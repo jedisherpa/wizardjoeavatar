@@ -1,0 +1,13 @@
+{
+  "direction": "northeast",
+  "label": "back-right",
+  "body_width": 0.84,
+  "face_shift": 2,
+  "profile": false,
+  "back": true,
+  "robe_opening": 0.0,
+  "beard_visibility": 0.35,
+  "staff_side": "viewer_right",
+  "staff_order": "rear",
+  "near_arm": "right"
+}

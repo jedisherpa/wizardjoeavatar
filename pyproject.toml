@@ -1,0 +1,13 @@
+[project]
+name = "wizardjoeavatar"
+version = "0.1.0"
+description = "Procedural ASCILINE WizardJoe avatar renderer and demo server"
+requires-python = ">=3.9"
+dependencies = [
+  "fastapi>=0.111",
+  "uvicorn[standard]>=0.30",
+  "pillow>=10",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

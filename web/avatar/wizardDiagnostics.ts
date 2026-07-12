@@ -1,0 +1,33 @@
+export class WizardDiagnostics {
+  constructor(element) {
+    this.element = element;
+    this.localFps = 0;
+  }
+
+  setLocalFps(fps) {
+    this.localFps = fps;
+  }
+
+  start() {
+    setInterval(() => this.refresh(), 1000);
+    this.refresh();
+  }
+
+  async refresh() {
+    const response = await fetch("/api/avatar/wizard/state");
+    if (!response.ok) return;
+    const data = await response.json();
+    const state = data.state;
+    const d = data.diagnostics;
+    this.element.textContent = [
+      `x ${state.world_position.x.toFixed(2)}  z ${state.world_position.z.toFixed(2)}`,
+      `screen ${d.screen_x.toFixed(1)}, ${d.screen_y.toFixed(1)}  scale ${d.display_scale.toFixed(3)}`,
+      `facing ${state.facing}  phase ${state.walk_phase.toFixed(2)}`,
+      `action ${state.action}  face ${state.expression}`,
+      `mouth ${state.mouth}  fps ${this.localFps}/${Math.round(d.fps)}`,
+      `seq ${d.frame_sequence}  tag ${d.codec_tag}  key ${d.keyframe_count}`,
+      `raw ${d.raw_frame_size}  wire ${d.encoded_frame_size}`,
+      `delta ${d.delta_cell_count}  reconnect ${d.reconnect_count}`,
+    ].join("\\n");
+  }
+}

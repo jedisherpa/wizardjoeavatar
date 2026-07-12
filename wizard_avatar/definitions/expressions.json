@@ -1,0 +1,63 @@
+{
+  "neutral": {
+    "brow_left": "level",
+    "brow_right": "level",
+    "eyes": "open",
+    "mouth": "closed"
+  },
+  "happy": {
+    "brow_left": "soft_up",
+    "brow_right": "soft_up",
+    "eyes": "bright",
+    "mouth": "smile"
+  },
+  "thinking": {
+    "brow_left": "down",
+    "brow_right": "tilt",
+    "eyes": "side",
+    "mouth": "closed",
+    "head_offset": [0, 0]
+  },
+  "surprised": {
+    "brow_left": "up",
+    "brow_right": "up",
+    "eyes": "wide",
+    "mouth": "open_wide"
+  },
+  "worried": {
+    "brow_left": "pinched",
+    "brow_right": "pinched",
+    "eyes": "open",
+    "mouth": "frown"
+  },
+  "amused": {
+    "brow_left": "tilt",
+    "brow_right": "soft_up",
+    "eyes": "squint",
+    "mouth": "smile"
+  },
+  "confident": {
+    "brow_left": "down",
+    "brow_right": "level",
+    "eyes": "bright",
+    "mouth": "smile"
+  },
+  "focused": {
+    "brow_left": "down",
+    "brow_right": "down",
+    "eyes": "open",
+    "mouth": "closed"
+  },
+  "skeptical": {
+    "brow_left": "up",
+    "brow_right": "down",
+    "eyes": "side",
+    "mouth": "frown"
+  },
+  "explaining": {
+    "brow_left": "soft_up",
+    "brow_right": "level",
+    "eyes": "open",
+    "mouth": "open_small"
+  }
+}

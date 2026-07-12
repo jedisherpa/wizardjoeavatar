@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>WizardJoeAvatar</title>
+    <link rel="stylesheet" href="/avatar/style.css" />
+  </head>
+  <body>
+    <main class="stage-shell">
+      <canvas id="wizard-canvas" aria-label="WizardJoeAvatar square-cell stage"></canvas>
+      <pre id="wizard-selection" aria-hidden="true"></pre>
+      <section id="diagnostics" class="diagnostics"></section>
+      <nav class="toolbar" aria-label="Wizard controls">
+        <button data-demo="play" title="Play demo">▶</button>
+        <button data-action="idle" title="Idle">•</button>
+        <button data-action="thinking" title="Think">?</button>
+        <button data-action="explaining" title="Explain">✦</button>
+        <button data-action="pointing" title="Point">→</button>
+        <button data-action="magic_cast" title="Cast">*</button>
+        <button data-action="reaction" title="React">!</button>
+      </nav>
+    </main>
+    <script type="module" src="/avatar/wizardDemo.ts?v=animation-demo"></script>
+  </body>
+</html>

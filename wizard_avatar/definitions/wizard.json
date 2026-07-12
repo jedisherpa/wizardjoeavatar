@@ -1,0 +1,21 @@
+{
+  "character_id": "asciline-wizard-v1",
+  "source_reference": "assets/reference/target_voxel_wizard.png",
+  "palette_version": "wizard-joe-v1",
+  "local_grid": {
+    "width": 74,
+    "height": 96,
+    "root": [37, 95]
+  },
+  "visual_contract": {
+    "species": "elderly male wizard",
+    "hat": "tall blue hat with fixed gold stars and a wide gold band",
+    "face": "warm tan skin, blue eyes, large eyebrows, visible teeth",
+    "beard": "brown beard and moustache",
+    "wings": "rainbow block wings behind the body",
+    "robe": "blue robe with magenta front stripe",
+    "boots": "brown boots",
+    "staff": "brown staff on viewer-right with curled hook",
+    "forbidden": ["runtime png sprite", "video frame dump"]
+  }
+}

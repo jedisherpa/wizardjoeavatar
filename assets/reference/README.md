@@ -1,16 +1,18 @@
 # WizardJoeAvatar Visual Reference
 
-The source design board supplied for this project defines an elderly male ASCILINE wizard with:
+The current PNG reference for this project is
+`assets/reference/target_voxel_wizard.png`. It defines an elderly male
+square-cell voxel wizard with:
 
 - a tall blue hat with gold stars and a wide gold band
 - warm tan skin, large eyebrows, and a thoughtful, slightly witty expression
-- a long white and gray beard
-- a blue robe with gold trim
+- a brown beard and moustache
+- bright blue eyes and white teeth
+- rainbow block wings behind the body
+- a blue robe
 - a magenta inner robe
-- a gold belt and buckle
 - brown boots
-- a brown staff with a curled head and a cyan magical orb
-- no wings
+- a brown staff on viewer-right with a curled hook
 
 ## Required views
 
@@ -49,6 +51,10 @@ The source design board supplied for this project defines an elderly male ASCILI
 
 ## Style
 
-The character must look like a deliberately authored colored-ASCII or cell-grid character. Use a limited palette, clear silhouettes, monospace glyphs, fixed cell masks, hard edges, and procedural layers. Do not reinterpret it as smooth 3D art, voxel/Minecraft art, or a flattened runtime sprite.
+The character must look like a deliberately authored square-cell voxel avatar.
+Use clear silhouettes, hard square cells, and a repeatable source-image to
+cell-mask conversion. The runtime must not stream the source PNG directly; it
+uses the generated JSON cell mask at
+`wizard_avatar/definitions/reference_avatar_cells.json`.
 
 The environment is fixed: pure white background, faint white checkerboard perspective floor, and a subtle contact shadow.

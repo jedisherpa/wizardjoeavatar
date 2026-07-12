@@ -1,0 +1,87 @@
+:root {
+  color-scheme: light;
+  --ink: #17191c;
+  --panel: rgba(255, 255, 255, 0.86);
+  --line: #e9e9e6;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  overflow: hidden;
+  background: #ffffff;
+  color: var(--ink);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+.stage-shell {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background: #ffffff;
+}
+
+#wizard-canvas {
+  width: min(100vw, calc(100vh * 16 / 9));
+  height: min(100vh, calc(100vw * 9 / 16));
+  display: block;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+  image-rendering: pixelated;
+  background: #ffffff;
+}
+
+#wizard-selection {
+  position: absolute;
+  inset: 0;
+  color: transparent;
+  pointer-events: none;
+  user-select: text;
+  white-space: pre;
+  margin: 0;
+}
+
+.diagnostics {
+  position: absolute;
+  left: 12px;
+  top: 12px;
+  min-width: 220px;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  background: var(--panel);
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.toolbar {
+  position: absolute;
+  right: 12px;
+  top: 12px;
+  display: flex;
+  gap: 6px;
+  padding: 8px;
+  border: 1px solid var(--line);
+  background: var(--panel);
+}
+
+button {
+  width: 34px;
+  height: 34px;
+  border: 1px solid #d7d7d2;
+  border-radius: 6px;
+  background: #ffffff;
+  color: var(--ink);
+  font: 700 17px/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  cursor: pointer;
+}
+
+button:hover,
+button:focus-visible {
+  border-color: #176db5;
+  outline: none;
+}
