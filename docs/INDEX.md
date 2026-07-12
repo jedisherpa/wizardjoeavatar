@@ -1,0 +1,49 @@
+# WizardJoeAvatar Documentation
+
+This package contains the full Codex implementation specification for a procedural ASCILINE wizard avatar.
+
+## Reference
+
+- [Visual design specification](../assets/reference/README.md)
+- [Codex goal entry point](../CODEX_GOAL.md)
+
+## Sections
+
+0. [Codex Goal and Visual Contract](00-goal-and-visual-contract.md)
+1. [Use Multiple Coordinated Agents](01-multi-agent-coordination.md)
+2. [Inspect the Repository Before Coding](02-repository-discovery.md)
+3. [Required Architecture](03-required-architecture.md)
+4. [Create the Module Structure](04-module-structure.md)
+5. [Define the Visual Output Grid](05-output-grid.md)
+6. [Define the Fixed Environment](06-fixed-environment.md)
+7. [Implement a Perspective Floor Procedurally](07-perspective-floor.md)
+8. [Define the Wizard’s Canonical Local Grid](08-canonical-local-grid.md)
+9. [Create the Exact 16-Color Character Palette](09-color-palette.md)
+10. [Define the Glyph Language](10-glyph-language.md)
+11. [Build the Character from Ordered Layers](11-ordered-layers.md)
+12. [Construct the Front View](12-front-view-construction.md)
+13. [Build Directional Views](13-directional-views.md)
+14. [Build a Joint Skeleton](14-joint-skeleton.md)
+15. [Implement Procedural Walking](15-procedural-walking.md)
+16. [Implement Movement in World Space](16-world-space-movement.md)
+17. [Implement Eight-Direction Facing](17-eight-direction-facing.md)
+18. [Implement Circular Walking](18-circular-walking.md)
+19. [Add a Path-Following Controller](19-path-following.md)
+20. [Implement Expressions](20-expressions.md)
+21. [Implement Blinking](21-blinking.md)
+22. [Implement Speech Mouth Shapes](22-speech-mouth-shapes.md)
+23. [Implement Independent Animation Channels](23-animation-channels.md)
+24. [Implement the Design-Board Actions](24-design-board-actions.md)
+25. [Create the Contact Shadow](25-contact-shadow.md)
+26. [Integrate with ASCILINE as a Direct Frame Source](26-asciline-frame-source.md)
+27. [Add Semantic Control Routes](27-semantic-control-routes.md)
+28. [Build a Browser Demonstration Controller](28-browser-demo-controls.md)
+29. [Add Diagnostics](29-diagnostics.md)
+30. [Required Visual Tests](30-visual-tests.md)
+31. [Required Locomotion Tests](31-locomotion-tests.md)
+32. [Required Environment Tests](32-environment-tests.md)
+33. [Required ASCILINE Tests](33-asciline-tests.md)
+34. [Required Speech and Expression Tests](34-speech-expression-tests.md)
+35. [Create an Automated Full Demonstration](35-automated-demo.md)
+36. [Evidence Package](36-evidence-package.md)
+37. [Completion Gate](37-completion-gate.md)
