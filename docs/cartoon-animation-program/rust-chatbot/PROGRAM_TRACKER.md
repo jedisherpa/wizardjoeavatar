@@ -14,7 +14,7 @@ Last coordinator update: 2026-07-13
 | Planning checkpoint | COMPLETE | Pushed `50948b907ad35ec8ca604d6c39a63b4317ac3da7` |
 | Rust branch | ACTIVE | `codex/rust-chatbot-animation-engine` in `jedisherpa/wizardjoeavatar` |
 | Contract implementation | COMPLETE | C0 PASS at `1775941e76c2bec0f54f44349d9b6f304d2bce1b`; 29 contract, 3 release-registry, and 30 workflow-validator tests pass |
-| Runtime and motion engines | IN_PROGRESS | Integer runtime clock implemented and wired; 89-geometry motion catalog in review |
+| Runtime and motion engines | IN_PROGRESS | `RCHAT-RUN-020` and `RCHAT-ANIM-020..030` accepted; integer hub wiring verified at `e2b0cd7` |
 | Serial integration | PLANNED | Blocked on engine handoffs |
 | QA foundation | COMPLETE | Q0 PASS at `ea0f3d7c0ae4202e565feb4b811011473862dfe2`; evidence writer, scope checker, CI, and honest browser harness |
 | Exhaustive QA | PLANNED | Per-frame live capture remains blocked on the integrated profile |
@@ -24,10 +24,10 @@ Last coordinator update: 2026-07-13
 
 | Role | Agent | Research | Planning | Next accountability |
 |---|---|---|---|---|
-| RUNTIME | Epicurus (`019f5c84-aca4-7953-b8ac-23a395e7268b`) | COMPLETE | COMPLETE | `RCHAT-RUN-020` implemented; coordinator production wiring passes focused tests |
-| MOTION | Singer (`019f5c84-b193-7f70-83ff-e0c7e33edd51`) | COMPLETE | COMPLETE | `RCHAT-ANIM-020..030` catalog, validation, and shadow-loader work in review |
+| RUNTIME | Epicurus (`019f5c84-aca4-7953-b8ac-23a395e7268b`) | COMPLETE | COMPLETE | `RCHAT-RUN-020` accepted at `10cef30`; next owner unit is ordered inbox/idempotency |
+| MOTION | Singer (`019f5c84-b193-7f70-83ff-e0c7e33edd51`) | COMPLETE | COMPLETE | `RCHAT-ANIM-020..030` accepted at `c43257a`; next owner unit is deterministic clip evaluation |
 | FLOW | Lagrange (`019f5c84-b630-7053-b560-cab55fb3ba11`) | COMPLETE | COMPLETE | `RCHAT-FLOW-060` accepted; Q0 passed with 39 validator, 7 release, and 22 browser contract tests |
-| INT | Coordinator | COMPLETE | COMPLETE | Q0 receipt recorded; reviewing runtime and motion engine handoffs |
+| INT | Coordinator | COMPLETE | COMPLETE | Integer clock wired into production hub at `e2b0cd7`; 36 focused integration tests pass |
 
 ## Pose prerequisite receipt
 
@@ -75,9 +75,9 @@ not claim that live per-frame browser capture has occurred.
 
 ## Next promotion
 
-1. Commit and push the Q0 registry and gate receipt without staging unrelated
-   Python or legacy work.
-2. Accept `RCHAT-RUN-020` only after the production hub wiring and full Rust
-   regression suite pass from an immutable candidate.
-3. Review and accept `RCHAT-ANIM-020..030` only after the embedded graph proves
-   exact 89/89 runtime and 50/50 WJFL coverage with stable hashes.
+1. Commit and push the accepted RUN-020 and ANIM-020..030 receipts without
+   staging unrelated Python or legacy work.
+2. Start `RCHAT-RUN-030` ordered inbox/idempotency and `RCHAT-ANIM-040`
+   deterministic clip evaluation in parallel.
+3. Connect the Q0 evidence writer to real Rust source/decode/presentation frames
+   before any browser capture can be promoted from foundation status.
