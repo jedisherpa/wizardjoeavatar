@@ -1,0 +1,112 @@
+{
+  "schema_version": 1,
+  "program_id": "wizardjoe-cartoon-animation-2026-07-12",
+  "gate_id": "FINAL",
+  "work_item_id": "CAP-800",
+  "result": "passed",
+  "production": {
+    "architecture": "asciline_python",
+    "port": 8765
+  },
+  "planning_checkpoint": {
+    "commit": "08d8f3aaa181d97ef3d2a29cb5a8362d81a05f12",
+    "pushed": true
+  },
+  "tested_commit": "a5f0cc1eea3d75f6f69b8d5221e6eb2da249d48f",
+  "generated_at": "2026-07-13T15:09:23Z",
+  "commands": [
+    {
+      "command": ".venv/bin/python -m unittest discover -s tests -p 'test_*.py'",
+      "exit_code": 0,
+      "duration_ms": 70420,
+      "result": "passed",
+      "output_summary": "153 tests passed."
+    },
+    {
+      "command": ".venv/bin/python tools/validate_cartoon_animation_program.py --root .",
+      "exit_code": 0,
+      "duration_ms": 1800,
+      "result": "passed",
+      "output_summary": "Program, ownership, wing contract, planning checkpoint, and Python production scope passed.",
+      "output_sha256": "9649de4e152b8fb0f66bd043a46c0aac2210e47222331785334d2d50a503fa54"
+    },
+    {
+      "command": ".venv/bin/python tools/validate_python_scope.py .",
+      "exit_code": 0,
+      "duration_ms": 200,
+      "result": "passed",
+      "output_summary": "47 production files scanned with zero Rust-boundary violations.",
+      "output_sha256": "34f901b36bf9a2e702fa6f67361c3cc681c74c8673df2dea6e0cffae8c1f09f4"
+    },
+    {
+      "command": ".venv/bin/python tools/run_python_avatar_soak.py --url http://127.0.0.1:8765 --duration-seconds 600 --viewers 4 --slow-viewer --strict",
+      "exit_code": 0,
+      "duration_ms": 600224,
+      "result": "passed",
+      "output_summary": "59.986 simulation Hz, 23.994 FPS, 5767 mixed requests, 25.914 ms p95, zero command/decode/sequence/queue errors."
+    },
+    {
+      "command": "Codex Browser Plugin live matrix on http://127.0.0.1:8765/",
+      "exit_code": 0,
+      "duration_ms": 15000,
+      "result": "passed",
+      "output_summary": "Repeat movement, takeoff/hover/landing, pose picker, WebSocket reconnect, Prism expression, mouth animation, and bottom captions visually verified."
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "evidence/cartoon-animation-program/soak/ten-minute.json",
+      "media_type": "application/json",
+      "sha256": "c54b06222c842127ce1eb94314e2ddb1e7a14d54acf0856a9283f6e327f1fded",
+      "bytes": 2206,
+      "storage": "git",
+      "retention_days": 3650
+    },
+    {
+      "path": "evidence/cartoon-animation-program/browser/live-caption.png",
+      "media_type": "image/png",
+      "sha256": "970ac412c6a994862f890078da66ce16469d88bc5488d91655778d168d3492c5",
+      "bytes": 71430,
+      "storage": "git",
+      "retention_days": 3650
+    },
+    {
+      "path": "evidence/cartoon-animation-program/browser/live-flight.png",
+      "media_type": "image/png",
+      "sha256": "a11fd50b05d67b25ee616e0a96df3890e370bc7f237d8a641b7b9ca8d2cefc51",
+      "bytes": 66423,
+      "storage": "git",
+      "retention_days": 3650
+    },
+    {
+      "path": "evidence/cartoon-animation-program/browser/live-repeat.png",
+      "media_type": "image/png",
+      "sha256": "78bd1f3a041a8f5ab384ddec12f0442cf3f1cc6f4ba750ba3df7202faab91338",
+      "bytes": 60100,
+      "storage": "git",
+      "retention_days": 3650
+    },
+    {
+      "path": "evidence/cartoon-animation-program/browser/pose-library.png",
+      "media_type": "image/png",
+      "sha256": "0dc43334cbb3ac65ebd3d9c0ebca923dd66452e209e2eab4c67c8e26de9f0063",
+      "bytes": 100070,
+      "storage": "git",
+      "retention_days": 3650
+    }
+  ],
+  "changed_paths": [
+    "wizard_avatar/controller.py",
+    "wizard_avatar/frame_source.py",
+    "wizard_avatar/character_package.py",
+    "wizard_avatar/stream.py",
+    "web/avatar/wizardControls.ts",
+    "tools/run_python_avatar_soak.py",
+    "deploy/macos/com.jedisherpa.wizardjoeavatar.plist"
+  ],
+  "risks": [
+    "Physical gamepad hardware was not attached during browser QA; dead-zone, button mapping, disconnect, and arbitration paths are covered by implementation and focused tests.",
+    "Browser TTS voice and timing vary by installed system voice; authoritative speech state, mouth lifecycle, caption lifecycle, and speech-stop behavior are tested independently.",
+    "Prism GT producer connectivity is optional; strict sanitized fixtures prove cue mapping and fail-closed behavior without giving the external runtime locomotion authority."
+  ]
+}

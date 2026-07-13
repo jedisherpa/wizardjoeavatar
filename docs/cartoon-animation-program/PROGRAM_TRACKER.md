@@ -11,8 +11,8 @@ Last coordinator update: 2026-07-13.
 | Coordinated planning | COMPLETE | Same four agents produced compatible planning contributions; two Prism signal reports added |
 | Planning checkpoint | COMPLETE | Research and plan pushed as `08d8f3aaa181d97ef3d2a29cb5a8362d81a05f12` |
 | Implementation | COMPLETE | Python runtime, graph, controls, reusable character package, Prism adapter, TTS captions, and persistent service integrated |
-| Final verification | IN_PROGRESS | 153 tests and live browser matrix passed; ten-minute mixed-control soak running |
-| Final publish | QUEUED | Implementation commit pushed to GitHub |
+| Final verification | COMPLETE | 153 tests, live Chromium matrix, Python-only validators, and ten-minute mixed-control soak passed |
+| Final publish | IN_PROGRESS | Implementation `a5f0cc1` pushed; compact evidence and required source archives being published |
 
 ## Agent ledger
 
@@ -36,3 +36,4 @@ Last coordinator update: 2026-07-13.
 | 2026-07-13 | Prism signal research completed against local `prism-gt-influence-integrated` commit `cf793dba` | Existing signal surfaces and proposed contracts are now separated explicitly | `research/05-prism-runtime-signals.md`, `research/06-persona-memory-governance-signals.md` |
 | 2026-07-13 | Missed frame deadlines are dropped instead of replayed | Unbounded frame catch-up consumed speech and animation timers and made transitions appear erratic | `wizard_avatar/stream.py`, `tests/wizard/test_stream_hub.py` |
 | 2026-07-13 | Character content is loaded through a versioned package | Future characters can reuse the runtime, control, transport, and renderer without architecture changes | `wizard_avatar/character_package.py`, `wizard_avatar/definitions/wizard_joe_character_package.json` |
+| 2026-07-13 | Commit the 30 registry-referenced source PNGs | Clean-clone verification proved the existing pose registry was not reproducible without its declared archived inputs | `evidence/pose-library-expansion/intake/poses2/`, `evidence/pose-library-expansion/intake/flying-action/` |

@@ -1,0 +1,83 @@
+{
+  "architecture": "asciline_python",
+  "control": {
+    "command_errors": [],
+    "latency_ms_max": 33.26958301477134,
+    "latency_ms_p50": 10.626,
+    "latency_ms_p95": 25.914,
+    "request_count": 5767,
+    "sent_control_count": 5216,
+    "sent_prism_count": 197
+  },
+  "control_window_actual_seconds": 600.1,
+  "duration_actual_seconds": 600.224,
+  "duration_requested_seconds": 600.0,
+  "failures": [],
+  "final_hub_actual_fps": 23.994,
+  "final_state": {
+    "airborne": true,
+    "altitude": 3.7207392799418817,
+    "semantic_cue": "think",
+    "world_position": {
+      "x": -1.8090594530513144,
+      "z": 4.587753308955771
+    }
+  },
+  "final_tick": 40350,
+  "hub_queue_drops": 0,
+  "initial_hub_actual_fps": 23.988,
+  "initial_tick": 4345,
+  "result": "passed",
+  "schedule_overruns": 2,
+  "schema_version": 1,
+  "simulation_hz": 59.986,
+  "slow_viewer_enabled": true,
+  "url": "http://127.0.0.1:8765",
+  "viewer_count": 4,
+  "viewers": [
+    {
+      "decode_errors": 0,
+      "error": null,
+      "first_sequence": 1737,
+      "frames": 14401,
+      "last_frame_sha256": "f157e5b10fc23a6bbdb2f2a72fcd8ce957630349d196a5566a80942c3641da2b",
+      "last_sequence": 16137,
+      "sequence_regressions": 0,
+      "slow": false,
+      "viewer_id": 0
+    },
+    {
+      "decode_errors": 0,
+      "error": null,
+      "first_sequence": 1737,
+      "frames": 14401,
+      "last_frame_sha256": "f157e5b10fc23a6bbdb2f2a72fcd8ce957630349d196a5566a80942c3641da2b",
+      "last_sequence": 16137,
+      "sequence_regressions": 0,
+      "slow": false,
+      "viewer_id": 1
+    },
+    {
+      "decode_errors": 0,
+      "error": null,
+      "first_sequence": 1737,
+      "frames": 14401,
+      "last_frame_sha256": "f157e5b10fc23a6bbdb2f2a72fcd8ce957630349d196a5566a80942c3641da2b",
+      "last_sequence": 16137,
+      "sequence_regressions": 0,
+      "slow": false,
+      "viewer_id": 2
+    },
+    {
+      "decode_errors": 0,
+      "error": null,
+      "first_sequence": 1737,
+      "frames": 2470,
+      "last_frame_sha256": "d268f22980b08f9ceb82bceb3cf0260b86ee1676aab7b797fc6867af31217714",
+      "last_sequence": 4206,
+      "sequence_regressions": 0,
+      "slow": true,
+      "viewer_id": 3
+    }
+  ]
+}
