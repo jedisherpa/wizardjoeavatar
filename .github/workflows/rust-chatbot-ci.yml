@@ -1,0 +1,177 @@
+name: Rust Chatbot CI
+
+on:
+  push:
+    branches: [codex/rust-chatbot-animation-engine]
+    paths:
+      - ".github/workflows/rust-chatbot-*.yml"
+      - "schemas/rchat/**"
+      - "tools/rchat/**"
+      - "rust/wizard_avatar_engine/**"
+      - "docs/cartoon-animation-program/rust-chatbot/registry.json"
+      - "evidence/cartoon-animation-program/rust-chatbot/**"
+  pull_request:
+    paths:
+      - ".github/workflows/rust-chatbot-*.yml"
+      - "schemas/rchat/**"
+      - "tools/rchat/**"
+      - "rust/wizard_avatar_engine/**"
+      - "docs/cartoon-animation-program/rust-chatbot/registry.json"
+      - "evidence/cartoon-animation-program/rust-chatbot/**"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: rust-chatbot-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  CARGO_TERM_COLOR: always
+  RUST_BACKTRACE: "1"
+
+jobs:
+  rchat-contracts:
+    name: rchat-contracts
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out accountable branch
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: ${{ github.head_ref || github.ref_name }}
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          components: rustfmt, clippy
+      - uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: tools/rchat
+      - name: Validate registry
+        run: >-
+          cargo run --locked --quiet --manifest-path tools/rchat/Cargo.toml --
+          registry docs/cartoon-animation-program/rust-chatbot/registry.json
+      - name: Validate committed gate records
+        shell: bash
+        run: |
+          shopt -s nullglob
+          gates=(evidence/cartoon-animation-program/rust-chatbot/*/gate.json)
+          for gate in "${gates[@]}"; do
+            cargo run --locked --quiet --manifest-path tools/rchat/Cargo.toml -- \
+              gate "$gate" --registry docs/cartoon-animation-program/rust-chatbot/registry.json
+          done
+      - name: Enforce FLOW-060 changed-path scope
+        shell: bash
+        run: |
+          base_sha="$(jq -r '(.work_items + .specialist_work_items)[] | select(.id == "RCHAT-FLOW-060") | .base_sha // empty' docs/cartoon-animation-program/rust-chatbot/registry.json)"
+          result_sha="$(jq -r '(.work_items + .specialist_work_items)[] | select(.id == "RCHAT-FLOW-060") | .result_sha // empty' docs/cartoon-animation-program/rust-chatbot/registry.json)"
+          if [[ -z "$base_sha" || -z "$result_sha" ]]; then
+            base_sha="$(git rev-parse HEAD^)"
+            result_sha="$(git rev-parse HEAD)"
+          fi
+          cargo run --locked --quiet --manifest-path tools/rchat/Cargo.toml -- \
+            scope docs/cartoon-animation-program/rust-chatbot/registry.json \
+            RCHAT-FLOW-060 --base "$base_sha" --head "$result_sha" --committed-only
+
+  rchat-rust:
+    name: rchat-rust
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          components: rustfmt, clippy
+      - uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: rust/wizard_avatar_engine
+      - name: Format
+        run: cargo fmt --manifest-path rust/wizard_avatar_engine/Cargo.toml --all -- --check
+      - name: Clippy
+        run: cargo clippy --manifest-path rust/wizard_avatar_engine/Cargo.toml --locked --all-targets --all-features -- -D warnings
+      - name: Test Rust engine
+        run: cargo test --manifest-path rust/wizard_avatar_engine/Cargo.toml --locked --all-targets
+
+  rchat-motion:
+    name: rchat-motion
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: rust/wizard_avatar_engine
+      - name: Run deterministic contract and motion suites
+        run: >-
+          cargo test --manifest-path rust/wizard_avatar_engine/Cargo.toml --locked
+          --test chat_event_contract --test command_ordering --test motion_graph_contract
+
+  rchat-evidence:
+    name: rchat-evidence
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref || github.ref_name }}
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          components: rustfmt, clippy
+      - uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: |
+            tools/rchat
+            rust/wizard_avatar_engine
+      - name: Validate evidence tool
+        run: |
+          cargo fmt --manifest-path tools/rchat/Cargo.toml --all -- --check
+          cargo clippy --manifest-path tools/rchat/Cargo.toml --locked --all-targets --all-features -- -D warnings
+          cargo test --manifest-path tools/rchat/Cargo.toml --locked --all-targets --all-features
+      - name: Validate release evidence integration
+        run: cargo test --manifest-path rust/wizard_avatar_engine/Cargo.toml --locked --test release_evidence
+      - name: Produce deterministic fixture receipt
+        run: |
+          mkdir -p "$RUNNER_TEMP/rchat-evidence"
+          jq \
+            --arg sha "$(git rev-parse HEAD)" \
+            --arg branch "$(git branch --show-current)" \
+            '.git_sha = $sha | .branch = $branch' \
+            tools/rchat/tests/fixtures/evidence-run.json \
+            > "$RUNNER_TEMP/rchat-evidence/run.json"
+          cargo run --locked --quiet --manifest-path tools/rchat/Cargo.toml -- \
+            evidence write "$RUNNER_TEMP/rchat-evidence/run.json" \
+            --ledger "$RUNNER_TEMP/rchat-evidence/frames.ndjson" \
+            --manifest "$RUNNER_TEMP/rchat-evidence/manifest.json"
+          cargo run --locked --quiet --manifest-path tools/rchat/Cargo.toml -- \
+            evidence validate "$RUNNER_TEMP/rchat-evidence/frames.ndjson" \
+            "$RUNNER_TEMP/rchat-evidence/manifest.json"
+      - name: Upload compact Q0 evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: rchat-q0-evidence-${{ github.sha }}
+          path: ${{ runner.temp }}/rchat-evidence
+          if-no-files-found: error
+          retention-days: 14
+
+  rchat-browser:
+    name: rchat-browser
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Test browser modules and harness contracts
+        run: >-
+          node --test
+          rust/wizard_avatar_engine/web/tests/*.test.mjs
+          rust/wizard_avatar_engine/web/tests/rchat/*.test.mjs
+      - name: Install isolated Playwright Chromium
+        run: |
+          npm install --prefix "$RUNNER_TEMP/rchat-browser" --no-save playwright@1.55.0
+          "$RUNNER_TEMP/rchat-browser/node_modules/.bin/playwright" install --with-deps chromium
+      - name: Require a real Chromium availability probe
+        run: >-
+          node rust/wizard_avatar_engine/web/tests/rchat/browser_harness.mjs probe
+          --playwright-module "file://$RUNNER_TEMP/rchat-browser/node_modules/playwright/index.mjs"
+          --unavailable-policy fail
+      - name: Record foundation-only browser status
+        run: echo "Browser tooling AVAILABLE. No capture PASS is claimed until a live adapter supplies every frame." >> "$GITHUB_STEP_SUMMARY"

@@ -1,0 +1,83 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://wizardjoe.local/schemas/rchat/evidence-frame-v1.schema.json",
+  "title": "wizardjoe-rchat-frame-evidence/v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema", "schema_version", "run_id", "scenario_id", "transition_id",
+    "clip_id", "frame_index", "simulation_tick", "source_event_id",
+    "command_id", "state_revision", "pose_id", "previous_pose_id",
+    "transition_progress", "contacts", "root", "anchors",
+    "channel_generations", "source_frame_sha256", "encoded_frame_sha256",
+    "decoded_frame_sha256", "presented_frame_sha256", "png_path",
+    "quality_failures"
+  ],
+  "properties": {
+    "schema": { "const": "wizardjoe-rchat-frame-evidence/v1" },
+    "schema_version": { "const": 1 },
+    "run_id": { "$ref": "#/$defs/nonEmptyString" },
+    "scenario_id": { "$ref": "#/$defs/nonEmptyString" },
+    "transition_id": { "$ref": "#/$defs/nullableString" },
+    "clip_id": { "$ref": "#/$defs/nullableString" },
+    "frame_index": { "type": "integer", "minimum": 0 },
+    "simulation_tick": { "type": "integer", "minimum": 0 },
+    "source_event_id": { "$ref": "#/$defs/nullableString" },
+    "command_id": { "$ref": "#/$defs/nullableString" },
+    "state_revision": { "type": "integer", "minimum": 0 },
+    "pose_id": { "$ref": "#/$defs/nonEmptyString" },
+    "previous_pose_id": { "$ref": "#/$defs/nullableString" },
+    "transition_progress": { "type": "number", "minimum": 0, "maximum": 1 },
+    "contacts": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/nonEmptyString" }
+    },
+    "root": { "$ref": "#/$defs/cellPoint" },
+    "anchors": {
+      "type": "object",
+      "additionalProperties": { "$ref": "#/$defs/cellPoint" }
+    },
+    "channel_generations": {
+      "type": "object",
+      "additionalProperties": { "type": "integer", "minimum": 0 }
+    },
+    "source_frame_sha256": { "$ref": "#/$defs/sha256" },
+    "encoded_frame_sha256": { "$ref": "#/$defs/sha256" },
+    "decoded_frame_sha256": { "$ref": "#/$defs/sha256" },
+    "presented_frame_sha256": { "$ref": "#/$defs/sha256" },
+    "png_path": { "$ref": "#/$defs/nullableRelativePath" },
+    "quality_failures": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/nonEmptyString" }
+    }
+  },
+  "$defs": {
+    "nonEmptyString": { "type": "string", "minLength": 1 },
+    "nullableString": {
+      "oneOf": [
+        { "$ref": "#/$defs/nonEmptyString" },
+        { "type": "null" }
+      ]
+    },
+    "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "nullableRelativePath": {
+      "oneOf": [
+        {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^(?!/)(?!.*(?:^|/)\\.\\.?(?:/|$))(?!.*[\\\\:]).+$"
+        },
+        { "type": "null" }
+      ]
+    },
+    "cellPoint": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["x", "y"],
+      "properties": {
+        "x": { "type": "integer" },
+        "y": { "type": "integer" }
+      }
+    }
+  }
+}

@@ -1,5 +1,8 @@
 //! Semantic validation for Wizard Joe RCHAT registries and gate records.
 
+pub mod evidence;
+pub mod scope;
+
 use serde_json::{Map, Value};
 use sha2::{Digest, Sha256};
 use std::collections::{HashMap, HashSet};

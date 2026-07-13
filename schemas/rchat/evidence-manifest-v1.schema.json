@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://wizardjoe.local/schemas/rchat/evidence-manifest-v1.schema.json",
+  "title": "wizardjoe-rchat-evidence-manifest/v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema", "schema_version", "run_id", "branch", "git_sha", "status",
+    "frame_count", "scenario_count", "screenshot_count", "first_frame_index",
+    "last_frame_index", "ledger", "presented_stream_sha256",
+    "quality_failure_count", "failures", "skips"
+  ],
+  "properties": {
+    "schema": { "const": "wizardjoe-rchat-evidence-manifest/v1" },
+    "schema_version": { "const": 1 },
+    "run_id": { "$ref": "#/$defs/nonEmptyString" },
+    "branch": { "$ref": "#/$defs/nonEmptyString" },
+    "git_sha": { "$ref": "#/$defs/gitSha" },
+    "status": { "enum": ["PASS", "FAIL", "SKIP"] },
+    "frame_count": { "type": "integer", "minimum": 0 },
+    "scenario_count": { "type": "integer", "minimum": 0 },
+    "screenshot_count": { "type": "integer", "minimum": 0 },
+    "first_frame_index": { "$ref": "#/$defs/nullableInteger" },
+    "last_frame_index": { "$ref": "#/$defs/nullableInteger" },
+    "ledger": { "$ref": "#/$defs/artifact" },
+    "presented_stream_sha256": { "$ref": "#/$defs/sha256" },
+    "quality_failure_count": { "type": "integer", "minimum": 0 },
+    "failures": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/nonEmptyString" }
+    },
+    "skips": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/nonEmptyString" }
+    }
+  },
+  "$defs": {
+    "nonEmptyString": { "type": "string", "minLength": 1 },
+    "gitSha": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
+    "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "nullableInteger": {
+      "oneOf": [
+        { "type": "integer", "minimum": 0 },
+        { "type": "null" }
+      ]
+    },
+    "artifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "sha256", "bytes"],
+      "properties": {
+        "path": { "$ref": "#/$defs/nonEmptyString" },
+        "sha256": { "$ref": "#/$defs/sha256" },
+        "bytes": { "type": "integer", "minimum": 0 }
+      }
+    }
+  }
+}

@@ -10,6 +10,19 @@ cargo run --manifest-path tools/rchat/Cargo.toml -- \
 cargo run --manifest-path tools/rchat/Cargo.toml -- \
   gate evidence/cartoon-animation-program/rust-chatbot/gates/Q2.json \
   --registry docs/cartoon-animation-program/rust-chatbot/registry.json
+
+cargo run --manifest-path tools/rchat/Cargo.toml -- \
+  scope docs/cartoon-animation-program/rust-chatbot/registry.json \
+  RCHAT-FLOW-060 --base <base-sha> --head HEAD
+
+cargo run --manifest-path tools/rchat/Cargo.toml -- \
+  evidence write tools/rchat/tests/fixtures/evidence-run.json \
+  --ledger target/rchat-evidence/frames.ndjson \
+  --manifest target/rchat-evidence/manifest.json
+
+cargo run --manifest-path tools/rchat/Cargo.toml -- \
+  evidence validate target/rchat-evidence/frames.ndjson \
+  target/rchat-evidence/manifest.json
 ```
 
 Registry CLI validation includes both structural checks and material checks for
@@ -30,3 +43,13 @@ then printed and returned with exit code one. File, JSON, Git invocation, and
 usage failures exit two. Every violation identifies the receipt and corrective
 action so live-registry failures can be repaired without changing status
 implicitly.
+
+The scope command requires the registry branch to match the checked-out branch
+and validates committed, staged, unstaged, and untracked paths by default.
+`--committed-only` restricts CI checks to the requested commit range.
+
+The evidence writer emits deterministic LF-delimited per-frame NDJSON and a
+compact manifest containing ledger, stream, count, status, and failure
+receipts. PASS is derived only from one or more contiguous valid frames with no
+quality failures. Empty runs are rejected unless they record an explicit SKIP;
+SKIP exits 77 and FAIL exits 1.
