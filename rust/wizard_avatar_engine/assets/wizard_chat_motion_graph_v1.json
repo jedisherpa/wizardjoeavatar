@@ -1,0 +1,4854 @@
+{
+  "schema_version": 1,
+  "graph_id": "wizard_chat_motion_graph_v1",
+  "asset_schema_version": 4,
+  "required_runtime_geometry_count": 89,
+  "required_wjfl_geometry_count": 50,
+  "default_clip_id": "state_idle",
+  "pose_coverage": [
+    {
+      "pose_id": "front_idle",
+      "use_kinds": [
+        "clip",
+        "transition"
+      ],
+      "capability_tier": "directional_base",
+      "approved_facings": [
+        "south"
+      ]
+    },
+    {
+      "pose_id": "back_idle",
+      "use_kinds": [
+        "clip",
+        "transition"
+      ],
+      "capability_tier": "directional_base",
+      "approved_facings": [
+        "north"
+      ]
+    },
+    {
+      "pose_id": "profile_left",
+      "use_kinds": [
+        "clip",
+        "transition"
+      ],
+      "capability_tier": "directional_base",
+      "approved_facings": [
+        "west"
+      ]
+    },
+    {
+      "pose_id": "profile_right",
+      "use_kinds": [
+        "clip",
+        "transition"
+      ],
+      "capability_tier": "directional_base",
+      "approved_facings": [
+        "east"
+      ]
+    },
+    {
+      "pose_id": "walk_front_left",
+      "use_kinds": [
+        "clip",
+        "transition"
+      ],
+      "capability_tier": "directional_base",
+      "approved_facings": [
+        "southwest"
+      ]
+    },
+    {
+      "pose_id": "walk_front_right",
+      "use_kinds": [
+        "clip",
+        "transition"
+      ],
+      "capability_tier": "directional_base",
+      "approved_facings": [
+        "southeast"
+      ]
+    },
+    {
+      "pose_id": "back_left",
+      "use_kinds": [
+        "clip",
+        "transition"
+      ],
+      "capability_tier": "directional_base",
+      "approved_facings": [
+        "northwest"
+      ]
+    },
+    {
+      "pose_id": "back_right",
+      "use_kinds": [
+        "clip",
+        "transition"
+      ],
+      "capability_tier": "directional_base",
+      "approved_facings": [
+        "northeast"
+      ]
+    },
+    {
+      "pose_id": "explaining",
+      "use_kinds": [
+        "clip",
+        "transition"
+      ],
+      "capability_tier": "front_performance",
+      "approved_facings": [
+        "south"
+      ]
+    },
+    {
+      "pose_id": "magic_cast",
+      "use_kinds": [
+        "clip",
+        "transition"
+      ],
+      "capability_tier": "front_performance",
+      "approved_facings": [
+        "south"
+      ]
+    },
+    {
+      "pose_id": "run_front_airborne_reach",
+      "use_kinds": [
+        "clip",
+        "transition"
+      ],
+      "capability_tier": "front_performance",
+      "approved_facings": [
+        "south"
+      ],
+      "source_candidate_id": "WJP2-01"
+    },
+    {
+      "pose_id": "run_front_airborne_drive",
+      "use_kinds": [
+        "clip",
+        "transition"
+      ],
+      "capability_tier": "front_performance",
+      "approved_facings": [
+        "south"
+      ],
+      "source_candidate_id": "WJP2-02"
+    },
+    {
+      "pose_id": "front_crouch_guard",
+      "use_kinds": [
+        "clip",
+        "transition"
+      ],
+      "capability_tier": "front_performance",
+      "approved_facings": [
+        "south"
+      ],
+      "source_candidate_id": "WJP2-03"
+    },
+    {
+      "pose_id": "front_reaction_jump_fist_staff",
+      "use_kinds": [
+        "clip",
+        "transition"
+      ],
+      "capability_tier": "front_performance",
+      "approved_facings": [
+        "south"
+      ],
+      "source_candidate_id": "WJP2-04"
+    },
+    {
+      "pose_id": "front_kneel_staff_brace",
+      "use_kinds": [
+        "clip",
+        "transition"
+      ],
+      "capability_tier": "front_performance",
+      "approved_facings": [
+        "south"
+      ],
+      "source_candidate_id": "WJP2-05"
+    },
+    {
+      "pose_id": "front_staff_guard_windup",
+      "use_kinds": [
+        "clip",
+        "transition"
+      ],
+      "capability_tier": "front_performance",
+      "approved_facings": [
+        "south"
+      ],
+      "source_candidate_id": "WJP2-06"
+    },
+    {
+      "pose_id": "front_staff_guard_low",
+      "use_kinds": [
+        "clip",
+        "transition"
+      ],
+      "capability_tier": "front_performance",
+      "approved_facings": [
+        "south"
+      ],
+      "source_candidate_id": "WJP2-07"
+    },
+    {
+      "pose_id": "walk_front_right_lift",
+      "use_kinds": [
+        "clip",
+        "transition"
+      ],
+      "capability_tier": "directional_base",
+      "approved_facings": [
+        "southeast"
+      ],
+      "source_candidate_id": "WJP2-08"
+    },
+    {
+      "pose_id": "front_crouch_reaction_staff_planted",
+      "use_kinds": [
+        "clip",
+        "transition"
+      ],
+      "capability_tier": "front_performance",
+      "approved_facings": [
+        "south"
+      ],
+      "source_candidate_id": "WJP2-09"
+    },
+    {
+      "pose_id": "front_victory_cast",
+      "use_kinds": [
+        "clip",
+        "transition"
+      ],
+      "capability_tier": "front_performance",
+      "approved_facings": [
+        "south"
+      ],
+      "source_candidate_id": "WJP2-10"
+    },
+    {
+      "pose_id": "fly_front_hover_neutral",
+      "use_kinds": [
+        "clip",
+        "transition"
+      ],
+      "capability_tier": "front_performance",
+      "approved_facings": [
+        "south"
+      ],
+      "source_candidate_id": "WJFA-01"
+    },
+    {
+      "pose_id": "fly_front_knee_up",
+      "use_kinds": [
+        "clip",
+        "transition"
+      ],
+      "capability_tier": "front_performance",
+      "approved_facings": [
+        "south"
+      ],
+      "source_candidate_id": "WJFA-02"
+    },
+    {
+      "pose_id": "fly_front_wings_up",
+      "use_kinds": [
+        "clip",
+        "transition"
+      ],
+      "capability_tier": "front_performance",
+      "approved_facings": [
+        "south"
+      ],
+      "source_candidate_id": "WJFA-03"
+    },
+    {
+      "pose_id": "fly_front_wings_down",
+      "use_kinds": [
+        "clip",
+        "transition"
+      ],
+      "capability_tier": "front_performance",
+      "approved_facings": [
+        "south"
+      ],
+      "source_candidate_id": "WJFA-04"
+    },
+    {
+      "pose_id": "fly_southeast_forward_glide",
+      "use_kinds": [
+        "clip",
+        "transition"
+      ],
+      "capability_tier": "diagonal_flight",
+      "approved_facings": [
+        "southeast"
+      ],
+      "source_candidate_id": "WJFA-05"
+    },
+    {
+      "pose_id": "fly_southwest_banked_staff",
+      "use_kinds": [
+        "clip",
+        "transition"
+      ],
+      "capability_tier": "diagonal_flight",
+      "approved_facings": [
+        "southwest"
+      ],
+      "source_candidate_id": "WJFA-06"
+    },
+    {
+      "pose_id": "fly_southeast_banked_staff",
+      "use_kinds": [
+        "clip",
+        "transition"
+      ],
+      "capability_tier": "diagonal_flight",
+      "approved_facings": [
+        "southeast"
+      ],
+      "source_candidate_id": "WJFA-07"
+    },
+    {
+      "pose_id": "fly_southeast_cheer",
+      "use_kinds": [
+        "clip",
+        "transition"
+      ],
+      "capability_tier": "diagonal_flight",
+      "approved_facings": [
+        "southeast"
+      ],
+      "source_candidate_id": "WJFA-08"
+    },
+    {
+      "pose_id": "fly_southeast_staff_forward",
+      "use_kinds": [
+        "clip",
+        "transition"
+      ],
+      "capability_tier": "diagonal_flight",
+      "approved_facings": [
+        "southeast"
+      ],
+      "source_candidate_id": "WJFA-09"
+    },
+    {
+      "pose_id": "front_run_charge_right_plant",
+      "use_kinds": [
+        "clip",
+        "transition"
+      ],
+      "capability_tier": "front_performance",
+      "approved_facings": [
+        "south"
+      ],
+      "source_candidate_id": "WJFA-11"
+    },
+    {
+      "pose_id": "front_crouch_landing_staff_plant",
+      "use_kinds": [
+        "clip",
+        "transition"
+      ],
+      "capability_tier": "front_performance",
+      "approved_facings": [
+        "south"
+      ],
+      "source_candidate_id": "WJFA-12"
+    },
+    {
+      "pose_id": "front_magic_staff_thrust",
+      "use_kinds": [
+        "clip",
+        "transition"
+      ],
+      "capability_tier": "front_performance",
+      "approved_facings": [
+        "south"
+      ],
+      "source_candidate_id": "WJFA-13"
+    },
+    {
+      "pose_id": "front_airborne_fall_back_staff",
+      "use_kinds": [
+        "clip",
+        "transition"
+      ],
+      "capability_tier": "front_performance",
+      "approved_facings": [
+        "south"
+      ],
+      "source_candidate_id": "WJFA-14"
+    },
+    {
+      "pose_id": "front_celebrate_wings_staff_up",
+      "use_kinds": [
+        "clip",
+        "transition"
+      ],
+      "capability_tier": "front_performance",
+      "approved_facings": [
+        "south"
+      ],
+      "source_candidate_id": "WJFA-15"
+    },
+    {
+      "pose_id": "front_staff_block_horizontal",
+      "use_kinds": [
+        "clip",
+        "transition"
+      ],
+      "capability_tier": "front_performance",
+      "approved_facings": [
+        "south"
+      ],
+      "source_candidate_id": "WJFA-16"
+    },
+    {
+      "pose_id": "front_point_direct_staff_held",
+      "use_kinds": [
+        "clip",
+        "transition"
+      ],
+      "capability_tier": "front_performance",
+      "approved_facings": [
+        "south"
+      ],
+      "source_candidate_id": "WJFA-17"
+    },
+    {
+      "pose_id": "front_celebrate_jump_staff_up",
+      "use_kinds": [
+        "clip",
+        "transition"
+      ],
+      "capability_tier": "front_performance",
+      "approved_facings": [
+        "south"
+      ],
+      "source_candidate_id": "WJFA-18"
+    },
+    {
+      "pose_id": "front_shush_secret_staff_held",
+      "use_kinds": [
+        "clip",
+        "transition"
+      ],
+      "capability_tier": "front_performance",
+      "approved_facings": [
+        "south"
+      ],
+      "source_candidate_id": "WJFA-19"
+    },
+    {
+      "pose_id": "front_staff_spin_flourish",
+      "use_kinds": [
+        "clip",
+        "transition"
+      ],
+      "capability_tier": "front_performance",
+      "approved_facings": [
+        "south"
+      ],
+      "source_candidate_id": "WJFA-20"
+    },
+    {
+      "pose_id": "run_front_cross_step_wings_staff",
+      "use_kinds": [
+        "clip",
+        "transition"
+      ],
+      "capability_tier": "front_performance",
+      "approved_facings": [
+        "south"
+      ],
+      "source_candidate_id": "WJFL-01"
+    },
+    {
+      "pose_id": "run_front_stride_wings_staff",
+      "use_kinds": [
+        "clip",
+        "transition"
+      ],
+      "capability_tier": "front_performance",
+      "approved_facings": [
+        "south"
+      ],
+      "source_candidate_id": "WJFL-02"
+    },
+    {
+      "pose_id": "front_crouch_guard_wings",
+      "use_kinds": [
+        "clip",
+        "transition"
+      ],
+      "capability_tier": "front_performance",
+      "approved_facings": [
+        "south"
+      ],
+      "source_candidate_id": "WJFL-03"
+    },
+    {
+      "pose_id": "front_reaction_jump_wings_staff",
+      "use_kinds": [
+        "clip",
+        "transition"
+      ],
+      "capability_tier": "front_performance",
+      "approved_facings": [
+        "south"
+      ],
+      "source_candidate_id": "WJFL-04"
+    },
+    {
+      "pose_id": "front_kneel_staff_brace_wings",
+      "use_kinds": [
+        "clip",
+        "transition"
+      ],
+      "capability_tier": "front_performance",
+      "approved_facings": [
+        "south"
+      ],
+      "source_candidate_id": "WJFL-05"
+    },
+    {
+      "pose_id": "front_staff_guard_windup_wings",
+      "use_kinds": [
+        "clip",
+        "transition"
+      ],
+      "capability_tier": "front_performance",
+      "approved_facings": [
+        "south"
+      ],
+      "source_candidate_id": "WJFL-06"
+    },
+    {
+      "pose_id": "front_staff_guard_horizontal_wings",
+      "use_kinds": [
+        "clip",
+        "transition"
+      ],
+      "capability_tier": "front_performance",
+      "approved_facings": [
+        "south"
+      ],
+      "source_candidate_id": "WJFL-07"
+    },
+    {
+      "pose_id": "front_staff_guard_low_wings",
+      "use_kinds": [
+        "clip",
+        "transition"
+      ],
+      "capability_tier": "front_performance",
+      "approved_facings": [
+        "south"
+      ],
+      "source_candidate_id": "WJFL-08"
+    },
+    {
+      "pose_id": "front_crouch_staff_planted_wings",
+      "use_kinds": [
+        "clip",
+        "transition"
+      ],
+      "capability_tier": "front_performance",
+      "approved_facings": [
+        "south"
+      ],
+      "source_candidate_id": "WJFL-09"
+    },
+    {
+      "pose_id": "front_victory_cast_wings",
+      "use_kinds": [
+        "clip",
+        "transition"
+      ],
+      "capability_tier": "front_performance",
+      "approved_facings": [
+        "south"
+      ],
+      "source_candidate_id": "WJFL-10"
+    },
+    {
+      "pose_id": "front_run_charge_wings",
+      "use_kinds": [
+        "clip",
+        "transition"
+      ],
+      "capability_tier": "front_performance",
+      "approved_facings": [
+        "south"
+      ],
+      "source_candidate_id": "WJFL-11"
+    },
+    {
+      "pose_id": "front_crouch_hand_plant_wings",
+      "use_kinds": [
+        "clip",
+        "transition"
+      ],
+      "capability_tier": "front_performance",
+      "approved_facings": [
+        "south"
+      ],
+      "source_candidate_id": "WJFL-12"
+    },
+    {
+      "pose_id": "front_magic_staff_thrust_wings",
+      "use_kinds": [
+        "clip",
+        "transition"
+      ],
+      "capability_tier": "front_performance",
+      "approved_facings": [
+        "south"
+      ],
+      "source_candidate_id": "WJFL-13"
+    },
+    {
+      "pose_id": "front_airborne_fall_back_wings",
+      "use_kinds": [
+        "clip",
+        "transition"
+      ],
+      "capability_tier": "front_performance",
+      "approved_facings": [
+        "south"
+      ],
+      "source_candidate_id": "WJFL-14"
+    },
+    {
+      "pose_id": "front_celebrate_staff_up_wings",
+      "use_kinds": [
+        "clip",
+        "transition"
+      ],
+      "capability_tier": "front_performance",
+      "approved_facings": [
+        "south"
+      ],
+      "source_candidate_id": "WJFL-15"
+    },
+    {
+      "pose_id": "front_staff_block_wings",
+      "use_kinds": [
+        "clip",
+        "transition"
+      ],
+      "capability_tier": "front_performance",
+      "approved_facings": [
+        "south"
+      ],
+      "source_candidate_id": "WJFL-16"
+    },
+    {
+      "pose_id": "front_point_direct_wings",
+      "use_kinds": [
+        "clip",
+        "transition"
+      ],
+      "capability_tier": "front_performance",
+      "approved_facings": [
+        "south"
+      ],
+      "source_candidate_id": "WJFL-17"
+    },
+    {
+      "pose_id": "front_celebrate_jump_wings",
+      "use_kinds": [
+        "clip",
+        "transition"
+      ],
+      "capability_tier": "front_performance",
+      "approved_facings": [
+        "south"
+      ],
+      "source_candidate_id": "WJFL-18"
+    },
+    {
+      "pose_id": "front_shush_wings",
+      "use_kinds": [
+        "clip",
+        "transition"
+      ],
+      "capability_tier": "front_performance",
+      "approved_facings": [
+        "south"
+      ],
+      "source_candidate_id": "WJFL-19"
+    },
+    {
+      "pose_id": "front_staff_spin_wings",
+      "use_kinds": [
+        "clip",
+        "transition"
+      ],
+      "capability_tier": "front_performance",
+      "approved_facings": [
+        "south"
+      ],
+      "source_candidate_id": "WJFL-20"
+    },
+    {
+      "pose_id": "front_idle_wings",
+      "use_kinds": [
+        "clip",
+        "transition"
+      ],
+      "capability_tier": "front_performance",
+      "approved_facings": [
+        "south"
+      ],
+      "source_candidate_id": "WJFL-21"
+    },
+    {
+      "pose_id": "front_greeting_wave_wings",
+      "use_kinds": [
+        "clip",
+        "transition"
+      ],
+      "capability_tier": "front_performance",
+      "approved_facings": [
+        "south"
+      ],
+      "source_candidate_id": "WJFL-22"
+    },
+    {
+      "pose_id": "front_thinking_hand_chin_wings",
+      "use_kinds": [
+        "clip",
+        "transition"
+      ],
+      "capability_tier": "front_performance",
+      "approved_facings": [
+        "south"
+      ],
+      "source_candidate_id": "WJFL-23"
+    },
+    {
+      "pose_id": "front_explaining_open_hand_wings",
+      "use_kinds": [
+        "clip",
+        "transition"
+      ],
+      "capability_tier": "front_performance",
+      "approved_facings": [
+        "south"
+      ],
+      "source_candidate_id": "WJFL-24"
+    },
+    {
+      "pose_id": "front_point_side_wings",
+      "use_kinds": [
+        "clip",
+        "transition"
+      ],
+      "capability_tier": "front_performance",
+      "approved_facings": [
+        "south"
+      ],
+      "source_candidate_id": "WJFL-25"
+    },
+    {
+      "pose_id": "front_explaining_both_hands_wings",
+      "use_kinds": [
+        "clip",
+        "transition"
+      ],
+      "capability_tier": "front_performance",
+      "approved_facings": [
+        "south"
+      ],
+      "source_candidate_id": "WJFL-26"
+    },
+    {
+      "pose_id": "front_magic_staff_raise_wings",
+      "use_kinds": [
+        "clip",
+        "transition"
+      ],
+      "capability_tier": "front_performance",
+      "approved_facings": [
+        "south"
+      ],
+      "source_candidate_id": "WJFL-27"
+    },
+    {
+      "pose_id": "front_sincere_hand_heart_wings",
+      "use_kinds": [
+        "clip",
+        "transition"
+      ],
+      "capability_tier": "front_performance",
+      "approved_facings": [
+        "south"
+      ],
+      "source_candidate_id": "WJFL-28"
+    },
+    {
+      "pose_id": "front_playful_kick_wings",
+      "use_kinds": [
+        "clip",
+        "transition"
+      ],
+      "capability_tier": "front_performance",
+      "approved_facings": [
+        "south"
+      ],
+      "source_candidate_id": "WJFL-29"
+    },
+    {
+      "pose_id": "front_magic_staff_spark_wings",
+      "use_kinds": [
+        "clip",
+        "transition"
+      ],
+      "capability_tier": "front_performance",
+      "approved_facings": [
+        "south"
+      ],
+      "source_candidate_id": "WJFL-30"
+    },
+    {
+      "pose_id": "feeling_joy_full",
+      "use_kinds": [
+        "clip",
+        "transition",
+        "face_accent"
+      ],
+      "capability_tier": "face_accent",
+      "approved_facings": [
+        "south"
+      ],
+      "source_candidate_id": "WJFL-31"
+    },
+    {
+      "pose_id": "feeling_sadness_full",
+      "use_kinds": [
+        "clip",
+        "transition",
+        "face_accent"
+      ],
+      "capability_tier": "face_accent",
+      "approved_facings": [
+        "south"
+      ],
+      "source_candidate_id": "WJFL-32"
+    },
+    {
+      "pose_id": "feeling_anger_full",
+      "use_kinds": [
+        "clip",
+        "transition",
+        "face_accent"
+      ],
+      "capability_tier": "face_accent",
+      "approved_facings": [
+        "south"
+      ],
+      "source_candidate_id": "WJFL-33"
+    },
+    {
+      "pose_id": "feeling_fear_full",
+      "use_kinds": [
+        "clip",
+        "transition",
+        "face_accent"
+      ],
+      "capability_tier": "face_accent",
+      "approved_facings": [
+        "south"
+      ],
+      "source_candidate_id": "WJFL-34"
+    },
+    {
+      "pose_id": "feeling_shame_full",
+      "use_kinds": [
+        "clip",
+        "transition",
+        "face_accent"
+      ],
+      "capability_tier": "face_accent",
+      "approved_facings": [
+        "south"
+      ],
+      "source_candidate_id": "WJFL-35"
+    },
+    {
+      "pose_id": "feeling_disgust_full",
+      "use_kinds": [
+        "clip",
+        "transition",
+        "face_accent"
+      ],
+      "capability_tier": "face_accent",
+      "approved_facings": [
+        "south"
+      ],
+      "source_candidate_id": "WJFL-36"
+    },
+    {
+      "pose_id": "feeling_surprise_full",
+      "use_kinds": [
+        "clip",
+        "transition",
+        "face_accent"
+      ],
+      "capability_tier": "face_accent",
+      "approved_facings": [
+        "south"
+      ],
+      "source_candidate_id": "WJFL-37"
+    },
+    {
+      "pose_id": "feeling_pride_full",
+      "use_kinds": [
+        "clip",
+        "transition",
+        "face_accent"
+      ],
+      "capability_tier": "face_accent",
+      "approved_facings": [
+        "south"
+      ],
+      "source_candidate_id": "WJFL-38"
+    },
+    {
+      "pose_id": "feeling_guilt_full",
+      "use_kinds": [
+        "clip",
+        "transition",
+        "face_accent"
+      ],
+      "capability_tier": "face_accent",
+      "approved_facings": [
+        "south"
+      ],
+      "source_candidate_id": "WJFL-39"
+    },
+    {
+      "pose_id": "feeling_love_full",
+      "use_kinds": [
+        "clip",
+        "transition",
+        "face_accent"
+      ],
+      "capability_tier": "face_accent",
+      "approved_facings": [
+        "south"
+      ],
+      "source_candidate_id": "WJFL-40"
+    },
+    {
+      "pose_id": "feeling_joy_close",
+      "use_kinds": [
+        "showcase"
+      ],
+      "capability_tier": "showcase_only",
+      "approved_facings": [
+        "south"
+      ],
+      "source_candidate_id": "WJFL-51",
+      "showcase_approval": {
+        "owner": "MOTION",
+        "rationale": "Close-composition feeling_joy_close is reserved for diagnostic showcase; conversational playback uses the full-body fallback.",
+        "fallback_pose_id": "feeling_joy_full"
+      }
+    },
+    {
+      "pose_id": "feeling_sadness_close",
+      "use_kinds": [
+        "showcase"
+      ],
+      "capability_tier": "showcase_only",
+      "approved_facings": [
+        "south"
+      ],
+      "source_candidate_id": "WJFL-52",
+      "showcase_approval": {
+        "owner": "MOTION",
+        "rationale": "Close-composition feeling_sadness_close is reserved for diagnostic showcase; conversational playback uses the full-body fallback.",
+        "fallback_pose_id": "feeling_sadness_full"
+      }
+    },
+    {
+      "pose_id": "feeling_anger_close",
+      "use_kinds": [
+        "showcase"
+      ],
+      "capability_tier": "showcase_only",
+      "approved_facings": [
+        "south"
+      ],
+      "source_candidate_id": "WJFL-53",
+      "showcase_approval": {
+        "owner": "MOTION",
+        "rationale": "Close-composition feeling_anger_close is reserved for diagnostic showcase; conversational playback uses the full-body fallback.",
+        "fallback_pose_id": "feeling_anger_full"
+      }
+    },
+    {
+      "pose_id": "feeling_fear_close",
+      "use_kinds": [
+        "showcase"
+      ],
+      "capability_tier": "showcase_only",
+      "approved_facings": [
+        "south"
+      ],
+      "source_candidate_id": "WJFL-54",
+      "showcase_approval": {
+        "owner": "MOTION",
+        "rationale": "Close-composition feeling_fear_close is reserved for diagnostic showcase; conversational playback uses the full-body fallback.",
+        "fallback_pose_id": "feeling_fear_full"
+      }
+    },
+    {
+      "pose_id": "feeling_shame_close",
+      "use_kinds": [
+        "showcase"
+      ],
+      "capability_tier": "showcase_only",
+      "approved_facings": [
+        "south"
+      ],
+      "source_candidate_id": "WJFL-55",
+      "showcase_approval": {
+        "owner": "MOTION",
+        "rationale": "Close-composition feeling_shame_close is reserved for diagnostic showcase; conversational playback uses the full-body fallback.",
+        "fallback_pose_id": "feeling_shame_full"
+      }
+    },
+    {
+      "pose_id": "feeling_disgust_close",
+      "use_kinds": [
+        "showcase"
+      ],
+      "capability_tier": "showcase_only",
+      "approved_facings": [
+        "south"
+      ],
+      "source_candidate_id": "WJFL-56",
+      "showcase_approval": {
+        "owner": "MOTION",
+        "rationale": "Close-composition feeling_disgust_close is reserved for diagnostic showcase; conversational playback uses the full-body fallback.",
+        "fallback_pose_id": "feeling_disgust_full"
+      }
+    },
+    {
+      "pose_id": "feeling_surprise_close",
+      "use_kinds": [
+        "showcase"
+      ],
+      "capability_tier": "showcase_only",
+      "approved_facings": [
+        "south"
+      ],
+      "source_candidate_id": "WJFL-57",
+      "showcase_approval": {
+        "owner": "MOTION",
+        "rationale": "Close-composition feeling_surprise_close is reserved for diagnostic showcase; conversational playback uses the full-body fallback.",
+        "fallback_pose_id": "feeling_surprise_full"
+      }
+    },
+    {
+      "pose_id": "feeling_pride_close",
+      "use_kinds": [
+        "showcase"
+      ],
+      "capability_tier": "showcase_only",
+      "approved_facings": [
+        "south"
+      ],
+      "source_candidate_id": "WJFL-58",
+      "showcase_approval": {
+        "owner": "MOTION",
+        "rationale": "Close-composition feeling_pride_close is reserved for diagnostic showcase; conversational playback uses the full-body fallback.",
+        "fallback_pose_id": "feeling_pride_full"
+      }
+    },
+    {
+      "pose_id": "feeling_guilt_close",
+      "use_kinds": [
+        "showcase"
+      ],
+      "capability_tier": "showcase_only",
+      "approved_facings": [
+        "south"
+      ],
+      "source_candidate_id": "WJFL-59",
+      "showcase_approval": {
+        "owner": "MOTION",
+        "rationale": "Close-composition feeling_guilt_close is reserved for diagnostic showcase; conversational playback uses the full-body fallback.",
+        "fallback_pose_id": "feeling_guilt_full"
+      }
+    },
+    {
+      "pose_id": "feeling_love_close",
+      "use_kinds": [
+        "showcase"
+      ],
+      "capability_tier": "showcase_only",
+      "approved_facings": [
+        "south"
+      ],
+      "source_candidate_id": "WJFL-60",
+      "showcase_approval": {
+        "owner": "MOTION",
+        "rationale": "Close-composition feeling_love_close is reserved for diagnostic showcase; conversational playback uses the full-body fallback.",
+        "fallback_pose_id": "feeling_love_full"
+      }
+    }
+  ],
+  "clips": [
+    {
+      "clip_id": "state_idle",
+      "family": "idle",
+      "loop_mode": "marked_segment",
+      "phase_source": "time",
+      "entry_marker": "entry",
+      "exit_markers": [
+        "exit"
+      ],
+      "minimum_hold_ticks": 1,
+      "interrupt_policy": "at_safe_marker",
+      "owned_channels": {
+        "regions": [
+          "base_body",
+          "upper_body",
+          "face_emotion",
+          "speech",
+          "gaze",
+          "blink",
+          "secondary"
+        ]
+      },
+      "samples": [
+        {
+          "pose_id": "front_idle",
+          "hold_ticks": 4,
+          "transition_recipe_id": "secondary_settle",
+          "markers": [
+            "entry",
+            "loop_start",
+            "settled"
+          ],
+          "support": {
+            "mode": "grounded",
+            "points": [
+              "left_foot",
+              "right_foot"
+            ]
+          },
+          "root_offset": [
+            0,
+            0
+          ],
+          "secondary_profile_id": "authored_default"
+        },
+        {
+          "pose_id": "front_idle",
+          "hold_ticks": 4,
+          "transition_recipe_id": "secondary_settle",
+          "markers": [
+            "loop_end",
+            "exit"
+          ],
+          "support": {
+            "mode": "grounded",
+            "points": [
+              "left_foot",
+              "right_foot"
+            ]
+          },
+          "root_offset": [
+            0,
+            0
+          ],
+          "secondary_profile_id": "authored_default"
+        }
+      ],
+      "loop_start_sample": 0,
+      "loop_end_sample": 1,
+      "reduced_motion_clip_id": null
+    },
+    {
+      "clip_id": "state_listening",
+      "family": "listening",
+      "loop_mode": "once",
+      "phase_source": "time",
+      "entry_marker": "entry",
+      "exit_markers": [
+        "exit"
+      ],
+      "minimum_hold_ticks": 1,
+      "interrupt_policy": "at_safe_marker",
+      "owned_channels": {
+        "regions": [
+          "base_body",
+          "upper_body",
+          "face_emotion",
+          "secondary"
+        ]
+      },
+      "samples": [
+        {
+          "pose_id": "front_idle_wings",
+          "hold_ticks": 4,
+          "transition_recipe_id": "reduced_motion_handoff",
+          "markers": [
+            "entry",
+            "settled",
+            "exit"
+          ],
+          "support": {
+            "mode": "grounded",
+            "points": [
+              "left_foot",
+              "right_foot",
+              "staff_tip"
+            ]
+          },
+          "root_offset": [
+            0,
+            0
+          ],
+          "secondary_profile_id": "authored_default"
+        }
+      ],
+      "loop_start_sample": null,
+      "loop_end_sample": null,
+      "reduced_motion_clip_id": null
+    },
+    {
+      "clip_id": "state_thinking",
+      "family": "thinking",
+      "loop_mode": "once",
+      "phase_source": "time",
+      "entry_marker": "entry",
+      "exit_markers": [
+        "exit"
+      ],
+      "minimum_hold_ticks": 1,
+      "interrupt_policy": "at_safe_marker",
+      "owned_channels": {
+        "regions": [
+          "base_body",
+          "upper_body",
+          "face_emotion",
+          "secondary"
+        ]
+      },
+      "samples": [
+        {
+          "pose_id": "front_thinking_hand_chin_wings",
+          "hold_ticks": 4,
+          "transition_recipe_id": "anticipation_action_recover",
+          "markers": [
+            "entry",
+            "settled",
+            "exit"
+          ],
+          "support": {
+            "mode": "grounded",
+            "points": [
+              "left_foot",
+              "right_foot",
+              "staff_tip"
+            ]
+          },
+          "root_offset": [
+            0,
+            0
+          ],
+          "secondary_profile_id": "authored_default"
+        }
+      ],
+      "loop_start_sample": null,
+      "loop_end_sample": null,
+      "reduced_motion_clip_id": null
+    },
+    {
+      "clip_id": "state_preparing_response",
+      "family": "preparing_response",
+      "loop_mode": "once",
+      "phase_source": "time",
+      "entry_marker": "entry",
+      "exit_markers": [
+        "exit"
+      ],
+      "minimum_hold_ticks": 1,
+      "interrupt_policy": "at_safe_marker",
+      "owned_channels": {
+        "regions": [
+          "base_body",
+          "upper_body",
+          "face_emotion",
+          "secondary"
+        ]
+      },
+      "samples": [
+        {
+          "pose_id": "front_magic_staff_raise_wings",
+          "hold_ticks": 4,
+          "transition_recipe_id": "anticipation_action_recover",
+          "markers": [
+            "entry",
+            "settled",
+            "exit"
+          ],
+          "support": {
+            "mode": "grounded",
+            "points": [
+              "left_foot",
+              "right_foot"
+            ]
+          },
+          "root_offset": [
+            0,
+            0
+          ],
+          "secondary_profile_id": "authored_default"
+        }
+      ],
+      "loop_start_sample": null,
+      "loop_end_sample": null,
+      "reduced_motion_clip_id": null
+    },
+    {
+      "clip_id": "state_speaking",
+      "family": "speaking",
+      "loop_mode": "marked_segment",
+      "phase_source": "speech",
+      "entry_marker": "entry",
+      "exit_markers": [
+        "exit"
+      ],
+      "minimum_hold_ticks": 1,
+      "interrupt_policy": "at_safe_marker",
+      "owned_channels": {
+        "regions": [
+          "base_body",
+          "upper_body",
+          "face_emotion",
+          "speech",
+          "gaze",
+          "blink",
+          "secondary"
+        ]
+      },
+      "samples": [
+        {
+          "pose_id": "explaining",
+          "hold_ticks": 4,
+          "transition_recipe_id": "face_coarticulation",
+          "markers": [
+            "entry",
+            "loop_start",
+            "settled"
+          ],
+          "support": {
+            "mode": "grounded",
+            "points": [
+              "left_foot",
+              "right_foot"
+            ]
+          },
+          "root_offset": [
+            0,
+            0
+          ],
+          "secondary_profile_id": "authored_default"
+        },
+        {
+          "pose_id": "explaining",
+          "hold_ticks": 4,
+          "transition_recipe_id": "face_coarticulation",
+          "markers": [
+            "loop_end",
+            "exit"
+          ],
+          "support": {
+            "mode": "grounded",
+            "points": [
+              "left_foot",
+              "right_foot"
+            ]
+          },
+          "root_offset": [
+            0,
+            0
+          ],
+          "secondary_profile_id": "authored_default"
+        }
+      ],
+      "loop_start_sample": 0,
+      "loop_end_sample": 1,
+      "reduced_motion_clip_id": null
+    },
+    {
+      "clip_id": "state_clarifying",
+      "family": "clarifying",
+      "loop_mode": "once",
+      "phase_source": "time",
+      "entry_marker": "entry",
+      "exit_markers": [
+        "exit"
+      ],
+      "minimum_hold_ticks": 1,
+      "interrupt_policy": "at_safe_marker",
+      "owned_channels": {
+        "regions": [
+          "base_body",
+          "upper_body",
+          "face_emotion",
+          "secondary"
+        ]
+      },
+      "samples": [
+        {
+          "pose_id": "front_shush_wings",
+          "hold_ticks": 4,
+          "transition_recipe_id": "face_coarticulation",
+          "markers": [
+            "entry",
+            "settled",
+            "exit"
+          ],
+          "support": {
+            "mode": "grounded",
+            "points": [
+              "left_foot",
+              "right_foot"
+            ]
+          },
+          "root_offset": [
+            0,
+            0
+          ],
+          "secondary_profile_id": "authored_default"
+        }
+      ],
+      "loop_start_sample": null,
+      "loop_end_sample": null,
+      "reduced_motion_clip_id": null
+    },
+    {
+      "clip_id": "state_tool_wait",
+      "family": "tool_wait",
+      "loop_mode": "once",
+      "phase_source": "time",
+      "entry_marker": "entry",
+      "exit_markers": [
+        "exit"
+      ],
+      "minimum_hold_ticks": 1,
+      "interrupt_policy": "at_safe_marker",
+      "owned_channels": {
+        "regions": [
+          "base_body",
+          "upper_body",
+          "face_emotion",
+          "secondary"
+        ]
+      },
+      "samples": [
+        {
+          "pose_id": "front_idle_wings",
+          "hold_ticks": 4,
+          "transition_recipe_id": "brace_transfer",
+          "markers": [
+            "entry",
+            "settled",
+            "exit"
+          ],
+          "support": {
+            "mode": "grounded",
+            "points": [
+              "left_foot",
+              "right_foot",
+              "staff_tip"
+            ]
+          },
+          "root_offset": [
+            0,
+            0
+          ],
+          "secondary_profile_id": "authored_default"
+        }
+      ],
+      "loop_start_sample": null,
+      "loop_end_sample": null,
+      "reduced_motion_clip_id": null
+    },
+    {
+      "clip_id": "state_error",
+      "family": "error",
+      "loop_mode": "once",
+      "phase_source": "time",
+      "entry_marker": "entry",
+      "exit_markers": [
+        "exit"
+      ],
+      "minimum_hold_ticks": 1,
+      "interrupt_policy": "at_safe_marker",
+      "owned_channels": {
+        "regions": [
+          "base_body",
+          "upper_body",
+          "face_emotion",
+          "secondary"
+        ]
+      },
+      "samples": [
+        {
+          "pose_id": "feeling_sadness_full",
+          "hold_ticks": 4,
+          "transition_recipe_id": "anticipation_action_recover",
+          "markers": [
+            "entry",
+            "settled",
+            "exit"
+          ],
+          "support": {
+            "mode": "grounded",
+            "points": [
+              "left_foot",
+              "right_foot",
+              "staff_tip"
+            ]
+          },
+          "root_offset": [
+            0,
+            0
+          ],
+          "secondary_profile_id": "authored_default"
+        }
+      ],
+      "loop_start_sample": null,
+      "loop_end_sample": null,
+      "reduced_motion_clip_id": null
+    },
+    {
+      "clip_id": "state_celebrating",
+      "family": "celebrating",
+      "loop_mode": "once",
+      "phase_source": "time",
+      "entry_marker": "entry",
+      "exit_markers": [
+        "exit"
+      ],
+      "minimum_hold_ticks": 1,
+      "interrupt_policy": "at_safe_marker",
+      "owned_channels": {
+        "regions": [
+          "base_body",
+          "upper_body",
+          "face_emotion",
+          "secondary"
+        ]
+      },
+      "samples": [
+        {
+          "pose_id": "feeling_joy_full",
+          "hold_ticks": 4,
+          "transition_recipe_id": "anticipation_action_recover",
+          "markers": [
+            "entry",
+            "settled",
+            "exit"
+          ],
+          "support": {
+            "mode": "grounded",
+            "points": [
+              "left_foot"
+            ]
+          },
+          "root_offset": [
+            0,
+            0
+          ],
+          "secondary_profile_id": "authored_default"
+        }
+      ],
+      "loop_start_sample": null,
+      "loop_end_sample": null,
+      "reduced_motion_clip_id": null
+    },
+    {
+      "clip_id": "state_interrupted",
+      "family": "interrupted",
+      "loop_mode": "once",
+      "phase_source": "time",
+      "entry_marker": "entry",
+      "exit_markers": [
+        "exit"
+      ],
+      "minimum_hold_ticks": 1,
+      "interrupt_policy": "at_safe_marker",
+      "owned_channels": {
+        "regions": [
+          "base_body",
+          "upper_body",
+          "face_emotion",
+          "secondary"
+        ]
+      },
+      "samples": [
+        {
+          "pose_id": "feeling_surprise_full",
+          "hold_ticks": 4,
+          "transition_recipe_id": "coherent_handoff",
+          "markers": [
+            "entry",
+            "settled",
+            "exit"
+          ],
+          "support": {
+            "mode": "grounded",
+            "points": [
+              "left_foot",
+              "right_foot",
+              "staff_tip"
+            ]
+          },
+          "root_offset": [
+            0,
+            0
+          ],
+          "secondary_profile_id": "authored_default"
+        }
+      ],
+      "loop_start_sample": null,
+      "loop_end_sample": null,
+      "reduced_motion_clip_id": null
+    },
+    {
+      "clip_id": "catalog_directional",
+      "family": "ground_locomotion",
+      "loop_mode": "once",
+      "phase_source": "time",
+      "entry_marker": "entry",
+      "exit_markers": [
+        "exit"
+      ],
+      "minimum_hold_ticks": 1,
+      "interrupt_policy": "at_safe_marker",
+      "owned_channels": {
+        "regions": [
+          "base_body",
+          "secondary"
+        ]
+      },
+      "samples": [
+        {
+          "pose_id": "front_idle",
+          "hold_ticks": 4,
+          "transition_recipe_id": "contact_sync",
+          "markers": [
+            "entry"
+          ],
+          "support": {
+            "mode": "grounded",
+            "points": [
+              "left_foot",
+              "right_foot"
+            ]
+          },
+          "root_offset": [
+            0,
+            0
+          ],
+          "secondary_profile_id": "authored_default"
+        },
+        {
+          "pose_id": "back_idle",
+          "hold_ticks": 4,
+          "transition_recipe_id": "contact_sync",
+          "markers": [],
+          "support": {
+            "mode": "grounded",
+            "points": [
+              "left_foot",
+              "right_foot"
+            ]
+          },
+          "root_offset": [
+            0,
+            0
+          ],
+          "secondary_profile_id": "authored_default"
+        },
+        {
+          "pose_id": "profile_left",
+          "hold_ticks": 4,
+          "transition_recipe_id": "contact_sync",
+          "markers": [],
+          "support": {
+            "mode": "grounded",
+            "points": [
+              "left_foot",
+              "right_foot"
+            ]
+          },
+          "root_offset": [
+            0,
+            0
+          ],
+          "secondary_profile_id": "authored_default"
+        },
+        {
+          "pose_id": "profile_right",
+          "hold_ticks": 4,
+          "transition_recipe_id": "contact_sync",
+          "markers": [],
+          "support": {
+            "mode": "grounded",
+            "points": [
+              "left_foot",
+              "right_foot"
+            ]
+          },
+          "root_offset": [
+            0,
+            0
+          ],
+          "secondary_profile_id": "authored_default"
+        },
+        {
+          "pose_id": "walk_front_left",
+          "hold_ticks": 4,
+          "transition_recipe_id": "contact_sync",
+          "markers": [],
+          "support": {
+            "mode": "grounded",
+            "points": [
+              "left_foot"
+            ]
+          },
+          "root_offset": [
+            0,
+            0
+          ],
+          "secondary_profile_id": "authored_default"
+        },
+        {
+          "pose_id": "walk_front_right",
+          "hold_ticks": 4,
+          "transition_recipe_id": "contact_sync",
+          "markers": [],
+          "support": {
+            "mode": "grounded",
+            "points": [
+              "right_foot"
+            ]
+          },
+          "root_offset": [
+            0,
+            0
+          ],
+          "secondary_profile_id": "authored_default"
+        },
+        {
+          "pose_id": "back_left",
+          "hold_ticks": 4,
+          "transition_recipe_id": "contact_sync",
+          "markers": [],
+          "support": {
+            "mode": "grounded",
+            "points": [
+              "left_foot"
+            ]
+          },
+          "root_offset": [
+            0,
+            0
+          ],
+          "secondary_profile_id": "authored_default"
+        },
+        {
+          "pose_id": "back_right",
+          "hold_ticks": 4,
+          "transition_recipe_id": "contact_sync",
+          "markers": [],
+          "support": {
+            "mode": "grounded",
+            "points": [
+              "right_foot"
+            ]
+          },
+          "root_offset": [
+            0,
+            0
+          ],
+          "secondary_profile_id": "authored_default"
+        },
+        {
+          "pose_id": "walk_front_right_lift",
+          "hold_ticks": 4,
+          "transition_recipe_id": "contact_sync",
+          "markers": [
+            "settled",
+            "exit"
+          ],
+          "support": {
+            "mode": "grounded",
+            "points": [
+              "left_foot"
+            ]
+          },
+          "root_offset": [
+            0,
+            0
+          ],
+          "secondary_profile_id": "authored_default"
+        }
+      ],
+      "loop_start_sample": null,
+      "loop_end_sample": null,
+      "reduced_motion_clip_id": null
+    },
+    {
+      "clip_id": "catalog_locomotion",
+      "family": "ground_locomotion",
+      "loop_mode": "once",
+      "phase_source": "time",
+      "entry_marker": "entry",
+      "exit_markers": [
+        "exit"
+      ],
+      "minimum_hold_ticks": 1,
+      "interrupt_policy": "at_safe_marker",
+      "owned_channels": {
+        "regions": [
+          "base_body",
+          "secondary"
+        ]
+      },
+      "samples": [
+        {
+          "pose_id": "run_front_airborne_reach",
+          "hold_ticks": 4,
+          "transition_recipe_id": "contact_sync",
+          "markers": [
+            "entry"
+          ],
+          "support": {
+            "mode": "airborne",
+            "points": []
+          },
+          "root_offset": [
+            0,
+            0
+          ],
+          "secondary_profile_id": "authored_default"
+        },
+        {
+          "pose_id": "run_front_airborne_drive",
+          "hold_ticks": 4,
+          "transition_recipe_id": "contact_sync",
+          "markers": [],
+          "support": {
+            "mode": "airborne",
+            "points": []
+          },
+          "root_offset": [
+            0,
+            0
+          ],
+          "secondary_profile_id": "authored_default"
+        },
+        {
+          "pose_id": "front_run_charge_right_plant",
+          "hold_ticks": 4,
+          "transition_recipe_id": "contact_sync",
+          "markers": [],
+          "support": {
+            "mode": "grounded",
+            "points": [
+              "right_foot"
+            ]
+          },
+          "root_offset": [
+            0,
+            0
+          ],
+          "secondary_profile_id": "authored_default"
+        },
+        {
+          "pose_id": "run_front_cross_step_wings_staff",
+          "hold_ticks": 4,
+          "transition_recipe_id": "contact_sync",
+          "markers": [],
+          "support": {
+            "mode": "airborne",
+            "points": []
+          },
+          "root_offset": [
+            0,
+            0
+          ],
+          "secondary_profile_id": "authored_default"
+        },
+        {
+          "pose_id": "run_front_stride_wings_staff",
+          "hold_ticks": 4,
+          "transition_recipe_id": "contact_sync",
+          "markers": [],
+          "support": {
+            "mode": "grounded",
+            "points": [
+              "right_foot"
+            ]
+          },
+          "root_offset": [
+            0,
+            0
+          ],
+          "secondary_profile_id": "authored_default"
+        },
+        {
+          "pose_id": "front_run_charge_wings",
+          "hold_ticks": 4,
+          "transition_recipe_id": "contact_sync",
+          "markers": [
+            "settled",
+            "exit"
+          ],
+          "support": {
+            "mode": "grounded",
+            "points": [
+              "right_foot"
+            ]
+          },
+          "root_offset": [
+            0,
+            0
+          ],
+          "secondary_profile_id": "authored_default"
+        }
+      ],
+      "loop_start_sample": null,
+      "loop_end_sample": null,
+      "reduced_motion_clip_id": null
+    },
+    {
+      "clip_id": "catalog_flight",
+      "family": "flight",
+      "loop_mode": "once",
+      "phase_source": "time",
+      "entry_marker": "entry",
+      "exit_markers": [
+        "exit"
+      ],
+      "minimum_hold_ticks": 1,
+      "interrupt_policy": "at_safe_marker",
+      "owned_channels": {
+        "regions": [
+          "base_body",
+          "upper_body",
+          "staff_effect",
+          "secondary"
+        ]
+      },
+      "samples": [
+        {
+          "pose_id": "fly_front_hover_neutral",
+          "hold_ticks": 4,
+          "transition_recipe_id": "airborne_arc",
+          "markers": [
+            "entry"
+          ],
+          "support": {
+            "mode": "airborne",
+            "points": []
+          },
+          "root_offset": [
+            0,
+            0
+          ],
+          "secondary_profile_id": "authored_default"
+        },
+        {
+          "pose_id": "fly_front_knee_up",
+          "hold_ticks": 4,
+          "transition_recipe_id": "airborne_arc",
+          "markers": [],
+          "support": {
+            "mode": "airborne",
+            "points": []
+          },
+          "root_offset": [
+            0,
+            0
+          ],
+          "secondary_profile_id": "authored_default"
+        },
+        {
+          "pose_id": "fly_front_wings_up",
+          "hold_ticks": 4,
+          "transition_recipe_id": "airborne_arc",
+          "markers": [],
+          "support": {
+            "mode": "airborne",
+            "points": []
+          },
+          "root_offset": [
+            0,
+            0
+          ],
+          "secondary_profile_id": "authored_default"
+        },
+        {
+          "pose_id": "fly_front_wings_down",
+          "hold_ticks": 4,
+          "transition_recipe_id": "airborne_arc",
+          "markers": [],
+          "support": {
+            "mode": "airborne",
+            "points": []
+          },
+          "root_offset": [
+            0,
+            0
+          ],
+          "secondary_profile_id": "authored_default"
+        },
+        {
+          "pose_id": "fly_southeast_forward_glide",
+          "hold_ticks": 4,
+          "transition_recipe_id": "airborne_arc",
+          "markers": [],
+          "support": {
+            "mode": "airborne",
+            "points": []
+          },
+          "root_offset": [
+            0,
+            0
+          ],
+          "secondary_profile_id": "authored_default"
+        },
+        {
+          "pose_id": "fly_southwest_banked_staff",
+          "hold_ticks": 4,
+          "transition_recipe_id": "airborne_arc",
+          "markers": [],
+          "support": {
+            "mode": "airborne",
+            "points": []
+          },
+          "root_offset": [
+            0,
+            0
+          ],
+          "secondary_profile_id": "authored_default"
+        },
+        {
+          "pose_id": "fly_southeast_banked_staff",
+          "hold_ticks": 4,
+          "transition_recipe_id": "airborne_arc",
+          "markers": [],
+          "support": {
+            "mode": "airborne",
+            "points": []
+          },
+          "root_offset": [
+            0,
+            0
+          ],
+          "secondary_profile_id": "authored_default"
+        },
+        {
+          "pose_id": "fly_southeast_cheer",
+          "hold_ticks": 4,
+          "transition_recipe_id": "airborne_arc",
+          "markers": [],
+          "support": {
+            "mode": "airborne",
+            "points": []
+          },
+          "root_offset": [
+            0,
+            0
+          ],
+          "secondary_profile_id": "authored_default"
+        },
+        {
+          "pose_id": "fly_southeast_staff_forward",
+          "hold_ticks": 4,
+          "transition_recipe_id": "airborne_arc",
+          "markers": [
+            "settled",
+            "exit"
+          ],
+          "support": {
+            "mode": "airborne",
+            "points": []
+          },
+          "root_offset": [
+            0,
+            0
+          ],
+          "secondary_profile_id": "authored_default"
+        }
+      ],
+      "loop_start_sample": null,
+      "loop_end_sample": null,
+      "reduced_motion_clip_id": null
+    },
+    {
+      "clip_id": "catalog_staff",
+      "family": "staff_action",
+      "loop_mode": "once",
+      "phase_source": "time",
+      "entry_marker": "entry",
+      "exit_markers": [
+        "exit"
+      ],
+      "minimum_hold_ticks": 1,
+      "interrupt_policy": "at_safe_marker",
+      "owned_channels": {
+        "regions": [
+          "base_body",
+          "upper_body",
+          "staff_effect",
+          "secondary"
+        ]
+      },
+      "samples": [
+        {
+          "pose_id": "magic_cast",
+          "hold_ticks": 4,
+          "transition_recipe_id": "brace_transfer",
+          "markers": [
+            "entry"
+          ],
+          "support": {
+            "mode": "grounded",
+            "points": [
+              "left_foot",
+              "right_foot"
+            ]
+          },
+          "root_offset": [
+            0,
+            0
+          ],
+          "secondary_profile_id": "authored_default"
+        },
+        {
+          "pose_id": "front_crouch_guard",
+          "hold_ticks": 4,
+          "transition_recipe_id": "brace_transfer",
+          "markers": [],
+          "support": {
+            "mode": "grounded",
+            "points": [
+              "left_foot",
+              "right_foot"
+            ]
+          },
+          "root_offset": [
+            0,
+            0
+          ],
+          "secondary_profile_id": "authored_default"
+        },
+        {
+          "pose_id": "front_reaction_jump_fist_staff",
+          "hold_ticks": 4,
+          "transition_recipe_id": "brace_transfer",
+          "markers": [],
+          "support": {
+            "mode": "airborne",
+            "points": []
+          },
+          "root_offset": [
+            0,
+            0
+          ],
+          "secondary_profile_id": "authored_default"
+        },
+        {
+          "pose_id": "front_kneel_staff_brace",
+          "hold_ticks": 4,
+          "transition_recipe_id": "brace_transfer",
+          "markers": [],
+          "support": {
+            "mode": "grounded",
+            "points": [
+              "left_foot",
+              "right_foot",
+              "staff_tip"
+            ]
+          },
+          "root_offset": [
+            0,
+            0
+          ],
+          "secondary_profile_id": "authored_default"
+        },
+        {
+          "pose_id": "front_staff_guard_windup",
+          "hold_ticks": 4,
+          "transition_recipe_id": "brace_transfer",
+          "markers": [],
+          "support": {
+            "mode": "grounded",
+            "points": [
+              "left_foot",
+              "right_foot"
+            ]
+          },
+          "root_offset": [
+            0,
+            0
+          ],
+          "secondary_profile_id": "authored_default"
+        },
+        {
+          "pose_id": "front_staff_guard_low",
+          "hold_ticks": 4,
+          "transition_recipe_id": "brace_transfer",
+          "markers": [],
+          "support": {
+            "mode": "grounded",
+            "points": [
+              "left_foot",
+              "right_foot"
+            ]
+          },
+          "root_offset": [
+            0,
+            0
+          ],
+          "secondary_profile_id": "authored_default"
+        },
+        {
+          "pose_id": "front_crouch_reaction_staff_planted",
+          "hold_ticks": 4,
+          "transition_recipe_id": "brace_transfer",
+          "markers": [],
+          "support": {
+            "mode": "grounded",
+            "points": [
+              "left_foot",
+              "right_foot",
+              "staff_tip"
+            ]
+          },
+          "root_offset": [
+            0,
+            0
+          ],
+          "secondary_profile_id": "authored_default"
+        },
+        {
+          "pose_id": "front_crouch_landing_staff_plant",
+          "hold_ticks": 4,
+          "transition_recipe_id": "brace_transfer",
+          "markers": [],
+          "support": {
+            "mode": "grounded",
+            "points": [
+              "left_hand",
+              "left_foot",
+              "staff_tip"
+            ]
+          },
+          "root_offset": [
+            0,
+            0
+          ],
+          "secondary_profile_id": "authored_default"
+        },
+        {
+          "pose_id": "front_magic_staff_thrust",
+          "hold_ticks": 4,
+          "transition_recipe_id": "brace_transfer",
+          "markers": [],
+          "support": {
+            "mode": "grounded",
+            "points": [
+              "left_foot",
+              "right_foot"
+            ]
+          },
+          "root_offset": [
+            0,
+            0
+          ],
+          "secondary_profile_id": "authored_default"
+        },
+        {
+          "pose_id": "front_airborne_fall_back_staff",
+          "hold_ticks": 4,
+          "transition_recipe_id": "brace_transfer",
+          "markers": [],
+          "support": {
+            "mode": "airborne",
+            "points": []
+          },
+          "root_offset": [
+            0,
+            0
+          ],
+          "secondary_profile_id": "authored_default"
+        },
+        {
+          "pose_id": "front_celebrate_wings_staff_up",
+          "hold_ticks": 4,
+          "transition_recipe_id": "brace_transfer",
+          "markers": [],
+          "support": {
+            "mode": "grounded",
+            "points": [
+              "left_foot",
+              "right_foot"
+            ]
+          },
+          "root_offset": [
+            0,
+            0
+          ],
+          "secondary_profile_id": "authored_default"
+        },
+        {
+          "pose_id": "front_staff_block_horizontal",
+          "hold_ticks": 4,
+          "transition_recipe_id": "brace_transfer",
+          "markers": [],
+          "support": {
+            "mode": "grounded",
+            "points": [
+              "left_foot",
+              "right_foot"
+            ]
+          },
+          "root_offset": [
+            0,
+            0
+          ],
+          "secondary_profile_id": "authored_default"
+        },
+        {
+          "pose_id": "front_point_direct_staff_held",
+          "hold_ticks": 4,
+          "transition_recipe_id": "brace_transfer",
+          "markers": [],
+          "support": {
+            "mode": "grounded",
+            "points": [
+              "left_foot",
+              "right_foot"
+            ]
+          },
+          "root_offset": [
+            0,
+            0
+          ],
+          "secondary_profile_id": "authored_default"
+        },
+        {
+          "pose_id": "front_celebrate_jump_staff_up",
+          "hold_ticks": 4,
+          "transition_recipe_id": "brace_transfer",
+          "markers": [],
+          "support": {
+            "mode": "airborne",
+            "points": []
+          },
+          "root_offset": [
+            0,
+            0
+          ],
+          "secondary_profile_id": "authored_default"
+        },
+        {
+          "pose_id": "front_shush_secret_staff_held",
+          "hold_ticks": 4,
+          "transition_recipe_id": "brace_transfer",
+          "markers": [],
+          "support": {
+            "mode": "grounded",
+            "points": [
+              "left_foot",
+              "right_foot"
+            ]
+          },
+          "root_offset": [
+            0,
+            0
+          ],
+          "secondary_profile_id": "authored_default"
+        },
+        {
+          "pose_id": "front_staff_spin_flourish",
+          "hold_ticks": 4,
+          "transition_recipe_id": "brace_transfer",
+          "markers": [],
+          "support": {
+            "mode": "grounded",
+            "points": [
+              "left_foot",
+              "right_foot"
+            ]
+          },
+          "root_offset": [
+            0,
+            0
+          ],
+          "secondary_profile_id": "authored_default"
+        },
+        {
+          "pose_id": "front_crouch_guard_wings",
+          "hold_ticks": 4,
+          "transition_recipe_id": "brace_transfer",
+          "markers": [],
+          "support": {
+            "mode": "grounded",
+            "points": [
+              "left_foot",
+              "right_foot"
+            ]
+          },
+          "root_offset": [
+            0,
+            0
+          ],
+          "secondary_profile_id": "authored_default"
+        },
+        {
+          "pose_id": "front_reaction_jump_wings_staff",
+          "hold_ticks": 4,
+          "transition_recipe_id": "brace_transfer",
+          "markers": [],
+          "support": {
+            "mode": "airborne",
+            "points": []
+          },
+          "root_offset": [
+            0,
+            0
+          ],
+          "secondary_profile_id": "authored_default"
+        },
+        {
+          "pose_id": "front_kneel_staff_brace_wings",
+          "hold_ticks": 4,
+          "transition_recipe_id": "brace_transfer",
+          "markers": [],
+          "support": {
+            "mode": "grounded",
+            "points": [
+              "left_foot",
+              "right_foot",
+              "staff_tip"
+            ]
+          },
+          "root_offset": [
+            0,
+            0
+          ],
+          "secondary_profile_id": "authored_default"
+        },
+        {
+          "pose_id": "front_staff_guard_windup_wings",
+          "hold_ticks": 4,
+          "transition_recipe_id": "brace_transfer",
+          "markers": [],
+          "support": {
+            "mode": "grounded",
+            "points": [
+              "left_foot",
+              "right_foot"
+            ]
+          },
+          "root_offset": [
+            0,
+            0
+          ],
+          "secondary_profile_id": "authored_default"
+        },
+        {
+          "pose_id": "front_staff_guard_horizontal_wings",
+          "hold_ticks": 4,
+          "transition_recipe_id": "brace_transfer",
+          "markers": [],
+          "support": {
+            "mode": "grounded",
+            "points": [
+              "left_foot",
+              "right_foot"
+            ]
+          },
+          "root_offset": [
+            0,
+            0
+          ],
+          "secondary_profile_id": "authored_default"
+        },
+        {
+          "pose_id": "front_staff_guard_low_wings",
+          "hold_ticks": 4,
+          "transition_recipe_id": "brace_transfer",
+          "markers": [],
+          "support": {
+            "mode": "grounded",
+            "points": [
+              "left_foot",
+              "right_foot"
+            ]
+          },
+          "root_offset": [
+            0,
+            0
+          ],
+          "secondary_profile_id": "authored_default"
+        },
+        {
+          "pose_id": "front_crouch_staff_planted_wings",
+          "hold_ticks": 4,
+          "transition_recipe_id": "brace_transfer",
+          "markers": [],
+          "support": {
+            "mode": "grounded",
+            "points": [
+              "left_foot",
+              "right_foot",
+              "staff_tip"
+            ]
+          },
+          "root_offset": [
+            0,
+            0
+          ],
+          "secondary_profile_id": "authored_default"
+        },
+        {
+          "pose_id": "front_crouch_hand_plant_wings",
+          "hold_ticks": 4,
+          "transition_recipe_id": "brace_transfer",
+          "markers": [],
+          "support": {
+            "mode": "grounded",
+            "points": [
+              "left_hand",
+              "left_foot",
+              "staff_tip"
+            ]
+          },
+          "root_offset": [
+            0,
+            0
+          ],
+          "secondary_profile_id": "authored_default"
+        },
+        {
+          "pose_id": "front_magic_staff_thrust_wings",
+          "hold_ticks": 4,
+          "transition_recipe_id": "brace_transfer",
+          "markers": [],
+          "support": {
+            "mode": "grounded",
+            "points": [
+              "left_foot",
+              "right_foot"
+            ]
+          },
+          "root_offset": [
+            0,
+            0
+          ],
+          "secondary_profile_id": "authored_default"
+        },
+        {
+          "pose_id": "front_celebrate_staff_up_wings",
+          "hold_ticks": 4,
+          "transition_recipe_id": "brace_transfer",
+          "markers": [],
+          "support": {
+            "mode": "grounded",
+            "points": [
+              "left_foot",
+              "right_foot"
+            ]
+          },
+          "root_offset": [
+            0,
+            0
+          ],
+          "secondary_profile_id": "authored_default"
+        },
+        {
+          "pose_id": "front_staff_block_wings",
+          "hold_ticks": 4,
+          "transition_recipe_id": "brace_transfer",
+          "markers": [],
+          "support": {
+            "mode": "grounded",
+            "points": [
+              "left_foot",
+              "right_foot"
+            ]
+          },
+          "root_offset": [
+            0,
+            0
+          ],
+          "secondary_profile_id": "authored_default"
+        },
+        {
+          "pose_id": "front_staff_spin_wings",
+          "hold_ticks": 4,
+          "transition_recipe_id": "brace_transfer",
+          "markers": [],
+          "support": {
+            "mode": "grounded",
+            "points": [
+              "left_foot",
+              "right_foot"
+            ]
+          },
+          "root_offset": [
+            0,
+            0
+          ],
+          "secondary_profile_id": "authored_default"
+        },
+        {
+          "pose_id": "front_magic_staff_raise_wings",
+          "hold_ticks": 4,
+          "transition_recipe_id": "brace_transfer",
+          "markers": [],
+          "support": {
+            "mode": "grounded",
+            "points": [
+              "left_foot",
+              "right_foot"
+            ]
+          },
+          "root_offset": [
+            0,
+            0
+          ],
+          "secondary_profile_id": "authored_default"
+        },
+        {
+          "pose_id": "front_magic_staff_spark_wings",
+          "hold_ticks": 4,
+          "transition_recipe_id": "brace_transfer",
+          "markers": [
+            "settled",
+            "exit"
+          ],
+          "support": {
+            "mode": "grounded",
+            "points": [
+              "left_foot",
+              "right_foot"
+            ]
+          },
+          "root_offset": [
+            0,
+            0
+          ],
+          "secondary_profile_id": "authored_default"
+        }
+      ],
+      "loop_start_sample": null,
+      "loop_end_sample": null,
+      "reduced_motion_clip_id": null
+    },
+    {
+      "clip_id": "catalog_performance",
+      "family": "reaction",
+      "loop_mode": "once",
+      "phase_source": "time",
+      "entry_marker": "entry",
+      "exit_markers": [
+        "exit"
+      ],
+      "minimum_hold_ticks": 1,
+      "interrupt_policy": "at_safe_marker",
+      "owned_channels": {
+        "regions": [
+          "base_body",
+          "upper_body",
+          "face_emotion",
+          "secondary"
+        ]
+      },
+      "samples": [
+        {
+          "pose_id": "explaining",
+          "hold_ticks": 4,
+          "transition_recipe_id": "anticipation_action_recover",
+          "markers": [
+            "entry"
+          ],
+          "support": {
+            "mode": "grounded",
+            "points": [
+              "left_foot",
+              "right_foot"
+            ]
+          },
+          "root_offset": [
+            0,
+            0
+          ],
+          "secondary_profile_id": "authored_default"
+        },
+        {
+          "pose_id": "front_victory_cast",
+          "hold_ticks": 4,
+          "transition_recipe_id": "anticipation_action_recover",
+          "markers": [],
+          "support": {
+            "mode": "grounded",
+            "points": [
+              "left_foot",
+              "right_foot"
+            ]
+          },
+          "root_offset": [
+            0,
+            0
+          ],
+          "secondary_profile_id": "authored_default"
+        },
+        {
+          "pose_id": "front_victory_cast_wings",
+          "hold_ticks": 4,
+          "transition_recipe_id": "anticipation_action_recover",
+          "markers": [],
+          "support": {
+            "mode": "grounded",
+            "points": [
+              "left_foot",
+              "right_foot"
+            ]
+          },
+          "root_offset": [
+            0,
+            0
+          ],
+          "secondary_profile_id": "authored_default"
+        },
+        {
+          "pose_id": "front_airborne_fall_back_wings",
+          "hold_ticks": 4,
+          "transition_recipe_id": "anticipation_action_recover",
+          "markers": [],
+          "support": {
+            "mode": "airborne",
+            "points": []
+          },
+          "root_offset": [
+            0,
+            0
+          ],
+          "secondary_profile_id": "authored_default"
+        },
+        {
+          "pose_id": "front_point_direct_wings",
+          "hold_ticks": 4,
+          "transition_recipe_id": "anticipation_action_recover",
+          "markers": [],
+          "support": {
+            "mode": "grounded",
+            "points": [
+              "left_foot",
+              "right_foot"
+            ]
+          },
+          "root_offset": [
+            0,
+            0
+          ],
+          "secondary_profile_id": "authored_default"
+        },
+        {
+          "pose_id": "front_celebrate_jump_wings",
+          "hold_ticks": 4,
+          "transition_recipe_id": "anticipation_action_recover",
+          "markers": [],
+          "support": {
+            "mode": "airborne",
+            "points": []
+          },
+          "root_offset": [
+            0,
+            0
+          ],
+          "secondary_profile_id": "authored_default"
+        },
+        {
+          "pose_id": "front_shush_wings",
+          "hold_ticks": 4,
+          "transition_recipe_id": "anticipation_action_recover",
+          "markers": [],
+          "support": {
+            "mode": "grounded",
+            "points": [
+              "left_foot",
+              "right_foot"
+            ]
+          },
+          "root_offset": [
+            0,
+            0
+          ],
+          "secondary_profile_id": "authored_default"
+        },
+        {
+          "pose_id": "front_idle_wings",
+          "hold_ticks": 4,
+          "transition_recipe_id": "anticipation_action_recover",
+          "markers": [],
+          "support": {
+            "mode": "grounded",
+            "points": [
+              "left_foot",
+              "right_foot",
+              "staff_tip"
+            ]
+          },
+          "root_offset": [
+            0,
+            0
+          ],
+          "secondary_profile_id": "authored_default"
+        },
+        {
+          "pose_id": "front_greeting_wave_wings",
+          "hold_ticks": 4,
+          "transition_recipe_id": "anticipation_action_recover",
+          "markers": [],
+          "support": {
+            "mode": "grounded",
+            "points": [
+              "left_foot",
+              "right_foot",
+              "staff_tip"
+            ]
+          },
+          "root_offset": [
+            0,
+            0
+          ],
+          "secondary_profile_id": "authored_default"
+        },
+        {
+          "pose_id": "front_thinking_hand_chin_wings",
+          "hold_ticks": 4,
+          "transition_recipe_id": "anticipation_action_recover",
+          "markers": [],
+          "support": {
+            "mode": "grounded",
+            "points": [
+              "left_foot",
+              "right_foot",
+              "staff_tip"
+            ]
+          },
+          "root_offset": [
+            0,
+            0
+          ],
+          "secondary_profile_id": "authored_default"
+        },
+        {
+          "pose_id": "front_explaining_open_hand_wings",
+          "hold_ticks": 4,
+          "transition_recipe_id": "anticipation_action_recover",
+          "markers": [],
+          "support": {
+            "mode": "grounded",
+            "points": [
+              "left_foot",
+              "right_foot",
+              "staff_tip"
+            ]
+          },
+          "root_offset": [
+            0,
+            0
+          ],
+          "secondary_profile_id": "authored_default"
+        },
+        {
+          "pose_id": "front_point_side_wings",
+          "hold_ticks": 4,
+          "transition_recipe_id": "anticipation_action_recover",
+          "markers": [],
+          "support": {
+            "mode": "grounded",
+            "points": [
+              "left_foot",
+              "right_foot",
+              "staff_tip"
+            ]
+          },
+          "root_offset": [
+            0,
+            0
+          ],
+          "secondary_profile_id": "authored_default"
+        },
+        {
+          "pose_id": "front_explaining_both_hands_wings",
+          "hold_ticks": 4,
+          "transition_recipe_id": "anticipation_action_recover",
+          "markers": [],
+          "support": {
+            "mode": "grounded",
+            "points": [
+              "left_foot",
+              "right_foot",
+              "staff_tip"
+            ]
+          },
+          "root_offset": [
+            0,
+            0
+          ],
+          "secondary_profile_id": "authored_default"
+        },
+        {
+          "pose_id": "front_sincere_hand_heart_wings",
+          "hold_ticks": 4,
+          "transition_recipe_id": "anticipation_action_recover",
+          "markers": [],
+          "support": {
+            "mode": "grounded",
+            "points": [
+              "left_foot",
+              "right_foot",
+              "staff_tip"
+            ]
+          },
+          "root_offset": [
+            0,
+            0
+          ],
+          "secondary_profile_id": "authored_default"
+        },
+        {
+          "pose_id": "front_playful_kick_wings",
+          "hold_ticks": 4,
+          "transition_recipe_id": "anticipation_action_recover",
+          "markers": [
+            "settled",
+            "exit"
+          ],
+          "support": {
+            "mode": "grounded",
+            "points": [
+              "left_foot"
+            ]
+          },
+          "root_offset": [
+            0,
+            0
+          ],
+          "secondary_profile_id": "authored_default"
+        }
+      ],
+      "loop_start_sample": null,
+      "loop_end_sample": null,
+      "reduced_motion_clip_id": null
+    },
+    {
+      "clip_id": "catalog_feeling",
+      "family": "feeling_accent",
+      "loop_mode": "once",
+      "phase_source": "time",
+      "entry_marker": "entry",
+      "exit_markers": [
+        "exit"
+      ],
+      "minimum_hold_ticks": 1,
+      "interrupt_policy": "at_safe_marker",
+      "owned_channels": {
+        "regions": [
+          "base_body",
+          "upper_body",
+          "face_emotion",
+          "secondary"
+        ]
+      },
+      "samples": [
+        {
+          "pose_id": "feeling_joy_full",
+          "hold_ticks": 4,
+          "transition_recipe_id": "face_coarticulation",
+          "markers": [
+            "entry"
+          ],
+          "support": {
+            "mode": "grounded",
+            "points": [
+              "left_foot"
+            ]
+          },
+          "root_offset": [
+            0,
+            0
+          ],
+          "secondary_profile_id": "authored_default"
+        },
+        {
+          "pose_id": "feeling_sadness_full",
+          "hold_ticks": 4,
+          "transition_recipe_id": "face_coarticulation",
+          "markers": [],
+          "support": {
+            "mode": "grounded",
+            "points": [
+              "left_foot",
+              "right_foot",
+              "staff_tip"
+            ]
+          },
+          "root_offset": [
+            0,
+            0
+          ],
+          "secondary_profile_id": "authored_default"
+        },
+        {
+          "pose_id": "feeling_anger_full",
+          "hold_ticks": 4,
+          "transition_recipe_id": "face_coarticulation",
+          "markers": [],
+          "support": {
+            "mode": "grounded",
+            "points": [
+              "left_foot",
+              "right_foot",
+              "staff_tip"
+            ]
+          },
+          "root_offset": [
+            0,
+            0
+          ],
+          "secondary_profile_id": "authored_default"
+        },
+        {
+          "pose_id": "feeling_fear_full",
+          "hold_ticks": 4,
+          "transition_recipe_id": "face_coarticulation",
+          "markers": [],
+          "support": {
+            "mode": "grounded",
+            "points": [
+              "left_foot",
+              "right_foot",
+              "staff_tip"
+            ]
+          },
+          "root_offset": [
+            0,
+            0
+          ],
+          "secondary_profile_id": "authored_default"
+        },
+        {
+          "pose_id": "feeling_shame_full",
+          "hold_ticks": 4,
+          "transition_recipe_id": "face_coarticulation",
+          "markers": [],
+          "support": {
+            "mode": "grounded",
+            "points": [
+              "left_foot",
+              "right_foot",
+              "staff_tip"
+            ]
+          },
+          "root_offset": [
+            0,
+            0
+          ],
+          "secondary_profile_id": "authored_default"
+        },
+        {
+          "pose_id": "feeling_disgust_full",
+          "hold_ticks": 4,
+          "transition_recipe_id": "face_coarticulation",
+          "markers": [],
+          "support": {
+            "mode": "grounded",
+            "points": [
+              "left_foot",
+              "right_foot",
+              "staff_tip"
+            ]
+          },
+          "root_offset": [
+            0,
+            0
+          ],
+          "secondary_profile_id": "authored_default"
+        },
+        {
+          "pose_id": "feeling_surprise_full",
+          "hold_ticks": 4,
+          "transition_recipe_id": "face_coarticulation",
+          "markers": [],
+          "support": {
+            "mode": "grounded",
+            "points": [
+              "left_foot",
+              "right_foot",
+              "staff_tip"
+            ]
+          },
+          "root_offset": [
+            0,
+            0
+          ],
+          "secondary_profile_id": "authored_default"
+        },
+        {
+          "pose_id": "feeling_pride_full",
+          "hold_ticks": 4,
+          "transition_recipe_id": "face_coarticulation",
+          "markers": [],
+          "support": {
+            "mode": "grounded",
+            "points": [
+              "left_foot",
+              "right_foot",
+              "staff_tip"
+            ]
+          },
+          "root_offset": [
+            0,
+            0
+          ],
+          "secondary_profile_id": "authored_default"
+        },
+        {
+          "pose_id": "feeling_guilt_full",
+          "hold_ticks": 4,
+          "transition_recipe_id": "face_coarticulation",
+          "markers": [],
+          "support": {
+            "mode": "grounded",
+            "points": [
+              "left_foot",
+              "right_foot",
+              "staff_tip"
+            ]
+          },
+          "root_offset": [
+            0,
+            0
+          ],
+          "secondary_profile_id": "authored_default"
+        },
+        {
+          "pose_id": "feeling_love_full",
+          "hold_ticks": 4,
+          "transition_recipe_id": "face_coarticulation",
+          "markers": [
+            "settled",
+            "exit"
+          ],
+          "support": {
+            "mode": "grounded",
+            "points": [
+              "left_foot",
+              "right_foot",
+              "staff_tip"
+            ]
+          },
+          "root_offset": [
+            0,
+            0
+          ],
+          "secondary_profile_id": "authored_default"
+        }
+      ],
+      "loop_start_sample": null,
+      "loop_end_sample": null,
+      "reduced_motion_clip_id": null
+    }
+  ],
+  "transition_recipes": [
+    {
+      "recipe_id": "coherent_handoff",
+      "source_families": [
+        "idle",
+        "listening",
+        "thinking",
+        "preparing_response",
+        "speaking",
+        "clarifying",
+        "tool_wait",
+        "error",
+        "celebrating",
+        "interrupted",
+        "ground_locomotion",
+        "flight",
+        "staff_action",
+        "reaction",
+        "feeling_accent"
+      ],
+      "target_families": [
+        "idle",
+        "listening",
+        "thinking",
+        "preparing_response",
+        "speaking",
+        "clarifying",
+        "tool_wait",
+        "error",
+        "celebrating",
+        "interrupted",
+        "ground_locomotion",
+        "flight",
+        "staff_action",
+        "reaction",
+        "feeling_accent"
+      ],
+      "timing": "marker_aligned",
+      "duration_ticks": {
+        "min": 1,
+        "max": 18
+      },
+      "handoff_marker": "commit",
+      "contact_policy": "preserve",
+      "root_policy": "preserve",
+      "region_policy": "preserve_unowned",
+      "secondary_policy": "preserve",
+      "interrupt_windows": [
+        {
+          "start_marker": "entry",
+          "end_marker": "exit",
+          "interrupt_policy": "at_safe_marker",
+          "recovery_policy": "settle_to_idle"
+        }
+      ],
+      "fallback_recipe_id": null
+    },
+    {
+      "recipe_id": "contact_sync",
+      "source_families": [
+        "idle",
+        "listening",
+        "thinking",
+        "preparing_response",
+        "speaking",
+        "clarifying",
+        "tool_wait",
+        "error",
+        "celebrating",
+        "interrupted",
+        "ground_locomotion",
+        "flight",
+        "staff_action",
+        "reaction",
+        "feeling_accent"
+      ],
+      "target_families": [
+        "idle",
+        "listening",
+        "thinking",
+        "preparing_response",
+        "speaking",
+        "clarifying",
+        "tool_wait",
+        "error",
+        "celebrating",
+        "interrupted",
+        "ground_locomotion",
+        "flight",
+        "staff_action",
+        "reaction",
+        "feeling_accent"
+      ],
+      "timing": "distance_phase",
+      "duration_ticks": {
+        "min": 1,
+        "max": 18
+      },
+      "handoff_marker": "commit",
+      "contact_policy": "transfer_at_marker",
+      "root_policy": "contact_locked",
+      "region_policy": "preserve_unowned",
+      "secondary_policy": "preserve",
+      "interrupt_windows": [
+        {
+          "start_marker": "entry",
+          "end_marker": "exit",
+          "interrupt_policy": "at_safe_marker",
+          "recovery_policy": "settle_to_idle"
+        }
+      ],
+      "fallback_recipe_id": "coherent_handoff"
+    },
+    {
+      "recipe_id": "anticipation_action_recover",
+      "source_families": [
+        "idle",
+        "listening",
+        "thinking",
+        "preparing_response",
+        "speaking",
+        "clarifying",
+        "tool_wait",
+        "error",
+        "celebrating",
+        "interrupted",
+        "ground_locomotion",
+        "flight",
+        "staff_action",
+        "reaction",
+        "feeling_accent"
+      ],
+      "target_families": [
+        "idle",
+        "listening",
+        "thinking",
+        "preparing_response",
+        "speaking",
+        "clarifying",
+        "tool_wait",
+        "error",
+        "celebrating",
+        "interrupted",
+        "ground_locomotion",
+        "flight",
+        "staff_action",
+        "reaction",
+        "feeling_accent"
+      ],
+      "timing": "marker_aligned",
+      "duration_ticks": {
+        "min": 1,
+        "max": 18
+      },
+      "handoff_marker": "commit",
+      "contact_policy": "preserve",
+      "root_policy": "authored_offset",
+      "region_policy": "replace_owned",
+      "secondary_policy": "settle",
+      "interrupt_windows": [
+        {
+          "start_marker": "entry",
+          "end_marker": "exit",
+          "interrupt_policy": "at_safe_marker",
+          "recovery_policy": "settle_to_idle"
+        }
+      ],
+      "fallback_recipe_id": "coherent_handoff"
+    },
+    {
+      "recipe_id": "airborne_arc",
+      "source_families": [
+        "idle",
+        "listening",
+        "thinking",
+        "preparing_response",
+        "speaking",
+        "clarifying",
+        "tool_wait",
+        "error",
+        "celebrating",
+        "interrupted",
+        "ground_locomotion",
+        "flight",
+        "staff_action",
+        "reaction",
+        "feeling_accent"
+      ],
+      "target_families": [
+        "idle",
+        "listening",
+        "thinking",
+        "preparing_response",
+        "speaking",
+        "clarifying",
+        "tool_wait",
+        "error",
+        "celebrating",
+        "interrupted",
+        "ground_locomotion",
+        "flight",
+        "staff_action",
+        "reaction",
+        "feeling_accent"
+      ],
+      "timing": "wing_phase",
+      "duration_ticks": {
+        "min": 1,
+        "max": 18
+      },
+      "handoff_marker": "commit",
+      "contact_policy": "release_then_airborne",
+      "root_policy": "follow_target",
+      "region_policy": "replace_owned",
+      "secondary_policy": "preserve",
+      "interrupt_windows": [
+        {
+          "start_marker": "entry",
+          "end_marker": "exit",
+          "interrupt_policy": "at_safe_marker",
+          "recovery_policy": "settle_to_idle"
+        }
+      ],
+      "fallback_recipe_id": "coherent_handoff"
+    },
+    {
+      "recipe_id": "brace_transfer",
+      "source_families": [
+        "idle",
+        "listening",
+        "thinking",
+        "preparing_response",
+        "speaking",
+        "clarifying",
+        "tool_wait",
+        "error",
+        "celebrating",
+        "interrupted",
+        "ground_locomotion",
+        "flight",
+        "staff_action",
+        "reaction",
+        "feeling_accent"
+      ],
+      "target_families": [
+        "idle",
+        "listening",
+        "thinking",
+        "preparing_response",
+        "speaking",
+        "clarifying",
+        "tool_wait",
+        "error",
+        "celebrating",
+        "interrupted",
+        "ground_locomotion",
+        "flight",
+        "staff_action",
+        "reaction",
+        "feeling_accent"
+      ],
+      "timing": "marker_aligned",
+      "duration_ticks": {
+        "min": 1,
+        "max": 18
+      },
+      "handoff_marker": "commit",
+      "contact_policy": "brace_transfer",
+      "root_policy": "contact_locked",
+      "region_policy": "replace_owned",
+      "secondary_policy": "settle",
+      "interrupt_windows": [
+        {
+          "start_marker": "entry",
+          "end_marker": "exit",
+          "interrupt_policy": "at_safe_marker",
+          "recovery_policy": "settle_to_idle"
+        }
+      ],
+      "fallback_recipe_id": "coherent_handoff"
+    },
+    {
+      "recipe_id": "face_coarticulation",
+      "source_families": [
+        "idle",
+        "listening",
+        "thinking",
+        "preparing_response",
+        "speaking",
+        "clarifying",
+        "tool_wait",
+        "error",
+        "celebrating",
+        "interrupted",
+        "ground_locomotion",
+        "flight",
+        "staff_action",
+        "reaction",
+        "feeling_accent"
+      ],
+      "target_families": [
+        "idle",
+        "listening",
+        "thinking",
+        "preparing_response",
+        "speaking",
+        "clarifying",
+        "tool_wait",
+        "error",
+        "celebrating",
+        "interrupted",
+        "ground_locomotion",
+        "flight",
+        "staff_action",
+        "reaction",
+        "feeling_accent"
+      ],
+      "timing": "speech_aligned",
+      "duration_ticks": {
+        "min": 1,
+        "max": 18
+      },
+      "handoff_marker": "commit",
+      "contact_policy": "none",
+      "root_policy": "preserve",
+      "region_policy": "face_only",
+      "secondary_policy": "preserve",
+      "interrupt_windows": [
+        {
+          "start_marker": "entry",
+          "end_marker": "exit",
+          "interrupt_policy": "at_safe_marker",
+          "recovery_policy": "settle_to_idle"
+        }
+      ],
+      "fallback_recipe_id": "coherent_handoff"
+    },
+    {
+      "recipe_id": "secondary_settle",
+      "source_families": [
+        "idle",
+        "listening",
+        "thinking",
+        "preparing_response",
+        "speaking",
+        "clarifying",
+        "tool_wait",
+        "error",
+        "celebrating",
+        "interrupted",
+        "ground_locomotion",
+        "flight",
+        "staff_action",
+        "reaction",
+        "feeling_accent"
+      ],
+      "target_families": [
+        "idle",
+        "listening",
+        "thinking",
+        "preparing_response",
+        "speaking",
+        "clarifying",
+        "tool_wait",
+        "error",
+        "celebrating",
+        "interrupted",
+        "ground_locomotion",
+        "flight",
+        "staff_action",
+        "reaction",
+        "feeling_accent"
+      ],
+      "timing": "fixed",
+      "duration_ticks": {
+        "min": 1,
+        "max": 18
+      },
+      "handoff_marker": "commit",
+      "contact_policy": "preserve",
+      "root_policy": "preserve",
+      "region_policy": "preserve_unowned",
+      "secondary_policy": "settle",
+      "interrupt_windows": [
+        {
+          "start_marker": "entry",
+          "end_marker": "exit",
+          "interrupt_policy": "at_safe_marker",
+          "recovery_policy": "settle_to_idle"
+        }
+      ],
+      "fallback_recipe_id": "coherent_handoff"
+    },
+    {
+      "recipe_id": "reduced_motion_handoff",
+      "source_families": [
+        "idle",
+        "listening",
+        "thinking",
+        "preparing_response",
+        "speaking",
+        "clarifying",
+        "tool_wait",
+        "error",
+        "celebrating",
+        "interrupted",
+        "ground_locomotion",
+        "flight",
+        "staff_action",
+        "reaction",
+        "feeling_accent"
+      ],
+      "target_families": [
+        "idle",
+        "listening",
+        "thinking",
+        "preparing_response",
+        "speaking",
+        "clarifying",
+        "tool_wait",
+        "error",
+        "celebrating",
+        "interrupted",
+        "ground_locomotion",
+        "flight",
+        "staff_action",
+        "reaction",
+        "feeling_accent"
+      ],
+      "timing": "fixed",
+      "duration_ticks": {
+        "min": 1,
+        "max": 18
+      },
+      "handoff_marker": "commit",
+      "contact_policy": "preserve",
+      "root_policy": "preserve",
+      "region_policy": "reduced_motion",
+      "secondary_policy": "suppress",
+      "interrupt_windows": [
+        {
+          "start_marker": "entry",
+          "end_marker": "exit",
+          "interrupt_policy": "at_safe_marker",
+          "recovery_policy": "settle_to_idle"
+        }
+      ],
+      "fallback_recipe_id": "coherent_handoff"
+    }
+  ],
+  "edges": [
+    {
+      "edge_id": "edge_001",
+      "source_clip_id": "state_idle",
+      "target_clip_id": "state_listening",
+      "transition_recipe_id": "coherent_handoff",
+      "allowed_turn_states": [
+        "idle",
+        "listening",
+        "thinking",
+        "preparing_response",
+        "speaking",
+        "clarifying",
+        "tool_wait",
+        "error",
+        "celebrating",
+        "interrupted"
+      ],
+      "allowed_motion_profiles": [
+        "full",
+        "reduced"
+      ]
+    },
+    {
+      "edge_id": "edge_002",
+      "source_clip_id": "state_listening",
+      "target_clip_id": "state_idle",
+      "transition_recipe_id": "coherent_handoff",
+      "allowed_turn_states": [
+        "idle",
+        "listening",
+        "thinking",
+        "preparing_response",
+        "speaking",
+        "clarifying",
+        "tool_wait",
+        "error",
+        "celebrating",
+        "interrupted"
+      ],
+      "allowed_motion_profiles": [
+        "full",
+        "reduced"
+      ]
+    },
+    {
+      "edge_id": "edge_003",
+      "source_clip_id": "state_idle",
+      "target_clip_id": "state_thinking",
+      "transition_recipe_id": "coherent_handoff",
+      "allowed_turn_states": [
+        "idle",
+        "listening",
+        "thinking",
+        "preparing_response",
+        "speaking",
+        "clarifying",
+        "tool_wait",
+        "error",
+        "celebrating",
+        "interrupted"
+      ],
+      "allowed_motion_profiles": [
+        "full",
+        "reduced"
+      ]
+    },
+    {
+      "edge_id": "edge_004",
+      "source_clip_id": "state_thinking",
+      "target_clip_id": "state_idle",
+      "transition_recipe_id": "coherent_handoff",
+      "allowed_turn_states": [
+        "idle",
+        "listening",
+        "thinking",
+        "preparing_response",
+        "speaking",
+        "clarifying",
+        "tool_wait",
+        "error",
+        "celebrating",
+        "interrupted"
+      ],
+      "allowed_motion_profiles": [
+        "full",
+        "reduced"
+      ]
+    },
+    {
+      "edge_id": "edge_005",
+      "source_clip_id": "state_idle",
+      "target_clip_id": "state_preparing_response",
+      "transition_recipe_id": "coherent_handoff",
+      "allowed_turn_states": [
+        "idle",
+        "listening",
+        "thinking",
+        "preparing_response",
+        "speaking",
+        "clarifying",
+        "tool_wait",
+        "error",
+        "celebrating",
+        "interrupted"
+      ],
+      "allowed_motion_profiles": [
+        "full",
+        "reduced"
+      ]
+    },
+    {
+      "edge_id": "edge_006",
+      "source_clip_id": "state_preparing_response",
+      "target_clip_id": "state_idle",
+      "transition_recipe_id": "coherent_handoff",
+      "allowed_turn_states": [
+        "idle",
+        "listening",
+        "thinking",
+        "preparing_response",
+        "speaking",
+        "clarifying",
+        "tool_wait",
+        "error",
+        "celebrating",
+        "interrupted"
+      ],
+      "allowed_motion_profiles": [
+        "full",
+        "reduced"
+      ]
+    },
+    {
+      "edge_id": "edge_007",
+      "source_clip_id": "state_idle",
+      "target_clip_id": "state_speaking",
+      "transition_recipe_id": "coherent_handoff",
+      "allowed_turn_states": [
+        "idle",
+        "listening",
+        "thinking",
+        "preparing_response",
+        "speaking",
+        "clarifying",
+        "tool_wait",
+        "error",
+        "celebrating",
+        "interrupted"
+      ],
+      "allowed_motion_profiles": [
+        "full",
+        "reduced"
+      ]
+    },
+    {
+      "edge_id": "edge_008",
+      "source_clip_id": "state_speaking",
+      "target_clip_id": "state_idle",
+      "transition_recipe_id": "coherent_handoff",
+      "allowed_turn_states": [
+        "idle",
+        "listening",
+        "thinking",
+        "preparing_response",
+        "speaking",
+        "clarifying",
+        "tool_wait",
+        "error",
+        "celebrating",
+        "interrupted"
+      ],
+      "allowed_motion_profiles": [
+        "full",
+        "reduced"
+      ]
+    },
+    {
+      "edge_id": "edge_009",
+      "source_clip_id": "state_idle",
+      "target_clip_id": "state_clarifying",
+      "transition_recipe_id": "coherent_handoff",
+      "allowed_turn_states": [
+        "idle",
+        "listening",
+        "thinking",
+        "preparing_response",
+        "speaking",
+        "clarifying",
+        "tool_wait",
+        "error",
+        "celebrating",
+        "interrupted"
+      ],
+      "allowed_motion_profiles": [
+        "full",
+        "reduced"
+      ]
+    },
+    {
+      "edge_id": "edge_010",
+      "source_clip_id": "state_clarifying",
+      "target_clip_id": "state_idle",
+      "transition_recipe_id": "coherent_handoff",
+      "allowed_turn_states": [
+        "idle",
+        "listening",
+        "thinking",
+        "preparing_response",
+        "speaking",
+        "clarifying",
+        "tool_wait",
+        "error",
+        "celebrating",
+        "interrupted"
+      ],
+      "allowed_motion_profiles": [
+        "full",
+        "reduced"
+      ]
+    },
+    {
+      "edge_id": "edge_011",
+      "source_clip_id": "state_idle",
+      "target_clip_id": "state_tool_wait",
+      "transition_recipe_id": "coherent_handoff",
+      "allowed_turn_states": [
+        "idle",
+        "listening",
+        "thinking",
+        "preparing_response",
+        "speaking",
+        "clarifying",
+        "tool_wait",
+        "error",
+        "celebrating",
+        "interrupted"
+      ],
+      "allowed_motion_profiles": [
+        "full",
+        "reduced"
+      ]
+    },
+    {
+      "edge_id": "edge_012",
+      "source_clip_id": "state_tool_wait",
+      "target_clip_id": "state_idle",
+      "transition_recipe_id": "coherent_handoff",
+      "allowed_turn_states": [
+        "idle",
+        "listening",
+        "thinking",
+        "preparing_response",
+        "speaking",
+        "clarifying",
+        "tool_wait",
+        "error",
+        "celebrating",
+        "interrupted"
+      ],
+      "allowed_motion_profiles": [
+        "full",
+        "reduced"
+      ]
+    },
+    {
+      "edge_id": "edge_013",
+      "source_clip_id": "state_idle",
+      "target_clip_id": "state_error",
+      "transition_recipe_id": "coherent_handoff",
+      "allowed_turn_states": [
+        "idle",
+        "listening",
+        "thinking",
+        "preparing_response",
+        "speaking",
+        "clarifying",
+        "tool_wait",
+        "error",
+        "celebrating",
+        "interrupted"
+      ],
+      "allowed_motion_profiles": [
+        "full",
+        "reduced"
+      ]
+    },
+    {
+      "edge_id": "edge_014",
+      "source_clip_id": "state_error",
+      "target_clip_id": "state_idle",
+      "transition_recipe_id": "coherent_handoff",
+      "allowed_turn_states": [
+        "idle",
+        "listening",
+        "thinking",
+        "preparing_response",
+        "speaking",
+        "clarifying",
+        "tool_wait",
+        "error",
+        "celebrating",
+        "interrupted"
+      ],
+      "allowed_motion_profiles": [
+        "full",
+        "reduced"
+      ]
+    },
+    {
+      "edge_id": "edge_015",
+      "source_clip_id": "state_idle",
+      "target_clip_id": "state_celebrating",
+      "transition_recipe_id": "coherent_handoff",
+      "allowed_turn_states": [
+        "idle",
+        "listening",
+        "thinking",
+        "preparing_response",
+        "speaking",
+        "clarifying",
+        "tool_wait",
+        "error",
+        "celebrating",
+        "interrupted"
+      ],
+      "allowed_motion_profiles": [
+        "full",
+        "reduced"
+      ]
+    },
+    {
+      "edge_id": "edge_016",
+      "source_clip_id": "state_celebrating",
+      "target_clip_id": "state_idle",
+      "transition_recipe_id": "coherent_handoff",
+      "allowed_turn_states": [
+        "idle",
+        "listening",
+        "thinking",
+        "preparing_response",
+        "speaking",
+        "clarifying",
+        "tool_wait",
+        "error",
+        "celebrating",
+        "interrupted"
+      ],
+      "allowed_motion_profiles": [
+        "full",
+        "reduced"
+      ]
+    },
+    {
+      "edge_id": "edge_017",
+      "source_clip_id": "state_idle",
+      "target_clip_id": "state_interrupted",
+      "transition_recipe_id": "coherent_handoff",
+      "allowed_turn_states": [
+        "idle",
+        "listening",
+        "thinking",
+        "preparing_response",
+        "speaking",
+        "clarifying",
+        "tool_wait",
+        "error",
+        "celebrating",
+        "interrupted"
+      ],
+      "allowed_motion_profiles": [
+        "full",
+        "reduced"
+      ]
+    },
+    {
+      "edge_id": "edge_018",
+      "source_clip_id": "state_interrupted",
+      "target_clip_id": "state_idle",
+      "transition_recipe_id": "coherent_handoff",
+      "allowed_turn_states": [
+        "idle",
+        "listening",
+        "thinking",
+        "preparing_response",
+        "speaking",
+        "clarifying",
+        "tool_wait",
+        "error",
+        "celebrating",
+        "interrupted"
+      ],
+      "allowed_motion_profiles": [
+        "full",
+        "reduced"
+      ]
+    },
+    {
+      "edge_id": "edge_019",
+      "source_clip_id": "state_idle",
+      "target_clip_id": "catalog_directional",
+      "transition_recipe_id": "coherent_handoff",
+      "allowed_turn_states": [
+        "idle",
+        "listening",
+        "thinking",
+        "preparing_response",
+        "speaking",
+        "clarifying",
+        "tool_wait",
+        "error",
+        "celebrating",
+        "interrupted"
+      ],
+      "allowed_motion_profiles": [
+        "full",
+        "reduced"
+      ]
+    },
+    {
+      "edge_id": "edge_020",
+      "source_clip_id": "catalog_directional",
+      "target_clip_id": "state_idle",
+      "transition_recipe_id": "coherent_handoff",
+      "allowed_turn_states": [
+        "idle",
+        "listening",
+        "thinking",
+        "preparing_response",
+        "speaking",
+        "clarifying",
+        "tool_wait",
+        "error",
+        "celebrating",
+        "interrupted"
+      ],
+      "allowed_motion_profiles": [
+        "full",
+        "reduced"
+      ]
+    },
+    {
+      "edge_id": "edge_021",
+      "source_clip_id": "state_idle",
+      "target_clip_id": "catalog_locomotion",
+      "transition_recipe_id": "coherent_handoff",
+      "allowed_turn_states": [
+        "idle",
+        "listening",
+        "thinking",
+        "preparing_response",
+        "speaking",
+        "clarifying",
+        "tool_wait",
+        "error",
+        "celebrating",
+        "interrupted"
+      ],
+      "allowed_motion_profiles": [
+        "full",
+        "reduced"
+      ]
+    },
+    {
+      "edge_id": "edge_022",
+      "source_clip_id": "catalog_locomotion",
+      "target_clip_id": "state_idle",
+      "transition_recipe_id": "coherent_handoff",
+      "allowed_turn_states": [
+        "idle",
+        "listening",
+        "thinking",
+        "preparing_response",
+        "speaking",
+        "clarifying",
+        "tool_wait",
+        "error",
+        "celebrating",
+        "interrupted"
+      ],
+      "allowed_motion_profiles": [
+        "full",
+        "reduced"
+      ]
+    },
+    {
+      "edge_id": "edge_023",
+      "source_clip_id": "state_idle",
+      "target_clip_id": "catalog_flight",
+      "transition_recipe_id": "coherent_handoff",
+      "allowed_turn_states": [
+        "idle",
+        "listening",
+        "thinking",
+        "preparing_response",
+        "speaking",
+        "clarifying",
+        "tool_wait",
+        "error",
+        "celebrating",
+        "interrupted"
+      ],
+      "allowed_motion_profiles": [
+        "full",
+        "reduced"
+      ]
+    },
+    {
+      "edge_id": "edge_024",
+      "source_clip_id": "catalog_flight",
+      "target_clip_id": "state_idle",
+      "transition_recipe_id": "coherent_handoff",
+      "allowed_turn_states": [
+        "idle",
+        "listening",
+        "thinking",
+        "preparing_response",
+        "speaking",
+        "clarifying",
+        "tool_wait",
+        "error",
+        "celebrating",
+        "interrupted"
+      ],
+      "allowed_motion_profiles": [
+        "full",
+        "reduced"
+      ]
+    },
+    {
+      "edge_id": "edge_025",
+      "source_clip_id": "state_idle",
+      "target_clip_id": "catalog_staff",
+      "transition_recipe_id": "coherent_handoff",
+      "allowed_turn_states": [
+        "idle",
+        "listening",
+        "thinking",
+        "preparing_response",
+        "speaking",
+        "clarifying",
+        "tool_wait",
+        "error",
+        "celebrating",
+        "interrupted"
+      ],
+      "allowed_motion_profiles": [
+        "full",
+        "reduced"
+      ]
+    },
+    {
+      "edge_id": "edge_026",
+      "source_clip_id": "catalog_staff",
+      "target_clip_id": "state_idle",
+      "transition_recipe_id": "coherent_handoff",
+      "allowed_turn_states": [
+        "idle",
+        "listening",
+        "thinking",
+        "preparing_response",
+        "speaking",
+        "clarifying",
+        "tool_wait",
+        "error",
+        "celebrating",
+        "interrupted"
+      ],
+      "allowed_motion_profiles": [
+        "full",
+        "reduced"
+      ]
+    },
+    {
+      "edge_id": "edge_027",
+      "source_clip_id": "state_idle",
+      "target_clip_id": "catalog_performance",
+      "transition_recipe_id": "coherent_handoff",
+      "allowed_turn_states": [
+        "idle",
+        "listening",
+        "thinking",
+        "preparing_response",
+        "speaking",
+        "clarifying",
+        "tool_wait",
+        "error",
+        "celebrating",
+        "interrupted"
+      ],
+      "allowed_motion_profiles": [
+        "full",
+        "reduced"
+      ]
+    },
+    {
+      "edge_id": "edge_028",
+      "source_clip_id": "catalog_performance",
+      "target_clip_id": "state_idle",
+      "transition_recipe_id": "coherent_handoff",
+      "allowed_turn_states": [
+        "idle",
+        "listening",
+        "thinking",
+        "preparing_response",
+        "speaking",
+        "clarifying",
+        "tool_wait",
+        "error",
+        "celebrating",
+        "interrupted"
+      ],
+      "allowed_motion_profiles": [
+        "full",
+        "reduced"
+      ]
+    },
+    {
+      "edge_id": "edge_029",
+      "source_clip_id": "state_idle",
+      "target_clip_id": "catalog_feeling",
+      "transition_recipe_id": "coherent_handoff",
+      "allowed_turn_states": [
+        "idle",
+        "listening",
+        "thinking",
+        "preparing_response",
+        "speaking",
+        "clarifying",
+        "tool_wait",
+        "error",
+        "celebrating",
+        "interrupted"
+      ],
+      "allowed_motion_profiles": [
+        "full",
+        "reduced"
+      ]
+    },
+    {
+      "edge_id": "edge_030",
+      "source_clip_id": "catalog_feeling",
+      "target_clip_id": "state_idle",
+      "transition_recipe_id": "coherent_handoff",
+      "allowed_turn_states": [
+        "idle",
+        "listening",
+        "thinking",
+        "preparing_response",
+        "speaking",
+        "clarifying",
+        "tool_wait",
+        "error",
+        "celebrating",
+        "interrupted"
+      ],
+      "allowed_motion_profiles": [
+        "full",
+        "reduced"
+      ]
+    }
+  ],
+  "turn_state_profiles": [
+    {
+      "turn_state": "idle",
+      "entry_clip_id": "state_idle",
+      "stable_clip_id": "state_idle",
+      "variant_set_id": null,
+      "recovery_policy": "settle_to_idle"
+    },
+    {
+      "turn_state": "listening",
+      "entry_clip_id": "state_listening",
+      "stable_clip_id": "state_listening",
+      "variant_set_id": null,
+      "recovery_policy": "settle_to_listening"
+    },
+    {
+      "turn_state": "thinking",
+      "entry_clip_id": "state_thinking",
+      "stable_clip_id": "state_thinking",
+      "variant_set_id": null,
+      "recovery_policy": "settle_to_idle"
+    },
+    {
+      "turn_state": "preparing_response",
+      "entry_clip_id": "state_preparing_response",
+      "stable_clip_id": "state_preparing_response",
+      "variant_set_id": null,
+      "recovery_policy": "settle_to_idle"
+    },
+    {
+      "turn_state": "speaking",
+      "entry_clip_id": "state_speaking",
+      "stable_clip_id": "state_speaking",
+      "variant_set_id": null,
+      "recovery_policy": "settle_to_idle"
+    },
+    {
+      "turn_state": "clarifying",
+      "entry_clip_id": "state_clarifying",
+      "stable_clip_id": "state_clarifying",
+      "variant_set_id": null,
+      "recovery_policy": "settle_to_idle"
+    },
+    {
+      "turn_state": "tool_wait",
+      "entry_clip_id": "state_tool_wait",
+      "stable_clip_id": "state_tool_wait",
+      "variant_set_id": null,
+      "recovery_policy": "settle_to_idle"
+    },
+    {
+      "turn_state": "error",
+      "entry_clip_id": "state_error",
+      "stable_clip_id": "state_error",
+      "variant_set_id": null,
+      "recovery_policy": "settle_to_idle"
+    },
+    {
+      "turn_state": "celebrating",
+      "entry_clip_id": "state_celebrating",
+      "stable_clip_id": "state_celebrating",
+      "variant_set_id": null,
+      "recovery_policy": "settle_to_idle"
+    },
+    {
+      "turn_state": "interrupted",
+      "entry_clip_id": "state_interrupted",
+      "stable_clip_id": "state_interrupted",
+      "variant_set_id": null,
+      "recovery_policy": "settle_to_idle"
+    }
+  ],
+  "emotion_profiles": [
+    {
+      "emotion": "neutral",
+      "accent_variant_set_id": null,
+      "rest_mouth_pose": "closed",
+      "negative_pose_may_loop": false
+    },
+    {
+      "emotion": "joy",
+      "accent_variant_set_id": null,
+      "rest_mouth_pose": "smile",
+      "negative_pose_may_loop": false
+    },
+    {
+      "emotion": "sadness",
+      "accent_variant_set_id": null,
+      "rest_mouth_pose": "frown",
+      "negative_pose_may_loop": false
+    },
+    {
+      "emotion": "anger",
+      "accent_variant_set_id": null,
+      "rest_mouth_pose": "frown",
+      "negative_pose_may_loop": false
+    },
+    {
+      "emotion": "fear",
+      "accent_variant_set_id": null,
+      "rest_mouth_pose": "open_small",
+      "negative_pose_may_loop": false
+    },
+    {
+      "emotion": "shame",
+      "accent_variant_set_id": null,
+      "rest_mouth_pose": "frown",
+      "negative_pose_may_loop": false
+    },
+    {
+      "emotion": "disgust",
+      "accent_variant_set_id": null,
+      "rest_mouth_pose": "frown",
+      "negative_pose_may_loop": false
+    },
+    {
+      "emotion": "surprise",
+      "accent_variant_set_id": null,
+      "rest_mouth_pose": "open_wide",
+      "negative_pose_may_loop": false
+    },
+    {
+      "emotion": "pride",
+      "accent_variant_set_id": null,
+      "rest_mouth_pose": "smile",
+      "negative_pose_may_loop": false
+    },
+    {
+      "emotion": "guilt",
+      "accent_variant_set_id": null,
+      "rest_mouth_pose": "frown",
+      "negative_pose_may_loop": false
+    },
+    {
+      "emotion": "love",
+      "accent_variant_set_id": null,
+      "rest_mouth_pose": "smile",
+      "negative_pose_may_loop": false
+    }
+  ],
+  "variant_sets": [],
+  "reduced_motion_overrides": [],
+  "state_facing_fallbacks": [
+    {
+      "turn_state": "idle",
+      "requested_facing": "south",
+      "fallback_pose_id": "front_idle"
+    },
+    {
+      "turn_state": "idle",
+      "requested_facing": "southwest",
+      "fallback_pose_id": "walk_front_left"
+    },
+    {
+      "turn_state": "idle",
+      "requested_facing": "west",
+      "fallback_pose_id": "profile_left"
+    },
+    {
+      "turn_state": "idle",
+      "requested_facing": "northwest",
+      "fallback_pose_id": "back_left"
+    },
+    {
+      "turn_state": "idle",
+      "requested_facing": "north",
+      "fallback_pose_id": "back_idle"
+    },
+    {
+      "turn_state": "idle",
+      "requested_facing": "northeast",
+      "fallback_pose_id": "back_right"
+    },
+    {
+      "turn_state": "idle",
+      "requested_facing": "east",
+      "fallback_pose_id": "profile_right"
+    },
+    {
+      "turn_state": "idle",
+      "requested_facing": "southeast",
+      "fallback_pose_id": "walk_front_right"
+    },
+    {
+      "turn_state": "listening",
+      "requested_facing": "south",
+      "fallback_pose_id": "front_idle_wings"
+    },
+    {
+      "turn_state": "listening",
+      "requested_facing": "southwest",
+      "fallback_pose_id": "walk_front_left"
+    },
+    {
+      "turn_state": "listening",
+      "requested_facing": "west",
+      "fallback_pose_id": "profile_left"
+    },
+    {
+      "turn_state": "listening",
+      "requested_facing": "northwest",
+      "fallback_pose_id": "back_left"
+    },
+    {
+      "turn_state": "listening",
+      "requested_facing": "north",
+      "fallback_pose_id": "back_idle"
+    },
+    {
+      "turn_state": "listening",
+      "requested_facing": "northeast",
+      "fallback_pose_id": "back_right"
+    },
+    {
+      "turn_state": "listening",
+      "requested_facing": "east",
+      "fallback_pose_id": "profile_right"
+    },
+    {
+      "turn_state": "listening",
+      "requested_facing": "southeast",
+      "fallback_pose_id": "walk_front_right"
+    },
+    {
+      "turn_state": "thinking",
+      "requested_facing": "south",
+      "fallback_pose_id": "front_thinking_hand_chin_wings"
+    },
+    {
+      "turn_state": "thinking",
+      "requested_facing": "southwest",
+      "fallback_pose_id": "walk_front_left"
+    },
+    {
+      "turn_state": "thinking",
+      "requested_facing": "west",
+      "fallback_pose_id": "profile_left"
+    },
+    {
+      "turn_state": "thinking",
+      "requested_facing": "northwest",
+      "fallback_pose_id": "back_left"
+    },
+    {
+      "turn_state": "thinking",
+      "requested_facing": "north",
+      "fallback_pose_id": "back_idle"
+    },
+    {
+      "turn_state": "thinking",
+      "requested_facing": "northeast",
+      "fallback_pose_id": "back_right"
+    },
+    {
+      "turn_state": "thinking",
+      "requested_facing": "east",
+      "fallback_pose_id": "profile_right"
+    },
+    {
+      "turn_state": "thinking",
+      "requested_facing": "southeast",
+      "fallback_pose_id": "walk_front_right"
+    },
+    {
+      "turn_state": "preparing_response",
+      "requested_facing": "south",
+      "fallback_pose_id": "front_magic_staff_raise_wings"
+    },
+    {
+      "turn_state": "preparing_response",
+      "requested_facing": "southwest",
+      "fallback_pose_id": "walk_front_left"
+    },
+    {
+      "turn_state": "preparing_response",
+      "requested_facing": "west",
+      "fallback_pose_id": "profile_left"
+    },
+    {
+      "turn_state": "preparing_response",
+      "requested_facing": "northwest",
+      "fallback_pose_id": "back_left"
+    },
+    {
+      "turn_state": "preparing_response",
+      "requested_facing": "north",
+      "fallback_pose_id": "back_idle"
+    },
+    {
+      "turn_state": "preparing_response",
+      "requested_facing": "northeast",
+      "fallback_pose_id": "back_right"
+    },
+    {
+      "turn_state": "preparing_response",
+      "requested_facing": "east",
+      "fallback_pose_id": "profile_right"
+    },
+    {
+      "turn_state": "preparing_response",
+      "requested_facing": "southeast",
+      "fallback_pose_id": "walk_front_right"
+    },
+    {
+      "turn_state": "speaking",
+      "requested_facing": "south",
+      "fallback_pose_id": "explaining"
+    },
+    {
+      "turn_state": "speaking",
+      "requested_facing": "southwest",
+      "fallback_pose_id": "walk_front_left"
+    },
+    {
+      "turn_state": "speaking",
+      "requested_facing": "west",
+      "fallback_pose_id": "profile_left"
+    },
+    {
+      "turn_state": "speaking",
+      "requested_facing": "northwest",
+      "fallback_pose_id": "back_left"
+    },
+    {
+      "turn_state": "speaking",
+      "requested_facing": "north",
+      "fallback_pose_id": "back_idle"
+    },
+    {
+      "turn_state": "speaking",
+      "requested_facing": "northeast",
+      "fallback_pose_id": "back_right"
+    },
+    {
+      "turn_state": "speaking",
+      "requested_facing": "east",
+      "fallback_pose_id": "profile_right"
+    },
+    {
+      "turn_state": "speaking",
+      "requested_facing": "southeast",
+      "fallback_pose_id": "walk_front_right"
+    },
+    {
+      "turn_state": "clarifying",
+      "requested_facing": "south",
+      "fallback_pose_id": "front_shush_wings"
+    },
+    {
+      "turn_state": "clarifying",
+      "requested_facing": "southwest",
+      "fallback_pose_id": "walk_front_left"
+    },
+    {
+      "turn_state": "clarifying",
+      "requested_facing": "west",
+      "fallback_pose_id": "profile_left"
+    },
+    {
+      "turn_state": "clarifying",
+      "requested_facing": "northwest",
+      "fallback_pose_id": "back_left"
+    },
+    {
+      "turn_state": "clarifying",
+      "requested_facing": "north",
+      "fallback_pose_id": "back_idle"
+    },
+    {
+      "turn_state": "clarifying",
+      "requested_facing": "northeast",
+      "fallback_pose_id": "back_right"
+    },
+    {
+      "turn_state": "clarifying",
+      "requested_facing": "east",
+      "fallback_pose_id": "profile_right"
+    },
+    {
+      "turn_state": "clarifying",
+      "requested_facing": "southeast",
+      "fallback_pose_id": "walk_front_right"
+    },
+    {
+      "turn_state": "tool_wait",
+      "requested_facing": "south",
+      "fallback_pose_id": "front_idle_wings"
+    },
+    {
+      "turn_state": "tool_wait",
+      "requested_facing": "southwest",
+      "fallback_pose_id": "walk_front_left"
+    },
+    {
+      "turn_state": "tool_wait",
+      "requested_facing": "west",
+      "fallback_pose_id": "profile_left"
+    },
+    {
+      "turn_state": "tool_wait",
+      "requested_facing": "northwest",
+      "fallback_pose_id": "back_left"
+    },
+    {
+      "turn_state": "tool_wait",
+      "requested_facing": "north",
+      "fallback_pose_id": "back_idle"
+    },
+    {
+      "turn_state": "tool_wait",
+      "requested_facing": "northeast",
+      "fallback_pose_id": "back_right"
+    },
+    {
+      "turn_state": "tool_wait",
+      "requested_facing": "east",
+      "fallback_pose_id": "profile_right"
+    },
+    {
+      "turn_state": "tool_wait",
+      "requested_facing": "southeast",
+      "fallback_pose_id": "walk_front_right"
+    },
+    {
+      "turn_state": "error",
+      "requested_facing": "south",
+      "fallback_pose_id": "feeling_sadness_full"
+    },
+    {
+      "turn_state": "error",
+      "requested_facing": "southwest",
+      "fallback_pose_id": "walk_front_left"
+    },
+    {
+      "turn_state": "error",
+      "requested_facing": "west",
+      "fallback_pose_id": "profile_left"
+    },
+    {
+      "turn_state": "error",
+      "requested_facing": "northwest",
+      "fallback_pose_id": "back_left"
+    },
+    {
+      "turn_state": "error",
+      "requested_facing": "north",
+      "fallback_pose_id": "back_idle"
+    },
+    {
+      "turn_state": "error",
+      "requested_facing": "northeast",
+      "fallback_pose_id": "back_right"
+    },
+    {
+      "turn_state": "error",
+      "requested_facing": "east",
+      "fallback_pose_id": "profile_right"
+    },
+    {
+      "turn_state": "error",
+      "requested_facing": "southeast",
+      "fallback_pose_id": "walk_front_right"
+    },
+    {
+      "turn_state": "celebrating",
+      "requested_facing": "south",
+      "fallback_pose_id": "feeling_joy_full"
+    },
+    {
+      "turn_state": "celebrating",
+      "requested_facing": "southwest",
+      "fallback_pose_id": "walk_front_left"
+    },
+    {
+      "turn_state": "celebrating",
+      "requested_facing": "west",
+      "fallback_pose_id": "profile_left"
+    },
+    {
+      "turn_state": "celebrating",
+      "requested_facing": "northwest",
+      "fallback_pose_id": "back_left"
+    },
+    {
+      "turn_state": "celebrating",
+      "requested_facing": "north",
+      "fallback_pose_id": "back_idle"
+    },
+    {
+      "turn_state": "celebrating",
+      "requested_facing": "northeast",
+      "fallback_pose_id": "back_right"
+    },
+    {
+      "turn_state": "celebrating",
+      "requested_facing": "east",
+      "fallback_pose_id": "profile_right"
+    },
+    {
+      "turn_state": "celebrating",
+      "requested_facing": "southeast",
+      "fallback_pose_id": "walk_front_right"
+    },
+    {
+      "turn_state": "interrupted",
+      "requested_facing": "south",
+      "fallback_pose_id": "feeling_surprise_full"
+    },
+    {
+      "turn_state": "interrupted",
+      "requested_facing": "southwest",
+      "fallback_pose_id": "walk_front_left"
+    },
+    {
+      "turn_state": "interrupted",
+      "requested_facing": "west",
+      "fallback_pose_id": "profile_left"
+    },
+    {
+      "turn_state": "interrupted",
+      "requested_facing": "northwest",
+      "fallback_pose_id": "back_left"
+    },
+    {
+      "turn_state": "interrupted",
+      "requested_facing": "north",
+      "fallback_pose_id": "back_idle"
+    },
+    {
+      "turn_state": "interrupted",
+      "requested_facing": "northeast",
+      "fallback_pose_id": "back_right"
+    },
+    {
+      "turn_state": "interrupted",
+      "requested_facing": "east",
+      "fallback_pose_id": "profile_right"
+    },
+    {
+      "turn_state": "interrupted",
+      "requested_facing": "southeast",
+      "fallback_pose_id": "walk_front_right"
+    }
+  ]
+}

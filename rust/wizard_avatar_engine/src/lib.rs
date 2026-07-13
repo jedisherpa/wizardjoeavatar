@@ -9,6 +9,7 @@ pub mod evidence;
 pub mod frame_source;
 pub mod geometry;
 pub mod hub;
+pub mod motion_catalog;
 pub mod motion_graph;
 pub mod palette;
 pub mod pathing;

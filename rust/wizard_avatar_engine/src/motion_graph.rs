@@ -39,15 +39,44 @@ pub struct MotionGraphV1 {
     pub emotion_profiles: Vec<EmotionProfile>,
     pub variant_sets: Vec<VariantSet>,
     pub reduced_motion_overrides: Vec<ReducedMotionOverride>,
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub state_facing_fallbacks: Vec<StateFacingFallback>,
 }
 
 #[derive(Clone, Debug, Eq, PartialEq, Serialize, Deserialize)]
 #[serde(deny_unknown_fields)]
 pub struct PoseCoverage {
     pub pose_id: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub source_candidate_id: Option<String>,
     pub use_kinds: Vec<PoseUseKind>,
     pub capability_tier: CapabilityTier,
     pub approved_facings: Vec<Direction>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub showcase_approval: Option<ShowcaseApproval>,
+}
+
+#[derive(Clone, Debug, Eq, PartialEq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct ShowcaseApproval {
+    pub owner: String,
+    pub rationale: String,
+    pub fallback_pose_id: String,
+}
+
+#[derive(Clone, Debug, Eq, PartialEq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct StateFacingFallback {
+    pub turn_state: ChatTurnState,
+    pub requested_facing: Direction,
+    pub fallback_pose_id: String,
+}
+
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub struct RuntimeGeometryAuthority {
+    pub pose_id: String,
+    pub source_candidate_id: Option<String>,
+    pub authored_facing: Direction,
 }
 
 #[derive(Clone, Copy, Debug, Eq, Hash, Ord, PartialEq, PartialOrd, Serialize, Deserialize)]
@@ -59,7 +88,7 @@ pub enum PoseUseKind {
     Showcase,
 }
 
-#[derive(Clone, Copy, Debug, Eq, PartialEq, Serialize, Deserialize)]
+#[derive(Clone, Copy, Debug, Eq, Hash, Ord, PartialEq, PartialOrd, Serialize, Deserialize)]
 #[serde(rename_all = "snake_case")]
 pub enum CapabilityTier {
     DirectionalBase,
@@ -443,6 +472,13 @@ impl MotionGraphV1 {
         }
         for pose in &self.pose_coverage {
             validate_pose_id(&pose.pose_id, &mut issues);
+            if let Some(candidate_id) = &pose.source_candidate_id {
+                validate_id(
+                    &format!("pose {} source_candidate_id", pose.pose_id),
+                    candidate_id,
+                    &mut issues,
+                );
+            }
             if pose.use_kinds.is_empty() {
                 issues.insert(format!("pose {} has no use_kinds", pose.pose_id));
             }
@@ -459,7 +495,13 @@ impl MotionGraphV1 {
                 &format!("pose {} approved_facings", pose.pose_id),
                 &mut issues,
             );
+            validate_showcase_approval(pose, &pose_ids, &mut issues);
         }
+        validate_state_facing_fallback_references(
+            &self.state_facing_fallbacks,
+            &self.pose_coverage,
+            &mut issues,
+        );
 
         let clip_ids = collect_ids(
             self.clips.iter().map(|clip| clip.clip_id.as_str()),
@@ -542,6 +584,277 @@ impl MotionGraphV1 {
             })
         }
     }
+
+    pub fn validate_against_runtime_authority(
+        &self,
+        authority: &[RuntimeGeometryAuthority],
+    ) -> Result<(), MotionGraphValidationError> {
+        let mut issues = self
+            .validate()
+            .err()
+            .map(|error| error.issues.into_iter().collect::<BTreeSet<_>>())
+            .unwrap_or_default();
+
+        let mut authority_by_pose = BTreeMap::new();
+        let mut authority_candidates = BTreeSet::new();
+        for row in authority {
+            validate_pose_id(&row.pose_id, &mut issues);
+            if authority_by_pose
+                .insert(row.pose_id.as_str(), row)
+                .is_some()
+            {
+                issues.insert(format!(
+                    "runtime authority contains duplicate pose ID {}",
+                    row.pose_id
+                ));
+            }
+            if let Some(candidate_id) = &row.source_candidate_id {
+                if !authority_candidates.insert(candidate_id.as_str()) {
+                    issues.insert(format!(
+                        "runtime authority contains duplicate candidate ID {candidate_id}"
+                    ));
+                }
+            }
+        }
+
+        if authority_by_pose.len() != REQUIRED_RUNTIME_GEOMETRY_COUNT {
+            issues.insert(format!(
+                "runtime authority must contain {REQUIRED_RUNTIME_GEOMETRY_COUNT} unique geometries, got {}",
+                authority_by_pose.len()
+            ));
+        }
+
+        let coverage_by_pose = self
+            .pose_coverage
+            .iter()
+            .map(|row| (row.pose_id.as_str(), row))
+            .collect::<BTreeMap<_, _>>();
+        for pose_id in authority_by_pose.keys() {
+            if !coverage_by_pose.contains_key(pose_id) {
+                issues.insert(format!("pose_coverage is missing runtime pose {pose_id}"));
+            }
+        }
+        for pose_id in coverage_by_pose.keys() {
+            if !authority_by_pose.contains_key(pose_id) {
+                issues.insert(format!(
+                    "pose_coverage contains unknown runtime pose {pose_id}"
+                ));
+            }
+        }
+
+        let referenced_poses = self
+            .clips
+            .iter()
+            .flat_map(|clip| clip.samples.iter().map(|sample| sample.pose_id.as_str()))
+            .collect::<BTreeSet<_>>();
+        for (pose_id, coverage) in &coverage_by_pose {
+            let Some(authority_row) = authority_by_pose.get(pose_id) else {
+                continue;
+            };
+            if coverage.source_candidate_id != authority_row.source_candidate_id {
+                issues.insert(format!(
+                    "pose {pose_id} source_candidate_id does not match runtime authority"
+                ));
+            }
+            if !coverage
+                .approved_facings
+                .contains(&authority_row.authored_facing)
+            {
+                issues.insert(format!(
+                    "pose {pose_id} does not approve its authored facing {:?}",
+                    authority_row.authored_facing
+                ));
+            }
+            validate_capability_tier(coverage, &mut issues);
+            if coverage.capability_tier == CapabilityTier::ShowcaseOnly
+                && coverage.showcase_approval.is_none()
+            {
+                issues.insert(format!(
+                    "showcase-only pose {pose_id} requires approval metadata"
+                ));
+            }
+            if coverage.capability_tier != CapabilityTier::ShowcaseOnly
+                && !referenced_poses.contains(pose_id)
+            {
+                issues.insert(format!(
+                    "non-showcase pose {pose_id} is absent from every authored clip"
+                ));
+            }
+        }
+
+        let expected_wjfl = authority_candidates
+            .iter()
+            .filter(|candidate_id| candidate_id.starts_with("WJFL-"))
+            .copied()
+            .collect::<BTreeSet<_>>();
+        let catalog_wjfl = self
+            .pose_coverage
+            .iter()
+            .filter_map(|row| row.source_candidate_id.as_deref())
+            .filter(|candidate_id| candidate_id.starts_with("WJFL-"))
+            .collect::<BTreeSet<_>>();
+        if expected_wjfl.len() != REQUIRED_WJFL_GEOMETRY_COUNT {
+            issues.insert(format!(
+                "runtime authority must contain {REQUIRED_WJFL_GEOMETRY_COUNT} WJFL geometries, got {}",
+                expected_wjfl.len()
+            ));
+        }
+        if catalog_wjfl != expected_wjfl {
+            issues.insert("pose_coverage WJFL candidate IDs do not match runtime authority".into());
+        }
+
+        validate_complete_state_facing_fallbacks(
+            &self.state_facing_fallbacks,
+            &coverage_by_pose,
+            &mut issues,
+        );
+
+        if issues.is_empty() {
+            Ok(())
+        } else {
+            Err(MotionGraphValidationError {
+                issues: issues.into_iter().collect(),
+            })
+        }
+    }
+}
+
+fn validate_showcase_approval(
+    pose: &PoseCoverage,
+    pose_ids: &BTreeSet<String>,
+    issues: &mut BTreeSet<String>,
+) {
+    match (pose.capability_tier, &pose.showcase_approval) {
+        (CapabilityTier::ShowcaseOnly, Some(approval)) => {
+            if approval.owner.trim().is_empty() || approval.rationale.trim().is_empty() {
+                issues.insert(format!(
+                    "showcase-only pose {} requires non-empty owner and rationale",
+                    pose.pose_id
+                ));
+            }
+            if approval.fallback_pose_id == pose.pose_id
+                || !pose_ids.contains(&approval.fallback_pose_id)
+            {
+                issues.insert(format!(
+                    "showcase-only pose {} has invalid fallback pose {}",
+                    pose.pose_id, approval.fallback_pose_id
+                ));
+            }
+            if !pose.use_kinds.contains(&PoseUseKind::Showcase) {
+                issues.insert(format!(
+                    "showcase-only pose {} must declare showcase use",
+                    pose.pose_id
+                ));
+            }
+        }
+        (CapabilityTier::ShowcaseOnly, None) => {}
+        (_, Some(_)) => {
+            issues.insert(format!(
+                "non-showcase pose {} may not carry showcase approval",
+                pose.pose_id
+            ));
+        }
+        (_, None) => {}
+    }
+}
+
+fn validate_state_facing_fallback_references(
+    fallbacks: &[StateFacingFallback],
+    coverage: &[PoseCoverage],
+    issues: &mut BTreeSet<String>,
+) {
+    let coverage_by_pose = coverage
+        .iter()
+        .map(|row| (row.pose_id.as_str(), row))
+        .collect::<BTreeMap<_, _>>();
+    let mut keys = BTreeSet::new();
+    for fallback in fallbacks {
+        if !keys.insert((fallback.turn_state, fallback.requested_facing)) {
+            issues.insert(format!(
+                "state_facing_fallbacks repeats {:?}/{:?}",
+                fallback.turn_state, fallback.requested_facing
+            ));
+        }
+        match coverage_by_pose.get(fallback.fallback_pose_id.as_str()) {
+            None => {
+                issues.insert(format!(
+                    "state/facing fallback {:?}/{:?} references missing pose {}",
+                    fallback.turn_state, fallback.requested_facing, fallback.fallback_pose_id
+                ));
+            }
+            Some(target) if !target.approved_facings.contains(&fallback.requested_facing) => {
+                issues.insert(format!(
+                    "state/facing fallback {:?}/{:?} targets pose {} without that facing",
+                    fallback.turn_state, fallback.requested_facing, fallback.fallback_pose_id
+                ));
+            }
+            Some(_) => {}
+        }
+    }
+}
+
+fn validate_complete_state_facing_fallbacks(
+    fallbacks: &[StateFacingFallback],
+    coverage_by_pose: &BTreeMap<&str, &PoseCoverage>,
+    issues: &mut BTreeSet<String>,
+) {
+    let actual = fallbacks
+        .iter()
+        .map(|fallback| (fallback.turn_state, fallback.requested_facing))
+        .collect::<BTreeSet<_>>();
+    let expected = ChatTurnState::ALL
+        .into_iter()
+        .flat_map(|state| {
+            Direction::ALL
+                .into_iter()
+                .map(move |facing| (state, facing))
+        })
+        .collect::<BTreeSet<_>>();
+    if fallbacks.len() != expected.len() || actual != expected {
+        issues.insert(
+            "state_facing_fallbacks must contain every canonical state/facing pair exactly once"
+                .into(),
+        );
+    }
+    for fallback in fallbacks {
+        if !coverage_by_pose.contains_key(fallback.fallback_pose_id.as_str()) {
+            issues.insert(format!(
+                "state/facing fallback references unknown runtime pose {}",
+                fallback.fallback_pose_id
+            ));
+        }
+    }
+}
+
+fn validate_capability_tier(pose: &PoseCoverage, issues: &mut BTreeSet<String>) {
+    let facings = pose
+        .approved_facings
+        .iter()
+        .copied()
+        .collect::<BTreeSet<_>>();
+    let allowed = match pose.capability_tier {
+        CapabilityTier::DirectionalBase => Direction::ALL.into_iter().collect(),
+        CapabilityTier::DiagonalFlight => [Direction::SouthWest, Direction::SouthEast]
+            .into_iter()
+            .collect(),
+        CapabilityTier::FrontPerformance
+        | CapabilityTier::FaceAccent
+        | CapabilityTier::ShowcaseOnly => [Direction::South].into_iter().collect(),
+    };
+    if !facings.is_subset(&allowed) {
+        issues.insert(format!(
+            "pose {} claims facings outside capability tier {:?}",
+            pose.pose_id, pose.capability_tier
+        ));
+    }
+    if pose.capability_tier != CapabilityTier::ShowcaseOnly
+        && pose.use_kinds == [PoseUseKind::Showcase]
+    {
+        issues.insert(format!(
+            "non-showcase pose {} cannot be classified only as showcase",
+            pose.pose_id
+        ));
+    }
 }
 
 fn validate_clip(
@@ -564,22 +877,44 @@ fn validate_clip(
         issues,
     );
     validate_region_mask(&clip.clip_id, &clip.owned_channels, issues);
+    if clip.minimum_hold_ticks == 0 {
+        issues.insert(format!(
+            "clip {} minimum_hold_ticks must be positive",
+            clip.clip_id
+        ));
+    }
 
-    let all_markers = clip
-        .samples
-        .iter()
-        .flat_map(|sample| sample.markers.iter().copied())
-        .collect::<BTreeSet<_>>();
+    let mut marker_positions = BTreeMap::<MotionMarker, Vec<usize>>::new();
+    for (sample_index, sample) in clip.samples.iter().enumerate() {
+        for marker in &sample.markers {
+            marker_positions
+                .entry(*marker)
+                .or_default()
+                .push(sample_index);
+        }
+    }
     if !clip.samples[0].markers.contains(&clip.entry_marker) {
         issues.insert(format!(
             "clip {} entry_marker is absent from its first sample",
             clip.clip_id
         ));
     }
+    if marker_positions
+        .get(&clip.entry_marker)
+        .is_none_or(|positions| positions.len() != 1)
+    {
+        issues.insert(format!(
+            "clip {} entry_marker must occur exactly once",
+            clip.clip_id
+        ));
+    }
     for marker in &clip.exit_markers {
-        if !all_markers.contains(marker) {
+        if marker_positions
+            .get(marker)
+            .is_none_or(|positions| positions.len() != 1)
+        {
             issues.insert(format!(
-                "clip {} exit marker {marker:?} is absent from samples",
+                "clip {} exit marker {marker:?} must occur exactly once",
                 clip.clip_id
             ));
         }
@@ -625,11 +960,26 @@ fn validate_clip(
                     clip.clip_id
                 ));
             }
+            if clip.loop_mode == LoopMode::Once
+                && (marker_positions.contains_key(&MotionMarker::LoopStart)
+                    || marker_positions.contains_key(&MotionMarker::LoopEnd))
+            {
+                issues.insert(format!(
+                    "clip {} once loop may not declare loop boundary markers",
+                    clip.clip_id
+                ));
+            }
         }
         LoopMode::MarkedSegment => match (clip.loop_start_sample, clip.loop_end_sample) {
             (Some(start), Some(end))
                 if start < end
                     && end < clip.samples.len()
+                    && marker_positions
+                        .get(&MotionMarker::LoopStart)
+                        .is_some_and(|positions| positions.as_slice() == [start])
+                    && marker_positions
+                        .get(&MotionMarker::LoopEnd)
+                        .is_some_and(|positions| positions.as_slice() == [end])
                     && clip.samples[start]
                         .markers
                         .contains(&MotionMarker::LoopStart)
