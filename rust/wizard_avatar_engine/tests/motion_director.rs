@@ -188,6 +188,166 @@ fn once_holds_are_half_open_and_marker_channels_are_distinct() {
 }
 
 #[test]
+fn once_exit_uses_natural_duration_for_shorter_or_longer_minimum_hold() {
+    for minimum_hold_ticks in [1, 9] {
+        let mut clip = clip(
+            "once_exit",
+            LoopMode::Once,
+            PhaseSource::Time,
+            vec![
+                sample(0, 2, vec![MotionMarker::Entry, MotionMarker::Commit]),
+                sample(1, 3, vec![MotionMarker::Recover, MotionMarker::Exit]),
+            ],
+            None,
+        );
+        clip.minimum_hold_ticks = minimum_hold_ticks;
+        let evaluator = ClipEvaluator::new(&clip).expect("once exit evaluator");
+        let request = Some(ExitRequest {
+            requested_at_tick: 2,
+        });
+
+        assert_eq!(
+            evaluator
+                .evaluate(time(1), request)
+                .expect("before request")
+                .exit,
+            ClipExitState::NotRequested
+        );
+        for tick in [2, 4] {
+            assert_eq!(
+                evaluator
+                    .evaluate(time(tick), request)
+                    .expect("pending once exit")
+                    .exit,
+                ClipExitState::Pending {
+                    requested_at_tick: 2,
+                    safe_exit_tick: 5,
+                },
+                "minimum hold {minimum_hold_ticks}, tick {tick}"
+            );
+        }
+        let completed = evaluator
+            .evaluate(time(5), request)
+            .expect("exact half-open completion");
+        assert_eq!(
+            completed.completion,
+            ClipCompletionState::Completed {
+                completed_at_tick: 5,
+            }
+        );
+        assert_eq!(
+            completed.exit,
+            ClipExitState::Satisfied {
+                requested_at_tick: 2,
+                safe_exit_tick: 5,
+            }
+        );
+
+        let request_at_completion = Some(ExitRequest {
+            requested_at_tick: 5,
+        });
+        assert_eq!(
+            evaluator
+                .evaluate(time(4), request_at_completion)
+                .expect("before exact request")
+                .exit,
+            ClipExitState::NotRequested
+        );
+        assert_eq!(
+            evaluator
+                .evaluate(time(5), request_at_completion)
+                .expect("request at completion")
+                .exit,
+            ClipExitState::Satisfied {
+                requested_at_tick: 5,
+                safe_exit_tick: 5,
+            }
+        );
+
+        let request_after_completion = Some(ExitRequest {
+            requested_at_tick: 6,
+        });
+        assert_eq!(
+            evaluator
+                .evaluate(time(5), request_after_completion)
+                .expect("natural completion precedes request")
+                .exit,
+            ClipExitState::NotRequested
+        );
+    }
+}
+
+#[test]
+fn once_skipped_boundary_advance_emits_all_sample_and_lifecycle_markers() {
+    let mut clip = clip(
+        "once_skipped",
+        LoopMode::Once,
+        PhaseSource::Time,
+        vec![
+            sample(0, 2, vec![MotionMarker::Anticipation, MotionMarker::Commit]),
+            sample(
+                1,
+                3,
+                vec![
+                    MotionMarker::Impact,
+                    MotionMarker::Recover,
+                    MotionMarker::Settled,
+                ],
+            ),
+        ],
+        None,
+    );
+    clip.entry_marker = MotionMarker::Anticipation;
+    clip.exit_markers = vec![MotionMarker::Settled, MotionMarker::Recover];
+    let evaluator = ClipEvaluator::new(&clip).expect("skipped once evaluator");
+    let mut playback = evaluator.begin_playback();
+    playback
+        .request_exit(ExitRequest {
+            requested_at_tick: 1,
+        })
+        .expect("once exit request");
+
+    let completed = playback
+        .advance_to(time(5))
+        .expect("skip directly to completion");
+    assert_eq!(
+        completed.evaluation.exit,
+        ClipExitState::Satisfied {
+            requested_at_tick: 1,
+            safe_exit_tick: 5,
+        }
+    );
+    assert_eq!(
+        event_trace(&collect_events(completed.crossed_markers)),
+        vec![
+            (
+                0,
+                0,
+                0,
+                MotionMarker::Anticipation,
+                MarkerEventKind::LifecycleEntry,
+            ),
+            (0, 0, 0, MotionMarker::Commit, MarkerEventKind::SampleEntry,),
+            (2, 0, 1, MotionMarker::Impact, MarkerEventKind::SampleEntry,),
+            (
+                5,
+                0,
+                1,
+                MotionMarker::Settled,
+                MarkerEventKind::LifecycleExit,
+            ),
+            (
+                5,
+                0,
+                1,
+                MotionMarker::Recover,
+                MarkerEventKind::LifecycleExit,
+            ),
+        ]
+    );
+}
+
+#[test]
 fn lifecycle_events_follow_declared_marker_contract_and_exit_order() {
     let mut clip = clip(
         "custom_lifecycle",
