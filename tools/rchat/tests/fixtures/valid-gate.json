@@ -1,0 +1,67 @@
+{
+  "schema": "wizardjoe-rchat-gate/v1",
+  "schema_version": 1,
+  "program_id": "RCHAT",
+  "gate_id": "Q1",
+  "status": "PASS",
+  "git": {
+    "branch": "codex/build-repeatable-avatar-animation",
+    "sha": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "dirty": false
+  },
+  "environment": {
+    "os": "macOS",
+    "arch": "aarch64",
+    "rustc": "rustc 1.88.0",
+    "cargo": "cargo 1.88.0",
+    "node": "not-used",
+    "browser": "Chromium"
+  },
+  "inputs": {
+    "pose_asset_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+    "motion_graph_sha256": null,
+    "policy_sha256": null,
+    "browser_bundle_sha256": null
+  },
+  "required_work_items": ["RCHAT-FLOW-100"],
+  "commands": [
+    {
+      "command": "cargo test --all-targets",
+      "exit_code": 0,
+      "duration_ms": 1200,
+      "stdout_artifact": null,
+      "stderr_artifact": null
+    }
+  ],
+  "metrics": [
+    {
+      "name": "quality_failures",
+      "actual": 0,
+      "operator": "eq",
+      "threshold": 0,
+      "unit": "count",
+      "status": "PASS"
+    }
+  ],
+  "artifacts": [
+    {
+      "kind": "report",
+      "path_or_url": "evidence/rchat/q1/report.json",
+      "sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+      "bytes": 1024,
+      "retention": "candidate"
+    }
+  ],
+  "failures": [],
+  "skips": [],
+  "review": {
+    "primary": "FLOW",
+    "independent": "RUNTIME",
+    "reviewed_at": "2026-07-13T00:01:00Z"
+  },
+  "rollback": {
+    "sha": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "profile": "legacy",
+    "drill_passed": true
+  }
+}

@@ -12,7 +12,8 @@ Last coordinator update: 2026-07-13
 | Coordinator synthesis | COMPLETE | Three agents accepted after iterative cross-review |
 | Pose checkpoint | COMPLETE | Pushed `ca52b8023d5021e3a9bb14753961e8f7007f5aef` |
 | Planning checkpoint | COMPLETE | Pushed `50948b907ad35ec8ca604d6c39a63b4317ac3da7` |
-| Contract implementation | READY | Runtime, motion, and validator lanes unblocked |
+| Rust branch | ACTIVE | `codex/rust-chatbot-animation-engine` in `jedisherpa/wizardjoeavatar` |
+| Contract implementation | IN_REVIEW | Shared modules exported; 31 engine contract tests and 19 workflow/release tests pass |
 | Runtime and motion engines | PLANNED | Blocked on C0 |
 | Serial integration | PLANNED | Blocked on engine handoffs |
 | Exhaustive QA | PLANNED | Blocked on integrated profile |
@@ -22,10 +23,10 @@ Last coordinator update: 2026-07-13
 
 | Role | Agent | Research | Planning | Next accountability |
 |---|---|---|---|---|
-| RUNTIME | Epicurus (`019f5c84-aca4-7953-b8ac-23a395e7268b`) | COMPLETE | COMPLETE | Review synthesis; implement runtime-owned modules |
-| MOTION | Singer (`019f5c84-b193-7f70-83ff-e0c7e33edd51`) | COMPLETE | COMPLETE | Review synthesis; implement motion-owned modules |
-| FLOW | Lagrange (`019f5c84-b630-7053-b560-cab55fb3ba11`) | COMPLETE | COMPLETE | Review synthesis; implement registry/gate/browser tooling |
-| INT | Coordinator | COMPLETE | IN_REVIEW | Freeze contracts, wire hotspots, accept gates |
+| RUNTIME | Epicurus (`019f5c84-aca4-7953-b8ac-23a395e7268b`) | COMPLETE | COMPLETE | Contract handoff complete; final C0 review accepted |
+| MOTION | Singer (`019f5c84-b193-7f70-83ff-e0c7e33edd51`) | COMPLETE | COMPLETE | Motion graph and speech quantizer in final C0 review |
+| FLOW | Lagrange (`019f5c84-b630-7053-b560-cab55fb3ba11`) | COMPLETE | COMPLETE | Validator handoff complete; receipt review pending commit SHA |
+| INT | Coordinator | COMPLETE | IN_REVIEW | Exported shared modules; preparing Rust-branch checkpoint |
 
 ## Pose prerequisite receipt
 
@@ -55,11 +56,14 @@ Last coordinator update: 2026-07-13
 
 ## Current blockers
 
-None.
+No implementation blocker. Final C0 acceptance remains intentionally open until
+the checkpoint commit supplies immutable result SHAs.
 
 ## Next promotion
 
-1. Move `RCHAT-RUN-010`, `RCHAT-ANIM-010`, and `RCHAT-FLOW-020` to
-   `IN_PROGRESS` on the same immutable base SHA.
-2. Promote `RCHAT-ANIM-015`, then aggregate `RCHAT-ANIM-019`, only after
-   their exact dependencies are accepted.
+1. Push the current Rust-only C0 checkpoint to
+   `codex/rust-chatbot-animation-engine`.
+2. Record its immutable result SHA, accept reviewed handoffs, and run the
+   registry validator again.
+3. Promote `RCHAT-ANIM-019` and aggregate `RCHAT-FLOW-030` only after the
+   exact dependency receipts are accepted.

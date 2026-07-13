@@ -1,0 +1,1458 @@
+{
+  "schema_version": 1,
+  "graph_id": "wizard_chat_motion_graph_v1_contract_fixture",
+  "asset_schema_version": 4,
+  "required_runtime_geometry_count": 89,
+  "required_wjfl_geometry_count": 50,
+  "default_clip_id": "idle_full",
+  "pose_coverage": [
+    {
+      "pose_id": "contract_pose_000",
+      "use_kinds": [
+        "clip"
+      ],
+      "capability_tier": "front_performance",
+      "approved_facings": [
+        "south"
+      ]
+    },
+    {
+      "pose_id": "contract_pose_001",
+      "use_kinds": [
+        "clip"
+      ],
+      "capability_tier": "front_performance",
+      "approved_facings": [
+        "south"
+      ]
+    },
+    {
+      "pose_id": "contract_pose_002",
+      "use_kinds": [
+        "showcase"
+      ],
+      "capability_tier": "showcase_only",
+      "approved_facings": [
+        "south"
+      ]
+    },
+    {
+      "pose_id": "contract_pose_003",
+      "use_kinds": [
+        "showcase"
+      ],
+      "capability_tier": "showcase_only",
+      "approved_facings": [
+        "south"
+      ]
+    },
+    {
+      "pose_id": "contract_pose_004",
+      "use_kinds": [
+        "showcase"
+      ],
+      "capability_tier": "showcase_only",
+      "approved_facings": [
+        "south"
+      ]
+    },
+    {
+      "pose_id": "contract_pose_005",
+      "use_kinds": [
+        "showcase"
+      ],
+      "capability_tier": "showcase_only",
+      "approved_facings": [
+        "south"
+      ]
+    },
+    {
+      "pose_id": "contract_pose_006",
+      "use_kinds": [
+        "showcase"
+      ],
+      "capability_tier": "showcase_only",
+      "approved_facings": [
+        "south"
+      ]
+    },
+    {
+      "pose_id": "contract_pose_007",
+      "use_kinds": [
+        "showcase"
+      ],
+      "capability_tier": "showcase_only",
+      "approved_facings": [
+        "south"
+      ]
+    },
+    {
+      "pose_id": "contract_pose_008",
+      "use_kinds": [
+        "showcase"
+      ],
+      "capability_tier": "showcase_only",
+      "approved_facings": [
+        "south"
+      ]
+    },
+    {
+      "pose_id": "contract_pose_009",
+      "use_kinds": [
+        "showcase"
+      ],
+      "capability_tier": "showcase_only",
+      "approved_facings": [
+        "south"
+      ]
+    },
+    {
+      "pose_id": "contract_pose_010",
+      "use_kinds": [
+        "showcase"
+      ],
+      "capability_tier": "showcase_only",
+      "approved_facings": [
+        "south"
+      ]
+    },
+    {
+      "pose_id": "contract_pose_011",
+      "use_kinds": [
+        "showcase"
+      ],
+      "capability_tier": "showcase_only",
+      "approved_facings": [
+        "south"
+      ]
+    },
+    {
+      "pose_id": "contract_pose_012",
+      "use_kinds": [
+        "showcase"
+      ],
+      "capability_tier": "showcase_only",
+      "approved_facings": [
+        "south"
+      ]
+    },
+    {
+      "pose_id": "contract_pose_013",
+      "use_kinds": [
+        "showcase"
+      ],
+      "capability_tier": "showcase_only",
+      "approved_facings": [
+        "south"
+      ]
+    },
+    {
+      "pose_id": "contract_pose_014",
+      "use_kinds": [
+        "showcase"
+      ],
+      "capability_tier": "showcase_only",
+      "approved_facings": [
+        "south"
+      ]
+    },
+    {
+      "pose_id": "contract_pose_015",
+      "use_kinds": [
+        "showcase"
+      ],
+      "capability_tier": "showcase_only",
+      "approved_facings": [
+        "south"
+      ]
+    },
+    {
+      "pose_id": "contract_pose_016",
+      "use_kinds": [
+        "showcase"
+      ],
+      "capability_tier": "showcase_only",
+      "approved_facings": [
+        "south"
+      ]
+    },
+    {
+      "pose_id": "contract_pose_017",
+      "use_kinds": [
+        "showcase"
+      ],
+      "capability_tier": "showcase_only",
+      "approved_facings": [
+        "south"
+      ]
+    },
+    {
+      "pose_id": "contract_pose_018",
+      "use_kinds": [
+        "showcase"
+      ],
+      "capability_tier": "showcase_only",
+      "approved_facings": [
+        "south"
+      ]
+    },
+    {
+      "pose_id": "contract_pose_019",
+      "use_kinds": [
+        "showcase"
+      ],
+      "capability_tier": "showcase_only",
+      "approved_facings": [
+        "south"
+      ]
+    },
+    {
+      "pose_id": "contract_pose_020",
+      "use_kinds": [
+        "showcase"
+      ],
+      "capability_tier": "showcase_only",
+      "approved_facings": [
+        "south"
+      ]
+    },
+    {
+      "pose_id": "contract_pose_021",
+      "use_kinds": [
+        "showcase"
+      ],
+      "capability_tier": "showcase_only",
+      "approved_facings": [
+        "south"
+      ]
+    },
+    {
+      "pose_id": "contract_pose_022",
+      "use_kinds": [
+        "showcase"
+      ],
+      "capability_tier": "showcase_only",
+      "approved_facings": [
+        "south"
+      ]
+    },
+    {
+      "pose_id": "contract_pose_023",
+      "use_kinds": [
+        "showcase"
+      ],
+      "capability_tier": "showcase_only",
+      "approved_facings": [
+        "south"
+      ]
+    },
+    {
+      "pose_id": "contract_pose_024",
+      "use_kinds": [
+        "showcase"
+      ],
+      "capability_tier": "showcase_only",
+      "approved_facings": [
+        "south"
+      ]
+    },
+    {
+      "pose_id": "contract_pose_025",
+      "use_kinds": [
+        "showcase"
+      ],
+      "capability_tier": "showcase_only",
+      "approved_facings": [
+        "south"
+      ]
+    },
+    {
+      "pose_id": "contract_pose_026",
+      "use_kinds": [
+        "showcase"
+      ],
+      "capability_tier": "showcase_only",
+      "approved_facings": [
+        "south"
+      ]
+    },
+    {
+      "pose_id": "contract_pose_027",
+      "use_kinds": [
+        "showcase"
+      ],
+      "capability_tier": "showcase_only",
+      "approved_facings": [
+        "south"
+      ]
+    },
+    {
+      "pose_id": "contract_pose_028",
+      "use_kinds": [
+        "showcase"
+      ],
+      "capability_tier": "showcase_only",
+      "approved_facings": [
+        "south"
+      ]
+    },
+    {
+      "pose_id": "contract_pose_029",
+      "use_kinds": [
+        "showcase"
+      ],
+      "capability_tier": "showcase_only",
+      "approved_facings": [
+        "south"
+      ]
+    },
+    {
+      "pose_id": "contract_pose_030",
+      "use_kinds": [
+        "showcase"
+      ],
+      "capability_tier": "showcase_only",
+      "approved_facings": [
+        "south"
+      ]
+    },
+    {
+      "pose_id": "contract_pose_031",
+      "use_kinds": [
+        "showcase"
+      ],
+      "capability_tier": "showcase_only",
+      "approved_facings": [
+        "south"
+      ]
+    },
+    {
+      "pose_id": "contract_pose_032",
+      "use_kinds": [
+        "showcase"
+      ],
+      "capability_tier": "showcase_only",
+      "approved_facings": [
+        "south"
+      ]
+    },
+    {
+      "pose_id": "contract_pose_033",
+      "use_kinds": [
+        "showcase"
+      ],
+      "capability_tier": "showcase_only",
+      "approved_facings": [
+        "south"
+      ]
+    },
+    {
+      "pose_id": "contract_pose_034",
+      "use_kinds": [
+        "showcase"
+      ],
+      "capability_tier": "showcase_only",
+      "approved_facings": [
+        "south"
+      ]
+    },
+    {
+      "pose_id": "contract_pose_035",
+      "use_kinds": [
+        "showcase"
+      ],
+      "capability_tier": "showcase_only",
+      "approved_facings": [
+        "south"
+      ]
+    },
+    {
+      "pose_id": "contract_pose_036",
+      "use_kinds": [
+        "showcase"
+      ],
+      "capability_tier": "showcase_only",
+      "approved_facings": [
+        "south"
+      ]
+    },
+    {
+      "pose_id": "contract_pose_037",
+      "use_kinds": [
+        "showcase"
+      ],
+      "capability_tier": "showcase_only",
+      "approved_facings": [
+        "south"
+      ]
+    },
+    {
+      "pose_id": "contract_pose_038",
+      "use_kinds": [
+        "showcase"
+      ],
+      "capability_tier": "showcase_only",
+      "approved_facings": [
+        "south"
+      ]
+    },
+    {
+      "pose_id": "contract_pose_039",
+      "use_kinds": [
+        "showcase"
+      ],
+      "capability_tier": "showcase_only",
+      "approved_facings": [
+        "south"
+      ]
+    },
+    {
+      "pose_id": "contract_pose_040",
+      "use_kinds": [
+        "showcase"
+      ],
+      "capability_tier": "showcase_only",
+      "approved_facings": [
+        "south"
+      ]
+    },
+    {
+      "pose_id": "contract_pose_041",
+      "use_kinds": [
+        "showcase"
+      ],
+      "capability_tier": "showcase_only",
+      "approved_facings": [
+        "south"
+      ]
+    },
+    {
+      "pose_id": "contract_pose_042",
+      "use_kinds": [
+        "showcase"
+      ],
+      "capability_tier": "showcase_only",
+      "approved_facings": [
+        "south"
+      ]
+    },
+    {
+      "pose_id": "contract_pose_043",
+      "use_kinds": [
+        "showcase"
+      ],
+      "capability_tier": "showcase_only",
+      "approved_facings": [
+        "south"
+      ]
+    },
+    {
+      "pose_id": "contract_pose_044",
+      "use_kinds": [
+        "showcase"
+      ],
+      "capability_tier": "showcase_only",
+      "approved_facings": [
+        "south"
+      ]
+    },
+    {
+      "pose_id": "contract_pose_045",
+      "use_kinds": [
+        "showcase"
+      ],
+      "capability_tier": "showcase_only",
+      "approved_facings": [
+        "south"
+      ]
+    },
+    {
+      "pose_id": "contract_pose_046",
+      "use_kinds": [
+        "showcase"
+      ],
+      "capability_tier": "showcase_only",
+      "approved_facings": [
+        "south"
+      ]
+    },
+    {
+      "pose_id": "contract_pose_047",
+      "use_kinds": [
+        "showcase"
+      ],
+      "capability_tier": "showcase_only",
+      "approved_facings": [
+        "south"
+      ]
+    },
+    {
+      "pose_id": "contract_pose_048",
+      "use_kinds": [
+        "showcase"
+      ],
+      "capability_tier": "showcase_only",
+      "approved_facings": [
+        "south"
+      ]
+    },
+    {
+      "pose_id": "contract_pose_049",
+      "use_kinds": [
+        "showcase"
+      ],
+      "capability_tier": "showcase_only",
+      "approved_facings": [
+        "south"
+      ]
+    },
+    {
+      "pose_id": "contract_pose_050",
+      "use_kinds": [
+        "showcase"
+      ],
+      "capability_tier": "showcase_only",
+      "approved_facings": [
+        "south"
+      ]
+    },
+    {
+      "pose_id": "contract_pose_051",
+      "use_kinds": [
+        "showcase"
+      ],
+      "capability_tier": "showcase_only",
+      "approved_facings": [
+        "south"
+      ]
+    },
+    {
+      "pose_id": "contract_pose_052",
+      "use_kinds": [
+        "showcase"
+      ],
+      "capability_tier": "showcase_only",
+      "approved_facings": [
+        "south"
+      ]
+    },
+    {
+      "pose_id": "contract_pose_053",
+      "use_kinds": [
+        "showcase"
+      ],
+      "capability_tier": "showcase_only",
+      "approved_facings": [
+        "south"
+      ]
+    },
+    {
+      "pose_id": "contract_pose_054",
+      "use_kinds": [
+        "showcase"
+      ],
+      "capability_tier": "showcase_only",
+      "approved_facings": [
+        "south"
+      ]
+    },
+    {
+      "pose_id": "contract_pose_055",
+      "use_kinds": [
+        "showcase"
+      ],
+      "capability_tier": "showcase_only",
+      "approved_facings": [
+        "south"
+      ]
+    },
+    {
+      "pose_id": "contract_pose_056",
+      "use_kinds": [
+        "showcase"
+      ],
+      "capability_tier": "showcase_only",
+      "approved_facings": [
+        "south"
+      ]
+    },
+    {
+      "pose_id": "contract_pose_057",
+      "use_kinds": [
+        "showcase"
+      ],
+      "capability_tier": "showcase_only",
+      "approved_facings": [
+        "south"
+      ]
+    },
+    {
+      "pose_id": "contract_pose_058",
+      "use_kinds": [
+        "showcase"
+      ],
+      "capability_tier": "showcase_only",
+      "approved_facings": [
+        "south"
+      ]
+    },
+    {
+      "pose_id": "contract_pose_059",
+      "use_kinds": [
+        "showcase"
+      ],
+      "capability_tier": "showcase_only",
+      "approved_facings": [
+        "south"
+      ]
+    },
+    {
+      "pose_id": "contract_pose_060",
+      "use_kinds": [
+        "showcase"
+      ],
+      "capability_tier": "showcase_only",
+      "approved_facings": [
+        "south"
+      ]
+    },
+    {
+      "pose_id": "contract_pose_061",
+      "use_kinds": [
+        "showcase"
+      ],
+      "capability_tier": "showcase_only",
+      "approved_facings": [
+        "south"
+      ]
+    },
+    {
+      "pose_id": "contract_pose_062",
+      "use_kinds": [
+        "showcase"
+      ],
+      "capability_tier": "showcase_only",
+      "approved_facings": [
+        "south"
+      ]
+    },
+    {
+      "pose_id": "contract_pose_063",
+      "use_kinds": [
+        "showcase"
+      ],
+      "capability_tier": "showcase_only",
+      "approved_facings": [
+        "south"
+      ]
+    },
+    {
+      "pose_id": "contract_pose_064",
+      "use_kinds": [
+        "showcase"
+      ],
+      "capability_tier": "showcase_only",
+      "approved_facings": [
+        "south"
+      ]
+    },
+    {
+      "pose_id": "contract_pose_065",
+      "use_kinds": [
+        "showcase"
+      ],
+      "capability_tier": "showcase_only",
+      "approved_facings": [
+        "south"
+      ]
+    },
+    {
+      "pose_id": "contract_pose_066",
+      "use_kinds": [
+        "showcase"
+      ],
+      "capability_tier": "showcase_only",
+      "approved_facings": [
+        "south"
+      ]
+    },
+    {
+      "pose_id": "contract_pose_067",
+      "use_kinds": [
+        "showcase"
+      ],
+      "capability_tier": "showcase_only",
+      "approved_facings": [
+        "south"
+      ]
+    },
+    {
+      "pose_id": "contract_pose_068",
+      "use_kinds": [
+        "showcase"
+      ],
+      "capability_tier": "showcase_only",
+      "approved_facings": [
+        "south"
+      ]
+    },
+    {
+      "pose_id": "contract_pose_069",
+      "use_kinds": [
+        "showcase"
+      ],
+      "capability_tier": "showcase_only",
+      "approved_facings": [
+        "south"
+      ]
+    },
+    {
+      "pose_id": "contract_pose_070",
+      "use_kinds": [
+        "showcase"
+      ],
+      "capability_tier": "showcase_only",
+      "approved_facings": [
+        "south"
+      ]
+    },
+    {
+      "pose_id": "contract_pose_071",
+      "use_kinds": [
+        "showcase"
+      ],
+      "capability_tier": "showcase_only",
+      "approved_facings": [
+        "south"
+      ]
+    },
+    {
+      "pose_id": "contract_pose_072",
+      "use_kinds": [
+        "showcase"
+      ],
+      "capability_tier": "showcase_only",
+      "approved_facings": [
+        "south"
+      ]
+    },
+    {
+      "pose_id": "contract_pose_073",
+      "use_kinds": [
+        "showcase"
+      ],
+      "capability_tier": "showcase_only",
+      "approved_facings": [
+        "south"
+      ]
+    },
+    {
+      "pose_id": "contract_pose_074",
+      "use_kinds": [
+        "showcase"
+      ],
+      "capability_tier": "showcase_only",
+      "approved_facings": [
+        "south"
+      ]
+    },
+    {
+      "pose_id": "contract_pose_075",
+      "use_kinds": [
+        "showcase"
+      ],
+      "capability_tier": "showcase_only",
+      "approved_facings": [
+        "south"
+      ]
+    },
+    {
+      "pose_id": "contract_pose_076",
+      "use_kinds": [
+        "showcase"
+      ],
+      "capability_tier": "showcase_only",
+      "approved_facings": [
+        "south"
+      ]
+    },
+    {
+      "pose_id": "contract_pose_077",
+      "use_kinds": [
+        "showcase"
+      ],
+      "capability_tier": "showcase_only",
+      "approved_facings": [
+        "south"
+      ]
+    },
+    {
+      "pose_id": "contract_pose_078",
+      "use_kinds": [
+        "showcase"
+      ],
+      "capability_tier": "showcase_only",
+      "approved_facings": [
+        "south"
+      ]
+    },
+    {
+      "pose_id": "contract_pose_079",
+      "use_kinds": [
+        "showcase"
+      ],
+      "capability_tier": "showcase_only",
+      "approved_facings": [
+        "south"
+      ]
+    },
+    {
+      "pose_id": "contract_pose_080",
+      "use_kinds": [
+        "showcase"
+      ],
+      "capability_tier": "showcase_only",
+      "approved_facings": [
+        "south"
+      ]
+    },
+    {
+      "pose_id": "contract_pose_081",
+      "use_kinds": [
+        "showcase"
+      ],
+      "capability_tier": "showcase_only",
+      "approved_facings": [
+        "south"
+      ]
+    },
+    {
+      "pose_id": "contract_pose_082",
+      "use_kinds": [
+        "showcase"
+      ],
+      "capability_tier": "showcase_only",
+      "approved_facings": [
+        "south"
+      ]
+    },
+    {
+      "pose_id": "contract_pose_083",
+      "use_kinds": [
+        "showcase"
+      ],
+      "capability_tier": "showcase_only",
+      "approved_facings": [
+        "south"
+      ]
+    },
+    {
+      "pose_id": "contract_pose_084",
+      "use_kinds": [
+        "showcase"
+      ],
+      "capability_tier": "showcase_only",
+      "approved_facings": [
+        "south"
+      ]
+    },
+    {
+      "pose_id": "contract_pose_085",
+      "use_kinds": [
+        "showcase"
+      ],
+      "capability_tier": "showcase_only",
+      "approved_facings": [
+        "south"
+      ]
+    },
+    {
+      "pose_id": "contract_pose_086",
+      "use_kinds": [
+        "showcase"
+      ],
+      "capability_tier": "showcase_only",
+      "approved_facings": [
+        "south"
+      ]
+    },
+    {
+      "pose_id": "contract_pose_087",
+      "use_kinds": [
+        "showcase"
+      ],
+      "capability_tier": "showcase_only",
+      "approved_facings": [
+        "south"
+      ]
+    },
+    {
+      "pose_id": "contract_pose_088",
+      "use_kinds": [
+        "showcase"
+      ],
+      "capability_tier": "showcase_only",
+      "approved_facings": [
+        "south"
+      ]
+    }
+  ],
+  "clips": [
+    {
+      "clip_id": "idle_full",
+      "family": "idle",
+      "loop_mode": "marked_segment",
+      "phase_source": "time",
+      "entry_marker": "entry",
+      "exit_markers": [
+        "exit"
+      ],
+      "minimum_hold_ticks": 1,
+      "interrupt_policy": "at_safe_marker",
+      "owned_channels": {
+        "regions": [
+          "base_body",
+          "upper_body",
+          "face_emotion",
+          "gaze",
+          "blink",
+          "secondary"
+        ]
+      },
+      "samples": [
+        {
+          "pose_id": "contract_pose_000",
+          "hold_ticks": 6,
+          "transition_recipe_id": "coherent_handoff",
+          "markers": [
+            "entry",
+            "loop_start",
+            "settled"
+          ],
+          "support": {
+            "mode": "grounded",
+            "points": [
+              "left_foot",
+              "right_foot"
+            ]
+          },
+          "root_offset": [
+            0,
+            0
+          ],
+          "secondary_profile_id": "secondary_stable"
+        },
+        {
+          "pose_id": "contract_pose_001",
+          "hold_ticks": 6,
+          "transition_recipe_id": "coherent_handoff",
+          "markers": [
+            "loop_end",
+            "exit"
+          ],
+          "support": {
+            "mode": "grounded",
+            "points": [
+              "left_foot",
+              "right_foot"
+            ]
+          },
+          "root_offset": [
+            0,
+            0
+          ],
+          "secondary_profile_id": "secondary_stable"
+        }
+      ],
+      "loop_start_sample": 0,
+      "loop_end_sample": 1,
+      "reduced_motion_clip_id": "idle_reduced"
+    },
+    {
+      "clip_id": "idle_reduced",
+      "family": "idle",
+      "loop_mode": "repeat",
+      "phase_source": "time",
+      "entry_marker": "entry",
+      "exit_markers": [
+        "exit"
+      ],
+      "minimum_hold_ticks": 1,
+      "interrupt_policy": "immediate",
+      "owned_channels": {
+        "regions": [
+          "base_body",
+          "face_emotion",
+          "speech",
+          "gaze",
+          "blink"
+        ]
+      },
+      "samples": [
+        {
+          "pose_id": "contract_pose_000",
+          "hold_ticks": 12,
+          "transition_recipe_id": "reduced_motion_handoff",
+          "markers": [
+            "entry",
+            "settled",
+            "exit"
+          ],
+          "support": {
+            "mode": "grounded",
+            "points": [
+              "left_foot",
+              "right_foot"
+            ]
+          },
+          "root_offset": [
+            0,
+            0
+          ],
+          "secondary_profile_id": "secondary_suppressed"
+        }
+      ],
+      "loop_start_sample": null,
+      "loop_end_sample": null,
+      "reduced_motion_clip_id": null
+    }
+  ],
+  "transition_recipes": [
+    {
+      "recipe_id": "coherent_handoff",
+      "source_families": [
+        "idle"
+      ],
+      "target_families": [
+        "idle"
+      ],
+      "timing": "marker_aligned",
+      "duration_ticks": {
+        "min": 1,
+        "max": 12
+      },
+      "handoff_marker": "settled",
+      "contact_policy": "preserve",
+      "root_policy": "contact_locked",
+      "region_policy": "preserve_unowned",
+      "secondary_policy": "settle",
+      "interrupt_windows": [
+        {
+          "start_marker": "entry",
+          "end_marker": "commit",
+          "interrupt_policy": "immediate",
+          "recovery_policy": "settle_to_idle"
+        }
+      ],
+      "fallback_recipe_id": "reduced_motion_handoff"
+    },
+    {
+      "recipe_id": "contact_sync",
+      "source_families": [
+        "idle"
+      ],
+      "target_families": [
+        "idle"
+      ],
+      "timing": "marker_aligned",
+      "duration_ticks": {
+        "min": 2,
+        "max": 12
+      },
+      "handoff_marker": "left_contact",
+      "contact_policy": "transfer_at_marker",
+      "root_policy": "contact_locked",
+      "region_policy": "preserve_unowned",
+      "secondary_policy": "preserve",
+      "interrupt_windows": [
+        {
+          "start_marker": "entry",
+          "end_marker": "commit",
+          "interrupt_policy": "at_safe_marker",
+          "recovery_policy": "restore_previous"
+        }
+      ],
+      "fallback_recipe_id": "coherent_handoff"
+    },
+    {
+      "recipe_id": "anticipation_action_recover",
+      "source_families": [
+        "idle"
+      ],
+      "target_families": [
+        "idle"
+      ],
+      "timing": "marker_aligned",
+      "duration_ticks": {
+        "min": 4,
+        "max": 24
+      },
+      "handoff_marker": "recover",
+      "contact_policy": "preserve",
+      "root_policy": "authored_offset",
+      "region_policy": "replace_owned",
+      "secondary_policy": "settle",
+      "interrupt_windows": [
+        {
+          "start_marker": "anticipation",
+          "end_marker": "commit",
+          "interrupt_policy": "after_commit",
+          "recovery_policy": "continue_target"
+        },
+        {
+          "start_marker": "impact",
+          "end_marker": "recover",
+          "interrupt_policy": "uninterruptible_until_recovery",
+          "recovery_policy": "settle_to_idle"
+        }
+      ],
+      "fallback_recipe_id": "coherent_handoff"
+    },
+    {
+      "recipe_id": "airborne_arc",
+      "source_families": [
+        "idle"
+      ],
+      "target_families": [
+        "idle"
+      ],
+      "timing": "wing_phase",
+      "duration_ticks": {
+        "min": 6,
+        "max": 30
+      },
+      "handoff_marker": "apex",
+      "contact_policy": "release_then_airborne",
+      "root_policy": "authored_offset",
+      "region_policy": "replace_owned",
+      "secondary_policy": "preserve",
+      "interrupt_windows": [
+        {
+          "start_marker": "release",
+          "end_marker": "apex",
+          "interrupt_policy": "after_impact",
+          "recovery_policy": "emergency_home"
+        }
+      ],
+      "fallback_recipe_id": "coherent_handoff"
+    },
+    {
+      "recipe_id": "brace_transfer",
+      "source_families": [
+        "idle"
+      ],
+      "target_families": [
+        "idle"
+      ],
+      "timing": "marker_aligned",
+      "duration_ticks": {
+        "min": 3,
+        "max": 18
+      },
+      "handoff_marker": "staff_plant",
+      "contact_policy": "brace_transfer",
+      "root_policy": "contact_locked",
+      "region_policy": "replace_owned",
+      "secondary_policy": "reset_at_marker",
+      "interrupt_windows": [
+        {
+          "start_marker": "staff_plant",
+          "end_marker": "staff_release",
+          "interrupt_policy": "at_safe_marker",
+          "recovery_policy": "restore_previous"
+        }
+      ],
+      "fallback_recipe_id": "contact_sync"
+    },
+    {
+      "recipe_id": "face_coarticulation",
+      "source_families": [
+        "idle"
+      ],
+      "target_families": [
+        "idle"
+      ],
+      "timing": "speech_aligned",
+      "duration_ticks": {
+        "min": 1,
+        "max": 8
+      },
+      "handoff_marker": "speech_accent",
+      "contact_policy": "none",
+      "root_policy": "preserve",
+      "region_policy": "face_only",
+      "secondary_policy": "preserve",
+      "interrupt_windows": [
+        {
+          "start_marker": "phrase_start",
+          "end_marker": "clause_end",
+          "interrupt_policy": "immediate",
+          "recovery_policy": "continue_target"
+        }
+      ],
+      "fallback_recipe_id": "coherent_handoff"
+    },
+    {
+      "recipe_id": "secondary_settle",
+      "source_families": [
+        "idle"
+      ],
+      "target_families": [
+        "idle"
+      ],
+      "timing": "fixed",
+      "duration_ticks": {
+        "min": 2,
+        "max": 16
+      },
+      "handoff_marker": "settled",
+      "contact_policy": "preserve",
+      "root_policy": "preserve",
+      "region_policy": "preserve_unowned",
+      "secondary_policy": "settle",
+      "interrupt_windows": [
+        {
+          "start_marker": "recover",
+          "end_marker": "settled",
+          "interrupt_policy": "at_safe_marker",
+          "recovery_policy": "settle_to_idle"
+        }
+      ],
+      "fallback_recipe_id": "reduced_motion_handoff"
+    },
+    {
+      "recipe_id": "reduced_motion_handoff",
+      "source_families": [
+        "idle"
+      ],
+      "target_families": [
+        "idle"
+      ],
+      "timing": "fixed",
+      "duration_ticks": {
+        "min": 1,
+        "max": 4
+      },
+      "handoff_marker": "settled",
+      "contact_policy": "preserve",
+      "root_policy": "preserve",
+      "region_policy": "reduced_motion",
+      "secondary_policy": "suppress",
+      "interrupt_windows": [
+        {
+          "start_marker": "entry",
+          "end_marker": "settled",
+          "interrupt_policy": "immediate",
+          "recovery_policy": "settle_to_idle"
+        }
+      ],
+      "fallback_recipe_id": null
+    }
+  ],
+  "edges": [
+    {
+      "edge_id": "idle_full_to_reduced",
+      "source_clip_id": "idle_full",
+      "target_clip_id": "idle_reduced",
+      "transition_recipe_id": "reduced_motion_handoff",
+      "allowed_turn_states": [
+        "idle",
+        "listening",
+        "thinking",
+        "preparing_response",
+        "speaking",
+        "clarifying",
+        "tool_wait",
+        "error",
+        "celebrating",
+        "interrupted"
+      ],
+      "allowed_motion_profiles": [
+        "reduced"
+      ]
+    },
+    {
+      "edge_id": "idle_reduced_to_full",
+      "source_clip_id": "idle_reduced",
+      "target_clip_id": "idle_full",
+      "transition_recipe_id": "coherent_handoff",
+      "allowed_turn_states": [
+        "idle",
+        "listening",
+        "thinking",
+        "preparing_response",
+        "speaking",
+        "clarifying",
+        "tool_wait",
+        "error",
+        "celebrating",
+        "interrupted"
+      ],
+      "allowed_motion_profiles": [
+        "full"
+      ]
+    }
+  ],
+  "turn_state_profiles": [
+    {
+      "turn_state": "idle",
+      "entry_clip_id": "idle_full",
+      "stable_clip_id": "idle_full",
+      "variant_set_id": "idle_variants",
+      "recovery_policy": "settle_to_idle"
+    },
+    {
+      "turn_state": "listening",
+      "entry_clip_id": "idle_full",
+      "stable_clip_id": "idle_full",
+      "variant_set_id": "idle_variants",
+      "recovery_policy": "settle_to_idle"
+    },
+    {
+      "turn_state": "thinking",
+      "entry_clip_id": "idle_full",
+      "stable_clip_id": "idle_full",
+      "variant_set_id": "idle_variants",
+      "recovery_policy": "settle_to_idle"
+    },
+    {
+      "turn_state": "preparing_response",
+      "entry_clip_id": "idle_full",
+      "stable_clip_id": "idle_full",
+      "variant_set_id": "idle_variants",
+      "recovery_policy": "settle_to_idle"
+    },
+    {
+      "turn_state": "speaking",
+      "entry_clip_id": "idle_full",
+      "stable_clip_id": "idle_full",
+      "variant_set_id": "idle_variants",
+      "recovery_policy": "settle_to_idle"
+    },
+    {
+      "turn_state": "clarifying",
+      "entry_clip_id": "idle_full",
+      "stable_clip_id": "idle_full",
+      "variant_set_id": "idle_variants",
+      "recovery_policy": "settle_to_idle"
+    },
+    {
+      "turn_state": "tool_wait",
+      "entry_clip_id": "idle_full",
+      "stable_clip_id": "idle_full",
+      "variant_set_id": "idle_variants",
+      "recovery_policy": "settle_to_idle"
+    },
+    {
+      "turn_state": "error",
+      "entry_clip_id": "idle_full",
+      "stable_clip_id": "idle_full",
+      "variant_set_id": "idle_variants",
+      "recovery_policy": "settle_to_idle"
+    },
+    {
+      "turn_state": "celebrating",
+      "entry_clip_id": "idle_full",
+      "stable_clip_id": "idle_full",
+      "variant_set_id": "idle_variants",
+      "recovery_policy": "settle_to_idle"
+    },
+    {
+      "turn_state": "interrupted",
+      "entry_clip_id": "idle_full",
+      "stable_clip_id": "idle_full",
+      "variant_set_id": "idle_variants",
+      "recovery_policy": "settle_to_listening"
+    }
+  ],
+  "emotion_profiles": [
+    {
+      "emotion": "neutral",
+      "accent_variant_set_id": "idle_variants",
+      "rest_mouth_pose": "closed",
+      "negative_pose_may_loop": false
+    },
+    {
+      "emotion": "joy",
+      "accent_variant_set_id": "idle_variants",
+      "rest_mouth_pose": "smile",
+      "negative_pose_may_loop": false
+    },
+    {
+      "emotion": "sadness",
+      "accent_variant_set_id": "idle_variants",
+      "rest_mouth_pose": "frown",
+      "negative_pose_may_loop": false
+    },
+    {
+      "emotion": "anger",
+      "accent_variant_set_id": "idle_variants",
+      "rest_mouth_pose": "frown",
+      "negative_pose_may_loop": false
+    },
+    {
+      "emotion": "fear",
+      "accent_variant_set_id": "idle_variants",
+      "rest_mouth_pose": "frown",
+      "negative_pose_may_loop": false
+    },
+    {
+      "emotion": "shame",
+      "accent_variant_set_id": "idle_variants",
+      "rest_mouth_pose": "frown",
+      "negative_pose_may_loop": false
+    },
+    {
+      "emotion": "disgust",
+      "accent_variant_set_id": "idle_variants",
+      "rest_mouth_pose": "frown",
+      "negative_pose_may_loop": false
+    },
+    {
+      "emotion": "surprise",
+      "accent_variant_set_id": "idle_variants",
+      "rest_mouth_pose": "open_wide",
+      "negative_pose_may_loop": false
+    },
+    {
+      "emotion": "pride",
+      "accent_variant_set_id": "idle_variants",
+      "rest_mouth_pose": "smile",
+      "negative_pose_may_loop": false
+    },
+    {
+      "emotion": "guilt",
+      "accent_variant_set_id": "idle_variants",
+      "rest_mouth_pose": "frown",
+      "negative_pose_may_loop": false
+    },
+    {
+      "emotion": "love",
+      "accent_variant_set_id": "idle_variants",
+      "rest_mouth_pose": "smile",
+      "negative_pose_may_loop": false
+    }
+  ],
+  "variant_sets": [
+    {
+      "variant_set_id": "idle_variants",
+      "choices": [
+        {
+          "clip_id": "idle_full",
+          "weight": 1,
+          "cooldown_generations": 0
+        }
+      ]
+    }
+  ],
+  "reduced_motion_overrides": [
+    {
+      "source_clip_id": "idle_full",
+      "reduced_clip_id": "idle_reduced",
+      "suppress_root_motion": true,
+      "suppress_secondary_motion": true,
+      "suppress_repeated_gestures": true,
+      "maximum_mouth_steps_per_second": 8
+    }
+  ]
+}

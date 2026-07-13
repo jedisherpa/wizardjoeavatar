@@ -1,0 +1,389 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://wizardjoe.local/schemas/rchat/registry-v1.schema.json",
+  "title": "wizardjoe-rchat-registry/v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "schema_version",
+    "program_id",
+    "branch",
+    "production_authority",
+    "integration_head",
+    "planning_checkpoint",
+    "status_vocabulary",
+    "agents",
+    "pose_baseline",
+    "locks",
+    "gates",
+    "gate_aliases",
+    "work_item_contract",
+    "work_items",
+    "specialist_work_items",
+    "artifacts",
+    "deployments",
+    "progress"
+  ],
+  "properties": {
+    "schema": { "const": "wizardjoe-rchat-registry/v1" },
+    "schema_version": { "const": 1 },
+    "program_id": { "const": "RCHAT" },
+    "branch": { "$ref": "#/$defs/nonEmptyString" },
+    "production_authority": { "const": "rust/wizard_avatar_engine" },
+    "integration_head": { "$ref": "#/$defs/gitSha" },
+    "planning_checkpoint": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["local_sha", "remote_sha", "pushed"],
+      "properties": {
+        "local_sha": { "$ref": "#/$defs/nullableGitSha" },
+        "remote_sha": { "$ref": "#/$defs/nullableGitSha" },
+        "pushed": { "type": "boolean" }
+      }
+    },
+    "status_vocabulary": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/workStatus" },
+      "uniqueItems": true,
+      "minItems": 9
+    },
+    "agents": {
+      "type": "array",
+      "minItems": 4,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["role", "agent_id", "nickname"],
+        "properties": {
+          "role": { "$ref": "#/$defs/role" },
+          "agent_id": { "$ref": "#/$defs/nonEmptyString" },
+          "nickname": { "$ref": "#/$defs/nonEmptyString" }
+        }
+      }
+    },
+    "pose_baseline": { "$ref": "#/$defs/poseBaseline" },
+    "locks": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/lock" }
+    },
+    "gates": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/gateSummary" }
+    },
+    "gate_aliases": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "array",
+        "items": { "$ref": "#/$defs/nonEmptyString" },
+        "uniqueItems": true
+      }
+    },
+    "work_item_contract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["acceptance_rule", "ready_rule", "progress_rule"],
+      "properties": {
+        "acceptance_rule": { "$ref": "#/$defs/nonEmptyString" },
+        "ready_rule": { "$ref": "#/$defs/nonEmptyString" },
+        "progress_rule": { "$ref": "#/$defs/nonEmptyString" }
+      }
+    },
+    "work_items": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/workItem" }
+    },
+    "specialist_work_items": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/specialistWorkItem" }
+    },
+    "artifacts": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/artifact" }
+    },
+    "deployments": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/deployment" }
+    },
+    "progress": { "$ref": "#/$defs/progress" }
+  },
+  "$defs": {
+    "nonEmptyString": { "type": "string", "minLength": 1 },
+    "gitSha": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
+    "nullableGitSha": {
+      "oneOf": [
+        { "$ref": "#/$defs/gitSha" },
+        { "type": "null" }
+      ]
+    },
+    "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "nullableString": {
+      "oneOf": [
+        { "type": "string" },
+        { "type": "null" }
+      ]
+    },
+    "role": { "enum": ["RUNTIME", "MOTION", "FLOW", "INT"] },
+    "workStatus": {
+      "enum": [
+        "PLANNED",
+        "READY",
+        "IN_PROGRESS",
+        "HANDOFF_READY",
+        "IN_REVIEW",
+        "ACCEPTED",
+        "BLOCKED",
+        "FAILED",
+        "REOPENED"
+      ]
+    },
+    "command": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": ["command", "exit_code", "duration_ms"],
+      "properties": {
+        "command": { "$ref": "#/$defs/nonEmptyString" },
+        "exit_code": { "type": "integer" },
+        "duration_ms": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": ["path", "sha256"],
+      "properties": {
+        "path": { "$ref": "#/$defs/nonEmptyString" },
+        "sha256": { "$ref": "#/$defs/sha256" },
+        "artifact_url": { "$ref": "#/$defs/nullableString" }
+      }
+    },
+    "rollback": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": ["sha", "profile", "verified"],
+      "properties": {
+        "sha": { "$ref": "#/$defs/nullableGitSha" },
+        "profile": { "$ref": "#/$defs/nonEmptyString" },
+        "verified": { "type": "boolean" },
+        "strategy": { "$ref": "#/$defs/nonEmptyString" },
+        "instruction": { "$ref": "#/$defs/nonEmptyString" },
+        "downgrade_allowed": { "type": "boolean" }
+      }
+    },
+    "workItem": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id", "title", "owner", "reviewers", "status", "weight",
+        "dependencies", "required_children", "gate_id", "path_allowlist",
+        "required_locks", "base_sha", "result_sha", "started_at",
+        "finished_at", "commands", "evidence", "metrics", "rollback",
+        "blocker", "handoff_id"
+      ],
+      "properties": {
+        "id": { "$ref": "#/$defs/nonEmptyString" },
+        "title": { "$ref": "#/$defs/nonEmptyString" },
+        "owner": { "$ref": "#/$defs/role" },
+        "reviewers": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/role" },
+          "uniqueItems": true
+        },
+        "status": { "$ref": "#/$defs/workStatus" },
+        "weight": { "type": "integer", "minimum": 0 },
+        "dependencies": { "$ref": "#/$defs/idArray" },
+        "required_children": { "$ref": "#/$defs/idArray" },
+        "gate_id": { "$ref": "#/$defs/nonEmptyString" },
+        "path_allowlist": { "$ref": "#/$defs/stringArray" },
+        "required_locks": { "$ref": "#/$defs/idArray" },
+        "base_sha": { "$ref": "#/$defs/nullableGitSha" },
+        "result_sha": { "$ref": "#/$defs/nullableGitSha" },
+        "started_at": { "$ref": "#/$defs/nullableString" },
+        "finished_at": { "$ref": "#/$defs/nullableString" },
+        "commands": { "type": "array", "items": { "$ref": "#/$defs/command" } },
+        "evidence": { "type": "array", "items": { "$ref": "#/$defs/evidence" } },
+        "metrics": { "type": "object" },
+        "rollback": { "$ref": "#/$defs/rollback" },
+        "blocker": {},
+        "handoff_id": { "$ref": "#/$defs/nullableString" }
+      }
+    },
+    "specialistWorkItem": {
+      "allOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "id", "parent", "title", "owner", "reviewers", "status", "weight",
+            "dependencies", "gate_id", "path_allowlist", "required_locks",
+            "base_sha", "result_sha", "started_at", "finished_at", "commands",
+            "evidence", "metrics", "rollback", "blocker", "handoff_id",
+            "detail_source"
+          ],
+          "properties": {
+            "id": { "$ref": "#/$defs/nonEmptyString" },
+            "parent": { "$ref": "#/$defs/nonEmptyString" },
+            "title": { "$ref": "#/$defs/nonEmptyString" },
+            "owner": { "$ref": "#/$defs/role" },
+            "reviewers": {
+              "type": "array",
+              "items": { "$ref": "#/$defs/role" },
+              "uniqueItems": true
+            },
+            "status": { "$ref": "#/$defs/workStatus" },
+            "weight": { "type": "integer", "minimum": 0 },
+            "dependencies": { "$ref": "#/$defs/idArray" },
+            "gate_id": { "$ref": "#/$defs/nonEmptyString" },
+            "path_allowlist": { "$ref": "#/$defs/stringArray" },
+            "required_locks": { "$ref": "#/$defs/idArray" },
+            "base_sha": { "$ref": "#/$defs/nullableGitSha" },
+            "result_sha": { "$ref": "#/$defs/nullableGitSha" },
+            "started_at": { "$ref": "#/$defs/nullableString" },
+            "finished_at": { "$ref": "#/$defs/nullableString" },
+            "commands": { "type": "array", "items": { "$ref": "#/$defs/command" } },
+            "evidence": { "type": "array", "items": { "$ref": "#/$defs/evidence" } },
+            "metrics": { "type": "object" },
+            "rollback": { "$ref": "#/$defs/rollback" },
+            "blocker": {},
+            "handoff_id": { "$ref": "#/$defs/nullableString" },
+            "detail_source": { "$ref": "#/$defs/nonEmptyString" }
+          }
+        }
+      ]
+    },
+    "idArray": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/nonEmptyString" },
+      "uniqueItems": true
+    },
+    "stringArray": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/nonEmptyString" },
+      "uniqueItems": true
+    },
+    "lock": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "lock_id", "paths", "holder", "work_id", "acquired_at", "expires_at",
+        "base_sha", "reason"
+      ],
+      "properties": {
+        "lock_id": { "$ref": "#/$defs/nonEmptyString" },
+        "paths": { "$ref": "#/$defs/stringArray" },
+        "holder": { "$ref": "#/$defs/nullableString" },
+        "work_id": { "$ref": "#/$defs/nullableString" },
+        "acquired_at": { "$ref": "#/$defs/nullableString" },
+        "expires_at": { "$ref": "#/$defs/nullableString" },
+        "base_sha": { "$ref": "#/$defs/nullableGitSha" },
+        "reason": { "$ref": "#/$defs/nullableString" }
+      }
+    },
+    "gateSummary": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": ["gate_id", "status", "required_work", "structural_pass_required", "record"],
+      "properties": {
+        "gate_id": { "$ref": "#/$defs/nonEmptyString" },
+        "status": { "enum": ["PASS", "FAIL", "BLOCKED", "IN_REVIEW"] },
+        "required_work": { "$ref": "#/$defs/idArray" },
+        "structural_pass_required": { "type": "boolean" },
+        "minimum_product_score": { "type": "number", "minimum": 0, "maximum": 100 },
+        "record": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": true,
+              "required": ["git_sha", "remote_sha", "result"],
+              "properties": {
+                "git_sha": { "$ref": "#/$defs/gitSha" },
+                "remote_sha": { "$ref": "#/$defs/gitSha" },
+                "dirty": { "type": "boolean" },
+                "result": { "enum": ["PASS", "FAIL"] }
+              }
+            },
+            { "type": "null" }
+          ]
+        }
+      }
+    },
+    "poseBaseline": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": [
+        "status", "runtime_geometries", "wjfl_geometries", "authored_transitions",
+        "clips", "static_frames", "frames_per_pass", "passes", "quality_failures",
+        "decode_parity", "presentation_parity", "asset_sha256", "stream_sha256",
+        "evidence_manifest"
+      ],
+      "properties": {
+        "status": { "enum": ["PASS", "FAIL"] },
+        "runtime_geometries": { "type": "integer", "minimum": 0 },
+        "wjfl_geometries": { "type": "integer", "minimum": 0 },
+        "authored_transitions": { "type": "integer", "minimum": 0 },
+        "clips": { "type": "integer", "minimum": 0 },
+        "static_frames": { "type": "integer", "minimum": 0 },
+        "frames_per_pass": { "type": "integer", "minimum": 0 },
+        "passes": { "type": "integer", "minimum": 0 },
+        "quality_failures": { "type": "integer", "minimum": 0 },
+        "decode_parity": { "type": "boolean" },
+        "presentation_parity": { "type": "boolean" },
+        "asset_sha256": { "$ref": "#/$defs/sha256" },
+        "stream_sha256": { "$ref": "#/$defs/sha256" },
+        "evidence_manifest": { "$ref": "#/$defs/nonEmptyString" }
+      }
+    },
+    "artifact": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": ["path", "sha256"],
+      "properties": {
+        "path": { "$ref": "#/$defs/nonEmptyString" },
+        "sha256": { "$ref": "#/$defs/sha256" }
+      }
+    },
+    "deployment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "deployment_id", "environment", "f0_approved_sha", "pushed_sha",
+        "built_sha", "deployed_sha", "endpoint_sha", "status"
+      ],
+      "properties": {
+        "deployment_id": { "$ref": "#/$defs/nonEmptyString" },
+        "environment": { "$ref": "#/$defs/nonEmptyString" },
+        "f0_approved_sha": { "$ref": "#/$defs/gitSha" },
+        "pushed_sha": { "$ref": "#/$defs/gitSha" },
+        "built_sha": { "$ref": "#/$defs/gitSha" },
+        "deployed_sha": { "$ref": "#/$defs/gitSha" },
+        "endpoint_sha": { "$ref": "#/$defs/gitSha" },
+        "status": { "enum": ["PLANNED", "ACTIVE", "ROLLED_BACK", "FAILED"] }
+      }
+    },
+    "progress": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": [
+        "accepted_weight", "total_weight", "program_percent",
+        "critical_path_percent", "passed_blocking_gates", "total_blocking_gates",
+        "gate_percent", "pose_coverage_percent"
+      ],
+      "properties": {
+        "accepted_weight": { "type": "integer", "minimum": 0 },
+        "total_weight": { "type": "integer", "minimum": 0 },
+        "program_percent": { "type": "number", "minimum": 0, "maximum": 100 },
+        "critical_path_percent": { "type": "number", "minimum": 0, "maximum": 100 },
+        "passed_blocking_gates": { "type": "integer", "minimum": 0 },
+        "total_blocking_gates": { "type": "integer", "minimum": 0 },
+        "gate_percent": { "type": "number", "minimum": 0, "maximum": 100 },
+        "pose_coverage_percent": { "type": "number", "minimum": 0, "maximum": 100 },
+        "weight_authority": { "const": "work_items" },
+        "specialist_weights_earning": { "const": false },
+        "specialist_accepted_weight": { "const": 0 },
+        "specialist_total_weight": { "const": 0 }
+      }
+    }
+  }
+}

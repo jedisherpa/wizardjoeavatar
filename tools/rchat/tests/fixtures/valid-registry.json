@@ -1,0 +1,210 @@
+{
+  "schema": "wizardjoe-rchat-registry/v1",
+  "schema_version": 1,
+  "program_id": "RCHAT",
+  "branch": "codex/build-repeatable-avatar-animation",
+  "production_authority": "rust/wizard_avatar_engine",
+  "integration_head": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "planning_checkpoint": {
+    "local_sha": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "remote_sha": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "pushed": true
+  },
+  "status_vocabulary": [
+    "PLANNED",
+    "READY",
+    "IN_PROGRESS",
+    "HANDOFF_READY",
+    "IN_REVIEW",
+    "ACCEPTED",
+    "BLOCKED",
+    "FAILED",
+    "REOPENED"
+  ],
+  "agents": [
+    { "role": "RUNTIME", "agent_id": "runtime", "nickname": "Runtime" },
+    { "role": "MOTION", "agent_id": "motion", "nickname": "Motion" },
+    { "role": "FLOW", "agent_id": "flow", "nickname": "Flow" },
+    { "role": "INT", "agent_id": "coordinator", "nickname": "Coordinator" }
+  ],
+  "pose_baseline": {
+    "status": "PASS",
+    "runtime_geometries": 89,
+    "wjfl_geometries": 50,
+    "catalog_records": 80,
+    "imported_geometries": 79,
+    "aliases": 1,
+    "authored_transitions": 621,
+    "clips": 16,
+    "static_frames": 89,
+    "frames_per_pass": 20065,
+    "passes": 2,
+    "quality_failures": 0,
+    "decode_parity": true,
+    "presentation_parity": true,
+    "asset_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+    "stream_sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+    "evidence_manifest": "evidence/rchat/p0/manifest.json"
+  },
+  "locks": [
+    {
+      "lock_id": "LOCK-RCHAT-REGISTRY",
+      "paths": ["docs/cartoon-animation-program/rust-chatbot/registry.json"],
+      "holder": null,
+      "work_id": null,
+      "acquired_at": null,
+      "expires_at": null,
+      "base_sha": null,
+      "reason": null
+    }
+  ],
+  "gates": [
+    {
+      "gate_id": "P0",
+      "status": "PASS",
+      "required_work": ["RCHAT-FLOW-001"],
+      "structural_pass_required": true,
+      "record": {
+        "git_sha": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "remote_sha": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "dirty": false,
+        "result": "PASS"
+      }
+    },
+    {
+      "gate_id": "C0",
+      "status": "BLOCKED",
+      "required_work": ["RCHAT-FLOW-020"],
+      "structural_pass_required": true,
+      "record": null
+    }
+  ],
+  "gate_aliases": {
+    "P0": ["RCHAT-GATE-P0"],
+    "C0": ["RCHAT-GATE-C0"]
+  },
+  "work_item_contract": {
+    "acceptance_rule": "Accepted work has complete evidence.",
+    "ready_rule": "Ready work has accepted dependencies.",
+    "progress_rule": "Only parent work earns progress."
+  },
+  "work_items": [
+    {
+      "id": "RCHAT-FLOW-001",
+      "title": "Accept pose baseline",
+      "owner": "INT",
+      "reviewers": ["FLOW"],
+      "status": "ACCEPTED",
+      "weight": 1,
+      "dependencies": [],
+      "required_children": ["RCHAT-RUN-000"],
+      "gate_id": "P0",
+      "path_allowlist": ["evidence/rchat/p0/**"],
+      "required_locks": [],
+      "base_sha": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "result_sha": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "started_at": "2026-07-13T00:00:00Z",
+      "finished_at": "2026-07-13T00:01:00Z",
+      "commands": [
+        { "command": "cargo test", "exit_code": 0, "duration_ms": 1000 }
+      ],
+      "evidence": [
+        {
+          "path": "evidence/rchat/p0/report.json",
+          "sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+        }
+      ],
+      "metrics": { "quality_failures": 0 },
+      "rollback": {
+        "profile": "repair-only",
+        "sha": null,
+        "verified": true,
+        "downgrade_allowed": false
+      },
+      "blocker": null,
+      "handoff_id": "RCHAT-HANDOFF-FLOW-001"
+    },
+    {
+      "id": "RCHAT-FLOW-020",
+      "title": "Build registry validator",
+      "owner": "FLOW",
+      "reviewers": ["INT"],
+      "status": "PLANNED",
+      "weight": 1,
+      "dependencies": ["RCHAT-FLOW-001"],
+      "required_children": [],
+      "gate_id": "C0",
+      "path_allowlist": ["schemas/rchat/**", "tools/rchat/**"],
+      "required_locks": [],
+      "base_sha": null,
+      "result_sha": null,
+      "started_at": null,
+      "finished_at": null,
+      "commands": [],
+      "evidence": [],
+      "metrics": {},
+      "rollback": {
+        "profile": "legacy",
+        "sha": null,
+        "verified": false,
+        "downgrade_allowed": false
+      },
+      "blocker": null,
+      "handoff_id": null
+    }
+  ],
+  "specialist_work_items": [
+    {
+      "id": "RCHAT-RUN-000",
+      "parent": "RCHAT-FLOW-001",
+      "title": "Verify baseline compatibility",
+      "owner": "RUNTIME",
+      "reviewers": ["FLOW"],
+      "status": "ACCEPTED",
+      "weight": 0,
+      "dependencies": [],
+      "gate_id": "P0",
+      "path_allowlist": ["evidence/rchat/p0/**"],
+      "required_locks": [],
+      "base_sha": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "result_sha": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "started_at": "2026-07-13T00:00:00Z",
+      "finished_at": "2026-07-13T00:01:00Z",
+      "commands": [
+        { "command": "cargo test", "exit_code": 0, "duration_ms": 1000 }
+      ],
+      "evidence": [
+        {
+          "path": "evidence/rchat/p0/runtime.json",
+          "sha256": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+        }
+      ],
+      "metrics": { "quality_failures": 0 },
+      "rollback": {
+        "profile": "repair-only",
+        "sha": null,
+        "verified": true,
+        "downgrade_allowed": false
+      },
+      "blocker": null,
+      "handoff_id": "RCHAT-HANDOFF-RUN-000",
+      "detail_source": "planning/01-rust-runtime-plan.md"
+    }
+  ],
+  "artifacts": [],
+  "deployments": [],
+  "progress": {
+    "accepted_weight": 1,
+    "total_weight": 2,
+    "program_percent": 50.0,
+    "critical_path_percent": 0.0,
+    "passed_blocking_gates": 1,
+    "total_blocking_gates": 2,
+    "gate_percent": 50.0,
+    "pose_coverage_percent": 100.0,
+    "weight_authority": "work_items",
+    "specialist_weights_earning": false,
+    "specialist_accepted_weight": 0,
+    "specialist_total_weight": 0
+  }
+}

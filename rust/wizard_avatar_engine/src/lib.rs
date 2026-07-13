@@ -1,11 +1,15 @@
 pub mod animation;
 pub mod cell;
+pub mod chat_event;
+pub mod chat_performance;
 pub mod codec;
+pub mod command;
 pub mod controller;
 pub mod evidence;
 pub mod frame_source;
 pub mod geometry;
 pub mod hub;
+pub mod motion_graph;
 pub mod palette;
 pub mod pathing;
 pub mod pose;

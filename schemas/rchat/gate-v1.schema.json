@@ -1,0 +1,160 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://wizardjoe.local/schemas/rchat/gate-v1.schema.json",
+  "title": "wizardjoe-rchat-gate/v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema", "schema_version", "program_id", "gate_id", "status", "git", "environment",
+    "inputs", "required_work_items", "commands", "metrics", "artifacts",
+    "failures", "skips", "review", "rollback"
+  ],
+  "properties": {
+    "schema": { "const": "wizardjoe-rchat-gate/v1" },
+    "schema_version": { "const": 1 },
+    "program_id": { "const": "RCHAT" },
+    "gate_id": { "$ref": "#/$defs/nonEmptyString" },
+    "status": { "enum": ["PASS", "FAIL", "BLOCKED"] },
+    "git": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["branch", "sha", "dirty"],
+      "properties": {
+        "branch": { "$ref": "#/$defs/nonEmptyString" },
+        "sha": { "$ref": "#/$defs/gitSha" },
+        "dirty": { "type": "boolean" }
+      }
+    },
+    "environment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["os", "arch", "rustc", "cargo", "node", "browser"],
+      "properties": {
+        "os": { "$ref": "#/$defs/nonEmptyString" },
+        "arch": { "$ref": "#/$defs/nonEmptyString" },
+        "rustc": { "$ref": "#/$defs/nonEmptyString" },
+        "cargo": { "$ref": "#/$defs/nonEmptyString" },
+        "node": { "$ref": "#/$defs/nonEmptyString" },
+        "browser": { "$ref": "#/$defs/nullableString" }
+      }
+    },
+    "inputs": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "pose_asset_sha256", "motion_graph_sha256", "policy_sha256",
+        "browser_bundle_sha256"
+      ],
+      "properties": {
+        "pose_asset_sha256": { "$ref": "#/$defs/sha256" },
+        "motion_graph_sha256": { "$ref": "#/$defs/nullableSha256" },
+        "policy_sha256": { "$ref": "#/$defs/nullableSha256" },
+        "browser_bundle_sha256": { "$ref": "#/$defs/nullableSha256" }
+      }
+    },
+    "required_work_items": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/nonEmptyString" },
+      "uniqueItems": true
+    },
+    "commands": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/command" }
+    },
+    "metrics": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/metric" }
+    },
+    "artifacts": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/artifact" }
+    },
+    "failures": { "type": "array" },
+    "skips": { "type": "array" },
+    "review": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["primary", "independent", "reviewed_at"],
+      "properties": {
+        "primary": { "$ref": "#/$defs/role" },
+        "independent": { "$ref": "#/$defs/role" },
+        "reviewed_at": { "$ref": "#/$defs/nonEmptyString" }
+      }
+    },
+    "rollback": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["sha", "profile", "drill_passed"],
+      "properties": {
+        "sha": { "$ref": "#/$defs/nullableGitSha" },
+        "profile": { "$ref": "#/$defs/nonEmptyString" },
+        "drill_passed": { "type": "boolean" },
+        "downgrade_allowed": { "type": "boolean" }
+      }
+    }
+  },
+  "$defs": {
+    "nonEmptyString": { "type": "string", "minLength": 1 },
+    "gitSha": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
+    "nullableGitSha": {
+      "oneOf": [
+        { "$ref": "#/$defs/gitSha" },
+        { "type": "null" }
+      ]
+    },
+    "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "nullableSha256": {
+      "oneOf": [
+        { "$ref": "#/$defs/sha256" },
+        { "type": "null" }
+      ]
+    },
+    "nullableString": {
+      "oneOf": [
+        { "type": "string" },
+        { "type": "null" }
+      ]
+    },
+    "role": { "enum": ["RUNTIME", "MOTION", "FLOW", "INT"] },
+    "command": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "command", "exit_code", "duration_ms", "stdout_artifact",
+        "stderr_artifact"
+      ],
+      "properties": {
+        "command": { "$ref": "#/$defs/nonEmptyString" },
+        "exit_code": { "type": "integer" },
+        "duration_ms": { "type": "integer", "minimum": 0 },
+        "stdout_artifact": { "$ref": "#/$defs/nullableString" },
+        "stderr_artifact": { "$ref": "#/$defs/nullableString" }
+      }
+    },
+    "metric": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "actual", "operator", "threshold", "unit", "status"],
+      "properties": {
+        "name": { "$ref": "#/$defs/nonEmptyString" },
+        "actual": { "type": "number" },
+        "operator": { "enum": ["eq", "lte", "gte"] },
+        "threshold": { "type": "number" },
+        "unit": { "$ref": "#/$defs/nonEmptyString" },
+        "status": { "enum": ["PASS", "FAIL"] }
+      }
+    },
+    "artifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "path_or_url", "sha256", "bytes", "retention"],
+      "properties": {
+        "kind": { "$ref": "#/$defs/nonEmptyString" },
+        "path_or_url": { "$ref": "#/$defs/nonEmptyString" },
+        "sha256": { "$ref": "#/$defs/sha256" },
+        "bytes": { "type": "integer", "minimum": 0 },
+        "retention": { "enum": ["pr", "candidate", "release", "permanent"] }
+      }
+    }
+  }
+}
