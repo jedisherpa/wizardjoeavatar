@@ -12,7 +12,7 @@ The Rust avatar server deploys from `codex/build-repeatable-avatar-animation` to
 | Internal listener | `127.0.0.1:18787` |
 | Public endpoint | `https://wizardjoe.5.78.137.112.sslip.io/` |
 
-The isolated bridge workflow checks out `jedisherpa/wizardjoeavatar` at `codex/build-repeatable-avatar-animation`, builds the server on Linux, runs Rust and browser-module checks, uploads only the compiled server, installs a dedicated unprivileged service, validates the complete Caddy configuration, and then verifies both the state API and rendered page over HTTPS.
+The isolated bridge workflow checks out `jedisherpa/wizardjoeavatar` at `codex/build-repeatable-avatar-animation`, builds the server on Linux, runs Rust and browser-module checks, uploads only the compiled server, installs a dedicated unprivileged service, adds an isolated Nginx virtual host with WebSocket proxying, provisions its dedicated Let's Encrypt certificate, and then verifies both the state API and rendered page over HTTPS.
 
 `CRX41_HETZNER_SSH` is read only by the bridge job from the existing `hetzner` environment. The key is never copied into the Wizard Joe repository.
 
