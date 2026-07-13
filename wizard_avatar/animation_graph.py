@@ -466,8 +466,6 @@ def load_pose_catalog(
     extra_library_poses = sorted(set(library_by_id) - set(catalog))
     if extra_library_poses:
         raise _path_error("pose_library", f"cell library has unmanifested poses: {', '.join(extra_library_poses)}")
-    if len(catalog) != 39:
-        raise _path_error("pose_library", f"expected 39 poses, found {len(catalog)}")
     return catalog
 
 

@@ -146,9 +146,16 @@ def generate_pose_library(
 ) -> dict:
     manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
     source_dir = manifest_path.parent
+    requested_cols = int(manifest.get("canonical", {}).get("cols", 0))
     raw_entries = []
     for pose in manifest["poses"]:
-        source_path = source_dir / pose["source"]
+        source_path_value = pose.get("source_path")
+        if source_path_value is None:
+            source_path = source_dir / pose["source"]
+        else:
+            source_path = Path(source_path_value)
+            if not source_path.is_absolute():
+                source_path = ROOT / source_path
         temp_output = output_path.parent / f".{pose['id']}.tmp.json"
         generation_rows = int(pose.get("generation_rows", rows))
         payload = generate(
@@ -160,6 +167,25 @@ def generate_pose_library(
             coverage_threshold=coverage_threshold,
             colors=colors,
         )
+        while requested_cols and int(payload["cols"]) > requested_cols:
+            fitted_rows = max(
+                1,
+                generation_rows * requested_cols // int(payload["cols"]),
+            )
+            if fitted_rows >= generation_rows:
+                fitted_rows = generation_rows - 1
+            if fitted_rows < 1:
+                raise ValueError(f"{pose['id']} cannot fit the canonical width")
+            generation_rows = fitted_rows
+            payload = generate(
+                source_path,
+                temp_output,
+                rows=generation_rows,
+                margin=margin,
+                threshold=threshold,
+                coverage_threshold=coverage_threshold,
+                colors=colors,
+            )
         temp_output.unlink(missing_ok=True)
         raw_entries.append((pose, payload, generation_rows))
 

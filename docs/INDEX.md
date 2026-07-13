@@ -8,6 +8,8 @@ This package contains the full Codex implementation specification for a procedur
 - [Codex goal entry point](../CODEX_GOAL.md)
 - [Pose library expansion tracker](pose-library-expansion/README.md)
 - [Cartoon animation program](cartoon-animation-program/README.md)
+- [Cartoon animation current-state audit](cartoon-animation-program/CURRENT_STATE_AUDIT.md)
+- [Python branch delivery and rebuild contract](cartoon-animation-program/PYTHON_BRANCH_DELIVERY.md)
 - [Cartoon animation integrated implementation plan](cartoon-animation-program/IMPLEMENTATION_PLAN.md)
 - [Cartoon animation multi-agent workflow](cartoon-animation-program/WORKFLOW.md)
 

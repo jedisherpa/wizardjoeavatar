@@ -11,8 +11,11 @@ Last coordinator update: 2026-07-13.
 | Coordinated planning | COMPLETE | Same four agents produced compatible planning contributions; two Prism signal reports added |
 | Planning checkpoint | COMPLETE | Research and plan pushed as `08d8f3aaa181d97ef3d2a29cb5a8362d81a05f12` |
 | Implementation | COMPLETE | Python runtime, graph, controls, reusable character package, Prism adapter, TTS captions, and persistent service integrated |
-| Final verification | COMPLETE | 153 tests, live Chromium matrix, Python-only validators, and ten-minute mixed-control soak passed |
+| Final verification | COMPLETE | 154 tests, live Chromium matrix, Python-only validators, and ten-minute mixed-control soak passed |
 | Final publish | COMPLETE | Implementation `a5f0cc1` and evidence/source checkpoint `0508039` pushed to GitHub |
+| Post-implementation code audit | PARTIAL - REMEDIATION REQUIRED | [2026-07-13 current-state audit](CURRENT_STATE_AUDIT.md) found that the live path bypasses the planned runtime/inbox, uses graph v2 only for flight, and does not render reference-pose expression or blink state |
+| Python feelings-pose integration | COMPLETE | 50 unique tracked sources migrated into the Python manifest and generated cell library; production catalog now contains 89 poses |
+| Python branch publication | IN PROGRESS | Dedicated `codex/python-asciline-avatar` branch, fresh port-8765 rebuild, live verification, and GitHub push |
 
 ## Agent ledger
 
@@ -37,3 +40,6 @@ Last coordinator update: 2026-07-13.
 | 2026-07-13 | Missed frame deadlines are dropped instead of replayed | Unbounded frame catch-up consumed speech and animation timers and made transitions appear erratic | `wizard_avatar/stream.py`, `tests/wizard/test_stream_hub.py` |
 | 2026-07-13 | Character content is loaded through a versioned package | Future characters can reuse the runtime, control, transport, and renderer without architecture changes | `wizard_avatar/character_package.py`, `wizard_avatar/definitions/wizard_joe_character_package.json` |
 | 2026-07-13 | Commit 30 registry sources and nine integration-spec previews | Clean-clone verification proved the pose workflow was not reproducible without every declared source path | `evidence/pose-library-expansion/intake/`, `evidence/pose-library-expansion/WJFA-01/` through `WJFA-09/` |
+| 2026-07-13 | Supersede the global completion claim with a partial current-state audit | Passing stability gates did not prove that planned runtime, command, graph, package, transition, and face-channel components were connected to production | [Current-State Audit](CURRENT_STATE_AUDIT.md) |
+| 2026-07-13 | Publish production work on `codex/python-asciline-avatar` | The live ASCILINE runtime is Python; the branch name and delivery contract must make that boundary explicit | [Python Branch Delivery](PYTHON_BRANCH_DELIVERY.md) |
+| 2026-07-13 | Expand the Python runtime catalog from 39 to 89 poses | The 50 unique feelings/action sources are now deterministic Python cell assets and participate automatically in Play, Repeat, and pose selection | `tools/integrate_feelings_into_python.py` |

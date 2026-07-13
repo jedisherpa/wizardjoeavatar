@@ -4,11 +4,19 @@ This directory is the durable execution record for turning WizardJoe's integrate
 
 Program date: 2026-07-12
 
-Baseline branch: `codex/build-repeatable-avatar-animation`
+Production branch: `codex/python-asciline-avatar`
 
-Baseline production library: 39 generated poses on the ASCILINE Python server at `http://127.0.0.1:8765/`.
+Production library: 89 generated poses on the ASCILINE Python server at `http://127.0.0.1:8765/`.
 
 Production architecture rule: the Python controller, direct-cell renderer, FastAPI delivery system, WebSocket stream, and browser client are authoritative. Rust is a historical side-track and must not become a production dependency or acceptance gate.
+
+## Current implementation status
+
+- [Current-state code and program audit](CURRENT_STATE_AUDIT.md) - 2026-07-13
+- [Python branch delivery and rebuild contract](PYTHON_BRANCH_DELIVERY.md)
+- [Program tracker](PROGRAM_TRACKER.md)
+- [Integrated implementation plan](IMPLEMENTATION_PLAN.md)
+- [Multi-agent execution workflow](WORKFLOW.md)
 
 ## Required sequence
 
@@ -47,3 +55,4 @@ Production architecture rule: the Python controller, direct-cell renderer, FastA
 - The live acceptance target is the Python service on port 8765.
 - Rust code is not included in the implementation workflow. The Rust role may identify generally useful ideas, but the plan must translate them into idiomatic Python designs and tests.
 - Existing untracked Rust work is not part of the planning checkpoint or production delivery.
+- The 50-pose migration uses Python-owned metadata and tracked PNG sources. The server and its rebuild gates do not import, execute, compile, invoke, or read Rust.

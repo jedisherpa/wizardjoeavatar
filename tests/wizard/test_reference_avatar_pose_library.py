@@ -25,6 +25,15 @@ class ReferenceAvatarPoseLibraryTests(unittest.TestCase):
         manifest = json.loads(MANIFEST_PATH.read_text(encoding="utf-8"))
         expected_pose_ids = {pose["id"] for pose in manifest["poses"]}
         self.assertEqual(set(reference_pose_ids()), expected_pose_ids)
+        self.assertEqual(len(expected_pose_ids), 89)
+        self.assertTrue(
+            {
+                "front_greeting_wave_wings",
+                "front_magic_staff_spark_wings",
+                "feeling_joy_full",
+                "feeling_love_close",
+            }.issubset(expected_pose_ids)
+        )
 
     def test_all_reference_poses_share_canonical_canvas_and_root(self):
         for pose_id in reference_pose_ids():

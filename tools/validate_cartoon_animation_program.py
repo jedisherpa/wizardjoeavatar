@@ -268,12 +268,12 @@ def _validate_program_identity(
                 "baseline.python_url must target the ASCILINE Python service on port 8765",
             )
         )
-    if baseline.get("production_pose_count") != 39:
+    if baseline.get("production_pose_count") != 89:
         errors.append(
             _issue(
                 "program.pose_count",
                 REGISTRY_RELATIVE.as_posix(),
-                "baseline.production_pose_count must be 39",
+                "baseline.production_pose_count must be 89",
             )
         )
     library_hash = baseline.get("generated_library_sha256")

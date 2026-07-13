@@ -7,305 +7,4086 @@
   "simulation_hz": 60,
   "default_node_id": "ground_idle",
   "capability_tiers": {
-    "A": { "description": "Authored south ground, action, and flight motion plus southeast flight." },
-    "B": { "description": "Coherent reduced-motion north, profile, and southwest flight coverage." },
-    "C": { "description": "Explicit fallback only; never advertised as authored omnidirectional motion." }
+    "A": {
+      "description": "Authored south ground, action, and flight motion plus southeast flight."
+    },
+    "B": {
+      "description": "Coherent reduced-motion north, profile, and southwest flight coverage."
+    },
+    "C": {
+      "description": "Explicit fallback only; never advertised as authored omnidirectional motion."
+    }
   },
   "pose_classification": {
-    "front_idle": { "roles": ["clip_sample", "transition_sample"], "altitude_class": "grounded", "support_contact": "both_feet", "planted_anchor": "left_foot", "wing_mode": "extended", "staff_mode": "carried", "capability_tier": "A" },
-    "back_idle": { "roles": ["clip_sample", "transition_sample"], "altitude_class": "grounded", "support_contact": "both_feet", "planted_anchor": "left_foot", "wing_mode": "extended", "staff_mode": "carried", "capability_tier": "B" },
-    "profile_left": { "roles": ["clip_sample", "transition_sample"], "altitude_class": "grounded", "support_contact": "both_feet", "planted_anchor": "left_foot", "wing_mode": "hidden", "staff_mode": "carried", "capability_tier": "B" },
-    "profile_right": { "roles": ["clip_sample", "transition_sample"], "altitude_class": "grounded", "support_contact": "both_feet", "planted_anchor": "right_foot", "wing_mode": "hidden", "staff_mode": "carried", "capability_tier": "B" },
-    "walk_front_left": { "roles": ["clip_sample"], "altitude_class": "grounded", "support_contact": "left_foot", "planted_anchor": "left_foot", "wing_mode": "extended", "staff_mode": "carried", "capability_tier": "A" },
-    "walk_front_right": { "roles": ["clip_sample"], "altitude_class": "grounded", "support_contact": "right_foot", "planted_anchor": "right_foot", "wing_mode": "extended", "staff_mode": "carried", "capability_tier": "A" },
-    "back_left": { "roles": ["clip_sample"], "altitude_class": "grounded", "support_contact": "left_foot", "planted_anchor": "left_foot", "wing_mode": "extended", "staff_mode": "carried", "capability_tier": "B" },
-    "back_right": { "roles": ["clip_sample"], "altitude_class": "grounded", "support_contact": "right_foot", "planted_anchor": "right_foot", "wing_mode": "extended", "staff_mode": "carried", "capability_tier": "B" },
-    "explaining": { "roles": ["clip_sample"], "altitude_class": "grounded", "support_contact": "both_feet", "planted_anchor": "left_foot", "wing_mode": "extended", "staff_mode": "carried", "capability_tier": "A" },
-    "magic_cast": { "roles": ["clip_sample"], "altitude_class": "grounded", "support_contact": "both_feet", "planted_anchor": "left_foot", "wing_mode": "extended", "staff_mode": "attack", "capability_tier": "A" },
-    "run_front_airborne_reach": { "roles": ["clip_sample"], "altitude_class": "airborne", "support_contact": "none", "planted_anchor": null, "wing_mode": "extended", "staff_mode": "carried", "capability_tier": "A" },
-    "run_front_airborne_drive": { "roles": ["clip_sample"], "altitude_class": "airborne", "support_contact": "none", "planted_anchor": null, "wing_mode": "extended", "staff_mode": "carried", "capability_tier": "A" },
-    "front_crouch_guard": { "roles": ["clip_sample", "transition_sample"], "altitude_class": "takeoff", "support_contact": "both_feet", "planted_anchor": "left_foot", "wing_mode": "folded", "staff_mode": "guard", "capability_tier": "A" },
-    "front_reaction_jump_fist_staff": { "roles": ["clip_sample"], "altitude_class": "airborne", "support_contact": "none", "planted_anchor": null, "wing_mode": "extended", "staff_mode": "carried", "capability_tier": "A" },
-    "front_kneel_staff_brace": { "roles": ["clip_sample", "transition_sample"], "altitude_class": "landing", "support_contact": "both_feet", "planted_anchor": "staff_tip", "wing_mode": "folded", "staff_mode": "planted", "capability_tier": "A" },
-    "front_staff_guard_windup": { "roles": ["clip_sample"], "altitude_class": "grounded", "support_contact": "both_feet", "planted_anchor": "left_foot", "wing_mode": "extended", "staff_mode": "guard", "capability_tier": "A" },
-    "front_staff_guard_low": { "roles": ["clip_sample", "transition_sample"], "altitude_class": "grounded", "support_contact": "both_feet", "planted_anchor": "left_foot", "wing_mode": "extended", "staff_mode": "guard", "capability_tier": "A" },
-    "walk_front_right_lift": { "roles": ["clip_sample"], "altitude_class": "grounded", "support_contact": "left_foot", "planted_anchor": "left_foot", "wing_mode": "extended", "staff_mode": "carried", "capability_tier": "A" },
-    "front_crouch_reaction_staff_planted": { "roles": ["clip_sample"], "altitude_class": "grounded", "support_contact": "staff", "planted_anchor": "staff_tip", "wing_mode": "folded", "staff_mode": "planted", "capability_tier": "A" },
-    "front_victory_cast": { "roles": ["clip_sample"], "altitude_class": "grounded", "support_contact": "both_feet", "planted_anchor": "left_foot", "wing_mode": "extended", "staff_mode": "attack", "capability_tier": "A" },
-    "fly_front_hover_neutral": { "roles": ["clip_sample", "transition_sample"], "altitude_class": "airborne", "support_contact": "none", "planted_anchor": null, "wing_mode": "extended", "staff_mode": "carried", "capability_tier": "A" },
-    "fly_front_knee_up": { "roles": ["clip_sample"], "altitude_class": "airborne", "support_contact": "none", "planted_anchor": null, "wing_mode": "extended", "staff_mode": "carried", "capability_tier": "A" },
-    "fly_front_wings_up": { "roles": ["clip_sample"], "altitude_class": "airborne", "support_contact": "none", "planted_anchor": null, "wing_mode": "upstroke", "staff_mode": "carried", "capability_tier": "A" },
-    "fly_front_wings_down": { "roles": ["clip_sample"], "altitude_class": "airborne", "support_contact": "none", "planted_anchor": null, "wing_mode": "downstroke", "staff_mode": "carried", "capability_tier": "A" },
-    "fly_southeast_forward_glide": { "roles": ["clip_sample"], "altitude_class": "airborne", "support_contact": "none", "planted_anchor": null, "wing_mode": "extended", "staff_mode": "carried", "capability_tier": "A" },
-    "fly_southwest_banked_staff": { "roles": ["clip_sample"], "altitude_class": "airborne", "support_contact": "none", "planted_anchor": null, "wing_mode": "banked", "staff_mode": "carried", "capability_tier": "B" },
-    "fly_southeast_banked_staff": { "roles": ["clip_sample"], "altitude_class": "airborne", "support_contact": "none", "planted_anchor": null, "wing_mode": "banked", "staff_mode": "carried", "capability_tier": "A" },
-    "fly_southeast_cheer": { "roles": ["clip_sample"], "altitude_class": "airborne", "support_contact": "none", "planted_anchor": null, "wing_mode": "extended", "staff_mode": "carried", "capability_tier": "A" },
-    "fly_southeast_staff_forward": { "roles": ["clip_sample"], "altitude_class": "airborne", "support_contact": "none", "planted_anchor": null, "wing_mode": "extended", "staff_mode": "attack", "capability_tier": "A" },
-    "front_run_charge_right_plant": { "roles": ["clip_sample"], "altitude_class": "grounded", "support_contact": "right_foot", "planted_anchor": "right_foot", "wing_mode": "extended", "staff_mode": "carried", "capability_tier": "A" },
-    "front_crouch_landing_staff_plant": { "roles": ["clip_sample", "transition_sample"], "altitude_class": "landing", "support_contact": "both_feet", "planted_anchor": "staff_tip", "wing_mode": "folded", "staff_mode": "planted", "capability_tier": "A" },
-    "front_magic_staff_thrust": { "roles": ["clip_sample"], "altitude_class": "grounded", "support_contact": "both_feet", "planted_anchor": "left_foot", "wing_mode": "extended", "staff_mode": "attack", "capability_tier": "A" },
-    "front_airborne_fall_back_staff": { "roles": ["clip_sample"], "altitude_class": "airborne", "support_contact": "none", "planted_anchor": null, "wing_mode": "extended", "staff_mode": "carried", "capability_tier": "A" },
-    "front_celebrate_wings_staff_up": { "roles": ["clip_sample"], "altitude_class": "grounded", "support_contact": "both_feet", "planted_anchor": "left_foot", "wing_mode": "extended", "staff_mode": "attack", "capability_tier": "A" },
-    "front_staff_block_horizontal": { "roles": ["clip_sample"], "altitude_class": "grounded", "support_contact": "both_feet", "planted_anchor": "left_foot", "wing_mode": "extended", "staff_mode": "guard", "capability_tier": "A" },
-    "front_point_direct_staff_held": { "roles": ["clip_sample"], "altitude_class": "grounded", "support_contact": "both_feet", "planted_anchor": "left_foot", "wing_mode": "extended", "staff_mode": "carried", "capability_tier": "A" },
-    "front_celebrate_jump_staff_up": { "roles": ["clip_sample"], "altitude_class": "airborne", "support_contact": "none", "planted_anchor": null, "wing_mode": "extended", "staff_mode": "attack", "capability_tier": "A" },
-    "front_shush_secret_staff_held": { "roles": ["clip_sample"], "altitude_class": "grounded", "support_contact": "both_feet", "planted_anchor": "left_foot", "wing_mode": "extended", "staff_mode": "carried", "capability_tier": "A" },
-    "front_staff_spin_flourish": { "roles": ["clip_sample"], "altitude_class": "grounded", "support_contact": "both_feet", "planted_anchor": "right_foot", "wing_mode": "extended", "staff_mode": "spin", "capability_tier": "A" }
+    "front_idle": {
+      "roles": [
+        "clip_sample",
+        "transition_sample"
+      ],
+      "altitude_class": "grounded",
+      "support_contact": "both_feet",
+      "planted_anchor": "left_foot",
+      "wing_mode": "extended",
+      "staff_mode": "carried",
+      "capability_tier": "A"
+    },
+    "back_idle": {
+      "roles": [
+        "clip_sample",
+        "transition_sample"
+      ],
+      "altitude_class": "grounded",
+      "support_contact": "both_feet",
+      "planted_anchor": "left_foot",
+      "wing_mode": "extended",
+      "staff_mode": "carried",
+      "capability_tier": "B"
+    },
+    "profile_left": {
+      "roles": [
+        "clip_sample",
+        "transition_sample"
+      ],
+      "altitude_class": "grounded",
+      "support_contact": "both_feet",
+      "planted_anchor": "left_foot",
+      "wing_mode": "hidden",
+      "staff_mode": "carried",
+      "capability_tier": "B"
+    },
+    "profile_right": {
+      "roles": [
+        "clip_sample",
+        "transition_sample"
+      ],
+      "altitude_class": "grounded",
+      "support_contact": "both_feet",
+      "planted_anchor": "right_foot",
+      "wing_mode": "hidden",
+      "staff_mode": "carried",
+      "capability_tier": "B"
+    },
+    "walk_front_left": {
+      "roles": [
+        "clip_sample"
+      ],
+      "altitude_class": "grounded",
+      "support_contact": "left_foot",
+      "planted_anchor": "left_foot",
+      "wing_mode": "extended",
+      "staff_mode": "carried",
+      "capability_tier": "A"
+    },
+    "walk_front_right": {
+      "roles": [
+        "clip_sample"
+      ],
+      "altitude_class": "grounded",
+      "support_contact": "right_foot",
+      "planted_anchor": "right_foot",
+      "wing_mode": "extended",
+      "staff_mode": "carried",
+      "capability_tier": "A"
+    },
+    "back_left": {
+      "roles": [
+        "clip_sample"
+      ],
+      "altitude_class": "grounded",
+      "support_contact": "left_foot",
+      "planted_anchor": "left_foot",
+      "wing_mode": "extended",
+      "staff_mode": "carried",
+      "capability_tier": "B"
+    },
+    "back_right": {
+      "roles": [
+        "clip_sample"
+      ],
+      "altitude_class": "grounded",
+      "support_contact": "right_foot",
+      "planted_anchor": "right_foot",
+      "wing_mode": "extended",
+      "staff_mode": "carried",
+      "capability_tier": "B"
+    },
+    "explaining": {
+      "roles": [
+        "clip_sample"
+      ],
+      "altitude_class": "grounded",
+      "support_contact": "both_feet",
+      "planted_anchor": "left_foot",
+      "wing_mode": "extended",
+      "staff_mode": "carried",
+      "capability_tier": "A"
+    },
+    "magic_cast": {
+      "roles": [
+        "clip_sample"
+      ],
+      "altitude_class": "grounded",
+      "support_contact": "both_feet",
+      "planted_anchor": "left_foot",
+      "wing_mode": "extended",
+      "staff_mode": "attack",
+      "capability_tier": "A"
+    },
+    "run_front_airborne_reach": {
+      "roles": [
+        "clip_sample"
+      ],
+      "altitude_class": "airborne",
+      "support_contact": "none",
+      "planted_anchor": null,
+      "wing_mode": "extended",
+      "staff_mode": "carried",
+      "capability_tier": "A"
+    },
+    "run_front_airborne_drive": {
+      "roles": [
+        "clip_sample"
+      ],
+      "altitude_class": "airborne",
+      "support_contact": "none",
+      "planted_anchor": null,
+      "wing_mode": "extended",
+      "staff_mode": "carried",
+      "capability_tier": "A"
+    },
+    "front_crouch_guard": {
+      "roles": [
+        "clip_sample",
+        "transition_sample"
+      ],
+      "altitude_class": "takeoff",
+      "support_contact": "both_feet",
+      "planted_anchor": "left_foot",
+      "wing_mode": "folded",
+      "staff_mode": "guard",
+      "capability_tier": "A"
+    },
+    "front_reaction_jump_fist_staff": {
+      "roles": [
+        "clip_sample"
+      ],
+      "altitude_class": "airborne",
+      "support_contact": "none",
+      "planted_anchor": null,
+      "wing_mode": "extended",
+      "staff_mode": "carried",
+      "capability_tier": "A"
+    },
+    "front_kneel_staff_brace": {
+      "roles": [
+        "clip_sample",
+        "transition_sample"
+      ],
+      "altitude_class": "landing",
+      "support_contact": "both_feet",
+      "planted_anchor": "staff_tip",
+      "wing_mode": "folded",
+      "staff_mode": "planted",
+      "capability_tier": "A"
+    },
+    "front_staff_guard_windup": {
+      "roles": [
+        "clip_sample"
+      ],
+      "altitude_class": "grounded",
+      "support_contact": "both_feet",
+      "planted_anchor": "left_foot",
+      "wing_mode": "extended",
+      "staff_mode": "guard",
+      "capability_tier": "A"
+    },
+    "front_staff_guard_low": {
+      "roles": [
+        "clip_sample",
+        "transition_sample"
+      ],
+      "altitude_class": "grounded",
+      "support_contact": "both_feet",
+      "planted_anchor": "left_foot",
+      "wing_mode": "extended",
+      "staff_mode": "guard",
+      "capability_tier": "A"
+    },
+    "walk_front_right_lift": {
+      "roles": [
+        "clip_sample"
+      ],
+      "altitude_class": "grounded",
+      "support_contact": "left_foot",
+      "planted_anchor": "left_foot",
+      "wing_mode": "extended",
+      "staff_mode": "carried",
+      "capability_tier": "A"
+    },
+    "front_crouch_reaction_staff_planted": {
+      "roles": [
+        "clip_sample"
+      ],
+      "altitude_class": "grounded",
+      "support_contact": "staff",
+      "planted_anchor": "staff_tip",
+      "wing_mode": "folded",
+      "staff_mode": "planted",
+      "capability_tier": "A"
+    },
+    "front_victory_cast": {
+      "roles": [
+        "clip_sample"
+      ],
+      "altitude_class": "grounded",
+      "support_contact": "both_feet",
+      "planted_anchor": "left_foot",
+      "wing_mode": "extended",
+      "staff_mode": "attack",
+      "capability_tier": "A"
+    },
+    "fly_front_hover_neutral": {
+      "roles": [
+        "clip_sample",
+        "transition_sample"
+      ],
+      "altitude_class": "airborne",
+      "support_contact": "none",
+      "planted_anchor": null,
+      "wing_mode": "extended",
+      "staff_mode": "carried",
+      "capability_tier": "A"
+    },
+    "fly_front_knee_up": {
+      "roles": [
+        "clip_sample"
+      ],
+      "altitude_class": "airborne",
+      "support_contact": "none",
+      "planted_anchor": null,
+      "wing_mode": "extended",
+      "staff_mode": "carried",
+      "capability_tier": "A"
+    },
+    "fly_front_wings_up": {
+      "roles": [
+        "clip_sample"
+      ],
+      "altitude_class": "airborne",
+      "support_contact": "none",
+      "planted_anchor": null,
+      "wing_mode": "upstroke",
+      "staff_mode": "carried",
+      "capability_tier": "A"
+    },
+    "fly_front_wings_down": {
+      "roles": [
+        "clip_sample"
+      ],
+      "altitude_class": "airborne",
+      "support_contact": "none",
+      "planted_anchor": null,
+      "wing_mode": "downstroke",
+      "staff_mode": "carried",
+      "capability_tier": "A"
+    },
+    "fly_southeast_forward_glide": {
+      "roles": [
+        "clip_sample"
+      ],
+      "altitude_class": "airborne",
+      "support_contact": "none",
+      "planted_anchor": null,
+      "wing_mode": "extended",
+      "staff_mode": "carried",
+      "capability_tier": "A"
+    },
+    "fly_southwest_banked_staff": {
+      "roles": [
+        "clip_sample"
+      ],
+      "altitude_class": "airborne",
+      "support_contact": "none",
+      "planted_anchor": null,
+      "wing_mode": "banked",
+      "staff_mode": "carried",
+      "capability_tier": "B"
+    },
+    "fly_southeast_banked_staff": {
+      "roles": [
+        "clip_sample"
+      ],
+      "altitude_class": "airborne",
+      "support_contact": "none",
+      "planted_anchor": null,
+      "wing_mode": "banked",
+      "staff_mode": "carried",
+      "capability_tier": "A"
+    },
+    "fly_southeast_cheer": {
+      "roles": [
+        "clip_sample"
+      ],
+      "altitude_class": "airborne",
+      "support_contact": "none",
+      "planted_anchor": null,
+      "wing_mode": "extended",
+      "staff_mode": "carried",
+      "capability_tier": "A"
+    },
+    "fly_southeast_staff_forward": {
+      "roles": [
+        "clip_sample"
+      ],
+      "altitude_class": "airborne",
+      "support_contact": "none",
+      "planted_anchor": null,
+      "wing_mode": "extended",
+      "staff_mode": "attack",
+      "capability_tier": "A"
+    },
+    "front_run_charge_right_plant": {
+      "roles": [
+        "clip_sample"
+      ],
+      "altitude_class": "grounded",
+      "support_contact": "right_foot",
+      "planted_anchor": "right_foot",
+      "wing_mode": "extended",
+      "staff_mode": "carried",
+      "capability_tier": "A"
+    },
+    "front_crouch_landing_staff_plant": {
+      "roles": [
+        "clip_sample",
+        "transition_sample"
+      ],
+      "altitude_class": "landing",
+      "support_contact": "both_feet",
+      "planted_anchor": "staff_tip",
+      "wing_mode": "folded",
+      "staff_mode": "planted",
+      "capability_tier": "A"
+    },
+    "front_magic_staff_thrust": {
+      "roles": [
+        "clip_sample"
+      ],
+      "altitude_class": "grounded",
+      "support_contact": "both_feet",
+      "planted_anchor": "left_foot",
+      "wing_mode": "extended",
+      "staff_mode": "attack",
+      "capability_tier": "A"
+    },
+    "front_airborne_fall_back_staff": {
+      "roles": [
+        "clip_sample"
+      ],
+      "altitude_class": "airborne",
+      "support_contact": "none",
+      "planted_anchor": null,
+      "wing_mode": "extended",
+      "staff_mode": "carried",
+      "capability_tier": "A"
+    },
+    "front_celebrate_wings_staff_up": {
+      "roles": [
+        "clip_sample"
+      ],
+      "altitude_class": "grounded",
+      "support_contact": "both_feet",
+      "planted_anchor": "left_foot",
+      "wing_mode": "extended",
+      "staff_mode": "attack",
+      "capability_tier": "A"
+    },
+    "front_staff_block_horizontal": {
+      "roles": [
+        "clip_sample"
+      ],
+      "altitude_class": "grounded",
+      "support_contact": "both_feet",
+      "planted_anchor": "left_foot",
+      "wing_mode": "extended",
+      "staff_mode": "guard",
+      "capability_tier": "A"
+    },
+    "front_point_direct_staff_held": {
+      "roles": [
+        "clip_sample"
+      ],
+      "altitude_class": "grounded",
+      "support_contact": "both_feet",
+      "planted_anchor": "left_foot",
+      "wing_mode": "extended",
+      "staff_mode": "carried",
+      "capability_tier": "A"
+    },
+    "front_celebrate_jump_staff_up": {
+      "roles": [
+        "clip_sample"
+      ],
+      "altitude_class": "airborne",
+      "support_contact": "none",
+      "planted_anchor": null,
+      "wing_mode": "extended",
+      "staff_mode": "attack",
+      "capability_tier": "A"
+    },
+    "front_shush_secret_staff_held": {
+      "roles": [
+        "clip_sample"
+      ],
+      "altitude_class": "grounded",
+      "support_contact": "both_feet",
+      "planted_anchor": "left_foot",
+      "wing_mode": "extended",
+      "staff_mode": "carried",
+      "capability_tier": "A"
+    },
+    "front_staff_spin_flourish": {
+      "roles": [
+        "clip_sample"
+      ],
+      "altitude_class": "grounded",
+      "support_contact": "both_feet",
+      "planted_anchor": "right_foot",
+      "wing_mode": "extended",
+      "staff_mode": "spin",
+      "capability_tier": "A"
+    },
+    "run_front_cross_step_wings_staff": {
+      "roles": [
+        "diagnostic_only"
+      ],
+      "altitude_class": "airborne",
+      "support_contact": "none",
+      "planted_anchor": null,
+      "wing_mode": "extended",
+      "staff_mode": "carried",
+      "capability_tier": "C"
+    },
+    "run_front_stride_wings_staff": {
+      "roles": [
+        "diagnostic_only"
+      ],
+      "altitude_class": "grounded",
+      "support_contact": "both_feet",
+      "planted_anchor": "left_foot",
+      "wing_mode": "extended",
+      "staff_mode": "carried",
+      "capability_tier": "C"
+    },
+    "front_crouch_guard_wings": {
+      "roles": [
+        "diagnostic_only"
+      ],
+      "altitude_class": "grounded",
+      "support_contact": "both_feet",
+      "planted_anchor": "left_foot",
+      "wing_mode": "extended",
+      "staff_mode": "guard",
+      "capability_tier": "C"
+    },
+    "front_reaction_jump_wings_staff": {
+      "roles": [
+        "diagnostic_only"
+      ],
+      "altitude_class": "airborne",
+      "support_contact": "none",
+      "planted_anchor": null,
+      "wing_mode": "extended",
+      "staff_mode": "carried",
+      "capability_tier": "C"
+    },
+    "front_kneel_staff_brace_wings": {
+      "roles": [
+        "diagnostic_only"
+      ],
+      "altitude_class": "grounded",
+      "support_contact": "both_feet",
+      "planted_anchor": "left_foot",
+      "wing_mode": "extended",
+      "staff_mode": "planted",
+      "capability_tier": "C"
+    },
+    "front_staff_guard_windup_wings": {
+      "roles": [
+        "diagnostic_only"
+      ],
+      "altitude_class": "grounded",
+      "support_contact": "both_feet",
+      "planted_anchor": "left_foot",
+      "wing_mode": "extended",
+      "staff_mode": "guard",
+      "capability_tier": "C"
+    },
+    "front_staff_guard_horizontal_wings": {
+      "roles": [
+        "diagnostic_only"
+      ],
+      "altitude_class": "grounded",
+      "support_contact": "both_feet",
+      "planted_anchor": "left_foot",
+      "wing_mode": "extended",
+      "staff_mode": "guard",
+      "capability_tier": "C"
+    },
+    "front_staff_guard_low_wings": {
+      "roles": [
+        "diagnostic_only"
+      ],
+      "altitude_class": "grounded",
+      "support_contact": "both_feet",
+      "planted_anchor": "left_foot",
+      "wing_mode": "extended",
+      "staff_mode": "guard",
+      "capability_tier": "C"
+    },
+    "front_crouch_staff_planted_wings": {
+      "roles": [
+        "diagnostic_only"
+      ],
+      "altitude_class": "grounded",
+      "support_contact": "both_feet",
+      "planted_anchor": "left_foot",
+      "wing_mode": "extended",
+      "staff_mode": "planted",
+      "capability_tier": "C"
+    },
+    "front_victory_cast_wings": {
+      "roles": [
+        "diagnostic_only"
+      ],
+      "altitude_class": "grounded",
+      "support_contact": "both_feet",
+      "planted_anchor": "left_foot",
+      "wing_mode": "extended",
+      "staff_mode": "carried",
+      "capability_tier": "C"
+    },
+    "front_run_charge_wings": {
+      "roles": [
+        "diagnostic_only"
+      ],
+      "altitude_class": "grounded",
+      "support_contact": "both_feet",
+      "planted_anchor": "left_foot",
+      "wing_mode": "extended",
+      "staff_mode": "carried",
+      "capability_tier": "C"
+    },
+    "front_crouch_hand_plant_wings": {
+      "roles": [
+        "diagnostic_only"
+      ],
+      "altitude_class": "grounded",
+      "support_contact": "both_feet",
+      "planted_anchor": "left_foot",
+      "wing_mode": "extended",
+      "staff_mode": "carried",
+      "capability_tier": "C"
+    },
+    "front_magic_staff_thrust_wings": {
+      "roles": [
+        "diagnostic_only"
+      ],
+      "altitude_class": "grounded",
+      "support_contact": "both_feet",
+      "planted_anchor": "left_foot",
+      "wing_mode": "extended",
+      "staff_mode": "attack",
+      "capability_tier": "C"
+    },
+    "front_airborne_fall_back_wings": {
+      "roles": [
+        "diagnostic_only"
+      ],
+      "altitude_class": "airborne",
+      "support_contact": "none",
+      "planted_anchor": null,
+      "wing_mode": "extended",
+      "staff_mode": "carried",
+      "capability_tier": "C"
+    },
+    "front_celebrate_staff_up_wings": {
+      "roles": [
+        "diagnostic_only"
+      ],
+      "altitude_class": "grounded",
+      "support_contact": "both_feet",
+      "planted_anchor": "left_foot",
+      "wing_mode": "extended",
+      "staff_mode": "carried",
+      "capability_tier": "C"
+    },
+    "front_staff_block_wings": {
+      "roles": [
+        "diagnostic_only"
+      ],
+      "altitude_class": "grounded",
+      "support_contact": "both_feet",
+      "planted_anchor": "left_foot",
+      "wing_mode": "extended",
+      "staff_mode": "guard",
+      "capability_tier": "C"
+    },
+    "front_point_direct_wings": {
+      "roles": [
+        "diagnostic_only"
+      ],
+      "altitude_class": "grounded",
+      "support_contact": "both_feet",
+      "planted_anchor": "left_foot",
+      "wing_mode": "extended",
+      "staff_mode": "carried",
+      "capability_tier": "C"
+    },
+    "front_celebrate_jump_wings": {
+      "roles": [
+        "diagnostic_only"
+      ],
+      "altitude_class": "airborne",
+      "support_contact": "none",
+      "planted_anchor": null,
+      "wing_mode": "extended",
+      "staff_mode": "carried",
+      "capability_tier": "C"
+    },
+    "front_shush_wings": {
+      "roles": [
+        "diagnostic_only"
+      ],
+      "altitude_class": "grounded",
+      "support_contact": "both_feet",
+      "planted_anchor": "left_foot",
+      "wing_mode": "extended",
+      "staff_mode": "carried",
+      "capability_tier": "C"
+    },
+    "front_staff_spin_wings": {
+      "roles": [
+        "diagnostic_only"
+      ],
+      "altitude_class": "grounded",
+      "support_contact": "both_feet",
+      "planted_anchor": "left_foot",
+      "wing_mode": "extended",
+      "staff_mode": "spin",
+      "capability_tier": "C"
+    },
+    "front_idle_wings": {
+      "roles": [
+        "diagnostic_only"
+      ],
+      "altitude_class": "grounded",
+      "support_contact": "both_feet",
+      "planted_anchor": "left_foot",
+      "wing_mode": "extended",
+      "staff_mode": "carried",
+      "capability_tier": "C"
+    },
+    "front_greeting_wave_wings": {
+      "roles": [
+        "diagnostic_only"
+      ],
+      "altitude_class": "grounded",
+      "support_contact": "both_feet",
+      "planted_anchor": "left_foot",
+      "wing_mode": "extended",
+      "staff_mode": "carried",
+      "capability_tier": "C"
+    },
+    "front_thinking_hand_chin_wings": {
+      "roles": [
+        "diagnostic_only"
+      ],
+      "altitude_class": "grounded",
+      "support_contact": "both_feet",
+      "planted_anchor": "left_foot",
+      "wing_mode": "extended",
+      "staff_mode": "carried",
+      "capability_tier": "C"
+    },
+    "front_explaining_open_hand_wings": {
+      "roles": [
+        "diagnostic_only"
+      ],
+      "altitude_class": "grounded",
+      "support_contact": "both_feet",
+      "planted_anchor": "left_foot",
+      "wing_mode": "extended",
+      "staff_mode": "carried",
+      "capability_tier": "C"
+    },
+    "front_point_side_wings": {
+      "roles": [
+        "diagnostic_only"
+      ],
+      "altitude_class": "grounded",
+      "support_contact": "both_feet",
+      "planted_anchor": "left_foot",
+      "wing_mode": "extended",
+      "staff_mode": "carried",
+      "capability_tier": "C"
+    },
+    "front_explaining_both_hands_wings": {
+      "roles": [
+        "diagnostic_only"
+      ],
+      "altitude_class": "grounded",
+      "support_contact": "both_feet",
+      "planted_anchor": "left_foot",
+      "wing_mode": "extended",
+      "staff_mode": "carried",
+      "capability_tier": "C"
+    },
+    "front_magic_staff_raise_wings": {
+      "roles": [
+        "diagnostic_only"
+      ],
+      "altitude_class": "grounded",
+      "support_contact": "both_feet",
+      "planted_anchor": "left_foot",
+      "wing_mode": "extended",
+      "staff_mode": "carried",
+      "capability_tier": "C"
+    },
+    "front_sincere_hand_heart_wings": {
+      "roles": [
+        "diagnostic_only"
+      ],
+      "altitude_class": "grounded",
+      "support_contact": "both_feet",
+      "planted_anchor": "left_foot",
+      "wing_mode": "extended",
+      "staff_mode": "carried",
+      "capability_tier": "C"
+    },
+    "front_playful_kick_wings": {
+      "roles": [
+        "diagnostic_only"
+      ],
+      "altitude_class": "grounded",
+      "support_contact": "both_feet",
+      "planted_anchor": "left_foot",
+      "wing_mode": "extended",
+      "staff_mode": "carried",
+      "capability_tier": "C"
+    },
+    "front_magic_staff_spark_wings": {
+      "roles": [
+        "diagnostic_only"
+      ],
+      "altitude_class": "grounded",
+      "support_contact": "both_feet",
+      "planted_anchor": "left_foot",
+      "wing_mode": "extended",
+      "staff_mode": "carried",
+      "capability_tier": "C"
+    },
+    "feeling_joy_full": {
+      "roles": [
+        "diagnostic_only"
+      ],
+      "altitude_class": "grounded",
+      "support_contact": "both_feet",
+      "planted_anchor": "left_foot",
+      "wing_mode": "extended",
+      "staff_mode": "carried",
+      "capability_tier": "C"
+    },
+    "feeling_sadness_full": {
+      "roles": [
+        "diagnostic_only"
+      ],
+      "altitude_class": "grounded",
+      "support_contact": "both_feet",
+      "planted_anchor": "left_foot",
+      "wing_mode": "extended",
+      "staff_mode": "carried",
+      "capability_tier": "C"
+    },
+    "feeling_anger_full": {
+      "roles": [
+        "diagnostic_only"
+      ],
+      "altitude_class": "grounded",
+      "support_contact": "both_feet",
+      "planted_anchor": "left_foot",
+      "wing_mode": "extended",
+      "staff_mode": "carried",
+      "capability_tier": "C"
+    },
+    "feeling_fear_full": {
+      "roles": [
+        "diagnostic_only"
+      ],
+      "altitude_class": "grounded",
+      "support_contact": "both_feet",
+      "planted_anchor": "left_foot",
+      "wing_mode": "extended",
+      "staff_mode": "carried",
+      "capability_tier": "C"
+    },
+    "feeling_shame_full": {
+      "roles": [
+        "diagnostic_only"
+      ],
+      "altitude_class": "grounded",
+      "support_contact": "both_feet",
+      "planted_anchor": "left_foot",
+      "wing_mode": "extended",
+      "staff_mode": "carried",
+      "capability_tier": "C"
+    },
+    "feeling_disgust_full": {
+      "roles": [
+        "diagnostic_only"
+      ],
+      "altitude_class": "grounded",
+      "support_contact": "both_feet",
+      "planted_anchor": "left_foot",
+      "wing_mode": "extended",
+      "staff_mode": "carried",
+      "capability_tier": "C"
+    },
+    "feeling_surprise_full": {
+      "roles": [
+        "diagnostic_only"
+      ],
+      "altitude_class": "grounded",
+      "support_contact": "both_feet",
+      "planted_anchor": "left_foot",
+      "wing_mode": "extended",
+      "staff_mode": "carried",
+      "capability_tier": "C"
+    },
+    "feeling_pride_full": {
+      "roles": [
+        "diagnostic_only"
+      ],
+      "altitude_class": "grounded",
+      "support_contact": "both_feet",
+      "planted_anchor": "left_foot",
+      "wing_mode": "extended",
+      "staff_mode": "carried",
+      "capability_tier": "C"
+    },
+    "feeling_guilt_full": {
+      "roles": [
+        "diagnostic_only"
+      ],
+      "altitude_class": "grounded",
+      "support_contact": "both_feet",
+      "planted_anchor": "left_foot",
+      "wing_mode": "extended",
+      "staff_mode": "carried",
+      "capability_tier": "C"
+    },
+    "feeling_love_full": {
+      "roles": [
+        "diagnostic_only"
+      ],
+      "altitude_class": "grounded",
+      "support_contact": "both_feet",
+      "planted_anchor": "left_foot",
+      "wing_mode": "extended",
+      "staff_mode": "carried",
+      "capability_tier": "C"
+    },
+    "feeling_joy_close": {
+      "roles": [
+        "diagnostic_only"
+      ],
+      "altitude_class": "grounded",
+      "support_contact": "both_feet",
+      "planted_anchor": "left_foot",
+      "wing_mode": "extended",
+      "staff_mode": "carried",
+      "capability_tier": "C"
+    },
+    "feeling_sadness_close": {
+      "roles": [
+        "diagnostic_only"
+      ],
+      "altitude_class": "grounded",
+      "support_contact": "both_feet",
+      "planted_anchor": "left_foot",
+      "wing_mode": "extended",
+      "staff_mode": "carried",
+      "capability_tier": "C"
+    },
+    "feeling_anger_close": {
+      "roles": [
+        "diagnostic_only"
+      ],
+      "altitude_class": "grounded",
+      "support_contact": "both_feet",
+      "planted_anchor": "left_foot",
+      "wing_mode": "extended",
+      "staff_mode": "carried",
+      "capability_tier": "C"
+    },
+    "feeling_fear_close": {
+      "roles": [
+        "diagnostic_only"
+      ],
+      "altitude_class": "grounded",
+      "support_contact": "both_feet",
+      "planted_anchor": "left_foot",
+      "wing_mode": "extended",
+      "staff_mode": "carried",
+      "capability_tier": "C"
+    },
+    "feeling_shame_close": {
+      "roles": [
+        "diagnostic_only"
+      ],
+      "altitude_class": "grounded",
+      "support_contact": "both_feet",
+      "planted_anchor": "left_foot",
+      "wing_mode": "extended",
+      "staff_mode": "carried",
+      "capability_tier": "C"
+    },
+    "feeling_disgust_close": {
+      "roles": [
+        "diagnostic_only"
+      ],
+      "altitude_class": "grounded",
+      "support_contact": "both_feet",
+      "planted_anchor": "left_foot",
+      "wing_mode": "extended",
+      "staff_mode": "carried",
+      "capability_tier": "C"
+    },
+    "feeling_surprise_close": {
+      "roles": [
+        "diagnostic_only"
+      ],
+      "altitude_class": "grounded",
+      "support_contact": "both_feet",
+      "planted_anchor": "left_foot",
+      "wing_mode": "extended",
+      "staff_mode": "carried",
+      "capability_tier": "C"
+    },
+    "feeling_pride_close": {
+      "roles": [
+        "diagnostic_only"
+      ],
+      "altitude_class": "grounded",
+      "support_contact": "both_feet",
+      "planted_anchor": "left_foot",
+      "wing_mode": "extended",
+      "staff_mode": "carried",
+      "capability_tier": "C"
+    },
+    "feeling_guilt_close": {
+      "roles": [
+        "diagnostic_only"
+      ],
+      "altitude_class": "grounded",
+      "support_contact": "both_feet",
+      "planted_anchor": "left_foot",
+      "wing_mode": "extended",
+      "staff_mode": "carried",
+      "capability_tier": "C"
+    },
+    "feeling_love_close": {
+      "roles": [
+        "diagnostic_only"
+      ],
+      "altitude_class": "grounded",
+      "support_contact": "both_feet",
+      "planted_anchor": "left_foot",
+      "wing_mode": "extended",
+      "staff_mode": "carried",
+      "capability_tier": "C"
+    }
   },
   "clips": {
     "idle_front": {
-      "clip_id": "idle_front", "family": "idle", "supported_facings": ["south", "southeast", "southwest"], "loop_mode": "loop", "phase_source": "time", "root_policy": "fixed", "minimum_hold_ticks": 1, "interrupt_policy": "immediate", "channel_ownership": ["body", "staff", "wings"],
-      "samples": [{ "pose_id": "front_idle", "duration_frames": 16, "support_contact": "both_feet", "planted_anchor": "left_foot", "markers": [{ "id": "both_contact", "frame_offset": 0 }, { "id": "loop_boundary", "frame_offset": 15 }] }],
-      "entry_markers": ["both_contact"], "exit_markers": ["loop_boundary"], "secondary_curves": { "body": "idle_breathe", "wings": "idle_wing_settle" },
-      "legal_successors": ["idle_front", "walk_front", "run_charge_front", "takeoff_front", "turn_views", "cast_front", "guard_front", "block_front", "flourish_front", "victory_cast_front", "explain_front", "point_front", "shush_front", "celebrate_front", "hit_fall_recover_front"]
+      "clip_id": "idle_front",
+      "family": "idle",
+      "supported_facings": [
+        "south",
+        "southeast",
+        "southwest"
+      ],
+      "loop_mode": "loop",
+      "phase_source": "time",
+      "root_policy": "fixed",
+      "minimum_hold_ticks": 1,
+      "interrupt_policy": "immediate",
+      "channel_ownership": [
+        "body",
+        "staff",
+        "wings"
+      ],
+      "samples": [
+        {
+          "pose_id": "front_idle",
+          "duration_frames": 16,
+          "support_contact": "both_feet",
+          "planted_anchor": "left_foot",
+          "markers": [
+            {
+              "id": "both_contact",
+              "frame_offset": 0
+            },
+            {
+              "id": "loop_boundary",
+              "frame_offset": 15
+            }
+          ]
+        }
+      ],
+      "entry_markers": [
+        "both_contact"
+      ],
+      "exit_markers": [
+        "loop_boundary"
+      ],
+      "secondary_curves": {
+        "body": "idle_breathe",
+        "wings": "idle_wing_settle"
+      },
+      "legal_successors": [
+        "idle_front",
+        "walk_front",
+        "run_charge_front",
+        "takeoff_front",
+        "turn_views",
+        "cast_front",
+        "guard_front",
+        "block_front",
+        "flourish_front",
+        "victory_cast_front",
+        "explain_front",
+        "point_front",
+        "shush_front",
+        "celebrate_front",
+        "hit_fall_recover_front"
+      ]
     },
     "idle_back": {
-      "clip_id": "idle_back", "family": "idle", "supported_facings": ["north", "northeast", "northwest"], "loop_mode": "loop", "phase_source": "time", "root_policy": "fixed", "minimum_hold_ticks": 1, "interrupt_policy": "immediate", "channel_ownership": ["body", "staff", "wings"],
-      "samples": [{ "pose_id": "back_idle", "duration_frames": 16, "support_contact": "both_feet", "planted_anchor": "left_foot", "markers": [{ "id": "both_contact", "frame_offset": 0 }, { "id": "loop_boundary", "frame_offset": 15 }] }],
-      "entry_markers": ["both_contact"], "exit_markers": ["loop_boundary"], "secondary_curves": { "body": "idle_breathe" }, "legal_successors": ["idle_back", "walk_back", "turn_views"]
+      "clip_id": "idle_back",
+      "family": "idle",
+      "supported_facings": [
+        "north",
+        "northeast",
+        "northwest"
+      ],
+      "loop_mode": "loop",
+      "phase_source": "time",
+      "root_policy": "fixed",
+      "minimum_hold_ticks": 1,
+      "interrupt_policy": "immediate",
+      "channel_ownership": [
+        "body",
+        "staff",
+        "wings"
+      ],
+      "samples": [
+        {
+          "pose_id": "back_idle",
+          "duration_frames": 16,
+          "support_contact": "both_feet",
+          "planted_anchor": "left_foot",
+          "markers": [
+            {
+              "id": "both_contact",
+              "frame_offset": 0
+            },
+            {
+              "id": "loop_boundary",
+              "frame_offset": 15
+            }
+          ]
+        }
+      ],
+      "entry_markers": [
+        "both_contact"
+      ],
+      "exit_markers": [
+        "loop_boundary"
+      ],
+      "secondary_curves": {
+        "body": "idle_breathe"
+      },
+      "legal_successors": [
+        "idle_back",
+        "walk_back",
+        "turn_views"
+      ]
     },
     "idle_left": {
-      "clip_id": "idle_left", "family": "idle", "supported_facings": ["west"], "loop_mode": "loop", "phase_source": "time", "root_policy": "fixed", "minimum_hold_ticks": 1, "interrupt_policy": "immediate", "channel_ownership": ["body", "staff"],
-      "samples": [{ "pose_id": "profile_left", "duration_frames": 16, "support_contact": "both_feet", "planted_anchor": "left_foot", "markers": [{ "id": "both_contact", "frame_offset": 0 }, { "id": "loop_boundary", "frame_offset": 15 }] }],
-      "entry_markers": ["both_contact"], "exit_markers": ["loop_boundary"], "secondary_curves": { "body": "idle_breathe" }, "legal_successors": ["idle_left", "turn_views"]
+      "clip_id": "idle_left",
+      "family": "idle",
+      "supported_facings": [
+        "west"
+      ],
+      "loop_mode": "loop",
+      "phase_source": "time",
+      "root_policy": "fixed",
+      "minimum_hold_ticks": 1,
+      "interrupt_policy": "immediate",
+      "channel_ownership": [
+        "body",
+        "staff"
+      ],
+      "samples": [
+        {
+          "pose_id": "profile_left",
+          "duration_frames": 16,
+          "support_contact": "both_feet",
+          "planted_anchor": "left_foot",
+          "markers": [
+            {
+              "id": "both_contact",
+              "frame_offset": 0
+            },
+            {
+              "id": "loop_boundary",
+              "frame_offset": 15
+            }
+          ]
+        }
+      ],
+      "entry_markers": [
+        "both_contact"
+      ],
+      "exit_markers": [
+        "loop_boundary"
+      ],
+      "secondary_curves": {
+        "body": "idle_breathe"
+      },
+      "legal_successors": [
+        "idle_left",
+        "turn_views"
+      ]
     },
     "idle_right": {
-      "clip_id": "idle_right", "family": "idle", "supported_facings": ["east"], "loop_mode": "loop", "phase_source": "time", "root_policy": "fixed", "minimum_hold_ticks": 1, "interrupt_policy": "immediate", "channel_ownership": ["body", "staff"],
-      "samples": [{ "pose_id": "profile_right", "duration_frames": 16, "support_contact": "both_feet", "planted_anchor": "right_foot", "markers": [{ "id": "both_contact", "frame_offset": 0 }, { "id": "loop_boundary", "frame_offset": 15 }] }],
-      "entry_markers": ["both_contact"], "exit_markers": ["loop_boundary"], "secondary_curves": { "body": "idle_breathe" }, "legal_successors": ["idle_right", "turn_views"]
+      "clip_id": "idle_right",
+      "family": "idle",
+      "supported_facings": [
+        "east"
+      ],
+      "loop_mode": "loop",
+      "phase_source": "time",
+      "root_policy": "fixed",
+      "minimum_hold_ticks": 1,
+      "interrupt_policy": "immediate",
+      "channel_ownership": [
+        "body",
+        "staff"
+      ],
+      "samples": [
+        {
+          "pose_id": "profile_right",
+          "duration_frames": 16,
+          "support_contact": "both_feet",
+          "planted_anchor": "right_foot",
+          "markers": [
+            {
+              "id": "both_contact",
+              "frame_offset": 0
+            },
+            {
+              "id": "loop_boundary",
+              "frame_offset": 15
+            }
+          ]
+        }
+      ],
+      "entry_markers": [
+        "both_contact"
+      ],
+      "exit_markers": [
+        "loop_boundary"
+      ],
+      "secondary_curves": {
+        "body": "idle_breathe"
+      },
+      "legal_successors": [
+        "idle_right",
+        "turn_views"
+      ]
     },
     "turn_views": {
-      "clip_id": "turn_views", "family": "transition", "supported_facings": ["north", "northeast", "east", "southeast", "south", "southwest", "west", "northwest"], "loop_mode": "once", "phase_source": "none", "root_policy": "contact_locked", "minimum_hold_ticks": 3, "interrupt_policy": "at_marker", "channel_ownership": ["body", "staff", "wings"],
-      "samples": [{ "pose_id": "profile_left", "duration_frames": 3, "support_contact": "both_feet", "planted_anchor": "left_foot", "markers": [{ "id": "both_contact", "frame_offset": 0 }] }, { "pose_id": "profile_right", "duration_frames": 3, "support_contact": "both_feet", "planted_anchor": "right_foot", "markers": [{ "id": "action_recoverable", "frame_offset": 2 }] }],
-      "entry_markers": ["both_contact"], "exit_markers": ["action_recoverable"], "secondary_curves": { "staff": "turn_staff_lag" }, "legal_successors": ["idle_front", "idle_back", "idle_left", "idle_right", "turn_views"]
+      "clip_id": "turn_views",
+      "family": "transition",
+      "supported_facings": [
+        "north",
+        "northeast",
+        "east",
+        "southeast",
+        "south",
+        "southwest",
+        "west",
+        "northwest"
+      ],
+      "loop_mode": "once",
+      "phase_source": "none",
+      "root_policy": "contact_locked",
+      "minimum_hold_ticks": 3,
+      "interrupt_policy": "at_marker",
+      "channel_ownership": [
+        "body",
+        "staff",
+        "wings"
+      ],
+      "samples": [
+        {
+          "pose_id": "profile_left",
+          "duration_frames": 3,
+          "support_contact": "both_feet",
+          "planted_anchor": "left_foot",
+          "markers": [
+            {
+              "id": "both_contact",
+              "frame_offset": 0
+            }
+          ]
+        },
+        {
+          "pose_id": "profile_right",
+          "duration_frames": 3,
+          "support_contact": "both_feet",
+          "planted_anchor": "right_foot",
+          "markers": [
+            {
+              "id": "action_recoverable",
+              "frame_offset": 2
+            }
+          ]
+        }
+      ],
+      "entry_markers": [
+        "both_contact"
+      ],
+      "exit_markers": [
+        "action_recoverable"
+      ],
+      "secondary_curves": {
+        "staff": "turn_staff_lag"
+      },
+      "legal_successors": [
+        "idle_front",
+        "idle_back",
+        "idle_left",
+        "idle_right",
+        "turn_views"
+      ]
     },
     "walk_front": {
-      "clip_id": "walk_front", "family": "locomotion", "supported_facings": ["south", "southeast", "southwest"], "loop_mode": "loop", "phase_source": "ground_distance", "root_policy": "contact_locked", "minimum_hold_ticks": 1, "interrupt_policy": "at_marker", "channel_ownership": ["body", "staff", "wings"],
-      "samples": [
-        { "pose_id": "walk_front_left", "duration_frames": 4, "support_contact": "left_foot", "planted_anchor": "left_foot", "normalized_distance": 0.0, "markers": [{ "id": "left_contact", "frame_offset": 0 }] },
-        { "pose_id": "front_idle", "duration_frames": 4, "support_contact": "left_foot", "planted_anchor": "left_foot", "normalized_distance": 0.25, "markers": [{ "id": "left_release", "frame_offset": 0 }] },
-        { "pose_id": "walk_front_right", "duration_frames": 4, "support_contact": "right_foot", "planted_anchor": "right_foot", "normalized_distance": 0.5, "markers": [{ "id": "right_contact", "frame_offset": 0 }] },
-        { "pose_id": "walk_front_right_lift", "duration_frames": 4, "support_contact": "left_foot", "planted_anchor": "left_foot", "normalized_distance": 0.75, "markers": [{ "id": "right_release", "frame_offset": 0 }, { "id": "loop_boundary", "frame_offset": 3 }] }
+      "clip_id": "walk_front",
+      "family": "locomotion",
+      "supported_facings": [
+        "south",
+        "southeast",
+        "southwest"
       ],
-      "entry_markers": ["left_contact", "right_contact"], "exit_markers": ["left_contact", "right_contact"], "secondary_curves": { "body": "walk_bob", "staff": "walk_staff_lag", "robe": "walk_robe_lag" }, "legal_successors": ["walk_front", "idle_front", "run_charge_front", "block_front", "turn_views"]
+      "loop_mode": "loop",
+      "phase_source": "ground_distance",
+      "root_policy": "contact_locked",
+      "minimum_hold_ticks": 1,
+      "interrupt_policy": "at_marker",
+      "channel_ownership": [
+        "body",
+        "staff",
+        "wings"
+      ],
+      "samples": [
+        {
+          "pose_id": "walk_front_left",
+          "duration_frames": 4,
+          "support_contact": "left_foot",
+          "planted_anchor": "left_foot",
+          "normalized_distance": 0.0,
+          "markers": [
+            {
+              "id": "left_contact",
+              "frame_offset": 0
+            }
+          ]
+        },
+        {
+          "pose_id": "front_idle",
+          "duration_frames": 4,
+          "support_contact": "left_foot",
+          "planted_anchor": "left_foot",
+          "normalized_distance": 0.25,
+          "markers": [
+            {
+              "id": "left_release",
+              "frame_offset": 0
+            }
+          ]
+        },
+        {
+          "pose_id": "walk_front_right",
+          "duration_frames": 4,
+          "support_contact": "right_foot",
+          "planted_anchor": "right_foot",
+          "normalized_distance": 0.5,
+          "markers": [
+            {
+              "id": "right_contact",
+              "frame_offset": 0
+            }
+          ]
+        },
+        {
+          "pose_id": "walk_front_right_lift",
+          "duration_frames": 4,
+          "support_contact": "left_foot",
+          "planted_anchor": "left_foot",
+          "normalized_distance": 0.75,
+          "markers": [
+            {
+              "id": "right_release",
+              "frame_offset": 0
+            },
+            {
+              "id": "loop_boundary",
+              "frame_offset": 3
+            }
+          ]
+        }
+      ],
+      "entry_markers": [
+        "left_contact",
+        "right_contact"
+      ],
+      "exit_markers": [
+        "left_contact",
+        "right_contact"
+      ],
+      "secondary_curves": {
+        "body": "walk_bob",
+        "staff": "walk_staff_lag",
+        "robe": "walk_robe_lag"
+      },
+      "legal_successors": [
+        "walk_front",
+        "idle_front",
+        "run_charge_front",
+        "block_front",
+        "turn_views"
+      ]
     },
     "walk_back": {
-      "clip_id": "walk_back", "family": "locomotion", "supported_facings": ["north", "northeast", "northwest"], "loop_mode": "loop", "phase_source": "ground_distance", "root_policy": "contact_locked", "minimum_hold_ticks": 1, "interrupt_policy": "at_marker", "channel_ownership": ["body", "staff", "wings"],
-      "samples": [
-        { "pose_id": "back_left", "duration_frames": 4, "support_contact": "left_foot", "planted_anchor": "left_foot", "normalized_distance": 0.0, "markers": [{ "id": "left_contact", "frame_offset": 0 }] },
-        { "pose_id": "back_idle", "duration_frames": 4, "support_contact": "left_foot", "planted_anchor": "left_foot", "normalized_distance": 0.25, "markers": [{ "id": "left_release", "frame_offset": 0 }] },
-        { "pose_id": "back_right", "duration_frames": 4, "support_contact": "right_foot", "planted_anchor": "right_foot", "normalized_distance": 0.5, "markers": [{ "id": "right_contact", "frame_offset": 0 }] },
-        { "pose_id": "back_idle", "duration_frames": 4, "support_contact": "right_foot", "planted_anchor": "right_foot", "normalized_distance": 0.75, "markers": [{ "id": "right_release", "frame_offset": 0 }, { "id": "loop_boundary", "frame_offset": 3 }] }
+      "clip_id": "walk_back",
+      "family": "locomotion",
+      "supported_facings": [
+        "north",
+        "northeast",
+        "northwest"
       ],
-      "entry_markers": ["left_contact", "right_contact"], "exit_markers": ["left_contact", "right_contact"], "secondary_curves": { "body": "walk_bob", "staff": "walk_staff_lag" }, "legal_successors": ["walk_back", "idle_back", "turn_views"]
+      "loop_mode": "loop",
+      "phase_source": "ground_distance",
+      "root_policy": "contact_locked",
+      "minimum_hold_ticks": 1,
+      "interrupt_policy": "at_marker",
+      "channel_ownership": [
+        "body",
+        "staff",
+        "wings"
+      ],
+      "samples": [
+        {
+          "pose_id": "back_left",
+          "duration_frames": 4,
+          "support_contact": "left_foot",
+          "planted_anchor": "left_foot",
+          "normalized_distance": 0.0,
+          "markers": [
+            {
+              "id": "left_contact",
+              "frame_offset": 0
+            }
+          ]
+        },
+        {
+          "pose_id": "back_idle",
+          "duration_frames": 4,
+          "support_contact": "left_foot",
+          "planted_anchor": "left_foot",
+          "normalized_distance": 0.25,
+          "markers": [
+            {
+              "id": "left_release",
+              "frame_offset": 0
+            }
+          ]
+        },
+        {
+          "pose_id": "back_right",
+          "duration_frames": 4,
+          "support_contact": "right_foot",
+          "planted_anchor": "right_foot",
+          "normalized_distance": 0.5,
+          "markers": [
+            {
+              "id": "right_contact",
+              "frame_offset": 0
+            }
+          ]
+        },
+        {
+          "pose_id": "back_idle",
+          "duration_frames": 4,
+          "support_contact": "right_foot",
+          "planted_anchor": "right_foot",
+          "normalized_distance": 0.75,
+          "markers": [
+            {
+              "id": "right_release",
+              "frame_offset": 0
+            },
+            {
+              "id": "loop_boundary",
+              "frame_offset": 3
+            }
+          ]
+        }
+      ],
+      "entry_markers": [
+        "left_contact",
+        "right_contact"
+      ],
+      "exit_markers": [
+        "left_contact",
+        "right_contact"
+      ],
+      "secondary_curves": {
+        "body": "walk_bob",
+        "staff": "walk_staff_lag"
+      },
+      "legal_successors": [
+        "walk_back",
+        "idle_back",
+        "turn_views"
+      ]
     },
     "run_charge_front": {
-      "clip_id": "run_charge_front", "family": "locomotion", "supported_facings": ["south"], "loop_mode": "once", "phase_source": "ground_distance", "root_policy": "ground_distance", "minimum_hold_ticks": 1, "interrupt_policy": "after_commit", "channel_ownership": ["body", "staff", "wings"],
-      "samples": [{ "pose_id": "front_run_charge_right_plant", "duration_frames": 4, "support_contact": "right_foot", "planted_anchor": "right_foot", "normalized_distance": 0.0, "markers": [{ "id": "right_contact", "frame_offset": 0 }, { "id": "right_release", "frame_offset": 3 }] }, { "pose_id": "run_front_airborne_reach", "duration_frames": 2, "support_contact": "none", "planted_anchor": null, "normalized_distance": 0.45, "markers": [{ "id": "airborne", "frame_offset": 0 }, { "id": "action_commit", "frame_offset": 1 }] }, { "pose_id": "run_front_airborne_drive", "duration_frames": 3, "support_contact": "none", "planted_anchor": null, "normalized_distance": 0.75, "markers": [{ "id": "action_recoverable", "frame_offset": 2 }] }],
-      "entry_markers": ["right_contact"], "exit_markers": ["action_recoverable"], "secondary_curves": { "robe": "run_robe_lag", "staff": "run_staff_lag" }, "legal_successors": ["run_land_front"]
+      "clip_id": "run_charge_front",
+      "family": "locomotion",
+      "supported_facings": [
+        "south"
+      ],
+      "loop_mode": "once",
+      "phase_source": "ground_distance",
+      "root_policy": "ground_distance",
+      "minimum_hold_ticks": 1,
+      "interrupt_policy": "after_commit",
+      "channel_ownership": [
+        "body",
+        "staff",
+        "wings"
+      ],
+      "samples": [
+        {
+          "pose_id": "front_run_charge_right_plant",
+          "duration_frames": 4,
+          "support_contact": "right_foot",
+          "planted_anchor": "right_foot",
+          "normalized_distance": 0.0,
+          "markers": [
+            {
+              "id": "right_contact",
+              "frame_offset": 0
+            },
+            {
+              "id": "right_release",
+              "frame_offset": 3
+            }
+          ]
+        },
+        {
+          "pose_id": "run_front_airborne_reach",
+          "duration_frames": 2,
+          "support_contact": "none",
+          "planted_anchor": null,
+          "normalized_distance": 0.45,
+          "markers": [
+            {
+              "id": "airborne",
+              "frame_offset": 0
+            },
+            {
+              "id": "action_commit",
+              "frame_offset": 1
+            }
+          ]
+        },
+        {
+          "pose_id": "run_front_airborne_drive",
+          "duration_frames": 3,
+          "support_contact": "none",
+          "planted_anchor": null,
+          "normalized_distance": 0.75,
+          "markers": [
+            {
+              "id": "action_recoverable",
+              "frame_offset": 2
+            }
+          ]
+        }
+      ],
+      "entry_markers": [
+        "right_contact"
+      ],
+      "exit_markers": [
+        "action_recoverable"
+      ],
+      "secondary_curves": {
+        "robe": "run_robe_lag",
+        "staff": "run_staff_lag"
+      },
+      "legal_successors": [
+        "run_land_front"
+      ]
     },
     "run_land_front": {
-      "clip_id": "run_land_front", "family": "locomotion", "supported_facings": ["south"], "loop_mode": "once", "phase_source": "none", "root_policy": "contact_locked", "minimum_hold_ticks": 3, "interrupt_policy": "at_marker", "channel_ownership": ["body", "staff", "wings"],
-      "samples": [{ "pose_id": "front_crouch_landing_staff_plant", "duration_frames": 3, "support_contact": "both_feet", "planted_anchor": "staff_tip", "markers": [{ "id": "landing_contact", "frame_offset": 0 }, { "id": "staff_contact", "frame_offset": 0 }] }, { "pose_id": "front_kneel_staff_brace", "duration_frames": 5, "support_contact": "staff", "planted_anchor": "staff_tip", "markers": [{ "id": "landing_settled", "frame_offset": 2 }] }, { "pose_id": "front_idle", "duration_frames": 4, "support_contact": "both_feet", "planted_anchor": "left_foot", "markers": [{ "id": "action_recoverable", "frame_offset": 0 }] }],
-      "entry_markers": ["landing_contact"], "exit_markers": ["action_recoverable"], "secondary_curves": { "wings": "landing_wing_settle" }, "legal_successors": ["idle_front"]
+      "clip_id": "run_land_front",
+      "family": "locomotion",
+      "supported_facings": [
+        "south"
+      ],
+      "loop_mode": "once",
+      "phase_source": "none",
+      "root_policy": "contact_locked",
+      "minimum_hold_ticks": 3,
+      "interrupt_policy": "at_marker",
+      "channel_ownership": [
+        "body",
+        "staff",
+        "wings"
+      ],
+      "samples": [
+        {
+          "pose_id": "front_crouch_landing_staff_plant",
+          "duration_frames": 3,
+          "support_contact": "both_feet",
+          "planted_anchor": "staff_tip",
+          "markers": [
+            {
+              "id": "landing_contact",
+              "frame_offset": 0
+            },
+            {
+              "id": "staff_contact",
+              "frame_offset": 0
+            }
+          ]
+        },
+        {
+          "pose_id": "front_kneel_staff_brace",
+          "duration_frames": 5,
+          "support_contact": "staff",
+          "planted_anchor": "staff_tip",
+          "markers": [
+            {
+              "id": "landing_settled",
+              "frame_offset": 2
+            }
+          ]
+        },
+        {
+          "pose_id": "front_idle",
+          "duration_frames": 4,
+          "support_contact": "both_feet",
+          "planted_anchor": "left_foot",
+          "markers": [
+            {
+              "id": "action_recoverable",
+              "frame_offset": 0
+            }
+          ]
+        }
+      ],
+      "entry_markers": [
+        "landing_contact"
+      ],
+      "exit_markers": [
+        "action_recoverable"
+      ],
+      "secondary_curves": {
+        "wings": "landing_wing_settle"
+      },
+      "legal_successors": [
+        "idle_front"
+      ]
     },
     "takeoff_front": {
-      "clip_id": "takeoff_front", "family": "flight", "supported_facings": ["south"], "loop_mode": "once", "phase_source": "flap_phase", "root_policy": "contact_locked", "minimum_hold_ticks": 3, "interrupt_policy": "after_commit", "channel_ownership": ["body", "staff", "wings"],
-      "samples": [{ "pose_id": "front_idle", "duration_frames": 2, "support_contact": "both_feet", "planted_anchor": "left_foot", "markers": [{ "id": "both_contact", "frame_offset": 0 }] }, { "pose_id": "front_crouch_guard", "duration_frames": 4, "support_contact": "both_feet", "planted_anchor": "left_foot", "markers": [{ "id": "takeoff_commit", "frame_offset": 3 }] }, { "pose_id": "fly_front_wings_down", "duration_frames": 3, "support_contact": "none", "planted_anchor": null, "markers": [{ "id": "airborne", "frame_offset": 0 }, { "id": "flap_down_peak", "frame_offset": 1 }] }, { "pose_id": "fly_front_hover_neutral", "duration_frames": 4, "support_contact": "none", "planted_anchor": null, "markers": [{ "id": "action_recoverable", "frame_offset": 3 }] }],
-      "entry_markers": ["both_contact"], "exit_markers": ["action_recoverable"], "secondary_curves": { "body": "takeoff_rise", "wings": "takeoff_flap" }, "legal_successors": ["idle_front", "hover_front"]
+      "clip_id": "takeoff_front",
+      "family": "flight",
+      "supported_facings": [
+        "south"
+      ],
+      "loop_mode": "once",
+      "phase_source": "flap_phase",
+      "root_policy": "contact_locked",
+      "minimum_hold_ticks": 3,
+      "interrupt_policy": "after_commit",
+      "channel_ownership": [
+        "body",
+        "staff",
+        "wings"
+      ],
+      "samples": [
+        {
+          "pose_id": "front_idle",
+          "duration_frames": 2,
+          "support_contact": "both_feet",
+          "planted_anchor": "left_foot",
+          "markers": [
+            {
+              "id": "both_contact",
+              "frame_offset": 0
+            }
+          ]
+        },
+        {
+          "pose_id": "front_crouch_guard",
+          "duration_frames": 4,
+          "support_contact": "both_feet",
+          "planted_anchor": "left_foot",
+          "markers": [
+            {
+              "id": "takeoff_commit",
+              "frame_offset": 3
+            }
+          ]
+        },
+        {
+          "pose_id": "fly_front_wings_down",
+          "duration_frames": 3,
+          "support_contact": "none",
+          "planted_anchor": null,
+          "markers": [
+            {
+              "id": "airborne",
+              "frame_offset": 0
+            },
+            {
+              "id": "flap_down_peak",
+              "frame_offset": 1
+            }
+          ]
+        },
+        {
+          "pose_id": "fly_front_hover_neutral",
+          "duration_frames": 4,
+          "support_contact": "none",
+          "planted_anchor": null,
+          "markers": [
+            {
+              "id": "action_recoverable",
+              "frame_offset": 3
+            }
+          ]
+        }
+      ],
+      "entry_markers": [
+        "both_contact"
+      ],
+      "exit_markers": [
+        "action_recoverable"
+      ],
+      "secondary_curves": {
+        "body": "takeoff_rise",
+        "wings": "takeoff_flap"
+      },
+      "legal_successors": [
+        "idle_front",
+        "hover_front"
+      ]
     },
     "hover_front": {
-      "clip_id": "hover_front", "family": "flight", "supported_facings": ["south"], "loop_mode": "loop", "phase_source": "flap_phase", "root_policy": "air_trajectory", "minimum_hold_ticks": 1, "interrupt_policy": "immediate", "channel_ownership": ["body", "staff", "wings"],
-      "samples": [{ "pose_id": "fly_front_hover_neutral", "duration_frames": 5, "support_contact": "none", "planted_anchor": null, "markers": [] }, { "pose_id": "fly_front_knee_up", "duration_frames": 3, "support_contact": "none", "planted_anchor": null, "markers": [] }, { "pose_id": "fly_front_wings_up", "duration_frames": 5, "support_contact": "none", "planted_anchor": null, "markers": [{ "id": "flap_up_peak", "frame_offset": 2 }] }, { "pose_id": "fly_front_wings_down", "duration_frames": 3, "support_contact": "none", "planted_anchor": null, "markers": [{ "id": "flap_down_peak", "frame_offset": 1 }, { "id": "loop_boundary", "frame_offset": 2 }] }],
-      "entry_markers": ["flap_up_peak", "flap_down_peak"], "exit_markers": ["flap_up_peak", "flap_down_peak"], "secondary_curves": { "body": "hover_bob", "staff": "hover_staff_lag" }, "legal_successors": ["hover_front", "glide_southeast", "bank_left", "bank_right", "air_reaction", "celebrate_air", "air_staff_forward", "land_front"]
+      "clip_id": "hover_front",
+      "family": "flight",
+      "supported_facings": [
+        "south"
+      ],
+      "loop_mode": "loop",
+      "phase_source": "flap_phase",
+      "root_policy": "air_trajectory",
+      "minimum_hold_ticks": 1,
+      "interrupt_policy": "immediate",
+      "channel_ownership": [
+        "body",
+        "staff",
+        "wings"
+      ],
+      "samples": [
+        {
+          "pose_id": "fly_front_hover_neutral",
+          "duration_frames": 5,
+          "support_contact": "none",
+          "planted_anchor": null,
+          "markers": []
+        },
+        {
+          "pose_id": "fly_front_knee_up",
+          "duration_frames": 3,
+          "support_contact": "none",
+          "planted_anchor": null,
+          "markers": []
+        },
+        {
+          "pose_id": "fly_front_wings_up",
+          "duration_frames": 5,
+          "support_contact": "none",
+          "planted_anchor": null,
+          "markers": [
+            {
+              "id": "flap_up_peak",
+              "frame_offset": 2
+            }
+          ]
+        },
+        {
+          "pose_id": "fly_front_wings_down",
+          "duration_frames": 3,
+          "support_contact": "none",
+          "planted_anchor": null,
+          "markers": [
+            {
+              "id": "flap_down_peak",
+              "frame_offset": 1
+            },
+            {
+              "id": "loop_boundary",
+              "frame_offset": 2
+            }
+          ]
+        }
+      ],
+      "entry_markers": [
+        "flap_up_peak",
+        "flap_down_peak"
+      ],
+      "exit_markers": [
+        "flap_up_peak",
+        "flap_down_peak"
+      ],
+      "secondary_curves": {
+        "body": "hover_bob",
+        "staff": "hover_staff_lag"
+      },
+      "legal_successors": [
+        "hover_front",
+        "glide_southeast",
+        "bank_left",
+        "bank_right",
+        "air_reaction",
+        "celebrate_air",
+        "air_staff_forward",
+        "land_front"
+      ]
     },
     "glide_southeast": {
-      "clip_id": "glide_southeast", "family": "flight", "supported_facings": ["southeast"], "loop_mode": "loop", "phase_source": "air_distance", "root_policy": "air_trajectory", "minimum_hold_ticks": 1, "interrupt_policy": "at_marker", "channel_ownership": ["body", "staff", "wings"],
-      "samples": [{ "pose_id": "fly_southeast_banked_staff", "duration_frames": 3, "support_contact": "none", "planted_anchor": null, "normalized_distance": 0.0, "markers": [{ "id": "bank_apex", "frame_offset": 2 }] }, { "pose_id": "fly_southeast_forward_glide", "duration_frames": 10, "support_contact": "none", "planted_anchor": null, "normalized_distance": 0.2, "markers": [] }, { "pose_id": "fly_southeast_staff_forward", "duration_frames": 5, "support_contact": "none", "planted_anchor": null, "normalized_distance": 0.75, "markers": [{ "id": "loop_boundary", "frame_offset": 4 }] }],
-      "entry_markers": ["bank_apex"], "exit_markers": ["loop_boundary"], "secondary_curves": { "body": "glide_bob", "robe": "air_robe_lag" }, "legal_successors": ["glide_southeast", "hover_front", "bank_left", "bank_right", "air_reaction", "celebrate_air", "air_staff_forward", "land_front"]
+      "clip_id": "glide_southeast",
+      "family": "flight",
+      "supported_facings": [
+        "southeast"
+      ],
+      "loop_mode": "loop",
+      "phase_source": "air_distance",
+      "root_policy": "air_trajectory",
+      "minimum_hold_ticks": 1,
+      "interrupt_policy": "at_marker",
+      "channel_ownership": [
+        "body",
+        "staff",
+        "wings"
+      ],
+      "samples": [
+        {
+          "pose_id": "fly_southeast_banked_staff",
+          "duration_frames": 3,
+          "support_contact": "none",
+          "planted_anchor": null,
+          "normalized_distance": 0.0,
+          "markers": [
+            {
+              "id": "bank_apex",
+              "frame_offset": 2
+            }
+          ]
+        },
+        {
+          "pose_id": "fly_southeast_forward_glide",
+          "duration_frames": 10,
+          "support_contact": "none",
+          "planted_anchor": null,
+          "normalized_distance": 0.2,
+          "markers": []
+        },
+        {
+          "pose_id": "fly_southeast_staff_forward",
+          "duration_frames": 5,
+          "support_contact": "none",
+          "planted_anchor": null,
+          "normalized_distance": 0.75,
+          "markers": [
+            {
+              "id": "loop_boundary",
+              "frame_offset": 4
+            }
+          ]
+        }
+      ],
+      "entry_markers": [
+        "bank_apex"
+      ],
+      "exit_markers": [
+        "loop_boundary"
+      ],
+      "secondary_curves": {
+        "body": "glide_bob",
+        "robe": "air_robe_lag"
+      },
+      "legal_successors": [
+        "glide_southeast",
+        "hover_front",
+        "bank_left",
+        "bank_right",
+        "air_reaction",
+        "celebrate_air",
+        "air_staff_forward",
+        "land_front"
+      ]
     },
     "bank_left": {
-      "clip_id": "bank_left", "family": "flight", "supported_facings": ["southwest"], "loop_mode": "once", "phase_source": "flap_phase", "root_policy": "air_trajectory", "minimum_hold_ticks": 2, "interrupt_policy": "at_marker", "channel_ownership": ["body", "staff", "wings"],
-      "samples": [{ "pose_id": "fly_front_hover_neutral", "duration_frames": 4, "support_contact": "none", "planted_anchor": null, "markers": [] }, { "pose_id": "fly_southwest_banked_staff", "duration_frames": 5, "support_contact": "none", "planted_anchor": null, "markers": [{ "id": "bank_apex", "frame_offset": 2 }] }, { "pose_id": "fly_front_hover_neutral", "duration_frames": 3, "support_contact": "none", "planted_anchor": null, "markers": [{ "id": "action_recoverable", "frame_offset": 2 }] }],
-      "entry_markers": ["bank_apex"], "exit_markers": ["action_recoverable"], "secondary_curves": { "body": "bank_left_tilt" }, "legal_successors": ["hover_front", "glide_southeast", "land_front"]
+      "clip_id": "bank_left",
+      "family": "flight",
+      "supported_facings": [
+        "southwest"
+      ],
+      "loop_mode": "once",
+      "phase_source": "flap_phase",
+      "root_policy": "air_trajectory",
+      "minimum_hold_ticks": 2,
+      "interrupt_policy": "at_marker",
+      "channel_ownership": [
+        "body",
+        "staff",
+        "wings"
+      ],
+      "samples": [
+        {
+          "pose_id": "fly_front_hover_neutral",
+          "duration_frames": 4,
+          "support_contact": "none",
+          "planted_anchor": null,
+          "markers": []
+        },
+        {
+          "pose_id": "fly_southwest_banked_staff",
+          "duration_frames": 5,
+          "support_contact": "none",
+          "planted_anchor": null,
+          "markers": [
+            {
+              "id": "bank_apex",
+              "frame_offset": 2
+            }
+          ]
+        },
+        {
+          "pose_id": "fly_front_hover_neutral",
+          "duration_frames": 3,
+          "support_contact": "none",
+          "planted_anchor": null,
+          "markers": [
+            {
+              "id": "action_recoverable",
+              "frame_offset": 2
+            }
+          ]
+        }
+      ],
+      "entry_markers": [
+        "bank_apex"
+      ],
+      "exit_markers": [
+        "action_recoverable"
+      ],
+      "secondary_curves": {
+        "body": "bank_left_tilt"
+      },
+      "legal_successors": [
+        "hover_front",
+        "glide_southeast",
+        "land_front"
+      ]
     },
     "bank_right": {
-      "clip_id": "bank_right", "family": "flight", "supported_facings": ["southeast"], "loop_mode": "once", "phase_source": "flap_phase", "root_policy": "air_trajectory", "minimum_hold_ticks": 2, "interrupt_policy": "at_marker", "channel_ownership": ["body", "staff", "wings"],
-      "samples": [{ "pose_id": "fly_front_hover_neutral", "duration_frames": 4, "support_contact": "none", "planted_anchor": null, "markers": [] }, { "pose_id": "fly_southeast_banked_staff", "duration_frames": 5, "support_contact": "none", "planted_anchor": null, "markers": [{ "id": "bank_apex", "frame_offset": 2 }] }, { "pose_id": "fly_front_hover_neutral", "duration_frames": 3, "support_contact": "none", "planted_anchor": null, "markers": [{ "id": "action_recoverable", "frame_offset": 2 }] }],
-      "entry_markers": ["bank_apex"], "exit_markers": ["action_recoverable"], "secondary_curves": { "body": "bank_right_tilt" }, "legal_successors": ["hover_front", "glide_southeast", "land_front"]
+      "clip_id": "bank_right",
+      "family": "flight",
+      "supported_facings": [
+        "southeast"
+      ],
+      "loop_mode": "once",
+      "phase_source": "flap_phase",
+      "root_policy": "air_trajectory",
+      "minimum_hold_ticks": 2,
+      "interrupt_policy": "at_marker",
+      "channel_ownership": [
+        "body",
+        "staff",
+        "wings"
+      ],
+      "samples": [
+        {
+          "pose_id": "fly_front_hover_neutral",
+          "duration_frames": 4,
+          "support_contact": "none",
+          "planted_anchor": null,
+          "markers": []
+        },
+        {
+          "pose_id": "fly_southeast_banked_staff",
+          "duration_frames": 5,
+          "support_contact": "none",
+          "planted_anchor": null,
+          "markers": [
+            {
+              "id": "bank_apex",
+              "frame_offset": 2
+            }
+          ]
+        },
+        {
+          "pose_id": "fly_front_hover_neutral",
+          "duration_frames": 3,
+          "support_contact": "none",
+          "planted_anchor": null,
+          "markers": [
+            {
+              "id": "action_recoverable",
+              "frame_offset": 2
+            }
+          ]
+        }
+      ],
+      "entry_markers": [
+        "bank_apex"
+      ],
+      "exit_markers": [
+        "action_recoverable"
+      ],
+      "secondary_curves": {
+        "body": "bank_right_tilt"
+      },
+      "legal_successors": [
+        "hover_front",
+        "glide_southeast",
+        "land_front"
+      ]
     },
     "air_reaction": {
-      "clip_id": "air_reaction", "family": "reaction", "supported_facings": ["south"], "loop_mode": "once", "phase_source": "flap_phase", "root_policy": "air_trajectory", "minimum_hold_ticks": 2, "interrupt_policy": "after_commit", "channel_ownership": ["body", "staff", "wings"],
-      "samples": [{ "pose_id": "fly_front_knee_up", "duration_frames": 3, "support_contact": "none", "planted_anchor": null, "markers": [{ "id": "action_commit", "frame_offset": 2 }] }, { "pose_id": "front_reaction_jump_fist_staff", "duration_frames": 4, "support_contact": "none", "planted_anchor": null, "markers": [] }, { "pose_id": "fly_front_hover_neutral", "duration_frames": 4, "support_contact": "none", "planted_anchor": null, "markers": [{ "id": "action_recoverable", "frame_offset": 3 }] }],
-      "entry_markers": ["action_commit"], "exit_markers": ["action_recoverable"], "secondary_curves": { "body": "air_reaction_pop" }, "legal_successors": ["hover_front", "land_front"]
+      "clip_id": "air_reaction",
+      "family": "reaction",
+      "supported_facings": [
+        "south"
+      ],
+      "loop_mode": "once",
+      "phase_source": "flap_phase",
+      "root_policy": "air_trajectory",
+      "minimum_hold_ticks": 2,
+      "interrupt_policy": "after_commit",
+      "channel_ownership": [
+        "body",
+        "staff",
+        "wings"
+      ],
+      "samples": [
+        {
+          "pose_id": "fly_front_knee_up",
+          "duration_frames": 3,
+          "support_contact": "none",
+          "planted_anchor": null,
+          "markers": [
+            {
+              "id": "action_commit",
+              "frame_offset": 2
+            }
+          ]
+        },
+        {
+          "pose_id": "front_reaction_jump_fist_staff",
+          "duration_frames": 4,
+          "support_contact": "none",
+          "planted_anchor": null,
+          "markers": []
+        },
+        {
+          "pose_id": "fly_front_hover_neutral",
+          "duration_frames": 4,
+          "support_contact": "none",
+          "planted_anchor": null,
+          "markers": [
+            {
+              "id": "action_recoverable",
+              "frame_offset": 3
+            }
+          ]
+        }
+      ],
+      "entry_markers": [
+        "action_commit"
+      ],
+      "exit_markers": [
+        "action_recoverable"
+      ],
+      "secondary_curves": {
+        "body": "air_reaction_pop"
+      },
+      "legal_successors": [
+        "hover_front",
+        "land_front"
+      ]
     },
     "land_front": {
-      "clip_id": "land_front", "family": "flight", "supported_facings": ["south"], "loop_mode": "once", "phase_source": "flap_phase", "root_policy": "air_trajectory", "minimum_hold_ticks": 3, "interrupt_policy": "after_commit", "channel_ownership": ["body", "staff", "wings"],
-      "samples": [{ "pose_id": "fly_front_wings_up", "duration_frames": 4, "support_contact": "none", "planted_anchor": null, "markers": [{ "id": "flap_up_peak", "frame_offset": 2 }] }, { "pose_id": "fly_front_wings_down", "duration_frames": 3, "support_contact": "none", "planted_anchor": null, "markers": [{ "id": "flap_down_peak", "frame_offset": 1 }] }, { "pose_id": "front_crouch_landing_staff_plant", "duration_frames": 3, "support_contact": "both_feet", "planted_anchor": "staff_tip", "markers": [{ "id": "landing_contact", "frame_offset": 0 }, { "id": "staff_contact", "frame_offset": 0 }] }, { "pose_id": "front_kneel_staff_brace", "duration_frames": 5, "support_contact": "staff", "planted_anchor": "staff_tip", "markers": [{ "id": "landing_settled", "frame_offset": 2 }] }, { "pose_id": "front_idle", "duration_frames": 5, "support_contact": "both_feet", "planted_anchor": "left_foot", "markers": [{ "id": "action_recoverable", "frame_offset": 0 }] }],
-      "entry_markers": ["flap_up_peak"], "exit_markers": ["action_recoverable"], "secondary_curves": { "body": "landing_drop", "wings": "landing_wing_settle" }, "legal_successors": ["idle_front"]
+      "clip_id": "land_front",
+      "family": "flight",
+      "supported_facings": [
+        "south"
+      ],
+      "loop_mode": "once",
+      "phase_source": "flap_phase",
+      "root_policy": "air_trajectory",
+      "minimum_hold_ticks": 3,
+      "interrupt_policy": "after_commit",
+      "channel_ownership": [
+        "body",
+        "staff",
+        "wings"
+      ],
+      "samples": [
+        {
+          "pose_id": "fly_front_wings_up",
+          "duration_frames": 4,
+          "support_contact": "none",
+          "planted_anchor": null,
+          "markers": [
+            {
+              "id": "flap_up_peak",
+              "frame_offset": 2
+            }
+          ]
+        },
+        {
+          "pose_id": "fly_front_wings_down",
+          "duration_frames": 3,
+          "support_contact": "none",
+          "planted_anchor": null,
+          "markers": [
+            {
+              "id": "flap_down_peak",
+              "frame_offset": 1
+            }
+          ]
+        },
+        {
+          "pose_id": "front_crouch_landing_staff_plant",
+          "duration_frames": 3,
+          "support_contact": "both_feet",
+          "planted_anchor": "staff_tip",
+          "markers": [
+            {
+              "id": "landing_contact",
+              "frame_offset": 0
+            },
+            {
+              "id": "staff_contact",
+              "frame_offset": 0
+            }
+          ]
+        },
+        {
+          "pose_id": "front_kneel_staff_brace",
+          "duration_frames": 5,
+          "support_contact": "staff",
+          "planted_anchor": "staff_tip",
+          "markers": [
+            {
+              "id": "landing_settled",
+              "frame_offset": 2
+            }
+          ]
+        },
+        {
+          "pose_id": "front_idle",
+          "duration_frames": 5,
+          "support_contact": "both_feet",
+          "planted_anchor": "left_foot",
+          "markers": [
+            {
+              "id": "action_recoverable",
+              "frame_offset": 0
+            }
+          ]
+        }
+      ],
+      "entry_markers": [
+        "flap_up_peak"
+      ],
+      "exit_markers": [
+        "action_recoverable"
+      ],
+      "secondary_curves": {
+        "body": "landing_drop",
+        "wings": "landing_wing_settle"
+      },
+      "legal_successors": [
+        "idle_front"
+      ]
     },
     "cast_front": {
-      "clip_id": "cast_front", "family": "action", "supported_facings": ["south"], "loop_mode": "once", "phase_source": "time", "root_policy": "contact_locked", "minimum_hold_ticks": 2, "interrupt_policy": "after_commit", "channel_ownership": ["body", "staff", "wings", "effect"],
-      "samples": [{ "pose_id": "front_idle", "duration_frames": 2, "support_contact": "both_feet", "planted_anchor": "left_foot", "markers": [] }, { "pose_id": "front_staff_guard_windup", "duration_frames": 5, "support_contact": "both_feet", "planted_anchor": "left_foot", "markers": [{ "id": "action_commit", "frame_offset": 4 }] }, { "pose_id": "front_magic_staff_thrust", "duration_frames": 2, "support_contact": "both_feet", "planted_anchor": "left_foot", "markers": [{ "id": "action_effect", "frame_offset": 1 }] }, { "pose_id": "magic_cast", "duration_frames": 5, "support_contact": "both_feet", "planted_anchor": "left_foot", "markers": [] }, { "pose_id": "front_staff_guard_low", "duration_frames": 3, "support_contact": "both_feet", "planted_anchor": "left_foot", "markers": [{ "id": "action_recoverable", "frame_offset": 0 }] }, { "pose_id": "front_idle", "duration_frames": 3, "support_contact": "both_feet", "planted_anchor": "left_foot", "markers": [] }],
-      "entry_markers": ["action_commit"], "exit_markers": ["action_recoverable"], "secondary_curves": { "staff": "cast_staff_accent", "effect": "cast_spark" }, "legal_successors": ["idle_front"]
+      "clip_id": "cast_front",
+      "family": "action",
+      "supported_facings": [
+        "south"
+      ],
+      "loop_mode": "once",
+      "phase_source": "time",
+      "root_policy": "contact_locked",
+      "minimum_hold_ticks": 2,
+      "interrupt_policy": "after_commit",
+      "channel_ownership": [
+        "body",
+        "staff",
+        "wings",
+        "effect"
+      ],
+      "samples": [
+        {
+          "pose_id": "front_idle",
+          "duration_frames": 2,
+          "support_contact": "both_feet",
+          "planted_anchor": "left_foot",
+          "markers": []
+        },
+        {
+          "pose_id": "front_staff_guard_windup",
+          "duration_frames": 5,
+          "support_contact": "both_feet",
+          "planted_anchor": "left_foot",
+          "markers": [
+            {
+              "id": "action_commit",
+              "frame_offset": 4
+            }
+          ]
+        },
+        {
+          "pose_id": "front_magic_staff_thrust",
+          "duration_frames": 2,
+          "support_contact": "both_feet",
+          "planted_anchor": "left_foot",
+          "markers": [
+            {
+              "id": "action_effect",
+              "frame_offset": 1
+            }
+          ]
+        },
+        {
+          "pose_id": "magic_cast",
+          "duration_frames": 5,
+          "support_contact": "both_feet",
+          "planted_anchor": "left_foot",
+          "markers": []
+        },
+        {
+          "pose_id": "front_staff_guard_low",
+          "duration_frames": 3,
+          "support_contact": "both_feet",
+          "planted_anchor": "left_foot",
+          "markers": [
+            {
+              "id": "action_recoverable",
+              "frame_offset": 0
+            }
+          ]
+        },
+        {
+          "pose_id": "front_idle",
+          "duration_frames": 3,
+          "support_contact": "both_feet",
+          "planted_anchor": "left_foot",
+          "markers": []
+        }
+      ],
+      "entry_markers": [
+        "action_commit"
+      ],
+      "exit_markers": [
+        "action_recoverable"
+      ],
+      "secondary_curves": {
+        "staff": "cast_staff_accent",
+        "effect": "cast_spark"
+      },
+      "legal_successors": [
+        "idle_front"
+      ]
     },
     "guard_front": {
-      "clip_id": "guard_front", "family": "action", "supported_facings": ["south"], "loop_mode": "once", "phase_source": "time", "root_policy": "contact_locked", "minimum_hold_ticks": 4, "interrupt_policy": "at_marker", "channel_ownership": ["body", "staff", "wings"],
-      "samples": [{ "pose_id": "front_staff_guard_windup", "duration_frames": 4, "support_contact": "both_feet", "planted_anchor": "left_foot", "markers": [{ "id": "action_commit", "frame_offset": 3 }] }, { "pose_id": "front_crouch_guard", "duration_frames": 6, "support_contact": "both_feet", "planted_anchor": "left_foot", "markers": [] }, { "pose_id": "front_staff_guard_low", "duration_frames": 4, "support_contact": "both_feet", "planted_anchor": "left_foot", "markers": [{ "id": "action_recoverable", "frame_offset": 0 }] }, { "pose_id": "front_idle", "duration_frames": 3, "support_contact": "both_feet", "planted_anchor": "left_foot", "markers": [] }],
-      "entry_markers": ["action_commit"], "exit_markers": ["action_recoverable"], "secondary_curves": { "staff": "guard_settle" }, "legal_successors": ["idle_front"]
+      "clip_id": "guard_front",
+      "family": "action",
+      "supported_facings": [
+        "south"
+      ],
+      "loop_mode": "once",
+      "phase_source": "time",
+      "root_policy": "contact_locked",
+      "minimum_hold_ticks": 4,
+      "interrupt_policy": "at_marker",
+      "channel_ownership": [
+        "body",
+        "staff",
+        "wings"
+      ],
+      "samples": [
+        {
+          "pose_id": "front_staff_guard_windup",
+          "duration_frames": 4,
+          "support_contact": "both_feet",
+          "planted_anchor": "left_foot",
+          "markers": [
+            {
+              "id": "action_commit",
+              "frame_offset": 3
+            }
+          ]
+        },
+        {
+          "pose_id": "front_crouch_guard",
+          "duration_frames": 6,
+          "support_contact": "both_feet",
+          "planted_anchor": "left_foot",
+          "markers": []
+        },
+        {
+          "pose_id": "front_staff_guard_low",
+          "duration_frames": 4,
+          "support_contact": "both_feet",
+          "planted_anchor": "left_foot",
+          "markers": [
+            {
+              "id": "action_recoverable",
+              "frame_offset": 0
+            }
+          ]
+        },
+        {
+          "pose_id": "front_idle",
+          "duration_frames": 3,
+          "support_contact": "both_feet",
+          "planted_anchor": "left_foot",
+          "markers": []
+        }
+      ],
+      "entry_markers": [
+        "action_commit"
+      ],
+      "exit_markers": [
+        "action_recoverable"
+      ],
+      "secondary_curves": {
+        "staff": "guard_settle"
+      },
+      "legal_successors": [
+        "idle_front"
+      ]
     },
     "block_front": {
-      "clip_id": "block_front", "family": "action", "supported_facings": ["south"], "loop_mode": "once", "phase_source": "time", "root_policy": "contact_locked", "minimum_hold_ticks": 3, "interrupt_policy": "after_commit", "channel_ownership": ["body", "staff", "wings"],
-      "samples": [{ "pose_id": "front_staff_guard_windup", "duration_frames": 3, "support_contact": "both_feet", "planted_anchor": "left_foot", "markers": [{ "id": "action_commit", "frame_offset": 2 }] }, { "pose_id": "front_staff_block_horizontal", "duration_frames": 5, "support_contact": "both_feet", "planted_anchor": "left_foot", "markers": [{ "id": "action_effect", "frame_offset": 0 }] }, { "pose_id": "front_staff_guard_low", "duration_frames": 4, "support_contact": "both_feet", "planted_anchor": "left_foot", "markers": [{ "id": "action_recoverable", "frame_offset": 0 }] }, { "pose_id": "front_idle", "duration_frames": 3, "support_contact": "both_feet", "planted_anchor": "left_foot", "markers": [] }],
-      "entry_markers": ["action_commit"], "exit_markers": ["action_recoverable"], "secondary_curves": { "staff": "block_impact" }, "legal_successors": ["idle_front", "walk_front"]
+      "clip_id": "block_front",
+      "family": "action",
+      "supported_facings": [
+        "south"
+      ],
+      "loop_mode": "once",
+      "phase_source": "time",
+      "root_policy": "contact_locked",
+      "minimum_hold_ticks": 3,
+      "interrupt_policy": "after_commit",
+      "channel_ownership": [
+        "body",
+        "staff",
+        "wings"
+      ],
+      "samples": [
+        {
+          "pose_id": "front_staff_guard_windup",
+          "duration_frames": 3,
+          "support_contact": "both_feet",
+          "planted_anchor": "left_foot",
+          "markers": [
+            {
+              "id": "action_commit",
+              "frame_offset": 2
+            }
+          ]
+        },
+        {
+          "pose_id": "front_staff_block_horizontal",
+          "duration_frames": 5,
+          "support_contact": "both_feet",
+          "planted_anchor": "left_foot",
+          "markers": [
+            {
+              "id": "action_effect",
+              "frame_offset": 0
+            }
+          ]
+        },
+        {
+          "pose_id": "front_staff_guard_low",
+          "duration_frames": 4,
+          "support_contact": "both_feet",
+          "planted_anchor": "left_foot",
+          "markers": [
+            {
+              "id": "action_recoverable",
+              "frame_offset": 0
+            }
+          ]
+        },
+        {
+          "pose_id": "front_idle",
+          "duration_frames": 3,
+          "support_contact": "both_feet",
+          "planted_anchor": "left_foot",
+          "markers": []
+        }
+      ],
+      "entry_markers": [
+        "action_commit"
+      ],
+      "exit_markers": [
+        "action_recoverable"
+      ],
+      "secondary_curves": {
+        "staff": "block_impact"
+      },
+      "legal_successors": [
+        "idle_front",
+        "walk_front"
+      ]
     },
     "flourish_front": {
-      "clip_id": "flourish_front", "family": "action", "supported_facings": ["south"], "loop_mode": "once", "phase_source": "time", "root_policy": "contact_locked", "minimum_hold_ticks": 3, "interrupt_policy": "after_commit", "channel_ownership": ["body", "staff", "wings", "effect"],
-      "samples": [{ "pose_id": "front_staff_guard_low", "duration_frames": 3, "support_contact": "both_feet", "planted_anchor": "left_foot", "markers": [{ "id": "action_commit", "frame_offset": 2 }] }, { "pose_id": "front_staff_spin_flourish", "duration_frames": 8, "support_contact": "both_feet", "planted_anchor": "right_foot", "markers": [{ "id": "action_effect", "frame_offset": 3 }] }, { "pose_id": "front_staff_guard_low", "duration_frames": 3, "support_contact": "both_feet", "planted_anchor": "left_foot", "markers": [{ "id": "action_recoverable", "frame_offset": 0 }] }, { "pose_id": "front_idle", "duration_frames": 3, "support_contact": "both_feet", "planted_anchor": "left_foot", "markers": [] }],
-      "entry_markers": ["action_commit"], "exit_markers": ["action_recoverable"], "secondary_curves": { "staff": "staff_spin_arc" }, "legal_successors": ["idle_front"]
+      "clip_id": "flourish_front",
+      "family": "action",
+      "supported_facings": [
+        "south"
+      ],
+      "loop_mode": "once",
+      "phase_source": "time",
+      "root_policy": "contact_locked",
+      "minimum_hold_ticks": 3,
+      "interrupt_policy": "after_commit",
+      "channel_ownership": [
+        "body",
+        "staff",
+        "wings",
+        "effect"
+      ],
+      "samples": [
+        {
+          "pose_id": "front_staff_guard_low",
+          "duration_frames": 3,
+          "support_contact": "both_feet",
+          "planted_anchor": "left_foot",
+          "markers": [
+            {
+              "id": "action_commit",
+              "frame_offset": 2
+            }
+          ]
+        },
+        {
+          "pose_id": "front_staff_spin_flourish",
+          "duration_frames": 8,
+          "support_contact": "both_feet",
+          "planted_anchor": "right_foot",
+          "markers": [
+            {
+              "id": "action_effect",
+              "frame_offset": 3
+            }
+          ]
+        },
+        {
+          "pose_id": "front_staff_guard_low",
+          "duration_frames": 3,
+          "support_contact": "both_feet",
+          "planted_anchor": "left_foot",
+          "markers": [
+            {
+              "id": "action_recoverable",
+              "frame_offset": 0
+            }
+          ]
+        },
+        {
+          "pose_id": "front_idle",
+          "duration_frames": 3,
+          "support_contact": "both_feet",
+          "planted_anchor": "left_foot",
+          "markers": []
+        }
+      ],
+      "entry_markers": [
+        "action_commit"
+      ],
+      "exit_markers": [
+        "action_recoverable"
+      ],
+      "secondary_curves": {
+        "staff": "staff_spin_arc"
+      },
+      "legal_successors": [
+        "idle_front"
+      ]
     },
     "victory_cast_front": {
-      "clip_id": "victory_cast_front", "family": "action", "supported_facings": ["south"], "loop_mode": "once", "phase_source": "time", "root_policy": "contact_locked", "minimum_hold_ticks": 3, "interrupt_policy": "after_commit", "channel_ownership": ["body", "staff", "wings", "effect"],
-      "samples": [{ "pose_id": "front_staff_guard_windup", "duration_frames": 4, "support_contact": "both_feet", "planted_anchor": "left_foot", "markers": [{ "id": "action_commit", "frame_offset": 3 }] }, { "pose_id": "front_victory_cast", "duration_frames": 8, "support_contact": "both_feet", "planted_anchor": "left_foot", "markers": [{ "id": "action_effect", "frame_offset": 2 }] }, { "pose_id": "magic_cast", "duration_frames": 4, "support_contact": "both_feet", "planted_anchor": "left_foot", "markers": [{ "id": "action_recoverable", "frame_offset": 2 }] }, { "pose_id": "front_idle", "duration_frames": 4, "support_contact": "both_feet", "planted_anchor": "left_foot", "markers": [] }],
-      "entry_markers": ["action_commit"], "exit_markers": ["action_recoverable"], "secondary_curves": { "wings": "victory_wing_accent", "effect": "victory_spark" }, "legal_successors": ["idle_front"]
+      "clip_id": "victory_cast_front",
+      "family": "action",
+      "supported_facings": [
+        "south"
+      ],
+      "loop_mode": "once",
+      "phase_source": "time",
+      "root_policy": "contact_locked",
+      "minimum_hold_ticks": 3,
+      "interrupt_policy": "after_commit",
+      "channel_ownership": [
+        "body",
+        "staff",
+        "wings",
+        "effect"
+      ],
+      "samples": [
+        {
+          "pose_id": "front_staff_guard_windup",
+          "duration_frames": 4,
+          "support_contact": "both_feet",
+          "planted_anchor": "left_foot",
+          "markers": [
+            {
+              "id": "action_commit",
+              "frame_offset": 3
+            }
+          ]
+        },
+        {
+          "pose_id": "front_victory_cast",
+          "duration_frames": 8,
+          "support_contact": "both_feet",
+          "planted_anchor": "left_foot",
+          "markers": [
+            {
+              "id": "action_effect",
+              "frame_offset": 2
+            }
+          ]
+        },
+        {
+          "pose_id": "magic_cast",
+          "duration_frames": 4,
+          "support_contact": "both_feet",
+          "planted_anchor": "left_foot",
+          "markers": [
+            {
+              "id": "action_recoverable",
+              "frame_offset": 2
+            }
+          ]
+        },
+        {
+          "pose_id": "front_idle",
+          "duration_frames": 4,
+          "support_contact": "both_feet",
+          "planted_anchor": "left_foot",
+          "markers": []
+        }
+      ],
+      "entry_markers": [
+        "action_commit"
+      ],
+      "exit_markers": [
+        "action_recoverable"
+      ],
+      "secondary_curves": {
+        "wings": "victory_wing_accent",
+        "effect": "victory_spark"
+      },
+      "legal_successors": [
+        "idle_front"
+      ]
     },
     "explain_front": {
-      "clip_id": "explain_front", "family": "speech", "supported_facings": ["south"], "loop_mode": "once", "phase_source": "time", "root_policy": "fixed", "minimum_hold_ticks": 3, "interrupt_policy": "immediate", "channel_ownership": ["body", "staff", "wings", "mouth"],
-      "samples": [{ "pose_id": "front_idle", "duration_frames": 3, "support_contact": "both_feet", "planted_anchor": "left_foot", "markers": [] }, { "pose_id": "explaining", "duration_frames": 10, "support_contact": "both_feet", "planted_anchor": "left_foot", "markers": [{ "id": "speech_open", "frame_offset": 0 }, { "id": "speech_close", "frame_offset": 9 }] }, { "pose_id": "front_idle", "duration_frames": 3, "support_contact": "both_feet", "planted_anchor": "left_foot", "markers": [{ "id": "action_recoverable", "frame_offset": 0 }] }],
-      "entry_markers": ["speech_open"], "exit_markers": ["action_recoverable"], "secondary_curves": { "mouth": "speech_level" }, "legal_successors": ["idle_front"]
+      "clip_id": "explain_front",
+      "family": "speech",
+      "supported_facings": [
+        "south"
+      ],
+      "loop_mode": "once",
+      "phase_source": "time",
+      "root_policy": "fixed",
+      "minimum_hold_ticks": 3,
+      "interrupt_policy": "immediate",
+      "channel_ownership": [
+        "body",
+        "staff",
+        "wings",
+        "mouth"
+      ],
+      "samples": [
+        {
+          "pose_id": "front_idle",
+          "duration_frames": 3,
+          "support_contact": "both_feet",
+          "planted_anchor": "left_foot",
+          "markers": []
+        },
+        {
+          "pose_id": "explaining",
+          "duration_frames": 10,
+          "support_contact": "both_feet",
+          "planted_anchor": "left_foot",
+          "markers": [
+            {
+              "id": "speech_open",
+              "frame_offset": 0
+            },
+            {
+              "id": "speech_close",
+              "frame_offset": 9
+            }
+          ]
+        },
+        {
+          "pose_id": "front_idle",
+          "duration_frames": 3,
+          "support_contact": "both_feet",
+          "planted_anchor": "left_foot",
+          "markers": [
+            {
+              "id": "action_recoverable",
+              "frame_offset": 0
+            }
+          ]
+        }
+      ],
+      "entry_markers": [
+        "speech_open"
+      ],
+      "exit_markers": [
+        "action_recoverable"
+      ],
+      "secondary_curves": {
+        "mouth": "speech_level"
+      },
+      "legal_successors": [
+        "idle_front"
+      ]
     },
     "point_front": {
-      "clip_id": "point_front", "family": "speech", "supported_facings": ["south"], "loop_mode": "once", "phase_source": "time", "root_policy": "fixed", "minimum_hold_ticks": 3, "interrupt_policy": "at_marker", "channel_ownership": ["body", "staff", "wings", "mouth"],
-      "samples": [{ "pose_id": "front_idle", "duration_frames": 3, "support_contact": "both_feet", "planted_anchor": "left_foot", "markers": [] }, { "pose_id": "front_point_direct_staff_held", "duration_frames": 8, "support_contact": "both_feet", "planted_anchor": "left_foot", "markers": [{ "id": "action_commit", "frame_offset": 1 }] }, { "pose_id": "front_idle", "duration_frames": 3, "support_contact": "both_feet", "planted_anchor": "left_foot", "markers": [{ "id": "action_recoverable", "frame_offset": 0 }] }],
-      "entry_markers": ["action_commit"], "exit_markers": ["action_recoverable"], "secondary_curves": { "mouth": "speech_level" }, "legal_successors": ["idle_front"]
+      "clip_id": "point_front",
+      "family": "speech",
+      "supported_facings": [
+        "south"
+      ],
+      "loop_mode": "once",
+      "phase_source": "time",
+      "root_policy": "fixed",
+      "minimum_hold_ticks": 3,
+      "interrupt_policy": "at_marker",
+      "channel_ownership": [
+        "body",
+        "staff",
+        "wings",
+        "mouth"
+      ],
+      "samples": [
+        {
+          "pose_id": "front_idle",
+          "duration_frames": 3,
+          "support_contact": "both_feet",
+          "planted_anchor": "left_foot",
+          "markers": []
+        },
+        {
+          "pose_id": "front_point_direct_staff_held",
+          "duration_frames": 8,
+          "support_contact": "both_feet",
+          "planted_anchor": "left_foot",
+          "markers": [
+            {
+              "id": "action_commit",
+              "frame_offset": 1
+            }
+          ]
+        },
+        {
+          "pose_id": "front_idle",
+          "duration_frames": 3,
+          "support_contact": "both_feet",
+          "planted_anchor": "left_foot",
+          "markers": [
+            {
+              "id": "action_recoverable",
+              "frame_offset": 0
+            }
+          ]
+        }
+      ],
+      "entry_markers": [
+        "action_commit"
+      ],
+      "exit_markers": [
+        "action_recoverable"
+      ],
+      "secondary_curves": {
+        "mouth": "speech_level"
+      },
+      "legal_successors": [
+        "idle_front"
+      ]
     },
     "shush_front": {
-      "clip_id": "shush_front", "family": "speech", "supported_facings": ["south"], "loop_mode": "once", "phase_source": "time", "root_policy": "fixed", "minimum_hold_ticks": 6, "interrupt_policy": "at_marker", "channel_ownership": ["body", "staff", "wings", "mouth"],
-      "samples": [{ "pose_id": "front_idle", "duration_frames": 3, "support_contact": "both_feet", "planted_anchor": "left_foot", "markers": [] }, { "pose_id": "front_shush_secret_staff_held", "duration_frames": 10, "support_contact": "both_feet", "planted_anchor": "left_foot", "markers": [{ "id": "shush_hold_start", "frame_offset": 0 }, { "id": "shush_hold_end", "frame_offset": 9 }] }, { "pose_id": "front_idle", "duration_frames": 3, "support_contact": "both_feet", "planted_anchor": "left_foot", "markers": [{ "id": "action_recoverable", "frame_offset": 0 }] }],
-      "entry_markers": ["shush_hold_start"], "exit_markers": ["action_recoverable"], "secondary_curves": { "mouth": "mouth_suppressed" }, "legal_successors": ["idle_front"]
+      "clip_id": "shush_front",
+      "family": "speech",
+      "supported_facings": [
+        "south"
+      ],
+      "loop_mode": "once",
+      "phase_source": "time",
+      "root_policy": "fixed",
+      "minimum_hold_ticks": 6,
+      "interrupt_policy": "at_marker",
+      "channel_ownership": [
+        "body",
+        "staff",
+        "wings",
+        "mouth"
+      ],
+      "samples": [
+        {
+          "pose_id": "front_idle",
+          "duration_frames": 3,
+          "support_contact": "both_feet",
+          "planted_anchor": "left_foot",
+          "markers": []
+        },
+        {
+          "pose_id": "front_shush_secret_staff_held",
+          "duration_frames": 10,
+          "support_contact": "both_feet",
+          "planted_anchor": "left_foot",
+          "markers": [
+            {
+              "id": "shush_hold_start",
+              "frame_offset": 0
+            },
+            {
+              "id": "shush_hold_end",
+              "frame_offset": 9
+            }
+          ]
+        },
+        {
+          "pose_id": "front_idle",
+          "duration_frames": 3,
+          "support_contact": "both_feet",
+          "planted_anchor": "left_foot",
+          "markers": [
+            {
+              "id": "action_recoverable",
+              "frame_offset": 0
+            }
+          ]
+        }
+      ],
+      "entry_markers": [
+        "shush_hold_start"
+      ],
+      "exit_markers": [
+        "action_recoverable"
+      ],
+      "secondary_curves": {
+        "mouth": "mouth_suppressed"
+      },
+      "legal_successors": [
+        "idle_front"
+      ]
     },
     "celebrate_front": {
-      "clip_id": "celebrate_front", "family": "action", "supported_facings": ["south"], "loop_mode": "once", "phase_source": "time", "root_policy": "contact_locked", "minimum_hold_ticks": 3, "interrupt_policy": "after_commit", "channel_ownership": ["body", "staff", "wings"],
-      "samples": [{ "pose_id": "front_celebrate_wings_staff_up", "duration_frames": 5, "support_contact": "both_feet", "planted_anchor": "left_foot", "markers": [{ "id": "action_commit", "frame_offset": 4 }] }, { "pose_id": "front_celebrate_jump_staff_up", "duration_frames": 4, "support_contact": "none", "planted_anchor": null, "markers": [{ "id": "airborne", "frame_offset": 0 }] }, { "pose_id": "front_reaction_jump_fist_staff", "duration_frames": 3, "support_contact": "none", "planted_anchor": null, "markers": [] }, { "pose_id": "front_celebrate_wings_staff_up", "duration_frames": 5, "support_contact": "both_feet", "planted_anchor": "left_foot", "markers": [{ "id": "landing_contact", "frame_offset": 0 }, { "id": "action_recoverable", "frame_offset": 4 }] }, { "pose_id": "front_idle", "duration_frames": 4, "support_contact": "both_feet", "planted_anchor": "left_foot", "markers": [] }],
-      "entry_markers": ["action_commit"], "exit_markers": ["action_recoverable"], "secondary_curves": { "body": "celebrate_jump", "wings": "celebrate_wing_accent" }, "legal_successors": ["idle_front"]
+      "clip_id": "celebrate_front",
+      "family": "action",
+      "supported_facings": [
+        "south"
+      ],
+      "loop_mode": "once",
+      "phase_source": "time",
+      "root_policy": "contact_locked",
+      "minimum_hold_ticks": 3,
+      "interrupt_policy": "after_commit",
+      "channel_ownership": [
+        "body",
+        "staff",
+        "wings"
+      ],
+      "samples": [
+        {
+          "pose_id": "front_celebrate_wings_staff_up",
+          "duration_frames": 5,
+          "support_contact": "both_feet",
+          "planted_anchor": "left_foot",
+          "markers": [
+            {
+              "id": "action_commit",
+              "frame_offset": 4
+            }
+          ]
+        },
+        {
+          "pose_id": "front_celebrate_jump_staff_up",
+          "duration_frames": 4,
+          "support_contact": "none",
+          "planted_anchor": null,
+          "markers": [
+            {
+              "id": "airborne",
+              "frame_offset": 0
+            }
+          ]
+        },
+        {
+          "pose_id": "front_reaction_jump_fist_staff",
+          "duration_frames": 3,
+          "support_contact": "none",
+          "planted_anchor": null,
+          "markers": []
+        },
+        {
+          "pose_id": "front_celebrate_wings_staff_up",
+          "duration_frames": 5,
+          "support_contact": "both_feet",
+          "planted_anchor": "left_foot",
+          "markers": [
+            {
+              "id": "landing_contact",
+              "frame_offset": 0
+            },
+            {
+              "id": "action_recoverable",
+              "frame_offset": 4
+            }
+          ]
+        },
+        {
+          "pose_id": "front_idle",
+          "duration_frames": 4,
+          "support_contact": "both_feet",
+          "planted_anchor": "left_foot",
+          "markers": []
+        }
+      ],
+      "entry_markers": [
+        "action_commit"
+      ],
+      "exit_markers": [
+        "action_recoverable"
+      ],
+      "secondary_curves": {
+        "body": "celebrate_jump",
+        "wings": "celebrate_wing_accent"
+      },
+      "legal_successors": [
+        "idle_front"
+      ]
     },
     "celebrate_air": {
-      "clip_id": "celebrate_air", "family": "action", "supported_facings": ["south", "southeast"], "loop_mode": "once", "phase_source": "flap_phase", "root_policy": "air_trajectory", "minimum_hold_ticks": 3, "interrupt_policy": "after_commit", "channel_ownership": ["body", "staff", "wings"],
-      "samples": [{ "pose_id": "fly_front_hover_neutral", "duration_frames": 3, "support_contact": "none", "planted_anchor": null, "markers": [{ "id": "action_commit", "frame_offset": 2 }] }, { "pose_id": "fly_southeast_cheer", "duration_frames": 8, "support_contact": "none", "planted_anchor": null, "markers": [] }, { "pose_id": "fly_front_hover_neutral", "duration_frames": 4, "support_contact": "none", "planted_anchor": null, "markers": [{ "id": "action_recoverable", "frame_offset": 3 }] }],
-      "entry_markers": ["action_commit"], "exit_markers": ["action_recoverable"], "secondary_curves": { "body": "air_celebrate_pop" }, "legal_successors": ["hover_front", "land_front"]
+      "clip_id": "celebrate_air",
+      "family": "action",
+      "supported_facings": [
+        "south",
+        "southeast"
+      ],
+      "loop_mode": "once",
+      "phase_source": "flap_phase",
+      "root_policy": "air_trajectory",
+      "minimum_hold_ticks": 3,
+      "interrupt_policy": "after_commit",
+      "channel_ownership": [
+        "body",
+        "staff",
+        "wings"
+      ],
+      "samples": [
+        {
+          "pose_id": "fly_front_hover_neutral",
+          "duration_frames": 3,
+          "support_contact": "none",
+          "planted_anchor": null,
+          "markers": [
+            {
+              "id": "action_commit",
+              "frame_offset": 2
+            }
+          ]
+        },
+        {
+          "pose_id": "fly_southeast_cheer",
+          "duration_frames": 8,
+          "support_contact": "none",
+          "planted_anchor": null,
+          "markers": []
+        },
+        {
+          "pose_id": "fly_front_hover_neutral",
+          "duration_frames": 4,
+          "support_contact": "none",
+          "planted_anchor": null,
+          "markers": [
+            {
+              "id": "action_recoverable",
+              "frame_offset": 3
+            }
+          ]
+        }
+      ],
+      "entry_markers": [
+        "action_commit"
+      ],
+      "exit_markers": [
+        "action_recoverable"
+      ],
+      "secondary_curves": {
+        "body": "air_celebrate_pop"
+      },
+      "legal_successors": [
+        "hover_front",
+        "land_front"
+      ]
     },
     "air_staff_forward": {
-      "clip_id": "air_staff_forward", "family": "action", "supported_facings": ["south", "southeast"], "loop_mode": "once", "phase_source": "air_distance", "root_policy": "air_trajectory", "minimum_hold_ticks": 2, "interrupt_policy": "after_commit", "channel_ownership": ["body", "staff", "wings", "effect"],
-      "samples": [{ "pose_id": "fly_front_hover_neutral", "duration_frames": 3, "support_contact": "none", "planted_anchor": null, "markers": [{ "id": "action_commit", "frame_offset": 2 }] }, { "pose_id": "fly_southeast_staff_forward", "duration_frames": 6, "support_contact": "none", "planted_anchor": null, "markers": [{ "id": "action_effect", "frame_offset": 2 }] }, { "pose_id": "fly_southeast_forward_glide", "duration_frames": 5, "support_contact": "none", "planted_anchor": null, "markers": [{ "id": "action_recoverable", "frame_offset": 4 }] }],
-      "entry_markers": ["action_commit"], "exit_markers": ["action_recoverable"], "secondary_curves": { "staff": "air_staff_thrust", "effect": "cast_spark" }, "legal_successors": ["hover_front", "glide_southeast", "land_front"]
+      "clip_id": "air_staff_forward",
+      "family": "action",
+      "supported_facings": [
+        "south",
+        "southeast"
+      ],
+      "loop_mode": "once",
+      "phase_source": "air_distance",
+      "root_policy": "air_trajectory",
+      "minimum_hold_ticks": 2,
+      "interrupt_policy": "after_commit",
+      "channel_ownership": [
+        "body",
+        "staff",
+        "wings",
+        "effect"
+      ],
+      "samples": [
+        {
+          "pose_id": "fly_front_hover_neutral",
+          "duration_frames": 3,
+          "support_contact": "none",
+          "planted_anchor": null,
+          "markers": [
+            {
+              "id": "action_commit",
+              "frame_offset": 2
+            }
+          ]
+        },
+        {
+          "pose_id": "fly_southeast_staff_forward",
+          "duration_frames": 6,
+          "support_contact": "none",
+          "planted_anchor": null,
+          "markers": [
+            {
+              "id": "action_effect",
+              "frame_offset": 2
+            }
+          ]
+        },
+        {
+          "pose_id": "fly_southeast_forward_glide",
+          "duration_frames": 5,
+          "support_contact": "none",
+          "planted_anchor": null,
+          "markers": [
+            {
+              "id": "action_recoverable",
+              "frame_offset": 4
+            }
+          ]
+        }
+      ],
+      "entry_markers": [
+        "action_commit"
+      ],
+      "exit_markers": [
+        "action_recoverable"
+      ],
+      "secondary_curves": {
+        "staff": "air_staff_thrust",
+        "effect": "cast_spark"
+      },
+      "legal_successors": [
+        "hover_front",
+        "glide_southeast",
+        "land_front"
+      ]
     },
     "hit_fall_recover_front": {
-      "clip_id": "hit_fall_recover_front", "family": "reaction", "supported_facings": ["south"], "loop_mode": "once", "phase_source": "time", "root_policy": "contact_locked", "minimum_hold_ticks": 3, "interrupt_policy": "uninterruptible", "channel_ownership": ["body", "staff", "wings"],
-      "samples": [{ "pose_id": "front_crouch_reaction_staff_planted", "duration_frames": 3, "support_contact": "staff", "planted_anchor": "staff_tip", "markers": [{ "id": "action_commit", "frame_offset": 2 }, { "id": "staff_release", "frame_offset": 2 }] }, { "pose_id": "front_airborne_fall_back_staff", "duration_frames": 4, "support_contact": "none", "planted_anchor": null, "markers": [{ "id": "airborne", "frame_offset": 0 }] }, { "pose_id": "front_crouch_landing_staff_plant", "duration_frames": 3, "support_contact": "both_feet", "planted_anchor": "staff_tip", "markers": [{ "id": "landing_contact", "frame_offset": 0 }, { "id": "staff_contact", "frame_offset": 0 }] }, { "pose_id": "front_kneel_staff_brace", "duration_frames": 5, "support_contact": "staff", "planted_anchor": "staff_tip", "markers": [{ "id": "landing_settled", "frame_offset": 2 }] }, { "pose_id": "front_idle", "duration_frames": 5, "support_contact": "both_feet", "planted_anchor": "left_foot", "markers": [{ "id": "action_recoverable", "frame_offset": 0 }] }],
-      "entry_markers": ["action_commit"], "exit_markers": ["action_recoverable"], "secondary_curves": { "body": "hit_fall_arc", "wings": "hit_wing_reaction" }, "legal_successors": ["idle_front"]
+      "clip_id": "hit_fall_recover_front",
+      "family": "reaction",
+      "supported_facings": [
+        "south"
+      ],
+      "loop_mode": "once",
+      "phase_source": "time",
+      "root_policy": "contact_locked",
+      "minimum_hold_ticks": 3,
+      "interrupt_policy": "uninterruptible",
+      "channel_ownership": [
+        "body",
+        "staff",
+        "wings"
+      ],
+      "samples": [
+        {
+          "pose_id": "front_crouch_reaction_staff_planted",
+          "duration_frames": 3,
+          "support_contact": "staff",
+          "planted_anchor": "staff_tip",
+          "markers": [
+            {
+              "id": "action_commit",
+              "frame_offset": 2
+            },
+            {
+              "id": "staff_release",
+              "frame_offset": 2
+            }
+          ]
+        },
+        {
+          "pose_id": "front_airborne_fall_back_staff",
+          "duration_frames": 4,
+          "support_contact": "none",
+          "planted_anchor": null,
+          "markers": [
+            {
+              "id": "airborne",
+              "frame_offset": 0
+            }
+          ]
+        },
+        {
+          "pose_id": "front_crouch_landing_staff_plant",
+          "duration_frames": 3,
+          "support_contact": "both_feet",
+          "planted_anchor": "staff_tip",
+          "markers": [
+            {
+              "id": "landing_contact",
+              "frame_offset": 0
+            },
+            {
+              "id": "staff_contact",
+              "frame_offset": 0
+            }
+          ]
+        },
+        {
+          "pose_id": "front_kneel_staff_brace",
+          "duration_frames": 5,
+          "support_contact": "staff",
+          "planted_anchor": "staff_tip",
+          "markers": [
+            {
+              "id": "landing_settled",
+              "frame_offset": 2
+            }
+          ]
+        },
+        {
+          "pose_id": "front_idle",
+          "duration_frames": 5,
+          "support_contact": "both_feet",
+          "planted_anchor": "left_foot",
+          "markers": [
+            {
+              "id": "action_recoverable",
+              "frame_offset": 0
+            }
+          ]
+        }
+      ],
+      "entry_markers": [
+        "action_commit"
+      ],
+      "exit_markers": [
+        "action_recoverable"
+      ],
+      "secondary_curves": {
+        "body": "hit_fall_arc",
+        "wings": "hit_wing_reaction"
+      },
+      "legal_successors": [
+        "idle_front"
+      ]
     }
   },
   "nodes": {
-    "ground_idle": { "clip_id": "idle_front", "mobility_modes": ["grounded_idle"], "actions": [] },
-    "back_idle": { "clip_id": "idle_back", "mobility_modes": ["grounded_idle"], "actions": [] },
-    "left_idle": { "clip_id": "idle_left", "mobility_modes": ["grounded_idle"], "actions": [] },
-    "right_idle": { "clip_id": "idle_right", "mobility_modes": ["grounded_idle"], "actions": [] },
-    "turn": { "clip_id": "turn_views", "mobility_modes": ["turn"], "actions": [] },
-    "ground_walk": { "clip_id": "walk_front", "mobility_modes": ["grounded_start", "grounded_walk", "grounded_stop"], "actions": [] },
-    "back_walk": { "clip_id": "walk_back", "mobility_modes": ["grounded_start", "grounded_walk", "grounded_stop"], "actions": [] },
-    "ground_run": { "clip_id": "run_charge_front", "mobility_modes": ["grounded_run"], "actions": ["dash"] },
-    "run_recovery": { "clip_id": "run_land_front", "mobility_modes": ["landing"], "actions": [] },
-    "takeoff": { "clip_id": "takeoff_front", "mobility_modes": ["takeoff"], "actions": [] },
-    "hover": { "clip_id": "hover_front", "mobility_modes": ["hover"], "actions": [] },
-    "glide": { "clip_id": "glide_southeast", "mobility_modes": ["flight_travel"], "actions": [] },
-    "flight_bank_left": { "clip_id": "bank_left", "mobility_modes": ["flight_bank"], "actions": [] },
-    "flight_bank_right": { "clip_id": "bank_right", "mobility_modes": ["flight_bank"], "actions": [] },
-    "air_reaction_node": { "clip_id": "air_reaction", "mobility_modes": ["hover", "flight_travel"], "actions": ["reaction"] },
-    "landing": { "clip_id": "land_front", "mobility_modes": ["landing"], "actions": [] },
-    "cast": { "clip_id": "cast_front", "mobility_modes": ["grounded_idle"], "actions": ["magic_cast"] },
-    "guard": { "clip_id": "guard_front", "mobility_modes": ["grounded_idle"], "actions": ["guard"] },
-    "block": { "clip_id": "block_front", "mobility_modes": ["grounded_idle", "grounded_walk"], "actions": ["block"] },
-    "flourish": { "clip_id": "flourish_front", "mobility_modes": ["grounded_idle"], "actions": ["flourish", "staff_spin"] },
-    "victory_cast": { "clip_id": "victory_cast_front", "mobility_modes": ["grounded_idle"], "actions": ["victory_cast"] },
-    "explain": { "clip_id": "explain_front", "mobility_modes": ["grounded_idle"], "actions": ["explaining", "speaking"] },
-    "point": { "clip_id": "point_front", "mobility_modes": ["grounded_idle"], "actions": ["pointing"] },
-    "shush": { "clip_id": "shush_front", "mobility_modes": ["grounded_idle"], "actions": ["shush"] },
-    "celebrate": { "clip_id": "celebrate_front", "mobility_modes": ["grounded_idle"], "actions": ["celebrate"] },
-    "air_celebrate": { "clip_id": "celebrate_air", "mobility_modes": ["hover", "flight_travel"], "actions": ["celebrate"] },
-    "air_staff": { "clip_id": "air_staff_forward", "mobility_modes": ["hover", "flight_travel"], "actions": ["magic_cast", "staff_forward"] },
-    "hit_reaction": { "clip_id": "hit_fall_recover_front", "mobility_modes": ["grounded_idle", "grounded_walk"], "actions": ["reaction", "hit"] }
+    "ground_idle": {
+      "clip_id": "idle_front",
+      "mobility_modes": [
+        "grounded_idle"
+      ],
+      "actions": []
+    },
+    "back_idle": {
+      "clip_id": "idle_back",
+      "mobility_modes": [
+        "grounded_idle"
+      ],
+      "actions": []
+    },
+    "left_idle": {
+      "clip_id": "idle_left",
+      "mobility_modes": [
+        "grounded_idle"
+      ],
+      "actions": []
+    },
+    "right_idle": {
+      "clip_id": "idle_right",
+      "mobility_modes": [
+        "grounded_idle"
+      ],
+      "actions": []
+    },
+    "turn": {
+      "clip_id": "turn_views",
+      "mobility_modes": [
+        "turn"
+      ],
+      "actions": []
+    },
+    "ground_walk": {
+      "clip_id": "walk_front",
+      "mobility_modes": [
+        "grounded_start",
+        "grounded_walk",
+        "grounded_stop"
+      ],
+      "actions": []
+    },
+    "back_walk": {
+      "clip_id": "walk_back",
+      "mobility_modes": [
+        "grounded_start",
+        "grounded_walk",
+        "grounded_stop"
+      ],
+      "actions": []
+    },
+    "ground_run": {
+      "clip_id": "run_charge_front",
+      "mobility_modes": [
+        "grounded_run"
+      ],
+      "actions": [
+        "dash"
+      ]
+    },
+    "run_recovery": {
+      "clip_id": "run_land_front",
+      "mobility_modes": [
+        "landing"
+      ],
+      "actions": []
+    },
+    "takeoff": {
+      "clip_id": "takeoff_front",
+      "mobility_modes": [
+        "takeoff"
+      ],
+      "actions": []
+    },
+    "hover": {
+      "clip_id": "hover_front",
+      "mobility_modes": [
+        "hover"
+      ],
+      "actions": []
+    },
+    "glide": {
+      "clip_id": "glide_southeast",
+      "mobility_modes": [
+        "flight_travel"
+      ],
+      "actions": []
+    },
+    "flight_bank_left": {
+      "clip_id": "bank_left",
+      "mobility_modes": [
+        "flight_bank"
+      ],
+      "actions": []
+    },
+    "flight_bank_right": {
+      "clip_id": "bank_right",
+      "mobility_modes": [
+        "flight_bank"
+      ],
+      "actions": []
+    },
+    "air_reaction_node": {
+      "clip_id": "air_reaction",
+      "mobility_modes": [
+        "hover",
+        "flight_travel"
+      ],
+      "actions": [
+        "reaction"
+      ]
+    },
+    "landing": {
+      "clip_id": "land_front",
+      "mobility_modes": [
+        "landing"
+      ],
+      "actions": []
+    },
+    "cast": {
+      "clip_id": "cast_front",
+      "mobility_modes": [
+        "grounded_idle"
+      ],
+      "actions": [
+        "magic_cast"
+      ]
+    },
+    "guard": {
+      "clip_id": "guard_front",
+      "mobility_modes": [
+        "grounded_idle"
+      ],
+      "actions": [
+        "guard"
+      ]
+    },
+    "block": {
+      "clip_id": "block_front",
+      "mobility_modes": [
+        "grounded_idle",
+        "grounded_walk"
+      ],
+      "actions": [
+        "block"
+      ]
+    },
+    "flourish": {
+      "clip_id": "flourish_front",
+      "mobility_modes": [
+        "grounded_idle"
+      ],
+      "actions": [
+        "flourish",
+        "staff_spin"
+      ]
+    },
+    "victory_cast": {
+      "clip_id": "victory_cast_front",
+      "mobility_modes": [
+        "grounded_idle"
+      ],
+      "actions": [
+        "victory_cast"
+      ]
+    },
+    "explain": {
+      "clip_id": "explain_front",
+      "mobility_modes": [
+        "grounded_idle"
+      ],
+      "actions": [
+        "explaining",
+        "speaking"
+      ]
+    },
+    "point": {
+      "clip_id": "point_front",
+      "mobility_modes": [
+        "grounded_idle"
+      ],
+      "actions": [
+        "pointing"
+      ]
+    },
+    "shush": {
+      "clip_id": "shush_front",
+      "mobility_modes": [
+        "grounded_idle"
+      ],
+      "actions": [
+        "shush"
+      ]
+    },
+    "celebrate": {
+      "clip_id": "celebrate_front",
+      "mobility_modes": [
+        "grounded_idle"
+      ],
+      "actions": [
+        "celebrate"
+      ]
+    },
+    "air_celebrate": {
+      "clip_id": "celebrate_air",
+      "mobility_modes": [
+        "hover",
+        "flight_travel"
+      ],
+      "actions": [
+        "celebrate"
+      ]
+    },
+    "air_staff": {
+      "clip_id": "air_staff_forward",
+      "mobility_modes": [
+        "hover",
+        "flight_travel"
+      ],
+      "actions": [
+        "magic_cast",
+        "staff_forward"
+      ]
+    },
+    "hit_reaction": {
+      "clip_id": "hit_fall_recover_front",
+      "mobility_modes": [
+        "grounded_idle",
+        "grounded_walk"
+      ],
+      "actions": [
+        "reaction",
+        "hit"
+      ]
+    }
   },
   "transition_recipes": {
-    "coherent_cut": { "entry_rule": "hard_cut", "duration_frames": 0, "interrupt_source": "authored_sample", "region_masks": [] },
-    "phase_match": { "entry_rule": "phase_match", "duration_frames": 0, "interrupt_source": "presented_snapshot", "region_masks": [] },
-    "contact_match": { "entry_rule": "contact_match", "duration_frames": 0, "interrupt_source": "presented_snapshot", "region_masks": [] },
-    "marker_gate": { "entry_rule": "marker_gate", "duration_frames": 0, "interrupt_source": "authored_sample", "region_masks": [] },
-    "snapshot_handoff": { "entry_rule": "snapshot_handoff", "duration_frames": 3, "interrupt_source": "presented_snapshot", "region_masks": ["body", "staff", "wings"] }
+    "coherent_cut": {
+      "entry_rule": "hard_cut",
+      "duration_frames": 0,
+      "interrupt_source": "authored_sample",
+      "region_masks": []
+    },
+    "phase_match": {
+      "entry_rule": "phase_match",
+      "duration_frames": 0,
+      "interrupt_source": "presented_snapshot",
+      "region_masks": []
+    },
+    "contact_match": {
+      "entry_rule": "contact_match",
+      "duration_frames": 0,
+      "interrupt_source": "presented_snapshot",
+      "region_masks": []
+    },
+    "marker_gate": {
+      "entry_rule": "marker_gate",
+      "duration_frames": 0,
+      "interrupt_source": "authored_sample",
+      "region_masks": []
+    },
+    "snapshot_handoff": {
+      "entry_rule": "snapshot_handoff",
+      "duration_frames": 3,
+      "interrupt_source": "presented_snapshot",
+      "region_masks": [
+        "body",
+        "staff",
+        "wings"
+      ]
+    }
   },
   "transitions": [
-    { "transition_id": "idle_to_walk", "source_node_id": "ground_idle", "target_node_id": "ground_walk", "priority": 50, "duration_ticks": 0, "timing_mode": "contact", "transition_recipe_id": "contact_match", "phase_policy": "nearest_contact", "root_policy": "contact_locked", "contact_policy": "match", "region_policy": "coherent_pose", "interrupt_window": "immediate", "fallback_transition_id": null },
-    { "transition_id": "walk_to_idle", "source_node_id": "ground_walk", "target_node_id": "ground_idle", "priority": 50, "duration_ticks": 0, "timing_mode": "contact", "transition_recipe_id": "contact_match", "phase_policy": "nearest_contact", "root_policy": "contact_locked", "contact_policy": "match", "region_policy": "coherent_pose", "interrupt_window": "contact_marker", "fallback_transition_id": null },
-    { "transition_id": "idle_to_run", "source_node_id": "ground_idle", "target_node_id": "ground_run", "priority": 60, "duration_ticks": 0, "timing_mode": "contact", "transition_recipe_id": "contact_match", "phase_policy": "nearest_contact", "root_policy": "ground_distance", "contact_policy": "match", "region_policy": "coherent_pose", "interrupt_window": "immediate", "fallback_transition_id": null },
-    { "transition_id": "run_to_recovery", "source_node_id": "ground_run", "target_node_id": "run_recovery", "priority": 70, "duration_ticks": 0, "timing_mode": "marker", "transition_recipe_id": "marker_gate", "phase_policy": "none", "root_policy": "contact_locked", "contact_policy": "match", "region_policy": "coherent_pose", "interrupt_window": "action_recoverable", "fallback_transition_id": null },
-    { "transition_id": "recovery_to_idle", "source_node_id": "run_recovery", "target_node_id": "ground_idle", "priority": 50, "duration_ticks": 0, "timing_mode": "marker", "transition_recipe_id": "marker_gate", "phase_policy": "restart", "root_policy": "fixed", "contact_policy": "preserve", "region_policy": "coherent_pose", "interrupt_window": "action_recoverable", "fallback_transition_id": null },
-    { "transition_id": "idle_to_turn", "source_node_id": "ground_idle", "target_node_id": "turn", "priority": 40, "duration_ticks": 8, "timing_mode": "immediate", "transition_recipe_id": "snapshot_handoff", "phase_policy": "none", "root_policy": "contact_locked", "contact_policy": "preserve", "region_policy": "presented_snapshot", "interrupt_window": "immediate", "fallback_transition_id": null },
-    { "transition_id": "turn_to_idle", "source_node_id": "turn", "target_node_id": "ground_idle", "priority": 40, "duration_ticks": 0, "timing_mode": "marker", "transition_recipe_id": "marker_gate", "phase_policy": "restart", "root_policy": "fixed", "contact_policy": "preserve", "region_policy": "coherent_pose", "interrupt_window": "action_recoverable", "fallback_transition_id": null },
-    { "transition_id": "idle_to_takeoff", "source_node_id": "ground_idle", "target_node_id": "takeoff", "priority": 80, "duration_ticks": 0, "timing_mode": "contact", "transition_recipe_id": "contact_match", "phase_policy": "restart", "root_policy": "contact_locked", "contact_policy": "preserve", "region_policy": "coherent_pose", "interrupt_window": "immediate", "fallback_transition_id": null },
-    { "transition_id": "takeoff_cancel", "source_node_id": "takeoff", "target_node_id": "ground_idle", "priority": 90, "duration_ticks": 5, "timing_mode": "marker", "transition_recipe_id": "snapshot_handoff", "phase_policy": "restart", "root_policy": "contact_locked", "contact_policy": "preserve", "region_policy": "presented_snapshot", "interrupt_window": "before_takeoff_commit", "fallback_transition_id": null },
-    { "transition_id": "takeoff_to_hover", "source_node_id": "takeoff", "target_node_id": "hover", "priority": 80, "duration_ticks": 0, "timing_mode": "marker", "transition_recipe_id": "marker_gate", "phase_policy": "preserve", "root_policy": "air_trajectory", "contact_policy": "release", "region_policy": "coherent_pose", "interrupt_window": "airborne", "fallback_transition_id": null },
-    { "transition_id": "hover_to_glide", "source_node_id": "hover", "target_node_id": "glide", "priority": 50, "duration_ticks": 4, "timing_mode": "phase", "transition_recipe_id": "phase_match", "phase_policy": "preserve", "root_policy": "air_trajectory", "contact_policy": "none", "region_policy": "presented_snapshot", "interrupt_window": "immediate", "fallback_transition_id": null },
-    { "transition_id": "glide_to_hover", "source_node_id": "glide", "target_node_id": "hover", "priority": 50, "duration_ticks": 4, "timing_mode": "phase", "transition_recipe_id": "phase_match", "phase_policy": "preserve", "root_policy": "air_trajectory", "contact_policy": "none", "region_policy": "presented_snapshot", "interrupt_window": "immediate", "fallback_transition_id": null },
-    { "transition_id": "hover_to_bank_left", "source_node_id": "hover", "target_node_id": "flight_bank_left", "priority": 55, "duration_ticks": 4, "timing_mode": "phase", "transition_recipe_id": "phase_match", "phase_policy": "preserve", "root_policy": "air_trajectory", "contact_policy": "none", "region_policy": "presented_snapshot", "interrupt_window": "immediate", "fallback_transition_id": null },
-    { "transition_id": "hover_to_bank_right", "source_node_id": "hover", "target_node_id": "flight_bank_right", "priority": 55, "duration_ticks": 4, "timing_mode": "phase", "transition_recipe_id": "phase_match", "phase_policy": "preserve", "root_policy": "air_trajectory", "contact_policy": "none", "region_policy": "presented_snapshot", "interrupt_window": "immediate", "fallback_transition_id": null },
-    { "transition_id": "bank_left_to_hover", "source_node_id": "flight_bank_left", "target_node_id": "hover", "priority": 50, "duration_ticks": 4, "timing_mode": "marker", "transition_recipe_id": "snapshot_handoff", "phase_policy": "preserve", "root_policy": "air_trajectory", "contact_policy": "none", "region_policy": "presented_snapshot", "interrupt_window": "action_recoverable", "fallback_transition_id": null },
-    { "transition_id": "bank_right_to_hover", "source_node_id": "flight_bank_right", "target_node_id": "hover", "priority": 50, "duration_ticks": 4, "timing_mode": "marker", "transition_recipe_id": "snapshot_handoff", "phase_policy": "preserve", "root_policy": "air_trajectory", "contact_policy": "none", "region_policy": "presented_snapshot", "interrupt_window": "action_recoverable", "fallback_transition_id": null },
-    { "transition_id": "hover_to_land", "source_node_id": "hover", "target_node_id": "landing", "priority": 80, "duration_ticks": 0, "timing_mode": "phase", "transition_recipe_id": "phase_match", "phase_policy": "preserve", "root_policy": "air_trajectory", "contact_policy": "none", "region_policy": "coherent_pose", "interrupt_window": "immediate", "fallback_transition_id": null },
-    { "transition_id": "glide_to_land", "source_node_id": "glide", "target_node_id": "landing", "priority": 80, "duration_ticks": 4, "timing_mode": "phase", "transition_recipe_id": "snapshot_handoff", "phase_policy": "preserve", "root_policy": "air_trajectory", "contact_policy": "none", "region_policy": "presented_snapshot", "interrupt_window": "immediate", "fallback_transition_id": null },
-    { "transition_id": "landing_to_idle", "source_node_id": "landing", "target_node_id": "ground_idle", "priority": 80, "duration_ticks": 0, "timing_mode": "marker", "transition_recipe_id": "marker_gate", "phase_policy": "restart", "root_policy": "fixed", "contact_policy": "preserve", "region_policy": "coherent_pose", "interrupt_window": "landing_settled", "fallback_transition_id": null },
-    { "transition_id": "hover_to_air_reaction", "source_node_id": "hover", "target_node_id": "air_reaction_node", "priority": 90, "duration_ticks": 3, "timing_mode": "immediate", "transition_recipe_id": "snapshot_handoff", "phase_policy": "preserve", "root_policy": "air_trajectory", "contact_policy": "none", "region_policy": "presented_snapshot", "interrupt_window": "immediate", "fallback_transition_id": null },
-    { "transition_id": "air_reaction_to_hover", "source_node_id": "air_reaction_node", "target_node_id": "hover", "priority": 70, "duration_ticks": 3, "timing_mode": "marker", "transition_recipe_id": "snapshot_handoff", "phase_policy": "preserve", "root_policy": "air_trajectory", "contact_policy": "none", "region_policy": "presented_snapshot", "interrupt_window": "action_recoverable", "fallback_transition_id": null },
-    { "transition_id": "hover_to_air_celebrate", "source_node_id": "hover", "target_node_id": "air_celebrate", "priority": 85, "duration_ticks": 3, "timing_mode": "immediate", "transition_recipe_id": "snapshot_handoff", "phase_policy": "preserve", "root_policy": "air_trajectory", "contact_policy": "none", "region_policy": "presented_snapshot", "interrupt_window": "immediate", "fallback_transition_id": null },
-    { "transition_id": "air_celebrate_to_hover", "source_node_id": "air_celebrate", "target_node_id": "hover", "priority": 70, "duration_ticks": 3, "timing_mode": "marker", "transition_recipe_id": "snapshot_handoff", "phase_policy": "preserve", "root_policy": "air_trajectory", "contact_policy": "none", "region_policy": "presented_snapshot", "interrupt_window": "action_recoverable", "fallback_transition_id": null },
-    { "transition_id": "hover_to_air_staff", "source_node_id": "hover", "target_node_id": "air_staff", "priority": 85, "duration_ticks": 3, "timing_mode": "immediate", "transition_recipe_id": "snapshot_handoff", "phase_policy": "preserve", "root_policy": "air_trajectory", "contact_policy": "none", "region_policy": "presented_snapshot", "interrupt_window": "immediate", "fallback_transition_id": null },
-    { "transition_id": "air_staff_to_hover", "source_node_id": "air_staff", "target_node_id": "hover", "priority": 70, "duration_ticks": 3, "timing_mode": "marker", "transition_recipe_id": "snapshot_handoff", "phase_policy": "preserve", "root_policy": "air_trajectory", "contact_policy": "none", "region_policy": "presented_snapshot", "interrupt_window": "action_recoverable", "fallback_transition_id": null },
-    { "transition_id": "walk_to_block", "source_node_id": "ground_walk", "target_node_id": "block", "priority": 90, "duration_ticks": 0, "timing_mode": "contact", "transition_recipe_id": "contact_match", "phase_policy": "preserve", "root_policy": "contact_locked", "contact_policy": "match", "region_policy": "coherent_pose", "interrupt_window": "contact_marker", "fallback_transition_id": null },
-    { "transition_id": "block_to_walk", "source_node_id": "block", "target_node_id": "ground_walk", "priority": 60, "duration_ticks": 0, "timing_mode": "marker", "transition_recipe_id": "marker_gate", "phase_policy": "preserve", "root_policy": "contact_locked", "contact_policy": "match", "region_policy": "coherent_pose", "interrupt_window": "action_recoverable", "fallback_transition_id": null },
-    { "transition_id": "idle_to_cast", "source_node_id": "ground_idle", "target_node_id": "cast", "priority": 80, "duration_ticks": 0, "timing_mode": "immediate", "transition_recipe_id": "coherent_cut", "phase_policy": "restart", "root_policy": "contact_locked", "contact_policy": "preserve", "region_policy": "coherent_pose", "interrupt_window": "immediate", "fallback_transition_id": null },
-    { "transition_id": "cast_to_idle", "source_node_id": "cast", "target_node_id": "ground_idle", "priority": 60, "duration_ticks": 0, "timing_mode": "marker", "transition_recipe_id": "marker_gate", "phase_policy": "restart", "root_policy": "fixed", "contact_policy": "preserve", "region_policy": "coherent_pose", "interrupt_window": "action_recoverable", "fallback_transition_id": null },
-    { "transition_id": "idle_to_guard", "source_node_id": "ground_idle", "target_node_id": "guard", "priority": 80, "duration_ticks": 0, "timing_mode": "immediate", "transition_recipe_id": "coherent_cut", "phase_policy": "restart", "root_policy": "contact_locked", "contact_policy": "preserve", "region_policy": "coherent_pose", "interrupt_window": "immediate", "fallback_transition_id": null },
-    { "transition_id": "guard_to_idle", "source_node_id": "guard", "target_node_id": "ground_idle", "priority": 60, "duration_ticks": 0, "timing_mode": "marker", "transition_recipe_id": "marker_gate", "phase_policy": "restart", "root_policy": "fixed", "contact_policy": "preserve", "region_policy": "coherent_pose", "interrupt_window": "action_recoverable", "fallback_transition_id": null },
-    { "transition_id": "idle_to_block", "source_node_id": "ground_idle", "target_node_id": "block", "priority": 80, "duration_ticks": 0, "timing_mode": "immediate", "transition_recipe_id": "coherent_cut", "phase_policy": "restart", "root_policy": "contact_locked", "contact_policy": "preserve", "region_policy": "coherent_pose", "interrupt_window": "immediate", "fallback_transition_id": null },
-    { "transition_id": "block_to_idle", "source_node_id": "block", "target_node_id": "ground_idle", "priority": 60, "duration_ticks": 0, "timing_mode": "marker", "transition_recipe_id": "marker_gate", "phase_policy": "restart", "root_policy": "fixed", "contact_policy": "preserve", "region_policy": "coherent_pose", "interrupt_window": "action_recoverable", "fallback_transition_id": null },
-    { "transition_id": "idle_to_flourish", "source_node_id": "ground_idle", "target_node_id": "flourish", "priority": 80, "duration_ticks": 0, "timing_mode": "immediate", "transition_recipe_id": "coherent_cut", "phase_policy": "restart", "root_policy": "contact_locked", "contact_policy": "preserve", "region_policy": "coherent_pose", "interrupt_window": "immediate", "fallback_transition_id": null },
-    { "transition_id": "flourish_to_idle", "source_node_id": "flourish", "target_node_id": "ground_idle", "priority": 60, "duration_ticks": 0, "timing_mode": "marker", "transition_recipe_id": "marker_gate", "phase_policy": "restart", "root_policy": "fixed", "contact_policy": "preserve", "region_policy": "coherent_pose", "interrupt_window": "action_recoverable", "fallback_transition_id": null },
-    { "transition_id": "idle_to_victory", "source_node_id": "ground_idle", "target_node_id": "victory_cast", "priority": 80, "duration_ticks": 0, "timing_mode": "immediate", "transition_recipe_id": "coherent_cut", "phase_policy": "restart", "root_policy": "contact_locked", "contact_policy": "preserve", "region_policy": "coherent_pose", "interrupt_window": "immediate", "fallback_transition_id": null },
-    { "transition_id": "victory_to_idle", "source_node_id": "victory_cast", "target_node_id": "ground_idle", "priority": 60, "duration_ticks": 0, "timing_mode": "marker", "transition_recipe_id": "marker_gate", "phase_policy": "restart", "root_policy": "fixed", "contact_policy": "preserve", "region_policy": "coherent_pose", "interrupt_window": "action_recoverable", "fallback_transition_id": null },
-    { "transition_id": "idle_to_explain", "source_node_id": "ground_idle", "target_node_id": "explain", "priority": 70, "duration_ticks": 0, "timing_mode": "immediate", "transition_recipe_id": "coherent_cut", "phase_policy": "restart", "root_policy": "fixed", "contact_policy": "preserve", "region_policy": "coherent_pose", "interrupt_window": "immediate", "fallback_transition_id": null },
-    { "transition_id": "explain_to_idle", "source_node_id": "explain", "target_node_id": "ground_idle", "priority": 60, "duration_ticks": 0, "timing_mode": "marker", "transition_recipe_id": "marker_gate", "phase_policy": "restart", "root_policy": "fixed", "contact_policy": "preserve", "region_policy": "coherent_pose", "interrupt_window": "action_recoverable", "fallback_transition_id": null },
-    { "transition_id": "idle_to_point", "source_node_id": "ground_idle", "target_node_id": "point", "priority": 70, "duration_ticks": 0, "timing_mode": "immediate", "transition_recipe_id": "coherent_cut", "phase_policy": "restart", "root_policy": "fixed", "contact_policy": "preserve", "region_policy": "coherent_pose", "interrupt_window": "immediate", "fallback_transition_id": null },
-    { "transition_id": "point_to_idle", "source_node_id": "point", "target_node_id": "ground_idle", "priority": 60, "duration_ticks": 0, "timing_mode": "marker", "transition_recipe_id": "marker_gate", "phase_policy": "restart", "root_policy": "fixed", "contact_policy": "preserve", "region_policy": "coherent_pose", "interrupt_window": "action_recoverable", "fallback_transition_id": null },
-    { "transition_id": "idle_to_shush", "source_node_id": "ground_idle", "target_node_id": "shush", "priority": 75, "duration_ticks": 0, "timing_mode": "immediate", "transition_recipe_id": "coherent_cut", "phase_policy": "restart", "root_policy": "fixed", "contact_policy": "preserve", "region_policy": "coherent_pose", "interrupt_window": "immediate", "fallback_transition_id": null },
-    { "transition_id": "shush_to_idle", "source_node_id": "shush", "target_node_id": "ground_idle", "priority": 60, "duration_ticks": 0, "timing_mode": "marker", "transition_recipe_id": "marker_gate", "phase_policy": "restart", "root_policy": "fixed", "contact_policy": "preserve", "region_policy": "coherent_pose", "interrupt_window": "action_recoverable", "fallback_transition_id": null },
-    { "transition_id": "idle_to_celebrate", "source_node_id": "ground_idle", "target_node_id": "celebrate", "priority": 75, "duration_ticks": 0, "timing_mode": "immediate", "transition_recipe_id": "coherent_cut", "phase_policy": "restart", "root_policy": "contact_locked", "contact_policy": "preserve", "region_policy": "coherent_pose", "interrupt_window": "immediate", "fallback_transition_id": null },
-    { "transition_id": "celebrate_to_idle", "source_node_id": "celebrate", "target_node_id": "ground_idle", "priority": 60, "duration_ticks": 0, "timing_mode": "marker", "transition_recipe_id": "marker_gate", "phase_policy": "restart", "root_policy": "fixed", "contact_policy": "preserve", "region_policy": "coherent_pose", "interrupt_window": "action_recoverable", "fallback_transition_id": null },
-    { "transition_id": "idle_to_hit", "source_node_id": "ground_idle", "target_node_id": "hit_reaction", "priority": 100, "duration_ticks": 0, "timing_mode": "immediate", "transition_recipe_id": "coherent_cut", "phase_policy": "restart", "root_policy": "contact_locked", "contact_policy": "preserve", "region_policy": "coherent_pose", "interrupt_window": "immediate", "fallback_transition_id": null },
-    { "transition_id": "hit_to_idle", "source_node_id": "hit_reaction", "target_node_id": "ground_idle", "priority": 60, "duration_ticks": 0, "timing_mode": "marker", "transition_recipe_id": "marker_gate", "phase_policy": "restart", "root_policy": "fixed", "contact_policy": "preserve", "region_policy": "coherent_pose", "interrupt_window": "action_recoverable", "fallback_transition_id": null }
+    {
+      "transition_id": "idle_to_walk",
+      "source_node_id": "ground_idle",
+      "target_node_id": "ground_walk",
+      "priority": 50,
+      "duration_ticks": 0,
+      "timing_mode": "contact",
+      "transition_recipe_id": "contact_match",
+      "phase_policy": "nearest_contact",
+      "root_policy": "contact_locked",
+      "contact_policy": "match",
+      "region_policy": "coherent_pose",
+      "interrupt_window": "immediate",
+      "fallback_transition_id": null
+    },
+    {
+      "transition_id": "walk_to_idle",
+      "source_node_id": "ground_walk",
+      "target_node_id": "ground_idle",
+      "priority": 50,
+      "duration_ticks": 0,
+      "timing_mode": "contact",
+      "transition_recipe_id": "contact_match",
+      "phase_policy": "nearest_contact",
+      "root_policy": "contact_locked",
+      "contact_policy": "match",
+      "region_policy": "coherent_pose",
+      "interrupt_window": "contact_marker",
+      "fallback_transition_id": null
+    },
+    {
+      "transition_id": "idle_to_run",
+      "source_node_id": "ground_idle",
+      "target_node_id": "ground_run",
+      "priority": 60,
+      "duration_ticks": 0,
+      "timing_mode": "contact",
+      "transition_recipe_id": "contact_match",
+      "phase_policy": "nearest_contact",
+      "root_policy": "ground_distance",
+      "contact_policy": "match",
+      "region_policy": "coherent_pose",
+      "interrupt_window": "immediate",
+      "fallback_transition_id": null
+    },
+    {
+      "transition_id": "run_to_recovery",
+      "source_node_id": "ground_run",
+      "target_node_id": "run_recovery",
+      "priority": 70,
+      "duration_ticks": 0,
+      "timing_mode": "marker",
+      "transition_recipe_id": "marker_gate",
+      "phase_policy": "none",
+      "root_policy": "contact_locked",
+      "contact_policy": "match",
+      "region_policy": "coherent_pose",
+      "interrupt_window": "action_recoverable",
+      "fallback_transition_id": null
+    },
+    {
+      "transition_id": "recovery_to_idle",
+      "source_node_id": "run_recovery",
+      "target_node_id": "ground_idle",
+      "priority": 50,
+      "duration_ticks": 0,
+      "timing_mode": "marker",
+      "transition_recipe_id": "marker_gate",
+      "phase_policy": "restart",
+      "root_policy": "fixed",
+      "contact_policy": "preserve",
+      "region_policy": "coherent_pose",
+      "interrupt_window": "action_recoverable",
+      "fallback_transition_id": null
+    },
+    {
+      "transition_id": "idle_to_turn",
+      "source_node_id": "ground_idle",
+      "target_node_id": "turn",
+      "priority": 40,
+      "duration_ticks": 8,
+      "timing_mode": "immediate",
+      "transition_recipe_id": "snapshot_handoff",
+      "phase_policy": "none",
+      "root_policy": "contact_locked",
+      "contact_policy": "preserve",
+      "region_policy": "presented_snapshot",
+      "interrupt_window": "immediate",
+      "fallback_transition_id": null
+    },
+    {
+      "transition_id": "turn_to_idle",
+      "source_node_id": "turn",
+      "target_node_id": "ground_idle",
+      "priority": 40,
+      "duration_ticks": 0,
+      "timing_mode": "marker",
+      "transition_recipe_id": "marker_gate",
+      "phase_policy": "restart",
+      "root_policy": "fixed",
+      "contact_policy": "preserve",
+      "region_policy": "coherent_pose",
+      "interrupt_window": "action_recoverable",
+      "fallback_transition_id": null
+    },
+    {
+      "transition_id": "idle_to_takeoff",
+      "source_node_id": "ground_idle",
+      "target_node_id": "takeoff",
+      "priority": 80,
+      "duration_ticks": 0,
+      "timing_mode": "contact",
+      "transition_recipe_id": "contact_match",
+      "phase_policy": "restart",
+      "root_policy": "contact_locked",
+      "contact_policy": "preserve",
+      "region_policy": "coherent_pose",
+      "interrupt_window": "immediate",
+      "fallback_transition_id": null
+    },
+    {
+      "transition_id": "takeoff_cancel",
+      "source_node_id": "takeoff",
+      "target_node_id": "ground_idle",
+      "priority": 90,
+      "duration_ticks": 5,
+      "timing_mode": "marker",
+      "transition_recipe_id": "snapshot_handoff",
+      "phase_policy": "restart",
+      "root_policy": "contact_locked",
+      "contact_policy": "preserve",
+      "region_policy": "presented_snapshot",
+      "interrupt_window": "before_takeoff_commit",
+      "fallback_transition_id": null
+    },
+    {
+      "transition_id": "takeoff_to_hover",
+      "source_node_id": "takeoff",
+      "target_node_id": "hover",
+      "priority": 80,
+      "duration_ticks": 0,
+      "timing_mode": "marker",
+      "transition_recipe_id": "marker_gate",
+      "phase_policy": "preserve",
+      "root_policy": "air_trajectory",
+      "contact_policy": "release",
+      "region_policy": "coherent_pose",
+      "interrupt_window": "airborne",
+      "fallback_transition_id": null
+    },
+    {
+      "transition_id": "hover_to_glide",
+      "source_node_id": "hover",
+      "target_node_id": "glide",
+      "priority": 50,
+      "duration_ticks": 4,
+      "timing_mode": "phase",
+      "transition_recipe_id": "phase_match",
+      "phase_policy": "preserve",
+      "root_policy": "air_trajectory",
+      "contact_policy": "none",
+      "region_policy": "presented_snapshot",
+      "interrupt_window": "immediate",
+      "fallback_transition_id": null
+    },
+    {
+      "transition_id": "glide_to_hover",
+      "source_node_id": "glide",
+      "target_node_id": "hover",
+      "priority": 50,
+      "duration_ticks": 4,
+      "timing_mode": "phase",
+      "transition_recipe_id": "phase_match",
+      "phase_policy": "preserve",
+      "root_policy": "air_trajectory",
+      "contact_policy": "none",
+      "region_policy": "presented_snapshot",
+      "interrupt_window": "immediate",
+      "fallback_transition_id": null
+    },
+    {
+      "transition_id": "hover_to_bank_left",
+      "source_node_id": "hover",
+      "target_node_id": "flight_bank_left",
+      "priority": 55,
+      "duration_ticks": 4,
+      "timing_mode": "phase",
+      "transition_recipe_id": "phase_match",
+      "phase_policy": "preserve",
+      "root_policy": "air_trajectory",
+      "contact_policy": "none",
+      "region_policy": "presented_snapshot",
+      "interrupt_window": "immediate",
+      "fallback_transition_id": null
+    },
+    {
+      "transition_id": "hover_to_bank_right",
+      "source_node_id": "hover",
+      "target_node_id": "flight_bank_right",
+      "priority": 55,
+      "duration_ticks": 4,
+      "timing_mode": "phase",
+      "transition_recipe_id": "phase_match",
+      "phase_policy": "preserve",
+      "root_policy": "air_trajectory",
+      "contact_policy": "none",
+      "region_policy": "presented_snapshot",
+      "interrupt_window": "immediate",
+      "fallback_transition_id": null
+    },
+    {
+      "transition_id": "bank_left_to_hover",
+      "source_node_id": "flight_bank_left",
+      "target_node_id": "hover",
+      "priority": 50,
+      "duration_ticks": 4,
+      "timing_mode": "marker",
+      "transition_recipe_id": "snapshot_handoff",
+      "phase_policy": "preserve",
+      "root_policy": "air_trajectory",
+      "contact_policy": "none",
+      "region_policy": "presented_snapshot",
+      "interrupt_window": "action_recoverable",
+      "fallback_transition_id": null
+    },
+    {
+      "transition_id": "bank_right_to_hover",
+      "source_node_id": "flight_bank_right",
+      "target_node_id": "hover",
+      "priority": 50,
+      "duration_ticks": 4,
+      "timing_mode": "marker",
+      "transition_recipe_id": "snapshot_handoff",
+      "phase_policy": "preserve",
+      "root_policy": "air_trajectory",
+      "contact_policy": "none",
+      "region_policy": "presented_snapshot",
+      "interrupt_window": "action_recoverable",
+      "fallback_transition_id": null
+    },
+    {
+      "transition_id": "hover_to_land",
+      "source_node_id": "hover",
+      "target_node_id": "landing",
+      "priority": 80,
+      "duration_ticks": 0,
+      "timing_mode": "phase",
+      "transition_recipe_id": "phase_match",
+      "phase_policy": "preserve",
+      "root_policy": "air_trajectory",
+      "contact_policy": "none",
+      "region_policy": "coherent_pose",
+      "interrupt_window": "immediate",
+      "fallback_transition_id": null
+    },
+    {
+      "transition_id": "glide_to_land",
+      "source_node_id": "glide",
+      "target_node_id": "landing",
+      "priority": 80,
+      "duration_ticks": 4,
+      "timing_mode": "phase",
+      "transition_recipe_id": "snapshot_handoff",
+      "phase_policy": "preserve",
+      "root_policy": "air_trajectory",
+      "contact_policy": "none",
+      "region_policy": "presented_snapshot",
+      "interrupt_window": "immediate",
+      "fallback_transition_id": null
+    },
+    {
+      "transition_id": "landing_to_idle",
+      "source_node_id": "landing",
+      "target_node_id": "ground_idle",
+      "priority": 80,
+      "duration_ticks": 0,
+      "timing_mode": "marker",
+      "transition_recipe_id": "marker_gate",
+      "phase_policy": "restart",
+      "root_policy": "fixed",
+      "contact_policy": "preserve",
+      "region_policy": "coherent_pose",
+      "interrupt_window": "landing_settled",
+      "fallback_transition_id": null
+    },
+    {
+      "transition_id": "hover_to_air_reaction",
+      "source_node_id": "hover",
+      "target_node_id": "air_reaction_node",
+      "priority": 90,
+      "duration_ticks": 3,
+      "timing_mode": "immediate",
+      "transition_recipe_id": "snapshot_handoff",
+      "phase_policy": "preserve",
+      "root_policy": "air_trajectory",
+      "contact_policy": "none",
+      "region_policy": "presented_snapshot",
+      "interrupt_window": "immediate",
+      "fallback_transition_id": null
+    },
+    {
+      "transition_id": "air_reaction_to_hover",
+      "source_node_id": "air_reaction_node",
+      "target_node_id": "hover",
+      "priority": 70,
+      "duration_ticks": 3,
+      "timing_mode": "marker",
+      "transition_recipe_id": "snapshot_handoff",
+      "phase_policy": "preserve",
+      "root_policy": "air_trajectory",
+      "contact_policy": "none",
+      "region_policy": "presented_snapshot",
+      "interrupt_window": "action_recoverable",
+      "fallback_transition_id": null
+    },
+    {
+      "transition_id": "hover_to_air_celebrate",
+      "source_node_id": "hover",
+      "target_node_id": "air_celebrate",
+      "priority": 85,
+      "duration_ticks": 3,
+      "timing_mode": "immediate",
+      "transition_recipe_id": "snapshot_handoff",
+      "phase_policy": "preserve",
+      "root_policy": "air_trajectory",
+      "contact_policy": "none",
+      "region_policy": "presented_snapshot",
+      "interrupt_window": "immediate",
+      "fallback_transition_id": null
+    },
+    {
+      "transition_id": "air_celebrate_to_hover",
+      "source_node_id": "air_celebrate",
+      "target_node_id": "hover",
+      "priority": 70,
+      "duration_ticks": 3,
+      "timing_mode": "marker",
+      "transition_recipe_id": "snapshot_handoff",
+      "phase_policy": "preserve",
+      "root_policy": "air_trajectory",
+      "contact_policy": "none",
+      "region_policy": "presented_snapshot",
+      "interrupt_window": "action_recoverable",
+      "fallback_transition_id": null
+    },
+    {
+      "transition_id": "hover_to_air_staff",
+      "source_node_id": "hover",
+      "target_node_id": "air_staff",
+      "priority": 85,
+      "duration_ticks": 3,
+      "timing_mode": "immediate",
+      "transition_recipe_id": "snapshot_handoff",
+      "phase_policy": "preserve",
+      "root_policy": "air_trajectory",
+      "contact_policy": "none",
+      "region_policy": "presented_snapshot",
+      "interrupt_window": "immediate",
+      "fallback_transition_id": null
+    },
+    {
+      "transition_id": "air_staff_to_hover",
+      "source_node_id": "air_staff",
+      "target_node_id": "hover",
+      "priority": 70,
+      "duration_ticks": 3,
+      "timing_mode": "marker",
+      "transition_recipe_id": "snapshot_handoff",
+      "phase_policy": "preserve",
+      "root_policy": "air_trajectory",
+      "contact_policy": "none",
+      "region_policy": "presented_snapshot",
+      "interrupt_window": "action_recoverable",
+      "fallback_transition_id": null
+    },
+    {
+      "transition_id": "walk_to_block",
+      "source_node_id": "ground_walk",
+      "target_node_id": "block",
+      "priority": 90,
+      "duration_ticks": 0,
+      "timing_mode": "contact",
+      "transition_recipe_id": "contact_match",
+      "phase_policy": "preserve",
+      "root_policy": "contact_locked",
+      "contact_policy": "match",
+      "region_policy": "coherent_pose",
+      "interrupt_window": "contact_marker",
+      "fallback_transition_id": null
+    },
+    {
+      "transition_id": "block_to_walk",
+      "source_node_id": "block",
+      "target_node_id": "ground_walk",
+      "priority": 60,
+      "duration_ticks": 0,
+      "timing_mode": "marker",
+      "transition_recipe_id": "marker_gate",
+      "phase_policy": "preserve",
+      "root_policy": "contact_locked",
+      "contact_policy": "match",
+      "region_policy": "coherent_pose",
+      "interrupt_window": "action_recoverable",
+      "fallback_transition_id": null
+    },
+    {
+      "transition_id": "idle_to_cast",
+      "source_node_id": "ground_idle",
+      "target_node_id": "cast",
+      "priority": 80,
+      "duration_ticks": 0,
+      "timing_mode": "immediate",
+      "transition_recipe_id": "coherent_cut",
+      "phase_policy": "restart",
+      "root_policy": "contact_locked",
+      "contact_policy": "preserve",
+      "region_policy": "coherent_pose",
+      "interrupt_window": "immediate",
+      "fallback_transition_id": null
+    },
+    {
+      "transition_id": "cast_to_idle",
+      "source_node_id": "cast",
+      "target_node_id": "ground_idle",
+      "priority": 60,
+      "duration_ticks": 0,
+      "timing_mode": "marker",
+      "transition_recipe_id": "marker_gate",
+      "phase_policy": "restart",
+      "root_policy": "fixed",
+      "contact_policy": "preserve",
+      "region_policy": "coherent_pose",
+      "interrupt_window": "action_recoverable",
+      "fallback_transition_id": null
+    },
+    {
+      "transition_id": "idle_to_guard",
+      "source_node_id": "ground_idle",
+      "target_node_id": "guard",
+      "priority": 80,
+      "duration_ticks": 0,
+      "timing_mode": "immediate",
+      "transition_recipe_id": "coherent_cut",
+      "phase_policy": "restart",
+      "root_policy": "contact_locked",
+      "contact_policy": "preserve",
+      "region_policy": "coherent_pose",
+      "interrupt_window": "immediate",
+      "fallback_transition_id": null
+    },
+    {
+      "transition_id": "guard_to_idle",
+      "source_node_id": "guard",
+      "target_node_id": "ground_idle",
+      "priority": 60,
+      "duration_ticks": 0,
+      "timing_mode": "marker",
+      "transition_recipe_id": "marker_gate",
+      "phase_policy": "restart",
+      "root_policy": "fixed",
+      "contact_policy": "preserve",
+      "region_policy": "coherent_pose",
+      "interrupt_window": "action_recoverable",
+      "fallback_transition_id": null
+    },
+    {
+      "transition_id": "idle_to_block",
+      "source_node_id": "ground_idle",
+      "target_node_id": "block",
+      "priority": 80,
+      "duration_ticks": 0,
+      "timing_mode": "immediate",
+      "transition_recipe_id": "coherent_cut",
+      "phase_policy": "restart",
+      "root_policy": "contact_locked",
+      "contact_policy": "preserve",
+      "region_policy": "coherent_pose",
+      "interrupt_window": "immediate",
+      "fallback_transition_id": null
+    },
+    {
+      "transition_id": "block_to_idle",
+      "source_node_id": "block",
+      "target_node_id": "ground_idle",
+      "priority": 60,
+      "duration_ticks": 0,
+      "timing_mode": "marker",
+      "transition_recipe_id": "marker_gate",
+      "phase_policy": "restart",
+      "root_policy": "fixed",
+      "contact_policy": "preserve",
+      "region_policy": "coherent_pose",
+      "interrupt_window": "action_recoverable",
+      "fallback_transition_id": null
+    },
+    {
+      "transition_id": "idle_to_flourish",
+      "source_node_id": "ground_idle",
+      "target_node_id": "flourish",
+      "priority": 80,
+      "duration_ticks": 0,
+      "timing_mode": "immediate",
+      "transition_recipe_id": "coherent_cut",
+      "phase_policy": "restart",
+      "root_policy": "contact_locked",
+      "contact_policy": "preserve",
+      "region_policy": "coherent_pose",
+      "interrupt_window": "immediate",
+      "fallback_transition_id": null
+    },
+    {
+      "transition_id": "flourish_to_idle",
+      "source_node_id": "flourish",
+      "target_node_id": "ground_idle",
+      "priority": 60,
+      "duration_ticks": 0,
+      "timing_mode": "marker",
+      "transition_recipe_id": "marker_gate",
+      "phase_policy": "restart",
+      "root_policy": "fixed",
+      "contact_policy": "preserve",
+      "region_policy": "coherent_pose",
+      "interrupt_window": "action_recoverable",
+      "fallback_transition_id": null
+    },
+    {
+      "transition_id": "idle_to_victory",
+      "source_node_id": "ground_idle",
+      "target_node_id": "victory_cast",
+      "priority": 80,
+      "duration_ticks": 0,
+      "timing_mode": "immediate",
+      "transition_recipe_id": "coherent_cut",
+      "phase_policy": "restart",
+      "root_policy": "contact_locked",
+      "contact_policy": "preserve",
+      "region_policy": "coherent_pose",
+      "interrupt_window": "immediate",
+      "fallback_transition_id": null
+    },
+    {
+      "transition_id": "victory_to_idle",
+      "source_node_id": "victory_cast",
+      "target_node_id": "ground_idle",
+      "priority": 60,
+      "duration_ticks": 0,
+      "timing_mode": "marker",
+      "transition_recipe_id": "marker_gate",
+      "phase_policy": "restart",
+      "root_policy": "fixed",
+      "contact_policy": "preserve",
+      "region_policy": "coherent_pose",
+      "interrupt_window": "action_recoverable",
+      "fallback_transition_id": null
+    },
+    {
+      "transition_id": "idle_to_explain",
+      "source_node_id": "ground_idle",
+      "target_node_id": "explain",
+      "priority": 70,
+      "duration_ticks": 0,
+      "timing_mode": "immediate",
+      "transition_recipe_id": "coherent_cut",
+      "phase_policy": "restart",
+      "root_policy": "fixed",
+      "contact_policy": "preserve",
+      "region_policy": "coherent_pose",
+      "interrupt_window": "immediate",
+      "fallback_transition_id": null
+    },
+    {
+      "transition_id": "explain_to_idle",
+      "source_node_id": "explain",
+      "target_node_id": "ground_idle",
+      "priority": 60,
+      "duration_ticks": 0,
+      "timing_mode": "marker",
+      "transition_recipe_id": "marker_gate",
+      "phase_policy": "restart",
+      "root_policy": "fixed",
+      "contact_policy": "preserve",
+      "region_policy": "coherent_pose",
+      "interrupt_window": "action_recoverable",
+      "fallback_transition_id": null
+    },
+    {
+      "transition_id": "idle_to_point",
+      "source_node_id": "ground_idle",
+      "target_node_id": "point",
+      "priority": 70,
+      "duration_ticks": 0,
+      "timing_mode": "immediate",
+      "transition_recipe_id": "coherent_cut",
+      "phase_policy": "restart",
+      "root_policy": "fixed",
+      "contact_policy": "preserve",
+      "region_policy": "coherent_pose",
+      "interrupt_window": "immediate",
+      "fallback_transition_id": null
+    },
+    {
+      "transition_id": "point_to_idle",
+      "source_node_id": "point",
+      "target_node_id": "ground_idle",
+      "priority": 60,
+      "duration_ticks": 0,
+      "timing_mode": "marker",
+      "transition_recipe_id": "marker_gate",
+      "phase_policy": "restart",
+      "root_policy": "fixed",
+      "contact_policy": "preserve",
+      "region_policy": "coherent_pose",
+      "interrupt_window": "action_recoverable",
+      "fallback_transition_id": null
+    },
+    {
+      "transition_id": "idle_to_shush",
+      "source_node_id": "ground_idle",
+      "target_node_id": "shush",
+      "priority": 75,
+      "duration_ticks": 0,
+      "timing_mode": "immediate",
+      "transition_recipe_id": "coherent_cut",
+      "phase_policy": "restart",
+      "root_policy": "fixed",
+      "contact_policy": "preserve",
+      "region_policy": "coherent_pose",
+      "interrupt_window": "immediate",
+      "fallback_transition_id": null
+    },
+    {
+      "transition_id": "shush_to_idle",
+      "source_node_id": "shush",
+      "target_node_id": "ground_idle",
+      "priority": 60,
+      "duration_ticks": 0,
+      "timing_mode": "marker",
+      "transition_recipe_id": "marker_gate",
+      "phase_policy": "restart",
+      "root_policy": "fixed",
+      "contact_policy": "preserve",
+      "region_policy": "coherent_pose",
+      "interrupt_window": "action_recoverable",
+      "fallback_transition_id": null
+    },
+    {
+      "transition_id": "idle_to_celebrate",
+      "source_node_id": "ground_idle",
+      "target_node_id": "celebrate",
+      "priority": 75,
+      "duration_ticks": 0,
+      "timing_mode": "immediate",
+      "transition_recipe_id": "coherent_cut",
+      "phase_policy": "restart",
+      "root_policy": "contact_locked",
+      "contact_policy": "preserve",
+      "region_policy": "coherent_pose",
+      "interrupt_window": "immediate",
+      "fallback_transition_id": null
+    },
+    {
+      "transition_id": "celebrate_to_idle",
+      "source_node_id": "celebrate",
+      "target_node_id": "ground_idle",
+      "priority": 60,
+      "duration_ticks": 0,
+      "timing_mode": "marker",
+      "transition_recipe_id": "marker_gate",
+      "phase_policy": "restart",
+      "root_policy": "fixed",
+      "contact_policy": "preserve",
+      "region_policy": "coherent_pose",
+      "interrupt_window": "action_recoverable",
+      "fallback_transition_id": null
+    },
+    {
+      "transition_id": "idle_to_hit",
+      "source_node_id": "ground_idle",
+      "target_node_id": "hit_reaction",
+      "priority": 100,
+      "duration_ticks": 0,
+      "timing_mode": "immediate",
+      "transition_recipe_id": "coherent_cut",
+      "phase_policy": "restart",
+      "root_policy": "contact_locked",
+      "contact_policy": "preserve",
+      "region_policy": "coherent_pose",
+      "interrupt_window": "immediate",
+      "fallback_transition_id": null
+    },
+    {
+      "transition_id": "hit_to_idle",
+      "source_node_id": "hit_reaction",
+      "target_node_id": "ground_idle",
+      "priority": 60,
+      "duration_ticks": 0,
+      "timing_mode": "marker",
+      "transition_recipe_id": "marker_gate",
+      "phase_policy": "restart",
+      "root_policy": "fixed",
+      "contact_policy": "preserve",
+      "region_policy": "coherent_pose",
+      "interrupt_window": "action_recoverable",
+      "fallback_transition_id": null
+    }
   ],
   "channel_masks": {
-    "body": ["head", "torso", "arms", "legs"],
-    "staff": ["staff", "staff_hand", "staff_tip"],
-    "wings": ["left_wing", "right_wing"],
-    "mouth": ["mouth"],
-    "effect": ["magic_effect"]
+    "body": [
+      "head",
+      "torso",
+      "arms",
+      "legs"
+    ],
+    "staff": [
+      "staff",
+      "staff_hand",
+      "staff_tip"
+    ],
+    "wings": [
+      "left_wing",
+      "right_wing"
+    ],
+    "mouth": [
+      "mouth"
+    ],
+    "effect": [
+      "magic_effect"
+    ]
   },
   "fallbacks": {
     "grounded_clip_id": "idle_front",
     "airborne_clip_id": "hover_front",
     "by_facing": {
-      "north": "idle_back", "northeast": "idle_back", "east": "idle_right", "southeast": "idle_front", "south": "idle_front", "southwest": "idle_front", "west": "idle_left", "northwest": "idle_back"
+      "north": "idle_back",
+      "northeast": "idle_back",
+      "east": "idle_right",
+      "southeast": "idle_front",
+      "south": "idle_front",
+      "southwest": "idle_front",
+      "west": "idle_left",
+      "northwest": "idle_back"
     },
     "by_action": {
-      "magic_cast": "cast_front", "guard": "guard_front", "block": "block_front", "flourish": "flourish_front", "victory_cast": "victory_cast_front", "explaining": "explain_front", "speaking": "explain_front", "pointing": "point_front", "shush": "shush_front", "celebrate": "celebrate_front", "reaction": "hit_fall_recover_front"
+      "magic_cast": "cast_front",
+      "guard": "guard_front",
+      "block": "block_front",
+      "flourish": "flourish_front",
+      "victory_cast": "victory_cast_front",
+      "explaining": "explain_front",
+      "speaking": "explain_front",
+      "pointing": "point_front",
+      "shush": "shush_front",
+      "celebrate": "celebrate_front",
+      "reaction": "hit_fall_recover_front"
     }
   }
 }

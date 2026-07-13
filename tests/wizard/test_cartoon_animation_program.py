@@ -32,7 +32,7 @@ class CartoonAnimationProgramTests(unittest.TestCase):
             "baseline": {
                 "branch": "codex/build-repeatable-avatar-animation",
                 "python_url": "http://127.0.0.1:8765/",
-                "production_pose_count": 39,
+                "production_pose_count": 89,
                 "generated_library_sha256": LIBRARY_HASH,
             },
             "production_architecture": "asciline_python",

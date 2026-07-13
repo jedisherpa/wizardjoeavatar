@@ -1,5 +1,5 @@
 {
-  "version": 31,
+  "version": 81,
   "asset_set_id": "wizardjoe-reference-motion-v1",
   "description": "Source pose PNGs for the repeatable WizardJoe square-cell pose library.",
   "canonical": {
@@ -2044,6 +2044,3177 @@
         "staff_tip": [
           -26,
           -65
+        ]
+      }
+    },
+    {
+      "id": "run_front_cross_step_wings_staff",
+      "source": "evidence/pose-library-expansion/intake/feelings/ChatGPT Image Jul 12, 2026, 11_43_57 PM (1).png",
+      "source_path": "evidence/pose-library-expansion/intake/feelings/ChatGPT Image Jul 12, 2026, 11_43_57 PM (1).png",
+      "description": "run front cross step wings staff",
+      "facing": "south",
+      "locomotion": "walking",
+      "actions": [
+        "walking",
+        "dash"
+      ],
+      "phase": 0.0,
+      "generation_rows": 92,
+      "tags": [
+        "front",
+        "wings",
+        "feelings_expansion",
+        "run",
+        "wjfl-01"
+      ],
+      "anchor_offsets": {
+        "root": [
+          0,
+          0
+        ],
+        "mouth": [
+          5,
+          -65
+        ],
+        "left_eye": [
+          2,
+          -71
+        ],
+        "right_eye": [
+          8,
+          -71
+        ],
+        "left_foot": [
+          -10,
+          -17
+        ],
+        "right_foot": [
+          10,
+          -7
+        ],
+        "left_hand": [
+          -16,
+          -42
+        ],
+        "right_hand": [
+          26,
+          -46
+        ],
+        "staff_hand": [
+          26,
+          -47
+        ],
+        "staff_tip": [
+          29,
+          -79
+        ]
+      }
+    },
+    {
+      "id": "run_front_stride_wings_staff",
+      "source": "evidence/pose-library-expansion/intake/feelings/ChatGPT Image Jul 12, 2026, 11_43_57 PM (2).png",
+      "source_path": "evidence/pose-library-expansion/intake/feelings/ChatGPT Image Jul 12, 2026, 11_43_57 PM (2).png",
+      "description": "run front stride wings staff",
+      "facing": "south",
+      "locomotion": "walking",
+      "actions": [
+        "walking",
+        "dash"
+      ],
+      "phase": 0.5,
+      "generation_rows": 94,
+      "tags": [
+        "front",
+        "wings",
+        "feelings_expansion",
+        "run",
+        "wjfl-02"
+      ],
+      "anchor_offsets": {
+        "root": [
+          0,
+          0
+        ],
+        "mouth": [
+          4,
+          -69
+        ],
+        "left_eye": [
+          1,
+          -75
+        ],
+        "right_eye": [
+          7,
+          -75
+        ],
+        "left_foot": [
+          -11,
+          -16
+        ],
+        "right_foot": [
+          11,
+          -6
+        ],
+        "left_hand": [
+          -2,
+          -51
+        ],
+        "right_hand": [
+          25,
+          -52
+        ],
+        "staff_hand": [
+          23,
+          -52
+        ],
+        "staff_tip": [
+          26,
+          -86
+        ]
+      }
+    },
+    {
+      "id": "front_crouch_guard_wings",
+      "source": "evidence/pose-library-expansion/intake/feelings/ChatGPT Image Jul 12, 2026, 11_43_57 PM (3).png",
+      "source_path": "evidence/pose-library-expansion/intake/feelings/ChatGPT Image Jul 12, 2026, 11_43_57 PM (3).png",
+      "description": "front crouch guard wings",
+      "facing": "south",
+      "locomotion": "idle",
+      "actions": [
+        "guard",
+        "reaction"
+      ],
+      "phase": null,
+      "generation_rows": 74,
+      "tags": [
+        "front",
+        "wings",
+        "feelings_expansion",
+        "ground_action",
+        "wjfl-03"
+      ],
+      "anchor_offsets": {
+        "root": [
+          0,
+          0
+        ],
+        "mouth": [
+          8,
+          -44
+        ],
+        "left_eye": [
+          4,
+          -50
+        ],
+        "right_eye": [
+          12,
+          -50
+        ],
+        "left_foot": [
+          -12,
+          -3
+        ],
+        "right_foot": [
+          11,
+          -3
+        ],
+        "left_hand": [
+          -16,
+          -22
+        ],
+        "right_hand": [
+          25,
+          -32
+        ],
+        "staff_hand": [
+          24,
+          -32
+        ],
+        "staff_tip": [
+          31,
+          -71
+        ]
+      }
+    },
+    {
+      "id": "front_reaction_jump_wings_staff",
+      "source": "evidence/pose-library-expansion/intake/feelings/ChatGPT Image Jul 12, 2026, 11_43_57 PM (4).png",
+      "source_path": "evidence/pose-library-expansion/intake/feelings/ChatGPT Image Jul 12, 2026, 11_43_57 PM (4).png",
+      "description": "front reaction jump wings staff",
+      "facing": "south",
+      "locomotion": "idle",
+      "actions": [
+        "reaction"
+      ],
+      "phase": null,
+      "generation_rows": 79,
+      "tags": [
+        "front",
+        "wings",
+        "feelings_expansion",
+        "jump",
+        "wjfl-04"
+      ],
+      "anchor_offsets": {
+        "root": [
+          0,
+          0
+        ],
+        "mouth": [
+          -3,
+          -52
+        ],
+        "left_eye": [
+          -8,
+          -58
+        ],
+        "right_eye": [
+          2,
+          -58
+        ],
+        "left_foot": [
+          -12,
+          -7
+        ],
+        "right_foot": [
+          14,
+          -8
+        ],
+        "left_hand": [
+          -24,
+          -53
+        ],
+        "right_hand": [
+          23,
+          -44
+        ],
+        "staff_hand": [
+          22,
+          -42
+        ],
+        "staff_tip": [
+          28,
+          -71
+        ]
+      }
+    },
+    {
+      "id": "front_kneel_staff_brace_wings",
+      "source": "evidence/pose-library-expansion/intake/feelings/ChatGPT Image Jul 12, 2026, 11_43_57 PM (5).png",
+      "source_path": "evidence/pose-library-expansion/intake/feelings/ChatGPT Image Jul 12, 2026, 11_43_57 PM (5).png",
+      "description": "front kneel staff brace wings",
+      "facing": "south",
+      "locomotion": "idle",
+      "actions": [
+        "reaction"
+      ],
+      "phase": null,
+      "generation_rows": 73,
+      "tags": [
+        "front",
+        "wings",
+        "feelings_expansion",
+        "kneel",
+        "wjfl-05"
+      ],
+      "anchor_offsets": {
+        "root": [
+          0,
+          0
+        ],
+        "mouth": [
+          0,
+          -45
+        ],
+        "left_eye": [
+          -4,
+          -51
+        ],
+        "right_eye": [
+          4,
+          -51
+        ],
+        "left_foot": [
+          -10,
+          -2
+        ],
+        "right_foot": [
+          10,
+          -1
+        ],
+        "left_hand": [
+          -14,
+          -24
+        ],
+        "right_hand": [
+          21,
+          -30
+        ],
+        "staff_hand": [
+          20,
+          -28
+        ],
+        "staff_tip": [
+          26,
+          -58
+        ]
+      }
+    },
+    {
+      "id": "front_staff_guard_windup_wings",
+      "source": "evidence/pose-library-expansion/intake/feelings/ChatGPT Image Jul 12, 2026, 11_43_57 PM (6).png",
+      "source_path": "evidence/pose-library-expansion/intake/feelings/ChatGPT Image Jul 12, 2026, 11_43_57 PM (6).png",
+      "description": "front staff guard windup wings",
+      "facing": "south",
+      "locomotion": "idle",
+      "actions": [
+        "guard",
+        "reaction"
+      ],
+      "phase": 0.25,
+      "generation_rows": 78,
+      "tags": [
+        "front",
+        "wings",
+        "feelings_expansion",
+        "ground_action",
+        "wjfl-06"
+      ],
+      "anchor_offsets": {
+        "root": [
+          0,
+          0
+        ],
+        "mouth": [
+          -5,
+          -51
+        ],
+        "left_eye": [
+          -9,
+          -57
+        ],
+        "right_eye": [
+          -1,
+          -57
+        ],
+        "left_foot": [
+          -11,
+          -1
+        ],
+        "right_foot": [
+          12,
+          -1
+        ],
+        "left_hand": [
+          3,
+          -37
+        ],
+        "right_hand": [
+          12,
+          -35
+        ],
+        "staff_hand": [
+          12,
+          -35
+        ],
+        "staff_tip": [
+          24,
+          -67
+        ]
+      }
+    },
+    {
+      "id": "front_staff_guard_horizontal_wings",
+      "source": "evidence/pose-library-expansion/intake/feelings/ChatGPT Image Jul 12, 2026, 11_43_57 PM (7).png",
+      "source_path": "evidence/pose-library-expansion/intake/feelings/ChatGPT Image Jul 12, 2026, 11_43_57 PM (7).png",
+      "description": "front staff guard horizontal wings",
+      "facing": "south",
+      "locomotion": "idle",
+      "actions": [
+        "guard",
+        "reaction"
+      ],
+      "phase": 0.5,
+      "generation_rows": 94,
+      "tags": [
+        "front",
+        "wings",
+        "feelings_expansion",
+        "ground_action",
+        "wjfl-07"
+      ],
+      "anchor_offsets": {
+        "root": [
+          0,
+          0
+        ],
+        "mouth": [
+          -4,
+          -65
+        ],
+        "left_eye": [
+          -9,
+          -71
+        ],
+        "right_eye": [
+          1,
+          -71
+        ],
+        "left_foot": [
+          -15,
+          -5
+        ],
+        "right_foot": [
+          17,
+          -1
+        ],
+        "left_hand": [
+          -6,
+          -49
+        ],
+        "right_hand": [
+          13,
+          -37
+        ],
+        "staff_hand": [
+          -7,
+          -49
+        ],
+        "staff_tip": [
+          -21,
+          -65
+        ]
+      }
+    },
+    {
+      "id": "front_staff_guard_low_wings",
+      "source": "evidence/pose-library-expansion/intake/feelings/ChatGPT Image Jul 12, 2026, 11_43_57 PM (8).png",
+      "source_path": "evidence/pose-library-expansion/intake/feelings/ChatGPT Image Jul 12, 2026, 11_43_57 PM (8).png",
+      "description": "front staff guard low wings",
+      "facing": "south",
+      "locomotion": "idle",
+      "actions": [
+        "guard",
+        "reaction"
+      ],
+      "phase": 0.75,
+      "generation_rows": 92,
+      "tags": [
+        "front",
+        "wings",
+        "feelings_expansion",
+        "ground_action",
+        "wjfl-08"
+      ],
+      "anchor_offsets": {
+        "root": [
+          0,
+          0
+        ],
+        "mouth": [
+          -12,
+          -65
+        ],
+        "left_eye": [
+          -17,
+          -71
+        ],
+        "right_eye": [
+          -7,
+          -71
+        ],
+        "left_foot": [
+          -7,
+          -1
+        ],
+        "right_foot": [
+          15,
+          -3
+        ],
+        "left_hand": [
+          -2,
+          -43
+        ],
+        "right_hand": [
+          20,
+          -44
+        ],
+        "staff_hand": [
+          3,
+          -46
+        ],
+        "staff_tip": [
+          14,
+          -80
+        ]
+      }
+    },
+    {
+      "id": "front_crouch_staff_planted_wings",
+      "source": "evidence/pose-library-expansion/intake/feelings/ChatGPT Image Jul 12, 2026, 11_43_57 PM (9).png",
+      "source_path": "evidence/pose-library-expansion/intake/feelings/ChatGPT Image Jul 12, 2026, 11_43_57 PM (9).png",
+      "description": "front crouch staff planted wings",
+      "facing": "south",
+      "locomotion": "idle",
+      "actions": [
+        "reaction"
+      ],
+      "phase": null,
+      "generation_rows": 69,
+      "tags": [
+        "front",
+        "wings",
+        "feelings_expansion",
+        "ground_action",
+        "wjfl-09"
+      ],
+      "anchor_offsets": {
+        "root": [
+          0,
+          0
+        ],
+        "mouth": [
+          0,
+          -40
+        ],
+        "left_eye": [
+          -4,
+          -46
+        ],
+        "right_eye": [
+          4,
+          -46
+        ],
+        "left_foot": [
+          -14,
+          -1
+        ],
+        "right_foot": [
+          9,
+          -1
+        ],
+        "left_hand": [
+          -12,
+          -32
+        ],
+        "right_hand": [
+          22,
+          -30
+        ],
+        "staff_hand": [
+          22,
+          -30
+        ],
+        "staff_tip": [
+          28,
+          -47
+        ]
+      }
+    },
+    {
+      "id": "front_victory_cast_wings",
+      "source": "evidence/pose-library-expansion/intake/feelings/ChatGPT Image Jul 12, 2026, 11_43_57 PM (10).png",
+      "source_path": "evidence/pose-library-expansion/intake/feelings/ChatGPT Image Jul 12, 2026, 11_43_57 PM (10).png",
+      "description": "front victory cast wings",
+      "facing": "south",
+      "locomotion": "idle",
+      "actions": [
+        "magic_cast"
+      ],
+      "phase": null,
+      "generation_rows": 94,
+      "tags": [
+        "front",
+        "wings",
+        "feelings_expansion",
+        "ground_action",
+        "wjfl-10"
+      ],
+      "anchor_offsets": {
+        "root": [
+          0,
+          0
+        ],
+        "mouth": [
+          0,
+          -55
+        ],
+        "left_eye": [
+          -5,
+          -61
+        ],
+        "right_eye": [
+          5,
+          -61
+        ],
+        "left_foot": [
+          -8,
+          -1
+        ],
+        "right_foot": [
+          11,
+          -1
+        ],
+        "left_hand": [
+          -18,
+          -63
+        ],
+        "right_hand": [
+          19,
+          -64
+        ],
+        "staff_hand": [
+          20,
+          -63
+        ],
+        "staff_tip": [
+          16,
+          -89
+        ]
+      }
+    },
+    {
+      "id": "front_run_charge_wings",
+      "source": "evidence/pose-library-expansion/intake/feelings/ChatGPT Image Jul 12, 2026, 11_44_16 PM (1).png",
+      "source_path": "evidence/pose-library-expansion/intake/feelings/ChatGPT Image Jul 12, 2026, 11_44_16 PM (1).png",
+      "description": "front run charge wings",
+      "facing": "south",
+      "locomotion": "walking",
+      "actions": [
+        "walking",
+        "dash"
+      ],
+      "phase": 0.25,
+      "generation_rows": 77,
+      "tags": [
+        "front",
+        "wings",
+        "feelings_expansion",
+        "run",
+        "wjfl-11"
+      ],
+      "anchor_offsets": {
+        "root": [
+          0,
+          0
+        ],
+        "mouth": [
+          0,
+          -48
+        ],
+        "left_eye": [
+          -5,
+          -54
+        ],
+        "right_eye": [
+          5,
+          -54
+        ],
+        "left_foot": [
+          -12,
+          -10
+        ],
+        "right_foot": [
+          12,
+          -5
+        ],
+        "left_hand": [
+          -12,
+          -31
+        ],
+        "right_hand": [
+          21,
+          -37
+        ],
+        "staff_hand": [
+          19,
+          -37
+        ],
+        "staff_tip": [
+          32,
+          -66
+        ]
+      }
+    },
+    {
+      "id": "front_crouch_hand_plant_wings",
+      "source": "evidence/pose-library-expansion/intake/feelings/ChatGPT Image Jul 12, 2026, 11_44_16 PM (2).png",
+      "source_path": "evidence/pose-library-expansion/intake/feelings/ChatGPT Image Jul 12, 2026, 11_44_16 PM (2).png",
+      "description": "front crouch hand plant wings",
+      "facing": "south",
+      "locomotion": "idle",
+      "actions": [
+        "reaction"
+      ],
+      "phase": null,
+      "generation_rows": 74,
+      "tags": [
+        "front",
+        "wings",
+        "feelings_expansion",
+        "landing",
+        "wjfl-12"
+      ],
+      "anchor_offsets": {
+        "root": [
+          0,
+          0
+        ],
+        "mouth": [
+          0,
+          -34
+        ],
+        "left_eye": [
+          -5,
+          -40
+        ],
+        "right_eye": [
+          5,
+          -40
+        ],
+        "left_foot": [
+          -21,
+          -1
+        ],
+        "right_foot": [
+          14,
+          -3
+        ],
+        "left_hand": [
+          -11,
+          -14
+        ],
+        "right_hand": [
+          20,
+          -43
+        ],
+        "staff_hand": [
+          22,
+          -42
+        ],
+        "staff_tip": [
+          30,
+          -68
+        ]
+      }
+    },
+    {
+      "id": "front_magic_staff_thrust_wings",
+      "source": "evidence/pose-library-expansion/intake/feelings/ChatGPT Image Jul 12, 2026, 11_44_16 PM (3).png",
+      "source_path": "evidence/pose-library-expansion/intake/feelings/ChatGPT Image Jul 12, 2026, 11_44_16 PM (3).png",
+      "description": "front magic staff thrust wings",
+      "facing": "south",
+      "locomotion": "idle",
+      "actions": [
+        "magic_cast"
+      ],
+      "phase": null,
+      "generation_rows": 76,
+      "tags": [
+        "front",
+        "wings",
+        "feelings_expansion",
+        "ground_action",
+        "wjfl-13"
+      ],
+      "anchor_offsets": {
+        "root": [
+          0,
+          0
+        ],
+        "mouth": [
+          9,
+          -50
+        ],
+        "left_eye": [
+          4,
+          -56
+        ],
+        "right_eye": [
+          14,
+          -56
+        ],
+        "left_foot": [
+          -13,
+          -1
+        ],
+        "right_foot": [
+          21,
+          -2
+        ],
+        "left_hand": [
+          -9,
+          -39
+        ],
+        "right_hand": [
+          23,
+          -31
+        ],
+        "staff_hand": [
+          -8,
+          -38
+        ],
+        "staff_tip": [
+          -21,
+          -53
+        ]
+      }
+    },
+    {
+      "id": "front_airborne_fall_back_wings",
+      "source": "evidence/pose-library-expansion/intake/feelings/ChatGPT Image Jul 12, 2026, 11_44_16 PM (4).png",
+      "source_path": "evidence/pose-library-expansion/intake/feelings/ChatGPT Image Jul 12, 2026, 11_44_16 PM (4).png",
+      "description": "front airborne fall back wings",
+      "facing": "south",
+      "locomotion": "idle",
+      "actions": [
+        "reaction"
+      ],
+      "phase": null,
+      "generation_rows": 70,
+      "tags": [
+        "front",
+        "wings",
+        "feelings_expansion",
+        "jump",
+        "wjfl-14"
+      ],
+      "anchor_offsets": {
+        "root": [
+          0,
+          0
+        ],
+        "mouth": [
+          -4,
+          -45
+        ],
+        "left_eye": [
+          -9,
+          -51
+        ],
+        "right_eye": [
+          1,
+          -51
+        ],
+        "left_foot": [
+          3,
+          -7
+        ],
+        "right_foot": [
+          25,
+          -10
+        ],
+        "left_hand": [
+          -16,
+          -40
+        ],
+        "right_hand": [
+          20,
+          -45
+        ],
+        "staff_hand": [
+          18,
+          -44
+        ],
+        "staff_tip": [
+          25,
+          -60
+        ]
+      }
+    },
+    {
+      "id": "front_celebrate_staff_up_wings",
+      "source": "evidence/pose-library-expansion/intake/feelings/ChatGPT Image Jul 12, 2026, 11_44_16 PM (5).png",
+      "source_path": "evidence/pose-library-expansion/intake/feelings/ChatGPT Image Jul 12, 2026, 11_44_16 PM (5).png",
+      "description": "front celebrate staff up wings",
+      "facing": "south",
+      "locomotion": "idle",
+      "actions": [
+        "celebrate",
+        "reaction"
+      ],
+      "phase": null,
+      "generation_rows": 90,
+      "tags": [
+        "front",
+        "wings",
+        "feelings_expansion",
+        "ground_action",
+        "wjfl-15"
+      ],
+      "anchor_offsets": {
+        "root": [
+          0,
+          0
+        ],
+        "mouth": [
+          -1,
+          -52
+        ],
+        "left_eye": [
+          -6,
+          -58
+        ],
+        "right_eye": [
+          4,
+          -58
+        ],
+        "left_foot": [
+          -9,
+          -1
+        ],
+        "right_foot": [
+          16,
+          -1
+        ],
+        "left_hand": [
+          18,
+          -63
+        ],
+        "right_hand": [
+          -18,
+          -65
+        ],
+        "staff_hand": [
+          -21,
+          -63
+        ],
+        "staff_tip": [
+          -24,
+          -86
+        ]
+      }
+    },
+    {
+      "id": "front_staff_block_wings",
+      "source": "evidence/pose-library-expansion/intake/feelings/ChatGPT Image Jul 12, 2026, 11_44_16 PM (6).png",
+      "source_path": "evidence/pose-library-expansion/intake/feelings/ChatGPT Image Jul 12, 2026, 11_44_16 PM (6).png",
+      "description": "front staff block wings",
+      "facing": "south",
+      "locomotion": "idle",
+      "actions": [
+        "guard",
+        "reaction"
+      ],
+      "phase": null,
+      "generation_rows": 75,
+      "tags": [
+        "front",
+        "wings",
+        "feelings_expansion",
+        "ground_action",
+        "wjfl-16"
+      ],
+      "anchor_offsets": {
+        "root": [
+          0,
+          0
+        ],
+        "mouth": [
+          -1,
+          -48
+        ],
+        "left_eye": [
+          -6,
+          -54
+        ],
+        "right_eye": [
+          4,
+          -54
+        ],
+        "left_foot": [
+          -14,
+          -1
+        ],
+        "right_foot": [
+          19,
+          -1
+        ],
+        "left_hand": [
+          -19,
+          -37
+        ],
+        "right_hand": [
+          8,
+          -40
+        ],
+        "staff_hand": [
+          -18,
+          -36
+        ],
+        "staff_tip": [
+          32,
+          -42
+        ]
+      }
+    },
+    {
+      "id": "front_point_direct_wings",
+      "source": "evidence/pose-library-expansion/intake/feelings/ChatGPT Image Jul 12, 2026, 11_44_16 PM (7).png",
+      "source_path": "evidence/pose-library-expansion/intake/feelings/ChatGPT Image Jul 12, 2026, 11_44_16 PM (7).png",
+      "description": "front point direct wings",
+      "facing": "south",
+      "locomotion": "idle",
+      "actions": [
+        "pointing"
+      ],
+      "phase": null,
+      "generation_rows": 94,
+      "tags": [
+        "front",
+        "wings",
+        "feelings_expansion",
+        "ground_action",
+        "wjfl-17"
+      ],
+      "anchor_offsets": {
+        "root": [
+          0,
+          0
+        ],
+        "mouth": [
+          -1,
+          -67
+        ],
+        "left_eye": [
+          -6,
+          -73
+        ],
+        "right_eye": [
+          4,
+          -73
+        ],
+        "left_foot": [
+          -11,
+          -1
+        ],
+        "right_foot": [
+          17,
+          -6
+        ],
+        "left_hand": [
+          -23,
+          -59
+        ],
+        "right_hand": [
+          21,
+          -49
+        ],
+        "staff_hand": [
+          24,
+          -49
+        ],
+        "staff_tip": [
+          28,
+          -83
+        ]
+      }
+    },
+    {
+      "id": "front_celebrate_jump_wings",
+      "source": "evidence/pose-library-expansion/intake/feelings/ChatGPT Image Jul 12, 2026, 11_44_16 PM (8).png",
+      "source_path": "evidence/pose-library-expansion/intake/feelings/ChatGPT Image Jul 12, 2026, 11_44_16 PM (8).png",
+      "description": "front celebrate jump wings",
+      "facing": "south",
+      "locomotion": "idle",
+      "actions": [
+        "celebrate",
+        "reaction"
+      ],
+      "phase": null,
+      "generation_rows": 82,
+      "tags": [
+        "front",
+        "wings",
+        "feelings_expansion",
+        "jump",
+        "wjfl-18"
+      ],
+      "anchor_offsets": {
+        "root": [
+          0,
+          0
+        ],
+        "mouth": [
+          -4,
+          -49
+        ],
+        "left_eye": [
+          -9,
+          -55
+        ],
+        "right_eye": [
+          1,
+          -55
+        ],
+        "left_foot": [
+          -8,
+          -4
+        ],
+        "right_foot": [
+          13,
+          -7
+        ],
+        "left_hand": [
+          -15,
+          -68
+        ],
+        "right_hand": [
+          18,
+          -69
+        ],
+        "staff_hand": [
+          18,
+          -69
+        ],
+        "staff_tip": [
+          19,
+          -78
+        ]
+      }
+    },
+    {
+      "id": "front_shush_wings",
+      "source": "evidence/pose-library-expansion/intake/feelings/ChatGPT Image Jul 12, 2026, 11_44_16 PM (9).png",
+      "source_path": "evidence/pose-library-expansion/intake/feelings/ChatGPT Image Jul 12, 2026, 11_44_16 PM (9).png",
+      "description": "front shush wings",
+      "facing": "south",
+      "locomotion": "idle",
+      "actions": [
+        "shush"
+      ],
+      "phase": null,
+      "generation_rows": 94,
+      "tags": [
+        "front",
+        "wings",
+        "feelings_expansion",
+        "ground_action",
+        "wjfl-19"
+      ],
+      "anchor_offsets": {
+        "root": [
+          0,
+          0
+        ],
+        "mouth": [
+          2,
+          -63
+        ],
+        "left_eye": [
+          -3,
+          -69
+        ],
+        "right_eye": [
+          7,
+          -69
+        ],
+        "left_foot": [
+          -9,
+          -5
+        ],
+        "right_foot": [
+          14,
+          -1
+        ],
+        "left_hand": [
+          -1,
+          -51
+        ],
+        "right_hand": [
+          21,
+          -50
+        ],
+        "staff_hand": [
+          20,
+          -51
+        ],
+        "staff_tip": [
+          26,
+          -81
+        ]
+      }
+    },
+    {
+      "id": "front_staff_spin_wings",
+      "source": "evidence/pose-library-expansion/intake/feelings/ChatGPT Image Jul 12, 2026, 11_44_16 PM (10).png",
+      "source_path": "evidence/pose-library-expansion/intake/feelings/ChatGPT Image Jul 12, 2026, 11_44_16 PM (10).png",
+      "description": "front staff spin wings",
+      "facing": "south",
+      "locomotion": "idle",
+      "actions": [
+        "staff_spin",
+        "magic_cast"
+      ],
+      "phase": null,
+      "generation_rows": 76,
+      "tags": [
+        "front",
+        "wings",
+        "feelings_expansion",
+        "ground_action",
+        "wjfl-20"
+      ],
+      "anchor_offsets": {
+        "root": [
+          0,
+          0
+        ],
+        "mouth": [
+          -1,
+          -52
+        ],
+        "left_eye": [
+          -6,
+          -58
+        ],
+        "right_eye": [
+          4,
+          -58
+        ],
+        "left_foot": [
+          -11,
+          -1
+        ],
+        "right_foot": [
+          16,
+          -3
+        ],
+        "left_hand": [
+          26,
+          -44
+        ],
+        "right_hand": [
+          -13,
+          -45
+        ],
+        "staff_hand": [
+          -17,
+          -47
+        ],
+        "staff_tip": [
+          -22,
+          -66
+        ]
+      }
+    },
+    {
+      "id": "front_idle_wings",
+      "source": "evidence/pose-library-expansion/intake/feelings/ChatGPT Image Jul 12, 2026, 11_45_11 PM (1).png",
+      "source_path": "evidence/pose-library-expansion/intake/feelings/ChatGPT Image Jul 12, 2026, 11_45_11 PM (1).png",
+      "description": "front idle wings",
+      "facing": "south",
+      "locomotion": "idle",
+      "actions": [
+        "idle"
+      ],
+      "phase": null,
+      "generation_rows": 92,
+      "tags": [
+        "front",
+        "wings",
+        "feelings_expansion",
+        "ground_action",
+        "wjfl-21"
+      ],
+      "anchor_offsets": {
+        "root": [
+          0,
+          0
+        ],
+        "mouth": [
+          -3,
+          -59
+        ],
+        "left_eye": [
+          -8,
+          -65
+        ],
+        "right_eye": [
+          2,
+          -65
+        ],
+        "left_foot": [
+          -8,
+          -1
+        ],
+        "right_foot": [
+          10,
+          -1
+        ],
+        "left_hand": [
+          -15,
+          -40
+        ],
+        "right_hand": [
+          18,
+          -49
+        ],
+        "staff_hand": [
+          24,
+          -43
+        ],
+        "staff_tip": [
+          26,
+          -80
+        ]
+      }
+    },
+    {
+      "id": "front_greeting_wave_wings",
+      "source": "evidence/pose-library-expansion/intake/feelings/ChatGPT Image Jul 12, 2026, 11_45_11 PM (2).png",
+      "source_path": "evidence/pose-library-expansion/intake/feelings/ChatGPT Image Jul 12, 2026, 11_45_11 PM (2).png",
+      "description": "front greeting wave wings",
+      "facing": "south",
+      "locomotion": "idle",
+      "actions": [
+        "explaining"
+      ],
+      "phase": null,
+      "generation_rows": 87,
+      "tags": [
+        "front",
+        "wings",
+        "feelings_expansion",
+        "ground_action",
+        "wjfl-22"
+      ],
+      "anchor_offsets": {
+        "root": [
+          0,
+          0
+        ],
+        "mouth": [
+          -1,
+          -59
+        ],
+        "left_eye": [
+          -6,
+          -65
+        ],
+        "right_eye": [
+          4,
+          -65
+        ],
+        "left_foot": [
+          -8,
+          -1
+        ],
+        "right_foot": [
+          10,
+          -1
+        ],
+        "left_hand": [
+          -20,
+          -62
+        ],
+        "right_hand": [
+          17,
+          -47
+        ],
+        "staff_hand": [
+          18,
+          -47
+        ],
+        "staff_tip": [
+          28,
+          -76
+        ]
+      }
+    },
+    {
+      "id": "front_thinking_hand_chin_wings",
+      "source": "evidence/pose-library-expansion/intake/feelings/ChatGPT Image Jul 12, 2026, 11_45_12 PM (3).png",
+      "source_path": "evidence/pose-library-expansion/intake/feelings/ChatGPT Image Jul 12, 2026, 11_45_12 PM (3).png",
+      "description": "front thinking hand chin wings",
+      "facing": "south",
+      "locomotion": "idle",
+      "actions": [
+        "thinking"
+      ],
+      "phase": null,
+      "generation_rows": 92,
+      "tags": [
+        "front",
+        "wings",
+        "feelings_expansion",
+        "ground_action",
+        "wjfl-23"
+      ],
+      "anchor_offsets": {
+        "root": [
+          0,
+          0
+        ],
+        "mouth": [
+          0,
+          -59
+        ],
+        "left_eye": [
+          -5,
+          -65
+        ],
+        "right_eye": [
+          5,
+          -65
+        ],
+        "left_foot": [
+          -8,
+          -1
+        ],
+        "right_foot": [
+          10,
+          -1
+        ],
+        "left_hand": [
+          -1,
+          -52
+        ],
+        "right_hand": [
+          25,
+          -45
+        ],
+        "staff_hand": [
+          24,
+          -43
+        ],
+        "staff_tip": [
+          26,
+          -81
+        ]
+      }
+    },
+    {
+      "id": "front_explaining_open_hand_wings",
+      "source": "evidence/pose-library-expansion/intake/feelings/ChatGPT Image Jul 12, 2026, 11_45_12 PM (4).png",
+      "source_path": "evidence/pose-library-expansion/intake/feelings/ChatGPT Image Jul 12, 2026, 11_45_12 PM (4).png",
+      "description": "front explaining open hand wings",
+      "facing": "south",
+      "locomotion": "idle",
+      "actions": [
+        "explaining"
+      ],
+      "phase": null,
+      "generation_rows": 89,
+      "tags": [
+        "front",
+        "wings",
+        "feelings_expansion",
+        "ground_action",
+        "wjfl-24"
+      ],
+      "anchor_offsets": {
+        "root": [
+          0,
+          0
+        ],
+        "mouth": [
+          -3,
+          -58
+        ],
+        "left_eye": [
+          -8,
+          -64
+        ],
+        "right_eye": [
+          2,
+          -64
+        ],
+        "left_foot": [
+          -8,
+          -1
+        ],
+        "right_foot": [
+          10,
+          -1
+        ],
+        "left_hand": [
+          -22,
+          -47
+        ],
+        "right_hand": [
+          17,
+          -48
+        ],
+        "staff_hand": [
+          18,
+          -47
+        ],
+        "staff_tip": [
+          28,
+          -78
+        ]
+      }
+    },
+    {
+      "id": "front_point_side_wings",
+      "source": "evidence/pose-library-expansion/intake/feelings/ChatGPT Image Jul 12, 2026, 11_45_12 PM (5).png",
+      "source_path": "evidence/pose-library-expansion/intake/feelings/ChatGPT Image Jul 12, 2026, 11_45_12 PM (5).png",
+      "description": "front point side wings",
+      "facing": "south",
+      "locomotion": "idle",
+      "actions": [
+        "pointing"
+      ],
+      "phase": null,
+      "generation_rows": 81,
+      "tags": [
+        "front",
+        "wings",
+        "feelings_expansion",
+        "ground_action",
+        "wjfl-25"
+      ],
+      "anchor_offsets": {
+        "root": [
+          0,
+          0
+        ],
+        "mouth": [
+          -6,
+          -51
+        ],
+        "left_eye": [
+          -11,
+          -57
+        ],
+        "right_eye": [
+          -1,
+          -57
+        ],
+        "left_foot": [
+          -8,
+          -1
+        ],
+        "right_foot": [
+          10,
+          -1
+        ],
+        "left_hand": [
+          -20,
+          -44
+        ],
+        "right_hand": [
+          28,
+          -52
+        ],
+        "staff_hand": [
+          -20,
+          -46
+        ],
+        "staff_tip": [
+          -25,
+          -72
+        ]
+      }
+    },
+    {
+      "id": "front_explaining_both_hands_wings",
+      "source": "evidence/pose-library-expansion/intake/feelings/ChatGPT Image Jul 12, 2026, 11_45_12 PM (6).png",
+      "source_path": "evidence/pose-library-expansion/intake/feelings/ChatGPT Image Jul 12, 2026, 11_45_12 PM (6).png",
+      "description": "front explaining both hands wings",
+      "facing": "south",
+      "locomotion": "idle",
+      "actions": [
+        "explaining"
+      ],
+      "phase": null,
+      "generation_rows": 85,
+      "tags": [
+        "front",
+        "wings",
+        "feelings_expansion",
+        "ground_action",
+        "wjfl-26"
+      ],
+      "anchor_offsets": {
+        "root": [
+          0,
+          0
+        ],
+        "mouth": [
+          -25,
+          -49
+        ],
+        "left_eye": [
+          -30,
+          -55
+        ],
+        "right_eye": [
+          -20,
+          -55
+        ],
+        "left_foot": [
+          -8,
+          -1
+        ],
+        "right_foot": [
+          10,
+          -1
+        ],
+        "left_hand": [
+          -22,
+          -49
+        ],
+        "right_hand": [
+          20,
+          -47
+        ],
+        "staff_hand": [
+          23,
+          -47
+        ],
+        "staff_tip": [
+          27,
+          -80
+        ]
+      }
+    },
+    {
+      "id": "front_magic_staff_raise_wings",
+      "source": "evidence/pose-library-expansion/intake/feelings/ChatGPT Image Jul 12, 2026, 11_45_13 PM (7).png",
+      "source_path": "evidence/pose-library-expansion/intake/feelings/ChatGPT Image Jul 12, 2026, 11_45_13 PM (7).png",
+      "description": "front magic staff raise wings",
+      "facing": "south",
+      "locomotion": "idle",
+      "actions": [
+        "magic_cast"
+      ],
+      "phase": null,
+      "generation_rows": 92,
+      "tags": [
+        "front",
+        "wings",
+        "feelings_expansion",
+        "ground_action",
+        "wjfl-27"
+      ],
+      "anchor_offsets": {
+        "root": [
+          0,
+          0
+        ],
+        "mouth": [
+          -7,
+          -58
+        ],
+        "left_eye": [
+          -12,
+          -64
+        ],
+        "right_eye": [
+          -2,
+          -64
+        ],
+        "left_foot": [
+          -8,
+          -1
+        ],
+        "right_foot": [
+          10,
+          -1
+        ],
+        "left_hand": [
+          -17,
+          -40
+        ],
+        "right_hand": [
+          20,
+          -65
+        ],
+        "staff_hand": [
+          24,
+          -66
+        ],
+        "staff_tip": [
+          22,
+          -89
+        ]
+      }
+    },
+    {
+      "id": "front_sincere_hand_heart_wings",
+      "source": "evidence/pose-library-expansion/intake/feelings/ChatGPT Image Jul 12, 2026, 11_45_13 PM (8).png",
+      "source_path": "evidence/pose-library-expansion/intake/feelings/ChatGPT Image Jul 12, 2026, 11_45_13 PM (8).png",
+      "description": "front sincere hand heart wings",
+      "facing": "south",
+      "locomotion": "idle",
+      "actions": [
+        "explaining"
+      ],
+      "phase": null,
+      "generation_rows": 92,
+      "tags": [
+        "front",
+        "wings",
+        "feelings_expansion",
+        "ground_action",
+        "wjfl-28"
+      ],
+      "anchor_offsets": {
+        "root": [
+          0,
+          0
+        ],
+        "mouth": [
+          2,
+          -64
+        ],
+        "left_eye": [
+          -3,
+          -70
+        ],
+        "right_eye": [
+          7,
+          -70
+        ],
+        "left_foot": [
+          -8,
+          -1
+        ],
+        "right_foot": [
+          10,
+          -1
+        ],
+        "left_hand": [
+          -1,
+          -50
+        ],
+        "right_hand": [
+          25,
+          -43
+        ],
+        "staff_hand": [
+          25,
+          -44
+        ],
+        "staff_tip": [
+          27,
+          -81
+        ]
+      }
+    },
+    {
+      "id": "front_playful_kick_wings",
+      "source": "evidence/pose-library-expansion/intake/feelings/ChatGPT Image Jul 12, 2026, 11_45_13 PM (9).png",
+      "source_path": "evidence/pose-library-expansion/intake/feelings/ChatGPT Image Jul 12, 2026, 11_45_13 PM (9).png",
+      "description": "front playful kick wings",
+      "facing": "south",
+      "locomotion": "idle",
+      "actions": [
+        "reaction"
+      ],
+      "phase": null,
+      "generation_rows": 85,
+      "tags": [
+        "front",
+        "wings",
+        "feelings_expansion",
+        "ground_action",
+        "wjfl-29"
+      ],
+      "anchor_offsets": {
+        "root": [
+          0,
+          0
+        ],
+        "mouth": [
+          0,
+          -58
+        ],
+        "left_eye": [
+          -5,
+          -64
+        ],
+        "right_eye": [
+          5,
+          -64
+        ],
+        "left_foot": [
+          -6,
+          -4
+        ],
+        "right_foot": [
+          12,
+          -17
+        ],
+        "left_hand": [
+          -16,
+          -50
+        ],
+        "right_hand": [
+          20,
+          -44
+        ],
+        "staff_hand": [
+          22,
+          -44
+        ],
+        "staff_tip": [
+          27,
+          -71
+        ]
+      }
+    },
+    {
+      "id": "front_magic_staff_spark_wings",
+      "source": "evidence/pose-library-expansion/intake/feelings/ChatGPT Image Jul 12, 2026, 11_45_13 PM (10).png",
+      "source_path": "evidence/pose-library-expansion/intake/feelings/ChatGPT Image Jul 12, 2026, 11_45_13 PM (10).png",
+      "description": "front magic staff spark wings",
+      "facing": "south",
+      "locomotion": "idle",
+      "actions": [
+        "magic_cast"
+      ],
+      "phase": null,
+      "generation_rows": 81,
+      "tags": [
+        "front",
+        "wings",
+        "feelings_expansion",
+        "ground_action",
+        "wjfl-30"
+      ],
+      "anchor_offsets": {
+        "root": [
+          0,
+          0
+        ],
+        "mouth": [
+          -3,
+          -55
+        ],
+        "left_eye": [
+          -8,
+          -61
+        ],
+        "right_eye": [
+          2,
+          -61
+        ],
+        "left_foot": [
+          -8,
+          -1
+        ],
+        "right_foot": [
+          10,
+          -1
+        ],
+        "left_hand": [
+          -18,
+          -46
+        ],
+        "right_hand": [
+          20,
+          -58
+        ],
+        "staff_hand": [
+          22,
+          -57
+        ],
+        "staff_tip": [
+          23,
+          -78
+        ]
+      }
+    },
+    {
+      "id": "feeling_joy_full",
+      "source": "evidence/pose-library-expansion/intake/feelings/ChatGPT Image Jul 13, 2026, 01_03_44 AM (1).png",
+      "source_path": "evidence/pose-library-expansion/intake/feelings/ChatGPT Image Jul 13, 2026, 01_03_44 AM (1).png",
+      "description": "feeling joy full",
+      "facing": "south",
+      "locomotion": "idle",
+      "actions": [
+        "reaction",
+        "joy"
+      ],
+      "phase": null,
+      "generation_rows": 80,
+      "tags": [
+        "front",
+        "wings",
+        "feelings_expansion",
+        "ground_action",
+        "wjfl-31",
+        "joy",
+        "full"
+      ],
+      "anchor_offsets": {
+        "root": [
+          0,
+          0
+        ],
+        "mouth": [
+          -2,
+          -53
+        ],
+        "left_eye": [
+          -7,
+          -59
+        ],
+        "right_eye": [
+          3,
+          -59
+        ],
+        "left_foot": [
+          -8,
+          -1
+        ],
+        "right_foot": [
+          9,
+          -7
+        ],
+        "left_hand": [
+          -21,
+          -62
+        ],
+        "right_hand": [
+          20,
+          -61
+        ],
+        "staff_hand": [
+          24,
+          -63
+        ],
+        "staff_tip": [
+          21,
+          -77
+        ]
+      }
+    },
+    {
+      "id": "feeling_sadness_full",
+      "source": "evidence/pose-library-expansion/intake/feelings/ChatGPT Image Jul 13, 2026, 01_03_44 AM (2).png",
+      "source_path": "evidence/pose-library-expansion/intake/feelings/ChatGPT Image Jul 13, 2026, 01_03_44 AM (2).png",
+      "description": "feeling sadness full",
+      "facing": "south",
+      "locomotion": "idle",
+      "actions": [
+        "reaction",
+        "sadness"
+      ],
+      "phase": null,
+      "generation_rows": 92,
+      "tags": [
+        "front",
+        "wings",
+        "feelings_expansion",
+        "ground_action",
+        "wjfl-32",
+        "sadness",
+        "full"
+      ],
+      "anchor_offsets": {
+        "root": [
+          0,
+          0
+        ],
+        "mouth": [
+          8,
+          -60
+        ],
+        "left_eye": [
+          3,
+          -66
+        ],
+        "right_eye": [
+          13,
+          -66
+        ],
+        "left_foot": [
+          -8,
+          -1
+        ],
+        "right_foot": [
+          10,
+          -1
+        ],
+        "left_hand": [
+          -15,
+          -40
+        ],
+        "right_hand": [
+          20,
+          -44
+        ],
+        "staff_hand": [
+          21,
+          -44
+        ],
+        "staff_tip": [
+          25,
+          -79
+        ]
+      }
+    },
+    {
+      "id": "feeling_anger_full",
+      "source": "evidence/pose-library-expansion/intake/feelings/ChatGPT Image Jul 13, 2026, 01_03_45 AM (3).png",
+      "source_path": "evidence/pose-library-expansion/intake/feelings/ChatGPT Image Jul 13, 2026, 01_03_45 AM (3).png",
+      "description": "feeling anger full",
+      "facing": "south",
+      "locomotion": "idle",
+      "actions": [
+        "reaction",
+        "anger"
+      ],
+      "phase": null,
+      "generation_rows": 85,
+      "tags": [
+        "front",
+        "wings",
+        "feelings_expansion",
+        "ground_action",
+        "wjfl-33",
+        "anger",
+        "full"
+      ],
+      "anchor_offsets": {
+        "root": [
+          0,
+          0
+        ],
+        "mouth": [
+          -1,
+          -58
+        ],
+        "left_eye": [
+          -6,
+          -64
+        ],
+        "right_eye": [
+          4,
+          -64
+        ],
+        "left_foot": [
+          -10,
+          -1
+        ],
+        "right_foot": [
+          12,
+          -1
+        ],
+        "left_hand": [
+          -20,
+          -52
+        ],
+        "right_hand": [
+          20,
+          -45
+        ],
+        "staff_hand": [
+          20,
+          -47
+        ],
+        "staff_tip": [
+          28,
+          -78
+        ]
+      }
+    },
+    {
+      "id": "feeling_fear_full",
+      "source": "evidence/pose-library-expansion/intake/feelings/ChatGPT Image Jul 13, 2026, 01_03_46 AM (4).png",
+      "source_path": "evidence/pose-library-expansion/intake/feelings/ChatGPT Image Jul 13, 2026, 01_03_46 AM (4).png",
+      "description": "feeling fear full",
+      "facing": "south",
+      "locomotion": "idle",
+      "actions": [
+        "reaction",
+        "fear"
+      ],
+      "phase": null,
+      "generation_rows": 85,
+      "tags": [
+        "front",
+        "wings",
+        "feelings_expansion",
+        "ground_action",
+        "wjfl-34",
+        "fear",
+        "full"
+      ],
+      "anchor_offsets": {
+        "root": [
+          0,
+          0
+        ],
+        "mouth": [
+          -11,
+          -58
+        ],
+        "left_eye": [
+          -16,
+          -64
+        ],
+        "right_eye": [
+          -6,
+          -64
+        ],
+        "left_foot": [
+          -9,
+          -1
+        ],
+        "right_foot": [
+          11,
+          -1
+        ],
+        "left_hand": [
+          -22,
+          -49
+        ],
+        "right_hand": [
+          20,
+          -45
+        ],
+        "staff_hand": [
+          20,
+          -45
+        ],
+        "staff_tip": [
+          28,
+          -79
+        ]
+      }
+    },
+    {
+      "id": "feeling_shame_full",
+      "source": "evidence/pose-library-expansion/intake/feelings/ChatGPT Image Jul 13, 2026, 01_03_46 AM (5).png",
+      "source_path": "evidence/pose-library-expansion/intake/feelings/ChatGPT Image Jul 13, 2026, 01_03_46 AM (5).png",
+      "description": "feeling shame full",
+      "facing": "south",
+      "locomotion": "idle",
+      "actions": [
+        "reaction",
+        "shame"
+      ],
+      "phase": null,
+      "generation_rows": 92,
+      "tags": [
+        "front",
+        "wings",
+        "feelings_expansion",
+        "ground_action",
+        "wjfl-35",
+        "shame",
+        "full"
+      ],
+      "anchor_offsets": {
+        "root": [
+          0,
+          0
+        ],
+        "mouth": [
+          0,
+          -60
+        ],
+        "left_eye": [
+          -5,
+          -66
+        ],
+        "right_eye": [
+          5,
+          -66
+        ],
+        "left_foot": [
+          -8,
+          -1
+        ],
+        "right_foot": [
+          10,
+          -1
+        ],
+        "left_hand": [
+          -3,
+          -54
+        ],
+        "right_hand": [
+          20,
+          -44
+        ],
+        "staff_hand": [
+          23,
+          -44
+        ],
+        "staff_tip": [
+          26,
+          -83
+        ]
+      }
+    },
+    {
+      "id": "feeling_disgust_full",
+      "source": "evidence/pose-library-expansion/intake/feelings/ChatGPT Image Jul 13, 2026, 01_03_46 AM (6).png",
+      "source_path": "evidence/pose-library-expansion/intake/feelings/ChatGPT Image Jul 13, 2026, 01_03_46 AM (6).png",
+      "description": "feeling disgust full",
+      "facing": "south",
+      "locomotion": "idle",
+      "actions": [
+        "reaction",
+        "disgust"
+      ],
+      "phase": null,
+      "generation_rows": 75,
+      "tags": [
+        "front",
+        "wings",
+        "feelings_expansion",
+        "ground_action",
+        "wjfl-36",
+        "disgust",
+        "full"
+      ],
+      "anchor_offsets": {
+        "root": [
+          0,
+          0
+        ],
+        "mouth": [
+          -10,
+          -49
+        ],
+        "left_eye": [
+          -15,
+          -55
+        ],
+        "right_eye": [
+          -5,
+          -55
+        ],
+        "left_foot": [
+          -9,
+          -1
+        ],
+        "right_foot": [
+          11,
+          -1
+        ],
+        "left_hand": [
+          -20,
+          -49
+        ],
+        "right_hand": [
+          20,
+          -44
+        ],
+        "staff_hand": [
+          25,
+          -43
+        ],
+        "staff_tip": [
+          27,
+          -66
+        ]
+      }
+    },
+    {
+      "id": "feeling_surprise_full",
+      "source": "evidence/pose-library-expansion/intake/feelings/ChatGPT Image Jul 13, 2026, 01_03_47 AM (7).png",
+      "source_path": "evidence/pose-library-expansion/intake/feelings/ChatGPT Image Jul 13, 2026, 01_03_47 AM (7).png",
+      "description": "feeling surprise full",
+      "facing": "south",
+      "locomotion": "idle",
+      "actions": [
+        "reaction",
+        "surprise"
+      ],
+      "phase": null,
+      "generation_rows": 69,
+      "tags": [
+        "front",
+        "wings",
+        "feelings_expansion",
+        "ground_action",
+        "wjfl-37",
+        "surprise",
+        "full"
+      ],
+      "anchor_offsets": {
+        "root": [
+          0,
+          0
+        ],
+        "mouth": [
+          -4,
+          -46
+        ],
+        "left_eye": [
+          -9,
+          -52
+        ],
+        "right_eye": [
+          1,
+          -52
+        ],
+        "left_foot": [
+          -9,
+          -1
+        ],
+        "right_foot": [
+          11,
+          -1
+        ],
+        "left_hand": [
+          -24,
+          -50
+        ],
+        "right_hand": [
+          20,
+          -44
+        ],
+        "staff_hand": [
+          27,
+          -43
+        ],
+        "staff_tip": [
+          30,
+          -48
+        ]
+      }
+    },
+    {
+      "id": "feeling_pride_full",
+      "source": "evidence/pose-library-expansion/intake/feelings/ChatGPT Image Jul 13, 2026, 01_03_47 AM (8).png",
+      "source_path": "evidence/pose-library-expansion/intake/feelings/ChatGPT Image Jul 13, 2026, 01_03_47 AM (8).png",
+      "description": "feeling pride full",
+      "facing": "south",
+      "locomotion": "idle",
+      "actions": [
+        "reaction",
+        "pride"
+      ],
+      "phase": null,
+      "generation_rows": 81,
+      "tags": [
+        "front",
+        "wings",
+        "feelings_expansion",
+        "ground_action",
+        "wjfl-38",
+        "pride",
+        "full"
+      ],
+      "anchor_offsets": {
+        "root": [
+          0,
+          0
+        ],
+        "mouth": [
+          0,
+          -52
+        ],
+        "left_eye": [
+          -5,
+          -58
+        ],
+        "right_eye": [
+          5,
+          -58
+        ],
+        "left_foot": [
+          -10,
+          -1
+        ],
+        "right_foot": [
+          12,
+          -1
+        ],
+        "left_hand": [
+          -15,
+          -42
+        ],
+        "right_hand": [
+          17,
+          -48
+        ],
+        "staff_hand": [
+          18,
+          -47
+        ],
+        "staff_tip": [
+          28,
+          -78
+        ]
+      }
+    },
+    {
+      "id": "feeling_guilt_full",
+      "source": "evidence/pose-library-expansion/intake/feelings/ChatGPT Image Jul 13, 2026, 01_03_48 AM (9).png",
+      "source_path": "evidence/pose-library-expansion/intake/feelings/ChatGPT Image Jul 13, 2026, 01_03_48 AM (9).png",
+      "description": "feeling guilt full",
+      "facing": "south",
+      "locomotion": "idle",
+      "actions": [
+        "reaction",
+        "guilt"
+      ],
+      "phase": null,
+      "generation_rows": 88,
+      "tags": [
+        "front",
+        "wings",
+        "feelings_expansion",
+        "ground_action",
+        "wjfl-39",
+        "guilt",
+        "full"
+      ],
+      "anchor_offsets": {
+        "root": [
+          0,
+          0
+        ],
+        "mouth": [
+          2,
+          -59
+        ],
+        "left_eye": [
+          -3,
+          -65
+        ],
+        "right_eye": [
+          7,
+          -65
+        ],
+        "left_foot": [
+          -8,
+          -1
+        ],
+        "right_foot": [
+          10,
+          -1
+        ],
+        "left_hand": [
+          -4,
+          -48
+        ],
+        "right_hand": [
+          20,
+          -44
+        ],
+        "staff_hand": [
+          20,
+          -44
+        ],
+        "staff_tip": [
+          24,
+          -82
+        ]
+      }
+    },
+    {
+      "id": "feeling_love_full",
+      "source": "evidence/pose-library-expansion/intake/feelings/ChatGPT Image Jul 13, 2026, 01_03_48 AM (10).png",
+      "source_path": "evidence/pose-library-expansion/intake/feelings/ChatGPT Image Jul 13, 2026, 01_03_48 AM (10).png",
+      "description": "feeling love full",
+      "facing": "south",
+      "locomotion": "idle",
+      "actions": [
+        "reaction",
+        "love"
+      ],
+      "phase": null,
+      "generation_rows": 82,
+      "tags": [
+        "front",
+        "wings",
+        "feelings_expansion",
+        "ground_action",
+        "wjfl-40",
+        "love",
+        "full"
+      ],
+      "anchor_offsets": {
+        "root": [
+          0,
+          0
+        ],
+        "mouth": [
+          -9,
+          -53
+        ],
+        "left_eye": [
+          -14,
+          -59
+        ],
+        "right_eye": [
+          -4,
+          -59
+        ],
+        "left_foot": [
+          -8,
+          -1
+        ],
+        "right_foot": [
+          10,
+          -1
+        ],
+        "left_hand": [
+          -2,
+          -50
+        ],
+        "right_hand": [
+          14,
+          -46
+        ],
+        "staff_hand": [
+          18,
+          -47
+        ],
+        "staff_tip": [
+          22,
+          -50
+        ]
+      }
+    },
+    {
+      "id": "feeling_joy_close",
+      "source": "evidence/pose-library-expansion/intake/feelings/ChatGPT Image Jul 13, 2026, 01_07_32 AM (1).png",
+      "source_path": "evidence/pose-library-expansion/intake/feelings/ChatGPT Image Jul 13, 2026, 01_07_32 AM (1).png",
+      "description": "feeling joy close",
+      "facing": "south",
+      "locomotion": "idle",
+      "actions": [
+        "reaction",
+        "joy"
+      ],
+      "phase": null,
+      "generation_rows": 80,
+      "tags": [
+        "front",
+        "wings",
+        "feelings_expansion",
+        "ground_action",
+        "wjfl-51",
+        "joy",
+        "close"
+      ],
+      "anchor_offsets": {
+        "root": [
+          0,
+          0
+        ],
+        "mouth": [
+          -2,
+          -53
+        ],
+        "left_eye": [
+          -7,
+          -59
+        ],
+        "right_eye": [
+          3,
+          -59
+        ],
+        "left_foot": [
+          -8,
+          -1
+        ],
+        "right_foot": [
+          9,
+          -7
+        ],
+        "left_hand": [
+          -21,
+          -62
+        ],
+        "right_hand": [
+          20,
+          -61
+        ],
+        "staff_hand": [
+          24,
+          -63
+        ],
+        "staff_tip": [
+          21,
+          -77
+        ]
+      }
+    },
+    {
+      "id": "feeling_sadness_close",
+      "source": "evidence/pose-library-expansion/intake/feelings/ChatGPT Image Jul 13, 2026, 01_07_33 AM (2).png",
+      "source_path": "evidence/pose-library-expansion/intake/feelings/ChatGPT Image Jul 13, 2026, 01_07_33 AM (2).png",
+      "description": "feeling sadness close",
+      "facing": "south",
+      "locomotion": "idle",
+      "actions": [
+        "reaction",
+        "sadness"
+      ],
+      "phase": null,
+      "generation_rows": 92,
+      "tags": [
+        "front",
+        "wings",
+        "feelings_expansion",
+        "ground_action",
+        "wjfl-52",
+        "sadness",
+        "close"
+      ],
+      "anchor_offsets": {
+        "root": [
+          0,
+          0
+        ],
+        "mouth": [
+          8,
+          -60
+        ],
+        "left_eye": [
+          3,
+          -66
+        ],
+        "right_eye": [
+          13,
+          -66
+        ],
+        "left_foot": [
+          -8,
+          -1
+        ],
+        "right_foot": [
+          10,
+          -1
+        ],
+        "left_hand": [
+          -15,
+          -40
+        ],
+        "right_hand": [
+          20,
+          -44
+        ],
+        "staff_hand": [
+          21,
+          -44
+        ],
+        "staff_tip": [
+          25,
+          -79
+        ]
+      }
+    },
+    {
+      "id": "feeling_anger_close",
+      "source": "evidence/pose-library-expansion/intake/feelings/ChatGPT Image Jul 13, 2026, 01_07_33 AM (3).png",
+      "source_path": "evidence/pose-library-expansion/intake/feelings/ChatGPT Image Jul 13, 2026, 01_07_33 AM (3).png",
+      "description": "feeling anger close",
+      "facing": "south",
+      "locomotion": "idle",
+      "actions": [
+        "reaction",
+        "anger"
+      ],
+      "phase": null,
+      "generation_rows": 85,
+      "tags": [
+        "front",
+        "wings",
+        "feelings_expansion",
+        "ground_action",
+        "wjfl-53",
+        "anger",
+        "close"
+      ],
+      "anchor_offsets": {
+        "root": [
+          0,
+          0
+        ],
+        "mouth": [
+          -1,
+          -58
+        ],
+        "left_eye": [
+          -6,
+          -64
+        ],
+        "right_eye": [
+          4,
+          -64
+        ],
+        "left_foot": [
+          -10,
+          -1
+        ],
+        "right_foot": [
+          12,
+          -1
+        ],
+        "left_hand": [
+          -20,
+          -52
+        ],
+        "right_hand": [
+          20,
+          -45
+        ],
+        "staff_hand": [
+          20,
+          -47
+        ],
+        "staff_tip": [
+          28,
+          -78
+        ]
+      }
+    },
+    {
+      "id": "feeling_fear_close",
+      "source": "evidence/pose-library-expansion/intake/feelings/ChatGPT Image Jul 13, 2026, 01_07_33 AM (4).png",
+      "source_path": "evidence/pose-library-expansion/intake/feelings/ChatGPT Image Jul 13, 2026, 01_07_33 AM (4).png",
+      "description": "feeling fear close",
+      "facing": "south",
+      "locomotion": "idle",
+      "actions": [
+        "reaction",
+        "fear"
+      ],
+      "phase": null,
+      "generation_rows": 85,
+      "tags": [
+        "front",
+        "wings",
+        "feelings_expansion",
+        "ground_action",
+        "wjfl-54",
+        "fear",
+        "close"
+      ],
+      "anchor_offsets": {
+        "root": [
+          0,
+          0
+        ],
+        "mouth": [
+          -11,
+          -58
+        ],
+        "left_eye": [
+          -16,
+          -64
+        ],
+        "right_eye": [
+          -6,
+          -64
+        ],
+        "left_foot": [
+          -9,
+          -1
+        ],
+        "right_foot": [
+          11,
+          -1
+        ],
+        "left_hand": [
+          -22,
+          -49
+        ],
+        "right_hand": [
+          20,
+          -45
+        ],
+        "staff_hand": [
+          20,
+          -45
+        ],
+        "staff_tip": [
+          28,
+          -79
+        ]
+      }
+    },
+    {
+      "id": "feeling_shame_close",
+      "source": "evidence/pose-library-expansion/intake/feelings/ChatGPT Image Jul 13, 2026, 01_07_33 AM (5).png",
+      "source_path": "evidence/pose-library-expansion/intake/feelings/ChatGPT Image Jul 13, 2026, 01_07_33 AM (5).png",
+      "description": "feeling shame close",
+      "facing": "south",
+      "locomotion": "idle",
+      "actions": [
+        "reaction",
+        "shame"
+      ],
+      "phase": null,
+      "generation_rows": 92,
+      "tags": [
+        "front",
+        "wings",
+        "feelings_expansion",
+        "ground_action",
+        "wjfl-55",
+        "shame",
+        "close"
+      ],
+      "anchor_offsets": {
+        "root": [
+          0,
+          0
+        ],
+        "mouth": [
+          0,
+          -60
+        ],
+        "left_eye": [
+          -5,
+          -66
+        ],
+        "right_eye": [
+          5,
+          -66
+        ],
+        "left_foot": [
+          -8,
+          -1
+        ],
+        "right_foot": [
+          10,
+          -1
+        ],
+        "left_hand": [
+          -3,
+          -54
+        ],
+        "right_hand": [
+          20,
+          -44
+        ],
+        "staff_hand": [
+          23,
+          -44
+        ],
+        "staff_tip": [
+          26,
+          -83
+        ]
+      }
+    },
+    {
+      "id": "feeling_disgust_close",
+      "source": "evidence/pose-library-expansion/intake/feelings/ChatGPT Image Jul 13, 2026, 01_07_34 AM (6).png",
+      "source_path": "evidence/pose-library-expansion/intake/feelings/ChatGPT Image Jul 13, 2026, 01_07_34 AM (6).png",
+      "description": "feeling disgust close",
+      "facing": "south",
+      "locomotion": "idle",
+      "actions": [
+        "reaction",
+        "disgust"
+      ],
+      "phase": null,
+      "generation_rows": 75,
+      "tags": [
+        "front",
+        "wings",
+        "feelings_expansion",
+        "ground_action",
+        "wjfl-56",
+        "disgust",
+        "close"
+      ],
+      "anchor_offsets": {
+        "root": [
+          0,
+          0
+        ],
+        "mouth": [
+          -10,
+          -49
+        ],
+        "left_eye": [
+          -15,
+          -55
+        ],
+        "right_eye": [
+          -5,
+          -55
+        ],
+        "left_foot": [
+          -9,
+          -1
+        ],
+        "right_foot": [
+          11,
+          -1
+        ],
+        "left_hand": [
+          -20,
+          -49
+        ],
+        "right_hand": [
+          20,
+          -44
+        ],
+        "staff_hand": [
+          25,
+          -43
+        ],
+        "staff_tip": [
+          27,
+          -66
+        ]
+      }
+    },
+    {
+      "id": "feeling_surprise_close",
+      "source": "evidence/pose-library-expansion/intake/feelings/ChatGPT Image Jul 13, 2026, 01_07_34 AM (7).png",
+      "source_path": "evidence/pose-library-expansion/intake/feelings/ChatGPT Image Jul 13, 2026, 01_07_34 AM (7).png",
+      "description": "feeling surprise close",
+      "facing": "south",
+      "locomotion": "idle",
+      "actions": [
+        "reaction",
+        "surprise"
+      ],
+      "phase": null,
+      "generation_rows": 69,
+      "tags": [
+        "front",
+        "wings",
+        "feelings_expansion",
+        "ground_action",
+        "wjfl-57",
+        "surprise",
+        "close"
+      ],
+      "anchor_offsets": {
+        "root": [
+          0,
+          0
+        ],
+        "mouth": [
+          -4,
+          -46
+        ],
+        "left_eye": [
+          -9,
+          -52
+        ],
+        "right_eye": [
+          1,
+          -52
+        ],
+        "left_foot": [
+          -9,
+          -1
+        ],
+        "right_foot": [
+          11,
+          -1
+        ],
+        "left_hand": [
+          -24,
+          -50
+        ],
+        "right_hand": [
+          20,
+          -44
+        ],
+        "staff_hand": [
+          27,
+          -43
+        ],
+        "staff_tip": [
+          30,
+          -48
+        ]
+      }
+    },
+    {
+      "id": "feeling_pride_close",
+      "source": "evidence/pose-library-expansion/intake/feelings/ChatGPT Image Jul 13, 2026, 01_07_34 AM (8).png",
+      "source_path": "evidence/pose-library-expansion/intake/feelings/ChatGPT Image Jul 13, 2026, 01_07_34 AM (8).png",
+      "description": "feeling pride close",
+      "facing": "south",
+      "locomotion": "idle",
+      "actions": [
+        "reaction",
+        "pride"
+      ],
+      "phase": null,
+      "generation_rows": 81,
+      "tags": [
+        "front",
+        "wings",
+        "feelings_expansion",
+        "ground_action",
+        "wjfl-58",
+        "pride",
+        "close"
+      ],
+      "anchor_offsets": {
+        "root": [
+          0,
+          0
+        ],
+        "mouth": [
+          0,
+          -52
+        ],
+        "left_eye": [
+          -5,
+          -58
+        ],
+        "right_eye": [
+          5,
+          -58
+        ],
+        "left_foot": [
+          -10,
+          -1
+        ],
+        "right_foot": [
+          12,
+          -1
+        ],
+        "left_hand": [
+          -15,
+          -42
+        ],
+        "right_hand": [
+          17,
+          -48
+        ],
+        "staff_hand": [
+          18,
+          -47
+        ],
+        "staff_tip": [
+          28,
+          -78
+        ]
+      }
+    },
+    {
+      "id": "feeling_guilt_close",
+      "source": "evidence/pose-library-expansion/intake/feelings/ChatGPT Image Jul 13, 2026, 01_07_34 AM (9).png",
+      "source_path": "evidence/pose-library-expansion/intake/feelings/ChatGPT Image Jul 13, 2026, 01_07_34 AM (9).png",
+      "description": "feeling guilt close",
+      "facing": "south",
+      "locomotion": "idle",
+      "actions": [
+        "reaction",
+        "guilt"
+      ],
+      "phase": null,
+      "generation_rows": 88,
+      "tags": [
+        "front",
+        "wings",
+        "feelings_expansion",
+        "ground_action",
+        "wjfl-59",
+        "guilt",
+        "close"
+      ],
+      "anchor_offsets": {
+        "root": [
+          0,
+          0
+        ],
+        "mouth": [
+          2,
+          -59
+        ],
+        "left_eye": [
+          -3,
+          -65
+        ],
+        "right_eye": [
+          7,
+          -65
+        ],
+        "left_foot": [
+          -8,
+          -1
+        ],
+        "right_foot": [
+          10,
+          -1
+        ],
+        "left_hand": [
+          -4,
+          -48
+        ],
+        "right_hand": [
+          20,
+          -44
+        ],
+        "staff_hand": [
+          20,
+          -44
+        ],
+        "staff_tip": [
+          24,
+          -82
+        ]
+      }
+    },
+    {
+      "id": "feeling_love_close",
+      "source": "evidence/pose-library-expansion/intake/feelings/ChatGPT Image Jul 13, 2026, 01_07_35 AM (10).png",
+      "source_path": "evidence/pose-library-expansion/intake/feelings/ChatGPT Image Jul 13, 2026, 01_07_35 AM (10).png",
+      "description": "feeling love close",
+      "facing": "south",
+      "locomotion": "idle",
+      "actions": [
+        "reaction",
+        "love"
+      ],
+      "phase": null,
+      "generation_rows": 82,
+      "tags": [
+        "front",
+        "wings",
+        "feelings_expansion",
+        "ground_action",
+        "wjfl-60",
+        "love",
+        "close"
+      ],
+      "anchor_offsets": {
+        "root": [
+          0,
+          0
+        ],
+        "mouth": [
+          -9,
+          -53
+        ],
+        "left_eye": [
+          -14,
+          -59
+        ],
+        "right_eye": [
+          -4,
+          -59
+        ],
+        "left_foot": [
+          -8,
+          -1
+        ],
+        "right_foot": [
+          10,
+          -1
+        ],
+        "left_hand": [
+          -2,
+          -50
+        ],
+        "right_hand": [
+          14,
+          -46
+        ],
+        "staff_hand": [
+          18,
+          -47
+        ],
+        "staff_tip": [
+          22,
+          -50
         ]
       }
     }

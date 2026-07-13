@@ -1,14 +1,14 @@
 {
   "program_id": "wizardjoe-cartoon-animation-2026-07-12",
   "baseline": {
-    "branch": "codex/build-repeatable-avatar-animation",
+    "branch": "codex/python-asciline-avatar",
     "python_url": "http://127.0.0.1:8765/",
-    "production_pose_count": 39,
-    "generated_library_sha256": "1200e2891902cd1f3147d2c2d298dd2d99313708fbc8e90034376500e1843037"
+    "production_pose_count": 89,
+    "generated_library_sha256": "3fc20782b61488d9b0955fa3a62125e7bba9adca95eced6b7477993d518565f0"
   },
   "production_architecture": "asciline_python",
   "rust_policy": "historical_side_track_not_a_production_dependency_or_gate",
-  "phase": "complete",
+  "phase": "audit_remediation_required",
   "planning_checkpoint": {
     "commit": "08d8f3aaa181d97ef3d2a29cb5a8362d81a05f12",
     "pushed": true
@@ -16,6 +16,12 @@
   "implementation_checkpoint": {
     "commit": "a5f0cc1eea3d75f6f69b8d5221e6eb2da249d48f",
     "pushed": true
+  },
+  "current_state_audit": {
+    "audited_commit": "988b2315caaafff6a8db66270339123368c1cb76",
+    "date": "2026-07-13",
+    "result": "partial_remediation_required",
+    "report": "CURRENT_STATE_AUDIT.md"
   },
   "roles": {
     "FPSE": {
