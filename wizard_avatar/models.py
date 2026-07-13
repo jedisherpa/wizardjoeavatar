@@ -113,6 +113,7 @@ class WizardState:
     blink_phase: float = 0.0
     staff_state: str = "held"
     speech_id: Optional[str] = None
+    speech_text: Optional[str] = None
     time_seconds: float = 0.0
     action_until: float = 0.0
     action_restore: Optional[Dict[str, Any]] = None
@@ -126,6 +127,23 @@ class WizardState:
     pose_override_id: Optional[str] = None
     pose_override_until: float = 0.0
     reconnect_count: int = 0
+    simulation_tick: int = 0
+    state_revision: int = 0
+    animation_clip_id: str = "idle_front"
+    animation_clip_tick: int = 0
+    animation_node_id: str = "ground_idle"
+    mobility_mode: str = "grounded_idle"
+    airborne: bool = False
+    altitude: float = 0.0
+    vertical_velocity: float = 0.0
+    flight_target_altitude: float = 0.0
+    control_source: Optional[str] = None
+    control_lease_id: Optional[str] = None
+    control_lease_generation: int = 0
+    semantic_cue: str = "none"
+    semantic_gesture: str = "none"
+    semantic_amplitude: float = 0.0
+    semantic_signal_sequence: int = 0
 
     def as_public_dict(self) -> Dict[str, Any]:
         return asdict(self)

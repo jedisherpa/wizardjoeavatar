@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "character_id": "wizard-joe-v1",
+  "display_name": "Wizard Joe",
+  "renderer": "asciline_square_cells",
+  "pose_library": "reference_avatar_pose_cells.json",
+  "animation_graph": "reference_avatar_animation_graph_v2.json",
+  "default_pose_id": "front_idle",
+  "capabilities": [
+    "ground_locomotion",
+    "flight_locomotion",
+    "actions",
+    "speech_overlay",
+    "pose_showcase",
+    "semantic_visual_advice"
+  ]
+}

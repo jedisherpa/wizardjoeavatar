@@ -44,6 +44,8 @@ def create_app(source: ProceduralWizardFrameSource | None = None):
     async def avatar_static(filename: str):
         allowed = {
             "reference-avatar-pose-cells.json",
+            "reference-avatar-animation-graph-v2.json",
+            "wizard-joe-character-package.json",
             "wizardClient.ts",
             "wizardCanvas.ts",
             "wizardControls.ts",
@@ -57,6 +59,16 @@ def create_app(source: ProceduralWizardFrameSource | None = None):
         if filename == "reference-avatar-pose-cells.json":
             return FileResponse(
                 DEFINITIONS_DIR / "reference_avatar_pose_cells.json",
+                media_type="application/json",
+            )
+        if filename == "reference-avatar-animation-graph-v2.json":
+            return FileResponse(
+                DEFINITIONS_DIR / "reference_avatar_animation_graph_v2.json",
+                media_type="application/json",
+            )
+        if filename == "wizard-joe-character-package.json":
+            return FileResponse(
+                DEFINITIONS_DIR / "wizard_joe_character_package.json",
                 media_type="application/json",
             )
         media = "application/javascript" if filename.endswith(".ts") else None
@@ -74,6 +86,22 @@ def create_app(source: ProceduralWizardFrameSource | None = None):
         return {
             "algorithm": "fnv1a32",
             "history": frame_hub.source_hash_history(),
+        }
+
+    @app.get("/api/avatar/wizard/poses")
+    async def poses():
+        return {"poses": list(frame_source.pose_ids)}
+
+    @app.get("/api/avatar/wizard/character")
+    async def character():
+        package = frame_source.character_package
+        return {
+            "schema_version": package.schema_version,
+            "character_id": package.character_id,
+            "display_name": package.display_name,
+            "renderer": package.renderer,
+            "default_pose_id": package.default_pose_id,
+            "capabilities": list(package.capabilities),
         }
 
     async def apply(command_type: str, payload: Dict[str, Any]):
@@ -109,6 +137,14 @@ def create_app(source: ProceduralWizardFrameSource | None = None):
     async def pose(payload: Dict[str, Any]):
         return await apply("pose", payload)
 
+    @app.post("/api/avatar/wizard/control")
+    async def control(payload: Dict[str, Any]):
+        return await apply("control", payload)
+
+    @app.post("/api/avatar/wizard/prism-signal")
+    async def prism_signal(payload: Dict[str, Any]):
+        return await apply("prism_signal", payload)
+
     @app.post("/api/avatar/wizard/expression")
     async def expression(payload: Dict[str, Any]):
         return await apply("expression", payload)
@@ -116,6 +152,10 @@ def create_app(source: ProceduralWizardFrameSource | None = None):
     @app.post("/api/avatar/wizard/speak")
     async def speak(payload: Dict[str, Any]):
         return await apply("speak", payload)
+
+    @app.post("/api/avatar/wizard/speech-stop")
+    async def speech_stop(payload: Optional[Dict[str, Any]] = None):
+        return await apply("speech_stop", payload or {})
 
     @app.post("/api/avatar/wizard/stop")
     async def stop(payload: Optional[Dict[str, Any]] = None):

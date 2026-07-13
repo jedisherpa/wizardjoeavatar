@@ -1,7 +1,7 @@
-import { WizardCanvas } from "./wizardCanvas.ts?v=animation-demo";
-import { WizardClient } from "./wizardClient.ts?v=animation-demo";
-import { installControls } from "./wizardControls.ts?v=animation-demo";
-import { WizardDiagnostics } from "./wizardDiagnostics.ts?v=animation-demo";
+import { WizardCanvas } from "./wizardCanvas.ts?v=cartoon-driver-v1";
+import { WizardClient } from "./wizardClient.ts?v=cartoon-driver-v1";
+import { installControls } from "./wizardControls.ts?v=cartoon-driver-v1";
+import { WizardDiagnostics } from "./wizardDiagnostics.ts?v=cartoon-driver-v1";
 
 const canvas = new WizardCanvas(
   document.getElementById("wizard-canvas"),

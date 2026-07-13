@@ -73,6 +73,60 @@ class LocomotionController:
         self.movement.velocity_x = 0.0
         self.movement.velocity_z = 0.0
 
+    def step_control(
+        self,
+        state: WizardState,
+        move_x: float,
+        move_z: float,
+        run: bool = False,
+        dt: float = SIMULATION_DT,
+    ) -> None:
+        """Advance one fixed tick from direct controller input.
+
+        Direct input owns planar motion for this tick, so any scripted target or
+        path is released. Acceleration and deceleration remain identical to the
+        point-to-point controller, which keeps keyboard and gamepad motion from
+        snapping when a lease starts or expires.
+        """
+
+        self.sync_from_state(state)
+        self.movement.target_x = None
+        self.movement.target_z = None
+        self.path.active = False
+        before = (self.movement.position_x, self.movement.position_z)
+        magnitude = math.hypot(move_x, move_z)
+        if magnitude > 1.0:
+            move_x /= magnitude
+            move_z /= magnitude
+            magnitude = 1.0
+        if magnitude <= 1e-6:
+            self._decelerate(dt)
+        else:
+            speed = (2.2 if run else 1.35) * magnitude
+            desired_vx = move_x / magnitude * speed
+            desired_vz = move_z / magnitude * speed
+            delta_x = desired_vx - self.movement.velocity_x
+            delta_z = desired_vz - self.movement.velocity_z
+            delta = math.hypot(delta_x, delta_z)
+            limit = self.movement.acceleration * (1.35 if run else 1.0) * dt
+            if delta > limit:
+                delta_x = delta_x / delta * limit
+                delta_z = delta_z / delta * limit
+            self.movement.velocity_x += delta_x
+            self.movement.velocity_z += delta_z
+            self.movement.position_x += self.movement.velocity_x * dt
+            self.movement.position_z += self.movement.velocity_z * dt
+
+        self.movement.position_x = clamp(self.movement.position_x, WORLD_X_MIN, WORLD_X_MAX)
+        self.movement.position_z = clamp(self.movement.position_z, WORLD_Z_NEAR, WORLD_Z_FAR)
+        after = (self.movement.position_x, self.movement.position_z)
+        travelled = math.hypot(after[0] - before[0], after[1] - before[1])
+        if travelled > 0:
+            state.walk_phase = (state.walk_phase + travelled / STRIDE_LENGTH) % 1.0
+        self.sync_to_state(state)
+        if state.airborne:
+            state.locomotion = "flying" if magnitude > 0.05 else "hovering"
+
     def step(self, state: WizardState, dt: float = SIMULATION_DT) -> None:
         self.sync_from_state(state)
         before = (self.movement.position_x, self.movement.position_z)

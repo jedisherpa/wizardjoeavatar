@@ -40,6 +40,7 @@ class WizardFrameHub:
         self._queue_drops = 0
         self._resync_count = 0
         self._forced_keyframe_count = 0
+        self._schedule_overruns = 0
         self._source_hash_history = deque(maxlen=240)
 
     async def start(self) -> None:
@@ -95,6 +96,7 @@ class WizardFrameHub:
             "resync_count": self._resync_count,
             "slow_subscriber_count": sum(1 for subscriber in self._subscribers if subscriber.dropped_frame_count),
             "forced_keyframe_count": self._forced_keyframe_count,
+            "schedule_overruns": self._schedule_overruns,
             "source_hash_history_count": len(self._source_hash_history),
         }
 
@@ -129,7 +131,12 @@ class WizardFrameHub:
             self._publish(message)
             self._update_diagnostics()
             next_tick += frame_interval
-            await asyncio.sleep(max(0.0, next_tick - time.perf_counter()))
+            now = time.perf_counter()
+            if next_tick < now:
+                # Drop missed presentation deadlines instead of advancing simulation in a burst.
+                next_tick = now + frame_interval
+                self._schedule_overruns += 1
+            await asyncio.sleep(max(0.0, next_tick - now))
 
     def _publish(self, message: bytes) -> None:
         for subscriber in list(self._subscribers):

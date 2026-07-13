@@ -3,8 +3,10 @@ from __future__ import annotations
 import asyncio
 import math
 import struct
+from pathlib import Path
 from typing import Optional, Tuple
 
+from .character_package import WIZARD_JOE_PACKAGE_PATH, load_character_package
 from .compositor import CellCanvas, blit_scaled
 from .controller import WizardAvatarController
 from .diagnostics import FrameDiagnostics
@@ -14,9 +16,7 @@ from .models import Cell, CommandResult, WizardCellFrame, WizardCommand, WizardS
 from .palette import ENV_RGB, RGB
 from .pose_compositor import (
     blit_pose_scaled,
-    composite_anchor_transition,
     copy_pose_canvas,
-    translate_anchor,
 )
 from .pose_selection import select_reference_pose_sample
 from .projection import project_quantized
@@ -39,11 +39,25 @@ REFERENCE_TEETH = (250, 238, 209)
 
 
 class ProceduralWizardFrameSource:
-    def __init__(self, cols: int = 240, rows: int = 135, fps: float = 24.0) -> None:
+    def __init__(
+        self,
+        cols: int = 240,
+        rows: int = 135,
+        fps: float = 24.0,
+        character_package_path: Optional[Path] = None,
+    ) -> None:
         self.cols = int(cols)
         self.rows = int(rows)
         self.fps = float(fps)
-        self.controller = WizardAvatarController()
+        self.character_package = load_character_package(
+            WIZARD_JOE_PACKAGE_PATH if character_package_path is None else character_package_path
+        )
+        self.pose_library_path = self.character_package.pose_library
+        self.pose_ids = reference_pose_ids(self.pose_library_path)
+        self.controller = WizardAvatarController(
+            self.pose_ids,
+            self.character_package.character_id,
+        )
         self.frame_index = 0
         self._prev_encoded_frame: Optional[bytes] = None
         self.diagnostics = FrameDiagnostics(fps=self.fps)
@@ -76,11 +90,12 @@ class ProceduralWizardFrameSource:
         )
         state.screen_position["x"] = sx
         state.screen_position["y"] = sy
-        use_reference_pose_library = reference_pose_library_available()
+        use_reference_pose_library = reference_pose_library_available(self.pose_library_path)
         if use_reference_pose_library:
             stage = build_background(self.cols, self.rows).copy()
-            render_scale = scale * REFERENCE_SCALE_MULTIPLIER
-            pose_sample = select_reference_pose_sample(state, reference_pose_ids())
+            altitude_scale = max(0.76, 1.0 - state.altitude * 0.07)
+            render_scale = scale * REFERENCE_SCALE_MULTIPLIER * altitude_scale
+            pose_sample = select_reference_pose_sample(state, self.pose_ids)
             pose_id = pose_sample.pose_id
             local, root_anchor, mouth_anchor = self._reference_pose_canvas_for_sample(
                 pose_id,
@@ -96,9 +111,13 @@ class ProceduralWizardFrameSource:
             root_screen = (sx, sy)
         state.last_pose_id = state.pose_id
         state.pose_id = pose_id or "procedural"
-        lifted = state.locomotion == "walking" and 0.15 < state.walk_phase < 0.38
+        lifted = state.airborne or (state.locomotion == "walking" and 0.15 < state.walk_phase < 0.38)
         state.display_scale = render_scale
-        draw_contact_shadow(stage, root_screen[0], root_screen[1], render_scale, lifted=lifted)
+        shadow_root = (
+            root_screen[0],
+            root_screen[1] + state.altitude * 8.0 * render_scale,
+        )
+        draw_contact_shadow(stage, shadow_root[0], shadow_root[1], render_scale, lifted=lifted)
         if pose_id is not None:
             blit_pose_scaled(
                 stage,
@@ -134,40 +153,25 @@ class ProceduralWizardFrameSource:
         self,
         pose_id: str,
     ) -> tuple[CellCanvas, Tuple[int, int], Tuple[int, int]]:
-        target_canvas = copy_pose_canvas(render_reference_pose_local(pose_id))
-        target_root = reference_pose_root_anchor(pose_id)
-        target_mouth = reference_pose_anchor(pose_id, "mouth")
-
-        if self._display_pose_id is None:
-            self._display_pose_id = pose_id
-            self._transition_from_pose_id = None
-            return target_canvas, target_root, target_mouth
+        target_canvas = copy_pose_canvas(
+            render_reference_pose_local(pose_id, self.pose_library_path)
+        )
+        target_root = reference_pose_root_anchor(pose_id, self.pose_library_path)
+        try:
+            target_mouth = reference_pose_anchor(pose_id, "mouth", self.pose_library_path)
+        except KeyError:
+            target_mouth = target_root
 
         if pose_id != self._display_pose_id:
             self._transition_from_pose_id = self._display_pose_id
             self._transition_started_at_frame = self.frame_index
             self._display_pose_id = pose_id
-
-        if self._transition_from_pose_id is None:
-            self.current_state().pose_transition_progress = 1.0
-            return target_canvas, target_root, target_mouth
-
-        elapsed = max(0, self.frame_index - self._transition_started_at_frame + 1)
-        progress = min(1.0, elapsed / self._transition_frames)
-        from_canvas = copy_pose_canvas(render_reference_pose_local(self._transition_from_pose_id))
-        from_root = reference_pose_root_anchor(self._transition_from_pose_id)
-        composite, composite_root = composite_anchor_transition(
-            from_canvas,
-            target_canvas,
-            from_root,
-            target_root,
-            _smoothstep(progress),
-        )
-        self.current_state().pose_transition_progress = progress
-        mouth_anchor = translate_anchor(target_mouth, target_root, composite_root)
-        if progress >= 1.0:
-            self._transition_from_pose_id = None
-        return composite, composite_root, mouth_anchor
+        # Authored square-cell sprites are atomic presentation snapshots. A
+        # partial per-cell dissolve creates false limbs and facial artifacts;
+        # root anchoring and fixed-tick motion carry continuity between them.
+        self.current_state().pose_transition_progress = 1.0
+        self._transition_from_pose_id = None
+        return target_canvas, target_root, target_mouth
 
     def _reference_root_screen(
         self,
@@ -176,7 +180,8 @@ class ProceduralWizardFrameSource:
         state: WizardState,
         render_scale: float,
     ) -> Tuple[float, float]:
-        return sx, min(self.rows - 8, sy + 18 * render_scale)
+        ground_y = min(self.rows - 8, sy + 18 * render_scale)
+        return sx, ground_y - state.altitude * 8.0 * render_scale
 
     def _draw_reference_animation_overlays(
         self,
@@ -314,6 +319,14 @@ class ProceduralWizardFrameSource:
             "pose_id": state["pose_id"],
             "last_pose_id": state["last_pose_id"],
             "pose_transition_progress": state["pose_transition_progress"],
+            "simulation_tick": state["simulation_tick"],
+            "animation_clip_id": state["animation_clip_id"],
+            "animation_node_id": state["animation_node_id"],
+            "mobility_mode": state["mobility_mode"],
+            "airborne": state["airborne"],
+            "altitude": state["altitude"],
+            "control_source": state["control_source"],
+            "semantic_cue": state["semantic_cue"],
         }
 
 

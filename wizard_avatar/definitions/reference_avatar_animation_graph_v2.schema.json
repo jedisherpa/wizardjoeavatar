@@ -1,0 +1,327 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://wizardjoe.local/schemas/reference_avatar_animation_graph_v2.schema.json",
+  "title": "Wizard Joe Reference Avatar Animation Graph v2",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "$schema",
+    "$id",
+    "schema_version",
+    "asset_set_id",
+    "authored_fps",
+    "simulation_hz",
+    "default_node_id",
+    "capability_tiers",
+    "pose_classification",
+    "clips",
+    "nodes",
+    "transitions",
+    "transition_recipes",
+    "channel_masks",
+    "fallbacks"
+  ],
+  "properties": {
+    "$schema": { "type": "string", "minLength": 1 },
+    "$id": { "type": "string", "minLength": 1 },
+    "schema_version": { "const": 2 },
+    "asset_set_id": { "type": "string", "minLength": 1 },
+    "authored_fps": { "type": "integer", "minimum": 1 },
+    "simulation_hz": { "type": "integer", "minimum": 1 },
+    "default_node_id": { "type": "string", "minLength": 1 },
+    "capability_tiers": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["A", "B", "C"],
+      "properties": {
+        "A": { "$ref": "#/$defs/capabilityTier" },
+        "B": { "$ref": "#/$defs/capabilityTier" },
+        "C": { "$ref": "#/$defs/capabilityTier" }
+      }
+    },
+    "pose_classification": {
+      "type": "object",
+      "minProperties": 39,
+      "additionalProperties": { "$ref": "#/$defs/poseClassification" }
+    },
+    "clips": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": { "$ref": "#/$defs/clip" }
+    },
+    "nodes": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": { "$ref": "#/$defs/node" }
+    },
+    "transitions": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/transition" }
+    },
+    "transition_recipes": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": { "$ref": "#/$defs/transitionRecipe" }
+    },
+    "channel_masks": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": { "$ref": "#/$defs/nonemptyStrings" }
+    },
+    "fallbacks": { "$ref": "#/$defs/fallbacks" }
+  },
+  "$defs": {
+    "nonemptyStrings": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "strings": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "capabilityTier": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": ["description"],
+      "properties": {
+        "description": { "type": "string", "minLength": 1 }
+      }
+    },
+    "poseClassification": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "roles",
+        "altitude_class",
+        "support_contact",
+        "planted_anchor",
+        "wing_mode",
+        "staff_mode",
+        "capability_tier"
+      ],
+      "properties": {
+        "roles": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "enum": ["clip_sample", "transition_sample", "diagnostic_only"]
+          }
+        },
+        "altitude_class": {
+          "enum": ["grounded", "takeoff", "airborne", "landing"]
+        },
+        "support_contact": {
+          "enum": ["none", "left_foot", "right_foot", "both_feet", "staff"]
+        },
+        "planted_anchor": {
+          "type": ["string", "null"],
+          "minLength": 1
+        },
+        "wing_mode": {
+          "enum": ["hidden", "folded", "extended", "upstroke", "downstroke", "banked"]
+        },
+        "staff_mode": {
+          "enum": ["absent", "carried", "planted", "guard", "attack", "spin"]
+        },
+        "capability_tier": { "enum": ["A", "B", "C"] }
+      }
+    },
+    "marker": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "frame_offset"],
+      "properties": {
+        "id": {
+          "enum": [
+            "left_contact",
+            "left_release",
+            "right_contact",
+            "right_release",
+            "both_contact",
+            "staff_contact",
+            "staff_release",
+            "takeoff_commit",
+            "airborne",
+            "flap_down_peak",
+            "flap_up_peak",
+            "bank_apex",
+            "landing_contact",
+            "landing_settled",
+            "action_commit",
+            "action_effect",
+            "action_recoverable",
+            "speech_open",
+            "speech_close",
+            "shush_hold_start",
+            "shush_hold_end",
+            "loop_boundary"
+          ]
+        },
+        "frame_offset": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "sample": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "pose_id",
+        "duration_frames",
+        "support_contact",
+        "planted_anchor",
+        "markers"
+      ],
+      "properties": {
+        "pose_id": { "type": "string", "minLength": 1 },
+        "duration_frames": { "type": "integer", "minimum": 1 },
+        "support_contact": {
+          "enum": ["none", "left_foot", "right_foot", "both_feet", "staff"]
+        },
+        "planted_anchor": { "type": ["string", "null"], "minLength": 1 },
+        "normalized_distance": { "type": "number", "minimum": 0 },
+        "markers": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/marker" }
+        }
+      }
+    },
+    "clip": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "clip_id",
+        "family",
+        "supported_facings",
+        "loop_mode",
+        "phase_source",
+        "root_policy",
+        "minimum_hold_ticks",
+        "interrupt_policy",
+        "channel_ownership",
+        "samples",
+        "entry_markers",
+        "exit_markers",
+        "secondary_curves",
+        "legal_successors"
+      ],
+      "properties": {
+        "clip_id": { "type": "string", "minLength": 1 },
+        "family": {
+          "enum": ["idle", "locomotion", "flight", "action", "reaction", "speech", "transition"]
+        },
+        "supported_facings": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "enum": ["north", "northeast", "east", "southeast", "south", "southwest", "west", "northwest"]
+          }
+        },
+        "loop_mode": { "enum": ["loop", "once", "hold_last"] },
+        "phase_source": { "enum": ["none", "time", "ground_distance", "air_distance", "flap_phase"] },
+        "root_policy": { "enum": ["fixed", "ground_distance", "air_trajectory", "contact_locked"] },
+        "minimum_hold_ticks": { "type": "integer", "minimum": 0 },
+        "interrupt_policy": { "enum": ["immediate", "at_marker", "after_commit", "uninterruptible"] },
+        "channel_ownership": { "$ref": "#/$defs/nonemptyStrings" },
+        "samples": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/sample" }
+        },
+        "entry_markers": { "$ref": "#/$defs/strings" },
+        "exit_markers": { "$ref": "#/$defs/strings" },
+        "secondary_curves": {
+          "type": "object",
+          "additionalProperties": { "type": "string", "minLength": 1 }
+        },
+        "legal_successors": { "$ref": "#/$defs/nonemptyStrings" }
+      }
+    },
+    "node": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["clip_id", "mobility_modes", "actions"],
+      "properties": {
+        "clip_id": { "type": "string", "minLength": 1 },
+        "mobility_modes": { "$ref": "#/$defs/nonemptyStrings" },
+        "actions": { "$ref": "#/$defs/strings" }
+      }
+    },
+    "transition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "transition_id",
+        "source_node_id",
+        "target_node_id",
+        "priority",
+        "duration_ticks",
+        "timing_mode",
+        "transition_recipe_id",
+        "phase_policy",
+        "root_policy",
+        "contact_policy",
+        "region_policy",
+        "interrupt_window",
+        "fallback_transition_id"
+      ],
+      "properties": {
+        "transition_id": { "type": "string", "minLength": 1 },
+        "source_node_id": { "type": "string", "minLength": 1 },
+        "target_node_id": { "type": "string", "minLength": 1 },
+        "priority": { "type": "integer", "minimum": 0 },
+        "duration_ticks": { "type": "integer", "minimum": 0 },
+        "timing_mode": { "enum": ["immediate", "marker", "phase", "contact"] },
+        "transition_recipe_id": { "type": "string", "minLength": 1 },
+        "phase_policy": { "enum": ["preserve", "nearest_contact", "restart", "none"] },
+        "root_policy": { "enum": ["fixed", "ground_distance", "air_trajectory", "contact_locked"] },
+        "contact_policy": { "enum": ["preserve", "match", "release", "none"] },
+        "region_policy": { "enum": ["coherent_pose", "presented_snapshot", "declared_masks"] },
+        "interrupt_window": { "type": "string", "minLength": 1 },
+        "fallback_transition_id": { "type": ["string", "null"], "minLength": 1 }
+      }
+    },
+    "transitionRecipe": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["entry_rule", "duration_frames", "interrupt_source", "region_masks"],
+      "properties": {
+        "entry_rule": { "enum": ["phase_match", "marker_gate", "contact_match", "snapshot_handoff", "hard_cut"] },
+        "duration_frames": { "type": "integer", "minimum": 0 },
+        "interrupt_source": { "enum": ["presented_snapshot", "authored_sample"] },
+        "region_masks": { "$ref": "#/$defs/strings" }
+      }
+    },
+    "fallbacks": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["grounded_clip_id", "airborne_clip_id", "by_facing", "by_action"],
+      "properties": {
+        "grounded_clip_id": { "type": "string", "minLength": 1 },
+        "airborne_clip_id": { "type": "string", "minLength": 1 },
+        "by_facing": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["north", "northeast", "east", "southeast", "south", "southwest", "west", "northwest"],
+          "properties": {
+            "north": { "type": "string", "minLength": 1 },
+            "northeast": { "type": "string", "minLength": 1 },
+            "east": { "type": "string", "minLength": 1 },
+            "southeast": { "type": "string", "minLength": 1 },
+            "south": { "type": "string", "minLength": 1 },
+            "southwest": { "type": "string", "minLength": 1 },
+            "west": { "type": "string", "minLength": 1 },
+            "northwest": { "type": "string", "minLength": 1 }
+          }
+        },
+        "by_action": {
+          "type": "object",
+          "additionalProperties": { "type": "string", "minLength": 1 }
+        }
+      }
+    }
+  }
+}

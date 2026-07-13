@@ -8,6 +8,7 @@ from typing import Any, Iterable, Optional, Set
 
 from .models import WizardState
 from .reference_avatar import reference_pose_ids
+from .animation_graph import load_reference_animation_graph_v2
 
 
 ANIMATION_GRAPH_PATH = Path(__file__).with_name("definitions") / "reference_avatar_animation_graph.json"
@@ -61,6 +62,16 @@ def select_reference_pose_sample(
         )
         return PoseSample(pose_id=pose_id, contact="showcase", clip_id="pose_showcase")
 
+    if state.airborne or state.mobility_mode in {"takeoff", "hover", "flight_travel", "landing"}:
+        sample = _select_flight_sample(state)
+        pose_id = _first_available(sample.pose_id, ("fly_front_hover_neutral", FRONT_IDLE_POSE), available)
+        return PoseSample(
+            pose_id=pose_id,
+            contact=sample.contact,
+            clip_id=sample.clip_id,
+            phase=sample.phase,
+        )
+
     try:
         graph = load_reference_animation_graph()
         sample = _select_graph_sample(state, graph)
@@ -95,6 +106,41 @@ def _select_graph_sample(state: WizardState, graph: dict[str, Any]) -> PoseSampl
         pose_id=str(graph.get("idle_by_facing", {}).get(state.facing, graph["default_pose_id"])),
         contact="both",
         phase=state.walk_phase % 1.0,
+    )
+
+
+def _select_flight_sample(state: WizardState) -> PoseSample:
+    graph = load_reference_animation_graph_v2()
+    if state.action == "magic_cast":
+        node_id = "air_staff"
+    elif state.action == "reaction":
+        node_id = "air_reaction_node"
+    elif state.mobility_mode == "takeoff":
+        node_id = "takeoff"
+    elif state.mobility_mode == "landing":
+        node_id = "landing"
+    else:
+        speed = (state.velocity["x"] ** 2 + state.velocity["z"] ** 2) ** 0.5
+        if speed <= 0.08:
+            node_id = "hover"
+        elif state.velocity["x"] < -0.25:
+            node_id = "flight_bank_left"
+        elif state.velocity["x"] > 0.25:
+            node_id = "flight_bank_right"
+        else:
+            node_id = "glide"
+    node = graph.nodes[node_id]
+    if state.animation_clip_id != node.clip_id:
+        state.animation_clip_id = node.clip_id
+        state.animation_clip_tick = 0
+    state.animation_node_id = node_id
+    evaluation = graph.evaluate_clip(node.clip_id, state.animation_clip_tick)
+    state.mobility_mode = state.mobility_mode or node.mobility_modes[0]
+    return PoseSample(
+        pose_id=evaluation.pose_id,
+        contact=evaluation.support_contact,
+        clip_id=node.clip_id,
+        phase=evaluation.clip_phase,
     )
 
 

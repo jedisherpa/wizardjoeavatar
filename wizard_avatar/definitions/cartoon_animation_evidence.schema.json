@@ -1,0 +1,273 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://wizardjoe.local/schemas/cartoon_animation_evidence.schema.json",
+  "title": "WizardJoe Cartoon Animation Compact Evidence",
+  "description": "Compact, commit-bound evidence for one cartoon-animation work item and gate.",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "program_id",
+    "gate_id",
+    "work_item_id",
+    "result",
+    "production",
+    "planning_checkpoint",
+    "tested_commit",
+    "generated_at",
+    "commands",
+    "artifacts",
+    "changed_paths",
+    "risks"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "program_id": {
+      "const": "wizardjoe-cartoon-animation-2026-07-12"
+    },
+    "gate_id": {
+      "type": "string",
+      "pattern": "^[A-Z][A-Z0-9-]{0,15}$"
+    },
+    "work_item_id": {
+      "type": "string",
+      "pattern": "^CAP-[0-9]{3}$"
+    },
+    "result": {
+      "enum": [
+        "passed",
+        "failed",
+        "blocked"
+      ]
+    },
+    "production": {
+      "type": "object",
+      "required": [
+        "architecture",
+        "port"
+      ],
+      "properties": {
+        "architecture": {
+          "const": "asciline_python"
+        },
+        "port": {
+          "const": 8765
+        }
+      },
+      "additionalProperties": false
+    },
+    "planning_checkpoint": {
+      "type": "object",
+      "required": [
+        "commit",
+        "pushed"
+      ],
+      "properties": {
+        "commit": {
+          "$ref": "#/$defs/gitCommit"
+        },
+        "pushed": {
+          "const": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "tested_commit": {
+      "$ref": "#/$defs/gitCommit"
+    },
+    "generated_at": {
+      "type": "string",
+      "format": "date-time",
+      "pattern": "Z$"
+    },
+    "commands": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/commandResult"
+      }
+    },
+    "artifacts": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/artifact"
+      }
+    },
+    "changed_paths": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/repositoryPath"
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "additionalProperties": {
+        "type": [
+          "boolean",
+          "integer",
+          "number",
+          "string"
+        ]
+      }
+    },
+    "risks": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "review": {
+      "$ref": "#/$defs/review"
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "gitCommit": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{40}$"
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "repositoryPath": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^(?!/)(?!.*(?:^|/)\\.\\.(?:/|$)).+$"
+    },
+    "commandResult": {
+      "type": "object",
+      "required": [
+        "command",
+        "exit_code",
+        "duration_ms",
+        "result"
+      ],
+      "properties": {
+        "command": {
+          "type": "string",
+          "minLength": 1
+        },
+        "exit_code": {
+          "type": "integer"
+        },
+        "duration_ms": {
+          "type": "number",
+          "minimum": 0
+        },
+        "result": {
+          "enum": [
+            "passed",
+            "failed"
+          ]
+        },
+        "output_summary": {
+          "type": "string",
+          "maxLength": 2000
+        },
+        "output_sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "log_artifact": {
+          "$ref": "#/$defs/repositoryPath"
+        }
+      },
+      "additionalProperties": false
+    },
+    "artifact": {
+      "type": "object",
+      "required": [
+        "path",
+        "media_type",
+        "sha256",
+        "bytes",
+        "storage",
+        "retention_days"
+      ],
+      "properties": {
+        "path": {
+          "$ref": "#/$defs/repositoryPath"
+        },
+        "media_type": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "bytes": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "storage": {
+          "enum": [
+            "git",
+            "workflow_artifact"
+          ]
+        },
+        "retention_days": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "artifact_url": {
+          "type": "string",
+          "format": "uri"
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "storage": {
+                "const": "git"
+              }
+            },
+            "required": [
+              "storage"
+            ]
+          },
+          "then": {
+            "properties": {
+              "bytes": {
+                "maximum": 5242880
+              }
+            }
+          }
+        }
+      ],
+      "additionalProperties": false
+    },
+    "review": {
+      "type": "object",
+      "required": [
+        "role",
+        "reviewer_id",
+        "decision"
+      ],
+      "properties": {
+        "role": {
+          "type": "string",
+          "minLength": 2
+        },
+        "reviewer_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "decision": {
+          "enum": [
+            "accepted",
+            "rejected",
+            "changes_requested"
+          ]
+        },
+        "notes": {
+          "type": "string",
+          "maxLength": 2000
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

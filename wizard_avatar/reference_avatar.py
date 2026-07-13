@@ -4,7 +4,7 @@ import json
 from dataclasses import dataclass
 from functools import lru_cache
 from pathlib import Path
-from typing import Dict, Tuple
+from typing import Dict, Mapping, Tuple
 
 from .compositor import CellCanvas
 from .glyphs import glyph
@@ -41,18 +41,26 @@ def _load_reference_payload() -> dict:
         return json.load(handle)
 
 
-@lru_cache(maxsize=1)
-def load_reference_pose_library() -> dict:
-    with open(REFERENCE_POSE_CELL_PATH, "r", encoding="utf-8") as handle:
+@lru_cache(maxsize=None)
+def load_reference_pose_library(path: Path = REFERENCE_POSE_CELL_PATH) -> dict:
+    with open(Path(path).resolve(), "r", encoding="utf-8") as handle:
         return json.load(handle)
 
 
-@lru_cache(maxsize=1)
-def _reference_pose_map() -> Dict[str, ReferencePose]:
-    payload = load_reference_pose_library()
+@lru_cache(maxsize=None)
+def _reference_pose_map(path: Path = REFERENCE_POSE_CELL_PATH) -> Dict[str, ReferencePose]:
+    library_path = Path(path).resolve()
+    payload = load_reference_pose_library(library_path)
     poses: Dict[str, ReferencePose] = {}
-    for pose in payload.get("poses", []):
-        raw_pose_id = pose.get("id") or pose.get("pose_id")
+    raw_poses = payload.get("poses", [])
+    if isinstance(raw_poses, Mapping):
+        pose_items = raw_poses.items()
+    else:
+        pose_items = ((None, pose) for pose in raw_poses)
+    for keyed_pose_id, pose in pose_items:
+        if not isinstance(pose, Mapping):
+            raise ValueError("Reference pose entries must be objects")
+        raw_pose_id = keyed_pose_id or pose.get("id") or pose.get("pose_id")
         if raw_pose_id is None:
             raise ValueError("Reference pose is missing an id")
         pose_id = str(raw_pose_id)
@@ -80,24 +88,27 @@ def _reference_pose_map() -> Dict[str, ReferencePose]:
             cells=cells,
         )
     if not poses:
-        raise ValueError(f"No reference poses found in {REFERENCE_POSE_CELL_PATH}")
+        raise ValueError(f"No reference poses found in {library_path}")
     return poses
 
 
-def reference_avatar_available() -> bool:
-    return reference_pose_library_available() or REFERENCE_CELL_PATH.exists()
+def reference_avatar_available(path: Path = REFERENCE_POSE_CELL_PATH) -> bool:
+    return reference_pose_library_available(path) or REFERENCE_CELL_PATH.exists()
 
 
-def reference_pose_library_available() -> bool:
-    return REFERENCE_POSE_CELL_PATH.exists()
+def reference_pose_library_available(path: Path = REFERENCE_POSE_CELL_PATH) -> bool:
+    return Path(path).resolve().exists()
 
 
-def reference_pose_ids() -> Tuple[str, ...]:
-    return tuple(_reference_pose_map().keys())
+def reference_pose_ids(path: Path = REFERENCE_POSE_CELL_PATH) -> Tuple[str, ...]:
+    return tuple(_reference_pose_map(Path(path).resolve()).keys())
 
 
-def get_reference_pose(pose_id: str) -> ReferencePose:
-    poses = _reference_pose_map()
+def get_reference_pose(
+    pose_id: str,
+    path: Path = REFERENCE_POSE_CELL_PATH,
+) -> ReferencePose:
+    poses = _reference_pose_map(Path(path).resolve())
     try:
         return poses[pose_id]
     except KeyError as exc:
@@ -105,12 +116,19 @@ def get_reference_pose(pose_id: str) -> ReferencePose:
         raise KeyError(f"Unknown reference pose {pose_id!r}; available poses: {available}") from exc
 
 
-def reference_pose_root_anchor(pose_id: str = REFERENCE_FRONT_IDLE_POSE_ID) -> Tuple[int, int]:
-    return get_reference_pose(pose_id).root_anchor
+def reference_pose_root_anchor(
+    pose_id: str = REFERENCE_FRONT_IDLE_POSE_ID,
+    path: Path = REFERENCE_POSE_CELL_PATH,
+) -> Tuple[int, int]:
+    return get_reference_pose(pose_id, path).root_anchor
 
 
-def reference_pose_anchor(pose_id: str, anchor_name: str) -> Tuple[int, int]:
-    pose = get_reference_pose(pose_id)
+def reference_pose_anchor(
+    pose_id: str,
+    anchor_name: str,
+    path: Path = REFERENCE_POSE_CELL_PATH,
+) -> Tuple[int, int]:
+    pose = get_reference_pose(pose_id, path)
     try:
         return pose.anchors[anchor_name]
     except KeyError as exc:
@@ -130,8 +148,11 @@ def reference_root_anchor() -> Tuple[int, int]:
 
 
 @lru_cache(maxsize=None)
-def _render_reference_pose_canvas(pose_id: str) -> CellCanvas:
-    pose = get_reference_pose(pose_id)
+def _render_reference_pose_canvas(
+    pose_id: str,
+    path: Path = REFERENCE_POSE_CELL_PATH,
+) -> CellCanvas:
+    pose = get_reference_pose(pose_id, path)
     canvas = CellCanvas(pose.cols, pose.rows)
     layer_id = f"{REFERENCE_LAYER_ID}:{pose.pose_id}"
     for cell in pose.cells:
@@ -139,8 +160,11 @@ def _render_reference_pose_canvas(pose_id: str) -> CellCanvas:
     return canvas
 
 
-def render_reference_pose_local(pose_id: str) -> CellCanvas:
-    return _render_reference_pose_canvas(pose_id).copy()
+def render_reference_pose_local(
+    pose_id: str,
+    path: Path = REFERENCE_POSE_CELL_PATH,
+) -> CellCanvas:
+    return _render_reference_pose_canvas(pose_id, Path(path).resolve()).copy()
 
 
 @lru_cache(maxsize=1)

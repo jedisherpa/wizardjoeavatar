@@ -29,12 +29,14 @@ The project is designed around a server-authoritative, editable character assemb
 
 This repository is intended to be cloned or referenced from any development machine and supplied directly to Codex as the authoritative implementation specification.
 
-## Current implementation status
+## Current implementation
 
-This is a first procedural implementation pass, not a completed pass of all 38
-specification documents. See
-[`docs/wizard/COMPLIANCE_GAP_AUDIT.md`](docs/wizard/COMPLIANCE_GAP_AUDIT.md)
-for the current gap list.
+The production target is the ASCILINE Python service on port `8765`. It provides
+a fixed-tick animation runtime, adaptive square-cell streaming, keyboard and
+gamepad movement, ground and flight control, a complete pose picker, a random
+Repeat mode, speech mouth animation with captions, and a content-free Prism
+visual-advisory input. Rust experiments in this checkout are historical and are
+not production dependencies.
 
 ## First-pass repeatable avatar pipeline
 
@@ -67,30 +69,51 @@ That reads `assets/reference/motion_sources/manifest.json` and produces
 square-cell pose library for front, side, back, walking, explaining, and magic
 cast states.
 
-Run locally:
+Run locally in the foreground:
 
 ```bash
 python3 -m pip install -r requirements.txt
-python3 tools/run_wizard_avatar_server.py --port 8000
+python3 tools/run_wizard_avatar_server.py --port 8765
 ```
 
-Then open `http://127.0.0.1:8000/`.
+Then open `http://127.0.0.1:8765/`.
+
+On macOS, install the local persistent service once:
+
+```bash
+tools/install_local_wizard_service.sh
+```
+
+It starts at login, restarts after a crash, and remains on port `8765` until:
+
+```bash
+tools/stop_local_wizard_service.sh
+```
 
 Run verification:
 
 ```bash
 python3 -m unittest discover -s tests
+python3 tools/validate_cartoon_animation_program.py --root .
+python3 tools/run_python_avatar_soak.py --duration-seconds 30 --viewers 4 --slow-viewer --strict
 python3 tools/generate_wizard_evidence.py
 python3 tools/demo_wizard_avatar.py
 ```
 
-For future NFT characters, keep the shared runtime and replace or extend:
+## Add another NFT character
 
-- `wizard_avatar/palette.py`
-- `wizard_avatar/glyphs.py`
-- `wizard_avatar/definitions/*.json`
-- `assets/reference/target_voxel_wizard.png`
-- `wizard_avatar/layers.py`
-- `wizard_avatar/expressions.py`
+The reusable unit is a versioned character package. A package names the
+character’s generated square-cell pose library, animation graph, default pose,
+renderer, and capabilities. The shared runtime, projection, control, transport,
+browser, API, diagnostics, and evidence flow do not change.
 
-The server/API/browser/demo/tests/evidence flow stays the same.
+1. Generate a canonical square-cell pose library from the character’s source images.
+2. Author or reuse a compatible animation graph whose samples name those poses.
+3. Add a package matching `wizard_avatar/definitions/character_package.schema.json`.
+4. Construct `ProceduralWizardFrameSource(character_package_path=...)`.
+5. Run the package, continuity, browser, and soak gates.
+
+Wizard Joe’s production package is
+`wizard_avatar/definitions/wizard_joe_character_package.json`. The test suite
+also renders a second fixture character through this same path to prevent the
+package boundary from becoming metadata-only.

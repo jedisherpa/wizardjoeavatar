@@ -1,0 +1,238 @@
+{
+  "schema_version": 1,
+  "classification": "visual_advisory_only",
+  "profiles": {
+    "none": {
+      "expression": "neutral",
+      "gesture": "none",
+      "amplitude": 0.0,
+      "tempo": 1.0,
+      "mouth_activity": 0.0,
+      "hold": false,
+      "allow_flourish": false,
+      "priority": 0
+    },
+    "listen": {
+      "expression": "attentive",
+      "gesture": "listen",
+      "amplitude": 0.28,
+      "tempo": 0.9,
+      "mouth_activity": 0.0,
+      "hold": true,
+      "allow_flourish": false,
+      "priority": 20
+    },
+    "think": {
+      "expression": "thinking",
+      "gesture": "think",
+      "amplitude": 0.34,
+      "tempo": 0.78,
+      "mouth_activity": 0.0,
+      "hold": false,
+      "allow_flourish": false,
+      "priority": 30
+    },
+    "speak": {
+      "expression": "friendly",
+      "gesture": "explain",
+      "amplitude": 0.42,
+      "tempo": 1.0,
+      "mouth_activity": 0.72,
+      "hold": false,
+      "allow_flourish": true,
+      "priority": 40
+    },
+    "review": {
+      "expression": "focused",
+      "gesture": "review",
+      "amplitude": 0.24,
+      "tempo": 0.72,
+      "mouth_activity": 0.04,
+      "hold": true,
+      "allow_flourish": false,
+      "priority": 55
+    },
+    "clarify": {
+      "expression": "curious",
+      "gesture": "question",
+      "amplitude": 0.32,
+      "tempo": 0.84,
+      "mouth_activity": 0.18,
+      "hold": false,
+      "allow_flourish": false,
+      "priority": 60
+    },
+    "wait": {
+      "expression": "neutral",
+      "gesture": "wait",
+      "amplitude": 0.12,
+      "tempo": 0.65,
+      "mouth_activity": 0.0,
+      "hold": true,
+      "allow_flourish": false,
+      "priority": 80
+    },
+    "recall": {
+      "expression": "thoughtful",
+      "gesture": "recall",
+      "amplitude": 0.22,
+      "tempo": 0.78,
+      "mouth_activity": 0.0,
+      "hold": false,
+      "allow_flourish": false,
+      "priority": 25
+    },
+    "reference": {
+      "expression": "attentive",
+      "gesture": "reference",
+      "amplitude": 0.25,
+      "tempo": 0.86,
+      "mouth_activity": 0.0,
+      "hold": false,
+      "allow_flourish": false,
+      "priority": 25
+    },
+    "topic_reset": {
+      "expression": "attentive",
+      "gesture": "reorient",
+      "amplitude": 0.18,
+      "tempo": 0.82,
+      "mouth_activity": 0.0,
+      "hold": false,
+      "allow_flourish": false,
+      "priority": 35
+    },
+    "degraded": {
+      "expression": "neutral",
+      "gesture": "none",
+      "amplitude": 0.08,
+      "tempo": 0.6,
+      "mouth_activity": 0.0,
+      "hold": true,
+      "allow_flourish": false,
+      "priority": 90
+    },
+    "persona_style": {
+      "expression": "neutral",
+      "gesture": "none",
+      "amplitude": 0.0,
+      "tempo": 1.0,
+      "mouth_activity": 0.0,
+      "hold": false,
+      "allow_flourish": false,
+      "priority": 5
+    }
+  },
+  "stage_map": {
+    "queued": {"cue": "listen"},
+    "understanding": {"cue": "listen"},
+    "reading_you": {"cue": "listen"},
+    "listening": {"cue": "listen"},
+    "drafting": {"cue": "think"},
+    "deciding": {"cue": "think"},
+    "thinking": {"cue": "think"},
+    "checking_safety": {"cue": "review", "amplitude_cap": 0.2},
+    "auditing": {"cue": "review", "amplitude_cap": 0.2},
+    "reviewing": {"cue": "review"},
+    "ready": {"cue": "speak", "amplitude_cap": 0.26, "allow_flourish": false},
+    "speaking": {"cue": "speak"},
+    "needs_clarification": {"cue": "clarify"},
+    "clarifying": {"cue": "clarify"},
+    "waiting": {"cue": "wait"},
+    "waiting_approval": {"cue": "wait", "amplitude_cap": 0.12},
+    "recalling": {"cue": "recall"},
+    "referencing": {"cue": "reference"},
+    "topic_reset": {"cue": "topic_reset"},
+    "degraded": {"cue": "degraded", "amplitude_cap": 0.08}
+  },
+  "kind_map": {
+    "listen": {"cue": "listen"},
+    "think": {"cue": "think"},
+    "speak": {"cue": "speak"},
+    "review": {"cue": "review"},
+    "clarify": {"cue": "clarify"},
+    "wait": {"cue": "wait"},
+    "recall": {"cue": "recall"},
+    "recall_summary": {"cue": "recall"},
+    "reference": {"cue": "reference"},
+    "retrieval_summary": {"cue": "reference"},
+    "topic_reset": {"cue": "topic_reset"},
+    "topic_shift": {"cue": "topic_reset"},
+    "degraded": {"cue": "degraded", "amplitude_cap": 0.08},
+    "persona_style": {"cue": "persona_style"}
+  },
+  "terminal_posture_map": {
+    "ready": {"cue": "speak", "amplitude_cap": 0.26, "allow_flourish": false},
+    "settled": {"cue": "listen", "amplitude_cap": 0.2},
+    "completed": {"cue": "listen", "amplitude_cap": 0.2},
+    "needs_clarification": {"cue": "clarify"},
+    "waiting": {"cue": "wait"},
+    "degraded": {"cue": "degraded", "amplitude_cap": 0.08}
+  },
+  "continuity_map": {
+    "continued": {"cue": "listen", "amplitude_cap": 0.18},
+    "restored": {"cue": "recall", "amplitude_cap": 0.18},
+    "reset": {"cue": "topic_reset"},
+    "new_topic": {"cue": "topic_reset"}
+  },
+  "approval_map": {
+    "required": {"cue": "wait"},
+    "pending": {"cue": "wait"},
+    "waiting": {"cue": "wait"},
+    "blocked": {"cue": "wait"},
+    "denied": {"cue": "wait"},
+    "approved": {"cue": "none"},
+    "not_required": {"cue": "none"}
+  },
+  "health_map": {
+    "degraded": {"cue": "degraded"},
+    "unavailable": {"cue": "degraded"},
+    "error": {"cue": "degraded"},
+    "healthy": {"cue": "none"},
+    "ok": {"cue": "none"}
+  },
+  "governance": {
+    "approval_cap": 0.12,
+    "safety_cap": 0.18,
+    "serious_cap": 0.26,
+    "degraded_cap": 0.08,
+    "approval_priority": 100,
+    "safety_priority": 100,
+    "degraded_priority": 90,
+    "approval_states": ["required", "pending", "waiting", "blocked", "denied"],
+    "safety_states": ["review", "restricted", "blocked", "invariant", "invariant_hit"],
+    "safety_hold_states": ["blocked", "invariant", "invariant_hit"],
+    "serious_states": ["serious", "high", "critical"],
+    "degraded_states": ["degraded", "unavailable", "error"]
+  },
+  "persona_styles": {
+    "warm": {"amplitude_scale": 1.0, "tempo_scale": 0.96},
+    "playful": {"amplitude_scale": 1.12, "tempo_scale": 1.06},
+    "focused": {"amplitude_scale": 0.82, "tempo_scale": 0.9},
+    "measured": {"amplitude_scale": 0.72, "tempo_scale": 0.82},
+    "direct": {"amplitude_scale": 0.88, "tempo_scale": 1.02},
+    "reflective": {"amplitude_scale": 0.74, "tempo_scale": 0.78}
+  },
+  "forbidden_key_fragments": [
+    "prompt",
+    "reply",
+    "message",
+    "content",
+    "snippet",
+    "memory_body",
+    "retrieved_text",
+    "embedding",
+    "vector",
+    "source_id",
+    "user_id",
+    "rationale",
+    "approval_payload",
+    "provider",
+    "model",
+    "route",
+    "path",
+    "hash",
+    "secret",
+    "authority"
+  ]
+}

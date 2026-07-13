@@ -21,6 +21,9 @@ export class WizardClient {
     this.ignoreDeltasUntilKeyframe = false;
     this.maxBufferedFrames = 8;
     this.frameCount = 0;
+    this.renderLoopStarted = false;
+    this.reconnectTimer = null;
+    this.reconnectAttempt = 0;
     this.lastFpsAt = performance.now();
     this.metrics = {
       targetFps: DEFAULT_TARGET_FPS,
@@ -52,20 +55,39 @@ export class WizardClient {
   }
 
   connect() {
+    if (this.reconnectTimer) {
+      clearTimeout(this.reconnectTimer);
+      this.reconnectTimer = null;
+    }
     const protocol = location.protocol === "https:" ? "wss:" : "ws:";
     this.ws = new WebSocket(`${protocol}//${location.host}/ws/avatar/wizard?codec=adaptive`);
     this.ws.binaryType = "arraybuffer";
     this.ws.onmessage = (event) => this.onMessage(event);
     this.ws.onopen = () => {
+      this.reconnectAttempt = 0;
       this.metrics.websocketReadyState = this.ws.readyState;
     };
     this.ws.onclose = () => {
       this.metrics.websocketReadyState = this.ws ? this.ws.readyState : null;
+      this.scheduleReconnect();
     };
     this.ws.onerror = () => {
       this.metrics.websocketReadyState = this.ws ? this.ws.readyState : null;
     };
-    requestAnimationFrame((time) => this.render(time));
+    if (!this.renderLoopStarted) {
+      this.renderLoopStarted = true;
+      requestAnimationFrame((time) => this.render(time));
+    }
+  }
+
+  scheduleReconnect() {
+    if (this.reconnectTimer) return;
+    const delay = Math.min(3000, 200 * (2 ** Math.min(this.reconnectAttempt, 4)));
+    this.reconnectAttempt += 1;
+    this.reconnectTimer = window.setTimeout(() => {
+      this.reconnectTimer = null;
+      this.connect();
+    }, delay);
   }
 
   onMessage(event) {
@@ -280,8 +302,11 @@ export async function command(type, payload = {}) {
     face: "/api/avatar/wizard/face",
     action: "/api/avatar/wizard/action",
     pose: "/api/avatar/wizard/pose",
+    control: "/api/avatar/wizard/control",
+    prism_signal: "/api/avatar/wizard/prism-signal",
     expression: "/api/avatar/wizard/expression",
     speak: "/api/avatar/wizard/speak",
+    speech_stop: "/api/avatar/wizard/speech-stop",
     stop: "/api/avatar/wizard/stop",
     reset: "/api/avatar/wizard/reset",
     figure_eight: "/api/avatar/wizard/figure-eight",

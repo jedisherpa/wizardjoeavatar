@@ -1,0 +1,237 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:wizardjoe:prism-animation-signal:v1",
+  "title": "PrismAnimationSignalV1",
+  "description": "Content-free, visual-advisory-only metadata. This contract grants no movement, execution, or world authority.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "event_id",
+    "source_epoch",
+    "source_sequence",
+    "emitted_at_ms",
+    "ttl_ms",
+    "kind",
+    "classification",
+    "provenance_class",
+    "sanitization_version",
+    "payload"
+  ],
+  "properties": {
+    "schema_version": { "const": 1 },
+    "event_id": {
+      "type": "string",
+      "format": "uuid",
+      "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+    },
+    "source_epoch": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 64,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{0,63}$"
+    },
+    "source_sequence": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 9007199254740991
+    },
+    "emitted_at_ms": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 9007199254740991
+    },
+    "ttl_ms": { "type": "integer", "minimum": 1, "maximum": 300000 },
+    "kind": {
+      "enum": [
+        "stage",
+        "terminal_posture",
+        "persona_style",
+        "recall_summary",
+        "retrieval_summary",
+        "approval_posture",
+        "continuity",
+        "topic_shift",
+        "health"
+      ]
+    },
+    "classification": { "const": "visual_advisory_only" },
+    "provenance_class": {
+      "enum": [
+        "runtime_lifecycle",
+        "governance_projection",
+        "sanitized_aggregate",
+        "runtime_health",
+        "authored_profile"
+      ]
+    },
+    "sanitization_version": { "const": 1 },
+    "payload": { "type": "object" }
+  },
+  "allOf": [
+    {
+      "if": { "properties": { "kind": { "const": "stage" } } },
+      "then": {
+        "properties": {
+          "payload": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["stage", "status"],
+            "properties": {
+              "stage": {
+                "enum": [
+                  "queued", "understanding", "reading_you", "listening",
+                  "drafting", "checking_safety", "auditing", "deciding",
+                  "reviewing", "ready", "speaking", "needs_clarification",
+                  "waiting_approval", "recalling", "referencing", "degraded"
+                ]
+              },
+              "status": {
+                "enum": ["started", "active", "completed", "cancelled", "failed"]
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": { "properties": { "kind": { "const": "terminal_posture" } } },
+      "then": {
+        "properties": {
+          "payload": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["posture"],
+            "properties": {
+              "posture": {
+                "enum": ["ready", "settled", "needs_clarification", "waiting", "degraded"]
+              },
+              "confidence_bucket": { "enum": ["unknown", "low", "medium", "high"] },
+              "serious_mode": { "type": "boolean" }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": { "properties": { "kind": { "const": "persona_style" } } },
+      "then": {
+        "properties": {
+          "payload": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["style"],
+            "properties": {
+              "style": { "enum": ["warm", "playful", "focused", "measured", "direct", "reflective"] }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": { "properties": { "kind": { "const": "recall_summary" } } },
+      "then": {
+        "properties": {
+          "payload": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["selected_count_bucket"],
+            "properties": {
+              "selected_count_bucket": { "enum": ["0", "1", "2_plus"] },
+              "selected_count": { "type": "integer", "minimum": 0, "maximum": 1000 },
+              "memory_selected": { "type": "boolean" },
+              "backstory_selected": { "type": "boolean" },
+              "degraded": { "type": "boolean" }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": { "properties": { "kind": { "const": "retrieval_summary" } } },
+      "then": {
+        "properties": {
+          "payload": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["result_count_bucket"],
+            "properties": {
+              "result_count_bucket": { "enum": ["0", "1", "2_plus"] },
+              "result_count": { "type": "integer", "minimum": 0, "maximum": 10000 },
+              "occurred": { "type": "boolean" },
+              "degraded": { "type": "boolean" }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": { "properties": { "kind": { "const": "approval_posture" } } },
+      "then": {
+        "properties": {
+          "payload": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["approval_state"],
+            "properties": {
+              "approval_state": { "enum": ["pending", "approved", "denied", "stale", "failed", "not_required"] }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": { "properties": { "kind": { "const": "continuity" } } },
+      "then": {
+        "properties": {
+          "payload": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["continuity_state"],
+            "properties": {
+              "continuity_state": { "enum": ["continued", "restored", "reset", "new_topic"] },
+              "age_bucket": { "enum": ["unknown", "new", "recent", "established"] },
+              "present": { "type": "boolean" },
+              "ledger_valid": { "type": "boolean" },
+              "pending_approval_count": { "type": "integer", "minimum": 0, "maximum": 1000 },
+              "recent_turns_count": { "type": "integer", "minimum": 0, "maximum": 1000000 }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": { "properties": { "kind": { "const": "topic_shift" } } },
+      "then": {
+        "properties": {
+          "payload": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["changed", "cause"],
+            "properties": {
+              "changed": { "type": "boolean" },
+              "cause": { "enum": ["explicit", "semantic", "unknown"] }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": { "properties": { "kind": { "const": "health" } } },
+      "then": {
+        "properties": {
+          "payload": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["health_state"],
+            "properties": {
+              "health_state": { "enum": ["healthy", "degraded", "unavailable"] },
+              "audit_healthy": { "type": "boolean" },
+              "signal_age_ms": { "type": "integer", "minimum": 0, "maximum": 300000 }
+            }
+          }
+        }
+      }
+    }
+  ]
+}

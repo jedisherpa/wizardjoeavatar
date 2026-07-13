@@ -1,6 +1,6 @@
 # Cartoon Animation Program Tracker
 
-Last coordinator update: 2026-07-12.
+Last coordinator update: 2026-07-13.
 
 ## Program status
 
@@ -9,9 +9,9 @@ Last coordinator update: 2026-07-12.
 | Baseline snapshot | COMPLETE | Current source, tests, generated library, and live endpoint recorded |
 | Role research | COMPLETE | Four reports saved with code references and primary sources |
 | Coordinated planning | COMPLETE | Same four agents produced compatible planning contributions; two Prism signal reports added |
-| Planning checkpoint | QUEUED | Research and plan reviewed, committed, and pushed |
-| Implementation | QUEUED | Workflow waves complete with disjoint ownership |
-| Final verification | QUEUED | Tests, browser QA, remote controls, motion quality, and evidence pass |
+| Planning checkpoint | COMPLETE | Research and plan pushed as `08d8f3aaa181d97ef3d2a29cb5a8362d81a05f12` |
+| Implementation | COMPLETE | Python runtime, graph, controls, reusable character package, Prism adapter, TTS captions, and persistent service integrated |
+| Final verification | IN_PROGRESS | 153 tests and live browser matrix passed; ten-minute mixed-control soak running |
 | Final publish | QUEUED | Implementation commit pushed to GitHub |
 
 ## Agent ledger
@@ -34,3 +34,5 @@ Last coordinator update: 2026-07-12.
 | 2026-07-12 | ASCILINE Python is the sole production architecture and delivery system | Rust came from an earlier side request and must not influence the port 8765 deliverable | User correction; Python suite passes 62 tests |
 | 2026-07-12 | Prism GT and CDISS may supply semantic animation signals through an adapter | External Rust-produced signals are inputs; WizardJoe animation execution remains Python-only | User-requested Prism signal research |
 | 2026-07-13 | Prism signal research completed against local `prism-gt-influence-integrated` commit `cf793dba` | Existing signal surfaces and proposed contracts are now separated explicitly | `research/05-prism-runtime-signals.md`, `research/06-persona-memory-governance-signals.md` |
+| 2026-07-13 | Missed frame deadlines are dropped instead of replayed | Unbounded frame catch-up consumed speech and animation timers and made transitions appear erratic | `wizard_avatar/stream.py`, `tests/wizard/test_stream_hub.py` |
+| 2026-07-13 | Character content is loaded through a versioned package | Future characters can reuse the runtime, control, transport, and renderer without architecture changes | `wizard_avatar/character_package.py`, `wizard_avatar/definitions/wizard_joe_character_package.json` |

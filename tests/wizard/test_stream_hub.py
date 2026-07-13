@@ -65,6 +65,32 @@ class StreamHubTests(unittest.IsolatedAsyncioTestCase):
             hub.unsubscribe(subscriber)
             await hub.stop()
 
+    async def test_frame_loop_does_not_replay_missed_deadlines(self):
+        source = ProceduralWizardFrameSource(fps=24)
+        original_next_frame = source.next_encoded_frame
+
+        async def delayed_next_frame(*args, **kwargs):
+            await asyncio.sleep(0.06)
+            return await original_next_frame(*args, **kwargs)
+
+        source.next_encoded_frame = delayed_next_frame
+        hub = WizardFrameHub(source)
+        subscriber = await hub.subscribe()
+        try:
+            await asyncio.sleep(0.34)
+            published = hub._published_frames
+            self.assertGreaterEqual(hub._schedule_overruns, 1)
+            self.assertGreaterEqual(published, 3)
+            self.assertLessEqual(published, 5)
+
+            before = source.current_state().time_seconds
+            await asyncio.sleep(0.12)
+            elapsed_simulation = source.current_state().time_seconds - before
+            self.assertLess(elapsed_simulation, 0.13)
+        finally:
+            hub.unsubscribe(subscriber)
+            await hub.stop()
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -11,8 +11,12 @@
       <canvas id="wizard-canvas" aria-label="WizardJoeAvatar square-cell stage"></canvas>
       <pre id="wizard-selection" aria-hidden="true"></pre>
       <section id="diagnostics" class="diagnostics"></section>
+      <div id="captions" class="captions" role="status" aria-live="polite" hidden></div>
       <nav class="toolbar" aria-label="Wizard controls">
         <button data-demo="play" title="Play demo">▶</button>
+        <button data-repeat title="Repeat random poses" aria-pressed="false">↻</button>
+        <button data-flight title="Fly" aria-pressed="false">↥</button>
+        <button data-poses title="Choose pose">▦</button>
         <button data-action="idle" title="Idle">•</button>
         <button data-action="thinking" title="Think">?</button>
         <button data-action="explaining" title="Explain">✦</button>
@@ -20,7 +24,14 @@
         <button data-action="magic_cast" title="Cast">*</button>
         <button data-action="reaction" title="React">!</button>
       </nav>
+      <dialog id="pose-picker" class="pose-picker" aria-label="Pose library">
+        <header class="pose-picker-header">
+          <strong>Poses</strong>
+          <button data-close-poses title="Close pose library" aria-label="Close pose library">×</button>
+        </header>
+        <div id="pose-grid" class="pose-grid"></div>
+      </dialog>
     </main>
-    <script type="module" src="/avatar/wizardDemo.ts?v=animation-demo"></script>
+    <script type="module" src="/avatar/wizardDemo.ts?v=cartoon-driver-v1"></script>
   </body>
 </html>
