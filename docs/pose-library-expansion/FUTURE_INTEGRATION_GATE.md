@@ -1,6 +1,6 @@
 # Deferred Pose Integration Gate
 
-The 30 images supplied in `Wizard Joe Poses 2.zip` and `Wizard Joe Poses Flying and Action.zip` are preserved as visual references. They are not runtime sprites and must not be loaded, traced frame-by-frame, or substituted for procedural ASCILINE output.
+The original 30 images supplied in `Wizard Joe Poses 2.zip` and `Wizard Joe Poses Flying and Action.zip` have completed Rust integration. The 60 images in `Wizard Joe Poses Feelings.zip` are now preserved as the next reference-only queue. None are runtime sprites, and they must not be loaded, traced frame-by-frame, or substituted for procedural ASCILINE output.
 
 ## Saved source material
 
@@ -8,8 +8,10 @@ The 30 images supplied in `Wizard Joe Poses 2.zip` and `Wizard Joe Poses Flying 
 - `evidence/pose-library-expansion/intake/manifest.json` records the source archive hash, stable candidate ID, semantic ID, source filename, dimensions, color mode, repository path, and SHA-256 for every PNG.
 - Labeled contact sheets are stored under `evidence/pose-library-expansion/intake/contact-sheets/`.
 - [POSE_TRACKER.md](POSE_TRACKER.md) and the files under `items/` hold the visual analysis, proposed anchors, transition neighbors, risks, and current disposition for every candidate.
+- The 60 feelings references are stored under `evidence/pose-library-expansion/intake/feelings/` and cataloged separately in `feelings-manifest.json` so the verified 30-pose compiler input stays immutable.
+- [FEELINGS_QUEUE.md](FEELINGS_QUEUE.md) and `feelings-queue.json` preserve `WJFL-01..60`, global orders 31-90, queue status, and exact duplicate links.
 
-Run `cargo run --manifest-path rust/wizard_avatar_engine/Cargo.toml --bin wizard-avatar-pose-catalog` to verify all 30 source files, hashes, archive counts, and the reference-only policy. Python pose tools belong to other agents and are not part of the Rust implementation or acceptance path.
+Run `cargo run --manifest-path rust/wizard_avatar_engine/Cargo.toml --bin wizard-avatar-pose-catalog` to verify the compiled 30-pose archive. Run `cargo run --manifest-path rust/wizard_avatar_pose_tool/Cargo.toml --locked --bin wizard-avatar-feelings-intake -- . "/Users/paul/Downloads/Wizard Joe Poses Feelings.zip"` from the repository root to regenerate and verify the queued feelings intake. Python pose tools belong to other agents and are not part of the Rust implementation or acceptance path.
 
 ## Runtime freeze
 

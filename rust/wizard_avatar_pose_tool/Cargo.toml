@@ -18,3 +18,7 @@ path = "src/lib.rs"
 [[bin]]
 name = "wizard-avatar-pose-tool"
 path = "src/main.rs"
+
+[[bin]]
+name = "wizard-avatar-feelings-intake"
+path = "src/feelings_intake_main.rs"

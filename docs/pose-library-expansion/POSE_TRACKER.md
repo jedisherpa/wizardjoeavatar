@@ -1,14 +1,16 @@
 # Pose Expansion Tracker
 
-Last coordinator update: 2026-07-12.
+Last coordinator update: 2026-07-13.
 
 ## Program status
 
 | Metric | Count |
 |---|---:|
 | Current production poses | 39 |
-| New candidates | 30 |
-| Queued | 0 |
+| Completed archive candidates | 30 |
+| Feelings archive references | 60 |
+| Unique feelings source hashes | 50 |
+| Queued | 60 |
 | Claimed for intake | 0 |
 | Analyzed | 0 |
 | In integration | 0 |
@@ -68,6 +70,19 @@ Integration lock: `UNCLAIMED`.
 | 29 | WJFA-19 | `08_15_42 PM (9)` | coordinator | `front_shush_secret_staff_held` | VERIFIED | [WJFA-19](items/WJFA-19.md) |
 | 30 | WJFA-20 | `08_15_42 PM (10)` | coordinator | `front_staff_spin_flourish` | VERIFIED | [WJFA-20](items/WJFA-20.md) |
 
+## Deferred feelings queue
+
+The 60 references in `Wizard Joe Poses Feelings.zip` are queued as `WJFL-01` through `WJFL-60`, with global integration orders 31 through 90. Semantic IDs and owners remain unassigned until visual intake. The exact queue is recorded in [FEELINGS_QUEUE.md](FEELINGS_QUEUE.md), `feelings-queue.json`, and the labeled Rust-generated contact sheet.
+
+| Queue range | Global orders | Sources | Status | Notes |
+|---|---:|---:|---|---|
+| `WJFL-01..10` | 31-40 | 10 | QUEUED | First action/locomotion batch. |
+| `WJFL-11..20` | 41-50 | 10 | QUEUED | Second action/gesture batch. |
+| `WJFL-21..30` | 51-60 | 10 | QUEUED | Conversation, reaction, and magic gesture batch. |
+| `WJFL-31..40` | 61-70 | 10 | QUEUED | Full-body labeled feelings: joy, sadness, anger, fear, shame, disgust, surprise, pride, guilt, and love. |
+| `WJFL-41..50` | 71-80 | 10 | QUEUED | Exact source duplicates of `WJFL-01..10`; retain for archive fidelity and resolve as aliases or duplicates during intake. |
+| `WJFL-51..60` | 81-90 | 10 | QUEUED | Close-up labeled feelings matching the same ten-emotion vocabulary. |
+
 ## Decision log
 
 | Timestamp | Candidate | Decision | Owner | Evidence |
@@ -82,4 +97,5 @@ Integration lock: `UNCLAIMED`.
 | 2026-07-12 | WJFA-01..20 | Intake completed: 19 analyzed, WJFA-10 duplicate of WJFA-01 | Hooke / Ramanujan | Per-pose item records and evidence directories |
 | 2026-07-12 | WJP2-01 | Verified and released integration lock | coordinator | Deterministic library hash, 57 tests, 32/32 transition matrix, live browser evidence |
 | 2026-07-12 | PROGRAM | Play demo changed to moving, library-driven pose reel | coordinator | [Demo Play Verification](../../evidence/pose-library-expansion/DEMO_PLAY_VERIFICATION.md): 11/11 poses, 78 positions, transitions observed, 0 console errors |
-| 2026-07-12 | PROGRAM | Expansion completed: 29 distinct candidates verified, WJFA-10 recorded as a duplicate, and the Python production library reached 39 poses | coordinator | [Pose Expansion Completion](../../evidence/pose-library-expansion/POSE_EXPANSION_COMPLETION.md) |
+| 2026-07-12 | PROGRAM | Expansion completed: 29 distinct candidates verified, WJFA-10 recorded as a duplicate, and the Rust production library reached 39 unique geometries | coordinator | [Rust Integration Report](RUST_INTEGRATION_REPORT.md) |
+| 2026-07-13 | WJFL-01..60 | Added feelings archive to the deferred Rust queue; preserved all 60 sources, identified 50 unique hashes and ten exact repeats, and left production runtime unchanged | coordinator | [Feelings Queue](FEELINGS_QUEUE.md) and `evidence/pose-library-expansion/intake/feelings-manifest.json` |
