@@ -14,7 +14,7 @@ Last coordinator update: 2026-07-13
 | Planning checkpoint | COMPLETE | Pushed `50948b907ad35ec8ca604d6c39a63b4317ac3da7` |
 | Rust branch | ACTIVE | `codex/rust-chatbot-animation-engine` in `jedisherpa/wizardjoeavatar` |
 | Contract implementation | COMPLETE | C0 PASS at `1775941e76c2bec0f54f44349d9b6f304d2bce1b`; 29 contract, 3 release-registry, and 30 workflow-validator tests pass |
-| Runtime and motion engines | IN_PROGRESS | Ordered inbox `RCHAT-RUN-030` and deterministic clip evaluator `RCHAT-ANIM-040` accepted and merged at `8084b82`; parent R1/A1 gates remain open |
+| Runtime and motion engines | IN_PROGRESS | Typed regions `RCHAT-RUN-040` and transition recipes `RCHAT-ANIM-041` accepted and merged at `e00e71e`; parent R1/A1 gates remain open |
 | Serial integration | PLANNED | Blocked on engine handoffs |
 | QA foundation | COMPLETE | Q0 PASS at `ea0f3d7c0ae4202e565feb4b811011473862dfe2`; evidence writer, scope checker, CI, and honest browser harness |
 | Exhaustive QA | PLANNED | Per-frame live capture remains blocked on the integrated profile |
@@ -24,8 +24,8 @@ Last coordinator update: 2026-07-13
 
 | Role | Agent | Research | Planning | Next accountability |
 |---|---|---|---|---|
-| RUNTIME | Epicurus (`019f5c84-aca4-7953-b8ac-23a395e7268b`) | COMPLETE | COMPLETE | `RCHAT-RUN-030` accepted at `e8129d0`; next owner unit is typed orthogonal state regions |
-| MOTION | Singer (`019f5c84-b193-7f70-83ff-e0c7e33edd51`) | COMPLETE | COMPLETE | `RCHAT-ANIM-040` accepted at `6f9ff0e`; next owner unit is transition recipe evaluation |
+| RUNTIME | Epicurus (`019f5c84-aca4-7953-b8ac-23a395e7268b`) | COMPLETE | COMPLETE | `RCHAT-RUN-040` accepted at `405e638`; next owner unit is the chat-event reducer and conversation lifecycle |
+| MOTION | Singer (`019f5c84-b193-7f70-83ff-e0c7e33edd51`) | COMPLETE | COMPLETE | `RCHAT-ANIM-041` accepted at `0fc04fe`; next owner units adapt legacy clips and add transition continuity controls |
 | FLOW | Lagrange (`019f5c84-b630-7053-b560-cab55fb3ba11`) | COMPLETE | COMPLETE | `RCHAT-FLOW-060` accepted; Q0 passed with 39 validator, 7 release, and 22 browser contract tests |
 | INT | Coordinator | COMPLETE | COMPLETE | Integer clock wired into production hub at `e2b0cd7`; 36 focused integration tests pass |
 
@@ -60,6 +60,8 @@ Last coordinator update: 2026-07-13
 | 2026-07-13 | Cache identity includes ingress authority | A public request can never reuse a trusted diagnostic acknowledgement, or vice versa |
 | 2026-07-13 | Inbox event identifiers are epoch-scoped hashes | Bounded telemetry remains useful for replay diagnostics without retaining raw source or command IDs |
 | 2026-07-13 | Clip exits are explicit integer-tick contracts | Once, repeat, and marked-segment playback cannot tear or silently skip lifecycle boundaries |
+| 2026-07-13 | Region ownership changes require strict priority and generation checks | Higher-priority takeover and expired-region replacement stay atomic and replayable |
+| 2026-07-13 | Transition windows are half-open integer-tick intervals | Authored overlaps, fallbacks, interrupts, and recovery remain deterministic at boundaries |
 
 ## Current blockers
 
@@ -73,22 +75,23 @@ the live material registry audit. The rollback candidate at
 check from a detached clean worktree.
 
 R1 and A1 remain open until their complete required-child sets are implemented,
-reviewed, and verified. `RCHAT-RUN-030` passed 21 focused tests and a two-path
-scope audit. `RCHAT-ANIM-040` passed 27 focused tests and a two-path scope audit.
-Both candidates passed formatting and warning-free clippy checks before merge at
-`8084b82b1c822cddfd152a9b5ee2071d6a3706d9`.
+reviewed, and verified. `RCHAT-RUN-040` passed 26 independently rerun focused
+tests and a two-path scope audit after its ownership and expiry semantics were
+revised. `RCHAT-ANIM-041` passed 38 focused tests and a two-path scope audit.
+Both candidates passed formatting, warning-free clippy, and two independent
+reviews before merge at `e00e71e3a394c55a040e6004be85658a8e2aae92`.
 
-The last pushed baseline, `3aa78c1f650c1a5f51c7abe8f3e0823bd2fe3cfc`,
-passed all five GitHub Actions jobs. The current checkpoint is locally accepted;
-its fresh GitHub Actions result will be attached after this push. Q0 supplies the
-harness for later gates but does not claim that live per-frame browser capture
-has occurred.
+The last pushed baseline, `40a228e91c5b4248cb103b51a595a40008ea2598`,
+passed all five GitHub Actions jobs, including the exhaustive Rust engine job.
+The current checkpoint is locally accepted; its fresh GitHub Actions result will
+be attached after this push. Q0 supplies the harness for later gates but does not
+claim that live per-frame browser capture has occurred.
 
 ## Next promotion
 
-1. Push the accepted `RCHAT-RUN-030` and `RCHAT-ANIM-040` checkpoint without
+1. Push the accepted `RCHAT-RUN-040` and `RCHAT-ANIM-041` checkpoint without
    staging unrelated Python, legacy, or generated preview work.
-2. Start `RCHAT-RUN-040` typed regions and `RCHAT-ANIM-041` transition recipe
-   evaluation as the next parallel owner units.
+2. Start `RCHAT-RUN-050` chat-event reduction and the next motion continuity
+   owner units from the pushed Rust checkpoint.
 3. Connect the Q0 evidence writer to real Rust source/decode/presentation frames
    before any browser capture can be promoted from foundation status.
