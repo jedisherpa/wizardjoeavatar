@@ -15,7 +15,7 @@ Last coordinator update: 2026-07-13.
 | Final publish | COMPLETE | Implementation `a5f0cc1` and evidence/source checkpoint `0508039` pushed to GitHub |
 | Post-implementation code audit | PARTIAL - REMEDIATION REQUIRED | [2026-07-13 current-state audit](CURRENT_STATE_AUDIT.md) found that the live path bypasses the planned runtime/inbox, uses graph v2 only for flight, and does not render reference-pose expression or blink state |
 | Python feelings-pose integration | COMPLETE | 50 unique tracked sources migrated into the Python manifest and generated cell library; production catalog now contains 89 poses |
-| Python branch publication | IN PROGRESS | Dedicated `codex/python-asciline-avatar` branch, fresh port-8765 rebuild, live verification, and GitHub push |
+| Python branch publication | COMPLETE | Integration checkpoint `70c5bd4` on `codex/python-asciline-avatar`; fresh port-8765 rebuild and live 89-pose verification passed |
 
 ## Agent ledger
 

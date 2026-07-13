@@ -6,6 +6,8 @@ Audited branch: `codex/python-asciline-avatar`
 
 Starting checkpoint: `988b2315caaafff6a8db66270339123368c1cb76`
 
+Python pose-integration checkpoint: `70c5bd46956175d1771f94826d6faef19a0d641b`
+
 Production endpoint: `http://127.0.0.1:8765/`
 
 ## Executive verdict
