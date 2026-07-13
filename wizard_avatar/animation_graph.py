@@ -263,6 +263,36 @@ class AnimationGraph:
             active_markers=markers,
         )
 
+    def evaluate_clip_phase(self, clip_id: str, phase: float) -> ClipEvaluation:
+        """Evaluate a distance-driven clip at a normalized cycle phase."""
+
+        try:
+            clip = self.clips[clip_id]
+        except KeyError as exc:
+            raise KeyError(f"Unknown animation clip {clip_id!r}") from exc
+        normalized = float(phase) % 1.0
+        authored_frame = min(int(normalized * clip.total_frames), clip.total_frames - 1)
+        sample_index, sample_frame = _sample_at_frame(clip, authored_frame)
+        sample = clip.samples[sample_index]
+        return ClipEvaluation(
+            clip_id=clip.clip_id,
+            elapsed_ticks=(authored_frame * self.simulation_hz) // self.authored_fps,
+            authored_frame=authored_frame,
+            loop_index=0,
+            sample_index=sample_index,
+            sample_frame=sample_frame,
+            pose_id=sample.pose_id,
+            support_contact=sample.support_contact,
+            planted_anchor=sample.planted_anchor,
+            clip_phase_numerator=authored_frame,
+            clip_phase_denominator=clip.total_frames,
+            active_markers=tuple(
+                marker.marker_id
+                for marker in sample.markers
+                if marker.frame_offset == sample_frame
+            ),
+        )
+
     def is_legal_successor(self, source_clip_id: str, target_clip_id: str) -> bool:
         try:
             source = self.clips[source_clip_id]
@@ -846,8 +876,13 @@ def parse_animation_graph(
     )
 
 
-def load_animation_graph(path: Path = ANIMATION_GRAPH_V2_PATH) -> AnimationGraph:
+@lru_cache(maxsize=16)
+def _load_animation_graph_cached(path: str) -> AnimationGraph:
     return parse_animation_graph(_load_json(Path(path)))
+
+
+def load_animation_graph(path: Path = ANIMATION_GRAPH_V2_PATH) -> AnimationGraph:
+    return _load_animation_graph_cached(str(Path(path).resolve()))
 
 
 @lru_cache(maxsize=1)

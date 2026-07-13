@@ -3,6 +3,7 @@ from __future__ import annotations
 import asyncio
 import math
 import struct
+from collections import Counter
 from pathlib import Path
 from typing import Optional, Tuple
 
@@ -10,6 +11,7 @@ from .character_package import WIZARD_JOE_PACKAGE_PATH, load_character_package
 from .compositor import CellCanvas, blit_scaled
 from .controller import WizardAvatarController
 from .diagnostics import FrameDiagnostics
+from .expressions import get_expression
 from .floor import build_background
 from .layers import ROOT_ANCHOR, render_wizard_local
 from .models import Cell, CommandResult, WizardCellFrame, WizardCommand, WizardState
@@ -36,6 +38,10 @@ REFERENCE_POSE_HORIZONTAL_SCALE = 1.18
 REFERENCE_MOUTH_OPEN = (132, 30, 22)
 REFERENCE_MOUTH_DARK = (78, 39, 20)
 REFERENCE_TEETH = (250, 238, 209)
+REFERENCE_EYE_WHITE = (242, 242, 242)
+REFERENCE_EYE_BLUE = (11, 76, 142)
+REFERENCE_SKIN = (234, 167, 75)
+REFERENCE_BROW = (108, 55, 26)
 
 
 class ProceduralWizardFrameSource:
@@ -100,6 +106,7 @@ class ProceduralWizardFrameSource:
             local, root_anchor, mouth_anchor = self._reference_pose_canvas_for_sample(
                 pose_id,
             )
+            self._apply_reference_face_channels(local, state, pose_id, mouth_anchor)
             root_screen = self._reference_root_screen(sx, sy, state, render_scale)
         else:
             stage = build_background(self.cols, self.rows).copy()
@@ -173,6 +180,258 @@ class ProceduralWizardFrameSource:
         self._transition_from_pose_id = None
         return target_canvas, target_root, target_mouth
 
+    def _apply_reference_face_channels(
+        self,
+        canvas: CellCanvas,
+        state: WizardState,
+        pose_id: str,
+        mouth_anchor: Tuple[int, int],
+    ) -> None:
+        eye_layouts = []
+        for anchor_name in ("left_eye", "right_eye"):
+            try:
+                anchor = reference_pose_anchor(pose_id, anchor_name, self.pose_library_path)
+            except KeyError:
+                continue
+            layout = self._reference_eye_layout(canvas, anchor)
+            if layout is not None:
+                eye_layouts.append((anchor_name, *layout))
+
+        # Rear views and occluded action poses still carry approximate anchors.
+        # Existing cool/white eye pixels are the authority for face visibility.
+        if not eye_layouts:
+            return
+
+        blink = state.blink_phase >= 0.965
+        eye_aim = self._reference_eye_aim(state)
+        expression = get_expression(state.expression)
+        for anchor_name, eye_left, eye_top in eye_layouts:
+            eye_index = 0 if anchor_name == "left_eye" else 1
+            skin = self._sample_reference_skin(canvas, eye_left + 2, eye_top)
+            for y in range(eye_top, eye_top + 2):
+                for x in range(eye_left, eye_left + 5):
+                    color = skin if blink else REFERENCE_EYE_WHITE
+                    layer = "reference_blink" if blink else "reference_eye_white"
+                    canvas.set(x, y, "#", color, layer)
+
+            if blink:
+                for x in range(eye_left + 1, eye_left + 4):
+                    canvas.set(x, eye_top + 1, "#", REFERENCE_BROW, "reference_blink")
+            else:
+                blue_x = eye_left + 2 + eye_aim
+                for y in range(eye_top, eye_top + 2):
+                    canvas.set(
+                        x=blue_x,
+                        y=y,
+                        glyph="#",
+                        rgb=REFERENCE_EYE_BLUE,
+                        layer_id="reference_eye_blue",
+                    )
+
+            if state.expression != "neutral":
+                self._draw_reference_brow(
+                    canvas,
+                    eye_left,
+                    eye_top,
+                    eye_index,
+                    str(
+                        expression.get(
+                            "brow_left" if eye_index == 0 else "brow_right",
+                            "level",
+                        )
+                    ),
+                    skin,
+                )
+
+        mouth_shape = self._reference_mouth_shape(state, expression)
+        if mouth_shape is not None:
+            self._draw_reference_mouth(canvas, mouth_anchor, mouth_shape)
+
+    @staticmethod
+    def _is_reference_eye_pixel(cell: Optional[Cell]) -> bool:
+        if cell is None:
+            return False
+        red, green, blue = cell.rgb
+        near_white = min(cell.rgb) >= 185 and max(cell.rgb) - min(cell.rgb) <= 50
+        cool_blue = blue >= 105 and blue >= red + 18 and blue >= green - 22
+        cool_gray = max(cell.rgb) - min(cell.rgb) <= 42 and blue >= 90 and red < 165
+        return near_white or cool_blue or cool_gray
+
+    def _reference_eye_layout(
+        self,
+        canvas: CellCanvas,
+        anchor: Tuple[int, int],
+    ) -> Optional[Tuple[int, int]]:
+        anchor_x, anchor_y = anchor
+        candidates = []
+        for y in range(anchor_y - 3, anchor_y + 3):
+            for x in range(anchor_x - 4, anchor_x + 5):
+                if self._is_reference_eye_pixel(canvas.get(x, y)):
+                    candidates.append((x, y))
+        if len(candidates) < 2:
+            return None
+        min_x = min(x for x, _ in candidates)
+        max_x = max(x for x, _ in candidates)
+        min_y = min(y for _, y in candidates)
+        max_y = max(y for _, y in candidates)
+        center_x = (min_x + max_x) // 2
+        eye_top = (min_y + max_y) // 2
+        return center_x - 2, eye_top
+
+    @staticmethod
+    def _reference_eye_aim(state: WizardState) -> int:
+        if state.target_point is not None:
+            delta_x = float(state.target_point.get("x", 0.0)) - float(
+                state.world_position.get("x", 0.0)
+            )
+            if abs(delta_x) > 0.12:
+                return 1 if delta_x > 0.0 else -1
+        if state.expression == "thinking":
+            return -1
+        if state.expression == "skeptical":
+            return 1
+        if state.facing in {"west", "northwest", "southwest"}:
+            return -1
+        if state.facing in {"east", "northeast", "southeast"}:
+            return 1
+        return 0
+
+    @staticmethod
+    def _sample_reference_skin(
+        canvas: CellCanvas,
+        center_x: int,
+        center_y: int,
+    ) -> Tuple[int, int, int]:
+        colors: Counter[Tuple[int, int, int]] = Counter()
+        for y in range(center_y - 3, center_y + 4):
+            for x in range(center_x - 4, center_x + 5):
+                cell = canvas.get(x, y)
+                if cell is None:
+                    continue
+                red, green, blue = cell.rgb
+                if red >= 175 and 75 <= green <= 210 and blue <= 145:
+                    colors[cell.rgb] += 1
+        return colors.most_common(1)[0][0] if colors else REFERENCE_SKIN
+
+    @staticmethod
+    def _draw_reference_brow(
+        canvas: CellCanvas,
+        eye_left: int,
+        eye_top: int,
+        eye_index: int,
+        style: str,
+        skin: Tuple[int, int, int],
+    ) -> None:
+        brow_y = eye_top - 2
+        for x in range(eye_left, eye_left + 5):
+            canvas.set(x, brow_y, "#", skin, "reference_brow_clear")
+        points = [
+            (eye_left + 1, brow_y),
+            (eye_left + 2, brow_y),
+            (eye_left + 3, brow_y),
+        ]
+        if style in {"up", "soft_up"}:
+            points[1] = (eye_left + 2, brow_y - 1)
+        elif style in {"down", "pinched"}:
+            inward = eye_left + (3 if eye_index == 0 else 1)
+            points = [
+                (eye_left + 1, brow_y - (eye_index == 1)),
+                (eye_left + 2, brow_y),
+                (inward, brow_y + 1),
+            ]
+        elif style == "tilt":
+            points = [
+                (eye_left + 1, brow_y + eye_index),
+                (eye_left + 2, brow_y),
+                (eye_left + 3, brow_y + (1 - eye_index)),
+            ]
+        for x, y in points:
+            canvas.set(x, y, "#", REFERENCE_BROW, "reference_expression_brow")
+
+    @staticmethod
+    def _reference_mouth_shape(state: WizardState, expression: dict) -> Optional[str]:
+        if state.action == "speaking" or state.speech_id is not None:
+            return ("open_medium", "open_small", "closed", "open_small")[
+                int(state.time_seconds * 10) % 4
+            ]
+        expression_mouth = str(expression.get("mouth", "closed"))
+        if state.mouth != "closed":
+            return state.mouth
+        if state.expression != "neutral":
+            return expression_mouth
+        return None
+
+    @staticmethod
+    def _sample_reference_beard(
+        canvas: CellCanvas,
+        anchor: Tuple[int, int],
+    ) -> Tuple[int, int, int]:
+        anchor_x, anchor_y = anchor
+        colors: Counter[Tuple[int, int, int]] = Counter()
+        for y in range(anchor_y - 4, anchor_y + 3):
+            for x in range(anchor_x - 6, anchor_x + 7):
+                if abs(x - anchor_x) < 5 and anchor_y - 3 <= y <= anchor_y + 1:
+                    continue
+                cell = canvas.get(x, y)
+                if cell is None:
+                    continue
+                red, green, blue = cell.rgb
+                if 65 <= red <= 175 and green < red and blue < green:
+                    colors[cell.rgb] += 1
+        return colors.most_common(1)[0][0] if colors else REFERENCE_BROW
+
+    def _draw_reference_mouth(
+        self,
+        canvas: CellCanvas,
+        anchor: Tuple[int, int],
+        shape: str,
+    ) -> None:
+        anchor_x, anchor_y = anchor
+        beard = self._sample_reference_beard(canvas, anchor)
+        for y in range(anchor_y - 3, anchor_y + 2):
+            for x in range(anchor_x - 5, anchor_x + 6):
+                if canvas.get(x, y) is not None:
+                    canvas.set(x, y, "#", beard, "reference_mouth_clear")
+
+        if shape == "closed":
+            for x in range(anchor_x - 3, anchor_x + 4):
+                canvas.set(x, anchor_y - 1, "#", REFERENCE_MOUTH_DARK, "reference_mouth_closed")
+            return
+        if shape == "frown":
+            for offset, y_offset in ((-2, 0), (-1, -1), (0, -1), (1, -1), (2, 0)):
+                canvas.set(
+                    anchor_x + offset,
+                    anchor_y + y_offset,
+                    "#",
+                    REFERENCE_MOUTH_DARK,
+                    "reference_mouth_frown",
+                )
+            return
+        if shape == "smile":
+            for x in range(anchor_x - 2, anchor_x + 3):
+                canvas.set(x, anchor_y - 2, "#", REFERENCE_TEETH, "reference_teeth")
+                canvas.set(x, anchor_y - 1, "#", REFERENCE_MOUTH_OPEN, "reference_mouth_smile")
+            canvas.set(anchor_x - 3, anchor_y - 2, "#", REFERENCE_MOUTH_DARK, "reference_mouth_smile")
+            canvas.set(anchor_x + 3, anchor_y - 2, "#", REFERENCE_MOUTH_DARK, "reference_mouth_smile")
+            return
+        if shape == "rounded":
+            canvas.set(anchor_x, anchor_y - 2, "#", REFERENCE_MOUTH_DARK, "reference_mouth_rounded")
+            canvas.set(anchor_x - 1, anchor_y - 1, "#", REFERENCE_MOUTH_DARK, "reference_mouth_rounded")
+            canvas.set(anchor_x, anchor_y - 1, "#", REFERENCE_MOUTH_OPEN, "reference_mouth_rounded")
+            canvas.set(anchor_x + 1, anchor_y - 1, "#", REFERENCE_MOUTH_DARK, "reference_mouth_rounded")
+            canvas.set(anchor_x, anchor_y, "#", REFERENCE_MOUTH_DARK, "reference_mouth_rounded")
+            return
+
+        width = {"open_small": 2, "open_medium": 3, "open_wide": 3}.get(shape, 2)
+        top = anchor_y - (3 if shape == "open_wide" else 2)
+        for x in range(anchor_x - width + 1, anchor_x + width):
+            canvas.set(x, top, "#", REFERENCE_TEETH, "reference_teeth")
+        for y in range(top + 1, anchor_y + 1):
+            for x in range(anchor_x - width + 1, anchor_x + width):
+                canvas.set(x, y, "#", REFERENCE_MOUTH_OPEN, "reference_speaking_mouth")
+        for x in range(anchor_x - width + 1, anchor_x + width):
+            canvas.set(x, anchor_y + 1, "#", REFERENCE_MOUTH_DARK, "reference_mouth_bottom")
+
     def _reference_root_screen(
         self,
         sx: float,
@@ -209,25 +468,6 @@ class ProceduralWizardFrameSource:
             for y in range(start_y, end_y + 1):
                 for x in range(start_x, end_x + 1):
                     stage.set(x, y, "#", color, layer_id)
-
-        if state.action == "speaking" or state.speech_id is not None:
-            open_mouth = int(state.time_seconds * 10) % 2 == 0
-            mouth_color = REFERENCE_MOUTH_OPEN if open_mouth else REFERENCE_MOUTH_DARK
-            anchor_x, anchor_y = mouth_anchor or (root_anchor[0], 36)
-            mouth_left = anchor_x - 3
-            mouth_right = anchor_x + 3
-            mouth_top = anchor_y - 2
-            mouth_bottom = anchor_y if open_mouth else mouth_top
-            if open_mouth:
-                for lx in range(anchor_x - 5, anchor_x + 6):
-                    for ly in range(anchor_y - 3, anchor_y + 2):
-                        stage_cell(lx, ly, REFERENCE_MOUTH_DARK, "reference_mouth_clear")
-            for lx in range(mouth_left, mouth_right + 1):
-                for ly in range(mouth_top, mouth_bottom + 1):
-                    stage_cell(lx, ly, mouth_color, "reference_speaking_mouth")
-            if open_mouth:
-                for lx in range(anchor_x - 2, anchor_x + 3):
-                    stage_cell(lx, anchor_y - 3, REFERENCE_TEETH, "reference_teeth")
 
         if state.action in {"magic_cast", "reaction"}:
             phase = state.time_seconds * math.tau * 1.4

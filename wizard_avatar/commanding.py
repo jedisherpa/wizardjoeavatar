@@ -424,6 +424,29 @@ class OrderedCommandInbox:
         self._acks.move_to_end(command_id)
         return ack
 
+    def mark_rejected(
+        self,
+        command_id: str,
+        state_revision: int,
+        error_code: str,
+        message: str,
+    ) -> CommandAckV1:
+        prior = self._acks.get(command_id)
+        if prior is None:
+            raise KeyError(command_id)
+        if prior.disposition != "accepted":
+            raise ValueError("cannot reject command with disposition {}".format(prior.disposition))
+        ack = replace(
+            prior,
+            disposition="rejected",
+            state_revision=state_revision,
+            error_code=error_code,
+            message=message,
+        )
+        self._acks[command_id] = ack
+        self._acks.move_to_end(command_id)
+        return ack
+
     def ack_for(self, command_id: str) -> Optional[CommandAckV1]:
         return self._acks.get(command_id)
 

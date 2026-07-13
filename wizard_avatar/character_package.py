@@ -8,6 +8,7 @@ from typing import Any, Mapping, Tuple
 
 DEFINITIONS_DIR = Path(__file__).with_name("definitions")
 WIZARD_JOE_PACKAGE_PATH = DEFINITIONS_DIR / "wizard_joe_character_package.json"
+_ANIMATION_GRAPHS_BY_CHARACTER_ID: dict[str, Path] = {}
 
 
 class CharacterPackageValidationError(ValueError):
@@ -73,7 +74,7 @@ def load_character_package(path: Path = WIZARD_JOE_PACKAGE_PATH) -> CharacterPac
     graph_pose_ids = _graph_pose_ids(graph_raw)
     if not graph_pose_ids.issubset(pose_ids):
         raise CharacterPackageValidationError("animation graph references unknown poses")
-    return CharacterPackage(
+    package = CharacterPackage(
         schema_version=1,
         character_id=str(raw["character_id"]),
         display_name=str(raw["display_name"]),
@@ -83,6 +84,14 @@ def load_character_package(path: Path = WIZARD_JOE_PACKAGE_PATH) -> CharacterPac
         default_pose_id=str(raw["default_pose_id"]),
         capabilities=tuple(capabilities),
     )
+    _ANIMATION_GRAPHS_BY_CHARACTER_ID[package.character_id] = package.animation_graph
+    return package
+
+
+def animation_graph_path_for(character_id: str) -> Path | None:
+    """Return the graph selected by the loaded package for ``character_id``."""
+
+    return _ANIMATION_GRAPHS_BY_CHARACTER_ID.get(character_id)
 
 
 def _package_asset(package_path: Path, value: Any, name: str) -> Path:
@@ -130,5 +139,6 @@ __all__ = [
     "CharacterPackage",
     "CharacterPackageValidationError",
     "WIZARD_JOE_PACKAGE_PATH",
+    "animation_graph_path_for",
     "load_character_package",
 ]

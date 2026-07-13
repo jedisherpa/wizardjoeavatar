@@ -13,6 +13,15 @@ ACTION_TO_CHANNELS = {
     "pointing": ("point", "point"),
     "magic_cast": ("cast", "cast"),
     "reaction": ("react", "held"),
+    "guard": ("guard", "guard"),
+    "block": ("block", "guard"),
+    "flourish": ("flourish", "spin"),
+    "staff_spin": ("flourish", "spin"),
+    "victory_cast": ("cast", "cast"),
+    "shush": ("shush", "held"),
+    "celebrate": ("celebrate", "held"),
+    "staff_forward": ("staff_forward", "point"),
+    "hit": ("react", "held"),
 }
 
 

@@ -16,6 +16,7 @@ TICK_RATE = 60
 TICK_SECONDS = 1.0 / TICK_RATE
 ACCUMULATOR_TICK_UNITS = 1_000_000_000
 DEFAULT_MAX_CATCH_UP_TICKS = 8
+DEFAULT_REPLAY_STATE_INTERVAL_TICKS = TICK_RATE
 
 StateT = TypeVar("StateT")
 PresentationT = TypeVar("PresentationT")
@@ -139,6 +140,7 @@ class ReplayLog:
     def __init__(self, header: Mapping[str, object]) -> None:
         self._records: list[Dict[str, object]] = []
         self._sequence = 0
+        self._sha256 = hashlib.sha256()
         self.append("header", 0, header)
 
     def append(self, record_type: str, simulation_tick: int, payload: Mapping[str, object]) -> None:
@@ -153,17 +155,22 @@ class ReplayLog:
             "payload": _canonicalize(payload),
         }
         self._records.append(record)
+        self._sha256.update(canonical_json_bytes(record) + b"\n")
         self._sequence += 1
 
     @property
     def records(self) -> Tuple[Mapping[str, object], ...]:
         return tuple(freeze_snapshot_value(record) for record in self._records)  # type: ignore[return-value]
 
+    @property
+    def record_count(self) -> int:
+        return len(self._records)
+
     def to_ndjson_bytes(self) -> bytes:
         return b"".join(canonical_json_bytes(record) + b"\n" for record in self._records)
 
     def sha256(self) -> str:
-        return hashlib.sha256(self.to_ndjson_bytes()).hexdigest()
+        return self._sha256.hexdigest()
 
 
 class AvatarRuntime(Generic[StateT, PresentationT]):
@@ -181,6 +188,7 @@ class AvatarRuntime(Generic[StateT, PresentationT]):
         presentation_factory: Optional[PresentationFactory[StateT, PresentationT]] = None,
         max_catch_up_ticks: int = DEFAULT_MAX_CATCH_UP_TICKS,
         replay_log: Optional[ReplayLog] = None,
+        replay_state_interval_ticks: int = DEFAULT_REPLAY_STATE_INTERVAL_TICKS,
     ) -> None:
         if not runtime_epoch:
             raise ValueError("runtime_epoch must not be empty")
@@ -188,6 +196,12 @@ class AvatarRuntime(Generic[StateT, PresentationT]):
             raise ValueError("max_catch_up_ticks must be an integer")
         if max_catch_up_ticks <= 0:
             raise ValueError("max_catch_up_ticks must be positive")
+        if (
+            isinstance(replay_state_interval_ticks, bool)
+            or not isinstance(replay_state_interval_ticks, int)
+            or replay_state_interval_ticks <= 0
+        ):
+            raise ValueError("replay_state_interval_ticks must be a positive integer")
         self.runtime_epoch = runtime_epoch
         self.inbox = inbox or OrderedCommandInbox(runtime_epoch)
         if self.inbox.runtime_epoch != runtime_epoch:
@@ -203,6 +217,7 @@ class AvatarRuntime(Generic[StateT, PresentationT]):
         self._last_monotonic_ns: Optional[int] = None
         self._events: list[RuntimeEvent] = []
         self._replay_log = replay_log
+        self._replay_state_interval_ticks = replay_state_interval_ticks
         frozen = freeze_snapshot_value(initial_state)
         presentation = self._build_presentation(initial_state, 0)
         self._snapshot = RuntimeSnapshot(
@@ -263,10 +278,15 @@ class AvatarRuntime(Generic[StateT, PresentationT]):
         )
         applied_acks = []
         for queued in due:
-            applied_acks.append(
-                self.inbox.mark_applied(queued.envelope.command_id, self._state_revision).to_dict()
-            )
-        if self._replay_log is not None:
+            ack = self.inbox.ack_for(queued.envelope.command_id)
+            if ack is None:
+                raise RuntimeError("runtime lost command acknowledgement")
+            if ack.disposition == "accepted":
+                ack = self.inbox.mark_applied(queued.envelope.command_id, self._state_revision)
+            applied_acks.append(ack.to_dict())
+        if self._replay_log is not None and (
+            due or target_tick % self._replay_state_interval_ticks == 0
+        ):
             self._replay_log.append(
                 "tick_state",
                 target_tick,
@@ -349,6 +369,7 @@ __all__ = [
     "ACCUMULATOR_TICK_UNITS",
     "AvatarRuntime",
     "DEFAULT_MAX_CATCH_UP_TICKS",
+    "DEFAULT_REPLAY_STATE_INTERVAL_TICKS",
     "ReplayLog",
     "RuntimeAdvanceResult",
     "RuntimeClock",

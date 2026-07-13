@@ -1,3 +1,4 @@
+import hashlib
 import unittest
 
 from wizard_avatar.commanding import CommandEnvelopeV1
@@ -154,7 +155,19 @@ class AvatarRuntimeTests(unittest.TestCase):
         second_bytes, second_hash = run()
         self.assertEqual(first_bytes, second_bytes)
         self.assertEqual(first_hash, second_hash)
+        self.assertEqual(first_hash, hashlib.sha256(first_bytes).hexdigest())
         self.assertIn(b'"record_type":"tick_state"', first_bytes)
+
+    def test_idle_replay_uses_one_state_checkpoint_per_second(self):
+        replay = ReplayLog({"schema_version": 1, "tick_rate": 60})
+        runtime = make_runtime(replay)
+        for _ in range(120):
+            runtime.step_tick()
+
+        tick_records = [
+            record for record in replay.records if record["record_type"] == "tick_state"
+        ]
+        self.assertEqual([record["simulation_tick"] for record in tick_records], [60, 120])
 
 
 if __name__ == "__main__":

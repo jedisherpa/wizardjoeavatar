@@ -3,7 +3,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from wizard_avatar.character_package import load_character_package
+from wizard_avatar.character_package import animation_graph_path_for, load_character_package
 from wizard_avatar.frame_source import ProceduralWizardFrameSource
 
 
@@ -13,6 +13,10 @@ class CharacterPackageTests(unittest.TestCase):
         self.assertEqual(package.character_id, "wizard-joe-v1")
         self.assertIn("flight_locomotion", package.capabilities)
         self.assertTrue(package.pose_library.is_file())
+        self.assertEqual(
+            animation_graph_path_for(package.character_id),
+            package.animation_graph,
+        )
 
     def test_second_character_uses_same_loader_without_runtime_changes(self):
         with tempfile.TemporaryDirectory() as directory:
@@ -59,6 +63,10 @@ class CharacterPackageTests(unittest.TestCase):
             )
             package = load_character_package(root / "package.json")
             self.assertEqual(package.character_id, "second-character")
+            self.assertEqual(
+                animation_graph_path_for("second-character"),
+                package.animation_graph,
+            )
 
             source = ProceduralWizardFrameSource(
                 cols=64,

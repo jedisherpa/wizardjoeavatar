@@ -320,7 +320,7 @@ def scenarios() -> list[TransitionScenario]:
             "idle_to_dash",
             "idle -> airborne dash",
             boundary=(Step("action", {"action": "dash", "duration_ms": 4000}),),
-            expected_final={"action": "dash", "pose_id": "run_front_airborne_reach"},
+            expected_final={"action": "dash", "pose_id": "run_front_airborne_drive"},
         ),
         TransitionScenario(
             "dash_to_idle",

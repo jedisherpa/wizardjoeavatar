@@ -5,6 +5,7 @@ import json
 from pathlib import Path
 from typing import Any, Dict, Optional
 
+from .commanding import CommandEnvelopeV1, CommandValidationError
 from .frame_source import ProceduralWizardFrameSource
 from .models import WizardCommand
 from .stream import WizardFrameHub
@@ -23,13 +24,17 @@ DEFINITIONS_DIR = ROOT / "wizard_avatar" / "definitions"
 def create_app(source: ProceduralWizardFrameSource | None = None):
     try:
         from fastapi import FastAPI, HTTPException, WebSocketDisconnect
-        from fastapi.responses import FileResponse, HTMLResponse
+        from fastapi.responses import FileResponse, HTMLResponse, Response
     except ImportError as exc:
         raise RuntimeError("Install server dependencies with: python3 -m pip install -r requirements.txt") from exc
 
     frame_source = source or ProceduralWizardFrameSource()
     frame_hub = WizardFrameHub(frame_source)
     app = FastAPI(title="WizardJoeAvatar")
+
+    @app.on_event("shutdown")
+    async def shutdown_frame_hub():
+        await frame_hub.stop()
 
     def result_or_400(result):
         if not result.ok:
@@ -87,6 +92,14 @@ def create_app(source: ProceduralWizardFrameSource | None = None):
             "algorithm": "fnv1a32",
             "history": frame_hub.source_hash_history(),
         }
+
+    @app.get("/api/avatar/wizard/replay")
+    async def replay():
+        return Response(
+            frame_hub.replay_log.to_ndjson_bytes(),
+            media_type="application/x-ndjson",
+            headers={"X-Replay-SHA256": frame_hub.replay_log.sha256()},
+        )
 
     @app.get("/api/avatar/wizard/poses")
     async def poses():
@@ -166,6 +179,20 @@ def create_app(source: ProceduralWizardFrameSource | None = None):
         state = await apply("reset", payload or {})
         frame_hub.force_keyframe()
         return state
+
+    @app.post("/api/avatar/wizard/command")
+    async def ordered_command(payload: Dict[str, Any]):
+        try:
+            envelope = CommandEnvelopeV1.from_mapping(payload)
+        except CommandValidationError as exc:
+            raise HTTPException(status_code=400, detail=str(exc)) from exc
+        ack, result = await frame_hub.apply_envelope(envelope)
+        if not result.ok:
+            raise HTTPException(
+                status_code=400,
+                detail={"ack": ack.to_dict(), "message": result.message},
+            )
+        return {"ack": ack.to_dict(), "state": result.state}
 
     @app.websocket("/ws/ping")
     async def ping_ws(websocket: FastAPIWebSocket):

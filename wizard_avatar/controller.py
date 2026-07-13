@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import time
+from collections.abc import Mapping
 from typing import Any, Dict, Iterable, Optional, Tuple
 
 from .commanding import CommandEnvelopeV1
@@ -87,7 +88,7 @@ class WizardAvatarController:
                 raise ValueError(f"Unsupported command: {command.type}")
             handler(command.payload)
             return CommandResult(True, "ok", self.state.as_public_dict())
-        except ValueError as exc:
+        except (KeyError, TypeError, ValueError) as exc:
             return CommandResult(False, str(exc), self.state.as_public_dict())
 
     def _update_timers(self) -> None:
@@ -217,8 +218,9 @@ class WizardAvatarController:
 
     def _cmd_control(self, payload: Dict[str, Any]) -> None:
         intent_payload = payload.get("intent", {})
-        if not isinstance(intent_payload, dict):
+        if not isinstance(intent_payload, Mapping):
             raise ValueError("control intent must be an object")
+        intent_payload = dict(intent_payload)
         source_kind = str(payload.get("source_kind", "keyboard"))
         priority_class = "demo" if source_kind == "demo" else "user"
         envelope = CommandEnvelopeV1(

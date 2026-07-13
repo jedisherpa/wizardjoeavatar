@@ -38,6 +38,15 @@ ACTIONS = (
     "pointing",
     "magic_cast",
     "reaction",
+    "guard",
+    "block",
+    "flourish",
+    "staff_spin",
+    "victory_cast",
+    "shush",
+    "celebrate",
+    "staff_forward",
+    "hit",
 )
 
 MOUTH_SHAPES = (
@@ -50,8 +59,21 @@ MOUTH_SHAPES = (
     "frown",
 )
 
-UPPER_BODY_ACTIONS = ("none", "explain", "point", "think", "cast", "react")
-STAFF_STATES = ("held", "point", "cast", "rest")
+UPPER_BODY_ACTIONS = (
+    "none",
+    "explain",
+    "point",
+    "think",
+    "cast",
+    "react",
+    "guard",
+    "block",
+    "flourish",
+    "shush",
+    "celebrate",
+    "staff_forward",
+)
+STAFF_STATES = ("held", "point", "cast", "rest", "guard", "spin")
 
 
 @dataclass(frozen=True)
@@ -132,6 +154,7 @@ class WizardState:
     animation_clip_id: str = "idle_front"
     animation_clip_tick: int = 0
     animation_node_id: str = "ground_idle"
+    animation_transition_id: Optional[str] = None
     mobility_mode: str = "grounded_idle"
     airborne: bool = False
     altitude: float = 0.0
@@ -145,7 +168,18 @@ class WizardState:
     semantic_amplitude: float = 0.0
     semantic_signal_sequence: int = 0
 
+    def reconcile_compatibility_state(self) -> None:
+        """Keep legacy action fields consistent with authoritative locomotion."""
+
+        if self.action == "walking" and self.locomotion != "walking":
+            self.action = "idle"
+            self.upper_body_action = "none"
+            self.staff_state = "held"
+            self.action_until = 0.0
+            self.action_restore = None
+
     def as_public_dict(self) -> Dict[str, Any]:
+        self.reconcile_compatibility_state()
         return asdict(self)
 
 

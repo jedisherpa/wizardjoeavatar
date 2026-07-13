@@ -83,10 +83,18 @@ class StreamHubTests(unittest.IsolatedAsyncioTestCase):
             self.assertGreaterEqual(published, 3)
             self.assertLessEqual(published, 5)
 
+            loop = asyncio.get_running_loop()
+            wall_started = loop.time()
             before = source.current_state().time_seconds
             await asyncio.sleep(0.12)
+            wall_elapsed = loop.time() - wall_started
             elapsed_simulation = source.current_state().time_seconds - before
-            self.assertLess(elapsed_simulation, 0.13)
+            self.assertGreater(elapsed_simulation, 0.0)
+            self.assertLessEqual(
+                elapsed_simulation,
+                wall_elapsed + 2.0 / 60.0,
+                "60 Hz runtime exceeded wall time plus two tick boundaries",
+            )
         finally:
             hub.unsubscribe(subscriber)
             await hub.stop()

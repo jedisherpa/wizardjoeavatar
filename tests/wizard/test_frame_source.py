@@ -1,15 +1,27 @@
 import asyncio
 import unittest
 
-from wizard_avatar.compositor import CellCanvas
-from wizard_avatar.frame_source import ProceduralWizardFrameSource
-from wizard_avatar.models import WizardCommand
-from wizard_avatar.pose_compositor import blit_pose_scaled
+from wizard_avatar.frame_source import (
+    REFERENCE_EYE_BLUE,
+    REFERENCE_EYE_WHITE,
+    REFERENCE_MOUTH_DARK,
+    ProceduralWizardFrameSource,
+)
+from wizard_avatar.models import WizardCommand, WizardState
 from wizard_avatar.reference_avatar import (
     reference_pose_anchor,
-    reference_pose_root_anchor,
+    reference_pose_ids,
     render_reference_pose_local,
 )
+
+
+def changed_points(before, after):
+    return {
+        (x, y)
+        for y in range(before.height)
+        for x in range(before.width)
+        if before.get(x, y) != after.get(x, y)
+    }
 
 
 class FrameSourceTests(unittest.TestCase):
@@ -35,132 +47,216 @@ class FrameSourceTests(unittest.TestCase):
         result = source.apply_command_sync(WizardCommand("expression", {"expression": "laser"}))
         self.assertFalse(result.ok)
 
-    def test_reference_speaking_mouth_tracks_authored_anchor(self):
+    def test_reference_face_channels_stay_bounded_and_expression_is_visible(self):
         source = ProceduralWizardFrameSource()
-        state = source.current_state()
-        state.action = "speaking"
-        state.time_seconds = 0.0
-        stage = CellCanvas(120, 130)
-        root_anchor = reference_pose_root_anchor("front_idle")
+        pose_id = "front_idle"
+        neutral = render_reference_pose_local(pose_id)
+        happy = render_reference_pose_local(pose_id)
         mouth_anchor = reference_pose_anchor("front_idle", "mouth")
-        root_screen = (60.0, 105.0)
-
-        source._draw_reference_animation_overlays(
-            stage,
-            state,
-            root_anchor,
+        source._apply_reference_face_channels(
+            neutral,
+            WizardState(expression="neutral"),
+            pose_id,
             mouth_anchor,
-            root_screen,
-            1.0,
-            1.0,
+        )
+        source._apply_reference_face_channels(
+            happy,
+            WizardState(expression="happy"),
+            pose_id,
+            mouth_anchor,
         )
 
-        origin_x = round(root_screen[0] - root_anchor[0])
-        origin_y = round(root_screen[1] - root_anchor[1])
-        mouth_stage_x = origin_x + mouth_anchor[0]
-        mouth_stage_y = origin_y + mouth_anchor[1]
-        mouth_cells = [
-            (x, y)
-            for y, row in enumerate(stage.cells)
-            for x, cell in enumerate(row)
-            if cell is not None and cell.layer_id == "reference_speaking_mouth"
+        changed = changed_points(neutral, happy)
+        eye_anchors = [
+            reference_pose_anchor(pose_id, "left_eye"),
+            reference_pose_anchor(pose_id, "right_eye"),
         ]
+        self.assertTrue(changed)
+        for x, y in changed:
+            near_eye = any(
+                abs(x - eye_x) <= 6 and abs(y - eye_y) <= 6
+                for eye_x, eye_y in eye_anchors
+            )
+            near_mouth = abs(x - mouth_anchor[0]) <= 6 and abs(y - mouth_anchor[1]) <= 4
+            self.assertTrue(near_eye or near_mouth, (x, y))
 
-        self.assertGreater(len(mouth_cells), 0)
-        self.assertLessEqual(max(abs(x - mouth_stage_x) for x, _ in mouth_cells), 3)
-        self.assertLessEqual(max(y for _, y in mouth_cells), mouth_stage_y)
-        self.assertGreaterEqual(min(y for _, y in mouth_cells), mouth_stage_y - 3)
-
-    def test_open_speaking_mouth_covers_reference_brown_corner_blocks(self):
+    def test_reference_eyes_are_short_blue_centers_with_white_sides(self):
         source = ProceduralWizardFrameSource()
-        state = source.current_state()
-        state.action = "speaking"
-        state.time_seconds = 0.0
-        stage = CellCanvas(120, 130)
-        root_anchor = reference_pose_root_anchor("front_idle")
-        mouth_anchor = reference_pose_anchor("front_idle", "mouth")
-        root_screen = (60.0, 105.0)
-
-        blit_pose_scaled(
-            stage,
-            render_reference_pose_local("front_idle"),
-            root_anchor,
-            root_screen,
-            1.0,
-            1.0,
+        pose_id = "front_idle"
+        canvas = render_reference_pose_local(pose_id)
+        layouts = [
+            source._reference_eye_layout(canvas, reference_pose_anchor(pose_id, anchor_name))
+            for anchor_name in ("left_eye", "right_eye")
+        ]
+        source._apply_reference_face_channels(
+            canvas,
+            WizardState(expression="neutral"),
+            pose_id,
+            reference_pose_anchor(pose_id, "mouth"),
         )
-        source._draw_reference_animation_overlays(
-            stage,
-            state,
-            root_anchor,
+
+        self.assertNotIn(None, layouts)
+        for eye_left, eye_top in layouts:
+            eye_cells = [
+                canvas.get(x, y)
+                for y in range(eye_top, eye_top + 2)
+                for x in range(eye_left, eye_left + 5)
+            ]
+            blue = [
+                cell
+                for cell in eye_cells
+                if cell is not None and cell.rgb == REFERENCE_EYE_BLUE
+            ]
+            white = [
+                cell
+                for cell in eye_cells
+                if cell is not None and cell.rgb == REFERENCE_EYE_WHITE
+            ]
+            self.assertEqual(len(blue), 2)
+            self.assertEqual(len(white), 8)
+            self.assertTrue(
+                all(cell.rgb != (0, 0, 0) for cell in eye_cells if cell is not None)
+            )
+
+    def test_reference_blink_stays_inside_two_row_eye_boxes(self):
+        source = ProceduralWizardFrameSource()
+        pose_id = "front_idle"
+        open_canvas = render_reference_pose_local(pose_id)
+        blink_canvas = render_reference_pose_local(pose_id)
+        layouts = [
+            source._reference_eye_layout(open_canvas, reference_pose_anchor(pose_id, anchor_name))
+            for anchor_name in ("left_eye", "right_eye")
+        ]
+        mouth_anchor = reference_pose_anchor(pose_id, "mouth")
+        source._apply_reference_face_channels(
+            open_canvas,
+            WizardState(blink_phase=0.5),
+            pose_id,
             mouth_anchor,
-            root_screen,
-            1.0,
-            1.0,
+        )
+        source._apply_reference_face_channels(
+            blink_canvas,
+            WizardState(blink_phase=0.99),
+            pose_id,
+            mouth_anchor,
         )
 
-        origin_x = round(root_screen[0] - root_anchor[0])
-        origin_y = round(root_screen[1] - root_anchor[1])
-        mouth_stage_x = origin_x + mouth_anchor[0]
-        upper_mouth_y = origin_y + mouth_anchor[1] - 3
-
-        allowed_layers = {"reference_mouth_clear", "reference_speaking_mouth", "reference_teeth"}
-        for y in range(upper_mouth_y, origin_y + mouth_anchor[1] + 2):
-            for x in range(mouth_stage_x - 5, mouth_stage_x + 6):
-                cell = stage.get(x, y)
-                self.assertIsNotNone(cell)
-                self.assertIn(cell.layer_id, allowed_layers)
-
-        for x in range(mouth_stage_x - 2, mouth_stage_x + 3):
-            cell = stage.get(x, upper_mouth_y)
+        allowed = {
+            (x, y)
+            for eye_left, eye_top in layouts
+            for y in range(eye_top, eye_top + 2)
+            for x in range(eye_left, eye_left + 5)
+        }
+        self.assertEqual(changed_points(open_canvas, blink_canvas), allowed)
+        for x, y in allowed:
+            cell = blink_canvas.get(x, y)
             self.assertIsNotNone(cell)
-            self.assertEqual(cell.layer_id, "reference_teeth")
+            self.assertNotIn(cell.rgb, {REFERENCE_EYE_WHITE, REFERENCE_EYE_BLUE})
 
-    def test_scaled_open_speaking_mouth_covers_reference_brown_columns(self):
+    def test_reference_eye_aim_moves_only_the_blue_centers(self):
         source = ProceduralWizardFrameSource()
-        state = source.current_state()
-        state.action = "speaking"
-        state.time_seconds = 0.0
-        stage = CellCanvas(240, 230)
-        root_anchor = reference_pose_root_anchor("front_idle")
-        mouth_anchor = reference_pose_anchor("front_idle", "mouth")
-        root_screen = (120.0, 205.0)
-        scale = 2.0
-        horizontal_scale = 1.18
-
-        blit_pose_scaled(
-            stage,
-            render_reference_pose_local("front_idle"),
-            root_anchor,
-            root_screen,
-            scale,
-            horizontal_scale,
-        )
-        source._draw_reference_animation_overlays(
-            stage,
-            state,
-            root_anchor,
+        pose_id = "front_idle"
+        left = render_reference_pose_local(pose_id)
+        right = render_reference_pose_local(pose_id)
+        mouth_anchor = reference_pose_anchor(pose_id, "mouth")
+        source._apply_reference_face_channels(
+            left,
+            WizardState(target_point={"x": -2.0, "z": 5.0}),
+            pose_id,
             mouth_anchor,
-            root_screen,
-            scale,
-            horizontal_scale,
+        )
+        source._apply_reference_face_channels(
+            right,
+            WizardState(target_point={"x": 2.0, "z": 5.0}),
+            pose_id,
+            mouth_anchor,
         )
 
-        scale_x = scale * horizontal_scale
-        origin_x = root_screen[0] - root_anchor[0] * scale_x
-        origin_y = root_screen[1] - root_anchor[1] * scale
-        allowed_layers = {"reference_mouth_clear", "reference_speaking_mouth", "reference_teeth"}
-        for lx in range(mouth_anchor[0] - 5, mouth_anchor[0] + 6):
-            for ly in range(mouth_anchor[1] - 3, mouth_anchor[1] + 2):
-                start_x = round(origin_x + lx * scale_x)
-                end_x = max(start_x, round(origin_x + (lx + 1) * scale_x) - 1)
-                start_y = round(origin_y + ly * scale)
-                end_y = max(start_y, round(origin_y + (ly + 1) * scale) - 1)
-                for y in range(start_y, end_y + 1):
-                    for x in range(start_x, end_x + 1):
-                        cell = stage.get(x, y)
-                        self.assertIsNotNone(cell)
-                        self.assertIn(cell.layer_id, allowed_layers)
+        changed = changed_points(left, right)
+        self.assertEqual(len(changed), 8)
+        self.assertTrue(
+            all(
+                left.get(x, y).rgb in {REFERENCE_EYE_WHITE, REFERENCE_EYE_BLUE}
+                for x, y in changed
+            )
+        )
+        self.assertTrue(
+            all(
+                right.get(x, y).rgb in {REFERENCE_EYE_WHITE, REFERENCE_EYE_BLUE}
+                for x, y in changed
+            )
+        )
+
+    def test_open_mouth_has_no_dark_vertical_side_columns(self):
+        source = ProceduralWizardFrameSource()
+        pose_id = "front_idle"
+        canvas = render_reference_pose_local(pose_id)
+        mouth_anchor = reference_pose_anchor(pose_id, "mouth")
+        source._apply_reference_face_channels(
+            canvas,
+            WizardState(action="speaking", time_seconds=0.0),
+            pose_id,
+            mouth_anchor,
+        )
+
+        dark_by_x = {}
+        for x in range(mouth_anchor[0] - 5, mouth_anchor[0] + 6):
+            dark_by_x[x] = sum(
+                canvas.get(x, y) is not None and canvas.get(x, y).rgb == REFERENCE_MOUTH_DARK
+                for y in range(mouth_anchor[1] - 3, mouth_anchor[1] + 2)
+            )
+        self.assertLessEqual(max(dark_by_x.values()), 1)
+        self.assertTrue(
+            any(
+                canvas.get(x, y) is not None
+                and canvas.get(x, y).layer_id == "reference_speaking_mouth"
+                for y in range(mouth_anchor[1] - 3, mouth_anchor[1] + 2)
+                for x in range(mouth_anchor[0] - 4, mouth_anchor[0] + 5)
+            )
+        )
+
+    def test_all_pose_face_edits_remain_inside_anchor_bounds(self):
+        source = ProceduralWizardFrameSource()
+        state = WizardState(expression="happy", blink_phase=0.5)
+        for pose_id in reference_pose_ids():
+            with self.subTest(pose_id=pose_id):
+                before = render_reference_pose_local(pose_id)
+                after = render_reference_pose_local(pose_id)
+                mouth_anchor = reference_pose_anchor(pose_id, "mouth")
+                eye_anchors = [
+                    reference_pose_anchor(pose_id, "left_eye"),
+                    reference_pose_anchor(pose_id, "right_eye"),
+                ]
+                source._apply_reference_face_channels(
+                    after,
+                    state,
+                    pose_id,
+                    mouth_anchor,
+                )
+
+                for x, y in changed_points(before, after):
+                    near_eye = any(
+                        abs(x - eye_x) <= 6 and abs(y - eye_y) <= 6
+                        for eye_x, eye_y in eye_anchors
+                    )
+                    near_mouth = (
+                        abs(x - mouth_anchor[0]) <= 6
+                        and abs(y - mouth_anchor[1]) <= 4
+                    )
+                    self.assertTrue(near_eye or near_mouth, (pose_id, x, y))
+
+    def test_back_pose_does_not_receive_front_face_pixels(self):
+        source = ProceduralWizardFrameSource()
+        pose_id = "back_idle"
+        before = render_reference_pose_local(pose_id)
+        after = render_reference_pose_local(pose_id)
+        source._apply_reference_face_channels(
+            after,
+            WizardState(expression="happy", blink_phase=0.99),
+            pose_id,
+            reference_pose_anchor(pose_id, "mouth"),
+        )
+        self.assertEqual(changed_points(before, after), set())
 
     def test_reference_pose_preserves_authored_eye_pixels(self):
         for pose_id in ("front_idle", "walk_front_left", "walk_front_right", "explaining", "magic_cast"):
