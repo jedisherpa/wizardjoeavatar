@@ -62,6 +62,15 @@ fn emergency_request(command_id: &str, source_sequence: u64) -> CommandRequestV1
     request
 }
 
+fn diagnostic_request(command_id: &str) -> CommandRequestV1 {
+    let mut request = request(command_id, "browser", 1, None, 1_000);
+    request.source_kind = SourceKind::Browser;
+    request.command = SemanticCommandV1::DiagnosticPose(DiagnosticPoseRequest {
+        geometry_id: DiagnosticGeometryId::new("front_idle").unwrap(),
+    });
+    request
+}
+
 #[test]
 fn one_hundred_retries_return_the_original_ack_and_apply_once() {
     let mut inbox = ChatInbox::new(InboxConfig::default(), EPOCH);
@@ -100,6 +109,61 @@ fn same_command_id_with_different_canonical_request_is_conflict() {
     assert_eq!(conflict.state_revision, accepted.state_revision);
     assert_eq!(conflict, conflict_retry);
     assert_eq!(inbox.pending_len(), 1);
+}
+
+#[test]
+fn trusted_diagnostic_then_public_reuse_is_conflict_not_cached_acceptance() {
+    let mut inbox = ChatInbox::new(InboxConfig::default(), EPOCH);
+    let diagnostic = diagnostic_request("trusted-diagnostic");
+    let accepted = inbox.accept(diagnostic.clone(), 0, REVISION);
+    assert_eq!(accepted.status, AckStatus::Accepted);
+
+    let public_conflict = inbox.accept_public(diagnostic.clone(), 0, REVISION + 100);
+    let public_retry = inbox.accept_public(diagnostic.clone(), 0, REVISION + 200);
+    assert_eq!(public_conflict.status, AckStatus::RejectedConflict);
+    assert_eq!(public_conflict.error_code, Some(CommandErrorCode::Conflict));
+    assert_eq!(public_conflict.state_revision, accepted.state_revision);
+    assert_eq!(public_conflict, public_retry);
+    assert_eq!(
+        serde_json::to_vec(&public_conflict).unwrap(),
+        serde_json::to_vec(&public_retry).unwrap()
+    );
+    assert_eq!(inbox.cached_ack(&diagnostic.command_id), Some(&accepted));
+    assert_eq!(inbox.pending_len(), 1);
+    assert_eq!(inbox.metrics().accepted_count, 1);
+    assert_eq!(inbox.metrics().duplicate_retry_count, 0);
+}
+
+#[test]
+fn public_unauthorized_then_trusted_reuse_conflicts_and_preserves_public_ack() {
+    let mut inbox = ChatInbox::new(InboxConfig::default(), EPOCH);
+    let diagnostic = diagnostic_request("public-diagnostic");
+    let unauthorized = inbox.accept_public(diagnostic.clone(), 0, REVISION);
+    let unauthorized_retry = inbox.accept_public(diagnostic.clone(), 0, REVISION + 100);
+    assert_eq!(unauthorized.status, AckStatus::RejectedUnauthorized);
+    assert_eq!(unauthorized, unauthorized_retry);
+    assert_eq!(
+        serde_json::to_vec(&unauthorized).unwrap(),
+        serde_json::to_vec(&unauthorized_retry).unwrap()
+    );
+
+    let trusted_conflict = inbox.accept(diagnostic.clone(), 0, REVISION + 200);
+    let trusted_retry = inbox.accept(diagnostic.clone(), 0, REVISION + 300);
+    assert_eq!(trusted_conflict.status, AckStatus::RejectedConflict);
+    assert_eq!(
+        trusted_conflict.error_code,
+        Some(CommandErrorCode::Conflict)
+    );
+    assert_eq!(trusted_conflict.state_revision, unauthorized.state_revision);
+    assert_eq!(trusted_conflict, trusted_retry);
+    assert_eq!(
+        inbox.cached_ack(&diagnostic.command_id),
+        Some(&unauthorized)
+    );
+    assert_eq!(inbox.pending_len(), 0);
+    assert!(inbox
+        .source_watermark(diagnostic.source_kind, &diagnostic.source_id)
+        .is_none());
 }
 
 #[test]
@@ -410,8 +474,9 @@ fn source_and_server_sequences_never_wrap() {
         SourceSequencePolicy::StrictMonotonicNewSourceOrEpochAfterMaximum
     );
     assert!(source_inbox.events().any(|event| {
-        event.command_id.as_str() == "source-wrap"
-            && event.kind == InboxEventKind::SourceRestartRequired
+        event.kind == InboxEventKind::SourceRestartRequired
+            && event.source_sequence == 0
+            && event.error_code == Some(CommandErrorCode::StaleSourceSequence)
     }));
     assert_eq!(
         source_inbox
@@ -498,12 +563,62 @@ fn replay_and_telemetry_event_storage_is_content_free_and_bounded() {
     assert_eq!(events.len(), 3);
     assert!(inbox.metrics().dropped_event_count > 0);
     let encoded = serde_json::to_string(&events).unwrap();
-    for forbidden in ["payload", "text", "legacy\":", "command\":"] {
+    for forbidden in [
+        "payload",
+        "text",
+        "legacy\":",
+        "command\":",
+        "event-1",
+        "event-2",
+        "chatbot-a",
+        "chatbot-b",
+    ] {
         assert!(
             !encoded.contains(forbidden),
             "logged forbidden field {forbidden}"
         );
     }
+    let value = serde_json::to_value(&events).unwrap();
+    for event in value.as_array().unwrap() {
+        let object = event.as_object().unwrap();
+        assert!(!object.contains_key("source_id"));
+        assert!(!object.contains_key("command_id"));
+        assert!(object.contains_key("source_id_hash64"));
+        assert!(object.contains_key("command_id_hash64"));
+    }
+}
+
+#[test]
+fn event_identifier_hashes_are_domain_separated_stable_and_epoch_scoped() {
+    fn accepted_event(epoch: RuntimeEpoch) -> chat_inbox::InboxEventV1 {
+        let mut inbox = ChatInbox::new(InboxConfig::default(), epoch);
+        assert_eq!(
+            inbox
+                .accept(
+                    request("same-identifier", "same-identifier", 1, None, 1_000),
+                    0,
+                    REVISION
+                )
+                .status,
+            AckStatus::Accepted
+        );
+        let event = inbox
+            .events()
+            .find(|event| event.kind == InboxEventKind::Accepted)
+            .cloned()
+            .expect("accepted event");
+        event
+    }
+
+    let first = accepted_event(EPOCH);
+    let same_epoch = accepted_event(EPOCH);
+    let next_epoch = accepted_event(RuntimeEpoch(EPOCH.0 + 1));
+
+    assert_eq!(first.source_id_hash64, same_epoch.source_id_hash64);
+    assert_eq!(first.command_id_hash64, same_epoch.command_id_hash64);
+    assert_ne!(first.source_id_hash64, first.command_id_hash64);
+    assert_ne!(first.source_id_hash64, next_epoch.source_id_hash64);
+    assert_ne!(first.command_id_hash64, next_epoch.command_id_hash64);
 }
 
 fn deterministic_shuffle<T>(values: &mut [T], state: &mut u64) {
