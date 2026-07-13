@@ -14,19 +14,20 @@ Last coordinator update: 2026-07-13
 | Planning checkpoint | COMPLETE | Pushed `50948b907ad35ec8ca604d6c39a63b4317ac3da7` |
 | Rust branch | ACTIVE | `codex/rust-chatbot-animation-engine` in `jedisherpa/wizardjoeavatar` |
 | Contract implementation | COMPLETE | C0 PASS at `1775941e76c2bec0f54f44349d9b6f304d2bce1b`; 29 contract, 3 release-registry, and 30 workflow-validator tests pass |
-| Runtime and motion engines | READY | C0 dependencies accepted; parallel R1/M1 work may begin |
+| Runtime and motion engines | IN_PROGRESS | Integer runtime clock implemented and wired; 89-geometry motion catalog in review |
 | Serial integration | PLANNED | Blocked on engine handoffs |
-| Exhaustive QA | PLANNED | Blocked on integrated profile |
+| QA foundation | COMPLETE | Q0 PASS at `ea0f3d7c0ae4202e565feb4b811011473862dfe2`; evidence writer, scope checker, CI, and honest browser harness |
+| Exhaustive QA | PLANNED | Per-frame live capture remains blocked on the integrated profile |
 | Publish and deployment | PLANNED | Blocked on F0 |
 
 ## Agent ledger
 
 | Role | Agent | Research | Planning | Next accountability |
 |---|---|---|---|---|
-| RUNTIME | Epicurus (`019f5c84-aca4-7953-b8ac-23a395e7268b`) | COMPLETE | COMPLETE | Contract handoff complete; final C0 review accepted |
-| MOTION | Singer (`019f5c84-b193-7f70-83ff-e0c7e33edd51`) | COMPLETE | COMPLETE | Motion graph and speech quantizer C0 review accepted |
-| FLOW | Lagrange (`019f5c84-b630-7053-b560-cab55fb3ba11`) | COMPLETE | COMPLETE | Material validator correction and independent C0 review accepted |
-| INT | Coordinator | COMPLETE | COMPLETE | C0 receipt validated; preparing immutable documentation checkpoint |
+| RUNTIME | Epicurus (`019f5c84-aca4-7953-b8ac-23a395e7268b`) | COMPLETE | COMPLETE | `RCHAT-RUN-020` implemented; coordinator production wiring passes focused tests |
+| MOTION | Singer (`019f5c84-b193-7f70-83ff-e0c7e33edd51`) | COMPLETE | COMPLETE | `RCHAT-ANIM-020..030` catalog, validation, and shadow-loader work in review |
+| FLOW | Lagrange (`019f5c84-b630-7053-b560-cab55fb3ba11`) | COMPLETE | COMPLETE | `RCHAT-FLOW-060` accepted; Q0 passed with 39 validator, 7 release, and 22 browser contract tests |
+| INT | Coordinator | COMPLETE | COMPLETE | Q0 receipt recorded; reviewing runtime and motion engine handoffs |
 
 ## Pose prerequisite receipt
 
@@ -54,10 +55,12 @@ Last coordinator update: 2026-07-13
 | 2026-07-13 | Structural gates require 100%; product score requires >=90% | Quality averages must never hide breakup, nondeterminism, or transport failure |
 | 2026-07-13 | Runtime PNG reuse remains prohibited | The accepted character is procedural colored-cell geometry, not a reused image |
 | 2026-07-13 | C0 accepted only after clean-candidate and rollback builds | The pushed result and its rollback SHA both compile independently of the dirty coordinator worktree |
+| 2026-07-13 | Browser tooling cannot manufacture a pass | Missing Chromium is `SKIP/77` or `FAIL/2`; live capture remains required at the later QA gate |
+| 2026-07-13 | Curated pose contact sheets are committed evidence | Fresh Rust checkouts must pass source-presence and hash validation without local-only files |
 
 ## Current blockers
 
-None for C0. The material registry validator now checks Git objects, evidence
+None for C0 or Q0. The material registry validator now checks Git objects, evidence
 bytes and hashes, exact gate commands, and aggregate changed-path ownership.
 
 The clean candidate at `1775941e76c2bec0f54f44349d9b6f304d2bce1b`
@@ -66,11 +69,15 @@ the live material registry audit. The rollback candidate at
 `988b2315caaafff6a8db66270339123368c1cb76` also passed the all-target compile
 check from a detached clean worktree.
 
+R1 and A1 remain open until their complete required-child sets are implemented,
+reviewed, and verified. Q0 supplies the harness for those later gates but does
+not claim that live per-frame browser capture has occurred.
+
 ## Next promotion
 
-1. Checkpoint the C0 receipt and gate evidence on
-   `codex/rust-chatbot-animation-engine` without staging unrelated Python work.
-2. Start `RCHAT-RUN-020` and `RCHAT-ANIM-020` in parallel under their disjoint
-   ownership boundaries.
-3. Start the FLOW QA/CI evidence harness so every integrated motion profile is
-   captured and checked frame by frame before promotion.
+1. Commit and push the Q0 registry and gate receipt without staging unrelated
+   Python or legacy work.
+2. Accept `RCHAT-RUN-020` only after the production hub wiring and full Rust
+   regression suite pass from an immutable candidate.
+3. Review and accept `RCHAT-ANIM-020..030` only after the embedded graph proves
+   exact 89/89 runtime and 50/50 WJFL coverage with stable hashes.
