@@ -1,9 +1,11 @@
 //! Semantic validation for Wizard Joe RCHAT registries and gate records.
 
 use serde_json::{Map, Value};
+use sha2::{Digest, Sha256};
 use std::collections::{HashMap, HashSet};
 use std::fs;
-use std::path::Path;
+use std::path::{Component, Path, PathBuf};
+use std::process::{Command, Output};
 
 pub const REGISTRY_SCHEMA: &str = "wizardjoe-rchat-registry/v1";
 pub const GATE_SCHEMA: &str = "wizardjoe-rchat-gate/v1";
@@ -65,7 +67,326 @@ pub fn read_json(path: &Path) -> Result<Value, String> {
 
 pub fn validate_registry_path(path: &Path) -> Result<ValidationReport, String> {
     let value = read_json(path)?;
-    Ok(validate_registry(&value))
+    let mut report = validate_registry(&value);
+    let repository = repository_root(path)?;
+    validate_material_registry(&value, &repository, &mut report.violations)?;
+    report.violations.sort_by(|left, right| {
+        (&left.path, left.code, &left.message).cmp(&(&right.path, right.code, &right.message))
+    });
+    Ok(report)
+}
+
+fn repository_root(registry_path: &Path) -> Result<PathBuf, String> {
+    let start = registry_path.parent().unwrap_or_else(|| Path::new("."));
+    let output = run_git(start, &["rev-parse", "--show-toplevel"])?;
+    if !output.status.success() {
+        return Err(format!(
+            "cannot locate the Git repository containing {}: {}",
+            registry_path.display(),
+            git_stderr(&output)
+        ));
+    }
+    let root = String::from_utf8(output.stdout)
+        .map_err(|error| format!("git returned a non-UTF-8 repository path: {error}"))?;
+    Ok(PathBuf::from(root.trim()))
+}
+
+fn validate_material_registry(
+    value: &Value,
+    repository: &Path,
+    violations: &mut Vec<Violation>,
+) -> Result<(), String> {
+    let Some(root) = value.as_object() else {
+        return Ok(());
+    };
+    for collection in ["work_items", "specialist_work_items"] {
+        let Some(items) = root.get(collection).and_then(Value::as_array) else {
+            continue;
+        };
+        for (index, value) in items.iter().enumerate() {
+            let Some(item) = value.as_object() else {
+                continue;
+            };
+            if item.get("status").and_then(Value::as_str) != Some("ACCEPTED") {
+                continue;
+            }
+            let path = format!("$.{collection}[{index}]");
+            validate_material_item(item, &path, repository, violations)?;
+        }
+    }
+    Ok(())
+}
+
+fn validate_material_item(
+    item: &Map<String, Value>,
+    item_path: &str,
+    repository: &Path,
+    violations: &mut Vec<Violation>,
+) -> Result<(), String> {
+    let id = item
+        .get("id")
+        .and_then(Value::as_str)
+        .unwrap_or("<unknown>");
+    let base_sha = item.get("base_sha").and_then(Value::as_str);
+    let result_sha = item.get("result_sha").and_then(Value::as_str);
+    let base_resolves = commit_resolves(
+        repository,
+        base_sha,
+        &format!("{item_path}.base_sha"),
+        id,
+        "RCHAT-GIT-BASE-COMMIT",
+        violations,
+    )?;
+    let result_resolves = commit_resolves(
+        repository,
+        result_sha,
+        &format!("{item_path}.result_sha"),
+        id,
+        "RCHAT-GIT-RESULT-COMMIT",
+        violations,
+    )?;
+
+    if result_resolves {
+        if let (Some(result_sha), Some(evidence)) =
+            (result_sha, item.get("evidence").and_then(Value::as_array))
+        {
+            for (index, record) in evidence.iter().enumerate() {
+                let Some(record) = record.as_object() else {
+                    continue;
+                };
+                validate_material_evidence(
+                    record,
+                    &format!("{item_path}.evidence[{index}]"),
+                    id,
+                    result_sha,
+                    repository,
+                    violations,
+                )?;
+            }
+        }
+    }
+
+    if base_resolves && result_resolves {
+        if let (Some(base_sha), Some(result_sha)) = (base_sha, result_sha) {
+            validate_changed_paths(
+                item, item_path, id, base_sha, result_sha, repository, violations,
+            )?;
+        }
+    }
+    Ok(())
+}
+
+fn commit_resolves(
+    repository: &Path,
+    sha: Option<&str>,
+    path: &str,
+    id: &str,
+    code: &'static str,
+    violations: &mut Vec<Violation>,
+) -> Result<bool, String> {
+    let Some(sha) = sha else {
+        return Ok(false);
+    };
+    let commit_object = format!("{sha}^{{commit}}");
+    let output = run_git(repository, &["cat-file", "-e", &commit_object])?;
+    if output.status.success() {
+        return Ok(true);
+    }
+    push(
+        violations,
+        code,
+        path,
+        format!(
+            "{id} references {sha}, which does not resolve to a commit; repair the receipt before acceptance ({})",
+            git_stderr(&output)
+        ),
+    );
+    Ok(false)
+}
+
+fn validate_material_evidence(
+    evidence: &Map<String, Value>,
+    evidence_path: &str,
+    id: &str,
+    result_sha: &str,
+    repository: &Path,
+    violations: &mut Vec<Violation>,
+) -> Result<(), String> {
+    let Some(path) = evidence.get("path").and_then(Value::as_str) else {
+        return Ok(());
+    };
+    if !is_safe_repo_path(path) {
+        push(
+            violations,
+            "RCHAT-EVIDENCE-PATH-UNSAFE",
+            format!("{evidence_path}.path"),
+            format!(
+                "{id} evidence path {path:?} must be a safe repository-relative path without dot segments, backslashes, colons, or NUL bytes"
+            ),
+        );
+        return Ok(());
+    }
+
+    let object = format!("{result_sha}:{path}");
+    let output = run_git(repository, &["show", &object])?;
+    if !output.status.success() {
+        push(
+            violations,
+            "RCHAT-EVIDENCE-MISSING",
+            format!("{evidence_path}.path"),
+            format!(
+                "{id} evidence {path} does not exist in result commit {result_sha}; commit the artifact or repair the receipt ({})",
+                git_stderr(&output)
+            ),
+        );
+        return Ok(());
+    }
+
+    let declared = evidence
+        .get("sha256")
+        .and_then(Value::as_str)
+        .unwrap_or_default();
+    let actual = format!("{:x}", Sha256::digest(&output.stdout));
+    if declared != actual {
+        push(
+            violations,
+            "RCHAT-EVIDENCE-HASH-MISMATCH",
+            format!("{evidence_path}.sha256"),
+            format!(
+                "{id} evidence {path} hashes to {actual} at {result_sha}, not declared {declared}; regenerate the receipt from git-show bytes"
+            ),
+        );
+    }
+    Ok(())
+}
+
+fn validate_changed_paths(
+    item: &Map<String, Value>,
+    item_path: &str,
+    id: &str,
+    base_sha: &str,
+    result_sha: &str,
+    repository: &Path,
+    violations: &mut Vec<Violation>,
+) -> Result<(), String> {
+    let output = run_git(
+        repository,
+        &[
+            "diff",
+            "--name-only",
+            "--no-renames",
+            "-z",
+            base_sha,
+            result_sha,
+            "--",
+        ],
+    )?;
+    if !output.status.success() {
+        return Err(format!(
+            "failed to inspect changed paths for {id} ({base_sha}..{result_sha}): {}",
+            git_stderr(&output)
+        ));
+    }
+    let allowlist: Vec<&str> = item
+        .get("path_allowlist")
+        .and_then(Value::as_array)
+        .into_iter()
+        .flatten()
+        .filter_map(Value::as_str)
+        .collect();
+    for raw_path in output
+        .stdout
+        .split(|byte| *byte == 0)
+        .filter(|p| !p.is_empty())
+    {
+        let changed_path = String::from_utf8(raw_path.to_vec())
+            .map_err(|error| format!("git diff returned a non-UTF-8 path for {id}: {error}"))?;
+        if !allowlist
+            .iter()
+            .any(|allowed| path_is_allowlisted(&changed_path, allowed))
+        {
+            push(
+                violations,
+                "RCHAT-PATH-OUT-OF-SCOPE",
+                format!("{item_path}.path_allowlist"),
+                format!(
+                    "{id} changed {changed_path} between {base_sha} and {result_sha}, but no path_allowlist entry covers it"
+                ),
+            );
+        }
+    }
+    Ok(())
+}
+
+fn is_safe_repo_path(value: &str) -> bool {
+    if value.is_empty()
+        || value.contains('\\')
+        || value.contains(':')
+        || value.contains('\0')
+        || Path::new(value).is_absolute()
+    {
+        return false;
+    }
+    Path::new(value)
+        .components()
+        .all(|component| matches!(component, Component::Normal(_)))
+}
+
+fn path_is_allowlisted(path: &str, allowed: &str) -> bool {
+    if !allowed.contains('*') {
+        return path == allowed
+            || path
+                .strip_prefix(allowed)
+                .is_some_and(|suffix| suffix.starts_with('/'));
+    }
+    wildcard_matches(path.as_bytes(), allowed.as_bytes())
+}
+
+fn wildcard_matches(value: &[u8], pattern: &[u8]) -> bool {
+    let mut previous = vec![false; value.len() + 1];
+    previous[0] = true;
+    for token in pattern {
+        let mut current = vec![false; value.len() + 1];
+        if *token == b'*' {
+            current[0] = previous[0];
+            for index in 1..=value.len() {
+                current[index] = previous[index] || current[index - 1];
+            }
+        } else {
+            for index in 1..=value.len() {
+                current[index] = previous[index - 1] && value[index - 1] == *token;
+            }
+        }
+        previous = current;
+    }
+    previous[value.len()]
+}
+
+fn run_git(repository: &Path, args: &[&str]) -> Result<Output, String> {
+    Command::new("git")
+        .arg("-C")
+        .arg(repository)
+        .args(args)
+        .env("LC_ALL", "C")
+        .env("LANG", "C")
+        .output()
+        .map_err(|error| {
+            format!(
+                "failed to execute git -C {} {}: {error}",
+                repository.display(),
+                args.join(" ")
+            )
+        })
+}
+
+fn git_stderr(output: &Output) -> String {
+    let stderr = String::from_utf8_lossy(&output.stderr);
+    let message = stderr.trim();
+    if message.is_empty() {
+        format!("git exited with {}", output.status)
+    } else {
+        message.to_owned()
+    }
 }
 
 pub fn validate_gate_path(
@@ -1069,6 +1390,7 @@ fn validate_accepted_item(item: &WorkItem, violations: &mut Vec<Violation>) {
             value,
             &format!("{}.commands[{index}]", item.path),
             true,
+            false,
             violations,
         );
     }
@@ -1591,6 +1913,7 @@ fn validate_gate_commands(
             command,
             &format!("$.commands[{index}]"),
             status == "PASS",
+            true,
             violations,
         );
     }
@@ -1892,20 +2215,34 @@ fn validate_command(
     value: &Value,
     path: &str,
     require_success: bool,
+    exact_gate_shape: bool,
     violations: &mut Vec<Violation>,
 ) {
     let Some(command) = object_value(value, path, violations) else {
         return;
     };
-    require_fields(
-        command,
-        path,
-        &["command", "exit_code", "duration_ms"],
-        violations,
-    );
+    let fields = if exact_gate_shape {
+        &[
+            "command",
+            "exit_code",
+            "duration_ms",
+            "stdout_artifact",
+            "stderr_artifact",
+        ][..]
+    } else {
+        &["command", "exit_code", "duration_ms"][..]
+    };
+    require_fields(command, path, fields, violations);
+    if exact_gate_shape {
+        reject_unknown_fields(command, path, fields, violations);
+    }
     non_empty_string_field(command, "command", path, violations);
     let exit_code = signed_integer_field(command, "exit_code", path, violations);
     integer_field(command, "duration_ms", path, violations);
+    if exact_gate_shape {
+        nullable_string_field(command, "stdout_artifact", path, violations);
+        nullable_string_field(command, "stderr_artifact", path, violations);
+    }
     if require_success && exit_code != Some(0) {
         push(
             violations,
@@ -1948,6 +2285,29 @@ fn require_fields(
                 format!("required field {field} is missing"),
             );
         }
+    }
+}
+
+fn reject_unknown_fields(
+    object: &Map<String, Value>,
+    path: &str,
+    allowed: &[&str],
+    violations: &mut Vec<Violation>,
+) {
+    let allowed: HashSet<&str> = allowed.iter().copied().collect();
+    let mut unknown: Vec<&str> = object
+        .keys()
+        .map(String::as_str)
+        .filter(|field| !allowed.contains(field))
+        .collect();
+    unknown.sort_unstable();
+    for field in unknown {
+        push(
+            violations,
+            "RCHAT-UNKNOWN-FIELD",
+            format!("{path}.{field}"),
+            format!("field {field} is not permitted by the gate-v1 command contract"),
+        );
     }
 }
 

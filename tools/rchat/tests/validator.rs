@@ -32,6 +32,47 @@ fn valid_gate_passes() {
 }
 
 #[test]
+fn gate_command_requires_artifact_fields() {
+    let mut value = gate();
+    value["commands"][0]
+        .as_object_mut()
+        .unwrap()
+        .remove("stdout_artifact");
+
+    let report = validate_gate(&value, None);
+    assert!(report.violations.iter().any(|violation| {
+        violation.code == "RCHAT-FIELD-MISSING" && violation.path == "$.commands[0].stdout_artifact"
+    }));
+}
+
+#[test]
+fn gate_command_artifacts_are_null_or_string() {
+    let mut value = gate();
+    value["commands"][0]["stdout_artifact"] = json!("evidence/stdout.txt");
+    value["commands"][0]["stderr_artifact"] = json!(42);
+
+    let report = validate_gate(&value, None);
+    assert!(report.violations.iter().any(|violation| {
+        violation.code == "RCHAT-TYPE" && violation.path == "$.commands[0].stderr_artifact"
+    }));
+    assert!(!report
+        .violations
+        .iter()
+        .any(|violation| violation.path == "$.commands[0].stdout_artifact"));
+}
+
+#[test]
+fn gate_command_rejects_unknown_fields() {
+    let mut value = gate();
+    value["commands"][0]["output"] = json!("uncontracted");
+
+    let report = validate_gate(&value, None);
+    assert!(report.violations.iter().any(|violation| {
+        violation.code == "RCHAT-UNKNOWN-FIELD" && violation.path == "$.commands[0].output"
+    }));
+}
+
+#[test]
 fn schemas_are_valid_json_and_name_the_contracts() {
     let registry_schema: Value = serde_json::from_str(include_str!(
         "../../../schemas/rchat/registry-v1.schema.json"
@@ -42,6 +83,41 @@ fn schemas_are_valid_json_and_name_the_contracts() {
 
     assert_eq!(registry_schema["title"], "wizardjoe-rchat-registry/v1");
     assert_eq!(gate_schema["title"], "wizardjoe-rchat-gate/v1");
+
+    let expected: HashSet<&str> = [
+        "command",
+        "exit_code",
+        "duration_ms",
+        "stdout_artifact",
+        "stderr_artifact",
+    ]
+    .into_iter()
+    .collect();
+    let command_schema = &gate_schema["$defs"]["command"];
+    let required: HashSet<&str> = command_schema["required"]
+        .as_array()
+        .unwrap()
+        .iter()
+        .map(|field| field.as_str().unwrap())
+        .collect();
+    let properties: HashSet<&str> = command_schema["properties"]
+        .as_object()
+        .unwrap()
+        .keys()
+        .map(String::as_str)
+        .collect();
+    let gate_fixture = gate();
+    let fixture_fields: HashSet<&str> = gate_fixture["commands"][0]
+        .as_object()
+        .unwrap()
+        .keys()
+        .map(String::as_str)
+        .collect();
+
+    assert_eq!(command_schema["additionalProperties"], false);
+    assert_eq!(required, expected);
+    assert_eq!(properties, expected);
+    assert_eq!(fixture_fields, expected);
 }
 
 #[test]

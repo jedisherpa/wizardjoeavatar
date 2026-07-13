@@ -56,8 +56,14 @@ Last coordinator update: 2026-07-13
 
 ## Current blockers
 
-No implementation blocker. Final C0 acceptance remains intentionally open until
-the checkpoint commit supplies immutable result SHAs.
+1. `RCHAT-FLOW-020` must materially verify Git objects, evidence bytes, hashes,
+   and scoped diffs instead of validating only field shapes.
+2. Gate command validation must match `wizardjoe-rchat-gate/v1` exactly.
+3. The corrective implementation commit must contain C0 evidence under the
+   explicit registry, library, and evidence ownership recorded in the registry.
+
+The semantic contract itself has passed RUNTIME review; C0 remains open until
+these accountability blockers are fixed and rerun from an immutable commit.
 
 ## Next promotion
 

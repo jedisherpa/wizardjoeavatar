@@ -455,6 +455,7 @@
       ],
       "gate_id": "P0",
       "path_allowlist": [
+        ".gitignore",
         "docs/pose-library-expansion",
         "rust/wizard_avatar_pose_tool",
         "rust/wizard_avatar_engine/assets/wizard_pose_library.v4.json.gz",
@@ -603,10 +604,11 @@
       "path_allowlist": [
         "schemas/rchat",
         "tools/rchat",
-        "rust/wizard_avatar_engine/tests/release_registry.rs"
+        "rust/wizard_avatar_engine/tests/release_registry.rs",
+        "evidence/cartoon-animation-program/rust-chatbot/c0/FLOW-020"
       ],
       "required_locks": [
-
+        "LOCK-RCHAT-EVIDENCE"
       ],
       "base_sha": "988b2315caaafff6a8db66270339123368c1cb76",
       "result_sha": null,
@@ -659,14 +661,27 @@
       ],
       "gate_id": "C0",
       "path_allowlist": [
+        "docs/cartoon-animation-program/rust-chatbot/registry.json",
+        "docs/cartoon-animation-program/rust-chatbot/PROGRAM_TRACKER.md",
+        "schemas/rchat",
+        "tools/rchat",
+        "rust/wizard_avatar_engine/src/lib.rs",
         "rust/wizard_avatar_engine/src/chat_event.rs",
+        "rust/wizard_avatar_engine/src/chat_performance.rs",
         "rust/wizard_avatar_engine/src/command.rs",
+        "rust/wizard_avatar_engine/src/motion_graph.rs",
         "rust/wizard_avatar_engine/tests/chat_event_contract.rs",
         "rust/wizard_avatar_engine/tests/command_ordering.rs",
-        "rust/wizard_avatar_engine/tests/fixtures/chat"
+        "rust/wizard_avatar_engine/tests/motion_graph_contract.rs",
+        "rust/wizard_avatar_engine/tests/release_registry.rs",
+        "rust/wizard_avatar_engine/tests/fixtures/chat",
+        "rust/wizard_avatar_engine/tests/fixtures/motion",
+        "evidence/cartoon-animation-program/rust-chatbot/c0"
       ],
       "required_locks": [
-        "LOCK-RCHAT-REGISTRY"
+        "LOCK-RCHAT-REGISTRY",
+        "LOCK-RCHAT-LIB",
+        "LOCK-RCHAT-EVIDENCE"
       ],
       "base_sha": null,
       "result_sha": null,
@@ -685,7 +700,7 @@
         "profile": "legacy",
         "verified": false
       },
-      "blocker": null,
+      "blocker": "FLOW-020 material evidence and scope validation corrections required before C0 receipt",
       "handoff_id": null
     },
     {
@@ -1513,6 +1528,7 @@
       ],
       "gate_id": "P0",
       "path_allowlist": [
+        ".gitignore",
         "docs/pose-library-expansion",
         "rust/wizard_avatar_pose_tool",
         "rust/wizard_avatar_engine/assets/wizard_pose_library.v4.json.gz",
@@ -2484,11 +2500,10 @@
       ],
       "gate_id": "C0",
       "path_allowlist": [
-        "docs/cartoon-animation-program/rust-chatbot/research/02-chat-animation-motion.md",
-        "docs/cartoon-animation-program/rust-chatbot/planning/02-chat-animation-plan.md"
+        "docs/cartoon-animation-program/rust-chatbot"
       ],
       "required_locks": [],
-      "base_sha": "988b2315caaafff6a8db66270339123368c1cb76",
+      "base_sha": "ca52b8023d5021e3a9bb14753961e8f7007f5aef",
       "result_sha": "50948b907ad35ec8ca604d6c39a63b4317ac3da7",
       "started_at": "2026-07-13T08:45:00Z",
       "finished_at": "2026-07-13T08:45:00Z",
