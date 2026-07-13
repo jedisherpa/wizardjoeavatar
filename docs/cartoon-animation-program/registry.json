@@ -8,7 +8,7 @@
   },
   "production_architecture": "asciline_python",
   "rust_policy": "historical_side_track_not_a_production_dependency_or_gate",
-  "phase": "final_publish",
+  "phase": "complete",
   "planning_checkpoint": {
     "commit": "08d8f3aaa181d97ef3d2a29cb5a8362d81a05f12",
     "pushed": true

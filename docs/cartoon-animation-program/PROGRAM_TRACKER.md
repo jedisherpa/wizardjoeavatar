@@ -12,7 +12,7 @@ Last coordinator update: 2026-07-13.
 | Planning checkpoint | COMPLETE | Research and plan pushed as `08d8f3aaa181d97ef3d2a29cb5a8362d81a05f12` |
 | Implementation | COMPLETE | Python runtime, graph, controls, reusable character package, Prism adapter, TTS captions, and persistent service integrated |
 | Final verification | COMPLETE | 153 tests, live Chromium matrix, Python-only validators, and ten-minute mixed-control soak passed |
-| Final publish | IN_PROGRESS | Implementation `a5f0cc1` pushed; compact evidence and required source archives being published |
+| Final publish | COMPLETE | Implementation `a5f0cc1` and evidence/source checkpoint `0508039` pushed to GitHub |
 
 ## Agent ledger
 
