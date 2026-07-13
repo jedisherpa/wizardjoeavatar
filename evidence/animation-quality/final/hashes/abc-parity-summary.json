@@ -1,0 +1,13 @@
+{
+  "scope": "shipped JavaScript decoder, bounded presentation queue, and CellStageRenderer module",
+  "real_browser_control": false,
+  "vectors": 52,
+  "tag_counts": {
+    "0": 1,
+    "1": 1,
+    "2": 39,
+    "3": 11
+  },
+  "all_source_decoded_equal": true,
+  "all_decoded_presented_rgb_equal": true
+}

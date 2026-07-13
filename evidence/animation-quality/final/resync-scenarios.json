@@ -1,0 +1,11 @@
+{
+  "scope": "module and Rust integration tests",
+  "real_browser_control": false,
+  "scenarios": [
+    "missing delta requests one resync",
+    "stale generation cannot present",
+    "in-flight decode invalidated by resync",
+    "reconnect bootstrap does not corrupt healthy viewer",
+    "explicit resync reconstructs from a full frame"
+  ]
+}

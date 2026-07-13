@@ -1,0 +1,247 @@
+{
+  "mode": "full",
+  "websocket_url": "ws://127.0.0.1:49251/ws/avatar/wizard?codec=adaptive",
+  "init": "INIT:24:5:480:270:0:0:0.000:EPOCH:1:CELL_BYTES:4:CODEC:1",
+  "steps": [
+    {
+      "id": "01-load-environment",
+      "description": "Load fixed white environment and receive initial stream",
+      "command_type": null,
+      "frames": 12,
+      "first_frame_index": 0,
+      "last_frame_index": 11,
+      "average_wire_bytes": 650.25,
+      "average_raw_bytes": 518400.0
+    },
+    {
+      "id": "02-spawn-center",
+      "description": "Spawn wizard in the center",
+      "command_type": "reset",
+      "frames": 12,
+      "first_frame_index": 12,
+      "last_frame_index": 23,
+      "average_wire_bytes": 16.0,
+      "average_raw_bytes": 518400.0
+    },
+    {
+      "id": "03-idle",
+      "description": "Idle for three seconds",
+      "command_type": "stop",
+      "frames": 72,
+      "first_frame_index": 24,
+      "last_frame_index": 95,
+      "average_wire_bytes": 118.875,
+      "average_raw_bytes": 518400.0
+    },
+    {
+      "id": "04-blink-window",
+      "description": "Observe deterministic blink window",
+      "command_type": null,
+      "frames": 6,
+      "first_frame_index": 96,
+      "last_frame_index": 101,
+      "average_wire_bytes": 1283.5,
+      "average_raw_bytes": 518400.0
+    },
+    {
+      "id": "05-happy",
+      "description": "Change to happy expression",
+      "command_type": "expression",
+      "frames": 12,
+      "first_frame_index": 102,
+      "last_frame_index": 113,
+      "average_wire_bytes": 19.583334,
+      "average_raw_bytes": 518400.0
+    },
+    {
+      "id": "06-speak",
+      "description": "Speak one test line",
+      "command_type": "speak",
+      "frames": 39,
+      "first_frame_index": 114,
+      "last_frame_index": 152,
+      "average_wire_bytes": 297.23077,
+      "average_raw_bytes": 518400.0
+    },
+    {
+      "id": "07-walk-left",
+      "description": "Walk left",
+      "command_type": "walk_left",
+      "frames": 34,
+      "first_frame_index": 153,
+      "last_frame_index": 186,
+      "average_wire_bytes": 14302.147,
+      "average_raw_bytes": 518400.0
+    },
+    {
+      "id": "08-walk-right",
+      "description": "Turn and walk right",
+      "command_type": "walk_right",
+      "frames": 53,
+      "first_frame_index": 187,
+      "last_frame_index": 239,
+      "average_wire_bytes": 15411.925,
+      "average_raw_bytes": 518400.0
+    },
+    {
+      "id": "09-walk-away",
+      "description": "Walk away from camera",
+      "command_type": "walk_backward",
+      "frames": 34,
+      "first_frame_index": 240,
+      "last_frame_index": 273,
+      "average_wire_bytes": 15048.647,
+      "average_raw_bytes": 518400.0
+    },
+    {
+      "id": "10-walk-toward",
+      "description": "Walk toward camera",
+      "command_type": "walk_forward",
+      "frames": 34,
+      "first_frame_index": 274,
+      "last_frame_index": 307,
+      "average_wire_bytes": 12591.883,
+      "average_raw_bytes": 518400.0
+    },
+    {
+      "id": "11-walk-front-left",
+      "description": "Walk front-left",
+      "command_type": "move_relative",
+      "frames": 34,
+      "first_frame_index": 308,
+      "last_frame_index": 341,
+      "average_wire_bytes": 14550.323,
+      "average_raw_bytes": 518400.0
+    },
+    {
+      "id": "12-walk-back-right",
+      "description": "Walk back-right",
+      "command_type": "move_relative",
+      "frames": 34,
+      "first_frame_index": 342,
+      "last_frame_index": 375,
+      "average_wire_bytes": 14789.235,
+      "average_raw_bytes": 518400.0
+    },
+    {
+      "id": "13-clockwise-circle",
+      "description": "Walk one clockwise circle",
+      "command_type": "circle",
+      "frames": 72,
+      "first_frame_index": 376,
+      "last_frame_index": 447,
+      "average_wire_bytes": 13794.861,
+      "average_raw_bytes": 518400.0
+    },
+    {
+      "id": "14-counterclockwise-circle",
+      "description": "Walk one counterclockwise circle",
+      "command_type": "circle",
+      "frames": 72,
+      "first_frame_index": 448,
+      "last_frame_index": 519,
+      "average_wire_bytes": 14679.806,
+      "average_raw_bytes": 518400.0
+    },
+    {
+      "id": "15-figure-eight",
+      "description": "Walk a figure-eight",
+      "command_type": "figure_eight",
+      "frames": 72,
+      "first_frame_index": 520,
+      "last_frame_index": 591,
+      "average_wire_bytes": 13898.014,
+      "average_raw_bytes": 518400.0
+    },
+    {
+      "id": "16-stop-center",
+      "description": "Stop in the center",
+      "command_type": "return_to_center",
+      "frames": 34,
+      "first_frame_index": 592,
+      "last_frame_index": 625,
+      "average_wire_bytes": 7840.794,
+      "average_raw_bytes": 518400.0
+    },
+    {
+      "id": "17-think",
+      "description": "Think",
+      "command_type": "action",
+      "frames": 29,
+      "first_frame_index": 626,
+      "last_frame_index": 654,
+      "average_wire_bytes": 211.48276,
+      "average_raw_bytes": 518400.0
+    },
+    {
+      "id": "18-point",
+      "description": "Point",
+      "command_type": "action",
+      "frames": 29,
+      "first_frame_index": 655,
+      "last_frame_index": 683,
+      "average_wire_bytes": 524.5862,
+      "average_raw_bytes": 518400.0
+    },
+    {
+      "id": "19-explain",
+      "description": "Explain",
+      "command_type": "action",
+      "frames": 29,
+      "first_frame_index": 684,
+      "last_frame_index": 712,
+      "average_wire_bytes": 236.86208,
+      "average_raw_bytes": 518400.0
+    },
+    {
+      "id": "20-cast-magic",
+      "description": "Cast magic",
+      "command_type": "action",
+      "frames": 34,
+      "first_frame_index": 713,
+      "last_frame_index": 746,
+      "average_wire_bytes": 459.32352,
+      "average_raw_bytes": 518400.0
+    },
+    {
+      "id": "21-react",
+      "description": "React",
+      "command_type": "action",
+      "frames": 24,
+      "first_frame_index": 747,
+      "last_frame_index": 770,
+      "average_wire_bytes": 597.2917,
+      "average_raw_bytes": 518400.0
+    },
+    {
+      "id": "22-neutral-idle",
+      "description": "Return to neutral idle",
+      "command_type": "expression",
+      "frames": 12,
+      "first_frame_index": 771,
+      "last_frame_index": 782,
+      "average_wire_bytes": 453.25,
+      "average_raw_bytes": 518400.0
+    },
+    {
+      "id": "23-final-idle",
+      "description": "Continue idling for ten seconds",
+      "command_type": "stop",
+      "frames": 240,
+      "first_frame_index": 783,
+      "last_frame_index": 1022,
+      "average_wire_bytes": 178.95,
+      "average_raw_bytes": 518400.0
+    }
+  ],
+  "total_frames": 1023,
+  "elapsed_seconds": 42.68683,
+  "observed_fps": 23.965239,
+  "average_wire_bytes": 6549.838,
+  "average_raw_bytes": 518400.0,
+  "compression_ratio": 0.012634718,
+  "codec_tag_counts": {
+    "2": 936,
+    "3": 87
+  }
+}

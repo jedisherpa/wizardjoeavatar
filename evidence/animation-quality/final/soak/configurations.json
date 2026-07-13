@@ -1,0 +1,20 @@
+[
+  {
+    "mode": "short",
+    "total_seconds": 15,
+    "seconds_per_viewer_count": 3.0,
+    "intended_use": "interactive verification"
+  },
+  {
+    "mode": "ci",
+    "total_seconds": 1800,
+    "seconds_per_viewer_count": 360.0,
+    "intended_use": "30-minute CI soak"
+  },
+  {
+    "mode": "nightly",
+    "total_seconds": 7200,
+    "seconds_per_viewer_count": 1440.0,
+    "intended_use": "two-hour nightly soak"
+  }
+]

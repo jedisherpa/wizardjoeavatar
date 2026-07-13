@@ -1,0 +1,80 @@
+[
+  {
+    "level": "error",
+    "message": "Error: Delta frame without previous frame\n    at Object.decode (http://127.0.0.1:8787/avatar/wizard.js:73:28)\n    at http://127.0.0.1:8787/avatar/wizard.js:1121:33",
+    "timestamp": "2026-07-12T21:33:01.626Z",
+    "url": "http://127.0.0.1:8787/avatar/wizard.js"
+  },
+  {
+    "level": "error",
+    "message": "Error: Delta frame without previous frame\n    at Object.decode (http://127.0.0.1:8787/avatar/wizard.js:73:28)\n    at http://127.0.0.1:8787/avatar/wizard.js:1121:33",
+    "timestamp": "2026-07-12T21:33:01.626Z",
+    "url": "http://127.0.0.1:8787/avatar/wizard.js"
+  },
+  {
+    "level": "error",
+    "message": "Error: Delta frame without previous frame\n    at Object.decode (http://127.0.0.1:8787/avatar/wizard.js:73:28)\n    at http://127.0.0.1:8787/avatar/wizard.js:1121:33",
+    "timestamp": "2026-07-12T21:33:01.626Z",
+    "url": "http://127.0.0.1:8787/avatar/wizard.js"
+  },
+  {
+    "level": "error",
+    "message": "Error: Delta frame without previous frame\n    at Object.decode (http://127.0.0.1:8787/avatar/wizard.js:73:28)\n    at http://127.0.0.1:8787/avatar/wizard.js:1121:33",
+    "timestamp": "2026-07-12T21:33:01.626Z",
+    "url": "http://127.0.0.1:8787/avatar/wizard.js"
+  },
+  {
+    "level": "error",
+    "message": "Error: Delta frame without previous frame\n    at Object.decode (http://127.0.0.1:8787/avatar/wizard.js:73:28)\n    at http://127.0.0.1:8787/avatar/wizard.js:1121:33",
+    "timestamp": "2026-07-12T21:33:01.626Z",
+    "url": "http://127.0.0.1:8787/avatar/wizard.js"
+  },
+  {
+    "level": "error",
+    "message": "Error: Delta frame without previous frame\n    at Object.decode (http://127.0.0.1:8787/avatar/wizard.js:73:28)\n    at http://127.0.0.1:8787/avatar/wizard.js:1121:33",
+    "timestamp": "2026-07-12T21:33:01.626Z",
+    "url": "http://127.0.0.1:8787/avatar/wizard.js"
+  },
+  {
+    "level": "error",
+    "message": "Error: Delta frame without previous frame\n    at Object.decode (http://127.0.0.1:8787/avatar/wizard.js:73:28)\n    at http://127.0.0.1:8787/avatar/wizard.js:1121:33",
+    "timestamp": "2026-07-12T21:33:01.626Z",
+    "url": "http://127.0.0.1:8787/avatar/wizard.js"
+  },
+  {
+    "level": "error",
+    "message": "Error: Delta frame without previous frame\n    at Object.decode (http://127.0.0.1:8787/avatar/wizard.js:73:28)\n    at http://127.0.0.1:8787/avatar/wizard.js:1121:33",
+    "timestamp": "2026-07-12T21:33:01.626Z",
+    "url": "http://127.0.0.1:8787/avatar/wizard.js"
+  },
+  {
+    "level": "error",
+    "message": "Error: Delta frame without previous frame\n    at Object.decode (http://127.0.0.1:8787/avatar/wizard.js:73:28)\n    at http://127.0.0.1:8787/avatar/wizard.js:1121:33",
+    "timestamp": "2026-07-12T21:33:01.626Z",
+    "url": "http://127.0.0.1:8787/avatar/wizard.js"
+  },
+  {
+    "level": "error",
+    "message": "Error: Delta frame without previous frame\n    at Object.decode (http://127.0.0.1:8787/avatar/wizard.js:73:28)\n    at http://127.0.0.1:8787/avatar/wizard.js:1121:33",
+    "timestamp": "2026-07-12T21:33:01.626Z",
+    "url": "http://127.0.0.1:8787/avatar/wizard.js"
+  },
+  {
+    "level": "error",
+    "message": "Error: Delta frame without previous frame\n    at Object.decode (http://127.0.0.1:8787/avatar/wizard.js:73:28)\n    at http://127.0.0.1:8787/avatar/wizard.js:1121:33",
+    "timestamp": "2026-07-12T21:33:01.626Z",
+    "url": "http://127.0.0.1:8787/avatar/wizard.js"
+  },
+  {
+    "level": "error",
+    "message": "Error: Delta frame without previous frame\n    at Object.decode (http://127.0.0.1:8787/avatar/wizard.js:73:28)\n    at http://127.0.0.1:8787/avatar/wizard.js:1121:33",
+    "timestamp": "2026-07-12T21:36:58.159Z",
+    "url": "http://127.0.0.1:8787/avatar/wizard.js"
+  },
+  {
+    "level": "error",
+    "message": "Error: Delta frame without previous frame\n    at Object.decode (http://127.0.0.1:8787/avatar/wizard.js:73:28)\n    at http://127.0.0.1:8787/avatar/wizard.js:1121:33",
+    "timestamp": "2026-07-12T21:36:58.201Z",
+    "url": "http://127.0.0.1:8787/avatar/wizard.js"
+  }
+]

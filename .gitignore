@@ -11,6 +11,7 @@ rust/*/target/
 .DS_Store
 .mypy_cache/
 external/
+evidence/animation-quality/final/tmp/
 evidence/wizard/**/*.png
 evidence/wizard/**/*.gif
 evidence/wizard/**/*.json

@@ -1,0 +1,9 @@
+{
+  "deterministic": true,
+  "manifest_hash64": "ba1afe183d3f31b8",
+  "run_1_semantic_hash64": "1f8db3d09f8d495f",
+  "run_2_semantic_hash64": "1f8db3d09f8d495f",
+  "run_1_raw_hash64": "69d2f9e4e8a39288",
+  "run_2_raw_hash64": "69d2f9e4e8a39288",
+  "frame_count_equal": true
+}

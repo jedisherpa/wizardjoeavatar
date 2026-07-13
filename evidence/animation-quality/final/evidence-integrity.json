@@ -1,0 +1,6306 @@
+{
+  "file_count": 1050,
+  "files": [
+    {
+      "bytes": 2069,
+      "crc32": "a061cfe1",
+      "hash64": "8fcb125b33cc5908",
+      "path": "FINAL_ANIMATION_QUALITY_VERIFICATION.md"
+    },
+    {
+      "bytes": 2247,
+      "crc32": "f98b6717",
+      "hash64": "126b1ada677d430b",
+      "path": "TRANSITION_MATRIX_8765.md"
+    },
+    {
+      "bytes": 177,
+      "crc32": "fcbd7eae",
+      "hash64": "72a9b34016443464",
+      "path": "browser-console.json"
+    },
+    {
+      "bytes": 5887,
+      "crc32": "08607edc",
+      "hash64": "982e00a698ab275e",
+      "path": "face-blue-dot-eyes-crop.png"
+    },
+    {
+      "bytes": 15692,
+      "crc32": "ee4bf309",
+      "hash64": "98032c8e6a17dcc4",
+      "path": "face-blue-dot-eyes-full.png"
+    },
+    {
+      "bytes": 5913,
+      "crc32": "036946c7",
+      "hash64": "fba207f57fe971b2",
+      "path": "face-first-principles-crop.png"
+    },
+    {
+      "bytes": 15718,
+      "crc32": "7f098079",
+      "hash64": "6d797e96aca28080",
+      "path": "face-first-principles-full.png"
+    },
+    {
+      "bytes": 5904,
+      "crc32": "cc3ec800",
+      "hash64": "ae8a6c22b0aba63e",
+      "path": "face-flat-blue-eyes-crop.png"
+    },
+    {
+      "bytes": 15712,
+      "crc32": "8ab150c3",
+      "hash64": "b3b97ad130e935e9",
+      "path": "face-flat-blue-eyes-full.png"
+    },
+    {
+      "bytes": 6380,
+      "crc32": "2e50cf67",
+      "hash64": "ef1c9a903c60d410",
+      "path": "face-mouth-cleanup-crop.png"
+    },
+    {
+      "bytes": 20887,
+      "crc32": "4fe98d08",
+      "hash64": "5a34d75c34631248",
+      "path": "face-mouth-cleanup-full.png"
+    },
+    {
+      "bytes": 5882,
+      "crc32": "c60d2687",
+      "hash64": "aa3283863b475d79",
+      "path": "face-short-blue-eyes-crop.png"
+    },
+    {
+      "bytes": 15689,
+      "crc32": "341133a7",
+      "hash64": "eadb2ece11f200e7",
+      "path": "face-short-blue-eyes-full.png"
+    },
+    {
+      "bytes": 5790,
+      "crc32": "3a7c8a71",
+      "hash64": "93e4af5da703209b",
+      "path": "face-skin-masked-blue-eyes-crop.png"
+    },
+    {
+      "bytes": 15594,
+      "crc32": "7ba68425",
+      "hash64": "e588a491fbaba766",
+      "path": "face-skin-masked-blue-eyes-full.png"
+    },
+    {
+      "bytes": 10486,
+      "crc32": "6208331a",
+      "hash64": "52af4b19ce62f989",
+      "path": "frame-sequences/01-locomotion-directions/0000.png"
+    },
+    {
+      "bytes": 10486,
+      "crc32": "6208331a",
+      "hash64": "52af4b19ce62f989",
+      "path": "frame-sequences/01-locomotion-directions/0001.png"
+    },
+    {
+      "bytes": 10486,
+      "crc32": "6208331a",
+      "hash64": "52af4b19ce62f989",
+      "path": "frame-sequences/01-locomotion-directions/0002.png"
+    },
+    {
+      "bytes": 10486,
+      "crc32": "6208331a",
+      "hash64": "52af4b19ce62f989",
+      "path": "frame-sequences/01-locomotion-directions/0003.png"
+    },
+    {
+      "bytes": 10486,
+      "crc32": "6208331a",
+      "hash64": "52af4b19ce62f989",
+      "path": "frame-sequences/01-locomotion-directions/0004.png"
+    },
+    {
+      "bytes": 10486,
+      "crc32": "6208331a",
+      "hash64": "52af4b19ce62f989",
+      "path": "frame-sequences/01-locomotion-directions/0005.png"
+    },
+    {
+      "bytes": 10486,
+      "crc32": "6208331a",
+      "hash64": "52af4b19ce62f989",
+      "path": "frame-sequences/01-locomotion-directions/0006.png"
+    },
+    {
+      "bytes": 10486,
+      "crc32": "6208331a",
+      "hash64": "52af4b19ce62f989",
+      "path": "frame-sequences/01-locomotion-directions/0007.png"
+    },
+    {
+      "bytes": 10486,
+      "crc32": "6208331a",
+      "hash64": "52af4b19ce62f989",
+      "path": "frame-sequences/01-locomotion-directions/0008.png"
+    },
+    {
+      "bytes": 10486,
+      "crc32": "6208331a",
+      "hash64": "52af4b19ce62f989",
+      "path": "frame-sequences/01-locomotion-directions/0009.png"
+    },
+    {
+      "bytes": 10486,
+      "crc32": "6208331a",
+      "hash64": "52af4b19ce62f989",
+      "path": "frame-sequences/01-locomotion-directions/0010.png"
+    },
+    {
+      "bytes": 10486,
+      "crc32": "6208331a",
+      "hash64": "52af4b19ce62f989",
+      "path": "frame-sequences/01-locomotion-directions/0011.png"
+    },
+    {
+      "bytes": 10494,
+      "crc32": "86a3d846",
+      "hash64": "3173b42482ad5867",
+      "path": "frame-sequences/01-locomotion-directions/0012.png"
+    },
+    {
+      "bytes": 10522,
+      "crc32": "81db3041",
+      "hash64": "2ace408290111b32",
+      "path": "frame-sequences/01-locomotion-directions/0013.png"
+    },
+    {
+      "bytes": 10712,
+      "crc32": "6ec057f0",
+      "hash64": "1a7a90ad283f178c",
+      "path": "frame-sequences/01-locomotion-directions/0014.png"
+    },
+    {
+      "bytes": 10671,
+      "crc32": "6c4b319a",
+      "hash64": "a34dbf1488175f5f",
+      "path": "frame-sequences/01-locomotion-directions/0015.png"
+    },
+    {
+      "bytes": 10747,
+      "crc32": "f3a604b0",
+      "hash64": "ab35187091456106",
+      "path": "frame-sequences/01-locomotion-directions/0016.png"
+    },
+    {
+      "bytes": 11537,
+      "crc32": "76fd292a",
+      "hash64": "dc3b91b8249f219e",
+      "path": "frame-sequences/01-locomotion-directions/0017.png"
+    },
+    {
+      "bytes": 11470,
+      "crc32": "572b7d44",
+      "hash64": "abbb392036dce94e",
+      "path": "frame-sequences/01-locomotion-directions/0018.png"
+    },
+    {
+      "bytes": 11391,
+      "crc32": "a1856a42",
+      "hash64": "d5bc23eb9aea2c09",
+      "path": "frame-sequences/01-locomotion-directions/0019.png"
+    },
+    {
+      "bytes": 11570,
+      "crc32": "f5b78037",
+      "hash64": "f0f6109d19c50e38",
+      "path": "frame-sequences/01-locomotion-directions/0020.png"
+    },
+    {
+      "bytes": 10196,
+      "crc32": "677af6ad",
+      "hash64": "fe192671b92d7d60",
+      "path": "frame-sequences/01-locomotion-directions/0021.png"
+    },
+    {
+      "bytes": 10138,
+      "crc32": "0ed06852",
+      "hash64": "49637e7cc0065395",
+      "path": "frame-sequences/01-locomotion-directions/0022.png"
+    },
+    {
+      "bytes": 10121,
+      "crc32": "9b7c5aba",
+      "hash64": "f2700d58f1cd0741",
+      "path": "frame-sequences/01-locomotion-directions/0023.png"
+    },
+    {
+      "bytes": 10057,
+      "crc32": "af20511e",
+      "hash64": "5fa0657f9243373e",
+      "path": "frame-sequences/01-locomotion-directions/0024.png"
+    },
+    {
+      "bytes": 10092,
+      "crc32": "85a5ccae",
+      "hash64": "2443b19fa723bc07",
+      "path": "frame-sequences/01-locomotion-directions/0025.png"
+    },
+    {
+      "bytes": 10208,
+      "crc32": "c30c9309",
+      "hash64": "11fb86dca96d77e7",
+      "path": "frame-sequences/01-locomotion-directions/0026.png"
+    },
+    {
+      "bytes": 10226,
+      "crc32": "8fec8428",
+      "hash64": "234a7603648a839f",
+      "path": "frame-sequences/01-locomotion-directions/0027.png"
+    },
+    {
+      "bytes": 10494,
+      "crc32": "86a3d846",
+      "hash64": "3173b42482ad5867",
+      "path": "frame-sequences/01-locomotion-directions/0028.png"
+    },
+    {
+      "bytes": 10522,
+      "crc32": "81db3041",
+      "hash64": "2ace408290111b32",
+      "path": "frame-sequences/01-locomotion-directions/0029.png"
+    },
+    {
+      "bytes": 10712,
+      "crc32": "6ec057f0",
+      "hash64": "1a7a90ad283f178c",
+      "path": "frame-sequences/01-locomotion-directions/0030.png"
+    },
+    {
+      "bytes": 10671,
+      "crc32": "6c4b319a",
+      "hash64": "a34dbf1488175f5f",
+      "path": "frame-sequences/01-locomotion-directions/0031.png"
+    },
+    {
+      "bytes": 10747,
+      "crc32": "f3a604b0",
+      "hash64": "ab35187091456106",
+      "path": "frame-sequences/01-locomotion-directions/0032.png"
+    },
+    {
+      "bytes": 11537,
+      "crc32": "76fd292a",
+      "hash64": "dc3b91b8249f219e",
+      "path": "frame-sequences/01-locomotion-directions/0033.png"
+    },
+    {
+      "bytes": 11470,
+      "crc32": "572b7d44",
+      "hash64": "abbb392036dce94e",
+      "path": "frame-sequences/01-locomotion-directions/0034.png"
+    },
+    {
+      "bytes": 11391,
+      "crc32": "a1856a42",
+      "hash64": "d5bc23eb9aea2c09",
+      "path": "frame-sequences/01-locomotion-directions/0035.png"
+    },
+    {
+      "bytes": 11570,
+      "crc32": "f5b78037",
+      "hash64": "f0f6109d19c50e38",
+      "path": "frame-sequences/01-locomotion-directions/0036.png"
+    },
+    {
+      "bytes": 10196,
+      "crc32": "677af6ad",
+      "hash64": "fe192671b92d7d60",
+      "path": "frame-sequences/01-locomotion-directions/0037.png"
+    },
+    {
+      "bytes": 10138,
+      "crc32": "0ed06852",
+      "hash64": "49637e7cc0065395",
+      "path": "frame-sequences/01-locomotion-directions/0038.png"
+    },
+    {
+      "bytes": 10121,
+      "crc32": "9b7c5aba",
+      "hash64": "f2700d58f1cd0741",
+      "path": "frame-sequences/01-locomotion-directions/0039.png"
+    },
+    {
+      "bytes": 10144,
+      "crc32": "50df7858",
+      "hash64": "171e9a7bfbbc4d3f",
+      "path": "frame-sequences/01-locomotion-directions/0040.png"
+    },
+    {
+      "bytes": 10125,
+      "crc32": "80d58457",
+      "hash64": "280a655bda0101cd",
+      "path": "frame-sequences/01-locomotion-directions/0041.png"
+    },
+    {
+      "bytes": 10165,
+      "crc32": "6905f0a9",
+      "hash64": "ae96617a326066d1",
+      "path": "frame-sequences/01-locomotion-directions/0042.png"
+    },
+    {
+      "bytes": 10020,
+      "crc32": "4c5696ce",
+      "hash64": "b3c07c2ad58bbda1",
+      "path": "frame-sequences/01-locomotion-directions/0043.png"
+    },
+    {
+      "bytes": 10018,
+      "crc32": "05563898",
+      "hash64": "81c02c7ae97d959c",
+      "path": "frame-sequences/01-locomotion-directions/0044.png"
+    },
+    {
+      "bytes": 10018,
+      "crc32": "e96c7139",
+      "hash64": "7794291fc5a35720",
+      "path": "frame-sequences/01-locomotion-directions/0045.png"
+    },
+    {
+      "bytes": 10018,
+      "crc32": "e96c7139",
+      "hash64": "7794291fc5a35720",
+      "path": "frame-sequences/01-locomotion-directions/0046.png"
+    },
+    {
+      "bytes": 10018,
+      "crc32": "e96c7139",
+      "hash64": "7794291fc5a35720",
+      "path": "frame-sequences/01-locomotion-directions/0047.png"
+    },
+    {
+      "bytes": 10018,
+      "crc32": "e96c7139",
+      "hash64": "7794291fc5a35720",
+      "path": "frame-sequences/01-locomotion-directions/0048.png"
+    },
+    {
+      "bytes": 10018,
+      "crc32": "e96c7139",
+      "hash64": "7794291fc5a35720",
+      "path": "frame-sequences/01-locomotion-directions/0049.png"
+    },
+    {
+      "bytes": 10018,
+      "crc32": "e96c7139",
+      "hash64": "7794291fc5a35720",
+      "path": "frame-sequences/01-locomotion-directions/0050.png"
+    },
+    {
+      "bytes": 10018,
+      "crc32": "e96c7139",
+      "hash64": "7794291fc5a35720",
+      "path": "frame-sequences/01-locomotion-directions/0051.png"
+    },
+    {
+      "bytes": 10018,
+      "crc32": "e96c7139",
+      "hash64": "7794291fc5a35720",
+      "path": "frame-sequences/01-locomotion-directions/0052.png"
+    },
+    {
+      "bytes": 10018,
+      "crc32": "e96c7139",
+      "hash64": "7794291fc5a35720",
+      "path": "frame-sequences/01-locomotion-directions/0053.png"
+    },
+    {
+      "bytes": 10018,
+      "crc32": "e96c7139",
+      "hash64": "7794291fc5a35720",
+      "path": "frame-sequences/01-locomotion-directions/0054.png"
+    },
+    {
+      "bytes": 10018,
+      "crc32": "e96c7139",
+      "hash64": "7794291fc5a35720",
+      "path": "frame-sequences/01-locomotion-directions/0055.png"
+    },
+    {
+      "bytes": 10494,
+      "crc32": "86a3d846",
+      "hash64": "3173b42482ad5867",
+      "path": "frame-sequences/01-locomotion-directions/0056.png"
+    },
+    {
+      "bytes": 10522,
+      "crc32": "81db3041",
+      "hash64": "2ace408290111b32",
+      "path": "frame-sequences/01-locomotion-directions/0057.png"
+    },
+    {
+      "bytes": 10696,
+      "crc32": "53a9fc04",
+      "hash64": "4f53747467c65852",
+      "path": "frame-sequences/01-locomotion-directions/0058.png"
+    },
+    {
+      "bytes": 10668,
+      "crc32": "7614fa70",
+      "hash64": "e41429916dc9d1f8",
+      "path": "frame-sequences/01-locomotion-directions/0059.png"
+    },
+    {
+      "bytes": 10760,
+      "crc32": "b3c8bbe4",
+      "hash64": "c36f83c37fed42bf",
+      "path": "frame-sequences/01-locomotion-directions/0060.png"
+    },
+    {
+      "bytes": 11530,
+      "crc32": "4167efa3",
+      "hash64": "0d2652b352e6873d",
+      "path": "frame-sequences/01-locomotion-directions/0061.png"
+    },
+    {
+      "bytes": 11470,
+      "crc32": "572b7d44",
+      "hash64": "abbb392036dce94e",
+      "path": "frame-sequences/01-locomotion-directions/0062.png"
+    },
+    {
+      "bytes": 11399,
+      "crc32": "e9995830",
+      "hash64": "f544b574dadc7f77",
+      "path": "frame-sequences/01-locomotion-directions/0063.png"
+    },
+    {
+      "bytes": 11578,
+      "crc32": "43da882f",
+      "hash64": "f078dfc51e0dc86c",
+      "path": "frame-sequences/01-locomotion-directions/0064.png"
+    },
+    {
+      "bytes": 10227,
+      "crc32": "ea70a011",
+      "hash64": "137fcb1122254594",
+      "path": "frame-sequences/01-locomotion-directions/0065.png"
+    },
+    {
+      "bytes": 10127,
+      "crc32": "c683beff",
+      "hash64": "ffb48c92e61908b0",
+      "path": "frame-sequences/01-locomotion-directions/0066.png"
+    },
+    {
+      "bytes": 10069,
+      "crc32": "dd5f987d",
+      "hash64": "b6bca87d2b441d6b",
+      "path": "frame-sequences/01-locomotion-directions/0067.png"
+    },
+    {
+      "bytes": 10075,
+      "crc32": "b12caaca",
+      "hash64": "1bca92254c61a868",
+      "path": "frame-sequences/01-locomotion-directions/0068.png"
+    },
+    {
+      "bytes": 10121,
+      "crc32": "48a1e0cb",
+      "hash64": "7551225b68c36cd6",
+      "path": "frame-sequences/01-locomotion-directions/0069.png"
+    },
+    {
+      "bytes": 10190,
+      "crc32": "c946912d",
+      "hash64": "cf6f7b6327fe1af2",
+      "path": "frame-sequences/01-locomotion-directions/0070.png"
+    },
+    {
+      "bytes": 10188,
+      "crc32": "61f8c9bc",
+      "hash64": "fe4207eef7ccbc1c",
+      "path": "frame-sequences/01-locomotion-directions/0071.png"
+    },
+    {
+      "bytes": 10068,
+      "crc32": "7e88ce3b",
+      "hash64": "2ef6448381615de2",
+      "path": "frame-sequences/01-locomotion-directions/0072.png"
+    },
+    {
+      "bytes": 10241,
+      "crc32": "6e1e4871",
+      "hash64": "7e4c9c4924287ba3",
+      "path": "frame-sequences/01-locomotion-directions/0073.png"
+    },
+    {
+      "bytes": 11464,
+      "crc32": "a0131bc7",
+      "hash64": "37f8afe3ef68f0a3",
+      "path": "frame-sequences/01-locomotion-directions/0074.png"
+    },
+    {
+      "bytes": 11382,
+      "crc32": "35c1f7ac",
+      "hash64": "ebe934ddf211368d",
+      "path": "frame-sequences/01-locomotion-directions/0075.png"
+    },
+    {
+      "bytes": 11392,
+      "crc32": "1791b5bd",
+      "hash64": "c74f87caa031afbd",
+      "path": "frame-sequences/01-locomotion-directions/0076.png"
+    },
+    {
+      "bytes": 11443,
+      "crc32": "5ec37279",
+      "hash64": "ac5a5ffcd0df92e5",
+      "path": "frame-sequences/01-locomotion-directions/0077.png"
+    },
+    {
+      "bytes": 11506,
+      "crc32": "b5702b8d",
+      "hash64": "b1e858335745f033",
+      "path": "frame-sequences/01-locomotion-directions/0078.png"
+    },
+    {
+      "bytes": 11453,
+      "crc32": "582eb563",
+      "hash64": "87bf6b47fa5f99b1",
+      "path": "frame-sequences/01-locomotion-directions/0079.png"
+    },
+    {
+      "bytes": 11465,
+      "crc32": "10f7b52a",
+      "hash64": "931123a4f2191f9b",
+      "path": "frame-sequences/01-locomotion-directions/0080.png"
+    },
+    {
+      "bytes": 11603,
+      "crc32": "3112ca09",
+      "hash64": "428d7fbf35114f06",
+      "path": "frame-sequences/01-locomotion-directions/0081.png"
+    },
+    {
+      "bytes": 11608,
+      "crc32": "48f226ab",
+      "hash64": "43d2a21691c8aeb0",
+      "path": "frame-sequences/01-locomotion-directions/0082.png"
+    },
+    {
+      "bytes": 11523,
+      "crc32": "c656e87d",
+      "hash64": "6adb8d0f54b50caa",
+      "path": "frame-sequences/01-locomotion-directions/0083.png"
+    },
+    {
+      "bytes": 10486,
+      "crc32": "6208331a",
+      "hash64": "52af4b19ce62f989",
+      "path": "frame-sequences/01-locomotion-directions/0084.png"
+    },
+    {
+      "bytes": 10486,
+      "crc32": "6208331a",
+      "hash64": "52af4b19ce62f989",
+      "path": "frame-sequences/01-locomotion-directions/0085.png"
+    },
+    {
+      "bytes": 11276,
+      "crc32": "5e90797b",
+      "hash64": "0c54ef0c262c0dba",
+      "path": "frame-sequences/01-locomotion-directions/0086.png"
+    },
+    {
+      "bytes": 11276,
+      "crc32": "5e90797b",
+      "hash64": "0c54ef0c262c0dba",
+      "path": "frame-sequences/01-locomotion-directions/0087.png"
+    },
+    {
+      "bytes": 11276,
+      "crc32": "5e90797b",
+      "hash64": "0c54ef0c262c0dba",
+      "path": "frame-sequences/01-locomotion-directions/0088.png"
+    },
+    {
+      "bytes": 11276,
+      "crc32": "5e90797b",
+      "hash64": "0c54ef0c262c0dba",
+      "path": "frame-sequences/01-locomotion-directions/0089.png"
+    },
+    {
+      "bytes": 11276,
+      "crc32": "5e90797b",
+      "hash64": "0c54ef0c262c0dba",
+      "path": "frame-sequences/01-locomotion-directions/0090.png"
+    },
+    {
+      "bytes": 11276,
+      "crc32": "5e90797b",
+      "hash64": "0c54ef0c262c0dba",
+      "path": "frame-sequences/01-locomotion-directions/0091.png"
+    },
+    {
+      "bytes": 11276,
+      "crc32": "5e90797b",
+      "hash64": "0c54ef0c262c0dba",
+      "path": "frame-sequences/01-locomotion-directions/0092.png"
+    },
+    {
+      "bytes": 11276,
+      "crc32": "5e90797b",
+      "hash64": "0c54ef0c262c0dba",
+      "path": "frame-sequences/01-locomotion-directions/0093.png"
+    },
+    {
+      "bytes": 11276,
+      "crc32": "5e90797b",
+      "hash64": "0c54ef0c262c0dba",
+      "path": "frame-sequences/01-locomotion-directions/0094.png"
+    },
+    {
+      "bytes": 11276,
+      "crc32": "5e90797b",
+      "hash64": "0c54ef0c262c0dba",
+      "path": "frame-sequences/01-locomotion-directions/0095.png"
+    },
+    {
+      "bytes": 11299,
+      "crc32": "70ef1a28",
+      "hash64": "124444fa8f2f8077",
+      "path": "frame-sequences/01-locomotion-directions/0096.png"
+    },
+    {
+      "bytes": 11241,
+      "crc32": "435c8083",
+      "hash64": "c593d1df2bb8c381",
+      "path": "frame-sequences/01-locomotion-directions/0097.png"
+    },
+    {
+      "bytes": 11341,
+      "crc32": "3a288bb8",
+      "hash64": "4c3ab6ea121e57ba",
+      "path": "frame-sequences/01-locomotion-directions/0098.png"
+    },
+    {
+      "bytes": 11418,
+      "crc32": "56a126d6",
+      "hash64": "ae51d993485ed149",
+      "path": "frame-sequences/01-locomotion-directions/0099.png"
+    },
+    {
+      "bytes": 11443,
+      "crc32": "73fb32db",
+      "hash64": "83de4606e2695caa",
+      "path": "frame-sequences/01-locomotion-directions/0100.png"
+    },
+    {
+      "bytes": 11498,
+      "crc32": "4bba64e7",
+      "hash64": "71447611d066c87d",
+      "path": "frame-sequences/01-locomotion-directions/0101.png"
+    },
+    {
+      "bytes": 11486,
+      "crc32": "0da1b792",
+      "hash64": "9903ee1a85368354",
+      "path": "frame-sequences/01-locomotion-directions/0102.png"
+    },
+    {
+      "bytes": 11383,
+      "crc32": "3a304c54",
+      "hash64": "de80ba6cc7387e78",
+      "path": "frame-sequences/01-locomotion-directions/0103.png"
+    },
+    {
+      "bytes": 11578,
+      "crc32": "104c990f",
+      "hash64": "6d165f53ed0db99d",
+      "path": "frame-sequences/01-locomotion-directions/0104.png"
+    },
+    {
+      "bytes": 11605,
+      "crc32": "d8f7657a",
+      "hash64": "83b4d25d60ae9c1d",
+      "path": "frame-sequences/01-locomotion-directions/0105.png"
+    },
+    {
+      "bytes": 11554,
+      "crc32": "1d3870b2",
+      "hash64": "e817e4d99cd41678",
+      "path": "frame-sequences/01-locomotion-directions/0106.png"
+    },
+    {
+      "bytes": 11493,
+      "crc32": "feb0d3e8",
+      "hash64": "d54d04dec146ad96",
+      "path": "frame-sequences/01-locomotion-directions/0107.png"
+    },
+    {
+      "bytes": 11391,
+      "crc32": "d5c7ebd3",
+      "hash64": "1e0285e1f084e795",
+      "path": "frame-sequences/01-locomotion-directions/0108.png"
+    },
+    {
+      "bytes": 11384,
+      "crc32": "f124b736",
+      "hash64": "80aa090b6356b20b",
+      "path": "frame-sequences/01-locomotion-directions/0109.png"
+    },
+    {
+      "bytes": 11451,
+      "crc32": "597022c2",
+      "hash64": "6995d6dd91fde0e9",
+      "path": "frame-sequences/01-locomotion-directions/0110.png"
+    },
+    {
+      "bytes": 11385,
+      "crc32": "12367e6f",
+      "hash64": "9bb6f57cbf4c5e4a",
+      "path": "frame-sequences/01-locomotion-directions/0111.png"
+    },
+    {
+      "bytes": 10486,
+      "crc32": "6208331a",
+      "hash64": "52af4b19ce62f989",
+      "path": "frame-sequences/01-locomotion-directions/0112.png"
+    },
+    {
+      "bytes": 10486,
+      "crc32": "6208331a",
+      "hash64": "52af4b19ce62f989",
+      "path": "frame-sequences/01-locomotion-directions/0113.png"
+    },
+    {
+      "bytes": 10486,
+      "crc32": "6208331a",
+      "hash64": "52af4b19ce62f989",
+      "path": "frame-sequences/01-locomotion-directions/0114.png"
+    },
+    {
+      "bytes": 10486,
+      "crc32": "6208331a",
+      "hash64": "52af4b19ce62f989",
+      "path": "frame-sequences/01-locomotion-directions/0115.png"
+    },
+    {
+      "bytes": 10486,
+      "crc32": "6208331a",
+      "hash64": "52af4b19ce62f989",
+      "path": "frame-sequences/01-locomotion-directions/0116.png"
+    },
+    {
+      "bytes": 10486,
+      "crc32": "6208331a",
+      "hash64": "52af4b19ce62f989",
+      "path": "frame-sequences/01-locomotion-directions/0117.png"
+    },
+    {
+      "bytes": 10486,
+      "crc32": "6208331a",
+      "hash64": "52af4b19ce62f989",
+      "path": "frame-sequences/01-locomotion-directions/0118.png"
+    },
+    {
+      "bytes": 10486,
+      "crc32": "6208331a",
+      "hash64": "52af4b19ce62f989",
+      "path": "frame-sequences/01-locomotion-directions/0119.png"
+    },
+    {
+      "bytes": 10486,
+      "crc32": "6208331a",
+      "hash64": "52af4b19ce62f989",
+      "path": "frame-sequences/01-locomotion-directions/0120.png"
+    },
+    {
+      "bytes": 10486,
+      "crc32": "6208331a",
+      "hash64": "52af4b19ce62f989",
+      "path": "frame-sequences/01-locomotion-directions/0121.png"
+    },
+    {
+      "bytes": 10486,
+      "crc32": "6208331a",
+      "hash64": "52af4b19ce62f989",
+      "path": "frame-sequences/01-locomotion-directions/0122.png"
+    },
+    {
+      "bytes": 10486,
+      "crc32": "6208331a",
+      "hash64": "52af4b19ce62f989",
+      "path": "frame-sequences/01-locomotion-directions/0123.png"
+    },
+    {
+      "bytes": 10486,
+      "crc32": "6208331a",
+      "hash64": "52af4b19ce62f989",
+      "path": "frame-sequences/01-locomotion-directions/0124.png"
+    },
+    {
+      "bytes": 10486,
+      "crc32": "6208331a",
+      "hash64": "52af4b19ce62f989",
+      "path": "frame-sequences/01-locomotion-directions/0125.png"
+    },
+    {
+      "bytes": 11276,
+      "crc32": "5e90797b",
+      "hash64": "0c54ef0c262c0dba",
+      "path": "frame-sequences/01-locomotion-directions/0126.png"
+    },
+    {
+      "bytes": 11276,
+      "crc32": "5e90797b",
+      "hash64": "0c54ef0c262c0dba",
+      "path": "frame-sequences/01-locomotion-directions/0127.png"
+    },
+    {
+      "bytes": 11276,
+      "crc32": "5e90797b",
+      "hash64": "0c54ef0c262c0dba",
+      "path": "frame-sequences/01-locomotion-directions/0128.png"
+    },
+    {
+      "bytes": 11276,
+      "crc32": "5e90797b",
+      "hash64": "0c54ef0c262c0dba",
+      "path": "frame-sequences/01-locomotion-directions/0129.png"
+    },
+    {
+      "bytes": 11276,
+      "crc32": "5e90797b",
+      "hash64": "0c54ef0c262c0dba",
+      "path": "frame-sequences/01-locomotion-directions/0130.png"
+    },
+    {
+      "bytes": 11276,
+      "crc32": "5e90797b",
+      "hash64": "0c54ef0c262c0dba",
+      "path": "frame-sequences/01-locomotion-directions/0131.png"
+    },
+    {
+      "bytes": 11276,
+      "crc32": "5e90797b",
+      "hash64": "0c54ef0c262c0dba",
+      "path": "frame-sequences/01-locomotion-directions/0132.png"
+    },
+    {
+      "bytes": 11276,
+      "crc32": "5e90797b",
+      "hash64": "0c54ef0c262c0dba",
+      "path": "frame-sequences/01-locomotion-directions/0133.png"
+    },
+    {
+      "bytes": 11276,
+      "crc32": "5e90797b",
+      "hash64": "0c54ef0c262c0dba",
+      "path": "frame-sequences/01-locomotion-directions/0134.png"
+    },
+    {
+      "bytes": 11276,
+      "crc32": "5e90797b",
+      "hash64": "0c54ef0c262c0dba",
+      "path": "frame-sequences/01-locomotion-directions/0135.png"
+    },
+    {
+      "bytes": 11276,
+      "crc32": "5e90797b",
+      "hash64": "0c54ef0c262c0dba",
+      "path": "frame-sequences/01-locomotion-directions/0136.png"
+    },
+    {
+      "bytes": 11276,
+      "crc32": "5e90797b",
+      "hash64": "0c54ef0c262c0dba",
+      "path": "frame-sequences/01-locomotion-directions/0137.png"
+    },
+    {
+      "bytes": 11276,
+      "crc32": "5e90797b",
+      "hash64": "0c54ef0c262c0dba",
+      "path": "frame-sequences/01-locomotion-directions/0138.png"
+    },
+    {
+      "bytes": 11276,
+      "crc32": "5e90797b",
+      "hash64": "0c54ef0c262c0dba",
+      "path": "frame-sequences/01-locomotion-directions/0139.png"
+    },
+    {
+      "bytes": 10486,
+      "crc32": "6208331a",
+      "hash64": "52af4b19ce62f989",
+      "path": "frame-sequences/01-locomotion-directions/0140.png"
+    },
+    {
+      "bytes": 10486,
+      "crc32": "6208331a",
+      "hash64": "52af4b19ce62f989",
+      "path": "frame-sequences/01-locomotion-directions/0141.png"
+    },
+    {
+      "bytes": 11276,
+      "crc32": "5e90797b",
+      "hash64": "0c54ef0c262c0dba",
+      "path": "frame-sequences/01-locomotion-directions/0142.png"
+    },
+    {
+      "bytes": 11276,
+      "crc32": "5e90797b",
+      "hash64": "0c54ef0c262c0dba",
+      "path": "frame-sequences/01-locomotion-directions/0143.png"
+    },
+    {
+      "bytes": 11276,
+      "crc32": "5e90797b",
+      "hash64": "0c54ef0c262c0dba",
+      "path": "frame-sequences/01-locomotion-directions/0144.png"
+    },
+    {
+      "bytes": 11276,
+      "crc32": "5e90797b",
+      "hash64": "0c54ef0c262c0dba",
+      "path": "frame-sequences/01-locomotion-directions/0145.png"
+    },
+    {
+      "bytes": 11276,
+      "crc32": "5e90797b",
+      "hash64": "0c54ef0c262c0dba",
+      "path": "frame-sequences/01-locomotion-directions/0146.png"
+    },
+    {
+      "bytes": 11276,
+      "crc32": "5e90797b",
+      "hash64": "0c54ef0c262c0dba",
+      "path": "frame-sequences/01-locomotion-directions/0147.png"
+    },
+    {
+      "bytes": 11276,
+      "crc32": "5e90797b",
+      "hash64": "0c54ef0c262c0dba",
+      "path": "frame-sequences/01-locomotion-directions/0148.png"
+    },
+    {
+      "bytes": 11276,
+      "crc32": "5e90797b",
+      "hash64": "0c54ef0c262c0dba",
+      "path": "frame-sequences/01-locomotion-directions/0149.png"
+    },
+    {
+      "bytes": 11276,
+      "crc32": "5e90797b",
+      "hash64": "0c54ef0c262c0dba",
+      "path": "frame-sequences/01-locomotion-directions/0150.png"
+    },
+    {
+      "bytes": 11276,
+      "crc32": "5e90797b",
+      "hash64": "0c54ef0c262c0dba",
+      "path": "frame-sequences/01-locomotion-directions/0151.png"
+    },
+    {
+      "bytes": 11276,
+      "crc32": "5e90797b",
+      "hash64": "0c54ef0c262c0dba",
+      "path": "frame-sequences/01-locomotion-directions/0152.png"
+    },
+    {
+      "bytes": 11276,
+      "crc32": "5e90797b",
+      "hash64": "0c54ef0c262c0dba",
+      "path": "frame-sequences/01-locomotion-directions/0153.png"
+    },
+    {
+      "bytes": 10032,
+      "crc32": "0e5e5a40",
+      "hash64": "5ba2749b0d1d169c",
+      "path": "frame-sequences/01-locomotion-directions/0154.png"
+    },
+    {
+      "bytes": 10032,
+      "crc32": "0e5e5a40",
+      "hash64": "5ba2749b0d1d169c",
+      "path": "frame-sequences/01-locomotion-directions/0155.png"
+    },
+    {
+      "bytes": 10032,
+      "crc32": "0e5e5a40",
+      "hash64": "5ba2749b0d1d169c",
+      "path": "frame-sequences/01-locomotion-directions/0156.png"
+    },
+    {
+      "bytes": 10032,
+      "crc32": "0e5e5a40",
+      "hash64": "5ba2749b0d1d169c",
+      "path": "frame-sequences/01-locomotion-directions/0157.png"
+    },
+    {
+      "bytes": 10032,
+      "crc32": "0e5e5a40",
+      "hash64": "5ba2749b0d1d169c",
+      "path": "frame-sequences/01-locomotion-directions/0158.png"
+    },
+    {
+      "bytes": 10032,
+      "crc32": "0e5e5a40",
+      "hash64": "5ba2749b0d1d169c",
+      "path": "frame-sequences/01-locomotion-directions/0159.png"
+    },
+    {
+      "bytes": 10032,
+      "crc32": "0e5e5a40",
+      "hash64": "5ba2749b0d1d169c",
+      "path": "frame-sequences/01-locomotion-directions/0160.png"
+    },
+    {
+      "bytes": 10032,
+      "crc32": "0e5e5a40",
+      "hash64": "5ba2749b0d1d169c",
+      "path": "frame-sequences/01-locomotion-directions/0161.png"
+    },
+    {
+      "bytes": 10032,
+      "crc32": "0e5e5a40",
+      "hash64": "5ba2749b0d1d169c",
+      "path": "frame-sequences/01-locomotion-directions/0162.png"
+    },
+    {
+      "bytes": 10032,
+      "crc32": "0e5e5a40",
+      "hash64": "5ba2749b0d1d169c",
+      "path": "frame-sequences/01-locomotion-directions/0163.png"
+    },
+    {
+      "bytes": 10032,
+      "crc32": "0e5e5a40",
+      "hash64": "5ba2749b0d1d169c",
+      "path": "frame-sequences/01-locomotion-directions/0164.png"
+    },
+    {
+      "bytes": 10032,
+      "crc32": "0e5e5a40",
+      "hash64": "5ba2749b0d1d169c",
+      "path": "frame-sequences/01-locomotion-directions/0165.png"
+    },
+    {
+      "bytes": 10032,
+      "crc32": "0e5e5a40",
+      "hash64": "5ba2749b0d1d169c",
+      "path": "frame-sequences/01-locomotion-directions/0166.png"
+    },
+    {
+      "bytes": 10032,
+      "crc32": "0e5e5a40",
+      "hash64": "5ba2749b0d1d169c",
+      "path": "frame-sequences/01-locomotion-directions/0167.png"
+    },
+    {
+      "bytes": 10486,
+      "crc32": "6208331a",
+      "hash64": "52af4b19ce62f989",
+      "path": "frame-sequences/01-locomotion-directions/0168.png"
+    },
+    {
+      "bytes": 10486,
+      "crc32": "6208331a",
+      "hash64": "52af4b19ce62f989",
+      "path": "frame-sequences/01-locomotion-directions/0169.png"
+    },
+    {
+      "bytes": 11276,
+      "crc32": "5e90797b",
+      "hash64": "0c54ef0c262c0dba",
+      "path": "frame-sequences/01-locomotion-directions/0170.png"
+    },
+    {
+      "bytes": 11276,
+      "crc32": "5e90797b",
+      "hash64": "0c54ef0c262c0dba",
+      "path": "frame-sequences/01-locomotion-directions/0171.png"
+    },
+    {
+      "bytes": 11276,
+      "crc32": "5e90797b",
+      "hash64": "0c54ef0c262c0dba",
+      "path": "frame-sequences/01-locomotion-directions/0172.png"
+    },
+    {
+      "bytes": 11276,
+      "crc32": "5e90797b",
+      "hash64": "0c54ef0c262c0dba",
+      "path": "frame-sequences/01-locomotion-directions/0173.png"
+    },
+    {
+      "bytes": 10032,
+      "crc32": "0e5e5a40",
+      "hash64": "5ba2749b0d1d169c",
+      "path": "frame-sequences/01-locomotion-directions/0174.png"
+    },
+    {
+      "bytes": 10032,
+      "crc32": "0e5e5a40",
+      "hash64": "5ba2749b0d1d169c",
+      "path": "frame-sequences/01-locomotion-directions/0175.png"
+    },
+    {
+      "bytes": 10032,
+      "crc32": "0e5e5a40",
+      "hash64": "5ba2749b0d1d169c",
+      "path": "frame-sequences/01-locomotion-directions/0176.png"
+    },
+    {
+      "bytes": 10032,
+      "crc32": "0e5e5a40",
+      "hash64": "5ba2749b0d1d169c",
+      "path": "frame-sequences/01-locomotion-directions/0177.png"
+    },
+    {
+      "bytes": 10032,
+      "crc32": "0e5e5a40",
+      "hash64": "5ba2749b0d1d169c",
+      "path": "frame-sequences/01-locomotion-directions/0178.png"
+    },
+    {
+      "bytes": 10032,
+      "crc32": "0e5e5a40",
+      "hash64": "5ba2749b0d1d169c",
+      "path": "frame-sequences/01-locomotion-directions/0179.png"
+    },
+    {
+      "bytes": 10032,
+      "crc32": "0e5e5a40",
+      "hash64": "5ba2749b0d1d169c",
+      "path": "frame-sequences/01-locomotion-directions/0180.png"
+    },
+    {
+      "bytes": 10032,
+      "crc32": "0e5e5a40",
+      "hash64": "5ba2749b0d1d169c",
+      "path": "frame-sequences/01-locomotion-directions/0181.png"
+    },
+    {
+      "bytes": 11645,
+      "crc32": "0d7280de",
+      "hash64": "b4af8495bc78ef3e",
+      "path": "frame-sequences/01-locomotion-directions/0182.png"
+    },
+    {
+      "bytes": 11645,
+      "crc32": "0d7280de",
+      "hash64": "b4af8495bc78ef3e",
+      "path": "frame-sequences/01-locomotion-directions/0183.png"
+    },
+    {
+      "bytes": 11645,
+      "crc32": "0d7280de",
+      "hash64": "b4af8495bc78ef3e",
+      "path": "frame-sequences/01-locomotion-directions/0184.png"
+    },
+    {
+      "bytes": 11645,
+      "crc32": "0d7280de",
+      "hash64": "b4af8495bc78ef3e",
+      "path": "frame-sequences/01-locomotion-directions/0185.png"
+    },
+    {
+      "bytes": 10722,
+      "crc32": "ba05c394",
+      "hash64": "17a5dafffc74c43c",
+      "path": "frame-sequences/01-locomotion-directions/0186.png"
+    },
+    {
+      "bytes": 10722,
+      "crc32": "ba05c394",
+      "hash64": "17a5dafffc74c43c",
+      "path": "frame-sequences/01-locomotion-directions/0187.png"
+    },
+    {
+      "bytes": 10722,
+      "crc32": "ba05c394",
+      "hash64": "17a5dafffc74c43c",
+      "path": "frame-sequences/01-locomotion-directions/0188.png"
+    },
+    {
+      "bytes": 10722,
+      "crc32": "ba05c394",
+      "hash64": "17a5dafffc74c43c",
+      "path": "frame-sequences/01-locomotion-directions/0189.png"
+    },
+    {
+      "bytes": 10722,
+      "crc32": "ba05c394",
+      "hash64": "17a5dafffc74c43c",
+      "path": "frame-sequences/01-locomotion-directions/0190.png"
+    },
+    {
+      "bytes": 10722,
+      "crc32": "ba05c394",
+      "hash64": "17a5dafffc74c43c",
+      "path": "frame-sequences/01-locomotion-directions/0191.png"
+    },
+    {
+      "bytes": 10722,
+      "crc32": "ba05c394",
+      "hash64": "17a5dafffc74c43c",
+      "path": "frame-sequences/01-locomotion-directions/0192.png"
+    },
+    {
+      "bytes": 10722,
+      "crc32": "ba05c394",
+      "hash64": "17a5dafffc74c43c",
+      "path": "frame-sequences/01-locomotion-directions/0193.png"
+    },
+    {
+      "bytes": 10722,
+      "crc32": "ba05c394",
+      "hash64": "17a5dafffc74c43c",
+      "path": "frame-sequences/01-locomotion-directions/0194.png"
+    },
+    {
+      "bytes": 10722,
+      "crc32": "ba05c394",
+      "hash64": "17a5dafffc74c43c",
+      "path": "frame-sequences/01-locomotion-directions/0195.png"
+    },
+    {
+      "bytes": 10494,
+      "crc32": "86a3d846",
+      "hash64": "3173b42482ad5867",
+      "path": "frame-sequences/01-locomotion-directions/0196.png"
+    },
+    {
+      "bytes": 10522,
+      "crc32": "81db3041",
+      "hash64": "2ace408290111b32",
+      "path": "frame-sequences/01-locomotion-directions/0197.png"
+    },
+    {
+      "bytes": 10688,
+      "crc32": "92b79499",
+      "hash64": "861623ffaedf5049",
+      "path": "frame-sequences/01-locomotion-directions/0198.png"
+    },
+    {
+      "bytes": 10670,
+      "crc32": "eda60b59",
+      "hash64": "fb412ac953bf5c39",
+      "path": "frame-sequences/01-locomotion-directions/0199.png"
+    },
+    {
+      "bytes": 10740,
+      "crc32": "bec338fb",
+      "hash64": "2fe0aa42a37d51ed",
+      "path": "frame-sequences/01-locomotion-directions/0200.png"
+    },
+    {
+      "bytes": 10697,
+      "crc32": "36495ee5",
+      "hash64": "7eac14a4a5e7d747",
+      "path": "frame-sequences/01-locomotion-directions/0201.png"
+    },
+    {
+      "bytes": 10650,
+      "crc32": "0f8aa409",
+      "hash64": "d595b42d7347a4e3",
+      "path": "frame-sequences/01-locomotion-directions/0202.png"
+    },
+    {
+      "bytes": 10610,
+      "crc32": "d8804b76",
+      "hash64": "32aa88692f897f49",
+      "path": "frame-sequences/01-locomotion-directions/0203.png"
+    },
+    {
+      "bytes": 10655,
+      "crc32": "3d6038a4",
+      "hash64": "6b4a43b67c72c88f",
+      "path": "frame-sequences/01-locomotion-directions/0204.png"
+    },
+    {
+      "bytes": 10748,
+      "crc32": "777ee407",
+      "hash64": "e795529f15f915b7",
+      "path": "frame-sequences/01-locomotion-directions/0205.png"
+    },
+    {
+      "bytes": 10719,
+      "crc32": "85871a41",
+      "hash64": "edbc24438eedb7f9",
+      "path": "frame-sequences/01-locomotion-directions/0206.png"
+    },
+    {
+      "bytes": 10724,
+      "crc32": "c2ab91dd",
+      "hash64": "85bfd015591ea338",
+      "path": "frame-sequences/01-locomotion-directions/0207.png"
+    },
+    {
+      "bytes": 10726,
+      "crc32": "2bf1d2ba",
+      "hash64": "70f3fae8e17e1857",
+      "path": "frame-sequences/01-locomotion-directions/0208.png"
+    },
+    {
+      "bytes": 10762,
+      "crc32": "7fd2fff3",
+      "hash64": "a0209eef0876dfcf",
+      "path": "frame-sequences/01-locomotion-directions/0209.png"
+    },
+    {
+      "bytes": 10604,
+      "crc32": "4b747f63",
+      "hash64": "c0e2a4540506cd72",
+      "path": "frame-sequences/01-locomotion-directions/0210.png"
+    },
+    {
+      "bytes": 10582,
+      "crc32": "10a58fb7",
+      "hash64": "3ea774c756d55712",
+      "path": "frame-sequences/01-locomotion-directions/0211.png"
+    },
+    {
+      "bytes": 10481,
+      "crc32": "385e363d",
+      "hash64": "b0017076135b4150",
+      "path": "frame-sequences/01-locomotion-directions/0212.png"
+    },
+    {
+      "bytes": 10549,
+      "crc32": "b030065f",
+      "hash64": "fdfbb291000d00ba",
+      "path": "frame-sequences/01-locomotion-directions/0213.png"
+    },
+    {
+      "bytes": 10545,
+      "crc32": "f830e8bc",
+      "hash64": "87b486077b0bb600",
+      "path": "frame-sequences/01-locomotion-directions/0214.png"
+    },
+    {
+      "bytes": 10545,
+      "crc32": "f830e8bc",
+      "hash64": "87b486077b0bb600",
+      "path": "frame-sequences/01-locomotion-directions/0215.png"
+    },
+    {
+      "bytes": 10545,
+      "crc32": "c01994c6",
+      "hash64": "c2cdbfdbe2ccb1e4",
+      "path": "frame-sequences/01-locomotion-directions/0216.png"
+    },
+    {
+      "bytes": 10534,
+      "crc32": "7922ce29",
+      "hash64": "406b056fb4581e1e",
+      "path": "frame-sequences/01-locomotion-directions/0217.png"
+    },
+    {
+      "bytes": 10517,
+      "crc32": "511b7782",
+      "hash64": "0b675155aa683686",
+      "path": "frame-sequences/01-locomotion-directions/0218.png"
+    },
+    {
+      "bytes": 10578,
+      "crc32": "2a0aafa5",
+      "hash64": "2e0637d02e27454c",
+      "path": "frame-sequences/01-locomotion-directions/0219.png"
+    },
+    {
+      "bytes": 11558,
+      "crc32": "edfbcfc9",
+      "hash64": "7e22be5aaae5cac4",
+      "path": "frame-sequences/01-locomotion-directions/0220.png"
+    },
+    {
+      "bytes": 10265,
+      "crc32": "42d8b0e5",
+      "hash64": "a9326d641dd154f3",
+      "path": "frame-sequences/01-locomotion-directions/0221.png"
+    },
+    {
+      "bytes": 10180,
+      "crc32": "2d54bb20",
+      "hash64": "9daffef54d80dcfe",
+      "path": "frame-sequences/01-locomotion-directions/0222.png"
+    },
+    {
+      "bytes": 10198,
+      "crc32": "93d7590b",
+      "hash64": "b707153f0287f7d8",
+      "path": "frame-sequences/01-locomotion-directions/0223.png"
+    },
+    {
+      "bytes": 10486,
+      "crc32": "6208331a",
+      "hash64": "52af4b19ce62f989",
+      "path": "frame-sequences/01-locomotion-directions/0224.png"
+    },
+    {
+      "bytes": 10486,
+      "crc32": "6208331a",
+      "hash64": "52af4b19ce62f989",
+      "path": "frame-sequences/01-locomotion-directions/0225.png"
+    },
+    {
+      "bytes": 10486,
+      "crc32": "6208331a",
+      "hash64": "52af4b19ce62f989",
+      "path": "frame-sequences/01-locomotion-directions/0226.png"
+    },
+    {
+      "bytes": 10486,
+      "crc32": "6208331a",
+      "hash64": "52af4b19ce62f989",
+      "path": "frame-sequences/01-locomotion-directions/0227.png"
+    },
+    {
+      "bytes": 10486,
+      "crc32": "6208331a",
+      "hash64": "52af4b19ce62f989",
+      "path": "frame-sequences/01-locomotion-directions/0228.png"
+    },
+    {
+      "bytes": 10486,
+      "crc32": "6208331a",
+      "hash64": "52af4b19ce62f989",
+      "path": "frame-sequences/01-locomotion-directions/0229.png"
+    },
+    {
+      "bytes": 10486,
+      "crc32": "6208331a",
+      "hash64": "52af4b19ce62f989",
+      "path": "frame-sequences/01-locomotion-directions/0230.png"
+    },
+    {
+      "bytes": 10486,
+      "crc32": "6208331a",
+      "hash64": "52af4b19ce62f989",
+      "path": "frame-sequences/01-locomotion-directions/0231.png"
+    },
+    {
+      "bytes": 10486,
+      "crc32": "6208331a",
+      "hash64": "52af4b19ce62f989",
+      "path": "frame-sequences/01-locomotion-directions/0232.png"
+    },
+    {
+      "bytes": 10486,
+      "crc32": "6208331a",
+      "hash64": "52af4b19ce62f989",
+      "path": "frame-sequences/01-locomotion-directions/0233.png"
+    },
+    {
+      "bytes": 10486,
+      "crc32": "6208331a",
+      "hash64": "52af4b19ce62f989",
+      "path": "frame-sequences/01-locomotion-directions/0234.png"
+    },
+    {
+      "bytes": 10486,
+      "crc32": "6208331a",
+      "hash64": "52af4b19ce62f989",
+      "path": "frame-sequences/01-locomotion-directions/0235.png"
+    },
+    {
+      "bytes": 10494,
+      "crc32": "86a3d846",
+      "hash64": "3173b42482ad5867",
+      "path": "frame-sequences/01-locomotion-directions/0236.png"
+    },
+    {
+      "bytes": 10522,
+      "crc32": "81db3041",
+      "hash64": "2ace408290111b32",
+      "path": "frame-sequences/01-locomotion-directions/0237.png"
+    },
+    {
+      "bytes": 10688,
+      "crc32": "92b79499",
+      "hash64": "861623ffaedf5049",
+      "path": "frame-sequences/01-locomotion-directions/0238.png"
+    },
+    {
+      "bytes": 10670,
+      "crc32": "eda60b59",
+      "hash64": "fb412ac953bf5c39",
+      "path": "frame-sequences/01-locomotion-directions/0239.png"
+    },
+    {
+      "bytes": 10740,
+      "crc32": "bec338fb",
+      "hash64": "2fe0aa42a37d51ed",
+      "path": "frame-sequences/01-locomotion-directions/0240.png"
+    },
+    {
+      "bytes": 10697,
+      "crc32": "36495ee5",
+      "hash64": "7eac14a4a5e7d747",
+      "path": "frame-sequences/01-locomotion-directions/0241.png"
+    },
+    {
+      "bytes": 10650,
+      "crc32": "0f8aa409",
+      "hash64": "d595b42d7347a4e3",
+      "path": "frame-sequences/01-locomotion-directions/0242.png"
+    },
+    {
+      "bytes": 10610,
+      "crc32": "d8804b76",
+      "hash64": "32aa88692f897f49",
+      "path": "frame-sequences/01-locomotion-directions/0243.png"
+    },
+    {
+      "bytes": 10655,
+      "crc32": "3d6038a4",
+      "hash64": "6b4a43b67c72c88f",
+      "path": "frame-sequences/01-locomotion-directions/0244.png"
+    },
+    {
+      "bytes": 10748,
+      "crc32": "777ee407",
+      "hash64": "e795529f15f915b7",
+      "path": "frame-sequences/01-locomotion-directions/0245.png"
+    },
+    {
+      "bytes": 10719,
+      "crc32": "85871a41",
+      "hash64": "edbc24438eedb7f9",
+      "path": "frame-sequences/01-locomotion-directions/0246.png"
+    },
+    {
+      "bytes": 10724,
+      "crc32": "c2ab91dd",
+      "hash64": "85bfd015591ea338",
+      "path": "frame-sequences/01-locomotion-directions/0247.png"
+    },
+    {
+      "bytes": 10545,
+      "crc32": "faa1aed8",
+      "hash64": "9a1660bc37a6ea60",
+      "path": "frame-sequences/01-locomotion-directions/0248.png"
+    },
+    {
+      "bytes": 10520,
+      "crc32": "ee050568",
+      "hash64": "83e8c1df412c9b77",
+      "path": "frame-sequences/01-locomotion-directions/0249.png"
+    },
+    {
+      "bytes": 10606,
+      "crc32": "48ac2b29",
+      "hash64": "cca0a581701509ef",
+      "path": "frame-sequences/01-locomotion-directions/0250.png"
+    },
+    {
+      "bytes": 10645,
+      "crc32": "8b383769",
+      "hash64": "4b66200e86629ce7",
+      "path": "frame-sequences/01-locomotion-directions/0251.png"
+    },
+    {
+      "bytes": 10486,
+      "crc32": "6208331a",
+      "hash64": "52af4b19ce62f989",
+      "path": "frame-sequences/01-locomotion-directions/0252.png"
+    },
+    {
+      "bytes": 10486,
+      "crc32": "6208331a",
+      "hash64": "52af4b19ce62f989",
+      "path": "frame-sequences/01-locomotion-directions/0253.png"
+    },
+    {
+      "bytes": 10486,
+      "crc32": "6208331a",
+      "hash64": "52af4b19ce62f989",
+      "path": "frame-sequences/01-locomotion-directions/0254.png"
+    },
+    {
+      "bytes": 10486,
+      "crc32": "6208331a",
+      "hash64": "52af4b19ce62f989",
+      "path": "frame-sequences/01-locomotion-directions/0255.png"
+    },
+    {
+      "bytes": 10486,
+      "crc32": "6208331a",
+      "hash64": "52af4b19ce62f989",
+      "path": "frame-sequences/01-locomotion-directions/0256.png"
+    },
+    {
+      "bytes": 10486,
+      "crc32": "6208331a",
+      "hash64": "52af4b19ce62f989",
+      "path": "frame-sequences/01-locomotion-directions/0257.png"
+    },
+    {
+      "bytes": 10486,
+      "crc32": "6208331a",
+      "hash64": "52af4b19ce62f989",
+      "path": "frame-sequences/01-locomotion-directions/0258.png"
+    },
+    {
+      "bytes": 10486,
+      "crc32": "6208331a",
+      "hash64": "52af4b19ce62f989",
+      "path": "frame-sequences/01-locomotion-directions/0259.png"
+    },
+    {
+      "bytes": 10486,
+      "crc32": "6208331a",
+      "hash64": "52af4b19ce62f989",
+      "path": "frame-sequences/01-locomotion-directions/0260.png"
+    },
+    {
+      "bytes": 10486,
+      "crc32": "6208331a",
+      "hash64": "52af4b19ce62f989",
+      "path": "frame-sequences/01-locomotion-directions/0261.png"
+    },
+    {
+      "bytes": 10486,
+      "crc32": "6208331a",
+      "hash64": "52af4b19ce62f989",
+      "path": "frame-sequences/01-locomotion-directions/0262.png"
+    },
+    {
+      "bytes": 10486,
+      "crc32": "6208331a",
+      "hash64": "52af4b19ce62f989",
+      "path": "frame-sequences/01-locomotion-directions/0263.png"
+    },
+    {
+      "bytes": 10486,
+      "crc32": "6208331a",
+      "hash64": "52af4b19ce62f989",
+      "path": "frame-sequences/01-locomotion-directions/0264.png"
+    },
+    {
+      "bytes": 10486,
+      "crc32": "6208331a",
+      "hash64": "52af4b19ce62f989",
+      "path": "frame-sequences/01-locomotion-directions/0265.png"
+    },
+    {
+      "bytes": 10594,
+      "crc32": "27259126",
+      "hash64": "94411610972c3531",
+      "path": "frame-sequences/01-locomotion-directions/0266.png"
+    },
+    {
+      "bytes": 10594,
+      "crc32": "27259126",
+      "hash64": "94411610972c3531",
+      "path": "frame-sequences/01-locomotion-directions/0267.png"
+    },
+    {
+      "bytes": 10594,
+      "crc32": "27259126",
+      "hash64": "94411610972c3531",
+      "path": "frame-sequences/01-locomotion-directions/0268.png"
+    },
+    {
+      "bytes": 10594,
+      "crc32": "27259126",
+      "hash64": "94411610972c3531",
+      "path": "frame-sequences/01-locomotion-directions/0269.png"
+    },
+    {
+      "bytes": 10594,
+      "crc32": "27259126",
+      "hash64": "94411610972c3531",
+      "path": "frame-sequences/01-locomotion-directions/0270.png"
+    },
+    {
+      "bytes": 10594,
+      "crc32": "27259126",
+      "hash64": "94411610972c3531",
+      "path": "frame-sequences/01-locomotion-directions/0271.png"
+    },
+    {
+      "bytes": 10594,
+      "crc32": "27259126",
+      "hash64": "94411610972c3531",
+      "path": "frame-sequences/01-locomotion-directions/0272.png"
+    },
+    {
+      "bytes": 10594,
+      "crc32": "27259126",
+      "hash64": "94411610972c3531",
+      "path": "frame-sequences/01-locomotion-directions/0273.png"
+    },
+    {
+      "bytes": 10594,
+      "crc32": "27259126",
+      "hash64": "94411610972c3531",
+      "path": "frame-sequences/01-locomotion-directions/0274.png"
+    },
+    {
+      "bytes": 10594,
+      "crc32": "27259126",
+      "hash64": "94411610972c3531",
+      "path": "frame-sequences/01-locomotion-directions/0275.png"
+    },
+    {
+      "bytes": 10594,
+      "crc32": "27259126",
+      "hash64": "94411610972c3531",
+      "path": "frame-sequences/01-locomotion-directions/0276.png"
+    },
+    {
+      "bytes": 10594,
+      "crc32": "27259126",
+      "hash64": "94411610972c3531",
+      "path": "frame-sequences/01-locomotion-directions/0277.png"
+    },
+    {
+      "bytes": 10594,
+      "crc32": "27259126",
+      "hash64": "94411610972c3531",
+      "path": "frame-sequences/01-locomotion-directions/0278.png"
+    },
+    {
+      "bytes": 10594,
+      "crc32": "27259126",
+      "hash64": "94411610972c3531",
+      "path": "frame-sequences/01-locomotion-directions/0279.png"
+    },
+    {
+      "bytes": 10494,
+      "crc32": "86a3d846",
+      "hash64": "3173b42482ad5867",
+      "path": "frame-sequences/01-locomotion-directions/0280.png"
+    },
+    {
+      "bytes": 10522,
+      "crc32": "81db3041",
+      "hash64": "2ace408290111b32",
+      "path": "frame-sequences/01-locomotion-directions/0281.png"
+    },
+    {
+      "bytes": 10696,
+      "crc32": "53a9fc04",
+      "hash64": "4f53747467c65852",
+      "path": "frame-sequences/01-locomotion-directions/0282.png"
+    },
+    {
+      "bytes": 10668,
+      "crc32": "7614fa70",
+      "hash64": "e41429916dc9d1f8",
+      "path": "frame-sequences/01-locomotion-directions/0283.png"
+    },
+    {
+      "bytes": 10760,
+      "crc32": "b3c8bbe4",
+      "hash64": "c36f83c37fed42bf",
+      "path": "frame-sequences/01-locomotion-directions/0284.png"
+    },
+    {
+      "bytes": 11530,
+      "crc32": "4167efa3",
+      "hash64": "0d2652b352e6873d",
+      "path": "frame-sequences/01-locomotion-directions/0285.png"
+    },
+    {
+      "bytes": 11470,
+      "crc32": "572b7d44",
+      "hash64": "abbb392036dce94e",
+      "path": "frame-sequences/01-locomotion-directions/0286.png"
+    },
+    {
+      "bytes": 11399,
+      "crc32": "e9995830",
+      "hash64": "f544b574dadc7f77",
+      "path": "frame-sequences/01-locomotion-directions/0287.png"
+    },
+    {
+      "bytes": 11578,
+      "crc32": "43da882f",
+      "hash64": "f078dfc51e0dc86c",
+      "path": "frame-sequences/01-locomotion-directions/0288.png"
+    },
+    {
+      "bytes": 10227,
+      "crc32": "ea70a011",
+      "hash64": "137fcb1122254594",
+      "path": "frame-sequences/01-locomotion-directions/0289.png"
+    },
+    {
+      "bytes": 10127,
+      "crc32": "c683beff",
+      "hash64": "ffb48c92e61908b0",
+      "path": "frame-sequences/01-locomotion-directions/0290.png"
+    },
+    {
+      "bytes": 10069,
+      "crc32": "dd5f987d",
+      "hash64": "b6bca87d2b441d6b",
+      "path": "frame-sequences/01-locomotion-directions/0291.png"
+    },
+    {
+      "bytes": 10073,
+      "crc32": "7e207045",
+      "hash64": "d4a337dcbf6d71ee",
+      "path": "frame-sequences/01-locomotion-directions/0292.png"
+    },
+    {
+      "bytes": 10162,
+      "crc32": "596e2c61",
+      "hash64": "a256c98e43f02c7c",
+      "path": "frame-sequences/01-locomotion-directions/0293.png"
+    },
+    {
+      "bytes": 10200,
+      "crc32": "2768973b",
+      "hash64": "e8cef7e2f8f403c6",
+      "path": "frame-sequences/01-locomotion-directions/0294.png"
+    },
+    {
+      "bytes": 10191,
+      "crc32": "1db07547",
+      "hash64": "45df23bc04477bef",
+      "path": "frame-sequences/01-locomotion-directions/0295.png"
+    },
+    {
+      "bytes": 10173,
+      "crc32": "e4e6460b",
+      "hash64": "a4efeffb13e828d8",
+      "path": "frame-sequences/01-locomotion-directions/0296.png"
+    },
+    {
+      "bytes": 10306,
+      "crc32": "4fdd5031",
+      "hash64": "299f9f2a7aedbffe",
+      "path": "frame-sequences/01-locomotion-directions/0297.png"
+    },
+    {
+      "bytes": 10127,
+      "crc32": "65287557",
+      "hash64": "4a3ea4382d487868",
+      "path": "frame-sequences/01-locomotion-directions/0298.png"
+    },
+    {
+      "bytes": 10051,
+      "crc32": "f1fa67ba",
+      "hash64": "310d6ff96e55174d",
+      "path": "frame-sequences/01-locomotion-directions/0299.png"
+    },
+    {
+      "bytes": 10072,
+      "crc32": "7170d68e",
+      "hash64": "add21ed118fb0427",
+      "path": "frame-sequences/01-locomotion-directions/0300.png"
+    },
+    {
+      "bytes": 10077,
+      "crc32": "f654e4d9",
+      "hash64": "3b244e75490219d6",
+      "path": "frame-sequences/01-locomotion-directions/0301.png"
+    },
+    {
+      "bytes": 10191,
+      "crc32": "8bbd3627",
+      "hash64": "6274335452575d88",
+      "path": "frame-sequences/01-locomotion-directions/0302.png"
+    },
+    {
+      "bytes": 10267,
+      "crc32": "d2868445",
+      "hash64": "c2184f5298d4ed4e",
+      "path": "frame-sequences/01-locomotion-directions/0303.png"
+    },
+    {
+      "bytes": 10203,
+      "crc32": "bf9825d1",
+      "hash64": "a1117e04b244b66f",
+      "path": "frame-sequences/01-locomotion-directions/0304.png"
+    },
+    {
+      "bytes": 10241,
+      "crc32": "8441e80d",
+      "hash64": "cf2784b7f78e0e3d",
+      "path": "frame-sequences/01-locomotion-directions/0305.png"
+    },
+    {
+      "bytes": 10165,
+      "crc32": "038a2327",
+      "hash64": "22c78d06e5366f0b",
+      "path": "frame-sequences/01-locomotion-directions/0306.png"
+    },
+    {
+      "bytes": 10129,
+      "crc32": "9dde2c4d",
+      "hash64": "d29f904b0da22338",
+      "path": "frame-sequences/01-locomotion-directions/0307.png"
+    },
+    {
+      "bytes": 10494,
+      "crc32": "86a3d846",
+      "hash64": "3173b42482ad5867",
+      "path": "frame-sequences/02-speech-actions-expressions/0000.png"
+    },
+    {
+      "bytes": 10522,
+      "crc32": "81db3041",
+      "hash64": "2ace408290111b32",
+      "path": "frame-sequences/02-speech-actions-expressions/0001.png"
+    },
+    {
+      "bytes": 10696,
+      "crc32": "53a9fc04",
+      "hash64": "4f53747467c65852",
+      "path": "frame-sequences/02-speech-actions-expressions/0002.png"
+    },
+    {
+      "bytes": 10668,
+      "crc32": "7614fa70",
+      "hash64": "e41429916dc9d1f8",
+      "path": "frame-sequences/02-speech-actions-expressions/0003.png"
+    },
+    {
+      "bytes": 10760,
+      "crc32": "b3c8bbe4",
+      "hash64": "c36f83c37fed42bf",
+      "path": "frame-sequences/02-speech-actions-expressions/0004.png"
+    },
+    {
+      "bytes": 11530,
+      "crc32": "4167efa3",
+      "hash64": "0d2652b352e6873d",
+      "path": "frame-sequences/02-speech-actions-expressions/0005.png"
+    },
+    {
+      "bytes": 11470,
+      "crc32": "572b7d44",
+      "hash64": "abbb392036dce94e",
+      "path": "frame-sequences/02-speech-actions-expressions/0006.png"
+    },
+    {
+      "bytes": 11399,
+      "crc32": "e9995830",
+      "hash64": "f544b574dadc7f77",
+      "path": "frame-sequences/02-speech-actions-expressions/0007.png"
+    },
+    {
+      "bytes": 11578,
+      "crc32": "43da882f",
+      "hash64": "f078dfc51e0dc86c",
+      "path": "frame-sequences/02-speech-actions-expressions/0008.png"
+    },
+    {
+      "bytes": 10227,
+      "crc32": "ea70a011",
+      "hash64": "137fcb1122254594",
+      "path": "frame-sequences/02-speech-actions-expressions/0009.png"
+    },
+    {
+      "bytes": 10127,
+      "crc32": "c683beff",
+      "hash64": "ffb48c92e61908b0",
+      "path": "frame-sequences/02-speech-actions-expressions/0010.png"
+    },
+    {
+      "bytes": 10069,
+      "crc32": "dd5f987d",
+      "hash64": "b6bca87d2b441d6b",
+      "path": "frame-sequences/02-speech-actions-expressions/0011.png"
+    },
+    {
+      "bytes": 10210,
+      "crc32": "fda591b6",
+      "hash64": "45012b02f6be961c",
+      "path": "frame-sequences/02-speech-actions-expressions/0012.png"
+    },
+    {
+      "bytes": 10230,
+      "crc32": "bb1f5677",
+      "hash64": "f8ddfda8573b6059",
+      "path": "frame-sequences/02-speech-actions-expressions/0013.png"
+    },
+    {
+      "bytes": 10157,
+      "crc32": "650ca707",
+      "hash64": "5ada741de5c43198",
+      "path": "frame-sequences/02-speech-actions-expressions/0014.png"
+    },
+    {
+      "bytes": 10184,
+      "crc32": "c97c206a",
+      "hash64": "66da62660c54c509",
+      "path": "frame-sequences/02-speech-actions-expressions/0015.png"
+    },
+    {
+      "bytes": 10254,
+      "crc32": "5880c241",
+      "hash64": "eaa1758070b7e813",
+      "path": "frame-sequences/02-speech-actions-expressions/0016.png"
+    },
+    {
+      "bytes": 10334,
+      "crc32": "b7540443",
+      "hash64": "fc7518f8de98eab0",
+      "path": "frame-sequences/02-speech-actions-expressions/0017.png"
+    },
+    {
+      "bytes": 10183,
+      "crc32": "c2c5d543",
+      "hash64": "b68a2507b44474f1",
+      "path": "frame-sequences/02-speech-actions-expressions/0018.png"
+    },
+    {
+      "bytes": 10111,
+      "crc32": "a0dd98c8",
+      "hash64": "eec1bc63b4cf97b2",
+      "path": "frame-sequences/02-speech-actions-expressions/0019.png"
+    },
+    {
+      "bytes": 10123,
+      "crc32": "689bb3ac",
+      "hash64": "ba146a3e7c840cfa",
+      "path": "frame-sequences/02-speech-actions-expressions/0020.png"
+    },
+    {
+      "bytes": 10127,
+      "crc32": "aade00b8",
+      "hash64": "4f05a532aeaadcee",
+      "path": "frame-sequences/02-speech-actions-expressions/0021.png"
+    },
+    {
+      "bytes": 10224,
+      "crc32": "78284538",
+      "hash64": "33123f884d65b3ed",
+      "path": "frame-sequences/02-speech-actions-expressions/0022.png"
+    },
+    {
+      "bytes": 10322,
+      "crc32": "75b1771e",
+      "hash64": "9169f8d8c5969678",
+      "path": "frame-sequences/02-speech-actions-expressions/0023.png"
+    },
+    {
+      "bytes": 10227,
+      "crc32": "644acbe2",
+      "hash64": "476d8a2d645b93b3",
+      "path": "frame-sequences/02-speech-actions-expressions/0024.png"
+    },
+    {
+      "bytes": 10379,
+      "crc32": "ff1c55b1",
+      "hash64": "ccbc6d7f8ad16d54",
+      "path": "frame-sequences/02-speech-actions-expressions/0025.png"
+    },
+    {
+      "bytes": 10187,
+      "crc32": "f6e2b589",
+      "hash64": "81bc94c3bfe2e510",
+      "path": "frame-sequences/02-speech-actions-expressions/0026.png"
+    },
+    {
+      "bytes": 10179,
+      "crc32": "af3c5828",
+      "hash64": "2dcfc0f32773b494",
+      "path": "frame-sequences/02-speech-actions-expressions/0027.png"
+    },
+    {
+      "bytes": 10648,
+      "crc32": "987bcd4e",
+      "hash64": "0d03cac8c6655a96",
+      "path": "frame-sequences/02-speech-actions-expressions/0028.png"
+    },
+    {
+      "bytes": 10574,
+      "crc32": "3d7f13e0",
+      "hash64": "1d69ae9b5567dc39",
+      "path": "frame-sequences/02-speech-actions-expressions/0029.png"
+    },
+    {
+      "bytes": 10750,
+      "crc32": "ad0ed76d",
+      "hash64": "41c70201d5224365",
+      "path": "frame-sequences/02-speech-actions-expressions/0030.png"
+    },
+    {
+      "bytes": 10703,
+      "crc32": "55148f7e",
+      "hash64": "c19d51cf90555943",
+      "path": "frame-sequences/02-speech-actions-expressions/0031.png"
+    },
+    {
+      "bytes": 10788,
+      "crc32": "1fd381a0",
+      "hash64": "18115bcaa06e5451",
+      "path": "frame-sequences/02-speech-actions-expressions/0032.png"
+    },
+    {
+      "bytes": 11577,
+      "crc32": "361f57c1",
+      "hash64": "78c4d29e47f706c0",
+      "path": "frame-sequences/02-speech-actions-expressions/0033.png"
+    },
+    {
+      "bytes": 11512,
+      "crc32": "df54f0ff",
+      "hash64": "94063d699840df58",
+      "path": "frame-sequences/02-speech-actions-expressions/0034.png"
+    },
+    {
+      "bytes": 11425,
+      "crc32": "846877dd",
+      "hash64": "6362acebbf0f4878",
+      "path": "frame-sequences/02-speech-actions-expressions/0035.png"
+    },
+    {
+      "bytes": 11691,
+      "crc32": "2b991c2b",
+      "hash64": "49c7fad9108c454a",
+      "path": "frame-sequences/02-speech-actions-expressions/0036.png"
+    },
+    {
+      "bytes": 10356,
+      "crc32": "3c25bd34",
+      "hash64": "cc57abc1ca86a715",
+      "path": "frame-sequences/02-speech-actions-expressions/0037.png"
+    },
+    {
+      "bytes": 10188,
+      "crc32": "48b3176b",
+      "hash64": "a59fad8e5229450d",
+      "path": "frame-sequences/02-speech-actions-expressions/0038.png"
+    },
+    {
+      "bytes": 10141,
+      "crc32": "094e822c",
+      "hash64": "6db45674a05afb89",
+      "path": "frame-sequences/02-speech-actions-expressions/0039.png"
+    },
+    {
+      "bytes": 10199,
+      "crc32": "19b4134a",
+      "hash64": "cb9a1f07ed67550b",
+      "path": "frame-sequences/02-speech-actions-expressions/0040.png"
+    },
+    {
+      "bytes": 10234,
+      "crc32": "ccfd4ffe",
+      "hash64": "bb5597c8dc36e246",
+      "path": "frame-sequences/02-speech-actions-expressions/0041.png"
+    },
+    {
+      "bytes": 10157,
+      "crc32": "650ca707",
+      "hash64": "5ada741de5c43198",
+      "path": "frame-sequences/02-speech-actions-expressions/0042.png"
+    },
+    {
+      "bytes": 10184,
+      "crc32": "c97c206a",
+      "hash64": "66da62660c54c509",
+      "path": "frame-sequences/02-speech-actions-expressions/0043.png"
+    },
+    {
+      "bytes": 10166,
+      "crc32": "747b0356",
+      "hash64": "684116130497310d",
+      "path": "frame-sequences/02-speech-actions-expressions/0044.png"
+    },
+    {
+      "bytes": 10235,
+      "crc32": "7f3dabbe",
+      "hash64": "39de172f190da6ce",
+      "path": "frame-sequences/02-speech-actions-expressions/0045.png"
+    },
+    {
+      "bytes": 10098,
+      "crc32": "00400786",
+      "hash64": "6f7e8ef5ef126a29",
+      "path": "frame-sequences/02-speech-actions-expressions/0046.png"
+    },
+    {
+      "bytes": 10017,
+      "crc32": "3f858a37",
+      "hash64": "783e8fd7da9c2051",
+      "path": "frame-sequences/02-speech-actions-expressions/0047.png"
+    },
+    {
+      "bytes": 10058,
+      "crc32": "7b72e95a",
+      "hash64": "ba0ef6210c3c571d",
+      "path": "frame-sequences/02-speech-actions-expressions/0048.png"
+    },
+    {
+      "bytes": 10068,
+      "crc32": "2d08a428",
+      "hash64": "2260294e4c90e977",
+      "path": "frame-sequences/02-speech-actions-expressions/0049.png"
+    },
+    {
+      "bytes": 10162,
+      "crc32": "1a50fe20",
+      "hash64": "e4858cb1c8801bf8",
+      "path": "frame-sequences/02-speech-actions-expressions/0050.png"
+    },
+    {
+      "bytes": 10241,
+      "crc32": "c707264c",
+      "hash64": "906c51cd1cb2b97a",
+      "path": "frame-sequences/02-speech-actions-expressions/0051.png"
+    },
+    {
+      "bytes": 10169,
+      "crc32": "a9591128",
+      "hash64": "75dc518a1f965885",
+      "path": "frame-sequences/02-speech-actions-expressions/0052.png"
+    },
+    {
+      "bytes": 10218,
+      "crc32": "d7d3a94b",
+      "hash64": "8d8c0cc2fc296308",
+      "path": "frame-sequences/02-speech-actions-expressions/0053.png"
+    },
+    {
+      "bytes": 10139,
+      "crc32": "5ffcc654",
+      "hash64": "35362e041c2f6194",
+      "path": "frame-sequences/02-speech-actions-expressions/0054.png"
+    },
+    {
+      "bytes": 10104,
+      "crc32": "e54c60b5",
+      "hash64": "d392cbe7a824f486",
+      "path": "frame-sequences/02-speech-actions-expressions/0055.png"
+    },
+    {
+      "bytes": 10486,
+      "crc32": "6208331a",
+      "hash64": "52af4b19ce62f989",
+      "path": "frame-sequences/02-speech-actions-expressions/0056.png"
+    },
+    {
+      "bytes": 10486,
+      "crc32": "6208331a",
+      "hash64": "52af4b19ce62f989",
+      "path": "frame-sequences/02-speech-actions-expressions/0057.png"
+    },
+    {
+      "bytes": 10486,
+      "crc32": "6208331a",
+      "hash64": "52af4b19ce62f989",
+      "path": "frame-sequences/02-speech-actions-expressions/0058.png"
+    },
+    {
+      "bytes": 10486,
+      "crc32": "6208331a",
+      "hash64": "52af4b19ce62f989",
+      "path": "frame-sequences/02-speech-actions-expressions/0059.png"
+    },
+    {
+      "bytes": 10486,
+      "crc32": "6208331a",
+      "hash64": "52af4b19ce62f989",
+      "path": "frame-sequences/02-speech-actions-expressions/0060.png"
+    },
+    {
+      "bytes": 10486,
+      "crc32": "6208331a",
+      "hash64": "52af4b19ce62f989",
+      "path": "frame-sequences/02-speech-actions-expressions/0061.png"
+    },
+    {
+      "bytes": 10486,
+      "crc32": "6208331a",
+      "hash64": "52af4b19ce62f989",
+      "path": "frame-sequences/02-speech-actions-expressions/0062.png"
+    },
+    {
+      "bytes": 10486,
+      "crc32": "6208331a",
+      "hash64": "52af4b19ce62f989",
+      "path": "frame-sequences/02-speech-actions-expressions/0063.png"
+    },
+    {
+      "bytes": 10486,
+      "crc32": "6208331a",
+      "hash64": "52af4b19ce62f989",
+      "path": "frame-sequences/02-speech-actions-expressions/0064.png"
+    },
+    {
+      "bytes": 10486,
+      "crc32": "6208331a",
+      "hash64": "52af4b19ce62f989",
+      "path": "frame-sequences/02-speech-actions-expressions/0065.png"
+    },
+    {
+      "bytes": 10486,
+      "crc32": "6208331a",
+      "hash64": "52af4b19ce62f989",
+      "path": "frame-sequences/02-speech-actions-expressions/0066.png"
+    },
+    {
+      "bytes": 10486,
+      "crc32": "6208331a",
+      "hash64": "52af4b19ce62f989",
+      "path": "frame-sequences/02-speech-actions-expressions/0067.png"
+    },
+    {
+      "bytes": 10704,
+      "crc32": "68ad6def",
+      "hash64": "25e2a0b06fe5c846",
+      "path": "frame-sequences/02-speech-actions-expressions/0068.png"
+    },
+    {
+      "bytes": 10644,
+      "crc32": "6614c64e",
+      "hash64": "e59cfe3bff9d7f70",
+      "path": "frame-sequences/02-speech-actions-expressions/0069.png"
+    },
+    {
+      "bytes": 11723,
+      "crc32": "c996e296",
+      "hash64": "961a1db129cbcb87",
+      "path": "frame-sequences/02-speech-actions-expressions/0070.png"
+    },
+    {
+      "bytes": 11747,
+      "crc32": "e53e3c6b",
+      "hash64": "b05a0a304601ef32",
+      "path": "frame-sequences/02-speech-actions-expressions/0071.png"
+    },
+    {
+      "bytes": 11938,
+      "crc32": "78dd82ee",
+      "hash64": "286c02e9ba84280a",
+      "path": "frame-sequences/02-speech-actions-expressions/0072.png"
+    },
+    {
+      "bytes": 11938,
+      "crc32": "78dd82ee",
+      "hash64": "286c02e9ba84280a",
+      "path": "frame-sequences/02-speech-actions-expressions/0073.png"
+    },
+    {
+      "bytes": 11938,
+      "crc32": "78dd82ee",
+      "hash64": "286c02e9ba84280a",
+      "path": "frame-sequences/02-speech-actions-expressions/0074.png"
+    },
+    {
+      "bytes": 11938,
+      "crc32": "78dd82ee",
+      "hash64": "286c02e9ba84280a",
+      "path": "frame-sequences/02-speech-actions-expressions/0075.png"
+    },
+    {
+      "bytes": 11938,
+      "crc32": "78dd82ee",
+      "hash64": "286c02e9ba84280a",
+      "path": "frame-sequences/02-speech-actions-expressions/0076.png"
+    },
+    {
+      "bytes": 11938,
+      "crc32": "78dd82ee",
+      "hash64": "286c02e9ba84280a",
+      "path": "frame-sequences/02-speech-actions-expressions/0077.png"
+    },
+    {
+      "bytes": 11938,
+      "crc32": "78dd82ee",
+      "hash64": "286c02e9ba84280a",
+      "path": "frame-sequences/02-speech-actions-expressions/0078.png"
+    },
+    {
+      "bytes": 11938,
+      "crc32": "78dd82ee",
+      "hash64": "286c02e9ba84280a",
+      "path": "frame-sequences/02-speech-actions-expressions/0079.png"
+    },
+    {
+      "bytes": 11938,
+      "crc32": "78dd82ee",
+      "hash64": "286c02e9ba84280a",
+      "path": "frame-sequences/02-speech-actions-expressions/0080.png"
+    },
+    {
+      "bytes": 11938,
+      "crc32": "78dd82ee",
+      "hash64": "286c02e9ba84280a",
+      "path": "frame-sequences/02-speech-actions-expressions/0081.png"
+    },
+    {
+      "bytes": 11938,
+      "crc32": "78dd82ee",
+      "hash64": "286c02e9ba84280a",
+      "path": "frame-sequences/02-speech-actions-expressions/0082.png"
+    },
+    {
+      "bytes": 11938,
+      "crc32": "78dd82ee",
+      "hash64": "286c02e9ba84280a",
+      "path": "frame-sequences/02-speech-actions-expressions/0083.png"
+    },
+    {
+      "bytes": 10704,
+      "crc32": "68ad6def",
+      "hash64": "25e2a0b06fe5c846",
+      "path": "frame-sequences/02-speech-actions-expressions/0084.png"
+    },
+    {
+      "bytes": 10644,
+      "crc32": "6614c64e",
+      "hash64": "e59cfe3bff9d7f70",
+      "path": "frame-sequences/02-speech-actions-expressions/0085.png"
+    },
+    {
+      "bytes": 11723,
+      "crc32": "c996e296",
+      "hash64": "961a1db129cbcb87",
+      "path": "frame-sequences/02-speech-actions-expressions/0086.png"
+    },
+    {
+      "bytes": 11747,
+      "crc32": "e53e3c6b",
+      "hash64": "b05a0a304601ef32",
+      "path": "frame-sequences/02-speech-actions-expressions/0087.png"
+    },
+    {
+      "bytes": 11938,
+      "crc32": "78dd82ee",
+      "hash64": "286c02e9ba84280a",
+      "path": "frame-sequences/02-speech-actions-expressions/0088.png"
+    },
+    {
+      "bytes": 11938,
+      "crc32": "78dd82ee",
+      "hash64": "286c02e9ba84280a",
+      "path": "frame-sequences/02-speech-actions-expressions/0089.png"
+    },
+    {
+      "bytes": 11938,
+      "crc32": "78dd82ee",
+      "hash64": "286c02e9ba84280a",
+      "path": "frame-sequences/02-speech-actions-expressions/0090.png"
+    },
+    {
+      "bytes": 11938,
+      "crc32": "78dd82ee",
+      "hash64": "286c02e9ba84280a",
+      "path": "frame-sequences/02-speech-actions-expressions/0091.png"
+    },
+    {
+      "bytes": 11938,
+      "crc32": "78dd82ee",
+      "hash64": "286c02e9ba84280a",
+      "path": "frame-sequences/02-speech-actions-expressions/0092.png"
+    },
+    {
+      "bytes": 11938,
+      "crc32": "78dd82ee",
+      "hash64": "286c02e9ba84280a",
+      "path": "frame-sequences/02-speech-actions-expressions/0093.png"
+    },
+    {
+      "bytes": 11938,
+      "crc32": "78dd82ee",
+      "hash64": "286c02e9ba84280a",
+      "path": "frame-sequences/02-speech-actions-expressions/0094.png"
+    },
+    {
+      "bytes": 11938,
+      "crc32": "78dd82ee",
+      "hash64": "286c02e9ba84280a",
+      "path": "frame-sequences/02-speech-actions-expressions/0095.png"
+    },
+    {
+      "bytes": 11936,
+      "crc32": "b6ba5002",
+      "hash64": "b3e1a4084621e51b",
+      "path": "frame-sequences/02-speech-actions-expressions/0096.png"
+    },
+    {
+      "bytes": 11850,
+      "crc32": "99860039",
+      "hash64": "8a20ba077adae650",
+      "path": "frame-sequences/02-speech-actions-expressions/0097.png"
+    },
+    {
+      "bytes": 11968,
+      "crc32": "b43894ed",
+      "hash64": "3940039c17044c93",
+      "path": "frame-sequences/02-speech-actions-expressions/0098.png"
+    },
+    {
+      "bytes": 11908,
+      "crc32": "b8b43c45",
+      "hash64": "db17d71ad53daed1",
+      "path": "frame-sequences/02-speech-actions-expressions/0099.png"
+    },
+    {
+      "bytes": 11971,
+      "crc32": "d283b734",
+      "hash64": "cc6517b5777cd4c5",
+      "path": "frame-sequences/02-speech-actions-expressions/0100.png"
+    },
+    {
+      "bytes": 12072,
+      "crc32": "b4bd018c",
+      "hash64": "9651dd2ac2beb0a3",
+      "path": "frame-sequences/02-speech-actions-expressions/0101.png"
+    },
+    {
+      "bytes": 12056,
+      "crc32": "d76fd127",
+      "hash64": "d38225048da9d3f2",
+      "path": "frame-sequences/02-speech-actions-expressions/0102.png"
+    },
+    {
+      "bytes": 12000,
+      "crc32": "c0a68ee0",
+      "hash64": "ce2552e71bee9ab0",
+      "path": "frame-sequences/02-speech-actions-expressions/0103.png"
+    },
+    {
+      "bytes": 12081,
+      "crc32": "0d6f8588",
+      "hash64": "4420e52b018966a3",
+      "path": "frame-sequences/02-speech-actions-expressions/0104.png"
+    },
+    {
+      "bytes": 12063,
+      "crc32": "3f1d58fa",
+      "hash64": "8835357dcde8f922",
+      "path": "frame-sequences/02-speech-actions-expressions/0105.png"
+    },
+    {
+      "bytes": 12001,
+      "crc32": "8ee55a84",
+      "hash64": "fc713da075baf787",
+      "path": "frame-sequences/02-speech-actions-expressions/0106.png"
+    },
+    {
+      "bytes": 11967,
+      "crc32": "e2d7c097",
+      "hash64": "a6d9a387633d4e11",
+      "path": "frame-sequences/02-speech-actions-expressions/0107.png"
+    },
+    {
+      "bytes": 11892,
+      "crc32": "575d5665",
+      "hash64": "ddd36066e2d2c714",
+      "path": "frame-sequences/02-speech-actions-expressions/0108.png"
+    },
+    {
+      "bytes": 11930,
+      "crc32": "6a6633ac",
+      "hash64": "c98efb4668c702dc",
+      "path": "frame-sequences/02-speech-actions-expressions/0109.png"
+    },
+    {
+      "bytes": 12043,
+      "crc32": "e0728cbc",
+      "hash64": "c558e2b3eabf9d20",
+      "path": "frame-sequences/02-speech-actions-expressions/0110.png"
+    },
+    {
+      "bytes": 12040,
+      "crc32": "60736c0b",
+      "hash64": "c05074075b0d306a",
+      "path": "frame-sequences/02-speech-actions-expressions/0111.png"
+    },
+    {
+      "bytes": 10494,
+      "crc32": "86a3d846",
+      "hash64": "3173b42482ad5867",
+      "path": "frame-sequences/02-speech-actions-expressions/0112.png"
+    },
+    {
+      "bytes": 10522,
+      "crc32": "81db3041",
+      "hash64": "2ace408290111b32",
+      "path": "frame-sequences/02-speech-actions-expressions/0113.png"
+    },
+    {
+      "bytes": 10696,
+      "crc32": "53a9fc04",
+      "hash64": "4f53747467c65852",
+      "path": "frame-sequences/02-speech-actions-expressions/0114.png"
+    },
+    {
+      "bytes": 10668,
+      "crc32": "7614fa70",
+      "hash64": "e41429916dc9d1f8",
+      "path": "frame-sequences/02-speech-actions-expressions/0115.png"
+    },
+    {
+      "bytes": 10760,
+      "crc32": "b3c8bbe4",
+      "hash64": "c36f83c37fed42bf",
+      "path": "frame-sequences/02-speech-actions-expressions/0116.png"
+    },
+    {
+      "bytes": 11530,
+      "crc32": "4167efa3",
+      "hash64": "0d2652b352e6873d",
+      "path": "frame-sequences/02-speech-actions-expressions/0117.png"
+    },
+    {
+      "bytes": 11470,
+      "crc32": "572b7d44",
+      "hash64": "abbb392036dce94e",
+      "path": "frame-sequences/02-speech-actions-expressions/0118.png"
+    },
+    {
+      "bytes": 11399,
+      "crc32": "e9995830",
+      "hash64": "f544b574dadc7f77",
+      "path": "frame-sequences/02-speech-actions-expressions/0119.png"
+    },
+    {
+      "bytes": 11578,
+      "crc32": "43da882f",
+      "hash64": "f078dfc51e0dc86c",
+      "path": "frame-sequences/02-speech-actions-expressions/0120.png"
+    },
+    {
+      "bytes": 10227,
+      "crc32": "ea70a011",
+      "hash64": "137fcb1122254594",
+      "path": "frame-sequences/02-speech-actions-expressions/0121.png"
+    },
+    {
+      "bytes": 10127,
+      "crc32": "c683beff",
+      "hash64": "ffb48c92e61908b0",
+      "path": "frame-sequences/02-speech-actions-expressions/0122.png"
+    },
+    {
+      "bytes": 10069,
+      "crc32": "dd5f987d",
+      "hash64": "b6bca87d2b441d6b",
+      "path": "frame-sequences/02-speech-actions-expressions/0123.png"
+    },
+    {
+      "bytes": 10202,
+      "crc32": "4cfd0100",
+      "hash64": "3954bbfddfa62ab2",
+      "path": "frame-sequences/02-speech-actions-expressions/0124.png"
+    },
+    {
+      "bytes": 10242,
+      "crc32": "e8e7c7b7",
+      "hash64": "7914cea4ae75b0e9",
+      "path": "frame-sequences/02-speech-actions-expressions/0125.png"
+    },
+    {
+      "bytes": 12556,
+      "crc32": "b9e2b8c9",
+      "hash64": "1e07ee408005a484",
+      "path": "frame-sequences/02-speech-actions-expressions/0126.png"
+    },
+    {
+      "bytes": 12282,
+      "crc32": "f0c3fdf6",
+      "hash64": "e989af99073113c6",
+      "path": "frame-sequences/02-speech-actions-expressions/0127.png"
+    },
+    {
+      "bytes": 12305,
+      "crc32": "f15a1e69",
+      "hash64": "6552e31d0bca6ac1",
+      "path": "frame-sequences/02-speech-actions-expressions/0128.png"
+    },
+    {
+      "bytes": 12355,
+      "crc32": "69410255",
+      "hash64": "9af898a365abe5db",
+      "path": "frame-sequences/02-speech-actions-expressions/0129.png"
+    },
+    {
+      "bytes": 12285,
+      "crc32": "226dd6ae",
+      "hash64": "dac063f4a74bd55b",
+      "path": "frame-sequences/02-speech-actions-expressions/0130.png"
+    },
+    {
+      "bytes": 12333,
+      "crc32": "d3b946e1",
+      "hash64": "f5b927bb19ff6b8e",
+      "path": "frame-sequences/02-speech-actions-expressions/0131.png"
+    },
+    {
+      "bytes": 12174,
+      "crc32": "cef57504",
+      "hash64": "f4485716d9d2d810",
+      "path": "frame-sequences/02-speech-actions-expressions/0132.png"
+    },
+    {
+      "bytes": 12218,
+      "crc32": "223ded3a",
+      "hash64": "a32a86623651cc40",
+      "path": "frame-sequences/02-speech-actions-expressions/0133.png"
+    },
+    {
+      "bytes": 12295,
+      "crc32": "28677e54",
+      "hash64": "dabc16b51d68613a",
+      "path": "frame-sequences/02-speech-actions-expressions/0134.png"
+    },
+    {
+      "bytes": 12298,
+      "crc32": "f2b51764",
+      "hash64": "241b25fdc6d2e2c6",
+      "path": "frame-sequences/02-speech-actions-expressions/0135.png"
+    },
+    {
+      "bytes": 12279,
+      "crc32": "c25f9354",
+      "hash64": "7b050af7053affba",
+      "path": "frame-sequences/02-speech-actions-expressions/0136.png"
+    },
+    {
+      "bytes": 12283,
+      "crc32": "a3171112",
+      "hash64": "5ce0e93d40573e14",
+      "path": "frame-sequences/02-speech-actions-expressions/0137.png"
+    },
+    {
+      "bytes": 12278,
+      "crc32": "cdba2d5f",
+      "hash64": "21d623235d97efd4",
+      "path": "frame-sequences/02-speech-actions-expressions/0138.png"
+    },
+    {
+      "bytes": 12268,
+      "crc32": "bfcd7b68",
+      "hash64": "1de4aeeca1dc7f5a",
+      "path": "frame-sequences/02-speech-actions-expressions/0139.png"
+    },
+    {
+      "bytes": 10692,
+      "crc32": "ba9efcc3",
+      "hash64": "baec74710e5d56f8",
+      "path": "frame-sequences/02-speech-actions-expressions/0140.png"
+    },
+    {
+      "bytes": 10750,
+      "crc32": "3144e3aa",
+      "hash64": "081ad61f092b59d6",
+      "path": "frame-sequences/02-speech-actions-expressions/0141.png"
+    },
+    {
+      "bytes": 12573,
+      "crc32": "5017372f",
+      "hash64": "88b1937dd0a4e630",
+      "path": "frame-sequences/02-speech-actions-expressions/0142.png"
+    },
+    {
+      "bytes": 12345,
+      "crc32": "dac2d8e0",
+      "hash64": "c93b987516a3691d",
+      "path": "frame-sequences/02-speech-actions-expressions/0143.png"
+    },
+    {
+      "bytes": 12119,
+      "crc32": "76daa5ac",
+      "hash64": "4ad2662f35190b8a",
+      "path": "frame-sequences/02-speech-actions-expressions/0144.png"
+    },
+    {
+      "bytes": 12116,
+      "crc32": "c22ff557",
+      "hash64": "0ee15ed18ccfcc7c",
+      "path": "frame-sequences/02-speech-actions-expressions/0145.png"
+    },
+    {
+      "bytes": 12116,
+      "crc32": "c22ff557",
+      "hash64": "0ee15ed18ccfcc7c",
+      "path": "frame-sequences/02-speech-actions-expressions/0146.png"
+    },
+    {
+      "bytes": 12116,
+      "crc32": "c22ff557",
+      "hash64": "0ee15ed18ccfcc7c",
+      "path": "frame-sequences/02-speech-actions-expressions/0147.png"
+    },
+    {
+      "bytes": 12116,
+      "crc32": "c22ff557",
+      "hash64": "0ee15ed18ccfcc7c",
+      "path": "frame-sequences/02-speech-actions-expressions/0148.png"
+    },
+    {
+      "bytes": 12116,
+      "crc32": "c22ff557",
+      "hash64": "0ee15ed18ccfcc7c",
+      "path": "frame-sequences/02-speech-actions-expressions/0149.png"
+    },
+    {
+      "bytes": 12116,
+      "crc32": "c22ff557",
+      "hash64": "0ee15ed18ccfcc7c",
+      "path": "frame-sequences/02-speech-actions-expressions/0150.png"
+    },
+    {
+      "bytes": 12116,
+      "crc32": "c22ff557",
+      "hash64": "0ee15ed18ccfcc7c",
+      "path": "frame-sequences/02-speech-actions-expressions/0151.png"
+    },
+    {
+      "bytes": 12176,
+      "crc32": "54b604f1",
+      "hash64": "f61f9577da9fa1a0",
+      "path": "frame-sequences/02-speech-actions-expressions/0152.png"
+    },
+    {
+      "bytes": 12412,
+      "crc32": "26b812b3",
+      "hash64": "9922fa5b61a5a801",
+      "path": "frame-sequences/02-speech-actions-expressions/0153.png"
+    },
+    {
+      "bytes": 10694,
+      "crc32": "c98ac5ec",
+      "hash64": "fe1fc965bc581163",
+      "path": "frame-sequences/02-speech-actions-expressions/0154.png"
+    },
+    {
+      "bytes": 10543,
+      "crc32": "e17cfb03",
+      "hash64": "6ad34d0cb8e70907",
+      "path": "frame-sequences/02-speech-actions-expressions/0155.png"
+    },
+    {
+      "bytes": 10498,
+      "crc32": "4c8053ed",
+      "hash64": "78bc9a1e6b282b08",
+      "path": "frame-sequences/02-speech-actions-expressions/0156.png"
+    },
+    {
+      "bytes": 10498,
+      "crc32": "4c8053ed",
+      "hash64": "78bc9a1e6b282b08",
+      "path": "frame-sequences/02-speech-actions-expressions/0157.png"
+    },
+    {
+      "bytes": 10498,
+      "crc32": "4c8053ed",
+      "hash64": "78bc9a1e6b282b08",
+      "path": "frame-sequences/02-speech-actions-expressions/0158.png"
+    },
+    {
+      "bytes": 10498,
+      "crc32": "4c8053ed",
+      "hash64": "78bc9a1e6b282b08",
+      "path": "frame-sequences/02-speech-actions-expressions/0159.png"
+    },
+    {
+      "bytes": 10498,
+      "crc32": "4c8053ed",
+      "hash64": "78bc9a1e6b282b08",
+      "path": "frame-sequences/02-speech-actions-expressions/0160.png"
+    },
+    {
+      "bytes": 10498,
+      "crc32": "4c8053ed",
+      "hash64": "78bc9a1e6b282b08",
+      "path": "frame-sequences/02-speech-actions-expressions/0161.png"
+    },
+    {
+      "bytes": 10498,
+      "crc32": "4c8053ed",
+      "hash64": "78bc9a1e6b282b08",
+      "path": "frame-sequences/02-speech-actions-expressions/0162.png"
+    },
+    {
+      "bytes": 10498,
+      "crc32": "4c8053ed",
+      "hash64": "78bc9a1e6b282b08",
+      "path": "frame-sequences/02-speech-actions-expressions/0163.png"
+    },
+    {
+      "bytes": 10498,
+      "crc32": "4c8053ed",
+      "hash64": "78bc9a1e6b282b08",
+      "path": "frame-sequences/02-speech-actions-expressions/0164.png"
+    },
+    {
+      "bytes": 10498,
+      "crc32": "4c8053ed",
+      "hash64": "78bc9a1e6b282b08",
+      "path": "frame-sequences/02-speech-actions-expressions/0165.png"
+    },
+    {
+      "bytes": 10498,
+      "crc32": "4c8053ed",
+      "hash64": "78bc9a1e6b282b08",
+      "path": "frame-sequences/02-speech-actions-expressions/0166.png"
+    },
+    {
+      "bytes": 10498,
+      "crc32": "4c8053ed",
+      "hash64": "78bc9a1e6b282b08",
+      "path": "frame-sequences/02-speech-actions-expressions/0167.png"
+    },
+    {
+      "bytes": 10486,
+      "crc32": "6208331a",
+      "hash64": "52af4b19ce62f989",
+      "path": "frame-sequences/02-speech-actions-expressions/0168.png"
+    },
+    {
+      "bytes": 10486,
+      "crc32": "6208331a",
+      "hash64": "52af4b19ce62f989",
+      "path": "frame-sequences/02-speech-actions-expressions/0169.png"
+    },
+    {
+      "bytes": 10486,
+      "crc32": "6208331a",
+      "hash64": "52af4b19ce62f989",
+      "path": "frame-sequences/02-speech-actions-expressions/0170.png"
+    },
+    {
+      "bytes": 10486,
+      "crc32": "6208331a",
+      "hash64": "52af4b19ce62f989",
+      "path": "frame-sequences/02-speech-actions-expressions/0171.png"
+    },
+    {
+      "bytes": 10486,
+      "crc32": "6208331a",
+      "hash64": "52af4b19ce62f989",
+      "path": "frame-sequences/02-speech-actions-expressions/0172.png"
+    },
+    {
+      "bytes": 10486,
+      "crc32": "6208331a",
+      "hash64": "52af4b19ce62f989",
+      "path": "frame-sequences/02-speech-actions-expressions/0173.png"
+    },
+    {
+      "bytes": 10486,
+      "crc32": "6208331a",
+      "hash64": "52af4b19ce62f989",
+      "path": "frame-sequences/02-speech-actions-expressions/0174.png"
+    },
+    {
+      "bytes": 10486,
+      "crc32": "6208331a",
+      "hash64": "52af4b19ce62f989",
+      "path": "frame-sequences/02-speech-actions-expressions/0175.png"
+    },
+    {
+      "bytes": 10486,
+      "crc32": "6208331a",
+      "hash64": "52af4b19ce62f989",
+      "path": "frame-sequences/02-speech-actions-expressions/0176.png"
+    },
+    {
+      "bytes": 10486,
+      "crc32": "6208331a",
+      "hash64": "52af4b19ce62f989",
+      "path": "frame-sequences/02-speech-actions-expressions/0177.png"
+    },
+    {
+      "bytes": 10486,
+      "crc32": "6208331a",
+      "hash64": "52af4b19ce62f989",
+      "path": "frame-sequences/02-speech-actions-expressions/0178.png"
+    },
+    {
+      "bytes": 10486,
+      "crc32": "6208331a",
+      "hash64": "52af4b19ce62f989",
+      "path": "frame-sequences/02-speech-actions-expressions/0179.png"
+    },
+    {
+      "bytes": 10922,
+      "crc32": "684be343",
+      "hash64": "e0db1308ebe9dcf7",
+      "path": "frame-sequences/02-speech-actions-expressions/0180.png"
+    },
+    {
+      "bytes": 10865,
+      "crc32": "96f3c706",
+      "hash64": "4343e2c985d6ce89",
+      "path": "frame-sequences/02-speech-actions-expressions/0181.png"
+    },
+    {
+      "bytes": 12927,
+      "crc32": "0964f72d",
+      "hash64": "dc8d34dbddda8383",
+      "path": "frame-sequences/02-speech-actions-expressions/0182.png"
+    },
+    {
+      "bytes": 13117,
+      "crc32": "99c50974",
+      "hash64": "fff724f3f3674fd5",
+      "path": "frame-sequences/02-speech-actions-expressions/0183.png"
+    },
+    {
+      "bytes": 12888,
+      "crc32": "a04c9c40",
+      "hash64": "88c67489985ae854",
+      "path": "frame-sequences/02-speech-actions-expressions/0184.png"
+    },
+    {
+      "bytes": 12880,
+      "crc32": "224675f4",
+      "hash64": "03dcd70bb6e66633",
+      "path": "frame-sequences/02-speech-actions-expressions/0185.png"
+    },
+    {
+      "bytes": 12880,
+      "crc32": "224675f4",
+      "hash64": "03dcd70bb6e66633",
+      "path": "frame-sequences/02-speech-actions-expressions/0186.png"
+    },
+    {
+      "bytes": 12880,
+      "crc32": "224675f4",
+      "hash64": "03dcd70bb6e66633",
+      "path": "frame-sequences/02-speech-actions-expressions/0187.png"
+    },
+    {
+      "bytes": 12880,
+      "crc32": "224675f4",
+      "hash64": "03dcd70bb6e66633",
+      "path": "frame-sequences/02-speech-actions-expressions/0188.png"
+    },
+    {
+      "bytes": 12880,
+      "crc32": "224675f4",
+      "hash64": "03dcd70bb6e66633",
+      "path": "frame-sequences/02-speech-actions-expressions/0189.png"
+    },
+    {
+      "bytes": 12880,
+      "crc32": "224675f4",
+      "hash64": "03dcd70bb6e66633",
+      "path": "frame-sequences/02-speech-actions-expressions/0190.png"
+    },
+    {
+      "bytes": 12880,
+      "crc32": "224675f4",
+      "hash64": "03dcd70bb6e66633",
+      "path": "frame-sequences/02-speech-actions-expressions/0191.png"
+    },
+    {
+      "bytes": 12880,
+      "crc32": "224675f4",
+      "hash64": "03dcd70bb6e66633",
+      "path": "frame-sequences/02-speech-actions-expressions/0192.png"
+    },
+    {
+      "bytes": 12880,
+      "crc32": "224675f4",
+      "hash64": "03dcd70bb6e66633",
+      "path": "frame-sequences/02-speech-actions-expressions/0193.png"
+    },
+    {
+      "bytes": 12880,
+      "crc32": "224675f4",
+      "hash64": "03dcd70bb6e66633",
+      "path": "frame-sequences/02-speech-actions-expressions/0194.png"
+    },
+    {
+      "bytes": 12880,
+      "crc32": "224675f4",
+      "hash64": "03dcd70bb6e66633",
+      "path": "frame-sequences/02-speech-actions-expressions/0195.png"
+    },
+    {
+      "bytes": 10916,
+      "crc32": "2168d5c5",
+      "hash64": "936cd1c48a5a56b8",
+      "path": "frame-sequences/02-speech-actions-expressions/0196.png"
+    },
+    {
+      "bytes": 10871,
+      "crc32": "0141fa6d",
+      "hash64": "9f757e5fc9f69cd2",
+      "path": "frame-sequences/02-speech-actions-expressions/0197.png"
+    },
+    {
+      "bytes": 12927,
+      "crc32": "0964f72d",
+      "hash64": "dc8d34dbddda8383",
+      "path": "frame-sequences/02-speech-actions-expressions/0198.png"
+    },
+    {
+      "bytes": 13117,
+      "crc32": "99c50974",
+      "hash64": "fff724f3f3674fd5",
+      "path": "frame-sequences/02-speech-actions-expressions/0199.png"
+    },
+    {
+      "bytes": 12888,
+      "crc32": "a04c9c40",
+      "hash64": "88c67489985ae854",
+      "path": "frame-sequences/02-speech-actions-expressions/0200.png"
+    },
+    {
+      "bytes": 12880,
+      "crc32": "224675f4",
+      "hash64": "03dcd70bb6e66633",
+      "path": "frame-sequences/02-speech-actions-expressions/0201.png"
+    },
+    {
+      "bytes": 12880,
+      "crc32": "224675f4",
+      "hash64": "03dcd70bb6e66633",
+      "path": "frame-sequences/02-speech-actions-expressions/0202.png"
+    },
+    {
+      "bytes": 12880,
+      "crc32": "224675f4",
+      "hash64": "03dcd70bb6e66633",
+      "path": "frame-sequences/02-speech-actions-expressions/0203.png"
+    },
+    {
+      "bytes": 12880,
+      "crc32": "224675f4",
+      "hash64": "03dcd70bb6e66633",
+      "path": "frame-sequences/02-speech-actions-expressions/0204.png"
+    },
+    {
+      "bytes": 12880,
+      "crc32": "224675f4",
+      "hash64": "03dcd70bb6e66633",
+      "path": "frame-sequences/02-speech-actions-expressions/0205.png"
+    },
+    {
+      "bytes": 12880,
+      "crc32": "224675f4",
+      "hash64": "03dcd70bb6e66633",
+      "path": "frame-sequences/02-speech-actions-expressions/0206.png"
+    },
+    {
+      "bytes": 12880,
+      "crc32": "224675f4",
+      "hash64": "03dcd70bb6e66633",
+      "path": "frame-sequences/02-speech-actions-expressions/0207.png"
+    },
+    {
+      "bytes": 12892,
+      "crc32": "f6c5df8d",
+      "hash64": "2795ce4a6fd3bec7",
+      "path": "frame-sequences/02-speech-actions-expressions/0208.png"
+    },
+    {
+      "bytes": 12892,
+      "crc32": "f6c5df8d",
+      "hash64": "2795ce4a6fd3bec7",
+      "path": "frame-sequences/02-speech-actions-expressions/0209.png"
+    },
+    {
+      "bytes": 12878,
+      "crc32": "31d99166",
+      "hash64": "d039757f81b768ca",
+      "path": "frame-sequences/02-speech-actions-expressions/0210.png"
+    },
+    {
+      "bytes": 12878,
+      "crc32": "31d99166",
+      "hash64": "d039757f81b768ca",
+      "path": "frame-sequences/02-speech-actions-expressions/0211.png"
+    },
+    {
+      "bytes": 12912,
+      "crc32": "755dcf26",
+      "hash64": "1e34ebd5cbe867c3",
+      "path": "frame-sequences/02-speech-actions-expressions/0212.png"
+    },
+    {
+      "bytes": 12912,
+      "crc32": "755dcf26",
+      "hash64": "1e34ebd5cbe867c3",
+      "path": "frame-sequences/02-speech-actions-expressions/0213.png"
+    },
+    {
+      "bytes": 12888,
+      "crc32": "6386b3c8",
+      "hash64": "f2fc37dc0be26df0",
+      "path": "frame-sequences/02-speech-actions-expressions/0214.png"
+    },
+    {
+      "bytes": 12888,
+      "crc32": "6386b3c8",
+      "hash64": "f2fc37dc0be26df0",
+      "path": "frame-sequences/02-speech-actions-expressions/0215.png"
+    },
+    {
+      "bytes": 12892,
+      "crc32": "f6c5df8d",
+      "hash64": "2795ce4a6fd3bec7",
+      "path": "frame-sequences/02-speech-actions-expressions/0216.png"
+    },
+    {
+      "bytes": 12892,
+      "crc32": "f6c5df8d",
+      "hash64": "2795ce4a6fd3bec7",
+      "path": "frame-sequences/02-speech-actions-expressions/0217.png"
+    },
+    {
+      "bytes": 12878,
+      "crc32": "31d99166",
+      "hash64": "d039757f81b768ca",
+      "path": "frame-sequences/02-speech-actions-expressions/0218.png"
+    },
+    {
+      "bytes": 12878,
+      "crc32": "31d99166",
+      "hash64": "d039757f81b768ca",
+      "path": "frame-sequences/02-speech-actions-expressions/0219.png"
+    },
+    {
+      "bytes": 12912,
+      "crc32": "755dcf26",
+      "hash64": "1e34ebd5cbe867c3",
+      "path": "frame-sequences/02-speech-actions-expressions/0220.png"
+    },
+    {
+      "bytes": 12912,
+      "crc32": "755dcf26",
+      "hash64": "1e34ebd5cbe867c3",
+      "path": "frame-sequences/02-speech-actions-expressions/0221.png"
+    },
+    {
+      "bytes": 12888,
+      "crc32": "6386b3c8",
+      "hash64": "f2fc37dc0be26df0",
+      "path": "frame-sequences/02-speech-actions-expressions/0222.png"
+    },
+    {
+      "bytes": 12888,
+      "crc32": "6386b3c8",
+      "hash64": "f2fc37dc0be26df0",
+      "path": "frame-sequences/02-speech-actions-expressions/0223.png"
+    },
+    {
+      "bytes": 10486,
+      "crc32": "6208331a",
+      "hash64": "52af4b19ce62f989",
+      "path": "frame-sequences/02-speech-actions-expressions/0224.png"
+    },
+    {
+      "bytes": 10486,
+      "crc32": "6208331a",
+      "hash64": "52af4b19ce62f989",
+      "path": "frame-sequences/02-speech-actions-expressions/0225.png"
+    },
+    {
+      "bytes": 10486,
+      "crc32": "6208331a",
+      "hash64": "52af4b19ce62f989",
+      "path": "frame-sequences/02-speech-actions-expressions/0226.png"
+    },
+    {
+      "bytes": 10486,
+      "crc32": "6208331a",
+      "hash64": "52af4b19ce62f989",
+      "path": "frame-sequences/02-speech-actions-expressions/0227.png"
+    },
+    {
+      "bytes": 10486,
+      "crc32": "6208331a",
+      "hash64": "52af4b19ce62f989",
+      "path": "frame-sequences/02-speech-actions-expressions/0228.png"
+    },
+    {
+      "bytes": 10486,
+      "crc32": "6208331a",
+      "hash64": "52af4b19ce62f989",
+      "path": "frame-sequences/02-speech-actions-expressions/0229.png"
+    },
+    {
+      "bytes": 10486,
+      "crc32": "6208331a",
+      "hash64": "52af4b19ce62f989",
+      "path": "frame-sequences/02-speech-actions-expressions/0230.png"
+    },
+    {
+      "bytes": 10486,
+      "crc32": "6208331a",
+      "hash64": "52af4b19ce62f989",
+      "path": "frame-sequences/02-speech-actions-expressions/0231.png"
+    },
+    {
+      "bytes": 10486,
+      "crc32": "6208331a",
+      "hash64": "52af4b19ce62f989",
+      "path": "frame-sequences/02-speech-actions-expressions/0232.png"
+    },
+    {
+      "bytes": 10486,
+      "crc32": "6208331a",
+      "hash64": "52af4b19ce62f989",
+      "path": "frame-sequences/02-speech-actions-expressions/0233.png"
+    },
+    {
+      "bytes": 10486,
+      "crc32": "6208331a",
+      "hash64": "52af4b19ce62f989",
+      "path": "frame-sequences/02-speech-actions-expressions/0234.png"
+    },
+    {
+      "bytes": 10486,
+      "crc32": "6208331a",
+      "hash64": "52af4b19ce62f989",
+      "path": "frame-sequences/02-speech-actions-expressions/0235.png"
+    },
+    {
+      "bytes": 10610,
+      "crc32": "7b0c1387",
+      "hash64": "8c33710dc2005c8e",
+      "path": "frame-sequences/02-speech-actions-expressions/0236.png"
+    },
+    {
+      "bytes": 10640,
+      "crc32": "5d0348ae",
+      "hash64": "b9aa2c94deaec475",
+      "path": "frame-sequences/02-speech-actions-expressions/0237.png"
+    },
+    {
+      "bytes": 10521,
+      "crc32": "403fa7f6",
+      "hash64": "df7cf9512c4bba5a",
+      "path": "frame-sequences/02-speech-actions-expressions/0238.png"
+    },
+    {
+      "bytes": 11235,
+      "crc32": "775192cf",
+      "hash64": "7adead4a81243bc5",
+      "path": "frame-sequences/02-speech-actions-expressions/0239.png"
+    },
+    {
+      "bytes": 11121,
+      "crc32": "600851ed",
+      "hash64": "a2c8a65e20ea8b18",
+      "path": "frame-sequences/02-speech-actions-expressions/0240.png"
+    },
+    {
+      "bytes": 10971,
+      "crc32": "19b3d900",
+      "hash64": "beba098683d967b9",
+      "path": "frame-sequences/02-speech-actions-expressions/0241.png"
+    },
+    {
+      "bytes": 10870,
+      "crc32": "fecf83b0",
+      "hash64": "ca0a2bef9de109af",
+      "path": "frame-sequences/02-speech-actions-expressions/0242.png"
+    },
+    {
+      "bytes": 10873,
+      "crc32": "e349e8b9",
+      "hash64": "f78244f32642addd",
+      "path": "frame-sequences/02-speech-actions-expressions/0243.png"
+    },
+    {
+      "bytes": 10891,
+      "crc32": "01384fbb",
+      "hash64": "823aa5813150eb80",
+      "path": "frame-sequences/02-speech-actions-expressions/0244.png"
+    },
+    {
+      "bytes": 11174,
+      "crc32": "9d994541",
+      "hash64": "64229b7b8da019f8",
+      "path": "frame-sequences/02-speech-actions-expressions/0245.png"
+    },
+    {
+      "bytes": 11236,
+      "crc32": "63032e11",
+      "hash64": "48519e0dc33f764b",
+      "path": "frame-sequences/02-speech-actions-expressions/0246.png"
+    },
+    {
+      "bytes": 11248,
+      "crc32": "380a56da",
+      "hash64": "fb1e40e163f53957",
+      "path": "frame-sequences/02-speech-actions-expressions/0247.png"
+    },
+    {
+      "bytes": 11231,
+      "crc32": "22c78062",
+      "hash64": "ad543e01320796e1",
+      "path": "frame-sequences/02-speech-actions-expressions/0248.png"
+    },
+    {
+      "bytes": 13067,
+      "crc32": "de721f67",
+      "hash64": "c98280ee02e2f7dc",
+      "path": "frame-sequences/02-speech-actions-expressions/0249.png"
+    },
+    {
+      "bytes": 13065,
+      "crc32": "9798de73",
+      "hash64": "1148c285b1e68629",
+      "path": "frame-sequences/02-speech-actions-expressions/0250.png"
+    },
+    {
+      "bytes": 13101,
+      "crc32": "c2ff7464",
+      "hash64": "c8d8426b6d83397a",
+      "path": "frame-sequences/02-speech-actions-expressions/0251.png"
+    },
+    {
+      "bytes": 10599,
+      "crc32": "843c562a",
+      "hash64": "42a3ca047b02d935",
+      "path": "frame-sequences/02-speech-actions-expressions/0252.png"
+    },
+    {
+      "bytes": 10638,
+      "crc32": "6a1ac399",
+      "hash64": "5ae51a015e31168b",
+      "path": "frame-sequences/02-speech-actions-expressions/0253.png"
+    },
+    {
+      "bytes": 10521,
+      "crc32": "b23a8e92",
+      "hash64": "a86badd3696b51de",
+      "path": "frame-sequences/02-speech-actions-expressions/0254.png"
+    },
+    {
+      "bytes": 11233,
+      "crc32": "b247cc38",
+      "hash64": "d70291ec49132347",
+      "path": "frame-sequences/02-speech-actions-expressions/0255.png"
+    },
+    {
+      "bytes": 11123,
+      "crc32": "e96e186a",
+      "hash64": "f5fa720630293968",
+      "path": "frame-sequences/02-speech-actions-expressions/0256.png"
+    },
+    {
+      "bytes": 10968,
+      "crc32": "46650b58",
+      "hash64": "dd75fea7d2a5e64d",
+      "path": "frame-sequences/02-speech-actions-expressions/0257.png"
+    },
+    {
+      "bytes": 10869,
+      "crc32": "ae7270f8",
+      "hash64": "f4228abee8356d57",
+      "path": "frame-sequences/02-speech-actions-expressions/0258.png"
+    },
+    {
+      "bytes": 10872,
+      "crc32": "70426e33",
+      "hash64": "368b910df57953c9",
+      "path": "frame-sequences/02-speech-actions-expressions/0259.png"
+    },
+    {
+      "bytes": 10893,
+      "crc32": "0f7bc37e",
+      "hash64": "5b36a1bceda8eaae",
+      "path": "frame-sequences/02-speech-actions-expressions/0260.png"
+    },
+    {
+      "bytes": 11178,
+      "crc32": "fea033e3",
+      "hash64": "03a6f9aa0a82e956",
+      "path": "frame-sequences/02-speech-actions-expressions/0261.png"
+    },
+    {
+      "bytes": 11238,
+      "crc32": "f92e9069",
+      "hash64": "fc4745f23bf18883",
+      "path": "frame-sequences/02-speech-actions-expressions/0262.png"
+    },
+    {
+      "bytes": 11245,
+      "crc32": "19a04cfc",
+      "hash64": "4791655c4ccd4a48",
+      "path": "frame-sequences/02-speech-actions-expressions/0263.png"
+    },
+    {
+      "bytes": 11129,
+      "crc32": "400a506d",
+      "hash64": "230fe559c6cca043",
+      "path": "frame-sequences/02-speech-actions-expressions/0264.png"
+    },
+    {
+      "bytes": 13132,
+      "crc32": "4a237cf9",
+      "hash64": "8778a405062c3b89",
+      "path": "frame-sequences/02-speech-actions-expressions/0265.png"
+    },
+    {
+      "bytes": 13066,
+      "crc32": "6bc00c17",
+      "hash64": "902bc05c5a598a81",
+      "path": "frame-sequences/02-speech-actions-expressions/0266.png"
+    },
+    {
+      "bytes": 13066,
+      "crc32": "b2d610f3",
+      "hash64": "bd2a2f5d920284db",
+      "path": "frame-sequences/02-speech-actions-expressions/0267.png"
+    },
+    {
+      "bytes": 13226,
+      "crc32": "9ea6ffbf",
+      "hash64": "778f8b746ba6b7ec",
+      "path": "frame-sequences/02-speech-actions-expressions/0268.png"
+    },
+    {
+      "bytes": 13004,
+      "crc32": "b048eb49",
+      "hash64": "96d301c02aa3186b",
+      "path": "frame-sequences/02-speech-actions-expressions/0269.png"
+    },
+    {
+      "bytes": 12979,
+      "crc32": "9e934878",
+      "hash64": "1b94c7b11feeb958",
+      "path": "frame-sequences/02-speech-actions-expressions/0270.png"
+    },
+    {
+      "bytes": 12882,
+      "crc32": "592ac9f7",
+      "hash64": "a3b18e4da9d754b4",
+      "path": "frame-sequences/02-speech-actions-expressions/0271.png"
+    },
+    {
+      "bytes": 12880,
+      "crc32": "81147d03",
+      "hash64": "14e2bee91ff5215c",
+      "path": "frame-sequences/02-speech-actions-expressions/0272.png"
+    },
+    {
+      "bytes": 12909,
+      "crc32": "bafc4470",
+      "hash64": "5b761e4536a388f5",
+      "path": "frame-sequences/02-speech-actions-expressions/0273.png"
+    },
+    {
+      "bytes": 13434,
+      "crc32": "ec1abf0e",
+      "hash64": "20174dad610a19c6",
+      "path": "frame-sequences/02-speech-actions-expressions/0274.png"
+    },
+    {
+      "bytes": 13374,
+      "crc32": "ca36e65c",
+      "hash64": "726a91460c18ede0",
+      "path": "frame-sequences/02-speech-actions-expressions/0275.png"
+    },
+    {
+      "bytes": 10378,
+      "crc32": "778d1124",
+      "hash64": "1e296593604aebd2",
+      "path": "frame-sequences/02-speech-actions-expressions/0276.png"
+    },
+    {
+      "bytes": 10437,
+      "crc32": "bb98840c",
+      "hash64": "738e197d31481547",
+      "path": "frame-sequences/02-speech-actions-expressions/0277.png"
+    },
+    {
+      "bytes": 10469,
+      "crc32": "a634ee64",
+      "hash64": "4834dfc3983e6711",
+      "path": "frame-sequences/02-speech-actions-expressions/0278.png"
+    },
+    {
+      "bytes": 10486,
+      "crc32": "6208331a",
+      "hash64": "52af4b19ce62f989",
+      "path": "frame-sequences/02-speech-actions-expressions/0279.png"
+    },
+    {
+      "bytes": 10692,
+      "crc32": "ba9efcc3",
+      "hash64": "baec74710e5d56f8",
+      "path": "frame-sequences/02-speech-actions-expressions/0280.png"
+    },
+    {
+      "bytes": 10750,
+      "crc32": "3144e3aa",
+      "hash64": "081ad61f092b59d6",
+      "path": "frame-sequences/02-speech-actions-expressions/0281.png"
+    },
+    {
+      "bytes": 12573,
+      "crc32": "5017372f",
+      "hash64": "88b1937dd0a4e630",
+      "path": "frame-sequences/02-speech-actions-expressions/0282.png"
+    },
+    {
+      "bytes": 12345,
+      "crc32": "dac2d8e0",
+      "hash64": "c93b987516a3691d",
+      "path": "frame-sequences/02-speech-actions-expressions/0283.png"
+    },
+    {
+      "bytes": 12119,
+      "crc32": "76daa5ac",
+      "hash64": "4ad2662f35190b8a",
+      "path": "frame-sequences/02-speech-actions-expressions/0284.png"
+    },
+    {
+      "bytes": 12116,
+      "crc32": "c22ff557",
+      "hash64": "0ee15ed18ccfcc7c",
+      "path": "frame-sequences/02-speech-actions-expressions/0285.png"
+    },
+    {
+      "bytes": 12116,
+      "crc32": "c22ff557",
+      "hash64": "0ee15ed18ccfcc7c",
+      "path": "frame-sequences/02-speech-actions-expressions/0286.png"
+    },
+    {
+      "bytes": 12116,
+      "crc32": "c22ff557",
+      "hash64": "0ee15ed18ccfcc7c",
+      "path": "frame-sequences/02-speech-actions-expressions/0287.png"
+    },
+    {
+      "bytes": 12116,
+      "crc32": "c22ff557",
+      "hash64": "0ee15ed18ccfcc7c",
+      "path": "frame-sequences/02-speech-actions-expressions/0288.png"
+    },
+    {
+      "bytes": 12116,
+      "crc32": "c22ff557",
+      "hash64": "0ee15ed18ccfcc7c",
+      "path": "frame-sequences/02-speech-actions-expressions/0289.png"
+    },
+    {
+      "bytes": 12116,
+      "crc32": "c22ff557",
+      "hash64": "0ee15ed18ccfcc7c",
+      "path": "frame-sequences/02-speech-actions-expressions/0290.png"
+    },
+    {
+      "bytes": 12116,
+      "crc32": "c22ff557",
+      "hash64": "0ee15ed18ccfcc7c",
+      "path": "frame-sequences/02-speech-actions-expressions/0291.png"
+    },
+    {
+      "bytes": 12161,
+      "crc32": "e4c72cc0",
+      "hash64": "0c6f373da69a2487",
+      "path": "frame-sequences/02-speech-actions-expressions/0292.png"
+    },
+    {
+      "bytes": 12289,
+      "crc32": "2c03c5d3",
+      "hash64": "9099e00824b9e1a1",
+      "path": "frame-sequences/02-speech-actions-expressions/0293.png"
+    },
+    {
+      "bytes": 12210,
+      "crc32": "c6dcd500",
+      "hash64": "ec9b40b8c694ad4c",
+      "path": "frame-sequences/02-speech-actions-expressions/0294.png"
+    },
+    {
+      "bytes": 12375,
+      "crc32": "c3341a55",
+      "hash64": "7ee001c8201df262",
+      "path": "frame-sequences/02-speech-actions-expressions/0295.png"
+    },
+    {
+      "bytes": 12512,
+      "crc32": "18086b76",
+      "hash64": "1500f613b50dd332",
+      "path": "frame-sequences/02-speech-actions-expressions/0296.png"
+    },
+    {
+      "bytes": 12258,
+      "crc32": "aa3ab0d2",
+      "hash64": "2aa2589220235c51",
+      "path": "frame-sequences/02-speech-actions-expressions/0297.png"
+    },
+    {
+      "bytes": 12417,
+      "crc32": "55963b78",
+      "hash64": "4978e65ad0d539cb",
+      "path": "frame-sequences/02-speech-actions-expressions/0298.png"
+    },
+    {
+      "bytes": 12387,
+      "crc32": "61d8470d",
+      "hash64": "1a2c3e697bed7314",
+      "path": "frame-sequences/02-speech-actions-expressions/0299.png"
+    },
+    {
+      "bytes": 12113,
+      "crc32": "6144d16c",
+      "hash64": "cce8b3f090848b0a",
+      "path": "frame-sequences/02-speech-actions-expressions/0300.png"
+    },
+    {
+      "bytes": 12029,
+      "crc32": "7638be39",
+      "hash64": "58e42dbc201c4799",
+      "path": "frame-sequences/02-speech-actions-expressions/0301.png"
+    },
+    {
+      "bytes": 11948,
+      "crc32": "1f78b5d2",
+      "hash64": "9dc99a74a5c8b532",
+      "path": "frame-sequences/02-speech-actions-expressions/0302.png"
+    },
+    {
+      "bytes": 11889,
+      "crc32": "7a85e68b",
+      "hash64": "0bba5ae3d27df9d0",
+      "path": "frame-sequences/02-speech-actions-expressions/0303.png"
+    },
+    {
+      "bytes": 11717,
+      "crc32": "17cb7aab",
+      "hash64": "9fbacf1d4c4d759f",
+      "path": "frame-sequences/02-speech-actions-expressions/0304.png"
+    },
+    {
+      "bytes": 11675,
+      "crc32": "ec5a26be",
+      "hash64": "0dbc60da897c1573",
+      "path": "frame-sequences/02-speech-actions-expressions/0305.png"
+    },
+    {
+      "bytes": 11501,
+      "crc32": "7175fbda",
+      "hash64": "e8409450e64b6b64",
+      "path": "frame-sequences/02-speech-actions-expressions/0306.png"
+    },
+    {
+      "bytes": 11505,
+      "crc32": "91381e30",
+      "hash64": "54cfb75695801ac7",
+      "path": "frame-sequences/02-speech-actions-expressions/0307.png"
+    },
+    {
+      "bytes": 10494,
+      "crc32": "86a3d846",
+      "hash64": "3173b42482ad5867",
+      "path": "frame-sequences/02-speech-actions-expressions/0308.png"
+    },
+    {
+      "bytes": 10522,
+      "crc32": "81db3041",
+      "hash64": "2ace408290111b32",
+      "path": "frame-sequences/02-speech-actions-expressions/0309.png"
+    },
+    {
+      "bytes": 10696,
+      "crc32": "53a9fc04",
+      "hash64": "4f53747467c65852",
+      "path": "frame-sequences/02-speech-actions-expressions/0310.png"
+    },
+    {
+      "bytes": 10668,
+      "crc32": "7614fa70",
+      "hash64": "e41429916dc9d1f8",
+      "path": "frame-sequences/02-speech-actions-expressions/0311.png"
+    },
+    {
+      "bytes": 10760,
+      "crc32": "b3c8bbe4",
+      "hash64": "c36f83c37fed42bf",
+      "path": "frame-sequences/02-speech-actions-expressions/0312.png"
+    },
+    {
+      "bytes": 11530,
+      "crc32": "4167efa3",
+      "hash64": "0d2652b352e6873d",
+      "path": "frame-sequences/02-speech-actions-expressions/0313.png"
+    },
+    {
+      "bytes": 11470,
+      "crc32": "572b7d44",
+      "hash64": "abbb392036dce94e",
+      "path": "frame-sequences/02-speech-actions-expressions/0314.png"
+    },
+    {
+      "bytes": 11399,
+      "crc32": "e9995830",
+      "hash64": "f544b574dadc7f77",
+      "path": "frame-sequences/02-speech-actions-expressions/0315.png"
+    },
+    {
+      "bytes": 11578,
+      "crc32": "43da882f",
+      "hash64": "f078dfc51e0dc86c",
+      "path": "frame-sequences/02-speech-actions-expressions/0316.png"
+    },
+    {
+      "bytes": 10227,
+      "crc32": "ea70a011",
+      "hash64": "137fcb1122254594",
+      "path": "frame-sequences/02-speech-actions-expressions/0317.png"
+    },
+    {
+      "bytes": 10127,
+      "crc32": "c683beff",
+      "hash64": "ffb48c92e61908b0",
+      "path": "frame-sequences/02-speech-actions-expressions/0318.png"
+    },
+    {
+      "bytes": 10069,
+      "crc32": "dd5f987d",
+      "hash64": "b6bca87d2b441d6b",
+      "path": "frame-sequences/02-speech-actions-expressions/0319.png"
+    },
+    {
+      "bytes": 10076,
+      "crc32": "e87fd6b0",
+      "hash64": "781e5ab7ea204f58",
+      "path": "frame-sequences/02-speech-actions-expressions/0320.png"
+    },
+    {
+      "bytes": 10154,
+      "crc32": "ea32ab61",
+      "hash64": "93af1e523b247131",
+      "path": "frame-sequences/02-speech-actions-expressions/0321.png"
+    },
+    {
+      "bytes": 10198,
+      "crc32": "900ee50d",
+      "hash64": "5c14ccf408e282c4",
+      "path": "frame-sequences/02-speech-actions-expressions/0322.png"
+    },
+    {
+      "bytes": 10192,
+      "crc32": "a18b7b5b",
+      "hash64": "f046e7380438824b",
+      "path": "frame-sequences/02-speech-actions-expressions/0323.png"
+    },
+    {
+      "bytes": 10171,
+      "crc32": "b7c2c8d2",
+      "hash64": "33d74eb1702fce06",
+      "path": "frame-sequences/02-speech-actions-expressions/0324.png"
+    },
+    {
+      "bytes": 10299,
+      "crc32": "13c6784c",
+      "hash64": "1bba26d1d79b2f12",
+      "path": "frame-sequences/02-speech-actions-expressions/0325.png"
+    },
+    {
+      "bytes": 10147,
+      "crc32": "34e9e813",
+      "hash64": "6f0c475b56c57fed",
+      "path": "frame-sequences/02-speech-actions-expressions/0326.png"
+    },
+    {
+      "bytes": 10063,
+      "crc32": "be96a2d3",
+      "hash64": "0598c98ef61309ea",
+      "path": "frame-sequences/02-speech-actions-expressions/0327.png"
+    },
+    {
+      "bytes": 10081,
+      "crc32": "a531aa80",
+      "hash64": "e9225c6132484c30",
+      "path": "frame-sequences/02-speech-actions-expressions/0328.png"
+    },
+    {
+      "bytes": 10074,
+      "crc32": "72923e75",
+      "hash64": "16a443700c3f166b",
+      "path": "frame-sequences/02-speech-actions-expressions/0329.png"
+    },
+    {
+      "bytes": 10202,
+      "crc32": "669498cf",
+      "hash64": "d232ac8f169ec283",
+      "path": "frame-sequences/02-speech-actions-expressions/0330.png"
+    },
+    {
+      "bytes": 10272,
+      "crc32": "6412e9a5",
+      "hash64": "40dbfd5966928090",
+      "path": "frame-sequences/02-speech-actions-expressions/0331.png"
+    },
+    {
+      "bytes": 10198,
+      "crc32": "6db72a63",
+      "hash64": "e012cc04831717e0",
+      "path": "frame-sequences/02-speech-actions-expressions/0332.png"
+    },
+    {
+      "bytes": 10245,
+      "crc32": "06e1789c",
+      "hash64": "bdf9f79ae93e1692",
+      "path": "frame-sequences/02-speech-actions-expressions/0333.png"
+    },
+    {
+      "bytes": 10165,
+      "crc32": "1fb45e9a",
+      "hash64": "c7f5938d40eda146",
+      "path": "frame-sequences/02-speech-actions-expressions/0334.png"
+    },
+    {
+      "bytes": 10120,
+      "crc32": "a7b99f35",
+      "hash64": "7ce218ed58937d84",
+      "path": "frame-sequences/02-speech-actions-expressions/0335.png"
+    },
+    {
+      "bytes": 10615,
+      "crc32": "0751e68a",
+      "hash64": "3a88ebff708c06fd",
+      "path": "frame-sequences/02-speech-actions-expressions/0336.png"
+    },
+    {
+      "bytes": 10552,
+      "crc32": "966763d2",
+      "hash64": "534806c7018ab96b",
+      "path": "frame-sequences/02-speech-actions-expressions/0337.png"
+    },
+    {
+      "bytes": 10582,
+      "crc32": "0d2d95f4",
+      "hash64": "dd7f0f270b07f88f",
+      "path": "frame-sequences/02-speech-actions-expressions/0338.png"
+    },
+    {
+      "bytes": 10582,
+      "crc32": "0d2d95f4",
+      "hash64": "dd7f0f270b07f88f",
+      "path": "frame-sequences/02-speech-actions-expressions/0339.png"
+    },
+    {
+      "bytes": 10574,
+      "crc32": "d432c1b7",
+      "hash64": "f5ac2ee9ca231b07",
+      "path": "frame-sequences/02-speech-actions-expressions/0340.png"
+    },
+    {
+      "bytes": 10574,
+      "crc32": "d432c1b7",
+      "hash64": "f5ac2ee9ca231b07",
+      "path": "frame-sequences/02-speech-actions-expressions/0341.png"
+    },
+    {
+      "bytes": 10585,
+      "crc32": "352cef08",
+      "hash64": "bab189c07634b9e4",
+      "path": "frame-sequences/02-speech-actions-expressions/0342.png"
+    },
+    {
+      "bytes": 10585,
+      "crc32": "352cef08",
+      "hash64": "bab189c07634b9e4",
+      "path": "frame-sequences/02-speech-actions-expressions/0343.png"
+    },
+    {
+      "bytes": 10573,
+      "crc32": "508be512",
+      "hash64": "7dfcd67e89b0315a",
+      "path": "frame-sequences/02-speech-actions-expressions/0344.png"
+    },
+    {
+      "bytes": 10573,
+      "crc32": "508be512",
+      "hash64": "7dfcd67e89b0315a",
+      "path": "frame-sequences/02-speech-actions-expressions/0345.png"
+    },
+    {
+      "bytes": 10582,
+      "crc32": "0d2d95f4",
+      "hash64": "dd7f0f270b07f88f",
+      "path": "frame-sequences/02-speech-actions-expressions/0346.png"
+    },
+    {
+      "bytes": 10582,
+      "crc32": "0d2d95f4",
+      "hash64": "dd7f0f270b07f88f",
+      "path": "frame-sequences/02-speech-actions-expressions/0347.png"
+    },
+    {
+      "bytes": 10574,
+      "crc32": "d432c1b7",
+      "hash64": "f5ac2ee9ca231b07",
+      "path": "frame-sequences/02-speech-actions-expressions/0348.png"
+    },
+    {
+      "bytes": 10574,
+      "crc32": "d432c1b7",
+      "hash64": "f5ac2ee9ca231b07",
+      "path": "frame-sequences/02-speech-actions-expressions/0349.png"
+    },
+    {
+      "bytes": 10585,
+      "crc32": "352cef08",
+      "hash64": "bab189c07634b9e4",
+      "path": "frame-sequences/02-speech-actions-expressions/0350.png"
+    },
+    {
+      "bytes": 10585,
+      "crc32": "352cef08",
+      "hash64": "bab189c07634b9e4",
+      "path": "frame-sequences/02-speech-actions-expressions/0351.png"
+    },
+    {
+      "bytes": 10573,
+      "crc32": "508be512",
+      "hash64": "7dfcd67e89b0315a",
+      "path": "frame-sequences/02-speech-actions-expressions/0352.png"
+    },
+    {
+      "bytes": 10573,
+      "crc32": "508be512",
+      "hash64": "7dfcd67e89b0315a",
+      "path": "frame-sequences/02-speech-actions-expressions/0353.png"
+    },
+    {
+      "bytes": 10582,
+      "crc32": "0d2d95f4",
+      "hash64": "dd7f0f270b07f88f",
+      "path": "frame-sequences/02-speech-actions-expressions/0354.png"
+    },
+    {
+      "bytes": 10582,
+      "crc32": "0d2d95f4",
+      "hash64": "dd7f0f270b07f88f",
+      "path": "frame-sequences/02-speech-actions-expressions/0355.png"
+    },
+    {
+      "bytes": 10574,
+      "crc32": "d432c1b7",
+      "hash64": "f5ac2ee9ca231b07",
+      "path": "frame-sequences/02-speech-actions-expressions/0356.png"
+    },
+    {
+      "bytes": 10574,
+      "crc32": "d432c1b7",
+      "hash64": "f5ac2ee9ca231b07",
+      "path": "frame-sequences/02-speech-actions-expressions/0357.png"
+    },
+    {
+      "bytes": 10585,
+      "crc32": "352cef08",
+      "hash64": "bab189c07634b9e4",
+      "path": "frame-sequences/02-speech-actions-expressions/0358.png"
+    },
+    {
+      "bytes": 10585,
+      "crc32": "352cef08",
+      "hash64": "bab189c07634b9e4",
+      "path": "frame-sequences/02-speech-actions-expressions/0359.png"
+    },
+    {
+      "bytes": 10573,
+      "crc32": "508be512",
+      "hash64": "7dfcd67e89b0315a",
+      "path": "frame-sequences/02-speech-actions-expressions/0360.png"
+    },
+    {
+      "bytes": 10573,
+      "crc32": "508be512",
+      "hash64": "7dfcd67e89b0315a",
+      "path": "frame-sequences/02-speech-actions-expressions/0361.png"
+    },
+    {
+      "bytes": 10582,
+      "crc32": "0d2d95f4",
+      "hash64": "dd7f0f270b07f88f",
+      "path": "frame-sequences/02-speech-actions-expressions/0362.png"
+    },
+    {
+      "bytes": 10582,
+      "crc32": "0d2d95f4",
+      "hash64": "dd7f0f270b07f88f",
+      "path": "frame-sequences/02-speech-actions-expressions/0363.png"
+    },
+    {
+      "bytes": 10628,
+      "crc32": "eb556faf",
+      "hash64": "2858dfbc873fd15b",
+      "path": "frame-sequences/02-speech-actions-expressions/0364.png"
+    },
+    {
+      "bytes": 10552,
+      "crc32": "966763d2",
+      "hash64": "534806c7018ab96b",
+      "path": "frame-sequences/02-speech-actions-expressions/0365.png"
+    },
+    {
+      "bytes": 10573,
+      "crc32": "508be512",
+      "hash64": "7dfcd67e89b0315a",
+      "path": "frame-sequences/02-speech-actions-expressions/0366.png"
+    },
+    {
+      "bytes": 10582,
+      "crc32": "0d2d95f4",
+      "hash64": "dd7f0f270b07f88f",
+      "path": "frame-sequences/02-speech-actions-expressions/0367.png"
+    },
+    {
+      "bytes": 10582,
+      "crc32": "0d2d95f4",
+      "hash64": "dd7f0f270b07f88f",
+      "path": "frame-sequences/02-speech-actions-expressions/0368.png"
+    },
+    {
+      "bytes": 10574,
+      "crc32": "d432c1b7",
+      "hash64": "f5ac2ee9ca231b07",
+      "path": "frame-sequences/02-speech-actions-expressions/0369.png"
+    },
+    {
+      "bytes": 10574,
+      "crc32": "d432c1b7",
+      "hash64": "f5ac2ee9ca231b07",
+      "path": "frame-sequences/02-speech-actions-expressions/0370.png"
+    },
+    {
+      "bytes": 10585,
+      "crc32": "352cef08",
+      "hash64": "bab189c07634b9e4",
+      "path": "frame-sequences/02-speech-actions-expressions/0371.png"
+    },
+    {
+      "bytes": 10585,
+      "crc32": "352cef08",
+      "hash64": "bab189c07634b9e4",
+      "path": "frame-sequences/02-speech-actions-expressions/0372.png"
+    },
+    {
+      "bytes": 10573,
+      "crc32": "508be512",
+      "hash64": "7dfcd67e89b0315a",
+      "path": "frame-sequences/02-speech-actions-expressions/0373.png"
+    },
+    {
+      "bytes": 10573,
+      "crc32": "508be512",
+      "hash64": "7dfcd67e89b0315a",
+      "path": "frame-sequences/02-speech-actions-expressions/0374.png"
+    },
+    {
+      "bytes": 10582,
+      "crc32": "0d2d95f4",
+      "hash64": "dd7f0f270b07f88f",
+      "path": "frame-sequences/02-speech-actions-expressions/0375.png"
+    },
+    {
+      "bytes": 10582,
+      "crc32": "0d2d95f4",
+      "hash64": "dd7f0f270b07f88f",
+      "path": "frame-sequences/02-speech-actions-expressions/0376.png"
+    },
+    {
+      "bytes": 10574,
+      "crc32": "d432c1b7",
+      "hash64": "f5ac2ee9ca231b07",
+      "path": "frame-sequences/02-speech-actions-expressions/0377.png"
+    },
+    {
+      "bytes": 10574,
+      "crc32": "d432c1b7",
+      "hash64": "f5ac2ee9ca231b07",
+      "path": "frame-sequences/02-speech-actions-expressions/0378.png"
+    },
+    {
+      "bytes": 10520,
+      "crc32": "58fc895e",
+      "hash64": "77677cd5f5fb0765",
+      "path": "frame-sequences/02-speech-actions-expressions/0379.png"
+    },
+    {
+      "bytes": 10537,
+      "crc32": "05319d4c",
+      "hash64": "a457367ed19e8366",
+      "path": "frame-sequences/02-speech-actions-expressions/0380.png"
+    },
+    {
+      "bytes": 10486,
+      "crc32": "6208331a",
+      "hash64": "52af4b19ce62f989",
+      "path": "frame-sequences/02-speech-actions-expressions/0381.png"
+    },
+    {
+      "bytes": 10486,
+      "crc32": "6208331a",
+      "hash64": "52af4b19ce62f989",
+      "path": "frame-sequences/02-speech-actions-expressions/0382.png"
+    },
+    {
+      "bytes": 10486,
+      "crc32": "6208331a",
+      "hash64": "52af4b19ce62f989",
+      "path": "frame-sequences/02-speech-actions-expressions/0383.png"
+    },
+    {
+      "bytes": 10486,
+      "crc32": "6208331a",
+      "hash64": "52af4b19ce62f989",
+      "path": "frame-sequences/02-speech-actions-expressions/0384.png"
+    },
+    {
+      "bytes": 10486,
+      "crc32": "6208331a",
+      "hash64": "52af4b19ce62f989",
+      "path": "frame-sequences/02-speech-actions-expressions/0385.png"
+    },
+    {
+      "bytes": 10486,
+      "crc32": "6208331a",
+      "hash64": "52af4b19ce62f989",
+      "path": "frame-sequences/02-speech-actions-expressions/0386.png"
+    },
+    {
+      "bytes": 10486,
+      "crc32": "6208331a",
+      "hash64": "52af4b19ce62f989",
+      "path": "frame-sequences/02-speech-actions-expressions/0387.png"
+    },
+    {
+      "bytes": 10486,
+      "crc32": "6208331a",
+      "hash64": "52af4b19ce62f989",
+      "path": "frame-sequences/02-speech-actions-expressions/0388.png"
+    },
+    {
+      "bytes": 10486,
+      "crc32": "6208331a",
+      "hash64": "52af4b19ce62f989",
+      "path": "frame-sequences/02-speech-actions-expressions/0389.png"
+    },
+    {
+      "bytes": 10486,
+      "crc32": "6208331a",
+      "hash64": "52af4b19ce62f989",
+      "path": "frame-sequences/02-speech-actions-expressions/0390.png"
+    },
+    {
+      "bytes": 10486,
+      "crc32": "6208331a",
+      "hash64": "52af4b19ce62f989",
+      "path": "frame-sequences/02-speech-actions-expressions/0391.png"
+    },
+    {
+      "bytes": 10494,
+      "crc32": "86a3d846",
+      "hash64": "3173b42482ad5867",
+      "path": "frame-sequences/02-speech-actions-expressions/0392.png"
+    },
+    {
+      "bytes": 10522,
+      "crc32": "81db3041",
+      "hash64": "2ace408290111b32",
+      "path": "frame-sequences/02-speech-actions-expressions/0393.png"
+    },
+    {
+      "bytes": 10696,
+      "crc32": "53a9fc04",
+      "hash64": "4f53747467c65852",
+      "path": "frame-sequences/02-speech-actions-expressions/0394.png"
+    },
+    {
+      "bytes": 10668,
+      "crc32": "7614fa70",
+      "hash64": "e41429916dc9d1f8",
+      "path": "frame-sequences/02-speech-actions-expressions/0395.png"
+    },
+    {
+      "bytes": 10760,
+      "crc32": "b3c8bbe4",
+      "hash64": "c36f83c37fed42bf",
+      "path": "frame-sequences/02-speech-actions-expressions/0396.png"
+    },
+    {
+      "bytes": 11530,
+      "crc32": "4167efa3",
+      "hash64": "0d2652b352e6873d",
+      "path": "frame-sequences/02-speech-actions-expressions/0397.png"
+    },
+    {
+      "bytes": 11470,
+      "crc32": "572b7d44",
+      "hash64": "abbb392036dce94e",
+      "path": "frame-sequences/02-speech-actions-expressions/0398.png"
+    },
+    {
+      "bytes": 11399,
+      "crc32": "e9995830",
+      "hash64": "f544b574dadc7f77",
+      "path": "frame-sequences/02-speech-actions-expressions/0399.png"
+    },
+    {
+      "bytes": 11578,
+      "crc32": "43da882f",
+      "hash64": "f078dfc51e0dc86c",
+      "path": "frame-sequences/02-speech-actions-expressions/0400.png"
+    },
+    {
+      "bytes": 10227,
+      "crc32": "ea70a011",
+      "hash64": "137fcb1122254594",
+      "path": "frame-sequences/02-speech-actions-expressions/0401.png"
+    },
+    {
+      "bytes": 10127,
+      "crc32": "c683beff",
+      "hash64": "ffb48c92e61908b0",
+      "path": "frame-sequences/02-speech-actions-expressions/0402.png"
+    },
+    {
+      "bytes": 10069,
+      "crc32": "dd5f987d",
+      "hash64": "b6bca87d2b441d6b",
+      "path": "frame-sequences/02-speech-actions-expressions/0403.png"
+    },
+    {
+      "bytes": 10075,
+      "crc32": "b12caaca",
+      "hash64": "1bca92254c61a868",
+      "path": "frame-sequences/02-speech-actions-expressions/0404.png"
+    },
+    {
+      "bytes": 10121,
+      "crc32": "48a1e0cb",
+      "hash64": "7551225b68c36cd6",
+      "path": "frame-sequences/02-speech-actions-expressions/0405.png"
+    },
+    {
+      "bytes": 10190,
+      "crc32": "c946912d",
+      "hash64": "cf6f7b6327fe1af2",
+      "path": "frame-sequences/02-speech-actions-expressions/0406.png"
+    },
+    {
+      "bytes": 10188,
+      "crc32": "61f8c9bc",
+      "hash64": "fe4207eef7ccbc1c",
+      "path": "frame-sequences/02-speech-actions-expressions/0407.png"
+    },
+    {
+      "bytes": 10068,
+      "crc32": "7e88ce3b",
+      "hash64": "2ef6448381615de2",
+      "path": "frame-sequences/02-speech-actions-expressions/0408.png"
+    },
+    {
+      "bytes": 10241,
+      "crc32": "6e1e4871",
+      "hash64": "7e4c9c4924287ba3",
+      "path": "frame-sequences/02-speech-actions-expressions/0409.png"
+    },
+    {
+      "bytes": 11464,
+      "crc32": "a0131bc7",
+      "hash64": "37f8afe3ef68f0a3",
+      "path": "frame-sequences/02-speech-actions-expressions/0410.png"
+    },
+    {
+      "bytes": 11382,
+      "crc32": "35c1f7ac",
+      "hash64": "ebe934ddf211368d",
+      "path": "frame-sequences/02-speech-actions-expressions/0411.png"
+    },
+    {
+      "bytes": 11392,
+      "crc32": "1791b5bd",
+      "hash64": "c74f87caa031afbd",
+      "path": "frame-sequences/02-speech-actions-expressions/0412.png"
+    },
+    {
+      "bytes": 11443,
+      "crc32": "5ec37279",
+      "hash64": "ac5a5ffcd0df92e5",
+      "path": "frame-sequences/02-speech-actions-expressions/0413.png"
+    },
+    {
+      "bytes": 11506,
+      "crc32": "b5702b8d",
+      "hash64": "b1e858335745f033",
+      "path": "frame-sequences/02-speech-actions-expressions/0414.png"
+    },
+    {
+      "bytes": 11453,
+      "crc32": "582eb563",
+      "hash64": "87bf6b47fa5f99b1",
+      "path": "frame-sequences/02-speech-actions-expressions/0415.png"
+    },
+    {
+      "bytes": 11465,
+      "crc32": "10f7b52a",
+      "hash64": "931123a4f2191f9b",
+      "path": "frame-sequences/02-speech-actions-expressions/0416.png"
+    },
+    {
+      "bytes": 11603,
+      "crc32": "3112ca09",
+      "hash64": "428d7fbf35114f06",
+      "path": "frame-sequences/02-speech-actions-expressions/0417.png"
+    },
+    {
+      "bytes": 11608,
+      "crc32": "48f226ab",
+      "hash64": "43d2a21691c8aeb0",
+      "path": "frame-sequences/02-speech-actions-expressions/0418.png"
+    },
+    {
+      "bytes": 11523,
+      "crc32": "c656e87d",
+      "hash64": "6adb8d0f54b50caa",
+      "path": "frame-sequences/02-speech-actions-expressions/0419.png"
+    },
+    {
+      "bytes": 10494,
+      "crc32": "86a3d846",
+      "hash64": "3173b42482ad5867",
+      "path": "frame-sequences/02-speech-actions-expressions/0420.png"
+    },
+    {
+      "bytes": 10522,
+      "crc32": "81db3041",
+      "hash64": "2ace408290111b32",
+      "path": "frame-sequences/02-speech-actions-expressions/0421.png"
+    },
+    {
+      "bytes": 10696,
+      "crc32": "53a9fc04",
+      "hash64": "4f53747467c65852",
+      "path": "frame-sequences/02-speech-actions-expressions/0422.png"
+    },
+    {
+      "bytes": 10668,
+      "crc32": "7614fa70",
+      "hash64": "e41429916dc9d1f8",
+      "path": "frame-sequences/02-speech-actions-expressions/0423.png"
+    },
+    {
+      "bytes": 10760,
+      "crc32": "b3c8bbe4",
+      "hash64": "c36f83c37fed42bf",
+      "path": "frame-sequences/02-speech-actions-expressions/0424.png"
+    },
+    {
+      "bytes": 11530,
+      "crc32": "4167efa3",
+      "hash64": "0d2652b352e6873d",
+      "path": "frame-sequences/02-speech-actions-expressions/0425.png"
+    },
+    {
+      "bytes": 11470,
+      "crc32": "572b7d44",
+      "hash64": "abbb392036dce94e",
+      "path": "frame-sequences/02-speech-actions-expressions/0426.png"
+    },
+    {
+      "bytes": 11399,
+      "crc32": "e9995830",
+      "hash64": "f544b574dadc7f77",
+      "path": "frame-sequences/02-speech-actions-expressions/0427.png"
+    },
+    {
+      "bytes": 11578,
+      "crc32": "43da882f",
+      "hash64": "f078dfc51e0dc86c",
+      "path": "frame-sequences/02-speech-actions-expressions/0428.png"
+    },
+    {
+      "bytes": 10227,
+      "crc32": "ea70a011",
+      "hash64": "137fcb1122254594",
+      "path": "frame-sequences/02-speech-actions-expressions/0429.png"
+    },
+    {
+      "bytes": 10127,
+      "crc32": "c683beff",
+      "hash64": "ffb48c92e61908b0",
+      "path": "frame-sequences/02-speech-actions-expressions/0430.png"
+    },
+    {
+      "bytes": 10069,
+      "crc32": "dd5f987d",
+      "hash64": "b6bca87d2b441d6b",
+      "path": "frame-sequences/02-speech-actions-expressions/0431.png"
+    },
+    {
+      "bytes": 10202,
+      "crc32": "4cfd0100",
+      "hash64": "3954bbfddfa62ab2",
+      "path": "frame-sequences/02-speech-actions-expressions/0432.png"
+    },
+    {
+      "bytes": 10242,
+      "crc32": "e8e7c7b7",
+      "hash64": "7914cea4ae75b0e9",
+      "path": "frame-sequences/02-speech-actions-expressions/0433.png"
+    },
+    {
+      "bytes": 12556,
+      "crc32": "b9e2b8c9",
+      "hash64": "1e07ee408005a484",
+      "path": "frame-sequences/02-speech-actions-expressions/0434.png"
+    },
+    {
+      "bytes": 12282,
+      "crc32": "f0c3fdf6",
+      "hash64": "e989af99073113c6",
+      "path": "frame-sequences/02-speech-actions-expressions/0435.png"
+    },
+    {
+      "bytes": 12305,
+      "crc32": "f15a1e69",
+      "hash64": "6552e31d0bca6ac1",
+      "path": "frame-sequences/02-speech-actions-expressions/0436.png"
+    },
+    {
+      "bytes": 12355,
+      "crc32": "69410255",
+      "hash64": "9af898a365abe5db",
+      "path": "frame-sequences/02-speech-actions-expressions/0437.png"
+    },
+    {
+      "bytes": 12285,
+      "crc32": "226dd6ae",
+      "hash64": "dac063f4a74bd55b",
+      "path": "frame-sequences/02-speech-actions-expressions/0438.png"
+    },
+    {
+      "bytes": 12333,
+      "crc32": "d3b946e1",
+      "hash64": "f5b927bb19ff6b8e",
+      "path": "frame-sequences/02-speech-actions-expressions/0439.png"
+    },
+    {
+      "bytes": 12174,
+      "crc32": "cef57504",
+      "hash64": "f4485716d9d2d810",
+      "path": "frame-sequences/02-speech-actions-expressions/0440.png"
+    },
+    {
+      "bytes": 12218,
+      "crc32": "223ded3a",
+      "hash64": "a32a86623651cc40",
+      "path": "frame-sequences/02-speech-actions-expressions/0441.png"
+    },
+    {
+      "bytes": 12295,
+      "crc32": "28677e54",
+      "hash64": "dabc16b51d68613a",
+      "path": "frame-sequences/02-speech-actions-expressions/0442.png"
+    },
+    {
+      "bytes": 12298,
+      "crc32": "f2b51764",
+      "hash64": "241b25fdc6d2e2c6",
+      "path": "frame-sequences/02-speech-actions-expressions/0443.png"
+    },
+    {
+      "bytes": 12279,
+      "crc32": "c25f9354",
+      "hash64": "7b050af7053affba",
+      "path": "frame-sequences/02-speech-actions-expressions/0444.png"
+    },
+    {
+      "bytes": 12283,
+      "crc32": "a3171112",
+      "hash64": "5ce0e93d40573e14",
+      "path": "frame-sequences/02-speech-actions-expressions/0445.png"
+    },
+    {
+      "bytes": 12278,
+      "crc32": "cdba2d5f",
+      "hash64": "21d623235d97efd4",
+      "path": "frame-sequences/02-speech-actions-expressions/0446.png"
+    },
+    {
+      "bytes": 12268,
+      "crc32": "bfcd7b68",
+      "hash64": "1de4aeeca1dc7f5a",
+      "path": "frame-sequences/02-speech-actions-expressions/0447.png"
+    },
+    {
+      "bytes": 10692,
+      "crc32": "ba9efcc3",
+      "hash64": "baec74710e5d56f8",
+      "path": "frame-sequences/02-speech-actions-expressions/0448.png"
+    },
+    {
+      "bytes": 10750,
+      "crc32": "3144e3aa",
+      "hash64": "081ad61f092b59d6",
+      "path": "frame-sequences/02-speech-actions-expressions/0449.png"
+    },
+    {
+      "bytes": 12573,
+      "crc32": "5017372f",
+      "hash64": "88b1937dd0a4e630",
+      "path": "frame-sequences/02-speech-actions-expressions/0450.png"
+    },
+    {
+      "bytes": 12345,
+      "crc32": "dac2d8e0",
+      "hash64": "c93b987516a3691d",
+      "path": "frame-sequences/02-speech-actions-expressions/0451.png"
+    },
+    {
+      "bytes": 12119,
+      "crc32": "76daa5ac",
+      "hash64": "4ad2662f35190b8a",
+      "path": "frame-sequences/02-speech-actions-expressions/0452.png"
+    },
+    {
+      "bytes": 12116,
+      "crc32": "c22ff557",
+      "hash64": "0ee15ed18ccfcc7c",
+      "path": "frame-sequences/02-speech-actions-expressions/0453.png"
+    },
+    {
+      "bytes": 12116,
+      "crc32": "c22ff557",
+      "hash64": "0ee15ed18ccfcc7c",
+      "path": "frame-sequences/02-speech-actions-expressions/0454.png"
+    },
+    {
+      "bytes": 12116,
+      "crc32": "c22ff557",
+      "hash64": "0ee15ed18ccfcc7c",
+      "path": "frame-sequences/02-speech-actions-expressions/0455.png"
+    },
+    {
+      "bytes": 12116,
+      "crc32": "c22ff557",
+      "hash64": "0ee15ed18ccfcc7c",
+      "path": "frame-sequences/02-speech-actions-expressions/0456.png"
+    },
+    {
+      "bytes": 12116,
+      "crc32": "c22ff557",
+      "hash64": "0ee15ed18ccfcc7c",
+      "path": "frame-sequences/02-speech-actions-expressions/0457.png"
+    },
+    {
+      "bytes": 12116,
+      "crc32": "c22ff557",
+      "hash64": "0ee15ed18ccfcc7c",
+      "path": "frame-sequences/02-speech-actions-expressions/0458.png"
+    },
+    {
+      "bytes": 12116,
+      "crc32": "c22ff557",
+      "hash64": "0ee15ed18ccfcc7c",
+      "path": "frame-sequences/02-speech-actions-expressions/0459.png"
+    },
+    {
+      "bytes": 12312,
+      "crc32": "e2f6f12c",
+      "hash64": "d7009f1da5f805b1",
+      "path": "frame-sequences/02-speech-actions-expressions/0460.png"
+    },
+    {
+      "bytes": 12312,
+      "crc32": "eb2f464f",
+      "hash64": "ccc04e0e38e50e04",
+      "path": "frame-sequences/02-speech-actions-expressions/0461.png"
+    },
+    {
+      "bytes": 12277,
+      "crc32": "00f649bd",
+      "hash64": "2e4908af5ca5b3e9",
+      "path": "frame-sequences/02-speech-actions-expressions/0462.png"
+    },
+    {
+      "bytes": 12307,
+      "crc32": "96feb69a",
+      "hash64": "3c43513dca10c589",
+      "path": "frame-sequences/02-speech-actions-expressions/0463.png"
+    },
+    {
+      "bytes": 11144,
+      "crc32": "9dceb915",
+      "hash64": "a7d538c8bbbf226c",
+      "path": "frame-sequences/02-speech-actions-expressions/0464.png"
+    },
+    {
+      "bytes": 11031,
+      "crc32": "6136aa51",
+      "hash64": "d095ce8bd579448a",
+      "path": "frame-sequences/02-speech-actions-expressions/0465.png"
+    },
+    {
+      "bytes": 10937,
+      "crc32": "e700df9c",
+      "hash64": "0560ef55c086796e",
+      "path": "frame-sequences/02-speech-actions-expressions/0466.png"
+    },
+    {
+      "bytes": 10991,
+      "crc32": "2c5cac8b",
+      "hash64": "c2d974e1db2e38a5",
+      "path": "frame-sequences/02-speech-actions-expressions/0467.png"
+    },
+    {
+      "bytes": 10883,
+      "crc32": "5298efb3",
+      "hash64": "5d87c6d5a4176353",
+      "path": "frame-sequences/02-speech-actions-expressions/0468.png"
+    },
+    {
+      "bytes": 10868,
+      "crc32": "d2f5433e",
+      "hash64": "d8c70d98ead416c6",
+      "path": "frame-sequences/02-speech-actions-expressions/0469.png"
+    },
+    {
+      "bytes": 10873,
+      "crc32": "e349e8b9",
+      "hash64": "f78244f32642addd",
+      "path": "frame-sequences/02-speech-actions-expressions/0470.png"
+    },
+    {
+      "bytes": 10970,
+      "crc32": "86df541c",
+      "hash64": "b1a260a9859fd4b4",
+      "path": "frame-sequences/02-speech-actions-expressions/0471.png"
+    },
+    {
+      "bytes": 11174,
+      "crc32": "9d994541",
+      "hash64": "64229b7b8da019f8",
+      "path": "frame-sequences/02-speech-actions-expressions/0472.png"
+    },
+    {
+      "bytes": 11071,
+      "crc32": "f1d6397d",
+      "hash64": "827d53583add0500",
+      "path": "frame-sequences/02-speech-actions-expressions/0473.png"
+    },
+    {
+      "bytes": 11248,
+      "crc32": "380a56da",
+      "hash64": "fb1e40e163f53957",
+      "path": "frame-sequences/02-speech-actions-expressions/0474.png"
+    },
+    {
+      "bytes": 11211,
+      "crc32": "39022882",
+      "hash64": "91537e349fba7962",
+      "path": "frame-sequences/02-speech-actions-expressions/0475.png"
+    },
+    {
+      "bytes": 10494,
+      "crc32": "86a3d846",
+      "hash64": "3173b42482ad5867",
+      "path": "frame-sequences/03-circles-figure-eight/0000.png"
+    },
+    {
+      "bytes": 10522,
+      "crc32": "81db3041",
+      "hash64": "2ace408290111b32",
+      "path": "frame-sequences/03-circles-figure-eight/0001.png"
+    },
+    {
+      "bytes": 10696,
+      "crc32": "53a9fc04",
+      "hash64": "4f53747467c65852",
+      "path": "frame-sequences/03-circles-figure-eight/0002.png"
+    },
+    {
+      "bytes": 10668,
+      "crc32": "7614fa70",
+      "hash64": "e41429916dc9d1f8",
+      "path": "frame-sequences/03-circles-figure-eight/0003.png"
+    },
+    {
+      "bytes": 10760,
+      "crc32": "b3c8bbe4",
+      "hash64": "c36f83c37fed42bf",
+      "path": "frame-sequences/03-circles-figure-eight/0004.png"
+    },
+    {
+      "bytes": 11530,
+      "crc32": "4167efa3",
+      "hash64": "0d2652b352e6873d",
+      "path": "frame-sequences/03-circles-figure-eight/0005.png"
+    },
+    {
+      "bytes": 11470,
+      "crc32": "572b7d44",
+      "hash64": "abbb392036dce94e",
+      "path": "frame-sequences/03-circles-figure-eight/0006.png"
+    },
+    {
+      "bytes": 11399,
+      "crc32": "e9995830",
+      "hash64": "f544b574dadc7f77",
+      "path": "frame-sequences/03-circles-figure-eight/0007.png"
+    },
+    {
+      "bytes": 11555,
+      "crc32": "adfa2431",
+      "hash64": "12a46e0d40c39d62",
+      "path": "frame-sequences/03-circles-figure-eight/0008.png"
+    },
+    {
+      "bytes": 11385,
+      "crc32": "9210945f",
+      "hash64": "dbaedc80dc26cba1",
+      "path": "frame-sequences/03-circles-figure-eight/0009.png"
+    },
+    {
+      "bytes": 10097,
+      "crc32": "1f0ab2a0",
+      "hash64": "ba163596f3efac8a",
+      "path": "frame-sequences/03-circles-figure-eight/0010.png"
+    },
+    {
+      "bytes": 10107,
+      "crc32": "2f948de2",
+      "hash64": "73e2ac426b4dbf9a",
+      "path": "frame-sequences/03-circles-figure-eight/0011.png"
+    },
+    {
+      "bytes": 10031,
+      "crc32": "d5bcde3a",
+      "hash64": "2585698610921d14",
+      "path": "frame-sequences/03-circles-figure-eight/0012.png"
+    },
+    {
+      "bytes": 10007,
+      "crc32": "9f703db4",
+      "hash64": "9bf5854cd0462375",
+      "path": "frame-sequences/03-circles-figure-eight/0013.png"
+    },
+    {
+      "bytes": 10031,
+      "crc32": "d5bcde3a",
+      "hash64": "2585698610921d14",
+      "path": "frame-sequences/03-circles-figure-eight/0014.png"
+    },
+    {
+      "bytes": 10040,
+      "crc32": "9a53f842",
+      "hash64": "0ff286c9858cd91f",
+      "path": "frame-sequences/03-circles-figure-eight/0015.png"
+    },
+    {
+      "bytes": 9992,
+      "crc32": "223ff41e",
+      "hash64": "23ca0e717218b3b3",
+      "path": "frame-sequences/03-circles-figure-eight/0016.png"
+    },
+    {
+      "bytes": 10010,
+      "crc32": "523e07b1",
+      "hash64": "6a26363afa112810",
+      "path": "frame-sequences/03-circles-figure-eight/0017.png"
+    },
+    {
+      "bytes": 10159,
+      "crc32": "eca82b13",
+      "hash64": "1c2036ed32447e71",
+      "path": "frame-sequences/03-circles-figure-eight/0018.png"
+    },
+    {
+      "bytes": 11526,
+      "crc32": "c3f35daf",
+      "hash64": "314722ca965f5a99",
+      "path": "frame-sequences/03-circles-figure-eight/0019.png"
+    },
+    {
+      "bytes": 11294,
+      "crc32": "58cbf5ae",
+      "hash64": "2c166560e4fede79",
+      "path": "frame-sequences/03-circles-figure-eight/0020.png"
+    },
+    {
+      "bytes": 11312,
+      "crc32": "ebbb2d36",
+      "hash64": "b23a6ab544b80ee8",
+      "path": "frame-sequences/03-circles-figure-eight/0021.png"
+    },
+    {
+      "bytes": 10610,
+      "crc32": "01b21c44",
+      "hash64": "4e8fcaeb1040c751",
+      "path": "frame-sequences/03-circles-figure-eight/0022.png"
+    },
+    {
+      "bytes": 10750,
+      "crc32": "731063aa",
+      "hash64": "3af0debf5c6517ff",
+      "path": "frame-sequences/03-circles-figure-eight/0023.png"
+    },
+    {
+      "bytes": 10735,
+      "crc32": "bcff605d",
+      "hash64": "f54ed476a20b6bb0",
+      "path": "frame-sequences/03-circles-figure-eight/0024.png"
+    },
+    {
+      "bytes": 10879,
+      "crc32": "4b09b721",
+      "hash64": "735f5e16ae314986",
+      "path": "frame-sequences/03-circles-figure-eight/0025.png"
+    },
+    {
+      "bytes": 10698,
+      "crc32": "9da8f4a8",
+      "hash64": "076abe2b49adcc08",
+      "path": "frame-sequences/03-circles-figure-eight/0026.png"
+    },
+    {
+      "bytes": 10666,
+      "crc32": "ca06bd47",
+      "hash64": "0705320266f00125",
+      "path": "frame-sequences/03-circles-figure-eight/0027.png"
+    },
+    {
+      "bytes": 10494,
+      "crc32": "86a3d846",
+      "hash64": "3173b42482ad5867",
+      "path": "frame-sequences/03-circles-figure-eight/0028.png"
+    },
+    {
+      "bytes": 10522,
+      "crc32": "81db3041",
+      "hash64": "2ace408290111b32",
+      "path": "frame-sequences/03-circles-figure-eight/0029.png"
+    },
+    {
+      "bytes": 10696,
+      "crc32": "53a9fc04",
+      "hash64": "4f53747467c65852",
+      "path": "frame-sequences/03-circles-figure-eight/0030.png"
+    },
+    {
+      "bytes": 10668,
+      "crc32": "7614fa70",
+      "hash64": "e41429916dc9d1f8",
+      "path": "frame-sequences/03-circles-figure-eight/0031.png"
+    },
+    {
+      "bytes": 10760,
+      "crc32": "b3c8bbe4",
+      "hash64": "c36f83c37fed42bf",
+      "path": "frame-sequences/03-circles-figure-eight/0032.png"
+    },
+    {
+      "bytes": 11530,
+      "crc32": "4167efa3",
+      "hash64": "0d2652b352e6873d",
+      "path": "frame-sequences/03-circles-figure-eight/0033.png"
+    },
+    {
+      "bytes": 11470,
+      "crc32": "572b7d44",
+      "hash64": "abbb392036dce94e",
+      "path": "frame-sequences/03-circles-figure-eight/0034.png"
+    },
+    {
+      "bytes": 11399,
+      "crc32": "e9995830",
+      "hash64": "f544b574dadc7f77",
+      "path": "frame-sequences/03-circles-figure-eight/0035.png"
+    },
+    {
+      "bytes": 11555,
+      "crc32": "adfa2431",
+      "hash64": "12a46e0d40c39d62",
+      "path": "frame-sequences/03-circles-figure-eight/0036.png"
+    },
+    {
+      "bytes": 11385,
+      "crc32": "9210945f",
+      "hash64": "dbaedc80dc26cba1",
+      "path": "frame-sequences/03-circles-figure-eight/0037.png"
+    },
+    {
+      "bytes": 10097,
+      "crc32": "1f0ab2a0",
+      "hash64": "ba163596f3efac8a",
+      "path": "frame-sequences/03-circles-figure-eight/0038.png"
+    },
+    {
+      "bytes": 10107,
+      "crc32": "2f948de2",
+      "hash64": "73e2ac426b4dbf9a",
+      "path": "frame-sequences/03-circles-figure-eight/0039.png"
+    },
+    {
+      "bytes": 10031,
+      "crc32": "d5bcde3a",
+      "hash64": "2585698610921d14",
+      "path": "frame-sequences/03-circles-figure-eight/0040.png"
+    },
+    {
+      "bytes": 10007,
+      "crc32": "9f703db4",
+      "hash64": "9bf5854cd0462375",
+      "path": "frame-sequences/03-circles-figure-eight/0041.png"
+    },
+    {
+      "bytes": 10031,
+      "crc32": "d5bcde3a",
+      "hash64": "2585698610921d14",
+      "path": "frame-sequences/03-circles-figure-eight/0042.png"
+    },
+    {
+      "bytes": 10032,
+      "crc32": "5816dd89",
+      "hash64": "b195032b075a03bf",
+      "path": "frame-sequences/03-circles-figure-eight/0043.png"
+    },
+    {
+      "bytes": 9992,
+      "crc32": "223ff41e",
+      "hash64": "23ca0e717218b3b3",
+      "path": "frame-sequences/03-circles-figure-eight/0044.png"
+    },
+    {
+      "bytes": 10012,
+      "crc32": "0b338fb0",
+      "hash64": "fcae340a277b9316",
+      "path": "frame-sequences/03-circles-figure-eight/0045.png"
+    },
+    {
+      "bytes": 10133,
+      "crc32": "355769aa",
+      "hash64": "d338099ac3599f64",
+      "path": "frame-sequences/03-circles-figure-eight/0046.png"
+    },
+    {
+      "bytes": 11789,
+      "crc32": "b02c550a",
+      "hash64": "c00c3d7dfdd00632",
+      "path": "frame-sequences/03-circles-figure-eight/0047.png"
+    },
+    {
+      "bytes": 11744,
+      "crc32": "9eb1af86",
+      "hash64": "26d80e614e9aae55",
+      "path": "frame-sequences/03-circles-figure-eight/0048.png"
+    },
+    {
+      "bytes": 11767,
+      "crc32": "f2eabb34",
+      "hash64": "2098f457be246eac",
+      "path": "frame-sequences/03-circles-figure-eight/0049.png"
+    },
+    {
+      "bytes": 10925,
+      "crc32": "49884a45",
+      "hash64": "392c204ac905c662",
+      "path": "frame-sequences/03-circles-figure-eight/0050.png"
+    },
+    {
+      "bytes": 11704,
+      "crc32": "a50d5372",
+      "hash64": "f4776eb8381d75c3",
+      "path": "frame-sequences/03-circles-figure-eight/0051.png"
+    },
+    {
+      "bytes": 11385,
+      "crc32": "c456bda7",
+      "hash64": "ee1407c5ddf00e8d",
+      "path": "frame-sequences/03-circles-figure-eight/0052.png"
+    },
+    {
+      "bytes": 11585,
+      "crc32": "0a303f3e",
+      "hash64": "4653a17d62a537e0",
+      "path": "frame-sequences/03-circles-figure-eight/0053.png"
+    },
+    {
+      "bytes": 11655,
+      "crc32": "f744dd26",
+      "hash64": "a9520b63d89ce3e6",
+      "path": "frame-sequences/03-circles-figure-eight/0054.png"
+    },
+    {
+      "bytes": 11633,
+      "crc32": "4a6d9f7c",
+      "hash64": "4f276328143d57c5",
+      "path": "frame-sequences/03-circles-figure-eight/0055.png"
+    },
+    {
+      "bytes": 10494,
+      "crc32": "86a3d846",
+      "hash64": "3173b42482ad5867",
+      "path": "frame-sequences/03-circles-figure-eight/0056.png"
+    },
+    {
+      "bytes": 10523,
+      "crc32": "9d044854",
+      "hash64": "bc6c86ccb9ff3638",
+      "path": "frame-sequences/03-circles-figure-eight/0057.png"
+    },
+    {
+      "bytes": 10551,
+      "crc32": "42cee612",
+      "hash64": "baf60dbe4fb7d1de",
+      "path": "frame-sequences/03-circles-figure-eight/0058.png"
+    },
+    {
+      "bytes": 10677,
+      "crc32": "9ae9ae1f",
+      "hash64": "766c5ebb64869b2a",
+      "path": "frame-sequences/03-circles-figure-eight/0059.png"
+    },
+    {
+      "bytes": 10715,
+      "crc32": "f17f6be6",
+      "hash64": "dd3d0936c9c25874",
+      "path": "frame-sequences/03-circles-figure-eight/0060.png"
+    },
+    {
+      "bytes": 11532,
+      "crc32": "75ef8c0b",
+      "hash64": "6d076623f7070291",
+      "path": "frame-sequences/03-circles-figure-eight/0061.png"
+    },
+    {
+      "bytes": 11437,
+      "crc32": "713d6061",
+      "hash64": "84c217cfb220ab72",
+      "path": "frame-sequences/03-circles-figure-eight/0062.png"
+    },
+    {
+      "bytes": 11397,
+      "crc32": "c7e10f2f",
+      "hash64": "93e8f1e66b8525a0",
+      "path": "frame-sequences/03-circles-figure-eight/0063.png"
+    },
+    {
+      "bytes": 11509,
+      "crc32": "feab74aa",
+      "hash64": "3271e2b66f5b0b36",
+      "path": "frame-sequences/03-circles-figure-eight/0064.png"
+    },
+    {
+      "bytes": 10112,
+      "crc32": "23b3fcf6",
+      "hash64": "ab7a8563b1028cd2",
+      "path": "frame-sequences/03-circles-figure-eight/0065.png"
+    },
+    {
+      "bytes": 10095,
+      "crc32": "eba19649",
+      "hash64": "7ec49c9eac249a07",
+      "path": "frame-sequences/03-circles-figure-eight/0066.png"
+    },
+    {
+      "bytes": 10212,
+      "crc32": "bea6f692",
+      "hash64": "ebdbbe4807634e62",
+      "path": "frame-sequences/03-circles-figure-eight/0067.png"
+    },
+    {
+      "bytes": 10094,
+      "crc32": "bef1fbe8",
+      "hash64": "bc16179931c12a4f",
+      "path": "frame-sequences/03-circles-figure-eight/0068.png"
+    },
+    {
+      "bytes": 10182,
+      "crc32": "9e337512",
+      "hash64": "931e59c04b7903f7",
+      "path": "frame-sequences/03-circles-figure-eight/0069.png"
+    },
+    {
+      "bytes": 10021,
+      "crc32": "442ffd2a",
+      "hash64": "37f1bbf5ca980fec",
+      "path": "frame-sequences/03-circles-figure-eight/0070.png"
+    },
+    {
+      "bytes": 10231,
+      "crc32": "0d2abd54",
+      "hash64": "59b26825715b7ebd",
+      "path": "frame-sequences/03-circles-figure-eight/0071.png"
+    },
+    {
+      "bytes": 10667,
+      "crc32": "d5c388d7",
+      "hash64": "e0d61fe1eec42fe9",
+      "path": "frame-sequences/03-circles-figure-eight/0072.png"
+    },
+    {
+      "bytes": 10699,
+      "crc32": "13e85357",
+      "hash64": "decd01914f6a57a3",
+      "path": "frame-sequences/03-circles-figure-eight/0073.png"
+    },
+    {
+      "bytes": 10679,
+      "crc32": "4cd6f967",
+      "hash64": "1e1194b4a2ca8790",
+      "path": "frame-sequences/03-circles-figure-eight/0074.png"
+    },
+    {
+      "bytes": 10643,
+      "crc32": "dab76750",
+      "hash64": "e324d9b0bd3b4880",
+      "path": "frame-sequences/03-circles-figure-eight/0075.png"
+    },
+    {
+      "bytes": 10646,
+      "crc32": "41760e70",
+      "hash64": "754d67253b038364",
+      "path": "frame-sequences/03-circles-figure-eight/0076.png"
+    },
+    {
+      "bytes": 10618,
+      "crc32": "8a17ef7b",
+      "hash64": "29b8ea0bb597e1f5",
+      "path": "frame-sequences/03-circles-figure-eight/0077.png"
+    },
+    {
+      "bytes": 9666,
+      "crc32": "007f80c2",
+      "hash64": "410d856986385f72",
+      "path": "frame-sequences/03-circles-figure-eight/0078.png"
+    },
+    {
+      "bytes": 9620,
+      "crc32": "9537c1eb",
+      "hash64": "897ef6f662c19bae",
+      "path": "frame-sequences/03-circles-figure-eight/0079.png"
+    },
+    {
+      "bytes": 9594,
+      "crc32": "d2444d77",
+      "hash64": "1fa9af55a7c675a4",
+      "path": "frame-sequences/03-circles-figure-eight/0080.png"
+    },
+    {
+      "bytes": 9608,
+      "crc32": "6cecb4a8",
+      "hash64": "e3ee0957f767f4fc",
+      "path": "frame-sequences/03-circles-figure-eight/0081.png"
+    },
+    {
+      "bytes": 9773,
+      "crc32": "2e010519",
+      "hash64": "b600761290cb141a",
+      "path": "frame-sequences/03-circles-figure-eight/0082.png"
+    },
+    {
+      "bytes": 9861,
+      "crc32": "49de3464",
+      "hash64": "d8609b1f3dbd2dec",
+      "path": "frame-sequences/03-circles-figure-eight/0083.png"
+    },
+    {
+      "bytes": 10494,
+      "crc32": "86a3d846",
+      "hash64": "3173b42482ad5867",
+      "path": "frame-sequences/04-reconnect-replay/0000.png"
+    },
+    {
+      "bytes": 10522,
+      "crc32": "81db3041",
+      "hash64": "2ace408290111b32",
+      "path": "frame-sequences/04-reconnect-replay/0001.png"
+    },
+    {
+      "bytes": 10696,
+      "crc32": "53a9fc04",
+      "hash64": "4f53747467c65852",
+      "path": "frame-sequences/04-reconnect-replay/0002.png"
+    },
+    {
+      "bytes": 10668,
+      "crc32": "7614fa70",
+      "hash64": "e41429916dc9d1f8",
+      "path": "frame-sequences/04-reconnect-replay/0003.png"
+    },
+    {
+      "bytes": 10760,
+      "crc32": "b3c8bbe4",
+      "hash64": "c36f83c37fed42bf",
+      "path": "frame-sequences/04-reconnect-replay/0004.png"
+    },
+    {
+      "bytes": 11530,
+      "crc32": "4167efa3",
+      "hash64": "0d2652b352e6873d",
+      "path": "frame-sequences/04-reconnect-replay/0005.png"
+    },
+    {
+      "bytes": 11470,
+      "crc32": "572b7d44",
+      "hash64": "abbb392036dce94e",
+      "path": "frame-sequences/04-reconnect-replay/0006.png"
+    },
+    {
+      "bytes": 11399,
+      "crc32": "e9995830",
+      "hash64": "f544b574dadc7f77",
+      "path": "frame-sequences/04-reconnect-replay/0007.png"
+    },
+    {
+      "bytes": 11578,
+      "crc32": "43da882f",
+      "hash64": "f078dfc51e0dc86c",
+      "path": "frame-sequences/04-reconnect-replay/0008.png"
+    },
+    {
+      "bytes": 10227,
+      "crc32": "ea70a011",
+      "hash64": "137fcb1122254594",
+      "path": "frame-sequences/04-reconnect-replay/0009.png"
+    },
+    {
+      "bytes": 10127,
+      "crc32": "c683beff",
+      "hash64": "ffb48c92e61908b0",
+      "path": "frame-sequences/04-reconnect-replay/0010.png"
+    },
+    {
+      "bytes": 10069,
+      "crc32": "dd5f987d",
+      "hash64": "b6bca87d2b441d6b",
+      "path": "frame-sequences/04-reconnect-replay/0011.png"
+    },
+    {
+      "bytes": 10062,
+      "crc32": "c2559a0d",
+      "hash64": "171be5c6e1e2e253",
+      "path": "frame-sequences/04-reconnect-replay/0012.png"
+    },
+    {
+      "bytes": 10137,
+      "crc32": "702b4920",
+      "hash64": "81599f3b853797f4",
+      "path": "frame-sequences/04-reconnect-replay/0013.png"
+    },
+    {
+      "bytes": 10169,
+      "crc32": "2cc4ffb8",
+      "hash64": "647d3f5996fb8b95",
+      "path": "frame-sequences/04-reconnect-replay/0014.png"
+    },
+    {
+      "bytes": 10161,
+      "crc32": "38c6e734",
+      "hash64": "17a9c5f60268d1cf",
+      "path": "frame-sequences/04-reconnect-replay/0015.png"
+    },
+    {
+      "bytes": 10159,
+      "crc32": "28f9344f",
+      "hash64": "50a054dcbbc4ea8d",
+      "path": "frame-sequences/04-reconnect-replay/0016.png"
+    },
+    {
+      "bytes": 10273,
+      "crc32": "e18ef7f8",
+      "hash64": "a3226806599f9b7d",
+      "path": "frame-sequences/04-reconnect-replay/0017.png"
+    },
+    {
+      "bytes": 10098,
+      "crc32": "00400786",
+      "hash64": "6f7e8ef5ef126a29",
+      "path": "frame-sequences/04-reconnect-replay/0018.png"
+    },
+    {
+      "bytes": 10017,
+      "crc32": "3f858a37",
+      "hash64": "783e8fd7da9c2051",
+      "path": "frame-sequences/04-reconnect-replay/0019.png"
+    },
+    {
+      "bytes": 10058,
+      "crc32": "7b72e95a",
+      "hash64": "ba0ef6210c3c571d",
+      "path": "frame-sequences/04-reconnect-replay/0020.png"
+    },
+    {
+      "bytes": 10068,
+      "crc32": "2d08a428",
+      "hash64": "2260294e4c90e977",
+      "path": "frame-sequences/04-reconnect-replay/0021.png"
+    },
+    {
+      "bytes": 10162,
+      "crc32": "1a50fe20",
+      "hash64": "e4858cb1c8801bf8",
+      "path": "frame-sequences/04-reconnect-replay/0022.png"
+    },
+    {
+      "bytes": 10241,
+      "crc32": "c707264c",
+      "hash64": "906c51cd1cb2b97a",
+      "path": "frame-sequences/04-reconnect-replay/0023.png"
+    },
+    {
+      "bytes": 10169,
+      "crc32": "a9591128",
+      "hash64": "75dc518a1f965885",
+      "path": "frame-sequences/04-reconnect-replay/0024.png"
+    },
+    {
+      "bytes": 10218,
+      "crc32": "d7d3a94b",
+      "hash64": "8d8c0cc2fc296308",
+      "path": "frame-sequences/04-reconnect-replay/0025.png"
+    },
+    {
+      "bytes": 10139,
+      "crc32": "5ffcc654",
+      "hash64": "35362e041c2f6194",
+      "path": "frame-sequences/04-reconnect-replay/0026.png"
+    },
+    {
+      "bytes": 10104,
+      "crc32": "e54c60b5",
+      "hash64": "d392cbe7a824f486",
+      "path": "frame-sequences/04-reconnect-replay/0027.png"
+    },
+    {
+      "bytes": 10704,
+      "crc32": "68ad6def",
+      "hash64": "25e2a0b06fe5c846",
+      "path": "frame-sequences/04-reconnect-replay/0028.png"
+    },
+    {
+      "bytes": 10644,
+      "crc32": "6614c64e",
+      "hash64": "e59cfe3bff9d7f70",
+      "path": "frame-sequences/04-reconnect-replay/0029.png"
+    },
+    {
+      "bytes": 11723,
+      "crc32": "c996e296",
+      "hash64": "961a1db129cbcb87",
+      "path": "frame-sequences/04-reconnect-replay/0030.png"
+    },
+    {
+      "bytes": 11747,
+      "crc32": "e53e3c6b",
+      "hash64": "b05a0a304601ef32",
+      "path": "frame-sequences/04-reconnect-replay/0031.png"
+    },
+    {
+      "bytes": 11938,
+      "crc32": "78dd82ee",
+      "hash64": "286c02e9ba84280a",
+      "path": "frame-sequences/04-reconnect-replay/0032.png"
+    },
+    {
+      "bytes": 11938,
+      "crc32": "78dd82ee",
+      "hash64": "286c02e9ba84280a",
+      "path": "frame-sequences/04-reconnect-replay/0033.png"
+    },
+    {
+      "bytes": 11938,
+      "crc32": "78dd82ee",
+      "hash64": "286c02e9ba84280a",
+      "path": "frame-sequences/04-reconnect-replay/0034.png"
+    },
+    {
+      "bytes": 11938,
+      "crc32": "78dd82ee",
+      "hash64": "286c02e9ba84280a",
+      "path": "frame-sequences/04-reconnect-replay/0035.png"
+    },
+    {
+      "bytes": 11938,
+      "crc32": "78dd82ee",
+      "hash64": "286c02e9ba84280a",
+      "path": "frame-sequences/04-reconnect-replay/0036.png"
+    },
+    {
+      "bytes": 11938,
+      "crc32": "78dd82ee",
+      "hash64": "286c02e9ba84280a",
+      "path": "frame-sequences/04-reconnect-replay/0037.png"
+    },
+    {
+      "bytes": 11938,
+      "crc32": "78dd82ee",
+      "hash64": "286c02e9ba84280a",
+      "path": "frame-sequences/04-reconnect-replay/0038.png"
+    },
+    {
+      "bytes": 11938,
+      "crc32": "78dd82ee",
+      "hash64": "286c02e9ba84280a",
+      "path": "frame-sequences/04-reconnect-replay/0039.png"
+    },
+    {
+      "bytes": 11938,
+      "crc32": "78dd82ee",
+      "hash64": "286c02e9ba84280a",
+      "path": "frame-sequences/04-reconnect-replay/0040.png"
+    },
+    {
+      "bytes": 11938,
+      "crc32": "78dd82ee",
+      "hash64": "286c02e9ba84280a",
+      "path": "frame-sequences/04-reconnect-replay/0041.png"
+    },
+    {
+      "bytes": 11938,
+      "crc32": "78dd82ee",
+      "hash64": "286c02e9ba84280a",
+      "path": "frame-sequences/04-reconnect-replay/0042.png"
+    },
+    {
+      "bytes": 11938,
+      "crc32": "78dd82ee",
+      "hash64": "286c02e9ba84280a",
+      "path": "frame-sequences/04-reconnect-replay/0043.png"
+    },
+    {
+      "bytes": 11938,
+      "crc32": "78dd82ee",
+      "hash64": "286c02e9ba84280a",
+      "path": "frame-sequences/04-reconnect-replay/0044.png"
+    },
+    {
+      "bytes": 11938,
+      "crc32": "78dd82ee",
+      "hash64": "286c02e9ba84280a",
+      "path": "frame-sequences/04-reconnect-replay/0045.png"
+    },
+    {
+      "bytes": 11938,
+      "crc32": "78dd82ee",
+      "hash64": "286c02e9ba84280a",
+      "path": "frame-sequences/04-reconnect-replay/0046.png"
+    },
+    {
+      "bytes": 11938,
+      "crc32": "78dd82ee",
+      "hash64": "286c02e9ba84280a",
+      "path": "frame-sequences/04-reconnect-replay/0047.png"
+    },
+    {
+      "bytes": 11938,
+      "crc32": "78dd82ee",
+      "hash64": "286c02e9ba84280a",
+      "path": "frame-sequences/04-reconnect-replay/0048.png"
+    },
+    {
+      "bytes": 11938,
+      "crc32": "78dd82ee",
+      "hash64": "286c02e9ba84280a",
+      "path": "frame-sequences/04-reconnect-replay/0049.png"
+    },
+    {
+      "bytes": 11938,
+      "crc32": "78dd82ee",
+      "hash64": "286c02e9ba84280a",
+      "path": "frame-sequences/04-reconnect-replay/0050.png"
+    },
+    {
+      "bytes": 11938,
+      "crc32": "78dd82ee",
+      "hash64": "286c02e9ba84280a",
+      "path": "frame-sequences/04-reconnect-replay/0051.png"
+    },
+    {
+      "bytes": 11938,
+      "crc32": "78dd82ee",
+      "hash64": "286c02e9ba84280a",
+      "path": "frame-sequences/04-reconnect-replay/0052.png"
+    },
+    {
+      "bytes": 11938,
+      "crc32": "78dd82ee",
+      "hash64": "286c02e9ba84280a",
+      "path": "frame-sequences/04-reconnect-replay/0053.png"
+    },
+    {
+      "bytes": 11938,
+      "crc32": "78dd82ee",
+      "hash64": "286c02e9ba84280a",
+      "path": "frame-sequences/04-reconnect-replay/0054.png"
+    },
+    {
+      "bytes": 11938,
+      "crc32": "78dd82ee",
+      "hash64": "286c02e9ba84280a",
+      "path": "frame-sequences/04-reconnect-replay/0055.png"
+    },
+    {
+      "bytes": 10494,
+      "crc32": "86a3d846",
+      "hash64": "3173b42482ad5867",
+      "path": "frame-sequences/04-reconnect-replay/0056.png"
+    },
+    {
+      "bytes": 10522,
+      "crc32": "81db3041",
+      "hash64": "2ace408290111b32",
+      "path": "frame-sequences/04-reconnect-replay/0057.png"
+    },
+    {
+      "bytes": 10681,
+      "crc32": "4f377ab8",
+      "hash64": "820f56522e84b347",
+      "path": "frame-sequences/04-reconnect-replay/0058.png"
+    },
+    {
+      "bytes": 10676,
+      "crc32": "2a0bd821",
+      "hash64": "b117c54d14020831",
+      "path": "frame-sequences/04-reconnect-replay/0059.png"
+    },
+    {
+      "bytes": 10690,
+      "crc32": "e55ba3c3",
+      "hash64": "acc2cb85ccc35b23",
+      "path": "frame-sequences/04-reconnect-replay/0060.png"
+    },
+    {
+      "bytes": 10665,
+      "crc32": "bf67ea03",
+      "hash64": "bb23eef2c6961eac",
+      "path": "frame-sequences/04-reconnect-replay/0061.png"
+    },
+    {
+      "bytes": 10596,
+      "crc32": "70baf6b3",
+      "hash64": "7150d82e3eea5cde",
+      "path": "frame-sequences/04-reconnect-replay/0062.png"
+    },
+    {
+      "bytes": 10504,
+      "crc32": "c0ad4945",
+      "hash64": "7c0933960af9d261",
+      "path": "frame-sequences/04-reconnect-replay/0063.png"
+    },
+    {
+      "bytes": 10690,
+      "crc32": "4e3937fc",
+      "hash64": "074297a13b1e6dae",
+      "path": "frame-sequences/04-reconnect-replay/0064.png"
+    },
+    {
+      "bytes": 9658,
+      "crc32": "0c98ea64",
+      "hash64": "a952b2aadbdce95e",
+      "path": "frame-sequences/04-reconnect-replay/0065.png"
+    },
+    {
+      "bytes": 9576,
+      "crc32": "5cd5c3a9",
+      "hash64": "314b3b7a995a4233",
+      "path": "frame-sequences/04-reconnect-replay/0066.png"
+    },
+    {
+      "bytes": 9661,
+      "crc32": "fcbfb797",
+      "hash64": "ea0e9ae2fa961e9d",
+      "path": "frame-sequences/04-reconnect-replay/0067.png"
+    },
+    {
+      "bytes": 9674,
+      "crc32": "3703caa1",
+      "hash64": "738b74e37a1923b5",
+      "path": "frame-sequences/04-reconnect-replay/0068.png"
+    },
+    {
+      "bytes": 9770,
+      "crc32": "a9b7f911",
+      "hash64": "487d9a638d2a6289",
+      "path": "frame-sequences/04-reconnect-replay/0069.png"
+    },
+    {
+      "bytes": 9844,
+      "crc32": "a43a83e4",
+      "hash64": "231fd5085c4a1785",
+      "path": "frame-sequences/04-reconnect-replay/0070.png"
+    },
+    {
+      "bytes": 9883,
+      "crc32": "2bf1c78a",
+      "hash64": "d7b0cd1248ea7d92",
+      "path": "frame-sequences/04-reconnect-replay/0071.png"
+    },
+    {
+      "bytes": 9664,
+      "crc32": "6f194104",
+      "hash64": "d5e8e4aa1410c195",
+      "path": "frame-sequences/04-reconnect-replay/0072.png"
+    },
+    {
+      "bytes": 9989,
+      "crc32": "7a45c306",
+      "hash64": "f89548822462b14a",
+      "path": "frame-sequences/04-reconnect-replay/0073.png"
+    },
+    {
+      "bytes": 9736,
+      "crc32": "2af6cd24",
+      "hash64": "ff373cd56bf50eed",
+      "path": "frame-sequences/04-reconnect-replay/0074.png"
+    },
+    {
+      "bytes": 9666,
+      "crc32": "642ae70c",
+      "hash64": "34aee0c88eb8fd45",
+      "path": "frame-sequences/04-reconnect-replay/0075.png"
+    },
+    {
+      "bytes": 9701,
+      "crc32": "d0568133",
+      "hash64": "09a8c709bf6900db",
+      "path": "frame-sequences/04-reconnect-replay/0076.png"
+    },
+    {
+      "bytes": 9671,
+      "crc32": "4eac1d12",
+      "hash64": "732a34e1856aeb03",
+      "path": "frame-sequences/04-reconnect-replay/0077.png"
+    },
+    {
+      "bytes": 9816,
+      "crc32": "ae7db560",
+      "hash64": "7761ef849e099d12",
+      "path": "frame-sequences/04-reconnect-replay/0078.png"
+    },
+    {
+      "bytes": 9845,
+      "crc32": "a3aa106c",
+      "hash64": "a6d30e165f7397c5",
+      "path": "frame-sequences/04-reconnect-replay/0079.png"
+    },
+    {
+      "bytes": 9636,
+      "crc32": "4ff76150",
+      "hash64": "4b2e807e472b5dc3",
+      "path": "frame-sequences/04-reconnect-replay/0080.png"
+    },
+    {
+      "bytes": 9699,
+      "crc32": "9e5556fc",
+      "hash64": "e3b396a52625ed00",
+      "path": "frame-sequences/04-reconnect-replay/0081.png"
+    },
+    {
+      "bytes": 9656,
+      "crc32": "b0476ab6",
+      "hash64": "9b63473fef34b7ff",
+      "path": "frame-sequences/04-reconnect-replay/0082.png"
+    },
+    {
+      "bytes": 9608,
+      "crc32": "7fff2cc9",
+      "hash64": "784a268ddf5e8bdc",
+      "path": "frame-sequences/04-reconnect-replay/0083.png"
+    },
+    {
+      "bytes": 10625,
+      "crc32": "fc8fab0c",
+      "hash64": "4b50b3630a53dff2",
+      "path": "frame-sequences/04-reconnect-replay/0084.png"
+    },
+    {
+      "bytes": 10561,
+      "crc32": "5986b201",
+      "hash64": "cddbae6b06b5bd33",
+      "path": "frame-sequences/04-reconnect-replay/0085.png"
+    },
+    {
+      "bytes": 10574,
+      "crc32": "d432c1b7",
+      "hash64": "f5ac2ee9ca231b07",
+      "path": "frame-sequences/04-reconnect-replay/0086.png"
+    },
+    {
+      "bytes": 10574,
+      "crc32": "d432c1b7",
+      "hash64": "f5ac2ee9ca231b07",
+      "path": "frame-sequences/04-reconnect-replay/0087.png"
+    },
+    {
+      "bytes": 10585,
+      "crc32": "352cef08",
+      "hash64": "bab189c07634b9e4",
+      "path": "frame-sequences/04-reconnect-replay/0088.png"
+    },
+    {
+      "bytes": 10585,
+      "crc32": "352cef08",
+      "hash64": "bab189c07634b9e4",
+      "path": "frame-sequences/04-reconnect-replay/0089.png"
+    },
+    {
+      "bytes": 10573,
+      "crc32": "508be512",
+      "hash64": "7dfcd67e89b0315a",
+      "path": "frame-sequences/04-reconnect-replay/0090.png"
+    },
+    {
+      "bytes": 10573,
+      "crc32": "508be512",
+      "hash64": "7dfcd67e89b0315a",
+      "path": "frame-sequences/04-reconnect-replay/0091.png"
+    },
+    {
+      "bytes": 10582,
+      "crc32": "0d2d95f4",
+      "hash64": "dd7f0f270b07f88f",
+      "path": "frame-sequences/04-reconnect-replay/0092.png"
+    },
+    {
+      "bytes": 10582,
+      "crc32": "0d2d95f4",
+      "hash64": "dd7f0f270b07f88f",
+      "path": "frame-sequences/04-reconnect-replay/0093.png"
+    },
+    {
+      "bytes": 10574,
+      "crc32": "d432c1b7",
+      "hash64": "f5ac2ee9ca231b07",
+      "path": "frame-sequences/04-reconnect-replay/0094.png"
+    },
+    {
+      "bytes": 10574,
+      "crc32": "d432c1b7",
+      "hash64": "f5ac2ee9ca231b07",
+      "path": "frame-sequences/04-reconnect-replay/0095.png"
+    },
+    {
+      "bytes": 10585,
+      "crc32": "352cef08",
+      "hash64": "bab189c07634b9e4",
+      "path": "frame-sequences/04-reconnect-replay/0096.png"
+    },
+    {
+      "bytes": 10585,
+      "crc32": "352cef08",
+      "hash64": "bab189c07634b9e4",
+      "path": "frame-sequences/04-reconnect-replay/0097.png"
+    },
+    {
+      "bytes": 10573,
+      "crc32": "508be512",
+      "hash64": "7dfcd67e89b0315a",
+      "path": "frame-sequences/04-reconnect-replay/0098.png"
+    },
+    {
+      "bytes": 10573,
+      "crc32": "508be512",
+      "hash64": "7dfcd67e89b0315a",
+      "path": "frame-sequences/04-reconnect-replay/0099.png"
+    },
+    {
+      "bytes": 10582,
+      "crc32": "0d2d95f4",
+      "hash64": "dd7f0f270b07f88f",
+      "path": "frame-sequences/04-reconnect-replay/0100.png"
+    },
+    {
+      "bytes": 10582,
+      "crc32": "0d2d95f4",
+      "hash64": "dd7f0f270b07f88f",
+      "path": "frame-sequences/04-reconnect-replay/0101.png"
+    },
+    {
+      "bytes": 10574,
+      "crc32": "d432c1b7",
+      "hash64": "f5ac2ee9ca231b07",
+      "path": "frame-sequences/04-reconnect-replay/0102.png"
+    },
+    {
+      "bytes": 10574,
+      "crc32": "d432c1b7",
+      "hash64": "f5ac2ee9ca231b07",
+      "path": "frame-sequences/04-reconnect-replay/0103.png"
+    },
+    {
+      "bytes": 10585,
+      "crc32": "352cef08",
+      "hash64": "bab189c07634b9e4",
+      "path": "frame-sequences/04-reconnect-replay/0104.png"
+    },
+    {
+      "bytes": 10585,
+      "crc32": "352cef08",
+      "hash64": "bab189c07634b9e4",
+      "path": "frame-sequences/04-reconnect-replay/0105.png"
+    },
+    {
+      "bytes": 10573,
+      "crc32": "508be512",
+      "hash64": "7dfcd67e89b0315a",
+      "path": "frame-sequences/04-reconnect-replay/0106.png"
+    },
+    {
+      "bytes": 10573,
+      "crc32": "508be512",
+      "hash64": "7dfcd67e89b0315a",
+      "path": "frame-sequences/04-reconnect-replay/0107.png"
+    },
+    {
+      "bytes": 10582,
+      "crc32": "0d2d95f4",
+      "hash64": "dd7f0f270b07f88f",
+      "path": "frame-sequences/04-reconnect-replay/0108.png"
+    },
+    {
+      "bytes": 10582,
+      "crc32": "0d2d95f4",
+      "hash64": "dd7f0f270b07f88f",
+      "path": "frame-sequences/04-reconnect-replay/0109.png"
+    },
+    {
+      "bytes": 10574,
+      "crc32": "d432c1b7",
+      "hash64": "f5ac2ee9ca231b07",
+      "path": "frame-sequences/04-reconnect-replay/0110.png"
+    },
+    {
+      "bytes": 10574,
+      "crc32": "d432c1b7",
+      "hash64": "f5ac2ee9ca231b07",
+      "path": "frame-sequences/04-reconnect-replay/0111.png"
+    },
+    {
+      "bytes": 10599,
+      "crc32": "843c562a",
+      "hash64": "42a3ca047b02d935",
+      "path": "frame-sequences/04-reconnect-replay/0112.png"
+    },
+    {
+      "bytes": 10638,
+      "crc32": "6a1ac399",
+      "hash64": "5ae51a015e31168b",
+      "path": "frame-sequences/04-reconnect-replay/0113.png"
+    },
+    {
+      "bytes": 10521,
+      "crc32": "b23a8e92",
+      "hash64": "a86badd3696b51de",
+      "path": "frame-sequences/04-reconnect-replay/0114.png"
+    },
+    {
+      "bytes": 11233,
+      "crc32": "b247cc38",
+      "hash64": "d70291ec49132347",
+      "path": "frame-sequences/04-reconnect-replay/0115.png"
+    },
+    {
+      "bytes": 11123,
+      "crc32": "e96e186a",
+      "hash64": "f5fa720630293968",
+      "path": "frame-sequences/04-reconnect-replay/0116.png"
+    },
+    {
+      "bytes": 10968,
+      "crc32": "46650b58",
+      "hash64": "dd75fea7d2a5e64d",
+      "path": "frame-sequences/04-reconnect-replay/0117.png"
+    },
+    {
+      "bytes": 10869,
+      "crc32": "ae7270f8",
+      "hash64": "f4228abee8356d57",
+      "path": "frame-sequences/04-reconnect-replay/0118.png"
+    },
+    {
+      "bytes": 10872,
+      "crc32": "70426e33",
+      "hash64": "368b910df57953c9",
+      "path": "frame-sequences/04-reconnect-replay/0119.png"
+    },
+    {
+      "bytes": 10893,
+      "crc32": "0f7bc37e",
+      "hash64": "5b36a1bceda8eaae",
+      "path": "frame-sequences/04-reconnect-replay/0120.png"
+    },
+    {
+      "bytes": 11178,
+      "crc32": "fea033e3",
+      "hash64": "03a6f9aa0a82e956",
+      "path": "frame-sequences/04-reconnect-replay/0121.png"
+    },
+    {
+      "bytes": 11238,
+      "crc32": "f92e9069",
+      "hash64": "fc4745f23bf18883",
+      "path": "frame-sequences/04-reconnect-replay/0122.png"
+    },
+    {
+      "bytes": 11245,
+      "crc32": "19a04cfc",
+      "hash64": "4791655c4ccd4a48",
+      "path": "frame-sequences/04-reconnect-replay/0123.png"
+    },
+    {
+      "bytes": 11241,
+      "crc32": "f290d2d0",
+      "hash64": "979d7223bcb99cd8",
+      "path": "frame-sequences/04-reconnect-replay/0124.png"
+    },
+    {
+      "bytes": 13060,
+      "crc32": "bd3a86a4",
+      "hash64": "45d4fb5d21c97050",
+      "path": "frame-sequences/04-reconnect-replay/0125.png"
+    },
+    {
+      "bytes": 13072,
+      "crc32": "879e5214",
+      "hash64": "442158afcbdc82e2",
+      "path": "frame-sequences/04-reconnect-replay/0126.png"
+    },
+    {
+      "bytes": 13100,
+      "crc32": "dbf8e897",
+      "hash64": "a1f4e1b646781b23",
+      "path": "frame-sequences/04-reconnect-replay/0127.png"
+    },
+    {
+      "bytes": 13144,
+      "crc32": "8c53d74c",
+      "hash64": "a78590b32cff8989",
+      "path": "frame-sequences/04-reconnect-replay/0128.png"
+    },
+    {
+      "bytes": 13106,
+      "crc32": "8a9a28da",
+      "hash64": "454484ba22802749",
+      "path": "frame-sequences/04-reconnect-replay/0129.png"
+    },
+    {
+      "bytes": 13062,
+      "crc32": "12aa8445",
+      "hash64": "c7f56d06698cb517",
+      "path": "frame-sequences/04-reconnect-replay/0130.png"
+    },
+    {
+      "bytes": 13099,
+      "crc32": "a5374bf3",
+      "hash64": "3c0ae47d4cba58df",
+      "path": "frame-sequences/04-reconnect-replay/0131.png"
+    },
+    {
+      "bytes": 13115,
+      "crc32": "e242ecc3",
+      "hash64": "dbe18bd01e300ec7",
+      "path": "frame-sequences/04-reconnect-replay/0132.png"
+    },
+    {
+      "bytes": 13146,
+      "crc32": "7eedfa74",
+      "hash64": "56e3360aa4985556",
+      "path": "frame-sequences/04-reconnect-replay/0133.png"
+    },
+    {
+      "bytes": 13181,
+      "crc32": "0582bcec",
+      "hash64": "3f2492cca53fc36b",
+      "path": "frame-sequences/04-reconnect-replay/0134.png"
+    },
+    {
+      "bytes": 13233,
+      "crc32": "dc88f7bb",
+      "hash64": "605178c35885b5da",
+      "path": "frame-sequences/04-reconnect-replay/0135.png"
+    },
+    {
+      "bytes": 13123,
+      "crc32": "240242a9",
+      "hash64": "d0f22344339b380a",
+      "path": "frame-sequences/04-reconnect-replay/0136.png"
+    },
+    {
+      "bytes": 13182,
+      "crc32": "460bc19f",
+      "hash64": "99d859bd04104bb3",
+      "path": "frame-sequences/04-reconnect-replay/0137.png"
+    },
+    {
+      "bytes": 13073,
+      "crc32": "5cd110f5",
+      "hash64": "6ccda0818620eb1c",
+      "path": "frame-sequences/04-reconnect-replay/0138.png"
+    },
+    {
+      "bytes": 12935,
+      "crc32": "558bf920",
+      "hash64": "be99414a1bd45f9c",
+      "path": "frame-sequences/04-reconnect-replay/0139.png"
+    },
+    {
+      "bytes": 303,
+      "crc32": "0eb21a94",
+      "hash64": "3b63032339e33608",
+      "path": "hashes/abc-parity-summary.json"
+    },
+    {
+      "bytes": 33902983,
+      "crc32": "19f8cf59",
+      "hash64": "950bb0015efe2dab",
+      "path": "hashes/codec-vectors.json"
+    },
+    {
+      "bytes": 23557,
+      "crc32": "e674b357",
+      "hash64": "f62efa6c0386999c",
+      "path": "hashes/source-decoded-presented.ndjson"
+    },
+    {
+      "bytes": 6137,
+      "crc32": "09210df4",
+      "hash64": "7b73817c29ae8809",
+      "path": "hashes/source-rust.ndjson"
+    },
+    {
+      "bytes": 15718,
+      "crc32": "32552abc",
+      "hash64": "732609ec27f24889",
+      "path": "logs/semantic-events.ndjson"
+    },
+    {
+      "bytes": 2157771,
+      "crc32": "b8b272ba",
+      "hash64": "3decf1e06c4be424",
+      "path": "logs/state-frames.ndjson"
+    },
+    {
+      "bytes": 205,
+      "crc32": "0f6bc118",
+      "hash64": "bba0ca6a79cc341d",
+      "path": "multiclient-fanout.json"
+    },
+    {
+      "bytes": 35344,
+      "crc32": "287b47c9",
+      "hash64": "6937fa8150cc6cef",
+      "path": "playwright-authored-eyes-restored.png"
+    },
+    {
+      "bytes": 32554,
+      "crc32": "6c4e9dff",
+      "hash64": "6e08450f0882dd3c",
+      "path": "playwright-flat-blue-eyes.png"
+    },
+    {
+      "bytes": 3214,
+      "crc32": "b5d38aa3",
+      "hash64": "6acc53e4d88b9c76",
+      "path": "queue-and-pacing.json"
+    },
+    {
+      "bytes": 663730,
+      "crc32": "492c2ac9",
+      "hash64": "f0726b0cb122b20d",
+      "path": "recordings/01-locomotion-directions.mp4"
+    },
+    {
+      "bytes": 1440198,
+      "crc32": "e6ec135c",
+      "hash64": "a2d5ee9fa99fdcfc",
+      "path": "recordings/02-speech-actions-expressions.mp4"
+    },
+    {
+      "bytes": 361285,
+      "crc32": "1e444470",
+      "hash64": "9b50447e6b575d17",
+      "path": "recordings/03-circles-figure-eight.mp4"
+    },
+    {
+      "bytes": 383444,
+      "crc32": "3ce6a943",
+      "hash64": "7fa01b98423193d1",
+      "path": "recordings/04-reconnect-replay.mp4"
+    },
+    {
+      "bytes": 275,
+      "crc32": "04accd92",
+      "hash64": "f03b2770af92707e",
+      "path": "replay/deterministic-parity.json"
+    },
+    {
+      "bytes": 16340,
+      "crc32": "060be76b",
+      "hash64": "ba1afe183d3f31b8",
+      "path": "replay/replay-manifest.json"
+    },
+    {
+      "bytes": 371,
+      "crc32": "b4ccc19b",
+      "hash64": "da9cff7e76db7acf",
+      "path": "replay/run-1-summary.json"
+    },
+    {
+      "bytes": 371,
+      "crc32": "209173ff",
+      "hash64": "3851762a19b0c7e4",
+      "path": "replay/run-2-summary.json"
+    },
+    {
+      "bytes": 344,
+      "crc32": "6f59b3d2",
+      "hash64": "781e5ee03320d882",
+      "path": "resync-scenarios.json"
+    },
+    {
+      "bytes": 141051,
+      "crc32": "fef42862",
+      "hash64": "0a8fec1beaa53e70",
+      "path": "screenshots/01-locomotion-directions-contact-sheet.png"
+    },
+    {
+      "bytes": 143596,
+      "crc32": "e0f96851",
+      "hash64": "0b0815765a666033",
+      "path": "screenshots/02-speech-actions-expressions-contact-sheet.png"
+    },
+    {
+      "bytes": 148783,
+      "crc32": "0e86df60",
+      "hash64": "da91dee613db0014",
+      "path": "screenshots/03-circles-figure-eight-contact-sheet.png"
+    },
+    {
+      "bytes": 130975,
+      "crc32": "bf12bca0",
+      "hash64": "0cdbc42ba21871a4",
+      "path": "screenshots/04-reconnect-replay-contact-sheet.png"
+    },
+    {
+      "bytes": 417,
+      "crc32": "080e02ff",
+      "hash64": "6319c06ec3273356",
+      "path": "soak/configurations.json"
+    },
+    {
+      "bytes": 3214,
+      "crc32": "b5d38aa3",
+      "hash64": "6acc53e4d88b9c76",
+      "path": "soak/short.json"
+    },
+    {
+      "bytes": 978883,
+      "crc32": "c131bd9d",
+      "hash64": "f0e50540fc27325b",
+      "path": "transition-matrix-8765.json"
+    },
+    {
+      "bytes": 28670,
+      "crc32": "4ea60b7a",
+      "hash64": "bd83dcc31ec7183e",
+      "path": "transition-metrics.json"
+    }
+  ],
+  "schema_version": 1
+}

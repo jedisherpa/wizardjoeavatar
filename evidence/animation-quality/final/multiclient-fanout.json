@@ -1,0 +1,13 @@
+{
+  "canonical_hash_mismatches": 0,
+  "passed": true,
+  "scope": "single live hub with sequential viewer-count scenarios",
+  "sequence_gaps": 0,
+  "viewer_counts": [
+    0,
+    1,
+    2,
+    4,
+    8
+  ]
+}

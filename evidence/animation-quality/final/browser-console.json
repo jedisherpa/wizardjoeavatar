@@ -1,0 +1,6 @@
+{
+  "claim": "No real-browser console capture was performed in this pass.",
+  "console_errors": null,
+  "real_browser_control_available": false,
+  "scope": "module-level only"
+}

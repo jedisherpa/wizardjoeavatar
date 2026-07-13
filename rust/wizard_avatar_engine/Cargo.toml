@@ -1,0 +1,58 @@
+[package]
+name = "wizard_avatar_engine"
+version = "0.1.0"
+edition = "2021"
+description = "Rust procedural ASCILINE wizard avatar engine"
+
+[lib]
+name = "wizard_avatar_engine"
+path = "src/lib.rs"
+
+[[bin]]
+name = "wizard-avatar-server"
+path = "src/main.rs"
+
+[[bin]]
+name = "wizard-avatar-demo"
+path = "src/demo.rs"
+
+[[bin]]
+name = "wizard-avatar-snapshots"
+path = "src/snapshots.rs"
+
+[[bin]]
+name = "wizard-avatar-performance"
+path = "src/performance.rs"
+
+[[bin]]
+name = "wizard-avatar-evidence"
+path = "src/evidence_main.rs"
+
+[[bin]]
+name = "wizard-avatar-soak"
+path = "src/soak.rs"
+
+[[bin]]
+name = "wizard-avatar-pose-catalog"
+path = "src/pose_catalog_main.rs"
+
+[[bin]]
+name = "wizard-avatar-pose-evidence"
+path = "src/pose_evidence_main.rs"
+
+[dependencies]
+anyhow = "1"
+axum = { version = "0.7", features = ["ws", "json"] }
+base64 = "0.22"
+crc32fast = "1"
+flate2 = "1"
+futures-util = "0.3"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+sha2 = "0.10"
+thiserror = "1"
+tokio = { version = "1", features = ["macros", "rt-multi-thread", "net", "sync", "time"] }
+tokio-tungstenite = "0.24"
+
+[dev-dependencies]
+tokio = { version = "1", features = ["macros", "rt-multi-thread"] }

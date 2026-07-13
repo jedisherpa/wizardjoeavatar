@@ -1,0 +1,748 @@
+{
+  "schema_version": 1,
+  "simulation_hz": 60,
+  "render_hz": 24,
+  "pre_boundary_frames": 12,
+  "post_boundary_frames": 16,
+  "transitions": [
+    {
+      "id": "idle-to-walk",
+      "ledger_transition": "idle -> walk",
+      "category": "01-locomotion-directions",
+      "setup": [],
+      "boundary": [
+        {
+          "type": "move",
+          "payload": {
+            "speed": 1.2,
+            "x": 2.0,
+            "z": 5.0
+          }
+        }
+      ],
+      "force_full_at_boundary": false
+    },
+    {
+      "id": "walk-to-idle",
+      "ledger_transition": "walk -> idle",
+      "category": "01-locomotion-directions",
+      "setup": [
+        {
+          "type": "move",
+          "payload": {
+            "speed": 1.2,
+            "x": 2.0,
+            "z": 5.0
+          }
+        }
+      ],
+      "boundary": [
+        {
+          "type": "stop",
+          "payload": {}
+        }
+      ],
+      "force_full_at_boundary": false
+    },
+    {
+      "id": "walk-to-turn",
+      "ledger_transition": "walk -> turn",
+      "category": "01-locomotion-directions",
+      "setup": [
+        {
+          "type": "move",
+          "payload": {
+            "x": 2.0,
+            "z": 5.0
+          }
+        }
+      ],
+      "boundary": [
+        {
+          "type": "move",
+          "payload": {
+            "x": 2.0,
+            "z": 3.0
+          }
+        }
+      ],
+      "force_full_at_boundary": false
+    },
+    {
+      "id": "turn-to-walk",
+      "ledger_transition": "turn -> walk",
+      "category": "01-locomotion-directions",
+      "setup": [
+        {
+          "type": "face",
+          "payload": {
+            "direction": "southeast"
+          }
+        }
+      ],
+      "boundary": [
+        {
+          "type": "move",
+          "payload": {
+            "x": 2.0,
+            "z": 3.0
+          }
+        }
+      ],
+      "force_full_at_boundary": false
+    },
+    {
+      "id": "front-to-diagonal",
+      "ledger_transition": "front -> diagonal",
+      "category": "01-locomotion-directions",
+      "setup": [
+        {
+          "type": "face",
+          "payload": {
+            "direction": "south"
+          }
+        }
+      ],
+      "boundary": [
+        {
+          "type": "face",
+          "payload": {
+            "direction": "southeast"
+          }
+        }
+      ],
+      "force_full_at_boundary": false
+    },
+    {
+      "id": "diagonal-to-side",
+      "ledger_transition": "diagonal -> side",
+      "category": "01-locomotion-directions",
+      "setup": [
+        {
+          "type": "face",
+          "payload": {
+            "direction": "southeast"
+          }
+        }
+      ],
+      "boundary": [
+        {
+          "type": "face",
+          "payload": {
+            "direction": "east"
+          }
+        }
+      ],
+      "force_full_at_boundary": false
+    },
+    {
+      "id": "side-to-back",
+      "ledger_transition": "side -> back",
+      "category": "01-locomotion-directions",
+      "setup": [
+        {
+          "type": "face",
+          "payload": {
+            "direction": "east"
+          }
+        }
+      ],
+      "boundary": [
+        {
+          "type": "face",
+          "payload": {
+            "direction": "north"
+          }
+        }
+      ],
+      "force_full_at_boundary": false
+    },
+    {
+      "id": "forward-to-backward",
+      "ledger_transition": "forward -> backward",
+      "category": "01-locomotion-directions",
+      "setup": [
+        {
+          "type": "move",
+          "payload": {
+            "x": 0.0,
+            "z": 3.0
+          }
+        }
+      ],
+      "boundary": [
+        {
+          "type": "move",
+          "payload": {
+            "x": 0.0,
+            "z": 7.0
+          }
+        }
+      ],
+      "force_full_at_boundary": false
+    },
+    {
+      "id": "clockwise-circle",
+      "ledger_transition": "clockwise circle changes",
+      "category": "03-circles-figure-eight",
+      "setup": [
+        {
+          "type": "circle",
+          "payload": {
+            "center_x": 0.0,
+            "center_z": 5.0,
+            "clockwise": true,
+            "duration_seconds": 1.4,
+            "radius": 0.4
+          }
+        }
+      ],
+      "boundary": [],
+      "force_full_at_boundary": false
+    },
+    {
+      "id": "counterclockwise-circle",
+      "ledger_transition": "counterclockwise circle changes",
+      "category": "03-circles-figure-eight",
+      "setup": [
+        {
+          "type": "circle",
+          "payload": {
+            "center_x": 0.0,
+            "center_z": 5.0,
+            "clockwise": false,
+            "duration_seconds": 1.4,
+            "radius": 0.4
+          }
+        }
+      ],
+      "boundary": [],
+      "force_full_at_boundary": false
+    },
+    {
+      "id": "figure-eight-crossover",
+      "ledger_transition": "figure-eight crossover",
+      "category": "03-circles-figure-eight",
+      "setup": [
+        {
+          "type": "figure_eight",
+          "payload": {
+            "center_x": 0.0,
+            "center_z": 5.0,
+            "radius": 0.4,
+            "speed": 1.5
+          }
+        }
+      ],
+      "boundary": [],
+      "force_full_at_boundary": false
+    },
+    {
+      "id": "walk-to-speak",
+      "ledger_transition": "walk -> speak",
+      "category": "02-speech-actions-expressions",
+      "setup": [
+        {
+          "type": "move",
+          "payload": {
+            "x": 2.0,
+            "z": 5.0
+          }
+        }
+      ],
+      "boundary": [
+        {
+          "type": "speak",
+          "payload": {
+            "duration_ms": 1200,
+            "text": "Still walking"
+          }
+        }
+      ],
+      "force_full_at_boundary": false
+    },
+    {
+      "id": "speak-to-walk",
+      "ledger_transition": "speak -> walk",
+      "category": "02-speech-actions-expressions",
+      "setup": [
+        {
+          "type": "move",
+          "payload": {
+            "x": 2.0,
+            "z": 5.0
+          }
+        },
+        {
+          "type": "speak",
+          "payload": {
+            "duration_ms": 700,
+            "text": "Ending soon"
+          }
+        }
+      ],
+      "boundary": [],
+      "force_full_at_boundary": false
+    },
+    {
+      "id": "idle-to-explain",
+      "ledger_transition": "idle -> explain",
+      "category": "02-speech-actions-expressions",
+      "setup": [],
+      "boundary": [
+        {
+          "type": "action",
+          "payload": {
+            "action": "explaining",
+            "duration_ms": 1200
+          }
+        }
+      ],
+      "force_full_at_boundary": false
+    },
+    {
+      "id": "explain-to-walk",
+      "ledger_transition": "explain -> walk",
+      "category": "02-speech-actions-expressions",
+      "setup": [
+        {
+          "type": "action",
+          "payload": {
+            "action": "explaining",
+            "duration_ms": 1800
+          }
+        }
+      ],
+      "boundary": [
+        {
+          "type": "move",
+          "payload": {
+            "x": 2.0,
+            "z": 5.0
+          }
+        }
+      ],
+      "force_full_at_boundary": false
+    },
+    {
+      "id": "walk-to-point",
+      "ledger_transition": "walk -> point",
+      "category": "02-speech-actions-expressions",
+      "setup": [
+        {
+          "type": "move",
+          "payload": {
+            "x": 2.0,
+            "z": 5.0
+          }
+        }
+      ],
+      "boundary": [
+        {
+          "type": "action",
+          "payload": {
+            "action": "pointing",
+            "duration_ms": 1200
+          }
+        }
+      ],
+      "force_full_at_boundary": false
+    },
+    {
+      "id": "point-to-idle",
+      "ledger_transition": "point -> idle",
+      "category": "02-speech-actions-expressions",
+      "setup": [
+        {
+          "type": "action",
+          "payload": {
+            "action": "pointing",
+            "duration_ms": 1800
+          }
+        }
+      ],
+      "boundary": [
+        {
+          "type": "action",
+          "payload": {
+            "action": "idle",
+            "duration_ms": 1
+          }
+        }
+      ],
+      "force_full_at_boundary": false
+    },
+    {
+      "id": "idle-to-think",
+      "ledger_transition": "idle -> think",
+      "category": "02-speech-actions-expressions",
+      "setup": [],
+      "boundary": [
+        {
+          "type": "action",
+          "payload": {
+            "action": "thinking",
+            "duration_ms": 1200
+          }
+        }
+      ],
+      "force_full_at_boundary": false
+    },
+    {
+      "id": "think-to-speak",
+      "ledger_transition": "think -> speak",
+      "category": "02-speech-actions-expressions",
+      "setup": [
+        {
+          "type": "action",
+          "payload": {
+            "action": "thinking",
+            "duration_ms": 1800
+          }
+        }
+      ],
+      "boundary": [
+        {
+          "type": "speak",
+          "payload": {
+            "duration_ms": 1200,
+            "text": "Thinking aloud"
+          }
+        }
+      ],
+      "force_full_at_boundary": false
+    },
+    {
+      "id": "idle-to-cast",
+      "ledger_transition": "idle -> cast",
+      "category": "02-speech-actions-expressions",
+      "setup": [],
+      "boundary": [
+        {
+          "type": "action",
+          "payload": {
+            "action": "magic_cast",
+            "duration_ms": 1200
+          }
+        }
+      ],
+      "force_full_at_boundary": false
+    },
+    {
+      "id": "cast-to-idle",
+      "ledger_transition": "cast -> idle",
+      "category": "02-speech-actions-expressions",
+      "setup": [
+        {
+          "type": "action",
+          "payload": {
+            "action": "magic_cast",
+            "duration_ms": 1800
+          }
+        }
+      ],
+      "boundary": [
+        {
+          "type": "action",
+          "payload": {
+            "action": "idle",
+            "duration_ms": 1
+          }
+        }
+      ],
+      "force_full_at_boundary": false
+    },
+    {
+      "id": "reaction-to-previous",
+      "ledger_transition": "reaction -> previous",
+      "category": "02-speech-actions-expressions",
+      "setup": [
+        {
+          "type": "action",
+          "payload": {
+            "action": "pointing",
+            "duration_ms": 1800
+          }
+        }
+      ],
+      "boundary": [
+        {
+          "type": "action",
+          "payload": {
+            "action": "reaction",
+            "duration_ms": 200
+          }
+        }
+      ],
+      "force_full_at_boundary": false
+    },
+    {
+      "id": "expression-during-locomotion",
+      "ledger_transition": "expression during locomotion",
+      "category": "02-speech-actions-expressions",
+      "setup": [
+        {
+          "type": "move",
+          "payload": {
+            "x": 2.0,
+            "z": 5.0
+          }
+        }
+      ],
+      "boundary": [
+        {
+          "type": "expression",
+          "payload": {
+            "expression": "skeptical"
+          }
+        }
+      ],
+      "force_full_at_boundary": false
+    },
+    {
+      "id": "blink-during-speech",
+      "ledger_transition": "blink during speech",
+      "category": "02-speech-actions-expressions",
+      "setup": [
+        {
+          "type": "speak",
+          "payload": {
+            "duration_ms": 1600,
+            "text": "Blink window"
+          }
+        }
+      ],
+      "boundary": [],
+      "force_full_at_boundary": false
+    },
+    {
+      "id": "mouth-closure",
+      "ledger_transition": "mouth closure after speech",
+      "category": "02-speech-actions-expressions",
+      "setup": [
+        {
+          "type": "speak",
+          "payload": {
+            "duration_ms": 650,
+            "text": "Close"
+          }
+        }
+      ],
+      "boundary": [],
+      "force_full_at_boundary": false
+    },
+    {
+      "id": "staff-during-turning",
+      "ledger_transition": "staff during turning",
+      "category": "02-speech-actions-expressions",
+      "setup": [
+        {
+          "type": "move",
+          "payload": {
+            "x": 2.0,
+            "z": 5.0
+          }
+        }
+      ],
+      "boundary": [
+        {
+          "type": "move",
+          "payload": {
+            "x": 2.0,
+            "z": 3.0
+          }
+        }
+      ],
+      "force_full_at_boundary": false
+    },
+    {
+      "id": "staff-during-gesture",
+      "ledger_transition": "staff during arm gestures",
+      "category": "02-speech-actions-expressions",
+      "setup": [
+        {
+          "type": "move",
+          "payload": {
+            "x": 2.0,
+            "z": 5.0
+          }
+        }
+      ],
+      "boundary": [
+        {
+          "type": "action",
+          "payload": {
+            "action": "pointing",
+            "duration_ms": 1200
+          }
+        }
+      ],
+      "force_full_at_boundary": false
+    },
+    {
+      "id": "depth-scaling",
+      "ledger_transition": "depth scaling",
+      "category": "01-locomotion-directions",
+      "setup": [],
+      "boundary": [
+        {
+          "type": "move",
+          "payload": {
+            "x": 0.0,
+            "z": 2.0
+          }
+        }
+      ],
+      "force_full_at_boundary": false
+    },
+    {
+      "id": "root-view-change",
+      "ledger_transition": "root during view changes",
+      "category": "01-locomotion-directions",
+      "setup": [
+        {
+          "type": "face",
+          "payload": {
+            "direction": "south"
+          }
+        }
+      ],
+      "boundary": [
+        {
+          "type": "face",
+          "payload": {
+            "direction": "southwest"
+          }
+        }
+      ],
+      "force_full_at_boundary": false
+    },
+    {
+      "id": "contact-shadow",
+      "ledger_transition": "contact shadow during locomotion",
+      "category": "01-locomotion-directions",
+      "setup": [
+        {
+          "type": "move",
+          "payload": {
+            "x": 2.0,
+            "z": 5.0
+          }
+        }
+      ],
+      "boundary": [
+        {
+          "type": "expression",
+          "payload": {
+            "expression": "happy"
+          }
+        }
+      ],
+      "force_full_at_boundary": false
+    },
+    {
+      "id": "interruption-cancellation",
+      "ledger_transition": "interruption and cancellation",
+      "category": "02-speech-actions-expressions",
+      "setup": [
+        {
+          "type": "action",
+          "payload": {
+            "action": "pointing",
+            "duration_ms": 1800
+          }
+        }
+      ],
+      "boundary": [
+        {
+          "type": "action",
+          "payload": {
+            "action": "magic_cast",
+            "duration_ms": 1200
+          }
+        }
+      ],
+      "force_full_at_boundary": false
+    },
+    {
+      "id": "reconnect-replay",
+      "ledger_transition": "reconnect and replay",
+      "category": "04-reconnect-replay",
+      "setup": [
+        {
+          "type": "move",
+          "payload": {
+            "x": 2.0,
+            "z": 5.0
+          }
+        }
+      ],
+      "boundary": [],
+      "force_full_at_boundary": true
+    },
+    {
+      "id": "canonical-fanout",
+      "ledger_transition": "viewer-count canonical fanout",
+      "category": "04-reconnect-replay",
+      "setup": [
+        {
+          "type": "action",
+          "payload": {
+            "action": "explaining",
+            "duration_ms": 1200
+          }
+        }
+      ],
+      "boundary": [],
+      "force_full_at_boundary": false
+    },
+    {
+      "id": "missing-delta-resync",
+      "ledger_transition": "missing delta recovery",
+      "category": "04-reconnect-replay",
+      "setup": [
+        {
+          "type": "move",
+          "payload": {
+            "x": -2.0,
+            "z": 5.0
+          }
+        }
+      ],
+      "boundary": [],
+      "force_full_at_boundary": true
+    },
+    {
+      "id": "hidden-resume",
+      "ledger_transition": "hidden resume",
+      "category": "04-reconnect-replay",
+      "setup": [
+        {
+          "type": "speak",
+          "payload": {
+            "duration_ms": 1200,
+            "text": "Resume"
+          }
+        }
+      ],
+      "boundary": [],
+      "force_full_at_boundary": true
+    },
+    {
+      "id": "context-restore",
+      "ledger_transition": "context restore",
+      "category": "04-reconnect-replay",
+      "setup": [
+        {
+          "type": "action",
+          "payload": {
+            "action": "magic_cast",
+            "duration_ms": 1200
+          }
+        }
+      ],
+      "boundary": [],
+      "force_full_at_boundary": true
+    }
+  ]
+}

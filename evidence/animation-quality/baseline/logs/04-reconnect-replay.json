@@ -1,0 +1,1020 @@
+{
+  "label": "04-reconnect-replay",
+  "samples": [
+    {
+      "kind": "frame",
+      "stage": "before-reload",
+      "frame": 0,
+      "elapsed_ms": 517,
+      "state": {
+        "action": "walking",
+        "action_until": 0,
+        "blink_phase": 1,
+        "character_id": "asciline-wizard-v1-rust",
+        "display_scale": 2.625,
+        "expression": "neutral",
+        "facing": "east",
+        "locomotion": "walking",
+        "mouth": "closed",
+        "reconnect_count": 80,
+        "screen_position": {
+          "x": 296.1592102050781,
+          "y": 193.12940979003906
+        },
+        "speech_id": null,
+        "speech_until": 0,
+        "staff_state": "held",
+        "target_point": {
+          "x": 4,
+          "z": 5
+        },
+        "time_seconds": 0.7083332538604736,
+        "upper_body_action": "none",
+        "velocity": {
+          "x": 1.25,
+          "z": 0
+        },
+        "walk_phase": 0.7003268003463745,
+        "world_position": {
+          "x": 0.5952777862548828,
+          "z": 5
+        }
+      },
+      "diagnostics": {
+        "bandwidth_ratio": 0.007899305783212185,
+        "codec_tag": 3,
+        "delta_cell_count": 16648,
+        "encoded_frame_size": 4095,
+        "fps": 24,
+        "frame_sequence": 52402,
+        "keyframe_count": 1165,
+        "raw_frame_size": 518400,
+        "reconnect_count": 80
+      }
+    },
+    {
+      "kind": "frame",
+      "stage": "before-reload",
+      "frame": 1,
+      "elapsed_ms": 704,
+      "state": {
+        "action": "walking",
+        "action_until": 0,
+        "blink_phase": 1,
+        "character_id": "asciline-wizard-v1-rust",
+        "display_scale": 2.625,
+        "expression": "neutral",
+        "facing": "east",
+        "locomotion": "walking",
+        "mouth": "closed",
+        "reconnect_count": 80,
+        "screen_position": {
+          "x": 320.7272033691406,
+          "y": 193.12940979003906
+        },
+        "speech_id": null,
+        "speech_until": 0,
+        "staff_state": "held",
+        "target_point": {
+          "x": 4,
+          "z": 5
+        },
+        "time_seconds": 0.9166663885116577,
+        "upper_body_action": "none",
+        "velocity": {
+          "x": 1.25,
+          "z": 0
+        },
+        "walk_phase": 0.0066994428634643555,
+        "world_position": {
+          "x": 0.8556943535804749,
+          "z": 5
+        }
+      },
+      "diagnostics": {
+        "bandwidth_ratio": 0.0077951387502253056,
+        "codec_tag": 3,
+        "delta_cell_count": 16745,
+        "encoded_frame_size": 4041,
+        "fps": 24,
+        "frame_sequence": 52407,
+        "keyframe_count": 1165,
+        "raw_frame_size": 518400,
+        "reconnect_count": 80
+      }
+    },
+    {
+      "kind": "frame",
+      "stage": "before-reload",
+      "frame": 2,
+      "elapsed_ms": 1019,
+      "state": {
+        "action": "walking",
+        "action_until": 0,
+        "blink_phase": 1,
+        "character_id": "asciline-wizard-v1-rust",
+        "display_scale": 2.625,
+        "expression": "neutral",
+        "facing": "northeast",
+        "locomotion": "walking",
+        "mouth": "closed",
+        "reconnect_count": 80,
+        "screen_position": {
+          "x": 362.0811462402344,
+          "y": 192.43621826171875
+        },
+        "speech_id": null,
+        "speech_until": 0,
+        "staff_state": "held",
+        "target_point": {
+          "x": 1.350000023841858,
+          "z": 5.400000095367432
+        },
+        "time_seconds": 1.291666030883789,
+        "upper_body_action": "none",
+        "velocity": {
+          "x": 0.9258326888084412,
+          "z": 0.5733266472816467
+        },
+        "walk_phase": 0.5408127903938293,
+        "world_position": {
+          "x": 1.2992897033691406,
+          "z": 5.054556846618652
+        }
+      },
+      "diagnostics": {
+        "bandwidth_ratio": 0.009494598954916,
+        "codec_tag": 3,
+        "delta_cell_count": 129600,
+        "encoded_frame_size": 4922,
+        "fps": 24,
+        "frame_sequence": 52416,
+        "keyframe_count": 1166,
+        "raw_frame_size": 518400,
+        "reconnect_count": 80
+      }
+    },
+    {
+      "kind": "frame",
+      "stage": "before-reload",
+      "frame": 3,
+      "elapsed_ms": 1197,
+      "state": {
+        "action": "walking",
+        "action_until": 0,
+        "blink_phase": 1,
+        "character_id": "asciline-wizard-v1-rust",
+        "display_scale": 2.625,
+        "expression": "neutral",
+        "facing": "north",
+        "locomotion": "walking",
+        "mouth": "closed",
+        "reconnect_count": 80,
+        "screen_position": {
+          "x": 370.9306640625,
+          "y": 190.00645446777344
+        },
+        "speech_id": null,
+        "speech_until": 0,
+        "staff_state": "held",
+        "target_point": {
+          "x": 1.350000023841858,
+          "z": 5.400000095367432
+        },
+        "time_seconds": 1.54166579246521,
+        "upper_body_action": "none",
+        "velocity": {
+          "x": 0.012892095372080803,
+          "z": 0.7370427846908569
+        },
+        "walk_phase": 0.8138272762298584,
+        "world_position": {
+          "x": 1.4135783910751343,
+          "z": 5.245787620544434
+        }
+      },
+      "diagnostics": {
+        "bandwidth_ratio": 0.022355323657393456,
+        "codec_tag": 2,
+        "delta_cell_count": 5202,
+        "encoded_frame_size": 11589,
+        "fps": 24,
+        "frame_sequence": 52422,
+        "keyframe_count": 1166,
+        "raw_frame_size": 518400,
+        "reconnect_count": 80
+      }
+    },
+    {
+      "kind": "frame",
+      "stage": "before-reload",
+      "frame": 4,
+      "elapsed_ms": 1363,
+      "state": {
+        "action": "walking",
+        "action_until": 0,
+        "blink_phase": 1,
+        "character_id": "asciline-wizard-v1-rust",
+        "display_scale": 2.5,
+        "expression": "neutral",
+        "facing": "north",
+        "locomotion": "walking",
+        "mouth": "closed",
+        "reconnect_count": 80,
+        "screen_position": {
+          "x": 362.9106750488281,
+          "y": 187.80357360839844
+        },
+        "speech_id": null,
+        "speech_until": 0,
+        "staff_state": "held",
+        "target_point": {
+          "x": 1.3384506702423096,
+          "z": 5.5762104988098145
+        },
+        "time_seconds": 1.8333321809768677,
+        "upper_body_action": "none",
+        "velocity": {
+          "x": -0.09795841574668884,
+          "z": 0.5022922158241272
+        },
+        "walk_phase": 0.035483572632074356,
+        "world_position": {
+          "x": 1.3445796966552734,
+          "z": 5.419163227081299
+        }
+      },
+      "diagnostics": {
+        "bandwidth_ratio": 0.030192900449037552,
+        "codec_tag": 2,
+        "delta_cell_count": 6906,
+        "encoded_frame_size": 15652,
+        "fps": 24,
+        "frame_sequence": 52429,
+        "keyframe_count": 1166,
+        "raw_frame_size": 518400,
+        "reconnect_count": 80
+      }
+    },
+    {
+      "kind": "frame",
+      "stage": "before-reload",
+      "frame": 5,
+      "elapsed_ms": 1554,
+      "state": {
+        "action": "walking",
+        "action_until": 0,
+        "blink_phase": 1,
+        "character_id": "asciline-wizard-v1-rust",
+        "display_scale": 2.5,
+        "expression": "neutral",
+        "facing": "north",
+        "locomotion": "walking",
+        "mouth": "closed",
+        "reconnect_count": 80,
+        "screen_position": {
+          "x": 358.357421875,
+          "y": 184.60020446777344
+        },
+        "speech_id": null,
+        "speech_until": 0,
+        "staff_state": "held",
+        "target_point": {
+          "x": 1.303999900817871,
+          "z": 5.749405860900879
+        },
+        "time_seconds": 2.291666030883789,
+        "upper_body_action": "none",
+        "velocity": {
+          "x": -0.0828733965754509,
+          "z": 0.399293452501297
+        },
+        "walk_phase": 0.3343454897403717,
+        "world_position": {
+          "x": 1.320214867591858,
+          "z": 5.671280384063721
+        }
+      },
+      "diagnostics": {
+        "bandwidth_ratio": 0.01924961432814598,
+        "codec_tag": 2,
+        "delta_cell_count": 4251,
+        "encoded_frame_size": 9979,
+        "fps": 24,
+        "frame_sequence": 52440,
+        "keyframe_count": 1166,
+        "raw_frame_size": 518400,
+        "reconnect_count": 80
+      }
+    },
+    {
+      "kind": "frame",
+      "stage": "before-reload",
+      "frame": 6,
+      "elapsed_ms": 2035,
+      "state": {
+        "action": "walking",
+        "action_until": 0,
+        "blink_phase": 1,
+        "character_id": "asciline-wizard-v1-rust",
+        "display_scale": 2.375,
+        "expression": "neutral",
+        "facing": "northwest",
+        "locomotion": "walking",
+        "mouth": "closed",
+        "reconnect_count": 80,
+        "screen_position": {
+          "x": 335.1298828125,
+          "y": 178.22909545898438
+        },
+        "speech_id": null,
+        "speech_until": 0,
+        "staff_state": "held",
+        "target_point": {
+          "x": 1.0710270404815674,
+          "z": 6.221827983856201
+        },
+        "time_seconds": 3.208334445953369,
+        "upper_body_action": "none",
+        "velocity": {
+          "x": -0.22864949703216553,
+          "z": 0.3376723825931549
+        },
+        "walk_phase": 0.9818059802055359,
+        "world_position": {
+          "x": 1.1042864322662354,
+          "z": 6.172709941864014
+        }
+      },
+      "diagnostics": {
+        "bandwidth_ratio": 0.020623071119189262,
+        "codec_tag": 2,
+        "delta_cell_count": 5243,
+        "encoded_frame_size": 10691,
+        "fps": 24,
+        "frame_sequence": 52462,
+        "keyframe_count": 1166,
+        "raw_frame_size": 518400,
+        "reconnect_count": 80
+      }
+    },
+    {
+      "kind": "frame",
+      "stage": "before-reload",
+      "frame": 7,
+      "elapsed_ms": 2223,
+      "state": {
+        "action": "walking",
+        "action_until": 0,
+        "blink_phase": 1,
+        "character_id": "asciline-wizard-v1-rust",
+        "display_scale": 2.375,
+        "expression": "neutral",
+        "facing": "northwest",
+        "locomotion": "walking",
+        "mouth": "closed",
+        "reconnect_count": 80,
+        "screen_position": {
+          "x": 320.79119873046875,
+          "y": 175.88409423828125
+        },
+        "speech_id": null,
+        "speech_until": 0,
+        "staff_state": "held",
+        "target_point": {
+          "x": 0.8218279480934143,
+          "z": 6.471027374267578
+        },
+        "time_seconds": 3.54166841506958,
+        "upper_body_action": "none",
+        "velocity": {
+          "x": -0.29989686608314514,
+          "z": 0.32114550471305847
+        },
+        "walk_phase": 0.263693630695343,
+        "world_position": {
+          "x": 0.9520949721336365,
+          "z": 6.357270240783691
+        }
+      },
+      "diagnostics": {
+        "bandwidth_ratio": 0.008466435596346855,
+        "codec_tag": 3,
+        "delta_cell_count": 20267,
+        "encoded_frame_size": 4389,
+        "fps": 24,
+        "frame_sequence": 52470,
+        "keyframe_count": 1167,
+        "raw_frame_size": 518400,
+        "reconnect_count": 80
+      }
+    },
+    {
+      "kind": "frame",
+      "stage": "before-reload",
+      "frame": 8,
+      "elapsed_ms": 2566,
+      "state": {
+        "action": "walking",
+        "action_until": 0,
+        "blink_phase": 1,
+        "character_id": "asciline-wizard-v1-rust",
+        "display_scale": 2.375,
+        "expression": "neutral",
+        "facing": "northwest",
+        "locomotion": "walking",
+        "mouth": "closed",
+        "reconnect_count": 80,
+        "screen_position": {
+          "x": 294.30316162109375,
+          "y": 173.0347900390625
+        },
+        "speech_id": null,
+        "speech_until": 0,
+        "staff_state": "held",
+        "target_point": {
+          "x": 0.5166226625442505,
+          "z": 6.647237300872803
+        },
+        "time_seconds": 4.166670322418213,
+        "upper_body_action": "none",
+        "velocity": {
+          "x": -0.5059555172920227,
+          "z": 0.24563631415367126
+        },
+        "walk_phase": 0.7057401537895203,
+        "world_position": {
+          "x": 0.6519835591316223,
+          "z": 6.581521034240723
+        }
+      },
+      "diagnostics": {
+        "bandwidth_ratio": 0.036471836268901825,
+        "codec_tag": 2,
+        "delta_cell_count": 9907,
+        "encoded_frame_size": 18907,
+        "fps": 24,
+        "frame_sequence": 52485,
+        "keyframe_count": 1167,
+        "raw_frame_size": 518400,
+        "reconnect_count": 80
+      }
+    },
+    {
+      "kind": "frame",
+      "stage": "before-reload",
+      "frame": 9,
+      "elapsed_ms": 2750,
+      "state": {
+        "action": "walking",
+        "action_until": 0,
+        "blink_phase": 0.7396191358566284,
+        "character_id": "asciline-wizard-v1-rust",
+        "display_scale": 2.25,
+        "expression": "neutral",
+        "facing": "northwest",
+        "locomotion": "walking",
+        "mouth": "closed",
+        "reconnect_count": 80,
+        "screen_position": {
+          "x": 280.73583984375,
+          "y": 172.08193969726562
+        },
+        "speech_id": null,
+        "speech_until": 0,
+        "staff_state": "held",
+        "target_point": {
+          "x": 0.34940576553344727,
+          "z": 6.703999996185303
+        },
+        "time_seconds": 4.458339214324951,
+        "upper_body_action": "none",
+        "velocity": {
+          "x": -0.5336893200874329,
+          "z": 0.17749734222888947
+        },
+        "walk_phase": 0.9135321378707886,
+        "world_position": {
+          "x": 0.49218645691871643,
+          "z": 6.656513214111328
+        }
+      },
+      "diagnostics": {
+        "bandwidth_ratio": 0.03319251537322998,
+        "codec_tag": 2,
+        "delta_cell_count": 9279,
+        "encoded_frame_size": 17207,
+        "fps": 24,
+        "frame_sequence": 52492,
+        "keyframe_count": 1167,
+        "raw_frame_size": 518400,
+        "reconnect_count": 80
+      }
+    },
+    {
+      "kind": "reload",
+      "elapsed_ms": 2853
+    },
+    {
+      "kind": "frame",
+      "stage": "after-reload",
+      "frame": 10,
+      "elapsed_ms": 2967,
+      "state": {
+        "action": "idle",
+        "action_until": 0,
+        "blink_phase": 0.5208333730697632,
+        "character_id": "asciline-wizard-v1-rust",
+        "display_scale": 2.625,
+        "expression": "neutral",
+        "facing": "south",
+        "locomotion": "idle",
+        "mouth": "closed",
+        "reconnect_count": 82,
+        "screen_position": {
+          "x": 240,
+          "y": 193.12940979003906
+        },
+        "speech_id": null,
+        "speech_until": 0,
+        "staff_state": "held",
+        "target_point": null,
+        "time_seconds": 0.0833333358168602,
+        "upper_body_action": "none",
+        "velocity": {
+          "x": 0,
+          "z": 0
+        },
+        "walk_phase": 0,
+        "world_position": {
+          "x": 0,
+          "z": 5
+        }
+      },
+      "diagnostics": {
+        "bandwidth_ratio": 0.00004822530900128186,
+        "codec_tag": 2,
+        "delta_cell_count": 2,
+        "encoded_frame_size": 25,
+        "fps": 24,
+        "frame_sequence": 52501,
+        "keyframe_count": 1168,
+        "raw_frame_size": 518400,
+        "reconnect_count": 82
+      }
+    },
+    {
+      "kind": "frame",
+      "stage": "after-reload",
+      "frame": 11,
+      "elapsed_ms": 3397,
+      "state": {
+        "action": "idle",
+        "action_until": 0,
+        "blink_phase": 1,
+        "character_id": "asciline-wizard-v1-rust",
+        "display_scale": 2.625,
+        "expression": "happy",
+        "facing": "south",
+        "locomotion": "idle",
+        "mouth": "smile",
+        "reconnect_count": 82,
+        "screen_position": {
+          "x": 240,
+          "y": 193.12940979003906
+        },
+        "speech_id": null,
+        "speech_until": 0,
+        "staff_state": "held",
+        "target_point": null,
+        "time_seconds": 1.749998927116394,
+        "upper_body_action": "none",
+        "velocity": {
+          "x": 0,
+          "z": 0
+        },
+        "walk_phase": 0,
+        "world_position": {
+          "x": 0,
+          "z": 5
+        }
+      },
+      "diagnostics": {
+        "bandwidth_ratio": 0.000025077160898945294,
+        "codec_tag": 2,
+        "delta_cell_count": 0,
+        "encoded_frame_size": 13,
+        "fps": 24,
+        "frame_sequence": 52541,
+        "keyframe_count": 1169,
+        "raw_frame_size": 518400,
+        "reconnect_count": 82
+      }
+    },
+    {
+      "kind": "frame",
+      "stage": "after-reload",
+      "frame": 12,
+      "elapsed_ms": 3539,
+      "state": {
+        "action": "speaking",
+        "action_until": 6.199998378753662,
+        "blink_phase": 1,
+        "character_id": "asciline-wizard-v1-rust",
+        "display_scale": 2.625,
+        "expression": "happy",
+        "facing": "south",
+        "locomotion": "idle",
+        "mouth": "open_small",
+        "reconnect_count": 82,
+        "screen_position": {
+          "x": 240,
+          "y": 193.12940979003906
+        },
+        "speech_id": "speech-2000",
+        "speech_until": 6.199998378753662,
+        "staff_state": "held",
+        "target_point": null,
+        "time_seconds": 2.16666579246521,
+        "upper_body_action": "explain",
+        "velocity": {
+          "x": 0,
+          "z": 0
+        },
+        "walk_phase": 0,
+        "world_position": {
+          "x": 0,
+          "z": 5
+        }
+      },
+      "diagnostics": {
+        "bandwidth_ratio": 0.02122492343187332,
+        "codec_tag": 2,
+        "delta_cell_count": 5012,
+        "encoded_frame_size": 11003,
+        "fps": 24,
+        "frame_sequence": 52551,
+        "keyframe_count": 1169,
+        "raw_frame_size": 518400,
+        "reconnect_count": 82
+      }
+    },
+    {
+      "kind": "frame",
+      "stage": "after-reload",
+      "frame": 13,
+      "elapsed_ms": 4090,
+      "state": {
+        "action": "walking",
+        "action_until": 0,
+        "blink_phase": 1,
+        "character_id": "asciline-wizard-v1-rust",
+        "display_scale": 2.625,
+        "expression": "happy",
+        "facing": "west",
+        "locomotion": "walking",
+        "mouth": "open_small",
+        "reconnect_count": 82,
+        "screen_position": {
+          "x": 167.31307983398438,
+          "y": 194.89120483398438
+        },
+        "speech_id": "speech-2000",
+        "speech_until": 6.199998378753662,
+        "staff_state": "held",
+        "target_point": {
+          "x": -2.200000047683716,
+          "z": 4.599999904632568
+        },
+        "time_seconds": 2.9166672229766846,
+        "upper_body_action": "none",
+        "velocity": {
+          "x": -1.426611065864563,
+          "z": -0.259385883808136
+        },
+        "walk_phase": 0.9119277596473694,
+        "world_position": {
+          "x": -0.7626357078552246,
+          "z": 4.8613409996032715
+        }
+      },
+      "diagnostics": {
+        "bandwidth_ratio": 0.007175926119089127,
+        "codec_tag": 3,
+        "delta_cell_count": 16302,
+        "encoded_frame_size": 3720,
+        "fps": 24,
+        "frame_sequence": 52569,
+        "keyframe_count": 1170,
+        "raw_frame_size": 518400,
+        "reconnect_count": 82
+      }
+    },
+    {
+      "kind": "frame",
+      "stage": "after-reload",
+      "frame": 14,
+      "elapsed_ms": 4274,
+      "state": {
+        "action": "walking",
+        "action_until": 0,
+        "blink_phase": 1,
+        "character_id": "asciline-wizard-v1-rust",
+        "display_scale": 2.625,
+        "expression": "happy",
+        "facing": "west",
+        "locomotion": "walking",
+        "mouth": "open_small",
+        "reconnect_count": 82,
+        "screen_position": {
+          "x": 138.5856475830078,
+          "y": 195.57778930664062
+        },
+        "speech_id": "speech-2000",
+        "speech_until": 6.199998378753662,
+        "staff_state": "held",
+        "target_point": {
+          "x": -2.200000047683716,
+          "z": 4.599999904632568
+        },
+        "time_seconds": 3.1250009536743164,
+        "upper_body_action": "none",
+        "velocity": {
+          "x": -1.4266109466552734,
+          "z": -0.2593872845172882
+        },
+        "walk_phase": 0.2673196792602539,
+        "world_position": {
+          "x": -1.05984628200531,
+          "z": 4.807303428649902
+        }
+      },
+      "diagnostics": {
+        "bandwidth_ratio": 0.007301311939954758,
+        "codec_tag": 3,
+        "delta_cell_count": 16357,
+        "encoded_frame_size": 3785,
+        "fps": 24,
+        "frame_sequence": 52574,
+        "keyframe_count": 1170,
+        "raw_frame_size": 518400,
+        "reconnect_count": 82
+      }
+    },
+    {
+      "kind": "frame",
+      "stage": "after-reload",
+      "frame": 15,
+      "elapsed_ms": 4460,
+      "state": {
+        "action": "walking",
+        "action_until": 0,
+        "blink_phase": 1,
+        "character_id": "asciline-wizard-v1-rust",
+        "display_scale": 2.625,
+        "expression": "happy",
+        "facing": "west",
+        "locomotion": "walking",
+        "mouth": "open_small",
+        "reconnect_count": 82,
+        "screen_position": {
+          "x": 109.63374328613281,
+          "y": 196.26438903808594
+        },
+        "speech_id": "speech-2000",
+        "speech_until": 6.199998378753662,
+        "staff_state": "held",
+        "target_point": {
+          "x": -2.200000047683716,
+          "z": 4.599999904632568
+        },
+        "time_seconds": 3.3333346843719482,
+        "upper_body_action": "none",
+        "velocity": {
+          "x": -1.4266103506088257,
+          "z": -0.2593896687030792
+        },
+        "walk_phase": 0.6227117776870728,
+        "world_position": {
+          "x": -1.3570570945739746,
+          "z": 4.753265857696533
+        }
+      },
+      "diagnostics": {
+        "bandwidth_ratio": 0.00725115742534399,
+        "codec_tag": 3,
+        "delta_cell_count": 16325,
+        "encoded_frame_size": 3759,
+        "fps": 24,
+        "frame_sequence": 52579,
+        "keyframe_count": 1170,
+        "raw_frame_size": 518400,
+        "reconnect_count": 82
+      }
+    },
+    {
+      "kind": "frame",
+      "stage": "after-reload",
+      "frame": 16,
+      "elapsed_ms": 4719,
+      "state": {
+        "action": "walking",
+        "action_until": 0,
+        "blink_phase": 1,
+        "character_id": "asciline-wizard-v1-rust",
+        "display_scale": 2.625,
+        "expression": "happy",
+        "facing": "west",
+        "locomotion": "walking",
+        "mouth": "open_small",
+        "reconnect_count": 82,
+        "screen_position": {
+          "x": 68.73464965820312,
+          "y": 197.2253875732422
+        },
+        "speech_id": "speech-2000",
+        "speech_until": 6.199998378753662,
+        "staff_state": "held",
+        "target_point": {
+          "x": -2.200000047683716,
+          "z": 4.599999904632568
+        },
+        "time_seconds": 3.625001907348633,
+        "upper_body_action": "none",
+        "velocity": {
+          "x": -1.413707971572876,
+          "z": -0.2570492625236511
+        },
+        "walk_phase": 0.1201317310333252,
+        "world_position": {
+          "x": -1.7730439901351929,
+          "z": 4.677631855010986
+        }
+      },
+      "diagnostics": {
+        "bandwidth_ratio": 0.007193286903202534,
+        "codec_tag": 3,
+        "delta_cell_count": 16404,
+        "encoded_frame_size": 3729,
+        "fps": 24,
+        "frame_sequence": 52586,
+        "keyframe_count": 1170,
+        "raw_frame_size": 518400,
+        "reconnect_count": 82
+      }
+    },
+    {
+      "kind": "frame",
+      "stage": "after-reload",
+      "frame": 17,
+      "elapsed_ms": 4939,
+      "state": {
+        "action": "explaining",
+        "action_until": 5.366668701171875,
+        "blink_phase": 1,
+        "character_id": "asciline-wizard-v1-rust",
+        "display_scale": 2.75,
+        "expression": "happy",
+        "facing": "west",
+        "locomotion": "walking",
+        "mouth": "open_small",
+        "reconnect_count": 82,
+        "screen_position": {
+          "x": 42.456268310546875,
+          "y": 197.83749389648438
+        },
+        "speech_id": "speech-2000",
+        "speech_until": 6.199998378753662,
+        "staff_state": "held",
+        "target_point": {
+          "x": -2.200000047683716,
+          "z": 4.599999904632568
+        },
+        "time_seconds": 3.9166691303253174,
+        "upper_body_action": "explain",
+        "velocity": {
+          "x": -0.5364335179328918,
+          "z": -0.0975385308265686
+        },
+        "walk_phase": 0.436944842338562,
+        "world_position": {
+          "x": -2.0379910469055176,
+          "z": 4.629457473754883
+        }
+      },
+      "diagnostics": {
+        "bandwidth_ratio": 0.037779707461595535,
+        "codec_tag": 2,
+        "delta_cell_count": 11071,
+        "encoded_frame_size": 19585,
+        "fps": 24,
+        "frame_sequence": 52593,
+        "keyframe_count": 1170,
+        "raw_frame_size": 518400,
+        "reconnect_count": 82
+      }
+    },
+    {
+      "kind": "frame",
+      "stage": "after-reload",
+      "frame": 18,
+      "elapsed_ms": 5200,
+      "state": {
+        "action": "explaining",
+        "action_until": 5.366668701171875,
+        "blink_phase": 0.47920048236846924,
+        "character_id": "asciline-wizard-v1-rust",
+        "display_scale": 2.75,
+        "expression": "happy",
+        "facing": "east",
+        "locomotion": "walking",
+        "mouth": "open_small",
+        "reconnect_count": 82,
+        "screen_position": {
+          "x": 27.961334228515625,
+          "y": 198.34011840820312
+        },
+        "speech_id": "speech-2000",
+        "speech_until": 6.199998378753662,
+        "staff_state": "held",
+        "target_point": {
+          "x": 2.200000047683716,
+          "z": 4.599999904632568
+        },
+        "time_seconds": 4.416672229766846,
+        "upper_body_action": "explain",
+        "velocity": {
+          "x": 0.47610992193222046,
+          "z": -0.0340086929500103
+        },
+        "walk_phase": 0.6863996386528015,
+        "world_position": {
+          "x": -2.1813089847564697,
+          "z": 4.589898586273193
+        }
+      },
+      "diagnostics": {
+        "bandwidth_ratio": 0.02622685208916664,
+        "codec_tag": 2,
+        "delta_cell_count": 7092,
+        "encoded_frame_size": 13596,
+        "fps": 24,
+        "frame_sequence": 52605,
+        "keyframe_count": 1170,
+        "raw_frame_size": 518400,
+        "reconnect_count": 82
+      }
+    },
+    {
+      "kind": "frame",
+      "stage": "after-reload",
+      "frame": 19,
+      "elapsed_ms": 5405,
+      "state": {
+        "action": "explaining",
+        "action_until": 5.366668701171875,
+        "blink_phase": 1,
+        "character_id": "asciline-wizard-v1-rust",
+        "display_scale": 2.75,
+        "expression": "happy",
+        "facing": "east",
+        "locomotion": "walking",
+        "mouth": "open_small",
+        "reconnect_count": 82,
+        "screen_position": {
+          "x": 58.21336364746094,
+          "y": 198.379638671875
+        },
+        "speech_id": "speech-2000",
+        "speech_until": 6.199998378753662,
+        "staff_state": "held",
+        "target_point": {
+          "x": 2.200000047683716,
+          "z": 4.599999904632568
+        },
+        "time_seconds": 4.708341121673584,
+        "upper_body_action": "explain",
+        "velocity": {
+          "x": 1.4499924182891846,
+          "z": 0.004707351792603731
+        },
+        "walk_phase": 0.05308891460299492,
+        "world_position": {
+          "x": -1.8696787357330322,
+          "z": 4.586787700653076
+        }
+      },
+      "diagnostics": {
+        "bandwidth_ratio": 0.0075559415854513645,
+        "codec_tag": 3,
+        "delta_cell_count": 17106,
+        "encoded_frame_size": 3917,
+        "fps": 24,
+        "frame_sequence": 52612,
+        "keyframe_count": 1171,
+        "raw_frame_size": 518400,
+        "reconnect_count": 82
+      }
+    }
+  ]
+}

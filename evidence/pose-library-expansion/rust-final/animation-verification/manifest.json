@@ -1,0 +1,26 @@
+{
+  "schema_version": 2,
+  "generator": "wizard-avatar-pose-evidence-rust-v3",
+  "simulation_fps": 60,
+  "frame_width": 480,
+  "frame_height": 270,
+  "frame_count": 7173,
+  "catalog_records": 30,
+  "unique_geometries": 39,
+  "aliases": 1,
+  "rust_clip_count": 11,
+  "authored_transition_count": 170,
+  "deterministic_replay": true,
+  "adaptive_decode_parity": true,
+  "presentation_parity": true,
+  "pass_one_stream_sha256": "c53e11ae34aca237be2325b44005ecf6698ecc62001d2461b24ca90d4dd65a1b",
+  "pass_two_stream_sha256": "c53e11ae34aca237be2325b44005ecf6698ecc62001d2461b24ca90d4dd65a1b",
+  "quality": {
+    "frame_count": 7173,
+    "pair_count": 6991,
+    "failures": []
+  },
+  "frame_ledger": "frame-ledger.ndjson",
+  "video": "animation.mp4",
+  "timeline_contact_sheet": "timeline-contact-sheet.png"
+}

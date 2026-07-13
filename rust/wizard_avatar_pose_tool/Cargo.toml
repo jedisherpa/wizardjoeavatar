@@ -1,0 +1,20 @@
+[package]
+name = "wizard_avatar_pose_tool"
+version = "0.1.0"
+edition = "2021"
+description = "Deterministic offline compiler for WizardJoe reference pose archives"
+
+[dependencies]
+image = { version = "0.25", default-features = false, features = ["png"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+sha2 = "0.10"
+thiserror = "2"
+
+[lib]
+name = "wizard_avatar_pose_tool"
+path = "src/lib.rs"
+
+[[bin]]
+name = "wizard-avatar-pose-tool"
+path = "src/main.rs"

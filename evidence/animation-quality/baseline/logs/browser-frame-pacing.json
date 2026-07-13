@@ -1,0 +1,204 @@
+{
+  "samples": [
+    {
+      "elapsed_ms": 15,
+      "fps": 30,
+      "seq": 60299,
+      "state": "locomotion idle | facing northeast | expression surprised | action idle | mouth open_wide",
+      "wire": 13,
+      "ws": "decode"
+    },
+    {
+      "elapsed_ms": 223,
+      "fps": 47,
+      "seq": 60319,
+      "state": "locomotion idle | facing northeast | expression surprised | action idle | mouth open_wide",
+      "wire": 13,
+      "ws": "decode"
+    },
+    {
+      "elapsed_ms": 437,
+      "fps": 47,
+      "seq": 60339,
+      "state": "locomotion idle | facing northeast | expression surprised | action idle | mouth open_wide",
+      "wire": 13,
+      "ws": "decode"
+    },
+    {
+      "elapsed_ms": 649,
+      "fps": 47,
+      "seq": 60359,
+      "state": "locomotion idle | facing northeast | expression surprised | action idle | mouth open_wide",
+      "wire": 13,
+      "ws": "decode"
+    },
+    {
+      "elapsed_ms": 859,
+      "fps": 47,
+      "seq": 60379,
+      "state": "locomotion idle | facing northeast | expression surprised | action idle | mouth open_wide",
+      "wire": 13,
+      "ws": "decode"
+    },
+    {
+      "elapsed_ms": 1068,
+      "fps": 47,
+      "seq": 60397,
+      "state": "locomotion idle | facing northeast | expression surprised | action idle | mouth open_wide",
+      "wire": 13,
+      "ws": "decode"
+    },
+    {
+      "elapsed_ms": 1278,
+      "fps": 47,
+      "seq": 60413,
+      "state": "locomotion walking | facing south | expression surprised | action walking | mouth open_wide",
+      "wire": 2856,
+      "ws": "decode"
+    },
+    {
+      "elapsed_ms": 1486,
+      "fps": 47,
+      "seq": 60425,
+      "state": "locomotion walking | facing south | expression surprised | action walking | mouth open_wide",
+      "wire": 6650,
+      "ws": "decode"
+    },
+    {
+      "elapsed_ms": 1694,
+      "fps": 47,
+      "seq": 60441,
+      "state": "locomotion idle | facing south | expression surprised | action idle | mouth open_wide",
+      "wire": 13,
+      "ws": "decode"
+    },
+    {
+      "elapsed_ms": 1902,
+      "fps": 47,
+      "seq": 60461,
+      "state": "locomotion idle | facing south | expression surprised | action idle | mouth open_wide",
+      "wire": 13,
+      "ws": "decode"
+    },
+    {
+      "elapsed_ms": 2111,
+      "fps": 39,
+      "seq": 60479,
+      "state": "locomotion idle | facing south | expression surprised | action idle | mouth open_wide",
+      "wire": 13,
+      "ws": "decode"
+    },
+    {
+      "elapsed_ms": 2321,
+      "fps": 39,
+      "seq": 60499,
+      "state": "locomotion idle | facing south | expression surprised | action idle | mouth open_wide",
+      "wire": 13,
+      "ws": "decode"
+    },
+    {
+      "elapsed_ms": 2531,
+      "fps": 39,
+      "seq": 60519,
+      "state": "locomotion idle | facing south | expression surprised | action idle | mouth open_wide",
+      "wire": 13,
+      "ws": "decode"
+    },
+    {
+      "elapsed_ms": 2744,
+      "fps": 39,
+      "seq": 60539,
+      "state": "locomotion idle | facing south | expression surprised | action idle | mouth open_wide",
+      "wire": 13,
+      "ws": "decode"
+    },
+    {
+      "elapsed_ms": 2956,
+      "fps": 39,
+      "seq": 60559,
+      "state": "locomotion idle | facing south | expression surprised | action idle | mouth open_wide",
+      "wire": 25,
+      "ws": "decode"
+    },
+    {
+      "elapsed_ms": 3166,
+      "fps": 47,
+      "seq": 60577,
+      "state": "locomotion idle | facing south | expression surprised | action idle | mouth open_wide",
+      "wire": 13,
+      "ws": "decode"
+    },
+    {
+      "elapsed_ms": 3376,
+      "fps": 47,
+      "seq": 60597,
+      "state": "locomotion idle | facing south | expression neutral | action idle | mouth closed",
+      "wire": 13,
+      "ws": "decode"
+    },
+    {
+      "elapsed_ms": 3584,
+      "fps": 47,
+      "seq": 60611,
+      "state": "locomotion idle | facing south | expression neutral | action idle | mouth closed",
+      "wire": 13,
+      "ws": "decode"
+    },
+    {
+      "elapsed_ms": 3794,
+      "fps": 47,
+      "seq": 60621,
+      "state": "locomotion idle | facing south | expression neutral | action idle | mouth closed",
+      "wire": 13,
+      "ws": "decode"
+    },
+    {
+      "elapsed_ms": 4003,
+      "fps": 47,
+      "seq": 60631,
+      "state": "locomotion idle | facing south | expression neutral | action idle | mouth closed",
+      "wire": 13,
+      "ws": "decode"
+    },
+    {
+      "elapsed_ms": 4213,
+      "fps": 31,
+      "seq": 60641,
+      "state": "locomotion idle | facing south | expression neutral | action idle | mouth closed",
+      "wire": 13,
+      "ws": "decode"
+    },
+    {
+      "elapsed_ms": 4421,
+      "fps": 31,
+      "seq": 60651,
+      "state": "locomotion idle | facing south | expression neutral | action idle | mouth closed",
+      "wire": 13,
+      "ws": "decode"
+    },
+    {
+      "elapsed_ms": 4630,
+      "fps": 31,
+      "seq": 60661,
+      "state": "locomotion idle | facing south | expression neutral | action idle | mouth closed",
+      "wire": 25,
+      "ws": "decode"
+    },
+    {
+      "elapsed_ms": 4838,
+      "fps": 31,
+      "seq": 60671,
+      "state": "locomotion idle | facing south | expression neutral | action idle | mouth closed",
+      "wire": 13,
+      "ws": "decode"
+    },
+    {
+      "elapsed_ms": 5046,
+      "fps": 31,
+      "seq": 60681,
+      "state": "locomotion idle | facing south | expression neutral | action idle | mouth closed",
+      "wire": 13,
+      "ws": "decode"
+    }
+  ]
+}

@@ -1,0 +1,123 @@
+{
+  "mode": "short",
+  "configured_total_seconds": 15,
+  "actual_elapsed_seconds": 15.055860833,
+  "broadcast_capacity": 16,
+  "scenarios": [
+    {
+      "viewers": 0,
+      "elapsed_seconds": 3.010168917,
+      "simulation_ticks": 181,
+      "measured_simulation_hz": 60.129515980913304,
+      "rendered_frames": 73,
+      "measured_render_fps": 24.25113075473299,
+      "simulation_deadline_misses": 0,
+      "render_deadline_misses": 0,
+      "viewer_received_frames": [],
+      "sequence_gaps": 0,
+      "lag_events": 0,
+      "canonical_hash_mismatches": 0,
+      "max_receiver_queue_depth": 0,
+      "rss_kb_start": 15104,
+      "rss_kb_end": 18880,
+      "rss_kb_peak": 18880,
+      "passed": true
+    },
+    {
+      "viewers": 1,
+      "elapsed_seconds": 3.01449075,
+      "simulation_ticks": 181,
+      "measured_simulation_hz": 60.04330913936292,
+      "rendered_frames": 73,
+      "measured_render_fps": 24.216362249577312,
+      "simulation_deadline_misses": 0,
+      "render_deadline_misses": 0,
+      "viewer_received_frames": [
+        73
+      ],
+      "sequence_gaps": 0,
+      "lag_events": 0,
+      "canonical_hash_mismatches": 0,
+      "max_receiver_queue_depth": 1,
+      "rss_kb_start": 18880,
+      "rss_kb_end": 21536,
+      "rss_kb_peak": 21536,
+      "passed": true
+    },
+    {
+      "viewers": 2,
+      "elapsed_seconds": 3.000939,
+      "simulation_ticks": 180,
+      "measured_simulation_hz": 59.98122587630072,
+      "rendered_frames": 72,
+      "measured_render_fps": 23.99249035052029,
+      "simulation_deadline_misses": 0,
+      "render_deadline_misses": 0,
+      "viewer_received_frames": [
+        72,
+        72
+      ],
+      "sequence_gaps": 0,
+      "lag_events": 0,
+      "canonical_hash_mismatches": 0,
+      "max_receiver_queue_depth": 1,
+      "rss_kb_start": 21536,
+      "rss_kb_end": 21552,
+      "rss_kb_peak": 21552,
+      "passed": true
+    },
+    {
+      "viewers": 4,
+      "elapsed_seconds": 3.007220959,
+      "simulation_ticks": 181,
+      "measured_simulation_hz": 60.18846053140985,
+      "rendered_frames": 72,
+      "measured_render_fps": 23.942371040118836,
+      "simulation_deadline_misses": 0,
+      "render_deadline_misses": 0,
+      "viewer_received_frames": [
+        72,
+        72,
+        72,
+        72
+      ],
+      "sequence_gaps": 0,
+      "lag_events": 0,
+      "canonical_hash_mismatches": 0,
+      "max_receiver_queue_depth": 1,
+      "rss_kb_start": 21552,
+      "rss_kb_end": 21552,
+      "rss_kb_peak": 21552,
+      "passed": true
+    },
+    {
+      "viewers": 8,
+      "elapsed_seconds": 3.004892417,
+      "simulation_ticks": 180,
+      "measured_simulation_hz": 59.902310971820725,
+      "rendered_frames": 72,
+      "measured_render_fps": 23.960924388728287,
+      "simulation_deadline_misses": 0,
+      "render_deadline_misses": 0,
+      "viewer_received_frames": [
+        72,
+        72,
+        72,
+        72,
+        72,
+        72,
+        72,
+        72
+      ],
+      "sequence_gaps": 0,
+      "lag_events": 0,
+      "canonical_hash_mismatches": 0,
+      "max_receiver_queue_depth": 1,
+      "rss_kb_start": 21552,
+      "rss_kb_end": 25664,
+      "rss_kb_peak": 25664,
+      "passed": true
+    }
+  ],
+  "passed": true
+}

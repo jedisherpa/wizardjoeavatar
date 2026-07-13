@@ -1,0 +1,14 @@
+{
+  "run_id": "run-2",
+  "transitions": 36,
+  "frames": 1008,
+  "semantic_stream_hash64": "1f8db3d09f8d495f",
+  "raw_frame_stream_hash64": "69d2f9e4e8a39288",
+  "category_frame_counts": {
+    "01-locomotion-directions": 308,
+    "02-speech-actions-expressions": 476,
+    "03-circles-figure-eight": 84,
+    "04-reconnect-replay": 140
+  },
+  "all_boundaries_passed": true
+}
