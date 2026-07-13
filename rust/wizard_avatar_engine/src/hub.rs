@@ -1,7 +1,8 @@
 use crate::codec::{encode_full_frame, CodecError, CELL_BYTES};
 use crate::controller::WizardCommand;
 use crate::frame_source::{FrameDiagnostics, ProceduralWizardFrameSource};
-use crate::runtime::{AvatarRuntime, RuntimeSnapshot, SimulationAccumulator};
+use crate::runtime::{AvatarRuntime, RuntimeSnapshot};
+use crate::runtime_clock::{CatchUpDropped, RuntimeClock};
 use crate::state::WizardState;
 use serde::Serialize;
 use std::sync::atomic::{AtomicU64, Ordering};
@@ -40,7 +41,35 @@ pub struct HubDiagnostics {
     pub frame_sequence: Option<u32>,
     pub subscriber_count: usize,
     pub latest_is_keyframe: bool,
+    pub clock: HubClockDiagnostics,
     pub frame: Option<FrameDiagnostics>,
+}
+
+#[derive(Clone, Debug, Default, Serialize)]
+pub struct HubClockDiagnostics {
+    pub catch_up_drop_count: u64,
+    pub cumulative_dropped_monotonic_ns: u64,
+    pub cumulative_dropped_sub_nanosecond_units: u8,
+    pub last_drop: Option<HubClockDropDiagnostics>,
+}
+
+#[derive(Clone, Debug, Serialize)]
+pub struct HubClockDropDiagnostics {
+    pub at_monotonic_ns: u64,
+    pub dropped_tick_count: u64,
+    pub dropped_monotonic_ns: u64,
+    pub dropped_sub_nanosecond_units: u8,
+}
+
+impl From<CatchUpDropped> for HubClockDropDiagnostics {
+    fn from(drop: CatchUpDropped) -> Self {
+        Self {
+            at_monotonic_ns: drop.at_monotonic_ns,
+            dropped_tick_count: drop.dropped_tick_count,
+            dropped_monotonic_ns: drop.dropped_monotonic_ns,
+            dropped_sub_nanosecond_units: drop.dropped_sub_nanosecond_units,
+        }
+    }
 }
 
 #[derive(Debug)]
@@ -48,6 +77,7 @@ pub struct AvatarFrameHub {
     sender: broadcast::Sender<Arc<FramePacket>>,
     latest: RwLock<Option<Arc<FramePacket>>>,
     runtime: Arc<RwLock<AvatarRuntime>>,
+    clock_diagnostics: RwLock<HubClockDiagnostics>,
     cols: usize,
     rows: usize,
     fps: f32,
@@ -63,6 +93,7 @@ impl AvatarFrameHub {
             sender,
             latest: RwLock::new(None),
             runtime,
+            clock_diagnostics: RwLock::new(HubClockDiagnostics::default()),
             cols: source.cols,
             rows: source.rows,
             fps: source.fps,
@@ -130,31 +161,40 @@ impl AvatarFrameHub {
     pub async fn diagnostics(&self) -> HubDiagnostics {
         let simulation_tick = self.runtime.read().await.tick();
         let latest = self.latest.read().await.clone();
+        let clock = self.clock_diagnostics.read().await.clone();
         HubDiagnostics {
             epoch: self.epoch,
             simulation_tick,
             frame_sequence: latest.as_ref().map(|packet| packet.sequence),
             subscriber_count: self.sender.receiver_count(),
             latest_is_keyframe: latest.as_ref().is_some_and(|packet| packet.is_keyframe),
+            clock,
             frame: latest.map(|packet| packet.diagnostics.clone()),
         }
     }
 }
 
 async fn run_runtime(hub: Arc<AvatarFrameHub>) {
-    let mut previous_wall = Instant::now();
-    let mut accumulator = SimulationAccumulator::default();
+    let origin = Instant::now();
+    let mut clock = RuntimeClock::default();
+    let _ = clock.advance_wall_clock(0);
     loop {
         sleep(Duration::from_millis(2)).await;
-        let now = Instant::now();
-        let elapsed = now.saturating_duration_since(previous_wall);
-        previous_wall = now;
-        let advance = accumulator.advance(elapsed);
-        if advance.steps == 0 {
+        let monotonic_ns = origin.elapsed().as_nanos().min(u128::from(u64::MAX)) as u64;
+        let advance = clock.advance_wall_clock(monotonic_ns);
+        if let Some(drop) = advance.dropped() {
+            let mut diagnostics = hub.clock_diagnostics.write().await;
+            diagnostics.catch_up_drop_count = drop.catch_up_drop_count;
+            diagnostics.cumulative_dropped_monotonic_ns = drop.cumulative_dropped_monotonic_ns;
+            diagnostics.cumulative_dropped_sub_nanosecond_units =
+                drop.cumulative_dropped_sub_nanosecond_units;
+            diagnostics.last_drop = Some(drop.into());
+        }
+        if advance.ticks_due() == 0 {
             continue;
         }
         let mut runtime = hub.runtime.write().await;
-        for _ in 0..advance.steps {
+        for _ in 0..advance.ticks_due() {
             runtime.step_tick();
         }
     }

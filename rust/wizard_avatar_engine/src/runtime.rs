@@ -1,50 +1,13 @@
 use crate::controller::{CommandResult, WizardAvatarController, WizardCommand};
 use crate::state::WizardState;
 use std::collections::{BTreeMap, VecDeque};
-use std::time::Duration;
-
-pub const MAX_CATCH_UP_STEPS: u32 = 8;
-const STEP_SECONDS: f64 = 1.0 / 60.0;
-
-#[derive(Clone, Copy, Debug, Default, PartialEq)]
-pub struct AccumulatorAdvance {
-    pub steps: u32,
-    pub alpha: f32,
-    pub dropped_seconds: f64,
-}
-
-#[derive(Clone, Debug, Default)]
-pub struct SimulationAccumulator {
-    accumulated_seconds: f64,
-    dropped_seconds: f64,
-}
-
-impl SimulationAccumulator {
-    #[must_use]
-    pub fn advance(&mut self, elapsed: Duration) -> AccumulatorAdvance {
-        self.accumulated_seconds += elapsed.as_secs_f64();
-        let maximum = STEP_SECONDS * f64::from(MAX_CATCH_UP_STEPS);
-        let dropped = (self.accumulated_seconds - maximum).max(0.0);
-        if dropped > 0.0 {
-            self.accumulated_seconds = maximum;
-            self.dropped_seconds += dropped;
-        }
-        let steps = ((self.accumulated_seconds / STEP_SECONDS) + 1e-9).floor() as u32;
-        let steps = steps.min(MAX_CATCH_UP_STEPS);
-        self.accumulated_seconds -= f64::from(steps) * STEP_SECONDS;
-        AccumulatorAdvance {
-            steps,
-            alpha: (self.accumulated_seconds / STEP_SECONDS).clamp(0.0, 1.0) as f32,
-            dropped_seconds: self.dropped_seconds,
-        }
-    }
-}
+use std::sync::Arc;
 
 #[derive(Clone, Debug)]
 pub struct RuntimeSnapshot {
     pub tick: u64,
-    pub previous: WizardState,
-    pub current: WizardState,
+    pub previous: Arc<WizardState>,
+    pub current: Arc<WizardState>,
 }
 
 #[derive(Clone, Debug)]
@@ -56,8 +19,8 @@ struct ScheduledCommand {
 #[derive(Clone, Debug)]
 pub struct AvatarRuntime {
     controller: WizardAvatarController,
-    previous: WizardState,
-    current: WizardState,
+    previous: Arc<WizardState>,
+    current: Arc<WizardState>,
     tick: u64,
     next_command_order: u64,
     scheduled: BTreeMap<u64, VecDeque<ScheduledCommand>>,
@@ -72,10 +35,10 @@ impl Default for AvatarRuntime {
 impl AvatarRuntime {
     #[must_use]
     pub fn new(controller: WizardAvatarController) -> Self {
-        let current = controller.current_state().clone();
+        let current = Arc::new(controller.current_state().clone());
         Self {
             controller,
-            previous: current.clone(),
+            previous: Arc::clone(&current),
             current,
             tick: 0,
             next_command_order: 0,
@@ -90,15 +53,15 @@ impl AvatarRuntime {
 
     #[must_use]
     pub fn current_state(&self) -> &WizardState {
-        &self.current
+        self.current.as_ref()
     }
 
     #[must_use]
     pub fn snapshot(&self) -> RuntimeSnapshot {
         RuntimeSnapshot {
             tick: self.tick,
-            previous: self.previous.clone(),
-            current: self.current.clone(),
+            previous: Arc::clone(&self.previous),
+            current: Arc::clone(&self.current),
         }
     }
 
@@ -120,10 +83,10 @@ impl AvatarRuntime {
 
     pub fn step_tick(&mut self) {
         self.apply_commands_through(self.tick);
-        self.previous = self.current.clone();
+        self.previous = Arc::clone(&self.current);
         self.controller.step_tick();
         self.tick += 1;
-        self.current = self.controller.current_state().clone();
+        self.current = Arc::new(self.controller.current_state().clone());
     }
 
     fn apply_commands_through(&mut self, tick: u64) -> Vec<CommandResult> {
@@ -144,7 +107,7 @@ impl AvatarRuntime {
             .into_iter()
             .map(|scheduled| self.controller.apply_command(scheduled.command))
             .collect::<Vec<_>>();
-        self.current = self.controller.current_state().clone();
+        self.current = Arc::new(self.controller.current_state().clone());
         results
     }
 }
@@ -166,14 +129,5 @@ mod tests {
         assert_eq!(runtime.current_state().expression.as_str(), "neutral");
         runtime.step_tick();
         assert_eq!(runtime.current_state().expression.as_str(), "happy");
-    }
-
-    #[test]
-    fn accumulator_caps_catch_up_without_fractional_simulation_steps() {
-        let mut accumulator = SimulationAccumulator::default();
-        let advance = accumulator.advance(Duration::from_secs(2));
-        assert_eq!(advance.steps, MAX_CATCH_UP_STEPS);
-        assert!(advance.dropped_seconds > 1.8);
-        assert!((0.0..=1.0).contains(&advance.alpha));
     }
 }
