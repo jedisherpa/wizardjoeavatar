@@ -9,9 +9,10 @@ Last coordinator update: 2026-07-13
 | 50-pose integration | COMPLETE | 89/50/621/16; 20,065 frames x2; zero failures |
 | Three-agent research | COMPLETE | RUNTIME, MOTION, FLOW reports saved |
 | Three-agent planning | COMPLETE | Detailed lane plans saved |
-| Coordinator synthesis | IN_REVIEW | Revised central contract is in three-way review |
+| Coordinator synthesis | COMPLETE | Three agents accepted after iterative cross-review |
 | Pose checkpoint | COMPLETE | Pushed `ca52b8023d5021e3a9bb14753961e8f7007f5aef` |
-| Contract implementation | PLANNED | Blocked on P0 and synthesis review |
+| Planning checkpoint | COMPLETE | Pushed `50948b907ad35ec8ca604d6c39a63b4317ac3da7` |
+| Contract implementation | READY | Runtime, motion, and validator lanes unblocked |
 | Runtime and motion engines | PLANNED | Blocked on C0 |
 | Serial integration | PLANNED | Blocked on engine handoffs |
 | Exhaustive QA | PLANNED | Blocked on integrated profile |
@@ -54,13 +55,11 @@ Last coordinator update: 2026-07-13
 
 ## Current blockers
 
-None external. Three-agent synthesis review is active work, not a blocker.
+None.
 
 ## Next promotion
 
-1. Complete three-way review of the central contracts and registry.
-2. Push the accepted planning checkpoint.
-3. Move `RCHAT-RUN-010`, `RCHAT-ANIM-010`, and `RCHAT-FLOW-020` to
+1. Move `RCHAT-RUN-010`, `RCHAT-ANIM-010`, and `RCHAT-FLOW-020` to
    `IN_PROGRESS` on the same immutable base SHA.
-4. Promote `RCHAT-ANIM-015`, then aggregate `RCHAT-ANIM-019`, only after
+2. Promote `RCHAT-ANIM-015`, then aggregate `RCHAT-ANIM-019`, only after
    their exact dependencies are accepted.
