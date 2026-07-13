@@ -1,0 +1,29 @@
+{
+  "candidate_id": "WJFA-02",
+  "semantic_id": "fly_front_knee_up",
+  "source_path": "evidence/pose-library-expansion/WJFA-02/source-preview.png",
+  "destination_filename": "fly_front_knee_up.png",
+  "manifest": {
+    "id": "fly_front_knee_up",
+    "source": "fly_front_knee_up.png",
+    "description": "front flying knee-up flap phase with staff held",
+    "facing": "south",
+    "locomotion": "flying",
+    "actions": ["fly", "hover"],
+    "phase": 0.25,
+    "generation_rows": 83,
+    "tags": ["front", "flying", "flap_cycle", "knee_up", "airborne", "staff_held", "wings"],
+    "anchor_offsets": {
+      "root": [0, 0],
+      "mouth": [0, -60],
+      "left_eye": [-5, -70],
+      "right_eye": [5, -70],
+      "left_foot": [-9, -7],
+      "right_foot": [7, -15],
+      "left_hand": [-12, -37],
+      "right_hand": [19, -42],
+      "staff_hand": [19, -42],
+      "staff_tip": [27, -82]
+    }
+  }
+}

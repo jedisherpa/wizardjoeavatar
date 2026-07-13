@@ -1,0 +1,71 @@
+{
+  "candidate_id": "WJFA-12",
+  "semantic_id": "front_crouch_landing_staff_plant",
+  "source_path": "evidence/pose-library-expansion/intake/flying-action/ChatGPT Image Jul 12, 2026, 08_15_41 PM (2).png",
+  "destination_filename": "front_crouch_landing_staff_plant.png",
+  "manifest": {
+    "id": "front_crouch_landing_staff_plant",
+    "source": "front_crouch_landing_staff_plant.png",
+    "description": "front-family crouch landing pose with ground hand contact, bent right boot, and planted staff",
+    "facing": "south",
+    "locomotion": "landing",
+    "actions": [
+      "landing",
+      "crouch",
+      "staff_plant"
+    ],
+    "phase": null,
+    "generation_rows": 74,
+    "tags": [
+      "front_family",
+      "landing",
+      "crouch",
+      "hand_contact",
+      "staff_plant",
+      "wings",
+      "high_risk_baseline"
+    ],
+    "anchor_offsets": {
+      "root": [
+        0,
+        0
+      ],
+      "mouth": [
+        0,
+        -43
+      ],
+      "left_eye": [
+        -5,
+        -47
+      ],
+      "right_eye": [
+        5,
+        -47
+      ],
+      "left_foot": [
+        -21,
+        -1
+      ],
+      "right_foot": [
+        14,
+        -3
+      ],
+      "left_hand": [
+        -18,
+        -2
+      ],
+      "right_hand": [
+        20,
+        -43
+      ],
+      "staff_hand": [
+        20,
+        -43
+      ],
+      "staff_tip": [
+        32,
+        -68
+      ]
+    }
+  }
+}

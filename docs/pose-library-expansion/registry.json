@@ -1,0 +1,261 @@
+{
+  "schema_version": 1,
+  "program_id": "wizardjoe-pose-library-expansion-2026-07-12",
+  "updated_at": "2026-07-12",
+  "integration_lock": null,
+  "allowed_statuses": [
+    "QUEUED",
+    "CLAIMED",
+    "ANALYZED",
+    "READY",
+    "INTEGRATING",
+    "GENERATED",
+    "TESTED",
+    "VERIFIED",
+    "DUPLICATE",
+    "REJECTED",
+    "BLOCKED"
+  ],
+  "candidates": [
+    {
+      "id": "WJP2-01",
+      "order": 1,
+      "owner": "coordinator",
+      "status": "VERIFIED",
+      "semantic_id": "run_front_airborne_reach",
+      "archive_entry": "ChatGPT Image Jul 12, 2026, 08_03_21 PM (1).png"
+    },
+    {
+      "id": "WJP2-02",
+      "order": 2,
+      "owner": "coordinator",
+      "status": "VERIFIED",
+      "semantic_id": "run_front_airborne_drive",
+      "archive_entry": "ChatGPT Image Jul 12, 2026, 08_03_21 PM (2).png"
+    },
+    {
+      "id": "WJP2-03",
+      "order": 3,
+      "owner": "coordinator",
+      "status": "VERIFIED",
+      "semantic_id": "front_crouch_guard",
+      "archive_entry": "ChatGPT Image Jul 12, 2026, 08_03_21 PM (3).png"
+    },
+    {
+      "id": "WJP2-04",
+      "order": 4,
+      "owner": "coordinator",
+      "status": "VERIFIED",
+      "semantic_id": "front_reaction_jump_fist_staff",
+      "archive_entry": "ChatGPT Image Jul 12, 2026, 08_03_22 PM (4).png"
+    },
+    {
+      "id": "WJP2-05",
+      "order": 5,
+      "owner": "coordinator",
+      "status": "VERIFIED",
+      "semantic_id": "front_kneel_staff_brace",
+      "archive_entry": "ChatGPT Image Jul 12, 2026, 08_03_22 PM (5).png"
+    },
+    {
+      "id": "WJP2-06",
+      "order": 6,
+      "owner": "coordinator",
+      "status": "VERIFIED",
+      "semantic_id": "front_staff_guard_windup",
+      "archive_entry": "ChatGPT Image Jul 12, 2026, 08_03_22 PM (6).png"
+    },
+    {
+      "id": "WJP2-07",
+      "order": 7,
+      "owner": "coordinator",
+      "status": "VERIFIED",
+      "semantic_id": "front_staff_guard_low",
+      "archive_entry": "ChatGPT Image Jul 12, 2026, 08_03_22 PM (7).png"
+    },
+    {
+      "id": "WJP2-08",
+      "order": 8,
+      "owner": "coordinator",
+      "status": "VERIFIED",
+      "semantic_id": "walk_front_right_lift",
+      "archive_entry": "ChatGPT Image Jul 12, 2026, 08_03_23 PM (8).png"
+    },
+    {
+      "id": "WJP2-09",
+      "order": 9,
+      "owner": "coordinator",
+      "status": "VERIFIED",
+      "semantic_id": "front_crouch_reaction_staff_planted",
+      "archive_entry": "ChatGPT Image Jul 12, 2026, 08_03_23 PM (9).png"
+    },
+    {
+      "id": "WJP2-10",
+      "order": 10,
+      "owner": "coordinator",
+      "status": "VERIFIED",
+      "semantic_id": "front_victory_cast",
+      "archive_entry": "ChatGPT Image Jul 12, 2026, 08_03_23 PM (10).png"
+    },
+    {
+      "id": "WJFA-01",
+      "order": 11,
+      "owner": "coordinator",
+      "status": "VERIFIED",
+      "semantic_id": "fly_front_hover_neutral",
+      "archive_entry": "ChatGPT Image Jul 12, 2026, 08_15_09 PM (1).png"
+    },
+    {
+      "id": "WJFA-02",
+      "order": 12,
+      "owner": "coordinator",
+      "status": "VERIFIED",
+      "semantic_id": "fly_front_knee_up",
+      "archive_entry": "ChatGPT Image Jul 12, 2026, 08_15_09 PM (2).png"
+    },
+    {
+      "id": "WJFA-03",
+      "order": 13,
+      "owner": "coordinator",
+      "status": "VERIFIED",
+      "semantic_id": "fly_front_wings_up",
+      "archive_entry": "ChatGPT Image Jul 12, 2026, 08_15_09 PM (3).png"
+    },
+    {
+      "id": "WJFA-04",
+      "order": 14,
+      "owner": "coordinator",
+      "status": "VERIFIED",
+      "semantic_id": "fly_front_wings_down",
+      "archive_entry": "ChatGPT Image Jul 12, 2026, 08_15_10 PM (4).png"
+    },
+    {
+      "id": "WJFA-05",
+      "order": 15,
+      "owner": "coordinator",
+      "status": "VERIFIED",
+      "semantic_id": "fly_southeast_forward_glide",
+      "archive_entry": "ChatGPT Image Jul 12, 2026, 08_15_10 PM (5).png"
+    },
+    {
+      "id": "WJFA-06",
+      "order": 16,
+      "owner": "coordinator",
+      "status": "VERIFIED",
+      "semantic_id": "fly_southwest_banked_staff",
+      "archive_entry": "ChatGPT Image Jul 12, 2026, 08_15_10 PM (6).png"
+    },
+    {
+      "id": "WJFA-07",
+      "order": 17,
+      "owner": "coordinator",
+      "status": "VERIFIED",
+      "semantic_id": "fly_southeast_banked_staff",
+      "archive_entry": "ChatGPT Image Jul 12, 2026, 08_15_10 PM (7).png"
+    },
+    {
+      "id": "WJFA-08",
+      "order": 18,
+      "owner": "coordinator",
+      "status": "VERIFIED",
+      "semantic_id": "fly_southeast_cheer",
+      "archive_entry": "ChatGPT Image Jul 12, 2026, 08_15_11 PM (8).png"
+    },
+    {
+      "id": "WJFA-09",
+      "order": 19,
+      "owner": "coordinator",
+      "status": "VERIFIED",
+      "semantic_id": "fly_southeast_staff_forward",
+      "archive_entry": "ChatGPT Image Jul 12, 2026, 08_15_11 PM (9).png"
+    },
+    {
+      "id": "WJFA-10",
+      "order": 20,
+      "owner": "Hooke",
+      "status": "DUPLICATE",
+      "semantic_id": "fly_front_hover_ready",
+      "archive_entry": "ChatGPT Image Jul 12, 2026, 08_15_11 PM (10).png"
+    },
+    {
+      "id": "WJFA-11",
+      "order": 21,
+      "owner": "coordinator",
+      "status": "VERIFIED",
+      "semantic_id": "front_run_charge_right_plant",
+      "archive_entry": "ChatGPT Image Jul 12, 2026, 08_15_41 PM (1).png"
+    },
+    {
+      "id": "WJFA-12",
+      "order": 22,
+      "owner": "coordinator",
+      "status": "VERIFIED",
+      "semantic_id": "front_crouch_landing_staff_plant",
+      "archive_entry": "ChatGPT Image Jul 12, 2026, 08_15_41 PM (2).png"
+    },
+    {
+      "id": "WJFA-13",
+      "order": 23,
+      "owner": "coordinator",
+      "status": "VERIFIED",
+      "semantic_id": "front_magic_staff_thrust",
+      "archive_entry": "ChatGPT Image Jul 12, 2026, 08_15_41 PM (3).png"
+    },
+    {
+      "id": "WJFA-14",
+      "order": 24,
+      "owner": "coordinator",
+      "status": "VERIFIED",
+      "semantic_id": "front_airborne_fall_back_staff",
+      "archive_entry": "ChatGPT Image Jul 12, 2026, 08_15_41 PM (4).png"
+    },
+    {
+      "id": "WJFA-15",
+      "order": 25,
+      "owner": "coordinator",
+      "status": "VERIFIED",
+      "semantic_id": "front_celebrate_wings_staff_up",
+      "archive_entry": "ChatGPT Image Jul 12, 2026, 08_15_41 PM (5).png"
+    },
+    {
+      "id": "WJFA-16",
+      "order": 26,
+      "owner": "coordinator",
+      "status": "VERIFIED",
+      "semantic_id": "front_staff_block_horizontal",
+      "archive_entry": "ChatGPT Image Jul 12, 2026, 08_15_42 PM (6).png"
+    },
+    {
+      "id": "WJFA-17",
+      "order": 27,
+      "owner": "coordinator",
+      "status": "VERIFIED",
+      "semantic_id": "front_point_direct_staff_held",
+      "archive_entry": "ChatGPT Image Jul 12, 2026, 08_15_42 PM (7).png"
+    },
+    {
+      "id": "WJFA-18",
+      "order": 28,
+      "owner": "coordinator",
+      "status": "VERIFIED",
+      "semantic_id": "front_celebrate_jump_staff_up",
+      "archive_entry": "ChatGPT Image Jul 12, 2026, 08_15_42 PM (8).png"
+    },
+    {
+      "id": "WJFA-19",
+      "order": 29,
+      "owner": "coordinator",
+      "status": "VERIFIED",
+      "semantic_id": "front_shush_secret_staff_held",
+      "archive_entry": "ChatGPT Image Jul 12, 2026, 08_15_42 PM (9).png"
+    },
+    {
+      "id": "WJFA-20",
+      "order": 30,
+      "owner": "coordinator",
+      "status": "VERIFIED",
+      "semantic_id": "front_staff_spin_flourish",
+      "archive_entry": "ChatGPT Image Jul 12, 2026, 08_15_42 PM (10).png"
+    }
+  ]
+}

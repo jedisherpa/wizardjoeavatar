@@ -12,15 +12,30 @@ from .floor import build_background
 from .layers import ROOT_ANCHOR, render_wizard_local
 from .models import Cell, CommandResult, WizardCellFrame, WizardCommand, WizardState
 from .palette import ENV_RGB, RGB
+from .pose_compositor import (
+    blit_pose_scaled,
+    composite_anchor_transition,
+    copy_pose_canvas,
+    translate_anchor,
+)
+from .pose_selection import select_reference_pose_sample
 from .projection import project_quantized
 from .protocol import EncodedFrame, encode_frame
 from .reference_avatar import (
     REFERENCE_SCALE_MULTIPLIER,
-    reference_avatar_available,
-    reference_root_anchor,
-    render_reference_avatar_local,
+    reference_pose_anchor,
+    reference_pose_ids,
+    reference_pose_library_available,
+    reference_pose_root_anchor,
+    render_reference_pose_local,
 )
 from .shadow import draw_contact_shadow
+
+
+REFERENCE_POSE_HORIZONTAL_SCALE = 1.18
+REFERENCE_MOUTH_OPEN = (132, 30, 22)
+REFERENCE_MOUTH_DARK = (78, 39, 20)
+REFERENCE_TEETH = (250, 238, 209)
 
 
 class ProceduralWizardFrameSource:
@@ -32,14 +47,24 @@ class ProceduralWizardFrameSource:
         self.frame_index = 0
         self._prev_encoded_frame: Optional[bytes] = None
         self.diagnostics = FrameDiagnostics(fps=self.fps)
+        self._display_pose_id: Optional[str] = None
+        self._transition_from_pose_id: Optional[str] = None
+        self._transition_started_at_frame = 0
+        self._transition_frames = max(2, round(self.fps * 0.12))
 
     async def next_frame(self) -> WizardCellFrame:
         await asyncio.sleep(0)
         return self.render_next_frame()
 
-    def render_next_frame(self) -> WizardCellFrame:
-        self.controller.advance(1.0 / self.fps)
+    def advance_simulation(self, seconds: float) -> None:
+        self.controller.advance(seconds)
+
+    def render_current_frame(self) -> WizardCellFrame:
         return self._render_current_frame()
+
+    def render_next_frame(self) -> WizardCellFrame:
+        self.advance_simulation(1.0 / self.fps)
+        return self.render_current_frame()
 
     def _render_current_frame(self) -> WizardCellFrame:
         state = self.controller.current_state()
@@ -51,32 +76,50 @@ class ProceduralWizardFrameSource:
         )
         state.screen_position["x"] = sx
         state.screen_position["y"] = sy
-        render_scale = scale
-        use_reference_avatar = reference_avatar_available() and state.facing == "south"
-        if use_reference_avatar:
-            stage = CellCanvas(self.cols, self.rows, Cell(" ", ENV_RGB["background"], "background"))
+        use_reference_pose_library = reference_pose_library_available()
+        if use_reference_pose_library:
+            stage = build_background(self.cols, self.rows).copy()
+            render_scale = scale * REFERENCE_SCALE_MULTIPLIER
+            pose_sample = select_reference_pose_sample(state, reference_pose_ids())
+            pose_id = pose_sample.pose_id
+            local, root_anchor, mouth_anchor = self._reference_pose_canvas_for_sample(
+                pose_id,
+            )
+            root_screen = self._reference_root_screen(sx, sy, state, render_scale)
         else:
             stage = build_background(self.cols, self.rows).copy()
-        lifted = state.locomotion == "walking" and 0.15 < state.walk_phase < 0.38
-        root_screen = (sx, sy)
-        if use_reference_avatar:
-            render_scale = scale * REFERENCE_SCALE_MULTIPLIER
-            bob = 0.0
-            if state.locomotion == "walking":
-                bob += math.sin(state.walk_phase * math.tau) * 1.8
-            if state.action in {"speaking", "explaining"}:
-                bob += math.sin(state.time_seconds * 12.0) * 0.7
-            root_screen = (sx, min(self.rows - 8, sy + 18 * render_scale + bob))
-            local = render_reference_avatar_local()
-            root_anchor = reference_root_anchor()
-        else:
+            render_scale = scale
+            pose_id = None
             local = render_wizard_local(state)
             root_anchor = ROOT_ANCHOR
+            mouth_anchor = None
+            root_screen = (sx, sy)
+        state.last_pose_id = state.pose_id
+        state.pose_id = pose_id or "procedural"
+        lifted = state.locomotion == "walking" and 0.15 < state.walk_phase < 0.38
         state.display_scale = render_scale
         draw_contact_shadow(stage, root_screen[0], root_screen[1], render_scale, lifted=lifted)
-        blit_scaled(stage, local, root_anchor, root_screen, render_scale)
-        if use_reference_avatar:
-            self._draw_reference_animation_overlays(stage, state, root_anchor, root_screen, render_scale)
+        if pose_id is not None:
+            blit_pose_scaled(
+                stage,
+                local,
+                root_anchor,
+                root_screen,
+                render_scale,
+                REFERENCE_POSE_HORIZONTAL_SCALE,
+            )
+            self._draw_reference_animation_overlays(
+                stage,
+                state,
+                root_anchor,
+                mouth_anchor,
+                root_screen,
+                render_scale,
+                REFERENCE_POSE_HORIZONTAL_SCALE,
+                pose_id,
+            )
+        else:
+            blit_scaled(stage, local, root_anchor, root_screen, render_scale)
         cells = stage.to_frame_bytes()
         frame = WizardCellFrame(
             cols=self.cols,
@@ -87,31 +130,99 @@ class ProceduralWizardFrameSource:
         )
         return frame
 
+    def _reference_pose_canvas_for_sample(
+        self,
+        pose_id: str,
+    ) -> tuple[CellCanvas, Tuple[int, int], Tuple[int, int]]:
+        target_canvas = copy_pose_canvas(render_reference_pose_local(pose_id))
+        target_root = reference_pose_root_anchor(pose_id)
+        target_mouth = reference_pose_anchor(pose_id, "mouth")
+
+        if self._display_pose_id is None:
+            self._display_pose_id = pose_id
+            self._transition_from_pose_id = None
+            return target_canvas, target_root, target_mouth
+
+        if pose_id != self._display_pose_id:
+            self._transition_from_pose_id = self._display_pose_id
+            self._transition_started_at_frame = self.frame_index
+            self._display_pose_id = pose_id
+
+        if self._transition_from_pose_id is None:
+            self.current_state().pose_transition_progress = 1.0
+            return target_canvas, target_root, target_mouth
+
+        elapsed = max(0, self.frame_index - self._transition_started_at_frame + 1)
+        progress = min(1.0, elapsed / self._transition_frames)
+        from_canvas = copy_pose_canvas(render_reference_pose_local(self._transition_from_pose_id))
+        from_root = reference_pose_root_anchor(self._transition_from_pose_id)
+        composite, composite_root = composite_anchor_transition(
+            from_canvas,
+            target_canvas,
+            from_root,
+            target_root,
+            _smoothstep(progress),
+        )
+        self.current_state().pose_transition_progress = progress
+        mouth_anchor = translate_anchor(target_mouth, target_root, composite_root)
+        if progress >= 1.0:
+            self._transition_from_pose_id = None
+        return composite, composite_root, mouth_anchor
+
+    def _reference_root_screen(
+        self,
+        sx: float,
+        sy: float,
+        state: WizardState,
+        render_scale: float,
+    ) -> Tuple[float, float]:
+        return sx, min(self.rows - 8, sy + 18 * render_scale)
+
     def _draw_reference_animation_overlays(
         self,
         stage: CellCanvas,
         state: WizardState,
         root_anchor: Tuple[int, int],
+        mouth_anchor: Optional[Tuple[int, int]],
         root_screen: Tuple[float, float],
         scale: float,
+        horizontal_scale: float = 1.0,
+        pose_id: Optional[str] = None,
     ) -> None:
-        origin_x = root_screen[0] - root_anchor[0] * scale
+        scale_x = scale * horizontal_scale
+        origin_x = root_screen[0] - root_anchor[0] * scale_x
         origin_y = root_screen[1] - root_anchor[1] * scale
 
         def stage_point(local_x: float, local_y: float) -> Tuple[int, int]:
-            return round(origin_x + local_x * scale), round(origin_y + local_y * scale)
+            return round(origin_x + local_x * scale_x), round(origin_y + local_y * scale)
+
+        def stage_cell(local_x: int, local_y: int, color: Tuple[int, int, int], layer_id: str) -> None:
+            start_x = round(origin_x + local_x * scale_x)
+            end_x = max(start_x, round(origin_x + (local_x + 1) * scale_x) - 1)
+            start_y = round(origin_y + local_y * scale)
+            end_y = max(start_y, round(origin_y + (local_y + 1) * scale) - 1)
+            for y in range(start_y, end_y + 1):
+                for x in range(start_x, end_x + 1):
+                    stage.set(x, y, "#", color, layer_id)
 
         if state.action == "speaking" or state.speech_id is not None:
             open_mouth = int(state.time_seconds * 10) % 2 == 0
-            mouth_color = (132, 30, 22) if open_mouth else (78, 39, 20)
-            for lx in range(34, 41):
-                for ly in range(35, 37 if open_mouth else 36):
-                    x, y = stage_point(lx, ly)
-                    stage.set(x, y, "#", mouth_color, "reference_speaking_mouth")
+            mouth_color = REFERENCE_MOUTH_OPEN if open_mouth else REFERENCE_MOUTH_DARK
+            anchor_x, anchor_y = mouth_anchor or (root_anchor[0], 36)
+            mouth_left = anchor_x - 3
+            mouth_right = anchor_x + 3
+            mouth_top = anchor_y - 2
+            mouth_bottom = anchor_y if open_mouth else mouth_top
             if open_mouth:
-                for lx in range(35, 40):
-                    x, y = stage_point(lx, 34)
-                    stage.set(x, y, "#", (250, 238, 209), "reference_teeth")
+                for lx in range(anchor_x - 5, anchor_x + 6):
+                    for ly in range(anchor_y - 3, anchor_y + 2):
+                        stage_cell(lx, ly, REFERENCE_MOUTH_DARK, "reference_mouth_clear")
+            for lx in range(mouth_left, mouth_right + 1):
+                for ly in range(mouth_top, mouth_bottom + 1):
+                    stage_cell(lx, ly, mouth_color, "reference_speaking_mouth")
+            if open_mouth:
+                for lx in range(anchor_x - 2, anchor_x + 3):
+                    stage_cell(lx, anchor_y - 3, REFERENCE_TEETH, "reference_teeth")
 
         if state.action in {"magic_cast", "reaction"}:
             phase = state.time_seconds * math.tau * 1.4
@@ -129,8 +240,16 @@ class ProceduralWizardFrameSource:
                 x, y = stage_point(47 + offset * 2, 18 - math.sin(state.time_seconds * 4 + offset) * 2)
                 stage.set(x, y, "#", color, "reference_thinking_bubble")
 
-    async def next_encoded_frame(self, codec: str = "adaptive") -> Tuple[bytes, WizardCellFrame]:
-        frame = await self.next_frame()
+    async def next_encoded_frame(
+        self,
+        codec: str = "adaptive",
+        advance: bool = True,
+    ) -> Tuple[bytes, WizardCellFrame]:
+        if advance:
+            frame = await self.next_frame()
+        else:
+            await asyncio.sleep(0)
+            frame = self.render_current_frame()
         if codec == "adaptive":
             encoded = encode_frame(frame.cells, self._prev_encoded_frame, frame.frame_index)
             self._prev_encoded_frame = encoded.shown_frame
@@ -192,4 +311,12 @@ class ProceduralWizardFrameSource:
             "current_action": state["action"],
             "current_expression": state["expression"],
             "mouth_state": state["mouth"],
+            "pose_id": state["pose_id"],
+            "last_pose_id": state["last_pose_id"],
+            "pose_transition_progress": state["pose_transition_progress"],
         }
+
+
+def _smoothstep(progress: float) -> float:
+    t = max(0.0, min(1.0, progress))
+    return t * t * (3.0 - 2.0 * t)

@@ -1,0 +1,29 @@
+{
+  "candidate_id": "WJFA-09",
+  "semantic_id": "fly_southeast_staff_forward",
+  "source_path": "evidence/pose-library-expansion/WJFA-09/source-preview.png",
+  "destination_filename": "fly_southeast_staff_forward.png",
+  "manifest": {
+    "id": "fly_southeast_staff_forward",
+    "source": "fly_southeast_staff_forward.png",
+    "description": "southeast forward flight with staff-forward staging",
+    "facing": "southeast",
+    "locomotion": "flying",
+    "actions": ["fly", "glide", "staff_forward"],
+    "phase": 0.65,
+    "generation_rows": 71,
+    "tags": ["southeast", "flying", "forward_glide", "staff_forward", "prone", "airborne", "wings"],
+    "anchor_offsets": {
+      "root": [0, 0],
+      "mouth": [5, -59],
+      "left_eye": [0, -67],
+      "right_eye": [10, -66],
+      "left_foot": [-21, -19],
+      "right_foot": [-5, -14],
+      "left_hand": [-14, -50],
+      "right_hand": [20, -50],
+      "staff_hand": [20, -50],
+      "staff_tip": [28, -71]
+    }
+  }
+}

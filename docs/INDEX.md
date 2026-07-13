@@ -6,6 +6,10 @@ This package contains the full Codex implementation specification for a procedur
 
 - [Visual design specification](../assets/reference/README.md)
 - [Codex goal entry point](../CODEX_GOAL.md)
+- [Pose library expansion tracker](pose-library-expansion/README.md)
+- [Cartoon animation program](cartoon-animation-program/README.md)
+- [Cartoon animation integrated implementation plan](cartoon-animation-program/IMPLEMENTATION_PLAN.md)
+- [Cartoon animation multi-agent workflow](cartoon-animation-program/WORKFLOW.md)
 
 ## Sections
 

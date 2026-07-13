@@ -1,0 +1,65 @@
+{
+  "candidate_id": "WJP2-03",
+  "semantic_id": "front_crouch_guard",
+  "source_path": "evidence/pose-library-expansion/intake/poses2/ChatGPT Image Jul 12, 2026, 08_03_21 PM (3).png",
+  "destination_filename": "front_crouch_guard.png",
+  "manifest": {
+    "id": "front_crouch_guard",
+    "source": "front_crouch_guard.png",
+    "description": "front lowered guard crouch with planted staff",
+    "facing": "south",
+    "locomotion": "idle",
+    "actions": [
+      "crouching",
+      "guarding",
+      "reaction"
+    ],
+    "phase": null,
+    "generation_rows": 74,
+    "tags": [
+      "front",
+      "lowered_stance",
+      "defensive",
+      "staff_held",
+      "wings"
+    ],
+    "anchor_offsets": {
+      "mouth": [
+        4,
+        -38
+      ],
+      "left_eye": [
+        0,
+        -45
+      ],
+      "right_eye": [
+        8,
+        -45
+      ],
+      "left_foot": [
+        -12,
+        -3
+      ],
+      "right_foot": [
+        11,
+        -3
+      ],
+      "left_hand": [
+        -16,
+        -22
+      ],
+      "right_hand": [
+        25,
+        -32
+      ],
+      "staff_hand": [
+        25,
+        -32
+      ],
+      "staff_tip": [
+        31,
+        -71
+      ]
+    }
+  }
+}

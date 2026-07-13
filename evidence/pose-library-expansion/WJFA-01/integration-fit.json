@@ -1,0 +1,25 @@
+{
+  "candidate_id": "WJFA-01",
+  "semantic_id": "fly_front_hover_neutral",
+  "source_path": "evidence/pose-library-expansion/WJFA-01/source-preview.png",
+  "generator_parameters": {
+    "margin": 18,
+    "threshold": 30.0,
+    "coverage_threshold": 24,
+    "colors": 64
+  },
+  "result": {
+    "generation_rows": 91,
+    "raw_cols": 72,
+    "raw_root_anchor": [36, 90],
+    "cells": 2748,
+    "source_size": [1122, 1402],
+    "source_crop": [84, 91, 1022, 1276],
+    "crop_width": 939,
+    "crop_height": 1186,
+    "first_invalid_above": {
+      "generation_rows": 92,
+      "raw_cols": 73
+    }
+  }
+}

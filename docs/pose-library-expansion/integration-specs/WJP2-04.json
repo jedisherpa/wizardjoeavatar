@@ -1,0 +1,67 @@
+{
+  "candidate_id": "WJP2-04",
+  "semantic_id": "front_reaction_jump_fist_staff",
+  "source_path": "evidence/pose-library-expansion/intake/poses2/ChatGPT Image Jul 12, 2026, 08_03_22 PM (4).png",
+  "destination_filename": "front_reaction_jump_fist_staff.png",
+  "manifest": {
+    "id": "front_reaction_jump_fist_staff",
+    "source": "front_reaction_jump_fist_staff.png",
+    "description": "front airborne reaction jump with forward fist and staff held upright",
+    "facing": "south",
+    "locomotion": "jump",
+    "actions": [
+      "reaction",
+      "celebrate"
+    ],
+    "phase": null,
+    "generation_rows": 93,
+    "tags": [
+      "front",
+      "reaction",
+      "jump",
+      "airborne",
+      "fist_forward",
+      "staff_held",
+      "wings",
+      "high_risk_baseline"
+    ],
+    "anchor_offsets": {
+      "mouth": [
+        0,
+        -56
+      ],
+      "left_eye": [
+        -5,
+        -67
+      ],
+      "right_eye": [
+        5,
+        -67
+      ],
+      "left_foot": [
+        -12,
+        -7
+      ],
+      "right_foot": [
+        14,
+        -8
+      ],
+      "left_hand": [
+        -24,
+        -53
+      ],
+      "right_hand": [
+        23,
+        -44
+      ],
+      "staff_hand": [
+        23,
+        -44
+      ],
+      "staff_tip": [
+        28,
+        -78
+      ]
+    }
+  }
+}

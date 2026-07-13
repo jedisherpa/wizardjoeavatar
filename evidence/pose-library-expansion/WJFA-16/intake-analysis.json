@@ -1,0 +1,76 @@
+{
+  "candidate_id": "WJFA-16",
+  "semantic_id": "front_staff_block_horizontal",
+  "source": "evidence/pose-library-expansion/intake/flying-action/ChatGPT Image Jul 12, 2026, 08_15_42 PM (6).png",
+  "sha256": "5fc228f1722fec151e9edb1f52ed6cfc30dabd346f3f4ffc2ea8b8dcf8f3edf4",
+  "source_size": [
+    1122,
+    1402
+  ],
+  "generator_source_crop": [
+    26,
+    106,
+    1092,
+    1220
+  ],
+  "raw_generated_cols": 92,
+  "raw_generated_rows": 96,
+  "raw_root_anchor": [
+    46,
+    95
+  ],
+  "canonical_root_anchor": [
+    36,
+    95
+  ],
+  "naive_canonical_shift": [
+    -10,
+    0
+  ],
+  "naive_out_of_bounds_cells": 150,
+  "cell_count": 4280,
+  "proposed_anchors": {
+    "mouth": [
+      36,
+      35
+    ],
+    "left_eye": [
+      31,
+      30
+    ],
+    "right_eye": [
+      42,
+      30
+    ],
+    "left_foot": [
+      22,
+      94
+    ],
+    "right_foot": [
+      55,
+      94
+    ],
+    "left_hand": [
+      17,
+      47
+    ],
+    "right_hand": [
+      44,
+      44
+    ],
+    "staff_hand": [
+      17,
+      47
+    ],
+    "staff_tip": [
+      69,
+      41
+    ]
+  },
+  "evidence_files": [
+    "source-preview.png",
+    "canonical-proposal-preview.png",
+    "intake-analysis.json",
+    "intake-analysis.md"
+  ]
+}

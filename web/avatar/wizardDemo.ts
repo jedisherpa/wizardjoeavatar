@@ -13,3 +13,7 @@ const client = new WizardClient(canvas, diagnostics);
 installControls();
 diagnostics.start();
 client.connect();
+
+window.__wizardJoeMetrics = () => client.getMetrics();
+window.__wizardJoeHashes = () => client.getHashHistory();
+window.__wizardJoeCanvas = () => canvas;

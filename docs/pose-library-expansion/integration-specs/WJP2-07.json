@@ -1,0 +1,67 @@
+{
+  "candidate_id": "WJP2-07",
+  "semantic_id": "front_staff_guard_low",
+  "source_path": "evidence/pose-library-expansion/intake/poses2/ChatGPT Image Jul 12, 2026, 08_03_22 PM (7).png",
+  "destination_filename": "front_staff_guard_low.png",
+  "manifest": {
+    "id": "front_staff_guard_low",
+    "source": "front_staff_guard_low.png",
+    "description": "front low two-handed staff guard across the torso",
+    "facing": "south",
+    "locomotion": "idle",
+    "actions": [
+      "staff_guard",
+      "magic_cast",
+      "brace"
+    ],
+    "phase": 0.5,
+    "generation_rows": 94,
+    "tags": [
+      "front",
+      "upper_body",
+      "staff_guard",
+      "low_guard",
+      "two_handed_staff",
+      "wide_stance",
+      "wings"
+    ],
+    "anchor_offsets": {
+      "mouth": [
+        0,
+        -57
+      ],
+      "left_eye": [
+        -5,
+        -68
+      ],
+      "right_eye": [
+        5,
+        -68
+      ],
+      "left_foot": [
+        -16,
+        -1
+      ],
+      "right_foot": [
+        17,
+        -1
+      ],
+      "left_hand": [
+        -6,
+        -49
+      ],
+      "right_hand": [
+        13,
+        -37
+      ],
+      "staff_hand": [
+        -6,
+        -49
+      ],
+      "staff_tip": [
+        -21,
+        -65
+      ]
+    }
+  }
+}

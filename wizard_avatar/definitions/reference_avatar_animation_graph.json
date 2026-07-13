@@ -1,0 +1,165 @@
+{
+  "schema_version": 1,
+  "version": 1,
+  "asset_set_id": "wizardjoe-reference-motion-v1",
+  "pose_library": "reference_avatar_pose_cells.json",
+  "default_pose_id": "front_idle",
+  "idle_by_facing": {
+    "south": "front_idle",
+    "southwest": "walk_front_left",
+    "west": "profile_left",
+    "northwest": "back_left",
+    "north": "back_idle",
+    "northeast": "back_right",
+    "east": "profile_right",
+    "southeast": "walk_front_right"
+  },
+  "action_pose_overrides": {
+    "explaining": "explaining",
+    "magic_cast": "magic_cast",
+    "dash": "run_front_airborne_reach",
+    "pointing": "explaining",
+    "reaction": "magic_cast",
+    "speaking": "explaining"
+  },
+  "walking_clips": {
+    "south": {
+      "clip_id": "walk_front",
+      "loop": true,
+      "samples": [
+        {
+          "phase": 0.0,
+          "pose_id": "walk_front_left",
+          "contact": "left"
+        },
+        {
+          "phase": 0.25,
+          "pose_id": "front_idle",
+          "contact": "both"
+        },
+        {
+          "phase": 0.5,
+          "pose_id": "walk_front_right",
+          "contact": "right"
+        },
+        {
+          "phase": 0.75,
+          "pose_id": "front_idle",
+          "contact": "both"
+        }
+      ]
+    },
+    "southwest": {
+      "clip_id": "walk_front_left_family",
+      "loop": true,
+      "samples": [
+        {
+          "phase": 0.0,
+          "pose_id": "walk_front_left",
+          "contact": "left"
+        },
+        {
+          "phase": 0.5,
+          "pose_id": "front_idle",
+          "contact": "right"
+        }
+      ]
+    },
+    "west": {
+      "clip_id": "walk_profile_left_hold",
+      "loop": true,
+      "samples": [
+        {
+          "phase": 0.0,
+          "pose_id": "profile_left",
+          "contact": "both"
+        }
+      ]
+    },
+    "northwest": {
+      "clip_id": "walk_back_left_family",
+      "loop": true,
+      "samples": [
+        {
+          "phase": 0.0,
+          "pose_id": "back_left",
+          "contact": "left"
+        },
+        {
+          "phase": 0.5,
+          "pose_id": "back_idle",
+          "contact": "both"
+        }
+      ]
+    },
+    "north": {
+      "clip_id": "walk_back",
+      "loop": true,
+      "samples": [
+        {
+          "phase": 0.0,
+          "pose_id": "back_left",
+          "contact": "left"
+        },
+        {
+          "phase": 0.25,
+          "pose_id": "back_idle",
+          "contact": "both"
+        },
+        {
+          "phase": 0.5,
+          "pose_id": "back_right",
+          "contact": "right"
+        },
+        {
+          "phase": 0.75,
+          "pose_id": "back_idle",
+          "contact": "both"
+        }
+      ]
+    },
+    "northeast": {
+      "clip_id": "walk_back_right_family",
+      "loop": true,
+      "samples": [
+        {
+          "phase": 0.0,
+          "pose_id": "back_right",
+          "contact": "right"
+        },
+        {
+          "phase": 0.5,
+          "pose_id": "back_idle",
+          "contact": "both"
+        }
+      ]
+    },
+    "east": {
+      "clip_id": "walk_profile_right_hold",
+      "loop": true,
+      "samples": [
+        {
+          "phase": 0.0,
+          "pose_id": "profile_right",
+          "contact": "both"
+        }
+      ]
+    },
+    "southeast": {
+      "clip_id": "walk_front_right_family",
+      "loop": true,
+      "samples": [
+        {
+          "phase": 0.0,
+          "pose_id": "walk_front_right",
+          "contact": "right"
+        },
+        {
+          "phase": 0.5,
+          "pose_id": "front_idle",
+          "contact": "both"
+        }
+      ]
+    }
+  }
+}

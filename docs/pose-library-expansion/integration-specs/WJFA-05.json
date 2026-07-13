@@ -1,0 +1,29 @@
+{
+  "candidate_id": "WJFA-05",
+  "semantic_id": "fly_southeast_forward_glide",
+  "source_path": "evidence/pose-library-expansion/WJFA-05/source-preview.png",
+  "destination_filename": "fly_southeast_forward_glide.png",
+  "manifest": {
+    "id": "fly_southeast_forward_glide",
+    "source": "fly_southeast_forward_glide.png",
+    "description": "southeast prone forward glide with trailing staff",
+    "facing": "southeast",
+    "locomotion": "flying",
+    "actions": ["fly", "glide"],
+    "phase": 0.35,
+    "generation_rows": 60,
+    "tags": ["southeast", "flying", "forward_glide", "prone", "airborne", "staff_trailing", "wings"],
+    "anchor_offsets": {
+      "root": [0, 0],
+      "mouth": [8, -64],
+      "left_eye": [3, -70],
+      "right_eye": [12, -70],
+      "left_foot": [-16, -17],
+      "right_foot": [-8, -15],
+      "left_hand": [-22, -47],
+      "right_hand": [22, -47],
+      "staff_hand": [-22, -47],
+      "staff_tip": [-32, -51]
+    }
+  }
+}

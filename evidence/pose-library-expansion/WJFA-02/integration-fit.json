@@ -1,0 +1,25 @@
+{
+  "candidate_id": "WJFA-02",
+  "semantic_id": "fly_front_knee_up",
+  "source_path": "evidence/pose-library-expansion/WJFA-02/source-preview.png",
+  "generator_parameters": {
+    "margin": 18,
+    "threshold": 30.0,
+    "coverage_threshold": 24,
+    "colors": 64
+  },
+  "result": {
+    "generation_rows": 83,
+    "raw_cols": 72,
+    "raw_root_anchor": [36, 82],
+    "cells": 2636,
+    "source_size": [1122, 1402],
+    "source_crop": [20, 80, 1087, 1311],
+    "crop_width": 1068,
+    "crop_height": 1232,
+    "first_invalid_above": {
+      "generation_rows": 84,
+      "raw_cols": 73
+    }
+  }
+}

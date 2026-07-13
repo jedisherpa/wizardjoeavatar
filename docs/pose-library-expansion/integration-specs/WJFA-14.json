@@ -1,0 +1,71 @@
+{
+  "candidate_id": "WJFA-14",
+  "semantic_id": "front_airborne_fall_back_staff",
+  "source_path": "evidence/pose-library-expansion/intake/flying-action/ChatGPT Image Jul 12, 2026, 08_15_41 PM (4).png",
+  "destination_filename": "front_airborne_fall_back_staff.png",
+  "manifest": {
+    "id": "front_airborne_fall_back_staff",
+    "source": "front_airborne_fall_back_staff.png",
+    "description": "front-family airborne falling-back reaction with both feet lifted and staff held on screen right",
+    "facing": "south",
+    "locomotion": "airborne",
+    "actions": [
+      "flying",
+      "falling",
+      "reaction"
+    ],
+    "phase": null,
+    "generation_rows": 80,
+    "tags": [
+      "front_family",
+      "airborne",
+      "falling",
+      "feet_up",
+      "staff_held",
+      "wings",
+      "high_risk_baseline"
+    ],
+    "anchor_offsets": {
+      "root": [
+        0,
+        0
+      ],
+      "mouth": [
+        0,
+        -51
+      ],
+      "left_eye": [
+        -5,
+        -55
+      ],
+      "right_eye": [
+        6,
+        -55
+      ],
+      "left_foot": [
+        -5,
+        -7
+      ],
+      "right_foot": [
+        25,
+        -10
+      ],
+      "left_hand": [
+        -16,
+        -40
+      ],
+      "right_hand": [
+        20,
+        -45
+      ],
+      "staff_hand": [
+        20,
+        -45
+      ],
+      "staff_tip": [
+        32,
+        -67
+      ]
+    }
+  }
+}

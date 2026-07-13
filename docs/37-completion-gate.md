@@ -3,7 +3,7 @@
 Do not declare the character complete until:
 
 1. The character matches the supplied design board.
-2. The character has no wings.
+2. The character retains the accepted rainbow wings and supports winged takeoff, flight, and landing.
 3. The character is procedurally constructed.
 4. No runtime dependency exists on a flattened character PNG.
 5. The background is fixed and white.
@@ -32,5 +32,7 @@ Do not declare the character complete until:
 28. The complete browser demonstration passes.
 29. No required tests are skipped.
 30. Final verification evidence is complete.
+31. Continuous remote-control intents can drive ground and flight movement without client-side simulation authority.
+32. Prism/CDISS signals, when enabled, are sanitized visual advice only and cannot move the character or grant authority.
 
 The final result must be a carefully constructed, editable, procedural ASCILINE wizard character living in a fixed white studio environment—not a moving image, prerecorded sprite animation, flattened character asset, or video playback trick.

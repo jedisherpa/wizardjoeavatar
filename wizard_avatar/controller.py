@@ -9,6 +9,7 @@ from .locomotion import LocomotionController, SIMULATION_DT
 from .models import CommandResult, DIRECTIONS, EXPRESSIONS, WizardCommand, WizardState
 from .mouth import validate_mouth_shape
 from .pathing import circle_points, figure_eight_points, validate_path, validate_world_point
+from .reference_avatar import reference_pose_ids
 from .views import rotate_direction
 
 
@@ -40,8 +41,15 @@ class WizardAvatarController:
             return CommandResult(False, str(exc), self.state.as_public_dict())
 
     def _update_timers(self) -> None:
+        if self.state.pose_override_id is not None and self.state.pose_override_until:
+            if self.state.time_seconds >= self.state.pose_override_until:
+                self.state.pose_override_id = None
+                self.state.pose_override_until = 0.0
         if self.state.action != "idle" and self.state.action_until and self.state.time_seconds >= self.state.action_until:
-            self._set_action("idle", 0)
+            if self.state.action == "reaction" and self.state.action_restore:
+                self._restore_action_after_reaction()
+            else:
+                self._set_action("idle", 0)
         if self.state.speech_id is not None and self.state.time_seconds >= self.state.speech_until:
             self.state.speech_id = None
             self.state.mouth = expression_mouth(self.state.expression)
@@ -50,6 +58,15 @@ class WizardAvatarController:
 
     def _set_action(self, action: str, duration_ms: int) -> None:
         validate_action(action)
+        if action == "reaction" and self.state.action not in {"idle", "reaction"}:
+            self.state.action_restore = {
+                "action": self.state.action,
+                "upper_body_action": self.state.upper_body_action,
+                "staff_state": self.state.staff_state,
+                "action_until": self.state.action_until,
+            }
+        elif action != "reaction":
+            self.state.action_restore = None
         upper, staff = channels_for_action(action)
         self.state.action = action
         self.state.upper_body_action = upper
@@ -59,6 +76,18 @@ class WizardAvatarController:
         )
         if action == "walking":
             self.state.locomotion = "walking"
+
+    def _restore_action_after_reaction(self) -> None:
+        restore = self.state.action_restore or {}
+        restore_until = float(restore.get("action_until") or 0.0)
+        if restore_until and self.state.time_seconds >= restore_until:
+            self._set_action("idle", 0)
+            return
+        self.state.action = str(restore.get("action", "idle"))
+        self.state.upper_body_action = str(restore.get("upper_body_action", "none"))
+        self.state.staff_state = str(restore.get("staff_state", "held"))
+        self.state.action_until = restore_until
+        self.state.action_restore = None
 
     def _cmd_move(self, payload: Dict[str, Any]) -> None:
         x = float(payload["x"])
@@ -120,6 +149,21 @@ class WizardAvatarController:
         duration_ms = int(payload.get("duration_ms", 1600))
         self._set_action(action, duration_ms)
 
+    def _cmd_pose(self, payload: Dict[str, Any]) -> None:
+        pose_id = payload.get("pose_id")
+        if pose_id is None:
+            self.state.pose_override_id = None
+            self.state.pose_override_until = 0.0
+            return
+        pose_id = str(pose_id)
+        if pose_id not in reference_pose_ids():
+            raise ValueError(f"Unsupported pose: {pose_id}")
+        duration_ms = max(0, int(payload.get("duration_ms", 900)))
+        self.state.pose_override_id = pose_id
+        self.state.pose_override_until = (
+            self.state.time_seconds + duration_ms / 1000.0 if duration_ms else 0.0
+        )
+
     def _cmd_expression(self, payload: Dict[str, Any]) -> None:
         expression = str(payload["expression"])
         if expression not in EXPRESSIONS:
@@ -134,7 +178,11 @@ class WizardAvatarController:
         self.state.speech_id = str(payload.get("speech_id", f"speech-{int(time.time() * 1000)}"))
         self.state.speech_until = self.state.time_seconds + duration_ms / 1000.0
         self.state.mouth = "open_small"
-        self._set_action("speaking", duration_ms)
+        if self.state.action in {"idle", "speaking"}:
+            self.state.action = "speaking"
+            self.state.upper_body_action = "explain"
+            self.state.staff_state = "held"
+            self.state.action_until = 0.0
 
     def _cmd_mouth(self, payload: Dict[str, Any]) -> None:
         shape = str(payload["mouth"])

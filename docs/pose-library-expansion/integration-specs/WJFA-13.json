@@ -1,0 +1,69 @@
+{
+  "candidate_id": "WJFA-13",
+  "semantic_id": "front_magic_staff_thrust",
+  "source_path": "evidence/pose-library-expansion/intake/flying-action/ChatGPT Image Jul 12, 2026, 08_15_41 PM (3).png",
+  "destination_filename": "front_magic_staff_thrust.png",
+  "manifest": {
+    "id": "front_magic_staff_thrust",
+    "source": "front_magic_staff_thrust.png",
+    "description": "front magic-cast variant with staff thrust toward screen left, spark effect, and wide stance",
+    "facing": "south",
+    "locomotion": "idle",
+    "actions": [
+      "magic_cast",
+      "staff_thrust"
+    ],
+    "phase": null,
+    "generation_rows": 73,
+    "tags": [
+      "front",
+      "magic",
+      "staff_thrust",
+      "spark",
+      "wide_stance",
+      "wings"
+    ],
+    "anchor_offsets": {
+      "root": [
+        0,
+        0
+      ],
+      "mouth": [
+        7,
+        -45
+      ],
+      "left_eye": [
+        3,
+        -48
+      ],
+      "right_eye": [
+        13,
+        -48
+      ],
+      "left_foot": [
+        -13,
+        -1
+      ],
+      "right_foot": [
+        21,
+        -2
+      ],
+      "left_hand": [
+        -9,
+        -39
+      ],
+      "right_hand": [
+        23,
+        -31
+      ],
+      "staff_hand": [
+        -9,
+        -39
+      ],
+      "staff_tip": [
+        -28,
+        -53
+      ]
+    }
+  }
+}

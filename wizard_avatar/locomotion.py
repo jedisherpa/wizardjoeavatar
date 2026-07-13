@@ -7,7 +7,7 @@ from .geometry import clamp
 from .models import MovementState, PathState, WizardState
 from .pathing import validate_path, validate_world_point
 from .projection import WORLD_X_MAX, WORLD_X_MIN, WORLD_Z_FAR, WORLD_Z_NEAR
-from .views import resolve_direction_from_velocity
+from .views import resolve_direction_from_velocity, step_direction_towards
 
 
 SIMULATION_HZ = 60.0
@@ -34,11 +34,12 @@ class LocomotionController:
         moving = math.hypot(self.movement.velocity_x, self.movement.velocity_z) > 0.01
         state.locomotion = "walking" if moving else "idle"
         if moving:
-            state.facing = resolve_direction_from_velocity(
+            target_facing = resolve_direction_from_velocity(
                 self.movement.velocity_x,
                 self.movement.velocity_z,
                 state.facing,
             )
+            state.facing = step_direction_towards(state.facing, target_facing)
 
     def move_to(self, x: float, z: float, speed: Optional[float] = None) -> None:
         validate_world_point(x, z)

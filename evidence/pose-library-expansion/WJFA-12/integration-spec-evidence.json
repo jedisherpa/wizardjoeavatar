@@ -1,0 +1,89 @@
+{
+  "candidate_id": "WJFA-12",
+  "semantic_id": "front_crouch_landing_staff_plant",
+  "source_path": "evidence/pose-library-expansion/intake/flying-action/ChatGPT Image Jul 12, 2026, 08_15_41 PM (2).png",
+  "existing_generator": "tools/generate_reference_avatar_cells.py",
+  "generator_parameters": {
+    "margin": 18,
+    "threshold": 30.0,
+    "coverage_threshold": 24,
+    "colors": 64
+  },
+  "source_crop": [
+    0,
+    111,
+    1056,
+    1194
+  ],
+  "crop_width": 1057,
+  "crop_height": 1084,
+  "max_generation_rows_with_raw_cols_lte_72": 74,
+  "selected_row_check": {
+    "rows": 74,
+    "raw_cols": 72,
+    "raw_root_anchor": [
+      36,
+      73
+    ],
+    "cell_count": 2893
+  },
+  "next_row_check": {
+    "rows": 75,
+    "raw_cols": 73
+  },
+  "required_anchors_preserved": [
+    "root",
+    "mouth",
+    "left_eye",
+    "right_eye",
+    "left_foot",
+    "right_foot",
+    "left_hand",
+    "right_hand",
+    "staff_hand",
+    "staff_tip"
+  ],
+  "anchor_offsets": {
+    "root": [
+      0,
+      0
+    ],
+    "mouth": [
+      0,
+      -43
+    ],
+    "left_eye": [
+      -5,
+      -47
+    ],
+    "right_eye": [
+      5,
+      -47
+    ],
+    "left_foot": [
+      -21,
+      -1
+    ],
+    "right_foot": [
+      14,
+      -3
+    ],
+    "left_hand": [
+      -18,
+      -2
+    ],
+    "right_hand": [
+      20,
+      -43
+    ],
+    "staff_hand": [
+      20,
+      -43
+    ],
+    "staff_tip": [
+      32,
+      -68
+    ]
+  },
+  "spec_path": "docs/pose-library-expansion/integration-specs/WJFA-12.json"
+}

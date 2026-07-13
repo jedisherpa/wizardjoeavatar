@@ -1,0 +1,70 @@
+{
+  "candidate_id": "WJFA-15",
+  "semantic_id": "front_celebrate_wings_staff_up",
+  "source_path": "evidence/pose-library-expansion/intake/flying-action/ChatGPT Image Jul 12, 2026, 08_15_41 PM (5).png",
+  "destination_filename": "front_celebrate_wings_staff_up.png",
+  "manifest": {
+    "id": "front_celebrate_wings_staff_up",
+    "source": "front_celebrate_wings_staff_up.png",
+    "description": "front grounded celebration pose with wings spread, staff raised, and opposite fist up",
+    "facing": "south",
+    "locomotion": "idle",
+    "actions": [
+      "celebrate",
+      "reaction"
+    ],
+    "phase": null,
+    "generation_rows": 90,
+    "tags": [
+      "front",
+      "celebrate",
+      "reaction",
+      "wings_spread",
+      "staff_up",
+      "arms_up",
+      "wings"
+    ],
+    "anchor_offsets": {
+      "root": [
+        0,
+        0
+      ],
+      "mouth": [
+        0,
+        -56
+      ],
+      "left_eye": [
+        -5,
+        -61
+      ],
+      "right_eye": [
+        5,
+        -61
+      ],
+      "left_foot": [
+        -9,
+        -1
+      ],
+      "right_foot": [
+        16,
+        -1
+      ],
+      "left_hand": [
+        18,
+        -63
+      ],
+      "right_hand": [
+        -18,
+        -65
+      ],
+      "staff_hand": [
+        -18,
+        -65
+      ],
+      "staff_tip": [
+        -24,
+        -86
+      ]
+    }
+  }
+}

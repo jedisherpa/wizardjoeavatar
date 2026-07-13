@@ -1,0 +1,109 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://wizardjoe.local/schemas/reference_avatar_animation_graph.schema.json",
+  "title": "WizardJoe Reference Avatar Animation Graph",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "asset_set_id",
+    "pose_library",
+    "default_pose_id",
+    "idle_by_facing",
+    "action_pose_overrides",
+    "walking_clips"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "version": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "asset_set_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "pose_library": {
+      "type": "string",
+      "minLength": 1
+    },
+    "default_pose_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "idle_by_facing": {
+      "$ref": "#/$defs/facingMap"
+    },
+    "action_pose_overrides": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "walking_clips": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/$defs/clip"
+      }
+    }
+  },
+  "additionalProperties": true,
+  "$defs": {
+    "facingMap": {
+      "type": "object",
+      "required": [
+        "south",
+        "southwest",
+        "west",
+        "northwest",
+        "north",
+        "northeast",
+        "east",
+        "southeast"
+      ],
+      "additionalProperties": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "clip": {
+      "type": "object",
+      "required": ["clip_id", "loop", "samples"],
+      "properties": {
+        "clip_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "loop": {
+          "type": "boolean"
+        },
+        "samples": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": ["phase", "pose_id"],
+            "properties": {
+              "phase": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              },
+              "pose_id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "contact": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": true
+          }
+        }
+      },
+      "additionalProperties": true
+    }
+  }
+}

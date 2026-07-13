@@ -1,0 +1,29 @@
+{
+  "candidate_id": "WJFA-06",
+  "semantic_id": "fly_southwest_banked_staff",
+  "source_path": "evidence/pose-library-expansion/WJFA-06/source-preview.png",
+  "destination_filename": "fly_southwest_banked_staff.png",
+  "manifest": {
+    "id": "fly_southwest_banked_staff",
+    "source": "fly_southwest_banked_staff.png",
+    "description": "southwest banked flying turn with staff on viewer-left side",
+    "facing": "southwest",
+    "locomotion": "flying",
+    "actions": ["fly", "bank"],
+    "phase": null,
+    "generation_rows": 85,
+    "tags": ["southwest", "flying", "banked", "turn", "staff_left", "airborne", "wings"],
+    "anchor_offsets": {
+      "root": [0, 0],
+      "mouth": [3, -62],
+      "left_eye": [-2, -70],
+      "right_eye": [8, -69],
+      "left_foot": [-8, -11],
+      "right_foot": [5, -6],
+      "left_hand": [-21, -39],
+      "right_hand": [21, -44],
+      "staff_hand": [-21, -39],
+      "staff_tip": [-32, -73]
+    }
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "candidate_id": "WJFA-05",
+  "semantic_id": "fly_southeast_forward_glide",
+  "source_path": "evidence/pose-library-expansion/WJFA-05/source-preview.png",
+  "generator_parameters": {
+    "margin": 18,
+    "threshold": 30.0,
+    "coverage_threshold": 24,
+    "colors": 64
+  },
+  "result": {
+    "generation_rows": 60,
+    "raw_cols": 72,
+    "raw_root_anchor": [36, 59],
+    "cells": 1539,
+    "source_size": [1122, 1402],
+    "source_crop": [7, 293, 1090, 1196],
+    "crop_width": 1084,
+    "crop_height": 904,
+    "first_invalid_above": {
+      "generation_rows": 61,
+      "raw_cols": 73
+    }
+  }
+}

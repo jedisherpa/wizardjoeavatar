@@ -51,16 +51,38 @@ async function playDemo(button) {
   button.disabled = true;
   try {
     await command("reset", {});
-    await sleep(400);
-    await command("speak", { text: "The stars prefer a tidy spellbook.", duration_ms: 2600 });
-    await sleep(3000);
-    await command("action", { action: "thinking", duration_ms: 2400 });
+    const clips = [
+      ["ground_walk", 1300],
+      ["ground_run", 1700],
+      ["hover_flap", 1450],
+      ["bank_glide", 2200],
+      ["staff_combo", 1900],
+      ["reaction_recover", 1800],
+      ["celebrate", 1500],
+      ["conversation", 1700],
+    ];
+
+    await command("path", {
+      points: [
+        { x: -2.4, z: 4.2 },
+        { x: 2.4, z: 4.2 },
+        { x: 2.0, z: 6.4 },
+        { x: -2.0, z: 6.4 },
+        { x: 0, z: 5.0 },
+      ],
+      loop: true,
+      speed: 0.85,
+    });
+
+    for (const [clipId, durationMs] of clips) {
+      await command("pose_clip", { clip_id: clipId });
+      await sleep(durationMs);
+    }
+
+    await command("action", { action: "idle", duration_ms: 0 });
+    await command("move", { x: 0, z: 5.0, speed: 1.1 });
     await sleep(2600);
-    await command("action", { action: "magic_cast", duration_ms: 2600 });
-    await sleep(3000);
-    await command("move", { x: 0, z: 3.0, speed: 0.9 });
-    await sleep(4200);
-    await command("reset", {});
+    await command("stop", {});
   } finally {
     button.disabled = false;
     button.dataset.playing = "false";

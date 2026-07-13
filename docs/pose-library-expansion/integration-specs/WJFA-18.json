@@ -1,0 +1,71 @@
+{
+  "candidate_id": "WJFA-18",
+  "semantic_id": "front_celebrate_jump_staff_up",
+  "source_path": "evidence/pose-library-expansion/intake/flying-action/ChatGPT Image Jul 12, 2026, 08_15_42 PM (8).png",
+  "destination_filename": "front_celebrate_jump_staff_up.png",
+  "manifest": {
+    "id": "front_celebrate_jump_staff_up",
+    "source": "front_celebrate_jump_staff_up.png",
+    "description": "front airborne celebration jump with raised fist, raised staff, wings open, and no planted foot contact",
+    "facing": "south",
+    "locomotion": "jump",
+    "actions": [
+      "celebrate",
+      "reaction",
+      "jump"
+    ],
+    "phase": null,
+    "generation_rows": 92,
+    "tags": [
+      "front",
+      "celebrate",
+      "jump",
+      "airborne",
+      "staff_up",
+      "fist_up",
+      "wings"
+    ],
+    "anchor_offsets": {
+      "root": [
+        0,
+        0
+      ],
+      "mouth": [
+        0,
+        -56
+      ],
+      "left_eye": [
+        -5,
+        -60
+      ],
+      "right_eye": [
+        6,
+        -60
+      ],
+      "left_foot": [
+        -9,
+        -9
+      ],
+      "right_foot": [
+        13,
+        -7
+      ],
+      "left_hand": [
+        -15,
+        -68
+      ],
+      "right_hand": [
+        18,
+        -69
+      ],
+      "staff_hand": [
+        18,
+        -69
+      ],
+      "staff_tip": [
+        25,
+        -86
+      ]
+    }
+  }
+}

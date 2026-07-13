@@ -33,6 +33,7 @@ ACTIONS = (
     "speaking",
     "explaining",
     "walking",
+    "dash",
     "thinking",
     "pointing",
     "magic_cast",
@@ -114,10 +115,16 @@ class WizardState:
     speech_id: Optional[str] = None
     time_seconds: float = 0.0
     action_until: float = 0.0
+    action_restore: Optional[Dict[str, Any]] = None
     speech_until: float = 0.0
     target_point: Optional[Dict[str, float]] = None
     screen_position: Dict[str, float] = field(default_factory=lambda: {"x": 0.0, "y": 0.0})
     display_scale: float = 1.0
+    pose_id: str = "front_idle"
+    last_pose_id: str = "front_idle"
+    pose_transition_progress: float = 1.0
+    pose_override_id: Optional[str] = None
+    pose_override_until: float = 0.0
     reconnect_count: int = 0
 
     def as_public_dict(self) -> Dict[str, Any]:

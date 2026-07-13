@@ -8,6 +8,7 @@ ACTION_TO_CHANNELS = {
     "speaking": ("explain", "held"),
     "explaining": ("explain", "held"),
     "walking": ("none", "held"),
+    "dash": ("none", "held"),
     "thinking": ("think", "held"),
     "pointing": ("point", "point"),
     "magic_cast": ("cast", "cast"),

@@ -1,0 +1,29 @@
+{
+  "candidate_id": "WJFA-03",
+  "semantic_id": "fly_front_wings_up",
+  "source_path": "evidence/pose-library-expansion/WJFA-03/source-preview.png",
+  "destination_filename": "fly_front_wings_up.png",
+  "manifest": {
+    "id": "fly_front_wings_up",
+    "source": "fly_front_wings_up.png",
+    "description": "front flying wing-up flap phase with staff held",
+    "facing": "south",
+    "locomotion": "flying",
+    "actions": ["fly", "hover"],
+    "phase": 0.5,
+    "generation_rows": 96,
+    "tags": ["front", "flying", "flap_cycle", "wings_up", "airborne", "staff_held"],
+    "anchor_offsets": {
+      "root": [0, 0],
+      "mouth": [0, -60],
+      "left_eye": [-5, -70],
+      "right_eye": [5, -70],
+      "left_foot": [-5, -9],
+      "right_foot": [6, -8],
+      "left_hand": [-13, -39],
+      "right_hand": [21, -40],
+      "staff_hand": [21, -40],
+      "staff_tip": [29, -78]
+    }
+  }
+}

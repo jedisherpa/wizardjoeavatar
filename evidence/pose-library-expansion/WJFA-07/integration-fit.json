@@ -1,0 +1,25 @@
+{
+  "candidate_id": "WJFA-07",
+  "semantic_id": "fly_southeast_banked_staff",
+  "source_path": "evidence/pose-library-expansion/WJFA-07/source-preview.png",
+  "generator_parameters": {
+    "margin": 18,
+    "threshold": 30.0,
+    "coverage_threshold": 24,
+    "colors": 64
+  },
+  "result": {
+    "generation_rows": 82,
+    "raw_cols": 72,
+    "raw_root_anchor": [36, 81],
+    "cells": 3181,
+    "source_size": [1122, 1402],
+    "source_crop": [0, 52, 1092, 1295],
+    "crop_width": 1093,
+    "crop_height": 1244,
+    "first_invalid_above": {
+      "generation_rows": 83,
+      "raw_cols": 73
+    }
+  }
+}

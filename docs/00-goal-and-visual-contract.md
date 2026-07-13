@@ -44,8 +44,11 @@ The character is:
 - warm tan face
 - large readable eyebrows
 - slightly witty and intelligent expression
-- no wings
+- rainbow square-cell wings behind the body, matching the current motion
+  reference images
 
-Do not add rainbow wings or reuse earlier winged-wizard concepts.
+Do not replace the current winged reference with unrelated older wing designs.
+If wings are present in the supplied project assets, keep them as explicit
+versioned regions so motion, anchors, and transitions remain deterministic.
 
 The character should look like a deliberate colored-ASCII character, not a Minecraft render or a smooth modern illustration.

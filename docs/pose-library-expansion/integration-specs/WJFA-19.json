@@ -1,0 +1,71 @@
+{
+  "candidate_id": "WJFA-19",
+  "semantic_id": "front_shush_secret_staff_held",
+  "source_path": "evidence/pose-library-expansion/intake/flying-action/ChatGPT Image Jul 12, 2026, 08_15_42 PM (9).png",
+  "destination_filename": "front_shush_secret_staff_held.png",
+  "manifest": {
+    "id": "front_shush_secret_staff_held",
+    "source": "front_shush_secret_staff_held.png",
+    "description": "front shush or secret gesture with finger at mouth and staff held upright",
+    "facing": "south",
+    "locomotion": "idle",
+    "actions": [
+      "shush",
+      "secret",
+      "thinking"
+    ],
+    "phase": null,
+    "generation_rows": 96,
+    "tags": [
+      "front",
+      "shush",
+      "secret",
+      "finger_to_mouth",
+      "staff_held",
+      "wings",
+      "low_fit_risk"
+    ],
+    "anchor_offsets": {
+      "root": [
+        0,
+        0
+      ],
+      "mouth": [
+        0,
+        -60
+      ],
+      "left_eye": [
+        -5,
+        -65
+      ],
+      "right_eye": [
+        5,
+        -65
+      ],
+      "left_foot": [
+        -9,
+        -5
+      ],
+      "right_foot": [
+        14,
+        -1
+      ],
+      "left_hand": [
+        -1,
+        -51
+      ],
+      "right_hand": [
+        21,
+        -50
+      ],
+      "staff_hand": [
+        21,
+        -50
+      ],
+      "staff_tip": [
+        25,
+        -84
+      ]
+    }
+  }
+}

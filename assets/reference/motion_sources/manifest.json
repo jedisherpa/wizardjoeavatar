@@ -1,0 +1,2051 @@
+{
+  "version": 31,
+  "asset_set_id": "wizardjoe-reference-motion-v1",
+  "description": "Source pose PNGs for the repeatable WizardJoe square-cell pose library.",
+  "canonical": {
+    "rows": 96,
+    "cols": 72,
+    "root_anchor": [
+      36,
+      95
+    ],
+    "baseline_y": 95,
+    "root_anchor_strategy": "fixed_canonical_root_v1",
+    "crop_strategy": "per_pose_subject_crop_then_canonical_canvas_v1"
+  },
+  "palette_id": "per_pose_quantized_64",
+  "anchor_space": "root_relative_cells",
+  "default_anchor_offsets": {
+    "root": [
+      0,
+      0
+    ],
+    "mouth": [
+      0,
+      -59
+    ],
+    "left_eye": [
+      -5,
+      -70
+    ],
+    "right_eye": [
+      5,
+      -70
+    ],
+    "left_foot": [
+      -8,
+      -1
+    ],
+    "right_foot": [
+      8,
+      -1
+    ],
+    "left_hand": [
+      -16,
+      -43
+    ],
+    "right_hand": [
+      16,
+      -43
+    ],
+    "staff_hand": [
+      -20,
+      -45
+    ],
+    "staff_tip": [
+      -22,
+      -83
+    ]
+  },
+  "poses": [
+    {
+      "id": "front_idle",
+      "source": "front_idle.png",
+      "description": "front idle with staff held upright",
+      "facing": "south",
+      "locomotion": "idle",
+      "actions": [
+        "idle"
+      ],
+      "phase": null,
+      "tags": [
+        "front",
+        "idle",
+        "staff_held",
+        "wings"
+      ]
+    },
+    {
+      "id": "back_idle",
+      "source": "back_idle.png",
+      "description": "rear idle with both wings visible",
+      "facing": "north",
+      "locomotion": "idle",
+      "actions": [
+        "idle"
+      ],
+      "phase": null,
+      "tags": [
+        "back",
+        "idle",
+        "staff_held",
+        "wings"
+      ]
+    },
+    {
+      "id": "profile_left",
+      "source": "profile_left.png",
+      "description": "left-facing profile",
+      "facing": "west",
+      "locomotion": "idle",
+      "actions": [
+        "idle"
+      ],
+      "phase": null,
+      "tags": [
+        "profile",
+        "left",
+        "idle"
+      ]
+    },
+    {
+      "id": "profile_right",
+      "source": "profile_right.png",
+      "description": "right-facing profile",
+      "facing": "east",
+      "locomotion": "idle",
+      "actions": [
+        "idle"
+      ],
+      "phase": null,
+      "tags": [
+        "profile",
+        "right",
+        "idle"
+      ]
+    },
+    {
+      "id": "walk_front_left",
+      "source": "walk_front_left.png",
+      "description": "front walk cycle phase with left-foot lead",
+      "facing": "southwest",
+      "locomotion": "walking",
+      "actions": [
+        "walking"
+      ],
+      "phase": 0.0,
+      "tags": [
+        "front_family",
+        "walk",
+        "left_foot_lead",
+        "wings"
+      ]
+    },
+    {
+      "id": "walk_front_right",
+      "source": "walk_front_right.png",
+      "description": "front walk cycle phase with right-foot lead",
+      "facing": "southeast",
+      "locomotion": "walking",
+      "actions": [
+        "walking"
+      ],
+      "phase": 0.5,
+      "tags": [
+        "front_family",
+        "walk",
+        "right_foot_lead",
+        "wings"
+      ]
+    },
+    {
+      "id": "back_left",
+      "source": "back_left.png",
+      "description": "rear three-quarter left walk or turn pose",
+      "facing": "northwest",
+      "locomotion": "walking",
+      "actions": [
+        "walking",
+        "turn"
+      ],
+      "phase": 0.0,
+      "tags": [
+        "back_family",
+        "walk",
+        "turn",
+        "left_foot_lead",
+        "wings"
+      ]
+    },
+    {
+      "id": "back_right",
+      "source": "back_right.png",
+      "description": "rear three-quarter right walk or turn pose",
+      "facing": "northeast",
+      "locomotion": "walking",
+      "actions": [
+        "walking",
+        "turn"
+      ],
+      "phase": 0.5,
+      "tags": [
+        "back_family",
+        "walk",
+        "turn",
+        "right_foot_lead",
+        "wings"
+      ]
+    },
+    {
+      "id": "explaining",
+      "source": "explaining.png",
+      "description": "front explanatory hand gesture",
+      "facing": "south",
+      "locomotion": "idle",
+      "actions": [
+        "explaining",
+        "speaking",
+        "pointing"
+      ],
+      "phase": null,
+      "tags": [
+        "front",
+        "upper_body",
+        "gesture",
+        "staff_held",
+        "wings"
+      ]
+    },
+    {
+      "id": "magic_cast",
+      "source": "magic_cast.png",
+      "description": "front magic-cast pose with raised staff and spark hand",
+      "facing": "south",
+      "locomotion": "idle",
+      "actions": [
+        "magic_cast",
+        "reaction"
+      ],
+      "phase": null,
+      "tags": [
+        "front",
+        "upper_body",
+        "magic",
+        "staff_cast",
+        "wings"
+      ]
+    },
+    {
+      "id": "run_front_airborne_reach",
+      "source": "run_front_airborne_reach.png",
+      "description": "front airborne dash stride with rearward free-arm reach",
+      "facing": "south",
+      "locomotion": "running",
+      "actions": [
+        "dash"
+      ],
+      "phase": 0.0,
+      "generation_rows": 91,
+      "tags": [
+        "front_family",
+        "run",
+        "dash",
+        "airborne",
+        "left_arm_back",
+        "staff_held",
+        "wings"
+      ],
+      "anchor_offsets": {
+        "mouth": [
+          6,
+          -64
+        ],
+        "left_eye": [
+          2,
+          -73
+        ],
+        "right_eye": [
+          9,
+          -73
+        ],
+        "left_foot": [
+          -10,
+          -17
+        ],
+        "right_foot": [
+          10,
+          -7
+        ],
+        "left_hand": [
+          -16,
+          -42
+        ],
+        "right_hand": [
+          26,
+          -46
+        ],
+        "staff_hand": [
+          26,
+          -46
+        ],
+        "staff_tip": [
+          31,
+          -86
+        ]
+      }
+    },
+    {
+      "id": "run_front_airborne_drive",
+      "source": "run_front_airborne_drive.png",
+      "description": "front airborne run stride with compact free-arm drive",
+      "facing": "south",
+      "locomotion": "running",
+      "actions": [
+        "running"
+      ],
+      "phase": 0.5,
+      "generation_rows": 96,
+      "tags": [
+        "front_family",
+        "run",
+        "airborne",
+        "left_arm_drive",
+        "staff_held",
+        "wings"
+      ],
+      "anchor_offsets": {
+        "mouth": [
+          6,
+          -65
+        ],
+        "left_eye": [
+          3,
+          -72
+        ],
+        "right_eye": [
+          9,
+          -72
+        ],
+        "left_foot": [
+          -11,
+          -16
+        ],
+        "right_foot": [
+          11,
+          -6
+        ],
+        "left_hand": [
+          -2,
+          -51
+        ],
+        "right_hand": [
+          25,
+          -52
+        ],
+        "staff_hand": [
+          25,
+          -52
+        ],
+        "staff_tip": [
+          28,
+          -87
+        ]
+      }
+    },
+    {
+      "id": "front_crouch_guard",
+      "source": "front_crouch_guard.png",
+      "description": "front lowered guard crouch with planted staff",
+      "facing": "south",
+      "locomotion": "idle",
+      "actions": [
+        "crouching",
+        "guarding",
+        "reaction"
+      ],
+      "phase": null,
+      "generation_rows": 74,
+      "tags": [
+        "front",
+        "lowered_stance",
+        "defensive",
+        "staff_held",
+        "wings"
+      ],
+      "anchor_offsets": {
+        "mouth": [
+          4,
+          -38
+        ],
+        "left_eye": [
+          0,
+          -45
+        ],
+        "right_eye": [
+          8,
+          -45
+        ],
+        "left_foot": [
+          -12,
+          -3
+        ],
+        "right_foot": [
+          11,
+          -3
+        ],
+        "left_hand": [
+          -16,
+          -22
+        ],
+        "right_hand": [
+          25,
+          -32
+        ],
+        "staff_hand": [
+          25,
+          -32
+        ],
+        "staff_tip": [
+          31,
+          -71
+        ]
+      }
+    },
+    {
+      "id": "front_reaction_jump_fist_staff",
+      "source": "front_reaction_jump_fist_staff.png",
+      "description": "front airborne reaction jump with forward fist and staff held upright",
+      "facing": "south",
+      "locomotion": "jump",
+      "actions": [
+        "reaction",
+        "celebrate"
+      ],
+      "phase": null,
+      "generation_rows": 93,
+      "tags": [
+        "front",
+        "reaction",
+        "jump",
+        "airborne",
+        "fist_forward",
+        "staff_held",
+        "wings",
+        "high_risk_baseline"
+      ],
+      "anchor_offsets": {
+        "mouth": [
+          0,
+          -56
+        ],
+        "left_eye": [
+          -5,
+          -67
+        ],
+        "right_eye": [
+          5,
+          -67
+        ],
+        "left_foot": [
+          -12,
+          -7
+        ],
+        "right_foot": [
+          14,
+          -8
+        ],
+        "left_hand": [
+          -24,
+          -53
+        ],
+        "right_hand": [
+          23,
+          -44
+        ],
+        "staff_hand": [
+          23,
+          -44
+        ],
+        "staff_tip": [
+          28,
+          -78
+        ]
+      }
+    },
+    {
+      "id": "front_kneel_staff_brace",
+      "source": "front_kneel_staff_brace.png",
+      "description": "front kneel brace pose with planted staff and low free hand",
+      "facing": "south",
+      "locomotion": "kneel",
+      "actions": [
+        "reaction",
+        "brace"
+      ],
+      "phase": null,
+      "generation_rows": 73,
+      "tags": [
+        "front",
+        "kneel",
+        "brace",
+        "reaction",
+        "staff_planted",
+        "low_pose",
+        "wings"
+      ],
+      "anchor_offsets": {
+        "mouth": [
+          0,
+          -44
+        ],
+        "left_eye": [
+          -4,
+          -52
+        ],
+        "right_eye": [
+          4,
+          -52
+        ],
+        "left_foot": [
+          -10,
+          -2
+        ],
+        "right_foot": [
+          10,
+          -1
+        ],
+        "left_hand": [
+          -14,
+          -24
+        ],
+        "right_hand": [
+          17,
+          -31
+        ],
+        "staff_hand": [
+          17,
+          -31
+        ],
+        "staff_tip": [
+          23,
+          -59
+        ]
+      }
+    },
+    {
+      "id": "front_staff_guard_windup",
+      "source": "front_staff_guard_windup.png",
+      "description": "front two-handed diagonal staff windup before cast or guard",
+      "facing": "south",
+      "locomotion": "idle",
+      "actions": [
+        "magic_cast",
+        "brace",
+        "staff_guard"
+      ],
+      "phase": 0.25,
+      "generation_rows": 78,
+      "tags": [
+        "front",
+        "upper_body",
+        "staff_guard",
+        "magic_windup",
+        "two_handed_staff",
+        "wide_stance",
+        "wings"
+      ],
+      "anchor_offsets": {
+        "mouth": [
+          0,
+          -47
+        ],
+        "left_eye": [
+          -4,
+          -56
+        ],
+        "right_eye": [
+          4,
+          -56
+        ],
+        "left_foot": [
+          -11,
+          -1
+        ],
+        "right_foot": [
+          12,
+          -1
+        ],
+        "left_hand": [
+          3,
+          -37
+        ],
+        "right_hand": [
+          12,
+          -35
+        ],
+        "staff_hand": [
+          12,
+          -35
+        ],
+        "staff_tip": [
+          22,
+          -64
+        ]
+      }
+    },
+    {
+      "id": "front_staff_guard_low",
+      "source": "front_staff_guard_low.png",
+      "description": "front low two-handed staff guard across the torso",
+      "facing": "south",
+      "locomotion": "idle",
+      "actions": [
+        "staff_guard",
+        "magic_cast",
+        "brace"
+      ],
+      "phase": 0.5,
+      "generation_rows": 94,
+      "tags": [
+        "front",
+        "upper_body",
+        "staff_guard",
+        "low_guard",
+        "two_handed_staff",
+        "wide_stance",
+        "wings"
+      ],
+      "anchor_offsets": {
+        "mouth": [
+          0,
+          -57
+        ],
+        "left_eye": [
+          -5,
+          -68
+        ],
+        "right_eye": [
+          5,
+          -68
+        ],
+        "left_foot": [
+          -16,
+          -1
+        ],
+        "right_foot": [
+          17,
+          -1
+        ],
+        "left_hand": [
+          -6,
+          -49
+        ],
+        "right_hand": [
+          13,
+          -37
+        ],
+        "staff_hand": [
+          -6,
+          -49
+        ],
+        "staff_tip": [
+          -21,
+          -65
+        ]
+      }
+    },
+    {
+      "id": "walk_front_right_lift",
+      "source": "walk_front_right_lift.png",
+      "description": "front-family walk passing pose with screen-right boot lifted and staff centered",
+      "facing": "southeast",
+      "locomotion": "walking",
+      "actions": [
+        "walking"
+      ],
+      "phase": 0.75,
+      "generation_rows": 94,
+      "tags": [
+        "front_family",
+        "walk",
+        "right_foot_lift",
+        "passing",
+        "staff_center",
+        "wings"
+      ],
+      "anchor_offsets": {
+        "mouth": [
+          0,
+          -59
+        ],
+        "left_eye": [
+          -5,
+          -64
+        ],
+        "right_eye": [
+          5,
+          -64
+        ],
+        "left_foot": [
+          -7,
+          -1
+        ],
+        "right_foot": [
+          15,
+          -3
+        ],
+        "left_hand": [
+          -2,
+          -43
+        ],
+        "right_hand": [
+          20,
+          -44
+        ],
+        "staff_hand": [
+          -2,
+          -44
+        ],
+        "staff_tip": [
+          13,
+          -80
+        ]
+      }
+    },
+    {
+      "id": "front_crouch_reaction_staff_planted",
+      "source": "front_crouch_reaction_staff_planted.png",
+      "description": "front crouch reaction with planted staff and low ready silhouette",
+      "facing": "south",
+      "locomotion": "idle",
+      "actions": [
+        "reaction"
+      ],
+      "phase": null,
+      "generation_rows": 68,
+      "tags": [
+        "front",
+        "crouch",
+        "reaction",
+        "staff_planted",
+        "low_pose",
+        "wings"
+      ],
+      "anchor_offsets": {
+        "mouth": [
+          2,
+          -44
+        ],
+        "left_eye": [
+          -3,
+          -51
+        ],
+        "right_eye": [
+          6,
+          -51
+        ],
+        "left_foot": [
+          -14,
+          -1
+        ],
+        "right_foot": [
+          9,
+          -1
+        ],
+        "left_hand": [
+          -12,
+          -32
+        ],
+        "right_hand": [
+          22,
+          -30
+        ],
+        "staff_hand": [
+          22,
+          -30
+        ],
+        "staff_tip": [
+          28,
+          -66
+        ]
+      }
+    },
+    {
+      "id": "front_victory_cast",
+      "source": "front_victory_cast.png",
+      "description": "front victory or cast peak with both arms raised",
+      "facing": "south",
+      "locomotion": "idle",
+      "actions": [
+        "magic_cast",
+        "reaction"
+      ],
+      "phase": null,
+      "generation_rows": 96,
+      "tags": [
+        "front",
+        "upper_body",
+        "victory",
+        "staff_raised",
+        "arms_up",
+        "wings"
+      ],
+      "anchor_offsets": {
+        "mouth": [
+          0,
+          -59
+        ],
+        "left_eye": [
+          -5,
+          -64
+        ],
+        "right_eye": [
+          5,
+          -64
+        ],
+        "left_foot": [
+          -8,
+          -1
+        ],
+        "right_foot": [
+          11,
+          -1
+        ],
+        "left_hand": [
+          -18,
+          -63
+        ],
+        "right_hand": [
+          19,
+          -64
+        ],
+        "staff_hand": [
+          19,
+          -64
+        ],
+        "staff_tip": [
+          19,
+          -90
+        ]
+      }
+    },
+    {
+      "id": "fly_front_hover_neutral",
+      "source": "fly_front_hover_neutral.png",
+      "description": "front airborne hover with staff held and wings spread",
+      "facing": "south",
+      "locomotion": "flying",
+      "actions": [
+        "idle",
+        "hover"
+      ],
+      "phase": null,
+      "generation_rows": 91,
+      "tags": [
+        "front",
+        "flying",
+        "hover",
+        "airborne",
+        "staff_held",
+        "wings"
+      ],
+      "anchor_offsets": {
+        "root": [
+          0,
+          0
+        ],
+        "mouth": [
+          0,
+          -60
+        ],
+        "left_eye": [
+          -5,
+          -70
+        ],
+        "right_eye": [
+          5,
+          -70
+        ],
+        "left_foot": [
+          -6,
+          -9
+        ],
+        "right_foot": [
+          6,
+          -9
+        ],
+        "left_hand": [
+          -15,
+          -38
+        ],
+        "right_hand": [
+          19,
+          -43
+        ],
+        "staff_hand": [
+          19,
+          -43
+        ],
+        "staff_tip": [
+          26,
+          -82
+        ]
+      }
+    },
+    {
+      "id": "fly_front_knee_up",
+      "source": "fly_front_knee_up.png",
+      "description": "front flying knee-up flap phase with staff held",
+      "facing": "south",
+      "locomotion": "flying",
+      "actions": [
+        "fly",
+        "hover"
+      ],
+      "phase": 0.25,
+      "generation_rows": 83,
+      "tags": [
+        "front",
+        "flying",
+        "flap_cycle",
+        "knee_up",
+        "airborne",
+        "staff_held",
+        "wings"
+      ],
+      "anchor_offsets": {
+        "root": [
+          0,
+          0
+        ],
+        "mouth": [
+          0,
+          -60
+        ],
+        "left_eye": [
+          -5,
+          -70
+        ],
+        "right_eye": [
+          5,
+          -70
+        ],
+        "left_foot": [
+          -9,
+          -7
+        ],
+        "right_foot": [
+          7,
+          -15
+        ],
+        "left_hand": [
+          -12,
+          -37
+        ],
+        "right_hand": [
+          19,
+          -42
+        ],
+        "staff_hand": [
+          19,
+          -42
+        ],
+        "staff_tip": [
+          27,
+          -82
+        ]
+      }
+    },
+    {
+      "id": "fly_front_wings_up",
+      "source": "fly_front_wings_up.png",
+      "description": "front flying wing-up flap phase with staff held",
+      "facing": "south",
+      "locomotion": "flying",
+      "actions": [
+        "fly",
+        "hover"
+      ],
+      "phase": 0.5,
+      "generation_rows": 96,
+      "tags": [
+        "front",
+        "flying",
+        "flap_cycle",
+        "wings_up",
+        "airborne",
+        "staff_held"
+      ],
+      "anchor_offsets": {
+        "root": [
+          0,
+          0
+        ],
+        "mouth": [
+          0,
+          -60
+        ],
+        "left_eye": [
+          -5,
+          -70
+        ],
+        "right_eye": [
+          5,
+          -70
+        ],
+        "left_foot": [
+          -5,
+          -9
+        ],
+        "right_foot": [
+          6,
+          -8
+        ],
+        "left_hand": [
+          -13,
+          -39
+        ],
+        "right_hand": [
+          21,
+          -40
+        ],
+        "staff_hand": [
+          21,
+          -40
+        ],
+        "staff_tip": [
+          29,
+          -78
+        ]
+      }
+    },
+    {
+      "id": "fly_front_wings_down",
+      "source": "fly_front_wings_down.png",
+      "description": "front flying wing-down flap phase with staff held",
+      "facing": "south",
+      "locomotion": "flying",
+      "actions": [
+        "fly",
+        "hover"
+      ],
+      "phase": 0.75,
+      "generation_rows": 85,
+      "tags": [
+        "front",
+        "flying",
+        "flap_cycle",
+        "wings_down",
+        "airborne",
+        "staff_held"
+      ],
+      "anchor_offsets": {
+        "root": [
+          0,
+          0
+        ],
+        "mouth": [
+          0,
+          -60
+        ],
+        "left_eye": [
+          -5,
+          -70
+        ],
+        "right_eye": [
+          5,
+          -70
+        ],
+        "left_foot": [
+          -5,
+          -11
+        ],
+        "right_foot": [
+          6,
+          -11
+        ],
+        "left_hand": [
+          -16,
+          -44
+        ],
+        "right_hand": [
+          20,
+          -48
+        ],
+        "staff_hand": [
+          20,
+          -48
+        ],
+        "staff_tip": [
+          26,
+          -81
+        ]
+      }
+    },
+    {
+      "id": "fly_southeast_forward_glide",
+      "source": "fly_southeast_forward_glide.png",
+      "description": "southeast prone forward glide with trailing staff",
+      "facing": "southeast",
+      "locomotion": "flying",
+      "actions": [
+        "fly",
+        "glide"
+      ],
+      "phase": 0.35,
+      "generation_rows": 60,
+      "tags": [
+        "southeast",
+        "flying",
+        "forward_glide",
+        "prone",
+        "airborne",
+        "staff_trailing",
+        "wings"
+      ],
+      "anchor_offsets": {
+        "root": [
+          0,
+          0
+        ],
+        "mouth": [
+          8,
+          -64
+        ],
+        "left_eye": [
+          3,
+          -70
+        ],
+        "right_eye": [
+          12,
+          -70
+        ],
+        "left_foot": [
+          -16,
+          -17
+        ],
+        "right_foot": [
+          -8,
+          -15
+        ],
+        "left_hand": [
+          -22,
+          -47
+        ],
+        "right_hand": [
+          22,
+          -47
+        ],
+        "staff_hand": [
+          -22,
+          -47
+        ],
+        "staff_tip": [
+          -32,
+          -51
+        ]
+      }
+    },
+    {
+      "id": "fly_southwest_banked_staff",
+      "source": "fly_southwest_banked_staff.png",
+      "description": "southwest banked flying turn with staff on viewer-left side",
+      "facing": "southwest",
+      "locomotion": "flying",
+      "actions": [
+        "fly",
+        "bank"
+      ],
+      "phase": null,
+      "generation_rows": 85,
+      "tags": [
+        "southwest",
+        "flying",
+        "banked",
+        "turn",
+        "staff_left",
+        "airborne",
+        "wings"
+      ],
+      "anchor_offsets": {
+        "root": [
+          0,
+          0
+        ],
+        "mouth": [
+          3,
+          -62
+        ],
+        "left_eye": [
+          -2,
+          -70
+        ],
+        "right_eye": [
+          8,
+          -69
+        ],
+        "left_foot": [
+          -8,
+          -11
+        ],
+        "right_foot": [
+          5,
+          -6
+        ],
+        "left_hand": [
+          -21,
+          -39
+        ],
+        "right_hand": [
+          21,
+          -44
+        ],
+        "staff_hand": [
+          -21,
+          -39
+        ],
+        "staff_tip": [
+          -32,
+          -73
+        ]
+      }
+    },
+    {
+      "id": "fly_southeast_banked_staff",
+      "source": "fly_southeast_banked_staff.png",
+      "description": "southeast banked flying turn with staff low on viewer-right side",
+      "facing": "southeast",
+      "locomotion": "flying",
+      "actions": [
+        "fly",
+        "bank"
+      ],
+      "phase": null,
+      "generation_rows": 82,
+      "tags": [
+        "southeast",
+        "flying",
+        "banked",
+        "turn",
+        "staff_right",
+        "airborne",
+        "wings"
+      ],
+      "anchor_offsets": {
+        "root": [
+          0,
+          0
+        ],
+        "mouth": [
+          2,
+          -61
+        ],
+        "left_eye": [
+          -3,
+          -70
+        ],
+        "right_eye": [
+          7,
+          -69
+        ],
+        "left_foot": [
+          -12,
+          -12
+        ],
+        "right_foot": [
+          2,
+          -5
+        ],
+        "left_hand": [
+          -13,
+          -45
+        ],
+        "right_hand": [
+          19,
+          -38
+        ],
+        "staff_hand": [
+          19,
+          -38
+        ],
+        "staff_tip": [
+          25,
+          -63
+        ]
+      }
+    },
+    {
+      "id": "fly_southeast_cheer",
+      "source": "fly_southeast_cheer.png",
+      "description": "southeast airborne cheer reaction with raised fist",
+      "facing": "southeast",
+      "locomotion": "flying",
+      "actions": [
+        "reaction",
+        "cheer"
+      ],
+      "phase": null,
+      "generation_rows": 96,
+      "tags": [
+        "southeast",
+        "flying",
+        "airborne",
+        "cheer",
+        "raised_fist",
+        "reaction",
+        "staff_held",
+        "wings"
+      ],
+      "anchor_offsets": {
+        "root": [
+          0,
+          0
+        ],
+        "mouth": [
+          3,
+          -61
+        ],
+        "left_eye": [
+          -2,
+          -70
+        ],
+        "right_eye": [
+          8,
+          -69
+        ],
+        "left_foot": [
+          -7,
+          -10
+        ],
+        "right_foot": [
+          6,
+          -6
+        ],
+        "left_hand": [
+          -14,
+          -71
+        ],
+        "right_hand": [
+          20,
+          -53
+        ],
+        "staff_hand": [
+          20,
+          -53
+        ],
+        "staff_tip": [
+          26,
+          -90
+        ]
+      }
+    },
+    {
+      "id": "fly_southeast_staff_forward",
+      "source": "fly_southeast_staff_forward.png",
+      "description": "southeast forward flight with staff-forward staging",
+      "facing": "southeast",
+      "locomotion": "flying",
+      "actions": [
+        "fly",
+        "glide",
+        "staff_forward"
+      ],
+      "phase": 0.65,
+      "generation_rows": 71,
+      "tags": [
+        "southeast",
+        "flying",
+        "forward_glide",
+        "staff_forward",
+        "prone",
+        "airborne",
+        "wings"
+      ],
+      "anchor_offsets": {
+        "root": [
+          0,
+          0
+        ],
+        "mouth": [
+          5,
+          -59
+        ],
+        "left_eye": [
+          0,
+          -67
+        ],
+        "right_eye": [
+          10,
+          -66
+        ],
+        "left_foot": [
+          -21,
+          -19
+        ],
+        "right_foot": [
+          -5,
+          -14
+        ],
+        "left_hand": [
+          -14,
+          -50
+        ],
+        "right_hand": [
+          20,
+          -50
+        ],
+        "staff_hand": [
+          20,
+          -50
+        ],
+        "staff_tip": [
+          28,
+          -71
+        ]
+      }
+    },
+    {
+      "id": "front_run_charge_right_plant",
+      "source": "front_run_charge_right_plant.png",
+      "description": "front-family running charge pose with right foot planted, left foot lifted, forward fist, and staff held high",
+      "facing": "south",
+      "locomotion": "running",
+      "actions": [
+        "running",
+        "charge"
+      ],
+      "phase": 0.25,
+      "generation_rows": 77,
+      "tags": [
+        "front_family",
+        "run",
+        "charge",
+        "right_foot_plant",
+        "left_foot_lift",
+        "staff_held",
+        "wings"
+      ],
+      "anchor_offsets": {
+        "root": [
+          0,
+          0
+        ],
+        "mouth": [
+          0,
+          -47
+        ],
+        "left_eye": [
+          -4,
+          -51
+        ],
+        "right_eye": [
+          6,
+          -51
+        ],
+        "left_foot": [
+          -8,
+          -7
+        ],
+        "right_foot": [
+          18,
+          -1
+        ],
+        "left_hand": [
+          -12,
+          -31
+        ],
+        "right_hand": [
+          21,
+          -37
+        ],
+        "staff_hand": [
+          21,
+          -37
+        ],
+        "staff_tip": [
+          32,
+          -66
+        ]
+      }
+    },
+    {
+      "id": "front_crouch_landing_staff_plant",
+      "source": "front_crouch_landing_staff_plant.png",
+      "description": "front-family crouch landing pose with ground hand contact, bent right boot, and planted staff",
+      "facing": "south",
+      "locomotion": "landing",
+      "actions": [
+        "landing",
+        "crouch",
+        "staff_plant"
+      ],
+      "phase": null,
+      "generation_rows": 74,
+      "tags": [
+        "front_family",
+        "landing",
+        "crouch",
+        "hand_contact",
+        "staff_plant",
+        "wings",
+        "high_risk_baseline"
+      ],
+      "anchor_offsets": {
+        "root": [
+          0,
+          0
+        ],
+        "mouth": [
+          0,
+          -43
+        ],
+        "left_eye": [
+          -5,
+          -47
+        ],
+        "right_eye": [
+          5,
+          -47
+        ],
+        "left_foot": [
+          -21,
+          -1
+        ],
+        "right_foot": [
+          14,
+          -3
+        ],
+        "left_hand": [
+          -18,
+          -2
+        ],
+        "right_hand": [
+          20,
+          -43
+        ],
+        "staff_hand": [
+          20,
+          -43
+        ],
+        "staff_tip": [
+          32,
+          -68
+        ]
+      }
+    },
+    {
+      "id": "front_magic_staff_thrust",
+      "source": "front_magic_staff_thrust.png",
+      "description": "front magic-cast variant with staff thrust toward screen left, spark effect, and wide stance",
+      "facing": "south",
+      "locomotion": "idle",
+      "actions": [
+        "magic_cast",
+        "staff_thrust"
+      ],
+      "phase": null,
+      "generation_rows": 73,
+      "tags": [
+        "front",
+        "magic",
+        "staff_thrust",
+        "spark",
+        "wide_stance",
+        "wings"
+      ],
+      "anchor_offsets": {
+        "root": [
+          0,
+          0
+        ],
+        "mouth": [
+          7,
+          -45
+        ],
+        "left_eye": [
+          3,
+          -48
+        ],
+        "right_eye": [
+          13,
+          -48
+        ],
+        "left_foot": [
+          -13,
+          -1
+        ],
+        "right_foot": [
+          21,
+          -2
+        ],
+        "left_hand": [
+          -9,
+          -39
+        ],
+        "right_hand": [
+          23,
+          -31
+        ],
+        "staff_hand": [
+          -9,
+          -39
+        ],
+        "staff_tip": [
+          -28,
+          -53
+        ]
+      }
+    },
+    {
+      "id": "front_airborne_fall_back_staff",
+      "source": "front_airborne_fall_back_staff.png",
+      "description": "front-family airborne falling-back reaction with both feet lifted and staff held on screen right",
+      "facing": "south",
+      "locomotion": "airborne",
+      "actions": [
+        "flying",
+        "falling",
+        "reaction"
+      ],
+      "phase": null,
+      "generation_rows": 80,
+      "tags": [
+        "front_family",
+        "airborne",
+        "falling",
+        "feet_up",
+        "staff_held",
+        "wings",
+        "high_risk_baseline"
+      ],
+      "anchor_offsets": {
+        "root": [
+          0,
+          0
+        ],
+        "mouth": [
+          0,
+          -51
+        ],
+        "left_eye": [
+          -5,
+          -55
+        ],
+        "right_eye": [
+          6,
+          -55
+        ],
+        "left_foot": [
+          -5,
+          -7
+        ],
+        "right_foot": [
+          25,
+          -10
+        ],
+        "left_hand": [
+          -16,
+          -40
+        ],
+        "right_hand": [
+          20,
+          -45
+        ],
+        "staff_hand": [
+          20,
+          -45
+        ],
+        "staff_tip": [
+          32,
+          -67
+        ]
+      }
+    },
+    {
+      "id": "front_celebrate_wings_staff_up",
+      "source": "front_celebrate_wings_staff_up.png",
+      "description": "front grounded celebration pose with wings spread, staff raised, and opposite fist up",
+      "facing": "south",
+      "locomotion": "idle",
+      "actions": [
+        "celebrate",
+        "reaction"
+      ],
+      "phase": null,
+      "generation_rows": 90,
+      "tags": [
+        "front",
+        "celebrate",
+        "reaction",
+        "wings_spread",
+        "staff_up",
+        "arms_up",
+        "wings"
+      ],
+      "anchor_offsets": {
+        "root": [
+          0,
+          0
+        ],
+        "mouth": [
+          0,
+          -56
+        ],
+        "left_eye": [
+          -5,
+          -61
+        ],
+        "right_eye": [
+          5,
+          -61
+        ],
+        "left_foot": [
+          -9,
+          -1
+        ],
+        "right_foot": [
+          16,
+          -1
+        ],
+        "left_hand": [
+          18,
+          -63
+        ],
+        "right_hand": [
+          -18,
+          -65
+        ],
+        "staff_hand": [
+          -18,
+          -65
+        ],
+        "staff_tip": [
+          -24,
+          -86
+        ]
+      }
+    },
+    {
+      "id": "front_staff_block_horizontal",
+      "source": "front_staff_block_horizontal.png",
+      "description": "front defensive guard pose with wide stance and staff held horizontally across the body",
+      "facing": "south",
+      "locomotion": "idle",
+      "actions": [
+        "block",
+        "guard",
+        "staff_ready"
+      ],
+      "phase": null,
+      "generation_rows": 75,
+      "tags": [
+        "front",
+        "defense",
+        "block",
+        "staff_horizontal",
+        "wide_stance",
+        "wings"
+      ],
+      "anchor_offsets": {
+        "root": [
+          0,
+          0
+        ],
+        "mouth": [
+          0,
+          -47
+        ],
+        "left_eye": [
+          -5,
+          -51
+        ],
+        "right_eye": [
+          6,
+          -51
+        ],
+        "left_foot": [
+          -14,
+          -1
+        ],
+        "right_foot": [
+          19,
+          -1
+        ],
+        "left_hand": [
+          -19,
+          -37
+        ],
+        "right_hand": [
+          8,
+          -40
+        ],
+        "staff_hand": [
+          -19,
+          -37
+        ],
+        "staff_tip": [
+          33,
+          -42
+        ]
+      }
+    },
+    {
+      "id": "front_point_direct_staff_held",
+      "source": "front_point_direct_staff_held.png",
+      "description": "front direct pointing pose with extended screen-left finger and staff held upright",
+      "facing": "south",
+      "locomotion": "idle",
+      "actions": [
+        "pointing",
+        "explaining"
+      ],
+      "phase": null,
+      "generation_rows": 94,
+      "tags": [
+        "front",
+        "pointing",
+        "direct_point",
+        "staff_held",
+        "wings",
+        "low_fit_risk"
+      ],
+      "anchor_offsets": {
+        "root": [
+          0,
+          0
+        ],
+        "mouth": [
+          0,
+          -58
+        ],
+        "left_eye": [
+          -5,
+          -63
+        ],
+        "right_eye": [
+          5,
+          -63
+        ],
+        "left_foot": [
+          -11,
+          -1
+        ],
+        "right_foot": [
+          17,
+          -1
+        ],
+        "left_hand": [
+          -23,
+          -59
+        ],
+        "right_hand": [
+          21,
+          -49
+        ],
+        "staff_hand": [
+          21,
+          -49
+        ],
+        "staff_tip": [
+          27,
+          -83
+        ]
+      }
+    },
+    {
+      "id": "front_celebrate_jump_staff_up",
+      "source": "front_celebrate_jump_staff_up.png",
+      "description": "front airborne celebration jump with raised fist, raised staff, wings open, and no planted foot contact",
+      "facing": "south",
+      "locomotion": "jump",
+      "actions": [
+        "celebrate",
+        "reaction",
+        "jump"
+      ],
+      "phase": null,
+      "generation_rows": 92,
+      "tags": [
+        "front",
+        "celebrate",
+        "jump",
+        "airborne",
+        "staff_up",
+        "fist_up",
+        "wings"
+      ],
+      "anchor_offsets": {
+        "root": [
+          0,
+          0
+        ],
+        "mouth": [
+          0,
+          -56
+        ],
+        "left_eye": [
+          -5,
+          -60
+        ],
+        "right_eye": [
+          6,
+          -60
+        ],
+        "left_foot": [
+          -9,
+          -9
+        ],
+        "right_foot": [
+          13,
+          -7
+        ],
+        "left_hand": [
+          -15,
+          -68
+        ],
+        "right_hand": [
+          18,
+          -69
+        ],
+        "staff_hand": [
+          18,
+          -69
+        ],
+        "staff_tip": [
+          25,
+          -86
+        ]
+      }
+    },
+    {
+      "id": "front_shush_secret_staff_held",
+      "source": "front_shush_secret_staff_held.png",
+      "description": "front shush or secret gesture with finger at mouth and staff held upright",
+      "facing": "south",
+      "locomotion": "idle",
+      "actions": [
+        "shush",
+        "secret",
+        "thinking"
+      ],
+      "phase": null,
+      "generation_rows": 96,
+      "tags": [
+        "front",
+        "shush",
+        "secret",
+        "finger_to_mouth",
+        "staff_held",
+        "wings",
+        "low_fit_risk"
+      ],
+      "anchor_offsets": {
+        "root": [
+          0,
+          0
+        ],
+        "mouth": [
+          0,
+          -60
+        ],
+        "left_eye": [
+          -5,
+          -65
+        ],
+        "right_eye": [
+          5,
+          -65
+        ],
+        "left_foot": [
+          -9,
+          -5
+        ],
+        "right_foot": [
+          14,
+          -1
+        ],
+        "left_hand": [
+          -1,
+          -51
+        ],
+        "right_hand": [
+          21,
+          -50
+        ],
+        "staff_hand": [
+          21,
+          -50
+        ],
+        "staff_tip": [
+          25,
+          -84
+        ]
+      }
+    },
+    {
+      "id": "front_staff_spin_flourish",
+      "source": "front_staff_spin_flourish.png",
+      "description": "front staff-spin flourish with visible motion arc, open presenting hand, and stepping stance",
+      "facing": "south",
+      "locomotion": "idle",
+      "actions": [
+        "staff_spin",
+        "flourish",
+        "magic_cast"
+      ],
+      "phase": null,
+      "generation_rows": 75,
+      "tags": [
+        "front",
+        "staff_spin",
+        "flourish",
+        "motion_arc",
+        "open_hand",
+        "wings",
+        "high_fit_risk"
+      ],
+      "anchor_offsets": {
+        "root": [
+          0,
+          0
+        ],
+        "mouth": [
+          0,
+          -47
+        ],
+        "left_eye": [
+          -5,
+          -51
+        ],
+        "right_eye": [
+          6,
+          -51
+        ],
+        "left_foot": [
+          -11,
+          -1
+        ],
+        "right_foot": [
+          22,
+          -1
+        ],
+        "left_hand": [
+          26,
+          -44
+        ],
+        "right_hand": [
+          -13,
+          -45
+        ],
+        "staff_hand": [
+          -13,
+          -45
+        ],
+        "staff_tip": [
+          -26,
+          -65
+        ]
+      }
+    }
+  ]
+}

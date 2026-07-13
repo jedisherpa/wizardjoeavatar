@@ -1,0 +1,29 @@
+{
+  "candidate_id": "WJFA-08",
+  "semantic_id": "fly_southeast_cheer",
+  "source_path": "evidence/pose-library-expansion/WJFA-08/source-preview.png",
+  "destination_filename": "fly_southeast_cheer.png",
+  "manifest": {
+    "id": "fly_southeast_cheer",
+    "source": "fly_southeast_cheer.png",
+    "description": "southeast airborne cheer reaction with raised fist",
+    "facing": "southeast",
+    "locomotion": "flying",
+    "actions": ["reaction", "cheer"],
+    "phase": null,
+    "generation_rows": 96,
+    "tags": ["southeast", "flying", "airborne", "cheer", "raised_fist", "reaction", "staff_held", "wings"],
+    "anchor_offsets": {
+      "root": [0, 0],
+      "mouth": [3, -61],
+      "left_eye": [-2, -70],
+      "right_eye": [8, -69],
+      "left_foot": [-7, -10],
+      "right_foot": [6, -6],
+      "left_hand": [-14, -71],
+      "right_hand": [20, -53],
+      "staff_hand": [20, -53],
+      "staff_tip": [26, -90]
+    }
+  }
+}

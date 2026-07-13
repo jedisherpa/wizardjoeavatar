@@ -1,0 +1,65 @@
+{
+  "candidate_id": "WJP2-10",
+  "semantic_id": "front_victory_cast",
+  "source_path": "evidence/pose-library-expansion/intake/poses2/ChatGPT Image Jul 12, 2026, 08_03_23 PM (10).png",
+  "destination_filename": "front_victory_cast.png",
+  "manifest": {
+    "id": "front_victory_cast",
+    "source": "front_victory_cast.png",
+    "description": "front victory or cast peak with both arms raised",
+    "facing": "south",
+    "locomotion": "idle",
+    "actions": [
+      "magic_cast",
+      "reaction"
+    ],
+    "phase": null,
+    "generation_rows": 96,
+    "tags": [
+      "front",
+      "upper_body",
+      "victory",
+      "staff_raised",
+      "arms_up",
+      "wings"
+    ],
+    "anchor_offsets": {
+      "mouth": [
+        0,
+        -59
+      ],
+      "left_eye": [
+        -5,
+        -64
+      ],
+      "right_eye": [
+        5,
+        -64
+      ],
+      "left_foot": [
+        -8,
+        -1
+      ],
+      "right_foot": [
+        11,
+        -1
+      ],
+      "left_hand": [
+        -18,
+        -63
+      ],
+      "right_hand": [
+        19,
+        -64
+      ],
+      "staff_hand": [
+        19,
+        -64
+      ],
+      "staff_tip": [
+        19,
+        -90
+      ]
+    }
+  }
+}

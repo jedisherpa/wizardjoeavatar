@@ -27,8 +27,8 @@ body {
 }
 
 #wizard-canvas {
-  width: min(100vw, calc(100vh * 16 / 9));
-  height: min(100vh, calc(100vw * 9 / 16));
+  max-width: 100vw;
+  max-height: 100vh;
   display: block;
   image-rendering: -webkit-optimize-contrast;
   image-rendering: crisp-edges;
@@ -37,13 +37,7 @@ body {
 }
 
 #wizard-selection {
-  position: absolute;
-  inset: 0;
-  color: transparent;
-  pointer-events: none;
-  user-select: text;
-  white-space: pre;
-  margin: 0;
+  display: none;
 }
 
 .diagnostics {

@@ -1,0 +1,64 @@
+{
+  "candidate_id": "WJP2-09",
+  "semantic_id": "front_crouch_reaction_staff_planted",
+  "source_path": "evidence/pose-library-expansion/intake/poses2/ChatGPT Image Jul 12, 2026, 08_03_23 PM (9).png",
+  "destination_filename": "front_crouch_reaction_staff_planted.png",
+  "manifest": {
+    "id": "front_crouch_reaction_staff_planted",
+    "source": "front_crouch_reaction_staff_planted.png",
+    "description": "front crouch reaction with planted staff and low ready silhouette",
+    "facing": "south",
+    "locomotion": "idle",
+    "actions": [
+      "reaction"
+    ],
+    "phase": null,
+    "generation_rows": 68,
+    "tags": [
+      "front",
+      "crouch",
+      "reaction",
+      "staff_planted",
+      "low_pose",
+      "wings"
+    ],
+    "anchor_offsets": {
+      "mouth": [
+        2,
+        -44
+      ],
+      "left_eye": [
+        -3,
+        -51
+      ],
+      "right_eye": [
+        6,
+        -51
+      ],
+      "left_foot": [
+        -14,
+        -1
+      ],
+      "right_foot": [
+        9,
+        -1
+      ],
+      "left_hand": [
+        -12,
+        -32
+      ],
+      "right_hand": [
+        22,
+        -30
+      ],
+      "staff_hand": [
+        22,
+        -30
+      ],
+      "staff_tip": [
+        28,
+        -66
+      ]
+    }
+  }
+}

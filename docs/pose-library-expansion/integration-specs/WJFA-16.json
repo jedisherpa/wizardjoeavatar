@@ -1,0 +1,70 @@
+{
+  "candidate_id": "WJFA-16",
+  "semantic_id": "front_staff_block_horizontal",
+  "source_path": "evidence/pose-library-expansion/intake/flying-action/ChatGPT Image Jul 12, 2026, 08_15_42 PM (6).png",
+  "destination_filename": "front_staff_block_horizontal.png",
+  "manifest": {
+    "id": "front_staff_block_horizontal",
+    "source": "front_staff_block_horizontal.png",
+    "description": "front defensive guard pose with wide stance and staff held horizontally across the body",
+    "facing": "south",
+    "locomotion": "idle",
+    "actions": [
+      "block",
+      "guard",
+      "staff_ready"
+    ],
+    "phase": null,
+    "generation_rows": 75,
+    "tags": [
+      "front",
+      "defense",
+      "block",
+      "staff_horizontal",
+      "wide_stance",
+      "wings"
+    ],
+    "anchor_offsets": {
+      "root": [
+        0,
+        0
+      ],
+      "mouth": [
+        0,
+        -47
+      ],
+      "left_eye": [
+        -5,
+        -51
+      ],
+      "right_eye": [
+        6,
+        -51
+      ],
+      "left_foot": [
+        -14,
+        -1
+      ],
+      "right_foot": [
+        19,
+        -1
+      ],
+      "left_hand": [
+        -19,
+        -37
+      ],
+      "right_hand": [
+        8,
+        -40
+      ],
+      "staff_hand": [
+        -19,
+        -37
+      ],
+      "staff_tip": [
+        33,
+        -42
+      ]
+    }
+  }
+}

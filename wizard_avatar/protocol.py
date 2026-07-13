@@ -58,6 +58,10 @@ def _full_frame(frame: bytes, frame_index: int, cell_bytes: int = CELL_BYTES) ->
     return EncodedFrame(message, frame, tag, len(frame) // cell_bytes, len(message), len(frame), True)
 
 
+def encode_keyframe(frame: bytes, frame_index: int, cell_bytes: int = CELL_BYTES) -> EncodedFrame:
+    return _full_frame(frame, frame_index, cell_bytes)
+
+
 def encode_frame(
     frame: bytes,
     prev: Optional[bytes],

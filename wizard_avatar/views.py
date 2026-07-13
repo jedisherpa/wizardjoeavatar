@@ -69,3 +69,18 @@ def rotate_direction(direction: str, steps: int) -> str:
     order = ["south", "southwest", "west", "northwest", "north", "northeast", "east", "southeast"]
     idx = order.index(direction)
     return order[(idx + steps) % len(order)]
+
+
+def step_direction_towards(current: str, target: str) -> str:
+    order = ["south", "southwest", "west", "northwest", "north", "northeast", "east", "southeast"]
+    if current not in order or target not in order:
+        return target
+    current_idx = order.index(current)
+    target_idx = order.index(target)
+    clockwise = (target_idx - current_idx) % len(order)
+    counter_clockwise = (current_idx - target_idx) % len(order)
+    if clockwise == 0:
+        return current
+    if clockwise <= counter_clockwise:
+        return order[(current_idx + 1) % len(order)]
+    return order[(current_idx - 1) % len(order)]

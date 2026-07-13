@@ -1,0 +1,25 @@
+{
+  "candidate_id": "WJFA-09",
+  "semantic_id": "fly_southeast_staff_forward",
+  "source_path": "evidence/pose-library-expansion/WJFA-09/source-preview.png",
+  "generator_parameters": {
+    "margin": 18,
+    "threshold": 30.0,
+    "coverage_threshold": 24,
+    "colors": 64
+  },
+  "result": {
+    "generation_rows": 71,
+    "raw_cols": 72,
+    "raw_root_anchor": [36, 70],
+    "cells": 2138,
+    "source_size": [1122, 1402],
+    "source_crop": [58, 227, 1087, 1241],
+    "crop_width": 1030,
+    "crop_height": 1015,
+    "first_invalid_above": {
+      "generation_rows": 72,
+      "raw_cols": 73
+    }
+  }
+}

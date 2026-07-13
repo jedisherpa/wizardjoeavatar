@@ -10,6 +10,7 @@ POST /api/avatar/wizard/path
 POST /api/avatar/wizard/circle
 POST /api/avatar/wizard/face
 POST /api/avatar/wizard/action
+POST /api/avatar/wizard/pose
 POST /api/avatar/wizard/expression
 POST /api/avatar/wizard/speak
 POST /api/avatar/wizard/stop
@@ -46,6 +47,17 @@ Action request:
   "duration_ms": 2400
 }
 ```
+
+Timed pose-showcase request:
+
+```json
+{
+  "pose_id": "front_idle",
+  "duration_ms": 900
+}
+```
+
+The pose ID must exist in the generated reference library. Passing `null` clears the showcase override. This channel changes presentation pose only; locomotion continues so the automated demo can move while cycling the full library.
 
 Validate all values.
 

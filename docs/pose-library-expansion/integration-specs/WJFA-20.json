@@ -1,0 +1,71 @@
+{
+  "candidate_id": "WJFA-20",
+  "semantic_id": "front_staff_spin_flourish",
+  "source_path": "evidence/pose-library-expansion/intake/flying-action/ChatGPT Image Jul 12, 2026, 08_15_42 PM (10).png",
+  "destination_filename": "front_staff_spin_flourish.png",
+  "manifest": {
+    "id": "front_staff_spin_flourish",
+    "source": "front_staff_spin_flourish.png",
+    "description": "front staff-spin flourish with visible motion arc, open presenting hand, and stepping stance",
+    "facing": "south",
+    "locomotion": "idle",
+    "actions": [
+      "staff_spin",
+      "flourish",
+      "magic_cast"
+    ],
+    "phase": null,
+    "generation_rows": 75,
+    "tags": [
+      "front",
+      "staff_spin",
+      "flourish",
+      "motion_arc",
+      "open_hand",
+      "wings",
+      "high_fit_risk"
+    ],
+    "anchor_offsets": {
+      "root": [
+        0,
+        0
+      ],
+      "mouth": [
+        0,
+        -47
+      ],
+      "left_eye": [
+        -5,
+        -51
+      ],
+      "right_eye": [
+        6,
+        -51
+      ],
+      "left_foot": [
+        -11,
+        -1
+      ],
+      "right_foot": [
+        22,
+        -1
+      ],
+      "left_hand": [
+        26,
+        -44
+      ],
+      "right_hand": [
+        -13,
+        -45
+      ],
+      "staff_hand": [
+        -13,
+        -45
+      ],
+      "staff_tip": [
+        -26,
+        -65
+      ]
+    }
+  }
+}

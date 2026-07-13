@@ -55,6 +55,18 @@ python3 tools/generate_reference_avatar_cells.py
 That produces `wizard_avatar/definitions/reference_avatar_cells.json`, which the
 live frame source uses instead of reading the PNG at runtime.
 
+The expanded reference motion range is generated from the pose copies in
+`assets/reference/motion_sources/`:
+
+```bash
+python3 tools/generate_reference_avatar_pose_cells.py
+```
+
+That reads `assets/reference/motion_sources/manifest.json` and produces
+`wizard_avatar/definitions/reference_avatar_pose_cells.json`, a repeatable
+square-cell pose library for front, side, back, walking, explaining, and magic
+cast states.
+
 Run locally:
 
 ```bash

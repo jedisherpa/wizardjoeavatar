@@ -1,0 +1,62 @@
+{
+  "program_id": "wizardjoe-cartoon-animation-2026-07-12",
+  "baseline": {
+    "branch": "codex/build-repeatable-avatar-animation",
+    "python_url": "http://127.0.0.1:8765/",
+    "production_pose_count": 39,
+    "generated_library_sha256": "1200e2891902cd1f3147d2c2d298dd2d99313708fbc8e90034376500e1843037"
+  },
+  "production_architecture": "asciline_python",
+  "rust_policy": "historical_side_track_not_a_production_dependency_or_gate",
+  "phase": "coordinated_planning",
+  "planning_checkpoint": {
+    "commit": null,
+    "pushed": false
+  },
+  "implementation_checkpoint": {
+    "commit": null,
+    "pushed": false
+  },
+  "roles": {
+    "FPSE": {
+      "agent_id": "019f59da-1633-7992-a984-47947a2f571a",
+      "research_status": "complete",
+      "planning_status": "complete",
+      "research_file": "research/01-first-principles-software.md",
+      "planning_file": "planning/01-first-principles-plan.md"
+    },
+    "ANIM": {
+      "agent_id": "019f59da-1e70-7c43-a292-02a8111eb657",
+      "research_status": "complete",
+      "planning_status": "complete",
+      "research_file": "research/02-game-animation-motion.md",
+      "planning_file": "planning/02-animation-plan.md"
+    },
+    "RUST": {
+      "agent_id": "019f59da-1a77-7900-bf2e-53731ad254f6",
+      "research_status": "complete",
+      "planning_status": "complete",
+      "research_file": "research/03-rust-runtime.md",
+      "planning_file": "planning/03-rust-plan.md"
+    },
+    "PLAN": {
+      "agent_id": "019f59da-227f-7f80-a968-d162a62aa2a1",
+      "research_status": "complete",
+      "planning_status": "complete",
+      "research_file": "research/04-project-delivery.md",
+      "planning_file": "planning/04-workflow-plan.md"
+    },
+    "PRSM": {
+      "agent_id": "019f5a11-0f8a-7490-87b5-523ead224d88",
+      "research_status": "complete",
+      "planning_status": "signal_report",
+      "research_file": "research/05-prism-runtime-signals.md"
+    },
+    "PERS": {
+      "agent_id": "019f5a11-139c-7370-b623-eafb46f28b11",
+      "research_status": "complete",
+      "planning_status": "signal_report",
+      "research_file": "research/06-persona-memory-governance-signals.md"
+    }
+  }
+}

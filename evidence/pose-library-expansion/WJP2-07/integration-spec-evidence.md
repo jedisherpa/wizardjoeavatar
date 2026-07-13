@@ -1,0 +1,7 @@
+# WJP2-07 Integration Spec Evidence
+
+- Spec: `docs/pose-library-expansion/integration-specs/WJP2-07.json`
+- Generator command basis: `tools/generate_reference_avatar_cells.py` via its `generate()` function, temp output only.
+- Raw 96-row generation: `74 x 96`, crop `[56, 49, 1018, 1302]`, root `[37, 95]`.
+- Selected `generation_rows`: `94`; verified raw cols `72 <= 72`.
+- Anchor decision: scaled item-record root-relative estimates by `94 / 96` because downscale was required.

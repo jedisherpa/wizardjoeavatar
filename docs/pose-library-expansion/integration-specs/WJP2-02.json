@@ -1,0 +1,64 @@
+{
+  "candidate_id": "WJP2-02",
+  "semantic_id": "run_front_airborne_drive",
+  "source_path": "evidence/pose-library-expansion/intake/poses2/ChatGPT Image Jul 12, 2026, 08_03_21 PM (2).png",
+  "destination_filename": "run_front_airborne_drive.png",
+  "manifest": {
+    "id": "run_front_airborne_drive",
+    "source": "run_front_airborne_drive.png",
+    "description": "front airborne run stride with compact free-arm drive",
+    "facing": "south",
+    "locomotion": "running",
+    "actions": [
+      "running"
+    ],
+    "phase": 0.5,
+    "generation_rows": 96,
+    "tags": [
+      "front_family",
+      "run",
+      "airborne",
+      "left_arm_drive",
+      "staff_held",
+      "wings"
+    ],
+    "anchor_offsets": {
+      "mouth": [
+        6,
+        -65
+      ],
+      "left_eye": [
+        3,
+        -72
+      ],
+      "right_eye": [
+        9,
+        -72
+      ],
+      "left_foot": [
+        -11,
+        -16
+      ],
+      "right_foot": [
+        11,
+        -6
+      ],
+      "left_hand": [
+        -2,
+        -51
+      ],
+      "right_hand": [
+        25,
+        -52
+      ],
+      "staff_hand": [
+        25,
+        -52
+      ],
+      "staff_tip": [
+        28,
+        -87
+      ]
+    }
+  }
+}

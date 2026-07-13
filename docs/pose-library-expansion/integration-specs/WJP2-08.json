@@ -1,0 +1,64 @@
+{
+  "candidate_id": "WJP2-08",
+  "semantic_id": "walk_front_right_lift",
+  "source_path": "evidence/pose-library-expansion/intake/poses2/ChatGPT Image Jul 12, 2026, 08_03_23 PM (8).png",
+  "destination_filename": "walk_front_right_lift.png",
+  "manifest": {
+    "id": "walk_front_right_lift",
+    "source": "walk_front_right_lift.png",
+    "description": "front-family walk passing pose with screen-right boot lifted and staff centered",
+    "facing": "southeast",
+    "locomotion": "walking",
+    "actions": [
+      "walking"
+    ],
+    "phase": 0.75,
+    "generation_rows": 94,
+    "tags": [
+      "front_family",
+      "walk",
+      "right_foot_lift",
+      "passing",
+      "staff_center",
+      "wings"
+    ],
+    "anchor_offsets": {
+      "mouth": [
+        0,
+        -59
+      ],
+      "left_eye": [
+        -5,
+        -64
+      ],
+      "right_eye": [
+        5,
+        -64
+      ],
+      "left_foot": [
+        -7,
+        -1
+      ],
+      "right_foot": [
+        15,
+        -3
+      ],
+      "left_hand": [
+        -2,
+        -43
+      ],
+      "right_hand": [
+        20,
+        -44
+      ],
+      "staff_hand": [
+        -2,
+        -44
+      ],
+      "staff_tip": [
+        13,
+        -80
+      ]
+    }
+  }
+}

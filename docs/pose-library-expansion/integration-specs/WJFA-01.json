@@ -1,0 +1,29 @@
+{
+  "candidate_id": "WJFA-01",
+  "semantic_id": "fly_front_hover_neutral",
+  "source_path": "evidence/pose-library-expansion/WJFA-01/source-preview.png",
+  "destination_filename": "fly_front_hover_neutral.png",
+  "manifest": {
+    "id": "fly_front_hover_neutral",
+    "source": "fly_front_hover_neutral.png",
+    "description": "front airborne hover with staff held and wings spread",
+    "facing": "south",
+    "locomotion": "flying",
+    "actions": ["idle", "hover"],
+    "phase": null,
+    "generation_rows": 91,
+    "tags": ["front", "flying", "hover", "airborne", "staff_held", "wings"],
+    "anchor_offsets": {
+      "root": [0, 0],
+      "mouth": [0, -60],
+      "left_eye": [-5, -70],
+      "right_eye": [5, -70],
+      "left_foot": [-6, -9],
+      "right_foot": [6, -9],
+      "left_hand": [-15, -38],
+      "right_hand": [19, -43],
+      "staff_hand": [19, -43],
+      "staff_tip": [26, -82]
+    }
+  }
+}

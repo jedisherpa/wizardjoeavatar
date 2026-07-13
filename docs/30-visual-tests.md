@@ -44,6 +44,6 @@ Golden frames must verify:
 - robe trim
 - staff attachment
 - no clipping
-- no wings
+- stable rainbow wings on winged poses, with no detached cells or unapproved disappearance
 - white background
 - faint floor

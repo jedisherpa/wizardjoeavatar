@@ -51,12 +51,16 @@ class VisualContractTests(unittest.TestCase):
         self.assertGreaterEqual(min_y, 15)
         self.assertLessEqual(max_y, frame.rows - 6)
 
-    def test_reference_avatar_uses_plain_white_png_background(self):
+    def test_reference_avatar_uses_fixed_white_background_with_faint_floor(self):
         source = ProceduralWizardFrameSource()
         frame = source.render_next_frame()
-        sample_index = (100 * frame.cols + 10) * 4
-        self.assertEqual(frame.cells[sample_index], 32)
-        self.assertEqual(tuple(frame.cells[sample_index + 1 : sample_index + 4]), (255, 255, 255))
+        upper_sample_index = (10 * frame.cols + 10) * 4
+        self.assertEqual(frame.cells[upper_sample_index], 32)
+        self.assertEqual(tuple(frame.cells[upper_sample_index + 1 : upper_sample_index + 4]), (255, 255, 255))
+
+        floor_sample_index = (100 * frame.cols + 10) * 4
+        floor_rgb = tuple(frame.cells[floor_sample_index + 1 : floor_sample_index + 4])
+        self.assertGreaterEqual(min(floor_rgb), 235)
 
 
 if __name__ == "__main__":

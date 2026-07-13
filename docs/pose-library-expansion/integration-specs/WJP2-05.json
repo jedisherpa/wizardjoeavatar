@@ -1,0 +1,66 @@
+{
+  "candidate_id": "WJP2-05",
+  "semantic_id": "front_kneel_staff_brace",
+  "source_path": "evidence/pose-library-expansion/intake/poses2/ChatGPT Image Jul 12, 2026, 08_03_22 PM (5).png",
+  "destination_filename": "front_kneel_staff_brace.png",
+  "manifest": {
+    "id": "front_kneel_staff_brace",
+    "source": "front_kneel_staff_brace.png",
+    "description": "front kneel brace pose with planted staff and low free hand",
+    "facing": "south",
+    "locomotion": "kneel",
+    "actions": [
+      "reaction",
+      "brace"
+    ],
+    "phase": null,
+    "generation_rows": 73,
+    "tags": [
+      "front",
+      "kneel",
+      "brace",
+      "reaction",
+      "staff_planted",
+      "low_pose",
+      "wings"
+    ],
+    "anchor_offsets": {
+      "mouth": [
+        0,
+        -44
+      ],
+      "left_eye": [
+        -4,
+        -52
+      ],
+      "right_eye": [
+        4,
+        -52
+      ],
+      "left_foot": [
+        -10,
+        -2
+      ],
+      "right_foot": [
+        10,
+        -1
+      ],
+      "left_hand": [
+        -14,
+        -24
+      ],
+      "right_hand": [
+        17,
+        -31
+      ],
+      "staff_hand": [
+        17,
+        -31
+      ],
+      "staff_tip": [
+        23,
+        -59
+      ]
+    }
+  }
+}
