@@ -14,7 +14,7 @@ Last coordinator update: 2026-07-13
 | Planning checkpoint | COMPLETE | Pushed `50948b907ad35ec8ca604d6c39a63b4317ac3da7` |
 | Rust branch | ACTIVE | `codex/rust-chatbot-animation-engine` in `jedisherpa/wizardjoeavatar` |
 | Contract implementation | COMPLETE | C0 PASS at `1775941e76c2bec0f54f44349d9b6f304d2bce1b`; 29 contract, 3 release-registry, and 30 workflow-validator tests pass |
-| Runtime and motion engines | IN_PROGRESS | `RCHAT-RUN-020` and `RCHAT-ANIM-020..030` accepted; integer hub wiring verified at `e2b0cd7` |
+| Runtime and motion engines | IN_PROGRESS | Ordered inbox `RCHAT-RUN-030` and deterministic clip evaluator `RCHAT-ANIM-040` accepted and merged at `8084b82`; parent R1/A1 gates remain open |
 | Serial integration | PLANNED | Blocked on engine handoffs |
 | QA foundation | COMPLETE | Q0 PASS at `ea0f3d7c0ae4202e565feb4b811011473862dfe2`; evidence writer, scope checker, CI, and honest browser harness |
 | Exhaustive QA | PLANNED | Per-frame live capture remains blocked on the integrated profile |
@@ -24,8 +24,8 @@ Last coordinator update: 2026-07-13
 
 | Role | Agent | Research | Planning | Next accountability |
 |---|---|---|---|---|
-| RUNTIME | Epicurus (`019f5c84-aca4-7953-b8ac-23a395e7268b`) | COMPLETE | COMPLETE | `RCHAT-RUN-020` accepted at `10cef30`; next owner unit is ordered inbox/idempotency |
-| MOTION | Singer (`019f5c84-b193-7f70-83ff-e0c7e33edd51`) | COMPLETE | COMPLETE | `RCHAT-ANIM-020..030` accepted at `c43257a`; next owner unit is deterministic clip evaluation |
+| RUNTIME | Epicurus (`019f5c84-aca4-7953-b8ac-23a395e7268b`) | COMPLETE | COMPLETE | `RCHAT-RUN-030` accepted at `e8129d0`; next owner unit is typed orthogonal state regions |
+| MOTION | Singer (`019f5c84-b193-7f70-83ff-e0c7e33edd51`) | COMPLETE | COMPLETE | `RCHAT-ANIM-040` accepted at `6f9ff0e`; next owner unit is transition recipe evaluation |
 | FLOW | Lagrange (`019f5c84-b630-7053-b560-cab55fb3ba11`) | COMPLETE | COMPLETE | `RCHAT-FLOW-060` accepted; Q0 passed with 39 validator, 7 release, and 22 browser contract tests |
 | INT | Coordinator | COMPLETE | COMPLETE | Integer clock wired into production hub at `e2b0cd7`; 36 focused integration tests pass |
 
@@ -57,6 +57,9 @@ Last coordinator update: 2026-07-13
 | 2026-07-13 | C0 accepted only after clean-candidate and rollback builds | The pushed result and its rollback SHA both compile independently of the dirty coordinator worktree |
 | 2026-07-13 | Browser tooling cannot manufacture a pass | Missing Chromium is `SKIP/77` or `FAIL/2`; live capture remains required at the later QA gate |
 | 2026-07-13 | Curated pose contact sheets are committed evidence | Fresh Rust checkouts must pass source-presence and hash validation without local-only files |
+| 2026-07-13 | Cache identity includes ingress authority | A public request can never reuse a trusted diagnostic acknowledgement, or vice versa |
+| 2026-07-13 | Inbox event identifiers are epoch-scoped hashes | Bounded telemetry remains useful for replay diagnostics without retaining raw source or command IDs |
+| 2026-07-13 | Clip exits are explicit integer-tick contracts | Once, repeat, and marked-segment playback cannot tear or silently skip lifecycle boundaries |
 
 ## Current blockers
 
@@ -70,14 +73,22 @@ the live material registry audit. The rollback candidate at
 check from a detached clean worktree.
 
 R1 and A1 remain open until their complete required-child sets are implemented,
-reviewed, and verified. Q0 supplies the harness for those later gates but does
-not claim that live per-frame browser capture has occurred.
+reviewed, and verified. `RCHAT-RUN-030` passed 21 focused tests and a two-path
+scope audit. `RCHAT-ANIM-040` passed 27 focused tests and a two-path scope audit.
+Both candidates passed formatting and warning-free clippy checks before merge at
+`8084b82b1c822cddfd152a9b5ee2071d6a3706d9`.
+
+The last pushed baseline, `3aa78c1f650c1a5f51c7abe8f3e0823bd2fe3cfc`,
+passed all five GitHub Actions jobs. The current checkpoint is locally accepted;
+its fresh GitHub Actions result will be attached after this push. Q0 supplies the
+harness for later gates but does not claim that live per-frame browser capture
+has occurred.
 
 ## Next promotion
 
-1. Commit and push the accepted RUN-020 and ANIM-020..030 receipts without
-   staging unrelated Python or legacy work.
-2. Start `RCHAT-RUN-030` ordered inbox/idempotency and `RCHAT-ANIM-040`
-   deterministic clip evaluation in parallel.
+1. Push the accepted `RCHAT-RUN-030` and `RCHAT-ANIM-040` checkpoint without
+   staging unrelated Python, legacy, or generated preview work.
+2. Start `RCHAT-RUN-040` typed regions and `RCHAT-ANIM-041` transition recipe
+   evaluation as the next parallel owner units.
 3. Connect the Q0 evidence writer to real Rust source/decode/presentation frames
    before any browser capture can be promoted from foundation status.

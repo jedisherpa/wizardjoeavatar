@@ -3,7 +3,7 @@
   "schema": "wizardjoe-rchat-registry/v1",
   "program_id": "RCHAT",
   "branch": "codex/rust-chatbot-animation-engine",
-  "integration_head": "e2b0cd74d8f7356d6900138aad34654acf21a187",
+  "integration_head": "8084b82b1c822cddfd152a9b5ee2071d6a3706d9",
   "production_authority": "rust/wizard_avatar_engine",
   "planning_checkpoint": {
     "local_sha": "50948b907ad35ec8ca604d6c39a63b4317ac3da7",
@@ -742,7 +742,7 @@
         "MOTION",
         "FLOW"
       ],
-      "status": "PLANNED",
+      "status": "IN_PROGRESS",
       "weight": 3,
       "dependencies": [
         "RCHAT-FLOW-020",
@@ -778,9 +778,9 @@
       "required_locks": [
 
       ],
-      "base_sha": null,
+      "base_sha": "8084b82b1c822cddfd152a9b5ee2071d6a3706d9",
       "result_sha": null,
-      "started_at": null,
+      "started_at": "2026-07-13T21:32:11Z",
       "finished_at": null,
       "commands": [
 
@@ -806,7 +806,7 @@
         "RUNTIME",
         "FLOW"
       ],
-      "status": "PLANNED",
+      "status": "IN_PROGRESS",
       "weight": 3,
       "dependencies": [
         "RCHAT-FLOW-020",
@@ -862,9 +862,9 @@
       "required_locks": [
 
       ],
-      "base_sha": null,
+      "base_sha": "8084b82b1c822cddfd152a9b5ee2071d6a3706d9",
       "result_sha": null,
-      "started_at": null,
+      "started_at": "2026-07-13T21:32:11Z",
       "finished_at": null,
       "commands": [
 
@@ -1763,7 +1763,7 @@
         "MOTION",
         "FLOW"
       ],
-      "status": "PLANNED",
+      "status": "ACCEPTED",
       "weight": 0,
       "dependencies": [
         "RCHAT-RUN-010"
@@ -1785,30 +1785,45 @@
       "required_locks": [
 
       ],
-      "base_sha": null,
-      "result_sha": null,
-      "started_at": null,
-      "finished_at": null,
+      "base_sha": "3aa78c1f650c1a5f51c7abe8f3e0823bd2fe3cfc",
+      "result_sha": "e8129d0200ad10660e3f1ba4546408f5d5e614af",
+      "started_at": "2026-07-13T21:32:11Z",
+      "finished_at": "2026-07-13T22:31:27Z",
       "commands": [
-
+        {"command":"cargo fmt --manifest-path rust/wizard_avatar_engine/Cargo.toml --all -- --check","exit_code":0,"duration_ms":100},
+        {"command":"cargo test --locked --manifest-path rust/wizard_avatar_engine/Cargo.toml --test chat_inbox --test command_ordering","exit_code":0,"duration_ms":1640},
+        {"command":"cargo clippy --locked --manifest-path rust/wizard_avatar_engine/Cargo.toml --test chat_inbox -- -D warnings","exit_code":0,"duration_ms":12660},
+        {"command":"cargo run --quiet --manifest-path tools/rchat/Cargo.toml -- scope docs/cartoon-animation-program/rust-chatbot/registry.json RCHAT-RUN-030 --base 3aa78c1f650c1a5f51c7abe8f3e0823bd2fe3cfc --head e8129d0200ad10660e3f1ba4546408f5d5e614af --committed-only","exit_code":0,"duration_ms":700}
       ],
       "evidence": [
-
+        {"path":"rust/wizard_avatar_engine/src/chat_inbox.rs","sha256":"cf60be2a72dd9d75d670034d2d72bee86cb4b4c79ac2eaee64f480d5b4bd9129","artifact_url":null},
+        {"path":"rust/wizard_avatar_engine/tests/chat_inbox.rs","sha256":"a7960a270bddedfa0f5883c2ae3d6aec098d68d782361a1954aabf87ce878703","artifact_url":null}
       ],
       "metrics": {
         "progress_earning": false,
-        "parent_weight_authoritative": true
+        "parent_weight_authoritative": true,
+        "tests_passed": 21,
+        "tests_failed": 0,
+        "randomized_envelopes_replayed": 10000,
+        "same_tick_envelopes_sorted": 10000,
+        "duplicate_retries_verified": 100,
+        "pending_capacity": 1024,
+        "terminal_ack_capacity": 8192,
+        "authority_cache_bypass_regressions": 2,
+        "raw_identifiers_in_event_ring": 0,
+        "scope_paths_verified": 2,
+        "independent_review_acceptances": 2
       },
       "rollback": {
-        "sha": null,
+        "sha": "3aa78c1f650c1a5f51c7abe8f3e0823bd2fe3cfc",
         "profile": "legacy-runtime",
-        "verified": false,
+        "verified": true,
         "strategy": "restore_parent_profile_and_reopen_item",
         "instruction": "Disable versioned ingress and retain the last verified legacy adapter.",
         "downgrade_allowed": false
       },
       "blocker": null,
-      "handoff_id": null,
+      "handoff_id": "RUN-030-e8129d0",
       "detail_source": "planning/01-rust-runtime-plan.md"
     },
     {
@@ -3096,7 +3111,7 @@
         "RUNTIME",
         "FLOW"
       ],
-      "status": "PLANNED",
+      "status": "ACCEPTED",
       "weight": 0,
       "dependencies": [
         "RCHAT-ANIM-030"
@@ -3113,30 +3128,43 @@
       "required_locks": [
 
       ],
-      "base_sha": null,
-      "result_sha": null,
-      "started_at": null,
-      "finished_at": null,
+      "base_sha": "4fccbab7f4789c4b712853ccd2496347f3f1a559",
+      "result_sha": "6f9ff0e9ee176b6022e04f77e5f6b9a53055bfce",
+      "started_at": "2026-07-13T21:32:11Z",
+      "finished_at": "2026-07-13T22:31:27Z",
       "commands": [
-
+        {"command":"cargo fmt --manifest-path rust/wizard_avatar_engine/Cargo.toml --all -- --check","exit_code":0,"duration_ms":100},
+        {"command":"cargo test --locked --manifest-path rust/wizard_avatar_engine/Cargo.toml --test motion_director --test motion_catalog","exit_code":0,"duration_ms":1930},
+        {"command":"cargo clippy --locked --manifest-path rust/wizard_avatar_engine/Cargo.toml --test motion_director --test motion_catalog -- -D warnings","exit_code":0,"duration_ms":130},
+        {"command":"cargo run --quiet --manifest-path tools/rchat/Cargo.toml -- scope docs/cartoon-animation-program/rust-chatbot/registry.json RCHAT-ANIM-040 --base 4fccbab7f4789c4b712853ccd2496347f3f1a559 --head 6f9ff0e9ee176b6022e04f77e5f6b9a53055bfce --committed-only","exit_code":0,"duration_ms":700}
       ],
       "evidence": [
-
+        {"path":"rust/wizard_avatar_engine/src/motion_director.rs","sha256":"58be5f3fe0e840b15cefa875dcdbab9e31bb313e79d4a3a8b51f8d8848cb5e89","artifact_url":null},
+        {"path":"rust/wizard_avatar_engine/tests/motion_director.rs","sha256":"c250b12c3b2bb95fdf21f265696c316db0f488b9f95599d9e2562778ee03eab0","artifact_url":null}
       ],
       "metrics": {
         "progress_earning": false,
-        "parent_weight_authoritative": true
+        "parent_weight_authoritative": true,
+        "tests_passed": 27,
+        "tests_failed": 0,
+        "clip_evaluator_tests": 18,
+        "catalog_contract_tests": 9,
+        "loop_modes_verified": 3,
+        "once_exit_regressions": 2,
+        "integer_phase_sources": 4,
+        "scope_paths_verified": 2,
+        "independent_review_acceptances": 2
       },
       "rollback": {
-        "sha": null,
+        "sha": "4fccbab7f4789c4b712853ccd2496347f3f1a559",
         "profile": "legacy-motion",
-        "verified": false,
+        "verified": true,
         "strategy": "restore_parent_profile_and_reopen_item",
         "instruction": "graph shadow-only",
         "downgrade_allowed": false
       },
       "blocker": null,
-      "handoff_id": null,
+      "handoff_id": "ANIM-040-6f9ff0e",
       "detail_source": "planning/02-chat-animation-plan.md"
     },
     {
