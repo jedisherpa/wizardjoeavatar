@@ -233,8 +233,8 @@ pub struct InboxEventV1 {
     pub kind: InboxEventKind,
     pub runtime_epoch: RuntimeEpoch,
     pub source_kind: SourceKind,
-    pub source_id: SourceId,
-    pub command_id: CommandId,
+    pub source_id_hash64: u64,
+    pub command_id_hash64: u64,
     pub source_sequence: u64,
     pub server_sequence: Option<u64>,
     pub apply_tick: Option<u64>,
@@ -380,7 +380,7 @@ impl ChatInbox {
         increment(&mut self.counters.ingress_count);
         self.prune_terminal_acks(current_tick);
 
-        let request_fingerprint = match canonical_request_fingerprint(&request) {
+        let request_fingerprint = match canonical_request_fingerprint(&request, authority) {
             Ok(fingerprint) => fingerprint,
             Err(error) => {
                 return self.reject_uncached(
@@ -818,8 +818,16 @@ impl ChatInbox {
             kind: InboxEventKind::TerminalAckEvicted,
             runtime_epoch: entry.namespace.runtime_epoch,
             source_kind: entry.namespace.source_kind,
-            source_id: entry.namespace.source_id,
-            command_id: entry.ack.command_id,
+            source_id_hash64: event_identifier_hash64(
+                entry.namespace.runtime_epoch,
+                EventIdentifierDomain::Source,
+                entry.namespace.source_id.as_str(),
+            ),
+            command_id_hash64: event_identifier_hash64(
+                entry.namespace.runtime_epoch,
+                EventIdentifierDomain::Command,
+                entry.ack.command_id.as_str(),
+            ),
             source_sequence: entry.ack.source_sequence,
             server_sequence: entry.ack.server_sequence,
             apply_tick: entry.ack.apply_tick,
@@ -841,8 +849,16 @@ impl ChatInbox {
             kind,
             runtime_epoch: self.runtime_epoch,
             source_kind: request.source_kind,
-            source_id: request.source_id.clone(),
-            command_id: request.command_id.clone(),
+            source_id_hash64: event_identifier_hash64(
+                self.runtime_epoch,
+                EventIdentifierDomain::Source,
+                request.source_id.as_str(),
+            ),
+            command_id_hash64: event_identifier_hash64(
+                self.runtime_epoch,
+                EventIdentifierDomain::Command,
+                request.command_id.as_str(),
+            ),
             source_sequence: request.source_sequence,
             server_sequence: ack.server_sequence,
             apply_tick: ack.apply_tick,
@@ -872,8 +888,16 @@ impl ChatInbox {
             kind,
             runtime_epoch: self.runtime_epoch,
             source_kind: envelope.source_kind,
-            source_id: envelope.source_id.clone(),
-            command_id: envelope.command_id.clone(),
+            source_id_hash64: event_identifier_hash64(
+                self.runtime_epoch,
+                EventIdentifierDomain::Source,
+                envelope.source_id.as_str(),
+            ),
+            command_id_hash64: event_identifier_hash64(
+                self.runtime_epoch,
+                EventIdentifierDomain::Command,
+                envelope.command_id.as_str(),
+            ),
             source_sequence: envelope.source_sequence,
             server_sequence: Some(envelope.server_sequence),
             apply_tick: Some(envelope.apply_tick),
@@ -895,11 +919,54 @@ impl ChatInbox {
 
 fn canonical_request_fingerprint(
     request: &CommandRequestV1,
+    authority: IngressAuthority,
 ) -> Result<[u8; 32], CommandContractError> {
     let canonical = request.to_canonical_json().map_err(|_| {
         CommandContractError::new(CommandErrorCode::InvalidCommand, "command_request")
     })?;
-    Ok(Sha256::digest(canonical).into())
+    let mut hasher = Sha256::new();
+    hasher.update(b"wizard-avatar-command-request-v1\0");
+    hasher.update([ingress_authority_tag(authority)]);
+    hasher.update((canonical.len() as u64).to_be_bytes());
+    hasher.update(canonical);
+    Ok(hasher.finalize().into())
+}
+
+const fn ingress_authority_tag(authority: IngressAuthority) -> u8 {
+    match authority {
+        IngressAuthority::Trusted => 0,
+        IngressAuthority::Public => 1,
+    }
+}
+
+#[derive(Clone, Copy)]
+enum EventIdentifierDomain {
+    Source,
+    Command,
+}
+
+fn event_identifier_hash64(
+    runtime_epoch: RuntimeEpoch,
+    domain: EventIdentifierDomain,
+    identifier: &str,
+) -> u64 {
+    let domain = match domain {
+        EventIdentifierDomain::Source => b"source_id".as_slice(),
+        EventIdentifierDomain::Command => b"command_id".as_slice(),
+    };
+    let mut hasher = Sha256::new();
+    hasher.update(b"wizard-avatar-inbox-event-identifier-v1\0");
+    hasher.update(runtime_epoch.0.to_be_bytes());
+    hasher.update((domain.len() as u64).to_be_bytes());
+    hasher.update(domain);
+    hasher.update((identifier.len() as u64).to_be_bytes());
+    hasher.update(identifier.as_bytes());
+    let digest = hasher.finalize();
+    u64::from_be_bytes(
+        digest[..8]
+            .try_into()
+            .expect("SHA-256 prefix is eight bytes"),
+    )
 }
 
 fn rejection_for_contract_error(error: &CommandContractError) -> (AckStatus, CommandErrorCode) {
