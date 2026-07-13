@@ -19,7 +19,8 @@ export class WizardDiagnostics {
   }
 
   async refresh() {
-    const response = await fetch("/api/avatar/wizard/state");
+    const characterId = new URLSearchParams(location.search).get("character") || "wizard-joe-v1";
+    const response = await fetch(`/api/avatar/${encodeURIComponent(characterId)}/state`);
     if (!response.ok) return;
     const data = await response.json();
     const state = data.state;
@@ -47,6 +48,6 @@ export class WizardDiagnostics {
         lines.push(`cell ${browser.canvas.deviceCell}px  dpr ${browser.canvas.dpr.toFixed(2)}`);
       }
     }
-    this.element.textContent = lines.join("\\n");
+    this.element.textContent = lines.join("\n");
   }
 }

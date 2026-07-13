@@ -13,6 +13,8 @@ ACTION_TO_CHANNELS = {
     "pointing": ("point", "point"),
     "magic_cast": ("cast", "cast"),
     "reaction": ("react", "held"),
+    "celebrating": ("react", "held"),
+    "containment": ("think", "rest"),
 }
 
 

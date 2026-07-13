@@ -1,0 +1,83 @@
+{
+  "attachment_points": [
+    "mouth",
+    "left_eye",
+    "right_eye",
+    "left_hand",
+    "right_hand",
+    "left_foot",
+    "right_foot",
+    "left_wing_tip",
+    "right_wing_tip",
+    "tail_tip"
+  ],
+  "character_id": "crystail-v1",
+  "derivation": {
+    "approved_worksheets": "assets/reference/crystail/canonical-worksheets/",
+    "flattened_runtime_dependency": false,
+    "original_reference": "assets/reference/crystail/original-reference.png",
+    "runtime_art": "deterministic worksheet-derived direct cell library"
+  },
+  "display_name": "CrystAIl",
+  "hashes": {
+    "animation_graph_sha256": "8bef1484c40eb3c25ea4ac5744f78398b31e198eead3ed9a881f47e141678d8f",
+    "animation_matrix_sha256": "78c37482b5a1d9dbdb2e3445021a7438299bcdd6771551549c6804e6d6d89abb",
+    "original_reference_sha256": "ca4a5d93e89191d271768f2be0c298cbe68226858a47bf755863f1ed9362b585",
+    "pose_library_sha256": "e8061d25d7cc2be5fb9edeaec76e7d84e7fdb4ffe045c293d938552291d175d4",
+    "worksheet_sha256": {
+      "01-identity-sheet-candidate-v1.png": "616b3707ab6643cd0ec85fe8afaa0da42a6af0912fdd72fe210fa71d2c520c02",
+      "02-turnaround-sheet-candidate-v1.png": "57587d8558e836cefc25152bad94e66e4bea281abe0ceb53166e26d8b9cbbc69",
+      "03-neutral-base-poses-candidate-v1.png": "84c1a4e5db8e18c3496bf3537f7be68eb2b0e51fe70d3235bbfe1fd6af626477",
+      "04-expression-sheet-candidate-v1.png": "f73a8594211eb4995cf534e0ab74efa064448f876536d57ef71633b271ca39d8",
+      "05-articulation-sheet-candidate-v1.png": "09f06c78703bc97b04bd0a7f766c2822e525113d090806d01eb33edc407fa3b1",
+      "06-ground-motion-sheet-v1.png": "63f032a09697e64ece29a09574a79dec201ebc4625009ea2c4b7057029a8c041",
+      "07-flight-motion-sheet-v1.png": "03e1eb9ad59e2782001a363dffe1902928232b3b3faa4726bbf77ee6617535ab"
+    }
+  },
+  "identity_lock": {
+    "articulated": [
+      "jaw",
+      "brows",
+      "eyelids",
+      "neck",
+      "shoulders",
+      "elbows",
+      "wrists",
+      "digits",
+      "hips",
+      "knees",
+      "ankles",
+      "tail segments",
+      "wing roots and folds"
+    ],
+    "default_prop": null,
+    "femininity": "performance_only",
+    "folded_wings_keep_rainbow_bands": true,
+    "immutable": [
+      "voxel dragon silhouette",
+      "deep emerald body",
+      "cream segmented throat and belly",
+      "large rectangular head",
+      "long squared muzzle",
+      "paired stepped horns",
+      "tan rectangular eyes",
+      "four upper teeth",
+      "rainbow-banded wings with blue tips",
+      "two forward toes",
+      "three articulated hand digits",
+      "thick stepped tail"
+    ]
+  },
+  "origin": {
+    "baseline_y": 91,
+    "canvas": [
+      72,
+      96
+    ],
+    "root_anchor": [
+      36,
+      91
+    ]
+  },
+  "schema_version": 1
+}

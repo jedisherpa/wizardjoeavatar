@@ -2,6 +2,8 @@ import { frameHash, isKeyframeTag, makeDecoder, parseFrameHeader, TAG_DELTA } fr
 
 const DEFAULT_TARGET_FPS = 24;
 const JITTER_BUFFER_FRAMES = 2;
+export const activeCharacterId = new URLSearchParams(location.search).get("character") || "wizard-joe-v1";
+export const avatarApi = (resource) => `/api/avatar/${encodeURIComponent(activeCharacterId)}/${resource}`;
 
 export class WizardClient {
   constructor(canvasRenderer, diagnostics) {
@@ -60,7 +62,7 @@ export class WizardClient {
       this.reconnectTimer = null;
     }
     const protocol = location.protocol === "https:" ? "wss:" : "ws:";
-    this.ws = new WebSocket(`${protocol}//${location.host}/ws/avatar/wizard?codec=adaptive`);
+    this.ws = new WebSocket(`${protocol}//${location.host}/ws/avatar/${encodeURIComponent(activeCharacterId)}?codec=adaptive`);
     this.ws.binaryType = "arraybuffer";
     this.ws.onmessage = (event) => this.onMessage(event);
     this.ws.onopen = () => {
@@ -295,24 +297,8 @@ export class WizardClient {
 }
 
 export async function command(type, payload = {}) {
-  const routes = {
-    move: "/api/avatar/wizard/move",
-    path: "/api/avatar/wizard/path",
-    circle: "/api/avatar/wizard/circle",
-    face: "/api/avatar/wizard/face",
-    action: "/api/avatar/wizard/action",
-    pose: "/api/avatar/wizard/pose",
-    control: "/api/avatar/wizard/control",
-    prism_signal: "/api/avatar/wizard/prism-signal",
-    expression: "/api/avatar/wizard/expression",
-    speak: "/api/avatar/wizard/speak",
-    speech_stop: "/api/avatar/wizard/speech-stop",
-    stop: "/api/avatar/wizard/stop",
-    reset: "/api/avatar/wizard/reset",
-    figure_eight: "/api/avatar/wizard/figure-eight",
-  };
-  const route = routes[type];
-  if (!route) throw new Error(`Unknown command route ${type}`);
+  const routeNames = { prism_signal: "prism-signal", speech_stop: "speech-stop", figure_eight: "figure-eight" };
+  const route = avatarApi(routeNames[type] || type);
   const response = await fetch(route, {
     method: "POST",
     headers: { "Content-Type": "application/json" },

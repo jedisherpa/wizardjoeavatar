@@ -19,10 +19,9 @@ def main() -> None:
     sys.path.insert(0, str(root))
 
     import uvicorn
-    from wizard_avatar.frame_source import ProceduralWizardFrameSource
     from wizard_avatar.server import create_app
 
-    app = create_app(ProceduralWizardFrameSource(args.cols, args.rows, args.fps))
+    app = create_app(cols=args.cols, rows=args.rows, fps=args.fps)
     uvicorn.run(app, host=args.host, port=args.port)
 
 

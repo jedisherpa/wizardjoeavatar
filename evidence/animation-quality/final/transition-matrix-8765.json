@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-07-13T19:57:25.279681+00:00",
-  "branch": "codex/python-asciline-avatar",
-  "commit": "988b2315caaafff6a8db66270339123368c1cb76",
+  "generated_at": "2026-07-13T22:33:54.084723+00:00",
+  "branch": "codex/crystail-character",
+  "commit": "ea5c0b5f414713e8fd2cd8b5bd050a6868948482",
   "summary": {
     "scenario_count": 32,
     "passed_count": 32,
@@ -11380,7 +11380,7 @@
             "staff_state": "held",
             "expression": "neutral",
             "mouth": "open_small",
-            "speech_id": "speech-1783972625937",
+            "speech_id": "speech-1783982013758",
             "walk_phase": 0.6696078431372537,
             "pose_id": "profile_right",
             "pose_transition_progress": 1.0
@@ -11410,7 +11410,7 @@
             "staff_state": "held",
             "expression": "neutral",
             "mouth": "open_small",
-            "speech_id": "speech-1783972625937",
+            "speech_id": "speech-1783982013758",
             "walk_phase": 0.7431372549019594,
             "pose_id": "profile_right",
             "pose_transition_progress": 1.0
@@ -11440,7 +11440,7 @@
             "staff_state": "held",
             "expression": "neutral",
             "mouth": "open_small",
-            "speech_id": "speech-1783972625937",
+            "speech_id": "speech-1783982013758",
             "walk_phase": 0.7921568627450964,
             "pose_id": "profile_right",
             "pose_transition_progress": 1.0
@@ -11470,7 +11470,7 @@
             "staff_state": "held",
             "expression": "neutral",
             "mouth": "open_small",
-            "speech_id": "speech-1783972625937",
+            "speech_id": "speech-1783982013758",
             "walk_phase": 0.8656862745098021,
             "pose_id": "profile_right",
             "pose_transition_progress": 1.0
@@ -11500,7 +11500,7 @@
             "staff_state": "held",
             "expression": "neutral",
             "mouth": "open_small",
-            "speech_id": "speech-1783972625937",
+            "speech_id": "speech-1783982013758",
             "walk_phase": 0.9147058823529391,
             "pose_id": "profile_right",
             "pose_transition_progress": 1.0
@@ -11530,7 +11530,7 @@
             "staff_state": "held",
             "expression": "neutral",
             "mouth": "open_small",
-            "speech_id": "speech-1783972625937",
+            "speech_id": "speech-1783982013758",
             "walk_phase": 0.9882352941176448,
             "pose_id": "profile_right",
             "pose_transition_progress": 1.0
@@ -11560,7 +11560,7 @@
             "staff_state": "held",
             "expression": "neutral",
             "mouth": "open_small",
-            "speech_id": "speech-1783972625937",
+            "speech_id": "speech-1783982013758",
             "walk_phase": 0.03725490196078196,
             "pose_id": "profile_right",
             "pose_transition_progress": 1.0
@@ -11590,7 +11590,7 @@
             "staff_state": "held",
             "expression": "neutral",
             "mouth": "open_small",
-            "speech_id": "speech-1783972625937",
+            "speech_id": "speech-1783982013758",
             "walk_phase": 0.11078431372548758,
             "pose_id": "profile_right",
             "pose_transition_progress": 1.0
@@ -11620,7 +11620,7 @@
             "staff_state": "held",
             "expression": "neutral",
             "mouth": "open_small",
-            "speech_id": "speech-1783972625937",
+            "speech_id": "speech-1783982013758",
             "walk_phase": 0.15980392156862466,
             "pose_id": "profile_right",
             "pose_transition_progress": 1.0
@@ -11650,7 +11650,7 @@
             "staff_state": "held",
             "expression": "neutral",
             "mouth": "open_small",
-            "speech_id": "speech-1783972625937",
+            "speech_id": "speech-1783982013758",
             "walk_phase": 0.23333333333333028,
             "pose_id": "profile_right",
             "pose_transition_progress": 1.0
@@ -11680,7 +11680,7 @@
             "staff_state": "held",
             "expression": "neutral",
             "mouth": "open_small",
-            "speech_id": "speech-1783972625937",
+            "speech_id": "speech-1783982013758",
             "walk_phase": 0.28235294117646736,
             "pose_id": "profile_right",
             "pose_transition_progress": 1.0
@@ -11967,7 +11967,7 @@
             "staff_state": "held",
             "expression": "neutral",
             "mouth": "open_small",
-            "speech_id": "speech-1783972626601",
+            "speech_id": "speech-1783982014448",
             "walk_phase": 0.0,
             "pose_id": "front_idle",
             "pose_transition_progress": 1.0
@@ -11997,7 +11997,7 @@
             "staff_state": "held",
             "expression": "neutral",
             "mouth": "open_small",
-            "speech_id": "speech-1783972626601",
+            "speech_id": "speech-1783982014448",
             "walk_phase": 0.0,
             "pose_id": "front_idle",
             "pose_transition_progress": 1.0
@@ -12027,7 +12027,7 @@
             "staff_state": "held",
             "expression": "neutral",
             "mouth": "open_small",
-            "speech_id": "speech-1783972626601",
+            "speech_id": "speech-1783982014448",
             "walk_phase": 0.0,
             "pose_id": "front_idle",
             "pose_transition_progress": 1.0
@@ -12057,7 +12057,7 @@
             "staff_state": "held",
             "expression": "neutral",
             "mouth": "open_small",
-            "speech_id": "speech-1783972626601",
+            "speech_id": "speech-1783982014448",
             "walk_phase": 0.0,
             "pose_id": "front_idle",
             "pose_transition_progress": 1.0
@@ -12087,7 +12087,7 @@
             "staff_state": "held",
             "expression": "neutral",
             "mouth": "open_small",
-            "speech_id": "speech-1783972626601",
+            "speech_id": "speech-1783982014448",
             "walk_phase": 0.0,
             "pose_id": "front_idle",
             "pose_transition_progress": 1.0
@@ -12117,7 +12117,7 @@
             "staff_state": "held",
             "expression": "neutral",
             "mouth": "open_small",
-            "speech_id": "speech-1783972626601",
+            "speech_id": "speech-1783982014448",
             "walk_phase": 0.0,
             "pose_id": "front_idle",
             "pose_transition_progress": 1.0
@@ -12147,7 +12147,7 @@
             "staff_state": "held",
             "expression": "neutral",
             "mouth": "open_small",
-            "speech_id": "speech-1783972626601",
+            "speech_id": "speech-1783982014448",
             "walk_phase": 0.0,
             "pose_id": "front_idle",
             "pose_transition_progress": 1.0
@@ -12177,7 +12177,7 @@
             "staff_state": "held",
             "expression": "neutral",
             "mouth": "open_small",
-            "speech_id": "speech-1783972626601",
+            "speech_id": "speech-1783982014448",
             "walk_phase": 0.0,
             "pose_id": "front_idle",
             "pose_transition_progress": 1.0
@@ -12207,7 +12207,7 @@
             "staff_state": "held",
             "expression": "neutral",
             "mouth": "open_small",
-            "speech_id": "speech-1783972626601",
+            "speech_id": "speech-1783982014448",
             "walk_phase": 0.0,
             "pose_id": "front_idle",
             "pose_transition_progress": 1.0
@@ -12237,7 +12237,7 @@
             "staff_state": "held",
             "expression": "neutral",
             "mouth": "open_small",
-            "speech_id": "speech-1783972626601",
+            "speech_id": "speech-1783982014448",
             "walk_phase": 0.0,
             "pose_id": "front_idle",
             "pose_transition_progress": 1.0
@@ -12267,7 +12267,7 @@
             "staff_state": "held",
             "expression": "neutral",
             "mouth": "open_small",
-            "speech_id": "speech-1783972626601",
+            "speech_id": "speech-1783982014448",
             "walk_phase": 0.0,
             "pose_id": "front_idle",
             "pose_transition_progress": 1.0
@@ -12297,7 +12297,7 @@
             "staff_state": "held",
             "expression": "neutral",
             "mouth": "open_small",
-            "speech_id": "speech-1783972626601",
+            "speech_id": "speech-1783982014448",
             "walk_phase": 0.0,
             "pose_id": "front_idle",
             "pose_transition_progress": 1.0
@@ -12327,7 +12327,7 @@
             "staff_state": "held",
             "expression": "neutral",
             "mouth": "open_small",
-            "speech_id": "speech-1783972626601",
+            "speech_id": "speech-1783982014448",
             "walk_phase": 0.00392156862745098,
             "pose_id": "profile_right",
             "pose_transition_progress": 1.0
@@ -19868,7 +19868,7 @@
             "staff_state": "held",
             "expression": "neutral",
             "mouth": "open_small",
-            "speech_id": "speech-1783972634287",
+            "speech_id": "speech-1783982022585",
             "walk_phase": 0.0,
             "pose_id": "front_idle",
             "pose_transition_progress": 1.0
@@ -19898,7 +19898,7 @@
             "staff_state": "held",
             "expression": "neutral",
             "mouth": "open_small",
-            "speech_id": "speech-1783972634287",
+            "speech_id": "speech-1783982022585",
             "walk_phase": 0.0,
             "pose_id": "front_idle",
             "pose_transition_progress": 1.0
@@ -19928,7 +19928,7 @@
             "staff_state": "held",
             "expression": "neutral",
             "mouth": "open_small",
-            "speech_id": "speech-1783972634287",
+            "speech_id": "speech-1783982022585",
             "walk_phase": 0.0,
             "pose_id": "front_idle",
             "pose_transition_progress": 1.0
@@ -19958,7 +19958,7 @@
             "staff_state": "held",
             "expression": "neutral",
             "mouth": "open_small",
-            "speech_id": "speech-1783972634287",
+            "speech_id": "speech-1783982022585",
             "walk_phase": 0.0,
             "pose_id": "front_idle",
             "pose_transition_progress": 1.0
@@ -19988,7 +19988,7 @@
             "staff_state": "held",
             "expression": "neutral",
             "mouth": "open_small",
-            "speech_id": "speech-1783972634287",
+            "speech_id": "speech-1783982022585",
             "walk_phase": 0.0,
             "pose_id": "front_idle",
             "pose_transition_progress": 1.0
@@ -20018,7 +20018,7 @@
             "staff_state": "held",
             "expression": "neutral",
             "mouth": "open_small",
-            "speech_id": "speech-1783972634287",
+            "speech_id": "speech-1783982022585",
             "walk_phase": 0.0,
             "pose_id": "front_idle",
             "pose_transition_progress": 1.0
@@ -20048,7 +20048,7 @@
             "staff_state": "held",
             "expression": "neutral",
             "mouth": "open_small",
-            "speech_id": "speech-1783972634287",
+            "speech_id": "speech-1783982022585",
             "walk_phase": 0.0,
             "pose_id": "front_idle",
             "pose_transition_progress": 1.0
@@ -20078,7 +20078,7 @@
             "staff_state": "held",
             "expression": "neutral",
             "mouth": "open_small",
-            "speech_id": "speech-1783972634287",
+            "speech_id": "speech-1783982022585",
             "walk_phase": 0.0,
             "pose_id": "front_idle",
             "pose_transition_progress": 1.0
@@ -20108,7 +20108,7 @@
             "staff_state": "held",
             "expression": "neutral",
             "mouth": "open_small",
-            "speech_id": "speech-1783972634287",
+            "speech_id": "speech-1783982022585",
             "walk_phase": 0.0,
             "pose_id": "front_idle",
             "pose_transition_progress": 1.0
@@ -20138,7 +20138,7 @@
             "staff_state": "held",
             "expression": "neutral",
             "mouth": "open_small",
-            "speech_id": "speech-1783972634287",
+            "speech_id": "speech-1783982022585",
             "walk_phase": 0.0,
             "pose_id": "front_idle",
             "pose_transition_progress": 1.0
@@ -20168,7 +20168,7 @@
             "staff_state": "held",
             "expression": "neutral",
             "mouth": "open_small",
-            "speech_id": "speech-1783972634287",
+            "speech_id": "speech-1783982022585",
             "walk_phase": 0.0,
             "pose_id": "front_idle",
             "pose_transition_progress": 1.0
@@ -20198,7 +20198,7 @@
             "staff_state": "held",
             "expression": "neutral",
             "mouth": "open_small",
-            "speech_id": "speech-1783972634287",
+            "speech_id": "speech-1783982022585",
             "walk_phase": 0.0,
             "pose_id": "front_idle",
             "pose_transition_progress": 1.0
@@ -24764,7 +24764,7 @@
             "staff_state": "held",
             "expression": "neutral",
             "mouth": "open_small",
-            "speech_id": "speech-1783972639196",
+            "speech_id": "speech-1783982027749",
             "walk_phase": 0.0,
             "pose_id": "front_idle",
             "pose_transition_progress": 1.0
@@ -24794,7 +24794,7 @@
             "staff_state": "held",
             "expression": "neutral",
             "mouth": "open_small",
-            "speech_id": "speech-1783972639196",
+            "speech_id": "speech-1783982027749",
             "walk_phase": 0.0,
             "pose_id": "front_idle",
             "pose_transition_progress": 1.0
@@ -24824,7 +24824,7 @@
             "staff_state": "held",
             "expression": "neutral",
             "mouth": "open_small",
-            "speech_id": "speech-1783972639196",
+            "speech_id": "speech-1783982027749",
             "walk_phase": 0.0,
             "pose_id": "front_idle",
             "pose_transition_progress": 1.0
@@ -24854,7 +24854,7 @@
             "staff_state": "held",
             "expression": "neutral",
             "mouth": "open_small",
-            "speech_id": "speech-1783972639196",
+            "speech_id": "speech-1783982027749",
             "walk_phase": 0.0,
             "pose_id": "front_idle",
             "pose_transition_progress": 1.0
@@ -24884,7 +24884,7 @@
             "staff_state": "held",
             "expression": "neutral",
             "mouth": "open_small",
-            "speech_id": "speech-1783972639196",
+            "speech_id": "speech-1783982027749",
             "walk_phase": 0.0,
             "pose_id": "front_idle",
             "pose_transition_progress": 1.0
@@ -24914,7 +24914,7 @@
             "staff_state": "held",
             "expression": "neutral",
             "mouth": "open_small",
-            "speech_id": "speech-1783972639196",
+            "speech_id": "speech-1783982027749",
             "walk_phase": 0.0,
             "pose_id": "front_idle",
             "pose_transition_progress": 1.0
@@ -24944,7 +24944,7 @@
             "staff_state": "held",
             "expression": "neutral",
             "mouth": "open_small",
-            "speech_id": "speech-1783972639196",
+            "speech_id": "speech-1783982027749",
             "walk_phase": 0.0,
             "pose_id": "front_idle",
             "pose_transition_progress": 1.0
@@ -24974,7 +24974,7 @@
             "staff_state": "held",
             "expression": "neutral",
             "mouth": "open_small",
-            "speech_id": "speech-1783972639196",
+            "speech_id": "speech-1783982027749",
             "walk_phase": 0.0,
             "pose_id": "front_idle",
             "pose_transition_progress": 1.0
@@ -25004,7 +25004,7 @@
             "staff_state": "held",
             "expression": "neutral",
             "mouth": "open_small",
-            "speech_id": "speech-1783972639196",
+            "speech_id": "speech-1783982027749",
             "walk_phase": 0.0,
             "pose_id": "front_idle",
             "pose_transition_progress": 1.0
@@ -25034,7 +25034,7 @@
             "staff_state": "held",
             "expression": "neutral",
             "mouth": "open_small",
-            "speech_id": "speech-1783972639196",
+            "speech_id": "speech-1783982027749",
             "walk_phase": 0.0,
             "pose_id": "front_idle",
             "pose_transition_progress": 1.0
@@ -25064,7 +25064,7 @@
             "staff_state": "held",
             "expression": "neutral",
             "mouth": "open_small",
-            "speech_id": "speech-1783972639196",
+            "speech_id": "speech-1783982027749",
             "walk_phase": 0.0,
             "pose_id": "front_idle",
             "pose_transition_progress": 1.0
@@ -25094,7 +25094,7 @@
             "staff_state": "held",
             "expression": "neutral",
             "mouth": "open_small",
-            "speech_id": "speech-1783972639196",
+            "speech_id": "speech-1783982027749",
             "walk_phase": 0.0,
             "pose_id": "front_idle",
             "pose_transition_progress": 1.0
@@ -25124,7 +25124,7 @@
             "staff_state": "held",
             "expression": "focused",
             "mouth": "open_small",
-            "speech_id": "speech-1783972639196",
+            "speech_id": "speech-1783982027749",
             "walk_phase": 0.0,
             "pose_id": "front_idle",
             "pose_transition_progress": 1.0
@@ -25701,7 +25701,7 @@
             "staff_state": "held",
             "expression": "neutral",
             "mouth": "open_small",
-            "speech_id": "speech-1783972640068",
+            "speech_id": "speech-1783982028660",
             "walk_phase": 0.0,
             "pose_id": "front_idle",
             "pose_transition_progress": 1.0

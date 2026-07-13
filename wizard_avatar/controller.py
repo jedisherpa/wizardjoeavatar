@@ -109,6 +109,11 @@ class WizardAvatarController:
 
     def _set_action(self, action: str, duration_ms: int) -> None:
         validate_action(action)
+        if action == "containment":
+            self.state.speech_id = None
+            self.state.speech_text = None
+            self.state.speech_until = 0.0
+            self.state.mouth = expression_mouth(self.state.expression)
         if action == "reaction" and self.state.action not in {"idle", "reaction"}:
             self.state.action_restore = {
                 "action": self.state.action,

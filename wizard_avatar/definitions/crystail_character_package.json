@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "character_id": "crystail-v1",
+  "display_name": "CrystAIl",
+  "renderer": "asciline_square_cells",
+  "pose_library": "crystail_pose_cells.json",
+  "animation_graph": "crystail_animation_graph.json",
+  "default_pose_id": "neutral_front",
+  "capabilities": [
+    "ground_locomotion",
+    "flight_locomotion",
+    "eight_direction_turnaround",
+    "actions",
+    "speech_visemes",
+    "full_expression_vocabulary",
+    "procedural_secondary_motion",
+    "pose_showcase",
+    "containment_recovery"
+  ]
+}

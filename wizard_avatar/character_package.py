@@ -8,6 +8,7 @@ from typing import Any, Mapping, Tuple
 
 DEFINITIONS_DIR = Path(__file__).with_name("definitions")
 WIZARD_JOE_PACKAGE_PATH = DEFINITIONS_DIR / "wizard_joe_character_package.json"
+CRYSTAIL_PACKAGE_PATH = DEFINITIONS_DIR / "crystail_character_package.json"
 
 
 class CharacterPackageValidationError(ValueError):
@@ -130,5 +131,6 @@ __all__ = [
     "CharacterPackage",
     "CharacterPackageValidationError",
     "WIZARD_JOE_PACKAGE_PATH",
+    "CRYSTAIL_PACKAGE_PATH",
     "load_character_package",
 ]

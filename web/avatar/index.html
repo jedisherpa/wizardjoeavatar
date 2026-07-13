@@ -4,6 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>WizardJoeAvatar</title>
+    <link rel="icon" href="data:," />
     <link rel="stylesheet" href="/avatar/style.css" />
   </head>
   <body>
@@ -13,6 +14,10 @@
       <section id="diagnostics" class="diagnostics"></section>
       <div id="captions" class="captions" role="status" aria-live="polite" hidden></div>
       <nav class="toolbar" aria-label="Wizard controls">
+        <label class="character-choice" title="Character">
+          <span>Character</span>
+          <select id="character-select" aria-label="Character"></select>
+        </label>
         <button data-demo="play" title="Play demo">▶</button>
         <button data-repeat title="Repeat random poses" aria-pressed="false">↻</button>
         <button data-flight title="Fly" aria-pressed="false">↥</button>
@@ -32,6 +37,6 @@
         <div id="pose-grid" class="pose-grid"></div>
       </dialog>
     </main>
-    <script type="module" src="/avatar/wizardDemo.ts?v=cartoon-driver-v1"></script>
+    <script type="module" src="/avatar/wizardDemo.ts?v=crystail-v1"></script>
   </body>
 </html>

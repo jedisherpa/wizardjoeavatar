@@ -1,8 +1,8 @@
 # Python 8765 Transition Matrix Verification
 
-- generated_at: `2026-07-13T19:57:25.279681+00:00`
-- branch: `codex/python-asciline-avatar`
-- commit: `988b2315caaafff6a8db66270339123368c1cb76`
+- generated_at: `2026-07-13T22:33:54.084723+00:00`
+- branch: `codex/crystail-character`
+- commit: `ea5c0b5f414713e8fd2cd8b5bd050a6868948482`
 - scenarios: `32`
 - passed: `32`
 - with issues: `0`

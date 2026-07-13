@@ -17,15 +17,36 @@ DIRECTIONS = (
 
 EXPRESSIONS = (
     "neutral",
+    "calm",
     "happy",
+    "joy",
     "thinking",
+    "contemplation",
     "surprised",
     "worried",
+    "concern",
     "amused",
+    "amusement",
+    "excitement",
+    "curiosity",
     "confident",
+    "confidence",
+    "compassion",
     "focused",
     "skeptical",
+    "skepticism",
+    "surprise",
     "explaining",
+    "confusion",
+    "sadness",
+    "shame",
+    "embarrassment",
+    "fear",
+    "anxiety",
+    "anger",
+    "frustration",
+    "determination",
+    "fatigue",
 )
 
 ACTIONS = (
@@ -38,6 +59,8 @@ ACTIONS = (
     "pointing",
     "magic_cast",
     "reaction",
+    "celebrating",
+    "containment",
 )
 
 MOUTH_SHAPES = (
@@ -48,6 +71,17 @@ MOUTH_SHAPES = (
     "rounded",
     "smile",
     "frown",
+    "slightly_open",
+    "wide_vowel",
+    "open_vowel",
+    "rounded_vowel",
+    "teeth_consonant",
+    "lower_lip_consonant",
+    "tongue_consonant",
+    "smile_speaking",
+    "frown_speaking",
+    "speech_emphasis",
+    "breath_pause",
 )
 
 UPPER_BODY_ACTIONS = ("none", "explain", "point", "think", "cast", "react")

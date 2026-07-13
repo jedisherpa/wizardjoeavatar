@@ -1,4 +1,4 @@
-import { command } from "./wizardClient.ts";
+import { avatarApi, command } from "./wizardClient.ts";
 
 const CONTROL_INTERVAL_MS = 50;
 const CONTROL_TTL_MS = 250;
@@ -142,6 +142,7 @@ async function sendControlIntent(release = false) {
     || Math.abs(intent.move_z) > 0.001
     || Math.abs(intent.ascend) > 0.001
     || intent.mobility_request !== "keep";
+  if (!isActive && !lastControlFingerprint && !release) return;
   if (fingerprint === lastControlFingerprint) {
     if (!isActive || now - lastControlSentAt < 100) return;
   }
@@ -172,7 +173,7 @@ async function installPosePicker() {
     if (event.target === dialog) dialog.close();
   });
   if (!grid) return;
-  const response = await fetch("/api/avatar/wizard/poses");
+  const response = await fetch(avatarApi("poses"));
   const { poses } = await response.json();
   const auto = document.createElement("button");
   auto.type = "button";
@@ -193,7 +194,7 @@ async function installPosePicker() {
 
 async function updateCaption() {
   try {
-    const response = await fetch("/api/avatar/wizard/state", { cache: "no-store" });
+    const response = await fetch(avatarApi("state"), { cache: "no-store" });
     const { state } = await response.json();
     const caption = document.getElementById("captions");
     if (!caption) return;
@@ -241,7 +242,7 @@ async function playDemo(button) {
   button.disabled = true;
   try {
     await command("reset", {});
-    const { poses } = await fetch("/api/avatar/wizard/poses").then((response) => response.json());
+    const { poses } = await fetch(avatarApi("poses")).then((response) => response.json());
     await command("path", {
       points: [{ x: -2.4, z: 4.2 }, { x: 2.4, z: 4.2 }, { x: 2.0, z: 6.4 }, { x: -2.0, z: 6.4 }],
       loop: true,
@@ -271,7 +272,7 @@ async function toggleRepeat(button) {
     return;
   }
 
-  const { poses } = await fetch("/api/avatar/wizard/poses").then((response) => response.json());
+  const { poses } = await fetch(avatarApi("poses")).then((response) => response.json());
   await command("path", {
     points: [
       { x: -2.5, z: 4.0 },

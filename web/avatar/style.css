@@ -63,6 +63,24 @@ body {
   background: var(--panel);
 }
 
+.character-choice {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-right: 4px;
+  font-size: 11px;
+}
+
+.character-choice select {
+  height: 34px;
+  max-width: 150px;
+  border: 1px solid #d7d7d2;
+  border-radius: 6px;
+  background: #ffffff;
+  color: var(--ink);
+  font: 700 12px/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
 .captions {
   position: absolute;
   left: 50%;

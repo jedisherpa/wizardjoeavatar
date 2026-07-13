@@ -1,0 +1,283 @@
+{
+  "asset_set_id": "crystail-worksheet-motion-v2",
+  "authored_fps": 24,
+  "clips": [
+    {
+      "clip_id": "crystail_idle",
+      "loop": true,
+      "samples": [
+        {
+          "contact": "authored",
+          "pose_id": "idle_relaxed",
+          "tick": 0
+        },
+        {
+          "contact": "authored",
+          "pose_id": "idle_attentive",
+          "tick": 6
+        },
+        {
+          "contact": "authored",
+          "pose_id": "idle_listening",
+          "tick": 12
+        },
+        {
+          "contact": "authored",
+          "pose_id": "idle_speaking",
+          "tick": 18
+        }
+      ]
+    },
+    {
+      "clip_id": "crystail_walk",
+      "loop": true,
+      "samples": [
+        {
+          "contact": "authored",
+          "pose_id": "walk_contact_left",
+          "tick": 0
+        },
+        {
+          "contact": "authored",
+          "pose_id": "walk_passing_left",
+          "tick": 6
+        },
+        {
+          "contact": "authored",
+          "pose_id": "walk_contact_right",
+          "tick": 12
+        },
+        {
+          "contact": "authored",
+          "pose_id": "walk_passing_right",
+          "tick": 18
+        }
+      ]
+    },
+    {
+      "clip_id": "crystail_run",
+      "loop": true,
+      "samples": [
+        {
+          "contact": "authored",
+          "pose_id": "run_reach",
+          "tick": 0
+        },
+        {
+          "contact": "authored",
+          "pose_id": "run_drive",
+          "tick": 6
+        }
+      ]
+    },
+    {
+      "clip_id": "crystail_turn",
+      "loop": false,
+      "samples": [
+        {
+          "contact": "authored",
+          "pose_id": "turn_left",
+          "tick": 0
+        },
+        {
+          "contact": "authored",
+          "pose_id": "neutral_front",
+          "tick": 6
+        },
+        {
+          "contact": "authored",
+          "pose_id": "turn_right",
+          "tick": 12
+        }
+      ]
+    },
+    {
+      "clip_id": "crystail_jump_land",
+      "loop": false,
+      "samples": [
+        {
+          "contact": "authored",
+          "pose_id": "jump_anticipation",
+          "tick": 0
+        },
+        {
+          "contact": "authored",
+          "pose_id": "jump_airborne",
+          "tick": 6
+        },
+        {
+          "contact": "authored",
+          "pose_id": "fall",
+          "tick": 12
+        },
+        {
+          "contact": "authored",
+          "pose_id": "land",
+          "tick": 18
+        }
+      ]
+    },
+    {
+      "clip_id": "crystail_flight",
+      "loop": true,
+      "samples": [
+        {
+          "contact": "none",
+          "pose_id": "takeoff",
+          "tick": 0
+        },
+        {
+          "contact": "none",
+          "pose_id": "hover_up",
+          "tick": 6
+        },
+        {
+          "contact": "none",
+          "pose_id": "hover_down",
+          "tick": 12
+        },
+        {
+          "contact": "none",
+          "pose_id": "glide",
+          "tick": 18
+        },
+        {
+          "contact": "none",
+          "pose_id": "touchdown",
+          "tick": 24
+        }
+      ]
+    },
+    {
+      "clip_id": "crystail_bank",
+      "loop": false,
+      "samples": [
+        {
+          "contact": "none",
+          "pose_id": "bank_left",
+          "tick": 0
+        },
+        {
+          "contact": "none",
+          "pose_id": "glide",
+          "tick": 6
+        },
+        {
+          "contact": "none",
+          "pose_id": "bank_right",
+          "tick": 12
+        }
+      ]
+    },
+    {
+      "clip_id": "crystail_conversation",
+      "loop": true,
+      "samples": [
+        {
+          "contact": "authored",
+          "pose_id": "idle_listening",
+          "tick": 0
+        },
+        {
+          "contact": "authored",
+          "pose_id": "gesture_explain",
+          "tick": 6
+        },
+        {
+          "contact": "authored",
+          "pose_id": "gesture_present",
+          "tick": 12
+        },
+        {
+          "contact": "authored",
+          "pose_id": "gesture_point",
+          "tick": 18
+        },
+        {
+          "contact": "authored",
+          "pose_id": "gesture_containment",
+          "tick": 24
+        }
+      ]
+    },
+    {
+      "clip_id": "crystail_performance",
+      "loop": false,
+      "samples": [
+        {
+          "contact": "authored",
+          "pose_id": "gesture_think",
+          "tick": 0
+        },
+        {
+          "contact": "authored",
+          "pose_id": "gesture_react",
+          "tick": 6
+        },
+        {
+          "contact": "authored",
+          "pose_id": "gesture_celebrate",
+          "tick": 12
+        },
+        {
+          "contact": "authored",
+          "pose_id": "magic_cast",
+          "tick": 18
+        }
+      ]
+    },
+    {
+      "clip_id": "crystail_turnaround",
+      "loop": true,
+      "samples": [
+        {
+          "pose_id": "neutral_front",
+          "tick": 0
+        },
+        {
+          "pose_id": "neutral_three_quarter_left",
+          "tick": 12
+        },
+        {
+          "pose_id": "neutral_left_profile",
+          "tick": 24
+        },
+        {
+          "pose_id": "neutral_back_three_quarter_left",
+          "tick": 36
+        },
+        {
+          "pose_id": "neutral_back",
+          "tick": 48
+        },
+        {
+          "pose_id": "neutral_back_three_quarter_right",
+          "tick": 60
+        },
+        {
+          "pose_id": "neutral_right_profile",
+          "tick": 72
+        },
+        {
+          "pose_id": "neutral_three_quarter_right",
+          "tick": 84
+        }
+      ]
+    }
+  ],
+  "default_node_id": "idle",
+  "motion_profile": {
+    "identity_note": "Femininity is communicated through performance only; anatomy and costume are unchanged.",
+    "principles": [
+      "graceful_hand_arcs",
+      "subtle_hip_counter_sway",
+      "soft_landings",
+      "wing_follow_through",
+      "enthusiastic_anticipation",
+      "containment_recovery"
+    ],
+    "quality": "smooth_feminine_performance"
+  },
+  "schema_version": 2,
+  "simulation_hz": 60
+}

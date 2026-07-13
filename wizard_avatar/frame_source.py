@@ -9,6 +9,11 @@ from typing import Optional, Tuple
 from .character_package import WIZARD_JOE_PACKAGE_PATH, load_character_package
 from .compositor import CellCanvas, blit_scaled
 from .controller import WizardAvatarController
+from .crystail import (
+    CRYSTAIL_CHARACTER_ID,
+    CRYSTAIL_SCALE_MULTIPLIER,
+    resolve_crystail_pose_id,
+)
 from .diagnostics import FrameDiagnostics
 from .floor import build_background
 from .layers import ROOT_ANCHOR, render_wizard_local
@@ -90,6 +95,8 @@ class ProceduralWizardFrameSource:
         )
         state.screen_position["x"] = sx
         state.screen_position["y"] = sy
+        if self.character_package.character_id == CRYSTAIL_CHARACTER_ID:
+            return self._render_crystail_frame(state, sx, sy, scale)
         use_reference_pose_library = reference_pose_library_available(self.pose_library_path)
         if use_reference_pose_library:
             stage = build_background(self.cols, self.rows).copy()
@@ -148,6 +155,52 @@ class ProceduralWizardFrameSource:
             raw_size=len(cells),
         )
         return frame
+
+    def _render_crystail_frame(
+        self,
+        state: WizardState,
+        sx: float,
+        sy: float,
+        projected_scale: float,
+    ) -> WizardCellFrame:
+        stage = build_background(self.cols, self.rows).copy()
+        altitude_scale = max(0.78, 1.0 - state.altitude * 0.055)
+        render_scale = projected_scale * CRYSTAIL_SCALE_MULTIPLIER * altitude_scale
+        pose_id = resolve_crystail_pose_id(state)
+        local = render_reference_pose_local(pose_id, self.pose_library_path)
+        root_anchor = reference_pose_root_anchor(pose_id, self.pose_library_path)
+        root_screen = self._reference_root_screen(sx, sy, state, render_scale)
+        state.last_pose_id = state.pose_id
+        state.pose_id = pose_id
+        state.pose_transition_progress = 1.0
+        state.display_scale = render_scale
+        lifted = state.airborne or pose_id in {"jump_airborne", "fall", "hover_up", "hover_down", "glide", "takeoff"}
+        shadow_root = (root_screen[0], root_screen[1] + state.altitude * 8.0 * render_scale)
+        draw_contact_shadow(stage, shadow_root[0], shadow_root[1], render_scale, lifted=lifted)
+        blit_scaled(stage, local, root_anchor, root_screen, render_scale)
+        if state.action == "magic_cast":
+            try:
+                mouth_anchor = reference_pose_anchor(pose_id, "mouth", self.pose_library_path)
+            except KeyError:
+                mouth_anchor = root_anchor
+            self._draw_reference_animation_overlays(
+                stage,
+                state,
+                root_anchor,
+                mouth_anchor,
+                root_screen,
+                render_scale,
+                1.0,
+                pose_id,
+            )
+        cells = stage.to_frame_bytes()
+        return WizardCellFrame(
+            cols=self.cols,
+            rows=self.rows,
+            frame_index=self.frame_index,
+            cells=cells,
+            raw_size=len(cells),
+        )
 
     def _reference_pose_canvas_for_sample(
         self,
