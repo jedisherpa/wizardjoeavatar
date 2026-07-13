@@ -34,7 +34,7 @@ fn connected_component_sizes(points: &BTreeSet<(i32, i32)>) -> Vec<(usize, (i32,
         );
         components.push((component.len(), bounds));
     }
-    components.sort_unstable_by(|left, right| right.0.cmp(&left.0));
+    components.sort_unstable_by_key(|component| std::cmp::Reverse(component.0));
     components
 }
 
