@@ -58,6 +58,16 @@ struct WorkItem {
     raw: Map<String, Value>,
 }
 
+struct MaterialScope<'a> {
+    item_path: &'a str,
+    id: &'a str,
+    base_sha: &'a str,
+    result_sha: &'a str,
+    own_allowlist: &'a [String],
+    cohort_allowlist: &'a [String],
+    has_own_evidence: bool,
+}
+
 pub fn read_json(path: &Path) -> Result<Value, String> {
     let text = fs::read_to_string(path)
         .map_err(|error| format!("failed to read {}: {error}", path.display()))?;
@@ -99,6 +109,35 @@ fn validate_material_registry(
     let Some(root) = value.as_object() else {
         return Ok(());
     };
+    let mut cohort_allowlists: HashMap<(String, String), Vec<String>> = HashMap::new();
+    for collection in ["work_items", "specialist_work_items"] {
+        let Some(items) = root.get(collection).and_then(Value::as_array) else {
+            continue;
+        };
+        for value in items {
+            let Some(item) = value.as_object() else {
+                continue;
+            };
+            if item.get("status").and_then(Value::as_str) != Some("ACCEPTED") {
+                continue;
+            }
+            let Some(gate_id) = item.get("gate_id").and_then(Value::as_str) else {
+                continue;
+            };
+            let Some(result_sha) = item.get("result_sha").and_then(Value::as_str) else {
+                continue;
+            };
+            cohort_allowlists
+                .entry((gate_id.to_owned(), result_sha.to_owned()))
+                .or_default()
+                .extend(item_allowlist(item));
+        }
+    }
+    for allowlist in cohort_allowlists.values_mut() {
+        allowlist.sort_unstable();
+        allowlist.dedup();
+    }
+
     for collection in ["work_items", "specialist_work_items"] {
         let Some(items) = root.get(collection).and_then(Value::as_array) else {
             continue;
@@ -111,7 +150,27 @@ fn validate_material_registry(
                 continue;
             }
             let path = format!("$.{collection}[{index}]");
-            validate_material_item(item, &path, repository, violations)?;
+            let gate_id = item
+                .get("gate_id")
+                .and_then(Value::as_str)
+                .unwrap_or_default();
+            let result_sha = item
+                .get("result_sha")
+                .and_then(Value::as_str)
+                .unwrap_or_default();
+            let own_allowlist = item_allowlist(item);
+            let cohort_allowlist = cohort_allowlists
+                .get(&(gate_id.to_owned(), result_sha.to_owned()))
+                .map(Vec::as_slice)
+                .unwrap_or(own_allowlist.as_slice());
+            validate_material_item(
+                item,
+                &path,
+                &own_allowlist,
+                cohort_allowlist,
+                repository,
+                violations,
+            )?;
         }
     }
     Ok(())
@@ -120,6 +179,8 @@ fn validate_material_registry(
 fn validate_material_item(
     item: &Map<String, Value>,
     item_path: &str,
+    own_allowlist: &[String],
+    cohort_allowlist: &[String],
     repository: &Path,
     violations: &mut Vec<Violation>,
 ) -> Result<(), String> {
@@ -146,6 +207,7 @@ fn validate_material_item(
         violations,
     )?;
 
+    let mut has_own_evidence = false;
     if result_resolves {
         if let (Some(result_sha), Some(evidence)) =
             (result_sha, item.get("evidence").and_then(Value::as_array))
@@ -154,7 +216,7 @@ fn validate_material_item(
                 let Some(record) = record.as_object() else {
                     continue;
                 };
-                validate_material_evidence(
+                let evidence_exists = validate_material_evidence(
                     record,
                     &format!("{item_path}.evidence[{index}]"),
                     id,
@@ -162,6 +224,15 @@ fn validate_material_item(
                     repository,
                     violations,
                 )?;
+                has_own_evidence |= evidence_exists
+                    && record
+                        .get("path")
+                        .and_then(Value::as_str)
+                        .is_some_and(|path| {
+                            own_allowlist
+                                .iter()
+                                .any(|allowed| path_is_allowlisted(path, allowed))
+                        });
             }
         }
     }
@@ -169,7 +240,17 @@ fn validate_material_item(
     if base_resolves && result_resolves {
         if let (Some(base_sha), Some(result_sha)) = (base_sha, result_sha) {
             validate_changed_paths(
-                item, item_path, id, base_sha, result_sha, repository, violations,
+                &MaterialScope {
+                    item_path,
+                    id,
+                    base_sha,
+                    result_sha,
+                    own_allowlist,
+                    cohort_allowlist,
+                    has_own_evidence,
+                },
+                repository,
+                violations,
             )?;
         }
     }
@@ -211,9 +292,9 @@ fn validate_material_evidence(
     result_sha: &str,
     repository: &Path,
     violations: &mut Vec<Violation>,
-) -> Result<(), String> {
+) -> Result<bool, String> {
     let Some(path) = evidence.get("path").and_then(Value::as_str) else {
-        return Ok(());
+        return Ok(false);
     };
     if !is_safe_repo_path(path) {
         push(
@@ -224,7 +305,7 @@ fn validate_material_evidence(
                 "{id} evidence path {path:?} must be a safe repository-relative path without dot segments, backslashes, colons, or NUL bytes"
             ),
         );
-        return Ok(());
+        return Ok(false);
     }
 
     let object = format!("{result_sha}:{path}");
@@ -239,7 +320,7 @@ fn validate_material_evidence(
                 git_stderr(&output)
             ),
         );
-        return Ok(());
+        return Ok(false);
     }
 
     let declared = evidence
@@ -257,15 +338,11 @@ fn validate_material_evidence(
             ),
         );
     }
-    Ok(())
+    Ok(true)
 }
 
 fn validate_changed_paths(
-    item: &Map<String, Value>,
-    item_path: &str,
-    id: &str,
-    base_sha: &str,
-    result_sha: &str,
+    scope: &MaterialScope<'_>,
     repository: &Path,
     violations: &mut Vec<Violation>,
 ) -> Result<(), String> {
@@ -276,46 +353,74 @@ fn validate_changed_paths(
             "--name-only",
             "--no-renames",
             "-z",
-            base_sha,
-            result_sha,
+            scope.base_sha,
+            scope.result_sha,
             "--",
         ],
     )?;
     if !output.status.success() {
         return Err(format!(
-            "failed to inspect changed paths for {id} ({base_sha}..{result_sha}): {}",
+            "failed to inspect changed paths for {} ({}..{}): {}",
+            scope.id,
+            scope.base_sha,
+            scope.result_sha,
             git_stderr(&output)
         ));
     }
-    let allowlist: Vec<&str> = item
-        .get("path_allowlist")
-        .and_then(Value::as_array)
-        .into_iter()
-        .flatten()
-        .filter_map(Value::as_str)
-        .collect();
+    let mut has_own_changed_path = false;
     for raw_path in output
         .stdout
         .split(|byte| *byte == 0)
         .filter(|p| !p.is_empty())
     {
-        let changed_path = String::from_utf8(raw_path.to_vec())
-            .map_err(|error| format!("git diff returned a non-UTF-8 path for {id}: {error}"))?;
-        if !allowlist
+        let changed_path = String::from_utf8(raw_path.to_vec()).map_err(|error| {
+            format!(
+                "git diff returned a non-UTF-8 path for {}: {error}",
+                scope.id
+            )
+        })?;
+        has_own_changed_path |= scope
+            .own_allowlist
+            .iter()
+            .any(|allowed| path_is_allowlisted(&changed_path, allowed));
+        if !scope
+            .cohort_allowlist
             .iter()
             .any(|allowed| path_is_allowlisted(&changed_path, allowed))
         {
             push(
                 violations,
                 "RCHAT-PATH-OUT-OF-SCOPE",
-                format!("{item_path}.path_allowlist"),
+                format!("{}.path_allowlist", scope.item_path),
                 format!(
-                    "{id} changed {changed_path} between {base_sha} and {result_sha}, but no path_allowlist entry covers it"
+                    "{} changed {changed_path} between {} and {}, but no path_allowlist in its accepted {} gate cohort covers it",
+                    scope.id, scope.base_sha, scope.result_sha, scope.result_sha
                 ),
             );
         }
     }
+    if !has_own_changed_path && !scope.has_own_evidence {
+        push(
+            violations,
+            "RCHAT-ITEM-NO-OWN-CONTRIBUTION",
+            format!("{}.path_allowlist", scope.item_path),
+            format!(
+                "{} has no changed path or material evidence path covered by its own path_allowlist; an accepted aggregate sibling must retain an individually attributable contribution",
+                scope.id
+            ),
+        );
+    }
     Ok(())
+}
+
+fn item_allowlist(item: &Map<String, Value>) -> Vec<String> {
+    item.get("path_allowlist")
+        .and_then(Value::as_array)
+        .into_iter()
+        .flatten()
+        .filter_map(Value::as_str)
+        .map(str::to_owned)
+        .collect()
 }
 
 fn is_safe_repo_path(value: &str) -> bool {

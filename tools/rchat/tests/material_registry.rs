@@ -9,7 +9,10 @@ use sha2::{Digest, Sha256};
 use wizardjoe_rchat_validator::{validate_registry_path, ValidationReport};
 
 static NEXT_REPOSITORY: AtomicU64 = AtomicU64::new(0);
+const BASE_BYTES: &[u8] = b"base\n";
 const EVIDENCE_BYTES: &[u8] = b"material receipt\n";
+const PROGRAM_BYTES: &[u8] = b"program contribution\n";
+const SPECIALIST_BYTES: &[u8] = b"specialist contribution\n";
 
 struct TestRepository {
     root: PathBuf,
@@ -30,13 +33,17 @@ impl TestRepository {
         git(&root, &["config", "user.name", "RCHAT Validator"]);
         git(&root, &["config", "user.email", "rchat@example.invalid"]);
 
-        fs::write(root.join("README.md"), "base\n").unwrap();
+        fs::write(root.join("README.md"), BASE_BYTES).unwrap();
         git(&root, &["add", "--all"]);
         git(&root, &["commit", "--quiet", "-m", "base"]);
         let base_sha = git_text(&root, &["rev-parse", "HEAD"]);
 
         fs::create_dir_all(root.join("evidence")).unwrap();
+        fs::create_dir_all(root.join("program")).unwrap();
+        fs::create_dir_all(root.join("specialist")).unwrap();
         fs::write(root.join("evidence/report.txt"), EVIDENCE_BYTES).unwrap();
+        fs::write(root.join("program/output.txt"), PROGRAM_BYTES).unwrap();
+        fs::write(root.join("specialist/output.txt"), SPECIALIST_BYTES).unwrap();
         git(&root, &["add", "--all"]);
         git(&root, &["commit", "--quiet", "-m", "result"]);
         let result_sha = git_text(&root, &["rev-parse", "HEAD"]);
@@ -63,7 +70,7 @@ impl TestRepository {
                 }
                 item["base_sha"] = json!(self.base_sha);
                 item["result_sha"] = json!(self.result_sha);
-                item["path_allowlist"] = json!(["evidence"]);
+                item["path_allowlist"] = json!(["evidence", "program", "specialist"]);
                 item["evidence"] = json!([{
                     "path": "evidence/report.txt",
                     "sha256": hash.clone()
@@ -95,6 +102,17 @@ impl Drop for TestRepository {
 
 fn parent_item_mut(value: &mut Value) -> &mut Value {
     &mut value["work_items"][0]
+}
+
+fn specialist_item_mut(value: &mut Value) -> &mut Value {
+    &mut value["specialist_work_items"][0]
+}
+
+fn evidence(path: &str, bytes: &[u8]) -> Value {
+    json!([{
+        "path": path,
+        "sha256": format!("{:x}", Sha256::digest(bytes))
+    }])
 }
 
 fn codes(report: &ValidationReport) -> HashSet<&'static str> {
@@ -192,7 +210,75 @@ fn rejects_missing_evidence_path() {
 fn rejects_out_of_scope_diff() {
     let repository = TestRepository::new();
     let mut value = repository.valid_registry();
-    parent_item_mut(&mut value)["path_allowlist"] = json!(["allowed"]);
+    for collection in ["work_items", "specialist_work_items"] {
+        for item in value[collection].as_array_mut().unwrap() {
+            if item["status"] == "ACCEPTED" {
+                item["path_allowlist"] = json!(["allowed"]);
+            }
+        }
+    }
+    repository.write_registry(value);
+
+    assert!(codes(&repository.validate()).contains("RCHAT-PATH-OUT-OF-SCOPE"));
+}
+
+#[test]
+fn aggregate_sibling_commit_passes_with_cohort_allowlist_union() {
+    let repository = TestRepository::new();
+    let mut value = repository.valid_registry();
+    parent_item_mut(&mut value)["path_allowlist"] = json!(["evidence", "program"]);
+    parent_item_mut(&mut value)["evidence"] = evidence("program/output.txt", PROGRAM_BYTES);
+    specialist_item_mut(&mut value)["path_allowlist"] = json!(["specialist"]);
+    specialist_item_mut(&mut value)["evidence"] =
+        evidence("specialist/output.txt", SPECIALIST_BYTES);
+    repository.write_registry(value);
+
+    let report = repository.validate();
+    assert!(report.is_valid(), "{:#?}", report.violations);
+}
+
+#[test]
+fn aggregate_sibling_commit_rejects_path_uncovered_by_cohort() {
+    let repository = TestRepository::new();
+    let mut value = repository.valid_registry();
+    parent_item_mut(&mut value)["path_allowlist"] = json!(["program"]);
+    parent_item_mut(&mut value)["evidence"] = evidence("program/output.txt", PROGRAM_BYTES);
+    specialist_item_mut(&mut value)["path_allowlist"] = json!(["specialist"]);
+    specialist_item_mut(&mut value)["evidence"] =
+        evidence("specialist/output.txt", SPECIALIST_BYTES);
+    repository.write_registry(value);
+
+    assert!(codes(&repository.validate()).contains("RCHAT-PATH-OUT-OF-SCOPE"));
+}
+
+#[test]
+fn aggregate_sibling_requires_own_contribution_or_evidence() {
+    let repository = TestRepository::new();
+    let mut value = repository.valid_registry();
+    parent_item_mut(&mut value)["path_allowlist"] = json!(["evidence", "program", "specialist"]);
+    parent_item_mut(&mut value)["evidence"] = evidence("program/output.txt", PROGRAM_BYTES);
+    specialist_item_mut(&mut value)["path_allowlist"] = json!(["unused"]);
+    specialist_item_mut(&mut value)["evidence"] = evidence("program/output.txt", PROGRAM_BYTES);
+    repository.write_registry(value);
+
+    let report = repository.validate();
+    let found = codes(&report);
+    assert!(found.contains("RCHAT-ITEM-NO-OWN-CONTRIBUTION"));
+    assert!(!found.contains("RCHAT-PATH-OUT-OF-SCOPE"));
+}
+
+#[test]
+fn single_item_cohort_keeps_strict_scope_validation() {
+    let repository = TestRepository::new();
+    let mut value = repository.valid_registry();
+    parent_item_mut(&mut value)["path_allowlist"] = json!(["program"]);
+    parent_item_mut(&mut value)["evidence"] = evidence("program/output.txt", PROGRAM_BYTES);
+
+    let base_sha = repository.base_sha.clone();
+    specialist_item_mut(&mut value)["base_sha"] = json!(base_sha);
+    specialist_item_mut(&mut value)["result_sha"] = json!(repository.base_sha);
+    specialist_item_mut(&mut value)["path_allowlist"] = json!(["README.md"]);
+    specialist_item_mut(&mut value)["evidence"] = evidence("README.md", BASE_BYTES);
     repository.write_registry(value);
 
     assert!(codes(&repository.validate()).contains("RCHAT-PATH-OUT-OF-SCOPE"));
