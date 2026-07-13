@@ -229,11 +229,7 @@ class WizardFrameHub:
             self._command_waiters.pop(command_id, None)
         result = self._command_results.pop(command_id, None)
         if result is not None:
-            return CommandResult(
-                result.ok,
-                result.message,
-                self.frame_source.current_state().as_public_dict(),
-            )
+            return result
         final_ack = self.command_inbox.ack_for(command_id) or ack
         return CommandResult(
             final_ack.disposition == "applied",
@@ -250,6 +246,7 @@ class WizardFrameHub:
     ) -> WizardState:
         controller = self.frame_source.controller
         controller.state = state
+        reduced_command_ids = []
         for queued in due:
             envelope = queued.envelope
             command_type = self._command_types.pop(
@@ -267,9 +264,7 @@ class WizardFrameHub:
                     "command_validation_failed",
                     result.message,
                 )
-            waiter = self._command_waiters.get(envelope.command_id)
-            if waiter is not None:
-                waiter.set()
+            reduced_command_ids.append(envelope.command_id)
 
         # Reset reinitializes the controller. Rebase it onto the authoritative
         # runtime tick before taking the single simulation step.
@@ -277,6 +272,17 @@ class WizardFrameHub:
         controller.state.state_revision = target_tick - 1
         controller.state.time_seconds = (target_tick - 1) / AvatarRuntime.TICK_RATE
         controller.advance_tick()
+        authoritative_state = controller.current_state().as_public_dict()
+        for command_id in reduced_command_ids:
+            result = self._command_results[command_id]
+            self._command_results[command_id] = CommandResult(
+                result.ok,
+                result.message,
+                authoritative_state,
+            )
+            waiter = self._command_waiters.get(command_id)
+            if waiter is not None:
+                waiter.set()
         return controller.current_state()
 
     def _legacy_envelope(self, command: WizardCommand, sequence: int) -> CommandEnvelopeV1:
