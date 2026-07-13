@@ -13,8 +13,8 @@ Last coordinator update: 2026-07-13
 | Pose checkpoint | COMPLETE | Pushed `ca52b8023d5021e3a9bb14753961e8f7007f5aef` |
 | Planning checkpoint | COMPLETE | Pushed `50948b907ad35ec8ca604d6c39a63b4317ac3da7` |
 | Rust branch | ACTIVE | `codex/rust-chatbot-animation-engine` in `jedisherpa/wizardjoeavatar` |
-| Contract implementation | IN_REVIEW | Shared modules exported; 31 engine contract tests and 19 workflow/release tests pass |
-| Runtime and motion engines | PLANNED | Blocked on C0 |
+| Contract implementation | COMPLETE | C0 PASS at `1775941e76c2bec0f54f44349d9b6f304d2bce1b`; 29 contract, 3 release-registry, and 30 workflow-validator tests pass |
+| Runtime and motion engines | READY | C0 dependencies accepted; parallel R1/M1 work may begin |
 | Serial integration | PLANNED | Blocked on engine handoffs |
 | Exhaustive QA | PLANNED | Blocked on integrated profile |
 | Publish and deployment | PLANNED | Blocked on F0 |
@@ -24,9 +24,9 @@ Last coordinator update: 2026-07-13
 | Role | Agent | Research | Planning | Next accountability |
 |---|---|---|---|---|
 | RUNTIME | Epicurus (`019f5c84-aca4-7953-b8ac-23a395e7268b`) | COMPLETE | COMPLETE | Contract handoff complete; final C0 review accepted |
-| MOTION | Singer (`019f5c84-b193-7f70-83ff-e0c7e33edd51`) | COMPLETE | COMPLETE | Motion graph and speech quantizer in final C0 review |
-| FLOW | Lagrange (`019f5c84-b630-7053-b560-cab55fb3ba11`) | COMPLETE | COMPLETE | Validator handoff complete; receipt review pending commit SHA |
-| INT | Coordinator | COMPLETE | IN_REVIEW | Exported shared modules; preparing Rust-branch checkpoint |
+| MOTION | Singer (`019f5c84-b193-7f70-83ff-e0c7e33edd51`) | COMPLETE | COMPLETE | Motion graph and speech quantizer C0 review accepted |
+| FLOW | Lagrange (`019f5c84-b630-7053-b560-cab55fb3ba11`) | COMPLETE | COMPLETE | Material validator correction and independent C0 review accepted |
+| INT | Coordinator | COMPLETE | COMPLETE | C0 receipt validated; preparing immutable documentation checkpoint |
 
 ## Pose prerequisite receipt
 
@@ -53,23 +53,24 @@ Last coordinator update: 2026-07-13
 | 2026-07-13 | Three lanes with coordinator-only hotspots | Preserves accountability and avoids conflicting runtime authority |
 | 2026-07-13 | Structural gates require 100%; product score requires >=90% | Quality averages must never hide breakup, nondeterminism, or transport failure |
 | 2026-07-13 | Runtime PNG reuse remains prohibited | The accepted character is procedural colored-cell geometry, not a reused image |
+| 2026-07-13 | C0 accepted only after clean-candidate and rollback builds | The pushed result and its rollback SHA both compile independently of the dirty coordinator worktree |
 
 ## Current blockers
 
-1. `RCHAT-FLOW-020` must materially verify Git objects, evidence bytes, hashes,
-   and scoped diffs instead of validating only field shapes.
-2. Gate command validation must match `wizardjoe-rchat-gate/v1` exactly.
-3. The corrective implementation commit must contain C0 evidence under the
-   explicit registry, library, and evidence ownership recorded in the registry.
+None for C0. The material registry validator now checks Git objects, evidence
+bytes and hashes, exact gate commands, and aggregate changed-path ownership.
 
-The semantic contract itself has passed RUNTIME review; C0 remains open until
-these accountability blockers are fixed and rerun from an immutable commit.
+The clean candidate at `1775941e76c2bec0f54f44349d9b6f304d2bce1b`
+passed formatting, clippy, 62 focused tests, the all-target compile check, and
+the live material registry audit. The rollback candidate at
+`988b2315caaafff6a8db66270339123368c1cb76` also passed the all-target compile
+check from a detached clean worktree.
 
 ## Next promotion
 
-1. Push the current Rust-only C0 checkpoint to
-   `codex/rust-chatbot-animation-engine`.
-2. Record its immutable result SHA, accept reviewed handoffs, and run the
-   registry validator again.
-3. Promote `RCHAT-ANIM-019` and aggregate `RCHAT-FLOW-030` only after the
-   exact dependency receipts are accepted.
+1. Checkpoint the C0 receipt and gate evidence on
+   `codex/rust-chatbot-animation-engine` without staging unrelated Python work.
+2. Start `RCHAT-RUN-020` and `RCHAT-ANIM-020` in parallel under their disjoint
+   ownership boundaries.
+3. Start the FLOW QA/CI evidence harness so every integrated motion profile is
+   captured and checked frame by frame before promotion.

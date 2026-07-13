@@ -1,0 +1,173 @@
+{
+  "schema": "wizardjoe-rchat-gate/v1",
+  "schema_version": 1,
+  "program_id": "RCHAT",
+  "gate_id": "C0",
+  "status": "PASS",
+  "git": {
+    "branch": "codex/rust-chatbot-animation-engine",
+    "sha": "1775941e76c2bec0f54f44349d9b6f304d2bce1b",
+    "dirty": false
+  },
+  "environment": {
+    "os": "Darwin",
+    "arch": "arm64",
+    "rustc": "rustc 1.94.1 (e408947bf 2026-03-25) (Homebrew)",
+    "cargo": "cargo 1.94.1 (Homebrew)",
+    "node": "not-used",
+    "browser": null
+  },
+  "inputs": {
+    "pose_asset_sha256": "028e2d3ff9e0ff58d72c7bb39a792f1d76f7ecc8cf5d37da91677f486eab3bb8",
+    "motion_graph_sha256": "bdbb753a5b4778eaa6a495bb7839c3a26c1c95152fb72328760060be6976b883",
+    "policy_sha256": "c7f6926eb05f8d72c5b75f6c17a7725eac225460846344577f49476f971ad81c",
+    "browser_bundle_sha256": null
+  },
+  "required_work_items": [
+    "RCHAT-FLOW-020",
+    "RCHAT-FLOW-030"
+  ],
+  "commands": [
+    {
+      "command": "cargo fmt --manifest-path rust/wizard_avatar_engine/Cargo.toml --all -- --check && cargo fmt --manifest-path tools/rchat/Cargo.toml --all -- --check",
+      "exit_code": 0,
+      "duration_ms": 100,
+      "stdout_artifact": null,
+      "stderr_artifact": null
+    },
+    {
+      "command": "cargo test --manifest-path tools/rchat/Cargo.toml --all-targets --all-features",
+      "exit_code": 0,
+      "duration_ms": 3270,
+      "stdout_artifact": null,
+      "stderr_artifact": null
+    },
+    {
+      "command": "cargo clippy --manifest-path tools/rchat/Cargo.toml --all-targets --all-features -- -D warnings",
+      "exit_code": 0,
+      "duration_ms": 1450,
+      "stdout_artifact": null,
+      "stderr_artifact": null
+    },
+    {
+      "command": "cargo test --manifest-path rust/wizard_avatar_engine/Cargo.toml --test chat_event_contract --test command_ordering --test motion_graph_contract --test release_registry",
+      "exit_code": 0,
+      "duration_ms": 18210,
+      "stdout_artifact": null,
+      "stderr_artifact": null
+    },
+    {
+      "command": "cargo test --manifest-path rust/wizard_avatar_engine/Cargo.toml --all-targets --no-run",
+      "exit_code": 0,
+      "duration_ms": 23140,
+      "stdout_artifact": null,
+      "stderr_artifact": null
+    },
+    {
+      "command": "cargo run --quiet --manifest-path tools/rchat/Cargo.toml -- registry docs/cartoon-animation-program/rust-chatbot/registry.json",
+      "exit_code": 0,
+      "duration_ms": 1000,
+      "stdout_artifact": null,
+      "stderr_artifact": null
+    },
+    {
+      "command": "git ls-remote origin refs/heads/codex/rust-chatbot-animation-engine",
+      "exit_code": 0,
+      "duration_ms": 500,
+      "stdout_artifact": null,
+      "stderr_artifact": null
+    },
+    {
+      "command": "cargo test --manifest-path rust/wizard_avatar_engine/Cargo.toml --all-targets --no-run @ 988b2315caaafff6a8db66270339123368c1cb76",
+      "exit_code": 0,
+      "duration_ms": 13860,
+      "stdout_artifact": null,
+      "stderr_artifact": null
+    }
+  ],
+  "metrics": [
+    {
+      "name": "runtime_contract_tests",
+      "actual": 13,
+      "operator": "eq",
+      "threshold": 13,
+      "unit": "tests",
+      "status": "PASS"
+    },
+    {
+      "name": "motion_contract_tests",
+      "actual": 16,
+      "operator": "eq",
+      "threshold": 16,
+      "unit": "tests",
+      "status": "PASS"
+    },
+    {
+      "name": "flow_validator_tests",
+      "actual": 30,
+      "operator": "eq",
+      "threshold": 30,
+      "unit": "tests",
+      "status": "PASS"
+    },
+    {
+      "name": "release_registry_tests",
+      "actual": 3,
+      "operator": "eq",
+      "threshold": 3,
+      "unit": "tests",
+      "status": "PASS"
+    },
+    {
+      "name": "material_registry_violations",
+      "actual": 0,
+      "operator": "eq",
+      "threshold": 0,
+      "unit": "violations",
+      "status": "PASS"
+    }
+  ],
+  "artifacts": [
+    {
+      "kind": "runtime-contract",
+      "path_or_url": "rust/wizard_avatar_engine/src/chat_event.rs",
+      "sha256": "859276259f69ec9c622064044c8846bedd8d08d3354b0dc8cbba9bf8b1765a87",
+      "bytes": 25258,
+      "retention": "permanent"
+    },
+    {
+      "kind": "motion-contract",
+      "path_or_url": "rust/wizard_avatar_engine/src/motion_graph.rs",
+      "sha256": "bdbb753a5b4778eaa6a495bb7839c3a26c1c95152fb72328760060be6976b883",
+      "bytes": 32468,
+      "retention": "permanent"
+    },
+    {
+      "kind": "gate-validator",
+      "path_or_url": "tools/rchat/src/lib.rs",
+      "sha256": "13873a456b88a85605d0b06a03410f26b6db49a8529dba3b15059067babc3de6",
+      "bytes": 87678,
+      "retention": "permanent"
+    },
+    {
+      "kind": "library-exports",
+      "path_or_url": "rust/wizard_avatar_engine/src/lib.rs",
+      "sha256": "01d0219fff4394c26054294f747dc996e7643b4b8c966a073a968db4e53dc72a",
+      "bytes": 841,
+      "retention": "permanent"
+    }
+  ],
+  "failures": [],
+  "skips": [],
+  "review": {
+    "primary": "INT",
+    "independent": "FLOW",
+    "reviewed_at": "2026-07-13T19:54:39Z"
+  },
+  "rollback": {
+    "sha": "988b2315caaafff6a8db66270339123368c1cb76",
+    "profile": "legacy",
+    "drill_passed": true,
+    "downgrade_allowed": false
+  }
+}
