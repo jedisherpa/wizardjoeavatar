@@ -1,0 +1,512 @@
+{
+  "schema_version": 4,
+  "compiler_id": "wizard-avatar-pose-tool-rust-v4",
+  "source_manifest_sha256": "fa95fa6d5e2ed13375b0a33084d1f646875de79ed7a94bbcc93713fc5047b022",
+  "archive_sha256": "2b7dc9b467ff3209791cbfdbc326a1e8856cf8a2f965caf7489a873bad44d63a",
+  "gzip_sha256": "028e2d3ff9e0ff58d72c7bb39a792f1d76f7ecc8cf5d37da91677f486eab3bb8",
+  "catalog_records": 80,
+  "unique_geometries": 79,
+  "aliases": 1,
+  "wjfl_admissions": [
+    {
+      "order": 31,
+      "candidate_id": "WJFL-01",
+      "semantic_id": "run_front_cross_step_wings_staff",
+      "kind": "geometry",
+      "cumulative_catalog_count": 31,
+      "cumulative_geometry_count": 30,
+      "cumulative_alias_count": 1,
+      "geometry_sha256": "a63a5614edfe37fa3cb76ea410fd8fdee6bc3881e6b3a17a2c6176d7d50cd8a5"
+    },
+    {
+      "order": 32,
+      "candidate_id": "WJFL-02",
+      "semantic_id": "run_front_stride_wings_staff",
+      "kind": "geometry",
+      "cumulative_catalog_count": 32,
+      "cumulative_geometry_count": 31,
+      "cumulative_alias_count": 1,
+      "geometry_sha256": "38c349fac508d10dbe93b73eadce9aa082062d7148280a2f4cbc946102607b7b"
+    },
+    {
+      "order": 33,
+      "candidate_id": "WJFL-03",
+      "semantic_id": "front_crouch_guard_wings",
+      "kind": "geometry",
+      "cumulative_catalog_count": 33,
+      "cumulative_geometry_count": 32,
+      "cumulative_alias_count": 1,
+      "geometry_sha256": "16d69fe4560347bc7ac012be85584b4a934f7b8ed4a0453e4e86270f12d12991"
+    },
+    {
+      "order": 34,
+      "candidate_id": "WJFL-04",
+      "semantic_id": "front_reaction_jump_wings_staff",
+      "kind": "geometry",
+      "cumulative_catalog_count": 34,
+      "cumulative_geometry_count": 33,
+      "cumulative_alias_count": 1,
+      "geometry_sha256": "3d1b0cb1cf76f6931fb16921026845a154d103cdbe44500bc137359d1b6904d7"
+    },
+    {
+      "order": 35,
+      "candidate_id": "WJFL-05",
+      "semantic_id": "front_kneel_staff_brace_wings",
+      "kind": "geometry",
+      "cumulative_catalog_count": 35,
+      "cumulative_geometry_count": 34,
+      "cumulative_alias_count": 1,
+      "geometry_sha256": "3cfa82a340df06d38b8bd51d6100d1814fda837742fddb101835d1bdeec22ec9"
+    },
+    {
+      "order": 36,
+      "candidate_id": "WJFL-06",
+      "semantic_id": "front_staff_guard_windup_wings",
+      "kind": "geometry",
+      "cumulative_catalog_count": 36,
+      "cumulative_geometry_count": 35,
+      "cumulative_alias_count": 1,
+      "geometry_sha256": "292ef14db8ab3f6fdd804fc0c48e0037dfe4c162cda4706924b2d3ac587d69e0"
+    },
+    {
+      "order": 37,
+      "candidate_id": "WJFL-07",
+      "semantic_id": "front_staff_guard_horizontal_wings",
+      "kind": "geometry",
+      "cumulative_catalog_count": 37,
+      "cumulative_geometry_count": 36,
+      "cumulative_alias_count": 1,
+      "geometry_sha256": "ebe709ddaace0f69646ff1613ec610666ea67a30601e2fe6581b769eff410e5d"
+    },
+    {
+      "order": 38,
+      "candidate_id": "WJFL-08",
+      "semantic_id": "front_staff_guard_low_wings",
+      "kind": "geometry",
+      "cumulative_catalog_count": 38,
+      "cumulative_geometry_count": 37,
+      "cumulative_alias_count": 1,
+      "geometry_sha256": "912685de5097faafd545c0943fa7abdc01b3eb997684630cb5117da156078618"
+    },
+    {
+      "order": 39,
+      "candidate_id": "WJFL-09",
+      "semantic_id": "front_crouch_staff_planted_wings",
+      "kind": "geometry",
+      "cumulative_catalog_count": 39,
+      "cumulative_geometry_count": 38,
+      "cumulative_alias_count": 1,
+      "geometry_sha256": "db6d36e372c57922c8bf5dcf329584ab5337921fcb79296d7af7f84ad5c8154a"
+    },
+    {
+      "order": 40,
+      "candidate_id": "WJFL-10",
+      "semantic_id": "front_victory_cast_wings",
+      "kind": "geometry",
+      "cumulative_catalog_count": 40,
+      "cumulative_geometry_count": 39,
+      "cumulative_alias_count": 1,
+      "geometry_sha256": "0d67e0a43bef3e90ff085a1714c5c77adbd8d25830aa08f820b57fdc3025ec80"
+    },
+    {
+      "order": 41,
+      "candidate_id": "WJFL-11",
+      "semantic_id": "front_run_charge_wings",
+      "kind": "geometry",
+      "cumulative_catalog_count": 41,
+      "cumulative_geometry_count": 40,
+      "cumulative_alias_count": 1,
+      "geometry_sha256": "7d0d450f6dd72eebd58ae9386bd5aa44574c2a0c56f0f8c489c92fc27bb1a92b"
+    },
+    {
+      "order": 42,
+      "candidate_id": "WJFL-12",
+      "semantic_id": "front_crouch_hand_plant_wings",
+      "kind": "geometry",
+      "cumulative_catalog_count": 42,
+      "cumulative_geometry_count": 41,
+      "cumulative_alias_count": 1,
+      "geometry_sha256": "9c5ba75419178c9ea4cea41a384b675d050791c0f60a196e1f3a22f45f782149"
+    },
+    {
+      "order": 43,
+      "candidate_id": "WJFL-13",
+      "semantic_id": "front_magic_staff_thrust_wings",
+      "kind": "geometry",
+      "cumulative_catalog_count": 43,
+      "cumulative_geometry_count": 42,
+      "cumulative_alias_count": 1,
+      "geometry_sha256": "486e98b19a466ce3d2c737ecf8c26a8bba19557bf77ddb48db9435bba7d33759"
+    },
+    {
+      "order": 44,
+      "candidate_id": "WJFL-14",
+      "semantic_id": "front_airborne_fall_back_wings",
+      "kind": "geometry",
+      "cumulative_catalog_count": 44,
+      "cumulative_geometry_count": 43,
+      "cumulative_alias_count": 1,
+      "geometry_sha256": "effd8de40b1026258bf25aee92546fd8420a931f72161f8a4bdce652e5c95887"
+    },
+    {
+      "order": 45,
+      "candidate_id": "WJFL-15",
+      "semantic_id": "front_celebrate_staff_up_wings",
+      "kind": "geometry",
+      "cumulative_catalog_count": 45,
+      "cumulative_geometry_count": 44,
+      "cumulative_alias_count": 1,
+      "geometry_sha256": "66cceb715a1dda06688d6bb925337cd088883c1240575ce1bb24c0d52b01b963"
+    },
+    {
+      "order": 46,
+      "candidate_id": "WJFL-16",
+      "semantic_id": "front_staff_block_wings",
+      "kind": "geometry",
+      "cumulative_catalog_count": 46,
+      "cumulative_geometry_count": 45,
+      "cumulative_alias_count": 1,
+      "geometry_sha256": "7edc27db269acba8014835c4fdf8974c7abeff0f1d5cbd748417d8422a44df2a"
+    },
+    {
+      "order": 47,
+      "candidate_id": "WJFL-17",
+      "semantic_id": "front_point_direct_wings",
+      "kind": "geometry",
+      "cumulative_catalog_count": 47,
+      "cumulative_geometry_count": 46,
+      "cumulative_alias_count": 1,
+      "geometry_sha256": "2b115bafc62439ad9e5af7c2a8f541521dff235b3ad048f0776658a670923e66"
+    },
+    {
+      "order": 48,
+      "candidate_id": "WJFL-18",
+      "semantic_id": "front_celebrate_jump_wings",
+      "kind": "geometry",
+      "cumulative_catalog_count": 48,
+      "cumulative_geometry_count": 47,
+      "cumulative_alias_count": 1,
+      "geometry_sha256": "f30852ec73fd4fab75a6503347082f525d8d89a5cfe5422e58c312a2c1eeb542"
+    },
+    {
+      "order": 49,
+      "candidate_id": "WJFL-19",
+      "semantic_id": "front_shush_wings",
+      "kind": "geometry",
+      "cumulative_catalog_count": 49,
+      "cumulative_geometry_count": 48,
+      "cumulative_alias_count": 1,
+      "geometry_sha256": "7f75607b9e29fddc1fe7dbf0348417c49068ae809c685374b2d9a991829a3a29"
+    },
+    {
+      "order": 50,
+      "candidate_id": "WJFL-20",
+      "semantic_id": "front_staff_spin_wings",
+      "kind": "geometry",
+      "cumulative_catalog_count": 50,
+      "cumulative_geometry_count": 49,
+      "cumulative_alias_count": 1,
+      "geometry_sha256": "3877ad5da77163deeaae1e37435a18e63bc97b7bf6a2a9c4a920606d7ce0fee2"
+    },
+    {
+      "order": 51,
+      "candidate_id": "WJFL-21",
+      "semantic_id": "front_idle_wings",
+      "kind": "geometry",
+      "cumulative_catalog_count": 51,
+      "cumulative_geometry_count": 50,
+      "cumulative_alias_count": 1,
+      "geometry_sha256": "63772c68d2d98206530985fde404410d3ad6d84177861b2e78dcbdba25edaf5e"
+    },
+    {
+      "order": 52,
+      "candidate_id": "WJFL-22",
+      "semantic_id": "front_greeting_wave_wings",
+      "kind": "geometry",
+      "cumulative_catalog_count": 52,
+      "cumulative_geometry_count": 51,
+      "cumulative_alias_count": 1,
+      "geometry_sha256": "443d57a3915b2eaa4ee338d030823b9b835b87c8eabe11d9f24bba5c75aeabed"
+    },
+    {
+      "order": 53,
+      "candidate_id": "WJFL-23",
+      "semantic_id": "front_thinking_hand_chin_wings",
+      "kind": "geometry",
+      "cumulative_catalog_count": 53,
+      "cumulative_geometry_count": 52,
+      "cumulative_alias_count": 1,
+      "geometry_sha256": "311cc97664baa5df8992beb35cf4b589cabe02217f98d15904c202347cb8c780"
+    },
+    {
+      "order": 54,
+      "candidate_id": "WJFL-24",
+      "semantic_id": "front_explaining_open_hand_wings",
+      "kind": "geometry",
+      "cumulative_catalog_count": 54,
+      "cumulative_geometry_count": 53,
+      "cumulative_alias_count": 1,
+      "geometry_sha256": "19068171b8bd9fd0ce78239b741debfd2dffac8a877b1e0ca53f27b0ccb9b95c"
+    },
+    {
+      "order": 55,
+      "candidate_id": "WJFL-25",
+      "semantic_id": "front_point_side_wings",
+      "kind": "geometry",
+      "cumulative_catalog_count": 55,
+      "cumulative_geometry_count": 54,
+      "cumulative_alias_count": 1,
+      "geometry_sha256": "04ee6901776d488bcbe8c47c98c1483cb3b7487e127b768312bf458647848ac9"
+    },
+    {
+      "order": 56,
+      "candidate_id": "WJFL-26",
+      "semantic_id": "front_explaining_both_hands_wings",
+      "kind": "geometry",
+      "cumulative_catalog_count": 56,
+      "cumulative_geometry_count": 55,
+      "cumulative_alias_count": 1,
+      "geometry_sha256": "190f24651c7531a05e43b2f10ba6f5ce408ca6e54edf8f8c813544459fe08fda"
+    },
+    {
+      "order": 57,
+      "candidate_id": "WJFL-27",
+      "semantic_id": "front_magic_staff_raise_wings",
+      "kind": "geometry",
+      "cumulative_catalog_count": 57,
+      "cumulative_geometry_count": 56,
+      "cumulative_alias_count": 1,
+      "geometry_sha256": "7945e333a1f181bc66b939ba4ef623b40e85513a53409ba3379c20a24baae2af"
+    },
+    {
+      "order": 58,
+      "candidate_id": "WJFL-28",
+      "semantic_id": "front_sincere_hand_heart_wings",
+      "kind": "geometry",
+      "cumulative_catalog_count": 58,
+      "cumulative_geometry_count": 57,
+      "cumulative_alias_count": 1,
+      "geometry_sha256": "a16e575d99fb6cde9e1f873e9ec6ef3f9f020cd3f6f79844601207a198567c39"
+    },
+    {
+      "order": 59,
+      "candidate_id": "WJFL-29",
+      "semantic_id": "front_playful_kick_wings",
+      "kind": "geometry",
+      "cumulative_catalog_count": 59,
+      "cumulative_geometry_count": 58,
+      "cumulative_alias_count": 1,
+      "geometry_sha256": "77467423b5a71507f120672427f177b2e1cb5701580f5fb8872308494a350514"
+    },
+    {
+      "order": 60,
+      "candidate_id": "WJFL-30",
+      "semantic_id": "front_magic_staff_spark_wings",
+      "kind": "geometry",
+      "cumulative_catalog_count": 60,
+      "cumulative_geometry_count": 59,
+      "cumulative_alias_count": 1,
+      "geometry_sha256": "847f0efc3eabf50fadeab3f41504c832b2ce081f29e55f06a7e0c9da4bbb3e06"
+    },
+    {
+      "order": 61,
+      "candidate_id": "WJFL-31",
+      "semantic_id": "feeling_joy_full",
+      "kind": "geometry",
+      "cumulative_catalog_count": 61,
+      "cumulative_geometry_count": 60,
+      "cumulative_alias_count": 1,
+      "geometry_sha256": "b7a535e5043878d7991992bc79d121fe4508d10ba81d05d392f940b1847f19f8"
+    },
+    {
+      "order": 62,
+      "candidate_id": "WJFL-32",
+      "semantic_id": "feeling_sadness_full",
+      "kind": "geometry",
+      "cumulative_catalog_count": 62,
+      "cumulative_geometry_count": 61,
+      "cumulative_alias_count": 1,
+      "geometry_sha256": "e489cb52a2fb7f143592d6c8541a1cc13474201d20d33b45eb9e1c0235f81857"
+    },
+    {
+      "order": 63,
+      "candidate_id": "WJFL-33",
+      "semantic_id": "feeling_anger_full",
+      "kind": "geometry",
+      "cumulative_catalog_count": 63,
+      "cumulative_geometry_count": 62,
+      "cumulative_alias_count": 1,
+      "geometry_sha256": "d88df51465ffec5b86e7571487efc8a27e11175c6582bd0a763466719b7cecde"
+    },
+    {
+      "order": 64,
+      "candidate_id": "WJFL-34",
+      "semantic_id": "feeling_fear_full",
+      "kind": "geometry",
+      "cumulative_catalog_count": 64,
+      "cumulative_geometry_count": 63,
+      "cumulative_alias_count": 1,
+      "geometry_sha256": "bb5b26d7117dcaee37203d02102f9e1bf5fbcbcfc964e01ecf8bdd57aaadd754"
+    },
+    {
+      "order": 65,
+      "candidate_id": "WJFL-35",
+      "semantic_id": "feeling_shame_full",
+      "kind": "geometry",
+      "cumulative_catalog_count": 65,
+      "cumulative_geometry_count": 64,
+      "cumulative_alias_count": 1,
+      "geometry_sha256": "b6935839491220755dc454306f6b4fc9af05446d502dc7bcc48fd27c8eae3fbb"
+    },
+    {
+      "order": 66,
+      "candidate_id": "WJFL-36",
+      "semantic_id": "feeling_disgust_full",
+      "kind": "geometry",
+      "cumulative_catalog_count": 66,
+      "cumulative_geometry_count": 65,
+      "cumulative_alias_count": 1,
+      "geometry_sha256": "f2df6338628f0773a7a2147828ee1bf48f4aa9545786b9c629ad06db6d55124a"
+    },
+    {
+      "order": 67,
+      "candidate_id": "WJFL-37",
+      "semantic_id": "feeling_surprise_full",
+      "kind": "geometry",
+      "cumulative_catalog_count": 67,
+      "cumulative_geometry_count": 66,
+      "cumulative_alias_count": 1,
+      "geometry_sha256": "f90f380af342f10bf708ce34a7f410d22058ee659a8c71a0da4d5097997c622d"
+    },
+    {
+      "order": 68,
+      "candidate_id": "WJFL-38",
+      "semantic_id": "feeling_pride_full",
+      "kind": "geometry",
+      "cumulative_catalog_count": 68,
+      "cumulative_geometry_count": 67,
+      "cumulative_alias_count": 1,
+      "geometry_sha256": "b4335e21665ba04534f203004169d034933c32c885742c9ec86673051755f733"
+    },
+    {
+      "order": 69,
+      "candidate_id": "WJFL-39",
+      "semantic_id": "feeling_guilt_full",
+      "kind": "geometry",
+      "cumulative_catalog_count": 69,
+      "cumulative_geometry_count": 68,
+      "cumulative_alias_count": 1,
+      "geometry_sha256": "9c0a79820d5f41825337fb3ea14f762b5ab2143dc994f14ca78fdb0b5a8482b2"
+    },
+    {
+      "order": 70,
+      "candidate_id": "WJFL-40",
+      "semantic_id": "feeling_love_full",
+      "kind": "geometry",
+      "cumulative_catalog_count": 70,
+      "cumulative_geometry_count": 69,
+      "cumulative_alias_count": 1,
+      "geometry_sha256": "613fadad03335b614e152496168b64044a6028c173b15bb732d87f6544aeab47"
+    },
+    {
+      "order": 71,
+      "candidate_id": "WJFL-51",
+      "semantic_id": "feeling_joy_close",
+      "kind": "geometry",
+      "cumulative_catalog_count": 71,
+      "cumulative_geometry_count": 70,
+      "cumulative_alias_count": 1,
+      "geometry_sha256": "eb2629b8265bec3a071322f30b22d14939e171238831a294079f4a3ba17a5e83"
+    },
+    {
+      "order": 72,
+      "candidate_id": "WJFL-52",
+      "semantic_id": "feeling_sadness_close",
+      "kind": "geometry",
+      "cumulative_catalog_count": 72,
+      "cumulative_geometry_count": 71,
+      "cumulative_alias_count": 1,
+      "geometry_sha256": "8b83f208ce8c79d200604cc3c14969a6672fdf2930d06843e4c5de2da6def17d"
+    },
+    {
+      "order": 73,
+      "candidate_id": "WJFL-53",
+      "semantic_id": "feeling_anger_close",
+      "kind": "geometry",
+      "cumulative_catalog_count": 73,
+      "cumulative_geometry_count": 72,
+      "cumulative_alias_count": 1,
+      "geometry_sha256": "6c86d8ec1bda6b0dbdd96d0ef4f3f3b865ccbff93ebaf87d5e7e243c99cdc2d4"
+    },
+    {
+      "order": 74,
+      "candidate_id": "WJFL-54",
+      "semantic_id": "feeling_fear_close",
+      "kind": "geometry",
+      "cumulative_catalog_count": 74,
+      "cumulative_geometry_count": 73,
+      "cumulative_alias_count": 1,
+      "geometry_sha256": "673e89955bc0da987fc53d2d40dac2a942f6b416c866455b6ea698014336e520"
+    },
+    {
+      "order": 75,
+      "candidate_id": "WJFL-55",
+      "semantic_id": "feeling_shame_close",
+      "kind": "geometry",
+      "cumulative_catalog_count": 75,
+      "cumulative_geometry_count": 74,
+      "cumulative_alias_count": 1,
+      "geometry_sha256": "6e28c2beb52e9bf474a51e099c3a95e196ea15aa9123af156c5a5aff062e9130"
+    },
+    {
+      "order": 76,
+      "candidate_id": "WJFL-56",
+      "semantic_id": "feeling_disgust_close",
+      "kind": "geometry",
+      "cumulative_catalog_count": 76,
+      "cumulative_geometry_count": 75,
+      "cumulative_alias_count": 1,
+      "geometry_sha256": "fbc5f9c40d705f19d31af3df63e246230ecafeeac34890c866a1cc4d2e0e298c"
+    },
+    {
+      "order": 77,
+      "candidate_id": "WJFL-57",
+      "semantic_id": "feeling_surprise_close",
+      "kind": "geometry",
+      "cumulative_catalog_count": 77,
+      "cumulative_geometry_count": 76,
+      "cumulative_alias_count": 1,
+      "geometry_sha256": "dd1815b434b7c844d8833c69e46ed64c04b299acc209f8cb0fead73437cc7059"
+    },
+    {
+      "order": 78,
+      "candidate_id": "WJFL-58",
+      "semantic_id": "feeling_pride_close",
+      "kind": "geometry",
+      "cumulative_catalog_count": 78,
+      "cumulative_geometry_count": 77,
+      "cumulative_alias_count": 1,
+      "geometry_sha256": "d143c7689f40c30cabae53bf9f04b81572bf2a04201630500abdc11a0708da17"
+    },
+    {
+      "order": 79,
+      "candidate_id": "WJFL-59",
+      "semantic_id": "feeling_guilt_close",
+      "kind": "geometry",
+      "cumulative_catalog_count": 79,
+      "cumulative_geometry_count": 78,
+      "cumulative_alias_count": 1,
+      "geometry_sha256": "f613148311a3d7280864739257653f277c8de962f610ed5a09e848258d2b2e85"
+    },
+    {
+      "order": 80,
+      "candidate_id": "WJFL-60",
+      "semantic_id": "feeling_love_close",
+      "kind": "geometry",
+      "cumulative_catalog_count": 80,
+      "cumulative_geometry_count": 79,
+      "cumulative_alias_count": 1,
+      "geometry_sha256": "b9d4859bff3c5d24e38c90aa0f24c2573a929dea7d99a99342830ecbd61c522d"
+    }
+  ]
+}

@@ -4,10 +4,10 @@ use wizard_avatar_engine::pose_program::FUTURE_POSE_MOTION_SPECS;
 use wizard_avatar_engine::state::WizardState;
 
 #[test]
-fn rust_runtime_loads_all_thirty_catalog_entries_as_twenty_nine_geometries_and_one_alias() {
+fn rust_runtime_loads_eighty_catalog_entries_as_seventy_nine_geometries_and_one_alias() {
     let library = PoseLibrary::reference().expect("Rust pose library");
     let ids = library.pose_ids().collect::<BTreeSet<_>>();
-    assert_eq!(ids.len(), 39);
+    assert_eq!(ids.len(), 89);
     assert_eq!(library.alias_count(), 1);
 
     for spec in FUTURE_POSE_MOTION_SPECS {
@@ -28,6 +28,22 @@ fn rust_runtime_loads_all_thirty_catalog_entries_as_twenty_nine_geometries_and_o
         library.for_id("fly_front_hover_ready").expect("alias").id,
         "fly_front_hover_neutral"
     );
+}
+
+#[test]
+fn all_fifty_wjfl_geometries_are_runtime_resolvable() {
+    let library = PoseLibrary::reference().expect("Rust pose library");
+    let imported = library
+        .pose_ids()
+        .filter_map(|id| library.for_id(id))
+        .filter_map(|pose| pose.motion.candidate_id.as_deref())
+        .filter(|candidate| candidate.starts_with("WJFL-"))
+        .collect::<BTreeSet<_>>();
+    assert_eq!(imported.len(), 50);
+    assert!(imported.contains("WJFL-01"));
+    assert!(imported.contains("WJFL-40"));
+    assert!(imported.contains("WJFL-51"));
+    assert!(imported.contains("WJFL-60"));
 }
 
 #[test]

@@ -15,7 +15,6 @@ use wizard_avatar_engine::pose::{
 };
 use wizard_avatar_engine::pose_clip::POSE_CLIPS;
 use wizard_avatar_engine::pose_playback::DEFAULT_POSE_TRANSITION_TICKS;
-use wizard_avatar_engine::pose_program::{BASELINE_POSE_IDS, FUTURE_POSE_MOTION_SPECS};
 use wizard_avatar_engine::quality::{
     FrameQualityReport, FrameQualitySnapshot, FrameQualityThresholds,
 };
@@ -61,20 +60,18 @@ fn main() -> anyhow::Result<()> {
     let library = PoseLibrary::reference().map_err(anyhow::Error::msg)?;
     let mut records = Vec::new();
     let mut snapshots = Vec::new();
-    let ids = BASELINE_POSE_IDS
-        .into_iter()
-        .map(|pose_id| (None, pose_id))
-        .chain(
-            FUTURE_POSE_MOTION_SPECS
-                .iter()
-                .map(|spec| (Some(spec.candidate_id), spec.semantic_id)),
-        )
+    let ids = library
+        .pose_ids()
+        .filter_map(|pose_id| {
+            let pose = library.for_id(pose_id)?;
+            Some((pose.motion.candidate_id.clone(), pose.id.clone()))
+        })
         .collect::<Vec<_>>();
 
     for (frame_index, (candidate_id, pose_id)) in ids.into_iter().enumerate() {
         let mut state = WizardState {
-            pose_id: Some(pose_id.to_string()),
-            previous_pose_id: Some(pose_id.to_string()),
+            pose_id: Some(pose_id.clone()),
+            previous_pose_id: Some(pose_id.clone()),
             pose_handoff: true,
             pose_blend: 1.0,
             screen_position: ScreenPoint {
@@ -98,9 +95,9 @@ fn main() -> anyhow::Result<()> {
         .map_err(anyhow::Error::msg)?;
         records.push(StaticPoseRecord {
             frame_index,
-            pose_id: pose_id.to_string(),
+            pose_id,
             resolved_pose_id: sample.pose_id.clone(),
-            candidate_id: candidate_id.map(str::to_string),
+            candidate_id,
             occupied_cells: snapshot.topology.occupied_cells,
             source_cells: snapshot.source_cell_count,
             png: format!("frames/{frame_index:04}.png"),
@@ -123,7 +120,7 @@ fn main() -> anyhow::Result<()> {
     }
     let manifest = StaticManifest {
         schema_version: 1,
-        generator: "wizard-avatar-pose-evidence-rust-v1",
+        generator: "wizard-avatar-pose-evidence-rust-v4",
         catalog_frames: records.len(),
         unique_geometry_count: library.pose_ids().count(),
         alias_count: library.alias_count(),
@@ -376,12 +373,12 @@ fn render_animation_verification() -> anyhow::Result<()> {
     let library = PoseLibrary::reference().map_err(anyhow::Error::msg)?;
     let manifest = AnimationManifest {
         schema_version: 2,
-        generator: "wizard-avatar-pose-evidence-rust-v3",
+        generator: "wizard-avatar-pose-evidence-rust-v4",
         simulation_fps: 60,
         frame_width: WIDTH,
         frame_height: HEIGHT,
         frame_count: first.records.len(),
-        catalog_records: 30,
+        catalog_records: 80,
         unique_geometries: library.pose_ids().count(),
         aliases: library.alias_count(),
         rust_clip_count: POSE_CLIPS.len(),
@@ -807,8 +804,7 @@ fn path_text(path: &Path) -> anyhow::Result<&str> {
 }
 
 fn evidence_root() -> PathBuf {
-    PathBuf::from(env!("CARGO_MANIFEST_DIR"))
-        .join("../../evidence/pose-library-expansion/rust-final")
+    PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../../evidence/pose-library-expansion/rust-v4")
 }
 
 #[cfg(test)]

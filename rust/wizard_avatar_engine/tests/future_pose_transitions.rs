@@ -31,7 +31,7 @@ fn every_authored_new_pose_neighbor_transition_passes_the_frame_breakup_gate() {
             })
         })
         .collect::<Vec<_>>();
-    assert_eq!(imported.len(), 29);
+    assert_eq!(imported.len(), 79);
 
     let thresholds = FrameQualityThresholds {
         maximum_face_anchor_step: 4.0,
@@ -76,7 +76,7 @@ fn every_authored_new_pose_neighbor_transition_passes_the_frame_breakup_gate() {
     }
 
     assert!(
-        transitions >= 100,
+        transitions >= 300,
         "transition matrix is unexpectedly small"
     );
     let mut by_rule = BTreeMap::<String, usize>::new();

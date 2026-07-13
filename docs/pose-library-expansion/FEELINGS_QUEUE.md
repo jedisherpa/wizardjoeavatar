@@ -1,6 +1,6 @@
 # Wizard Joe Feelings Queue
 
-Status: `QUEUED` on 2026-07-13. No production pose geometry or runtime selection changed.
+Status: `INTEGRATED_RUST` on 2026-07-13. All 50 unique references are embedded as procedural Rust geometry; the ten repeated files remain reference-only duplicates.
 
 ## Intake summary
 
@@ -11,11 +11,11 @@ Status: `QUEUED` on 2026-07-13. No production pose geometry or runtime selection
 | Preserved PNGs | 60 |
 | Unique PNG hashes | 50 |
 | Candidate IDs | `WJFL-01` through `WJFL-60` |
-| Global integration orders | 31 through 90 |
-| Semantic IDs | Deferred until visual intake |
+| Rust catalog orders | 31 through 80 after exact-hash deduplication |
+| Semantic IDs | Assigned for all 50 unique geometries and all 10 duplicate references |
 | Runtime policy | Reference-only; Rust must procedurally generate accepted geometry and motion |
 
-The full per-file queue, including source filename, order, ownership, status, and exact-duplicate links, is in [feelings-queue.json](feelings-queue.json). Hashes, dimensions, repository paths, and source disposition are in `evidence/pose-library-expansion/intake/feelings-manifest.json`.
+The full per-file ledger, including source filename, original order, Rust ownership, semantic ID, integration status, and exact-duplicate links, is in [feelings-queue.json](feelings-queue.json). Hashes, dimensions, repository paths, and source disposition are in `evidence/pose-library-expansion/intake/feelings-manifest.json`. The serial compiler ledger is in `evidence/pose-library-expansion/rust-v4/admission-ledger.json`.
 
 ## Visual index
 
@@ -42,11 +42,18 @@ cargo run --locked --bin wizard-avatar-feelings-intake -- \
 
 The Rust command regenerates `feelings-manifest.json`, `feelings-queue.json`, and the labeled contact sheet. It fails unless exactly 60 RGB PNGs are present.
 
-## Future integration gate
+Promote and revalidate the integrated v4 archive with:
 
-- Assign semantic IDs only after inspecting each full-resolution source against the current 39-pose production library.
-- Resolve exact repeats as aliases or `DUPLICATE`; do not compile duplicate cell geometry.
-- Integrate one unique candidate at a time through the Rust animation graph.
-- Preserve all anchors, contact markers, staff topology, body connectivity, and white-background composition.
-- Run deterministic frame capture and source/decode/presentation parity before advancing the queue.
-- Keep every source PNG out of the runtime bundle.
+```bash
+cd rust/wizard_avatar_pose_tool
+cargo run --locked --release --bin wizard-avatar-pose-promote -- ../..
+```
+
+## Completed integration gate
+
+- 50 unique candidates were admitted one at a time; every admission records its cumulative catalog and geometry count.
+- `WJFL-41..50` are marked `DUPLICATE_REFERENCE` and compile no duplicate geometry.
+- `WJFL-51..60` are full-body facial variants of their matching emotion poses, preserving feet, staff, wings, contacts, and root topology.
+- The runtime contains 89 geometries plus one alias and loads only the compressed v4 cell archive.
+- All 621 authored directed transitions and all repeated WJFL clip frames pass the breakup gate.
+- Source PNG paths and PNG bytes are absent from the runtime archive.

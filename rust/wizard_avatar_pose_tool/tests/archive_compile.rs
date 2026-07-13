@@ -1,9 +1,9 @@
 use std::collections::{BTreeMap, BTreeSet};
 use std::path::PathBuf;
 use wizard_avatar_pose_tool::{
-    compile_archive, compile_archive_bytes, load_archive, validate_compiled_archive,
-    write_compiled_archive, AnchorId, CatalogRecordKind, CompilerConfig, ContactMode, Point,
-    RegionId,
+    compile_archive, compile_archive_bytes, compile_archive_with_admission_trace, load_archive,
+    validate_compiled_archive, write_compiled_archive, AnchorId, CatalogRecordKind, CompilerConfig,
+    ContactMode, Point, RegionId,
 };
 
 const BASELINE_POSE_IDS: [&str; 10] = [
@@ -24,28 +24,45 @@ fn repo_root() -> PathBuf {
 }
 
 #[test]
-fn all_thirty_archived_poses_compile_twice_to_identical_schema_v3() {
-    let archive = load_archive(repo_root()).expect("validate 30-pose archive");
-    assert_eq!(archive.poses.len(), 30);
+fn all_eighty_archived_records_compile_twice_to_identical_schema_v4() {
+    let archive = load_archive(repo_root()).expect("validate 80-record archive");
+    assert_eq!(archive.poses.len(), 80);
     assert_eq!(archive.poses.first().unwrap().candidate_id, "WJP2-01");
-    assert_eq!(archive.poses.last().unwrap().candidate_id, "WJFA-20");
+    assert_eq!(archive.poses.last().unwrap().candidate_id, "WJFL-60");
 
-    let first = compile_archive(&archive, CompilerConfig::default()).expect("first compile");
+    let (first, admissions) =
+        compile_archive_with_admission_trace(&archive, CompilerConfig::default())
+            .expect("first serial compile");
     let second = compile_archive(&archive, CompilerConfig::default()).expect("second compile");
-    validate_compiled_archive(&first).expect("validate schema v3 artifact");
+    validate_compiled_archive(&first).expect("validate schema v4 artifact");
     let first_bytes = compile_archive_bytes(&first).expect("first serialization");
     let second_bytes = compile_archive_bytes(&second).expect("second serialization");
     assert_eq!(first, second);
     assert_eq!(first_bytes, second_bytes);
 
-    assert_eq!(first.schema_version, 3);
-    assert_eq!(first.catalog_count, 30);
-    assert_eq!(first.unique_geometry_count, 29);
+    assert_eq!(first.schema_version, 4);
+    assert_eq!(first.catalog_count, 80);
+    assert_eq!(first.unique_geometry_count, 79);
     assert_eq!(first.alias_count, 1);
-    assert_eq!(first.catalog.len(), 30);
-    assert_eq!(first.poses.len(), 29);
+    assert_eq!(first.catalog.len(), 80);
+    assert_eq!(first.poses.len(), 79);
     assert_eq!(first.aliases.len(), 1);
     assert_eq!(first.archive_sha256.len(), 64);
+
+    assert_eq!(admissions.len(), 80);
+    for (index, admission) in admissions.iter().enumerate() {
+        assert_eq!(admission.order, index as u32 + 1);
+        assert_eq!(admission.cumulative_catalog_count, index + 1);
+        assert_eq!(
+            admission.cumulative_geometry_count + admission.cumulative_alias_count,
+            index + 1
+        );
+    }
+    assert_eq!(admissions[30].candidate_id, "WJFL-01");
+    assert_eq!(admissions[79].candidate_id, "WJFL-60");
+    assert!(admissions[30..]
+        .iter()
+        .all(|admission| admission.geometry_sha256.len() == 64));
 
     let alias = &first.aliases[0];
     assert_eq!(alias.candidate_id, "WJFA-10");
@@ -68,7 +85,7 @@ fn all_thirty_archived_poses_compile_twice_to_identical_schema_v3() {
         .iter()
         .map(|pose| pose.semantic_id.as_str())
         .collect::<BTreeSet<_>>();
-    assert_eq!(geometry_ids.len(), 29);
+    assert_eq!(geometry_ids.len(), 79);
     let allowed_neighbor_ids = geometry_ids
         .iter()
         .copied()
@@ -166,6 +183,33 @@ fn all_thirty_archived_poses_compile_twice_to_identical_schema_v3() {
         assert_eq!(record.source_sha256.len(), 64);
     }
 
+    for (full, close) in [
+        ("feeling_joy_full", "feeling_joy_close"),
+        ("feeling_sadness_full", "feeling_sadness_close"),
+        ("feeling_anger_full", "feeling_anger_close"),
+        ("feeling_fear_full", "feeling_fear_close"),
+        ("feeling_shame_full", "feeling_shame_close"),
+        ("feeling_disgust_full", "feeling_disgust_close"),
+        ("feeling_surprise_full", "feeling_surprise_close"),
+        ("feeling_pride_full", "feeling_pride_close"),
+        ("feeling_guilt_full", "feeling_guilt_close"),
+        ("feeling_love_full", "feeling_love_close"),
+    ] {
+        let full = first
+            .poses
+            .iter()
+            .find(|pose| pose.semantic_id == full)
+            .unwrap();
+        let close = first
+            .poses
+            .iter()
+            .find(|pose| pose.semantic_id == close)
+            .unwrap();
+        assert_ne!(full.cell_sha256, close.cell_sha256);
+        assert_eq!(full.root_anchor, close.root_anchor);
+        assert_eq!(full.contact_sets, close.contact_sets);
+    }
+
     let authored_neighbors = first
         .poses
         .iter()
@@ -194,7 +238,7 @@ fn all_thirty_archived_poses_compile_twice_to_identical_schema_v3() {
     assert!(!text.contains("source_path"));
 
     let output = PathBuf::from(format!(
-        "target/test-temp/schema-v3-all-30-{}/compiled.json",
+        "target/test-temp/schema-v4-all-80-{}/compiled.json",
         std::process::id()
     ));
     let written = write_compiled_archive(&first, &output).expect("write test artifact");

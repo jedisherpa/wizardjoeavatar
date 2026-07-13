@@ -385,3 +385,15 @@ pub struct CompiledArchive {
     pub palette_sha256: String,
     pub archive_sha256: String,
 }
+
+#[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
+pub struct AdmissionRecord {
+    pub order: u32,
+    pub candidate_id: String,
+    pub semantic_id: String,
+    pub kind: CatalogRecordKind,
+    pub cumulative_catalog_count: usize,
+    pub cumulative_geometry_count: usize,
+    pub cumulative_alias_count: usize,
+    pub geometry_sha256: String,
+}

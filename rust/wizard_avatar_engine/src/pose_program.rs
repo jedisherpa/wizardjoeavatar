@@ -338,6 +338,8 @@ pub fn is_authored_pose_id(pose_id: &str) -> bool {
         || FUTURE_POSE_MOTION_SPECS.iter().any(|spec| {
             spec.semantic_id == pose_id || spec.duplicate_of.is_some_and(|alias| alias == pose_id)
         })
+        || crate::pose::PoseLibrary::reference()
+            .is_ok_and(|library| library.for_id(pose_id).is_some())
 }
 
 const fn spec(

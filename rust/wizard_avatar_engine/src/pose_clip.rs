@@ -98,6 +98,72 @@ const CONVERSATION: &[PoseClipStep] = &[
 const EXPLAIN: &[PoseClipStep] = &[step("explaining", 72, 10)];
 const POINT: &[PoseClipStep] = &[step("front_point_direct_staff_held", 72, 10)];
 const THINK: &[PoseClipStep] = &[step("front_shush_secret_staff_held", 72, 10)];
+const WJFL_RUN: &[PoseClipStep] = &[
+    step("run_front_cross_step_wings_staff", 10, 9),
+    step("run_front_stride_wings_staff", 10, 9),
+    step("front_run_charge_wings", 10, 9),
+    step("run_front_stride_wings_staff", 10, 9),
+];
+const WJFL_GUARD: &[PoseClipStep] = &[
+    step("front_idle_wings", 14, 10),
+    step("front_crouch_guard_wings", 12, 10),
+    step("front_kneel_staff_brace_wings", 12, 10),
+    step("front_crouch_staff_planted_wings", 12, 10),
+    step("front_crouch_hand_plant_wings", 12, 10),
+    step("front_staff_guard_windup_wings", 12, 10),
+    step("front_staff_guard_horizontal_wings", 12, 10),
+    step("front_staff_guard_low_wings", 12, 10),
+    step("front_staff_block_wings", 12, 10),
+    step("front_magic_staff_thrust_wings", 12, 10),
+    step("front_staff_spin_wings", 14, 10),
+    step("front_idle_wings", 14, 10),
+];
+const WJFL_REACTION: &[PoseClipStep] = &[
+    step("front_idle_wings", 14, 10),
+    step("front_reaction_jump_wings_staff", 12, 10),
+    step("front_airborne_fall_back_wings", 12, 10),
+    step("front_celebrate_jump_wings", 12, 10),
+    step("front_victory_cast_wings", 14, 10),
+    step("front_celebrate_staff_up_wings", 14, 10),
+    step("front_idle_wings", 14, 10),
+];
+const WJFL_SOCIAL: &[PoseClipStep] = &[
+    step("front_idle_wings", 16, 10),
+    step("front_greeting_wave_wings", 14, 10),
+    step("front_explaining_open_hand_wings", 14, 10),
+    step("front_explaining_both_hands_wings", 14, 10),
+    step("front_point_direct_wings", 14, 10),
+    step("front_point_side_wings", 14, 10),
+    step("front_thinking_hand_chin_wings", 16, 10),
+    step("front_shush_wings", 16, 10),
+    step("front_sincere_hand_heart_wings", 16, 10),
+    step("front_playful_kick_wings", 14, 10),
+    step("front_magic_staff_raise_wings", 14, 10),
+    step("front_magic_staff_spark_wings", 16, 10),
+    step("front_idle_wings", 16, 10),
+];
+const WJFL_FEELINGS: &[PoseClipStep] = &[
+    step("feeling_joy_full", 16, 10),
+    step("feeling_joy_close", 14, 10),
+    step("feeling_sadness_full", 16, 10),
+    step("feeling_sadness_close", 14, 10),
+    step("feeling_anger_full", 16, 10),
+    step("feeling_anger_close", 14, 10),
+    step("feeling_fear_full", 16, 10),
+    step("feeling_fear_close", 14, 10),
+    step("feeling_shame_full", 16, 10),
+    step("feeling_shame_close", 14, 10),
+    step("feeling_disgust_full", 16, 10),
+    step("feeling_disgust_close", 14, 10),
+    step("feeling_surprise_full", 16, 10),
+    step("feeling_surprise_close", 14, 10),
+    step("feeling_pride_full", 16, 10),
+    step("feeling_pride_close", 14, 10),
+    step("feeling_guilt_full", 16, 10),
+    step("feeling_guilt_close", 14, 10),
+    step("feeling_love_full", 16, 10),
+    step("feeling_love_close", 14, 10),
+];
 
 pub const POSE_CLIPS: &[PoseClipDefinition] = &[
     PoseClipDefinition {
@@ -154,6 +220,31 @@ pub const POSE_CLIPS: &[PoseClipDefinition] = &[
         id: "think",
         steps: THINK,
         loopable: false,
+    },
+    PoseClipDefinition {
+        id: "wjfl_run",
+        steps: WJFL_RUN,
+        loopable: true,
+    },
+    PoseClipDefinition {
+        id: "wjfl_guard",
+        steps: WJFL_GUARD,
+        loopable: true,
+    },
+    PoseClipDefinition {
+        id: "wjfl_reaction",
+        steps: WJFL_REACTION,
+        loopable: true,
+    },
+    PoseClipDefinition {
+        id: "wjfl_social",
+        steps: WJFL_SOCIAL,
+        loopable: true,
+    },
+    PoseClipDefinition {
+        id: "wjfl_feelings",
+        steps: WJFL_FEELINGS,
+        loopable: true,
     },
 ];
 

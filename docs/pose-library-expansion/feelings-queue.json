@@ -1,501 +1,503 @@
 {
-  "schema_version": 1,
-  "queue_id": "wizardjoe-feelings-2026-07-13",
-  "updated_at": "2026-07-13",
-  "source_manifest": "evidence/pose-library-expansion/intake/feelings-manifest.json",
-  "integration_policy": "Rust-only procedural translation; sources remain reference-only and are integrated serially after semantic intake and transition planning.",
   "candidate_count": 60,
-  "queued_count": 60,
   "candidates": [
     {
+      "archive_entry": "ChatGPT Image Jul 12, 2026, 11_43_57 PM (1).png",
       "id": "WJFL-01",
       "order": 31,
-      "owner": null,
-      "status": "QUEUED",
-      "semantic_id": null,
-      "archive_entry": "ChatGPT Image Jul 12, 2026, 11_43_57 PM (1).png"
+      "owner": "rust/wizard_avatar_pose_tool",
+      "semantic_id": "run_front_cross_step_wings_staff",
+      "status": "INTEGRATED_RUST"
     },
     {
+      "archive_entry": "ChatGPT Image Jul 12, 2026, 11_43_57 PM (2).png",
       "id": "WJFL-02",
       "order": 32,
-      "owner": null,
-      "status": "QUEUED",
-      "semantic_id": null,
-      "archive_entry": "ChatGPT Image Jul 12, 2026, 11_43_57 PM (2).png"
+      "owner": "rust/wizard_avatar_pose_tool",
+      "semantic_id": "run_front_stride_wings_staff",
+      "status": "INTEGRATED_RUST"
     },
     {
+      "archive_entry": "ChatGPT Image Jul 12, 2026, 11_43_57 PM (3).png",
       "id": "WJFL-03",
       "order": 33,
-      "owner": null,
-      "status": "QUEUED",
-      "semantic_id": null,
-      "archive_entry": "ChatGPT Image Jul 12, 2026, 11_43_57 PM (3).png"
+      "owner": "rust/wizard_avatar_pose_tool",
+      "semantic_id": "front_crouch_guard_wings",
+      "status": "INTEGRATED_RUST"
     },
     {
+      "archive_entry": "ChatGPT Image Jul 12, 2026, 11_43_57 PM (4).png",
       "id": "WJFL-04",
       "order": 34,
-      "owner": null,
-      "status": "QUEUED",
-      "semantic_id": null,
-      "archive_entry": "ChatGPT Image Jul 12, 2026, 11_43_57 PM (4).png"
+      "owner": "rust/wizard_avatar_pose_tool",
+      "semantic_id": "front_reaction_jump_wings_staff",
+      "status": "INTEGRATED_RUST"
     },
     {
+      "archive_entry": "ChatGPT Image Jul 12, 2026, 11_43_57 PM (5).png",
       "id": "WJFL-05",
       "order": 35,
-      "owner": null,
-      "status": "QUEUED",
-      "semantic_id": null,
-      "archive_entry": "ChatGPT Image Jul 12, 2026, 11_43_57 PM (5).png"
+      "owner": "rust/wizard_avatar_pose_tool",
+      "semantic_id": "front_kneel_staff_brace_wings",
+      "status": "INTEGRATED_RUST"
     },
     {
+      "archive_entry": "ChatGPT Image Jul 12, 2026, 11_43_57 PM (6).png",
       "id": "WJFL-06",
       "order": 36,
-      "owner": null,
-      "status": "QUEUED",
-      "semantic_id": null,
-      "archive_entry": "ChatGPT Image Jul 12, 2026, 11_43_57 PM (6).png"
+      "owner": "rust/wizard_avatar_pose_tool",
+      "semantic_id": "front_staff_guard_windup_wings",
+      "status": "INTEGRATED_RUST"
     },
     {
+      "archive_entry": "ChatGPT Image Jul 12, 2026, 11_43_57 PM (7).png",
       "id": "WJFL-07",
       "order": 37,
-      "owner": null,
-      "status": "QUEUED",
-      "semantic_id": null,
-      "archive_entry": "ChatGPT Image Jul 12, 2026, 11_43_57 PM (7).png"
+      "owner": "rust/wizard_avatar_pose_tool",
+      "semantic_id": "front_staff_guard_horizontal_wings",
+      "status": "INTEGRATED_RUST"
     },
     {
+      "archive_entry": "ChatGPT Image Jul 12, 2026, 11_43_57 PM (8).png",
       "id": "WJFL-08",
       "order": 38,
-      "owner": null,
-      "status": "QUEUED",
-      "semantic_id": null,
-      "archive_entry": "ChatGPT Image Jul 12, 2026, 11_43_57 PM (8).png"
+      "owner": "rust/wizard_avatar_pose_tool",
+      "semantic_id": "front_staff_guard_low_wings",
+      "status": "INTEGRATED_RUST"
     },
     {
+      "archive_entry": "ChatGPT Image Jul 12, 2026, 11_43_57 PM (9).png",
       "id": "WJFL-09",
       "order": 39,
-      "owner": null,
-      "status": "QUEUED",
-      "semantic_id": null,
-      "archive_entry": "ChatGPT Image Jul 12, 2026, 11_43_57 PM (9).png"
+      "owner": "rust/wizard_avatar_pose_tool",
+      "semantic_id": "front_crouch_staff_planted_wings",
+      "status": "INTEGRATED_RUST"
     },
     {
+      "archive_entry": "ChatGPT Image Jul 12, 2026, 11_43_57 PM (10).png",
       "id": "WJFL-10",
       "order": 40,
-      "owner": null,
-      "status": "QUEUED",
-      "semantic_id": null,
-      "archive_entry": "ChatGPT Image Jul 12, 2026, 11_43_57 PM (10).png"
+      "owner": "rust/wizard_avatar_pose_tool",
+      "semantic_id": "front_victory_cast_wings",
+      "status": "INTEGRATED_RUST"
     },
     {
+      "archive_entry": "ChatGPT Image Jul 12, 2026, 11_44_16 PM (1).png",
       "id": "WJFL-11",
       "order": 41,
-      "owner": null,
-      "status": "QUEUED",
-      "semantic_id": null,
-      "archive_entry": "ChatGPT Image Jul 12, 2026, 11_44_16 PM (1).png"
+      "owner": "rust/wizard_avatar_pose_tool",
+      "semantic_id": "front_run_charge_wings",
+      "status": "INTEGRATED_RUST"
     },
     {
+      "archive_entry": "ChatGPT Image Jul 12, 2026, 11_44_16 PM (2).png",
       "id": "WJFL-12",
       "order": 42,
-      "owner": null,
-      "status": "QUEUED",
-      "semantic_id": null,
-      "archive_entry": "ChatGPT Image Jul 12, 2026, 11_44_16 PM (2).png"
+      "owner": "rust/wizard_avatar_pose_tool",
+      "semantic_id": "front_crouch_hand_plant_wings",
+      "status": "INTEGRATED_RUST"
     },
     {
+      "archive_entry": "ChatGPT Image Jul 12, 2026, 11_44_16 PM (3).png",
       "id": "WJFL-13",
       "order": 43,
-      "owner": null,
-      "status": "QUEUED",
-      "semantic_id": null,
-      "archive_entry": "ChatGPT Image Jul 12, 2026, 11_44_16 PM (3).png"
+      "owner": "rust/wizard_avatar_pose_tool",
+      "semantic_id": "front_magic_staff_thrust_wings",
+      "status": "INTEGRATED_RUST"
     },
     {
+      "archive_entry": "ChatGPT Image Jul 12, 2026, 11_44_16 PM (4).png",
       "id": "WJFL-14",
       "order": 44,
-      "owner": null,
-      "status": "QUEUED",
-      "semantic_id": null,
-      "archive_entry": "ChatGPT Image Jul 12, 2026, 11_44_16 PM (4).png"
+      "owner": "rust/wizard_avatar_pose_tool",
+      "semantic_id": "front_airborne_fall_back_wings",
+      "status": "INTEGRATED_RUST"
     },
     {
+      "archive_entry": "ChatGPT Image Jul 12, 2026, 11_44_16 PM (5).png",
       "id": "WJFL-15",
       "order": 45,
-      "owner": null,
-      "status": "QUEUED",
-      "semantic_id": null,
-      "archive_entry": "ChatGPT Image Jul 12, 2026, 11_44_16 PM (5).png"
+      "owner": "rust/wizard_avatar_pose_tool",
+      "semantic_id": "front_celebrate_staff_up_wings",
+      "status": "INTEGRATED_RUST"
     },
     {
+      "archive_entry": "ChatGPT Image Jul 12, 2026, 11_44_16 PM (6).png",
       "id": "WJFL-16",
       "order": 46,
-      "owner": null,
-      "status": "QUEUED",
-      "semantic_id": null,
-      "archive_entry": "ChatGPT Image Jul 12, 2026, 11_44_16 PM (6).png"
+      "owner": "rust/wizard_avatar_pose_tool",
+      "semantic_id": "front_staff_block_wings",
+      "status": "INTEGRATED_RUST"
     },
     {
+      "archive_entry": "ChatGPT Image Jul 12, 2026, 11_44_16 PM (7).png",
       "id": "WJFL-17",
       "order": 47,
-      "owner": null,
-      "status": "QUEUED",
-      "semantic_id": null,
-      "archive_entry": "ChatGPT Image Jul 12, 2026, 11_44_16 PM (7).png"
+      "owner": "rust/wizard_avatar_pose_tool",
+      "semantic_id": "front_point_direct_wings",
+      "status": "INTEGRATED_RUST"
     },
     {
+      "archive_entry": "ChatGPT Image Jul 12, 2026, 11_44_16 PM (8).png",
       "id": "WJFL-18",
       "order": 48,
-      "owner": null,
-      "status": "QUEUED",
-      "semantic_id": null,
-      "archive_entry": "ChatGPT Image Jul 12, 2026, 11_44_16 PM (8).png"
+      "owner": "rust/wizard_avatar_pose_tool",
+      "semantic_id": "front_celebrate_jump_wings",
+      "status": "INTEGRATED_RUST"
     },
     {
+      "archive_entry": "ChatGPT Image Jul 12, 2026, 11_44_16 PM (9).png",
       "id": "WJFL-19",
       "order": 49,
-      "owner": null,
-      "status": "QUEUED",
-      "semantic_id": null,
-      "archive_entry": "ChatGPT Image Jul 12, 2026, 11_44_16 PM (9).png"
+      "owner": "rust/wizard_avatar_pose_tool",
+      "semantic_id": "front_shush_wings",
+      "status": "INTEGRATED_RUST"
     },
     {
+      "archive_entry": "ChatGPT Image Jul 12, 2026, 11_44_16 PM (10).png",
       "id": "WJFL-20",
       "order": 50,
-      "owner": null,
-      "status": "QUEUED",
-      "semantic_id": null,
-      "archive_entry": "ChatGPT Image Jul 12, 2026, 11_44_16 PM (10).png"
+      "owner": "rust/wizard_avatar_pose_tool",
+      "semantic_id": "front_staff_spin_wings",
+      "status": "INTEGRATED_RUST"
     },
     {
+      "archive_entry": "ChatGPT Image Jul 12, 2026, 11_45_11 PM (1).png",
       "id": "WJFL-21",
       "order": 51,
-      "owner": null,
-      "status": "QUEUED",
-      "semantic_id": null,
-      "archive_entry": "ChatGPT Image Jul 12, 2026, 11_45_11 PM (1).png"
+      "owner": "rust/wizard_avatar_pose_tool",
+      "semantic_id": "front_idle_wings",
+      "status": "INTEGRATED_RUST"
     },
     {
+      "archive_entry": "ChatGPT Image Jul 12, 2026, 11_45_11 PM (2).png",
       "id": "WJFL-22",
       "order": 52,
-      "owner": null,
-      "status": "QUEUED",
-      "semantic_id": null,
-      "archive_entry": "ChatGPT Image Jul 12, 2026, 11_45_11 PM (2).png"
+      "owner": "rust/wizard_avatar_pose_tool",
+      "semantic_id": "front_greeting_wave_wings",
+      "status": "INTEGRATED_RUST"
     },
     {
+      "archive_entry": "ChatGPT Image Jul 12, 2026, 11_45_12 PM (3).png",
       "id": "WJFL-23",
       "order": 53,
-      "owner": null,
-      "status": "QUEUED",
-      "semantic_id": null,
-      "archive_entry": "ChatGPT Image Jul 12, 2026, 11_45_12 PM (3).png"
+      "owner": "rust/wizard_avatar_pose_tool",
+      "semantic_id": "front_thinking_hand_chin_wings",
+      "status": "INTEGRATED_RUST"
     },
     {
+      "archive_entry": "ChatGPT Image Jul 12, 2026, 11_45_12 PM (4).png",
       "id": "WJFL-24",
       "order": 54,
-      "owner": null,
-      "status": "QUEUED",
-      "semantic_id": null,
-      "archive_entry": "ChatGPT Image Jul 12, 2026, 11_45_12 PM (4).png"
+      "owner": "rust/wizard_avatar_pose_tool",
+      "semantic_id": "front_explaining_open_hand_wings",
+      "status": "INTEGRATED_RUST"
     },
     {
+      "archive_entry": "ChatGPT Image Jul 12, 2026, 11_45_12 PM (5).png",
       "id": "WJFL-25",
       "order": 55,
-      "owner": null,
-      "status": "QUEUED",
-      "semantic_id": null,
-      "archive_entry": "ChatGPT Image Jul 12, 2026, 11_45_12 PM (5).png"
+      "owner": "rust/wizard_avatar_pose_tool",
+      "semantic_id": "front_point_side_wings",
+      "status": "INTEGRATED_RUST"
     },
     {
+      "archive_entry": "ChatGPT Image Jul 12, 2026, 11_45_12 PM (6).png",
       "id": "WJFL-26",
       "order": 56,
-      "owner": null,
-      "status": "QUEUED",
-      "semantic_id": null,
-      "archive_entry": "ChatGPT Image Jul 12, 2026, 11_45_12 PM (6).png"
+      "owner": "rust/wizard_avatar_pose_tool",
+      "semantic_id": "front_explaining_both_hands_wings",
+      "status": "INTEGRATED_RUST"
     },
     {
+      "archive_entry": "ChatGPT Image Jul 12, 2026, 11_45_13 PM (7).png",
       "id": "WJFL-27",
       "order": 57,
-      "owner": null,
-      "status": "QUEUED",
-      "semantic_id": null,
-      "archive_entry": "ChatGPT Image Jul 12, 2026, 11_45_13 PM (7).png"
+      "owner": "rust/wizard_avatar_pose_tool",
+      "semantic_id": "front_magic_staff_raise_wings",
+      "status": "INTEGRATED_RUST"
     },
     {
+      "archive_entry": "ChatGPT Image Jul 12, 2026, 11_45_13 PM (8).png",
       "id": "WJFL-28",
       "order": 58,
-      "owner": null,
-      "status": "QUEUED",
-      "semantic_id": null,
-      "archive_entry": "ChatGPT Image Jul 12, 2026, 11_45_13 PM (8).png"
+      "owner": "rust/wizard_avatar_pose_tool",
+      "semantic_id": "front_sincere_hand_heart_wings",
+      "status": "INTEGRATED_RUST"
     },
     {
+      "archive_entry": "ChatGPT Image Jul 12, 2026, 11_45_13 PM (9).png",
       "id": "WJFL-29",
       "order": 59,
-      "owner": null,
-      "status": "QUEUED",
-      "semantic_id": null,
-      "archive_entry": "ChatGPT Image Jul 12, 2026, 11_45_13 PM (9).png"
+      "owner": "rust/wizard_avatar_pose_tool",
+      "semantic_id": "front_playful_kick_wings",
+      "status": "INTEGRATED_RUST"
     },
     {
+      "archive_entry": "ChatGPT Image Jul 12, 2026, 11_45_13 PM (10).png",
       "id": "WJFL-30",
       "order": 60,
-      "owner": null,
-      "status": "QUEUED",
-      "semantic_id": null,
-      "archive_entry": "ChatGPT Image Jul 12, 2026, 11_45_13 PM (10).png"
+      "owner": "rust/wizard_avatar_pose_tool",
+      "semantic_id": "front_magic_staff_spark_wings",
+      "status": "INTEGRATED_RUST"
     },
     {
+      "archive_entry": "ChatGPT Image Jul 13, 2026, 01_03_44 AM (1).png",
       "id": "WJFL-31",
       "order": 61,
-      "owner": null,
-      "status": "QUEUED",
-      "semantic_id": null,
-      "archive_entry": "ChatGPT Image Jul 13, 2026, 01_03_44 AM (1).png"
+      "owner": "rust/wizard_avatar_pose_tool",
+      "semantic_id": "feeling_joy_full",
+      "status": "INTEGRATED_RUST"
     },
     {
+      "archive_entry": "ChatGPT Image Jul 13, 2026, 01_03_44 AM (2).png",
       "id": "WJFL-32",
       "order": 62,
-      "owner": null,
-      "status": "QUEUED",
-      "semantic_id": null,
-      "archive_entry": "ChatGPT Image Jul 13, 2026, 01_03_44 AM (2).png"
+      "owner": "rust/wizard_avatar_pose_tool",
+      "semantic_id": "feeling_sadness_full",
+      "status": "INTEGRATED_RUST"
     },
     {
+      "archive_entry": "ChatGPT Image Jul 13, 2026, 01_03_45 AM (3).png",
       "id": "WJFL-33",
       "order": 63,
-      "owner": null,
-      "status": "QUEUED",
-      "semantic_id": null,
-      "archive_entry": "ChatGPT Image Jul 13, 2026, 01_03_45 AM (3).png"
+      "owner": "rust/wizard_avatar_pose_tool",
+      "semantic_id": "feeling_anger_full",
+      "status": "INTEGRATED_RUST"
     },
     {
+      "archive_entry": "ChatGPT Image Jul 13, 2026, 01_03_46 AM (4).png",
       "id": "WJFL-34",
       "order": 64,
-      "owner": null,
-      "status": "QUEUED",
-      "semantic_id": null,
-      "archive_entry": "ChatGPT Image Jul 13, 2026, 01_03_46 AM (4).png"
+      "owner": "rust/wizard_avatar_pose_tool",
+      "semantic_id": "feeling_fear_full",
+      "status": "INTEGRATED_RUST"
     },
     {
+      "archive_entry": "ChatGPT Image Jul 13, 2026, 01_03_46 AM (5).png",
       "id": "WJFL-35",
       "order": 65,
-      "owner": null,
-      "status": "QUEUED",
-      "semantic_id": null,
-      "archive_entry": "ChatGPT Image Jul 13, 2026, 01_03_46 AM (5).png"
+      "owner": "rust/wizard_avatar_pose_tool",
+      "semantic_id": "feeling_shame_full",
+      "status": "INTEGRATED_RUST"
     },
     {
+      "archive_entry": "ChatGPT Image Jul 13, 2026, 01_03_46 AM (6).png",
       "id": "WJFL-36",
       "order": 66,
-      "owner": null,
-      "status": "QUEUED",
-      "semantic_id": null,
-      "archive_entry": "ChatGPT Image Jul 13, 2026, 01_03_46 AM (6).png"
+      "owner": "rust/wizard_avatar_pose_tool",
+      "semantic_id": "feeling_disgust_full",
+      "status": "INTEGRATED_RUST"
     },
     {
+      "archive_entry": "ChatGPT Image Jul 13, 2026, 01_03_47 AM (7).png",
       "id": "WJFL-37",
       "order": 67,
-      "owner": null,
-      "status": "QUEUED",
-      "semantic_id": null,
-      "archive_entry": "ChatGPT Image Jul 13, 2026, 01_03_47 AM (7).png"
+      "owner": "rust/wizard_avatar_pose_tool",
+      "semantic_id": "feeling_surprise_full",
+      "status": "INTEGRATED_RUST"
     },
     {
+      "archive_entry": "ChatGPT Image Jul 13, 2026, 01_03_47 AM (8).png",
       "id": "WJFL-38",
       "order": 68,
-      "owner": null,
-      "status": "QUEUED",
-      "semantic_id": null,
-      "archive_entry": "ChatGPT Image Jul 13, 2026, 01_03_47 AM (8).png"
+      "owner": "rust/wizard_avatar_pose_tool",
+      "semantic_id": "feeling_pride_full",
+      "status": "INTEGRATED_RUST"
     },
     {
+      "archive_entry": "ChatGPT Image Jul 13, 2026, 01_03_48 AM (9).png",
       "id": "WJFL-39",
       "order": 69,
-      "owner": null,
-      "status": "QUEUED",
-      "semantic_id": null,
-      "archive_entry": "ChatGPT Image Jul 13, 2026, 01_03_48 AM (9).png"
+      "owner": "rust/wizard_avatar_pose_tool",
+      "semantic_id": "feeling_guilt_full",
+      "status": "INTEGRATED_RUST"
     },
     {
+      "archive_entry": "ChatGPT Image Jul 13, 2026, 01_03_48 AM (10).png",
       "id": "WJFL-40",
       "order": 70,
-      "owner": null,
-      "status": "QUEUED",
-      "semantic_id": null,
-      "archive_entry": "ChatGPT Image Jul 13, 2026, 01_03_48 AM (10).png"
+      "owner": "rust/wizard_avatar_pose_tool",
+      "semantic_id": "feeling_love_full",
+      "status": "INTEGRATED_RUST"
     },
     {
+      "archive_entry": "ChatGPT Image Jul 13, 2026, 01_06_13 AM (1).png",
+      "exact_duplicate_of": "WJFL-01",
       "id": "WJFL-41",
       "order": 71,
-      "owner": null,
-      "status": "QUEUED",
-      "semantic_id": null,
-      "archive_entry": "ChatGPT Image Jul 13, 2026, 01_06_13 AM (1).png",
-      "exact_duplicate_of": "WJFL-01"
+      "owner": "rust/wizard_avatar_pose_tool",
+      "semantic_id": "run_front_cross_step_wings_staff",
+      "status": "DUPLICATE_REFERENCE"
     },
     {
+      "archive_entry": "ChatGPT Image Jul 13, 2026, 01_06_13 AM (2).png",
+      "exact_duplicate_of": "WJFL-02",
       "id": "WJFL-42",
       "order": 72,
-      "owner": null,
-      "status": "QUEUED",
-      "semantic_id": null,
-      "archive_entry": "ChatGPT Image Jul 13, 2026, 01_06_13 AM (2).png",
-      "exact_duplicate_of": "WJFL-02"
+      "owner": "rust/wizard_avatar_pose_tool",
+      "semantic_id": "run_front_stride_wings_staff",
+      "status": "DUPLICATE_REFERENCE"
     },
     {
+      "archive_entry": "ChatGPT Image Jul 13, 2026, 01_06_13 AM (3).png",
+      "exact_duplicate_of": "WJFL-03",
       "id": "WJFL-43",
       "order": 73,
-      "owner": null,
-      "status": "QUEUED",
-      "semantic_id": null,
-      "archive_entry": "ChatGPT Image Jul 13, 2026, 01_06_13 AM (3).png",
-      "exact_duplicate_of": "WJFL-03"
+      "owner": "rust/wizard_avatar_pose_tool",
+      "semantic_id": "front_crouch_guard_wings",
+      "status": "DUPLICATE_REFERENCE"
     },
     {
+      "archive_entry": "ChatGPT Image Jul 13, 2026, 01_06_13 AM (4).png",
+      "exact_duplicate_of": "WJFL-04",
       "id": "WJFL-44",
       "order": 74,
-      "owner": null,
-      "status": "QUEUED",
-      "semantic_id": null,
-      "archive_entry": "ChatGPT Image Jul 13, 2026, 01_06_13 AM (4).png",
-      "exact_duplicate_of": "WJFL-04"
+      "owner": "rust/wizard_avatar_pose_tool",
+      "semantic_id": "front_reaction_jump_wings_staff",
+      "status": "DUPLICATE_REFERENCE"
     },
     {
+      "archive_entry": "ChatGPT Image Jul 13, 2026, 01_06_13 AM (5).png",
+      "exact_duplicate_of": "WJFL-05",
       "id": "WJFL-45",
       "order": 75,
-      "owner": null,
-      "status": "QUEUED",
-      "semantic_id": null,
-      "archive_entry": "ChatGPT Image Jul 13, 2026, 01_06_13 AM (5).png",
-      "exact_duplicate_of": "WJFL-05"
+      "owner": "rust/wizard_avatar_pose_tool",
+      "semantic_id": "front_kneel_staff_brace_wings",
+      "status": "DUPLICATE_REFERENCE"
     },
     {
+      "archive_entry": "ChatGPT Image Jul 13, 2026, 01_06_13 AM (6).png",
+      "exact_duplicate_of": "WJFL-06",
       "id": "WJFL-46",
       "order": 76,
-      "owner": null,
-      "status": "QUEUED",
-      "semantic_id": null,
-      "archive_entry": "ChatGPT Image Jul 13, 2026, 01_06_13 AM (6).png",
-      "exact_duplicate_of": "WJFL-06"
+      "owner": "rust/wizard_avatar_pose_tool",
+      "semantic_id": "front_staff_guard_windup_wings",
+      "status": "DUPLICATE_REFERENCE"
     },
     {
+      "archive_entry": "ChatGPT Image Jul 13, 2026, 01_06_13 AM (7).png",
+      "exact_duplicate_of": "WJFL-07",
       "id": "WJFL-47",
       "order": 77,
-      "owner": null,
-      "status": "QUEUED",
-      "semantic_id": null,
-      "archive_entry": "ChatGPT Image Jul 13, 2026, 01_06_13 AM (7).png",
-      "exact_duplicate_of": "WJFL-07"
+      "owner": "rust/wizard_avatar_pose_tool",
+      "semantic_id": "front_staff_guard_horizontal_wings",
+      "status": "DUPLICATE_REFERENCE"
     },
     {
+      "archive_entry": "ChatGPT Image Jul 13, 2026, 01_06_13 AM (8).png",
+      "exact_duplicate_of": "WJFL-08",
       "id": "WJFL-48",
       "order": 78,
-      "owner": null,
-      "status": "QUEUED",
-      "semantic_id": null,
-      "archive_entry": "ChatGPT Image Jul 13, 2026, 01_06_13 AM (8).png",
-      "exact_duplicate_of": "WJFL-08"
+      "owner": "rust/wizard_avatar_pose_tool",
+      "semantic_id": "front_staff_guard_low_wings",
+      "status": "DUPLICATE_REFERENCE"
     },
     {
+      "archive_entry": "ChatGPT Image Jul 13, 2026, 01_06_13 AM (9).png",
+      "exact_duplicate_of": "WJFL-09",
       "id": "WJFL-49",
       "order": 79,
-      "owner": null,
-      "status": "QUEUED",
-      "semantic_id": null,
-      "archive_entry": "ChatGPT Image Jul 13, 2026, 01_06_13 AM (9).png",
-      "exact_duplicate_of": "WJFL-09"
+      "owner": "rust/wizard_avatar_pose_tool",
+      "semantic_id": "front_crouch_staff_planted_wings",
+      "status": "DUPLICATE_REFERENCE"
     },
     {
+      "archive_entry": "ChatGPT Image Jul 13, 2026, 01_06_13 AM (10).png",
+      "exact_duplicate_of": "WJFL-10",
       "id": "WJFL-50",
       "order": 80,
-      "owner": null,
-      "status": "QUEUED",
-      "semantic_id": null,
-      "archive_entry": "ChatGPT Image Jul 13, 2026, 01_06_13 AM (10).png",
-      "exact_duplicate_of": "WJFL-10"
+      "owner": "rust/wizard_avatar_pose_tool",
+      "semantic_id": "front_victory_cast_wings",
+      "status": "DUPLICATE_REFERENCE"
     },
     {
+      "archive_entry": "ChatGPT Image Jul 13, 2026, 01_07_32 AM (1).png",
       "id": "WJFL-51",
       "order": 81,
-      "owner": null,
-      "status": "QUEUED",
-      "semantic_id": null,
-      "archive_entry": "ChatGPT Image Jul 13, 2026, 01_07_32 AM (1).png"
+      "owner": "rust/wizard_avatar_pose_tool",
+      "semantic_id": "feeling_joy_close",
+      "status": "INTEGRATED_RUST"
     },
     {
+      "archive_entry": "ChatGPT Image Jul 13, 2026, 01_07_33 AM (2).png",
       "id": "WJFL-52",
       "order": 82,
-      "owner": null,
-      "status": "QUEUED",
-      "semantic_id": null,
-      "archive_entry": "ChatGPT Image Jul 13, 2026, 01_07_33 AM (2).png"
+      "owner": "rust/wizard_avatar_pose_tool",
+      "semantic_id": "feeling_sadness_close",
+      "status": "INTEGRATED_RUST"
     },
     {
+      "archive_entry": "ChatGPT Image Jul 13, 2026, 01_07_33 AM (3).png",
       "id": "WJFL-53",
       "order": 83,
-      "owner": null,
-      "status": "QUEUED",
-      "semantic_id": null,
-      "archive_entry": "ChatGPT Image Jul 13, 2026, 01_07_33 AM (3).png"
+      "owner": "rust/wizard_avatar_pose_tool",
+      "semantic_id": "feeling_anger_close",
+      "status": "INTEGRATED_RUST"
     },
     {
+      "archive_entry": "ChatGPT Image Jul 13, 2026, 01_07_33 AM (4).png",
       "id": "WJFL-54",
       "order": 84,
-      "owner": null,
-      "status": "QUEUED",
-      "semantic_id": null,
-      "archive_entry": "ChatGPT Image Jul 13, 2026, 01_07_33 AM (4).png"
+      "owner": "rust/wizard_avatar_pose_tool",
+      "semantic_id": "feeling_fear_close",
+      "status": "INTEGRATED_RUST"
     },
     {
+      "archive_entry": "ChatGPT Image Jul 13, 2026, 01_07_33 AM (5).png",
       "id": "WJFL-55",
       "order": 85,
-      "owner": null,
-      "status": "QUEUED",
-      "semantic_id": null,
-      "archive_entry": "ChatGPT Image Jul 13, 2026, 01_07_33 AM (5).png"
+      "owner": "rust/wizard_avatar_pose_tool",
+      "semantic_id": "feeling_shame_close",
+      "status": "INTEGRATED_RUST"
     },
     {
+      "archive_entry": "ChatGPT Image Jul 13, 2026, 01_07_34 AM (6).png",
       "id": "WJFL-56",
       "order": 86,
-      "owner": null,
-      "status": "QUEUED",
-      "semantic_id": null,
-      "archive_entry": "ChatGPT Image Jul 13, 2026, 01_07_34 AM (6).png"
+      "owner": "rust/wizard_avatar_pose_tool",
+      "semantic_id": "feeling_disgust_close",
+      "status": "INTEGRATED_RUST"
     },
     {
+      "archive_entry": "ChatGPT Image Jul 13, 2026, 01_07_34 AM (7).png",
       "id": "WJFL-57",
       "order": 87,
-      "owner": null,
-      "status": "QUEUED",
-      "semantic_id": null,
-      "archive_entry": "ChatGPT Image Jul 13, 2026, 01_07_34 AM (7).png"
+      "owner": "rust/wizard_avatar_pose_tool",
+      "semantic_id": "feeling_surprise_close",
+      "status": "INTEGRATED_RUST"
     },
     {
+      "archive_entry": "ChatGPT Image Jul 13, 2026, 01_07_34 AM (8).png",
       "id": "WJFL-58",
       "order": 88,
-      "owner": null,
-      "status": "QUEUED",
-      "semantic_id": null,
-      "archive_entry": "ChatGPT Image Jul 13, 2026, 01_07_34 AM (8).png"
+      "owner": "rust/wizard_avatar_pose_tool",
+      "semantic_id": "feeling_pride_close",
+      "status": "INTEGRATED_RUST"
     },
     {
+      "archive_entry": "ChatGPT Image Jul 13, 2026, 01_07_34 AM (9).png",
       "id": "WJFL-59",
       "order": 89,
-      "owner": null,
-      "status": "QUEUED",
-      "semantic_id": null,
-      "archive_entry": "ChatGPT Image Jul 13, 2026, 01_07_34 AM (9).png"
+      "owner": "rust/wizard_avatar_pose_tool",
+      "semantic_id": "feeling_guilt_close",
+      "status": "INTEGRATED_RUST"
     },
     {
+      "archive_entry": "ChatGPT Image Jul 13, 2026, 01_07_35 AM (10).png",
       "id": "WJFL-60",
       "order": 90,
-      "owner": null,
-      "status": "QUEUED",
-      "semantic_id": null,
-      "archive_entry": "ChatGPT Image Jul 13, 2026, 01_07_35 AM (10).png"
+      "owner": "rust/wizard_avatar_pose_tool",
+      "semantic_id": "feeling_love_close",
+      "status": "INTEGRATED_RUST"
     }
-  ]
+  ],
+  "duplicate_reference_count": 10,
+  "integrated_unique_count": 50,
+  "integration_policy": "Rust-only procedural translation; sources remain reference-only and are integrated serially after semantic intake and transition planning.",
+  "queue_id": "wizardjoe-feelings-2026-07-13",
+  "queued_count": 0,
+  "schema_version": 1,
+  "source_manifest": "evidence/pose-library-expansion/intake/feelings-manifest.json",
+  "updated_at": "2026-07-13"
 }

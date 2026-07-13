@@ -12,6 +12,9 @@ rust/*/target/
 .mypy_cache/
 external/
 evidence/animation-quality/final/tmp/
+evidence/pose-library-expansion/rust-v4/**/frames/
+evidence/pose-library-expansion/rust-v4/**/animation.mp4
+evidence/pose-library-expansion/rust-v4/**/frame-ledger.ndjson
 evidence/wizard/**/*.png
 evidence/wizard/**/*.gif
 evidence/wizard/**/*.json

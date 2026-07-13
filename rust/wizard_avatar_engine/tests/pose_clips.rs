@@ -34,6 +34,24 @@ fn rust_clips_cover_every_new_catalog_record_and_resolve_every_step() {
             spec.semantic_id
         );
     }
+    let wjfl = library
+        .pose_ids()
+        .filter_map(|id| library.for_id(id))
+        .filter_map(|pose| {
+            pose.motion
+                .candidate_id
+                .as_deref()
+                .filter(|candidate| candidate.starts_with("WJFL-"))
+                .map(|_| pose.id.as_str())
+        })
+        .collect::<BTreeSet<_>>();
+    assert_eq!(wjfl.len(), 50);
+    for pose_id in wjfl {
+        assert!(
+            covered.contains(pose_id),
+            "{pose_id} is not scheduled by a Rust clip"
+        );
+    }
     for pose_id in covered {
         assert!(
             library.for_id(pose_id).is_some(),

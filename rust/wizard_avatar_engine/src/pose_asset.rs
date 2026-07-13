@@ -13,8 +13,8 @@ use sha2::{Digest, Sha256};
 use std::collections::{BTreeMap, BTreeSet};
 use std::io::Read;
 
-pub const IMPORTED_POSE_SCHEMA_VERSION: u32 = 3;
-pub const IMPORTED_POSE_COMPILER_ID: &str = "wizard-avatar-pose-tool-rust-v3";
+pub const IMPORTED_POSE_SCHEMA_VERSION: u32 = 4;
+pub const IMPORTED_POSE_COMPILER_ID: &str = "wizard-avatar-pose-tool-rust-v4";
 
 #[derive(Clone, Copy, Debug, Deserialize)]
 pub struct AssetPoint {
@@ -222,7 +222,7 @@ pub struct ImportedPoseLibrary {
 pub fn load_embedded_pose_library() -> Result<ImportedPoseLibrary, String> {
     const GZIP: &[u8] = include_bytes!(concat!(
         env!("CARGO_MANIFEST_DIR"),
-        "/assets/future_pose_library.v3.json.gz"
+        "/assets/wizard_pose_library.v4.json.gz"
     ));
     let mut decoder = GzDecoder::new(GZIP);
     let mut json = String::new();
@@ -243,13 +243,13 @@ pub fn parse_imported_pose_library(json: &str) -> Result<ImportedPoseLibrary, St
             archive.schema_version, archive.compiler_id
         ));
     }
-    if archive.catalog_count != 30
-        || archive.unique_geometry_count != 29
+    if archive.catalog_count != 80
+        || archive.unique_geometry_count != 79
         || archive.alias_count != 1
-        || archive.poses.len() != 29
+        || archive.poses.len() != 79
         || archive.aliases.len() != 1
     {
-        return Err("pose archive must contain 30 records, 29 geometries, and 1 alias".to_string());
+        return Err("pose archive must contain 80 records, 79 geometries, and 1 alias".to_string());
     }
 
     let geometry_ids = archive
@@ -257,13 +257,13 @@ pub fn parse_imported_pose_library(json: &str) -> Result<ImportedPoseLibrary, St
         .iter()
         .map(|pose| pose.semantic_id.clone())
         .collect::<BTreeSet<_>>();
-    if geometry_ids.len() != 29 {
+    if geometry_ids.len() != 79 {
         return Err("imported pose IDs are not unique".to_string());
     }
     let mut known_ids = geometry_ids;
     known_ids.extend(BASELINE_POSE_IDS.into_iter().map(str::to_string));
 
-    let mut definitions = Vec::with_capacity(29);
+    let mut definitions = Vec::with_capacity(79);
     for pose in archive.poses {
         validate_pose(&pose, &known_ids)?;
         definitions.push(convert_pose(pose)?);
@@ -467,7 +467,7 @@ mod tests {
     use super::*;
 
     #[test]
-    fn rejects_a_non_v3_payload() {
+    fn rejects_a_non_v4_payload() {
         let error = parse_imported_pose_library(r#"{"schema_version":2}"#)
             .err()
             .expect("invalid payload");

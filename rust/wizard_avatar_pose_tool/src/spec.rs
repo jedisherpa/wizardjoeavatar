@@ -5,6 +5,7 @@ use crate::model::{ContactMode, Direction, MotionFamily, Phase, Point};
 pub(crate) enum SpecKind {
     Geometry,
     Alias { target_semantic_id: &'static str },
+    FaceVariant { base_semantic_id: &'static str },
 }
 
 #[derive(Clone, Copy, Debug)]
@@ -831,8 +832,15 @@ pub(crate) const POSE_SPECS: [PoseSpec; 30] = [
 pub(crate) fn pose_spec(candidate_id: &str) -> Result<&'static PoseSpec> {
     POSE_SPECS
         .iter()
+        .chain(crate::feelings_spec::WJFL_SPECS.iter())
         .find(|spec| spec.candidate_id == candidate_id)
         .ok_or_else(|| PoseToolError::Archive(format!("no Rust semantic spec for {candidate_id}")))
+}
+
+pub(crate) fn all_pose_specs() -> impl Iterator<Item = &'static PoseSpec> {
+    POSE_SPECS
+        .iter()
+        .chain(crate::feelings_spec::WJFL_SPECS.iter())
 }
 
 #[cfg(test)]
@@ -865,16 +873,15 @@ mod tests {
 
     #[test]
     fn all_authored_neighbors_resolve_to_new_or_baseline_geometry() {
-        let geometries = POSE_SPECS
-            .iter()
-            .filter(|spec| matches!(spec.kind, SpecKind::Geometry))
+        let geometries = all_pose_specs()
+            .filter(|spec| !matches!(spec.kind, SpecKind::Alias { .. }))
             .map(|spec| spec.semantic_id)
             .collect::<BTreeSet<_>>();
         let allowed = geometries
             .union(&BASELINE_POSE_IDS.into_iter().collect())
             .copied()
             .collect::<BTreeSet<_>>();
-        for spec in &POSE_SPECS {
+        for spec in all_pose_specs() {
             assert!(!spec.neighbors.is_empty(), "{}", spec.candidate_id);
             for neighbor in spec.neighbors {
                 assert!(
@@ -883,6 +890,15 @@ mod tests {
                     spec.candidate_id
                 );
             }
+        }
+    }
+
+    #[test]
+    fn combined_catalog_has_eighty_ordered_records() {
+        let specs = all_pose_specs().collect::<Vec<_>>();
+        assert_eq!(specs.len(), 80);
+        for (index, spec) in specs.iter().enumerate() {
+            assert_eq!(spec.order, index as u32 + 1);
         }
     }
 }

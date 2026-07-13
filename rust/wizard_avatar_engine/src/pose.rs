@@ -535,9 +535,9 @@ impl PoseLibrary {
                 return Err(format!("invalid pose alias {alias} -> {target}"));
             }
         }
-        if self.by_id.len() != 39 || self.aliases.len() != 1 {
+        if self.by_id.len() != 89 || self.aliases.len() != 1 {
             return Err(format!(
-                "runtime pose library must contain 39 geometries and 1 alias, got {} and {}",
+                "runtime pose library must contain 89 geometries and 1 alias, got {} and {}",
                 self.by_id.len(),
                 self.aliases.len()
             ));

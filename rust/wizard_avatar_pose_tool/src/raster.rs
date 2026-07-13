@@ -2,6 +2,20 @@ use crate::error::{PoseToolError, Result};
 use crate::model::{CanonicalConfig, CellPayload, CropBounds, Point};
 use std::collections::VecDeque;
 
+#[derive(Clone, Copy, Debug)]
+struct ComponentBounds {
+    left: u32,
+    top: u32,
+    right: u32,
+    bottom: u32,
+}
+
+#[derive(Debug)]
+struct MaskComponent {
+    pixels: Vec<usize>,
+    bounds: ComponentBounds,
+}
+
 pub fn white_distance_mask(
     pixels: &[[u8; 3]],
     width: u32,
@@ -79,6 +93,81 @@ pub fn fill_subject_holes(mask: &[u8], width: u32, height: u32) -> Result<Vec<u8
             },
         )
         .collect())
+}
+
+pub fn retain_subject_components(mask: &[u8], width: u32, height: u32) -> Result<Vec<u8>> {
+    validate_len(mask.len(), width, height, "mask")?;
+    let mut visited = vec![false; mask.len()];
+    let mut components = Vec::new();
+    for y in 0..height {
+        for x in 0..width {
+            let start = index(x, y, width);
+            if mask[start] == 0 || visited[start] {
+                continue;
+            }
+            visited[start] = true;
+            let mut queue = VecDeque::from([(x, y)]);
+            let mut pixels = Vec::new();
+            let mut bounds = ComponentBounds {
+                left: x,
+                top: y,
+                right: x,
+                bottom: y,
+            };
+            while let Some((cx, cy)) = queue.pop_front() {
+                pixels.push(index(cx, cy, width));
+                bounds.left = bounds.left.min(cx);
+                bounds.top = bounds.top.min(cy);
+                bounds.right = bounds.right.max(cx);
+                bounds.bottom = bounds.bottom.max(cy);
+                for dy in -1_i32..=1 {
+                    for dx in -1_i32..=1 {
+                        if dx == 0 && dy == 0 {
+                            continue;
+                        }
+                        let nx = cx as i32 + dx;
+                        let ny = cy as i32 + dy;
+                        if nx < 0 || ny < 0 || nx >= width as i32 || ny >= height as i32 {
+                            continue;
+                        }
+                        let next = index(nx as u32, ny as u32, width);
+                        if mask[next] != 0 && !visited[next] {
+                            visited[next] = true;
+                            queue.push_back((nx as u32, ny as u32));
+                        }
+                    }
+                }
+            }
+            components.push(MaskComponent { pixels, bounds });
+        }
+    }
+    let primary = components
+        .iter()
+        .max_by_key(|component| component.pixels.len())
+        .ok_or_else(|| PoseToolError::Raster("image contains no detectable subject".to_string()))?;
+    let proximity = width.max(height).div_ceil(9);
+    let minimum_detail = (primary.pixels.len() / 600).max(4);
+    let mut retained = vec![0_u8; mask.len()];
+    for component in &components {
+        let horizontal_gap = if component.bounds.right < primary.bounds.left {
+            primary.bounds.left.saturating_sub(component.bounds.right)
+        } else if component.bounds.left > primary.bounds.right {
+            component.bounds.left.saturating_sub(primary.bounds.right)
+        } else {
+            0
+        };
+        let vertically_relevant = component.bounds.bottom <= primary.bounds.bottom;
+        let is_primary = std::ptr::eq(component, primary);
+        let is_near_detail = component.pixels.len() >= minimum_detail
+            && horizontal_gap <= proximity
+            && vertically_relevant;
+        if is_primary || is_near_detail {
+            for pixel in &component.pixels {
+                retained[*pixel] = 255;
+            }
+        }
+    }
+    Ok(retained)
 }
 
 pub(crate) fn subject_bounds(mask: &[u8], width: u32, height: u32) -> Result<CropBounds> {
@@ -383,6 +472,32 @@ mod tests {
         let filled = fill_subject_holes(&mask, 5, 5).expect("filled mask");
         assert_eq!(filled[index(2, 2, 5)], 255);
         assert_eq!(filled[index(0, 0, 5)], 0);
+    }
+
+    #[test]
+    fn foreground_components_keep_near_effects_but_remove_shadow_and_caption() {
+        let mut mask = vec![0_u8; 12 * 12];
+        for y in 2..=8 {
+            for x in 4..=7 {
+                mask[index(x, y, 12)] = 255;
+            }
+        }
+        mask[index(9, 3, 12)] = 255;
+        mask[index(9, 4, 12)] = 255;
+        mask[index(10, 3, 12)] = 255;
+        mask[index(10, 4, 12)] = 255;
+        for x in 3..=8 {
+            mask[index(x, 10, 12)] = 255;
+        }
+        for x in 4..=7 {
+            mask[index(x, 11, 12)] = 255;
+        }
+
+        let retained = retain_subject_components(&mask, 12, 12).expect("retained mask");
+        assert_eq!(retained[index(5, 5, 12)], 255);
+        assert_eq!(retained[index(9, 3, 12)], 255);
+        assert_eq!(retained[index(5, 10, 12)], 0);
+        assert_eq!(retained[index(5, 11, 12)], 0);
     }
 
     #[test]

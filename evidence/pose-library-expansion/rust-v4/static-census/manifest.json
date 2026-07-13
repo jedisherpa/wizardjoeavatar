@@ -1,0 +1,817 @@
+{
+  "schema_version": 1,
+  "generator": "wizard-avatar-pose-evidence-rust-v4",
+  "catalog_frames": 89,
+  "unique_geometry_count": 89,
+  "alias_count": 1,
+  "frame_width": 480,
+  "frame_height": 270,
+  "records": [
+    {
+      "frame_index": 0,
+      "pose_id": "back_idle",
+      "resolved_pose_id": "back_idle",
+      "candidate_id": null,
+      "occupied_cells": 3765,
+      "source_cells": 3748,
+      "png": "frames/0000.png"
+    },
+    {
+      "frame_index": 1,
+      "pose_id": "back_left",
+      "resolved_pose_id": "back_left",
+      "candidate_id": null,
+      "occupied_cells": 3704,
+      "source_cells": 3688,
+      "png": "frames/0001.png"
+    },
+    {
+      "frame_index": 2,
+      "pose_id": "back_right",
+      "resolved_pose_id": "back_right",
+      "candidate_id": null,
+      "occupied_cells": 3683,
+      "source_cells": 3683,
+      "png": "frames/0002.png"
+    },
+    {
+      "frame_index": 3,
+      "pose_id": "explaining",
+      "resolved_pose_id": "explaining",
+      "candidate_id": null,
+      "occupied_cells": 3483,
+      "source_cells": 3480,
+      "png": "frames/0003.png"
+    },
+    {
+      "frame_index": 4,
+      "pose_id": "feeling_anger_close",
+      "resolved_pose_id": "feeling_anger_close",
+      "candidate_id": "WJFL-53",
+      "occupied_cells": 3696,
+      "source_cells": 3689,
+      "png": "frames/0004.png"
+    },
+    {
+      "frame_index": 5,
+      "pose_id": "feeling_anger_full",
+      "resolved_pose_id": "feeling_anger_full",
+      "candidate_id": "WJFL-33",
+      "occupied_cells": 3696,
+      "source_cells": 3689,
+      "png": "frames/0005.png"
+    },
+    {
+      "frame_index": 6,
+      "pose_id": "feeling_disgust_close",
+      "resolved_pose_id": "feeling_disgust_close",
+      "candidate_id": "WJFL-56",
+      "occupied_cells": 3063,
+      "source_cells": 3059,
+      "png": "frames/0006.png"
+    },
+    {
+      "frame_index": 7,
+      "pose_id": "feeling_disgust_full",
+      "resolved_pose_id": "feeling_disgust_full",
+      "candidate_id": "WJFL-36",
+      "occupied_cells": 3063,
+      "source_cells": 3059,
+      "png": "frames/0007.png"
+    },
+    {
+      "frame_index": 8,
+      "pose_id": "feeling_fear_close",
+      "resolved_pose_id": "feeling_fear_close",
+      "candidate_id": "WJFL-54",
+      "occupied_cells": 3592,
+      "source_cells": 3585,
+      "png": "frames/0008.png"
+    },
+    {
+      "frame_index": 9,
+      "pose_id": "feeling_fear_full",
+      "resolved_pose_id": "feeling_fear_full",
+      "candidate_id": "WJFL-34",
+      "occupied_cells": 3592,
+      "source_cells": 3585,
+      "png": "frames/0009.png"
+    },
+    {
+      "frame_index": 10,
+      "pose_id": "feeling_guilt_close",
+      "resolved_pose_id": "feeling_guilt_close",
+      "candidate_id": "WJFL-59",
+      "occupied_cells": 3571,
+      "source_cells": 3571,
+      "png": "frames/0010.png"
+    },
+    {
+      "frame_index": 11,
+      "pose_id": "feeling_guilt_full",
+      "resolved_pose_id": "feeling_guilt_full",
+      "candidate_id": "WJFL-39",
+      "occupied_cells": 3571,
+      "source_cells": 3571,
+      "png": "frames/0011.png"
+    },
+    {
+      "frame_index": 12,
+      "pose_id": "feeling_joy_close",
+      "resolved_pose_id": "feeling_joy_close",
+      "candidate_id": "WJFL-51",
+      "occupied_cells": 3161,
+      "source_cells": 3158,
+      "png": "frames/0012.png"
+    },
+    {
+      "frame_index": 13,
+      "pose_id": "feeling_joy_full",
+      "resolved_pose_id": "feeling_joy_full",
+      "candidate_id": "WJFL-31",
+      "occupied_cells": 3161,
+      "source_cells": 3158,
+      "png": "frames/0013.png"
+    },
+    {
+      "frame_index": 14,
+      "pose_id": "feeling_love_close",
+      "resolved_pose_id": "feeling_love_close",
+      "candidate_id": "WJFL-60",
+      "occupied_cells": 3280,
+      "source_cells": 3273,
+      "png": "frames/0014.png"
+    },
+    {
+      "frame_index": 15,
+      "pose_id": "feeling_love_full",
+      "resolved_pose_id": "feeling_love_full",
+      "candidate_id": "WJFL-40",
+      "occupied_cells": 3280,
+      "source_cells": 3273,
+      "png": "frames/0015.png"
+    },
+    {
+      "frame_index": 16,
+      "pose_id": "feeling_pride_close",
+      "resolved_pose_id": "feeling_pride_close",
+      "candidate_id": "WJFL-58",
+      "occupied_cells": 3229,
+      "source_cells": 3228,
+      "png": "frames/0016.png"
+    },
+    {
+      "frame_index": 17,
+      "pose_id": "feeling_pride_full",
+      "resolved_pose_id": "feeling_pride_full",
+      "candidate_id": "WJFL-38",
+      "occupied_cells": 3229,
+      "source_cells": 3228,
+      "png": "frames/0017.png"
+    },
+    {
+      "frame_index": 18,
+      "pose_id": "feeling_sadness_close",
+      "resolved_pose_id": "feeling_sadness_close",
+      "candidate_id": "WJFL-52",
+      "occupied_cells": 3867,
+      "source_cells": 3866,
+      "png": "frames/0018.png"
+    },
+    {
+      "frame_index": 19,
+      "pose_id": "feeling_sadness_full",
+      "resolved_pose_id": "feeling_sadness_full",
+      "candidate_id": "WJFL-32",
+      "occupied_cells": 3867,
+      "source_cells": 3866,
+      "png": "frames/0019.png"
+    },
+    {
+      "frame_index": 20,
+      "pose_id": "feeling_shame_close",
+      "resolved_pose_id": "feeling_shame_close",
+      "candidate_id": "WJFL-55",
+      "occupied_cells": 4051,
+      "source_cells": 4047,
+      "png": "frames/0020.png"
+    },
+    {
+      "frame_index": 21,
+      "pose_id": "feeling_shame_full",
+      "resolved_pose_id": "feeling_shame_full",
+      "candidate_id": "WJFL-35",
+      "occupied_cells": 4051,
+      "source_cells": 4047,
+      "png": "frames/0021.png"
+    },
+    {
+      "frame_index": 22,
+      "pose_id": "feeling_surprise_close",
+      "resolved_pose_id": "feeling_surprise_close",
+      "candidate_id": "WJFL-57",
+      "occupied_cells": 2594,
+      "source_cells": 2589,
+      "png": "frames/0022.png"
+    },
+    {
+      "frame_index": 23,
+      "pose_id": "feeling_surprise_full",
+      "resolved_pose_id": "feeling_surprise_full",
+      "candidate_id": "WJFL-37",
+      "occupied_cells": 2594,
+      "source_cells": 2589,
+      "png": "frames/0023.png"
+    },
+    {
+      "frame_index": 24,
+      "pose_id": "fly_front_hover_neutral",
+      "resolved_pose_id": "fly_front_hover_neutral",
+      "candidate_id": "WJFA-01",
+      "occupied_cells": 2988,
+      "source_cells": 2978,
+      "png": "frames/0024.png"
+    },
+    {
+      "frame_index": 25,
+      "pose_id": "fly_front_knee_up",
+      "resolved_pose_id": "fly_front_knee_up",
+      "candidate_id": "WJFA-02",
+      "occupied_cells": 2883,
+      "source_cells": 2874,
+      "png": "frames/0025.png"
+    },
+    {
+      "frame_index": 26,
+      "pose_id": "fly_front_wings_down",
+      "resolved_pose_id": "fly_front_wings_down",
+      "candidate_id": "WJFA-04",
+      "occupied_cells": 3034,
+      "source_cells": 3033,
+      "png": "frames/0026.png"
+    },
+    {
+      "frame_index": 27,
+      "pose_id": "fly_front_wings_up",
+      "resolved_pose_id": "fly_front_wings_up",
+      "candidate_id": "WJFA-03",
+      "occupied_cells": 3427,
+      "source_cells": 3412,
+      "png": "frames/0027.png"
+    },
+    {
+      "frame_index": 28,
+      "pose_id": "fly_southeast_banked_staff",
+      "resolved_pose_id": "fly_southeast_banked_staff",
+      "candidate_id": "WJFA-07",
+      "occupied_cells": 3391,
+      "source_cells": 3385,
+      "png": "frames/0028.png"
+    },
+    {
+      "frame_index": 29,
+      "pose_id": "fly_southeast_cheer",
+      "resolved_pose_id": "fly_southeast_cheer",
+      "candidate_id": "WJFA-08",
+      "occupied_cells": 3248,
+      "source_cells": 3246,
+      "png": "frames/0029.png"
+    },
+    {
+      "frame_index": 30,
+      "pose_id": "fly_southeast_forward_glide",
+      "resolved_pose_id": "fly_southeast_forward_glide",
+      "candidate_id": "WJFA-05",
+      "occupied_cells": 1696,
+      "source_cells": 1695,
+      "png": "frames/0030.png"
+    },
+    {
+      "frame_index": 31,
+      "pose_id": "fly_southeast_staff_forward",
+      "resolved_pose_id": "fly_southeast_staff_forward",
+      "candidate_id": "WJFA-09",
+      "occupied_cells": 2330,
+      "source_cells": 2326,
+      "png": "frames/0031.png"
+    },
+    {
+      "frame_index": 32,
+      "pose_id": "fly_southwest_banked_staff",
+      "resolved_pose_id": "fly_southwest_banked_staff",
+      "candidate_id": "WJFA-06",
+      "occupied_cells": 2640,
+      "source_cells": 2638,
+      "png": "frames/0032.png"
+    },
+    {
+      "frame_index": 33,
+      "pose_id": "front_airborne_fall_back_staff",
+      "resolved_pose_id": "front_airborne_fall_back_staff",
+      "candidate_id": "WJFA-14",
+      "occupied_cells": 3138,
+      "source_cells": 3137,
+      "png": "frames/0033.png"
+    },
+    {
+      "frame_index": 34,
+      "pose_id": "front_airborne_fall_back_wings",
+      "resolved_pose_id": "front_airborne_fall_back_wings",
+      "candidate_id": "WJFL-14",
+      "occupied_cells": 2757,
+      "source_cells": 2753,
+      "png": "frames/0034.png"
+    },
+    {
+      "frame_index": 35,
+      "pose_id": "front_celebrate_jump_staff_up",
+      "resolved_pose_id": "front_celebrate_jump_staff_up",
+      "candidate_id": "WJFA-18",
+      "occupied_cells": 2956,
+      "source_cells": 2947,
+      "png": "frames/0035.png"
+    },
+    {
+      "frame_index": 36,
+      "pose_id": "front_celebrate_jump_wings",
+      "resolved_pose_id": "front_celebrate_jump_wings",
+      "candidate_id": "WJFL-18",
+      "occupied_cells": 2979,
+      "source_cells": 2975,
+      "png": "frames/0036.png"
+    },
+    {
+      "frame_index": 37,
+      "pose_id": "front_celebrate_staff_up_wings",
+      "resolved_pose_id": "front_celebrate_staff_up_wings",
+      "candidate_id": "WJFL-15",
+      "occupied_cells": 3337,
+      "source_cells": 3333,
+      "png": "frames/0037.png"
+    },
+    {
+      "frame_index": 38,
+      "pose_id": "front_celebrate_wings_staff_up",
+      "resolved_pose_id": "front_celebrate_wings_staff_up",
+      "candidate_id": "WJFA-15",
+      "occupied_cells": 3338,
+      "source_cells": 3333,
+      "png": "frames/0038.png"
+    },
+    {
+      "frame_index": 39,
+      "pose_id": "front_crouch_guard",
+      "resolved_pose_id": "front_crouch_guard",
+      "candidate_id": "WJP2-03",
+      "occupied_cells": 3349,
+      "source_cells": 3345,
+      "png": "frames/0039.png"
+    },
+    {
+      "frame_index": 40,
+      "pose_id": "front_crouch_guard_wings",
+      "resolved_pose_id": "front_crouch_guard_wings",
+      "candidate_id": "WJFL-03",
+      "occupied_cells": 3349,
+      "source_cells": 3345,
+      "png": "frames/0040.png"
+    },
+    {
+      "frame_index": 41,
+      "pose_id": "front_crouch_hand_plant_wings",
+      "resolved_pose_id": "front_crouch_hand_plant_wings",
+      "candidate_id": "WJFL-12",
+      "occupied_cells": 3073,
+      "source_cells": 3062,
+      "png": "frames/0041.png"
+    },
+    {
+      "frame_index": 42,
+      "pose_id": "front_crouch_landing_staff_plant",
+      "resolved_pose_id": "front_crouch_landing_staff_plant",
+      "candidate_id": "WJFA-12",
+      "occupied_cells": 3071,
+      "source_cells": 3060,
+      "png": "frames/0042.png"
+    },
+    {
+      "frame_index": 43,
+      "pose_id": "front_crouch_reaction_staff_planted",
+      "resolved_pose_id": "front_crouch_reaction_staff_planted",
+      "candidate_id": "WJP2-09",
+      "occupied_cells": 2991,
+      "source_cells": 2989,
+      "png": "frames/0043.png"
+    },
+    {
+      "frame_index": 44,
+      "pose_id": "front_crouch_staff_planted_wings",
+      "resolved_pose_id": "front_crouch_staff_planted_wings",
+      "candidate_id": "WJFL-09",
+      "occupied_cells": 3066,
+      "source_cells": 3063,
+      "png": "frames/0044.png"
+    },
+    {
+      "frame_index": 45,
+      "pose_id": "front_explaining_both_hands_wings",
+      "resolved_pose_id": "front_explaining_both_hands_wings",
+      "candidate_id": "WJFL-26",
+      "occupied_cells": 3571,
+      "source_cells": 3568,
+      "png": "frames/0045.png"
+    },
+    {
+      "frame_index": 46,
+      "pose_id": "front_explaining_open_hand_wings",
+      "resolved_pose_id": "front_explaining_open_hand_wings",
+      "candidate_id": "WJFL-24",
+      "occupied_cells": 3848,
+      "source_cells": 3845,
+      "png": "frames/0046.png"
+    },
+    {
+      "frame_index": 47,
+      "pose_id": "front_greeting_wave_wings",
+      "resolved_pose_id": "front_greeting_wave_wings",
+      "candidate_id": "WJFL-22",
+      "occupied_cells": 3542,
+      "source_cells": 3535,
+      "png": "frames/0047.png"
+    },
+    {
+      "frame_index": 48,
+      "pose_id": "front_idle",
+      "resolved_pose_id": "front_idle",
+      "candidate_id": null,
+      "occupied_cells": 3433,
+      "source_cells": 3430,
+      "png": "frames/0048.png"
+    },
+    {
+      "frame_index": 49,
+      "pose_id": "front_idle_wings",
+      "resolved_pose_id": "front_idle_wings",
+      "candidate_id": "WJFL-21",
+      "occupied_cells": 4135,
+      "source_cells": 4132,
+      "png": "frames/0049.png"
+    },
+    {
+      "frame_index": 50,
+      "pose_id": "front_kneel_staff_brace",
+      "resolved_pose_id": "front_kneel_staff_brace",
+      "candidate_id": "WJP2-05",
+      "occupied_cells": 3087,
+      "source_cells": 3082,
+      "png": "frames/0050.png"
+    },
+    {
+      "frame_index": 51,
+      "pose_id": "front_kneel_staff_brace_wings",
+      "resolved_pose_id": "front_kneel_staff_brace_wings",
+      "candidate_id": "WJFL-05",
+      "occupied_cells": 3081,
+      "source_cells": 3077,
+      "png": "frames/0051.png"
+    },
+    {
+      "frame_index": 52,
+      "pose_id": "front_magic_staff_raise_wings",
+      "resolved_pose_id": "front_magic_staff_raise_wings",
+      "candidate_id": "WJFL-27",
+      "occupied_cells": 3545,
+      "source_cells": 3540,
+      "png": "frames/0052.png"
+    },
+    {
+      "frame_index": 53,
+      "pose_id": "front_magic_staff_spark_wings",
+      "resolved_pose_id": "front_magic_staff_spark_wings",
+      "candidate_id": "WJFL-30",
+      "occupied_cells": 3085,
+      "source_cells": 3081,
+      "png": "frames/0053.png"
+    },
+    {
+      "frame_index": 54,
+      "pose_id": "front_magic_staff_thrust",
+      "resolved_pose_id": "front_magic_staff_thrust",
+      "candidate_id": "WJFA-13",
+      "occupied_cells": 2780,
+      "source_cells": 2775,
+      "png": "frames/0054.png"
+    },
+    {
+      "frame_index": 55,
+      "pose_id": "front_magic_staff_thrust_wings",
+      "resolved_pose_id": "front_magic_staff_thrust_wings",
+      "candidate_id": "WJFL-13",
+      "occupied_cells": 2935,
+      "source_cells": 2931,
+      "png": "frames/0055.png"
+    },
+    {
+      "frame_index": 56,
+      "pose_id": "front_playful_kick_wings",
+      "resolved_pose_id": "front_playful_kick_wings",
+      "candidate_id": "WJFL-29",
+      "occupied_cells": 3558,
+      "source_cells": 3555,
+      "png": "frames/0056.png"
+    },
+    {
+      "frame_index": 57,
+      "pose_id": "front_point_direct_staff_held",
+      "resolved_pose_id": "front_point_direct_staff_held",
+      "candidate_id": "WJFA-17",
+      "occupied_cells": 4096,
+      "source_cells": 4091,
+      "png": "frames/0057.png"
+    },
+    {
+      "frame_index": 58,
+      "pose_id": "front_point_direct_wings",
+      "resolved_pose_id": "front_point_direct_wings",
+      "candidate_id": "WJFL-17",
+      "occupied_cells": 4043,
+      "source_cells": 4041,
+      "png": "frames/0058.png"
+    },
+    {
+      "frame_index": 59,
+      "pose_id": "front_point_side_wings",
+      "resolved_pose_id": "front_point_side_wings",
+      "candidate_id": "WJFL-25",
+      "occupied_cells": 3096,
+      "source_cells": 3094,
+      "png": "frames/0059.png"
+    },
+    {
+      "frame_index": 60,
+      "pose_id": "front_reaction_jump_fist_staff",
+      "resolved_pose_id": "front_reaction_jump_fist_staff",
+      "candidate_id": "WJP2-04",
+      "occupied_cells": 3410,
+      "source_cells": 3407,
+      "png": "frames/0060.png"
+    },
+    {
+      "frame_index": 61,
+      "pose_id": "front_reaction_jump_wings_staff",
+      "resolved_pose_id": "front_reaction_jump_wings_staff",
+      "candidate_id": "WJFL-04",
+      "occupied_cells": 3021,
+      "source_cells": 3018,
+      "png": "frames/0061.png"
+    },
+    {
+      "frame_index": 62,
+      "pose_id": "front_run_charge_right_plant",
+      "resolved_pose_id": "front_run_charge_right_plant",
+      "candidate_id": "WJFA-11",
+      "occupied_cells": 3132,
+      "source_cells": 3131,
+      "png": "frames/0062.png"
+    },
+    {
+      "frame_index": 63,
+      "pose_id": "front_run_charge_wings",
+      "resolved_pose_id": "front_run_charge_wings",
+      "candidate_id": "WJFL-11",
+      "occupied_cells": 3157,
+      "source_cells": 3156,
+      "png": "frames/0063.png"
+    },
+    {
+      "frame_index": 64,
+      "pose_id": "front_shush_secret_staff_held",
+      "resolved_pose_id": "front_shush_secret_staff_held",
+      "candidate_id": "WJFA-19",
+      "occupied_cells": 4340,
+      "source_cells": 4339,
+      "png": "frames/0064.png"
+    },
+    {
+      "frame_index": 65,
+      "pose_id": "front_shush_wings",
+      "resolved_pose_id": "front_shush_wings",
+      "candidate_id": "WJFL-19",
+      "occupied_cells": 4163,
+      "source_cells": 4162,
+      "png": "frames/0065.png"
+    },
+    {
+      "frame_index": 66,
+      "pose_id": "front_sincere_hand_heart_wings",
+      "resolved_pose_id": "front_sincere_hand_heart_wings",
+      "candidate_id": "WJFL-28",
+      "occupied_cells": 4054,
+      "source_cells": 4053,
+      "png": "frames/0066.png"
+    },
+    {
+      "frame_index": 67,
+      "pose_id": "front_staff_block_horizontal",
+      "resolved_pose_id": "front_staff_block_horizontal",
+      "candidate_id": "WJFA-16",
+      "occupied_cells": 2800,
+      "source_cells": 2799,
+      "png": "frames/0067.png"
+    },
+    {
+      "frame_index": 68,
+      "pose_id": "front_staff_block_wings",
+      "resolved_pose_id": "front_staff_block_wings",
+      "candidate_id": "WJFL-16",
+      "occupied_cells": 2796,
+      "source_cells": 2795,
+      "png": "frames/0068.png"
+    },
+    {
+      "frame_index": 69,
+      "pose_id": "front_staff_guard_horizontal_wings",
+      "resolved_pose_id": "front_staff_guard_horizontal_wings",
+      "candidate_id": "WJFL-07",
+      "occupied_cells": 4161,
+      "source_cells": 4159,
+      "png": "frames/0069.png"
+    },
+    {
+      "frame_index": 70,
+      "pose_id": "front_staff_guard_low",
+      "resolved_pose_id": "front_staff_guard_low",
+      "candidate_id": "WJP2-07",
+      "occupied_cells": 4155,
+      "source_cells": 4154,
+      "png": "frames/0070.png"
+    },
+    {
+      "frame_index": 71,
+      "pose_id": "front_staff_guard_low_wings",
+      "resolved_pose_id": "front_staff_guard_low_wings",
+      "candidate_id": "WJFL-08",
+      "occupied_cells": 3857,
+      "source_cells": 3853,
+      "png": "frames/0071.png"
+    },
+    {
+      "frame_index": 72,
+      "pose_id": "front_staff_guard_windup",
+      "resolved_pose_id": "front_staff_guard_windup",
+      "candidate_id": "WJP2-06",
+      "occupied_cells": 2791,
+      "source_cells": 2783,
+      "png": "frames/0072.png"
+    },
+    {
+      "frame_index": 73,
+      "pose_id": "front_staff_guard_windup_wings",
+      "resolved_pose_id": "front_staff_guard_windup_wings",
+      "candidate_id": "WJFL-06",
+      "occupied_cells": 2791,
+      "source_cells": 2783,
+      "png": "frames/0073.png"
+    },
+    {
+      "frame_index": 74,
+      "pose_id": "front_staff_spin_flourish",
+      "resolved_pose_id": "front_staff_spin_flourish",
+      "candidate_id": "WJFA-20",
+      "occupied_cells": 3195,
+      "source_cells": 3194,
+      "png": "frames/0074.png"
+    },
+    {
+      "frame_index": 75,
+      "pose_id": "front_staff_spin_wings",
+      "resolved_pose_id": "front_staff_spin_wings",
+      "candidate_id": "WJFL-20",
+      "occupied_cells": 3250,
+      "source_cells": 3248,
+      "png": "frames/0075.png"
+    },
+    {
+      "frame_index": 76,
+      "pose_id": "front_thinking_hand_chin_wings",
+      "resolved_pose_id": "front_thinking_hand_chin_wings",
+      "candidate_id": "WJFL-23",
+      "occupied_cells": 4020,
+      "source_cells": 4017,
+      "png": "frames/0076.png"
+    },
+    {
+      "frame_index": 77,
+      "pose_id": "front_victory_cast",
+      "resolved_pose_id": "front_victory_cast",
+      "candidate_id": "WJP2-10",
+      "occupied_cells": 3272,
+      "source_cells": 3258,
+      "png": "frames/0077.png"
+    },
+    {
+      "frame_index": 78,
+      "pose_id": "front_victory_cast_wings",
+      "resolved_pose_id": "front_victory_cast_wings",
+      "candidate_id": "WJFL-10",
+      "occupied_cells": 3134,
+      "source_cells": 3132,
+      "png": "frames/0078.png"
+    },
+    {
+      "frame_index": 79,
+      "pose_id": "magic_cast",
+      "resolved_pose_id": "magic_cast",
+      "candidate_id": null,
+      "occupied_cells": 3181,
+      "source_cells": 3175,
+      "png": "frames/0079.png"
+    },
+    {
+      "frame_index": 80,
+      "pose_id": "profile_left",
+      "resolved_pose_id": "profile_left",
+      "candidate_id": null,
+      "occupied_cells": 2749,
+      "source_cells": 2749,
+      "png": "frames/0080.png"
+    },
+    {
+      "frame_index": 81,
+      "pose_id": "profile_right",
+      "resolved_pose_id": "profile_right",
+      "candidate_id": null,
+      "occupied_cells": 3070,
+      "source_cells": 3068,
+      "png": "frames/0081.png"
+    },
+    {
+      "frame_index": 82,
+      "pose_id": "run_front_airborne_drive",
+      "resolved_pose_id": "run_front_airborne_drive",
+      "candidate_id": "WJP2-02",
+      "occupied_cells": 3408,
+      "source_cells": 3403,
+      "png": "frames/0082.png"
+    },
+    {
+      "frame_index": 83,
+      "pose_id": "run_front_airborne_reach",
+      "resolved_pose_id": "run_front_airborne_reach",
+      "candidate_id": "WJP2-01",
+      "occupied_cells": 3582,
+      "source_cells": 3582,
+      "png": "frames/0083.png"
+    },
+    {
+      "frame_index": 84,
+      "pose_id": "run_front_cross_step_wings_staff",
+      "resolved_pose_id": "run_front_cross_step_wings_staff",
+      "candidate_id": "WJFL-01",
+      "occupied_cells": 3647,
+      "source_cells": 3643,
+      "png": "frames/0084.png"
+    },
+    {
+      "frame_index": 85,
+      "pose_id": "run_front_stride_wings_staff",
+      "resolved_pose_id": "run_front_stride_wings_staff",
+      "candidate_id": "WJFL-02",
+      "occupied_cells": 3241,
+      "source_cells": 3237,
+      "png": "frames/0085.png"
+    },
+    {
+      "frame_index": 86,
+      "pose_id": "walk_front_left",
+      "resolved_pose_id": "walk_front_left",
+      "candidate_id": null,
+      "occupied_cells": 3226,
+      "source_cells": 3213,
+      "png": "frames/0086.png"
+    },
+    {
+      "frame_index": 87,
+      "pose_id": "walk_front_right",
+      "resolved_pose_id": "walk_front_right",
+      "candidate_id": null,
+      "occupied_cells": 3211,
+      "source_cells": 3207,
+      "png": "frames/0087.png"
+    },
+    {
+      "frame_index": 88,
+      "pose_id": "walk_front_right_lift",
+      "resolved_pose_id": "walk_front_right_lift",
+      "candidate_id": "WJP2-08",
+      "occupied_cells": 3989,
+      "source_cells": 3987,
+      "png": "frames/0088.png"
+    }
+  ],
+  "quality": {
+    "frame_count": 89,
+    "pair_count": 0,
+    "failures": []
+  }
+}

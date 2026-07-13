@@ -19,7 +19,7 @@ fn run() -> wizard_avatar_pose_tool::Result<()> {
     let output = arguments
         .next()
         .map(PathBuf::from)
-        .unwrap_or_else(|| PathBuf::from("target/pose-tool/compiled-30-poses.json"));
+        .unwrap_or_else(|| PathBuf::from("target/pose-tool/compiled-80-poses-v4.json"));
     if arguments.next().is_some() {
         return Err(wizard_avatar_pose_tool::PoseToolError::Archive(
             "usage: wizard-avatar-pose-tool [repo-root] [crate-target-output]".to_string(),

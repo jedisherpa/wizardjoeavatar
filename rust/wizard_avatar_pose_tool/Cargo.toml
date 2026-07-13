@@ -6,6 +6,7 @@ description = "Deterministic offline compiler for WizardJoe reference pose archi
 
 [dependencies]
 image = { version = "0.25", default-features = false, features = ["png"] }
+flate2 = "1"
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
 sha2 = "0.10"
@@ -22,3 +23,7 @@ path = "src/main.rs"
 [[bin]]
 name = "wizard-avatar-feelings-intake"
 path = "src/feelings_intake_main.rs"
+
+[[bin]]
+name = "wizard-avatar-pose-promote"
+path = "src/pose_promote_main.rs"

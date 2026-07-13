@@ -58,6 +58,7 @@ pub(crate) fn compile_semantics(
     let mut semantic_cells = segment_cells(spec, cells, &staff_anchors);
     ensure_required_regions(spec, &mut semantic_cells, &staff_anchors)?;
     let anchors = snap_anchors(staff_anchors, &semantic_cells, spec.effect);
+    bridge_staff_axis(&anchors, &mut semantic_cells);
     let contact_sets = contact_sets(spec.contact_mode, &anchors, &semantic_cells)?;
     let attachment_edges = attachment_edges(&anchors, spec.effect);
     let presence = FeaturePresence {
@@ -88,6 +89,27 @@ pub(crate) fn compile_semantics(
     };
     validate_semantics(spec.semantic_id, &parts, canonical)?;
     Ok(parts)
+}
+
+fn bridge_staff_axis(anchors: &[NamedAnchor], cells: &mut Vec<SemanticCellPayload>) {
+    let map = anchor_map(anchors);
+    let top = map[&AnchorId::StaffTop];
+    let hand = map[&AnchorId::StaffHand];
+    for point in discrete_line(top, hand) {
+        let occupied = cells
+            .iter()
+            .any(|cell| cell.x == point.x && cell.y == point.y);
+        if occupied {
+            continue;
+        }
+        cells.push(SemanticCellPayload {
+            x: point.x,
+            y: point.y,
+            rgb: [126, 73, 24],
+            region: RegionId::Staff,
+        });
+    }
+    cells.sort_by_key(|cell| (cell.y, cell.x, cell.rgb));
 }
 
 fn derive_anchors(landmarks: Landmarks, canonical: CanonicalConfig) -> Vec<NamedAnchor> {
@@ -535,12 +557,9 @@ fn snap_anchors(
         .map(|mut anchor| {
             if matches!(
                 anchor.id,
-                AnchorId::Root
-                    | AnchorId::ContactRoot
-                    | AnchorId::StaffHand
-                    | AnchorId::StaffTop
-                    | AnchorId::EffectOrigin
-            ) {
+                AnchorId::Root | AnchorId::ContactRoot | AnchorId::StaffHand | AnchorId::StaffTop
+            ) || anchor.id == AnchorId::EffectOrigin && !effect_present
+            {
                 return anchor;
             }
             let regions = anchor_regions(anchor.id, effect_present);
@@ -1139,6 +1158,10 @@ fn unexplained_segment_gaps(
                                 | RegionId::InnerRobe
                                 | RegionId::LeftArm
                                 | RegionId::RightArm
+                                | RegionId::Head
+                                | RegionId::Hat
+                                | RegionId::Beard
+                                | RegionId::Face
                         ))
             });
             !has_authored_occluder
