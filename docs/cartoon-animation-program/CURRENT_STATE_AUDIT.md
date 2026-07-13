@@ -24,11 +24,13 @@ ten-minute soak all pass.
 The original audit at `70c5bd4` found that several planned components existed
 but were bypassed by the live path. Those findings are preserved below as the
 baseline that drove remediation. Commit
-`c73be1f8d423f3347b5171f186f408ffad86d440` closes them: the live hub now owns a
+`c73be1f8d423f3347b5171f186f408ffad86d440` closes the integration gaps: the live hub now owns a
 fixed-tick `AvatarRuntime`, ordered inbox, typed acknowledgements, compact replay
 log, package-selected graph-v2 driver, reachable semantic actions, and visible
 reference-pose face channels. Browser control packets and response snapshots
-also cross the deterministic runtime boundary without type or revision drift.
+also cross the deterministic runtime boundary without type drift. Commit
+`9b8507e7bc31a9a15e584d0e18644f99578c59a5` atomically binds each applied ack to
+its exact post-tick response snapshot.
 
 Current rating: **complete Python ASCILINE cartoon animation runtime and
 repeatable 89-pose character package**. Physical gamepad hardware remains a
@@ -67,8 +69,8 @@ executes only Python and serves only the generated Python cell library.
 Checkpoint date: 2026-07-13
 
 The first portion of this checkpoint recorded provisional working-tree evidence.
-The same contracts are now committed at `c73be1f` and have passed the complete
-release gate.
+The same contracts are now committed through `9b8507e` and have passed the
+complete release gate.
 
 `tests/wizard/test_production_animation_wiring.py` now protects seven production
 contracts that the earlier suite did not prove:
@@ -109,7 +111,7 @@ The final release evidence is:
 
 ```text
 python3 -m unittest discover -s tests
-Ran 171 tests in 149.253s
+Ran 171 tests in 149.294s
 OK
 
 python3 tools/validate_cartoon_animation_program.py --root .
@@ -134,7 +136,7 @@ after the final response-state correction, its response revision and simulation
 tick match that ack. The original findings below remain the audited `70c5bd4`
 baseline and are retained for accountability.
 
-## Original baseline findings (resolved at `c73be1f`)
+## Original baseline findings (resolved through `9b8507e`)
 
 ### P1: The deterministic runtime and ordered command system are not in production
 
