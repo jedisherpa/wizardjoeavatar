@@ -54,6 +54,17 @@ class CrystailCharacterTests(unittest.TestCase):
         self.assertTrue(any(r > g * 1.3 and r > b * 1.8 for r, g, b in colors))
         self.assertTrue(any(b > r * 1.2 and b > g * 0.8 for r, g, b in colors))
 
+    def test_every_pose_keeps_wing_safe_canvas_inset(self):
+        package = load_character_package(CRYSTAIL_PACKAGE_PATH)
+        payload = json.loads(package.pose_library.read_text(encoding="utf-8"))
+        for pose in payload["poses"]:
+            with self.subTest(pose_id=pose["id"]):
+                xs = [cell["x"] for cell in pose["cells"]]
+                ys = [cell["y"] for cell in pose["cells"]]
+                self.assertGreaterEqual(min(xs), 4)
+                self.assertLessEqual(max(xs), 67)
+                self.assertGreaterEqual(min(ys), 4)
+
     def test_motion_expression_speech_and_containment_change_live_cells(self):
         source = self.make_source()
         idle = source.render_current_frame().cells

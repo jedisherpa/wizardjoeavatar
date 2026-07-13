@@ -32,6 +32,12 @@ EXPRESSION_NAMES = (
     "anger", "frustration", "determination", "fatigue", "contemplation",
 )
 
+# Leave enough transparent cells around every authored pose for scaled blits,
+# wing follow-through, and sub-cell projection rounding.  A one-cell border
+# reads as a clipped wing tip even when no source pixels are discarded.
+POSE_MAX_WIDTH = 64
+POSE_MAX_HEIGHT = 88
+
 
 def _source_map() -> dict[str, tuple[str, int, int, int]]:
     result: dict[str, tuple[str, int, int, int]] = {}
@@ -134,7 +140,7 @@ def _panel_cells(sheet_name: str, columns: int, rows: int, index: int) -> list[d
     rgba.putalpha(alpha)
     subject = rgba.crop((x0, y0, x1, y1))
 
-    scale = min(70 / subject.width, 90 / subject.height)
+    scale = min(POSE_MAX_WIDTH / subject.width, POSE_MAX_HEIGHT / subject.height)
     target_width = max(1, round(subject.width * scale))
     target_height = max(1, round(subject.height * scale))
     resampling = getattr(Image, "Resampling", Image).LANCZOS
@@ -191,7 +197,13 @@ def pose_payload() -> dict:
         "version": 1,
         "asset_set_id": "crystail-worksheet-motion-v2",
         "generation_method": "canonical_worksheet_raster_to_direct_square_cells",
-        "canonical": {"cols": 72, "rows": 96, "root_anchor": list(CRYSTAIL_ROOT_ANCHOR), "baseline_y": CRYSTAIL_ROOT_ANCHOR[1]},
+        "canonical": {
+            "cols": 72,
+            "rows": 96,
+            "root_anchor": list(CRYSTAIL_ROOT_ANCHOR),
+            "baseline_y": CRYSTAIL_ROOT_ANCHOR[1],
+            "safe_inset": {"left": 4, "right": 4, "top": 4},
+        },
         "palette": {name: list(rgb) for name, rgb in PALETTE.items()},
         "poses": poses,
     }
