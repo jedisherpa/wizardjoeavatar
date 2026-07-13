@@ -1,0 +1,5443 @@
+{
+  "schema_version": 1,
+  "schema": "wizardjoe-rchat-registry/v1",
+  "program_id": "RCHAT",
+  "branch": "codex/build-repeatable-avatar-animation",
+  "integration_head": "ca52b8023d5021e3a9bb14753961e8f7007f5aef",
+  "production_authority": "rust/wizard_avatar_engine",
+  "planning_checkpoint": {
+    "local_sha": null,
+    "remote_sha": null,
+    "pushed": false
+  },
+  "pose_baseline": {
+    "status": "PASS",
+    "runtime_geometries": 89,
+    "wjfl_geometries": 50,
+    "catalog_records": 80,
+    "imported_geometries": 79,
+    "aliases": 1,
+    "authored_transitions": 621,
+    "clips": 16,
+    "static_frames": 89,
+    "frames_per_pass": 20065,
+    "passes": 2,
+    "quality_failures": 0,
+    "decode_parity": true,
+    "presentation_parity": true,
+    "asset_sha256": "028e2d3ff9e0ff58d72c7bb39a792f1d76f7ecc8cf5d37da91677f486eab3bb8",
+    "stream_sha256": "a2daab4ce0ffee0f37683c9a0f4b2ef3dea96477f7252cff9877d426953833d5",
+    "evidence_manifest": "evidence/pose-library-expansion/rust-v4/animation-verification/manifest.json"
+  },
+  "status_vocabulary": [
+    "PLANNED",
+    "READY",
+    "IN_PROGRESS",
+    "HANDOFF_READY",
+    "IN_REVIEW",
+    "ACCEPTED",
+    "BLOCKED",
+    "FAILED",
+    "REOPENED"
+  ],
+  "agents": [
+    {
+      "role": "RUNTIME",
+      "agent_id": "019f5c84-aca4-7953-b8ac-23a395e7268b",
+      "nickname": "Epicurus"
+    },
+    {
+      "role": "MOTION",
+      "agent_id": "019f5c84-b193-7f70-83ff-e0c7e33edd51",
+      "nickname": "Singer"
+    },
+    {
+      "role": "FLOW",
+      "agent_id": "019f5c84-b630-7053-b560-cab55fb3ba11",
+      "nickname": "Lagrange"
+    },
+    {
+      "role": "INT",
+      "agent_id": "coordinator",
+      "nickname": "Coordinator"
+    }
+  ],
+  "locks": [
+    {
+      "lock_id": "LOCK-RCHAT-REGISTRY",
+      "paths": [
+        "docs/cartoon-animation-program/rust-chatbot/registry.json",
+        "docs/cartoon-animation-program/rust-chatbot/PROGRAM_TRACKER.md"
+      ],
+      "holder": null,
+      "work_id": null,
+      "acquired_at": null,
+      "expires_at": null,
+      "base_sha": null,
+      "reason": null
+    },
+    {
+      "lock_id": "LOCK-RCHAT-CARGO",
+      "paths": [
+        "rust/wizard_avatar_engine/Cargo.toml",
+        "rust/wizard_avatar_engine/Cargo.lock"
+      ],
+      "holder": null,
+      "work_id": null,
+      "acquired_at": null,
+      "expires_at": null,
+      "base_sha": null,
+      "reason": null
+    },
+    {
+      "lock_id": "LOCK-RCHAT-LIB",
+      "paths": [
+        "rust/wizard_avatar_engine/src/lib.rs"
+      ],
+      "holder": null,
+      "work_id": null,
+      "acquired_at": null,
+      "expires_at": null,
+      "base_sha": null,
+      "reason": null
+    },
+    {
+      "lock_id": "LOCK-RCHAT-RUNTIME",
+      "paths": [
+        "rust/wizard_avatar_engine/src/runtime.rs"
+      ],
+      "holder": null,
+      "work_id": null,
+      "acquired_at": null,
+      "expires_at": null,
+      "base_sha": null,
+      "reason": null
+    },
+    {
+      "lock_id": "LOCK-RCHAT-STATE",
+      "paths": [
+        "rust/wizard_avatar_engine/src/state.rs"
+      ],
+      "holder": null,
+      "work_id": null,
+      "acquired_at": null,
+      "expires_at": null,
+      "base_sha": null,
+      "reason": null
+    },
+    {
+      "lock_id": "LOCK-RCHAT-CONTROLLER",
+      "paths": [
+        "rust/wizard_avatar_engine/src/controller.rs"
+      ],
+      "holder": null,
+      "work_id": null,
+      "acquired_at": null,
+      "expires_at": null,
+      "base_sha": null,
+      "reason": null
+    },
+    {
+      "lock_id": "LOCK-RCHAT-CHANNELS",
+      "paths": [
+        "rust/wizard_avatar_engine/src/animation.rs"
+      ],
+      "holder": null,
+      "work_id": null,
+      "acquired_at": null,
+      "expires_at": null,
+      "base_sha": null,
+      "reason": null
+    },
+    {
+      "lock_id": "LOCK-RCHAT-POSE",
+      "paths": [
+        "rust/wizard_avatar_engine/src/pose.rs",
+        "rust/wizard_avatar_engine/assets/wizard_pose_library.v4.json.gz"
+      ],
+      "holder": null,
+      "work_id": null,
+      "acquired_at": null,
+      "expires_at": null,
+      "base_sha": null,
+      "reason": "Pose asset frozen after P0"
+    },
+    {
+      "lock_id": "LOCK-RCHAT-CLIPS",
+      "paths": [
+        "rust/wizard_avatar_engine/src/pose_clip.rs"
+      ],
+      "holder": null,
+      "work_id": null,
+      "acquired_at": null,
+      "expires_at": null,
+      "base_sha": null,
+      "reason": null
+    },
+    {
+      "lock_id": "LOCK-RCHAT-PLAYBACK",
+      "paths": [
+        "rust/wizard_avatar_engine/src/pose_playback.rs"
+      ],
+      "holder": null,
+      "work_id": null,
+      "acquired_at": null,
+      "expires_at": null,
+      "base_sha": null,
+      "reason": null
+    },
+    {
+      "lock_id": "LOCK-RCHAT-RENDERER",
+      "paths": [
+        "rust/wizard_avatar_engine/src/renderer.rs",
+        "rust/wizard_avatar_engine/src/frame_source.rs"
+      ],
+      "holder": null,
+      "work_id": null,
+      "acquired_at": null,
+      "expires_at": null,
+      "base_sha": null,
+      "reason": null
+    },
+    {
+      "lock_id": "LOCK-RCHAT-HUB",
+      "paths": [
+        "rust/wizard_avatar_engine/src/hub.rs"
+      ],
+      "holder": null,
+      "work_id": null,
+      "acquired_at": null,
+      "expires_at": null,
+      "base_sha": null,
+      "reason": null
+    },
+    {
+      "lock_id": "LOCK-RCHAT-SERVER",
+      "paths": [
+        "rust/wizard_avatar_engine/src/server.rs"
+      ],
+      "holder": null,
+      "work_id": null,
+      "acquired_at": null,
+      "expires_at": null,
+      "base_sha": null,
+      "reason": null
+    },
+    {
+      "lock_id": "LOCK-RCHAT-WEB",
+      "paths": [
+        "rust/wizard_avatar_engine/web"
+      ],
+      "holder": null,
+      "work_id": null,
+      "acquired_at": null,
+      "expires_at": null,
+      "base_sha": null,
+      "reason": null
+    },
+    {
+      "lock_id": "LOCK-RCHAT-EVIDENCE",
+      "paths": [
+        "rust/wizard_avatar_engine/src/pose_evidence_main.rs",
+        "evidence/cartoon-animation-program/rust-chatbot"
+      ],
+      "holder": null,
+      "work_id": null,
+      "acquired_at": null,
+      "expires_at": null,
+      "base_sha": null,
+      "reason": null
+    },
+    {
+      "lock_id": "LOCK-RCHAT-DEPLOY",
+      "paths": [
+        "release",
+        "remote:wizardjoe-avatar.service"
+      ],
+      "holder": null,
+      "work_id": null,
+      "acquired_at": null,
+      "expires_at": null,
+      "base_sha": null,
+      "reason": null
+    }
+  ],
+  "gates": [
+    {
+      "gate_id": "P0",
+      "status": "PASS",
+      "required_work": [
+        "RCHAT-FLOW-001"
+      ],
+      "structural_pass_required": true,
+      "record": {
+        "git_sha": "ca52b8023d5021e3a9bb14753961e8f7007f5aef",
+        "remote_sha": "ca52b8023d5021e3a9bb14753961e8f7007f5aef",
+        "dirty": false,
+        "result": "PASS"
+      }
+    },
+    {
+      "gate_id": "D0",
+      "status": "IN_REVIEW",
+      "required_work": [
+        "RCHAT-FLOW-010"
+      ],
+      "structural_pass_required": true,
+      "record": null
+    },
+    {
+      "gate_id": "C0",
+      "status": "BLOCKED",
+      "required_work": [
+        "RCHAT-FLOW-020",
+        "RCHAT-FLOW-030"
+      ],
+      "structural_pass_required": true,
+      "record": null
+    },
+    {
+      "gate_id": "R1",
+      "status": "BLOCKED",
+      "required_work": [
+        "RCHAT-FLOW-040"
+      ],
+      "structural_pass_required": true,
+      "record": null
+    },
+    {
+      "gate_id": "A1",
+      "status": "BLOCKED",
+      "required_work": [
+        "RCHAT-FLOW-050"
+      ],
+      "structural_pass_required": true,
+      "record": null
+    },
+    {
+      "gate_id": "Q0",
+      "status": "BLOCKED",
+      "required_work": [
+        "RCHAT-FLOW-060"
+      ],
+      "structural_pass_required": true,
+      "record": null
+    },
+    {
+      "gate_id": "I1",
+      "status": "BLOCKED",
+      "required_work": [
+        "RCHAT-FLOW-070"
+      ],
+      "structural_pass_required": true,
+      "record": null
+    },
+    {
+      "gate_id": "I2",
+      "status": "BLOCKED",
+      "required_work": [
+        "RCHAT-FLOW-080"
+      ],
+      "structural_pass_required": true,
+      "record": null
+    },
+    {
+      "gate_id": "T1",
+      "status": "BLOCKED",
+      "required_work": [
+        "RCHAT-FLOW-090"
+      ],
+      "structural_pass_required": true,
+      "record": null
+    },
+    {
+      "gate_id": "Q1",
+      "status": "BLOCKED",
+      "required_work": [
+        "RCHAT-FLOW-100"
+      ],
+      "structural_pass_required": true,
+      "record": null
+    },
+    {
+      "gate_id": "Q2",
+      "status": "BLOCKED",
+      "required_work": [
+        "RCHAT-FLOW-110"
+      ],
+      "structural_pass_required": true,
+      "record": null
+    },
+    {
+      "gate_id": "Q3",
+      "status": "BLOCKED",
+      "required_work": [
+        "RCHAT-FLOW-120"
+      ],
+      "structural_pass_required": true,
+      "record": null
+    },
+    {
+      "gate_id": "S1",
+      "status": "BLOCKED",
+      "required_work": [
+        "RCHAT-FLOW-130"
+      ],
+      "structural_pass_required": true,
+      "record": null
+    },
+    {
+      "gate_id": "R0",
+      "status": "BLOCKED",
+      "required_work": [
+        "RCHAT-FLOW-140"
+      ],
+      "structural_pass_required": true,
+      "record": null
+    },
+    {
+      "gate_id": "F0",
+      "status": "BLOCKED",
+      "required_work": [
+        "RCHAT-FLOW-150",
+        "RCHAT-FLOW-160",
+        "RCHAT-FLOW-170",
+        "RCHAT-FLOW-180",
+        "RCHAT-FLOW-190"
+      ],
+      "structural_pass_required": true,
+      "minimum_product_score": 90,
+      "record": null
+    }
+  ],
+  "gate_aliases": {
+    "P0": ["RCHAT-GATE-P0", "RCHAT-ANIM-001..009"],
+    "D0": ["planning_checkpoint"],
+    "C0": ["C1", "RCHAT-GATE-C0", "RCHAT-RUN-C0", "ANIM-C0", "RCHAT-ANIM-010", "RCHAT-ANIM-015", "RCHAT-ANIM-019"],
+    "R1": ["RCHAT-RUN-R1", "R2", "R3", "B1", "B2", "B3", "D1", "O1", "RS1"],
+    "A1": ["RCHAT-ANIM-020..135", "M1", "motion-contract", "motion-runtime"],
+    "Q0": ["pre-integration-ci"],
+    "I1": ["RCHAT-RUN-I1", "runtime-integration"],
+    "I2": ["RCHAT-RUN-I2", "motion-integration"],
+    "T1": ["RCHAT-RUN-T1", "transport-integration"],
+    "Q1": ["RCHAT-RUN-Q1", "RCHAT-ANIM-160", "RCHAT-ANIM-165"],
+    "Q2": ["RCHAT-ANIM-170", "RCHAT-ANIM-172", "RCHAT-ANIM-175"],
+    "Q3": ["RCHAT-RUN-Q2", "RCHAT-ANIM-176"],
+    "S1": ["RCHAT-ANIM-180", "release-soak"],
+    "R0": ["clean-clone-release"],
+    "F0": ["RCHAT-RUN-F0", "RCHAT-ANIM-185", "RCHAT-ANIM-190", "F0-A", "F0-B", "F0-C", "F0-D"]
+  },
+  "work_item_contract": {
+    "acceptance_rule": "ACCEPTED requires all dependencies and required children ACCEPTED, result_sha, successful commands, hashed evidence, metrics, reviewers, and verified rollback fields.",
+    "ready_rule": "READY requires all dependencies ACCEPTED, a matching integration_head base_sha, and all required locks free.",
+    "progress_rule": "Only ACCEPTED FLOW parent weight earns progress. Specialist records are acceptance children with weight fixed at zero and never earn progress independently. Reopened parent work immediately removes its weight."
+  },
+  "work_items": [
+    {
+      "id": "RCHAT-FLOW-001",
+      "title": "Freeze and push immutable pose baseline",
+      "owner": "INT",
+      "reviewers": [
+        "FLOW"
+      ],
+      "status": "ACCEPTED",
+      "weight": 1,
+      "dependencies": [
+
+      ],
+      "required_children": [
+        "RCHAT-RUN-000"
+      ],
+      "gate_id": "P0",
+      "path_allowlist": [
+        "docs/pose-library-expansion",
+        "rust/wizard_avatar_pose_tool",
+        "rust/wizard_avatar_engine/assets/wizard_pose_library.v4.json.gz",
+        "rust/wizard_avatar_engine/src/pose*.rs",
+        "rust/wizard_avatar_engine/tests",
+        "evidence/pose-library-expansion/rust-v4"
+      ],
+      "required_locks": [
+        "LOCK-RCHAT-POSE",
+        "LOCK-RCHAT-EVIDENCE"
+      ],
+      "base_sha": "19eb784e6f686e8ad469bd7926d34eb4c239c817",
+      "result_sha": "ca52b8023d5021e3a9bb14753961e8f7007f5aef",
+      "started_at": "2026-07-13T00:00:00Z",
+      "finished_at": "2026-07-13T07:55:00Z",
+      "commands": [
+        {
+          "command": "cargo fmt --check; cargo clippy --all-targets --all-features -- -D warnings; cargo test --all-targets --all-features (pose tool)",
+          "exit_code": 0,
+          "duration_ms": 92000
+        },
+        {
+          "command": "cargo fmt --check; cargo clippy --all-targets --all-features -- -D warnings; cargo test --all-targets --all-features (engine)",
+          "exit_code": 0,
+          "duration_ms": 1230000
+        },
+        {
+          "command": "cargo run --release --bin wizard-avatar-pose-evidence",
+          "exit_code": 0,
+          "duration_ms": 840000
+        },
+        {
+          "command": "git push origin codex/build-repeatable-avatar-animation",
+          "exit_code": 0,
+          "duration_ms": 10000
+        }
+      ],
+      "evidence": [
+        {
+          "path": "evidence/pose-library-expansion/rust-v4/admission-ledger.json",
+          "sha256": "4448a9ae109a45c2c8524b40d50ba8e28f31e1de45d2f1f043454bf6899d1961",
+          "artifact_url": null
+        },
+        {
+          "path": "evidence/pose-library-expansion/rust-v4/static-census/manifest.json",
+          "sha256": "c331a9fe407626dec64ed01bb6366578ca6e5d9fb2f7bcbe7499191914011a3f",
+          "artifact_url": null
+        },
+        {
+          "path": "evidence/pose-library-expansion/rust-v4/animation-verification/manifest.json",
+          "sha256": "a77ed682ed5ecbddfee221cb59e3e053adc59088845f87cb1d7d4743175a4f01",
+          "artifact_url": null
+        }
+      ],
+      "metrics": {
+        "runtime_geometries": 89,
+        "wjfl_geometries": 50,
+        "transitions": 621,
+        "clips": 16,
+        "static_frames": 89,
+        "frames_per_pass": 20065,
+        "deterministic_passes": 2,
+        "failures": 0,
+        "decode_parity": true,
+        "presentation_parity": true
+      },
+      "rollback": {
+        "sha": null,
+        "profile": "repair-only",
+        "verified": true,
+        "strategy": "block_and_repair_pose_v4_in_place",
+      "instruction": "Invalidate P0, block every descendant, and repair/re-verify the immutable pose-v4 baseline in place; never downgrade the pose asset.",
+        "downgrade_allowed": false
+      },
+      "blocker": null,
+      "handoff_id": "P0-ca52b802"
+    },
+    {
+      "id": "RCHAT-FLOW-010",
+      "title": "Push three-agent research, plans, and coordinator synthesis",
+      "owner": "INT",
+      "reviewers": [
+        "RUNTIME",
+        "MOTION",
+        "FLOW"
+      ],
+      "status": "IN_REVIEW",
+      "weight": 1,
+      "dependencies": [
+        "RCHAT-FLOW-001"
+      ],
+      "required_children": [
+
+      ],
+      "gate_id": "D0",
+      "path_allowlist": [
+        "docs/cartoon-animation-program/rust-chatbot"
+      ],
+      "required_locks": [
+        "LOCK-RCHAT-REGISTRY"
+      ],
+      "base_sha": "ca52b8023d5021e3a9bb14753961e8f7007f5aef",
+      "result_sha": null,
+      "started_at": "2026-07-13T07:55:00Z",
+      "finished_at": null,
+      "commands": [
+
+      ],
+      "evidence": [
+
+      ],
+      "metrics": {
+        "review_round": 2,
+        "reviewers_requested": 3
+      },
+      "rollback": {
+        "sha": "ca52b8023d5021e3a9bb14753961e8f7007f5aef",
+        "profile": "planning-draft",
+        "verified": true
+      },
+      "blocker": null,
+      "handoff_id": null
+    },
+    {
+      "id": "RCHAT-FLOW-020",
+      "title": "Implement registry, gate, handoff, lock, and evidence validators",
+      "owner": "FLOW",
+      "reviewers": [
+        "INT"
+      ],
+      "status": "PLANNED",
+      "weight": 1,
+      "dependencies": [
+        "RCHAT-FLOW-010"
+      ],
+      "required_children": [
+
+      ],
+      "gate_id": "C0",
+      "path_allowlist": [
+        "schemas/rchat",
+        "tools/rchat",
+        "rust/wizard_avatar_engine/tests/release_registry.rs"
+      ],
+      "required_locks": [
+
+      ],
+      "base_sha": null,
+      "result_sha": null,
+      "started_at": null,
+      "finished_at": null,
+      "commands": [
+
+      ],
+      "evidence": [
+
+      ],
+      "metrics": {
+      },
+      "rollback": {
+        "sha": null,
+        "profile": "manual-tracker",
+        "verified": false
+      },
+      "blocker": null,
+      "handoff_id": null
+    },
+    {
+      "id": "RCHAT-FLOW-030",
+      "title": "Freeze shared event, state, graph, speech, replay, telemetry, and browser contracts",
+      "owner": "INT",
+      "reviewers": [
+        "RUNTIME",
+        "MOTION",
+        "FLOW"
+      ],
+      "status": "PLANNED",
+      "weight": 3,
+      "dependencies": [
+        "RCHAT-FLOW-010",
+        "RCHAT-FLOW-020"
+      ],
+      "required_children": [
+        "RCHAT-RUN-010",
+        "RCHAT-ANIM-010",
+        "RCHAT-ANIM-015",
+        "RCHAT-ANIM-019"
+      ],
+      "gate_id": "C0",
+      "path_allowlist": [
+        "rust/wizard_avatar_engine/src/chat_event.rs",
+        "rust/wizard_avatar_engine/src/command.rs",
+        "rust/wizard_avatar_engine/tests/chat_event_contract.rs",
+        "rust/wizard_avatar_engine/tests/command_ordering.rs",
+        "rust/wizard_avatar_engine/tests/fixtures/chat"
+      ],
+      "required_locks": [
+        "LOCK-RCHAT-REGISTRY"
+      ],
+      "base_sha": null,
+      "result_sha": null,
+      "started_at": null,
+      "finished_at": null,
+      "commands": [
+
+      ],
+      "evidence": [
+
+      ],
+      "metrics": {
+      },
+      "rollback": {
+        "sha": null,
+        "profile": "legacy",
+        "verified": false
+      },
+      "blocker": null,
+      "handoff_id": null
+    },
+    {
+      "id": "RCHAT-FLOW-040",
+      "title": "Execute runtime modules and focused tests",
+      "owner": "RUNTIME",
+      "reviewers": [
+        "MOTION",
+        "FLOW"
+      ],
+      "status": "PLANNED",
+      "weight": 3,
+      "dependencies": [
+        "RCHAT-FLOW-020",
+        "RCHAT-FLOW-030"
+      ],
+      "required_children": [
+        "RCHAT-RUN-020",
+        "RCHAT-RUN-030",
+        "RCHAT-RUN-040",
+        "RCHAT-RUN-050",
+        "RCHAT-RUN-060",
+        "RCHAT-RUN-070",
+        "RCHAT-RUN-080",
+        "RCHAT-RUN-090",
+        "RCHAT-RUN-100"
+      ],
+      "gate_id": "R1",
+      "path_allowlist": [
+        "rust/wizard_avatar_engine/src/chat_*.rs",
+        "rust/wizard_avatar_engine/src/command*.rs",
+        "rust/wizard_avatar_engine/src/runtime_clock.rs",
+        "rust/wizard_avatar_engine/src/replay*.rs",
+        "rust/wizard_avatar_engine/src/speech*.rs",
+        "rust/wizard_avatar_engine/src/state_regions*.rs",
+        "rust/wizard_avatar_engine/src/telemetry*.rs",
+        "rust/wizard_avatar_engine/tests/chat_*.rs",
+        "rust/wizard_avatar_engine/tests/command_*.rs",
+        "rust/wizard_avatar_engine/tests/replay_*.rs",
+        "rust/wizard_avatar_engine/tests/speech_*.rs"
+      ],
+      "required_locks": [
+
+      ],
+      "base_sha": null,
+      "result_sha": null,
+      "started_at": null,
+      "finished_at": null,
+      "commands": [
+
+      ],
+      "evidence": [
+
+      ],
+      "metrics": {
+      },
+      "rollback": {
+        "sha": null,
+        "profile": "legacy-runtime",
+        "verified": false
+      },
+      "blocker": null,
+      "handoff_id": null
+    },
+    {
+      "id": "RCHAT-FLOW-050",
+      "title": "Execute motion modules, graph assets, and focused tests",
+      "owner": "MOTION",
+      "reviewers": [
+        "RUNTIME",
+        "FLOW"
+      ],
+      "status": "PLANNED",
+      "weight": 3,
+      "dependencies": [
+        "RCHAT-FLOW-020",
+        "RCHAT-FLOW-030"
+      ],
+      "required_children": [
+        "RCHAT-ANIM-020",
+        "RCHAT-ANIM-021",
+        "RCHAT-ANIM-025",
+        "RCHAT-ANIM-030",
+        "RCHAT-ANIM-040",
+        "RCHAT-ANIM-041",
+        "RCHAT-ANIM-044",
+        "RCHAT-ANIM-045",
+        "RCHAT-ANIM-050",
+        "RCHAT-ANIM-052",
+        "RCHAT-ANIM-055",
+        "RCHAT-ANIM-057",
+        "RCHAT-ANIM-060",
+        "RCHAT-ANIM-063",
+        "RCHAT-ANIM-070",
+        "RCHAT-ANIM-072",
+        "RCHAT-ANIM-074",
+        "RCHAT-ANIM-075",
+        "RCHAT-ANIM-077",
+        "RCHAT-ANIM-080",
+        "RCHAT-ANIM-090",
+        "RCHAT-ANIM-092",
+        "RCHAT-ANIM-095",
+        "RCHAT-ANIM-097",
+        "RCHAT-ANIM-100",
+        "RCHAT-ANIM-102",
+        "RCHAT-ANIM-110",
+        "RCHAT-ANIM-114",
+        "RCHAT-ANIM-116",
+        "RCHAT-ANIM-118",
+        "RCHAT-ANIM-119",
+        "RCHAT-ANIM-120",
+        "RCHAT-ANIM-125",
+        "RCHAT-ANIM-130",
+        "RCHAT-ANIM-135"
+      ],
+      "gate_id": "A1",
+      "path_allowlist": [
+        "rust/wizard_avatar_engine/src/motion_*.rs",
+        "rust/wizard_avatar_engine/src/facial_*.rs",
+        "rust/wizard_avatar_engine/src/secondary_*.rs",
+        "rust/wizard_avatar_engine/assets/wizard_chat_motion_graph*.json",
+        "rust/wizard_avatar_engine/tests/motion_*.rs",
+        "rust/wizard_avatar_engine/tests/chatbot_animation_*.rs"
+      ],
+      "required_locks": [
+
+      ],
+      "base_sha": null,
+      "result_sha": null,
+      "started_at": null,
+      "finished_at": null,
+      "commands": [
+
+      ],
+      "evidence": [
+
+      ],
+      "metrics": {
+      },
+      "rollback": {
+        "sha": null,
+        "profile": "legacy-motion",
+        "verified": false
+      },
+      "blocker": null,
+      "handoff_id": null
+    },
+    {
+      "id": "RCHAT-FLOW-060",
+      "title": "Implement CI, scope checker, evidence writers, and browser harness skeleton",
+      "owner": "FLOW",
+      "reviewers": [
+        "INT"
+      ],
+      "status": "PLANNED",
+      "weight": 1,
+      "dependencies": [
+        "RCHAT-FLOW-020",
+        "RCHAT-FLOW-030"
+      ],
+      "required_children": [
+
+      ],
+      "gate_id": "Q0",
+      "path_allowlist": [
+        ".github/workflows/rust-chatbot-*.yml",
+        "schemas/rchat",
+        "tools/rchat",
+        "rust/wizard_avatar_engine/web/tests",
+        "rust/wizard_avatar_engine/tests/release_*.rs"
+      ],
+      "required_locks": [
+
+      ],
+      "base_sha": null,
+      "result_sha": null,
+      "started_at": null,
+      "finished_at": null,
+      "commands": [
+
+      ],
+      "evidence": [
+
+      ],
+      "metrics": {
+      },
+      "rollback": {
+        "sha": null,
+        "profile": "local-gates",
+        "verified": false
+      },
+      "blocker": null,
+      "handoff_id": null
+    },
+    {
+      "id": "RCHAT-FLOW-070",
+      "title": "Serial clock, inbox, state, replay, telemetry, and server-core wiring",
+      "owner": "INT",
+      "reviewers": [
+        "RUNTIME",
+        "FLOW"
+      ],
+      "status": "PLANNED",
+      "weight": 5,
+      "dependencies": [
+        "RCHAT-FLOW-040",
+        "RCHAT-FLOW-060"
+      ],
+      "required_children": [
+        "RCHAT-RUN-110",
+        "RCHAT-RUN-120",
+        "RCHAT-RUN-130"
+      ],
+      "gate_id": "I1",
+      "path_allowlist": [
+        "rust/wizard_avatar_engine/Cargo.toml",
+        "rust/wizard_avatar_engine/src/lib.rs",
+        "rust/wizard_avatar_engine/src/runtime.rs",
+        "rust/wizard_avatar_engine/src/state.rs",
+        "rust/wizard_avatar_engine/src/controller.rs",
+        "rust/wizard_avatar_engine/src/hub.rs",
+        "rust/wizard_avatar_engine/src/server.rs",
+        "rust/wizard_avatar_engine/src/frame_source.rs"
+      ],
+      "required_locks": [
+        "LOCK-RCHAT-CARGO",
+        "LOCK-RCHAT-LIB",
+        "LOCK-RCHAT-RUNTIME",
+        "LOCK-RCHAT-STATE",
+        "LOCK-RCHAT-CONTROLLER",
+        "LOCK-RCHAT-HUB",
+        "LOCK-RCHAT-SERVER",
+        "LOCK-RCHAT-RENDERER"
+      ],
+      "base_sha": null,
+      "result_sha": null,
+      "started_at": null,
+      "finished_at": null,
+      "commands": [
+
+      ],
+      "evidence": [
+
+      ],
+      "metrics": {
+      },
+      "rollback": {
+        "sha": null,
+        "profile": "legacy-runtime",
+        "verified": false
+      },
+      "blocker": null,
+      "handoff_id": null
+    },
+    {
+      "id": "RCHAT-FLOW-080",
+      "title": "Serial director, channels, clip, playback, pose, and renderer wiring",
+      "owner": "INT",
+      "reviewers": [
+        "MOTION",
+        "FLOW"
+      ],
+      "status": "PLANNED",
+      "weight": 5,
+      "dependencies": [
+        "RCHAT-FLOW-050",
+        "RCHAT-FLOW-070"
+      ],
+      "required_children": [
+        "RCHAT-ANIM-031",
+        "RCHAT-ANIM-032",
+        "RCHAT-ANIM-042",
+        "RCHAT-ANIM-043",
+        "RCHAT-ANIM-111",
+        "RCHAT-ANIM-112",
+        "RCHAT-ANIM-140"
+      ],
+      "gate_id": "I2",
+      "path_allowlist": [
+        "rust/wizard_avatar_engine/src/lib.rs",
+        "rust/wizard_avatar_engine/src/state.rs",
+        "rust/wizard_avatar_engine/src/controller.rs",
+        "rust/wizard_avatar_engine/src/animation.rs",
+        "rust/wizard_avatar_engine/src/pose.rs",
+        "rust/wizard_avatar_engine/src/pose_clip.rs",
+        "rust/wizard_avatar_engine/src/pose_playback.rs",
+        "rust/wizard_avatar_engine/src/renderer.rs",
+        "rust/wizard_avatar_engine/src/frame_source.rs"
+      ],
+      "required_locks": [
+        "LOCK-RCHAT-LIB",
+        "LOCK-RCHAT-STATE",
+        "LOCK-RCHAT-CONTROLLER",
+        "LOCK-RCHAT-CHANNELS",
+        "LOCK-RCHAT-POSE",
+        "LOCK-RCHAT-CLIPS",
+        "LOCK-RCHAT-PLAYBACK",
+        "LOCK-RCHAT-RENDERER"
+      ],
+      "base_sha": null,
+      "result_sha": null,
+      "started_at": null,
+      "finished_at": null,
+      "commands": [
+
+      ],
+      "evidence": [
+
+      ],
+      "metrics": {
+      },
+      "rollback": {
+        "sha": null,
+        "profile": "legacy-motion",
+        "verified": false
+      },
+      "blocker": null,
+      "handoff_id": null
+    },
+    {
+      "id": "RCHAT-FLOW-090",
+      "title": "Integrate HTTP/WS acks, capabilities, held controls, reconnect, and diagnostics",
+      "owner": "INT",
+      "reviewers": [
+        "RUNTIME",
+        "MOTION",
+        "FLOW"
+      ],
+      "status": "PLANNED",
+      "weight": 5,
+      "dependencies": [
+        "RCHAT-FLOW-070",
+        "RCHAT-FLOW-080"
+      ],
+      "required_children": [
+        "RCHAT-ANIM-145",
+        "RCHAT-ANIM-150"
+      ],
+      "gate_id": "T1",
+      "path_allowlist": [
+        "rust/wizard_avatar_engine/src/server.rs",
+        "rust/wizard_avatar_engine/src/hub.rs",
+        "rust/wizard_avatar_engine/web"
+      ],
+      "required_locks": [
+        "LOCK-RCHAT-SERVER",
+        "LOCK-RCHAT-HUB",
+        "LOCK-RCHAT-WEB"
+      ],
+      "base_sha": null,
+      "result_sha": null,
+      "started_at": null,
+      "finished_at": null,
+      "commands": [
+
+      ],
+      "evidence": [
+
+      ],
+      "metrics": {
+      },
+      "rollback": {
+        "sha": null,
+        "profile": "legacy-web",
+        "verified": false
+      },
+      "blocker": null,
+      "handoff_id": null
+    },
+    {
+      "id": "RCHAT-FLOW-100",
+      "title": "Run full tests, replay twice, cadence, idempotency, coverage, and legacy parity",
+      "owner": "FLOW",
+      "reviewers": [
+        "RUNTIME",
+        "MOTION"
+      ],
+      "status": "PLANNED",
+      "weight": 5,
+      "dependencies": [
+        "RCHAT-FLOW-090"
+      ],
+      "required_children": [
+        "RCHAT-RUN-140",
+        "RCHAT-ANIM-160",
+        "RCHAT-ANIM-165"
+      ],
+      "gate_id": "Q1",
+      "path_allowlist": [
+        "rust/wizard_avatar_engine/tests/release_*.rs",
+        "evidence/cartoon-animation-program/rust-chatbot/q1"
+      ],
+      "required_locks": [
+
+      ],
+      "base_sha": null,
+      "result_sha": null,
+      "started_at": null,
+      "finished_at": null,
+      "commands": [
+
+      ],
+      "evidence": [
+
+      ],
+      "metrics": {
+      },
+      "rollback": {
+        "sha": null,
+        "profile": "block-promotion",
+        "verified": false
+      },
+      "blocker": null,
+      "handoff_id": null
+    },
+    {
+      "id": "RCHAT-FLOW-110",
+      "title": "Screenshot every authored graph, interruption, and chatbot frame twice",
+      "owner": "FLOW",
+      "reviewers": [
+        "MOTION"
+      ],
+      "status": "PLANNED",
+      "weight": 5,
+      "dependencies": [
+        "RCHAT-FLOW-100"
+      ],
+      "required_children": [
+        "RCHAT-ANIM-170",
+        "RCHAT-ANIM-172",
+        "RCHAT-ANIM-175"
+      ],
+      "gate_id": "Q2",
+      "path_allowlist": [
+        "rust/wizard_avatar_engine/src/chat_motion_evidence.rs",
+        "rust/wizard_avatar_engine/src/pose_evidence_main.rs",
+        "evidence/cartoon-animation-program/rust-chatbot/q2"
+      ],
+      "required_locks": [
+        "LOCK-RCHAT-EVIDENCE"
+      ],
+      "base_sha": null,
+      "result_sha": null,
+      "started_at": null,
+      "finished_at": null,
+      "commands": [
+
+      ],
+      "evidence": [
+
+      ],
+      "metrics": {
+      },
+      "rollback": {
+        "sha": null,
+        "profile": "block-promotion",
+        "verified": false
+      },
+      "blocker": null,
+      "handoff_id": null
+    },
+    {
+      "id": "RCHAT-FLOW-120",
+      "title": "Run real Chromium console, parity, responsive, reconnect, Stop, and reduced-motion matrix",
+      "owner": "FLOW",
+      "reviewers": [
+        "RUNTIME",
+        "MOTION"
+      ],
+      "status": "PLANNED",
+      "weight": 5,
+      "dependencies": [
+        "RCHAT-FLOW-110"
+      ],
+      "required_children": [
+        "RCHAT-RUN-150",
+        "RCHAT-ANIM-176"
+      ],
+      "gate_id": "Q3",
+      "path_allowlist": [
+        "rust/wizard_avatar_engine/web/tests",
+        "rust/wizard_avatar_engine/tests/chatbot_browser.rs",
+        "evidence/cartoon-animation-program/rust-chatbot/q3"
+      ],
+      "required_locks": [
+
+      ],
+      "base_sha": null,
+      "result_sha": null,
+      "started_at": null,
+      "finished_at": null,
+      "commands": [
+
+      ],
+      "evidence": [
+
+      ],
+      "metrics": {
+      },
+      "rollback": {
+        "sha": null,
+        "profile": "legacy-web",
+        "verified": false
+      },
+      "blocker": null,
+      "handoff_id": null
+    },
+    {
+      "id": "RCHAT-FLOW-130",
+      "title": "Run ten-minute mixed-state soak and performance profiles",
+      "owner": "FLOW",
+      "reviewers": [
+        "RUNTIME"
+      ],
+      "status": "PLANNED",
+      "weight": 5,
+      "dependencies": [
+        "RCHAT-FLOW-120"
+      ],
+      "required_children": [
+        "RCHAT-ANIM-180"
+      ],
+      "gate_id": "S1",
+      "path_allowlist": [
+        "evidence/cartoon-animation-program/rust-chatbot/soak"
+      ],
+      "required_locks": [
+
+      ],
+      "base_sha": null,
+      "result_sha": null,
+      "started_at": null,
+      "finished_at": null,
+      "commands": [
+
+      ],
+      "evidence": [
+
+      ],
+      "metrics": {
+      },
+      "rollback": {
+        "sha": null,
+        "profile": "block-promotion",
+        "verified": false
+      },
+      "blocker": null,
+      "handoff_id": null
+    },
+    {
+      "id": "RCHAT-FLOW-140",
+      "title": "Run clean-clone locked build and complete release matrix",
+      "owner": "FLOW",
+      "reviewers": [
+        "INT"
+      ],
+      "status": "PLANNED",
+      "weight": 5,
+      "dependencies": [
+        "RCHAT-FLOW-130"
+      ],
+      "required_children": [
+
+      ],
+      "gate_id": "R0",
+      "path_allowlist": [
+        "evidence/cartoon-animation-program/rust-chatbot/release"
+      ],
+      "required_locks": [
+
+      ],
+      "base_sha": null,
+      "result_sha": null,
+      "started_at": null,
+      "finished_at": null,
+      "commands": [
+
+      ],
+      "evidence": [
+
+      ],
+      "metrics": {
+      },
+      "rollback": {
+        "sha": null,
+        "profile": "previous-accepted-sha",
+        "verified": false
+      },
+      "blocker": null,
+      "handoff_id": null
+    },
+    {
+      "id": "RCHAT-FLOW-150",
+      "title": "Create compact final manifest, checksums, scorecard, and rollback receipt",
+      "owner": "FLOW",
+      "reviewers": [
+        "RUNTIME",
+        "MOTION",
+        "INT"
+      ],
+      "status": "PLANNED",
+      "weight": 2,
+      "dependencies": [
+        "RCHAT-FLOW-140"
+      ],
+      "required_children": [
+        "RCHAT-ANIM-185",
+        "RCHAT-ANIM-190"
+      ],
+      "gate_id": "F0",
+      "path_allowlist": [
+        "evidence/cartoon-animation-program/rust-chatbot/release"
+      ],
+      "required_locks": [
+        "LOCK-RCHAT-EVIDENCE"
+      ],
+      "base_sha": null,
+      "result_sha": null,
+      "started_at": null,
+      "finished_at": null,
+      "commands": [
+
+      ],
+      "evidence": [
+
+      ],
+      "metrics": {
+      },
+      "rollback": {
+        "sha": null,
+        "profile": "previous-accepted-sha",
+        "verified": false
+      },
+      "blocker": null,
+      "handoff_id": null
+    },
+    {
+      "id": "RCHAT-FLOW-160",
+      "title": "Commit and push exact release SHA and verify remote ref",
+      "owner": "INT",
+      "reviewers": [
+        "FLOW"
+      ],
+      "status": "PLANNED",
+      "weight": 2,
+      "dependencies": [
+        "RCHAT-FLOW-150"
+      ],
+      "required_children": [
+        "RCHAT-RUN-160"
+      ],
+      "gate_id": "F0",
+      "path_allowlist": [
+        "repository:branch"
+      ],
+      "required_locks": [
+        "LOCK-RCHAT-REGISTRY"
+      ],
+      "base_sha": null,
+      "result_sha": null,
+      "started_at": null,
+      "finished_at": null,
+      "commands": [
+
+      ],
+      "evidence": [
+
+      ],
+      "metrics": {
+      },
+      "rollback": {
+        "sha": null,
+        "profile": "previous-accepted-sha",
+        "verified": false
+      },
+      "blocker": null,
+      "handoff_id": null
+    },
+    {
+      "id": "RCHAT-FLOW-170",
+      "title": "Trigger pinned-SHA Hetzner bridge and activate release",
+      "owner": "INT",
+      "reviewers": [
+        "FLOW"
+      ],
+      "status": "PLANNED",
+      "weight": 2,
+      "dependencies": [
+        "RCHAT-FLOW-160"
+      ],
+      "required_children": [
+
+      ],
+      "gate_id": "F0",
+      "path_allowlist": [
+        "remote:root@5.78.137.112",
+        "github:deploy-bridge"
+      ],
+      "required_locks": [
+        "LOCK-RCHAT-DEPLOY"
+      ],
+      "base_sha": null,
+      "result_sha": null,
+      "started_at": null,
+      "finished_at": null,
+      "commands": [
+
+      ],
+      "evidence": [
+
+      ],
+      "metrics": {
+      },
+      "rollback": {
+        "sha": null,
+        "profile": "previous-remote-release",
+        "verified": false
+      },
+      "blocker": null,
+      "handoff_id": null
+    },
+    {
+      "id": "RCHAT-FLOW-180",
+      "title": "Verify public HTTPS/WS/build identity and execute rollback/re-promotion drill",
+      "owner": "INT",
+      "reviewers": [
+        "FLOW"
+      ],
+      "status": "PLANNED",
+      "weight": 2,
+      "dependencies": [
+        "RCHAT-FLOW-170"
+      ],
+      "required_children": [
+
+      ],
+      "gate_id": "F0",
+      "path_allowlist": [
+        "remote:root@5.78.137.112",
+        "evidence/cartoon-animation-program/rust-chatbot/deploy"
+      ],
+      "required_locks": [
+        "LOCK-RCHAT-DEPLOY"
+      ],
+      "base_sha": null,
+      "result_sha": null,
+      "started_at": null,
+      "finished_at": null,
+      "commands": [
+
+      ],
+      "evidence": [
+
+      ],
+      "metrics": {
+      },
+      "rollback": {
+        "sha": null,
+        "profile": "previous-remote-release",
+        "verified": false
+      },
+      "blocker": null,
+      "handoff_id": null
+    },
+    {
+      "id": "RCHAT-FLOW-190",
+      "title": "Run independent scorecard and final acceptance audit",
+      "owner": "FLOW",
+      "reviewers": [
+        "RUNTIME",
+        "MOTION",
+        "INT"
+      ],
+      "status": "PLANNED",
+      "weight": 2,
+      "dependencies": [
+        "RCHAT-FLOW-180"
+      ],
+      "required_children": [
+
+      ],
+      "gate_id": "F0",
+      "path_allowlist": [
+        "evidence/cartoon-animation-program/rust-chatbot/final"
+      ],
+      "required_locks": [
+
+      ],
+      "base_sha": null,
+      "result_sha": null,
+      "started_at": null,
+      "finished_at": null,
+      "commands": [
+
+      ],
+      "evidence": [
+
+      ],
+      "metrics": {
+        "minimum_product_score": 90,
+        "structural_pass_required": true
+      },
+      "rollback": {
+        "sha": null,
+        "profile": "previous-accepted-sha",
+        "verified": false
+      },
+      "blocker": null,
+      "handoff_id": null
+    }
+  ],
+  "specialist_work_items": [
+    {
+      "id": "RCHAT-RUN-000",
+      "parent": "RCHAT-FLOW-001",
+      "title": "Freeze pose-v4 readiness baseline",
+      "owner": "INT",
+      "reviewers": [
+        "FLOW"
+      ],
+      "status": "ACCEPTED",
+      "weight": 0,
+      "dependencies": [
+
+      ],
+      "gate_id": "P0",
+      "path_allowlist": [
+        "docs/pose-library-expansion",
+        "rust/wizard_avatar_pose_tool",
+        "rust/wizard_avatar_engine/assets/wizard_pose_library.v4.json.gz",
+        "rust/wizard_avatar_engine/src/pose*.rs",
+        "rust/wizard_avatar_engine/tests",
+        "evidence/pose-library-expansion/rust-v4"
+      ],
+      "required_locks": [
+        "LOCK-RCHAT-POSE",
+        "LOCK-RCHAT-EVIDENCE"
+      ],
+      "base_sha": "19eb784e6f686e8ad469bd7926d34eb4c239c817",
+      "result_sha": "ca52b8023d5021e3a9bb14753961e8f7007f5aef",
+      "started_at": "2026-07-13T00:00:00Z",
+      "finished_at": "2026-07-13T07:55:00Z",
+      "commands": [
+        {
+          "command": "P0 full Rust matrix",
+          "exit_code": 0,
+          "duration_ms": 2162000
+        }
+      ],
+      "evidence": [
+        {
+          "path": "evidence/pose-library-expansion/rust-v4/animation-verification/manifest.json",
+          "sha256": "a77ed682ed5ecbddfee221cb59e3e053adc59088845f87cb1d7d4743175a4f01"
+        }
+      ],
+      "metrics": {
+        "quality_failures": 0,
+        "progress_earning": false,
+        "parent_weight_authoritative": true
+      },
+      "rollback": {
+        "sha": null,
+        "profile": "repair-only",
+        "verified": true,
+        "strategy": "block_and_repair_pose_v4_in_place",
+        "instruction": "Block descendants and repair/re-verify pose-v4 in place; never downgrade the pose asset.",
+        "downgrade_allowed": false
+      },
+      "blocker": null,
+      "handoff_id": "P0-ca52b802",
+      "detail_source": "planning/01-rust-runtime-plan.md"
+    },
+    {
+      "id": "RCHAT-RUN-010",
+      "parent": "RCHAT-FLOW-030",
+      "title": "Serde contracts, strict validation, fixtures, schema/version policy",
+      "owner": "RUNTIME",
+      "reviewers": [
+        "MOTION",
+        "FLOW"
+      ],
+      "status": "PLANNED",
+      "weight": 0,
+      "dependencies": [
+        "RCHAT-RUN-000"
+      ],
+      "gate_id": "C0",
+      "path_allowlist": [
+        "rust/wizard_avatar_engine/src/chat_event.rs",
+        "rust/wizard_avatar_engine/src/command.rs",
+        "rust/wizard_avatar_engine/tests/chat_event_contract.rs",
+        "rust/wizard_avatar_engine/tests/command_ordering.rs",
+        "rust/wizard_avatar_engine/tests/fixtures/chat"
+      ],
+      "required_locks": [],
+      "base_sha": null,
+      "result_sha": null,
+      "started_at": null,
+      "finished_at": null,
+      "commands": [
+
+      ],
+      "evidence": [
+
+      ],
+      "metrics": {
+        "progress_earning": false,
+        "parent_weight_authoritative": true
+      },
+      "rollback": {
+        "sha": null,
+        "profile": "legacy",
+        "verified": false,
+        "strategy": "restore_parent_profile_and_reopen_item",
+        "instruction": "Revert only new contract modules and exports; preserve pose-v4.",
+        "downgrade_allowed": false
+      },
+      "blocker": null,
+      "handoff_id": null,
+      "detail_source": "planning/01-rust-runtime-plan.md"
+    },
+    {
+      "id": "RCHAT-RUN-020",
+      "parent": "RCHAT-FLOW-040",
+      "title": "Integer 60 Hz clock and immutable snapshot API",
+      "owner": "RUNTIME",
+      "reviewers": [
+        "MOTION",
+        "FLOW"
+      ],
+      "status": "PLANNED",
+      "weight": 0,
+      "dependencies": [
+        "RCHAT-RUN-010"
+      ],
+      "gate_id": "R1",
+      "path_allowlist": [
+        "rust/wizard_avatar_engine/src/chat_*.rs",
+        "rust/wizard_avatar_engine/src/command*.rs",
+        "rust/wizard_avatar_engine/src/runtime_clock.rs",
+        "rust/wizard_avatar_engine/src/replay*.rs",
+        "rust/wizard_avatar_engine/src/speech*.rs",
+        "rust/wizard_avatar_engine/src/state_regions*.rs",
+        "rust/wizard_avatar_engine/src/telemetry*.rs",
+        "rust/wizard_avatar_engine/tests/chat_*.rs",
+        "rust/wizard_avatar_engine/tests/command_*.rs",
+        "rust/wizard_avatar_engine/tests/replay_*.rs",
+        "rust/wizard_avatar_engine/tests/speech_*.rs"
+      ],
+      "required_locks": [
+
+      ],
+      "base_sha": null,
+      "result_sha": null,
+      "started_at": null,
+      "finished_at": null,
+      "commands": [
+
+      ],
+      "evidence": [
+
+      ],
+      "metrics": {
+        "progress_earning": false,
+        "parent_weight_authoritative": true
+      },
+      "rollback": {
+        "sha": null,
+        "profile": "legacy-runtime",
+        "verified": false,
+        "strategy": "restore_parent_profile_and_reopen_item",
+        "instruction": "Restore the prior accumulator behind WIZARD_CHAT_RUNTIME=legacy and block promotion.",
+        "downgrade_allowed": false
+      },
+      "blocker": null,
+      "handoff_id": null,
+      "detail_source": "planning/01-rust-runtime-plan.md"
+    },
+    {
+      "id": "RCHAT-RUN-030",
+      "parent": "RCHAT-FLOW-040",
+      "title": "Bounded ordered inbox, dedupe cache, source watermarks, terminal acks",
+      "owner": "RUNTIME",
+      "reviewers": [
+        "MOTION",
+        "FLOW"
+      ],
+      "status": "PLANNED",
+      "weight": 0,
+      "dependencies": [
+        "RCHAT-RUN-010"
+      ],
+      "gate_id": "R1",
+      "path_allowlist": [
+        "rust/wizard_avatar_engine/src/chat_*.rs",
+        "rust/wizard_avatar_engine/src/command*.rs",
+        "rust/wizard_avatar_engine/src/runtime_clock.rs",
+        "rust/wizard_avatar_engine/src/replay*.rs",
+        "rust/wizard_avatar_engine/src/speech*.rs",
+        "rust/wizard_avatar_engine/src/state_regions*.rs",
+        "rust/wizard_avatar_engine/src/telemetry*.rs",
+        "rust/wizard_avatar_engine/tests/chat_*.rs",
+        "rust/wizard_avatar_engine/tests/command_*.rs",
+        "rust/wizard_avatar_engine/tests/replay_*.rs",
+        "rust/wizard_avatar_engine/tests/speech_*.rs"
+      ],
+      "required_locks": [
+
+      ],
+      "base_sha": null,
+      "result_sha": null,
+      "started_at": null,
+      "finished_at": null,
+      "commands": [
+
+      ],
+      "evidence": [
+
+      ],
+      "metrics": {
+        "progress_earning": false,
+        "parent_weight_authoritative": true
+      },
+      "rollback": {
+        "sha": null,
+        "profile": "legacy-runtime",
+        "verified": false,
+        "strategy": "restore_parent_profile_and_reopen_item",
+        "instruction": "Disable versioned ingress and retain the last verified legacy adapter.",
+        "downgrade_allowed": false
+      },
+      "blocker": null,
+      "handoff_id": null,
+      "detail_source": "planning/01-rust-runtime-plan.md"
+    },
+    {
+      "id": "RCHAT-RUN-040",
+      "parent": "RCHAT-FLOW-040",
+      "title": "Typed orthogonal regions and legacy state projection",
+      "owner": "RUNTIME",
+      "reviewers": [
+        "MOTION",
+        "FLOW"
+      ],
+      "status": "PLANNED",
+      "weight": 0,
+      "dependencies": [
+        "RCHAT-RUN-010"
+      ],
+      "gate_id": "R1",
+      "path_allowlist": [
+        "rust/wizard_avatar_engine/src/chat_*.rs",
+        "rust/wizard_avatar_engine/src/command*.rs",
+        "rust/wizard_avatar_engine/src/runtime_clock.rs",
+        "rust/wizard_avatar_engine/src/replay*.rs",
+        "rust/wizard_avatar_engine/src/speech*.rs",
+        "rust/wizard_avatar_engine/src/state_regions*.rs",
+        "rust/wizard_avatar_engine/src/telemetry*.rs",
+        "rust/wizard_avatar_engine/tests/chat_*.rs",
+        "rust/wizard_avatar_engine/tests/command_*.rs",
+        "rust/wizard_avatar_engine/tests/replay_*.rs",
+        "rust/wizard_avatar_engine/tests/speech_*.rs"
+      ],
+      "required_locks": [
+
+      ],
+      "base_sha": null,
+      "result_sha": null,
+      "started_at": null,
+      "finished_at": null,
+      "commands": [
+
+      ],
+      "evidence": [
+
+      ],
+      "metrics": {
+        "progress_earning": false,
+        "parent_weight_authoritative": true
+      },
+      "rollback": {
+        "sha": null,
+        "profile": "legacy-runtime",
+        "verified": false,
+        "strategy": "restore_parent_profile_and_reopen_item",
+        "instruction": "Revert only the last migrated region; never restore dual authority.",
+        "downgrade_allowed": false
+      },
+      "blocker": null,
+      "handoff_id": null,
+      "detail_source": "planning/01-rust-runtime-plan.md"
+    },
+    {
+      "id": "RCHAT-RUN-050",
+      "parent": "RCHAT-FLOW-040",
+      "title": "Chat-event reducer and conversation lifecycle",
+      "owner": "RUNTIME",
+      "reviewers": [
+        "MOTION",
+        "FLOW"
+      ],
+      "status": "PLANNED",
+      "weight": 0,
+      "dependencies": [
+        "RCHAT-RUN-020",
+        "RCHAT-RUN-030",
+        "RCHAT-RUN-040"
+      ],
+      "gate_id": "R1",
+      "path_allowlist": [
+        "rust/wizard_avatar_engine/src/chat_*.rs",
+        "rust/wizard_avatar_engine/src/command*.rs",
+        "rust/wizard_avatar_engine/src/runtime_clock.rs",
+        "rust/wizard_avatar_engine/src/replay*.rs",
+        "rust/wizard_avatar_engine/src/speech*.rs",
+        "rust/wizard_avatar_engine/src/state_regions*.rs",
+        "rust/wizard_avatar_engine/src/telemetry*.rs",
+        "rust/wizard_avatar_engine/tests/chat_*.rs",
+        "rust/wizard_avatar_engine/tests/command_*.rs",
+        "rust/wizard_avatar_engine/tests/replay_*.rs",
+        "rust/wizard_avatar_engine/tests/speech_*.rs"
+      ],
+      "required_locks": [
+
+      ],
+      "base_sha": null,
+      "result_sha": null,
+      "started_at": null,
+      "finished_at": null,
+      "commands": [
+
+      ],
+      "evidence": [
+
+      ],
+      "metrics": {
+        "progress_earning": false,
+        "parent_weight_authoritative": true
+      },
+      "rollback": {
+        "sha": null,
+        "profile": "legacy-runtime",
+        "verified": false,
+        "strategy": "restore_parent_profile_and_reopen_item",
+        "instruction": "Select the legacy conversation reducer and revert only the reducer bridge.",
+        "downgrade_allowed": false
+      },
+      "blocker": null,
+      "handoff_id": null,
+      "detail_source": "planning/01-rust-runtime-plan.md"
+    },
+    {
+      "id": "RCHAT-RUN-060",
+      "parent": "RCHAT-FLOW-040",
+      "title": "Speech lifecycle, timing quantization, semantic visemes, mouth mapping",
+      "owner": "RUNTIME",
+      "reviewers": [
+        "MOTION",
+        "FLOW"
+      ],
+      "status": "PLANNED",
+      "weight": 0,
+      "dependencies": [
+        "RCHAT-RUN-010",
+        "RCHAT-RUN-040"
+      ],
+      "gate_id": "R1",
+      "path_allowlist": [
+        "rust/wizard_avatar_engine/src/chat_*.rs",
+        "rust/wizard_avatar_engine/src/command*.rs",
+        "rust/wizard_avatar_engine/src/runtime_clock.rs",
+        "rust/wizard_avatar_engine/src/replay*.rs",
+        "rust/wizard_avatar_engine/src/speech*.rs",
+        "rust/wizard_avatar_engine/src/state_regions*.rs",
+        "rust/wizard_avatar_engine/src/telemetry*.rs",
+        "rust/wizard_avatar_engine/tests/chat_*.rs",
+        "rust/wizard_avatar_engine/tests/command_*.rs",
+        "rust/wizard_avatar_engine/tests/replay_*.rs",
+        "rust/wizard_avatar_engine/tests/speech_*.rs"
+      ],
+      "required_locks": [
+
+      ],
+      "base_sha": null,
+      "result_sha": null,
+      "started_at": null,
+      "finished_at": null,
+      "commands": [
+
+      ],
+      "evidence": [
+
+      ],
+      "metrics": {
+        "progress_earning": false,
+        "parent_weight_authoritative": true
+      },
+      "rollback": {
+        "sha": null,
+        "profile": "legacy-runtime",
+        "verified": false,
+        "strategy": "restore_parent_profile_and_reopen_item",
+        "instruction": "Select deterministic duration fallback mouth timing and revert viseme-v1 wiring.",
+        "downgrade_allowed": false
+      },
+      "blocker": null,
+      "handoff_id": null,
+      "detail_source": "planning/01-rust-runtime-plan.md"
+    },
+    {
+      "id": "RCHAT-RUN-070",
+      "parent": "RCHAT-FLOW-040",
+      "title": "Deterministic emotion/gesture selection using ANIMATION catalog",
+      "owner": "RUNTIME",
+      "reviewers": [
+        "MOTION",
+        "FLOW"
+      ],
+      "status": "PLANNED",
+      "weight": 0,
+      "dependencies": [
+        "RCHAT-RUN-040",
+        "RCHAT-RUN-050",
+        "RCHAT-RUN-060",
+        "RCHAT-ANIM-019"
+      ],
+      "gate_id": "R1",
+      "path_allowlist": [
+        "rust/wizard_avatar_engine/src/chat_*.rs",
+        "rust/wizard_avatar_engine/src/command*.rs",
+        "rust/wizard_avatar_engine/src/runtime_clock.rs",
+        "rust/wizard_avatar_engine/src/replay*.rs",
+        "rust/wizard_avatar_engine/src/speech*.rs",
+        "rust/wizard_avatar_engine/src/state_regions*.rs",
+        "rust/wizard_avatar_engine/src/telemetry*.rs",
+        "rust/wizard_avatar_engine/tests/chat_*.rs",
+        "rust/wizard_avatar_engine/tests/command_*.rs",
+        "rust/wizard_avatar_engine/tests/replay_*.rs",
+        "rust/wizard_avatar_engine/tests/speech_*.rs"
+      ],
+      "required_locks": [
+
+      ],
+      "base_sha": null,
+      "result_sha": null,
+      "started_at": null,
+      "finished_at": null,
+      "commands": [
+
+      ],
+      "evidence": [
+
+      ],
+      "metrics": {
+        "progress_earning": false,
+        "parent_weight_authoritative": true
+      },
+      "rollback": {
+        "sha": null,
+        "profile": "legacy-runtime",
+        "verified": false,
+        "strategy": "restore_parent_profile_and_reopen_item",
+        "instruction": "Select direct policy and retain the reviewed animation catalog as inactive data.",
+        "downgrade_allowed": false
+      },
+      "blocker": null,
+      "handoff_id": null,
+      "detail_source": "planning/01-rust-runtime-plan.md"
+    },
+    {
+      "id": "RCHAT-RUN-080",
+      "parent": "RCHAT-FLOW-040",
+      "title": "Region-aware interruption, coalescing, restoration, recovery",
+      "owner": "RUNTIME",
+      "reviewers": [
+        "MOTION",
+        "FLOW"
+      ],
+      "status": "PLANNED",
+      "weight": 0,
+      "dependencies": [
+        "RCHAT-RUN-040",
+        "RCHAT-RUN-070",
+        "RCHAT-ANIM-019"
+      ],
+      "gate_id": "R1",
+      "path_allowlist": [
+        "rust/wizard_avatar_engine/src/chat_*.rs",
+        "rust/wizard_avatar_engine/src/command*.rs",
+        "rust/wizard_avatar_engine/src/runtime_clock.rs",
+        "rust/wizard_avatar_engine/src/replay*.rs",
+        "rust/wizard_avatar_engine/src/speech*.rs",
+        "rust/wizard_avatar_engine/src/state_regions*.rs",
+        "rust/wizard_avatar_engine/src/telemetry*.rs",
+        "rust/wizard_avatar_engine/tests/chat_*.rs",
+        "rust/wizard_avatar_engine/tests/command_*.rs",
+        "rust/wizard_avatar_engine/tests/replay_*.rs",
+        "rust/wizard_avatar_engine/tests/speech_*.rs"
+      ],
+      "required_locks": [
+
+      ],
+      "base_sha": null,
+      "result_sha": null,
+      "started_at": null,
+      "finished_at": null,
+      "commands": [
+
+      ],
+      "evidence": [
+
+      ],
+      "metrics": {
+        "progress_earning": false,
+        "parent_weight_authoritative": true
+      },
+      "rollback": {
+        "sha": null,
+        "profile": "legacy-runtime",
+        "verified": false,
+        "strategy": "restore_parent_profile_and_reopen_item",
+        "instruction": "Restore legacy action priority and coherent handoff behavior.",
+        "downgrade_allowed": false
+      },
+      "blocker": null,
+      "handoff_id": null,
+      "detail_source": "planning/01-rust-runtime-plan.md"
+    },
+    {
+      "id": "RCHAT-RUN-090",
+      "parent": "RCHAT-FLOW-040",
+      "title": "Canonical replay writer/reader/hash comparator",
+      "owner": "RUNTIME",
+      "reviewers": [
+        "MOTION",
+        "FLOW"
+      ],
+      "status": "PLANNED",
+      "weight": 0,
+      "dependencies": [
+        "RCHAT-RUN-010",
+        "RCHAT-RUN-020",
+        "RCHAT-RUN-030",
+        "RCHAT-RUN-040"
+      ],
+      "gate_id": "R1",
+      "path_allowlist": [
+        "rust/wizard_avatar_engine/src/chat_*.rs",
+        "rust/wizard_avatar_engine/src/command*.rs",
+        "rust/wizard_avatar_engine/src/runtime_clock.rs",
+        "rust/wizard_avatar_engine/src/replay*.rs",
+        "rust/wizard_avatar_engine/src/speech*.rs",
+        "rust/wizard_avatar_engine/src/state_regions*.rs",
+        "rust/wizard_avatar_engine/src/telemetry*.rs",
+        "rust/wizard_avatar_engine/tests/chat_*.rs",
+        "rust/wizard_avatar_engine/tests/command_*.rs",
+        "rust/wizard_avatar_engine/tests/replay_*.rs",
+        "rust/wizard_avatar_engine/tests/speech_*.rs"
+      ],
+      "required_locks": [
+
+      ],
+      "base_sha": null,
+      "result_sha": null,
+      "started_at": null,
+      "finished_at": null,
+      "commands": [
+
+      ],
+      "evidence": [
+
+      ],
+      "metrics": {
+        "progress_earning": false,
+        "parent_weight_authoritative": true
+      },
+      "rollback": {
+        "sha": null,
+        "profile": "legacy-runtime",
+        "verified": false,
+        "strategy": "restore_parent_profile_and_reopen_item",
+        "instruction": "Disable replay-v1 writers/readers and preserve the last compatible runtime profile.",
+        "downgrade_allowed": false
+      },
+      "blocker": null,
+      "handoff_id": null,
+      "detail_source": "planning/01-rust-runtime-plan.md"
+    },
+    {
+      "id": "RCHAT-RUN-100",
+      "parent": "RCHAT-FLOW-040",
+      "title": "Bounded causal telemetry and snapshots",
+      "owner": "RUNTIME",
+      "reviewers": [
+        "MOTION",
+        "FLOW"
+      ],
+      "status": "PLANNED",
+      "weight": 0,
+      "dependencies": [
+        "RCHAT-RUN-010",
+        "RCHAT-RUN-020",
+        "RCHAT-RUN-030"
+      ],
+      "gate_id": "R1",
+      "path_allowlist": [
+        "rust/wizard_avatar_engine/src/chat_*.rs",
+        "rust/wizard_avatar_engine/src/command*.rs",
+        "rust/wizard_avatar_engine/src/runtime_clock.rs",
+        "rust/wizard_avatar_engine/src/replay*.rs",
+        "rust/wizard_avatar_engine/src/speech*.rs",
+        "rust/wizard_avatar_engine/src/state_regions*.rs",
+        "rust/wizard_avatar_engine/src/telemetry*.rs",
+        "rust/wizard_avatar_engine/tests/chat_*.rs",
+        "rust/wizard_avatar_engine/tests/command_*.rs",
+        "rust/wizard_avatar_engine/tests/replay_*.rs",
+        "rust/wizard_avatar_engine/tests/speech_*.rs"
+      ],
+      "required_locks": [
+
+      ],
+      "base_sha": null,
+      "result_sha": null,
+      "started_at": null,
+      "finished_at": null,
+      "commands": [
+
+      ],
+      "evidence": [
+
+      ],
+      "metrics": {
+        "progress_earning": false,
+        "parent_weight_authoritative": true
+      },
+      "rollback": {
+        "sha": null,
+        "profile": "legacy-runtime",
+        "verified": false,
+        "strategy": "restore_parent_profile_and_reopen_item",
+        "instruction": "Disable bounded telemetry export without changing simulation semantics.",
+        "downgrade_allowed": false
+      },
+      "blocker": null,
+      "handoff_id": null,
+      "detail_source": "planning/01-rust-runtime-plan.md"
+    },
+    {
+      "id": "RCHAT-RUN-110",
+      "parent": "RCHAT-FLOW-070",
+      "title": "Versioned HTTP/WS ingress, acks, capabilities, legacy adapters",
+      "owner": "INT",
+      "reviewers": [
+        "RUNTIME",
+        "FLOW"
+      ],
+      "status": "PLANNED",
+      "weight": 0,
+      "dependencies": [
+        "RCHAT-RUN-030",
+        "RCHAT-RUN-050",
+        "RCHAT-RUN-060",
+        "RCHAT-RUN-090",
+        "RCHAT-RUN-100"
+      ],
+      "gate_id": "I1",
+      "path_allowlist": [
+        "rust/wizard_avatar_engine/Cargo.toml",
+        "rust/wizard_avatar_engine/src/lib.rs",
+        "rust/wizard_avatar_engine/src/runtime.rs",
+        "rust/wizard_avatar_engine/src/state.rs",
+        "rust/wizard_avatar_engine/src/controller.rs",
+        "rust/wizard_avatar_engine/src/hub.rs",
+        "rust/wizard_avatar_engine/src/server.rs",
+        "rust/wizard_avatar_engine/src/frame_source.rs"
+      ],
+      "required_locks": [
+        "LOCK-RCHAT-CARGO",
+        "LOCK-RCHAT-LIB",
+        "LOCK-RCHAT-RUNTIME",
+        "LOCK-RCHAT-STATE",
+        "LOCK-RCHAT-CONTROLLER",
+        "LOCK-RCHAT-HUB",
+        "LOCK-RCHAT-SERVER",
+        "LOCK-RCHAT-RENDERER"
+      ],
+      "base_sha": null,
+      "result_sha": null,
+      "started_at": null,
+      "finished_at": null,
+      "commands": [
+
+      ],
+      "evidence": [
+
+      ],
+      "metrics": {
+        "progress_earning": false,
+        "parent_weight_authoritative": true
+      },
+      "rollback": {
+        "sha": null,
+        "profile": "legacy-runtime",
+        "verified": false,
+        "strategy": "restore_parent_profile_and_reopen_item",
+        "instruction": "Disable protocol-v2 ingress and serve the verified legacy adapters.",
+        "downgrade_allowed": false
+      },
+      "blocker": null,
+      "handoff_id": null,
+      "detail_source": "planning/01-rust-runtime-plan.md"
+    },
+    {
+      "id": "RCHAT-RUN-120",
+      "parent": "RCHAT-FLOW-070",
+      "title": "Single hub-owned runtime cadence and snapshot/render lineage",
+      "owner": "INT",
+      "reviewers": [
+        "RUNTIME",
+        "FLOW"
+      ],
+      "status": "PLANNED",
+      "weight": 0,
+      "dependencies": [
+        "RCHAT-RUN-020",
+        "RCHAT-RUN-040",
+        "RCHAT-RUN-080",
+        "RCHAT-RUN-100",
+        "RCHAT-RUN-110"
+      ],
+      "gate_id": "I1",
+      "path_allowlist": [
+        "rust/wizard_avatar_engine/Cargo.toml",
+        "rust/wizard_avatar_engine/src/lib.rs",
+        "rust/wizard_avatar_engine/src/runtime.rs",
+        "rust/wizard_avatar_engine/src/state.rs",
+        "rust/wizard_avatar_engine/src/controller.rs",
+        "rust/wizard_avatar_engine/src/hub.rs",
+        "rust/wizard_avatar_engine/src/server.rs",
+        "rust/wizard_avatar_engine/src/frame_source.rs"
+      ],
+      "required_locks": [
+        "LOCK-RCHAT-CARGO",
+        "LOCK-RCHAT-LIB",
+        "LOCK-RCHAT-RUNTIME",
+        "LOCK-RCHAT-STATE",
+        "LOCK-RCHAT-CONTROLLER",
+        "LOCK-RCHAT-HUB",
+        "LOCK-RCHAT-SERVER",
+        "LOCK-RCHAT-RENDERER"
+      ],
+      "base_sha": null,
+      "result_sha": null,
+      "started_at": null,
+      "finished_at": null,
+      "commands": [
+
+      ],
+      "evidence": [
+
+      ],
+      "metrics": {
+        "progress_earning": false,
+        "parent_weight_authoritative": true
+      },
+      "rollback": {
+        "sha": null,
+        "profile": "legacy-runtime",
+        "verified": false,
+        "strategy": "restore_parent_profile_and_reopen_item",
+        "instruction": "Select the verified legacy runtime/hub integration profile.",
+        "downgrade_allowed": false
+      },
+      "blocker": null,
+      "handoff_id": null,
+      "detail_source": "planning/01-rust-runtime-plan.md"
+    },
+    {
+      "id": "RCHAT-RUN-130",
+      "parent": "RCHAT-FLOW-070",
+      "title": "Compatibility projection, temporary feature flags, migration docs",
+      "owner": "INT",
+      "reviewers": [
+        "RUNTIME",
+        "FLOW"
+      ],
+      "status": "PLANNED",
+      "weight": 0,
+      "dependencies": [
+        "RCHAT-RUN-120"
+      ],
+      "gate_id": "I1",
+      "path_allowlist": [
+        "rust/wizard_avatar_engine/Cargo.toml",
+        "rust/wizard_avatar_engine/src/lib.rs",
+        "rust/wizard_avatar_engine/src/runtime.rs",
+        "rust/wizard_avatar_engine/src/state.rs",
+        "rust/wizard_avatar_engine/src/controller.rs",
+        "rust/wizard_avatar_engine/src/hub.rs",
+        "rust/wizard_avatar_engine/src/server.rs",
+        "rust/wizard_avatar_engine/src/frame_source.rs"
+      ],
+      "required_locks": [
+        "LOCK-RCHAT-CARGO",
+        "LOCK-RCHAT-LIB",
+        "LOCK-RCHAT-RUNTIME",
+        "LOCK-RCHAT-STATE",
+        "LOCK-RCHAT-CONTROLLER",
+        "LOCK-RCHAT-HUB",
+        "LOCK-RCHAT-SERVER",
+        "LOCK-RCHAT-RENDERER"
+      ],
+      "base_sha": null,
+      "result_sha": null,
+      "started_at": null,
+      "finished_at": null,
+      "commands": [
+
+      ],
+      "evidence": [
+
+      ],
+      "metrics": {
+        "progress_earning": false,
+        "parent_weight_authoritative": true
+      },
+      "rollback": {
+        "sha": null,
+        "profile": "legacy-runtime",
+        "verified": false,
+        "strategy": "restore_parent_profile_and_reopen_item",
+        "instruction": "Select all documented legacy compatibility switches and block default promotion.",
+        "downgrade_allowed": false
+      },
+      "blocker": null,
+      "handoff_id": null,
+      "detail_source": "planning/01-rust-runtime-plan.md"
+    },
+    {
+      "id": "RCHAT-RUN-140",
+      "parent": "RCHAT-FLOW-100",
+      "title": "Full deterministic, pose, transition, replay, cadence, interruption QA",
+      "owner": "FLOW",
+      "reviewers": [
+        "RUNTIME",
+        "MOTION"
+      ],
+      "status": "PLANNED",
+      "weight": 0,
+      "dependencies": [
+        "RCHAT-RUN-130"
+      ],
+      "gate_id": "Q1",
+      "path_allowlist": [
+        "rust/wizard_avatar_engine/tests/release_*.rs",
+        "evidence/cartoon-animation-program/rust-chatbot/q1"
+      ],
+      "required_locks": [
+
+      ],
+      "base_sha": null,
+      "result_sha": null,
+      "started_at": null,
+      "finished_at": null,
+      "commands": [
+
+      ],
+      "evidence": [
+
+      ],
+      "metrics": {
+        "progress_earning": false,
+        "parent_weight_authoritative": true
+      },
+      "rollback": {
+        "sha": null,
+        "profile": "block-promotion",
+        "verified": false,
+        "strategy": "restore_parent_profile_and_reopen_item",
+        "instruction": "Block promotion and reopen the failing implementation work IDs.",
+        "downgrade_allowed": false
+      },
+      "blocker": null,
+      "handoff_id": null,
+      "detail_source": "planning/01-rust-runtime-plan.md"
+    },
+    {
+      "id": "RCHAT-RUN-150",
+      "parent": "RCHAT-FLOW-120",
+      "title": "Live browser, multiclient, reconnect, TTS timing, 10-minute soak",
+      "owner": "FLOW",
+      "reviewers": [
+        "RUNTIME",
+        "MOTION"
+      ],
+      "status": "PLANNED",
+      "weight": 0,
+      "dependencies": [
+        "RCHAT-RUN-140"
+      ],
+      "gate_id": "Q3",
+      "path_allowlist": [
+        "rust/wizard_avatar_engine/web/tests",
+        "rust/wizard_avatar_engine/tests/chatbot_browser.rs",
+        "evidence/cartoon-animation-program/rust-chatbot/q3"
+      ],
+      "required_locks": [
+
+      ],
+      "base_sha": null,
+      "result_sha": null,
+      "started_at": null,
+      "finished_at": null,
+      "commands": [
+
+      ],
+      "evidence": [
+
+      ],
+      "metrics": {
+        "progress_earning": false,
+        "parent_weight_authoritative": true
+      },
+      "rollback": {
+        "sha": null,
+        "profile": "legacy-web",
+        "verified": false,
+        "strategy": "restore_parent_profile_and_reopen_item",
+        "instruction": "Keep the verified legacy browser/runtime profile live and block release.",
+        "downgrade_allowed": false
+      },
+      "blocker": null,
+      "handoff_id": null,
+      "detail_source": "planning/01-rust-runtime-plan.md"
+    },
+    {
+      "id": "RCHAT-RUN-160",
+      "parent": "RCHAT-FLOW-160",
+      "title": "Clean-clone release, push, deploy, endpoint verification",
+      "owner": "INT",
+      "reviewers": [
+        "FLOW"
+      ],
+      "status": "PLANNED",
+      "weight": 0,
+      "dependencies": [
+        "RCHAT-RUN-150",
+        "RCHAT-FLOW-150"
+      ],
+      "gate_id": "F0",
+      "path_allowlist": [
+        "repository:branch"
+      ],
+      "required_locks": [
+        "LOCK-RCHAT-REGISTRY"
+      ],
+      "base_sha": null,
+      "result_sha": null,
+      "started_at": null,
+      "finished_at": null,
+      "commands": [
+
+      ],
+      "evidence": [
+
+      ],
+      "metrics": {
+        "progress_earning": false,
+        "parent_weight_authoritative": true
+      },
+      "rollback": {
+        "sha": null,
+        "profile": "previous-accepted-sha",
+        "verified": false,
+        "strategy": "restore_parent_profile_and_reopen_item",
+        "instruction": "Restore the previous accepted release SHA/profile and re-run endpoint verification.",
+        "downgrade_allowed": false
+      },
+      "blocker": null,
+      "handoff_id": null,
+      "detail_source": "planning/01-rust-runtime-plan.md"
+    },
+    {
+      "id": "RCHAT-ANIM-010",
+      "parent": "RCHAT-FLOW-030",
+      "title": "Freeze motion requirements and thresholds",
+      "owner": "MOTION",
+      "reviewers": [
+        "RUNTIME",
+        "FLOW"
+      ],
+      "status": "PLANNED",
+      "weight": 0,
+      "dependencies": [
+        "RCHAT-RUN-000"
+      ],
+      "gate_id": "C0",
+      "path_allowlist": [
+        "docs/cartoon-animation-program/rust-chatbot/research/02-chat-animation-motion.md",
+        "docs/cartoon-animation-program/rust-chatbot/planning/02-chat-animation-plan.md"
+      ],
+      "required_locks": [],
+      "base_sha": null,
+      "result_sha": null,
+      "started_at": null,
+      "finished_at": null,
+      "commands": [
+
+      ],
+      "evidence": [
+
+      ],
+      "metrics": {
+        "progress_earning": false,
+        "parent_weight_authoritative": true
+      },
+      "rollback": {
+        "sha": null,
+        "profile": "legacy",
+        "verified": false,
+        "strategy": "restore_parent_profile_and_reopen_item",
+        "instruction": "remain on legacy",
+        "downgrade_allowed": false
+      },
+      "blocker": null,
+      "handoff_id": null,
+      "detail_source": "planning/02-chat-animation-plan.md"
+    },
+    {
+      "id": "RCHAT-ANIM-015",
+      "parent": "RCHAT-FLOW-030",
+      "title": "Define graph schema v1",
+      "owner": "MOTION",
+      "reviewers": [
+        "RUNTIME",
+        "FLOW"
+      ],
+      "status": "PLANNED",
+      "weight": 0,
+      "dependencies": [
+        "RCHAT-ANIM-010"
+      ],
+      "gate_id": "C0",
+      "path_allowlist": [
+        "rust/wizard_avatar_engine/src/chat_performance.rs",
+        "rust/wizard_avatar_engine/src/motion_graph.rs",
+        "rust/wizard_avatar_engine/tests/motion_graph_contract.rs",
+        "rust/wizard_avatar_engine/tests/fixtures/motion"
+      ],
+      "required_locks": [],
+      "base_sha": null,
+      "result_sha": null,
+      "started_at": null,
+      "finished_at": null,
+      "commands": [
+
+      ],
+      "evidence": [
+
+      ],
+      "metrics": {
+        "progress_earning": false,
+        "parent_weight_authoritative": true
+      },
+      "rollback": {
+        "sha": null,
+        "profile": "legacy",
+        "verified": false,
+        "strategy": "restore_parent_profile_and_reopen_item",
+        "instruction": "delete unpromoted graph file",
+        "downgrade_allowed": false
+      },
+      "blocker": null,
+      "handoff_id": null,
+      "detail_source": "planning/02-chat-animation-plan.md"
+    },
+    {
+      "id": "RCHAT-ANIM-019",
+      "parent": "RCHAT-FLOW-030",
+      "title": "Freeze shared Rust interfaces",
+      "owner": "INT",
+      "reviewers": [
+        "RUNTIME",
+        "MOTION",
+        "FLOW"
+      ],
+      "status": "PLANNED",
+      "weight": 0,
+      "dependencies": [
+        "RCHAT-ANIM-015"
+      ],
+      "gate_id": "C0",
+      "path_allowlist": [
+        "docs/cartoon-animation-program/rust-chatbot/IMPLEMENTATION_PLAN.md",
+        "docs/cartoon-animation-program/rust-chatbot/WORKFLOW.md",
+        "docs/cartoon-animation-program/rust-chatbot/PROGRAM_TRACKER.md",
+        "docs/cartoon-animation-program/rust-chatbot/registry.json"
+      ],
+      "required_locks": [
+        "LOCK-RCHAT-REGISTRY"
+      ],
+      "base_sha": null,
+      "result_sha": null,
+      "started_at": null,
+      "finished_at": null,
+      "commands": [
+
+      ],
+      "evidence": [
+
+      ],
+      "metrics": {
+        "progress_earning": false,
+        "parent_weight_authoritative": true
+      },
+      "rollback": {
+        "sha": null,
+        "profile": "legacy",
+        "verified": false,
+        "strategy": "restore_parent_profile_and_reopen_item",
+        "instruction": "return to schema draft",
+        "downgrade_allowed": false
+      },
+      "blocker": null,
+      "handoff_id": null,
+      "detail_source": "planning/02-chat-animation-plan.md"
+    },
+    {
+      "id": "RCHAT-ANIM-020",
+      "parent": "RCHAT-FLOW-050",
+      "title": "Classify 89 geometries",
+      "owner": "MOTION",
+      "reviewers": [
+        "RUNTIME",
+        "FLOW"
+      ],
+      "status": "PLANNED",
+      "weight": 0,
+      "dependencies": [
+        "RCHAT-ANIM-019"
+      ],
+      "gate_id": "A1",
+      "path_allowlist": [
+        "rust/wizard_avatar_engine/src/motion_*.rs",
+        "rust/wizard_avatar_engine/src/facial_*.rs",
+        "rust/wizard_avatar_engine/src/secondary_*.rs",
+        "rust/wizard_avatar_engine/assets/wizard_chat_motion_graph*.json",
+        "rust/wizard_avatar_engine/tests/motion_*.rs",
+        "rust/wizard_avatar_engine/tests/chatbot_animation_*.rs"
+      ],
+      "required_locks": [
+
+      ],
+      "base_sha": null,
+      "result_sha": null,
+      "started_at": null,
+      "finished_at": null,
+      "commands": [
+
+      ],
+      "evidence": [
+
+      ],
+      "metrics": {
+        "progress_earning": false,
+        "parent_weight_authoritative": true
+      },
+      "rollback": {
+        "sha": null,
+        "profile": "legacy-motion",
+        "verified": false,
+        "strategy": "restore_parent_profile_and_reopen_item",
+        "instruction": "no graph promotion",
+        "downgrade_allowed": false
+      },
+      "blocker": null,
+      "handoff_id": null,
+      "detail_source": "planning/02-chat-animation-plan.md"
+    },
+    {
+      "id": "RCHAT-ANIM-021",
+      "parent": "RCHAT-FLOW-050",
+      "title": "Author capability tiers and fallbacks",
+      "owner": "MOTION",
+      "reviewers": [
+        "RUNTIME",
+        "FLOW"
+      ],
+      "status": "PLANNED",
+      "weight": 0,
+      "dependencies": [
+        "RCHAT-ANIM-020"
+      ],
+      "gate_id": "A1",
+      "path_allowlist": [
+        "rust/wizard_avatar_engine/src/motion_*.rs",
+        "rust/wizard_avatar_engine/src/facial_*.rs",
+        "rust/wizard_avatar_engine/src/secondary_*.rs",
+        "rust/wizard_avatar_engine/assets/wizard_chat_motion_graph*.json",
+        "rust/wizard_avatar_engine/tests/motion_*.rs",
+        "rust/wizard_avatar_engine/tests/chatbot_animation_*.rs"
+      ],
+      "required_locks": [
+
+      ],
+      "base_sha": null,
+      "result_sha": null,
+      "started_at": null,
+      "finished_at": null,
+      "commands": [
+
+      ],
+      "evidence": [
+
+      ],
+      "metrics": {
+        "progress_earning": false,
+        "parent_weight_authoritative": true
+      },
+      "rollback": {
+        "sha": null,
+        "profile": "legacy-motion",
+        "verified": false,
+        "strategy": "restore_parent_profile_and_reopen_item",
+        "instruction": "legacy direction selector",
+        "downgrade_allowed": false
+      },
+      "blocker": null,
+      "handoff_id": null,
+      "detail_source": "planning/02-chat-animation-plan.md"
+    },
+    {
+      "id": "RCHAT-ANIM-025",
+      "parent": "RCHAT-FLOW-050",
+      "title": "Build strict graph validator",
+      "owner": "MOTION",
+      "reviewers": [
+        "RUNTIME",
+        "FLOW"
+      ],
+      "status": "PLANNED",
+      "weight": 0,
+      "dependencies": [
+        "RCHAT-ANIM-020",
+        "RCHAT-ANIM-021"
+      ],
+      "gate_id": "A1",
+      "path_allowlist": [
+        "rust/wizard_avatar_engine/src/motion_*.rs",
+        "rust/wizard_avatar_engine/src/facial_*.rs",
+        "rust/wizard_avatar_engine/src/secondary_*.rs",
+        "rust/wizard_avatar_engine/assets/wizard_chat_motion_graph*.json",
+        "rust/wizard_avatar_engine/tests/motion_*.rs",
+        "rust/wizard_avatar_engine/tests/chatbot_animation_*.rs"
+      ],
+      "required_locks": [
+
+      ],
+      "base_sha": null,
+      "result_sha": null,
+      "started_at": null,
+      "finished_at": null,
+      "commands": [
+
+      ],
+      "evidence": [
+
+      ],
+      "metrics": {
+        "progress_earning": false,
+        "parent_weight_authoritative": true
+      },
+      "rollback": {
+        "sha": null,
+        "profile": "legacy-motion",
+        "verified": false,
+        "strategy": "restore_parent_profile_and_reopen_item",
+        "instruction": "reject graph and use legacy",
+        "downgrade_allowed": false
+      },
+      "blocker": null,
+      "handoff_id": null,
+      "detail_source": "planning/02-chat-animation-plan.md"
+    },
+    {
+      "id": "RCHAT-ANIM-030",
+      "parent": "RCHAT-FLOW-050",
+      "title": "Add shadow graph loader",
+      "owner": "MOTION",
+      "reviewers": [
+        "RUNTIME",
+        "FLOW"
+      ],
+      "status": "PLANNED",
+      "weight": 0,
+      "dependencies": [
+        "RCHAT-ANIM-025"
+      ],
+      "gate_id": "A1",
+      "path_allowlist": [
+        "rust/wizard_avatar_engine/src/motion_*.rs",
+        "rust/wizard_avatar_engine/src/facial_*.rs",
+        "rust/wizard_avatar_engine/src/secondary_*.rs",
+        "rust/wizard_avatar_engine/assets/wizard_chat_motion_graph*.json",
+        "rust/wizard_avatar_engine/tests/motion_*.rs",
+        "rust/wizard_avatar_engine/tests/chatbot_animation_*.rs"
+      ],
+      "required_locks": [
+
+      ],
+      "base_sha": null,
+      "result_sha": null,
+      "started_at": null,
+      "finished_at": null,
+      "commands": [
+
+      ],
+      "evidence": [
+
+      ],
+      "metrics": {
+        "progress_earning": false,
+        "parent_weight_authoritative": true
+      },
+      "rollback": {
+        "sha": null,
+        "profile": "legacy-motion",
+        "verified": false,
+        "strategy": "restore_parent_profile_and_reopen_item",
+        "instruction": "remove module export",
+        "downgrade_allowed": false
+      },
+      "blocker": null,
+      "handoff_id": null,
+      "detail_source": "planning/02-chat-animation-plan.md"
+    },
+    {
+      "id": "RCHAT-ANIM-031",
+      "parent": "RCHAT-FLOW-080",
+      "title": "Export contract modules",
+      "owner": "INT",
+      "reviewers": [
+        "MOTION",
+        "FLOW"
+      ],
+      "status": "PLANNED",
+      "weight": 0,
+      "dependencies": [
+        "RCHAT-ANIM-030"
+      ],
+      "gate_id": "I2",
+      "path_allowlist": [
+        "rust/wizard_avatar_engine/src/lib.rs",
+        "rust/wizard_avatar_engine/src/state.rs",
+        "rust/wizard_avatar_engine/src/controller.rs",
+        "rust/wizard_avatar_engine/src/animation.rs",
+        "rust/wizard_avatar_engine/src/pose.rs",
+        "rust/wizard_avatar_engine/src/pose_clip.rs",
+        "rust/wizard_avatar_engine/src/pose_playback.rs",
+        "rust/wizard_avatar_engine/src/renderer.rs",
+        "rust/wizard_avatar_engine/src/frame_source.rs"
+      ],
+      "required_locks": [
+        "LOCK-RCHAT-LIB",
+        "LOCK-RCHAT-STATE",
+        "LOCK-RCHAT-CONTROLLER",
+        "LOCK-RCHAT-CHANNELS",
+        "LOCK-RCHAT-POSE",
+        "LOCK-RCHAT-CLIPS",
+        "LOCK-RCHAT-PLAYBACK",
+        "LOCK-RCHAT-RENDERER"
+      ],
+      "base_sha": null,
+      "result_sha": null,
+      "started_at": null,
+      "finished_at": null,
+      "commands": [
+
+      ],
+      "evidence": [
+
+      ],
+      "metrics": {
+        "progress_earning": false,
+        "parent_weight_authoritative": true
+      },
+      "rollback": {
+        "sha": null,
+        "profile": "legacy-motion",
+        "verified": false,
+        "strategy": "restore_parent_profile_and_reopen_item",
+        "instruction": "revert wiring commit",
+        "downgrade_allowed": false
+      },
+      "blocker": null,
+      "handoff_id": null,
+      "detail_source": "planning/02-chat-animation-plan.md"
+    },
+    {
+      "id": "RCHAT-ANIM-032",
+      "parent": "RCHAT-FLOW-080",
+      "title": "Add backward-compatible public state summary",
+      "owner": "INT",
+      "reviewers": [
+        "MOTION",
+        "FLOW"
+      ],
+      "status": "PLANNED",
+      "weight": 0,
+      "dependencies": [
+        "RCHAT-ANIM-019",
+        "RCHAT-ANIM-031"
+      ],
+      "gate_id": "I2",
+      "path_allowlist": [
+        "rust/wizard_avatar_engine/src/lib.rs",
+        "rust/wizard_avatar_engine/src/state.rs",
+        "rust/wizard_avatar_engine/src/controller.rs",
+        "rust/wizard_avatar_engine/src/animation.rs",
+        "rust/wizard_avatar_engine/src/pose.rs",
+        "rust/wizard_avatar_engine/src/pose_clip.rs",
+        "rust/wizard_avatar_engine/src/pose_playback.rs",
+        "rust/wizard_avatar_engine/src/renderer.rs",
+        "rust/wizard_avatar_engine/src/frame_source.rs"
+      ],
+      "required_locks": [
+        "LOCK-RCHAT-LIB",
+        "LOCK-RCHAT-STATE",
+        "LOCK-RCHAT-CONTROLLER",
+        "LOCK-RCHAT-CHANNELS",
+        "LOCK-RCHAT-POSE",
+        "LOCK-RCHAT-CLIPS",
+        "LOCK-RCHAT-PLAYBACK",
+        "LOCK-RCHAT-RENDERER"
+      ],
+      "base_sha": null,
+      "result_sha": null,
+      "started_at": null,
+      "finished_at": null,
+      "commands": [
+
+      ],
+      "evidence": [
+
+      ],
+      "metrics": {
+        "progress_earning": false,
+        "parent_weight_authoritative": true
+      },
+      "rollback": {
+        "sha": null,
+        "profile": "legacy-motion",
+        "verified": false,
+        "strategy": "restore_parent_profile_and_reopen_item",
+        "instruction": "remove new optional fields",
+        "downgrade_allowed": false
+      },
+      "blocker": null,
+      "handoff_id": null,
+      "detail_source": "planning/02-chat-animation-plan.md"
+    },
+    {
+      "id": "RCHAT-ANIM-040",
+      "parent": "RCHAT-FLOW-050",
+      "title": "Implement deterministic clip evaluator",
+      "owner": "MOTION",
+      "reviewers": [
+        "RUNTIME",
+        "FLOW"
+      ],
+      "status": "PLANNED",
+      "weight": 0,
+      "dependencies": [
+        "RCHAT-ANIM-030"
+      ],
+      "gate_id": "A1",
+      "path_allowlist": [
+        "rust/wizard_avatar_engine/src/motion_*.rs",
+        "rust/wizard_avatar_engine/src/facial_*.rs",
+        "rust/wizard_avatar_engine/src/secondary_*.rs",
+        "rust/wizard_avatar_engine/assets/wizard_chat_motion_graph*.json",
+        "rust/wizard_avatar_engine/tests/motion_*.rs",
+        "rust/wizard_avatar_engine/tests/chatbot_animation_*.rs"
+      ],
+      "required_locks": [
+
+      ],
+      "base_sha": null,
+      "result_sha": null,
+      "started_at": null,
+      "finished_at": null,
+      "commands": [
+
+      ],
+      "evidence": [
+
+      ],
+      "metrics": {
+        "progress_earning": false,
+        "parent_weight_authoritative": true
+      },
+      "rollback": {
+        "sha": null,
+        "profile": "legacy-motion",
+        "verified": false,
+        "strategy": "restore_parent_profile_and_reopen_item",
+        "instruction": "graph shadow-only",
+        "downgrade_allowed": false
+      },
+      "blocker": null,
+      "handoff_id": null,
+      "detail_source": "planning/02-chat-animation-plan.md"
+    },
+    {
+      "id": "RCHAT-ANIM-041",
+      "parent": "RCHAT-FLOW-050",
+      "title": "Implement transition recipe evaluator",
+      "owner": "MOTION",
+      "reviewers": [
+        "RUNTIME",
+        "FLOW"
+      ],
+      "status": "PLANNED",
+      "weight": 0,
+      "dependencies": [
+        "RCHAT-ANIM-040"
+      ],
+      "gate_id": "A1",
+      "path_allowlist": [
+        "rust/wizard_avatar_engine/src/motion_*.rs",
+        "rust/wizard_avatar_engine/src/facial_*.rs",
+        "rust/wizard_avatar_engine/src/secondary_*.rs",
+        "rust/wizard_avatar_engine/assets/wizard_chat_motion_graph*.json",
+        "rust/wizard_avatar_engine/tests/motion_*.rs",
+        "rust/wizard_avatar_engine/tests/chatbot_animation_*.rs"
+      ],
+      "required_locks": [
+
+      ],
+      "base_sha": null,
+      "result_sha": null,
+      "started_at": null,
+      "finished_at": null,
+      "commands": [
+
+      ],
+      "evidence": [
+
+      ],
+      "metrics": {
+        "progress_earning": false,
+        "parent_weight_authoritative": true
+      },
+      "rollback": {
+        "sha": null,
+        "profile": "legacy-motion",
+        "verified": false,
+        "strategy": "restore_parent_profile_and_reopen_item",
+        "instruction": "coherent legacy handoff",
+        "downgrade_allowed": false
+      },
+      "blocker": null,
+      "handoff_id": null,
+      "detail_source": "planning/02-chat-animation-plan.md"
+    },
+    {
+      "id": "RCHAT-ANIM-042",
+      "parent": "RCHAT-FLOW-080",
+      "title": "Adapt legacy clips to graph interface",
+      "owner": "INT",
+      "reviewers": [
+        "MOTION",
+        "FLOW"
+      ],
+      "status": "PLANNED",
+      "weight": 0,
+      "dependencies": [
+        "RCHAT-ANIM-040",
+        "RCHAT-ANIM-041"
+      ],
+      "gate_id": "I2",
+      "path_allowlist": [
+        "rust/wizard_avatar_engine/src/lib.rs",
+        "rust/wizard_avatar_engine/src/state.rs",
+        "rust/wizard_avatar_engine/src/controller.rs",
+        "rust/wizard_avatar_engine/src/animation.rs",
+        "rust/wizard_avatar_engine/src/pose.rs",
+        "rust/wizard_avatar_engine/src/pose_clip.rs",
+        "rust/wizard_avatar_engine/src/pose_playback.rs",
+        "rust/wizard_avatar_engine/src/renderer.rs",
+        "rust/wizard_avatar_engine/src/frame_source.rs"
+      ],
+      "required_locks": [
+        "LOCK-RCHAT-LIB",
+        "LOCK-RCHAT-STATE",
+        "LOCK-RCHAT-CONTROLLER",
+        "LOCK-RCHAT-CHANNELS",
+        "LOCK-RCHAT-POSE",
+        "LOCK-RCHAT-CLIPS",
+        "LOCK-RCHAT-PLAYBACK",
+        "LOCK-RCHAT-RENDERER"
+      ],
+      "base_sha": null,
+      "result_sha": null,
+      "started_at": null,
+      "finished_at": null,
+      "commands": [
+
+      ],
+      "evidence": [
+
+      ],
+      "metrics": {
+        "progress_earning": false,
+        "parent_weight_authoritative": true
+      },
+      "rollback": {
+        "sha": null,
+        "profile": "legacy-motion",
+        "verified": false,
+        "strategy": "restore_parent_profile_and_reopen_item",
+        "instruction": "select legacy profile",
+        "downgrade_allowed": false
+      },
+      "blocker": null,
+      "handoff_id": null,
+      "detail_source": "planning/02-chat-animation-plan.md"
+    },
+    {
+      "id": "RCHAT-ANIM-043",
+      "parent": "RCHAT-FLOW-080",
+      "title": "Add marker-safe replacement/restore",
+      "owner": "INT",
+      "reviewers": [
+        "MOTION",
+        "FLOW"
+      ],
+      "status": "PLANNED",
+      "weight": 0,
+      "dependencies": [
+        "RCHAT-ANIM-041"
+      ],
+      "gate_id": "I2",
+      "path_allowlist": [
+        "rust/wizard_avatar_engine/src/lib.rs",
+        "rust/wizard_avatar_engine/src/state.rs",
+        "rust/wizard_avatar_engine/src/controller.rs",
+        "rust/wizard_avatar_engine/src/animation.rs",
+        "rust/wizard_avatar_engine/src/pose.rs",
+        "rust/wizard_avatar_engine/src/pose_clip.rs",
+        "rust/wizard_avatar_engine/src/pose_playback.rs",
+        "rust/wizard_avatar_engine/src/renderer.rs",
+        "rust/wizard_avatar_engine/src/frame_source.rs"
+      ],
+      "required_locks": [
+        "LOCK-RCHAT-LIB",
+        "LOCK-RCHAT-STATE",
+        "LOCK-RCHAT-CONTROLLER",
+        "LOCK-RCHAT-CHANNELS",
+        "LOCK-RCHAT-POSE",
+        "LOCK-RCHAT-CLIPS",
+        "LOCK-RCHAT-PLAYBACK",
+        "LOCK-RCHAT-RENDERER"
+      ],
+      "base_sha": null,
+      "result_sha": null,
+      "started_at": null,
+      "finished_at": null,
+      "commands": [
+
+      ],
+      "evidence": [
+
+      ],
+      "metrics": {
+        "progress_earning": false,
+        "parent_weight_authoritative": true
+      },
+      "rollback": {
+        "sha": null,
+        "profile": "legacy-motion",
+        "verified": false,
+        "strategy": "restore_parent_profile_and_reopen_item",
+        "instruction": "legacy pending-pose logic",
+        "downgrade_allowed": false
+      },
+      "blocker": null,
+      "handoff_id": null,
+      "detail_source": "planning/02-chat-animation-plan.md"
+    },
+    {
+      "id": "RCHAT-ANIM-044",
+      "parent": "RCHAT-FLOW-050",
+      "title": "Add per-channel generations and leases",
+      "owner": "MOTION",
+      "reviewers": [
+        "RUNTIME",
+        "FLOW"
+      ],
+      "status": "PLANNED",
+      "weight": 0,
+      "dependencies": [
+        "RCHAT-ANIM-032",
+        "RCHAT-ANIM-040"
+      ],
+      "gate_id": "A1",
+      "path_allowlist": [
+        "rust/wizard_avatar_engine/src/motion_*.rs",
+        "rust/wizard_avatar_engine/src/facial_*.rs",
+        "rust/wizard_avatar_engine/src/secondary_*.rs",
+        "rust/wizard_avatar_engine/assets/wizard_chat_motion_graph*.json",
+        "rust/wizard_avatar_engine/tests/motion_*.rs",
+        "rust/wizard_avatar_engine/tests/chatbot_animation_*.rs"
+      ],
+      "required_locks": [
+
+      ],
+      "base_sha": null,
+      "result_sha": null,
+      "started_at": null,
+      "finished_at": null,
+      "commands": [
+
+      ],
+      "evidence": [
+
+      ],
+      "metrics": {
+        "progress_earning": false,
+        "parent_weight_authoritative": true
+      },
+      "rollback": {
+        "sha": null,
+        "profile": "legacy-motion",
+        "verified": false,
+        "strategy": "restore_parent_profile_and_reopen_item",
+        "instruction": "disable chat director",
+        "downgrade_allowed": false
+      },
+      "blocker": null,
+      "handoff_id": null,
+      "detail_source": "planning/02-chat-animation-plan.md"
+    },
+    {
+      "id": "RCHAT-ANIM-045",
+      "parent": "RCHAT-FLOW-050",
+      "title": "Add deterministic variant selector",
+      "owner": "MOTION",
+      "reviewers": [
+        "RUNTIME",
+        "FLOW"
+      ],
+      "status": "PLANNED",
+      "weight": 0,
+      "dependencies": [
+        "RCHAT-ANIM-040"
+      ],
+      "gate_id": "A1",
+      "path_allowlist": [
+        "rust/wizard_avatar_engine/src/motion_*.rs",
+        "rust/wizard_avatar_engine/src/facial_*.rs",
+        "rust/wizard_avatar_engine/src/secondary_*.rs",
+        "rust/wizard_avatar_engine/assets/wizard_chat_motion_graph*.json",
+        "rust/wizard_avatar_engine/tests/motion_*.rs",
+        "rust/wizard_avatar_engine/tests/chatbot_animation_*.rs"
+      ],
+      "required_locks": [
+
+      ],
+      "base_sha": null,
+      "result_sha": null,
+      "started_at": null,
+      "finished_at": null,
+      "commands": [
+
+      ],
+      "evidence": [
+
+      ],
+      "metrics": {
+        "progress_earning": false,
+        "parent_weight_authoritative": true
+      },
+      "rollback": {
+        "sha": null,
+        "profile": "legacy-motion",
+        "verified": false,
+        "strategy": "restore_parent_profile_and_reopen_item",
+        "instruction": "fixed first variant",
+        "downgrade_allowed": false
+      },
+      "blocker": null,
+      "handoff_id": null,
+      "detail_source": "planning/02-chat-animation-plan.md"
+    },
+    {
+      "id": "RCHAT-ANIM-050",
+      "parent": "RCHAT-FLOW-050",
+      "title": "Author ground start/walk/run/stop/turn clips",
+      "owner": "MOTION",
+      "reviewers": [
+        "RUNTIME",
+        "FLOW"
+      ],
+      "status": "PLANNED",
+      "weight": 0,
+      "dependencies": [
+        "RCHAT-ANIM-020",
+        "RCHAT-ANIM-041"
+      ],
+      "gate_id": "A1",
+      "path_allowlist": [
+        "rust/wizard_avatar_engine/src/motion_*.rs",
+        "rust/wizard_avatar_engine/src/facial_*.rs",
+        "rust/wizard_avatar_engine/src/secondary_*.rs",
+        "rust/wizard_avatar_engine/assets/wizard_chat_motion_graph*.json",
+        "rust/wizard_avatar_engine/tests/motion_*.rs",
+        "rust/wizard_avatar_engine/tests/chatbot_animation_*.rs"
+      ],
+      "required_locks": [
+
+      ],
+      "base_sha": null,
+      "result_sha": null,
+      "started_at": null,
+      "finished_at": null,
+      "commands": [
+
+      ],
+      "evidence": [
+
+      ],
+      "metrics": {
+        "progress_earning": false,
+        "parent_weight_authoritative": true
+      },
+      "rollback": {
+        "sha": null,
+        "profile": "legacy-motion",
+        "verified": false,
+        "strategy": "restore_parent_profile_and_reopen_item",
+        "instruction": "current ground clips",
+        "downgrade_allowed": false
+      },
+      "blocker": null,
+      "handoff_id": null,
+      "detail_source": "planning/02-chat-animation-plan.md"
+    },
+    {
+      "id": "RCHAT-ANIM-052",
+      "parent": "RCHAT-FLOW-050",
+      "title": "Preserve distance phase across speed changes",
+      "owner": "MOTION",
+      "reviewers": [
+        "RUNTIME",
+        "FLOW"
+      ],
+      "status": "PLANNED",
+      "weight": 0,
+      "dependencies": [
+        "RCHAT-ANIM-050"
+      ],
+      "gate_id": "A1",
+      "path_allowlist": [
+        "rust/wizard_avatar_engine/src/motion_*.rs",
+        "rust/wizard_avatar_engine/src/facial_*.rs",
+        "rust/wizard_avatar_engine/src/secondary_*.rs",
+        "rust/wizard_avatar_engine/assets/wizard_chat_motion_graph*.json",
+        "rust/wizard_avatar_engine/tests/motion_*.rs",
+        "rust/wizard_avatar_engine/tests/chatbot_animation_*.rs"
+      ],
+      "required_locks": [
+
+      ],
+      "base_sha": null,
+      "result_sha": null,
+      "started_at": null,
+      "finished_at": null,
+      "commands": [
+
+      ],
+      "evidence": [
+
+      ],
+      "metrics": {
+        "progress_earning": false,
+        "parent_weight_authoritative": true
+      },
+      "rollback": {
+        "sha": null,
+        "profile": "legacy-motion",
+        "verified": false,
+        "strategy": "restore_parent_profile_and_reopen_item",
+        "instruction": "current walk phase",
+        "downgrade_allowed": false
+      },
+      "blocker": null,
+      "handoff_id": null,
+      "detail_source": "planning/02-chat-animation-plan.md"
+    },
+    {
+      "id": "RCHAT-ANIM-055",
+      "parent": "RCHAT-FLOW-050",
+      "title": "Enforce planted foot/staff/hand contacts",
+      "owner": "MOTION",
+      "reviewers": [
+        "RUNTIME",
+        "FLOW"
+      ],
+      "status": "PLANNED",
+      "weight": 0,
+      "dependencies": [
+        "RCHAT-ANIM-050"
+      ],
+      "gate_id": "A1",
+      "path_allowlist": [
+        "rust/wizard_avatar_engine/src/motion_*.rs",
+        "rust/wizard_avatar_engine/src/facial_*.rs",
+        "rust/wizard_avatar_engine/src/secondary_*.rs",
+        "rust/wizard_avatar_engine/assets/wizard_chat_motion_graph*.json",
+        "rust/wizard_avatar_engine/tests/motion_*.rs",
+        "rust/wizard_avatar_engine/tests/chatbot_animation_*.rs"
+      ],
+      "required_locks": [
+
+      ],
+      "base_sha": null,
+      "result_sha": null,
+      "started_at": null,
+      "finished_at": null,
+      "commands": [
+
+      ],
+      "evidence": [
+
+      ],
+      "metrics": {
+        "progress_earning": false,
+        "parent_weight_authoritative": true
+      },
+      "rollback": {
+        "sha": null,
+        "profile": "legacy-motion",
+        "verified": false,
+        "strategy": "restore_parent_profile_and_reopen_item",
+        "instruction": "coherent handoff without offset",
+        "downgrade_allowed": false
+      },
+      "blocker": null,
+      "handoff_id": null,
+      "detail_source": "planning/02-chat-animation-plan.md"
+    },
+    {
+      "id": "RCHAT-ANIM-057",
+      "parent": "RCHAT-FLOW-050",
+      "title": "Author jump/fall/landing arcs",
+      "owner": "MOTION",
+      "reviewers": [
+        "RUNTIME",
+        "FLOW"
+      ],
+      "status": "PLANNED",
+      "weight": 0,
+      "dependencies": [
+        "RCHAT-ANIM-041",
+        "RCHAT-ANIM-055"
+      ],
+      "gate_id": "A1",
+      "path_allowlist": [
+        "rust/wizard_avatar_engine/src/motion_*.rs",
+        "rust/wizard_avatar_engine/src/facial_*.rs",
+        "rust/wizard_avatar_engine/src/secondary_*.rs",
+        "rust/wizard_avatar_engine/assets/wizard_chat_motion_graph*.json",
+        "rust/wizard_avatar_engine/tests/motion_*.rs",
+        "rust/wizard_avatar_engine/tests/chatbot_animation_*.rs"
+      ],
+      "required_locks": [
+
+      ],
+      "base_sha": null,
+      "result_sha": null,
+      "started_at": null,
+      "finished_at": null,
+      "commands": [
+
+      ],
+      "evidence": [
+
+      ],
+      "metrics": {
+        "progress_earning": false,
+        "parent_weight_authoritative": true
+      },
+      "rollback": {
+        "sha": null,
+        "profile": "legacy-motion",
+        "verified": false,
+        "strategy": "restore_parent_profile_and_reopen_item",
+        "instruction": "disable airborne action",
+        "downgrade_allowed": false
+      },
+      "blocker": null,
+      "handoff_id": null,
+      "detail_source": "planning/02-chat-animation-plan.md"
+    },
+    {
+      "id": "RCHAT-ANIM-060",
+      "parent": "RCHAT-FLOW-050",
+      "title": "Author takeoff/hover/flap/glide/bank/land",
+      "owner": "MOTION",
+      "reviewers": [
+        "RUNTIME",
+        "FLOW"
+      ],
+      "status": "PLANNED",
+      "weight": 0,
+      "dependencies": [
+        "RCHAT-ANIM-041",
+        "RCHAT-ANIM-055"
+      ],
+      "gate_id": "A1",
+      "path_allowlist": [
+        "rust/wizard_avatar_engine/src/motion_*.rs",
+        "rust/wizard_avatar_engine/src/facial_*.rs",
+        "rust/wizard_avatar_engine/src/secondary_*.rs",
+        "rust/wizard_avatar_engine/assets/wizard_chat_motion_graph*.json",
+        "rust/wizard_avatar_engine/tests/motion_*.rs",
+        "rust/wizard_avatar_engine/tests/chatbot_animation_*.rs"
+      ],
+      "required_locks": [
+
+      ],
+      "base_sha": null,
+      "result_sha": null,
+      "started_at": null,
+      "finished_at": null,
+      "commands": [
+
+      ],
+      "evidence": [
+
+      ],
+      "metrics": {
+        "progress_earning": false,
+        "parent_weight_authoritative": true
+      },
+      "rollback": {
+        "sha": null,
+        "profile": "legacy-motion",
+        "verified": false,
+        "strategy": "restore_parent_profile_and_reopen_item",
+        "instruction": "current hover/bank clips",
+        "downgrade_allowed": false
+      },
+      "blocker": null,
+      "handoff_id": null,
+      "detail_source": "planning/02-chat-animation-plan.md"
+    },
+    {
+      "id": "RCHAT-ANIM-063",
+      "parent": "RCHAT-FLOW-050",
+      "title": "Add honest facing fallbacks",
+      "owner": "MOTION",
+      "reviewers": [
+        "RUNTIME",
+        "FLOW"
+      ],
+      "status": "PLANNED",
+      "weight": 0,
+      "dependencies": [
+        "RCHAT-ANIM-021",
+        "RCHAT-ANIM-050",
+        "RCHAT-ANIM-060"
+      ],
+      "gate_id": "A1",
+      "path_allowlist": [
+        "rust/wizard_avatar_engine/src/motion_*.rs",
+        "rust/wizard_avatar_engine/src/facial_*.rs",
+        "rust/wizard_avatar_engine/src/secondary_*.rs",
+        "rust/wizard_avatar_engine/assets/wizard_chat_motion_graph*.json",
+        "rust/wizard_avatar_engine/tests/motion_*.rs",
+        "rust/wizard_avatar_engine/tests/chatbot_animation_*.rs"
+      ],
+      "required_locks": [
+
+      ],
+      "base_sha": null,
+      "result_sha": null,
+      "started_at": null,
+      "finished_at": null,
+      "commands": [
+
+      ],
+      "evidence": [
+
+      ],
+      "metrics": {
+        "progress_earning": false,
+        "parent_weight_authoritative": true
+      },
+      "rollback": {
+        "sha": null,
+        "profile": "legacy-motion",
+        "verified": false,
+        "strategy": "restore_parent_profile_and_reopen_item",
+        "instruction": "front-performance fallback",
+        "downgrade_allowed": false
+      },
+      "blocker": null,
+      "handoff_id": null,
+      "detail_source": "planning/02-chat-animation-plan.md"
+    },
+    {
+      "id": "RCHAT-ANIM-070",
+      "parent": "RCHAT-FLOW-050",
+      "title": "Implement ten canonical turn-state profiles",
+      "owner": "MOTION",
+      "reviewers": [
+        "RUNTIME",
+        "FLOW"
+      ],
+      "status": "PLANNED",
+      "weight": 0,
+      "dependencies": [
+        "RCHAT-ANIM-040",
+        "RCHAT-ANIM-044"
+      ],
+      "gate_id": "A1",
+      "path_allowlist": [
+        "rust/wizard_avatar_engine/src/motion_*.rs",
+        "rust/wizard_avatar_engine/src/facial_*.rs",
+        "rust/wizard_avatar_engine/src/secondary_*.rs",
+        "rust/wizard_avatar_engine/assets/wizard_chat_motion_graph*.json",
+        "rust/wizard_avatar_engine/tests/motion_*.rs",
+        "rust/wizard_avatar_engine/tests/chatbot_animation_*.rs"
+      ],
+      "required_locks": [
+
+      ],
+      "base_sha": null,
+      "result_sha": null,
+      "started_at": null,
+      "finished_at": null,
+      "commands": [
+
+      ],
+      "evidence": [
+
+      ],
+      "metrics": {
+        "progress_earning": false,
+        "parent_weight_authoritative": true
+      },
+      "rollback": {
+        "sha": null,
+        "profile": "legacy-motion",
+        "verified": false,
+        "strategy": "restore_parent_profile_and_reopen_item",
+        "instruction": "map all to idle/current actions",
+        "downgrade_allowed": false
+      },
+      "blocker": null,
+      "handoff_id": null,
+      "detail_source": "planning/02-chat-animation-plan.md"
+    },
+    {
+      "id": "RCHAT-ANIM-072",
+      "parent": "RCHAT-FLOW-050",
+      "title": "Author listen and idle variants",
+      "owner": "MOTION",
+      "reviewers": [
+        "RUNTIME",
+        "FLOW"
+      ],
+      "status": "PLANNED",
+      "weight": 0,
+      "dependencies": [
+        "RCHAT-ANIM-070"
+      ],
+      "gate_id": "A1",
+      "path_allowlist": [
+        "rust/wizard_avatar_engine/src/motion_*.rs",
+        "rust/wizard_avatar_engine/src/facial_*.rs",
+        "rust/wizard_avatar_engine/src/secondary_*.rs",
+        "rust/wizard_avatar_engine/assets/wizard_chat_motion_graph*.json",
+        "rust/wizard_avatar_engine/tests/motion_*.rs",
+        "rust/wizard_avatar_engine/tests/chatbot_animation_*.rs"
+      ],
+      "required_locks": [
+
+      ],
+      "base_sha": null,
+      "result_sha": null,
+      "started_at": null,
+      "finished_at": null,
+      "commands": [
+
+      ],
+      "evidence": [
+
+      ],
+      "metrics": {
+        "progress_earning": false,
+        "parent_weight_authoritative": true
+      },
+      "rollback": {
+        "sha": null,
+        "profile": "legacy-motion",
+        "verified": false,
+        "strategy": "restore_parent_profile_and_reopen_item",
+        "instruction": "stable idle",
+        "downgrade_allowed": false
+      },
+      "blocker": null,
+      "handoff_id": null,
+      "detail_source": "planning/02-chat-animation-plan.md"
+    },
+    {
+      "id": "RCHAT-ANIM-074",
+      "parent": "RCHAT-FLOW-050",
+      "title": "Author think/clarify/tool-wait variants",
+      "owner": "MOTION",
+      "reviewers": [
+        "RUNTIME",
+        "FLOW"
+      ],
+      "status": "PLANNED",
+      "weight": 0,
+      "dependencies": [
+        "RCHAT-ANIM-070"
+      ],
+      "gate_id": "A1",
+      "path_allowlist": [
+        "rust/wizard_avatar_engine/src/motion_*.rs",
+        "rust/wizard_avatar_engine/src/facial_*.rs",
+        "rust/wizard_avatar_engine/src/secondary_*.rs",
+        "rust/wizard_avatar_engine/assets/wizard_chat_motion_graph*.json",
+        "rust/wizard_avatar_engine/tests/motion_*.rs",
+        "rust/wizard_avatar_engine/tests/chatbot_animation_*.rs"
+      ],
+      "required_locks": [
+
+      ],
+      "base_sha": null,
+      "result_sha": null,
+      "started_at": null,
+      "finished_at": null,
+      "commands": [
+
+      ],
+      "evidence": [
+
+      ],
+      "metrics": {
+        "progress_earning": false,
+        "parent_weight_authoritative": true
+      },
+      "rollback": {
+        "sha": null,
+        "profile": "legacy-motion",
+        "verified": false,
+        "strategy": "restore_parent_profile_and_reopen_item",
+        "instruction": "static thinking pose",
+        "downgrade_allowed": false
+      },
+      "blocker": null,
+      "handoff_id": null,
+      "detail_source": "planning/02-chat-animation-plan.md"
+    },
+    {
+      "id": "RCHAT-ANIM-075",
+      "parent": "RCHAT-FLOW-050",
+      "title": "Map ten emotions to full/close accents",
+      "owner": "MOTION",
+      "reviewers": [
+        "RUNTIME",
+        "FLOW"
+      ],
+      "status": "PLANNED",
+      "weight": 0,
+      "dependencies": [
+        "RCHAT-ANIM-020",
+        "RCHAT-ANIM-070"
+      ],
+      "gate_id": "A1",
+      "path_allowlist": [
+        "rust/wizard_avatar_engine/src/motion_*.rs",
+        "rust/wizard_avatar_engine/src/facial_*.rs",
+        "rust/wizard_avatar_engine/src/secondary_*.rs",
+        "rust/wizard_avatar_engine/assets/wizard_chat_motion_graph*.json",
+        "rust/wizard_avatar_engine/tests/motion_*.rs",
+        "rust/wizard_avatar_engine/tests/chatbot_animation_*.rs"
+      ],
+      "required_locks": [
+
+      ],
+      "base_sha": null,
+      "result_sha": null,
+      "started_at": null,
+      "finished_at": null,
+      "commands": [
+
+      ],
+      "evidence": [
+
+      ],
+      "metrics": {
+        "progress_earning": false,
+        "parent_weight_authoritative": true
+      },
+      "rollback": {
+        "sha": null,
+        "profile": "legacy-motion",
+        "verified": false,
+        "strategy": "restore_parent_profile_and_reopen_item",
+        "instruction": "neutral expression",
+        "downgrade_allowed": false
+      },
+      "blocker": null,
+      "handoff_id": null,
+      "detail_source": "planning/02-chat-animation-plan.md"
+    },
+    {
+      "id": "RCHAT-ANIM-077",
+      "parent": "RCHAT-FLOW-050",
+      "title": "Author error/celebrate recipes",
+      "owner": "MOTION",
+      "reviewers": [
+        "RUNTIME",
+        "FLOW"
+      ],
+      "status": "PLANNED",
+      "weight": 0,
+      "dependencies": [
+        "RCHAT-ANIM-057",
+        "RCHAT-ANIM-075"
+      ],
+      "gate_id": "A1",
+      "path_allowlist": [
+        "rust/wizard_avatar_engine/src/motion_*.rs",
+        "rust/wizard_avatar_engine/src/facial_*.rs",
+        "rust/wizard_avatar_engine/src/secondary_*.rs",
+        "rust/wizard_avatar_engine/assets/wizard_chat_motion_graph*.json",
+        "rust/wizard_avatar_engine/tests/motion_*.rs",
+        "rust/wizard_avatar_engine/tests/chatbot_animation_*.rs"
+      ],
+      "required_locks": [
+
+      ],
+      "base_sha": null,
+      "result_sha": null,
+      "started_at": null,
+      "finished_at": null,
+      "commands": [
+
+      ],
+      "evidence": [
+
+      ],
+      "metrics": {
+        "progress_earning": false,
+        "parent_weight_authoritative": true
+      },
+      "rollback": {
+        "sha": null,
+        "profile": "legacy-motion",
+        "verified": false,
+        "strategy": "restore_parent_profile_and_reopen_item",
+        "instruction": "restrained static accent",
+        "downgrade_allowed": false
+      },
+      "blocker": null,
+      "handoff_id": null,
+      "detail_source": "planning/02-chat-animation-plan.md"
+    },
+    {
+      "id": "RCHAT-ANIM-080",
+      "parent": "RCHAT-FLOW-050",
+      "title": "Implement state/intensity/variant selection",
+      "owner": "MOTION",
+      "reviewers": [
+        "RUNTIME",
+        "FLOW"
+      ],
+      "status": "PLANNED",
+      "weight": 0,
+      "dependencies": [
+        "RCHAT-ANIM-045",
+        "RCHAT-ANIM-070",
+        "RCHAT-ANIM-075"
+      ],
+      "gate_id": "A1",
+      "path_allowlist": [
+        "rust/wizard_avatar_engine/src/motion_*.rs",
+        "rust/wizard_avatar_engine/src/facial_*.rs",
+        "rust/wizard_avatar_engine/src/secondary_*.rs",
+        "rust/wizard_avatar_engine/assets/wizard_chat_motion_graph*.json",
+        "rust/wizard_avatar_engine/tests/motion_*.rs",
+        "rust/wizard_avatar_engine/tests/chatbot_animation_*.rs"
+      ],
+      "required_locks": [
+
+      ],
+      "base_sha": null,
+      "result_sha": null,
+      "started_at": null,
+      "finished_at": null,
+      "commands": [
+
+      ],
+      "evidence": [
+
+      ],
+      "metrics": {
+        "progress_earning": false,
+        "parent_weight_authoritative": true
+      },
+      "rollback": {
+        "sha": null,
+        "profile": "legacy-motion",
+        "verified": false,
+        "strategy": "restore_parent_profile_and_reopen_item",
+        "instruction": "default state profile",
+        "downgrade_allowed": false
+      },
+      "blocker": null,
+      "handoff_id": null,
+      "detail_source": "planning/02-chat-animation-plan.md"
+    },
+    {
+      "id": "RCHAT-ANIM-090",
+      "parent": "RCHAT-FLOW-050",
+      "title": "Implement viseme reducer",
+      "owner": "MOTION",
+      "reviewers": [
+        "RUNTIME",
+        "FLOW"
+      ],
+      "status": "PLANNED",
+      "weight": 0,
+      "dependencies": [
+        "RCHAT-ANIM-019"
+      ],
+      "gate_id": "A1",
+      "path_allowlist": [
+        "rust/wizard_avatar_engine/src/motion_*.rs",
+        "rust/wizard_avatar_engine/src/facial_*.rs",
+        "rust/wizard_avatar_engine/src/secondary_*.rs",
+        "rust/wizard_avatar_engine/assets/wizard_chat_motion_graph*.json",
+        "rust/wizard_avatar_engine/tests/motion_*.rs",
+        "rust/wizard_avatar_engine/tests/chatbot_animation_*.rs"
+      ],
+      "required_locks": [
+
+      ],
+      "base_sha": null,
+      "result_sha": null,
+      "started_at": null,
+      "finished_at": null,
+      "commands": [
+
+      ],
+      "evidence": [
+
+      ],
+      "metrics": {
+        "progress_earning": false,
+        "parent_weight_authoritative": true
+      },
+      "rollback": {
+        "sha": null,
+        "profile": "legacy-motion",
+        "verified": false,
+        "strategy": "restore_parent_profile_and_reopen_item",
+        "instruction": "duration fallback mouth",
+        "downgrade_allowed": false
+      },
+      "blocker": null,
+      "handoff_id": null,
+      "detail_source": "planning/02-chat-animation-plan.md"
+    },
+    {
+      "id": "RCHAT-ANIM-092",
+      "parent": "RCHAT-FLOW-050",
+      "title": "Preserve emotion mouth bias",
+      "owner": "MOTION",
+      "reviewers": [
+        "RUNTIME",
+        "FLOW"
+      ],
+      "status": "PLANNED",
+      "weight": 0,
+      "dependencies": [
+        "RCHAT-ANIM-075",
+        "RCHAT-ANIM-090"
+      ],
+      "gate_id": "A1",
+      "path_allowlist": [
+        "rust/wizard_avatar_engine/src/motion_*.rs",
+        "rust/wizard_avatar_engine/src/facial_*.rs",
+        "rust/wizard_avatar_engine/src/secondary_*.rs",
+        "rust/wizard_avatar_engine/assets/wizard_chat_motion_graph*.json",
+        "rust/wizard_avatar_engine/tests/motion_*.rs",
+        "rust/wizard_avatar_engine/tests/chatbot_animation_*.rs"
+      ],
+      "required_locks": [
+
+      ],
+      "base_sha": null,
+      "result_sha": null,
+      "started_at": null,
+      "finished_at": null,
+      "commands": [
+
+      ],
+      "evidence": [
+
+      ],
+      "metrics": {
+        "progress_earning": false,
+        "parent_weight_authoritative": true
+      },
+      "rollback": {
+        "sha": null,
+        "profile": "legacy-motion",
+        "verified": false,
+        "strategy": "restore_parent_profile_and_reopen_item",
+        "instruction": "neutral mouth bias",
+        "downgrade_allowed": false
+      },
+      "blocker": null,
+      "handoff_id": null,
+      "detail_source": "planning/02-chat-animation-plan.md"
+    },
+    {
+      "id": "RCHAT-ANIM-095",
+      "parent": "RCHAT-FLOW-050",
+      "title": "Implement gaze state",
+      "owner": "MOTION",
+      "reviewers": [
+        "RUNTIME",
+        "FLOW"
+      ],
+      "status": "PLANNED",
+      "weight": 0,
+      "dependencies": [
+        "RCHAT-ANIM-070"
+      ],
+      "gate_id": "A1",
+      "path_allowlist": [
+        "rust/wizard_avatar_engine/src/motion_*.rs",
+        "rust/wizard_avatar_engine/src/facial_*.rs",
+        "rust/wizard_avatar_engine/src/secondary_*.rs",
+        "rust/wizard_avatar_engine/assets/wizard_chat_motion_graph*.json",
+        "rust/wizard_avatar_engine/tests/motion_*.rs",
+        "rust/wizard_avatar_engine/tests/chatbot_animation_*.rs"
+      ],
+      "required_locks": [
+
+      ],
+      "base_sha": null,
+      "result_sha": null,
+      "started_at": null,
+      "finished_at": null,
+      "commands": [
+
+      ],
+      "evidence": [
+
+      ],
+      "metrics": {
+        "progress_earning": false,
+        "parent_weight_authoritative": true
+      },
+      "rollback": {
+        "sha": null,
+        "profile": "legacy-motion",
+        "verified": false,
+        "strategy": "restore_parent_profile_and_reopen_item",
+        "instruction": "neutral gaze",
+        "downgrade_allowed": false
+      },
+      "blocker": null,
+      "handoff_id": null,
+      "detail_source": "planning/02-chat-animation-plan.md"
+    },
+    {
+      "id": "RCHAT-ANIM-097",
+      "parent": "RCHAT-FLOW-050",
+      "title": "Implement deterministic blink scheduler",
+      "owner": "MOTION",
+      "reviewers": [
+        "RUNTIME",
+        "FLOW"
+      ],
+      "status": "PLANNED",
+      "weight": 0,
+      "dependencies": [
+        "RCHAT-ANIM-045",
+        "RCHAT-ANIM-095"
+      ],
+      "gate_id": "A1",
+      "path_allowlist": [
+        "rust/wizard_avatar_engine/src/motion_*.rs",
+        "rust/wizard_avatar_engine/src/facial_*.rs",
+        "rust/wizard_avatar_engine/src/secondary_*.rs",
+        "rust/wizard_avatar_engine/assets/wizard_chat_motion_graph*.json",
+        "rust/wizard_avatar_engine/tests/motion_*.rs",
+        "rust/wizard_avatar_engine/tests/chatbot_animation_*.rs"
+      ],
+      "required_locks": [
+
+      ],
+      "base_sha": null,
+      "result_sha": null,
+      "started_at": null,
+      "finished_at": null,
+      "commands": [
+
+      ],
+      "evidence": [
+
+      ],
+      "metrics": {
+        "progress_earning": false,
+        "parent_weight_authoritative": true
+      },
+      "rollback": {
+        "sha": null,
+        "profile": "legacy-motion",
+        "verified": false,
+        "strategy": "restore_parent_profile_and_reopen_item",
+        "instruction": "current periodic blink",
+        "downgrade_allowed": false
+      },
+      "blocker": null,
+      "handoff_id": null,
+      "detail_source": "planning/02-chat-animation-plan.md"
+    },
+    {
+      "id": "RCHAT-ANIM-100",
+      "parent": "RCHAT-FLOW-050",
+      "title": "Align phrase gestures to speech markers",
+      "owner": "MOTION",
+      "reviewers": [
+        "RUNTIME",
+        "FLOW"
+      ],
+      "status": "PLANNED",
+      "weight": 0,
+      "dependencies": [
+        "RCHAT-ANIM-070",
+        "RCHAT-ANIM-090"
+      ],
+      "gate_id": "A1",
+      "path_allowlist": [
+        "rust/wizard_avatar_engine/src/motion_*.rs",
+        "rust/wizard_avatar_engine/src/facial_*.rs",
+        "rust/wizard_avatar_engine/src/secondary_*.rs",
+        "rust/wizard_avatar_engine/assets/wizard_chat_motion_graph*.json",
+        "rust/wizard_avatar_engine/tests/motion_*.rs",
+        "rust/wizard_avatar_engine/tests/chatbot_animation_*.rs"
+      ],
+      "required_locks": [
+
+      ],
+      "base_sha": null,
+      "result_sha": null,
+      "started_at": null,
+      "finished_at": null,
+      "commands": [
+
+      ],
+      "evidence": [
+
+      ],
+      "metrics": {
+        "progress_earning": false,
+        "parent_weight_authoritative": true
+      },
+      "rollback": {
+        "sha": null,
+        "profile": "legacy-motion",
+        "verified": false,
+        "strategy": "restore_parent_profile_and_reopen_item",
+        "instruction": "speech without gesture",
+        "downgrade_allowed": false
+      },
+      "blocker": null,
+      "handoff_id": null,
+      "detail_source": "planning/02-chat-animation-plan.md"
+    },
+    {
+      "id": "RCHAT-ANIM-102",
+      "parent": "RCHAT-FLOW-050",
+      "title": "Implement speech interruption",
+      "owner": "MOTION",
+      "reviewers": [
+        "RUNTIME",
+        "FLOW"
+      ],
+      "status": "PLANNED",
+      "weight": 0,
+      "dependencies": [
+        "RCHAT-ANIM-043",
+        "RCHAT-ANIM-090",
+        "RCHAT-ANIM-100"
+      ],
+      "gate_id": "A1",
+      "path_allowlist": [
+        "rust/wizard_avatar_engine/src/motion_*.rs",
+        "rust/wizard_avatar_engine/src/facial_*.rs",
+        "rust/wizard_avatar_engine/src/secondary_*.rs",
+        "rust/wizard_avatar_engine/assets/wizard_chat_motion_graph*.json",
+        "rust/wizard_avatar_engine/tests/motion_*.rs",
+        "rust/wizard_avatar_engine/tests/chatbot_animation_*.rs"
+      ],
+      "required_locks": [
+
+      ],
+      "base_sha": null,
+      "result_sha": null,
+      "started_at": null,
+      "finished_at": null,
+      "commands": [
+
+      ],
+      "evidence": [
+
+      ],
+      "metrics": {
+        "progress_earning": false,
+        "parent_weight_authoritative": true
+      },
+      "rollback": {
+        "sha": null,
+        "profile": "legacy-motion",
+        "verified": false,
+        "strategy": "restore_parent_profile_and_reopen_item",
+        "instruction": "clear speech channel immediately",
+        "downgrade_allowed": false
+      },
+      "blocker": null,
+      "handoff_id": null,
+      "detail_source": "planning/02-chat-animation-plan.md"
+    },
+    {
+      "id": "RCHAT-ANIM-110",
+      "parent": "RCHAT-FLOW-050",
+      "title": "Implement quantized secondary state",
+      "owner": "MOTION",
+      "reviewers": [
+        "RUNTIME",
+        "FLOW"
+      ],
+      "status": "PLANNED",
+      "weight": 0,
+      "dependencies": [
+        "RCHAT-ANIM-044"
+      ],
+      "gate_id": "A1",
+      "path_allowlist": [
+        "rust/wizard_avatar_engine/src/motion_*.rs",
+        "rust/wizard_avatar_engine/src/facial_*.rs",
+        "rust/wizard_avatar_engine/src/secondary_*.rs",
+        "rust/wizard_avatar_engine/assets/wizard_chat_motion_graph*.json",
+        "rust/wizard_avatar_engine/tests/motion_*.rs",
+        "rust/wizard_avatar_engine/tests/chatbot_animation_*.rs"
+      ],
+      "required_locks": [
+
+      ],
+      "base_sha": null,
+      "result_sha": null,
+      "started_at": null,
+      "finished_at": null,
+      "commands": [
+
+      ],
+      "evidence": [
+
+      ],
+      "metrics": {
+        "progress_earning": false,
+        "parent_weight_authoritative": true
+      },
+      "rollback": {
+        "sha": null,
+        "profile": "legacy-motion",
+        "verified": false,
+        "strategy": "restore_parent_profile_and_reopen_item",
+        "instruction": "zero offsets",
+        "downgrade_allowed": false
+      },
+      "blocker": null,
+      "handoff_id": null,
+      "detail_source": "planning/02-chat-animation-plan.md"
+    },
+    {
+      "id": "RCHAT-ANIM-111",
+      "parent": "RCHAT-FLOW-080",
+      "title": "Apply constrained region offsets",
+      "owner": "INT",
+      "reviewers": [
+        "MOTION",
+        "FLOW"
+      ],
+      "status": "PLANNED",
+      "weight": 0,
+      "dependencies": [
+        "RCHAT-ANIM-055",
+        "RCHAT-ANIM-110"
+      ],
+      "gate_id": "I2",
+      "path_allowlist": [
+        "rust/wizard_avatar_engine/src/lib.rs",
+        "rust/wizard_avatar_engine/src/state.rs",
+        "rust/wizard_avatar_engine/src/controller.rs",
+        "rust/wizard_avatar_engine/src/animation.rs",
+        "rust/wizard_avatar_engine/src/pose.rs",
+        "rust/wizard_avatar_engine/src/pose_clip.rs",
+        "rust/wizard_avatar_engine/src/pose_playback.rs",
+        "rust/wizard_avatar_engine/src/renderer.rs",
+        "rust/wizard_avatar_engine/src/frame_source.rs"
+      ],
+      "required_locks": [
+        "LOCK-RCHAT-LIB",
+        "LOCK-RCHAT-STATE",
+        "LOCK-RCHAT-CONTROLLER",
+        "LOCK-RCHAT-CHANNELS",
+        "LOCK-RCHAT-POSE",
+        "LOCK-RCHAT-CLIPS",
+        "LOCK-RCHAT-PLAYBACK",
+        "LOCK-RCHAT-RENDERER"
+      ],
+      "base_sha": null,
+      "result_sha": null,
+      "started_at": null,
+      "finished_at": null,
+      "commands": [
+
+      ],
+      "evidence": [
+
+      ],
+      "metrics": {
+        "progress_earning": false,
+        "parent_weight_authoritative": true
+      },
+      "rollback": {
+        "sha": null,
+        "profile": "legacy-motion",
+        "verified": false,
+        "strategy": "restore_parent_profile_and_reopen_item",
+        "instruction": "zero offsets/profile off",
+        "downgrade_allowed": false
+      },
+      "blocker": null,
+      "handoff_id": null,
+      "detail_source": "planning/02-chat-animation-plan.md"
+    },
+    {
+      "id": "RCHAT-ANIM-112",
+      "parent": "RCHAT-FLOW-080",
+      "title": "Render face/gaze/secondary channels",
+      "owner": "INT",
+      "reviewers": [
+        "MOTION",
+        "FLOW"
+      ],
+      "status": "PLANNED",
+      "weight": 0,
+      "dependencies": [
+        "RCHAT-ANIM-090",
+        "RCHAT-ANIM-095",
+        "RCHAT-ANIM-111"
+      ],
+      "gate_id": "I2",
+      "path_allowlist": [
+        "rust/wizard_avatar_engine/src/lib.rs",
+        "rust/wizard_avatar_engine/src/state.rs",
+        "rust/wizard_avatar_engine/src/controller.rs",
+        "rust/wizard_avatar_engine/src/animation.rs",
+        "rust/wizard_avatar_engine/src/pose.rs",
+        "rust/wizard_avatar_engine/src/pose_clip.rs",
+        "rust/wizard_avatar_engine/src/pose_playback.rs",
+        "rust/wizard_avatar_engine/src/renderer.rs",
+        "rust/wizard_avatar_engine/src/frame_source.rs"
+      ],
+      "required_locks": [
+        "LOCK-RCHAT-LIB",
+        "LOCK-RCHAT-STATE",
+        "LOCK-RCHAT-CONTROLLER",
+        "LOCK-RCHAT-CHANNELS",
+        "LOCK-RCHAT-POSE",
+        "LOCK-RCHAT-CLIPS",
+        "LOCK-RCHAT-PLAYBACK",
+        "LOCK-RCHAT-RENDERER"
+      ],
+      "base_sha": null,
+      "result_sha": null,
+      "started_at": null,
+      "finished_at": null,
+      "commands": [
+
+      ],
+      "evidence": [
+
+      ],
+      "metrics": {
+        "progress_earning": false,
+        "parent_weight_authoritative": true
+      },
+      "rollback": {
+        "sha": null,
+        "profile": "legacy-motion",
+        "verified": false,
+        "strategy": "restore_parent_profile_and_reopen_item",
+        "instruction": "old renderer path",
+        "downgrade_allowed": false
+      },
+      "blocker": null,
+      "handoff_id": null,
+      "detail_source": "planning/02-chat-animation-plan.md"
+    },
+    {
+      "id": "RCHAT-ANIM-114",
+      "parent": "RCHAT-FLOW-050",
+      "title": "Staff plant and tip-lag rules",
+      "owner": "MOTION",
+      "reviewers": [
+        "RUNTIME",
+        "FLOW"
+      ],
+      "status": "PLANNED",
+      "weight": 0,
+      "dependencies": [
+        "RCHAT-ANIM-055",
+        "RCHAT-ANIM-111"
+      ],
+      "gate_id": "A1",
+      "path_allowlist": [
+        "rust/wizard_avatar_engine/src/motion_*.rs",
+        "rust/wizard_avatar_engine/src/facial_*.rs",
+        "rust/wizard_avatar_engine/src/secondary_*.rs",
+        "rust/wizard_avatar_engine/assets/wizard_chat_motion_graph*.json",
+        "rust/wizard_avatar_engine/tests/motion_*.rs",
+        "rust/wizard_avatar_engine/tests/chatbot_animation_*.rs"
+      ],
+      "required_locks": [
+
+      ],
+      "base_sha": null,
+      "result_sha": null,
+      "started_at": null,
+      "finished_at": null,
+      "commands": [
+
+      ],
+      "evidence": [
+
+      ],
+      "metrics": {
+        "progress_earning": false,
+        "parent_weight_authoritative": true
+      },
+      "rollback": {
+        "sha": null,
+        "profile": "legacy-motion",
+        "verified": false,
+        "strategy": "restore_parent_profile_and_reopen_item",
+        "instruction": "disable staff lag",
+        "downgrade_allowed": false
+      },
+      "blocker": null,
+      "handoff_id": null,
+      "detail_source": "planning/02-chat-animation-plan.md"
+    },
+    {
+      "id": "RCHAT-ANIM-116",
+      "parent": "RCHAT-FLOW-050",
+      "title": "Wing flap/settle constraints",
+      "owner": "MOTION",
+      "reviewers": [
+        "RUNTIME",
+        "FLOW"
+      ],
+      "status": "PLANNED",
+      "weight": 0,
+      "dependencies": [
+        "RCHAT-ANIM-060",
+        "RCHAT-ANIM-111"
+      ],
+      "gate_id": "A1",
+      "path_allowlist": [
+        "rust/wizard_avatar_engine/src/motion_*.rs",
+        "rust/wizard_avatar_engine/src/facial_*.rs",
+        "rust/wizard_avatar_engine/src/secondary_*.rs",
+        "rust/wizard_avatar_engine/assets/wizard_chat_motion_graph*.json",
+        "rust/wizard_avatar_engine/tests/motion_*.rs",
+        "rust/wizard_avatar_engine/tests/chatbot_animation_*.rs"
+      ],
+      "required_locks": [
+
+      ],
+      "base_sha": null,
+      "result_sha": null,
+      "started_at": null,
+      "finished_at": null,
+      "commands": [
+
+      ],
+      "evidence": [
+
+      ],
+      "metrics": {
+        "progress_earning": false,
+        "parent_weight_authoritative": true
+      },
+      "rollback": {
+        "sha": null,
+        "profile": "legacy-motion",
+        "verified": false,
+        "strategy": "restore_parent_profile_and_reopen_item",
+        "instruction": "authored pose only",
+        "downgrade_allowed": false
+      },
+      "blocker": null,
+      "handoff_id": null,
+      "detail_source": "planning/02-chat-animation-plan.md"
+    },
+    {
+      "id": "RCHAT-ANIM-118",
+      "parent": "RCHAT-FLOW-050",
+      "title": "Robe/beard/hat follow-through",
+      "owner": "MOTION",
+      "reviewers": [
+        "RUNTIME",
+        "FLOW"
+      ],
+      "status": "PLANNED",
+      "weight": 0,
+      "dependencies": [
+        "RCHAT-ANIM-110",
+        "RCHAT-ANIM-111"
+      ],
+      "gate_id": "A1",
+      "path_allowlist": [
+        "rust/wizard_avatar_engine/src/motion_*.rs",
+        "rust/wizard_avatar_engine/src/facial_*.rs",
+        "rust/wizard_avatar_engine/src/secondary_*.rs",
+        "rust/wizard_avatar_engine/assets/wizard_chat_motion_graph*.json",
+        "rust/wizard_avatar_engine/tests/motion_*.rs",
+        "rust/wizard_avatar_engine/tests/chatbot_animation_*.rs"
+      ],
+      "required_locks": [
+
+      ],
+      "base_sha": null,
+      "result_sha": null,
+      "started_at": null,
+      "finished_at": null,
+      "commands": [
+
+      ],
+      "evidence": [
+
+      ],
+      "metrics": {
+        "progress_earning": false,
+        "parent_weight_authoritative": true
+      },
+      "rollback": {
+        "sha": null,
+        "profile": "legacy-motion",
+        "verified": false,
+        "strategy": "restore_parent_profile_and_reopen_item",
+        "instruction": "zero offsets",
+        "downgrade_allowed": false
+      },
+      "blocker": null,
+      "handoff_id": null,
+      "detail_source": "planning/02-chat-animation-plan.md"
+    },
+    {
+      "id": "RCHAT-ANIM-119",
+      "parent": "RCHAT-FLOW-050",
+      "title": "Deterministic effect lifetimes",
+      "owner": "MOTION",
+      "reviewers": [
+        "RUNTIME",
+        "FLOW"
+      ],
+      "status": "PLANNED",
+      "weight": 0,
+      "dependencies": [
+        "RCHAT-ANIM-044",
+        "RCHAT-ANIM-112"
+      ],
+      "gate_id": "A1",
+      "path_allowlist": [
+        "rust/wizard_avatar_engine/src/motion_*.rs",
+        "rust/wizard_avatar_engine/src/facial_*.rs",
+        "rust/wizard_avatar_engine/src/secondary_*.rs",
+        "rust/wizard_avatar_engine/assets/wizard_chat_motion_graph*.json",
+        "rust/wizard_avatar_engine/tests/motion_*.rs",
+        "rust/wizard_avatar_engine/tests/chatbot_animation_*.rs"
+      ],
+      "required_locks": [
+
+      ],
+      "base_sha": null,
+      "result_sha": null,
+      "started_at": null,
+      "finished_at": null,
+      "commands": [
+
+      ],
+      "evidence": [
+
+      ],
+      "metrics": {
+        "progress_earning": false,
+        "parent_weight_authoritative": true
+      },
+      "rollback": {
+        "sha": null,
+        "profile": "legacy-motion",
+        "verified": false,
+        "strategy": "restore_parent_profile_and_reopen_item",
+        "instruction": "existing cast effect",
+        "downgrade_allowed": false
+      },
+      "blocker": null,
+      "handoff_id": null,
+      "detail_source": "planning/02-chat-animation-plan.md"
+    },
+    {
+      "id": "RCHAT-ANIM-120",
+      "parent": "RCHAT-FLOW-050",
+      "title": "Build full interruption matrix",
+      "owner": "MOTION",
+      "reviewers": [
+        "RUNTIME",
+        "FLOW"
+      ],
+      "status": "PLANNED",
+      "weight": 0,
+      "dependencies": [
+        "RCHAT-ANIM-043",
+        "RCHAT-ANIM-070",
+        "RCHAT-ANIM-102",
+        "RCHAT-ANIM-119"
+      ],
+      "gate_id": "A1",
+      "path_allowlist": [
+        "rust/wizard_avatar_engine/src/motion_*.rs",
+        "rust/wizard_avatar_engine/src/facial_*.rs",
+        "rust/wizard_avatar_engine/src/secondary_*.rs",
+        "rust/wizard_avatar_engine/assets/wizard_chat_motion_graph*.json",
+        "rust/wizard_avatar_engine/tests/motion_*.rs",
+        "rust/wizard_avatar_engine/tests/chatbot_animation_*.rs"
+      ],
+      "required_locks": [
+
+      ],
+      "base_sha": null,
+      "result_sha": null,
+      "started_at": null,
+      "finished_at": null,
+      "commands": [
+
+      ],
+      "evidence": [
+
+      ],
+      "metrics": {
+        "progress_earning": false,
+        "parent_weight_authoritative": true
+      },
+      "rollback": {
+        "sha": null,
+        "profile": "legacy-motion",
+        "verified": false,
+        "strategy": "restore_parent_profile_and_reopen_item",
+        "instruction": "legacy action priority",
+        "downgrade_allowed": false
+      },
+      "blocker": null,
+      "handoff_id": null,
+      "detail_source": "planning/02-chat-animation-plan.md"
+    },
+    {
+      "id": "RCHAT-ANIM-125",
+      "parent": "RCHAT-FLOW-050",
+      "title": "Add cooldowns and repeat-safe variants",
+      "owner": "MOTION",
+      "reviewers": [
+        "RUNTIME",
+        "FLOW"
+      ],
+      "status": "PLANNED",
+      "weight": 0,
+      "dependencies": [
+        "RCHAT-ANIM-045",
+        "RCHAT-ANIM-080"
+      ],
+      "gate_id": "A1",
+      "path_allowlist": [
+        "rust/wizard_avatar_engine/src/motion_*.rs",
+        "rust/wizard_avatar_engine/src/facial_*.rs",
+        "rust/wizard_avatar_engine/src/secondary_*.rs",
+        "rust/wizard_avatar_engine/assets/wizard_chat_motion_graph*.json",
+        "rust/wizard_avatar_engine/tests/motion_*.rs",
+        "rust/wizard_avatar_engine/tests/chatbot_animation_*.rs"
+      ],
+      "required_locks": [
+
+      ],
+      "base_sha": null,
+      "result_sha": null,
+      "started_at": null,
+      "finished_at": null,
+      "commands": [
+
+      ],
+      "evidence": [
+
+      ],
+      "metrics": {
+        "progress_earning": false,
+        "parent_weight_authoritative": true
+      },
+      "rollback": {
+        "sha": null,
+        "profile": "legacy-motion",
+        "verified": false,
+        "strategy": "restore_parent_profile_and_reopen_item",
+        "instruction": "fixed variant",
+        "downgrade_allowed": false
+      },
+      "blocker": null,
+      "handoff_id": null,
+      "detail_source": "planning/02-chat-animation-plan.md"
+    },
+    {
+      "id": "RCHAT-ANIM-130",
+      "parent": "RCHAT-FLOW-050",
+      "title": "Implement repeat-until-stop clips",
+      "owner": "MOTION",
+      "reviewers": [
+        "RUNTIME",
+        "FLOW"
+      ],
+      "status": "PLANNED",
+      "weight": 0,
+      "dependencies": [
+        "RCHAT-ANIM-040",
+        "RCHAT-ANIM-120"
+      ],
+      "gate_id": "A1",
+      "path_allowlist": [
+        "rust/wizard_avatar_engine/src/motion_*.rs",
+        "rust/wizard_avatar_engine/src/facial_*.rs",
+        "rust/wizard_avatar_engine/src/secondary_*.rs",
+        "rust/wizard_avatar_engine/assets/wizard_chat_motion_graph*.json",
+        "rust/wizard_avatar_engine/tests/motion_*.rs",
+        "rust/wizard_avatar_engine/tests/chatbot_animation_*.rs"
+      ],
+      "required_locks": [
+
+      ],
+      "base_sha": null,
+      "result_sha": null,
+      "started_at": null,
+      "finished_at": null,
+      "commands": [
+
+      ],
+      "evidence": [
+
+      ],
+      "metrics": {
+        "progress_earning": false,
+        "parent_weight_authoritative": true
+      },
+      "rollback": {
+        "sha": null,
+        "profile": "legacy-motion",
+        "verified": false,
+        "strategy": "restore_parent_profile_and_reopen_item",
+        "instruction": "existing clip loop flag",
+        "downgrade_allowed": false
+      },
+      "blocker": null,
+      "handoff_id": null,
+      "detail_source": "planning/02-chat-animation-plan.md"
+    },
+    {
+      "id": "RCHAT-ANIM-135",
+      "parent": "RCHAT-FLOW-050",
+      "title": "Implement reduced-motion graph overrides",
+      "owner": "MOTION",
+      "reviewers": [
+        "RUNTIME",
+        "FLOW"
+      ],
+      "status": "PLANNED",
+      "weight": 0,
+      "dependencies": [
+        "RCHAT-ANIM-070",
+        "RCHAT-ANIM-110",
+        "RCHAT-ANIM-130"
+      ],
+      "gate_id": "A1",
+      "path_allowlist": [
+        "rust/wizard_avatar_engine/src/motion_*.rs",
+        "rust/wizard_avatar_engine/src/facial_*.rs",
+        "rust/wizard_avatar_engine/src/secondary_*.rs",
+        "rust/wizard_avatar_engine/assets/wizard_chat_motion_graph*.json",
+        "rust/wizard_avatar_engine/tests/motion_*.rs",
+        "rust/wizard_avatar_engine/tests/chatbot_animation_*.rs"
+      ],
+      "required_locks": [
+
+      ],
+      "base_sha": null,
+      "result_sha": null,
+      "started_at": null,
+      "finished_at": null,
+      "commands": [
+
+      ],
+      "evidence": [
+
+      ],
+      "metrics": {
+        "progress_earning": false,
+        "parent_weight_authoritative": true
+      },
+      "rollback": {
+        "sha": null,
+        "profile": "legacy-motion",
+        "verified": false,
+        "strategy": "restore_parent_profile_and_reopen_item",
+        "instruction": "stable coherent handoff",
+        "downgrade_allowed": false
+      },
+      "blocker": null,
+      "handoff_id": null,
+      "detail_source": "planning/02-chat-animation-plan.md"
+    },
+    {
+      "id": "RCHAT-ANIM-140",
+      "parent": "RCHAT-FLOW-080",
+      "title": "Wire director into controller",
+      "owner": "INT",
+      "reviewers": [
+        "MOTION",
+        "FLOW"
+      ],
+      "status": "PLANNED",
+      "weight": 0,
+      "dependencies": [
+        "RCHAT-ANIM-080",
+        "RCHAT-ANIM-120",
+        "RCHAT-ANIM-135"
+      ],
+      "gate_id": "I2",
+      "path_allowlist": [
+        "rust/wizard_avatar_engine/src/lib.rs",
+        "rust/wizard_avatar_engine/src/state.rs",
+        "rust/wizard_avatar_engine/src/controller.rs",
+        "rust/wizard_avatar_engine/src/animation.rs",
+        "rust/wizard_avatar_engine/src/pose.rs",
+        "rust/wizard_avatar_engine/src/pose_clip.rs",
+        "rust/wizard_avatar_engine/src/pose_playback.rs",
+        "rust/wizard_avatar_engine/src/renderer.rs",
+        "rust/wizard_avatar_engine/src/frame_source.rs"
+      ],
+      "required_locks": [
+        "LOCK-RCHAT-LIB",
+        "LOCK-RCHAT-STATE",
+        "LOCK-RCHAT-CONTROLLER",
+        "LOCK-RCHAT-CHANNELS",
+        "LOCK-RCHAT-POSE",
+        "LOCK-RCHAT-CLIPS",
+        "LOCK-RCHAT-PLAYBACK",
+        "LOCK-RCHAT-RENDERER"
+      ],
+      "base_sha": null,
+      "result_sha": null,
+      "started_at": null,
+      "finished_at": null,
+      "commands": [
+
+      ],
+      "evidence": [
+
+      ],
+      "metrics": {
+        "progress_earning": false,
+        "parent_weight_authoritative": true
+      },
+      "rollback": {
+        "sha": null,
+        "profile": "legacy-motion",
+        "verified": false,
+        "strategy": "restore_parent_profile_and_reopen_item",
+        "instruction": "runtime profile `legacy`",
+        "downgrade_allowed": false
+      },
+      "blocker": null,
+      "handoff_id": null,
+      "detail_source": "planning/02-chat-animation-plan.md"
+    },
+    {
+      "id": "RCHAT-ANIM-145",
+      "parent": "RCHAT-FLOW-090",
+      "title": "Wire normalized performance API",
+      "owner": "INT",
+      "reviewers": [
+        "RUNTIME",
+        "MOTION",
+        "FLOW"
+      ],
+      "status": "PLANNED",
+      "weight": 0,
+      "dependencies": [
+        "RCHAT-ANIM-019",
+        "RCHAT-ANIM-140"
+      ],
+      "gate_id": "T1",
+      "path_allowlist": [
+        "rust/wizard_avatar_engine/src/server.rs",
+        "rust/wizard_avatar_engine/src/hub.rs",
+        "rust/wizard_avatar_engine/web"
+      ],
+      "required_locks": [
+        "LOCK-RCHAT-SERVER",
+        "LOCK-RCHAT-HUB",
+        "LOCK-RCHAT-WEB"
+      ],
+      "base_sha": null,
+      "result_sha": null,
+      "started_at": null,
+      "finished_at": null,
+      "commands": [
+
+      ],
+      "evidence": [
+
+      ],
+      "metrics": {
+        "progress_earning": false,
+        "parent_weight_authoritative": true
+      },
+      "rollback": {
+        "sha": null,
+        "profile": "legacy-web",
+        "verified": false,
+        "strategy": "restore_parent_profile_and_reopen_item",
+        "instruction": "route disabled",
+        "downgrade_allowed": false
+      },
+      "blocker": null,
+      "handoff_id": null,
+      "detail_source": "planning/02-chat-animation-plan.md"
+    },
+    {
+      "id": "RCHAT-ANIM-150",
+      "parent": "RCHAT-FLOW-090",
+      "title": "Publish diagnostics and active profile",
+      "owner": "INT",
+      "reviewers": [
+        "RUNTIME",
+        "MOTION",
+        "FLOW"
+      ],
+      "status": "PLANNED",
+      "weight": 0,
+      "dependencies": [
+        "RCHAT-ANIM-140",
+        "RCHAT-ANIM-145"
+      ],
+      "gate_id": "T1",
+      "path_allowlist": [
+        "rust/wizard_avatar_engine/src/server.rs",
+        "rust/wizard_avatar_engine/src/hub.rs",
+        "rust/wizard_avatar_engine/web"
+      ],
+      "required_locks": [
+        "LOCK-RCHAT-SERVER",
+        "LOCK-RCHAT-HUB",
+        "LOCK-RCHAT-WEB"
+      ],
+      "base_sha": null,
+      "result_sha": null,
+      "started_at": null,
+      "finished_at": null,
+      "commands": [
+
+      ],
+      "evidence": [
+
+      ],
+      "metrics": {
+        "progress_earning": false,
+        "parent_weight_authoritative": true
+      },
+      "rollback": {
+        "sha": null,
+        "profile": "legacy-web",
+        "verified": false,
+        "strategy": "restore_parent_profile_and_reopen_item",
+        "instruction": "omit optional diagnostics",
+        "downgrade_allowed": false
+      },
+      "blocker": null,
+      "handoff_id": null,
+      "detail_source": "planning/02-chat-animation-plan.md"
+    },
+    {
+      "id": "RCHAT-ANIM-160",
+      "parent": "RCHAT-FLOW-100",
+      "title": "Run focused unit/contract suite",
+      "owner": "FLOW",
+      "reviewers": [
+        "RUNTIME",
+        "MOTION"
+      ],
+      "status": "PLANNED",
+      "weight": 0,
+      "dependencies": [
+        "RCHAT-ANIM-150"
+      ],
+      "gate_id": "Q1",
+      "path_allowlist": [
+        "rust/wizard_avatar_engine/tests/release_*.rs",
+        "evidence/cartoon-animation-program/rust-chatbot/q1"
+      ],
+      "required_locks": [
+
+      ],
+      "base_sha": null,
+      "result_sha": null,
+      "started_at": null,
+      "finished_at": null,
+      "commands": [
+
+      ],
+      "evidence": [
+
+      ],
+      "metrics": {
+        "progress_earning": false,
+        "parent_weight_authoritative": true
+      },
+      "rollback": {
+        "sha": null,
+        "profile": "block-promotion",
+        "verified": false,
+        "strategy": "restore_parent_profile_and_reopen_item",
+        "instruction": "block promotion",
+        "downgrade_allowed": false
+      },
+      "blocker": null,
+      "handoff_id": null,
+      "detail_source": "planning/02-chat-animation-plan.md"
+    },
+    {
+      "id": "RCHAT-ANIM-165",
+      "parent": "RCHAT-FLOW-100",
+      "title": "Run exhaustive graph/interrupt matrix",
+      "owner": "FLOW",
+      "reviewers": [
+        "RUNTIME",
+        "MOTION"
+      ],
+      "status": "PLANNED",
+      "weight": 0,
+      "dependencies": [
+        "RCHAT-ANIM-160"
+      ],
+      "gate_id": "Q1",
+      "path_allowlist": [
+        "rust/wizard_avatar_engine/tests/release_*.rs",
+        "evidence/cartoon-animation-program/rust-chatbot/q1"
+      ],
+      "required_locks": [
+
+      ],
+      "base_sha": null,
+      "result_sha": null,
+      "started_at": null,
+      "finished_at": null,
+      "commands": [
+
+      ],
+      "evidence": [
+
+      ],
+      "metrics": {
+        "progress_earning": false,
+        "parent_weight_authoritative": true
+      },
+      "rollback": {
+        "sha": null,
+        "profile": "block-promotion",
+        "verified": false,
+        "strategy": "restore_parent_profile_and_reopen_item",
+        "instruction": "block promotion",
+        "downgrade_allowed": false
+      },
+      "blocker": null,
+      "handoff_id": null,
+      "detail_source": "planning/02-chat-animation-plan.md"
+    },
+    {
+      "id": "RCHAT-ANIM-170",
+      "parent": "RCHAT-FLOW-110",
+      "title": "Extend Rust evidence generator",
+      "owner": "FLOW",
+      "reviewers": [
+        "MOTION"
+      ],
+      "status": "PLANNED",
+      "weight": 0,
+      "dependencies": [
+        "RCHAT-ANIM-165"
+      ],
+      "gate_id": "Q2",
+      "path_allowlist": [
+        "rust/wizard_avatar_engine/src/chat_motion_evidence.rs",
+        "rust/wizard_avatar_engine/src/pose_evidence_main.rs",
+        "evidence/cartoon-animation-program/rust-chatbot/q2"
+      ],
+      "required_locks": [
+        "LOCK-RCHAT-EVIDENCE"
+      ],
+      "base_sha": null,
+      "result_sha": null,
+      "started_at": null,
+      "finished_at": null,
+      "commands": [
+
+      ],
+      "evidence": [
+
+      ],
+      "metrics": {
+        "progress_earning": false,
+        "parent_weight_authoritative": true
+      },
+      "rollback": {
+        "sha": null,
+        "profile": "block-promotion",
+        "verified": false,
+        "strategy": "restore_parent_profile_and_reopen_item",
+        "instruction": "block promotion",
+        "downgrade_allowed": false
+      },
+      "blocker": null,
+      "handoff_id": null,
+      "detail_source": "planning/02-chat-animation-plan.md"
+    },
+    {
+      "id": "RCHAT-ANIM-172",
+      "parent": "RCHAT-FLOW-110",
+      "title": "Run two-pass deterministic evidence",
+      "owner": "FLOW",
+      "reviewers": [
+        "MOTION"
+      ],
+      "status": "PLANNED",
+      "weight": 0,
+      "dependencies": [
+        "RCHAT-ANIM-170"
+      ],
+      "gate_id": "Q2",
+      "path_allowlist": [
+        "rust/wizard_avatar_engine/src/chat_motion_evidence.rs",
+        "rust/wizard_avatar_engine/src/pose_evidence_main.rs",
+        "evidence/cartoon-animation-program/rust-chatbot/q2"
+      ],
+      "required_locks": [
+        "LOCK-RCHAT-EVIDENCE"
+      ],
+      "base_sha": null,
+      "result_sha": null,
+      "started_at": null,
+      "finished_at": null,
+      "commands": [
+
+      ],
+      "evidence": [
+
+      ],
+      "metrics": {
+        "progress_earning": false,
+        "parent_weight_authoritative": true
+      },
+      "rollback": {
+        "sha": null,
+        "profile": "block-promotion",
+        "verified": false,
+        "strategy": "restore_parent_profile_and_reopen_item",
+        "instruction": "block promotion",
+        "downgrade_allowed": false
+      },
+      "blocker": null,
+      "handoff_id": null,
+      "detail_source": "planning/02-chat-animation-plan.md"
+    },
+    {
+      "id": "RCHAT-ANIM-175",
+      "parent": "RCHAT-FLOW-110",
+      "title": "Run source/decode/presentation parity",
+      "owner": "FLOW",
+      "reviewers": [
+        "MOTION"
+      ],
+      "status": "PLANNED",
+      "weight": 0,
+      "dependencies": [
+        "RCHAT-ANIM-172"
+      ],
+      "gate_id": "Q2",
+      "path_allowlist": [
+        "rust/wizard_avatar_engine/src/chat_motion_evidence.rs",
+        "rust/wizard_avatar_engine/src/pose_evidence_main.rs",
+        "evidence/cartoon-animation-program/rust-chatbot/q2"
+      ],
+      "required_locks": [
+        "LOCK-RCHAT-EVIDENCE"
+      ],
+      "base_sha": null,
+      "result_sha": null,
+      "started_at": null,
+      "finished_at": null,
+      "commands": [
+
+      ],
+      "evidence": [
+
+      ],
+      "metrics": {
+        "progress_earning": false,
+        "parent_weight_authoritative": true
+      },
+      "rollback": {
+        "sha": null,
+        "profile": "block-promotion",
+        "verified": false,
+        "strategy": "restore_parent_profile_and_reopen_item",
+        "instruction": "block promotion",
+        "downgrade_allowed": false
+      },
+      "blocker": null,
+      "handoff_id": null,
+      "detail_source": "planning/02-chat-animation-plan.md"
+    },
+    {
+      "id": "RCHAT-ANIM-176",
+      "parent": "RCHAT-FLOW-120",
+      "title": "Run real-browser scenario suite on 8787",
+      "owner": "FLOW",
+      "reviewers": [
+        "RUNTIME",
+        "MOTION"
+      ],
+      "status": "PLANNED",
+      "weight": 0,
+      "dependencies": [
+        "RCHAT-ANIM-175"
+      ],
+      "gate_id": "Q3",
+      "path_allowlist": [
+        "rust/wizard_avatar_engine/web/tests",
+        "rust/wizard_avatar_engine/tests/chatbot_browser.rs",
+        "evidence/cartoon-animation-program/rust-chatbot/q3"
+      ],
+      "required_locks": [
+
+      ],
+      "base_sha": null,
+      "result_sha": null,
+      "started_at": null,
+      "finished_at": null,
+      "commands": [
+
+      ],
+      "evidence": [
+
+      ],
+      "metrics": {
+        "progress_earning": false,
+        "parent_weight_authoritative": true
+      },
+      "rollback": {
+        "sha": null,
+        "profile": "legacy-web",
+        "verified": false,
+        "strategy": "restore_parent_profile_and_reopen_item",
+        "instruction": "keep legacy live",
+        "downgrade_allowed": false
+      },
+      "blocker": null,
+      "handoff_id": null,
+      "detail_source": "planning/02-chat-animation-plan.md"
+    },
+    {
+      "id": "RCHAT-ANIM-180",
+      "parent": "RCHAT-FLOW-130",
+      "title": "Run mixed-state soak and performance profiles",
+      "owner": "FLOW",
+      "reviewers": [
+        "RUNTIME"
+      ],
+      "status": "PLANNED",
+      "weight": 0,
+      "dependencies": [
+        "RCHAT-ANIM-176"
+      ],
+      "gate_id": "S1",
+      "path_allowlist": [
+        "evidence/cartoon-animation-program/rust-chatbot/soak"
+      ],
+      "required_locks": [
+
+      ],
+      "base_sha": null,
+      "result_sha": null,
+      "started_at": null,
+      "finished_at": null,
+      "commands": [
+
+      ],
+      "evidence": [
+
+      ],
+      "metrics": {
+        "progress_earning": false,
+        "parent_weight_authoritative": true
+      },
+      "rollback": {
+        "sha": null,
+        "profile": "block-promotion",
+        "verified": false,
+        "strategy": "restore_parent_profile_and_reopen_item",
+        "instruction": "keep legacy live",
+        "downgrade_allowed": false
+      },
+      "blocker": null,
+      "handoff_id": null,
+      "detail_source": "planning/02-chat-animation-plan.md"
+    },
+    {
+      "id": "RCHAT-ANIM-185",
+      "parent": "RCHAT-FLOW-150",
+      "title": "Shadow-to-default promotion",
+      "owner": "INT",
+      "reviewers": [
+        "RUNTIME",
+        "MOTION"
+      ],
+      "status": "PLANNED",
+      "weight": 0,
+      "dependencies": [
+        "RCHAT-ANIM-180"
+      ],
+      "gate_id": "F0",
+      "path_allowlist": [
+        "evidence/cartoon-animation-program/rust-chatbot/release"
+      ],
+      "required_locks": [
+        "LOCK-RCHAT-EVIDENCE"
+      ],
+      "base_sha": null,
+      "result_sha": null,
+      "started_at": null,
+      "finished_at": null,
+      "commands": [
+
+      ],
+      "evidence": [
+
+      ],
+      "metrics": {
+        "progress_earning": false,
+        "parent_weight_authoritative": true
+      },
+      "rollback": {
+        "sha": null,
+        "profile": "previous-accepted-sha",
+        "verified": false,
+        "strategy": "restore_parent_profile_and_reopen_item",
+        "instruction": "set profile back to legacy",
+        "downgrade_allowed": false
+      },
+      "blocker": null,
+      "handoff_id": null,
+      "detail_source": "planning/02-chat-animation-plan.md"
+    },
+    {
+      "id": "RCHAT-ANIM-190",
+      "parent": "RCHAT-FLOW-150",
+      "title": "Final independent acceptance audit",
+      "owner": "FLOW",
+      "reviewers": [
+        "RUNTIME",
+        "MOTION",
+        "INT"
+      ],
+      "status": "PLANNED",
+      "weight": 0,
+      "dependencies": [
+        "RCHAT-ANIM-185"
+      ],
+      "gate_id": "F0",
+      "path_allowlist": [
+        "evidence/cartoon-animation-program/rust-chatbot/release"
+      ],
+      "required_locks": [
+        "LOCK-RCHAT-EVIDENCE"
+      ],
+      "base_sha": null,
+      "result_sha": null,
+      "started_at": null,
+      "finished_at": null,
+      "commands": [
+
+      ],
+      "evidence": [
+
+      ],
+      "metrics": {
+        "progress_earning": false,
+        "parent_weight_authoritative": true
+      },
+      "rollback": {
+        "sha": null,
+        "profile": "previous-accepted-sha",
+        "verified": false,
+        "strategy": "restore_parent_profile_and_reopen_item",
+        "instruction": "reopen failed work IDs",
+        "downgrade_allowed": false
+      },
+      "blocker": null,
+      "handoff_id": null,
+      "detail_source": "planning/02-chat-animation-plan.md"
+    }
+  ],
+  "artifacts": [
+
+  ],
+  "deployments": [
+
+  ],
+  "progress": {
+    "accepted_weight": 1,
+    "total_weight": 63,
+    "program_percent": 1.5873,
+    "critical_path_percent": 0.0,
+    "passed_blocking_gates": 1,
+    "total_blocking_gates": 15,
+    "gate_percent": 6.6667,
+    "pose_coverage_percent": 100.0,
+    "weight_authority": "work_items",
+    "specialist_weights_earning": false,
+    "specialist_accepted_weight": 0,
+    "specialist_total_weight": 0
+  }
+}
