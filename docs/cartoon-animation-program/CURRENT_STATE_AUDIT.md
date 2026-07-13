@@ -10,7 +10,7 @@ Python pose-integration checkpoint: `70c5bd46956175d1771f94826d6faef19a0d641b`
 
 Production endpoint: `http://127.0.0.1:8765/`
 
-## Executive verdict
+## Executive verdict and closure
 
 The branch contains a strong and demonstrably working Python ASCILINE avatar
 foundation. The persistent local service renders crisp square-cell frames,
@@ -21,18 +21,18 @@ captions. The current test suite, Python-scope validator, program validator,
 strict 32-scenario animation matrix, live browser smoke test, and recorded
 ten-minute soak all pass.
 
-The full Cartoon Character Animation Program is not, however, implemented as
-described by `IMPLEMENTATION_PLAN.md`. Several of the plan's central components
-exist as well-tested modules or validated JSON but are not connected to the live
-port-8765 execution path. In particular, the production path does not use
-`AvatarRuntime`, `OrderedCommandInbox`, command acknowledgements, replay logs,
-the graph-v2 transition topology for ground and action motion, or the character
-package's animation graph. Reference-pose expressions and blinking change state
-but do not change rendered pixels. The program tracker and registry therefore
-overstate completion.
+The original audit at `70c5bd4` found that several planned components existed
+but were bypassed by the live path. Those findings are preserved below as the
+baseline that drove remediation. Commit
+`c73be1f8d423f3347b5171f186f408ffad86d440` closes them: the live hub now owns a
+fixed-tick `AvatarRuntime`, ordered inbox, typed acknowledgements, compact replay
+log, package-selected graph-v2 driver, reachable semantic actions, and visible
+reference-pose face channels. Browser control packets and response snapshots
+also cross the deterministic runtime boundary without type or revision drift.
 
-Current rating: **production-capable animated pose demo and control foundation;
-partially integrated cartoon animation runtime**.
+Current rating: **complete Python ASCILINE cartoon animation runtime and
+repeatable 89-pose character package**. Physical gamepad hardware remains a
+manual device-specific QA item, not a production-path implementation gap.
 
 ## Audit boundary
 
@@ -62,7 +62,79 @@ verifiable from Python-owned metadata and tracked PNG sources. Rust remains
 outside both the live architecture and the current rebuild gate; the server
 executes only Python and serves only the generated Python cell library.
 
-## Findings
+## Production-path remediation closure
+
+Checkpoint date: 2026-07-13
+
+The first portion of this checkpoint recorded provisional working-tree evidence.
+The same contracts are now committed at `c73be1f` and have passed the complete
+release gate.
+
+`tests/wizard/test_production_animation_wiring.py` now protects seven production
+contracts that the earlier suite did not prove:
+
+- a frame-hub command must be acknowledged by the hub's
+  `OrderedCommandInbox`, advance `AvatarRuntime`, and appear in `ReplayLog`;
+- invalid ordered commands must reject without stopping the runtime;
+- canonical immutable browser-control payloads must remain valid mappings;
+- an applied acknowledgement must return the authoritative post-tick state;
+- a temporary character package with a modified idle clip must render the pose
+  selected by that package's graph rather than a global Wizard Joe graph;
+- every semantic action declared by the package graph must be accepted safely
+  by the production action API;
+- reference-pose expression and blink state must each produce a nonzero pixel
+  delta.
+
+The first red run correctly exposed missing blink pixels, nine unsupported graph
+actions, incomplete authored clip coverage, and a legacy cadence threshold.
+After the production fixes and test-threshold corrections, the focused gate
+contains seven production-wiring tests, four stream-hub tests, and 27 adjacent
+package/selector/overlay/channel/frame-source tests. All 38 are included in the
+171-test release suite.
+
+Those production tests now prove on the committed implementation revision:
+
+- live frame-hub command flow used `AvatarRuntime`, `OrderedCommandInbox`, and
+  `ReplayLog`, including an applied command ID in the replayed tick record;
+- the frame source honored a custom character package graph whose idle clip
+  selected `feeling_joy_full`;
+- all graph-declared semantic actions were accepted safely by the action API;
+- `happy` expression and `0.99` blink state each changed reference-pose pixels;
+- the delayed frame loop stayed bounded by measured wall time plus two 60 Hz
+  tick boundaries instead of relying on the obsolete `< 0.13` threshold;
+- browser control survived canonical payload freezing, and ordered command
+  responses matched their applied ack tick and revision.
+
+The final release evidence is:
+
+```text
+python3 -m unittest discover -s tests
+Ran 171 tests in 149.253s
+OK
+
+python3 tools/validate_cartoon_animation_program.py --root .
+Result: passed; 88 production paths; zero errors
+
+python3 tools/validate_python_scope.py .
+Result: passed; 47 files scanned; zero violations
+
+python3 tools/integrate_feelings_into_python.py --check
+Result: passed; 89 Python poses
+
+python3 tools/verify_animation_quality.py --strict
+Result: 32/32 scenarios passed; zero issues
+```
+
+The persistent port-8765 service sustained 23.89 published FPS against a 24 FPS
+target with zero hub queue drops and no slow subscribers. The replay endpoint's
+`X-Replay-SHA256` matched the downloaded NDJSON bytes. A fresh browser tab ran
+Repeat on and off with zero console errors, while the canvas reported no decode,
+drop, or resync errors. The ordered command smoke returned an applied ack and,
+after the final response-state correction, its response revision and simulation
+tick match that ack. The original findings below remain the audited `70c5bd4`
+baseline and are retained for accountability.
+
+## Original baseline findings (resolved at `c73be1f`)
 
 ### P1: The deterministic runtime and ordered command system are not in production
 
@@ -350,12 +422,13 @@ Result: open-eye SHA-256 == blink-phase SHA-256; zero changed bytes
 
 ## Final conclusion
 
-The current branch is a meaningful implementation, not a mock. It has a healthy
-live Python service and a valuable set of reusable components. The remaining
-work is primarily integration, not invention: the planned runtime, inbox,
-graph, transition, package, and channel concepts already exist in useful form.
-The next implementation pass should connect those pieces into the one
-authoritative production path and add tests that prove the connection.
+The branch now has one authoritative Python production path from HTTP/browser
+input through ordered fixed-tick reduction, graph-driven pose selection,
+reference face composition, ASCILINE transport, and deterministic replay. The
+contract tests fail if those components are bypassed, and the full release gate
+passes on the committed implementation revision.
 
-Until those P1 items are resolved, the honest program status is **PARTIAL:
-stable animated avatar foundation with incomplete cartoon-runtime integration**.
+The honest program status is **COMPLETE for the planned Python ASCILINE cartoon
+animation runtime**. Future character packs can reuse the same package, graph,
+pose, validation, and delivery workflow without introducing a Rust production
+dependency.

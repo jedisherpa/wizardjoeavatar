@@ -8,20 +8,41 @@
   },
   "production_architecture": "asciline_python",
   "rust_policy": "historical_side_track_not_a_production_dependency_or_gate",
-  "phase": "audit_remediation_required",
+  "phase": "complete",
   "planning_checkpoint": {
     "commit": "08d8f3aaa181d97ef3d2a29cb5a8362d81a05f12",
     "pushed": true
   },
   "implementation_checkpoint": {
-    "commit": "70c5bd46956175d1771f94826d6faef19a0d641b",
+    "commit": "c73be1f8d423f3347b5171f186f408ffad86d440",
     "pushed": true
   },
   "current_state_audit": {
     "audited_commit": "70c5bd46956175d1771f94826d6faef19a0d641b",
     "date": "2026-07-13",
-    "result": "partial_remediation_required",
+    "result": "remediated_complete",
+    "remediation_commit": "c73be1f8d423f3347b5171f186f408ffad86d440",
     "report": "CURRENT_STATE_AUDIT.md"
+  },
+  "remediation_contract_tests": {
+    "date": "2026-07-13",
+    "status": "complete_on_committed_revision",
+    "test_file": "../../tests/wizard/test_production_animation_wiring.py",
+    "contract_passes": [
+      "runtime_inbox_replay_production_path",
+      "character_package_graph_authority",
+      "graph_declared_semantic_action_reachability",
+      "reference_expression_pixel_delta",
+      "reference_blink_pixel_delta",
+      "canonical_browser_control_payload",
+      "authoritative_ack_response_state",
+      "adjacent_focused_production_suite"
+    ],
+    "failures": [],
+    "focused_test_count": 38,
+    "full_test_count": 171,
+    "strict_transition_scenarios": 32,
+    "completion_claim_allowed": true
   },
   "roles": {
     "FPSE": {

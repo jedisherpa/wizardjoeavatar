@@ -10,10 +10,10 @@ Last coordinator update: 2026-07-13.
 | Role research | COMPLETE | Four reports saved with code references and primary sources |
 | Coordinated planning | COMPLETE | Same four agents produced compatible planning contributions; two Prism signal reports added |
 | Planning checkpoint | COMPLETE | Research and plan pushed as `08d8f3aaa181d97ef3d2a29cb5a8362d81a05f12` |
-| Implementation | COMPLETE | Python runtime, graph, controls, reusable character package, Prism adapter, TTS captions, and persistent service integrated |
-| Final verification | COMPLETE | 154 tests, live Chromium matrix, Python-only validators, and ten-minute mixed-control soak passed |
-| Final publish | COMPLETE | Implementation `a5f0cc1` and evidence/source checkpoint `0508039` pushed to GitHub |
-| Post-implementation code audit | PARTIAL - REMEDIATION REQUIRED | [2026-07-13 current-state audit](CURRENT_STATE_AUDIT.md) found that the live path bypasses the planned runtime/inbox, uses graph v2 only for flight, and does not render reference-pose expression or blink state |
+| Implementation | COMPLETE | Production runtime, ordered command path, replay, package graph authority, graph-v2 actions, face channels, and compatibility reconciliation committed as `c73be1f8d423f3347b5171f186f408ffad86d440` |
+| Final verification | COMPLETE | 171 tests pass; both validators pass; 89-pose integration check passes; strict matrix is 32/32; live browser Play/Repeat smoke has zero console errors |
+| Final publish | COMPLETE | Python implementation and closure documentation are published on `codex/python-asciline-avatar` |
+| Post-implementation code audit | COMPLETE - REMEDIATED | [2026-07-13 current-state audit](CURRENT_STATE_AUDIT.md) preserves the partial `70c5bd4` baseline and records closure at `c73be1f` |
 | Python feelings-pose integration | COMPLETE | 50 unique tracked sources migrated into the Python manifest and generated cell library; production catalog now contains 89 poses |
 | Python branch publication | COMPLETE | Integration checkpoint `70c5bd4` on `codex/python-asciline-avatar`; fresh port-8765 rebuild and live 89-pose verification passed |
 
@@ -43,3 +43,18 @@ Last coordinator update: 2026-07-13.
 | 2026-07-13 | Supersede the global completion claim with a partial current-state audit | Passing stability gates did not prove that planned runtime, command, graph, package, transition, and face-channel components were connected to production | [Current-State Audit](CURRENT_STATE_AUDIT.md) |
 | 2026-07-13 | Publish production work on `codex/python-asciline-avatar` | The live ASCILINE runtime is Python; the branch name and delivery contract must make that boundary explicit | [Python Branch Delivery](PYTHON_BRANCH_DELIVERY.md) |
 | 2026-07-13 | Expand the Python runtime catalog from 39 to 89 poses | The 50 unique feelings/action sources are now deterministic Python cell assets and participate automatically in Play, Repeat, and pose selection | `tools/integrate_feelings_into_python.py` |
+| 2026-07-13 | Require production-path contract tests before restoring completion | Existing unit and soak evidence did not fail when runtime wiring, package graph authority, semantic action reachability, or reference face pixels were bypassed | `tests/wizard/test_production_animation_wiring.py`; [Current-State Audit](CURRENT_STATE_AUDIT.md) |
+| 2026-07-13 | Restore completion after production-path remediation | Runtime, command/replay, package graph, semantic actions, reference face channels, browser control, and authoritative response-state contracts now pass on committed revision `c73be1f` | `tests/wizard/test_production_animation_wiring.py`; strict matrix; live port-8765 browser and replay probes |
+
+## Remediation contract gate
+
+| Contract | Current working-tree result | Completion requirement |
+|---|---|---|
+| Hub uses `AvatarRuntime` + `OrderedCommandInbox` + `ReplayLog` | COMPLETE | Production contract and replay records pass at `c73be1f` |
+| Character package graph is authoritative | COMPLETE | Temporary-package authority test passes at `c73be1f` |
+| All graph-declared semantic actions are API-reachable | COMPLETE | Exhaustive package action test passes at `c73be1f` |
+| Reference expression pixels differ | COMPLETE | Happy expression produces a rendered pixel delta |
+| Reference blink pixels differ | COMPLETE | `blink_phase=0.99` is visibly distinct |
+| Browser control survives canonical payload freezing | COMPLETE | Neutral browser packet is applied through the ordered runtime |
+| Ack response returns authoritative post-tick state | COMPLETE | Response revision and simulation tick match the applied ack |
+| Full release suite | COMPLETE | 171 tests, 32/32 strict scenarios, 89 poses, zero scope/program-validator errors |
