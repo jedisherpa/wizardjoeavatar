@@ -78,6 +78,23 @@ fn input(sequence: u64, tick: u64, event: ChatEventV1) -> OrderedChatEventV1 {
     }
 }
 
+fn input_for(
+    sequence: u64,
+    tick: u64,
+    session: &str,
+    turn: &str,
+    event: ChatEventV1,
+) -> OrderedChatEventV1 {
+    OrderedChatEventV1 {
+        apply_tick: SemanticTick(tick),
+        server_sequence: sequence,
+        session_id: SessionId::new(session).unwrap(),
+        turn_id: Some(TurnId::new(turn).unwrap()),
+        previous_turn_id: None,
+        event,
+    }
+}
+
 fn reduce(
     reducer: &mut ChatPolicyReducerV1,
     sequence: &mut u64,
@@ -934,25 +951,185 @@ fn safety_clamp_neutralizes_only_requested_channels_immediately_and_with_bounds(
 
 #[test]
 fn exact_active_safety_retry_reasserts_neutralization_at_the_expiry_boundary() {
-    let mut reducer = prepare_for(&ChatEventV1::SpeechPaused {
+    for (scope, region) in [
+        (SafetyScope::All, RegionKind::Conversation),
+        (SafetyScope::Speech, RegionKind::Speech),
+        (SafetyScope::Gesture, RegionKind::Gesture),
+        (SafetyScope::Mobility, RegionKind::Mobility),
+        (SafetyScope::Effects, RegionKind::Effects),
+    ] {
+        let mut reducer = prepare_for(&ChatEventV1::SpeechPaused {
+            utterance_id: utterance_id(),
+        });
+        reducer
+            .reduce(input(
+                reducer.next_test_sequence(),
+                reducer.next_test_tick(),
+                ChatEventV1::SafetyClamp(SafetyClampV1 {
+                    scope,
+                    active: true,
+                }),
+            ))
+            .unwrap();
+        let deadline = reducer
+            .semantic()
+            .region_header(region)
+            .deadline_tick
+            .unwrap();
+        let before_boundary = serde_json::to_vec(reducer.semantic()).unwrap();
+
+        let outcome = reducer
+            .reduce(input(
+                reducer.next_test_sequence(),
+                deadline.0 - 1,
+                ChatEventV1::SafetyClamp(SafetyClampV1 {
+                    scope,
+                    active: true,
+                }),
+            ))
+            .unwrap();
+        assert_eq!(outcome.disposition, ChatPolicyDispositionV1::Duplicate);
+        assert_eq!(
+            serde_json::to_vec(reducer.semantic()).unwrap(),
+            before_boundary
+        );
+
+        reducer
+            .reduce(input(
+                reducer.next_test_sequence(),
+                deadline.0,
+                ChatEventV1::SafetyClamp(SafetyClampV1 {
+                    scope,
+                    active: true,
+                }),
+            ))
+            .unwrap();
+
+        assert!(reducer.semantic().control.state.safety_clamp, "{scope:?}");
+        assert!(
+            reducer
+                .semantic()
+                .region_header(region)
+                .deadline_tick
+                .unwrap()
+                > deadline,
+            "{scope:?}"
+        );
+        reducer.semantic().validate_at(deadline).unwrap();
+    }
+}
+
+#[test]
+fn quiet_clock_expires_holds_at_equality_handles_skips_and_reasserts_safety() {
+    let clarification = ChatEventV1::ClarificationRequested(ClarificationRequestV1 {
+        reason: ClarificationReason::MissingInformation,
+        urgency: 40,
+    });
+    let mut reducer = active_reducer();
+    reducer.reduce(input(2, 2, clarification.clone())).unwrap();
+    let deadline = reducer
+        .semantic()
+        .conversation
+        .header
+        .deadline_tick
+        .unwrap();
+
+    let before_deadline = reducer.advance_to(SemanticTick(deadline.0 - 1)).unwrap();
+    assert!(!before_deadline
+        .changed_regions
+        .contains(&RegionKind::Conversation));
+    assert_eq!(
+        reducer.semantic().conversation.state.turn_state,
+        ChatTurnState::Clarifying
+    );
+    let outcome = reducer.advance_to(deadline).unwrap();
+    assert!(outcome.changed_regions.contains(&RegionKind::Conversation));
+    assert_eq!(
+        reducer.semantic().conversation.state.turn_state,
+        ChatTurnState::Idle
+    );
+    reducer.semantic().validate_at(deadline).unwrap();
+
+    let mut skipped = active_reducer();
+    skipped.reduce(input(2, 2, clarification)).unwrap();
+    let skipped_deadline = skipped
+        .semantic()
+        .conversation
+        .header
+        .deadline_tick
+        .unwrap();
+    skipped
+        .advance_to(SemanticTick(skipped_deadline.0 + 17))
+        .unwrap();
+    assert_eq!(
+        skipped.semantic().conversation.state.turn_state,
+        ChatTurnState::Idle
+    );
+    assert!(matches!(
+        skipped.advance_to(skipped_deadline),
+        Err(ChatPolicyError::ClockRewind { .. })
+    ));
+
+    let mut safety = prepare_for(&ChatEventV1::SpeechPaused {
         utterance_id: utterance_id(),
     });
-    reducer
+    safety
         .reduce(input(
-            reducer.next_test_sequence(),
-            reducer.next_test_tick(),
+            safety.next_test_sequence(),
+            safety.next_test_tick(),
             ChatEventV1::SafetyClamp(SafetyClampV1 {
                 scope: SafetyScope::Speech,
                 active: true,
             }),
         ))
         .unwrap();
-    let deadline = reducer.semantic().speech.header.deadline_tick.unwrap();
+    let safety_deadline = safety.semantic().speech.header.deadline_tick.unwrap();
+    safety.advance_to(safety_deadline).unwrap();
+    assert!(safety.semantic().speech.state.suppressed);
+    assert!(safety.semantic().speech.header.deadline_tick.unwrap() > safety_deadline);
 
-    reducer
+    let mut attention = active_reducer();
+    attention
         .reduce(input(
-            reducer.next_test_sequence(),
-            deadline.0,
+            2,
+            2,
+            ChatEventV1::AttentionTarget(AttentionTargetV1 {
+                target: AttentionTarget::Content,
+                hold_ms: 1_000,
+                return_to_user: true,
+            }),
+        ))
+        .unwrap();
+    let attention_deadline = attention.semantic().face.header.deadline_tick.unwrap();
+    attention.advance_to(attention_deadline).unwrap();
+    assert_eq!(
+        attention.semantic().session.state.attention_target,
+        AttentionTarget::User
+    );
+    assert_eq!(attention.semantic().face.state.gaze, AttentionTarget::User);
+}
+
+#[test]
+fn safety_release_is_owner_scoped_and_stale_release_is_atomic() {
+    let mut reducer = active_reducer();
+    reducer
+        .reduce(input_for(
+            2,
+            2,
+            "session-1",
+            "turn-1",
+            ChatEventV1::SafetyClamp(SafetyClampV1 {
+                scope: SafetyScope::Speech,
+                active: true,
+            }),
+        ))
+        .unwrap();
+    reducer
+        .reduce(input_for(
+            3,
+            3,
+            "session-2",
+            "turn-2",
             ChatEventV1::SafetyClamp(SafetyClampV1 {
                 scope: SafetyScope::Speech,
                 active: true,
@@ -960,13 +1137,48 @@ fn exact_active_safety_retry_reasserts_neutralization_at_the_expiry_boundary() {
         ))
         .unwrap();
 
+    reducer
+        .reduce(input_for(
+            4,
+            4,
+            "session-1",
+            "turn-1",
+            ChatEventV1::SafetyClamp(SafetyClampV1 {
+                scope: SafetyScope::Speech,
+                active: false,
+            }),
+        ))
+        .unwrap();
     assert!(reducer.semantic().control.state.safety_clamp);
-    assert!(reducer.semantic().speech.state.suppressed);
-    assert_ne!(reducer.semantic().speech.state.mode, SpeechModeV1::Active);
-    assert_ne!(reducer.semantic().speech.state.mode, SpeechModeV1::Prepared);
-    assert_eq!(reducer.semantic().mouth.state.viseme, Viseme::Rest);
-    assert!(reducer.semantic().speech.header.deadline_tick.unwrap() > deadline);
-    reducer.semantic().validate_at(deadline).unwrap();
+
+    reducer
+        .reduce(input_for(
+            5,
+            5,
+            "session-2",
+            "turn-2",
+            ChatEventV1::SafetyClamp(SafetyClampV1 {
+                scope: SafetyScope::Speech,
+                active: false,
+            }),
+        ))
+        .unwrap();
+    assert!(!reducer.semantic().control.state.safety_clamp);
+    let before = serde_json::to_vec(&reducer).unwrap();
+    assert_eq!(
+        reducer.reduce(input_for(
+            6,
+            6,
+            "session-1",
+            "turn-retired",
+            ChatEventV1::SafetyClamp(SafetyClampV1 {
+                scope: SafetyScope::Speech,
+                active: false,
+            }),
+        )),
+        Err(ChatPolicyError::SafetyClampOwnerMismatch)
+    );
+    assert_eq!(serde_json::to_vec(&reducer).unwrap(), before);
 }
 
 fn semantic_without_control(reducer: &ChatPolicyReducerV1) -> serde_json::Value {
@@ -1171,16 +1383,7 @@ fn expiry_sweeps_every_bounded_header_and_internal_deadline_at_equality() {
         deadline_tick: deadline,
     });
 
-    reducer
-        .reduce(input(
-            2,
-            deadline.0,
-            ChatEventV1::SafetyClamp(SafetyClampV1 {
-                scope: SafetyScope::Effects,
-                active: false,
-            }),
-        ))
-        .unwrap();
+    reducer.advance_to(deadline).unwrap();
     for region in RegionKind::ALL {
         assert_eq!(reducer.semantic().region_header(region).deadline_tick, None);
     }
@@ -1497,7 +1700,12 @@ fn command_envelope_preserves_chat_correlation_and_bridge_rejects_legacy_absence
         chat_correlation: None,
         command: SemanticCommandV1::ApplyChatEvent(ChatEventV1::UserTurnStarted),
     };
-    let legacy = CommandEnvelopeV1::assign(legacy, 100, 40).unwrap();
+    assert_eq!(
+        CommandEnvelopeV1::assign(legacy, 100, 40).unwrap_err().code,
+        command::CommandErrorCode::InvalidCommand
+    );
+    let mut legacy = envelope;
+    legacy.chat_correlation = None;
     assert_eq!(
         OrderedChatEventV1::from_command_envelope(&legacy),
         Err(ChatPolicyError::MissingCommandCorrelation)
@@ -2054,4 +2262,4 @@ fn out_of_order_and_failed_events_are_atomic_and_replay_hash_is_stable() {
 }
 
 const EXPECTED_REPLAY_HASH: &str =
-    "adae98d0652351f8823a6aa6b632397ece553899af4b5f6ec71d0060c104278f";
+    "81257f8f9b84eb146dc9b9feaf7e52f3b0532d4a6164c3a6820e76ff850aa0d5";

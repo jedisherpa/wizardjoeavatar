@@ -116,9 +116,8 @@ impl CommandRequestV1 {
             ));
         }
         validate_apply_tick(self.requested_apply_tick, current_tick)?;
-        if self.chat_correlation.is_some()
-            && !matches!(self.command, SemanticCommandV1::ApplyChatEvent(_))
-        {
+        let chat_command = matches!(self.command, SemanticCommandV1::ApplyChatEvent(_));
+        if chat_command != self.chat_correlation.is_some() {
             return Err(CommandContractError::new(
                 CommandErrorCode::InvalidCommand,
                 "chat_correlation",
