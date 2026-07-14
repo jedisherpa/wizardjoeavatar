@@ -1,0 +1,42 @@
+{
+  "base": "codex/crystail-character",
+  "branch": "codex/joeville-scene-castle-legacy-exterior",
+  "camera": "Exterior garden master; do not implement as current Castle Grace",
+  "corrections": [
+    "Replace church/institution silhouette",
+    "Use canonical sandstone terraces, gables, iron rails and monumental pine",
+    "Rebuild approach and terrace continuity from Castle Grace references"
+  ],
+  "layers": [
+    "reference_only"
+  ],
+  "playable": "No runtime character anchors until redesigned against the canonical Castle Grace packet.",
+  "role": "Negative reference documenting the superseded church-like Castle direction",
+  "runtime_target": {
+    "cell_proxy": [
+      240,
+      135
+    ],
+    "color_space": "sRGB",
+    "fps": 24,
+    "master": [
+      3840,
+      2160
+    ]
+  },
+  "scene_id": "JV-CAS-EXTERIOR-GOLD-LEGACY",
+  "schema_version": 1,
+  "set_id": "JV-CAS",
+  "slug": "castle-legacy-exterior",
+  "source": {
+    "height": 1254,
+    "path": "assets/environments/joeville/jv-cas-exterior-gold-legacy/source-reference.png",
+    "sha256": "e63eaf5d729aec9382cc87854f41b93d4954261a61bb8962b5c80aafbbf638a1",
+    "width": 1254
+  },
+  "status": "REJECTED-REFERENCE-ONLY",
+  "title": "Legacy Castle exterior study",
+  "variants": [
+    "none_until_redesign"
+  ]
+}
