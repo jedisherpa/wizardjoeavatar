@@ -121,6 +121,18 @@ impl Default for AnimationChannels {
 }
 
 impl AnimationChannels {
+    pub fn settle_safe_idle(&mut self, tick: u64) {
+        self.upper_body
+            .interrupt(UpperBodyAction::None, tick, 8, None, None);
+        self.staff.interrupt(StaffState::Held, tick, 8, None, None);
+        self.expression
+            .interrupt(Expression::Neutral, tick, 4, None, None);
+        self.speech.interrupt(false, tick, 1, None, None);
+        self.effects
+            .interrupt(EffectState::None, tick, 6, None, None);
+        self.blink_generation = self.blink_generation.wrapping_add(1);
+    }
+
     pub fn set_action(&mut self, action: Action, tick: u64, duration_ticks: u64) {
         let expiry = (duration_ticks > 0).then_some(tick + duration_ticks);
         let (upper, staff, effect) = channels_for_action(action);
