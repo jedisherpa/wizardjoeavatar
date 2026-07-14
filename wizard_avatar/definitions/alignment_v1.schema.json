@@ -1,0 +1,85 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://wizardjoe.local/schemas/alignment_v1.schema.json",
+  "title": "AlignmentV1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "alignment_id", "media_id", "media_sha256", "pcm_sha256", "transcript_id", "transcript_revision", "duration_ms", "source_kind", "units", "silences", "engine", "qa"],
+  "properties": {
+    "schema_version": {"const": 1},
+    "alignment_id": {"type": "string", "pattern": "^alignment:[a-z0-9][a-z0-9._:-]{0,127}$"},
+    "media_id": {"type": "string", "pattern": "^media:sha256:[0-9a-f]{64}$"},
+    "media_sha256": {"$ref": "#/$defs/hash"},
+    "pcm_sha256": {"$ref": "#/$defs/hash"},
+    "transcript_id": {"type": "string", "pattern": "^transcript:[a-z0-9][a-z0-9._:-]{0,127}$"},
+    "transcript_revision": {"type": "integer", "minimum": 1, "maximum": 9007199254740991},
+    "duration_ms": {"$ref": "#/$defs/time"},
+    "source_kind": {"enum": ["provider_native", "forced_alignment", "asr_word_timing", "manual"]},
+    "units": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["unit_id", "parent_block_id", "kind", "text", "normalized", "start_ms", "end_ms", "confidence_milli", "review"],
+        "properties": {
+          "unit_id": {"$ref": "#/$defs/id"},
+          "parent_block_id": {"$ref": "#/$defs/id"},
+          "kind": {"enum": ["word", "punctuation"]},
+          "text": {"type": "string", "minLength": 1},
+          "normalized": {"type": "string"},
+          "start_ms": {"$ref": "#/$defs/time"},
+          "end_ms": {"$ref": "#/$defs/time"},
+          "confidence_milli": {"$ref": "#/$defs/milli"},
+          "review": {"enum": ["accepted", "review", "rejected"]}
+        }
+      }
+    },
+    "silences": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["silence_id", "start_ms", "end_ms", "kind"],
+        "properties": {
+          "silence_id": {"$ref": "#/$defs/id"},
+          "start_ms": {"$ref": "#/$defs/time"},
+          "end_ms": {"$ref": "#/$defs/time"},
+          "kind": {"enum": ["breath", "syntactic", "turn", "interruption", "suspense_hold", "reflective_hold", "scene_break", "chapter_boundary", "technical_room_tone"]}
+        }
+      }
+    },
+    "engine": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["adapter", "adapter_version", "model_id", "model_sha256", "parameters_sha256", "offline"],
+      "properties": {
+        "adapter": {"$ref": "#/$defs/id"},
+        "adapter_version": {"$ref": "#/$defs/id"},
+        "model_id": {"$ref": "#/$defs/id"},
+        "model_sha256": {"$ref": "#/$defs/hash"},
+        "parameters_sha256": {"$ref": "#/$defs/hash"},
+        "offline": {"type": "boolean"}
+      }
+    },
+    "qa": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["wer_milli", "cer_milli", "timed_word_coverage_milli", "low_confidence_count", "unaligned_count", "disposition"],
+      "properties": {
+        "wer_milli": {"$ref": "#/$defs/milli"},
+        "cer_milli": {"$ref": "#/$defs/milli"},
+        "timed_word_coverage_milli": {"$ref": "#/$defs/milli"},
+        "low_confidence_count": {"$ref": "#/$defs/count"},
+        "unaligned_count": {"$ref": "#/$defs/count"},
+        "disposition": {"enum": ["pass", "review", "fail"]}
+      }
+    }
+  },
+  "$defs": {
+    "id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._:-]{0,127}$"},
+    "hash": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+    "time": {"type": "integer", "minimum": 0, "maximum": 9007199254740991},
+    "milli": {"type": "integer", "minimum": 0, "maximum": 1000},
+    "count": {"type": "integer", "minimum": 0, "maximum": 9007199254740991}
+  }
+}

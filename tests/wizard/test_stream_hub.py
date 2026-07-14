@@ -1,10 +1,86 @@
 import asyncio
 import unittest
+from types import SimpleNamespace
+from unittest import mock
 
 from wizard_avatar.frame_source import ProceduralWizardFrameSource
-from wizard_avatar.models import WizardCommand
+from wizard_avatar.models import WizardCellFrame, WizardCommand, WizardState
 from wizard_avatar.protocol import TAG_DELTA, decode_frame
 from wizard_avatar.stream import WizardFrameHub
+
+
+_REAL_ASYNCIO_SLEEP = asyncio.sleep
+
+
+class _FrameLoopComplete(Exception):
+    pass
+
+
+class _FakeMonotonicClock:
+    def __init__(self):
+        self.now = 0.0
+        self.sleep_delays = []
+
+    def perf_counter(self):
+        return self.now
+
+    def perf_counter_ns(self):
+        return round(self.now * 1_000_000_000)
+
+    def advance(self, seconds):
+        self.now += seconds
+
+    async def sleep(self, delay):
+        self.sleep_delays.append(delay)
+        self.advance(delay)
+        await _REAL_ASYNCIO_SLEEP(0)
+
+
+class _CheapController:
+    def __init__(self):
+        self.state = WizardState(character_id="deadline-policy-test")
+
+    def advance_tick(self):
+        self.state.simulation_tick += 1
+        self.state.state_revision += 1
+        self.state.time_seconds = self.state.simulation_tick / 60.0
+
+    def current_state(self):
+        return self.state
+
+
+class _CheapFrameSource:
+    fps = 10
+    cols = 1
+    rows = 1
+
+    def __init__(self, clock, render_durations):
+        self.clock = clock
+        self.render_durations = render_durations
+        self.controller = _CheapController()
+        self.character_package = SimpleNamespace(character_id="deadline-policy-test")
+        self.diagnostics = SimpleNamespace(extra={})
+        self.frame_started_at = []
+        self.simulation_times = []
+
+    def current_state(self):
+        return self.controller.current_state()
+
+    async def next_encoded_frame(self, *_args, **_kwargs):
+        frame_index = len(self.frame_started_at)
+        if frame_index == len(self.render_durations):
+            raise _FrameLoopComplete
+        self.frame_started_at.append(self.clock.now)
+        self.simulation_times.append(self.current_state().time_seconds)
+        self.clock.advance(self.render_durations[frame_index])
+        frame = WizardCellFrame(
+            cols=1,
+            rows=1,
+            frame_index=frame_index,
+            cells=b"\x00\x00\x00\x00",
+            raw_size=4,
+        )
+        return b"cheap-frame", frame
 
 
 class StreamHubTests(unittest.IsolatedAsyncioTestCase):
@@ -66,38 +142,55 @@ class StreamHubTests(unittest.IsolatedAsyncioTestCase):
             await hub.stop()
 
     async def test_frame_loop_does_not_replay_missed_deadlines(self):
-        source = ProceduralWizardFrameSource(fps=24)
-        original_next_frame = source.next_encoded_frame
+        for iteration in range(100):
+            with self.subTest(iteration=iteration):
+                await self._assert_deadline_policy()
 
-        async def delayed_next_frame(*args, **kwargs):
-            await asyncio.sleep(0.06)
-            return await original_next_frame(*args, **kwargs)
-
-        source.next_encoded_frame = delayed_next_frame
+    async def _assert_deadline_policy(self):
+        clock = _FakeMonotonicClock()
+        render_durations = (0.02, 0.12, 0.02, 0.02)
+        source = _CheapFrameSource(clock, render_durations)
         hub = WizardFrameHub(source)
-        subscriber = await hub.subscribe()
-        try:
-            await asyncio.sleep(0.34)
-            published = hub._published_frames
-            self.assertGreaterEqual(hub._schedule_overruns, 1)
-            self.assertGreaterEqual(published, 3)
-            self.assertLessEqual(published, 5)
+        with (
+            mock.patch("wizard_avatar.stream.time.perf_counter", clock.perf_counter),
+            mock.patch(
+                "wizard_avatar.stream.time.perf_counter_ns",
+                clock.perf_counter_ns,
+            ),
+            mock.patch("wizard_avatar.stream.asyncio.sleep", clock.sleep),
+        ):
+            with self.assertRaises(_FrameLoopComplete):
+                await hub._run()
 
-            loop = asyncio.get_running_loop()
-            wall_started = loop.time()
-            before = source.current_state().time_seconds
-            await asyncio.sleep(0.12)
-            wall_elapsed = loop.time() - wall_started
-            elapsed_simulation = source.current_state().time_seconds - before
-            self.assertGreater(elapsed_simulation, 0.0)
-            self.assertLessEqual(
-                elapsed_simulation,
-                wall_elapsed + 2.0 / 60.0,
-                "60 Hz runtime exceeded wall time plus two tick boundaries",
-            )
-        finally:
-            hub.unsubscribe(subscriber)
-            await hub.stop()
+        frame_interval = 1.0 / source.fps
+        frame_gaps = [
+            later - earlier
+            for earlier, later in zip(source.frame_started_at, source.frame_started_at[1:])
+        ]
+        scheduled_sleeps = [delay for delay in clock.sleep_delays if delay > 0.001]
+
+        self.assertEqual(hub._published_frames, len(render_durations))
+        self.assertEqual(hub._schedule_overruns, 1, "exactly one deadline was missed")
+        self.assertTrue(
+            all(gap >= frame_interval - 1e-9 for gap in frame_gaps),
+            "a missed deadline caused a replay burst",
+        )
+        self.assertTrue(
+            all(
+                simulation <= started + 1e-9
+                for simulation, started in zip(
+                    source.simulation_times,
+                    source.frame_started_at,
+                )
+            ),
+            "simulation advanced beyond the fake monotonic clock",
+        )
+        self.assertAlmostEqual(
+            scheduled_sleeps[1],
+            frame_interval,
+            places=9,
+            msg="the post-overrun deadline was not aligned into the future",
+        )
 
 
 if __name__ == "__main__":

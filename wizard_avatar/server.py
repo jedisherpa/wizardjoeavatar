@@ -1,18 +1,27 @@
 from __future__ import annotations
 
 import asyncio
+import hmac
 import json
+import os
 from pathlib import Path
 from typing import Any, Dict, Optional
 
 from .commanding import CommandEnvelopeV1, CommandValidationError
 from .frame_source import ProceduralWizardFrameSource
 from .models import WizardCommand
+from .media_session import (
+    MEDIA_SESSION_MAX_BODY_BYTES,
+    MediaSessionError,
+    MediaSessionSnapshotV1,
+)
 from .stream import WizardFrameHub
 
 try:
+    from fastapi import Request as FastAPIRequest
     from fastapi import WebSocket as FastAPIWebSocket
 except ImportError:  # pragma: no cover - create_app reports the install command.
+    FastAPIRequest = Any
     FastAPIWebSocket = Any
 
 
@@ -31,6 +40,38 @@ def create_app(source: ProceduralWizardFrameSource | None = None):
     frame_source = source or ProceduralWizardFrameSource()
     frame_hub = WizardFrameHub(frame_source)
     app = FastAPI(title="WizardJoeAvatar")
+    app.state.frame_hub = frame_hub
+    connector_enabled = os.environ.get("WIZARD_MEDIA_CONNECTOR_ENABLED", "").lower() in {
+        "1", "true", "yes", "on"
+    }
+    connector_token = os.environ.get("WIZARD_MEDIA_CONNECTOR_TOKEN", "")
+
+    def require_connector(request: FastAPIRequest) -> None:
+        if not connector_enabled or not connector_token:
+            raise HTTPException(status_code=503, detail="Media connector unavailable")
+        if request.headers.get("origin"):
+            raise HTTPException(status_code=403, detail="Browser-origin requests are not allowed")
+        authorization = request.headers.get("authorization", "")
+        expected = "Bearer " + connector_token
+        if not hmac.compare_digest(authorization.encode("utf-8"), expected.encode("utf-8")):
+            raise HTTPException(status_code=401, detail="Unauthorized")
+
+    async def bounded_json_body(request: FastAPIRequest) -> bytes:
+        if request.headers.get("content-type") != "application/json":
+            raise HTTPException(status_code=415, detail="Content-Type must be application/json")
+        content_length = request.headers.get("content-length")
+        if content_length is not None:
+            try:
+                if int(content_length) > MEDIA_SESSION_MAX_BODY_BYTES:
+                    raise HTTPException(status_code=413, detail="Request body too large")
+            except ValueError as exc:
+                raise HTTPException(status_code=400, detail="Invalid Content-Length") from exc
+        chunks = bytearray()
+        async for chunk in request.stream():
+            chunks.extend(chunk)
+            if len(chunks) > MEDIA_SESSION_MAX_BODY_BYTES:
+                raise HTTPException(status_code=413, detail="Request body too large")
+        return bytes(chunks)
 
     @app.on_event("shutdown")
     async def shutdown_frame_hub():
@@ -116,6 +157,25 @@ def create_app(source: ProceduralWizardFrameSource | None = None):
             "default_pose_id": package.default_pose_id,
             "capabilities": list(package.capabilities),
         }
+
+    @app.post("/api/avatar/wizard/media-session")
+    async def media_session(request: FastAPIRequest):
+        require_connector(request)
+        body = await bounded_json_body(request)
+        try:
+            snapshot = MediaSessionSnapshotV1.from_json(body)
+        except MediaSessionError as exc:
+            raise HTTPException(
+                status_code=400,
+                detail={"code": exc.code, "path": exc.path},
+            ) from exc
+        ack = await frame_hub.accept_media_session(snapshot)
+        return dict(ack.to_dict())
+
+    @app.get("/api/avatar/wizard/media-session/status")
+    async def media_session_status(request: FastAPIRequest):
+        require_connector(request)
+        return await frame_hub.media_session_status()
 
     async def apply(command_type: str, payload: Dict[str, Any]):
         command = WizardCommand(command_type, payload)

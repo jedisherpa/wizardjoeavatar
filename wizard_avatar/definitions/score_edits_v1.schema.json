@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://wizardjoe.local/schemas/score_edits_v1.schema.json",
+  "title": "ScoreEditsV1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "edit_set_id", "base_score_sha256", "revision", "operations", "parent_edit_set_sha256", "actor"],
+  "properties": {
+    "schema_version": {"const": 1},
+    "edit_set_id": {"type": "string", "pattern": "^edits:[a-z0-9][a-z0-9._:-]{0,127}$"},
+    "base_score_sha256": {"$ref": "#/$defs/hash"},
+    "revision": {"type": "integer", "minimum": 1, "maximum": 9007199254740991},
+    "operations": {"type": "array", "items": {"$ref": "#/$defs/operation"}},
+    "parent_edit_set_sha256": {"$ref": "#/$defs/nullableHash"},
+    "actor": {
+      "type": "object", "additionalProperties": false, "required": ["kind", "actor_id"],
+      "properties": {"kind": {"enum": ["human", "system", "migration"]}, "actor_id": {"$ref": "#/$defs/id"}}
+    }
+  },
+  "$defs": {
+    "id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._:-]{0,127}$"},
+    "hash": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+    "nullableHash": {"oneOf": [{"type": "null"}, {"$ref": "#/$defs/hash"}]},
+    "jsonScalar": {"oneOf": [{"type": "null"}, {"type": "string"}, {"type": "integer", "minimum": -9007199254740991, "maximum": 9007199254740991}, {"type": "boolean"}]},
+    "editValue": {
+      "oneOf": [
+        {"$ref": "#/$defs/jsonScalar"},
+        {"type": "array", "items": {"$ref": "#/$defs/jsonScalar"}},
+        {"$ref": "#/$defs/cue"}
+      ]
+    },
+    "time": {"type": "integer", "minimum": 0, "maximum": 9007199254740991},
+    "milli": {"type": "integer", "minimum": 0, "maximum": 1000},
+    "phaseRange": {"type": "array", "minItems": 2, "maxItems": 2, "items": {"$ref": "#/$defs/time"}},
+    "phaseRanges": {
+      "type": "object", "additionalProperties": false, "minProperties": 1,
+      "properties": {"anticipation": {"$ref": "#/$defs/phaseRange"}, "stroke": {"$ref": "#/$defs/phaseRange"}, "hold": {"$ref": "#/$defs/phaseRange"}, "release": {"$ref": "#/$defs/phaseRange"}, "settle": {"$ref": "#/$defs/phaseRange"}}
+    },
+    "cue": {
+      "type": "object", "additionalProperties": false,
+      "required": ["cue_id", "start_ms", "end_ms", "intent", "source_ids", "priority", "amplitude_milli", "capability_requirements", "fallback_intents", "interrupt_policy", "cooldown_class", "motif_id", "confidence", "manual"],
+      "properties": {
+        "cue_id": {"$ref": "#/$defs/id"}, "start_ms": {"$ref": "#/$defs/time"}, "end_ms": {"$ref": "#/$defs/time"}, "intent": {"$ref": "#/$defs/id"},
+        "source_ids": {"type": "array", "uniqueItems": true, "items": {"$ref": "#/$defs/id"}}, "priority": {"type": "integer", "minimum": 0, "maximum": 1000},
+        "amplitude_milli": {"$ref": "#/$defs/milli"}, "phase_ranges": {"$ref": "#/$defs/phaseRanges"},
+        "capability_requirements": {"type": "array", "uniqueItems": true, "items": {"$ref": "#/$defs/id"}},
+        "fallback_intents": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"$ref": "#/$defs/id"}},
+        "interrupt_policy": {"enum": ["never", "at_phase_boundary", "after_hold", "immediate"]}, "cooldown_class": {"$ref": "#/$defs/id"},
+        "motif_id": {"oneOf": [{"type": "null"}, {"$ref": "#/$defs/id"}]},
+        "confidence": {
+          "type": "object", "additionalProperties": false, "required": ["alignment_milli", "evidence_milli", "planner_milli"],
+          "properties": {"alignment_milli": {"$ref": "#/$defs/milli"}, "evidence_milli": {"$ref": "#/$defs/milli"}, "planner_milli": {"$ref": "#/$defs/milli"}}
+        },
+        "manual": {"type": "object", "additionalProperties": false, "required": ["locked", "disabled"], "properties": {"locked": {"type": "boolean"}, "disabled": {"type": "boolean"}}}
+      }
+    },
+    "operation": {
+      "type": "object", "additionalProperties": false,
+      "required": ["operation_id", "op", "cue_id", "field", "old_value_sha256", "value", "reason_code", "locked"],
+      "properties": {
+        "operation_id": {"$ref": "#/$defs/id"},
+        "op": {"enum": ["add_cue", "remove_cue", "replace", "disable", "enable", "lock", "unlock", "select_take"]},
+        "cue_id": {"$ref": "#/$defs/id"},
+        "field": {"oneOf": [{"type": "null"}, {"$ref": "#/$defs/id"}]},
+        "old_value_sha256": {"$ref": "#/$defs/nullableHash"},
+        "value": {"$ref": "#/$defs/editValue"},
+        "reason_code": {"$ref": "#/$defs/id"},
+        "locked": {"type": "boolean"}
+      }
+    }
+  }
+}

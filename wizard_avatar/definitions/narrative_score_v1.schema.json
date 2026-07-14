@@ -1,0 +1,90 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://wizardjoe.local/schemas/narrative_score_v1.schema.json",
+  "title": "NarrativeScoreV1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "narrative_score_id", "media_id", "transcript_id", "alignment_id", "duration_ms", "book_profile", "chapter_envelopes", "beats", "provenance"],
+  "properties": {
+    "schema_version": {"const": 1},
+    "narrative_score_id": {"type": "string", "pattern": "^narrative:[a-z0-9][a-z0-9._:-]{0,127}$"},
+    "media_id": {"type": "string", "pattern": "^media:sha256:[0-9a-f]{64}$"},
+    "transcript_id": {"type": "string", "pattern": "^transcript:[a-z0-9][a-z0-9._:-]{0,127}$"},
+    "alignment_id": {"type": "string", "pattern": "^alignment:[a-z0-9][a-z0-9._:-]{0,127}$"},
+    "duration_ms": {"$ref": "#/$defs/time"},
+    "book_profile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["genre_family", "narration_form", "pov_system", "narrator_role", "baseline_distance", "baseline_energy_milli", "performance_ceiling_milli"],
+      "properties": {
+        "genre_family": {"enum": ["fiction", "nonfiction", "poetry", "drama", "mixed", "unknown"]},
+        "narration_form": {"enum": ["fiction", "nonfiction", "memoir", "essay", "poetry", "drama", "mixed"]},
+        "pov_system": {"enum": ["first", "second", "third_limited", "third_omniscient", "multiple", "none", "unknown"]},
+        "narrator_role": {"enum": ["storyteller", "witness", "confidant", "expert", "teacher", "persuader"]},
+        "baseline_distance": {"enum": ["close", "middle", "far"]},
+        "baseline_energy_milli": {"$ref": "#/$defs/milli"},
+        "performance_ceiling_milli": {"$ref": "#/$defs/milli"}
+      }
+    },
+    "chapter_envelopes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["chapter_id", "start_ms", "end_ms", "entry_energy_milli", "apex_energy_milli", "exit_energy_milli"],
+        "properties": {
+          "chapter_id": {"$ref": "#/$defs/id"},
+          "start_ms": {"$ref": "#/$defs/time"},
+          "end_ms": {"$ref": "#/$defs/time"},
+          "entry_energy_milli": {"$ref": "#/$defs/milli"},
+          "apex_energy_milli": {"$ref": "#/$defs/milli"},
+          "exit_energy_milli": {"$ref": "#/$defs/milli"}
+        }
+      }
+    },
+    "beats": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["beat_id", "chapter_id", "scene_id", "source_span_ids", "start_ms", "apex_ms", "end_ms", "performer_mode", "beat_function", "chapter_phase", "tension_milli", "valence_milli", "activation_milli", "intimacy_milli", "information_density_milli", "stillness_target", "gesture_intent", "visual_salience", "spoiler_sensitive", "confidence_milli", "review_status"],
+        "properties": {
+          "beat_id": {"$ref": "#/$defs/id"},
+          "chapter_id": {"$ref": "#/$defs/id"},
+          "scene_id": {"$ref": "#/$defs/id"},
+          "source_span_ids": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"$ref": "#/$defs/id"}},
+          "start_ms": {"$ref": "#/$defs/time"},
+          "apex_ms": {"$ref": "#/$defs/time"},
+          "end_ms": {"$ref": "#/$defs/time"},
+          "performer_mode": {"enum": ["narration", "dialogue", "interior_thought", "scene_action", "exposition", "reflection", "quotation", "paratext"]},
+          "beat_function": {"enum": ["orient", "propose", "question", "contrast", "escalate", "reveal", "reverse", "decide", "confess", "connect", "withdraw", "punchline", "tag", "callback", "summarize", "conclude", "interrupt"]},
+          "chapter_phase": {"enum": ["entry", "development", "turn", "pressure", "release", "landing"]},
+          "tension_milli": {"$ref": "#/$defs/milli"},
+          "valence_milli": {"$ref": "#/$defs/signedMilli"},
+          "activation_milli": {"$ref": "#/$defs/milli"},
+          "intimacy_milli": {"$ref": "#/$defs/milli"},
+          "information_density_milli": {"$ref": "#/$defs/milli"},
+          "stillness_target": {"enum": ["active", "settled", "held", "absolute"]},
+          "gesture_intent": {"enum": ["none", "orient", "explain", "compare", "reference", "question", "reassure", "sincere", "withhold", "release", "react"]},
+          "visual_salience": {"enum": ["none", "low", "medium", "high", "peak"]},
+          "spoiler_sensitive": {"type": "boolean"},
+          "confidence_milli": {"$ref": "#/$defs/milli"},
+          "review_status": {"enum": ["proposed", "accepted", "rejected", "needs_review"]}
+        }
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["pipeline_hash", "validation_hash"],
+      "properties": {"pipeline_hash": {"$ref": "#/$defs/hash"}, "validation_hash": {"$ref": "#/$defs/hash"}}
+    }
+  },
+  "$defs": {
+    "id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._:-]{0,127}$"},
+    "hash": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+    "time": {"type": "integer", "minimum": 0, "maximum": 9007199254740991},
+    "milli": {"type": "integer", "minimum": 0, "maximum": 1000},
+    "signedMilli": {"type": "integer", "minimum": -1000, "maximum": 1000}
+  }
+}

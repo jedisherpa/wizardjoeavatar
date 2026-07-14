@@ -1,0 +1,103 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://wizardjoe.local/schemas/performance_score_v1.schema.json",
+  "title": "PerformanceScoreV1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "score_id", "revision", "status", "mode", "media", "analysis_ref", "tracks", "provenance", "validation"],
+  "properties": {
+    "schema_version": {"const": 1},
+    "score_id": {"type": "string", "pattern": "^performance:[a-z0-9][a-z0-9._:-]{0,127}$"},
+    "revision": {"type": "integer", "minimum": 1, "maximum": 9007199254740991},
+    "status": {"enum": ["draft", "review", "accepted", "rejected"]},
+    "mode": {"enum": ["audiobook", "music"]},
+    "media": {
+      "type": "object", "additionalProperties": false,
+      "required": ["media_id", "media_sha256", "duration_ms"],
+      "properties": {
+        "media_id": {"type": "string", "pattern": "^media:sha256:[0-9a-f]{64}$"},
+        "media_sha256": {"$ref": "#/$defs/hash"}, "duration_ms": {"$ref": "#/$defs/time"}
+      }
+    },
+    "analysis_ref": {
+      "type": "object", "additionalProperties": false,
+      "required": ["kind", "artifact_id", "artifact_sha256"],
+      "properties": {
+        "kind": {"enum": ["narrative", "music"]},
+        "artifact_id": {"type": "string", "pattern": "^(narrative|music):[a-z0-9][a-z0-9._:-]{0,127}$"},
+        "artifact_sha256": {"$ref": "#/$defs/hash"}
+      }
+    },
+    "tracks": {"type": "array", "items": {"$ref": "#/$defs/track"}},
+    "provenance": {
+      "type": "object", "additionalProperties": false,
+      "required": ["pipeline_version", "prompt_bundle_sha256", "provider_run_sha256", "seed", "parent_score_sha256", "edit_set_sha256"],
+      "properties": {
+        "pipeline_version": {"$ref": "#/$defs/id"},
+        "prompt_bundle_sha256": {"$ref": "#/$defs/nullableHash"},
+        "provider_run_sha256": {"$ref": "#/$defs/nullableHash"},
+        "seed": {"type": "integer", "minimum": 0, "maximum": 9007199254740991},
+        "parent_score_sha256": {"$ref": "#/$defs/nullableHash"},
+        "edit_set_sha256": {"$ref": "#/$defs/nullableHash"}
+      }
+    },
+    "validation": {
+      "type": "object", "additionalProperties": false,
+      "required": ["policy_sha256", "report_sha256", "decision"],
+      "properties": {
+        "policy_sha256": {"$ref": "#/$defs/hash"}, "report_sha256": {"$ref": "#/$defs/hash"},
+        "decision": {"enum": ["accepted", "rejected", "review"]}
+      }
+    }
+  },
+  "$defs": {
+    "id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._:-]{0,127}$"},
+    "hash": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+    "nullableHash": {"oneOf": [{"type": "null"}, {"$ref": "#/$defs/hash"}]},
+    "time": {"type": "integer", "minimum": 0, "maximum": 9007199254740991},
+    "milli": {"type": "integer", "minimum": 0, "maximum": 1000},
+    "trackKind": {"enum": ["narrative_state", "body_base", "locomotion", "stage", "gesture", "face", "gaze", "speech", "blink", "dance", "effects", "transition", "manual_override"]},
+    "phaseRange": {"type": "array", "minItems": 2, "maxItems": 2, "items": {"$ref": "#/$defs/time"}},
+    "phaseRanges": {
+      "type": "object", "additionalProperties": false,
+      "properties": {
+        "anticipation": {"$ref": "#/$defs/phaseRange"}, "stroke": {"$ref": "#/$defs/phaseRange"},
+        "hold": {"$ref": "#/$defs/phaseRange"}, "release": {"$ref": "#/$defs/phaseRange"}, "settle": {"$ref": "#/$defs/phaseRange"}
+      },
+      "minProperties": 1
+    },
+    "cue": {
+      "type": "object", "additionalProperties": false,
+      "required": ["cue_id", "start_ms", "end_ms", "intent", "source_ids", "priority", "amplitude_milli", "capability_requirements", "fallback_intents", "interrupt_policy", "cooldown_class", "motif_id", "confidence", "manual"],
+      "properties": {
+        "cue_id": {"$ref": "#/$defs/id"}, "start_ms": {"$ref": "#/$defs/time"}, "end_ms": {"$ref": "#/$defs/time"},
+        "intent": {"$ref": "#/$defs/id"}, "source_ids": {"type": "array", "uniqueItems": true, "items": {"$ref": "#/$defs/id"}},
+        "priority": {"type": "integer", "minimum": 0, "maximum": 1000}, "amplitude_milli": {"$ref": "#/$defs/milli"},
+        "phase_ranges": {"$ref": "#/$defs/phaseRanges"},
+        "capability_requirements": {"type": "array", "uniqueItems": true, "items": {"$ref": "#/$defs/id"}},
+        "fallback_intents": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"$ref": "#/$defs/id"}},
+        "interrupt_policy": {"enum": ["never", "at_phase_boundary", "after_hold", "immediate"]},
+        "cooldown_class": {"$ref": "#/$defs/id"}, "motif_id": {"oneOf": [{"type": "null"}, {"$ref": "#/$defs/id"}]},
+        "confidence": {
+          "type": "object", "additionalProperties": false,
+          "required": ["alignment_milli", "evidence_milli", "planner_milli"],
+          "properties": {"alignment_milli": {"$ref": "#/$defs/milli"}, "evidence_milli": {"$ref": "#/$defs/milli"}, "planner_milli": {"$ref": "#/$defs/milli"}}
+        },
+        "manual": {
+          "type": "object", "additionalProperties": false, "required": ["locked", "disabled"],
+          "properties": {"locked": {"type": "boolean"}, "disabled": {"type": "boolean"}}
+        }
+      }
+    },
+    "track": {
+      "type": "object", "additionalProperties": false,
+      "required": ["track_id", "kind", "exclusive", "max_active", "gap_policy", "cues"],
+      "properties": {
+        "track_id": {"$ref": "#/$defs/id"}, "kind": {"$ref": "#/$defs/trackKind"}, "exclusive": {"type": "boolean"},
+        "max_active": {"type": "integer", "minimum": 1, "maximum": 64},
+        "gap_policy": {"enum": ["characterful_neutral", "clear", "hold", "neutral", "none"]},
+        "cues": {"type": "array", "items": {"$ref": "#/$defs/cue"}}
+      }
+    }
+  }
+}

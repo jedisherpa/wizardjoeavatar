@@ -1,0 +1,92 @@
+{
+  "schema_version": 1,
+  "run_id": "REQUIRED",
+  "status": "REQUIRED",
+  "started_at_utc": "REQUIRED",
+  "completed_at_utc": "REQUIRED",
+  "workflow": {
+    "provider": "REQUIRED",
+    "run_id": "REQUIRED",
+    "url": "REQUIRED"
+  },
+  "repositories": [
+    {
+      "name": "WizardJoeAvatar-python",
+      "url": "REQUIRED",
+      "commit": "REQUIRED",
+      "branch": "REQUIRED",
+      "dirty": "REQUIRED",
+      "dirty_patch_sha256": "REQUIRED_OR_NULL"
+    },
+    {
+      "name": "PrismGT",
+      "url": "REQUIRED",
+      "commit": "REQUIRED",
+      "branch": "REQUIRED",
+      "dirty": "REQUIRED",
+      "dirty_patch_sha256": "REQUIRED_OR_NULL"
+    }
+  ],
+  "environment": {
+    "hardware_model": "REQUIRED",
+    "cpu_architecture": "REQUIRED",
+    "power_mode": "REQUIRED",
+    "os": "REQUIRED",
+    "python": "REQUIRED",
+    "node": "REQUIRED",
+    "rust": "REQUIRED",
+    "browsers": {},
+    "ffmpeg": "REQUIRED_OR_NULL"
+  },
+  "lockfiles": [
+    {
+      "repository": "REQUIRED",
+      "path": "REQUIRED_REPOSITORY_RELATIVE_PATH",
+      "sha256": "REQUIRED"
+    }
+  ],
+  "commands": [
+    {
+      "id": "REQUIRED",
+      "repository": "REQUIRED",
+      "command": "REQUIRED",
+      "started_at_utc": "REQUIRED",
+      "completed_at_utc": "REQUIRED",
+      "exit_code": "REQUIRED",
+      "stdout_sha256": "REQUIRED",
+      "stderr_sha256": "REQUIRED",
+      "artifact_paths": []
+    }
+  ],
+  "fixtures": [
+    {
+      "id": "REQUIRED",
+      "path": "REQUIRED_REPOSITORY_RELATIVE_PATH",
+      "sha256": "REQUIRED"
+    }
+  ],
+  "random_seeds": [],
+  "test_summary": {
+    "passed": "REQUIRED",
+    "failed": "REQUIRED",
+    "errors": "REQUIRED",
+    "skipped": "REQUIRED",
+    "retries": "REQUIRED"
+  },
+  "waivers": [],
+  "privacy": {
+    "canary_scan_command_id": "REQUIRED",
+    "canary_occurrences_outside_approved_source": "REQUIRED",
+    "egress_mode": "REQUIRED",
+    "non_loopback_connections": "REQUIRED"
+  },
+  "artifacts": [
+    {
+      "path": "REQUIRED_BUNDLE_RELATIVE_PATH",
+      "byte_length": "REQUIRED",
+      "sha256": "REQUIRED",
+      "content_class": "REQUIRED"
+    }
+  ],
+  "sha256sums_sha256": "REQUIRED"
+}

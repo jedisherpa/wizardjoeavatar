@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "transcript_id": "transcript:fixture-001",
+  "media_id": "media:sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "source_sha256": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+  "display_sha256": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+  "spoken_normalized_sha256": "sha256:3333333333333333333333333333333333333333333333333333333333333333",
+  "revision": 1,
+  "language": "en",
+  "source_kind": "provided",
+  "chapters": [{"chapter_id": "ch-001", "order": 0, "title": null, "block_ids": ["b-0001"]}],
+  "blocks": [{"block_id": "b-0001", "chapter_id": "ch-001", "order": 0, "kind": "paragraph", "display_text": "Synthetic words.", "spoken_normalized_text": "synthetic words"}],
+  "provenance": {"importer_id": "provided-text-v1", "normalizer_version": "transcript-normalizer-v1", "parent_transcript_id": null}
+}

@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "media_id": "media:sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "identity": {
+    "source_sha256": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "byte_length": 4096,
+    "mime_type": "audio/mpeg",
+    "duration_ms": 10000,
+    "media_kind": "audiobook"
+  },
+  "storage_ref": "prism-media:fixture-001",
+  "display": {"title": "Synthetic chapter", "creator": null, "collection": null, "chapter_id": "ch-001"},
+  "canonical_pcm": {
+    "pcm_sha256": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+    "sample_rate_hz": 44100,
+    "channels": 1,
+    "sample_format": "s16le",
+    "duration_samples": 441000,
+    "decoder_build_sha256": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+    "decoder_arguments_sha256": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+  },
+  "external": {"canonical_url": null, "url_source": null},
+  "status": {"transcript": "ready", "analysis": "ready", "performance": "ready"}
+}

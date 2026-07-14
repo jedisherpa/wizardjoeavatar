@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "narrative_score_id": "narrative:fixture-001",
+  "media_id": "media:sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "transcript_id": "transcript:fixture-001",
+  "alignment_id": "alignment:fixture-001",
+  "duration_ms": 10000,
+  "book_profile": {"genre_family": "fiction", "narration_form": "fiction", "pov_system": "third_limited", "narrator_role": "storyteller", "baseline_distance": "middle", "baseline_energy_milli": 350, "performance_ceiling_milli": 700},
+  "chapter_envelopes": [{"chapter_id": "ch-001", "start_ms": 0, "end_ms": 10000, "entry_energy_milli": 300, "apex_energy_milli": 700, "exit_energy_milli": 250}],
+  "beats": [{"beat_id": "beat-0001", "chapter_id": "ch-001", "scene_id": "scene-001", "source_span_ids": ["b-0001"], "start_ms": 1000, "apex_ms": 1500, "end_ms": 2000, "performer_mode": "narration", "beat_function": "reveal", "chapter_phase": "turn", "tension_milli": 820, "valence_milli": 0, "activation_milli": 460, "intimacy_milli": 200, "information_density_milli": 350, "stillness_target": "held", "gesture_intent": "react", "visual_salience": "medium", "spoiler_sensitive": true, "confidence_milli": 910, "review_status": "accepted"}],
+  "provenance": {"pipeline_hash": "sha256:6666666666666666666666666666666666666666666666666666666666666666", "validation_hash": "sha256:7777777777777777777777777777777777777777777777777777777777777777"}
+}

@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "score_id": "performance:fixture-001",
+  "revision": 1,
+  "status": "accepted",
+  "mode": "audiobook",
+  "media": {"media_id": "media:sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "media_sha256": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "duration_ms": 10000},
+  "analysis_ref": {"kind": "narrative", "artifact_id": "narrative:fixture-001", "artifact_sha256": "sha256:6666666666666666666666666666666666666666666666666666666666666666"},
+  "tracks": [{
+    "track_id": "body-base", "kind": "body_base", "exclusive": true, "max_active": 1, "gap_policy": "characterful_neutral",
+    "cues": [{
+      "cue_id": "ch-001.beat-001.gesture-001", "start_ms": 1000, "end_ms": 2000, "intent": "explain_light", "source_ids": ["beat-0001"], "priority": 40, "amplitude_milli": 450,
+      "phase_ranges": {"anticipation": [1000, 1100], "stroke": [1100, 1250], "hold": [1250, 1700], "release": [1700, 1900], "settle": [1900, 2000]},
+      "capability_requirements": ["body.explain_light"], "fallback_intents": ["face.attentive", "body.characterful_neutral", "still"], "interrupt_policy": "at_phase_boundary", "cooldown_class": "ordinary_gesture", "motif_id": null,
+      "confidence": {"alignment_milli": 980, "evidence_milli": 910, "planner_milli": 740}, "manual": {"locked": false, "disabled": false}
+    }]
+  }],
+  "provenance": {"pipeline_version": "performance-assembly-v1", "prompt_bundle_sha256": null, "provider_run_sha256": null, "seed": 0, "parent_score_sha256": null, "edit_set_sha256": null},
+  "validation": {"policy_sha256": "sha256:1010101010101010101010101010101010101010101010101010101010101010", "report_sha256": "sha256:1212121212121212121212121212121212121212121212121212121212121212", "decision": "accepted"}
+}

@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "program_id": "wizard-joe-audiobook-performance-engine",
+  "updated_at": "2026-07-14",
+  "python": {
+    "repository": "jedisherpa/wizardjoeavatar",
+    "branch": "codex/audiobook-performance-engine",
+    "baseline_commit": "7781a67c97bfbfa16a64d5b9fb12bdf74bd4c032",
+    "runtime_url": "http://127.0.0.1:8765/",
+    "character_id": "wizard-joe-v1",
+    "pose_count": 89
+  },
+  "prismgt": {
+    "repository": "jedisherpa/prism-geometry-talk",
+    "branch": "codex/wizardjoe-media-connector",
+    "baseline_commit": "0ce9f9bae665b1415cd776e4d6c9ee23565936ac"
+  },
+  "research_reports": [
+    "01-supervising-animation-director.md",
+    "02-character-performance-animator.md",
+    "03-facial-eye-motion.md",
+    "04-audiobook-narrative-direction.md",
+    "05-audio-dsp-music.md",
+    "06-speech-alignment.md",
+    "07-character-technical-direction.md",
+    "08-performance-planning-llm.md",
+    "09-prismgt-integration.md",
+    "10-film-editing-previs.md",
+    "11-qa-verification.md",
+    "12-accessibility-ux.md"
+  ],
+  "phase_count": 20,
+  "authoritative_clock": "prismgt_html_audio_current_time",
+  "privacy_default": "local_only",
+  "status": "local_connector_verified_packaging_in_progress"
+}

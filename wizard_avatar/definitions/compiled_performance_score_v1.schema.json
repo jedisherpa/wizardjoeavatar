@@ -1,0 +1,116 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://wizardjoe.local/schemas/compiled_performance_score_v1.schema.json",
+  "title": "CompiledPerformanceScoreV1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "compiled_score_id", "performance_score_sha256", "character", "mapping_policy_sha256", "runtime_api_version", "tracks", "checkpoints", "fallback_records", "validation"],
+  "properties": {
+    "schema_version": {"const": 1},
+    "compiled_score_id": {"type": "string", "pattern": "^compiled:[a-z0-9][a-z0-9._:-]{0,127}$"},
+    "performance_score_sha256": {"$ref": "#/$defs/hash"},
+    "character": {
+      "type": "object", "additionalProperties": false,
+      "required": ["character_id", "package_version", "package_digest", "pose_library_digest", "graph_digest"],
+      "properties": {
+        "character_id": {"$ref": "#/$defs/id"}, "package_version": {"type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"},
+        "package_digest": {"$ref": "#/$defs/hash"}, "pose_library_digest": {"$ref": "#/$defs/hash"}, "graph_digest": {"$ref": "#/$defs/hash"}
+      }
+    },
+    "mapping_policy_sha256": {"$ref": "#/$defs/hash"},
+    "runtime_api_version": {"const": 2},
+    "tracks": {"type": "array", "items": {"$ref": "#/$defs/track"}},
+    "checkpoints": {"type": "array", "items": {"$ref": "#/$defs/checkpoint"}},
+    "fallback_records": {"type": "array", "items": {"$ref": "#/$defs/fallbackRecord"}},
+    "validation": {
+      "type": "object", "additionalProperties": false, "required": ["decision", "report_sha256"],
+      "properties": {"decision": {"enum": ["accepted", "rejected", "review"]}, "report_sha256": {"$ref": "#/$defs/hash"}}
+    }
+  },
+  "$defs": {
+    "id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._:-]{0,127}$"},
+    "hash": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+    "time": {"type": "integer", "minimum": 0, "maximum": 9007199254740991},
+    "milli": {"type": "integer", "minimum": 0, "maximum": 1000},
+    "trackKind": {"enum": ["narrative_state", "body_base", "locomotion", "stage", "gesture", "face", "gaze", "speech", "blink", "dance", "effects", "transition", "manual_override"]},
+    "phaseRange": {"type": "array", "minItems": 2, "maxItems": 2, "items": {"$ref": "#/$defs/time"}},
+    "phaseRanges": {
+      "type": "object", "additionalProperties": false,
+      "properties": {"anticipation": {"$ref": "#/$defs/phaseRange"}, "stroke": {"$ref": "#/$defs/phaseRange"}, "hold": {"$ref": "#/$defs/phaseRange"}, "release": {"$ref": "#/$defs/phaseRange"}, "settle": {"$ref": "#/$defs/phaseRange"}},
+      "minProperties": 1
+    },
+    "confidence": {
+      "type": "object", "additionalProperties": false, "required": ["alignment_milli", "evidence_milli", "planner_milli"],
+      "properties": {"alignment_milli": {"$ref": "#/$defs/milli"}, "evidence_milli": {"$ref": "#/$defs/milli"}, "planner_milli": {"$ref": "#/$defs/milli"}}
+    },
+    "manual": {
+      "type": "object", "additionalProperties": false, "required": ["locked", "disabled"],
+      "properties": {"locked": {"type": "boolean"}, "disabled": {"type": "boolean"}}
+    },
+    "phaseMarkerMap": {
+      "type": "object", "additionalProperties": false,
+      "required": ["anticipation", "stroke", "hold", "release", "settle"],
+      "properties": {
+        "anticipation": {"oneOf": [{"type": "null"}, {"$ref": "#/$defs/id"}]}, "stroke": {"oneOf": [{"type": "null"}, {"$ref": "#/$defs/id"}]},
+        "hold": {"oneOf": [{"type": "null"}, {"$ref": "#/$defs/id"}]}, "release": {"oneOf": [{"type": "null"}, {"$ref": "#/$defs/id"}]},
+        "settle": {"oneOf": [{"type": "null"}, {"$ref": "#/$defs/id"}]}
+      }
+    },
+    "cue": {
+      "type": "object", "additionalProperties": false,
+      "required": ["cue_id", "start_ms", "end_ms", "intent", "source_ids", "priority", "amplitude_milli", "capability_requirements", "fallback_intents", "interrupt_policy", "cooldown_class", "motif_id", "confidence", "manual", "mapping_id", "clip_id", "node_id", "phase_marker_map", "owned_channels", "resolved_fallback_path", "preload_asset_ids", "resolution_hash"],
+      "properties": {
+        "cue_id": {"$ref": "#/$defs/id"}, "start_ms": {"$ref": "#/$defs/time"}, "end_ms": {"$ref": "#/$defs/time"}, "intent": {"$ref": "#/$defs/id"},
+        "source_ids": {"type": "array", "uniqueItems": true, "items": {"$ref": "#/$defs/id"}}, "priority": {"type": "integer", "minimum": 0, "maximum": 1000},
+        "amplitude_milli": {"$ref": "#/$defs/milli"}, "phase_ranges": {"$ref": "#/$defs/phaseRanges"},
+        "capability_requirements": {"type": "array", "uniqueItems": true, "items": {"$ref": "#/$defs/id"}},
+        "fallback_intents": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"$ref": "#/$defs/id"}},
+        "interrupt_policy": {"enum": ["never", "at_phase_boundary", "after_hold", "immediate"]}, "cooldown_class": {"$ref": "#/$defs/id"},
+        "motif_id": {"oneOf": [{"type": "null"}, {"$ref": "#/$defs/id"}]}, "confidence": {"$ref": "#/$defs/confidence"}, "manual": {"$ref": "#/$defs/manual"},
+        "mapping_id": {"$ref": "#/$defs/id"}, "clip_id": {"oneOf": [{"type": "null"}, {"$ref": "#/$defs/id"}]},
+        "node_id": {"oneOf": [{"type": "null"}, {"$ref": "#/$defs/id"}]}, "phase_marker_map": {"$ref": "#/$defs/phaseMarkerMap"},
+        "owned_channels": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"$ref": "#/$defs/id"}},
+        "resolved_fallback_path": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"$ref": "#/$defs/id"}},
+        "preload_asset_ids": {"type": "array", "uniqueItems": true, "items": {"$ref": "#/$defs/id"}}, "resolution_hash": {"$ref": "#/$defs/hash"}
+      }
+    },
+    "track": {
+      "type": "object", "additionalProperties": false,
+      "required": ["track_id", "kind", "exclusive", "max_active", "gap_policy", "cues"],
+      "properties": {
+        "track_id": {"$ref": "#/$defs/id"}, "kind": {"$ref": "#/$defs/trackKind"}, "exclusive": {"type": "boolean"},
+        "max_active": {"type": "integer", "minimum": 1, "maximum": 64}, "gap_policy": {"enum": ["characterful_neutral", "clear", "hold", "neutral", "none"]},
+        "cues": {"type": "array", "items": {"$ref": "#/$defs/cue"}}
+      }
+    },
+    "checkpointState": {
+      "type": "object", "additionalProperties": false,
+      "required": ["active_cue_ids", "chapter_id", "scene_id", "setup_id", "stage_intent", "body_intent", "face_intent", "gaze_intent", "speech_intent"],
+      "properties": {
+        "active_cue_ids": {"type": "array", "uniqueItems": true, "items": {"$ref": "#/$defs/id"}},
+        "chapter_id": {"oneOf": [{"type": "null"}, {"$ref": "#/$defs/id"}]}, "scene_id": {"oneOf": [{"type": "null"}, {"$ref": "#/$defs/id"}]},
+        "setup_id": {"oneOf": [{"type": "null"}, {"$ref": "#/$defs/id"}]}, "stage_intent": {"oneOf": [{"type": "null"}, {"$ref": "#/$defs/id"}]},
+        "body_intent": {"oneOf": [{"type": "null"}, {"$ref": "#/$defs/id"}]}, "face_intent": {"oneOf": [{"type": "null"}, {"$ref": "#/$defs/id"}]},
+        "gaze_intent": {"oneOf": [{"type": "null"}, {"$ref": "#/$defs/id"}]}, "speech_intent": {"oneOf": [{"type": "null"}, {"$ref": "#/$defs/id"}]}
+      }
+    },
+    "checkpoint": {
+      "type": "object", "additionalProperties": false, "required": ["checkpoint_id", "media_time_ms", "reason", "state"],
+      "properties": {
+        "checkpoint_id": {"$ref": "#/$defs/id"}, "media_time_ms": {"$ref": "#/$defs/time"},
+        "reason": {"enum": ["time_zero", "chapter_boundary", "hard_setup", "source_discontinuity", "periodic"]}, "state": {"$ref": "#/$defs/checkpointState"}
+      }
+    },
+    "fallbackRecord": {
+      "type": "object", "additionalProperties": false,
+      "required": ["fallback_id", "cue_id", "requested_intent", "selected_intent", "selected_mapping_id", "fallback_path", "reason_code", "package_digest", "media_time_ms", "severity", "review_required"],
+      "properties": {
+        "fallback_id": {"$ref": "#/$defs/id"}, "cue_id": {"$ref": "#/$defs/id"}, "requested_intent": {"$ref": "#/$defs/id"},
+        "selected_intent": {"$ref": "#/$defs/id"}, "selected_mapping_id": {"oneOf": [{"type": "null"}, {"$ref": "#/$defs/id"}]},
+        "fallback_path": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"$ref": "#/$defs/id"}},
+        "reason_code": {"$ref": "#/$defs/id"}, "package_digest": {"$ref": "#/$defs/hash"}, "media_time_ms": {"$ref": "#/$defs/time"},
+        "severity": {"enum": ["info", "warning", "error"]}, "review_required": {"type": "boolean"}
+      }
+    }
+  }
+}

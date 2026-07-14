@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "license": "CC0-1.0",
+  "generator": "integer-square-pulse-v1",
+  "sample_rate_hz": 16000,
+  "channels": 1,
+  "sample_width_bytes": 2,
+  "duration_samples": 64000,
+  "pulse_interval_samples": 8000,
+  "pulse_duration_samples": 1600,
+  "pulse_amplitude": 12000
+}

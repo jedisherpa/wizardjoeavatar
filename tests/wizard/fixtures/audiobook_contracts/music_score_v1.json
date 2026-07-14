@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "music_score_id": "music:fixture-001",
+  "media_id": "media:sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "media_sha256": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "pcm_sha256": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+  "sample_rate_hz": 44100,
+  "duration_samples": 441000,
+  "analysis": {"pipeline_version": "music-analysis-v1", "decoder_build_sha256": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc", "config_sha256": "sha256:8888888888888888888888888888888888888888888888888888888888888888", "packages_sha256": "sha256:9999999999999999999999999999999999999999999999999999999999999999", "model_sha256": null},
+  "beats": [{"sample": 0, "confidence_milli": 900}],
+  "downbeats": [{"sample": 0, "confidence_milli": 850}],
+  "tempo_regions": [{"start_sample": 0, "end_sample": 441000, "bpm_milli": 120000, "confidence_milli": 900}],
+  "meter_regions": [{"start_sample": 0, "end_sample": 441000, "numerator": 4, "denominator": null, "confidence_milli": 620}],
+  "sections": [{"section_id": "sec-001", "start_sample": 0, "end_sample": 441000, "label": "unknown", "confidence_milli": 500}],
+  "onsets": [{"sample": 0, "strength_milli": 800}],
+  "loudness": {"integrated_lufs_centi": -1600, "lra_lu_centi": 800, "true_peak_dbtp_centi": -120},
+  "envelopes": {"hop_samples": 441, "rms_dbfs_centi": [], "onset_strength_milli": [], "bands_db_centi": []}
+}

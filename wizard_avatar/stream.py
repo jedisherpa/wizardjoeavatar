@@ -14,6 +14,8 @@ from .frame_hash import frame_hash
 from .frame_source import ProceduralWizardFrameSource
 from .models import CommandResult, WizardCellFrame, WizardCommand, WizardState
 from .protocol import encode_keyframe
+from .performance_application import PerformanceApplication
+from .media_session import MediaSessionAckV1, MediaSessionSnapshotV1
 from .runtime import AvatarRuntime, ReplayLog
 
 
@@ -33,6 +35,7 @@ class WizardFrameHub:
         self.frame_source = frame_source
         self.codec = codec
         self.runtime_epoch = "wizard-{}".format(uuid.uuid4().hex)
+        self.performance = PerformanceApplication(self.runtime_epoch)
         self.command_inbox = OrderedCommandInbox(self.runtime_epoch)
         self.replay_log = ReplayLog(
             {
@@ -127,7 +130,7 @@ class WizardFrameHub:
 
     def diagnostics_extra(self) -> dict:
         elapsed = max(0.001, time.perf_counter() - self._started_at) if self._started_at else 0.001
-        return {
+        diagnostics = {
             "subscriber_count": len(self._subscribers),
             "hub_actual_fps": self._published_frames / elapsed,
             "hub_queue_drops": self._queue_drops,
@@ -144,6 +147,22 @@ class WizardFrameHub:
             "replay_record_count": self.replay_log.record_count,
             "replay_sha256": self.replay_log.sha256(),
         }
+        diagnostics["media_performance"] = self.performance.diagnostics(time.perf_counter_ns() // 1000)
+        return diagnostics
+
+    async def accept_media_session(
+        self,
+        snapshot: MediaSessionSnapshotV1,
+        receipt_monotonic_us: Optional[int] = None,
+    ) -> MediaSessionAckV1:
+        await self.start()
+        receipt = receipt_monotonic_us if receipt_monotonic_us is not None else time.perf_counter_ns() // 1000
+        async with self._current_lock():
+            return self.performance.accept_snapshot(snapshot, receipt)
+
+    async def media_session_status(self) -> dict:
+        async with self._current_lock():
+            return dict(self.performance.diagnostics(time.perf_counter_ns() // 1000))
 
     def source_hash_history(self) -> list[dict]:
         return list(self._source_hash_history)
@@ -272,6 +291,7 @@ class WizardFrameHub:
         controller.state.state_revision = target_tick - 1
         controller.state.time_seconds = (target_tick - 1) / AvatarRuntime.TICK_RATE
         controller.advance_tick()
+        self.performance.apply(controller, time.perf_counter_ns() // 1000)
         authoritative_state = controller.current_state().as_public_dict()
         for command_id in reduced_command_ids:
             result = self._command_results[command_id]

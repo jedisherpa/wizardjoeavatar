@@ -1,0 +1,81 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://wizardjoe.local/schemas/media_asset_v1.schema.json",
+  "title": "MediaAssetV1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "media_id", "identity", "storage_ref", "display", "canonical_pcm", "external", "status"],
+  "properties": {
+    "schema_version": {"const": 1},
+    "media_id": {"type": "string", "pattern": "^media:sha256:[0-9a-f]{64}$"},
+    "identity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["source_sha256", "byte_length", "mime_type", "duration_ms", "media_kind"],
+      "properties": {
+        "source_sha256": {"$ref": "#/$defs/hash"},
+        "byte_length": {"type": "integer", "minimum": 1, "maximum": 9007199254740991},
+        "mime_type": {"type": "string", "pattern": "^[a-z0-9.+-]+/[a-z0-9.+-]+$", "maxLength": 127},
+        "duration_ms": {"$ref": "#/$defs/time"},
+        "media_kind": {"enum": ["audiobook", "music", "video", "speech", "unknown"]}
+      }
+    },
+    "storage_ref": {"$ref": "#/$defs/id"},
+    "display": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["title", "creator", "collection", "chapter_id"],
+      "properties": {
+        "title": {"type": "string", "minLength": 1, "maxLength": 1024},
+        "creator": {"oneOf": [{"type": "null"}, {"type": "string", "minLength": 1, "maxLength": 512}]},
+        "collection": {"oneOf": [{"type": "null"}, {"type": "string", "minLength": 1, "maxLength": 512}]},
+        "chapter_id": {"oneOf": [{"type": "null"}, {"$ref": "#/$defs/id"}]}
+      }
+    },
+    "canonical_pcm": {
+      "oneOf": [
+        {"type": "null"},
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["pcm_sha256", "sample_rate_hz", "channels", "sample_format", "duration_samples", "decoder_build_sha256", "decoder_arguments_sha256"],
+          "properties": {
+            "pcm_sha256": {"$ref": "#/$defs/hash"},
+            "sample_rate_hz": {"type": "integer", "minimum": 8000, "maximum": 384000},
+            "channels": {"type": "integer", "minimum": 1, "maximum": 32},
+            "sample_format": {"enum": ["s16le", "s24le", "s32le"]},
+            "duration_samples": {"$ref": "#/$defs/count"},
+            "decoder_build_sha256": {"$ref": "#/$defs/hash"},
+            "decoder_arguments_sha256": {"$ref": "#/$defs/hash"}
+          }
+        }
+      ]
+    },
+    "external": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["canonical_url", "url_source"],
+      "properties": {
+        "canonical_url": {"oneOf": [{"type": "null"}, {"type": "string", "pattern": "^https?://[^\\s]+$", "maxLength": 4096}]},
+        "url_source": {"oneOf": [{"type": "null"}, {"enum": ["provider", "metadata", "human", "imported"]}]}
+      }
+    },
+    "status": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["transcript", "analysis", "performance"],
+      "properties": {
+        "transcript": {"$ref": "#/$defs/status"},
+        "analysis": {"$ref": "#/$defs/status"},
+        "performance": {"$ref": "#/$defs/status"}
+      }
+    }
+  },
+  "$defs": {
+    "id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._:-]{0,127}$"},
+    "hash": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+    "time": {"type": "integer", "minimum": 0, "maximum": 9007199254740991},
+    "count": {"type": "integer", "minimum": 0, "maximum": 9007199254740991},
+    "status": {"enum": ["missing", "queued", "processing", "ready", "ready_with_warnings", "failed", "stale"]}
+  }
+}

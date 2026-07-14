@@ -1,0 +1,106 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://wizardjoe.local/schemas/music_score_v1.schema.json",
+  "title": "MusicScoreV1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "music_score_id", "media_id", "media_sha256", "pcm_sha256", "sample_rate_hz", "duration_samples", "analysis", "beats", "downbeats", "tempo_regions", "meter_regions", "sections", "onsets", "loudness", "envelopes"],
+  "properties": {
+    "schema_version": {"const": 1},
+    "music_score_id": {"type": "string", "pattern": "^music:[a-z0-9][a-z0-9._:-]{0,127}$"},
+    "media_id": {"type": "string", "pattern": "^media:sha256:[0-9a-f]{64}$"},
+    "media_sha256": {"$ref": "#/$defs/hash"},
+    "pcm_sha256": {"$ref": "#/$defs/hash"},
+    "sample_rate_hz": {"type": "integer", "minimum": 8000, "maximum": 384000},
+    "duration_samples": {"$ref": "#/$defs/count"},
+    "analysis": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["pipeline_version", "decoder_build_sha256", "config_sha256", "packages_sha256", "model_sha256"],
+      "properties": {
+        "pipeline_version": {"$ref": "#/$defs/id"},
+        "decoder_build_sha256": {"$ref": "#/$defs/hash"},
+        "config_sha256": {"$ref": "#/$defs/hash"},
+        "packages_sha256": {"$ref": "#/$defs/hash"},
+        "model_sha256": {"oneOf": [{"type": "null"}, {"$ref": "#/$defs/hash"}]}
+      }
+    },
+    "beats": {"type": "array", "items": {"$ref": "#/$defs/timedConfidence"}},
+    "downbeats": {"type": "array", "items": {"$ref": "#/$defs/timedConfidence"}},
+    "tempo_regions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["start_sample", "end_sample", "bpm_milli", "confidence_milli"],
+        "properties": {
+          "start_sample": {"$ref": "#/$defs/count"}, "end_sample": {"$ref": "#/$defs/count"},
+          "bpm_milli": {"type": "integer", "minimum": 1, "maximum": 1000000}, "confidence_milli": {"$ref": "#/$defs/milli"}
+        }
+      }
+    },
+    "meter_regions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["start_sample", "end_sample", "numerator", "denominator", "confidence_milli"],
+        "properties": {
+          "start_sample": {"$ref": "#/$defs/count"}, "end_sample": {"$ref": "#/$defs/count"},
+          "numerator": {"oneOf": [{"type": "null"}, {"type": "integer", "minimum": 1, "maximum": 32}]},
+          "denominator": {"oneOf": [{"type": "null"}, {"enum": [1, 2, 4, 8, 16, 32]}]},
+          "confidence_milli": {"$ref": "#/$defs/milli"}
+        }
+      }
+    },
+    "sections": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["section_id", "start_sample", "end_sample", "label", "confidence_milli"],
+        "properties": {
+          "section_id": {"$ref": "#/$defs/id"}, "start_sample": {"$ref": "#/$defs/count"}, "end_sample": {"$ref": "#/$defs/count"},
+          "label": {"enum": ["unknown", "intro", "verse", "pre_chorus", "chorus", "bridge", "breakdown", "drop", "solo", "outro", "speech"]},
+          "confidence_milli": {"$ref": "#/$defs/milli"}
+        }
+      }
+    },
+    "onsets": {
+      "type": "array",
+      "items": {
+        "type": "object", "additionalProperties": false, "required": ["sample", "strength_milli"],
+        "properties": {"sample": {"$ref": "#/$defs/count"}, "strength_milli": {"$ref": "#/$defs/milli"}}
+      }
+    },
+    "loudness": {
+      "type": "object", "additionalProperties": false,
+      "required": ["integrated_lufs_centi", "lra_lu_centi", "true_peak_dbtp_centi"],
+      "properties": {
+        "integrated_lufs_centi": {"type": "integer", "minimum": -10000, "maximum": 0},
+        "lra_lu_centi": {"type": "integer", "minimum": 0, "maximum": 10000},
+        "true_peak_dbtp_centi": {"type": "integer", "minimum": -10000, "maximum": 1000}
+      }
+    },
+    "envelopes": {
+      "type": "object", "additionalProperties": false,
+      "required": ["hop_samples", "rms_dbfs_centi", "onset_strength_milli", "bands_db_centi"],
+      "properties": {
+        "hop_samples": {"type": "integer", "minimum": 1, "maximum": 9007199254740991},
+        "rms_dbfs_centi": {"type": "array", "items": {"type": "integer", "minimum": -20000, "maximum": 0}},
+        "onset_strength_milli": {"type": "array", "items": {"$ref": "#/$defs/milli"}},
+        "bands_db_centi": {"type": "array", "items": {"type": "integer", "minimum": -20000, "maximum": 0}}
+      }
+    }
+  },
+  "$defs": {
+    "id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._:-]{0,127}$"},
+    "hash": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+    "count": {"type": "integer", "minimum": 0, "maximum": 9007199254740991},
+    "milli": {"type": "integer", "minimum": 0, "maximum": 1000},
+    "timedConfidence": {
+      "type": "object", "additionalProperties": false, "required": ["sample", "confidence_milli"],
+      "properties": {"sample": {"$ref": "#/$defs/count"}, "confidence_milli": {"$ref": "#/$defs/milli"}}
+    }
+  }
+}

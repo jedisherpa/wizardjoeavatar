@@ -1,0 +1,9 @@
+{
+  "schema_version": 1,
+  "vectors": [
+    {"id": "null", "value": null, "canonical_utf8": "null", "sha256": "sha256:74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"},
+    {"id": "object-order-and-array", "value": {"b": [true, false, null], "a": 1}, "canonical_utf8": "{\"a\":1,\"b\":[true,false,null]}", "sha256": "sha256:39c40f48225c0bda582175eb3e5f00cc9e58928b59b1cd3d6385276cca4da0d5"},
+    {"id": "unicode-code-point-order", "value": {"\ud83d\ude00": "astral", "\ue000": "bmp", "\u00e9": "composed"}, "canonical_utf8": "{\"\u00e9\":\"composed\",\"\ue000\":\"bmp\",\"\ud83d\ude00\":\"astral\"}", "sha256": "sha256:7b88c1955c5d2b999816379b84168be7dd99e013d08df62b0263b94ab10be83c"},
+    {"id": "safe-integer-boundaries", "value": {"max": 9007199254740991, "min": -9007199254740991}, "canonical_utf8": "{\"max\":9007199254740991,\"min\":-9007199254740991}", "sha256": "sha256:63546eb60913dcb1cdd5118f7bf4885beed344af930c8a9d5f38fad243fd4819"}
+  ]
+}

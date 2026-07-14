@@ -1,0 +1,9 @@
+{
+  "schema_version": 1,
+  "edit_set_id": "edits:fixture-001",
+  "base_score_sha256": "sha256:1313131313131313131313131313131313131313131313131313131313131313",
+  "revision": 1,
+  "operations": [{"operation_id": "op-0001", "op": "replace", "cue_id": "ch-001.beat-001.gesture-001", "field": "intent", "old_value_sha256": "sha256:1414141414141414141414141414141414141414141414141414141414141414", "value": "sincere", "reason_code": "director_choice", "locked": true}],
+  "parent_edit_set_sha256": null,
+  "actor": {"kind": "human", "actor_id": "local:opaque"}
+}

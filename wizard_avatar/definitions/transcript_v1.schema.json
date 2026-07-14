@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://wizardjoe.local/schemas/transcript_v1.schema.json",
+  "title": "TranscriptV1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "transcript_id", "media_id", "source_sha256", "display_sha256", "spoken_normalized_sha256", "revision", "language", "source_kind", "chapters", "blocks", "provenance"],
+  "properties": {
+    "schema_version": {"const": 1},
+    "transcript_id": {"$ref": "#/$defs/transcriptId"},
+    "media_id": {"$ref": "#/$defs/mediaId"},
+    "source_sha256": {"$ref": "#/$defs/hash"},
+    "display_sha256": {"$ref": "#/$defs/hash"},
+    "spoken_normalized_sha256": {"$ref": "#/$defs/hash"},
+    "revision": {"type": "integer", "minimum": 1, "maximum": 9007199254740991},
+    "language": {"type": "string", "pattern": "^[a-z]{2,3}(-[A-Z]{2})?$", "maxLength": 16},
+    "source_kind": {"enum": ["provided", "provider_tts", "local_asr", "human_corrected"]},
+    "chapters": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["chapter_id", "order", "title", "block_ids"],
+        "properties": {
+          "chapter_id": {"$ref": "#/$defs/id"},
+          "order": {"type": "integer", "minimum": 0, "maximum": 9007199254740991},
+          "title": {"oneOf": [{"type": "null"}, {"type": "string", "minLength": 1, "maxLength": 1024}]},
+          "block_ids": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"$ref": "#/$defs/id"}}
+        }
+      }
+    },
+    "blocks": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["block_id", "chapter_id", "order", "kind", "display_text", "spoken_normalized_text"],
+        "properties": {
+          "block_id": {"$ref": "#/$defs/id"},
+          "chapter_id": {"$ref": "#/$defs/id"},
+          "order": {"type": "integer", "minimum": 0, "maximum": 9007199254740991},
+          "kind": {"enum": ["heading", "paragraph", "dialogue", "verse", "list_item", "paratext"]},
+          "display_text": {"type": "string", "minLength": 1},
+          "spoken_normalized_text": {"type": "string", "minLength": 1}
+        }
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["importer_id", "normalizer_version", "parent_transcript_id"],
+      "properties": {
+        "importer_id": {"$ref": "#/$defs/id"},
+        "normalizer_version": {"$ref": "#/$defs/id"},
+        "parent_transcript_id": {"oneOf": [{"type": "null"}, {"$ref": "#/$defs/transcriptId"}]}
+      }
+    }
+  },
+  "$defs": {
+    "id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._:-]{0,127}$"},
+    "hash": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+    "mediaId": {"type": "string", "pattern": "^media:sha256:[0-9a-f]{64}$"},
+    "transcriptId": {"type": "string", "pattern": "^transcript:[a-z0-9][a-z0-9._:-]{0,127}$"}
+  }
+}

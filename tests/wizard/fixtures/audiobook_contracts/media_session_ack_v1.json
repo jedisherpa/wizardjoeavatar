@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "connector_session_id": "00000000-0000-4000-8000-000000000002",
+  "accepted_sequence": 42,
+  "accepted_media_epoch": 3,
+  "disposition": "accepted",
+  "wizard_runtime_epoch": "wizard-runtime-fixture-001",
+  "resync_required": false,
+  "scheduler_state": "playing",
+  "error": null,
+  "capabilities": {"media_session_schema": 1, "max_snapshot_hz": 8, "supported_rate_milli": [500, 750, 1000, 1250, 1500, 2000], "motion_profiles": ["full", "reduced", "still"]}
+}

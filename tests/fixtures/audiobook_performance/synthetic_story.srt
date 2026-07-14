@@ -1,0 +1,11 @@
+1
+00:00:00,000 --> 00:00:02,000
+At sunrise, the brass observatory opened its quiet shutters.
+
+2
+00:00:02,000 --> 00:00:04,000
+"Is the blue dial awake?" asked Mira.
+
+3
+00:00:04,000 --> 00:00:06,000
+The dial chimed once, and the room became still.

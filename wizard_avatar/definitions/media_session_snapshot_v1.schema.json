@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://wizardjoe.local/schemas/media_session_snapshot_v1.schema.json",
+  "title": "MediaSessionSnapshotV1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "message_id", "connector_session_id", "sequence", "media_epoch", "cause", "sampled_at_monotonic_ms", "media", "playback", "performance"],
+  "properties": {
+    "schema_version": {"const": 1},
+    "message_id": {"$ref": "#/$defs/uuid_v4"},
+    "connector_session_id": {"$ref": "#/$defs/uuid_v4"},
+    "sequence": {"$ref": "#/$defs/count"},
+    "media_epoch": {"$ref": "#/$defs/count"},
+    "cause": {"enum": ["initial", "mount", "loadedmetadata", "play", "play_intent", "playing", "pause", "waiting", "stalled", "seeking", "seeked", "ratechange", "durationchange", "ended", "emptied", "error", "stop", "trackchange", "chapterchange", "visibilitychange", "preferencechange", "heartbeat", "pagehide", "reconnect"]},
+    "sampled_at_monotonic_ms": {"$ref": "#/$defs/count"},
+    "media": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["media_id", "media_sha256", "kind", "source_slot", "source_kind", "book_id", "chapter_id", "duration_ms"],
+      "properties": {
+        "media_id": {"$ref": "#/$defs/id"},
+        "media_sha256": {"oneOf": [{"type": "null"}, {"$ref": "#/$defs/hash"}]},
+        "kind": {"enum": ["audiobook", "podcast", "music", "video", "speech", "tts"]},
+        "source_slot": {"enum": ["main", "speech"]},
+        "source_kind": {"enum": ["library", "podcast", "generated", "studio_chapter", "managed_import", "linked_local", "speech", "tts", "speaker"]},
+        "book_id": {"oneOf": [{"type": "null"}, {"$ref": "#/$defs/id"}]},
+        "chapter_id": {"oneOf": [{"type": "null"}, {"$ref": "#/$defs/id"}]},
+        "duration_ms": {"oneOf": [{"type": "null"}, {"type": "integer", "minimum": 1, "maximum": 9007199254740991}]}
+      }
+    },
+    "playback": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["state", "position_ms", "rate_milli", "ready_state", "seeking"],
+      "properties": {
+        "state": {"enum": ["empty", "loading", "paused", "playing", "buffering", "seeking", "ended", "stopped", "error"]},
+        "position_ms": {"$ref": "#/$defs/count"},
+        "rate_milli": {"enum": [500, 750, 1000, 1250, 1500, 2000]},
+        "ready_state": {"type": "integer", "minimum": 0, "maximum": 4},
+        "seeking": {"type": "boolean"}
+      }
+    },
+    "performance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["mode", "score_id", "score_revision", "score_sha256", "character_id", "character_package_sha256", "intensity_milli", "motion_profile", "disabled_channels"],
+      "properties": {
+        "mode": {"enum": ["narrative", "music", "speech", "none"]},
+        "score_id": {"oneOf": [{"type": "null"}, {"$ref": "#/$defs/id"}]},
+        "score_revision": {"oneOf": [{"type": "null"}, {"type": "integer", "minimum": 1, "maximum": 9007199254740991}]},
+        "score_sha256": {"oneOf": [{"type": "null"}, {"$ref": "#/$defs/hash"}]},
+        "character_id": {"$ref": "#/$defs/id"},
+        "character_package_sha256": {"oneOf": [{"type": "null"}, {"$ref": "#/$defs/hash"}]},
+        "intensity_milli": {"type": "integer", "minimum": 0, "maximum": 1000},
+        "motion_profile": {"enum": ["full", "reduced", "still"]},
+        "disabled_channels": {"type": "array", "uniqueItems": true, "items": {"enum": ["camera_motion", "dance", "eyes", "face", "flight", "locomotion", "mouth", "scene_flash", "simulated_depth", "upper_body", "whole_body_pulse"]}}
+      }
+    }
+  },
+  "$defs": {
+    "uuid_v4": {"type": "string", "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"},
+    "id": {"type": "string", "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._:-]{0,127}$"},
+    "hash": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+    "count": {"type": "integer", "minimum": 0, "maximum": 9007199254740991}
+  }
+}
