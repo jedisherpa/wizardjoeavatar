@@ -26,6 +26,7 @@ pub const MAX_POLICY_HOLD_TICKS: u64 = 600;
 pub const MAX_COMPLETED_OPERATIONS: usize = 64;
 pub const MAX_ACTIVE_SAFETY_CLAMPS: usize = 32;
 pub const MAX_COMPLETED_SAFETY_CLAMPS: usize = 64;
+pub const MAX_RETIRED_SESSIONS: usize = 1_024;
 
 const THINKING_HOLD_TICKS: u64 = 180;
 const RESPONSE_HOLD_TICKS: u64 = 120;
@@ -122,6 +123,8 @@ pub enum ChatPolicyError {
     SessionMismatch,
     #[error("session {0} was already completed and cannot be reused")]
     SessionIdRetired(SessionId),
+    #[error("retired session identity history capacity exceeded")]
+    SessionHistoryCapacity,
     #[error("turn correlation mismatch")]
     TurnMismatch,
     #[error("chat command is missing session/turn correlation")]
@@ -270,6 +273,7 @@ pub struct ChatPolicyReducerV1 {
     active_attention_hold: Option<ActiveAttentionHoldV1>,
     active_safety_clamps: Vec<ActiveSafetyClampV1>,
     completed_safety_clamps: Vec<ActiveSafetyClampV1>,
+    retired_session_ids: Vec<SessionId>,
     last_session_end: Option<CompletedSessionEndV1>,
     last_session_locale: Option<SessionLocaleMarkerV1>,
     last_conversation_retry: Option<ConversationRetryV1>,
@@ -296,6 +300,8 @@ struct UncheckedChatPolicyReducerV1 {
     active_attention_hold: Option<ActiveAttentionHoldV1>,
     active_safety_clamps: Vec<ActiveSafetyClampV1>,
     completed_safety_clamps: Vec<ActiveSafetyClampV1>,
+    #[serde(default)]
+    retired_session_ids: Vec<SessionId>,
     last_session_end: Option<CompletedSessionEndV1>,
     last_session_locale: Option<SessionLocaleMarkerV1>,
     last_conversation_retry: Option<ConversationRetryV1>,
@@ -324,6 +330,7 @@ impl TryFrom<UncheckedChatPolicyReducerV1> for ChatPolicyReducerV1 {
             active_attention_hold: value.active_attention_hold,
             active_safety_clamps: value.active_safety_clamps,
             completed_safety_clamps: value.completed_safety_clamps,
+            retired_session_ids: value.retired_session_ids,
             last_session_end: value.last_session_end,
             last_session_locale: value.last_session_locale,
             last_conversation_retry: value.last_conversation_retry,
@@ -366,6 +373,7 @@ impl ChatPolicyReducerV1 {
             active_attention_hold: None,
             active_safety_clamps: Vec::new(),
             completed_safety_clamps: Vec::new(),
+            retired_session_ids: Vec::new(),
             last_session_end: None,
             last_session_locale: None,
             last_conversation_retry: None,
@@ -416,6 +424,12 @@ impl ChatPolicyReducerV1 {
             > MAX_COMPLETED_SAFETY_CLAMPS
         {
             return Err("safety clamp identity history reservation exceeded".to_string());
+        }
+        if self.retired_session_ids.len() > MAX_RETIRED_SESSIONS {
+            return Err("retired session identity history bound exceeded".to_string());
+        }
+        if has_duplicates_by(&self.retired_session_ids, PartialEq::eq) {
+            return Err("duplicate retired session identity".to_string());
         }
         if has_duplicates_by(&self.active_safety_clamps, PartialEq::eq)
             || has_duplicates_by(&self.completed_safety_clamps, PartialEq::eq)
@@ -1100,11 +1114,7 @@ impl ChatPolicyReducerV1 {
         }
 
         if matches!(input.event, ChatEventV1::SessionStarted { .. }) {
-            if self
-                .last_session_end
-                .as_ref()
-                .is_some_and(|completed| completed.session_id == input.session_id)
-            {
+            if self.retired_session_ids.contains(&input.session_id) {
                 return Err(ChatPolicyError::SessionIdRetired(input.session_id.clone()));
             }
             if let Some(active_session) = self.semantic.session.state.session_id.as_ref() {
@@ -1409,6 +1419,12 @@ impl ChatPolicyReducerV1 {
             turn_id: input.turn_id.clone(),
             reason: *reason,
         };
+        if !self.retired_session_ids.contains(&input.session_id) {
+            if self.retired_session_ids.len() >= MAX_RETIRED_SESSIONS {
+                return Err(ChatPolicyError::SessionHistoryCapacity);
+            }
+            self.retired_session_ids.push(input.session_id.clone());
+        }
         let defaults = AvatarSemanticStateV1::new(self.semantic.character_id.clone());
         let mobility = self.semantic.mobility.state.clone();
         let mut control = self.semantic.control.state.clone();

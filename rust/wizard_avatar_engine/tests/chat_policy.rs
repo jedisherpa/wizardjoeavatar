@@ -1310,6 +1310,27 @@ fn safety_history_never_evicts_or_reuses_a_retired_identity() {
             safety_event("clamp-history-0", SafetyScope::Speech, true),
         ))
         .expect("a new session owns a fresh bounded clamp identity epoch");
+    reducer
+        .reduce(input_for(
+            reducer.next_test_sequence(),
+            reducer.next_test_tick(),
+            "session-2",
+            "turn-2",
+            ChatEventV1::SessionEnded {
+                reason: SessionEndReason::UserEnded,
+            },
+        ))
+        .unwrap();
+    let second_ended = serde_json::to_vec(&reducer).unwrap();
+    assert_eq!(
+        reducer.reduce(input(
+            reducer.next_test_sequence(),
+            reducer.next_test_tick(),
+            ChatEventV1::SessionStarted { locale: None },
+        )),
+        Err(ChatPolicyError::SessionIdRetired(session_id()))
+    );
+    assert_eq!(serde_json::to_vec(&reducer).unwrap(), second_ended);
 }
 
 #[test]
@@ -1430,6 +1451,16 @@ fn reducer_snapshot_deserialization_enforces_bounds_uniqueness_and_invariants() 
         serde_json::from_value::<ChatPolicyReducerV1>(valid.clone()).unwrap(),
         reducer
     );
+
+    let retired = serde_json::json!("retired-session");
+    let mut duplicate_sessions = valid.clone();
+    duplicate_sessions["retired_session_ids"] =
+        serde_json::Value::Array(vec![retired.clone(), retired.clone()]);
+    assert!(serde_json::from_value::<ChatPolicyReducerV1>(duplicate_sessions).is_err());
+    let mut oversized_sessions = valid.clone();
+    oversized_sessions["retired_session_ids"] =
+        serde_json::Value::Array(vec![retired; MAX_RETIRED_SESSIONS + 1]);
+    assert!(serde_json::from_value::<ChatPolicyReducerV1>(oversized_sessions).is_err());
 
     let active = valid["active_safety_clamps"][0].clone();
     let mut oversized = valid.clone();
@@ -2804,4 +2835,4 @@ fn out_of_order_and_failed_events_are_atomic_and_replay_hash_is_stable() {
 }
 
 const EXPECTED_REPLAY_HASH: &str =
-    "12baaa7658baf911104010f23a7553a529b1ec41473512dbad0a635490ad4b6c";
+    "9d348765120b8d42995a60afa87833d4af779a0b73c3fbc407a117e35d369426";
