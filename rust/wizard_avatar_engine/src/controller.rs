@@ -20,6 +20,95 @@ pub const WORLD_Z_FAR: f32 = 10.0;
 pub const SIMULATION_HZ: f32 = 60.0;
 pub const SIMULATION_DT: f32 = 1.0 / SIMULATION_HZ;
 pub const STRIDE_LENGTH: f32 = 0.85;
+#[derive(Clone, Copy, Debug, Eq, Hash, Ord, PartialEq, PartialOrd, Serialize, Deserialize)]
+#[serde(rename_all = "snake_case")]
+pub enum ControllerCommandKind {
+    Move,
+    MoveRelative,
+    Path,
+    Circle,
+    FigureEight,
+    Face,
+    Action,
+    Pose,
+    PoseClip,
+    Expression,
+    Speak,
+    Mouth,
+    Stop,
+    Reset,
+    ReturnToCenter,
+    WalkLeft,
+    WalkRight,
+    WalkForward,
+    WalkBackward,
+}
+
+impl ControllerCommandKind {
+    pub const ALL: [Self; 19] = [
+        Self::Move,
+        Self::MoveRelative,
+        Self::Path,
+        Self::Circle,
+        Self::FigureEight,
+        Self::Face,
+        Self::Action,
+        Self::Pose,
+        Self::PoseClip,
+        Self::Expression,
+        Self::Speak,
+        Self::Mouth,
+        Self::Stop,
+        Self::Reset,
+        Self::ReturnToCenter,
+        Self::WalkLeft,
+        Self::WalkRight,
+        Self::WalkForward,
+        Self::WalkBackward,
+    ];
+
+    #[must_use]
+    pub fn from_wire_name(value: &str) -> Option<Self> {
+        match value {
+            "move" => Some(Self::Move),
+            "move_relative" => Some(Self::MoveRelative),
+            "path" => Some(Self::Path),
+            "circle" => Some(Self::Circle),
+            "figure_eight" | "figure-eight" => Some(Self::FigureEight),
+            "face" => Some(Self::Face),
+            "action" => Some(Self::Action),
+            "pose" => Some(Self::Pose),
+            "pose_clip" => Some(Self::PoseClip),
+            "expression" => Some(Self::Expression),
+            "speak" => Some(Self::Speak),
+            "mouth" => Some(Self::Mouth),
+            "stop" => Some(Self::Stop),
+            "reset" => Some(Self::Reset),
+            "return_to_center" => Some(Self::ReturnToCenter),
+            "walk_left" => Some(Self::WalkLeft),
+            "walk_right" => Some(Self::WalkRight),
+            "walk_forward" => Some(Self::WalkForward),
+            "walk_backward" => Some(Self::WalkBackward),
+            _ => None,
+        }
+    }
+}
+
+pub const PROCEDURAL_CONTROLLER_COMMANDS: [ControllerCommandKind; 13] = [
+    ControllerCommandKind::Move,
+    ControllerCommandKind::MoveRelative,
+    ControllerCommandKind::Path,
+    ControllerCommandKind::Circle,
+    ControllerCommandKind::FigureEight,
+    ControllerCommandKind::Face,
+    ControllerCommandKind::Stop,
+    ControllerCommandKind::Reset,
+    ControllerCommandKind::ReturnToCenter,
+    ControllerCommandKind::WalkLeft,
+    ControllerCommandKind::WalkRight,
+    ControllerCommandKind::WalkForward,
+    ControllerCommandKind::WalkBackward,
+];
 
 #[derive(Clone, Debug, Deserialize)]
 pub struct WizardCommand {
@@ -162,37 +251,46 @@ impl WizardAvatarController {
     }
 
     fn apply_command_inner(&mut self, command: WizardCommand) -> Result<(), String> {
-        match command.command_type.as_str() {
-            "move" => self.cmd_move(&command.payload),
-            "move_relative" => self.cmd_move_relative(&command.payload),
-            "path" => self.cmd_path(&command.payload),
-            "circle" => self.cmd_circle(&command.payload),
-            "figure_eight" | "figure-eight" => self.cmd_figure_eight(&command.payload),
-            "face" => self.cmd_face(&command.payload),
-            "action" => self.cmd_action(&command.payload),
-            "pose" => self.cmd_pose(&command.payload),
-            "pose_clip" => self.cmd_pose_clip(&command.payload),
-            "expression" => self.cmd_expression(&command.payload),
-            "speak" => self.cmd_speak(&command.payload),
-            "mouth" => self.cmd_mouth(&command.payload),
-            "stop" => {
-                self.stop_locomotion();
+        let kind = ControllerCommandKind::from_wire_name(&command.command_type)
+            .ok_or_else(|| format!("unsupported command: {}", command.command_type))?;
+        match kind {
+            ControllerCommandKind::Move => self.cmd_move(&command.payload),
+            ControllerCommandKind::MoveRelative => self.cmd_move_relative(&command.payload),
+            ControllerCommandKind::Path => self.cmd_path(&command.payload),
+            ControllerCommandKind::Circle => self.cmd_circle(&command.payload),
+            ControllerCommandKind::FigureEight => self.cmd_figure_eight(&command.payload),
+            ControllerCommandKind::Face => self.cmd_face(&command.payload),
+            ControllerCommandKind::Action => self.cmd_action(&command.payload),
+            ControllerCommandKind::Pose => self.cmd_pose(&command.payload),
+            ControllerCommandKind::PoseClip => self.cmd_pose_clip(&command.payload),
+            ControllerCommandKind::Expression => self.cmd_expression(&command.payload),
+            ControllerCommandKind::Speak => self.cmd_speak(&command.payload),
+            ControllerCommandKind::Mouth => self.cmd_mouth(&command.payload),
+            ControllerCommandKind::Stop => {
+                self.enter_safe_idle();
                 Ok(())
             }
-            "reset" => {
+            ControllerCommandKind::Reset => {
                 let reconnect_count = self.state.reconnect_count;
                 *self = Self::default();
                 self.state.reconnect_count = reconnect_count + 1;
                 Ok(())
             }
-            "return_to_center" => {
+            ControllerCommandKind::ReturnToCenter => {
                 self.move_to(WorldPoint { x: 0.0, z: 5.0 }, self.movement.max_speed)
             }
-            "walk_left" => self.move_relative(-number(&command.payload, "distance", 1.5)?, 0.0),
-            "walk_right" => self.move_relative(number(&command.payload, "distance", 1.5)?, 0.0),
-            "walk_forward" => self.move_relative(0.0, -number(&command.payload, "distance", 1.5)?),
-            "walk_backward" => self.move_relative(0.0, number(&command.payload, "distance", 1.5)?),
-            other => Err(format!("unsupported command: {other}")),
+            ControllerCommandKind::WalkLeft => {
+                self.move_relative(-number(&command.payload, "distance", 1.5)?, 0.0)
+            }
+            ControllerCommandKind::WalkRight => {
+                self.move_relative(number(&command.payload, "distance", 1.5)?, 0.0)
+            }
+            ControllerCommandKind::WalkForward => {
+                self.move_relative(0.0, -number(&command.payload, "distance", 1.5)?)
+            }
+            ControllerCommandKind::WalkBackward => {
+                self.move_relative(0.0, number(&command.payload, "distance", 1.5)?)
+            }
         }
     }
 
@@ -551,6 +649,42 @@ impl WizardAvatarController {
         self.movement.desired_velocity = Velocity { x: 0.0, z: 0.0 };
         self.state.target_point = None;
         self.channels.note_locomotion_change();
+    }
+
+    fn enter_safe_idle(&mut self) {
+        self.stop_locomotion();
+        self.movement.current_speed = 0.0;
+        self.state.velocity = Velocity { x: 0.0, z: 0.0 };
+        self.state.speed_ratio = 0.0;
+        self.state.locomotion = Locomotion::Idle;
+        self.state.planted_foot = PlantedFoot::Both;
+
+        self.pose_clip.clear(&mut self.state);
+        let presented = self
+            .pose_playback
+            .presented_pose()
+            .map(str::to_owned)
+            .or_else(|| self.state.pose_id.clone());
+        self.pose_playback.clear(&mut self.state);
+        if let Some(presented) = presented {
+            self.pose_playback.return_to_direction(
+                pose_id_for_direction(self.state.facing),
+                presented,
+                self.state.simulation_tick,
+                DEFAULT_POSE_TRANSITION_TICKS,
+            );
+            self.pose_playback
+                .step(self.state.simulation_tick, &mut self.state);
+        } else {
+            self.pose_playback.clear(&mut self.state);
+        }
+
+        self.channels.settle_safe_idle(self.state.simulation_tick);
+        self.state.speech_id = None;
+        self.state.speech_until = self.state.time_seconds;
+        self.state.action_until = self.state.time_seconds;
+        self.state.mouth = MouthShape::Closed;
+        self.state.blink_phase = blink_phase(self.state.time_seconds);
     }
 
     fn step_locomotion(&mut self) {

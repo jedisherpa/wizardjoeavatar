@@ -1,3 +1,4 @@
+use crate::capability_manifest::wizard_capability_document;
 use crate::controller::WizardCommand;
 use crate::frame_source::ProceduralWizardFrameSource;
 use crate::hub::AvatarFrameHub;
@@ -5,7 +6,7 @@ use anyhow::Context;
 use axum::extract::ws::{Message, WebSocket, WebSocketUpgrade};
 use axum::extract::{Query, State};
 use axum::http::StatusCode;
-use axum::response::{Html, IntoResponse};
+use axum::response::{Html, IntoResponse, Response};
 use axum::routing::{get, post};
 use axum::{Json, Router};
 use futures_util::{SinkExt, StreamExt};
@@ -56,6 +57,8 @@ pub fn app(source: ProceduralWizardFrameSource) -> Router {
             get(reference_avatar_pose_cells_json),
         )
         .route("/api/avatar/wizard/state", get(state))
+        .route("/api/avatar/wizard/v2/capabilities", get(capabilities))
+        .route("/api/avatar/wizard/capabilities", get(capabilities))
         .route("/api/avatar/wizard/move", post(command_move))
         .route("/api/avatar/wizard/walk-left", post(command_walk_left))
         .route("/api/avatar/wizard/walk-right", post(command_walk_right))
@@ -156,6 +159,20 @@ async fn state(State(app): State<AppState>) -> Json<Value> {
         "state": state,
         "diagnostics": diagnostics,
     }))
+}
+
+async fn capabilities() -> Response {
+    match wizard_capability_document() {
+        Ok(document) => Json(document).into_response(),
+        Err(error) => (
+            StatusCode::INTERNAL_SERVER_ERROR,
+            Json(json!({
+                "error": "capability_manifest_unavailable",
+                "message": error,
+            })),
+        )
+            .into_response(),
+    }
 }
 
 async fn command_move(

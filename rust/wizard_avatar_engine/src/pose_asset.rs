@@ -12,9 +12,17 @@ use serde::Deserialize;
 use sha2::{Digest, Sha256};
 use std::collections::{BTreeMap, BTreeSet};
 use std::io::Read;
+use std::sync::OnceLock;
 
 pub const IMPORTED_POSE_SCHEMA_VERSION: u32 = 4;
 pub const IMPORTED_POSE_COMPILER_ID: &str = "wizard-avatar-pose-tool-rust-v4";
+
+const EMBEDDED_POSE_ARCHIVE_GZIP: &[u8] = include_bytes!(concat!(
+    env!("CARGO_MANIFEST_DIR"),
+    "/assets/wizard_pose_library.v4.json.gz"
+));
+
+static EMBEDDED_POSE_ARCHIVE_SHA256: OnceLock<String> = OnceLock::new();
 
 #[derive(Clone, Copy, Debug, Deserialize)]
 pub struct AssetPoint {
@@ -220,16 +228,18 @@ pub struct ImportedPoseLibrary {
 }
 
 pub fn load_embedded_pose_library() -> Result<ImportedPoseLibrary, String> {
-    const GZIP: &[u8] = include_bytes!(concat!(
-        env!("CARGO_MANIFEST_DIR"),
-        "/assets/wizard_pose_library.v4.json.gz"
-    ));
-    let mut decoder = GzDecoder::new(GZIP);
+    let mut decoder = GzDecoder::new(EMBEDDED_POSE_ARCHIVE_GZIP);
     let mut json = String::new();
     decoder
         .read_to_string(&mut json)
         .map_err(|error| format!("failed to decompress embedded pose archive: {error}"))?;
     parse_imported_pose_library(&json)
+}
+
+#[must_use]
+pub fn embedded_pose_archive_sha256() -> &'static str {
+    EMBEDDED_POSE_ARCHIVE_SHA256
+        .get_or_init(|| format!("{:x}", Sha256::digest(EMBEDDED_POSE_ARCHIVE_GZIP)))
 }
 
 pub fn parse_imported_pose_library(json: &str) -> Result<ImportedPoseLibrary, String> {

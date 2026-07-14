@@ -128,7 +128,7 @@ impl FromStr for Direction {
     }
 }
 
-#[derive(Clone, Copy, Debug, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Clone, Copy, Debug, Hash, Ord, PartialEq, Eq, PartialOrd, Serialize, Deserialize)]
 #[serde(rename_all = "snake_case")]
 pub enum Expression {
     Neutral,
@@ -164,6 +164,19 @@ impl FromStr for Expression {
 }
 
 impl Expression {
+    pub const ALL: [Self; 10] = [
+        Self::Neutral,
+        Self::Happy,
+        Self::Thinking,
+        Self::Surprised,
+        Self::Worried,
+        Self::Amused,
+        Self::Confident,
+        Self::Focused,
+        Self::Skeptical,
+        Self::Explaining,
+    ];
+
     #[must_use]
     pub const fn as_str(self) -> &'static str {
         match self {
@@ -192,6 +205,33 @@ pub enum Action {
     Pointing,
     MagicCast,
     Reaction,
+}
+
+impl Action {
+    pub const ALL: [Self; 8] = [
+        Self::Idle,
+        Self::Speaking,
+        Self::Explaining,
+        Self::Walking,
+        Self::Thinking,
+        Self::Pointing,
+        Self::MagicCast,
+        Self::Reaction,
+    ];
+
+    #[must_use]
+    pub const fn as_str(self) -> &'static str {
+        match self {
+            Self::Idle => "idle",
+            Self::Speaking => "speaking",
+            Self::Explaining => "explaining",
+            Self::Walking => "walking",
+            Self::Thinking => "thinking",
+            Self::Pointing => "pointing",
+            Self::MagicCast => "magic_cast",
+            Self::Reaction => "reaction",
+        }
+    }
 }
 
 impl FromStr for Action {
@@ -241,12 +281,16 @@ impl FromStr for MouthShape {
     }
 }
 
-#[derive(Clone, Copy, Debug, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Clone, Copy, Debug, Hash, Ord, PartialEq, Eq, PartialOrd, Serialize, Deserialize)]
 #[serde(rename_all = "snake_case")]
 pub enum Locomotion {
     Idle,
     Walking,
     Turn,
+}
+
+impl Locomotion {
+    pub const ALL: [Self; 3] = [Self::Idle, Self::Walking, Self::Turn];
 }
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Serialize, Deserialize)]
