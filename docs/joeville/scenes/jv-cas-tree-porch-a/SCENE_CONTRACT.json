@@ -1,0 +1,53 @@
+{
+  "base": "codex/crystail-character",
+  "branch": "codex/joeville-scene-castle-tree-porch-a",
+  "camera": "Portrait reference angle along the upper timber porch toward the gable door",
+  "corrections": [
+    "Generate a new horizontal 16:9 master from this reference; never stretch portrait art",
+    "Preserve pine/gable/door geometry",
+    "Create reverse and door-facing coverage"
+  ],
+  "layers": [
+    "forest_drop",
+    "castle_wall_and_glass",
+    "deck_character_plane",
+    "chairs",
+    "rail_occlusion",
+    "pine_trunk_and_branches",
+    "lighting"
+  ],
+  "playable": "Deck centerline supports two standing characters; chairs form seated two-shot; door is entrance; railing and pine branches require foreground occlusion.",
+  "role": "Quiet two-character porch dialogue and threshold scenes",
+  "runtime_target": {
+    "cell_proxy": [
+      240,
+      135
+    ],
+    "color_space": "sRGB",
+    "fps": 24,
+    "master": [
+      3840,
+      2160
+    ]
+  },
+  "scene_id": "JV-CAS-TREE-PORCH-A",
+  "schema_version": 1,
+  "set_id": "JV-CAS",
+  "slug": "castle-tree-porch-a",
+  "source": {
+    "height": 1536,
+    "path": "assets/environments/joeville/jv-cas-tree-porch-a/source-reference.png",
+    "sha256": "53bf12a70e44650843901e6f1703a14c9a40beef5ab933f00644c78f108bb8b0",
+    "width": 1024
+  },
+  "status": "CANONICAL-CONCEPT-RECOMPOSE-REQUIRED",
+  "title": "Castle Grace monumental-pine porch A",
+  "variants": [
+    "morning",
+    "afternoon",
+    "golden_hour",
+    "night_lantern",
+    "rain",
+    "snow"
+  ]
+}
