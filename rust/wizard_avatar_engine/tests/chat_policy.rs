@@ -1452,6 +1452,27 @@ fn reducer_snapshot_deserialization_enforces_bounds_uniqueness_and_invariants() 
         reducer
     );
 
+    let mut ended = active_reducer();
+    ended
+        .reduce(input(
+            ended.next_test_sequence(),
+            ended.next_test_tick(),
+            ChatEventV1::SessionEnded {
+                reason: SessionEndReason::UserEnded,
+            },
+        ))
+        .unwrap();
+    let ended_json = serde_json::to_value(ended).unwrap();
+    let mut missing_session_ledger = ended_json.clone();
+    missing_session_ledger
+        .as_object_mut()
+        .unwrap()
+        .remove("retired_session_ids");
+    assert!(serde_json::from_value::<ChatPolicyReducerV1>(missing_session_ledger).is_err());
+    let mut incomplete_session_ledger = ended_json;
+    incomplete_session_ledger["retired_session_ids"] = serde_json::json!([]);
+    assert!(serde_json::from_value::<ChatPolicyReducerV1>(incomplete_session_ledger).is_err());
+
     let retired = serde_json::json!("retired-session");
     let mut duplicate_sessions = valid.clone();
     duplicate_sessions["retired_session_ids"] =
@@ -2835,4 +2856,4 @@ fn out_of_order_and_failed_events_are_atomic_and_replay_hash_is_stable() {
 }
 
 const EXPECTED_REPLAY_HASH: &str =
-    "9d348765120b8d42995a60afa87833d4af779a0b73c3fbc407a117e35d369426";
+    "4f77f36a6bb2932ce058a675048e0bb4757adfcbb02596136ac88e198558f511";

@@ -20,7 +20,7 @@ use serde::de::Error as DeError;
 use serde::{Deserialize, Deserializer, Serialize};
 use thiserror::Error;
 
-pub const CHAT_POLICY_SCHEMA_VERSION: u16 = 1;
+pub const CHAT_POLICY_SCHEMA_VERSION: u16 = 2;
 pub const POLICY_PRIORITY: RegionPriority = RegionPriority(40);
 pub const MAX_POLICY_HOLD_TICKS: u64 = 600;
 pub const MAX_COMPLETED_OPERATIONS: usize = 64;
@@ -300,7 +300,6 @@ struct UncheckedChatPolicyReducerV1 {
     active_attention_hold: Option<ActiveAttentionHoldV1>,
     active_safety_clamps: Vec<ActiveSafetyClampV1>,
     completed_safety_clamps: Vec<ActiveSafetyClampV1>,
-    #[serde(default)]
     retired_session_ids: Vec<SessionId>,
     last_session_end: Option<CompletedSessionEndV1>,
     last_session_locale: Option<SessionLocaleMarkerV1>,
@@ -430,6 +429,13 @@ impl ChatPolicyReducerV1 {
         }
         if has_duplicates_by(&self.retired_session_ids, PartialEq::eq) {
             return Err("duplicate retired session identity".to_string());
+        }
+        if self
+            .last_session_end
+            .as_ref()
+            .is_some_and(|completed| !self.retired_session_ids.contains(&completed.session_id))
+        {
+            return Err("completed session is missing from retired identity history".to_string());
         }
         if has_duplicates_by(&self.active_safety_clamps, PartialEq::eq)
             || has_duplicates_by(&self.completed_safety_clamps, PartialEq::eq)
