@@ -8,7 +8,7 @@ mod chat_inbox;
 #[path = "../src/command.rs"]
 mod command;
 
-use chat_event::{CommandId, DiagnosticGeometryId, SourceId, SourceKind};
+use chat_event::{ChatEventV1, CommandId, DiagnosticGeometryId, SourceId, SourceKind};
 use chat_inbox::{
     ChatInbox, InboxConfig, InboxEventKind, SourceSequencePolicy, DEFAULT_ACK_RETENTION_TICKS,
     MAX_INBOX_EVENTS, MAX_PENDING_COMMANDS, MAX_SOURCE_WATERMARKS, MAX_TERMINAL_ACKS,
@@ -49,6 +49,7 @@ fn request(
         source_sequence,
         requested_apply_tick,
         ttl_ms,
+        chat_correlation: None,
         command: SemanticCommandV1::Legacy(LegacyCommandV1 {
             command: LegacyCommandKind::Idle,
         }),
@@ -69,6 +70,24 @@ fn diagnostic_request(command_id: &str) -> CommandRequestV1 {
         geometry_id: DiagnosticGeometryId::new("front_idle").unwrap(),
     });
     request
+}
+
+#[test]
+fn chat_event_without_correlation_is_rejected_cached_and_never_queued() {
+    let mut inbox = ChatInbox::new(InboxConfig::default(), EPOCH);
+    let mut request = request("missing-correlation", "chatbot-a", 1, None, 1_000);
+    request.command = SemanticCommandV1::ApplyChatEvent(ChatEventV1::UserTurnStarted);
+
+    let first = inbox.accept(request.clone(), 0, REVISION);
+    assert_eq!(first.status, AckStatus::RejectedInvalid);
+    assert_eq!(first.error_code, Some(CommandErrorCode::InvalidCommand));
+    assert_eq!(inbox.pending_len(), 0);
+    assert_eq!(inbox.terminal_ack_len(), 1);
+
+    let retry = inbox.accept(request, 0, REVISION + 1);
+    assert_eq!(retry, first);
+    assert_eq!(inbox.pending_len(), 0);
+    assert!(inbox.drain_for_tick(1).is_empty());
 }
 
 #[test]

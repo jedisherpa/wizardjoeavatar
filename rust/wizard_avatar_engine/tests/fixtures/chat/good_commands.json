@@ -1,5 +1,5 @@
 [
-  {"schema_version":1,"command_id":"command-001","source_id":"source-1","source_kind":"chatbot","source_sequence":1,"requested_apply_tick":null,"ttl_ms":1000,"command":{"type":"apply_chat_event","payload":{"type":"user_turn_started"}}},
+  {"schema_version":1,"command_id":"command-001","source_id":"source-1","source_kind":"chatbot","source_sequence":1,"requested_apply_tick":null,"ttl_ms":1000,"chat_correlation":{"session_id":"session-1","turn_id":"turn-1","previous_turn_id":null},"command":{"type":"apply_chat_event","payload":{"type":"user_turn_started"}}},
   {"schema_version":1,"command_id":"command-002","source_id":"source-1","source_kind":"chatbot","source_sequence":2,"requested_apply_tick":101,"ttl_ms":1000,"command":{"type":"set_motion_intent","payload":{"state":"thinking","intensity":60,"profile":"full"}}},
   {"schema_version":1,"command_id":"command-003","source_id":"source-1","source_kind":"chatbot","source_sequence":3,"requested_apply_tick":102,"ttl_ms":1000,"command":{"type":"start_gesture","payload":{"gesture":"explain","intensity":70,"duration_ms":900}}},
   {"schema_version":1,"command_id":"command-004","source_id":"source-1","source_kind":"chatbot","source_sequence":4,"requested_apply_tick":103,"ttl_ms":1000,"command":{"type":"set_emotion","payload":{"emotion":"joy","intensity":80,"duration_ms":1200}}},
