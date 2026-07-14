@@ -787,6 +787,41 @@ fn stop_behavior_executes_the_published_safe_idle_policy() {
 }
 
 #[test]
+fn stop_behavior_supersedes_an_in_flight_raw_pose_transition() {
+    let mut controller = WizardAvatarController::default();
+    let started = controller.apply_command(WizardCommand::new(
+        "pose",
+        serde_json::json!({
+            "pose_id": "front_magic_staff_thrust",
+            "transition_ms": 1_000
+        }),
+    ));
+    assert!(started.ok);
+    assert_eq!(
+        started.state.pose_id.as_deref(),
+        Some("front_magic_staff_thrust")
+    );
+
+    let stopped = controller.apply_command(WizardCommand::new("stop", serde_json::json!({})));
+    assert!(stopped.ok);
+    assert_ne!(
+        stopped.state.pose_id.as_deref(),
+        Some("front_magic_staff_thrust")
+    );
+    for _ in 0..60 {
+        controller.step_tick();
+        assert_ne!(
+            controller.current_state().pose_id.as_deref(),
+            Some("front_magic_staff_thrust")
+        );
+    }
+    assert_eq!(
+        wizard_avatar_engine::animation::reference_pose_id_for_state(controller.current_state()),
+        "front_idle"
+    );
+}
+
+#[test]
 fn safe_idle_profile_rejects_wrong_references_policy_and_facing_coverage() {
     let valid = build_wizard_capability_manifest().expect("manifest should build");
 

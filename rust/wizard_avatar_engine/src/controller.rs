@@ -665,6 +665,7 @@ impl WizardAvatarController {
             .presented_pose()
             .map(str::to_owned)
             .or_else(|| self.state.pose_id.clone());
+        self.pose_playback.clear(&mut self.state);
         if let Some(presented) = presented {
             self.pose_playback.return_to_direction(
                 pose_id_for_direction(self.state.facing),
