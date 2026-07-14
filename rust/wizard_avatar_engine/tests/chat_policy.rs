@@ -1488,6 +1488,93 @@ fn reducer_snapshot_deserialization_enforces_bounds_uniqueness_and_invariants() 
     assert!(serde_json::from_value::<ChatPolicyReducerV1>(completed_json).is_err());
 }
 
+#[test]
+fn accepted_cross_channel_transitions_keep_snapshot_lifecycle_coherent() {
+    let roundtrip = |name: &str, reducer: &ChatPolicyReducerV1| {
+        assert_eq!(
+            serde_json::from_value::<ChatPolicyReducerV1>(serde_json::to_value(reducer).unwrap())
+                .unwrap_or_else(|error| panic!("{name}: snapshot rejected: {error}")),
+            *reducer,
+            "{name}: snapshot drifted"
+        );
+    };
+
+    let started = ChatEventV1::SpeechStarted {
+        utterance_id: utterance_id(),
+    };
+    let mut speech = prepare_for(&started);
+    speech
+        .reduce(input(
+            speech.next_test_sequence(),
+            speech.next_test_tick(),
+            started,
+        ))
+        .unwrap();
+    speech
+        .reduce(input(
+            speech.next_test_sequence(),
+            speech.next_test_tick(),
+            ChatEventV1::UserTurnStarted,
+        ))
+        .unwrap();
+    assert_eq!(
+        speech.semantic().speech.state.mode,
+        SpeechModeV1::Cancelling
+    );
+    roundtrip("speech_started_then_user_turn", &speech);
+
+    let mut attention = active_reducer();
+    attention
+        .reduce(input(
+            attention.next_test_sequence(),
+            attention.next_test_tick(),
+            ChatEventV1::AttentionTarget(AttentionTargetV1 {
+                target: AttentionTarget::Content,
+                hold_ms: 2_000,
+                return_to_user: true,
+            }),
+        ))
+        .unwrap();
+    attention
+        .reduce(input(
+            attention.next_test_sequence(),
+            attention.next_test_tick(),
+            ChatEventV1::UserTurnStarted,
+        ))
+        .unwrap();
+    assert_eq!(
+        attention.semantic().session.state.attention_target,
+        AttentionTarget::User
+    );
+    assert_eq!(attention.semantic().face.state.gaze, AttentionTarget::User);
+    roundtrip("attention_then_user_turn", &attention);
+
+    let mut tool_wait = active_reducer();
+    tool_wait
+        .reduce(input(
+            tool_wait.next_test_sequence(),
+            tool_wait.next_test_tick(),
+            ChatEventV1::ToolWaitStarted(ToolWaitStartedV1 {
+                operation_id: operation_id(),
+                kind: ToolWaitKind::Retrieval,
+                expected_duration_ms: Some(2_000),
+            }),
+        ))
+        .unwrap();
+    tool_wait
+        .reduce(input(
+            tool_wait.next_test_sequence(),
+            tool_wait.next_test_tick(),
+            ChatEventV1::AssistantThinkingStarted,
+        ))
+        .unwrap();
+    assert_eq!(
+        tool_wait.semantic().conversation.state.turn_state,
+        ChatTurnState::Thinking
+    );
+    roundtrip("tool_wait_then_thinking", &tool_wait);
+}
+
 fn semantic_without_control(reducer: &ChatPolicyReducerV1) -> serde_json::Value {
     let mut value = serde_json::to_value(reducer.semantic()).unwrap();
     value.as_object_mut().unwrap().remove("control");
@@ -2584,4 +2671,4 @@ fn out_of_order_and_failed_events_are_atomic_and_replay_hash_is_stable() {
 }
 
 const EXPECTED_REPLAY_HASH: &str =
-    "ea74e5d0e9997aae3bdd5145edb435986352b41f8251c8de9bfe92bb5dcbd740";
+    "12baaa7658baf911104010f23a7553a529b1ec41473512dbad0a635490ad4b6c";

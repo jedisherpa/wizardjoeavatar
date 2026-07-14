@@ -545,15 +545,6 @@ impl ChatPolicyReducerV1 {
             None => {}
         }
 
-        if let Some(retry) = &self.last_speech_retry {
-            let (utterance_id, expected_mode) = speech_retry_identity(retry);
-            if self.semantic.speech.state.utterance_id.as_ref() != Some(utterance_id)
-                || self.semantic.speech.state.mode != expected_mode
-            {
-                return Err("speech retry disagrees with the speech lifecycle".to_string());
-            }
-        }
-
         match (&self.active_attention_hold, &self.last_attention) {
             (Some(hold), Some(payload)) => {
                 if hold.deadline_tick <= self.last_tick
@@ -1309,6 +1300,7 @@ impl ChatPolicyReducerV1 {
             attention_target: AttentionTarget::User,
         };
         self.set_session(transaction, state)?;
+        self.reset_attention_to_user(transaction)?;
         self.set_conversation(transaction, ChatTurnState::Idle, None, false)
     }
 
@@ -1438,6 +1430,7 @@ impl ChatPolicyReducerV1 {
         session.turn_id = input.turn_id.clone();
         session.attention_target = AttentionTarget::User;
         self.set_session(transaction, session)?;
+        self.reset_attention_to_user(transaction)?;
         self.set_conversation(transaction, ChatTurnState::Listening, None, false)?;
         self.cancel_speech(transaction)?;
         self.set_mouth_rest(transaction)?;
@@ -2019,6 +2012,9 @@ impl ChatPolicyReducerV1 {
     ) -> Result<(), ChatPolicyError> {
         let mut session = self.semantic.session.state.clone();
         session.mode = SessionModeV1::Degraded;
+        session.attention_target = AttentionTarget::User;
+        self.active_attention_hold = None;
+        self.last_attention = None;
         self.set_session(transaction, session)?;
         self.set_face(
             transaction,
@@ -2063,6 +2059,7 @@ impl ChatPolicyReducerV1 {
         &mut self,
         transaction: &mut PolicyTransactionV1,
     ) -> Result<(), ChatPolicyError> {
+        self.last_speech_retry = None;
         let mut speech = self.semantic.speech.state.clone();
         speech.mode = if speech.utterance_id.is_some() {
             SpeechModeV1::Cancelling
@@ -2177,6 +2174,9 @@ impl ChatPolicyReducerV1 {
             },
         };
         let hold_ticks = if safety_active { None } else { hold_ticks };
+        if state.turn_state != ChatTurnState::ToolWait {
+            self.active_tool_wait = None;
+        }
         if !force
             && hold_ticks.is_none()
             && self.semantic.conversation.state == state
@@ -2190,6 +2190,20 @@ impl ChatPolicyReducerV1 {
             RegionMutationV1::Conversation(state),
             hold_ticks,
         )
+    }
+
+    fn reset_attention_to_user(
+        &mut self,
+        transaction: &mut PolicyTransactionV1,
+    ) -> Result<(), ChatPolicyError> {
+        self.active_attention_hold = None;
+        self.last_attention = None;
+        let mut session = self.semantic.session.state.clone();
+        session.attention_target = AttentionTarget::User;
+        self.set_session(transaction, session)?;
+        let mut face = self.semantic.face.state.clone();
+        face.gaze = AttentionTarget::User;
+        self.set_face(transaction, face, None)
     }
 
     fn set_speech(
@@ -2527,18 +2541,6 @@ fn speech_retry_event(retry: &SpeechRetryV1) -> ChatEventV1 {
             utterance_id: utterance_id.clone(),
             code: *code,
         },
-    }
-}
-
-fn speech_retry_identity(retry: &SpeechRetryV1) -> (&UtteranceId, SpeechModeV1) {
-    match retry {
-        SpeechRetryV1::Started { utterance_id }
-        | SpeechRetryV1::Progress { utterance_id, .. }
-        | SpeechRetryV1::Resumed { utterance_id } => (utterance_id, SpeechModeV1::Active),
-        SpeechRetryV1::Paused { utterance_id } => (utterance_id, SpeechModeV1::Paused),
-        SpeechRetryV1::Cancelled { utterance_id, .. } => (utterance_id, SpeechModeV1::Cancelling),
-        SpeechRetryV1::Completed { utterance_id } => (utterance_id, SpeechModeV1::Completed),
-        SpeechRetryV1::Failed { utterance_id, .. } => (utterance_id, SpeechModeV1::Failed),
     }
 }
 
