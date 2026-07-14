@@ -1,0 +1,52 @@
+{
+  "base": "codex/crystail-character",
+  "branch": "codex/joeville-scene-coffee-interior-day",
+  "camera": "Corner-wide interior master at seated-character eye height",
+  "corrections": [
+    "Recompose to 16:9",
+    "Validate chairs, counter and doors against full cast lineup",
+    "Author reverse master and removable foreground passes"
+  ],
+  "layers": [
+    "window_far",
+    "wall_and_counter",
+    "character_plane",
+    "tables_and_chairs_mid",
+    "removable_foreground_furniture",
+    "practicals",
+    "window_light"
+  ],
+  "playable": "Entry aisle, counter queue and center floor must remain clear; window two-top is intimate zone; group table supports five after cast-scale validation.",
+  "role": "Recurring dialogue interior for solo, two-shot and small-group scenes",
+  "runtime_target": {
+    "cell_proxy": [
+      240,
+      135
+    ],
+    "color_space": "sRGB",
+    "fps": 24,
+    "master": [
+      3840,
+      2160
+    ]
+  },
+  "scene_id": "JV-COF-INTERIOR-DAY",
+  "schema_version": 1,
+  "set_id": "JV-COF",
+  "slug": "coffee-interior-day",
+  "source": {
+    "height": 1243,
+    "path": "assets/environments/joeville/jv-cof-interior-day/source-reference.png",
+    "sha256": "a4e6afb691c9a81b3f2e997702c170eca06a149e195edea2cb29d1db7d319f83",
+    "width": 1266
+  },
+  "status": "LAYOUT-KEEP-SCALE-VALIDATION-REQUIRED",
+  "title": "Lantern and Lark coffee interior",
+  "variants": [
+    "morning_rush",
+    "quiet_afternoon",
+    "rainy_day",
+    "warm_evening",
+    "night_closed"
+  ]
+}
