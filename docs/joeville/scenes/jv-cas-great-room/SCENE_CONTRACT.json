@@ -1,0 +1,55 @@
+{
+  "base": "codex/crystail-character",
+  "branch": "codex/joeville-scene-castle-great-room",
+  "camera": "Corner-wide interior master facing fireplace and terrace doors",
+  "corrections": [
+    "Recompose square concept into 16:9 with approved side-wall extension",
+    "Separate furniture and fire passes",
+    "Validate full-cast layout against final 13-character lineup"
+  ],
+  "layers": [
+    "window_and_door_exterior",
+    "stone_room",
+    "character_plane",
+    "seating_props",
+    "removable_coffee_table",
+    "foreground_ottoman",
+    "fire",
+    "firelight",
+    "practicals"
+  ],
+  "playable": "Rug center is standing group zone; sofa, red chair and wing chair are seated anchors; French doors are exterior transition; coffee table is removable foreground prop.",
+  "role": "Intimate dialogue, firelight reflection and Castle group gathering",
+  "runtime_target": {
+    "cell_proxy": [
+      240,
+      135
+    ],
+    "color_space": "sRGB",
+    "fps": 24,
+    "master": [
+      3840,
+      2160
+    ]
+  },
+  "scene_id": "JV-CAS-GREAT-ROOM",
+  "schema_version": 1,
+  "set_id": "JV-CAS",
+  "slug": "castle-great-room",
+  "source": {
+    "height": 1254,
+    "path": "assets/environments/joeville/jv-cas-great-room/source-reference.png",
+    "sha256": "ab194d81636e35096ca2d3337bf65e9625cacc0c1fead03c700b7cfff227a990",
+    "width": 1254
+  },
+  "status": "CANONICAL-INTERIOR-CONCEPT-RECOMPOSE-REQUIRED",
+  "title": "Castle Grace great room",
+  "variants": [
+    "day",
+    "rainy_day",
+    "sunset",
+    "firelight_night",
+    "celebration",
+    "quiet_empty"
+  ]
+}
