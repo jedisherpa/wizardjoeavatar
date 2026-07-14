@@ -1,0 +1,53 @@
+{
+  "base": "codex/crystail-character",
+  "branch": "codex/joeville-scene-town-aerial-sunrise",
+  "camera": "Elevated simulated aerial, western foothills upstage, creek and downtown readable",
+  "corrections": [
+    "Reduce alpine ridge drama to Boulder-like foothills",
+    "Replace obsolete church-like Castle silhouette with approved Castle Grace massing",
+    "Lock map bearings to MAP_SPEC.md"
+  ],
+  "layers": [
+    "far_sky",
+    "foothill_ridge",
+    "town_far",
+    "town_near",
+    "creek_glint",
+    "atmosphere",
+    "lighting"
+  ],
+  "playable": "No dialogue blocking. Reserve only optional distant travel markers; this is an establishing scene.",
+  "role": "Townwide establishing shot and geographic orientation",
+  "runtime_target": {
+    "cell_proxy": [
+      240,
+      135
+    ],
+    "color_space": "sRGB",
+    "fps": 24,
+    "master": [
+      3840,
+      2160
+    ]
+  },
+  "scene_id": "JV-TWN-AERIAL-SUNRISE",
+  "schema_version": 1,
+  "set_id": "JV-TWN",
+  "slug": "town-aerial-sunrise",
+  "source": {
+    "height": 941,
+    "path": "assets/environments/joeville/jv-twn-aerial-sunrise/source-reference.png",
+    "sha256": "304081406afa735ea1788960e8035f58294ad56559b43117d2a0c940eca3b36a",
+    "width": 1672
+  },
+  "status": "DIRECTION-KEEP-CORRECTION-REQUIRED",
+  "title": "Joeville aerial at sunrise",
+  "variants": [
+    "midday",
+    "golden_hour",
+    "blue_hour",
+    "night",
+    "winter",
+    "summer"
+  ]
+}
