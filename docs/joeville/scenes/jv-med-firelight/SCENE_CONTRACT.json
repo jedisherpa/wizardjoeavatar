@@ -1,0 +1,54 @@
+{
+  "base": "codex/crystail-character",
+  "branch": "codex/joeville-scene-meditation-firelight",
+  "camera": "Wide eye-level circle master with two safe approach paths",
+  "corrections": [
+    "Replace Utah-like buttes with approved Flatiron analogue",
+    "Recompose 16:9",
+    "Separate fire, glow and smoke for compositing"
+  ],
+  "layers": [
+    "night_sky",
+    "corrected_foothill_background",
+    "circle_ground",
+    "character_plane",
+    "stones_and_cushions",
+    "foreground_branches",
+    "fire",
+    "firelight",
+    "smoke"
+  ],
+  "playable": "Thirteen discrete seat anchors around the circle; central altar/fire is non-walkable; two radial entrance lanes remain clear.",
+  "role": "Full-cast circular meditation and intimate firelight dialogue",
+  "runtime_target": {
+    "cell_proxy": [
+      240,
+      135
+    ],
+    "color_space": "sRGB",
+    "fps": 24,
+    "master": [
+      3840,
+      2160
+    ]
+  },
+  "scene_id": "JV-MED-FIRELIGHT",
+  "schema_version": 1,
+  "set_id": "JV-MED",
+  "slug": "meditation-firelight",
+  "source": {
+    "height": 1254,
+    "path": "assets/environments/joeville/jv-med-firelight/source-reference.png",
+    "sha256": "e70b283e7e482222c5398571706f725ba8375772b94ffe1fb0b2b8669546e7b2",
+    "width": 1254
+  },
+  "status": "BLOCKING-KEEP-GEOGRAPHY-REJECTED",
+  "title": "Thirteen Stones meditation circle by firelight",
+  "variants": [
+    "dawn",
+    "day_empty",
+    "sunset",
+    "night_firelight",
+    "winter_no_fire"
+  ]
+}
