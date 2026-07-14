@@ -5,6 +5,36 @@
   "branch": "codex/rust-chatbot-animation-engine",
   "integration_head": "4b8f1130646852ccd172215cae4e2f2bc53e6dc9",
   "production_authority": "rust/wizard_avatar_engine",
+  "repository_authorities": [
+    {
+      "repository": "jedisherpa/wizardjoeavatar",
+      "role": "character_runtime",
+      "branch": "codex/rust-chatbot-animation-engine",
+      "observed_head": "e9f85c285430fdc39ad5b12983350cb690ebcf00",
+      "source_allowlist": [
+        "rust/wizard_avatar_engine/**",
+        "tools/rchat/**",
+        "docs/cartoon-animation-program/rust-chatbot/**",
+        "evidence/cartoon-animation-program/rust-chatbot/**"
+      ]
+    },
+    {
+      "repository": "jedisherpa/prism-geometry-talk",
+      "role": "media_host",
+      "branch": "codex/wizardjoe-media-performance",
+      "observed_head": "4ec50226e964fcd078dd846c73a1862778e95b09",
+      "source_allowlist": [
+        "crates/prism-cdiss-cli/src/audiobooks.rs",
+        "crates/prism-cdiss-cli/src/voice.rs",
+        "crates/prism-cdiss-cli/src/media*.rs",
+        "crates/prism-cdiss-cli/src/preprocess*.rs",
+        "src/pages/PrismDodecahedron/**",
+        "src-tauri/**",
+        "tests/**",
+        ".github/workflows/**"
+      ]
+    }
+  ],
   "planning_checkpoint": {
     "local_sha": "50948b907ad35ec8ca604d6c39a63b4317ac3da7",
     "remote_sha": "50948b907ad35ec8ca604d6c39a63b4317ac3da7",
@@ -432,6 +462,96 @@
       "structural_pass_required": true,
       "minimum_product_score": 90,
       "record": null
+    },
+    {
+      "gate_id": "MP0",
+      "status": "BLOCKED",
+      "required_work": ["RCHAT-MEDIA-RSCH-000"],
+      "structural_pass_required": true,
+      "record": null
+    },
+    {
+      "gate_id": "MP1",
+      "status": "BLOCKED",
+      "required_work": [
+        "RCHAT-MEDIA-WIZ-005",
+        "RCHAT-MEDIA-WIZ-010",
+        "RCHAT-MEDIA-WIZ-020",
+        "RCHAT-MEDIA-WIZ-030"
+      ],
+      "structural_pass_required": true,
+      "record": null
+    },
+    {
+      "gate_id": "MP2",
+      "status": "BLOCKED",
+      "required_work": [
+        "RCHAT-MEDIA-PRISM-010",
+        "RCHAT-MEDIA-PRISM-020",
+        "RCHAT-MEDIA-PRISM-030",
+        "RCHAT-MEDIA-PRISM-032",
+        "RCHAT-MEDIA-PRISM-034",
+        "RCHAT-MEDIA-PRISM-040"
+      ],
+      "structural_pass_required": true,
+      "record": null
+    },
+    {
+      "gate_id": "MP3",
+      "status": "BLOCKED",
+      "required_work": [
+        "RCHAT-MEDIA-PREP-010",
+        "RCHAT-MEDIA-PREP-012",
+        "RCHAT-MEDIA-PREP-020",
+        "RCHAT-MEDIA-PREP-030",
+        "RCHAT-MEDIA-PREP-040",
+        "RCHAT-MEDIA-PREP-050"
+      ],
+      "structural_pass_required": true,
+      "record": null
+    },
+    {
+      "gate_id": "MP4",
+      "status": "BLOCKED",
+      "required_work": [
+        "RCHAT-MEDIA-PREP-060",
+        "RCHAT-MEDIA-PREP-070"
+      ],
+      "structural_pass_required": true,
+      "record": null
+    },
+    {
+      "gate_id": "MP5",
+      "status": "BLOCKED",
+      "required_work": [
+        "RCHAT-MEDIA-WIZ-040",
+        "RCHAT-MEDIA-WIZ-050",
+        "RCHAT-MEDIA-WIZ-060",
+        "RCHAT-MEDIA-WIZ-070"
+      ],
+      "structural_pass_required": true,
+      "record": null
+    },
+    {
+      "gate_id": "MP6",
+      "status": "BLOCKED",
+      "required_work": [
+        "RCHAT-MEDIA-WHIZ-010",
+        "RCHAT-MEDIA-WHIZ-020",
+        "RCHAT-MEDIA-EDIT-010"
+      ],
+      "structural_pass_required": true,
+      "record": null
+    },
+    {
+      "gate_id": "MP7",
+      "status": "BLOCKED",
+      "required_work": [
+        "RCHAT-MEDIA-QA-010",
+        "RCHAT-MEDIA-QA-020"
+      ],
+      "structural_pass_required": true,
+      "record": null
     }
   ],
   "gate_aliases": {
@@ -449,7 +569,15 @@
     "Q3": ["RCHAT-RUN-Q2", "RCHAT-ANIM-176"],
     "S1": ["RCHAT-ANIM-180", "release-soak"],
     "R0": ["clean-clone-release"],
-    "F0": ["RCHAT-RUN-F0", "RCHAT-ANIM-185", "RCHAT-ANIM-190", "F0-A", "F0-B", "F0-C", "F0-D"]
+    "F0": ["RCHAT-RUN-F0", "RCHAT-ANIM-185", "RCHAT-ANIM-190", "F0-A", "F0-B", "F0-C", "F0-D"],
+    "MP0": ["media-research"],
+    "MP1": ["media-contracts"],
+    "MP2": ["media-session"],
+    "MP3": ["media-transcript"],
+    "MP4": ["media-music"],
+    "MP5": ["media-animation"],
+    "MP6": ["media-tools"],
+    "MP7": ["media-release"]
   },
   "work_item_contract": {
     "acceptance_rule": "ACCEPTED requires all dependencies and required children ACCEPTED, result_sha, successful commands, hashed evidence, metrics, reviewers, and verified rollback fields.",
@@ -963,7 +1091,11 @@
       "required_children": [
         "RCHAT-RUN-110",
         "RCHAT-RUN-120",
-        "RCHAT-RUN-130"
+        "RCHAT-RUN-130",
+        "RCHAT-MEDIA-WIZ-005",
+        "RCHAT-MEDIA-WIZ-020",
+        "RCHAT-MEDIA-WIZ-030",
+        "RCHAT-MEDIA-WIZ-040"
       ],
       "gate_id": "I1",
       "path_allowlist": [
@@ -1027,7 +1159,10 @@
         "RCHAT-ANIM-043",
         "RCHAT-ANIM-111",
         "RCHAT-ANIM-112",
-        "RCHAT-ANIM-140"
+        "RCHAT-ANIM-140",
+        "RCHAT-MEDIA-WIZ-050",
+        "RCHAT-MEDIA-WIZ-060",
+        "RCHAT-MEDIA-WIZ-070"
       ],
       "gate_id": "I2",
       "path_allowlist": [
@@ -1088,7 +1223,25 @@
       ],
       "required_children": [
         "RCHAT-ANIM-145",
-        "RCHAT-ANIM-150"
+        "RCHAT-ANIM-150",
+        "RCHAT-MEDIA-RSCH-000",
+        "RCHAT-MEDIA-WIZ-010",
+        "RCHAT-MEDIA-PRISM-010",
+        "RCHAT-MEDIA-PRISM-020",
+        "RCHAT-MEDIA-PRISM-030",
+        "RCHAT-MEDIA-PRISM-032",
+        "RCHAT-MEDIA-PRISM-034",
+        "RCHAT-MEDIA-PRISM-040",
+        "RCHAT-MEDIA-PREP-010",
+        "RCHAT-MEDIA-PREP-012",
+        "RCHAT-MEDIA-PREP-020",
+        "RCHAT-MEDIA-PREP-030",
+        "RCHAT-MEDIA-PREP-040",
+        "RCHAT-MEDIA-PREP-050",
+        "RCHAT-MEDIA-PREP-060",
+        "RCHAT-MEDIA-PREP-070",
+        "RCHAT-MEDIA-WHIZ-010",
+        "RCHAT-MEDIA-EDIT-010"
       ],
       "gate_id": "T1",
       "path_allowlist": [
@@ -1182,7 +1335,8 @@
       "required_children": [
         "RCHAT-ANIM-170",
         "RCHAT-ANIM-172",
-        "RCHAT-ANIM-175"
+        "RCHAT-ANIM-175",
+        "RCHAT-MEDIA-QA-010"
       ],
       "gate_id": "Q2",
       "path_allowlist": [
@@ -1228,7 +1382,8 @@
       ],
       "required_children": [
         "RCHAT-RUN-150",
-        "RCHAT-ANIM-176"
+        "RCHAT-ANIM-176",
+        "RCHAT-MEDIA-WHIZ-020"
       ],
       "gate_id": "Q3",
       "path_allowlist": [
@@ -1314,7 +1469,7 @@
         "RCHAT-FLOW-130"
       ],
       "required_children": [
-
+        "RCHAT-MEDIA-QA-020"
       ],
       "gate_id": "R0",
       "path_allowlist": [
@@ -1929,7 +2084,7 @@
         "MOTION",
         "FLOW"
       ],
-      "status": "IN_PROGRESS",
+      "status": "ACCEPTED",
       "weight": 0,
       "dependencies": [
         "RCHAT-RUN-020",
@@ -1947,6 +2102,7 @@
         "rust/wizard_avatar_engine/src/telemetry*.rs",
         "rust/wizard_avatar_engine/tests/chat_*.rs",
         "rust/wizard_avatar_engine/tests/command_*.rs",
+        "rust/wizard_avatar_engine/tests/fixtures/chat/*.json",
         "rust/wizard_avatar_engine/tests/replay_*.rs",
         "rust/wizard_avatar_engine/tests/speech_*.rs"
       ],
@@ -1954,29 +2110,37 @@
 
       ],
       "base_sha": "4b8f1130646852ccd172215cae4e2f2bc53e6dc9",
-      "result_sha": null,
+      "result_sha": "d801964108fc13010858cac3de32f64da2a87605",
       "started_at": "2026-07-13T23:54:26Z",
-      "finished_at": null,
+      "finished_at": "2026-07-14T05:29:33Z",
       "commands": [
-
+        {"command":"cargo test --locked","exit_code":0,"duration_ms":1985000}
       ],
       "evidence": [
-
+        {"path":"rust/wizard_avatar_engine/src/chat_policy.rs","sha256":"4ec7ee8bb39a440df9254acea95495c282508555e886788d453f7cbbdc0bce0b","artifact_url":null},
+        {"path":"rust/wizard_avatar_engine/tests/chat_inbox.rs","sha256":"3dca155c5527dea27ed18ed8f942b63eab45563845727556b9013ffa0e1b49f7","artifact_url":null},
+        {"path":"rust/wizard_avatar_engine/tests/chat_policy.rs","sha256":"8d1f55f5ee3efe7337c469891735cf3ce9723bc99ea4f072e9bbf10a7d51caac","artifact_url":null},
+        {"path":"rust/wizard_avatar_engine/tests/fixtures/chat/good_commands.json","sha256":"3ff100d5db4898bec89873f91f2f38d1b8aba5d85df4afd748f0b6975b15bac0","artifact_url":null},
+        {"path":"rust/wizard_avatar_engine/tests/fixtures/chat/good_events.json","sha256":"a840ad1829fbff6eb73db850d7935fc4bf0b5369691e7077627431ec743293d1","artifact_url":null}
       ],
       "metrics": {
         "progress_earning": false,
-        "parent_weight_authoritative": true
+        "parent_weight_authoritative": true,
+        "related_tests_passed": 70,
+        "full_suite_passed": true,
+        "independent_acceptances": 2,
+        "frozen_replay_sha256": "4f77f36a6bb2932ce058a675048e0bb4757adfcbb02596136ac88e198558f511"
       },
       "rollback": {
-        "sha": null,
+        "sha": "4b8f1130646852ccd172215cae4e2f2bc53e6dc9",
         "profile": "legacy-runtime",
-        "verified": false,
+        "verified": true,
         "strategy": "restore_parent_profile_and_reopen_item",
         "instruction": "Select the legacy conversation reducer and revert only the reducer bridge.",
         "downgrade_allowed": false
       },
       "blocker": null,
-      "handoff_id": null,
+      "handoff_id": "RUN-050-d801964",
       "detail_source": "planning/01-rust-runtime-plan.md"
     },
     {
@@ -5729,7 +5893,35 @@
       "blocker": null,
       "handoff_id": null,
       "detail_source": "planning/02-chat-animation-plan.md"
-    }
+    },
+    {"id":"RCHAT-MEDIA-RSCH-000","parent":"RCHAT-FLOW-090","title":"Code-grounded media performance research and synthesis","owner":"FLOW","reviewers":["RUNTIME","MOTION"],"status":"IN_REVIEW","weight":0,"dependencies":[],"gate_id":"MP0","path_allowlist":["docs/cartoon-animation-program/rust-chatbot/media-performance"],"required_locks":[],"base_sha":null,"result_sha":null,"started_at":null,"finished_at":null,"commands":[],"evidence":[],"metrics":{"progress_earning":false,"parent_weight_authoritative":true},"rollback":{"sha":null,"profile":"research-only","verified":false,"strategy":"restore_parent_profile_and_reopen_item","instruction":"disable this media-performance work package and restore the previous accepted profile","downgrade_allowed":false},"blocker":null,"handoff_id":null,"detail_source":"media-performance/IMPLEMENTATION_TRACKER.md"},
+    {"id":"RCHAT-MEDIA-WIZ-005","parent":"RCHAT-FLOW-070","title":"Promote typed inbox and legacy compatibility path","owner":"RUNTIME","reviewers":["FLOW","MOTION"],"status":"PLANNED","weight":0,"dependencies":["RCHAT-RUN-110"],"gate_id":"MP1","path_allowlist":["rust/wizard_avatar_engine/src/chat_*.rs","rust/wizard_avatar_engine/src/server.rs","rust/wizard_avatar_engine/tests/chat_*.rs"],"required_locks":["LOCK-RCHAT-RUNTIME","LOCK-RCHAT-SERVER"],"base_sha":null,"result_sha":null,"started_at":null,"finished_at":null,"commands":[],"evidence":[],"metrics":{"progress_earning":false,"parent_weight_authoritative":true},"rollback":{"sha":null,"profile":"legacy-command-path","verified":false,"strategy":"restore_parent_profile_and_reopen_item","instruction":"disable this media-performance work package and restore the previous accepted profile","downgrade_allowed":false},"blocker":null,"handoff_id":null,"detail_source":"media-performance/IMPLEMENTATION_TRACKER.md"},
+    {"id":"RCHAT-MEDIA-WIZ-010","parent":"RCHAT-FLOW-090","title":"Publish generated factual capability manifest","owner":"RUNTIME","reviewers":["MOTION","FLOW"],"status":"PLANNED","weight":0,"dependencies":["RCHAT-ANIM-050"],"gate_id":"MP1","path_allowlist":["rust/wizard_avatar_engine/src/animation.rs","rust/wizard_avatar_engine/src/capability_manifest.rs","rust/wizard_avatar_engine/src/controller.rs","rust/wizard_avatar_engine/src/lib.rs","rust/wizard_avatar_engine/src/pose_asset.rs","rust/wizard_avatar_engine/src/server.rs","rust/wizard_avatar_engine/src/state.rs","rust/wizard_avatar_engine/tests/capability_manifest.rs"],"required_locks":["LOCK-RCHAT-LIB","LOCK-RCHAT-SERVER"],"base_sha":null,"result_sha":null,"started_at":null,"finished_at":null,"commands":[],"evidence":[],"metrics":{"progress_earning":false,"parent_weight_authoritative":true},"rollback":{"sha":null,"profile":"capability-endpoint-off","verified":false,"strategy":"restore_parent_profile_and_reopen_item","instruction":"disable this media-performance work package and restore the previous accepted profile","downgrade_allowed":false},"blocker":null,"handoff_id":null,"detail_source":"media-performance/IMPLEMENTATION_TRACKER.md"},
+    {"id":"RCHAT-MEDIA-WIZ-020","parent":"RCHAT-FLOW-070","title":"Implement MediaProtocolV1 through typed inbox","owner":"RUNTIME","reviewers":["FLOW","MOTION"],"status":"PLANNED","weight":0,"dependencies":["RCHAT-MEDIA-WIZ-005"],"gate_id":"MP1","path_allowlist":["rust/wizard_avatar_engine/src/media_protocol.rs","rust/wizard_avatar_engine/src/chat_*.rs","rust/wizard_avatar_engine/src/server.rs","rust/wizard_avatar_engine/tests/media_protocol*.rs"],"required_locks":["LOCK-RCHAT-RUNTIME","LOCK-RCHAT-SERVER"],"base_sha":null,"result_sha":null,"started_at":null,"finished_at":null,"commands":[],"evidence":[],"metrics":{"progress_earning":false,"parent_weight_authoritative":true},"rollback":{"sha":null,"profile":"reject-media-protocol","verified":false,"strategy":"restore_parent_profile_and_reopen_item","instruction":"disable this media-performance work package and restore the previous accepted profile","downgrade_allowed":false},"blocker":null,"handoff_id":null,"detail_source":"media-performance/IMPLEMENTATION_TRACKER.md"},
+    {"id":"RCHAT-MEDIA-WIZ-030","parent":"RCHAT-FLOW-070","title":"Implement PerformanceScoreV1 and strict validator","owner":"RUNTIME","reviewers":["MOTION","FLOW"],"status":"PLANNED","weight":0,"dependencies":["RCHAT-MEDIA-WIZ-010"],"gate_id":"MP1","path_allowlist":["rust/wizard_avatar_engine/src/lib.rs","rust/wizard_avatar_engine/src/performance_score.rs","rust/wizard_avatar_engine/src/score_validator.rs","rust/wizard_avatar_engine/tests/fixtures/media/performance-score-v1.minimal.json","rust/wizard_avatar_engine/tests/performance_score*.rs"],"required_locks":["LOCK-RCHAT-RUNTIME"],"base_sha":null,"result_sha":null,"started_at":null,"finished_at":null,"commands":[],"evidence":[],"metrics":{"progress_earning":false,"parent_weight_authoritative":true},"rollback":{"sha":null,"profile":"reject-performance-scores","verified":false,"strategy":"restore_parent_profile_and_reopen_item","instruction":"disable this media-performance work package and restore the previous accepted profile","downgrade_allowed":false},"blocker":null,"handoff_id":null,"detail_source":"media-performance/IMPLEMENTATION_TRACKER.md"},
+    {"id":"RCHAT-MEDIA-WIZ-040","parent":"RCHAT-FLOW-070","title":"Implement deterministic cue scheduler and timeline reducer","owner":"RUNTIME","reviewers":["MOTION","FLOW"],"status":"PLANNED","weight":0,"dependencies":["RCHAT-MEDIA-WIZ-020","RCHAT-MEDIA-WIZ-030"],"gate_id":"MP5","path_allowlist":["rust/wizard_avatar_engine/src/cue_scheduler.rs","rust/wizard_avatar_engine/src/media_runtime.rs","rust/wizard_avatar_engine/tests/media_runtime*.rs"],"required_locks":["LOCK-RCHAT-RUNTIME","LOCK-RCHAT-STATE"],"base_sha":null,"result_sha":null,"started_at":null,"finished_at":null,"commands":[],"evidence":[],"metrics":{"progress_earning":false,"parent_weight_authoritative":true},"rollback":{"sha":null,"profile":"scheduler-off","verified":false,"strategy":"restore_parent_profile_and_reopen_item","instruction":"disable this media-performance work package and restore the previous accepted profile","downgrade_allowed":false},"blocker":null,"handoff_id":null,"detail_source":"media-performance/IMPLEMENTATION_TRACKER.md"},
+    {"id":"RCHAT-MEDIA-WIZ-050","parent":"RCHAT-FLOW-080","title":"Integrate layered media performance execution","owner":"INT","reviewers":["RUNTIME","MOTION"],"status":"PLANNED","weight":0,"dependencies":["RCHAT-MEDIA-WIZ-040","RCHAT-ANIM-050"],"gate_id":"MP5","path_allowlist":["rust/wizard_avatar_engine/src/controller.rs","rust/wizard_avatar_engine/src/motion_*.rs","rust/wizard_avatar_engine/src/facial_*.rs","rust/wizard_avatar_engine/src/renderer.rs","rust/wizard_avatar_engine/tests/media_performance*.rs"],"required_locks":["LOCK-RCHAT-CONTROLLER","LOCK-RCHAT-RENDERER"],"base_sha":null,"result_sha":null,"started_at":null,"finished_at":null,"commands":[],"evidence":[],"metrics":{"progress_earning":false,"parent_weight_authoritative":true},"rollback":{"sha":null,"profile":"legacy-animation-only","verified":false,"strategy":"restore_parent_profile_and_reopen_item","instruction":"disable this media-performance work package and restore the previous accepted profile","downgrade_allowed":false},"blocker":null,"handoff_id":null,"detail_source":"media-performance/IMPLEMENTATION_TRACKER.md"},
+    {"id":"RCHAT-MEDIA-WIZ-060","parent":"RCHAT-FLOW-080","title":"Author audiobook performance phrases and transitions","owner":"MOTION","reviewers":["RUNTIME","FLOW"],"status":"PLANNED","weight":0,"dependencies":["RCHAT-MEDIA-WIZ-050"],"gate_id":"MP5","path_allowlist":["rust/wizard_avatar_engine/assets/media_performance*.json","rust/wizard_avatar_engine/src/motion_*.rs","rust/wizard_avatar_engine/tests/audiobook_performance*.rs"],"required_locks":[],"base_sha":null,"result_sha":null,"started_at":null,"finished_at":null,"commands":[],"evidence":[],"metrics":{"progress_earning":false,"parent_weight_authoritative":true},"rollback":{"sha":null,"profile":"basic-narration","verified":false,"strategy":"restore_parent_profile_and_reopen_item","instruction":"disable this media-performance work package and restore the previous accepted profile","downgrade_allowed":false},"blocker":null,"handoff_id":null,"detail_source":"media-performance/IMPLEMENTATION_TRACKER.md"},
+    {"id":"RCHAT-MEDIA-WIZ-070","parent":"RCHAT-FLOW-080","title":"Author dance phrases contacts and reduced motion","owner":"MOTION","reviewers":["RUNTIME","FLOW"],"status":"PLANNED","weight":0,"dependencies":["RCHAT-MEDIA-WIZ-050"],"gate_id":"MP5","path_allowlist":["rust/wizard_avatar_engine/assets/media_performance*.json","rust/wizard_avatar_engine/src/motion_*.rs","rust/wizard_avatar_engine/tests/music_performance*.rs"],"required_locks":[],"base_sha":null,"result_sha":null,"started_at":null,"finished_at":null,"commands":[],"evidence":[],"metrics":{"progress_earning":false,"parent_weight_authoritative":true},"rollback":{"sha":null,"profile":"dance-off","verified":false,"strategy":"restore_parent_profile_and_reopen_item","instruction":"disable this media-performance work package and restore the previous accepted profile","downgrade_allowed":false},"blocker":null,"handoff_id":null,"detail_source":"media-performance/IMPLEMENTATION_TRACKER.md"},
+    {"id":"RCHAT-MEDIA-PRISM-010","parent":"RCHAT-FLOW-090","title":"Add durable Prism media identity provenance and chapters","owner":"INT","reviewers":["RUNTIME","FLOW"],"status":"PLANNED","weight":0,"dependencies":["RCHAT-MEDIA-RSCH-000"],"gate_id":"MP2","path_allowlist":["docs/cartoon-animation-program/rust-chatbot/media-performance","evidence/cartoon-animation-program/rust-chatbot/media-performance/prism"],"required_locks":[],"base_sha":null,"result_sha":null,"started_at":null,"finished_at":null,"commands":[],"evidence":[],"metrics":{"progress_earning":false,"parent_weight_authoritative":true},"rollback":{"sha":null,"profile":"prism-media-schema-off","verified":false,"strategy":"restore_parent_profile_and_reopen_item","instruction":"disable this media-performance work package and restore the previous accepted profile","downgrade_allowed":false},"blocker":null,"handoff_id":null,"detail_source":"media-performance/IMPLEMENTATION_TRACKER.md"},
+    {"id":"RCHAT-MEDIA-PRISM-020","parent":"RCHAT-FLOW-090","title":"Add file-backed range streaming and format probe","owner":"INT","reviewers":["RUNTIME","FLOW"],"status":"PLANNED","weight":0,"dependencies":["RCHAT-MEDIA-PRISM-010"],"gate_id":"MP2","path_allowlist":["docs/cartoon-animation-program/rust-chatbot/media-performance","evidence/cartoon-animation-program/rust-chatbot/media-performance/prism"],"required_locks":[],"base_sha":null,"result_sha":null,"started_at":null,"finished_at":null,"commands":[],"evidence":[],"metrics":{"progress_earning":false,"parent_weight_authoritative":true},"rollback":{"sha":null,"profile":"legacy-media-streaming","verified":false,"strategy":"restore_parent_profile_and_reopen_item","instruction":"disable this media-performance work package and restore the previous accepted profile","downgrade_allowed":false},"blocker":null,"handoff_id":null,"detail_source":"media-performance/IMPLEMENTATION_TRACKER.md"},
+    {"id":"RCHAT-MEDIA-PRISM-030","parent":"RCHAT-FLOW-090","title":"Add Prism media session controller and browser adapter","owner":"INT","reviewers":["RUNTIME","FLOW"],"status":"PLANNED","weight":0,"dependencies":["RCHAT-MEDIA-PRISM-010"],"gate_id":"MP2","path_allowlist":["docs/cartoon-animation-program/rust-chatbot/media-performance","evidence/cartoon-animation-program/rust-chatbot/media-performance/prism"],"required_locks":[],"base_sha":null,"result_sha":null,"started_at":null,"finished_at":null,"commands":[],"evidence":[],"metrics":{"progress_earning":false,"parent_weight_authoritative":true},"rollback":{"sha":null,"profile":"legacy-player","verified":false,"strategy":"restore_parent_profile_and_reopen_item","instruction":"disable this media-performance work package and restore the previous accepted profile","downgrade_allowed":false},"blocker":null,"handoff_id":null,"detail_source":"media-performance/IMPLEMENTATION_TRACKER.md"},
+    {"id":"RCHAT-MEDIA-PRISM-032","parent":"RCHAT-FLOW-090","title":"Add shared audio and video player adapter","owner":"INT","reviewers":["RUNTIME","FLOW"],"status":"PLANNED","weight":0,"dependencies":["RCHAT-MEDIA-PRISM-030"],"gate_id":"MP2","path_allowlist":["docs/cartoon-animation-program/rust-chatbot/media-performance","evidence/cartoon-animation-program/rust-chatbot/media-performance/prism"],"required_locks":[],"base_sha":null,"result_sha":null,"started_at":null,"finished_at":null,"commands":[],"evidence":[],"metrics":{"progress_earning":false,"parent_weight_authoritative":true},"rollback":{"sha":null,"profile":"audio-only-player","verified":false,"strategy":"restore_parent_profile_and_reopen_item","instruction":"disable this media-performance work package and restore the previous accepted profile","downgrade_allowed":false},"blocker":null,"handoff_id":null,"detail_source":"media-performance/IMPLEMENTATION_TRACKER.md"},
+    {"id":"RCHAT-MEDIA-PRISM-034","parent":"RCHAT-FLOW-090","title":"Add complete performance and media controls","owner":"INT","reviewers":["RUNTIME","FLOW"],"status":"PLANNED","weight":0,"dependencies":["RCHAT-MEDIA-PRISM-030","RCHAT-MEDIA-WIZ-020"],"gate_id":"MP2","path_allowlist":["docs/cartoon-animation-program/rust-chatbot/media-performance","evidence/cartoon-animation-program/rust-chatbot/media-performance/prism"],"required_locks":[],"base_sha":null,"result_sha":null,"started_at":null,"finished_at":null,"commands":[],"evidence":[],"metrics":{"progress_earning":false,"parent_weight_authoritative":true},"rollback":{"sha":null,"profile":"basic-player-controls","verified":false,"strategy":"restore_parent_profile_and_reopen_item","instruction":"disable this media-performance work package and restore the previous accepted profile","downgrade_allowed":false},"blocker":null,"handoff_id":null,"detail_source":"media-performance/IMPLEMENTATION_TRACKER.md"},
+    {"id":"RCHAT-MEDIA-PRISM-040","parent":"RCHAT-FLOW-090","title":"Implement correlated Prism Wizard connector","owner":"INT","reviewers":["RUNTIME","FLOW"],"status":"PLANNED","weight":0,"dependencies":["RCHAT-MEDIA-WIZ-020","RCHAT-MEDIA-PRISM-030"],"gate_id":"MP2","path_allowlist":["docs/cartoon-animation-program/rust-chatbot/media-performance","evidence/cartoon-animation-program/rust-chatbot/media-performance/prism"],"required_locks":[],"base_sha":null,"result_sha":null,"started_at":null,"finished_at":null,"commands":[],"evidence":[],"metrics":{"progress_earning":false,"parent_weight_authoritative":true},"rollback":{"sha":null,"profile":"connector-off","verified":false,"strategy":"restore_parent_profile_and_reopen_item","instruction":"disable this media-performance work package and restore the previous accepted profile","downgrade_allowed":false},"blocker":null,"handoff_id":null,"detail_source":"media-performance/IMPLEMENTATION_TRACKER.md"},
+    {"id":"RCHAT-MEDIA-PREP-010","parent":"RCHAT-FLOW-090","title":"Implement resumable preprocessing jobs and checkpoints","owner":"INT","reviewers":["RUNTIME","FLOW"],"status":"PLANNED","weight":0,"dependencies":["RCHAT-MEDIA-PRISM-010"],"gate_id":"MP3","path_allowlist":["docs/cartoon-animation-program/rust-chatbot/media-performance","evidence/cartoon-animation-program/rust-chatbot/media-performance/preprocessing"],"required_locks":[],"base_sha":null,"result_sha":null,"started_at":null,"finished_at":null,"commands":[],"evidence":[],"metrics":{"progress_earning":false,"parent_weight_authoritative":true},"rollback":{"sha":null,"profile":"preprocessing-off","verified":false,"strategy":"restore_parent_profile_and_reopen_item","instruction":"disable this media-performance work package and restore the previous accepted profile","downgrade_allowed":false},"blocker":null,"handoff_id":null,"detail_source":"media-performance/IMPLEMENTATION_TRACKER.md"},
+    {"id":"RCHAT-MEDIA-PREP-012","parent":"RCHAT-FLOW-090","title":"Add import progress cancellation retry and error UI","owner":"INT","reviewers":["FLOW","RUNTIME"],"status":"PLANNED","weight":0,"dependencies":["RCHAT-MEDIA-PREP-010"],"gate_id":"MP3","path_allowlist":["docs/cartoon-animation-program/rust-chatbot/media-performance","evidence/cartoon-animation-program/rust-chatbot/media-performance/prism"],"required_locks":[],"base_sha":null,"result_sha":null,"started_at":null,"finished_at":null,"commands":[],"evidence":[],"metrics":{"progress_earning":false,"parent_weight_authoritative":true},"rollback":{"sha":null,"profile":"preprocessing-ui-off","verified":false,"strategy":"restore_parent_profile_and_reopen_item","instruction":"disable this media-performance work package and restore the previous accepted profile","downgrade_allowed":false},"blocker":null,"handoff_id":null,"detail_source":"media-performance/IMPLEMENTATION_TRACKER.md"},
+    {"id":"RCHAT-MEDIA-PREP-020","parent":"RCHAT-FLOW-090","title":"Parse and validate provided transcripts","owner":"INT","reviewers":["RUNTIME","FLOW"],"status":"PLANNED","weight":0,"dependencies":["RCHAT-MEDIA-PREP-010"],"gate_id":"MP3","path_allowlist":["docs/cartoon-animation-program/rust-chatbot/media-performance","evidence/cartoon-animation-program/rust-chatbot/media-performance/preprocessing"],"required_locks":[],"base_sha":null,"result_sha":null,"started_at":null,"finished_at":null,"commands":[],"evidence":[],"metrics":{"progress_earning":false,"parent_weight_authoritative":true},"rollback":{"sha":null,"profile":"provided-transcript-only","verified":false,"strategy":"restore_parent_profile_and_reopen_item","instruction":"disable this media-performance work package and restore the previous accepted profile","downgrade_allowed":false},"blocker":null,"handoff_id":null,"detail_source":"media-performance/IMPLEMENTATION_TRACKER.md"},
+    {"id":"RCHAT-MEDIA-PREP-030","parent":"RCHAT-FLOW-090","title":"Inventory and invoke existing server Whisper through an opt-in Rust runner","owner":"INT","reviewers":["RUNTIME","FLOW"],"status":"PLANNED","weight":0,"dependencies":["RCHAT-MEDIA-PREP-010"],"gate_id":"MP3","path_allowlist":["docs/cartoon-animation-program/rust-chatbot/media-performance","evidence/cartoon-animation-program/rust-chatbot/media-performance/preprocessing"],"required_locks":[],"base_sha":null,"result_sha":null,"started_at":null,"finished_at":null,"commands":[],"evidence":[],"metrics":{"progress_earning":false,"parent_weight_authoritative":true},"rollback":{"sha":null,"profile":"transcription-off","verified":false,"strategy":"restore_parent_profile_and_reopen_item","instruction":"disable this media-performance work package and restore the previous accepted profile","downgrade_allowed":false},"blocker":null,"handoff_id":null,"detail_source":"media-performance/IMPLEMENTATION_TRACKER.md"},
+    {"id":"RCHAT-MEDIA-PREP-040","parent":"RCHAT-FLOW-090","title":"Verify and hierarchically align transcripts","owner":"INT","reviewers":["RUNTIME","FLOW"],"status":"PLANNED","weight":0,"dependencies":["RCHAT-MEDIA-PREP-020","RCHAT-MEDIA-PREP-030"],"gate_id":"MP3","path_allowlist":["docs/cartoon-animation-program/rust-chatbot/media-performance","evidence/cartoon-animation-program/rust-chatbot/media-performance/preprocessing"],"required_locks":[],"base_sha":null,"result_sha":null,"started_at":null,"finished_at":null,"commands":[],"evidence":[],"metrics":{"progress_earning":false,"parent_weight_authoritative":true},"rollback":{"sha":null,"profile":"alignment-off","verified":false,"strategy":"restore_parent_profile_and_reopen_item","instruction":"disable this media-performance work package and restore the previous accepted profile","downgrade_allowed":false},"blocker":null,"handoff_id":null,"detail_source":"media-performance/IMPLEMENTATION_TRACKER.md"},
+    {"id":"RCHAT-MEDIA-PREP-050","parent":"RCHAT-FLOW-090","title":"Extract narrative features with governed optional analysis","owner":"INT","reviewers":["RUNTIME","FLOW"],"status":"PLANNED","weight":0,"dependencies":["RCHAT-MEDIA-PREP-040"],"gate_id":"MP3","path_allowlist":["docs/cartoon-animation-program/rust-chatbot/media-performance","evidence/cartoon-animation-program/rust-chatbot/media-performance/preprocessing"],"required_locks":[],"base_sha":null,"result_sha":null,"started_at":null,"finished_at":null,"commands":[],"evidence":[],"metrics":{"progress_earning":false,"parent_weight_authoritative":true},"rollback":{"sha":null,"profile":"narrative-analysis-off","verified":false,"strategy":"restore_parent_profile_and_reopen_item","instruction":"disable this media-performance work package and restore the previous accepted profile","downgrade_allowed":false},"blocker":null,"handoff_id":null,"detail_source":"media-performance/IMPLEMENTATION_TRACKER.md"},
+    {"id":"RCHAT-MEDIA-PREP-060","parent":"RCHAT-FLOW-090","title":"Decode PCM and extract deterministic music features","owner":"INT","reviewers":["MOTION","RUNTIME"],"status":"PLANNED","weight":0,"dependencies":["RCHAT-MEDIA-PREP-010"],"gate_id":"MP4","path_allowlist":["docs/cartoon-animation-program/rust-chatbot/media-performance","evidence/cartoon-animation-program/rust-chatbot/media-performance/preprocessing"],"required_locks":[],"base_sha":null,"result_sha":null,"started_at":null,"finished_at":null,"commands":[],"evidence":[],"metrics":{"progress_earning":false,"parent_weight_authoritative":true},"rollback":{"sha":null,"profile":"music-analysis-off","verified":false,"strategy":"restore_parent_profile_and_reopen_item","instruction":"disable this media-performance work package and restore the previous accepted profile","downgrade_allowed":false},"blocker":null,"handoff_id":null,"detail_source":"media-performance/IMPLEMENTATION_TRACKER.md"},
+    {"id":"RCHAT-MEDIA-PREP-070","parent":"RCHAT-FLOW-090","title":"Compile capability constrained media scores","owner":"INT","reviewers":["RUNTIME","MOTION"],"status":"PLANNED","weight":0,"dependencies":["RCHAT-MEDIA-PREP-050","RCHAT-MEDIA-PREP-060","RCHAT-MEDIA-WIZ-030"],"gate_id":"MP4","path_allowlist":["docs/cartoon-animation-program/rust-chatbot/media-performance","evidence/cartoon-animation-program/rust-chatbot/media-performance/preprocessing"],"required_locks":[],"base_sha":null,"result_sha":null,"started_at":null,"finished_at":null,"commands":[],"evidence":[],"metrics":{"progress_earning":false,"parent_weight_authoritative":true},"rollback":{"sha":null,"profile":"score-compiler-off","verified":false,"strategy":"restore_parent_profile_and_reopen_item","instruction":"disable this media-performance work package and restore the previous accepted profile","downgrade_allowed":false},"blocker":null,"handoff_id":null,"detail_source":"media-performance/IMPLEMENTATION_TRACKER.md"},
+    {"id":"RCHAT-MEDIA-WHIZ-010","parent":"RCHAT-FLOW-090","title":"Implement governed source open permit","owner":"INT","reviewers":["FLOW","RUNTIME"],"status":"PLANNED","weight":0,"dependencies":["RCHAT-MEDIA-PRISM-010"],"gate_id":"MP6","path_allowlist":["docs/cartoon-animation-program/rust-chatbot/media-performance","evidence/cartoon-animation-program/rust-chatbot/media-performance/prism"],"required_locks":[],"base_sha":null,"result_sha":null,"started_at":null,"finished_at":null,"commands":[],"evidence":[],"metrics":{"progress_earning":false,"parent_weight_authoritative":true},"rollback":{"sha":null,"profile":"whiz-off","verified":false,"strategy":"restore_parent_profile_and_reopen_item","instruction":"disable this media-performance work package and restore the previous accepted profile","downgrade_allowed":false},"blocker":null,"handoff_id":null,"detail_source":"media-performance/IMPLEMENTATION_TRACKER.md"},
+    {"id":"RCHAT-MEDIA-WHIZ-020","parent":"RCHAT-FLOW-120","title":"Add hosted and desktop Whiz UI","owner":"INT","reviewers":["FLOW","RUNTIME"],"status":"PLANNED","weight":0,"dependencies":["RCHAT-MEDIA-WHIZ-010"],"gate_id":"MP6","path_allowlist":["docs/cartoon-animation-program/rust-chatbot/media-performance","evidence/cartoon-animation-program/rust-chatbot/media-performance/prism"],"required_locks":[],"base_sha":null,"result_sha":null,"started_at":null,"finished_at":null,"commands":[],"evidence":[],"metrics":{"progress_earning":false,"parent_weight_authoritative":true},"rollback":{"sha":null,"profile":"whiz-hidden","verified":false,"strategy":"restore_parent_profile_and_reopen_item","instruction":"disable this media-performance work package and restore the previous accepted profile","downgrade_allowed":false},"blocker":null,"handoff_id":null,"detail_source":"media-performance/IMPLEMENTATION_TRACKER.md"},
+    {"id":"RCHAT-MEDIA-EDIT-010","parent":"RCHAT-FLOW-090","title":"Add immutable performance score editor override layer","owner":"INT","reviewers":["MOTION","FLOW"],"status":"PLANNED","weight":0,"dependencies":["RCHAT-MEDIA-PREP-070"],"gate_id":"MP6","path_allowlist":["docs/cartoon-animation-program/rust-chatbot/media-performance","evidence/cartoon-animation-program/rust-chatbot/media-performance/prism"],"required_locks":[],"base_sha":null,"result_sha":null,"started_at":null,"finished_at":null,"commands":[],"evidence":[],"metrics":{"progress_earning":false,"parent_weight_authoritative":true},"rollback":{"sha":null,"profile":"editor-off","verified":false,"strategy":"restore_parent_profile_and_reopen_item","instruction":"disable this media-performance work package and restore the previous accepted profile","downgrade_allowed":false},"blocker":null,"handoff_id":null,"detail_source":"media-performance/IMPLEMENTATION_TRACKER.md"},
+    {"id":"RCHAT-MEDIA-QA-010","parent":"RCHAT-FLOW-110","title":"Build exhaustive cue frame and sync evidence runner","owner":"FLOW","reviewers":["RUNTIME","MOTION"],"status":"PLANNED","weight":0,"dependencies":["RCHAT-MEDIA-WIZ-040"],"gate_id":"MP7","path_allowlist":["tools/rchat","evidence/cartoon-animation-program/rust-chatbot/media-performance"],"required_locks":["LOCK-RCHAT-EVIDENCE"],"base_sha":null,"result_sha":null,"started_at":null,"finished_at":null,"commands":[],"evidence":[],"metrics":{"progress_earning":false,"parent_weight_authoritative":true},"rollback":{"sha":null,"profile":"block-promotion","verified":false,"strategy":"restore_parent_profile_and_reopen_item","instruction":"disable this media-performance work package and restore the previous accepted profile","downgrade_allowed":false},"blocker":null,"handoff_id":null,"detail_source":"media-performance/IMPLEMENTATION_TRACKER.md"},
+    {"id":"RCHAT-MEDIA-QA-020","parent":"RCHAT-FLOW-140","title":"Run packaged audiobook music video soak and reproduction","owner":"FLOW","reviewers":["RUNTIME","MOTION","INT"],"status":"PLANNED","weight":0,"dependencies":["RCHAT-MEDIA-QA-010","RCHAT-MEDIA-WIZ-060","RCHAT-MEDIA-WIZ-070","RCHAT-MEDIA-PRISM-020","RCHAT-MEDIA-PRISM-032","RCHAT-MEDIA-PRISM-034","RCHAT-MEDIA-PRISM-040","RCHAT-MEDIA-PREP-012","RCHAT-MEDIA-WHIZ-020","RCHAT-MEDIA-EDIT-010"],"gate_id":"MP7","path_allowlist":["evidence/cartoon-animation-program/rust-chatbot/media-performance"],"required_locks":["LOCK-RCHAT-EVIDENCE","LOCK-RCHAT-DEPLOY"],"base_sha":null,"result_sha":null,"started_at":null,"finished_at":null,"commands":[],"evidence":[],"metrics":{"progress_earning":false,"parent_weight_authoritative":true},"rollback":{"sha":null,"profile":"previous-accepted-release","verified":false,"strategy":"restore_parent_profile_and_reopen_item","instruction":"disable this media-performance work package and restore the previous accepted profile","downgrade_allowed":false},"blocker":null,"handoff_id":null,"detail_source":"media-performance/IMPLEMENTATION_TRACKER.md"}
   ],
   "artifacts": [
 
@@ -5743,8 +5935,8 @@
     "program_percent": 11.1111,
     "critical_path_percent": 0.0,
     "passed_blocking_gates": 4,
-    "total_blocking_gates": 15,
-    "gate_percent": 26.6667,
+    "total_blocking_gates": 23,
+    "gate_percent": 17.3913,
     "pose_coverage_percent": 100.0,
     "weight_authority": "work_items",
     "specialist_weights_earning": false,
