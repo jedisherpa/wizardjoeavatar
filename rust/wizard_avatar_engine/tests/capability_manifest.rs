@@ -28,7 +28,7 @@ use wizard_avatar_engine::server;
 use wizard_avatar_engine::state::{Action, Direction, Expression, Locomotion, WizardState};
 
 const EXPECTED_MANIFEST_SHA256: &str =
-    "f7d47f9480240475c17dc77f5c5fdd7fcc10f28add0e168c18c0fb93c7a83054";
+    "4ef14b34a6ce9b8b81c89e59a25b9f5fd142aff19757069d692b39422650b482";
 
 fn ids_for(
     manifest: &wizard_avatar_engine::capability_manifest::CapabilityManifestV1,
@@ -73,6 +73,13 @@ fn manifest_is_an_exact_census_of_runtime_and_contract_registries() {
     assert_eq!(manifest.imported_pose_archive_sha256.len(), 64);
     assert_eq!(manifest.runtime_geometry_authority_sha256.len(), 64);
     assert_eq!(manifest.motion_graph_sha256.len(), 64);
+    assert_eq!(manifest.safe_idle.idle_turn_state, ChatTurnState::Idle);
+    assert_eq!(manifest.safe_idle.stop_behavior_id, "behavior.stop");
+    assert_eq!(
+        manifest.safe_idle.neutral_expression_id,
+        "expression.neutral"
+    );
+    assert_eq!(manifest.safe_idle.rest_mouth_pose_id, "mouth.closed");
     assert_eq!(
         manifest.imported_pose_archive_sha256,
         format!(
@@ -686,6 +693,142 @@ fn closed_world_validation_rejects_invented_missing_and_reclassified_runtime_ids
 }
 
 #[test]
+fn safe_idle_profile_is_exactly_runtime_resolvable() {
+    let manifest = build_wizard_capability_manifest().expect("manifest should build");
+    let profile = &manifest.safe_idle;
+
+    assert_eq!(profile.idle_turn_state, ChatTurnState::Idle);
+    assert_eq!(profile.stop_behavior_id, "behavior.stop");
+    assert_eq!(profile.neutral_expression_id, "expression.neutral");
+    assert_eq!(profile.rest_mouth_pose_id, "mouth.closed");
+    assert!(profile.preserve_mode);
+    assert!(profile.preserve_root_position);
+    assert!(profile.preserve_facing);
+    assert!(profile.clear_gesture);
+    assert!(profile.clear_gaze_override);
+    assert!(profile.clear_viseme_override);
+    assert!(profile.clear_blink_override);
+    assert!(profile.clear_prop_effects);
+    assert!(profile.settle_secondary_motion);
+
+    let idle_fallbacks = manifest
+        .state_facing_fallbacks
+        .iter()
+        .filter(|fallback| fallback.turn_state == profile.idle_turn_state)
+        .collect::<Vec<_>>();
+    assert_eq!(idle_fallbacks.len(), Direction::ALL.len());
+    assert_eq!(
+        idle_fallbacks
+            .iter()
+            .map(|fallback| fallback.requested_facing)
+            .collect::<BTreeSet<_>>(),
+        Direction::ALL.into_iter().collect()
+    );
+    for fallback in idle_fallbacks {
+        let target = manifest
+            .capabilities
+            .iter()
+            .find(|entry| entry.id == fallback.fallback_pose_id)
+            .expect("safe idle fallback target");
+        assert_eq!(target.kind, CapabilityKind::Pose);
+        assert_eq!(target.status, CapabilityStatus::ActiveLegacy);
+    }
+}
+
+#[test]
+fn safe_idle_profile_rejects_wrong_references_policy_and_facing_coverage() {
+    let valid = build_wizard_capability_manifest().expect("manifest should build");
+
+    let mut wrong_state = valid.clone();
+    wrong_state.safe_idle.idle_turn_state = ChatTurnState::Listening;
+    assert!(wrong_state.validate().is_err());
+
+    let mut wrong_stop = valid.clone();
+    wrong_stop.safe_idle.stop_behavior_id = "behavior.reset".to_string();
+    assert!(wrong_stop.validate().is_err());
+
+    let mut wrong_expression = valid.clone();
+    wrong_expression.safe_idle.neutral_expression_id = "expression.happy".to_string();
+    assert!(wrong_expression.validate().is_err());
+
+    let mut wrong_mouth = valid.clone();
+    wrong_mouth.safe_idle.rest_mouth_pose_id = "mouth.open_small".to_string();
+    assert!(wrong_mouth.validate().is_err());
+
+    let mut missing_reference = valid.clone();
+    missing_reference.safe_idle.stop_behavior_id = "behavior.missing".to_string();
+    assert!(missing_reference.validate().is_err());
+
+    let mut inactive_reference = valid.clone();
+    inactive_reference
+        .capabilities
+        .iter_mut()
+        .find(|entry| entry.id == "expression.neutral")
+        .expect("neutral expression")
+        .status = CapabilityStatus::ShadowValidated;
+    assert!(inactive_reference.validate().is_err());
+
+    let mut reclassified_reference = valid.clone();
+    reclassified_reference
+        .capabilities
+        .iter_mut()
+        .find(|entry| entry.id == "behavior.stop")
+        .expect("stop behavior")
+        .category = wizard_avatar_engine::capability_manifest::CapabilityCategoryV1::RootMotion;
+    assert!(reclassified_reference.validate().is_err());
+
+    let mut wrong_command = valid.clone();
+    wrong_command
+        .capabilities
+        .iter_mut()
+        .find(|entry| entry.id == "mouth.closed")
+        .expect("rest mouth pose")
+        .controller_commands = ApplicabilityV1::NotApplicable;
+    assert!(wrong_command.validate().is_err());
+
+    let mut false_policies = Vec::new();
+    let mut policy = valid.clone();
+    policy.safe_idle.preserve_mode = false;
+    false_policies.push(policy);
+    let mut policy = valid.clone();
+    policy.safe_idle.preserve_root_position = false;
+    false_policies.push(policy);
+    let mut policy = valid.clone();
+    policy.safe_idle.preserve_facing = false;
+    false_policies.push(policy);
+    let mut policy = valid.clone();
+    policy.safe_idle.clear_gesture = false;
+    false_policies.push(policy);
+    let mut policy = valid.clone();
+    policy.safe_idle.clear_gaze_override = false;
+    false_policies.push(policy);
+    let mut policy = valid.clone();
+    policy.safe_idle.clear_viseme_override = false;
+    false_policies.push(policy);
+    let mut policy = valid.clone();
+    policy.safe_idle.clear_blink_override = false;
+    false_policies.push(policy);
+    let mut policy = valid.clone();
+    policy.safe_idle.clear_prop_effects = false;
+    false_policies.push(policy);
+    let mut policy = valid.clone();
+    policy.safe_idle.settle_secondary_motion = false;
+    false_policies.push(policy);
+    for malformed in false_policies {
+        assert!(malformed.validate().is_err());
+    }
+
+    let mut missing_idle_facing = valid;
+    missing_idle_facing
+        .state_facing_fallbacks
+        .retain(|fallback| {
+            fallback.turn_state != ChatTurnState::Idle
+                || fallback.requested_facing != Direction::South
+        });
+    assert!(missing_idle_facing.validate().is_err());
+}
+
+#[test]
 fn malformed_schema_status_bounds_order_and_fallbacks_are_rejected() {
     let valid = build_wizard_capability_manifest().expect("manifest should build");
     let mut cases = Vec::new();
@@ -789,6 +932,17 @@ fn serde_is_closed_and_document_hash_mismatch_rejects() {
     let mut value = serde_json::to_value(&document).expect("document JSON");
     assert_eq!(value["manifest"]["schema_version"], 2);
     assert_eq!(value["manifest"]["versions"]["capability_api_version"], 2);
+    assert_eq!(value["manifest"]["safe_idle"]["idle_turn_state"], "idle");
+    assert_eq!(
+        value["manifest"]["safe_idle"]["stop_behavior_id"],
+        "behavior.stop"
+    );
+    let mut unknown_safe_idle = value.clone();
+    unknown_safe_idle["manifest"]["safe_idle"]
+        .as_object_mut()
+        .expect("safe idle object")
+        .insert("unknown_policy".to_string(), serde_json::json!(true));
+    assert!(serde_json::from_value::<CapabilityDocumentV1>(unknown_safe_idle).is_err());
     value
         .get_mut("manifest")
         .and_then(serde_json::Value::as_object_mut)
@@ -865,6 +1019,22 @@ async fn axum_versioned_route_and_unversioned_adapter_serve_identical_document()
         WizardState::default().character_id
     );
     assert_eq!(document.manifest_sha256, EXPECTED_MANIFEST_SHA256);
+    assert_eq!(
+        document.manifest.safe_idle.idle_turn_state,
+        ChatTurnState::Idle
+    );
+    assert_eq!(
+        document.manifest.safe_idle.stop_behavior_id,
+        "behavior.stop"
+    );
+    assert_eq!(
+        document.manifest.safe_idle.neutral_expression_id,
+        "expression.neutral"
+    );
+    assert_eq!(
+        document.manifest.safe_idle.rest_mouth_pose_id,
+        "mouth.closed"
+    );
     document.validate().expect("route document validates");
 }
 
