@@ -57,7 +57,7 @@ pub fn app(source: ProceduralWizardFrameSource) -> Router {
             get(reference_avatar_pose_cells_json),
         )
         .route("/api/avatar/wizard/state", get(state))
-        .route("/api/avatar/wizard/v1/capabilities", get(capabilities))
+        .route("/api/avatar/wizard/v2/capabilities", get(capabilities))
         .route("/api/avatar/wizard/capabilities", get(capabilities))
         .route("/api/avatar/wizard/move", post(command_move))
         .route("/api/avatar/wizard/walk-left", post(command_walk_left))

@@ -267,7 +267,7 @@ impl WizardAvatarController {
             ControllerCommandKind::Speak => self.cmd_speak(&command.payload),
             ControllerCommandKind::Mouth => self.cmd_mouth(&command.payload),
             ControllerCommandKind::Stop => {
-                self.stop_locomotion();
+                self.enter_safe_idle();
                 Ok(())
             }
             ControllerCommandKind::Reset => {
@@ -649,6 +649,41 @@ impl WizardAvatarController {
         self.movement.desired_velocity = Velocity { x: 0.0, z: 0.0 };
         self.state.target_point = None;
         self.channels.note_locomotion_change();
+    }
+
+    fn enter_safe_idle(&mut self) {
+        self.stop_locomotion();
+        self.movement.current_speed = 0.0;
+        self.state.velocity = Velocity { x: 0.0, z: 0.0 };
+        self.state.speed_ratio = 0.0;
+        self.state.locomotion = Locomotion::Idle;
+        self.state.planted_foot = PlantedFoot::Both;
+
+        self.pose_clip.clear(&mut self.state);
+        let presented = self
+            .pose_playback
+            .presented_pose()
+            .map(str::to_owned)
+            .or_else(|| self.state.pose_id.clone());
+        if let Some(presented) = presented {
+            self.pose_playback.return_to_direction(
+                pose_id_for_direction(self.state.facing),
+                presented,
+                self.state.simulation_tick,
+                DEFAULT_POSE_TRANSITION_TICKS,
+            );
+            self.pose_playback
+                .step(self.state.simulation_tick, &mut self.state);
+        } else {
+            self.pose_playback.clear(&mut self.state);
+        }
+
+        self.channels.settle_safe_idle(self.state.simulation_tick);
+        self.state.speech_id = None;
+        self.state.speech_until = self.state.time_seconds;
+        self.state.action_until = self.state.time_seconds;
+        self.state.mouth = MouthShape::Closed;
+        self.state.blink_phase = blink_phase(self.state.time_seconds);
     }
 
     fn step_locomotion(&mut self) {

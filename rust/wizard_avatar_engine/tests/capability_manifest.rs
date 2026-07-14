@@ -25,7 +25,10 @@ use wizard_avatar_engine::motion_graph::{CapabilityTier, MOTION_GRAPH_SCHEMA_VER
 use wizard_avatar_engine::pose::PoseLibrary;
 use wizard_avatar_engine::pose_clip::POSE_CLIPS;
 use wizard_avatar_engine::server;
-use wizard_avatar_engine::state::{Action, Direction, Expression, Locomotion, WizardState};
+use wizard_avatar_engine::state::{
+    Action, Direction, EffectState, Expression, Locomotion, MouthShape, StaffState,
+    UpperBodyAction, WizardState, WorldPoint,
+};
 
 const EXPECTED_MANIFEST_SHA256: &str =
     "4ef14b34a6ce9b8b81c89e59a25b9f5fd142aff19757069d692b39422650b482";
@@ -736,6 +739,54 @@ fn safe_idle_profile_is_exactly_runtime_resolvable() {
 }
 
 #[test]
+fn stop_behavior_executes_the_published_safe_idle_policy() {
+    let mut controller = WizardAvatarController::default();
+    controller.state_mut().world_position = WorldPoint { x: 2.0, z: 7.0 };
+    controller.state_mut().facing = Direction::East;
+    controller.apply_command(WizardCommand::new(
+        "action",
+        serde_json::json!({"action": "magic_cast", "duration_ms": 10_000}),
+    ));
+    controller.apply_command(WizardCommand::new(
+        "speak",
+        serde_json::json!({"text": "active", "duration_ms": 10_000}),
+    ));
+    controller.apply_command(WizardCommand::new(
+        "expression",
+        serde_json::json!({"expression": "happy"}),
+    ));
+    controller.apply_command(WizardCommand::new(
+        "mouth",
+        serde_json::json!({"mouth": "open_wide"}),
+    ));
+    let root = controller.current_state().world_position;
+    let facing = controller.current_state().facing;
+
+    let result = controller.apply_command(WizardCommand::new("stop", serde_json::json!({})));
+    assert!(result.ok);
+    assert_eq!(result.state.world_position, root);
+    assert_eq!(result.state.facing, facing);
+    assert_eq!(result.state.locomotion, Locomotion::Idle);
+    assert_eq!(result.state.action, Action::Idle);
+    assert_eq!(result.state.upper_body_action, UpperBodyAction::None);
+    assert_eq!(result.state.expression, Expression::Neutral);
+    assert_eq!(result.state.mouth, MouthShape::Closed);
+    assert_eq!(result.state.staff_state, StaffState::Held);
+    assert_eq!(result.state.effect_state, EffectState::None);
+    assert!(result.state.speech_id.is_none());
+    assert!(result.state.pose_clip_id.is_none());
+    assert!(result.state.target_point.is_none());
+
+    controller.advance(1.0);
+    assert_eq!(controller.current_state().world_position, root);
+    assert_eq!(controller.current_state().facing, facing);
+    assert_eq!(
+        wizard_avatar_engine::animation::reference_pose_id_for_state(controller.current_state()),
+        "profile_right"
+    );
+}
+
+#[test]
 fn safe_idle_profile_rejects_wrong_references_policy_and_facing_coverage() {
     let valid = build_wizard_capability_manifest().expect("manifest should build");
 
@@ -990,7 +1041,7 @@ fn canonical_manifest_hash_is_independently_verified_and_frozen() {
 }
 
 #[tokio::test]
-async fn axum_versioned_route_and_unversioned_adapter_serve_identical_document() {
+async fn axum_v2_route_and_unversioned_adapter_serve_identical_document() {
     let listener = tokio::net::TcpListener::bind("127.0.0.1:0")
         .await
         .expect("bind test server");
@@ -1000,8 +1051,9 @@ async fn axum_versioned_route_and_unversioned_adapter_serve_identical_document()
         axum::serve(listener, app).await.expect("serve test router");
     });
 
-    let versioned = raw_http_get(addr, "/api/avatar/wizard/v1/capabilities").await;
+    let versioned = raw_http_get(addr, "/api/avatar/wizard/v2/capabilities").await;
     let adapter = raw_http_get(addr, "/api/avatar/wizard/capabilities").await;
+    let stale_v1 = raw_http_get(addr, "/api/avatar/wizard/v1/capabilities").await;
     server_task.abort();
 
     assert!(versioned.starts_with("HTTP/1.1 200 OK\r\n"));
@@ -1009,6 +1061,7 @@ async fn axum_versioned_route_and_unversioned_adapter_serve_identical_document()
         .to_ascii_lowercase()
         .contains("content-type: application/json"));
     assert!(adapter.starts_with("HTTP/1.1 200 OK\r\n"));
+    assert!(stale_v1.starts_with("HTTP/1.1 404 Not Found\r\n"));
     let versioned_body = versioned.split("\r\n\r\n").nth(1).expect("versioned body");
     let adapter_body = adapter.split("\r\n\r\n").nth(1).expect("adapter body");
     assert_eq!(versioned_body, adapter_body);
