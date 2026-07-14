@@ -496,6 +496,15 @@ impl ChatPolicyReducerV1 {
         {
             return Err("active safety clamp belongs to a retired session".to_string());
         }
+        if self.completed_safety_clamps.iter().any(|completed| {
+            self.retired_session_ids.contains(&completed.session_id)
+                && self
+                    .last_session_end
+                    .as_ref()
+                    .is_none_or(|ended| ended.session_id != completed.session_id)
+        }) {
+            return Err("completed safety clamp belongs to a superseded session".to_string());
+        }
         if self.semantic.control.state.safety_clamp == self.active_safety_clamps.is_empty() {
             return Err("safety clamp control state is inconsistent".to_string());
         }

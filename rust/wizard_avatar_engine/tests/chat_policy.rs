@@ -1470,6 +1470,47 @@ fn reducer_snapshot_deserialization_enforces_bounds_uniqueness_and_invariants() 
     clamp_owner_is_retired["retired_session_ids"] = serde_json::json!(["session-2"]);
     clamp_owner_is_retired["active_safety_clamps"][0]["session_id"] = "session-2".into();
     assert!(serde_json::from_value::<ChatPolicyReducerV1>(clamp_owner_is_retired).is_err());
+    let mut rollover = active_reducer();
+    rollover
+        .reduce(input_from_source(
+            2,
+            2,
+            "rollover-source",
+            safety_event("rollover-clamp", SafetyScope::Speech, true),
+        ))
+        .unwrap();
+    rollover
+        .reduce(input_from_source(
+            3,
+            3,
+            "rollover-source",
+            safety_event("rollover-clamp", SafetyScope::Speech, false),
+        ))
+        .unwrap();
+    rollover
+        .reduce(input(
+            4,
+            4,
+            ChatEventV1::SessionEnded {
+                reason: SessionEndReason::UserEnded,
+            },
+        ))
+        .unwrap();
+    let completed_from_retired =
+        serde_json::to_value(&rollover).unwrap()["completed_safety_clamps"][0].clone();
+    rollover
+        .reduce(input_for(
+            5,
+            5,
+            "session-2",
+            "turn-2",
+            ChatEventV1::SessionStarted { locale: None },
+        ))
+        .unwrap();
+    let mut restored_superseded_clamp = serde_json::to_value(rollover).unwrap();
+    restored_superseded_clamp["completed_safety_clamps"] =
+        serde_json::json!([completed_from_retired]);
+    assert!(serde_json::from_value::<ChatPolicyReducerV1>(restored_superseded_clamp).is_err());
     let mut active_with_completed_marker = valid.clone();
     active_with_completed_marker["retired_session_ids"] = serde_json::json!(["session-2"]);
     active_with_completed_marker["last_session_end"] = serde_json::json!({
