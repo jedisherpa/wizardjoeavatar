@@ -82,6 +82,31 @@ def create_app(source: ProceduralWizardFrameSource | None = None):
             raise HTTPException(status_code=400, detail=result.message)
         return result.state
 
+    async def public_media_status() -> Dict[str, Any]:
+        diagnostics = await frame_hub.media_session_status()
+        session = diagnostics["session"]
+        application = diagnostics["application"]
+        scheduler_state = session["scheduler_state"]
+        if not connector_enabled or not connector_token:
+            status = "disabled"
+        elif application["active"]:
+            status = "animating"
+        elif session["active_session_suffix"] is None:
+            status = "waiting"
+        elif scheduler_state == "clock_uncertain":
+            status = "stale"
+        elif scheduler_state in {"paused", "stopped", "ended", "no_session"}:
+            status = "paused"
+        else:
+            status = "ready"
+        return {
+            "status": status,
+            "active": bool(application["active"]),
+            "source": application["source_slot"] or session["active_source_slot"],
+            "scheduler_state": scheduler_state,
+            "action": application["action"],
+        }
+
     @app.get("/")
     async def root():
         return HTMLResponse((WEB_DIR / "index.html").read_text(encoding="utf-8"))
@@ -125,6 +150,7 @@ def create_app(source: ProceduralWizardFrameSource | None = None):
         return {
             "state": frame_source.current_state().as_public_dict(),
             "diagnostics": frame_source.diagnostics_dict(),
+            "media": await public_media_status(),
         }
 
     @app.get("/api/avatar/wizard/frame-hashes")

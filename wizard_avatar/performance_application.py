@@ -91,6 +91,7 @@ class PerformanceApplication:
         elif resolved.expression in EXPRESSIONS:
             state.expression = resolved.expression
 
+        self._release_scripted_locomotion(controller)
         body_allowed = self._body_available(controller)
         action: Optional[str] = None
         if body_allowed:
@@ -140,6 +141,27 @@ class PerformanceApplication:
         if state.action in _PERFORMANCE_ACTIONS or state.action == "idle":
             return True
         return bool(state.action_until and state.time_seconds >= state.action_until)
+
+    @staticmethod
+    def _release_scripted_locomotion(controller: WizardAvatarController) -> None:
+        """Let live media own the body without overriding a human control lease."""
+        if controller.control_arbiter.active_lease is not None:
+            return
+        state = controller.state
+        movement = controller.locomotion.movement
+        scripted = (
+            controller.locomotion.path.active
+            or movement.target_x is not None
+            or movement.target_z is not None
+            or state.locomotion == "walking"
+            or state.action == "walking"
+        )
+        if not scripted:
+            return
+        controller.locomotion.stop()
+        controller.locomotion.sync_to_state(state)
+        if state.action == "walking":
+            controller._set_action("idle", 0)
 
     @staticmethod
     def _resolve_action(

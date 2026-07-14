@@ -25,8 +25,8 @@ This is the canonical accountability record. A phase is complete only when its a
 | 14 | PrismGT player wiring | PrismGT engineer | complete | Main and speech HTML audio lifecycle wiring; TTS preemption and main restore |
 | 15 | Whiz governed media action | PrismGT/governance | pending | Canonical URL validation, explicit-click-only open, disabled/error states |
 | 16 | Preview, editing, and debug UI | UX/previs | in_progress | Connector diagnostics shipped; score timeline/editor remains |
-| 17 | Automated quality gates | QA | verified | 245 Python, 18 Node, 9 Rust contract, 5 Rust route tests; Vite build passed |
-| 18 | Browser and visual verification | QA/accessibility | in_progress | Live main/TTS/main relay proof complete; packaged desktop playback QA remains |
+| 17 | Automated quality gates | QA | verified | 249 Python, 20 Node, 9 Rust contract, 5 Rust route, 3 desktop activation tests; Vite and desktop builds passed |
+| 18 | Browser and visual verification | QA/accessibility | verified | Packaged playback animated main media, paused cleanly, and passed desktop/mobile status and overlap checks |
 | 19 | Documentation, deployment, and handoff | Coordinator | in_progress | Local operator guide complete; commits, pushes, and final report remain |
 
 ## Specialist Accountability
@@ -83,3 +83,4 @@ This is the canonical accountability record. A phase is complete only when its a
 | 2026-07-13 | Expanded the live integration target to all PrismGT audio | Main music/podcast/audiobook player and TTS/speaker element share deterministic priority and handoff |
 | 2026-07-14 | Implemented and verified the local media connector | 245 Python tests, 18 Node tests, 14 Rust focused tests, Vite build, isolated live relay |
 | 2026-07-14 | Proved source priority against the persistent runtime | Music animated on `main`; TTS preempted on `speech`; main resumed at advanced media time |
+| 2026-07-14 | Closed the usability and state-ownership audit | 249 Python tests; packaged app connected from private config; main audio animated; pause released performance; desktop/mobile browser QA passed |

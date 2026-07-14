@@ -757,13 +757,22 @@ class MediaSessionCoordinator:
             self._seen.popitem(last=False)
 
     @staticmethod
-    def _is_terminal_source(snapshot: MediaSessionSnapshotV1) -> bool:
-        return snapshot.playback.state in {"empty", "ended", "stopped", "error"}
+    def _speech_owns_performance(snapshot: MediaSessionSnapshotV1) -> bool:
+        # Speech owns the performance only while it is audible or actively
+        # continuing an already-audible utterance. Startup/loading and paused
+        # elements must not strand the runtime on a silent speech clock.
+        return snapshot.playback.state in {"playing", "buffering", "seeking"}
 
-    def _select_active_snapshot(self) -> Optional[MediaSessionSnapshotV1]:
-        candidate = self._slot_snapshots.get("speech")
-        if candidate is not None and not self._is_terminal_source(candidate):
-            return candidate
+    def _select_active_snapshot(
+        self, incoming: MediaSessionSnapshotV1
+    ) -> Optional[MediaSessionSnapshotV1]:
+        # The connector contract carries full-state snapshots, not independent
+        # per-element telemetry. A main snapshot received after speech therefore
+        # means the connector has already restored main as its active source.
+        if incoming.media.source_slot == "main":
+            return incoming
+        if self._speech_owns_performance(incoming):
+            return incoming
         return self._slot_snapshots.get("main")
 
     def _activate(self, snapshot: Optional[MediaSessionSnapshotV1]) -> None:
@@ -866,7 +875,7 @@ class MediaSessionCoordinator:
         slot_clock.observe(snapshot, receipt)
         self._slot_snapshots[slot] = snapshot
         self._slot_receipts[slot] = receipt
-        new_active = self._select_active_snapshot()
+        new_active = self._select_active_snapshot(snapshot)
         active_changed = (
             previous_active is None
             or new_active is None

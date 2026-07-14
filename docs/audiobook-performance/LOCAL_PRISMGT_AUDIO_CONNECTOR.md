@@ -20,6 +20,38 @@ ends, pauses, or becomes inaudible, the latest main-media snapshot is restored.
 - Prism same-origin ingress: `POST /api/connectors/wizard/media-session`
 - Prism connector status: `GET /api/connectors/wizard/status`
 
+## User workflow
+
+1. Open `/Applications/Prism GT.app` and the Wizard visualization at
+   `http://127.0.0.1:8765/`.
+2. In Prism, find the visible **Wizard Joe** status directly below the top action
+   buttons. It must read **Connected** before playback begins.
+3. Select **Player** from that status row or the bottom-right utility controls.
+4. Choose a bundled track, open **Tracks**, or use **Link Audio** for local media.
+5. Press **Play**. Prism changes to **Animating main audio** and the Wizard page
+   changes to the matching green animation status.
+6. TTS and speaker output switch both indicators to speech automatically. Main
+   media resumes animation when speech pauses or ends; audio itself is never
+   restarted by the connector.
+
+The Prism sidecar port is intentionally dynamic in the packaged desktop app.
+Launch Prism GT from `/Applications` instead of bookmarking a transient sidecar
+URL. **Open Wizard** always targets the stable visualization port `8765`.
+
+## One-time activation
+
+Run the Wizard service installer once:
+
+```bash
+tools/install_local_wizard_service.sh
+```
+
+It generates or preserves one high-entropy shared token, installs the persistent
+Wizard LaunchAgent, and writes Prism's private connector configuration to
+`~/Library/Application Support/WizardJoeAvatar/prism-connector.env` with mode
+`0600`. Quit and reopen Prism GT after first installation. No terminal-specific
+environment is required for later desktop launches.
+
 ## Service configuration
 
 The Wizard LaunchAgent is `com.jedisherpa.wizardjoeavatar`. Its local-only
@@ -38,8 +70,10 @@ PRISM_WIZARD_BASE_URL=http://127.0.0.1:8765
 PRISM_WIZARD_CONNECTOR_TOKEN=<same shared random secret>
 ```
 
-Secrets belong in service environments or the OS credential store. They must
-not be committed, included in diagnostics, or exposed to the browser.
+The installer manages these values. Explicit process environment values still
+override the private file for development and tests. Secrets must not be
+committed, included in diagnostics, exposed to the browser, or placed on a
+command line.
 
 ## Contract and privacy
 
@@ -86,7 +120,12 @@ The local integration proof must observe all three states in order:
 
 ## Recovery
 
-If Prism reports `disabled`, verify the three `PRISM_WIZARD_*` variables. If it
-reports `wizard_unavailable`, verify the persistent listener and Wizard status.
+If Prism reports `disabled`, rerun `tools/install_local_wizard_service.sh`, quit
+Prism GT completely, and reopen it. If it reports `wizard_unavailable`, verify
+the persistent listener and Wizard status.
 If the Wizard returns `resync_required`, reload the Prism window so it creates a
 new connector session and emits a full reconnect snapshot.
+
+If the Wizard visualization is walking independently of audio, press its square
+Stop button. Live media playback also cancels scripted demo paths automatically;
+keyboard and gamepad control leases still retain body authority.

@@ -78,13 +78,37 @@ python3 tools/run_wizard_avatar_server.py --port 8765
 
 Then open `http://127.0.0.1:8765/`.
 
+## Animate from Prism GT audio
+
+With the persistent Wizard service and the configured Prism GT app running:
+
+1. Open `/Applications/Prism GT.app`.
+2. Confirm the visible **Wizard Joe** status reads **Connected**.
+3. Select **Player**, choose a bundled track or **Link Audio**, and press **Play**.
+4. Keep `http://127.0.0.1:8765/` open as the visualization output.
+5. Use **Open Wizard** in Prism whenever the visualization is not already open.
+
+Prism music, podcasts, audiobooks, and video audio use the main-media channel.
+TTS and speaker output temporarily use the speech channel, then return control to
+the current main track when speech pauses or ends. The square Stop button on the
+visualization releases demo movement; active Prism playback also releases any
+scripted demo path automatically while preserving keyboard and gamepad leases.
+
+The visualization's media banner is the quickest health check:
+
+- **Animating main audio** or **Animating speech**: playback owns the performance.
+- **Wizard media paused**: the connector is healthy and Prism is paused.
+- **Wizard media needs reconnect**: reload Prism GT and press Play again.
+
 On macOS, install the local persistent service once:
 
 ```bash
 tools/install_local_wizard_service.sh
 ```
 
-It starts at login, restarts after a crash, and remains on port `8765` until:
+The installer generates a private shared connector credential, configures both
+the Wizard LaunchAgent and normal Prism GT desktop launches, starts at login,
+restarts after a crash, and remains on port `8765` until:
 
 ```bash
 tools/stop_local_wizard_service.sh

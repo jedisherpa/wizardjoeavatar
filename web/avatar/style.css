@@ -63,6 +63,59 @@ body {
   background: var(--panel);
 }
 
+.media-status {
+  position: absolute;
+  left: 50%;
+  top: 12px;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  min-height: 52px;
+  max-width: min(360px, calc(100vw - 560px));
+  transform: translateX(-50%);
+  padding: 8px 12px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--panel);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.media-status-indicator {
+  width: 9px;
+  height: 9px;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  background: #9b7213;
+}
+
+.media-status strong,
+.media-status small {
+  display: block;
+  letter-spacing: 0;
+}
+
+.media-status strong {
+  font-size: 13px;
+  line-height: 1.2;
+}
+
+.media-status small {
+  margin-top: 3px;
+  color: #5d6268;
+  font-size: 11px;
+  line-height: 1.2;
+}
+
+.media-status.is-animating .media-status-indicator {
+  background: #13824b;
+  box-shadow: 0 0 0 3px rgba(19, 130, 75, 0.14);
+}
+
+.media-status.is-stale .media-status-indicator,
+.media-status.is-disabled .media-status-indicator {
+  background: #b43a2f;
+}
+
 .captions {
   position: absolute;
   left: 50%;
@@ -155,12 +208,21 @@ button[aria-pressed="true"] {
     display: none;
   }
 
+  .media-status {
+    left: 8px;
+    right: 8px;
+    top: 108px;
+    max-width: none;
+    transform: none;
+  }
+
   .toolbar {
+    left: 8px;
     right: 8px;
     top: 8px;
-    max-width: calc(100vw - 16px);
-    flex-wrap: wrap;
-    justify-content: flex-end;
+    display: grid;
+    grid-template-columns: repeat(6, 34px);
+    justify-content: center;
   }
 
   .pose-grid {

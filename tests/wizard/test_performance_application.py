@@ -107,6 +107,25 @@ class PerformanceApplicationTests(unittest.TestCase):
         self.assertTrue(result.active)
         self.assertIsNone(result.action)
 
+    def test_live_media_releases_scripted_demo_locomotion(self):
+        self.controller.apply_command(
+            type("Command", (), {"type": "path", "payload": {
+                "points": [{"x": -2.0, "z": 4.0}, {"x": 2.0, "z": 4.0}],
+                "loop": True,
+                "speed": 0.9,
+            }})()
+        )
+        self.assertTrue(self.controller.locomotion.path.active)
+        self.assertEqual(self.controller.state.action, "walking")
+
+        self.accept(snapshot_mapping(), 0)
+        result = self.application.apply(self.controller, 500_000)
+
+        self.assertTrue(result.active)
+        self.assertEqual(result.action, "staff_spin")
+        self.assertFalse(self.controller.locomotion.path.active)
+        self.assertEqual(self.controller.state.locomotion, "idle")
+
     def test_stale_heartbeat_releases_animation(self):
         self.accept(snapshot_mapping(), 0)
         self.assertTrue(self.application.apply(self.controller, 100_000).active)

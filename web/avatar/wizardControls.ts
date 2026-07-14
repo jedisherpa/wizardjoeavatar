@@ -34,9 +34,13 @@ export function installControls() {
   document.querySelector("[data-repeat]")?.addEventListener("click", (event) => {
     toggleRepeat(event.currentTarget).catch(console.error);
   });
+  document.querySelector("[data-stop]")?.addEventListener("click", () => {
+    stopScriptedMotion().catch(console.error);
+  });
 
   installPosePicker();
   installKeyboard();
+  updateMediaStatus();
   window.setInterval(sendControlIntent, CONTROL_INTERVAL_MS);
   window.setInterval(updateCaption, 125);
   window.addEventListener("blur", releaseHeldInput);
@@ -194,16 +198,51 @@ async function installPosePicker() {
 async function updateCaption() {
   try {
     const response = await fetch("/api/avatar/wizard/state", { cache: "no-store" });
-    const { state } = await response.json();
+    const { state, media } = await response.json();
     const caption = document.getElementById("captions");
     if (!caption) return;
     caption.textContent = state.speech_text || "";
     caption.hidden = !state.speech_text;
     flightRequested = Boolean(state.airborne) || pendingMobilityRequest === "takeoff";
     updateFlightButton();
+    updateMediaStatus(media);
   } catch (_error) {
     // A reconnect should not interrupt local controller input.
   }
+}
+
+function updateMediaStatus(media = null) {
+  const container = document.getElementById("media-status");
+  const title = document.getElementById("media-status-title");
+  const detail = document.getElementById("media-status-detail");
+  if (!container || !title || !detail || !media) return;
+  const labels = {
+    disabled: ["Wizard media disabled", "Connector configuration is required"],
+    waiting: ["Wizard media ready", "Play audio in the Prism GT app"],
+    paused: ["Wizard media paused", "Press Play in Prism GT"],
+    stale: ["Wizard media needs reconnect", "Reload Prism GT, then press Play"],
+    ready: ["Wizard media connected", "Waiting for active playback"],
+    animating: [
+      `Animating ${media.source === "speech" ? "speech" : "main audio"}`,
+      media.action ? `Action: ${media.action.replaceAll("_", " ")}` : "Following Prism GT",
+    ],
+  };
+  const [heading, description] = labels[media.status] || labels.waiting;
+  container.className = `media-status is-${media.status || "waiting"}`;
+  title.textContent = heading;
+  detail.textContent = description;
+}
+
+async function stopScriptedMotion() {
+  repeatRunId += 1;
+  const repeatButton = document.querySelector("[data-repeat]");
+  if (repeatButton) {
+    repeatButton.setAttribute("aria-pressed", "false");
+    repeatButton.title = "Repeat random poses";
+    repeatButton.setAttribute("aria-label", "Repeat random poses");
+  }
+  await command("pose", { pose_id: null });
+  await command("stop", {});
 }
 
 function updateFlightButton() {
@@ -265,6 +304,7 @@ async function toggleRepeat(button) {
   const runId = repeatRunId;
   button.setAttribute("aria-pressed", String(isStarting));
   button.title = isStarting ? "Stop repeating" : "Repeat random poses";
+  button.setAttribute("aria-label", button.title);
   if (!isStarting) {
     await command("pose", { pose_id: null });
     await command("stop", {});

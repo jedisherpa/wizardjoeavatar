@@ -62,6 +62,12 @@ class MediaSessionServerTests(unittest.IsolatedAsyncioTestCase):
             (("content-type", "application/json"),),
         )
         self.assertEqual(status, 503)
+        state_status, payload = await asgi_request(
+            app, "GET", "/api/avatar/wizard/state"
+        )
+        self.assertEqual(state_status, 200)
+        self.assertEqual(payload["media"]["status"], "disabled")
+        self.assertNotIn("active_session_suffix", payload["media"])
 
     async def test_auth_origin_size_and_valid_snapshot_boundaries(self):
         env = {
@@ -111,6 +117,14 @@ class MediaSessionServerTests(unittest.IsolatedAsyncioTestCase):
         self.assertEqual(accepted, 200)
         self.assertEqual(payload["disposition"], "accepted")
         self.assertEqual(payload["scheduler_state"], "scoreless")
+
+        state_status, state_payload = await asgi_request(
+            app, "GET", "/api/avatar/wizard/state"
+        )
+        self.assertEqual(state_status, 200)
+        self.assertIn(state_payload["media"]["status"], {"ready", "animating"})
+        self.assertEqual(state_payload["media"]["source"], "main")
+        self.assertNotIn("active_session_suffix", state_payload["media"])
         await app.state.frame_hub.stop()
 
 

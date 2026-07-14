@@ -241,7 +241,7 @@ class MediaSessionCoordinatorTests(unittest.TestCase):
         self.assertEqual(takeover.disposition, "accepted")
         self.assertEqual(takeover.connector_session_id, "00000000-0000-4000-8000-000000000022")
 
-    def test_tts_preempts_main_and_terminal_tts_restores_latest_main(self):
+    def test_tts_preempts_main_and_terminal_tts_restores_main(self):
         main = self.coordinator.accept_with_result(snapshot(position_ms=1000), 0)
         self.assertEqual(main.snapshot.media.source_slot, "main")
 
@@ -259,18 +259,9 @@ class MediaSessionCoordinatorTests(unittest.TestCase):
         self.assertTrue(tts.hard_reconcile)
         tts_generation = tts.reconciliation_generation
 
-        background_main = self.coordinator.accept_with_result(
-            snapshot(sequence=2, cause="heartbeat", position_ms=1400),
-            20_000,
-        )
-        self.assertIsNone(background_main.snapshot)
-        self.assertFalse(background_main.hard_reconcile)
-        self.assertEqual(background_main.reconciliation_generation, tts_generation)
-        self.assertEqual(self.coordinator.accepted_snapshot.media.source_slot, "speech")
-
         restored = self.coordinator.accept_with_result(
             snapshot(
-                sequence=3,
+                sequence=2,
                 cause="ended",
                 state="ended",
                 source_slot="speech",
@@ -281,8 +272,84 @@ class MediaSessionCoordinatorTests(unittest.TestCase):
         )
         self.assertTrue(restored.hard_reconcile)
         self.assertEqual(restored.snapshot.media.source_slot, "main")
-        self.assertEqual(restored.snapshot.playback.position_ms, 1400)
+        self.assertEqual(restored.snapshot.playback.position_ms, 1000)
         self.assertEqual(restored.reconciliation_generation, tts_generation + 1)
+
+    def test_main_full_state_snapshot_reclaims_ownership_after_speech(self):
+        self.coordinator.accept(snapshot(position_ms=1000), 0)
+        self.coordinator.accept(
+            snapshot(
+                sequence=1,
+                cause="playing",
+                source_slot="speech",
+                kind="tts",
+                position_ms=0,
+            ),
+            10_000,
+        )
+
+        restored = self.coordinator.accept_with_result(
+            snapshot(sequence=2, cause="trackchange", state="paused", position_ms=0),
+            20_000,
+        )
+
+        self.assertEqual(restored.ack.disposition, "accepted")
+        self.assertTrue(restored.hard_reconcile)
+        self.assertEqual(restored.snapshot.media.source_slot, "main")
+
+        playing = self.coordinator.accept_with_result(
+            snapshot(sequence=3, cause="playing", position_ms=1400),
+            30_000,
+        )
+        self.assertEqual(playing.snapshot.media.source_slot, "main")
+        self.assertEqual(playing.snapshot.playback.position_ms, 1400)
+
+    def test_paused_tts_restores_latest_main_immediately(self):
+        self.coordinator.accept(snapshot(position_ms=1000), 0)
+        self.coordinator.accept(
+            snapshot(
+                sequence=1,
+                cause="playing",
+                source_slot="speech",
+                kind="tts",
+                position_ms=100,
+            ),
+            10_000,
+        )
+        restored = self.coordinator.accept_with_result(
+            snapshot(
+                sequence=2,
+                cause="pause",
+                state="paused",
+                source_slot="speech",
+                kind="tts",
+                position_ms=500,
+            ),
+            30_000,
+        )
+
+        self.assertEqual(restored.ack.disposition, "accepted")
+        self.assertTrue(restored.hard_reconcile)
+        self.assertEqual(restored.snapshot.media.source_slot, "main")
+        self.assertEqual(restored.snapshot.playback.position_ms, 1000)
+
+    def test_loading_tts_does_not_preempt_main(self):
+        self.coordinator.accept(snapshot(position_ms=1000), 0)
+        loading = self.coordinator.accept_with_result(
+            snapshot(
+                sequence=1,
+                cause="play",
+                state="loading",
+                source_slot="speech",
+                kind="tts",
+                position_ms=0,
+            ),
+            10_000,
+        )
+
+        self.assertEqual(loading.ack.disposition, "accepted")
+        self.assertEqual(self.coordinator.accepted_snapshot.media.source_slot, "main")
+        self.assertIsNone(loading.snapshot)
 
     def test_stale_tts_terminal_cannot_restore_main(self):
         self.coordinator.accept(snapshot(sequence=0), 0)

@@ -11,18 +11,26 @@
       <canvas id="wizard-canvas" aria-label="WizardJoeAvatar square-cell stage"></canvas>
       <pre id="wizard-selection" aria-hidden="true"></pre>
       <section id="diagnostics" class="diagnostics"></section>
+      <section id="media-status" class="media-status is-waiting" role="status" aria-live="polite">
+        <span class="media-status-indicator" aria-hidden="true"></span>
+        <span>
+          <strong id="media-status-title">Wizard media waiting</strong>
+          <small id="media-status-detail">Play audio in the Prism GT app</small>
+        </span>
+      </section>
       <div id="captions" class="captions" role="status" aria-live="polite" hidden></div>
       <nav class="toolbar" aria-label="Wizard controls">
-        <button data-demo="play" title="Play demo">▶</button>
-        <button data-repeat title="Repeat random poses" aria-pressed="false">↻</button>
-        <button data-flight title="Fly" aria-pressed="false">↥</button>
-        <button data-poses title="Choose pose">▦</button>
-        <button data-action="idle" title="Idle">•</button>
-        <button data-action="thinking" title="Think">?</button>
-        <button data-action="explaining" title="Explain">✦</button>
-        <button data-action="pointing" title="Point">→</button>
-        <button data-action="magic_cast" title="Cast">*</button>
-        <button data-action="reaction" title="React">!</button>
+        <button data-demo="play" title="Play demo" aria-label="Play demo">▶</button>
+        <button data-repeat title="Repeat random poses" aria-label="Repeat random poses" aria-pressed="false">↻</button>
+        <button data-stop title="Stop movement" aria-label="Stop movement">■</button>
+        <button data-flight title="Fly" aria-label="Fly" aria-pressed="false">↥</button>
+        <button data-poses title="Choose pose" aria-label="Choose pose">▦</button>
+        <button data-action="idle" title="Idle" aria-label="Idle">•</button>
+        <button data-action="thinking" title="Think" aria-label="Think">?</button>
+        <button data-action="explaining" title="Explain" aria-label="Explain">✦</button>
+        <button data-action="pointing" title="Point" aria-label="Point">→</button>
+        <button data-action="magic_cast" title="Cast" aria-label="Cast">*</button>
+        <button data-action="reaction" title="React" aria-label="React">!</button>
       </nav>
       <dialog id="pose-picker" class="pose-picker" aria-label="Pose library">
         <header class="pose-picker-header">

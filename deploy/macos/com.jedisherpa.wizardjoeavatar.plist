@@ -17,6 +17,10 @@
   <dict>
     <key>PYTHONUNBUFFERED</key>
     <string>1</string>
+    <key>WIZARD_MEDIA_CONNECTOR_ENABLED</key>
+    <string>1</string>
+    <key>WIZARD_MEDIA_CONNECTOR_TOKEN</key>
+    <string>__CONNECTOR_TOKEN__</string>
   </dict>
   <key>RunAtLoad</key>
   <true/>

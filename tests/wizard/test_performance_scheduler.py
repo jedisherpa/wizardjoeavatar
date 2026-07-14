@@ -298,10 +298,13 @@ class SnapshotSchedulerTests(unittest.TestCase):
         tts_state = scheduler.current_state(10_000)
         self.assertTrue(all(cue_id.startswith("tts.") for cue_id in tts_state.score_cue_ids))
 
-        scheduler.accept_snapshot(bound_snapshot(self.main_score, sequence=2, cause="heartbeat", position=1600), 20_000)
-        background_state = scheduler.current_state(20_000)
-        self.assertEqual(background_state.resolution_hash, scheduler.evaluate(810, intensity_milli=700).resolution_hash)
-        self.assertTrue(all(cue_id.startswith("tts.") for cue_id in background_state.score_cue_ids))
+        scheduler.accept_snapshot(
+            bound_snapshot(self.main_score, sequence=2, cause="trackchange", state="paused", position=1600),
+            20_000,
+        )
+        restored_main = scheduler.current_state(20_000)
+        self.assertEqual(restored_main.resolution_hash, scheduler.evaluate(1600, intensity_milli=700).resolution_hash)
+        self.assertFalse(any(cue_id.startswith("tts.") for cue_id in restored_main.score_cue_ids))
 
         scheduler.accept_snapshot(
             bound_snapshot(
@@ -316,7 +319,7 @@ class SnapshotSchedulerTests(unittest.TestCase):
             30_000,
         )
         restored = scheduler.current_state(30_000)
-        expected = scheduler.evaluate(1610, intensity_milli=700)
+        expected = scheduler.evaluate(1600, intensity_milli=700)
         self.assertEqual(restored.resolution_hash, expected.resolution_hash)
         self.assertFalse(any(cue_id.startswith("tts.") for cue_id in restored.score_cue_ids))
         self.assertEqual(scheduler.diagnostics(30_000).hard_reconcile_count, 3)
@@ -389,9 +392,9 @@ class SnapshotSchedulerTests(unittest.TestCase):
             bound_snapshot(self.main_score, sequence=2, position=1800, with_score=False, mode="narrative"),
             20_000,
         )
-        background = scheduler.current_state(20_000)
-        self.assertEqual(background.fallback_records[0]["mode"], "speech")
-        self.assertEqual(background.media_time_ms, 250)
+        restored_main = scheduler.current_state(20_000)
+        self.assertEqual(restored_main.fallback_records[0]["mode"], "narrative")
+        self.assertEqual(restored_main.media_time_ms, 1800)
         scheduler.accept_snapshot(
             bound_snapshot(
                 self.main_score,
