@@ -1,0 +1,53 @@
+{
+  "base": "codex/crystail-character",
+  "branch": "codex/joeville-scene-lantern-walk-day",
+  "camera": "Character-eye-level pedestrian master looking west along the mall",
+  "corrections": [
+    "Recompose to 16:9 without stretching",
+    "Create controlled signage as separate graphics",
+    "Lock three-block storefront continuity and reverse angle"
+  ],
+  "layers": [
+    "sky_and_far_block",
+    "storefront_background",
+    "character_plane",
+    "tree_midground",
+    "bench_props",
+    "foreground_planters",
+    "lighting"
+  ],
+  "playable": "Central 55 percent walkway is the character plane; left and right storefront edges are entrance zones; preserve a five-character walking corridor.",
+  "role": "Pearl Street analogue exterior master for walking and public encounters",
+  "runtime_target": {
+    "cell_proxy": [
+      240,
+      135
+    ],
+    "color_space": "sRGB",
+    "fps": 24,
+    "master": [
+      3840,
+      2160
+    ]
+  },
+  "scene_id": "JV-PRL-DAY-MASTER",
+  "schema_version": 1,
+  "set_id": "JV-PRL",
+  "slug": "lantern-walk-day",
+  "source": {
+    "height": 1254,
+    "path": "assets/environments/joeville/jv-prl-day-master/source-reference.png",
+    "sha256": "56829d171fc1142ba22370a2b58767d1c04e565c6b22b991099334907617c75f",
+    "width": 1254
+  },
+  "status": "DIRECTION-KEEP-RECOMPOSE-16X9",
+  "title": "Lantern Walk pedestrian district by day",
+  "variants": [
+    "early_morning_empty",
+    "midday",
+    "golden_hour",
+    "night_lights",
+    "summer_crowd",
+    "winter"
+  ]
+}
