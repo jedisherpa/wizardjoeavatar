@@ -24,8 +24,8 @@ use sha2::{Digest, Sha256};
 use std::collections::{BTreeMap, BTreeSet};
 use std::sync::OnceLock;
 
-pub const CAPABILITY_MANIFEST_SCHEMA_VERSION: u16 = 1;
-pub const CAPABILITY_API_VERSION: u16 = 1;
+pub const CAPABILITY_MANIFEST_SCHEMA_VERSION: u16 = 2;
+pub const CAPABILITY_API_VERSION: u16 = 2;
 pub const RUNTIME_PROFILE_VERSION: u16 = 1;
 pub const RUNTIME_POLICY_VERSION: u16 = 1;
 pub const RUNTIME_TRANSPORT_VERSION: u16 = 1;
@@ -441,7 +441,9 @@ impl CapabilityManifestV1 {
         }
 
         validate_feeling_entries(&ids, &self.feelings)?;
+        validate_controller_command_coverage(&self.capabilities, &self.controller_command_surface)?;
         validate_fallback_topology(&ids)?;
+        validate_pose_alias_target_consistency(&ids)?;
         validate_state_facing_fallbacks(&ids, &self.state_facing_fallbacks)?;
         let expected = build_unvalidated_wizard_capability_manifest()?;
         if self != &expected {
@@ -694,13 +696,7 @@ fn pose_entry(
         runtime_surfaces.push(RuntimeSurfaceV1::DirectionalController);
     }
     runtime_surfaces.sort();
-    let mut props = Vec::new();
-    if pose.motion.staff_present {
-        props.push(PropRequirementV1::StaffAllSamples);
-    }
-    if pose.motion.effect_present {
-        props.push(PropRequirementV1::EffectAllSamples);
-    }
+    let props = pose_prop_requirements(pose);
     let fallback = showcase_approval
         .as_ref()
         .map_or(FallbackTopologyV1::Terminal, |approval| {
@@ -770,7 +766,7 @@ fn pose_alias_entry(
         compatible_motion_profiles: Vec::new(),
         controller_commands: applicable([ControllerCommandKind::Pose]),
         runtime_surfaces: vec![RuntimeSurfaceV1::DirectPoseCommand],
-        prop_requirements: Vec::new(),
+        prop_requirements: pose_prop_requirements(target),
         runtime_cost: RuntimeCostV1::BoundedCellProjection,
         quality_status: QualityStatusV1::RuntimeAliasValidated,
         pose_coverage: None,
@@ -1093,6 +1089,18 @@ fn procedural_entries() -> Result<Vec<CapabilityEntryV1>, String> {
         .into_iter()
         .map(procedural_command_entry)
         .collect::<Result<Vec<_>, _>>()?;
+    entries.push(simple_entry(
+        "behavior.action".to_string(),
+        CapabilityKind::ProceduralBehavior,
+        CapabilityStatus::ActiveLegacy,
+        CapabilityCategoryV1::ControllerControl,
+        60,
+        simple_runtime(
+            RuntimeSurfaceV1::LegacyController,
+            QualityStatusV1::RuntimeActiveLegacy,
+            Some(ControllerCommandKind::Action),
+        ),
+    ));
     entries.push(simple_entry(
         "behavior.speaking_duration".to_string(),
         CapabilityKind::ProceduralBehavior,
@@ -1470,6 +1478,69 @@ fn validate_feeling_entries(
     Ok(())
 }
 
+fn validate_controller_command_coverage(
+    capabilities: &[CapabilityEntryV1],
+    command_surface: &[ControllerCommandKind],
+) -> Result<(), String> {
+    let advertised = sorted_unique(capabilities.iter().flat_map(|entry| {
+        match &entry.controller_commands {
+            ApplicabilityV1::Applicable(commands) => commands.as_slice(),
+            ApplicabilityV1::NotApplicable => &[],
+        }
+        .iter()
+        .copied()
+    }));
+    if advertised != command_surface {
+        return Err(
+            "capability entry commands do not cover the exact runtime command surface".to_string(),
+        );
+    }
+    Ok(())
+}
+
+fn validate_pose_alias_target_consistency(
+    ids: &BTreeMap<&str, &CapabilityEntryV1>,
+) -> Result<(), String> {
+    for alias in ids
+        .values()
+        .filter(|entry| entry.kind == CapabilityKind::PoseAlias)
+    {
+        let target_id = &alias
+            .pose_alias
+            .as_ref()
+            .ok_or_else(|| format!("{} alias is missing its target", alias.id))?
+            .target_pose_id;
+        let target = ids
+            .get(target_id.as_str())
+            .ok_or_else(|| format!("{} alias lost target {target_id}", alias.id))?;
+        if alias.emotional_uses != target.emotional_uses
+            || alias.energy != target.energy
+            || alias.directions != target.directions
+            || alias.duration != target.duration
+            || alias.loop_behavior != target.loop_behavior
+            || alias.interruptibility != target.interruptibility
+            || alias.valid_entry_states != target.valid_entry_states
+            || alias.valid_exit_states != target.valid_exit_states
+            || alias.face_policy != target.face_policy
+            || alias.compatible_face_states != target.compatible_face_states
+            || alias.compatible_locomotion_states != target.compatible_locomotion_states
+            || alias.compatible_motion_profiles != target.compatible_motion_profiles
+            || alias.controller_commands != target.controller_commands
+            || alias.prop_requirements != target.prop_requirements
+            || alias.runtime_cost != target.runtime_cost
+            || alias.transition_limitations != target.transition_limitations
+            || alias.narrative_uses != target.narrative_uses
+            || alias.inappropriate_uses != target.inappropriate_uses
+        {
+            return Err(format!(
+                "{} alias metadata differs from target {target_id}",
+                alias.id
+            ));
+        }
+    }
+    Ok(())
+}
+
 fn validate_fallback_topology(ids: &BTreeMap<&str, &CapabilityEntryV1>) -> Result<(), String> {
     for entry in ids.values() {
         for fallback in fallback_ids(entry) {
@@ -1531,6 +1602,17 @@ fn fallback_ids(entry: &CapabilityEntryV1) -> Vec<&str> {
         FallbackTopologyV1::Fallbacks(ids) => ids.iter().map(String::as_str).collect(),
         FallbackTopologyV1::NotApplicable | FallbackTopologyV1::Terminal => Vec::new(),
     }
+}
+
+fn pose_prop_requirements(pose: &PoseDefinition) -> Vec<PropRequirementV1> {
+    let mut requirements = Vec::new();
+    if pose.motion.staff_present {
+        requirements.push(PropRequirementV1::StaffAllSamples);
+    }
+    if pose.motion.effect_present {
+        requirements.push(PropRequirementV1::EffectAllSamples);
+    }
+    requirements
 }
 
 fn validate_state_facing_fallbacks(

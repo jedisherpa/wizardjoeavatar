@@ -25,10 +25,10 @@ use wizard_avatar_engine::motion_graph::{CapabilityTier, MOTION_GRAPH_SCHEMA_VER
 use wizard_avatar_engine::pose::PoseLibrary;
 use wizard_avatar_engine::pose_clip::POSE_CLIPS;
 use wizard_avatar_engine::server;
-use wizard_avatar_engine::state::{Direction, Expression, Locomotion, WizardState};
+use wizard_avatar_engine::state::{Action, Direction, Expression, Locomotion, WizardState};
 
 const EXPECTED_MANIFEST_SHA256: &str =
-    "233f1015375dafb931926c8c644991214db1f25467cf1796e14c31daa4e1d625";
+    "f7d47f9480240475c17dc77f5c5fdd7fcc10f28add0e168c18c0fb93c7a83054";
 
 fn ids_for(
     manifest: &wizard_avatar_engine::capability_manifest::CapabilityManifestV1,
@@ -66,7 +66,7 @@ fn manifest_is_an_exact_census_of_runtime_and_contract_registries() {
         .graph;
 
     assert_eq!(manifest.schema_version, CAPABILITY_MANIFEST_SCHEMA_VERSION);
-    assert_eq!(manifest.capabilities.len(), 208);
+    assert_eq!(manifest.capabilities.len(), 209);
     assert_eq!(manifest.character_id, WizardState::default().character_id);
     assert_eq!(manifest.pose_geometry_count, library.pose_ids().count());
     assert_eq!(manifest.pose_alias_count, library.alias_count());
@@ -154,6 +154,7 @@ fn manifest_is_an_exact_census_of_runtime_and_contract_registries() {
     assert_eq!(
         ids_for(&manifest, CapabilityKind::ProceduralBehavior),
         [
+            "behavior.action",
             "behavior.circle",
             "behavior.face",
             "behavior.figure_eight",
@@ -294,6 +295,9 @@ fn state_facing_fallbacks_are_the_exact_graph_10_by_8_topology() {
 #[test]
 fn versions_and_unsupported_flags_publish_only_current_runtime_truth() {
     let manifest = build_wizard_capability_manifest().expect("manifest should build");
+    assert_eq!(CAPABILITY_MANIFEST_SCHEMA_VERSION, 2);
+    assert_eq!(CAPABILITY_API_VERSION, 2);
+    assert_eq!(manifest.schema_version, 2);
     assert_eq!(
         manifest.versions.capability_api_version,
         CAPABILITY_API_VERSION
@@ -375,6 +379,39 @@ fn runtime_alias_is_a_stable_resolvable_capability_with_exact_topology() {
             .expect("target resolves")
             .id
     );
+    let target = manifest
+        .capabilities
+        .iter()
+        .find(|entry| entry.id == "fly_front_hover_neutral")
+        .expect("alias target capability");
+    assert_eq!(alias.emotional_uses, target.emotional_uses);
+    assert_eq!(alias.energy, target.energy);
+    assert_eq!(alias.directions, target.directions);
+    assert_eq!(alias.duration, target.duration);
+    assert_eq!(alias.loop_behavior, target.loop_behavior);
+    assert_eq!(alias.interruptibility, target.interruptibility);
+    assert_eq!(alias.valid_entry_states, target.valid_entry_states);
+    assert_eq!(alias.valid_exit_states, target.valid_exit_states);
+    assert_eq!(alias.face_policy, target.face_policy);
+    assert_eq!(alias.compatible_face_states, target.compatible_face_states);
+    assert_eq!(
+        alias.compatible_locomotion_states,
+        target.compatible_locomotion_states
+    );
+    assert_eq!(
+        alias.compatible_motion_profiles,
+        target.compatible_motion_profiles
+    );
+    assert_eq!(alias.controller_commands, target.controller_commands);
+    assert_eq!(alias.prop_requirements, target.prop_requirements);
+    assert_eq!(
+        alias.prop_requirements,
+        vec![PropRequirementV1::StaffAllSamples]
+    );
+    assert_eq!(alias.runtime_cost, target.runtime_cost);
+    assert_eq!(alias.transition_limitations, target.transition_limitations);
+    assert_eq!(alias.narrative_uses, target.narrative_uses);
+    assert_eq!(alias.inappropriate_uses, target.inappropriate_uses);
 }
 
 #[test]
@@ -408,7 +445,7 @@ fn controller_command_and_procedural_census_is_derived_and_behaviorally_resolvab
         .iter()
         .filter(|entry| entry.kind == CapabilityKind::ProceduralBehavior)
         .collect::<Vec<_>>();
-    assert_eq!(procedural.len(), PROCEDURAL_CONTROLLER_COMMANDS.len() + 2);
+    assert_eq!(procedural.len(), PROCEDURAL_CONTROLLER_COMMANDS.len() + 3);
     for command in PROCEDURAL_CONTROLLER_COMMANDS {
         assert_eq!(
             procedural
@@ -428,6 +465,45 @@ fn controller_command_and_procedural_census_is_derived_and_behaviorally_resolvab
         ids_for(&manifest, CapabilityKind::ProceduralBehavior).contains("behavior.move_relative")
     );
     assert!(ids_for(&manifest, CapabilityKind::ProceduralBehavior).contains("behavior.face"));
+
+    let entry_command_union = manifest
+        .capabilities
+        .iter()
+        .flat_map(|entry| match &entry.controller_commands {
+            ApplicabilityV1::Applicable(commands) => commands.as_slice(),
+            ApplicabilityV1::NotApplicable => &[],
+        })
+        .copied()
+        .collect::<BTreeSet<_>>();
+    assert_eq!(
+        entry_command_union,
+        ControllerCommandKind::ALL.into_iter().collect()
+    );
+    let action_entries = manifest
+        .capabilities
+        .iter()
+        .filter(|entry| {
+            matches!(
+                &entry.controller_commands,
+                ApplicabilityV1::Applicable(commands)
+                    if commands.contains(&ControllerCommandKind::Action)
+            )
+        })
+        .map(|entry| entry.id.as_str())
+        .collect::<BTreeSet<_>>();
+    assert_eq!(action_entries, ["behavior.action"].into_iter().collect());
+    for action in Action::ALL {
+        let result = WizardAvatarController::default().apply_command(WizardCommand::new(
+            "action",
+            serde_json::json!({"action": action.as_str(), "duration_ms": 1}),
+        ));
+        assert!(
+            result.ok,
+            "{} action must resolve: {}",
+            action.as_str(),
+            result.message
+        );
+    }
 
     let mut moving = WizardAvatarController::default();
     assert!(
@@ -587,6 +663,15 @@ fn closed_world_validation_rejects_invented_missing_and_reclassified_runtime_ids
     missing_command.controller_command_surface.pop();
     assert!(missing_command.validate().is_err());
 
+    let mut unadvertised_action = valid.clone();
+    unadvertised_action
+        .capabilities
+        .iter_mut()
+        .find(|entry| entry.id == "behavior.action")
+        .expect("action capability")
+        .controller_commands = ApplicabilityV1::NotApplicable;
+    assert!(unadvertised_action.validate().is_err());
+
     let mut changed_alias = valid;
     changed_alias
         .capabilities
@@ -702,6 +787,8 @@ fn malformed_schema_status_bounds_order_and_fallbacks_are_rejected() {
 fn serde_is_closed_and_document_hash_mismatch_rejects() {
     let document = build_wizard_capability_document().expect("document");
     let mut value = serde_json::to_value(&document).expect("document JSON");
+    assert_eq!(value["manifest"]["schema_version"], 2);
+    assert_eq!(value["manifest"]["versions"]["capability_api_version"], 2);
     value
         .get_mut("manifest")
         .and_then(serde_json::Value::as_object_mut)
@@ -712,6 +799,19 @@ fn serde_is_closed_and_document_hash_mismatch_rejects() {
     let mut wrong_hash = document;
     wrong_hash.manifest_sha256 = "0".repeat(64);
     assert!(wrong_hash.validate().is_err());
+}
+
+#[test]
+fn stale_v1_manifest_and_api_expectations_are_rejected() {
+    let valid = build_wizard_capability_manifest().expect("manifest");
+
+    let mut stale_schema = valid.clone();
+    stale_schema.schema_version = 1;
+    assert!(stale_schema.validate().is_err());
+
+    let mut stale_api = valid;
+    stale_api.versions.capability_api_version = 1;
+    assert!(stale_api.validate().is_err());
 }
 
 #[test]
