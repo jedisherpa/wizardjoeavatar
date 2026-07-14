@@ -2,8 +2,26 @@
 from __future__ import annotations
 
 import argparse
+import os
 import sys
 from pathlib import Path
+from typing import Any
+
+
+class ServerShutdownSignal:
+    def __init__(self) -> None:
+        self._server: Any = None
+        self.requested = False
+
+    def attach(self, server: Any) -> None:
+        self._server = server
+        if self.requested:
+            server.should_exit = True
+
+    def request(self) -> None:
+        self.requested = True
+        if self._server is not None:
+            self._server.should_exit = True
 
 
 def main() -> None:
@@ -13,6 +31,11 @@ def main() -> None:
     parser.add_argument("--cols", type=int, default=240)
     parser.add_argument("--rows", type=int, default=135)
     parser.add_argument("--fps", type=float, default=24.0)
+    parser.add_argument(
+        "--companion",
+        action="store_true",
+        help="Enable app-owned lifecycle and authentication using WIZARD_COMPANION_APP_TOKEN.",
+    )
     args = parser.parse_args()
 
     root = Path(__file__).resolve().parent.parent
@@ -20,10 +43,24 @@ def main() -> None:
 
     import uvicorn
     from wizard_avatar.frame_source import ProceduralWizardFrameSource
-    from wizard_avatar.server import create_app
+    from wizard_avatar.server import create_app, is_literal_loopback_host
 
-    app = create_app(ProceduralWizardFrameSource(args.cols, args.rows, args.fps))
-    uvicorn.run(app, host=args.host, port=args.port)
+    environment_companion_mode = os.environ.get("WIZARD_COMPANION_MODE", "").lower() in {
+        "1", "true", "yes", "on"
+    }
+    companion_mode = args.companion or environment_companion_mode
+    if companion_mode and not is_literal_loopback_host(args.host):
+        parser.error("companion mode requires --host to be a literal loopback address")
+
+    shutdown_signal = ServerShutdownSignal()
+    app = create_app(
+        ProceduralWizardFrameSource(args.cols, args.rows, args.fps),
+        companion_mode=companion_mode,
+        shutdown_signal=shutdown_signal.request,
+    )
+    server = uvicorn.Server(uvicorn.Config(app, host=args.host, port=args.port))
+    shutdown_signal.attach(server)
+    server.run()
 
 
 if __name__ == "__main__":

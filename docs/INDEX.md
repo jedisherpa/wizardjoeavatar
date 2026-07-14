@@ -12,6 +12,17 @@ This package contains the full Codex implementation specification for a procedur
 - [Python branch delivery and rebuild contract](cartoon-animation-program/PYTHON_BRANCH_DELIVERY.md)
 - [Cartoon animation integrated implementation plan](cartoon-animation-program/IMPLEMENTATION_PLAN.md)
 - [Cartoon animation multi-agent workflow](cartoon-animation-program/WORKFLOW.md)
+- [Wizard Joe Companion program tracker](companion/PROGRAM_TRACKER.md)
+- [Wizard Joe Companion current-state audit](companion/CURRENT_STATE_AUDIT.md)
+- [Wizard Joe Companion standalone architecture ADR](companion/ADR-001-STANDALONE-ARCHITECTURE.md)
+- [Wizard Joe Companion product and interface specification](companion/PRODUCT_AND_INTERFACE_SPEC.md)
+- [Wizard Joe Companion discovery and lifecycle protocol](companion/DISCOVERY_AND_LIFECYCLE_PROTOCOL.md)
+- [Wizard Joe Companion implementation and release plan](companion/IMPLEMENTATION_AND_RELEASE_PLAN.md)
+- [Wizard Joe Companion user guide](companion/USER_GUIDE.md)
+- [Wizard Joe Companion developer and release guide](companion/DEVELOPER_RELEASE_GUIDE.md)
+- [Wizard Joe Companion verification evidence](companion/VERIFICATION_EVIDENCE.md)
+- [Wizard Joe Companion rollback guide](companion/ROLLBACK.md)
+- [Wizard Joe Companion production readiness](companion/PRODUCTION_READINESS.md)
 
 ## Sections
 

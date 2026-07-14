@@ -164,6 +164,12 @@ class WizardFrameHub:
         async with self._current_lock():
             return dict(self.performance.diagnostics(time.perf_counter_ns() // 1000))
 
+    async def set_reactions_paused(self, paused: bool) -> dict:
+        await self.start()
+        async with self._current_lock():
+            self.performance.set_paused(paused, self.frame_source.controller)
+            return {"reactions_paused": self.performance.paused}
+
     def source_hash_history(self) -> list[dict]:
         return list(self._source_hash_history)
 

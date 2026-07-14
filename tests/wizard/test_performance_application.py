@@ -131,6 +131,20 @@ class PerformanceApplicationTests(unittest.TestCase):
         self.assertTrue(self.application.apply(self.controller, 100_000).active)
         self.assertFalse(self.application.apply(self.controller, 1_500_001).active)
 
+    def test_reaction_pause_suppresses_performance_without_losing_media_clock(self):
+        self.accept(snapshot_mapping(), 0)
+        self.assertTrue(self.application.apply(self.controller, 100_000).active)
+
+        self.application.set_paused(True, self.controller)
+        self.assertFalse(self.application.apply(self.controller, 200_000).active)
+        self.assertEqual(self.controller.state.action, "idle")
+        self.assertTrue(self.application.diagnostics(200_000)["reactions_paused"])
+
+        self.application.set_paused(False)
+        resumed = self.application.apply(self.controller, 300_000)
+        self.assertTrue(resumed.active)
+        self.assertEqual(resumed.media_time_ms, 300)
+
 
 if __name__ == "__main__":
     unittest.main()

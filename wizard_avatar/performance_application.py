@@ -57,7 +57,21 @@ class PerformanceApplication:
         )
         self._last_applied_action: Optional[str] = None
         self._last_applied_pose: Optional[str] = None
+        self._paused = False
         self._last_result = PerformanceApplicationResult(False, None, None, None, None, None)
+
+    @property
+    def paused(self) -> bool:
+        return self._paused
+
+    def set_paused(
+        self,
+        paused: bool,
+        controller: Optional[WizardAvatarController] = None,
+    ) -> None:
+        self._paused = bool(paused)
+        if self._paused and controller is not None:
+            self._release_owned_state(controller)
 
     def accept_snapshot(
         self,
@@ -72,6 +86,10 @@ class PerformanceApplication:
         now_monotonic_us: int,
     ) -> PerformanceApplicationResult:
         snapshot = self.scheduler.coordinator.accepted_snapshot
+        if self._paused:
+            self._release_owned_state(controller)
+            self._last_result = PerformanceApplicationResult(False, None, None, None, None, None)
+            return self._last_result
         if snapshot is None or not self._is_live(snapshot, now_monotonic_us):
             self._release_owned_state(controller)
             self._last_result = PerformanceApplicationResult(False, None, None, None, None, None)
@@ -123,6 +141,7 @@ class PerformanceApplication:
 
     def diagnostics(self, now_monotonic_us: int) -> Mapping[str, object]:
         return {
+            "reactions_paused": self._paused,
             "application": self._last_result.to_dict(),
             "session": self.scheduler.coordinator.diagnostics(now_monotonic_us).to_dict(),
             "scheduler": self.scheduler.diagnostics(now_monotonic_us).to_dict(),

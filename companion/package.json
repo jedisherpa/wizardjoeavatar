@@ -1,0 +1,14 @@
+{
+  "name": "wizard-joe-companion",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "tauri": "tauri",
+    "tauri:build": "tauri build --bundles app",
+    "sidecar:build": "./scripts/build-sidecar.sh",
+    "test": "cargo test --manifest-path src-tauri/Cargo.toml"
+  },
+  "devDependencies": {
+    "@tauri-apps/cli": "2.11.4"
+  }
+}

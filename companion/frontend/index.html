@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'self' ipc: http://ipc.localhost http://127.0.0.1:* ws://127.0.0.1:* http://localhost:* ws://localhost:*"
+    >
+    <title>Wizard Joe Companion</title>
+    <link rel="stylesheet" href="./styles.css">
+  </head>
+  <body>
+    <div class="app-shell" id="app-shell" aria-busy="true">
+      <header class="status-bar">
+        <div class="identity" aria-label="Wizard Joe Companion">
+          <span class="wordmark" aria-hidden="true">WJ</span>
+          <h1>Wizard Joe</h1>
+        </div>
+
+        <div class="health-summary" aria-label="Current status">
+          <span class="state-mark" id="state-mark" data-tone="pending" aria-hidden="true"></span>
+          <span class="status-copy">
+            <strong id="status-label">Engine starting</strong>
+            <span id="source-label">Local engine</span>
+          </span>
+        </div>
+
+        <button class="quiet-button prism-button" id="open-prism" type="button">
+          <span aria-hidden="true">&#8599;</span>
+          <span>Open Prism GT</span>
+        </button>
+      </header>
+
+      <main
+        class="stage"
+        id="stage"
+        tabindex="0"
+        aria-label="Wizard Joe stage. Use arrow keys or W A S D to move Joe while the stage is focused."
+        aria-describedby="activity-description"
+      >
+        <canvas id="wizard-canvas" role="img" aria-label="Wizard Joe is waiting for the engine.">
+          Wizard Joe's animated stage.
+        </canvas>
+        <div class="stage-message" id="stage-message" aria-hidden="true">
+          <span class="stage-message-mark"></span>
+          <span id="stage-message-text">Starting Joe...</span>
+        </div>
+        <p class="focus-hint" aria-hidden="true">Stage controls active</p>
+      </main>
+
+      <nav class="command-bar" aria-label="Wizard controls">
+        <div class="command-cluster">
+          <button class="command-button primary" id="play-demo" type="button">
+            <span class="command-icon" aria-hidden="true">&#9654;</span>
+            <span>Play Demo</span>
+          </button>
+          <button class="command-button" id="repeat-demo" type="button" aria-pressed="false">
+            <span class="command-icon" aria-hidden="true">&#8635;</span>
+            <span>Repeat</span>
+          </button>
+          <button class="command-button" id="stop-movement" type="button">
+            <span class="command-icon stop-icon" aria-hidden="true"></span>
+            <span>Stop Local Movement</span>
+          </button>
+          <button class="command-button" id="fly-toggle" type="button" aria-pressed="false">
+            <span class="command-icon" aria-hidden="true">&#8593;</span>
+            <span>Fly</span>
+          </button>
+          <button class="command-button" id="open-poses" type="button">
+            <span class="command-icon" aria-hidden="true">&#9670;</span>
+            <span>Poses</span>
+          </button>
+          <button class="command-button" id="open-more" type="button">
+            <span class="command-icon more-icon" aria-hidden="true">&#8226;&#8226;&#8226;</span>
+            <span>More</span>
+          </button>
+        </div>
+      </nav>
+    </div>
+
+    <dialog class="sheet" id="poses-dialog" aria-labelledby="poses-title">
+      <header class="sheet-header">
+        <div>
+          <p class="eyebrow">Character</p>
+          <h2 id="poses-title">Choose a pose</h2>
+        </div>
+        <button class="icon-button" type="button" data-close-dialog aria-label="Close poses">&#215;</button>
+      </header>
+      <div class="pose-grid" id="pose-grid">
+        <p class="pose-loading" id="pose-loading">Loading poses...</p>
+      </div>
+      <button class="text-button clear-pose" id="clear-pose" type="button">Return to natural movement</button>
+    </dialog>
+
+    <dialog class="sheet settings-sheet" id="more-dialog" aria-labelledby="more-title">
+      <header class="sheet-header">
+        <div>
+          <p class="eyebrow">Companion</p>
+          <h2 id="more-title">Settings and recovery</h2>
+        </div>
+        <button class="icon-button" type="button" data-close-dialog aria-label="Close settings">&#215;</button>
+      </header>
+
+      <section class="settings-section" aria-labelledby="behavior-title">
+        <h3 id="behavior-title">Behavior</h3>
+        <label class="setting-row" for="pause-reactions">
+          <span>
+            <strong>Pause Reactions</strong>
+            <small>Joe stays still until reactions resume.</small>
+          </span>
+          <input class="switch" id="pause-reactions" type="checkbox" role="switch">
+        </label>
+        <label class="setting-row" for="motion-mode">
+          <span>
+            <strong>Motion</strong>
+            <small>System preference is used on first launch.</small>
+          </span>
+          <select id="motion-mode">
+            <option value="full">Full</option>
+            <option value="reduced">Reduced</option>
+            <option value="still">Still</option>
+          </select>
+        </label>
+        <label class="setting-row" for="launch-at-login">
+          <span>
+            <strong>Open at login</strong>
+            <small>Start Joe after you sign in.</small>
+          </span>
+          <input class="switch" id="launch-at-login" type="checkbox" role="switch">
+        </label>
+      </section>
+
+      <section class="settings-section" aria-labelledby="recovery-title">
+        <h3 id="recovery-title">Recovery</h3>
+        <div class="recovery-grid">
+          <button type="button" id="retry-connection">Retry</button>
+          <button type="button" id="restart-engine">Restart Engine</button>
+          <button type="button" id="settings-open-prism">Open Prism GT</button>
+          <button type="button" id="copy-diagnostics">Copy Diagnostics</button>
+          <button type="button" id="open-logs">Open Logs</button>
+        </div>
+      </section>
+
+      <details class="diagnostics-disclosure" id="advanced-diagnostics">
+        <summary>Advanced diagnostics</summary>
+        <pre id="diagnostics-output">Diagnostics are not available yet.</pre>
+      </details>
+    </dialog>
+
+    <p class="sr-only" id="activity-description">
+      Wizard Joe is waiting for the engine. No media source is active. Joe is facing forward.
+    </p>
+    <div class="sr-only" id="live-status" role="status" aria-live="polite" aria-atomic="true"></div>
+
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>
