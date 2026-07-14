@@ -14,10 +14,10 @@ use wizard_avatar_engine::performance_score::{
 
 const FIXTURE: &[u8] = include_bytes!("fixtures/media/performance-score-v1.minimal.json");
 const FIXTURE_FILE_SHA256: &str =
-    "9cade5e7dc37a6d22241c7ef1f501cf947e8256801500a486a9996d0e10b8060";
-const FIXTURE_SCORE_ID: &str = "a88726d8dcbe285d18770f3b0a6dab36991e7cd269df97e0c641912c05dacf1f";
+    "796e365e4a921b0c8d62e3ab7d88a0e163de5d9df31e88ea78b7f282e66cc304";
+const FIXTURE_SCORE_ID: &str = "03fccd6f74a198a2bb276563f6e49d82601a872c49e62ae7e851e2d2f0aa97e7";
 const FIXTURE_CAPABILITY_MANIFEST_SHA256: &str =
-    "f7d47f9480240475c17dc77f5c5fdd7fcc10f28add0e168c18c0fb93c7a83054";
+    "4ef14b34a6ce9b8b81c89e59a25b9f5fd142aff19757069d692b39422650b482";
 const FIXTURE_MEDIA_SHA256: &str =
     "4ec95cd27fbef0d944a8040cb0ab6e766dc19f89cd6a074b94a07fb0f81a1722";
 const FIXTURE_ANIMATION_LIBRARY_SHA256: &str =
