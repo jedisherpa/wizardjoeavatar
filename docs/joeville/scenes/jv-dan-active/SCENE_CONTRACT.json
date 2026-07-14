@@ -1,0 +1,54 @@
+{
+  "base": "codex/crystail-character",
+  "branch": "codex/joeville-scene-dance-hall-active",
+  "camera": "Elevated wide master covering the complete unobstructed dance floor",
+  "corrections": [
+    "Remove accidental cross-like wall motif",
+    "Raise face readability",
+    "Separate lighting rig and animated light passes"
+  ],
+  "layers": [
+    "back_wall",
+    "stage_and_rig",
+    "character_floor",
+    "side_furniture",
+    "foreground_silhouette",
+    "light_beams",
+    "floor_light",
+    "atmosphere"
+  ],
+  "playable": "Center 65 percent floor supports all thirteen; stage edge is presenter zone; side seating and water station are interaction zones.",
+  "role": "Full-cast dance, circular formations, celebration and closing-circle scenes",
+  "runtime_target": {
+    "cell_proxy": [
+      240,
+      135
+    ],
+    "color_space": "sRGB",
+    "fps": 24,
+    "master": [
+      3840,
+      2160
+    ]
+  },
+  "scene_id": "JV-DAN-ACTIVE",
+  "schema_version": 1,
+  "set_id": "JV-DAN",
+  "slug": "dance-hall-active",
+  "source": {
+    "height": 1254,
+    "path": "assets/environments/joeville/jv-dan-active/source-reference.png",
+    "sha256": "a8d0f2b85b4588b43191dccd98a519782707172288bfd043795d3401033a62ce",
+    "width": 1254
+  },
+  "status": "CONDITIONAL-KEEP-CORRECTION-REQUIRED",
+  "title": "Current Hall active dance lighting",
+  "variants": [
+    "empty_day",
+    "warmup",
+    "active",
+    "high_energy",
+    "closing_circle",
+    "cleanup"
+  ]
+}
