@@ -1,0 +1,61 @@
+name: Rust News Anchor CI
+
+on:
+  push:
+    branches: [codex/rust-news-anchor-engine]
+  pull_request:
+    paths:
+      - ".github/workflows/rust-news-anchor-ci.yml"
+      - "rust/wizard_avatar_engine/**"
+      - "docs/news-anchor-implementation/**"
+      - "evidence/animation-quality/final/**"
+      - "evidence/pose-library-expansion/rust-v4/animation-verification/**"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: rust-news-anchor-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  CARGO_TERM_COLOR: always
+  RUST_BACKTRACE: "1"
+
+jobs:
+  rust-news-anchor:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          components: rustfmt, clippy
+      - uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: rust/wizard_avatar_engine
+      - name: Format
+        run: cargo fmt --manifest-path rust/wizard_avatar_engine/Cargo.toml --all -- --check
+      - name: Clippy
+        run: cargo clippy --manifest-path rust/wizard_avatar_engine/Cargo.toml --locked --all-targets --all-features -- -D warnings
+      - name: Test complete Rust engine
+        run: cargo test --manifest-path rust/wizard_avatar_engine/Cargo.toml --locked --all-targets
+      - name: Test browser modules
+        run: node --test rust/wizard_avatar_engine/web/tests/*.test.mjs
+      - name: Build pinned release server
+        env:
+          WIZARD_AVATAR_GIT_SHA: ${{ github.sha }}
+        run: cargo build --manifest-path rust/wizard_avatar_engine/Cargo.toml --locked --release --bin wizard-avatar-server
+      - name: Upload compact newsroom evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: rust-news-anchor-evidence-${{ github.sha }}
+          path: |
+            evidence/animation-quality/final/soak/newsroom.json
+            evidence/animation-quality/final/soak/configurations.json
+            evidence/pose-library-expansion/rust-v4/animation-verification/manifest.json
+            evidence/pose-library-expansion/rust-v4/animation-verification/timeline-contact-sheet.png
+          if-no-files-found: error
+          retention-days: 30

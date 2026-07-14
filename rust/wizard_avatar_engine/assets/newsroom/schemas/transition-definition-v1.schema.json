@@ -1,0 +1,160 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://wizardjoe.local/schemas/transition-definition-v1.schema.json",
+  "title": "WizardJoe Transition Definition v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "transition_id",
+    "source_family",
+    "target_family",
+    "legal_source_poses",
+    "legal_target_poses",
+    "minimum_duration_ms",
+    "maximum_duration_ms",
+    "root_rule",
+    "contact_rule",
+    "staff_rule",
+    "wing_rule",
+    "mouth_rule",
+    "gaze_rule",
+    "expression_rule",
+    "effect_rule",
+    "interrupt_points",
+    "restoration",
+    "python_strategy",
+    "rust_strategy",
+    "joe_timing_relationship",
+    "reduced_motion_fallback",
+    "structural_failure_conditions",
+    "tests",
+    "evidence",
+    "acceptance_state"
+  ],
+  "properties": {
+    "transition_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source_family": {
+      "type": "string",
+      "minLength": 1
+    },
+    "target_family": {
+      "type": "string",
+      "minLength": 1
+    },
+    "legal_source_poses": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "legal_target_poses": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "minimum_duration_ms": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "maximum_duration_ms": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "root_rule": {
+      "type": "string",
+      "minLength": 1
+    },
+    "contact_rule": {
+      "type": "string",
+      "minLength": 1
+    },
+    "staff_rule": {
+      "type": "string",
+      "minLength": 1
+    },
+    "wing_rule": {
+      "type": "string",
+      "minLength": 1
+    },
+    "mouth_rule": {
+      "type": "string",
+      "minLength": 1
+    },
+    "gaze_rule": {
+      "type": "string",
+      "minLength": 1
+    },
+    "expression_rule": {
+      "type": "string",
+      "minLength": 1
+    },
+    "effect_rule": {
+      "type": "string",
+      "minLength": 1
+    },
+    "interrupt_points": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "restoration": {
+      "type": "string",
+      "minLength": 1
+    },
+    "python_strategy": {
+      "type": "string",
+      "minLength": 1
+    },
+    "rust_strategy": {
+      "type": "string",
+      "minLength": 1
+    },
+    "joe_timing_relationship": {
+      "type": "string",
+      "minLength": 1
+    },
+    "reduced_motion_fallback": {
+      "type": "string",
+      "minLength": 1
+    },
+    "structural_failure_conditions": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "tests": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "evidence": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "acceptance_state": {
+      "type": "string",
+      "minLength": 1
+    }
+  }
+}

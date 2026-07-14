@@ -1,13 +1,17 @@
 use crate::codec::{encode_full_frame, CodecError, CELL_BYTES};
 use crate::controller::WizardCommand;
 use crate::frame_source::{FrameDiagnostics, ProceduralWizardFrameSource};
+use crate::newsroom::{
+    build_actor_render_sample, embedded_newsroom_catalogs, ActorRenderSampleEnvelopeV1,
+    NewsPerformanceCueV1, NewsroomCueReceiptV1, NewsroomError,
+};
 use crate::runtime::{AvatarRuntime, RuntimeSnapshot};
 use crate::runtime_clock::{CatchUpDropped, RuntimeClock};
 use crate::state::WizardState;
 use serde::Serialize;
 use std::sync::atomic::{AtomicU64, Ordering};
 use std::sync::Arc;
-use tokio::sync::{broadcast, RwLock};
+use tokio::sync::{broadcast, RwLock, Semaphore};
 use tokio::time::{interval_at, sleep, Duration, Instant, MissedTickBehavior};
 
 const BROADCAST_CAPACITY: usize = 16;
@@ -77,6 +81,7 @@ pub struct AvatarFrameHub {
     sender: broadcast::Sender<Arc<FramePacket>>,
     latest: RwLock<Option<Arc<FramePacket>>>,
     runtime: Arc<RwLock<AvatarRuntime>>,
+    actor_sample_slots: Semaphore,
     clock_diagnostics: RwLock<HubClockDiagnostics>,
     cols: usize,
     rows: usize,
@@ -93,6 +98,7 @@ impl AvatarFrameHub {
             sender,
             latest: RwLock::new(None),
             runtime,
+            actor_sample_slots: Semaphore::new(2),
             clock_diagnostics: RwLock::new(HubClockDiagnostics::default()),
             cols: source.cols,
             rows: source.rows,
@@ -140,6 +146,39 @@ impl AvatarFrameHub {
 
     pub async fn apply_command(&self, command: WizardCommand) -> crate::controller::CommandResult {
         self.runtime.write().await.apply_command(command)
+    }
+
+    pub async fn apply_newsroom_cue(
+        &self,
+        cue: NewsPerformanceCueV1,
+    ) -> Result<NewsroomCueReceiptV1, NewsroomError> {
+        embedded_newsroom_catalogs()?;
+        self.runtime.write().await.apply_newsroom_cue(cue)
+    }
+
+    pub async fn latest_newsroom_receipt(&self) -> Option<NewsroomCueReceiptV1> {
+        self.runtime.read().await.latest_newsroom_receipt().cloned()
+    }
+
+    pub async fn newsroom_actor_sample(
+        &self,
+    ) -> Result<ActorRenderSampleEnvelopeV1, NewsroomError> {
+        let _permit = self
+            .actor_sample_slots
+            .try_acquire()
+            .map_err(|_| NewsroomError::ActorSampleBusy)?;
+        let (state, semantic_pose, generation) = {
+            let runtime = self.runtime.read().await;
+            runtime.newsroom_actor_sample_context()
+        };
+        let engine_commit = crate::BUILD_GIT_SHA.to_string();
+        tokio::task::spawn_blocking(move || {
+            let (metadata, buffers) =
+                build_actor_render_sample(&state, &semantic_pose, generation, &engine_commit)?;
+            Ok(ActorRenderSampleEnvelopeV1::new(metadata, &buffers))
+        })
+        .await
+        .map_err(|error| NewsroomError::ActorSample(format!("actor sample task failed: {error}")))?
     }
 
     pub async fn bootstrap(&self) -> Result<Option<BootstrapFrame>, CodecError> {

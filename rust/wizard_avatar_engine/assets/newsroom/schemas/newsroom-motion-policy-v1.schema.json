@@ -1,0 +1,105 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://wizardjoe.local/schemas/newsroom-motion-policy-v1.schema.json",
+  "title": "newsroom_wizard_v1 motion policy",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "policy_id",
+    "sensitivity_caps",
+    "forbidden_pairs",
+    "reduced_motion",
+    "raw_control_allowed"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "policy_id": {
+      "const": "newsroom_wizard_v1"
+    },
+    "sensitivity_caps": {
+      "type": "object",
+      "required": [
+        "light",
+        "normal",
+        "serious",
+        "critical",
+        "correction"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "light": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "normal": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "serious": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "critical": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "correction": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        }
+      }
+    },
+    "forbidden_pairs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "scene",
+          "family"
+        ],
+        "properties": {
+          "scene": {
+            "type": "string"
+          },
+          "family": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "reduced_motion": {
+      "type": "object",
+      "required": [
+        "suppress_root_motion",
+        "suppress_repeated_secondary_motion",
+        "maximum_transition_ms"
+      ],
+      "properties": {
+        "suppress_root_motion": {
+          "type": "boolean"
+        },
+        "suppress_repeated_secondary_motion": {
+          "type": "boolean"
+        },
+        "maximum_transition_ms": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 500
+        }
+      },
+      "additionalProperties": false
+    },
+    "raw_control_allowed": {
+      "const": false
+    }
+  }
+}

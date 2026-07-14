@@ -1,0 +1,188 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://wizardjoe.local/schemas/actor-render-sample-v1.schema.json",
+  "title": "WizardJoe actor render sample v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "width",
+    "height",
+    "channels",
+    "rgb_sha256",
+    "coverage_mask_sha256",
+    "bounds",
+    "root",
+    "contact_points",
+    "staff_bounds",
+    "wing_bounds",
+    "semantic_pose",
+    "expression",
+    "mouth",
+    "engine",
+    "engine_commit",
+    "character_package",
+    "simulation_tick",
+    "generation",
+    "state_hash",
+    "actor_layer_hash",
+    "diagnostics"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "wizardjoe.actor-render-sample.v1"
+    },
+    "width": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 2048
+    },
+    "height": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 2048
+    },
+    "channels": {
+      "enum": [
+        3,
+        4
+      ]
+    },
+    "rgb_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "coverage_mask_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "shadow_mask_sha256": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "depth_sha256": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "bounds": {
+      "$ref": "#/$defs/rect"
+    },
+    "root": {
+      "$ref": "#/$defs/point"
+    },
+    "contact_points": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/point"
+      }
+    },
+    "staff_bounds": {
+      "type": [
+        "object",
+        "null"
+      ]
+    },
+    "wing_bounds": {
+      "type": [
+        "object",
+        "null"
+      ]
+    },
+    "semantic_pose": {
+      "type": "string",
+      "minLength": 1
+    },
+    "expression": {
+      "type": "string",
+      "minLength": 1
+    },
+    "mouth": {
+      "type": "string",
+      "minLength": 1
+    },
+    "engine": {
+      "enum": [
+        "python",
+        "rust",
+        "safe_fallback"
+      ]
+    },
+    "engine_commit": {
+      "type": "string",
+      "minLength": 7
+    },
+    "character_package": {
+      "type": "string",
+      "minLength": 1
+    },
+    "simulation_tick": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "generation": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "state_hash": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "actor_layer_hash": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "diagnostics": {
+      "type": "object"
+    }
+  },
+  "$defs": {
+    "point": {
+      "type": "object",
+      "required": [
+        "x",
+        "y"
+      ],
+      "properties": {
+        "x": {
+          "type": "integer"
+        },
+        "y": {
+          "type": "integer"
+        }
+      },
+      "additionalProperties": false
+    },
+    "rect": {
+      "type": "object",
+      "required": [
+        "x",
+        "y",
+        "width",
+        "height"
+      ],
+      "properties": {
+        "x": {
+          "type": "integer"
+        },
+        "y": {
+          "type": "integer"
+        },
+        "width": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "height": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

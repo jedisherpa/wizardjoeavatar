@@ -1,0 +1,132 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://wizardjoe.local/schemas/news-performance-cue-v1.schema.json",
+  "title": "newsroom_wizard_v1 semantic performance cue",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "cue_id",
+    "sequence",
+    "program",
+    "command",
+    "intensity",
+    "sensitivity",
+    "start_ms",
+    "duration_ms",
+    "generation",
+    "reduced_motion"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "newsroom_wizard_v1"
+    },
+    "cue_id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9._:-]{1,96}$"
+    },
+    "sequence": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "program": {
+      "enum": [
+        "general_news",
+        "ai_innovation"
+      ]
+    },
+    "command": {
+      "enum": [
+        "anchor",
+        "break",
+        "clarify",
+        "compare",
+        "correct",
+        "count",
+        "emphasize",
+        "explain",
+        "handoff",
+        "listen",
+        "nod",
+        "point",
+        "react",
+        "reveal_graphic",
+        "reveal_source",
+        "sign_off",
+        "think",
+        "warn",
+        "welcome"
+      ]
+    },
+    "target": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 96
+    },
+    "count": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "minimum": 1,
+      "maximum": 3
+    },
+    "intensity": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "sensitivity": {
+      "enum": [
+        "light",
+        "normal",
+        "serious",
+        "critical",
+        "correction"
+      ]
+    },
+    "start_ms": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "duration_ms": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 30000
+    },
+    "generation": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "reduced_motion": {
+      "type": "boolean"
+    },
+    "speech_line_id": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 96
+    },
+    "graphic_id": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 96
+    },
+    "source_id": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 96
+    },
+    "seed": {
+      "type": "integer",
+      "minimum": 0
+    }
+  }
+}

@@ -10,6 +10,10 @@ use std::process::Command;
 use wizard_avatar_engine::codec::{decode_frame, CELL_BYTES};
 use wizard_avatar_engine::controller::WizardCommand;
 use wizard_avatar_engine::frame_source::ProceduralWizardFrameSource;
+use wizard_avatar_engine::newsroom::{
+    runtime_binding_for_pose, NewsCommand, NewsPerformanceCueV1, NewsProgram, NewsroomCatalogs,
+    StorySensitivity, UnitInterval, NEWSROOM_CUE_SCHEMA_VERSION,
+};
 use wizard_avatar_engine::pose::{
     sample_pose, transition_ticks_for, AnchorId, PointF, PoseLibrary, PoseTopologyMetrics,
 };
@@ -179,6 +183,7 @@ struct AnimationPass {
     frame_hashes: Vec<String>,
     quality: FrameQualityReport,
     authored_transitions: usize,
+    newsroom_semantic_poses: usize,
 }
 
 struct AnimationRecorder {
@@ -297,7 +302,11 @@ impl AnimationRecorder {
         Ok(())
     }
 
-    fn finish(mut self, authored_transitions: usize) -> anyhow::Result<AnimationPass> {
+    fn finish(
+        mut self,
+        authored_transitions: usize,
+        newsroom_semantic_poses: usize,
+    ) -> anyhow::Result<AnimationPass> {
         if let Some(raw) = &mut self.raw {
             raw.flush()?;
         }
@@ -319,6 +328,7 @@ impl AnimationRecorder {
             frame_hashes: self.frame_hashes,
             quality,
             authored_transitions,
+            newsroom_semantic_poses,
         })
     }
 }
@@ -327,6 +337,7 @@ impl AnimationRecorder {
 struct AnimationManifest {
     schema_version: u32,
     generator: &'static str,
+    source_git_sha: String,
     simulation_fps: u32,
     frame_width: usize,
     frame_height: usize,
@@ -336,6 +347,7 @@ struct AnimationManifest {
     aliases: usize,
     rust_clip_count: usize,
     authored_transition_count: usize,
+    newsroom_semantic_pose_count: usize,
     deterministic_replay: bool,
     adaptive_decode_parity: bool,
     presentation_parity: bool,
@@ -374,6 +386,7 @@ fn render_animation_verification() -> anyhow::Result<()> {
     let manifest = AnimationManifest {
         schema_version: 2,
         generator: "wizard-avatar-pose-evidence-rust-v4",
+        source_git_sha: source_git_sha()?,
         simulation_fps: 60,
         frame_width: WIDTH,
         frame_height: HEIGHT,
@@ -383,6 +396,7 @@ fn render_animation_verification() -> anyhow::Result<()> {
         aliases: library.alias_count(),
         rust_clip_count: POSE_CLIPS.len(),
         authored_transition_count: first.authored_transitions,
+        newsroom_semantic_pose_count: first.newsroom_semantic_poses,
         deterministic_replay: deterministic,
         adaptive_decode_parity: first
             .records
@@ -421,12 +435,102 @@ fn render_animation_verification() -> anyhow::Result<()> {
     Ok(())
 }
 
+fn source_git_sha() -> anyhow::Result<String> {
+    if let Ok(sha) = std::env::var("WIZARD_EVIDENCE_GIT_SHA") {
+        return validate_git_sha(sha);
+    }
+    let output = Command::new("git")
+        .args(["rev-parse", "HEAD"])
+        .output()
+        .context("failed to resolve evidence source Git SHA")?;
+    if !output.status.success() {
+        bail!("git rev-parse HEAD failed with {}", output.status);
+    }
+    validate_git_sha(String::from_utf8(output.stdout)?.trim().to_string())
+}
+
+fn validate_git_sha(sha: String) -> anyhow::Result<String> {
+    if sha.len() != 40 || !sha.bytes().all(|byte| byte.is_ascii_hexdigit()) {
+        bail!("evidence source Git SHA must be 40 hexadecimal characters");
+    }
+    Ok(sha.to_ascii_lowercase())
+}
+
 fn run_animation_pass(raw_path: Option<&Path>) -> anyhow::Result<AnimationPass> {
     let mut recorder = AnimationRecorder::new(raw_path)?;
     run_clip_scenarios(&mut recorder)?;
     let authored_transitions = run_authored_transition_matrix(&mut recorder)?;
+    let newsroom_semantic_poses = run_newsroom_semantic_matrix(&mut recorder)?;
     run_interruption_scenario(&mut recorder)?;
-    recorder.finish(authored_transitions)
+    recorder.finish(authored_transitions, newsroom_semantic_poses)
+}
+
+fn run_newsroom_semantic_matrix(recorder: &mut AnimationRecorder) -> anyhow::Result<usize> {
+    let catalogs = NewsroomCatalogs::embedded().map_err(anyhow::Error::msg)?;
+    for pose in &catalogs.poses.poses {
+        let binding = runtime_binding_for_pose(pose).map_err(anyhow::Error::msg)?;
+        let command = NewsCommand::from_wire_name(&pose.semantic_intent)
+            .ok_or_else(|| anyhow::anyhow!("unknown semantic intent {}", pose.semantic_intent))?;
+        let seed = catalogs
+            .poses
+            .poses
+            .iter()
+            .filter(|candidate| candidate.semantic_intent == pose.semantic_intent)
+            .position(|candidate| candidate.pose_id == pose.pose_id)
+            .ok_or_else(|| anyhow::anyhow!("missing variant index for {}", pose.pose_id))?
+            as u64;
+        let mut runtime = AvatarRuntime::default();
+        let mut frame_source = ProceduralWizardFrameSource::new(WIDTH, HEIGHT, 60.0);
+        let cue = NewsPerformanceCueV1 {
+            schema_version: NEWSROOM_CUE_SCHEMA_VERSION.to_string(),
+            cue_id: format!("evidence-{}", pose.pose_id),
+            sequence: 1,
+            program: NewsProgram::GeneralNews,
+            command,
+            target: None,
+            count: (command == NewsCommand::Count).then_some(match pose.pose_id.as_str() {
+                "count_one" => 1,
+                "count_two" => 2,
+                _ => 3,
+            }),
+            intensity: UnitInterval::from_permille(700).expect("constant"),
+            sensitivity: StorySensitivity::Light,
+            start_ms: 0,
+            duration_ms: 320,
+            generation: 1,
+            reduced_motion: false,
+            speech_line_id: None,
+            graphic_id: (command == NewsCommand::RevealGraphic)
+                .then(|| "evidence-graphic".to_string()),
+            source_id: (command == NewsCommand::RevealSource)
+                .then(|| "evidence-source".to_string()),
+            seed: Some(seed),
+        };
+        let receipt = runtime
+            .apply_newsroom_cue(cue)
+            .map_err(anyhow::Error::msg)?;
+        if receipt.performance.semantic_pose_id != pose.pose_id
+            || receipt.performance.internal_pose_id != binding.internal_pose_id
+        {
+            bail!(
+                "semantic evidence selection mismatch for {}: {:?}",
+                pose.pose_id,
+                receipt.performance
+            );
+        }
+        let transition_ticks = (u64::from(receipt.performance.transition_ms) * 60).div_ceil(1_000);
+        let restore_ticks = transition_ticks_for(
+            &binding.internal_pose_id,
+            "front_idle",
+            DEFAULT_POSE_TRANSITION_TICKS,
+        );
+        let scenario_id = format!("newsroom-semantic-{}", pose.pose_id);
+        for _ in 0..=transition_ticks + 20 + u64::from(restore_ticks) {
+            runtime.step_tick();
+            recorder.capture(&scenario_id, &scenario_id, &runtime, &mut frame_source)?;
+        }
+    }
+    Ok(catalogs.poses.poses.len())
 }
 
 fn run_clip_scenarios(recorder: &mut AnimationRecorder) -> anyhow::Result<()> {

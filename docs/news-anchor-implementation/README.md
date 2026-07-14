@@ -1,6 +1,6 @@
 # WizardJoe Rust News-Anchor Implementation Packet
 
-This directory carries the implementation-preparation packet for the Rust ASCILINE workstream. It does not implement runtime behavior.
+This directory carries the implementation-preparation packet and the accountable status of its Rust ASCILINE implementation.
 
 - Baseline before this packet: `e2b0cd74d8f7356d6900138aad34654acf21a187` on `codex/rust-chatbot-animation-engine`.
 - Packet: `WizardJoe_Rust_News_Anchor_Implementation_Packet.zip`.
@@ -9,4 +9,4 @@ This directory carries the implementation-preparation packet for the Rust ASCILI
 
 Begin inside the ZIP with `ENGINE_PACKET_README.md`, then read `MASTER_CODING_AGENT_PROMPT.md`. Preserve the integer runtime clock and motion catalog at this baseline. Generated content may only submit the semantic newsroom cue contract; raw pose and clip IDs remain local development surfaces and are forbidden at the Joe boundary.
 
-Runtime news-anchor work remains `PLANNED_NOT_STARTED` in the packet.
+The packet itself remains immutable and still records its original planning status. Runtime progress is tracked in [RUST_IMPLEMENTATION_STATUS.md](RUST_IMPLEMENTATION_STATUS.md); do not edit the packet ZIP to rewrite history.

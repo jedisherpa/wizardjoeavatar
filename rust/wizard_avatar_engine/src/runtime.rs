@@ -1,4 +1,5 @@
 use crate::controller::{CommandResult, WizardAvatarController, WizardCommand};
+use crate::newsroom::{NewsPerformanceCueV1, NewsroomCueReceiptV1, NewsroomError};
 use crate::state::WizardState;
 use std::collections::{BTreeMap, VecDeque};
 use std::sync::Arc;
@@ -79,6 +80,38 @@ impl AvatarRuntime {
         self.apply_commands_through(self.tick)
             .pop()
             .expect("the just-scheduled command must be applied")
+    }
+
+    pub fn apply_newsroom_cue(
+        &mut self,
+        cue: NewsPerformanceCueV1,
+    ) -> Result<NewsroomCueReceiptV1, NewsroomError> {
+        let receipt = self.controller.apply_newsroom_cue(cue)?;
+        self.current = Arc::new(self.controller.current_state().clone());
+        Ok(receipt)
+    }
+
+    #[must_use]
+    pub fn latest_newsroom_receipt(&self) -> Option<&NewsroomCueReceiptV1> {
+        self.controller.latest_newsroom_receipt()
+    }
+
+    #[must_use]
+    pub fn newsroom_actor_sample_context(&self) -> (WizardState, String, u64) {
+        let (semantic_pose, generation) = self
+            .latest_newsroom_receipt()
+            .map(|receipt| {
+                (
+                    receipt.performance.semantic_pose_id.as_str(),
+                    receipt.generation,
+                )
+            })
+            .unwrap_or(("anchor_neutral_front", 1));
+        (
+            self.current_state().clone(),
+            semantic_pose.to_string(),
+            generation,
+        )
     }
 
     pub fn step_tick(&mut self) {

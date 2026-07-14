@@ -1,5 +1,9 @@
 use crate::animation::AnimationChannels;
 use crate::geometry::distance;
+use crate::newsroom::{
+    embedded_newsroom_catalogs, resolve_newsroom_cue, NewsPerformanceCueV1, NewsroomCueReceiptV1,
+    NewsroomError, NewsroomLifecycleState, NewsroomMotionPolicyV1,
+};
 use crate::pathing::PathCurve;
 use crate::pose_clip::PoseClipPlayback;
 use crate::pose_playback::{PosePlayback, DEFAULT_POSE_TRANSITION_TICKS};
@@ -10,6 +14,7 @@ use crate::state::{
 };
 use serde::{Deserialize, Serialize};
 use serde_json::Value;
+use std::collections::VecDeque;
 use std::f32::consts::{FRAC_PI_4, PI, TAU};
 use std::str::FromStr;
 
@@ -182,6 +187,19 @@ struct PathState {
     looped: bool,
 }
 
+const NEWSROOM_RECEIPT_HISTORY_LIMIT: usize = 64;
+
+#[derive(Clone, Debug, Default)]
+struct NewsroomControllerState {
+    generation: u64,
+    sequence: u64,
+    last_cue: Option<NewsPerformanceCueV1>,
+    receipts: VecDeque<NewsroomCueReceiptV1>,
+    expected_pose_generation: Option<u64>,
+    restore_at_tick: Option<u64>,
+    complete_at_tick: Option<u64>,
+}
+
 #[derive(Clone, Debug, Default)]
 pub struct WizardAvatarController {
     state: WizardState,
@@ -190,6 +208,7 @@ pub struct WizardAvatarController {
     channels: AnimationChannels,
     pose_playback: PosePlayback,
     pose_clip: PoseClipPlayback,
+    newsroom: NewsroomControllerState,
 }
 
 impl WizardAvatarController {
@@ -201,6 +220,123 @@ impl WizardAvatarController {
     #[must_use]
     pub fn state_mut(&mut self) -> &mut WizardState {
         &mut self.state
+    }
+
+    #[must_use]
+    pub fn latest_newsroom_receipt(&self) -> Option<&NewsroomCueReceiptV1> {
+        self.newsroom.receipts.back()
+    }
+
+    #[must_use]
+    pub fn newsroom_receipts(&self) -> &VecDeque<NewsroomCueReceiptV1> {
+        &self.newsroom.receipts
+    }
+
+    pub fn apply_newsroom_cue(
+        &mut self,
+        cue: NewsPerformanceCueV1,
+    ) -> Result<NewsroomCueReceiptV1, NewsroomError> {
+        cue.validate()?;
+        let stale = cue.generation < self.newsroom.generation
+            || cue.generation == self.newsroom.generation && cue.sequence < self.newsroom.sequence;
+        if stale {
+            return Err(NewsroomError::StaleCue {
+                incoming_generation: cue.generation,
+                incoming_sequence: cue.sequence,
+                current_generation: self.newsroom.generation,
+                current_sequence: self.newsroom.sequence,
+            });
+        }
+        if cue.generation == self.newsroom.generation && cue.sequence == self.newsroom.sequence {
+            if self.newsroom.last_cue.as_ref() == Some(&cue) {
+                let mut receipt = self
+                    .newsroom
+                    .receipts
+                    .back()
+                    .cloned()
+                    .ok_or(NewsroomError::SequenceConflict)?;
+                receipt.duplicate = true;
+                return Ok(receipt);
+            }
+            return Err(NewsroomError::SequenceConflict);
+        }
+
+        let catalogs = embedded_newsroom_catalogs()?;
+        let mut performance =
+            resolve_newsroom_cue(&cue, &NewsroomMotionPolicyV1::default(), catalogs)?;
+        if !is_authored_pose_id(&performance.internal_pose_id) {
+            return Err(NewsroomError::UnsupportedInternalPose(
+                performance.internal_pose_id,
+            ));
+        }
+
+        let interrupted_cue_id = self.newsroom.receipts.back_mut().and_then(|receipt| {
+            if matches!(
+                receipt.performance.lifecycle,
+                NewsroomLifecycleState::Scheduled
+                    | NewsroomLifecycleState::Applied
+                    | NewsroomLifecycleState::Restoring
+            ) {
+                receipt.performance.lifecycle = NewsroomLifecycleState::Interrupted;
+                Some(receipt.cue_id.clone())
+            } else {
+                None
+            }
+        });
+        let presented = self
+            .pose_playback
+            .presented_pose()
+            .map(str::to_owned)
+            .or_else(|| self.state.pose_id.clone())
+            .unwrap_or_else(|| pose_id_for_direction(self.state.facing).to_string());
+        let transition_ticks =
+            millis_to_ticks(u64::from(performance.transition_ms)).min(u64::from(u16::MAX)) as u16;
+        let expected_pose_generation = self.state.pose_generation.wrapping_add(1);
+        let expires_at_tick = (cue.duration_ms > 0)
+            .then_some(self.state.simulation_tick + millis_to_ticks(u64::from(cue.duration_ms)));
+        let restore_to = expires_at_tick.map(|_| presented.clone());
+        self.pose_clip.clear(&mut self.state);
+        self.pose_playback.interrupt(
+            performance.internal_pose_id.clone(),
+            presented,
+            self.state.simulation_tick,
+            transition_ticks,
+            expires_at_tick,
+            restore_to,
+        );
+        self.pose_playback
+            .step(self.state.simulation_tick, &mut self.state);
+        let applied = self.state.pose_generation == expected_pose_generation;
+        performance.lifecycle = if applied {
+            NewsroomLifecycleState::Applied
+        } else {
+            NewsroomLifecycleState::Scheduled
+        };
+
+        let receipt = NewsroomCueReceiptV1 {
+            cue_id: cue.cue_id.clone(),
+            sequence: cue.sequence,
+            generation: cue.generation,
+            accepted_tick: self.state.simulation_tick,
+            duplicate: false,
+            interrupted_cue_id,
+            performance,
+        };
+        self.newsroom.generation = cue.generation;
+        self.newsroom.sequence = cue.sequence;
+        self.newsroom.last_cue = Some(cue);
+        self.newsroom.expected_pose_generation = (!applied).then_some(expected_pose_generation);
+        self.newsroom.restore_at_tick =
+            applied.then_some(self.state.pose_expires_at_tick).flatten();
+        self.newsroom.complete_at_tick = self
+            .newsroom
+            .restore_at_tick
+            .map(|tick| tick + u64::from(DEFAULT_POSE_TRANSITION_TICKS));
+        self.newsroom.receipts.push_back(receipt.clone());
+        if self.newsroom.receipts.len() > NEWSROOM_RECEIPT_HISTORY_LIMIT {
+            self.newsroom.receipts.pop_front();
+        }
+        Ok(receipt)
     }
 
     pub fn advance(&mut self, seconds: f32) {
@@ -225,11 +361,50 @@ impl WizardAvatarController {
         );
         self.pose_playback
             .step(self.state.simulation_tick, &mut self.state);
+        self.step_newsroom_lifecycle();
         if !self.channels.speech_active() && self.state.speech_id.is_some() {
             self.state.speech_id = None;
             self.state.mouth = expression_mouth(self.state.expression);
         }
         self.state.blink_phase = blink_phase(self.state.time_seconds);
+    }
+
+    fn step_newsroom_lifecycle(&mut self) {
+        let Some(receipt) = self.newsroom.receipts.back_mut() else {
+            return;
+        };
+        if receipt.performance.lifecycle == NewsroomLifecycleState::Scheduled
+            && self
+                .newsroom
+                .expected_pose_generation
+                .is_some_and(|generation| self.state.pose_generation == generation)
+        {
+            receipt.performance.lifecycle = NewsroomLifecycleState::Applied;
+            self.newsroom.expected_pose_generation = None;
+            self.newsroom.restore_at_tick = self.state.pose_expires_at_tick;
+            self.newsroom.complete_at_tick = self
+                .newsroom
+                .restore_at_tick
+                .map(|tick| tick + u64::from(DEFAULT_POSE_TRANSITION_TICKS));
+        }
+        if self
+            .newsroom
+            .restore_at_tick
+            .is_some_and(|tick| self.state.simulation_tick >= tick)
+            && receipt.performance.lifecycle == NewsroomLifecycleState::Applied
+        {
+            receipt.performance.lifecycle = NewsroomLifecycleState::Restoring;
+        }
+        if self
+            .newsroom
+            .complete_at_tick
+            .is_some_and(|tick| self.state.simulation_tick >= tick)
+            && receipt.performance.lifecycle == NewsroomLifecycleState::Restoring
+        {
+            receipt.performance.lifecycle = NewsroomLifecycleState::Completed;
+            self.newsroom.restore_at_tick = None;
+            self.newsroom.complete_at_tick = None;
+        }
     }
 
     pub fn apply_command(&mut self, command: WizardCommand) -> CommandResult {

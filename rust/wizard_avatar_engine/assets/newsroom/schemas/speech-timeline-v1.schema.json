@@ -1,0 +1,113 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://wizardjoe.local/schemas/speech-timeline-v1.schema.json",
+  "title": "WizardJoe speech timeline v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "utterance_id",
+    "generation",
+    "start_ms",
+    "duration_ms",
+    "timing_source",
+    "cues",
+    "caption_cues"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "wizardjoe.speech-timeline.v1"
+    },
+    "utterance_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 96
+    },
+    "generation": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "start_ms": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "duration_ms": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "timing_source": {
+      "enum": [
+        "provider_viseme",
+        "provider_phoneme",
+        "word",
+        "amplitude",
+        "text_fallback"
+      ]
+    },
+    "cues": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "start_ms",
+          "end_ms",
+          "mouth"
+        ],
+        "properties": {
+          "start_ms": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "end_ms": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "mouth": {
+            "enum": [
+              "closed",
+              "open_small",
+              "open_medium",
+              "open_wide",
+              "rounded",
+              "smile",
+              "frown"
+            ]
+          },
+          "weight": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 100
+          }
+        }
+      }
+    },
+    "caption_cues": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "start_ms",
+          "end_ms",
+          "text"
+        ],
+        "properties": {
+          "start_ms": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "end_ms": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "text": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 500
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  }
+}

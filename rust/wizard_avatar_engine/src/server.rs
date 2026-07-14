@@ -2,9 +2,10 @@ use crate::capability_manifest::wizard_capability_document;
 use crate::controller::WizardCommand;
 use crate::frame_source::ProceduralWizardFrameSource;
 use crate::hub::AvatarFrameHub;
+use crate::newsroom::{NewsPerformanceCueV1, NewsroomError};
 use anyhow::Context;
 use axum::extract::ws::{Message, WebSocket, WebSocketUpgrade};
-use axum::extract::{Query, State};
+use axum::extract::{DefaultBodyLimit, Query, State};
 use axum::http::StatusCode;
 use axum::response::{Html, IntoResponse, Response};
 use axum::routing::{get, post};
@@ -15,6 +16,8 @@ use serde_json::{json, Value};
 use std::net::SocketAddr;
 use std::sync::Arc;
 use tokio::net::TcpListener;
+
+const MAX_COMMAND_BODY_BYTES: usize = 16 * 1_024;
 
 #[derive(Clone)]
 pub struct AppState {
@@ -58,6 +61,18 @@ pub fn app(source: ProceduralWizardFrameSource) -> Router {
         )
         .route("/api/avatar/wizard/state", get(state))
         .route("/api/avatar/wizard/v2/capabilities", get(capabilities))
+        .route(
+            "/api/avatar/wizard/v2/newsroom/cue",
+            post(command_newsroom_cue),
+        )
+        .route(
+            "/api/avatar/wizard/v2/newsroom/receipt",
+            get(latest_newsroom_receipt),
+        )
+        .route(
+            "/api/avatar/wizard/v2/newsroom/actor-sample",
+            get(newsroom_actor_sample),
+        )
         .route("/api/avatar/wizard/capabilities", get(capabilities))
         .route("/api/avatar/wizard/move", post(command_move))
         .route("/api/avatar/wizard/walk-left", post(command_walk_left))
@@ -87,6 +102,7 @@ pub fn app(source: ProceduralWizardFrameSource) -> Router {
         .route("/api/avatar/wizard/stop", post(command_stop))
         .route("/api/avatar/wizard/reset", post(command_reset))
         .route("/ws/avatar/wizard", get(wizard_ws))
+        .layer(DefaultBodyLimit::max(MAX_COMMAND_BODY_BYTES))
         .with_state(AppState::new(source))
 }
 
@@ -156,6 +172,9 @@ async fn state(State(app): State<AppState>) -> Json<Value> {
     let state = app.hub.current_state().await;
     let diagnostics = app.hub.diagnostics().await;
     Json(json!({
+        "build": {
+            "git_sha": crate::BUILD_GIT_SHA,
+        },
         "state": state,
         "diagnostics": diagnostics,
     }))
@@ -173,6 +192,58 @@ async fn capabilities() -> Response {
         )
             .into_response(),
     }
+}
+
+async fn command_newsroom_cue(
+    State(app): State<AppState>,
+    Json(cue): Json<NewsPerformanceCueV1>,
+) -> Response {
+    match app.hub.apply_newsroom_cue(cue).await {
+        Ok(receipt) => (StatusCode::OK, Json(receipt)).into_response(),
+        Err(error) => newsroom_error_response(error),
+    }
+}
+
+async fn latest_newsroom_receipt(State(app): State<AppState>) -> Response {
+    match app.hub.latest_newsroom_receipt().await {
+        Some(receipt) => (StatusCode::OK, Json(receipt)).into_response(),
+        None => (
+            StatusCode::NOT_FOUND,
+            Json(json!({"error": "newsroom_receipt_not_found"})),
+        )
+            .into_response(),
+    }
+}
+
+async fn newsroom_actor_sample(State(app): State<AppState>) -> Response {
+    match app.hub.newsroom_actor_sample().await {
+        Ok(sample) => (StatusCode::OK, Json(sample)).into_response(),
+        Err(error) => newsroom_error_response(error),
+    }
+}
+
+fn newsroom_error_response(error: NewsroomError) -> Response {
+    let (status, code) = match error {
+        NewsroomError::StaleCue { .. } | NewsroomError::SequenceConflict => {
+            (StatusCode::CONFLICT, "newsroom_cue_conflict")
+        }
+        NewsroomError::ActorSampleBusy => {
+            (StatusCode::TOO_MANY_REQUESTS, "newsroom_actor_sample_busy")
+        }
+        NewsroomError::ActorSample(_)
+        | NewsroomError::InvalidActorSample(_)
+        | NewsroomError::InvalidCatalog(_)
+        | NewsroomError::UnknownSemanticPose(_)
+        | NewsroomError::UnsupportedInternalPose(_) => {
+            (StatusCode::INTERNAL_SERVER_ERROR, "newsroom_runtime_error")
+        }
+        _ => (StatusCode::UNPROCESSABLE_ENTITY, "invalid_newsroom_cue"),
+    };
+    (
+        status,
+        Json(json!({"error": code, "message": error.to_string()})),
+    )
+        .into_response()
 }
 
 async fn command_move(

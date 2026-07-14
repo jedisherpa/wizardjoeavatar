@@ -1,0 +1,365 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://wizardjoe.local/schemas/pose-definition-v1.schema.json",
+  "title": "WizardJoe News Anchor Pose Definition v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "ordinal",
+    "pose_id",
+    "display_name",
+    "section",
+    "family",
+    "semantic_intent",
+    "newsroom_purpose",
+    "python_classification",
+    "python_current_equivalent",
+    "rust_classification",
+    "rust_current_equivalent",
+    "joe_semantic_cue",
+    "geometry_requirement",
+    "clip_requirement",
+    "silhouette",
+    "root_anchor",
+    "contact_mode",
+    "planted_foot",
+    "staff_contact",
+    "head_direction",
+    "gaze_target",
+    "expression",
+    "mouth_compatibility",
+    "staff_mode",
+    "wing_mode",
+    "robe_behavior",
+    "hat_behavior",
+    "beard_behavior",
+    "effect_behavior",
+    "allowed_scenes",
+    "disallowed_scenes",
+    "story_sensitivity_limit",
+    "emotional_amplitude",
+    "recommended_duration",
+    "entry_transitions",
+    "exit_transitions",
+    "interruption",
+    "restoration",
+    "desktop_safe_bounds",
+    "mobile_safe_bounds",
+    "closeup_compatibility",
+    "reduced_motion_fallback",
+    "python_files_likely_affected",
+    "rust_files_likely_affected",
+    "joe_files_likely_affected",
+    "unit_tests",
+    "integration_tests",
+    "visual_tests",
+    "runtime_tests",
+    "evidence",
+    "dependencies",
+    "risks",
+    "acceptance_state"
+  ],
+  "properties": {
+    "pose_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "display_name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "family": {
+      "type": "string",
+      "minLength": 1
+    },
+    "semantic_intent": {
+      "type": "string",
+      "minLength": 1
+    },
+    "newsroom_purpose": {
+      "type": "string",
+      "minLength": 1
+    },
+    "python_classification": {
+      "enum": [
+        "APPROXIMATE_EXISTING",
+        "CHANNEL_COMPOSITION",
+        "DEFERRED",
+        "EXACT_EXISTING",
+        "NEW_CLIP",
+        "NEW_GEOMETRY",
+        "NEW_GEOMETRY_AND_CLIP",
+        "POLICY_ONLY"
+      ]
+    },
+    "python_current_equivalent": {
+      "type": "string",
+      "minLength": 1
+    },
+    "rust_classification": {
+      "enum": [
+        "APPROXIMATE_EXISTING",
+        "CHANNEL_COMPOSITION",
+        "DEFERRED",
+        "EXACT_EXISTING",
+        "NEW_CLIP",
+        "NEW_GEOMETRY",
+        "NEW_GEOMETRY_AND_CLIP",
+        "POLICY_ONLY"
+      ]
+    },
+    "rust_current_equivalent": {
+      "type": "string",
+      "minLength": 1
+    },
+    "joe_semantic_cue": {
+      "type": "string",
+      "minLength": 1
+    },
+    "geometry_requirement": {
+      "type": "string",
+      "minLength": 1
+    },
+    "clip_requirement": {
+      "type": "string",
+      "minLength": 1
+    },
+    "silhouette": {
+      "type": "string",
+      "minLength": 1
+    },
+    "root_anchor": {
+      "type": "string",
+      "minLength": 1
+    },
+    "contact_mode": {
+      "type": "string",
+      "minLength": 1
+    },
+    "planted_foot": {
+      "type": "string",
+      "minLength": 1
+    },
+    "staff_contact": {
+      "type": "string",
+      "minLength": 1
+    },
+    "head_direction": {
+      "type": "string",
+      "minLength": 1
+    },
+    "gaze_target": {
+      "type": "string",
+      "minLength": 1
+    },
+    "expression": {
+      "type": "string",
+      "minLength": 1
+    },
+    "mouth_compatibility": {
+      "type": "string",
+      "minLength": 1
+    },
+    "staff_mode": {
+      "type": "string",
+      "minLength": 1
+    },
+    "wing_mode": {
+      "type": "string",
+      "minLength": 1
+    },
+    "robe_behavior": {
+      "type": "string",
+      "minLength": 1
+    },
+    "hat_behavior": {
+      "type": "string",
+      "minLength": 1
+    },
+    "beard_behavior": {
+      "type": "string",
+      "minLength": 1
+    },
+    "effect_behavior": {
+      "type": "string",
+      "minLength": 1
+    },
+    "story_sensitivity_limit": {
+      "type": "string",
+      "minLength": 1
+    },
+    "recommended_duration": {
+      "type": "string",
+      "minLength": 1
+    },
+    "interruption": {
+      "type": "string",
+      "minLength": 1
+    },
+    "restoration": {
+      "type": "string",
+      "minLength": 1
+    },
+    "desktop_safe_bounds": {
+      "type": "string",
+      "minLength": 1
+    },
+    "mobile_safe_bounds": {
+      "type": "string",
+      "minLength": 1
+    },
+    "closeup_compatibility": {
+      "type": "string",
+      "minLength": 1
+    },
+    "reduced_motion_fallback": {
+      "type": "string",
+      "minLength": 1
+    },
+    "acceptance_state": {
+      "type": "string",
+      "minLength": 1
+    },
+    "ordinal": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 88
+    },
+    "section": {
+      "type": "object",
+      "required": [
+        "number",
+        "name"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "number": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 11
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "emotional_amplitude": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "allowed_scenes": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "disallowed_scenes": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "entry_transitions": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "exit_transitions": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "python_files_likely_affected": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "rust_files_likely_affected": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "joe_files_likely_affected": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "unit_tests": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "integration_tests": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "visual_tests": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "runtime_tests": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "evidence": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "dependencies": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "risks": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    }
+  }
+}

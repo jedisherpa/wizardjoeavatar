@@ -12,6 +12,7 @@ pub mod geometry;
 pub mod hub;
 pub mod motion_catalog;
 pub mod motion_graph;
+pub mod newsroom;
 pub mod palette;
 pub mod pathing;
 pub mod performance_score;
@@ -36,3 +37,8 @@ pub use codec::{
 pub use controller::{CommandResult, WizardAvatarController, WizardCommand};
 pub use frame_source::{ProceduralWizardFrameSource, WizardCellFrame};
 pub use state::{Action, Direction, Expression, MouthShape, WizardState};
+
+pub const BUILD_GIT_SHA: &str = match option_env!("WIZARD_AVATAR_GIT_SHA") {
+    Some(sha) => sha,
+    None => "development",
+};
