@@ -1,9 +1,10 @@
 use crate::chat_event::{
     AssistantErrorV1, AttentionTarget, AttentionTargetV1, CancelReason, CelebrationRequestV1,
     ChatEventV1, ChatTurnState, ClarificationRequestV1, ContractError, EmotionHintV1,
-    GestureHintV1, GestureKind, OperationId, SafetyClampV1, SafetyScope, SessionEndReason,
-    SessionId, SpeechFailureCode, SpeechMarkerKindV1, SpeechPlanV1, TimingSource, ToolWaitEndedV1,
-    ToolWaitKind, ToolWaitOutcome, ToolWaitStartedV1, TurnId, UtteranceId, Viseme,
+    GestureHintV1, GestureKind, OperationId, SafetyClampId, SafetyClampV1, SafetyScope,
+    SessionEndReason, SessionId, SourceId, SpeechFailureCode, SpeechMarkerKindV1, SpeechPlanV1,
+    TimingSource, ToolWaitEndedV1, ToolWaitKind, ToolWaitOutcome, ToolWaitStartedV1, TurnId,
+    UtteranceId, Viseme,
 };
 use crate::chat_performance::RenderedMouthPose;
 use crate::command::{CommandEnvelopeV1, SemanticCommandV1};
@@ -15,7 +16,8 @@ use crate::state_regions::{
     RegionMutationV1, RegionPriority, SemanticTick, SessionModeV1, SessionStateV1, SpeechModeV1,
     SpeechStateV1, StateRegionError,
 };
-use serde::{Deserialize, Serialize};
+use serde::de::Error as DeError;
+use serde::{Deserialize, Deserializer, Serialize};
 use thiserror::Error;
 
 pub const CHAT_POLICY_SCHEMA_VERSION: u16 = 1;
@@ -23,6 +25,7 @@ pub const POLICY_PRIORITY: RegionPriority = RegionPriority(40);
 pub const MAX_POLICY_HOLD_TICKS: u64 = 600;
 pub const MAX_COMPLETED_OPERATIONS: usize = 64;
 pub const MAX_ACTIVE_SAFETY_CLAMPS: usize = 32;
+pub const MAX_COMPLETED_SAFETY_CLAMPS: usize = 64;
 
 const THINKING_HOLD_TICKS: u64 = 180;
 const RESPONSE_HOLD_TICKS: u64 = 120;
@@ -43,6 +46,7 @@ pub struct ChatPolicyOrderKeyV1 {
 pub struct OrderedChatEventV1 {
     pub apply_tick: SemanticTick,
     pub server_sequence: u64,
+    pub source_id: SourceId,
     pub session_id: SessionId,
     pub turn_id: Option<TurnId>,
     pub previous_turn_id: Option<TurnId>,
@@ -70,6 +74,7 @@ impl OrderedChatEventV1 {
         Ok(Some(Self {
             apply_tick: SemanticTick(envelope.apply_tick),
             server_sequence: envelope.server_sequence,
+            source_id: envelope.source_id.clone(),
             session_id: correlation.session_id.clone(),
             turn_id: correlation.turn_id.clone(),
             previous_turn_id: correlation.previous_turn_id.clone(),
@@ -147,8 +152,12 @@ pub enum ChatPolicyError {
         previous: SemanticTick,
         received: SemanticTick,
     },
+    #[error("policy tick {0:?} was already finalized")]
+    TickAlreadyFinalized(SemanticTick),
     #[error("safety clamp release does not match an active owner")]
     SafetyClampOwnerMismatch,
+    #[error("safety clamp activation ID was already retired")]
+    SafetyClampIdRetired,
     #[error("active safety clamp capacity exceeded")]
     SafetyClampCapacity,
 }
@@ -178,6 +187,12 @@ struct CompletedSessionEndV1 {
 
 #[derive(Clone, Debug, Eq, PartialEq, Serialize, Deserialize)]
 #[serde(deny_unknown_fields)]
+struct SessionLocaleMarkerV1 {
+    locale: Option<String>,
+}
+
+#[derive(Clone, Debug, Eq, PartialEq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
 struct SpeechPlanIdentityV1 {
     utterance_id: UtteranceId,
     content_free_hash64: u64,
@@ -193,7 +208,9 @@ struct ActiveAttentionHoldV1 {
 #[derive(Clone, Debug, Eq, PartialEq, Serialize, Deserialize)]
 #[serde(deny_unknown_fields)]
 struct ActiveSafetyClampV1 {
+    clamp_id: SafetyClampId,
     scope: SafetyScope,
+    source_id: SourceId,
     session_id: SessionId,
     turn_id: Option<TurnId>,
 }
@@ -238,7 +255,7 @@ enum SpeechRetryV1 {
     },
 }
 
-#[derive(Clone, Debug, Eq, PartialEq, Serialize, Deserialize)]
+#[derive(Clone, Debug, Eq, PartialEq, Serialize)]
 #[serde(deny_unknown_fields)]
 pub struct ChatPolicyReducerV1 {
     pub schema_version: u16,
@@ -248,9 +265,9 @@ pub struct ChatPolicyReducerV1 {
     active_speech_plan: Option<SpeechPlanIdentityV1>,
     active_attention_hold: Option<ActiveAttentionHoldV1>,
     active_safety_clamps: Vec<ActiveSafetyClampV1>,
-    last_safety_release: Option<ActiveSafetyClampV1>,
+    completed_safety_clamps: Vec<ActiveSafetyClampV1>,
     last_session_end: Option<CompletedSessionEndV1>,
-    last_session_locale: Option<Option<String>>,
+    last_session_locale: Option<SessionLocaleMarkerV1>,
     last_conversation_retry: Option<ConversationRetryV1>,
     last_speech_retry: Option<SpeechRetryV1>,
     last_emotion: Option<EmotionHintV1>,
@@ -261,6 +278,76 @@ pub struct ChatPolicyReducerV1 {
     last_celebration: Option<CelebrationRequestV1>,
     last_order: Option<ChatPolicyOrderKeyV1>,
     last_tick: SemanticTick,
+    last_finalized_tick: Option<SemanticTick>,
+}
+
+#[derive(Deserialize)]
+#[serde(deny_unknown_fields)]
+struct UncheckedChatPolicyReducerV1 {
+    schema_version: u16,
+    semantic: AvatarSemanticStateV1,
+    active_tool_wait: Option<ActiveToolWaitV1>,
+    completed_tool_waits: Vec<CompletedToolWaitV1>,
+    active_speech_plan: Option<SpeechPlanIdentityV1>,
+    active_attention_hold: Option<ActiveAttentionHoldV1>,
+    active_safety_clamps: Vec<ActiveSafetyClampV1>,
+    completed_safety_clamps: Vec<ActiveSafetyClampV1>,
+    last_session_end: Option<CompletedSessionEndV1>,
+    last_session_locale: Option<SessionLocaleMarkerV1>,
+    last_conversation_retry: Option<ConversationRetryV1>,
+    last_speech_retry: Option<SpeechRetryV1>,
+    last_emotion: Option<EmotionHintV1>,
+    last_gesture: Option<GestureHintV1>,
+    last_attention: Option<AttentionTargetV1>,
+    last_clarification: Option<ClarificationRequestV1>,
+    last_error: Option<AssistantErrorV1>,
+    last_celebration: Option<CelebrationRequestV1>,
+    last_order: Option<ChatPolicyOrderKeyV1>,
+    last_tick: SemanticTick,
+    last_finalized_tick: Option<SemanticTick>,
+}
+
+impl TryFrom<UncheckedChatPolicyReducerV1> for ChatPolicyReducerV1 {
+    type Error = String;
+
+    fn try_from(value: UncheckedChatPolicyReducerV1) -> Result<Self, Self::Error> {
+        let reducer = Self {
+            schema_version: value.schema_version,
+            semantic: value.semantic,
+            active_tool_wait: value.active_tool_wait,
+            completed_tool_waits: value.completed_tool_waits,
+            active_speech_plan: value.active_speech_plan,
+            active_attention_hold: value.active_attention_hold,
+            active_safety_clamps: value.active_safety_clamps,
+            completed_safety_clamps: value.completed_safety_clamps,
+            last_session_end: value.last_session_end,
+            last_session_locale: value.last_session_locale,
+            last_conversation_retry: value.last_conversation_retry,
+            last_speech_retry: value.last_speech_retry,
+            last_emotion: value.last_emotion,
+            last_gesture: value.last_gesture,
+            last_attention: value.last_attention,
+            last_clarification: value.last_clarification,
+            last_error: value.last_error,
+            last_celebration: value.last_celebration,
+            last_order: value.last_order,
+            last_tick: value.last_tick,
+            last_finalized_tick: value.last_finalized_tick,
+        };
+        reducer.validate_snapshot()?;
+        Ok(reducer)
+    }
+}
+
+impl<'de> Deserialize<'de> for ChatPolicyReducerV1 {
+    fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
+    where
+        D: Deserializer<'de>,
+    {
+        UncheckedChatPolicyReducerV1::deserialize(deserializer)?
+            .try_into()
+            .map_err(D::Error::custom)
+    }
 }
 
 impl ChatPolicyReducerV1 {
@@ -274,7 +361,7 @@ impl ChatPolicyReducerV1 {
             active_speech_plan: None,
             active_attention_hold: None,
             active_safety_clamps: Vec::new(),
-            last_safety_release: None,
+            completed_safety_clamps: Vec::new(),
             last_session_end: None,
             last_session_locale: None,
             last_conversation_retry: None,
@@ -287,12 +374,70 @@ impl ChatPolicyReducerV1 {
             last_celebration: None,
             last_order: None,
             last_tick: SemanticTick(0),
+            last_finalized_tick: None,
         }
     }
 
     #[must_use]
     pub const fn semantic(&self) -> &AvatarSemanticStateV1 {
         &self.semantic
+    }
+
+    fn validate_snapshot(&self) -> Result<(), String> {
+        if self.schema_version != CHAT_POLICY_SCHEMA_VERSION {
+            return Err("unsupported chat policy snapshot schema".to_string());
+        }
+        if self.completed_tool_waits.len() > MAX_COMPLETED_OPERATIONS {
+            return Err("completed tool wait bound exceeded".to_string());
+        }
+        if has_duplicates_by(&self.completed_tool_waits, |left, right| {
+            left.operation_id == right.operation_id
+        }) {
+            return Err("duplicate completed tool wait operation".to_string());
+        }
+        if self.active_tool_wait.as_ref().is_some_and(|active| {
+            self.completed_tool_waits
+                .iter()
+                .any(|completed| completed.operation_id == active.operation_id)
+        }) {
+            return Err("active tool wait is already completed".to_string());
+        }
+        if self.active_safety_clamps.len() > MAX_ACTIVE_SAFETY_CLAMPS {
+            return Err("active safety clamp bound exceeded".to_string());
+        }
+        if self.completed_safety_clamps.len() > MAX_COMPLETED_SAFETY_CLAMPS {
+            return Err("completed safety clamp bound exceeded".to_string());
+        }
+        if has_duplicates_by(&self.active_safety_clamps, PartialEq::eq)
+            || has_duplicates_by(&self.completed_safety_clamps, PartialEq::eq)
+        {
+            return Err("duplicate safety clamp identity".to_string());
+        }
+        if self
+            .active_safety_clamps
+            .iter()
+            .any(|active| self.completed_safety_clamps.contains(active))
+        {
+            return Err("safety clamp cannot be active and completed".to_string());
+        }
+        if self.semantic.control.state.safety_clamp == self.active_safety_clamps.is_empty() {
+            return Err("safety clamp control state is inconsistent".to_string());
+        }
+        if self
+            .last_order
+            .is_some_and(|order| order.apply_tick > self.last_tick)
+        {
+            return Err("last order is ahead of the policy clock".to_string());
+        }
+        if self
+            .last_finalized_tick
+            .is_some_and(|tick| tick > self.last_tick)
+        {
+            return Err("finalized tick is ahead of the policy clock".to_string());
+        }
+        self.semantic
+            .validate_at(self.last_tick)
+            .map_err(|error| format!("invalid semantic snapshot: {error}"))
     }
 
     pub fn reduce(
@@ -306,6 +451,12 @@ impl ChatPolicyReducerV1 {
         &mut self,
         tick: SemanticTick,
     ) -> Result<ChatPolicyAdvanceOutcomeV1, ChatPolicyError> {
+        if self.last_finalized_tick == Some(tick) {
+            return Ok(ChatPolicyAdvanceOutcomeV1 {
+                tick,
+                changed_regions: Vec::new(),
+            });
+        }
         if tick < self.last_tick {
             return Err(ChatPolicyError::ClockRewind {
                 previous: self.last_tick,
@@ -318,6 +469,7 @@ impl ChatPolicyReducerV1 {
         draft.enforce_active_safety_scopes(&mut transaction)?;
         draft.semantic.validate_at(tick)?;
         draft.last_tick = tick;
+        draft.last_finalized_tick = Some(tick);
         let outcome = ChatPolicyAdvanceOutcomeV1 {
             tick,
             changed_regions: transaction.changed_regions,
@@ -340,6 +492,12 @@ impl ChatPolicyReducerV1 {
                     received: order,
                 });
             }
+        }
+        if self
+            .last_finalized_tick
+            .is_some_and(|finalized| input.apply_tick <= finalized)
+        {
+            return Err(ChatPolicyError::TickAlreadyFinalized(input.apply_tick));
         }
         if input.apply_tick < self.last_tick {
             return Err(ChatPolicyError::ClockRewind {
@@ -443,7 +601,9 @@ impl ChatPolicyReducerV1 {
         let event = &input.event;
         match event {
             ChatEventV1::SessionStarted { locale } => {
-                self.last_session_locale.as_ref() == Some(locale)
+                self.last_session_locale
+                    .as_ref()
+                    .is_some_and(|marker| &marker.locale == locale)
                     && self.semantic.session.state.mode != SessionModeV1::Disconnected
                     && self.semantic.session.state.session_id.as_ref() == Some(&input.session_id)
                     && self.semantic.session.state.turn_id == input.turn_id
@@ -589,12 +749,12 @@ impl ChatPolicyReducerV1 {
                     && self.semantic.face.state.gaze == payload.target
             }
             ChatEventV1::SafetyClamp(payload) => {
-                let owner = safety_owner(input, payload.scope);
+                let owner = safety_owner(input, payload);
                 if payload.active {
                     self.active_safety_clamps.contains(&owner)
                 } else {
                     !self.active_safety_clamps.contains(&owner)
-                        && self.last_safety_release.as_ref() == Some(&owner)
+                        && self.completed_safety_clamps.contains(&owner)
                 }
             }
             ChatEventV1::ConnectionDegraded => {
@@ -610,7 +770,9 @@ impl ChatPolicyReducerV1 {
     fn record_retry_identity(&mut self, event: &ChatEventV1) {
         match event {
             ChatEventV1::SessionStarted { locale } => {
-                self.last_session_locale = Some(locale.clone());
+                self.last_session_locale = Some(SessionLocaleMarkerV1 {
+                    locale: locale.clone(),
+                });
                 self.last_conversation_retry = None;
             }
             ChatEventV1::SessionEnded { .. } => {}
@@ -718,9 +880,9 @@ impl ChatPolicyReducerV1 {
             if payload.active {
                 return Ok(());
             }
-            let owner = safety_owner(input, payload.scope);
+            let owner = safety_owner(input, payload);
             if self.active_safety_clamps.contains(&owner)
-                || self.last_safety_release.as_ref() == Some(&owner)
+                || self.completed_safety_clamps.contains(&owner)
             {
                 return Ok(());
             }
@@ -1109,8 +1271,12 @@ impl ChatPolicyReducerV1 {
         self.active_tool_wait = None;
         self.active_speech_plan = None;
         self.active_attention_hold = None;
-        self.active_safety_clamps.clear();
-        self.last_safety_release = None;
+        self.completed_safety_clamps
+            .append(&mut self.active_safety_clamps);
+        if self.completed_safety_clamps.len() > MAX_COMPLETED_SAFETY_CLAMPS {
+            let excess = self.completed_safety_clamps.len() - MAX_COMPLETED_SAFETY_CLAMPS;
+            self.completed_safety_clamps.drain(..excess);
+        }
         self.last_session_locale = None;
         self.last_conversation_retry = None;
         self.last_speech_retry = None;
@@ -1607,16 +1773,16 @@ impl ChatPolicyReducerV1 {
         payload: &SafetyClampV1,
         transaction: &mut PolicyTransactionV1,
     ) -> Result<(), ChatPolicyError> {
-        let owner = safety_owner(input, payload.scope);
+        let owner = safety_owner(input, payload);
         if payload.active {
+            if self.completed_safety_clamps.contains(&owner) {
+                return Err(ChatPolicyError::SafetyClampIdRetired);
+            }
             if !self.active_safety_clamps.contains(&owner) {
                 if self.active_safety_clamps.len() >= MAX_ACTIVE_SAFETY_CLAMPS {
                     return Err(ChatPolicyError::SafetyClampCapacity);
                 }
                 self.active_safety_clamps.push(owner.clone());
-            }
-            if self.last_safety_release.as_ref() == Some(&owner) {
-                self.last_safety_release = None;
             }
         } else {
             let Some(index) = self
@@ -1627,7 +1793,10 @@ impl ChatPolicyReducerV1 {
                 return Err(ChatPolicyError::SafetyClampOwnerMismatch);
             };
             self.active_safety_clamps.remove(index);
-            self.last_safety_release = Some(owner);
+            if self.completed_safety_clamps.len() >= MAX_COMPLETED_SAFETY_CLAMPS {
+                self.completed_safety_clamps.remove(0);
+            }
+            self.completed_safety_clamps.push(owner);
         }
         let mut control = self.semantic.control.state.clone();
         control.safety_clamp = !self.active_safety_clamps.is_empty();
@@ -1637,12 +1806,7 @@ impl ChatPolicyReducerV1 {
         }
         match payload.scope {
             SafetyScope::All => {
-                self.set_conversation(
-                    transaction,
-                    ChatTurnState::Idle,
-                    Some(SAFETY_HOLD_TICKS),
-                    false,
-                )?;
+                self.set_conversation(transaction, ChatTurnState::Idle, None, false)?;
                 self.cancel_speech(transaction)?;
                 self.set_mouth_rest(transaction)?;
                 self.set_gesture_recovery(transaction)?;
@@ -1683,12 +1847,7 @@ impl ChatPolicyReducerV1 {
         control.safety_clamp = !self.active_safety_clamps.is_empty();
         self.set_control(transaction, control)?;
         if self.safety_scope_is_active(SafetyScope::All) {
-            self.set_conversation(
-                transaction,
-                ChatTurnState::Idle,
-                Some(SAFETY_HOLD_TICKS),
-                true,
-            )?;
+            self.set_conversation(transaction, ChatTurnState::Idle, None, false)?;
             self.cancel_speech(transaction)?;
             self.set_mouth_rest(transaction)?;
             self.set_gesture_recovery(transaction)?;
@@ -1778,33 +1937,38 @@ impl ChatPolicyReducerV1 {
             SpeechModeV1::Idle
         };
         speech.suppressed = true;
-        self.set_speech(transaction, speech, Some(SAFETY_HOLD_TICKS))
+        let hold = (!self.safety_scope_is_active(SafetyScope::Speech)).then_some(SAFETY_HOLD_TICKS);
+        self.set_speech(transaction, speech, hold)
     }
 
     fn set_mouth_rest(
         &mut self,
         transaction: &mut PolicyTransactionV1,
     ) -> Result<(), ChatPolicyError> {
-        if !self.safety_scope_is_active(SafetyScope::Speech)
-            && self.semantic.mouth.state.viseme == Viseme::Rest
-            && self.semantic.mouth.state.rendered_pose == RenderedMouthPose::Closed
-            && self.semantic.mouth.state.cue_index.is_none()
-        {
-            return Ok(());
-        }
+        let safety_active = self.safety_scope_is_active(SafetyScope::Speech);
         let mouth = MouthStateV1 {
             viseme: Viseme::Rest,
             rendered_pose: RenderedMouthPose::Closed,
-            previous_pose: self.semantic.mouth.state.rendered_pose,
+            previous_pose: if safety_active {
+                RenderedMouthPose::Closed
+            } else {
+                self.semantic.mouth.state.rendered_pose
+            },
             blend_percent: 100,
             cue_index: None,
             confidence: 100,
         };
+        let hold = (!safety_active).then_some(SAFETY_HOLD_TICKS);
+        if self.semantic.mouth.state == mouth
+            && (!safety_active || self.semantic.mouth.header.deadline_tick.is_none())
+        {
+            return Ok(());
+        }
         self.apply_region(
             transaction,
             RegionKind::Mouth,
             RegionMutationV1::Mouth(mouth),
-            Some(SAFETY_HOLD_TICKS),
+            hold,
         )
     }
 
@@ -1812,6 +1976,8 @@ impl ChatPolicyReducerV1 {
         &mut self,
         transaction: &mut PolicyTransactionV1,
     ) -> Result<(), ChatPolicyError> {
+        let hold =
+            (!self.safety_scope_is_active(SafetyScope::Gesture)).then_some(SAFETY_HOLD_TICKS);
         self.set_gesture(
             transaction,
             GestureStateV1 {
@@ -1821,7 +1987,7 @@ impl ChatPolicyReducerV1 {
                 interrupt_policy: GestureInterruptPolicyV1::Immediate,
                 restoration_policy: GestureRestorationPolicyV1::SettleToIdle,
             },
-            Some(SAFETY_HOLD_TICKS),
+            hold,
             false,
         )
     }
@@ -1841,7 +2007,9 @@ impl ChatPolicyReducerV1 {
             locomotion_phase_tick: current.locomotion_phase_tick,
             wing_phase_tick: current.wing_phase_tick,
         };
-        self.set_mobility(transaction, state, Some(SAFETY_HOLD_TICKS))
+        let hold =
+            (!self.safety_scope_is_active(SafetyScope::Mobility)).then_some(SAFETY_HOLD_TICKS);
+        self.set_mobility(transaction, state, hold)
     }
 
     fn set_session(
@@ -1875,12 +2043,12 @@ impl ChatPolicyReducerV1 {
                 turn_state
             },
         };
-        let hold_ticks = if safety_active {
-            Some(SAFETY_HOLD_TICKS)
-        } else {
-            hold_ticks
-        };
-        if !force && hold_ticks.is_none() && self.semantic.conversation.state == state {
+        let hold_ticks = if safety_active { None } else { hold_ticks };
+        if !force
+            && hold_ticks.is_none()
+            && self.semantic.conversation.state == state
+            && self.semantic.conversation.header.deadline_tick.is_none()
+        {
             return Ok(());
         }
         self.apply_region(
@@ -1910,12 +2078,11 @@ impl ChatPolicyReducerV1 {
         } else {
             state
         };
-        let hold_ticks = if safety_active {
-            Some(SAFETY_HOLD_TICKS)
-        } else {
-            hold_ticks
-        };
-        if hold_ticks.is_none() && self.semantic.speech.state == state {
+        let hold_ticks = if safety_active { None } else { hold_ticks };
+        if hold_ticks.is_none()
+            && self.semantic.speech.state == state
+            && self.semantic.speech.header.deadline_tick.is_none()
+        {
             return Ok(());
         }
         self.apply_region(
@@ -1962,12 +2129,12 @@ impl ChatPolicyReducerV1 {
         } else {
             state
         };
-        let hold_ticks = if safety_active {
-            Some(SAFETY_HOLD_TICKS)
-        } else {
-            hold_ticks
-        };
-        if !force && hold_ticks.is_none() && self.semantic.gesture.state == state {
+        let hold_ticks = if safety_active { None } else { hold_ticks };
+        if !force
+            && hold_ticks.is_none()
+            && self.semantic.gesture.state == state
+            && self.semantic.gesture.header.deadline_tick.is_none()
+        {
             return Ok(());
         }
         self.apply_region(
@@ -1983,23 +2150,25 @@ impl ChatPolicyReducerV1 {
         transaction: &mut PolicyTransactionV1,
         state: EffectsStateV1,
     ) -> Result<(), ChatPolicyError> {
-        let state = if self.safety_scope_is_active(SafetyScope::Effects) {
+        let safety_active = self.safety_scope_is_active(SafetyScope::Effects);
+        let state = if safety_active {
             EffectsStateV1 {
                 instances: Vec::new(),
             }
         } else {
             state
         };
-        if !self.safety_scope_is_active(SafetyScope::Effects)
-            && self.semantic.effects.state == state
+        if self.semantic.effects.state == state
+            && (!safety_active || self.semantic.effects.header.deadline_tick.is_none())
         {
             return Ok(());
         }
+        let hold = (!safety_active).then_some(SAFETY_HOLD_TICKS);
         self.apply_region(
             transaction,
             RegionKind::Effects,
             RegionMutationV1::Effects(state),
-            Some(SAFETY_HOLD_TICKS),
+            hold,
         )
     }
 
@@ -2025,12 +2194,11 @@ impl ChatPolicyReducerV1 {
         } else {
             state
         };
-        let hold_ticks = if safety_active {
-            Some(SAFETY_HOLD_TICKS)
-        } else {
-            hold_ticks
-        };
-        if hold_ticks.is_none() && self.semantic.mobility.state == state {
+        let hold_ticks = if safety_active { None } else { hold_ticks };
+        if hold_ticks.is_none()
+            && self.semantic.mobility.state == state
+            && self.semantic.mobility.header.deadline_tick.is_none()
+        {
             return Ok(());
         }
         self.apply_region(
@@ -2194,9 +2362,18 @@ fn bounded_visual_ticks(milliseconds: u32) -> Result<u64, ChatPolicyError> {
     Ok(milliseconds_to_ticks(milliseconds)?.clamp(1, MAX_POLICY_HOLD_TICKS))
 }
 
-fn safety_owner(input: &OrderedChatEventV1, scope: SafetyScope) -> ActiveSafetyClampV1 {
+fn has_duplicates_by<T>(values: &[T], equal: impl Fn(&T, &T) -> bool) -> bool {
+    values
+        .iter()
+        .enumerate()
+        .any(|(index, value)| values[index + 1..].iter().any(|other| equal(value, other)))
+}
+
+fn safety_owner(input: &OrderedChatEventV1, payload: &SafetyClampV1) -> ActiveSafetyClampV1 {
     ActiveSafetyClampV1 {
-        scope,
+        clamp_id: payload.clamp_id.clone(),
+        scope: payload.scope,
+        source_id: input.source_id.clone(),
         session_id: input.session_id.clone(),
         turn_id: input.turn_id.clone(),
     }

@@ -149,6 +149,7 @@ opaque_id!(SessionId);
 opaque_id!(TurnId);
 opaque_id!(UtteranceId);
 opaque_id!(OperationId);
+opaque_id!(SafetyClampId);
 opaque_id!(SourceId);
 opaque_id!(DiagnosticGeometryId);
 
@@ -694,6 +695,7 @@ pub enum SafetyScope {
 #[derive(Clone, Debug, Eq, PartialEq, Serialize, Deserialize)]
 #[serde(deny_unknown_fields)]
 pub struct SafetyClampV1 {
+    pub clamp_id: SafetyClampId,
     pub scope: SafetyScope,
     pub active: bool,
 }

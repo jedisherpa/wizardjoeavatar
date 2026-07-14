@@ -48,6 +48,10 @@ fn operation_id() -> OperationId {
     OperationId::new("operation-1").unwrap()
 }
 
+fn safety_clamp_id() -> SafetyClampId {
+    SafetyClampId::new("clamp-1").unwrap()
+}
+
 fn speech_plan() -> SpeechPlanV1 {
     speech_plan_for("utterance-1")
 }
@@ -71,6 +75,7 @@ fn input(sequence: u64, tick: u64, event: ChatEventV1) -> OrderedChatEventV1 {
     OrderedChatEventV1 {
         apply_tick: SemanticTick(tick),
         server_sequence: sequence,
+        source_id: SourceId::new("source-1").unwrap(),
         session_id: session_id(),
         turn_id: Some(turn_id()),
         previous_turn_id: None,
@@ -88,11 +93,31 @@ fn input_for(
     OrderedChatEventV1 {
         apply_tick: SemanticTick(tick),
         server_sequence: sequence,
+        source_id: SourceId::new("source-1").unwrap(),
         session_id: SessionId::new(session).unwrap(),
         turn_id: Some(TurnId::new(turn).unwrap()),
         previous_turn_id: None,
         event,
     }
+}
+
+fn input_from_source(
+    sequence: u64,
+    tick: u64,
+    source: &str,
+    event: ChatEventV1,
+) -> OrderedChatEventV1 {
+    let mut input = input(sequence, tick, event);
+    input.source_id = SourceId::new(source).unwrap();
+    input
+}
+
+fn safety_event(id: &str, scope: SafetyScope, active: bool) -> ChatEventV1 {
+    ChatEventV1::SafetyClamp(SafetyClampV1 {
+        clamp_id: SafetyClampId::new(id).unwrap(),
+        scope,
+        active,
+    })
 }
 
 fn reduce(
@@ -336,6 +361,7 @@ fn every_event_variant() -> Vec<(&'static str, ChatEventV1)> {
         (
             "safety_clamp",
             ChatEventV1::SafetyClamp(SafetyClampV1 {
+                clamp_id: safety_clamp_id(),
                 scope: SafetyScope::Speech,
                 active: true,
             }),
@@ -876,7 +902,7 @@ fn compatible_conversation_and_speech_cancellation_preserve_user_mobility_byte_f
 }
 
 #[test]
-fn safety_clamp_neutralizes_only_requested_channels_immediately_and_with_bounds() {
+fn safety_clamp_neutralizes_only_requested_channels_until_owned_release() {
     let mut reducer = prepare_for(&ChatEventV1::SpeechPaused {
         utterance_id: utterance_id(),
     });
@@ -886,6 +912,7 @@ fn safety_clamp_neutralizes_only_requested_channels_immediately_and_with_bounds(
             reducer.next_test_sequence(),
             reducer.next_test_tick(),
             ChatEventV1::SafetyClamp(SafetyClampV1 {
+                clamp_id: safety_clamp_id(),
                 scope: SafetyScope::Speech,
                 active: true,
             }),
@@ -908,6 +935,7 @@ fn safety_clamp_neutralizes_only_requested_channels_immediately_and_with_bounds(
             reducer.next_test_sequence(),
             tick,
             ChatEventV1::SafetyClamp(SafetyClampV1 {
+                clamp_id: safety_clamp_id(),
                 scope: SafetyScope::All,
                 active: true,
             }),
@@ -926,31 +954,11 @@ fn safety_clamp_neutralizes_only_requested_channels_immediately_and_with_bounds(
         reducer.semantic().mobility.state.mode,
         MobilityModeV1::GroundedIdle
     );
-    assert!(
-        reducer
-            .semantic()
-            .conversation
-            .header
-            .deadline_tick
-            .unwrap()
-            .0
-            > tick
-    );
-    assert!(
-        reducer
-            .semantic()
-            .conversation
-            .header
-            .deadline_tick
-            .unwrap()
-            .0
-            - tick
-            <= MAX_POLICY_HOLD_TICKS
-    );
+    assert_eq!(reducer.semantic().conversation.header.deadline_tick, None);
 }
 
 #[test]
-fn exact_active_safety_retry_reasserts_neutralization_at_the_expiry_boundary() {
+fn exact_active_safety_retries_are_deadline_free_and_byte_stable() {
     for (scope, region) in [
         (SafetyScope::All, RegionKind::Conversation),
         (SafetyScope::Speech, RegionKind::Speech),
@@ -966,23 +974,25 @@ fn exact_active_safety_retry_reasserts_neutralization_at_the_expiry_boundary() {
                 reducer.next_test_sequence(),
                 reducer.next_test_tick(),
                 ChatEventV1::SafetyClamp(SafetyClampV1 {
+                    clamp_id: safety_clamp_id(),
                     scope,
                     active: true,
                 }),
             ))
             .unwrap();
-        let deadline = reducer
-            .semantic()
-            .region_header(region)
-            .deadline_tick
-            .unwrap();
-        let before_boundary = serde_json::to_vec(reducer.semantic()).unwrap();
+        assert_eq!(
+            reducer.semantic().region_header(region).deadline_tick,
+            None,
+            "{scope:?}"
+        );
+        let before_retry = serde_json::to_vec(reducer.semantic()).unwrap();
 
         let outcome = reducer
             .reduce(input(
                 reducer.next_test_sequence(),
-                deadline.0 - 1,
+                reducer.next_test_tick() + 10_000,
                 ChatEventV1::SafetyClamp(SafetyClampV1 {
+                    clamp_id: safety_clamp_id(),
                     scope,
                     active: true,
                 }),
@@ -991,31 +1001,13 @@ fn exact_active_safety_retry_reasserts_neutralization_at_the_expiry_boundary() {
         assert_eq!(outcome.disposition, ChatPolicyDispositionV1::Duplicate);
         assert_eq!(
             serde_json::to_vec(reducer.semantic()).unwrap(),
-            before_boundary
+            before_retry
         );
-
-        reducer
-            .reduce(input(
-                reducer.next_test_sequence(),
-                deadline.0,
-                ChatEventV1::SafetyClamp(SafetyClampV1 {
-                    scope,
-                    active: true,
-                }),
-            ))
-            .unwrap();
-
         assert!(reducer.semantic().control.state.safety_clamp, "{scope:?}");
-        assert!(
-            reducer
-                .semantic()
-                .region_header(region)
-                .deadline_tick
-                .unwrap()
-                > deadline,
-            "{scope:?}"
-        );
-        reducer.semantic().validate_at(deadline).unwrap();
+        reducer
+            .semantic()
+            .validate_at(SemanticTick(reducer.next_test_tick()))
+            .unwrap();
     }
 }
 
@@ -1078,15 +1070,25 @@ fn quiet_clock_expires_holds_at_equality_handles_skips_and_reasserts_safety() {
             safety.next_test_sequence(),
             safety.next_test_tick(),
             ChatEventV1::SafetyClamp(SafetyClampV1 {
+                clamp_id: safety_clamp_id(),
                 scope: SafetyScope::Speech,
                 active: true,
             }),
         ))
         .unwrap();
-    let safety_deadline = safety.semantic().speech.header.deadline_tick.unwrap();
-    safety.advance_to(safety_deadline).unwrap();
+    let safety_before = serde_json::to_vec(&safety).unwrap();
+    let safety_tick = SemanticTick(safety.next_test_tick() + 1_000);
+    safety.advance_to(safety_tick).unwrap();
     assert!(safety.semantic().speech.state.suppressed);
-    assert!(safety.semantic().speech.header.deadline_tick.unwrap() > safety_deadline);
+    assert_eq!(safety.semantic().speech.header.deadline_tick, None);
+    let once = serde_json::to_vec(&safety).unwrap();
+    assert!(safety
+        .advance_to(safety_tick)
+        .unwrap()
+        .changed_regions
+        .is_empty());
+    assert_eq!(serde_json::to_vec(&safety).unwrap(), once);
+    assert_ne!(safety_before, once);
 
     let mut attention = active_reducer();
     attention
@@ -1113,72 +1115,235 @@ fn quiet_clock_expires_holds_at_equality_handles_skips_and_reasserts_safety() {
 fn safety_release_is_owner_scoped_and_stale_release_is_atomic() {
     let mut reducer = active_reducer();
     reducer
-        .reduce(input_for(
+        .reduce(input_from_source(
             2,
             2,
-            "session-1",
-            "turn-1",
-            ChatEventV1::SafetyClamp(SafetyClampV1 {
-                scope: SafetyScope::Speech,
-                active: true,
-            }),
+            "safety-source-a",
+            safety_event("clamp-a", SafetyScope::Speech, true),
         ))
         .unwrap();
     reducer
-        .reduce(input_for(
+        .reduce(input_from_source(
             3,
             3,
-            "session-2",
-            "turn-2",
-            ChatEventV1::SafetyClamp(SafetyClampV1 {
-                scope: SafetyScope::Speech,
-                active: true,
-            }),
+            "safety-source-b",
+            safety_event("clamp-b", SafetyScope::Speech, true),
         ))
         .unwrap();
 
     reducer
-        .reduce(input_for(
+        .reduce(input_from_source(
             4,
             4,
-            "session-1",
-            "turn-1",
-            ChatEventV1::SafetyClamp(SafetyClampV1 {
-                scope: SafetyScope::Speech,
-                active: false,
-            }),
+            "safety-source-a",
+            safety_event("clamp-a", SafetyScope::Speech, false),
         ))
         .unwrap();
     assert!(reducer.semantic().control.state.safety_clamp);
 
     reducer
-        .reduce(input_for(
+        .reduce(input_from_source(
             5,
             5,
-            "session-2",
-            "turn-2",
-            ChatEventV1::SafetyClamp(SafetyClampV1 {
-                scope: SafetyScope::Speech,
-                active: false,
-            }),
+            "safety-source-a",
+            safety_event("clamp-c", SafetyScope::Speech, true),
         ))
         .unwrap();
-    assert!(!reducer.semantic().control.state.safety_clamp);
+    let before_delayed = serde_json::to_vec(reducer.semantic()).unwrap();
+    let delayed = reducer
+        .reduce(input_from_source(
+            6,
+            6,
+            "safety-source-a",
+            safety_event("clamp-a", SafetyScope::Speech, false),
+        ))
+        .unwrap();
+    assert_eq!(delayed.disposition, ChatPolicyDispositionV1::Duplicate);
+    assert_eq!(
+        serde_json::to_vec(reducer.semantic()).unwrap(),
+        before_delayed
+    );
+    assert!(reducer.semantic().control.state.safety_clamp);
+
+    reducer
+        .reduce(input_from_source(
+            7,
+            7,
+            "safety-source-b",
+            safety_event("clamp-b", SafetyScope::Speech, false),
+        ))
+        .unwrap();
+    assert!(reducer.semantic().control.state.safety_clamp);
+
     let before = serde_json::to_vec(&reducer).unwrap();
     assert_eq!(
-        reducer.reduce(input_for(
-            6,
-            6,
-            "session-1",
-            "turn-retired",
-            ChatEventV1::SafetyClamp(SafetyClampV1 {
-                scope: SafetyScope::Speech,
-                active: false,
-            }),
+        reducer.reduce(input_from_source(
+            8,
+            8,
+            "safety-source-b",
+            safety_event("clamp-c", SafetyScope::Speech, false),
         )),
         Err(ChatPolicyError::SafetyClampOwnerMismatch)
     );
     assert_eq!(serde_json::to_vec(&reducer).unwrap(), before);
+
+    reducer
+        .reduce(input_from_source(
+            9,
+            9,
+            "safety-source-a",
+            safety_event("clamp-c", SafetyScope::Speech, false),
+        ))
+        .unwrap();
+    assert!(!reducer.semantic().control.state.safety_clamp);
+
+    let retired = serde_json::to_vec(&reducer).unwrap();
+    assert_eq!(
+        reducer.reduce(input_from_source(
+            10,
+            10,
+            "safety-source-a",
+            safety_event("clamp-c", SafetyScope::Speech, true),
+        )),
+        Err(ChatPolicyError::SafetyClampIdRetired)
+    );
+    assert_eq!(serde_json::to_vec(&reducer).unwrap(), retired);
+}
+
+#[test]
+fn finalized_ticks_reject_late_events_and_deadline_owner_runs_before_finalization() {
+    let end = ChatEventV1::ToolWaitEnded(ToolWaitEndedV1 {
+        operation_id: operation_id(),
+        outcome: ToolWaitOutcome::Completed,
+    });
+    let mut late = prepare_for(&end);
+    let deadline = late.semantic().conversation.header.deadline_tick.unwrap();
+    late.advance_to(deadline).unwrap();
+    let expired = serde_json::to_vec(&late).unwrap();
+    assert_eq!(
+        late.reduce(input(late.next_test_sequence(), deadline.0, end.clone(),)),
+        Err(ChatPolicyError::TickAlreadyFinalized(deadline))
+    );
+    assert_eq!(serde_json::to_vec(&late).unwrap(), expired);
+
+    let mut supported = prepare_for(&end);
+    let outcome = supported
+        .reduce(input(supported.next_test_sequence(), deadline.0, end))
+        .unwrap();
+    assert_eq!(outcome.disposition, ChatPolicyDispositionV1::Applied);
+    assert_eq!(
+        supported.semantic().conversation.state.turn_state,
+        ChatTurnState::Idle
+    );
+    assert!(supported
+        .advance_to(deadline)
+        .unwrap()
+        .changed_regions
+        .is_empty());
+}
+
+#[test]
+fn safety_advancement_is_partition_independent_for_every_scope_and_overlap() {
+    let cases = vec![
+        vec![SafetyScope::All],
+        vec![SafetyScope::Speech],
+        vec![SafetyScope::Gesture],
+        vec![SafetyScope::Mobility],
+        vec![SafetyScope::Effects],
+        vec![SafetyScope::Speech, SafetyScope::Gesture],
+        vec![SafetyScope::All, SafetyScope::Effects],
+    ];
+    for scopes in cases {
+        let mut baseline = active_reducer();
+        for (index, scope) in scopes.iter().copied().enumerate() {
+            let sequence = index as u64 + 2;
+            baseline
+                .reduce(input_from_source(
+                    sequence,
+                    sequence,
+                    &format!("safety-source-{index}"),
+                    safety_event(&format!("clamp-{index}"), scope, true),
+                ))
+                .unwrap();
+        }
+        let target = SemanticTick(240);
+        let mut per_tick = baseline.clone();
+        for tick in per_tick.next_test_tick()..=target.0 {
+            per_tick.advance_to(SemanticTick(tick)).unwrap();
+        }
+        let mut skipped = baseline;
+        skipped.advance_to(target).unwrap();
+        assert_eq!(
+            serde_json::to_vec(&per_tick).unwrap(),
+            serde_json::to_vec(&skipped).unwrap(),
+            "{scopes:?}"
+        );
+        let canonical = serde_json::to_vec(&skipped).unwrap();
+        assert!(skipped
+            .advance_to(target)
+            .unwrap()
+            .changed_regions
+            .is_empty());
+        assert_eq!(serde_json::to_vec(&skipped).unwrap(), canonical);
+    }
+}
+
+#[test]
+fn reducer_snapshot_deserialization_enforces_bounds_uniqueness_and_invariants() {
+    let mut reducer = active_reducer();
+    reducer
+        .reduce(input_from_source(
+            2,
+            2,
+            "safety-source-a",
+            safety_event("clamp-a", SafetyScope::Speech, true),
+        ))
+        .unwrap();
+    let valid = serde_json::to_value(&reducer).unwrap();
+    assert_eq!(
+        serde_json::from_value::<ChatPolicyReducerV1>(valid.clone()).unwrap(),
+        reducer
+    );
+
+    let active = valid["active_safety_clamps"][0].clone();
+    let mut oversized = valid.clone();
+    oversized["active_safety_clamps"] = serde_json::Value::Array(vec![active.clone(); 33]);
+    assert!(serde_json::from_value::<ChatPolicyReducerV1>(oversized).is_err());
+
+    let mut duplicate = valid.clone();
+    duplicate["active_safety_clamps"] =
+        serde_json::Value::Array(vec![active.clone(), active.clone()]);
+    assert!(serde_json::from_value::<ChatPolicyReducerV1>(duplicate).is_err());
+
+    let mut inconsistent = valid.clone();
+    inconsistent["completed_safety_clamps"] = serde_json::Value::Array(vec![active]);
+    assert!(serde_json::from_value::<ChatPolicyReducerV1>(inconsistent).is_err());
+
+    let mut control = valid.clone();
+    control["semantic"]["control"]["state"]["safety_clamp"] = false.into();
+    assert!(serde_json::from_value::<ChatPolicyReducerV1>(control).is_err());
+
+    let mut clock = valid;
+    clock["last_tick"] = serde_json::json!(0);
+    assert!(serde_json::from_value::<ChatPolicyReducerV1>(clock).is_err());
+
+    let end = ChatEventV1::ToolWaitEnded(ToolWaitEndedV1 {
+        operation_id: operation_id(),
+        outcome: ToolWaitOutcome::Completed,
+    });
+    let mut completed = prepare_for(&end);
+    completed
+        .reduce(input(
+            completed.next_test_sequence(),
+            completed.next_test_tick(),
+            end,
+        ))
+        .unwrap();
+    let mut completed_json = serde_json::to_value(completed).unwrap();
+    let operation = completed_json["completed_tool_waits"][0].clone();
+    completed_json["completed_tool_waits"] =
+        serde_json::Value::Array(vec![operation; MAX_COMPLETED_OPERATIONS + 1]);
+    assert!(serde_json::from_value::<ChatPolicyReducerV1>(completed_json).is_err());
 }
 
 fn semantic_without_control(reducer: &ChatPolicyReducerV1) -> serde_json::Value {
@@ -1230,6 +1395,7 @@ fn every_safety_scope_release_preserves_neutralization_without_replaying_stale_b
                 reducer.next_test_sequence(),
                 active_tick,
                 ChatEventV1::SafetyClamp(SafetyClampV1 {
+                    clamp_id: safety_clamp_id(),
                     scope,
                     active: true,
                 }),
@@ -1241,6 +1407,7 @@ fn every_safety_scope_release_preserves_neutralization_without_replaying_stale_b
                 reducer.next_test_sequence(),
                 active_tick,
                 ChatEventV1::SafetyClamp(SafetyClampV1 {
+                    clamp_id: safety_clamp_id(),
                     scope,
                     active: false,
                 }),
@@ -1265,7 +1432,11 @@ fn overlapping_safety_scopes_keep_the_clamp_active_until_each_scope_releases() {
             .reduce(input(
                 sequence,
                 sequence,
-                ChatEventV1::SafetyClamp(SafetyClampV1 { scope, active }),
+                ChatEventV1::SafetyClamp(SafetyClampV1 {
+                    clamp_id: safety_clamp_id(),
+                    scope,
+                    active,
+                }),
             ))
             .unwrap();
     }
@@ -1280,6 +1451,7 @@ fn overlapping_safety_scopes_keep_the_clamp_active_until_each_scope_releases() {
             7,
             7,
             ChatEventV1::SafetyClamp(SafetyClampV1 {
+                clamp_id: safety_clamp_id(),
                 scope: SafetyScope::Gesture,
                 active: false,
             }),
@@ -1294,6 +1466,7 @@ fn overlapping_safety_scopes_keep_the_clamp_active_until_each_scope_releases() {
                 8,
                 8,
                 ChatEventV1::SafetyClamp(SafetyClampV1 {
+                    clamp_id: safety_clamp_id(),
                     scope: SafetyScope::Gesture,
                     active: false,
                 }),
@@ -1467,6 +1640,7 @@ fn active_and_overlapping_safety_scopes_block_repopulation_until_final_release()
             2,
             2,
             ChatEventV1::SafetyClamp(SafetyClampV1 {
+                clamp_id: safety_clamp_id(),
                 scope: SafetyScope::All,
                 active: true,
             }),
@@ -1477,6 +1651,7 @@ fn active_and_overlapping_safety_scopes_block_repopulation_until_final_release()
             3,
             3,
             ChatEventV1::SafetyClamp(SafetyClampV1 {
+                clamp_id: safety_clamp_id(),
                 scope: SafetyScope::Speech,
                 active: true,
             }),
@@ -1523,6 +1698,7 @@ fn active_and_overlapping_safety_scopes_block_repopulation_until_final_release()
             8,
             8,
             ChatEventV1::SafetyClamp(SafetyClampV1 {
+                clamp_id: safety_clamp_id(),
                 scope: SafetyScope::All,
                 active: false,
             }),
@@ -1538,6 +1714,7 @@ fn active_and_overlapping_safety_scopes_block_repopulation_until_final_release()
             10,
             10,
             ChatEventV1::SafetyClamp(SafetyClampV1 {
+                clamp_id: safety_clamp_id(),
                 scope: SafetyScope::Speech,
                 active: false,
             }),
@@ -1573,6 +1750,7 @@ fn non_global_events_require_live_exact_session_and_turn_correlation() {
             1,
             1,
             ChatEventV1::SafetyClamp(SafetyClampV1 {
+                clamp_id: safety_clamp_id(),
                 scope: SafetyScope::Gesture,
                 active: true,
             }),
@@ -2194,10 +2372,12 @@ fn out_of_order_and_failed_events_are_atomic_and_replay_hash_is_stable() {
             },
             ChatEventV1::UserTurnCancelled,
             ChatEventV1::SafetyClamp(SafetyClampV1 {
+                clamp_id: safety_clamp_id(),
                 scope: SafetyScope::Speech,
                 active: true,
             }),
             ChatEventV1::SafetyClamp(SafetyClampV1 {
+                clamp_id: safety_clamp_id(),
                 scope: SafetyScope::Speech,
                 active: false,
             }),
@@ -2262,4 +2442,4 @@ fn out_of_order_and_failed_events_are_atomic_and_replay_hash_is_stable() {
 }
 
 const EXPECTED_REPLAY_HASH: &str =
-    "81257f8f9b84eb146dc9b9feaf7e52f3b0532d4a6164c3a6820e76ff850aa0d5";
+    "ea74e5d0e9997aae3bdd5145edb435986352b41f8251c8de9bfe92bb5dcbd740";
