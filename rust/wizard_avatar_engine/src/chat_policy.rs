@@ -325,6 +325,12 @@ impl ChatPolicyReducerV1 {
                     draft.record_retry_identity(&input.event);
                 }
                 draft.enforce_active_safety_scopes(&mut transaction)?;
+            } else if !transaction.changed_regions.is_empty() {
+                // Expiry runs before retry detection. An exact retry of an active
+                // clamp at its hold boundary must therefore reassert neutralized
+                // regions even though the command itself is deduplicated. A retry
+                // before any expiry remains byte-for-byte idempotent.
+                draft.enforce_active_safety_scopes(&mut transaction)?;
             }
         }
         draft.semantic.validate_at(input.apply_tick)?;

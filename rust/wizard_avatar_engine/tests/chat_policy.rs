@@ -932,6 +932,43 @@ fn safety_clamp_neutralizes_only_requested_channels_immediately_and_with_bounds(
     );
 }
 
+#[test]
+fn exact_active_safety_retry_reasserts_neutralization_at_the_expiry_boundary() {
+    let mut reducer = prepare_for(&ChatEventV1::SpeechPaused {
+        utterance_id: utterance_id(),
+    });
+    reducer
+        .reduce(input(
+            reducer.next_test_sequence(),
+            reducer.next_test_tick(),
+            ChatEventV1::SafetyClamp(SafetyClampV1 {
+                scope: SafetyScope::Speech,
+                active: true,
+            }),
+        ))
+        .unwrap();
+    let deadline = reducer.semantic().speech.header.deadline_tick.unwrap();
+
+    reducer
+        .reduce(input(
+            reducer.next_test_sequence(),
+            deadline.0,
+            ChatEventV1::SafetyClamp(SafetyClampV1 {
+                scope: SafetyScope::Speech,
+                active: true,
+            }),
+        ))
+        .unwrap();
+
+    assert!(reducer.semantic().control.state.safety_clamp);
+    assert!(reducer.semantic().speech.state.suppressed);
+    assert_ne!(reducer.semantic().speech.state.mode, SpeechModeV1::Active);
+    assert_ne!(reducer.semantic().speech.state.mode, SpeechModeV1::Prepared);
+    assert_eq!(reducer.semantic().mouth.state.viseme, Viseme::Rest);
+    assert!(reducer.semantic().speech.header.deadline_tick.unwrap() > deadline);
+    reducer.semantic().validate_at(deadline).unwrap();
+}
+
 fn semantic_without_control(reducer: &ChatPolicyReducerV1) -> serde_json::Value {
     let mut value = serde_json::to_value(reducer.semantic()).unwrap();
     value.as_object_mut().unwrap().remove("control");
