@@ -35,9 +35,12 @@ bundles it without separating the executable from `_internal`.
 
 The script writes `build-provenance.json` beside the sidecar with the Python and
 PyInstaller versions, source commit/dirty state, lock hash, payload hash,
-executable hash, target, and unsigned signing state. Tauri's resulting local app
-is under `src-tauri/target/release/bundle/macos/`. The build does not copy it to
-`/Applications`, alter an installed app, sign it, notarize it, or publish it.
+executable hash, target, and sidecar signing state. Tauri's resulting local app
+is under `src-tauri/target/release/bundle/macos/`. `tauri:build` applies and
+strictly verifies a local ad-hoc signature so the bundle has the resource
+envelope macOS requires in Applications. It does not use Developer ID
+credentials, notarize, staple, publish, copy to Applications, or alter an
+installed app.
 
 `WIZARD_SIDECAR_BUILD_DIR` can relocate the temporary build root. Generated
 target-specific resource trees are intentionally ignored; rerun

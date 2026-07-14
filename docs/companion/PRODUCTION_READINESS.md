@@ -17,7 +17,7 @@ public distribution**
 - The app provides status, recovery, diagnostics, full pose access, continuous
   repeat, scoped keyboard controls, VoiceOver labels, and reduced-motion modes.
 - All source-level verification gates pass.
-- A local unsigned draft `.app` builds successfully.
+- A local draft `.app` builds and receives a verified ad-hoc bundle signature.
 
 ## Release Blockers
 

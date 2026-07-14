@@ -38,7 +38,9 @@ Updated: 2026-07-14
 A draft unsigned local bundle was produced at 81 MB after narrowing packaged
 resources to runtime definitions, legacy web assets, and the motion manifest.
 It was built from a dirty implementation tree and is build feedback, not the
-final provenance artifact.
+final provenance artifact. The first clean copy exposed a missing bundle
+resource envelope when launched from Applications; the build now applies and
+strictly verifies a local ad-hoc bundle signature before acceptance.
 
 ## Packaged-Runtime Matrix
 

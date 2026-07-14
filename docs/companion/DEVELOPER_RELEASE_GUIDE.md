@@ -56,8 +56,9 @@ Expected local artifact:
 companion/src-tauri/target/release/bundle/macos/Wizard Joe Companion.app
 ```
 
-This build is unsigned for distribution, not notarized, not stapled, not
-published, and not an authorization to replace an installed application.
+This build receives a local ad-hoc signature and strict resource-envelope
+verification. It is not Developer ID signed, notarized, stapled, published, or
+an authorization to replace an installed application.
 
 ## Packaged Verification
 
