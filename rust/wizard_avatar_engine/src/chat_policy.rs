@@ -458,6 +458,15 @@ impl ChatPolicyReducerV1 {
         if session.session_id.is_some() == (session.mode == SessionModeV1::Disconnected) {
             return Err("session identity and mode are inconsistent".to_string());
         }
+        if session.session_id.is_none() && session.turn_id.is_some() {
+            return Err("sessionless snapshot has a live turn identity".to_string());
+        }
+        if session.mode == SessionModeV1::Disconnected
+            && !self.retired_session_ids.is_empty()
+            && self.last_session_end.is_none()
+        {
+            return Err("ended session is missing its completion marker".to_string());
+        }
         if session.session_id.is_some() != self.last_session_locale.is_some() {
             return Err("session locale marker is inconsistent with session identity".to_string());
         }

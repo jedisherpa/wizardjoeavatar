@@ -1496,6 +1496,9 @@ fn reducer_snapshot_deserialization_enforces_bounds_uniqueness_and_invariants() 
         ))
         .unwrap();
     let ended_json = serde_json::to_value(ended).unwrap();
+    let mut missing_completion_marker = ended_json.clone();
+    missing_completion_marker["last_session_end"] = serde_json::Value::Null;
+    assert!(serde_json::from_value::<ChatPolicyReducerV1>(missing_completion_marker).is_err());
     let mut missing_session_ledger = ended_json.clone();
     missing_session_ledger
         .as_object_mut()
@@ -1505,6 +1508,10 @@ fn reducer_snapshot_deserialization_enforces_bounds_uniqueness_and_invariants() 
     let mut incomplete_session_ledger = ended_json;
     incomplete_session_ledger["retired_session_ids"] = serde_json::json!([]);
     assert!(serde_json::from_value::<ChatPolicyReducerV1>(incomplete_session_ledger).is_err());
+
+    let mut dangling_turn = serde_json::to_value(ChatPolicyReducerV1::new("wizard-joe")).unwrap();
+    dangling_turn["semantic"]["session"]["state"]["turn_id"] = "turn-1".into();
+    assert!(serde_json::from_value::<ChatPolicyReducerV1>(dangling_turn).is_err());
 
     let retired = serde_json::json!("retired-session");
     let mut duplicate_sessions = valid.clone();
