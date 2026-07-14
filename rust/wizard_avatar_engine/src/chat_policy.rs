@@ -437,6 +437,16 @@ impl ChatPolicyReducerV1 {
         {
             return Err("completed session is missing from retired identity history".to_string());
         }
+        if self
+            .semantic
+            .session
+            .state
+            .session_id
+            .as_ref()
+            .is_some_and(|active| self.retired_session_ids.contains(active))
+        {
+            return Err("active session is present in retired identity history".to_string());
+        }
         if has_duplicates_by(&self.active_safety_clamps, PartialEq::eq)
             || has_duplicates_by(&self.completed_safety_clamps, PartialEq::eq)
         {
