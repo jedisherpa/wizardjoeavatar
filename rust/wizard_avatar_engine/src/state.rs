@@ -207,6 +207,33 @@ pub enum Action {
     Reaction,
 }
 
+impl Action {
+    pub const ALL: [Self; 8] = [
+        Self::Idle,
+        Self::Speaking,
+        Self::Explaining,
+        Self::Walking,
+        Self::Thinking,
+        Self::Pointing,
+        Self::MagicCast,
+        Self::Reaction,
+    ];
+
+    #[must_use]
+    pub const fn as_str(self) -> &'static str {
+        match self {
+            Self::Idle => "idle",
+            Self::Speaking => "speaking",
+            Self::Explaining => "explaining",
+            Self::Walking => "walking",
+            Self::Thinking => "thinking",
+            Self::Pointing => "pointing",
+            Self::MagicCast => "magic_cast",
+            Self::Reaction => "reaction",
+        }
+    }
+}
+
 impl FromStr for Action {
     type Err = String;
 

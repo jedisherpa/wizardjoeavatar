@@ -24,8 +24,8 @@ use sha2::{Digest, Sha256};
 use std::collections::{BTreeMap, BTreeSet};
 use std::sync::OnceLock;
 
-pub const CAPABILITY_MANIFEST_SCHEMA_VERSION: u16 = 1;
-pub const CAPABILITY_API_VERSION: u16 = 1;
+pub const CAPABILITY_MANIFEST_SCHEMA_VERSION: u16 = 2;
+pub const CAPABILITY_API_VERSION: u16 = 2;
 pub const RUNTIME_PROFILE_VERSION: u16 = 1;
 pub const RUNTIME_POLICY_VERSION: u16 = 1;
 pub const RUNTIME_TRANSPORT_VERSION: u16 = 1;
@@ -335,6 +335,24 @@ pub struct RuntimeSupportFlagsV1 {
 
 #[derive(Clone, Debug, Eq, PartialEq, Serialize, Deserialize)]
 #[serde(deny_unknown_fields)]
+pub struct RuntimeSafeIdleProfileV1 {
+    pub idle_turn_state: ChatTurnState,
+    pub stop_behavior_id: String,
+    pub neutral_expression_id: String,
+    pub rest_mouth_pose_id: String,
+    pub preserve_mode: bool,
+    pub preserve_root_position: bool,
+    pub preserve_facing: bool,
+    pub clear_gesture: bool,
+    pub clear_gaze_override: bool,
+    pub clear_viseme_override: bool,
+    pub clear_blink_override: bool,
+    pub clear_prop_effects: bool,
+    pub settle_secondary_motion: bool,
+}
+
+#[derive(Clone, Debug, Eq, PartialEq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
 pub struct CapabilityEntryV1 {
     pub id: String,
     pub kind: CapabilityKind,
@@ -381,6 +399,7 @@ pub struct CapabilityManifestV1 {
     pub feelings: Vec<Emotion>,
     pub controller_command_surface: Vec<ControllerCommandKind>,
     pub state_facing_fallbacks: Vec<StateFacingFallbackV1>,
+    pub safe_idle: RuntimeSafeIdleProfileV1,
     pub support: RuntimeSupportFlagsV1,
     pub capabilities: Vec<CapabilityEntryV1>,
 }
@@ -441,8 +460,11 @@ impl CapabilityManifestV1 {
         }
 
         validate_feeling_entries(&ids, &self.feelings)?;
+        validate_controller_command_coverage(&self.capabilities, &self.controller_command_surface)?;
         validate_fallback_topology(&ids)?;
+        validate_pose_alias_target_consistency(&ids)?;
         validate_state_facing_fallbacks(&ids, &self.state_facing_fallbacks)?;
+        validate_safe_idle_profile(&self.safe_idle, &ids, &self.state_facing_fallbacks)?;
         let expected = build_unvalidated_wizard_capability_manifest()?;
         if self != &expected {
             return Err(
@@ -627,6 +649,21 @@ fn build_unvalidated_wizard_capability_manifest() -> Result<CapabilityManifestV1
         feelings: non_neutral_emotions(),
         controller_command_surface: sorted_unique(ControllerCommandKind::ALL),
         state_facing_fallbacks,
+        safe_idle: RuntimeSafeIdleProfileV1 {
+            idle_turn_state: ChatTurnState::Idle,
+            stop_behavior_id: "behavior.stop".to_string(),
+            neutral_expression_id: "expression.neutral".to_string(),
+            rest_mouth_pose_id: "mouth.closed".to_string(),
+            preserve_mode: true,
+            preserve_root_position: true,
+            preserve_facing: true,
+            clear_gesture: true,
+            clear_gaze_override: true,
+            clear_viseme_override: true,
+            clear_blink_override: true,
+            clear_prop_effects: true,
+            settle_secondary_motion: true,
+        },
         support: RuntimeSupportFlagsV1 {
             deterministic_media_scores: false,
             authored_dance: false,
@@ -694,13 +731,7 @@ fn pose_entry(
         runtime_surfaces.push(RuntimeSurfaceV1::DirectionalController);
     }
     runtime_surfaces.sort();
-    let mut props = Vec::new();
-    if pose.motion.staff_present {
-        props.push(PropRequirementV1::StaffAllSamples);
-    }
-    if pose.motion.effect_present {
-        props.push(PropRequirementV1::EffectAllSamples);
-    }
+    let props = pose_prop_requirements(pose);
     let fallback = showcase_approval
         .as_ref()
         .map_or(FallbackTopologyV1::Terminal, |approval| {
@@ -770,7 +801,7 @@ fn pose_alias_entry(
         compatible_motion_profiles: Vec::new(),
         controller_commands: applicable([ControllerCommandKind::Pose]),
         runtime_surfaces: vec![RuntimeSurfaceV1::DirectPoseCommand],
-        prop_requirements: Vec::new(),
+        prop_requirements: pose_prop_requirements(target),
         runtime_cost: RuntimeCostV1::BoundedCellProjection,
         quality_status: QualityStatusV1::RuntimeAliasValidated,
         pose_coverage: None,
@@ -1093,6 +1124,18 @@ fn procedural_entries() -> Result<Vec<CapabilityEntryV1>, String> {
         .into_iter()
         .map(procedural_command_entry)
         .collect::<Result<Vec<_>, _>>()?;
+    entries.push(simple_entry(
+        "behavior.action".to_string(),
+        CapabilityKind::ProceduralBehavior,
+        CapabilityStatus::ActiveLegacy,
+        CapabilityCategoryV1::ControllerControl,
+        60,
+        simple_runtime(
+            RuntimeSurfaceV1::LegacyController,
+            QualityStatusV1::RuntimeActiveLegacy,
+            Some(ControllerCommandKind::Action),
+        ),
+    ));
     entries.push(simple_entry(
         "behavior.speaking_duration".to_string(),
         CapabilityKind::ProceduralBehavior,
@@ -1470,6 +1513,69 @@ fn validate_feeling_entries(
     Ok(())
 }
 
+fn validate_controller_command_coverage(
+    capabilities: &[CapabilityEntryV1],
+    command_surface: &[ControllerCommandKind],
+) -> Result<(), String> {
+    let advertised = sorted_unique(capabilities.iter().flat_map(|entry| {
+        match &entry.controller_commands {
+            ApplicabilityV1::Applicable(commands) => commands.as_slice(),
+            ApplicabilityV1::NotApplicable => &[],
+        }
+        .iter()
+        .copied()
+    }));
+    if advertised != command_surface {
+        return Err(
+            "capability entry commands do not cover the exact runtime command surface".to_string(),
+        );
+    }
+    Ok(())
+}
+
+fn validate_pose_alias_target_consistency(
+    ids: &BTreeMap<&str, &CapabilityEntryV1>,
+) -> Result<(), String> {
+    for alias in ids
+        .values()
+        .filter(|entry| entry.kind == CapabilityKind::PoseAlias)
+    {
+        let target_id = &alias
+            .pose_alias
+            .as_ref()
+            .ok_or_else(|| format!("{} alias is missing its target", alias.id))?
+            .target_pose_id;
+        let target = ids
+            .get(target_id.as_str())
+            .ok_or_else(|| format!("{} alias lost target {target_id}", alias.id))?;
+        if alias.emotional_uses != target.emotional_uses
+            || alias.energy != target.energy
+            || alias.directions != target.directions
+            || alias.duration != target.duration
+            || alias.loop_behavior != target.loop_behavior
+            || alias.interruptibility != target.interruptibility
+            || alias.valid_entry_states != target.valid_entry_states
+            || alias.valid_exit_states != target.valid_exit_states
+            || alias.face_policy != target.face_policy
+            || alias.compatible_face_states != target.compatible_face_states
+            || alias.compatible_locomotion_states != target.compatible_locomotion_states
+            || alias.compatible_motion_profiles != target.compatible_motion_profiles
+            || alias.controller_commands != target.controller_commands
+            || alias.prop_requirements != target.prop_requirements
+            || alias.runtime_cost != target.runtime_cost
+            || alias.transition_limitations != target.transition_limitations
+            || alias.narrative_uses != target.narrative_uses
+            || alias.inappropriate_uses != target.inappropriate_uses
+        {
+            return Err(format!(
+                "{} alias metadata differs from target {target_id}",
+                alias.id
+            ));
+        }
+    }
+    Ok(())
+}
+
 fn validate_fallback_topology(ids: &BTreeMap<&str, &CapabilityEntryV1>) -> Result<(), String> {
     for entry in ids.values() {
         for fallback in fallback_ids(entry) {
@@ -1533,6 +1639,17 @@ fn fallback_ids(entry: &CapabilityEntryV1) -> Vec<&str> {
     }
 }
 
+fn pose_prop_requirements(pose: &PoseDefinition) -> Vec<PropRequirementV1> {
+    let mut requirements = Vec::new();
+    if pose.motion.staff_present {
+        requirements.push(PropRequirementV1::StaffAllSamples);
+    }
+    if pose.motion.effect_present {
+        requirements.push(PropRequirementV1::EffectAllSamples);
+    }
+    requirements
+}
+
 fn validate_state_facing_fallbacks(
     ids: &BTreeMap<&str, &CapabilityEntryV1>,
     fallbacks: &[StateFacingFallbackV1],
@@ -1576,6 +1693,111 @@ fn validate_state_facing_fallbacks(
         if coverage.capability_tier == CapabilityTier::ShowcaseOnly {
             return Err("state/facing fallback cannot target showcase-only geometry".to_string());
         }
+    }
+    Ok(())
+}
+
+fn validate_safe_idle_profile(
+    profile: &RuntimeSafeIdleProfileV1,
+    ids: &BTreeMap<&str, &CapabilityEntryV1>,
+    fallbacks: &[StateFacingFallbackV1],
+) -> Result<(), String> {
+    if profile.idle_turn_state != ChatTurnState::Idle {
+        return Err("safe idle turn state must be idle".to_string());
+    }
+    if profile.stop_behavior_id != "behavior.stop"
+        || profile.neutral_expression_id != "expression.neutral"
+        || profile.rest_mouth_pose_id != "mouth.closed"
+    {
+        return Err("safe idle capability IDs must match the exact runtime policy".to_string());
+    }
+    if !profile.preserve_mode
+        || !profile.preserve_root_position
+        || !profile.preserve_facing
+        || !profile.clear_gesture
+        || !profile.clear_gaze_override
+        || !profile.clear_viseme_override
+        || !profile.clear_blink_override
+        || !profile.clear_prop_effects
+        || !profile.settle_secondary_motion
+    {
+        return Err("safe idle policy flags must match the exact runtime policy".to_string());
+    }
+
+    validate_safe_idle_reference(
+        ids,
+        &profile.stop_behavior_id,
+        CapabilityKind::ProceduralBehavior,
+        CapabilityCategoryV1::ControllerControl,
+        ControllerCommandKind::Stop,
+        "stop behavior",
+    )?;
+    validate_safe_idle_reference(
+        ids,
+        &profile.neutral_expression_id,
+        CapabilityKind::Expression,
+        CapabilityCategoryV1::FaceExpression,
+        ControllerCommandKind::Expression,
+        "neutral expression",
+    )?;
+    validate_safe_idle_reference(
+        ids,
+        &profile.rest_mouth_pose_id,
+        CapabilityKind::MouthPose,
+        CapabilityCategoryV1::MouthPose,
+        ControllerCommandKind::Mouth,
+        "rest mouth pose",
+    )?;
+
+    let expected_facings = Direction::ALL.into_iter().collect::<BTreeSet<_>>();
+    let idle_rows = fallbacks
+        .iter()
+        .filter(|fallback| fallback.turn_state == profile.idle_turn_state)
+        .collect::<Vec<_>>();
+    let idle_facings = idle_rows
+        .iter()
+        .map(|fallback| fallback.requested_facing)
+        .collect::<BTreeSet<_>>();
+    if idle_rows.len() != Direction::ALL.len() || idle_facings != expected_facings {
+        return Err("safe idle must resolve all eight facing fallbacks exactly once".to_string());
+    }
+    for fallback in idle_rows {
+        let target = ids.get(fallback.fallback_pose_id.as_str()).ok_or_else(|| {
+            format!(
+                "safe idle fallback lost target {}",
+                fallback.fallback_pose_id
+            )
+        })?;
+        if target.kind != CapabilityKind::Pose || target.status != CapabilityStatus::ActiveLegacy {
+            return Err(format!(
+                "safe idle fallback {} is not an active pose",
+                fallback.fallback_pose_id
+            ));
+        }
+    }
+    Ok(())
+}
+
+fn validate_safe_idle_reference(
+    ids: &BTreeMap<&str, &CapabilityEntryV1>,
+    id: &str,
+    kind: CapabilityKind,
+    category: CapabilityCategoryV1,
+    command: ControllerCommandKind,
+    label: &str,
+) -> Result<(), String> {
+    validate_id(id)?;
+    let entry = ids
+        .get(id)
+        .ok_or_else(|| format!("safe idle {label} lost capability {id}"))?;
+    if entry.kind != kind
+        || entry.status != CapabilityStatus::ActiveLegacy
+        || entry.category != category
+        || entry.controller_commands != applicable([command])
+    {
+        return Err(format!(
+            "safe idle {label} {id} has the wrong runtime contract"
+        ));
     }
     Ok(())
 }
