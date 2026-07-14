@@ -9,7 +9,7 @@ const EMBEDDED_MOTION_GRAPH_JSON: &str = include_str!(concat!(
 ));
 
 pub const EMBEDDED_MOTION_GRAPH_SHA256: &str =
-    "04df2b13940e1109555569e93b8610f026425749086c1036328bd30a54a6b19e";
+    "6d22052dc3a43da683c09d3a7da71fa4a4228eaf53bf98a3633205a5f0898a4d";
 
 #[derive(Clone, Debug, Eq, PartialEq)]
 pub struct ShadowMotionCatalog {
@@ -46,6 +46,9 @@ pub fn load_shadow_motion_catalog(
     let graph = MotionGraphV1::from_json(json).map_err(|error| error.to_string())?;
     graph
         .validate_against_runtime_authority(&authority)
+        .map_err(|error| error.to_string())?;
+    graph
+        .validate_ground_locomotion_family()
         .map_err(|error| error.to_string())?;
     Ok(ShadowMotionCatalog { graph, sha256 })
 }

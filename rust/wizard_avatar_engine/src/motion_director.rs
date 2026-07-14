@@ -375,7 +375,7 @@ impl<'a> ClipEvaluator<'a> {
                 provided,
             });
         }
-        if provided != PhaseSource::Time {
+        if !matches!(provided, PhaseSource::Time | PhaseSource::Distance) {
             return Err(MotionDirectorError::PhaseSourceNotEnabled {
                 phase_source: provided,
             });
@@ -519,7 +519,8 @@ impl<'a> ClipEvaluator<'a> {
         tick: u64,
         exit_request: Option<ExitRequest>,
     ) -> Result<Option<u64>, MotionDirectorError> {
-        let evaluation = self.evaluate(ClipPhaseInput::Time(SimulationTick(tick)), exit_request)?;
+        let evaluation =
+            self.evaluate(clip_phase_input(self.clip.phase_source, tick), exit_request)?;
         if matches!(evaluation.completion, ClipCompletionState::Completed { .. }) {
             return Ok(None);
         }
@@ -677,7 +678,7 @@ impl<'evaluator, 'graph> CrossedMarkerEvents<'evaluator, 'graph> {
 
     fn queue_boundary(&mut self, boundary_tick: u64) -> Result<(), MotionDirectorError> {
         let evaluation = self.evaluator.evaluate(
-            ClipPhaseInput::Time(SimulationTick(boundary_tick)),
+            clip_phase_input(self.evaluator.clip.phase_source, boundary_tick),
             self.exit_request,
         )?;
         match evaluation.completion {
@@ -722,6 +723,15 @@ impl<'evaluator, 'graph> CrossedMarkerEvents<'evaluator, 'graph> {
             .next_boundary_after(boundary_tick, self.exit_request)?
             .filter(|next| *next <= self.upper_tick);
         Ok(())
+    }
+}
+
+fn clip_phase_input(source: PhaseSource, tick: u64) -> ClipPhaseInput {
+    match source {
+        PhaseSource::Time => ClipPhaseInput::Time(SimulationTick(tick)),
+        PhaseSource::Distance => ClipPhaseInput::Distance(DistancePhaseTick(tick)),
+        PhaseSource::Wing => ClipPhaseInput::Wing(WingPhaseTick(tick)),
+        PhaseSource::Speech => ClipPhaseInput::Speech(SpeechPhaseTick(tick)),
     }
 }
 

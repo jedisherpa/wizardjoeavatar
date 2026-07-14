@@ -21,6 +21,30 @@ pub const REQUIRED_RECIPE_IDS: [&str; 8] = [
     "secondary_settle",
     "reduced_motion_handoff",
 ];
+pub const GROUND_LOCOMOTION_CLIP_IDS: [&str; 6] = [
+    "ground_start_front",
+    "ground_walk_front",
+    "ground_run_front",
+    "ground_stop_front",
+    "ground_turn_left",
+    "ground_turn_right",
+];
+pub const GROUND_LOCOMOTION_EDGE_ROUTES: [(&str, &str); 13] = [
+    ("state_idle", "ground_start_front"),
+    ("ground_start_front", "ground_walk_front"),
+    ("ground_walk_front", "ground_run_front"),
+    ("ground_run_front", "ground_walk_front"),
+    ("ground_walk_front", "ground_stop_front"),
+    ("ground_run_front", "ground_stop_front"),
+    ("ground_stop_front", "state_idle"),
+    ("ground_walk_front", "ground_turn_left"),
+    ("ground_run_front", "ground_turn_left"),
+    ("ground_turn_left", "ground_walk_front"),
+    ("ground_walk_front", "ground_turn_right"),
+    ("ground_run_front", "ground_turn_right"),
+    ("ground_turn_right", "ground_walk_front"),
+];
+pub const MAX_GROUND_FACING_DELTA_STEPS: u8 = 1;
 
 #[derive(Clone, Debug, Eq, PartialEq, Serialize, Deserialize)]
 #[serde(deny_unknown_fields)]
@@ -118,6 +142,26 @@ pub enum ClipFamily {
     FeelingAccent,
 }
 
+#[derive(Clone, Copy, Debug, Eq, Hash, Ord, PartialEq, PartialOrd, Serialize, Deserialize)]
+#[serde(rename_all = "snake_case")]
+pub enum GroundLocomotionRole {
+    Start,
+    Walk,
+    Run,
+    Stop,
+    TurnLeft,
+    TurnRight,
+}
+
+pub const GROUND_LOCOMOTION_ROLE_CLIPS: [(GroundLocomotionRole, &str); 6] = [
+    (GroundLocomotionRole::Start, "ground_start_front"),
+    (GroundLocomotionRole::Walk, "ground_walk_front"),
+    (GroundLocomotionRole::Run, "ground_run_front"),
+    (GroundLocomotionRole::Stop, "ground_stop_front"),
+    (GroundLocomotionRole::TurnLeft, "ground_turn_left"),
+    (GroundLocomotionRole::TurnRight, "ground_turn_right"),
+];
+
 #[derive(Clone, Copy, Debug, Eq, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "snake_case")]
 pub enum LoopMode {
@@ -212,6 +256,8 @@ pub enum RecoveryPolicy {
 pub struct MotionClip {
     pub clip_id: String,
     pub family: ClipFamily,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub ground_locomotion_role: Option<GroundLocomotionRole>,
     pub loop_mode: LoopMode,
     pub phase_source: PhaseSource,
     pub entry_marker: MotionMarker,
@@ -715,6 +761,489 @@ impl MotionGraphV1 {
             Err(MotionGraphValidationError {
                 issues: issues.into_iter().collect(),
             })
+        }
+    }
+
+    pub fn validate_ground_locomotion_family(&self) -> Result<(), MotionGraphValidationError> {
+        let mut issues = BTreeSet::new();
+        let clips = self
+            .clips
+            .iter()
+            .map(|clip| (clip.clip_id.as_str(), clip))
+            .collect::<BTreeMap<_, _>>();
+        let coverage = self
+            .pose_coverage
+            .iter()
+            .map(|pose| (pose.pose_id.as_str(), pose))
+            .collect::<BTreeMap<_, _>>();
+
+        let mut authored_roles = BTreeSet::new();
+        for (expected_role, clip_id) in GROUND_LOCOMOTION_ROLE_CLIPS {
+            let Some(clip) = clips.get(clip_id).copied() else {
+                issues.insert(format!("ground locomotion is missing clip {clip_id}"));
+                continue;
+            };
+            if clip.ground_locomotion_role != Some(expected_role) {
+                issues.insert(format!(
+                    "ground locomotion clip {clip_id} must declare role {expected_role:?}"
+                ));
+            } else if !authored_roles.insert(expected_role) {
+                issues.insert(format!(
+                    "ground locomotion role {expected_role:?} is authored more than once"
+                ));
+            }
+            validate_ground_clip(clip, &coverage, &mut issues);
+        }
+
+        let authored_clip_ids = GROUND_LOCOMOTION_CLIP_IDS
+            .into_iter()
+            .collect::<BTreeSet<_>>();
+        for clip in &self.clips {
+            if clip.ground_locomotion_role.is_some()
+                && !authored_clip_ids.contains(clip.clip_id.as_str())
+            {
+                issues.insert(format!(
+                    "clip {} declares an unregistered ground locomotion role",
+                    clip.clip_id
+                ));
+            }
+        }
+
+        validate_ground_edges(&self.edges, &clips, &coverage, &mut issues);
+        validate_ground_reachability(&self.edges, &mut issues);
+
+        if issues.is_empty() {
+            Ok(())
+        } else {
+            Err(MotionGraphValidationError {
+                issues: issues.into_iter().collect(),
+            })
+        }
+    }
+}
+
+fn validate_ground_edges(
+    edges: &[MotionEdge],
+    clips: &BTreeMap<&str, &MotionClip>,
+    coverage: &BTreeMap<&str, &PoseCoverage>,
+    issues: &mut BTreeSet<String>,
+) {
+    let ground_clip_ids = GROUND_LOCOMOTION_CLIP_IDS
+        .into_iter()
+        .collect::<BTreeSet<_>>();
+    let expected_routes = GROUND_LOCOMOTION_EDGE_ROUTES
+        .into_iter()
+        .collect::<BTreeSet<_>>();
+    let ground_edges = edges
+        .iter()
+        .filter(|edge| {
+            ground_clip_ids.contains(edge.source_clip_id.as_str())
+                || ground_clip_ids.contains(edge.target_clip_id.as_str())
+        })
+        .collect::<Vec<_>>();
+    let mut route_counts = BTreeMap::<(&str, &str), usize>::new();
+
+    for edge in &ground_edges {
+        let route = (edge.source_clip_id.as_str(), edge.target_clip_id.as_str());
+        *route_counts.entry(route).or_default() += 1;
+        if !expected_routes.contains(&route) {
+            issues.insert(format!(
+                "ground locomotion contains unregistered route {}->{}",
+                edge.source_clip_id, edge.target_clip_id
+            ));
+        }
+    }
+
+    for (source_id, target_id) in GROUND_LOCOMOTION_EDGE_ROUTES {
+        let count = route_counts
+            .get(&(source_id, target_id))
+            .copied()
+            .unwrap_or_default();
+        if count != 1 {
+            issues.insert(format!(
+                "ground locomotion route {source_id}->{target_id} must resolve exactly once, got {count}"
+            ));
+            continue;
+        }
+        let edge = ground_edges
+            .iter()
+            .find(|edge| edge.source_clip_id == source_id && edge.target_clip_id == target_id)
+            .expect("counted route has an edge");
+        if edge.transition_recipe_id != "contact_sync" {
+            issues.insert(format!(
+                "ground locomotion route {source_id}->{target_id} must use contact_sync"
+            ));
+        }
+        if let (Some(source), Some(target)) = (clips.get(source_id), clips.get(target_id)) {
+            validate_ground_edge_boundary(source, target, coverage, issues);
+        }
+    }
+
+    if ground_edges.len() != GROUND_LOCOMOTION_EDGE_ROUTES.len() {
+        issues.insert(format!(
+            "ground locomotion must contain exactly {} registered edges, got {}",
+            GROUND_LOCOMOTION_EDGE_ROUTES.len(),
+            ground_edges.len()
+        ));
+    }
+}
+
+fn validate_ground_clip(
+    clip: &MotionClip,
+    coverage: &BTreeMap<&str, &PoseCoverage>,
+    issues: &mut BTreeSet<String>,
+) {
+    if clip.family != ClipFamily::GroundLocomotion {
+        issues.insert(format!(
+            "ground locomotion clip {} has family {:?}",
+            clip.clip_id, clip.family
+        ));
+    }
+    let looping = matches!(
+        clip.clip_id.as_str(),
+        "ground_walk_front" | "ground_run_front"
+    );
+    if looping {
+        if clip.loop_mode != LoopMode::MarkedSegment || clip.phase_source != PhaseSource::Distance {
+            issues.insert(format!(
+                "ground locomotion clip {} must be a distance-driven marked loop",
+                clip.clip_id
+            ));
+        }
+    } else if clip.loop_mode != LoopMode::Once
+        || clip.phase_source != PhaseSource::Time
+        || clip.loop_start_sample.is_some()
+        || clip.loop_end_sample.is_some()
+        || clip.samples.iter().any(|sample| {
+            sample.markers.contains(&MotionMarker::LoopStart)
+                || sample.markers.contains(&MotionMarker::LoopEnd)
+        })
+    {
+        issues.insert(format!(
+            "ground locomotion clip {} must be a finite time clip without loop markers",
+            clip.clip_id
+        ));
+    }
+
+    if clip.exit_markers != [MotionMarker::Exit] {
+        issues.insert(format!(
+            "ground locomotion clip {} must declare one exit marker",
+            clip.clip_id
+        ));
+    }
+    if clip
+        .samples
+        .first()
+        .is_some_and(|sample| sample.root_offset != [0, 0])
+        || clip
+            .samples
+            .last()
+            .is_some_and(|sample| sample.root_offset != [0, 0])
+    {
+        issues.insert(format!(
+            "ground locomotion clip {} must enter and exit at the contact root",
+            clip.clip_id
+        ));
+    }
+
+    for (index, sample) in clip.samples.iter().enumerate() {
+        let Some(pose) = coverage.get(sample.pose_id.as_str()) else {
+            continue;
+        };
+        if pose.capability_tier == CapabilityTier::ShowcaseOnly
+            || pose.approved_facings.is_empty()
+            || !pose.use_kinds.contains(&PoseUseKind::Clip)
+        {
+            issues.insert(format!(
+                "ground locomotion clip {} sample {index} uses unapproved pose {}",
+                clip.clip_id, sample.pose_id
+            ));
+        }
+        if sample.transition_recipe_id != "contact_sync" {
+            issues.insert(format!(
+                "ground locomotion clip {} sample {index} must use contact_sync",
+                clip.clip_id
+            ));
+        }
+        if index > 0 {
+            validate_support_change(
+                &clip.clip_id,
+                index,
+                &clip.samples[index - 1].support,
+                sample,
+                issues,
+            );
+            let previous = clip.samples[index - 1].root_offset;
+            if (i16::from(previous[0]) - i16::from(sample.root_offset[0])).abs() > 1
+                || (i16::from(previous[1]) - i16::from(sample.root_offset[1])).abs() > 1
+            {
+                issues.insert(format!(
+                    "ground locomotion clip {} sample {index} teleports its root",
+                    clip.clip_id
+                ));
+            }
+        }
+    }
+
+    for (index, pair) in clip.samples.windows(2).enumerate() {
+        validate_ground_facing_change(
+            &clip.clip_id,
+            index + 1,
+            &pair[0].pose_id,
+            &pair[1].pose_id,
+            coverage,
+            issues,
+        );
+    }
+
+    if matches!(
+        clip.ground_locomotion_role,
+        Some(GroundLocomotionRole::TurnLeft | GroundLocomotionRole::TurnRight)
+    ) {
+        if let Some(exit_sample) = clip.samples.last() {
+            let exit_facing =
+                unique_authored_facing(&clip.clip_id, &exit_sample.pose_id, coverage, issues);
+            if exit_facing.is_some_and(|facing| facing != Direction::South) {
+                issues.insert(format!(
+                    "ground locomotion clip {} must return its turn accent to South",
+                    clip.clip_id
+                ));
+            }
+        }
+    }
+
+    if looping {
+        let (Some(start), Some(end)) = (clip.loop_start_sample, clip.loop_end_sample) else {
+            return;
+        };
+        if start < clip.samples.len() && end < clip.samples.len() {
+            validate_support_change(
+                &clip.clip_id,
+                start,
+                &clip.samples[end].support,
+                &clip.samples[start],
+                issues,
+            );
+            validate_ground_facing_change(
+                &format!("{} loop", clip.clip_id),
+                start,
+                &clip.samples[end].pose_id,
+                &clip.samples[start].pose_id,
+                coverage,
+                issues,
+            );
+            let contact_order = clip.samples[start..=end]
+                .iter()
+                .flat_map(|sample| sample.markers.iter().copied())
+                .filter(|marker| {
+                    matches!(
+                        marker,
+                        MotionMarker::LeftContact
+                            | MotionMarker::LeftRelease
+                            | MotionMarker::RightContact
+                            | MotionMarker::RightRelease
+                    )
+                })
+                .collect::<Vec<_>>();
+            let expected = [
+                MotionMarker::RightRelease,
+                MotionMarker::LeftContact,
+                MotionMarker::LeftRelease,
+                MotionMarker::RightContact,
+            ];
+            if contact_order != expected {
+                issues.insert(format!(
+                    "ground locomotion clip {} has incompatible normalized contact order",
+                    clip.clip_id
+                ));
+            }
+        }
+    }
+}
+
+fn support_contacts(support: &SupportContact) -> BTreeSet<ContactPoint> {
+    support.points.iter().copied().collect()
+}
+
+fn support_marker(point: ContactPoint, planted: bool) -> MotionMarker {
+    match (point, planted) {
+        (ContactPoint::LeftFoot, true) => MotionMarker::LeftContact,
+        (ContactPoint::LeftFoot, false) => MotionMarker::LeftRelease,
+        (ContactPoint::RightFoot, true) => MotionMarker::RightContact,
+        (ContactPoint::RightFoot, false) => MotionMarker::RightRelease,
+        (ContactPoint::StaffTip, true) => MotionMarker::StaffPlant,
+        (ContactPoint::StaffTip, false) => MotionMarker::StaffRelease,
+        (ContactPoint::LeftHand | ContactPoint::RightHand, true) => MotionMarker::HandPlant,
+        (ContactPoint::LeftHand | ContactPoint::RightHand, false) => MotionMarker::HandRelease,
+    }
+}
+
+fn validate_support_change(
+    clip_id: &str,
+    sample_index: usize,
+    previous: &SupportContact,
+    current: &MotionSample,
+    issues: &mut BTreeSet<String>,
+) {
+    let previous_contacts = support_contacts(previous);
+    let current_contacts = support_contacts(&current.support);
+    for point in current_contacts.difference(&previous_contacts) {
+        let marker = support_marker(*point, true);
+        if !current.markers.contains(&marker) {
+            issues.insert(format!(
+                "ground locomotion clip {clip_id} sample {sample_index} adds {point:?} without {marker:?}"
+            ));
+        }
+    }
+    for point in previous_contacts.difference(&current_contacts) {
+        let marker = support_marker(*point, false);
+        if !current.markers.contains(&marker) {
+            issues.insert(format!(
+                "ground locomotion clip {clip_id} sample {sample_index} removes {point:?} without {marker:?}"
+            ));
+        }
+    }
+}
+
+fn validate_ground_edge_boundary(
+    source: &MotionClip,
+    target: &MotionClip,
+    coverage: &BTreeMap<&str, &PoseCoverage>,
+    issues: &mut BTreeSet<String>,
+) {
+    let Some(source_sample) = source.samples.last() else {
+        return;
+    };
+    let Some(target_sample) = target.samples.first() else {
+        return;
+    };
+    if source_sample.root_offset != target_sample.root_offset {
+        issues.insert(format!(
+            "ground locomotion route {}->{} changes root at handoff",
+            source.clip_id, target.clip_id
+        ));
+    }
+    if source_sample.support.mode != SupportMode::Grounded
+        || target_sample.support.mode != SupportMode::Grounded
+    {
+        issues.insert(format!(
+            "ground locomotion route {}->{} lacks a grounded handoff",
+            source.clip_id, target.clip_id
+        ));
+    }
+    validate_support_change(
+        &format!("{}->{}", source.clip_id, target.clip_id),
+        0,
+        &source_sample.support,
+        target_sample,
+        issues,
+    );
+    validate_ground_facing_change(
+        &format!("{}->{}", source.clip_id, target.clip_id),
+        0,
+        &source_sample.pose_id,
+        &target_sample.pose_id,
+        coverage,
+        issues,
+    );
+}
+
+fn unique_authored_facing(
+    context: &str,
+    pose_id: &str,
+    coverage: &BTreeMap<&str, &PoseCoverage>,
+    issues: &mut BTreeSet<String>,
+) -> Option<Direction> {
+    let Some(pose) = coverage.get(pose_id) else {
+        issues.insert(format!(
+            "ground locomotion {context} references missing pose {pose_id}"
+        ));
+        return None;
+    };
+    match pose.approved_facings.as_slice() {
+        [facing] => Some(*facing),
+        facings => {
+            issues.insert(format!(
+                "ground locomotion {context} pose {pose_id} must have one authored facing, got {}",
+                facings.len()
+            ));
+            None
+        }
+    }
+}
+
+fn direction_index(direction: Direction) -> u8 {
+    match direction {
+        Direction::South => 0,
+        Direction::SouthWest => 1,
+        Direction::West => 2,
+        Direction::NorthWest => 3,
+        Direction::North => 4,
+        Direction::NorthEast => 5,
+        Direction::East => 6,
+        Direction::SouthEast => 7,
+    }
+}
+
+fn facing_delta_steps(source: Direction, target: Direction) -> u8 {
+    let direct = direction_index(source).abs_diff(direction_index(target));
+    direct.min(8 - direct)
+}
+
+fn validate_ground_facing_change(
+    context: &str,
+    sample_index: usize,
+    source_pose_id: &str,
+    target_pose_id: &str,
+    coverage: &BTreeMap<&str, &PoseCoverage>,
+    issues: &mut BTreeSet<String>,
+) {
+    let source = unique_authored_facing(context, source_pose_id, coverage, issues);
+    let target = unique_authored_facing(context, target_pose_id, coverage, issues);
+    if let (Some(source), Some(target)) = (source, target) {
+        let delta = facing_delta_steps(source, target);
+        if delta > MAX_GROUND_FACING_DELTA_STEPS {
+            issues.insert(format!(
+                "ground locomotion {context} sample {sample_index} snaps {source:?}->{target:?} by {delta} steps"
+            ));
+        }
+    }
+}
+
+fn validate_ground_reachability(edges: &[MotionEdge], issues: &mut BTreeSet<String>) {
+    let required = GROUND_LOCOMOTION_EDGE_ROUTES
+        .into_iter()
+        .collect::<BTreeSet<_>>();
+    let mut reachable_from_idle = BTreeSet::from(["state_idle"]);
+    let mut can_reach_idle = BTreeSet::from(["state_idle"]);
+    loop {
+        let before = (reachable_from_idle.len(), can_reach_idle.len());
+        for edge in edges {
+            if required.contains(&(edge.source_clip_id.as_str(), edge.target_clip_id.as_str()))
+                && reachable_from_idle.contains(edge.source_clip_id.as_str())
+            {
+                reachable_from_idle.insert(edge.target_clip_id.as_str());
+            }
+            if required.contains(&(edge.source_clip_id.as_str(), edge.target_clip_id.as_str()))
+                && can_reach_idle.contains(edge.target_clip_id.as_str())
+            {
+                can_reach_idle.insert(edge.source_clip_id.as_str());
+            }
+        }
+        if (reachable_from_idle.len(), can_reach_idle.len()) == before {
+            break;
+        }
+    }
+    for clip_id in GROUND_LOCOMOTION_CLIP_IDS {
+        if !reachable_from_idle.contains(clip_id) {
+            issues.insert(format!(
+                "ground locomotion clip {clip_id} is unreachable from state_idle"
+            ));
+        }
+        if !can_reach_idle.contains(clip_id) {
+            issues.insert(format!(
+                "ground locomotion clip {clip_id} cannot return to state_idle"
+            ));
         }
     }
 }

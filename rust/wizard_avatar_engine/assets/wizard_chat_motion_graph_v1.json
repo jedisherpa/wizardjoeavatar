@@ -3193,6 +3193,760 @@
       "loop_start_sample": null,
       "loop_end_sample": null,
       "reduced_motion_clip_id": null
+    },
+    {
+      "clip_id": "ground_start_front",
+      "family": "ground_locomotion",
+      "ground_locomotion_role": "start",
+      "loop_mode": "once",
+      "phase_source": "time",
+      "entry_marker": "entry",
+      "exit_markers": [
+        "exit"
+      ],
+      "minimum_hold_ticks": 8,
+      "interrupt_policy": "at_safe_marker",
+      "owned_channels": {
+        "regions": [
+          "base_body",
+          "secondary"
+        ]
+      },
+      "samples": [
+        {
+          "pose_id": "front_idle",
+          "hold_ticks": 3,
+          "transition_recipe_id": "contact_sync",
+          "markers": [
+            "entry",
+            "settled",
+            "staff_plant"
+          ],
+          "support": {
+            "mode": "grounded",
+            "points": [
+              "left_foot",
+              "right_foot",
+              "staff_tip"
+            ]
+          },
+          "root_offset": [
+            0,
+            0
+          ],
+          "secondary_profile_id": "ground_weight_neutral"
+        },
+        {
+          "pose_id": "front_idle",
+          "hold_ticks": 3,
+          "transition_recipe_id": "contact_sync",
+          "markers": [
+            "anticipation"
+          ],
+          "support": {
+            "mode": "grounded",
+            "points": [
+              "left_foot",
+              "right_foot",
+              "staff_tip"
+            ]
+          },
+          "root_offset": [
+            0,
+            0
+          ],
+          "secondary_profile_id": "ground_weight_back"
+        },
+        {
+          "pose_id": "front_run_charge_right_plant",
+          "hold_ticks": 3,
+          "transition_recipe_id": "contact_sync",
+          "markers": [
+            "left_release",
+            "right_contact",
+            "staff_release",
+            "release",
+            "commit",
+            "exit"
+          ],
+          "support": {
+            "mode": "grounded",
+            "points": [
+              "right_foot"
+            ]
+          },
+          "root_offset": [
+            0,
+            0
+          ],
+          "secondary_profile_id": "ground_start_front_plant"
+        }
+      ],
+      "loop_start_sample": null,
+      "loop_end_sample": null,
+      "reduced_motion_clip_id": null
+    },
+    {
+      "clip_id": "ground_walk_front",
+      "family": "ground_locomotion",
+      "ground_locomotion_role": "walk",
+      "loop_mode": "marked_segment",
+      "phase_source": "distance",
+      "entry_marker": "entry",
+      "exit_markers": [
+        "exit"
+      ],
+      "minimum_hold_ticks": 16,
+      "interrupt_policy": "at_safe_marker",
+      "owned_channels": {
+        "regions": [
+          "base_body",
+          "secondary"
+        ]
+      },
+      "samples": [
+        {
+          "pose_id": "walk_front_left",
+          "hold_ticks": 6,
+          "transition_recipe_id": "contact_sync",
+          "markers": [
+            "entry",
+            "loop_start",
+            "right_release",
+            "left_contact"
+          ],
+          "support": {
+            "mode": "grounded",
+            "points": [
+              "left_foot"
+            ]
+          },
+          "root_offset": [
+            0,
+            0
+          ],
+          "secondary_profile_id": "ground_walk_left_stance"
+        },
+        {
+          "pose_id": "front_idle",
+          "hold_ticks": 2,
+          "transition_recipe_id": "contact_sync",
+          "markers": [],
+          "support": {
+            "mode": "grounded",
+            "points": [
+              "left_foot"
+            ]
+          },
+          "root_offset": [
+            0,
+            0
+          ],
+          "secondary_profile_id": "ground_walk_front_bridge_left"
+        },
+        {
+          "pose_id": "walk_front_right_lift",
+          "hold_ticks": 4,
+          "transition_recipe_id": "contact_sync",
+          "markers": [
+            "commit"
+          ],
+          "support": {
+            "mode": "grounded",
+            "points": [
+              "left_foot"
+            ]
+          },
+          "root_offset": [
+            0,
+            0
+          ],
+          "secondary_profile_id": "ground_walk_passing"
+        },
+        {
+          "pose_id": "walk_front_right",
+          "hold_ticks": 6,
+          "transition_recipe_id": "contact_sync",
+          "markers": [
+            "left_release",
+            "right_contact"
+          ],
+          "support": {
+            "mode": "grounded",
+            "points": [
+              "right_foot"
+            ]
+          },
+          "root_offset": [
+            0,
+            0
+          ],
+          "secondary_profile_id": "ground_walk_right_stance"
+        },
+        {
+          "pose_id": "front_run_charge_right_plant",
+          "hold_ticks": 2,
+          "transition_recipe_id": "contact_sync",
+          "markers": [
+            "loop_end"
+          ],
+          "support": {
+            "mode": "grounded",
+            "points": [
+              "right_foot"
+            ]
+          },
+          "root_offset": [
+            0,
+            0
+          ],
+          "secondary_profile_id": "ground_walk_front_bridge_right"
+        },
+        {
+          "pose_id": "front_run_charge_right_plant",
+          "hold_ticks": 2,
+          "transition_recipe_id": "contact_sync",
+          "markers": [
+            "exit"
+          ],
+          "support": {
+            "mode": "grounded",
+            "points": [
+              "right_foot"
+            ]
+          },
+          "root_offset": [
+            0,
+            0
+          ],
+          "secondary_profile_id": "ground_walk_front_exit"
+        }
+      ],
+      "loop_start_sample": 0,
+      "loop_end_sample": 4,
+      "reduced_motion_clip_id": null
+    },
+    {
+      "clip_id": "ground_run_front",
+      "family": "ground_locomotion",
+      "ground_locomotion_role": "run",
+      "loop_mode": "marked_segment",
+      "phase_source": "distance",
+      "entry_marker": "entry",
+      "exit_markers": [
+        "exit"
+      ],
+      "minimum_hold_ticks": 10,
+      "interrupt_policy": "at_safe_marker",
+      "owned_channels": {
+        "regions": [
+          "base_body",
+          "secondary"
+        ]
+      },
+      "samples": [
+        {
+          "pose_id": "walk_front_left",
+          "hold_ticks": 4,
+          "transition_recipe_id": "contact_sync",
+          "markers": [
+            "entry",
+            "loop_start",
+            "right_release",
+            "left_contact"
+          ],
+          "support": {
+            "mode": "grounded",
+            "points": [
+              "left_foot"
+            ]
+          },
+          "root_offset": [
+            0,
+            0
+          ],
+          "secondary_profile_id": "ground_run_left_drive"
+        },
+        {
+          "pose_id": "run_front_airborne_reach",
+          "hold_ticks": 2,
+          "transition_recipe_id": "contact_sync",
+          "markers": [
+            "left_release",
+            "commit",
+            "apex"
+          ],
+          "support": {
+            "mode": "airborne",
+            "points": []
+          },
+          "root_offset": [
+            0,
+            0
+          ],
+          "secondary_profile_id": "ground_run_flight"
+        },
+        {
+          "pose_id": "front_run_charge_right_plant",
+          "hold_ticks": 4,
+          "transition_recipe_id": "contact_sync",
+          "markers": [
+            "right_contact",
+            "impact",
+            "loop_end"
+          ],
+          "support": {
+            "mode": "grounded",
+            "points": [
+              "right_foot"
+            ]
+          },
+          "root_offset": [
+            0,
+            0
+          ],
+          "secondary_profile_id": "ground_run_right_plant"
+        },
+        {
+          "pose_id": "front_run_charge_right_plant",
+          "hold_ticks": 2,
+          "transition_recipe_id": "contact_sync",
+          "markers": [
+            "recover",
+            "exit"
+          ],
+          "support": {
+            "mode": "grounded",
+            "points": [
+              "right_foot"
+            ]
+          },
+          "root_offset": [
+            0,
+            0
+          ],
+          "secondary_profile_id": "ground_run_exit_plant"
+        }
+      ],
+      "loop_start_sample": 0,
+      "loop_end_sample": 2,
+      "reduced_motion_clip_id": null
+    },
+    {
+      "clip_id": "ground_stop_front",
+      "family": "ground_locomotion",
+      "ground_locomotion_role": "stop",
+      "loop_mode": "once",
+      "phase_source": "time",
+      "entry_marker": "entry",
+      "exit_markers": [
+        "exit"
+      ],
+      "minimum_hold_ticks": 10,
+      "interrupt_policy": "at_safe_marker",
+      "owned_channels": {
+        "regions": [
+          "base_body",
+          "secondary"
+        ]
+      },
+      "samples": [
+        {
+          "pose_id": "walk_front_right",
+          "hold_ticks": 3,
+          "transition_recipe_id": "contact_sync",
+          "markers": [
+            "entry",
+            "right_contact"
+          ],
+          "support": {
+            "mode": "grounded",
+            "points": [
+              "right_foot"
+            ]
+          },
+          "root_offset": [
+            0,
+            0
+          ],
+          "secondary_profile_id": "ground_stop_final_contact"
+        },
+        {
+          "pose_id": "walk_front_right_lift",
+          "hold_ticks": 3,
+          "transition_recipe_id": "contact_sync",
+          "markers": [
+            "right_release",
+            "left_contact",
+            "impact"
+          ],
+          "support": {
+            "mode": "grounded",
+            "points": [
+              "left_foot"
+            ]
+          },
+          "root_offset": [
+            0,
+            0
+          ],
+          "secondary_profile_id": "ground_stop_compression"
+        },
+        {
+          "pose_id": "front_idle",
+          "hold_ticks": 3,
+          "transition_recipe_id": "contact_sync",
+          "markers": [
+            "right_contact",
+            "staff_plant",
+            "recover"
+          ],
+          "support": {
+            "mode": "grounded",
+            "points": [
+              "left_foot",
+              "right_foot",
+              "staff_tip"
+            ]
+          },
+          "root_offset": [
+            0,
+            0
+          ],
+          "secondary_profile_id": "ground_stop_overshoot"
+        },
+        {
+          "pose_id": "front_idle",
+          "hold_ticks": 3,
+          "transition_recipe_id": "contact_sync",
+          "markers": [
+            "settled",
+            "staff_release",
+            "exit"
+          ],
+          "support": {
+            "mode": "grounded",
+            "points": [
+              "left_foot",
+              "right_foot"
+            ]
+          },
+          "root_offset": [
+            0,
+            0
+          ],
+          "secondary_profile_id": "ground_weight_neutral"
+        }
+      ],
+      "loop_start_sample": null,
+      "loop_end_sample": null,
+      "reduced_motion_clip_id": null
+    },
+    {
+      "clip_id": "ground_turn_left",
+      "family": "ground_locomotion",
+      "ground_locomotion_role": "turn_left",
+      "loop_mode": "once",
+      "phase_source": "time",
+      "entry_marker": "entry",
+      "exit_markers": [
+        "exit"
+      ],
+      "minimum_hold_ticks": 14,
+      "interrupt_policy": "at_safe_marker",
+      "owned_channels": {
+        "regions": [
+          "base_body",
+          "secondary"
+        ]
+      },
+      "samples": [
+        {
+          "pose_id": "walk_front_right",
+          "hold_ticks": 3,
+          "transition_recipe_id": "contact_sync",
+          "markers": [
+            "entry",
+            "right_contact"
+          ],
+          "support": {
+            "mode": "grounded",
+            "points": [
+              "right_foot"
+            ]
+          },
+          "root_offset": [
+            0,
+            0
+          ],
+          "secondary_profile_id": "ground_turn_brake"
+        },
+        {
+          "pose_id": "front_idle",
+          "hold_ticks": 3,
+          "transition_recipe_id": "contact_sync",
+          "markers": [
+            "left_contact",
+            "staff_plant",
+            "anticipation"
+          ],
+          "support": {
+            "mode": "grounded",
+            "points": [
+              "left_foot",
+              "right_foot",
+              "staff_tip"
+            ]
+          },
+          "root_offset": [
+            0,
+            0
+          ],
+          "secondary_profile_id": "ground_turn_transfer"
+        },
+        {
+          "pose_id": "walk_front_left",
+          "hold_ticks": 3,
+          "transition_recipe_id": "contact_sync",
+          "markers": [
+            "right_release",
+            "staff_release",
+            "commit"
+          ],
+          "support": {
+            "mode": "grounded",
+            "points": [
+              "left_foot"
+            ]
+          },
+          "root_offset": [
+            0,
+            0
+          ],
+          "secondary_profile_id": "ground_turn_left_load"
+        },
+        {
+          "pose_id": "profile_left",
+          "hold_ticks": 3,
+          "transition_recipe_id": "contact_sync",
+          "markers": [
+            "right_contact",
+            "staff_plant",
+            "impact"
+          ],
+          "support": {
+            "mode": "grounded",
+            "points": [
+              "left_foot",
+              "right_foot",
+              "staff_tip"
+            ]
+          },
+          "root_offset": [
+            0,
+            0
+          ],
+          "secondary_profile_id": "ground_turn_left_facing"
+        },
+        {
+          "pose_id": "walk_front_left",
+          "hold_ticks": 3,
+          "transition_recipe_id": "contact_sync",
+          "markers": [
+            "right_release",
+            "staff_release",
+            "recover"
+          ],
+          "support": {
+            "mode": "grounded",
+            "points": [
+              "left_foot"
+            ]
+          },
+          "root_offset": [
+            0,
+            0
+          ],
+          "secondary_profile_id": "ground_turn_restart"
+        },
+        {
+          "pose_id": "front_idle",
+          "hold_ticks": 3,
+          "transition_recipe_id": "contact_sync",
+          "markers": [
+            "left_release",
+            "right_contact",
+            "settled",
+            "exit"
+          ],
+          "support": {
+            "mode": "grounded",
+            "points": [
+              "right_foot"
+            ]
+          },
+          "root_offset": [
+            0,
+            0
+          ],
+          "secondary_profile_id": "ground_turn_left_front_return"
+        }
+      ],
+      "loop_start_sample": null,
+      "loop_end_sample": null,
+      "reduced_motion_clip_id": null
+    },
+    {
+      "clip_id": "ground_turn_right",
+      "family": "ground_locomotion",
+      "ground_locomotion_role": "turn_right",
+      "loop_mode": "once",
+      "phase_source": "time",
+      "entry_marker": "entry",
+      "exit_markers": [
+        "exit"
+      ],
+      "minimum_hold_ticks": 14,
+      "interrupt_policy": "at_safe_marker",
+      "owned_channels": {
+        "regions": [
+          "base_body",
+          "secondary"
+        ]
+      },
+      "samples": [
+        {
+          "pose_id": "walk_front_right",
+          "hold_ticks": 3,
+          "transition_recipe_id": "contact_sync",
+          "markers": [
+            "entry",
+            "right_contact"
+          ],
+          "support": {
+            "mode": "grounded",
+            "points": [
+              "right_foot"
+            ]
+          },
+          "root_offset": [
+            0,
+            0
+          ],
+          "secondary_profile_id": "ground_turn_brake"
+        },
+        {
+          "pose_id": "front_idle",
+          "hold_ticks": 3,
+          "transition_recipe_id": "contact_sync",
+          "markers": [
+            "left_contact",
+            "staff_plant",
+            "anticipation"
+          ],
+          "support": {
+            "mode": "grounded",
+            "points": [
+              "left_foot",
+              "right_foot",
+              "staff_tip"
+            ]
+          },
+          "root_offset": [
+            0,
+            0
+          ],
+          "secondary_profile_id": "ground_turn_transfer"
+        },
+        {
+          "pose_id": "walk_front_right",
+          "hold_ticks": 3,
+          "transition_recipe_id": "contact_sync",
+          "markers": [
+            "left_release",
+            "staff_release",
+            "commit"
+          ],
+          "support": {
+            "mode": "grounded",
+            "points": [
+              "right_foot"
+            ]
+          },
+          "root_offset": [
+            0,
+            0
+          ],
+          "secondary_profile_id": "ground_turn_right_load"
+        },
+        {
+          "pose_id": "profile_right",
+          "hold_ticks": 3,
+          "transition_recipe_id": "contact_sync",
+          "markers": [
+            "left_contact",
+            "staff_plant",
+            "impact"
+          ],
+          "support": {
+            "mode": "grounded",
+            "points": [
+              "left_foot",
+              "right_foot",
+              "staff_tip"
+            ]
+          },
+          "root_offset": [
+            0,
+            0
+          ],
+          "secondary_profile_id": "ground_turn_right_facing"
+        },
+        {
+          "pose_id": "walk_front_right",
+          "hold_ticks": 3,
+          "transition_recipe_id": "contact_sync",
+          "markers": [
+            "left_release",
+            "staff_release",
+            "recover"
+          ],
+          "support": {
+            "mode": "grounded",
+            "points": [
+              "right_foot"
+            ]
+          },
+          "root_offset": [
+            0,
+            0
+          ],
+          "secondary_profile_id": "ground_turn_restart"
+        },
+        {
+          "pose_id": "front_idle",
+          "hold_ticks": 3,
+          "transition_recipe_id": "contact_sync",
+          "markers": [
+            "settled",
+            "exit"
+          ],
+          "support": {
+            "mode": "grounded",
+            "points": [
+              "right_foot"
+            ]
+          },
+          "root_offset": [
+            0,
+            0
+          ],
+          "secondary_profile_id": "ground_turn_right_front_return"
+        }
+      ],
+      "loop_start_sample": null,
+      "loop_end_sample": null,
+      "reduced_motion_clip_id": null
     }
   ],
   "transition_recipes": [
@@ -4289,6 +5043,292 @@
       "source_clip_id": "catalog_feeling",
       "target_clip_id": "state_idle",
       "transition_recipe_id": "coherent_handoff",
+      "allowed_turn_states": [
+        "idle",
+        "listening",
+        "thinking",
+        "preparing_response",
+        "speaking",
+        "clarifying",
+        "tool_wait",
+        "error",
+        "celebrating",
+        "interrupted"
+      ],
+      "allowed_motion_profiles": [
+        "full",
+        "reduced"
+      ]
+    },
+    {
+      "edge_id": "ground_edge_001_idle_to_start",
+      "source_clip_id": "state_idle",
+      "target_clip_id": "ground_start_front",
+      "transition_recipe_id": "contact_sync",
+      "allowed_turn_states": [
+        "idle",
+        "listening",
+        "thinking",
+        "preparing_response",
+        "speaking",
+        "clarifying",
+        "tool_wait",
+        "error",
+        "celebrating",
+        "interrupted"
+      ],
+      "allowed_motion_profiles": [
+        "full",
+        "reduced"
+      ]
+    },
+    {
+      "edge_id": "ground_edge_002_start_to_walk",
+      "source_clip_id": "ground_start_front",
+      "target_clip_id": "ground_walk_front",
+      "transition_recipe_id": "contact_sync",
+      "allowed_turn_states": [
+        "idle",
+        "listening",
+        "thinking",
+        "preparing_response",
+        "speaking",
+        "clarifying",
+        "tool_wait",
+        "error",
+        "celebrating",
+        "interrupted"
+      ],
+      "allowed_motion_profiles": [
+        "full",
+        "reduced"
+      ]
+    },
+    {
+      "edge_id": "ground_edge_003_walk_to_run",
+      "source_clip_id": "ground_walk_front",
+      "target_clip_id": "ground_run_front",
+      "transition_recipe_id": "contact_sync",
+      "allowed_turn_states": [
+        "idle",
+        "listening",
+        "thinking",
+        "preparing_response",
+        "speaking",
+        "clarifying",
+        "tool_wait",
+        "error",
+        "celebrating",
+        "interrupted"
+      ],
+      "allowed_motion_profiles": [
+        "full",
+        "reduced"
+      ]
+    },
+    {
+      "edge_id": "ground_edge_004_run_to_walk",
+      "source_clip_id": "ground_run_front",
+      "target_clip_id": "ground_walk_front",
+      "transition_recipe_id": "contact_sync",
+      "allowed_turn_states": [
+        "idle",
+        "listening",
+        "thinking",
+        "preparing_response",
+        "speaking",
+        "clarifying",
+        "tool_wait",
+        "error",
+        "celebrating",
+        "interrupted"
+      ],
+      "allowed_motion_profiles": [
+        "full",
+        "reduced"
+      ]
+    },
+    {
+      "edge_id": "ground_edge_005_walk_to_stop",
+      "source_clip_id": "ground_walk_front",
+      "target_clip_id": "ground_stop_front",
+      "transition_recipe_id": "contact_sync",
+      "allowed_turn_states": [
+        "idle",
+        "listening",
+        "thinking",
+        "preparing_response",
+        "speaking",
+        "clarifying",
+        "tool_wait",
+        "error",
+        "celebrating",
+        "interrupted"
+      ],
+      "allowed_motion_profiles": [
+        "full",
+        "reduced"
+      ]
+    },
+    {
+      "edge_id": "ground_edge_006_run_to_stop",
+      "source_clip_id": "ground_run_front",
+      "target_clip_id": "ground_stop_front",
+      "transition_recipe_id": "contact_sync",
+      "allowed_turn_states": [
+        "idle",
+        "listening",
+        "thinking",
+        "preparing_response",
+        "speaking",
+        "clarifying",
+        "tool_wait",
+        "error",
+        "celebrating",
+        "interrupted"
+      ],
+      "allowed_motion_profiles": [
+        "full",
+        "reduced"
+      ]
+    },
+    {
+      "edge_id": "ground_edge_007_stop_to_idle",
+      "source_clip_id": "ground_stop_front",
+      "target_clip_id": "state_idle",
+      "transition_recipe_id": "contact_sync",
+      "allowed_turn_states": [
+        "idle",
+        "listening",
+        "thinking",
+        "preparing_response",
+        "speaking",
+        "clarifying",
+        "tool_wait",
+        "error",
+        "celebrating",
+        "interrupted"
+      ],
+      "allowed_motion_profiles": [
+        "full",
+        "reduced"
+      ]
+    },
+    {
+      "edge_id": "ground_edge_008_walk_to_left_turn",
+      "source_clip_id": "ground_walk_front",
+      "target_clip_id": "ground_turn_left",
+      "transition_recipe_id": "contact_sync",
+      "allowed_turn_states": [
+        "idle",
+        "listening",
+        "thinking",
+        "preparing_response",
+        "speaking",
+        "clarifying",
+        "tool_wait",
+        "error",
+        "celebrating",
+        "interrupted"
+      ],
+      "allowed_motion_profiles": [
+        "full",
+        "reduced"
+      ]
+    },
+    {
+      "edge_id": "ground_edge_009_run_to_left_turn",
+      "source_clip_id": "ground_run_front",
+      "target_clip_id": "ground_turn_left",
+      "transition_recipe_id": "contact_sync",
+      "allowed_turn_states": [
+        "idle",
+        "listening",
+        "thinking",
+        "preparing_response",
+        "speaking",
+        "clarifying",
+        "tool_wait",
+        "error",
+        "celebrating",
+        "interrupted"
+      ],
+      "allowed_motion_profiles": [
+        "full",
+        "reduced"
+      ]
+    },
+    {
+      "edge_id": "ground_edge_010_left_turn_to_walk",
+      "source_clip_id": "ground_turn_left",
+      "target_clip_id": "ground_walk_front",
+      "transition_recipe_id": "contact_sync",
+      "allowed_turn_states": [
+        "idle",
+        "listening",
+        "thinking",
+        "preparing_response",
+        "speaking",
+        "clarifying",
+        "tool_wait",
+        "error",
+        "celebrating",
+        "interrupted"
+      ],
+      "allowed_motion_profiles": [
+        "full",
+        "reduced"
+      ]
+    },
+    {
+      "edge_id": "ground_edge_011_walk_to_right_turn",
+      "source_clip_id": "ground_walk_front",
+      "target_clip_id": "ground_turn_right",
+      "transition_recipe_id": "contact_sync",
+      "allowed_turn_states": [
+        "idle",
+        "listening",
+        "thinking",
+        "preparing_response",
+        "speaking",
+        "clarifying",
+        "tool_wait",
+        "error",
+        "celebrating",
+        "interrupted"
+      ],
+      "allowed_motion_profiles": [
+        "full",
+        "reduced"
+      ]
+    },
+    {
+      "edge_id": "ground_edge_012_run_to_right_turn",
+      "source_clip_id": "ground_run_front",
+      "target_clip_id": "ground_turn_right",
+      "transition_recipe_id": "contact_sync",
+      "allowed_turn_states": [
+        "idle",
+        "listening",
+        "thinking",
+        "preparing_response",
+        "speaking",
+        "clarifying",
+        "tool_wait",
+        "error",
+        "celebrating",
+        "interrupted"
+      ],
+      "allowed_motion_profiles": [
+        "full",
+        "reduced"
+      ]
+    },
+    {
+      "edge_id": "ground_edge_013_right_turn_to_walk",
+      "source_clip_id": "ground_turn_right",
+      "target_clip_id": "ground_walk_front",
+      "transition_recipe_id": "contact_sync",
       "allowed_turn_states": [
         "idle",
         "listening",

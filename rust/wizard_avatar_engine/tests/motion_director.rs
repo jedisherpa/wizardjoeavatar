@@ -46,6 +46,7 @@ fn clip(
     MotionClip {
         clip_id: clip_id.to_string(),
         family: ClipFamily::Idle,
+        ground_locomotion_role: None,
         loop_mode,
         phase_source,
         entry_marker: MotionMarker::Entry,
@@ -865,7 +866,7 @@ fn marked_exit_respects_minimum_hold_at_exact_loop_boundaries() {
 }
 
 #[test]
-fn phase_sources_are_typed_but_only_time_is_enabled() {
+fn phase_sources_are_typed_and_shadow_distance_phase_is_enabled() {
     let time_clip = clip(
         "time",
         LoopMode::Once,
@@ -883,11 +884,20 @@ fn phase_sources_are_typed_but_only_time_is_enabled() {
         })
     );
 
+    let distance_clip = clip(
+        "distance",
+        LoopMode::Repeat,
+        PhaseSource::Distance,
+        vec![sample(0, 2, vec![MotionMarker::Entry])],
+        None,
+    );
+    let distance_evaluator = ClipEvaluator::new(&distance_clip).expect("distance evaluator");
+    let distance = distance_evaluator
+        .evaluate(ClipPhaseInput::Distance(DistancePhaseTick(3)), None)
+        .expect("shadow distance phase");
+    assert_eq!((distance.cycle, distance.sample_local_tick), (1, 1));
+
     for (source, input) in [
-        (
-            PhaseSource::Distance,
-            ClipPhaseInput::Distance(DistancePhaseTick(3)),
-        ),
         (PhaseSource::Wing, ClipPhaseInput::Wing(WingPhaseTick(3))),
         (
             PhaseSource::Speech,
@@ -1271,7 +1281,7 @@ fn coherent_recipe_mut(graph: &mut MotionGraphV1) -> &mut motion_graph::Transiti
 #[test]
 fn all_embedded_edges_resolve_exactly_one_authored_recipe() {
     let graph = embedded_graph();
-    assert_eq!(graph.edges.len(), 30);
+    assert_eq!(graph.edges.len(), 43);
     let director = TransitionDirector::new(&graph).expect("transition director");
     let mut resolved_ids = Vec::new();
     for edge in &graph.edges {
@@ -1283,10 +1293,21 @@ fn all_embedded_edges_resolve_exactly_one_authored_recipe() {
             resolved.recipe.recipe_id.as_str(),
         ));
     }
-    assert_eq!(resolved_ids.len(), 30);
-    assert!(resolved_ids
-        .iter()
-        .all(|(_, recipe_id)| *recipe_id == "coherent_handoff"));
+    assert_eq!(resolved_ids.len(), 43);
+    assert_eq!(
+        resolved_ids
+            .iter()
+            .filter(|(_, recipe_id)| *recipe_id == "coherent_handoff")
+            .count(),
+        30
+    );
+    assert_eq!(
+        resolved_ids
+            .iter()
+            .filter(|(_, recipe_id)| *recipe_id == "contact_sync")
+            .count(),
+        13
+    );
 }
 
 #[test]
