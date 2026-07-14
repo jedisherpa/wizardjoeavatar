@@ -473,6 +473,13 @@ impl ChatPolicyReducerV1 {
         {
             return Err("safety clamp cannot be active and completed".to_string());
         }
+        if self
+            .active_safety_clamps
+            .iter()
+            .any(|active| self.retired_session_ids.contains(&active.session_id))
+        {
+            return Err("active safety clamp belongs to a retired session".to_string());
+        }
         if self.semantic.control.state.safety_clamp == self.active_safety_clamps.is_empty() {
             return Err("safety clamp control state is inconsistent".to_string());
         }

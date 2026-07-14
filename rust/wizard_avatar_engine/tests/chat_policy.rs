@@ -1466,6 +1466,10 @@ fn reducer_snapshot_deserialization_enforces_bounds_uniqueness_and_invariants() 
     let mut active_is_retired = valid.clone();
     active_is_retired["retired_session_ids"] = serde_json::json!(["session-1"]);
     assert!(serde_json::from_value::<ChatPolicyReducerV1>(active_is_retired).is_err());
+    let mut clamp_owner_is_retired = valid.clone();
+    clamp_owner_is_retired["retired_session_ids"] = serde_json::json!(["session-2"]);
+    clamp_owner_is_retired["active_safety_clamps"][0]["session_id"] = "session-2".into();
+    assert!(serde_json::from_value::<ChatPolicyReducerV1>(clamp_owner_is_retired).is_err());
     let mut active_with_completed_marker = valid.clone();
     active_with_completed_marker["retired_session_ids"] = serde_json::json!(["session-2"]);
     active_with_completed_marker["last_session_end"] = serde_json::json!({
