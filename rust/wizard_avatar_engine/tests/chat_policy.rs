@@ -399,6 +399,12 @@ fn every_chat_event_variant_reduces_deterministically_and_repeats_remain_contrac
             serde_json::to_vec(&second).unwrap(),
             "{name}"
         );
+        assert_eq!(
+            serde_json::from_value::<ChatPolicyReducerV1>(serde_json::to_value(&first).unwrap())
+                .unwrap_or_else(|error| panic!("{name}: valid snapshot rejected: {error}")),
+            first,
+            "{name}: snapshot roundtrip drifted"
+        );
 
         let before_repeat = serde_json::to_vec(first.semantic()).unwrap();
         let repeat = first.reduce(input(first_sequence + 1, first_tick + 1, event));
@@ -1211,6 +1217,64 @@ fn safety_release_is_owner_scoped_and_stale_release_is_atomic() {
 }
 
 #[test]
+fn safety_history_never_evicts_or_reuses_a_retired_identity() {
+    let mut reducer = active_reducer();
+    for index in 0..MAX_COMPLETED_SAFETY_CLAMPS {
+        let clamp_id = format!("clamp-history-{index}");
+        reducer
+            .reduce(input_from_source(
+                reducer.next_test_sequence(),
+                reducer.next_test_tick(),
+                "safety-history-source",
+                safety_event(&clamp_id, SafetyScope::Speech, true),
+            ))
+            .unwrap();
+        reducer
+            .reduce(input_from_source(
+                reducer.next_test_sequence(),
+                reducer.next_test_tick(),
+                "safety-history-source",
+                safety_event(&clamp_id, SafetyScope::Speech, false),
+            ))
+            .unwrap();
+    }
+
+    let full = serde_json::to_vec(&reducer).unwrap();
+    assert_eq!(
+        reducer.reduce(input_from_source(
+            reducer.next_test_sequence(),
+            reducer.next_test_tick(),
+            "safety-history-source",
+            safety_event("clamp-overflow", SafetyScope::Speech, true),
+        )),
+        Err(ChatPolicyError::SafetyClampHistoryCapacity)
+    );
+    assert_eq!(serde_json::to_vec(&reducer).unwrap(), full);
+
+    assert_eq!(
+        reducer.reduce(input_from_source(
+            reducer.next_test_sequence(),
+            reducer.next_test_tick(),
+            "safety-history-source",
+            safety_event("clamp-history-0", SafetyScope::Speech, true),
+        )),
+        Err(ChatPolicyError::SafetyClampIdRetired)
+    );
+    assert_eq!(serde_json::to_vec(&reducer).unwrap(), full);
+
+    let delayed = reducer
+        .reduce(input_from_source(
+            reducer.next_test_sequence(),
+            reducer.next_test_tick(),
+            "safety-history-source",
+            safety_event("clamp-history-0", SafetyScope::Speech, false),
+        ))
+        .unwrap();
+    assert_eq!(delayed.disposition, ChatPolicyDispositionV1::Duplicate);
+    assert!(!reducer.semantic().control.state.safety_clamp);
+}
+
+#[test]
 fn finalized_ticks_reject_late_events_and_deadline_owner_runs_before_finalization() {
     let end = ChatEventV1::ToolWaitEnded(ToolWaitEndedV1 {
         operation_id: operation_id(),
@@ -1326,6 +1390,84 @@ fn reducer_snapshot_deserialization_enforces_bounds_uniqueness_and_invariants() 
     let mut clock = valid;
     clock["last_tick"] = serde_json::json!(0);
     assert!(serde_json::from_value::<ChatPolicyReducerV1>(clock).is_err());
+
+    let mut locale = serde_json::to_value(active_reducer()).unwrap();
+    locale["last_session_locale"]["locale"] = "not a locale!".into();
+    assert!(serde_json::from_value::<ChatPolicyReducerV1>(locale).is_err());
+
+    let wait_event = ChatEventV1::ToolWaitStarted(ToolWaitStartedV1 {
+        operation_id: operation_id(),
+        kind: ToolWaitKind::Retrieval,
+        expected_duration_ms: Some(1_000),
+    });
+    let mut wait = prepare_for(&wait_event);
+    wait.reduce(input(
+        wait.next_test_sequence(),
+        wait.next_test_tick(),
+        wait_event,
+    ))
+    .unwrap();
+    let mut malformed_wait = serde_json::to_value(&wait).unwrap();
+    malformed_wait["active_tool_wait"]["expected_duration_ms"] = 1_800_001.into();
+    assert!(serde_json::from_value::<ChatPolicyReducerV1>(malformed_wait).is_err());
+    let mut incoherent_wait = serde_json::to_value(wait).unwrap();
+    incoherent_wait["semantic"]["conversation"]["state"]["turn_state"] = "idle".into();
+    assert!(serde_json::from_value::<ChatPolicyReducerV1>(incoherent_wait).is_err());
+
+    let attention_event = ChatEventV1::AttentionTarget(AttentionTargetV1 {
+        target: AttentionTarget::Content,
+        hold_ms: 2_000,
+        return_to_user: true,
+    });
+    let mut attention = prepare_for(&attention_event);
+    attention
+        .reduce(input(
+            attention.next_test_sequence(),
+            attention.next_test_tick(),
+            attention_event,
+        ))
+        .unwrap();
+    let mut expired_attention = serde_json::to_value(&attention).unwrap();
+    expired_attention["active_attention_hold"]["deadline_tick"] =
+        expired_attention["last_tick"].clone();
+    assert!(serde_json::from_value::<ChatPolicyReducerV1>(expired_attention).is_err());
+    let mut mismatched_attention = serde_json::to_value(attention).unwrap();
+    mismatched_attention["last_attention"]["target"] = "staff".into();
+    assert!(serde_json::from_value::<ChatPolicyReducerV1>(mismatched_attention).is_err());
+
+    let progress_event = ChatEventV1::SpeechProgress {
+        utterance_id: utterance_id(),
+        elapsed_ms: 250,
+    };
+    let mut progress = prepare_for(&progress_event);
+    progress
+        .reduce(input(
+            progress.next_test_sequence(),
+            progress.next_test_tick(),
+            progress_event,
+        ))
+        .unwrap();
+    let mut oversized_progress = serde_json::to_value(progress).unwrap();
+    oversized_progress["last_speech_retry"]["progress"]["elapsed_ms"] = 1_800_001.into();
+    assert!(serde_json::from_value::<ChatPolicyReducerV1>(oversized_progress).is_err());
+
+    let emotion_event = ChatEventV1::EmotionHint(EmotionHintV1 {
+        emotion: Emotion::Joy,
+        intensity: 80,
+        confidence: 90,
+        duration_ms: Some(1_000),
+    });
+    let mut emotion = prepare_for(&emotion_event);
+    emotion
+        .reduce(input(
+            emotion.next_test_sequence(),
+            emotion.next_test_tick(),
+            emotion_event,
+        ))
+        .unwrap();
+    let mut malformed_emotion = serde_json::to_value(emotion).unwrap();
+    malformed_emotion["last_emotion"]["intensity"] = 101.into();
+    assert!(serde_json::from_value::<ChatPolicyReducerV1>(malformed_emotion).is_err());
 
     let end = ChatEventV1::ToolWaitEnded(ToolWaitEndedV1 {
         operation_id: operation_id(),

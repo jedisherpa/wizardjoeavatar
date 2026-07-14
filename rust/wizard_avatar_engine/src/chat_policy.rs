@@ -160,6 +160,8 @@ pub enum ChatPolicyError {
     SafetyClampIdRetired,
     #[error("active safety clamp capacity exceeded")]
     SafetyClampCapacity,
+    #[error("safety clamp identity history capacity exceeded")]
+    SafetyClampHistoryCapacity,
 }
 
 #[derive(Clone, Debug, Eq, PartialEq, Serialize, Deserialize)]
@@ -408,6 +410,11 @@ impl ChatPolicyReducerV1 {
         if self.completed_safety_clamps.len() > MAX_COMPLETED_SAFETY_CLAMPS {
             return Err("completed safety clamp bound exceeded".to_string());
         }
+        if self.active_safety_clamps.len() + self.completed_safety_clamps.len()
+            > MAX_COMPLETED_SAFETY_CLAMPS
+        {
+            return Err("safety clamp identity history reservation exceeded".to_string());
+        }
         if has_duplicates_by(&self.active_safety_clamps, PartialEq::eq)
             || has_duplicates_by(&self.completed_safety_clamps, PartialEq::eq)
         {
@@ -423,6 +430,8 @@ impl ChatPolicyReducerV1 {
         if self.semantic.control.state.safety_clamp == self.active_safety_clamps.is_empty() {
             return Err("safety clamp control state is inconsistent".to_string());
         }
+        self.validate_snapshot_contracts()?;
+        self.validate_snapshot_lifecycle()?;
         if self
             .last_order
             .is_some_and(|order| order.apply_tick > self.last_tick)
@@ -438,6 +447,132 @@ impl ChatPolicyReducerV1 {
         self.semantic
             .validate_at(self.last_tick)
             .map_err(|error| format!("invalid semantic snapshot: {error}"))
+    }
+
+    fn validate_snapshot_contracts(&self) -> Result<(), String> {
+        let validate = |event: ChatEventV1, field: &str| {
+            event
+                .validate()
+                .map_err(|error| format!("invalid persisted {field}: {error}"))
+        };
+        if let Some(marker) = &self.last_session_locale {
+            validate(
+                ChatEventV1::SessionStarted {
+                    locale: marker.locale.clone(),
+                },
+                "session locale",
+            )?;
+        }
+        if let Some(wait) = &self.active_tool_wait {
+            validate(
+                ChatEventV1::ToolWaitStarted(ToolWaitStartedV1 {
+                    operation_id: wait.operation_id.clone(),
+                    kind: wait.kind,
+                    expected_duration_ms: wait.expected_duration_ms,
+                }),
+                "active tool wait",
+            )?;
+        }
+        if let Some(retry) = &self.last_speech_retry {
+            validate(speech_retry_event(retry), "speech retry")?;
+        }
+        if let Some(payload) = &self.last_emotion {
+            validate(ChatEventV1::EmotionHint(payload.clone()), "emotion retry")?;
+        }
+        if let Some(payload) = &self.last_gesture {
+            validate(ChatEventV1::GestureHint(payload.clone()), "gesture retry")?;
+        }
+        if let Some(payload) = &self.last_attention {
+            validate(
+                ChatEventV1::AttentionTarget(payload.clone()),
+                "attention retry",
+            )?;
+        }
+        if let Some(payload) = &self.last_clarification {
+            validate(
+                ChatEventV1::ClarificationRequested(payload.clone()),
+                "clarification retry",
+            )?;
+        }
+        if let Some(payload) = &self.last_error {
+            validate(
+                ChatEventV1::AssistantError(payload.clone()),
+                "assistant error retry",
+            )?;
+        }
+        if let Some(payload) = &self.last_celebration {
+            validate(
+                ChatEventV1::CelebrationRequested(payload.clone()),
+                "celebration retry",
+            )?;
+        }
+        Ok(())
+    }
+
+    fn validate_snapshot_lifecycle(&self) -> Result<(), String> {
+        match &self.active_tool_wait {
+            Some(_) => {
+                if self.semantic.conversation.state.turn_state != ChatTurnState::ToolWait
+                    || self
+                        .semantic
+                        .conversation
+                        .header
+                        .deadline_tick
+                        .is_none_or(|deadline| deadline <= self.last_tick)
+                {
+                    return Err("active tool wait is not backed by a live region".to_string());
+                }
+            }
+            None if self.semantic.conversation.state.turn_state == ChatTurnState::ToolWait => {
+                return Err("tool-wait region has no active operation".to_string());
+            }
+            None => {}
+        }
+
+        match &self.active_speech_plan {
+            Some(plan)
+                if self.semantic.speech.state.utterance_id.as_ref() == Some(&plan.utterance_id)
+                    && self.semantic.speech.state.plan_hash64 == Some(plan.content_free_hash64) => {
+            }
+            Some(_) => {
+                return Err("active speech plan disagrees with the speech region".to_string());
+            }
+            None if self.semantic.speech.state.utterance_id.is_some()
+                || self.semantic.speech.state.plan_hash64.is_some() =>
+            {
+                return Err("speech region has no active plan identity".to_string());
+            }
+            None => {}
+        }
+
+        if let Some(retry) = &self.last_speech_retry {
+            let (utterance_id, expected_mode) = speech_retry_identity(retry);
+            if self.semantic.speech.state.utterance_id.as_ref() != Some(utterance_id)
+                || self.semantic.speech.state.mode != expected_mode
+            {
+                return Err("speech retry disagrees with the speech lifecycle".to_string());
+            }
+        }
+
+        match (&self.active_attention_hold, &self.last_attention) {
+            (Some(hold), Some(payload)) => {
+                if hold.deadline_tick <= self.last_tick
+                    || hold.return_to_user != payload.return_to_user
+                    || self.semantic.session.state.attention_target != payload.target
+                    || self.semantic.face.state.gaze != payload.target
+                {
+                    return Err("active attention hold is expired or inconsistent".to_string());
+                }
+            }
+            (Some(_), None) => {
+                return Err("active attention hold has no retry identity".to_string());
+            }
+            (None, Some(_)) => {
+                return Err("attention retry has no active hold".to_string());
+            }
+            (None, None) => {}
+        }
+        Ok(())
     }
 
     pub fn reduce(
@@ -1273,10 +1408,6 @@ impl ChatPolicyReducerV1 {
         self.active_attention_hold = None;
         self.completed_safety_clamps
             .append(&mut self.active_safety_clamps);
-        if self.completed_safety_clamps.len() > MAX_COMPLETED_SAFETY_CLAMPS {
-            let excess = self.completed_safety_clamps.len() - MAX_COMPLETED_SAFETY_CLAMPS;
-            self.completed_safety_clamps.drain(..excess);
-        }
         self.last_session_locale = None;
         self.last_conversation_retry = None;
         self.last_speech_retry = None;
@@ -1782,6 +1913,11 @@ impl ChatPolicyReducerV1 {
                 if self.active_safety_clamps.len() >= MAX_ACTIVE_SAFETY_CLAMPS {
                     return Err(ChatPolicyError::SafetyClampCapacity);
                 }
+                if self.active_safety_clamps.len() + self.completed_safety_clamps.len()
+                    >= MAX_COMPLETED_SAFETY_CLAMPS
+                {
+                    return Err(ChatPolicyError::SafetyClampHistoryCapacity);
+                }
                 self.active_safety_clamps.push(owner.clone());
             }
         } else {
@@ -1793,9 +1929,6 @@ impl ChatPolicyReducerV1 {
                 return Err(ChatPolicyError::SafetyClampOwnerMismatch);
             };
             self.active_safety_clamps.remove(index);
-            if self.completed_safety_clamps.len() >= MAX_COMPLETED_SAFETY_CLAMPS {
-                self.completed_safety_clamps.remove(0);
-            }
             self.completed_safety_clamps.push(owner);
         }
         let mut control = self.semantic.control.state.clone();
@@ -2360,6 +2493,53 @@ fn milliseconds_to_ticks(milliseconds: u32) -> Result<u64, ChatPolicyError> {
 
 fn bounded_visual_ticks(milliseconds: u32) -> Result<u64, ChatPolicyError> {
     Ok(milliseconds_to_ticks(milliseconds)?.clamp(1, MAX_POLICY_HOLD_TICKS))
+}
+
+fn speech_retry_event(retry: &SpeechRetryV1) -> ChatEventV1 {
+    match retry {
+        SpeechRetryV1::Started { utterance_id } => ChatEventV1::SpeechStarted {
+            utterance_id: utterance_id.clone(),
+        },
+        SpeechRetryV1::Progress {
+            utterance_id,
+            elapsed_ms,
+        } => ChatEventV1::SpeechProgress {
+            utterance_id: utterance_id.clone(),
+            elapsed_ms: *elapsed_ms,
+        },
+        SpeechRetryV1::Paused { utterance_id } => ChatEventV1::SpeechPaused {
+            utterance_id: utterance_id.clone(),
+        },
+        SpeechRetryV1::Resumed { utterance_id } => ChatEventV1::SpeechResumed {
+            utterance_id: utterance_id.clone(),
+        },
+        SpeechRetryV1::Cancelled {
+            utterance_id,
+            reason,
+        } => ChatEventV1::SpeechCancelled {
+            utterance_id: utterance_id.clone(),
+            reason: *reason,
+        },
+        SpeechRetryV1::Completed { utterance_id } => ChatEventV1::SpeechCompleted {
+            utterance_id: utterance_id.clone(),
+        },
+        SpeechRetryV1::Failed { utterance_id, code } => ChatEventV1::SpeechFailed {
+            utterance_id: utterance_id.clone(),
+            code: *code,
+        },
+    }
+}
+
+fn speech_retry_identity(retry: &SpeechRetryV1) -> (&UtteranceId, SpeechModeV1) {
+    match retry {
+        SpeechRetryV1::Started { utterance_id }
+        | SpeechRetryV1::Progress { utterance_id, .. }
+        | SpeechRetryV1::Resumed { utterance_id } => (utterance_id, SpeechModeV1::Active),
+        SpeechRetryV1::Paused { utterance_id } => (utterance_id, SpeechModeV1::Paused),
+        SpeechRetryV1::Cancelled { utterance_id, .. } => (utterance_id, SpeechModeV1::Cancelling),
+        SpeechRetryV1::Completed { utterance_id } => (utterance_id, SpeechModeV1::Completed),
+        SpeechRetryV1::Failed { utterance_id, .. } => (utterance_id, SpeechModeV1::Failed),
+    }
 }
 
 fn has_duplicates_by<T>(values: &[T], equal: impl Fn(&T, &T) -> bool) -> bool {
