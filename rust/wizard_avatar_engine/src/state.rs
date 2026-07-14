@@ -164,6 +164,19 @@ impl FromStr for Expression {
 }
 
 impl Expression {
+    pub const ALL: [Self; 10] = [
+        Self::Neutral,
+        Self::Happy,
+        Self::Thinking,
+        Self::Surprised,
+        Self::Worried,
+        Self::Amused,
+        Self::Confident,
+        Self::Focused,
+        Self::Skeptical,
+        Self::Explaining,
+    ];
+
     #[must_use]
     pub const fn as_str(self) -> &'static str {
         match self {

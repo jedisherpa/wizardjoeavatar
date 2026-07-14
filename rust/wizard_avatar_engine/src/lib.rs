@@ -1,4 +1,5 @@
 pub mod animation;
+pub mod capability_manifest;
 pub mod cell;
 pub mod chat_event;
 pub mod chat_performance;

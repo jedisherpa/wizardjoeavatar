@@ -20,6 +20,19 @@ pub const WORLD_Z_FAR: f32 = 10.0;
 pub const SIMULATION_HZ: f32 = 60.0;
 pub const SIMULATION_DT: f32 = 1.0 / SIMULATION_HZ;
 pub const STRIDE_LENGTH: f32 = 0.85;
+pub const RUNTIME_PROCEDURAL_BEHAVIOR_IDS: [&str; 11] = [
+    "behavior.move",
+    "behavior.walk_left",
+    "behavior.walk_right",
+    "behavior.walk_forward",
+    "behavior.walk_backward",
+    "behavior.return_to_center",
+    "behavior.path",
+    "behavior.circle",
+    "behavior.figure_eight",
+    "behavior.speaking_duration",
+    "behavior.periodic_blink",
+];
 
 #[derive(Clone, Debug, Deserialize)]
 pub struct WizardCommand {
