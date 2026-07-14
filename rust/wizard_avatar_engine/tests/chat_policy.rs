@@ -1272,6 +1272,34 @@ fn safety_history_never_evicts_or_reuses_a_retired_identity() {
         .unwrap();
     assert_eq!(delayed.disposition, ChatPolicyDispositionV1::Duplicate);
     assert!(!reducer.semantic().control.state.safety_clamp);
+
+    reducer
+        .reduce(input(
+            reducer.next_test_sequence(),
+            reducer.next_test_tick(),
+            ChatEventV1::SessionEnded {
+                reason: SessionEndReason::UserEnded,
+            },
+        ))
+        .unwrap();
+    reducer
+        .reduce(input_for(
+            reducer.next_test_sequence(),
+            reducer.next_test_tick(),
+            "session-2",
+            "turn-2",
+            ChatEventV1::SessionStarted { locale: None },
+        ))
+        .unwrap();
+    reducer
+        .reduce(input_for(
+            reducer.next_test_sequence(),
+            reducer.next_test_tick(),
+            "session-2",
+            "turn-2",
+            safety_event("clamp-history-0", SafetyScope::Speech, true),
+        ))
+        .expect("a new session owns a fresh bounded clamp identity epoch");
 }
 
 #[test]
@@ -1304,6 +1332,30 @@ fn finalized_ticks_reject_late_events_and_deadline_owner_runs_before_finalizatio
         .unwrap()
         .changed_regions
         .is_empty());
+
+    let mut advanced = active_reducer();
+    advanced.advance_to(SemanticTick(10)).unwrap();
+    advanced
+        .reduce(input(
+            advanced.next_test_sequence(),
+            11,
+            ChatEventV1::EmotionHint(EmotionHintV1 {
+                emotion: Emotion::Joy,
+                intensity: 40,
+                confidence: 90,
+                duration_ms: None,
+            }),
+        ))
+        .unwrap();
+    let after_tick_eleven = serde_json::to_vec(&advanced).unwrap();
+    assert_eq!(
+        advanced.advance_to(SemanticTick(10)),
+        Err(ChatPolicyError::ClockRewind {
+            previous: SemanticTick(11),
+            received: SemanticTick(10),
+        })
+    );
+    assert_eq!(serde_json::to_vec(&advanced).unwrap(), after_tick_eleven);
 }
 
 #[test]
@@ -1387,6 +1439,37 @@ fn reducer_snapshot_deserialization_enforces_bounds_uniqueness_and_invariants() 
     control["semantic"]["control"]["state"]["safety_clamp"] = false.into();
     assert!(serde_json::from_value::<ChatPolicyReducerV1>(control).is_err());
 
+    let clamped = |scope: SafetyScope| {
+        let mut reducer = active_reducer();
+        reducer
+            .reduce(input_from_source(
+                2,
+                2,
+                "snapshot-safety-source",
+                safety_event("snapshot-clamp", scope, true),
+            ))
+            .unwrap();
+        serde_json::to_value(reducer).unwrap()
+    };
+    let mut live_conversation = clamped(SafetyScope::All);
+    live_conversation["semantic"]["conversation"]["state"]["turn_state"] = "thinking".into();
+    assert!(serde_json::from_value::<ChatPolicyReducerV1>(live_conversation).is_err());
+    let mut live_speech = clamped(SafetyScope::Speech);
+    live_speech["semantic"]["speech"]["state"]["suppressed"] = false.into();
+    assert!(serde_json::from_value::<ChatPolicyReducerV1>(live_speech).is_err());
+    let mut live_mouth = clamped(SafetyScope::Speech);
+    live_mouth["semantic"]["mouth"]["state"]["blend_percent"] = 99.into();
+    assert!(serde_json::from_value::<ChatPolicyReducerV1>(live_mouth).is_err());
+    let mut live_gesture = clamped(SafetyScope::Gesture);
+    live_gesture["semantic"]["gesture"]["state"]["marker"] = "commit".into();
+    assert!(serde_json::from_value::<ChatPolicyReducerV1>(live_gesture).is_err());
+    let mut live_effects = clamped(SafetyScope::Effects);
+    live_effects["semantic"]["effects"]["header"]["deadline_tick"] = 20.into();
+    assert!(serde_json::from_value::<ChatPolicyReducerV1>(live_effects).is_err());
+    let mut live_mobility = clamped(SafetyScope::Mobility);
+    live_mobility["semantic"]["mobility"]["state"]["mode"] = "ground_walk".into();
+    assert!(serde_json::from_value::<ChatPolicyReducerV1>(live_mobility).is_err());
+
     let mut clock = valid;
     clock["last_tick"] = serde_json::json!(0);
     assert!(serde_json::from_value::<ChatPolicyReducerV1>(clock).is_err());
@@ -1447,9 +1530,13 @@ fn reducer_snapshot_deserialization_enforces_bounds_uniqueness_and_invariants() 
             progress_event,
         ))
         .unwrap();
-    let mut oversized_progress = serde_json::to_value(progress).unwrap();
+    let progress_json = serde_json::to_value(progress).unwrap();
+    let mut oversized_progress = progress_json.clone();
     oversized_progress["last_speech_retry"]["progress"]["elapsed_ms"] = 1_800_001.into();
     assert!(serde_json::from_value::<ChatPolicyReducerV1>(oversized_progress).is_err());
+    let mut incoherent_progress = progress_json;
+    incoherent_progress["semantic"]["speech"]["state"]["mode"] = "paused".into();
+    assert!(serde_json::from_value::<ChatPolicyReducerV1>(incoherent_progress).is_err());
 
     let emotion_event = ChatEventV1::EmotionHint(EmotionHintV1 {
         emotion: Emotion::Joy,
@@ -1548,6 +1635,42 @@ fn accepted_cross_channel_transitions_keep_snapshot_lifecycle_coherent() {
     );
     assert_eq!(attention.semantic().face.state.gaze, AttentionTarget::User);
     roundtrip("attention_then_user_turn", &attention);
+
+    let mut same_target_attention = active_reducer();
+    same_target_attention
+        .reduce(input(
+            same_target_attention.next_test_sequence(),
+            same_target_attention.next_test_tick(),
+            ChatEventV1::AttentionTarget(AttentionTargetV1 {
+                target: AttentionTarget::User,
+                hold_ms: 2_000,
+                return_to_user: true,
+            }),
+        ))
+        .unwrap();
+    assert!(same_target_attention
+        .semantic()
+        .face
+        .header
+        .deadline_tick
+        .is_some());
+    same_target_attention
+        .reduce(input(
+            same_target_attention.next_test_sequence(),
+            same_target_attention.next_test_tick(),
+            ChatEventV1::UserTurnStarted,
+        ))
+        .unwrap();
+    assert!(same_target_attention
+        .semantic()
+        .face
+        .header
+        .deadline_tick
+        .is_none());
+    roundtrip(
+        "same_target_attention_then_user_turn",
+        &same_target_attention,
+    );
 
     let mut tool_wait = active_reducer();
     tool_wait

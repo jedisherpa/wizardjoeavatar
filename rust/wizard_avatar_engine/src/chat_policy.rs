@@ -432,6 +432,7 @@ impl ChatPolicyReducerV1 {
         }
         self.validate_snapshot_contracts()?;
         self.validate_snapshot_lifecycle()?;
+        self.validate_snapshot_safety_neutralization()?;
         if self
             .last_order
             .is_some_and(|order| order.apply_tick > self.last_tick)
@@ -545,6 +546,15 @@ impl ChatPolicyReducerV1 {
             None => {}
         }
 
+        if let Some(retry) = &self.last_speech_retry {
+            let (utterance_id, expected_mode) = speech_retry_identity(retry);
+            if self.semantic.speech.state.utterance_id.as_ref() != Some(utterance_id)
+                || self.semantic.speech.state.mode != expected_mode
+            {
+                return Err("speech retry disagrees with the speech lifecycle".to_string());
+            }
+        }
+
         match (&self.active_attention_hold, &self.last_attention) {
             (Some(hold), Some(payload)) => {
                 if hold.deadline_tick <= self.last_tick
@@ -566,6 +576,78 @@ impl ChatPolicyReducerV1 {
         Ok(())
     }
 
+    fn validate_snapshot_safety_neutralization(&self) -> Result<(), String> {
+        if self.safety_scope_is_active(SafetyScope::All)
+            && (self.semantic.conversation.state.turn_state != ChatTurnState::Idle
+                || self.semantic.conversation.header.deadline_tick.is_some())
+        {
+            return Err("all-scope safety clamp has a live conversation state".to_string());
+        }
+
+        if self.safety_scope_is_active(SafetyScope::Speech) {
+            let expected_mode = if self.semantic.speech.state.utterance_id.is_some() {
+                SpeechModeV1::Cancelling
+            } else {
+                SpeechModeV1::Idle
+            };
+            if self.semantic.speech.state.mode != expected_mode
+                || !self.semantic.speech.state.suppressed
+                || self.semantic.speech.header.deadline_tick.is_some()
+            {
+                return Err("speech safety clamp is not neutralized".to_string());
+            }
+            let expected_mouth = MouthStateV1 {
+                viseme: Viseme::Rest,
+                rendered_pose: RenderedMouthPose::Closed,
+                previous_pose: RenderedMouthPose::Closed,
+                blend_percent: 100,
+                cue_index: None,
+                confidence: 100,
+            };
+            if self.semantic.mouth.state != expected_mouth
+                || self.semantic.mouth.header.deadline_tick.is_some()
+            {
+                return Err("speech safety clamp has a live mouth state".to_string());
+            }
+        }
+
+        if self.safety_scope_is_active(SafetyScope::Gesture) {
+            let expected = GestureStateV1 {
+                gesture: None,
+                phase: GesturePhaseV1::Recovery,
+                marker: GestureMarkerV1::Recover,
+                interrupt_policy: GestureInterruptPolicyV1::Immediate,
+                restoration_policy: GestureRestorationPolicyV1::SettleToIdle,
+            };
+            if self.semantic.gesture.state != expected
+                || self.semantic.gesture.header.deadline_tick.is_some()
+            {
+                return Err("gesture safety clamp is not neutralized".to_string());
+            }
+        }
+
+        if self.safety_scope_is_active(SafetyScope::Effects)
+            && (!self.semantic.effects.state.instances.is_empty()
+                || self.semantic.effects.header.deadline_tick.is_some())
+        {
+            return Err("effects safety clamp is not neutralized".to_string());
+        }
+
+        if self.safety_scope_is_active(SafetyScope::Mobility) {
+            let mobility = &self.semantic.mobility;
+            if mobility.state.mode != MobilityModeV1::GroundedIdle
+                || mobility.state.velocity_millicells_per_tick != Point2iV1::default()
+                || mobility.state.altitude_millicells != 0
+                || mobility.state.contacts
+                    != vec![ContactPointV1::LeftFoot, ContactPointV1::RightFoot]
+                || mobility.header.deadline_tick.is_some()
+            {
+                return Err("mobility safety clamp is not neutralized".to_string());
+            }
+        }
+        Ok(())
+    }
+
     pub fn reduce(
         &mut self,
         input: OrderedChatEventV1,
@@ -577,16 +659,16 @@ impl ChatPolicyReducerV1 {
         &mut self,
         tick: SemanticTick,
     ) -> Result<ChatPolicyAdvanceOutcomeV1, ChatPolicyError> {
-        if self.last_finalized_tick == Some(tick) {
-            return Ok(ChatPolicyAdvanceOutcomeV1 {
-                tick,
-                changed_regions: Vec::new(),
-            });
-        }
         if tick < self.last_tick {
             return Err(ChatPolicyError::ClockRewind {
                 previous: self.last_tick,
                 received: tick,
+            });
+        }
+        if self.last_finalized_tick == Some(tick) {
+            return Ok(ChatPolicyAdvanceOutcomeV1 {
+                tick,
+                changed_regions: Vec::new(),
             });
         }
         let mut draft = self.clone();
@@ -1292,6 +1374,7 @@ impl ChatPolicyReducerV1 {
             self.semantic.session.state.session_id.as_ref() != Some(&input.session_id);
         if starts_new_session {
             self.last_session_end = None;
+            self.completed_safety_clamps.clear();
         }
         let state = SessionStateV1 {
             mode: SessionModeV1::Ready,
@@ -2246,7 +2329,10 @@ impl ChatPolicyReducerV1 {
         state: FaceStateV1,
         hold_ticks: Option<u64>,
     ) -> Result<(), ChatPolicyError> {
-        if hold_ticks.is_none() && self.semantic.face.state == state {
+        if hold_ticks.is_none()
+            && self.semantic.face.state == state
+            && self.semantic.face.header.deadline_tick.is_none()
+        {
             return Ok(());
         }
         self.apply_region(
@@ -2541,6 +2627,18 @@ fn speech_retry_event(retry: &SpeechRetryV1) -> ChatEventV1 {
             utterance_id: utterance_id.clone(),
             code: *code,
         },
+    }
+}
+
+fn speech_retry_identity(retry: &SpeechRetryV1) -> (&UtteranceId, SpeechModeV1) {
+    match retry {
+        SpeechRetryV1::Started { utterance_id }
+        | SpeechRetryV1::Progress { utterance_id, .. }
+        | SpeechRetryV1::Resumed { utterance_id } => (utterance_id, SpeechModeV1::Active),
+        SpeechRetryV1::Paused { utterance_id } => (utterance_id, SpeechModeV1::Paused),
+        SpeechRetryV1::Cancelled { utterance_id, .. } => (utterance_id, SpeechModeV1::Cancelling),
+        SpeechRetryV1::Completed { utterance_id } => (utterance_id, SpeechModeV1::Completed),
+        SpeechRetryV1::Failed { utterance_id, .. } => (utterance_id, SpeechModeV1::Failed),
     }
 }
 
