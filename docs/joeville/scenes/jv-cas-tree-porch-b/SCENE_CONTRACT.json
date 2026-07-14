@@ -1,0 +1,55 @@
+{
+  "base": "codex/crystail-character",
+  "branch": "codex/joeville-scene-castle-tree-porch-b",
+  "camera": "Portrait alternate from farther down the porch toward the open door",
+  "corrections": [
+    "Generate horizontal 16:9 production angle",
+    "Match porch A chair and door coordinates",
+    "Keep two-level balcony relationship consistent"
+  ],
+  "layers": [
+    "forest_far",
+    "lower_castle",
+    "upper_castle",
+    "deck_character_plane",
+    "chairs",
+    "rail",
+    "pine_foreground",
+    "door_practical",
+    "lighting"
+  ],
+  "playable": "Long deck lane supports a walking two-shot; two chairs are dialogue anchors; open door is exit; trunk splits foreground and middle depth.",
+  "role": "Alternate porch master preserving two-level Castle continuity",
+  "runtime_target": {
+    "cell_proxy": [
+      240,
+      135
+    ],
+    "color_space": "sRGB",
+    "fps": 24,
+    "master": [
+      3840,
+      2160
+    ]
+  },
+  "scene_id": "JV-CAS-TREE-PORCH-B",
+  "schema_version": 1,
+  "set_id": "JV-CAS",
+  "slug": "castle-tree-porch-b",
+  "source": {
+    "height": 1536,
+    "path": "assets/environments/joeville/jv-cas-tree-porch-b/source-reference.png",
+    "sha256": "9b43b99b0197ec106f30ce635141830c8813343a8d51a4de00f650ae78f12456",
+    "width": 1024
+  },
+  "status": "CANONICAL-CONCEPT-RECOMPOSE-REQUIRED",
+  "title": "Castle Grace monumental-pine porch B",
+  "variants": [
+    "morning",
+    "afternoon",
+    "golden_hour",
+    "night_lantern",
+    "storm",
+    "winter"
+  ]
+}
