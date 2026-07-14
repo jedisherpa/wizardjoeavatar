@@ -3,7 +3,7 @@
   "schema": "wizardjoe-rchat-registry/v1",
   "program_id": "RCHAT",
   "branch": "codex/rust-chatbot-animation-engine",
-  "integration_head": "e00e71e3a394c55a040e6004be85658a8e2aae92",
+  "integration_head": "24dc0735d167dcc955462d528e871692d46e2941",
   "production_authority": "rust/wizard_avatar_engine",
   "planning_checkpoint": {
     "local_sha": "50948b907ad35ec8ca604d6c39a63b4317ac3da7",
@@ -778,7 +778,7 @@
       "required_locks": [
 
       ],
-      "base_sha": "e00e71e3a394c55a040e6004be85658a8e2aae92",
+      "base_sha": "24dc0735d167dcc955462d528e871692d46e2941",
       "result_sha": null,
       "started_at": "2026-07-13T21:32:11Z",
       "finished_at": null,
@@ -862,7 +862,7 @@
       "required_locks": [
 
       ],
-      "base_sha": "e00e71e3a394c55a040e6004be85658a8e2aae92",
+      "base_sha": "24dc0735d167dcc955462d528e871692d46e2941",
       "result_sha": null,
       "started_at": "2026-07-13T21:32:11Z",
       "finished_at": null,
@@ -1929,7 +1929,7 @@
         "MOTION",
         "FLOW"
       ],
-      "status": "PLANNED",
+      "status": "IN_PROGRESS",
       "weight": 0,
       "dependencies": [
         "RCHAT-RUN-020",
@@ -1953,9 +1953,9 @@
       "required_locks": [
 
       ],
-      "base_sha": null,
+      "base_sha": "24dc0735d167dcc955462d528e871692d46e2941",
       "result_sha": null,
-      "started_at": null,
+      "started_at": "2026-07-13T23:54:26Z",
       "finished_at": null,
       "commands": [
 
@@ -3537,7 +3537,7 @@
         "RUNTIME",
         "FLOW"
       ],
-      "status": "PLANNED",
+      "status": "IN_PROGRESS",
       "weight": 0,
       "dependencies": [
         "RCHAT-ANIM-020",
@@ -3555,9 +3555,9 @@
       "required_locks": [
 
       ],
-      "base_sha": null,
+      "base_sha": "24dc0735d167dcc955462d528e871692d46e2941",
       "result_sha": null,
-      "started_at": null,
+      "started_at": "2026-07-13T23:54:26Z",
       "finished_at": null,
       "commands": [
 
