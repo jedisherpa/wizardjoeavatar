@@ -14,14 +14,14 @@ use wizard_avatar_engine::performance_score::{
 
 const FIXTURE: &[u8] = include_bytes!("fixtures/media/performance-score-v1.minimal.json");
 const FIXTURE_FILE_SHA256: &str =
-    "796e365e4a921b0c8d62e3ab7d88a0e163de5d9df31e88ea78b7f282e66cc304";
-const FIXTURE_SCORE_ID: &str = "03fccd6f74a198a2bb276563f6e49d82601a872c49e62ae7e851e2d2f0aa97e7";
+    "d14e9ec43b0ad0d24030b266eb9b2900454dbc414098ba3e4e28e817462265af";
+const FIXTURE_SCORE_ID: &str = "5aeae9452e61fcd1a39984f3927b034a052f1ebdf739e8d5953a6a81848151ca";
 const FIXTURE_CAPABILITY_MANIFEST_SHA256: &str =
     "4ef14b34a6ce9b8b81c89e59a25b9f5fd142aff19757069d692b39422650b482";
 const FIXTURE_MEDIA_SHA256: &str =
     "4ec95cd27fbef0d944a8040cb0ab6e766dc19f89cd6a074b94a07fb0f81a1722";
 const FIXTURE_ANIMATION_LIBRARY_SHA256: &str =
-    "028e2d3ff9e0ff58d72c7bb39a792f1d76f7ecc8cf5d37da91677f486eab3bb8";
+    "675feeb8c30f2e028c0e5bfab1de9c9e2f97f608a276a9b308406e12bdb39a9e";
 const FIXTURE_MOTION_GRAPH_SHA256: &str =
     "6d22052dc3a43da683c09d3a7da71fa4a4228eaf53bf98a3633205a5f0898a4d";
 
@@ -515,6 +515,24 @@ fn ordering_uniqueness_overlap_and_collection_bounds_are_enforced() {
     overlap.tracks[0].cues.push(second);
     expect_invalid(&overlap, ScoreErrorCode::InvalidOverlap);
 
+    let mut interleaved_tracks = valid.clone();
+    interleaved_tracks.tracks[0].cues[0].end_us = 10;
+    let mut late = interleaved_tracks.tracks[0].cues[0].clone();
+    late.cue_id = CueId::new("c3").unwrap();
+    late.start_us = 100;
+    late.end_us = 110;
+    interleaved_tracks.tracks[0].cues.push(late);
+    let mut middle_track = interleaved_tracks.tracks[0].clone();
+    middle_track.track_id = TrackId::new("body-middle").unwrap();
+    middle_track.cues.truncate(1);
+    middle_track.cues[0].cue_id = CueId::new("c2").unwrap();
+    middle_track.cues[0].start_us = 50;
+    middle_track.cues[0].end_us = 60;
+    interleaved_tracks.tracks.push(middle_track);
+    interleaved_tracks.checkpoints[0].next_cue_indices = vec![1, 0];
+    interleaved_tracks.recompute_score_id().unwrap();
+    interleaved_tracks.validate().unwrap();
+
     let mut priority_layering = valid.clone();
     let mut higher = priority_layering.tracks[0].cues[0].clone();
     higher.cue_id = CueId::new("c2").unwrap();
@@ -705,13 +723,7 @@ fn checkpoints_are_complete_ordered_half_open_and_seekable() {
 fn runtime_manifest_binding_resolves_primary_and_ordered_fallbacks() {
     let manifest = build_wizard_capability_manifest().expect("manifest");
     let fixture = fixture_score();
-    assert_eq!(
-        fixture
-            .validate_against_manifest(&manifest)
-            .unwrap_err()
-            .code,
-        ScoreErrorCode::ManifestMismatch
-    );
+    fixture.validate_against_manifest(&manifest).unwrap();
 
     let bound = bind_to_runtime_manifest();
     bound.validate_against_manifest(&manifest).unwrap();

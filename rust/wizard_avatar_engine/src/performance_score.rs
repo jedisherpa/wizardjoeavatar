@@ -760,10 +760,11 @@ impl PerformanceScoreV1 {
             return Err(ScoreError::new(ScoreErrorCode::InvalidRange, "cues"));
         }
 
-        for ((layer, _), cues) in overlap_groups {
+        for ((layer, _), mut cues) in overlap_groups {
             if layer == RegionLayerV1::PropEffect {
                 continue;
             }
+            cues.sort_by_key(|cue| (cue.start_us, cue.end_us, cue.cue_id.as_str()));
             let mut latest_end = -1;
             for cue in cues {
                 if cue.start_us < latest_end {
@@ -1181,12 +1182,13 @@ fn validate_capability_for_cue(
     if capability.status != CapabilityStatus::ActiveLegacy {
         return Err(ScoreError::new(ScoreErrorCode::InactiveCapability, field));
     }
-    if matches!(
+    if !matches!(
         capability.quality_status,
-        QualityStatusV1::RuntimeActiveUnscored
-            | QualityStatusV1::ShadowValidatedNotRuntimeWired
-            | QualityStatusV1::ContractValidatedNotRuntimeRendered
-            | QualityStatusV1::ShowcaseApprovedNotGeneralPurpose
+        QualityStatusV1::RuntimeGeometryValidated
+            | QualityStatusV1::RuntimeRendered
+            | QualityStatusV1::RuntimeRenderedDurationDriven
+            | QualityStatusV1::RuntimeActiveLegacy
+            | QualityStatusV1::RuntimeAliasValidated
     ) {
         return Err(ScoreError::new(
             ScoreErrorCode::UnderQualityCapability,
