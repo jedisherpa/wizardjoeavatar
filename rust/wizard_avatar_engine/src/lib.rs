@@ -14,6 +14,7 @@ pub mod motion_catalog;
 pub mod motion_graph;
 pub mod palette;
 pub mod pathing;
+pub mod performance_score;
 pub mod pose;
 pub mod pose_archive;
 pub mod pose_asset;
