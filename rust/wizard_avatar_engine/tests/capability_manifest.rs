@@ -3,10 +3,11 @@ use std::collections::{BTreeMap, BTreeSet};
 use std::io::{Read, Write};
 use std::net::{SocketAddr, TcpStream};
 use wizard_avatar_engine::capability_manifest::{
-    build_wizard_capability_document, build_wizard_capability_manifest, CapabilityDocumentV1,
-    CapabilityKind, CapabilityStatus, RuntimePolicyV1, RuntimeProfileV1, RuntimeSurfaceV1,
-    RuntimeTransportV1, CAPABILITY_API_VERSION, CAPABILITY_MANIFEST_SCHEMA_VERSION,
-    RUNTIME_POLICY_VERSION, RUNTIME_PROFILE_VERSION, RUNTIME_TRANSPORT_VERSION,
+    build_wizard_capability_document, build_wizard_capability_manifest, ApplicabilityV1,
+    CapabilityDocumentV1, CapabilityKind, CapabilityStatus, FallbackTopologyV1, NarrativeUseV1,
+    PropRequirementV1, RuntimePolicyV1, RuntimeProfileV1, RuntimeSurfaceV1, RuntimeTransportV1,
+    CAPABILITY_API_VERSION, CAPABILITY_MANIFEST_SCHEMA_VERSION, RUNTIME_POLICY_VERSION,
+    RUNTIME_PROFILE_VERSION, RUNTIME_TRANSPORT_VERSION,
 };
 use wizard_avatar_engine::chat_event::{
     AttentionTarget, ChatTurnState, Emotion, GestureKind, Viseme, CHAT_EVENT_SCHEMA_VERSION,
@@ -15,17 +16,19 @@ use wizard_avatar_engine::chat_performance::{
     RenderedMouthPose, CHAT_PERFORMANCE_SCHEMA_VERSION, DURATION_FALLBACK_VERSION,
 };
 use wizard_avatar_engine::command::COMMAND_SCHEMA_VERSION;
-use wizard_avatar_engine::controller::RUNTIME_PROCEDURAL_BEHAVIOR_IDS;
+use wizard_avatar_engine::controller::{
+    ControllerCommandKind, WizardAvatarController, WizardCommand, PROCEDURAL_CONTROLLER_COMMANDS,
+};
 use wizard_avatar_engine::frame_source::ProceduralWizardFrameSource;
 use wizard_avatar_engine::motion_catalog::{embedded_motion_graph_json, shadow_motion_catalog};
 use wizard_avatar_engine::motion_graph::{CapabilityTier, MOTION_GRAPH_SCHEMA_VERSION};
 use wizard_avatar_engine::pose::PoseLibrary;
 use wizard_avatar_engine::pose_clip::POSE_CLIPS;
 use wizard_avatar_engine::server;
-use wizard_avatar_engine::state::{Direction, Expression, WizardState};
+use wizard_avatar_engine::state::{Direction, Expression, Locomotion, WizardState};
 
 const EXPECTED_MANIFEST_SHA256: &str =
-    "c2e00c7ece170b731351734b5662d552496a7bef3c75bba3ee5146c12a9bc725";
+    "233f1015375dafb931926c8c644991214db1f25467cf1796e14c31daa4e1d625";
 
 fn ids_for(
     manifest: &wizard_avatar_engine::capability_manifest::CapabilityManifestV1,
@@ -63,6 +66,7 @@ fn manifest_is_an_exact_census_of_runtime_and_contract_registries() {
         .graph;
 
     assert_eq!(manifest.schema_version, CAPABILITY_MANIFEST_SCHEMA_VERSION);
+    assert_eq!(manifest.capabilities.len(), 208);
     assert_eq!(manifest.character_id, WizardState::default().character_id);
     assert_eq!(manifest.pose_geometry_count, library.pose_ids().count());
     assert_eq!(manifest.pose_alias_count, library.alias_count());
@@ -90,6 +94,10 @@ fn manifest_is_an_exact_census_of_runtime_and_contract_registries() {
             .pose_ids()
             .map(str::to_string)
             .collect::<BTreeSet<_>>()
+    );
+    assert_eq!(
+        ids_for(&manifest, CapabilityKind::PoseAlias),
+        ["fly_front_hover_ready".to_string()].into_iter().collect()
     );
     assert_eq!(
         ids_for(&manifest, CapabilityKind::LegacyClip),
@@ -145,29 +153,25 @@ fn manifest_is_an_exact_census_of_runtime_and_contract_registries() {
     );
     assert_eq!(
         ids_for(&manifest, CapabilityKind::ProceduralBehavior),
-        RUNTIME_PROCEDURAL_BEHAVIOR_IDS
-            .into_iter()
-            .map(str::to_string)
-            .collect()
-    );
-    assert_eq!(
-        RUNTIME_PROCEDURAL_BEHAVIOR_IDS
-            .into_iter()
-            .collect::<BTreeSet<_>>(),
         [
             "behavior.circle",
+            "behavior.face",
             "behavior.figure_eight",
             "behavior.move",
+            "behavior.move_relative",
             "behavior.path",
             "behavior.periodic_blink",
+            "behavior.reset",
             "behavior.return_to_center",
             "behavior.speaking_duration",
+            "behavior.stop",
             "behavior.walk_backward",
             "behavior.walk_forward",
             "behavior.walk_left",
             "behavior.walk_right",
         ]
         .into_iter()
+        .map(str::to_string)
         .collect()
     );
 }
@@ -229,8 +233,8 @@ fn every_pose_joins_exact_graph_tier_facing_surface_and_showcase_fallback_truth(
                 assert_eq!(actual.rationale, expected.rationale);
                 assert_eq!(actual.fallback_pose_id, expected.fallback_pose_id);
                 assert_eq!(
-                    entry.fallback_ids.as_slice(),
-                    std::slice::from_ref(&expected.fallback_pose_id)
+                    entry.fallback,
+                    FallbackTopologyV1::Fallbacks(vec![expected.fallback_pose_id.clone()])
                 );
             }
             (None, None) => assert_ne!(row.capability_tier, CapabilityTier::ShowcaseOnly),
@@ -342,6 +346,261 @@ fn versions_and_unsupported_flags_publish_only_current_runtime_truth() {
 }
 
 #[test]
+fn runtime_alias_is_a_stable_resolvable_capability_with_exact_topology() {
+    let manifest = build_wizard_capability_manifest().expect("manifest should build");
+    let alias = manifest
+        .capabilities
+        .iter()
+        .find(|entry| entry.kind == CapabilityKind::PoseAlias)
+        .expect("pose alias capability");
+    assert_eq!(alias.id, "fly_front_hover_ready");
+    assert_eq!(alias.status, CapabilityStatus::ActiveLegacy);
+    assert_eq!(
+        alias
+            .pose_alias
+            .as_ref()
+            .expect("alias target")
+            .target_pose_id,
+        "fly_front_hover_neutral"
+    );
+    assert_eq!(
+        alias.fallback,
+        FallbackTopologyV1::Fallbacks(vec!["fly_front_hover_neutral".to_string()])
+    );
+    let library = PoseLibrary::reference().expect("pose library");
+    assert_eq!(
+        library.for_id(&alias.id).expect("alias resolves").id,
+        library
+            .for_id("fly_front_hover_neutral")
+            .expect("target resolves")
+            .id
+    );
+}
+
+#[test]
+fn controller_command_and_procedural_census_is_derived_and_behaviorally_resolvable() {
+    let manifest = build_wizard_capability_manifest().expect("manifest should build");
+    assert_eq!(
+        manifest.controller_command_surface,
+        ControllerCommandKind::ALL
+            .into_iter()
+            .collect::<BTreeSet<_>>()
+            .into_iter()
+            .collect::<Vec<_>>()
+    );
+    for command in ControllerCommandKind::ALL {
+        let mut controller = WizardAvatarController::default();
+        let result = controller.apply_command(WizardCommand::new(
+            wire_name(command),
+            serde_json::json!({}),
+        ));
+        assert!(
+            !result.message.starts_with("unsupported command"),
+            "{command:?} must resolve through the controller registry"
+        );
+    }
+    let alias = WizardAvatarController::default()
+        .apply_command(WizardCommand::new("figure-eight", serde_json::json!({})));
+    assert!(!alias.message.starts_with("unsupported command"));
+
+    let procedural = manifest
+        .capabilities
+        .iter()
+        .filter(|entry| entry.kind == CapabilityKind::ProceduralBehavior)
+        .collect::<Vec<_>>();
+    assert_eq!(procedural.len(), PROCEDURAL_CONTROLLER_COMMANDS.len() + 2);
+    for command in PROCEDURAL_CONTROLLER_COMMANDS {
+        assert_eq!(
+            procedural
+                .iter()
+                .filter(|entry| {
+                    matches!(
+                        &entry.controller_commands,
+                        ApplicabilityV1::Applicable(commands) if commands == &[command]
+                    )
+                })
+                .count(),
+            1,
+            "{command:?} must have one procedural capability"
+        );
+    }
+    assert!(
+        ids_for(&manifest, CapabilityKind::ProceduralBehavior).contains("behavior.move_relative")
+    );
+    assert!(ids_for(&manifest, CapabilityKind::ProceduralBehavior).contains("behavior.face"));
+
+    let mut moving = WizardAvatarController::default();
+    assert!(
+        moving
+            .apply_command(WizardCommand::new(
+                "move_relative",
+                serde_json::json!({"dx": 1.0, "dz": 0.0}),
+            ))
+            .ok
+    );
+    moving.advance(1.0);
+    assert!(moving.current_state().world_position.x > 0.0);
+
+    let mut facing = WizardAvatarController::default();
+    assert!(
+        facing
+            .apply_command(WizardCommand::new(
+                "face",
+                serde_json::json!({"direction": "west"}),
+            ))
+            .ok
+    );
+    facing.advance(0.5);
+    assert_eq!(facing.current_state().facing, Direction::West);
+}
+
+#[test]
+fn applicability_is_explicit_and_face_locomotion_metadata_is_typed() {
+    let manifest = build_wizard_capability_manifest().expect("manifest should build");
+    for entry in &manifest.capabilities {
+        assert_explicit(&entry.emotional_uses, "emotional_uses", &entry.id);
+        assert_explicit(&entry.valid_entry_states, "valid_entry_states", &entry.id);
+        assert_explicit(&entry.valid_exit_states, "valid_exit_states", &entry.id);
+        assert_explicit(
+            &entry.compatible_face_states,
+            "compatible_face_states",
+            &entry.id,
+        );
+        assert_explicit(
+            &entry.compatible_locomotion_states,
+            "compatible_locomotion_states",
+            &entry.id,
+        );
+        assert_explicit(
+            &entry.transition_limitations,
+            "transition_limitations",
+            &entry.id,
+        );
+        assert_explicit(&entry.narrative_uses, "narrative_uses", &entry.id);
+        assert_explicit(&entry.inappropriate_uses, "inappropriate_uses", &entry.id);
+        if let FallbackTopologyV1::Fallbacks(ids) = &entry.fallback {
+            assert!(!ids.is_empty(), "{} fallback topology", entry.id);
+        }
+    }
+
+    let pose = manifest
+        .capabilities
+        .iter()
+        .find(|entry| entry.kind == CapabilityKind::Pose)
+        .expect("pose");
+    assert_eq!(
+        pose.compatible_face_states,
+        ApplicabilityV1::Applicable(Expression::ALL.to_vec())
+    );
+    assert_eq!(
+        pose.compatible_locomotion_states,
+        ApplicabilityV1::Applicable(Locomotion::ALL.to_vec())
+    );
+}
+
+#[test]
+fn legacy_clip_props_include_exact_staff_and_effect_coverage() {
+    let manifest = build_wizard_capability_manifest().expect("manifest should build");
+    let library = PoseLibrary::reference().expect("pose library");
+    for clip in POSE_CLIPS {
+        let entry = manifest
+            .capabilities
+            .iter()
+            .find(|entry| entry.kind == CapabilityKind::LegacyClip && entry.id == clip.id)
+            .expect("legacy clip capability");
+        let staff_count = clip
+            .steps
+            .iter()
+            .filter(|step| {
+                library
+                    .for_id(step.pose_id)
+                    .expect("step pose")
+                    .motion
+                    .staff_present
+            })
+            .count();
+        let effect_count = clip
+            .steps
+            .iter()
+            .filter(|step| {
+                library
+                    .for_id(step.pose_id)
+                    .expect("step pose")
+                    .motion
+                    .effect_present
+            })
+            .count();
+        let mut expected = BTreeSet::new();
+        add_expected_prop(
+            &mut expected,
+            PropRequirementV1::StaffAllSamples,
+            PropRequirementV1::StaffSomeSamples,
+            staff_count,
+            clip.steps.len(),
+        );
+        add_expected_prop(
+            &mut expected,
+            PropRequirementV1::EffectAllSamples,
+            PropRequirementV1::EffectSomeSamples,
+            effect_count,
+            clip.steps.len(),
+        );
+        assert_eq!(
+            entry
+                .prop_requirements
+                .iter()
+                .copied()
+                .collect::<BTreeSet<_>>(),
+            expected,
+            "{} prop coverage",
+            clip.id
+        );
+    }
+    let staff_combo = manifest
+        .capabilities
+        .iter()
+        .find(|entry| entry.id == "staff_combo")
+        .expect("staff combo");
+    assert!(staff_combo
+        .prop_requirements
+        .contains(&PropRequirementV1::EffectSomeSamples));
+}
+
+#[test]
+fn closed_world_validation_rejects_invented_missing_and_reclassified_runtime_ids() {
+    let valid = build_wizard_capability_manifest().expect("manifest should build");
+
+    let mut missing = valid.clone();
+    missing.capabilities.remove(0);
+    assert!(missing.validate().is_err());
+
+    let mut invented = valid.clone();
+    let mut fake = invented.capabilities[0].clone();
+    fake.id = "invented.capability".to_string();
+    invented.capabilities.push(fake);
+    invented
+        .capabilities
+        .sort_by(|left, right| left.id.cmp(&right.id));
+    assert!(invented.validate().is_err());
+
+    let mut missing_command = valid.clone();
+    missing_command.controller_command_surface.pop();
+    assert!(missing_command.validate().is_err());
+
+    let mut changed_alias = valid;
+    changed_alias
+        .capabilities
+        .iter_mut()
+        .find(|entry| entry.kind == CapabilityKind::PoseAlias)
+        .expect("alias")
+        .id = "fly_front_hover_invented".to_string();
+    changed_alias
+        .capabilities
+        .sort_by(|left, right| left.id.cmp(&right.id));
+    assert!(changed_alias.validate().is_err());
+}
+
+#[test]
 fn malformed_schema_status_bounds_order_and_fallbacks_are_rejected() {
     let valid = build_wizard_capability_manifest().expect("manifest should build");
     let mut cases = Vec::new();
@@ -398,7 +657,7 @@ fn malformed_schema_status_bounds_order_and_fallbacks_are_rejected() {
         .iter_mut()
         .find(|entry| entry.status == CapabilityStatus::ShowcaseOnly)
         .expect("showcase")
-        .fallback_ids = vec!["missing.pose".to_string()];
+        .fallback = FallbackTopologyV1::Fallbacks(vec!["missing.pose".to_string()]);
     cases.push(("unresolved fallback", unresolved_fallback));
 
     let mut self_fallback = valid.clone();
@@ -407,7 +666,7 @@ fn malformed_schema_status_bounds_order_and_fallbacks_are_rejected() {
         .iter_mut()
         .find(|entry| entry.kind == CapabilityKind::MotionClip)
         .expect("motion clip");
-    entry.fallback_ids = vec![entry.id.clone()];
+    entry.fallback = FallbackTopologyV1::Fallbacks(vec![entry.id.clone()]);
     cases.push(("self fallback", self_fallback));
 
     let mut missing_topology = valid.clone();
@@ -423,8 +682,15 @@ fn malformed_schema_status_bounds_order_and_fallbacks_are_rejected() {
         .nominal_ticks = 0;
     cases.push(("duration bound", zero_duration));
 
+    let mut empty_applicability = valid.clone();
+    empty_applicability.capabilities[0].narrative_uses = ApplicabilityV1::Applicable(Vec::new());
+    cases.push(("empty applicability", empty_applicability));
+
     let mut unordered_text = valid;
-    unordered_text.capabilities[0].narrative_uses = vec!["z".to_string(), "a".to_string()];
+    unordered_text.capabilities[0].narrative_uses = ApplicabilityV1::Applicable(vec![
+        NarrativeUseV1::DeliberateStageTravel,
+        NarrativeUseV1::UrgentTravelOrAction,
+    ]);
     cases.push(("metadata order", unordered_text));
 
     for (name, malformed) in cases {
@@ -519,4 +785,24 @@ async fn raw_http_get(addr: SocketAddr, path: &'static str) -> String {
     })
     .await
     .expect("blocking HTTP client")
+}
+
+fn assert_explicit<T>(value: &ApplicabilityV1<T>, field: &str, id: &str) {
+    if let ApplicabilityV1::Applicable(values) = value {
+        assert!(!values.is_empty(), "{id} has empty applicable {field}");
+    }
+}
+
+fn add_expected_prop(
+    expected: &mut BTreeSet<PropRequirementV1>,
+    all: PropRequirementV1,
+    some: PropRequirementV1,
+    count: usize,
+    total: usize,
+) {
+    if count == total {
+        expected.insert(all);
+    } else if count > 0 {
+        expected.insert(some);
+    }
 }

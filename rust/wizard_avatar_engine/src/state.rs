@@ -128,7 +128,7 @@ impl FromStr for Direction {
     }
 }
 
-#[derive(Clone, Copy, Debug, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Clone, Copy, Debug, Hash, Ord, PartialEq, Eq, PartialOrd, Serialize, Deserialize)]
 #[serde(rename_all = "snake_case")]
 pub enum Expression {
     Neutral,
@@ -254,12 +254,16 @@ impl FromStr for MouthShape {
     }
 }
 
-#[derive(Clone, Copy, Debug, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Clone, Copy, Debug, Hash, Ord, PartialEq, Eq, PartialOrd, Serialize, Deserialize)]
 #[serde(rename_all = "snake_case")]
 pub enum Locomotion {
     Idle,
     Walking,
     Turn,
+}
+
+impl Locomotion {
+    pub const ALL: [Self; 3] = [Self::Idle, Self::Walking, Self::Turn];
 }
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Serialize, Deserialize)]

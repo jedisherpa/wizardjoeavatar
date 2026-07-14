@@ -7,16 +7,18 @@ use crate::chat_performance::{
     RenderedMouthPose, CHAT_PERFORMANCE_SCHEMA_VERSION, DURATION_FALLBACK_VERSION,
 };
 use crate::command::COMMAND_SCHEMA_VERSION;
-use crate::controller::RUNTIME_PROCEDURAL_BEHAVIOR_IDS;
+use crate::controller::{ControllerCommandKind, PROCEDURAL_CONTROLLER_COMMANDS};
 use crate::motion_catalog::{shadow_motion_catalog, EMBEDDED_MOTION_GRAPH_SHA256};
 use crate::motion_graph::{
     CapabilityTier, ClipFamily, InterruptPolicy, LoopMode, MotionClip, MotionGraphV1, PoseUseKind,
     MOTION_GRAPH_SCHEMA_VERSION, REQUIRED_RUNTIME_GEOMETRY_COUNT,
 };
 use crate::pose::{PoseDefinition, PoseLibrary, PoseMotionFamily};
-use crate::pose_asset::{embedded_pose_archive_sha256, IMPORTED_POSE_SCHEMA_VERSION};
+use crate::pose_asset::{
+    embedded_pose_archive_sha256, load_embedded_pose_library, IMPORTED_POSE_SCHEMA_VERSION,
+};
 use crate::pose_clip::{PoseClipDefinition, POSE_CLIPS};
-use crate::state::{Direction, Expression, WizardState};
+use crate::state::{Direction, Expression, Locomotion, WizardState};
 use serde::{Deserialize, Serialize};
 use sha2::{Digest, Sha256};
 use std::collections::{BTreeMap, BTreeSet};
@@ -41,6 +43,7 @@ static CAPABILITY_DOCUMENT: OnceLock<Result<CapabilityDocumentV1, String>> = Onc
 #[serde(rename_all = "snake_case")]
 pub enum CapabilityKind {
     Pose,
+    PoseAlias,
     LegacyClip,
     MotionClip,
     Expression,
@@ -123,6 +126,7 @@ pub enum LegacyClipCategoryV1 {
 #[serde(tag = "domain", content = "value", rename_all = "snake_case")]
 pub enum CapabilityCategoryV1 {
     PoseFamily(PoseFamilyV1),
+    PoseAlias,
     LegacyClip(LegacyClipCategoryV1),
     MotionClip(ClipFamily),
     FaceExpression,
@@ -133,6 +137,8 @@ pub enum CapabilityCategoryV1 {
     GazeIntent,
     VisemeIntent,
     RootMotion,
+    FacingControl,
+    ControllerControl,
     PathMotion,
     SpeechFallback,
     BlinkFallback,
@@ -213,6 +219,71 @@ pub enum QualityStatusV1 {
     ShadowValidatedNotRuntimeWired,
     ContractValidatedNotRuntimeRendered,
     ShowcaseApprovedNotGeneralPurpose,
+    RuntimeAliasValidated,
+}
+
+#[derive(Clone, Debug, Eq, PartialEq, Serialize, Deserialize)]
+#[serde(tag = "applicability", content = "values", rename_all = "snake_case")]
+pub enum ApplicabilityV1<T> {
+    NotApplicable,
+    Applicable(Vec<T>),
+}
+
+#[derive(Clone, Debug, Eq, PartialEq, Serialize, Deserialize)]
+#[serde(tag = "topology", content = "ids", rename_all = "snake_case")]
+pub enum FallbackTopologyV1 {
+    NotApplicable,
+    Terminal,
+    Fallbacks(Vec<String>),
+}
+
+#[derive(Clone, Copy, Debug, Eq, Hash, Ord, PartialEq, PartialOrd, Serialize, Deserialize)]
+#[serde(rename_all = "snake_case")]
+pub enum TransitionLimitationV1 {
+    RawPoseBypassesSemanticPolicy,
+    NotMarkerAwareMotionDirector,
+    NotProductionControllerWired,
+    NotConsumedByProductionRenderer,
+}
+
+#[derive(Clone, Copy, Debug, Eq, Hash, Ord, PartialEq, PartialOrd, Serialize, Deserialize)]
+#[serde(rename_all = "snake_case")]
+pub enum NarrativeUseV1 {
+    UrgentTravelOrAction,
+    DeliberateStageTravel,
+    AirborneStaging,
+    AuthoredActionAccent,
+    AuthoredRecoveryOrArrival,
+    GroundedPerformanceAccent,
+    LowOrBracedStaging,
+    NeutralStagingAndDirectionalFallback,
+    StageTravel,
+    FlightShowcaseOnly,
+    AuthoredActionBeat,
+    PositiveClimax,
+    SpokenExplanationOrSocialBeat,
+    EmotionReferenceOrShowcase,
+    AuthoredStillness,
+    ReceptiveAttention,
+    InternalThoughtBeat,
+    PreSpeechAnticipation,
+    SpokenPhrasePerformance,
+    ClarificationEmphasis,
+    BoundedWaitingState,
+    ErrorAcknowledgment,
+    InterruptionAndRecovery,
+    StaffLedActionBeat,
+    ReactionAccent,
+    EmotionAccent,
+}
+
+#[derive(Clone, Copy, Debug, Eq, Hash, Ord, PartialEq, PartialOrd, Serialize, Deserialize)]
+#[serde(rename_all = "snake_case")]
+pub enum InappropriateUseV1 {
+    UnconstrainedModelDirectSelection,
+    MediaTimeChoreographyWithoutScore,
+    AdvertisingAsRuntimeBeforeWiring,
+    AdvertisingAsVisiblyImplemented,
 }
 
 #[derive(Clone, Debug, Eq, PartialEq, Serialize, Deserialize)]
@@ -239,6 +310,12 @@ pub struct PoseCoverageV1 {
     pub showcase_approval: Option<ShowcaseApprovalV1>,
 }
 
+#[derive(Clone, Debug, Eq, PartialEq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct PoseAliasV1 {
+    pub target_pose_id: String,
+}
+
 #[derive(Clone, Debug, Eq, Ord, PartialEq, PartialOrd, Serialize, Deserialize)]
 #[serde(deny_unknown_fields)]
 pub struct StateFacingFallbackV1 {
@@ -263,25 +340,29 @@ pub struct CapabilityEntryV1 {
     pub kind: CapabilityKind,
     pub status: CapabilityStatus,
     pub category: CapabilityCategoryV1,
-    pub emotional_uses: Vec<Emotion>,
+    pub emotional_uses: ApplicabilityV1<Emotion>,
     pub energy: u8,
     pub directions: Vec<Direction>,
     pub duration: Option<TickDurationV1>,
     pub loop_behavior: LoopBehaviorV1,
     pub interruptibility: InterruptibilityV1,
-    pub valid_entry_states: Vec<ChatTurnState>,
-    pub valid_exit_states: Vec<ChatTurnState>,
+    pub valid_entry_states: ApplicabilityV1<ChatTurnState>,
+    pub valid_exit_states: ApplicabilityV1<ChatTurnState>,
     pub face_policy: FacePolicyV1,
+    pub compatible_face_states: ApplicabilityV1<Expression>,
+    pub compatible_locomotion_states: ApplicabilityV1<Locomotion>,
     pub compatible_motion_profiles: Vec<MotionProfile>,
+    pub controller_commands: ApplicabilityV1<ControllerCommandKind>,
     pub runtime_surfaces: Vec<RuntimeSurfaceV1>,
     pub prop_requirements: Vec<PropRequirementV1>,
     pub runtime_cost: RuntimeCostV1,
     pub quality_status: QualityStatusV1,
     pub pose_coverage: Option<PoseCoverageV1>,
-    pub transition_limitations: Vec<String>,
-    pub narrative_uses: Vec<String>,
-    pub inappropriate_uses: Vec<String>,
-    pub fallback_ids: Vec<String>,
+    pub pose_alias: Option<PoseAliasV1>,
+    pub transition_limitations: ApplicabilityV1<TransitionLimitationV1>,
+    pub narrative_uses: ApplicabilityV1<NarrativeUseV1>,
+    pub inappropriate_uses: ApplicabilityV1<InappropriateUseV1>,
+    pub fallback: FallbackTopologyV1,
 }
 
 #[derive(Clone, Debug, Eq, PartialEq, Serialize, Deserialize)]
@@ -298,6 +379,7 @@ pub struct CapabilityManifestV1 {
     pub motion_graph_schema_version: u16,
     pub motion_graph_sha256: String,
     pub feelings: Vec<Emotion>,
+    pub controller_command_surface: Vec<ControllerCommandKind>,
     pub state_facing_fallbacks: Vec<StateFacingFallbackV1>,
     pub support: RuntimeSupportFlagsV1,
     pub capabilities: Vec<CapabilityEntryV1>,
@@ -332,6 +414,13 @@ impl CapabilityManifestV1 {
         if self.feelings != non_neutral_emotions() {
             return Err("feelings must be the exact ten non-neutral emotions".to_string());
         }
+        validate_sorted_unique(
+            &self.controller_command_surface,
+            "controller_command_surface",
+        )?;
+        if self.controller_command_surface != sorted_unique(ControllerCommandKind::ALL) {
+            return Err("controller command surface is not the exact runtime registry".to_string());
+        }
         validate_sorted_unique(&self.state_facing_fallbacks, "state_facing_fallbacks")?;
         if self.capabilities.is_empty() || self.capabilities.len() > MAX_CAPABILITIES {
             return Err("capability count is outside the bounded manifest range".to_string());
@@ -354,6 +443,12 @@ impl CapabilityManifestV1 {
         validate_feeling_entries(&ids, &self.feelings)?;
         validate_fallback_topology(&ids)?;
         validate_state_facing_fallbacks(&ids, &self.state_facing_fallbacks)?;
+        let expected = build_unvalidated_wizard_capability_manifest()?;
+        if self != &expected {
+            return Err(
+                "capability manifest differs from the exact loaded runtime registries".to_string(),
+            );
+        }
         Ok(())
     }
 
@@ -441,8 +536,9 @@ impl RuntimeVersionsV1 {
     }
 }
 
-pub fn build_wizard_capability_manifest() -> Result<CapabilityManifestV1, String> {
+fn build_unvalidated_wizard_capability_manifest() -> Result<CapabilityManifestV1, String> {
     let library = PoseLibrary::reference()?;
+    let imported = load_embedded_pose_library()?;
     let catalog = shadow_motion_catalog()?;
     let graph = &catalog.graph;
     let coverage = graph
@@ -485,6 +581,12 @@ pub fn build_wizard_capability_manifest() -> Result<CapabilityManifestV1, String
             directional_pose_ids.contains(pose_id),
         ));
     }
+    for (alias_id, target_pose_id) in &imported.aliases {
+        let target = library
+            .for_id(target_pose_id)
+            .ok_or_else(|| format!("runtime alias {alias_id} lost target {target_pose_id}"))?;
+        capabilities.push(pose_alias_entry(alias_id, target_pose_id, target));
+    }
     capabilities.extend(
         POSE_CLIPS
             .iter()
@@ -523,6 +625,7 @@ pub fn build_wizard_capability_manifest() -> Result<CapabilityManifestV1, String
         motion_graph_schema_version: graph.schema_version,
         motion_graph_sha256: EMBEDDED_MOTION_GRAPH_SHA256.to_string(),
         feelings: non_neutral_emotions(),
+        controller_command_surface: sorted_unique(ControllerCommandKind::ALL),
         state_facing_fallbacks,
         support: RuntimeSupportFlagsV1 {
             deterministic_media_scores: false,
@@ -532,6 +635,11 @@ pub fn build_wizard_capability_manifest() -> Result<CapabilityManifestV1, String
         },
         capabilities,
     };
+    Ok(manifest)
+}
+
+pub fn build_wizard_capability_manifest() -> Result<CapabilityManifestV1, String> {
+    let manifest = build_unvalidated_wizard_capability_manifest()?;
     manifest.validate()?;
     Ok(manifest)
 }
@@ -593,25 +701,29 @@ fn pose_entry(
     if pose.motion.effect_present {
         props.push(PropRequirementV1::EffectAllSamples);
     }
-    let fallback_ids = showcase_approval
+    let fallback = showcase_approval
         .as_ref()
-        .map(|approval| vec![approval.fallback_pose_id.clone()])
-        .unwrap_or_default();
+        .map_or(FallbackTopologyV1::Terminal, |approval| {
+            FallbackTopologyV1::Fallbacks(vec![approval.fallback_pose_id.clone()])
+        });
     CapabilityEntryV1 {
         id: pose.id.clone(),
         kind: CapabilityKind::Pose,
         status,
         category: CapabilityCategoryV1::PoseFamily(pose_family(pose.motion.family)),
-        emotional_uses: Vec::new(),
+        emotional_uses: ApplicabilityV1::NotApplicable,
         energy: pose_family_energy(pose.motion.family),
         directions: vec![pose.direction],
         duration: None,
         loop_behavior: LoopBehaviorV1::NotApplicable,
         interruptibility: InterruptibilityV1::RawPoseReplace,
-        valid_entry_states: Vec::new(),
-        valid_exit_states: Vec::new(),
+        valid_entry_states: ApplicabilityV1::NotApplicable,
+        valid_exit_states: ApplicabilityV1::NotApplicable,
         face_policy: FacePolicyV1::LegacyOverlay,
+        compatible_face_states: applicable(Expression::ALL),
+        compatible_locomotion_states: applicable(Locomotion::ALL),
         compatible_motion_profiles: Vec::new(),
+        controller_commands: applicable([ControllerCommandKind::Pose]),
         runtime_surfaces,
         prop_requirements: props,
         runtime_cost: RuntimeCostV1::BoundedCellProjection,
@@ -626,12 +738,49 @@ fn pose_entry(
             approved_facings: sorted_unique(coverage.approved_facings.iter().copied()),
             showcase_approval,
         }),
-        transition_limitations: vec![
-            "raw pose selection bypasses semantic performance policy".to_string()
-        ],
-        narrative_uses: pose_family_narrative_uses(pose.motion.family),
-        inappropriate_uses: vec!["direct selection by an unconstrained model".to_string()],
-        fallback_ids,
+        pose_alias: None,
+        transition_limitations: applicable([TransitionLimitationV1::RawPoseBypassesSemanticPolicy]),
+        narrative_uses: applicable(pose_family_narrative_uses(pose.motion.family)),
+        inappropriate_uses: applicable([InappropriateUseV1::UnconstrainedModelDirectSelection]),
+        fallback,
+    }
+}
+
+fn pose_alias_entry(
+    alias_id: &str,
+    target_pose_id: &str,
+    target: &PoseDefinition,
+) -> CapabilityEntryV1 {
+    CapabilityEntryV1 {
+        id: alias_id.to_string(),
+        kind: CapabilityKind::PoseAlias,
+        status: CapabilityStatus::ActiveLegacy,
+        category: CapabilityCategoryV1::PoseAlias,
+        emotional_uses: ApplicabilityV1::NotApplicable,
+        energy: pose_family_energy(target.motion.family),
+        directions: vec![target.direction],
+        duration: None,
+        loop_behavior: LoopBehaviorV1::NotApplicable,
+        interruptibility: InterruptibilityV1::RawPoseReplace,
+        valid_entry_states: ApplicabilityV1::NotApplicable,
+        valid_exit_states: ApplicabilityV1::NotApplicable,
+        face_policy: FacePolicyV1::LegacyOverlay,
+        compatible_face_states: applicable(Expression::ALL),
+        compatible_locomotion_states: applicable(Locomotion::ALL),
+        compatible_motion_profiles: Vec::new(),
+        controller_commands: applicable([ControllerCommandKind::Pose]),
+        runtime_surfaces: vec![RuntimeSurfaceV1::DirectPoseCommand],
+        prop_requirements: Vec::new(),
+        runtime_cost: RuntimeCostV1::BoundedCellProjection,
+        quality_status: QualityStatusV1::RuntimeAliasValidated,
+        pose_coverage: None,
+        pose_alias: Some(PoseAliasV1 {
+            target_pose_id: target_pose_id.to_string(),
+        }),
+        transition_limitations: applicable([TransitionLimitationV1::RawPoseBypassesSemanticPolicy]),
+        narrative_uses: applicable(pose_family_narrative_uses(target.motion.family)),
+        inappropriate_uses: applicable([InappropriateUseV1::UnconstrainedModelDirectSelection]),
+        fallback: FallbackTopologyV1::Fallbacks(vec![target_pose_id.to_string()]),
     }
 }
 
@@ -653,13 +802,36 @@ fn legacy_clip_entry(
                 .is_some_and(|pose| pose.motion.staff_present)
         })
         .count();
+    let effect_count = clip
+        .steps
+        .iter()
+        .filter(|step| {
+            library
+                .for_id(step.pose_id)
+                .is_some_and(|pose| pose.motion.effect_present)
+        })
+        .count();
+    let mut props = Vec::new();
+    props.extend(prop_coverage(
+        PropRequirementV1::StaffAllSamples,
+        PropRequirementV1::StaffSomeSamples,
+        staff_count,
+        clip.steps.len(),
+    ));
+    props.extend(prop_coverage(
+        PropRequirementV1::EffectAllSamples,
+        PropRequirementV1::EffectSomeSamples,
+        effect_count,
+        clip.steps.len(),
+    ));
+    props.sort();
     let category = legacy_clip_category(clip.id)?;
     Ok(CapabilityEntryV1 {
         id: clip.id.to_string(),
         kind: CapabilityKind::LegacyClip,
         status: CapabilityStatus::ActiveLegacy,
         category: CapabilityCategoryV1::LegacyClip(category),
-        emotional_uses: legacy_clip_emotions(clip.id),
+        emotional_uses: applicability(legacy_clip_emotions(clip.id)),
         energy: legacy_clip_energy(category),
         directions,
         duration: Some(TickDurationV1 {
@@ -676,29 +848,26 @@ fn legacy_clip_entry(
             LoopBehaviorV1::Once
         },
         interruptibility: InterruptibilityV1::LegacyGenerationReplace,
-        valid_entry_states: Vec::new(),
-        valid_exit_states: Vec::new(),
+        valid_entry_states: ApplicabilityV1::NotApplicable,
+        valid_exit_states: ApplicabilityV1::NotApplicable,
         face_policy: FacePolicyV1::LegacyOverlay,
+        compatible_face_states: applicable(Expression::ALL),
+        compatible_locomotion_states: applicable(Locomotion::ALL),
         compatible_motion_profiles: Vec::new(),
+        controller_commands: applicable([ControllerCommandKind::PoseClip]),
         runtime_surfaces: vec![
             RuntimeSurfaceV1::LegacyPoseClip,
             RuntimeSurfaceV1::LegacyController,
         ],
-        prop_requirements: prop_coverage(
-            PropRequirementV1::StaffAllSamples,
-            PropRequirementV1::StaffSomeSamples,
-            staff_count,
-            clip.steps.len(),
-        )
-        .into_iter()
-        .collect(),
+        prop_requirements: props,
         runtime_cost: RuntimeCostV1::BoundedPoseSequence,
         quality_status: RuntimeCostV1::BoundedPoseSequence.into_quality(),
         pose_coverage: None,
-        transition_limitations: vec!["not executed by the marker-aware motion director".to_string()],
-        narrative_uses: legacy_clip_narrative_uses(category),
-        inappropriate_uses: vec!["media-time choreography without a score".to_string()],
-        fallback_ids: Vec::new(),
+        pose_alias: None,
+        transition_limitations: applicable([TransitionLimitationV1::NotMarkerAwareMotionDirector]),
+        narrative_uses: applicable(legacy_clip_narrative_uses(category)),
+        inappropriate_uses: applicable([InappropriateUseV1::MediaTimeChoreographyWithoutScore]),
+        fallback: FallbackTopologyV1::NotApplicable,
     })
 }
 
@@ -756,7 +925,7 @@ fn motion_clip_entry(
             .filter(|edge| edge.source_clip_id == clip.clip_id)
             .flat_map(|edge| edge.allowed_turn_states.iter().copied()),
     );
-    let fallback_ids = clip
+    let fallback_ids: Vec<String> = clip
         .reduced_motion_clip_id
         .iter()
         .filter(|fallback| fallback.as_str() != clip.clip_id)
@@ -767,7 +936,7 @@ fn motion_clip_entry(
         kind: CapabilityKind::MotionClip,
         status: CapabilityStatus::ShadowValidated,
         category: CapabilityCategoryV1::MotionClip(clip.family),
-        emotional_uses: clip_family_emotions(clip.family),
+        emotional_uses: applicability(clip_family_emotions(clip.family)),
         energy: clip_family_energy(clip.family),
         directions: directions.into_iter().collect(),
         duration: Some(TickDurationV1 {
@@ -784,8 +953,8 @@ fn motion_clip_entry(
             LoopMode::MarkedSegment => LoopBehaviorV1::MarkedSegment,
         },
         interruptibility: interruptibility(clip.interrupt_policy),
-        valid_entry_states,
-        valid_exit_states,
+        valid_entry_states: applicability(valid_entry_states),
+        valid_exit_states: applicability(valid_exit_states),
         face_policy: if clip
             .owned_channels
             .regions
@@ -795,6 +964,16 @@ fn motion_clip_entry(
         } else {
             FacePolicyV1::PreserveFaceRegion
         },
+        compatible_face_states: if clip
+            .owned_channels
+            .regions
+            .contains(&crate::motion_graph::PerformanceRegion::FaceEmotion)
+        {
+            ApplicabilityV1::NotApplicable
+        } else {
+            applicable(Expression::ALL)
+        },
+        compatible_locomotion_states: clip_family_locomotion_states(clip.family),
         compatible_motion_profiles: sorted_unique(
             graph
                 .edges
@@ -804,15 +983,21 @@ fn motion_clip_entry(
                 })
                 .flat_map(|edge| edge.allowed_motion_profiles.iter().copied()),
         ),
+        controller_commands: ApplicabilityV1::NotApplicable,
         runtime_surfaces: vec![RuntimeSurfaceV1::ShadowMotionGraph],
         prop_requirements: props,
         runtime_cost: RuntimeCostV1::BoundedMarkerTimeline,
         quality_status: QualityStatusV1::ShadowValidatedNotRuntimeWired,
         pose_coverage: None,
-        transition_limitations: vec!["not yet consumed by the production controller".to_string()],
-        narrative_uses: clip_family_narrative_uses(clip.family),
-        inappropriate_uses: vec!["advertising as runtime active before wiring".to_string()],
-        fallback_ids,
+        pose_alias: None,
+        transition_limitations: applicable([TransitionLimitationV1::NotProductionControllerWired]),
+        narrative_uses: applicable(clip_family_narrative_uses(clip.family)),
+        inappropriate_uses: applicable([InappropriateUseV1::AdvertisingAsRuntimeBeforeWiring]),
+        fallback: if fallback_ids.is_empty() {
+            FallbackTopologyV1::Terminal
+        } else {
+            FallbackTopologyV1::Fallbacks(fallback_ids)
+        },
     })
 }
 
@@ -820,15 +1005,20 @@ fn expression_entries() -> Vec<CapabilityEntryV1> {
     Expression::ALL
         .into_iter()
         .map(|expression| {
-            simple_entry(
+            let mut entry = simple_entry(
                 format!("expression.{}", expression.as_str()),
                 CapabilityKind::Expression,
                 CapabilityStatus::ActiveLegacy,
                 CapabilityCategoryV1::FaceExpression,
                 20,
-                RuntimeSurfaceV1::LegacyController,
-                QualityStatusV1::RuntimeRendered,
-            )
+                simple_runtime(
+                    RuntimeSurfaceV1::LegacyController,
+                    QualityStatusV1::RuntimeRendered,
+                    Some(ControllerCommandKind::Expression),
+                ),
+            );
+            entry.compatible_face_states = applicable([expression]);
+            entry
         })
         .collect()
 }
@@ -843,8 +1033,11 @@ fn mouth_entries() -> Result<Vec<CapabilityEntryV1>, String> {
                 CapabilityStatus::ActiveLegacy,
                 CapabilityCategoryV1::MouthPose,
                 15,
-                RuntimeSurfaceV1::LegacyController,
-                QualityStatusV1::RuntimeRenderedDurationDriven,
+                simple_runtime(
+                    RuntimeSurfaceV1::LegacyController,
+                    QualityStatusV1::RuntimeRenderedDurationDriven,
+                    Some(ControllerCommandKind::Mouth),
+                ),
             ))
         })
         .collect()
@@ -853,18 +1046,23 @@ fn mouth_entries() -> Result<Vec<CapabilityEntryV1>, String> {
 fn shadow_semantic_entries() -> Result<Vec<CapabilityEntryV1>, String> {
     let mut entries = Vec::new();
     for state in ChatTurnState::ALL {
-        entries.push(simple_shadow_entry(
+        let mut entry = simple_shadow_entry(
             format!("chat_state.{}", enum_wire_name(state, "chat state")?),
             CapabilityKind::ChatState,
             CapabilityCategoryV1::ChatState,
-        ));
+        );
+        entry.valid_entry_states = applicable([state]);
+        entry.valid_exit_states = applicable([state]);
+        entries.push(entry);
     }
     for emotion in non_neutral_emotions() {
-        entries.push(simple_shadow_entry(
+        let mut entry = simple_shadow_entry(
             format!("emotion.{}", enum_wire_name(emotion, "emotion")?),
             CapabilityKind::Emotion,
             CapabilityCategoryV1::EmotionIntent,
-        ));
+        );
+        entry.emotional_uses = applicable([emotion]);
+        entries.push(entry);
     }
     for gesture in GestureKind::ALL {
         entries.push(simple_shadow_entry(
@@ -891,34 +1089,116 @@ fn shadow_semantic_entries() -> Result<Vec<CapabilityEntryV1>, String> {
 }
 
 fn procedural_entries() -> Result<Vec<CapabilityEntryV1>, String> {
-    RUNTIME_PROCEDURAL_BEHAVIOR_IDS
+    let mut entries = PROCEDURAL_CONTROLLER_COMMANDS
         .into_iter()
-        .map(|id| {
-            let (category, energy) = match id {
-                "behavior.move" | "behavior.return_to_center" => {
-                    (CapabilityCategoryV1::RootMotion, 35)
-                }
-                "behavior.walk_left"
-                | "behavior.walk_right"
-                | "behavior.walk_forward"
-                | "behavior.walk_backward" => (CapabilityCategoryV1::RootMotion, 40),
-                "behavior.path" | "behavior.circle" => (CapabilityCategoryV1::PathMotion, 45),
-                "behavior.figure_eight" => (CapabilityCategoryV1::PathMotion, 50),
-                "behavior.speaking_duration" => (CapabilityCategoryV1::SpeechFallback, 25),
-                "behavior.periodic_blink" => (CapabilityCategoryV1::BlinkFallback, 5),
-                _ => return Err(format!("unclassified controller procedural behavior {id}")),
-            };
-            Ok(simple_entry(
-                id.to_string(),
-                CapabilityKind::ProceduralBehavior,
-                CapabilityStatus::ActiveLegacy,
-                category,
-                energy,
-                RuntimeSurfaceV1::LegacyController,
-                QualityStatusV1::RuntimeActiveLegacy,
+        .map(procedural_command_entry)
+        .collect::<Result<Vec<_>, _>>()?;
+    entries.push(simple_entry(
+        "behavior.speaking_duration".to_string(),
+        CapabilityKind::ProceduralBehavior,
+        CapabilityStatus::ActiveLegacy,
+        CapabilityCategoryV1::SpeechFallback,
+        25,
+        simple_runtime(
+            RuntimeSurfaceV1::LegacyController,
+            QualityStatusV1::RuntimeActiveLegacy,
+            Some(ControllerCommandKind::Speak),
+        ),
+    ));
+    entries.push(simple_entry(
+        "behavior.periodic_blink".to_string(),
+        CapabilityKind::ProceduralBehavior,
+        CapabilityStatus::ActiveLegacy,
+        CapabilityCategoryV1::BlinkFallback,
+        5,
+        simple_runtime(
+            RuntimeSurfaceV1::LegacyController,
+            QualityStatusV1::RuntimeActiveLegacy,
+            None,
+        ),
+    ));
+    Ok(entries)
+}
+
+fn procedural_command_entry(command: ControllerCommandKind) -> Result<CapabilityEntryV1, String> {
+    let (id, category, energy) = match command {
+        ControllerCommandKind::Move => ("behavior.move", CapabilityCategoryV1::RootMotion, 35),
+        ControllerCommandKind::MoveRelative => (
+            "behavior.move_relative",
+            CapabilityCategoryV1::RootMotion,
+            35,
+        ),
+        ControllerCommandKind::Path => ("behavior.path", CapabilityCategoryV1::PathMotion, 45),
+        ControllerCommandKind::Circle => ("behavior.circle", CapabilityCategoryV1::PathMotion, 45),
+        ControllerCommandKind::FigureEight => (
+            "behavior.figure_eight",
+            CapabilityCategoryV1::PathMotion,
+            50,
+        ),
+        ControllerCommandKind::Face => ("behavior.face", CapabilityCategoryV1::FacingControl, 10),
+        ControllerCommandKind::Stop => {
+            ("behavior.stop", CapabilityCategoryV1::ControllerControl, 5)
+        }
+        ControllerCommandKind::Reset => {
+            ("behavior.reset", CapabilityCategoryV1::ControllerControl, 5)
+        }
+        ControllerCommandKind::ReturnToCenter => (
+            "behavior.return_to_center",
+            CapabilityCategoryV1::RootMotion,
+            35,
+        ),
+        ControllerCommandKind::WalkLeft => {
+            ("behavior.walk_left", CapabilityCategoryV1::RootMotion, 40)
+        }
+        ControllerCommandKind::WalkRight => {
+            ("behavior.walk_right", CapabilityCategoryV1::RootMotion, 40)
+        }
+        ControllerCommandKind::WalkForward => (
+            "behavior.walk_forward",
+            CapabilityCategoryV1::RootMotion,
+            40,
+        ),
+        ControllerCommandKind::WalkBackward => (
+            "behavior.walk_backward",
+            CapabilityCategoryV1::RootMotion,
+            40,
+        ),
+        _ => {
+            return Err(format!(
+                "unclassified procedural controller command {command:?}"
             ))
-        })
-        .collect()
+        }
+    };
+    Ok(simple_entry(
+        id.to_string(),
+        CapabilityKind::ProceduralBehavior,
+        CapabilityStatus::ActiveLegacy,
+        category,
+        energy,
+        simple_runtime(
+            RuntimeSurfaceV1::LegacyController,
+            QualityStatusV1::RuntimeActiveLegacy,
+            Some(command),
+        ),
+    ))
+}
+
+struct SimpleRuntimeMetadata {
+    surface: RuntimeSurfaceV1,
+    quality_status: QualityStatusV1,
+    controller_command: Option<ControllerCommandKind>,
+}
+
+fn simple_runtime(
+    surface: RuntimeSurfaceV1,
+    quality_status: QualityStatusV1,
+    controller_command: Option<ControllerCommandKind>,
+) -> SimpleRuntimeMetadata {
+    SimpleRuntimeMetadata {
+        surface,
+        quality_status,
+        controller_command,
+    }
 }
 
 fn simple_entry(
@@ -927,33 +1207,39 @@ fn simple_entry(
     status: CapabilityStatus,
     category: CapabilityCategoryV1,
     energy: u8,
-    surface: RuntimeSurfaceV1,
-    quality_status: QualityStatusV1,
+    runtime: SimpleRuntimeMetadata,
 ) -> CapabilityEntryV1 {
     CapabilityEntryV1 {
         id,
         kind,
         status,
         category,
-        emotional_uses: Vec::new(),
+        emotional_uses: ApplicabilityV1::NotApplicable,
         energy,
         directions: Vec::new(),
         duration: None,
         loop_behavior: LoopBehaviorV1::StateDriven,
         interruptibility: InterruptibilityV1::Immediate,
-        valid_entry_states: Vec::new(),
-        valid_exit_states: Vec::new(),
+        valid_entry_states: ApplicabilityV1::NotApplicable,
+        valid_exit_states: ApplicabilityV1::NotApplicable,
         face_policy: FacePolicyV1::LegacyOverlay,
+        compatible_face_states: applicable(Expression::ALL),
+        compatible_locomotion_states: applicable(Locomotion::ALL),
         compatible_motion_profiles: Vec::new(),
-        runtime_surfaces: vec![surface],
+        controller_commands: runtime
+            .controller_command
+            .map(|command| applicable([command]))
+            .unwrap_or(ApplicabilityV1::NotApplicable),
+        runtime_surfaces: vec![runtime.surface],
         prop_requirements: Vec::new(),
         runtime_cost: RuntimeCostV1::ConstantTimeStateUpdate,
-        quality_status,
+        quality_status: runtime.quality_status,
         pose_coverage: None,
-        transition_limitations: Vec::new(),
-        narrative_uses: Vec::new(),
-        inappropriate_uses: Vec::new(),
-        fallback_ids: Vec::new(),
+        pose_alias: None,
+        transition_limitations: ApplicabilityV1::NotApplicable,
+        narrative_uses: ApplicabilityV1::NotApplicable,
+        inappropriate_uses: ApplicabilityV1::NotApplicable,
+        fallback: FallbackTopologyV1::NotApplicable,
     }
 }
 
@@ -967,25 +1253,31 @@ fn simple_shadow_entry(
         kind,
         status: CapabilityStatus::ShadowValidated,
         category,
-        emotional_uses: Vec::new(),
+        emotional_uses: ApplicabilityV1::NotApplicable,
         energy: 25,
         directions: Vec::new(),
         duration: None,
         loop_behavior: LoopBehaviorV1::EventDriven,
         interruptibility: InterruptibilityV1::ContractDefined,
-        valid_entry_states: Vec::new(),
-        valid_exit_states: Vec::new(),
+        valid_entry_states: ApplicabilityV1::NotApplicable,
+        valid_exit_states: ApplicabilityV1::NotApplicable,
         face_policy: FacePolicyV1::ContractOnlyNotRendered,
+        compatible_face_states: ApplicabilityV1::NotApplicable,
+        compatible_locomotion_states: ApplicabilityV1::NotApplicable,
         compatible_motion_profiles: Vec::new(),
+        controller_commands: ApplicabilityV1::NotApplicable,
         runtime_surfaces: vec![RuntimeSurfaceV1::TypedChatContract],
         prop_requirements: Vec::new(),
         runtime_cost: RuntimeCostV1::NotMeasuredUntilRuntimeWiring,
         quality_status: QualityStatusV1::ContractValidatedNotRuntimeRendered,
         pose_coverage: None,
-        transition_limitations: vec!["not consumed by the production renderer".to_string()],
-        narrative_uses: Vec::new(),
-        inappropriate_uses: vec!["advertising as visibly implemented".to_string()],
-        fallback_ids: Vec::new(),
+        pose_alias: None,
+        transition_limitations: applicable([
+            TransitionLimitationV1::NotConsumedByProductionRenderer,
+        ]),
+        narrative_uses: ApplicabilityV1::NotApplicable,
+        inappropriate_uses: applicable([InappropriateUseV1::AdvertisingAsVisiblyImplemented]),
+        fallback: FallbackTopologyV1::NotApplicable,
     }
 }
 
@@ -993,20 +1285,31 @@ fn validate_entry(entry: &CapabilityEntryV1) -> Result<(), String> {
     if entry.energy > 100 {
         return Err(format!("{} energy exceeds 100", entry.id));
     }
-    validate_sorted_unique(&entry.emotional_uses, "emotional_uses")?;
+    validate_applicability(&entry.emotional_uses, "emotional_uses")?;
     validate_sorted_unique(&entry.directions, "directions")?;
-    validate_sorted_unique(&entry.valid_entry_states, "valid_entry_states")?;
-    validate_sorted_unique(&entry.valid_exit_states, "valid_exit_states")?;
+    validate_applicability(&entry.valid_entry_states, "valid_entry_states")?;
+    validate_applicability(&entry.valid_exit_states, "valid_exit_states")?;
+    validate_applicability(&entry.compatible_face_states, "compatible_face_states")?;
+    validate_applicability(
+        &entry.compatible_locomotion_states,
+        "compatible_locomotion_states",
+    )?;
     validate_sorted_unique(
         &entry.compatible_motion_profiles,
         "compatible_motion_profiles",
     )?;
+    validate_applicability(&entry.controller_commands, "controller_commands")?;
     validate_sorted_unique(&entry.runtime_surfaces, "runtime_surfaces")?;
     validate_sorted_unique(&entry.prop_requirements, "prop_requirements")?;
-    validate_text_values(&entry.transition_limitations, "transition_limitations")?;
-    validate_text_values(&entry.narrative_uses, "narrative_uses")?;
-    validate_text_values(&entry.inappropriate_uses, "inappropriate_uses")?;
-    validate_ids(&entry.fallback_ids, "fallback_ids")?;
+    validate_applicability(&entry.transition_limitations, "transition_limitations")?;
+    validate_applicability(&entry.narrative_uses, "narrative_uses")?;
+    validate_applicability(&entry.inappropriate_uses, "inappropriate_uses")?;
+    if let FallbackTopologyV1::Fallbacks(ids) = &entry.fallback {
+        if ids.is_empty() {
+            return Err(format!("{} has an empty applicable fallback", entry.id));
+        }
+        validate_ids(ids, "fallback")?;
+    }
     if let Some(duration) = &entry.duration {
         if duration.nominal_ticks == 0 || duration.nominal_ticks > MAX_TICK_DURATION {
             return Err(format!("{} has invalid nominal duration", entry.id));
@@ -1031,11 +1334,15 @@ fn validate_entry(entry: &CapabilityEntryV1) -> Result<(), String> {
 
     match entry.kind {
         CapabilityKind::Pose => validate_pose_entry(entry),
+        CapabilityKind::PoseAlias => validate_pose_alias_entry(entry),
         CapabilityKind::LegacyClip
         | CapabilityKind::Expression
         | CapabilityKind::MouthPose
         | CapabilityKind::ProceduralBehavior => {
-            if entry.status != CapabilityStatus::ActiveLegacy || entry.pose_coverage.is_some() {
+            if entry.status != CapabilityStatus::ActiveLegacy
+                || entry.pose_coverage.is_some()
+                || entry.pose_alias.is_some()
+            {
                 return Err(format!("{} has an invalid active legacy status", entry.id));
             }
             Ok(())
@@ -1046,7 +1353,10 @@ fn validate_entry(entry: &CapabilityEntryV1) -> Result<(), String> {
         | CapabilityKind::GestureIntent
         | CapabilityKind::GazeIntent
         | CapabilityKind::VisemeIntent => {
-            if entry.status != CapabilityStatus::ShadowValidated || entry.pose_coverage.is_some() {
+            if entry.status != CapabilityStatus::ShadowValidated
+                || entry.pose_coverage.is_some()
+                || entry.pose_alias.is_some()
+            {
                 return Err(format!("{} has an invalid shadow status", entry.id));
             }
             Ok(())
@@ -1054,7 +1364,28 @@ fn validate_entry(entry: &CapabilityEntryV1) -> Result<(), String> {
     }
 }
 
+fn validate_pose_alias_entry(entry: &CapabilityEntryV1) -> Result<(), String> {
+    if entry.status != CapabilityStatus::ActiveLegacy || entry.pose_coverage.is_some() {
+        return Err(format!("{} has invalid alias status/coverage", entry.id));
+    }
+    let alias = entry
+        .pose_alias
+        .as_ref()
+        .ok_or_else(|| format!("{} alias is missing its target", entry.id))?;
+    validate_id(&alias.target_pose_id)?;
+    if fallback_ids(entry) != [alias.target_pose_id.as_str()] {
+        return Err(format!(
+            "{} alias fallback does not match its target",
+            entry.id
+        ));
+    }
+    Ok(())
+}
+
 fn validate_pose_entry(entry: &CapabilityEntryV1) -> Result<(), String> {
+    if entry.pose_alias.is_some() {
+        return Err(format!("{} pose cannot also be an alias", entry.id));
+    }
     let coverage = entry
         .pose_coverage
         .as_ref()
@@ -1098,7 +1429,7 @@ fn validate_pose_entry(entry: &CapabilityEntryV1) -> Result<(), String> {
             validate_text(&approval.owner, "showcase owner")?;
             validate_text(&approval.rationale, "showcase rationale")?;
             validate_id(&approval.fallback_pose_id)?;
-            if entry.fallback_ids != [approval.fallback_pose_id.clone()] {
+            if fallback_ids(entry) != [approval.fallback_pose_id.as_str()] {
                 return Err(format!("{} lost its showcase fallback", entry.id));
             }
         }
@@ -1111,7 +1442,11 @@ fn validate_pose_entry(entry: &CapabilityEntryV1) -> Result<(), String> {
                 entry.id
             ))
         }
-        (_, None) => {}
+        (_, None) => {
+            if entry.fallback != FallbackTopologyV1::Terminal {
+                return Err(format!("{} non-showcase pose must be terminal", entry.id));
+            }
+        }
     }
     Ok(())
 }
@@ -1137,14 +1472,19 @@ fn validate_feeling_entries(
 
 fn validate_fallback_topology(ids: &BTreeMap<&str, &CapabilityEntryV1>) -> Result<(), String> {
     for entry in ids.values() {
-        for fallback in &entry.fallback_ids {
+        for fallback in fallback_ids(entry) {
             let target = ids
-                .get(fallback.as_str())
+                .get(fallback)
                 .ok_or_else(|| format!("{} has unresolved fallback {fallback}", entry.id))?;
-            if fallback == &entry.id {
+            if fallback == entry.id {
                 return Err(format!("{} has a self fallback", entry.id));
             }
-            if target.kind != entry.kind {
+            let valid_kind = if entry.kind == CapabilityKind::PoseAlias {
+                target.kind == CapabilityKind::Pose
+            } else {
+                target.kind == entry.kind
+            };
+            if !valid_kind {
                 return Err(format!(
                     "{} fallback {fallback} changes capability kind",
                     entry.id
@@ -1175,15 +1515,22 @@ fn validate_fallback_acyclic<'a>(
     let entry = ids
         .get(id)
         .ok_or_else(|| format!("fallback traversal lost {id}"))?;
-    for fallback in &entry.fallback_ids {
+    for fallback in fallback_ids(entry) {
         let (target_id, _) = ids
-            .get_key_value(fallback.as_str())
+            .get_key_value(fallback)
             .ok_or_else(|| format!("{id} has unresolved fallback {fallback}"))?;
         validate_fallback_acyclic(target_id, ids, visiting, visited)?;
     }
     visiting.remove(id);
     visited.insert(id);
     Ok(())
+}
+
+fn fallback_ids(entry: &CapabilityEntryV1) -> Vec<&str> {
+    match &entry.fallback {
+        FallbackTopologyV1::Fallbacks(ids) => ids.iter().map(String::as_str).collect(),
+        FallbackTopologyV1::NotApplicable | FallbackTopologyV1::Terminal => Vec::new(),
+    }
 }
 
 fn validate_state_facing_fallbacks(
@@ -1342,22 +1689,26 @@ fn validate_text(value: &str, field: &str) -> Result<(), String> {
     Ok(())
 }
 
-fn validate_text_values(values: &[String], field: &str) -> Result<(), String> {
-    if values.len() > MAX_TEXT_VALUES {
-        return Err(format!("{field} exceeds {MAX_TEXT_VALUES} values"));
-    }
-    validate_sorted_unique(values, field)?;
-    for value in values {
-        validate_text(value, field)?;
-    }
-    Ok(())
-}
-
 fn validate_sorted_unique<T: Ord>(values: &[T], field: &str) -> Result<(), String> {
     if values.windows(2).any(|pair| pair[0] >= pair[1]) {
         return Err(format!("{field} must be canonically sorted and unique"));
     }
     Ok(())
+}
+
+fn validate_applicability<T: Ord>(
+    applicability: &ApplicabilityV1<T>,
+    field: &str,
+) -> Result<(), String> {
+    match applicability {
+        ApplicabilityV1::NotApplicable => Ok(()),
+        ApplicabilityV1::Applicable(values) => {
+            if values.is_empty() {
+                return Err(format!("{field} is applicable but has no values"));
+            }
+            validate_sorted_unique(values, field)
+        }
+    }
 }
 
 fn sorted_unique<T: Ord>(values: impl IntoIterator<Item = T>) -> Vec<T> {
@@ -1366,6 +1717,19 @@ fn sorted_unique<T: Ord>(values: impl IntoIterator<Item = T>) -> Vec<T> {
         .collect::<BTreeSet<_>>()
         .into_iter()
         .collect()
+}
+
+fn applicable<T: Ord>(values: impl IntoIterator<Item = T>) -> ApplicabilityV1<T> {
+    ApplicabilityV1::Applicable(sorted_unique(values))
+}
+
+fn applicability<T: Ord>(values: impl IntoIterator<Item = T>) -> ApplicabilityV1<T> {
+    let values = sorted_unique(values);
+    if values.is_empty() {
+        ApplicabilityV1::NotApplicable
+    } else {
+        ApplicabilityV1::Applicable(values)
+    }
 }
 
 fn non_neutral_emotions() -> Vec<Emotion> {
@@ -1481,18 +1845,18 @@ fn pose_family_energy(family: PoseMotionFamily) -> u8 {
     }
 }
 
-fn pose_family_narrative_uses(family: PoseMotionFamily) -> Vec<String> {
+fn pose_family_narrative_uses(family: PoseMotionFamily) -> Vec<NarrativeUseV1> {
     let value = match family {
-        PoseMotionFamily::Run => "urgent travel or action",
-        PoseMotionFamily::Walk => "deliberate stage travel",
-        PoseMotionFamily::Flight => "airborne staging after flight activation",
-        PoseMotionFamily::Jump => "authored action accent",
-        PoseMotionFamily::Landing => "authored recovery or arrival",
-        PoseMotionFamily::GroundAction => "grounded performance accent",
-        PoseMotionFamily::Kneel => "low or braced staging",
-        PoseMotionFamily::Baseline => "neutral staging and directional fallback",
+        PoseMotionFamily::Run => NarrativeUseV1::UrgentTravelOrAction,
+        PoseMotionFamily::Walk => NarrativeUseV1::DeliberateStageTravel,
+        PoseMotionFamily::Flight => NarrativeUseV1::AirborneStaging,
+        PoseMotionFamily::Jump => NarrativeUseV1::AuthoredActionAccent,
+        PoseMotionFamily::Landing => NarrativeUseV1::AuthoredRecoveryOrArrival,
+        PoseMotionFamily::GroundAction => NarrativeUseV1::GroundedPerformanceAccent,
+        PoseMotionFamily::Kneel => NarrativeUseV1::LowOrBracedStaging,
+        PoseMotionFamily::Baseline => NarrativeUseV1::NeutralStagingAndDirectionalFallback,
     };
-    vec![value.to_string()]
+    vec![value]
 }
 
 fn legacy_clip_category(id: &str) -> Result<LegacyClipCategoryV1, String> {
@@ -1532,16 +1896,16 @@ fn legacy_clip_emotions(id: &str) -> Vec<Emotion> {
     }
 }
 
-fn legacy_clip_narrative_uses(category: LegacyClipCategoryV1) -> Vec<String> {
+fn legacy_clip_narrative_uses(category: LegacyClipCategoryV1) -> Vec<NarrativeUseV1> {
     let use_case = match category {
-        LegacyClipCategoryV1::GroundLocomotion => "stage travel",
-        LegacyClipCategoryV1::FlightPoseSequence => "flight showcase only",
-        LegacyClipCategoryV1::Action => "authored action beat",
-        LegacyClipCategoryV1::Celebration => "positive climax",
-        LegacyClipCategoryV1::Conversation => "spoken explanation or social beat",
-        LegacyClipCategoryV1::EmotionShowcase => "emotion reference or showcase",
+        LegacyClipCategoryV1::GroundLocomotion => NarrativeUseV1::StageTravel,
+        LegacyClipCategoryV1::FlightPoseSequence => NarrativeUseV1::FlightShowcaseOnly,
+        LegacyClipCategoryV1::Action => NarrativeUseV1::AuthoredActionBeat,
+        LegacyClipCategoryV1::Celebration => NarrativeUseV1::PositiveClimax,
+        LegacyClipCategoryV1::Conversation => NarrativeUseV1::SpokenExplanationOrSocialBeat,
+        LegacyClipCategoryV1::EmotionShowcase => NarrativeUseV1::EmotionReferenceOrShowcase,
     };
-    vec![use_case.to_string()]
+    vec![use_case]
 }
 
 fn clip_family_energy(family: ClipFamily) -> u8 {
@@ -1573,25 +1937,33 @@ fn clip_family_emotions(family: ClipFamily) -> Vec<Emotion> {
     }
 }
 
-fn clip_family_narrative_uses(family: ClipFamily) -> Vec<String> {
+fn clip_family_locomotion_states(family: ClipFamily) -> ApplicabilityV1<Locomotion> {
+    match family {
+        ClipFamily::Flight => ApplicabilityV1::NotApplicable,
+        ClipFamily::GroundLocomotion => applicable([Locomotion::Walking, Locomotion::Turn]),
+        _ => applicable(Locomotion::ALL),
+    }
+}
+
+fn clip_family_narrative_uses(family: ClipFamily) -> Vec<NarrativeUseV1> {
     let value = match family {
-        ClipFamily::Idle => "authored stillness",
-        ClipFamily::Listening => "receptive attention",
-        ClipFamily::Thinking => "internal thought beat",
-        ClipFamily::PreparingResponse => "pre-speech anticipation",
-        ClipFamily::Speaking => "spoken phrase performance",
-        ClipFamily::Clarifying => "clarification emphasis",
-        ClipFamily::ToolWait => "bounded waiting state",
-        ClipFamily::Error => "error acknowledgment",
-        ClipFamily::Celebrating => "positive climax",
-        ClipFamily::Interrupted => "interruption and recovery",
-        ClipFamily::GroundLocomotion => "stage travel",
-        ClipFamily::Flight => "airborne staging after flight activation",
-        ClipFamily::StaffAction => "staff-led action beat",
-        ClipFamily::Reaction => "reaction accent",
-        ClipFamily::FeelingAccent => "emotion accent",
+        ClipFamily::Idle => NarrativeUseV1::AuthoredStillness,
+        ClipFamily::Listening => NarrativeUseV1::ReceptiveAttention,
+        ClipFamily::Thinking => NarrativeUseV1::InternalThoughtBeat,
+        ClipFamily::PreparingResponse => NarrativeUseV1::PreSpeechAnticipation,
+        ClipFamily::Speaking => NarrativeUseV1::SpokenPhrasePerformance,
+        ClipFamily::Clarifying => NarrativeUseV1::ClarificationEmphasis,
+        ClipFamily::ToolWait => NarrativeUseV1::BoundedWaitingState,
+        ClipFamily::Error => NarrativeUseV1::ErrorAcknowledgment,
+        ClipFamily::Celebrating => NarrativeUseV1::PositiveClimax,
+        ClipFamily::Interrupted => NarrativeUseV1::InterruptionAndRecovery,
+        ClipFamily::GroundLocomotion => NarrativeUseV1::StageTravel,
+        ClipFamily::Flight => NarrativeUseV1::AirborneStaging,
+        ClipFamily::StaffAction => NarrativeUseV1::StaffLedActionBeat,
+        ClipFamily::Reaction => NarrativeUseV1::ReactionAccent,
+        ClipFamily::FeelingAccent => NarrativeUseV1::EmotionAccent,
     };
-    vec![value.to_string()]
+    vec![value]
 }
 
 fn interruptibility(policy: InterruptPolicy) -> InterruptibilityV1 {

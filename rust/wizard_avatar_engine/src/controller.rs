@@ -20,18 +20,94 @@ pub const WORLD_Z_FAR: f32 = 10.0;
 pub const SIMULATION_HZ: f32 = 60.0;
 pub const SIMULATION_DT: f32 = 1.0 / SIMULATION_HZ;
 pub const STRIDE_LENGTH: f32 = 0.85;
-pub const RUNTIME_PROCEDURAL_BEHAVIOR_IDS: [&str; 11] = [
-    "behavior.move",
-    "behavior.walk_left",
-    "behavior.walk_right",
-    "behavior.walk_forward",
-    "behavior.walk_backward",
-    "behavior.return_to_center",
-    "behavior.path",
-    "behavior.circle",
-    "behavior.figure_eight",
-    "behavior.speaking_duration",
-    "behavior.periodic_blink",
+#[derive(Clone, Copy, Debug, Eq, Hash, Ord, PartialEq, PartialOrd, Serialize, Deserialize)]
+#[serde(rename_all = "snake_case")]
+pub enum ControllerCommandKind {
+    Move,
+    MoveRelative,
+    Path,
+    Circle,
+    FigureEight,
+    Face,
+    Action,
+    Pose,
+    PoseClip,
+    Expression,
+    Speak,
+    Mouth,
+    Stop,
+    Reset,
+    ReturnToCenter,
+    WalkLeft,
+    WalkRight,
+    WalkForward,
+    WalkBackward,
+}
+
+impl ControllerCommandKind {
+    pub const ALL: [Self; 19] = [
+        Self::Move,
+        Self::MoveRelative,
+        Self::Path,
+        Self::Circle,
+        Self::FigureEight,
+        Self::Face,
+        Self::Action,
+        Self::Pose,
+        Self::PoseClip,
+        Self::Expression,
+        Self::Speak,
+        Self::Mouth,
+        Self::Stop,
+        Self::Reset,
+        Self::ReturnToCenter,
+        Self::WalkLeft,
+        Self::WalkRight,
+        Self::WalkForward,
+        Self::WalkBackward,
+    ];
+
+    #[must_use]
+    pub fn from_wire_name(value: &str) -> Option<Self> {
+        match value {
+            "move" => Some(Self::Move),
+            "move_relative" => Some(Self::MoveRelative),
+            "path" => Some(Self::Path),
+            "circle" => Some(Self::Circle),
+            "figure_eight" | "figure-eight" => Some(Self::FigureEight),
+            "face" => Some(Self::Face),
+            "action" => Some(Self::Action),
+            "pose" => Some(Self::Pose),
+            "pose_clip" => Some(Self::PoseClip),
+            "expression" => Some(Self::Expression),
+            "speak" => Some(Self::Speak),
+            "mouth" => Some(Self::Mouth),
+            "stop" => Some(Self::Stop),
+            "reset" => Some(Self::Reset),
+            "return_to_center" => Some(Self::ReturnToCenter),
+            "walk_left" => Some(Self::WalkLeft),
+            "walk_right" => Some(Self::WalkRight),
+            "walk_forward" => Some(Self::WalkForward),
+            "walk_backward" => Some(Self::WalkBackward),
+            _ => None,
+        }
+    }
+}
+
+pub const PROCEDURAL_CONTROLLER_COMMANDS: [ControllerCommandKind; 13] = [
+    ControllerCommandKind::Move,
+    ControllerCommandKind::MoveRelative,
+    ControllerCommandKind::Path,
+    ControllerCommandKind::Circle,
+    ControllerCommandKind::FigureEight,
+    ControllerCommandKind::Face,
+    ControllerCommandKind::Stop,
+    ControllerCommandKind::Reset,
+    ControllerCommandKind::ReturnToCenter,
+    ControllerCommandKind::WalkLeft,
+    ControllerCommandKind::WalkRight,
+    ControllerCommandKind::WalkForward,
+    ControllerCommandKind::WalkBackward,
 ];
 
 #[derive(Clone, Debug, Deserialize)]
@@ -175,37 +251,46 @@ impl WizardAvatarController {
     }
 
     fn apply_command_inner(&mut self, command: WizardCommand) -> Result<(), String> {
-        match command.command_type.as_str() {
-            "move" => self.cmd_move(&command.payload),
-            "move_relative" => self.cmd_move_relative(&command.payload),
-            "path" => self.cmd_path(&command.payload),
-            "circle" => self.cmd_circle(&command.payload),
-            "figure_eight" | "figure-eight" => self.cmd_figure_eight(&command.payload),
-            "face" => self.cmd_face(&command.payload),
-            "action" => self.cmd_action(&command.payload),
-            "pose" => self.cmd_pose(&command.payload),
-            "pose_clip" => self.cmd_pose_clip(&command.payload),
-            "expression" => self.cmd_expression(&command.payload),
-            "speak" => self.cmd_speak(&command.payload),
-            "mouth" => self.cmd_mouth(&command.payload),
-            "stop" => {
+        let kind = ControllerCommandKind::from_wire_name(&command.command_type)
+            .ok_or_else(|| format!("unsupported command: {}", command.command_type))?;
+        match kind {
+            ControllerCommandKind::Move => self.cmd_move(&command.payload),
+            ControllerCommandKind::MoveRelative => self.cmd_move_relative(&command.payload),
+            ControllerCommandKind::Path => self.cmd_path(&command.payload),
+            ControllerCommandKind::Circle => self.cmd_circle(&command.payload),
+            ControllerCommandKind::FigureEight => self.cmd_figure_eight(&command.payload),
+            ControllerCommandKind::Face => self.cmd_face(&command.payload),
+            ControllerCommandKind::Action => self.cmd_action(&command.payload),
+            ControllerCommandKind::Pose => self.cmd_pose(&command.payload),
+            ControllerCommandKind::PoseClip => self.cmd_pose_clip(&command.payload),
+            ControllerCommandKind::Expression => self.cmd_expression(&command.payload),
+            ControllerCommandKind::Speak => self.cmd_speak(&command.payload),
+            ControllerCommandKind::Mouth => self.cmd_mouth(&command.payload),
+            ControllerCommandKind::Stop => {
                 self.stop_locomotion();
                 Ok(())
             }
-            "reset" => {
+            ControllerCommandKind::Reset => {
                 let reconnect_count = self.state.reconnect_count;
                 *self = Self::default();
                 self.state.reconnect_count = reconnect_count + 1;
                 Ok(())
             }
-            "return_to_center" => {
+            ControllerCommandKind::ReturnToCenter => {
                 self.move_to(WorldPoint { x: 0.0, z: 5.0 }, self.movement.max_speed)
             }
-            "walk_left" => self.move_relative(-number(&command.payload, "distance", 1.5)?, 0.0),
-            "walk_right" => self.move_relative(number(&command.payload, "distance", 1.5)?, 0.0),
-            "walk_forward" => self.move_relative(0.0, -number(&command.payload, "distance", 1.5)?),
-            "walk_backward" => self.move_relative(0.0, number(&command.payload, "distance", 1.5)?),
-            other => Err(format!("unsupported command: {other}")),
+            ControllerCommandKind::WalkLeft => {
+                self.move_relative(-number(&command.payload, "distance", 1.5)?, 0.0)
+            }
+            ControllerCommandKind::WalkRight => {
+                self.move_relative(number(&command.payload, "distance", 1.5)?, 0.0)
+            }
+            ControllerCommandKind::WalkForward => {
+                self.move_relative(0.0, -number(&command.payload, "distance", 1.5)?)
+            }
+            ControllerCommandKind::WalkBackward => {
+                self.move_relative(0.0, number(&command.payload, "distance", 1.5)?)
+            }
         }
     }
 
