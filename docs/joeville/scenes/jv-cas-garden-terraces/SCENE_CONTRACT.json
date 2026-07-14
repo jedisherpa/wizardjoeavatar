@@ -1,0 +1,55 @@
+{
+  "base": "codex/crystail-character",
+  "branch": "codex/joeville-scene-castle-garden-terraces",
+  "camera": "Upper-landing view down the curved garden path",
+  "corrections": [
+    "Create 16:9 master without changing path geometry",
+    "Separate chairs for optional prop interaction",
+    "Author matching reverse toward the Castle"
+  ],
+  "layers": [
+    "sky_forest",
+    "castle_wall",
+    "garden_background",
+    "character_path",
+    "chairs_and_table",
+    "rail_occlusion",
+    "foreground_pillar",
+    "foliage",
+    "lighting"
+  ],
+  "playable": "Curved pale path is the movement spline; four-chair patio is a seated group zone; rail gates define entrances; planted beds are non-walkable.",
+  "role": "Garden walking conversations, small patio meetings and connective Castle geography",
+  "runtime_target": {
+    "cell_proxy": [
+      240,
+      135
+    ],
+    "color_space": "sRGB",
+    "fps": 24,
+    "master": [
+      3840,
+      2160
+    ]
+  },
+  "scene_id": "JV-CAS-GARDEN-TERRACES",
+  "schema_version": 1,
+  "set_id": "JV-CAS",
+  "slug": "castle-garden-terraces",
+  "source": {
+    "height": 1024,
+    "path": "assets/environments/joeville/jv-cas-garden-terraces/source-reference.png",
+    "sha256": "ee50aa8f5db98ce449b79dd81123fe2650e35fe6dbcb122ac5e664ad865ee8ba",
+    "width": 1536
+  },
+  "status": "CANONICAL-CONCEPT-CLEAN-PLATE",
+  "title": "Castle Grace garden circulation",
+  "variants": [
+    "spring",
+    "summer",
+    "autumn",
+    "winter",
+    "rain",
+    "evening_practicals"
+  ]
+}
