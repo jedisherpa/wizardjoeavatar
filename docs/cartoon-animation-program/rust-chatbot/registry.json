@@ -3,7 +3,7 @@
   "schema": "wizardjoe-rchat-registry/v1",
   "program_id": "RCHAT",
   "branch": "codex/rust-chatbot-animation-engine",
-  "integration_head": "24dc0735d167dcc955462d528e871692d46e2941",
+  "integration_head": "4b8f1130646852ccd172215cae4e2f2bc53e6dc9",
   "production_authority": "rust/wizard_avatar_engine",
   "planning_checkpoint": {
     "local_sha": "50948b907ad35ec8ca604d6c39a63b4317ac3da7",
@@ -778,7 +778,7 @@
       "required_locks": [
 
       ],
-      "base_sha": "24dc0735d167dcc955462d528e871692d46e2941",
+      "base_sha": "4b8f1130646852ccd172215cae4e2f2bc53e6dc9",
       "result_sha": null,
       "started_at": "2026-07-13T21:32:11Z",
       "finished_at": null,
@@ -862,7 +862,7 @@
       "required_locks": [
 
       ],
-      "base_sha": "24dc0735d167dcc955462d528e871692d46e2941",
+      "base_sha": "4b8f1130646852ccd172215cae4e2f2bc53e6dc9",
       "result_sha": null,
       "started_at": "2026-07-13T21:32:11Z",
       "finished_at": null,
@@ -1953,7 +1953,7 @@
       "required_locks": [
 
       ],
-      "base_sha": "24dc0735d167dcc955462d528e871692d46e2941",
+      "base_sha": "4b8f1130646852ccd172215cae4e2f2bc53e6dc9",
       "result_sha": null,
       "started_at": "2026-07-13T23:54:26Z",
       "finished_at": null,
@@ -3537,7 +3537,7 @@
         "RUNTIME",
         "FLOW"
       ],
-      "status": "IN_PROGRESS",
+      "status": "ACCEPTED",
       "weight": 0,
       "dependencies": [
         "RCHAT-ANIM-020",
@@ -3555,30 +3555,75 @@
       "required_locks": [
 
       ],
-      "base_sha": "24dc0735d167dcc955462d528e871692d46e2941",
-      "result_sha": null,
+      "base_sha": "375ff4c68383e34e04377cca9f69862b5a5e83b7",
+      "result_sha": "4b8f1130646852ccd172215cae4e2f2bc53e6dc9",
       "started_at": "2026-07-13T23:54:26Z",
-      "finished_at": null,
+      "finished_at": "2026-07-14T01:53:09Z",
       "commands": [
-
+        {
+          "command": "cargo test --manifest-path rust/wizard_avatar_engine/Cargo.toml --test motion_ground_locomotion --test motion_director --test motion_catalog --test motion_graph_contract --lib",
+          "exit_code": 0,
+          "duration_ms": 0
+        },
+        {
+          "command": "cargo test --manifest-path rust/wizard_avatar_engine/Cargo.toml --test motion_ground_locomotion --test motion_director --test chat_policy --test chat_event_contract --test chat_inbox --test chat_state_regions --test command_ordering --test fixed_clock",
+          "exit_code": 0,
+          "duration_ms": 34660
+        },
+        {
+          "command": "cargo clippy --manifest-path rust/wizard_avatar_engine/Cargo.toml --all-targets -- -D warnings",
+          "exit_code": 0,
+          "duration_ms": 9550
+        },
+        {
+          "command": "cargo fmt --manifest-path rust/wizard_avatar_engine/Cargo.toml --all -- --check",
+          "exit_code": 0,
+          "duration_ms": 400
+        }
       ],
       "evidence": [
-
+        {
+          "path": "rust/wizard_avatar_engine/assets/wizard_chat_motion_graph_v1.json",
+          "sha256": "6d22052dc3a43da683c09d3a7da71fa4a4228eaf53bf98a3633205a5f0898a4d",
+          "artifact_url": null
+        },
+        {
+          "path": "rust/wizard_avatar_engine/src/motion_graph.rs",
+          "sha256": "5dd7feef70d73fb093a058a0a3dda90fd90c9c9282c1fc9efaab9a1bb3abc10a",
+          "artifact_url": null
+        },
+        {
+          "path": "rust/wizard_avatar_engine/tests/motion_ground_locomotion.rs",
+          "sha256": "283ba87235d065c526a0757320eb073a79ba18cd2f25982aff2766db77bbe2cc",
+          "artifact_url": null
+        }
       ],
       "metrics": {
         "progress_earning": false,
-        "parent_weight_authoritative": true
+        "parent_weight_authoritative": true,
+        "tests_passed": 92,
+        "combined_integration_tests_passed": 100,
+        "ground_roles": 6,
+        "authored_samples": 29,
+        "authored_markers": 76,
+        "reachable_contact_sync_edges": 13,
+        "foot_contact_markers": 26,
+        "staff_contact_markers": 12,
+        "support_changing_boundaries": 24,
+        "maximum_facing_delta_degrees": 45,
+        "semantic_topology_samples": 190,
+        "independent_review_acceptances": 2
       },
       "rollback": {
-        "sha": null,
+        "sha": "375ff4c68383e34e04377cca9f69862b5a5e83b7",
         "profile": "legacy-motion",
-        "verified": false,
+        "verified": true,
         "strategy": "restore_parent_profile_and_reopen_item",
         "instruction": "current ground clips",
         "downgrade_allowed": false
       },
       "blocker": null,
-      "handoff_id": null,
+      "handoff_id": "ANIM-050-4b8f113",
       "detail_source": "planning/02-chat-animation-plan.md"
     },
     {
