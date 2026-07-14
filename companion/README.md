@@ -40,10 +40,13 @@ is under `src-tauri/target/release/bundle/macos/`. `tauri:build` applies and
 strictly verifies a local ad-hoc signature so the bundle has the resource
 envelope macOS requires in Applications. It does not use Developer ID
 credentials, notarize, staple, publish, copy to Applications, or alter an
-installed app.
+installed app. The verified app is written outside File Provider workspaces at
+`~/Library/Caches/Wizard Joe Companion/build-target/release/bundle/macos/` by
+default; set `WIZARD_COMPANION_TARGET_DIR` to choose another stable local build
+directory.
 
-`WIZARD_SIDECAR_BUILD_DIR` can relocate the temporary build root. Generated
-target-specific resource trees are intentionally ignored; rerun
+`WIZARD_SIDECAR_BUILD_DIR` can relocate the temporary sidecar build root.
+Generated target-specific resource trees are intentionally ignored; rerun
 `npm run sidecar:build` immediately before `npm run tauri:build`.
 
 ## Runtime Contract

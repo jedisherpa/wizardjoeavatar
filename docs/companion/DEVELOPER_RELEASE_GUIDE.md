@@ -50,10 +50,11 @@ targets, and writes `build-provenance.json` beside the onedir payload. The
 generated sidecar resource is intentionally ignored and must be rebuilt from
 the intended source commit.
 
-Expected local artifact:
+Expected local artifact (override the prefix with
+`WIZARD_COMPANION_TARGET_DIR`):
 
 ```text
-companion/src-tauri/target/release/bundle/macos/Wizard Joe Companion.app
+~/Library/Caches/Wizard Joe Companion/build-target/release/bundle/macos/Wizard Joe Companion.app
 ```
 
 This build receives a local ad-hoc signature and strict resource-envelope

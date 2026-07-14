@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "tauri": "tauri",
-    "tauri:build": "tauri build --bundles app && ./scripts/adhoc-sign-app.sh",
+    "tauri:build": "./scripts/build-app.sh",
     "sidecar:build": "./scripts/build-sidecar.sh",
     "test": "cargo test --manifest-path src-tauri/Cargo.toml"
   },
