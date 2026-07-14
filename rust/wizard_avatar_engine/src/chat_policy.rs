@@ -447,6 +447,20 @@ impl ChatPolicyReducerV1 {
         {
             return Err("active session is present in retired identity history".to_string());
         }
+        let session = &self.semantic.session.state;
+        if self.last_session_end.is_some()
+            && (session.mode != SessionModeV1::Disconnected
+                || session.session_id.is_some()
+                || session.turn_id.is_some())
+        {
+            return Err("completed session marker overlaps a live session".to_string());
+        }
+        if session.session_id.is_some() == (session.mode == SessionModeV1::Disconnected) {
+            return Err("session identity and mode are inconsistent".to_string());
+        }
+        if session.session_id.is_some() != self.last_session_locale.is_some() {
+            return Err("session locale marker is inconsistent with session identity".to_string());
+        }
         if has_duplicates_by(&self.active_safety_clamps, PartialEq::eq)
             || has_duplicates_by(&self.completed_safety_clamps, PartialEq::eq)
         {
@@ -1118,6 +1132,17 @@ impl ChatPolicyReducerV1 {
     fn validate_correlation(&self, input: &OrderedChatEventV1) -> Result<(), ChatPolicyError> {
         if let ChatEventV1::SafetyClamp(payload) = &input.event {
             if payload.active {
+                if self.retired_session_ids.contains(&input.session_id) {
+                    return Err(ChatPolicyError::SessionIdRetired(input.session_id.clone()));
+                }
+                if let Some(active_session) = self.semantic.session.state.session_id.as_ref() {
+                    if active_session != &input.session_id {
+                        return Err(ChatPolicyError::SessionMismatch);
+                    }
+                    if self.semantic.session.state.turn_id != input.turn_id {
+                        return Err(ChatPolicyError::TurnMismatch);
+                    }
+                }
                 return Ok(());
             }
             let owner = safety_owner(input, payload);

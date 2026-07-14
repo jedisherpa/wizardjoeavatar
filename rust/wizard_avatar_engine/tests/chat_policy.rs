@@ -1301,6 +1301,18 @@ fn safety_history_never_evicts_or_reuses_a_retired_identity() {
             ChatEventV1::SessionStarted { locale: None },
         ))
         .unwrap();
+    let second_session = serde_json::to_vec(&reducer).unwrap();
+    assert_eq!(
+        reducer.reduce(input_for(
+            reducer.next_test_sequence(),
+            reducer.next_test_tick(),
+            "session-1",
+            "turn-1",
+            safety_event("delayed-session-a", SafetyScope::Speech, true),
+        )),
+        Err(ChatPolicyError::SessionIdRetired(session_id()))
+    );
+    assert_eq!(serde_json::to_vec(&reducer).unwrap(), second_session);
     reducer
         .reduce(input_for(
             reducer.next_test_sequence(),
@@ -1454,6 +1466,20 @@ fn reducer_snapshot_deserialization_enforces_bounds_uniqueness_and_invariants() 
     let mut active_is_retired = valid.clone();
     active_is_retired["retired_session_ids"] = serde_json::json!(["session-1"]);
     assert!(serde_json::from_value::<ChatPolicyReducerV1>(active_is_retired).is_err());
+    let mut active_with_completed_marker = valid.clone();
+    active_with_completed_marker["retired_session_ids"] = serde_json::json!(["session-2"]);
+    active_with_completed_marker["last_session_end"] = serde_json::json!({
+        "session_id": "session-2",
+        "turn_id": "turn-2",
+        "reason": "user_ended"
+    });
+    assert!(serde_json::from_value::<ChatPolicyReducerV1>(active_with_completed_marker).is_err());
+    let mut active_without_locale = valid.clone();
+    active_without_locale["last_session_locale"] = serde_json::Value::Null;
+    assert!(serde_json::from_value::<ChatPolicyReducerV1>(active_without_locale).is_err());
+    let mut disconnected_with_identity = valid.clone();
+    disconnected_with_identity["semantic"]["session"]["state"]["mode"] = "disconnected".into();
+    assert!(serde_json::from_value::<ChatPolicyReducerV1>(disconnected_with_identity).is_err());
 
     let mut ended = active_reducer();
     ended
