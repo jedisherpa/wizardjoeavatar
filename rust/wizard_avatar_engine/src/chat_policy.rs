@@ -438,6 +438,13 @@ impl ChatPolicyReducerV1 {
             return Err("completed session is missing from retired identity history".to_string());
         }
         if self
+            .last_session_end
+            .as_ref()
+            .is_some_and(|completed| self.retired_session_ids.last() != Some(&completed.session_id))
+        {
+            return Err("completion marker is not the latest retired session".to_string());
+        }
+        if self
             .semantic
             .session
             .state

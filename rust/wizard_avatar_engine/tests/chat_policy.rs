@@ -1499,6 +1499,9 @@ fn reducer_snapshot_deserialization_enforces_bounds_uniqueness_and_invariants() 
     let mut missing_completion_marker = ended_json.clone();
     missing_completion_marker["last_session_end"] = serde_json::Value::Null;
     assert!(serde_json::from_value::<ChatPolicyReducerV1>(missing_completion_marker).is_err());
+    let mut stale_completion_marker = ended_json.clone();
+    stale_completion_marker["retired_session_ids"] = serde_json::json!(["session-1", "session-2"]);
+    assert!(serde_json::from_value::<ChatPolicyReducerV1>(stale_completion_marker).is_err());
     let mut missing_session_ledger = ended_json.clone();
     missing_session_ledger
         .as_object_mut()
