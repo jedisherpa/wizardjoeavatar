@@ -1,0 +1,54 @@
+{
+  "base": "codex/crystail-character",
+  "branch": "codex/joeville-scene-castle-front-terraces",
+  "camera": "Downslope three-quarter exterior master looking across stepped terraces",
+  "corrections": [
+    "Recompose production master to 16:9 if required",
+    "Author rail and foliage alpha masks",
+    "Validate each terrace ground line separately"
+  ],
+  "layers": [
+    "sky_mountains",
+    "castle_far_mass",
+    "upper_terrace",
+    "character_planes_three_depths",
+    "rail_occlusion",
+    "foreground_stairs",
+    "foliage",
+    "lighting"
+  ],
+  "playable": "Right stair is primary vertical entrance; upper and middle terraces are separate depth bands; garage landing is lower exit; rails require occlusion masks.",
+  "role": "Castle exterior master, arrival, balcony dialogue and stair transitions",
+  "runtime_target": {
+    "cell_proxy": [
+      240,
+      135
+    ],
+    "color_space": "sRGB",
+    "fps": 24,
+    "master": [
+      3840,
+      2160
+    ]
+  },
+  "scene_id": "JV-CAS-FRONT-TERRACES",
+  "schema_version": 1,
+  "set_id": "JV-CAS",
+  "slug": "castle-front-terraces",
+  "source": {
+    "height": 1024,
+    "path": "assets/environments/joeville/jv-cas-front-terraces/source-reference.png",
+    "sha256": "e539cbc718aae5eeb404641a16e42d1172faf6999cd7b93f5a5471e71fbf5760",
+    "width": 1536
+  },
+  "status": "CANONICAL-CONCEPT-CLEAN-PLATE",
+  "title": "Castle Grace front terraces",
+  "variants": [
+    "morning",
+    "midday",
+    "golden_hour",
+    "night_practicals",
+    "rain",
+    "winter"
+  ]
+}
