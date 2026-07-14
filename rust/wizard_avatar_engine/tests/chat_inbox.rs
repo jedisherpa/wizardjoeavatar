@@ -49,6 +49,7 @@ fn request(
         source_sequence,
         requested_apply_tick,
         ttl_ms,
+        chat_correlation: None,
         command: SemanticCommandV1::Legacy(LegacyCommandV1 {
             command: LegacyCommandKind::Idle,
         }),

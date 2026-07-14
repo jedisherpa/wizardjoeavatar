@@ -1,7 +1,7 @@
 use crate::chat_event::{
     CancelReason, ChatEventV1, ChatTurnState, CommandId, ContractErrorCode, DiagnosticGeometryId,
-    Emotion, GestureKind, MotionProfile, SourceId, SourceKind, SpeechPlanV1, UtteranceId,
-    CHAT_EVENT_SCHEMA_VERSION, MAX_DURATION_MS, MAX_INGRESS_BYTES, MAX_TTL_MS,
+    Emotion, GestureKind, MotionProfile, SessionId, SourceId, SourceKind, SpeechPlanV1, TurnId,
+    UtteranceId, CHAT_EVENT_SCHEMA_VERSION, MAX_DURATION_MS, MAX_INGRESS_BYTES, MAX_TTL_MS,
 };
 use serde::{Deserialize, Serialize};
 use std::fmt;
@@ -77,6 +77,8 @@ pub struct CommandRequestV1 {
     pub source_sequence: u64,
     pub requested_apply_tick: Option<u64>,
     pub ttl_ms: u32,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub chat_correlation: Option<ChatCommandCorrelationV1>,
     pub command: SemanticCommandV1,
 }
 
@@ -114,6 +116,14 @@ impl CommandRequestV1 {
             ));
         }
         validate_apply_tick(self.requested_apply_tick, current_tick)?;
+        if self.chat_correlation.is_some()
+            && !matches!(self.command, SemanticCommandV1::ApplyChatEvent(_))
+        {
+            return Err(CommandContractError::new(
+                CommandErrorCode::InvalidCommand,
+                "chat_correlation",
+            ));
+        }
         self.command.validate()
     }
 
@@ -130,6 +140,15 @@ impl CommandRequestV1 {
     pub fn to_canonical_json(&self) -> Result<Vec<u8>, serde_json::Error> {
         serde_json::to_vec(self)
     }
+}
+
+#[derive(Clone, Debug, Eq, PartialEq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct ChatCommandCorrelationV1 {
+    pub session_id: SessionId,
+    pub turn_id: Option<TurnId>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub previous_turn_id: Option<TurnId>,
 }
 
 #[derive(Clone, Debug, Eq, PartialEq, Serialize, Deserialize)]
@@ -283,6 +302,8 @@ pub struct CommandEnvelopeV1 {
     pub source_sequence: u64,
     pub requested_apply_tick: Option<u64>,
     pub ttl_ms: u32,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub chat_correlation: Option<ChatCommandCorrelationV1>,
     pub command: SemanticCommandV1,
     pub server_sequence: u64,
     pub accepted_tick: u64,
@@ -316,6 +337,7 @@ impl CommandEnvelopeV1 {
             source_sequence: request.source_sequence,
             requested_apply_tick: request.requested_apply_tick,
             ttl_ms: request.ttl_ms,
+            chat_correlation: request.chat_correlation,
             command: request.command,
             server_sequence,
             accepted_tick: current_tick,
