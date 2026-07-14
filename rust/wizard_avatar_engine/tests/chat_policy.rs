@@ -1282,6 +1282,16 @@ fn safety_history_never_evicts_or_reuses_a_retired_identity() {
             },
         ))
         .unwrap();
+    let ended = serde_json::to_vec(&reducer).unwrap();
+    assert_eq!(
+        reducer.reduce(input(
+            reducer.next_test_sequence(),
+            reducer.next_test_tick(),
+            ChatEventV1::SessionStarted { locale: None },
+        )),
+        Err(ChatPolicyError::SessionIdRetired(session_id()))
+    );
+    assert_eq!(serde_json::to_vec(&reducer).unwrap(), ended);
     reducer
         .reduce(input_for(
             reducer.next_test_sequence(),

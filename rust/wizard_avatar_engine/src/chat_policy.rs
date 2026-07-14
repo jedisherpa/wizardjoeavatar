@@ -120,6 +120,8 @@ pub enum ChatPolicyError {
     },
     #[error("session correlation mismatch")]
     SessionMismatch,
+    #[error("session {0} was already completed and cannot be reused")]
+    SessionIdRetired(SessionId),
     #[error("turn correlation mismatch")]
     TurnMismatch,
     #[error("chat command is missing session/turn correlation")]
@@ -1098,6 +1100,13 @@ impl ChatPolicyReducerV1 {
         }
 
         if matches!(input.event, ChatEventV1::SessionStarted { .. }) {
+            if self
+                .last_session_end
+                .as_ref()
+                .is_some_and(|completed| completed.session_id == input.session_id)
+            {
+                return Err(ChatPolicyError::SessionIdRetired(input.session_id.clone()));
+            }
             if let Some(active_session) = self.semantic.session.state.session_id.as_ref() {
                 if active_session != &input.session_id {
                     return Err(ChatPolicyError::SessionMismatch);
