@@ -33,9 +33,9 @@ readiness remains visible in the work-package table below.
 |---|---|---|---|---|---|
 | MP-RSCH-000 | Architecture | Code-grounded two-repository research, decisions, tracker, and acceptance contract | none | Two independent reviews plus FLOW receipt | IN_REVIEW |
 | MP-WIZ-005 | Wizard Runtime | Promote `RCHAT-RUN-110` typed inbox/reducer/ACK path with legacy compatibility | RCHAT-RUN-110 | Lifecycle, idempotency, retry, replay tests | PLANNED |
-| MP-WIZ-010 | Wizard Runtime | Generated capability manifest wire V2, endpoint, exact-set tests | RCHAT-ANIM-050 | Complete canonical fixture, nonzero frozen hash, exact loaded-registry equality, no planned IDs | PLANNED |
+| MP-WIZ-010 | Wizard Runtime | Generated capability manifest wire V2, endpoint, exact-set tests | RCHAT-ANIM-050 | Complete canonical fixture, nonzero frozen hash, exact loaded-registry equality, no planned IDs | IN_REVIEW |
 | MP-WIZ-020 | Wizard Runtime | `MediaProtocolV1` typed command variants through existing inbox | MP-WIZ-005 | Canonical full-transcript fixture, every-variant roundtrip, invalid/stale/duplicate/property tests | PLANNED |
-| MP-WIZ-030 | Wizard Runtime | `PerformanceScoreV1` and strict validator | MP-WIZ-010 | Golden roundtrip/hash and real nonzero capability-manifest binding tests | PLANNED |
+| MP-WIZ-030 | Wizard Runtime | `PerformanceScoreV1` and strict validator | MP-WIZ-010 | Golden roundtrip/hash and real nonzero capability-manifest binding tests | BLOCKED |
 | MP-WIZ-040 | Wizard Runtime | Bounded deterministic cue scheduler and timeline reducer | MP-WIZ-020,030 | Seek/rate/reconnect replay matrix | PLANNED |
 | MP-WIZ-050 | Animation | Layered performance execution: locomotion, gesture, gaze, face, speech, stillness | MP-WIZ-040 | Every-frame ownership/topology evidence | PLANNED |
 | MP-WIZ-060 | Animation | Authored audiobook performance phrases and transitions | MP-WIZ-050 | Accent/anticipation/recovery visual review | PLANNED |
@@ -62,6 +62,13 @@ readiness remains visible in the work-package table below.
 
 This table is a readable view. Matching `RCHAT-MEDIA-*` entries in
 `../registry.json` are the status authority and carry SHA/evidence receipts.
+
+### Current Rust Contract Receipt
+
+- Capability candidate: `73f733a03599af786fc92b1e5ec0826e4ab5a23e` with 18 focused tests passing.
+- PerformanceScore candidate: `43d80b902dcc51d501ff72c8c2a8b7f9727ebcf4` with 10 focused tests passing.
+- Combined RUN-050 integration: `d405eb1695e6d4a66a72806b2484351d836f03e3`; `cargo test --locked` passed, including the 998.70-second all-neighbor transition sweep and 249.53-second WJFL every-frame/loop-boundary sweep.
+- Exact-commit independent acceptance is still outstanding. Earlier review findings were repaired, but reviewer capacity was exhausted before two fresh final-SHA approvals could be recorded. MP-WIZ-010 therefore remains `IN_REVIEW`, and dependency-gated MP-WIZ-030 remains `BLOCKED` despite its completed implementation and focused verification.
 
 ## Required Review Pairings
 
