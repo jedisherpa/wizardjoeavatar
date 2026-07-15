@@ -48,6 +48,7 @@ pub fn app(source: ProceduralWizardFrameSource) -> Router {
         .route("/", get(root))
         .route("/avatar/wizard.js", get(wizard_js))
         .route("/avatar/motion_tour.js", get(motion_tour_js))
+        .route("/avatar/newsroom_controls.js", get(newsroom_controls_js))
         .route("/avatar/asciline_codec.js", get(asciline_codec_js))
         .route("/avatar/asciline_client.js", get(asciline_client_js))
         .route("/avatar/canvas_renderer.js", get(canvas_renderer_js))
@@ -130,6 +131,13 @@ async fn motion_tour_js() -> impl IntoResponse {
     (
         [("content-type", "application/javascript; charset=utf-8")],
         include_str!("../web/motion_tour.js"),
+    )
+}
+
+async fn newsroom_controls_js() -> impl IntoResponse {
+    (
+        [("content-type", "application/javascript; charset=utf-8")],
+        include_str!("../web/newsroom_controls.js"),
     )
 }
 

@@ -15,6 +15,7 @@ function fakeCanvas(width = 1600, height = 900) {
     createImageData(w, h) { return { width: w, height: h, data: new Uint8ClampedArray(w * h * 4) }; },
     putImageData(image, x, y) { calls.push(["putImageData", image, x, y]); },
     clearRect(...args) { calls.push(["clearRect", ...args]); },
+    fillRect(...args) { calls.push(["fillRect", ...args]); },
     drawImage(...args) { calls.push(["drawImage", ...args]); },
   };
   return { width, height, calls, getContext() { return context; } };
@@ -26,6 +27,24 @@ test("complete presentation queue retains only two newest ordered frames", () =>
   queue.push({ sequence: 1, presentationTime: 10 });
   queue.push({ sequence: 2, presentationTime: 20 });
   assert.deepEqual(queue.items.map((frame) => frame.sequence), [2, 3]);
+});
+
+test("responsive resize redraws the last complete frame without waiting for the stream", () => {
+  const visible = fakeCanvas();
+  const logical = fakeCanvas(2, 1);
+  const renderer = new CellStageRenderer(visible, 2, 1, { createCanvas: () => logical });
+  renderer.enqueue({
+    sequence: 1,
+    presentationTime: 0,
+    frame: new Uint8Array([35, 1, 2, 3, 64, 4, 5, 6]),
+  });
+  renderer.present(0);
+  visible.calls.length = 0;
+
+  renderer.resize(800, 450);
+
+  assert.equal(visible.calls.filter(([name]) => name === "fillRect").length, 1);
+  assert.equal(visible.calls.filter(([name]) => name === "drawImage").length, 1);
 });
 
 test("fixed viewport depends on stage dimensions, never frame content", () => {

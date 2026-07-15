@@ -3,14 +3,24 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Wizard Avatar Motion</title>
+  <link rel="icon" href="data:,">
+  <title>Wizard Joe Performance Console</title>
   <style>
     :root {
       color-scheme: light;
-      --ink: #17191c;
-      --line: #d9d9d4;
-      --panel: rgba(255, 255, 255, 0.94);
-      --accent: #0e4c89;
+      --ink: #182124;
+      --muted: #667075;
+      --line: #d8ddda;
+      --line-strong: #b9c1bd;
+      --surface: rgba(255, 255, 255, 0.96);
+      --surface-soft: #f4f6f4;
+      --studio: #075f73;
+      --news: #b62d24;
+      --news-dark: #832019;
+      --live: #16804b;
+      --focus: #0b63a5;
+      --dock-height: 64px;
+      --top-height: 54px;
     }
 
     * { box-sizing: border-box; }
@@ -23,29 +33,156 @@
       overflow: hidden;
       color: var(--ink);
       background: #fff;
-      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      letter-spacing: 0;
+    }
+
+    body[data-mode="newsroom"] { --dock-height: 174px; }
+
+    button,
+    select,
+    input { font: inherit; }
+
+    button:focus-visible,
+    select:focus-visible,
+    input:focus-visible {
+      outline: 2px solid var(--focus);
+      outline-offset: 2px;
+    }
+
+    .app-bar {
+      position: fixed;
+      z-index: 20;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: var(--top-height);
+      display: grid;
+      grid-template-columns: minmax(180px, 1fr) auto minmax(180px, 1fr);
+      align-items: center;
+      gap: 18px;
+      padding: 0 18px;
+      border-bottom: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.94);
+      backdrop-filter: blur(14px);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      min-width: 0;
+      gap: 10px;
+    }
+
+    .brand-grid {
+      width: 18px;
+      height: 18px;
+      flex: 0 0 auto;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2px;
+    }
+
+    .brand-grid i { display: block; background: var(--studio); }
+    .brand-grid i:nth-child(2) { background: #efa900; }
+    .brand-grid i:nth-child(3) { background: #d62573; }
+    .brand-grid i:nth-child(4) { background: var(--news); }
+
+    .brand-copy { min-width: 0; }
+    .brand-name {
+      display: block;
+      font-size: 13px;
+      line-height: 1.1;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+    .brand-subtitle {
+      display: block;
+      margin-top: 2px;
+      overflow: hidden;
+      color: var(--muted);
+      font: 10px/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      text-overflow: ellipsis;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .mode-switch {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      width: 224px;
+      height: 34px;
+      padding: 3px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: var(--surface-soft);
+    }
+
+    .mode-switch button {
+      border: 0;
+      border-radius: 4px;
+      background: transparent;
+      color: var(--muted);
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 750;
+    }
+
+    .mode-switch button[aria-selected="true"] {
+      color: #fff;
+      background: var(--studio);
+      box-shadow: 0 1px 4px rgba(24, 33, 36, 0.14);
+    }
+
+    body[data-mode="newsroom"] .mode-switch button[aria-selected="true"] {
+      background: var(--news);
+    }
+
+    .connection {
+      justify-self: end;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--muted);
+      font: 11px/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      text-transform: uppercase;
+    }
+
+    .connection-dot {
+      width: 8px;
+      height: 8px;
+      border: 1px solid #7c8581;
+      border-radius: 50%;
+      background: #fff;
+    }
+
+    .connection[data-state="live"] .connection-dot {
+      border-color: var(--live);
+      background: var(--live);
+      box-shadow: 0 0 0 3px rgba(22, 128, 75, 0.12);
     }
 
     main {
       width: 100vw;
-      height: 100vh;
+      height: 100dvh;
       display: grid;
       place-items: center;
+      padding: var(--top-height) 0 var(--dock-height);
       background: #fff;
+      transition: padding-bottom 180ms ease;
     }
 
     .avatar-stage {
       position: relative;
-      width: min(100vw, calc((100vh - 66px) * 16 / 9));
+      width: min(100vw, calc((100dvh - var(--top-height) - var(--dock-height)) * 16 / 9));
+      max-height: calc(100dvh - var(--top-height) - var(--dock-height));
       aspect-ratio: 16 / 9;
       overflow: hidden;
       background: #fff;
+      transition: width 180ms ease, max-height 180ms ease;
     }
 
-    .avatar-figure {
-      position: absolute;
-      inset: 0;
-    }
+    .avatar-figure { position: absolute; inset: 0; }
 
     .avatar-canvas {
       display: block;
@@ -54,6 +191,28 @@
       background: #fff;
       image-rendering: pixelated;
     }
+
+    .newsroom-bug {
+      position: absolute;
+      top: 16px;
+      left: 18px;
+      display: none;
+      align-items: center;
+      gap: 9px;
+      color: var(--news-dark);
+      font: 700 10px/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      text-transform: uppercase;
+      pointer-events: none;
+    }
+
+    .newsroom-bug::before {
+      content: "";
+      width: 16px;
+      height: 3px;
+      background: var(--news);
+    }
+
+    body[data-mode="newsroom"] .newsroom-bug { display: flex; }
 
     .state-label {
       position: absolute;
@@ -64,46 +223,73 @@
       white-space: nowrap;
     }
 
-    .toolbar {
+    .control-dock {
       position: fixed;
-      left: 16px;
-      right: 16px;
-      bottom: 16px;
+      z-index: 20;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: var(--dock-height);
+      border-top: 1px solid var(--line);
+      background: var(--surface);
+      backdrop-filter: blur(14px);
+      box-shadow: 0 -12px 34px rgba(24, 33, 36, 0.06);
+      transition: height 180ms ease;
+    }
+
+    .studio-controls,
+    .newsroom-controls {
+      width: 100%;
+      height: 100%;
+      max-width: 1440px;
+      margin: 0 auto;
+    }
+
+    .studio-controls {
       display: flex;
       align-items: center;
       gap: 8px;
-      padding: 8px;
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      background: var(--panel);
-      backdrop-filter: blur(12px);
-      box-shadow: 0 12px 40px rgba(23, 25, 28, 0.08);
+      padding: 10px 18px;
     }
+
+    .newsroom-controls {
+      display: none;
+      grid-template-rows: 80px 1fr;
+      padding: 10px 18px 12px;
+    }
+
+    body[data-mode="newsroom"] .studio-controls { display: none; }
+    body[data-mode="newsroom"] .newsroom-controls { display: grid; }
 
     .cluster { display: flex; align-items: center; gap: 6px; }
     .spacer { flex: 1; }
+    .divider { width: 1px; height: 28px; margin: 0 3px; background: var(--line); }
 
-    button,
+    .icon-button,
+    .action-button,
     select {
       height: 34px;
       border: 1px solid var(--line);
-      border-radius: 6px;
+      border-radius: 5px;
       background: #fff;
       color: var(--ink);
-      font: inherit;
     }
 
-    button {
+    .icon-button,
+    .action-button {
       min-width: 34px;
-      padding: 0 9px;
-      font-size: 16px;
-      line-height: 1;
+      padding: 0 10px;
       cursor: pointer;
+      font-size: 15px;
+      line-height: 1;
     }
 
-    button:hover,
-    select:hover { border-color: var(--accent); }
-    select { min-width: 124px; padding: 0 28px 0 9px; }
+    .icon-button:hover,
+    .action-button:hover,
+    select:hover { border-color: var(--studio); }
+    select { min-width: 128px; padding: 0 28px 0 9px; cursor: pointer; }
+    .action-button { font-size: 12px; font-weight: 750; }
+    .icon-button[aria-pressed="true"] { color: #fff; border-color: var(--studio); background: var(--studio); }
 
     .diagnostics {
       display: grid;
@@ -111,79 +297,272 @@
       grid-auto-columns: max-content;
       gap: 10px;
       align-items: center;
-      color: #363a3e;
-      font: 12px/1.2 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      color: var(--muted);
+      font: 10px/1.2 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      text-transform: uppercase;
       white-space: nowrap;
     }
 
-    .diagnostics b { color: var(--ink); font-weight: 700; }
+    .diagnostics b { color: var(--ink); font-weight: 800; }
 
-    @media (max-width: 760px) {
-      .toolbar {
-        left: 8px;
-        right: 8px;
-        bottom: 8px;
-        align-items: flex-start;
-        flex-wrap: wrap;
-      }
-      .cluster { max-width: 100%; flex-wrap: wrap; }
-      .spacer { display: none; }
-      .diagnostics {
-        width: 100%;
-        grid-auto-flow: row;
-        grid-template-columns: repeat(3, max-content);
-      }
+    .cue-strip {
+      display: grid;
+      grid-auto-flow: column;
+      grid-auto-columns: minmax(88px, 1fr);
+      gap: 6px;
+      overflow-x: auto;
+      padding-bottom: 8px;
+      scrollbar-width: thin;
+      scrollbar-color: var(--line-strong) transparent;
+    }
+
+    .cue-button {
+      position: relative;
+      height: 58px;
+      padding: 10px 8px 8px;
+      border: 1px solid var(--line);
+      border-radius: 5px;
+      background: #fff;
+      color: var(--ink);
+      cursor: pointer;
+      font-size: 11px;
+      font-weight: 800;
+      line-height: 1.15;
+      text-transform: uppercase;
+    }
+
+    .cue-button::before {
+      content: attr(data-index);
+      position: absolute;
+      top: 5px;
+      left: 6px;
+      color: #9aa19e;
+      font: 8px/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    }
+
+    .cue-button:hover { border-color: var(--news); color: var(--news-dark); }
+    .cue-button.is-active { border-color: var(--news); background: #fff4f2; color: var(--news-dark); }
+    .cue-button:disabled { cursor: wait; opacity: 0.55; }
+
+    .newsroom-footer {
+      min-width: 0;
+      display: grid;
+      grid-template-columns: max-content max-content minmax(190px, 1fr) minmax(250px, 1.2fr);
+      align-items: center;
+      gap: 16px;
+      border-top: 1px solid var(--line);
+      padding-top: 9px;
+    }
+
+    .field-group { display: flex; align-items: center; gap: 7px; min-width: 0; }
+    .field-label {
+      color: var(--muted);
+      font: 9px/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .field-group select { height: 30px; min-width: 122px; font-size: 11px; }
+    .intensity-control { display: grid; grid-template-columns: auto minmax(70px, 1fr) 32px; }
+    .intensity-control input { width: 100%; accent-color: var(--news); }
+    .intensity-control output { color: var(--ink); font: 800 10px/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; text-align: right; }
+
+    .switch-label { display: flex; align-items: center; gap: 7px; cursor: pointer; }
+    .switch-label input { position: absolute; opacity: 0; pointer-events: none; }
+    .switch-track {
+      position: relative;
+      width: 34px;
+      height: 18px;
+      border: 1px solid var(--line-strong);
+      border-radius: 9px;
+      background: #e7ebe8;
+      transition: background 120ms ease, border-color 120ms ease;
+    }
+    .switch-track::after {
+      content: "";
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #fff;
+      box-shadow: 0 1px 3px rgba(24, 33, 36, 0.25);
+      transition: transform 120ms ease;
+    }
+    .switch-label input:checked + .switch-track { border-color: var(--news); background: var(--news); }
+    .switch-label input:checked + .switch-track::after { transform: translateX(16px); }
+    .switch-label input:focus-visible + .switch-track { outline: 2px solid var(--focus); outline-offset: 2px; }
+
+    .cue-receipt {
+      min-width: 0;
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr);
+      align-items: center;
+      gap: 10px;
+      padding-left: 16px;
+      border-left: 1px solid var(--line);
+    }
+
+    .cue-status {
+      min-width: 54px;
+      color: var(--live);
+      font: 800 10px/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      text-transform: uppercase;
+    }
+    .cue-status[data-state="sending"] { color: #a36a00; }
+    .cue-status[data-state="error"] { color: var(--news); }
+    .cue-result { min-width: 0; }
+    .cue-result strong,
+    .cue-result span { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .cue-result strong { font-size: 11px; }
+    .cue-result span { margin-top: 3px; color: var(--muted); font: 9px/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; text-transform: uppercase; }
+
+    @media (max-width: 900px) {
+      .app-bar { grid-template-columns: 1fr auto auto; }
+      .brand-subtitle { display: none; }
+      .mode-switch { width: 184px; }
+      .newsroom-footer { grid-template-columns: max-content minmax(160px, 1fr) minmax(220px, 1fr); }
+      .program-field { display: none; }
+      .diagnostics span:nth-child(n + 4) { display: none; }
+    }
+
+    @media (max-width: 680px) {
+      :root { --top-height: 48px; --dock-height: 108px; }
+      body[data-mode="newsroom"] { --dock-height: 194px; }
+      .app-bar { grid-template-columns: auto 1fr auto; gap: 8px; padding: 0 10px; }
+      .brand-copy { display: none; }
+      .mode-switch { justify-self: center; width: min(210px, 100%); height: 32px; }
+      .connection-label { display: none; }
+      .studio-controls { align-content: center; flex-wrap: wrap; padding: 8px 10px; }
+      .studio-controls .spacer { display: none; }
+      .studio-controls .diagnostics { width: 100%; justify-content: end; }
+      .divider { display: none; }
+      .newsroom-controls { grid-template-rows: 82px 1fr; padding: 8px 10px 10px; }
+      .newsroom-footer { grid-template-columns: minmax(0, 1fr) auto; gap: 8px 12px; }
+      .sensitivity-field { display: none; }
+      .intensity-control { grid-column: 1; }
+      .motion-field { grid-column: 2; }
+      .cue-receipt { grid-column: 1 / -1; padding: 8px 0 0; border-top: 1px solid var(--line); border-left: 0; }
+      .newsroom-bug { top: 8px; left: 10px; }
     }
   </style>
 </head>
-<body>
+<body data-mode="studio">
+  <header class="app-bar">
+    <div class="brand" aria-label="Wizard Joe Performance Engine">
+      <span class="brand-grid" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+      <span class="brand-copy">
+        <span class="brand-name">Wizard Joe</span>
+        <span class="brand-subtitle">Performance engine</span>
+      </span>
+    </div>
+    <div class="mode-switch" role="tablist" aria-label="Performance mode">
+      <button id="mode-studio" role="tab" data-mode-target="studio" aria-selected="true" aria-controls="studio-controls">Studio</button>
+      <button id="mode-newsroom" role="tab" data-mode-target="newsroom" aria-selected="false" aria-controls="newsroom-controls">Newsroom</button>
+    </div>
+    <div class="connection" id="connection" data-state="opening">
+      <span class="connection-dot" aria-hidden="true"></span>
+      <span class="connection-label">Opening</span>
+    </div>
+  </header>
+
   <main>
-    <section class="avatar-stage" aria-label="Animated wizard avatar">
+    <section class="avatar-stage" aria-label="Animated Wizard Joe avatar">
       <div class="avatar-figure" id="avatar-figure">
         <canvas class="avatar-canvas" id="avatar-canvas" width="1600" height="900"></canvas>
       </div>
+      <div class="newsroom-bug" id="newsroom-bug">General news</div>
     </section>
   </main>
+
   <output class="state-label" id="state-label">state loading</output>
-  <nav class="toolbar" aria-label="Wizard controls">
-    <div class="cluster">
-      <button data-command="walk_left" title="Walk left" aria-label="Walk left">&larr;</button>
-      <button data-command="walk_forward" title="Walk toward camera" aria-label="Walk toward camera">&darr;</button>
-      <button data-command="walk_backward" title="Walk away from camera" aria-label="Walk away from camera">&uarr;</button>
-      <button data-command="walk_right" title="Walk right" aria-label="Walk right">&rarr;</button>
-      <button data-command="stop" title="Stop" aria-label="Stop">&#9632;</button>
-      <button data-command="return_to_center" title="Return to center" aria-label="Return to center">&#8962;</button>
-    </div>
-    <div class="cluster">
-      <select id="expression" title="Expression" aria-label="Expression">
-        <option value="neutral">neutral</option>
-        <option value="happy">happy</option>
-        <option value="thinking">thinking</option>
-        <option value="surprised">surprised</option>
-        <option value="worried">worried</option>
-        <option value="amused">amused</option>
-        <option value="confident">confident</option>
-        <option value="focused">focused</option>
-        <option value="skeptical">skeptical</option>
-        <option value="explaining">explaining</option>
-      </select>
-      <button id="tour" title="Play motion tour on repeat" aria-label="Play motion tour on repeat" aria-pressed="false">&#9654;</button>
-      <button data-action="thinking" title="Think" aria-label="Think">?</button>
-      <button data-action="pointing" title="Point" aria-label="Point">&#8640;</button>
-      <button data-action="explaining" title="Explain" aria-label="Explain">*</button>
-      <button data-action="magic_cast" title="Cast" aria-label="Cast">&#10022;</button>
-      <button data-action="reaction" title="React" aria-label="React">!</button>
-      <button id="speak" title="Speak" aria-label="Speak">&#9680;</button>
-    </div>
-    <div class="spacer"></div>
-    <output class="diagnostics" id="diagnostics">
-      <span>ws <b id="diag-ws">idle</b></span>
-      <span>fps <b id="diag-fps">0</b></span>
-      <span>tag <b id="diag-tag">-</b></span>
-      <span>seq <b id="diag-seq">0</b></span>
-      <span>wire <b id="diag-wire">0</b></span>
-    </output>
+
+  <nav class="control-dock" aria-label="Wizard performance controls">
+    <section class="studio-controls" id="studio-controls" role="tabpanel" aria-labelledby="mode-studio">
+      <div class="cluster" aria-label="Movement">
+        <button class="icon-button" data-command="walk_left" title="Walk left" aria-label="Walk left">&larr;</button>
+        <button class="icon-button" data-command="walk_forward" title="Walk toward camera" aria-label="Walk toward camera">&darr;</button>
+        <button class="icon-button" data-command="walk_backward" title="Walk away from camera" aria-label="Walk away from camera">&uarr;</button>
+        <button class="icon-button" data-command="walk_right" title="Walk right" aria-label="Walk right">&rarr;</button>
+        <button class="icon-button" data-command="stop" title="Stop" aria-label="Stop">&#9632;</button>
+        <button class="icon-button" data-command="return_to_center" title="Return to center" aria-label="Return to center">&#8962;</button>
+      </div>
+      <span class="divider" aria-hidden="true"></span>
+      <div class="cluster" aria-label="Performance">
+        <select id="expression" title="Expression" aria-label="Expression">
+          <option value="neutral">Neutral</option>
+          <option value="happy">Happy</option>
+          <option value="thinking">Thinking</option>
+          <option value="surprised">Surprised</option>
+          <option value="worried">Worried</option>
+          <option value="amused">Amused</option>
+          <option value="confident">Confident</option>
+          <option value="focused">Focused</option>
+          <option value="skeptical">Skeptical</option>
+          <option value="explaining">Explaining</option>
+        </select>
+        <button class="icon-button" id="tour" title="Play motion tour on repeat" aria-label="Play motion tour on repeat" aria-pressed="false">&#9654;</button>
+        <button class="action-button" data-action="thinking" title="Think">Think</button>
+        <button class="action-button" data-action="pointing" title="Point">Point</button>
+        <button class="action-button" data-action="explaining" title="Explain">Explain</button>
+        <button class="icon-button" data-action="magic_cast" title="Cast" aria-label="Cast">&#10022;</button>
+        <button class="icon-button" data-action="reaction" title="React" aria-label="React">!</button>
+        <button class="icon-button" id="speak" title="Speak" aria-label="Speak">&#9680;</button>
+      </div>
+      <div class="spacer"></div>
+      <output class="diagnostics" id="diagnostics">
+        <span>ws <b id="diag-ws">idle</b></span>
+        <span>fps <b id="diag-fps">0</b></span>
+        <span>tag <b id="diag-tag">-</b></span>
+        <span>seq <b id="diag-seq">0</b></span>
+        <span>wire <b id="diag-wire">0</b></span>
+      </output>
+    </section>
+
+    <section class="newsroom-controls" id="newsroom-controls" role="tabpanel" aria-labelledby="mode-newsroom" hidden>
+      <div class="cue-strip" id="cue-strip" aria-label="Newsroom cues"></div>
+      <div class="newsroom-footer">
+        <label class="field-group program-field">
+          <span class="field-label">Program</span>
+          <select id="news-program">
+            <option value="general_news">General news</option>
+            <option value="ai_innovation">AI innovation</option>
+          </select>
+        </label>
+        <label class="field-group sensitivity-field">
+          <span class="field-label">Tone</span>
+          <select id="news-sensitivity">
+            <option value="normal">Normal</option>
+            <option value="light">Light</option>
+            <option value="serious">Serious</option>
+            <option value="critical">Critical</option>
+            <option value="correction">Correction</option>
+          </select>
+        </label>
+        <label class="field-group intensity-control">
+          <span class="field-label">Intensity</span>
+          <input id="news-intensity" type="range" min="0" max="100" value="40" aria-label="Cue intensity">
+          <output id="news-intensity-value" for="news-intensity">40</output>
+        </label>
+        <div class="field-group motion-field">
+          <label class="switch-label" title="Reduced motion">
+            <input id="news-reduced-motion" type="checkbox">
+            <span class="switch-track" aria-hidden="true"></span>
+            <span class="field-label">Reduced</span>
+          </label>
+        </div>
+        <output class="cue-receipt" id="cue-receipt" aria-live="polite">
+          <span class="cue-status" id="cue-status" data-state="ready">Ready</span>
+          <span class="cue-result">
+            <strong id="cue-result-title">Select a cue</strong>
+            <span id="cue-result-detail">Sequence ready</span>
+          </span>
+        </output>
+      </div>
+    </section>
   </nav>
+
   <script type="module" src="/avatar/wizard.js"></script>
 </body>
 </html>

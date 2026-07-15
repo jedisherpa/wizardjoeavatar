@@ -9,6 +9,9 @@ use std::f32::consts::{PI, TAU};
 use std::sync::OnceLock;
 
 pub const POSE_SCHEMA_VERSION: u16 = 2;
+pub const CANONICAL_POSE_COLS: usize = 72;
+pub const CANONICAL_POSE_ROWS: usize = 96;
+pub const CANONICAL_POSE_ROOT: Point = (36, 95);
 
 #[derive(Clone, Copy, Debug, Default, PartialEq, Serialize)]
 pub struct PointF {
@@ -471,6 +474,9 @@ impl PoseLibrary {
                 return Err("imported pose collides with a baseline pose ID".to_string());
             }
         }
+        for definition in by_id.values_mut() {
+            normalize_pose_canvas(definition)?;
+        }
         let library = Self {
             schema_version: POSE_SCHEMA_VERSION,
             by_direction,
@@ -500,10 +506,41 @@ impl PoseLibrary {
             }
         }
         for pose in self.by_id.values() {
+            if pose.cols != CANONICAL_POSE_COLS
+                || pose.rows != CANONICAL_POSE_ROWS
+                || pose.root != CANONICAL_POSE_ROOT
+            {
+                return Err(format!(
+                    "{} is not normalized to {}x{} at root {:?}",
+                    pose.id, CANONICAL_POSE_COLS, CANONICAL_POSE_ROWS, CANONICAL_POSE_ROOT
+                ));
+            }
             for anchor in AnchorId::REQUIRED {
                 if !pose.anchors.contains_key(&anchor) {
                     return Err(format!("{} missing {anchor:?}", pose.id));
                 }
+            }
+            if pose.anchors.values().any(|point| {
+                !point.x.is_finite()
+                    || !point.y.is_finite()
+                    || !(0.0..CANONICAL_POSE_COLS as f32).contains(&point.x)
+                    || !(0.0..CANONICAL_POSE_ROWS as f32).contains(&point.y)
+            }) {
+                return Err(format!(
+                    "{} has anchors outside the canonical canvas",
+                    pose.id
+                ));
+            }
+            if pose.motion.contact_sets.iter().any(|set| {
+                set.points.iter().any(|point| {
+                    !(0..CANONICAL_POSE_COLS as i32).contains(&point.point.0)
+                        || !(0..CANONICAL_POSE_ROWS as i32).contains(&point.point.1)
+                })
+            }) {
+                return Err(format!(
+                    "{} has contacts outside the canonical canvas",
+                    pose.id
+                ));
             }
             let ids = pose
                 .cells
@@ -515,6 +552,17 @@ impl PoseLibrary {
             }
             if pose.cells.is_empty() {
                 return Err(format!("{} has invalid semantic cells", pose.id));
+            }
+            if pose.cells.iter().any(|cell| {
+                cell.x < 0
+                    || usize::try_from(cell.x).map_or(true, |x| x >= CANONICAL_POSE_COLS)
+                    || cell.y < 0
+                    || usize::try_from(cell.y).map_or(true, |y| y >= CANONICAL_POSE_ROWS)
+            }) {
+                return Err(format!(
+                    "{} has cells outside the canonical canvas",
+                    pose.id
+                ));
             }
             let effect_cells = pose
                 .cells
@@ -762,6 +810,53 @@ impl PoseLibrary {
                 .collect(),
         })
     }
+}
+
+fn normalize_pose_canvas(pose: &mut PoseDefinition) -> Result<(), String> {
+    if pose.cols > CANONICAL_POSE_COLS || pose.rows > CANONICAL_POSE_ROWS {
+        return Err(format!(
+            "{} canvas {}x{} exceeds canonical {}x{}",
+            pose.id, pose.cols, pose.rows, CANONICAL_POSE_COLS, CANONICAL_POSE_ROWS
+        ));
+    }
+
+    let dx = CANONICAL_POSE_ROOT.0 - pose.root.0;
+    let dy = CANONICAL_POSE_ROOT.1 - pose.root.1;
+    let translated_cells = pose
+        .cells
+        .iter()
+        .map(|cell| (i32::from(cell.x) + dx, i32::from(cell.y) + dy))
+        .collect::<Vec<_>>();
+    if translated_cells.iter().any(|(x, y)| {
+        *x < 0
+            || usize::try_from(*x).map_or(true, |x| x >= CANONICAL_POSE_COLS)
+            || *y < 0
+            || usize::try_from(*y).map_or(true, |y| y >= CANONICAL_POSE_ROWS)
+    }) {
+        return Err(format!(
+            "{} cannot be edge-padded to the canonical canvas without cropping",
+            pose.id
+        ));
+    }
+
+    for (cell, (x, y)) in pose.cells.iter_mut().zip(translated_cells) {
+        cell.x = i16::try_from(x).map_err(|_| format!("{} cell x overflow", pose.id))?;
+        cell.y = i16::try_from(y).map_err(|_| format!("{} cell y overflow", pose.id))?;
+    }
+    for point in pose.anchors.values_mut() {
+        point.x += dx as f32;
+        point.y += dy as f32;
+    }
+    for set in &mut pose.motion.contact_sets {
+        for point in &mut set.points {
+            point.point.0 += dx;
+            point.point.1 += dy;
+        }
+    }
+    pose.root = CANONICAL_POSE_ROOT;
+    pose.cols = CANONICAL_POSE_COLS;
+    pose.rows = CANONICAL_POSE_ROWS;
+    Ok(())
 }
 
 fn repair_one_cell_attachment_gaps(
@@ -1942,4 +2037,84 @@ fn anchor_regions() -> [(AnchorId, RegionId); 21] {
         (AnchorId::RightEye, RegionId::Face),
         (AnchorId::Mouth, RegionId::Mouth),
     ]
+}
+
+#[cfg(test)]
+mod canvas_normalization_tests {
+    use super::*;
+    use crate::palette::Rgb;
+
+    #[test]
+    fn edge_padding_translates_cells_anchors_and_contacts_without_resampling() {
+        let anchors = AnchorId::REQUIRED
+            .into_iter()
+            .map(|anchor| (anchor, PointF { x: 5.0, y: 9.0 }))
+            .collect();
+        let mut pose = PoseDefinition {
+            id: "small-test-pose".to_string(),
+            direction: Direction::South,
+            root: (5, 9),
+            anchors,
+            cells: vec![PoseCell {
+                x: 5,
+                y: 0,
+                cell: Cell::new(b'#', Rgb(1, 2, 3)),
+                region: RegionId::Torso,
+                stable_id: 0,
+            }],
+            z_order: RegionId::Z_ORDER.to_vec(),
+            cols: 10,
+            rows: 10,
+            motion: PoseMotionMetadata {
+                candidate_id: None,
+                family: PoseMotionFamily::Baseline,
+                contact_mode: PoseContactMode::BothFeet,
+                phase: None,
+                authored_transition_neighbors: Vec::new(),
+                contact_sets: vec![PoseContactSet {
+                    id: "floor".to_string(),
+                    points: vec![PoseContactPoint {
+                        anchor: AnchorId::LeftFoot,
+                        kind: PoseContactKind::Ground,
+                        point: (5, 9),
+                    }],
+                }],
+                attachment_edges: Vec::new(),
+                staff_present: false,
+                effect_present: false,
+            },
+        };
+
+        normalize_pose_canvas(&mut pose).expect("small pose should fit by edge padding");
+
+        assert_eq!(
+            (pose.cols, pose.rows),
+            (CANONICAL_POSE_COLS, CANONICAL_POSE_ROWS)
+        );
+        assert_eq!(pose.root, CANONICAL_POSE_ROOT);
+        assert_eq!((pose.cells[0].x, pose.cells[0].y), (36, 86));
+        assert_eq!(pose.anchors[&AnchorId::Head], PointF { x: 36.0, y: 95.0 });
+        assert_eq!(
+            pose.motion.contact_sets[0].points[0].point,
+            CANONICAL_POSE_ROOT
+        );
+        assert_eq!(pose.cells[0].cell.rgb, Rgb(1, 2, 3));
+    }
+
+    #[test]
+    fn canonical_library_rejects_dimension_drift() {
+        let library = PoseLibrary::reference().expect("embedded pose library");
+        for pose_id in library.pose_ids() {
+            let pose = library.for_id(pose_id).expect("known pose");
+            assert_eq!(
+                (pose.cols, pose.rows, pose.root),
+                (
+                    CANONICAL_POSE_COLS,
+                    CANONICAL_POSE_ROWS,
+                    CANONICAL_POSE_ROOT
+                ),
+                "{pose_id}"
+            );
+        }
+    }
 }

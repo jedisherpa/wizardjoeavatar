@@ -70,12 +70,16 @@ export class CellStageRenderer {
     this.logicalContext = this.logicalCanvas.getContext("2d", { alpha: false });
     this.imageData = this.logicalContext.createImageData(cols, rows);
     this.lastPresentedSequence = -1;
+    this.hasPresentedFrame = false;
     this.queue.clear();
   }
 
   resize(width, height) {
     this.visibleCanvas.width = width;
     this.visibleCanvas.height = height;
+    this.visibleContext.fillStyle = "#fff";
+    this.visibleContext.fillRect(0, 0, width, height);
+    if (this.hasPresentedFrame) this.drawLogicalFrame();
   }
 
   restoreContext() {
@@ -90,6 +94,13 @@ export class CellStageRenderer {
     const candidate = this.queue.takeNewestDue(now, this.lastPresentedSequence);
     if (!candidate) return false;
     this.build(candidate.frame);
+    this.hasPresentedFrame = true;
+    this.drawLogicalFrame();
+    this.lastPresentedSequence = candidate.sequence;
+    return true;
+  }
+
+  drawLogicalFrame() {
     const viewport = computeFixedViewport(
       this.visibleCanvas.width,
       this.visibleCanvas.height,
@@ -108,8 +119,6 @@ export class CellStageRenderer {
       viewport.width,
       viewport.height,
     );
-    this.lastPresentedSequence = candidate.sequence;
-    return true;
   }
 
   build(frame) {

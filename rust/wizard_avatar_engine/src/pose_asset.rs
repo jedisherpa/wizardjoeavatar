@@ -3,7 +3,7 @@ use crate::palette::Rgb;
 use crate::pose::{
     AnchorId, PointF, PoseAttachmentEdge, PoseCell, PoseContactKind, PoseContactMode,
     PoseContactPoint, PoseContactSet, PoseDefinition, PoseMotionFamily, PoseMotionMetadata,
-    RegionId,
+    RegionId, CANONICAL_POSE_COLS, CANONICAL_POSE_ROOT, CANONICAL_POSE_ROWS,
 };
 use crate::pose_program::BASELINE_POSE_IDS;
 use crate::state::Direction;
@@ -294,8 +294,10 @@ pub fn parse_imported_pose_library(json: &str) -> Result<ImportedPoseLibrary, St
 
 fn validate_pose(pose: &AssetPose, known_ids: &BTreeSet<String>) -> Result<(), String> {
     let fail = |message: &str| format!("{}: {message}", pose.semantic_id);
-    if pose.canonical_size != [72, 96] || pose.root_anchor.x != 36 || pose.root_anchor.y != 95 {
-        return Err(fail("canonical geometry is not 72x96 at root 36,95"));
+    if pose.canonical_size != [CANONICAL_POSE_COLS as u32, CANONICAL_POSE_ROWS as u32]
+        || (pose.root_anchor.x, pose.root_anchor.y) != CANONICAL_POSE_ROOT
+    {
+        return Err(fail("geometry does not match the canonical pose canvas"));
     }
     if pose.cells.len() != pose.cell_count || pose.cells.is_empty() {
         return Err(fail("cell count is invalid"));
@@ -306,10 +308,10 @@ fn validate_pose(pose: &AssetPose, known_ids: &BTreeSet<String>) -> Result<(), S
         .map(|cell| (cell.x, cell.y))
         .collect::<BTreeSet<_>>();
     if coordinates.len() != pose.cells.len()
-        || pose
-            .cells
-            .iter()
-            .any(|cell| !(0..72).contains(&cell.x) || !(0..96).contains(&cell.y))
+        || pose.cells.iter().any(|cell| {
+            !(0..CANONICAL_POSE_COLS as i32).contains(&cell.x)
+                || !(0..CANONICAL_POSE_ROWS as i32).contains(&cell.y)
+        })
     {
         return Err(fail("cells are duplicated or out of bounds"));
     }
@@ -325,10 +327,10 @@ fn validate_pose(pose: &AssetPose, known_ids: &BTreeSet<String>) -> Result<(), S
         || !AnchorId::REQUIRED
             .iter()
             .all(|anchor| anchor_ids.contains(anchor))
-        || pose
-            .anchors
-            .iter()
-            .any(|anchor| !(0..72).contains(&anchor.point.x) || !(0..96).contains(&anchor.point.y))
+        || pose.anchors.iter().any(|anchor| {
+            !(0..CANONICAL_POSE_COLS as i32).contains(&anchor.point.x)
+                || !(0..CANONICAL_POSE_ROWS as i32).contains(&anchor.point.y)
+        })
     {
         return Err(fail(
             "required anchors are missing, duplicated, or out of bounds",
