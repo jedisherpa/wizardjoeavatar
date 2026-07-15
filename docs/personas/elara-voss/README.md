@@ -12,3 +12,9 @@ Performance: warm, unhurried, intelligent, and exacting. Use image-first present
 
 Signature actions: curriculum explanation, sequencing steps, inviting reflection, attentive listening, rubric emphasis, and microphone presentation.
 
+## Canonical production package
+
+- `IDENTITY_LOCK.md` — immutable identity, articulation limits, performance lock, and rejection rules.
+- `UNCERTAINTY_LOG.md` — hidden-detail inferences and explicitly prohibited inventions.
+- `WORKSHEET_GENERATION_RECORD.md` — exact panel maps, hashes, visual review decisions, and runtime handoff.
+- `assets/reference/personas/elara-voss/canonical-worksheets/` — nine accepted worksheet categories totaling exactly 124 cells; identity candidates v1/v2 and grounded-motion candidate v1 are retained as rejected evidence, while identity v3 and grounded motion v2 are authoritative.
