@@ -21,6 +21,11 @@ commit or push.
 - Direct-node contact renders of all 16 identity graphs and all 108 pose/feature
   graphs were visually reviewed at canonical resolution. All silhouettes are
   complete; no identity panel is a chopped callout or non-grid fragment.
+- The retained human-review contact sheet is
+  `evidence/elara-voss/124-graph-contact-sheet.png` (SHA-256
+  `22685bad5b85577be661ec2c7bfebb5b191de1df69cc887154cc2f040b6f05c3`).
+  It is evidence only; the runtime continues to load colored JSON nodes rather
+  than PNG or SVG render assets.
 - Microphone anchors occur only on the graphs declared by the generation
   profile; other poses do not receive a fabricated prop anchor.
 - Package load rejects post-audit graph changes, node-count/bounds changes,
