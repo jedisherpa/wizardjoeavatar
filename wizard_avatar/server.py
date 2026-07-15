@@ -41,7 +41,7 @@ def create_app(
                 cols=cols,
                 rows=rows,
                 fps=fps,
-                character_package_path=package.pose_library.parent / ("crystail_character_package.json" if character_id == "crystail-v1" else "wizard_joe_character_package.json"),
+                character_package_path=package.package_path,
             )
             for character_id, package in registry.packages.items()
         }
@@ -109,6 +109,28 @@ def create_app(
             return FileResponse(DEFINITIONS_DIR / crystail_files[filename], media_type="application/json")
         media = "application/javascript" if filename.endswith(".ts") else None
         return FileResponse(WEB_DIR / filename, media_type=media)
+
+    @app.get("/avatar/characters/{character_id}/{asset_name}")
+    async def character_static(character_id: str, asset_name: str):
+        """Serve only registry-owned assets through a character-neutral route."""
+        try:
+            package = registry.get(character_id)
+        except ValueError as exc:
+            raise HTTPException(status_code=404, detail="Unknown character") from exc
+        assets = {
+            "package": package.package_path,
+            "pose-library": package.pose_library,
+            "animation-graph": package.animation_graph,
+            "runtime-profile": package.runtime_profile,
+            "manifest": package.manifest,
+            "animation-matrix": package.animation_matrix,
+            "extraction-audit": package.extraction_audit,
+            "pixel-graph-library": package.pixel_graph_library,
+        }
+        path = assets.get(asset_name)
+        if path is None:
+            raise HTTPException(status_code=404, detail="Unknown character asset")
+        return FileResponse(path, media_type="application/json")
 
     @app.get("/api/avatar/wizard/state")
     async def state():
