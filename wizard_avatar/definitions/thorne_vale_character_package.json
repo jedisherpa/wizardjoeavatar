@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "character_id": "thorne-vale-v1",
+  "display_name": "Thorne Vale",
+  "renderer": "asciline_square_cells",
+  "pose_library": "thorne_vale_pose_cells.json",
+  "animation_graph": "thorne_vale_animation_graph.json",
+  "runtime_profile": "thorne_vale_runtime_profile.json",
+  "manifest": "thorne_vale_character_manifest.json",
+  "animation_matrix": "thorne_vale_animation_matrix.json",
+  "extraction_audit": "thorne_vale_extraction_audit.json",
+  "pixel_graph_library": "thorne_vale_pixel_graphs.json",
+  "default_pose_id": "neutral_front",
+  "capabilities": [
+    "ground_locomotion",
+    "eight_direction_turnaround",
+    "actions",
+    "speech_visemes",
+    "full_expression_vocabulary",
+    "procedural_secondary_motion",
+    "pose_showcase",
+    "sword_and_parchment_interaction",
+    "decision_rights_signature_actions",
+    "tradeoff_and_risk_review",
+    "guarded_approval_recovery"
+  ]
+}

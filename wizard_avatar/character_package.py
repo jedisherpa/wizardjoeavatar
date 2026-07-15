@@ -11,6 +11,7 @@ DEFINITIONS_DIR = Path(__file__).with_name("definitions")
 WIZARD_JOE_PACKAGE_PATH = DEFINITIONS_DIR / "wizard_joe_character_package.json"
 CRYSTAIL_PACKAGE_PATH = DEFINITIONS_DIR / "crystail_character_package.json"
 ORION_VALE_PACKAGE_PATH = DEFINITIONS_DIR / "orion_vale_character_package.json"
+THORNE_VALE_PACKAGE_PATH = DEFINITIONS_DIR / "thorne_vale_character_package.json"
 
 
 class CharacterPackageValidationError(ValueError):
@@ -115,6 +116,19 @@ def load_character_package(path: Path = WIZARD_JOE_PACKAGE_PATH) -> CharacterPac
         _validate_extraction_audit(
             raw["character_id"], pose_raw, pixel_graph_raw, audit_raw
         )
+    if optional_assets["manifest"] is not None:
+        manifest_raw = json.loads(
+            optional_assets["manifest"].read_text(encoding="utf-8")
+        )
+        _validate_character_manifest(
+            package_path,
+            raw["character_id"],
+            manifest_raw,
+            pose_library,
+            animation_graph,
+            optional_assets,
+            audit_raw if optional_assets["extraction_audit"] is not None else None,
+        )
     return CharacterPackage(
         schema_version=1,
         character_id=str(raw["character_id"]),
@@ -213,6 +227,14 @@ def _validate_extraction_audit(
     }
     if set(graph_by_id) != set(item_by_id) or audit_raw.get("item_count") != len(graph_by_id):
         raise CharacterPackageValidationError("extraction_audit does not cover every pixel graph")
+    if pixel_graph_raw.get("graph_count") != len(graphs):
+        raise CharacterPackageValidationError("pixel graph count differs from graph library")
+    if pixel_graph_raw.get("character_id") != character_id:
+        raise CharacterPackageValidationError("pixel graph character_id does not match package")
+    if pixel_graph_raw.get("encoding") != "transparent_colored_pixel_nodes":
+        raise CharacterPackageValidationError("pixel graph encoding is not transparent colored nodes")
+    if audit_raw.get("runtime_image_assets") != []:
+        raise CharacterPackageValidationError("runtime image assets are forbidden")
     for graph_id, graph in graph_by_id.items():
         item = item_by_id[graph_id]
         if item.get("background_removed") is not True:
@@ -229,6 +251,129 @@ def _validate_extraction_audit(
             raise CharacterPackageValidationError(
                 "extraction_audit hash differs for graph {}".format(graph_id)
             )
+        if item.get("pixel_node_count") != len(cells):
+            raise CharacterPackageValidationError(
+                "extraction_audit node count differs for graph {}".format(graph_id)
+            )
+        if not isinstance(cells, list) or not cells:
+            raise CharacterPackageValidationError("pixel graph must contain colored nodes")
+        try:
+            actual_bounds = {
+                "left": min(int(cell["x"]) for cell in cells),
+                "top": min(int(cell["y"]) for cell in cells),
+                "right": max(int(cell["x"]) for cell in cells),
+                "bottom": max(int(cell["y"]) for cell in cells),
+            }
+        except (KeyError, TypeError, ValueError) as exc:
+            raise CharacterPackageValidationError("pixel graph contains invalid nodes") from exc
+        if item.get("bounds") != actual_bounds:
+            raise CharacterPackageValidationError(
+                "extraction_audit bounds differ for graph {}".format(graph_id)
+            )
+        for cell in cells:
+            rgb = cell.get("rgb") if isinstance(cell, Mapping) else None
+            if (
+                not isinstance(rgb, list)
+                or len(rgb) != 3
+                or any(isinstance(channel, bool) or not isinstance(channel, int) or not 0 <= channel <= 255 for channel in rgb)
+            ):
+                raise CharacterPackageValidationError("pixel graph contains invalid colors")
+
+
+def _validate_character_manifest(
+    package_path: Path,
+    character_id: str,
+    manifest_raw: Any,
+    pose_library: Path,
+    animation_graph: Path,
+    optional_assets: Mapping[str, Optional[Path]],
+    audit_raw: Optional[Mapping[str, Any]],
+) -> None:
+    """Revalidate the complete approved derivation chain at package load."""
+    if not isinstance(manifest_raw, Mapping) or manifest_raw.get("schema_version") != 1:
+        raise CharacterPackageValidationError("manifest must use schema_version 1")
+    if manifest_raw.get("character_id") != character_id:
+        raise CharacterPackageValidationError("manifest character_id does not match package")
+    hashes = manifest_raw.get("hashes")
+    derivation = manifest_raw.get("derivation")
+    if not isinstance(hashes, Mapping) or not isinstance(derivation, Mapping):
+        raise CharacterPackageValidationError("manifest must expose hashes and derivation")
+    if derivation.get("flattened_runtime_dependency") is not False:
+        raise CharacterPackageValidationError("flattened runtime dependencies are forbidden")
+
+    generated_assets = {
+        "pose_library_sha256": pose_library,
+        "animation_graph_sha256": animation_graph,
+        "animation_matrix_sha256": optional_assets.get("animation_matrix"),
+        "extraction_audit_sha256": optional_assets.get("extraction_audit"),
+        "pixel_graph_library_sha256": optional_assets.get("pixel_graph_library"),
+    }
+    for hash_name, asset_path in generated_assets.items():
+        if asset_path is None:
+            continue
+        if hashes.get(hash_name) != _digest_file(asset_path):
+            raise CharacterPackageValidationError(
+                "manifest hash differs for {}".format(hash_name)
+            )
+    if audit_raw is not None and hashes.get("extraction_item_count") != audit_raw.get("item_count"):
+        raise CharacterPackageValidationError("manifest extraction count differs from audit")
+
+    repository_root = package_path.parents[2]
+    source_specs = (
+        ("original_reference", "original_reference_sha256"),
+        ("canonical_reference", "canonical_reference_sha256"),
+    )
+    for derivation_name, hash_name in source_specs:
+        source = _repository_asset(repository_root, derivation.get(derivation_name), derivation_name)
+        if hashes.get(hash_name) != _digest_file(source):
+            raise CharacterPackageValidationError(
+                "manifest source hash differs for {}".format(derivation_name)
+            )
+    worksheet_hashes = hashes.get("worksheet_sha256")
+    if not isinstance(worksheet_hashes, Mapping) or not worksheet_hashes:
+        raise CharacterPackageValidationError("manifest must hash approved worksheets")
+    worksheet_dir = _repository_asset(
+        repository_root, derivation.get("approved_worksheets"), "approved_worksheets", directory=True
+    )
+    for filename, expected_hash in worksheet_hashes.items():
+        if not isinstance(filename, str) or Path(filename).name != filename:
+            raise CharacterPackageValidationError("approved worksheet name is invalid")
+        worksheet = worksheet_dir / filename
+        if not worksheet.is_file() or expected_hash != _digest_file(worksheet):
+            raise CharacterPackageValidationError(
+                "manifest worksheet hash differs for {}".format(filename)
+            )
+    if audit_raw is not None:
+        accepted = dict(worksheet_hashes)
+        for item in audit_raw.get("items", []):
+            source_cell = item.get("source_cell") if isinstance(item, Mapping) else None
+            source_name = str(source_cell).split("#", 1)[0]
+            if source_name not in accepted:
+                raise CharacterPackageValidationError("audit uses an unapproved worksheet")
+            if item.get("source_worksheet_sha256") != accepted[source_name]:
+                raise CharacterPackageValidationError("audit worksheet hash differs from manifest")
+
+
+def _repository_asset(
+    repository_root: Path,
+    value: Any,
+    name: str,
+    *,
+    directory: bool = False,
+) -> Path:
+    if not isinstance(value, str) or not value:
+        raise CharacterPackageValidationError("{} must be a repository path".format(name))
+    asset = (repository_root / value).resolve()
+    if repository_root not in asset.parents:
+        raise CharacterPackageValidationError("{} escapes the repository".format(name))
+    exists = asset.is_dir() if directory else asset.is_file()
+    if not exists:
+        raise CharacterPackageValidationError("{} is missing".format(name))
+    return asset
+
+
+def _digest_file(path: Path) -> str:
+    return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
 __all__ = [
@@ -237,5 +382,6 @@ __all__ = [
     "WIZARD_JOE_PACKAGE_PATH",
     "CRYSTAIL_PACKAGE_PATH",
     "ORION_VALE_PACKAGE_PATH",
+    "THORNE_VALE_PACKAGE_PATH",
     "load_character_package",
 ]

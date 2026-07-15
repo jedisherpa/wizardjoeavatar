@@ -25,6 +25,15 @@ ACTION_TO_CHANNELS = {
     "journal_hold": ("none", "rest"),
     "journal_write": ("none", "rest"),
     "journal_page_turn": ("none", "rest"),
+    "sword_upright": ("none", "held"),
+    "sword_guard_low": ("none", "held"),
+    "parchment_read": ("think", "rest"),
+    "policy_present": ("explain", "rest"),
+    "decision_rights": ("point", "held"),
+    "tradeoff_compare": ("explain", "rest"),
+    "risk_review": ("point", "rest"),
+    "incentive_analysis": ("think", "rest"),
+    "guarded_approval": ("none", "held"),
 }
 
 

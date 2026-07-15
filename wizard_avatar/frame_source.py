@@ -66,20 +66,20 @@ class ProceduralWizardFrameSource:
             WIZARD_JOE_PACKAGE_PATH if character_package_path is None else character_package_path
         )
         self.pose_library_path = self.character_package.pose_library
-        all_pose_ids = reference_pose_ids(self.pose_library_path)
         self.direct_cell_runtime_profile: Optional[DirectCellRuntimeProfile] = None
         if self.character_package.runtime_profile is not None:
             self.direct_cell_runtime_profile = load_direct_cell_runtime_profile(
                 self.character_package.runtime_profile
             )
-            validate_direct_cell_runtime_profile(
-                self.direct_cell_runtime_profile,
-                all_pose_ids,
-            )
         self.pose_ids = reference_pose_ids(
             self.pose_library_path,
             pose_capable_only=self.direct_cell_runtime_profile is not None,
         )
+        if self.direct_cell_runtime_profile is not None:
+            validate_direct_cell_runtime_profile(
+                self.direct_cell_runtime_profile,
+                self.pose_ids,
+            )
         self.controller = WizardAvatarController(
             self.pose_ids,
             self.character_package.character_id,

@@ -1,0 +1,91 @@
+{
+  "attachment_points": [
+    "mouth",
+    "left_eye",
+    "right_eye",
+    "left_hand",
+    "right_hand",
+    "left_foot",
+    "right_foot",
+    "parchment"
+  ],
+  "character_id": "thorne-vale-v1",
+  "derivation": {
+    "approved_worksheets": "assets/reference/personas/thorne-vale/canonical-worksheets",
+    "canonical_reference": "assets/reference/personas/thorne-vale/canonical-voxel.png",
+    "flattened_runtime_dependency": false,
+    "original_reference": "assets/reference/personas/thorne-vale/source-reference.png",
+    "runtime_art": "deterministic worksheet-derived direct cell library"
+  },
+  "display_name": "Thorne Vale",
+  "hashes": {
+    "animation_graph_sha256": "71f870c3712697f25a5f743ebdfa468b547d072fc945246ff8ee1b36e581e31a",
+    "animation_matrix_sha256": "671a49aef8a571ee87833861fba65a7ba60aea2d77d575d1b18080b4f5cb8a25",
+    "canonical_reference_sha256": "13a8eca0379f2957174fa48c44bd9d2342a22ad06c92952f5f915867a6bb9599",
+    "extraction_audit_sha256": "60e6b0eb7978936b29ed806611d442e29a150a9fb6fdf3536e1069bc445a42c3",
+    "extraction_item_count": 124,
+    "generation_profile_sha256": "8217f9c9f2bdf15f67152e912a1abd2f7704e1788409c04a0ceb9cde15f9f861",
+    "original_reference_sha256": "ad40f76a8b086711f3b3b44dcca63c8829a96e665fb15d5cedf588301e8e77d8",
+    "pixel_graph_library_sha256": "3d3aaf95beadd70ba91af238ba87f1160cc286299adc848785989932478d8e2d",
+    "pose_library_sha256": "c6120890f99543fab9a2d5a30efef14671c36da5078332a5085ec4e52a9dc7b9",
+    "worksheet_sha256": {
+      "01-identity-sheet-v3.png": "ca1e46c7d0a8e9a5a2578a06bbf7e8dc92a16237744528ef39ba1dc1e57d6e21",
+      "02-turnaround-sheet-v1.png": "92c43a81e2bcac5e51e082f36c081087893140a866510cf85c92197bbdbafbc8",
+      "03-neutral-base-poses-v1.png": "0ee8ba06372fa1e496e558bc49faff2db6787a24e0a421b653280755de9186bf",
+      "04-full-body-expression-sheet-v1.png": "1ce2066dddb667679718c0349a06d3ee9aa231cc23329fc2da1e010364f28502",
+      "05-full-body-viseme-blink-sheet-v1.png": "d2756c28f7a2ea1d80e9991ef10e0609cba9cf879164580c277ed091edf16304",
+      "06-hand-prop-sheet-v1.png": "c48b6a4c06b9757bc526fec89fff90a4680ea603b9dbff4e6158354c7e70a649",
+      "07-grounded-motion-sheet-v2.png": "b5bf4b4617e136d54debdeb90758fc4dffecc70e82d92ec85908fee30606cf9f",
+      "08-signature-actions-sheet-v1.png": "a66308fd38a35816dbe18a4c3eec9021b70784c54f934e862a3cc16a717ad793",
+      "09-articulation-open-closed-fist-reach-v1.png": "970e50296c47fc81c2180f1eae43a024ad5451b8a6d2dee4ca617e87f1c85ae3"
+    }
+  },
+  "identity_lock": {
+    "articulated": [
+      "brows",
+      "eyelids",
+      "mouth",
+      "neck",
+      "shoulders",
+      "elbows",
+      "wrists",
+      "fingers",
+      "hips",
+      "knees",
+      "ankles"
+    ],
+    "default_prop": "policy parchment and safely held sword",
+    "immutable": [
+      "tall bright-gold crenellated crown",
+      "brown hair",
+      "rectangular green eyes",
+      "thick dark-brown brows",
+      "long block nose",
+      "thick dark-brown mustache",
+      "bright-gold knee-length jacket",
+      "plain white shirt",
+      "brown belt with square gold buckle",
+      "tan trousers",
+      "dark-brown block boots",
+      "straight gray sword",
+      "rolled tan policy parchment"
+    ],
+    "personality": "restrained strategic authoritative deliberate guarded decisive"
+  },
+  "origin": {
+    "baseline_y": 91,
+    "cols": 72,
+    "root_anchor": [
+      36,
+      91
+    ],
+    "rows": 96,
+    "safe_inset": {
+      "bottom": 4,
+      "left": 4,
+      "right": 4,
+      "top": 4
+    }
+  },
+  "schema_version": 1
+}

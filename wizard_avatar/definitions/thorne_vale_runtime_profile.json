@@ -1,0 +1,80 @@
+{
+  "schema_version": 1,
+  "character_id": "thorne-vale-v1",
+  "scale_multiplier": 0.88,
+  "default_pose_id": "neutral_front",
+  "facing_poses": {
+    "south": "neutral_front",
+    "southwest": "neutral_three_quarter_left",
+    "west": "neutral_left_profile",
+    "northwest": "neutral_back_three_quarter_left",
+    "north": "neutral_back",
+    "northeast": "neutral_back_three_quarter_right",
+    "east": "neutral_right_profile",
+    "southeast": "neutral_three_quarter_right"
+  },
+  "action_poses": {
+    "explaining": "risk_review_action",
+    "pointing": "risk_review_action",
+    "thinking": "tradeoff_anticipation",
+    "reaction": "decision_rights_follow_through",
+    "celebrating": "incentive_follow_through",
+    "containment": "decision_rights_recovery",
+    "magic_cast": "decision_rights_action",
+    "turn_left": "turn_left",
+    "turn_right": "turn_right",
+    "crouch": "crouch",
+    "jump": "jump_airborne",
+    "fall": "fall",
+    "land": "land_contact",
+    "listening": "idle_listening",
+    "sword_upright": "decision_rights_action",
+    "sword_guard_low": "decision_rights_recovery",
+    "parchment_read": "risk_review_anticipation",
+    "policy_present": "tradeoff_action",
+    "decision_rights": "decision_rights_action",
+    "tradeoff_compare": "tradeoff_action",
+    "risk_review": "risk_review_action",
+    "incentive_analysis": "incentive_action",
+    "guarded_approval": "incentive_recovery"
+  },
+  "expression_aliases": {
+    "happy": "joy",
+    "amused": "amusement",
+    "surprised": "surprise",
+    "worried": "concern",
+    "confident": "confidence",
+    "skeptical": "skepticism",
+    "thinking": "contemplation",
+    "focused": "determination",
+    "explaining": "curiosity"
+  },
+  "walking_cycle": [
+    "walk_contact_left",
+    "walk_passing_left",
+    "walk_contact_right",
+    "walk_passing_right"
+  ],
+  "running_cycle": ["run_reach", "run_drive"],
+  "airborne_poses": {},
+  "speech_poses": [
+    "viseme_rest",
+    "viseme_closed_lips",
+    "viseme_slightly_open",
+    "viseme_wide_vowel",
+    "viseme_open_vowel",
+    "viseme_rounded_vowel",
+    "viseme_teeth_consonant",
+    "viseme_lower_lip_consonant",
+    "viseme_tongue_consonant",
+    "viseme_smile_speaking",
+    "viseme_frown_speaking",
+    "viseme_speech_emphasis",
+    "viseme_breath_pause"
+  ],
+  "blink_poses": {
+    "open": "blink_open",
+    "half_closed": "blink_half_closed",
+    "closed": "blink_closed"
+  }
+}

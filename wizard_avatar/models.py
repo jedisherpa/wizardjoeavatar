@@ -71,6 +71,15 @@ ACTIONS = (
     "journal_hold",
     "journal_write",
     "journal_page_turn",
+    "sword_upright",
+    "sword_guard_low",
+    "parchment_read",
+    "policy_present",
+    "decision_rights",
+    "tradeoff_compare",
+    "risk_review",
+    "incentive_analysis",
+    "guarded_approval",
 )
 
 MOUTH_SHAPES = (
