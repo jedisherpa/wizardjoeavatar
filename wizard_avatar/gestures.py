@@ -15,6 +15,16 @@ ACTION_TO_CHANNELS = {
     "reaction": ("react", "held"),
     "celebrating": ("react", "held"),
     "containment": ("think", "rest"),
+    "turn_left": ("none", "held"),
+    "turn_right": ("none", "held"),
+    "crouch": ("none", "held"),
+    "jump": ("none", "held"),
+    "fall": ("react", "held"),
+    "land": ("none", "held"),
+    "listening": ("none", "held"),
+    "journal_hold": ("none", "rest"),
+    "journal_write": ("none", "rest"),
+    "journal_page_turn": ("none", "rest"),
 }
 
 

@@ -24,16 +24,32 @@ class CharacterRegistry:
             raise ValueError("Unknown character: {}".format(character_id)) from exc
 
     def public_entries(self) -> Tuple[dict, ...]:
-        return tuple(
-            {
+        entries = []
+        for package in self.packages.values():
+            base = "/avatar/characters/{}/".format(package.character_id)
+            assets = {
+                "package": base + "package",
+                "pose_library": base + "pose-library",
+                "animation_graph": base + "animation-graph",
+            }
+            for name, path in (
+                ("runtime_profile", package.runtime_profile),
+                ("manifest", package.manifest),
+                ("animation_matrix", package.animation_matrix),
+                ("extraction_audit", package.extraction_audit),
+                ("pixel_graph_library", package.pixel_graph_library),
+            ):
+                if path is not None:
+                    assets[name] = base + name.replace("_", "-")
+            entries.append({
                 "character_id": package.character_id,
                 "display_name": package.display_name,
                 "renderer": package.renderer,
                 "default_pose_id": package.default_pose_id,
                 "capabilities": list(package.capabilities),
-            }
-            for package in self.packages.values()
-        )
+                "assets": assets,
+            })
+        return tuple(entries)
 
 
 def load_character_registry(path: Path = CHARACTER_REGISTRY_PATH) -> CharacterRegistry:
