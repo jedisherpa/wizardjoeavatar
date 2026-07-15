@@ -15,6 +15,14 @@ from .crystail import (
     resolve_crystail_pose_id,
 )
 from .diagnostics import FrameDiagnostics
+from .direct_cell_character import (
+    DirectCellRuntimeProfile,
+    load_direct_cell_runtime_profile,
+    resolve_direct_cell_blink_pose_id,
+    resolve_direct_cell_pose_id,
+    resolve_direct_cell_speech_pose_id,
+    validate_direct_cell_runtime_profile,
+)
 from .floor import build_background
 from .layers import ROOT_ANCHOR, render_wizard_local
 from .models import Cell, CommandResult, WizardCellFrame, WizardCommand, WizardState
@@ -58,7 +66,20 @@ class ProceduralWizardFrameSource:
             WIZARD_JOE_PACKAGE_PATH if character_package_path is None else character_package_path
         )
         self.pose_library_path = self.character_package.pose_library
-        self.pose_ids = reference_pose_ids(self.pose_library_path)
+        all_pose_ids = reference_pose_ids(self.pose_library_path)
+        self.direct_cell_runtime_profile: Optional[DirectCellRuntimeProfile] = None
+        if self.character_package.runtime_profile is not None:
+            self.direct_cell_runtime_profile = load_direct_cell_runtime_profile(
+                self.character_package.runtime_profile
+            )
+            validate_direct_cell_runtime_profile(
+                self.direct_cell_runtime_profile,
+                all_pose_ids,
+            )
+        self.pose_ids = reference_pose_ids(
+            self.pose_library_path,
+            pose_capable_only=self.direct_cell_runtime_profile is not None,
+        )
         self.controller = WizardAvatarController(
             self.pose_ids,
             self.character_package.character_id,
@@ -97,6 +118,8 @@ class ProceduralWizardFrameSource:
         state.screen_position["y"] = sy
         if self.character_package.character_id == CRYSTAIL_CHARACTER_ID:
             return self._render_crystail_frame(state, sx, sy, scale)
+        if self.direct_cell_runtime_profile is not None:
+            return self._render_direct_cell_character_frame(state, sx, sy, scale)
         use_reference_pose_library = reference_pose_library_available(self.pose_library_path)
         if use_reference_pose_library:
             stage = build_background(self.cols, self.rows).copy()
@@ -201,6 +224,183 @@ class ProceduralWizardFrameSource:
             cells=cells,
             raw_size=len(cells),
         )
+
+    def _render_direct_cell_character_frame(
+        self,
+        state: WizardState,
+        sx: float,
+        sy: float,
+        projected_scale: float,
+    ) -> WizardCellFrame:
+        profile = self.direct_cell_runtime_profile
+        if profile is None:  # pragma: no cover - guarded by caller.
+            raise RuntimeError("direct-cell runtime profile is not loaded")
+        stage = build_background(self.cols, self.rows).copy()
+        altitude_scale = max(0.78, 1.0 - state.altitude * 0.055)
+        render_scale = projected_scale * profile.scale_multiplier * altitude_scale
+        pose_id = resolve_direct_cell_pose_id(state, profile, self.pose_ids)
+        local = render_reference_pose_local(pose_id, self.pose_library_path)
+        root_anchor = reference_pose_root_anchor(pose_id, self.pose_library_path)
+        self._apply_direct_cell_face_channels(local, pose_id, state, profile)
+        root_screen = self._reference_root_screen(sx, sy, state, render_scale)
+        state.last_pose_id = state.pose_id
+        state.pose_id = pose_id
+        state.pose_transition_progress = 1.0
+        state.display_scale = render_scale
+        lifted = state.airborne or pose_id in {
+            "jump_airborne", "fall", "hover_up", "hover_down", "glide", "takeoff"
+        }
+        shadow_root = (
+            root_screen[0],
+            root_screen[1] + state.altitude * 8.0 * render_scale,
+        )
+        draw_contact_shadow(stage, shadow_root[0], shadow_root[1], render_scale, lifted=lifted)
+        blit_scaled(stage, local, root_anchor, root_screen, render_scale)
+        cells = stage.to_frame_bytes()
+        return WizardCellFrame(
+            cols=self.cols,
+            rows=self.rows,
+            frame_index=self.frame_index,
+            cells=cells,
+            raw_size=len(cells),
+        )
+
+    def _apply_direct_cell_face_channels(
+        self,
+        target: CellCanvas,
+        target_pose_id: str,
+        state: WizardState,
+        profile: DirectCellRuntimeProfile,
+    ) -> None:
+        """Compose authored speech and blink regions over the current body.
+
+        Face channels use pose-local anchors, so speaking never replaces a
+        walking, action, expression, or journal body pose. Back-facing views
+        intentionally retain their authored hidden face rather than receiving
+        a front-view patch.
+        """
+        if state.facing in {"north", "northeast", "northwest"}:
+            return
+        speech_pose_id = resolve_direct_cell_speech_pose_id(state, profile, self.pose_ids)
+        if speech_pose_id is not None:
+            self._copy_direct_cell_feature(
+                target,
+                target_pose_id,
+                speech_pose_id,
+                "mouth",
+                left=6,
+                right=6,
+                above=4,
+                below=3,
+            )
+        blink_pose_id = resolve_direct_cell_blink_pose_id(state, profile, self.pose_ids)
+        if blink_pose_id is not None and blink_pose_id != profile.blink_poses.get("open"):
+            open_pose_id = profile.blink_poses.get("open")
+            if open_pose_id is None:
+                return
+            for eye_anchor in ("left_eye", "right_eye"):
+                self._copy_direct_cell_feature_delta(
+                    target,
+                    target_pose_id,
+                    blink_pose_id,
+                    open_pose_id,
+                    eye_anchor,
+                    left=3,
+                    right=3,
+                    above=2,
+                    below=2,
+                )
+
+    def _copy_direct_cell_feature(
+        self,
+        target: CellCanvas,
+        target_pose_id: str,
+        donor_pose_id: str,
+        anchor_name: str,
+        *,
+        left: int,
+        right: int,
+        above: int,
+        below: int,
+    ) -> None:
+        target_anchor = reference_pose_anchor(
+            target_pose_id, anchor_name, self.pose_library_path
+        )
+        donor_anchor = reference_pose_anchor(
+            donor_pose_id, anchor_name, self.pose_library_path
+        )
+        donor = render_reference_pose_local(donor_pose_id, self.pose_library_path)
+        for dy in range(-above, below + 1):
+            for dx in range(-left, right + 1):
+                target_x, target_y = target_anchor[0] + dx, target_anchor[1] + dy
+                donor_cell = donor.get(donor_anchor[0] + dx, donor_anchor[1] + dy)
+                target.clear_cell(target_x, target_y)
+                if donor_cell is not None:
+                    target.set(
+                        target_x,
+                        target_y,
+                        donor_cell.glyph,
+                        donor_cell.rgb,
+                        "direct_cell_face:{}".format(donor_pose_id),
+                    )
+
+    def _copy_direct_cell_feature_delta(
+        self,
+        target: CellCanvas,
+        target_pose_id: str,
+        donor_pose_id: str,
+        reference_pose_id: str,
+        anchor_name: str,
+        *,
+        left: int,
+        right: int,
+        above: int,
+        below: int,
+    ) -> None:
+        """Apply only authored differences, preserving the target face/view."""
+        target_anchor = reference_pose_anchor(
+            target_pose_id, anchor_name, self.pose_library_path
+        )
+        donor_anchor = reference_pose_anchor(
+            donor_pose_id, anchor_name, self.pose_library_path
+        )
+        reference_anchor = reference_pose_anchor(
+            reference_pose_id, anchor_name, self.pose_library_path
+        )
+        donor = render_reference_pose_local(donor_pose_id, self.pose_library_path)
+        reference = render_reference_pose_local(reference_pose_id, self.pose_library_path)
+        for dy in range(-above, below + 1):
+            for dx in range(-left, right + 1):
+                donor_cell = donor.get(donor_anchor[0] + dx, donor_anchor[1] + dy)
+                reference_cell = reference.get(
+                    reference_anchor[0] + dx,
+                    reference_anchor[1] + dy,
+                )
+                if not self._direct_cell_feature_changed(donor_cell, reference_cell):
+                    continue
+                target_x, target_y = target_anchor[0] + dx, target_anchor[1] + dy
+                if donor_cell is None:
+                    target.clear_cell(target_x, target_y)
+                else:
+                    target.set(
+                        target_x,
+                        target_y,
+                        donor_cell.glyph,
+                        donor_cell.rgb,
+                        "direct_cell_blink:{}".format(donor_pose_id),
+                    )
+
+    @staticmethod
+    def _direct_cell_feature_changed(
+        donor_cell: Optional[Cell],
+        reference_cell: Optional[Cell],
+    ) -> bool:
+        if donor_cell is None or reference_cell is None:
+            return donor_cell is not reference_cell
+        return max(
+            abs(donor - reference)
+            for donor, reference in zip(donor_cell.rgb, reference_cell.rgb)
+        ) >= 18
 
     def _reference_pose_canvas_for_sample(
         self,
