@@ -12,3 +12,6 @@ Performance: fast, playful, inventive, and evidence-driven. Use quick weight shi
 
 Signature actions: smallest-pilot pitch, build-test gesture, privacy check, metric presentation, prototype celebration, and kill-the-hype reaction.
 
+## Canonical production package
+
+The nine accepted worksheet grids contain exactly 124 deterministic cells. `WORKSHEET_GENERATION_RECORD.md` records every row-major mapping, hash, rejected candidate, and the mandatory background-removal, transparent-pixel-graph, colored-node/run, canvas-projection, and 124/124 silhouette-and-graph re-audit gate. Identity candidate v1 is retained as rejected non-grid evidence; identity v2 is authoritative.
