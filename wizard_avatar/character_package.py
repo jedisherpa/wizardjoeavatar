@@ -1,14 +1,16 @@
 from __future__ import annotations
 
 import json
+import hashlib
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Any, Mapping, Tuple
+from typing import Any, Mapping, Optional, Tuple
 
 
 DEFINITIONS_DIR = Path(__file__).with_name("definitions")
 WIZARD_JOE_PACKAGE_PATH = DEFINITIONS_DIR / "wizard_joe_character_package.json"
 CRYSTAIL_PACKAGE_PATH = DEFINITIONS_DIR / "crystail_character_package.json"
+ORION_VALE_PACKAGE_PATH = DEFINITIONS_DIR / "orion_vale_character_package.json"
 
 
 class CharacterPackageValidationError(ValueError):
@@ -25,6 +27,12 @@ class CharacterPackage:
     animation_graph: Path
     default_pose_id: str
     capabilities: Tuple[str, ...]
+    package_path: Path
+    runtime_profile: Optional[Path] = None
+    manifest: Optional[Path] = None
+    animation_matrix: Optional[Path] = None
+    extraction_audit: Optional[Path] = None
+    pixel_graph_library: Optional[Path] = None
 
 
 def load_character_package(path: Path = WIZARD_JOE_PACKAGE_PATH) -> CharacterPackage:
@@ -45,7 +53,11 @@ def load_character_package(path: Path = WIZARD_JOE_PACKAGE_PATH) -> CharacterPac
         "default_pose_id",
         "capabilities",
     }
-    unknown = sorted(set(raw) - required)
+    optional = {
+        "runtime_profile", "manifest", "animation_matrix", "extraction_audit",
+        "pixel_graph_library",
+    }
+    unknown = sorted(set(raw) - required - optional)
     missing = sorted(required - set(raw))
     if unknown or missing:
         raise CharacterPackageValidationError(
@@ -74,6 +86,35 @@ def load_character_package(path: Path = WIZARD_JOE_PACKAGE_PATH) -> CharacterPac
     graph_pose_ids = _graph_pose_ids(graph_raw)
     if not graph_pose_ids.issubset(pose_ids):
         raise CharacterPackageValidationError("animation graph references unknown poses")
+    runtime_profile = None
+    if "runtime_profile" in raw:
+        runtime_profile = _package_asset(package_path, raw["runtime_profile"], "runtime_profile")
+        profile_raw = json.loads(runtime_profile.read_text(encoding="utf-8"))
+        if not isinstance(profile_raw, Mapping) or profile_raw.get("schema_version") != 1:
+            raise CharacterPackageValidationError("runtime_profile must use schema_version 1")
+        if profile_raw.get("character_id") != raw["character_id"]:
+            raise CharacterPackageValidationError("runtime_profile character_id does not match package")
+    optional_assets = {}
+    for name in ("manifest", "animation_matrix", "extraction_audit", "pixel_graph_library"):
+        optional_assets[name] = (
+            _package_asset(package_path, raw[name], name) if name in raw else None
+        )
+    if (optional_assets["extraction_audit"] is None) != (
+        optional_assets["pixel_graph_library"] is None
+    ):
+        raise CharacterPackageValidationError(
+            "extraction_audit and pixel_graph_library must be supplied together"
+        )
+    if optional_assets["extraction_audit"] is not None:
+        audit_raw = json.loads(
+            optional_assets["extraction_audit"].read_text(encoding="utf-8")
+        )
+        pixel_graph_raw = json.loads(
+            optional_assets["pixel_graph_library"].read_text(encoding="utf-8")
+        )
+        _validate_extraction_audit(
+            raw["character_id"], pose_raw, pixel_graph_raw, audit_raw
+        )
     return CharacterPackage(
         schema_version=1,
         character_id=str(raw["character_id"]),
@@ -83,6 +124,12 @@ def load_character_package(path: Path = WIZARD_JOE_PACKAGE_PATH) -> CharacterPac
         animation_graph=animation_graph,
         default_pose_id=str(raw["default_pose_id"]),
         capabilities=tuple(capabilities),
+        package_path=package_path,
+        runtime_profile=runtime_profile,
+        manifest=optional_assets["manifest"],
+        animation_matrix=optional_assets["animation_matrix"],
+        extraction_audit=optional_assets["extraction_audit"],
+        pixel_graph_library=optional_assets["pixel_graph_library"],
     )
 
 
@@ -127,10 +174,68 @@ def _graph_pose_ids(raw: Any) -> set[str]:
     return result
 
 
+def _validate_extraction_audit(
+    character_id: str,
+    pose_raw: Any,
+    pixel_graph_raw: Any,
+    audit_raw: Any,
+) -> None:
+    """Reject unaudited or altered pixel graphs before runtime pose mapping."""
+    if not isinstance(audit_raw, Mapping) or audit_raw.get("schema_version") != 1:
+        raise CharacterPackageValidationError("extraction_audit must use schema_version 1")
+    if audit_raw.get("character_id") != character_id:
+        raise CharacterPackageValidationError("extraction_audit character_id does not match package")
+    poses = pose_raw.get("poses") if isinstance(pose_raw, Mapping) else None
+    graphs = pixel_graph_raw.get("graphs") if isinstance(pixel_graph_raw, Mapping) else None
+    items = audit_raw.get("items")
+    if not isinstance(poses, list) or not isinstance(graphs, list) or not isinstance(items, list):
+        raise CharacterPackageValidationError("extraction_audit must expose pose items")
+    pose_by_id = {
+        str(pose.get("id")): pose
+        for pose in poses
+        if isinstance(pose, Mapping) and isinstance(pose.get("id"), str)
+    }
+    graph_by_id = {
+        str(graph.get("id")): graph
+        for graph in graphs
+        if isinstance(graph, Mapping) and isinstance(graph.get("id"), str)
+    }
+    for pose_id, pose in pose_by_id.items():
+        if pose_id in graph_by_id:
+            raise CharacterPackageValidationError(
+                "pixel graph library duplicates runtime pose: {}".format(pose_id)
+            )
+        graph_by_id[pose_id] = {"id": pose_id, "nodes": pose.get("cells")}
+    item_by_id = {
+        str(item.get("graph_id")): item
+        for item in items
+        if isinstance(item, Mapping) and isinstance(item.get("graph_id"), str)
+    }
+    if set(graph_by_id) != set(item_by_id) or audit_raw.get("item_count") != len(graph_by_id):
+        raise CharacterPackageValidationError("extraction_audit does not cover every pixel graph")
+    for graph_id, graph in graph_by_id.items():
+        item = item_by_id[graph_id]
+        if item.get("background_removed") is not True:
+            raise CharacterPackageValidationError("pose background removal was not audited")
+        if item.get("runtime_format") != "colored_pixel_nodes_json":
+            raise CharacterPackageValidationError("unsupported audited runtime format")
+        runtime_asset = item.get("runtime_asset")
+        if not isinstance(runtime_asset, str) or runtime_asset.lower().endswith((".png", ".svg")):
+            raise CharacterPackageValidationError("runtime image assets are forbidden")
+        cells = graph.get("nodes")
+        compact = json.dumps(cells, separators=(",", ":"), sort_keys=True)
+        digest = hashlib.sha256(compact.encode("utf-8")).hexdigest()
+        if item.get("pixel_graph_sha256") != digest:
+            raise CharacterPackageValidationError(
+                "extraction_audit hash differs for graph {}".format(graph_id)
+            )
+
+
 __all__ = [
     "CharacterPackage",
     "CharacterPackageValidationError",
     "WIZARD_JOE_PACKAGE_PATH",
     "CRYSTAIL_PACKAGE_PATH",
+    "ORION_VALE_PACKAGE_PATH",
     "load_character_package",
 ]
