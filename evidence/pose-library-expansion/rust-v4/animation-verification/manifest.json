@@ -1,6 +1,7 @@
 {
   "schema_version": 2,
   "generator": "wizard-avatar-pose-evidence-rust-v4",
+  "source_git_sha": "fc63a938f095f08421a57b2a7019ca22acb9ce56",
   "simulation_fps": 60,
   "frame_width": 480,
   "frame_height": 270,

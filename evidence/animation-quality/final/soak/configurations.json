@@ -12,6 +12,12 @@
     "intended_use": "30-minute CI soak"
   },
   {
+    "mode": "newsroom",
+    "total_seconds": 3600,
+    "seconds_per_viewer_count": 720.0,
+    "intended_use": "60-minute newsroom release gate"
+  },
+  {
     "mode": "nightly",
     "total_seconds": 7200,
     "seconds_per_viewer_count": 1440.0,

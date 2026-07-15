@@ -52,11 +52,19 @@ Joe Newsroom compositor, set occlusion, editorial graphics, TTS authority, and f
 
 ## Verification Result
 
-The implementation source gate passed the focused newsroom contracts, clippy with warnings denied, Rust doc tests, all 18 browser presentation tests, and `cargo test --locked --all-targets`. The all-target run includes the 1,015.32-second authored-neighbor breakup gate and the 252.95-second imported-pose loop gate. A release-mode short soak also passed with warmed actor-sample p50/p95/p99 timings of 5.75/8.49/8.49 milliseconds against a 250-millisecond p99 ceiling and a 64 MiB peak-RSS-growth ceiling.
+The implementation source gate passed the focused newsroom contracts, clippy with warnings denied, Rust doc tests, all 18 browser presentation tests, and `cargo test --locked --all-targets`. The all-target run includes the 1,015.32-second authored-neighbor breakup gate and the 252.95-second imported-pose loop gate. The canonical 15-second release soak also passed with warmed actor-sample p50/p95/p99 timings of 5.77/9.39/9.39 milliseconds against a 250-millisecond p99 ceiling and a 64 MiB peak-RSS-growth ceiling.
 
-The exact-SHA frame run and named 60-minute newsroom soak remain the evidence-only release gates after the clean implementation commit. The soak exercises all semantic commands and seeded variants, correction and reduced-motion policy, stale rejection, actor-sample generation, runtime clock continuity, reconnects, bounded fanout queues, canonical frame hashes, process RSS, and actor-sample latency percentiles; its retained result is `evidence/animation-quality/final/soak/newsroom.json`.
+The exact-SHA frame run and named 60-minute newsroom soak both passed against implementation commit `fc63a938f095f08421a57b2a7019ca22acb9ce56`. The retained soak result is `evidence/animation-quality/final/soak/newsroom.json` and records:
 
-The optimized visual preflight produced:
+- 3,600.09 seconds across 0/1/2/4/8-viewer scenarios.
+- 7,200 semantic cues and 7,200 verified receipts.
+- all 88 semantic poses, 379 correction receipts, and 1,028 reduced-motion receipts.
+- five stale-cue rejections, six validated actor samples, and 15 reconnects.
+- zero simulation/render deadline misses, sequence gaps, lag events, frame-hash mismatches, or generation leaks.
+- actor-sample p50/p95/p99 of 5.51/8.43/8.43 milliseconds against a 250-millisecond p99 ceiling.
+- maximum per-scenario peak-RSS growth of 2,880 KiB against a 65,536-KiB ceiling.
+
+The exact-SHA optimized visual evidence run produced:
 
 - 24,724 frames in each of two complete passes.
 - 621 authored transitions.
@@ -67,7 +75,7 @@ The optimized visual preflight produced:
 - exact source/adaptive-decode/presentation parity.
 - identical replay SHA-256: `d4710b9125817a9efcd3bf2de43409e4b6f1cd724ad14dd7ce785cad7590ec5e`.
 
-The final run embeds its clean source commit in both evidence manifests. Generated frame PNGs and the raw frame stream remain reproducible build evidence and are ignored because they exceed practical Git storage. The compact manifest and timeline contact sheet are retained in Git.
+Both retained manifests identify the clean source commit. Generated frame PNGs and the raw frame stream remain reproducible build evidence and are ignored because they exceed practical Git storage. The compact manifest and timeline contact sheet are retained in Git.
 
 ## Reproduction
 
