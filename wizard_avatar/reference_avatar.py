@@ -33,6 +33,7 @@ class ReferencePose:
     root_anchor: Tuple[int, int]
     anchors: Dict[str, Tuple[int, int]]
     cells: Tuple[ReferencePoseCell, ...]
+    pose_capable: bool = True
 
 
 @lru_cache(maxsize=1)
@@ -86,6 +87,7 @@ def _reference_pose_map(path: Path = REFERENCE_POSE_CELL_PATH) -> Dict[str, Refe
             root_anchor=(int(root[0]), int(root[1])),
             anchors=anchors,
             cells=cells,
+            pose_capable=str(pose.get("graph_kind", "full_body_graph")) != "feature_graph",
         )
     if not poses:
         raise ValueError(f"No reference poses found in {library_path}")
@@ -100,8 +102,17 @@ def reference_pose_library_available(path: Path = REFERENCE_POSE_CELL_PATH) -> b
     return Path(path).resolve().exists()
 
 
-def reference_pose_ids(path: Path = REFERENCE_POSE_CELL_PATH) -> Tuple[str, ...]:
-    return tuple(_reference_pose_map(Path(path).resolve()).keys())
+def reference_pose_ids(
+    path: Path = REFERENCE_POSE_CELL_PATH,
+    *,
+    pose_capable_only: bool = False,
+) -> Tuple[str, ...]:
+    poses = _reference_pose_map(Path(path).resolve())
+    return tuple(
+        pose_id
+        for pose_id, pose in poses.items()
+        if not pose_capable_only or pose.pose_capable
+    )
 
 
 def get_reference_pose(
