@@ -61,6 +61,16 @@ ACTIONS = (
     "reaction",
     "celebrating",
     "containment",
+    "turn_left",
+    "turn_right",
+    "crouch",
+    "jump",
+    "fall",
+    "land",
+    "listening",
+    "journal_hold",
+    "journal_write",
+    "journal_page_turn",
 )
 
 MOUTH_SHAPES = (
