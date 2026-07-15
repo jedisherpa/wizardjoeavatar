@@ -24,6 +24,11 @@ implementation pass).
   cells, isolation method, bounds, node counts, and graph hashes.
 - Package loading recomputes every one of the 124 graph hashes before the
   animation profile and controller are constructed.
+- The retained human-review render is
+  `evidence/orion-vale/124-graph-contact-sheet.png` (SHA-256
+  `c17b74c5b8777c0cae6ef85bc2d449b01756276e6a817a44d4b96c52aa55881f`).
+  It is evidence only; the runtime continues to consume transparent colored
+  JSON nodes rather than PNG or SVG render assets.
 
 The approved revision-2 neutral, expression, speech/blink, and ground-motion
 sheets are used. Expression revision-2 panel 23 is blank, so its corresponding
