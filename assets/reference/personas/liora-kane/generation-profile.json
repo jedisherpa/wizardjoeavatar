@@ -1,0 +1,1441 @@
+{
+  "schema_version": 1,
+  "character_id": "liora-kane-v1",
+  "display_name": "Liora Kane",
+  "asset_set_id": "liora-kane-worksheet-motion-v1",
+  "output_prefix": "liora_kane",
+  "references": {
+    "original_reference": "assets/reference/personas/liora-kane/source-reference.png",
+    "canonical_reference": "assets/reference/personas/liora-kane/canonical-voxel.png",
+    "worksheets_dir": "assets/reference/personas/liora-kane/canonical-worksheets"
+  },
+  "sheet_revision_overrides": {},
+  "canonical": {
+    "cols": 72,
+    "rows": 96,
+    "root_anchor": [
+      36,
+      91
+    ],
+    "baseline_y": 91,
+    "safe_inset": {
+      "left": 4,
+      "right": 4,
+      "top": 4,
+      "bottom": 4
+    }
+  },
+  "expected_extraction_counts": {
+    "identity_reference": 16,
+    "turnaround": 8,
+    "neutral": 8,
+    "expression": 24,
+    "viseme_blink": 16,
+    "hand_prop": 16,
+    "motion": 16,
+    "signature": 16,
+    "interaction": 4
+  },
+  "reference_cells": [
+    {
+      "id": "identity_reference_00",
+      "sheet": "01-identity-sheet-candidate-v1.png",
+      "columns": 4,
+      "rows": 4,
+      "index": 0,
+      "graph_kind": "reference_graph"
+    },
+    {
+      "id": "identity_reference_01",
+      "sheet": "01-identity-sheet-candidate-v1.png",
+      "columns": 4,
+      "rows": 4,
+      "index": 1,
+      "graph_kind": "reference_graph"
+    },
+    {
+      "id": "identity_reference_02",
+      "sheet": "01-identity-sheet-candidate-v1.png",
+      "columns": 4,
+      "rows": 4,
+      "index": 2,
+      "graph_kind": "reference_graph"
+    },
+    {
+      "id": "identity_reference_03",
+      "sheet": "01-identity-sheet-candidate-v1.png",
+      "columns": 4,
+      "rows": 4,
+      "index": 3,
+      "graph_kind": "reference_graph"
+    },
+    {
+      "id": "identity_reference_04",
+      "sheet": "01-identity-sheet-candidate-v1.png",
+      "columns": 4,
+      "rows": 4,
+      "index": 4,
+      "graph_kind": "reference_graph"
+    },
+    {
+      "id": "identity_reference_05",
+      "sheet": "01-identity-sheet-candidate-v1.png",
+      "columns": 4,
+      "rows": 4,
+      "index": 5,
+      "graph_kind": "reference_graph"
+    },
+    {
+      "id": "identity_reference_06",
+      "sheet": "01-identity-sheet-candidate-v1.png",
+      "columns": 4,
+      "rows": 4,
+      "index": 6,
+      "graph_kind": "reference_graph"
+    },
+    {
+      "id": "identity_reference_07",
+      "sheet": "01-identity-sheet-candidate-v1.png",
+      "columns": 4,
+      "rows": 4,
+      "index": 7,
+      "graph_kind": "reference_graph"
+    },
+    {
+      "id": "identity_reference_08",
+      "sheet": "01-identity-sheet-candidate-v1.png",
+      "columns": 4,
+      "rows": 4,
+      "index": 8,
+      "graph_kind": "reference_graph"
+    },
+    {
+      "id": "identity_reference_09",
+      "sheet": "01-identity-sheet-candidate-v1.png",
+      "columns": 4,
+      "rows": 4,
+      "index": 9,
+      "graph_kind": "reference_graph"
+    },
+    {
+      "id": "identity_reference_10",
+      "sheet": "01-identity-sheet-candidate-v1.png",
+      "columns": 4,
+      "rows": 4,
+      "index": 10,
+      "graph_kind": "reference_graph"
+    },
+    {
+      "id": "identity_reference_11",
+      "sheet": "01-identity-sheet-candidate-v1.png",
+      "columns": 4,
+      "rows": 4,
+      "index": 11,
+      "graph_kind": "reference_graph"
+    },
+    {
+      "id": "identity_reference_12",
+      "sheet": "01-identity-sheet-candidate-v1.png",
+      "columns": 4,
+      "rows": 4,
+      "index": 12,
+      "graph_kind": "reference_graph"
+    },
+    {
+      "id": "identity_reference_13",
+      "sheet": "01-identity-sheet-candidate-v1.png",
+      "columns": 4,
+      "rows": 4,
+      "index": 13,
+      "graph_kind": "reference_graph"
+    },
+    {
+      "id": "identity_reference_14",
+      "sheet": "01-identity-sheet-candidate-v1.png",
+      "columns": 4,
+      "rows": 4,
+      "index": 14,
+      "graph_kind": "reference_graph"
+    },
+    {
+      "id": "identity_reference_15",
+      "sheet": "01-identity-sheet-candidate-v1.png",
+      "columns": 4,
+      "rows": 4,
+      "index": 15,
+      "graph_kind": "reference_graph"
+    }
+  ],
+  "extraction": {
+    "foreground_mode": "background_distance",
+    "largest_component": true,
+    "detail_radius": 0,
+    "corner_sample": 12,
+    "background_tolerance": 90,
+    "close_filter": 5,
+    "edge_clear": 2,
+    "crop_margin": 3,
+    "alpha_threshold": 42
+  },
+  "default_anchors": {
+    "root": [
+      36,
+      91
+    ],
+    "mouth": [
+      36,
+      25
+    ],
+    "left_eye": [
+      31,
+      20
+    ],
+    "right_eye": [
+      41,
+      20
+    ],
+    "left_hand": [
+      24,
+      59
+    ],
+    "right_hand": [
+      48,
+      59
+    ],
+    "left_foot": [
+      30,
+      91
+    ],
+    "right_foot": [
+      42,
+      91
+    ],
+    "notebook": [
+      36,
+      58
+    ]
+  },
+  "anchor_ratios": {
+    "mouth": [
+      0.5,
+      0.245
+    ],
+    "left_eye": [
+      0.445,
+      0.195
+    ],
+    "right_eye": [
+      0.555,
+      0.195
+    ],
+    "left_hand": [
+      0.275,
+      0.575
+    ],
+    "right_hand": [
+      0.725,
+      0.575
+    ],
+    "left_foot": [
+      0.42,
+      0.97
+    ],
+    "right_foot": [
+      0.58,
+      0.97
+    ],
+    "notebook": [
+      0.5,
+      0.56
+    ]
+  },
+  "anchor_presence": {
+    "notebook": [
+      "idle_speaking",
+      "idle_listening",
+      "support_listening_start",
+      "support_listening_nod",
+      "family_plan_open_notebook",
+      "family_plan_point_to_page",
+      "belonging_checkin_open_hand",
+      "belonging_checkin_pause",
+      "privacy_notebook_shield",
+      "privacy_calm_stop_palm",
+      "escalation_assess",
+      "escalation_indicate_next_step",
+      "support_notebook_write",
+      "support_present_plan",
+      "supportive_hand_offer",
+      "protective_grounded_stance",
+      "quiet_reassurance",
+      "slow_neutral_recovery",
+      "prop_notebook_hold_center",
+      "prop_notebook_cradle",
+      "prop_notebook_present",
+      "prop_notebook_open",
+      "prop_notebook_write",
+      "prop_notebook_page_turn",
+      "prop_notebook_close",
+      "prop_notebook_side_hold",
+      "prop_notebook_offer"
+    ]
+  },
+  "poses": [
+    {
+      "id": "neutral_front",
+      "sheet": "02-turnaround-sheet-candidate-v1.png",
+      "columns": 4,
+      "rows": 2,
+      "index": 0,
+      "facing": "south"
+    },
+    {
+      "id": "neutral_three_quarter_left",
+      "sheet": "02-turnaround-sheet-candidate-v1.png",
+      "columns": 4,
+      "rows": 2,
+      "index": 1,
+      "facing": "southwest"
+    },
+    {
+      "id": "neutral_left_profile",
+      "sheet": "02-turnaround-sheet-candidate-v1.png",
+      "columns": 4,
+      "rows": 2,
+      "index": 2,
+      "facing": "west"
+    },
+    {
+      "id": "neutral_back_three_quarter_left",
+      "sheet": "02-turnaround-sheet-candidate-v1.png",
+      "columns": 4,
+      "rows": 2,
+      "index": 3,
+      "facing": "northwest"
+    },
+    {
+      "id": "neutral_back",
+      "sheet": "02-turnaround-sheet-candidate-v1.png",
+      "columns": 4,
+      "rows": 2,
+      "index": 4,
+      "facing": "north"
+    },
+    {
+      "id": "neutral_back_three_quarter_right",
+      "sheet": "02-turnaround-sheet-candidate-v1.png",
+      "columns": 4,
+      "rows": 2,
+      "index": 5,
+      "facing": "northeast"
+    },
+    {
+      "id": "neutral_right_profile",
+      "sheet": "02-turnaround-sheet-candidate-v1.png",
+      "columns": 4,
+      "rows": 2,
+      "index": 6,
+      "facing": "east"
+    },
+    {
+      "id": "neutral_three_quarter_right",
+      "sheet": "02-turnaround-sheet-candidate-v1.png",
+      "columns": 4,
+      "rows": 2,
+      "index": 7,
+      "facing": "southeast"
+    },
+    {
+      "id": "neutral_base_front",
+      "sheet": "03-neutral-base-poses-candidate-v1.png",
+      "columns": 4,
+      "rows": 2,
+      "index": 0,
+      "facing": "south"
+    },
+    {
+      "id": "neutral_base_three_quarter",
+      "sheet": "03-neutral-base-poses-candidate-v1.png",
+      "columns": 4,
+      "rows": 2,
+      "index": 1,
+      "facing": "southwest"
+    },
+    {
+      "id": "neutral_base_profile",
+      "sheet": "03-neutral-base-poses-candidate-v1.png",
+      "columns": 4,
+      "rows": 2,
+      "index": 2,
+      "facing": "west"
+    },
+    {
+      "id": "neutral_base_back",
+      "sheet": "03-neutral-base-poses-candidate-v1.png",
+      "columns": 4,
+      "rows": 2,
+      "index": 3,
+      "facing": "north"
+    },
+    {
+      "id": "idle_relaxed",
+      "sheet": "03-neutral-base-poses-candidate-v1.png",
+      "columns": 4,
+      "rows": 2,
+      "index": 4
+    },
+    {
+      "id": "idle_attentive",
+      "sheet": "03-neutral-base-poses-candidate-v1.png",
+      "columns": 4,
+      "rows": 2,
+      "index": 5
+    },
+    {
+      "id": "idle_speaking",
+      "sheet": "03-neutral-base-poses-candidate-v1.png",
+      "columns": 4,
+      "rows": 2,
+      "index": 6
+    },
+    {
+      "id": "idle_listening",
+      "sheet": "03-neutral-base-poses-candidate-v1.png",
+      "columns": 4,
+      "rows": 2,
+      "index": 7
+    },
+    {
+      "id": "expression_neutral",
+      "sheet": "04-expression-sheet-candidate-v1.png",
+      "columns": 6,
+      "rows": 4,
+      "index": 0
+    },
+    {
+      "id": "expression_calm",
+      "sheet": "04-expression-sheet-candidate-v1.png",
+      "columns": 6,
+      "rows": 4,
+      "index": 1
+    },
+    {
+      "id": "expression_joy",
+      "sheet": "04-expression-sheet-candidate-v1.png",
+      "columns": 6,
+      "rows": 4,
+      "index": 2
+    },
+    {
+      "id": "expression_amusement",
+      "sheet": "04-expression-sheet-candidate-v1.png",
+      "columns": 6,
+      "rows": 4,
+      "index": 3
+    },
+    {
+      "id": "expression_excitement",
+      "sheet": "04-expression-sheet-candidate-v1.png",
+      "columns": 6,
+      "rows": 4,
+      "index": 4
+    },
+    {
+      "id": "expression_curiosity",
+      "sheet": "04-expression-sheet-candidate-v1.png",
+      "columns": 6,
+      "rows": 4,
+      "index": 5
+    },
+    {
+      "id": "expression_confidence",
+      "sheet": "04-expression-sheet-candidate-v1.png",
+      "columns": 6,
+      "rows": 4,
+      "index": 6
+    },
+    {
+      "id": "expression_compassion",
+      "sheet": "04-expression-sheet-candidate-v1.png",
+      "columns": 6,
+      "rows": 4,
+      "index": 7
+    },
+    {
+      "id": "expression_surprise",
+      "sheet": "04-expression-sheet-candidate-v1.png",
+      "columns": 6,
+      "rows": 4,
+      "index": 8
+    },
+    {
+      "id": "expression_confusion",
+      "sheet": "04-expression-sheet-candidate-v1.png",
+      "columns": 6,
+      "rows": 4,
+      "index": 9
+    },
+    {
+      "id": "expression_skepticism",
+      "sheet": "04-expression-sheet-candidate-v1.png",
+      "columns": 6,
+      "rows": 4,
+      "index": 10
+    },
+    {
+      "id": "expression_concern",
+      "sheet": "04-expression-sheet-candidate-v1.png",
+      "columns": 6,
+      "rows": 4,
+      "index": 11
+    },
+    {
+      "id": "expression_sadness",
+      "sheet": "04-expression-sheet-candidate-v1.png",
+      "columns": 6,
+      "rows": 4,
+      "index": 12
+    },
+    {
+      "id": "expression_shame",
+      "sheet": "04-expression-sheet-candidate-v1.png",
+      "columns": 6,
+      "rows": 4,
+      "index": 13
+    },
+    {
+      "id": "expression_embarrassment",
+      "sheet": "04-expression-sheet-candidate-v1.png",
+      "columns": 6,
+      "rows": 4,
+      "index": 14
+    },
+    {
+      "id": "expression_fear",
+      "sheet": "04-expression-sheet-candidate-v1.png",
+      "columns": 6,
+      "rows": 4,
+      "index": 15
+    },
+    {
+      "id": "expression_anxiety",
+      "sheet": "04-expression-sheet-candidate-v1.png",
+      "columns": 6,
+      "rows": 4,
+      "index": 16
+    },
+    {
+      "id": "expression_anger",
+      "sheet": "04-expression-sheet-candidate-v1.png",
+      "columns": 6,
+      "rows": 4,
+      "index": 17
+    },
+    {
+      "id": "expression_frustration",
+      "sheet": "04-expression-sheet-candidate-v1.png",
+      "columns": 6,
+      "rows": 4,
+      "index": 18
+    },
+    {
+      "id": "expression_determination",
+      "sheet": "04-expression-sheet-candidate-v1.png",
+      "columns": 6,
+      "rows": 4,
+      "index": 19
+    },
+    {
+      "id": "expression_fatigue",
+      "sheet": "04-expression-sheet-candidate-v1.png",
+      "columns": 6,
+      "rows": 4,
+      "index": 20
+    },
+    {
+      "id": "expression_contemplation",
+      "sheet": "04-expression-sheet-candidate-v1.png",
+      "columns": 6,
+      "rows": 4,
+      "index": 21
+    },
+    {
+      "id": "expression_listening_ready",
+      "sheet": "04-expression-sheet-candidate-v1.png",
+      "columns": 6,
+      "rows": 4,
+      "index": 22
+    },
+    {
+      "id": "expression_reflective_reset",
+      "sheet": "04-expression-sheet-candidate-v1.png",
+      "resolved_sheet": "04-expression-sheet-candidate-v1.png",
+      "columns": 6,
+      "rows": 4,
+      "index": 23
+    },
+    {
+      "id": "viseme_rest",
+      "sheet": "05-speech-viseme-sheet-candidate-v1.png",
+      "columns": 4,
+      "rows": 4,
+      "index": 0
+    },
+    {
+      "id": "viseme_closed_lips",
+      "sheet": "05-speech-viseme-sheet-candidate-v1.png",
+      "columns": 4,
+      "rows": 4,
+      "index": 1
+    },
+    {
+      "id": "viseme_slightly_open",
+      "sheet": "05-speech-viseme-sheet-candidate-v1.png",
+      "columns": 4,
+      "rows": 4,
+      "index": 2
+    },
+    {
+      "id": "viseme_wide_vowel",
+      "sheet": "05-speech-viseme-sheet-candidate-v1.png",
+      "columns": 4,
+      "rows": 4,
+      "index": 3
+    },
+    {
+      "id": "viseme_open_vowel",
+      "sheet": "05-speech-viseme-sheet-candidate-v1.png",
+      "columns": 4,
+      "rows": 4,
+      "index": 4
+    },
+    {
+      "id": "viseme_rounded_vowel",
+      "sheet": "05-speech-viseme-sheet-candidate-v1.png",
+      "columns": 4,
+      "rows": 4,
+      "index": 5
+    },
+    {
+      "id": "viseme_teeth_consonant",
+      "sheet": "05-speech-viseme-sheet-candidate-v1.png",
+      "columns": 4,
+      "rows": 4,
+      "index": 6
+    },
+    {
+      "id": "viseme_lower_lip_consonant",
+      "sheet": "05-speech-viseme-sheet-candidate-v1.png",
+      "columns": 4,
+      "rows": 4,
+      "index": 7
+    },
+    {
+      "id": "viseme_tongue_consonant",
+      "sheet": "05-speech-viseme-sheet-candidate-v1.png",
+      "columns": 4,
+      "rows": 4,
+      "index": 8
+    },
+    {
+      "id": "viseme_smile_speaking",
+      "sheet": "05-speech-viseme-sheet-candidate-v1.png",
+      "columns": 4,
+      "rows": 4,
+      "index": 9
+    },
+    {
+      "id": "viseme_frown_speaking",
+      "sheet": "05-speech-viseme-sheet-candidate-v1.png",
+      "columns": 4,
+      "rows": 4,
+      "index": 10
+    },
+    {
+      "id": "viseme_speech_emphasis",
+      "sheet": "05-speech-viseme-sheet-candidate-v1.png",
+      "columns": 4,
+      "rows": 4,
+      "index": 11
+    },
+    {
+      "id": "viseme_breath_pause",
+      "sheet": "05-speech-viseme-sheet-candidate-v1.png",
+      "columns": 4,
+      "rows": 4,
+      "index": 12
+    },
+    {
+      "id": "blink_open",
+      "sheet": "05-speech-viseme-sheet-candidate-v1.png",
+      "columns": 4,
+      "rows": 4,
+      "index": 13
+    },
+    {
+      "id": "blink_half_closed",
+      "sheet": "05-speech-viseme-sheet-candidate-v1.png",
+      "columns": 4,
+      "rows": 4,
+      "index": 14
+    },
+    {
+      "id": "blink_closed",
+      "sheet": "05-speech-viseme-sheet-candidate-v1.png",
+      "columns": 4,
+      "rows": 4,
+      "index": 15
+    },
+    {
+      "id": "hand_open_relaxed",
+      "sheet": "06-hand-prop-sheet-candidate-v1.png",
+      "columns": 4,
+      "rows": 4,
+      "index": 0,
+      "graph_kind": "feature_graph"
+    },
+    {
+      "id": "hand_closed",
+      "sheet": "06-hand-prop-sheet-candidate-v1.png",
+      "columns": 4,
+      "rows": 4,
+      "index": 1,
+      "graph_kind": "feature_graph"
+    },
+    {
+      "id": "hand_fist",
+      "sheet": "06-hand-prop-sheet-candidate-v1.png",
+      "columns": 4,
+      "rows": 4,
+      "index": 2,
+      "graph_kind": "feature_graph"
+    },
+    {
+      "id": "hand_pointing",
+      "sheet": "06-hand-prop-sheet-candidate-v1.png",
+      "columns": 4,
+      "rows": 4,
+      "index": 3,
+      "graph_kind": "feature_graph"
+    },
+    {
+      "id": "hand_presenting",
+      "sheet": "06-hand-prop-sheet-candidate-v1.png",
+      "columns": 4,
+      "rows": 4,
+      "index": 4,
+      "graph_kind": "feature_graph"
+    },
+    {
+      "id": "hand_gripping",
+      "sheet": "06-hand-prop-sheet-candidate-v1.png",
+      "columns": 4,
+      "rows": 4,
+      "index": 5,
+      "graph_kind": "feature_graph"
+    },
+    {
+      "id": "hand_writing_grip",
+      "sheet": "06-hand-prop-sheet-candidate-v1.png",
+      "columns": 4,
+      "rows": 4,
+      "index": 6,
+      "graph_kind": "feature_graph"
+    },
+    {
+      "id": "prop_notebook_hold_center",
+      "sheet": "06-hand-prop-sheet-candidate-v1.png",
+      "columns": 4,
+      "rows": 4,
+      "index": 7,
+      "graph_kind": "feature_graph"
+    },
+    {
+      "id": "prop_notebook_cradle",
+      "sheet": "06-hand-prop-sheet-candidate-v1.png",
+      "columns": 4,
+      "rows": 4,
+      "index": 8,
+      "graph_kind": "feature_graph"
+    },
+    {
+      "id": "prop_notebook_present",
+      "sheet": "06-hand-prop-sheet-candidate-v1.png",
+      "columns": 4,
+      "rows": 4,
+      "index": 9,
+      "graph_kind": "feature_graph"
+    },
+    {
+      "id": "prop_notebook_open",
+      "sheet": "06-hand-prop-sheet-candidate-v1.png",
+      "columns": 4,
+      "rows": 4,
+      "index": 10,
+      "graph_kind": "feature_graph"
+    },
+    {
+      "id": "prop_notebook_write",
+      "sheet": "06-hand-prop-sheet-candidate-v1.png",
+      "columns": 4,
+      "rows": 4,
+      "index": 11,
+      "graph_kind": "feature_graph"
+    },
+    {
+      "id": "prop_notebook_page_turn",
+      "sheet": "06-hand-prop-sheet-candidate-v1.png",
+      "columns": 4,
+      "rows": 4,
+      "index": 12,
+      "graph_kind": "feature_graph"
+    },
+    {
+      "id": "prop_notebook_close",
+      "sheet": "06-hand-prop-sheet-candidate-v1.png",
+      "columns": 4,
+      "rows": 4,
+      "index": 13,
+      "graph_kind": "feature_graph"
+    },
+    {
+      "id": "prop_notebook_side_hold",
+      "sheet": "06-hand-prop-sheet-candidate-v1.png",
+      "columns": 4,
+      "rows": 4,
+      "index": 14,
+      "graph_kind": "feature_graph"
+    },
+    {
+      "id": "prop_notebook_offer",
+      "sheet": "06-hand-prop-sheet-candidate-v1.png",
+      "columns": 4,
+      "rows": 4,
+      "index": 15,
+      "graph_kind": "feature_graph"
+    },
+    {
+      "id": "walk_contact_left",
+      "sheet": "07-ground-motion-sheet-candidate-v1.png",
+      "columns": 4,
+      "rows": 4,
+      "index": 0
+    },
+    {
+      "id": "walk_passing_left",
+      "sheet": "07-ground-motion-sheet-candidate-v1.png",
+      "columns": 4,
+      "rows": 4,
+      "index": 1
+    },
+    {
+      "id": "walk_contact_right",
+      "sheet": "07-ground-motion-sheet-candidate-v1.png",
+      "columns": 4,
+      "rows": 4,
+      "index": 2
+    },
+    {
+      "id": "walk_passing_right",
+      "sheet": "07-ground-motion-sheet-candidate-v1.png",
+      "columns": 4,
+      "rows": 4,
+      "index": 3
+    },
+    {
+      "id": "run_reach",
+      "sheet": "07-ground-motion-sheet-candidate-v1.png",
+      "columns": 4,
+      "rows": 4,
+      "index": 4
+    },
+    {
+      "id": "run_drive",
+      "sheet": "07-ground-motion-sheet-candidate-v1.png",
+      "columns": 4,
+      "rows": 4,
+      "index": 5
+    },
+    {
+      "id": "start",
+      "sheet": "07-ground-motion-sheet-candidate-v1.png",
+      "columns": 4,
+      "rows": 4,
+      "index": 6
+    },
+    {
+      "id": "stop",
+      "sheet": "07-ground-motion-sheet-candidate-v1.png",
+      "columns": 4,
+      "rows": 4,
+      "index": 7
+    },
+    {
+      "id": "turn_left",
+      "sheet": "07-ground-motion-sheet-candidate-v1.png",
+      "columns": 4,
+      "rows": 4,
+      "index": 8
+    },
+    {
+      "id": "turn_right",
+      "sheet": "07-ground-motion-sheet-candidate-v1.png",
+      "columns": 4,
+      "rows": 4,
+      "index": 9
+    },
+    {
+      "id": "crouch",
+      "sheet": "07-ground-motion-sheet-candidate-v1.png",
+      "columns": 4,
+      "rows": 4,
+      "index": 10
+    },
+    {
+      "id": "jump_anticipation",
+      "sheet": "07-ground-motion-sheet-candidate-v1.png",
+      "columns": 4,
+      "rows": 4,
+      "index": 11
+    },
+    {
+      "id": "jump_airborne",
+      "sheet": "07-ground-motion-sheet-candidate-v1.png",
+      "columns": 4,
+      "rows": 4,
+      "index": 12
+    },
+    {
+      "id": "fall",
+      "sheet": "07-ground-motion-sheet-candidate-v1.png",
+      "columns": 4,
+      "rows": 4,
+      "index": 13
+    },
+    {
+      "id": "land_contact",
+      "sheet": "07-ground-motion-sheet-candidate-v1.png",
+      "columns": 4,
+      "rows": 4,
+      "index": 14
+    },
+    {
+      "id": "land_recovery",
+      "sheet": "07-ground-motion-sheet-candidate-v1.png",
+      "columns": 4,
+      "rows": 4,
+      "index": 15
+    },
+    {
+      "id": "support_listening_start",
+      "sheet": "08-signature-actions-sheet-candidate-v1.png",
+      "columns": 4,
+      "rows": 4,
+      "index": 0
+    },
+    {
+      "id": "support_listening_nod",
+      "sheet": "08-signature-actions-sheet-candidate-v1.png",
+      "columns": 4,
+      "rows": 4,
+      "index": 1
+    },
+    {
+      "id": "family_plan_open_notebook",
+      "sheet": "08-signature-actions-sheet-candidate-v1.png",
+      "columns": 4,
+      "rows": 4,
+      "index": 2
+    },
+    {
+      "id": "family_plan_point_to_page",
+      "sheet": "08-signature-actions-sheet-candidate-v1.png",
+      "columns": 4,
+      "rows": 4,
+      "index": 3
+    },
+    {
+      "id": "belonging_checkin_open_hand",
+      "sheet": "08-signature-actions-sheet-candidate-v1.png",
+      "columns": 4,
+      "rows": 4,
+      "index": 4
+    },
+    {
+      "id": "belonging_checkin_pause",
+      "sheet": "08-signature-actions-sheet-candidate-v1.png",
+      "columns": 4,
+      "rows": 4,
+      "index": 5
+    },
+    {
+      "id": "privacy_notebook_shield",
+      "sheet": "08-signature-actions-sheet-candidate-v1.png",
+      "columns": 4,
+      "rows": 4,
+      "index": 6
+    },
+    {
+      "id": "privacy_calm_stop_palm",
+      "sheet": "08-signature-actions-sheet-candidate-v1.png",
+      "columns": 4,
+      "rows": 4,
+      "index": 7
+    },
+    {
+      "id": "escalation_assess",
+      "sheet": "08-signature-actions-sheet-candidate-v1.png",
+      "columns": 4,
+      "rows": 4,
+      "index": 8
+    },
+    {
+      "id": "escalation_indicate_next_step",
+      "sheet": "08-signature-actions-sheet-candidate-v1.png",
+      "columns": 4,
+      "rows": 4,
+      "index": 9
+    },
+    {
+      "id": "support_notebook_write",
+      "sheet": "08-signature-actions-sheet-candidate-v1.png",
+      "columns": 4,
+      "rows": 4,
+      "index": 10
+    },
+    {
+      "id": "support_present_plan",
+      "sheet": "08-signature-actions-sheet-candidate-v1.png",
+      "columns": 4,
+      "rows": 4,
+      "index": 11
+    },
+    {
+      "id": "supportive_hand_offer",
+      "sheet": "08-signature-actions-sheet-candidate-v1.png",
+      "columns": 4,
+      "rows": 4,
+      "index": 12
+    },
+    {
+      "id": "protective_grounded_stance",
+      "sheet": "08-signature-actions-sheet-candidate-v1.png",
+      "columns": 4,
+      "rows": 4,
+      "index": 13
+    },
+    {
+      "id": "quiet_reassurance",
+      "sheet": "08-signature-actions-sheet-candidate-v1.png",
+      "columns": 4,
+      "rows": 4,
+      "index": 14
+    },
+    {
+      "id": "slow_neutral_recovery",
+      "sheet": "08-signature-actions-sheet-candidate-v1.png",
+      "columns": 4,
+      "rows": 4,
+      "index": 15
+    },
+    {
+      "id": "interaction_open_hand",
+      "sheet": "09-body-hand-poses-candidate-v1.png",
+      "columns": 2,
+      "rows": 2,
+      "index": 0
+    },
+    {
+      "id": "interaction_closed_hand",
+      "sheet": "09-body-hand-poses-candidate-v1.png",
+      "columns": 2,
+      "rows": 2,
+      "index": 1
+    },
+    {
+      "id": "interaction_fist",
+      "sheet": "09-body-hand-poses-candidate-v1.png",
+      "columns": 2,
+      "rows": 2,
+      "index": 2
+    },
+    {
+      "id": "interaction_reach",
+      "sheet": "09-body-hand-poses-candidate-v1.png",
+      "columns": 2,
+      "rows": 2,
+      "index": 3
+    }
+  ],
+  "animation_graph": {
+    "schema_version": 2,
+    "asset_set_id": "liora-kane-worksheet-motion-v1",
+    "authored_fps": 24,
+    "simulation_hz": 60,
+    "default_node_id": "idle",
+    "motion_profile": {
+      "quality": "calm_protective_support_performance",
+      "principles": [
+        "grounded_anticipation",
+        "small_to_medium_supportive_arcs",
+        "attentive_eye_contact",
+        "careful_notebook_contacts",
+        "measured_listening_pauses",
+        "slow_recovery"
+      ]
+    },
+    "clips": [
+      {
+        "clip_id": "liora_idle",
+        "loop": true,
+        "samples": [
+          {
+            "pose_id": "idle_relaxed",
+            "tick": 0
+          },
+          {
+            "pose_id": "idle_attentive",
+            "tick": 18
+          },
+          {
+            "pose_id": "idle_listening",
+            "tick": 36
+          }
+        ]
+      },
+      {
+        "clip_id": "liora_walk",
+        "loop": true,
+        "samples": [
+          {
+            "pose_id": "walk_contact_left",
+            "tick": 0
+          },
+          {
+            "pose_id": "walk_passing_left",
+            "tick": 6
+          },
+          {
+            "pose_id": "walk_contact_right",
+            "tick": 12
+          },
+          {
+            "pose_id": "walk_passing_right",
+            "tick": 18
+          }
+        ]
+      },
+      {
+        "clip_id": "liora_run",
+        "loop": true,
+        "samples": [
+          {
+            "pose_id": "run_reach",
+            "tick": 0
+          },
+          {
+            "pose_id": "run_drive",
+            "tick": 6
+          }
+        ]
+      },
+      {
+        "clip_id": "liora_jump_land",
+        "loop": false,
+        "samples": [
+          {
+            "pose_id": "jump_anticipation",
+            "tick": 0
+          },
+          {
+            "pose_id": "jump_airborne",
+            "tick": 5
+          },
+          {
+            "pose_id": "fall",
+            "tick": 10
+          },
+          {
+            "pose_id": "land_contact",
+            "tick": 15
+          },
+          {
+            "pose_id": "land_recovery",
+            "tick": 20
+          }
+        ]
+      },
+      {
+        "clip_id": "liora_support_conversation",
+        "loop": true,
+        "samples": [
+          {
+            "pose_id": "support_listening_start",
+            "tick": 0
+          },
+          {
+            "pose_id": "support_listening_nod",
+            "tick": 16
+          },
+          {
+            "pose_id": "belonging_checkin_open_hand",
+            "tick": 32
+          },
+          {
+            "pose_id": "quiet_reassurance",
+            "tick": 48
+          }
+        ]
+      },
+      {
+        "clip_id": "liora_privacy_escalation",
+        "loop": false,
+        "samples": [
+          {
+            "pose_id": "privacy_notebook_shield",
+            "tick": 0
+          },
+          {
+            "pose_id": "privacy_calm_stop_palm",
+            "tick": 10
+          },
+          {
+            "pose_id": "escalation_assess",
+            "tick": 20
+          },
+          {
+            "pose_id": "escalation_indicate_next_step",
+            "tick": 30
+          },
+          {
+            "pose_id": "slow_neutral_recovery",
+            "tick": 42
+          }
+        ]
+      },
+      {
+        "clip_id": "liora_family_plan",
+        "loop": false,
+        "samples": [
+          {
+            "pose_id": "family_plan_open_notebook",
+            "tick": 0
+          },
+          {
+            "pose_id": "support_notebook_write",
+            "tick": 12
+          },
+          {
+            "pose_id": "family_plan_point_to_page",
+            "tick": 24
+          },
+          {
+            "pose_id": "support_present_plan",
+            "tick": 36
+          }
+        ]
+      },
+      {
+        "clip_id": "liora_hand_interactions",
+        "loop": false,
+        "samples": [
+          {
+            "pose_id": "interaction_open_hand",
+            "tick": 0
+          },
+          {
+            "pose_id": "interaction_closed_hand",
+            "tick": 10
+          },
+          {
+            "pose_id": "interaction_fist",
+            "tick": 20
+          },
+          {
+            "pose_id": "interaction_reach",
+            "tick": 30
+          }
+        ]
+      },
+      {
+        "clip_id": "liora_turnaround",
+        "loop": true,
+        "samples": [
+          {
+            "pose_id": "neutral_front",
+            "tick": 0
+          },
+          {
+            "pose_id": "neutral_three_quarter_left",
+            "tick": 12
+          },
+          {
+            "pose_id": "neutral_left_profile",
+            "tick": 24
+          },
+          {
+            "pose_id": "neutral_back_three_quarter_left",
+            "tick": 36
+          },
+          {
+            "pose_id": "neutral_back",
+            "tick": 48
+          },
+          {
+            "pose_id": "neutral_back_three_quarter_right",
+            "tick": 60
+          },
+          {
+            "pose_id": "neutral_right_profile",
+            "tick": 72
+          },
+          {
+            "pose_id": "neutral_three_quarter_right",
+            "tick": 84
+          }
+        ]
+      }
+    ]
+  },
+  "animation_matrix": {
+    "idle": [
+      "neutral",
+      "relaxed",
+      "attentive",
+      "speaking",
+      "listening",
+      "breathing",
+      "blink",
+      "look_left",
+      "look_right",
+      "weight_shift"
+    ],
+    "locomotion": [
+      "walk_forward",
+      "walk_backward",
+      "walk_left",
+      "walk_right",
+      "run_forward",
+      "run_burst",
+      "start",
+      "stop",
+      "turn_left",
+      "turn_right",
+      "crouch",
+      "jump",
+      "fall",
+      "land"
+    ],
+    "conversation": [
+      "support_listening",
+      "measured_nod",
+      "family_planning",
+      "belonging_checkin",
+      "privacy_boundary",
+      "calm_stop",
+      "safe_escalation",
+      "indicate_next_step",
+      "present_support_plan",
+      "supportive_offer",
+      "protective_stance",
+      "quiet_reassurance",
+      "slow_recovery",
+      "speech_emphasis"
+    ],
+    "emotion": [
+      "calm",
+      "joy",
+      "amusement",
+      "excitement",
+      "curiosity",
+      "confidence",
+      "compassion",
+      "surprise",
+      "confusion",
+      "skepticism",
+      "concern",
+      "sadness",
+      "shame",
+      "embarrassment",
+      "fear",
+      "anxiety",
+      "anger",
+      "frustration",
+      "determination",
+      "fatigue",
+      "contemplation"
+    ],
+    "interaction": [
+      "reach",
+      "open_hand",
+      "close_hand",
+      "fist",
+      "point",
+      "present",
+      "notebook_hold",
+      "notebook_cradle",
+      "notebook_present",
+      "notebook_open",
+      "notebook_write",
+      "notebook_page_turn",
+      "notebook_close",
+      "notebook_side_hold",
+      "privacy_shield",
+      "family_plan",
+      "support_plan"
+    ],
+    "speech": [
+      "rest",
+      "closed_lips",
+      "slightly_open",
+      "wide_vowel",
+      "open_vowel",
+      "rounded_vowel",
+      "teeth_consonant",
+      "lower_lip_consonant",
+      "tongue_consonant",
+      "smile_speaking",
+      "frown_speaking",
+      "speech_emphasis",
+      "breath_pause"
+    ]
+  },
+  "identity_lock": {
+    "immutable": [
+      "long wavy brown hair",
+      "near-center hair part",
+      "warm peach skin",
+      "dark-brown eyes and brows",
+      "light-gray pullover hoodie with cream drawstrings",
+      "hood, ribbed cuffs, ribbed hem, and kangaroo pocket",
+      "deep teal blue-green and cream plaid trousers",
+      "cream low voxel sneakers",
+      "dark navy support notebook with blank cream pages"
+    ],
+    "articulated": [
+      "brows",
+      "eyelids",
+      "mouth",
+      "neck",
+      "shoulders",
+      "elbows",
+      "wrists",
+      "fingers",
+      "hips",
+      "knees",
+      "ankles"
+    ],
+    "default_prop": "navy support notebook",
+    "personality": "steady protective patient quietly warm privacy-aware supportive"
+  },
+  "attachment_points": [
+    "mouth",
+    "left_eye",
+    "right_eye",
+    "left_hand",
+    "right_hand",
+    "left_foot",
+    "right_foot",
+    "notebook"
+  ]
+}

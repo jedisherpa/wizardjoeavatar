@@ -1,0 +1,87 @@
+{
+  "attachment_points": [
+    "mouth",
+    "left_eye",
+    "right_eye",
+    "left_hand",
+    "right_hand",
+    "left_foot",
+    "right_foot",
+    "notebook"
+  ],
+  "character_id": "liora-kane-v1",
+  "derivation": {
+    "approved_worksheets": "assets/reference/personas/liora-kane/canonical-worksheets",
+    "canonical_reference": "assets/reference/personas/liora-kane/canonical-voxel.png",
+    "flattened_runtime_dependency": false,
+    "original_reference": "assets/reference/personas/liora-kane/source-reference.png",
+    "runtime_art": "deterministic worksheet-derived direct cell library"
+  },
+  "display_name": "Liora Kane",
+  "hashes": {
+    "animation_graph_sha256": "8acd1ef33c66031590ff088d45b7838e377a4e43eee2121879fd700b910d1c64",
+    "animation_matrix_sha256": "ca22bc4c1a11b54d625c0c910607eb3299224900218d9df99adf4d51fe03d6a1",
+    "canonical_reference_sha256": "c4710c8764b9246fcddff297943da6d8ca83478794331e846758eb44451d1ad9",
+    "extraction_audit_sha256": "d659656402f28c4634e8a7fad22f8363b9cb48210c1559e25099331bf9e00c96",
+    "extraction_item_count": 124,
+    "generation_profile_sha256": "d81be17a2ce16b2a1f7e134f20f044fac2cb72495b1c3ad6a00565a51fa2ec49",
+    "original_reference_sha256": "a1ad002278e7477fd05c091c79d929b2b674071484fd8e8e00a638d2fdaeca2e",
+    "pixel_graph_library_sha256": "5ecd756a1c052c52346b49e7affd07c0e88433676197ab53e0f792aa0b892477",
+    "pose_library_sha256": "5249f2fa5e77963c4114cdc6fc95f8dfa1c304f81866af0bd8811a128f8383e5",
+    "worksheet_sha256": {
+      "01-identity-sheet-candidate-v1.png": "cdce2b7d7d85d622673c14c42062376ee7b17e0efb5d92f634b20b830c6c1068",
+      "02-turnaround-sheet-candidate-v1.png": "bd878d40988a65db4669a0db0b13e8bd1526999dbda628f7a4c8bf7a0b189d4c",
+      "03-neutral-base-poses-candidate-v1.png": "122151365db08b4b95ae8d6cf00cb233d69b206254217f932a9796c89e1b7018",
+      "04-expression-sheet-candidate-v1.png": "48d97a1b39c250030c5abbf3ee98364a79d0b0784d2c75686df8d2225d8cb067",
+      "05-speech-viseme-sheet-candidate-v1.png": "1011eec4bf9516abe1b45f379b32a385c7c243aa6a1f90b9d842fccd0250e75b",
+      "06-hand-prop-sheet-candidate-v1.png": "b959e294881ef392aa4e7738aa113961cc6256d251b0ba5a8fdcfd6889c138fc",
+      "07-ground-motion-sheet-candidate-v1.png": "8a04b825a9db1d74451cfdbc9d758a8f63ab24b8f4cbbdd3455cbb8222a7ee37",
+      "08-signature-actions-sheet-candidate-v1.png": "7ecc9e3b9f9e1e0ec0aed12f0b4f2c535149d23df0afa6d4d55519794718ed85",
+      "09-body-hand-poses-candidate-v1.png": "71a773b50ccbd306d3548b7cc59e635c4f2fa11cc570e0146be1e4771ac700e4"
+    }
+  },
+  "identity_lock": {
+    "articulated": [
+      "brows",
+      "eyelids",
+      "mouth",
+      "neck",
+      "shoulders",
+      "elbows",
+      "wrists",
+      "fingers",
+      "hips",
+      "knees",
+      "ankles"
+    ],
+    "default_prop": "navy support notebook",
+    "immutable": [
+      "long wavy brown hair",
+      "near-center hair part",
+      "warm peach skin",
+      "dark-brown eyes and brows",
+      "light-gray pullover hoodie with cream drawstrings",
+      "hood, ribbed cuffs, ribbed hem, and kangaroo pocket",
+      "deep teal blue-green and cream plaid trousers",
+      "cream low voxel sneakers",
+      "dark navy support notebook with blank cream pages"
+    ],
+    "personality": "steady protective patient quietly warm privacy-aware supportive"
+  },
+  "origin": {
+    "baseline_y": 91,
+    "cols": 72,
+    "root_anchor": [
+      36,
+      91
+    ],
+    "rows": 96,
+    "safe_inset": {
+      "bottom": 4,
+      "left": 4,
+      "right": 4,
+      "top": 4
+    }
+  },
+  "schema_version": 1
+}

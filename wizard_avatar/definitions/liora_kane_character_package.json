@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "character_id": "liora-kane-v1",
+  "display_name": "Liora Kane",
+  "renderer": "asciline_square_cells",
+  "pose_library": "liora_kane_pose_cells.json",
+  "animation_graph": "liora_kane_animation_graph.json",
+  "runtime_profile": "liora_kane_runtime_profile.json",
+  "manifest": "liora_kane_character_manifest.json",
+  "animation_matrix": "liora_kane_animation_matrix.json",
+  "extraction_audit": "liora_kane_extraction_audit.json",
+  "pixel_graph_library": "liora_kane_pixel_graphs.json",
+  "default_pose_id": "neutral_front",
+  "capabilities": [
+    "ground_locomotion",
+    "eight_direction_turnaround",
+    "actions",
+    "speech_visemes",
+    "full_expression_vocabulary",
+    "procedural_secondary_motion",
+    "pose_showcase",
+    "support_notebook_interaction",
+    "privacy_boundary_actions",
+    "safe_escalation_actions",
+    "family_communication_planning"
+  ]
+}

@@ -11,6 +11,7 @@ DEFINITIONS_DIR = Path(__file__).with_name("definitions")
 WIZARD_JOE_PACKAGE_PATH = DEFINITIONS_DIR / "wizard_joe_character_package.json"
 CRYSTAIL_PACKAGE_PATH = DEFINITIONS_DIR / "crystail_character_package.json"
 ORION_VALE_PACKAGE_PATH = DEFINITIONS_DIR / "orion_vale_character_package.json"
+LIORA_KANE_PACKAGE_PATH = DEFINITIONS_DIR / "liora_kane_character_package.json"
 
 
 class CharacterPackageValidationError(ValueError):
@@ -94,6 +95,7 @@ def load_character_package(path: Path = WIZARD_JOE_PACKAGE_PATH) -> CharacterPac
             raise CharacterPackageValidationError("runtime_profile must use schema_version 1")
         if profile_raw.get("character_id") != raw["character_id"]:
             raise CharacterPackageValidationError("runtime_profile character_id does not match package")
+        _validate_runtime_profile(profile_raw, pose_ids)
     optional_assets = {}
     for name in ("manifest", "animation_matrix", "extraction_audit", "pixel_graph_library"):
         optional_assets[name] = (
@@ -114,6 +116,19 @@ def load_character_package(path: Path = WIZARD_JOE_PACKAGE_PATH) -> CharacterPac
         )
         _validate_extraction_audit(
             raw["character_id"], pose_raw, pixel_graph_raw, audit_raw
+        )
+    if optional_assets["manifest"] is not None:
+        manifest_raw = json.loads(optional_assets["manifest"].read_text(encoding="utf-8"))
+        _validate_manifest_lineage(
+            raw["character_id"],
+            manifest_raw,
+            {
+                "pose_library": pose_library,
+                "animation_graph": animation_graph,
+                "animation_matrix": optional_assets["animation_matrix"],
+                "extraction_audit": optional_assets["extraction_audit"],
+                "pixel_graph_library": optional_assets["pixel_graph_library"],
+            },
         )
     return CharacterPackage(
         schema_version=1,
@@ -174,6 +189,61 @@ def _graph_pose_ids(raw: Any) -> set[str]:
     return result
 
 
+def _validate_runtime_profile(raw: Mapping[str, Any], pose_ids: set[str]) -> None:
+    """Require every data-driven semantic channel to resolve to a real pose."""
+    referenced: set[str] = set()
+    for field in ("facing_poses", "action_poses", "expression_aliases", "blink_poses"):
+        value = raw.get(field, {})
+        if not isinstance(value, Mapping):
+            raise CharacterPackageValidationError("runtime_profile {} must be an object".format(field))
+        if field == "expression_aliases":
+            referenced.update("expression_{}".format(item) for item in value.values())
+        else:
+            referenced.update(str(item) for item in value.values())
+    for field in ("walking_cycle", "running_cycle", "speech_poses"):
+        value = raw.get(field, [])
+        if not isinstance(value, list):
+            raise CharacterPackageValidationError("runtime_profile {} must be an array".format(field))
+        referenced.update(str(item) for item in value)
+    airborne = raw.get("airborne_poses", {})
+    if not isinstance(airborne, Mapping):
+        raise CharacterPackageValidationError("runtime_profile airborne_poses must be an object")
+    referenced.update(str(item) for item in airborne.values())
+    referenced.add(str(raw.get("default_pose_id", "")))
+    unknown = sorted(referenced - pose_ids)
+    if unknown:
+        raise CharacterPackageValidationError(
+            "runtime_profile references unknown poses: {}".format(", ".join(unknown))
+        )
+
+
+def _validate_manifest_lineage(
+    character_id: str,
+    raw: Any,
+    assets: Mapping[str, Optional[Path]],
+) -> None:
+    """Bind package assets to the immutable hashes recorded by the manifest."""
+    if not isinstance(raw, Mapping) or raw.get("schema_version") != 1:
+        raise CharacterPackageValidationError("manifest must use schema_version 1")
+    if raw.get("character_id") != character_id:
+        raise CharacterPackageValidationError("manifest character_id does not match package")
+    hashes = raw.get("hashes")
+    if not isinstance(hashes, Mapping):
+        raise CharacterPackageValidationError("manifest hashes must be an object")
+    for asset_name, path in assets.items():
+        if path is None:
+            continue
+        key = "{}_sha256".format(asset_name)
+        expected = hashes.get(key)
+        if not isinstance(expected, str) or len(expected) != 64:
+            raise CharacterPackageValidationError("manifest is missing {}".format(key))
+        actual = hashlib.sha256(path.read_bytes()).hexdigest()
+        if actual != expected:
+            raise CharacterPackageValidationError(
+                "manifest hash differs for {}".format(asset_name)
+            )
+
+
 def _validate_extraction_audit(
     character_id: str,
     pose_raw: Any,
@@ -217,6 +287,14 @@ def _validate_extraction_audit(
         item = item_by_id[graph_id]
         if item.get("background_removed") is not True:
             raise CharacterPackageValidationError("pose background removal was not audited")
+        if "floor_and_contact_shadows_removed" in item and item.get(
+            "floor_and_contact_shadows_removed"
+        ) is not True:
+            raise CharacterPackageValidationError("pose floor-shadow removal was not audited")
+        if "subject_continuity_preserved" in item and item.get(
+            "subject_continuity_preserved"
+        ) is not True:
+            raise CharacterPackageValidationError("pose subject continuity was not audited")
         if item.get("runtime_format") != "colored_pixel_nodes_json":
             raise CharacterPackageValidationError("unsupported audited runtime format")
         runtime_asset = item.get("runtime_asset")
@@ -237,5 +315,6 @@ __all__ = [
     "WIZARD_JOE_PACKAGE_PATH",
     "CRYSTAIL_PACKAGE_PATH",
     "ORION_VALE_PACKAGE_PATH",
+    "LIORA_KANE_PACKAGE_PATH",
     "load_character_package",
 ]

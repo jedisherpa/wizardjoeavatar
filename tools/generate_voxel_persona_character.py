@@ -111,6 +111,18 @@ def _subject_rgba(panel: Image.Image, extraction: Mapping[str, Any]) -> Image.Im
         tolerance = float(extraction.get("background_tolerance", 42.0))
         mask = distance > tolerance
 
+    # The accepted studio sheets use a pale blue backdrop and floor. A high
+    # distance threshold protects gray/cream clothing, while this hue guard
+    # removes the remaining bright cyan floor tiles without affecting dark
+    # teal garments or navy props.
+    if extraction.get("remove_pale_blue", True):
+        pale_blue = (
+            (blue >= int(extraction.get("pale_blue_minimum", 170)))
+            & (blue >= red + int(extraction.get("pale_blue_red_delta", 14)))
+            & (blue >= green + int(extraction.get("pale_blue_green_delta", 8)))
+        )
+        mask &= ~pale_blue
+
     # Close small gaps inside glasses, hair, fingers, and held props without
     # expanding the subject to the panel edge.
     mask_image = Image.fromarray(mask.astype(np.uint8) * 255)
@@ -122,6 +134,8 @@ def _subject_rgba(panel: Image.Image, extraction: Mapping[str, Any]) -> Image.Im
             ImageFilter.MinFilter(close_size)
         )
     mask = np.asarray(mask_image, dtype=np.uint8) > 0
+    if extraction.get("remove_pale_blue", True):
+        mask &= ~pale_blue
     if extraction.get("largest_component", True):
         mask = _largest_component(mask)
         detail_radius = int(extraction.get("detail_radius", 5))
@@ -296,11 +310,11 @@ def _anchors_for_pose(
             candidates = [
                 cell for cell in cells if int(cell["y"]) <= top + height * 0.38
             ] or cells
-        elif name == "journal":
+        elif name in {"journal", "notebook"}:
             candidates = [
                 cell for cell in cells
                 if top + height * 0.32 <= int(cell["y"]) <= top + height * 0.78
-                and _is_journal_detail_cell(cell)
+                and _is_prop_detail_cell(cell)
             ] or cells
         nearest = min(
             candidates,
@@ -328,11 +342,13 @@ def _is_skin_cell(cell: Mapping[str, Any]) -> bool:
     return red >= 135 and red >= green + 12 and green >= blue + 8
 
 
-def _is_journal_detail_cell(cell: Mapping[str, Any]) -> bool:
+def _is_prop_detail_cell(cell: Mapping[str, Any]) -> bool:
     red, green, blue = (int(value) for value in cell["rgb"])
     gold = red >= 135 and green >= 75 and blue <= 85 and red >= green + 35
     leather = red >= 55 and red >= green * 1.25 and green >= blue * 1.2
-    return gold or leather
+    navy = blue >= red * 1.2 and blue >= green * 1.05 and blue <= 150
+    cream_page = red >= 160 and green >= 150 and blue >= 120 and max(red, green, blue) - min(red, green, blue) <= 65
+    return gold or leather or navy or cream_page
 
 
 def pose_payload(profile: Mapping[str, Any]) -> dict[str, Any]:
@@ -416,7 +432,11 @@ def extraction_audit_payload(
                 "source_cell": "{}#panel-{}".format(sheet_name, raw_pose["index"]),
                 "source_worksheet_sha256": digest_bytes((worksheet_dir / sheet_name).read_bytes()),
                 "background_removed": True,
-                "isolation_method": "largest_connected_warm_subject_mask",
+                "floor_and_contact_shadows_removed": True,
+                "subject_continuity_preserved": True,
+                "isolation_method": "largest_connected_{}_mask".format(
+                    profile.get("extraction", {}).get("foreground_mode", "background_distance")
+                ),
                 "runtime_format": "colored_pixel_nodes_json",
                 "runtime_asset": (
                     "{}_pixel_graphs.json#graph={}".format(

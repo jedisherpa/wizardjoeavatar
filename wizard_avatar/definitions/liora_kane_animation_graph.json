@@ -1,0 +1,230 @@
+{
+  "asset_set_id": "liora-kane-worksheet-motion-v1",
+  "authored_fps": 24,
+  "clips": [
+    {
+      "clip_id": "liora_idle",
+      "loop": true,
+      "samples": [
+        {
+          "pose_id": "idle_relaxed",
+          "tick": 0
+        },
+        {
+          "pose_id": "idle_attentive",
+          "tick": 18
+        },
+        {
+          "pose_id": "idle_listening",
+          "tick": 36
+        }
+      ]
+    },
+    {
+      "clip_id": "liora_walk",
+      "loop": true,
+      "samples": [
+        {
+          "pose_id": "walk_contact_left",
+          "tick": 0
+        },
+        {
+          "pose_id": "walk_passing_left",
+          "tick": 6
+        },
+        {
+          "pose_id": "walk_contact_right",
+          "tick": 12
+        },
+        {
+          "pose_id": "walk_passing_right",
+          "tick": 18
+        }
+      ]
+    },
+    {
+      "clip_id": "liora_run",
+      "loop": true,
+      "samples": [
+        {
+          "pose_id": "run_reach",
+          "tick": 0
+        },
+        {
+          "pose_id": "run_drive",
+          "tick": 6
+        }
+      ]
+    },
+    {
+      "clip_id": "liora_jump_land",
+      "loop": false,
+      "samples": [
+        {
+          "pose_id": "jump_anticipation",
+          "tick": 0
+        },
+        {
+          "pose_id": "jump_airborne",
+          "tick": 5
+        },
+        {
+          "pose_id": "fall",
+          "tick": 10
+        },
+        {
+          "pose_id": "land_contact",
+          "tick": 15
+        },
+        {
+          "pose_id": "land_recovery",
+          "tick": 20
+        }
+      ]
+    },
+    {
+      "clip_id": "liora_support_conversation",
+      "loop": true,
+      "samples": [
+        {
+          "pose_id": "support_listening_start",
+          "tick": 0
+        },
+        {
+          "pose_id": "support_listening_nod",
+          "tick": 16
+        },
+        {
+          "pose_id": "belonging_checkin_open_hand",
+          "tick": 32
+        },
+        {
+          "pose_id": "quiet_reassurance",
+          "tick": 48
+        }
+      ]
+    },
+    {
+      "clip_id": "liora_privacy_escalation",
+      "loop": false,
+      "samples": [
+        {
+          "pose_id": "privacy_notebook_shield",
+          "tick": 0
+        },
+        {
+          "pose_id": "privacy_calm_stop_palm",
+          "tick": 10
+        },
+        {
+          "pose_id": "escalation_assess",
+          "tick": 20
+        },
+        {
+          "pose_id": "escalation_indicate_next_step",
+          "tick": 30
+        },
+        {
+          "pose_id": "slow_neutral_recovery",
+          "tick": 42
+        }
+      ]
+    },
+    {
+      "clip_id": "liora_family_plan",
+      "loop": false,
+      "samples": [
+        {
+          "pose_id": "family_plan_open_notebook",
+          "tick": 0
+        },
+        {
+          "pose_id": "support_notebook_write",
+          "tick": 12
+        },
+        {
+          "pose_id": "family_plan_point_to_page",
+          "tick": 24
+        },
+        {
+          "pose_id": "support_present_plan",
+          "tick": 36
+        }
+      ]
+    },
+    {
+      "clip_id": "liora_hand_interactions",
+      "loop": false,
+      "samples": [
+        {
+          "pose_id": "interaction_open_hand",
+          "tick": 0
+        },
+        {
+          "pose_id": "interaction_closed_hand",
+          "tick": 10
+        },
+        {
+          "pose_id": "interaction_fist",
+          "tick": 20
+        },
+        {
+          "pose_id": "interaction_reach",
+          "tick": 30
+        }
+      ]
+    },
+    {
+      "clip_id": "liora_turnaround",
+      "loop": true,
+      "samples": [
+        {
+          "pose_id": "neutral_front",
+          "tick": 0
+        },
+        {
+          "pose_id": "neutral_three_quarter_left",
+          "tick": 12
+        },
+        {
+          "pose_id": "neutral_left_profile",
+          "tick": 24
+        },
+        {
+          "pose_id": "neutral_back_three_quarter_left",
+          "tick": 36
+        },
+        {
+          "pose_id": "neutral_back",
+          "tick": 48
+        },
+        {
+          "pose_id": "neutral_back_three_quarter_right",
+          "tick": 60
+        },
+        {
+          "pose_id": "neutral_right_profile",
+          "tick": 72
+        },
+        {
+          "pose_id": "neutral_three_quarter_right",
+          "tick": 84
+        }
+      ]
+    }
+  ],
+  "default_node_id": "idle",
+  "motion_profile": {
+    "principles": [
+      "grounded_anticipation",
+      "small_to_medium_supportive_arcs",
+      "attentive_eye_contact",
+      "careful_notebook_contacts",
+      "measured_listening_pauses",
+      "slow_recovery"
+    ],
+    "quality": "calm_protective_support_performance"
+  },
+  "schema_version": 2,
+  "simulation_hz": 60
+}
