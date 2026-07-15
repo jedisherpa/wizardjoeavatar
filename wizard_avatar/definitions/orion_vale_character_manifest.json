@@ -1,0 +1,90 @@
+{
+  "attachment_points": [
+    "mouth",
+    "left_eye",
+    "right_eye",
+    "left_hand",
+    "right_hand",
+    "left_foot",
+    "right_foot",
+    "journal"
+  ],
+  "character_id": "orion-vale-v1",
+  "derivation": {
+    "approved_worksheets": "assets/reference/personas/orion-vale/canonical-worksheets",
+    "canonical_reference": "assets/reference/personas/orion-vale/canonical-voxel.png",
+    "flattened_runtime_dependency": false,
+    "original_reference": "assets/reference/personas/orion-vale/source-reference.png",
+    "runtime_art": "deterministic worksheet-derived direct cell library"
+  },
+  "display_name": "Orion Vale",
+  "hashes": {
+    "animation_graph_sha256": "b2f25391aa3f840145abd5d5c9122479a96595d2d6c675b86df85f3d8c6f8fe7",
+    "animation_matrix_sha256": "5ed9c23e5ec74fc2b1eb16fdc4f3e061b4e3aac261896acf04c18d7eaf23eebf",
+    "canonical_reference_sha256": "a81010fb994724b56956dd7718c19f999b8c425c8a206c0fb6df436990fa464f",
+    "extraction_audit_sha256": "b9aa3491c9f7afaa851d286f2d5ea4974f164e73aa6d66d0ae53bff372631c66",
+    "extraction_item_count": 124,
+    "generation_profile_sha256": "8c459604ff4ed28fe4ac6e18031c834b651248604848ebc616bcbed83b022ddf",
+    "original_reference_sha256": "deb391b66fa438f01e0fad8b710bbcbb333aee5761a6737135fda6a2cda43ada",
+    "pixel_graph_library_sha256": "97eb3b1ab8bf28e2c032a00ea0aac958d66196ec0ff3610d78b0bec6b150b5b9",
+    "pose_library_sha256": "a90453fb5f0f67fe8a275541ff34929a9ceae53f52549f355c33a524aef3e8e7",
+    "worksheet_sha256": {
+      "01-identity-sheet-candidate-v2.png": "6050dbaf6d28055ec9b78968a6c9dcda57033fb3ecc47d22f0eeafe010de628a",
+      "02-turnaround-sheet-candidate-v1.png": "5018a363e10f2fac102ee3debe4966f7fb1aafbff033ec50c2208391a833e6dc",
+      "03-neutral-base-poses-candidate-v2.png": "f72ff5131aa0889763f4d55205d9ffe98dc9432fe30db6cab0a73525b1a08ac0",
+      "04-expression-sheet-candidate-v1.png": "245ec2f81972c4d7e6a75d439079f7bc25b58c24e5b82c37d2ee73d7283bae91",
+      "04-expression-sheet-candidate-v2.png": "19ce65f4533265f136c41cfa140d2d6b8460fca4b68ffe86f9b2da924fd00c73",
+      "05-speech-viseme-sheet-candidate-v2.png": "29d5d07871d833fec797fa0548978a84ba2252c4de1722c954d1077dde3f1c63",
+      "06-hand-prop-sheet-candidate-v1.png": "2ad391e305a53f6c441a4d84015f30488879af44a5df668f3ef152a9c22d5d8c",
+      "07-ground-motion-sheet-candidate-v2.png": "150cdf0b28e54d86272ef17bf006c713034fb2bb7de127390fff4a50e96475a1",
+      "08-signature-actions-sheet-candidate-v1.png": "12466c4fed470b63823d6afe58bee3449363f564ed0c90eebb641f1ee3192d27",
+      "09-interaction-poses-candidate-v1.png": "dca84beac39efe47f0930a7e0c3916939235bca0f40f193e7987b2d4872e60c0"
+    }
+  },
+  "identity_lock": {
+    "articulated": [
+      "brows",
+      "eyelids",
+      "mouth",
+      "neck",
+      "shoulders",
+      "elbows",
+      "wrists",
+      "fingers",
+      "hips",
+      "knees",
+      "ankles"
+    ],
+    "default_prop": "question journal",
+    "immutable": [
+      "long wavy brown hair",
+      "broad forehead",
+      "round gray glasses",
+      "blue-gray eyes",
+      "warm brown beard",
+      "dark-brown long coat",
+      "cream shirt",
+      "red-and-cream checked tie",
+      "rust trousers",
+      "brown boots",
+      "brown question journal with gold question mark"
+    ],
+    "personality": "reflective patient quietly playful anti-dogmatic"
+  },
+  "origin": {
+    "baseline_y": 91,
+    "cols": 72,
+    "root_anchor": [
+      36,
+      91
+    ],
+    "rows": 96,
+    "safe_inset": {
+      "bottom": 4,
+      "left": 4,
+      "right": 4,
+      "top": 4
+    }
+  },
+  "schema_version": 1
+}

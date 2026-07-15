@@ -1,0 +1,88 @@
+# Orion Vale Runtime Verification
+
+Verification date: 2026-07-14
+
+Branch: `codex/persona-orion-vale`
+
+Base commit: `4235be3` (verification covers the uncommitted production worktree
+changes requested for integration; no commit or push was performed by this
+implementation pass).
+
+## Extraction gate
+
+- Exact audited graph count: 124.
+- Identity/reference graphs from sheet 01: 16.
+- The identity source is the audited 4-by-4 revision-2 sheet; revision 1 was
+  rejected because its nonuniform callout layout produced incomplete equal-cell
+  slices.
+- Pose and feature graphs from sheets 02–09: 108.
+- Category counts: 8 turnaround, 8 neutral, 24 expression, 16 viseme/blink,
+  16 hand/prop, 16 motion, 16 signature, and 4 interaction.
+- Runtime format: transparent colored pixel nodes in JSON. Missing nodes are
+  transparent; no PNG or SVG is a runtime render asset.
+- `orion_vale_extraction_audit.json` records source worksheet hashes, source
+  cells, isolation method, bounds, node counts, and graph hashes.
+- Package loading recomputes every one of the 124 graph hashes before the
+  animation profile and controller are constructed.
+
+The approved revision-2 neutral, expression, speech/blink, and ground-motion
+sheets are used. Expression revision-2 panel 23 is blank, so its corresponding
+reviewed revision-1 cell is used as the single explicit fallback. This fallback
+is named and hashed in the audit.
+
+## Runtime gate
+
+- Orion is registered as `orion-vale-v1` through the shared character registry.
+- Character-scoped state, commands, poses, WebSocket streaming, and static JSON
+  assets use the shared server architecture.
+- The ASCILINE projector reads direct cells and paints square colored nodes into
+  the framebuffer each frame.
+- Seeded simulation reaches the authored revision-2 blink graph.
+- Speech and blink overlays preserve the active locomotion body graph.
+- Turn, crouch, jump, fall, land, listen, journal hold, journal write, and page
+  turn are semantically addressable.
+- Hand/prop feature graphs are audited donors and are excluded from the
+  pose-capable controller list; full-body interaction graphs remain addressable.
+- Runtime rendering succeeds while `PIL.Image.open` is forced to fail, proving
+  the live path does not decode worksheet PNGs.
+
+## Determinism
+
+Command:
+
+```bash
+uv run python tools/generate_voxel_persona_character.py \
+  assets/reference/personas/orion-vale/generation-profile.json --check
+```
+
+Result: `Orion Vale generated assets are deterministic`.
+
+## Tests
+
+Focused command:
+
+```bash
+uv run python -m unittest \
+  tests.wizard.test_direct_cell_character \
+  tests.wizard.test_orion_vale_character -v
+```
+
+Result after the identity-grid correction: 20 tests passed, 0 failed, 0 skipped.
+
+Full command:
+
+```bash
+uv run python -m unittest discover -s tests -v
+```
+
+Result after the identity-grid correction: 181 tests passed in 112.481 seconds,
+0 failed, 0 skipped. The run
+includes Wizard Joe, CrystAIl, codec, transport, controller, stream, browser
+contract, projection, locomotion, and Orion regression coverage.
+
+## Known reviewed fallback
+
+Revision-2 expression panel 23 contains no subject pixels. The production
+profile uses the corresponding revision-1 expression cell rather than
+fabricating a silhouette. No other v1 fallback is used in the revision-2
+neutral, expression, speech/blink, or ground-motion groups.

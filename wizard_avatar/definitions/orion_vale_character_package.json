@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "character_id": "orion-vale-v1",
+  "display_name": "Orion Vale",
+  "renderer": "asciline_square_cells",
+  "pose_library": "orion_vale_pose_cells.json",
+  "animation_graph": "orion_vale_animation_graph.json",
+  "runtime_profile": "orion_vale_runtime_profile.json",
+  "manifest": "orion_vale_character_manifest.json",
+  "animation_matrix": "orion_vale_animation_matrix.json",
+  "extraction_audit": "orion_vale_extraction_audit.json",
+  "pixel_graph_library": "orion_vale_pixel_graphs.json",
+  "default_pose_id": "neutral_front",
+  "capabilities": [
+    "ground_locomotion",
+    "eight_direction_turnaround",
+    "actions",
+    "speech_visemes",
+    "full_expression_vocabulary",
+    "procedural_secondary_motion",
+    "pose_showcase",
+    "journal_interaction",
+    "inquiry_signature_actions",
+    "containment_recovery"
+  ]
+}

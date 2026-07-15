@@ -1,0 +1,230 @@
+{
+  "asset_set_id": "orion-vale-worksheet-motion-v1",
+  "authored_fps": 24,
+  "clips": [
+    {
+      "clip_id": "orion_idle",
+      "loop": true,
+      "samples": [
+        {
+          "pose_id": "idle_relaxed",
+          "tick": 0
+        },
+        {
+          "pose_id": "idle_attentive",
+          "tick": 18
+        },
+        {
+          "pose_id": "idle_listening",
+          "tick": 36
+        }
+      ]
+    },
+    {
+      "clip_id": "orion_walk",
+      "loop": true,
+      "samples": [
+        {
+          "pose_id": "walk_contact_left",
+          "tick": 0
+        },
+        {
+          "pose_id": "walk_passing_left",
+          "tick": 6
+        },
+        {
+          "pose_id": "walk_contact_right",
+          "tick": 12
+        },
+        {
+          "pose_id": "walk_passing_right",
+          "tick": 18
+        }
+      ]
+    },
+    {
+      "clip_id": "orion_run",
+      "loop": true,
+      "samples": [
+        {
+          "pose_id": "run_reach",
+          "tick": 0
+        },
+        {
+          "pose_id": "run_drive",
+          "tick": 6
+        }
+      ]
+    },
+    {
+      "clip_id": "orion_jump_land",
+      "loop": false,
+      "samples": [
+        {
+          "pose_id": "jump_anticipation",
+          "tick": 0
+        },
+        {
+          "pose_id": "jump_airborne",
+          "tick": 5
+        },
+        {
+          "pose_id": "fall",
+          "tick": 10
+        },
+        {
+          "pose_id": "land_contact",
+          "tick": 15
+        },
+        {
+          "pose_id": "land_recovery",
+          "tick": 20
+        }
+      ]
+    },
+    {
+      "clip_id": "orion_conversation",
+      "loop": true,
+      "samples": [
+        {
+          "pose_id": "listen_socratic",
+          "tick": 0
+        },
+        {
+          "pose_id": "gesture_explain",
+          "tick": 16
+        },
+        {
+          "pose_id": "gesture_present",
+          "tick": 32
+        },
+        {
+          "pose_id": "gesture_point",
+          "tick": 48
+        }
+      ]
+    },
+    {
+      "clip_id": "orion_inquiry",
+      "loop": false,
+      "samples": [
+        {
+          "pose_id": "inquiry_hidden_question",
+          "tick": 0
+        },
+        {
+          "pose_id": "inquiry_overloaded_word",
+          "tick": 10
+        },
+        {
+          "pose_id": "inquiry_testable_handle",
+          "tick": 20
+        },
+        {
+          "pose_id": "inquiry_lens_break",
+          "tick": 30
+        },
+        {
+          "pose_id": "gesture_inquiry_down",
+          "tick": 42
+        }
+      ]
+    },
+    {
+      "clip_id": "orion_journal",
+      "loop": false,
+      "samples": [
+        {
+          "pose_id": "journal_hold",
+          "tick": 0
+        },
+        {
+          "pose_id": "journal_write",
+          "tick": 12
+        },
+        {
+          "pose_id": "journal_page_turn",
+          "tick": 24
+        },
+        {
+          "pose_id": "journal_hold",
+          "tick": 36
+        }
+      ]
+    },
+    {
+      "clip_id": "orion_hand_interactions",
+      "loop": false,
+      "samples": [
+        {
+          "pose_id": "interaction_open_hand",
+          "tick": 0
+        },
+        {
+          "pose_id": "interaction_closed_hand",
+          "tick": 10
+        },
+        {
+          "pose_id": "interaction_fist",
+          "tick": 20
+        },
+        {
+          "pose_id": "interaction_reach",
+          "tick": 30
+        }
+      ]
+    },
+    {
+      "clip_id": "orion_turnaround",
+      "loop": true,
+      "samples": [
+        {
+          "pose_id": "neutral_front",
+          "tick": 0
+        },
+        {
+          "pose_id": "neutral_three_quarter_left",
+          "tick": 12
+        },
+        {
+          "pose_id": "neutral_left_profile",
+          "tick": 24
+        },
+        {
+          "pose_id": "neutral_back_three_quarter_left",
+          "tick": 36
+        },
+        {
+          "pose_id": "neutral_back",
+          "tick": 48
+        },
+        {
+          "pose_id": "neutral_back_three_quarter_right",
+          "tick": 60
+        },
+        {
+          "pose_id": "neutral_right_profile",
+          "tick": 72
+        },
+        {
+          "pose_id": "neutral_three_quarter_right",
+          "tick": 84
+        }
+      ]
+    }
+  ],
+  "default_node_id": "idle",
+  "motion_profile": {
+    "principles": [
+      "unhurried_anticipation",
+      "small_question_offering_arcs",
+      "thoughtful_gaze_shifts",
+      "clear_journal_contacts",
+      "generous_listening_pauses",
+      "soft_recovery"
+    ],
+    "quality": "reflective_inquiry_performance"
+  },
+  "schema_version": 2,
+  "simulation_hz": 60
+}
