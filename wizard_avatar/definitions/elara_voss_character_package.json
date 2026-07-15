@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "character_id": "elara-voss-v1",
+  "display_name": "Elara Voss",
+  "renderer": "asciline_square_cells",
+  "pose_library": "elara_voss_pose_cells.json",
+  "animation_graph": "elara_voss_animation_graph.json",
+  "runtime_profile": "elara_voss_runtime_profile.json",
+  "manifest": "elara_voss_character_manifest.json",
+  "animation_matrix": "elara_voss_animation_matrix.json",
+  "extraction_audit": "elara_voss_extraction_audit.json",
+  "pixel_graph_library": "elara_voss_pixel_graphs.json",
+  "default_pose_id": "neutral_front",
+  "capabilities": [
+    "ground_locomotion",
+    "eight_direction_turnaround",
+    "actions",
+    "speech_visemes",
+    "full_expression_vocabulary",
+    "procedural_secondary_motion",
+    "pose_showcase",
+    "microphone_interaction",
+    "curriculum_instruction",
+    "sequencing_and_reflection",
+    "calm_correction",
+    "containment_recovery"
+  ]
+}

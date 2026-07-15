@@ -1,0 +1,88 @@
+{
+  "attachment_points": [
+    "mouth",
+    "left_eye",
+    "right_eye",
+    "left_hand",
+    "right_hand",
+    "left_foot",
+    "right_foot",
+    "microphone"
+  ],
+  "character_id": "elara-voss-v1",
+  "derivation": {
+    "approved_worksheets": "assets/reference/personas/elara-voss/canonical-worksheets",
+    "canonical_reference": "assets/reference/personas/elara-voss/canonical-voxel.png",
+    "flattened_runtime_dependency": false,
+    "generation_profile": "assets/reference/personas/elara-voss/generation-profile.json",
+    "original_reference": "assets/reference/personas/elara-voss/source-reference.png",
+    "runtime_art": "deterministic worksheet-derived direct cell library"
+  },
+  "display_name": "Elara Voss",
+  "hashes": {
+    "animation_graph_sha256": "703e6338bfc6eb77d39ec509066ea674e6a0a886530dd887f33589dd070748d6",
+    "animation_matrix_sha256": "609e7945003080c420c86c8a56d8f71c342b2c6e4ed723c2abedbccdd48348f0",
+    "canonical_reference_sha256": "5ed2dc852e525b2ffa6ca7e32ce9b3c027b408bed810529b212ebec43b472ffa",
+    "extraction_audit_sha256": "f58081158323927efddbe7b099785ba6b5157dacff01c2c14130adddd7e2bf33",
+    "extraction_item_count": 124,
+    "generation_profile_sha256": "304ced1dda56bbc006f9e5f886aa232a77103d39f29c5ed3dfe83a3fccffcc29",
+    "original_reference_sha256": "e347288320da20d8a9021b351fd4e726f8f28922fae4e715e5123ff8bd8ace6f",
+    "pixel_graph_library_sha256": "a928c522362044fc14eaf63522bd5eea390d211ae6eed95c2ed8eb28e5c58b62",
+    "pose_library_sha256": "17fad387618a3af164f44027fc4973e75b5d3cf75909e2b5756c32efff08c791",
+    "worksheet_sha256": {
+      "01-identity-sheet-candidate-v3.png": "5a685da06982b8cd492d6b6e8ad80970ddf04c49715fe43c4f7e8e88e10ae378",
+      "02-turnaround-sheet-candidate-v1.png": "6dee2c932ee77afab25ff1e90e697c3eb2b58766661ccc78546144e008e3f245",
+      "03-neutral-base-poses-candidate-v1.png": "eb34359a91751abefff0327ee952053cfffb866a53b8f11ab6cfa15fe46ebcbc",
+      "04-expression-sheet-candidate-v1.png": "a862b20435cee6fe09f98e4cfd9784be784c841f58971a83cddaa0268d1a8339",
+      "05-speech-viseme-sheet-candidate-v1.png": "a36158b9d60738b9848672a4915616323313d14d370ca493a29f1801c65ce0f3",
+      "06-hand-prop-sheet-candidate-v1.png": "8b84124b78186d69e8149e99b42fc0e5476f6b964d7bb14794446c0a01c2e25c",
+      "07-ground-motion-sheet-candidate-v2.png": "a905810a245b92699d1498372e3bacbbce9f1fd3f451e25a91cbfe598f7625d2",
+      "08-signature-actions-sheet-candidate-v1.png": "c46761d4c1d7114a6565cb58cdd08c532149a6bbe2061ba9617153b3739a9bb7",
+      "09-interaction-poses-candidate-v1.png": "da4c0105396daeb718629fceee5f6735bc9ed38805fb98b2d31d23b1bd3b405f"
+    }
+  },
+  "identity_lock": {
+    "articulated": [
+      "eyelids",
+      "mouth",
+      "neck",
+      "shoulders",
+      "elbows",
+      "wrists",
+      "hands",
+      "hips",
+      "knees",
+      "ankles"
+    ],
+    "default_prop": "microphone",
+    "immutable": [
+      "bright lime-green cuboid alien head",
+      "black stepped almond eyes with outer lash blocks",
+      "two square nostrils",
+      "small black mouth",
+      "burnt-orange tailored jacket",
+      "cream V-neck blouse",
+      "burnt-orange knee-length skirt",
+      "slim green limbs",
+      "orange block heels",
+      "silver-and-black microphone"
+    ],
+    "personality": "warm unhurried intelligent exacting enthusiastic academic presenter"
+  },
+  "origin": {
+    "baseline_y": 91,
+    "cols": 72,
+    "root_anchor": [
+      36,
+      91
+    ],
+    "rows": 96,
+    "safe_inset": {
+      "bottom": 4,
+      "left": 4,
+      "right": 4,
+      "top": 4
+    }
+  },
+  "schema_version": 1
+}
