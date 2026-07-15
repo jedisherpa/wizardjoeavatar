@@ -1,0 +1,66 @@
+repository: jedisherpa/wizardjoeavatar
+production_branch: codex/rust-chatbot-animation-engine
+baseline_commit: e3c5c5d8fa39b16a2da6a48215a28dc84eee38e5
+analyzed_commit: e3c5c5d8fa39b16a2da6a48215a28dc84eee38e5
+target_role: procedural broadcast avatar visualizer supplying animation frame source
+  contract
+workstreams:
+- name: branch_authority_stabilization
+  tasks:
+  - add_current_authority_note
+  dependencies: []
+  files:
+  - README.md
+  - docs/cartoon-animation-program/rust-chatbot/README.md
+  interface_locks:
+  - authority_document
+  tests:
+  - documentation_review
+  completion_evidence: signed_note_at_analyzed_commit
+  approval: owner_signature
+- name: rchat_gate_records
+  tasks:
+  - generate_commit_gate_records
+  dependencies:
+  - branch_authority_stabilization
+  files:
+  - schemas/rchat/gate-v1.schema.json
+  - tools/rchat/
+  interface_locks:
+  - gate_schema
+  tests:
+  - validator_run
+  completion_evidence: committed_gate_records_with_SHA_match
+  approval: none
+dependencies:
+- name: rust_engine
+  manifest: rust/wizard_avatar_engine/Cargo.toml
+- name: pose_tool
+  manifest: rust/wizard_avatar_pose_tool/Cargo.toml
+- name: python_package
+  manifest: pyproject.toml
+contracts:
+- name: prism_animation_signal
+  schema: wizard_avatar/definitions/prism_animation_signal.schema.json
+  status: implemented
+- name: animation_frame_source
+  status: Proposed — interface lock required
+- name: cdiss_dispatch_event
+  status: Proposed — interface lock required
+milestones:
+- name: authority_stabilized
+  evidence: signed_note
+- name: gates_recorded
+  evidence: committed_records
+- name: deployment_receipt
+  evidence: immutable_SHA_receipt
+test_gates:
+- cargo_test
+- rchat_validator
+- browser_harness_probe
+- every_frame_capture
+approval_gates:
+- owner_decision_C001
+- security_sign_off
+- governance_owner
+central_integration_repository: https://github.com/jedisherpa/prism-gt-broadcast-integration

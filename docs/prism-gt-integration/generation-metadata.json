@@ -1,0 +1,61 @@
+{
+  "identity": "repository-docs-jedisherpa__wizardjoeavatar",
+  "stage": "repository_documentation_package_repair_1",
+  "status": "complete",
+  "provider": "xAI",
+  "model_requested": "grok-4.3",
+  "model_returned": "grok-4.3",
+  "model_route": "direct_xai_api_chat_completions",
+  "reasoning_effort": "high",
+  "attempt": 1,
+  "started_at": "2026-07-15T04:42:42.648495+00:00",
+  "completed_at": "2026-07-15T04:43:32.920508+00:00",
+  "prompt_chars": 125215,
+  "prompt_sha256": "d1ec3c352dfc241d09bcb17dd6b22ec1b038ea54112c11043ad36355283a0bd1",
+  "output_chars": 30802,
+  "output_sha256": "6cebd60b7ca72920735541ac95ec6fd7e23d566efc300d66c5d78d59f48b7c0b",
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 28163,
+    "completion_tokens": 6673,
+    "total_tokens": 36708,
+    "prompt_tokens_details": {
+      "text_tokens": 28163,
+      "audio_tokens": 0,
+      "image_tokens": 0,
+      "cached_tokens": 128
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 1872,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    },
+    "num_sources_used": 0,
+    "cost_in_usd_ticks": 564318500
+  },
+  "request_id": "a1595c0c-b57d-9685-a2a0-8d3716cff9a4",
+  "independence_control": "Stateless direct xAI request. Messages contained only this expert's system prompt, assigned lens, frozen shared evidence, and this expert's own checkpoints.",
+  "repository": "jedisherpa/wizardjoeavatar",
+  "identifier": "jedisherpa__wizardjoeavatar",
+  "production_branch": "codex/rust-chatbot-animation-engine",
+  "baseline_commit": "e3c5c5d8fa39b16a2da6a48215a28dc84eee38e5",
+  "output_dir": "/home/ubuntu/prism_gt_integration_work/generated-repository-docs/jedisherpa__wizardjoeavatar",
+  "files": [
+    "README.md",
+    "CURRENT_STATE.md",
+    "ROLE_IN_ECOSYSTEM.md",
+    "TARGET_ARCHITECTURE.md",
+    "INTEGRATION_CONTRACTS.md",
+    "IMPLEMENTATION_PLAN.md",
+    "TEST_AND_ACCEPTANCE_PLAN.md",
+    "RISKS_AND_OPEN_QUESTIONS.md",
+    "AGENT_HANDOFF.md",
+    "implementation-manifest.yaml"
+  ],
+  "total_chars": 30431,
+  "package_sha256": "0719722d1875b3ee111c73d5e0a1f9b600bf62473e927429da6d0a3378256c44",
+  "repository_report_sha256": "dd345276fde4799003127a6fb07e2e121bc2bdafdc5b0e66cfaa1beaca1a383f",
+  "synthesis_sha256": "619f29eee2e348afb15515fae3d4e5eda1612f0b6c9e48934148656612c6b914",
+  "shared_evidence_sha256": "e2e6028ef2e19905b8d72b90aa92cb4370ffa3a4e604d08d211c3390a329e76d"
+}
