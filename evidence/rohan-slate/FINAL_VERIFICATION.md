@@ -54,8 +54,9 @@ the visualizer never loads these evidence PNG files.
 - Live character list, state, poses, metadata, and pixel-graph routes returned
   HTTP 200; the pixel-graph response was 5,434,114 bytes.
 - Character-scoped WebSocket returned
-  `INIT:24.0:5:240:135:0:0:0.000` and a 10,073-byte binary frame; the
-  `wrench_present` action reaches live pose `wrench_presentation`.
+  `INIT:24.0:5:240:135:0:0:0.000`, a 10,073-byte idle binary frame, and a
+  12,106-byte action frame; live state confirmed `wrench_present` reached pose
+  `wrench_presentation` for `rohan-slate-v1`.
 - Forced `PIL.Image.open` failure still produced runtime frames.
 
 Final evidence hashes:
