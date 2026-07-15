@@ -69,16 +69,30 @@ def _pose_sheet_name(profile: Mapping[str, Any], pose: Mapping[str, Any]) -> str
     return str(overrides.get(requested, requested))
 
 
-def _panel(sheet: Path, columns: int, rows: int, index: int, gutter: int) -> Image.Image:
+def _panel(
+    sheet: Path,
+    columns: int,
+    rows: int,
+    index: int,
+    gutter: int,
+    expansion: Mapping[str, Any] | None = None,
+) -> Image.Image:
     image = Image.open(sheet).convert("RGB")
     column = index % columns
     row = index // columns
     if row >= rows:
         raise ValueError("panel index {} is outside {}x{} sheet".format(index, columns, rows))
-    left = round(column * image.width / columns) + gutter
-    right = round((column + 1) * image.width / columns) - gutter
-    top = round(row * image.height / rows) + gutter
-    bottom = round((row + 1) * image.height / rows) - gutter
+    expanded = expansion or {}
+    left = max(0, round(column * image.width / columns) + gutter - int(expanded.get("left", 0)))
+    right = min(
+        image.width,
+        round((column + 1) * image.width / columns) - gutter + int(expanded.get("right", 0)),
+    )
+    top = max(0, round(row * image.height / rows) + gutter - int(expanded.get("top", 0)))
+    bottom = min(
+        image.height,
+        round((row + 1) * image.height / rows) - gutter + int(expanded.get("bottom", 0)),
+    )
     return image.crop((left, top, right, bottom))
 
 
@@ -96,6 +110,8 @@ def _subject_rgba(panel: Image.Image, extraction: Mapping[str, Any]) -> Image.Im
     )
     background = np.median(corner_pixels.astype(np.int16), axis=0)
     channels = pixels.astype(np.int16)
+    delta = channels - background
+    distance = np.sqrt(np.sum(delta * delta, axis=2))
     red, green, blue = channels[:, :, 0], channels[:, :, 1], channels[:, :, 2]
     if extraction.get("foreground_mode") == "warm_subject":
         maximum = channels.max(axis=2)
@@ -104,10 +120,9 @@ def _subject_rgba(panel: Image.Image, extraction: Mapping[str, Any]) -> Image.Im
         warm = (red > blue + 7) & (red >= green - 18)
         non_blue_color = (chroma > 24) & (blue < maximum)
         dark_detail = (maximum < 112) & (red >= blue - 8)
-        mask = warm | non_blue_color | dark_detail
+        tolerance = float(extraction.get("background_tolerance", 42.0))
+        mask = (warm | non_blue_color | dark_detail) & (distance > tolerance)
     else:
-        delta = channels - background
-        distance = np.sqrt(np.sum(delta * delta, axis=2))
         tolerance = float(extraction.get("background_tolerance", 42.0))
         mask = distance > tolerance
 
@@ -122,6 +137,17 @@ def _subject_rgba(panel: Image.Image, extraction: Mapping[str, Any]) -> Image.Im
             ImageFilter.MinFilter(close_size)
         )
     mask = np.asarray(mask_image, dtype=np.uint8) > 0
+    if extraction.get("foreground_mode") == "warm_subject":
+        # Closing can bridge isolated holes with the pale cyan studio color.
+        # Reject that source hue again after morphology while retaining the
+        # character's much darker teal eyes and green meter display.
+        studio_cyan = (
+            (red >= 100)
+            & (green >= red + 18)
+            & (blue >= red + 25)
+            & (blue >= green - 5)
+        )
+        mask &= ~studio_cyan
     if extraction.get("largest_component", True):
         mask = _largest_component(mask)
         detail_radius = int(extraction.get("detail_radius", 5))
@@ -147,8 +173,14 @@ def _subject_rgba(panel: Image.Image, extraction: Mapping[str, Any]) -> Image.Im
     x1 = min(panel.width, int(xs.max()) + margin + 1)
     y0 = max(0, int(ys.min()) - margin)
     y1 = min(panel.height, int(ys.max()) + margin + 1)
-    rgba = panel.convert("RGBA")
-    rgba.putalpha(Image.fromarray(mask.astype(np.uint8) * 255))
+    # Clear RGB beneath transparent pixels before Lanczos normalization.  If
+    # the source studio color remains under alpha=0, resampling leaks a cyan
+    # fringe back into otherwise transparent direct-cell edge nodes.
+    rgba_pixels = np.zeros((panel.height, panel.width, 4), dtype=np.uint8)
+    rgba_pixels[:, :, :3] = pixels
+    rgba_pixels[~mask, :3] = 0
+    rgba_pixels[:, :, 3] = mask.astype(np.uint8) * 255
+    rgba = Image.fromarray(rgba_pixels)
     return rgba.crop((x0, y0, x1, y1))
 
 
@@ -190,6 +222,7 @@ def _cells_for_pose(profile: Mapping[str, Any], pose: Mapping[str, Any]) -> list
         int(pose["rows"]),
         int(pose["index"]),
         int(pose.get("gutter", 3)),
+        pose.get("panel_expansion"),
     )
     extraction = dict(profile.get("extraction", {}))
     pose_extraction = pose.get("extraction", {})
@@ -563,6 +596,7 @@ def manifest_payload(
         "origin": profile["canonical"],
         "attachment_points": profile["attachment_points"],
         "derivation": {
+            "generation_profile": str(profile_path.relative_to(ROOT)),
             "original_reference": refs["original_reference"],
             "canonical_reference": refs["canonical_reference"],
             "approved_worksheets": refs["worksheets_dir"],

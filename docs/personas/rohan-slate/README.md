@@ -12,3 +12,5 @@ Performance: grounded, practical, and unflappable. Use stable feet, small diagno
 
 Signature actions: observe symptom, check boring cause, meter scan, safety stop, device reset, facilities walkthrough, and call qualified help.
 
+See `RUNTIME_INTEGRATION.md` for the production graph package, semantic mappings,
+regeneration command, and runtime validation contract.

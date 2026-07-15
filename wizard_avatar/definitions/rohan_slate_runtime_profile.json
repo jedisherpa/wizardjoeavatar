@@ -1,0 +1,92 @@
+{
+  "schema_version": 1,
+  "character_id": "rohan-slate-v1",
+  "scale_multiplier": 0.88,
+  "default_pose_id": "neutral_front",
+  "facing_poses": {
+    "south": "neutral_front",
+    "southwest": "neutral_three_quarter_left",
+    "west": "neutral_left_profile",
+    "northwest": "neutral_back_three_quarter_left",
+    "north": "neutral_back",
+    "northeast": "neutral_back_three_quarter_right",
+    "east": "neutral_right_profile",
+    "southeast": "neutral_three_quarter_right"
+  },
+  "action_poses": {
+    "speaking": "indicate_result",
+    "explaining": "walkthrough_direction",
+    "pointing": "indicate_result",
+    "thinking": "observe_symptom",
+    "reaction": "reset_success_nod",
+    "celebrating": "reset_success_nod",
+    "containment": "safety_stop_hold",
+    "magic_cast": "wrench_presentation",
+    "turn_left": "turn_left",
+    "turn_right": "turn_right",
+    "crouch": "crouch",
+    "jump": "jump_airborne",
+    "fall": "fall",
+    "land": "land_contact",
+    "listening": "watch_and_wait",
+    "journal_hold": "meter_scan_reading",
+    "journal_write": "precise_meter_reset",
+    "journal_page_turn": "meter_scan_anticipation",
+    "observe_symptom": "observe_symptom",
+    "inspect_cause": "inspect_cause_low",
+    "meter_scan": "meter_scan_reading",
+    "safety_stop": "safety_stop_hold",
+    "reset": "precise_meter_reset",
+    "watch_wait": "watch_and_wait",
+    "walkthrough": "walkthrough_direction",
+    "wrench_present": "wrench_presentation",
+    "qualified_help": "qualified_help_signal"
+  },
+  "expression_aliases": {
+    "happy": "joy",
+    "amused": "amusement",
+    "surprised": "surprise",
+    "worried": "concern",
+    "confident": "confidence",
+    "skeptical": "skepticism",
+    "thinking": "contemplation",
+    "focused": "determination",
+    "explaining": "curiosity"
+  },
+  "walking_cycle": [
+    "walk_contact_left",
+    "walk_passing_left",
+    "walk_contact_right",
+    "walk_passing_right"
+  ],
+  "running_cycle": ["run_reach", "run_drive"],
+  "airborne_poses": {
+    "takeoff": "jump_anticipation",
+    "hover": "jump_airborne",
+    "bank_left": "jump_airborne",
+    "bank_right": "jump_airborne",
+    "travel_away": "fall",
+    "travel_toward": "jump_airborne",
+    "landing": "land_contact"
+  },
+  "speech_poses": [
+    "viseme_rest",
+    "viseme_closed_lips",
+    "viseme_slightly_open",
+    "viseme_wide_vowel",
+    "viseme_open_vowel",
+    "viseme_rounded_vowel",
+    "viseme_teeth_consonant",
+    "viseme_lower_lip_consonant",
+    "viseme_tongue_consonant",
+    "viseme_smile_speaking",
+    "viseme_frown_speaking",
+    "viseme_speech_emphasis",
+    "viseme_breath_pause"
+  ],
+  "blink_poses": {
+    "open": "blink_open",
+    "half_closed": "blink_half_closed",
+    "closed": "blink_closed"
+  }
+}

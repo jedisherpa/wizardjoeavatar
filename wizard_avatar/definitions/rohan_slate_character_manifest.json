@@ -1,0 +1,90 @@
+{
+  "attachment_points": [
+    "mouth",
+    "left_eye",
+    "right_eye",
+    "left_hand",
+    "right_hand",
+    "left_foot",
+    "right_foot",
+    "meter",
+    "wrench"
+  ],
+  "character_id": "rohan-slate-v1",
+  "derivation": {
+    "approved_worksheets": "assets/reference/personas/rohan-slate/canonical-worksheets",
+    "canonical_reference": "assets/reference/personas/rohan-slate/canonical-voxel.png",
+    "flattened_runtime_dependency": false,
+    "generation_profile": "assets/reference/personas/rohan-slate/generation-profile.json",
+    "original_reference": "assets/reference/personas/rohan-slate/source-reference.png",
+    "runtime_art": "deterministic worksheet-derived direct cell library"
+  },
+  "display_name": "Rohan Slate",
+  "hashes": {
+    "animation_graph_sha256": "78c9974eff330ff002cb40ebea2840c2b0890cb99d888b8970047df9f4a1372a",
+    "animation_matrix_sha256": "ec7fec1155c68383fcf75b09ff9b613887b7db98c8e4eda1550161f0cc9f54fd",
+    "canonical_reference_sha256": "9669b00c83e1f7bc57b25b4611a440a4b3a1f6de12a1253c37de8158709b0114",
+    "extraction_audit_sha256": "8052709541b90154b48981f4d03da03854b62d7c2a93db1703975d6aac524f69",
+    "extraction_item_count": 124,
+    "generation_profile_sha256": "28e5d0531ffb91b5d6307cd218d6aee43b6481188f0fbe60c696f090427cb41e",
+    "original_reference_sha256": "b3711407b803d432c97233ec9680d5e394f8f109839265a3e03259aa890741e6",
+    "pixel_graph_library_sha256": "78f1592fb443f6a977ad01e118ed6f9f08e2753b63752d5762b022b741579eab",
+    "pose_library_sha256": "89880a31bf19dc237e102290ff3f7cef62580b709cae3f9d7d0022de399a63c5",
+    "worksheet_sha256": {
+      "01-identity-sheet-approved-v1.png": "2215dc58e8eafecaff1992640851612b416d7bb2f1a62829e5a8d8cacb8b088b",
+      "02-turnaround-sheet-approved-v1.png": "de094d437ad783ef14af79c3501ce42750608ba65ddc531065168262d6e46eac",
+      "03-neutral-base-poses-approved-v1.png": "5b44eb46f683deea314031fc9eb456c1dabed4591930d3ddf277deef692a5d6a",
+      "04-expression-sheet-approved-v1.png": "8851cdb367039e9d92c5512523a50671a5d5a42cafb21c469c94b3632e5fd70c",
+      "05-speech-viseme-sheet-approved-v3.png": "cd933e6566d518b10c5de69f58f122b2231aa7c2a78d1ad39b35ed0cb1598e19",
+      "06-hand-prop-sheet-approved-v1.png": "7e66083113268ca1baf08b5f728ffffdfa1b8812c0e329f7e0b2bbca866a8ae2",
+      "07-ground-motion-sheet-approved-v1.png": "d74ef406c6fca6d36ed6f6c4165ca88f6ae06f032b276c6312b7f6304f95906c",
+      "08-signature-actions-sheet-approved-v1.png": "243a406826cdfe1fc06f7c895e08c20764f9fc7162d75551fba4fc2a6ab8460a",
+      "09-interaction-poses-approved-v1.png": "0aff8a8681e2dc25a1156969f64b4623bcd31b37ea87f1d8d4fb51d8b49d4c9e"
+    }
+  },
+  "identity_lock": {
+    "articulated": [
+      "eyelids",
+      "mouth",
+      "neck",
+      "shoulders",
+      "elbows",
+      "wrists",
+      "hands",
+      "hips",
+      "knees",
+      "ankles"
+    ],
+    "default_prop": "meter",
+    "immutable": [
+      "compact middle-aged adult male proportions",
+      "broad square head",
+      "curly medium-brown voxel hair",
+      "full square brown beard and moustache",
+      "rectangular black glasses",
+      "teal eyes",
+      "forest-green collared work shirt and matching trousers",
+      "brown tool belt with stable pouch and tool placement",
+      "heavy brown work boots",
+      "charcoal diagnostic meter with green bar display",
+      "approved gray open-end wrench"
+    ],
+    "personality": "practical exact observant matter-of-fact unflappable facilities technician"
+  },
+  "origin": {
+    "baseline_y": 91,
+    "cols": 72,
+    "root_anchor": [
+      36,
+      91
+    ],
+    "rows": 96,
+    "safe_inset": {
+      "bottom": 4,
+      "left": 4,
+      "right": 4,
+      "top": 4
+    }
+  },
+  "schema_version": 1
+}

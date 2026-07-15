@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "character_id": "rohan-slate-v1",
+  "display_name": "Rohan Slate",
+  "renderer": "asciline_square_cells",
+  "pose_library": "rohan_slate_pose_cells.json",
+  "animation_graph": "rohan_slate_animation_graph.json",
+  "runtime_profile": "rohan_slate_runtime_profile.json",
+  "manifest": "rohan_slate_character_manifest.json",
+  "animation_matrix": "rohan_slate_animation_matrix.json",
+  "extraction_audit": "rohan_slate_extraction_audit.json",
+  "pixel_graph_library": "rohan_slate_pixel_graphs.json",
+  "default_pose_id": "neutral_front",
+  "capabilities": [
+    "ground_locomotion",
+    "eight_direction_turnaround",
+    "actions",
+    "speech_visemes",
+    "full_expression_vocabulary",
+    "procedural_secondary_motion",
+    "pose_showcase",
+    "diagnostic_meter_interaction",
+    "facilities_diagnostics",
+    "safety_stop",
+    "meter_reset_and_verification",
+    "maintenance_walkthrough",
+    "qualified_help_signal",
+    "wrench_presentation"
+  ]
+}

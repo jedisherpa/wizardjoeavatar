@@ -71,6 +71,15 @@ ACTIONS = (
     "journal_hold",
     "journal_write",
     "journal_page_turn",
+    "observe_symptom",
+    "inspect_cause",
+    "meter_scan",
+    "safety_stop",
+    "reset",
+    "watch_wait",
+    "walkthrough",
+    "wrench_present",
+    "qualified_help",
 )
 
 MOUTH_SHAPES = (

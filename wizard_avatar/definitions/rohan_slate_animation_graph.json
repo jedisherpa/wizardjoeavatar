@@ -1,0 +1,252 @@
+{
+  "asset_set_id": "rohan-slate-worksheet-motion-v1",
+  "authored_fps": 24,
+  "clips": [
+    {
+      "clip_id": "rohan_idle",
+      "loop": true,
+      "samples": [
+        {
+          "pose_id": "idle_relaxed",
+          "tick": 0
+        },
+        {
+          "pose_id": "idle_attentive",
+          "tick": 20
+        },
+        {
+          "pose_id": "idle_listening",
+          "tick": 40
+        }
+      ]
+    },
+    {
+      "clip_id": "rohan_walk",
+      "loop": true,
+      "samples": [
+        {
+          "pose_id": "walk_contact_left",
+          "tick": 0
+        },
+        {
+          "pose_id": "walk_passing_left",
+          "tick": 7
+        },
+        {
+          "pose_id": "walk_contact_right",
+          "tick": 14
+        },
+        {
+          "pose_id": "walk_passing_right",
+          "tick": 21
+        }
+      ]
+    },
+    {
+      "clip_id": "rohan_run",
+      "loop": true,
+      "samples": [
+        {
+          "pose_id": "run_reach",
+          "tick": 0
+        },
+        {
+          "pose_id": "run_drive",
+          "tick": 7
+        }
+      ]
+    },
+    {
+      "clip_id": "rohan_jump_land",
+      "loop": false,
+      "samples": [
+        {
+          "pose_id": "jump_anticipation",
+          "tick": 0
+        },
+        {
+          "pose_id": "jump_airborne",
+          "tick": 6
+        },
+        {
+          "pose_id": "fall",
+          "tick": 12
+        },
+        {
+          "pose_id": "land_contact",
+          "tick": 18
+        },
+        {
+          "pose_id": "land_recovery",
+          "tick": 24
+        }
+      ]
+    },
+    {
+      "clip_id": "rohan_diagnose",
+      "loop": false,
+      "samples": [
+        {
+          "pose_id": "observe_symptom",
+          "tick": 0
+        },
+        {
+          "pose_id": "inspect_cause_low",
+          "tick": 14
+        },
+        {
+          "pose_id": "meter_scan_anticipation",
+          "tick": 28
+        },
+        {
+          "pose_id": "meter_scan_reading",
+          "tick": 42
+        },
+        {
+          "pose_id": "indicate_result",
+          "tick": 56
+        }
+      ]
+    },
+    {
+      "clip_id": "rohan_safety_stop",
+      "loop": false,
+      "samples": [
+        {
+          "pose_id": "safety_stop_anticipation",
+          "tick": 0
+        },
+        {
+          "pose_id": "safety_stop_hold",
+          "tick": 12
+        },
+        {
+          "pose_id": "safety_stop_recovery",
+          "tick": 30
+        }
+      ]
+    },
+    {
+      "clip_id": "rohan_reset_verify",
+      "loop": false,
+      "samples": [
+        {
+          "pose_id": "reset_anticipation",
+          "tick": 0
+        },
+        {
+          "pose_id": "precise_meter_reset",
+          "tick": 14
+        },
+        {
+          "pose_id": "watch_and_wait",
+          "tick": 30
+        },
+        {
+          "pose_id": "reset_success_nod",
+          "tick": 50
+        },
+        {
+          "pose_id": "settled_ready_tools_returned",
+          "tick": 66
+        }
+      ]
+    },
+    {
+      "clip_id": "rohan_walkthrough",
+      "loop": false,
+      "samples": [
+        {
+          "pose_id": "walkthrough_direction",
+          "tick": 0
+        },
+        {
+          "pose_id": "wrench_presentation",
+          "tick": 16
+        },
+        {
+          "pose_id": "qualified_help_signal",
+          "tick": 34
+        },
+        {
+          "pose_id": "settled_ready_tools_returned",
+          "tick": 52
+        }
+      ]
+    },
+    {
+      "clip_id": "rohan_hand_interactions",
+      "loop": false,
+      "samples": [
+        {
+          "pose_id": "interaction_open_hand",
+          "tick": 0
+        },
+        {
+          "pose_id": "interaction_closed_hand",
+          "tick": 10
+        },
+        {
+          "pose_id": "interaction_fist",
+          "tick": 20
+        },
+        {
+          "pose_id": "interaction_reach",
+          "tick": 30
+        }
+      ]
+    },
+    {
+      "clip_id": "rohan_turnaround",
+      "loop": true,
+      "samples": [
+        {
+          "pose_id": "neutral_front",
+          "tick": 0
+        },
+        {
+          "pose_id": "neutral_three_quarter_left",
+          "tick": 12
+        },
+        {
+          "pose_id": "neutral_left_profile",
+          "tick": 24
+        },
+        {
+          "pose_id": "neutral_back_three_quarter_left",
+          "tick": 36
+        },
+        {
+          "pose_id": "neutral_back",
+          "tick": 48
+        },
+        {
+          "pose_id": "neutral_back_three_quarter_right",
+          "tick": 60
+        },
+        {
+          "pose_id": "neutral_right_profile",
+          "tick": 72
+        },
+        {
+          "pose_id": "neutral_three_quarter_right",
+          "tick": 84
+        }
+      ]
+    }
+  ],
+  "default_node_id": "idle",
+  "motion_profile": {
+    "principles": [
+      "restrained_anticipation",
+      "stable_planted_contacts",
+      "deliberate_meter_reads",
+      "clear_safety_stops",
+      "watchful_pauses",
+      "unhurried_recovery"
+    ],
+    "quality": "grounded_precise_facilities_diagnostics"
+  },
+  "schema_version": 2,
+  "simulation_hz": 60
+}

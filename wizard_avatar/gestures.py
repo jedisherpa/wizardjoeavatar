@@ -25,6 +25,15 @@ ACTION_TO_CHANNELS = {
     "journal_hold": ("none", "rest"),
     "journal_write": ("none", "rest"),
     "journal_page_turn": ("none", "rest"),
+    "observe_symptom": ("think", "held"),
+    "inspect_cause": ("think", "held"),
+    "meter_scan": ("think", "held"),
+    "safety_stop": ("point", "rest"),
+    "reset": ("none", "rest"),
+    "watch_wait": ("none", "held"),
+    "walkthrough": ("point", "held"),
+    "wrench_present": ("point", "point"),
+    "qualified_help": ("react", "held"),
 }
 
 
