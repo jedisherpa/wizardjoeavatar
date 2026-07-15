@@ -1,0 +1,91 @@
+{
+  "attachment_points": [
+    "mouth",
+    "left_eye",
+    "right_eye",
+    "left_hand",
+    "right_hand",
+    "left_foot",
+    "right_foot",
+    "prototype"
+  ],
+  "character_id": "kai-renner-v1",
+  "derivation": {
+    "approved_worksheets": "assets/reference/personas/kai-renner/canonical-worksheets",
+    "canonical_reference": "assets/reference/personas/kai-renner/canonical-voxel.png",
+    "flattened_runtime_dependency": false,
+    "original_reference": "assets/reference/personas/kai-renner/source-reference.png",
+    "runtime_art": "deterministic worksheet-derived direct cell library"
+  },
+  "display_name": "Kai Renner",
+  "hashes": {
+    "animation_graph_sha256": "67734bd590a9dbf3bc0dffcab1355e04f3fb62478d3c57a1d6764d9be3af681f",
+    "animation_matrix_sha256": "d16e5de7f3dca1ed0cd2e6a91ca9c9d2d8dc915611f5cdfcb8b7ae01382a4e4a",
+    "canonical_reference_sha256": "fc73a37b15383b6af8c1ffb3c00ad7d584a0faf2a54bd28783f0b026a640d439",
+    "extraction_audit_sha256": "fede28d157a921d6eafc454b6719d3e303da2d18ba746778df09084f407d8b30",
+    "extraction_item_count": 124,
+    "generation_profile_sha256": "2fed85db25814e185699cb0d19a3acba999056d47f44121506180dd95737a4b9",
+    "original_reference_sha256": "882e005783758986883064105c500bb1dfde5447c3b3e3fac9aa1f6f6f6b5f4b",
+    "pixel_graph_library_sha256": "86ac285deb8a4b321e00efe4c7991f0b64f0a2db05bc19ef8966a513bb9c4f0e",
+    "pose_library_sha256": "1ea283376ec735fb0872693a32d92f71dc81f970bde3ab1b76873ed633052a2a",
+    "worksheet_sha256": {
+      "01-identity-sheet-candidate-v2.png": "b913294ff0084017da12bae9f034db0c0e2cc261dfc4ed9ff457b40988ee68d3",
+      "02-turnaround-sheet-candidate-v1.png": "ee7fbdcb2e13c53bfc805f92d8e54faebe8e9d71e84863b49a86ba34b573a9d9",
+      "03-neutral-base-poses-candidate-v1.png": "1ef772827b69b499893dfdf2e6c51480aef8333cfaf6b8da22b684f9422653d4",
+      "04-expression-sheet-candidate-v1.png": "6e61adf3c8afd5db02e8f3525c31cfa18680cfd1d4e01558d73706f17002bc44",
+      "05-speech-viseme-sheet-candidate-v1.png": "c4441ae6b33fd0d70827ed31bf53ee8ccd44d137b391a3fb7362a38875605236",
+      "06-hand-prop-sheet-candidate-v1.png": "a96a17707ae31c0ac4c2de442a229edf4212599354f6e72e82e97fa996972331",
+      "07-ground-motion-sheet-candidate-v1.png": "c88ae94c2e14e92330df5ae237ebc81e9958a2ca5f83da06714d386867b8f9d4",
+      "08-signature-actions-sheet-candidate-v1.png": "087ecab02fd57b885489a6c4c1a66d5198e8c43c058860032afcc7758955b889",
+      "09-core-hand-actions-candidate-v1.png": "cd8d5bb08ef20121964a9f24ab0d75905c795d060fe7261d1a97d009ffc7164e"
+    }
+  },
+  "identity_lock": {
+    "articulated": [
+      "brows",
+      "eyelids",
+      "pupils",
+      "mouth",
+      "neck",
+      "shoulders",
+      "elbows",
+      "wrists",
+      "fingers",
+      "hips",
+      "knees",
+      "ankles",
+      "shirt cuffs",
+      "cap brim"
+    ],
+    "default_prop": "gray-blue controlled prototype",
+    "immutable": [
+      "black flat-brim BAKE cap with exact white uppercase lettering",
+      "square black glasses",
+      "blue-gray eyes",
+      "short brown hair",
+      "squared brown beard and moustache",
+      "bright yellow long-sleeve shirt",
+      "medium blue trousers",
+      "near-black shoes",
+      "warm medium-tan skin",
+      "compact voxel proportions"
+    ],
+    "personality": "fast playful inventive evidence-driven with immediate privacy and safety slowdown"
+  },
+  "origin": {
+    "baseline_y": 91,
+    "cols": 72,
+    "root_anchor": [
+      36,
+      91
+    ],
+    "rows": 96,
+    "safe_inset": {
+      "bottom": 4,
+      "left": 4,
+      "right": 4,
+      "top": 4
+    }
+  },
+  "schema_version": 1
+}

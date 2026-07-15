@@ -11,6 +11,7 @@ DEFINITIONS_DIR = Path(__file__).with_name("definitions")
 WIZARD_JOE_PACKAGE_PATH = DEFINITIONS_DIR / "wizard_joe_character_package.json"
 CRYSTAIL_PACKAGE_PATH = DEFINITIONS_DIR / "crystail_character_package.json"
 ORION_VALE_PACKAGE_PATH = DEFINITIONS_DIR / "orion_vale_character_package.json"
+KAI_RENNER_PACKAGE_PATH = DEFINITIONS_DIR / "kai_renner_character_package.json"
 
 
 class CharacterPackageValidationError(ValueError):
@@ -237,5 +238,6 @@ __all__ = [
     "WIZARD_JOE_PACKAGE_PATH",
     "CRYSTAIL_PACKAGE_PATH",
     "ORION_VALE_PACKAGE_PATH",
+    "KAI_RENNER_PACKAGE_PATH",
     "load_character_package",
 ]

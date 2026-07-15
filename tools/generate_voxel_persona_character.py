@@ -97,14 +97,41 @@ def _subject_rgba(panel: Image.Image, extraction: Mapping[str, Any]) -> Image.Im
     background = np.median(corner_pixels.astype(np.int16), axis=0)
     channels = pixels.astype(np.int16)
     red, green, blue = channels[:, :, 0], channels[:, :, 1], channels[:, :, 2]
-    if extraction.get("foreground_mode") == "warm_subject":
+    if extraction.get("foreground_mode") == "cool_object":
+        delta = channels - background
+        distance = np.sqrt(np.sum(delta * delta, axis=2))
+        tolerance = float(extraction.get("background_tolerance", 42.0))
+        maximum = channels.max(axis=2)
+        minimum = channels.min(axis=2)
+        chroma = maximum - minimum
+        floor_cyan = (green > 125) & (blue > green + 20) & (blue > red + 70)
+        mask = (distance > tolerance) & ((maximum < 190) | (chroma < 20)) & ~floor_cyan
+    elif extraction.get("foreground_mode") == "warm_subject":
         maximum = channels.max(axis=2)
         minimum = channels.min(axis=2)
         chroma = maximum - minimum
         warm = (red > blue + 7) & (red >= green - 18)
         non_blue_color = (chroma > 24) & (blue < maximum)
         dark_detail = (maximum < 112) & (red >= blue - 8)
-        mask = warm | non_blue_color | dark_detail
+        # Preserve Kai's saturated blue trousers while rejecting the much
+        # lighter cyan studio/floor. This remains color-family based rather
+        # than character-name based so other cool wardrobe accents use the
+        # same deterministic extraction path.
+        dark_cobalt = (
+            (blue >= green + 12)
+            & (red < 82)
+            & (green < 142)
+            & (blue < 178)
+        )
+        structural = warm | non_blue_color | dark_detail
+        # Cool wardrobe pixels must sit beneath an already detected subject
+        # column. This keeps trousers while discarding lateral blue floor
+        # shadows and cyan studio islands before connected-component cleanup.
+        if not extraction.get("allow_isolated_cobalt", False):
+            subject_above = np.maximum.accumulate(structural, axis=0)
+            subject_below = np.maximum.accumulate(structural[::-1, :], axis=0)[::-1, :]
+            dark_cobalt &= subject_above & subject_below
+        mask = warm | non_blue_color | dark_detail | dark_cobalt
     else:
         delta = channels - background
         distance = np.sqrt(np.sum(delta * delta, axis=2))

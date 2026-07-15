@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "character_id": "kai-renner-v1",
+  "display_name": "Kai Renner",
+  "renderer": "asciline_square_cells",
+  "pose_library": "kai_renner_pose_cells.json",
+  "animation_graph": "kai_renner_animation_graph.json",
+  "runtime_profile": "kai_renner_runtime_profile.json",
+  "manifest": "kai_renner_character_manifest.json",
+  "animation_matrix": "kai_renner_animation_matrix.json",
+  "extraction_audit": "kai_renner_extraction_audit.json",
+  "pixel_graph_library": "kai_renner_pixel_graphs.json",
+  "default_pose_id": "neutral_front",
+  "capabilities": [
+    "ground_locomotion",
+    "eight_direction_turnaround",
+    "actions",
+    "speech_visemes",
+    "full_expression_vocabulary",
+    "procedural_secondary_motion",
+    "pose_showcase",
+    "prototype_interaction",
+    "build_test_signature_actions",
+    "privacy_safety_slowdown",
+    "evidence_metrics",
+    "containment_recovery"
+  ]
+}

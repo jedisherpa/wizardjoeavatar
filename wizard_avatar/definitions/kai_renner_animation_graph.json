@@ -1,0 +1,258 @@
+{
+  "asset_set_id": "kai-renner-worksheet-motion-v1",
+  "authored_fps": 24,
+  "clips": [
+    {
+      "clip_id": "kai_idle",
+      "loop": true,
+      "samples": [
+        {
+          "pose_id": "idle_relaxed",
+          "tick": 0
+        },
+        {
+          "pose_id": "idle_attentive",
+          "tick": 12
+        },
+        {
+          "pose_id": "idle_listening",
+          "tick": 24
+        }
+      ]
+    },
+    {
+      "clip_id": "kai_walk",
+      "loop": true,
+      "samples": [
+        {
+          "pose_id": "walk_contact_left",
+          "tick": 0
+        },
+        {
+          "pose_id": "walk_passing_left",
+          "tick": 5
+        },
+        {
+          "pose_id": "walk_contact_right",
+          "tick": 10
+        },
+        {
+          "pose_id": "walk_passing_right",
+          "tick": 15
+        }
+      ]
+    },
+    {
+      "clip_id": "kai_run",
+      "loop": true,
+      "samples": [
+        {
+          "pose_id": "run_reach",
+          "tick": 0
+        },
+        {
+          "pose_id": "run_drive",
+          "tick": 5
+        }
+      ]
+    },
+    {
+      "clip_id": "kai_jump_land",
+      "loop": false,
+      "samples": [
+        {
+          "pose_id": "jump_anticipation",
+          "tick": 0
+        },
+        {
+          "pose_id": "jump_airborne",
+          "tick": 4
+        },
+        {
+          "pose_id": "fall",
+          "tick": 8
+        },
+        {
+          "pose_id": "land_contact",
+          "tick": 12
+        },
+        {
+          "pose_id": "land_recovery",
+          "tick": 17
+        }
+      ]
+    },
+    {
+      "clip_id": "kai_build_test",
+      "loop": false,
+      "samples": [
+        {
+          "pose_id": "pilot_smallest_pitch",
+          "tick": 0
+        },
+        {
+          "pose_id": "build_gesture",
+          "tick": 8
+        },
+        {
+          "pose_id": "test_gesture",
+          "tick": 16
+        },
+        {
+          "pose_id": "build_test_handoff",
+          "tick": 24
+        }
+      ]
+    },
+    {
+      "clip_id": "kai_safety",
+      "loop": false,
+      "samples": [
+        {
+          "pose_id": "privacy_check",
+          "tick": 0
+        },
+        {
+          "pose_id": "safety_slowdown",
+          "tick": 12
+        },
+        {
+          "pose_id": "settle_and_listen",
+          "tick": 28
+        }
+      ]
+    },
+    {
+      "clip_id": "kai_evidence",
+      "loop": false,
+      "samples": [
+        {
+          "pose_id": "metric_presentation",
+          "tick": 0
+        },
+        {
+          "pose_id": "evidence_comparison",
+          "tick": 10
+        },
+        {
+          "pose_id": "decisive_thumbs_up",
+          "tick": 20
+        }
+      ]
+    },
+    {
+      "clip_id": "kai_prototype",
+      "loop": false,
+      "samples": [
+        {
+          "pose_id": "prototype_present",
+          "tick": 0
+        },
+        {
+          "pose_id": "prototype_inspect",
+          "tick": 10
+        },
+        {
+          "pose_id": "prototype_celebration",
+          "tick": 20
+        }
+      ]
+    },
+    {
+      "clip_id": "kai_correction",
+      "loop": false,
+      "samples": [
+        {
+          "pose_id": "self_correction",
+          "tick": 0
+        },
+        {
+          "pose_id": "kill_the_hype",
+          "tick": 12
+        },
+        {
+          "pose_id": "settle_and_listen",
+          "tick": 28
+        },
+        {
+          "pose_id": "energetic_recovery",
+          "tick": 42
+        }
+      ]
+    },
+    {
+      "clip_id": "kai_hand_interactions",
+      "loop": false,
+      "samples": [
+        {
+          "pose_id": "interaction_open_hand",
+          "tick": 0
+        },
+        {
+          "pose_id": "interaction_closed_hand",
+          "tick": 8
+        },
+        {
+          "pose_id": "interaction_fist",
+          "tick": 16
+        },
+        {
+          "pose_id": "interaction_reach",
+          "tick": 24
+        }
+      ]
+    },
+    {
+      "clip_id": "kai_turnaround",
+      "loop": true,
+      "samples": [
+        {
+          "pose_id": "neutral_front",
+          "tick": 0
+        },
+        {
+          "pose_id": "neutral_three_quarter_left",
+          "tick": 10
+        },
+        {
+          "pose_id": "neutral_left_profile",
+          "tick": 20
+        },
+        {
+          "pose_id": "neutral_back_three_quarter_left",
+          "tick": 30
+        },
+        {
+          "pose_id": "neutral_back",
+          "tick": 40
+        },
+        {
+          "pose_id": "neutral_back_three_quarter_right",
+          "tick": 50
+        },
+        {
+          "pose_id": "neutral_right_profile",
+          "tick": 60
+        },
+        {
+          "pose_id": "neutral_three_quarter_right",
+          "tick": 70
+        }
+      ]
+    }
+  ],
+  "default_node_id": "idle",
+  "motion_profile": {
+    "principles": [
+      "quick_weight_shifts",
+      "crisp_build_test_beats",
+      "privacy_safety_slowdown",
+      "clear_prototype_contacts",
+      "decisive_thumbs_up_punctuation",
+      "self_correcting_recovery"
+    ],
+    "quality": "fast_evidence_driven_builder"
+  },
+  "schema_version": 2,
+  "simulation_hz": 60
+}
