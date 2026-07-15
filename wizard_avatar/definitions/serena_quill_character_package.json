@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "character_id": "serena-quill-v1",
+  "display_name": "Serena Quill",
+  "renderer": "asciline_square_cells",
+  "pose_library": "serena_quill_pose_cells.json",
+  "animation_graph": "serena_quill_animation_graph.json",
+  "runtime_profile": "serena_quill_runtime_profile.json",
+  "manifest": "serena_quill_character_manifest.json",
+  "animation_matrix": "serena_quill_animation_matrix.json",
+  "extraction_audit": "serena_quill_extraction_audit.json",
+  "pixel_graph_library": "serena_quill_pixel_graphs.json",
+  "default_pose_id": "neutral_front",
+  "capabilities": [
+    "ground_locomotion",
+    "eight_direction_turnaround",
+    "actions",
+    "speech_visemes",
+    "full_expression_vocabulary",
+    "procedural_secondary_motion",
+    "pose_showcase",
+    "orb_interaction",
+    "angelic_facilitation_actions",
+    "wing_secondary_motion",
+    "consent_aware_support",
+    "containment_recovery"
+  ]
+}

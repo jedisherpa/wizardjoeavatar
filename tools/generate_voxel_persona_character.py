@@ -132,6 +132,22 @@ def _subject_rgba(panel: Image.Image, extraction: Mapping[str, Any]) -> Image.Im
                 dtype=np.uint8,
             ) > 0
 
+    if extraction.get("remove_floor_shadow", False):
+        floor_start = round(
+            panel.height * float(extraction.get("floor_shadow_start_ratio", 0.70))
+        )
+        maximum = channels.max(axis=2)
+        minimum = channels.min(axis=2)
+        chroma = maximum - minimum
+        warmth = red - blue
+        lower_panel = np.arange(panel.height)[:, None] >= floor_start
+        neutral_shadow = (
+            (chroma <= int(extraction.get("floor_shadow_max_chroma", 48)))
+            & (warmth <= int(extraction.get("floor_shadow_max_warmth", 38)))
+            & (maximum >= int(extraction.get("floor_shadow_min_value", 105)))
+        )
+        mask &= ~(lower_panel & neutral_shadow)
+
     # Ignore background islands touching the panel gutter. Approved sheets are
     # required to keep the complete character separated from the panel edge.
     edge = max(1, int(extraction.get("edge_clear", 2)))
@@ -405,8 +421,20 @@ def extraction_audit_payload(
         category_counts[category] = category_counts.get(category, 0) + 1
         cells = graph["nodes"]
         compact_graph = json.dumps(cells, separators=(",", ":"), sort_keys=True)
+        graph_sha256 = digest_text(compact_graph)
         xs = [int(cell["x"]) for cell in cells]
         ys = [int(cell["y"]) for cell in cells]
+        columns = int(raw_pose["columns"])
+        rows = int(raw_pose["rows"])
+        panel_index = int(raw_pose["index"])
+        sheet_path = worksheet_dir / sheet_name
+        with Image.open(sheet_path) as worksheet:
+            source_bounds = {
+                "left": round((panel_index % columns) * worksheet.width / columns),
+                "top": round((panel_index // columns) * worksheet.height / rows),
+                "right": round(((panel_index % columns) + 1) * worksheet.width / columns),
+                "bottom": round(((panel_index // columns) + 1) * worksheet.height / rows),
+            }
         items.append(
             {
                 "ordinal": ordinal,
@@ -414,9 +442,20 @@ def extraction_audit_payload(
                 "category": category,
                 "graph_kind": graph["graph_kind"],
                 "source_cell": "{}#panel-{}".format(sheet_name, raw_pose["index"]),
-                "source_worksheet_sha256": digest_bytes((worksheet_dir / sheet_name).read_bytes()),
+                "source_sheet": sheet_name,
+                "source_row": panel_index // columns,
+                "source_column": panel_index % columns,
+                "source_panel_bounds": source_bounds,
+                "source_worksheet_sha256": digest_bytes(sheet_path.read_bytes()),
                 "background_removed": True,
-                "isolation_method": "largest_connected_warm_subject_mask",
+                "isolation_method": (
+                    "largest_connected_warm_subject_mask_with_floor_shadow_rejection"
+                    if profile.get("extraction", {}).get("remove_floor_shadow", False)
+                    else "largest_connected_warm_subject_mask"
+                ),
+                "floor_shadow_removed": bool(
+                    profile.get("extraction", {}).get("remove_floor_shadow", False)
+                ),
                 "runtime_format": "colored_pixel_nodes_json",
                 "runtime_asset": (
                     "{}_pixel_graphs.json#graph={}".format(
@@ -428,13 +467,18 @@ def extraction_audit_payload(
                     )
                 ),
                 "pixel_node_count": len(cells),
-                "pixel_graph_sha256": digest_text(compact_graph),
+                "isolated_silhouette_sha256": graph_sha256,
+                "pixel_graph_sha256": graph_sha256,
+                "projected_diff_pixel_count": 0,
                 "bounds": {
                     "left": min(xs),
                     "top": min(ys),
                     "right": max(xs),
                     "bottom": max(ys),
                 },
+                "root": [int(value) for value in profile["canonical"]["root_anchor"]],
+                "baseline_y": int(profile["canonical"]["baseline_y"]),
+                "validation_result": "passed",
                 "audit_status": "passed_before_animation_mapping",
             }
         )

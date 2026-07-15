@@ -25,6 +25,13 @@ ACTION_TO_CHANNELS = {
     "journal_hold": ("none", "rest"),
     "journal_write": ("none", "rest"),
     "journal_page_turn": ("none", "rest"),
+    "mentoring_invitation": ("explain", "rest"),
+    "consent_pause": ("none", "rest"),
+    "orb_reassurance": ("think", "rest"),
+    "protective_wing_fold": ("none", "rest"),
+    "human_referral": ("point", "rest"),
+    "deescalation": ("none", "rest"),
+    "settled_presence": ("none", "rest"),
 }
 
 

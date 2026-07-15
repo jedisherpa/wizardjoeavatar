@@ -1,0 +1,260 @@
+{
+  "asset_set_id": "serena-quill-worksheet-motion-v1",
+  "authored_fps": 24,
+  "clips": [
+    {
+      "clip_id": "serena_idle",
+      "loop": true,
+      "samples": [
+        {
+          "pose_id": "idle_relaxed",
+          "tick": 0
+        },
+        {
+          "pose_id": "idle_attentive",
+          "tick": 20
+        },
+        {
+          "pose_id": "idle_listening",
+          "tick": 42
+        }
+      ]
+    },
+    {
+      "clip_id": "serena_walk",
+      "loop": true,
+      "samples": [
+        {
+          "pose_id": "walk_contact_left",
+          "tick": 0
+        },
+        {
+          "pose_id": "walk_down_left",
+          "tick": 7
+        },
+        {
+          "pose_id": "walk_passing_right",
+          "tick": 14
+        },
+        {
+          "pose_id": "walk_up_right",
+          "tick": 21
+        }
+      ]
+    },
+    {
+      "clip_id": "serena_run",
+      "loop": true,
+      "samples": [
+        {
+          "pose_id": "run_contact_left",
+          "tick": 0
+        },
+        {
+          "pose_id": "run_passing_right",
+          "tick": 7
+        }
+      ]
+    },
+    {
+      "clip_id": "serena_jump_land",
+      "loop": false,
+      "samples": [
+        {
+          "pose_id": "jump_anticipation",
+          "tick": 0
+        },
+        {
+          "pose_id": "jump_airborne",
+          "tick": 6
+        },
+        {
+          "pose_id": "fall",
+          "tick": 12
+        },
+        {
+          "pose_id": "land_contact",
+          "tick": 18
+        },
+        {
+          "pose_id": "land_recovery",
+          "tick": 25
+        }
+      ]
+    },
+    {
+      "clip_id": "serena_facilitation",
+      "loop": false,
+      "samples": [
+        {
+          "pose_id": "mentoring_invitation",
+          "tick": 0
+        },
+        {
+          "pose_id": "emotional_climate_check",
+          "tick": 12
+        },
+        {
+          "pose_id": "consent_pause",
+          "tick": 24
+        },
+        {
+          "pose_id": "facilitation",
+          "tick": 38
+        },
+        {
+          "pose_id": "active_listening",
+          "tick": 54
+        }
+      ]
+    },
+    {
+      "clip_id": "serena_support",
+      "loop": false,
+      "samples": [
+        {
+          "pose_id": "orb_reassurance",
+          "tick": 0
+        },
+        {
+          "pose_id": "protective_wing_fold",
+          "tick": 14
+        },
+        {
+          "pose_id": "referral_human_help",
+          "tick": 30
+        },
+        {
+          "pose_id": "deescalation",
+          "tick": 46
+        },
+        {
+          "pose_id": "settled_presence",
+          "tick": 64
+        }
+      ]
+    },
+    {
+      "clip_id": "serena_conversation",
+      "loop": true,
+      "samples": [
+        {
+          "pose_id": "compassionate_agreement",
+          "tick": 0
+        },
+        {
+          "pose_id": "safe_disagreement",
+          "tick": 16
+        },
+        {
+          "pose_id": "reflective_question",
+          "tick": 32
+        },
+        {
+          "pose_id": "supportive_answer",
+          "tick": 48
+        }
+      ]
+    },
+    {
+      "clip_id": "serena_orb",
+      "loop": false,
+      "samples": [
+        {
+          "pose_id": "prop_orb_two_hand_cradle",
+          "tick": 0
+        },
+        {
+          "pose_id": "prop_orb_offered",
+          "tick": 14
+        },
+        {
+          "pose_id": "prop_orb_received",
+          "tick": 28
+        },
+        {
+          "pose_id": "prop_orb_transfer",
+          "tick": 42
+        },
+        {
+          "pose_id": "prop_orb_settled_listening",
+          "tick": 58
+        }
+      ]
+    },
+    {
+      "clip_id": "serena_hand_interactions",
+      "loop": false,
+      "samples": [
+        {
+          "pose_id": "interaction_open_stance",
+          "tick": 0
+        },
+        {
+          "pose_id": "interaction_closed_stance",
+          "tick": 10
+        },
+        {
+          "pose_id": "interaction_safe_fist",
+          "tick": 20
+        },
+        {
+          "pose_id": "interaction_forward_reach",
+          "tick": 30
+        }
+      ]
+    },
+    {
+      "clip_id": "serena_turnaround",
+      "loop": true,
+      "samples": [
+        {
+          "pose_id": "neutral_front",
+          "tick": 0
+        },
+        {
+          "pose_id": "neutral_three_quarter_left",
+          "tick": 12
+        },
+        {
+          "pose_id": "neutral_left_profile",
+          "tick": 24
+        },
+        {
+          "pose_id": "neutral_back_three_quarter_left",
+          "tick": 36
+        },
+        {
+          "pose_id": "neutral_back",
+          "tick": 48
+        },
+        {
+          "pose_id": "neutral_back_three_quarter_right",
+          "tick": 60
+        },
+        {
+          "pose_id": "neutral_right_profile",
+          "tick": 72
+        },
+        {
+          "pose_id": "neutral_three_quarter_right",
+          "tick": 84
+        }
+      ]
+    }
+  ],
+  "default_node_id": "idle",
+  "motion_profile": {
+    "principles": [
+      "gentle_anticipation",
+      "smooth_feminine_arcs",
+      "restrained_wing_breathing",
+      "clear_orb_contacts",
+      "consent_aware_pauses",
+      "plain_still_recovery"
+    ],
+    "quality": "compassionate_angelic_facilitation"
+  },
+  "schema_version": 2,
+  "simulation_hz": 60
+}

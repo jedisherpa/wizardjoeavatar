@@ -1,0 +1,4857 @@
+{
+  "asset_set_id": "serena-quill-worksheet-motion-v1",
+  "audit_stage": "background_removal_and_pixel_graph_before_animation_mapping",
+  "category_counts": {
+    "expression": 24,
+    "hand_prop": 16,
+    "identity_reference": 16,
+    "interaction": 4,
+    "motion": 16,
+    "neutral": 8,
+    "signature": 16,
+    "turnaround": 8,
+    "viseme_blink": 16
+  },
+  "character_id": "serena-quill-v1",
+  "item_count": 124,
+  "items": [
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 4,
+        "right": 67,
+        "top": 13
+      },
+      "category": "identity_reference",
+      "floor_shadow_removed": true,
+      "graph_id": "identity_reference_00",
+      "graph_kind": "reference_graph",
+      "isolated_silhouette_sha256": "c05155b1803e4f679e807a4c1895c835b02575cb0f9d189bbad024188ded49c8",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 0,
+      "pixel_graph_sha256": "c05155b1803e4f679e807a4c1895c835b02575cb0f9d189bbad024188ded49c8",
+      "pixel_node_count": 2484,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "serena_quill_pixel_graphs.json#graph=identity_reference_00",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "01-identity-sheet-candidate-v3.png#panel-0",
+      "source_column": 0,
+      "source_panel_bounds": {
+        "bottom": 314,
+        "left": 0,
+        "right": 314,
+        "top": 0
+      },
+      "source_row": 0,
+      "source_sheet": "01-identity-sheet-candidate-v3.png",
+      "source_worksheet_sha256": "a6405defd8a031426bd3f3c2f0bbe426ed5a766f6f5063290cd46ebbd5047fbb",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 4,
+        "right": 67,
+        "top": 16
+      },
+      "category": "identity_reference",
+      "floor_shadow_removed": true,
+      "graph_id": "identity_reference_01",
+      "graph_kind": "reference_graph",
+      "isolated_silhouette_sha256": "8ec0fa8f404d3425ec74248bd82ed5968a63fc0a7481c1c249a8df1aa892f1fe",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 1,
+      "pixel_graph_sha256": "8ec0fa8f404d3425ec74248bd82ed5968a63fc0a7481c1c249a8df1aa892f1fe",
+      "pixel_node_count": 2351,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "serena_quill_pixel_graphs.json#graph=identity_reference_01",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "01-identity-sheet-candidate-v3.png#panel-1",
+      "source_column": 1,
+      "source_panel_bounds": {
+        "bottom": 314,
+        "left": 314,
+        "right": 627,
+        "top": 0
+      },
+      "source_row": 0,
+      "source_sheet": "01-identity-sheet-candidate-v3.png",
+      "source_worksheet_sha256": "a6405defd8a031426bd3f3c2f0bbe426ed5a766f6f5063290cd46ebbd5047fbb",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 4,
+        "right": 67,
+        "top": 16
+      },
+      "category": "identity_reference",
+      "floor_shadow_removed": true,
+      "graph_id": "identity_reference_02",
+      "graph_kind": "reference_graph",
+      "isolated_silhouette_sha256": "d2de613a245c8c514a5ffe3cc6d5d5db1c4372e9e33b9da657946a9735454bf4",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 2,
+      "pixel_graph_sha256": "d2de613a245c8c514a5ffe3cc6d5d5db1c4372e9e33b9da657946a9735454bf4",
+      "pixel_node_count": 2338,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "serena_quill_pixel_graphs.json#graph=identity_reference_02",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "01-identity-sheet-candidate-v3.png#panel-2",
+      "source_column": 2,
+      "source_panel_bounds": {
+        "bottom": 314,
+        "left": 627,
+        "right": 940,
+        "top": 0
+      },
+      "source_row": 0,
+      "source_sheet": "01-identity-sheet-candidate-v3.png",
+      "source_worksheet_sha256": "a6405defd8a031426bd3f3c2f0bbe426ed5a766f6f5063290cd46ebbd5047fbb",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 4,
+        "right": 67,
+        "top": 12
+      },
+      "category": "identity_reference",
+      "floor_shadow_removed": true,
+      "graph_id": "identity_reference_03",
+      "graph_kind": "reference_graph",
+      "isolated_silhouette_sha256": "0b22f6e335a22de7c59558db024fbafe3ff482b830647292f01654de96fb3f49",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 3,
+      "pixel_graph_sha256": "0b22f6e335a22de7c59558db024fbafe3ff482b830647292f01654de96fb3f49",
+      "pixel_node_count": 2627,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "serena_quill_pixel_graphs.json#graph=identity_reference_03",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "01-identity-sheet-candidate-v3.png#panel-3",
+      "source_column": 3,
+      "source_panel_bounds": {
+        "bottom": 314,
+        "left": 940,
+        "right": 1254,
+        "top": 0
+      },
+      "source_row": 0,
+      "source_sheet": "01-identity-sheet-candidate-v3.png",
+      "source_worksheet_sha256": "a6405defd8a031426bd3f3c2f0bbe426ed5a766f6f5063290cd46ebbd5047fbb",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 4,
+        "right": 67,
+        "top": 21
+      },
+      "category": "identity_reference",
+      "floor_shadow_removed": true,
+      "graph_id": "identity_reference_04",
+      "graph_kind": "reference_graph",
+      "isolated_silhouette_sha256": "69272a0598e25e208c615f347e59253ab62f2812089cdd99e1aeda1bf377c8c6",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 4,
+      "pixel_graph_sha256": "69272a0598e25e208c615f347e59253ab62f2812089cdd99e1aeda1bf377c8c6",
+      "pixel_node_count": 3476,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "serena_quill_pixel_graphs.json#graph=identity_reference_04",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "01-identity-sheet-candidate-v3.png#panel-4",
+      "source_column": 0,
+      "source_panel_bounds": {
+        "bottom": 627,
+        "left": 0,
+        "right": 314,
+        "top": 314
+      },
+      "source_row": 1,
+      "source_sheet": "01-identity-sheet-candidate-v3.png",
+      "source_worksheet_sha256": "a6405defd8a031426bd3f3c2f0bbe426ed5a766f6f5063290cd46ebbd5047fbb",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 19,
+        "right": 52,
+        "top": 5
+      },
+      "category": "identity_reference",
+      "floor_shadow_removed": true,
+      "graph_id": "identity_reference_05",
+      "graph_kind": "reference_graph",
+      "isolated_silhouette_sha256": "3fe11d9caab721925eb7ab333e4f7c6ae00cc5a82ff0b09a125d9ece60745693",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 5,
+      "pixel_graph_sha256": "3fe11d9caab721925eb7ab333e4f7c6ae00cc5a82ff0b09a125d9ece60745693",
+      "pixel_node_count": 2035,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "serena_quill_pixel_graphs.json#graph=identity_reference_05",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "01-identity-sheet-candidate-v3.png#panel-5",
+      "source_column": 1,
+      "source_panel_bounds": {
+        "bottom": 627,
+        "left": 314,
+        "right": 627,
+        "top": 314
+      },
+      "source_row": 1,
+      "source_sheet": "01-identity-sheet-candidate-v3.png",
+      "source_worksheet_sha256": "a6405defd8a031426bd3f3c2f0bbe426ed5a766f6f5063290cd46ebbd5047fbb",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 4,
+        "right": 67,
+        "top": 26
+      },
+      "category": "identity_reference",
+      "floor_shadow_removed": true,
+      "graph_id": "identity_reference_06",
+      "graph_kind": "reference_graph",
+      "isolated_silhouette_sha256": "554e1cd2d2bf2f383a9e153a5fc4241291cd570acd2f10a912fcc67fd046b206",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 6,
+      "pixel_graph_sha256": "554e1cd2d2bf2f383a9e153a5fc4241291cd570acd2f10a912fcc67fd046b206",
+      "pixel_node_count": 1947,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "serena_quill_pixel_graphs.json#graph=identity_reference_06",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "01-identity-sheet-candidate-v3.png#panel-6",
+      "source_column": 2,
+      "source_panel_bounds": {
+        "bottom": 627,
+        "left": 627,
+        "right": 940,
+        "top": 314
+      },
+      "source_row": 1,
+      "source_sheet": "01-identity-sheet-candidate-v3.png",
+      "source_worksheet_sha256": "a6405defd8a031426bd3f3c2f0bbe426ed5a766f6f5063290cd46ebbd5047fbb",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 90,
+        "left": 16,
+        "right": 56,
+        "top": 6
+      },
+      "category": "identity_reference",
+      "floor_shadow_removed": true,
+      "graph_id": "identity_reference_07",
+      "graph_kind": "reference_graph",
+      "isolated_silhouette_sha256": "b99d5bb289c08b451fd368b5c0cd274f77e6b3b29fab1095e811643421abf77a",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 7,
+      "pixel_graph_sha256": "b99d5bb289c08b451fd368b5c0cd274f77e6b3b29fab1095e811643421abf77a",
+      "pixel_node_count": 2683,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "serena_quill_pixel_graphs.json#graph=identity_reference_07",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "01-identity-sheet-candidate-v3.png#panel-7",
+      "source_column": 3,
+      "source_panel_bounds": {
+        "bottom": 627,
+        "left": 940,
+        "right": 1254,
+        "top": 314
+      },
+      "source_row": 1,
+      "source_sheet": "01-identity-sheet-candidate-v3.png",
+      "source_worksheet_sha256": "a6405defd8a031426bd3f3c2f0bbe426ed5a766f6f5063290cd46ebbd5047fbb",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 4,
+        "right": 67,
+        "top": 38
+      },
+      "category": "identity_reference",
+      "floor_shadow_removed": true,
+      "graph_id": "identity_reference_08",
+      "graph_kind": "reference_graph",
+      "isolated_silhouette_sha256": "190be194a30a3490bf08985570b968412e8073b1635bc8fac0bfc67e97003c25",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 8,
+      "pixel_graph_sha256": "190be194a30a3490bf08985570b968412e8073b1635bc8fac0bfc67e97003c25",
+      "pixel_node_count": 1691,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "serena_quill_pixel_graphs.json#graph=identity_reference_08",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "01-identity-sheet-candidate-v3.png#panel-8",
+      "source_column": 0,
+      "source_panel_bounds": {
+        "bottom": 940,
+        "left": 0,
+        "right": 314,
+        "top": 627
+      },
+      "source_row": 2,
+      "source_sheet": "01-identity-sheet-candidate-v3.png",
+      "source_worksheet_sha256": "a6405defd8a031426bd3f3c2f0bbe426ed5a766f6f5063290cd46ebbd5047fbb",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 90,
+        "left": 12,
+        "right": 58,
+        "top": 5
+      },
+      "category": "identity_reference",
+      "floor_shadow_removed": true,
+      "graph_id": "identity_reference_09",
+      "graph_kind": "reference_graph",
+      "isolated_silhouette_sha256": "162755e58a5479edd98c78130a84fa199fab5f2c71740888869ae9046c7ef800",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 9,
+      "pixel_graph_sha256": "162755e58a5479edd98c78130a84fa199fab5f2c71740888869ae9046c7ef800",
+      "pixel_node_count": 2893,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "serena_quill_pixel_graphs.json#graph=identity_reference_09",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "01-identity-sheet-candidate-v3.png#panel-9",
+      "source_column": 1,
+      "source_panel_bounds": {
+        "bottom": 940,
+        "left": 314,
+        "right": 627,
+        "top": 627
+      },
+      "source_row": 2,
+      "source_sheet": "01-identity-sheet-candidate-v3.png",
+      "source_worksheet_sha256": "a6405defd8a031426bd3f3c2f0bbe426ed5a766f6f5063290cd46ebbd5047fbb",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 90,
+        "left": 5,
+        "right": 66,
+        "top": 14
+      },
+      "category": "identity_reference",
+      "floor_shadow_removed": true,
+      "graph_id": "identity_reference_10",
+      "graph_kind": "reference_graph",
+      "isolated_silhouette_sha256": "336411bf0c08075004488a7c9337bc6086c5b6c9cdf392120dcea44bf5eb645b",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 10,
+      "pixel_graph_sha256": "336411bf0c08075004488a7c9337bc6086c5b6c9cdf392120dcea44bf5eb645b",
+      "pixel_node_count": 2232,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "serena_quill_pixel_graphs.json#graph=identity_reference_10",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "01-identity-sheet-candidate-v3.png#panel-10",
+      "source_column": 2,
+      "source_panel_bounds": {
+        "bottom": 940,
+        "left": 627,
+        "right": 940,
+        "top": 627
+      },
+      "source_row": 2,
+      "source_sheet": "01-identity-sheet-candidate-v3.png",
+      "source_worksheet_sha256": "a6405defd8a031426bd3f3c2f0bbe426ed5a766f6f5063290cd46ebbd5047fbb",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 4,
+        "right": 67,
+        "top": 53
+      },
+      "category": "identity_reference",
+      "floor_shadow_removed": true,
+      "graph_id": "identity_reference_11",
+      "graph_kind": "reference_graph",
+      "isolated_silhouette_sha256": "5570ac6a72f5ad3f2b54316252ba6df72b4f896e531b01644058098b89841cac",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 11,
+      "pixel_graph_sha256": "5570ac6a72f5ad3f2b54316252ba6df72b4f896e531b01644058098b89841cac",
+      "pixel_node_count": 1151,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "serena_quill_pixel_graphs.json#graph=identity_reference_11",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "01-identity-sheet-candidate-v3.png#panel-11",
+      "source_column": 3,
+      "source_panel_bounds": {
+        "bottom": 940,
+        "left": 940,
+        "right": 1254,
+        "top": 627
+      },
+      "source_row": 2,
+      "source_sheet": "01-identity-sheet-candidate-v3.png",
+      "source_worksheet_sha256": "a6405defd8a031426bd3f3c2f0bbe426ed5a766f6f5063290cd46ebbd5047fbb",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 90,
+        "left": 21,
+        "right": 50,
+        "top": 5
+      },
+      "category": "identity_reference",
+      "floor_shadow_removed": true,
+      "graph_id": "identity_reference_12",
+      "graph_kind": "reference_graph",
+      "isolated_silhouette_sha256": "b0c92a00f98495f5557c0feeb1a79686a166038283e8337f9693b6fc564fd2d3",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 12,
+      "pixel_graph_sha256": "b0c92a00f98495f5557c0feeb1a79686a166038283e8337f9693b6fc564fd2d3",
+      "pixel_node_count": 1842,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "serena_quill_pixel_graphs.json#graph=identity_reference_12",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "01-identity-sheet-candidate-v3.png#panel-12",
+      "source_column": 0,
+      "source_panel_bounds": {
+        "bottom": 1254,
+        "left": 0,
+        "right": 314,
+        "top": 940
+      },
+      "source_row": 3,
+      "source_sheet": "01-identity-sheet-candidate-v3.png",
+      "source_worksheet_sha256": "a6405defd8a031426bd3f3c2f0bbe426ed5a766f6f5063290cd46ebbd5047fbb",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 5,
+        "right": 66,
+        "top": 4
+      },
+      "category": "identity_reference",
+      "floor_shadow_removed": true,
+      "graph_id": "identity_reference_13",
+      "graph_kind": "reference_graph",
+      "isolated_silhouette_sha256": "9ee5a9c15a857a97b9696992adf20489d73bd95c08e390c1cfc475359991ee52",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 13,
+      "pixel_graph_sha256": "9ee5a9c15a857a97b9696992adf20489d73bd95c08e390c1cfc475359991ee52",
+      "pixel_node_count": 2932,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "serena_quill_pixel_graphs.json#graph=identity_reference_13",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "01-identity-sheet-candidate-v3.png#panel-13",
+      "source_column": 1,
+      "source_panel_bounds": {
+        "bottom": 1254,
+        "left": 314,
+        "right": 627,
+        "top": 940
+      },
+      "source_row": 3,
+      "source_sheet": "01-identity-sheet-candidate-v3.png",
+      "source_worksheet_sha256": "a6405defd8a031426bd3f3c2f0bbe426ed5a766f6f5063290cd46ebbd5047fbb",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 90,
+        "left": 4,
+        "right": 67,
+        "top": 19
+      },
+      "category": "identity_reference",
+      "floor_shadow_removed": true,
+      "graph_id": "identity_reference_14",
+      "graph_kind": "reference_graph",
+      "isolated_silhouette_sha256": "4556d35da7a02125cc037b47b96fb1bf96f8a3dcc27202816c0f70fb10e892dd",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 14,
+      "pixel_graph_sha256": "4556d35da7a02125cc037b47b96fb1bf96f8a3dcc27202816c0f70fb10e892dd",
+      "pixel_node_count": 2283,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "serena_quill_pixel_graphs.json#graph=identity_reference_14",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "01-identity-sheet-candidate-v3.png#panel-14",
+      "source_column": 2,
+      "source_panel_bounds": {
+        "bottom": 1254,
+        "left": 627,
+        "right": 940,
+        "top": 940
+      },
+      "source_row": 3,
+      "source_sheet": "01-identity-sheet-candidate-v3.png",
+      "source_worksheet_sha256": "a6405defd8a031426bd3f3c2f0bbe426ed5a766f6f5063290cd46ebbd5047fbb",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 90,
+        "left": 8,
+        "right": 62,
+        "top": 5
+      },
+      "category": "identity_reference",
+      "floor_shadow_removed": true,
+      "graph_id": "identity_reference_15",
+      "graph_kind": "reference_graph",
+      "isolated_silhouette_sha256": "62a0a40e9b28eaf9ae889138f2c4c01787914dcb6b4c725e51e2d7d7bea0d409",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 15,
+      "pixel_graph_sha256": "62a0a40e9b28eaf9ae889138f2c4c01787914dcb6b4c725e51e2d7d7bea0d409",
+      "pixel_node_count": 2660,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "serena_quill_pixel_graphs.json#graph=identity_reference_15",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "01-identity-sheet-candidate-v3.png#panel-15",
+      "source_column": 3,
+      "source_panel_bounds": {
+        "bottom": 1254,
+        "left": 940,
+        "right": 1254,
+        "top": 940
+      },
+      "source_row": 3,
+      "source_sheet": "01-identity-sheet-candidate-v3.png",
+      "source_worksheet_sha256": "a6405defd8a031426bd3f3c2f0bbe426ed5a766f6f5063290cd46ebbd5047fbb",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 4,
+        "right": 67,
+        "top": 6
+      },
+      "category": "turnaround",
+      "floor_shadow_removed": true,
+      "graph_id": "neutral_front",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "ad709dc521ffcd1ffa63d01f699bd9158bb81165f0454aed17b70a6d550c84a4",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 16,
+      "pixel_graph_sha256": "ad709dc521ffcd1ffa63d01f699bd9158bb81165f0454aed17b70a6d550c84a4",
+      "pixel_node_count": 2615,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "serena_quill_pose_cells.json#pose=neutral_front",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "02-turnaround-sheet-candidate-v1.png#panel-0",
+      "source_column": 0,
+      "source_panel_bounds": {
+        "bottom": 512,
+        "left": 0,
+        "right": 384,
+        "top": 0
+      },
+      "source_row": 0,
+      "source_sheet": "02-turnaround-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "d476d6aa2d1c2961135a6e6774bde2fc50d765174cddca0cec9c273201bfdafd",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 5,
+        "right": 65,
+        "top": 4
+      },
+      "category": "turnaround",
+      "floor_shadow_removed": true,
+      "graph_id": "neutral_three_quarter_left",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "62617d70de41d640927b32142963c5a39b4985cb1c15a3977fd0e4928ba70035",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 17,
+      "pixel_graph_sha256": "62617d70de41d640927b32142963c5a39b4985cb1c15a3977fd0e4928ba70035",
+      "pixel_node_count": 2680,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "serena_quill_pose_cells.json#pose=neutral_three_quarter_left",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "02-turnaround-sheet-candidate-v1.png#panel-1",
+      "source_column": 1,
+      "source_panel_bounds": {
+        "bottom": 512,
+        "left": 384,
+        "right": 768,
+        "top": 0
+      },
+      "source_row": 0,
+      "source_sheet": "02-turnaround-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "d476d6aa2d1c2961135a6e6774bde2fc50d765174cddca0cec9c273201bfdafd",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 14,
+        "right": 56,
+        "top": 4
+      },
+      "category": "turnaround",
+      "floor_shadow_removed": true,
+      "graph_id": "neutral_left_profile",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "28813c791659f43a56b34bd9038638fbe0b173a7a2733ff2d649aedcc37ebf2d",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 18,
+      "pixel_graph_sha256": "28813c791659f43a56b34bd9038638fbe0b173a7a2733ff2d649aedcc37ebf2d",
+      "pixel_node_count": 1988,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "serena_quill_pose_cells.json#pose=neutral_left_profile",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "02-turnaround-sheet-candidate-v1.png#panel-2",
+      "source_column": 2,
+      "source_panel_bounds": {
+        "bottom": 512,
+        "left": 768,
+        "right": 1152,
+        "top": 0
+      },
+      "source_row": 0,
+      "source_sheet": "02-turnaround-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "d476d6aa2d1c2961135a6e6774bde2fc50d765174cddca0cec9c273201bfdafd",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 9,
+        "right": 61,
+        "top": 4
+      },
+      "category": "turnaround",
+      "floor_shadow_removed": true,
+      "graph_id": "neutral_back_three_quarter_left",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "1952bffb949fa6b81edc399f18e19eb8534fb287d9ec6ae12882fe3117a9e844",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 19,
+      "pixel_graph_sha256": "1952bffb949fa6b81edc399f18e19eb8534fb287d9ec6ae12882fe3117a9e844",
+      "pixel_node_count": 2583,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "serena_quill_pose_cells.json#pose=neutral_back_three_quarter_left",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "02-turnaround-sheet-candidate-v1.png#panel-3",
+      "source_column": 3,
+      "source_panel_bounds": {
+        "bottom": 512,
+        "left": 1152,
+        "right": 1536,
+        "top": 0
+      },
+      "source_row": 0,
+      "source_sheet": "02-turnaround-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "d476d6aa2d1c2961135a6e6774bde2fc50d765174cddca0cec9c273201bfdafd",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 4,
+        "right": 67,
+        "top": 8
+      },
+      "category": "turnaround",
+      "floor_shadow_removed": true,
+      "graph_id": "neutral_back",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "36a10b4e185e8f3f5b3c33c2555db3cfc6e631624037a6e78036701b2aa158a6",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 20,
+      "pixel_graph_sha256": "36a10b4e185e8f3f5b3c33c2555db3cfc6e631624037a6e78036701b2aa158a6",
+      "pixel_node_count": 2560,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "serena_quill_pose_cells.json#pose=neutral_back",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "02-turnaround-sheet-candidate-v1.png#panel-4",
+      "source_column": 0,
+      "source_panel_bounds": {
+        "bottom": 1024,
+        "left": 0,
+        "right": 384,
+        "top": 512
+      },
+      "source_row": 1,
+      "source_sheet": "02-turnaround-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "d476d6aa2d1c2961135a6e6774bde2fc50d765174cddca0cec9c273201bfdafd",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 9,
+        "right": 61,
+        "top": 4
+      },
+      "category": "turnaround",
+      "floor_shadow_removed": true,
+      "graph_id": "neutral_back_three_quarter_right",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "6265ae16337e669a240da3312adf01d66f006c76ff345217434ebcf64afe3810",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 21,
+      "pixel_graph_sha256": "6265ae16337e669a240da3312adf01d66f006c76ff345217434ebcf64afe3810",
+      "pixel_node_count": 2571,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "serena_quill_pose_cells.json#pose=neutral_back_three_quarter_right",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "02-turnaround-sheet-candidate-v1.png#panel-5",
+      "source_column": 1,
+      "source_panel_bounds": {
+        "bottom": 1024,
+        "left": 384,
+        "right": 768,
+        "top": 512
+      },
+      "source_row": 1,
+      "source_sheet": "02-turnaround-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "d476d6aa2d1c2961135a6e6774bde2fc50d765174cddca0cec9c273201bfdafd",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 15,
+        "right": 55,
+        "top": 4
+      },
+      "category": "turnaround",
+      "floor_shadow_removed": true,
+      "graph_id": "neutral_right_profile",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "90f95eee4031da74b4066e717dd528f919f73feb64d57a6f00f374a2b541c6a4",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 22,
+      "pixel_graph_sha256": "90f95eee4031da74b4066e717dd528f919f73feb64d57a6f00f374a2b541c6a4",
+      "pixel_node_count": 2020,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "serena_quill_pose_cells.json#pose=neutral_right_profile",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "02-turnaround-sheet-candidate-v1.png#panel-6",
+      "source_column": 2,
+      "source_panel_bounds": {
+        "bottom": 1024,
+        "left": 768,
+        "right": 1152,
+        "top": 512
+      },
+      "source_row": 1,
+      "source_sheet": "02-turnaround-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "d476d6aa2d1c2961135a6e6774bde2fc50d765174cddca0cec9c273201bfdafd",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 7,
+        "right": 64,
+        "top": 4
+      },
+      "category": "turnaround",
+      "floor_shadow_removed": true,
+      "graph_id": "neutral_three_quarter_right",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "9ea28086895e3359fa033593a8ab01a9282e09df6f1e8c661f4652b5b387edc6",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 23,
+      "pixel_graph_sha256": "9ea28086895e3359fa033593a8ab01a9282e09df6f1e8c661f4652b5b387edc6",
+      "pixel_node_count": 2579,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "serena_quill_pose_cells.json#pose=neutral_three_quarter_right",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "02-turnaround-sheet-candidate-v1.png#panel-7",
+      "source_column": 3,
+      "source_panel_bounds": {
+        "bottom": 1024,
+        "left": 1152,
+        "right": 1536,
+        "top": 512
+      },
+      "source_row": 1,
+      "source_sheet": "02-turnaround-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "d476d6aa2d1c2961135a6e6774bde2fc50d765174cddca0cec9c273201bfdafd",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 4,
+        "right": 67,
+        "top": 11
+      },
+      "category": "neutral",
+      "floor_shadow_removed": true,
+      "graph_id": "neutral_base_front",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "a8b6ced96c5a811a5b1447140627a743902aa243c093aaf6515ab68329dfb85e",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 24,
+      "pixel_graph_sha256": "a8b6ced96c5a811a5b1447140627a743902aa243c093aaf6515ab68329dfb85e",
+      "pixel_node_count": 2489,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "serena_quill_pose_cells.json#pose=neutral_base_front",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "03-neutral-base-poses-candidate-v1.png#panel-0",
+      "source_column": 0,
+      "source_panel_bounds": {
+        "bottom": 444,
+        "left": 0,
+        "right": 444,
+        "top": 0
+      },
+      "source_row": 0,
+      "source_sheet": "03-neutral-base-poses-candidate-v1.png",
+      "source_worksheet_sha256": "be5702f9e655dac6bf9b826bf162588d0d6cf69f91ddb1e3cf3ead6f8697fdf2",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 4,
+        "right": 67,
+        "top": 5
+      },
+      "category": "neutral",
+      "floor_shadow_removed": true,
+      "graph_id": "neutral_base_three_quarter",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "85e2df1e226eca67dd41720d4c02077167521253d654febc62a9bd015645f508",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 25,
+      "pixel_graph_sha256": "85e2df1e226eca67dd41720d4c02077167521253d654febc62a9bd015645f508",
+      "pixel_node_count": 2808,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "serena_quill_pose_cells.json#pose=neutral_base_three_quarter",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "03-neutral-base-poses-candidate-v1.png#panel-1",
+      "source_column": 1,
+      "source_panel_bounds": {
+        "bottom": 444,
+        "left": 444,
+        "right": 887,
+        "top": 0
+      },
+      "source_row": 0,
+      "source_sheet": "03-neutral-base-poses-candidate-v1.png",
+      "source_worksheet_sha256": "be5702f9e655dac6bf9b826bf162588d0d6cf69f91ddb1e3cf3ead6f8697fdf2",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 8,
+        "right": 62,
+        "top": 4
+      },
+      "category": "neutral",
+      "floor_shadow_removed": true,
+      "graph_id": "neutral_base_profile",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "7c97389b4202a89e6400ed1dbfc078f14f80b5552a768883a6cb093448ada243",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 26,
+      "pixel_graph_sha256": "7c97389b4202a89e6400ed1dbfc078f14f80b5552a768883a6cb093448ada243",
+      "pixel_node_count": 2555,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "serena_quill_pose_cells.json#pose=neutral_base_profile",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "03-neutral-base-poses-candidate-v1.png#panel-2",
+      "source_column": 2,
+      "source_panel_bounds": {
+        "bottom": 444,
+        "left": 887,
+        "right": 1330,
+        "top": 0
+      },
+      "source_row": 0,
+      "source_sheet": "03-neutral-base-poses-candidate-v1.png",
+      "source_worksheet_sha256": "be5702f9e655dac6bf9b826bf162588d0d6cf69f91ddb1e3cf3ead6f8697fdf2",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 4,
+        "right": 67,
+        "top": 19
+      },
+      "category": "neutral",
+      "floor_shadow_removed": true,
+      "graph_id": "neutral_base_back",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "f80d870b88cf74116a637af49bdc9fbf91d1f696395eb2ec666cb79448dc9bf7",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 27,
+      "pixel_graph_sha256": "f80d870b88cf74116a637af49bdc9fbf91d1f696395eb2ec666cb79448dc9bf7",
+      "pixel_node_count": 2135,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "serena_quill_pose_cells.json#pose=neutral_base_back",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "03-neutral-base-poses-candidate-v1.png#panel-3",
+      "source_column": 3,
+      "source_panel_bounds": {
+        "bottom": 444,
+        "left": 1330,
+        "right": 1774,
+        "top": 0
+      },
+      "source_row": 0,
+      "source_sheet": "03-neutral-base-poses-candidate-v1.png",
+      "source_worksheet_sha256": "be5702f9e655dac6bf9b826bf162588d0d6cf69f91ddb1e3cf3ead6f8697fdf2",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 4,
+        "right": 67,
+        "top": 19
+      },
+      "category": "neutral",
+      "floor_shadow_removed": true,
+      "graph_id": "idle_relaxed",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "998409c6dffe2cf5fcd2e481a6c29cf47c37c62e4b68f8482353e2a52e6ffa7f",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 28,
+      "pixel_graph_sha256": "998409c6dffe2cf5fcd2e481a6c29cf47c37c62e4b68f8482353e2a52e6ffa7f",
+      "pixel_node_count": 2024,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "serena_quill_pose_cells.json#pose=idle_relaxed",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "03-neutral-base-poses-candidate-v1.png#panel-4",
+      "source_column": 0,
+      "source_panel_bounds": {
+        "bottom": 887,
+        "left": 0,
+        "right": 444,
+        "top": 444
+      },
+      "source_row": 1,
+      "source_sheet": "03-neutral-base-poses-candidate-v1.png",
+      "source_worksheet_sha256": "be5702f9e655dac6bf9b826bf162588d0d6cf69f91ddb1e3cf3ead6f8697fdf2",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 4,
+        "right": 67,
+        "top": 10
+      },
+      "category": "neutral",
+      "floor_shadow_removed": true,
+      "graph_id": "idle_attentive",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "a8e6bddad81e12857d69f2009f355f3173d7d8e50ae617fbecb5c8f100df1169",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 29,
+      "pixel_graph_sha256": "a8e6bddad81e12857d69f2009f355f3173d7d8e50ae617fbecb5c8f100df1169",
+      "pixel_node_count": 2504,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "serena_quill_pose_cells.json#pose=idle_attentive",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "03-neutral-base-poses-candidate-v1.png#panel-5",
+      "source_column": 1,
+      "source_panel_bounds": {
+        "bottom": 887,
+        "left": 444,
+        "right": 887,
+        "top": 444
+      },
+      "source_row": 1,
+      "source_sheet": "03-neutral-base-poses-candidate-v1.png",
+      "source_worksheet_sha256": "be5702f9e655dac6bf9b826bf162588d0d6cf69f91ddb1e3cf3ead6f8697fdf2",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 4,
+        "right": 67,
+        "top": 11
+      },
+      "category": "neutral",
+      "floor_shadow_removed": true,
+      "graph_id": "idle_speaking",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "9d8e761287625558a70f84fa141b5fa7a585f09fd431acd852a113ac325e671d",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 30,
+      "pixel_graph_sha256": "9d8e761287625558a70f84fa141b5fa7a585f09fd431acd852a113ac325e671d",
+      "pixel_node_count": 2436,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "serena_quill_pose_cells.json#pose=idle_speaking",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "03-neutral-base-poses-candidate-v1.png#panel-6",
+      "source_column": 2,
+      "source_panel_bounds": {
+        "bottom": 887,
+        "left": 887,
+        "right": 1330,
+        "top": 444
+      },
+      "source_row": 1,
+      "source_sheet": "03-neutral-base-poses-candidate-v1.png",
+      "source_worksheet_sha256": "be5702f9e655dac6bf9b826bf162588d0d6cf69f91ddb1e3cf3ead6f8697fdf2",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 90,
+        "left": 4,
+        "right": 67,
+        "top": 5
+      },
+      "category": "neutral",
+      "floor_shadow_removed": true,
+      "graph_id": "idle_listening",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "7c24699572f2fe94b2d6bb0f92146b8682587f2bd8ff3008b7a5aaefbb661e67",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 31,
+      "pixel_graph_sha256": "7c24699572f2fe94b2d6bb0f92146b8682587f2bd8ff3008b7a5aaefbb661e67",
+      "pixel_node_count": 2820,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "serena_quill_pose_cells.json#pose=idle_listening",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "03-neutral-base-poses-candidate-v1.png#panel-7",
+      "source_column": 3,
+      "source_panel_bounds": {
+        "bottom": 887,
+        "left": 1330,
+        "right": 1774,
+        "top": 444
+      },
+      "source_row": 1,
+      "source_sheet": "03-neutral-base-poses-candidate-v1.png",
+      "source_worksheet_sha256": "be5702f9e655dac6bf9b826bf162588d0d6cf69f91ddb1e3cf3ead6f8697fdf2",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 5,
+        "right": 66,
+        "top": 15
+      },
+      "category": "expression",
+      "floor_shadow_removed": true,
+      "graph_id": "expression_neutral",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "cefae2bcd4f40e07d30f1df2c310f1486dc99eccebaece616f0049160ec9647d",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 32,
+      "pixel_graph_sha256": "cefae2bcd4f40e07d30f1df2c310f1486dc99eccebaece616f0049160ec9647d",
+      "pixel_node_count": 2435,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "serena_quill_pose_cells.json#pose=expression_neutral",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "04-expression-sheet-candidate-v1.png#panel-0",
+      "source_column": 0,
+      "source_panel_bounds": {
+        "bottom": 256,
+        "left": 0,
+        "right": 256,
+        "top": 0
+      },
+      "source_row": 0,
+      "source_sheet": "04-expression-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "f163614a617a6ca601e9862d4b04843ec77b8d9bf53c9b60926951cb8fba1f71",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 5,
+        "right": 66,
+        "top": 14
+      },
+      "category": "expression",
+      "floor_shadow_removed": true,
+      "graph_id": "expression_calm",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "2afe043881b915b5c923e4a68c34525c85d04232d6a72ed44eae349e22dd85df",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 33,
+      "pixel_graph_sha256": "2afe043881b915b5c923e4a68c34525c85d04232d6a72ed44eae349e22dd85df",
+      "pixel_node_count": 2520,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "serena_quill_pose_cells.json#pose=expression_calm",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "04-expression-sheet-candidate-v1.png#panel-1",
+      "source_column": 1,
+      "source_panel_bounds": {
+        "bottom": 256,
+        "left": 256,
+        "right": 512,
+        "top": 0
+      },
+      "source_row": 0,
+      "source_sheet": "04-expression-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "f163614a617a6ca601e9862d4b04843ec77b8d9bf53c9b60926951cb8fba1f71",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 5,
+        "right": 66,
+        "top": 19
+      },
+      "category": "expression",
+      "floor_shadow_removed": true,
+      "graph_id": "expression_joy",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "1cf39a52caccbaee19ebcd5f78a9de03135ed762daa2b9779cce7c9847682060",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 34,
+      "pixel_graph_sha256": "1cf39a52caccbaee19ebcd5f78a9de03135ed762daa2b9779cce7c9847682060",
+      "pixel_node_count": 2429,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "serena_quill_pose_cells.json#pose=expression_joy",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "04-expression-sheet-candidate-v1.png#panel-2",
+      "source_column": 2,
+      "source_panel_bounds": {
+        "bottom": 256,
+        "left": 512,
+        "right": 768,
+        "top": 0
+      },
+      "source_row": 0,
+      "source_sheet": "04-expression-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "f163614a617a6ca601e9862d4b04843ec77b8d9bf53c9b60926951cb8fba1f71",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 5,
+        "right": 66,
+        "top": 16
+      },
+      "category": "expression",
+      "floor_shadow_removed": true,
+      "graph_id": "expression_amusement",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "d91e27263d37d5773036f0bf1e27fce608f5674601b7fef8d40452ffb00263ef",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 35,
+      "pixel_graph_sha256": "d91e27263d37d5773036f0bf1e27fce608f5674601b7fef8d40452ffb00263ef",
+      "pixel_node_count": 2447,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "serena_quill_pose_cells.json#pose=expression_amusement",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "04-expression-sheet-candidate-v1.png#panel-3",
+      "source_column": 3,
+      "source_panel_bounds": {
+        "bottom": 256,
+        "left": 768,
+        "right": 1024,
+        "top": 0
+      },
+      "source_row": 0,
+      "source_sheet": "04-expression-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "f163614a617a6ca601e9862d4b04843ec77b8d9bf53c9b60926951cb8fba1f71",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 5,
+        "right": 66,
+        "top": 10
+      },
+      "category": "expression",
+      "floor_shadow_removed": true,
+      "graph_id": "expression_excitement",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "f104c01ce03767ede17cb950535907eabc763da4f6fa6a34b3d8a2dc00e8c52a",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 36,
+      "pixel_graph_sha256": "f104c01ce03767ede17cb950535907eabc763da4f6fa6a34b3d8a2dc00e8c52a",
+      "pixel_node_count": 2887,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "serena_quill_pose_cells.json#pose=expression_excitement",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "04-expression-sheet-candidate-v1.png#panel-4",
+      "source_column": 4,
+      "source_panel_bounds": {
+        "bottom": 256,
+        "left": 1024,
+        "right": 1280,
+        "top": 0
+      },
+      "source_row": 0,
+      "source_sheet": "04-expression-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "f163614a617a6ca601e9862d4b04843ec77b8d9bf53c9b60926951cb8fba1f71",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 5,
+        "right": 66,
+        "top": 12
+      },
+      "category": "expression",
+      "floor_shadow_removed": true,
+      "graph_id": "expression_curiosity",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "a1d5f7be9386494f89479fee92a16258ab9b6dc1e567cdfd6ff68403d866b73c",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 37,
+      "pixel_graph_sha256": "a1d5f7be9386494f89479fee92a16258ab9b6dc1e567cdfd6ff68403d866b73c",
+      "pixel_node_count": 2564,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "serena_quill_pose_cells.json#pose=expression_curiosity",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "04-expression-sheet-candidate-v1.png#panel-5",
+      "source_column": 5,
+      "source_panel_bounds": {
+        "bottom": 256,
+        "left": 1280,
+        "right": 1536,
+        "top": 0
+      },
+      "source_row": 0,
+      "source_sheet": "04-expression-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "f163614a617a6ca601e9862d4b04843ec77b8d9bf53c9b60926951cb8fba1f71",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 5,
+        "right": 66,
+        "top": 18
+      },
+      "category": "expression",
+      "floor_shadow_removed": true,
+      "graph_id": "expression_confidence",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "7ce34942386c15a2b452ef1f39fad47192220a3744360ee6a151f45700ad13f5",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 38,
+      "pixel_graph_sha256": "7ce34942386c15a2b452ef1f39fad47192220a3744360ee6a151f45700ad13f5",
+      "pixel_node_count": 2383,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "serena_quill_pose_cells.json#pose=expression_confidence",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "04-expression-sheet-candidate-v1.png#panel-6",
+      "source_column": 0,
+      "source_panel_bounds": {
+        "bottom": 512,
+        "left": 0,
+        "right": 256,
+        "top": 256
+      },
+      "source_row": 1,
+      "source_sheet": "04-expression-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "f163614a617a6ca601e9862d4b04843ec77b8d9bf53c9b60926951cb8fba1f71",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 5,
+        "right": 66,
+        "top": 10
+      },
+      "category": "expression",
+      "floor_shadow_removed": true,
+      "graph_id": "expression_compassion",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "a997fdba0dc0acbbde33e63d3ae75afc6d1dd1a8d0bcde661ea00a9f9b8bceef",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 39,
+      "pixel_graph_sha256": "a997fdba0dc0acbbde33e63d3ae75afc6d1dd1a8d0bcde661ea00a9f9b8bceef",
+      "pixel_node_count": 2625,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "serena_quill_pose_cells.json#pose=expression_compassion",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "04-expression-sheet-candidate-v1.png#panel-7",
+      "source_column": 1,
+      "source_panel_bounds": {
+        "bottom": 512,
+        "left": 256,
+        "right": 512,
+        "top": 256
+      },
+      "source_row": 1,
+      "source_sheet": "04-expression-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "f163614a617a6ca601e9862d4b04843ec77b8d9bf53c9b60926951cb8fba1f71",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 5,
+        "right": 66,
+        "top": 15
+      },
+      "category": "expression",
+      "floor_shadow_removed": true,
+      "graph_id": "expression_surprise",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "6bd9d8e725e9fda3b3d0497e667ffaecea3e78db686668aa3052ebbf08434273",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 40,
+      "pixel_graph_sha256": "6bd9d8e725e9fda3b3d0497e667ffaecea3e78db686668aa3052ebbf08434273",
+      "pixel_node_count": 2506,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "serena_quill_pose_cells.json#pose=expression_surprise",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "04-expression-sheet-candidate-v1.png#panel-8",
+      "source_column": 2,
+      "source_panel_bounds": {
+        "bottom": 512,
+        "left": 512,
+        "right": 768,
+        "top": 256
+      },
+      "source_row": 1,
+      "source_sheet": "04-expression-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "f163614a617a6ca601e9862d4b04843ec77b8d9bf53c9b60926951cb8fba1f71",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 5,
+        "right": 66,
+        "top": 13
+      },
+      "category": "expression",
+      "floor_shadow_removed": true,
+      "graph_id": "expression_confusion",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "1716b053613a0755833112edfca915a704b3e66a7f3e5f205bc7d5d9d6b17a5b",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 41,
+      "pixel_graph_sha256": "1716b053613a0755833112edfca915a704b3e66a7f3e5f205bc7d5d9d6b17a5b",
+      "pixel_node_count": 2795,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "serena_quill_pose_cells.json#pose=expression_confusion",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "04-expression-sheet-candidate-v1.png#panel-9",
+      "source_column": 3,
+      "source_panel_bounds": {
+        "bottom": 512,
+        "left": 768,
+        "right": 1024,
+        "top": 256
+      },
+      "source_row": 1,
+      "source_sheet": "04-expression-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "f163614a617a6ca601e9862d4b04843ec77b8d9bf53c9b60926951cb8fba1f71",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 5,
+        "right": 66,
+        "top": 14
+      },
+      "category": "expression",
+      "floor_shadow_removed": true,
+      "graph_id": "expression_skepticism",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "c00ca8fe103fcdf415f901e1f24eed634fd6e88d7ee74b05757484b5df4ccd67",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 42,
+      "pixel_graph_sha256": "c00ca8fe103fcdf415f901e1f24eed634fd6e88d7ee74b05757484b5df4ccd67",
+      "pixel_node_count": 2509,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "serena_quill_pose_cells.json#pose=expression_skepticism",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "04-expression-sheet-candidate-v1.png#panel-10",
+      "source_column": 4,
+      "source_panel_bounds": {
+        "bottom": 512,
+        "left": 1024,
+        "right": 1280,
+        "top": 256
+      },
+      "source_row": 1,
+      "source_sheet": "04-expression-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "f163614a617a6ca601e9862d4b04843ec77b8d9bf53c9b60926951cb8fba1f71",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 5,
+        "right": 66,
+        "top": 13
+      },
+      "category": "expression",
+      "floor_shadow_removed": true,
+      "graph_id": "expression_concern",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "1dad001994263c1a9dfa115fb160ac1803b54e36fdce3d93b93e44442ed6b8ea",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 43,
+      "pixel_graph_sha256": "1dad001994263c1a9dfa115fb160ac1803b54e36fdce3d93b93e44442ed6b8ea",
+      "pixel_node_count": 2580,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "serena_quill_pose_cells.json#pose=expression_concern",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "04-expression-sheet-candidate-v1.png#panel-11",
+      "source_column": 5,
+      "source_panel_bounds": {
+        "bottom": 512,
+        "left": 1280,
+        "right": 1536,
+        "top": 256
+      },
+      "source_row": 1,
+      "source_sheet": "04-expression-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "f163614a617a6ca601e9862d4b04843ec77b8d9bf53c9b60926951cb8fba1f71",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 90,
+        "left": 13,
+        "right": 58,
+        "top": 5
+      },
+      "category": "expression",
+      "floor_shadow_removed": true,
+      "graph_id": "expression_sadness",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "2e613c9c0bf57ae0677e6f1174509eb6ea6b4d050456079dfb7addd2bafac2a0",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 44,
+      "pixel_graph_sha256": "2e613c9c0bf57ae0677e6f1174509eb6ea6b4d050456079dfb7addd2bafac2a0",
+      "pixel_node_count": 2825,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "serena_quill_pose_cells.json#pose=expression_sadness",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "04-expression-sheet-candidate-v1.png#panel-12",
+      "source_column": 0,
+      "source_panel_bounds": {
+        "bottom": 768,
+        "left": 0,
+        "right": 256,
+        "top": 512
+      },
+      "source_row": 2,
+      "source_sheet": "04-expression-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "f163614a617a6ca601e9862d4b04843ec77b8d9bf53c9b60926951cb8fba1f71",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 90,
+        "left": 8,
+        "right": 62,
+        "top": 5
+      },
+      "category": "expression",
+      "floor_shadow_removed": true,
+      "graph_id": "expression_shame",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "2b9e076011b0486bce9c07c54e87617f3f184f9163d266abd5544b56b4f402ca",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 45,
+      "pixel_graph_sha256": "2b9e076011b0486bce9c07c54e87617f3f184f9163d266abd5544b56b4f402ca",
+      "pixel_node_count": 3077,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "serena_quill_pose_cells.json#pose=expression_shame",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "04-expression-sheet-candidate-v1.png#panel-13",
+      "source_column": 1,
+      "source_panel_bounds": {
+        "bottom": 768,
+        "left": 256,
+        "right": 512,
+        "top": 512
+      },
+      "source_row": 2,
+      "source_sheet": "04-expression-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "f163614a617a6ca601e9862d4b04843ec77b8d9bf53c9b60926951cb8fba1f71",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 90,
+        "left": 8,
+        "right": 62,
+        "top": 5
+      },
+      "category": "expression",
+      "floor_shadow_removed": true,
+      "graph_id": "expression_embarrassment",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "ef790da76ef362d0cc1763cf47d4fa0dfb59beb0dab19fc263d28e6de7eebdad",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 46,
+      "pixel_graph_sha256": "ef790da76ef362d0cc1763cf47d4fa0dfb59beb0dab19fc263d28e6de7eebdad",
+      "pixel_node_count": 3139,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "serena_quill_pose_cells.json#pose=expression_embarrassment",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "04-expression-sheet-candidate-v1.png#panel-14",
+      "source_column": 2,
+      "source_panel_bounds": {
+        "bottom": 768,
+        "left": 512,
+        "right": 768,
+        "top": 512
+      },
+      "source_row": 2,
+      "source_sheet": "04-expression-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "f163614a617a6ca601e9862d4b04843ec77b8d9bf53c9b60926951cb8fba1f71",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 90,
+        "left": 10,
+        "right": 60,
+        "top": 5
+      },
+      "category": "expression",
+      "floor_shadow_removed": true,
+      "graph_id": "expression_fear",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "007878cf7f83a502b207d81b7da2a9eb160f7cae660749b31cb45b1cc0ce2302",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 47,
+      "pixel_graph_sha256": "007878cf7f83a502b207d81b7da2a9eb160f7cae660749b31cb45b1cc0ce2302",
+      "pixel_node_count": 2979,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "serena_quill_pose_cells.json#pose=expression_fear",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "04-expression-sheet-candidate-v1.png#panel-15",
+      "source_column": 3,
+      "source_panel_bounds": {
+        "bottom": 768,
+        "left": 768,
+        "right": 1024,
+        "top": 512
+      },
+      "source_row": 2,
+      "source_sheet": "04-expression-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "f163614a617a6ca601e9862d4b04843ec77b8d9bf53c9b60926951cb8fba1f71",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 90,
+        "left": 7,
+        "right": 64,
+        "top": 5
+      },
+      "category": "expression",
+      "floor_shadow_removed": true,
+      "graph_id": "expression_anxiety",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "3ea7a354ca99ee681f58918150baf7b7aef04246cab37ea1c2ddedf5bad83165",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 48,
+      "pixel_graph_sha256": "3ea7a354ca99ee681f58918150baf7b7aef04246cab37ea1c2ddedf5bad83165",
+      "pixel_node_count": 3115,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "serena_quill_pose_cells.json#pose=expression_anxiety",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "04-expression-sheet-candidate-v1.png#panel-16",
+      "source_column": 4,
+      "source_panel_bounds": {
+        "bottom": 768,
+        "left": 1024,
+        "right": 1280,
+        "top": 512
+      },
+      "source_row": 2,
+      "source_sheet": "04-expression-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "f163614a617a6ca601e9862d4b04843ec77b8d9bf53c9b60926951cb8fba1f71",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 5,
+        "right": 66,
+        "top": 22
+      },
+      "category": "expression",
+      "floor_shadow_removed": true,
+      "graph_id": "expression_anger",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "fc1e5d96a7ee72ce9dfb3a779358157aa75891f580b32c1ca0592aa53e44d061",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 49,
+      "pixel_graph_sha256": "fc1e5d96a7ee72ce9dfb3a779358157aa75891f580b32c1ca0592aa53e44d061",
+      "pixel_node_count": 2269,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "serena_quill_pose_cells.json#pose=expression_anger",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "04-expression-sheet-candidate-v1.png#panel-17",
+      "source_column": 5,
+      "source_panel_bounds": {
+        "bottom": 768,
+        "left": 1280,
+        "right": 1536,
+        "top": 512
+      },
+      "source_row": 2,
+      "source_sheet": "04-expression-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "f163614a617a6ca601e9862d4b04843ec77b8d9bf53c9b60926951cb8fba1f71",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 90,
+        "left": 5,
+        "right": 66,
+        "top": 18
+      },
+      "category": "expression",
+      "floor_shadow_removed": true,
+      "graph_id": "expression_frustration",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "53eb981c4ba700930eb77a75f2fd2adf92734c42e030ac416a10e48dab24311a",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 50,
+      "pixel_graph_sha256": "53eb981c4ba700930eb77a75f2fd2adf92734c42e030ac416a10e48dab24311a",
+      "pixel_node_count": 2379,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "serena_quill_pose_cells.json#pose=expression_frustration",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "04-expression-sheet-candidate-v1.png#panel-18",
+      "source_column": 0,
+      "source_panel_bounds": {
+        "bottom": 1024,
+        "left": 0,
+        "right": 256,
+        "top": 768
+      },
+      "source_row": 3,
+      "source_sheet": "04-expression-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "f163614a617a6ca601e9862d4b04843ec77b8d9bf53c9b60926951cb8fba1f71",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 90,
+        "left": 7,
+        "right": 64,
+        "top": 4
+      },
+      "category": "expression",
+      "floor_shadow_removed": true,
+      "graph_id": "expression_determination",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "7a61d2d1cda095afbf681f1aaf37f975ff22b3ce7a72fe91e0d8c7f0de1763b0",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 51,
+      "pixel_graph_sha256": "7a61d2d1cda095afbf681f1aaf37f975ff22b3ce7a72fe91e0d8c7f0de1763b0",
+      "pixel_node_count": 3214,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "serena_quill_pose_cells.json#pose=expression_determination",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "04-expression-sheet-candidate-v1.png#panel-19",
+      "source_column": 1,
+      "source_panel_bounds": {
+        "bottom": 1024,
+        "left": 256,
+        "right": 512,
+        "top": 768
+      },
+      "source_row": 3,
+      "source_sheet": "04-expression-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "f163614a617a6ca601e9862d4b04843ec77b8d9bf53c9b60926951cb8fba1f71",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 90,
+        "left": 10,
+        "right": 61,
+        "top": 4
+      },
+      "category": "expression",
+      "floor_shadow_removed": true,
+      "graph_id": "expression_fatigue",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "7e1d437228403e0e36b0549d481f55bdabe95a48088855afc0229be67b4a56a5",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 52,
+      "pixel_graph_sha256": "7e1d437228403e0e36b0549d481f55bdabe95a48088855afc0229be67b4a56a5",
+      "pixel_node_count": 3039,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "serena_quill_pose_cells.json#pose=expression_fatigue",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "04-expression-sheet-candidate-v1.png#panel-20",
+      "source_column": 2,
+      "source_panel_bounds": {
+        "bottom": 1024,
+        "left": 512,
+        "right": 768,
+        "top": 768
+      },
+      "source_row": 3,
+      "source_sheet": "04-expression-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "f163614a617a6ca601e9862d4b04843ec77b8d9bf53c9b60926951cb8fba1f71",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 90,
+        "left": 12,
+        "right": 59,
+        "top": 4
+      },
+      "category": "expression",
+      "floor_shadow_removed": true,
+      "graph_id": "expression_contemplation",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "31116745a3672dd9dc11c1930349ee21434894331c445b079c4f11a30019ccd3",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 53,
+      "pixel_graph_sha256": "31116745a3672dd9dc11c1930349ee21434894331c445b079c4f11a30019ccd3",
+      "pixel_node_count": 3002,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "serena_quill_pose_cells.json#pose=expression_contemplation",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "04-expression-sheet-candidate-v1.png#panel-21",
+      "source_column": 3,
+      "source_panel_bounds": {
+        "bottom": 1024,
+        "left": 768,
+        "right": 1024,
+        "top": 768
+      },
+      "source_row": 3,
+      "source_sheet": "04-expression-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "f163614a617a6ca601e9862d4b04843ec77b8d9bf53c9b60926951cb8fba1f71",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 90,
+        "left": 5,
+        "right": 66,
+        "top": 22
+      },
+      "category": "expression",
+      "floor_shadow_removed": true,
+      "graph_id": "expression_mentoring_reassurance",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "e1a857f9d2c80aae8ef9556f985fb7261781224110dd0926ae9410e10ea04ba2",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 54,
+      "pixel_graph_sha256": "e1a857f9d2c80aae8ef9556f985fb7261781224110dd0926ae9410e10ea04ba2",
+      "pixel_node_count": 2175,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "serena_quill_pose_cells.json#pose=expression_mentoring_reassurance",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "04-expression-sheet-candidate-v1.png#panel-22",
+      "source_column": 4,
+      "source_panel_bounds": {
+        "bottom": 1024,
+        "left": 1024,
+        "right": 1280,
+        "top": 768
+      },
+      "source_row": 3,
+      "source_sheet": "04-expression-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "f163614a617a6ca601e9862d4b04843ec77b8d9bf53c9b60926951cb8fba1f71",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 90,
+        "left": 13,
+        "right": 58,
+        "top": 4
+      },
+      "category": "expression",
+      "floor_shadow_removed": true,
+      "graph_id": "expression_settled_listening",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "3ba9ba57e48c602802f406aba4b6f15201b660b5ce1f8cf00bfcbafd3464ae5e",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 55,
+      "pixel_graph_sha256": "3ba9ba57e48c602802f406aba4b6f15201b660b5ce1f8cf00bfcbafd3464ae5e",
+      "pixel_node_count": 2973,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "serena_quill_pose_cells.json#pose=expression_settled_listening",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "04-expression-sheet-candidate-v1.png#panel-23",
+      "source_column": 5,
+      "source_panel_bounds": {
+        "bottom": 1024,
+        "left": 1280,
+        "right": 1536,
+        "top": 768
+      },
+      "source_row": 3,
+      "source_sheet": "04-expression-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "f163614a617a6ca601e9862d4b04843ec77b8d9bf53c9b60926951cb8fba1f71",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 4,
+        "right": 67,
+        "top": 25
+      },
+      "category": "viseme_blink",
+      "floor_shadow_removed": true,
+      "graph_id": "viseme_rest",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "6bf5e805b5a0625d19f12179b090d510ae7d6820a390989eb3cfcac19e68e5c3",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 56,
+      "pixel_graph_sha256": "6bf5e805b5a0625d19f12179b090d510ae7d6820a390989eb3cfcac19e68e5c3",
+      "pixel_node_count": 2127,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "serena_quill_pose_cells.json#pose=viseme_rest",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "05-speech-viseme-sheet-candidate-v1.png#panel-0",
+      "source_column": 0,
+      "source_panel_bounds": {
+        "bottom": 256,
+        "left": 0,
+        "right": 384,
+        "top": 0
+      },
+      "source_row": 0,
+      "source_sheet": "05-speech-viseme-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "f35dc783f6192a99f6b422c7cc1dd5408d74d8afb57c84277f40aee87582a29f",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 4,
+        "right": 67,
+        "top": 25
+      },
+      "category": "viseme_blink",
+      "floor_shadow_removed": true,
+      "graph_id": "viseme_closed_lips",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "ee21dd47895d308243e1e8066eaa2a2339dbe7e564e75075135c92c7eb0c63cb",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 57,
+      "pixel_graph_sha256": "ee21dd47895d308243e1e8066eaa2a2339dbe7e564e75075135c92c7eb0c63cb",
+      "pixel_node_count": 2120,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "serena_quill_pose_cells.json#pose=viseme_closed_lips",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "05-speech-viseme-sheet-candidate-v1.png#panel-1",
+      "source_column": 1,
+      "source_panel_bounds": {
+        "bottom": 256,
+        "left": 384,
+        "right": 768,
+        "top": 0
+      },
+      "source_row": 0,
+      "source_sheet": "05-speech-viseme-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "f35dc783f6192a99f6b422c7cc1dd5408d74d8afb57c84277f40aee87582a29f",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 4,
+        "right": 66,
+        "top": 25
+      },
+      "category": "viseme_blink",
+      "floor_shadow_removed": true,
+      "graph_id": "viseme_slightly_open",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "a63e28b2e8132b7e37678687aa298baf10d28d7c57b4a44127dbb531fb5bbe75",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 58,
+      "pixel_graph_sha256": "a63e28b2e8132b7e37678687aa298baf10d28d7c57b4a44127dbb531fb5bbe75",
+      "pixel_node_count": 2141,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "serena_quill_pose_cells.json#pose=viseme_slightly_open",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "05-speech-viseme-sheet-candidate-v1.png#panel-2",
+      "source_column": 2,
+      "source_panel_bounds": {
+        "bottom": 256,
+        "left": 768,
+        "right": 1152,
+        "top": 0
+      },
+      "source_row": 0,
+      "source_sheet": "05-speech-viseme-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "f35dc783f6192a99f6b422c7cc1dd5408d74d8afb57c84277f40aee87582a29f",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 4,
+        "right": 67,
+        "top": 25
+      },
+      "category": "viseme_blink",
+      "floor_shadow_removed": true,
+      "graph_id": "viseme_wide_vowel",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "ae379fe387421519726a44ca611b4235d07aa9420d9537c1a853ff4669aa854f",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 59,
+      "pixel_graph_sha256": "ae379fe387421519726a44ca611b4235d07aa9420d9537c1a853ff4669aa854f",
+      "pixel_node_count": 2134,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "serena_quill_pose_cells.json#pose=viseme_wide_vowel",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "05-speech-viseme-sheet-candidate-v1.png#panel-3",
+      "source_column": 3,
+      "source_panel_bounds": {
+        "bottom": 256,
+        "left": 1152,
+        "right": 1536,
+        "top": 0
+      },
+      "source_row": 0,
+      "source_sheet": "05-speech-viseme-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "f35dc783f6192a99f6b422c7cc1dd5408d74d8afb57c84277f40aee87582a29f",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 4,
+        "right": 67,
+        "top": 24
+      },
+      "category": "viseme_blink",
+      "floor_shadow_removed": true,
+      "graph_id": "viseme_open_vowel",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "1ac84777b2a9e7d677beb430b5fb217f926f33559d990f64e6be227a80cdc007",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 60,
+      "pixel_graph_sha256": "1ac84777b2a9e7d677beb430b5fb217f926f33559d990f64e6be227a80cdc007",
+      "pixel_node_count": 2141,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "serena_quill_pose_cells.json#pose=viseme_open_vowel",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "05-speech-viseme-sheet-candidate-v1.png#panel-4",
+      "source_column": 0,
+      "source_panel_bounds": {
+        "bottom": 512,
+        "left": 0,
+        "right": 384,
+        "top": 256
+      },
+      "source_row": 1,
+      "source_sheet": "05-speech-viseme-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "f35dc783f6192a99f6b422c7cc1dd5408d74d8afb57c84277f40aee87582a29f",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 4,
+        "right": 67,
+        "top": 24
+      },
+      "category": "viseme_blink",
+      "floor_shadow_removed": true,
+      "graph_id": "viseme_rounded_vowel",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "03a87a619085d4e3a20aae6076daa673bd6a49488a707b0f6f12a541b17252a5",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 61,
+      "pixel_graph_sha256": "03a87a619085d4e3a20aae6076daa673bd6a49488a707b0f6f12a541b17252a5",
+      "pixel_node_count": 2148,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "serena_quill_pose_cells.json#pose=viseme_rounded_vowel",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "05-speech-viseme-sheet-candidate-v1.png#panel-5",
+      "source_column": 1,
+      "source_panel_bounds": {
+        "bottom": 512,
+        "left": 384,
+        "right": 768,
+        "top": 256
+      },
+      "source_row": 1,
+      "source_sheet": "05-speech-viseme-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "f35dc783f6192a99f6b422c7cc1dd5408d74d8afb57c84277f40aee87582a29f",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 4,
+        "right": 67,
+        "top": 24
+      },
+      "category": "viseme_blink",
+      "floor_shadow_removed": true,
+      "graph_id": "viseme_teeth_consonant",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "725ba3647f431a057f644c40b8b7926adaf08cf4542fe2ece398e95ddb95b93a",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 62,
+      "pixel_graph_sha256": "725ba3647f431a057f644c40b8b7926adaf08cf4542fe2ece398e95ddb95b93a",
+      "pixel_node_count": 2150,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "serena_quill_pose_cells.json#pose=viseme_teeth_consonant",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "05-speech-viseme-sheet-candidate-v1.png#panel-6",
+      "source_column": 2,
+      "source_panel_bounds": {
+        "bottom": 512,
+        "left": 768,
+        "right": 1152,
+        "top": 256
+      },
+      "source_row": 1,
+      "source_sheet": "05-speech-viseme-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "f35dc783f6192a99f6b422c7cc1dd5408d74d8afb57c84277f40aee87582a29f",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 4,
+        "right": 67,
+        "top": 25
+      },
+      "category": "viseme_blink",
+      "floor_shadow_removed": true,
+      "graph_id": "viseme_lower_lip_consonant",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "6e26c40bebbc98a330ad3864ea498ac762e41f99597649b0c137318309100748",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 63,
+      "pixel_graph_sha256": "6e26c40bebbc98a330ad3864ea498ac762e41f99597649b0c137318309100748",
+      "pixel_node_count": 2136,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "serena_quill_pose_cells.json#pose=viseme_lower_lip_consonant",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "05-speech-viseme-sheet-candidate-v1.png#panel-7",
+      "source_column": 3,
+      "source_panel_bounds": {
+        "bottom": 512,
+        "left": 1152,
+        "right": 1536,
+        "top": 256
+      },
+      "source_row": 1,
+      "source_sheet": "05-speech-viseme-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "f35dc783f6192a99f6b422c7cc1dd5408d74d8afb57c84277f40aee87582a29f",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 4,
+        "right": 67,
+        "top": 24
+      },
+      "category": "viseme_blink",
+      "floor_shadow_removed": true,
+      "graph_id": "viseme_tongue_consonant",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "4e098e2bf73140cdedf7a0f9c5d2d0c0e068aee95a5addfdf6fbff0fba4e058f",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 64,
+      "pixel_graph_sha256": "4e098e2bf73140cdedf7a0f9c5d2d0c0e068aee95a5addfdf6fbff0fba4e058f",
+      "pixel_node_count": 2145,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "serena_quill_pose_cells.json#pose=viseme_tongue_consonant",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "05-speech-viseme-sheet-candidate-v1.png#panel-8",
+      "source_column": 0,
+      "source_panel_bounds": {
+        "bottom": 768,
+        "left": 0,
+        "right": 384,
+        "top": 512
+      },
+      "source_row": 2,
+      "source_sheet": "05-speech-viseme-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "f35dc783f6192a99f6b422c7cc1dd5408d74d8afb57c84277f40aee87582a29f",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 4,
+        "right": 67,
+        "top": 25
+      },
+      "category": "viseme_blink",
+      "floor_shadow_removed": true,
+      "graph_id": "viseme_smile_speaking",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "eae8bf2e6daff1fbb235d63dd05ff723e8dca8561deb3ef4957ee5d14d7fe783",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 65,
+      "pixel_graph_sha256": "eae8bf2e6daff1fbb235d63dd05ff723e8dca8561deb3ef4957ee5d14d7fe783",
+      "pixel_node_count": 2216,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "serena_quill_pose_cells.json#pose=viseme_smile_speaking",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "05-speech-viseme-sheet-candidate-v1.png#panel-9",
+      "source_column": 1,
+      "source_panel_bounds": {
+        "bottom": 768,
+        "left": 384,
+        "right": 768,
+        "top": 512
+      },
+      "source_row": 2,
+      "source_sheet": "05-speech-viseme-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "f35dc783f6192a99f6b422c7cc1dd5408d74d8afb57c84277f40aee87582a29f",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 4,
+        "right": 67,
+        "top": 24
+      },
+      "category": "viseme_blink",
+      "floor_shadow_removed": true,
+      "graph_id": "viseme_frown_speaking",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "6aba500795df24dc6cff461bf47484d6970bd05aa487f9c91acb5dae3c758b20",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 66,
+      "pixel_graph_sha256": "6aba500795df24dc6cff461bf47484d6970bd05aa487f9c91acb5dae3c758b20",
+      "pixel_node_count": 2254,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "serena_quill_pose_cells.json#pose=viseme_frown_speaking",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "05-speech-viseme-sheet-candidate-v1.png#panel-10",
+      "source_column": 2,
+      "source_panel_bounds": {
+        "bottom": 768,
+        "left": 768,
+        "right": 1152,
+        "top": 512
+      },
+      "source_row": 2,
+      "source_sheet": "05-speech-viseme-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "f35dc783f6192a99f6b422c7cc1dd5408d74d8afb57c84277f40aee87582a29f",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 4,
+        "right": 67,
+        "top": 24
+      },
+      "category": "viseme_blink",
+      "floor_shadow_removed": true,
+      "graph_id": "viseme_speech_emphasis",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "9392ebc32b5157fe356657c5a2b9e6e5b14c92dc2c060ad318d9ddcaffde9025",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 67,
+      "pixel_graph_sha256": "9392ebc32b5157fe356657c5a2b9e6e5b14c92dc2c060ad318d9ddcaffde9025",
+      "pixel_node_count": 2211,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "serena_quill_pose_cells.json#pose=viseme_speech_emphasis",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "05-speech-viseme-sheet-candidate-v1.png#panel-11",
+      "source_column": 3,
+      "source_panel_bounds": {
+        "bottom": 768,
+        "left": 1152,
+        "right": 1536,
+        "top": 512
+      },
+      "source_row": 2,
+      "source_sheet": "05-speech-viseme-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "f35dc783f6192a99f6b422c7cc1dd5408d74d8afb57c84277f40aee87582a29f",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 4,
+        "right": 67,
+        "top": 24
+      },
+      "category": "viseme_blink",
+      "floor_shadow_removed": true,
+      "graph_id": "viseme_breath_pause",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "b7eff7018db5d8446cbff9cecc0060c197c6011b9fcec81fba4b43f8aadb1fbc",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 68,
+      "pixel_graph_sha256": "b7eff7018db5d8446cbff9cecc0060c197c6011b9fcec81fba4b43f8aadb1fbc",
+      "pixel_node_count": 2157,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "serena_quill_pose_cells.json#pose=viseme_breath_pause",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "05-speech-viseme-sheet-candidate-v1.png#panel-12",
+      "source_column": 0,
+      "source_panel_bounds": {
+        "bottom": 1024,
+        "left": 0,
+        "right": 384,
+        "top": 768
+      },
+      "source_row": 3,
+      "source_sheet": "05-speech-viseme-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "f35dc783f6192a99f6b422c7cc1dd5408d74d8afb57c84277f40aee87582a29f",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 4,
+        "right": 67,
+        "top": 25
+      },
+      "category": "viseme_blink",
+      "floor_shadow_removed": true,
+      "graph_id": "blink_open",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "2d36636da857dcc499177b4561db2d41e7e80f52bfba49d7db39db169bb20e1c",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 69,
+      "pixel_graph_sha256": "2d36636da857dcc499177b4561db2d41e7e80f52bfba49d7db39db169bb20e1c",
+      "pixel_node_count": 2133,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "serena_quill_pose_cells.json#pose=blink_open",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "05-speech-viseme-sheet-candidate-v1.png#panel-13",
+      "source_column": 1,
+      "source_panel_bounds": {
+        "bottom": 1024,
+        "left": 384,
+        "right": 768,
+        "top": 768
+      },
+      "source_row": 3,
+      "source_sheet": "05-speech-viseme-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "f35dc783f6192a99f6b422c7cc1dd5408d74d8afb57c84277f40aee87582a29f",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 5,
+        "right": 66,
+        "top": 25
+      },
+      "category": "viseme_blink",
+      "floor_shadow_removed": true,
+      "graph_id": "blink_half_closed",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "7a7a845a3a40330dd0875c4366c7594d83717dbbfa961c0db9d701d97f45d1aa",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 70,
+      "pixel_graph_sha256": "7a7a845a3a40330dd0875c4366c7594d83717dbbfa961c0db9d701d97f45d1aa",
+      "pixel_node_count": 2118,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "serena_quill_pose_cells.json#pose=blink_half_closed",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "05-speech-viseme-sheet-candidate-v1.png#panel-14",
+      "source_column": 2,
+      "source_panel_bounds": {
+        "bottom": 1024,
+        "left": 768,
+        "right": 1152,
+        "top": 768
+      },
+      "source_row": 3,
+      "source_sheet": "05-speech-viseme-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "f35dc783f6192a99f6b422c7cc1dd5408d74d8afb57c84277f40aee87582a29f",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 4,
+        "right": 67,
+        "top": 24
+      },
+      "category": "viseme_blink",
+      "floor_shadow_removed": true,
+      "graph_id": "blink_closed",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "421f852987c5564d52786add18bfc7385f49cb7611f810b4e6ff6a1f482afb25",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 71,
+      "pixel_graph_sha256": "421f852987c5564d52786add18bfc7385f49cb7611f810b4e6ff6a1f482afb25",
+      "pixel_node_count": 2160,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "serena_quill_pose_cells.json#pose=blink_closed",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "05-speech-viseme-sheet-candidate-v1.png#panel-15",
+      "source_column": 3,
+      "source_panel_bounds": {
+        "bottom": 1024,
+        "left": 1152,
+        "right": 1536,
+        "top": 768
+      },
+      "source_row": 3,
+      "source_sheet": "05-speech-viseme-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "f35dc783f6192a99f6b422c7cc1dd5408d74d8afb57c84277f40aee87582a29f",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 5,
+        "right": 67,
+        "top": 21
+      },
+      "category": "hand_prop",
+      "floor_shadow_removed": true,
+      "graph_id": "hand_open_relaxed",
+      "graph_kind": "feature_graph",
+      "isolated_silhouette_sha256": "1c91f1b41b903a80e23201bd99edf07ba111f90ebbc494b7c738e7945e48d8b1",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 72,
+      "pixel_graph_sha256": "1c91f1b41b903a80e23201bd99edf07ba111f90ebbc494b7c738e7945e48d8b1",
+      "pixel_node_count": 2390,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "serena_quill_pose_cells.json#pose=hand_open_relaxed",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "06-hand-prop-sheet-candidate-v1.png#panel-0",
+      "source_column": 0,
+      "source_panel_bounds": {
+        "bottom": 272,
+        "left": 0,
+        "right": 362,
+        "top": 0
+      },
+      "source_row": 0,
+      "source_sheet": "06-hand-prop-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "b7ef9f1f79840efc0892f52590341e8847dbb2bd01a1d29456e773ce27661c41",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 4,
+        "right": 67,
+        "top": 20
+      },
+      "category": "hand_prop",
+      "floor_shadow_removed": true,
+      "graph_id": "hand_closed_relaxed",
+      "graph_kind": "feature_graph",
+      "isolated_silhouette_sha256": "1a3629e2bb2ac112329dc09bd82961fbe26e2ce1afc5cf09ab30713b0b360e36",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 73,
+      "pixel_graph_sha256": "1a3629e2bb2ac112329dc09bd82961fbe26e2ce1afc5cf09ab30713b0b360e36",
+      "pixel_node_count": 2502,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "serena_quill_pose_cells.json#pose=hand_closed_relaxed",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "06-hand-prop-sheet-candidate-v1.png#panel-1",
+      "source_column": 1,
+      "source_panel_bounds": {
+        "bottom": 272,
+        "left": 362,
+        "right": 724,
+        "top": 0
+      },
+      "source_row": 0,
+      "source_sheet": "06-hand-prop-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "b7ef9f1f79840efc0892f52590341e8847dbb2bd01a1d29456e773ce27661c41",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 4,
+        "right": 66,
+        "top": 27
+      },
+      "category": "hand_prop",
+      "floor_shadow_removed": true,
+      "graph_id": "hand_safe_fist",
+      "graph_kind": "feature_graph",
+      "isolated_silhouette_sha256": "873ccafa22212b3e55226eb89e3c46018037e3f1ecd496a49acaaa9a19c639ab",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 74,
+      "pixel_graph_sha256": "873ccafa22212b3e55226eb89e3c46018037e3f1ecd496a49acaaa9a19c639ab",
+      "pixel_node_count": 2029,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "serena_quill_pose_cells.json#pose=hand_safe_fist",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "06-hand-prop-sheet-candidate-v1.png#panel-2",
+      "source_column": 2,
+      "source_panel_bounds": {
+        "bottom": 272,
+        "left": 724,
+        "right": 1086,
+        "top": 0
+      },
+      "source_row": 0,
+      "source_sheet": "06-hand-prop-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "b7ef9f1f79840efc0892f52590341e8847dbb2bd01a1d29456e773ce27661c41",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 4,
+        "right": 67,
+        "top": 26
+      },
+      "category": "hand_prop",
+      "floor_shadow_removed": true,
+      "graph_id": "hand_gentle_point",
+      "graph_kind": "feature_graph",
+      "isolated_silhouette_sha256": "480283feb248674e9ce006e64cc2a21a896ba2c220c5bebf339980e59720e7c9",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 75,
+      "pixel_graph_sha256": "480283feb248674e9ce006e64cc2a21a896ba2c220c5bebf339980e59720e7c9",
+      "pixel_node_count": 2055,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "serena_quill_pose_cells.json#pose=hand_gentle_point",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "06-hand-prop-sheet-candidate-v1.png#panel-3",
+      "source_column": 3,
+      "source_panel_bounds": {
+        "bottom": 272,
+        "left": 1086,
+        "right": 1448,
+        "top": 0
+      },
+      "source_row": 0,
+      "source_sheet": "06-hand-prop-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "b7ef9f1f79840efc0892f52590341e8847dbb2bd01a1d29456e773ce27661c41",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 4,
+        "right": 66,
+        "top": 25
+      },
+      "category": "hand_prop",
+      "floor_shadow_removed": true,
+      "graph_id": "hand_presenting",
+      "graph_kind": "feature_graph",
+      "isolated_silhouette_sha256": "00a81b807f7134100b374351ab914fe1197771176c782ee99d5b8c60ccea0894",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 76,
+      "pixel_graph_sha256": "00a81b807f7134100b374351ab914fe1197771176c782ee99d5b8c60ccea0894",
+      "pixel_node_count": 2121,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "serena_quill_pose_cells.json#pose=hand_presenting",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "06-hand-prop-sheet-candidate-v1.png#panel-4",
+      "source_column": 0,
+      "source_panel_bounds": {
+        "bottom": 543,
+        "left": 0,
+        "right": 362,
+        "top": 272
+      },
+      "source_row": 1,
+      "source_sheet": "06-hand-prop-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "b7ef9f1f79840efc0892f52590341e8847dbb2bd01a1d29456e773ce27661c41",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 4,
+        "right": 66,
+        "top": 26
+      },
+      "category": "hand_prop",
+      "floor_shadow_removed": true,
+      "graph_id": "hand_reaching",
+      "graph_kind": "feature_graph",
+      "isolated_silhouette_sha256": "eef05e3844bf24d5e3888d6f233c83d0ac14e30af4881322549cc55e9ad0cbc4",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 77,
+      "pixel_graph_sha256": "eef05e3844bf24d5e3888d6f233c83d0ac14e30af4881322549cc55e9ad0cbc4",
+      "pixel_node_count": 2054,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "serena_quill_pose_cells.json#pose=hand_reaching",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "06-hand-prop-sheet-candidate-v1.png#panel-5",
+      "source_column": 1,
+      "source_panel_bounds": {
+        "bottom": 543,
+        "left": 362,
+        "right": 724,
+        "top": 272
+      },
+      "source_row": 1,
+      "source_sheet": "06-hand-prop-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "b7ef9f1f79840efc0892f52590341e8847dbb2bd01a1d29456e773ce27661c41",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 4,
+        "right": 67,
+        "top": 19
+      },
+      "category": "hand_prop",
+      "floor_shadow_removed": true,
+      "graph_id": "prop_orb_two_hand_cradle",
+      "graph_kind": "feature_graph",
+      "isolated_silhouette_sha256": "df8db7f76c136a6d89c8f382c8a49c1cd28a6f219bb34f16f07bdbfffcb9e3e9",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 78,
+      "pixel_graph_sha256": "df8db7f76c136a6d89c8f382c8a49c1cd28a6f219bb34f16f07bdbfffcb9e3e9",
+      "pixel_node_count": 2365,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "serena_quill_pose_cells.json#pose=prop_orb_two_hand_cradle",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "06-hand-prop-sheet-candidate-v1.png#panel-6",
+      "source_column": 2,
+      "source_panel_bounds": {
+        "bottom": 543,
+        "left": 724,
+        "right": 1086,
+        "top": 272
+      },
+      "source_row": 1,
+      "source_sheet": "06-hand-prop-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "b7ef9f1f79840efc0892f52590341e8847dbb2bd01a1d29456e773ce27661c41",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 4,
+        "right": 67,
+        "top": 21
+      },
+      "category": "hand_prop",
+      "floor_shadow_removed": true,
+      "graph_id": "prop_orb_one_hand_support",
+      "graph_kind": "feature_graph",
+      "isolated_silhouette_sha256": "d3312dd330aa1cc7cde3b10893bfaaa70121e24fcdf4a881e1a4024ad8593222",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 79,
+      "pixel_graph_sha256": "d3312dd330aa1cc7cde3b10893bfaaa70121e24fcdf4a881e1a4024ad8593222",
+      "pixel_node_count": 2351,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "serena_quill_pose_cells.json#pose=prop_orb_one_hand_support",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "06-hand-prop-sheet-candidate-v1.png#panel-7",
+      "source_column": 3,
+      "source_panel_bounds": {
+        "bottom": 543,
+        "left": 1086,
+        "right": 1448,
+        "top": 272
+      },
+      "source_row": 1,
+      "source_sheet": "06-hand-prop-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "b7ef9f1f79840efc0892f52590341e8847dbb2bd01a1d29456e773ce27661c41",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 90,
+        "left": 5,
+        "right": 66,
+        "top": 14
+      },
+      "category": "hand_prop",
+      "floor_shadow_removed": true,
+      "graph_id": "prop_orb_lowered",
+      "graph_kind": "feature_graph",
+      "isolated_silhouette_sha256": "e3be9aa5242a626962a2e7c781a072d602e4efaceca40569316632e6558e5758",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 80,
+      "pixel_graph_sha256": "e3be9aa5242a626962a2e7c781a072d602e4efaceca40569316632e6558e5758",
+      "pixel_node_count": 2497,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "serena_quill_pose_cells.json#pose=prop_orb_lowered",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "06-hand-prop-sheet-candidate-v1.png#panel-8",
+      "source_column": 0,
+      "source_panel_bounds": {
+        "bottom": 814,
+        "left": 0,
+        "right": 362,
+        "top": 543
+      },
+      "source_row": 2,
+      "source_sheet": "06-hand-prop-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "b7ef9f1f79840efc0892f52590341e8847dbb2bd01a1d29456e773ce27661c41",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 90,
+        "left": 5,
+        "right": 67,
+        "top": 18
+      },
+      "category": "hand_prop",
+      "floor_shadow_removed": true,
+      "graph_id": "prop_orb_offered",
+      "graph_kind": "feature_graph",
+      "isolated_silhouette_sha256": "bff2fc5c3d2831e2627478a79ffd259434f6c165e0d2206c57a72fd2e2cfe801",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 81,
+      "pixel_graph_sha256": "bff2fc5c3d2831e2627478a79ffd259434f6c165e0d2206c57a72fd2e2cfe801",
+      "pixel_node_count": 2336,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "serena_quill_pose_cells.json#pose=prop_orb_offered",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "06-hand-prop-sheet-candidate-v1.png#panel-9",
+      "source_column": 1,
+      "source_panel_bounds": {
+        "bottom": 814,
+        "left": 362,
+        "right": 724,
+        "top": 543
+      },
+      "source_row": 2,
+      "source_sheet": "06-hand-prop-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "b7ef9f1f79840efc0892f52590341e8847dbb2bd01a1d29456e773ce27661c41",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 5,
+        "right": 67,
+        "top": 23
+      },
+      "category": "hand_prop",
+      "floor_shadow_removed": true,
+      "graph_id": "prop_orb_received",
+      "graph_kind": "feature_graph",
+      "isolated_silhouette_sha256": "622d598663d829af2bcdf14d36ee92492e24bdadc9251708519bf54524904351",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 82,
+      "pixel_graph_sha256": "622d598663d829af2bcdf14d36ee92492e24bdadc9251708519bf54524904351",
+      "pixel_node_count": 2084,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "serena_quill_pose_cells.json#pose=prop_orb_received",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "06-hand-prop-sheet-candidate-v1.png#panel-10",
+      "source_column": 2,
+      "source_panel_bounds": {
+        "bottom": 814,
+        "left": 724,
+        "right": 1086,
+        "top": 543
+      },
+      "source_row": 2,
+      "source_sheet": "06-hand-prop-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "b7ef9f1f79840efc0892f52590341e8847dbb2bd01a1d29456e773ce27661c41",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 4,
+        "right": 67,
+        "top": 23
+      },
+      "category": "hand_prop",
+      "floor_shadow_removed": true,
+      "graph_id": "prop_orb_transfer",
+      "graph_kind": "feature_graph",
+      "isolated_silhouette_sha256": "c4c9bc71ce76a3e85322efd708eb59549fa70b479773c09d866702866c095795",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 83,
+      "pixel_graph_sha256": "c4c9bc71ce76a3e85322efd708eb59549fa70b479773c09d866702866c095795",
+      "pixel_node_count": 2160,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "serena_quill_pose_cells.json#pose=prop_orb_transfer",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "06-hand-prop-sheet-candidate-v1.png#panel-11",
+      "source_column": 3,
+      "source_panel_bounds": {
+        "bottom": 814,
+        "left": 1086,
+        "right": 1448,
+        "top": 543
+      },
+      "source_row": 2,
+      "source_sheet": "06-hand-prop-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "b7ef9f1f79840efc0892f52590341e8847dbb2bd01a1d29456e773ce27661c41",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 90,
+        "left": 5,
+        "right": 67,
+        "top": 16
+      },
+      "category": "hand_prop",
+      "floor_shadow_removed": true,
+      "graph_id": "prop_orb_reassurance",
+      "graph_kind": "feature_graph",
+      "isolated_silhouette_sha256": "e4ccae0da848c9062cb82a332a1b6284762bd7f8fcb764f17e8a0e0c13089f03",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 84,
+      "pixel_graph_sha256": "e4ccae0da848c9062cb82a332a1b6284762bd7f8fcb764f17e8a0e0c13089f03",
+      "pixel_node_count": 2403,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "serena_quill_pose_cells.json#pose=prop_orb_reassurance",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "06-hand-prop-sheet-candidate-v1.png#panel-12",
+      "source_column": 0,
+      "source_panel_bounds": {
+        "bottom": 1086,
+        "left": 0,
+        "right": 362,
+        "top": 814
+      },
+      "source_row": 3,
+      "source_sheet": "06-hand-prop-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "b7ef9f1f79840efc0892f52590341e8847dbb2bd01a1d29456e773ce27661c41",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 90,
+        "left": 4,
+        "right": 67,
+        "top": 15
+      },
+      "category": "hand_prop",
+      "floor_shadow_removed": true,
+      "graph_id": "hand_consent_pause",
+      "graph_kind": "feature_graph",
+      "isolated_silhouette_sha256": "8e284007fcb91b21150bb97c5e5ee00a62e6b52b9d8fcb371cf6ab0257c85f03",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 85,
+      "pixel_graph_sha256": "8e284007fcb91b21150bb97c5e5ee00a62e6b52b9d8fcb371cf6ab0257c85f03",
+      "pixel_node_count": 2489,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "serena_quill_pose_cells.json#pose=hand_consent_pause",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "06-hand-prop-sheet-candidate-v1.png#panel-13",
+      "source_column": 1,
+      "source_panel_bounds": {
+        "bottom": 1086,
+        "left": 362,
+        "right": 724,
+        "top": 814
+      },
+      "source_row": 3,
+      "source_sheet": "06-hand-prop-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "b7ef9f1f79840efc0892f52590341e8847dbb2bd01a1d29456e773ce27661c41",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 90,
+        "left": 4,
+        "right": 67,
+        "top": 15
+      },
+      "category": "hand_prop",
+      "floor_shadow_removed": true,
+      "graph_id": "prop_orb_release",
+      "graph_kind": "feature_graph",
+      "isolated_silhouette_sha256": "363850a3841ae4cfd62acaeb2fdd8439c3c1d814aa793bbfd0047de32ef425b3",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 86,
+      "pixel_graph_sha256": "363850a3841ae4cfd62acaeb2fdd8439c3c1d814aa793bbfd0047de32ef425b3",
+      "pixel_node_count": 2457,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "serena_quill_pose_cells.json#pose=prop_orb_release",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "06-hand-prop-sheet-candidate-v1.png#panel-14",
+      "source_column": 2,
+      "source_panel_bounds": {
+        "bottom": 1086,
+        "left": 724,
+        "right": 1086,
+        "top": 814
+      },
+      "source_row": 3,
+      "source_sheet": "06-hand-prop-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "b7ef9f1f79840efc0892f52590341e8847dbb2bd01a1d29456e773ce27661c41",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 90,
+        "left": 5,
+        "right": 67,
+        "top": 16
+      },
+      "category": "hand_prop",
+      "floor_shadow_removed": true,
+      "graph_id": "prop_orb_settled_listening",
+      "graph_kind": "feature_graph",
+      "isolated_silhouette_sha256": "a84b2462c6ad1b2b3c5435bca870486f72769477dc6b4c2ba370d5dfb82574e8",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 87,
+      "pixel_graph_sha256": "a84b2462c6ad1b2b3c5435bca870486f72769477dc6b4c2ba370d5dfb82574e8",
+      "pixel_node_count": 2448,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "serena_quill_pose_cells.json#pose=prop_orb_settled_listening",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "06-hand-prop-sheet-candidate-v1.png#panel-15",
+      "source_column": 3,
+      "source_panel_bounds": {
+        "bottom": 1086,
+        "left": 1086,
+        "right": 1448,
+        "top": 814
+      },
+      "source_row": 3,
+      "source_sheet": "06-hand-prop-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "b7ef9f1f79840efc0892f52590341e8847dbb2bd01a1d29456e773ce27661c41",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 90,
+        "left": 6,
+        "right": 65,
+        "top": 5
+      },
+      "category": "motion",
+      "floor_shadow_removed": true,
+      "graph_id": "walk_contact_left",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "66627c8fc895cb6d3f10e20d3b7a2c32e78cf41a17cad4484648e469312e4d9a",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 88,
+      "pixel_graph_sha256": "66627c8fc895cb6d3f10e20d3b7a2c32e78cf41a17cad4484648e469312e4d9a",
+      "pixel_node_count": 3085,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "serena_quill_pose_cells.json#pose=walk_contact_left",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "07-ground-motion-sheet-candidate-v1.png#panel-0",
+      "source_column": 0,
+      "source_panel_bounds": {
+        "bottom": 256,
+        "left": 0,
+        "right": 384,
+        "top": 0
+      },
+      "source_row": 0,
+      "source_sheet": "07-ground-motion-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "85082be9d7566eefe4af68301896ec4d41ec9fb8c5745e7c1840e983500a4413",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 90,
+        "left": 6,
+        "right": 65,
+        "top": 5
+      },
+      "category": "motion",
+      "floor_shadow_removed": true,
+      "graph_id": "walk_down_left",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "2205e4a797a8b0fea2385f04c7e3d4d14ea50201282c3667344a35bb9a551583",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 89,
+      "pixel_graph_sha256": "2205e4a797a8b0fea2385f04c7e3d4d14ea50201282c3667344a35bb9a551583",
+      "pixel_node_count": 3202,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "serena_quill_pose_cells.json#pose=walk_down_left",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "07-ground-motion-sheet-candidate-v1.png#panel-1",
+      "source_column": 1,
+      "source_panel_bounds": {
+        "bottom": 256,
+        "left": 384,
+        "right": 768,
+        "top": 0
+      },
+      "source_row": 0,
+      "source_sheet": "07-ground-motion-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "85082be9d7566eefe4af68301896ec4d41ec9fb8c5745e7c1840e983500a4413",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 90,
+        "left": 10,
+        "right": 61,
+        "top": 5
+      },
+      "category": "motion",
+      "floor_shadow_removed": true,
+      "graph_id": "walk_passing_right",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "a084292cc05a470a3a4bbc4732179501f3cd63e843b6bc8aed608c2e98ceb669",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 90,
+      "pixel_graph_sha256": "a084292cc05a470a3a4bbc4732179501f3cd63e843b6bc8aed608c2e98ceb669",
+      "pixel_node_count": 2720,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "serena_quill_pose_cells.json#pose=walk_passing_right",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "07-ground-motion-sheet-candidate-v1.png#panel-2",
+      "source_column": 2,
+      "source_panel_bounds": {
+        "bottom": 256,
+        "left": 768,
+        "right": 1152,
+        "top": 0
+      },
+      "source_row": 0,
+      "source_sheet": "07-ground-motion-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "85082be9d7566eefe4af68301896ec4d41ec9fb8c5745e7c1840e983500a4413",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 90,
+        "left": 8,
+        "right": 62,
+        "top": 5
+      },
+      "category": "motion",
+      "floor_shadow_removed": true,
+      "graph_id": "walk_up_right",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "d07188b9465a6b8aed48a62e57a8550ab447061fb73dacfacf59d2b13d3c079e",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 91,
+      "pixel_graph_sha256": "d07188b9465a6b8aed48a62e57a8550ab447061fb73dacfacf59d2b13d3c079e",
+      "pixel_node_count": 2856,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "serena_quill_pose_cells.json#pose=walk_up_right",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "07-ground-motion-sheet-candidate-v1.png#panel-3",
+      "source_column": 3,
+      "source_panel_bounds": {
+        "bottom": 256,
+        "left": 1152,
+        "right": 1536,
+        "top": 0
+      },
+      "source_row": 0,
+      "source_sheet": "07-ground-motion-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "85082be9d7566eefe4af68301896ec4d41ec9fb8c5745e7c1840e983500a4413",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 90,
+        "left": 5,
+        "right": 66,
+        "top": 12
+      },
+      "category": "motion",
+      "floor_shadow_removed": true,
+      "graph_id": "run_contact_left",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "7ee243a0a4a427b7266d48336f094d84d5144392eff604975d633f12f90a8e6b",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 92,
+      "pixel_graph_sha256": "7ee243a0a4a427b7266d48336f094d84d5144392eff604975d633f12f90a8e6b",
+      "pixel_node_count": 2825,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "serena_quill_pose_cells.json#pose=run_contact_left",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "07-ground-motion-sheet-candidate-v1.png#panel-4",
+      "source_column": 0,
+      "source_panel_bounds": {
+        "bottom": 512,
+        "left": 0,
+        "right": 384,
+        "top": 256
+      },
+      "source_row": 1,
+      "source_sheet": "07-ground-motion-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "85082be9d7566eefe4af68301896ec4d41ec9fb8c5745e7c1840e983500a4413",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 90,
+        "left": 5,
+        "right": 66,
+        "top": 20
+      },
+      "category": "motion",
+      "floor_shadow_removed": true,
+      "graph_id": "run_passing_right",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "56daab515a4f8636136ddc50a86db9afa6faf329c6c995f9d480f6f2adf8eca6",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 93,
+      "pixel_graph_sha256": "56daab515a4f8636136ddc50a86db9afa6faf329c6c995f9d480f6f2adf8eca6",
+      "pixel_node_count": 2776,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "serena_quill_pose_cells.json#pose=run_passing_right",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "07-ground-motion-sheet-candidate-v1.png#panel-5",
+      "source_column": 1,
+      "source_panel_bounds": {
+        "bottom": 512,
+        "left": 384,
+        "right": 768,
+        "top": 256
+      },
+      "source_row": 1,
+      "source_sheet": "07-ground-motion-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "85082be9d7566eefe4af68301896ec4d41ec9fb8c5745e7c1840e983500a4413",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 90,
+        "left": 5,
+        "right": 66,
+        "top": 5
+      },
+      "category": "motion",
+      "floor_shadow_removed": true,
+      "graph_id": "start",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "56686ee1c3ae93fd3b4bb2d1d933d87fc00ba5b9061f3345ada95a94a0af510c",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 94,
+      "pixel_graph_sha256": "56686ee1c3ae93fd3b4bb2d1d933d87fc00ba5b9061f3345ada95a94a0af510c",
+      "pixel_node_count": 3382,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "serena_quill_pose_cells.json#pose=start",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "07-ground-motion-sheet-candidate-v1.png#panel-6",
+      "source_column": 2,
+      "source_panel_bounds": {
+        "bottom": 512,
+        "left": 768,
+        "right": 1152,
+        "top": 256
+      },
+      "source_row": 1,
+      "source_sheet": "07-ground-motion-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "85082be9d7566eefe4af68301896ec4d41ec9fb8c5745e7c1840e983500a4413",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 90,
+        "left": 5,
+        "right": 66,
+        "top": 7
+      },
+      "category": "motion",
+      "floor_shadow_removed": true,
+      "graph_id": "stop",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "741aa6d0dd7bd53096b979455c23a515b50649689c688239e2a82c573255580c",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 95,
+      "pixel_graph_sha256": "741aa6d0dd7bd53096b979455c23a515b50649689c688239e2a82c573255580c",
+      "pixel_node_count": 3029,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "serena_quill_pose_cells.json#pose=stop",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "07-ground-motion-sheet-candidate-v1.png#panel-7",
+      "source_column": 3,
+      "source_panel_bounds": {
+        "bottom": 512,
+        "left": 1152,
+        "right": 1536,
+        "top": 256
+      },
+      "source_row": 1,
+      "source_sheet": "07-ground-motion-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "85082be9d7566eefe4af68301896ec4d41ec9fb8c5745e7c1840e983500a4413",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 90,
+        "left": 5,
+        "right": 66,
+        "top": 13
+      },
+      "category": "motion",
+      "floor_shadow_removed": true,
+      "graph_id": "turn_left",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "7bd495741c610fc39a1b9d7ef74ff62e017c94c05eab01357184b2194cfbed47",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 96,
+      "pixel_graph_sha256": "7bd495741c610fc39a1b9d7ef74ff62e017c94c05eab01357184b2194cfbed47",
+      "pixel_node_count": 2968,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "serena_quill_pose_cells.json#pose=turn_left",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "07-ground-motion-sheet-candidate-v1.png#panel-8",
+      "source_column": 0,
+      "source_panel_bounds": {
+        "bottom": 768,
+        "left": 0,
+        "right": 384,
+        "top": 512
+      },
+      "source_row": 2,
+      "source_sheet": "07-ground-motion-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "85082be9d7566eefe4af68301896ec4d41ec9fb8c5745e7c1840e983500a4413",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 90,
+        "left": 5,
+        "right": 66,
+        "top": 19
+      },
+      "category": "motion",
+      "floor_shadow_removed": true,
+      "graph_id": "turn_right",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "a49a861fa23ea210598e372ac5bbb13275b04fd6d7abcf85c5816a0eccb29edf",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 97,
+      "pixel_graph_sha256": "a49a861fa23ea210598e372ac5bbb13275b04fd6d7abcf85c5816a0eccb29edf",
+      "pixel_node_count": 2586,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "serena_quill_pose_cells.json#pose=turn_right",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "07-ground-motion-sheet-candidate-v1.png#panel-9",
+      "source_column": 1,
+      "source_panel_bounds": {
+        "bottom": 768,
+        "left": 384,
+        "right": 768,
+        "top": 512
+      },
+      "source_row": 2,
+      "source_sheet": "07-ground-motion-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "85082be9d7566eefe4af68301896ec4d41ec9fb8c5745e7c1840e983500a4413",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 90,
+        "left": 5,
+        "right": 66,
+        "top": 8
+      },
+      "category": "motion",
+      "floor_shadow_removed": true,
+      "graph_id": "crouch",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "867d8cef82c803bb6b5f6c28e9c39ce3e28b507c6a7fd4095eb127eac6f1e53c",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 98,
+      "pixel_graph_sha256": "867d8cef82c803bb6b5f6c28e9c39ce3e28b507c6a7fd4095eb127eac6f1e53c",
+      "pixel_node_count": 3759,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "serena_quill_pose_cells.json#pose=crouch",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "07-ground-motion-sheet-candidate-v1.png#panel-10",
+      "source_column": 2,
+      "source_panel_bounds": {
+        "bottom": 768,
+        "left": 768,
+        "right": 1152,
+        "top": 512
+      },
+      "source_row": 2,
+      "source_sheet": "07-ground-motion-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "85082be9d7566eefe4af68301896ec4d41ec9fb8c5745e7c1840e983500a4413",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 90,
+        "left": 6,
+        "right": 64,
+        "top": 5
+      },
+      "category": "motion",
+      "floor_shadow_removed": true,
+      "graph_id": "jump_anticipation",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "41adff0396c8cd778c0ca2e45e7010e7f5c495227984703eb2e7a695116fe212",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 99,
+      "pixel_graph_sha256": "41adff0396c8cd778c0ca2e45e7010e7f5c495227984703eb2e7a695116fe212",
+      "pixel_node_count": 3262,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "serena_quill_pose_cells.json#pose=jump_anticipation",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "07-ground-motion-sheet-candidate-v1.png#panel-11",
+      "source_column": 3,
+      "source_panel_bounds": {
+        "bottom": 768,
+        "left": 1152,
+        "right": 1536,
+        "top": 512
+      },
+      "source_row": 2,
+      "source_sheet": "07-ground-motion-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "85082be9d7566eefe4af68301896ec4d41ec9fb8c5745e7c1840e983500a4413",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 90,
+        "left": 5,
+        "right": 66,
+        "top": 24
+      },
+      "category": "motion",
+      "floor_shadow_removed": true,
+      "graph_id": "jump_airborne",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "1474628d024958bbaa58156d1dacd5888156df59be82df83e4c3ff253480550d",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 100,
+      "pixel_graph_sha256": "1474628d024958bbaa58156d1dacd5888156df59be82df83e4c3ff253480550d",
+      "pixel_node_count": 2271,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "serena_quill_pose_cells.json#pose=jump_airborne",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "07-ground-motion-sheet-candidate-v1.png#panel-12",
+      "source_column": 0,
+      "source_panel_bounds": {
+        "bottom": 1024,
+        "left": 0,
+        "right": 384,
+        "top": 768
+      },
+      "source_row": 3,
+      "source_sheet": "07-ground-motion-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "85082be9d7566eefe4af68301896ec4d41ec9fb8c5745e7c1840e983500a4413",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 90,
+        "left": 5,
+        "right": 66,
+        "top": 42
+      },
+      "category": "motion",
+      "floor_shadow_removed": true,
+      "graph_id": "fall",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "a7620ffb6733ab45c7e292f63c3f830abe21dfb829588ccf43d5127a6ffc2837",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 101,
+      "pixel_graph_sha256": "a7620ffb6733ab45c7e292f63c3f830abe21dfb829588ccf43d5127a6ffc2837",
+      "pixel_node_count": 1819,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "serena_quill_pose_cells.json#pose=fall",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "07-ground-motion-sheet-candidate-v1.png#panel-13",
+      "source_column": 1,
+      "source_panel_bounds": {
+        "bottom": 1024,
+        "left": 384,
+        "right": 768,
+        "top": 768
+      },
+      "source_row": 3,
+      "source_sheet": "07-ground-motion-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "85082be9d7566eefe4af68301896ec4d41ec9fb8c5745e7c1840e983500a4413",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 90,
+        "left": 5,
+        "right": 66,
+        "top": 15
+      },
+      "category": "motion",
+      "floor_shadow_removed": true,
+      "graph_id": "land_contact",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "7b9604014675468ab872afc575e12609736bc2a3ef088201d74e2494b8672c29",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 102,
+      "pixel_graph_sha256": "7b9604014675468ab872afc575e12609736bc2a3ef088201d74e2494b8672c29",
+      "pixel_node_count": 3355,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "serena_quill_pose_cells.json#pose=land_contact",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "07-ground-motion-sheet-candidate-v1.png#panel-14",
+      "source_column": 2,
+      "source_panel_bounds": {
+        "bottom": 1024,
+        "left": 768,
+        "right": 1152,
+        "top": 768
+      },
+      "source_row": 3,
+      "source_sheet": "07-ground-motion-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "85082be9d7566eefe4af68301896ec4d41ec9fb8c5745e7c1840e983500a4413",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 90,
+        "left": 5,
+        "right": 66,
+        "top": 16
+      },
+      "category": "motion",
+      "floor_shadow_removed": true,
+      "graph_id": "land_recovery",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "ffe65f462a6979573d22fb165ef2fbd184d16121fe6183709e9c85e52187a97d",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 103,
+      "pixel_graph_sha256": "ffe65f462a6979573d22fb165ef2fbd184d16121fe6183709e9c85e52187a97d",
+      "pixel_node_count": 2751,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "serena_quill_pose_cells.json#pose=land_recovery",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "07-ground-motion-sheet-candidate-v1.png#panel-15",
+      "source_column": 3,
+      "source_panel_bounds": {
+        "bottom": 1024,
+        "left": 1152,
+        "right": 1536,
+        "top": 768
+      },
+      "source_row": 3,
+      "source_sheet": "07-ground-motion-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "85082be9d7566eefe4af68301896ec4d41ec9fb8c5745e7c1840e983500a4413",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 4,
+        "right": 67,
+        "top": 23
+      },
+      "category": "signature",
+      "floor_shadow_removed": true,
+      "graph_id": "mentoring_invitation",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "2e99a39953c3d1b99f4e24312de70e4a276eb5b22789f2fe34d621d07ac90608",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 104,
+      "pixel_graph_sha256": "2e99a39953c3d1b99f4e24312de70e4a276eb5b22789f2fe34d621d07ac90608",
+      "pixel_node_count": 2213,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "serena_quill_pose_cells.json#pose=mentoring_invitation",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "08-signature-actions-sheet-candidate-v1.png#panel-0",
+      "source_column": 0,
+      "source_panel_bounds": {
+        "bottom": 272,
+        "left": 0,
+        "right": 362,
+        "top": 0
+      },
+      "source_row": 0,
+      "source_sheet": "08-signature-actions-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "6f3db8f1ab455a593f33af235ba634041899a7d174264c2ab15d7b18271e7c94",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 5,
+        "right": 66,
+        "top": 12
+      },
+      "category": "signature",
+      "floor_shadow_removed": true,
+      "graph_id": "emotional_climate_check",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "9418ee285eb71348d072d556adc2208f5710a2bcdcbe5cae2017946bb39be250",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 105,
+      "pixel_graph_sha256": "9418ee285eb71348d072d556adc2208f5710a2bcdcbe5cae2017946bb39be250",
+      "pixel_node_count": 2639,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "serena_quill_pose_cells.json#pose=emotional_climate_check",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "08-signature-actions-sheet-candidate-v1.png#panel-1",
+      "source_column": 1,
+      "source_panel_bounds": {
+        "bottom": 272,
+        "left": 362,
+        "right": 724,
+        "top": 0
+      },
+      "source_row": 0,
+      "source_sheet": "08-signature-actions-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "6f3db8f1ab455a593f33af235ba634041899a7d174264c2ab15d7b18271e7c94",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 5,
+        "right": 66,
+        "top": 13
+      },
+      "category": "signature",
+      "floor_shadow_removed": true,
+      "graph_id": "consent_pause",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "64de442c2608674c4b1685689fad68e2b5067f7bd24de201ead1e9152091f42c",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 106,
+      "pixel_graph_sha256": "64de442c2608674c4b1685689fad68e2b5067f7bd24de201ead1e9152091f42c",
+      "pixel_node_count": 2597,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "serena_quill_pose_cells.json#pose=consent_pause",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "08-signature-actions-sheet-candidate-v1.png#panel-2",
+      "source_column": 2,
+      "source_panel_bounds": {
+        "bottom": 272,
+        "left": 724,
+        "right": 1086,
+        "top": 0
+      },
+      "source_row": 0,
+      "source_sheet": "08-signature-actions-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "6f3db8f1ab455a593f33af235ba634041899a7d174264c2ab15d7b18271e7c94",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 4,
+        "right": 67,
+        "top": 19
+      },
+      "category": "signature",
+      "floor_shadow_removed": true,
+      "graph_id": "facilitation",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "7a31226d49c181e7135661d32e69ddbb7e3bdcfdc50def8fd979e4ba938f8295",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 107,
+      "pixel_graph_sha256": "7a31226d49c181e7135661d32e69ddbb7e3bdcfdc50def8fd979e4ba938f8295",
+      "pixel_node_count": 2389,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "serena_quill_pose_cells.json#pose=facilitation",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "08-signature-actions-sheet-candidate-v1.png#panel-3",
+      "source_column": 3,
+      "source_panel_bounds": {
+        "bottom": 272,
+        "left": 1086,
+        "right": 1448,
+        "top": 0
+      },
+      "source_row": 0,
+      "source_sheet": "08-signature-actions-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "6f3db8f1ab455a593f33af235ba634041899a7d174264c2ab15d7b18271e7c94",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 5,
+        "right": 66,
+        "top": 10
+      },
+      "category": "signature",
+      "floor_shadow_removed": true,
+      "graph_id": "orb_reassurance",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "a19bef5545300072c0e29de556c417b23b1a2193880f2f40765db183d7fd2ad9",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 108,
+      "pixel_graph_sha256": "a19bef5545300072c0e29de556c417b23b1a2193880f2f40765db183d7fd2ad9",
+      "pixel_node_count": 2757,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "serena_quill_pose_cells.json#pose=orb_reassurance",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "08-signature-actions-sheet-candidate-v1.png#panel-4",
+      "source_column": 0,
+      "source_panel_bounds": {
+        "bottom": 543,
+        "left": 0,
+        "right": 362,
+        "top": 272
+      },
+      "source_row": 1,
+      "source_sheet": "08-signature-actions-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "6f3db8f1ab455a593f33af235ba634041899a7d174264c2ab15d7b18271e7c94",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 6,
+        "right": 64,
+        "top": 4
+      },
+      "category": "signature",
+      "floor_shadow_removed": true,
+      "graph_id": "protective_wing_fold",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "04c6d8a5246702a2c11faeeb643fb99a6fe5bca01d07dc952f1fe2478a1394bd",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 109,
+      "pixel_graph_sha256": "04c6d8a5246702a2c11faeeb643fb99a6fe5bca01d07dc952f1fe2478a1394bd",
+      "pixel_node_count": 3669,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "serena_quill_pose_cells.json#pose=protective_wing_fold",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "08-signature-actions-sheet-candidate-v1.png#panel-5",
+      "source_column": 1,
+      "source_panel_bounds": {
+        "bottom": 543,
+        "left": 362,
+        "right": 724,
+        "top": 272
+      },
+      "source_row": 1,
+      "source_sheet": "08-signature-actions-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "6f3db8f1ab455a593f33af235ba634041899a7d174264c2ab15d7b18271e7c94",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 4,
+        "right": 67,
+        "top": 24
+      },
+      "category": "signature",
+      "floor_shadow_removed": true,
+      "graph_id": "referral_human_help",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "50c74c53e030dd832ad96f41e4915d2e5acf3e47f0e01af170b8122ec6401087",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 110,
+      "pixel_graph_sha256": "50c74c53e030dd832ad96f41e4915d2e5acf3e47f0e01af170b8122ec6401087",
+      "pixel_node_count": 2112,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "serena_quill_pose_cells.json#pose=referral_human_help",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "08-signature-actions-sheet-candidate-v1.png#panel-6",
+      "source_column": 2,
+      "source_panel_bounds": {
+        "bottom": 543,
+        "left": 724,
+        "right": 1086,
+        "top": 272
+      },
+      "source_row": 1,
+      "source_sheet": "08-signature-actions-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "6f3db8f1ab455a593f33af235ba634041899a7d174264c2ab15d7b18271e7c94",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 4,
+        "right": 67,
+        "top": 16
+      },
+      "category": "signature",
+      "floor_shadow_removed": true,
+      "graph_id": "active_listening",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "95b43aab3cf6ab344cf2ab996f81945ffe372653217d9445f03451fe2150955d",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 111,
+      "pixel_graph_sha256": "95b43aab3cf6ab344cf2ab996f81945ffe372653217d9445f03451fe2150955d",
+      "pixel_node_count": 2599,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "serena_quill_pose_cells.json#pose=active_listening",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "08-signature-actions-sheet-candidate-v1.png#panel-7",
+      "source_column": 3,
+      "source_panel_bounds": {
+        "bottom": 543,
+        "left": 1086,
+        "right": 1448,
+        "top": 272
+      },
+      "source_row": 1,
+      "source_sheet": "08-signature-actions-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "6f3db8f1ab455a593f33af235ba634041899a7d174264c2ab15d7b18271e7c94",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 5,
+        "right": 66,
+        "top": 11
+      },
+      "category": "signature",
+      "floor_shadow_removed": true,
+      "graph_id": "compassionate_agreement",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "5183aa1cd51a7e3ead10d2d75b6e1901f7bfe30ef4e795d5fa98b1747addf6c4",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 112,
+      "pixel_graph_sha256": "5183aa1cd51a7e3ead10d2d75b6e1901f7bfe30ef4e795d5fa98b1747addf6c4",
+      "pixel_node_count": 2690,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "serena_quill_pose_cells.json#pose=compassionate_agreement",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "08-signature-actions-sheet-candidate-v1.png#panel-8",
+      "source_column": 0,
+      "source_panel_bounds": {
+        "bottom": 814,
+        "left": 0,
+        "right": 362,
+        "top": 543
+      },
+      "source_row": 2,
+      "source_sheet": "08-signature-actions-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "6f3db8f1ab455a593f33af235ba634041899a7d174264c2ab15d7b18271e7c94",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 5,
+        "right": 66,
+        "top": 13
+      },
+      "category": "signature",
+      "floor_shadow_removed": true,
+      "graph_id": "safe_disagreement",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "da76e4f4c6a1e2a34947b9dfd6dae097d0c1b4f52c79bac12b391cfe5313c778",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 113,
+      "pixel_graph_sha256": "da76e4f4c6a1e2a34947b9dfd6dae097d0c1b4f52c79bac12b391cfe5313c778",
+      "pixel_node_count": 2621,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "serena_quill_pose_cells.json#pose=safe_disagreement",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "08-signature-actions-sheet-candidate-v1.png#panel-9",
+      "source_column": 1,
+      "source_panel_bounds": {
+        "bottom": 814,
+        "left": 362,
+        "right": 724,
+        "top": 543
+      },
+      "source_row": 2,
+      "source_sheet": "08-signature-actions-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "6f3db8f1ab455a593f33af235ba634041899a7d174264c2ab15d7b18271e7c94",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 5,
+        "right": 66,
+        "top": 8
+      },
+      "category": "signature",
+      "floor_shadow_removed": true,
+      "graph_id": "reflective_question",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "ce7ebbe89efda30c4c915e60a8659b653a4c058f7b789f6431b326a35ab48599",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 114,
+      "pixel_graph_sha256": "ce7ebbe89efda30c4c915e60a8659b653a4c058f7b789f6431b326a35ab48599",
+      "pixel_node_count": 2848,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "serena_quill_pose_cells.json#pose=reflective_question",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "08-signature-actions-sheet-candidate-v1.png#panel-10",
+      "source_column": 2,
+      "source_panel_bounds": {
+        "bottom": 814,
+        "left": 724,
+        "right": 1086,
+        "top": 543
+      },
+      "source_row": 2,
+      "source_sheet": "08-signature-actions-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "6f3db8f1ab455a593f33af235ba634041899a7d174264c2ab15d7b18271e7c94",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 5,
+        "right": 66,
+        "top": 10
+      },
+      "category": "signature",
+      "floor_shadow_removed": true,
+      "graph_id": "supportive_answer",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "e714f17f9378799d82b939fdda6e5da06522cb17bb6ce9a53a225a472813a0b3",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 115,
+      "pixel_graph_sha256": "e714f17f9378799d82b939fdda6e5da06522cb17bb6ce9a53a225a472813a0b3",
+      "pixel_node_count": 2787,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "serena_quill_pose_cells.json#pose=supportive_answer",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "08-signature-actions-sheet-candidate-v1.png#panel-11",
+      "source_column": 3,
+      "source_panel_bounds": {
+        "bottom": 814,
+        "left": 1086,
+        "right": 1448,
+        "top": 543
+      },
+      "source_row": 2,
+      "source_sheet": "08-signature-actions-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "6f3db8f1ab455a593f33af235ba634041899a7d174264c2ab15d7b18271e7c94",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 5,
+        "right": 66,
+        "top": 9
+      },
+      "category": "signature",
+      "floor_shadow_removed": true,
+      "graph_id": "luminous_encouragement",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "2a1f0c1b6d1fa62f498d31e337792e77a65eb0a3f062772ceb35c8ce5f25b853",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 116,
+      "pixel_graph_sha256": "2a1f0c1b6d1fa62f498d31e337792e77a65eb0a3f062772ceb35c8ce5f25b853",
+      "pixel_node_count": 2772,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "serena_quill_pose_cells.json#pose=luminous_encouragement",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "08-signature-actions-sheet-candidate-v1.png#panel-12",
+      "source_column": 0,
+      "source_panel_bounds": {
+        "bottom": 1086,
+        "left": 0,
+        "right": 362,
+        "top": 814
+      },
+      "source_row": 3,
+      "source_sheet": "08-signature-actions-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "6f3db8f1ab455a593f33af235ba634041899a7d174264c2ab15d7b18271e7c94",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 4,
+        "right": 67,
+        "top": 22
+      },
+      "category": "signature",
+      "floor_shadow_removed": true,
+      "graph_id": "careful_celebration",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "39c92b5ce393e28b7ba93a9738db3f6d63123db39f998c415043f668d4533bd9",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 117,
+      "pixel_graph_sha256": "39c92b5ce393e28b7ba93a9738db3f6d63123db39f998c415043f668d4533bd9",
+      "pixel_node_count": 2224,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "serena_quill_pose_cells.json#pose=careful_celebration",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "08-signature-actions-sheet-candidate-v1.png#panel-13",
+      "source_column": 1,
+      "source_panel_bounds": {
+        "bottom": 1086,
+        "left": 362,
+        "right": 724,
+        "top": 814
+      },
+      "source_row": 3,
+      "source_sheet": "08-signature-actions-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "6f3db8f1ab455a593f33af235ba634041899a7d174264c2ab15d7b18271e7c94",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 9,
+        "right": 61,
+        "top": 4
+      },
+      "category": "signature",
+      "floor_shadow_removed": true,
+      "graph_id": "deescalation",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "337dd1f842cb479d12e48a2a8f78cc9f544655ac823fd2e278a11adbc7a24685",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 118,
+      "pixel_graph_sha256": "337dd1f842cb479d12e48a2a8f78cc9f544655ac823fd2e278a11adbc7a24685",
+      "pixel_node_count": 3319,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "serena_quill_pose_cells.json#pose=deescalation",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "08-signature-actions-sheet-candidate-v1.png#panel-14",
+      "source_column": 2,
+      "source_panel_bounds": {
+        "bottom": 1086,
+        "left": 724,
+        "right": 1086,
+        "top": 814
+      },
+      "source_row": 3,
+      "source_sheet": "08-signature-actions-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "6f3db8f1ab455a593f33af235ba634041899a7d174264c2ab15d7b18271e7c94",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 5,
+        "right": 66,
+        "top": 11
+      },
+      "category": "signature",
+      "floor_shadow_removed": true,
+      "graph_id": "settled_presence",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "800b5e57d26b666a1406a94ce7785fb1853a504f5acbc2bae4894f1c28cf5e18",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 119,
+      "pixel_graph_sha256": "800b5e57d26b666a1406a94ce7785fb1853a504f5acbc2bae4894f1c28cf5e18",
+      "pixel_node_count": 2626,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "serena_quill_pose_cells.json#pose=settled_presence",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "08-signature-actions-sheet-candidate-v1.png#panel-15",
+      "source_column": 3,
+      "source_panel_bounds": {
+        "bottom": 1086,
+        "left": 1086,
+        "right": 1448,
+        "top": 814
+      },
+      "source_row": 3,
+      "source_sheet": "08-signature-actions-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "6f3db8f1ab455a593f33af235ba634041899a7d174264c2ab15d7b18271e7c94",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 4,
+        "right": 67,
+        "top": 13
+      },
+      "category": "interaction",
+      "floor_shadow_removed": true,
+      "graph_id": "interaction_open_stance",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "3a6d00461869e097c7a86dc139d92c802a06cc9658ecf252f888086388a89b4e",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 120,
+      "pixel_graph_sha256": "3a6d00461869e097c7a86dc139d92c802a06cc9658ecf252f888086388a89b4e",
+      "pixel_node_count": 2380,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "serena_quill_pose_cells.json#pose=interaction_open_stance",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "09-interaction-poses-candidate-v1.png#panel-0",
+      "source_column": 0,
+      "source_panel_bounds": {
+        "bottom": 627,
+        "left": 0,
+        "right": 627,
+        "top": 0
+      },
+      "source_row": 0,
+      "source_sheet": "09-interaction-poses-candidate-v1.png",
+      "source_worksheet_sha256": "353b91fc8492aac9f544a79584545dfcd12388416584d43633b9ccec341c856e",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 7,
+        "right": 64,
+        "top": 4
+      },
+      "category": "interaction",
+      "floor_shadow_removed": true,
+      "graph_id": "interaction_closed_stance",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "1ac8650a6b429882a32db57c62da2ff76b82748014f1ab9a6700fd0108b987f6",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 121,
+      "pixel_graph_sha256": "1ac8650a6b429882a32db57c62da2ff76b82748014f1ab9a6700fd0108b987f6",
+      "pixel_node_count": 2621,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "serena_quill_pose_cells.json#pose=interaction_closed_stance",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "09-interaction-poses-candidate-v1.png#panel-1",
+      "source_column": 1,
+      "source_panel_bounds": {
+        "bottom": 627,
+        "left": 627,
+        "right": 1254,
+        "top": 0
+      },
+      "source_row": 0,
+      "source_sheet": "09-interaction-poses-candidate-v1.png",
+      "source_worksheet_sha256": "353b91fc8492aac9f544a79584545dfcd12388416584d43633b9ccec341c856e",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 6,
+        "right": 65,
+        "top": 4
+      },
+      "category": "interaction",
+      "floor_shadow_removed": true,
+      "graph_id": "interaction_safe_fist",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "914d6f111b6befa22ce95075ccfb894987238148a31ca370f480131541ae6b26",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 122,
+      "pixel_graph_sha256": "914d6f111b6befa22ce95075ccfb894987238148a31ca370f480131541ae6b26",
+      "pixel_node_count": 2796,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "serena_quill_pose_cells.json#pose=interaction_safe_fist",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "09-interaction-poses-candidate-v1.png#panel-2",
+      "source_column": 0,
+      "source_panel_bounds": {
+        "bottom": 1254,
+        "left": 0,
+        "right": 627,
+        "top": 627
+      },
+      "source_row": 1,
+      "source_sheet": "09-interaction-poses-candidate-v1.png",
+      "source_worksheet_sha256": "353b91fc8492aac9f544a79584545dfcd12388416584d43633b9ccec341c856e",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 90,
+        "left": 4,
+        "right": 67,
+        "top": 11
+      },
+      "category": "interaction",
+      "floor_shadow_removed": true,
+      "graph_id": "interaction_forward_reach",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "956f38b4fbf9107772fcefbc10f9ec51c88737646d129b0fea375159ecb2874d",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 123,
+      "pixel_graph_sha256": "956f38b4fbf9107772fcefbc10f9ec51c88737646d129b0fea375159ecb2874d",
+      "pixel_node_count": 2463,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "serena_quill_pose_cells.json#pose=interaction_forward_reach",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "09-interaction-poses-candidate-v1.png#panel-3",
+      "source_column": 1,
+      "source_panel_bounds": {
+        "bottom": 1254,
+        "left": 627,
+        "right": 1254,
+        "top": 627
+      },
+      "source_row": 1,
+      "source_sheet": "09-interaction-poses-candidate-v1.png",
+      "source_worksheet_sha256": "353b91fc8492aac9f544a79584545dfcd12388416584d43633b9ccec341c856e",
+      "validation_result": "passed"
+    }
+  ],
+  "runtime_image_assets": [],
+  "schema_version": 1
+}

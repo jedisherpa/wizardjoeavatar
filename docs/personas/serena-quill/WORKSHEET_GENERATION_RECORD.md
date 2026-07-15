@@ -2,7 +2,7 @@
 
 ## Status
 
-The Serena Quill canonical production worksheet package contains nine accepted board types and exactly **124 deterministic cells**. Sheet 01 v1 is retained only as a rejected provenance artifact; Sheet 01 v2 is the production candidate.
+The Serena Quill canonical production worksheet package contains nine accepted board types and exactly **124 deterministic cells**. Sheet 01 v1 and v2 are retained only as rejected provenance artifacts; Sheet 01 v3 is the sole production candidate.
 
 This record covers reference generation and human-readable visual QA. It does not approve runtime integration. Runtime acceptance still requires isolation, background removal, pixel-graph conversion, per-cell re-audit, animation mapping, live playback, and the complete branch acceptance gate.
 
@@ -32,7 +32,7 @@ This formula handles the few one-pixel remainder differences without interpolati
 
 | Sheet | File | Grid | Cells | Pixel dimensions | SHA-256 | Visual status |
 |---|---|---:|---:|---:|---|---|
-| 01 | `01-identity-sheet-candidate-v2.png` | 4x4 | 16 | 1254x1254 | `18ae92d61482755c06960b3bb532d2e56a45cc59bb7070cd06bac7e2315f3602` | Accepted production candidate |
+| 01 | `01-identity-sheet-candidate-v3.png` | 4x4 | 16 | 1254x1254 | `a6405defd8a031426bd3f3c2f0bbe426ed5a766f6f5063290cd46ebbd5047fbb` | Accepted production candidate; all sixteen panels have clean blue studio fields and panel 1 is a complete canonical voxel figure |
 | 02 | `02-turnaround-sheet-candidate-v1.png` | 4x2 | 8 | 1536x1024 | `d476d6aa2d1c2961135a6e6774bde2fc50d765174cddca0cec9c273201bfdafd` | Accepted production candidate |
 | 03 | `03-neutral-base-poses-candidate-v1.png` | 4x2 | 8 | 1774x887 | `be5702f9e655dac6bf9b826bf162588d0d6cf69f91ddb1e3cf3ead6f8697fdf2` | Accepted production candidate |
 | 04 | `04-expression-sheet-candidate-v1.png` | 6x4 | 24 | 1536x1024 | `f163614a617a6ca601e9862d4b04843ec77b8d9bf53c9b60926951cb8fba1f71` | Accepted production candidate |
@@ -46,6 +46,8 @@ This formula handles the few one-pixel remainder differences without interpolati
 ## Rejected artifact
 
 `01-identity-sheet-candidate-v1-rejected.png` (3x3, 1254x1254, SHA-256 `42bfd209f4e493164ef56c8c466f99c39a12cee1ddd7155b0515790c74555301`) is rejected because its nine-cell layout cannot satisfy the required 16-cell Sheet 01 or 124-cell package total. Its character rendering was visually useful, but its geometry and cell count make it non-production. It must not be isolated, converted, registered, or used as a runtime source.
+
+`01-identity-sheet-candidate-v2.png` (4x4, SHA-256 `18ae92d61482755c06960b3bb532d2e56a45cc59bb7070cd06bac7e2315f3602`) is rejected because panel 1 embeds the original illustrated scene and green dragon. That rectangular scene cannot become an isolated transparent character/reference graph. V3 changes only that panel to a clean canonical full-body voxel Serena and is the sole accepted identity source.
 
 ## Exact row-major mappings
 
@@ -217,7 +219,7 @@ This formula handles the few one-pixel remainder differences without interpolati
 
 ## Runtime handoff — mandatory 124-cell pixel-graph conversion
 
-1. Treat the accepted Sheet 01 v2 and Sheets 02–09 as the only extraction sources.
+1. Treat the accepted Sheet 01 v3 and Sheets 02–09 as the only extraction sources.
 2. Isolate exactly **124 cells** using the grid metadata and proportional integer boundary formula above: 16 + 8 + 8 + 24 + 16 + 16 + 16 + 16 + 4.
 3. Remove the pale-blue background independently from every isolated cell. Preserve the complete halo glow and orb glow while making all non-character/background pixels transparent.
 4. Normalize each isolated pose to the character package's canonical transparent canvas with the required safety inset, stable root, and pose-appropriate baseline. Do not rescale one pose independently merely to fill its cell.

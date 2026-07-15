@@ -29,3 +29,14 @@ This branch is a character-preparation branch. The supplied source image is immu
 - Runtime evidence includes idle, locomotion, expression, speaking, signature action, and widest-silhouette screenshots with zero browser errors or dropped frames.
 
 The character is complete only when the live visualizer can use the full movement, expression, speech, gesture, interaction, and state vocabulary without visible identity drift.
+
+## Serena completion record
+
+- Required cell count: 124 (16 identity/reference + 108 production pose/feature cells).
+- Runtime encoding: transparent colored pixel nodes in JSON only.
+- Canonical canvas: 72x96 cells; root `[36, 91]`; baseline 91; four-cell safety inset.
+- Background removal: warm-subject connected-component extraction with explicit floor-shadow rejection, tuned to preserve the cream robe, stepped wings, golden halo, orange hair, orange-gold orb, robe hem, and feet.
+- Projection comparison: 124/124 exact; zero different nodes.
+- Registry and transport: character package, registry entry, static assets, REST metadata/commands, and character-scoped WebSocket stream verified.
+- Runtime image dependency: forced `PIL.Image.open` failure still renders successfully.
+- Acceptance evidence: `evidence/serena-quill/FINAL_VERIFICATION.md`.

@@ -12,3 +12,10 @@ Performance: compassionate, bright, consent-aware, and emotionally attentive. Us
 
 Signature actions: mentoring invitation, emotional-climate check, consent pause, facilitation, orb reassurance, protective wing fold, and careful referral to human help.
 
+## Production runtime
+
+Serena is registered as `serena-quill-v1`. Her production library contains exactly 124 audited worksheet cells: 16 identity/reference graphs and 108 runtime pose/feature graphs. The runtime package stores transparent colored pixel nodes in JSON and the canvas projector paints those nodes; the worksheet and evidence PNG files are never runtime render dependencies.
+
+Runtime mappings use Serena's authored actions directly: mentoring invitation, emotional-climate check, consent pause, facilitation, orb reassurance, protective wing fold, human-help referral, active listening, compassionate agreement, safe disagreement, reflective question, supportive answer, luminous encouragement, careful celebration, de-escalation, and settled presence. There are no inherited Orion/journal/inquiry mappings.
+
+The visual audit contact sheets are in `evidence/serena-quill/`. They show all 124 isolated silhouettes and all 124 projected pixel graphs in row-major worksheet order. Their identical SHA-256 hash proves the stored graph renderer reproduces the isolated node data exactly.

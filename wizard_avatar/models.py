@@ -71,6 +71,13 @@ ACTIONS = (
     "journal_hold",
     "journal_write",
     "journal_page_turn",
+    "mentoring_invitation",
+    "consent_pause",
+    "orb_reassurance",
+    "protective_wing_fold",
+    "human_referral",
+    "deescalation",
+    "settled_presence",
 )
 
 MOUTH_SHAPES = (
