@@ -91,6 +91,8 @@ class OrionValeCharacterTests(unittest.TestCase):
             hashlib.sha256(PROFILE.read_bytes()).hexdigest(),
         )
         for key, filename in (
+            ("character_package_sha256", "orion_vale_character_package.json"),
+            ("runtime_profile_sha256", "orion_vale_runtime_profile.json"),
             ("pose_library_sha256", "orion_vale_pose_cells.json"),
             ("animation_graph_sha256", "orion_vale_animation_graph.json"),
             ("animation_matrix_sha256", "orion_vale_animation_matrix.json"),
@@ -142,6 +144,8 @@ class OrionValeCharacterTests(unittest.TestCase):
         definitions = ROOT / "wizard_avatar" / "definitions"
         generated = {
             "generation profile": PROFILE,
+            "character package": definitions / "orion_vale_character_package.json",
+            "runtime profile": definitions / "orion_vale_runtime_profile.json",
             "pose library": definitions / "orion_vale_pose_cells.json",
             "animation graph": definitions / "orion_vale_animation_graph.json",
             "animation matrix": definitions / "orion_vale_animation_matrix.json",

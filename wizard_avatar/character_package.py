@@ -283,6 +283,10 @@ def _validate_manifest_lineage(
         raise CharacterPackageValidationError("flattened runtime art is forbidden")
 
     generated = {
+        "character_package_sha256": package_path,
+        "runtime_profile_sha256": _package_asset(
+            package_path, package_raw["runtime_profile"], "runtime_profile"
+        ),
         "pose_library_sha256": _package_asset(
             package_path, package_raw["pose_library"], "pose_library"
         ),
