@@ -1,6 +1,6 @@
 # Rohan Slate Runtime Verification
 
-Verification date: 2026-07-15
+Verification date: 2026-07-16
 
 Branch: `codex/persona-rohan-slate`
 
@@ -49,8 +49,8 @@ the visualizer never loads these evidence PNG files.
 ## Automated verification
 
 - Deterministic generator `--check`: passed.
-- Focused Rohan suite: 16/16 passed in 42.754 seconds.
-- Full repository suite: 181/181 passed in 438.280 seconds.
+- Focused direct-cell and Rohan suite: 20/20 passed in 23.601 seconds.
+- Full repository suite: 181/181 passed in 438.272 seconds.
 - `git diff --check`: passed.
 - Live character list, state, poses, metadata, and pixel-graph routes returned
   HTTP 200; the pixel-graph response was 5,434,114 bytes.
@@ -59,6 +59,9 @@ the visualizer never loads these evidence PNG files.
   12,106-byte action frame; live state confirmed `wrench_present` reached pose
   `wrench_presentation` for `rohan-slate-v1`.
 - Forced `PIL.Image.open` failure still produced runtime frames.
+- Closure smoke on `127.0.0.1:18767` returned HTTP 200 for the Rohan registry
+  and state routes, then returned `INIT:24.0:5:160:100:0:0:0.000` and a
+  9,230-byte binary frame over the character-scoped WebSocket.
 
 Final evidence hashes:
 
