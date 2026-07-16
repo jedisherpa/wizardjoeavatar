@@ -1,0 +1,880 @@
+{
+  "cell_count": 124,
+  "character_id": "finn-calder-v1",
+  "comparisons": [
+    {
+      "different_nodes": 0,
+      "graph_id": "identity_reference_00",
+      "isolated_node_count": 2517,
+      "projected_node_count": 2517,
+      "status": "passed"
+    },
+    {
+      "different_nodes": 0,
+      "graph_id": "identity_reference_01",
+      "isolated_node_count": 2709,
+      "projected_node_count": 2709,
+      "status": "passed"
+    },
+    {
+      "different_nodes": 0,
+      "graph_id": "identity_reference_02",
+      "isolated_node_count": 1699,
+      "projected_node_count": 1699,
+      "status": "passed"
+    },
+    {
+      "different_nodes": 0,
+      "graph_id": "identity_reference_03",
+      "isolated_node_count": 2449,
+      "projected_node_count": 2449,
+      "status": "passed"
+    },
+    {
+      "different_nodes": 0,
+      "graph_id": "identity_reference_04",
+      "isolated_node_count": 3429,
+      "projected_node_count": 3429,
+      "status": "passed"
+    },
+    {
+      "different_nodes": 0,
+      "graph_id": "identity_reference_05",
+      "isolated_node_count": 3487,
+      "projected_node_count": 3487,
+      "status": "passed"
+    },
+    {
+      "different_nodes": 0,
+      "graph_id": "identity_reference_06",
+      "isolated_node_count": 1982,
+      "projected_node_count": 1982,
+      "status": "passed"
+    },
+    {
+      "different_nodes": 0,
+      "graph_id": "identity_reference_07",
+      "isolated_node_count": 2010,
+      "projected_node_count": 2010,
+      "status": "passed"
+    },
+    {
+      "different_nodes": 0,
+      "graph_id": "identity_reference_08",
+      "isolated_node_count": 1916,
+      "projected_node_count": 1916,
+      "status": "passed"
+    },
+    {
+      "different_nodes": 0,
+      "graph_id": "identity_reference_09",
+      "isolated_node_count": 3271,
+      "projected_node_count": 3271,
+      "status": "passed"
+    },
+    {
+      "different_nodes": 0,
+      "graph_id": "identity_reference_10",
+      "isolated_node_count": 2097,
+      "projected_node_count": 2097,
+      "status": "passed"
+    },
+    {
+      "different_nodes": 0,
+      "graph_id": "identity_reference_11",
+      "isolated_node_count": 2264,
+      "projected_node_count": 2264,
+      "status": "passed"
+    },
+    {
+      "different_nodes": 0,
+      "graph_id": "identity_reference_12",
+      "isolated_node_count": 3006,
+      "projected_node_count": 3006,
+      "status": "passed"
+    },
+    {
+      "different_nodes": 0,
+      "graph_id": "identity_reference_13",
+      "isolated_node_count": 2464,
+      "projected_node_count": 2464,
+      "status": "passed"
+    },
+    {
+      "different_nodes": 0,
+      "graph_id": "identity_reference_14",
+      "isolated_node_count": 1636,
+      "projected_node_count": 1636,
+      "status": "passed"
+    },
+    {
+      "different_nodes": 0,
+      "graph_id": "identity_reference_15",
+      "isolated_node_count": 2404,
+      "projected_node_count": 2404,
+      "status": "passed"
+    },
+    {
+      "different_nodes": 0,
+      "graph_id": "neutral_front",
+      "isolated_node_count": 2478,
+      "projected_node_count": 2478,
+      "status": "passed"
+    },
+    {
+      "different_nodes": 0,
+      "graph_id": "neutral_three_quarter_left",
+      "isolated_node_count": 2646,
+      "projected_node_count": 2646,
+      "status": "passed"
+    },
+    {
+      "different_nodes": 0,
+      "graph_id": "neutral_left_profile",
+      "isolated_node_count": 1547,
+      "projected_node_count": 1547,
+      "status": "passed"
+    },
+    {
+      "different_nodes": 0,
+      "graph_id": "neutral_back_three_quarter_left",
+      "isolated_node_count": 2562,
+      "projected_node_count": 2562,
+      "status": "passed"
+    },
+    {
+      "different_nodes": 0,
+      "graph_id": "neutral_back",
+      "isolated_node_count": 2397,
+      "projected_node_count": 2397,
+      "status": "passed"
+    },
+    {
+      "different_nodes": 0,
+      "graph_id": "neutral_back_three_quarter_right",
+      "isolated_node_count": 2511,
+      "projected_node_count": 2511,
+      "status": "passed"
+    },
+    {
+      "different_nodes": 0,
+      "graph_id": "neutral_right_profile",
+      "isolated_node_count": 1552,
+      "projected_node_count": 1552,
+      "status": "passed"
+    },
+    {
+      "different_nodes": 0,
+      "graph_id": "neutral_three_quarter_right",
+      "isolated_node_count": 2513,
+      "projected_node_count": 2513,
+      "status": "passed"
+    },
+    {
+      "different_nodes": 0,
+      "graph_id": "neutral_base_front",
+      "isolated_node_count": 2412,
+      "projected_node_count": 2412,
+      "status": "passed"
+    },
+    {
+      "different_nodes": 0,
+      "graph_id": "neutral_base_three_quarter",
+      "isolated_node_count": 2382,
+      "projected_node_count": 2382,
+      "status": "passed"
+    },
+    {
+      "different_nodes": 0,
+      "graph_id": "neutral_base_profile",
+      "isolated_node_count": 1478,
+      "projected_node_count": 1478,
+      "status": "passed"
+    },
+    {
+      "different_nodes": 0,
+      "graph_id": "neutral_base_back",
+      "isolated_node_count": 2272,
+      "projected_node_count": 2272,
+      "status": "passed"
+    },
+    {
+      "different_nodes": 0,
+      "graph_id": "idle_relaxed",
+      "isolated_node_count": 2268,
+      "projected_node_count": 2268,
+      "status": "passed"
+    },
+    {
+      "different_nodes": 0,
+      "graph_id": "idle_attentive",
+      "isolated_node_count": 2290,
+      "projected_node_count": 2290,
+      "status": "passed"
+    },
+    {
+      "different_nodes": 0,
+      "graph_id": "idle_speaking",
+      "isolated_node_count": 2143,
+      "projected_node_count": 2143,
+      "status": "passed"
+    },
+    {
+      "different_nodes": 0,
+      "graph_id": "idle_listening",
+      "isolated_node_count": 2312,
+      "projected_node_count": 2312,
+      "status": "passed"
+    },
+    {
+      "different_nodes": 0,
+      "graph_id": "expression_neutral",
+      "isolated_node_count": 2543,
+      "projected_node_count": 2543,
+      "status": "passed"
+    },
+    {
+      "different_nodes": 0,
+      "graph_id": "expression_calm",
+      "isolated_node_count": 2564,
+      "projected_node_count": 2564,
+      "status": "passed"
+    },
+    {
+      "different_nodes": 0,
+      "graph_id": "expression_joy",
+      "isolated_node_count": 2088,
+      "projected_node_count": 2088,
+      "status": "passed"
+    },
+    {
+      "different_nodes": 0,
+      "graph_id": "expression_amusement",
+      "isolated_node_count": 2507,
+      "projected_node_count": 2507,
+      "status": "passed"
+    },
+    {
+      "different_nodes": 0,
+      "graph_id": "expression_excitement",
+      "isolated_node_count": 2404,
+      "projected_node_count": 2404,
+      "status": "passed"
+    },
+    {
+      "different_nodes": 0,
+      "graph_id": "expression_curiosity",
+      "isolated_node_count": 2362,
+      "projected_node_count": 2362,
+      "status": "passed"
+    },
+    {
+      "different_nodes": 0,
+      "graph_id": "expression_confidence",
+      "isolated_node_count": 2521,
+      "projected_node_count": 2521,
+      "status": "passed"
+    },
+    {
+      "different_nodes": 0,
+      "graph_id": "expression_compassion",
+      "isolated_node_count": 2335,
+      "projected_node_count": 2335,
+      "status": "passed"
+    },
+    {
+      "different_nodes": 0,
+      "graph_id": "expression_surprise",
+      "isolated_node_count": 2414,
+      "projected_node_count": 2414,
+      "status": "passed"
+    },
+    {
+      "different_nodes": 0,
+      "graph_id": "expression_confusion",
+      "isolated_node_count": 2564,
+      "projected_node_count": 2564,
+      "status": "passed"
+    },
+    {
+      "different_nodes": 0,
+      "graph_id": "expression_skepticism",
+      "isolated_node_count": 2330,
+      "projected_node_count": 2330,
+      "status": "passed"
+    },
+    {
+      "different_nodes": 0,
+      "graph_id": "expression_concern",
+      "isolated_node_count": 2314,
+      "projected_node_count": 2314,
+      "status": "passed"
+    },
+    {
+      "different_nodes": 0,
+      "graph_id": "expression_sadness",
+      "isolated_node_count": 2593,
+      "projected_node_count": 2593,
+      "status": "passed"
+    },
+    {
+      "different_nodes": 0,
+      "graph_id": "expression_shame",
+      "isolated_node_count": 2270,
+      "projected_node_count": 2270,
+      "status": "passed"
+    },
+    {
+      "different_nodes": 0,
+      "graph_id": "expression_embarrassment",
+      "isolated_node_count": 2457,
+      "projected_node_count": 2457,
+      "status": "passed"
+    },
+    {
+      "different_nodes": 0,
+      "graph_id": "expression_fear",
+      "isolated_node_count": 2312,
+      "projected_node_count": 2312,
+      "status": "passed"
+    },
+    {
+      "different_nodes": 0,
+      "graph_id": "expression_anxiety",
+      "isolated_node_count": 2252,
+      "projected_node_count": 2252,
+      "status": "passed"
+    },
+    {
+      "different_nodes": 0,
+      "graph_id": "expression_anger",
+      "isolated_node_count": 2571,
+      "projected_node_count": 2571,
+      "status": "passed"
+    },
+    {
+      "different_nodes": 0,
+      "graph_id": "expression_frustration",
+      "isolated_node_count": 2471,
+      "projected_node_count": 2471,
+      "status": "passed"
+    },
+    {
+      "different_nodes": 0,
+      "graph_id": "expression_determination",
+      "isolated_node_count": 2512,
+      "projected_node_count": 2512,
+      "status": "passed"
+    },
+    {
+      "different_nodes": 0,
+      "graph_id": "expression_fatigue",
+      "isolated_node_count": 2451,
+      "projected_node_count": 2451,
+      "status": "passed"
+    },
+    {
+      "different_nodes": 0,
+      "graph_id": "expression_contemplation",
+      "isolated_node_count": 2241,
+      "projected_node_count": 2241,
+      "status": "passed"
+    },
+    {
+      "different_nodes": 0,
+      "graph_id": "expression_listening_ready",
+      "isolated_node_count": 2377,
+      "projected_node_count": 2377,
+      "status": "passed"
+    },
+    {
+      "different_nodes": 0,
+      "graph_id": "expression_reflective_reset",
+      "isolated_node_count": 2542,
+      "projected_node_count": 2542,
+      "status": "passed"
+    },
+    {
+      "different_nodes": 0,
+      "graph_id": "viseme_rest",
+      "isolated_node_count": 2547,
+      "projected_node_count": 2547,
+      "status": "passed"
+    },
+    {
+      "different_nodes": 0,
+      "graph_id": "viseme_closed_lips",
+      "isolated_node_count": 2542,
+      "projected_node_count": 2542,
+      "status": "passed"
+    },
+    {
+      "different_nodes": 0,
+      "graph_id": "viseme_slightly_open",
+      "isolated_node_count": 2528,
+      "projected_node_count": 2528,
+      "status": "passed"
+    },
+    {
+      "different_nodes": 0,
+      "graph_id": "viseme_wide_vowel",
+      "isolated_node_count": 2516,
+      "projected_node_count": 2516,
+      "status": "passed"
+    },
+    {
+      "different_nodes": 0,
+      "graph_id": "viseme_open_vowel",
+      "isolated_node_count": 2500,
+      "projected_node_count": 2500,
+      "status": "passed"
+    },
+    {
+      "different_nodes": 0,
+      "graph_id": "viseme_rounded_vowel",
+      "isolated_node_count": 2551,
+      "projected_node_count": 2551,
+      "status": "passed"
+    },
+    {
+      "different_nodes": 0,
+      "graph_id": "viseme_teeth_consonant",
+      "isolated_node_count": 2532,
+      "projected_node_count": 2532,
+      "status": "passed"
+    },
+    {
+      "different_nodes": 0,
+      "graph_id": "viseme_lower_lip_consonant",
+      "isolated_node_count": 2555,
+      "projected_node_count": 2555,
+      "status": "passed"
+    },
+    {
+      "different_nodes": 0,
+      "graph_id": "viseme_tongue_consonant",
+      "isolated_node_count": 2504,
+      "projected_node_count": 2504,
+      "status": "passed"
+    },
+    {
+      "different_nodes": 0,
+      "graph_id": "viseme_smile_speaking",
+      "isolated_node_count": 2551,
+      "projected_node_count": 2551,
+      "status": "passed"
+    },
+    {
+      "different_nodes": 0,
+      "graph_id": "viseme_frown_speaking",
+      "isolated_node_count": 2529,
+      "projected_node_count": 2529,
+      "status": "passed"
+    },
+    {
+      "different_nodes": 0,
+      "graph_id": "viseme_speech_emphasis",
+      "isolated_node_count": 2526,
+      "projected_node_count": 2526,
+      "status": "passed"
+    },
+    {
+      "different_nodes": 0,
+      "graph_id": "viseme_breath_pause",
+      "isolated_node_count": 2503,
+      "projected_node_count": 2503,
+      "status": "passed"
+    },
+    {
+      "different_nodes": 0,
+      "graph_id": "blink_open",
+      "isolated_node_count": 2534,
+      "projected_node_count": 2534,
+      "status": "passed"
+    },
+    {
+      "different_nodes": 0,
+      "graph_id": "blink_half_closed",
+      "isolated_node_count": 2529,
+      "projected_node_count": 2529,
+      "status": "passed"
+    },
+    {
+      "different_nodes": 0,
+      "graph_id": "blink_closed",
+      "isolated_node_count": 2558,
+      "projected_node_count": 2558,
+      "status": "passed"
+    },
+    {
+      "different_nodes": 0,
+      "graph_id": "hand_open_relaxed",
+      "isolated_node_count": 1514,
+      "projected_node_count": 1514,
+      "status": "passed"
+    },
+    {
+      "different_nodes": 0,
+      "graph_id": "hand_closed",
+      "isolated_node_count": 1633,
+      "projected_node_count": 1633,
+      "status": "passed"
+    },
+    {
+      "different_nodes": 0,
+      "graph_id": "hand_fist",
+      "isolated_node_count": 1736,
+      "projected_node_count": 1736,
+      "status": "passed"
+    },
+    {
+      "different_nodes": 0,
+      "graph_id": "hand_pointing",
+      "isolated_node_count": 1349,
+      "projected_node_count": 1349,
+      "status": "passed"
+    },
+    {
+      "different_nodes": 0,
+      "graph_id": "hand_presenting",
+      "isolated_node_count": 1246,
+      "projected_node_count": 1246,
+      "status": "passed"
+    },
+    {
+      "different_nodes": 0,
+      "graph_id": "hand_reaching",
+      "isolated_node_count": 1351,
+      "projected_node_count": 1351,
+      "status": "passed"
+    },
+    {
+      "different_nodes": 0,
+      "graph_id": "prop_microphone_grip_front",
+      "isolated_node_count": 2425,
+      "projected_node_count": 2425,
+      "status": "passed"
+    },
+    {
+      "different_nodes": 0,
+      "graph_id": "prop_microphone_grip_three_quarter",
+      "isolated_node_count": 2257,
+      "projected_node_count": 2257,
+      "status": "passed"
+    },
+    {
+      "different_nodes": 0,
+      "graph_id": "prop_microphone_lowered",
+      "isolated_node_count": 1786,
+      "projected_node_count": 1786,
+      "status": "passed"
+    },
+    {
+      "different_nodes": 0,
+      "graph_id": "prop_microphone_offer",
+      "isolated_node_count": 1460,
+      "projected_node_count": 1460,
+      "status": "passed"
+    },
+    {
+      "different_nodes": 0,
+      "graph_id": "prop_microphone_receive",
+      "isolated_node_count": 1796,
+      "projected_node_count": 1796,
+      "status": "passed"
+    },
+    {
+      "different_nodes": 0,
+      "graph_id": "prop_microphone_transfer",
+      "isolated_node_count": 1324,
+      "projected_node_count": 1324,
+      "status": "passed"
+    },
+    {
+      "different_nodes": 0,
+      "graph_id": "prop_microphone_two_hand",
+      "isolated_node_count": 1589,
+      "projected_node_count": 1589,
+      "status": "passed"
+    },
+    {
+      "different_nodes": 0,
+      "graph_id": "prop_microphone_emphasis",
+      "isolated_node_count": 2051,
+      "projected_node_count": 2051,
+      "status": "passed"
+    },
+    {
+      "different_nodes": 0,
+      "graph_id": "prop_microphone_release",
+      "isolated_node_count": 1759,
+      "projected_node_count": 1759,
+      "status": "passed"
+    },
+    {
+      "different_nodes": 0,
+      "graph_id": "prop_microphone_settled",
+      "isolated_node_count": 2481,
+      "projected_node_count": 2481,
+      "status": "passed"
+    },
+    {
+      "different_nodes": 0,
+      "graph_id": "walk_contact_left",
+      "isolated_node_count": 2666,
+      "projected_node_count": 2666,
+      "status": "passed"
+    },
+    {
+      "different_nodes": 0,
+      "graph_id": "walk_passing_left",
+      "isolated_node_count": 2887,
+      "projected_node_count": 2887,
+      "status": "passed"
+    },
+    {
+      "different_nodes": 0,
+      "graph_id": "walk_contact_right",
+      "isolated_node_count": 2615,
+      "projected_node_count": 2615,
+      "status": "passed"
+    },
+    {
+      "different_nodes": 0,
+      "graph_id": "walk_passing_right",
+      "isolated_node_count": 2629,
+      "projected_node_count": 2629,
+      "status": "passed"
+    },
+    {
+      "different_nodes": 0,
+      "graph_id": "run_reach",
+      "isolated_node_count": 2765,
+      "projected_node_count": 2765,
+      "status": "passed"
+    },
+    {
+      "different_nodes": 0,
+      "graph_id": "run_drive",
+      "isolated_node_count": 2789,
+      "projected_node_count": 2789,
+      "status": "passed"
+    },
+    {
+      "different_nodes": 0,
+      "graph_id": "start",
+      "isolated_node_count": 2470,
+      "projected_node_count": 2470,
+      "status": "passed"
+    },
+    {
+      "different_nodes": 0,
+      "graph_id": "stop",
+      "isolated_node_count": 2445,
+      "projected_node_count": 2445,
+      "status": "passed"
+    },
+    {
+      "different_nodes": 0,
+      "graph_id": "turn_left",
+      "isolated_node_count": 2190,
+      "projected_node_count": 2190,
+      "status": "passed"
+    },
+    {
+      "different_nodes": 0,
+      "graph_id": "turn_right",
+      "isolated_node_count": 2102,
+      "projected_node_count": 2102,
+      "status": "passed"
+    },
+    {
+      "different_nodes": 0,
+      "graph_id": "crouch",
+      "isolated_node_count": 3289,
+      "projected_node_count": 3289,
+      "status": "passed"
+    },
+    {
+      "different_nodes": 0,
+      "graph_id": "jump_anticipation",
+      "isolated_node_count": 3305,
+      "projected_node_count": 3305,
+      "status": "passed"
+    },
+    {
+      "different_nodes": 0,
+      "graph_id": "jump_airborne",
+      "isolated_node_count": 2719,
+      "projected_node_count": 2719,
+      "status": "passed"
+    },
+    {
+      "different_nodes": 0,
+      "graph_id": "fall",
+      "isolated_node_count": 2072,
+      "projected_node_count": 2072,
+      "status": "passed"
+    },
+    {
+      "different_nodes": 0,
+      "graph_id": "land_contact",
+      "isolated_node_count": 3032,
+      "projected_node_count": 3032,
+      "status": "passed"
+    },
+    {
+      "different_nodes": 0,
+      "graph_id": "land_recovery",
+      "isolated_node_count": 2629,
+      "projected_node_count": 2629,
+      "status": "passed"
+    },
+    {
+      "different_nodes": 0,
+      "graph_id": "welcome_anticipation",
+      "isolated_node_count": 2497,
+      "projected_node_count": 2497,
+      "status": "passed"
+    },
+    {
+      "different_nodes": 0,
+      "graph_id": "inclusive_opening",
+      "isolated_node_count": 1680,
+      "projected_node_count": 1680,
+      "status": "passed"
+    },
+    {
+      "different_nodes": 0,
+      "graph_id": "microphone_welcome",
+      "isolated_node_count": 2298,
+      "projected_node_count": 2298,
+      "status": "passed"
+    },
+    {
+      "different_nodes": 0,
+      "graph_id": "welcome_recovery",
+      "isolated_node_count": 2491,
+      "projected_node_count": 2491,
+      "status": "passed"
+    },
+    {
+      "different_nodes": 0,
+      "graph_id": "announcement_breath",
+      "isolated_node_count": 2219,
+      "projected_node_count": 2219,
+      "status": "passed"
+    },
+    {
+      "different_nodes": 0,
+      "graph_id": "energetic_announcement",
+      "isolated_node_count": 2535,
+      "projected_node_count": 2535,
+      "status": "passed"
+    },
+    {
+      "different_nodes": 0,
+      "graph_id": "participation_cue",
+      "isolated_node_count": 2493,
+      "projected_node_count": 2493,
+      "status": "passed"
+    },
+    {
+      "different_nodes": 0,
+      "graph_id": "ritual_hold",
+      "isolated_node_count": 2318,
+      "projected_node_count": 2318,
+      "status": "passed"
+    },
+    {
+      "different_nodes": 0,
+      "graph_id": "scan_listen",
+      "isolated_node_count": 2487,
+      "projected_node_count": 2487,
+      "status": "passed"
+    },
+    {
+      "different_nodes": 0,
+      "graph_id": "accessibility_check",
+      "isolated_node_count": 2465,
+      "projected_node_count": 2465,
+      "status": "passed"
+    },
+    {
+      "different_nodes": 0,
+      "graph_id": "transition_direction",
+      "isolated_node_count": 2319,
+      "projected_node_count": 2319,
+      "status": "passed"
+    },
+    {
+      "different_nodes": 0,
+      "graph_id": "ready_confirmation",
+      "isolated_node_count": 2268,
+      "projected_node_count": 2268,
+      "status": "passed"
+    },
+    {
+      "different_nodes": 0,
+      "graph_id": "celebration_anticipation",
+      "isolated_node_count": 2406,
+      "projected_node_count": 2406,
+      "status": "passed"
+    },
+    {
+      "different_nodes": 0,
+      "graph_id": "celebration",
+      "isolated_node_count": 1869,
+      "projected_node_count": 1869,
+      "status": "passed"
+    },
+    {
+      "different_nodes": 0,
+      "graph_id": "appreciation",
+      "isolated_node_count": 2199,
+      "projected_node_count": 2199,
+      "status": "passed"
+    },
+    {
+      "different_nodes": 0,
+      "graph_id": "community_sign_off",
+      "isolated_node_count": 1991,
+      "projected_node_count": 1991,
+      "status": "passed"
+    },
+    {
+      "different_nodes": 0,
+      "graph_id": "interaction_open_hand",
+      "isolated_node_count": 2483,
+      "projected_node_count": 2483,
+      "status": "passed"
+    },
+    {
+      "different_nodes": 0,
+      "graph_id": "interaction_closed_hand",
+      "isolated_node_count": 2468,
+      "projected_node_count": 2468,
+      "status": "passed"
+    },
+    {
+      "different_nodes": 0,
+      "graph_id": "interaction_fist",
+      "isolated_node_count": 2581,
+      "projected_node_count": 2581,
+      "status": "passed"
+    },
+    {
+      "different_nodes": 0,
+      "graph_id": "interaction_reach",
+      "isolated_node_count": 2481,
+      "projected_node_count": 2481,
+      "status": "passed"
+    }
+  ],
+  "failed_count": 0,
+  "isolated_contact_sheet": "evidence/finn-calder/finn-calder-124-isolated-silhouettes.png",
+  "isolated_contact_sheet_sha256": "ebc201cdcc8294848986ee0ee7d08fe7b227886355ac7288222cb6e0640aa697",
+  "projected_contact_sheet": "evidence/finn-calder/finn-calder-124-pixel-graph-renders.png",
+  "projected_contact_sheet_sha256": "ebc201cdcc8294848986ee0ee7d08fe7b227886355ac7288222cb6e0640aa697",
+  "schema_version": 1
+}

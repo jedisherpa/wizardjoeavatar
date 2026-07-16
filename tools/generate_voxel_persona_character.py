@@ -69,6 +69,19 @@ def _pose_sheet_name(profile: Mapping[str, Any], pose: Mapping[str, Any]) -> str
     return str(overrides.get(requested, requested))
 
 
+def _is_full_body_graph(source: Mapping[str, Any]) -> bool:
+    """Return whether an isolated cell is eligible for live animation."""
+    return str(source.get("graph_kind", "full_body_graph")) == "full_body_graph"
+
+
+def _audit_only_sources(profile: Mapping[str, Any]) -> list[Mapping[str, Any]]:
+    """Reference and close-feature cells are retained but never pose-capable."""
+    return [
+        *profile.get("reference_cells", ()),
+        *(pose for pose in profile["poses"] if not _is_full_body_graph(pose)),
+    ]
+
+
 def _panel(sheet: Path, columns: int, rows: int, index: int, gutter: int) -> Image.Image:
     image = Image.open(sheet).convert("RGB")
     column = index % columns
@@ -149,7 +162,13 @@ def _subject_rgba(panel: Image.Image, extraction: Mapping[str, Any]) -> Image.Im
     y1 = min(panel.height, int(ys.max()) + margin + 1)
     rgba = panel.convert("RGBA")
     rgba.putalpha(Image.fromarray(mask.astype(np.uint8) * 255))
-    return rgba.crop((x0, y0, x1, y1))
+    cropped = rgba.crop((x0, y0, x1, y1))
+    # Clear RGB values behind transparent pixels before Lanczos scaling. This
+    # prevents worksheet blue, grid, floor, and contact-shadow colors from
+    # bleeding into otherwise transparent silhouette edges.
+    transparent = Image.new("RGBA", cropped.size, (0, 0, 0, 0))
+    transparent.alpha_composite(cropped)
+    return transparent
 
 
 def _largest_component(mask: np.ndarray) -> np.ndarray:
@@ -340,6 +359,8 @@ def pose_payload(profile: Mapping[str, Any]) -> dict[str, Any]:
     poses = []
     seen: set[str] = set()
     for raw_pose in profile["poses"]:
+        if not _is_full_body_graph(raw_pose):
+            continue
         pose_id = str(raw_pose["id"])
         if pose_id in seen:
             raise ValueError("duplicate pose id: {}".format(pose_id))
@@ -394,7 +415,10 @@ def extraction_audit_payload(
             for pose in generated_pose_payload["poses"]
         ),
     ]
-    source_cells = [*profile.get("reference_cells", ()), *profile["poses"]]
+    source_cells = [
+        *_audit_only_sources(profile),
+        *(pose for pose in profile["poses"] if _is_full_body_graph(pose)),
+    ]
     if len(generated_graphs) != len(source_cells):
         raise ValueError("pixel graph extraction and audit item counts differ")
     items = []
@@ -416,13 +440,19 @@ def extraction_audit_payload(
                 "source_cell": "{}#panel-{}".format(sheet_name, raw_pose["index"]),
                 "source_worksheet_sha256": digest_bytes((worksheet_dir / sheet_name).read_bytes()),
                 "background_removed": True,
+                "removed_environment_components": [
+                    "worksheet_background",
+                    "grid",
+                    "floor",
+                    "contact_shadow",
+                ],
                 "isolation_method": "largest_connected_warm_subject_mask",
                 "runtime_format": "colored_pixel_nodes_json",
                 "runtime_asset": (
                     "{}_pixel_graphs.json#graph={}".format(
                         profile["output_prefix"], graph["id"]
                     )
-                    if ordinal < len(profile.get("reference_cells", ()))
+                    if ordinal < len(pixel_graphs["graphs"])
                     else "{}_pose_cells.json#pose={}".format(
                         profile["output_prefix"], graph["id"]
                     )
@@ -463,10 +493,10 @@ def pixel_graph_payload(
     profile: Mapping[str, Any],
     generated_pose_payload: Mapping[str, Any],
 ) -> dict[str, Any]:
-    """Store all 124 isolated worksheet cells as transparent color nodes."""
+    """Store audit-only identity/feature cells as transparent color nodes."""
     graphs = []
     seen: set[str] = set()
-    for raw_cell in profile.get("reference_cells", ()):
+    for raw_cell in _audit_only_sources(profile):
         graph_id = str(raw_cell["id"])
         if graph_id in seen:
             raise ValueError("duplicate pixel graph id: {}".format(graph_id))
@@ -563,6 +593,7 @@ def manifest_payload(
         "origin": profile["canonical"],
         "attachment_points": profile["attachment_points"],
         "derivation": {
+            "generation_profile": str(profile_path.relative_to(ROOT)),
             "original_reference": refs["original_reference"],
             "canonical_reference": refs["canonical_reference"],
             "approved_worksheets": refs["worksheets_dir"],

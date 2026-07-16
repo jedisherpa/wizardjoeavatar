@@ -83,6 +83,11 @@ class ProceduralWizardFrameSource:
         self.controller = WizardAvatarController(
             self.pose_ids,
             self.character_package.character_id,
+            (
+                self.direct_cell_runtime_profile.action_poses
+                if self.direct_cell_runtime_profile is not None
+                else ()
+            ),
         )
         self.frame_index = 0
         self._prev_encoded_frame: Optional[bytes] = None

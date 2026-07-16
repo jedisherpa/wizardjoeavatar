@@ -11,6 +11,7 @@ DEFINITIONS_DIR = Path(__file__).with_name("definitions")
 WIZARD_JOE_PACKAGE_PATH = DEFINITIONS_DIR / "wizard_joe_character_package.json"
 CRYSTAIL_PACKAGE_PATH = DEFINITIONS_DIR / "crystail_character_package.json"
 ORION_VALE_PACKAGE_PATH = DEFINITIONS_DIR / "orion_vale_character_package.json"
+FINN_CALDER_PACKAGE_PATH = DEFINITIONS_DIR / "finn_calder_character_package.json"
 
 
 class CharacterPackageValidationError(ValueError):
@@ -114,6 +115,12 @@ def load_character_package(path: Path = WIZARD_JOE_PACKAGE_PATH) -> CharacterPac
         )
         _validate_extraction_audit(
             raw["character_id"], pose_raw, pixel_graph_raw, audit_raw
+        )
+    if optional_assets["manifest"] is not None:
+        _validate_manifest_hashes(
+            package_path,
+            raw["character_id"],
+            optional_assets,
         )
     return CharacterPackage(
         schema_version=1,
@@ -229,6 +236,97 @@ def _validate_extraction_audit(
             raise CharacterPackageValidationError(
                 "extraction_audit hash differs for graph {}".format(graph_id)
             )
+        if item.get("pixel_node_count") != len(cells):
+            raise CharacterPackageValidationError(
+                "extraction_audit node count differs for graph {}".format(graph_id)
+            )
+        if not cells:
+            raise CharacterPackageValidationError("pixel graph is empty: {}".format(graph_id))
+        expected_bounds = {
+            "left": min(int(cell["x"]) for cell in cells),
+            "top": min(int(cell["y"]) for cell in cells),
+            "right": max(int(cell["x"]) for cell in cells),
+            "bottom": max(int(cell["y"]) for cell in cells),
+        }
+        if item.get("bounds") != expected_bounds:
+            raise CharacterPackageValidationError(
+                "extraction_audit bounds differ for graph {}".format(graph_id)
+            )
+
+
+def _validate_manifest_hashes(
+    package_path: Path,
+    character_id: str,
+    optional_assets: Mapping[str, Optional[Path]],
+) -> None:
+    """Verify generated production assets before runtime animation mapping."""
+    manifest_path = optional_assets["manifest"]
+    if manifest_path is None:  # pragma: no cover - guarded by caller.
+        return
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    if not isinstance(manifest, Mapping) or manifest.get("schema_version") != 1:
+        raise CharacterPackageValidationError("manifest must use schema_version 1")
+    if manifest.get("character_id") != character_id:
+        raise CharacterPackageValidationError("manifest character_id does not match package")
+    hashes = manifest.get("hashes")
+    if not isinstance(hashes, Mapping):
+        raise CharacterPackageValidationError("manifest hashes must be an object")
+    package_raw = json.loads(package_path.read_text(encoding="utf-8"))
+    generated = {
+        "pose_library_sha256": package_path.parent / package_raw["pose_library"],
+        "animation_graph_sha256": package_path.parent / package_raw["animation_graph"],
+        "animation_matrix_sha256": optional_assets["animation_matrix"],
+        "extraction_audit_sha256": optional_assets["extraction_audit"],
+        "pixel_graph_library_sha256": optional_assets["pixel_graph_library"],
+    }
+    for hash_name, asset_path in generated.items():
+        if asset_path is None:
+            continue
+        actual = hashlib.sha256(asset_path.read_bytes()).hexdigest()
+        if hashes.get(hash_name) != actual:
+            raise CharacterPackageValidationError(
+                "manifest hash differs for {}".format(hash_name)
+            )
+    audit_path = optional_assets["extraction_audit"]
+    if audit_path is not None:
+        audit = json.loads(audit_path.read_text(encoding="utf-8"))
+        if hashes.get("extraction_item_count") != audit.get("item_count"):
+            raise CharacterPackageValidationError("manifest extraction count differs")
+    derivation = manifest.get("derivation")
+    if not isinstance(derivation, Mapping):
+        raise CharacterPackageValidationError("manifest derivation must be an object")
+    repository_root = package_path.parent.parent.parent
+    source_assets = {
+        "generation_profile_sha256": derivation.get("generation_profile"),
+        "original_reference_sha256": derivation.get("original_reference"),
+        "canonical_reference_sha256": derivation.get("canonical_reference"),
+    }
+    for hash_name, relative_name in source_assets.items():
+        if relative_name is None and hash_name == "generation_profile_sha256":
+            # Legacy packages did not name their build profile. Their generated
+            # assets are still checked above; new direct-cell packages name it.
+            continue
+        if not isinstance(relative_name, str) or not relative_name:
+            raise CharacterPackageValidationError("manifest source path is invalid")
+        source_path = (repository_root / relative_name).resolve()
+        if repository_root not in source_path.parents or not source_path.is_file():
+            raise CharacterPackageValidationError("manifest source path is outside repository or missing")
+        if hashes.get(hash_name) != hashlib.sha256(source_path.read_bytes()).hexdigest():
+            raise CharacterPackageValidationError("manifest hash differs for {}".format(hash_name))
+    worksheet_hashes = hashes.get("worksheet_sha256")
+    worksheet_dir_name = derivation.get("approved_worksheets")
+    if worksheet_hashes is not None:
+        if not isinstance(worksheet_hashes, Mapping) or not isinstance(worksheet_dir_name, str):
+            raise CharacterPackageValidationError("manifest worksheet hashes are invalid")
+        worksheet_dir = (repository_root / worksheet_dir_name).resolve()
+        if repository_root not in worksheet_dir.parents or not worksheet_dir.is_dir():
+            raise CharacterPackageValidationError("manifest worksheet directory is invalid")
+        for name, expected_hash in worksheet_hashes.items():
+            if not isinstance(name, str) or Path(name).name != name:
+                raise CharacterPackageValidationError("manifest worksheet name is invalid")
+            worksheet = worksheet_dir / name
+            if not worksheet.is_file() or hashlib.sha256(worksheet.read_bytes()).hexdigest() != expected_hash:
+                raise CharacterPackageValidationError("manifest hash differs for worksheet {}".format(name))
 
 
 __all__ = [
@@ -237,5 +335,6 @@ __all__ = [
     "WIZARD_JOE_PACKAGE_PATH",
     "CRYSTAIL_PACKAGE_PATH",
     "ORION_VALE_PACKAGE_PATH",
+    "FINN_CALDER_PACKAGE_PATH",
     "load_character_package",
 ]

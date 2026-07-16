@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "character_id": "finn-calder-v1",
+  "display_name": "Finn Calder",
+  "renderer": "asciline_square_cells",
+  "pose_library": "finn_calder_pose_cells.json",
+  "animation_graph": "finn_calder_animation_graph.json",
+  "runtime_profile": "finn_calder_runtime_profile.json",
+  "manifest": "finn_calder_character_manifest.json",
+  "animation_matrix": "finn_calder_animation_matrix.json",
+  "extraction_audit": "finn_calder_extraction_audit.json",
+  "pixel_graph_library": "finn_calder_pixel_graphs.json",
+  "default_pose_id": "neutral_front",
+  "capabilities": [
+    "ground_locomotion",
+    "eight_direction_turnaround",
+    "actions",
+    "speech_visemes",
+    "full_expression_vocabulary",
+    "procedural_secondary_motion",
+    "pose_showcase",
+    "microphone_interaction",
+    "welcome_crowd",
+    "announce_event",
+    "accessibility_check",
+    "lead_ritual",
+    "celebrate_student_contribution",
+    "supervise_transition",
+    "community_sign_off"
+  ]
+}

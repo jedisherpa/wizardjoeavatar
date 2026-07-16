@@ -1,0 +1,270 @@
+{
+  "asset_set_id": "finn-calder-worksheet-motion-v1",
+  "authored_fps": 24,
+  "clips": [
+    {
+      "clip_id": "finn_idle",
+      "loop": true,
+      "samples": [
+        {
+          "pose_id": "idle_relaxed",
+          "tick": 0
+        },
+        {
+          "pose_id": "idle_attentive",
+          "tick": 20
+        },
+        {
+          "pose_id": "idle_listening",
+          "tick": 40
+        }
+      ]
+    },
+    {
+      "clip_id": "finn_walk",
+      "loop": true,
+      "samples": [
+        {
+          "pose_id": "walk_contact_left",
+          "tick": 0
+        },
+        {
+          "pose_id": "walk_passing_left",
+          "tick": 7
+        },
+        {
+          "pose_id": "walk_contact_right",
+          "tick": 14
+        },
+        {
+          "pose_id": "walk_passing_right",
+          "tick": 21
+        }
+      ]
+    },
+    {
+      "clip_id": "finn_run",
+      "loop": true,
+      "samples": [
+        {
+          "pose_id": "run_reach",
+          "tick": 0
+        },
+        {
+          "pose_id": "run_drive",
+          "tick": 7
+        }
+      ]
+    },
+    {
+      "clip_id": "finn_jump_land",
+      "loop": false,
+      "samples": [
+        {
+          "pose_id": "jump_anticipation",
+          "tick": 0
+        },
+        {
+          "pose_id": "jump_airborne",
+          "tick": 6
+        },
+        {
+          "pose_id": "fall",
+          "tick": 12
+        },
+        {
+          "pose_id": "land_contact",
+          "tick": 18
+        },
+        {
+          "pose_id": "land_recovery",
+          "tick": 24
+        }
+      ]
+    },
+    {
+      "clip_id": "finn_conversation",
+      "loop": true,
+      "samples": [
+        {
+          "pose_id": "scan_listen",
+          "tick": 0
+        },
+        {
+          "pose_id": "microphone_welcome",
+          "tick": 18
+        },
+        {
+          "pose_id": "accessibility_check",
+          "tick": 36
+        },
+        {
+          "pose_id": "ready_confirmation",
+          "tick": 54
+        }
+      ]
+    },
+    {
+      "clip_id": "finn_welcome",
+      "loop": false,
+      "samples": [
+        {
+          "pose_id": "welcome_anticipation",
+          "tick": 0
+        },
+        {
+          "pose_id": "inclusive_opening",
+          "tick": 12
+        },
+        {
+          "pose_id": "microphone_welcome",
+          "tick": 24
+        },
+        {
+          "pose_id": "welcome_recovery",
+          "tick": 36
+        }
+      ]
+    },
+    {
+      "clip_id": "finn_announcement",
+      "loop": false,
+      "samples": [
+        {
+          "pose_id": "announcement_breath",
+          "tick": 0
+        },
+        {
+          "pose_id": "energetic_announcement",
+          "tick": 12
+        },
+        {
+          "pose_id": "participation_cue",
+          "tick": 24
+        },
+        {
+          "pose_id": "ritual_hold",
+          "tick": 36
+        }
+      ]
+    },
+    {
+      "clip_id": "finn_accessibility_transition",
+      "loop": false,
+      "samples": [
+        {
+          "pose_id": "scan_listen",
+          "tick": 0
+        },
+        {
+          "pose_id": "accessibility_check",
+          "tick": 14
+        },
+        {
+          "pose_id": "transition_direction",
+          "tick": 28
+        },
+        {
+          "pose_id": "ready_confirmation",
+          "tick": 42
+        }
+      ]
+    },
+    {
+      "clip_id": "finn_celebration_sign_off",
+      "loop": false,
+      "samples": [
+        {
+          "pose_id": "celebration_anticipation",
+          "tick": 0
+        },
+        {
+          "pose_id": "celebration",
+          "tick": 12
+        },
+        {
+          "pose_id": "appreciation",
+          "tick": 24
+        },
+        {
+          "pose_id": "community_sign_off",
+          "tick": 36
+        }
+      ]
+    },
+    {
+      "clip_id": "finn_hand_interactions",
+      "loop": false,
+      "samples": [
+        {
+          "pose_id": "interaction_open_hand",
+          "tick": 0
+        },
+        {
+          "pose_id": "interaction_closed_hand",
+          "tick": 10
+        },
+        {
+          "pose_id": "interaction_fist",
+          "tick": 20
+        },
+        {
+          "pose_id": "interaction_reach",
+          "tick": 30
+        }
+      ]
+    },
+    {
+      "clip_id": "finn_turnaround",
+      "loop": true,
+      "samples": [
+        {
+          "pose_id": "neutral_front",
+          "tick": 0
+        },
+        {
+          "pose_id": "neutral_three_quarter_left",
+          "tick": 12
+        },
+        {
+          "pose_id": "neutral_left_profile",
+          "tick": 24
+        },
+        {
+          "pose_id": "neutral_back_three_quarter_left",
+          "tick": 36
+        },
+        {
+          "pose_id": "neutral_back",
+          "tick": 48
+        },
+        {
+          "pose_id": "neutral_back_three_quarter_right",
+          "tick": 60
+        },
+        {
+          "pose_id": "neutral_right_profile",
+          "tick": 72
+        },
+        {
+          "pose_id": "neutral_three_quarter_right",
+          "tick": 84
+        }
+      ]
+    }
+  ],
+  "default_node_id": "idle",
+  "motion_profile": {
+    "principles": [
+      "clear_anticipation",
+      "broad_welcoming_arcs",
+      "rhythmic_microphone_motion",
+      "quick_audience_checks",
+      "stable_action_beats",
+      "responsible_recovery"
+    ],
+    "quality": "energetic_inclusive_event_host_performance"
+  },
+  "schema_version": 2,
+  "simulation_hz": 60
+}

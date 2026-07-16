@@ -6,7 +6,7 @@ from typing import Any, Dict, Iterable, Optional, Tuple
 from .commanding import CommandEnvelopeV1
 from .control import ControlArbiter, ControlIntentV1
 from .expressions import expression_mouth
-from .gestures import channels_for_action, validate_action
+from .gestures import ACTION_TO_CHANNELS, channels_for_action
 from .locomotion import LocomotionController, SIMULATION_DT
 from .models import CommandResult, DIRECTIONS, EXPRESSIONS, WizardCommand, WizardState
 from .mouth import validate_mouth_shape
@@ -22,6 +22,7 @@ class WizardAvatarController:
         self,
         available_pose_ids: Optional[Iterable[str]] = None,
         character_id: str = "asciline-wizard-v1",
+        additional_actions: Optional[Iterable[str]] = None,
     ) -> None:
         self.available_pose_ids = tuple(
             available_pose_ids if available_pose_ids is not None else reference_pose_ids()
@@ -29,6 +30,8 @@ class WizardAvatarController:
         if not self.available_pose_ids:
             raise ValueError("available_pose_ids must not be empty")
         self.character_id = character_id
+        self.additional_actions = tuple(additional_actions or ())
+        self.available_actions = frozenset((*ACTION_TO_CHANNELS, *self.additional_actions))
         self.state = WizardState(character_id=character_id)
         self.locomotion = LocomotionController()
         self.control_arbiter = ControlArbiter()
@@ -108,7 +111,8 @@ class WizardAvatarController:
                 self._set_action("idle", 0)
 
     def _set_action(self, action: str, duration_ms: int) -> None:
-        validate_action(action)
+        if action not in self.available_actions:
+            raise ValueError(f"Unsupported action: {action}")
         if action == "containment":
             self.state.speech_id = None
             self.state.speech_text = None
@@ -123,7 +127,11 @@ class WizardAvatarController:
             }
         elif action != "reaction":
             self.state.action_restore = None
-        upper, staff = channels_for_action(action)
+        upper, staff = (
+            channels_for_action(action)
+            if action in ACTION_TO_CHANNELS
+            else ("none", "held")
+        )
         self.state.action = action
         self.state.upper_body_action = upper
         self.state.staff_state = staff
@@ -355,7 +363,7 @@ class WizardAvatarController:
         self._set_action("idle", 0)
 
     def _cmd_reset(self, payload: Dict[str, Any]) -> None:
-        self.__init__(self.available_pose_ids, self.character_id)
+        self.__init__(self.available_pose_ids, self.character_id, self.additional_actions)
 
     def _step_flight(self, ascend: float, mobility_request: str) -> None:
         if mobility_request == "takeoff" and not self.state.airborne:

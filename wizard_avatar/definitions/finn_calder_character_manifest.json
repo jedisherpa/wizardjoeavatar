@@ -1,0 +1,89 @@
+{
+  "attachment_points": [
+    "mouth",
+    "left_eye",
+    "right_eye",
+    "left_hand",
+    "right_hand",
+    "left_foot",
+    "right_foot",
+    "microphone"
+  ],
+  "character_id": "finn-calder-v1",
+  "derivation": {
+    "approved_worksheets": "assets/reference/personas/finn-calder/canonical-worksheets",
+    "canonical_reference": "assets/reference/personas/finn-calder/canonical-voxel.png",
+    "flattened_runtime_dependency": false,
+    "generation_profile": "assets/reference/personas/finn-calder/generation-profile.json",
+    "original_reference": "assets/reference/personas/finn-calder/source-reference.png",
+    "runtime_art": "deterministic worksheet-derived direct cell library"
+  },
+  "display_name": "Finn Calder",
+  "hashes": {
+    "animation_graph_sha256": "10281562cad9ac8a9eb06e2858200afc06e6d23182090f6898f1a151045b9d8e",
+    "animation_matrix_sha256": "85fafb750ad98171f9a95d945e759fcca7ac1b7f33e1e1c99bfd044b9f779d6e",
+    "canonical_reference_sha256": "efac69875fe2b0c38dafe20d3669af2ed97da98b320dc703f41a1c2f9ea9f385",
+    "extraction_audit_sha256": "187e2da425aa94c23fea435b8b13410f70b353683815c737c3992002ebe8e3b1",
+    "extraction_item_count": 124,
+    "generation_profile_sha256": "df7dcb08bebdb9afca582f9283374c4faf7f8eae0ad49107489724cb4dc7314d",
+    "original_reference_sha256": "64a602fe7dc96684738a4e7d7728465eefde2d6071b11d555cf05b1e05b12c37",
+    "pixel_graph_library_sha256": "b7b30136743f45d96c17a2252ea53e034022cebd2e2110bd8f275f4ef48512b9",
+    "pose_library_sha256": "0532ee7e7449ed78b1bf910e06db6f331506250397d264a043c1b702c88db833",
+    "worksheet_sha256": {
+      "01-identity-sheet-approved-v1.png": "4457fd834b64c2cc1440fa1317f52df11c91d2bddab10a45895af8d4c1641724",
+      "02-turnaround-sheet-approved-v1.png": "e5ef341fd92ef0c548aadb88b6235eed572592bec37ff51283e008367f317c49",
+      "03-neutral-base-poses-approved-v1.png": "4da98de07a151b0a6160d9f32d1dcb8c21a07db291d41ef9c05656ad132a095d",
+      "04-expression-sheet-approved-v1.png": "bad740bfbe09d6d544daf46f581ef857fce4c681e31cb48c394eb692007f57a0",
+      "05-speech-viseme-sheet-approved-v2.png": "ff68617c922f354157ee3f1af886add72a6cb1b102460f18b7854a30f5c23739",
+      "06-hand-prop-sheet-approved-v1.png": "17ec0c04a93119b560bb7677102c06bfafc69b8e64c7eea406ecf78627681f8b",
+      "07-ground-motion-sheet-approved-v1.png": "d6a7dcae3381f3ba43aba20ab9bf1a2cfe483dbef6b5bbe3fd4f2f0cf33938e2",
+      "08-signature-actions-sheet-approved-v1.png": "e3f230896a6ce28b894cd19d4dcddcd3877bcdb059b9ec1746c4a9f54d309311",
+      "09-interaction-poses-approved-v1.png": "5cfc3a6ad3bbb158321363145207ad94f2472aa56d0f3d4ead6a284e52ea1c9f"
+    }
+  },
+  "identity_lock": {
+    "articulated": [
+      "eyelids",
+      "mouth",
+      "neck",
+      "shoulders",
+      "elbows",
+      "wrists",
+      "hands",
+      "hips",
+      "knees",
+      "ankles"
+    ],
+    "default_prop": "microphone",
+    "immutable": [
+      "bright lime-green stepped rectangular alien head",
+      "two huge symmetrical black stepped eye masses without sclera",
+      "two tiny square black nostrils",
+      "short horizontal black block mouth",
+      "saturated orange tailored jacket with broad stepped lapels",
+      "black shirt opening and pocket accents",
+      "orange trousers",
+      "black belt with silver rectangular buckle",
+      "lime four-pronged block hands",
+      "chunky black stepped shoes",
+      "silver-and-black microphone in the right hand"
+    ],
+    "personality": "energetic inclusive socially alert rhythmic playful responsible event host"
+  },
+  "origin": {
+    "baseline_y": 91,
+    "cols": 72,
+    "root_anchor": [
+      36,
+      91
+    ],
+    "rows": 96,
+    "safe_inset": {
+      "bottom": 4,
+      "left": 4,
+      "right": 4,
+      "top": 4
+    }
+  },
+  "schema_version": 1
+}
