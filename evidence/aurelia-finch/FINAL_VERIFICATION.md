@@ -38,9 +38,12 @@ Evidence:
 - Manifest: `c08212ac840ca9eda60add3a6c38ebe60a1d8354c93473bb6a5caa687ba526eb`.
 
 Package tests prove rejection of post-audit graph tampering and independent
-tampering of the original reference, canonical voxel reference, or any accepted
-worksheet. Load-time validation checks those full provenance hashes, exact
-count, per-item hash/count/bounds, canonical safety bounds, and RGB values.
+tampering of the generation profile, original reference, canonical voxel
+reference, character package, runtime profile, every generated library, or any
+of the nine accepted worksheets. Load-time validation checks that full
+provenance, requires the worksheet set to equal the 124-item extraction audit,
+and enforces exact count, per-item hash/count/bounds, canonical safety bounds,
+and RGB values.
 
 ## Runtime and API verification
 
@@ -55,7 +58,7 @@ count, per-item hash/count/bounds, canonical safety bounds, and RGB values.
 
 - Deterministic generation: pass, `Aurelia Finch generated assets are deterministic`.
 - Focused suite: 13 passed, 0 failed, 0 skipped.
-- Full suite: 174 passed in 110.682 seconds, 0 failed, 0 skipped.
+- Full suite: 174 passed in 112.653 seconds, 0 failed, 0 skipped.
 - Production Python scope: 50 files scanned, 0 violations.
 - Strict animation quality: 32/32 scenarios passed, 0 issues.
 - `git diff --check`: pass.

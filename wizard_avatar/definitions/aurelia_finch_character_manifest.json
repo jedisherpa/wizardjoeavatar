@@ -14,6 +14,7 @@
     "approved_worksheets": "assets/reference/personas/aurelia-finch/canonical-worksheets",
     "canonical_reference": "assets/reference/personas/aurelia-finch/canonical-voxel.png",
     "flattened_runtime_dependency": false,
+    "generation_profile": "assets/reference/personas/aurelia-finch/generation-profile.json",
     "original_reference": "assets/reference/personas/aurelia-finch/source-reference.png",
     "runtime_art": "deterministic worksheet-derived direct cell library"
   },

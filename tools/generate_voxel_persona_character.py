@@ -611,6 +611,7 @@ def manifest_payload(
         "origin": profile["canonical"],
         "attachment_points": profile["attachment_points"],
         "derivation": {
+            "generation_profile": str(profile_path.resolve().relative_to(ROOT)),
             "original_reference": refs["original_reference"],
             "canonical_reference": refs["canonical_reference"],
             "approved_worksheets": refs["worksheets_dir"],

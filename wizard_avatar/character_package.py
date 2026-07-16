@@ -225,6 +225,8 @@ def _validate_extraction_audit(
     }
     if set(graph_by_id) != set(item_by_id) or audit_raw.get("item_count") != len(graph_by_id):
         raise CharacterPackageValidationError("extraction_audit does not cover every pixel graph")
+    if len(graph_by_id) != 124:
+        raise CharacterPackageValidationError("direct-cell extraction must contain exactly 124 graphs")
     for graph_id, graph in graph_by_id.items():
         item = item_by_id[graph_id]
         if item.get("background_removed") is not True:
@@ -301,6 +303,13 @@ def _validate_direct_cell_manifest(
         raise CharacterPackageValidationError("direct-cell manifest must cover exactly 124 cells")
 
     repository_root = package_path.parents[2]
+    generation_profile = _repository_asset(
+        repository_root, derivation.get("generation_profile"), "generation_profile"
+    )
+    if hashes.get("generation_profile_sha256") != hashlib.sha256(
+        generation_profile.read_bytes()
+    ).hexdigest():
+        raise CharacterPackageValidationError("manifest hash differs for generation_profile")
     for source_name, hash_name in (
         ("original_reference", "original_reference_sha256"),
         ("canonical_reference", "canonical_reference_sha256"),
@@ -314,6 +323,15 @@ def _validate_direct_cell_manifest(
     worksheet_hashes = hashes.get("worksheet_sha256")
     if not isinstance(worksheet_hashes, Mapping) or not worksheet_hashes:
         raise CharacterPackageValidationError("manifest accepted worksheet hashes are absent")
+    audited_worksheets = {
+        str(item.get("source_sheet"))
+        for item in audit_raw.get("items", ())
+        if isinstance(item, Mapping) and isinstance(item.get("source_sheet"), str)
+    }
+    if set(map(str, worksheet_hashes)) != audited_worksheets:
+        raise CharacterPackageValidationError(
+            "manifest accepted worksheets differ from extraction audit"
+        )
     for filename, expected_hash in worksheet_hashes.items():
         worksheet = (worksheet_dir / str(filename)).resolve()
         if worksheet_dir not in worksheet.parents or not worksheet.is_file():

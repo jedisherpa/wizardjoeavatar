@@ -202,13 +202,27 @@ class AureliaFinchCharacterTests(unittest.TestCase):
                 load_character_package(AURELIA_FINCH_PACKAGE_PATH)
 
     def test_package_rejects_source_canonical_and_worksheet_lineage_tampering(self):
-        targets = (
+        manifest = json.loads(
+            (DEFINITIONS / "aurelia_finch_character_manifest.json").read_text()
+        )
+        targets = [
+            (PROFILE, "generation_profile"),
             (PERSONA / "source-reference.png", "original_reference"),
             (PERSONA / "canonical-voxel.png", "canonical_reference"),
+            (AURELIA_FINCH_PACKAGE_PATH, "manifest hash differs"),
+            (DEFINITIONS / "aurelia_finch_runtime_profile.json", "manifest hash differs"),
+            (DEFINITIONS / "aurelia_finch_pose_cells.json", "manifest hash differs"),
+            (DEFINITIONS / "aurelia_finch_animation_graph.json", "manifest hash differs"),
+            (DEFINITIONS / "aurelia_finch_animation_matrix.json", "manifest hash differs"),
+            (DEFINITIONS / "aurelia_finch_extraction_audit.json", "manifest hash differs"),
+            (DEFINITIONS / "aurelia_finch_pixel_graphs.json", "manifest hash differs"),
+        ]
+        targets.extend(
             (
-                PERSONA / "canonical-worksheets/08-signature-actions-sheet-candidate-v2.png",
+                PERSONA / "canonical-worksheets" / filename,
                 "accepted worksheet",
-            ),
+            )
+            for filename in manifest["hashes"]["worksheet_sha256"]
         )
         original = Path.read_bytes
         for target, expected_message in targets:
