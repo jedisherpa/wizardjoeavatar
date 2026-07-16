@@ -25,6 +25,13 @@ ACTION_TO_CHANNELS = {
     "journal_hold": ("none", "rest"),
     "journal_write": ("none", "rest"),
     "journal_page_turn": ("none", "rest"),
+    "define_standard": ("explain", "rest"),
+    "inspect_evidence": ("think", "rest"),
+    "compare_rubric": ("think", "rest"),
+    "flag_gap": ("point", "point"),
+    "compliance_review": ("think", "rest"),
+    "issue_measured_result": ("explain", "rest"),
+    "document_exception": ("point", "rest"),
 }
 
 

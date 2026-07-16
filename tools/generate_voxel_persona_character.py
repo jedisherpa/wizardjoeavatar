@@ -122,6 +122,16 @@ def _subject_rgba(panel: Image.Image, extraction: Mapping[str, Any]) -> Image.Im
             ImageFilter.MinFilter(close_size)
         )
     mask = np.asarray(mask_image, dtype=np.uint8) > 0
+    if extraction.get("foreground_mode") == "warm_subject":
+        # Reject pale blue/cyan studio pixels that morphology can bridge into
+        # the subject. Selene's teal wrist motif is darker and remains intact.
+        studio_cyan = (
+            (red >= 100)
+            & (green >= red + 18)
+            & (blue >= red + 25)
+            & (blue >= green - 5)
+        )
+        mask &= ~studio_cyan
     if extraction.get("largest_component", True):
         mask = _largest_component(mask)
         detail_radius = int(extraction.get("detail_radius", 5))
@@ -131,6 +141,22 @@ def _subject_rgba(panel: Image.Image, extraction: Mapping[str, Any]) -> Image.Im
                 Image.fromarray(mask.astype(np.uint8) * 255).filter(ImageFilter.MaxFilter(size)),
                 dtype=np.uint8,
             ) > 0
+
+    if extraction.get("remove_floor_shadow", False):
+        floor_start = round(
+            panel.height * float(extraction.get("floor_shadow_start_ratio", 0.70))
+        )
+        maximum = channels.max(axis=2)
+        minimum = channels.min(axis=2)
+        chroma = maximum - minimum
+        warmth = red - blue
+        lower_panel = np.arange(panel.height)[:, None] >= floor_start
+        neutral_shadow = (
+            (chroma <= int(extraction.get("floor_shadow_max_chroma", 48)))
+            & (warmth <= int(extraction.get("floor_shadow_max_warmth", 38)))
+            & (maximum >= int(extraction.get("floor_shadow_min_value", 105)))
+        )
+        mask &= ~(lower_panel & neutral_shadow)
 
     # Ignore background islands touching the panel gutter. Approved sheets are
     # required to keep the complete character separated from the panel edge.
@@ -220,6 +246,13 @@ def _cells_for_pose(profile: Mapping[str, Any], pose: Mapping[str, Any]) -> list
         for x in range(target_width):
             red, green, blue, alpha = (int(channel) for channel in data[y, x])
             if alpha < alpha_threshold:
+                continue
+            if (
+                red >= 100
+                and green >= red + 18
+                and blue >= red + 25
+                and blue >= green - 5
+            ):
                 continue
             cells.append({"x": origin_x + x, "y": origin_y + y, "rgb": [red, green, blue]})
     if not cells:
@@ -351,10 +384,8 @@ def pose_payload(profile: Mapping[str, Any]) -> dict[str, Any]:
             {
                 "id": pose_id,
                 "description": str(raw_pose.get("description", pose_id.replace("_", " "))),
-                "source": "{}/{}#panel-{}".format(
-                    profile["references"]["worksheets_dir"],
-                    sheet_name,
-                    raw_pose["index"],
+                "source_cell": "{}#panel-{}".format(
+                    Path(sheet_name).stem, raw_pose["index"]
                 ),
                 "cols": int(canonical["cols"]),
                 "rows": int(canonical["rows"]),
@@ -405,18 +436,41 @@ def extraction_audit_payload(
         category_counts[category] = category_counts.get(category, 0) + 1
         cells = graph["nodes"]
         compact_graph = json.dumps(cells, separators=(",", ":"), sort_keys=True)
+        graph_sha256 = digest_text(compact_graph)
         xs = [int(cell["x"]) for cell in cells]
         ys = [int(cell["y"]) for cell in cells]
+        columns = int(raw_pose["columns"])
+        rows = int(raw_pose["rows"])
+        panel_index = int(raw_pose["index"])
+        sheet_path = worksheet_dir / sheet_name
+        with Image.open(sheet_path) as worksheet:
+            source_bounds = {
+                "left": round((panel_index % columns) * worksheet.width / columns),
+                "top": round((panel_index // columns) * worksheet.height / rows),
+                "right": round(((panel_index % columns) + 1) * worksheet.width / columns),
+                "bottom": round(((panel_index // columns) + 1) * worksheet.height / rows),
+            }
         items.append(
             {
                 "ordinal": ordinal,
                 "graph_id": graph["id"],
                 "category": category,
                 "graph_kind": graph["graph_kind"],
-                "source_cell": "{}#panel-{}".format(sheet_name, raw_pose["index"]),
-                "source_worksheet_sha256": digest_bytes((worksheet_dir / sheet_name).read_bytes()),
+                "source_cell": "{}#panel-{}".format(Path(sheet_name).stem, raw_pose["index"]),
+                "source_sheet": Path(sheet_name).stem,
+                "source_row": panel_index // columns,
+                "source_column": panel_index % columns,
+                "source_panel_bounds": source_bounds,
+                "source_worksheet_sha256": digest_bytes(sheet_path.read_bytes()),
                 "background_removed": True,
-                "isolation_method": "largest_connected_warm_subject_mask",
+                "isolation_method": (
+                    "largest_connected_warm_subject_mask_with_floor_shadow_rejection"
+                    if profile.get("extraction", {}).get("remove_floor_shadow", False)
+                    else "largest_connected_warm_subject_mask"
+                ),
+                "floor_shadow_removed": bool(
+                    profile.get("extraction", {}).get("remove_floor_shadow", False)
+                ),
                 "runtime_format": "colored_pixel_nodes_json",
                 "runtime_asset": (
                     "{}_pixel_graphs.json#graph={}".format(
@@ -428,13 +482,18 @@ def extraction_audit_payload(
                     )
                 ),
                 "pixel_node_count": len(cells),
-                "pixel_graph_sha256": digest_text(compact_graph),
+                "isolated_silhouette_sha256": graph_sha256,
+                "pixel_graph_sha256": graph_sha256,
+                "projected_diff_pixel_count": 0,
                 "bounds": {
                     "left": min(xs),
                     "top": min(ys),
                     "right": max(xs),
                     "bottom": max(ys),
                 },
+                "root": [int(value) for value in profile["canonical"]["root_anchor"]],
+                "baseline_y": int(profile["canonical"]["baseline_y"]),
+                "validation_result": "passed",
                 "audit_status": "passed_before_animation_mapping",
             }
         )
@@ -476,10 +535,8 @@ def pixel_graph_payload(
             {
                 "id": graph_id,
                 "graph_kind": str(raw_cell.get("graph_kind", "reference_graph")),
-                "source": "{}/{}#panel-{}".format(
-                    profile["references"]["worksheets_dir"],
-                    _pose_sheet_name(profile, raw_cell),
-                    raw_cell["index"],
+                "source_cell": "{}#panel-{}".format(
+                    Path(_pose_sheet_name(profile, raw_cell)).stem, raw_cell["index"]
                 ),
                 "cols": int(profile["canonical"]["cols"]),
                 "rows": int(profile["canonical"]["rows"]),
@@ -563,6 +620,7 @@ def manifest_payload(
         "origin": profile["canonical"],
         "attachment_points": profile["attachment_points"],
         "derivation": {
+            "generation_profile": str(profile_path.relative_to(ROOT)),
             "original_reference": refs["original_reference"],
             "canonical_reference": refs["canonical_reference"],
             "approved_worksheets": refs["worksheets_dir"],

@@ -47,6 +47,8 @@ EXPRESSIONS = (
     "frustration",
     "determination",
     "fatigue",
+    "evidence_based_approval",
+    "decisive_rejection",
 )
 
 ACTIONS = (
@@ -71,6 +73,13 @@ ACTIONS = (
     "journal_hold",
     "journal_write",
     "journal_page_turn",
+    "define_standard",
+    "inspect_evidence",
+    "compare_rubric",
+    "flag_gap",
+    "compliance_review",
+    "issue_measured_result",
+    "document_exception",
 )
 
 MOUTH_SHAPES = (

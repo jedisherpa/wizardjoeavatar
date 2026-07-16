@@ -12,3 +12,6 @@ Performance: precise, calm, unsentimental, and fair. Use controlled clipboard ch
 
 Signature actions: define standard, inspect evidence, compare rubric, flag gap, compliance review, issue measured result, and document exception.
 
+## Production verification
+
+The direct-cell runtime implementation and its exact acceptance evidence are documented in [FINAL_VERIFICATION.md](../../../evidence/selene-hart/FINAL_VERIFICATION.md).

@@ -16,7 +16,10 @@
     "brow_right": "tilt",
     "eyes": "side",
     "mouth": "closed",
-    "head_offset": [0, 0]
+    "head_offset": [
+      0,
+      0
+    ]
   },
   "surprised": {
     "brow_left": "up",
@@ -60,25 +63,142 @@
     "eyes": "open",
     "mouth": "open_small"
   },
-  "calm": {"brow_left": "level", "brow_right": "level", "eyes": "soft", "mouth": "closed"},
-  "joy": {"brow_left": "soft_up", "brow_right": "soft_up", "eyes": "bright", "mouth": "smile"},
-  "contemplation": {"brow_left": "level", "brow_right": "tilt", "eyes": "side", "mouth": "breath_pause"},
-  "concern": {"brow_left": "pinched", "brow_right": "pinched", "eyes": "open", "mouth": "frown"},
-  "excitement": {"brow_left": "up", "brow_right": "up", "eyes": "wide", "mouth": "wide_vowel"},
-  "curiosity": {"brow_left": "tilt", "brow_right": "soft_up", "eyes": "side", "mouth": "slightly_open"},
-  "compassion": {"brow_left": "soft_up", "brow_right": "soft_up", "eyes": "soft", "mouth": "smile"},
-  "confusion": {"brow_left": "up", "brow_right": "down", "eyes": "side", "mouth": "rounded_vowel"},
-  "sadness": {"brow_left": "pinched", "brow_right": "pinched", "eyes": "soft", "mouth": "frown"},
-  "shame": {"brow_left": "down", "brow_right": "down", "eyes": "down", "mouth": "closed"},
-  "embarrassment": {"brow_left": "soft_up", "brow_right": "soft_up", "eyes": "down", "mouth": "breath_pause"},
-  "fear": {"brow_left": "up", "brow_right": "up", "eyes": "wide", "mouth": "open_vowel"},
-  "anxiety": {"brow_left": "pinched", "brow_right": "pinched", "eyes": "wide", "mouth": "slightly_open"},
-  "anger": {"brow_left": "down", "brow_right": "down", "eyes": "open", "mouth": "frown_speaking"},
-  "frustration": {"brow_left": "down", "brow_right": "down", "eyes": "squint", "mouth": "frown"},
-  "determination": {"brow_left": "down", "brow_right": "down", "eyes": "bright", "mouth": "closed"},
-  "fatigue": {"brow_left": "level", "brow_right": "level", "eyes": "squint", "mouth": "breath_pause"}
-  ,"amusement": {"brow_left": "tilt", "brow_right": "soft_up", "eyes": "squint", "mouth": "smile"}
-  ,"confidence": {"brow_left": "down", "brow_right": "level", "eyes": "bright", "mouth": "smile"}
-  ,"skepticism": {"brow_left": "up", "brow_right": "down", "eyes": "side", "mouth": "frown"}
-  ,"surprise": {"brow_left": "up", "brow_right": "up", "eyes": "wide", "mouth": "open_wide"}
+  "calm": {
+    "brow_left": "level",
+    "brow_right": "level",
+    "eyes": "soft",
+    "mouth": "closed"
+  },
+  "joy": {
+    "brow_left": "soft_up",
+    "brow_right": "soft_up",
+    "eyes": "bright",
+    "mouth": "smile"
+  },
+  "contemplation": {
+    "brow_left": "level",
+    "brow_right": "tilt",
+    "eyes": "side",
+    "mouth": "breath_pause"
+  },
+  "concern": {
+    "brow_left": "pinched",
+    "brow_right": "pinched",
+    "eyes": "open",
+    "mouth": "frown"
+  },
+  "excitement": {
+    "brow_left": "up",
+    "brow_right": "up",
+    "eyes": "wide",
+    "mouth": "wide_vowel"
+  },
+  "curiosity": {
+    "brow_left": "tilt",
+    "brow_right": "soft_up",
+    "eyes": "side",
+    "mouth": "slightly_open"
+  },
+  "compassion": {
+    "brow_left": "soft_up",
+    "brow_right": "soft_up",
+    "eyes": "soft",
+    "mouth": "smile"
+  },
+  "confusion": {
+    "brow_left": "up",
+    "brow_right": "down",
+    "eyes": "side",
+    "mouth": "rounded_vowel"
+  },
+  "sadness": {
+    "brow_left": "pinched",
+    "brow_right": "pinched",
+    "eyes": "soft",
+    "mouth": "frown"
+  },
+  "shame": {
+    "brow_left": "down",
+    "brow_right": "down",
+    "eyes": "down",
+    "mouth": "closed"
+  },
+  "embarrassment": {
+    "brow_left": "soft_up",
+    "brow_right": "soft_up",
+    "eyes": "down",
+    "mouth": "breath_pause"
+  },
+  "fear": {
+    "brow_left": "up",
+    "brow_right": "up",
+    "eyes": "wide",
+    "mouth": "open_vowel"
+  },
+  "anxiety": {
+    "brow_left": "pinched",
+    "brow_right": "pinched",
+    "eyes": "wide",
+    "mouth": "slightly_open"
+  },
+  "anger": {
+    "brow_left": "down",
+    "brow_right": "down",
+    "eyes": "open",
+    "mouth": "frown_speaking"
+  },
+  "frustration": {
+    "brow_left": "down",
+    "brow_right": "down",
+    "eyes": "squint",
+    "mouth": "frown"
+  },
+  "determination": {
+    "brow_left": "down",
+    "brow_right": "down",
+    "eyes": "bright",
+    "mouth": "closed"
+  },
+  "fatigue": {
+    "brow_left": "level",
+    "brow_right": "level",
+    "eyes": "squint",
+    "mouth": "breath_pause"
+  },
+  "amusement": {
+    "brow_left": "tilt",
+    "brow_right": "soft_up",
+    "eyes": "squint",
+    "mouth": "smile"
+  },
+  "confidence": {
+    "brow_left": "down",
+    "brow_right": "level",
+    "eyes": "bright",
+    "mouth": "smile"
+  },
+  "skepticism": {
+    "brow_left": "up",
+    "brow_right": "down",
+    "eyes": "side",
+    "mouth": "frown"
+  },
+  "surprise": {
+    "brow_left": "up",
+    "brow_right": "up",
+    "eyes": "wide",
+    "mouth": "open_wide"
+  },
+  "evidence_based_approval": {
+    "brow_left": "down",
+    "brow_right": "level",
+    "eyes": "bright",
+    "mouth": "smile"
+  },
+  "decisive_rejection": {
+    "brow_left": "up",
+    "brow_right": "down",
+    "eyes": "side",
+    "mouth": "frown"
+  }
 }

@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "character_id": "selene-hart-v1",
+  "display_name": "Selene Hart",
+  "renderer": "asciline_square_cells",
+  "pose_library": "selene_hart_pose_cells.json",
+  "animation_graph": "selene_hart_animation_graph.json",
+  "runtime_profile": "selene_hart_runtime_profile.json",
+  "manifest": "selene_hart_character_manifest.json",
+  "animation_matrix": "selene_hart_animation_matrix.json",
+  "extraction_audit": "selene_hart_extraction_audit.json",
+  "pixel_graph_library": "selene_hart_pixel_graphs.json",
+  "default_pose_id": "neutral_front",
+  "capabilities": [
+    "ground_locomotion",
+    "eight_direction_turnaround",
+    "actions",
+    "speech_visemes",
+    "full_expression_vocabulary",
+    "procedural_secondary_motion",
+    "pose_showcase",
+    "define_standard",
+    "inspect_evidence",
+    "compare_rubric",
+    "flag_gap",
+    "compliance_review",
+    "issue_measured_result",
+    "document_exception",
+    "rubric_and_clipboard_interaction"
+  ]
+}

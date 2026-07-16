@@ -11,6 +11,7 @@ DEFINITIONS_DIR = Path(__file__).with_name("definitions")
 WIZARD_JOE_PACKAGE_PATH = DEFINITIONS_DIR / "wizard_joe_character_package.json"
 CRYSTAIL_PACKAGE_PATH = DEFINITIONS_DIR / "crystail_character_package.json"
 ORION_VALE_PACKAGE_PATH = DEFINITIONS_DIR / "orion_vale_character_package.json"
+SELENE_HART_PACKAGE_PATH = DEFINITIONS_DIR / "selene_hart_character_package.json"
 
 
 class CharacterPackageValidationError(ValueError):
@@ -114,6 +115,22 @@ def load_character_package(path: Path = WIZARD_JOE_PACKAGE_PATH) -> CharacterPac
         )
         _validate_extraction_audit(
             raw["character_id"], pose_raw, pixel_graph_raw, audit_raw
+        )
+        if optional_assets["manifest"] is None:
+            raise CharacterPackageValidationError(
+                "audited direct-cell packages require a manifest"
+            )
+        manifest_raw = json.loads(
+            optional_assets["manifest"].read_text(encoding="utf-8")
+        )
+        _validate_direct_cell_manifest(
+            raw,
+            package_path,
+            pose_raw,
+            pixel_graph_raw,
+            audit_raw,
+            manifest_raw,
+            optional_assets,
         )
     return CharacterPackage(
         schema_version=1,
@@ -231,11 +248,123 @@ def _validate_extraction_audit(
             )
 
 
+def _validate_direct_cell_manifest(
+    package_raw: Mapping[str, Any],
+    package_path: Path,
+    pose_raw: Mapping[str, Any],
+    pixel_graph_raw: Mapping[str, Any],
+    audit_raw: Mapping[str, Any],
+    manifest_raw: Any,
+    optional_assets: Mapping[str, Optional[Path]],
+) -> None:
+    """Validate provenance, accepted sources, bounds, and RGB node integrity."""
+    if not isinstance(manifest_raw, Mapping) or manifest_raw.get("schema_version") != 1:
+        raise CharacterPackageValidationError("manifest must use schema_version 1")
+    character_id = str(package_raw["character_id"])
+    if manifest_raw.get("character_id") != character_id:
+        raise CharacterPackageValidationError("manifest character_id does not match package")
+    hashes = manifest_raw.get("hashes")
+    derivation = manifest_raw.get("derivation")
+    if not isinstance(hashes, Mapping) or not isinstance(derivation, Mapping):
+        raise CharacterPackageValidationError("manifest provenance is incomplete")
+    if derivation.get("flattened_runtime_dependency") is not False:
+        raise CharacterPackageValidationError("flattened runtime art is forbidden")
+    expected_assets = {
+        "pose_library_sha256": _package_asset(package_path, package_raw["pose_library"], "pose_library"),
+        "animation_graph_sha256": _package_asset(package_path, package_raw["animation_graph"], "animation_graph"),
+        "animation_matrix_sha256": optional_assets["animation_matrix"],
+        "extraction_audit_sha256": optional_assets["extraction_audit"],
+        "pixel_graph_library_sha256": optional_assets["pixel_graph_library"],
+    }
+    for hash_name, asset_path in expected_assets.items():
+        if asset_path is None:
+            raise CharacterPackageValidationError("manifest asset is missing: {}".format(hash_name))
+        actual = hashlib.sha256(asset_path.read_bytes()).hexdigest()
+        if hashes.get(hash_name) != actual:
+            raise CharacterPackageValidationError("manifest hash differs for {}".format(hash_name))
+    if hashes.get("extraction_item_count") != 124 or audit_raw.get("item_count") != 124:
+        raise CharacterPackageValidationError("direct-cell manifest must cover exactly 124 cells")
+
+    repository_root = package_path.parents[2]
+    reference_pairs = (
+        ("original_reference", "original_reference_sha256"),
+        ("canonical_reference", "canonical_reference_sha256"),
+    )
+    for source_name, hash_name in reference_pairs:
+        source = _repository_asset(repository_root, derivation.get(source_name), source_name)
+        if hashes.get(hash_name) != hashlib.sha256(source.read_bytes()).hexdigest():
+            raise CharacterPackageValidationError("manifest hash differs for {}".format(source_name))
+    worksheet_dir = _repository_asset(
+        repository_root, derivation.get("approved_worksheets"), "approved_worksheets", directory=True
+    )
+    worksheet_hashes = hashes.get("worksheet_sha256")
+    if not isinstance(worksheet_hashes, Mapping) or not worksheet_hashes:
+        raise CharacterPackageValidationError("manifest accepted worksheet hashes are absent")
+    for filename, expected_hash in worksheet_hashes.items():
+        worksheet = (worksheet_dir / str(filename)).resolve()
+        if worksheet_dir not in worksheet.parents or not worksheet.is_file():
+            raise CharacterPackageValidationError("accepted worksheet is missing")
+        if hashlib.sha256(worksheet.read_bytes()).hexdigest() != expected_hash:
+            raise CharacterPackageValidationError("accepted worksheet hash differs")
+
+    canonical = pose_raw.get("canonical")
+    if not isinstance(canonical, Mapping):
+        raise CharacterPackageValidationError("pose library canonical bounds are absent")
+    cols, rows = int(canonical.get("cols", 0)), int(canonical.get("rows", 0))
+    inset = canonical.get("safe_inset")
+    if cols <= 0 or rows <= 0 or not isinstance(inset, Mapping):
+        raise CharacterPackageValidationError("pose library canonical bounds are invalid")
+    graphs = [
+        *(pixel_graph_raw.get("graphs") or []),
+        *(
+            {"id": pose.get("id"), "nodes": pose.get("cells")}
+            for pose in (pose_raw.get("poses") or [])
+            if isinstance(pose, Mapping)
+        ),
+    ]
+    for graph in graphs:
+        if not isinstance(graph, Mapping) or not isinstance(graph.get("nodes"), list):
+            raise CharacterPackageValidationError("pixel graph nodes are absent")
+        for node in graph["nodes"]:
+            if not isinstance(node, Mapping):
+                raise CharacterPackageValidationError("pixel graph node is invalid")
+            x, y, rgb = node.get("x"), node.get("y"), node.get("rgb")
+            if not isinstance(x, int) or isinstance(x, bool) or not isinstance(y, int) or isinstance(y, bool):
+                raise CharacterPackageValidationError("pixel graph coordinates must be integers")
+            if not (int(inset["left"]) <= x < cols - int(inset["right"])):
+                raise CharacterPackageValidationError("pixel graph x coordinate violates safe bounds")
+            if not (int(inset["top"]) <= y <= int(canonical["baseline_y"])):
+                raise CharacterPackageValidationError("pixel graph y coordinate violates safe bounds")
+            if (
+                not isinstance(rgb, list)
+                or len(rgb) != 3
+                or any(not isinstance(channel, int) or isinstance(channel, bool) or not 0 <= channel <= 255 for channel in rgb)
+            ):
+                raise CharacterPackageValidationError("pixel graph RGB node is invalid")
+
+
+def _repository_asset(
+    repository_root: Path,
+    value: Any,
+    name: str,
+    *,
+    directory: bool = False,
+) -> Path:
+    if not isinstance(value, str) or not value:
+        raise CharacterPackageValidationError("{} provenance path is invalid".format(name))
+    asset = (repository_root / value).resolve()
+    valid = asset.is_dir() if directory else asset.is_file()
+    if repository_root not in asset.parents or not valid:
+        raise CharacterPackageValidationError("{} provenance path is missing".format(name))
+    return asset
+
+
 __all__ = [
     "CharacterPackage",
     "CharacterPackageValidationError",
     "WIZARD_JOE_PACKAGE_PATH",
     "CRYSTAIL_PACKAGE_PATH",
     "ORION_VALE_PACKAGE_PATH",
+    "SELENE_HART_PACKAGE_PATH",
     "load_character_package",
 ]

@@ -1,0 +1,234 @@
+{
+  "character_id": "selene-hart-v1",
+  "clips": [
+    {
+      "clip_id": "selene_idle",
+      "loop": true,
+      "samples": [
+        {
+          "pose_id": "idle_attentive",
+          "tick": 0
+        },
+        {
+          "pose_id": "idle_relaxed",
+          "tick": 12
+        },
+        {
+          "pose_id": "idle_listening",
+          "tick": 24
+        }
+      ]
+    },
+    {
+      "clip_id": "selene_walk",
+      "loop": true,
+      "samples": [
+        {
+          "pose_id": "walk_contact_a",
+          "tick": 0
+        },
+        {
+          "pose_id": "walk_passing_a",
+          "tick": 12
+        },
+        {
+          "pose_id": "walk_contact_b",
+          "tick": 24
+        },
+        {
+          "pose_id": "walk_passing_b",
+          "tick": 36
+        }
+      ]
+    },
+    {
+      "clip_id": "selene_run",
+      "loop": true,
+      "samples": [
+        {
+          "pose_id": "run_contact_a",
+          "tick": 0
+        },
+        {
+          "pose_id": "run_contact_b",
+          "tick": 12
+        }
+      ]
+    },
+    {
+      "clip_id": "selene_jump_land",
+      "loop": false,
+      "samples": [
+        {
+          "pose_id": "jump_anticipation",
+          "tick": 0
+        },
+        {
+          "pose_id": "jump_airborne",
+          "tick": 12
+        },
+        {
+          "pose_id": "fall_descending",
+          "tick": 24
+        },
+        {
+          "pose_id": "landing_contact",
+          "tick": 36
+        },
+        {
+          "pose_id": "landing_recovery",
+          "tick": 48
+        }
+      ]
+    },
+    {
+      "clip_id": "selene_define_standard",
+      "loop": false,
+      "samples": [
+        {
+          "pose_id": "prepare_rubric_folio",
+          "tick": 0
+        },
+        {
+          "pose_id": "present_standard",
+          "tick": 12
+        },
+        {
+          "pose_id": "indicate_rubric_grid",
+          "tick": 24
+        },
+        {
+          "pose_id": "close_rubric_at_chest",
+          "tick": 36
+        }
+      ]
+    },
+    {
+      "clip_id": "selene_inspect_evidence",
+      "loop": false,
+      "samples": [
+        {
+          "pose_id": "raise_clipboard",
+          "tick": 0
+        },
+        {
+          "pose_id": "inspect_checklist",
+          "tick": 12
+        },
+        {
+          "pose_id": "indicate_checked_square",
+          "tick": 24
+        },
+        {
+          "pose_id": "lower_clipboard_thoughtfully",
+          "tick": 36
+        }
+      ]
+    },
+    {
+      "clip_id": "selene_compare_rubric",
+      "loop": false,
+      "samples": [
+        {
+          "pose_id": "hold_rubric_and_clipboard_separately",
+          "tick": 0
+        },
+        {
+          "pose_id": "compare_side_by_side",
+          "tick": 12
+        },
+        {
+          "pose_id": "flag_gap_controlled_point",
+          "tick": 24
+        },
+        {
+          "pose_id": "document_exception",
+          "tick": 36
+        }
+      ]
+    },
+    {
+      "clip_id": "selene_issue_result",
+      "loop": false,
+      "samples": [
+        {
+          "pose_id": "deliberate_props_lowered",
+          "tick": 0
+        },
+        {
+          "pose_id": "evidence_based_approval",
+          "tick": 12
+        },
+        {
+          "pose_id": "decisive_rejection_stop",
+          "tick": 24
+        },
+        {
+          "pose_id": "neutral_settled_hold",
+          "tick": 36
+        }
+      ]
+    },
+    {
+      "clip_id": "selene_interactions",
+      "loop": false,
+      "samples": [
+        {
+          "pose_id": "interaction_open_relaxed_hand",
+          "tick": 0
+        },
+        {
+          "pose_id": "interaction_closed_relaxed_hand",
+          "tick": 12
+        },
+        {
+          "pose_id": "interaction_firm_fist",
+          "tick": 24
+        },
+        {
+          "pose_id": "interaction_full_reach",
+          "tick": 36
+        }
+      ]
+    },
+    {
+      "clip_id": "selene_turnaround",
+      "loop": true,
+      "samples": [
+        {
+          "pose_id": "neutral_front",
+          "tick": 0
+        },
+        {
+          "pose_id": "neutral_three_quarter_left",
+          "tick": 12
+        },
+        {
+          "pose_id": "neutral_left_profile",
+          "tick": 24
+        },
+        {
+          "pose_id": "neutral_back_three_quarter_left",
+          "tick": 36
+        },
+        {
+          "pose_id": "neutral_back",
+          "tick": 48
+        },
+        {
+          "pose_id": "neutral_back_three_quarter_right",
+          "tick": 60
+        },
+        {
+          "pose_id": "neutral_right_profile",
+          "tick": 72
+        },
+        {
+          "pose_id": "neutral_three_quarter_right",
+          "tick": 84
+        }
+      ]
+    }
+  ],
+  "schema_version": 1
+}

@@ -1,0 +1,90 @@
+{
+  "schema_version": 1,
+  "character_id": "selene-hart-v1",
+  "scale_multiplier": 0.88,
+  "default_pose_id": "neutral_front",
+  "facing_poses": {
+    "south": "neutral_front",
+    "southwest": "neutral_three_quarter_left",
+    "west": "neutral_left_profile",
+    "northwest": "neutral_back_three_quarter_left",
+    "north": "neutral_back",
+    "northeast": "neutral_back_three_quarter_right",
+    "east": "neutral_right_profile",
+    "southeast": "neutral_three_quarter_right"
+  },
+  "action_poses": {
+    "speaking": "idle_speaking",
+    "explaining": "present_standard",
+    "pointing": "flag_gap_controlled_point",
+    "thinking": "deliberate_props_lowered",
+    "reaction": "expression_skepticism",
+    "celebrating": "evidence_based_approval",
+    "containment": "decisive_rejection_stop",
+    "magic_cast": "indicate_rubric_grid",
+    "turn_left": "planted_turn_left",
+    "turn_right": "planted_turn_right",
+    "crouch": "crouch",
+    "jump": "jump_airborne",
+    "fall": "fall_descending",
+    "land": "landing_contact",
+    "listening": "idle_listening",
+    "define_standard": "present_standard",
+    "inspect_evidence": "inspect_checklist",
+    "compare_rubric": "compare_side_by_side",
+    "flag_gap": "flag_gap_controlled_point",
+    "compliance_review": "hold_rubric_and_clipboard_separately",
+    "issue_measured_result": "evidence_based_approval",
+    "document_exception": "document_exception"
+  },
+  "expression_aliases": {
+    "happy": "joy",
+    "amused": "amusement",
+    "surprised": "surprise",
+    "worried": "concern",
+    "confident": "confidence",
+    "skeptical": "skepticism",
+    "thinking": "contemplation",
+    "focused": "determination",
+    "explaining": "curiosity"
+  },
+  "walking_cycle": [
+    "walk_contact_a",
+    "walk_passing_a",
+    "walk_contact_b",
+    "walk_passing_b"
+  ],
+  "running_cycle": [
+    "run_contact_a",
+    "run_contact_b"
+  ],
+  "airborne_poses": {
+    "takeoff": "jump_anticipation",
+    "hover": "jump_airborne",
+    "bank_left": "jump_airborne",
+    "bank_right": "jump_airborne",
+    "travel_away": "fall_descending",
+    "travel_toward": "jump_airborne",
+    "landing": "landing_contact"
+  },
+  "speech_poses": [
+    "viseme_rest",
+    "viseme_closed_lips",
+    "viseme_slightly_open",
+    "viseme_wide_vowel",
+    "viseme_open_vowel",
+    "viseme_rounded_vowel",
+    "viseme_teeth_consonant",
+    "viseme_lower_lip_consonant",
+    "viseme_tongue_consonant",
+    "viseme_smile_speaking",
+    "viseme_frown_speaking",
+    "viseme_speech_emphasis",
+    "viseme_breath_pause"
+  ],
+  "blink_poses": {
+    "open": "blink_open",
+    "half_closed": "blink_half_closed",
+    "closed": "blink_closed"
+  }
+}

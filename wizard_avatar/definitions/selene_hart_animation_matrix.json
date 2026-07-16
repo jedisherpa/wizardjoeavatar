@@ -1,0 +1,532 @@
+{
+  "character_id": "selene-hart-v1",
+  "row_count": 75,
+  "rows": [
+    {
+      "behavior_id": "idle.neutral",
+      "group": "idle",
+      "runtime": "worksheet_pose_plus_semantic_channel",
+      "status": "production",
+      "transition": "anticipate_action_follow_through_recover"
+    },
+    {
+      "behavior_id": "idle.relaxed",
+      "group": "idle",
+      "runtime": "worksheet_pose_plus_semantic_channel",
+      "status": "production",
+      "transition": "anticipate_action_follow_through_recover"
+    },
+    {
+      "behavior_id": "idle.attentive",
+      "group": "idle",
+      "runtime": "worksheet_pose_plus_semantic_channel",
+      "status": "production",
+      "transition": "anticipate_action_follow_through_recover"
+    },
+    {
+      "behavior_id": "idle.speaking",
+      "group": "idle",
+      "runtime": "worksheet_pose_plus_semantic_channel",
+      "status": "production",
+      "transition": "anticipate_action_follow_through_recover"
+    },
+    {
+      "behavior_id": "idle.listening",
+      "group": "idle",
+      "runtime": "worksheet_pose_plus_semantic_channel",
+      "status": "production",
+      "transition": "anticipate_action_follow_through_recover"
+    },
+    {
+      "behavior_id": "idle.blink",
+      "group": "idle",
+      "runtime": "worksheet_pose_plus_semantic_channel",
+      "status": "production",
+      "transition": "anticipate_action_follow_through_recover"
+    },
+    {
+      "behavior_id": "idle.settle",
+      "group": "idle",
+      "runtime": "worksheet_pose_plus_semantic_channel",
+      "status": "production",
+      "transition": "anticipate_action_follow_through_recover"
+    },
+    {
+      "behavior_id": "locomotion.walk_forward",
+      "group": "locomotion",
+      "runtime": "worksheet_pose_plus_semantic_channel",
+      "status": "production",
+      "transition": "anticipate_action_follow_through_recover"
+    },
+    {
+      "behavior_id": "locomotion.walk_backward",
+      "group": "locomotion",
+      "runtime": "worksheet_pose_plus_semantic_channel",
+      "status": "production",
+      "transition": "anticipate_action_follow_through_recover"
+    },
+    {
+      "behavior_id": "locomotion.walk_left",
+      "group": "locomotion",
+      "runtime": "worksheet_pose_plus_semantic_channel",
+      "status": "production",
+      "transition": "anticipate_action_follow_through_recover"
+    },
+    {
+      "behavior_id": "locomotion.walk_right",
+      "group": "locomotion",
+      "runtime": "worksheet_pose_plus_semantic_channel",
+      "status": "production",
+      "transition": "anticipate_action_follow_through_recover"
+    },
+    {
+      "behavior_id": "locomotion.run_forward",
+      "group": "locomotion",
+      "runtime": "worksheet_pose_plus_semantic_channel",
+      "status": "production",
+      "transition": "anticipate_action_follow_through_recover"
+    },
+    {
+      "behavior_id": "locomotion.start",
+      "group": "locomotion",
+      "runtime": "worksheet_pose_plus_semantic_channel",
+      "status": "production",
+      "transition": "anticipate_action_follow_through_recover"
+    },
+    {
+      "behavior_id": "locomotion.stop",
+      "group": "locomotion",
+      "runtime": "worksheet_pose_plus_semantic_channel",
+      "status": "production",
+      "transition": "anticipate_action_follow_through_recover"
+    },
+    {
+      "behavior_id": "locomotion.turn_left",
+      "group": "locomotion",
+      "runtime": "worksheet_pose_plus_semantic_channel",
+      "status": "production",
+      "transition": "anticipate_action_follow_through_recover"
+    },
+    {
+      "behavior_id": "locomotion.turn_right",
+      "group": "locomotion",
+      "runtime": "worksheet_pose_plus_semantic_channel",
+      "status": "production",
+      "transition": "anticipate_action_follow_through_recover"
+    },
+    {
+      "behavior_id": "locomotion.crouch",
+      "group": "locomotion",
+      "runtime": "worksheet_pose_plus_semantic_channel",
+      "status": "production",
+      "transition": "anticipate_action_follow_through_recover"
+    },
+    {
+      "behavior_id": "locomotion.jump",
+      "group": "locomotion",
+      "runtime": "worksheet_pose_plus_semantic_channel",
+      "status": "production",
+      "transition": "anticipate_action_follow_through_recover"
+    },
+    {
+      "behavior_id": "locomotion.fall",
+      "group": "locomotion",
+      "runtime": "worksheet_pose_plus_semantic_channel",
+      "status": "production",
+      "transition": "anticipate_action_follow_through_recover"
+    },
+    {
+      "behavior_id": "locomotion.land",
+      "group": "locomotion",
+      "runtime": "worksheet_pose_plus_semantic_channel",
+      "status": "production",
+      "transition": "anticipate_action_follow_through_recover"
+    },
+    {
+      "behavior_id": "conversation.speak",
+      "group": "conversation",
+      "runtime": "worksheet_pose_plus_semantic_channel",
+      "status": "production",
+      "transition": "anticipate_action_follow_through_recover"
+    },
+    {
+      "behavior_id": "conversation.listen",
+      "group": "conversation",
+      "runtime": "worksheet_pose_plus_semantic_channel",
+      "status": "production",
+      "transition": "anticipate_action_follow_through_recover"
+    },
+    {
+      "behavior_id": "conversation.explain",
+      "group": "conversation",
+      "runtime": "worksheet_pose_plus_semantic_channel",
+      "status": "production",
+      "transition": "anticipate_action_follow_through_recover"
+    },
+    {
+      "behavior_id": "conversation.point",
+      "group": "conversation",
+      "runtime": "worksheet_pose_plus_semantic_channel",
+      "status": "production",
+      "transition": "anticipate_action_follow_through_recover"
+    },
+    {
+      "behavior_id": "conversation.present",
+      "group": "conversation",
+      "runtime": "worksheet_pose_plus_semantic_channel",
+      "status": "production",
+      "transition": "anticipate_action_follow_through_recover"
+    },
+    {
+      "behavior_id": "conversation.deliberate",
+      "group": "conversation",
+      "runtime": "worksheet_pose_plus_semantic_channel",
+      "status": "production",
+      "transition": "anticipate_action_follow_through_recover"
+    },
+    {
+      "behavior_id": "conversation.settle",
+      "group": "conversation",
+      "runtime": "worksheet_pose_plus_semantic_channel",
+      "status": "production",
+      "transition": "anticipate_action_follow_through_recover"
+    },
+    {
+      "behavior_id": "emotion.neutral",
+      "group": "emotion",
+      "runtime": "worksheet_pose_plus_semantic_channel",
+      "status": "production",
+      "transition": "anticipate_action_follow_through_recover"
+    },
+    {
+      "behavior_id": "emotion.calm",
+      "group": "emotion",
+      "runtime": "worksheet_pose_plus_semantic_channel",
+      "status": "production",
+      "transition": "anticipate_action_follow_through_recover"
+    },
+    {
+      "behavior_id": "emotion.joy",
+      "group": "emotion",
+      "runtime": "worksheet_pose_plus_semantic_channel",
+      "status": "production",
+      "transition": "anticipate_action_follow_through_recover"
+    },
+    {
+      "behavior_id": "emotion.amusement",
+      "group": "emotion",
+      "runtime": "worksheet_pose_plus_semantic_channel",
+      "status": "production",
+      "transition": "anticipate_action_follow_through_recover"
+    },
+    {
+      "behavior_id": "emotion.excitement",
+      "group": "emotion",
+      "runtime": "worksheet_pose_plus_semantic_channel",
+      "status": "production",
+      "transition": "anticipate_action_follow_through_recover"
+    },
+    {
+      "behavior_id": "emotion.curiosity",
+      "group": "emotion",
+      "runtime": "worksheet_pose_plus_semantic_channel",
+      "status": "production",
+      "transition": "anticipate_action_follow_through_recover"
+    },
+    {
+      "behavior_id": "emotion.confidence",
+      "group": "emotion",
+      "runtime": "worksheet_pose_plus_semantic_channel",
+      "status": "production",
+      "transition": "anticipate_action_follow_through_recover"
+    },
+    {
+      "behavior_id": "emotion.compassion",
+      "group": "emotion",
+      "runtime": "worksheet_pose_plus_semantic_channel",
+      "status": "production",
+      "transition": "anticipate_action_follow_through_recover"
+    },
+    {
+      "behavior_id": "emotion.surprise",
+      "group": "emotion",
+      "runtime": "worksheet_pose_plus_semantic_channel",
+      "status": "production",
+      "transition": "anticipate_action_follow_through_recover"
+    },
+    {
+      "behavior_id": "emotion.confusion",
+      "group": "emotion",
+      "runtime": "worksheet_pose_plus_semantic_channel",
+      "status": "production",
+      "transition": "anticipate_action_follow_through_recover"
+    },
+    {
+      "behavior_id": "emotion.skepticism",
+      "group": "emotion",
+      "runtime": "worksheet_pose_plus_semantic_channel",
+      "status": "production",
+      "transition": "anticipate_action_follow_through_recover"
+    },
+    {
+      "behavior_id": "emotion.concern",
+      "group": "emotion",
+      "runtime": "worksheet_pose_plus_semantic_channel",
+      "status": "production",
+      "transition": "anticipate_action_follow_through_recover"
+    },
+    {
+      "behavior_id": "emotion.sadness",
+      "group": "emotion",
+      "runtime": "worksheet_pose_plus_semantic_channel",
+      "status": "production",
+      "transition": "anticipate_action_follow_through_recover"
+    },
+    {
+      "behavior_id": "emotion.shame",
+      "group": "emotion",
+      "runtime": "worksheet_pose_plus_semantic_channel",
+      "status": "production",
+      "transition": "anticipate_action_follow_through_recover"
+    },
+    {
+      "behavior_id": "emotion.embarrassment",
+      "group": "emotion",
+      "runtime": "worksheet_pose_plus_semantic_channel",
+      "status": "production",
+      "transition": "anticipate_action_follow_through_recover"
+    },
+    {
+      "behavior_id": "emotion.fear",
+      "group": "emotion",
+      "runtime": "worksheet_pose_plus_semantic_channel",
+      "status": "production",
+      "transition": "anticipate_action_follow_through_recover"
+    },
+    {
+      "behavior_id": "emotion.anxiety",
+      "group": "emotion",
+      "runtime": "worksheet_pose_plus_semantic_channel",
+      "status": "production",
+      "transition": "anticipate_action_follow_through_recover"
+    },
+    {
+      "behavior_id": "emotion.anger",
+      "group": "emotion",
+      "runtime": "worksheet_pose_plus_semantic_channel",
+      "status": "production",
+      "transition": "anticipate_action_follow_through_recover"
+    },
+    {
+      "behavior_id": "emotion.frustration",
+      "group": "emotion",
+      "runtime": "worksheet_pose_plus_semantic_channel",
+      "status": "production",
+      "transition": "anticipate_action_follow_through_recover"
+    },
+    {
+      "behavior_id": "emotion.determination",
+      "group": "emotion",
+      "runtime": "worksheet_pose_plus_semantic_channel",
+      "status": "production",
+      "transition": "anticipate_action_follow_through_recover"
+    },
+    {
+      "behavior_id": "emotion.fatigue",
+      "group": "emotion",
+      "runtime": "worksheet_pose_plus_semantic_channel",
+      "status": "production",
+      "transition": "anticipate_action_follow_through_recover"
+    },
+    {
+      "behavior_id": "emotion.contemplation",
+      "group": "emotion",
+      "runtime": "worksheet_pose_plus_semantic_channel",
+      "status": "production",
+      "transition": "anticipate_action_follow_through_recover"
+    },
+    {
+      "behavior_id": "emotion.evidence_based_approval",
+      "group": "emotion",
+      "runtime": "worksheet_pose_plus_semantic_channel",
+      "status": "production",
+      "transition": "anticipate_action_follow_through_recover"
+    },
+    {
+      "behavior_id": "emotion.decisive_rejection",
+      "group": "emotion",
+      "runtime": "worksheet_pose_plus_semantic_channel",
+      "status": "production",
+      "transition": "anticipate_action_follow_through_recover"
+    },
+    {
+      "behavior_id": "interaction.open_relaxed_hand",
+      "group": "interaction",
+      "runtime": "worksheet_pose_plus_semantic_channel",
+      "status": "production",
+      "transition": "anticipate_action_follow_through_recover"
+    },
+    {
+      "behavior_id": "interaction.closed_relaxed_hand",
+      "group": "interaction",
+      "runtime": "worksheet_pose_plus_semantic_channel",
+      "status": "production",
+      "transition": "anticipate_action_follow_through_recover"
+    },
+    {
+      "behavior_id": "interaction.firm_fist",
+      "group": "interaction",
+      "runtime": "worksheet_pose_plus_semantic_channel",
+      "status": "production",
+      "transition": "anticipate_action_follow_through_recover"
+    },
+    {
+      "behavior_id": "interaction.full_reach",
+      "group": "interaction",
+      "runtime": "worksheet_pose_plus_semantic_channel",
+      "status": "production",
+      "transition": "anticipate_action_follow_through_recover"
+    },
+    {
+      "behavior_id": "interaction.define_standard",
+      "group": "interaction",
+      "runtime": "worksheet_pose_plus_semantic_channel",
+      "status": "production",
+      "transition": "anticipate_action_follow_through_recover"
+    },
+    {
+      "behavior_id": "interaction.inspect_evidence",
+      "group": "interaction",
+      "runtime": "worksheet_pose_plus_semantic_channel",
+      "status": "production",
+      "transition": "anticipate_action_follow_through_recover"
+    },
+    {
+      "behavior_id": "interaction.compare_rubric",
+      "group": "interaction",
+      "runtime": "worksheet_pose_plus_semantic_channel",
+      "status": "production",
+      "transition": "anticipate_action_follow_through_recover"
+    },
+    {
+      "behavior_id": "interaction.flag_gap",
+      "group": "interaction",
+      "runtime": "worksheet_pose_plus_semantic_channel",
+      "status": "production",
+      "transition": "anticipate_action_follow_through_recover"
+    },
+    {
+      "behavior_id": "interaction.compliance_review",
+      "group": "interaction",
+      "runtime": "worksheet_pose_plus_semantic_channel",
+      "status": "production",
+      "transition": "anticipate_action_follow_through_recover"
+    },
+    {
+      "behavior_id": "interaction.issue_measured_result",
+      "group": "interaction",
+      "runtime": "worksheet_pose_plus_semantic_channel",
+      "status": "production",
+      "transition": "anticipate_action_follow_through_recover"
+    },
+    {
+      "behavior_id": "interaction.document_exception",
+      "group": "interaction",
+      "runtime": "worksheet_pose_plus_semantic_channel",
+      "status": "production",
+      "transition": "anticipate_action_follow_through_recover"
+    },
+    {
+      "behavior_id": "speech.rest",
+      "group": "speech",
+      "runtime": "worksheet_pose_plus_semantic_channel",
+      "status": "production",
+      "transition": "anticipate_action_follow_through_recover"
+    },
+    {
+      "behavior_id": "speech.closed_lips",
+      "group": "speech",
+      "runtime": "worksheet_pose_plus_semantic_channel",
+      "status": "production",
+      "transition": "anticipate_action_follow_through_recover"
+    },
+    {
+      "behavior_id": "speech.slightly_open",
+      "group": "speech",
+      "runtime": "worksheet_pose_plus_semantic_channel",
+      "status": "production",
+      "transition": "anticipate_action_follow_through_recover"
+    },
+    {
+      "behavior_id": "speech.wide_vowel",
+      "group": "speech",
+      "runtime": "worksheet_pose_plus_semantic_channel",
+      "status": "production",
+      "transition": "anticipate_action_follow_through_recover"
+    },
+    {
+      "behavior_id": "speech.open_vowel",
+      "group": "speech",
+      "runtime": "worksheet_pose_plus_semantic_channel",
+      "status": "production",
+      "transition": "anticipate_action_follow_through_recover"
+    },
+    {
+      "behavior_id": "speech.rounded_vowel",
+      "group": "speech",
+      "runtime": "worksheet_pose_plus_semantic_channel",
+      "status": "production",
+      "transition": "anticipate_action_follow_through_recover"
+    },
+    {
+      "behavior_id": "speech.teeth_consonant",
+      "group": "speech",
+      "runtime": "worksheet_pose_plus_semantic_channel",
+      "status": "production",
+      "transition": "anticipate_action_follow_through_recover"
+    },
+    {
+      "behavior_id": "speech.lower_lip_consonant",
+      "group": "speech",
+      "runtime": "worksheet_pose_plus_semantic_channel",
+      "status": "production",
+      "transition": "anticipate_action_follow_through_recover"
+    },
+    {
+      "behavior_id": "speech.tongue_consonant",
+      "group": "speech",
+      "runtime": "worksheet_pose_plus_semantic_channel",
+      "status": "production",
+      "transition": "anticipate_action_follow_through_recover"
+    },
+    {
+      "behavior_id": "speech.smile_speaking",
+      "group": "speech",
+      "runtime": "worksheet_pose_plus_semantic_channel",
+      "status": "production",
+      "transition": "anticipate_action_follow_through_recover"
+    },
+    {
+      "behavior_id": "speech.frown_speaking",
+      "group": "speech",
+      "runtime": "worksheet_pose_plus_semantic_channel",
+      "status": "production",
+      "transition": "anticipate_action_follow_through_recover"
+    },
+    {
+      "behavior_id": "speech.speech_emphasis",
+      "group": "speech",
+      "runtime": "worksheet_pose_plus_semantic_channel",
+      "status": "production",
+      "transition": "anticipate_action_follow_through_recover"
+    },
+    {
+      "behavior_id": "speech.breath_pause",
+      "group": "speech",
+      "runtime": "worksheet_pose_plus_semantic_channel",
+      "status": "production",
+      "transition": "anticipate_action_follow_through_recover"
+    }
+  ],
+  "schema_version": 1
+}
