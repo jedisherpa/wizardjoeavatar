@@ -3,6 +3,7 @@
   "default_character_id": "wizard-joe-v1",
   "characters": [
     {"character_id": "wizard-joe-v1", "package": "wizard_joe_character_package.json"},
-    {"character_id": "crystail-v1", "package": "crystail_character_package.json"}
+    {"character_id": "crystail-v1", "package": "crystail_character_package.json"},
+    {"character_id": "aurelia-finch-v1", "package": "aurelia_finch_character_package.json"}
   ]
 }

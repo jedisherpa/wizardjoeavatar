@@ -25,7 +25,10 @@ class CrystailCharacterTests(unittest.TestCase):
     def test_registry_exposes_both_characters(self):
         registry = load_character_registry()
         self.assertEqual(registry.default_character_id, "wizard-joe-v1")
-        self.assertEqual(set(registry.packages), {"wizard-joe-v1", "crystail-v1"})
+        self.assertEqual(
+            set(registry.packages),
+            {"wizard-joe-v1", "crystail-v1", "aurelia-finch-v1"},
+        )
         self.assertEqual(registry.get("crystail-v1").display_name, "CrystAIl")
 
     def test_package_has_full_runtime_capabilities_and_pose_library(self):

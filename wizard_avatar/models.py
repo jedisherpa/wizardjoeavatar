@@ -71,6 +71,13 @@ ACTIONS = (
     "journal_hold",
     "journal_write",
     "journal_page_turn",
+    "partnership_pitch",
+    "stakeholder_translation",
+    "proof_presentation",
+    "public_promise_check",
+    "leadership_briefing",
+    "leadership_recovery",
+    "diplomatic_recovery",
 )
 
 MOUTH_SHAPES = (

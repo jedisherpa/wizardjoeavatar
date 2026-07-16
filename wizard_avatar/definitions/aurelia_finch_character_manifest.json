@@ -1,0 +1,90 @@
+{
+  "attachment_points": [
+    "mouth",
+    "left_eye",
+    "right_eye",
+    "left_hand",
+    "right_hand",
+    "left_foot",
+    "right_foot",
+    "folio"
+  ],
+  "character_id": "aurelia-finch-v1",
+  "derivation": {
+    "approved_worksheets": "assets/reference/personas/aurelia-finch/canonical-worksheets",
+    "canonical_reference": "assets/reference/personas/aurelia-finch/canonical-voxel.png",
+    "flattened_runtime_dependency": false,
+    "original_reference": "assets/reference/personas/aurelia-finch/source-reference.png",
+    "runtime_art": "deterministic worksheet-derived direct cell library"
+  },
+  "display_name": "Aurelia Finch",
+  "hashes": {
+    "animation_graph_sha256": "42c56a3025e63aab04d45b0698af7b36507d16a8c317be9dd00e42326964fd33",
+    "animation_matrix_sha256": "69d3b3ec9b60484c0cf0bc7b526899ffd6eaa1b576d13bb42452a7a2c155589d",
+    "canonical_reference_sha256": "462dbff7c21e06c4450bf620f13f0bb7c923f57dd4819cb11eb9bfcc8853a821",
+    "character_package_sha256": "2a2f320aa55ff835b0d04cdc56fc403da1ad20f9ef3c7ab8e6174ea7a157b8f8",
+    "extraction_audit_sha256": "6221c34d98a009f3512ac610c4c18b2adf95538de80fe5d6c8ee49f750773bc3",
+    "extraction_item_count": 124,
+    "generation_profile_sha256": "522ae810ad56a156be6ccb6ba5e1c400374316b659aa60da9907020114bc39c3",
+    "original_reference_sha256": "bd8bc74059e57f8edafb0161bcbc7b70dd52ddddc59ec72dd1808f8287c87f41",
+    "pixel_graph_library_sha256": "dd35a3acb67cac7d8e7228fb12f6efae43e9e66d9859a625992cf8b0b34285a3",
+    "pose_library_sha256": "bef043eb4db2e7916776917ed9ea9efe2981f363b0b61f25da2ff92857f1cdad",
+    "runtime_profile_sha256": "8296e88a81beec787cffec13ebe105d1fb13be3e76d00c8e100ab77025caed22",
+    "worksheet_sha256": {
+      "01-identity-sheet-candidate-v1.png": "e28850447f89019ee187b2a628cfa9aa43e014e802425f1ae5780135927752a5",
+      "02-turnaround-sheet-candidate-v1.png": "c700743f194af0103094ab4dd9f62ad5d70e96c3b7df6a6c2c96cd91b14737b9",
+      "03-neutral-base-poses-candidate-v1.png": "a83466add91e58406390ca97f83e4764674952dba0b89579db982085f9c6378f",
+      "04-expression-sheet-candidate-v2.png": "68f0a6e5fec8b9ebd3f5a455a8020710c14e42184cad6950e3625b31dbaf87d7",
+      "05-speech-viseme-sheet-candidate-v2.png": "900ca79efd2141691a28385565fb2d646695981a0d23d854f6ea25ba033e26c3",
+      "06-hand-prop-sheet-candidate-v1.png": "53125372d018bc6f7bf7f52e089b4cf42749e281f5a2c6d5e4a7cc03cd626ae1",
+      "07-ground-motion-sheet-candidate-v1.png": "999d80d4195ba8be4d93599b1b119e55ea9c82b6eaeb9c672b9a9e0ecf239607",
+      "08-signature-actions-sheet-candidate-v2.png": "18934f91ae9f21b9144e5db2137a3c9800874e3d422ef3803aa686778bb205b0",
+      "09-interaction-poses-candidate-v1.png": "57f27892803ad1b5d0e8ea44b02404f3de558a499826d7584bdf21de34164849"
+    }
+  },
+  "identity_lock": {
+    "articulated": [
+      "brows",
+      "eyelids",
+      "mouth",
+      "neck",
+      "shoulders",
+      "elbows",
+      "wrists",
+      "fingers",
+      "hips",
+      "knees",
+      "ankles"
+    ],
+    "default_prop": "partnership folio",
+    "immutable": [
+      "warm medium-brown skin",
+      "long very dark brown voxel curls",
+      "large dark eyes with strong lashes and brows",
+      "cream wide-brim hat",
+      "navy hat band",
+      "orange hat accent on Aurelia's right side",
+      "pearl stud earrings and short pearl necklace",
+      "burnt-orange wrap dress with long sleeves and layered skirt",
+      "brown closed-toe block heels",
+      "dark-brown partnership folio with small gold corners"
+    ],
+    "personality": "polished charismatic evidence-conscious outward-facing diplomatic"
+  },
+  "origin": {
+    "baseline_y": 91,
+    "cols": 72,
+    "root_anchor": [
+      36,
+      91
+    ],
+    "rows": 96,
+    "safe_inset": {
+      "bottom": 4,
+      "left": 4,
+      "right": 4,
+      "top": 4
+    }
+  },
+  "schema_version": 1
+}

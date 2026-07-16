@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "character_id": "aurelia-finch-v1",
+  "scale_multiplier": 0.88,
+  "default_pose_id": "neutral_front",
+  "facing_poses": {
+    "south": "neutral_front", "southwest": "neutral_three_quarter_left",
+    "west": "neutral_left_profile", "northwest": "neutral_back_three_quarter_left",
+    "north": "neutral_back", "northeast": "neutral_back_three_quarter_right",
+    "east": "neutral_right_profile", "southeast": "neutral_three_quarter_right"
+  },
+  "action_poses": {
+    "speaking": "partnership_pitch_invitation",
+    "explaining": "stakeholder_translation_two_hand_translation",
+    "pointing": "proof_presentation_point_to_proof",
+    "thinking": "public_promise_check_pause",
+    "reaction": "stakeholder_translation_acknowledge",
+    "celebrating": "public_promise_check_commitment",
+    "listening": "stakeholder_translation_listen",
+    "partnership_pitch": "partnership_pitch_outward_pitch",
+    "stakeholder_translation": "stakeholder_translation_bridge",
+    "proof_presentation": "proof_presentation_reveal_blank_evidence",
+    "public_promise_check": "public_promise_check_commitment",
+    "leadership_briefing": "proof_presentation_ready",
+    "leadership_recovery": "leadership_recovery_reconsider",
+    "diplomatic_recovery": "leadership_recovery_diplomatic_settle",
+    "turn_left": "planted_turn_left", "turn_right": "planted_turn_right",
+    "crouch": "crouch", "jump": "jump_airborne", "fall": "controlled_fall",
+    "land": "landing_contact"
+  },
+  "expression_aliases": {
+    "happy": "joy", "amused": "amusement", "surprised": "surprise",
+    "worried": "concern", "confident": "confidence", "skeptical": "skepticism",
+    "thinking": "contemplation", "focused": "determination", "explaining": "curiosity"
+  },
+  "walking_cycle": [
+    "walk_contact_left", "walk_down_left", "walk_passing_left", "walk_contact_right"
+  ],
+  "running_cycle": ["run_contact_left", "run_contact_right"],
+  "airborne_poses": {
+    "takeoff": "jump_anticipation", "hover": "jump_airborne",
+    "bank_left": "jump_airborne", "bank_right": "jump_airborne",
+    "travel_away": "controlled_fall", "travel_toward": "jump_airborne",
+    "landing": "landing_contact"
+  },
+  "speech_poses": [
+    "viseme_rest", "viseme_closed_lips", "viseme_slightly_open", "viseme_wide_vowel",
+    "viseme_open_vowel", "viseme_rounded_vowel", "viseme_teeth_consonant",
+    "viseme_lower_lip_consonant", "viseme_tongue_consonant", "viseme_smile_speaking",
+    "viseme_frown_speaking", "viseme_speech_emphasis", "viseme_breath_pause"
+  ],
+  "blink_poses": {"open": "blink_open", "half_closed": "blink_half_closed", "closed": "blink_closed"}
+}

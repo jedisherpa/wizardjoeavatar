@@ -25,6 +25,13 @@ ACTION_TO_CHANNELS = {
     "journal_hold": ("none", "rest"),
     "journal_write": ("none", "rest"),
     "journal_page_turn": ("none", "rest"),
+    "partnership_pitch": ("present", "rest"),
+    "stakeholder_translation": ("explain", "rest"),
+    "proof_presentation": ("point", "rest"),
+    "public_promise_check": ("think", "rest"),
+    "leadership_briefing": ("explain", "rest"),
+    "leadership_recovery": ("none", "rest"),
+    "diplomatic_recovery": ("none", "rest"),
 }
 
 

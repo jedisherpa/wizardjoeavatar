@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "character_id": "aurelia-finch-v1",
+  "display_name": "Aurelia Finch",
+  "renderer": "asciline_square_cells",
+  "pose_library": "aurelia_finch_pose_cells.json",
+  "animation_graph": "aurelia_finch_animation_graph.json",
+  "runtime_profile": "aurelia_finch_runtime_profile.json",
+  "manifest": "aurelia_finch_character_manifest.json",
+  "animation_matrix": "aurelia_finch_animation_matrix.json",
+  "extraction_audit": "aurelia_finch_extraction_audit.json",
+  "pixel_graph_library": "aurelia_finch_pixel_graphs.json",
+  "default_pose_id": "neutral_front",
+  "capabilities": [
+    "eight_direction_facing", "ground_locomotion", "airborne_motion",
+    "expression_graphs", "speech_visemes", "blink_graphs", "folio_interaction",
+    "partnership_pitch", "stakeholder_translation", "proof_presentation",
+    "public_promise_check", "leadership_briefing", "diplomatic_recovery"
+  ]
+}

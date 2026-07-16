@@ -1,0 +1,4857 @@
+{
+  "asset_set_id": "aurelia-finch-worksheet-motion-v1",
+  "audit_stage": "background_removal_and_pixel_graph_before_animation_mapping",
+  "category_counts": {
+    "expression": 24,
+    "hand_prop": 16,
+    "identity_reference": 16,
+    "interaction": 4,
+    "motion": 16,
+    "neutral": 8,
+    "signature": 16,
+    "turnaround": 8,
+    "viseme_blink": 16
+  },
+  "character_id": "aurelia-finch-v1",
+  "item_count": 124,
+  "items": [
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 20,
+        "right": 50,
+        "top": 5
+      },
+      "category": "identity_reference",
+      "floor_shadow_removed": true,
+      "graph_id": "identity_reference_00",
+      "graph_kind": "reference_graph",
+      "isolated_silhouette_sha256": "2b6be422f5451fcd7820caea8f3109318490155cd0e111c9b5c78e233a87e4dc",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 0,
+      "pixel_graph_sha256": "2b6be422f5451fcd7820caea8f3109318490155cd0e111c9b5c78e233a87e4dc",
+      "pixel_node_count": 2085,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "aurelia_finch_pixel_graphs.json#graph=identity_reference_00",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "01-identity-sheet-candidate-v1.png#panel-0",
+      "source_column": 0,
+      "source_panel_bounds": {
+        "bottom": 256,
+        "left": 0,
+        "right": 256,
+        "top": 0
+      },
+      "source_row": 0,
+      "source_sheet": "01-identity-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "e28850447f89019ee187b2a628cfa9aa43e014e802425f1ae5780135927752a5",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 19,
+        "right": 51,
+        "top": 5
+      },
+      "category": "identity_reference",
+      "floor_shadow_removed": true,
+      "graph_id": "identity_reference_01",
+      "graph_kind": "reference_graph",
+      "isolated_silhouette_sha256": "45e7c5ef781af4538e8d51a40c4d013a4a9ce8cc984214e8341a2603adeac76e",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 1,
+      "pixel_graph_sha256": "45e7c5ef781af4538e8d51a40c4d013a4a9ce8cc984214e8341a2603adeac76e",
+      "pixel_node_count": 2014,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "aurelia_finch_pixel_graphs.json#graph=identity_reference_01",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "01-identity-sheet-candidate-v1.png#panel-1",
+      "source_column": 1,
+      "source_panel_bounds": {
+        "bottom": 256,
+        "left": 256,
+        "right": 512,
+        "top": 0
+      },
+      "source_row": 0,
+      "source_sheet": "01-identity-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "e28850447f89019ee187b2a628cfa9aa43e014e802425f1ae5780135927752a5",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 23,
+        "right": 48,
+        "top": 5
+      },
+      "category": "identity_reference",
+      "floor_shadow_removed": true,
+      "graph_id": "identity_reference_02",
+      "graph_kind": "reference_graph",
+      "isolated_silhouette_sha256": "f681fd7e6a959063593fdea8504f2e25a8769b9a6faa1f681b4d78df9bb05932",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 2,
+      "pixel_graph_sha256": "f681fd7e6a959063593fdea8504f2e25a8769b9a6faa1f681b4d78df9bb05932",
+      "pixel_node_count": 1555,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "aurelia_finch_pixel_graphs.json#graph=identity_reference_02",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "01-identity-sheet-candidate-v1.png#panel-2",
+      "source_column": 2,
+      "source_panel_bounds": {
+        "bottom": 256,
+        "left": 512,
+        "right": 768,
+        "top": 0
+      },
+      "source_row": 0,
+      "source_sheet": "01-identity-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "e28850447f89019ee187b2a628cfa9aa43e014e802425f1ae5780135927752a5",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 21,
+        "right": 49,
+        "top": 5
+      },
+      "category": "identity_reference",
+      "floor_shadow_removed": true,
+      "graph_id": "identity_reference_03",
+      "graph_kind": "reference_graph",
+      "isolated_silhouette_sha256": "d070f1f37292bb61146fcd5b776072dfde7444369ebe8967cf7d4f69acbd3727",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 3,
+      "pixel_graph_sha256": "d070f1f37292bb61146fcd5b776072dfde7444369ebe8967cf7d4f69acbd3727",
+      "pixel_node_count": 1978,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "aurelia_finch_pixel_graphs.json#graph=identity_reference_03",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "01-identity-sheet-candidate-v1.png#panel-3",
+      "source_column": 3,
+      "source_panel_bounds": {
+        "bottom": 256,
+        "left": 768,
+        "right": 1024,
+        "top": 0
+      },
+      "source_row": 0,
+      "source_sheet": "01-identity-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "e28850447f89019ee187b2a628cfa9aa43e014e802425f1ae5780135927752a5",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 5,
+        "right": 66,
+        "top": 27
+      },
+      "category": "identity_reference",
+      "floor_shadow_removed": true,
+      "graph_id": "identity_reference_04",
+      "graph_kind": "reference_graph",
+      "isolated_silhouette_sha256": "72853a9673f9c014fdaf60d6f3f8e1a34eb31739c246dd33a8103d37ef4e906a",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 4,
+      "pixel_graph_sha256": "72853a9673f9c014fdaf60d6f3f8e1a34eb31739c246dd33a8103d37ef4e906a",
+      "pixel_node_count": 3090,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "aurelia_finch_pixel_graphs.json#graph=identity_reference_04",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "01-identity-sheet-candidate-v1.png#panel-4",
+      "source_column": 0,
+      "source_panel_bounds": {
+        "bottom": 512,
+        "left": 0,
+        "right": 256,
+        "top": 256
+      },
+      "source_row": 1,
+      "source_sheet": "01-identity-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "e28850447f89019ee187b2a628cfa9aa43e014e802425f1ae5780135927752a5",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 5,
+        "right": 66,
+        "top": 27
+      },
+      "category": "identity_reference",
+      "floor_shadow_removed": true,
+      "graph_id": "identity_reference_05",
+      "graph_kind": "reference_graph",
+      "isolated_silhouette_sha256": "e5641db6d4f466065cffb7bdabcb113427dc7d9ec028a440e2277b1100ba67f0",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 5,
+      "pixel_graph_sha256": "e5641db6d4f466065cffb7bdabcb113427dc7d9ec028a440e2277b1100ba67f0",
+      "pixel_node_count": 2911,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "aurelia_finch_pixel_graphs.json#graph=identity_reference_05",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "01-identity-sheet-candidate-v1.png#panel-5",
+      "source_column": 1,
+      "source_panel_bounds": {
+        "bottom": 512,
+        "left": 256,
+        "right": 512,
+        "top": 256
+      },
+      "source_row": 1,
+      "source_sheet": "01-identity-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "e28850447f89019ee187b2a628cfa9aa43e014e802425f1ae5780135927752a5",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 5,
+        "right": 66,
+        "top": 55
+      },
+      "category": "identity_reference",
+      "floor_shadow_removed": true,
+      "graph_id": "identity_reference_06",
+      "graph_kind": "reference_graph",
+      "isolated_silhouette_sha256": "68ce34008742f3283e51417b3f9f135ba91ffeef91799ddd85d3e1896b3149ef",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 6,
+      "pixel_graph_sha256": "68ce34008742f3283e51417b3f9f135ba91ffeef91799ddd85d3e1896b3149ef",
+      "pixel_node_count": 1316,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "aurelia_finch_pixel_graphs.json#graph=identity_reference_06",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "01-identity-sheet-candidate-v1.png#panel-6",
+      "source_column": 2,
+      "source_panel_bounds": {
+        "bottom": 512,
+        "left": 512,
+        "right": 768,
+        "top": 256
+      },
+      "source_row": 1,
+      "source_sheet": "01-identity-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "e28850447f89019ee187b2a628cfa9aa43e014e802425f1ae5780135927752a5",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 4,
+        "right": 67,
+        "top": 51
+      },
+      "category": "identity_reference",
+      "floor_shadow_removed": true,
+      "graph_id": "identity_reference_07",
+      "graph_kind": "reference_graph",
+      "isolated_silhouette_sha256": "3030cd0ccf07d1413ca4201d4e2e3a4a5c742817c6276eb4add532079300f9a8",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 7,
+      "pixel_graph_sha256": "3030cd0ccf07d1413ca4201d4e2e3a4a5c742817c6276eb4add532079300f9a8",
+      "pixel_node_count": 1666,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "aurelia_finch_pixel_graphs.json#graph=identity_reference_07",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "01-identity-sheet-candidate-v1.png#panel-7",
+      "source_column": 3,
+      "source_panel_bounds": {
+        "bottom": 512,
+        "left": 768,
+        "right": 1024,
+        "top": 256
+      },
+      "source_row": 1,
+      "source_sheet": "01-identity-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "e28850447f89019ee187b2a628cfa9aa43e014e802425f1ae5780135927752a5",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 4,
+        "right": 67,
+        "top": 23
+      },
+      "category": "identity_reference",
+      "floor_shadow_removed": true,
+      "graph_id": "identity_reference_08",
+      "graph_kind": "reference_graph",
+      "isolated_silhouette_sha256": "21cbb79adbbea337ae39401bc644e56fa5e0c1e002871c0e737a68cc92180b72",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 8,
+      "pixel_graph_sha256": "21cbb79adbbea337ae39401bc644e56fa5e0c1e002871c0e737a68cc92180b72",
+      "pixel_node_count": 3543,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "aurelia_finch_pixel_graphs.json#graph=identity_reference_08",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "01-identity-sheet-candidate-v1.png#panel-8",
+      "source_column": 0,
+      "source_panel_bounds": {
+        "bottom": 768,
+        "left": 0,
+        "right": 256,
+        "top": 512
+      },
+      "source_row": 2,
+      "source_sheet": "01-identity-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "e28850447f89019ee187b2a628cfa9aa43e014e802425f1ae5780135927752a5",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 4,
+        "right": 67,
+        "top": 28
+      },
+      "category": "identity_reference",
+      "floor_shadow_removed": true,
+      "graph_id": "identity_reference_09",
+      "graph_kind": "reference_graph",
+      "isolated_silhouette_sha256": "1deb528e7d0e88b21660d1ee2d5ff20693ab5ee566585369d8fb88af09d0ba24",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 9,
+      "pixel_graph_sha256": "1deb528e7d0e88b21660d1ee2d5ff20693ab5ee566585369d8fb88af09d0ba24",
+      "pixel_node_count": 3801,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "aurelia_finch_pixel_graphs.json#graph=identity_reference_09",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "01-identity-sheet-candidate-v1.png#panel-9",
+      "source_column": 1,
+      "source_panel_bounds": {
+        "bottom": 768,
+        "left": 256,
+        "right": 512,
+        "top": 512
+      },
+      "source_row": 2,
+      "source_sheet": "01-identity-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "e28850447f89019ee187b2a628cfa9aa43e014e802425f1ae5780135927752a5",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 4,
+        "right": 66,
+        "top": 16
+      },
+      "category": "identity_reference",
+      "floor_shadow_removed": true,
+      "graph_id": "identity_reference_10",
+      "graph_kind": "reference_graph",
+      "isolated_silhouette_sha256": "4f5a4988ce308c443b3a55052b91c6cf8ca02f2dd464a6bf8f13cb1d9b2f84e4",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 10,
+      "pixel_graph_sha256": "4f5a4988ce308c443b3a55052b91c6cf8ca02f2dd464a6bf8f13cb1d9b2f84e4",
+      "pixel_node_count": 3216,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "aurelia_finch_pixel_graphs.json#graph=identity_reference_10",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "01-identity-sheet-candidate-v1.png#panel-10",
+      "source_column": 2,
+      "source_panel_bounds": {
+        "bottom": 768,
+        "left": 512,
+        "right": 768,
+        "top": 512
+      },
+      "source_row": 2,
+      "source_sheet": "01-identity-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "e28850447f89019ee187b2a628cfa9aa43e014e802425f1ae5780135927752a5",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 5,
+        "right": 65,
+        "top": 5
+      },
+      "category": "identity_reference",
+      "floor_shadow_removed": true,
+      "graph_id": "identity_reference_11",
+      "graph_kind": "reference_graph",
+      "isolated_silhouette_sha256": "d5db092d785ae7970278b3f68f1dd07f7e258aad1a768533d13862fd3af7aa13",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 11,
+      "pixel_graph_sha256": "d5db092d785ae7970278b3f68f1dd07f7e258aad1a768533d13862fd3af7aa13",
+      "pixel_node_count": 3638,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "aurelia_finch_pixel_graphs.json#graph=identity_reference_11",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "01-identity-sheet-candidate-v1.png#panel-11",
+      "source_column": 3,
+      "source_panel_bounds": {
+        "bottom": 768,
+        "left": 768,
+        "right": 1024,
+        "top": 512
+      },
+      "source_row": 2,
+      "source_sheet": "01-identity-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "e28850447f89019ee187b2a628cfa9aa43e014e802425f1ae5780135927752a5",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 90,
+        "left": 5,
+        "right": 67,
+        "top": 31
+      },
+      "category": "identity_reference",
+      "floor_shadow_removed": true,
+      "graph_id": "identity_reference_12",
+      "graph_kind": "reference_graph",
+      "isolated_silhouette_sha256": "12ab4b74a01990a3a1bcce2162cb91ffa973ed15fc95d4f6415d06c276ecd511",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 12,
+      "pixel_graph_sha256": "12ab4b74a01990a3a1bcce2162cb91ffa973ed15fc95d4f6415d06c276ecd511",
+      "pixel_node_count": 1879,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "aurelia_finch_pixel_graphs.json#graph=identity_reference_12",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "01-identity-sheet-candidate-v1.png#panel-12",
+      "source_column": 0,
+      "source_panel_bounds": {
+        "bottom": 1024,
+        "left": 0,
+        "right": 256,
+        "top": 768
+      },
+      "source_row": 3,
+      "source_sheet": "01-identity-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "e28850447f89019ee187b2a628cfa9aa43e014e802425f1ae5780135927752a5",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 90,
+        "left": 5,
+        "right": 66,
+        "top": 35
+      },
+      "category": "identity_reference",
+      "floor_shadow_removed": true,
+      "graph_id": "identity_reference_13",
+      "graph_kind": "reference_graph",
+      "isolated_silhouette_sha256": "b4cc8fef6280aa043d29a92c8d43dfa16c13eec28dc5ecb1bc00dc1b501412f6",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 13,
+      "pixel_graph_sha256": "b4cc8fef6280aa043d29a92c8d43dfa16c13eec28dc5ecb1bc00dc1b501412f6",
+      "pixel_node_count": 1979,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "aurelia_finch_pixel_graphs.json#graph=identity_reference_13",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "01-identity-sheet-candidate-v1.png#panel-13",
+      "source_column": 1,
+      "source_panel_bounds": {
+        "bottom": 1024,
+        "left": 256,
+        "right": 512,
+        "top": 768
+      },
+      "source_row": 3,
+      "source_sheet": "01-identity-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "e28850447f89019ee187b2a628cfa9aa43e014e802425f1ae5780135927752a5",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 90,
+        "left": 5,
+        "right": 66,
+        "top": 32
+      },
+      "category": "identity_reference",
+      "floor_shadow_removed": true,
+      "graph_id": "identity_reference_14",
+      "graph_kind": "reference_graph",
+      "isolated_silhouette_sha256": "8a53be08da9e2af9918d112509b51abca2ba88b15aa4f1d6be915d2262aa1c67",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 14,
+      "pixel_graph_sha256": "8a53be08da9e2af9918d112509b51abca2ba88b15aa4f1d6be915d2262aa1c67",
+      "pixel_node_count": 2884,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "aurelia_finch_pixel_graphs.json#graph=identity_reference_14",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "01-identity-sheet-candidate-v1.png#panel-14",
+      "source_column": 2,
+      "source_panel_bounds": {
+        "bottom": 1024,
+        "left": 512,
+        "right": 768,
+        "top": 768
+      },
+      "source_row": 3,
+      "source_sheet": "01-identity-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "e28850447f89019ee187b2a628cfa9aa43e014e802425f1ae5780135927752a5",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 4,
+        "right": 67,
+        "top": 29
+      },
+      "category": "identity_reference",
+      "floor_shadow_removed": true,
+      "graph_id": "identity_reference_15",
+      "graph_kind": "reference_graph",
+      "isolated_silhouette_sha256": "211c5fd89bef5748b254aabf541e3ac26822783b02cf7070ec52ba7782be1464",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 15,
+      "pixel_graph_sha256": "211c5fd89bef5748b254aabf541e3ac26822783b02cf7070ec52ba7782be1464",
+      "pixel_node_count": 3997,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "aurelia_finch_pixel_graphs.json#graph=identity_reference_15",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "01-identity-sheet-candidate-v1.png#panel-15",
+      "source_column": 3,
+      "source_panel_bounds": {
+        "bottom": 1024,
+        "left": 768,
+        "right": 1024,
+        "top": 768
+      },
+      "source_row": 3,
+      "source_sheet": "01-identity-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "e28850447f89019ee187b2a628cfa9aa43e014e802425f1ae5780135927752a5",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 22,
+        "right": 49,
+        "top": 4
+      },
+      "category": "turnaround",
+      "floor_shadow_removed": true,
+      "graph_id": "neutral_front",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "2b9bb8ef4a725a2e435e7cc7e8779c3aa6c17744ccfe09e8854ab451105e9370",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 16,
+      "pixel_graph_sha256": "2b9bb8ef4a725a2e435e7cc7e8779c3aa6c17744ccfe09e8854ab451105e9370",
+      "pixel_node_count": 1720,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "aurelia_finch_pose_cells.json#pose=neutral_front",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "02-turnaround-sheet-candidate-v1.png#panel-0",
+      "source_column": 0,
+      "source_panel_bounds": {
+        "bottom": 512,
+        "left": 0,
+        "right": 256,
+        "top": 0
+      },
+      "source_row": 0,
+      "source_sheet": "02-turnaround-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "c700743f194af0103094ab4dd9f62ad5d70e96c3b7df6a6c2c96cd91b14737b9",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 23,
+        "right": 48,
+        "top": 4
+      },
+      "category": "turnaround",
+      "floor_shadow_removed": true,
+      "graph_id": "neutral_three_quarter_left",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "e2c6388ca7b5403dd25c6507dd8ce87dcd11b4f7a8db50e6f3b9d908756bc09b",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 17,
+      "pixel_graph_sha256": "e2c6388ca7b5403dd25c6507dd8ce87dcd11b4f7a8db50e6f3b9d908756bc09b",
+      "pixel_node_count": 1543,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "aurelia_finch_pose_cells.json#pose=neutral_three_quarter_left",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "02-turnaround-sheet-candidate-v1.png#panel-1",
+      "source_column": 1,
+      "source_panel_bounds": {
+        "bottom": 512,
+        "left": 256,
+        "right": 512,
+        "top": 0
+      },
+      "source_row": 0,
+      "source_sheet": "02-turnaround-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "c700743f194af0103094ab4dd9f62ad5d70e96c3b7df6a6c2c96cd91b14737b9",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 23,
+        "right": 47,
+        "top": 4
+      },
+      "category": "turnaround",
+      "floor_shadow_removed": true,
+      "graph_id": "neutral_left_profile",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "48737354d2f5da8122ddbdf507d1d324ae801f100c5e255c3a5a4a955c7edbd6",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 18,
+      "pixel_graph_sha256": "48737354d2f5da8122ddbdf507d1d324ae801f100c5e255c3a5a4a955c7edbd6",
+      "pixel_node_count": 1311,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "aurelia_finch_pose_cells.json#pose=neutral_left_profile",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "02-turnaround-sheet-candidate-v1.png#panel-2",
+      "source_column": 2,
+      "source_panel_bounds": {
+        "bottom": 512,
+        "left": 512,
+        "right": 768,
+        "top": 0
+      },
+      "source_row": 0,
+      "source_sheet": "02-turnaround-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "c700743f194af0103094ab4dd9f62ad5d70e96c3b7df6a6c2c96cd91b14737b9",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 22,
+        "right": 49,
+        "top": 4
+      },
+      "category": "turnaround",
+      "floor_shadow_removed": true,
+      "graph_id": "neutral_back_three_quarter_left",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "73c17930af33de961e7e6c69c9986c5782c217805711231e542c880c26405f2c",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 19,
+      "pixel_graph_sha256": "73c17930af33de961e7e6c69c9986c5782c217805711231e542c880c26405f2c",
+      "pixel_node_count": 1589,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "aurelia_finch_pose_cells.json#pose=neutral_back_three_quarter_left",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "02-turnaround-sheet-candidate-v1.png#panel-3",
+      "source_column": 3,
+      "source_panel_bounds": {
+        "bottom": 512,
+        "left": 768,
+        "right": 1024,
+        "top": 0
+      },
+      "source_row": 0,
+      "source_sheet": "02-turnaround-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "c700743f194af0103094ab4dd9f62ad5d70e96c3b7df6a6c2c96cd91b14737b9",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 22,
+        "right": 48,
+        "top": 4
+      },
+      "category": "turnaround",
+      "floor_shadow_removed": true,
+      "graph_id": "neutral_back",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "556f5e473aefe3fd81fabaa61d04f43dccd9851d3d531b63eb361ab9cabecca2",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 20,
+      "pixel_graph_sha256": "556f5e473aefe3fd81fabaa61d04f43dccd9851d3d531b63eb361ab9cabecca2",
+      "pixel_node_count": 1714,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "aurelia_finch_pose_cells.json#pose=neutral_back",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "02-turnaround-sheet-candidate-v1.png#panel-4",
+      "source_column": 0,
+      "source_panel_bounds": {
+        "bottom": 1024,
+        "left": 0,
+        "right": 256,
+        "top": 512
+      },
+      "source_row": 1,
+      "source_sheet": "02-turnaround-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "c700743f194af0103094ab4dd9f62ad5d70e96c3b7df6a6c2c96cd91b14737b9",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 21,
+        "right": 49,
+        "top": 4
+      },
+      "category": "turnaround",
+      "floor_shadow_removed": true,
+      "graph_id": "neutral_back_three_quarter_right",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "072d91bc74ec0ea0d19e4de8b56f2aa06b6978d17cb66dc4419d2775a60ff30e",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 21,
+      "pixel_graph_sha256": "072d91bc74ec0ea0d19e4de8b56f2aa06b6978d17cb66dc4419d2775a60ff30e",
+      "pixel_node_count": 1717,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "aurelia_finch_pose_cells.json#pose=neutral_back_three_quarter_right",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "02-turnaround-sheet-candidate-v1.png#panel-5",
+      "source_column": 1,
+      "source_panel_bounds": {
+        "bottom": 1024,
+        "left": 256,
+        "right": 512,
+        "top": 512
+      },
+      "source_row": 1,
+      "source_sheet": "02-turnaround-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "c700743f194af0103094ab4dd9f62ad5d70e96c3b7df6a6c2c96cd91b14737b9",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 23,
+        "right": 48,
+        "top": 4
+      },
+      "category": "turnaround",
+      "floor_shadow_removed": true,
+      "graph_id": "neutral_right_profile",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "41a731eec2db657406898de31c3744219dd23e6578f06c98aa45066b6e2b5cfb",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 22,
+      "pixel_graph_sha256": "41a731eec2db657406898de31c3744219dd23e6578f06c98aa45066b6e2b5cfb",
+      "pixel_node_count": 1400,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "aurelia_finch_pose_cells.json#pose=neutral_right_profile",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "02-turnaround-sheet-candidate-v1.png#panel-6",
+      "source_column": 2,
+      "source_panel_bounds": {
+        "bottom": 1024,
+        "left": 512,
+        "right": 768,
+        "top": 512
+      },
+      "source_row": 1,
+      "source_sheet": "02-turnaround-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "c700743f194af0103094ab4dd9f62ad5d70e96c3b7df6a6c2c96cd91b14737b9",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 21,
+        "right": 50,
+        "top": 4
+      },
+      "category": "turnaround",
+      "floor_shadow_removed": true,
+      "graph_id": "neutral_three_quarter_right",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "58a09bb07595f292da67df172ee411e05ec2c232dee8b09604f120abf93bbcb5",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 23,
+      "pixel_graph_sha256": "58a09bb07595f292da67df172ee411e05ec2c232dee8b09604f120abf93bbcb5",
+      "pixel_node_count": 1705,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "aurelia_finch_pose_cells.json#pose=neutral_three_quarter_right",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "02-turnaround-sheet-candidate-v1.png#panel-7",
+      "source_column": 3,
+      "source_panel_bounds": {
+        "bottom": 1024,
+        "left": 768,
+        "right": 1024,
+        "top": 512
+      },
+      "source_row": 1,
+      "source_sheet": "02-turnaround-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "c700743f194af0103094ab4dd9f62ad5d70e96c3b7df6a6c2c96cd91b14737b9",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 22,
+        "right": 49,
+        "top": 4
+      },
+      "category": "neutral",
+      "floor_shadow_removed": true,
+      "graph_id": "neutral_base_front",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "b8e81826f1156c188e7f2fc4d130858bd96ad46f54f1e2f4be08d52fc380bdb9",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 24,
+      "pixel_graph_sha256": "b8e81826f1156c188e7f2fc4d130858bd96ad46f54f1e2f4be08d52fc380bdb9",
+      "pixel_node_count": 1832,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "aurelia_finch_pose_cells.json#pose=neutral_base_front",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "03-neutral-base-poses-candidate-v1.png#panel-0",
+      "source_column": 0,
+      "source_panel_bounds": {
+        "bottom": 448,
+        "left": 0,
+        "right": 448,
+        "top": 0
+      },
+      "source_row": 0,
+      "source_sheet": "03-neutral-base-poses-candidate-v1.png",
+      "source_worksheet_sha256": "a83466add91e58406390ca97f83e4764674952dba0b89579db982085f9c6378f",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 22,
+        "right": 49,
+        "top": 4
+      },
+      "category": "neutral",
+      "floor_shadow_removed": true,
+      "graph_id": "neutral_base_three_quarter",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "c4e66d23ae793d9f0e80cb5c4d99ad70e5d7582c08d77ca12a23c27714799e78",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 25,
+      "pixel_graph_sha256": "c4e66d23ae793d9f0e80cb5c4d99ad70e5d7582c08d77ca12a23c27714799e78",
+      "pixel_node_count": 1760,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "aurelia_finch_pose_cells.json#pose=neutral_base_three_quarter",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "03-neutral-base-poses-candidate-v1.png#panel-1",
+      "source_column": 1,
+      "source_panel_bounds": {
+        "bottom": 448,
+        "left": 448,
+        "right": 896,
+        "top": 0
+      },
+      "source_row": 0,
+      "source_sheet": "03-neutral-base-poses-candidate-v1.png",
+      "source_worksheet_sha256": "a83466add91e58406390ca97f83e4764674952dba0b89579db982085f9c6378f",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 23,
+        "right": 48,
+        "top": 4
+      },
+      "category": "neutral",
+      "floor_shadow_removed": true,
+      "graph_id": "neutral_base_profile",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "6e6d850881d8872f6b1e0670b2c7da29c84ad444305cf3de902926682ea18cf6",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 26,
+      "pixel_graph_sha256": "6e6d850881d8872f6b1e0670b2c7da29c84ad444305cf3de902926682ea18cf6",
+      "pixel_node_count": 1393,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "aurelia_finch_pose_cells.json#pose=neutral_base_profile",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "03-neutral-base-poses-candidate-v1.png#panel-2",
+      "source_column": 2,
+      "source_panel_bounds": {
+        "bottom": 448,
+        "left": 896,
+        "right": 1344,
+        "top": 0
+      },
+      "source_row": 0,
+      "source_sheet": "03-neutral-base-poses-candidate-v1.png",
+      "source_worksheet_sha256": "a83466add91e58406390ca97f83e4764674952dba0b89579db982085f9c6378f",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 21,
+        "right": 49,
+        "top": 4
+      },
+      "category": "neutral",
+      "floor_shadow_removed": true,
+      "graph_id": "neutral_base_back",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "ea3450cfadd1a079ca6359c7e06a8bcf4678176dc02f6550c4d3237e39ab719e",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 27,
+      "pixel_graph_sha256": "ea3450cfadd1a079ca6359c7e06a8bcf4678176dc02f6550c4d3237e39ab719e",
+      "pixel_node_count": 1876,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "aurelia_finch_pose_cells.json#pose=neutral_base_back",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "03-neutral-base-poses-candidate-v1.png#panel-3",
+      "source_column": 3,
+      "source_panel_bounds": {
+        "bottom": 448,
+        "left": 1344,
+        "right": 1792,
+        "top": 0
+      },
+      "source_row": 0,
+      "source_sheet": "03-neutral-base-poses-candidate-v1.png",
+      "source_worksheet_sha256": "a83466add91e58406390ca97f83e4764674952dba0b89579db982085f9c6378f",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 20,
+        "right": 51,
+        "top": 4
+      },
+      "category": "neutral",
+      "floor_shadow_removed": true,
+      "graph_id": "idle_relaxed",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "951dae6ba5a8a06ce7af8073339c0023bd03689c3f32b480d7379c2a3f97e201",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 28,
+      "pixel_graph_sha256": "951dae6ba5a8a06ce7af8073339c0023bd03689c3f32b480d7379c2a3f97e201",
+      "pixel_node_count": 1862,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "aurelia_finch_pose_cells.json#pose=idle_relaxed",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "03-neutral-base-poses-candidate-v1.png#panel-4",
+      "source_column": 0,
+      "source_panel_bounds": {
+        "bottom": 896,
+        "left": 0,
+        "right": 448,
+        "top": 448
+      },
+      "source_row": 1,
+      "source_sheet": "03-neutral-base-poses-candidate-v1.png",
+      "source_worksheet_sha256": "a83466add91e58406390ca97f83e4764674952dba0b89579db982085f9c6378f",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 21,
+        "right": 49,
+        "top": 4
+      },
+      "category": "neutral",
+      "floor_shadow_removed": true,
+      "graph_id": "idle_attentive",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "f6f54df51cbabccd451e7b787f53f471f6ef41b25639ca1d8f9be54733a10e44",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 29,
+      "pixel_graph_sha256": "f6f54df51cbabccd451e7b787f53f471f6ef41b25639ca1d8f9be54733a10e44",
+      "pixel_node_count": 1807,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "aurelia_finch_pose_cells.json#pose=idle_attentive",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "03-neutral-base-poses-candidate-v1.png#panel-5",
+      "source_column": 1,
+      "source_panel_bounds": {
+        "bottom": 896,
+        "left": 448,
+        "right": 896,
+        "top": 448
+      },
+      "source_row": 1,
+      "source_sheet": "03-neutral-base-poses-candidate-v1.png",
+      "source_worksheet_sha256": "a83466add91e58406390ca97f83e4764674952dba0b89579db982085f9c6378f",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 15,
+        "right": 56,
+        "top": 4
+      },
+      "category": "neutral",
+      "floor_shadow_removed": true,
+      "graph_id": "idle_speaking",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "32ee7c4155b8f49e17fe065c69c26e8c6f709735d3f8168dd810d71fb53d8606",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 30,
+      "pixel_graph_sha256": "32ee7c4155b8f49e17fe065c69c26e8c6f709735d3f8168dd810d71fb53d8606",
+      "pixel_node_count": 1825,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "aurelia_finch_pose_cells.json#pose=idle_speaking",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "03-neutral-base-poses-candidate-v1.png#panel-6",
+      "source_column": 2,
+      "source_panel_bounds": {
+        "bottom": 896,
+        "left": 896,
+        "right": 1344,
+        "top": 448
+      },
+      "source_row": 1,
+      "source_sheet": "03-neutral-base-poses-candidate-v1.png",
+      "source_worksheet_sha256": "a83466add91e58406390ca97f83e4764674952dba0b89579db982085f9c6378f",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 22,
+        "right": 49,
+        "top": 4
+      },
+      "category": "neutral",
+      "floor_shadow_removed": true,
+      "graph_id": "idle_listening",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "eb0a124417642a5b477e50e87014897d1b5c2dd34e192682af8975a70dc3df96",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 31,
+      "pixel_graph_sha256": "eb0a124417642a5b477e50e87014897d1b5c2dd34e192682af8975a70dc3df96",
+      "pixel_node_count": 1735,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "aurelia_finch_pose_cells.json#pose=idle_listening",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "03-neutral-base-poses-candidate-v1.png#panel-7",
+      "source_column": 3,
+      "source_panel_bounds": {
+        "bottom": 896,
+        "left": 1344,
+        "right": 1792,
+        "top": 448
+      },
+      "source_row": 1,
+      "source_sheet": "03-neutral-base-poses-candidate-v1.png",
+      "source_worksheet_sha256": "a83466add91e58406390ca97f83e4764674952dba0b89579db982085f9c6378f",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 90,
+        "left": 22,
+        "right": 49,
+        "top": 5
+      },
+      "category": "expression",
+      "floor_shadow_removed": true,
+      "graph_id": "expression_neutral",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "dca84edcaa912fdcc778d68837e1aee2c415b3fe42017a0feecf30b4ded0c20c",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 32,
+      "pixel_graph_sha256": "dca84edcaa912fdcc778d68837e1aee2c415b3fe42017a0feecf30b4ded0c20c",
+      "pixel_node_count": 1732,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "aurelia_finch_pose_cells.json#pose=expression_neutral",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "04-expression-sheet-candidate-v2.png#panel-0",
+      "source_column": 0,
+      "source_panel_bounds": {
+        "bottom": 256,
+        "left": 0,
+        "right": 256,
+        "top": 0
+      },
+      "source_row": 0,
+      "source_sheet": "04-expression-sheet-candidate-v2.png",
+      "source_worksheet_sha256": "68f0a6e5fec8b9ebd3f5a455a8020710c14e42184cad6950e3625b31dbaf87d7",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 90,
+        "left": 22,
+        "right": 49,
+        "top": 5
+      },
+      "category": "expression",
+      "floor_shadow_removed": true,
+      "graph_id": "expression_calm",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "508a22ef9d805fd177df4f1dc49ceb86115b35a39452058fad3125a2905683c1",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 33,
+      "pixel_graph_sha256": "508a22ef9d805fd177df4f1dc49ceb86115b35a39452058fad3125a2905683c1",
+      "pixel_node_count": 1639,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "aurelia_finch_pose_cells.json#pose=expression_calm",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "04-expression-sheet-candidate-v2.png#panel-1",
+      "source_column": 1,
+      "source_panel_bounds": {
+        "bottom": 256,
+        "left": 256,
+        "right": 512,
+        "top": 0
+      },
+      "source_row": 0,
+      "source_sheet": "04-expression-sheet-candidate-v2.png",
+      "source_worksheet_sha256": "68f0a6e5fec8b9ebd3f5a455a8020710c14e42184cad6950e3625b31dbaf87d7",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 90,
+        "left": 20,
+        "right": 51,
+        "top": 5
+      },
+      "category": "expression",
+      "floor_shadow_removed": true,
+      "graph_id": "expression_joy",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "69111d2f00a4a18774e4bafca199c7277c02851ea3140d2fb7d371e1de147b09",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 34,
+      "pixel_graph_sha256": "69111d2f00a4a18774e4bafca199c7277c02851ea3140d2fb7d371e1de147b09",
+      "pixel_node_count": 1710,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "aurelia_finch_pose_cells.json#pose=expression_joy",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "04-expression-sheet-candidate-v2.png#panel-2",
+      "source_column": 2,
+      "source_panel_bounds": {
+        "bottom": 256,
+        "left": 512,
+        "right": 768,
+        "top": 0
+      },
+      "source_row": 0,
+      "source_sheet": "04-expression-sheet-candidate-v2.png",
+      "source_worksheet_sha256": "68f0a6e5fec8b9ebd3f5a455a8020710c14e42184cad6950e3625b31dbaf87d7",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 90,
+        "left": 20,
+        "right": 50,
+        "top": 5
+      },
+      "category": "expression",
+      "floor_shadow_removed": true,
+      "graph_id": "expression_amusement",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "93b39ac1250af92bc1e93c3c1af0ac814b729473f041543ef38934f900a2bdd5",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 35,
+      "pixel_graph_sha256": "93b39ac1250af92bc1e93c3c1af0ac814b729473f041543ef38934f900a2bdd5",
+      "pixel_node_count": 1744,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "aurelia_finch_pose_cells.json#pose=expression_amusement",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "04-expression-sheet-candidate-v2.png#panel-3",
+      "source_column": 3,
+      "source_panel_bounds": {
+        "bottom": 256,
+        "left": 768,
+        "right": 1024,
+        "top": 0
+      },
+      "source_row": 0,
+      "source_sheet": "04-expression-sheet-candidate-v2.png",
+      "source_worksheet_sha256": "68f0a6e5fec8b9ebd3f5a455a8020710c14e42184cad6950e3625b31dbaf87d7",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 90,
+        "left": 15,
+        "right": 56,
+        "top": 5
+      },
+      "category": "expression",
+      "floor_shadow_removed": true,
+      "graph_id": "expression_excitement",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "bd31184efb3210ad9903bde7b513365343770ed78dae0baf098b058316c5ec6f",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 36,
+      "pixel_graph_sha256": "bd31184efb3210ad9903bde7b513365343770ed78dae0baf098b058316c5ec6f",
+      "pixel_node_count": 1849,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "aurelia_finch_pose_cells.json#pose=expression_excitement",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "04-expression-sheet-candidate-v2.png#panel-4",
+      "source_column": 4,
+      "source_panel_bounds": {
+        "bottom": 256,
+        "left": 1024,
+        "right": 1280,
+        "top": 0
+      },
+      "source_row": 0,
+      "source_sheet": "04-expression-sheet-candidate-v2.png",
+      "source_worksheet_sha256": "68f0a6e5fec8b9ebd3f5a455a8020710c14e42184cad6950e3625b31dbaf87d7",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 90,
+        "left": 22,
+        "right": 49,
+        "top": 5
+      },
+      "category": "expression",
+      "floor_shadow_removed": true,
+      "graph_id": "expression_curiosity",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "882fe9e98c4973e1fc7eafb2c2a64a42a62dc1dc12441bac6ced30a4634f9d25",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 37,
+      "pixel_graph_sha256": "882fe9e98c4973e1fc7eafb2c2a64a42a62dc1dc12441bac6ced30a4634f9d25",
+      "pixel_node_count": 1674,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "aurelia_finch_pose_cells.json#pose=expression_curiosity",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "04-expression-sheet-candidate-v2.png#panel-5",
+      "source_column": 5,
+      "source_panel_bounds": {
+        "bottom": 256,
+        "left": 1280,
+        "right": 1536,
+        "top": 0
+      },
+      "source_row": 0,
+      "source_sheet": "04-expression-sheet-candidate-v2.png",
+      "source_worksheet_sha256": "68f0a6e5fec8b9ebd3f5a455a8020710c14e42184cad6950e3625b31dbaf87d7",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 90,
+        "left": 21,
+        "right": 50,
+        "top": 5
+      },
+      "category": "expression",
+      "floor_shadow_removed": true,
+      "graph_id": "expression_confidence",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "f1843c96305baacc8ce3f1476426e442116042ab08a7aedb8277c3de2b5e103c",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 38,
+      "pixel_graph_sha256": "f1843c96305baacc8ce3f1476426e442116042ab08a7aedb8277c3de2b5e103c",
+      "pixel_node_count": 1729,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "aurelia_finch_pose_cells.json#pose=expression_confidence",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "04-expression-sheet-candidate-v2.png#panel-6",
+      "source_column": 0,
+      "source_panel_bounds": {
+        "bottom": 512,
+        "left": 0,
+        "right": 256,
+        "top": 256
+      },
+      "source_row": 1,
+      "source_sheet": "04-expression-sheet-candidate-v2.png",
+      "source_worksheet_sha256": "68f0a6e5fec8b9ebd3f5a455a8020710c14e42184cad6950e3625b31dbaf87d7",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 90,
+        "left": 21,
+        "right": 49,
+        "top": 5
+      },
+      "category": "expression",
+      "floor_shadow_removed": true,
+      "graph_id": "expression_compassion",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "5d7e8f9e088202c2f52ff9b500df943b3aee056e119fc280a29597d0e0bd8c76",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 39,
+      "pixel_graph_sha256": "5d7e8f9e088202c2f52ff9b500df943b3aee056e119fc280a29597d0e0bd8c76",
+      "pixel_node_count": 1637,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "aurelia_finch_pose_cells.json#pose=expression_compassion",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "04-expression-sheet-candidate-v2.png#panel-7",
+      "source_column": 1,
+      "source_panel_bounds": {
+        "bottom": 512,
+        "left": 256,
+        "right": 512,
+        "top": 256
+      },
+      "source_row": 1,
+      "source_sheet": "04-expression-sheet-candidate-v2.png",
+      "source_worksheet_sha256": "68f0a6e5fec8b9ebd3f5a455a8020710c14e42184cad6950e3625b31dbaf87d7",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 90,
+        "left": 21,
+        "right": 49,
+        "top": 5
+      },
+      "category": "expression",
+      "floor_shadow_removed": true,
+      "graph_id": "expression_surprise",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "a558f69dc96620cd0308144d86df808ed953aeaf637b0947869708586a0759ea",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 40,
+      "pixel_graph_sha256": "a558f69dc96620cd0308144d86df808ed953aeaf637b0947869708586a0759ea",
+      "pixel_node_count": 1638,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "aurelia_finch_pose_cells.json#pose=expression_surprise",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "04-expression-sheet-candidate-v2.png#panel-8",
+      "source_column": 2,
+      "source_panel_bounds": {
+        "bottom": 512,
+        "left": 512,
+        "right": 768,
+        "top": 256
+      },
+      "source_row": 1,
+      "source_sheet": "04-expression-sheet-candidate-v2.png",
+      "source_worksheet_sha256": "68f0a6e5fec8b9ebd3f5a455a8020710c14e42184cad6950e3625b31dbaf87d7",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 90,
+        "left": 12,
+        "right": 59,
+        "top": 5
+      },
+      "category": "expression",
+      "floor_shadow_removed": true,
+      "graph_id": "expression_confusion",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "ef32c1b207b8b711e19b1b664af924b1ba4a87af30a209f9202f3c93c254bdbc",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 41,
+      "pixel_graph_sha256": "ef32c1b207b8b711e19b1b664af924b1ba4a87af30a209f9202f3c93c254bdbc",
+      "pixel_node_count": 1840,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "aurelia_finch_pose_cells.json#pose=expression_confusion",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "04-expression-sheet-candidate-v2.png#panel-9",
+      "source_column": 3,
+      "source_panel_bounds": {
+        "bottom": 512,
+        "left": 768,
+        "right": 1024,
+        "top": 256
+      },
+      "source_row": 1,
+      "source_sheet": "04-expression-sheet-candidate-v2.png",
+      "source_worksheet_sha256": "68f0a6e5fec8b9ebd3f5a455a8020710c14e42184cad6950e3625b31dbaf87d7",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 90,
+        "left": 22,
+        "right": 48,
+        "top": 5
+      },
+      "category": "expression",
+      "floor_shadow_removed": true,
+      "graph_id": "expression_skepticism",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "9aaa7b2382165f3be89354dce200249e513cea97243d3964db6250ad9b860d05",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 42,
+      "pixel_graph_sha256": "9aaa7b2382165f3be89354dce200249e513cea97243d3964db6250ad9b860d05",
+      "pixel_node_count": 1633,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "aurelia_finch_pose_cells.json#pose=expression_skepticism",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "04-expression-sheet-candidate-v2.png#panel-10",
+      "source_column": 4,
+      "source_panel_bounds": {
+        "bottom": 512,
+        "left": 1024,
+        "right": 1280,
+        "top": 256
+      },
+      "source_row": 1,
+      "source_sheet": "04-expression-sheet-candidate-v2.png",
+      "source_worksheet_sha256": "68f0a6e5fec8b9ebd3f5a455a8020710c14e42184cad6950e3625b31dbaf87d7",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 90,
+        "left": 22,
+        "right": 49,
+        "top": 5
+      },
+      "category": "expression",
+      "floor_shadow_removed": true,
+      "graph_id": "expression_concern",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "d324cfe5d16c12317ef0103ba5778a5483d3b671980161b333ba35b8f14a3e4b",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 43,
+      "pixel_graph_sha256": "d324cfe5d16c12317ef0103ba5778a5483d3b671980161b333ba35b8f14a3e4b",
+      "pixel_node_count": 1625,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "aurelia_finch_pose_cells.json#pose=expression_concern",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "04-expression-sheet-candidate-v2.png#panel-11",
+      "source_column": 5,
+      "source_panel_bounds": {
+        "bottom": 512,
+        "left": 1280,
+        "right": 1536,
+        "top": 256
+      },
+      "source_row": 1,
+      "source_sheet": "04-expression-sheet-candidate-v2.png",
+      "source_worksheet_sha256": "68f0a6e5fec8b9ebd3f5a455a8020710c14e42184cad6950e3625b31dbaf87d7",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 90,
+        "left": 21,
+        "right": 50,
+        "top": 5
+      },
+      "category": "expression",
+      "floor_shadow_removed": true,
+      "graph_id": "expression_sadness",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "11300e0ebf3ccff956c7c1f5624ef474be33f60573a4f6505040ba2eb83e5820",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 44,
+      "pixel_graph_sha256": "11300e0ebf3ccff956c7c1f5624ef474be33f60573a4f6505040ba2eb83e5820",
+      "pixel_node_count": 1688,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "aurelia_finch_pose_cells.json#pose=expression_sadness",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "04-expression-sheet-candidate-v2.png#panel-12",
+      "source_column": 0,
+      "source_panel_bounds": {
+        "bottom": 768,
+        "left": 0,
+        "right": 256,
+        "top": 512
+      },
+      "source_row": 2,
+      "source_sheet": "04-expression-sheet-candidate-v2.png",
+      "source_worksheet_sha256": "68f0a6e5fec8b9ebd3f5a455a8020710c14e42184cad6950e3625b31dbaf87d7",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 90,
+        "left": 21,
+        "right": 50,
+        "top": 5
+      },
+      "category": "expression",
+      "floor_shadow_removed": true,
+      "graph_id": "expression_shame",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "0aefc576a102c9dc9ef80d45f4b302eb1a43035ed4b36c8876e03d970ce362e0",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 45,
+      "pixel_graph_sha256": "0aefc576a102c9dc9ef80d45f4b302eb1a43035ed4b36c8876e03d970ce362e0",
+      "pixel_node_count": 1593,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "aurelia_finch_pose_cells.json#pose=expression_shame",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "04-expression-sheet-candidate-v2.png#panel-13",
+      "source_column": 1,
+      "source_panel_bounds": {
+        "bottom": 768,
+        "left": 256,
+        "right": 512,
+        "top": 512
+      },
+      "source_row": 2,
+      "source_sheet": "04-expression-sheet-candidate-v2.png",
+      "source_worksheet_sha256": "68f0a6e5fec8b9ebd3f5a455a8020710c14e42184cad6950e3625b31dbaf87d7",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 90,
+        "left": 20,
+        "right": 50,
+        "top": 5
+      },
+      "category": "expression",
+      "floor_shadow_removed": true,
+      "graph_id": "expression_embarrassment",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "2c61efbe158501bd6e96401ebcba121421fee0542eb2882dce2c0cd555c5388e",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 46,
+      "pixel_graph_sha256": "2c61efbe158501bd6e96401ebcba121421fee0542eb2882dce2c0cd555c5388e",
+      "pixel_node_count": 1673,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "aurelia_finch_pose_cells.json#pose=expression_embarrassment",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "04-expression-sheet-candidate-v2.png#panel-14",
+      "source_column": 2,
+      "source_panel_bounds": {
+        "bottom": 768,
+        "left": 512,
+        "right": 768,
+        "top": 512
+      },
+      "source_row": 2,
+      "source_sheet": "04-expression-sheet-candidate-v2.png",
+      "source_worksheet_sha256": "68f0a6e5fec8b9ebd3f5a455a8020710c14e42184cad6950e3625b31dbaf87d7",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 90,
+        "left": 15,
+        "right": 55,
+        "top": 5
+      },
+      "category": "expression",
+      "floor_shadow_removed": true,
+      "graph_id": "expression_fear",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "d413a6022e4bbb2c46db63f9574a831d94c64359e53577186f705a6d5cff04d6",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 47,
+      "pixel_graph_sha256": "d413a6022e4bbb2c46db63f9574a831d94c64359e53577186f705a6d5cff04d6",
+      "pixel_node_count": 1914,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "aurelia_finch_pose_cells.json#pose=expression_fear",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "04-expression-sheet-candidate-v2.png#panel-15",
+      "source_column": 3,
+      "source_panel_bounds": {
+        "bottom": 768,
+        "left": 768,
+        "right": 1024,
+        "top": 512
+      },
+      "source_row": 2,
+      "source_sheet": "04-expression-sheet-candidate-v2.png",
+      "source_worksheet_sha256": "68f0a6e5fec8b9ebd3f5a455a8020710c14e42184cad6950e3625b31dbaf87d7",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 90,
+        "left": 21,
+        "right": 50,
+        "top": 5
+      },
+      "category": "expression",
+      "floor_shadow_removed": true,
+      "graph_id": "expression_anxiety",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "aa7b130bec66c1742d36a4a4003bb65f53eec1cc02514e1e2a3b45793a6bc747",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 48,
+      "pixel_graph_sha256": "aa7b130bec66c1742d36a4a4003bb65f53eec1cc02514e1e2a3b45793a6bc747",
+      "pixel_node_count": 1701,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "aurelia_finch_pose_cells.json#pose=expression_anxiety",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "04-expression-sheet-candidate-v2.png#panel-16",
+      "source_column": 4,
+      "source_panel_bounds": {
+        "bottom": 768,
+        "left": 1024,
+        "right": 1280,
+        "top": 512
+      },
+      "source_row": 2,
+      "source_sheet": "04-expression-sheet-candidate-v2.png",
+      "source_worksheet_sha256": "68f0a6e5fec8b9ebd3f5a455a8020710c14e42184cad6950e3625b31dbaf87d7",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 90,
+        "left": 16,
+        "right": 54,
+        "top": 5
+      },
+      "category": "expression",
+      "floor_shadow_removed": true,
+      "graph_id": "expression_anger",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "071ba4e10bd287e6c0116704a0bffe127a5b199c393d7b621287f3327b77193c",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 49,
+      "pixel_graph_sha256": "071ba4e10bd287e6c0116704a0bffe127a5b199c393d7b621287f3327b77193c",
+      "pixel_node_count": 1992,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "aurelia_finch_pose_cells.json#pose=expression_anger",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "04-expression-sheet-candidate-v2.png#panel-17",
+      "source_column": 5,
+      "source_panel_bounds": {
+        "bottom": 768,
+        "left": 1280,
+        "right": 1536,
+        "top": 512
+      },
+      "source_row": 2,
+      "source_sheet": "04-expression-sheet-candidate-v2.png",
+      "source_worksheet_sha256": "68f0a6e5fec8b9ebd3f5a455a8020710c14e42184cad6950e3625b31dbaf87d7",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 90,
+        "left": 15,
+        "right": 55,
+        "top": 5
+      },
+      "category": "expression",
+      "floor_shadow_removed": true,
+      "graph_id": "expression_frustration",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "a4bd3a7633d779cdc6018e1d028d94e634d34c42aede5863492dbf4664277ad7",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 50,
+      "pixel_graph_sha256": "a4bd3a7633d779cdc6018e1d028d94e634d34c42aede5863492dbf4664277ad7",
+      "pixel_node_count": 1948,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "aurelia_finch_pose_cells.json#pose=expression_frustration",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "04-expression-sheet-candidate-v2.png#panel-18",
+      "source_column": 0,
+      "source_panel_bounds": {
+        "bottom": 1024,
+        "left": 0,
+        "right": 256,
+        "top": 768
+      },
+      "source_row": 3,
+      "source_sheet": "04-expression-sheet-candidate-v2.png",
+      "source_worksheet_sha256": "68f0a6e5fec8b9ebd3f5a455a8020710c14e42184cad6950e3625b31dbaf87d7",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 90,
+        "left": 17,
+        "right": 54,
+        "top": 5
+      },
+      "category": "expression",
+      "floor_shadow_removed": true,
+      "graph_id": "expression_determination",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "a66d8a145c80cbddc76d0ec3123053c130071ca55f17db49b056486ff21fbd1f",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 51,
+      "pixel_graph_sha256": "a66d8a145c80cbddc76d0ec3123053c130071ca55f17db49b056486ff21fbd1f",
+      "pixel_node_count": 1860,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "aurelia_finch_pose_cells.json#pose=expression_determination",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "04-expression-sheet-candidate-v2.png#panel-19",
+      "source_column": 1,
+      "source_panel_bounds": {
+        "bottom": 1024,
+        "left": 256,
+        "right": 512,
+        "top": 768
+      },
+      "source_row": 3,
+      "source_sheet": "04-expression-sheet-candidate-v2.png",
+      "source_worksheet_sha256": "68f0a6e5fec8b9ebd3f5a455a8020710c14e42184cad6950e3625b31dbaf87d7",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 90,
+        "left": 19,
+        "right": 51,
+        "top": 5
+      },
+      "category": "expression",
+      "floor_shadow_removed": true,
+      "graph_id": "expression_fatigue",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "8faec233d983da4dac14b61b26e4dc5557574a2055563b0a45a843d1da9dfce1",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 52,
+      "pixel_graph_sha256": "8faec233d983da4dac14b61b26e4dc5557574a2055563b0a45a843d1da9dfce1",
+      "pixel_node_count": 1730,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "aurelia_finch_pose_cells.json#pose=expression_fatigue",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "04-expression-sheet-candidate-v2.png#panel-20",
+      "source_column": 2,
+      "source_panel_bounds": {
+        "bottom": 1024,
+        "left": 512,
+        "right": 768,
+        "top": 768
+      },
+      "source_row": 3,
+      "source_sheet": "04-expression-sheet-candidate-v2.png",
+      "source_worksheet_sha256": "68f0a6e5fec8b9ebd3f5a455a8020710c14e42184cad6950e3625b31dbaf87d7",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 90,
+        "left": 22,
+        "right": 49,
+        "top": 5
+      },
+      "category": "expression",
+      "floor_shadow_removed": true,
+      "graph_id": "expression_contemplation",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "c91e5ee8b56c20e437fdb679794ed5336ca87f92f07987c270f3585b7a8b0023",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 53,
+      "pixel_graph_sha256": "c91e5ee8b56c20e437fdb679794ed5336ca87f92f07987c270f3585b7a8b0023",
+      "pixel_node_count": 1651,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "aurelia_finch_pose_cells.json#pose=expression_contemplation",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "04-expression-sheet-candidate-v2.png#panel-21",
+      "source_column": 3,
+      "source_panel_bounds": {
+        "bottom": 1024,
+        "left": 768,
+        "right": 1024,
+        "top": 768
+      },
+      "source_row": 3,
+      "source_sheet": "04-expression-sheet-candidate-v2.png",
+      "source_worksheet_sha256": "68f0a6e5fec8b9ebd3f5a455a8020710c14e42184cad6950e3625b31dbaf87d7",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 90,
+        "left": 22,
+        "right": 48,
+        "top": 5
+      },
+      "category": "expression",
+      "floor_shadow_removed": true,
+      "graph_id": "expression_listening_ready",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "a174b0073c2028a6628aed5541e088cb36567da0e74b130c1cca7795234da1ed",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 54,
+      "pixel_graph_sha256": "a174b0073c2028a6628aed5541e088cb36567da0e74b130c1cca7795234da1ed",
+      "pixel_node_count": 1721,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "aurelia_finch_pose_cells.json#pose=expression_listening_ready",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "04-expression-sheet-candidate-v2.png#panel-22",
+      "source_column": 4,
+      "source_panel_bounds": {
+        "bottom": 1024,
+        "left": 1024,
+        "right": 1280,
+        "top": 768
+      },
+      "source_row": 3,
+      "source_sheet": "04-expression-sheet-candidate-v2.png",
+      "source_worksheet_sha256": "68f0a6e5fec8b9ebd3f5a455a8020710c14e42184cad6950e3625b31dbaf87d7",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 90,
+        "left": 22,
+        "right": 48,
+        "top": 5
+      },
+      "category": "expression",
+      "floor_shadow_removed": true,
+      "graph_id": "expression_reflective_reset",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "7d85b244920d299dff6f1778be39590b7f3bd709d1f8fd79c28f03631485cbed",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 55,
+      "pixel_graph_sha256": "7d85b244920d299dff6f1778be39590b7f3bd709d1f8fd79c28f03631485cbed",
+      "pixel_node_count": 1604,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "aurelia_finch_pose_cells.json#pose=expression_reflective_reset",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "04-expression-sheet-candidate-v2.png#panel-23",
+      "source_column": 5,
+      "source_panel_bounds": {
+        "bottom": 1024,
+        "left": 1280,
+        "right": 1536,
+        "top": 768
+      },
+      "source_row": 3,
+      "source_sheet": "04-expression-sheet-candidate-v2.png",
+      "source_worksheet_sha256": "68f0a6e5fec8b9ebd3f5a455a8020710c14e42184cad6950e3625b31dbaf87d7",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 17,
+        "right": 54,
+        "top": 5
+      },
+      "category": "viseme_blink",
+      "floor_shadow_removed": true,
+      "graph_id": "viseme_rest",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "59e5e70f522f715a5f1e7dbb1dc3b4f6989e73fea95af80806af5678fec478ca",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 56,
+      "pixel_graph_sha256": "59e5e70f522f715a5f1e7dbb1dc3b4f6989e73fea95af80806af5678fec478ca",
+      "pixel_node_count": 1914,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "aurelia_finch_pose_cells.json#pose=viseme_rest",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "05-speech-viseme-sheet-candidate-v2.png#panel-0",
+      "source_column": 0,
+      "source_panel_bounds": {
+        "bottom": 256,
+        "left": 0,
+        "right": 256,
+        "top": 0
+      },
+      "source_row": 0,
+      "source_sheet": "05-speech-viseme-sheet-candidate-v2.png",
+      "source_worksheet_sha256": "900ca79efd2141691a28385565fb2d646695981a0d23d854f6ea25ba033e26c3",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 17,
+        "right": 54,
+        "top": 5
+      },
+      "category": "viseme_blink",
+      "floor_shadow_removed": true,
+      "graph_id": "viseme_closed_lips",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "62b0d0c0c62306c17c20a0d44fc583f0aca204ab4c992c32dc3c4c217ea040c0",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 57,
+      "pixel_graph_sha256": "62b0d0c0c62306c17c20a0d44fc583f0aca204ab4c992c32dc3c4c217ea040c0",
+      "pixel_node_count": 1925,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "aurelia_finch_pose_cells.json#pose=viseme_closed_lips",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "05-speech-viseme-sheet-candidate-v2.png#panel-1",
+      "source_column": 1,
+      "source_panel_bounds": {
+        "bottom": 256,
+        "left": 256,
+        "right": 512,
+        "top": 0
+      },
+      "source_row": 0,
+      "source_sheet": "05-speech-viseme-sheet-candidate-v2.png",
+      "source_worksheet_sha256": "900ca79efd2141691a28385565fb2d646695981a0d23d854f6ea25ba033e26c3",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 17,
+        "right": 54,
+        "top": 5
+      },
+      "category": "viseme_blink",
+      "floor_shadow_removed": true,
+      "graph_id": "viseme_slightly_open",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "d6d7c82514082448884dcd374b53423a68fb31f505bbeefc9d133d5bc14c1ccb",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 58,
+      "pixel_graph_sha256": "d6d7c82514082448884dcd374b53423a68fb31f505bbeefc9d133d5bc14c1ccb",
+      "pixel_node_count": 1923,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "aurelia_finch_pose_cells.json#pose=viseme_slightly_open",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "05-speech-viseme-sheet-candidate-v2.png#panel-2",
+      "source_column": 2,
+      "source_panel_bounds": {
+        "bottom": 256,
+        "left": 512,
+        "right": 768,
+        "top": 0
+      },
+      "source_row": 0,
+      "source_sheet": "05-speech-viseme-sheet-candidate-v2.png",
+      "source_worksheet_sha256": "900ca79efd2141691a28385565fb2d646695981a0d23d854f6ea25ba033e26c3",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 17,
+        "right": 54,
+        "top": 5
+      },
+      "category": "viseme_blink",
+      "floor_shadow_removed": true,
+      "graph_id": "viseme_wide_vowel",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "a6b72834ca49d847db964a4787ca1ea6fb648ec1e969b3807b6dd9613dbfc18b",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 59,
+      "pixel_graph_sha256": "a6b72834ca49d847db964a4787ca1ea6fb648ec1e969b3807b6dd9613dbfc18b",
+      "pixel_node_count": 1914,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "aurelia_finch_pose_cells.json#pose=viseme_wide_vowel",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "05-speech-viseme-sheet-candidate-v2.png#panel-3",
+      "source_column": 3,
+      "source_panel_bounds": {
+        "bottom": 256,
+        "left": 768,
+        "right": 1024,
+        "top": 0
+      },
+      "source_row": 0,
+      "source_sheet": "05-speech-viseme-sheet-candidate-v2.png",
+      "source_worksheet_sha256": "900ca79efd2141691a28385565fb2d646695981a0d23d854f6ea25ba033e26c3",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 17,
+        "right": 54,
+        "top": 5
+      },
+      "category": "viseme_blink",
+      "floor_shadow_removed": true,
+      "graph_id": "viseme_open_vowel",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "fa971eb465d037d1c7009dfab680f73f7e95882fd43e5670940c40be2c7337ee",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 60,
+      "pixel_graph_sha256": "fa971eb465d037d1c7009dfab680f73f7e95882fd43e5670940c40be2c7337ee",
+      "pixel_node_count": 1916,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "aurelia_finch_pose_cells.json#pose=viseme_open_vowel",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "05-speech-viseme-sheet-candidate-v2.png#panel-4",
+      "source_column": 0,
+      "source_panel_bounds": {
+        "bottom": 512,
+        "left": 0,
+        "right": 256,
+        "top": 256
+      },
+      "source_row": 1,
+      "source_sheet": "05-speech-viseme-sheet-candidate-v2.png",
+      "source_worksheet_sha256": "900ca79efd2141691a28385565fb2d646695981a0d23d854f6ea25ba033e26c3",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 17,
+        "right": 54,
+        "top": 5
+      },
+      "category": "viseme_blink",
+      "floor_shadow_removed": true,
+      "graph_id": "viseme_rounded_vowel",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "e1293ea4a886caba2914e438644e90bd6c3db6fd9576b553ffb26fc1d005aeda",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 61,
+      "pixel_graph_sha256": "e1293ea4a886caba2914e438644e90bd6c3db6fd9576b553ffb26fc1d005aeda",
+      "pixel_node_count": 1909,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "aurelia_finch_pose_cells.json#pose=viseme_rounded_vowel",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "05-speech-viseme-sheet-candidate-v2.png#panel-5",
+      "source_column": 1,
+      "source_panel_bounds": {
+        "bottom": 512,
+        "left": 256,
+        "right": 512,
+        "top": 256
+      },
+      "source_row": 1,
+      "source_sheet": "05-speech-viseme-sheet-candidate-v2.png",
+      "source_worksheet_sha256": "900ca79efd2141691a28385565fb2d646695981a0d23d854f6ea25ba033e26c3",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 17,
+        "right": 54,
+        "top": 5
+      },
+      "category": "viseme_blink",
+      "floor_shadow_removed": true,
+      "graph_id": "viseme_teeth_consonant",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "ea0b2b01b912bfc85db847edd41f8e3c071d097df5adc16fd25fa3e0c2132bf3",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 62,
+      "pixel_graph_sha256": "ea0b2b01b912bfc85db847edd41f8e3c071d097df5adc16fd25fa3e0c2132bf3",
+      "pixel_node_count": 1931,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "aurelia_finch_pose_cells.json#pose=viseme_teeth_consonant",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "05-speech-viseme-sheet-candidate-v2.png#panel-6",
+      "source_column": 2,
+      "source_panel_bounds": {
+        "bottom": 512,
+        "left": 512,
+        "right": 768,
+        "top": 256
+      },
+      "source_row": 1,
+      "source_sheet": "05-speech-viseme-sheet-candidate-v2.png",
+      "source_worksheet_sha256": "900ca79efd2141691a28385565fb2d646695981a0d23d854f6ea25ba033e26c3",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 17,
+        "right": 54,
+        "top": 5
+      },
+      "category": "viseme_blink",
+      "floor_shadow_removed": true,
+      "graph_id": "viseme_lower_lip_consonant",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "60f2aca4f554a6a6b65ebea0178e0d8a17ee642be328047b0142abc5f298b821",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 63,
+      "pixel_graph_sha256": "60f2aca4f554a6a6b65ebea0178e0d8a17ee642be328047b0142abc5f298b821",
+      "pixel_node_count": 1916,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "aurelia_finch_pose_cells.json#pose=viseme_lower_lip_consonant",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "05-speech-viseme-sheet-candidate-v2.png#panel-7",
+      "source_column": 3,
+      "source_panel_bounds": {
+        "bottom": 512,
+        "left": 768,
+        "right": 1024,
+        "top": 256
+      },
+      "source_row": 1,
+      "source_sheet": "05-speech-viseme-sheet-candidate-v2.png",
+      "source_worksheet_sha256": "900ca79efd2141691a28385565fb2d646695981a0d23d854f6ea25ba033e26c3",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 17,
+        "right": 54,
+        "top": 5
+      },
+      "category": "viseme_blink",
+      "floor_shadow_removed": true,
+      "graph_id": "viseme_tongue_consonant",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "4d9b2632641ed78a20fb920c86998884869bfc598c73896c6662be6b87cbd834",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 64,
+      "pixel_graph_sha256": "4d9b2632641ed78a20fb920c86998884869bfc598c73896c6662be6b87cbd834",
+      "pixel_node_count": 1916,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "aurelia_finch_pose_cells.json#pose=viseme_tongue_consonant",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "05-speech-viseme-sheet-candidate-v2.png#panel-8",
+      "source_column": 0,
+      "source_panel_bounds": {
+        "bottom": 768,
+        "left": 0,
+        "right": 256,
+        "top": 512
+      },
+      "source_row": 2,
+      "source_sheet": "05-speech-viseme-sheet-candidate-v2.png",
+      "source_worksheet_sha256": "900ca79efd2141691a28385565fb2d646695981a0d23d854f6ea25ba033e26c3",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 16,
+        "right": 54,
+        "top": 5
+      },
+      "category": "viseme_blink",
+      "floor_shadow_removed": true,
+      "graph_id": "viseme_smile_speaking",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "3b672c588195aaed57c51f75f99c27deb3eef4233ae843381eda112c3385f8b9",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 65,
+      "pixel_graph_sha256": "3b672c588195aaed57c51f75f99c27deb3eef4233ae843381eda112c3385f8b9",
+      "pixel_node_count": 1924,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "aurelia_finch_pose_cells.json#pose=viseme_smile_speaking",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "05-speech-viseme-sheet-candidate-v2.png#panel-9",
+      "source_column": 1,
+      "source_panel_bounds": {
+        "bottom": 768,
+        "left": 256,
+        "right": 512,
+        "top": 512
+      },
+      "source_row": 2,
+      "source_sheet": "05-speech-viseme-sheet-candidate-v2.png",
+      "source_worksheet_sha256": "900ca79efd2141691a28385565fb2d646695981a0d23d854f6ea25ba033e26c3",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 17,
+        "right": 54,
+        "top": 5
+      },
+      "category": "viseme_blink",
+      "floor_shadow_removed": true,
+      "graph_id": "viseme_frown_speaking",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "d513a77d521de2a0f0fa1b052c387b3e8c81bbb9002d8cd7e6ba320f839a7507",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 66,
+      "pixel_graph_sha256": "d513a77d521de2a0f0fa1b052c387b3e8c81bbb9002d8cd7e6ba320f839a7507",
+      "pixel_node_count": 1922,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "aurelia_finch_pose_cells.json#pose=viseme_frown_speaking",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "05-speech-viseme-sheet-candidate-v2.png#panel-10",
+      "source_column": 2,
+      "source_panel_bounds": {
+        "bottom": 768,
+        "left": 512,
+        "right": 768,
+        "top": 512
+      },
+      "source_row": 2,
+      "source_sheet": "05-speech-viseme-sheet-candidate-v2.png",
+      "source_worksheet_sha256": "900ca79efd2141691a28385565fb2d646695981a0d23d854f6ea25ba033e26c3",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 17,
+        "right": 54,
+        "top": 5
+      },
+      "category": "viseme_blink",
+      "floor_shadow_removed": true,
+      "graph_id": "viseme_speech_emphasis",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "d2701dd8f017cd17853fc86be44361d976d1237d40435f1582494f7b39289219",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 67,
+      "pixel_graph_sha256": "d2701dd8f017cd17853fc86be44361d976d1237d40435f1582494f7b39289219",
+      "pixel_node_count": 1914,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "aurelia_finch_pose_cells.json#pose=viseme_speech_emphasis",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "05-speech-viseme-sheet-candidate-v2.png#panel-11",
+      "source_column": 3,
+      "source_panel_bounds": {
+        "bottom": 768,
+        "left": 768,
+        "right": 1024,
+        "top": 512
+      },
+      "source_row": 2,
+      "source_sheet": "05-speech-viseme-sheet-candidate-v2.png",
+      "source_worksheet_sha256": "900ca79efd2141691a28385565fb2d646695981a0d23d854f6ea25ba033e26c3",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 17,
+        "right": 54,
+        "top": 5
+      },
+      "category": "viseme_blink",
+      "floor_shadow_removed": true,
+      "graph_id": "viseme_breath_pause",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "e3e4a2997d0ec0dd4aba838a9eb0744da2c13e052e774b48f44b33419b1e4c4d",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 68,
+      "pixel_graph_sha256": "e3e4a2997d0ec0dd4aba838a9eb0744da2c13e052e774b48f44b33419b1e4c4d",
+      "pixel_node_count": 1913,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "aurelia_finch_pose_cells.json#pose=viseme_breath_pause",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "05-speech-viseme-sheet-candidate-v2.png#panel-12",
+      "source_column": 0,
+      "source_panel_bounds": {
+        "bottom": 1024,
+        "left": 0,
+        "right": 256,
+        "top": 768
+      },
+      "source_row": 3,
+      "source_sheet": "05-speech-viseme-sheet-candidate-v2.png",
+      "source_worksheet_sha256": "900ca79efd2141691a28385565fb2d646695981a0d23d854f6ea25ba033e26c3",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 17,
+        "right": 54,
+        "top": 5
+      },
+      "category": "viseme_blink",
+      "floor_shadow_removed": true,
+      "graph_id": "blink_open",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "86f038b78a46fc611dd31c264057e13736ea6c1d811ab4d1a232df183062e8b4",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 69,
+      "pixel_graph_sha256": "86f038b78a46fc611dd31c264057e13736ea6c1d811ab4d1a232df183062e8b4",
+      "pixel_node_count": 1906,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "aurelia_finch_pose_cells.json#pose=blink_open",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "05-speech-viseme-sheet-candidate-v2.png#panel-13",
+      "source_column": 1,
+      "source_panel_bounds": {
+        "bottom": 1024,
+        "left": 256,
+        "right": 512,
+        "top": 768
+      },
+      "source_row": 3,
+      "source_sheet": "05-speech-viseme-sheet-candidate-v2.png",
+      "source_worksheet_sha256": "900ca79efd2141691a28385565fb2d646695981a0d23d854f6ea25ba033e26c3",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 17,
+        "right": 54,
+        "top": 5
+      },
+      "category": "viseme_blink",
+      "floor_shadow_removed": true,
+      "graph_id": "blink_half_closed",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "f5674dd20896cf88cf6ae9368cfc7b178b7bc07d6a3340b3747b940da8ba2a30",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 70,
+      "pixel_graph_sha256": "f5674dd20896cf88cf6ae9368cfc7b178b7bc07d6a3340b3747b940da8ba2a30",
+      "pixel_node_count": 1919,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "aurelia_finch_pose_cells.json#pose=blink_half_closed",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "05-speech-viseme-sheet-candidate-v2.png#panel-14",
+      "source_column": 2,
+      "source_panel_bounds": {
+        "bottom": 1024,
+        "left": 512,
+        "right": 768,
+        "top": 768
+      },
+      "source_row": 3,
+      "source_sheet": "05-speech-viseme-sheet-candidate-v2.png",
+      "source_worksheet_sha256": "900ca79efd2141691a28385565fb2d646695981a0d23d854f6ea25ba033e26c3",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 17,
+        "right": 54,
+        "top": 5
+      },
+      "category": "viseme_blink",
+      "floor_shadow_removed": true,
+      "graph_id": "blink_closed",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "03d19987353cbd6892bbba4fdf2542e2a6d71c7cb9ca67df79ec95b86216380c",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 71,
+      "pixel_graph_sha256": "03d19987353cbd6892bbba4fdf2542e2a6d71c7cb9ca67df79ec95b86216380c",
+      "pixel_node_count": 1917,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "aurelia_finch_pose_cells.json#pose=blink_closed",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "05-speech-viseme-sheet-candidate-v2.png#panel-15",
+      "source_column": 3,
+      "source_panel_bounds": {
+        "bottom": 1024,
+        "left": 768,
+        "right": 1024,
+        "top": 768
+      },
+      "source_row": 3,
+      "source_sheet": "05-speech-viseme-sheet-candidate-v2.png",
+      "source_worksheet_sha256": "900ca79efd2141691a28385565fb2d646695981a0d23d854f6ea25ba033e26c3",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 90,
+        "left": 5,
+        "right": 66,
+        "top": 53
+      },
+      "category": "hand_prop",
+      "floor_shadow_removed": true,
+      "graph_id": "hand_open_relaxed",
+      "graph_kind": "feature_graph",
+      "isolated_silhouette_sha256": "6580e905bb11c9966805cb7777b0f98d6cf87dc8a7fe3836f3bb33d0be4dce85",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 72,
+      "pixel_graph_sha256": "6580e905bb11c9966805cb7777b0f98d6cf87dc8a7fe3836f3bb33d0be4dce85",
+      "pixel_node_count": 1344,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "aurelia_finch_pose_cells.json#pose=hand_open_relaxed",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "06-hand-prop-sheet-candidate-v1.png#panel-0",
+      "source_column": 0,
+      "source_panel_bounds": {
+        "bottom": 256,
+        "left": 0,
+        "right": 256,
+        "top": 0
+      },
+      "source_row": 0,
+      "source_sheet": "06-hand-prop-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "53125372d018bc6f7bf7f52e089b4cf42749e281f5a2c6d5e4a7cc03cd626ae1",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 90,
+        "left": 5,
+        "right": 66,
+        "top": 45
+      },
+      "category": "hand_prop",
+      "floor_shadow_removed": true,
+      "graph_id": "hand_closed_relaxed",
+      "graph_kind": "feature_graph",
+      "isolated_silhouette_sha256": "b20586d1ed1ad6abd56619a6c63194a901ae0a54d61184b556d7fb6a02aed18f",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 73,
+      "pixel_graph_sha256": "b20586d1ed1ad6abd56619a6c63194a901ae0a54d61184b556d7fb6a02aed18f",
+      "pixel_node_count": 1525,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "aurelia_finch_pose_cells.json#pose=hand_closed_relaxed",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "06-hand-prop-sheet-candidate-v1.png#panel-1",
+      "source_column": 1,
+      "source_panel_bounds": {
+        "bottom": 256,
+        "left": 256,
+        "right": 512,
+        "top": 0
+      },
+      "source_row": 0,
+      "source_sheet": "06-hand-prop-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "53125372d018bc6f7bf7f52e089b4cf42749e281f5a2c6d5e4a7cc03cd626ae1",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 90,
+        "left": 5,
+        "right": 66,
+        "top": 53
+      },
+      "category": "hand_prop",
+      "floor_shadow_removed": true,
+      "graph_id": "hand_firm_fist",
+      "graph_kind": "feature_graph",
+      "isolated_silhouette_sha256": "64002c6720617b0bea7e2c87582c2db169bcf0af517e4ba0e5fc587129b567e4",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 74,
+      "pixel_graph_sha256": "64002c6720617b0bea7e2c87582c2db169bcf0af517e4ba0e5fc587129b567e4",
+      "pixel_node_count": 1720,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "aurelia_finch_pose_cells.json#pose=hand_firm_fist",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "06-hand-prop-sheet-candidate-v1.png#panel-2",
+      "source_column": 2,
+      "source_panel_bounds": {
+        "bottom": 256,
+        "left": 512,
+        "right": 768,
+        "top": 0
+      },
+      "source_row": 0,
+      "source_sheet": "06-hand-prop-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "53125372d018bc6f7bf7f52e089b4cf42749e281f5a2c6d5e4a7cc03cd626ae1",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 90,
+        "left": 4,
+        "right": 66,
+        "top": 61
+      },
+      "category": "hand_prop",
+      "floor_shadow_removed": true,
+      "graph_id": "hand_pointing",
+      "graph_kind": "feature_graph",
+      "isolated_silhouette_sha256": "0b58e57c24b14a3f58acc05390daa6ba25abf49babe6f36d58813765884c733e",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 75,
+      "pixel_graph_sha256": "0b58e57c24b14a3f58acc05390daa6ba25abf49babe6f36d58813765884c733e",
+      "pixel_node_count": 1013,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "aurelia_finch_pose_cells.json#pose=hand_pointing",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "06-hand-prop-sheet-candidate-v1.png#panel-3",
+      "source_column": 3,
+      "source_panel_bounds": {
+        "bottom": 256,
+        "left": 768,
+        "right": 1024,
+        "top": 0
+      },
+      "source_row": 0,
+      "source_sheet": "06-hand-prop-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "53125372d018bc6f7bf7f52e089b4cf42749e281f5a2c6d5e4a7cc03cd626ae1",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 90,
+        "left": 5,
+        "right": 66,
+        "top": 61
+      },
+      "category": "hand_prop",
+      "floor_shadow_removed": true,
+      "graph_id": "hand_presenting_palm",
+      "graph_kind": "feature_graph",
+      "isolated_silhouette_sha256": "6ad05379f9f7c7ad4e8c8173962b0afb9641ad04e360a6727f7bc8915a33c4f9",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 76,
+      "pixel_graph_sha256": "6ad05379f9f7c7ad4e8c8173962b0afb9641ad04e360a6727f7bc8915a33c4f9",
+      "pixel_node_count": 1197,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "aurelia_finch_pose_cells.json#pose=hand_presenting_palm",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "06-hand-prop-sheet-candidate-v1.png#panel-4",
+      "source_column": 0,
+      "source_panel_bounds": {
+        "bottom": 512,
+        "left": 0,
+        "right": 256,
+        "top": 256
+      },
+      "source_row": 1,
+      "source_sheet": "06-hand-prop-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "53125372d018bc6f7bf7f52e089b4cf42749e281f5a2c6d5e4a7cc03cd626ae1",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 90,
+        "left": 5,
+        "right": 66,
+        "top": 57
+      },
+      "category": "hand_prop",
+      "floor_shadow_removed": true,
+      "graph_id": "hand_reaching",
+      "graph_kind": "feature_graph",
+      "isolated_silhouette_sha256": "335db5b43efff85446ad2f96b5de9d1ad774d5efeb1cfb4403d2ffe10d502872",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 77,
+      "pixel_graph_sha256": "335db5b43efff85446ad2f96b5de9d1ad774d5efeb1cfb4403d2ffe10d502872",
+      "pixel_node_count": 1269,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "aurelia_finch_pose_cells.json#pose=hand_reaching",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "06-hand-prop-sheet-candidate-v1.png#panel-5",
+      "source_column": 1,
+      "source_panel_bounds": {
+        "bottom": 512,
+        "left": 256,
+        "right": 512,
+        "top": 256
+      },
+      "source_row": 1,
+      "source_sheet": "06-hand-prop-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "53125372d018bc6f7bf7f52e089b4cf42749e281f5a2c6d5e4a7cc03cd626ae1",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 90,
+        "left": 5,
+        "right": 66,
+        "top": 5
+      },
+      "category": "hand_prop",
+      "floor_shadow_removed": true,
+      "graph_id": "prop_folio_side_grip",
+      "graph_kind": "feature_graph",
+      "isolated_silhouette_sha256": "d52d92c92529e5bdbf33331363b55a6ed9c234917dfe4c60c7bfd1ba4ecd4b1e",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 78,
+      "pixel_graph_sha256": "d52d92c92529e5bdbf33331363b55a6ed9c234917dfe4c60c7bfd1ba4ecd4b1e",
+      "pixel_node_count": 3977,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "aurelia_finch_pose_cells.json#pose=prop_folio_side_grip",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "06-hand-prop-sheet-candidate-v1.png#panel-6",
+      "source_column": 2,
+      "source_panel_bounds": {
+        "bottom": 512,
+        "left": 512,
+        "right": 768,
+        "top": 256
+      },
+      "source_row": 1,
+      "source_sheet": "06-hand-prop-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "53125372d018bc6f7bf7f52e089b4cf42749e281f5a2c6d5e4a7cc03cd626ae1",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 90,
+        "left": 5,
+        "right": 66,
+        "top": 26
+      },
+      "category": "hand_prop",
+      "floor_shadow_removed": true,
+      "graph_id": "prop_folio_underarm_grip",
+      "graph_kind": "feature_graph",
+      "isolated_silhouette_sha256": "ecb8a24d4a7703b48f8d40665d80ae2c7bff263a7fb46c9d7bee25768c3e4600",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 79,
+      "pixel_graph_sha256": "ecb8a24d4a7703b48f8d40665d80ae2c7bff263a7fb46c9d7bee25768c3e4600",
+      "pixel_node_count": 2979,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "aurelia_finch_pose_cells.json#pose=prop_folio_underarm_grip",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "06-hand-prop-sheet-candidate-v1.png#panel-7",
+      "source_column": 3,
+      "source_panel_bounds": {
+        "bottom": 512,
+        "left": 768,
+        "right": 1024,
+        "top": 256
+      },
+      "source_row": 1,
+      "source_sheet": "06-hand-prop-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "53125372d018bc6f7bf7f52e089b4cf42749e281f5a2c6d5e4a7cc03cd626ae1",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 90,
+        "left": 5,
+        "right": 66,
+        "top": 34
+      },
+      "category": "hand_prop",
+      "floor_shadow_removed": true,
+      "graph_id": "prop_folio_chest_hold",
+      "graph_kind": "feature_graph",
+      "isolated_silhouette_sha256": "91cacb0861f602241950d69c0561686a342ed9d193ff3c49c3b4107d76528f9a",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 80,
+      "pixel_graph_sha256": "91cacb0861f602241950d69c0561686a342ed9d193ff3c49c3b4107d76528f9a",
+      "pixel_node_count": 2700,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "aurelia_finch_pose_cells.json#pose=prop_folio_chest_hold",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "06-hand-prop-sheet-candidate-v1.png#panel-8",
+      "source_column": 0,
+      "source_panel_bounds": {
+        "bottom": 768,
+        "left": 0,
+        "right": 256,
+        "top": 512
+      },
+      "source_row": 2,
+      "source_sheet": "06-hand-prop-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "53125372d018bc6f7bf7f52e089b4cf42749e281f5a2c6d5e4a7cc03cd626ae1",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 90,
+        "left": 4,
+        "right": 67,
+        "top": 64
+      },
+      "category": "hand_prop",
+      "floor_shadow_removed": true,
+      "graph_id": "prop_folio_present_outward",
+      "graph_kind": "feature_graph",
+      "isolated_silhouette_sha256": "302e465c9d947e6b7f1e542390ff02470e41381a424df3e7f95d1526a88ed40b",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 81,
+      "pixel_graph_sha256": "302e465c9d947e6b7f1e542390ff02470e41381a424df3e7f95d1526a88ed40b",
+      "pixel_node_count": 1117,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "aurelia_finch_pose_cells.json#pose=prop_folio_present_outward",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "06-hand-prop-sheet-candidate-v1.png#panel-9",
+      "source_column": 1,
+      "source_panel_bounds": {
+        "bottom": 768,
+        "left": 256,
+        "right": 512,
+        "top": 512
+      },
+      "source_row": 2,
+      "source_sheet": "06-hand-prop-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "53125372d018bc6f7bf7f52e089b4cf42749e281f5a2c6d5e4a7cc03cd626ae1",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 4,
+        "right": 66,
+        "top": 29
+      },
+      "category": "hand_prop",
+      "floor_shadow_removed": true,
+      "graph_id": "prop_folio_offer_two_hands",
+      "graph_kind": "feature_graph",
+      "isolated_silhouette_sha256": "09617550a871431ab7809cfca539947fab41e77c981b78f7db9f5d7589e294eb",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 82,
+      "pixel_graph_sha256": "09617550a871431ab7809cfca539947fab41e77c981b78f7db9f5d7589e294eb",
+      "pixel_node_count": 2050,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "aurelia_finch_pose_cells.json#pose=prop_folio_offer_two_hands",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "06-hand-prop-sheet-candidate-v1.png#panel-10",
+      "source_column": 2,
+      "source_panel_bounds": {
+        "bottom": 768,
+        "left": 512,
+        "right": 768,
+        "top": 512
+      },
+      "source_row": 2,
+      "source_sheet": "06-hand-prop-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "53125372d018bc6f7bf7f52e089b4cf42749e281f5a2c6d5e4a7cc03cd626ae1",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 90,
+        "left": 4,
+        "right": 67,
+        "top": 49
+      },
+      "category": "hand_prop",
+      "floor_shadow_removed": true,
+      "graph_id": "prop_folio_receive_two_hands",
+      "graph_kind": "feature_graph",
+      "isolated_silhouette_sha256": "47954201c11894c381b417f6868e1079a5bb77185cd4a3a736837fe9fc5e4e9d",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 83,
+      "pixel_graph_sha256": "47954201c11894c381b417f6868e1079a5bb77185cd4a3a736837fe9fc5e4e9d",
+      "pixel_node_count": 1357,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "aurelia_finch_pose_cells.json#pose=prop_folio_receive_two_hands",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "06-hand-prop-sheet-candidate-v1.png#panel-11",
+      "source_column": 3,
+      "source_panel_bounds": {
+        "bottom": 768,
+        "left": 768,
+        "right": 1024,
+        "top": 512
+      },
+      "source_row": 2,
+      "source_sheet": "06-hand-prop-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "53125372d018bc6f7bf7f52e089b4cf42749e281f5a2c6d5e4a7cc03cd626ae1",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 4,
+        "right": 67,
+        "top": 56
+      },
+      "category": "hand_prop",
+      "floor_shadow_removed": true,
+      "graph_id": "stakeholder_handshake",
+      "graph_kind": "feature_graph",
+      "isolated_silhouette_sha256": "3a575539bb70a98342e77abfceb0d1dec45c3661e10d37293fa74f27f2402f6b",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 84,
+      "pixel_graph_sha256": "3a575539bb70a98342e77abfceb0d1dec45c3661e10d37293fa74f27f2402f6b",
+      "pixel_node_count": 1340,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "aurelia_finch_pose_cells.json#pose=stakeholder_handshake",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "06-hand-prop-sheet-candidate-v1.png#panel-12",
+      "source_column": 0,
+      "source_panel_bounds": {
+        "bottom": 1024,
+        "left": 0,
+        "right": 256,
+        "top": 768
+      },
+      "source_row": 3,
+      "source_sheet": "06-hand-prop-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "53125372d018bc6f7bf7f52e089b4cf42749e281f5a2c6d5e4a7cc03cd626ae1",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 4,
+        "right": 66,
+        "top": 26
+      },
+      "category": "hand_prop",
+      "floor_shadow_removed": true,
+      "graph_id": "prop_blank_evidence_page",
+      "graph_kind": "feature_graph",
+      "isolated_silhouette_sha256": "fc4bd06472de3215331851b62db7b9ebc70883dd14492b556fba6eba61541fc7",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 85,
+      "pixel_graph_sha256": "fc4bd06472de3215331851b62db7b9ebc70883dd14492b556fba6eba61541fc7",
+      "pixel_node_count": 2054,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "aurelia_finch_pose_cells.json#pose=prop_blank_evidence_page",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "06-hand-prop-sheet-candidate-v1.png#panel-13",
+      "source_column": 1,
+      "source_panel_bounds": {
+        "bottom": 1024,
+        "left": 256,
+        "right": 512,
+        "top": 768
+      },
+      "source_row": 3,
+      "source_sheet": "06-hand-prop-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "53125372d018bc6f7bf7f52e089b4cf42749e281f5a2c6d5e4a7cc03cd626ae1",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 90,
+        "left": 6,
+        "right": 65,
+        "top": 5
+      },
+      "category": "hand_prop",
+      "floor_shadow_removed": true,
+      "graph_id": "diplomatic_open_palms",
+      "graph_kind": "feature_graph",
+      "isolated_silhouette_sha256": "f7aa6c16b6fa574779bcb699240366d58c453a236a5b42b2270ffe8f98f8278b",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 86,
+      "pixel_graph_sha256": "f7aa6c16b6fa574779bcb699240366d58c453a236a5b42b2270ffe8f98f8278b",
+      "pixel_node_count": 2370,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "aurelia_finch_pose_cells.json#pose=diplomatic_open_palms",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "06-hand-prop-sheet-candidate-v1.png#panel-14",
+      "source_column": 2,
+      "source_panel_bounds": {
+        "bottom": 1024,
+        "left": 512,
+        "right": 768,
+        "top": 768
+      },
+      "source_row": 3,
+      "source_sheet": "06-hand-prop-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "53125372d018bc6f7bf7f52e089b4cf42749e281f5a2c6d5e4a7cc03cd626ae1",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 4,
+        "right": 67,
+        "top": 40
+      },
+      "category": "hand_prop",
+      "floor_shadow_removed": true,
+      "graph_id": "prop_folio_settled_hold",
+      "graph_kind": "feature_graph",
+      "isolated_silhouette_sha256": "eaee53d26bdd8ae08d5090c039d0c441b04a151a16ee85bca86a83be49ba21b7",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 87,
+      "pixel_graph_sha256": "eaee53d26bdd8ae08d5090c039d0c441b04a151a16ee85bca86a83be49ba21b7",
+      "pixel_node_count": 1698,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "aurelia_finch_pose_cells.json#pose=prop_folio_settled_hold",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "06-hand-prop-sheet-candidate-v1.png#panel-15",
+      "source_column": 3,
+      "source_panel_bounds": {
+        "bottom": 1024,
+        "left": 768,
+        "right": 1024,
+        "top": 768
+      },
+      "source_row": 3,
+      "source_sheet": "06-hand-prop-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "53125372d018bc6f7bf7f52e089b4cf42749e281f5a2c6d5e4a7cc03cd626ae1",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 90,
+        "left": 14,
+        "right": 57,
+        "top": 5
+      },
+      "category": "motion",
+      "floor_shadow_removed": true,
+      "graph_id": "walk_contact_left",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "581b93426e1e61a6f2ee7274c418e87716a9efecb503a99c9aec8628233956c8",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 88,
+      "pixel_graph_sha256": "581b93426e1e61a6f2ee7274c418e87716a9efecb503a99c9aec8628233956c8",
+      "pixel_node_count": 1966,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "aurelia_finch_pose_cells.json#pose=walk_contact_left",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "07-ground-motion-sheet-candidate-v1.png#panel-0",
+      "source_column": 0,
+      "source_panel_bounds": {
+        "bottom": 256,
+        "left": 0,
+        "right": 256,
+        "top": 0
+      },
+      "source_row": 0,
+      "source_sheet": "07-ground-motion-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "999d80d4195ba8be4d93599b1b119e55ea9c82b6eaeb9c672b9a9e0ecf239607",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 90,
+        "left": 11,
+        "right": 59,
+        "top": 5
+      },
+      "category": "motion",
+      "floor_shadow_removed": true,
+      "graph_id": "walk_down_left",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "3e05949f4dbc7a2450b5fd11a54e84cb2a038abb59b3723d231e7dbd5d5366bf",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 89,
+      "pixel_graph_sha256": "3e05949f4dbc7a2450b5fd11a54e84cb2a038abb59b3723d231e7dbd5d5366bf",
+      "pixel_node_count": 2070,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "aurelia_finch_pose_cells.json#pose=walk_down_left",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "07-ground-motion-sheet-candidate-v1.png#panel-1",
+      "source_column": 1,
+      "source_panel_bounds": {
+        "bottom": 256,
+        "left": 256,
+        "right": 512,
+        "top": 0
+      },
+      "source_row": 0,
+      "source_sheet": "07-ground-motion-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "999d80d4195ba8be4d93599b1b119e55ea9c82b6eaeb9c672b9a9e0ecf239607",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 90,
+        "left": 10,
+        "right": 61,
+        "top": 5
+      },
+      "category": "motion",
+      "floor_shadow_removed": true,
+      "graph_id": "walk_passing_left",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "ba2cac83f189b4162cb2966c08a7b54d09a0cf33f192710f5a90c5bc2229cd96",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 90,
+      "pixel_graph_sha256": "ba2cac83f189b4162cb2966c08a7b54d09a0cf33f192710f5a90c5bc2229cd96",
+      "pixel_node_count": 2044,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "aurelia_finch_pose_cells.json#pose=walk_passing_left",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "07-ground-motion-sheet-candidate-v1.png#panel-2",
+      "source_column": 2,
+      "source_panel_bounds": {
+        "bottom": 256,
+        "left": 512,
+        "right": 768,
+        "top": 0
+      },
+      "source_row": 0,
+      "source_sheet": "07-ground-motion-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "999d80d4195ba8be4d93599b1b119e55ea9c82b6eaeb9c672b9a9e0ecf239607",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 90,
+        "left": 11,
+        "right": 59,
+        "top": 5
+      },
+      "category": "motion",
+      "floor_shadow_removed": true,
+      "graph_id": "walk_contact_right",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "2bed1af593877f57d8132b373ce680ca778553cb58750e40644d5eea087e5494",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 91,
+      "pixel_graph_sha256": "2bed1af593877f57d8132b373ce680ca778553cb58750e40644d5eea087e5494",
+      "pixel_node_count": 2012,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "aurelia_finch_pose_cells.json#pose=walk_contact_right",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "07-ground-motion-sheet-candidate-v1.png#panel-3",
+      "source_column": 3,
+      "source_panel_bounds": {
+        "bottom": 256,
+        "left": 768,
+        "right": 1024,
+        "top": 0
+      },
+      "source_row": 0,
+      "source_sheet": "07-ground-motion-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "999d80d4195ba8be4d93599b1b119e55ea9c82b6eaeb9c672b9a9e0ecf239607",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 90,
+        "left": 5,
+        "right": 66,
+        "top": 6
+      },
+      "category": "motion",
+      "floor_shadow_removed": true,
+      "graph_id": "run_contact_left",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "06c7384357ce66b3cc82abf35f2f9a5930ba82f1121b97452169994a70c273a4",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 92,
+      "pixel_graph_sha256": "06c7384357ce66b3cc82abf35f2f9a5930ba82f1121b97452169994a70c273a4",
+      "pixel_node_count": 2246,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "aurelia_finch_pose_cells.json#pose=run_contact_left",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "07-ground-motion-sheet-candidate-v1.png#panel-4",
+      "source_column": 0,
+      "source_panel_bounds": {
+        "bottom": 512,
+        "left": 0,
+        "right": 256,
+        "top": 256
+      },
+      "source_row": 1,
+      "source_sheet": "07-ground-motion-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "999d80d4195ba8be4d93599b1b119e55ea9c82b6eaeb9c672b9a9e0ecf239607",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 90,
+        "left": 5,
+        "right": 66,
+        "top": 5
+      },
+      "category": "motion",
+      "floor_shadow_removed": true,
+      "graph_id": "run_contact_right",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "101738dc8baad5eb409fe418216fe0435ed0a6bc80eeab92fcc0ad565d404ab6",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 93,
+      "pixel_graph_sha256": "101738dc8baad5eb409fe418216fe0435ed0a6bc80eeab92fcc0ad565d404ab6",
+      "pixel_node_count": 2428,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "aurelia_finch_pose_cells.json#pose=run_contact_right",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "07-ground-motion-sheet-candidate-v1.png#panel-5",
+      "source_column": 1,
+      "source_panel_bounds": {
+        "bottom": 512,
+        "left": 256,
+        "right": 512,
+        "top": 256
+      },
+      "source_row": 1,
+      "source_sheet": "07-ground-motion-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "999d80d4195ba8be4d93599b1b119e55ea9c82b6eaeb9c672b9a9e0ecf239607",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 90,
+        "left": 5,
+        "right": 66,
+        "top": 7
+      },
+      "category": "motion",
+      "floor_shadow_removed": true,
+      "graph_id": "locomotion_start_anticipation",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "fe5c656d7ca4cafb078cd68094c65fa395d72b876bee4b99651aab372ba35797",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 94,
+      "pixel_graph_sha256": "fe5c656d7ca4cafb078cd68094c65fa395d72b876bee4b99651aab372ba35797",
+      "pixel_node_count": 2729,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "aurelia_finch_pose_cells.json#pose=locomotion_start_anticipation",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "07-ground-motion-sheet-candidate-v1.png#panel-6",
+      "source_column": 2,
+      "source_panel_bounds": {
+        "bottom": 512,
+        "left": 512,
+        "right": 768,
+        "top": 256
+      },
+      "source_row": 1,
+      "source_sheet": "07-ground-motion-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "999d80d4195ba8be4d93599b1b119e55ea9c82b6eaeb9c672b9a9e0ecf239607",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 90,
+        "left": 5,
+        "right": 66,
+        "top": 17
+      },
+      "category": "motion",
+      "floor_shadow_removed": true,
+      "graph_id": "locomotion_stop_recovery",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "c62bcb23ca7705365666ef82f40c0f2a3c9cb0b1a8f0c4debfae683291571072",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 95,
+      "pixel_graph_sha256": "c62bcb23ca7705365666ef82f40c0f2a3c9cb0b1a8f0c4debfae683291571072",
+      "pixel_node_count": 1926,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "aurelia_finch_pose_cells.json#pose=locomotion_stop_recovery",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "07-ground-motion-sheet-candidate-v1.png#panel-7",
+      "source_column": 3,
+      "source_panel_bounds": {
+        "bottom": 512,
+        "left": 768,
+        "right": 1024,
+        "top": 256
+      },
+      "source_row": 1,
+      "source_sheet": "07-ground-motion-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "999d80d4195ba8be4d93599b1b119e55ea9c82b6eaeb9c672b9a9e0ecf239607",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 90,
+        "left": 14,
+        "right": 57,
+        "top": 5
+      },
+      "category": "motion",
+      "floor_shadow_removed": true,
+      "graph_id": "planted_turn_left",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "ffc96ceb3186a922b64ff23cd120918789f7df9fa1034c85e10d59ab4ffd09e2",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 96,
+      "pixel_graph_sha256": "ffc96ceb3186a922b64ff23cd120918789f7df9fa1034c85e10d59ab4ffd09e2",
+      "pixel_node_count": 2130,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "aurelia_finch_pose_cells.json#pose=planted_turn_left",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "07-ground-motion-sheet-candidate-v1.png#panel-8",
+      "source_column": 0,
+      "source_panel_bounds": {
+        "bottom": 768,
+        "left": 0,
+        "right": 256,
+        "top": 512
+      },
+      "source_row": 2,
+      "source_sheet": "07-ground-motion-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "999d80d4195ba8be4d93599b1b119e55ea9c82b6eaeb9c672b9a9e0ecf239607",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 90,
+        "left": 11,
+        "right": 59,
+        "top": 5
+      },
+      "category": "motion",
+      "floor_shadow_removed": true,
+      "graph_id": "planted_turn_right",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "f8edc50b1eb038f54ca6d64d0e78c7320378b86d5ef5b4d91993daf0a247f5d6",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 97,
+      "pixel_graph_sha256": "f8edc50b1eb038f54ca6d64d0e78c7320378b86d5ef5b4d91993daf0a247f5d6",
+      "pixel_node_count": 2242,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "aurelia_finch_pose_cells.json#pose=planted_turn_right",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "07-ground-motion-sheet-candidate-v1.png#panel-9",
+      "source_column": 1,
+      "source_panel_bounds": {
+        "bottom": 768,
+        "left": 256,
+        "right": 512,
+        "top": 512
+      },
+      "source_row": 2,
+      "source_sheet": "07-ground-motion-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "999d80d4195ba8be4d93599b1b119e55ea9c82b6eaeb9c672b9a9e0ecf239607",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 90,
+        "left": 5,
+        "right": 66,
+        "top": 27
+      },
+      "category": "motion",
+      "floor_shadow_removed": true,
+      "graph_id": "crouch",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "6a97b3ff3076049425cd168b6dd96714639f692190597b725b81a788c980e211",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 98,
+      "pixel_graph_sha256": "6a97b3ff3076049425cd168b6dd96714639f692190597b725b81a788c980e211",
+      "pixel_node_count": 2201,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "aurelia_finch_pose_cells.json#pose=crouch",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "07-ground-motion-sheet-candidate-v1.png#panel-10",
+      "source_column": 2,
+      "source_panel_bounds": {
+        "bottom": 768,
+        "left": 512,
+        "right": 768,
+        "top": 512
+      },
+      "source_row": 2,
+      "source_sheet": "07-ground-motion-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "999d80d4195ba8be4d93599b1b119e55ea9c82b6eaeb9c672b9a9e0ecf239607",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 90,
+        "left": 7,
+        "right": 64,
+        "top": 5
+      },
+      "category": "motion",
+      "floor_shadow_removed": true,
+      "graph_id": "jump_anticipation",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "67398a9c49cde4f69543f4a0fcb86ed87d6471508f223b5c3a166c19c834d241",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 99,
+      "pixel_graph_sha256": "67398a9c49cde4f69543f4a0fcb86ed87d6471508f223b5c3a166c19c834d241",
+      "pixel_node_count": 2268,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "aurelia_finch_pose_cells.json#pose=jump_anticipation",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "07-ground-motion-sheet-candidate-v1.png#panel-11",
+      "source_column": 3,
+      "source_panel_bounds": {
+        "bottom": 768,
+        "left": 768,
+        "right": 1024,
+        "top": 512
+      },
+      "source_row": 2,
+      "source_sheet": "07-ground-motion-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "999d80d4195ba8be4d93599b1b119e55ea9c82b6eaeb9c672b9a9e0ecf239607",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 90,
+        "left": 5,
+        "right": 66,
+        "top": 8
+      },
+      "category": "motion",
+      "floor_shadow_removed": true,
+      "graph_id": "jump_airborne",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "804ff79c070182ef6490ff132623bd988dc768559e19c510e2ec5e6f18b25f75",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 100,
+      "pixel_graph_sha256": "804ff79c070182ef6490ff132623bd988dc768559e19c510e2ec5e6f18b25f75",
+      "pixel_node_count": 1947,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "aurelia_finch_pose_cells.json#pose=jump_airborne",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "07-ground-motion-sheet-candidate-v1.png#panel-12",
+      "source_column": 0,
+      "source_panel_bounds": {
+        "bottom": 1024,
+        "left": 0,
+        "right": 256,
+        "top": 768
+      },
+      "source_row": 3,
+      "source_sheet": "07-ground-motion-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "999d80d4195ba8be4d93599b1b119e55ea9c82b6eaeb9c672b9a9e0ecf239607",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 90,
+        "left": 5,
+        "right": 66,
+        "top": 40
+      },
+      "category": "motion",
+      "floor_shadow_removed": true,
+      "graph_id": "controlled_fall",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "f4b3b715372323368280131a49ada863c141ad860f26fe083c3f006d2f1ec7d5",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 101,
+      "pixel_graph_sha256": "f4b3b715372323368280131a49ada863c141ad860f26fe083c3f006d2f1ec7d5",
+      "pixel_node_count": 1202,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "aurelia_finch_pose_cells.json#pose=controlled_fall",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "07-ground-motion-sheet-candidate-v1.png#panel-13",
+      "source_column": 1,
+      "source_panel_bounds": {
+        "bottom": 1024,
+        "left": 256,
+        "right": 512,
+        "top": 768
+      },
+      "source_row": 3,
+      "source_sheet": "07-ground-motion-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "999d80d4195ba8be4d93599b1b119e55ea9c82b6eaeb9c672b9a9e0ecf239607",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 90,
+        "left": 5,
+        "right": 66,
+        "top": 32
+      },
+      "category": "motion",
+      "floor_shadow_removed": true,
+      "graph_id": "landing_contact",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "fad7c331129023ad097216db87873fd1eb30cdeb82f63242afc2ff06926e04ec",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 102,
+      "pixel_graph_sha256": "fad7c331129023ad097216db87873fd1eb30cdeb82f63242afc2ff06926e04ec",
+      "pixel_node_count": 2042,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "aurelia_finch_pose_cells.json#pose=landing_contact",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "07-ground-motion-sheet-candidate-v1.png#panel-14",
+      "source_column": 2,
+      "source_panel_bounds": {
+        "bottom": 1024,
+        "left": 512,
+        "right": 768,
+        "top": 768
+      },
+      "source_row": 3,
+      "source_sheet": "07-ground-motion-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "999d80d4195ba8be4d93599b1b119e55ea9c82b6eaeb9c672b9a9e0ecf239607",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 90,
+        "left": 8,
+        "right": 62,
+        "top": 5
+      },
+      "category": "motion",
+      "floor_shadow_removed": true,
+      "graph_id": "landing_recovery",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "cea86bf293c0a609f7535312973614936bd02efc482346e9428256749938d092",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 103,
+      "pixel_graph_sha256": "cea86bf293c0a609f7535312973614936bd02efc482346e9428256749938d092",
+      "pixel_node_count": 2607,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "aurelia_finch_pose_cells.json#pose=landing_recovery",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "07-ground-motion-sheet-candidate-v1.png#panel-15",
+      "source_column": 3,
+      "source_panel_bounds": {
+        "bottom": 1024,
+        "left": 768,
+        "right": 1024,
+        "top": 768
+      },
+      "source_row": 3,
+      "source_sheet": "07-ground-motion-sheet-candidate-v1.png",
+      "source_worksheet_sha256": "999d80d4195ba8be4d93599b1b119e55ea9c82b6eaeb9c672b9a9e0ecf239607",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 21,
+        "right": 49,
+        "top": 5
+      },
+      "category": "signature",
+      "floor_shadow_removed": true,
+      "graph_id": "partnership_pitch_compose",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "4a759ae540eaf46346a10d6b69823ecda0add14b4f1a33c33f8ae4da9c88cb38",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 104,
+      "pixel_graph_sha256": "4a759ae540eaf46346a10d6b69823ecda0add14b4f1a33c33f8ae4da9c88cb38",
+      "pixel_node_count": 1670,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "aurelia_finch_pose_cells.json#pose=partnership_pitch_compose",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "08-signature-actions-sheet-candidate-v2.png#panel-0",
+      "source_column": 0,
+      "source_panel_bounds": {
+        "bottom": 256,
+        "left": 0,
+        "right": 256,
+        "top": 0
+      },
+      "source_row": 0,
+      "source_sheet": "08-signature-actions-sheet-candidate-v2.png",
+      "source_worksheet_sha256": "18934f91ae9f21b9144e5db2137a3c9800874e3d422ef3803aa686778bb205b0",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 12,
+        "right": 59,
+        "top": 5
+      },
+      "category": "signature",
+      "floor_shadow_removed": true,
+      "graph_id": "partnership_pitch_invitation",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "fabec258346d0d8d19f50ce824e8e300f31eeb32372038acde5e7fedd51ff2d8",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 105,
+      "pixel_graph_sha256": "fabec258346d0d8d19f50ce824e8e300f31eeb32372038acde5e7fedd51ff2d8",
+      "pixel_node_count": 1930,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "aurelia_finch_pose_cells.json#pose=partnership_pitch_invitation",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "08-signature-actions-sheet-candidate-v2.png#panel-1",
+      "source_column": 1,
+      "source_panel_bounds": {
+        "bottom": 256,
+        "left": 256,
+        "right": 512,
+        "top": 0
+      },
+      "source_row": 0,
+      "source_sheet": "08-signature-actions-sheet-candidate-v2.png",
+      "source_worksheet_sha256": "18934f91ae9f21b9144e5db2137a3c9800874e3d422ef3803aa686778bb205b0",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 9,
+        "right": 61,
+        "top": 5
+      },
+      "category": "signature",
+      "floor_shadow_removed": true,
+      "graph_id": "partnership_pitch_outward_pitch",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "1dfb1f4752bf5eaf16f551453997227ce2d9f7c1419a14733219616ae6b23aff",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 106,
+      "pixel_graph_sha256": "1dfb1f4752bf5eaf16f551453997227ce2d9f7c1419a14733219616ae6b23aff",
+      "pixel_node_count": 1867,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "aurelia_finch_pose_cells.json#pose=partnership_pitch_outward_pitch",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "08-signature-actions-sheet-candidate-v2.png#panel-2",
+      "source_column": 2,
+      "source_panel_bounds": {
+        "bottom": 256,
+        "left": 512,
+        "right": 768,
+        "top": 0
+      },
+      "source_row": 0,
+      "source_sheet": "08-signature-actions-sheet-candidate-v2.png",
+      "source_worksheet_sha256": "18934f91ae9f21b9144e5db2137a3c9800874e3d422ef3803aa686778bb205b0",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 22,
+        "right": 49,
+        "top": 5
+      },
+      "category": "signature",
+      "floor_shadow_removed": true,
+      "graph_id": "partnership_pitch_recovery",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "69bf04d3ad16db31d2c6b68f10ddc22f480b5002a5e64218b47660867668d71e",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 107,
+      "pixel_graph_sha256": "69bf04d3ad16db31d2c6b68f10ddc22f480b5002a5e64218b47660867668d71e",
+      "pixel_node_count": 1760,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "aurelia_finch_pose_cells.json#pose=partnership_pitch_recovery",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "08-signature-actions-sheet-candidate-v2.png#panel-3",
+      "source_column": 3,
+      "source_panel_bounds": {
+        "bottom": 256,
+        "left": 768,
+        "right": 1024,
+        "top": 0
+      },
+      "source_row": 0,
+      "source_sheet": "08-signature-actions-sheet-candidate-v2.png",
+      "source_worksheet_sha256": "18934f91ae9f21b9144e5db2137a3c9800874e3d422ef3803aa686778bb205b0",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 22,
+        "right": 49,
+        "top": 5
+      },
+      "category": "signature",
+      "floor_shadow_removed": true,
+      "graph_id": "stakeholder_translation_listen",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "f34d4f7db610d9c746c9ae150e77804eaa66c53641786828439a3dbdee0a663c",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 108,
+      "pixel_graph_sha256": "f34d4f7db610d9c746c9ae150e77804eaa66c53641786828439a3dbdee0a663c",
+      "pixel_node_count": 1658,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "aurelia_finch_pose_cells.json#pose=stakeholder_translation_listen",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "08-signature-actions-sheet-candidate-v2.png#panel-4",
+      "source_column": 0,
+      "source_panel_bounds": {
+        "bottom": 512,
+        "left": 0,
+        "right": 256,
+        "top": 256
+      },
+      "source_row": 1,
+      "source_sheet": "08-signature-actions-sheet-candidate-v2.png",
+      "source_worksheet_sha256": "18934f91ae9f21b9144e5db2137a3c9800874e3d422ef3803aa686778bb205b0",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 15,
+        "right": 55,
+        "top": 5
+      },
+      "category": "signature",
+      "floor_shadow_removed": true,
+      "graph_id": "stakeholder_translation_two_hand_translation",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "04d4e231cdcf32ae20f2b4695198312127888ecf00d4846b02ae76397b7033c3",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 109,
+      "pixel_graph_sha256": "04d4e231cdcf32ae20f2b4695198312127888ecf00d4846b02ae76397b7033c3",
+      "pixel_node_count": 1725,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "aurelia_finch_pose_cells.json#pose=stakeholder_translation_two_hand_translation",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "08-signature-actions-sheet-candidate-v2.png#panel-5",
+      "source_column": 1,
+      "source_panel_bounds": {
+        "bottom": 512,
+        "left": 256,
+        "right": 512,
+        "top": 256
+      },
+      "source_row": 1,
+      "source_sheet": "08-signature-actions-sheet-candidate-v2.png",
+      "source_worksheet_sha256": "18934f91ae9f21b9144e5db2137a3c9800874e3d422ef3803aa686778bb205b0",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 5,
+        "right": 66,
+        "top": 12
+      },
+      "category": "signature",
+      "floor_shadow_removed": true,
+      "graph_id": "stakeholder_translation_bridge",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "3d36c599ffc958eec3cd72fa74aa8ece9d62bc98e0d083d8ef0188f0819c4380",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 110,
+      "pixel_graph_sha256": "3d36c599ffc958eec3cd72fa74aa8ece9d62bc98e0d083d8ef0188f0819c4380",
+      "pixel_node_count": 1551,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "aurelia_finch_pose_cells.json#pose=stakeholder_translation_bridge",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "08-signature-actions-sheet-candidate-v2.png#panel-6",
+      "source_column": 2,
+      "source_panel_bounds": {
+        "bottom": 512,
+        "left": 512,
+        "right": 768,
+        "top": 256
+      },
+      "source_row": 1,
+      "source_sheet": "08-signature-actions-sheet-candidate-v2.png",
+      "source_worksheet_sha256": "18934f91ae9f21b9144e5db2137a3c9800874e3d422ef3803aa686778bb205b0",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 21,
+        "right": 49,
+        "top": 5
+      },
+      "category": "signature",
+      "floor_shadow_removed": true,
+      "graph_id": "stakeholder_translation_acknowledge",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "3acf73744d6126514211a89b0c24b429fbdde1114129570059309b7faa174bc2",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 111,
+      "pixel_graph_sha256": "3acf73744d6126514211a89b0c24b429fbdde1114129570059309b7faa174bc2",
+      "pixel_node_count": 1703,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "aurelia_finch_pose_cells.json#pose=stakeholder_translation_acknowledge",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "08-signature-actions-sheet-candidate-v2.png#panel-7",
+      "source_column": 3,
+      "source_panel_bounds": {
+        "bottom": 512,
+        "left": 768,
+        "right": 1024,
+        "top": 256
+      },
+      "source_row": 1,
+      "source_sheet": "08-signature-actions-sheet-candidate-v2.png",
+      "source_worksheet_sha256": "18934f91ae9f21b9144e5db2137a3c9800874e3d422ef3803aa686778bb205b0",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 21,
+        "right": 49,
+        "top": 5
+      },
+      "category": "signature",
+      "floor_shadow_removed": true,
+      "graph_id": "proof_presentation_ready",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "179e6187ec61ca878f768d51cdc9cb5047ea9952b05727603f530b667284d8ec",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 112,
+      "pixel_graph_sha256": "179e6187ec61ca878f768d51cdc9cb5047ea9952b05727603f530b667284d8ec",
+      "pixel_node_count": 1741,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "aurelia_finch_pose_cells.json#pose=proof_presentation_ready",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "08-signature-actions-sheet-candidate-v2.png#panel-8",
+      "source_column": 0,
+      "source_panel_bounds": {
+        "bottom": 768,
+        "left": 0,
+        "right": 256,
+        "top": 512
+      },
+      "source_row": 2,
+      "source_sheet": "08-signature-actions-sheet-candidate-v2.png",
+      "source_worksheet_sha256": "18934f91ae9f21b9144e5db2137a3c9800874e3d422ef3803aa686778bb205b0",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 20,
+        "right": 50,
+        "top": 5
+      },
+      "category": "signature",
+      "floor_shadow_removed": true,
+      "graph_id": "proof_presentation_reveal_blank_evidence",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "24fc20e6989faacd326f7f28e0d88c33abb423e7139353389eb7316f9b0f0e1b",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 113,
+      "pixel_graph_sha256": "24fc20e6989faacd326f7f28e0d88c33abb423e7139353389eb7316f9b0f0e1b",
+      "pixel_node_count": 1839,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "aurelia_finch_pose_cells.json#pose=proof_presentation_reveal_blank_evidence",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "08-signature-actions-sheet-candidate-v2.png#panel-9",
+      "source_column": 1,
+      "source_panel_bounds": {
+        "bottom": 768,
+        "left": 256,
+        "right": 512,
+        "top": 512
+      },
+      "source_row": 2,
+      "source_sheet": "08-signature-actions-sheet-candidate-v2.png",
+      "source_worksheet_sha256": "18934f91ae9f21b9144e5db2137a3c9800874e3d422ef3803aa686778bb205b0",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 16,
+        "right": 55,
+        "top": 5
+      },
+      "category": "signature",
+      "floor_shadow_removed": true,
+      "graph_id": "proof_presentation_point_to_proof",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "c07d9f41c3628d366dca7a5659a35c29c2afbb2972680e68c38923d0ea9efe29",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 114,
+      "pixel_graph_sha256": "c07d9f41c3628d366dca7a5659a35c29c2afbb2972680e68c38923d0ea9efe29",
+      "pixel_node_count": 1961,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "aurelia_finch_pose_cells.json#pose=proof_presentation_point_to_proof",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "08-signature-actions-sheet-candidate-v2.png#panel-10",
+      "source_column": 2,
+      "source_panel_bounds": {
+        "bottom": 768,
+        "left": 512,
+        "right": 768,
+        "top": 512
+      },
+      "source_row": 2,
+      "source_sheet": "08-signature-actions-sheet-candidate-v2.png",
+      "source_worksheet_sha256": "18934f91ae9f21b9144e5db2137a3c9800874e3d422ef3803aa686778bb205b0",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 21,
+        "right": 49,
+        "top": 5
+      },
+      "category": "signature",
+      "floor_shadow_removed": true,
+      "graph_id": "proof_presentation_close_and_secure",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "720b47d1e990ed5c20bd1ebaf6f7c3f7370100db2e29c1b4f05339fbbe9cf3b1",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 115,
+      "pixel_graph_sha256": "720b47d1e990ed5c20bd1ebaf6f7c3f7370100db2e29c1b4f05339fbbe9cf3b1",
+      "pixel_node_count": 1706,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "aurelia_finch_pose_cells.json#pose=proof_presentation_close_and_secure",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "08-signature-actions-sheet-candidate-v2.png#panel-11",
+      "source_column": 3,
+      "source_panel_bounds": {
+        "bottom": 768,
+        "left": 768,
+        "right": 1024,
+        "top": 512
+      },
+      "source_row": 2,
+      "source_sheet": "08-signature-actions-sheet-candidate-v2.png",
+      "source_worksheet_sha256": "18934f91ae9f21b9144e5db2137a3c9800874e3d422ef3803aa686778bb205b0",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 17,
+        "right": 53,
+        "top": 5
+      },
+      "category": "signature",
+      "floor_shadow_removed": true,
+      "graph_id": "public_promise_check_pause",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "faed8691e1f260e90a95e2202763b5420b140dc6a09a6d151c464939a5ebbfa6",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 116,
+      "pixel_graph_sha256": "faed8691e1f260e90a95e2202763b5420b140dc6a09a6d151c464939a5ebbfa6",
+      "pixel_node_count": 1811,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "aurelia_finch_pose_cells.json#pose=public_promise_check_pause",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "08-signature-actions-sheet-candidate-v2.png#panel-12",
+      "source_column": 0,
+      "source_panel_bounds": {
+        "bottom": 1024,
+        "left": 0,
+        "right": 256,
+        "top": 768
+      },
+      "source_row": 3,
+      "source_sheet": "08-signature-actions-sheet-candidate-v2.png",
+      "source_worksheet_sha256": "18934f91ae9f21b9144e5db2137a3c9800874e3d422ef3803aa686778bb205b0",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 19,
+        "right": 51,
+        "top": 5
+      },
+      "category": "signature",
+      "floor_shadow_removed": true,
+      "graph_id": "public_promise_check_commitment",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "db22e3452f570288389875684fe991d2f75bc6cca07e981031c66b1d9bb1836a",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 117,
+      "pixel_graph_sha256": "db22e3452f570288389875684fe991d2f75bc6cca07e981031c66b1d9bb1836a",
+      "pixel_node_count": 1700,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "aurelia_finch_pose_cells.json#pose=public_promise_check_commitment",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "08-signature-actions-sheet-candidate-v2.png#panel-13",
+      "source_column": 1,
+      "source_panel_bounds": {
+        "bottom": 1024,
+        "left": 256,
+        "right": 512,
+        "top": 768
+      },
+      "source_row": 3,
+      "source_sheet": "08-signature-actions-sheet-candidate-v2.png",
+      "source_worksheet_sha256": "18934f91ae9f21b9144e5db2137a3c9800874e3d422ef3803aa686778bb205b0",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 19,
+        "right": 51,
+        "top": 5
+      },
+      "category": "signature",
+      "floor_shadow_removed": true,
+      "graph_id": "leadership_recovery_reconsider",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "90ea205a8e693f48153e6b39edf4b57292fc8aa18c91021224778b5aeaef513f",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 118,
+      "pixel_graph_sha256": "90ea205a8e693f48153e6b39edf4b57292fc8aa18c91021224778b5aeaef513f",
+      "pixel_node_count": 1773,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "aurelia_finch_pose_cells.json#pose=leadership_recovery_reconsider",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "08-signature-actions-sheet-candidate-v2.png#panel-14",
+      "source_column": 2,
+      "source_panel_bounds": {
+        "bottom": 1024,
+        "left": 512,
+        "right": 768,
+        "top": 768
+      },
+      "source_row": 3,
+      "source_sheet": "08-signature-actions-sheet-candidate-v2.png",
+      "source_worksheet_sha256": "18934f91ae9f21b9144e5db2137a3c9800874e3d422ef3803aa686778bb205b0",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 13,
+        "right": 58,
+        "top": 5
+      },
+      "category": "signature",
+      "floor_shadow_removed": true,
+      "graph_id": "leadership_recovery_diplomatic_settle",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "d50d54d2470035f3e017cbf6b041121c053555825300033481ecb40e690981db",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 119,
+      "pixel_graph_sha256": "d50d54d2470035f3e017cbf6b041121c053555825300033481ecb40e690981db",
+      "pixel_node_count": 1835,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "aurelia_finch_pose_cells.json#pose=leadership_recovery_diplomatic_settle",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "08-signature-actions-sheet-candidate-v2.png#panel-15",
+      "source_column": 3,
+      "source_panel_bounds": {
+        "bottom": 1024,
+        "left": 768,
+        "right": 1024,
+        "top": 768
+      },
+      "source_row": 3,
+      "source_sheet": "08-signature-actions-sheet-candidate-v2.png",
+      "source_worksheet_sha256": "18934f91ae9f21b9144e5db2137a3c9800874e3d422ef3803aa686778bb205b0",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 14,
+        "right": 56,
+        "top": 4
+      },
+      "category": "interaction",
+      "floor_shadow_removed": true,
+      "graph_id": "interaction_open",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "ce07509f239a7e0e2cb9d12fedde20bdd5e5ceeebec4577a763bbfbd21cd034c",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 120,
+      "pixel_graph_sha256": "ce07509f239a7e0e2cb9d12fedde20bdd5e5ceeebec4577a763bbfbd21cd034c",
+      "pixel_node_count": 1722,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "aurelia_finch_pose_cells.json#pose=interaction_open",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "09-interaction-poses-candidate-v1.png#panel-0",
+      "source_column": 0,
+      "source_panel_bounds": {
+        "bottom": 512,
+        "left": 0,
+        "right": 512,
+        "top": 0
+      },
+      "source_row": 0,
+      "source_sheet": "09-interaction-poses-candidate-v1.png",
+      "source_worksheet_sha256": "57f27892803ad1b5d0e8ea44b02404f3de558a499826d7584bdf21de34164849",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 22,
+        "right": 49,
+        "top": 4
+      },
+      "category": "interaction",
+      "floor_shadow_removed": true,
+      "graph_id": "interaction_closed",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "4b1afe356e443ad9689e47c1c5211cebd32d1e9aa5144319cc71168ec1d56c92",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 121,
+      "pixel_graph_sha256": "4b1afe356e443ad9689e47c1c5211cebd32d1e9aa5144319cc71168ec1d56c92",
+      "pixel_node_count": 1636,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "aurelia_finch_pose_cells.json#pose=interaction_closed",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "09-interaction-poses-candidate-v1.png#panel-1",
+      "source_column": 1,
+      "source_panel_bounds": {
+        "bottom": 512,
+        "left": 512,
+        "right": 1024,
+        "top": 0
+      },
+      "source_row": 0,
+      "source_sheet": "09-interaction-poses-candidate-v1.png",
+      "source_worksheet_sha256": "57f27892803ad1b5d0e8ea44b02404f3de558a499826d7584bdf21de34164849",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 21,
+        "right": 49,
+        "top": 4
+      },
+      "category": "interaction",
+      "floor_shadow_removed": true,
+      "graph_id": "interaction_fist",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "63210bbb73eeacd53ad285a35520a344a91127d266be5ee340ed72ae716f9bac",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 122,
+      "pixel_graph_sha256": "63210bbb73eeacd53ad285a35520a344a91127d266be5ee340ed72ae716f9bac",
+      "pixel_node_count": 1672,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "aurelia_finch_pose_cells.json#pose=interaction_fist",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "09-interaction-poses-candidate-v1.png#panel-2",
+      "source_column": 0,
+      "source_panel_bounds": {
+        "bottom": 1024,
+        "left": 0,
+        "right": 512,
+        "top": 512
+      },
+      "source_row": 1,
+      "source_sheet": "09-interaction-poses-candidate-v1.png",
+      "source_worksheet_sha256": "57f27892803ad1b5d0e8ea44b02404f3de558a499826d7584bdf21de34164849",
+      "validation_result": "passed"
+    },
+    {
+      "audit_status": "passed_before_animation_mapping",
+      "background_removed": true,
+      "baseline_y": 91,
+      "bounds": {
+        "bottom": 91,
+        "left": 12,
+        "right": 58,
+        "top": 4
+      },
+      "category": "interaction",
+      "floor_shadow_removed": true,
+      "graph_id": "interaction_reach",
+      "graph_kind": "full_body_graph",
+      "isolated_silhouette_sha256": "0e003fb697a77ef498fa6d927526a1e765a256edf0b150090748ba2022cc5717",
+      "isolation_method": "largest_connected_warm_subject_mask_with_floor_shadow_rejection",
+      "ordinal": 123,
+      "pixel_graph_sha256": "0e003fb697a77ef498fa6d927526a1e765a256edf0b150090748ba2022cc5717",
+      "pixel_node_count": 1823,
+      "projected_diff_pixel_count": 0,
+      "root": [
+        36,
+        91
+      ],
+      "runtime_asset": "aurelia_finch_pose_cells.json#pose=interaction_reach",
+      "runtime_format": "colored_pixel_nodes_json",
+      "source_cell": "09-interaction-poses-candidate-v1.png#panel-3",
+      "source_column": 1,
+      "source_panel_bounds": {
+        "bottom": 1024,
+        "left": 512,
+        "right": 1024,
+        "top": 512
+      },
+      "source_row": 1,
+      "source_sheet": "09-interaction-poses-candidate-v1.png",
+      "source_worksheet_sha256": "57f27892803ad1b5d0e8ea44b02404f3de558a499826d7584bdf21de34164849",
+      "validation_result": "passed"
+    }
+  ],
+  "runtime_image_assets": [],
+  "schema_version": 1
+}
