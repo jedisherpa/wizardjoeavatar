@@ -13,6 +13,14 @@ Runtime assets:
 - `mira_solen_runtime_profile.json`: data-driven state-to-pose mappings.
 - `mira_solen_character_package.json`: loader and registry package.
 
+At package load, the manifest is treated as a verification contract rather
+than a report. The loader recomputes hashes for the generation profile,
+immutable source, canonical voxel, all nine accepted worksheet categories,
+character package, runtime profile, pose library, animation graph, animation
+matrix, extraction audit, and pixel-graph library. It also rejects repository
+path escapes, any total other than 124, wrong category counts, unsafe bounds,
+duplicate coordinates, invalid RGB nodes, and any runtime image dependency.
+
 Package loading recomputes the audit hash for every graph before the animation profile and controller are constructed. Runtime rendering reads transparent colored nodes from JSON and paints them into the ASCILINE framebuffer. It does not load a worksheet, contact sheet, PNG, SVG, data URI, or flattened sprite. Missing nodes remain transparent.
 
 Regenerate with:

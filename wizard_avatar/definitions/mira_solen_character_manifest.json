@@ -14,6 +14,7 @@
     "approved_worksheets": "assets/reference/personas/mira-solen/canonical-worksheets",
     "canonical_reference": "assets/reference/personas/mira-solen/canonical-voxel.png",
     "flattened_runtime_dependency": false,
+    "generation_profile": "assets/reference/personas/mira-solen/generation-profile.json",
     "original_reference": "assets/reference/personas/mira-solen/source-reference.png",
     "runtime_art": "deterministic worksheet-derived direct cell library"
   },
@@ -22,12 +23,14 @@
     "animation_graph_sha256": "047903180ddcb14c7e406ec5fbf61403164f5019b00e6978e5b3f2bec21ac981",
     "animation_matrix_sha256": "0437657c50083b6443ab3e530ad9f049d27c14b9936b9d6c1f2e9a17bc8858b6",
     "canonical_reference_sha256": "7802522fbc0d26370fdb826ab409ca3b8d063eac75c62af1bdf888848bb6561e",
+    "character_package_sha256": "26b1f5dc9609c88377bc8891f2cfcafd608996ec27a9da91f79b40a11dbb50b0",
     "extraction_audit_sha256": "4b6716a67cf428904249a27632288dce75e594cef1a39e0b05f5986f92528909",
     "extraction_item_count": 124,
     "generation_profile_sha256": "2a82a2a4bbffce405d6dbd89c78291c2bdac4a7cd49c1d399ad49f9c679ced00",
     "original_reference_sha256": "ee88963dc59ab9efb8f4500734aa8a7b66f67b378e075088207df49cf6e08f6a",
     "pixel_graph_library_sha256": "ac8536cd7a719a809281169431c3d9f2a803e1b89a80aae0f8a99dca1f831692",
     "pose_library_sha256": "94138553cb493b0437c42c77041ff9fdb66ff32e9a59274a68029e8006b77b32",
+    "runtime_profile_sha256": "d1c0e25c440c6605f507ad65d431ebc6c1eb5fc8b50ebca9ae143705606a5676",
     "worksheet_sha256": {
       "01-identity-sheet-candidate-v3.png": "8fa5e28a04b7b710cbdcc5ba30b6678a81857799c83ced9b082cfff4475825f1",
       "02-turnaround-sheet-candidate-v1.png": "8f19fe35f59b5166ad519bba585d449d7f9657a80f1a3763e4868d9da216803e",

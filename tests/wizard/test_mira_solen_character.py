@@ -7,7 +7,11 @@ import unittest
 from pathlib import Path
 from unittest.mock import patch
 
-from wizard_avatar.character_package import MIRA_SOLEN_PACKAGE_PATH, load_character_package
+from wizard_avatar.character_package import (
+    MIRA_SOLEN_PACKAGE_PATH,
+    CharacterPackageValidationError,
+    load_character_package,
+)
 from wizard_avatar.character_registry import load_character_registry
 from wizard_avatar.frame_source import ProceduralWizardFrameSource
 from wizard_avatar.models import WizardCommand
@@ -16,6 +20,7 @@ from wizard_avatar.server import create_app
 
 ROOT = Path(__file__).resolve().parents[2]
 PROFILE = ROOT / "assets/reference/personas/mira-solen/generation-profile.json"
+PERSONA = ROOT / "assets/reference/personas/mira-solen"
 DEFINITIONS = ROOT / "wizard_avatar/definitions"
 
 
@@ -36,6 +41,8 @@ class MiraSolenCharacterTests(unittest.TestCase):
         self.assertEqual(hashes["generation_profile_sha256"], hashlib.sha256(PROFILE.read_bytes()).hexdigest())
         self.assertEqual(hashes["extraction_item_count"], 124)
         for key, filename in (
+            ("character_package_sha256", "mira_solen_character_package.json"),
+            ("runtime_profile_sha256", "mira_solen_runtime_profile.json"),
             ("pose_library_sha256", "mira_solen_pose_cells.json"),
             ("animation_graph_sha256", "mira_solen_animation_graph.json"),
             ("animation_matrix_sha256", "mira_solen_animation_matrix.json"),
@@ -73,6 +80,11 @@ class MiraSolenCharacterTests(unittest.TestCase):
             self.assertLessEqual(max(node["x"] for node in graph["nodes"]), 67)
             self.assertGreaterEqual(min(node["y"] for node in graph["nodes"]), 4)
             self.assertLessEqual(max(node["y"] for node in graph["nodes"]), 91)
+            for node in graph["nodes"]:
+                self.assertIs(type(node["x"]), int)
+                self.assertIs(type(node["y"]), int)
+                self.assertEqual(len(node["rgb"]), 3)
+                self.assertTrue(all(type(channel) is int and 0 <= channel <= 255 for channel in node["rgb"]))
         flame = next(pose for pose in poses if pose["id"] == "blue_flame_inspiration")
         self.assertGreater(sum(1 for node in flame["cells"] if node["rgb"][2] >= 155 and node["rgb"][0] <= 65), 20)
 
@@ -143,6 +155,114 @@ class MiraSolenCharacterTests(unittest.TestCase):
         with patch("PIL.Image.open", side_effect=AssertionError("runtime image access")):
             frame = self.make_source().render_current_frame()
         self.assertEqual(len(frame.cells), frame.cols * frame.rows * 4)
+
+    def test_package_rejects_tampering_across_complete_provenance_chain(self):
+        manifest = json.loads(
+            (DEFINITIONS / "mira_solen_character_manifest.json").read_text()
+        )
+        targets = {
+            "generation_profile": PROFILE,
+            "original_source": PERSONA / "source-reference.png",
+            "canonical_voxel": PERSONA / "canonical-voxel.png",
+            "character_package": DEFINITIONS / "mira_solen_character_package.json",
+            "runtime_profile": DEFINITIONS / "mira_solen_runtime_profile.json",
+            "pose_library": DEFINITIONS / "mira_solen_pose_cells.json",
+            "animation_graph": DEFINITIONS / "mira_solen_animation_graph.json",
+            "animation_matrix": DEFINITIONS / "mira_solen_animation_matrix.json",
+            "extraction_audit": DEFINITIONS / "mira_solen_extraction_audit.json",
+            "pixel_graph_library": DEFINITIONS / "mira_solen_pixel_graphs.json",
+        }
+        worksheet_dir = PERSONA / "canonical-worksheets"
+        for filename in manifest["hashes"]["worksheet_sha256"]:
+            targets["worksheet_{}".format(filename[:2])] = worksheet_dir / filename
+        self.assertEqual(
+            {label for label in targets if label.startswith("worksheet_")},
+            {"worksheet_{:02d}".format(index) for index in range(1, 10)},
+        )
+        original_read_bytes = Path.read_bytes
+        for label, target in targets.items():
+            resolved_target = target.resolve()
+
+            def tampered_read_bytes(path, *args, **kwargs):
+                data = original_read_bytes(path, *args, **kwargs)
+                return data + b"tamper" if path.resolve() == resolved_target else data
+
+            with self.subTest(asset=label), patch.object(
+                Path, "read_bytes", new=tampered_read_bytes
+            ):
+                with self.assertRaises(CharacterPackageValidationError):
+                    load_character_package(MIRA_SOLEN_PACKAGE_PATH)
+
+    def test_package_rejects_manifest_tampering_and_repository_escape(self):
+        manifest_path = (DEFINITIONS / "mira_solen_character_manifest.json").resolve()
+        original_manifest = json.loads(manifest_path.read_text())
+        cases = []
+        wrong_hash = json.loads(json.dumps(original_manifest))
+        wrong_hash["hashes"]["pose_library_sha256"] = "0" * 64
+        cases.append(("generated_hash", wrong_hash))
+        wrong_count = json.loads(json.dumps(original_manifest))
+        wrong_count["hashes"]["extraction_item_count"] = 123
+        cases.append(("exact_124", wrong_count))
+        source_escape = json.loads(json.dumps(original_manifest))
+        source_escape["derivation"]["original_reference"] = "../../outside.png"
+        cases.append(("source_escape", source_escape))
+        worksheet_escape = json.loads(json.dumps(original_manifest))
+        worksheet_escape["derivation"]["approved_worksheets"] = "../../"
+        cases.append(("worksheet_escape", worksheet_escape))
+        original_read_text = Path.read_text
+        for label, tampered in cases:
+            def tampered_read_text(path, *args, **kwargs):
+                if path.resolve() == manifest_path:
+                    return json.dumps(tampered)
+                return original_read_text(path, *args, **kwargs)
+
+            with self.subTest(case=label), patch.object(
+                Path, "read_text", new=tampered_read_text
+            ):
+                with self.assertRaises(CharacterPackageValidationError):
+                    load_character_package(MIRA_SOLEN_PACKAGE_PATH)
+
+    def test_package_rejects_out_of_bounds_and_invalid_rgb_graph_nodes(self):
+        graph_path = (DEFINITIONS / "mira_solen_pixel_graphs.json").resolve()
+        audit_path = (DEFINITIONS / "mira_solen_extraction_audit.json").resolve()
+        original_graph = json.loads(graph_path.read_text())
+        original_audit = json.loads(audit_path.read_text())
+        original_read_text = Path.read_text
+        for label, replacement in (
+            ("unsafe_x", {"x": 0}),
+            ("invalid_rgb", {"rgb": [256, 0, 0]}),
+        ):
+            graph = json.loads(json.dumps(original_graph))
+            audit = json.loads(json.dumps(original_audit))
+            target_graph = graph["graphs"][0]
+            target_graph["nodes"][0].update(replacement)
+            nodes = target_graph["nodes"]
+            item = next(
+                entry for entry in audit["items"]
+                if entry["graph_id"] == target_graph["id"]
+            )
+            item["pixel_graph_sha256"] = hashlib.sha256(
+                json.dumps(nodes, separators=(",", ":"), sort_keys=True).encode()
+            ).hexdigest()
+            item["bounds"] = {
+                "left": min(node["x"] for node in nodes),
+                "top": min(node["y"] for node in nodes),
+                "right": max(node["x"] for node in nodes),
+                "bottom": max(node["y"] for node in nodes),
+            }
+
+            def tampered_read_text(path, *args, **kwargs):
+                if path.resolve() == graph_path:
+                    return json.dumps(graph)
+                if path.resolve() == audit_path:
+                    return json.dumps(audit)
+                return original_read_text(path, *args, **kwargs)
+
+            with self.subTest(case=label), patch.object(
+                Path, "read_text", new=tampered_read_text
+            ):
+                with self.assertRaises(CharacterPackageValidationError):
+                    load_character_package(MIRA_SOLEN_PACKAGE_PATH)
 
     def test_registry_static_rest_and_websocket_surfaces(self):
         app = create_app()
