@@ -20,6 +20,7 @@ from wizard_avatar.server import create_app
 
 ROOT = Path(__file__).resolve().parents[2]
 PROFILE = ROOT / "assets" / "reference" / "personas" / "kai-renner" / "generation-profile.json"
+PERSONA = PROFILE.parent
 
 
 class KaiRennerCharacterTests(unittest.TestCase):
@@ -215,6 +216,35 @@ class KaiRennerCharacterTests(unittest.TestCase):
                 CharacterPackageValidationError, "hash differs"
             ):
                 load_character_package(KAI_RENNER_PACKAGE_PATH)
+
+    def test_package_rejects_original_canonical_and_every_accepted_worksheet_tamper(self):
+        manifest = json.loads(
+            (ROOT / "wizard_avatar" / "definitions" / "kai_renner_character_manifest.json").read_text(
+                encoding="utf-8"
+            )
+        )
+        targets = [
+            (PERSONA / "source-reference.png", "original_reference"),
+            (PERSONA / "canonical-voxel.png", "canonical_reference"),
+        ]
+        targets.extend(
+            (PERSONA / "canonical-worksheets" / filename, "accepted worksheet")
+            for filename in manifest["hashes"]["worksheet_sha256"]
+        )
+        original_read_bytes = Path.read_bytes
+        for target, expected_message in targets:
+            resolved = target.resolve()
+
+            def controlled_read_bytes(path, *args, **kwargs):
+                payload = original_read_bytes(path, *args, **kwargs)
+                return payload + b"tampered" if path.resolve() == resolved else payload
+
+            with self.subTest(target=target.name):
+                with patch.object(Path, "read_bytes", new=controlled_read_bytes):
+                    with self.assertRaisesRegex(
+                        CharacterPackageValidationError, expected_message
+                    ):
+                        load_character_package(KAI_RENNER_PACKAGE_PATH)
 
     def test_accepted_worksheets_and_pose_local_anchors_are_production_inputs(self):
         package = load_character_package(KAI_RENNER_PACKAGE_PATH)
