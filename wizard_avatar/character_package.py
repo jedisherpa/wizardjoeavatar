@@ -131,6 +131,7 @@ def load_character_package(path: Path = WIZARD_JOE_PACKAGE_PATH) -> CharacterPac
             audit_raw if optional_assets["extraction_audit"] is not None else {},
             manifest_raw,
             {
+                "character_package": package_path,
                 "pose_library": pose_library,
                 "animation_graph": animation_graph,
                 "runtime_profile": runtime_profile,

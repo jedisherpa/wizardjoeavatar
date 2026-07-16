@@ -569,6 +569,9 @@ def manifest_payload(
     canonical_reference = _root_path(profile, str(refs["canonical_reference"]))
     worksheet_dir = _root_path(profile, str(refs["worksheets_dir"]))
     profile_path = Path(str(profile["_profile_path"]))
+    character_package_path = DEFINITIONS / "{}_character_package.json".format(
+        profile["output_prefix"]
+    )
     runtime_profile_path = DEFINITIONS / "{}_runtime_profile.json".format(
         profile["output_prefix"]
     )
@@ -595,6 +598,7 @@ def manifest_payload(
         },
         "hashes": {
             "generation_profile_sha256": digest_bytes(profile_path.read_bytes()),
+            "character_package_sha256": digest_bytes(character_package_path.read_bytes()),
             "original_reference_sha256": digest_bytes(original.read_bytes()),
             "canonical_reference_sha256": digest_bytes(canonical_reference.read_bytes()),
             "worksheet_sha256": {

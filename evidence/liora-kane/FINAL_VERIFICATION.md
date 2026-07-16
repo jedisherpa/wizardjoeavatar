@@ -29,9 +29,10 @@ node graphs and succeeds with `PIL.Image.open` forced to fail.
 ## Identity and semantic gate
 
 - The source and canonical images retain their recorded SHA-256 hashes.
-- Runtime package loading independently re-hashes the generation profile,
-  original reference, canonical voxel reference, all nine accepted worksheet
-  classes, runtime profile, and every generated graph/audit/animation asset.
+- Runtime package loading independently re-hashes the character package,
+  generation profile, original reference, canonical voxel reference, all nine
+  accepted worksheet classes, runtime profile, and every generated
+  graph/audit/animation asset.
   Repository-safe path resolution rejects missing or escaping provenance paths.
 - No Orion inquiry, question-notebook, coat, beard, glasses, or tie content
   remains in Liora's profile, graph, manifest, runtime profile, or pose IDs.
@@ -48,10 +49,10 @@ node graphs and succeeds with `PIL.Image.open` forced to fail.
 
 - Generator `--check`: passed.
 - Provenance-focused Liora and direct-cell suite: 19 passed, 0 failed,
-  including independent tamper attempts against 18 immutable/generated assets.
+  including independent tamper attempts against 19 immutable/generated assets.
 - Live HTTP character registry: HTTP 200 and `liora-kane-v1` present.
 - Live WebSocket: connected and streamed before and after a Liora action.
-- Full repository suite: 180 passed, 0 failed, 0 skipped in 188.695 seconds.
+- Full repository suite: 180 passed, 0 failed, 0 skipped in 123.124 seconds.
 - Contact-sheet rerender: byte-identical to the reviewed evidence image.
 
 ## Human visual review

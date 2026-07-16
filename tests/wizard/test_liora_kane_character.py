@@ -76,6 +76,7 @@ class LioraKaneCharacterTests(unittest.TestCase):
             hashes["generation_profile_sha256"], hashlib.sha256(PROFILE.read_bytes()).hexdigest()
         )
         for key, filename in (
+            ("character_package_sha256", "liora_kane_character_package.json"),
             ("pose_library_sha256", "liora_kane_pose_cells.json"),
             ("animation_graph_sha256", "liora_kane_animation_graph.json"),
             ("runtime_profile_sha256", "liora_kane_runtime_profile.json"),
@@ -184,6 +185,7 @@ class LioraKaneCharacterTests(unittest.TestCase):
             ),
         ]
         generated_assets = [
+            DEFINITIONS / "liora_kane_character_package.json",
             DEFINITIONS / "liora_kane_pose_cells.json",
             DEFINITIONS / "liora_kane_animation_graph.json",
             DEFINITIONS / "liora_kane_runtime_profile.json",

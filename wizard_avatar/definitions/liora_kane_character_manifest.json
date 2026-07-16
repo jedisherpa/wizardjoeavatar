@@ -23,6 +23,7 @@
     "animation_graph_sha256": "8acd1ef33c66031590ff088d45b7838e377a4e43eee2121879fd700b910d1c64",
     "animation_matrix_sha256": "ca22bc4c1a11b54d625c0c910607eb3299224900218d9df99adf4d51fe03d6a1",
     "canonical_reference_sha256": "c4710c8764b9246fcddff297943da6d8ca83478794331e846758eb44451d1ad9",
+    "character_package_sha256": "bfb3047929472d3add555d9ea2cc615e6e9ce6617ce54ab721b1a8a9e9332f2d",
     "extraction_audit_sha256": "d659656402f28c4634e8a7fad22f8363b9cb48210c1559e25099331bf9e00c96",
     "extraction_item_count": 124,
     "generation_profile_sha256": "d81be17a2ce16b2a1f7e134f20f044fac2cb72495b1c3ad6a00565a51fa2ec49",
