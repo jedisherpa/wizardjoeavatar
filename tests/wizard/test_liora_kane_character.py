@@ -78,6 +78,7 @@ class LioraKaneCharacterTests(unittest.TestCase):
         for key, filename in (
             ("pose_library_sha256", "liora_kane_pose_cells.json"),
             ("animation_graph_sha256", "liora_kane_animation_graph.json"),
+            ("runtime_profile_sha256", "liora_kane_runtime_profile.json"),
             ("animation_matrix_sha256", "liora_kane_animation_matrix.json"),
             ("extraction_audit_sha256", "liora_kane_extraction_audit.json"),
             ("pixel_graph_library_sha256", "liora_kane_pixel_graphs.json"),
@@ -86,6 +87,15 @@ class LioraKaneCharacterTests(unittest.TestCase):
                 hashes[key], hashlib.sha256((DEFINITIONS / filename).read_bytes()).hexdigest()
             )
         self.assertEqual(hashes["extraction_item_count"], 124)
+        persona = ROOT / "assets/reference/personas/liora-kane"
+        self.assertEqual(
+            hashes["original_reference_sha256"],
+            hashlib.sha256((persona / "source-reference.png").read_bytes()).hexdigest(),
+        )
+        self.assertEqual(
+            hashes["canonical_reference_sha256"],
+            hashlib.sha256((persona / "canonical-voxel.png").read_bytes()).hexdigest(),
+        )
         self.assertEqual(
             set(hashes["worksheet_sha256"]),
             {
@@ -100,6 +110,9 @@ class LioraKaneCharacterTests(unittest.TestCase):
                 "09-body-hand-poses-candidate-v1.png",
             },
         )
+        for filename, expected_hash in hashes["worksheet_sha256"].items():
+            worksheet = persona / "canonical-worksheets" / filename
+            self.assertEqual(expected_hash, hashlib.sha256(worksheet.read_bytes()).hexdigest())
 
     def test_exact_124_transparent_graphs_are_audited_before_animation(self):
         package = load_character_package(LIORA_KANE_PACKAGE_PATH)
@@ -156,18 +169,53 @@ class LioraKaneCharacterTests(unittest.TestCase):
             with self.assertRaisesRegex(CharacterPackageValidationError, "hash differs"):
                 load_character_package(LIORA_KANE_PACKAGE_PATH)
 
-    def test_package_rejects_assets_changed_after_manifest_lineage(self):
-        pose_path = (DEFINITIONS / "liora_kane_pose_cells.json").resolve()
+    def test_package_independently_rejects_every_input_and_generated_asset_tamper(self):
+        persona = ROOT / "assets/reference/personas/liora-kane"
+        manifest = json.loads(
+            (DEFINITIONS / "liora_kane_character_manifest.json").read_text(encoding="utf-8")
+        )
+        immutable_inputs = [
+            PROFILE,
+            persona / "source-reference.png",
+            persona / "canonical-voxel.png",
+            *(
+                persona / "canonical-worksheets" / filename
+                for filename in manifest["hashes"]["worksheet_sha256"]
+            ),
+        ]
+        generated_assets = [
+            DEFINITIONS / "liora_kane_pose_cells.json",
+            DEFINITIONS / "liora_kane_animation_graph.json",
+            DEFINITIONS / "liora_kane_runtime_profile.json",
+            DEFINITIONS / "liora_kane_animation_matrix.json",
+            DEFINITIONS / "liora_kane_extraction_audit.json",
+            DEFINITIONS / "liora_kane_pixel_graphs.json",
+        ]
         original_read_bytes = Path.read_bytes
+        for target in [*immutable_inputs, *generated_assets]:
+            target = target.resolve()
+            with self.subTest(target=target.name):
+                def controlled_read_bytes(path, *args, **kwargs):
+                    data = original_read_bytes(path, *args, **kwargs)
+                    return data + b"\n" if path.resolve() == target else data
 
-        def controlled_read_bytes(path, *args, **kwargs):
-            data = original_read_bytes(path, *args, **kwargs)
-            if path.resolve() == pose_path:
-                return data + b"\n"
-            return data
+                with patch.object(Path, "read_bytes", new=controlled_read_bytes):
+                    with self.assertRaisesRegex(CharacterPackageValidationError, "manifest hash differs"):
+                        load_character_package(LIORA_KANE_PACKAGE_PATH)
 
-        with patch.object(Path, "read_bytes", new=controlled_read_bytes):
-            with self.assertRaisesRegex(CharacterPackageValidationError, "manifest hash differs"):
+    def test_package_rejects_provenance_paths_that_escape_the_repository(self):
+        manifest_path = (DEFINITIONS / "liora_kane_character_manifest.json").resolve()
+        tampered = json.loads(manifest_path.read_text(encoding="utf-8"))
+        tampered["derivation"]["original_reference"] = "../../../../etc/passwd"
+        original_read_text = Path.read_text
+
+        def controlled_read_text(path, *args, **kwargs):
+            if path.resolve() == manifest_path:
+                return json.dumps(tampered)
+            return original_read_text(path, *args, **kwargs)
+
+        with patch.object(Path, "read_text", new=controlled_read_text):
+            with self.assertRaisesRegex(CharacterPackageValidationError, "provenance path"):
                 load_character_package(LIORA_KANE_PACKAGE_PATH)
 
     def test_all_graphs_are_detailed_bounded_and_free_of_pale_blue_background(self):

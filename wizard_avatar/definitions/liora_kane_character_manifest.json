@@ -14,6 +14,7 @@
     "approved_worksheets": "assets/reference/personas/liora-kane/canonical-worksheets",
     "canonical_reference": "assets/reference/personas/liora-kane/canonical-voxel.png",
     "flattened_runtime_dependency": false,
+    "generation_profile": "assets/reference/personas/liora-kane/generation-profile.json",
     "original_reference": "assets/reference/personas/liora-kane/source-reference.png",
     "runtime_art": "deterministic worksheet-derived direct cell library"
   },
@@ -28,6 +29,7 @@
     "original_reference_sha256": "a1ad002278e7477fd05c091c79d929b2b674071484fd8e8e00a638d2fdaeca2e",
     "pixel_graph_library_sha256": "5ecd756a1c052c52346b49e7affd07c0e88433676197ab53e0f792aa0b892477",
     "pose_library_sha256": "5249f2fa5e77963c4114cdc6fc95f8dfa1c304f81866af0bd8811a128f8383e5",
+    "runtime_profile_sha256": "4d49c5c330335038825ad2eeccbe9f97ed91b136bc54e2291e3efc3db13797f5",
     "worksheet_sha256": {
       "01-identity-sheet-candidate-v1.png": "cdce2b7d7d85d622673c14c42062376ee7b17e0efb5d92f634b20b830c6c1068",
       "02-turnaround-sheet-candidate-v1.png": "bd878d40988a65db4669a0db0b13e8bd1526999dbda628f7a4c8bf7a0b189d4c",

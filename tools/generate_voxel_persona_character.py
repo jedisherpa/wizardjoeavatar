@@ -569,6 +569,9 @@ def manifest_payload(
     canonical_reference = _root_path(profile, str(refs["canonical_reference"]))
     worksheet_dir = _root_path(profile, str(refs["worksheets_dir"]))
     profile_path = Path(str(profile["_profile_path"]))
+    runtime_profile_path = DEFINITIONS / "{}_runtime_profile.json".format(
+        profile["output_prefix"]
+    )
     production_worksheets = sorted(
         {
             _pose_sheet_name(profile, pose)
@@ -583,6 +586,7 @@ def manifest_payload(
         "origin": profile["canonical"],
         "attachment_points": profile["attachment_points"],
         "derivation": {
+            "generation_profile": str(profile_path.resolve().relative_to(ROOT)),
             "original_reference": refs["original_reference"],
             "canonical_reference": refs["canonical_reference"],
             "approved_worksheets": refs["worksheets_dir"],
@@ -603,6 +607,7 @@ def manifest_payload(
             "extraction_audit_sha256": extraction_audit_hash,
             "extraction_item_count": extraction_item_count,
             "pixel_graph_library_sha256": pixel_graph_hash,
+            "runtime_profile_sha256": digest_bytes(runtime_profile_path.read_bytes()),
         },
     }
 
