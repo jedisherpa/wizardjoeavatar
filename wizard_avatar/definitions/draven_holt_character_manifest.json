@@ -1,0 +1,89 @@
+{
+  "attachment_points": [
+    "mouth",
+    "left_eye",
+    "right_eye",
+    "left_hand",
+    "right_hand",
+    "left_foot",
+    "right_foot",
+    "clipboard",
+    "pencil"
+  ],
+  "character_id": "draven-holt-v1",
+  "derivation": {
+    "approved_worksheets": "assets/reference/personas/draven-holt/canonical-worksheets",
+    "canonical_reference": "assets/reference/personas/draven-holt/canonical-voxel.png",
+    "flattened_runtime_dependency": false,
+    "generation_profile": "assets/reference/personas/draven-holt/generation-profile.json",
+    "original_reference": "assets/reference/personas/draven-holt/source-reference.png",
+    "runtime_art": "deterministic worksheet-derived direct cell library"
+  },
+  "display_name": "Draven Holt",
+  "hashes": {
+    "animation_graph_sha256": "ad8412a960189a64271a54d64c47aa24d6f4e4067bfdc563ffa5cdba06433853",
+    "animation_matrix_sha256": "79269e3e0674300787ec8a4a6019db83fc59973d31b46f345271c826331ac32f",
+    "canonical_reference_sha256": "e7fb434cd76e087a5fa9ec35020c6950d1b75d054a3cc4204e5115c12fe3d68b",
+    "extraction_audit_sha256": "5a75b9fee8fac5546fc20b3fea668fafeb58fdb5187e65d74ae1df39b82a94f9",
+    "extraction_item_count": 124,
+    "generation_profile_sha256": "00be96defe93c3426625deb20513f13b698de088be5d597f3e82dcb9f8552fa7",
+    "original_reference_sha256": "7908ed681f5fb723d14d454b5621eae24645a4e30577e0dc2be79768d237e0d9",
+    "pixel_graph_library_sha256": "b2cc64c15b737d111f3998bf892661a84bc35cb71d227d4cdaf8f0aa068f1daa",
+    "pose_library_sha256": "46fac72ee95a66e812f48c9f1b76447c8d1e6a0f94905a0587443925a7447362",
+    "worksheet_sha256": {
+      "01-identity-sheet-approved-v1.png": "d44853d6c8384e0ff0ca60375da2db05b5dcfae71f77a27ec39ba0243cefe077",
+      "02-turnaround-sheet-approved-v1.png": "abf9057076528d26137f3621392417b985584fb889f06fb6c2fba85ad3be107b",
+      "03-neutral-base-poses-approved-v1.png": "b5b9956eb83d472a42cc0a864cc93bf4995e37de702e7c61cd22c8ee652b3148",
+      "04-expression-sheet-approved-v1.png": "cfde2ce26658dd687e6f84ed01338d568d0ce8c0459dd1f59286a5c11b0d88a2",
+      "05-speech-viseme-sheet-approved-v1.png": "e78f32da6fb528c286e8117d9d343eaf07492b53389bdb079ca91794c2f7ec43",
+      "06-hand-prop-sheet-approved-v1.png": "045e2ba4ac61122c6007d9c4281d782e82c50caa91bb794e86f0d238f8edcd98",
+      "07-ground-motion-sheet-approved-v1.png": "b4b6d51b33b4629b80cd7ef5b1fa565c00b44815293bb83959b43dbe382ea355",
+      "08-signature-actions-sheet-approved-v1.png": "7b2a37c58d9846a59791ff537e7155a34b6f5a0d9d41028346e4c4dd2d847f1e",
+      "09-interaction-poses-approved-v1.png": "760eeb1a9bb14c15fd260810ae45e1104e5deb2918876b445f598621459e9054"
+    }
+  },
+  "identity_lock": {
+    "articulated": [
+      "eyelids",
+      "mouth",
+      "neck",
+      "shoulders",
+      "elbows",
+      "wrists",
+      "hands",
+      "hips",
+      "knees",
+      "ankles"
+    ],
+    "default_prop": "clipboard_and_orange_mechanical_pencil",
+    "immutable": [
+      "tall lean medium-brown adult male proportions",
+      "long right-swept black block forelock",
+      "heavy square black glasses",
+      "luminous emerald-green square eyes",
+      "full squared black beard and mustache",
+      "matte black tailored suit shirt trousers and stepped shoes",
+      "vivid orange straight tie",
+      "brown clipboard with silver clip and abstract paper marks",
+      "orange mechanical pencil",
+      "uniform small-cube voxel construction"
+    ],
+    "personality": "disciplined decisive controlled reliable operations lead"
+  },
+  "origin": {
+    "baseline_y": 91,
+    "cols": 72,
+    "root_anchor": [
+      36,
+      91
+    ],
+    "rows": 96,
+    "safe_inset": {
+      "bottom": 4,
+      "left": 4,
+      "right": 4,
+      "top": 4
+    }
+  },
+  "schema_version": 1
+}

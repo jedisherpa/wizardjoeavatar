@@ -71,6 +71,10 @@ ACTIONS = (
     "journal_hold",
     "journal_write",
     "journal_page_turn",
+    "assign_owner",
+    "deadline_emphasis",
+    "resource_allocation",
+    "clipboard_handoff",
 )
 
 MOUTH_SHAPES = (

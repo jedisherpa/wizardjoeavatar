@@ -25,6 +25,10 @@ ACTION_TO_CHANNELS = {
     "journal_hold": ("none", "rest"),
     "journal_write": ("none", "rest"),
     "journal_page_turn": ("none", "rest"),
+    "assign_owner": ("point", "held"),
+    "deadline_emphasis": ("point", "rest"),
+    "resource_allocation": ("explain", "held"),
+    "clipboard_handoff": ("react", "held"),
 }
 
 

@@ -1,0 +1,248 @@
+{
+  "asset_set_id": "draven-holt-worksheet-motion-v1",
+  "authored_fps": 24,
+  "clips": [
+    {
+      "clip_id": "draven_idle",
+      "loop": true,
+      "samples": [
+        {
+          "pose_id": "idle_relaxed",
+          "tick": 0
+        },
+        {
+          "pose_id": "idle_attentive",
+          "tick": 20
+        },
+        {
+          "pose_id": "idle_listening",
+          "tick": 40
+        }
+      ]
+    },
+    {
+      "clip_id": "draven_walk",
+      "loop": true,
+      "samples": [
+        {
+          "pose_id": "walk_contact_left",
+          "tick": 0
+        },
+        {
+          "pose_id": "walk_passing_left",
+          "tick": 7
+        },
+        {
+          "pose_id": "walk_contact_right",
+          "tick": 14
+        },
+        {
+          "pose_id": "walk_passing_right",
+          "tick": 21
+        }
+      ]
+    },
+    {
+      "clip_id": "draven_run",
+      "loop": true,
+      "samples": [
+        {
+          "pose_id": "run_contact_left",
+          "tick": 0
+        },
+        {
+          "pose_id": "run_contact_right",
+          "tick": 7
+        }
+      ]
+    },
+    {
+      "clip_id": "draven_jump_land",
+      "loop": false,
+      "samples": [
+        {
+          "pose_id": "jump_anticipation",
+          "tick": 0
+        },
+        {
+          "pose_id": "jump_airborne",
+          "tick": 6
+        },
+        {
+          "pose_id": "fall",
+          "tick": 12
+        },
+        {
+          "pose_id": "land_contact",
+          "tick": 18
+        },
+        {
+          "pose_id": "land_recovery",
+          "tick": 24
+        }
+      ]
+    },
+    {
+      "clip_id": "draven_assign_owner",
+      "loop": false,
+      "samples": [
+        {
+          "pose_id": "assign_owner_preparation",
+          "tick": 0
+        },
+        {
+          "pose_id": "assign_owner_open_hand",
+          "tick": 8
+        },
+        {
+          "pose_id": "assign_owner_confirming_point",
+          "tick": 18
+        },
+        {
+          "pose_id": "assign_owner_recovery",
+          "tick": 30
+        }
+      ]
+    },
+    {
+      "clip_id": "draven_deadline_emphasis",
+      "loop": false,
+      "samples": [
+        {
+          "pose_id": "deadline_raise_clipboard",
+          "tick": 0
+        },
+        {
+          "pose_id": "deadline_pencil_tap",
+          "tick": 9
+        },
+        {
+          "pose_id": "deadline_clipboard_emphasis",
+          "tick": 19
+        },
+        {
+          "pose_id": "deadline_recovery",
+          "tick": 31
+        }
+      ]
+    },
+    {
+      "clip_id": "draven_resource_allocation",
+      "loop": false,
+      "samples": [
+        {
+          "pose_id": "allocation_checklist_review",
+          "tick": 0
+        },
+        {
+          "pose_id": "allocation_presentation",
+          "tick": 12
+        },
+        {
+          "pose_id": "allocation_blocker_escalation",
+          "tick": 24
+        },
+        {
+          "pose_id": "allocation_recovery",
+          "tick": 38
+        }
+      ]
+    },
+    {
+      "clip_id": "draven_clipboard_handoff",
+      "loop": false,
+      "samples": [
+        {
+          "pose_id": "handoff_checklist_scan",
+          "tick": 0
+        },
+        {
+          "pose_id": "handoff_extend_clipboard",
+          "tick": 10
+        },
+        {
+          "pose_id": "handoff_release",
+          "tick": 22
+        },
+        {
+          "pose_id": "handoff_settled_pencil_ready",
+          "tick": 34
+        }
+      ]
+    },
+    {
+      "clip_id": "draven_interactions",
+      "loop": false,
+      "samples": [
+        {
+          "pose_id": "interaction_open_stance",
+          "tick": 0
+        },
+        {
+          "pose_id": "interaction_closed_stance",
+          "tick": 10
+        },
+        {
+          "pose_id": "interaction_determined_fist",
+          "tick": 20
+        },
+        {
+          "pose_id": "interaction_forward_reach",
+          "tick": 30
+        }
+      ]
+    },
+    {
+      "clip_id": "draven_turnaround",
+      "loop": true,
+      "samples": [
+        {
+          "pose_id": "neutral_front",
+          "tick": 0
+        },
+        {
+          "pose_id": "neutral_three_quarter_left",
+          "tick": 12
+        },
+        {
+          "pose_id": "neutral_left_profile",
+          "tick": 24
+        },
+        {
+          "pose_id": "neutral_back_three_quarter_left",
+          "tick": 36
+        },
+        {
+          "pose_id": "neutral_back",
+          "tick": 48
+        },
+        {
+          "pose_id": "neutral_back_three_quarter_right",
+          "tick": 60
+        },
+        {
+          "pose_id": "neutral_right_profile",
+          "tick": 72
+        },
+        {
+          "pose_id": "neutral_three_quarter_right",
+          "tick": 84
+        }
+      ]
+    }
+  ],
+  "default_node_id": "idle",
+  "motion_profile": {
+    "principles": [
+      "short_anticipation",
+      "clear_primary_action",
+      "economical_follow_through",
+      "immediate_clean_recovery",
+      "stable_planted_contacts",
+      "controlled_gesture_amplitude"
+    ],
+    "quality": "disciplined_decisive_operations_lead"
+  },
+  "schema_version": 2,
+  "simulation_hz": 60
+}

@@ -1,0 +1,1471 @@
+{
+  "anchor_presence": {
+    "clipboard": [
+      "prop_clipboard_grip",
+      "prop_clipboard_chest",
+      "prop_clipboard_offered",
+      "prop_clipboard_received",
+      "prop_two_hand_review",
+      "prop_clipboard_pencil_ready",
+      "deadline_raise_clipboard",
+      "deadline_clipboard_emphasis",
+      "allocation_checklist_review",
+      "allocation_presentation",
+      "allocation_blocker_escalation",
+      "allocation_recovery",
+      "handoff_checklist_scan",
+      "handoff_extend_clipboard",
+      "handoff_release",
+      "handoff_settled_pencil_ready"
+    ],
+    "pencil": [
+      "prop_pencil_writing_grip",
+      "prop_deadline_tap",
+      "prop_pencil_release",
+      "prop_clipboard_pencil_ready",
+      "deadline_raise_clipboard",
+      "deadline_pencil_tap",
+      "deadline_clipboard_emphasis",
+      "deadline_recovery",
+      "allocation_checklist_review",
+      "allocation_presentation",
+      "allocation_blocker_escalation",
+      "allocation_recovery",
+      "handoff_checklist_scan",
+      "handoff_extend_clipboard",
+      "handoff_release",
+      "handoff_settled_pencil_ready"
+    ]
+  },
+  "anchor_ratios": {
+    "clipboard": [
+      0.34,
+      0.55
+    ],
+    "left_eye": [
+      0.445,
+      0.195
+    ],
+    "left_foot": [
+      0.42,
+      0.97
+    ],
+    "left_hand": [
+      0.275,
+      0.575
+    ],
+    "mouth": [
+      0.5,
+      0.245
+    ],
+    "pencil": [
+      0.68,
+      0.54
+    ],
+    "right_eye": [
+      0.555,
+      0.195
+    ],
+    "right_foot": [
+      0.58,
+      0.97
+    ],
+    "right_hand": [
+      0.725,
+      0.575
+    ]
+  },
+  "animation_graph": {
+    "asset_set_id": "draven-holt-worksheet-motion-v1",
+    "authored_fps": 24,
+    "clips": [
+      {
+        "clip_id": "draven_idle",
+        "loop": true,
+        "samples": [
+          {
+            "pose_id": "idle_relaxed",
+            "tick": 0
+          },
+          {
+            "pose_id": "idle_attentive",
+            "tick": 20
+          },
+          {
+            "pose_id": "idle_listening",
+            "tick": 40
+          }
+        ]
+      },
+      {
+        "clip_id": "draven_walk",
+        "loop": true,
+        "samples": [
+          {
+            "pose_id": "walk_contact_left",
+            "tick": 0
+          },
+          {
+            "pose_id": "walk_passing_left",
+            "tick": 7
+          },
+          {
+            "pose_id": "walk_contact_right",
+            "tick": 14
+          },
+          {
+            "pose_id": "walk_passing_right",
+            "tick": 21
+          }
+        ]
+      },
+      {
+        "clip_id": "draven_run",
+        "loop": true,
+        "samples": [
+          {
+            "pose_id": "run_contact_left",
+            "tick": 0
+          },
+          {
+            "pose_id": "run_contact_right",
+            "tick": 7
+          }
+        ]
+      },
+      {
+        "clip_id": "draven_jump_land",
+        "loop": false,
+        "samples": [
+          {
+            "pose_id": "jump_anticipation",
+            "tick": 0
+          },
+          {
+            "pose_id": "jump_airborne",
+            "tick": 6
+          },
+          {
+            "pose_id": "fall",
+            "tick": 12
+          },
+          {
+            "pose_id": "land_contact",
+            "tick": 18
+          },
+          {
+            "pose_id": "land_recovery",
+            "tick": 24
+          }
+        ]
+      },
+      {
+        "clip_id": "draven_assign_owner",
+        "loop": false,
+        "samples": [
+          {
+            "pose_id": "assign_owner_preparation",
+            "tick": 0
+          },
+          {
+            "pose_id": "assign_owner_open_hand",
+            "tick": 8
+          },
+          {
+            "pose_id": "assign_owner_confirming_point",
+            "tick": 18
+          },
+          {
+            "pose_id": "assign_owner_recovery",
+            "tick": 30
+          }
+        ]
+      },
+      {
+        "clip_id": "draven_deadline_emphasis",
+        "loop": false,
+        "samples": [
+          {
+            "pose_id": "deadline_raise_clipboard",
+            "tick": 0
+          },
+          {
+            "pose_id": "deadline_pencil_tap",
+            "tick": 9
+          },
+          {
+            "pose_id": "deadline_clipboard_emphasis",
+            "tick": 19
+          },
+          {
+            "pose_id": "deadline_recovery",
+            "tick": 31
+          }
+        ]
+      },
+      {
+        "clip_id": "draven_resource_allocation",
+        "loop": false,
+        "samples": [
+          {
+            "pose_id": "allocation_checklist_review",
+            "tick": 0
+          },
+          {
+            "pose_id": "allocation_presentation",
+            "tick": 12
+          },
+          {
+            "pose_id": "allocation_blocker_escalation",
+            "tick": 24
+          },
+          {
+            "pose_id": "allocation_recovery",
+            "tick": 38
+          }
+        ]
+      },
+      {
+        "clip_id": "draven_clipboard_handoff",
+        "loop": false,
+        "samples": [
+          {
+            "pose_id": "handoff_checklist_scan",
+            "tick": 0
+          },
+          {
+            "pose_id": "handoff_extend_clipboard",
+            "tick": 10
+          },
+          {
+            "pose_id": "handoff_release",
+            "tick": 22
+          },
+          {
+            "pose_id": "handoff_settled_pencil_ready",
+            "tick": 34
+          }
+        ]
+      },
+      {
+        "clip_id": "draven_interactions",
+        "loop": false,
+        "samples": [
+          {
+            "pose_id": "interaction_open_stance",
+            "tick": 0
+          },
+          {
+            "pose_id": "interaction_closed_stance",
+            "tick": 10
+          },
+          {
+            "pose_id": "interaction_determined_fist",
+            "tick": 20
+          },
+          {
+            "pose_id": "interaction_forward_reach",
+            "tick": 30
+          }
+        ]
+      },
+      {
+        "clip_id": "draven_turnaround",
+        "loop": true,
+        "samples": [
+          {
+            "pose_id": "neutral_front",
+            "tick": 0
+          },
+          {
+            "pose_id": "neutral_three_quarter_left",
+            "tick": 12
+          },
+          {
+            "pose_id": "neutral_left_profile",
+            "tick": 24
+          },
+          {
+            "pose_id": "neutral_back_three_quarter_left",
+            "tick": 36
+          },
+          {
+            "pose_id": "neutral_back",
+            "tick": 48
+          },
+          {
+            "pose_id": "neutral_back_three_quarter_right",
+            "tick": 60
+          },
+          {
+            "pose_id": "neutral_right_profile",
+            "tick": 72
+          },
+          {
+            "pose_id": "neutral_three_quarter_right",
+            "tick": 84
+          }
+        ]
+      }
+    ],
+    "default_node_id": "idle",
+    "motion_profile": {
+      "principles": [
+        "short_anticipation",
+        "clear_primary_action",
+        "economical_follow_through",
+        "immediate_clean_recovery",
+        "stable_planted_contacts",
+        "controlled_gesture_amplitude"
+      ],
+      "quality": "disciplined_decisive_operations_lead"
+    },
+    "schema_version": 2,
+    "simulation_hz": 60
+  },
+  "animation_matrix": {
+    "conversation": [
+      "explain",
+      "point",
+      "present",
+      "listen",
+      "agree",
+      "disagree",
+      "question",
+      "answer",
+      "think",
+      "concern",
+      "assign_owner",
+      "deadline_emphasis",
+      "settle",
+      "speech_emphasis"
+    ],
+    "emotion": [
+      "calm",
+      "joy",
+      "amusement",
+      "excitement",
+      "curiosity",
+      "confidence",
+      "compassion",
+      "surprise",
+      "confusion",
+      "skepticism",
+      "concern",
+      "sadness",
+      "shame",
+      "embarrassment",
+      "fear",
+      "anxiety",
+      "anger",
+      "frustration",
+      "determination",
+      "fatigue",
+      "contemplation"
+    ],
+    "idle": [
+      "neutral",
+      "relaxed",
+      "attentive",
+      "speaking",
+      "listening",
+      "breathing",
+      "blink",
+      "look_left",
+      "look_right",
+      "weight_shift"
+    ],
+    "interaction": [
+      "reach",
+      "open_hand",
+      "close_hand",
+      "fist",
+      "point",
+      "present",
+      "clipboard_hold",
+      "clipboard_offer",
+      "clipboard_transfer",
+      "clipboard_handoff",
+      "pencil_write",
+      "deadline_tap",
+      "resource_allocation",
+      "blocker_escalation"
+    ],
+    "locomotion": [
+      "walk_forward",
+      "walk_backward",
+      "walk_left",
+      "walk_right",
+      "run_forward",
+      "run_burst",
+      "start",
+      "stop",
+      "turn_left",
+      "turn_right",
+      "crouch",
+      "jump",
+      "fall",
+      "land"
+    ],
+    "speech": [
+      "rest",
+      "closed_lips",
+      "slightly_open",
+      "wide_vowel",
+      "open_vowel",
+      "rounded_vowel",
+      "teeth_consonant",
+      "lower_lip_consonant",
+      "tongue_consonant",
+      "smile_speaking",
+      "frown_speaking",
+      "speech_emphasis",
+      "breath_pause"
+    ]
+  },
+  "asset_set_id": "draven-holt-worksheet-motion-v1",
+  "attachment_points": [
+    "mouth",
+    "left_eye",
+    "right_eye",
+    "left_hand",
+    "right_hand",
+    "left_foot",
+    "right_foot",
+    "clipboard",
+    "pencil"
+  ],
+  "canonical": {
+    "baseline_y": 91,
+    "cols": 72,
+    "root_anchor": [
+      36,
+      91
+    ],
+    "rows": 96,
+    "safe_inset": {
+      "bottom": 4,
+      "left": 4,
+      "right": 4,
+      "top": 4
+    }
+  },
+  "character_id": "draven-holt-v1",
+  "default_anchors": {
+    "clipboard": [
+      24,
+      56
+    ],
+    "left_eye": [
+      31,
+      20
+    ],
+    "left_foot": [
+      30,
+      91
+    ],
+    "left_hand": [
+      24,
+      59
+    ],
+    "mouth": [
+      36,
+      25
+    ],
+    "pencil": [
+      48,
+      55
+    ],
+    "right_eye": [
+      41,
+      20
+    ],
+    "right_foot": [
+      42,
+      91
+    ],
+    "right_hand": [
+      48,
+      59
+    ],
+    "root": [
+      36,
+      91
+    ]
+  },
+  "display_name": "Draven Holt",
+  "expected_extraction_counts": {
+    "expression": 24,
+    "hand_prop": 16,
+    "identity_reference": 16,
+    "interaction": 4,
+    "motion": 16,
+    "neutral": 8,
+    "signature": 16,
+    "turnaround": 8,
+    "viseme_blink": 16
+  },
+  "extraction": {
+    "alpha_threshold": 42,
+    "background_tolerance": 50,
+    "close_filter": 1,
+    "corner_sample": 12,
+    "crop_margin": 3,
+    "detail_radius": 0,
+    "edge_clear": 2,
+    "foreground_mode": "warm_subject",
+    "largest_component": true
+  },
+  "identity_lock": {
+    "articulated": [
+      "eyelids",
+      "mouth",
+      "neck",
+      "shoulders",
+      "elbows",
+      "wrists",
+      "hands",
+      "hips",
+      "knees",
+      "ankles"
+    ],
+    "default_prop": "clipboard_and_orange_mechanical_pencil",
+    "immutable": [
+      "tall lean medium-brown adult male proportions",
+      "long right-swept black block forelock",
+      "heavy square black glasses",
+      "luminous emerald-green square eyes",
+      "full squared black beard and mustache",
+      "matte black tailored suit shirt trousers and stepped shoes",
+      "vivid orange straight tie",
+      "brown clipboard with silver clip and abstract paper marks",
+      "orange mechanical pencil",
+      "uniform small-cube voxel construction"
+    ],
+    "personality": "disciplined decisive controlled reliable operations lead"
+  },
+  "output_prefix": "draven_holt",
+  "poses": [
+    {
+      "columns": 4,
+      "facing": "south",
+      "id": "neutral_front",
+      "index": 0,
+      "rows": 2,
+      "sheet": "02-turnaround-sheet-approved-v1.png"
+    },
+    {
+      "columns": 4,
+      "facing": "southwest",
+      "id": "neutral_three_quarter_left",
+      "index": 1,
+      "rows": 2,
+      "sheet": "02-turnaround-sheet-approved-v1.png"
+    },
+    {
+      "columns": 4,
+      "facing": "west",
+      "id": "neutral_left_profile",
+      "index": 2,
+      "rows": 2,
+      "sheet": "02-turnaround-sheet-approved-v1.png"
+    },
+    {
+      "columns": 4,
+      "facing": "northwest",
+      "id": "neutral_back_three_quarter_left",
+      "index": 3,
+      "rows": 2,
+      "sheet": "02-turnaround-sheet-approved-v1.png"
+    },
+    {
+      "columns": 4,
+      "facing": "north",
+      "id": "neutral_back",
+      "index": 4,
+      "rows": 2,
+      "sheet": "02-turnaround-sheet-approved-v1.png"
+    },
+    {
+      "columns": 4,
+      "facing": "northeast",
+      "id": "neutral_back_three_quarter_right",
+      "index": 5,
+      "rows": 2,
+      "sheet": "02-turnaround-sheet-approved-v1.png"
+    },
+    {
+      "columns": 4,
+      "facing": "east",
+      "id": "neutral_right_profile",
+      "index": 6,
+      "rows": 2,
+      "sheet": "02-turnaround-sheet-approved-v1.png"
+    },
+    {
+      "columns": 4,
+      "facing": "southeast",
+      "id": "neutral_three_quarter_right",
+      "index": 7,
+      "rows": 2,
+      "sheet": "02-turnaround-sheet-approved-v1.png"
+    },
+    {
+      "columns": 4,
+      "facing": "south",
+      "id": "neutral_base_front",
+      "index": 0,
+      "rows": 2,
+      "sheet": "03-neutral-base-poses-approved-v1.png"
+    },
+    {
+      "columns": 4,
+      "facing": "southwest",
+      "id": "neutral_base_three_quarter",
+      "index": 1,
+      "rows": 2,
+      "sheet": "03-neutral-base-poses-approved-v1.png"
+    },
+    {
+      "columns": 4,
+      "facing": "west",
+      "id": "neutral_base_profile",
+      "index": 2,
+      "rows": 2,
+      "sheet": "03-neutral-base-poses-approved-v1.png"
+    },
+    {
+      "columns": 4,
+      "facing": "north",
+      "id": "neutral_base_back",
+      "index": 3,
+      "rows": 2,
+      "sheet": "03-neutral-base-poses-approved-v1.png"
+    },
+    {
+      "columns": 4,
+      "id": "idle_relaxed",
+      "index": 4,
+      "rows": 2,
+      "sheet": "03-neutral-base-poses-approved-v1.png"
+    },
+    {
+      "columns": 4,
+      "id": "idle_attentive",
+      "index": 5,
+      "rows": 2,
+      "sheet": "03-neutral-base-poses-approved-v1.png"
+    },
+    {
+      "columns": 4,
+      "id": "idle_speaking",
+      "index": 6,
+      "rows": 2,
+      "sheet": "03-neutral-base-poses-approved-v1.png"
+    },
+    {
+      "columns": 4,
+      "id": "idle_listening",
+      "index": 7,
+      "rows": 2,
+      "sheet": "03-neutral-base-poses-approved-v1.png"
+    },
+    {
+      "columns": 6,
+      "id": "expression_neutral",
+      "index": 0,
+      "rows": 4,
+      "sheet": "04-expression-sheet-approved-v1.png"
+    },
+    {
+      "columns": 6,
+      "id": "expression_calm",
+      "index": 1,
+      "rows": 4,
+      "sheet": "04-expression-sheet-approved-v1.png"
+    },
+    {
+      "columns": 6,
+      "id": "expression_joy",
+      "index": 2,
+      "rows": 4,
+      "sheet": "04-expression-sheet-approved-v1.png"
+    },
+    {
+      "columns": 6,
+      "id": "expression_amusement",
+      "index": 3,
+      "rows": 4,
+      "sheet": "04-expression-sheet-approved-v1.png"
+    },
+    {
+      "columns": 6,
+      "id": "expression_excitement",
+      "index": 4,
+      "rows": 4,
+      "sheet": "04-expression-sheet-approved-v1.png"
+    },
+    {
+      "columns": 6,
+      "id": "expression_curiosity",
+      "index": 5,
+      "rows": 4,
+      "sheet": "04-expression-sheet-approved-v1.png"
+    },
+    {
+      "columns": 6,
+      "id": "expression_confidence",
+      "index": 6,
+      "rows": 4,
+      "sheet": "04-expression-sheet-approved-v1.png"
+    },
+    {
+      "columns": 6,
+      "id": "expression_compassion",
+      "index": 7,
+      "rows": 4,
+      "sheet": "04-expression-sheet-approved-v1.png"
+    },
+    {
+      "columns": 6,
+      "id": "expression_surprise",
+      "index": 8,
+      "rows": 4,
+      "sheet": "04-expression-sheet-approved-v1.png"
+    },
+    {
+      "columns": 6,
+      "id": "expression_confusion",
+      "index": 9,
+      "rows": 4,
+      "sheet": "04-expression-sheet-approved-v1.png"
+    },
+    {
+      "columns": 6,
+      "id": "expression_skepticism",
+      "index": 10,
+      "rows": 4,
+      "sheet": "04-expression-sheet-approved-v1.png"
+    },
+    {
+      "columns": 6,
+      "id": "expression_concern",
+      "index": 11,
+      "rows": 4,
+      "sheet": "04-expression-sheet-approved-v1.png"
+    },
+    {
+      "columns": 6,
+      "id": "expression_sadness",
+      "index": 12,
+      "rows": 4,
+      "sheet": "04-expression-sheet-approved-v1.png"
+    },
+    {
+      "columns": 6,
+      "id": "expression_shame",
+      "index": 13,
+      "rows": 4,
+      "sheet": "04-expression-sheet-approved-v1.png"
+    },
+    {
+      "columns": 6,
+      "id": "expression_embarrassment",
+      "index": 14,
+      "rows": 4,
+      "sheet": "04-expression-sheet-approved-v1.png"
+    },
+    {
+      "columns": 6,
+      "id": "expression_fear",
+      "index": 15,
+      "rows": 4,
+      "sheet": "04-expression-sheet-approved-v1.png"
+    },
+    {
+      "columns": 6,
+      "id": "expression_anxiety",
+      "index": 16,
+      "rows": 4,
+      "sheet": "04-expression-sheet-approved-v1.png"
+    },
+    {
+      "columns": 6,
+      "id": "expression_anger",
+      "index": 17,
+      "rows": 4,
+      "sheet": "04-expression-sheet-approved-v1.png"
+    },
+    {
+      "columns": 6,
+      "id": "expression_frustration",
+      "index": 18,
+      "rows": 4,
+      "sheet": "04-expression-sheet-approved-v1.png"
+    },
+    {
+      "columns": 6,
+      "id": "expression_determination",
+      "index": 19,
+      "rows": 4,
+      "sheet": "04-expression-sheet-approved-v1.png"
+    },
+    {
+      "columns": 6,
+      "id": "expression_fatigue",
+      "index": 20,
+      "rows": 4,
+      "sheet": "04-expression-sheet-approved-v1.png"
+    },
+    {
+      "columns": 6,
+      "id": "expression_contemplation",
+      "index": 21,
+      "rows": 4,
+      "sheet": "04-expression-sheet-approved-v1.png"
+    },
+    {
+      "columns": 6,
+      "id": "expression_neutral_recovery",
+      "index": 22,
+      "rows": 4,
+      "sheet": "04-expression-sheet-approved-v1.png"
+    },
+    {
+      "columns": 6,
+      "id": "expression_settled_attentive",
+      "index": 23,
+      "rows": 4,
+      "sheet": "04-expression-sheet-approved-v1.png"
+    },
+    {
+      "columns": 4,
+      "id": "viseme_rest",
+      "index": 0,
+      "rows": 4,
+      "sheet": "05-speech-viseme-sheet-approved-v1.png"
+    },
+    {
+      "columns": 4,
+      "id": "viseme_closed_lips",
+      "index": 1,
+      "rows": 4,
+      "sheet": "05-speech-viseme-sheet-approved-v1.png"
+    },
+    {
+      "columns": 4,
+      "id": "viseme_slightly_open",
+      "index": 2,
+      "rows": 4,
+      "sheet": "05-speech-viseme-sheet-approved-v1.png"
+    },
+    {
+      "columns": 4,
+      "id": "viseme_wide_vowel",
+      "index": 3,
+      "rows": 4,
+      "sheet": "05-speech-viseme-sheet-approved-v1.png"
+    },
+    {
+      "columns": 4,
+      "id": "viseme_open_vowel",
+      "index": 4,
+      "rows": 4,
+      "sheet": "05-speech-viseme-sheet-approved-v1.png"
+    },
+    {
+      "columns": 4,
+      "id": "viseme_rounded_vowel",
+      "index": 5,
+      "rows": 4,
+      "sheet": "05-speech-viseme-sheet-approved-v1.png"
+    },
+    {
+      "columns": 4,
+      "id": "viseme_teeth_consonant",
+      "index": 6,
+      "rows": 4,
+      "sheet": "05-speech-viseme-sheet-approved-v1.png"
+    },
+    {
+      "columns": 4,
+      "id": "viseme_lower_lip_consonant",
+      "index": 7,
+      "rows": 4,
+      "sheet": "05-speech-viseme-sheet-approved-v1.png"
+    },
+    {
+      "columns": 4,
+      "id": "viseme_tongue_consonant",
+      "index": 8,
+      "rows": 4,
+      "sheet": "05-speech-viseme-sheet-approved-v1.png"
+    },
+    {
+      "columns": 4,
+      "id": "viseme_smile_speaking",
+      "index": 9,
+      "rows": 4,
+      "sheet": "05-speech-viseme-sheet-approved-v1.png"
+    },
+    {
+      "columns": 4,
+      "id": "viseme_frown_speaking",
+      "index": 10,
+      "rows": 4,
+      "sheet": "05-speech-viseme-sheet-approved-v1.png"
+    },
+    {
+      "columns": 4,
+      "id": "viseme_speech_emphasis",
+      "index": 11,
+      "rows": 4,
+      "sheet": "05-speech-viseme-sheet-approved-v1.png"
+    },
+    {
+      "columns": 4,
+      "id": "viseme_breath_pause",
+      "index": 12,
+      "rows": 4,
+      "sheet": "05-speech-viseme-sheet-approved-v1.png"
+    },
+    {
+      "columns": 4,
+      "id": "blink_open",
+      "index": 13,
+      "rows": 4,
+      "sheet": "05-speech-viseme-sheet-approved-v1.png"
+    },
+    {
+      "columns": 4,
+      "id": "blink_half_closed",
+      "index": 14,
+      "rows": 4,
+      "sheet": "05-speech-viseme-sheet-approved-v1.png"
+    },
+    {
+      "columns": 4,
+      "id": "blink_closed",
+      "index": 15,
+      "rows": 4,
+      "sheet": "05-speech-viseme-sheet-approved-v1.png"
+    },
+    {
+      "columns": 4,
+      "graph_kind": "feature_graph",
+      "id": "hand_open_relaxed",
+      "index": 0,
+      "rows": 4,
+      "sheet": "06-hand-prop-sheet-approved-v1.png"
+    },
+    {
+      "columns": 4,
+      "graph_kind": "feature_graph",
+      "id": "hand_closed_relaxed",
+      "index": 1,
+      "rows": 4,
+      "sheet": "06-hand-prop-sheet-approved-v1.png"
+    },
+    {
+      "columns": 4,
+      "graph_kind": "feature_graph",
+      "id": "hand_fist",
+      "index": 2,
+      "rows": 4,
+      "sheet": "06-hand-prop-sheet-approved-v1.png"
+    },
+    {
+      "columns": 4,
+      "graph_kind": "feature_graph",
+      "id": "hand_pointing",
+      "index": 3,
+      "rows": 4,
+      "sheet": "06-hand-prop-sheet-approved-v1.png"
+    },
+    {
+      "columns": 4,
+      "graph_kind": "feature_graph",
+      "id": "hand_presenting",
+      "index": 4,
+      "rows": 4,
+      "sheet": "06-hand-prop-sheet-approved-v1.png"
+    },
+    {
+      "columns": 4,
+      "graph_kind": "feature_graph",
+      "id": "hand_reaching",
+      "index": 5,
+      "rows": 4,
+      "sheet": "06-hand-prop-sheet-approved-v1.png"
+    },
+    {
+      "columns": 4,
+      "graph_kind": "feature_graph",
+      "id": "prop_clipboard_grip",
+      "index": 6,
+      "rows": 4,
+      "sheet": "06-hand-prop-sheet-approved-v1.png"
+    },
+    {
+      "columns": 4,
+      "graph_kind": "feature_graph",
+      "id": "prop_pencil_writing_grip",
+      "index": 7,
+      "rows": 4,
+      "sheet": "06-hand-prop-sheet-approved-v1.png"
+    },
+    {
+      "columns": 4,
+      "graph_kind": "feature_graph",
+      "id": "prop_clipboard_chest",
+      "index": 8,
+      "rows": 4,
+      "sheet": "06-hand-prop-sheet-approved-v1.png"
+    },
+    {
+      "columns": 4,
+      "graph_kind": "feature_graph",
+      "id": "prop_clipboard_offered",
+      "index": 9,
+      "rows": 4,
+      "sheet": "06-hand-prop-sheet-approved-v1.png"
+    },
+    {
+      "columns": 4,
+      "graph_kind": "feature_graph",
+      "id": "prop_clipboard_received",
+      "index": 10,
+      "rows": 4,
+      "sheet": "06-hand-prop-sheet-approved-v1.png"
+    },
+    {
+      "columns": 4,
+      "graph_kind": "feature_graph",
+      "id": "prop_transfer_grip",
+      "index": 11,
+      "rows": 4,
+      "sheet": "06-hand-prop-sheet-approved-v1.png"
+    },
+    {
+      "columns": 4,
+      "graph_kind": "feature_graph",
+      "id": "prop_two_hand_review",
+      "index": 12,
+      "rows": 4,
+      "sheet": "06-hand-prop-sheet-approved-v1.png"
+    },
+    {
+      "columns": 4,
+      "graph_kind": "feature_graph",
+      "id": "prop_deadline_tap",
+      "index": 13,
+      "rows": 4,
+      "sheet": "06-hand-prop-sheet-approved-v1.png"
+    },
+    {
+      "columns": 4,
+      "graph_kind": "feature_graph",
+      "id": "prop_pencil_release",
+      "index": 14,
+      "rows": 4,
+      "sheet": "06-hand-prop-sheet-approved-v1.png"
+    },
+    {
+      "columns": 4,
+      "graph_kind": "feature_graph",
+      "id": "prop_clipboard_pencil_ready",
+      "index": 15,
+      "rows": 4,
+      "sheet": "06-hand-prop-sheet-approved-v1.png"
+    },
+    {
+      "columns": 4,
+      "id": "walk_contact_left",
+      "index": 0,
+      "rows": 4,
+      "sheet": "07-ground-motion-sheet-approved-v1.png"
+    },
+    {
+      "columns": 4,
+      "id": "walk_passing_left",
+      "index": 1,
+      "rows": 4,
+      "sheet": "07-ground-motion-sheet-approved-v1.png"
+    },
+    {
+      "columns": 4,
+      "id": "walk_contact_right",
+      "index": 2,
+      "rows": 4,
+      "sheet": "07-ground-motion-sheet-approved-v1.png"
+    },
+    {
+      "columns": 4,
+      "id": "walk_passing_right",
+      "index": 3,
+      "rows": 4,
+      "sheet": "07-ground-motion-sheet-approved-v1.png"
+    },
+    {
+      "columns": 4,
+      "id": "run_contact_left",
+      "index": 4,
+      "rows": 4,
+      "sheet": "07-ground-motion-sheet-approved-v1.png"
+    },
+    {
+      "columns": 4,
+      "id": "run_contact_right",
+      "index": 5,
+      "rows": 4,
+      "sheet": "07-ground-motion-sheet-approved-v1.png"
+    },
+    {
+      "columns": 4,
+      "id": "start",
+      "index": 6,
+      "rows": 4,
+      "sheet": "07-ground-motion-sheet-approved-v1.png"
+    },
+    {
+      "columns": 4,
+      "id": "stop",
+      "index": 7,
+      "rows": 4,
+      "sheet": "07-ground-motion-sheet-approved-v1.png"
+    },
+    {
+      "columns": 4,
+      "id": "turn_left",
+      "index": 8,
+      "rows": 4,
+      "sheet": "07-ground-motion-sheet-approved-v1.png"
+    },
+    {
+      "columns": 4,
+      "id": "turn_right",
+      "index": 9,
+      "rows": 4,
+      "sheet": "07-ground-motion-sheet-approved-v1.png"
+    },
+    {
+      "columns": 4,
+      "id": "crouch",
+      "index": 10,
+      "rows": 4,
+      "sheet": "07-ground-motion-sheet-approved-v1.png"
+    },
+    {
+      "columns": 4,
+      "id": "jump_anticipation",
+      "index": 11,
+      "rows": 4,
+      "sheet": "07-ground-motion-sheet-approved-v1.png"
+    },
+    {
+      "columns": 4,
+      "id": "jump_airborne",
+      "index": 12,
+      "rows": 4,
+      "sheet": "07-ground-motion-sheet-approved-v1.png"
+    },
+    {
+      "columns": 4,
+      "id": "fall",
+      "index": 13,
+      "rows": 4,
+      "sheet": "07-ground-motion-sheet-approved-v1.png"
+    },
+    {
+      "columns": 4,
+      "id": "land_contact",
+      "index": 14,
+      "rows": 4,
+      "sheet": "07-ground-motion-sheet-approved-v1.png"
+    },
+    {
+      "columns": 4,
+      "id": "land_recovery",
+      "index": 15,
+      "rows": 4,
+      "sheet": "07-ground-motion-sheet-approved-v1.png"
+    },
+    {
+      "columns": 4,
+      "id": "assign_owner_preparation",
+      "index": 0,
+      "rows": 4,
+      "sheet": "08-signature-actions-sheet-approved-v1.png"
+    },
+    {
+      "columns": 4,
+      "id": "assign_owner_open_hand",
+      "index": 1,
+      "rows": 4,
+      "sheet": "08-signature-actions-sheet-approved-v1.png"
+    },
+    {
+      "columns": 4,
+      "id": "assign_owner_confirming_point",
+      "index": 2,
+      "rows": 4,
+      "sheet": "08-signature-actions-sheet-approved-v1.png"
+    },
+    {
+      "columns": 4,
+      "id": "assign_owner_recovery",
+      "index": 3,
+      "rows": 4,
+      "sheet": "08-signature-actions-sheet-approved-v1.png"
+    },
+    {
+      "columns": 4,
+      "id": "deadline_raise_clipboard",
+      "index": 4,
+      "rows": 4,
+      "sheet": "08-signature-actions-sheet-approved-v1.png"
+    },
+    {
+      "columns": 4,
+      "id": "deadline_pencil_tap",
+      "index": 5,
+      "rows": 4,
+      "sheet": "08-signature-actions-sheet-approved-v1.png"
+    },
+    {
+      "columns": 4,
+      "id": "deadline_clipboard_emphasis",
+      "index": 6,
+      "rows": 4,
+      "sheet": "08-signature-actions-sheet-approved-v1.png"
+    },
+    {
+      "columns": 4,
+      "id": "deadline_recovery",
+      "index": 7,
+      "rows": 4,
+      "sheet": "08-signature-actions-sheet-approved-v1.png"
+    },
+    {
+      "columns": 4,
+      "id": "allocation_checklist_review",
+      "index": 8,
+      "rows": 4,
+      "sheet": "08-signature-actions-sheet-approved-v1.png"
+    },
+    {
+      "columns": 4,
+      "id": "allocation_presentation",
+      "index": 9,
+      "rows": 4,
+      "sheet": "08-signature-actions-sheet-approved-v1.png"
+    },
+    {
+      "columns": 4,
+      "id": "allocation_blocker_escalation",
+      "index": 10,
+      "rows": 4,
+      "sheet": "08-signature-actions-sheet-approved-v1.png"
+    },
+    {
+      "columns": 4,
+      "id": "allocation_recovery",
+      "index": 11,
+      "rows": 4,
+      "sheet": "08-signature-actions-sheet-approved-v1.png"
+    },
+    {
+      "columns": 4,
+      "id": "handoff_checklist_scan",
+      "index": 12,
+      "rows": 4,
+      "sheet": "08-signature-actions-sheet-approved-v1.png"
+    },
+    {
+      "columns": 4,
+      "id": "handoff_extend_clipboard",
+      "index": 13,
+      "rows": 4,
+      "sheet": "08-signature-actions-sheet-approved-v1.png"
+    },
+    {
+      "columns": 4,
+      "id": "handoff_release",
+      "index": 14,
+      "rows": 4,
+      "sheet": "08-signature-actions-sheet-approved-v1.png"
+    },
+    {
+      "columns": 4,
+      "id": "handoff_settled_pencil_ready",
+      "index": 15,
+      "rows": 4,
+      "sheet": "08-signature-actions-sheet-approved-v1.png"
+    },
+    {
+      "columns": 2,
+      "id": "interaction_open_stance",
+      "index": 0,
+      "rows": 2,
+      "sheet": "09-interaction-poses-approved-v1.png"
+    },
+    {
+      "columns": 2,
+      "id": "interaction_closed_stance",
+      "index": 1,
+      "rows": 2,
+      "sheet": "09-interaction-poses-approved-v1.png"
+    },
+    {
+      "columns": 2,
+      "id": "interaction_determined_fist",
+      "index": 2,
+      "rows": 2,
+      "sheet": "09-interaction-poses-approved-v1.png"
+    },
+    {
+      "columns": 2,
+      "id": "interaction_forward_reach",
+      "index": 3,
+      "rows": 2,
+      "sheet": "09-interaction-poses-approved-v1.png"
+    }
+  ],
+  "reference_cells": [
+    {
+      "columns": 4,
+      "graph_kind": "reference_graph",
+      "id": "identity_reference_00",
+      "index": 0,
+      "rows": 4,
+      "sheet": "01-identity-sheet-approved-v1.png"
+    },
+    {
+      "columns": 4,
+      "graph_kind": "reference_graph",
+      "id": "identity_reference_01",
+      "index": 1,
+      "rows": 4,
+      "sheet": "01-identity-sheet-approved-v1.png"
+    },
+    {
+      "columns": 4,
+      "graph_kind": "reference_graph",
+      "id": "identity_reference_02",
+      "index": 2,
+      "rows": 4,
+      "sheet": "01-identity-sheet-approved-v1.png"
+    },
+    {
+      "columns": 4,
+      "graph_kind": "reference_graph",
+      "id": "identity_reference_03",
+      "index": 3,
+      "rows": 4,
+      "sheet": "01-identity-sheet-approved-v1.png"
+    },
+    {
+      "columns": 4,
+      "graph_kind": "reference_graph",
+      "id": "identity_reference_04",
+      "index": 4,
+      "rows": 4,
+      "sheet": "01-identity-sheet-approved-v1.png"
+    },
+    {
+      "columns": 4,
+      "graph_kind": "reference_graph",
+      "id": "identity_reference_05",
+      "index": 5,
+      "rows": 4,
+      "sheet": "01-identity-sheet-approved-v1.png"
+    },
+    {
+      "columns": 4,
+      "graph_kind": "reference_graph",
+      "id": "identity_reference_06",
+      "index": 6,
+      "rows": 4,
+      "sheet": "01-identity-sheet-approved-v1.png"
+    },
+    {
+      "columns": 4,
+      "graph_kind": "reference_graph",
+      "id": "identity_reference_07",
+      "index": 7,
+      "rows": 4,
+      "sheet": "01-identity-sheet-approved-v1.png"
+    },
+    {
+      "columns": 4,
+      "graph_kind": "reference_graph",
+      "id": "identity_reference_08",
+      "index": 8,
+      "rows": 4,
+      "sheet": "01-identity-sheet-approved-v1.png"
+    },
+    {
+      "columns": 4,
+      "graph_kind": "reference_graph",
+      "id": "identity_reference_09",
+      "index": 9,
+      "rows": 4,
+      "sheet": "01-identity-sheet-approved-v1.png"
+    },
+    {
+      "columns": 4,
+      "graph_kind": "reference_graph",
+      "id": "identity_reference_10",
+      "index": 10,
+      "rows": 4,
+      "sheet": "01-identity-sheet-approved-v1.png"
+    },
+    {
+      "columns": 4,
+      "graph_kind": "reference_graph",
+      "id": "identity_reference_11",
+      "index": 11,
+      "rows": 4,
+      "sheet": "01-identity-sheet-approved-v1.png"
+    },
+    {
+      "columns": 4,
+      "graph_kind": "reference_graph",
+      "id": "identity_reference_12",
+      "index": 12,
+      "rows": 4,
+      "sheet": "01-identity-sheet-approved-v1.png"
+    },
+    {
+      "columns": 4,
+      "graph_kind": "reference_graph",
+      "id": "identity_reference_13",
+      "index": 13,
+      "rows": 4,
+      "sheet": "01-identity-sheet-approved-v1.png"
+    },
+    {
+      "columns": 4,
+      "graph_kind": "reference_graph",
+      "id": "identity_reference_14",
+      "index": 14,
+      "rows": 4,
+      "sheet": "01-identity-sheet-approved-v1.png"
+    },
+    {
+      "columns": 4,
+      "graph_kind": "reference_graph",
+      "id": "identity_reference_15",
+      "index": 15,
+      "rows": 4,
+      "sheet": "01-identity-sheet-approved-v1.png"
+    }
+  ],
+  "references": {
+    "canonical_reference": "assets/reference/personas/draven-holt/canonical-voxel.png",
+    "original_reference": "assets/reference/personas/draven-holt/source-reference.png",
+    "worksheets_dir": "assets/reference/personas/draven-holt/canonical-worksheets"
+  },
+  "schema_version": 1,
+  "sheet_revision_overrides": {}
+}

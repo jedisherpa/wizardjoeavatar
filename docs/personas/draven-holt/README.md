@@ -12,3 +12,5 @@ Performance: decisive, disciplined, and reliable. Use squared stance, short open
 
 Signature actions: assign owner, set deadline, allocate resources, escalate blocker, check operations list, and hand off the next action.
 
+See `RUNTIME_INTEGRATION.md` for the exact 124-graph package, runtime mappings,
+regeneration workflow, and production validation gates.
