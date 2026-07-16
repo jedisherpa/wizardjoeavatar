@@ -1,12 +1,12 @@
 # Orion Vale Runtime Verification
 
-Verification date: 2026-07-14
+Verification date: 2026-07-15
 
 Branch: `codex/persona-orion-vale`
 
-Base commit: `4235be3` (verification covers the uncommitted production worktree
-changes requested for integration; no commit or push was performed by this
-implementation pass).
+Publication: this closure pass is committed and pushed on
+`codex/persona-orion-vale`. This statement supersedes the earlier provisional
+note that described the implementation as an uncommitted worktree.
 
 ## Extraction gate
 
@@ -24,6 +24,11 @@ implementation pass).
   cells, isolation method, bounds, node counts, and graph hashes.
 - Package loading recomputes every one of the 124 graph hashes before the
   animation profile and controller are constructed.
+- Package loading also recomputes the original-reference, canonical-reference,
+  generation-profile, all 10 accepted worksheet-revision, pose-library,
+  animation-graph, animation-matrix, extraction-audit, and reference-graph
+  library hashes. The accepted worksheet filenames and per-item worksheet
+  hashes must exactly match the extraction audit.
 - The retained human-review render is
   `evidence/orion-vale/124-graph-contact-sheet.png` (SHA-256
   `c17b74c5b8777c0cae6ef85bc2d449b01756276e6a817a44d4b96c52aa55881f`).
@@ -72,7 +77,9 @@ uv run python -m unittest \
   tests.wizard.test_orion_vale_character -v
 ```
 
-Result after the identity-grid correction: 20 tests passed, 0 failed, 0 skipped.
+Result after the provenance closure: 24 tests passed in 28.634 seconds,
+0 failed, 0 skipped. This includes forced `PIL.Image.open` failure while Orion
+renders successfully.
 
 Full command:
 
@@ -80,10 +87,33 @@ Full command:
 uv run python -m unittest discover -s tests -v
 ```
 
-Result after the identity-grid correction: 181 tests passed in 112.481 seconds,
+Result after the provenance closure: 185 tests passed in 128.242 seconds,
 0 failed, 0 skipped. The run
 includes Wizard Joe, CrystAIl, codec, transport, controller, stream, browser
 contract, projection, locomotion, and Orion regression coverage.
+
+## Destructive provenance tests
+
+- Byte tampering is rejected for the source reference and canonical reference.
+- Byte tampering is rejected independently for every accepted worksheet file,
+  including both the approved expression-v2 sheet and the single explicitly
+  retained expression-v1 fallback sheet.
+- Byte tampering is rejected for the generation profile, pose library,
+  animation graph, animation matrix, extraction audit, and 16-graph identity
+  reference library.
+- Node tampering is rejected independently for each of the 16 reference graphs
+  and each of the 108 pose/feature graphs by the validator used during package
+  loading.
+- Audit node counts, nonempty graphs, bounds, graph hashes, accepted worksheet
+  revisions, and per-item worksheet hashes are all fail-closed.
+
+## Live smoke verification
+
+A local production server registered `orion-vale-v1` through
+`GET /api/avatar/characters`, returned its character-scoped state with HTTP
+200, and accepted `ws://127.0.0.1:18766/ws/avatar/orion-vale-v1`. The socket
+returned `INIT:24.0:5:160:100:0:0:0.000` followed by a 10,628-byte binary
+projected frame.
 
 ## Known reviewed fallback
 

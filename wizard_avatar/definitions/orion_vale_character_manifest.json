@@ -14,6 +14,7 @@
     "approved_worksheets": "assets/reference/personas/orion-vale/canonical-worksheets",
     "canonical_reference": "assets/reference/personas/orion-vale/canonical-voxel.png",
     "flattened_runtime_dependency": false,
+    "generation_profile": "assets/reference/personas/orion-vale/generation-profile.json",
     "original_reference": "assets/reference/personas/orion-vale/source-reference.png",
     "runtime_art": "deterministic worksheet-derived direct cell library"
   },

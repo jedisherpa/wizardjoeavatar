@@ -10,6 +10,7 @@ from unittest.mock import patch
 from wizard_avatar.character_package import (
     ORION_VALE_PACKAGE_PATH,
     CharacterPackageValidationError,
+    _validate_extraction_audit,
     load_character_package,
 )
 from wizard_avatar.character_registry import load_character_registry
@@ -29,6 +30,20 @@ class OrionValeCharacterTests(unittest.TestCase):
             rows=100,
             character_package_path=ORION_VALE_PACKAGE_PATH,
         )
+
+    def assert_package_rejects_byte_tamper(self, target, message):
+        target = target.resolve()
+        original_read_bytes = Path.read_bytes
+
+        def controlled_read_bytes(path):
+            payload = original_read_bytes(path)
+            if path.resolve() == target:
+                return payload + b"tampered"
+            return payload
+
+        with patch.object(Path, "read_bytes", new=controlled_read_bytes):
+            with self.assertRaisesRegex(CharacterPackageValidationError, message):
+                load_character_package(ORION_VALE_PACKAGE_PATH)
 
     def test_registry_and_package_expose_orion(self):
         registry = load_character_registry()
@@ -86,6 +101,10 @@ class OrionValeCharacterTests(unittest.TestCase):
             self.assertEqual(hashes[key], hashlib.sha256(path.read_bytes()).hexdigest())
         self.assertEqual(hashes["extraction_item_count"], 124)
         self.assertEqual(
+            manifest["derivation"]["generation_profile"],
+            "assets/reference/personas/orion-vale/generation-profile.json",
+        )
+        self.assertEqual(
             set(hashes["worksheet_sha256"]),
             {
                 "02-turnaround-sheet-candidate-v1.png",
@@ -100,6 +119,76 @@ class OrionValeCharacterTests(unittest.TestCase):
                 "09-interaction-poses-candidate-v1.png",
             },
         )
+
+    def test_package_rejects_source_canonical_and_every_accepted_worksheet_tamper(self):
+        manifest = json.loads(
+            (ROOT / "wizard_avatar" / "definitions" / "orion_vale_character_manifest.json")
+            .read_text(encoding="utf-8")
+        )
+        derivation = manifest["derivation"]
+        for source_name in ("original_reference", "canonical_reference"):
+            with self.subTest(source=source_name):
+                self.assert_package_rejects_byte_tamper(
+                    ROOT / derivation[source_name], "manifest hash differs"
+                )
+        worksheet_dir = ROOT / derivation["approved_worksheets"]
+        for filename in manifest["hashes"]["worksheet_sha256"]:
+            with self.subTest(worksheet=filename):
+                self.assert_package_rejects_byte_tamper(
+                    worksheet_dir / filename, "worksheet .* hash differs"
+                )
+
+    def test_package_rejects_every_generated_asset_tamper(self):
+        definitions = ROOT / "wizard_avatar" / "definitions"
+        generated = {
+            "generation profile": PROFILE,
+            "pose library": definitions / "orion_vale_pose_cells.json",
+            "animation graph": definitions / "orion_vale_animation_graph.json",
+            "animation matrix": definitions / "orion_vale_animation_matrix.json",
+            "extraction audit": definitions / "orion_vale_extraction_audit.json",
+            "pixel graph library": definitions / "orion_vale_pixel_graphs.json",
+        }
+        for name, path in generated.items():
+            with self.subTest(asset=name):
+                self.assert_package_rejects_byte_tamper(path, "manifest hash differs")
+
+    def test_load_time_validator_rejects_node_tamper_in_each_of_the_124_graphs(self):
+        definitions = ROOT / "wizard_avatar" / "definitions"
+        audit = json.loads(
+            (definitions / "orion_vale_extraction_audit.json").read_text(encoding="utf-8")
+        )
+        audit_by_id = {item["graph_id"]: item for item in audit["items"]}
+        graph_stores = (
+            (definitions / "orion_vale_pixel_graphs.json", "graphs", "nodes", False),
+            (definitions / "orion_vale_pose_cells.json", "poses", "cells", True),
+        )
+        tested = 0
+        for target, collection_name, nodes_name, is_pose in graph_stores:
+            original = json.loads(target.read_text(encoding="utf-8"))
+            for graph in original[collection_name]:
+                with self.subTest(graph_id=graph["id"]):
+                    tampered_graph = json.loads(json.dumps(graph))
+                    node = tampered_graph[nodes_name][0]
+                    node["rgb"][0] = (node["rgb"][0] + 1) % 256
+                    one_item_audit = {
+                        "schema_version": 1,
+                        "character_id": "orion-vale-v1",
+                        "item_count": 1,
+                        "items": [audit_by_id[graph["id"]]],
+                    }
+                    pose_payload = {"poses": [tampered_graph] if is_pose else []}
+                    graph_payload = {"graphs": [] if is_pose else [tampered_graph]}
+                    with self.assertRaisesRegex(
+                        CharacterPackageValidationError, "hash differs"
+                    ):
+                        _validate_extraction_audit(
+                            "orion-vale-v1",
+                            pose_payload,
+                            graph_payload,
+                            one_item_audit,
+                        )
+                tested += 1
+        self.assertEqual(tested, 124)
 
     def test_pose_library_has_complete_orion_vocabulary(self):
         package = load_character_package(ORION_VALE_PACKAGE_PATH)
@@ -192,6 +281,30 @@ class OrionValeCharacterTests(unittest.TestCase):
                 CharacterPackageValidationError, "hash differs"
             ):
                 load_character_package(ORION_VALE_PACKAGE_PATH)
+
+    def test_package_rejects_audit_worksheet_hash_and_revision_tampering(self):
+        audit_path = (
+            ROOT / "wizard_avatar" / "definitions" / "orion_vale_extraction_audit.json"
+        ).resolve()
+        original = json.loads(audit_path.read_text(encoding="utf-8"))
+        original_read_text = Path.read_text
+        mutations = (
+            ("source_worksheet_sha256", "0" * 64, "audit worksheet"),
+            ("source_cell", "unapproved-revision.png#panel-0", "revisions differ"),
+        )
+        for field, value, message in mutations:
+            with self.subTest(field=field):
+                tampered = json.loads(json.dumps(original))
+                tampered["items"][0][field] = value
+
+                def controlled_read_text(path, *args, **kwargs):
+                    if path.resolve() == audit_path:
+                        return json.dumps(tampered)
+                    return original_read_text(path, *args, **kwargs)
+
+                with patch.object(Path, "read_text", new=controlled_read_text):
+                    with self.assertRaisesRegex(CharacterPackageValidationError, message):
+                        load_character_package(ORION_VALE_PACKAGE_PATH)
 
     def test_v2_worksheets_and_pose_local_anchors_are_production_inputs(self):
         package = load_character_package(ORION_VALE_PACKAGE_PATH)
