@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "character_id": "mira-solen-v1",
+  "display_name": "Mira Solen",
+  "renderer": "asciline_square_cells",
+  "pose_library": "mira_solen_pose_cells.json",
+  "animation_graph": "mira_solen_animation_graph.json",
+  "runtime_profile": "mira_solen_runtime_profile.json",
+  "manifest": "mira_solen_character_manifest.json",
+  "animation_matrix": "mira_solen_animation_matrix.json",
+  "extraction_audit": "mira_solen_extraction_audit.json",
+  "pixel_graph_library": "mira_solen_pixel_graphs.json",
+  "default_pose_id": "neutral_front",
+  "capabilities": [
+    "ground_locomotion",
+    "eight_direction_turnaround",
+    "actions",
+    "speech_visemes",
+    "full_expression_vocabulary",
+    "procedural_secondary_motion",
+    "pose_showcase",
+    "artwork_tray_interaction",
+    "critique_invitation",
+    "dignity_protection",
+    "creative_reframing",
+    "student_voice_amplification",
+    "blue_flame_inspiration"
+  ]
+}

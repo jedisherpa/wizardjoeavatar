@@ -1,8 +1,8 @@
 # Mira Solen — Identity Lock
 
-Status: canonical production constraint  
-Character: Mira Solen  
-School function: Creative Arts  
+Status: canonical production constraint
+Character: Mira Solen
+School function: Creative Arts
 Canonical voxel authority: `assets/reference/personas/mira-solen/canonical-voxel.png`
 
 ## Derivation authorities

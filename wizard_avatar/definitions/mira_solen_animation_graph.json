@@ -1,0 +1,234 @@
+{
+  "asset_set_id": "mira-solen-worksheet-motion-v1",
+  "clips": [
+    {
+      "clip_id": "mira_idle",
+      "loop": true,
+      "samples": [
+        {
+          "pose_id": "idle_reflective",
+          "tick": 0
+        },
+        {
+          "pose_id": "idle_attentive_listening",
+          "tick": 24
+        },
+        {
+          "pose_id": "idle_contemplative",
+          "tick": 48
+        }
+      ]
+    },
+    {
+      "clip_id": "mira_walk",
+      "loop": true,
+      "samples": [
+        {
+          "pose_id": "walk_contact_left",
+          "tick": 0
+        },
+        {
+          "pose_id": "walk_passing_left",
+          "tick": 6
+        },
+        {
+          "pose_id": "walk_contact_right",
+          "tick": 12
+        },
+        {
+          "pose_id": "walk_passing_right",
+          "tick": 18
+        }
+      ]
+    },
+    {
+      "clip_id": "mira_run",
+      "loop": true,
+      "samples": [
+        {
+          "pose_id": "run_contact_left",
+          "tick": 0
+        },
+        {
+          "pose_id": "run_contact_right",
+          "tick": 8
+        }
+      ]
+    },
+    {
+      "clip_id": "mira_jump_land",
+      "loop": false,
+      "samples": [
+        {
+          "pose_id": "jump_anticipation",
+          "tick": 0
+        },
+        {
+          "pose_id": "jump_airborne",
+          "tick": 8
+        },
+        {
+          "pose_id": "fall_descending",
+          "tick": 14
+        },
+        {
+          "pose_id": "land_contact",
+          "tick": 20
+        },
+        {
+          "pose_id": "land_recovery",
+          "tick": 28
+        }
+      ]
+    },
+    {
+      "clip_id": "mira_artwork_reveal",
+      "loop": false,
+      "samples": [
+        {
+          "pose_id": "prepare_tray_at_waist",
+          "tick": 0
+        },
+        {
+          "pose_id": "raise_artwork",
+          "tick": 12
+        },
+        {
+          "pose_id": "reveal_artwork_forward",
+          "tick": 24
+        },
+        {
+          "pose_id": "settle_reveal",
+          "tick": 38
+        }
+      ]
+    },
+    {
+      "clip_id": "mira_critique",
+      "loop": false,
+      "samples": [
+        {
+          "pose_id": "invite_critique",
+          "tick": 0
+        },
+        {
+          "pose_id": "listen_contemplatively",
+          "tick": 16
+        },
+        {
+          "pose_id": "acknowledge_student_voice",
+          "tick": 34
+        },
+        {
+          "pose_id": "dignified_recovery",
+          "tick": 52
+        }
+      ]
+    },
+    {
+      "clip_id": "mira_dignity_protection",
+      "loop": false,
+      "samples": [
+        {
+          "pose_id": "notice_public_discomfort",
+          "tick": 0
+        },
+        {
+          "pose_id": "draw_artwork_protectively_inward",
+          "tick": 12
+        },
+        {
+          "pose_id": "shield_dignity",
+          "tick": 26
+        },
+        {
+          "pose_id": "reassuring_recovery",
+          "tick": 44
+        }
+      ]
+    },
+    {
+      "clip_id": "mira_creative_voice",
+      "loop": false,
+      "samples": [
+        {
+          "pose_id": "creative_reframe",
+          "tick": 0
+        },
+        {
+          "pose_id": "blue_flame_inspiration",
+          "tick": 18
+        },
+        {
+          "pose_id": "amplify_student_voice",
+          "tick": 36
+        },
+        {
+          "pose_id": "neutral_settled_hold",
+          "tick": 54
+        }
+      ]
+    },
+    {
+      "clip_id": "mira_interactions",
+      "loop": false,
+      "samples": [
+        {
+          "pose_id": "interaction_open_hand",
+          "tick": 0
+        },
+        {
+          "pose_id": "interaction_closed_hand",
+          "tick": 10
+        },
+        {
+          "pose_id": "interaction_fist",
+          "tick": 20
+        },
+        {
+          "pose_id": "interaction_reach",
+          "tick": 30
+        }
+      ]
+    },
+    {
+      "clip_id": "mira_turnaround",
+      "loop": true,
+      "samples": [
+        {
+          "pose_id": "neutral_front",
+          "tick": 0
+        },
+        {
+          "pose_id": "neutral_three_quarter_left",
+          "tick": 12
+        },
+        {
+          "pose_id": "neutral_left_profile",
+          "tick": 24
+        },
+        {
+          "pose_id": "neutral_back_three_quarter_left",
+          "tick": 36
+        },
+        {
+          "pose_id": "neutral_back",
+          "tick": 48
+        },
+        {
+          "pose_id": "neutral_back_three_quarter_right",
+          "tick": 60
+        },
+        {
+          "pose_id": "neutral_right_profile",
+          "tick": 72
+        },
+        {
+          "pose_id": "neutral_three_quarter_right",
+          "tick": 84
+        }
+      ]
+    }
+  ],
+  "schema_version": 1
+}

@@ -1,0 +1,91 @@
+{
+  "attachment_points": [
+    "mouth",
+    "left_eye",
+    "right_eye",
+    "left_hand",
+    "right_hand",
+    "left_foot",
+    "right_foot",
+    "tray"
+  ],
+  "character_id": "mira-solen-v1",
+  "derivation": {
+    "approved_worksheets": "assets/reference/personas/mira-solen/canonical-worksheets",
+    "canonical_reference": "assets/reference/personas/mira-solen/canonical-voxel.png",
+    "flattened_runtime_dependency": false,
+    "original_reference": "assets/reference/personas/mira-solen/source-reference.png",
+    "runtime_art": "deterministic worksheet-derived direct cell library"
+  },
+  "display_name": "Mira Solen",
+  "hashes": {
+    "animation_graph_sha256": "047903180ddcb14c7e406ec5fbf61403164f5019b00e6978e5b3f2bec21ac981",
+    "animation_matrix_sha256": "0437657c50083b6443ab3e530ad9f049d27c14b9936b9d6c1f2e9a17bc8858b6",
+    "canonical_reference_sha256": "7802522fbc0d26370fdb826ab409ca3b8d063eac75c62af1bdf888848bb6561e",
+    "extraction_audit_sha256": "4b6716a67cf428904249a27632288dce75e594cef1a39e0b05f5986f92528909",
+    "extraction_item_count": 124,
+    "generation_profile_sha256": "2a82a2a4bbffce405d6dbd89c78291c2bdac4a7cd49c1d399ad49f9c679ced00",
+    "original_reference_sha256": "ee88963dc59ab9efb8f4500734aa8a7b66f67b378e075088207df49cf6e08f6a",
+    "pixel_graph_library_sha256": "ac8536cd7a719a809281169431c3d9f2a803e1b89a80aae0f8a99dca1f831692",
+    "pose_library_sha256": "94138553cb493b0437c42c77041ff9fdb66ff32e9a59274a68029e8006b77b32",
+    "worksheet_sha256": {
+      "01-identity-sheet-candidate-v3.png": "8fa5e28a04b7b710cbdcc5ba30b6678a81857799c83ced9b082cfff4475825f1",
+      "02-turnaround-sheet-candidate-v1.png": "8f19fe35f59b5166ad519bba585d449d7f9657a80f1a3763e4868d9da216803e",
+      "03-neutral-base-poses-candidate-v1.png": "a5b3d36f7082cef78087451e7d2ecec2a540cc4838e0d536e1ff07bc0bd6bcfc",
+      "04-expression-sheet-candidate-v1.png": "5019c020e9e966636d4763b10773c9a8780ced1060b68a93a34d332eea5189ff",
+      "05-speech-viseme-sheet-candidate-v2.png": "0f62d92637b2cfab45fefb8b6f3b39ff907c428433f1339ea23971b5199fdb61",
+      "06-hand-prop-sheet-candidate-v1.png": "198dcb84a6d04380adad200861a419be701f957458317fcad503bcb38717e8ab",
+      "07-ground-motion-sheet-candidate-v1.png": "1dc7bb65a8a50337038d4acfe643ec6b8de59a308a3d2a095632ccea1225ad76",
+      "08-signature-actions-sheet-candidate-v1.png": "57da614af36d3e8c8f530e8650ce6eaaa36bac4b3f648fa13ec9cd13f7212e0a",
+      "09-interaction-poses-candidate-v1.png": "fb77553dcb627d74f2dbfce81d450d39fa012d690b4818f8e535c3aaf33e70fc"
+    }
+  },
+  "identity_lock": {
+    "articulated": [
+      "eyelids",
+      "brows",
+      "mouth",
+      "head angle",
+      "shoulders",
+      "spine",
+      "elbows",
+      "wrists",
+      "fingers",
+      "hips",
+      "knees",
+      "ankles",
+      "hair fringe",
+      "dress layers",
+      "pendant lag",
+      "blue flame flicker"
+    ],
+    "default_prop": "black tray with orange-yellow core and surrounding blue voxel flame",
+    "immutable": [
+      "short dark stepped bob",
+      "warm medium-tan skin",
+      "white sleeveless asymmetrical handkerchief dress",
+      "black right-upper-arm geometric emblem",
+      "black cord and gold openwork pendant",
+      "white low block shoes",
+      "black tray with orange core and surrounding blue flame",
+      "fine matte voxel scale"
+    ],
+    "personality": "imaginative reflective protective of student voice with curved gestures deliberate breath pauses and dignified recovery"
+  },
+  "origin": {
+    "baseline_y": 91,
+    "cols": 72,
+    "root_anchor": [
+      36,
+      91
+    ],
+    "rows": 96,
+    "safe_inset": {
+      "bottom": 4,
+      "left": 4,
+      "right": 4,
+      "top": 4
+    }
+  },
+  "schema_version": 1
+}

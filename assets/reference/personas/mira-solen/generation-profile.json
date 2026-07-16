@@ -1,0 +1,154 @@
+{
+  "schema_version": 1,
+  "character_id": "mira-solen-v1",
+  "display_name": "Mira Solen",
+  "asset_set_id": "mira-solen-worksheet-motion-v1",
+  "output_prefix": "mira_solen",
+  "references": {
+    "original_reference": "assets/reference/personas/mira-solen/source-reference.png",
+    "canonical_reference": "assets/reference/personas/mira-solen/canonical-voxel.png",
+    "worksheets_dir": "assets/reference/personas/mira-solen/canonical-worksheets"
+  },
+  "canonical": {
+    "cols": 72,
+    "rows": 96,
+    "root_anchor": [36, 91],
+    "baseline_y": 91,
+    "safe_inset": {"left": 4, "right": 4, "top": 4, "bottom": 4}
+  },
+  "expected_extraction_counts": {
+    "identity_reference": 16,
+    "turnaround": 8,
+    "neutral": 8,
+    "expression": 24,
+    "viseme_blink": 16,
+    "hand_prop": 16,
+    "motion": 16,
+    "signature": 16,
+    "interaction": 4
+  },
+  "worksheet_groups": [
+    {
+      "sheet": "01-identity-sheet-candidate-v3.png", "columns": 4, "rows": 4,
+      "reference_only": true, "graph_kind": "reference_graph",
+      "ids": [
+        "identity_neutral_front", "identity_neutral_three_quarter", "identity_neutral_profile", "identity_neutral_back",
+        "identity_face_front", "identity_face_three_quarter", "identity_hair_front", "identity_hair_back",
+        "identity_dress_front", "identity_dress_back", "identity_arm_emblem", "identity_pendant",
+        "identity_hand_open", "identity_hand_closed", "identity_shoe", "identity_tray_flame"
+      ]
+    },
+    {
+      "sheet": "02-turnaround-sheet-candidate-v1.png", "columns": 4, "rows": 2,
+      "facings": {"0": "south", "1": "southwest", "2": "west", "3": "northwest", "4": "north", "5": "northeast", "6": "east", "7": "southeast"},
+      "ids": ["neutral_front", "neutral_three_quarter_left", "neutral_left_profile", "neutral_back_three_quarter_left", "neutral_back", "neutral_back_three_quarter_right", "neutral_right_profile", "neutral_three_quarter_right"]
+    },
+    {
+      "sheet": "03-neutral-base-poses-candidate-v1.png", "columns": 4, "rows": 2,
+      "ids": ["neutral_base_front", "neutral_base_three_quarter", "neutral_base_profile", "neutral_base_back", "idle_reflective", "idle_attentive_listening", "idle_speaking_measured", "idle_contemplative"]
+    },
+    {
+      "sheet": "04-expression-sheet-candidate-v1.png", "columns": 6, "rows": 4,
+      "ids": [
+        "expression_neutral", "expression_calm", "expression_joy", "expression_amusement", "expression_excitement", "expression_curiosity",
+        "expression_confidence", "expression_compassion", "expression_surprise", "expression_confusion", "expression_skepticism", "expression_concern",
+        "expression_sadness", "expression_shame", "expression_embarrassment", "expression_fear", "expression_anxiety", "expression_anger",
+        "expression_frustration", "expression_determination", "expression_fatigue", "expression_contemplation", "expression_inspired_delight", "expression_protective_resolve"
+      ]
+    },
+    {
+      "sheet": "05-speech-viseme-sheet-candidate-v2.png", "columns": 4, "rows": 4,
+      "ids": [
+        "viseme_rest", "viseme_closed_lips", "viseme_slightly_open", "viseme_wide_vowel", "viseme_open_vowel", "viseme_rounded_vowel",
+        "viseme_teeth_consonant", "viseme_lower_lip_consonant", "viseme_tongue_consonant", "viseme_smile_speaking", "viseme_frown_speaking",
+        "viseme_speech_emphasis", "viseme_breath_pause", "blink_open", "blink_half_closed", "blink_closed"
+      ]
+    },
+    {
+      "sheet": "06-hand-prop-sheet-candidate-v1.png", "columns": 4, "rows": 4, "graph_kind": "feature_graph",
+      "ids": [
+        "hand_open_relaxed", "hand_closed_relaxed", "hand_fist", "hand_pointing", "hand_presenting", "hand_reaching",
+        "prop_two_hand_tray_grip", "prop_one_hand_tray_support", "prop_tray_level_torso", "prop_artwork_reveal_forward",
+        "prop_offering_tray", "prop_receiving_tray", "prop_protective_draw_in", "prop_deliberate_tray_tilt",
+        "prop_release_transition", "prop_empty_hand_recovery"
+      ]
+    },
+    {
+      "sheet": "07-ground-motion-sheet-candidate-v1.png", "columns": 4, "rows": 4,
+      "ids": [
+        "walk_contact_left", "walk_passing_left", "walk_contact_right", "walk_passing_right", "run_contact_left", "run_contact_right",
+        "locomotion_start", "locomotion_stop", "turn_left", "turn_right", "crouch", "jump_anticipation", "jump_airborne",
+        "fall_descending", "land_contact", "land_recovery"
+      ]
+    },
+    {
+      "sheet": "08-signature-actions-sheet-candidate-v1.png", "columns": 4, "rows": 4,
+      "ids": [
+        "prepare_tray_at_waist", "raise_artwork", "reveal_artwork_forward", "settle_reveal", "invite_critique",
+        "listen_contemplatively", "acknowledge_student_voice", "dignified_recovery", "notice_public_discomfort",
+        "draw_artwork_protectively_inward", "shield_dignity", "reassuring_recovery", "creative_reframe",
+        "blue_flame_inspiration", "amplify_student_voice", "neutral_settled_hold"
+      ]
+    },
+    {
+      "sheet": "09-interaction-poses-candidate-v1.png", "columns": 2, "rows": 2,
+      "ids": ["interaction_open_hand", "interaction_closed_hand", "interaction_fist", "interaction_reach"]
+    }
+  ],
+  "extraction": {
+    "foreground_mode": "mira_subject",
+    "largest_component": true,
+    "detail_radius": 0,
+    "corner_sample": 12,
+    "background_tolerance": 38,
+    "close_filter": 3,
+    "edge_clear": 3,
+    "crop_margin": 3,
+    "alpha_threshold": 42
+  },
+  "anchor_ratios": {
+    "mouth": [0.50, 0.245], "left_eye": [0.445, 0.195], "right_eye": [0.555, 0.195],
+    "left_hand": [0.275, 0.575], "right_hand": [0.725, 0.575],
+    "left_foot": [0.42, 0.97], "right_foot": [0.58, 0.97], "tray": [0.50, 0.58]
+  },
+  "anchor_presence": {
+    "tray": [
+      "idle_speaking_measured", "prop_two_hand_tray_grip", "prop_one_hand_tray_support", "prop_tray_level_torso",
+      "prop_artwork_reveal_forward", "prop_offering_tray", "prop_receiving_tray", "prop_protective_draw_in",
+      "prop_deliberate_tray_tilt", "prop_release_transition", "prepare_tray_at_waist", "raise_artwork",
+      "reveal_artwork_forward", "settle_reveal", "draw_artwork_protectively_inward", "creative_reframe",
+      "blue_flame_inspiration", "neutral_settled_hold"
+    ]
+  },
+  "animation_graph": {
+    "schema_version": 1,
+    "asset_set_id": "mira-solen-worksheet-motion-v1",
+    "clips": [
+      {"clip_id": "mira_idle", "loop": true, "samples": [{"pose_id": "idle_reflective", "tick": 0}, {"pose_id": "idle_attentive_listening", "tick": 24}, {"pose_id": "idle_contemplative", "tick": 48}]},
+      {"clip_id": "mira_walk", "loop": true, "samples": [{"pose_id": "walk_contact_left", "tick": 0}, {"pose_id": "walk_passing_left", "tick": 6}, {"pose_id": "walk_contact_right", "tick": 12}, {"pose_id": "walk_passing_right", "tick": 18}]},
+      {"clip_id": "mira_run", "loop": true, "samples": [{"pose_id": "run_contact_left", "tick": 0}, {"pose_id": "run_contact_right", "tick": 8}]},
+      {"clip_id": "mira_jump_land", "loop": false, "samples": [{"pose_id": "jump_anticipation", "tick": 0}, {"pose_id": "jump_airborne", "tick": 8}, {"pose_id": "fall_descending", "tick": 14}, {"pose_id": "land_contact", "tick": 20}, {"pose_id": "land_recovery", "tick": 28}]},
+      {"clip_id": "mira_artwork_reveal", "loop": false, "samples": [{"pose_id": "prepare_tray_at_waist", "tick": 0}, {"pose_id": "raise_artwork", "tick": 12}, {"pose_id": "reveal_artwork_forward", "tick": 24}, {"pose_id": "settle_reveal", "tick": 38}]},
+      {"clip_id": "mira_critique", "loop": false, "samples": [{"pose_id": "invite_critique", "tick": 0}, {"pose_id": "listen_contemplatively", "tick": 16}, {"pose_id": "acknowledge_student_voice", "tick": 34}, {"pose_id": "dignified_recovery", "tick": 52}]},
+      {"clip_id": "mira_dignity_protection", "loop": false, "samples": [{"pose_id": "notice_public_discomfort", "tick": 0}, {"pose_id": "draw_artwork_protectively_inward", "tick": 12}, {"pose_id": "shield_dignity", "tick": 26}, {"pose_id": "reassuring_recovery", "tick": 44}]},
+      {"clip_id": "mira_creative_voice", "loop": false, "samples": [{"pose_id": "creative_reframe", "tick": 0}, {"pose_id": "blue_flame_inspiration", "tick": 18}, {"pose_id": "amplify_student_voice", "tick": 36}, {"pose_id": "neutral_settled_hold", "tick": 54}]},
+      {"clip_id": "mira_interactions", "loop": false, "samples": [{"pose_id": "interaction_open_hand", "tick": 0}, {"pose_id": "interaction_closed_hand", "tick": 10}, {"pose_id": "interaction_fist", "tick": 20}, {"pose_id": "interaction_reach", "tick": 30}]},
+      {"clip_id": "mira_turnaround", "loop": true, "samples": [{"pose_id": "neutral_front", "tick": 0}, {"pose_id": "neutral_three_quarter_left", "tick": 12}, {"pose_id": "neutral_left_profile", "tick": 24}, {"pose_id": "neutral_back_three_quarter_left", "tick": 36}, {"pose_id": "neutral_back", "tick": 48}, {"pose_id": "neutral_back_three_quarter_right", "tick": 60}, {"pose_id": "neutral_right_profile", "tick": 72}, {"pose_id": "neutral_three_quarter_right", "tick": 84}]}
+    ]
+  },
+  "animation_matrix": {
+    "idle": ["neutral", "reflective", "attentive_listening", "speaking_measured", "contemplative", "blink", "settle"],
+    "locomotion": ["walk_forward", "walk_backward", "walk_left", "walk_right", "run_forward", "start", "stop", "turn_left", "turn_right", "crouch", "jump", "fall", "land"],
+    "conversation": ["invite_critique", "listen_contemplatively", "acknowledge_student_voice", "dignified_recovery", "notice_public_discomfort", "shield_dignity", "reassuring_recovery", "creative_reframe", "amplify_student_voice"],
+    "emotion": ["calm", "joy", "amusement", "excitement", "curiosity", "confidence", "compassion", "surprise", "confusion", "skepticism", "concern", "sadness", "shame", "embarrassment", "fear", "anxiety", "anger", "frustration", "determination", "fatigue", "contemplation", "inspired_delight", "protective_resolve"],
+    "interaction": ["reach", "open_hand", "closed_hand", "fist", "present", "tray_level", "artwork_reveal", "tray_offer", "tray_receive", "protective_draw_in", "blue_flame_inspiration"],
+    "speech": ["rest", "closed_lips", "slightly_open", "wide_vowel", "open_vowel", "rounded_vowel", "teeth_consonant", "lower_lip_consonant", "tongue_consonant", "smile_speaking", "frown_speaking", "speech_emphasis", "breath_pause"]
+  },
+  "identity_lock": {
+    "immutable": ["short dark stepped bob", "warm medium-tan skin", "white sleeveless asymmetrical handkerchief dress", "black right-upper-arm geometric emblem", "black cord and gold openwork pendant", "white low block shoes", "black tray with orange core and surrounding blue flame", "fine matte voxel scale"],
+    "articulated": ["eyelids", "brows", "mouth", "head angle", "shoulders", "spine", "elbows", "wrists", "fingers", "hips", "knees", "ankles", "hair fringe", "dress layers", "pendant lag", "blue flame flicker"],
+    "default_prop": "black tray with orange-yellow core and surrounding blue voxel flame",
+    "personality": "imaginative reflective protective of student voice with curved gestures deliberate breath pauses and dignified recovery"
+  },
+  "attachment_points": ["mouth", "left_eye", "right_eye", "left_hand", "right_hand", "left_foot", "right_foot", "tray"]
+}

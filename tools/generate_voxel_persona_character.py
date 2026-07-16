@@ -39,6 +39,8 @@ def load_profile(path: Path) -> dict[str, Any]:
     raw = json.loads(profile_path.read_text(encoding="utf-8"))
     if not isinstance(raw, dict) or raw.get("schema_version") != 1:
         raise ValueError("generation profile must use schema_version 1")
+    if "worksheet_groups" in raw:
+        raw = _expand_worksheet_groups(raw)
     required = {
         "character_id", "display_name", "asset_set_id", "references",
         "canonical", "poses", "animation_graph", "animation_matrix",
@@ -49,6 +51,41 @@ def load_profile(path: Path) -> dict[str, Any]:
         raise ValueError("generation profile is missing: {}".format(", ".join(missing)))
     raw["_profile_path"] = profile_path
     return raw
+
+
+def _expand_worksheet_groups(profile: dict[str, Any]) -> dict[str, Any]:
+    """Expand a compact, reviewable worksheet map into the generator schema."""
+    groups = profile.pop("worksheet_groups")
+    if not isinstance(groups, list):
+        raise ValueError("worksheet_groups must be an array")
+    reference_cells: list[dict[str, Any]] = []
+    poses: list[dict[str, Any]] = []
+    for group in groups:
+        if not isinstance(group, Mapping):
+            raise ValueError("worksheet group must be an object")
+        ids = group.get("ids")
+        if not isinstance(ids, list):
+            raise ValueError("worksheet group ids must be an array")
+        facings = group.get("facings", {})
+        if not isinstance(facings, Mapping):
+            raise ValueError("worksheet group facings must be an object")
+        destination = reference_cells if group.get("reference_only") else poses
+        for index, pose_id in enumerate(ids):
+            item = {
+                "id": str(pose_id),
+                "sheet": str(group["sheet"]),
+                "columns": int(group["columns"]),
+                "rows": int(group["rows"]),
+                "index": index,
+                "graph_kind": str(group.get("graph_kind", "full_body_graph")),
+            }
+            facing = facings.get(str(index))
+            if facing is not None:
+                item["facing"] = str(facing)
+            destination.append(item)
+    profile["reference_cells"] = reference_cells
+    profile["poses"] = poses
+    return profile
 
 
 def _root_path(profile: Mapping[str, Any], value: str) -> Path:
@@ -97,14 +134,19 @@ def _subject_rgba(panel: Image.Image, extraction: Mapping[str, Any]) -> Image.Im
     background = np.median(corner_pixels.astype(np.int16), axis=0)
     channels = pixels.astype(np.int16)
     red, green, blue = channels[:, :, 0], channels[:, :, 1], channels[:, :, 2]
-    if extraction.get("foreground_mode") == "warm_subject":
+    if extraction.get("foreground_mode") in {"warm_subject", "mira_subject"}:
         maximum = channels.max(axis=2)
         minimum = channels.min(axis=2)
         chroma = maximum - minimum
         warm = (red > blue + 7) & (red >= green - 18)
         non_blue_color = (chroma > 24) & (blue < maximum)
         dark_detail = (maximum < 112) & (red >= blue - 8)
+        neutral_light = (chroma <= 34) & (maximum >= 72)
         mask = warm | non_blue_color | dark_detail
+        if extraction.get("foreground_mode") == "mira_subject":
+            # Mira's white dress is deliberately low-chroma. Keep it while
+            # rejecting the high-chroma blue studio, floor grid, and shadows.
+            mask |= neutral_light
     else:
         delta = channels - background
         distance = np.sqrt(np.sum(delta * delta, axis=2))
@@ -131,6 +173,8 @@ def _subject_rgba(panel: Image.Image, extraction: Mapping[str, Any]) -> Image.Im
                 Image.fromarray(mask.astype(np.uint8) * 255).filter(ImageFilter.MaxFilter(size)),
                 dtype=np.uint8,
             ) > 0
+    if extraction.get("foreground_mode") == "mira_subject":
+        mask |= _mira_blue_flame_detail(pixels, mask)
 
     # Ignore background islands touching the panel gutter. Approved sheets are
     # required to keep the complete character separated from the panel edge.
@@ -174,6 +218,54 @@ def _largest_component(mask: np.ndarray) -> np.ndarray:
     result = np.zeros_like(mask, dtype=bool)
     for y, x in best:
         result[y, x] = True
+    return result
+
+
+def _mira_blue_flame_detail(pixels: np.ndarray, subject_mask: np.ndarray) -> np.ndarray:
+    """Recover the saturated blue outer flame without admitting blue studio pixels."""
+    channels = pixels.astype(np.int16)
+    red, green, blue = channels[:, :, 0], channels[:, :, 1], channels[:, :, 2]
+    orange_core = (
+        subject_mask
+        & (red >= 220)
+        & (green >= 85)
+        & (green <= 190)
+        & (blue <= 65)
+        & (red >= green + 35)
+    )
+    ys, xs = np.nonzero(orange_core)
+    result = np.zeros_like(subject_mask, dtype=bool)
+    if not len(xs):
+        return result
+    candidate = (
+        (red <= 65)
+        & (green <= 155)
+        & (blue >= 155)
+        & (blue >= red + 90)
+        & (blue >= green + 15)
+    )
+    # The approved flame is physically attached to its orange core. Constrain
+    # reconstruction to that prop neighborhood so the blue studio can never
+    # become runtime nodes.
+    vicinity = np.zeros_like(subject_mask, dtype=bool)
+    y0, y1 = max(0, int(ys.min()) - 90), min(candidate.shape[0], int(ys.max()) + 91)
+    x0, x1 = max(0, int(xs.min()) - 90), min(candidate.shape[1], int(xs.max()) + 91)
+    vicinity[y0:y1, x0:x1] = True
+    candidate &= vicinity
+    frontier = np.asarray(
+        Image.fromarray(orange_core.astype(np.uint8) * 255).filter(ImageFilter.MaxFilter(9)),
+        dtype=np.uint8,
+    ) > 0
+    result = frontier & candidate
+    for _ in range(100):
+        grown = np.asarray(
+            Image.fromarray(result.astype(np.uint8) * 255).filter(ImageFilter.MaxFilter(3)),
+            dtype=np.uint8,
+        ) > 0
+        grown &= candidate
+        if np.array_equal(grown, result):
+            break
+        result = grown
     return result
 
 
@@ -416,7 +508,11 @@ def extraction_audit_payload(
                 "source_cell": "{}#panel-{}".format(sheet_name, raw_pose["index"]),
                 "source_worksheet_sha256": digest_bytes((worksheet_dir / sheet_name).read_bytes()),
                 "background_removed": True,
-                "isolation_method": "largest_connected_warm_subject_mask",
+                "isolation_method": (
+                    "largest_connected_identity_mask_with_attached_blue_flame"
+                    if profile.get("extraction", {}).get("foreground_mode") == "mira_subject"
+                    else "largest_connected_warm_subject_mask"
+                ),
                 "runtime_format": "colored_pixel_nodes_json",
                 "runtime_asset": (
                     "{}_pixel_graphs.json#graph={}".format(

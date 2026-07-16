@@ -1,0 +1,9 @@
+{
+  "graph_count": 124,
+  "isolated_contact_sha256": "07beb9b0cb1a06a9521c23c2a53297e3c31fd144c37374ffb0322cbc64d6dd94",
+  "projected_contact_sha256": "1d46fd5615a4c849fcd2ad09f2b9736903326bc8320e8338f82569fbb3998c3e",
+  "projection_node_count_preserved": true,
+  "runtime_image_assets": [],
+  "schema_version": 1,
+  "source_format": "transparent_colored_pixel_nodes_json"
+}

@@ -71,6 +71,12 @@ ACTIONS = (
     "journal_hold",
     "journal_write",
     "journal_page_turn",
+    "artwork_reveal",
+    "invite_critique",
+    "protect_dignity",
+    "creative_reframe",
+    "student_voice",
+    "blue_flame_inspiration",
 )
 
 MOUTH_SHAPES = (

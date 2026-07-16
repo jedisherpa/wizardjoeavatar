@@ -25,6 +25,12 @@ ACTION_TO_CHANNELS = {
     "journal_hold": ("none", "rest"),
     "journal_write": ("none", "rest"),
     "journal_page_turn": ("none", "rest"),
+    "artwork_reveal": ("explain", "held"),
+    "invite_critique": ("explain", "held"),
+    "protect_dignity": ("think", "rest"),
+    "creative_reframe": ("explain", "held"),
+    "student_voice": ("explain", "held"),
+    "blue_flame_inspiration": ("cast", "held"),
 }
 
 
