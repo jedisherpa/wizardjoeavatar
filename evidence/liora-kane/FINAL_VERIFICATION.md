@@ -52,7 +52,7 @@ node graphs and succeeds with `PIL.Image.open` forced to fail.
   including independent tamper attempts against 19 immutable/generated assets.
 - Live HTTP character registry: HTTP 200 and `liora-kane-v1` present.
 - Live WebSocket: connected and streamed before and after a Liora action.
-- Full repository suite: 180 passed, 0 failed, 0 skipped in 123.124 seconds.
+- Full repository suite: 180 passed, 0 failed, 0 skipped in 113.137 seconds.
 - Contact-sheet rerender: byte-identical to the reviewed evidence image.
 
 ## Human visual review
