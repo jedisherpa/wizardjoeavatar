@@ -217,22 +217,30 @@ class KaiRennerCharacterTests(unittest.TestCase):
             ):
                 load_character_package(KAI_RENNER_PACKAGE_PATH)
 
-    def test_package_rejects_original_canonical_and_every_accepted_worksheet_tamper(self):
+    def test_package_rejects_every_immutable_and_generated_asset_tamper(self):
         manifest = json.loads(
             (ROOT / "wizard_avatar" / "definitions" / "kai_renner_character_manifest.json").read_text(
                 encoding="utf-8"
             )
         )
         targets = [
-            (PERSONA / "source-reference.png", "original_reference"),
-            (PERSONA / "canonical-voxel.png", "canonical_reference"),
+            PROFILE,
+            PERSONA / "source-reference.png",
+            PERSONA / "canonical-voxel.png",
+            KAI_RENNER_PACKAGE_PATH,
+            ROOT / "wizard_avatar/definitions/kai_renner_runtime_profile.json",
+            ROOT / "wizard_avatar/definitions/kai_renner_animation_graph.json",
+            ROOT / "wizard_avatar/definitions/kai_renner_animation_matrix.json",
+            ROOT / "wizard_avatar/definitions/kai_renner_pose_cells.json",
+            ROOT / "wizard_avatar/definitions/kai_renner_extraction_audit.json",
+            ROOT / "wizard_avatar/definitions/kai_renner_pixel_graphs.json",
         ]
         targets.extend(
-            (PERSONA / "canonical-worksheets" / filename, "accepted worksheet")
+            PERSONA / "canonical-worksheets" / filename
             for filename in manifest["hashes"]["worksheet_sha256"]
         )
         original_read_bytes = Path.read_bytes
-        for target, expected_message in targets:
+        for target in targets:
             resolved = target.resolve()
 
             def controlled_read_bytes(path, *args, **kwargs):
@@ -242,7 +250,8 @@ class KaiRennerCharacterTests(unittest.TestCase):
             with self.subTest(target=target.name):
                 with patch.object(Path, "read_bytes", new=controlled_read_bytes):
                     with self.assertRaisesRegex(
-                        CharacterPackageValidationError, expected_message
+                        CharacterPackageValidationError,
+                        "hash differs|accepted worksheet",
                     ):
                         load_character_package(KAI_RENNER_PACKAGE_PATH)
 

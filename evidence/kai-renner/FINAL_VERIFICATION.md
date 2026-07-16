@@ -14,10 +14,12 @@ Branch: `codex/persona-kai-renner`
 - Runtime image assets: none. PNG worksheets remain preserved, hashed extraction sources only.
 - Every audit item records its worksheet cell, worksheet SHA-256, isolation method, bounds, node count, runtime target, and colored-node graph SHA-256.
 - Package loading recomputes all 124 graph hashes before animation mapping.
-- Package loading also recomputes the character package, runtime profile,
-  generated libraries, original reference, canonical reference, and every
-  accepted worksheet hash before exposing the character. Dedicated tamper
-  tests exercise the original, canonical, and all nine accepted worksheets.
+- Package loading also recomputes the generation profile, character package,
+  runtime profile, generated libraries, original reference, canonical
+  reference, and every accepted worksheet hash before exposing the character.
+  The worksheet set must exactly equal the sources named by all 124 audit
+  records. Dedicated loader-level tamper tests exercise every one of those
+  immutable and generated assets.
 - Human-readable direct-node review: `evidence/kai-renner/kai-renner-124-pixel-graphs-contact-sheet.png` (SHA-256 `fe74afb984811136fd0ec3f26e65448e903b8506a1ca09b9cfc229def9c5038d`). This evidence-only PNG renders the JSON nodes after extraction; it is not referenced by the runtime package.
 - The first distance-mask pass was rejected during contact-sheet review because it retained cyan studio islands. The accepted pass uses the warm-subject mask plus vertically bounded dark-cobalt preservation for the trousers, and a shadow-rejecting cool-object mask for the three gray-blue prop studies. It retains the costume and props while removing studio and floor-shadow pixels. All 124 accepted graphs were then reviewed together for complete silhouette, cap/limb clearance, `BAKE` retention where front-facing, and absence of cyan background islands before animation was reconnected.
 
@@ -58,7 +60,7 @@ Full command:
 uv run python -m unittest discover -s tests -v
 ```
 
-Result: 183 tests passed in 123.991 seconds, 0 failed, 0 skipped. The run includes Wizard Joe, CrystAIl, codec, controller, projection, locomotion, semantic signals, runtime determinism, transport, stream, browser contract, and Kai regression coverage.
+Result: 183 tests passed in 215.938 seconds, 0 failed, 0 skipped. The run includes Wizard Joe, CrystAIl, codec, controller, projection, locomotion, semantic signals, runtime determinism, transport, stream, browser contract, and Kai regression coverage.
 
 ## Live REST and WebSocket smoke
 
@@ -66,11 +68,17 @@ The final regenerated assets ran locally on port 8894. Verified with live reques
 
 - `GET /api/avatar/characters`: HTTP 200 and `kai-renner-v1` advertised with all package assets.
 - `GET /api/avatar/kai-renner-v1/state`: HTTP 200 with character-scoped state.
-- `GET /api/avatar/kai-renner-v1/poses`: HTTP 200 with the 108 pose-capable graphs.
+- `GET /api/avatar/kai-renner-v1/poses`: HTTP 200 with the 92 full-body
+  pose-capable graphs; 16 feature-study graphs remain audit-only.
 - `POST /api/avatar/kai-renner-v1/action` using `privacy_check`: HTTP 200 and action accepted.
 - `GET /avatar/characters/kai-renner-v1/extraction-audit`: HTTP 200 with `item_count: 124` and an empty runtime image asset list.
 - `WS /ws/avatar/kai-renner-v1`: accepted, returned `INIT:24.0:5:240:135:0:0:0.000`, then a 12,040-byte binary frame.
 - A WebSocket `prototype_present` action produced the next 9,850-byte binary frame.
+- After the provenance repair, the package was loaded again by a fresh server
+  on port 8895. A 160×100/12 FPS WebSocket returned
+  `INIT:12.0:5:160:100:0:0:0.000`, a 10,282-byte idle frame, and an 8,554-byte
+  `prototype_present` frame; live state then reported pose
+  `prototype_present`.
 
 The verified production implementation is published on
 `codex/persona-kai-renner`; this document records the additional full-lineage

@@ -14,6 +14,7 @@
     "approved_worksheets": "assets/reference/personas/kai-renner/canonical-worksheets",
     "canonical_reference": "assets/reference/personas/kai-renner/canonical-voxel.png",
     "flattened_runtime_dependency": false,
+    "generation_profile": "assets/reference/personas/kai-renner/generation-profile.json",
     "original_reference": "assets/reference/personas/kai-renner/source-reference.png",
     "runtime_art": "deterministic worksheet-derived direct cell library"
   },

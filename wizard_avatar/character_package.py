@@ -302,6 +302,7 @@ def _validate_direct_cell_manifest(
 
     repository_root = package_path.parents[2]
     for source_name, hash_name in (
+        ("generation_profile", "generation_profile_sha256"),
         ("original_reference", "original_reference_sha256"),
         ("canonical_reference", "canonical_reference_sha256"),
     ):
@@ -314,12 +315,35 @@ def _validate_direct_cell_manifest(
     worksheet_hashes = hashes.get("worksheet_sha256")
     if not isinstance(worksheet_hashes, Mapping) or not worksheet_hashes:
         raise CharacterPackageValidationError("manifest accepted worksheet hashes are absent")
+    audit_items = audit_raw.get("items")
+    if not isinstance(audit_items, list) or len(audit_items) != 124:
+        raise CharacterPackageValidationError("direct-cell audit must contain exactly 124 items")
+    audited_worksheets: set[str] = set()
+    for item in audit_items:
+        if not isinstance(item, Mapping):
+            raise CharacterPackageValidationError("direct-cell audit item is invalid")
+        source_cell = item.get("source_cell")
+        if not isinstance(source_cell, str) or "#panel-" not in source_cell:
+            raise CharacterPackageValidationError("audit source cell is invalid")
+        audited_worksheets.add(source_cell.split("#", 1)[0])
+    if set(worksheet_hashes) != audited_worksheets:
+        raise CharacterPackageValidationError(
+            "manifest worksheet set differs from the 124 audited source cells"
+        )
     for filename, expected_hash in worksheet_hashes.items():
-        worksheet = (worksheet_dir / str(filename)).resolve()
+        if not isinstance(filename, str) or Path(filename).name != filename:
+            raise CharacterPackageValidationError("manifest worksheet name is invalid")
+        worksheet = (worksheet_dir / filename).resolve()
         if worksheet_dir not in worksheet.parents or not worksheet.is_file():
             raise CharacterPackageValidationError("accepted worksheet is missing")
         if hashlib.sha256(worksheet.read_bytes()).hexdigest() != expected_hash:
             raise CharacterPackageValidationError("accepted worksheet hash differs")
+    for item in audit_items:
+        source_name = str(item["source_cell"]).split("#", 1)[0]
+        if item.get("source_worksheet_sha256") != worksheet_hashes[source_name]:
+            raise CharacterPackageValidationError(
+                "audit worksheet hash differs for {}".format(source_name)
+            )
 
     canonical = pose_raw.get("canonical")
     if not isinstance(canonical, Mapping):
@@ -335,6 +359,19 @@ def _validate_direct_cell_manifest(
             for pose in (pose_raw.get("poses") or []) if isinstance(pose, Mapping)
         ),
     ]
+    graph_ids = [graph.get("id") for graph in graphs if isinstance(graph, Mapping)]
+    audit_graph_ids = [item.get("graph_id") for item in audit_items]
+    if (
+        len(graphs) != 124
+        or len(graph_ids) != 124
+        or len(set(graph_ids)) != 124
+        or len(audit_graph_ids) != 124
+        or len(set(audit_graph_ids)) != 124
+        or set(graph_ids) != set(audit_graph_ids)
+    ):
+        raise CharacterPackageValidationError(
+            "direct-cell package must expose 124 unique audited graphs"
+        )
     for graph in graphs:
         if not isinstance(graph, Mapping) or not isinstance(graph.get("nodes"), list):
             raise CharacterPackageValidationError("pixel graph nodes are absent")
