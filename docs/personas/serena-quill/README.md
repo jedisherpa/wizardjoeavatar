@@ -18,4 +18,6 @@ Serena is registered as `serena-quill-v1`. Her production library contains exact
 
 Runtime mappings use Serena's authored actions directly: mentoring invitation, emotional-climate check, consent pause, facilitation, orb reassurance, protective wing fold, human-help referral, active listening, compassionate agreement, safe disagreement, reflective question, supportive answer, luminous encouragement, careful celebration, de-escalation, and settled presence. There are no inherited Orion/journal/inquiry mappings.
 
+Only canonical `full_body_graph` poses can be selected by the runtime profile or animation graph. Identity, face, hand, and prop feature studies remain audit-only. Serena's orb clip preserves its five-beat action arc with the approved full-body sequence: orb reassurance/cradle, mentoring invitation/offer, compassionate agreement/receipt, facilitation/transfer, and settled presence.
+
 The visual audit contact sheets are in `evidence/serena-quill/`. They show all 124 isolated silhouettes and all 124 projected pixel graphs in row-major worksheet order. Their identical SHA-256 hash proves the stored graph renderer reproduces the isolated node data exactly.

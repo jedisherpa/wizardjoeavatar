@@ -21,8 +21,9 @@ Identity revision 3 is the only accepted Sheet 01 source. It replaces the reject
 
 ## Automated verification
 
-- Focused Serena suite: **24 passed, 274 subtests passed** in 33.36 seconds.
-- Full Python suite: **189 passed, 560 subtests passed** in 147.09 seconds.
+- Focused Serena suite: **24/24 passed** in 54.195 seconds.
+- Focused Serena plus legacy-loader compatibility: **25/25 passed** in 64.955 seconds.
+- Full Python suite: **189/189 passed** in 225.620 seconds.
 - Production Python scope: **50 files scanned, 0 violations**.
 - Engine transition-quality matrix: **32/32 scenarios passed, 0 issues**.
 - Generator determinism check: passed.
@@ -30,7 +31,7 @@ Identity revision 3 is the only accepted Sheet 01 source. It replaces the reject
 - Tamper rejection: every immutable input, all nine accepted worksheets, every generated package/runtime asset, graph hashes, bounds, duplicate coordinates, RGB values, provenance path escapes, and the exact 124-cell invariant are covered by negative tests.
 - Runtime graph-kind gate: animation clips and runtime profile mappings reference only `full_body_graph` poses; hand/prop feature graphs and identity reference graphs are audit-only. The orb clip now uses full-body Serena actions throughout.
 - Forced image-loader failure: direct-cell runtime still renders a complete frame.
-- Registry/static/REST/WebSocket smoke: Serena appears in the character registry; metadata and pixel-graph asset routes return successfully; a live character-scoped WebSocket returned `INIT:24.0:5:240:135:0:0:0.000` followed by an 11,659-byte binary frame.
+- Registry/static/REST/WebSocket smoke: Serena appears in the character registry; live REST selected `orb_reassurance`; a live character-scoped WebSocket returned `INIT:24.0:5:240:135:0:0:0.000` followed by a 12,137-byte binary frame.
 
 ## Persona mapping audit
 
