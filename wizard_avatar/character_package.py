@@ -273,6 +273,8 @@ def _validate_manifest_hashes(
         raise CharacterPackageValidationError("manifest hashes must be an object")
     package_raw = json.loads(package_path.read_text(encoding="utf-8"))
     generated = {
+        "character_package_sha256": package_path,
+        "runtime_profile_sha256": package_path.parent / package_raw["runtime_profile"],
         "pose_library_sha256": package_path.parent / package_raw["pose_library"],
         "animation_graph_sha256": package_path.parent / package_raw["animation_graph"],
         "animation_matrix_sha256": optional_assets["animation_matrix"],

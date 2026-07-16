@@ -86,6 +86,8 @@ class DravenHoltCharacterTests(unittest.TestCase):
                 hashlib.sha256((PERSONA / "canonical-worksheets" / name).read_bytes()).hexdigest(),
             )
         for key, filename in (
+            ("character_package_sha256", "draven_holt_character_package.json"),
+            ("runtime_profile_sha256", "draven_holt_runtime_profile.json"),
             ("pose_library_sha256", "draven_holt_pose_cells.json"),
             ("animation_graph_sha256", "draven_holt_animation_graph.json"),
             ("animation_matrix_sha256", "draven_holt_animation_matrix.json"),
@@ -285,6 +287,41 @@ class DravenHoltCharacterTests(unittest.TestCase):
         with patch.object(Path, "read_bytes", new=tampered_bytes):
             with self.assertRaisesRegex(CharacterPackageValidationError, "manifest hash differs"):
                 load_character_package(DRAVEN_HOLT_PACKAGE_PATH)
+
+    def test_package_rejects_every_immutable_and_generated_provenance_tamper(self):
+        manifest = json.loads(
+            (DEFINITIONS / "draven_holt_character_manifest.json").read_text()
+        )
+        targets = [
+            PROFILE,
+            PERSONA / "source-reference.png",
+            PERSONA / "canonical-voxel.png",
+            DRAVEN_HOLT_PACKAGE_PATH,
+            DEFINITIONS / "draven_holt_runtime_profile.json",
+            DEFINITIONS / "draven_holt_pose_cells.json",
+            DEFINITIONS / "draven_holt_animation_graph.json",
+            DEFINITIONS / "draven_holt_animation_matrix.json",
+            DEFINITIONS / "draven_holt_extraction_audit.json",
+            DEFINITIONS / "draven_holt_pixel_graphs.json",
+            *(
+                PERSONA / "canonical-worksheets" / filename
+                for filename in manifest["hashes"]["worksheet_sha256"]
+            ),
+        ]
+        original_read_bytes = Path.read_bytes
+        for target in targets:
+            resolved = target.resolve()
+
+            def controlled_read_bytes(path, *args, **kwargs):
+                payload = original_read_bytes(path, *args, **kwargs)
+                return payload + b"tampered" if path.resolve() == resolved else payload
+
+            with self.subTest(target=target.name):
+                with patch.object(Path, "read_bytes", new=controlled_read_bytes):
+                    with self.assertRaisesRegex(
+                        CharacterPackageValidationError, "hash differs"
+                    ):
+                        load_character_package(DRAVEN_HOLT_PACKAGE_PATH)
 
 
 if __name__ == "__main__":

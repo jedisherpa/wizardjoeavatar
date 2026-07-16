@@ -49,8 +49,9 @@ These PNG files are review evidence only. Live rendering uses JSON nodes.
 - Assign owner, deadline emphasis, resource allocation, blocker escalation,
   clipboard handoff, locomotion, expressions, speech, and blink channels are
   reachable through Draven's runtime profile.
-- Package loading rejects post-audit graph, count, bounds, generated-file,
-  profile, source, canonical, and worksheet tampering.
+- Package loading rejects post-audit graph, count, bounds, character-package,
+  runtime-profile, generated-file, profile, source, canonical, and every
+  accepted-worksheet tamper.
 - Runtime rendering succeeds while `PIL.Image.open` is forced to fail.
 
 ## Determinism and automated tests
@@ -70,7 +71,7 @@ python3 -m unittest \
   tests.wizard.test_crystail_character
 ```
 
-Result after the exact-filename provenance repair: 20/20 passed in 27.443
+Result after the package-provenance repair: 21/21 passed in 22.492
 seconds; 0 failed, 0 skipped. The focused verification includes the Draven and
 CrystAIl regression suites.
 
@@ -80,7 +81,7 @@ Full regression command:
 python3 -m unittest discover -s tests
 ```
 
-Result: 178/178 passed in 176.637 seconds; 0 failed, 0 skipped.
+Result: 179/179 passed in 116.622 seconds; 0 failed, 0 skipped.
 `git diff --check` also passed.
 
 Production Python scope scanned 50 files with zero violations. The strict

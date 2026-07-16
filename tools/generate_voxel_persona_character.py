@@ -611,6 +611,12 @@ def manifest_payload(
             "flattened_runtime_dependency": False,
         },
         "hashes": {
+            "character_package_sha256": digest_bytes(
+                (DEFINITIONS / "{}_character_package.json".format(profile["output_prefix"])).read_bytes()
+            ),
+            "runtime_profile_sha256": digest_bytes(
+                (DEFINITIONS / "{}_runtime_profile.json".format(profile["output_prefix"])).read_bytes()
+            ),
             "generation_profile_sha256": digest_bytes(profile_path.read_bytes()),
             "original_reference_sha256": digest_bytes(original.read_bytes()),
             "canonical_reference_sha256": digest_bytes(canonical_reference.read_bytes()),
