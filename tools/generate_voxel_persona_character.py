@@ -563,6 +563,7 @@ def manifest_payload(
         "origin": profile["canonical"],
         "attachment_points": profile["attachment_points"],
         "derivation": {
+            "generation_profile": str(profile_path.resolve().relative_to(ROOT)),
             "original_reference": refs["original_reference"],
             "canonical_reference": refs["canonical_reference"],
             "approved_worksheets": refs["worksheets_dir"],
@@ -570,6 +571,24 @@ def manifest_payload(
             "flattened_runtime_dependency": False,
         },
         "hashes": {
+            **(
+                {
+                    "character_package_sha256": digest_bytes(
+                        (DEFINITIONS / "{}_character_package.json".format(profile["output_prefix"])).read_bytes()
+                    )
+                }
+                if (DEFINITIONS / "{}_character_package.json".format(profile["output_prefix"])).is_file()
+                else {}
+            ),
+            **(
+                {
+                    "runtime_profile_sha256": digest_bytes(
+                        (DEFINITIONS / "{}_runtime_profile.json".format(profile["output_prefix"])).read_bytes()
+                    )
+                }
+                if (DEFINITIONS / "{}_runtime_profile.json".format(profile["output_prefix"])).is_file()
+                else {}
+            ),
             "generation_profile_sha256": digest_bytes(profile_path.read_bytes()),
             "original_reference_sha256": digest_bytes(original.read_bytes()),
             "canonical_reference_sha256": digest_bytes(canonical_reference.read_bytes()),

@@ -4,9 +4,8 @@ Verification date: 2026-07-15
 
 Branch: `codex/persona-thorne-vale`
 
-Base commit: `ae15f89`. This verification covers the completed, uncommitted
-production worktree changes requested for review; this pass did not commit or
-push.
+This verification records the production implementation published on
+`codex/persona-thorne-vale`.
 
 ## Exact 124-cell extraction gate
 
@@ -21,11 +20,13 @@ push.
 - Runtime data format: JSON colored pixel nodes; missing cells are transparent.
 - No Thorne PNG or SVG exists in `wizard_avatar/definitions`.
 
-Package loading recomputes all 124 graph hashes and validates their node counts,
-bounds, RGB values, transparent-node encoding, and audit coverage. It also
-revalidates the source-reference hash, canonical-reference hash, generated
-asset hashes, approved worksheet hashes, and each audit item's worksheet hash
-before the runtime profile is loaded.
+Package loading recomputes all 124 graph hashes and validates their unique IDs,
+node counts, bounds, RGB values, transparent-node encoding, and exact audit
+coverage. It also revalidates the generation profile, character package,
+runtime profile, source and canonical references, every generated asset, the
+exact worksheet set derived from all 124 audit records, and each audit item's
+worksheet hash before exposing the character. Loader-level tamper tests cover
+every one of those inputs.
 
 ## Human visual contact audit
 
@@ -73,6 +74,11 @@ The focused suite exercises the actual character-scoped architecture:
 The live projector paints the JSON cells directly into the ASCILINE canvas. It
 does not decode any worksheet or contact-sheet image.
 
+A fresh post-provenance server on port 8896 returned
+`INIT:12.0:5:160:100:0:0:0.000`, a 9,827-byte idle frame, and a 10,303-byte
+`decision_rights` action frame. Live state then reported
+`decision_rights_action`.
+
 ## Determinism and tests
 
 Generator check:
@@ -92,7 +98,7 @@ uv run python -m unittest \
   tests.wizard.test_thorne_vale_character -v
 ```
 
-Result: 17 passed in 18.732 seconds; 0 failed, 0 skipped.
+Result: 19 passed in 54.672 seconds; 0 failed, 0 skipped.
 
 Full command:
 
@@ -100,6 +106,6 @@ Full command:
 uv run python -m unittest discover -s tests -v
 ```
 
-Result: 178 passed in 111.438 seconds; 0 failed, 0 skipped.
+Result: 180 passed in 209.941 seconds; 0 failed, 0 skipped.
 
 Final `git diff --check`: passed with no whitespace errors.

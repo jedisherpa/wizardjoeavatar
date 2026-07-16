@@ -200,6 +200,42 @@ class ThorneValeCharacterTests(unittest.TestCase):
             with self.assertRaisesRegex(CharacterPackageValidationError, "worksheet hash differs"):
                 load_character_package(THORNE_VALE_PACKAGE_PATH)
 
+    def test_package_rejects_every_immutable_and_generated_asset_tamper(self):
+        persona = ROOT / "assets/reference/personas/thorne-vale"
+        manifest = json.loads(
+            (DEFINITIONS / "thorne_vale_character_manifest.json").read_text(encoding="utf-8")
+        )
+        targets = [
+            PROFILE,
+            persona / "source-reference.png",
+            persona / "canonical-voxel.png",
+            THORNE_VALE_PACKAGE_PATH,
+            DEFINITIONS / "thorne_vale_runtime_profile.json",
+            DEFINITIONS / "thorne_vale_animation_graph.json",
+            DEFINITIONS / "thorne_vale_animation_matrix.json",
+            DEFINITIONS / "thorne_vale_pose_cells.json",
+            DEFINITIONS / "thorne_vale_extraction_audit.json",
+            DEFINITIONS / "thorne_vale_pixel_graphs.json",
+            *(
+                persona / "canonical-worksheets" / filename
+                for filename in manifest["hashes"]["worksheet_sha256"]
+            ),
+        ]
+        original_read_bytes = Path.read_bytes
+        for target in targets:
+            resolved = target.resolve()
+            with self.subTest(target=target.name):
+                def controlled_read_bytes(path, *args, **kwargs):
+                    payload = original_read_bytes(path, *args, **kwargs)
+                    return payload + b"tampered" if path.resolve() == resolved else payload
+
+                with patch.object(Path, "read_bytes", new=controlled_read_bytes):
+                    with self.assertRaisesRegex(
+                        CharacterPackageValidationError,
+                        "hash differs|worksheet hash differs",
+                    ):
+                        load_character_package(THORNE_VALE_PACKAGE_PATH)
+
     def test_identity_and_signature_vocabulary_are_locked(self):
         package = load_character_package(THORNE_VALE_PACKAGE_PATH)
         manifest = json.loads(package.manifest.read_text(encoding="utf-8"))
@@ -288,6 +324,44 @@ class ThorneValeCharacterTests(unittest.TestCase):
                 WizardCommand("pose", {"pose_id": pose_id, "duration_ms": 900})
             )
             self.assertTrue(result.ok)
+
+    def test_runtime_profiles_and_animation_clips_only_target_full_body_graphs(self):
+        package = load_character_package(THORNE_VALE_PACKAGE_PATH)
+        payload = json.loads(package.pose_library.read_text(encoding="utf-8"))
+        full_body = {
+            pose["id"] for pose in payload["poses"]
+            if pose["graph_kind"] == "full_body_graph"
+        }
+        features = {
+            pose["id"] for pose in payload["poses"]
+            if pose["graph_kind"] == "feature_graph"
+        }
+        self.assertEqual(len(full_body), 92)
+        self.assertEqual(len(features), 16)
+        source = self.make_source()
+        self.assertEqual(set(source.pose_ids), full_body)
+        self.assertTrue(features.isdisjoint(source.pose_ids))
+
+        profile = json.loads(package.runtime_profile.read_text(encoding="utf-8"))
+        profile_targets = set(profile["facing_poses"].values())
+        profile_targets.update(profile["action_poses"].values())
+        profile_targets.update(profile["walking_cycle"])
+        profile_targets.update(profile["running_cycle"])
+        profile_targets.update(profile["speech_poses"])
+        profile_targets.update(profile["blink_poses"].values())
+        profile_targets.update(
+            "expression_{}".format(value)
+            for value in profile["expression_aliases"].values()
+        )
+        self.assertTrue(profile_targets.issubset(full_body))
+
+        graph = json.loads(package.animation_graph.read_text(encoding="utf-8"))
+        clip_targets = {
+            sample["pose_id"]
+            for clip in graph["clips"]
+            for sample in clip["samples"]
+        }
+        self.assertTrue(clip_targets.issubset(full_body))
 
     def test_runtime_render_never_decodes_png_or_svg(self):
         with patch("PIL.Image.open", side_effect=AssertionError("runtime image access")):

@@ -14,6 +14,7 @@
     "approved_worksheets": "assets/reference/personas/thorne-vale/canonical-worksheets",
     "canonical_reference": "assets/reference/personas/thorne-vale/canonical-voxel.png",
     "flattened_runtime_dependency": false,
+    "generation_profile": "assets/reference/personas/thorne-vale/generation-profile.json",
     "original_reference": "assets/reference/personas/thorne-vale/source-reference.png",
     "runtime_art": "deterministic worksheet-derived direct cell library"
   },
@@ -22,12 +23,14 @@
     "animation_graph_sha256": "71f870c3712697f25a5f743ebdfa468b547d072fc945246ff8ee1b36e581e31a",
     "animation_matrix_sha256": "671a49aef8a571ee87833861fba65a7ba60aea2d77d575d1b18080b4f5cb8a25",
     "canonical_reference_sha256": "13a8eca0379f2957174fa48c44bd9d2342a22ad06c92952f5f915867a6bb9599",
+    "character_package_sha256": "b852111b345190a3afc2e8aaa2909c7d43e27820eee0395f58b5984d59e445a6",
     "extraction_audit_sha256": "60e6b0eb7978936b29ed806611d442e29a150a9fb6fdf3536e1069bc445a42c3",
     "extraction_item_count": 124,
     "generation_profile_sha256": "8217f9c9f2bdf15f67152e912a1abd2f7704e1788409c04a0ceb9cde15f9f861",
     "original_reference_sha256": "ad40f76a8b086711f3b3b44dcca63c8829a96e665fb15d5cedf588301e8e77d8",
     "pixel_graph_library_sha256": "3d3aaf95beadd70ba91af238ba87f1160cc286299adc848785989932478d8e2d",
     "pose_library_sha256": "c6120890f99543fab9a2d5a30efef14671c36da5078332a5085ec4e52a9dc7b9",
+    "runtime_profile_sha256": "0ad89775dbc8819be42f256dc591160077b4fad0c74df47e4b969544c515c687",
     "worksheet_sha256": {
       "01-identity-sheet-v3.png": "ca1e46c7d0a8e9a5a2578a06bbf7e8dc92a16237744528ef39ba1dc1e57d6e21",
       "02-turnaround-sheet-v1.png": "92c43a81e2bcac5e51e082f36c081087893140a866510cf85c92197bbdbafbc8",
