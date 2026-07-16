@@ -21,8 +21,9 @@ Branch: `codex/persona-rohan-slate`
   Recorded per-cell top expansion was added and all 12 silhouettes were
   regenerated; the final 124-up sheets show complete heads and bodies.
 - Meter and wrench anchors occur only on graphs declared by the profile.
-- Runtime package validation rejects audit, graph, bounds, count, generated
-  asset, source, profile, and worksheet tampering.
+- Runtime package validation rejects audit, graph, bounds, count, character
+  package, runtime profile, generated asset, source, generation profile,
+  canonical reference, and every accepted worksheet tampering attempt.
 
 ## Retained visual evidence
 
@@ -48,8 +49,8 @@ the visualizer never loads these evidence PNG files.
 ## Automated verification
 
 - Deterministic generator `--check`: passed.
-- Focused Rohan/direct-node suite: 20/20 passed in 28.788 seconds.
-- Full repository suite: 181/181 passed in 182.607 seconds.
+- Focused Rohan suite: 16/16 passed in 42.754 seconds.
+- Full repository suite: 181/181 passed in 438.280 seconds.
 - `git diff --check`: passed.
 - Live character list, state, poses, metadata, and pixel-graph routes returned
   HTTP 200; the pixel-graph response was 5,434,114 bytes.

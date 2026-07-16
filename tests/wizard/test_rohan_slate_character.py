@@ -101,8 +101,10 @@ class RohanSlateCharacterTests(unittest.TestCase):
             )
         self.assertEqual(hashes["extraction_item_count"], 124)
         for key, filename in (
+            ("character_package_sha256", "rohan_slate_character_package.json"),
             ("pose_library_sha256", "rohan_slate_pose_cells.json"),
             ("animation_graph_sha256", "rohan_slate_animation_graph.json"),
+            ("runtime_profile_sha256", "rohan_slate_runtime_profile.json"),
             ("animation_matrix_sha256", "rohan_slate_animation_matrix.json"),
             ("extraction_audit_sha256", "rohan_slate_extraction_audit.json"),
             ("pixel_graph_library_sha256", "rohan_slate_pixel_graphs.json"),
@@ -286,16 +288,42 @@ class RohanSlateCharacterTests(unittest.TestCase):
             with self.assertRaisesRegex(CharacterPackageValidationError, "hash differs"):
                 load_character_package(ROHAN_SLATE_PACKAGE_PATH)
 
-        pose_path = (DEFINITIONS / "rohan_slate_pose_cells.json").resolve()
+        manifest = json.loads(
+            (DEFINITIONS / "rohan_slate_character_manifest.json").read_text(
+                encoding="utf-8"
+            )
+        )
+        targets = [
+            PROFILE,
+            PERSONA / "source-reference.png",
+            PERSONA / "canonical-voxel.png",
+            ROHAN_SLATE_PACKAGE_PATH,
+            DEFINITIONS / "rohan_slate_runtime_profile.json",
+            DEFINITIONS / "rohan_slate_pose_cells.json",
+            DEFINITIONS / "rohan_slate_animation_graph.json",
+            DEFINITIONS / "rohan_slate_animation_matrix.json",
+            DEFINITIONS / "rohan_slate_extraction_audit.json",
+            DEFINITIONS / "rohan_slate_pixel_graphs.json",
+        ]
+        targets.extend(
+            PERSONA / "canonical-worksheets" / filename
+            for filename in manifest["hashes"]["worksheet_sha256"]
+        )
         original_read_bytes = Path.read_bytes
+        for target in targets:
+            resolved = target.resolve()
 
-        def controlled_read_bytes(path, *args, **kwargs):
-            data = original_read_bytes(path, *args, **kwargs)
-            return data + b" " if path.resolve() == pose_path else data
+            def controlled_read_bytes(path, *args, **kwargs):
+                data = original_read_bytes(path, *args, **kwargs)
+                return data + b"tampered" if path.resolve() == resolved else data
 
-        with patch.object(Path, "read_bytes", new=controlled_read_bytes):
-            with self.assertRaisesRegex(CharacterPackageValidationError, "manifest hash differs"):
-                load_character_package(ROHAN_SLATE_PACKAGE_PATH)
+            with self.subTest(target=target.name):
+                with patch.object(Path, "read_bytes", new=controlled_read_bytes):
+                    with self.assertRaisesRegex(
+                        CharacterPackageValidationError,
+                        "manifest hash differs|worksheet",
+                    ):
+                        load_character_package(ROHAN_SLATE_PACKAGE_PATH)
 
     def test_live_cells_change_for_motion_expression_speech_and_diagnostics(self):
         source = self.make_source()
