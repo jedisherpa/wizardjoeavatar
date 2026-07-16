@@ -239,6 +239,41 @@ class ElaraVossCharacterTests(unittest.TestCase):
             with self.assertRaisesRegex(CharacterPackageValidationError, "manifest hash differs"):
                 load_character_package(ELARA_VOSS_PACKAGE_PATH)
 
+    def test_package_rejects_every_immutable_and_generated_asset_tamper(self):
+        manifest = json.loads(
+            (DEFINITIONS / "elara_voss_character_manifest.json").read_text(encoding="utf-8")
+        )
+        targets = [
+            PROFILE,
+            PERSONA / "source-reference.png",
+            PERSONA / "canonical-voxel.png",
+            ELARA_VOSS_PACKAGE_PATH,
+            DEFINITIONS / "elara_voss_runtime_profile.json",
+            DEFINITIONS / "elara_voss_animation_graph.json",
+            DEFINITIONS / "elara_voss_animation_matrix.json",
+            DEFINITIONS / "elara_voss_pose_cells.json",
+            DEFINITIONS / "elara_voss_extraction_audit.json",
+            DEFINITIONS / "elara_voss_pixel_graphs.json",
+            *(
+                PERSONA / "canonical-worksheets" / filename
+                for filename in manifest["hashes"]["worksheet_sha256"]
+            ),
+        ]
+        original_read_bytes = Path.read_bytes
+        for target in targets:
+            resolved = target.resolve()
+            with self.subTest(target=target.name):
+                def controlled_read_bytes(path, *args, **kwargs):
+                    payload = original_read_bytes(path, *args, **kwargs)
+                    return payload + b"tampered" if path.resolve() == resolved else payload
+
+                with patch.object(Path, "read_bytes", new=controlled_read_bytes):
+                    with self.assertRaisesRegex(
+                        CharacterPackageValidationError,
+                        "hash differs|worksheet",
+                    ):
+                        load_character_package(ELARA_VOSS_PACKAGE_PATH)
+
     def test_live_cells_change_for_motion_expression_speech_and_curriculum(self):
         source = self.make_source()
         idle = source.render_current_frame().cells
@@ -345,6 +380,31 @@ class ElaraVossCharacterTests(unittest.TestCase):
             source = self.make_source()
             frame = source.render_current_frame()
         self.assertEqual(len(frame.cells), frame.cols * frame.rows * 4)
+
+    def test_runtime_profiles_and_animation_clips_only_target_full_body_graphs(self):
+        package = load_character_package(ELARA_VOSS_PACKAGE_PATH)
+        payload = json.loads(package.pose_library.read_text(encoding="utf-8"))
+        full_body = {pose["id"] for pose in payload["poses"] if pose["graph_kind"] == "full_body_graph"}
+        features = {pose["id"] for pose in payload["poses"] if pose["graph_kind"] == "feature_graph"}
+        self.assertEqual(len(full_body), 92)
+        self.assertEqual(len(features), 16)
+        source = self.make_source()
+        self.assertEqual(set(source.pose_ids), full_body)
+        self.assertTrue(features.isdisjoint(source.pose_ids))
+
+        profile = json.loads(package.runtime_profile.read_text(encoding="utf-8"))
+        targets = set(profile["facing_poses"].values())
+        targets.update(profile["action_poses"].values())
+        targets.update(profile["walking_cycle"])
+        targets.update(profile["running_cycle"])
+        targets.update(profile["speech_poses"])
+        targets.update(profile["blink_poses"].values())
+        targets.update("expression_{}".format(value) for value in profile["expression_aliases"].values())
+        self.assertTrue(targets.issubset(full_body))
+
+        graph = json.loads(package.animation_graph.read_text(encoding="utf-8"))
+        clip_targets = {sample["pose_id"] for clip in graph["clips"] for sample in clip["samples"]}
+        self.assertTrue(clip_targets.issubset(full_body))
 
 
 if __name__ == "__main__":

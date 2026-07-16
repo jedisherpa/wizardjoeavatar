@@ -116,11 +116,19 @@ def load_character_package(path: Path = WIZARD_JOE_PACKAGE_PATH) -> CharacterPac
         _validate_extraction_audit(
             raw["character_id"], pose_raw, pixel_graph_raw, audit_raw
         )
+        if optional_assets["manifest"] is None:
+            raise CharacterPackageValidationError(
+                "audited direct-cell packages require a manifest"
+            )
     if optional_assets["manifest"] is not None:
         _validate_manifest_hashes(
             package_path,
-            raw["character_id"],
+            raw,
+            pose_raw,
+            pixel_graph_raw if optional_assets["pixel_graph_library"] is not None else {},
+            audit_raw if optional_assets["extraction_audit"] is not None else {},
             optional_assets,
+            runtime_profile,
         )
     return CharacterPackage(
         schema_version=1,
@@ -256,8 +264,12 @@ def _validate_extraction_audit(
 
 def _validate_manifest_hashes(
     package_path: Path,
-    character_id: str,
+    package_raw: Mapping[str, Any],
+    pose_raw: Mapping[str, Any],
+    pixel_graph_raw: Mapping[str, Any],
+    audit: Mapping[str, Any],
     optional_assets: Mapping[str, Optional[Path]],
+    runtime_profile: Optional[Path],
 ) -> None:
     """Verify generated production assets before runtime animation mapping."""
     manifest_path = optional_assets["manifest"]
@@ -266,32 +278,30 @@ def _validate_manifest_hashes(
     manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
     if not isinstance(manifest, Mapping) or manifest.get("schema_version") != 1:
         raise CharacterPackageValidationError("manifest must use schema_version 1")
-    if manifest.get("character_id") != character_id:
+    if manifest.get("character_id") != package_raw["character_id"]:
         raise CharacterPackageValidationError("manifest character_id does not match package")
     hashes = manifest.get("hashes")
     if not isinstance(hashes, Mapping):
         raise CharacterPackageValidationError("manifest hashes must be an object")
-    package_raw = json.loads(package_path.read_text(encoding="utf-8"))
     generated = {
+        "character_package_sha256": package_path,
         "pose_library_sha256": package_path.parent / package_raw["pose_library"],
         "animation_graph_sha256": package_path.parent / package_raw["animation_graph"],
+        "runtime_profile_sha256": runtime_profile,
         "animation_matrix_sha256": optional_assets["animation_matrix"],
         "extraction_audit_sha256": optional_assets["extraction_audit"],
         "pixel_graph_library_sha256": optional_assets["pixel_graph_library"],
     }
     for hash_name, asset_path in generated.items():
         if asset_path is None:
-            continue
+            raise CharacterPackageValidationError("manifest asset is missing for {}".format(hash_name))
         actual = hashlib.sha256(asset_path.read_bytes()).hexdigest()
         if hashes.get(hash_name) != actual:
             raise CharacterPackageValidationError(
                 "manifest hash differs for {}".format(hash_name)
             )
-    audit_path = optional_assets["extraction_audit"]
-    if audit_path is not None:
-        audit = json.loads(audit_path.read_text(encoding="utf-8"))
-        if hashes.get("extraction_item_count") != audit.get("item_count"):
-            raise CharacterPackageValidationError("manifest extraction count differs")
+    if hashes.get("extraction_item_count") != 124 or audit.get("item_count") != 124:
+        raise CharacterPackageValidationError("manifest extraction count must be exactly 124")
     derivation = manifest.get("derivation")
     if not isinstance(derivation, Mapping):
         raise CharacterPackageValidationError("manifest derivation must be an object")
@@ -302,10 +312,6 @@ def _validate_manifest_hashes(
         "canonical_reference_sha256": derivation.get("canonical_reference"),
     }
     for hash_name, relative_name in source_assets.items():
-        if relative_name is None and hash_name == "generation_profile_sha256":
-            # Legacy packages did not name their build profile. Their generated
-            # assets are still checked above; new direct-cell packages name it.
-            continue
         if not isinstance(relative_name, str) or not relative_name:
             raise CharacterPackageValidationError("manifest source path is invalid")
         source_path = (repository_root / relative_name).resolve()
@@ -315,18 +321,57 @@ def _validate_manifest_hashes(
             raise CharacterPackageValidationError("manifest hash differs for {}".format(hash_name))
     worksheet_hashes = hashes.get("worksheet_sha256")
     worksheet_dir_name = derivation.get("approved_worksheets")
-    if worksheet_hashes is not None:
-        if not isinstance(worksheet_hashes, Mapping) or not isinstance(worksheet_dir_name, str):
-            raise CharacterPackageValidationError("manifest worksheet hashes are invalid")
-        worksheet_dir = (repository_root / worksheet_dir_name).resolve()
-        if repository_root not in worksheet_dir.parents or not worksheet_dir.is_dir():
-            raise CharacterPackageValidationError("manifest worksheet directory is invalid")
-        for name, expected_hash in worksheet_hashes.items():
-            if not isinstance(name, str) or Path(name).name != name:
-                raise CharacterPackageValidationError("manifest worksheet name is invalid")
-            worksheet = worksheet_dir / name
-            if not worksheet.is_file() or hashlib.sha256(worksheet.read_bytes()).hexdigest() != expected_hash:
-                raise CharacterPackageValidationError("manifest hash differs for worksheet {}".format(name))
+    if not isinstance(worksheet_hashes, Mapping) or not isinstance(worksheet_dir_name, str):
+        raise CharacterPackageValidationError("manifest worksheet hashes are invalid")
+    worksheet_dir = (repository_root / worksheet_dir_name).resolve()
+    if repository_root not in worksheet_dir.parents or not worksheet_dir.is_dir():
+        raise CharacterPackageValidationError("manifest worksheet directory is invalid")
+    audit_items = audit.get("items")
+    if not isinstance(audit_items, list) or len(audit_items) != 124:
+        raise CharacterPackageValidationError("audit must contain exactly 124 items")
+    audited_worksheets = {
+        str(item.get("source_cell")).split("#", 1)[0]
+        for item in audit_items if isinstance(item, Mapping)
+    }
+    if len(audited_worksheets) == 0 or set(worksheet_hashes) != audited_worksheets:
+        raise CharacterPackageValidationError("manifest worksheet set differs from the 124 audited sources")
+    for name, expected_hash in worksheet_hashes.items():
+        if not isinstance(name, str) or Path(name).name != name:
+            raise CharacterPackageValidationError("manifest worksheet name is invalid")
+        worksheet = worksheet_dir / name
+        if not worksheet.is_file() or hashlib.sha256(worksheet.read_bytes()).hexdigest() != expected_hash:
+            raise CharacterPackageValidationError("manifest hash differs for worksheet {}".format(name))
+    for item in audit_items:
+        source_name = str(item["source_cell"]).split("#", 1)[0]
+        if item.get("source_worksheet_sha256") != worksheet_hashes[source_name]:
+            raise CharacterPackageValidationError("audit worksheet hash differs from manifest")
+
+    canonical = pose_raw.get("canonical")
+    if not isinstance(canonical, Mapping) or not isinstance(canonical.get("safe_inset"), Mapping):
+        raise CharacterPackageValidationError("pose library canonical bounds are invalid")
+    cols = int(canonical.get("cols", 0)); inset = canonical["safe_inset"]
+    graphs = [
+        *(pixel_graph_raw.get("graphs") or []),
+        *({"id": pose.get("id"), "nodes": pose.get("cells")} for pose in (pose_raw.get("poses") or []) if isinstance(pose, Mapping)),
+    ]
+    graph_ids = [graph.get("id") for graph in graphs if isinstance(graph, Mapping)]
+    audit_ids = [item.get("graph_id") for item in audit_items]
+    if len(graphs) != 124 or len(set(graph_ids)) != 124 or len(set(audit_ids)) != 124 or set(graph_ids) != set(audit_ids):
+        raise CharacterPackageValidationError("direct-cell package must expose 124 unique audited graphs")
+    for graph in graphs:
+        nodes = graph.get("nodes") if isinstance(graph, Mapping) else None
+        if not isinstance(nodes, list) or not nodes:
+            raise CharacterPackageValidationError("pixel graph nodes are absent")
+        for node in nodes:
+            if not isinstance(node, Mapping):
+                raise CharacterPackageValidationError("pixel graph node is invalid")
+            x, y, rgb = node.get("x"), node.get("y"), node.get("rgb")
+            if not isinstance(x, int) or isinstance(x, bool) or not isinstance(y, int) or isinstance(y, bool):
+                raise CharacterPackageValidationError("pixel graph coordinates must be integers")
+            if not (int(inset["left"]) <= x < cols - int(inset["right"])) or not (int(inset["top"]) <= y <= int(canonical["baseline_y"])):
+                raise CharacterPackageValidationError("pixel graph coordinate violates safe bounds")
+            if not isinstance(rgb, list) or len(rgb) != 3 or any(not isinstance(c, int) or isinstance(c, bool) or not 0 <= c <= 255 for c in rgb):
+                raise CharacterPackageValidationError("pixel graph RGB node is invalid")
 
 
 __all__ = [

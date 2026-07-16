@@ -4,8 +4,8 @@ Verification date: 2026-07-15
 
 Branch: `codex/persona-elara-voss`
 
-Verification covers the uncommitted production worktree. This pass did not
-commit or push.
+This verification records the production implementation published on
+`codex/persona-elara-voss`.
 
 ## Extraction and identity gate
 
@@ -29,15 +29,18 @@ commit or push.
 - Microphone anchors occur only on the graphs declared by the generation
   profile; other poses do not receive a fabricated prop anchor.
 - Package load rejects post-audit graph changes, node-count/bounds changes,
-  generated-file changes, source changes, and accepted-worksheet changes.
+  generation-profile changes, package/runtime/generated-file changes, source
+  changes, and every accepted-worksheet change. It requires 124 unique graph
+  IDs and audit IDs, plus an exact worksheet set derived from all audit records.
 
 ## Runtime gate
 
 - Elara is registered as `elara-voss-v1` through the shared registry.
 - Curriculum, sequencing, reflection, microphone, correction, containment,
   listening, turn, crouch, jump, fall, and landing graphs are runtime reachable.
-- Full-body interaction poses are addressable; close feature graphs are audit
-  and donor data and are excluded from the controller’s body-pose list.
+- Exactly 92 full-body graphs are pose-addressable. The 16 close feature graphs
+  and 16 identity/reference graphs are audit-only. Every runtime-profile and
+  animation-clip reference targets a full-body graph.
 - Blink and speech composition preserve the active walking/action body graph.
 - Runtime rendering succeeds when `PIL.Image.open` is forced to fail, proving
   that the live path does not decode PNG or SVG assets.
@@ -61,7 +64,7 @@ python3 -m unittest \
   tests.wizard.test_elara_voss_character -v
 ```
 
-Result: 18 passed, 0 failed, 0 skipped.
+Result: 20 passed, 0 failed, 0 skipped.
 
 Full command:
 
@@ -69,7 +72,7 @@ Full command:
 python3 -m unittest discover -s tests -v
 ```
 
-Result: 179 passed in 177.688 seconds, 0 failed, 0 skipped. This includes the
+Result: 181 passed in 124.684 seconds, 0 failed, 0 skipped. This includes the
 Wizard Joe, CrystAIl, transport, controller, projection, stream, browser,
 rendering, and Elara regression coverage.
 
