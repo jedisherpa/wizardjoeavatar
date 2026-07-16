@@ -1,8 +1,8 @@
 # Python 8765 Transition Matrix Verification
 
-- generated_at: `2026-07-15T21:33:55.887146+00:00`
+- generated_at: `2026-07-16T02:28:12.543141+00:00`
 - branch: `codex/persona-draven-holt`
-- commit: `bb59dec14761238b93d8b20b195c4af8a67cab2f`
+- commit: `3473dff474c861a1a8641f361d9671e0e8a666d8`
 - scenarios: `32`
 - passed: `32`
 - with issues: `0`
@@ -43,4 +43,3 @@
 | depth_scaling_forward | yes | 0.021 | 0.000000 | 0.217 |  |
 | root_position_view_change | yes | 0.000 | 0.000000 | 0.193 |  |
 | animation_interruption_cancel | yes | 0.000 | 0.000000 | 0.183 |  |
-

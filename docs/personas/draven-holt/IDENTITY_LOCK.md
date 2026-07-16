@@ -1,7 +1,7 @@
 # Draven Holt — Identity Lock
 
-Status: canonical production reference, approved for worksheet derivation  
-Highest visual authority: `assets/reference/personas/draven-holt/canonical-voxel.png`  
+Status: canonical production reference, approved for worksheet derivation
+Highest visual authority: `assets/reference/personas/draven-holt/canonical-voxel.png`
 Preserved source: `assets/reference/personas/draven-holt/source-reference.png`
 
 ## Recognition summary

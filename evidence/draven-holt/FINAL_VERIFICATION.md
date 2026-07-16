@@ -16,6 +16,8 @@ Branch: `codex/persona-draven-holt`
   hand/prop feature graphs and all 16 identity references remain audit-only.
 - Original, canonical, generation profile, and nine approved worksheet hashes
   are manifest-locked. Rejected candidates do not enter runtime lineage.
+- Every `source_cell` retains the exact accepted `.png` filename plus panel
+  index; all 124 resolve to files in `canonical-worksheets`.
 - Studio background, sheet boundaries, floor, cast/contact shadows, and cyan
   edge fringe are absent. Draven's full identity, green eyes, orange tie,
   clipboard, abstract checklist, silver clip, and orange pencil remain intact.
@@ -65,10 +67,12 @@ Focused command:
 ```bash
 python3 -m unittest \
   tests.wizard.test_draven_holt_character \
-  tests.wizard.test_direct_cell_character -v
+  tests.wizard.test_crystail_character
 ```
 
-Result: 17/17 passed in 24.131 seconds; 0 failed, 0 skipped.
+Result after the exact-filename provenance repair: 20/20 passed in 27.443
+seconds; 0 failed, 0 skipped. The focused verification includes the Draven and
+CrystAIl regression suites.
 
 Full regression command:
 
@@ -76,8 +80,11 @@ Full regression command:
 python3 -m unittest discover -s tests
 ```
 
-Result: 178/178 passed in 176.178 seconds; 0 failed, 0 skipped.
+Result: 178/178 passed in 176.637 seconds; 0 failed, 0 skipped.
 `git diff --check` also passed.
+
+Production Python scope scanned 50 files with zero violations. The strict
+animation-quality matrix passed 32/32 scenarios with zero issues.
 
 ## Live REST/WebSocket smoke
 
@@ -91,6 +98,7 @@ a 7,853-byte binary action frame. Live state confirmed action
 
 Final production hashes:
 
-- Pose library: `51b90b154ed2657deb00f8f163b7a7fc8e1cd90d28068c5b6e3f68269220427b`.
-- Reference graph library: `d7543d6a725c7daa5e5f2d2aa170f64b6c40d6d086e1ce1baffce60f3f1cc1a3`.
-- Extraction audit: `efdf7d56185e7297cf3b1c1eb3b7054f001c51e9c314326f6fb4789326ceba09`.
+- Pose library: `46fac72ee95a66e812f48c9f1b76447c8d1e6a0f94905a0587443925a7447362`.
+- Reference graph library: `b2cc64c15b737d111f3998bf892661a84bc35cb71d227d4cdaf8f0aa068f1daa`.
+- Extraction audit: `5a75b9fee8fac5546fc20b3fea668fafeb58fdb5187e65d74ae1df39b82a94f9`.
+- Character manifest: `149db3be428089ee3fb2b0ee21cba69ffb4f5470f741f547d862475e0486f431`.

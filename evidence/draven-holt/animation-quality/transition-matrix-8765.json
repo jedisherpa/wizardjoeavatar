@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-07-15T21:33:55.887146+00:00",
+  "generated_at": "2026-07-16T02:28:12.543141+00:00",
   "branch": "codex/persona-draven-holt",
-  "commit": "bb59dec14761238b93d8b20b195c4af8a67cab2f",
+  "commit": "3473dff474c861a1a8641f361d9671e0e8a666d8",
   "summary": {
     "scenario_count": 32,
     "passed_count": 32,
@@ -26,7 +26,7 @@
         "max_adjacent_root_delta": 1.3500000000000227,
         "max_adjacent_scale_delta": 0.0,
         "max_adjacent_churn_ratio": 0.17385802469135803,
-        "average_adjacent_churn_ratio": 0.046724137931034485,
+        "average_adjacent_churn_ratio": 0.04672413793103448,
         "boundary_root_delta": 0.07200000000000273,
         "boundary_scale_delta": 0.0,
         "unique_poses": [
@@ -1914,7 +1914,7 @@
         "max_adjacent_root_delta": 1.3500000000000227,
         "max_adjacent_scale_delta": 0.0,
         "max_adjacent_churn_ratio": 0.1153395061728395,
-        "average_adjacent_churn_ratio": 0.08153043848446148,
+        "average_adjacent_churn_ratio": 0.08153043848446145,
         "boundary_root_delta": 0.8999999999999773,
         "boundary_scale_delta": 0.0,
         "unique_poses": [
@@ -8270,7 +8270,7 @@
             "expression": "neutral",
             "mouth": "closed",
             "speech_id": null,
-            "walk_phase": 0.9510142174525226,
+            "walk_phase": 0.9510142174525225,
             "pose_id": "back_idle",
             "pose_transition_progress": 1.0
           }
@@ -8300,7 +8300,7 @@
             "expression": "neutral",
             "mouth": "closed",
             "speech_id": null,
-            "walk_phase": 0.9684749291131498,
+            "walk_phase": 0.9684749291131497,
             "pose_id": "back_idle",
             "pose_transition_progress": 1.0
           }
@@ -8330,7 +8330,7 @@
             "expression": "neutral",
             "mouth": "closed",
             "speech_id": null,
-            "walk_phase": 0.9917350761867911,
+            "walk_phase": 0.991735076186791,
             "pose_id": "back_idle",
             "pose_transition_progress": 1.0
           }
@@ -8360,7 +8360,7 @@
             "expression": "neutral",
             "mouth": "closed",
             "speech_id": null,
-            "walk_phase": 0.005493526432696738,
+            "walk_phase": 0.005493526432696516,
             "pose_id": "back_left",
             "pose_transition_progress": 1.0
           }
@@ -8390,7 +8390,7 @@
             "expression": "neutral",
             "mouth": "closed",
             "speech_id": null,
-            "walk_phase": 0.02421627638183217,
+            "walk_phase": 0.02421627638183195,
             "pose_id": "back_left",
             "pose_transition_progress": 1.0
           }
@@ -8420,7 +8420,7 @@
             "expression": "neutral",
             "mouth": "closed",
             "speech_id": null,
-            "walk_phase": 0.03653624757238031,
+            "walk_phase": 0.036536247572380096,
             "pose_id": "back_left",
             "pose_transition_progress": 1.0
           }
@@ -8450,7 +8450,7 @@
             "expression": "neutral",
             "mouth": "closed",
             "speech_id": null,
-            "walk_phase": 0.05501620435820253,
+            "walk_phase": 0.055016204358202314,
             "pose_id": "back_left",
             "pose_transition_progress": 1.0
           }
@@ -8480,7 +8480,7 @@
             "expression": "neutral",
             "mouth": "closed",
             "speech_id": null,
-            "walk_phase": 0.06733617554875067,
+            "walk_phase": 0.06733617554875046,
             "pose_id": "back_left",
             "pose_transition_progress": 1.0
           }
@@ -8510,7 +8510,7 @@
             "expression": "neutral",
             "mouth": "closed",
             "speech_id": null,
-            "walk_phase": 0.14306310144134995,
+            "walk_phase": 0.14306310144134976,
             "pose_id": "back_left",
             "pose_transition_progress": 1.0
           }
@@ -9224,7 +9224,7 @@
             "expression": "neutral",
             "mouth": "closed",
             "speech_id": null,
-            "walk_phase": 0.9510142174525226,
+            "walk_phase": 0.9510142174525225,
             "pose_id": "front_idle",
             "pose_transition_progress": 1.0
           }
@@ -9254,7 +9254,7 @@
             "expression": "neutral",
             "mouth": "closed",
             "speech_id": null,
-            "walk_phase": 0.9684749291131498,
+            "walk_phase": 0.9684749291131497,
             "pose_id": "front_idle",
             "pose_transition_progress": 1.0
           }
@@ -9284,7 +9284,7 @@
             "expression": "neutral",
             "mouth": "closed",
             "speech_id": null,
-            "walk_phase": 0.9917350761867911,
+            "walk_phase": 0.991735076186791,
             "pose_id": "front_idle",
             "pose_transition_progress": 1.0
           }
@@ -9314,7 +9314,7 @@
             "expression": "neutral",
             "mouth": "closed",
             "speech_id": null,
-            "walk_phase": 0.005493526432696738,
+            "walk_phase": 0.005493526432696516,
             "pose_id": "walk_front_left",
             "pose_transition_progress": 1.0
           }
@@ -9344,7 +9344,7 @@
             "expression": "neutral",
             "mouth": "closed",
             "speech_id": null,
-            "walk_phase": 0.02421627638183217,
+            "walk_phase": 0.02421627638183195,
             "pose_id": "walk_front_left",
             "pose_transition_progress": 1.0
           }
@@ -9374,7 +9374,7 @@
             "expression": "neutral",
             "mouth": "closed",
             "speech_id": null,
-            "walk_phase": 0.03653624757238031,
+            "walk_phase": 0.036536247572380096,
             "pose_id": "walk_front_left",
             "pose_transition_progress": 1.0
           }
@@ -9404,7 +9404,7 @@
             "expression": "neutral",
             "mouth": "closed",
             "speech_id": null,
-            "walk_phase": 0.05501620435820253,
+            "walk_phase": 0.055016204358202314,
             "pose_id": "walk_front_left",
             "pose_transition_progress": 1.0
           }
@@ -9434,7 +9434,7 @@
             "expression": "neutral",
             "mouth": "closed",
             "speech_id": null,
-            "walk_phase": 0.06733617554875067,
+            "walk_phase": 0.06733617554875046,
             "pose_id": "walk_front_left",
             "pose_transition_progress": 1.0
           }
@@ -9464,7 +9464,7 @@
             "expression": "neutral",
             "mouth": "closed",
             "speech_id": null,
-            "walk_phase": 0.14306310144134995,
+            "walk_phase": 0.14306310144134976,
             "pose_id": "walk_front_left",
             "pose_transition_progress": 1.0
           }
@@ -9487,7 +9487,7 @@
         }
       ],
       "metrics": {
-        "max_adjacent_root_delta": 1.1696731892380055,
+        "max_adjacent_root_delta": 1.1696731892380057,
         "max_adjacent_scale_delta": 0.11250000000000004,
         "max_adjacent_churn_ratio": 0.1825,
         "average_adjacent_churn_ratio": 0.04237654320987654,
@@ -9881,7 +9881,7 @@
           "state": {
             "time_seconds": 0.533333,
             "world_position": {
-              "x": 0.0007865157454338855,
+              "x": 0.0007865157454338857,
               "z": 5.0007848317548484
             },
             "screen_position": {
@@ -9897,7 +9897,7 @@
             "expression": "neutral",
             "mouth": "closed",
             "speech_id": null,
-            "walk_phase": 0.001307189542483314,
+            "walk_phase": 0.0013071895424833142,
             "pose_id": "walk_front_right",
             "pose_transition_progress": 1.0
           }
@@ -10377,7 +10377,7 @@
             "expression": "neutral",
             "mouth": "closed",
             "speech_id": null,
-            "walk_phase": 0.4041763322020667,
+            "walk_phase": 0.4041763322020666,
             "pose_id": "back_right",
             "pose_transition_progress": 1.0
           }
@@ -10407,7 +10407,7 @@
             "expression": "neutral",
             "mouth": "closed",
             "speech_id": null,
-            "walk_phase": 0.422558685143243,
+            "walk_phase": 0.42255868514324285,
             "pose_id": "back_right",
             "pose_transition_progress": 1.0
           }
@@ -10437,7 +10437,7 @@
             "expression": "neutral",
             "mouth": "closed",
             "speech_id": null,
-            "walk_phase": 0.4348135871040272,
+            "walk_phase": 0.434813587104027,
             "pose_id": "back_right",
             "pose_transition_progress": 1.0
           }
@@ -10467,7 +10467,7 @@
             "expression": "neutral",
             "mouth": "closed",
             "speech_id": null,
-            "walk_phase": 0.5080738666459026,
+            "walk_phase": 0.5080738666459024,
             "pose_id": "back_idle",
             "pose_transition_progress": 1.0
           }
@@ -10497,7 +10497,7 @@
             "expression": "neutral",
             "mouth": "closed",
             "speech_id": null,
-            "walk_phase": 0.5203287686066866,
+            "walk_phase": 0.5203287686066864,
             "pose_id": "back_idle",
             "pose_transition_progress": 1.0
           }
@@ -10527,7 +10527,7 @@
             "expression": "neutral",
             "mouth": "closed",
             "speech_id": null,
-            "walk_phase": 0.5387111215478627,
+            "walk_phase": 0.5387111215478625,
             "pose_id": "back_idle",
             "pose_transition_progress": 1.0
           }
@@ -10557,7 +10557,7 @@
             "expression": "neutral",
             "mouth": "closed",
             "speech_id": null,
-            "walk_phase": 0.5509660235086468,
+            "walk_phase": 0.5509660235086465,
             "pose_id": "back_idle",
             "pose_transition_progress": 1.0
           }
@@ -10587,7 +10587,7 @@
             "expression": "neutral",
             "mouth": "closed",
             "speech_id": null,
-            "walk_phase": 0.6251616783448144,
+            "walk_phase": 0.6251616783448142,
             "pose_id": "back_idle",
             "pose_transition_progress": 1.0
           }
@@ -10617,7 +10617,7 @@
             "expression": "neutral",
             "mouth": "closed",
             "speech_id": null,
-            "walk_phase": 0.6374165803055984,
+            "walk_phase": 0.6374165803055982,
             "pose_id": "back_idle",
             "pose_transition_progress": 1.0
           }
@@ -10647,7 +10647,7 @@
             "expression": "neutral",
             "mouth": "closed",
             "speech_id": null,
-            "walk_phase": 0.6557989332467745,
+            "walk_phase": 0.6557989332467743,
             "pose_id": "back_idle",
             "pose_transition_progress": 1.0
           }
@@ -10677,7 +10677,7 @@
             "expression": "neutral",
             "mouth": "closed",
             "speech_id": null,
-            "walk_phase": 0.6680538352075586,
+            "walk_phase": 0.6680538352075583,
             "pose_id": "back_idle",
             "pose_transition_progress": 1.0
           }
@@ -10707,7 +10707,7 @@
             "expression": "neutral",
             "mouth": "closed",
             "speech_id": null,
-            "walk_phase": 0.7421713220436295,
+            "walk_phase": 0.7421713220436292,
             "pose_id": "back_idle",
             "pose_transition_progress": 1.0
           }
@@ -10737,7 +10737,7 @@
             "expression": "neutral",
             "mouth": "closed",
             "speech_id": null,
-            "walk_phase": 0.7544262240044133,
+            "walk_phase": 0.7544262240044131,
             "pose_id": "back_idle",
             "pose_transition_progress": 1.0
           }
@@ -10767,7 +10767,7 @@
             "expression": "neutral",
             "mouth": "closed",
             "speech_id": null,
-            "walk_phase": 0.7728085769455895,
+            "walk_phase": 0.7728085769455892,
             "pose_id": "back_idle",
             "pose_transition_progress": 1.0
           }
@@ -10797,7 +10797,7 @@
             "expression": "neutral",
             "mouth": "closed",
             "speech_id": null,
-            "walk_phase": 0.8399060486029695,
+            "walk_phase": 0.8399060486029692,
             "pose_id": "back_idle",
             "pose_transition_progress": 1.0
           }
@@ -10827,7 +10827,7 @@
             "expression": "neutral",
             "mouth": "closed",
             "speech_id": null,
-            "walk_phase": 0.8582884015441462,
+            "walk_phase": 0.858288401544146,
             "pose_id": "back_idle",
             "pose_transition_progress": 1.0
           }
@@ -10857,7 +10857,7 @@
             "expression": "neutral",
             "mouth": "closed",
             "speech_id": null,
-            "walk_phase": 0.8705433035049307,
+            "walk_phase": 0.8705433035049305,
             "pose_id": "back_idle",
             "pose_transition_progress": 1.0
           }
@@ -10887,7 +10887,7 @@
             "expression": "neutral",
             "mouth": "closed",
             "speech_id": null,
-            "walk_phase": 0.9423123590652155,
+            "walk_phase": 0.9423123590652153,
             "pose_id": "back_idle",
             "pose_transition_progress": 1.0
           }
@@ -10917,7 +10917,7 @@
             "expression": "neutral",
             "mouth": "closed",
             "speech_id": null,
-            "walk_phase": 0.9545672610259998,
+            "walk_phase": 0.9545672610259995,
             "pose_id": "back_idle",
             "pose_transition_progress": 1.0
           }
@@ -10947,7 +10947,7 @@
             "expression": "neutral",
             "mouth": "closed",
             "speech_id": null,
-            "walk_phase": 0.03075720219643475,
+            "walk_phase": 0.03075720219643453,
             "pose_id": "back_right",
             "pose_transition_progress": 1.0
           }
@@ -10980,7 +10980,7 @@
         "max_adjacent_root_delta": 1.3500000000000227,
         "max_adjacent_scale_delta": 0.0,
         "max_adjacent_churn_ratio": 0.11657407407407408,
-        "average_adjacent_churn_ratio": 0.08186462324393359,
+        "average_adjacent_churn_ratio": 0.08186462324393358,
         "boundary_root_delta": 0.8999999999999773,
         "boundary_scale_delta": 0.0,
         "unique_poses": [
@@ -11380,7 +11380,7 @@
             "staff_state": "held",
             "expression": "neutral",
             "mouth": "open_small",
-            "speech_id": "speech-1784151225430",
+            "speech_id": "speech-1784168872609",
             "walk_phase": 0.6696078431372537,
             "pose_id": "profile_right",
             "pose_transition_progress": 1.0
@@ -11410,7 +11410,7 @@
             "staff_state": "held",
             "expression": "neutral",
             "mouth": "open_small",
-            "speech_id": "speech-1784151225430",
+            "speech_id": "speech-1784168872609",
             "walk_phase": 0.7431372549019594,
             "pose_id": "profile_right",
             "pose_transition_progress": 1.0
@@ -11440,7 +11440,7 @@
             "staff_state": "held",
             "expression": "neutral",
             "mouth": "open_small",
-            "speech_id": "speech-1784151225430",
+            "speech_id": "speech-1784168872609",
             "walk_phase": 0.7921568627450964,
             "pose_id": "profile_right",
             "pose_transition_progress": 1.0
@@ -11470,7 +11470,7 @@
             "staff_state": "held",
             "expression": "neutral",
             "mouth": "open_small",
-            "speech_id": "speech-1784151225430",
+            "speech_id": "speech-1784168872609",
             "walk_phase": 0.8656862745098021,
             "pose_id": "profile_right",
             "pose_transition_progress": 1.0
@@ -11500,7 +11500,7 @@
             "staff_state": "held",
             "expression": "neutral",
             "mouth": "open_small",
-            "speech_id": "speech-1784151225430",
+            "speech_id": "speech-1784168872609",
             "walk_phase": 0.9147058823529391,
             "pose_id": "profile_right",
             "pose_transition_progress": 1.0
@@ -11530,7 +11530,7 @@
             "staff_state": "held",
             "expression": "neutral",
             "mouth": "open_small",
-            "speech_id": "speech-1784151225430",
+            "speech_id": "speech-1784168872609",
             "walk_phase": 0.9882352941176448,
             "pose_id": "profile_right",
             "pose_transition_progress": 1.0
@@ -11560,7 +11560,7 @@
             "staff_state": "held",
             "expression": "neutral",
             "mouth": "open_small",
-            "speech_id": "speech-1784151225430",
+            "speech_id": "speech-1784168872609",
             "walk_phase": 0.03725490196078196,
             "pose_id": "profile_right",
             "pose_transition_progress": 1.0
@@ -11590,7 +11590,7 @@
             "staff_state": "held",
             "expression": "neutral",
             "mouth": "open_small",
-            "speech_id": "speech-1784151225430",
+            "speech_id": "speech-1784168872609",
             "walk_phase": 0.11078431372548758,
             "pose_id": "profile_right",
             "pose_transition_progress": 1.0
@@ -11620,7 +11620,7 @@
             "staff_state": "held",
             "expression": "neutral",
             "mouth": "open_small",
-            "speech_id": "speech-1784151225430",
+            "speech_id": "speech-1784168872609",
             "walk_phase": 0.15980392156862466,
             "pose_id": "profile_right",
             "pose_transition_progress": 1.0
@@ -11650,7 +11650,7 @@
             "staff_state": "held",
             "expression": "neutral",
             "mouth": "open_small",
-            "speech_id": "speech-1784151225430",
+            "speech_id": "speech-1784168872609",
             "walk_phase": 0.23333333333333028,
             "pose_id": "profile_right",
             "pose_transition_progress": 1.0
@@ -11680,7 +11680,7 @@
             "staff_state": "held",
             "expression": "neutral",
             "mouth": "open_small",
-            "speech_id": "speech-1784151225430",
+            "speech_id": "speech-1784168872609",
             "walk_phase": 0.28235294117646736,
             "pose_id": "profile_right",
             "pose_transition_progress": 1.0
@@ -11924,7 +11924,7 @@
         "max_adjacent_root_delta": 1.3500000000000227,
         "max_adjacent_scale_delta": 0.0,
         "max_adjacent_churn_ratio": 0.17108024691358026,
-        "average_adjacent_churn_ratio": 0.047173265219242234,
+        "average_adjacent_churn_ratio": 0.047173265219242214,
         "boundary_root_delta": 0.07200000000000273,
         "boundary_scale_delta": 0.0,
         "unique_poses": [
@@ -11967,7 +11967,7 @@
             "staff_state": "held",
             "expression": "neutral",
             "mouth": "open_small",
-            "speech_id": "speech-1784151225761",
+            "speech_id": "speech-1784168873287",
             "walk_phase": 0.0,
             "pose_id": "front_idle",
             "pose_transition_progress": 1.0
@@ -11997,7 +11997,7 @@
             "staff_state": "held",
             "expression": "neutral",
             "mouth": "open_small",
-            "speech_id": "speech-1784151225761",
+            "speech_id": "speech-1784168873287",
             "walk_phase": 0.0,
             "pose_id": "front_idle",
             "pose_transition_progress": 1.0
@@ -12027,7 +12027,7 @@
             "staff_state": "held",
             "expression": "neutral",
             "mouth": "open_small",
-            "speech_id": "speech-1784151225761",
+            "speech_id": "speech-1784168873287",
             "walk_phase": 0.0,
             "pose_id": "front_idle",
             "pose_transition_progress": 1.0
@@ -12057,7 +12057,7 @@
             "staff_state": "held",
             "expression": "neutral",
             "mouth": "open_small",
-            "speech_id": "speech-1784151225761",
+            "speech_id": "speech-1784168873287",
             "walk_phase": 0.0,
             "pose_id": "front_idle",
             "pose_transition_progress": 1.0
@@ -12087,7 +12087,7 @@
             "staff_state": "held",
             "expression": "neutral",
             "mouth": "open_small",
-            "speech_id": "speech-1784151225761",
+            "speech_id": "speech-1784168873287",
             "walk_phase": 0.0,
             "pose_id": "front_idle",
             "pose_transition_progress": 1.0
@@ -12117,7 +12117,7 @@
             "staff_state": "held",
             "expression": "neutral",
             "mouth": "open_small",
-            "speech_id": "speech-1784151225761",
+            "speech_id": "speech-1784168873287",
             "walk_phase": 0.0,
             "pose_id": "front_idle",
             "pose_transition_progress": 1.0
@@ -12147,7 +12147,7 @@
             "staff_state": "held",
             "expression": "neutral",
             "mouth": "open_small",
-            "speech_id": "speech-1784151225761",
+            "speech_id": "speech-1784168873287",
             "walk_phase": 0.0,
             "pose_id": "front_idle",
             "pose_transition_progress": 1.0
@@ -12177,7 +12177,7 @@
             "staff_state": "held",
             "expression": "neutral",
             "mouth": "open_small",
-            "speech_id": "speech-1784151225761",
+            "speech_id": "speech-1784168873287",
             "walk_phase": 0.0,
             "pose_id": "front_idle",
             "pose_transition_progress": 1.0
@@ -12207,7 +12207,7 @@
             "staff_state": "held",
             "expression": "neutral",
             "mouth": "open_small",
-            "speech_id": "speech-1784151225761",
+            "speech_id": "speech-1784168873287",
             "walk_phase": 0.0,
             "pose_id": "front_idle",
             "pose_transition_progress": 1.0
@@ -12237,7 +12237,7 @@
             "staff_state": "held",
             "expression": "neutral",
             "mouth": "open_small",
-            "speech_id": "speech-1784151225761",
+            "speech_id": "speech-1784168873287",
             "walk_phase": 0.0,
             "pose_id": "front_idle",
             "pose_transition_progress": 1.0
@@ -12267,7 +12267,7 @@
             "staff_state": "held",
             "expression": "neutral",
             "mouth": "open_small",
-            "speech_id": "speech-1784151225761",
+            "speech_id": "speech-1784168873287",
             "walk_phase": 0.0,
             "pose_id": "front_idle",
             "pose_transition_progress": 1.0
@@ -12297,7 +12297,7 @@
             "staff_state": "held",
             "expression": "neutral",
             "mouth": "open_small",
-            "speech_id": "speech-1784151225761",
+            "speech_id": "speech-1784168873287",
             "walk_phase": 0.0,
             "pose_id": "front_idle",
             "pose_transition_progress": 1.0
@@ -12327,7 +12327,7 @@
             "staff_state": "held",
             "expression": "neutral",
             "mouth": "open_small",
-            "speech_id": "speech-1784151225761",
+            "speech_id": "speech-1784168873287",
             "walk_phase": 0.00392156862745098,
             "pose_id": "profile_right",
             "pose_transition_progress": 1.0
@@ -15693,7 +15693,7 @@
         "max_adjacent_root_delta": 1.3500000000000227,
         "max_adjacent_scale_delta": 0.0,
         "max_adjacent_churn_ratio": 0.18416666666666667,
-        "average_adjacent_churn_ratio": 0.04707960834397616,
+        "average_adjacent_churn_ratio": 0.047079608343976155,
         "boundary_root_delta": 0.07200000000000273,
         "boundary_scale_delta": 0.0,
         "unique_poses": [
@@ -16640,7 +16640,7 @@
         "max_adjacent_root_delta": 1.3500000000000227,
         "max_adjacent_scale_delta": 0.0,
         "max_adjacent_churn_ratio": 0.1153395061728395,
-        "average_adjacent_churn_ratio": 0.08153043848446148,
+        "average_adjacent_churn_ratio": 0.08153043848446145,
         "boundary_root_delta": 0.8999999999999773,
         "boundary_scale_delta": 0.0,
         "unique_poses": [
@@ -19868,7 +19868,7 @@
             "staff_state": "held",
             "expression": "neutral",
             "mouth": "open_small",
-            "speech_id": "speech-1784151229956",
+            "speech_id": "speech-1784168881272",
             "walk_phase": 0.0,
             "pose_id": "front_idle",
             "pose_transition_progress": 1.0
@@ -19898,7 +19898,7 @@
             "staff_state": "held",
             "expression": "neutral",
             "mouth": "open_small",
-            "speech_id": "speech-1784151229956",
+            "speech_id": "speech-1784168881272",
             "walk_phase": 0.0,
             "pose_id": "front_idle",
             "pose_transition_progress": 1.0
@@ -19928,7 +19928,7 @@
             "staff_state": "held",
             "expression": "neutral",
             "mouth": "open_small",
-            "speech_id": "speech-1784151229956",
+            "speech_id": "speech-1784168881272",
             "walk_phase": 0.0,
             "pose_id": "front_idle",
             "pose_transition_progress": 1.0
@@ -19958,7 +19958,7 @@
             "staff_state": "held",
             "expression": "neutral",
             "mouth": "open_small",
-            "speech_id": "speech-1784151229956",
+            "speech_id": "speech-1784168881272",
             "walk_phase": 0.0,
             "pose_id": "front_idle",
             "pose_transition_progress": 1.0
@@ -19988,7 +19988,7 @@
             "staff_state": "held",
             "expression": "neutral",
             "mouth": "open_small",
-            "speech_id": "speech-1784151229956",
+            "speech_id": "speech-1784168881272",
             "walk_phase": 0.0,
             "pose_id": "front_idle",
             "pose_transition_progress": 1.0
@@ -20018,7 +20018,7 @@
             "staff_state": "held",
             "expression": "neutral",
             "mouth": "open_small",
-            "speech_id": "speech-1784151229956",
+            "speech_id": "speech-1784168881272",
             "walk_phase": 0.0,
             "pose_id": "front_idle",
             "pose_transition_progress": 1.0
@@ -20048,7 +20048,7 @@
             "staff_state": "held",
             "expression": "neutral",
             "mouth": "open_small",
-            "speech_id": "speech-1784151229956",
+            "speech_id": "speech-1784168881272",
             "walk_phase": 0.0,
             "pose_id": "front_idle",
             "pose_transition_progress": 1.0
@@ -20078,7 +20078,7 @@
             "staff_state": "held",
             "expression": "neutral",
             "mouth": "open_small",
-            "speech_id": "speech-1784151229956",
+            "speech_id": "speech-1784168881272",
             "walk_phase": 0.0,
             "pose_id": "front_idle",
             "pose_transition_progress": 1.0
@@ -20108,7 +20108,7 @@
             "staff_state": "held",
             "expression": "neutral",
             "mouth": "open_small",
-            "speech_id": "speech-1784151229956",
+            "speech_id": "speech-1784168881272",
             "walk_phase": 0.0,
             "pose_id": "front_idle",
             "pose_transition_progress": 1.0
@@ -20138,7 +20138,7 @@
             "staff_state": "held",
             "expression": "neutral",
             "mouth": "open_small",
-            "speech_id": "speech-1784151229956",
+            "speech_id": "speech-1784168881272",
             "walk_phase": 0.0,
             "pose_id": "front_idle",
             "pose_transition_progress": 1.0
@@ -20168,7 +20168,7 @@
             "staff_state": "held",
             "expression": "neutral",
             "mouth": "open_small",
-            "speech_id": "speech-1784151229956",
+            "speech_id": "speech-1784168881272",
             "walk_phase": 0.0,
             "pose_id": "front_idle",
             "pose_transition_progress": 1.0
@@ -20198,7 +20198,7 @@
             "staff_state": "held",
             "expression": "neutral",
             "mouth": "open_small",
-            "speech_id": "speech-1784151229956",
+            "speech_id": "speech-1784168881272",
             "walk_phase": 0.0,
             "pose_id": "front_idle",
             "pose_transition_progress": 1.0
@@ -22296,7 +22296,7 @@
         "max_adjacent_root_delta": 0.0,
         "max_adjacent_scale_delta": 0.0,
         "max_adjacent_churn_ratio": 0.0008641975308641976,
-        "average_adjacent_churn_ratio": 0.0008175728920409771,
+        "average_adjacent_churn_ratio": 0.0008175728920409767,
         "boundary_root_delta": 0.0,
         "boundary_scale_delta": 0.0,
         "unique_poses": [
@@ -23780,7 +23780,7 @@
         "max_adjacent_root_delta": 1.3500000000000227,
         "max_adjacent_scale_delta": 0.0,
         "max_adjacent_churn_ratio": 0.1153395061728395,
-        "average_adjacent_churn_ratio": 0.08153043848446148,
+        "average_adjacent_churn_ratio": 0.08153043848446145,
         "boundary_root_delta": 0.8999999999999773,
         "boundary_scale_delta": 0.0,
         "unique_poses": [
@@ -24764,7 +24764,7 @@
             "staff_state": "held",
             "expression": "neutral",
             "mouth": "open_small",
-            "speech_id": "speech-1784151232528",
+            "speech_id": "speech-1784168886276",
             "walk_phase": 0.0,
             "pose_id": "front_idle",
             "pose_transition_progress": 1.0
@@ -24794,7 +24794,7 @@
             "staff_state": "held",
             "expression": "neutral",
             "mouth": "open_small",
-            "speech_id": "speech-1784151232528",
+            "speech_id": "speech-1784168886276",
             "walk_phase": 0.0,
             "pose_id": "front_idle",
             "pose_transition_progress": 1.0
@@ -24824,7 +24824,7 @@
             "staff_state": "held",
             "expression": "neutral",
             "mouth": "open_small",
-            "speech_id": "speech-1784151232528",
+            "speech_id": "speech-1784168886276",
             "walk_phase": 0.0,
             "pose_id": "front_idle",
             "pose_transition_progress": 1.0
@@ -24854,7 +24854,7 @@
             "staff_state": "held",
             "expression": "neutral",
             "mouth": "open_small",
-            "speech_id": "speech-1784151232528",
+            "speech_id": "speech-1784168886276",
             "walk_phase": 0.0,
             "pose_id": "front_idle",
             "pose_transition_progress": 1.0
@@ -24884,7 +24884,7 @@
             "staff_state": "held",
             "expression": "neutral",
             "mouth": "open_small",
-            "speech_id": "speech-1784151232528",
+            "speech_id": "speech-1784168886276",
             "walk_phase": 0.0,
             "pose_id": "front_idle",
             "pose_transition_progress": 1.0
@@ -24914,7 +24914,7 @@
             "staff_state": "held",
             "expression": "neutral",
             "mouth": "open_small",
-            "speech_id": "speech-1784151232528",
+            "speech_id": "speech-1784168886276",
             "walk_phase": 0.0,
             "pose_id": "front_idle",
             "pose_transition_progress": 1.0
@@ -24944,7 +24944,7 @@
             "staff_state": "held",
             "expression": "neutral",
             "mouth": "open_small",
-            "speech_id": "speech-1784151232528",
+            "speech_id": "speech-1784168886276",
             "walk_phase": 0.0,
             "pose_id": "front_idle",
             "pose_transition_progress": 1.0
@@ -24974,7 +24974,7 @@
             "staff_state": "held",
             "expression": "neutral",
             "mouth": "open_small",
-            "speech_id": "speech-1784151232528",
+            "speech_id": "speech-1784168886276",
             "walk_phase": 0.0,
             "pose_id": "front_idle",
             "pose_transition_progress": 1.0
@@ -25004,7 +25004,7 @@
             "staff_state": "held",
             "expression": "neutral",
             "mouth": "open_small",
-            "speech_id": "speech-1784151232528",
+            "speech_id": "speech-1784168886276",
             "walk_phase": 0.0,
             "pose_id": "front_idle",
             "pose_transition_progress": 1.0
@@ -25034,7 +25034,7 @@
             "staff_state": "held",
             "expression": "neutral",
             "mouth": "open_small",
-            "speech_id": "speech-1784151232528",
+            "speech_id": "speech-1784168886276",
             "walk_phase": 0.0,
             "pose_id": "front_idle",
             "pose_transition_progress": 1.0
@@ -25064,7 +25064,7 @@
             "staff_state": "held",
             "expression": "neutral",
             "mouth": "open_small",
-            "speech_id": "speech-1784151232528",
+            "speech_id": "speech-1784168886276",
             "walk_phase": 0.0,
             "pose_id": "front_idle",
             "pose_transition_progress": 1.0
@@ -25094,7 +25094,7 @@
             "staff_state": "held",
             "expression": "neutral",
             "mouth": "open_small",
-            "speech_id": "speech-1784151232528",
+            "speech_id": "speech-1784168886276",
             "walk_phase": 0.0,
             "pose_id": "front_idle",
             "pose_transition_progress": 1.0
@@ -25124,7 +25124,7 @@
             "staff_state": "held",
             "expression": "focused",
             "mouth": "open_small",
-            "speech_id": "speech-1784151232528",
+            "speech_id": "speech-1784168886276",
             "walk_phase": 0.0,
             "pose_id": "front_idle",
             "pose_transition_progress": 1.0
@@ -25701,7 +25701,7 @@
             "staff_state": "held",
             "expression": "neutral",
             "mouth": "open_small",
-            "speech_id": "speech-1784151233048",
+            "speech_id": "speech-1784168887169",
             "walk_phase": 0.0,
             "pose_id": "front_idle",
             "pose_transition_progress": 1.0
@@ -26604,7 +26604,7 @@
         "max_adjacent_root_delta": 0.0,
         "max_adjacent_scale_delta": 0.0,
         "max_adjacent_churn_ratio": 0.0008641975308641976,
-        "average_adjacent_churn_ratio": 0.0008216262239250744,
+        "average_adjacent_churn_ratio": 0.0008216262239250743,
         "boundary_root_delta": 0.0,
         "boundary_scale_delta": 0.0,
         "unique_poses": [
