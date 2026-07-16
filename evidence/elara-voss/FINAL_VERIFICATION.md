@@ -64,7 +64,7 @@ python3 -m unittest \
   tests.wizard.test_elara_voss_character -v
 ```
 
-Result: 20 passed, 0 failed, 0 skipped.
+Result: 20 passed in 47.842 seconds, 0 failed, 0 skipped.
 
 Full command:
 
@@ -72,7 +72,7 @@ Full command:
 python3 -m unittest discover -s tests -v
 ```
 
-Result: 181 passed in 124.684 seconds, 0 failed, 0 skipped. This includes the
+Result: 181 passed in 226.470 seconds, 0 failed, 0 skipped. This includes the
 Wizard Joe, CrystAIl, transport, controller, projection, stream, browser,
 rendering, and Elara regression coverage.
 
@@ -82,3 +82,7 @@ The live server on `127.0.0.1:8878` returned HTTP 200 for the character list,
 Elara state, poses, metadata, and pixel-graph library. The registry response
 listed `elara-voss-v1`. The character-scoped WebSocket returned
 `INIT:24.0:5:240:135:0:0:0.000` followed by a 10,649-byte binary frame.
+
+A fresh post-provenance server on port 8897 returned
+`INIT:12.0:5:160:100:0:0:0.000`, a 9,794-byte idle frame, and a 10,350-byte
+`explaining` action frame. Live state then reported `curriculum_explain`.
