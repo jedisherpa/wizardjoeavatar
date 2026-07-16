@@ -37,7 +37,10 @@ Evidence:
 - Runtime profile: `8296e88a81beec787cffec13ebe105d1fb13be3e76d00c8e100ab77025caed22`.
 - Manifest: `c08212ac840ca9eda60add3a6c38ebe60a1d8354c93473bb6a5caa687ba526eb`.
 
-Package tests prove rejection of post-audit graph tampering. Load-time validation also checks source and worksheet lineage, exact count, per-item hash/count/bounds, canonical safety bounds, and RGB values.
+Package tests prove rejection of post-audit graph tampering and independent
+tampering of the original reference, canonical voxel reference, or any accepted
+worksheet. Load-time validation checks those full provenance hashes, exact
+count, per-item hash/count/bounds, canonical safety bounds, and RGB values.
 
 ## Runtime and API verification
 
@@ -45,13 +48,14 @@ Package tests prove rejection of post-audit graph tampering. Load-time validatio
 - Turn, crouch, jump, controlled fall, landing, locomotion, expression, speech, and blink paths render direct cells.
 - Runtime render passes while `PIL.Image.open` is forced to fail.
 - Live HTTP on `127.0.0.1:8879`: characters `200/2015 bytes`, state `200/1776`, poses `200/2216`, pixel graph library `200/5722550`, manifest `200/3636`, runtime profile `200/2640`.
-- Live WebSocket: `INIT:24.0:5:240:135:0:0:0.000`, followed by an 8,596-byte binary frame.
+- Live WebSocket: `INIT:24.0:5:240:135:0:0:0.000`, followed by an 8,596-byte
+  binary frame; a partnership-pitch command then produced a 9,266-byte frame.
 
 ## Automated verification
 
 - Deterministic generation: pass, `Aurelia Finch generated assets are deterministic`.
-- Focused suite: 12 passed, 0 failed, 0 skipped.
-- Full suite: 173 passed in 175.508 seconds, 0 failed, 0 skipped.
+- Focused suite: 13 passed, 0 failed, 0 skipped.
+- Full suite: 174 passed in 110.682 seconds, 0 failed, 0 skipped.
 - Production Python scope: 50 files scanned, 0 violations.
 - Strict animation quality: 32/32 scenarios passed, 0 issues.
 - `git diff --check`: pass.
