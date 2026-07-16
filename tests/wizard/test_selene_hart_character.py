@@ -175,6 +175,43 @@ class SeleneHartCharacterTests(unittest.TestCase):
         for leftover in ("rohan", "meter", "wrench", "finn", "journal", "cigar", "smoke", "tobacco", "draven", "pencil", "serena", "orb", "halo", "wings"):
             self.assertNotIn(leftover, profile_and_outputs)
 
+    def test_animation_and_runtime_profiles_only_select_full_body_graphs(self):
+        poses = json.loads(
+            (DEFINITIONS / "selene_hart_pose_cells.json").read_text()
+        )["poses"]
+        full_body = {
+            pose["id"] for pose in poses if pose.get("graph_kind") == "full_body_graph"
+        }
+        feature = {
+            pose["id"] for pose in poses if pose.get("graph_kind") == "feature_graph"
+        }
+        self.assertEqual(len(full_body), 88)
+        self.assertEqual(len(feature), 20)
+        animation = json.loads(
+            (DEFINITIONS / "selene_hart_animation_graph.json").read_text()
+        )
+        animation_pose_ids = {
+            sample["pose_id"]
+            for clip in animation["clips"]
+            for sample in clip["samples"]
+        }
+        runtime = json.loads(
+            (DEFINITIONS / "selene_hart_runtime_profile.json").read_text()
+        )
+        runtime_pose_ids = {
+            runtime["default_pose_id"],
+            *runtime["facing_poses"].values(),
+            *runtime["action_poses"].values(),
+            *runtime["walking_cycle"],
+            *runtime["running_cycle"],
+            *runtime["airborne_poses"].values(),
+            *runtime["speech_poses"],
+            *runtime["blink_poses"].values(),
+        }
+        self.assertTrue(animation_pose_ids <= full_body)
+        self.assertTrue(runtime_pose_ids <= full_body)
+        self.assertTrue(feature.isdisjoint(animation_pose_ids | runtime_pose_ids))
+
     def test_only_full_body_graphs_are_runtime_pose_capable(self):
         payload = json.loads((DEFINITIONS / "selene_hart_pose_cells.json").read_text())
         full_body = {pose["id"] for pose in payload["poses"] if pose["graph_kind"] == "full_body_graph"}
@@ -286,6 +323,41 @@ class SeleneHartCharacterTests(unittest.TestCase):
         with patch.object(Path, "read_bytes", new=tampered_bytes):
             with self.assertRaisesRegex(CharacterPackageValidationError, "manifest hash differs"):
                 load_character_package(SELENE_HART_PACKAGE_PATH)
+
+    def test_package_rejects_every_immutable_and_generated_provenance_tamper(self):
+        manifest = json.loads(
+            (DEFINITIONS / "selene_hart_character_manifest.json").read_text()
+        )
+        targets = [
+            (PROFILE, "generation_profile"),
+            (PERSONA / "source-reference.png", "original_reference"),
+            (PERSONA / "canonical-voxel.png", "canonical_reference"),
+            (SELENE_HART_PACKAGE_PATH, "manifest hash differs"),
+            (DEFINITIONS / "selene_hart_runtime_profile.json", "manifest hash differs"),
+            (DEFINITIONS / "selene_hart_pose_cells.json", "manifest hash differs"),
+            (DEFINITIONS / "selene_hart_animation_graph.json", "manifest hash differs"),
+            (DEFINITIONS / "selene_hart_animation_matrix.json", "manifest hash differs"),
+            (DEFINITIONS / "selene_hart_extraction_audit.json", "manifest hash differs"),
+            (DEFINITIONS / "selene_hart_pixel_graphs.json", "manifest hash differs"),
+        ]
+        targets.extend(
+            (PERSONA / "canonical-worksheets" / filename, "accepted worksheet")
+            for filename in manifest["hashes"]["worksheet_sha256"]
+        )
+        original_bytes = Path.read_bytes
+        for target, expected_message in targets:
+            resolved = target.resolve()
+
+            def controlled(path, *args, **kwargs):
+                payload = original_bytes(path, *args, **kwargs)
+                return payload + b"tampered" if path.resolve() == resolved else payload
+
+            with self.subTest(target=target.name):
+                with patch.object(Path, "read_bytes", new=controlled):
+                    with self.assertRaisesRegex(
+                        CharacterPackageValidationError, expected_message
+                    ):
+                        load_character_package(SELENE_HART_PACKAGE_PATH)
 
 
 if __name__ == "__main__":

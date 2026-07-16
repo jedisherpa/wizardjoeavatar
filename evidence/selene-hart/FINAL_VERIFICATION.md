@@ -20,6 +20,8 @@ The hard gate contains exactly **124** independently isolated and serialized gra
 | **Total** | **124** |
 
 The runtime pose vocabulary contains **88 full-body graphs**. The **20 feature graphs** and **16 identity/reference graphs** are retained for audit and lineage only and cannot be selected as body poses.
+Automated tests enumerate every animation-graph sample and runtime-profile pose
+reference and require it to resolve to one of those 88 full-body graphs.
 
 ## Visual and data audit
 
@@ -49,10 +51,13 @@ The equal contact-sheet hashes are expected: the isolated node lists and the des
 ## Automated verification
 
 - Deterministic generation check: passed.
-- Focused Selene/direct-cell suite: **17/17 passed**.
-- Full Python suite: **178/178 passed**.
+- Focused Selene/direct-cell suite: **19/19 passed**.
+- Full Python suite: **180/180 passed** in 146.745 seconds.
 - Forced `PIL.Image.open` failure during runtime rendering: passed; an ASCILINE frame still rendered successfully.
-- Manifest, source, canonical worksheet, generated library, extraction-audit, bounds, RGB-node, and tamper validation: passed.
+- Manifest validation rehashes the generation profile, character package,
+  runtime profile, original and canonical references, all nine accepted
+  worksheets, every generated library, and the extraction audit. A destructive
+  tamper matrix calls the real loader for every one of those inputs: passed.
 - Animation-quality transition matrix: **32/32 scenarios passed**, 0 issues.
 
 ## Live Python runtime verification

@@ -230,6 +230,8 @@ def _validate_extraction_audit(
     }
     if set(graph_by_id) != set(item_by_id) or audit_raw.get("item_count") != len(graph_by_id):
         raise CharacterPackageValidationError("extraction_audit does not cover every pixel graph")
+    if len(graph_by_id) != 124:
+        raise CharacterPackageValidationError("direct-cell extraction must contain exactly 124 graphs")
     for graph_id, graph in graph_by_id.items():
         item = item_by_id[graph_id]
         if item.get("background_removed") is not True:
@@ -270,12 +272,17 @@ def _validate_direct_cell_manifest(
     if derivation.get("flattened_runtime_dependency") is not False:
         raise CharacterPackageValidationError("flattened runtime art is forbidden")
     expected_assets = {
+        "character_package_sha256": package_path,
         "pose_library_sha256": _package_asset(package_path, package_raw["pose_library"], "pose_library"),
         "animation_graph_sha256": _package_asset(package_path, package_raw["animation_graph"], "animation_graph"),
         "animation_matrix_sha256": optional_assets["animation_matrix"],
         "extraction_audit_sha256": optional_assets["extraction_audit"],
         "pixel_graph_library_sha256": optional_assets["pixel_graph_library"],
     }
+    if "runtime_profile" in package_raw:
+        expected_assets["runtime_profile_sha256"] = _package_asset(
+            package_path, package_raw["runtime_profile"], "runtime_profile"
+        )
     for hash_name, asset_path in expected_assets.items():
         if asset_path is None:
             raise CharacterPackageValidationError("manifest asset is missing: {}".format(hash_name))
@@ -286,6 +293,13 @@ def _validate_direct_cell_manifest(
         raise CharacterPackageValidationError("direct-cell manifest must cover exactly 124 cells")
 
     repository_root = package_path.parents[2]
+    generation_profile = _repository_asset(
+        repository_root, derivation.get("generation_profile"), "generation_profile"
+    )
+    if hashes.get("generation_profile_sha256") != hashlib.sha256(
+        generation_profile.read_bytes()
+    ).hexdigest():
+        raise CharacterPackageValidationError("manifest hash differs for generation_profile")
     reference_pairs = (
         ("original_reference", "original_reference_sha256"),
         ("canonical_reference", "canonical_reference_sha256"),
@@ -300,6 +314,19 @@ def _validate_direct_cell_manifest(
     worksheet_hashes = hashes.get("worksheet_sha256")
     if not isinstance(worksheet_hashes, Mapping) or not worksheet_hashes:
         raise CharacterPackageValidationError("manifest accepted worksheet hashes are absent")
+    audited_worksheets = {
+        (
+            str(item.get("source_sheet"))
+            if str(item.get("source_sheet")).endswith(".png")
+            else str(item.get("source_sheet")) + ".png"
+        )
+        for item in audit_raw.get("items", ())
+        if isinstance(item, Mapping) and isinstance(item.get("source_sheet"), str)
+    }
+    if set(map(str, worksheet_hashes)) != audited_worksheets:
+        raise CharacterPackageValidationError(
+            "manifest accepted worksheets differ from extraction audit"
+        )
     for filename, expected_hash in worksheet_hashes.items():
         worksheet = (worksheet_dir / str(filename)).resolve()
         if worksheet_dir not in worksheet.parents or not worksheet.is_file():

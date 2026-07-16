@@ -170,28 +170,6 @@
       ]
     },
     {
-      "clip_id": "selene_interactions",
-      "loop": false,
-      "samples": [
-        {
-          "pose_id": "interaction_open_relaxed_hand",
-          "tick": 0
-        },
-        {
-          "pose_id": "interaction_closed_relaxed_hand",
-          "tick": 12
-        },
-        {
-          "pose_id": "interaction_firm_fist",
-          "tick": 24
-        },
-        {
-          "pose_id": "interaction_full_reach",
-          "tick": 36
-        }
-      ]
-    },
-    {
       "clip_id": "selene_turnaround",
       "loop": true,
       "samples": [
