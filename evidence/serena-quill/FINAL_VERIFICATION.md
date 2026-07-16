@@ -21,15 +21,16 @@ Identity revision 3 is the only accepted Sheet 01 source. It replaces the reject
 
 ## Automated verification
 
-- Focused Serena suite: **19 passed, 248 subtests passed**.
-- Full Python suite: **184 passed, 534 subtests passed** in 116.41 seconds.
+- Focused Serena suite: **24 passed, 274 subtests passed** in 33.36 seconds.
+- Full Python suite: **189 passed, 560 subtests passed** in 147.09 seconds.
 - Production Python scope: **50 files scanned, 0 violations**.
 - Engine transition-quality matrix: **32/32 scenarios passed, 0 issues**.
 - Generator determinism check: passed.
-- Package validation: hashes, exact count, graph audit, safe bounds, RGB ranges, original source, canonical reference, and all accepted worksheet hashes validated.
-- Tamper rejection: altered graph audit and altered canonical provenance both rejected.
+- Package validation: generation profile, original source, canonical reference, package, runtime profile, pose library, animation graph, animation matrix, graph audit, pixel graph library, exact category/count, safe bounds, RGB ranges, and the complete accepted worksheet set are hash-validated at load time.
+- Tamper rejection: every immutable input, all nine accepted worksheets, every generated package/runtime asset, graph hashes, bounds, duplicate coordinates, RGB values, provenance path escapes, and the exact 124-cell invariant are covered by negative tests.
+- Runtime graph-kind gate: animation clips and runtime profile mappings reference only `full_body_graph` poses; hand/prop feature graphs and identity reference graphs are audit-only. The orb clip now uses full-body Serena actions throughout.
 - Forced image-loader failure: direct-cell runtime still renders a complete frame.
-- Registry/static/REST/WebSocket smoke: Serena appears in the character registry; metadata and pixel-graph asset routes return successfully; character-scoped WebSocket returns `INIT:8.0:5:80:60:0:0:0.000` followed by a binary frame.
+- Registry/static/REST/WebSocket smoke: Serena appears in the character registry; metadata and pixel-graph asset routes return successfully; a live character-scoped WebSocket returned `INIT:24.0:5:240:135:0:0:0.000` followed by an 11,659-byte binary frame.
 
 ## Persona mapping audit
 

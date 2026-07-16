@@ -1268,23 +1268,23 @@
         "loop": false,
         "samples": [
           {
-            "pose_id": "prop_orb_two_hand_cradle",
+            "pose_id": "orb_reassurance",
             "tick": 0
           },
           {
-            "pose_id": "prop_orb_offered",
+            "pose_id": "mentoring_invitation",
             "tick": 14
           },
           {
-            "pose_id": "prop_orb_received",
+            "pose_id": "compassionate_agreement",
             "tick": 28
           },
           {
-            "pose_id": "prop_orb_transfer",
+            "pose_id": "facilitation",
             "tick": 42
           },
           {
-            "pose_id": "prop_orb_settled_listening",
+            "pose_id": "settled_presence",
             "tick": 58
           }
         ]

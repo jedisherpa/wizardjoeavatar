@@ -15,7 +15,7 @@
   },
   "action_poses": {
     "explaining": "facilitation",
-    "pointing": "hand_gentle_point",
+    "pointing": "referral_human_help",
     "thinking": "reflective_question",
     "reaction": "emotional_climate_check",
     "celebrating": "careful_celebration",

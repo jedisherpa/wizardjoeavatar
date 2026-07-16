@@ -19,7 +19,9 @@ from wizard_avatar.server import create_app
 
 
 ROOT = Path(__file__).resolve().parents[2]
-PROFILE = ROOT / "assets" / "reference" / "personas" / "serena-quill" / "generation-profile.json"
+DEFINITIONS = ROOT / "wizard_avatar" / "definitions"
+PERSONA = ROOT / "assets" / "reference" / "personas" / "serena-quill"
+PROFILE = PERSONA / "generation-profile.json"
 
 
 class SerenaQuillCharacterTests(unittest.TestCase):
@@ -354,6 +356,65 @@ class SerenaQuillCharacterTests(unittest.TestCase):
                 source.render_current_frame()
                 self.assertEqual(source.current_state().pose_id, pose_id)
 
+    def test_every_runtime_and_animation_pose_reference_is_full_body(self):
+        pose_payload = json.loads(
+            (DEFINITIONS / "serena_quill_pose_cells.json").read_text()
+        )
+        graph_kind = {
+            pose["id"]: pose.get("graph_kind") for pose in pose_payload["poses"]
+        }
+        runtime = json.loads(
+            (DEFINITIONS / "serena_quill_runtime_profile.json").read_text()
+        )
+        references = {
+            runtime["default_pose_id"],
+            *runtime["facing_poses"].values(),
+            *runtime["action_poses"].values(),
+            *runtime["walking_cycle"],
+            *runtime["running_cycle"],
+            *runtime["airborne_poses"].values(),
+            *runtime["speech_poses"],
+            *runtime["blink_poses"].values(),
+            *("expression_{}".format(value) for value in runtime["expression_aliases"].values()),
+        }
+        animation = json.loads(
+            (DEFINITIONS / "serena_quill_animation_graph.json").read_text()
+        )
+        references.update(
+            sample["pose_id"]
+            for clip in animation["clips"]
+            for sample in clip["samples"]
+        )
+        self.assertTrue(references)
+        self.assertEqual(
+            {pose_id: graph_kind.get(pose_id) for pose_id in references},
+            {pose_id: "full_body_graph" for pose_id in references},
+        )
+        audit_only = {
+            pose_id for pose_id, kind in graph_kind.items()
+            if kind in {"feature_graph", "reference_graph"}
+        }
+        self.assertTrue(audit_only)
+        self.assertTrue(audit_only.isdisjoint(references))
+
+    def test_orb_clip_preserves_full_body_orb_action_semantics(self):
+        animation = json.loads(
+            (DEFINITIONS / "serena_quill_animation_graph.json").read_text()
+        )
+        orb_clip = next(
+            clip for clip in animation["clips"] if clip["clip_id"] == "serena_orb"
+        )
+        self.assertEqual(
+            [sample["pose_id"] for sample in orb_clip["samples"]],
+            [
+                "orb_reassurance",
+                "mentoring_invitation",
+                "compassionate_agreement",
+                "facilitation",
+                "settled_presence",
+            ],
+        )
+
     def test_semantic_ground_and_angelic_actions_are_runtime_addressable(self):
         source = self.make_source()
         expected = {
@@ -399,6 +460,115 @@ class SerenaQuillCharacterTests(unittest.TestCase):
         speech_frame = source.render_current_frame().cells
         self.assertEqual(source.current_state().pose_id, "walk_up_right")
         self.assertNotEqual(blink_frame, speech_frame)
+
+    def test_package_rejects_tampering_across_complete_provenance_chain(self):
+        manifest = json.loads(
+            (DEFINITIONS / "serena_quill_character_manifest.json").read_text()
+        )
+        targets = {
+            "generation_profile": PROFILE,
+            "original_source": PERSONA / "source-reference.png",
+            "canonical_voxel": PERSONA / "canonical-voxel.png",
+            "character_package": DEFINITIONS / "serena_quill_character_package.json",
+            "runtime_profile": DEFINITIONS / "serena_quill_runtime_profile.json",
+            "pose_library": DEFINITIONS / "serena_quill_pose_cells.json",
+            "animation_graph": DEFINITIONS / "serena_quill_animation_graph.json",
+            "animation_matrix": DEFINITIONS / "serena_quill_animation_matrix.json",
+            "extraction_audit": DEFINITIONS / "serena_quill_extraction_audit.json",
+            "pixel_graph_library": DEFINITIONS / "serena_quill_pixel_graphs.json",
+        }
+        worksheet_dir = PERSONA / "canonical-worksheets"
+        for filename in manifest["hashes"]["worksheet_sha256"]:
+            targets["worksheet_{}".format(filename[:2])] = worksheet_dir / filename
+        self.assertEqual(
+            {label for label in targets if label.startswith("worksheet_")},
+            {"worksheet_{:02d}".format(index) for index in range(1, 10)},
+        )
+        original_read_bytes = Path.read_bytes
+        for label, target in targets.items():
+            resolved_target = target.resolve()
+
+            def tampered_read_bytes(path, *args, **kwargs):
+                data = original_read_bytes(path, *args, **kwargs)
+                return data + b"tamper" if path.resolve() == resolved_target else data
+
+            with self.subTest(asset=label), patch.object(
+                Path, "read_bytes", new=tampered_read_bytes
+            ):
+                with self.assertRaises(CharacterPackageValidationError):
+                    load_character_package(SERENA_QUILL_PACKAGE_PATH)
+
+    def test_package_rejects_manifest_escape_and_canonical_count_tampering(self):
+        manifest_path = (DEFINITIONS / "serena_quill_character_manifest.json").resolve()
+        original_manifest = json.loads(manifest_path.read_text())
+        cases = []
+        wrong_count = json.loads(json.dumps(original_manifest))
+        wrong_count["hashes"]["extraction_item_count"] = 123
+        cases.append(("exact_124", wrong_count))
+        source_escape = json.loads(json.dumps(original_manifest))
+        source_escape["derivation"]["generation_profile"] = "../../outside.json"
+        cases.append(("source_escape", source_escape))
+        worksheet_escape = json.loads(json.dumps(original_manifest))
+        worksheet_escape["derivation"]["approved_worksheets"] = "../../"
+        cases.append(("worksheet_escape", worksheet_escape))
+        missing_worksheet = json.loads(json.dumps(original_manifest))
+        missing_worksheet["hashes"]["worksheet_sha256"].pop(
+            next(iter(missing_worksheet["hashes"]["worksheet_sha256"]))
+        )
+        cases.append(("nine_worksheets", missing_worksheet))
+        original_read_text = Path.read_text
+        for label, tampered in cases:
+            def tampered_read_text(path, *args, **kwargs):
+                if path.resolve() == manifest_path:
+                    return json.dumps(tampered)
+                return original_read_text(path, *args, **kwargs)
+
+            with self.subTest(case=label), patch.object(
+                Path, "read_text", new=tampered_read_text
+            ):
+                with self.assertRaises(CharacterPackageValidationError):
+                    load_character_package(SERENA_QUILL_PACKAGE_PATH)
+
+    def test_package_rejects_out_of_bounds_duplicate_and_invalid_rgb_nodes(self):
+        graph_path = (DEFINITIONS / "serena_quill_pixel_graphs.json").resolve()
+        audit_path = (DEFINITIONS / "serena_quill_extraction_audit.json").resolve()
+        original_graph = json.loads(graph_path.read_text())
+        original_audit = json.loads(audit_path.read_text())
+        original_read_text = Path.read_text
+        for label, replacement in (
+            ("unsafe_x", {"x": 0}),
+            ("invalid_rgb", {"rgb": [256, 0, 0]}),
+            ("duplicate_coordinate", {"duplicate": True}),
+        ):
+            graph = json.loads(json.dumps(original_graph))
+            audit = json.loads(json.dumps(original_audit))
+            target_graph = graph["graphs"][0]
+            if replacement.pop("duplicate", False):
+                target_graph["nodes"][1]["x"] = target_graph["nodes"][0]["x"]
+                target_graph["nodes"][1]["y"] = target_graph["nodes"][0]["y"]
+            else:
+                target_graph["nodes"][0].update(replacement)
+            nodes = target_graph["nodes"]
+            item = next(
+                entry for entry in audit["items"]
+                if entry["graph_id"] == target_graph["id"]
+            )
+            item["pixel_graph_sha256"] = hashlib.sha256(
+                json.dumps(nodes, separators=(",", ":"), sort_keys=True).encode()
+            ).hexdigest()
+
+            def tampered_read_text(path, *args, **kwargs):
+                if path.resolve() == graph_path:
+                    return json.dumps(graph)
+                if path.resolve() == audit_path:
+                    return json.dumps(audit)
+                return original_read_text(path, *args, **kwargs)
+
+            with self.subTest(case=label), patch.object(
+                Path, "read_text", new=tampered_read_text
+            ):
+                with self.assertRaises(CharacterPackageValidationError):
+                    load_character_package(SERENA_QUILL_PACKAGE_PATH)
 
     def test_seeded_simulation_reaches_the_authored_blink_graph(self):
         source = self.make_source()
