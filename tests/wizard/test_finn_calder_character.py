@@ -102,6 +102,8 @@ class FinnCalderCharacterTests(unittest.TestCase):
             )
         self.assertEqual(hashes["extraction_item_count"], 124)
         for key, filename in (
+            ("character_package_sha256", "finn_calder_character_package.json"),
+            ("runtime_profile_sha256", "finn_calder_runtime_profile.json"),
             ("pose_library_sha256", "finn_calder_pose_cells.json"),
             ("animation_graph_sha256", "finn_calder_animation_graph.json"),
             ("animation_matrix_sha256", "finn_calder_animation_matrix.json"),
@@ -312,6 +314,36 @@ class FinnCalderCharacterTests(unittest.TestCase):
             with self.assertRaisesRegex(CharacterPackageValidationError, "manifest hash differs"):
                 load_character_package(FINN_CALDER_PACKAGE_PATH)
 
+    def test_package_and_runtime_profile_are_cryptographically_bound(self):
+        manifest = json.loads(
+            (DEFINITIONS / "finn_calder_character_manifest.json").read_text()
+        )
+        targets = {
+            "character_package_sha256": FINN_CALDER_PACKAGE_PATH.resolve(),
+            "runtime_profile_sha256": (
+                DEFINITIONS / "finn_calder_runtime_profile.json"
+            ).resolve(),
+        }
+        original_read_bytes = Path.read_bytes
+        for hash_name, target in targets.items():
+            self.assertEqual(
+                manifest["hashes"][hash_name],
+                hashlib.sha256(original_read_bytes(target)).hexdigest(),
+            )
+
+            def tampered_read_bytes(path, *args, **kwargs):
+                data = original_read_bytes(path, *args, **kwargs)
+                return data + b"destructive-tamper" if path.resolve() == target else data
+
+            with self.subTest(asset=hash_name), patch.object(
+                Path, "read_bytes", new=tampered_read_bytes
+            ):
+                with self.assertRaisesRegex(
+                    CharacterPackageValidationError,
+                    "manifest hash differs for {}".format(hash_name),
+                ):
+                    load_character_package(FINN_CALDER_PACKAGE_PATH)
+
     def test_package_rejects_source_worksheet_and_pixel_graph_tampering(self):
         original_read_bytes = Path.read_bytes
         source_path = (PERSONA / "source-reference.png").resolve()
@@ -357,6 +389,41 @@ class FinnCalderCharacterTests(unittest.TestCase):
         with patch.object(Path, "read_text", new=graph_tamper):
             with self.assertRaisesRegex(CharacterPackageValidationError, "hash differs"):
                 load_character_package(FINN_CALDER_PACKAGE_PATH)
+
+    def test_package_rejects_every_provenance_input_tamper(self):
+        manifest = json.loads(
+            (DEFINITIONS / "finn_calder_character_manifest.json").read_text()
+        )
+        targets = [
+            PROFILE,
+            PERSONA / "source-reference.png",
+            PERSONA / "canonical-voxel.png",
+            FINN_CALDER_PACKAGE_PATH,
+            DEFINITIONS / "finn_calder_runtime_profile.json",
+            DEFINITIONS / "finn_calder_pose_cells.json",
+            DEFINITIONS / "finn_calder_animation_graph.json",
+            DEFINITIONS / "finn_calder_animation_matrix.json",
+            DEFINITIONS / "finn_calder_extraction_audit.json",
+            DEFINITIONS / "finn_calder_pixel_graphs.json",
+            *(
+                PERSONA / "canonical-worksheets" / filename
+                for filename in manifest["hashes"]["worksheet_sha256"]
+            ),
+        ]
+        original_read_bytes = Path.read_bytes
+        for target in targets:
+            resolved = target.resolve()
+
+            def controlled_read_bytes(path, *args, **kwargs):
+                payload = original_read_bytes(path, *args, **kwargs)
+                return payload + b"tampered" if path.resolve() == resolved else payload
+
+            with self.subTest(target=target.name):
+                with patch.object(Path, "read_bytes", new=controlled_read_bytes):
+                    with self.assertRaisesRegex(
+                        CharacterPackageValidationError, "hash differs|worksheet"
+                    ):
+                        load_character_package(FINN_CALDER_PACKAGE_PATH)
 
     def test_live_cells_change_for_motion_expression_speech_and_announcement(self):
         source = self.make_source()

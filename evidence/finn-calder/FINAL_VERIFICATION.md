@@ -26,11 +26,10 @@ passes on the final diff.
   `64a602fe7dc96684738a4e7d7728465eefde2d6071b11d555cf05b1e05b12c37`.
 - Canonical SHA-256:
   `efac69875fe2b0c38dafe20d3669af2ed97da98b320dc703f41a1c2f9ea9f385`.
-- Package load recomputes graph hashes, node counts, bounds, generated-file
-  hashes, generation-profile hash, source hashes, and all nine accepted
-  worksheet hashes. Dedicated tampering tests reject source-reference,
-  accepted-worksheet, extraction-audit, pose-library, manifest, and pixel-graph
-  changes.
+- Package load recomputes graph hashes, node counts, bounds, character-package,
+  runtime-profile and generated-file hashes, generation-profile and source
+  hashes, and all nine accepted worksheet hashes. The exhaustive tampering
+  matrix rejects changes to every one of those inputs.
 
 ## Visual inspection
 
@@ -69,8 +68,9 @@ passes on the final diff.
 
 - Deterministic generator: passed (`Finn Calder generated assets are
   deterministic`).
-- Focused direct-cell and Finn suite: 20 passed, 0 failed, 0 skipped.
-- Full Python suite: 181 passed, 0 failed, 0 skipped in 183.154 seconds.
+- Focused direct-cell and Finn suite: 22 passed, 0 failed, 0 skipped in
+  25.128 seconds.
+- Full Python suite: 183 passed, 0 failed, 0 skipped in 119.669 seconds.
 - Python production-scope validation: 50 files scanned, 0 violations.
 - Strict animation-quality validation: 32/32 scenarios passed, 0 issues.
 - `python3 -m py_compile` passed for all changed Python modules and tests.
@@ -78,7 +78,7 @@ passes on the final diff.
 
 ## Live REST/WebSocket smoke
 
-The production app served on `127.0.0.1:8894` during verification.
+The production app served on `127.0.0.1:8899` during verification.
 
 - HTTP 200: character registry, Finn state, Finn poses, and Finn static pixel
   graph library.
@@ -86,5 +86,5 @@ The production app served on `127.0.0.1:8894` during verification.
   `encoding=transparent_colored_pixel_nodes`.
 - Live named action: `community_sign_off` resolved to pose
   `community_sign_off` for character `finn-calder-v1`.
-- WebSocket bootstrap: `INIT:24.0:5:160:100:0:0:0.000`.
-- First WebSocket payload: binary frame, 9,822 bytes.
+- WebSocket bootstrap: `INIT:24.0:5:240:135:0:0:0.000`.
+- First WebSocket payload: binary frame, 9,252 bytes.
