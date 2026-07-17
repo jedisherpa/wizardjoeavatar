@@ -1,6 +1,6 @@
 # Character Director Final Handoff
 
-Date: 2026-07-15
+Date: 2026-07-17
 
 ## 1. Executive Summary
 
@@ -13,15 +13,15 @@ Prism connector.
 
 The implementation and short production gates are strong. The overall goal is
 **partially achieved**, not production-complete, because real permission facts,
-connected Prism recordings, human acting/animation review, multi-hour soaks,
-and independent clean-user reproduction remain.
+complete audiovisual acting review, the eight-hour and 24-hour soak gates, and
+independent-user package/rollback reproduction remain.
 
 ## 2. Repositories, Branches, Commits, And Worktrees
 
 | Surface | Branch | Implementation commit | Worktree |
 | --- | --- | --- | --- |
-| Python/Companion | `codex/character-director` | `84b95fb8aaa4040b9c967c0ef64367ec9139cd26` | `/Users/paul/Documents/WizardJoeAsci/worktrees/wizardjoe-character-director` |
-| Prism | `codex/character-director-prism` | `0ead02c630fd3e9d9a69d008b19829e82846a7c5` | `/Users/paul/Documents/WizardJoeAsci/worktrees/prism-character-director` |
+| Python/Companion | `codex/character-director` | `cee9de821abe46ec8a91c8860426d85247a0353c` | `/Users/paul/Documents/WizardJoeAsci/worktrees/wizardjoe-character-director` |
+| Prism | `codex/character-director-prism` | `287a0ca` | `/Users/paul/Documents/WizardJoeAsci/worktrees/prism-character-director` |
 
 The implementation commits were clean. This handoff is a follow-up
 documentation receipt. The original dirty source trees were preserved.
@@ -134,7 +134,11 @@ The existing connector gained approved-reply custody, exact TTS authorization,
 governed speech registration/revocation, content-free stage advisories,
 permission-world relay, private discovery refresh, bounded responses, and
 main/speech source arbitration. A same-track preference-change bug was fixed to
-sample the active source state and is regression-tested.
+sample the active source state and is regression-tested. The Prism "Open
+Wizard" action now uses a private same-origin redirect derived from the active,
+validated loopback relay instead of assuming port 8765. The redirect strips the
+connector path, query, and fragment, keeps credentials in Rust, and sends
+`no-store` and `no-referrer` headers.
 
 ## 17. Director And Debugging Interface
 
@@ -190,15 +194,24 @@ checks, sidecar build, Tauri build, and live HTTP contract checks.
 ## 22. Timing And Synchronization Measurements
 
 The 120-second concurrent source soak sustained 23.998 FPS and 59.972 Hz
-simulation with 42.086 ms p95 frame spacing. Text/mouth/body share media time;
-cursor and lifecycle equivalence are covered by deterministic tests.
+simulation with 42.086 ms p95 frame spacing. The later strict two-hour run
+sustained 59.986 Hz simulation and a 23.1 FPS final presentation window across
+eight viewers. Text/mouth/body share media time; cursor and lifecycle
+equivalence are covered by deterministic tests.
 
 ## 23. Performance And Memory Measurements
 
-The soak issued 1,033 requests, 922 controls, and 40 Prism signals across four
-normal viewers and one slow viewer. It recorded zero command errors, decode
-errors, sequence regressions, or hub queue drops, with five schedule overruns.
-Two-hour, eight-hour, and 24-hour runs remain.
+The two-hour soak issued 60,821 requests, 54,254 controls, and 2,345 Prism
+signals across seven normal viewers and one slow viewer. It recorded zero
+command, viewer, decode, sequence, or hub queue-drop errors, with 55.538 ms
+request p95, a retained 5,370.707 ms maximum, and 4,779 schedule overruns. RSS
+was not sampled. Eight-hour and 24-hour runs remain. See
+`SOAK_2H_2026-07-17.md`.
+
+A fresh GitHub clone at pushed commit `cee9de8` installed from `uv.lock`, passed
+428 tests, started on isolated port 8876, and emitted a valid 5,709-byte
+ASCILINE frame at 24.0049 FPS with zero queue drops. See
+`CLEAN_CLONE_REPRODUCTION_2026-07-17.md`.
 
 ## 24. Visual-Quality Review
 
@@ -208,6 +221,13 @@ permission-denied staff removal was manually inspected. Live browser layout and
 controls were checked at desktop and mobile sizes, with one valid 1038x720
 desktop screenshot retained. Connected real-time, slow-motion, and
 frame-by-frame acting review remains.
+
+A 25.49-second 1280x720 connected Prism-to-Python screen recording, timing
+receipt, contact sheet, and sanitized cursor transitions are retained under
+`evidence/character-director/connected-e2e-2026-07-17/`. It proves a real
+connected turn and cursor advance, but the recording is silent and does not
+visibly isolate the short mouth-synchronization interval. It is not presented
+as a completed audiovisual acting review.
 
 ## 25. Governance And Permission Review
 
@@ -227,25 +247,29 @@ authenticated performance binding while legacy port 8765 stayed live.
 Bundle:
 `/Users/paul/Library/Caches/Wizard Joe Companion/build-target/release/bundle/macos/Wizard Joe Companion.app`
 
-An independent fresh-clone or clean-user run remains.
+A fresh-clone source run now passes. An independent-user package install and
+rollback run remains.
 
 ## 27. Known Limitations
 
 - No real upstream permission producer.
-- No connected governed Prism/TTS recording.
+- The connected governed Prism/TTS recording is silent and does not isolate the
+  complete short lip-sync interval.
 - No complete free-form direction authoring pipeline.
 - Score edits are component-only.
 - Some speech can use restrained scoreless body behavior.
 - No server-confirmed in-flight model-turn cancellation.
 - No complete connected human animation review or retained mobile screenshot.
-- No multi-hour soak or independent clean-user run.
+- The two-hour soak passes; no RSS, eight-hour, 24-hour, or independent-user
+  package/rollback run is complete.
 
 ## 28. Deferred Work
 
 Connect real permission authority, complete live character-bound score
-publication, finish in-flight turn cancellation, record governed E2E playback,
-conduct professional visual review, run multi-hour package soaks, and execute a
-fresh-clone/clean-user install and rollback drill.
+publication, finish in-flight turn cancellation, record a complete audiovisual
+governed performance, conduct professional visual review, add RSS sampling,
+run the eight-hour and 24-hour package soaks, and execute an independent-user
+install and rollback drill.
 
 ## 29. Rollback Instructions
 
@@ -279,6 +303,8 @@ blockers, commands, counts, and conservative status.
 
 **Partially achieved.** The production architecture, governed connector,
 deterministic contracts, package supervision, automated correctness, and short
-cadence gate are implemented and verified. The goal is not fully achieved until
-the real permission producer, connected recordings, professional visual review,
-multi-hour runs, and independent clean-user reproduction are complete.
+cadence gate are implemented and verified. Fresh-clone source reproduction and
+a limited connected recording are also retained. The goal is not fully
+achieved until the real permission producer, complete audiovisual/professional
+visual review, the remaining long-duration/RSS runs, and independent-user
+package/rollback reproduction are complete.

@@ -23,6 +23,13 @@ This package contains the full Codex implementation specification for a procedur
 - [Wizard Joe Companion verification evidence](companion/VERIFICATION_EVIDENCE.md)
 - [Wizard Joe Companion rollback guide](companion/ROLLBACK.md)
 - [Wizard Joe Companion production readiness](companion/PRODUCTION_READINESS.md)
+- [Character Director final handoff](character-director/FINAL_HANDOFF.md)
+- [Character Director acceptance matrix](character-director/ACCEPTANCE_CRITERIA_MATRIX.md)
+- [Character Director production verification](character-director/PRODUCTION_VERIFICATION.md)
+- [Character Director live E2E receipt](character-director/LIVE_E2E_2026-07-16.md)
+- [Character Director clean-clone reproduction](character-director/CLEAN_CLONE_REPRODUCTION_2026-07-17.md)
+- [Character Director two-hour soak receipt](character-director/SOAK_2H_2026-07-17.md)
+- [Connected Prism performance evidence](../evidence/character-director/connected-e2e-2026-07-17/README.md)
 
 ## Sections
 

@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "capture": "live Prism 8890 to Python 8875",
+  "sampling_note": "The status route exposed the pre-turn and post-turn states; the short intermediate speech lifecycle was collapsed before the polling observer saw it.",
+  "transitions": [
+    {
+      "captured_at_s": 1784278961,
+      "accepted_sequence": 10,
+      "media_epoch": 8,
+      "source_slot": "main",
+      "scheduler_state": "paused",
+      "governed_active": false,
+      "governed_status": "approval_revoked",
+      "revocation_generation": 11,
+      "replay_approval_count": 1,
+      "application": {
+        "active": false,
+        "source_slot": null,
+        "media_time_ms": null,
+        "action": null,
+        "mouth": null
+      }
+    },
+    {
+      "captured_at_s": 1784279059,
+      "accepted_sequence": 11,
+      "media_epoch": 8,
+      "source_slot": "main",
+      "scheduler_state": "paused",
+      "governed_active": false,
+      "governed_status": "approval_revoked",
+      "revocation_generation": 11,
+      "replay_approval_count": 1,
+      "application": {
+        "active": false,
+        "source_slot": null,
+        "media_time_ms": null,
+        "action": null,
+        "mouth": null
+      }
+    }
+  ]
+}

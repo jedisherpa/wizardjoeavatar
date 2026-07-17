@@ -1,0 +1,129 @@
+{
+  "architecture": "asciline_python",
+  "control": {
+    "command_errors": [],
+    "latency_ms_max": 5370.706500000001,
+    "latency_ms_p50": 24.197,
+    "latency_ms_p95": 55.538,
+    "request_count": 60821,
+    "sent_control_count": 54254,
+    "sent_prism_count": 2345
+  },
+  "control_window_actual_seconds": 7200.076,
+  "duration_actual_seconds": 7200.178,
+  "duration_requested_seconds": 7200.0,
+  "failures": [],
+  "final_hub_actual_fps": 21.258,
+  "final_hub_window_fps": 23.1,
+  "final_state": {
+    "airborne": false,
+    "altitude": 0.0,
+    "semantic_cue": "none",
+    "world_position": {
+      "x": 1.7837132087521652,
+      "z": 1.8872497832287893
+    }
+  },
+  "final_tick": 674110,
+  "hub_queue_drops": 0,
+  "initial_hub_actual_fps": 17.631,
+  "initial_hub_window_fps": 10.538,
+  "initial_tick": 242201,
+  "result": "passed",
+  "schedule_overruns": 4779,
+  "schema_version": 1,
+  "simulation_hz": 59.986,
+  "slow_viewer_enabled": true,
+  "url": "http://127.0.0.1:8875",
+  "viewer_count": 8,
+  "viewers": [
+    {
+      "decode_errors": 0,
+      "error": null,
+      "first_sequence": 71458,
+      "frames": 167614,
+      "last_frame_sha256": "8aff398d4253b516469c760a087fd0e43e7c0b7ca36753cd0dacd7d648e7907c",
+      "last_sequence": 239071,
+      "sequence_regressions": 0,
+      "slow": false,
+      "viewer_id": 0
+    },
+    {
+      "decode_errors": 0,
+      "error": null,
+      "first_sequence": 71458,
+      "frames": 167614,
+      "last_frame_sha256": "8aff398d4253b516469c760a087fd0e43e7c0b7ca36753cd0dacd7d648e7907c",
+      "last_sequence": 239071,
+      "sequence_regressions": 0,
+      "slow": false,
+      "viewer_id": 1
+    },
+    {
+      "decode_errors": 0,
+      "error": null,
+      "first_sequence": 71458,
+      "frames": 167614,
+      "last_frame_sha256": "8aff398d4253b516469c760a087fd0e43e7c0b7ca36753cd0dacd7d648e7907c",
+      "last_sequence": 239071,
+      "sequence_regressions": 0,
+      "slow": false,
+      "viewer_id": 2
+    },
+    {
+      "decode_errors": 0,
+      "error": null,
+      "first_sequence": 71458,
+      "frames": 167614,
+      "last_frame_sha256": "8aff398d4253b516469c760a087fd0e43e7c0b7ca36753cd0dacd7d648e7907c",
+      "last_sequence": 239071,
+      "sequence_regressions": 0,
+      "slow": false,
+      "viewer_id": 3
+    },
+    {
+      "decode_errors": 0,
+      "error": null,
+      "first_sequence": 71458,
+      "frames": 167614,
+      "last_frame_sha256": "8aff398d4253b516469c760a087fd0e43e7c0b7ca36753cd0dacd7d648e7907c",
+      "last_sequence": 239071,
+      "sequence_regressions": 0,
+      "slow": false,
+      "viewer_id": 4
+    },
+    {
+      "decode_errors": 0,
+      "error": null,
+      "first_sequence": 71458,
+      "frames": 167614,
+      "last_frame_sha256": "8aff398d4253b516469c760a087fd0e43e7c0b7ca36753cd0dacd7d648e7907c",
+      "last_sequence": 239071,
+      "sequence_regressions": 0,
+      "slow": false,
+      "viewer_id": 5
+    },
+    {
+      "decode_errors": 0,
+      "error": null,
+      "first_sequence": 71458,
+      "frames": 167614,
+      "last_frame_sha256": "8aff398d4253b516469c760a087fd0e43e7c0b7ca36753cd0dacd7d648e7907c",
+      "last_sequence": 239071,
+      "sequence_regressions": 0,
+      "slow": false,
+      "viewer_id": 6
+    },
+    {
+      "decode_errors": 0,
+      "error": null,
+      "first_sequence": 71459,
+      "frames": 29627,
+      "last_frame_sha256": "53ac3fa7784a2d0f6963ed87704e5ec3ea269a40b6853ab59b0bbdc682b064e9",
+      "last_sequence": 101085,
+      "sequence_regressions": 0,
+      "slow": true,
+      "viewer_id": 7
+    }
+  ]
+}

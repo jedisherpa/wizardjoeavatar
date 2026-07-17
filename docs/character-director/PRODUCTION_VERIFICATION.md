@@ -1,6 +1,6 @@
 # Character Director Production Verification
 
-Date: 2026-07-15
+Date: 2026-07-17
 
 Python candidate: `/Users/paul/Documents/WizardJoeAsci/worktrees/wizardjoe-character-director`
 
@@ -13,17 +13,20 @@ Director implementation passes its complete Python suite, Companion contract
 and supervisor suites, Prism media tests, Prism build, strict generated-frame
 quality gate, and a concurrent authenticated 120-second cadence soak. The
 packaged Companion supervisor has also demonstrated dynamic-port discovery,
-authenticated health and binding, and graceful child shutdown.
+authenticated health and binding, and graceful child shutdown. A fresh GitHub
+clone now installs, passes all 428 tests, starts independently, and emits live
+ASCILINE frames. A limited real Prism-to-Python screen recording is retained,
+and a strict two-hour source soak now passes.
 
 Production promotion remains blocked by four external acceptance gaps:
 
 1. Prism does not yet produce permission-world facts from a real authoritative
    grant/deny/revoke store.
-2. No retained recording demonstrates a real governed Prism reply and TTS
-   driving synchronized text, mouth, body, interruption, and main-media restore.
+2. The retained connected recording is silent and does not visibly demonstrate
+   the complete short lip-sync interval, interruption, or reconnect sequence.
 3. Browser-driven and human frame-by-frame animation review is incomplete.
-4. Multi-hour soaks and a final clean immutable package reproduction are still
-   required.
+4. Eight-hour/24-hour and RSS growth gates plus an independent-user package
+   install/rollback are still required.
 
 This report distinguishes source verification from human/product acceptance.
 No green test is presented as proof of acting quality or external authority.
@@ -32,8 +35,8 @@ No green test is presented as proof of acting quality or external authority.
 
 | Repository | Branch | Base HEAD | State at verification |
 | --- | --- | --- | --- |
-| Python/Companion | `codex/character-director` | `84b95fb8aaa4040b9c967c0ef64367ec9139cd26` | Clean implementation commit used for the final package build |
-| Prism | `codex/character-director-prism` | `0ead02c630fd3e9d9a69d008b19829e82846a7c5` | Clean governed connector implementation commit |
+| Python/Companion | `codex/character-director` | `cee9de821abe46ec8a91c8860426d85247a0353c` | Pushed Character Director implementation used for fresh-clone reproduction |
+| Prism | `codex/character-director-prism` | `287a0ca` | Pushed governed connector plus active-runtime visualizer redirect |
 
 The original dirty source trees and the legacy Python listener on
 `127.0.0.1:8765` were not replaced.
@@ -56,6 +59,7 @@ The original dirty source trees and the legacy Python listener on
 | Prism release | locked release build for `prism-dodeca-cli` | **Pass** |
 | Prism repository | `git fsck --full --no-progress` | **Pass** after restoring an iCloud-offloaded packfile |
 | Whitespace/format | `cargo fmt --all --check` and `git diff --check` in Prism | **Pass** |
+| Fresh GitHub clone | `uv sync --frozen`, full tests, isolated server and WebSocket frame | **Pass:** 428/428, 24.0049 FPS, zero queue drops |
 
 The Companion Rust build initially stalled because macOS had offloaded its
 rebuildable `target` cache. A clean local rebuild reached the project but ran
@@ -90,6 +94,22 @@ Evidence:
 
 SHA-256:
 `6c2cf37e012eaa10ae7b54b09ffc35d2df3fc1d2ea1380e6924b3cdacc8df059`
+
+The later strict two-hour run used seven normal viewers and one deliberately
+slow viewer. It completed 7,200.178 seconds at 59.986 Hz simulation and a 23.1
+FPS final presentation window. Across 60,821 requests, 54,254 controls, and
+2,345 Prism signals it recorded no command, viewer, decode, sequence, or queue
+drop errors. Request latency was 24.197 ms p50 and 55.538 ms p95. The retained
+5,370.707 ms maximum and 4,779 schedule overruns require comparison in the
+longer gates. The harness did not sample RSS.
+
+Evidence:
+`evidence/character-director/soak-2h-2026-07-17.json`
+
+SHA-256:
+`7f57f50ed191a5b182f00b569d3db0909e7a6011b3c615415afe21e1a3e37b82`
+
+See `SOAK_2H_2026-07-17.md` for the exact command and conservative finding.
 
 The performance correction moved exact retained-replay serialization and
 hashing off the per-frame diagnostics path. Explicit diagnostics and replay
@@ -127,7 +147,10 @@ Bundle:
 `/Users/paul/Library/Caches/Wizard Joe Companion/build-target/release/bundle/macos/Wizard Joe Companion.app`
 
 This proves the committed package and coexistence path in the current account.
-It does not replace an independent fresh-clone or clean-user reproduction.
+A fresh source clone has now independently reproduced install, tests, startup,
+and streaming under the current account. It does not replace a clean-user or
+clean-machine package installation and rollback drill. See
+`CLEAN_CLONE_REPRODUCTION_2026-07-17.md`.
 
 ## Visual Evidence
 
@@ -152,9 +175,22 @@ machine-readable manifest are retained under
 `evidence/character-director/browser-qa/`. The 390x844 mobile layout was checked
 interactively, but no valid mobile screenshot was retained. This is layout and
 control evidence, not a connected audiovisual or professional acting review.
+The later `evidence/character-director/connected-e2e-2026-07-17/` package adds a
+25.49-second 1280x720 live Prism-to-Python capture, exact frame timing, a
+contact sheet, and sanitized cursor transitions. It proves a real connected
+turn and live rendering, but it is silent and does not visibly isolate the
+short lip-sync lifecycle, so the professional audiovisual gate remains open.
 Generated evidence is not a substitute for real-time, slow-motion, and
 frame-by-frame human review of gaze, blink rhythm, hand arcs, foot contact,
 starts/stops/turns, stillness, and reduced motion.
+
+The same live pass found that Prism's "Open Wizard" link was hardcoded to the
+legacy port even when the connector was bound to an isolated runtime. Prism now
+opens `/api/connectors/wizard/visualizer`, whose Rust handler derives a
+credential-free root URL from the active validated loopback relay and returns a
+temporary `no-store`, `no-referrer` redirect. Browser and HTTP checks confirmed
+that the isolated connector opened `http://127.0.0.1:8875/` while the legacy
+8765 process remained untouched.
 
 ## Security And Governance
 
@@ -181,9 +217,12 @@ starts/stops/turns, stillness, and reduced motion.
 4. A real permission authority producer is absent.
 5. Server-confirmed cancellation of an in-flight model turn is separate from
    the implemented stale-performance revocation and remains incomplete.
-6. Real connected recordings and human animation review are absent.
-7. Two-hour, eight-hour, and 24-hour soak gates remain outstanding.
-8. Independent clean-user reproduction and rollback remain.
+6. A limited connected recording exists; complete audiovisual and human
+   animation review are absent.
+7. The two-hour soak passes; RSS sampling plus eight-hour and 24-hour gates
+   remain outstanding.
+8. Fresh-clone source reproduction passes; independent-user package install
+   and rollback remain.
 
 ## Promotion Decision
 
