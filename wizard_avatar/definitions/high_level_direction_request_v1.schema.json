@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://wizardjoe.local/schemas/high_level_direction_request_v1.schema.json",
+  "title": "HighLevelDirectionRequestV1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "direction_id",
+    "direction_text",
+    "context_sha256",
+    "intent",
+    "duration_ms",
+    "media_id",
+    "media_sha256",
+    "seed"
+  ],
+  "properties": {
+    "schema_version": {"const": 1},
+    "direction_id": {"type": "string", "pattern": "^direction:[a-z0-9][a-z0-9._:-]{0,117}$"},
+    "direction_text": {"type": "string", "minLength": 1, "maxLength": 2048},
+    "context_sha256": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+    "intent": {
+      "enum": [
+        "acknowledge", "caution", "celebrate", "characterful_neutral", "clarify",
+        "direct", "empathize", "explain", "greet", "interrupt", "listen",
+        "present", "question", "reassure", "review", "settle", "speak", "transition", "wait"
+      ]
+    },
+    "duration_ms": {"type": "integer", "minimum": 1000, "maximum": 600000},
+    "media_id": {"type": "string", "pattern": "^media:sha256:[0-9a-f]{64}$"},
+    "media_sha256": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+    "seed": {"type": "integer", "minimum": 0, "maximum": 9007199254740991}
+  }
+}

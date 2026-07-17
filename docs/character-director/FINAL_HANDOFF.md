@@ -91,7 +91,7 @@ Prism governed result
 graph, pose-library, runtime-vocabulary, and semantic-map facts. Unsupported and
 diagnostic-only behavior is explicit. Current deterministic hash:
 
-`sha256:31755bf2948213f4c068e9658b287561f5968243b143dae81b2cb3faa0f084f9`
+`sha256:761f5faef38a03a801de21915a18a95469797bd3f7e66b59d51c3060bda71fbe`
 
 Runtime derivation does not read workstation PNGs.
 
@@ -110,10 +110,12 @@ private reasoning.
 
 ## 13. Performance Compiler
 
-The deterministic character-bound compiler maps structured semantic cues to
-manifest-admitted behavior, projects motion/accessibility constraints, rejects
-raw renderer IDs, and records explicit fallback decisions. A complete
-free-form natural-language authoring layer is deferred.
+The governed controlled-language V1 compiler parses the required high- and
+mid-level direction examples into deterministic semantic plans, stage
+trajectories, acting beats, and portable scores. The character-bound compiler
+then selects manifest-admitted behavior, projects motion/accessibility
+constraints, rejects raw renderer IDs, and records explicit fallback
+decisions. Unrestricted natural-language choreography remains deferred.
 
 ## 14. Performance-Score Model
 
@@ -160,6 +162,7 @@ Python modules are:
 - `permission_world.py`
 - `score_runtime.py`
 - `score_edits.py`
+- `direction_compiler.py`
 
 Principal Prism additions are `approved_reply.rs`, `governedSpeech.js`, their
 tests, and extensions to `media_connector.rs`, `voice.rs`, `web.rs`,
@@ -182,7 +185,7 @@ checks, sidecar build, Tauri build, and live HTTP contract checks.
 
 ## 21. Automated Test Results
 
-- Python: 428/428.
+- Python: 436/436 after the direction-compiler checkpoint.
 - Python scope gate: 63 files, zero violations.
 - Companion frontend: 27/27.
 - Companion Rust: 17/17.
@@ -255,7 +258,8 @@ rollback run remains.
 - No real upstream permission producer.
 - The connected governed Prism/TTS recording is silent and does not isolate the
   complete short lip-sync interval.
-- No complete free-form direction authoring pipeline.
+- Controlled-language direction V1 is implemented; unrestricted language and
+  arbitrary choreography remain unsupported.
 - Score edits are component-only.
 - Some speech can use restrained scoreless body behavior.
 - No server-confirmed in-flight model-turn cancellation.

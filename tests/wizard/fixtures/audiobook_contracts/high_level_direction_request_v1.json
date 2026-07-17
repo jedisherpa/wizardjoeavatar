@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "direction_id": "direction:fixture-001",
+  "direction_text": "Wizard Joe enters toward center stage, then speaks.",
+  "context_sha256": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+  "intent": "explain",
+  "duration_ms": 5000,
+  "media_id": "media:sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+  "media_sha256": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+  "seed": 0
+}

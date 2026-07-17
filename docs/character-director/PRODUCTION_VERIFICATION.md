@@ -45,7 +45,7 @@ The original dirty source trees and the legacy Python listener on
 
 | Surface | Command or gate | Result |
 | --- | --- | --- |
-| Python runtime | `python3 -m unittest discover -v` | **Pass:** 428/428 in 246.650 s |
+| Python runtime | `python3 -m unittest discover -v` | **Pass:** 436/436 after the governed direction checkpoint |
 | Capability determinism | focused capability and portability suites | **Pass:** 9/9 |
 | Python boundary | `python3 tools/validate_python_scope.py .` | **Pass:** 63 files, zero violations |
 | Python tools | `python3 -m py_compile` for evidence and soak tools | **Pass** |
@@ -126,7 +126,7 @@ derivation remains successful.
 
 Current deterministic capability-manifest hash:
 
-`sha256:31755bf2948213f4c068e9658b287561f5968243b143dae81b2cb3faa0f084f9`
+`sha256:761f5faef38a03a801de21915a18a95469797bd3f7e66b59d51c3060bda71fbe`
 
 ## Package And Lifecycle
 
@@ -208,8 +208,9 @@ that the isolated connector opened `http://127.0.0.1:8875/` while the legacy
 
 ## Current Limitations
 
-1. Free-form high-level direction is not yet a complete natural-language
-   authoring pipeline; the strongest compiler accepts structured semantic cues.
+1. Controlled-language high-level direction V1 now compiles the required
+   examples through the existing runtime; unrestricted natural language and
+   arbitrary choreography remain unsupported.
 2. `ScoreEditsV1` is a validated component but is not a complete published
    production editing workflow.
 3. Normal governed speech can use restrained scoreless body behavior when no

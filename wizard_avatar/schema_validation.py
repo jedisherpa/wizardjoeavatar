@@ -21,6 +21,7 @@ SCHEMA_FILES = {
     "NarrativeScoreV1": "narrative_score_v1.schema.json",
     "MusicScoreV1": "music_score_v1.schema.json",
     "PerformanceScoreV1": "performance_score_v1.schema.json",
+    "HighLevelDirectionRequestV1": "high_level_direction_request_v1.schema.json",
     "ScoreEditsV1": "score_edits_v1.schema.json",
     "CompiledPerformanceScoreV1": "compiled_performance_score_v1.schema.json",
     "MediaSessionSnapshotV1": "media_session_snapshot_v1.schema.json",
@@ -438,6 +439,14 @@ def _validate_performance(value: Mapping[str, object]) -> None:
     _validate_tracks(value["tracks"], value["media"]["duration_ms"])
 
 
+def _validate_high_level_direction(value: Mapping[str, object]) -> None:
+    _validate_media_hash_binding(
+        value["media_id"],
+        value["media_sha256"],
+        "$.media_id",
+    )
+
+
 def _validate_score_edits(value: Mapping[str, object]) -> None:
     _require_unique(value["operations"], "operation_id", "$.operations")
     for index, operation in enumerate(value["operations"]):
@@ -455,6 +464,20 @@ def _validate_score_edits(value: Mapping[str, object]) -> None:
 
 def _validate_compiled(value: Mapping[str, object]) -> None:
     _validate_tracks(value["tracks"], None)
+    if "media" in value:
+        _validate_media_hash_binding(
+            value["media"]["media_id"],
+            value["media"]["media_sha256"],
+            "$.media.media_id",
+        )
+        for track_index, track in enumerate(value["tracks"]):
+            for cue_index, cue in enumerate(track["cues"]):
+                if cue["end_ms"] > value["media"]["duration_ms"]:
+                    raise _error(
+                        "time_out_of_bounds",
+                        "$.tracks[{}].cues[{}].end_ms".format(track_index, cue_index),
+                        "cue exceeds media duration",
+                    )
     _require_unique(value["checkpoints"], "checkpoint_id", "$.checkpoints")
     _require_unique(value["fallback_records"], "fallback_id", "$.fallback_records")
     times = [checkpoint["media_time_ms"] for checkpoint in value["checkpoints"]]
@@ -490,6 +513,7 @@ SEMANTIC_VALIDATORS = {
     "NarrativeScoreV1": _validate_narrative,
     "MusicScoreV1": _validate_music,
     "PerformanceScoreV1": _validate_performance,
+    "HighLevelDirectionRequestV1": _validate_high_level_direction,
     "ScoreEditsV1": _validate_score_edits,
     "CompiledPerformanceScoreV1": _validate_compiled,
     "MediaSessionSnapshotV1": _validate_snapshot,

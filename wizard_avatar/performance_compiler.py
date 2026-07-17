@@ -16,6 +16,7 @@ from .performance_scheduler import (
     REDUCED_PROHIBITED_CHANNELS,
     REDUCED_PROHIBITED_TRACKS,
     STILL_ALLOWED_CHANNELS,
+    TRACK_DEFAULT_CHANNEL,
 )
 from .transcript_ingest import CaptionCue, TranscriptDocument
 
@@ -765,6 +766,7 @@ def compile_character_bound_performance(
     body = {
         "schema_version": 1,
         "performance_score_sha256": score_sha256,
+        "media": copy.deepcopy(media),
         "character": {
             "character_id": manifest_character["character_id"],
             "package_version": "{}.0.0".format(capability_manifest["schema_version"]),
@@ -786,6 +788,7 @@ def compile_character_bound_performance(
         "schema_version": body["schema_version"],
         "compiled_score_id": body["compiled_score_id"],
         "performance_score_sha256": body["performance_score_sha256"],
+        "media": body["media"],
         "character": body["character"],
         "mapping_policy_sha256": body["mapping_policy_sha256"],
         "runtime_api_version": body["runtime_api_version"],
@@ -1015,6 +1018,11 @@ def _semantic_variants(value: str) -> frozenset[str]:
         "speak": ("speaking", "speech"),
         "greet": ("greeting",),
         "celebration": ("celebrate",),
+        "celebrate_grounded": ("celebrate_front",),
+        "stage_walk": ("walk_front",),
+        "viewer_turn": ("turn_views",),
+        "settle_grounded": ("idle_front",),
+        "point": ("point_front",),
     }
     variants.update(aliases.get(leaf, ()))
     return frozenset(variants)
@@ -1084,6 +1092,9 @@ def _project_capability_channels(
 ) -> Tuple[Tuple[str, ...], Tuple[str, ...]]:
     mapping = _mapping_value(capability.get("mapping"), "capability mapping")
     channels = tuple(sorted(str(item) for item in _sequence_value(mapping.get("channels"), "mapping channels")))
+    locomotion_ids = _sequence_value(mapping.get("locomotion_ids"), "mapping locomotion IDs")
+    if track_kind in {"stage", "locomotion"} and locomotion_ids:
+        channels = tuple(sorted(set(channels) | {TRACK_DEFAULT_CHANNEL[track_kind]}))
     disabled = set(disabled_channels)
     if "body_base" in disabled:
         disabled.add("body")
@@ -1133,6 +1144,8 @@ def _compile_bound_cue(
     }
     if cue.get("phase_ranges"):
         compiled["phase_ranges"] = copy.deepcopy(cue["phase_ranges"])
+    if cue.get("execution"):
+        compiled["execution"] = copy.deepcopy(cue["execution"])
     capability = resolution.capability
     capability_id = _string_value(capability.get("capability_id"), "capability ID")
     mapping = _mapping_value(capability.get("mapping"), "capability mapping")

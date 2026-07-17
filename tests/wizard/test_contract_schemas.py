@@ -202,6 +202,14 @@ class ContractSchemaTests(unittest.TestCase):
     def test_add_cue_edit_accepts_a_complete_strict_cue(self):
         edits = self.fixture("ScoreEditsV1")
         cue = copy.deepcopy(self.fixture("PerformanceScoreV1")["tracks"][0]["cues"][0])
+        cue["execution"] = {
+            "trajectory": {
+                "source_position_milli": [100, 200],
+                "destination_position_milli": [500, 600],
+                "easing_id": "smoothstep_v1",
+            },
+            "facing": "south",
+        }
         edits["operations"] = [
             {
                 "operation_id": "op-add-0001",

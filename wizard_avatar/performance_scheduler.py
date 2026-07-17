@@ -44,6 +44,8 @@ class SchedulerState(str, Enum):
 REDUCED_PROHIBITED_CHANNELS = frozenset(
     {
         "locomotion",
+        "stage",
+        "position",
         "dance",
         "flight",
         "camera",
@@ -53,7 +55,7 @@ REDUCED_PROHIBITED_CHANNELS = frozenset(
         "scene_flash",
     }
 )
-REDUCED_PROHIBITED_TRACKS = frozenset({"locomotion", "dance"})
+REDUCED_PROHIBITED_TRACKS = frozenset({"locomotion", "stage", "dance"})
 STILL_ALLOWED_CHANNELS = frozenset({"speech", "mouth", "face", "eyes", "gaze", "blink"})
 TRACK_DEFAULT_CHANNEL = {
     "narrative_state": "narrative_state",

@@ -50,7 +50,7 @@ class CharacterCapabilityManifestTests(unittest.TestCase):
         )
         self.assertEqual(
             self.manifest["manifest_sha256"],
-            "sha256:31755bf2948213f4c068e9658b287561f5968243b143dae81b2cb3faa0f084f9",
+            "sha256:761f5faef38a03a801de21915a18a95469797bd3f7e66b59d51c3060bda71fbe",
         )
 
     def test_current_character_counts_and_admission_are_truthful(self):

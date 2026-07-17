@@ -9,6 +9,15 @@
     "schema_version": {"const": 1},
     "compiled_score_id": {"type": "string", "pattern": "^compiled:[a-z0-9][a-z0-9._:-]{0,127}$"},
     "performance_score_sha256": {"$ref": "#/$defs/hash"},
+    "media": {
+      "type": "object", "additionalProperties": false,
+      "required": ["media_id", "media_sha256", "duration_ms"],
+      "properties": {
+        "media_id": {"type": "string", "pattern": "^media:sha256:[0-9a-f]{64}$"},
+        "media_sha256": {"$ref": "#/$defs/hash"},
+        "duration_ms": {"$ref": "#/$defs/time"}
+      }
+    },
     "character": {
       "type": "object", "additionalProperties": false,
       "required": ["character_id", "package_version", "package_digest", "pose_library_digest", "graph_digest"],
@@ -39,6 +48,32 @@
       "properties": {"anticipation": {"$ref": "#/$defs/phaseRange"}, "stroke": {"$ref": "#/$defs/phaseRange"}, "hold": {"$ref": "#/$defs/phaseRange"}, "release": {"$ref": "#/$defs/phaseRange"}, "settle": {"$ref": "#/$defs/phaseRange"}},
       "minProperties": 1
     },
+    "positionPair": {
+      "type": "array", "minItems": 2, "maxItems": 2,
+      "items": {"type": "integer", "minimum": 0, "maximum": 1000}
+    },
+    "execution": {
+      "type": "object", "additionalProperties": false,
+      "properties": {
+        "trajectory": {
+          "type": "object", "additionalProperties": false,
+          "required": ["source_position_milli", "destination_position_milli", "easing_id"],
+          "properties": {
+            "source_position_milli": {"$ref": "#/$defs/positionPair"},
+            "destination_position_milli": {"$ref": "#/$defs/positionPair"},
+            "easing_id": {"enum": ["linear_v1", "smoothstep_v1", "ease_in_out_v1"]}
+          }
+        },
+        "world_position_milli": {"$ref": "#/$defs/positionPair"},
+        "facing": {"enum": ["north", "northeast", "east", "southeast", "south", "southwest", "west", "northwest"]},
+        "expression": {"$ref": "#/$defs/id"},
+        "gaze_target": {"$ref": "#/$defs/id"},
+        "mouth_shape": {"$ref": "#/$defs/id"},
+        "speaking": {"type": "boolean"},
+        "phrase_phase_origin_ms": {"$ref": "#/$defs/time"}
+      },
+      "minProperties": 1
+    },
     "confidence": {
       "type": "object", "additionalProperties": false, "required": ["alignment_milli", "evidence_milli", "planner_milli"],
       "properties": {"alignment_milli": {"$ref": "#/$defs/milli"}, "evidence_milli": {"$ref": "#/$defs/milli"}, "planner_milli": {"$ref": "#/$defs/milli"}}
@@ -63,6 +98,7 @@
         "cue_id": {"$ref": "#/$defs/id"}, "start_ms": {"$ref": "#/$defs/time"}, "end_ms": {"$ref": "#/$defs/time"}, "intent": {"$ref": "#/$defs/id"},
         "source_ids": {"type": "array", "uniqueItems": true, "items": {"$ref": "#/$defs/id"}}, "priority": {"type": "integer", "minimum": 0, "maximum": 1000},
         "amplitude_milli": {"$ref": "#/$defs/milli"}, "phase_ranges": {"$ref": "#/$defs/phaseRanges"},
+        "execution": {"$ref": "#/$defs/execution"},
         "capability_requirements": {"type": "array", "uniqueItems": true, "items": {"$ref": "#/$defs/id"}},
         "fallback_intents": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"$ref": "#/$defs/id"}},
         "interrupt_policy": {"enum": ["never", "at_phase_boundary", "after_hold", "immediate"]}, "cooldown_class": {"$ref": "#/$defs/id"},
