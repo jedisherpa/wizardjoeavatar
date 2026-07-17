@@ -1,0 +1,87 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://wizardjoe.local/schemas/voice_alignment_v1.schema.json",
+  "title": "VoiceAlignmentV1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "alignment_id",
+    "approved_content_sha256",
+    "approved_text_length",
+    "media_id",
+    "media_sha256",
+    "speech_id",
+    "voice_id",
+    "duration_ms",
+    "word_spans",
+    "character_spans",
+    "phoneme_spans"
+  ],
+  "properties": {
+    "schema_version": {"const": 1},
+    "alignment_id": {"type": "string", "pattern": "^alignment:[A-Za-z0-9][A-Za-z0-9._:-]{0,117}$"},
+    "approved_content_sha256": {"$ref": "#/$defs/hash"},
+    "approved_text_length": {"$ref": "#/$defs/integer"},
+    "media_id": {"type": "string", "pattern": "^media:[A-Za-z0-9][A-Za-z0-9._:-]{0,121}$"},
+    "media_sha256": {"$ref": "#/$defs/hash"},
+    "speech_id": {"type": "string", "pattern": "^speech:[A-Za-z0-9][A-Za-z0-9._:-]{0,120}$"},
+    "voice_id": {"$ref": "#/$defs/id"},
+    "duration_ms": {"type": "integer", "minimum": 1, "maximum": 9007199254740991},
+    "word_spans": {"type": "array", "items": {"$ref": "#/$defs/text_span"}},
+    "character_spans": {"type": "array", "items": {"$ref": "#/$defs/text_span"}},
+    "phoneme_spans": {"type": "array", "items": {"$ref": "#/$defs/phoneme_span"}}
+  },
+  "allOf": [
+    {
+      "not": {
+        "properties": {
+          "word_spans": {"minItems": 1},
+          "character_spans": {"minItems": 1}
+        },
+        "required": ["word_spans", "character_spans"]
+      }
+    },
+    {
+      "if": {"properties": {"approved_text_length": {"minimum": 1}}},
+      "then": {
+        "oneOf": [
+          {"properties": {"word_spans": {"minItems": 1}, "character_spans": {"maxItems": 0}}},
+          {"properties": {"word_spans": {"maxItems": 0}, "character_spans": {"minItems": 1}}}
+        ]
+      },
+      "else": {
+        "properties": {
+          "word_spans": {"maxItems": 0},
+          "character_spans": {"maxItems": 0}
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{0,127}$"},
+    "hash": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+    "integer": {"type": "integer", "minimum": 0, "maximum": 9007199254740991},
+    "text_span": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["start_ms", "end_ms", "start_char", "end_char"],
+      "properties": {
+        "start_ms": {"$ref": "#/$defs/integer"},
+        "end_ms": {"$ref": "#/$defs/integer"},
+        "start_char": {"$ref": "#/$defs/integer"},
+        "end_char": {"$ref": "#/$defs/integer"}
+      }
+    },
+    "phoneme_span": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["start_ms", "end_ms", "phoneme_class"],
+      "properties": {
+        "start_ms": {"$ref": "#/$defs/integer"},
+        "end_ms": {"$ref": "#/$defs/integer"},
+        "phoneme_class": {"enum": ["rest", "mbp", "fv", "th", "dtln", "kg", "chsh", "sz", "r", "a", "e", "i", "o", "u"]}
+      }
+    }
+  }
+}

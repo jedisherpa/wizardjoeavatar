@@ -44,22 +44,28 @@ body {
   position: absolute;
   left: 12px;
   top: 12px;
-  min-width: 220px;
+  width: 250px;
+  max-height: calc(100vh - 96px);
   padding: 10px 12px;
+  overflow: hidden;
   border: 1px solid var(--line);
+  border-radius: 6px;
   background: var(--panel);
   font-size: 12px;
   line-height: 1.45;
+  white-space: pre-line;
 }
 
 .toolbar {
   position: absolute;
-  right: 12px;
-  top: 12px;
+  left: 50%;
+  bottom: 12px;
   display: flex;
   gap: 6px;
+  transform: translateX(-50%);
   padding: 8px;
   border: 1px solid var(--line);
+  border-radius: 6px;
   background: var(--panel);
 }
 
@@ -119,7 +125,7 @@ body {
 .captions {
   position: absolute;
   left: 50%;
-  bottom: 22px;
+  bottom: 72px;
   width: min(760px, calc(100vw - 32px));
   transform: translateX(-50%);
   padding: 9px 14px;
@@ -203,7 +209,7 @@ button[aria-pressed="true"] {
   color: #0e568e;
 }
 
-@media (max-width: 680px) {
+@media (max-width: 820px) {
   .diagnostics {
     display: none;
   }
@@ -211,18 +217,23 @@ button[aria-pressed="true"] {
   .media-status {
     left: 8px;
     right: 8px;
-    top: 108px;
+    top: 8px;
     max-width: none;
     transform: none;
+  }
+
+  .captions {
+    bottom: 104px;
   }
 
   .toolbar {
     left: 8px;
     right: 8px;
-    top: 8px;
+    bottom: 8px;
     display: grid;
     grid-template-columns: repeat(6, 34px);
     justify-content: center;
+    transform: none;
   }
 
   .pose-grid {

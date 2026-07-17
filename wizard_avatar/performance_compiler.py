@@ -1,15 +1,36 @@
 from __future__ import annotations
 
+import copy
 import hashlib
 import json
+import re
 from dataclasses import dataclass
 from typing import Dict, Mapping, Optional, Sequence, Tuple
 
+from .character_capabilities import (
+    CharacterCapabilityManifestValidationError,
+    validate_character_capability_manifest,
+)
+from .performance_context import PerformanceContextV1
+from .performance_scheduler import (
+    REDUCED_PROHIBITED_CHANNELS,
+    REDUCED_PROHIBITED_TRACKS,
+    STILL_ALLOWED_CHANNELS,
+)
 from .transcript_ingest import CaptionCue, TranscriptDocument
 
 
 NARRATIVE_PIPELINE_VERSION = "deterministic-narrative-baseline-v1"
 PERFORMANCE_ASSEMBLY_VERSION = "deterministic-performance-assembly-v1"
+CHARACTER_BINDING_POLICY_VERSION = "deterministic-character-binding-v1"
+COMPILED_RUNTIME_API_VERSION = 2
+
+_PRIVATE_VALUE_PATTERNS = (
+    re.compile(r"(?i)^bearer\\s"),
+    re.compile(r"(?i)^basic\\s"),
+    re.compile(r"(?i)^(?:sk|xox[baprs]|gh[opusr])[-_]"),
+    re.compile(r"(?i)^-----BEGIN\\s"),
+)
 
 
 class PerformanceCompileError(ValueError):
@@ -79,6 +100,15 @@ class PerformanceSourceSelection:
     aligned_score: Optional[Mapping[str, object]]
     speech_fallback: Optional[SpeechFallbackProfile]
     degraded_reason: Optional[str]
+
+
+@dataclass(frozen=True)
+class _CapabilityResolution:
+    capability: Optional[Mapping[str, object]]
+    selected_intent: str
+    path: Tuple[str, ...]
+    reason_code: Optional[str] = None
+    review_required: bool = False
 
 
 def timing_spans_from_captions(
@@ -521,6 +551,766 @@ def compile_baseline_performance(
     )
 
 
+def compile_character_bound_performance(
+    context: PerformanceContextV1,
+    performance_score: Mapping[str, object],
+    capability_manifest: Mapping[str, object],
+) -> Dict[str, object]:
+    """Bind a portable score to one validated character without runtime guessing."""
+
+    if not isinstance(context, PerformanceContextV1):
+        raise PerformanceCompileError("context_invalid", "context must be PerformanceContextV1")
+    if not isinstance(performance_score, Mapping):
+        raise PerformanceCompileError("score_invalid", "performance score must be an object")
+    if not isinstance(capability_manifest, Mapping):
+        raise PerformanceCompileError("manifest_invalid", "capability manifest must be an object")
+
+    _reject_private_values(performance_score)
+    _reject_private_values(capability_manifest)
+
+    from .schema_validation import SchemaRegistry
+
+    registry = SchemaRegistry()
+    try:
+        registry.validate("PerformanceScoreV1", performance_score)
+        validate_character_capability_manifest(capability_manifest)
+    except CharacterCapabilityManifestValidationError as exc:
+        raise PerformanceCompileError(exc.code, "character capability manifest is invalid") from exc
+    except ValueError as exc:
+        raise PerformanceCompileError(
+            getattr(exc, "code", "score_invalid"),
+            "portable performance score is invalid",
+        ) from exc
+
+    if performance_score.get("status") != "accepted":
+        raise PerformanceCompileError("artifact_not_accepted", "performance score is not accepted")
+
+    score_sha256 = _identity_hash(performance_score)
+    _validate_character_binding(context, performance_score, capability_manifest, score_sha256)
+
+    media = _mapping_value(performance_score.get("media"), "score media")
+    manifest_character = _mapping_value(capability_manifest.get("character"), "manifest character")
+    sources = _mapping_value(capability_manifest.get("sources"), "manifest sources")
+    manifest_sha256 = _string_value(capability_manifest.get("manifest_sha256"), "manifest SHA-256")
+    mapping_policy_identity = {
+        "policy_version": CHARACTER_BINDING_POLICY_VERSION,
+        "context_sha256": context.context_sha256,
+        "wizard_runtime_epoch": context.runtime.wizard_runtime_epoch,
+        "reconciliation_generation": context.runtime.reconciliation_generation,
+        "connector_session_id": context.source.connector_session_id,
+        "accepted_sequence": context.source.accepted_sequence,
+        "media_epoch": context.source.media_epoch,
+        "source_epoch": context.source.source_epoch,
+        "turn_id": context.source.turn_id,
+        "performance_score_id": performance_score["score_id"],
+        "performance_score_revision": performance_score["revision"],
+        "performance_score_sha256": score_sha256,
+        "media_id": media["media_id"],
+        "media_sha256": media["media_sha256"],
+        "media_duration_ms": media["duration_ms"],
+        "character_id": manifest_character["character_id"],
+        "package_sha256": sources["package_sha256"],
+        "manifest_sha256": manifest_sha256,
+        "pose_library_sha256": sources["pose_library_sha256"],
+        "animation_graph_sha256": sources["animation_graph_sha256"],
+        "motion_profile": context.preferences.motion_profile,
+        "disabled_channels": list(context.preferences.disabled_channels),
+        "model_calls": False,
+        "live_io": False,
+    }
+    mapping_policy_sha256 = _identity_hash(mapping_policy_identity)
+
+    capabilities = tuple(
+        _mapping_value(item, "manifest capability")
+        for item in _sequence_value(capability_manifest.get("capabilities"), "manifest capabilities")
+    )
+    poses = tuple(
+        _mapping_value(item, "manifest pose")
+        for item in _sequence_value(capability_manifest.get("poses"), "manifest poses")
+    )
+    capabilities_by_id = {
+        _string_value(item.get("capability_id"), "capability ID"): item
+        for item in capabilities
+    }
+    poses_by_id = {
+        _string_value(item.get("pose_id"), "pose ID"): item
+        for item in poses
+    }
+
+    compiled_tracks = []  # type: list[Dict[str, object]]
+    fallback_records = []  # type: list[Dict[str, object]]
+    for track_value in _sequence_value(performance_score.get("tracks"), "score tracks"):
+        track = _mapping_value(track_value, "score track")
+        track_kind = _string_value(track.get("kind"), "track kind")
+        compiled_cues = []  # type: list[Dict[str, object]]
+        for cue_value in _sequence_value(track.get("cues"), "score cues"):
+            cue = _mapping_value(cue_value, "score cue")
+            resolution = _resolve_capability(
+                cue,
+                capability_manifest,
+                capabilities_by_id,
+                poses_by_id,
+            )
+            if resolution.capability is None:
+                fallback_records.append(
+                    _fallback_record(
+                        cue,
+                        resolution.selected_intent,
+                        None,
+                        resolution.path,
+                        resolution.reason_code or "clear_fallback",
+                        context.character.package_digest,
+                        resolution.review_required,
+                    )
+                )
+                continue
+            resolution = _apply_accessibility_fallback(
+                resolution,
+                context.preferences.motion_profile,
+                capabilities_by_id,
+            )
+            projected_channels, projection_reasons = _project_capability_channels(
+                resolution.capability,
+                track_kind,
+                context.preferences.motion_profile,
+                context.preferences.disabled_channels,
+            )
+
+            if resolution.reason_code is not None:
+                fallback_records.append(
+                    _fallback_record(
+                        cue,
+                        resolution.selected_intent,
+                        resolution.capability,
+                        resolution.path,
+                        resolution.reason_code,
+                        context.character.package_digest,
+                        resolution.review_required,
+                    )
+                )
+            for reason_code in projection_reasons:
+                fallback_records.append(
+                    _fallback_record(
+                        cue,
+                        resolution.selected_intent,
+                        resolution.capability,
+                        _unique_path(resolution.path + ("projection:" + context.preferences.motion_profile,)),
+                        reason_code,
+                        context.character.package_digest,
+                        False,
+                    )
+                )
+
+            if not projected_channels:
+                fallback_records.append(
+                    _fallback_record(
+                        cue,
+                        "clear",
+                        None,
+                        _unique_path(resolution.path + ("clear",)),
+                        "motion_profile_suppressed",
+                        context.character.package_digest,
+                        False,
+                    )
+                )
+                continue
+
+            compiled_cues.append(
+                _compile_bound_cue(
+                    cue,
+                    resolution,
+                    projected_channels,
+                    mapping_policy_sha256,
+                    context,
+                )
+            )
+
+        compiled_tracks.append(
+            {
+                "track_id": track["track_id"],
+                "kind": track_kind,
+                "exclusive": track["exclusive"],
+                "max_active": track["max_active"],
+                "gap_policy": track["gap_policy"],
+                "cues": compiled_cues,
+            }
+        )
+
+    fallback_records.sort(
+        key=lambda item: (
+            int(item["media_time_ms"]),
+            str(item["cue_id"]),
+            str(item["reason_code"]),
+            str(item["selected_mapping_id"]),
+        )
+    )
+    checkpoints = [_time_zero_checkpoint(compiled_tracks)]
+    report_sha256 = _identity_hash(
+        {
+            "policy_sha256": mapping_policy_sha256,
+            "context_sha256": context.context_sha256,
+            "manifest_sha256": manifest_sha256,
+            "package_sha256": context.character.package_digest,
+            "media_sha256": media["media_sha256"],
+            "performance_score_sha256": score_sha256,
+            "reconciliation_generation": context.runtime.reconciliation_generation,
+            "cue_resolution_hashes": [
+                cue["resolution_hash"]
+                for track in compiled_tracks
+                for cue in track["cues"]  # type: ignore[index]
+            ],
+            "fallback_records": fallback_records,
+        }
+    )
+    body = {
+        "schema_version": 1,
+        "performance_score_sha256": score_sha256,
+        "character": {
+            "character_id": manifest_character["character_id"],
+            "package_version": "{}.0.0".format(capability_manifest["schema_version"]),
+            "package_digest": sources["package_sha256"],
+            "pose_library_digest": sources["pose_library_sha256"],
+            "graph_digest": sources["animation_graph_sha256"],
+        },
+        "mapping_policy_sha256": mapping_policy_sha256,
+        "runtime_api_version": COMPILED_RUNTIME_API_VERSION,
+        "tracks": compiled_tracks,
+        "checkpoints": checkpoints,
+        "fallback_records": fallback_records,
+        "validation": {"decision": "accepted", "report_sha256": report_sha256},
+    }
+    body["compiled_score_id"] = "compiled:{}".format(
+        _identity_hash(body).split(":", 1)[1][:24]
+    )
+    ordered = {
+        "schema_version": body["schema_version"],
+        "compiled_score_id": body["compiled_score_id"],
+        "performance_score_sha256": body["performance_score_sha256"],
+        "character": body["character"],
+        "mapping_policy_sha256": body["mapping_policy_sha256"],
+        "runtime_api_version": body["runtime_api_version"],
+        "tracks": body["tracks"],
+        "checkpoints": body["checkpoints"],
+        "fallback_records": body["fallback_records"],
+        "validation": body["validation"],
+    }
+    try:
+        registry.validate("CompiledPerformanceScoreV1", ordered)
+    except ValueError as exc:
+        raise PerformanceCompileError(
+            getattr(exc, "code", "compiled_score_invalid"),
+            "compiled performance score is invalid",
+        ) from exc
+    return ordered
+
+
+compile_character_bound_score = compile_character_bound_performance
+
+
+def _validate_character_binding(
+    context: PerformanceContextV1,
+    score: Mapping[str, object],
+    manifest: Mapping[str, object],
+    score_sha256: str,
+) -> None:
+    character = _mapping_value(manifest.get("character"), "manifest character")
+    sources = _mapping_value(manifest.get("sources"), "manifest sources")
+    expected = {
+        "character_id": character.get("character_id"),
+        "package_digest": sources.get("package_sha256"),
+        "manifest_digest": manifest.get("manifest_sha256"),
+    }
+    actual = {
+        "character_id": context.character.character_id,
+        "package_digest": context.character.package_digest,
+        "manifest_digest": context.character.manifest_digest,
+    }
+    for field in ("character_id", "package_digest", "manifest_digest"):
+        if actual[field] != expected[field]:
+            raise PerformanceCompileError(
+                "stale_binding",
+                "performance context does not match the selected character manifest",
+            )
+
+    binding = context.evidence.score_binding
+    if binding.score_id is None:
+        raise PerformanceCompileError("score_binding_missing", "context has no portable score binding")
+    if (
+        binding.score_id != score.get("score_id")
+        or binding.score_revision != score.get("revision")
+        or binding.score_sha256 != score_sha256
+    ):
+        raise PerformanceCompileError("stale_binding", "context score binding does not match input score")
+
+
+def _resolve_capability(
+    cue: Mapping[str, object],
+    manifest: Mapping[str, object],
+    capabilities_by_id: Mapping[str, Mapping[str, object]],
+    poses_by_id: Mapping[str, Mapping[str, object]],
+) -> _CapabilityResolution:
+    intent = _string_value(cue.get("intent"), "cue intent")
+    _reject_renderer_intent(intent, capabilities_by_id, poses_by_id)
+    requirements = tuple(
+        _string_value(item, "capability requirement")
+        for item in _sequence_value(cue.get("capability_requirements"), "capability requirements")
+    )
+    fallbacks = tuple(
+        _string_value(item, "fallback intent")
+        for item in _sequence_value(cue.get("fallback_intents"), "fallback intents")
+    )
+    attempted = []  # type: list[str]
+    terminal_reason = "characterful_neutral_fallback"
+    requests = requirements + (intent,) + fallbacks
+    for request_index, requested in enumerate(requests):
+        if requested not in attempted:
+            attempted.append(requested)
+        direct = capabilities_by_id.get(requested)
+        if direct is not None:
+            if direct.get("admission") == "unsupported":
+                declared = _declared_fallback_resolution(
+                    direct,
+                    requested,
+                    tuple(attempted),
+                    capabilities_by_id,
+                )
+                if declared is not None:
+                    return declared
+                terminal_reason = "declared_fallback_unavailable"
+                continue
+            return _CapabilityResolution(
+                direct,
+                intent,
+                _unique_path(tuple(attempted) + (requested,)),
+                None if request_index == 0 else "semantic_fallback",
+            )
+
+        pose_id = requested.removeprefix("pose:")
+        pose = poses_by_id.get(pose_id)
+        if pose is not None:
+            if pose.get("admission") != "graph_admitted":
+                raise PerformanceCompileError(
+                    "pose_not_admitted",
+                    "diagnostic-only pose cannot be selected by the compiler",
+                )
+            pose_capabilities = sorted(
+                (
+                    capability
+                    for capability in capabilities_by_id.values()
+                    if capability.get("admission") != "unsupported"
+                    and pose_id in _mapping_sequence(capability, "mapping", "pose_ids")
+                ),
+                key=lambda item: str(item.get("capability_id")),
+            )
+            if not pose_capabilities:
+                raise PerformanceCompileError(
+                    "pose_capability_unknown",
+                    "admitted pose has no admitted capability mapping",
+                )
+            capability = pose_capabilities[0]
+            capability_id = _string_value(capability.get("capability_id"), "capability ID")
+            return _CapabilityResolution(
+                capability,
+                intent,
+                _unique_path(tuple(attempted) + (capability_id,)),
+                None if request_index == 0 else "semantic_fallback",
+            )
+
+        if requested.startswith(("clip:", "expression:", "mouth:", "ownership:", "unsupported:")):
+            raise PerformanceCompileError("capability_unknown", "requested capability ID is absent")
+
+        matches = _semantic_capability_matches(requested, manifest, capabilities_by_id)
+        if matches:
+            capability = matches[0]
+            capability_id = _string_value(capability.get("capability_id"), "capability ID")
+            return _CapabilityResolution(
+                capability,
+                intent,
+                _unique_path(tuple(attempted) + (capability_id,)),
+                None if request_index == 0 else "semantic_fallback",
+            )
+
+    neutral = _neutral_capability(manifest, capabilities_by_id)
+    if neutral is None:
+        return _CapabilityResolution(
+            None,
+            "clear",
+            _unique_path(tuple(attempted) + ("clear",)),
+            "clear_fallback",
+            True,
+        )
+    neutral_id = _string_value(neutral.get("capability_id"), "neutral capability ID")
+    return _CapabilityResolution(
+        neutral,
+        "characterful_neutral",
+        _unique_path(tuple(attempted) + (neutral_id,)),
+        terminal_reason,
+        True,
+    )
+
+
+def _declared_fallback_resolution(
+    capability: Mapping[str, object],
+    requested: str,
+    attempted: Tuple[str, ...],
+    capabilities_by_id: Mapping[str, Mapping[str, object]],
+) -> Optional[_CapabilityResolution]:
+    fallback = _mapping_value(capability.get("fallback"), "capability fallback")
+    fallback_id = fallback.get("capability_id")
+    selected = capabilities_by_id.get(str(fallback_id)) if fallback_id is not None else None
+    if selected is None or selected.get("admission") == "unsupported":
+        return None
+    selected_id = _string_value(selected.get("capability_id"), "fallback capability ID")
+    selected_intent = fallback.get("intent")
+    return _CapabilityResolution(
+        selected,
+        str(selected_intent) if isinstance(selected_intent, str) else "characterful_neutral",
+        _unique_path(attempted + (requested, selected_id)),
+        str(fallback.get("reason_code") or "capability_not_admitted"),
+        True,
+    )
+
+
+def _semantic_capability_matches(
+    requested: str,
+    manifest: Mapping[str, object],
+    capabilities_by_id: Mapping[str, Mapping[str, object]],
+) -> Tuple[Mapping[str, object], ...]:
+    variants = _semantic_variants(requested)
+    if "characterful_neutral" in variants or "still" in variants or "clear" in variants:
+        neutral = _neutral_capability(manifest, capabilities_by_id)
+        return () if neutral is None else (neutral,)
+    matches = []  # type: list[Mapping[str, object]]
+    for capability in capabilities_by_id.values():
+        if capability.get("admission") == "unsupported":
+            continue
+        mapping = _mapping_value(capability.get("mapping"), "capability mapping")
+        searchable = {
+            str(capability.get("semantic_meaning", "")),
+            str(capability.get("capability_id", "")).split(":", 1)[-1],
+        }
+        for field in (
+            "action_ids",
+            "expression_ids",
+            "mouth_ids",
+            "gaze_ids",
+            "locomotion_ids",
+            "flight_ids",
+            "effect_ids",
+            "prop_ids",
+        ):
+            searchable.update(str(item) for item in _sequence_value(mapping.get(field), field))
+        if variants.intersection(searchable):
+            matches.append(capability)
+    return tuple(sorted(matches, key=lambda item: str(item.get("capability_id"))))
+
+
+def _semantic_variants(value: str) -> frozenset[str]:
+    leaf = value.rsplit(".", 1)[-1].rsplit(":", 1)[-1]
+    variants = {value, leaf}
+    aliases = {
+        "explain": ("explaining", "speech"),
+        "explain_light": ("explain", "explaining", "speech"),
+        "explain_broad": ("explain", "explaining", "speech"),
+        "speak": ("speaking", "speech"),
+        "greet": ("greeting",),
+        "celebration": ("celebrate",),
+    }
+    variants.update(aliases.get(leaf, ()))
+    return frozenset(variants)
+
+
+def _neutral_capability(
+    manifest: Mapping[str, object],
+    capabilities_by_id: Mapping[str, Mapping[str, object]],
+) -> Optional[Mapping[str, object]]:
+    character = _mapping_value(manifest.get("character"), "manifest character")
+    default_pose = character.get("default_pose_id")
+    candidates = sorted(
+        (
+            capability
+            for capability in capabilities_by_id.values()
+            if capability.get("admission") != "unsupported"
+            and default_pose in _mapping_sequence(capability, "mapping", "pose_ids")
+        ),
+        key=lambda item: str(item.get("capability_id")),
+    )
+    if candidates:
+        return candidates[0]
+    for capability_id in ("clip:idle_front", "expression:neutral", "mouth:closed"):
+        capability = capabilities_by_id.get(capability_id)
+        if capability is not None and capability.get("admission") != "unsupported":
+            return capability
+    return None
+
+
+def _apply_accessibility_fallback(
+    resolution: _CapabilityResolution,
+    motion_profile: str,
+    capabilities_by_id: Mapping[str, Mapping[str, object]],
+) -> _CapabilityResolution:
+    accessibility = _mapping_value(resolution.capability.get("accessibility"), "capability accessibility")
+    behavior = accessibility.get(motion_profile)
+    if behavior in {"admitted", "admitted_by_scheduler_projection"}:
+        return resolution
+    if behavior in {"fallback_characterful_neutral", "unsupported"}:
+        fallback = _mapping_value(resolution.capability.get("fallback"), "capability fallback")
+        fallback_id = fallback.get("capability_id")
+        selected = capabilities_by_id.get(str(fallback_id)) if fallback_id is not None else None
+        if selected is None or selected.get("admission") == "unsupported":
+            raise PerformanceCompileError(
+                "motion_profile_unsupported",
+                "capability has no admitted accessibility fallback",
+            )
+        selected_id = _string_value(selected.get("capability_id"), "fallback capability ID")
+        return _CapabilityResolution(
+            selected,
+            str(fallback.get("intent") or "characterful_neutral"),
+            _unique_path(resolution.path + (selected_id,)),
+            "motion_profile_fallback",
+            resolution.review_required,
+        )
+    raise PerformanceCompileError(
+        "motion_profile_unsupported",
+        "capability declares an unknown accessibility behavior",
+    )
+
+
+def _project_capability_channels(
+    capability: Mapping[str, object],
+    track_kind: str,
+    motion_profile: str,
+    disabled_channels: Sequence[str],
+) -> Tuple[Tuple[str, ...], Tuple[str, ...]]:
+    mapping = _mapping_value(capability.get("mapping"), "capability mapping")
+    channels = tuple(sorted(str(item) for item in _sequence_value(mapping.get("channels"), "mapping channels")))
+    disabled = set(disabled_channels)
+    if "body_base" in disabled:
+        disabled.add("body")
+    if "body" in disabled:
+        disabled.add("body_base")
+    projected = tuple(channel for channel in channels if channel not in disabled)
+    reasons = []  # type: list[str]
+    if len(projected) != len(channels):
+        reasons.append("channel_disabled")
+    before_motion = projected
+    if motion_profile == "reduced":
+        projected = tuple(channel for channel in projected if channel not in REDUCED_PROHIBITED_CHANNELS)
+        if track_kind in REDUCED_PROHIBITED_TRACKS:
+            projected = ()
+    elif motion_profile == "still":
+        projected = tuple(channel for channel in projected if channel in STILL_ALLOWED_CHANNELS)
+    if projected != before_motion:
+        reasons.append("motion_profile_projection")
+    return projected, tuple(reasons)
+
+
+def _compile_bound_cue(
+    cue: Mapping[str, object],
+    resolution: _CapabilityResolution,
+    projected_channels: Sequence[str],
+    mapping_policy_sha256: str,
+    context: PerformanceContextV1,
+) -> Dict[str, object]:
+    compiled = {
+        key: copy.deepcopy(cue[key])
+        for key in (
+            "cue_id",
+            "start_ms",
+            "end_ms",
+            "intent",
+            "source_ids",
+            "priority",
+            "amplitude_milli",
+            "capability_requirements",
+            "fallback_intents",
+            "interrupt_policy",
+            "cooldown_class",
+            "motif_id",
+            "confidence",
+            "manual",
+        )
+    }
+    if cue.get("phase_ranges"):
+        compiled["phase_ranges"] = copy.deepcopy(cue["phase_ranges"])
+    capability = resolution.capability
+    capability_id = _string_value(capability.get("capability_id"), "capability ID")
+    mapping = _mapping_value(capability.get("mapping"), "capability mapping")
+    clip_ids = _sequence_value(mapping.get("clip_ids"), "mapping clip IDs")
+    node_ids = _sequence_value(mapping.get("node_ids"), "mapping node IDs")
+    pose_ids = _sequence_value(mapping.get("pose_ids"), "mapping pose IDs")
+    timing = _mapping_value(capability.get("timing"), "capability timing")
+    transitions = _mapping_value(capability.get("transitions"), "capability transitions")
+    budget = _mapping_value(capability.get("budget"), "capability budget")
+    compiled.update(
+        {
+            "mapping_id": capability_id,
+            "clip_id": str(clip_ids[0]) if clip_ids else None,
+            "node_id": str(node_ids[0]) if node_ids else None,
+            "phase_marker_map": _phase_marker_map(transitions),
+            "owned_channels": sorted(set(projected_channels)),
+            "resolved_fallback_path": list(_unique_path(resolution.path)),
+            "preload_asset_ids": (
+                sorted({str(item) for item in tuple(clip_ids) + tuple(pose_ids)})
+                if budget.get("preload_required") is True
+                else []
+            ),
+        }
+    )
+    compiled["resolution_hash"] = _identity_hash(
+        {
+            "cue": compiled,
+            "mapping_policy_sha256": mapping_policy_sha256,
+            "context_sha256": context.context_sha256,
+            "reconciliation_generation": context.runtime.reconciliation_generation,
+            "capability_timing": timing,
+            "capability_transitions": transitions,
+        }
+    )
+    return compiled
+
+
+def _phase_marker_map(transitions: Mapping[str, object]) -> Dict[str, Optional[str]]:
+    entry = _sequence_value(transitions.get("entry_markers"), "entry markers")
+    commit = _sequence_value(transitions.get("commit_markers"), "commit markers")
+    recovery = _sequence_value(transitions.get("recovery_markers"), "recovery markers")
+    exit_markers = _sequence_value(transitions.get("exit_markers"), "exit markers")
+    return {
+        "anticipation": str(entry[0]) if entry else None,
+        "stroke": str(commit[0]) if commit else None,
+        "hold": None,
+        "release": str(recovery[0]) if recovery else (str(exit_markers[0]) if exit_markers else None),
+        "settle": str(exit_markers[0]) if exit_markers else None,
+    }
+
+
+def _fallback_record(
+    cue: Mapping[str, object],
+    selected_intent: str,
+    capability: Optional[Mapping[str, object]],
+    path: Sequence[str],
+    reason_code: str,
+    package_digest: str,
+    review_required: bool,
+) -> Dict[str, object]:
+    capability_id = (
+        _string_value(capability.get("capability_id"), "capability ID")
+        if capability is not None
+        else None
+    )
+    identity = {
+        "cue_id": cue["cue_id"],
+        "requested_intent": cue["intent"],
+        "selected_intent": selected_intent,
+        "selected_mapping_id": capability_id,
+        "fallback_path": list(_unique_path(tuple(str(item) for item in path))),
+        "reason_code": reason_code,
+        "package_digest": package_digest,
+        "media_time_ms": cue["start_ms"],
+        "severity": "warning" if review_required else "info",
+        "review_required": review_required,
+    }
+    return {
+        "fallback_id": "fallback:{}".format(_identity_hash(identity).split(":", 1)[1][:24]),
+        **identity,
+    }
+
+
+def _time_zero_checkpoint(tracks: Sequence[Mapping[str, object]]) -> Dict[str, object]:
+    active = []  # type: list[Tuple[str, str, str]]
+    for track in tracks:
+        track_kind = str(track["kind"])
+        for cue_value in track["cues"]:  # type: ignore[index]
+            cue = _mapping_value(cue_value, "compiled cue")
+            if int(cue["start_ms"]) <= 0 < int(cue["end_ms"]):
+                active.append((str(cue["cue_id"]), track_kind, str(cue["intent"])))
+
+    def intent_for(kind: str) -> Optional[str]:
+        return next((intent for _cue_id, track_kind, intent in active if track_kind == kind), None)
+
+    return {
+        "checkpoint_id": "checkpoint:time-zero",
+        "media_time_ms": 0,
+        "reason": "time_zero",
+        "state": {
+            "active_cue_ids": sorted(cue_id for cue_id, _kind, _intent in active),
+            "chapter_id": None,
+            "scene_id": None,
+            "setup_id": None,
+            "stage_intent": intent_for("stage"),
+            "body_intent": intent_for("body_base"),
+            "face_intent": intent_for("face"),
+            "gaze_intent": intent_for("gaze"),
+            "speech_intent": intent_for("speech"),
+        },
+    }
+
+
+def _mapping_sequence(value: Mapping[str, object], parent: str, field: str) -> Tuple[object, ...]:
+    mapping = _mapping_value(value.get(parent), parent)
+    return _sequence_value(mapping.get(field), field)
+
+
+def _mapping_value(value: object, name: str) -> Mapping[str, object]:
+    if not isinstance(value, Mapping):
+        raise PerformanceCompileError("invalid_type", "{} must be an object".format(name))
+    return value
+
+
+def _sequence_value(value: object, name: str) -> Tuple[object, ...]:
+    if not isinstance(value, (list, tuple)):
+        raise PerformanceCompileError("invalid_type", "{} must be an array".format(name))
+    return tuple(value)
+
+
+def _string_value(value: object, name: str) -> str:
+    if not isinstance(value, str) or not value:
+        raise PerformanceCompileError("invalid_type", "{} must be a non-empty string".format(name))
+    return value
+
+
+def _unique_path(path: Sequence[str]) -> Tuple[str, ...]:
+    seen = set()
+    return tuple(item for item in path if item and not (item in seen or seen.add(item)))
+
+
+def _reject_renderer_intent(
+    intent: str,
+    capabilities_by_id: Mapping[str, Mapping[str, object]],
+    poses_by_id: Mapping[str, Mapping[str, object]],
+) -> None:
+    raw_clip_ids = {
+        str(clip_id)
+        for capability in capabilities_by_id.values()
+        for clip_id in _mapping_sequence(capability, "mapping", "clip_ids")
+    }
+    if (
+        intent.startswith(("pose:", "clip:"))
+        or intent in poses_by_id
+        or intent in raw_clip_ids
+    ):
+        raise PerformanceCompileError(
+            "raw_renderer_intent",
+            "semantic intent cannot contain a renderer pose or clip identifier",
+        )
+
+
+def _reject_private_values(value: object) -> None:
+    if isinstance(value, Mapping):
+        for item in value.values():
+            _reject_private_values(item)
+        return
+    if isinstance(value, (list, tuple)):
+        for item in value:
+            _reject_private_values(item)
+        return
+    if isinstance(value, str) and any(pattern.search(value) for pattern in _PRIVATE_VALUE_PATTERNS):
+        raise PerformanceCompileError(
+            "private_content",
+            "compiler input contains a forbidden private value",
+        )
+
+
 def canonical_artifact_bytes(value: Mapping[str, object]) -> bytes:
     """Serialize baseline artifacts deterministically for publication/tests."""
 
@@ -735,6 +1525,7 @@ def _ordered_performance_score(value: Mapping[str, object]) -> Dict[str, object]
 
 __all__ = [
     "BaselineCompilation",
+    "CHARACTER_BINDING_POLICY_VERSION",
     "NARRATIVE_PIPELINE_VERSION",
     "NarrativeTimingSpan",
     "PERFORMANCE_ASSEMBLY_VERSION",
@@ -746,6 +1537,8 @@ __all__ = [
     "build_speech_fallback_profile",
     "canonical_artifact_bytes",
     "compile_baseline_performance",
+    "compile_character_bound_performance",
+    "compile_character_bound_score",
     "compile_narrative_baseline",
     "evaluate_speech_fallback",
     "select_performance_source",

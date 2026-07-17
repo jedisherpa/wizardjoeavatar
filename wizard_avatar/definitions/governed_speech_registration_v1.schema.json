@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://wizardjoe.local/schemas/governed_speech_registration_v1.schema.json",
+  "title": "GovernedSpeechRegistrationV1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "approved_text", "approval", "performance_context", "alignment"],
+  "properties": {
+    "schema_version": {"type": "integer", "const": 1},
+    "approved_text": {"type": "string", "maxLength": 32768},
+    "approval": {
+      "allOf": [
+        {"$ref": "https://wizardjoe.local/schemas/governed_performance_approval_v1.schema.json"},
+        {"type": "object", "properties": {"schema_version": {"type": "integer", "const": 1}}}
+      ]
+    },
+    "performance_context": {
+      "$ref": "https://wizardjoe.local/schemas/performance_context_v1.schema.json"
+    },
+    "alignment": {
+      "allOf": [
+        {"$ref": "https://wizardjoe.local/schemas/voice_alignment_v1.schema.json"},
+        {
+          "type": "object",
+          "properties": {
+            "schema_version": {"type": "integer", "const": 1},
+            "word_spans": {"maxItems": 65536},
+            "character_spans": {"maxItems": 65536},
+            "phoneme_spans": {"maxItems": 65536}
+          }
+        }
+      ]
+    }
+  }
+}

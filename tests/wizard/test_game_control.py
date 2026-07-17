@@ -1,10 +1,15 @@
+import copy
+import json
 import time
 import unittest
 import uuid
+from pathlib import Path
 
 from wizard_avatar.controller import WizardAvatarController
 from wizard_avatar.frame_source import ProceduralWizardFrameSource
+from wizard_avatar.media_session import MediaSessionSnapshotV1
 from wizard_avatar.models import WizardCommand
+from wizard_avatar.performance_application import PerformanceApplication
 
 
 def control_payload(sequence, intent, source_id="test-controller"):
@@ -20,7 +25,77 @@ def control_payload(sequence, intent, source_id="test-controller"):
     }
 
 
+def prism_v2(sequence, now_ms, turn_id, *, stage="reviewing", status="active", ttl_ms=1000):
+    return {
+        "schema_version": 2,
+        "event_id": str(uuid.uuid4()),
+        "source_epoch": "test-prism-v2",
+        "source_sequence": sequence,
+        "emitted_at_ms": now_ms,
+        "ttl_ms": ttl_ms,
+        "kind": "stage",
+        "classification": "visual_advisory_only",
+        "provenance_class": "runtime_lifecycle",
+        "sanitization_version": 1,
+        "turn_id": turn_id,
+        "utterance_id": "utterance-{}".format(turn_id),
+        "payload": {"stage": stage, "status": status},
+    }
+
+
+def live_music_snapshot():
+    fixture = (
+        Path(__file__).parent
+        / "fixtures"
+        / "audiobook_contracts"
+        / "media_session_snapshot_v1.json"
+    )
+    value = json.loads(fixture.read_text(encoding="utf-8"))
+    value["media"].update(
+        {
+            "media_id": "prism-overlap",
+            "media_sha256": None,
+            "kind": "music",
+            "source_slot": "main",
+            "source_kind": "library",
+            "book_id": None,
+            "chapter_id": None,
+            "duration_ms": 60_000,
+        }
+    )
+    value["playback"].update(
+        {"state": "playing", "position_ms": 0, "rate_milli": 1000, "seeking": False}
+    )
+    value["performance"].update(
+        {
+            "mode": "music",
+            "score_id": None,
+            "score_revision": None,
+            "score_sha256": None,
+            "character_package_sha256": None,
+            "motion_profile": "full",
+            "disabled_channels": [],
+        }
+    )
+    return MediaSessionSnapshotV1.from_mapping(copy.deepcopy(value))
+
+
 class GameControlIntegrationTests(unittest.TestCase):
+    def test_director_gaze_is_explicit_and_can_return_to_automatic(self):
+        controller = WizardAvatarController()
+        result = controller.apply_command(WizardCommand("gaze", {"target": "up"}))
+        self.assertTrue(result.ok, result.message)
+        self.assertTrue(controller.state.gaze_authoritative)
+        self.assertEqual(controller.state.gaze_aim, 0)
+        self.assertEqual(controller.state.gaze_vertical_aim, -1)
+
+        result = controller.apply_command(
+            WizardCommand("gaze", {"target": "automatic"})
+        )
+        self.assertTrue(result.ok, result.message)
+        self.assertFalse(controller.state.gaze_authoritative)
+        self.assertEqual(controller.state.gaze_vertical_aim, 0)
+
     def test_takeoff_directional_flight_and_landing(self):
         controller = WizardAvatarController()
         takeoff = controller.apply_command(
@@ -158,6 +233,69 @@ class GameControlIntegrationTests(unittest.TestCase):
         for _ in range(5):
             controller.advance_tick()
         self.assertGreater(controller.current_state().world_position["x"], before["x"])
+
+    def test_v2_terminal_and_expiry_restore_only_prism_owned_values(self):
+        clock = {"now": 20_000}
+        controller = WizardAvatarController(clock_ms=lambda: clock["now"])
+        accepted = controller.apply_command(
+            WizardCommand("prism_signal", prism_v2(1, clock["now"], "turn-a", ttl_ms=100))
+        )
+        self.assertTrue(accepted.ok, accepted.message)
+        self.assertEqual(controller.state.expression, "focused")
+        self.assertEqual(controller.state.action, "thinking")
+
+        manual = controller.apply_command(
+            WizardCommand("expression", {"expression": "happy"})
+        )
+        self.assertTrue(manual.ok, manual.message)
+        clock["now"] += 100
+        controller.advance_tick()
+        self.assertFalse(controller.state.semantic_advisory_active)
+        self.assertEqual(controller.state.expression, "happy")
+
+        controller.apply_command(
+            WizardCommand("prism_signal", prism_v2(2, clock["now"], "turn-new"))
+        )
+        stale = controller.apply_command(
+            WizardCommand(
+                "prism_signal",
+                prism_v2(3, clock["now"], "turn-a", stage="ready", status="completed"),
+            )
+        )
+        self.assertTrue(stale.ok, stale.message)
+        self.assertTrue(controller.state.semantic_advisory_active)
+        self.assertEqual(controller.state.semantic_turn_id, "turn-new")
+
+    def test_speech_and_performance_release_reprojects_live_prism_channels(self):
+        clock = {"now": 30_000}
+        controller = WizardAvatarController(clock_ms=lambda: clock["now"])
+        controller.apply_command(
+            WizardCommand("prism_signal", prism_v2(1, clock["now"], "turn-overlap", ttl_ms=5000))
+        )
+        self.assertEqual(
+            (controller.state.expression, controller.state.action),
+            ("focused", "thinking"),
+        )
+
+        performance = PerformanceApplication("prism-overlap-runtime")
+        performance.accept_snapshot(live_music_snapshot(), 0)
+        self.assertTrue(performance.apply(controller, 100_000).active)
+        controller.apply_command(
+            WizardCommand(
+                "speak",
+                {"speech_id": "overlap-line", "text": "Reviewing.", "duration_ms": 1000},
+            )
+        )
+
+        self.assertFalse(performance.apply(controller, 1_500_001).active)
+        self.assertEqual(controller.state.expression, "focused")
+        self.assertEqual(controller.state.action, "speaking")
+        self.assertEqual(controller.state.mouth, "open_small")
+
+        controller.apply_command(WizardCommand("speech_stop", {}))
+        self.assertEqual(controller.state.expression, "focused")
+        self.assertEqual(controller.state.action, "thinking")
+        self.assertEqual(controller.state.mouth, "closed")
 
     def test_speech_text_and_mouth_share_one_lifecycle(self):
         controller = WizardAvatarController()

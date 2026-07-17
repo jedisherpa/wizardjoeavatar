@@ -1,0 +1,175 @@
+{
+  "schema_version": 1,
+  "renderer": "asciline_square_cell_pixel_graph",
+  "generation": "deterministic",
+  "records": [
+    {
+      "name": "desktop-front-idle",
+      "file": "desktop-front-idle.png",
+      "cols": 240,
+      "rows": 135,
+      "frame_sha256": "aa25349ea4bff4859f258c505bc514c64a6fc2dd6cb18f4e65d5eb30454066aa",
+      "visible_bounds": {
+        "min_x": 0,
+        "min_y": 22,
+        "max_x": 239,
+        "max_y": 130
+      },
+      "state": {
+        "pose_id": "front_idle",
+        "facing": "south",
+        "expression": "neutral",
+        "mouth": "closed",
+        "gaze_aim": 0,
+        "gaze_vertical_aim": 0
+      }
+    },
+    {
+      "name": "portrait-front-idle",
+      "file": "portrait-front-idle.png",
+      "cols": 135,
+      "rows": 240,
+      "frame_sha256": "b122bd3cdd7a58068f5039921230473597cb9cc8eb4788112efeb858e4cfeb07",
+      "visible_bounds": {
+        "min_x": 0,
+        "min_y": 105,
+        "max_x": 134,
+        "max_y": 228
+      },
+      "state": {
+        "pose_id": "front_idle",
+        "facing": "south",
+        "expression": "neutral",
+        "mouth": "closed",
+        "gaze_aim": 0,
+        "gaze_vertical_aim": 0
+      }
+    },
+    {
+      "name": "gaze-left",
+      "file": "gaze-left.png",
+      "cols": 240,
+      "rows": 135,
+      "frame_sha256": "84fc7fda6732552df8ecbe865264bd8979d9d609194524f4d70f3c80bc810514",
+      "visible_bounds": {
+        "min_x": 0,
+        "min_y": 22,
+        "max_x": 239,
+        "max_y": 130
+      },
+      "state": {
+        "pose_id": "front_idle",
+        "facing": "south",
+        "expression": "neutral",
+        "mouth": "closed",
+        "gaze_aim": -1,
+        "gaze_vertical_aim": 0
+      }
+    },
+    {
+      "name": "gaze-right",
+      "file": "gaze-right.png",
+      "cols": 240,
+      "rows": 135,
+      "frame_sha256": "0da158240cd94996958c2d3ad2c86c8fcd8d9f813d493190dbf0725f69361586",
+      "visible_bounds": {
+        "min_x": 0,
+        "min_y": 22,
+        "max_x": 239,
+        "max_y": 130
+      },
+      "state": {
+        "pose_id": "front_idle",
+        "facing": "south",
+        "expression": "neutral",
+        "mouth": "closed",
+        "gaze_aim": 1,
+        "gaze_vertical_aim": 0
+      }
+    },
+    {
+      "name": "speaking",
+      "file": "speaking.png",
+      "cols": 240,
+      "rows": 135,
+      "frame_sha256": "18cf3f1f0a80be2f0410941f6024e6e3308a1785731726a599df3f5a820d4877",
+      "visible_bounds": {
+        "min_x": 0,
+        "min_y": 22,
+        "max_x": 239,
+        "max_y": 130
+      },
+      "state": {
+        "pose_id": "front_idle",
+        "facing": "south",
+        "expression": "neutral",
+        "mouth": "open_small",
+        "gaze_aim": 1,
+        "gaze_vertical_aim": 0
+      }
+    },
+    {
+      "name": "interruption-recovery",
+      "file": "interruption-recovery.png",
+      "cols": 240,
+      "rows": 135,
+      "frame_sha256": "0da158240cd94996958c2d3ad2c86c8fcd8d9f813d493190dbf0725f69361586",
+      "visible_bounds": {
+        "min_x": 0,
+        "min_y": 22,
+        "max_x": 239,
+        "max_y": 130
+      },
+      "state": {
+        "pose_id": "front_idle",
+        "facing": "south",
+        "expression": "neutral",
+        "mouth": "closed",
+        "gaze_aim": 1,
+        "gaze_vertical_aim": 0
+      }
+    },
+    {
+      "name": "permission-granted",
+      "file": "permission-granted.png",
+      "cols": 240,
+      "rows": 135,
+      "frame_sha256": "d97de9dbba14f092e07621e2db7ae9ea9687792d64cd626cb5e7ba2b95b0474b",
+      "visible_bounds": {
+        "min_x": 0,
+        "min_y": 22,
+        "max_x": 239,
+        "max_y": 130
+      },
+      "state": {
+        "pose_id": "front_idle",
+        "facing": "south",
+        "expression": "neutral",
+        "mouth": "closed",
+        "gaze_aim": 0,
+        "gaze_vertical_aim": 0
+      }
+    },
+    {
+      "name": "permission-denied",
+      "file": "permission-denied.png",
+      "cols": 240,
+      "rows": 135,
+      "frame_sha256": "d019049a9d490c42fc293083db5fa40a7174fcf463947c3316b32c5747dc1462",
+      "visible_bounds": {
+        "min_x": 0,
+        "min_y": 22,
+        "max_x": 239,
+        "max_y": 130
+      },
+      "state": {
+        "pose_id": "front_idle",
+        "facing": "south",
+        "expression": "neutral",
+        "mouth": "closed",
+        "gaze_aim": 0,
+        "gaze_vertical_aim": 0
+      }
+    }
+  ]
+}

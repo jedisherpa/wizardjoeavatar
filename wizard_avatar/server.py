@@ -1,13 +1,14 @@
 from __future__ import annotations
 
 import asyncio
+import hashlib
 import hmac
 import inspect
 import ipaddress
 import json
 import os
 import time
-from contextlib import asynccontextmanager
+from contextlib import asynccontextmanager, suppress
 from pathlib import Path
 from typing import Any, Callable, Dict, Optional
 from urllib.parse import urlsplit
@@ -19,6 +20,21 @@ from .media_session import (
     MEDIA_SESSION_MAX_BODY_BYTES,
     MediaSessionError,
     MediaSessionSnapshotV1,
+)
+from .prism_signals import PrismSignalValidationError, parse_prism_signal_json
+from .performance_release import (
+    GOVERNED_SPEECH_MAX_BODY_BYTES,
+    GovernedSpeechError,
+    GovernedSpeechRegistrationV1,
+    GovernedSpeechRevocationV1,
+    PerformanceContextRequestV1,
+)
+from .performance_score import CompiledScoreRepository
+from .permission_world import (
+    CapabilityPermissionV1,
+    PERMISSION_WORLD_MAX_BODY_BYTES,
+    PermissionWorldError,
+    PermissionWorldStateV1,
 )
 from .stream import WizardFrameHub
 
@@ -35,6 +51,8 @@ WEB_DIR = ROOT / "web" / "avatar"
 DEFINITIONS_DIR = ROOT / "wizard_avatar" / "definitions"
 COMPANION_HEALTH_SCHEMA_VERSION = 1
 COMPANION_PROTOCOL_VERSION = 1
+MAX_API_MUTATION_BODY_BYTES = 64 * 1024
+MAX_WEBSOCKET_COMMAND_BYTES = 64 * 1024
 
 
 def is_literal_loopback_host(host: str) -> bool:
@@ -108,15 +126,20 @@ def create_app(
     companion_mode: Optional[bool] = None,
     app_token: Optional[str] = None,
     shutdown_signal: Optional[Callable[[], Any]] = None,
+    score_repository: Optional[CompiledScoreRepository] = None,
 ):
     try:
         from fastapi import FastAPI, HTTPException, WebSocketDisconnect
-        from fastapi.responses import FileResponse, HTMLResponse, JSONResponse, Response
+        from fastapi.responses import FileResponse, HTMLResponse, JSONResponse, StreamingResponse
     except ImportError as exc:
         raise RuntimeError("Install server dependencies with: python3 -m pip install -r requirements.txt") from exc
 
     frame_source = source or ProceduralWizardFrameSource()
-    frame_hub = WizardFrameHub(frame_source)
+    if score_repository is None:
+        score_root = os.environ.get("WIZARD_SCORE_ROOT", "").strip()
+        if score_root:
+            score_repository = CompiledScoreRepository(Path(score_root).expanduser())
+    frame_hub = WizardFrameHub(frame_source, score_repository=score_repository)
     started_at_monotonic_ms = time.monotonic_ns() // 1_000_000
     if companion_mode is None:
         companion_mode = os.environ.get("WIZARD_COMPANION_MODE", "").lower() in {
@@ -144,27 +167,56 @@ def create_app(
     app.state.frame_hub = frame_hub
     app.state.shutdown_requested = False
 
-    if companion_mode:
-        @app.middleware("http")
-        async def companion_security(request: FastAPIRequest, call_next: Callable[..., Any]):
-            loopback_error = _loopback_error(request)
-            if loopback_error:
-                return JSONResponse(status_code=403, content={"detail": loopback_error})
-            media_connector_route = request.url.path.startswith(
-                "/api/avatar/wizard/media-session"
+    @app.middleware("http")
+    async def local_runtime_security(request: FastAPIRequest, call_next: Callable[..., Any]):
+        loopback_error = _loopback_error(request)
+        if loopback_error:
+            return JSONResponse(status_code=403, content={"detail": loopback_error})
+
+        connector_route = (
+            request.url.path.startswith("/api/avatar/wizard/media-session")
+            or request.url.path == "/api/avatar/wizard/performance-binding"
+            or request.url.path.startswith("/api/avatar/wizard/performance-context")
+            or request.url.path.startswith("/api/avatar/wizard/governed-speech")
+            or (
+                request.method == "POST"
+                and request.url.path == "/api/avatar/wizard/permission-world"
             )
-            app_api_route = request.url.path.startswith("/api/avatar/wizard/")
-            mutation = request.method in {"POST", "PUT", "PATCH", "DELETE"}
-            if (mutation or (app_api_route and not media_connector_route)) and not (
-                media_connector_route
-                or _bearer_matches(request.headers.get("authorization", ""), app_token)
-            ):
-                return JSONResponse(
-                    status_code=401,
-                    content={"detail": "Unauthorized"},
-                    headers={"WWW-Authenticate": "Bearer"},
-                )
-            return await call_next(request)
+            or request.url.path == "/api/avatar/wizard/prism-signal"
+        )
+        app_api_route = request.url.path.startswith("/api/avatar/wizard/")
+        mutation = request.method in {"POST", "PUT", "PATCH", "DELETE"}
+        if mutation:
+            content_length = request.headers.get("content-length")
+            if content_length is not None:
+                try:
+                    body_size = int(content_length)
+                except ValueError:
+                    return JSONResponse(
+                        status_code=400,
+                        content={"detail": "Invalid Content-Length"},
+                    )
+                if body_size < 0:
+                    return JSONResponse(
+                        status_code=400,
+                        content={"detail": "Invalid Content-Length"},
+                    )
+                if body_size > MAX_API_MUTATION_BODY_BYTES:
+                    return JSONResponse(
+                        status_code=413,
+                        content={"detail": "Request body too large"},
+                    )
+
+        if companion_mode and (mutation or (app_api_route and not connector_route)) and not (
+            connector_route
+            or _bearer_matches(request.headers.get("authorization", ""), app_token)
+        ):
+            return JSONResponse(
+                status_code=401,
+                content={"detail": "Unauthorized"},
+                headers={"WWW-Authenticate": "Bearer"},
+            )
+        return await call_next(request)
 
     def require_connector(request: FastAPIRequest) -> None:
         if not connector_enabled or not connector_token:
@@ -175,20 +227,32 @@ def create_app(
         if not _bearer_matches(authorization, connector_token):
             raise HTTPException(status_code=401, detail="Unauthorized")
 
-    async def bounded_json_body(request: FastAPIRequest) -> bytes:
+    def require_permission_connector(request: FastAPIRequest) -> None:
+        if request.headers.get("origin"):
+            raise HTTPException(status_code=403, detail="Browser-origin requests are not allowed")
+        authorization = request.headers.get("authorization", "")
+        if not connector_token or not _bearer_matches(authorization, connector_token):
+            raise HTTPException(status_code=401, detail="Unauthorized")
+        if not connector_enabled:
+            raise HTTPException(status_code=503, detail="Media connector unavailable")
+
+    async def bounded_json_body(
+        request: FastAPIRequest,
+        maximum_bytes: int = MEDIA_SESSION_MAX_BODY_BYTES,
+    ) -> bytes:
         if request.headers.get("content-type") != "application/json":
             raise HTTPException(status_code=415, detail="Content-Type must be application/json")
         content_length = request.headers.get("content-length")
         if content_length is not None:
             try:
-                if int(content_length) > MEDIA_SESSION_MAX_BODY_BYTES:
+                if int(content_length) > maximum_bytes:
                     raise HTTPException(status_code=413, detail="Request body too large")
             except ValueError as exc:
                 raise HTTPException(status_code=400, detail="Invalid Content-Length") from exc
         chunks = bytearray()
         async for chunk in request.stream():
             chunks.extend(chunk)
-            if len(chunks) > MEDIA_SESSION_MAX_BODY_BYTES:
+            if len(chunks) > maximum_bytes:
                 raise HTTPException(status_code=413, detail="Request body too large")
         return bytes(chunks)
 
@@ -232,15 +296,23 @@ def create_app(
         if loopback_error:
             raise HTTPException(status_code=403, detail=loopback_error)
         hub_task = frame_hub._task
+        hub_error_code = frame_hub.task_error_code
         return {
             "schema_version": COMPANION_HEALTH_SCHEMA_VERSION,
-            "status": "shutting_down" if app.state.shutdown_requested else "ready",
+            "status": (
+                "shutting_down"
+                if app.state.shutdown_requested
+                else "degraded"
+                if hub_error_code is not None
+                else "ready"
+            ),
             "runtime_epoch": frame_hub.runtime_epoch,
             "protocol_version": COMPANION_PROTOCOL_VERSION,
             "character_id": frame_source.character_package.character_id,
             "pid": os.getpid(),
             "started_at_monotonic_ms": started_at_monotonic_ms,
             "frame_hub_running": hub_task is not None and not hub_task.done(),
+            "frame_hub_error_code": hub_error_code,
             "connector_enabled": connector_enabled and bool(connector_token),
         }
 
@@ -303,10 +375,12 @@ def create_app(
 
     @app.get("/api/avatar/wizard/state")
     async def state():
+        permission_status = await frame_hub.permission_world_status()
         return {
             "state": frame_source.current_state().as_public_dict(),
             "diagnostics": frame_source.diagnostics_dict(),
             "media": await public_media_status(),
+            "permission_world": permission_status["runtime"],
         }
 
     @app.get("/api/avatar/wizard/frame-hashes")
@@ -318,10 +392,20 @@ def create_app(
 
     @app.get("/api/avatar/wizard/replay")
     async def replay():
-        return Response(
-            frame_hub.replay_log.to_ndjson_bytes(),
+        replay_log = frame_hub.replay_log
+        chunks = tuple(replay_log.iter_ndjson_bytes())
+        retained_sha256 = hashlib.sha256(b"".join(chunks)).hexdigest()
+        return StreamingResponse(
+            iter(chunks),
             media_type="application/x-ndjson",
-            headers={"X-Replay-SHA256": frame_hub.replay_log.sha256()},
+            headers={
+                "X-Replay-SHA256": retained_sha256,
+                "X-Replay-Cumulative-SHA256": replay_log.sha256(),
+                "X-Replay-Total-Records": str(replay_log.total_record_count),
+                "X-Replay-Retained-Records": str(replay_log.retained_record_count),
+                "X-Replay-Evicted-Records": str(replay_log.evicted_record_count),
+                "X-Replay-Truncated": "true" if replay_log.is_truncated else "false",
+            },
         )
 
     @app.get("/api/avatar/wizard/poses")
@@ -359,6 +443,100 @@ def create_app(
         require_connector(request)
         return await frame_hub.media_session_status()
 
+    @app.get("/api/avatar/wizard/performance-binding")
+    async def performance_binding(request: FastAPIRequest):
+        require_connector(request)
+        return await frame_hub.performance_binding()
+
+    @app.post("/api/avatar/wizard/performance-context")
+    async def performance_context(request: FastAPIRequest):
+        require_connector(request)
+        body = await bounded_json_body(request)
+        try:
+            context_request = PerformanceContextRequestV1.from_json(body)
+            context = await frame_hub.capture_performance_context(context_request)
+        except GovernedSpeechError as exc:
+            raise HTTPException(
+                status_code=409 if exc.code.endswith("not_ready") else 400,
+                detail={"code": exc.code, "path": exc.path},
+            ) from exc
+        return context.to_dict()
+
+    @app.post("/api/avatar/wizard/governed-speech")
+    async def governed_speech(request: FastAPIRequest):
+        require_connector(request)
+        body = await bounded_json_body(request, GOVERNED_SPEECH_MAX_BODY_BYTES)
+        try:
+            registration = GovernedSpeechRegistrationV1.from_json(body)
+            return await frame_hub.register_governed_speech(registration)
+        except GovernedSpeechError as exc:
+            raise HTTPException(
+                status_code=409 if exc.code.endswith(("mismatch", "not_ready")) else 400,
+                detail={"code": exc.code, "path": exc.path},
+            ) from exc
+
+    @app.post("/api/avatar/wizard/governed-speech/revoke")
+    async def revoke_governed_speech(request: FastAPIRequest):
+        require_connector(request)
+        body = await bounded_json_body(request, 4 * 1024)
+        try:
+            revocation = GovernedSpeechRevocationV1.from_json(body)
+            return await frame_hub.revoke_governed_speech(
+                revocation.revocation_generation
+            )
+        except GovernedSpeechError as exc:
+            raise HTTPException(
+                status_code=409,
+                detail={"code": exc.code, "path": exc.path},
+            ) from exc
+
+    @app.post("/api/avatar/wizard/permission-world")
+    async def accept_permission_world(request: FastAPIRequest):
+        require_permission_connector(request)
+        body = await bounded_json_body(request, PERMISSION_WORLD_MAX_BODY_BYTES)
+        try:
+            state = PermissionWorldStateV1.from_json(body)
+            return await frame_hub.accept_permission_world(state)
+        except PermissionWorldError as exc:
+            raise HTTPException(
+                status_code=409
+                if exc.code in {
+                    "observation_conflict",
+                    "replayed_state",
+                    "retired_source_epoch",
+                    "stale_observation",
+                }
+                else 400,
+                detail={"code": exc.code, "path": exc.path},
+            ) from exc
+
+    @app.get("/api/avatar/wizard/permission-world")
+    async def permission_world_status():
+        return await frame_hub.permission_world_status()
+
+    @app.post("/api/avatar/wizard/director/permission-world")
+    async def simulate_permission_world(request: FastAPIRequest):
+        if not companion_mode:
+            raise HTTPException(status_code=404, detail="Not found")
+        body = await bounded_json_body(request, PERMISSION_WORLD_MAX_BODY_BYTES)
+        try:
+            state = PermissionWorldStateV1.from_json(body)
+            if (
+                state.source_epoch != "director-simulation:v1"
+                or len(state.permissions) != 1
+                or state.permissions[0].capability_kind != "director.simulation"
+            ):
+                raise PermissionWorldError(
+                    "simulation_contract_invalid",
+                    "director simulation must use the reserved identity",
+                )
+            return await frame_hub.simulate_permission_world(state.permissions[0])
+        except PermissionWorldError as exc:
+            raise HTTPException(
+                status_code=400,
+                detail={"code": exc.code, "path": exc.path},
+            ) from exc
+
     async def apply(command_type: str, payload: Dict[str, Any]):
         command = WizardCommand(command_type, payload)
         result = await frame_hub.apply_command(command)
@@ -384,6 +562,10 @@ def create_app(
     async def face(payload: Dict[str, Any]):
         return await apply("face", payload)
 
+    @app.post("/api/avatar/wizard/gaze")
+    async def gaze(payload: Dict[str, Any]):
+        return await apply("gaze", payload)
+
     @app.post("/api/avatar/wizard/action")
     async def action(payload: Dict[str, Any]):
         return await apply("action", payload)
@@ -397,8 +579,17 @@ def create_app(
         return await apply("control", payload)
 
     @app.post("/api/avatar/wizard/prism-signal")
-    async def prism_signal(payload: Dict[str, Any]):
-        return await apply("prism_signal", payload)
+    async def prism_signal(request: FastAPIRequest):
+        require_connector(request)
+        body = await bounded_json_body(request)
+        try:
+            signal = parse_prism_signal_json(body)
+        except PrismSignalValidationError as exc:
+            raise HTTPException(
+                status_code=400,
+                detail={"code": "visual_advisory_invalid"},
+            ) from exc
+        return await apply("prism_signal", signal.to_dict())
 
     @app.post("/api/avatar/wizard/expression")
     async def expression(payload: Dict[str, Any]):
@@ -438,18 +629,23 @@ def create_app(
 
     @app.websocket("/ws/ping")
     async def ping_ws(websocket: FastAPIWebSocket):
+        if _loopback_error(websocket):
+            await websocket.close(code=1008)
+            return
         await websocket.accept()
         await websocket.send_text("pong")
         await websocket.close()
 
     @app.websocket("/ws/avatar/wizard")
     async def wizard_ws(websocket: FastAPIWebSocket):
-        if companion_mode:
-            if _loopback_error(websocket) or not _bearer_matches(
+        if _loopback_error(websocket) or (
+            companion_mode
+            and not _bearer_matches(
                 websocket.headers.get("authorization", ""), app_token
-            ):
-                await websocket.close(code=1008)
-                return
+            )
+        ):
+            await websocket.close(code=1008)
+            return
         await websocket.accept()
         _codec = websocket.query_params.get("codec", "adaptive")
         await websocket.send_text(
@@ -461,6 +657,9 @@ def create_app(
             try:
                 while True:
                     message = await websocket.receive_text()
+                    if len(message.encode("utf-8")) > MAX_WEBSOCKET_COMMAND_BYTES:
+                        await websocket.close(code=1009)
+                        return
                     try:
                         payload = json.loads(message)
                     except json.JSONDecodeError:
@@ -473,7 +672,9 @@ def create_app(
                         await frame_hub.apply_command(
                             WizardCommand(str(payload["type"]), dict(payload.get("payload", {})))
                         )
-            except Exception:
+            except asyncio.CancelledError:
+                raise
+            except (WebSocketDisconnect, RuntimeError):
                 return
 
         receiver_task = asyncio.create_task(receiver())
@@ -486,5 +687,7 @@ def create_app(
         finally:
             frame_hub.unsubscribe(subscriber)
             receiver_task.cancel()
+            with suppress(asyncio.CancelledError):
+                await receiver_task
 
     return app

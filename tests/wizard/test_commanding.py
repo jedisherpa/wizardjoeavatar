@@ -170,6 +170,214 @@ class OrderedCommandInboxTests(unittest.TestCase):
         second = run([1, 2, 3, 4])
         self.assertEqual(first, second)
 
+    def test_source_watermark_capacity_must_be_positive(self):
+        for invalid in (0, -1, True, 1.5):
+            with self.subTest(invalid=invalid):
+                with self.assertRaises(ValueError):
+                    OrderedCommandInbox("runtime-a", source_watermark_capacity=invalid)
+                with self.assertRaises(ValueError):
+                    OrderedCommandInbox("runtime-a", retired_source_epoch_capacity=invalid)
+
+    def test_old_source_epochs_are_evicted_deterministically_and_fail_closed(self):
+        inbox = OrderedCommandInbox(
+            "runtime-a",
+            capacity=4,
+            dedup_capacity=8,
+            source_watermark_capacity=2,
+        )
+        for index, epoch in enumerate(("epoch-a", "epoch-b", "epoch-c"), start=1):
+            ack = inbox.submit(
+                envelope(
+                    command_id="command-{}".format(index),
+                    source_id="controller-a",
+                    source_sequence=1,
+                    source_epoch=epoch,
+                ),
+                current_tick=index - 1,
+                state_revision=index - 1,
+            )
+            self.assertEqual(ack.disposition, "accepted")
+            inbox.pop_due(index)
+            inbox.mark_applied(ack.command_id, index)
+
+        self.assertIsNone(inbox.source_watermark("controller-a", "epoch-a"))
+        self.assertEqual(inbox.source_watermark("controller-a", "epoch-b"), 1)
+        self.assertEqual(inbox.source_watermark("controller-a", "epoch-c"), 1)
+        self.assertEqual(inbox.source_watermark_count, 2)
+        self.assertEqual(inbox.total_source_epoch_count, 3)
+        self.assertEqual(inbox.source_watermark_eviction_count, 1)
+
+        replay = inbox.submit(
+            envelope(
+                command_id="replayed-old-epoch",
+                source_id="controller-a",
+                source_sequence=99,
+                source_epoch="epoch-a",
+            ),
+            current_tick=3,
+            state_revision=3,
+        )
+        self.assertEqual(replay.disposition, "stale")
+        self.assertEqual(replay.error_code, "retired_source_epoch")
+        self.assertEqual(inbox.pending_count, 0)
+
+    def test_pending_and_active_source_epochs_are_never_evicted(self):
+        inbox = OrderedCommandInbox(
+            "runtime-a",
+            capacity=4,
+            dedup_capacity=8,
+            source_watermark_capacity=2,
+        )
+        first = inbox.submit(
+            envelope("first", "controller-a", source_sequence=1, source_epoch="epoch-a"),
+            0,
+            0,
+            apply_tick=10,
+        )
+        second = inbox.submit(
+            envelope("second", "controller-a", source_sequence=1, source_epoch="epoch-b"),
+            0,
+            0,
+            apply_tick=11,
+        )
+        self.assertEqual(first.disposition, "accepted")
+        self.assertEqual(second.disposition, "accepted")
+
+        blocked = inbox.submit(
+            envelope("third", "controller-a", source_sequence=1, source_epoch="epoch-c"),
+            0,
+            0,
+            apply_tick=12,
+        )
+        self.assertEqual(blocked.disposition, "rejected")
+        self.assertEqual(blocked.error_code, "source_watermark_capacity")
+        self.assertEqual(inbox.source_watermark_count, 2)
+        self.assertEqual(inbox.source_watermark_eviction_count, 0)
+        self.assertEqual(inbox.source_watermark_capacity_rejection_count, 1)
+
+        inbox.pop_due(10)
+        inbox.mark_applied("first", 1)
+        retry = inbox.submit(
+            envelope("third-retry", "controller-a", source_sequence=1, source_epoch="epoch-c"),
+            10,
+            1,
+            apply_tick=12,
+        )
+        self.assertEqual(retry.disposition, "accepted")
+        self.assertIsNone(inbox.source_watermark("controller-a", "epoch-a"))
+
+    def test_active_sources_fill_capacity_and_require_a_fresh_epoch(self):
+        inbox = OrderedCommandInbox(
+            "runtime-a",
+            capacity=4,
+            dedup_capacity=8,
+            source_watermark_capacity=2,
+        )
+        for source_id in ("controller-a", "controller-b"):
+            accepted = inbox.submit(
+                envelope(
+                    command_id="{}-1".format(source_id),
+                    source_id=source_id,
+                    source_sequence=1,
+                    source_epoch="epoch-a",
+                ),
+                0,
+                0,
+            )
+            self.assertEqual(accepted.disposition, "accepted")
+        inbox.pop_due(1)
+
+        rejected = inbox.submit(
+            envelope(
+                command_id="controller-c-1",
+                source_id="controller-c",
+                source_sequence=1,
+                source_epoch="epoch-a",
+            ),
+            1,
+            1,
+        )
+        self.assertEqual(rejected.error_code, "source_watermark_capacity")
+        self.assertEqual(inbox.source_watermark_count, 2)
+
+    def test_retired_epoch_history_is_bounded_and_exhaustion_fails_closed(self):
+        inbox = OrderedCommandInbox(
+            "runtime-a",
+            capacity=4,
+            dedup_capacity=8,
+            source_watermark_capacity=1,
+            retired_source_epoch_capacity=1,
+        )
+        for index, epoch in enumerate(("epoch-a", "epoch-b"), start=1):
+            ack = inbox.submit(
+                envelope(
+                    command_id="command-{}".format(index),
+                    source_id="controller-a",
+                    source_sequence=1,
+                    source_epoch=epoch,
+                ),
+                index - 1,
+                index - 1,
+            )
+            self.assertEqual(ack.disposition, "accepted")
+            inbox.pop_due(index)
+            inbox.mark_applied(ack.command_id, index)
+
+        blocked = inbox.submit(
+            envelope(
+                command_id="command-3",
+                source_id="controller-a",
+                source_sequence=1,
+                source_epoch="epoch-c",
+            ),
+            2,
+            2,
+        )
+        self.assertEqual(blocked.disposition, "rejected")
+        self.assertEqual(blocked.error_code, "source_watermark_capacity")
+        self.assertEqual(inbox.source_watermark("controller-a", "epoch-b"), 1)
+        self.assertEqual(inbox.source_retention_diagnostics["retired_source_epoch_count"], 1)
+
+        stale = inbox.submit(
+            envelope(
+                command_id="replayed-epoch-a",
+                source_id="controller-a",
+                source_sequence=99,
+                source_epoch="epoch-a",
+            ),
+            2,
+            2,
+        )
+        self.assertEqual(stale.error_code, "retired_source_epoch")
+
+    def test_watermark_retention_is_repeatably_deterministic(self):
+        def run():
+            inbox = OrderedCommandInbox(
+                "runtime-a",
+                capacity=4,
+                dedup_capacity=8,
+                source_watermark_capacity=2,
+            )
+            results = []
+            for index, epoch in enumerate(("epoch-a", "epoch-b", "epoch-c", "epoch-a"), start=1):
+                ack = inbox.submit(
+                    envelope(
+                        command_id="command-{}".format(index),
+                        source_id="controller-a",
+                        source_sequence=index,
+                        source_epoch=epoch,
+                    ),
+                    index - 1,
+                    index - 1,
+                )
+                results.append((ack.disposition, ack.error_code))
+                if ack.disposition == "accepted":
+                    inbox.pop_due(index)
+                    inbox.mark_applied(ack.command_id, index)
+            return results, inbox.source_retention_diagnostics
+
+        self.assertEqual(run(), run())
+
 
 if __name__ == "__main__":
     unittest.main()

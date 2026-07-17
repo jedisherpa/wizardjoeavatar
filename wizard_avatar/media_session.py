@@ -688,6 +688,7 @@ class MediaSessionCoordinator:
         self._last_snapshot: Optional[MediaSessionSnapshotV1] = None
         self._last_receipt_us: Optional[int] = None
         self._last_accepted_sequence: Optional[int] = None
+        self._last_accepted_media_epoch: Optional[int] = None
         self._slot_snapshots: Dict[str, MediaSessionSnapshotV1] = {}
         self._slot_receipts: Dict[str, int] = {}
         self._slot_clocks: Dict[str, MediaClockEstimator] = {}
@@ -707,6 +708,20 @@ class MediaSessionCoordinator:
     @property
     def last_acceptance(self) -> Optional[MediaSessionAcceptance]:
         return self._last_acceptance
+
+    def snapshot_for_slot(self, source_slot: str) -> Optional[MediaSessionSnapshotV1]:
+        """Return the newest accepted full-state snapshot for a source slot."""
+
+        if source_slot not in SOURCE_SLOTS:
+            raise MediaSessionError("invalid_enum", "unsupported media source slot", "source_slot")
+        return self._slot_snapshots.get(source_slot)
+
+    def receipt_for_slot(self, source_slot: str) -> Optional[int]:
+        """Return the monotonic receipt timestamp for a source slot snapshot."""
+
+        if source_slot not in SOURCE_SLOTS:
+            raise MediaSessionError("invalid_enum", "unsupported media source slot", "source_slot")
+        return self._slot_receipts.get(source_slot)
 
     def _scheduler_state(self, snapshot: Optional[MediaSessionSnapshotV1]) -> str:
         if snapshot is None:
@@ -731,7 +746,11 @@ class MediaSessionCoordinator:
         resync_required: bool = False,
     ) -> MediaSessionAckV1:
         accepted_sequence = self._last_accepted_sequence if self._last_accepted_sequence is not None else snapshot.sequence
-        media_epoch = self._last_snapshot.media_epoch if self._last_snapshot is not None else snapshot.media_epoch
+        media_epoch = (
+            self._last_accepted_media_epoch
+            if self._last_accepted_media_epoch is not None
+            else snapshot.media_epoch
+        )
         return MediaSessionAckV1(
             schema_version=1,
             connector_session_id=snapshot.connector_session_id,
@@ -836,6 +855,7 @@ class MediaSessionCoordinator:
             self._slot_clocks.clear()
             self._last_snapshot = None
             self._last_accepted_sequence = None
+            self._last_accepted_media_epoch = None
             self.clock = MediaClockEstimator()
         elif self._last_receipt_us is not None and receipt < self._last_receipt_us:
             raise MediaSessionError("clock_invalid", "monotonic receipt time moved backwards")
@@ -905,6 +925,7 @@ class MediaSessionCoordinator:
         self._active_session_id = snapshot.connector_session_id
         self._last_receipt_us = receipt
         self._last_accepted_sequence = snapshot.sequence
+        self._last_accepted_media_epoch = snapshot.media_epoch
         self._requires_reconnect = False
         self._remember(snapshot)
         self._activate(new_active)
@@ -918,6 +939,7 @@ class MediaSessionCoordinator:
         self._last_snapshot = None
         self._last_receipt_us = None
         self._last_accepted_sequence = None
+        self._last_accepted_media_epoch = None
         self._slot_snapshots.clear()
         self._slot_receipts.clear()
         self._slot_clocks.clear()

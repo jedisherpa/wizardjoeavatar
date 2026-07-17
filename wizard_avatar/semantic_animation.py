@@ -202,9 +202,26 @@ def _forbidden_content(signal: Mapping[str, Any]) -> bool:
         normalized_key = str(key).strip().lower().replace("-", "_")
         if any(fragment in normalized_key for fragment in fragments):
             return True
-        if isinstance(value, (Mapping, list, tuple, set)):
+        if normalized_key == "payload" and isinstance(value, Mapping):
+            if _forbidden_content(value):
+                return True
+        elif isinstance(value, (Mapping, list, tuple, set)):
             return True
     return False
+
+
+def _flatten_signal_payload(signal: Mapping[str, Any]) -> Mapping[str, Any]:
+    payload = signal.get("payload")
+    if payload is None:
+        return signal
+    if not isinstance(payload, Mapping):
+        return {}
+    flattened = {key: value for key, value in signal.items() if key != "payload"}
+    for key, value in payload.items():
+        if key in flattened:
+            return {}
+        flattened[key] = value
+    return flattened
 
 
 def _is_stale(signal: Mapping[str, Any], now_ms: Optional[int]) -> bool:
@@ -349,14 +366,29 @@ def map_signal_to_animation_intent(
     del user_locomotion_active
     if not isinstance(signal, Mapping):
         return _neutral()
-    kind = _normalized_token(signal.get("kind")) or "unknown"
     if _forbidden_content(signal) or _is_stale(signal, now_ms):
         return _neutral()
+    raw_schema_version = signal.get("schema_version")
+    if raw_schema_version in (2, "2", "2.0") and not isinstance(
+        signal.get("payload"), Mapping
+    ):
+        return _neutral()
+    signal = _flatten_signal_payload(signal)
+    if not signal:
+        return _neutral()
+    kind = _normalized_token(signal.get("kind")) or "unknown"
     classification = signal.get("classification")
     if classification is not None and classification != VISUAL_ADVISORY_CLASSIFICATION:
         return _neutral()
     schema_version = signal.get("schema_version")
-    if schema_version is not None and schema_version not in (1, "1", "1.0"):
+    if schema_version is not None and schema_version not in (
+        1,
+        2,
+        "1",
+        "1.0",
+        "2",
+        "2.0",
+    ):
         return _neutral()
 
     rule = _rule_for_signal(signal, kind)

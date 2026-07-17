@@ -21,10 +21,13 @@ const CRASH_WINDOW: Duration = Duration::from_secs(60);
 const MAX_CRASH_RESTARTS: usize = 4;
 const STABLE_RUNTIME: Duration = Duration::from_secs(30);
 const MAX_HTTP_BYTES: usize = 32 * 1024;
+const MAX_REPLAY_HTTP_BYTES: usize = 8 * 1024 * 1024;
 const MAX_COMMAND_BODY_BYTES: usize = 16 * 1024;
 const DISCOVERY_SCHEMA_VERSION: u32 = 1;
 const DISCOVERY_TTL: Duration = Duration::from_secs(120);
 const DISCOVERY_REFRESH_INTERVAL: Duration = Duration::from_secs(45);
+const ENGINE_LOG_MAX_BYTES: u64 = 5 * 1024 * 1024;
+const ENGINE_LOG_HISTORY_COUNT: usize = 5;
 
 #[derive(Clone, Debug, Serialize, PartialEq, Eq)]
 #[serde(rename_all = "snake_case")]
@@ -148,6 +151,7 @@ impl SupervisorHandle {
         executable: PathBuf,
         logs_dir: PathBuf,
         discovery_path: PathBuf,
+        score_root: PathBuf,
         app_version: String,
     ) -> Result<Self, String> {
         let port =
@@ -180,6 +184,7 @@ impl SupervisorHandle {
                         executable,
                         logs_dir,
                         discovery_path,
+                        score_root,
                         port,
                         app_token,
                         media_token,
@@ -214,13 +219,20 @@ impl SupervisorHandle {
         }
     }
 
-    pub fn authenticated_json_request(
+    pub fn authenticated_runtime_request(
         &self,
         method: &str,
         path: &str,
         body: Option<&serde_json::Value>,
+        response_type: Option<&str>,
     ) -> Result<serde_json::Value, String> {
         validate_runtime_request(method, path).map_err(str::to_string)?;
+        let response_type = response_type.unwrap_or("json");
+        if response_type != "json"
+            && !(response_type == "text" && path == "/api/avatar/wizard/replay")
+        {
+            return Err("runtime_response_type_not_allowed".to_string());
+        }
         let encoded = body
             .map(serde_json::to_vec)
             .transpose()
@@ -231,14 +243,24 @@ impl SupervisorHandle {
         {
             return Err("request_body_too_large".to_string());
         }
-        let response = http_request(
+        let response = http_request_with_limit(
             self.status().port,
             method,
             path,
             Some(&self.secret),
             encoded.as_deref(),
+            if response_type == "text" {
+                MAX_REPLAY_HTTP_BYTES
+            } else {
+                MAX_HTTP_BYTES
+            },
         )
         .map_err(str::to_string)?;
+        if response_type == "text" {
+            return String::from_utf8(response)
+                .map(serde_json::Value::String)
+                .map_err(|_| "response_text_invalid".to_string());
+        }
         serde_json::from_slice(&response).map_err(|_| "response_json_invalid".to_string())
     }
 
@@ -276,6 +298,7 @@ struct WorkerConfig {
     executable: PathBuf,
     logs_dir: PathBuf,
     discovery_path: PathBuf,
+    score_root: PathBuf,
     port: u16,
     app_token: String,
     media_token: String,
@@ -483,10 +506,91 @@ fn run_supervisor(
 
 fn open_log(logs_dir: &Path) -> io::Result<File> {
     std::fs::create_dir_all(logs_dir)?;
+    if let Err(rotation_error) = rotate_engine_log(logs_dir) {
+        return recover_bounded_engine_log(logs_dir, rotation_error);
+    }
+    open_append_log(logs_dir)
+}
+
+fn open_append_log(logs_dir: &Path) -> io::Result<File> {
     OpenOptions::new()
         .create(true)
         .append(true)
         .open(logs_dir.join("engine.log"))
+}
+
+fn recover_bounded_engine_log(logs_dir: &Path, rotation_error: io::Error) -> io::Result<File> {
+    let active = logs_dir.join("engine.log");
+    let metadata = std::fs::symlink_metadata(&active)?;
+    if metadata.file_type().is_symlink() || !metadata.is_file() {
+        return Err(rotation_error);
+    }
+
+    let mut recovered = OpenOptions::new().write(true).truncate(true).open(active)?;
+    writeln!(
+        recovered,
+        "[companion] engine log rotation failed ({:?}); active log reset to preserve size bound",
+        rotation_error.kind()
+    )?;
+    Ok(recovered)
+}
+
+fn rotate_engine_log(logs_dir: &Path) -> io::Result<()> {
+    prune_excess_engine_logs(logs_dir)?;
+
+    let active = logs_dir.join("engine.log");
+    let metadata = match std::fs::symlink_metadata(&active) {
+        Ok(metadata) => metadata,
+        Err(error) if error.kind() == io::ErrorKind::NotFound => return Ok(()),
+        Err(error) => return Err(error),
+    };
+    if metadata.file_type().is_symlink() || !metadata.is_file() {
+        return Err(io::Error::other("engine log path is unsafe"));
+    }
+    if metadata.len() < ENGINE_LOG_MAX_BYTES {
+        return Ok(());
+    }
+
+    let oldest = engine_log_history_path(logs_dir, ENGINE_LOG_HISTORY_COUNT);
+    match std::fs::remove_file(&oldest) {
+        Ok(()) => {}
+        Err(error) if error.kind() == io::ErrorKind::NotFound => {}
+        Err(error) => return Err(error),
+    }
+
+    for generation in (1..ENGINE_LOG_HISTORY_COUNT).rev() {
+        let source = engine_log_history_path(logs_dir, generation);
+        let destination = engine_log_history_path(logs_dir, generation + 1);
+        match std::fs::rename(source, destination) {
+            Ok(()) => {}
+            Err(error) if error.kind() == io::ErrorKind::NotFound => {}
+            Err(error) => return Err(error),
+        }
+    }
+    std::fs::rename(active, engine_log_history_path(logs_dir, 1))
+}
+
+fn prune_excess_engine_logs(logs_dir: &Path) -> io::Result<()> {
+    for entry in std::fs::read_dir(logs_dir)? {
+        let entry = entry?;
+        let Some(name) = entry.file_name().to_str().map(str::to_owned) else {
+            continue;
+        };
+        let Some(generation) = name
+            .strip_prefix("engine.log.")
+            .and_then(|suffix| suffix.parse::<usize>().ok())
+        else {
+            continue;
+        };
+        if generation > ENGINE_LOG_HISTORY_COUNT {
+            std::fs::remove_file(entry.path())?;
+        }
+    }
+    Ok(())
+}
+
+fn engine_log_history_path(logs_dir: &Path, generation: usize) -> PathBuf {
+    logs_dir.join(format!("engine.log.{generation}"))
 }
 
 fn spawn_child(config: &WorkerConfig, log: File) -> Result<Child, &'static str> {
@@ -506,6 +610,7 @@ fn spawn_child(config: &WorkerConfig, log: File) -> Result<Child, &'static str> 
         .env("WIZARD_COMPANION_APP_TOKEN", &config.app_token)
         .env("WIZARD_MEDIA_CONNECTOR_ENABLED", "1")
         .env("WIZARD_MEDIA_CONNECTOR_TOKEN", &config.media_token)
+        .env("WIZARD_SCORE_ROOT", &config.score_root)
         .stdin(Stdio::null())
         .stdout(Stdio::from(log))
         .stderr(Stdio::from(stderr))
@@ -698,12 +803,22 @@ fn validate_runtime_request(method: &str, path: &str) -> Result<(), &'static str
         ("GET", "/api/companion/health")
             | ("GET", "/api/avatar/wizard/state")
             | ("GET", "/api/avatar/wizard/poses")
+            | ("GET", "/api/avatar/wizard/character")
+            | ("GET", "/api/avatar/wizard/permission-world")
+            | ("GET", "/api/avatar/wizard/replay")
             | ("POST", "/api/companion/reactions")
             | ("POST", "/api/avatar/wizard/action")
+            | ("POST", "/api/avatar/wizard/gaze")
+            | ("POST", "/api/avatar/wizard/move")
+            | ("POST", "/api/avatar/wizard/path")
+            | ("POST", "/api/avatar/wizard/expression")
+            | ("POST", "/api/avatar/wizard/speak")
+            | ("POST", "/api/avatar/wizard/speech-stop")
             | ("POST", "/api/avatar/wizard/pose")
             | ("POST", "/api/avatar/wizard/control")
             | ("POST", "/api/avatar/wizard/stop")
             | ("POST", "/api/avatar/wizard/reset")
+            | ("POST", "/api/avatar/wizard/director/permission-world")
     );
     allowed.then_some(()).ok_or("runtime_route_not_allowed")
 }
@@ -714,6 +829,17 @@ fn http_request(
     path: &str,
     bearer: Option<&str>,
     body: Option<&[u8]>,
+) -> Result<Vec<u8>, &'static str> {
+    http_request_with_limit(port, method, path, bearer, body, MAX_HTTP_BYTES)
+}
+
+fn http_request_with_limit(
+    port: u16,
+    method: &str,
+    path: &str,
+    bearer: Option<&str>,
+    body: Option<&[u8]>,
+    max_response_bytes: usize,
 ) -> Result<Vec<u8>, &'static str> {
     let address = SocketAddr::V4(SocketAddrV4::new(Ipv4Addr::LOCALHOST, port));
     let timeout = Duration::from_millis(600);
@@ -749,7 +875,7 @@ fn http_request(
         match stream.read(&mut chunk) {
             Ok(0) => break,
             Ok(count) => {
-                if response.len() + count > MAX_HTTP_BYTES {
+                if response.len() + count > max_response_bytes {
                     return Err("health_response_too_large");
                 }
                 response.extend_from_slice(&chunk[..count]);
@@ -782,6 +908,33 @@ fn http_request(
 mod tests {
     use super::*;
     use std::collections::HashSet;
+    use std::sync::atomic::{AtomicU64, Ordering};
+
+    static TEMP_PATH_SEQUENCE: AtomicU64 = AtomicU64::new(0);
+
+    struct TestDirectory(PathBuf);
+
+    impl TestDirectory {
+        fn new(label: &str) -> Self {
+            let sequence = TEMP_PATH_SEQUENCE.fetch_add(1, Ordering::Relaxed);
+            let path = std::env::temp_dir().join(format!(
+                "wizard-companion-{label}-{}-{sequence}",
+                std::process::id()
+            ));
+            std::fs::create_dir_all(&path).expect("create test directory");
+            Self(path)
+        }
+
+        fn path(&self) -> &Path {
+            &self.0
+        }
+    }
+
+    impl Drop for TestDirectory {
+        fn drop(&mut self) {
+            let _ = std::fs::remove_dir_all(&self.0);
+        }
+    }
 
     #[test]
     fn selected_ports_are_dynamic_literal_loopback_ports() {
@@ -896,6 +1049,28 @@ mod tests {
             validate_runtime_request("POST", "/api/avatar/wizard/action"),
             Ok(())
         );
+        for path in [
+            "/api/avatar/wizard/character",
+            "/api/avatar/wizard/permission-world",
+            "/api/avatar/wizard/replay",
+        ] {
+            assert_eq!(validate_runtime_request("GET", path), Ok(()));
+        }
+        for path in [
+            "/api/avatar/wizard/gaze",
+            "/api/avatar/wizard/move",
+            "/api/avatar/wizard/path",
+            "/api/avatar/wizard/expression",
+            "/api/avatar/wizard/speak",
+            "/api/avatar/wizard/speech-stop",
+            "/api/avatar/wizard/director/permission-world",
+        ] {
+            assert_eq!(validate_runtime_request("POST", path), Ok(()));
+            assert_eq!(
+                validate_runtime_request("GET", path),
+                Err("runtime_route_not_allowed")
+            );
+        }
         assert_eq!(
             validate_runtime_request("POST", "/api/companion/shutdown"),
             Err("runtime_route_not_allowed")
@@ -918,6 +1093,7 @@ mod tests {
             executable: PathBuf::from("/unused"),
             logs_dir: PathBuf::from("/unused"),
             discovery_path: path.clone(),
+            score_root: PathBuf::from("/unused/scores"),
             port: 51_234,
             app_token: "a".repeat(64),
             media_token: "b".repeat(64),
@@ -954,5 +1130,110 @@ mod tests {
         remove_owned_discovery(&path, "epoch-owned");
         assert!(!path.exists());
         let _ = std::fs::remove_dir_all(directory);
+    }
+
+    #[test]
+    fn engine_log_below_limit_is_reopened_without_rotation() {
+        let directory = TestDirectory::new("log-below-limit");
+        let active = directory.path().join("engine.log");
+        std::fs::write(&active, b"existing\n").unwrap();
+
+        let mut log = open_log(directory.path()).unwrap();
+        log.write_all(b"next\n").unwrap();
+        drop(log);
+
+        assert_eq!(std::fs::read(&active).unwrap(), b"existing\nnext\n");
+        assert!(!engine_log_history_path(directory.path(), 1).exists());
+    }
+
+    #[test]
+    fn engine_log_at_limit_rotates_before_the_new_file_is_opened() {
+        let directory = TestDirectory::new("log-at-limit");
+        let active = directory.path().join("engine.log");
+        let oversized = File::create(&active).unwrap();
+        oversized.set_len(ENGINE_LOG_MAX_BYTES).unwrap();
+        drop(oversized);
+
+        let mut log = open_log(directory.path()).unwrap();
+        log.write_all(b"fresh\n").unwrap();
+        drop(log);
+
+        assert_eq!(std::fs::metadata(&active).unwrap().len(), 6);
+        assert_eq!(
+            std::fs::metadata(engine_log_history_path(directory.path(), 1))
+                .unwrap()
+                .len(),
+            ENGINE_LOG_MAX_BYTES
+        );
+    }
+
+    #[test]
+    fn engine_log_rotation_retains_only_five_deterministic_generations() {
+        let directory = TestDirectory::new("log-history");
+        let active = directory.path().join("engine.log");
+        let oversized = File::create(&active).unwrap();
+        oversized.set_len(ENGINE_LOG_MAX_BYTES + 1).unwrap();
+        drop(oversized);
+        for generation in 1..=7 {
+            std::fs::write(
+                engine_log_history_path(directory.path(), generation),
+                generation.to_string(),
+            )
+            .unwrap();
+        }
+        std::fs::write(directory.path().join("engine.log.notes"), b"leave me").unwrap();
+
+        drop(open_log(directory.path()).unwrap());
+
+        assert_eq!(
+            std::fs::metadata(engine_log_history_path(directory.path(), 1))
+                .unwrap()
+                .len(),
+            ENGINE_LOG_MAX_BYTES + 1
+        );
+        for generation in 2..=ENGINE_LOG_HISTORY_COUNT {
+            assert_eq!(
+                std::fs::read_to_string(engine_log_history_path(directory.path(), generation))
+                    .unwrap(),
+                (generation - 1).to_string()
+            );
+        }
+        assert!(!engine_log_history_path(directory.path(), 6).exists());
+        assert!(!engine_log_history_path(directory.path(), 7).exists());
+        assert!(directory.path().join("engine.log.notes").exists());
+    }
+
+    #[test]
+    fn unrotatable_history_recovers_with_a_bounded_observable_active_log() {
+        let directory = TestDirectory::new("log-rotation-failure");
+        let active = directory.path().join("engine.log");
+        let oversized = File::create(&active).unwrap();
+        oversized.set_len(ENGINE_LOG_MAX_BYTES).unwrap();
+        drop(oversized);
+        std::fs::create_dir(engine_log_history_path(
+            directory.path(),
+            ENGINE_LOG_HISTORY_COUNT,
+        ))
+        .unwrap();
+
+        drop(open_log(directory.path()).unwrap());
+        let recovered = std::fs::read_to_string(active).unwrap();
+        assert!(recovered.contains("engine log rotation failed"));
+        assert!(recovered.len() < ENGINE_LOG_MAX_BYTES as usize);
+    }
+
+    #[cfg(unix)]
+    #[test]
+    fn unsafe_active_log_symlink_fails_closed() {
+        use std::os::unix::fs::symlink;
+
+        let directory = TestDirectory::new("log-symlink");
+        let target = directory.path().join("target.log");
+        let active = directory.path().join("engine.log");
+        std::fs::write(&target, b"do not overwrite").unwrap();
+        symlink(&target, &active).unwrap();
+
+        assert!(open_log(directory.path()).is_err());
+        assert_eq!(std::fs::read_to_string(target).unwrap(), "do not overwrite");
     }
 }

@@ -1,0 +1,98 @@
+{
+  "architecture": "asciline_python",
+  "control": {
+    "command_errors": [
+      "POST http://127.0.0.1:44001/api/avatar/wizard/prism-signal failed: 503 {\"detail\":\"Media connector unavailable\"}",
+      "POST http://127.0.0.1:44001/api/avatar/wizard/prism-signal failed: 503 {\"detail\":\"Media connector unavailable\"}",
+      "POST http://127.0.0.1:44001/api/avatar/wizard/prism-signal failed: 503 {\"detail\":\"Media connector unavailable\"}",
+      "POST http://127.0.0.1:44001/api/avatar/wizard/prism-signal failed: 503 {\"detail\":\"Media connector unavailable\"}",
+      "POST http://127.0.0.1:44001/api/avatar/wizard/prism-signal failed: 503 {\"detail\":\"Media connector unavailable\"}",
+      "POST http://127.0.0.1:44001/api/avatar/wizard/prism-signal failed: 503 {\"detail\":\"Media connector unavailable\"}",
+      "POST http://127.0.0.1:44001/api/avatar/wizard/prism-signal failed: 503 {\"detail\":\"Media connector unavailable\"}",
+      "POST http://127.0.0.1:44001/api/avatar/wizard/prism-signal failed: 503 {\"detail\":\"Media connector unavailable\"}",
+      "POST http://127.0.0.1:44001/api/avatar/wizard/prism-signal failed: 503 {\"detail\":\"Media connector unavailable\"}",
+      "POST http://127.0.0.1:44001/api/avatar/wizard/prism-signal failed: 503 {\"detail\":\"Media connector unavailable\"}"
+    ],
+    "latency_ms_max": 202.92620800000006,
+    "latency_ms_p50": 24.102,
+    "latency_ms_p95": 43.545,
+    "request_count": 248,
+    "sent_control_count": 230,
+    "sent_prism_count": 10
+  },
+  "control_window_actual_seconds": 30.075,
+  "duration_actual_seconds": 30.146,
+  "duration_requested_seconds": 30.0,
+  "failures": [
+    "command errors: 10"
+  ],
+  "final_hub_actual_fps": 22.721,
+  "final_hub_window_fps": 22.192,
+  "final_state": {
+    "airborne": true,
+    "altitude": 1.4249662750865255,
+    "semantic_cue": "none",
+    "world_position": {
+      "x": -0.20132376894880244,
+      "z": 8.230857576167184
+    }
+  },
+  "final_tick": 1804,
+  "hub_queue_drops": 0,
+  "initial_hub_actual_fps": null,
+  "initial_hub_window_fps": null,
+  "initial_tick": 0,
+  "result": "failed",
+  "schedule_overruns": 24,
+  "schema_version": 1,
+  "simulation_hz": 59.842,
+  "slow_viewer_enabled": true,
+  "url": "http://127.0.0.1:44001",
+  "viewer_count": 4,
+  "viewers": [
+    {
+      "decode_errors": 0,
+      "error": null,
+      "first_sequence": 0,
+      "frames": 684,
+      "last_frame_sha256": "55d44de14130a279c4166ac588fb6a612926b12c9f9ac0558ba7396ef48aa035",
+      "last_sequence": 683,
+      "sequence_regressions": 0,
+      "slow": false,
+      "viewer_id": 0
+    },
+    {
+      "decode_errors": 0,
+      "error": null,
+      "first_sequence": 0,
+      "frames": 684,
+      "last_frame_sha256": "55d44de14130a279c4166ac588fb6a612926b12c9f9ac0558ba7396ef48aa035",
+      "last_sequence": 683,
+      "sequence_regressions": 0,
+      "slow": false,
+      "viewer_id": 1
+    },
+    {
+      "decode_errors": 0,
+      "error": null,
+      "first_sequence": 0,
+      "frames": 684,
+      "last_frame_sha256": "55d44de14130a279c4166ac588fb6a612926b12c9f9ac0558ba7396ef48aa035",
+      "last_sequence": 683,
+      "sequence_regressions": 0,
+      "slow": false,
+      "viewer_id": 2
+    },
+    {
+      "decode_errors": 0,
+      "error": null,
+      "first_sequence": 0,
+      "frames": 124,
+      "last_frame_sha256": "103787f50395a72e82ee5b0da5b18e57992f03c5931c822074349c3f7bf007ce",
+      "last_sequence": 123,
+      "sequence_regressions": 0,
+      "slow": true,
+      "viewer_id": 3
+    }
+  ]
+}

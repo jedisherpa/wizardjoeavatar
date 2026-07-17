@@ -30,6 +30,8 @@ struct CompanionRequest {
     path: String,
     method: String,
     body: Option<serde_json::Value>,
+    #[serde(default, rename = "responseType")]
+    response_type: Option<String>,
 }
 
 #[tauri::command]
@@ -37,10 +39,11 @@ fn companion_http_request(
     request: CompanionRequest,
     supervisor: tauri::State<'_, SupervisorHandle>,
 ) -> Result<serde_json::Value, String> {
-    supervisor.authenticated_json_request(
+    supervisor.authenticated_runtime_request(
         &request.method.to_ascii_uppercase(),
         &request.path,
         request.body.as_ref(),
+        request.response_type.as_deref(),
     )
 }
 
@@ -178,11 +181,13 @@ pub fn run() {
             let resource_dir = app.path().resource_dir()?;
             let app_data_dir = app.path().app_data_dir()?;
             let logs_dir = app_data_dir.join("logs");
+            let score_root = app_data_dir.join("scores");
             let discovery_path = wizard_discovery_path()?;
             let supervisor = SupervisorHandle::launch(
                 resource_sidecar_path(&resource_dir),
                 logs_dir.clone(),
                 discovery_path,
+                score_root,
                 app.package_info().version.to_string(),
             )
             .map_err(io_error)?;

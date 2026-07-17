@@ -1,0 +1,116 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://wizardjoe.local/schemas/governed_performance_approval_v1.schema.json",
+  "title": "GovernedPerformanceApprovalV1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "approval_id",
+    "turn_id",
+    "reply_sha256",
+    "speech_media",
+    "performance_context_sha256",
+    "character_id",
+    "package_digest",
+    "allowed_sinks",
+    "issued_at_ms",
+    "expires_at_ms",
+    "revocation_generation",
+    "reconciliation_generation",
+    "approval_sha256"
+  ],
+  "properties": {
+    "schema_version": {"const": 1},
+    "approval_id": {"$ref": "#/$defs/id"},
+    "turn_id": {"$ref": "#/$defs/id"},
+    "reply_sha256": {"$ref": "#/$defs/hash"},
+    "speech_media": {"$ref": "#/$defs/speech_media"},
+    "performance_context_sha256": {"$ref": "#/$defs/hash"},
+    "character_id": {"$ref": "#/$defs/id"},
+    "package_digest": {"$ref": "#/$defs/hash"},
+    "allowed_sinks": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 3,
+      "uniqueItems": true,
+      "items": {"enum": ["animation", "speech", "text"]}
+    },
+    "issued_at_ms": {"$ref": "#/$defs/non_negative_integer"},
+    "expires_at_ms": {"$ref": "#/$defs/non_negative_integer"},
+    "revocation_generation": {"$ref": "#/$defs/non_negative_integer"},
+    "reconciliation_generation": {"$ref": "#/$defs/non_negative_integer"},
+    "approval_sha256": {"$ref": "#/$defs/hash"}
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "allowed_sinks": {"contains": {"const": "speech"}}
+        },
+        "required": ["allowed_sinks"]
+      },
+      "then": {
+        "properties": {
+          "speech_media": {
+            "properties": {"kind": {"enum": ["media", "speech"]}}
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{0,127}$"
+    },
+    "hash": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "nullable_id": {
+      "oneOf": [{"$ref": "#/$defs/id"}, {"type": "null"}]
+    },
+    "nullable_hash": {
+      "oneOf": [{"$ref": "#/$defs/hash"}, {"type": "null"}]
+    },
+    "non_negative_integer": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 9007199254740991
+    },
+    "speech_media": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "identity", "sha256"],
+      "properties": {
+        "kind": {"enum": ["media", "none", "speech"]},
+        "identity": {"$ref": "#/$defs/nullable_id"},
+        "sha256": {"$ref": "#/$defs/nullable_hash"}
+      },
+      "allOf": [
+        {
+          "if": {"properties": {"kind": {"const": "none"}}, "required": ["kind"]},
+          "then": {
+            "properties": {
+              "identity": {"type": "null"},
+              "sha256": {"type": "null"}
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {"kind": {"enum": ["media", "speech"]}},
+            "required": ["kind"]
+          },
+          "then": {
+            "anyOf": [
+              {"properties": {"identity": {"$ref": "#/$defs/id"}}},
+              {"properties": {"sha256": {"$ref": "#/$defs/hash"}}}
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

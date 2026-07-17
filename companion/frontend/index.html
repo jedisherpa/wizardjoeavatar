@@ -32,22 +32,243 @@
         </button>
       </header>
 
-      <main
-        class="stage"
-        id="stage"
-        tabindex="0"
-        aria-label="Wizard Joe stage. Use arrow keys or W A S D to move Joe while the stage is focused."
-        aria-describedby="activity-description"
-      >
-        <canvas id="wizard-canvas" role="img" aria-label="Wizard Joe is waiting for the engine.">
-          Wizard Joe's animated stage.
-        </canvas>
-        <div class="stage-message" id="stage-message" aria-hidden="true">
-          <span class="stage-message-mark"></span>
-          <span id="stage-message-text">Starting Joe...</span>
-        </div>
-        <p class="focus-hint" aria-hidden="true">Stage controls active</p>
-      </main>
+      <div class="workspace">
+        <main
+          class="stage"
+          id="stage"
+          tabindex="0"
+          aria-label="Wizard Joe stage. Use arrow keys or W A S D to move Joe while the stage is focused."
+          aria-describedby="activity-description"
+        >
+          <canvas id="wizard-canvas" role="img" aria-label="Wizard Joe is waiting for the engine.">
+            Wizard Joe's animated stage.
+          </canvas>
+          <div class="stage-message" id="stage-message" aria-hidden="true">
+            <span class="stage-message-mark"></span>
+            <span id="stage-message-text">Starting Joe...</span>
+          </div>
+          <p class="focus-hint" aria-hidden="true">Stage controls active</p>
+        </main>
+
+        <aside class="director-panel" id="director-panel" data-expanded="false" aria-label="Director and debug">
+          <header class="director-header">
+            <button
+              class="director-toggle"
+              id="director-toggle"
+              type="button"
+              aria-controls="director-content"
+              aria-expanded="false"
+              title="Open Director"
+            >
+              <span class="director-chevron" aria-hidden="true">&#8249;</span>
+              <span class="director-toggle-label">Director</span>
+            </button>
+            <span class="director-summary">
+              <span class="state-mark" id="director-state-mark" data-tone="pending" aria-hidden="true"></span>
+              <span id="director-summary-label">Connecting</span>
+            </span>
+          </header>
+
+          <div class="director-content" id="director-content" hidden>
+            <details class="director-group" open>
+              <summary>Stage direction</summary>
+              <div class="director-group-body">
+                <div class="director-field-grid director-position-grid">
+                  <label>X <input id="director-position-x" type="number" min="-20" max="20" step="0.25" value="0"></label>
+                  <label>Z <input id="director-position-z" type="number" min="0" max="20" step="0.25" value="5"></label>
+                </div>
+                <div class="director-actions">
+                  <button id="director-move" type="button">Move</button>
+                  <button id="director-stop" type="button">Stop</button>
+                </div>
+                <label class="director-field">Path preset
+                  <select id="director-path-preset">
+                    <option value="cross-stage">Cross stage</option>
+                    <option value="front-arc">Front arc</option>
+                    <option value="figure-eight">Figure eight</option>
+                  </select>
+                </label>
+                <div class="director-actions director-actions-split">
+                  <label class="compact-check"><input id="director-path-loop" type="checkbox"> Loop</label>
+                  <button id="director-run-path" type="button">Run path</button>
+                </div>
+                <label class="director-field">Gaze target
+                  <select id="director-gaze">
+                    <option value="viewer">Viewer</option>
+                    <option value="left">Left</option>
+                    <option value="right">Right</option>
+                    <option value="up">Up</option>
+                    <option value="down">Down</option>
+                  </select>
+                </label>
+              </div>
+            </details>
+
+            <details class="director-group">
+              <summary>Performance</summary>
+              <div class="director-group-body">
+                <label class="director-field">Expression
+                  <select id="director-expression">
+                    <option value="neutral">Neutral</option>
+                    <option value="happy">Happy</option>
+                    <option value="thinking">Thinking</option>
+                    <option value="surprised">Surprised</option>
+                    <option value="worried">Worried</option>
+                    <option value="amused">Amused</option>
+                    <option value="confident">Confident</option>
+                    <option value="focused">Focused</option>
+                    <option value="skeptical">Skeptical</option>
+                    <option value="explaining">Explaining</option>
+                  </select>
+                </label>
+                <div class="director-actions">
+                  <button id="director-apply-expression" type="button">Apply expression</button>
+                </div>
+                <label class="director-field">Gesture / action
+                  <select id="director-action-select">
+                    <option value="explaining">Explain</option>
+                    <option value="thinking">Think</option>
+                    <option value="pointing">Point</option>
+                    <option value="magic_cast">Magic cast</option>
+                    <option value="reaction">React</option>
+                    <option value="flourish">Flourish</option>
+                    <option value="staff_spin">Staff spin</option>
+                    <option value="victory_cast">Victory cast</option>
+                    <option value="shush">Shush</option>
+                    <option value="celebrate">Celebrate</option>
+                  </select>
+                </label>
+                <div class="director-field-grid director-duration-grid">
+                  <label>Duration <input id="director-action-duration" type="number" min="0" max="30000" step="100" value="1600"></label>
+                  <button id="director-apply-action" type="button">Cue action</button>
+                </div>
+              </div>
+            </details>
+
+            <details class="director-group">
+              <summary>Speech preview</summary>
+              <div class="director-group-body">
+                <label class="director-field">Preview text
+                  <textarea id="director-speech-text" rows="3" maxlength="1000">The stars prefer a tidy spellbook.</textarea>
+                </label>
+                <label class="director-field">Duration (ms)
+                  <input id="director-speech-duration" type="number" min="250" max="60000" step="100" value="2400">
+                </label>
+                <label class="compact-check progressive-control" id="director-progressive-control">
+                  <input id="director-progressive-text" type="checkbox" disabled>
+                  Progressive text <span id="director-progressive-status">Unavailable</span>
+                </label>
+                <div class="director-actions">
+                  <button id="director-speak" type="button">Preview speech</button>
+                  <button id="director-speech-stop" type="button">Interrupt</button>
+                </div>
+              </div>
+            </details>
+
+            <details class="director-group permission-simulation">
+              <summary><strong>SIMULATION</strong> Permission world</summary>
+              <div class="director-group-body">
+                <label class="director-field">Posture
+                  <select id="director-permission-posture">
+                    <option value="promptable">Promptable</option>
+                    <option value="granted">Granted</option>
+                    <option value="denied">Denied</option>
+                    <option value="unavailable">Unavailable</option>
+                    <option value="unknown">Unknown</option>
+                  </select>
+                </label>
+                <label class="director-field">Scope
+                  <select id="director-permission-scope">
+                    <option value="current_surface">Current surface</option>
+                    <option value="current_session">Current session</option>
+                    <option value="all_surfaces">All surfaces</option>
+                  </select>
+                </label>
+                <label class="director-field">Purpose
+                  <select id="director-permission-purpose">
+                    <option value="director_preview">Director preview</option>
+                    <option value="calendar_coordination">Calendar coordination</option>
+                    <option value="media_control">Media control</option>
+                  </select>
+                </label>
+                <label class="director-field">Surface
+                  <select id="director-permission-surface">
+                    <option value="companion.stage">Companion stage</option>
+                    <option value="wizard.calendar">Wizard calendar</option>
+                    <option value="wizard.media">Wizard media</option>
+                  </select>
+                </label>
+                <label class="director-field">Expiry
+                  <select id="director-permission-expiry">
+                    <option value="unbounded">Unbounded</option>
+                    <option value="15m">15 minutes</option>
+                    <option value="1h">1 hour</option>
+                    <option value="expired">Expired</option>
+                  </select>
+                </label>
+                <div class="director-actions director-actions-split">
+                  <span class="director-result" id="director-permission-status">Not applied</span>
+                  <button id="director-apply-permission" type="button">Apply simulation</button>
+                </div>
+              </div>
+            </details>
+
+            <details class="director-group">
+              <summary>Stage viewport</summary>
+              <div class="director-group-body">
+                <fieldset class="segmented-control" id="director-viewport-profile">
+                  <legend>Profile</legend>
+                  <label><input type="radio" name="director-viewport" value="desktop" checked><span>Desktop</span></label>
+                  <label><input type="radio" name="director-viewport" value="mobile"><span>Mobile</span></label>
+                </fieldset>
+              </div>
+            </details>
+
+            <details class="director-group">
+              <summary>Cue / diagnostics</summary>
+              <div class="director-group-body">
+              <dl class="director-values">
+                <div><dt>Connection</dt><dd id="director-connection">Connecting</dd></div>
+                <div><dt>Connector</dt><dd id="director-connector">Unavailable</dd></div>
+                <div><dt>Playback</dt><dd id="director-playback">Unavailable</dd></div>
+                <div><dt>Media source</dt><dd id="director-source">None</dd></div>
+                <div><dt>Performance</dt><dd id="director-mode">Unavailable</dd></div>
+                <div class="director-time"><dt>Media time</dt><dd id="director-time">Unavailable</dd></div>
+                <div><dt>Mouth</dt><dd id="director-mouth">Unavailable</dd></div>
+                <div><dt>Action</dt><dd id="director-action">Unavailable</dd></div>
+                <div><dt>Pose</dt><dd id="director-pose">Unavailable</dd></div>
+                <div><dt>Clip</dt><dd id="director-clip">Unavailable</dd></div>
+                <div><dt>Score</dt><dd id="director-score">Unavailable</dd></div>
+                <div><dt>Scheduler</dt><dd id="director-scheduler">Unavailable</dd></div>
+                <div><dt>Engine</dt><dd id="director-engine">Starting</dd></div>
+                <div><dt>Frames</dt><dd id="director-frames">Waiting</dd></div>
+                <div><dt>Control</dt><dd id="director-control">None</dd></div>
+                <div><dt>Semantic cue</dt><dd id="director-cue">None</dd></div>
+                <div><dt>Gesture</dt><dd id="director-gesture">None</dd></div>
+                <div><dt>Transition</dt><dd id="director-transition">Inactive</dd></div>
+                <div><dt>Tick / revision</dt><dd id="director-tick">Unavailable</dd></div>
+                <div><dt>Node</dt><dd id="director-node">Unknown</dd></div>
+              </dl>
+              </div>
+            </details>
+
+            <details class="director-group">
+              <summary>Deterministic replay</summary>
+              <div class="director-group-body">
+                <dl class="director-values replay-values">
+                  <div><dt>Records</dt><dd id="director-replay-records">Not inspected</dd></div>
+                  <div><dt>Last tick</dt><dd id="director-replay-tick">Unavailable</dd></div>
+                  <div><dt>SHA-256</dt><dd id="director-replay-hash">Unavailable</dd></div>
+                </dl>
+                <div class="director-actions">
+                  <button id="director-inspect-replay" type="button">Inspect</button>
+                  <button id="director-export-replay" type="button">Export</button>
+                </div>
+              </div>
+            </details>
+          </div>
+        </aside>
+      </div>
 
       <nav class="command-bar" aria-label="Wizard controls">
         <div class="command-cluster">

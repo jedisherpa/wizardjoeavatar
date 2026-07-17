@@ -7,7 +7,7 @@ import math
 from dataclasses import dataclass, fields, is_dataclass
 from enum import Enum
 from types import MappingProxyType
-from typing import Any, Callable, Dict, Generic, Mapping, Optional, Sequence, Tuple, TypeVar
+from typing import Any, Callable, Dict, Generic, Iterator, Mapping, Optional, Sequence, Tuple, TypeVar
 
 from .commanding import CommandAckV1, CommandEnvelopeV1, OrderedCommandInbox, QueuedCommand
 
@@ -17,6 +17,7 @@ TICK_SECONDS = 1.0 / TICK_RATE
 ACCUMULATOR_TICK_UNITS = 1_000_000_000
 DEFAULT_MAX_CATCH_UP_TICKS = 8
 DEFAULT_REPLAY_STATE_INTERVAL_TICKS = TICK_RATE
+DEFAULT_REPLAY_MAX_RECORDS = 4096
 
 StateT = TypeVar("StateT")
 PresentationT = TypeVar("PresentationT")
@@ -135,11 +136,19 @@ class RuntimeAdvanceResult(Generic[StateT, PresentationT]):
 
 
 class ReplayLog:
-    """Deterministic in-memory NDJSON evidence recorder."""
+    """Deterministic NDJSON evidence recorder with a bounded export window."""
 
-    def __init__(self, header: Mapping[str, object]) -> None:
+    def __init__(
+        self,
+        header: Mapping[str, object],
+        max_records: int = DEFAULT_REPLAY_MAX_RECORDS,
+    ) -> None:
+        if isinstance(max_records, bool) or not isinstance(max_records, int) or max_records <= 0:
+            raise ValueError("max_records must be a positive integer")
+        self.max_records = max_records
         self._records: list[Dict[str, object]] = []
         self._sequence = 0
+        self._evicted_record_count = 0
         self._sha256 = hashlib.sha256()
         self.append("header", 0, header)
 
@@ -157,6 +166,15 @@ class ReplayLog:
         self._records.append(record)
         self._sha256.update(canonical_json_bytes(record) + b"\n")
         self._sequence += 1
+        self._trim_retained_records()
+
+    def _trim_retained_records(self) -> None:
+        while len(self._records) > self.max_records:
+            # The replay header is structural evidence and remains pinned. The
+            # oldest non-header record is evicted first.
+            remove_index = 1 if self._records and self._records[0]["record_type"] == "header" else 0
+            del self._records[remove_index]
+            self._evicted_record_count += 1
 
     @property
     def records(self) -> Tuple[Mapping[str, object], ...]:
@@ -164,13 +182,75 @@ class ReplayLog:
 
     @property
     def record_count(self) -> int:
+        """Compatibility count: total records observed, including evictions."""
+
+        return self._sequence
+
+    @property
+    def total_record_count(self) -> int:
+        return self._sequence
+
+    @property
+    def retained_record_count(self) -> int:
         return len(self._records)
 
+    @property
+    def evicted_record_count(self) -> int:
+        return self._evicted_record_count
+
+    @property
+    def is_truncated(self) -> bool:
+        return self._evicted_record_count > 0
+
+    @property
+    def first_retained_sequence(self) -> Optional[int]:
+        if not self._records:
+            return None
+        return int(self._records[0]["record_sequence"])
+
+    @property
+    def retention_diagnostics(self) -> Mapping[str, object]:
+        ranges = []
+        for record in self._records:
+            sequence = int(record["record_sequence"])
+            if ranges and sequence == ranges[-1][1] + 1:
+                ranges[-1] = (ranges[-1][0], sequence)
+            else:
+                ranges.append((sequence, sequence))
+        return MappingProxyType(
+            {
+                "max_records": self.max_records,
+                "total_record_count": self.total_record_count,
+                "retained_record_count": self.retained_record_count,
+                "evicted_record_count": self.evicted_record_count,
+                "is_truncated": self.is_truncated,
+                "retained_sequence_ranges": tuple(ranges),
+            }
+        )
+
+    def iter_ndjson_bytes(self) -> Iterator[bytes]:
+        """Yield the bounded retained window without building another copy."""
+
+        # Freeze the bounded window so a response iterator cannot observe a
+        # later append/eviction midway through an export.
+        for record in tuple(self._records):
+            yield canonical_json_bytes(record) + b"\n"
+
     def to_ndjson_bytes(self) -> bytes:
-        return b"".join(canonical_json_bytes(record) + b"\n" for record in self._records)
+        return b"".join(self.iter_ndjson_bytes())
 
     def sha256(self) -> str:
+        """Return the cumulative hash of every record ever appended."""
+
         return self._sha256.hexdigest()
+
+    def retained_sha256(self) -> str:
+        """Return the hash of the currently exportable retained NDJSON window."""
+
+        digest = hashlib.sha256()
+        for chunk in self.iter_ndjson_bytes():
+            digest.update(chunk)
+        return digest.hexdigest()
 
 
 class AvatarRuntime(Generic[StateT, PresentationT]):
@@ -369,6 +449,7 @@ __all__ = [
     "ACCUMULATOR_TICK_UNITS",
     "AvatarRuntime",
     "DEFAULT_MAX_CATCH_UP_TICKS",
+    "DEFAULT_REPLAY_MAX_RECORDS",
     "DEFAULT_REPLAY_STATE_INTERVAL_TICKS",
     "ReplayLog",
     "RuntimeAdvanceResult",

@@ -141,6 +141,9 @@ class WizardState:
     action_restore: Optional[Dict[str, Any]] = None
     speech_until: float = 0.0
     target_point: Optional[Dict[str, float]] = None
+    gaze_aim: int = 0
+    gaze_vertical_aim: int = 0
+    gaze_authoritative: bool = False
     screen_position: Dict[str, float] = field(default_factory=lambda: {"x": 0.0, "y": 0.0})
     display_scale: float = 1.0
     pose_id: str = "front_idle"
@@ -167,6 +170,12 @@ class WizardState:
     semantic_gesture: str = "none"
     semantic_amplitude: float = 0.0
     semantic_signal_sequence: int = 0
+    semantic_advisory_active: bool = False
+    semantic_turn_id: Optional[str] = None
+    semantic_utterance_id: Optional[str] = None
+    semantic_expires_at_ms: Optional[int] = None
+    semantic_transition: str = "inactive"
+    semantic_release_reason: Optional[str] = None
 
     def reconcile_compatibility_state(self) -> None:
         """Keep legacy action fields consistent with authoritative locomotion."""
@@ -179,8 +188,27 @@ class WizardState:
             self.action_restore = None
 
     def as_public_dict(self) -> Dict[str, Any]:
-        self.reconcile_compatibility_state()
-        return asdict(self)
+        public = asdict(self)
+        if public["action"] == "walking" and public["locomotion"] != "walking":
+            public["action"] = "idle"
+            public["upper_body_action"] = "none"
+            public["staff_state"] = "held"
+            public["action_until"] = 0.0
+            public["action_restore"] = None
+        return public
+
+
+@dataclass(frozen=True)
+class WizardPresentationState:
+    screen_x: float
+    screen_y: float
+    display_scale: float
+    pose_id: str
+    last_pose_id: str
+    pose_transition_progress: float
+    animation_clip_id: str
+    animation_node_id: str
+    animation_transition_id: Optional[str]
 
 
 @dataclass

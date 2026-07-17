@@ -334,10 +334,11 @@ class MediaSessionCoordinatorTests(unittest.TestCase):
         self.assertEqual(restored.snapshot.playback.position_ms, 1000)
 
     def test_loading_tts_does_not_preempt_main(self):
-        self.coordinator.accept(snapshot(position_ms=1000), 0)
+        self.coordinator.accept(snapshot(media_epoch=3, position_ms=1000), 0)
         loading = self.coordinator.accept_with_result(
             snapshot(
                 sequence=1,
+                media_epoch=4,
                 cause="play",
                 state="loading",
                 source_slot="speech",
@@ -348,7 +349,10 @@ class MediaSessionCoordinatorTests(unittest.TestCase):
         )
 
         self.assertEqual(loading.ack.disposition, "accepted")
+        self.assertEqual(loading.ack.accepted_sequence, 1)
+        self.assertEqual(loading.ack.accepted_media_epoch, 4)
         self.assertEqual(self.coordinator.accepted_snapshot.media.source_slot, "main")
+        self.assertEqual(self.coordinator.accepted_snapshot.media_epoch, 3)
         self.assertIsNone(loading.snapshot)
 
     def test_stale_tts_terminal_cannot_restore_main(self):

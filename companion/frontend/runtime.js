@@ -1,5 +1,11 @@
 const COMMAND_ROUTES = Object.freeze({
   action: "/api/avatar/wizard/action",
+  gaze: "/api/avatar/wizard/gaze",
+  move: "/api/avatar/wizard/move",
+  path: "/api/avatar/wizard/path",
+  expression: "/api/avatar/wizard/expression",
+  speak: "/api/avatar/wizard/speak",
+  "speech-stop": "/api/avatar/wizard/speech-stop",
   pose: "/api/avatar/wizard/pose",
   control: "/api/avatar/wizard/control",
   stop: "/api/avatar/wizard/stop",
@@ -79,10 +85,27 @@ export class RuntimeClient {
     this.invoke = tauriInvoke();
     this.mockState = {
       facing: "forward",
+      gaze_target: "viewer",
       action: "idle",
+      expression: "neutral",
+      mouth: "closed",
+      pose_id: "front_idle",
+      animation_clip_id: "idle_front",
+      animation_node_id: "ground_idle",
+      world_position: { x: 0, z: 5 },
+      simulation_tick: 0,
+      state_revision: 0,
+      semantic_cue: "none",
+      semantic_gesture: "none",
+      semantic_transition: "inactive",
+      semantic_advisory_active: false,
       airborne: false,
       control_source: null,
     };
+    this.mockPermissionWorld = { status: "empty", state: null, projection: null };
+    this.mockReplay = [
+      { record_type: "header", record_sequence: 0, simulation_tick: 0, payload: { schema_version: 1, seed: 7 } },
+    ];
   }
 
   async request(path, options = {}) {
@@ -102,6 +125,7 @@ export class RuntimeClient {
       path,
       method: options.method || "GET",
       body: options.body === undefined ? null : options.body,
+      responseType: options.responseType || "json",
     };
     const aliases = [
       "companion_http_request",
@@ -114,6 +138,7 @@ export class RuntimeClient {
         try {
           const result = await this.invoke(command, args);
           if (typeof result !== "string") return result;
+          if (options.responseType === "text") return result;
           try {
             return JSON.parse(result);
           } catch {
@@ -137,6 +162,7 @@ export class RuntimeClient {
       cache: "no-store",
     });
     if (!response.ok) throw new Error(`Runtime request failed (${response.status})`);
+    if (options.responseType === "text") return response.text();
     return response.json();
   }
 
@@ -202,6 +228,13 @@ export class RuntimeClient {
     if (path === "/api/avatar/wizard/state") {
       return {
         state: { ...this.mockState },
+        diagnostics: {
+          pose_id: this.mockState.pose_id,
+          animation_clip_id: this.mockState.animation_clip_id,
+          animation_node_id: this.mockState.animation_node_id,
+          mouth_state: this.mockState.mouth,
+          current_action: this.mockState.action,
+        },
         media: { status: "waiting", active: false, source: null, scheduler_state: "no_session" },
       };
     }
@@ -217,10 +250,48 @@ export class RuntimeClient {
         ],
       };
     }
+    if (path === "/api/avatar/wizard/character") {
+      return {
+        schema_version: 1,
+        character_id: "wizard-joe-v1",
+        display_name: "Wizard Joe",
+        capabilities: ["actions", "speech_overlay", "progressive_text_preview"],
+      };
+    }
+    if (path === "/api/avatar/wizard/replay") {
+      return `${this.mockReplay.map((record) => JSON.stringify(record)).join("\n")}\n`;
+    }
+    if (path === "/api/avatar/wizard/permission-world" && options.method !== "POST") {
+      return this.mockPermissionWorld;
+    }
     if (options.method === "POST") {
+      this.mockState.simulation_tick += 1;
+      this.mockState.state_revision += 1;
       if (path.endsWith("/stop")) this.mockState.action = "idle";
       if (path.endsWith("/action")) this.mockState.action = options.body.action || "idle";
-      if (path.endsWith("/pose")) this.mockState.action = options.body.pose_id ? "posing" : "idle";
+      if (path.endsWith("/gaze")) this.mockState.gaze_target = options.body.target || "viewer";
+      if (path.endsWith("/move")) {
+        this.mockState.world_position = { x: options.body.x, z: options.body.z };
+        this.mockState.action = "walking";
+      }
+      if (path.endsWith("/path")) {
+        const destination = options.body.points?.at(-1);
+        if (destination) this.mockState.world_position = { ...destination };
+        this.mockState.action = "walking";
+      }
+      if (path.endsWith("/expression")) this.mockState.expression = options.body.expression || "neutral";
+      if (path.endsWith("/speak")) {
+        this.mockState.action = "speaking";
+        this.mockState.mouth = "open_small";
+      }
+      if (path.endsWith("/speech-stop")) {
+        this.mockState.action = "idle";
+        this.mockState.mouth = "closed";
+      }
+      if (path.endsWith("/pose")) {
+        this.mockState.action = options.body.pose_id ? "posing" : "idle";
+        this.mockState.pose_id = options.body.pose_id || "front_idle";
+      }
       if (path.endsWith("/control")) {
         const intent = options.body.intent || {};
         const mobility = options.body.intent?.mobility_request;
@@ -228,6 +299,32 @@ export class RuntimeClient {
         if (mobility === "land") this.mockState.airborne = false;
         if (intent.move_x || intent.move_z) this.mockState.action = "walking";
       }
+      if (path === "/api/avatar/wizard/director/permission-world") {
+        const permission = options.body.permissions?.[0];
+        this.mockPermissionWorld = {
+          status: "ready",
+          state: null,
+          projection: null,
+          simulation_state: options.body,
+          simulation_projection: {
+            affordances: permission ? [{
+              capability_kind: permission.capability_kind,
+              permission_posture: permission.posture,
+              scope_class: permission.required_scope_class,
+              expiry_class: permission.expires_at_ms === null
+                ? "unbounded"
+                : permission.expires_at_ms <= Date.now() ? "expired" : "current",
+            }] : [],
+          },
+        };
+        return this.mockPermissionWorld;
+      }
+      this.mockReplay.push({
+        record_type: "command",
+        record_sequence: this.mockReplay.length,
+        simulation_tick: this.mockState.simulation_tick,
+        payload: { route: path.split("/").at(-1) },
+      });
       return { ...this.mockState };
     }
     return {};

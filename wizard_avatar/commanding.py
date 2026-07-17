@@ -11,6 +11,8 @@ from typing import Any, Dict, Iterable, Mapping, Optional, Sequence, Tuple
 COMMAND_SCHEMA_VERSION = 1
 DEFAULT_INBOX_CAPACITY = 1024
 DEFAULT_DEDUP_CAPACITY = 4096
+DEFAULT_SOURCE_WATERMARK_CAPACITY = 4096
+DEFAULT_RETIRED_SOURCE_EPOCH_CAPACITY = 16384
 MAX_FUTURE_TICKS = 120
 TICK_RATE = 60
 
@@ -37,6 +39,7 @@ COMMAND_KINDS = frozenset(
         "circle",
         "figure_eight",
         "face",
+        "gaze",
         "expression",
         "speak",
         "stop",
@@ -311,18 +314,31 @@ class OrderedCommandInbox:
         runtime_epoch: str,
         capacity: int = DEFAULT_INBOX_CAPACITY,
         dedup_capacity: int = DEFAULT_DEDUP_CAPACITY,
+        source_watermark_capacity: int = DEFAULT_SOURCE_WATERMARK_CAPACITY,
+        retired_source_epoch_capacity: int = DEFAULT_RETIRED_SOURCE_EPOCH_CAPACITY,
     ) -> None:
         _require_text("runtime_epoch", runtime_epoch)
         if not _is_int(capacity) or capacity <= 0:
             raise ValueError("capacity must be a positive integer")
         if not _is_int(dedup_capacity) or dedup_capacity < capacity:
             raise ValueError("dedup_capacity must be an integer >= capacity")
+        if not _is_int(source_watermark_capacity) or source_watermark_capacity <= 0:
+            raise ValueError("source_watermark_capacity must be a positive integer")
+        if not _is_int(retired_source_epoch_capacity) or retired_source_epoch_capacity <= 0:
+            raise ValueError("retired_source_epoch_capacity must be a positive integer")
         self.runtime_epoch = runtime_epoch
         self.capacity = capacity
         self.dedup_capacity = dedup_capacity
+        self.source_watermark_capacity = source_watermark_capacity
+        self.retired_source_epoch_capacity = retired_source_epoch_capacity
         self._heap: list[Tuple[int, int, int, QueuedCommand]] = []
         self._received_order = 0
-        self._source_watermarks: Dict[Tuple[str, str], int] = {}
+        self._source_watermarks: "OrderedDict[Tuple[str, str], int]" = OrderedDict()
+        self._active_source_epochs: Dict[str, str] = {}
+        self._retired_source_epochs: set[Tuple[str, str]] = set()
+        self._total_source_epoch_count = 0
+        self._source_watermark_eviction_count = 0
+        self._source_watermark_capacity_rejection_count = 0
         self._acks: "OrderedDict[str, CommandAckV1]" = OrderedDict()
         self._pending_ids: set[str] = set()
 
@@ -346,6 +362,29 @@ class OrderedCommandInbox:
             )
 
         key = (envelope.source_id, envelope.source_epoch)
+        if key in self._retired_source_epochs:
+            return self._remember(
+                self._reject(
+                    envelope,
+                    state_revision,
+                    "stale",
+                    "retired_source_epoch",
+                    "source epoch was retired; use a fresh source_epoch",
+                )
+            )
+
+        active_epoch = self._active_source_epochs.get(envelope.source_id)
+        if active_epoch is not None and active_epoch != envelope.source_epoch and key in self._source_watermarks:
+            return self._remember(
+                self._reject(
+                    envelope,
+                    state_revision,
+                    "stale",
+                    "retired_source_epoch",
+                    "source epoch is no longer active; use a fresh source_epoch",
+                )
+            )
+
         watermark = self._source_watermarks.get(key)
         if watermark is not None and envelope.source_sequence <= watermark:
             return self._remember(
@@ -370,6 +409,17 @@ class OrderedCommandInbox:
             return self._remember(
                 self._reject(envelope, state_revision, "rejected", "queue_full", "command inbox is full")
             )
+        if not self._reserve_source_watermark(key):
+            self._source_watermark_capacity_rejection_count += 1
+            return self._remember(
+                self._reject(
+                    envelope,
+                    state_revision,
+                    "rejected",
+                    "source_watermark_capacity",
+                    "source watermark retention is full; use an existing active source or restart the runtime",
+                )
+            )
 
         self._received_order += 1
         priority = command_priority(envelope)
@@ -383,7 +433,12 @@ class OrderedCommandInbox:
         # Higher numeric priority applies first at the same tick.
         heapq.heappush(self._heap, (target_tick, -priority, queued.received_order, queued))
         self._pending_ids.add(envelope.command_id)
+        is_new_source_epoch = key not in self._source_watermarks
         self._source_watermarks[key] = envelope.source_sequence
+        self._source_watermarks.move_to_end(key)
+        self._active_source_epochs[envelope.source_id] = envelope.source_epoch
+        if is_new_source_epoch:
+            self._total_source_epoch_count += 1
         ack = CommandAckV1(
             schema_version=COMMAND_SCHEMA_VERSION,
             command_id=envelope.command_id,
@@ -461,6 +516,36 @@ class OrderedCommandInbox:
     def source_watermark(self, source_id: str, source_epoch: str) -> Optional[int]:
         return self._source_watermarks.get((source_id, source_epoch))
 
+    @property
+    def source_watermark_count(self) -> int:
+        return len(self._source_watermarks)
+
+    @property
+    def total_source_epoch_count(self) -> int:
+        return self._total_source_epoch_count
+
+    @property
+    def source_watermark_eviction_count(self) -> int:
+        return self._source_watermark_eviction_count
+
+    @property
+    def source_watermark_capacity_rejection_count(self) -> int:
+        return self._source_watermark_capacity_rejection_count
+
+    @property
+    def source_retention_diagnostics(self) -> Mapping[str, object]:
+        return MappingProxyType(
+            {
+                "source_watermark_capacity": self.source_watermark_capacity,
+                "source_watermark_count": self.source_watermark_count,
+                "total_source_epoch_count": self.total_source_epoch_count,
+                "source_watermark_eviction_count": self.source_watermark_eviction_count,
+                "source_watermark_capacity_rejection_count": self.source_watermark_capacity_rejection_count,
+                "retired_source_epoch_capacity": self.retired_source_epoch_capacity,
+                "retired_source_epoch_count": len(self._retired_source_epochs),
+            }
+        )
+
     def pending(self) -> Tuple[QueuedCommand, ...]:
         return tuple(item[3] for item in sorted(self._heap))
 
@@ -484,6 +569,31 @@ class OrderedCommandInbox:
             return False
         ttl_ticks = int(math.ceil(envelope.ttl_ms * TICK_RATE / 1000.0))
         return current_tick > envelope.issued_tick + ttl_ticks
+
+    def _reserve_source_watermark(self, incoming_key: Tuple[str, str]) -> bool:
+        if incoming_key in self._source_watermarks:
+            return True
+        if len(self._source_watermarks) < self.source_watermark_capacity:
+            return True
+        if len(self._retired_source_epochs) >= self.retired_source_epoch_capacity:
+            return False
+
+        pending_keys = {
+            (item[3].envelope.source_id, item[3].envelope.source_epoch)
+            for item in self._heap
+        }
+        incoming_source_id = incoming_key[0]
+        for candidate in tuple(self._source_watermarks):
+            active_epoch = self._active_source_epochs.get(candidate[0])
+            is_active = active_epoch == candidate[1]
+            is_atomic_epoch_replacement = candidate[0] == incoming_source_id
+            if candidate in pending_keys or (is_active and not is_atomic_epoch_replacement):
+                continue
+            del self._source_watermarks[candidate]
+            self._retired_source_epochs.add(candidate)
+            self._source_watermark_eviction_count += 1
+            return True
+        return False
 
     def _reject(
         self,
@@ -530,6 +640,8 @@ __all__ = [
     "ACK_DISPOSITIONS",
     "COMMAND_KINDS",
     "COMMAND_SCHEMA_VERSION",
+    "DEFAULT_RETIRED_SOURCE_EPOCH_CAPACITY",
+    "DEFAULT_SOURCE_WATERMARK_CAPACITY",
     "CommandAckV1",
     "CommandEnvelopeV1",
     "CommandValidationError",

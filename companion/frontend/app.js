@@ -2,10 +2,22 @@ import { WizardFrameStream } from "./frame-stream.js";
 import { resolveRuntimeDescriptor, RuntimeClient } from "./runtime.js";
 import {
   activityDescription,
+  createActionPayload,
+  createExpressionPayload,
+  createGazePayload,
+  createMovePayload,
+  createPathPayload,
+  createPermissionSimulationPayload,
   createRandomPoseCycle,
   createSafeDiagnostics,
+  createSafeCueInspection,
+  createSpeechPayload,
+  deriveDirectorState,
   derivePresentation,
   movementCommandForKey,
+  normalizeViewportProfile,
+  summarizeReplayExport,
+  supportsProgressiveText,
 } from "./state.js";
 
 const elements = {
@@ -29,7 +41,61 @@ const elements = {
   motionMode: document.getElementById("motion-mode"),
   launchAtLogin: document.getElementById("launch-at-login"),
   diagnostics: document.getElementById("diagnostics-output"),
+  directorPanel: document.getElementById("director-panel"),
+  directorToggle: document.getElementById("director-toggle"),
+  directorContent: document.getElementById("director-content"),
+  directorStateMark: document.getElementById("director-state-mark"),
+  directorSummaryLabel: document.getElementById("director-summary-label"),
+  progressiveText: document.getElementById("director-progressive-text"),
+  progressiveStatus: document.getElementById("director-progressive-status"),
+  permissionStatus: document.getElementById("director-permission-status"),
+  replayRecords: document.getElementById("director-replay-records"),
+  replayTick: document.getElementById("director-replay-tick"),
+  replayHash: document.getElementById("director-replay-hash"),
 };
+
+const directorControls = {
+  positionX: document.getElementById("director-position-x"),
+  positionZ: document.getElementById("director-position-z"),
+  pathPreset: document.getElementById("director-path-preset"),
+  pathLoop: document.getElementById("director-path-loop"),
+  gaze: document.getElementById("director-gaze"),
+  expression: document.getElementById("director-expression"),
+  action: document.getElementById("director-action-select"),
+  actionDuration: document.getElementById("director-action-duration"),
+  speechText: document.getElementById("director-speech-text"),
+  speechDuration: document.getElementById("director-speech-duration"),
+  permissionPosture: document.getElementById("director-permission-posture"),
+  permissionScope: document.getElementById("director-permission-scope"),
+  permissionPurpose: document.getElementById("director-permission-purpose"),
+  permissionSurface: document.getElementById("director-permission-surface"),
+  permissionExpiry: document.getElementById("director-permission-expiry"),
+};
+
+const directorOutputs = Object.fromEntries(
+  [
+    "connection",
+    "connector",
+    "playback",
+    "source",
+    "mode",
+    "time",
+    "mouth",
+    "action",
+    "pose",
+    "clip",
+    "score",
+    "scheduler",
+    "engine",
+    "frames",
+    "control",
+    "cue",
+    "gesture",
+    "transition",
+    "tick",
+    "node",
+  ].map((name) => [name, document.getElementById(`director-${name}`)])
+);
 
 const systemReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 const storedMotionMode = localStorage.getItem("wizard.motionMode");
@@ -39,6 +105,14 @@ const state = {
   health: { status: "starting" },
   avatar: {},
   media: {},
+  diagnostics: {},
+  performance: {},
+  runtimeStatus: {},
+  character: {},
+  permissionWorld: null,
+  permissionStatus: "Not applied",
+  replayText: "",
+  replaySummary: null,
   connection: "connecting",
   error: null,
   errorCode: "none",
@@ -52,6 +126,9 @@ const state = {
   reactionsPaused: localStorage.getItem("wizard.reactionsPaused") === "true",
   motionMode: storedMotionMode || (systemReducedMotion.matches ? "reduced" : "full"),
   launchAtLogin: localStorage.getItem("wizard.launchAtLogin") === "true",
+  directorExpanded: localStorage.getItem("wizard.directorExpanded") === "true",
+  viewportProfile: normalizeViewportProfile(localStorage.getItem("wizard.viewportProfile")),
+  directorPositionSeeded: false,
   lastAnnouncedStatus: "",
   lastDescriptionAt: 0,
   demoTimers: [],
@@ -98,13 +175,88 @@ function render() {
     : "Repeat";
   elements.playDemo.setAttribute("aria-pressed", String(state.localDemo));
   elements.shell.setAttribute("aria-busy", String(!state.hasFrame && !state.error));
+  elements.stage.dataset.viewportProfile = state.viewportProfile;
+  elements.progressiveText.disabled = !supportsProgressiveText(state.character);
+  elements.progressiveStatus.textContent = elements.progressiveText.disabled ? "Unavailable" : "Supported";
+  const selectedViewport = document.querySelector(
+    `input[name="director-viewport"][value="${state.viewportProfile}"]`
+  );
+  if (selectedViewport) selectedViewport.checked = true;
 
   if (view.label !== state.lastAnnouncedStatus) {
     elements.liveStatus.textContent = `${view.label}. ${view.source}.`;
     state.lastAnnouncedStatus = view.label;
   }
   updateActivityDescription();
+  updateDirector();
   updateDiagnostics();
+}
+
+function updateDirector() {
+  const view = deriveDirectorState({
+    health: state.health,
+    avatar: state.avatar,
+    media: state.media,
+    diagnostics: state.diagnostics,
+    performance: state.performance,
+    runtime: state.runtimeStatus,
+    connection: state.connection,
+    stream: stream.getStats(),
+    hasFrame: state.hasFrame,
+    reactionsPaused: state.reactionsPaused,
+    error: state.error,
+  });
+  const values = {
+    connection: view.connection,
+    connector: view.connector,
+    playback: view.playback,
+    source: view.source,
+    mode: view.mode,
+    time: view.mediaTime,
+    mouth: view.mouth,
+    action: view.action,
+    pose: view.pose,
+    clip: view.clip,
+    score: view.score,
+    scheduler: view.scheduler,
+    engine: view.engine,
+    frames: view.frames,
+    control: view.control,
+    cue: "None",
+    gesture: "None",
+    transition: "Inactive",
+    tick: "Unavailable",
+    node: "Unknown",
+  };
+  const inspection = createSafeCueInspection({
+    avatar: state.avatar,
+    diagnostics: state.diagnostics,
+    media: state.media,
+  });
+  values.cue = inspection.semantic_cue;
+  values.gesture = inspection.semantic_gesture;
+  values.transition = inspection.semantic_transition;
+  values.tick = inspection.simulation_tick === null
+    ? "Unavailable"
+    : `${inspection.simulation_tick} / ${inspection.state_revision ?? "-"}`;
+  values.node = inspection.animation_node_id;
+  for (const [name, value] of Object.entries(values)) {
+    directorOutputs[name].textContent = value;
+    directorOutputs[name].title = value;
+  }
+  elements.directorPanel.dataset.expanded = String(state.directorExpanded);
+  elements.directorContent.hidden = !state.directorExpanded;
+  elements.directorToggle.setAttribute("aria-expanded", String(state.directorExpanded));
+  elements.directorToggle.title = state.directorExpanded ? "Close Director" : "Open Director";
+  elements.directorSummaryLabel.textContent = view.summary;
+  elements.directorSummaryLabel.title = view.summary;
+  elements.directorStateMark.dataset.tone = view.tone;
+  elements.permissionStatus.textContent = state.permissionStatus;
+  elements.permissionStatus.title = state.permissionStatus;
+  elements.replayRecords.textContent = state.replaySummary?.retained_records ?? "Not inspected";
+  elements.replayTick.textContent = state.replaySummary?.last_tick ?? "Unavailable";
+  elements.replayHash.textContent = state.replaySummary?.retained_sha256 || "Unavailable";
+  elements.replayHash.title = elements.replayHash.textContent;
 }
 
 function updateActivityDescription(force = false) {
@@ -121,6 +273,10 @@ function diagnosticPayload() {
     appVersion: state.descriptor?.appVersion,
     health: state.health,
     media: state.media,
+    avatar: state.avatar,
+    diagnostics: state.diagnostics,
+    performance: state.performance,
+    runtime: state.runtimeStatus,
     stream: stream.getStats(),
     preferences: {
       motionMode: state.motionMode,
@@ -183,6 +339,97 @@ async function loadPoseCatalog() {
     state.poseIds = [];
   }
   renderPoseCatalog();
+}
+
+async function loadCharacter() {
+  try {
+    state.character = await state.runtime?.request("/api/avatar/wizard/character") || {};
+  } catch {
+    state.character = {};
+  }
+}
+
+function permissionStatusLabel(payload) {
+  const affordance = payload?.simulation_projection?.affordances?.[0]
+    || payload?.projection?.affordances?.[0];
+  if (affordance) {
+    const posture = affordance.permission_posture || "unknown";
+    const expiry = affordance.expiry_class || "unknown";
+    return `${humanizePoseId(posture)} / ${humanizePoseId(expiry)}`;
+  }
+  const status = payload?.status || payload?.diagnostics?.status;
+  if (status === "empty") return "No simulation";
+  return status ? humanizePoseId(status) : "Unavailable";
+}
+
+async function loadPermissionWorld() {
+  try {
+    state.permissionWorld = await state.runtime?.request("/api/avatar/wizard/permission-world");
+    state.permissionStatus = permissionStatusLabel(state.permissionWorld);
+  } catch {
+    state.permissionWorld = null;
+    state.permissionStatus = "Unavailable";
+  }
+  render();
+}
+
+async function applyPermissionSimulation() {
+  state.permissionStatus = "Applying...";
+  render();
+  try {
+    const payload = await createPermissionSimulationPayload({
+      posture: directorControls.permissionPosture.value,
+      scope: directorControls.permissionScope.value,
+      purpose: directorControls.permissionPurpose.value,
+      surface: directorControls.permissionSurface.value,
+      expiry: directorControls.permissionExpiry.value,
+    });
+    await state.runtime?.request("/api/avatar/wizard/director/permission-world", {
+      method: "POST",
+      body: payload,
+    });
+    state.permissionWorld = await state.runtime?.request("/api/avatar/wizard/permission-world");
+    state.permissionStatus = permissionStatusLabel(state.permissionWorld);
+    elements.liveStatus.textContent = `Permission simulation applied. ${state.permissionStatus}.`;
+  } catch {
+    state.permissionStatus = "Simulation rejected";
+  }
+  render();
+}
+
+function replayText(result) {
+  if (typeof result === "string") return result;
+  if (typeof result?.body === "string") return result.body;
+  return result ? `${JSON.stringify(result)}\n` : "";
+}
+
+async function inspectReplay() {
+  try {
+    const result = await state.runtime?.request("/api/avatar/wizard/replay", { responseType: "text" });
+    state.replayText = replayText(result);
+    state.replaySummary = await summarizeReplayExport(state.replayText);
+    elements.liveStatus.textContent = `Replay inspected. ${state.replaySummary.retained_records} retained records.`;
+  } catch {
+    state.replayText = "";
+    state.replaySummary = {
+      retained_records: "Unavailable",
+      last_tick: "Unavailable",
+      retained_sha256: "Unavailable",
+    };
+  }
+  render();
+}
+
+async function exportReplay() {
+  if (!state.replayText) await inspectReplay();
+  if (!state.replayText) return;
+  const url = URL.createObjectURL(new Blob([state.replayText], { type: "application/x-ndjson" }));
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = "wizard-joe-replay.ndjson";
+  link.click();
+  window.setTimeout(() => URL.revokeObjectURL(url), 0);
+  elements.liveStatus.textContent = "Replay export prepared.";
 }
 
 function stopRepeat(clearPose = true) {
@@ -305,6 +552,18 @@ async function pollRuntime() {
     state.health = health;
     state.avatar = publicState.state || state.avatar;
     state.media = publicState.media || {};
+    state.diagnostics = publicState.diagnostics || {};
+    state.performance = publicState.performance
+      || publicState.director?.performance
+      || state.media.performance
+      || {};
+    state.runtimeStatus = publicState.runtime || publicState.director?.runtime || {};
+    const worldPosition = state.avatar.world_position;
+    if (!state.directorPositionSeeded && worldPosition && typeof worldPosition === "object") {
+      if (Number.isFinite(worldPosition.x)) directorControls.positionX.value = worldPosition.x;
+      if (Number.isFinite(worldPosition.z)) directorControls.positionZ.value = worldPosition.z;
+      state.directorPositionSeeded = true;
+    }
     if (
       state.localDemo
       && !state.reactionsPaused
@@ -390,6 +649,59 @@ function closeDialog(dialog) {
 }
 
 elements.playDemo.addEventListener("click", playDemo);
+elements.directorToggle.addEventListener("click", () => {
+  state.directorExpanded = !state.directorExpanded;
+  localStorage.setItem("wizard.directorExpanded", String(state.directorExpanded));
+  render();
+});
+document.getElementById("director-move").addEventListener("click", () => {
+  stopRepeat(false);
+  sendCommand("move", createMovePayload({
+    x: directorControls.positionX.value,
+    z: directorControls.positionZ.value,
+  }));
+});
+document.getElementById("director-stop").addEventListener("click", stopLocalMovement);
+document.getElementById("director-run-path").addEventListener("click", () => {
+  stopRepeat(false);
+  sendCommand("path", createPathPayload({
+    preset: directorControls.pathPreset.value,
+    loop: directorControls.pathLoop.checked,
+  }));
+});
+directorControls.gaze.addEventListener("change", () => {
+  sendCommand("gaze", createGazePayload(directorControls.gaze.value));
+});
+document.getElementById("director-apply-expression").addEventListener("click", () => {
+  sendCommand("expression", createExpressionPayload(directorControls.expression.value));
+});
+document.getElementById("director-apply-action").addEventListener("click", () => {
+  sendCommand("action", createActionPayload({
+    action: directorControls.action.value,
+    durationMs: directorControls.actionDuration.value,
+  }));
+});
+document.getElementById("director-speak").addEventListener("click", () => {
+  sendCommand("speak", createSpeechPayload({
+    text: directorControls.speechText.value,
+    durationMs: directorControls.speechDuration.value,
+    progressiveText: elements.progressiveText.checked,
+    progressiveSupported: supportsProgressiveText(state.character),
+  }));
+});
+document.getElementById("director-speech-stop").addEventListener("click", () => {
+  sendCommand("speech-stop");
+});
+document.getElementById("director-apply-permission").addEventListener("click", applyPermissionSimulation);
+document.getElementById("director-inspect-replay").addEventListener("click", inspectReplay);
+document.getElementById("director-export-replay").addEventListener("click", exportReplay);
+document.querySelectorAll('input[name="director-viewport"]').forEach((input) => {
+  input.addEventListener("change", () => {
+    state.viewportProfile = normalizeViewportProfile(input.value);
+    localStorage.setItem("wizard.viewportProfile", state.viewportProfile);
+    render();
+  });
+});
 elements.repeatDemo.addEventListener("click", toggleRepeat);
 elements.stopMovement.addEventListener("click", stopLocalMovement);
 elements.flyToggle.addEventListener("click", toggleFlight);
@@ -495,10 +807,11 @@ async function start() {
         state.launchAtLogin = false;
       }
     }
-    await loadPoseCatalog();
+    await Promise.all([loadPoseCatalog(), loadCharacter()]);
     stream.setMotionMode(state.motionMode);
     stream.connect(state.descriptor);
     await pollRuntime();
+    await loadPermissionWorld();
     window.setInterval(pollRuntime, 1500);
   } catch (error) {
     setError(error, "startup_failed");

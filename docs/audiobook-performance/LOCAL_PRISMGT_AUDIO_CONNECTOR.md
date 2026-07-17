@@ -17,7 +17,16 @@ ends, pauses, or becomes inaudible, the latest main-media snapshot is restored.
 - Wizard visualization: `http://127.0.0.1:8765/`
 - Wizard ingress: `POST /api/avatar/wizard/media-session`
 - Wizard status: `GET /api/avatar/wizard/media-session/status`
+- Wizard runtime binding: `GET /api/avatar/wizard/performance-binding`
+- Wizard performance context: `POST /api/avatar/wizard/performance-context`
+- Wizard governed speech registration: `POST /api/avatar/wizard/governed-speech`
+- Wizard governed speech revocation: `POST /api/avatar/wizard/governed-speech/revoke`
+- Wizard permission-world authority: `POST /api/avatar/wizard/permission-world`
 - Prism same-origin ingress: `POST /api/connectors/wizard/media-session`
+- Prism runtime-binding bridge: `GET /api/connectors/wizard/performance-binding`
+- Prism performance-context bridge: `POST /api/connectors/wizard/performance-context`
+- Prism governed-speech bridge: `POST /api/connectors/wizard/governed-speech`
+- Prism governed-speech revocation bridge: `POST /api/connectors/wizard/governed-speech/revoke`
 - Prism connector status: `GET /api/connectors/wizard/status`
 
 ## User workflow
@@ -86,6 +95,24 @@ Both ingress layers enforce exact JSON, a 16 KiB request limit, strict unknown
 field rejection, and authentication. The Python boundary rejects requests with
 a browser `Origin`. The Rust relay accepts only an explicit loopback base URL.
 
+Governed conversational speech has an additional release boundary. Prism mints
+an expiring approval only for exact final text that is neither pending nor a
+clarification. TTS, its audio digest, provider timing when available, the active
+Wizard runtime/package binding, the accepted media cursor, and the captured
+performance context must all agree before Prism registers speech with Wizard or
+starts the audio element. Progressive text and character performance then
+project from that same audio element clock. Missing or invalid alignment uses a
+deterministic local timing projection; it does not authorize different text.
+
+Permission-world updates use the same connector instance, discovery identity,
+and bearer token. The current Prism runtime does not yet own a generic user
+permission-grant store, so its production producer sends a complete empty
+authority snapshot on a bounded heartbeat. This fail-closed snapshot removes
+only explicitly permission-managed scenery. It never infers grants from CDISS,
+agreements, configured providers, memory availability, credentials, microphone
+UI state, notifications, speech approval, or ledger history. Director
+simulations are separately labeled and cannot control production projection.
+
 ## Runtime behavior
 
 - Music without a compiled score uses a deterministic media-time groove.
@@ -111,6 +138,18 @@ cargo test --locked -p prism-cdiss-cli media_connector
 cargo test --locked -p prism-cdiss-cli wizard_
 npm run build
 ```
+
+Governed speech verification must additionally prove:
+
+1. Exact approved UTF-8 text is the only TTS input.
+2. The browser-decoded audio digest matches the registered digest.
+3. Runtime epoch, character, package, media cursor, context, speech, and timing
+   identities all match before playback.
+4. Text reveal follows the audio element's current time during play, pause,
+   seek, and rate changes.
+5. Revocation or a stale turn stops the obsolete performance.
+6. Permission snapshots remain empty until a real permission authority is
+   wired, and no browser route can create grants.
 
 The local integration proof must observe all three states in order:
 

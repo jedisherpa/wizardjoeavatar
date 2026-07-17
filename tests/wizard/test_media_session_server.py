@@ -22,6 +22,9 @@ async def asgi_request(app, method, path, body=b"", headers=()):
     async def send(message):
         messages.append(message)
 
+    request_headers = list(headers)
+    if not any(key.lower() == "host" for key, _value in request_headers):
+        request_headers.append(("host", "127.0.0.1:8765"))
     scope = {
         "type": "http",
         "asgi": {"version": "3.0"},
@@ -32,7 +35,10 @@ async def asgi_request(app, method, path, body=b"", headers=()):
         "raw_path": path.encode("ascii"),
         "query_string": b"",
         "root_path": "",
-        "headers": [(key.lower().encode("ascii"), value.encode("ascii")) for key, value in headers],
+        "headers": [
+            (key.lower().encode("ascii"), value.encode("ascii"))
+            for key, value in request_headers
+        ],
         "client": ("127.0.0.1", 50000),
         "server": ("127.0.0.1", 8765),
     }

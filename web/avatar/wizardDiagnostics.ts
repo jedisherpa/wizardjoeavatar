@@ -47,6 +47,6 @@ export class WizardDiagnostics {
         lines.push(`cell ${browser.canvas.deviceCell}px  dpr ${browser.canvas.dpr.toFixed(2)}`);
       }
     }
-    this.element.textContent = lines.join("\\n");
+    this.element.textContent = lines.join("\n");
   }
 }

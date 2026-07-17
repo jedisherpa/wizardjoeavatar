@@ -1,0 +1,18 @@
+{
+  "schema_version": 2,
+  "event_id": "123e4567-e89b-42d3-a456-426614174000",
+  "turn_id": "turn-20260715-0017",
+  "utterance_id": "utterance-03",
+  "source_epoch": "prism-local-1",
+  "source_sequence": 17,
+  "emitted_at_ms": 1000000,
+  "ttl_ms": 1500,
+  "kind": "stage",
+  "classification": "visual_advisory_only",
+  "provenance_class": "runtime_lifecycle",
+  "sanitization_version": 1,
+  "payload": {
+    "stage": "understanding",
+    "status": "active"
+  }
+}

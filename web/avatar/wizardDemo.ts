@@ -1,7 +1,7 @@
-import { WizardCanvas } from "./wizardCanvas.ts?v=cartoon-driver-v1";
-import { WizardClient } from "./wizardClient.ts?v=cartoon-driver-v1";
-import { installControls } from "./wizardControls.ts?v=cartoon-driver-v1";
-import { WizardDiagnostics } from "./wizardDiagnostics.ts?v=cartoon-driver-v1";
+import { WizardCanvas } from "./wizardCanvas.ts?v=character-director-v2";
+import { WizardClient } from "./wizardClient.ts?v=character-director-v2";
+import { installControls } from "./wizardControls.ts?v=character-director-v2";
+import { WizardDiagnostics } from "./wizardDiagnostics.ts?v=character-director-v2";
 
 const canvas = new WizardCanvas(
   document.getElementById("wizard-canvas"),

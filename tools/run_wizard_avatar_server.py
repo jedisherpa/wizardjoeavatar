@@ -49,8 +49,8 @@ def main() -> None:
         "1", "true", "yes", "on"
     }
     companion_mode = args.companion or environment_companion_mode
-    if companion_mode and not is_literal_loopback_host(args.host):
-        parser.error("companion mode requires --host to be a literal loopback address")
+    if not is_literal_loopback_host(args.host):
+        parser.error("Wizard Joe only supports a literal loopback --host")
 
     shutdown_signal = ServerShutdownSignal()
     app = create_app(

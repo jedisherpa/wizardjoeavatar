@@ -1,11 +1,24 @@
 import copy
 import json
+import tempfile
 import unittest
+from dataclasses import replace
 from pathlib import Path
+from unittest import mock
 
 from wizard_avatar.controller import WizardAvatarController
 from wizard_avatar.media_session import MediaSessionSnapshotV1
 from wizard_avatar.performance_application import PerformanceApplication
+from wizard_avatar.performance_score import CompiledScoreLoader, CompiledScoreRepository
+
+from tests.wizard.test_performance_scheduler import bound_snapshot, runtime_score
+
+
+def make_score_repository(root):
+    return CompiledScoreRepository(
+        root,
+        CompiledScoreLoader(contract_validator=lambda _name, _value: None),
+    )
 
 
 FIXTURE = (
@@ -144,6 +157,171 @@ class PerformanceApplicationTests(unittest.TestCase):
         resumed = self.application.apply(self.controller, 300_000)
         self.assertTrue(resumed.active)
         self.assertEqual(resumed.media_time_ms, 300)
+
+    def test_prepared_bound_score_is_resolved_without_tick_disk_io(self):
+        score = runtime_score()
+        snapshot = bound_snapshot(score, position=1500)
+        with tempfile.TemporaryDirectory() as temporary:
+            repository = make_score_repository(temporary)
+            repository.publish(score)
+            application = PerformanceApplication(
+                "wizard-runtime-repository",
+                score_repository=repository,
+            )
+
+            prepared = application.prepare_snapshot(snapshot)
+            self.assertTrue(prepared.ready)
+            with mock.patch.object(
+                repository,
+                "load_current",
+                side_effect=AssertionError("event-loop path touched disk"),
+            ):
+                ack = application.accept_snapshot(snapshot, 0)
+                result = application.apply(WizardAvatarController(), 0)
+                current = application.scheduler.current_state(0)
+
+            self.assertEqual(ack.scheduler_state, "playing")
+            self.assertTrue(result.active)
+            self.assertEqual(current.score_id, score.compiled_score_id)
+
+    def test_bound_score_not_prepared_fails_closed_without_named_fallback(self):
+        score = runtime_score()
+        snapshot = bound_snapshot(score, position=1500)
+        with tempfile.TemporaryDirectory() as temporary:
+            repository = make_score_repository(temporary)
+            repository.publish(score)
+            application = PerformanceApplication(
+                "wizard-runtime-not-prepared",
+                score_repository=repository,
+            )
+            controller = WizardAvatarController()
+
+            ack = application.accept_snapshot(snapshot, 0)
+            result = application.apply(controller, 0)
+
+            self.assertEqual(ack.scheduler_state, "error")
+            self.assertEqual(ack.error_code, "score_not_ready")
+            self.assertFalse(result.active)
+            self.assertEqual(controller.state.action, "idle")
+            self.assertEqual(
+                application.diagnostics(0)["score_runtime"]["code"],
+                "score_not_ready",
+            )
+
+        unconfigured = PerformanceApplication("wizard-runtime-no-repository")
+        unconfigured_ack = unconfigured.accept_snapshot(snapshot, 0)
+        unconfigured_result = unconfigured.apply(WizardAvatarController(), 0)
+        self.assertEqual(unconfigured_ack.error_code, "score_not_ready")
+        self.assertFalse(unconfigured_result.active)
+
+    def test_prepare_failure_codes_are_returned_by_accept_snapshot(self):
+        score = runtime_score()
+        snapshot = bound_snapshot(score)
+        other = runtime_score(compiled_id="compiled:other")
+        with tempfile.TemporaryDirectory() as temporary:
+            repository = make_score_repository(temporary)
+            repository.publish(other)
+            application = PerformanceApplication(
+                "wizard-runtime-mismatch",
+                score_repository=repository,
+            )
+
+            prepared = application.prepare_snapshot(snapshot)
+            ack = application.accept_snapshot(snapshot, 0)
+
+            self.assertEqual(prepared.code, "score_mismatch")
+            self.assertEqual(ack.error_code, "score_mismatch")
+
+    def test_repository_configuration_preserves_scoreless_migration_fallback(self):
+        score = runtime_score()
+        snapshot = bound_snapshot(score, with_score=False, mode="narrative")
+        with tempfile.TemporaryDirectory() as temporary:
+            application = PerformanceApplication(
+                "wizard-runtime-scoreless",
+                score_repository=CompiledScoreRepository(temporary),
+            )
+
+            prepared = application.prepare_snapshot(snapshot)
+            ack = application.accept_snapshot(snapshot, 0)
+            resolved = application.scheduler.current_state(0)
+
+            self.assertEqual(prepared.code, "scoreless_v1")
+            self.assertEqual(ack.scheduler_state, "scoreless")
+            self.assertEqual(resolved.fallback_records[0]["fallback_id"], "scoreless-v1")
+
+    def test_scoreless_preparation_without_repository_keeps_migration_name(self):
+        score = runtime_score()
+        snapshot = bound_snapshot(score, with_score=False, mode="narrative")
+
+        prepared = PerformanceApplication("wizard-runtime-scoreless-no-repo").prepare_snapshot(
+            snapshot
+        )
+
+        self.assertEqual(prepared.code, "scoreless_v1")
+
+    def test_stage_and_gaze_reach_authoritative_state_or_report_suppression(self):
+        self.accept(snapshot_mapping(), 0)
+        resolved = replace(
+            self.application.scheduler.current_state(500_000),
+            world_position_milli=(750, 500),
+            gaze_target="semantic:gaze:viewer_left",
+            owned_channels=frozenset({"stage", "locomotion", "gaze"}),
+        )
+
+        suppressions = self.application._apply_stage_and_gaze(
+            self.controller,
+            resolved,
+            body_allowed=True,
+            gaze_allowed=True,
+        )
+
+        self.assertEqual(suppressions, ())
+        self.assertAlmostEqual(self.controller.state.world_position["x"], 2.5)
+        self.assertAlmostEqual(self.controller.state.world_position["z"], 5.75)
+        self.assertTrue(self.controller.state.gaze_authoritative)
+        self.assertEqual(self.controller.state.gaze_aim, -1)
+
+        unsupported = replace(resolved, gaze_target="semantic:gaze:up")
+        suppressions = self.application._apply_stage_and_gaze(
+            self.controller,
+            unsupported,
+            body_allowed=True,
+            gaze_allowed=True,
+        )
+        self.assertIn(
+            {"channel": "gaze", "reason_code": "gaze_target_unsupported"},
+            suppressions,
+        )
+
+    def test_user_control_lease_suppresses_score_stage_authority(self):
+        self.accept(snapshot_mapping(), 0)
+        self.controller.apply_command(
+            type("Command", (), {"type": "control", "payload": {
+                "source_kind": "keyboard",
+                "lease_id": "manual-stage",
+                "ttl_ms": 1000,
+                "intent": {"move_x": 1.0, "move_z": 0.0},
+            }})()
+        )
+        resolved = replace(
+            self.application.scheduler.current_state(100_000),
+            world_position_milli=(1000, 1000),
+            owned_channels=frozenset({"stage", "locomotion"}),
+        )
+        before = dict(self.controller.state.world_position)
+
+        suppressions = self.application._apply_stage_and_gaze(
+            self.controller,
+            resolved,
+            body_allowed=False,
+            gaze_allowed=True,
+        )
+
+        self.assertEqual(self.controller.state.world_position, before)
+        self.assertIn(
+            {"channel": "stage", "reason_code": "user_control_lease"},
+            suppressions,
+        )
 
 
 if __name__ == "__main__":

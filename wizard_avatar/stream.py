@@ -4,17 +4,26 @@ import asyncio
 import contextlib
 import time
 import uuid
+from concurrent.futures import ThreadPoolExecutor
 from dataclasses import dataclass, field
 from itertools import count
 from collections import deque
 from typing import Dict, Optional, Set
 
+from .character_capabilities import derive_character_capability_manifest
 from .commanding import CommandAckV1, CommandEnvelopeV1, OrderedCommandInbox, QueuedCommand
 from .frame_hash import frame_hash
 from .frame_source import ProceduralWizardFrameSource
 from .models import CommandResult, WizardCellFrame, WizardCommand, WizardState
 from .protocol import encode_keyframe
 from .performance_application import PerformanceApplication
+from .performance_context import PerformanceContextV1
+from .performance_release import (
+    GovernedSpeechRegistrationV1,
+    PerformanceContextRequestV1,
+)
+from .performance_score import CompiledScoreRepository
+from .permission_world import CapabilityPermissionV1, PermissionWorldStateV1
 from .media_session import MediaSessionAckV1, MediaSessionSnapshotV1
 from .runtime import AvatarRuntime, ReplayLog
 
@@ -31,11 +40,37 @@ class WizardSubscriber:
 
 
 class WizardFrameHub:
-    def __init__(self, frame_source: ProceduralWizardFrameSource, codec: str = "adaptive") -> None:
+    def __init__(
+        self,
+        frame_source: ProceduralWizardFrameSource,
+        codec: str = "adaptive",
+        score_repository: Optional[CompiledScoreRepository] = None,
+    ) -> None:
         self.frame_source = frame_source
         self.codec = codec
         self.runtime_epoch = "wizard-{}".format(uuid.uuid4().hex)
-        self.performance = PerformanceApplication(self.runtime_epoch)
+        package_path = getattr(self.frame_source, "character_package_path", None)
+        capability_manifest = (
+            derive_character_capability_manifest(package_path)
+            if package_path is not None
+            else None
+        )
+        self.performance = PerformanceApplication(
+            self.runtime_epoch,
+            score_repository=score_repository,
+            character_id=self.frame_source.character_package.character_id,
+            package_digest=(
+                "sha256:" + "0" * 64
+                if capability_manifest is None
+                else str(capability_manifest["sources"]["package_sha256"])
+            ),
+            manifest_digest=(
+                "sha256:" + "0" * 64
+                if capability_manifest is None
+                else str(capability_manifest["manifest_sha256"])
+            ),
+            capability_manifest=capability_manifest,
+        )
         self.command_inbox = OrderedCommandInbox(self.runtime_epoch)
         self.replay_log = ReplayLog(
             {
@@ -58,6 +93,9 @@ class WizardFrameHub:
         self._command_waiters: Dict[str, asyncio.Event] = {}
         self._subscribers: Set[WizardSubscriber] = set()
         self._task: Optional[asyncio.Task] = None
+        self._render_executor: Optional[ThreadPoolExecutor] = None
+        self._task_error_code: Optional[str] = None
+        self._task_failure_count = 0
         self._lock: Optional[asyncio.Lock] = None
         self._lock_loop: Optional[asyncio.AbstractEventLoop] = None
         self._latest_frame: Optional[WizardCellFrame] = None
@@ -69,20 +107,73 @@ class WizardFrameHub:
         self._forced_keyframe_count = 0
         self._schedule_overruns = 0
         self._source_hash_history = deque(maxlen=240)
+        self._published_at = deque(maxlen=240)
+
+    @property
+    def task_error_code(self) -> Optional[str]:
+        return self._task_error_code
 
     async def start(self) -> None:
         if self._task is None or self._task.done():
             self._started_at = time.perf_counter()
             self.runtime.advance_to(time.perf_counter_ns())
+            self._task_error_code = None
+            if self._render_executor is None:
+                self._render_executor = ThreadPoolExecutor(
+                    max_workers=1,
+                    thread_name_prefix="wizard-frame-render",
+                )
             self._task = asyncio.create_task(self._run(), name="wizard-frame-hub")
+            self._task.add_done_callback(self._record_task_outcome)
 
     async def stop(self) -> None:
-        if self._task is None:
-            return
-        self._task.cancel()
-        with contextlib.suppress(asyncio.CancelledError):
-            await self._task
+        task = self._task
+        if task is not None:
+            task.cancel()
+            # The done callback records any non-cancellation failure. Shutdown
+            # must remain idempotent when it is invoked after that failure.
+            with contextlib.suppress(asyncio.CancelledError, Exception):
+                await task
         self._task = None
+        await self._settle_waiters_on_stop()
+        executor = self._render_executor
+        self._render_executor = None
+        if executor is not None:
+            await asyncio.to_thread(executor.shutdown, wait=True, cancel_futures=True)
+
+    def _record_task_outcome(self, task: asyncio.Task) -> None:
+        if task.cancelled():
+            return
+        try:
+            error = task.exception()
+        except asyncio.CancelledError:
+            return
+        self._task_failure_count += 1
+        self._task_error_code = (
+            "frame_hub_failed" if error is not None else "frame_hub_stopped_unexpectedly"
+        )
+        self._update_diagnostics()
+
+    async def _settle_waiters_on_stop(self) -> None:
+        async with self._current_lock():
+            self.command_inbox.discard_pending()
+            state = self.frame_source.current_state().as_public_dict()
+            for command_id, waiter in tuple(self._command_waiters.items()):
+                ack = self.command_inbox.ack_for(command_id)
+                if ack is not None and ack.disposition == "accepted":
+                    self.command_inbox.mark_rejected(
+                        command_id,
+                        self.runtime.clock.state_revision,
+                        "runtime_stopped",
+                        "runtime stopped before command application",
+                    )
+                self._command_results[command_id] = CommandResult(
+                    False,
+                    "runtime stopped before command application",
+                    state,
+                )
+                waiter.set()
+            self._command_types.clear()
 
     async def subscribe(self, max_queue_size: int = 8) -> WizardSubscriber:
         await self.start()
@@ -128,25 +219,41 @@ class WizardFrameHub:
         final_ack = self.command_inbox.ack_for(envelope.command_id) or ack
         return final_ack, result
 
-    def diagnostics_extra(self) -> dict:
-        elapsed = max(0.001, time.perf_counter() - self._started_at) if self._started_at else 0.001
+    def diagnostics_extra(self, include_replay_digest: bool = True) -> dict:
+        now = time.perf_counter()
+        elapsed = max(0.001, now - self._started_at) if self._started_at else 0.001
+        presentation_window = 0.0
+        if len(self._published_at) >= 2:
+            presentation_window = (len(self._published_at) - 1) / max(
+                0.001,
+                self._published_at[-1] - self._published_at[0],
+            )
         diagnostics = {
             "subscriber_count": len(self._subscribers),
             "hub_actual_fps": self._published_frames / elapsed,
+            "hub_window_fps": presentation_window,
             "hub_queue_drops": self._queue_drops,
             "resync_count": self._resync_count,
             "slow_subscriber_count": sum(1 for subscriber in self._subscribers if subscriber.dropped_frame_count),
             "forced_keyframe_count": self._forced_keyframe_count,
             "schedule_overruns": self._schedule_overruns,
+            "frame_hub_error_code": self._task_error_code,
+            "frame_hub_failure_count": self._task_failure_count,
             "source_hash_history_count": len(self._source_hash_history),
             "runtime_epoch": self.runtime_epoch,
             "simulation_tick": self.runtime.clock.simulation_tick,
             "state_revision": self.runtime.clock.state_revision,
             "runtime_state_hash": self.runtime.current_snapshot().state_hash,
             "ordered_command_pending": self.command_inbox.pending_count,
-            "replay_record_count": self.replay_log.record_count,
+            **self.command_inbox.source_retention_diagnostics,
+            "replay_record_count": self.replay_log.total_record_count,
+            "replay_retained_record_count": self.replay_log.retained_record_count,
+            "replay_evicted_record_count": self.replay_log.evicted_record_count,
+            "replay_is_truncated": self.replay_log.is_truncated,
             "replay_sha256": self.replay_log.sha256(),
         }
+        if include_replay_digest:
+            diagnostics["replay_retained_sha256"] = self.replay_log.retained_sha256()
         diagnostics["media_performance"] = self.performance.diagnostics(time.perf_counter_ns() // 1000)
         return diagnostics
 
@@ -156,6 +263,10 @@ class WizardFrameHub:
         receipt_monotonic_us: Optional[int] = None,
     ) -> MediaSessionAckV1:
         await self.start()
+        # Score loading and validation may touch disk. Complete that work before
+        # entering the single-writer hub lock; scheduler ticks only resolve the
+        # resulting immutable score from memory.
+        await asyncio.to_thread(self.performance.prepare_snapshot, snapshot)
         receipt = receipt_monotonic_us if receipt_monotonic_us is not None else time.perf_counter_ns() // 1000
         async with self._current_lock():
             return self.performance.accept_snapshot(snapshot, receipt)
@@ -163,6 +274,93 @@ class WizardFrameHub:
     async def media_session_status(self) -> dict:
         async with self._current_lock():
             return dict(self.performance.diagnostics(time.perf_counter_ns() // 1000))
+
+    async def performance_binding(self) -> dict:
+        """Return the content-free runtime binding required before speech admission."""
+
+        await self.start()
+        async with self._current_lock():
+            return {
+                "schema_version": 1,
+                "wizard_runtime_epoch": self.performance.runtime_epoch,
+                "character_id": self.performance.character_id,
+                "package_digest": self.performance.package_digest,
+                "reconciliation_generation": (
+                    self.performance.scheduler.coordinator.reconciliation_generation
+                ),
+                "revocation_generation": (
+                    self.performance.governed_speech.revocation_generation
+                ),
+            }
+
+    async def capture_performance_context(
+        self,
+        request: PerformanceContextRequestV1,
+    ) -> PerformanceContextV1:
+        await self.start()
+        async with self._current_lock():
+            return self.performance.capture_performance_context(
+                request,
+                self.frame_source.controller,
+                time.perf_counter_ns() // 1000,
+            )
+
+    async def register_governed_speech(
+        self,
+        registration: GovernedSpeechRegistrationV1,
+    ) -> dict:
+        await self.start()
+        async with self._current_lock():
+            self.performance.register_governed_speech(
+                registration,
+                now_wall_ms=time.time_ns() // 1_000_000,
+                now_monotonic_us=time.perf_counter_ns() // 1000,
+            )
+            return dict(self.performance.governed_speech.diagnostics())
+
+    async def revoke_governed_speech(self, generation: int) -> dict:
+        await self.start()
+        async with self._current_lock():
+            self.performance.revoke_governed_speech(
+                generation,
+                self.frame_source.controller,
+            )
+            return dict(self.performance.governed_speech.diagnostics())
+
+    async def accept_permission_world(
+        self,
+        state: PermissionWorldStateV1,
+    ) -> dict:
+        await self.start()
+        async with self._current_lock():
+            return dict(self.performance.accept_permission_world(state))
+
+    async def permission_world_status(self) -> dict:
+        await self.start()
+        async with self._current_lock():
+            return dict(
+                self.performance.permission_world_snapshot(
+                    time.time_ns() // 1_000_000
+                )
+            )
+
+    async def simulate_permission_world(
+        self,
+        permission: CapabilityPermissionV1,
+    ) -> dict:
+        await self.start()
+        async with self._current_lock():
+            return dict(
+                self.performance.simulate_permission_world(
+                    permission,
+                    time.time_ns() // 1_000_000,
+                )
+            )
+
+    async def clear_permission_world_simulation(self) -> dict:
+        await self.start()
+        async with self._current_lock():
+            return dict(self.performance.clear_permission_world_simulation())
 
     async def set_reactions_paused(self, paused: bool) -> dict:
         await self.start()
@@ -181,14 +379,42 @@ class WizardFrameHub:
                 advance_result = self.runtime.advance_to(time.perf_counter_ns())
                 if advance_result.steps == 0 and self.command_inbox.pending_count:
                     self.runtime.step_tick()
+                capture_render_state = getattr(
+                    self.frame_source,
+                    "capture_render_state",
+                    None,
+                )
+                render_state = (
+                    None
+                    if capture_render_state is None
+                    else capture_render_state()
+                )
             # Let command waiters observe their authoritative ack before the
             # synchronous cell compositor begins the presentation frame.
-            await asyncio.sleep(0.001)
-            async with self._current_lock():
+            await asyncio.sleep(0)
+            captured_renderer = getattr(
+                self.frame_source,
+                "encode_captured_frame_sync",
+                None,
+            )
+            if captured_renderer is not None and render_state is not None:
+                if self._render_executor is None:
+                    self._render_executor = ThreadPoolExecutor(
+                        max_workers=1,
+                        thread_name_prefix="wizard-frame-render",
+                    )
+                message, frame = await asyncio.get_running_loop().run_in_executor(
+                    self._render_executor,
+                    captured_renderer,
+                    render_state,
+                    self.codec,
+                )
+            else:
                 message, frame = await self.frame_source.next_encoded_frame(
                     self.codec,
                     advance=False,
                 )
+            async with self._current_lock():
                 self._latest_frame = frame
                 self._source_hash_history.append(
                     {
@@ -204,6 +430,7 @@ class WizardFrameHub:
                     self._force_keyframe = False
                     self._forced_keyframe_count += 1
             self._published_frames += 1
+            self._published_at.append(time.perf_counter())
             self._publish(message)
             self._update_diagnostics()
             next_tick += frame_interval
@@ -298,6 +525,13 @@ class WizardFrameHub:
         controller.state.time_seconds = (target_tick - 1) / AvatarRuntime.TICK_RATE
         controller.advance_tick()
         self.performance.apply(controller, time.perf_counter_ns() // 1000)
+        resolve_animation = getattr(
+            self.frame_source,
+            "resolve_authoritative_animation_state",
+            None,
+        )
+        if resolve_animation is not None:
+            resolve_animation()
         authoritative_state = controller.current_state().as_public_dict()
         for command_id in reduced_command_ids:
             result = self._command_results[command_id]
@@ -357,7 +591,7 @@ class WizardFrameHub:
         kind = aliases.get(command_type, command_type)
         if kind not in {
             "control_intent", "action", "path", "move", "move_to", "circle",
-            "figure_eight", "face", "expression", "speak", "stop", "reset",
+            "figure_eight", "face", "gaze", "expression", "speak", "stop", "reset",
             "diagnostic_pose", "visual_signal",
         }:
             raise ValueError("Unsupported command: {}".format(command_type))
@@ -393,7 +627,11 @@ class WizardFrameHub:
         return self._lock
 
     def _update_diagnostics(self) -> None:
-        self.frame_source.diagnostics.extra.update(self.diagnostics_extra())
+        # Exact retained replay hashing serializes the bounded evidence window.
+        # Keep that operator-requested work entirely off the presentation loop.
+        self.frame_source.diagnostics.extra.update(
+            self.diagnostics_extra(include_replay_digest=False)
+        )
 
     @staticmethod
     def _clear_queue(queue: asyncio.Queue[bytes]) -> None:

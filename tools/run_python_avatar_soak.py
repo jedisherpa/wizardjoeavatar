@@ -40,9 +40,16 @@ class ViewerResult:
     error: Optional[str] = None
 
 
-def request_json(method: str, url: str, payload: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
+def request_json(
+    method: str,
+    url: str,
+    payload: Optional[Dict[str, Any]] = None,
+    bearer: Optional[str] = None,
+) -> Dict[str, Any]:
     data = None
     headers = {"Accept": "application/json"}
+    if bearer:
+        headers["Authorization"] = "Bearer " + bearer
     if payload is not None:
         data = json.dumps(payload, separators=(",", ":")).encode("utf-8")
         headers["Content-Type"] = "application/json"
@@ -59,18 +66,30 @@ async def request_json_async(
     method: str,
     url: str,
     payload: Optional[Dict[str, Any]] = None,
+    bearer: Optional[str] = None,
 ) -> tuple[Dict[str, Any], float]:
     started = time.perf_counter()
-    result = await asyncio.to_thread(request_json, method, url, payload)
+    result = await asyncio.to_thread(request_json, method, url, payload, bearer)
     return result, (time.perf_counter() - started) * 1000.0
 
 
-async def viewer(uri: str, viewer_id: int, slow: bool, stop: asyncio.Event) -> ViewerResult:
+async def viewer(
+    uri: str,
+    viewer_id: int,
+    slow: bool,
+    stop: asyncio.Event,
+    app_token: Optional[str],
+) -> ViewerResult:
     result = ViewerResult(viewer_id=viewer_id, slow=slow)
     previous = None
     try:
         async with websockets.connect(
             uri,
+            additional_headers=(
+                {"Authorization": "Bearer " + app_token}
+                if app_token
+                else None
+            ),
             max_size=None,
             max_queue=None,
             open_timeout=5.0,
@@ -106,7 +125,13 @@ async def viewer(uri: str, viewer_id: int, slow: bool, stop: asyncio.Event) -> V
     return result
 
 
-async def exercise_controls(base_url: str, duration: float, stop: asyncio.Event) -> Dict[str, Any]:
+async def exercise_controls(
+    base_url: str,
+    duration: float,
+    stop: asyncio.Event,
+    app_token: Optional[str],
+    media_token: Optional[str],
+) -> Dict[str, Any]:
     source_epoch = "soak-{}".format(uuid.uuid4())
     source_id = "soak-controller-{}".format(uuid.uuid4())
     lease_id = "soak-lease-{}".format(uuid.uuid4())
@@ -156,7 +181,7 @@ async def exercise_controls(base_url: str, duration: float, stop: asyncio.Event)
         sequence += 1
         try:
             response, latency = await request_json_async(
-                "POST", base_url + "/api/avatar/wizard/control", control
+                "POST", base_url + "/api/avatar/wizard/control", control, app_token
             )
             latencies.append(latency)
             if isinstance(response, dict) and response.get("ok") is False:
@@ -173,6 +198,7 @@ async def exercise_controls(base_url: str, duration: float, stop: asyncio.Event)
                     "POST",
                     base_url + "/api/avatar/wizard/action",
                     {"action": action, "duration_ms": 800},
+                    app_token,
                 )
                 latencies.append(latency)
             except Exception as exc:
@@ -189,6 +215,7 @@ async def exercise_controls(base_url: str, duration: float, stop: asyncio.Event)
                         "text": "A deterministic local animation line.",
                         "duration_ms": 1200,
                     },
+                    app_token,
                 )
                 latencies.append(latency)
             except Exception as exc:
@@ -220,6 +247,7 @@ async def exercise_controls(base_url: str, duration: float, stop: asyncio.Event)
                             "status": "active",
                         },
                     },
+                    media_token,
                 )
                 latencies.append(latency)
             except Exception as exc:
@@ -247,7 +275,7 @@ async def exercise_controls(base_url: str, duration: float, stop: asyncio.Event)
     }
     try:
         _, latency = await request_json_async(
-            "POST", base_url + "/api/avatar/wizard/control", release
+            "POST", base_url + "/api/avatar/wizard/control", release, app_token
         )
         latencies.append(latency)
     except Exception as exc:
@@ -271,25 +299,48 @@ def percentile(values: List[float], quantile: int) -> Optional[float]:
     return round(ordered[index], 3)
 
 
+def optional_float(mapping: Dict[str, Any], key: str) -> Optional[float]:
+    value = mapping.get(key)
+    return None if value is None else round(float(value), 3)
+
+
 async def run(args: argparse.Namespace) -> Dict[str, Any]:
     base_url = args.url.rstrip("/")
     parsed = urllib.parse.urlparse(base_url)
     ws_scheme = "wss" if parsed.scheme == "https" else "ws"
     ws_uri = "{}://{}{}".format(ws_scheme, parsed.netloc, "/ws/avatar/wizard?codec=adaptive")
-    initial, _ = await request_json_async("GET", base_url + "/api/avatar/wizard/state")
+    initial, _ = await request_json_async(
+        "GET", base_url + "/api/avatar/wizard/state", bearer=args.app_token
+    )
     initial_tick = int(initial["state"]["simulation_tick"])
     initial_diagnostics = initial["diagnostics"]
     stop = asyncio.Event()
     viewer_tasks = [
-        asyncio.create_task(viewer(ws_uri, index, args.slow_viewer and index == args.viewers - 1, stop))
+        asyncio.create_task(
+            viewer(
+                ws_uri,
+                index,
+                args.slow_viewer and index == args.viewers - 1,
+                stop,
+                args.app_token,
+            )
+        )
         for index in range(args.viewers)
     ]
     started = time.perf_counter()
-    control_result = await exercise_controls(base_url, args.duration_seconds, stop)
+    control_result = await exercise_controls(
+        base_url,
+        args.duration_seconds,
+        stop,
+        args.app_token,
+        args.media_token,
+    )
     control_elapsed = time.perf_counter() - started
     stop.set()
     viewers = await asyncio.gather(*viewer_tasks)
-    final, _ = await request_json_async("GET", base_url + "/api/avatar/wizard/state")
+    final, _ = await request_json_async(
+        "GET", base_url + "/api/avatar/wizard/state", bearer=args.app_token
+    )
     elapsed = time.perf_counter() - started
     final_tick = int(final["state"]["simulation_tick"])
     final_diagnostics = final["diagnostics"]
@@ -318,8 +369,17 @@ async def run(args: argparse.Namespace) -> Dict[str, Any]:
         failures.append("command latency p95 exceeded 100 ms")
     if not 55.0 <= simulation_hz <= 65.0:
         failures.append("simulation cadence outside 60 Hz tolerance: {:.3f}".format(simulation_hz))
-    if not 21.0 <= float(final_diagnostics["hub_actual_fps"]) <= 27.0:
-        failures.append("presentation cadence outside 24 fps tolerance")
+    presentation_fps = final_diagnostics.get(
+        "hub_window_fps", final_diagnostics.get("hub_actual_fps")
+    )
+    if presentation_fps is None:
+        failures.append("presentation cadence diagnostic is unavailable")
+    elif not 21.0 <= float(presentation_fps) <= 27.0:
+        failures.append(
+            "presentation cadence outside 24 fps tolerance: {:.3f}".format(
+                float(presentation_fps)
+            )
+        )
 
     return {
         "schema_version": 1,
@@ -334,10 +394,12 @@ async def run(args: argparse.Namespace) -> Dict[str, Any]:
         "simulation_hz": round(simulation_hz, 3),
         "initial_tick": initial_tick,
         "final_tick": final_tick,
-        "initial_hub_actual_fps": round(float(initial_diagnostics["hub_actual_fps"]), 3),
-        "final_hub_actual_fps": round(float(final_diagnostics["hub_actual_fps"]), 3),
-        "hub_queue_drops": int(final_diagnostics["hub_queue_drops"])
-        - int(initial_diagnostics["hub_queue_drops"]),
+        "initial_hub_actual_fps": optional_float(initial_diagnostics, "hub_actual_fps"),
+        "final_hub_actual_fps": optional_float(final_diagnostics, "hub_actual_fps"),
+        "initial_hub_window_fps": optional_float(initial_diagnostics, "hub_window_fps"),
+        "final_hub_window_fps": optional_float(final_diagnostics, "hub_window_fps"),
+        "hub_queue_drops": int(final_diagnostics.get("hub_queue_drops", 0))
+        - int(initial_diagnostics.get("hub_queue_drops", 0)),
         "schedule_overruns": int(final_diagnostics.get("schedule_overruns", 0))
         - int(initial_diagnostics.get("schedule_overruns", 0)),
         "control": control_result,
@@ -373,6 +435,16 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--duration-seconds", type=float, default=30.0)
     parser.add_argument("--viewers", type=int, default=4)
     parser.add_argument("--slow-viewer", action="store_true")
+    parser.add_argument(
+        "--app-token",
+        default=os.environ.get("WIZARD_COMPANION_APP_TOKEN"),
+        help="Companion app bearer; defaults to WIZARD_COMPANION_APP_TOKEN.",
+    )
+    parser.add_argument(
+        "--media-token",
+        default=os.environ.get("WIZARD_MEDIA_CONNECTOR_TOKEN"),
+        help="Prism relay bearer; defaults to WIZARD_MEDIA_CONNECTOR_TOKEN.",
+    )
     parser.add_argument("--strict", action="store_true")
     parser.add_argument("--output", type=Path)
     args = parser.parse_args()

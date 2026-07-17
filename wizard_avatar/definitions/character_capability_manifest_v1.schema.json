@@ -1,0 +1,274 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://wizardjoe.local/schemas/character_capability_manifest_v1.schema.json",
+  "title": "CharacterCapabilityManifestV1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "manifest_id", "character", "sources", "counts", "poses", "capabilities", "diagnostics", "manifest_sha256"],
+  "properties": {
+    "schema_version": {"const": 1},
+    "manifest_id": {"type": "string", "pattern": "^character-capabilities:[a-z0-9][a-z0-9._-]*:v1$"},
+    "character": {"$ref": "#/$defs/character"},
+    "sources": {"$ref": "#/$defs/sources"},
+    "counts": {"$ref": "#/$defs/counts"},
+    "poses": {"type": "array", "items": {"$ref": "#/$defs/pose"}},
+    "capabilities": {"type": "array", "items": {"$ref": "#/$defs/capability"}},
+    "diagnostics": {"type": "array", "items": {"$ref": "#/$defs/diagnostic"}},
+    "manifest_sha256": {"$ref": "#/$defs/hash"}
+  },
+  "$defs": {
+    "hash": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+    "nullable_hash": {"oneOf": [{"$ref": "#/$defs/hash"}, {"type": "null"}]},
+    "text": {"type": "string", "minLength": 1},
+    "texts": {"type": "array", "uniqueItems": true, "items": {"$ref": "#/$defs/text"}},
+    "hashes": {"type": "array", "uniqueItems": true, "items": {"$ref": "#/$defs/hash"}},
+    "nullable_text": {"oneOf": [{"$ref": "#/$defs/text"}, {"type": "null"}]},
+    "nullable_integer": {"oneOf": [{"type": "integer", "minimum": 0}, {"type": "null"}]},
+    "character": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["character_id", "display_name", "renderer", "default_pose_id", "package_capabilities"],
+      "properties": {
+        "character_id": {"$ref": "#/$defs/text"},
+        "display_name": {"$ref": "#/$defs/text"},
+        "renderer": {"$ref": "#/$defs/text"},
+        "default_pose_id": {"$ref": "#/$defs/text"},
+        "package_capabilities": {"$ref": "#/$defs/texts"}
+      }
+    },
+    "evidence_source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["evidence_id", "sha256"],
+      "properties": {
+        "evidence_id": {"$ref": "#/$defs/text"},
+        "sha256": {"$ref": "#/$defs/hash"}
+      }
+    },
+    "sources": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["package_sha256", "pose_library_sha256", "animation_graph_sha256", "animation_graph_content_sha256", "pose_source_manifest_sha256", "expressions_sha256", "semantic_mapping_sha256", "runtime_vocabulary_sha256", "runtime_mapping_sha256", "evidence"],
+      "properties": {
+        "package_sha256": {"$ref": "#/$defs/hash"},
+        "pose_library_sha256": {"$ref": "#/$defs/hash"},
+        "animation_graph_sha256": {"$ref": "#/$defs/hash"},
+        "animation_graph_content_sha256": {"$ref": "#/$defs/hash"},
+        "pose_source_manifest_sha256": {"$ref": "#/$defs/hash"},
+        "expressions_sha256": {"$ref": "#/$defs/hash"},
+        "semantic_mapping_sha256": {"$ref": "#/$defs/hash"},
+        "runtime_vocabulary_sha256": {"$ref": "#/$defs/hash"},
+        "runtime_mapping_sha256": {"$ref": "#/$defs/hash"},
+        "evidence": {"type": "array", "items": {"$ref": "#/$defs/evidence_source"}}
+      }
+    },
+    "counts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["package_capability_count", "clip_count", "node_count", "transition_count", "pose_count", "graph_admitted_pose_count", "diagnostic_only_pose_count", "expression_count", "mouth_shape_count", "capability_count", "diagnostic_count"],
+      "properties": {
+        "package_capability_count": {"type": "integer", "minimum": 0},
+        "clip_count": {"type": "integer", "minimum": 0},
+        "node_count": {"type": "integer", "minimum": 0},
+        "transition_count": {"type": "integer", "minimum": 0},
+        "pose_count": {"type": "integer", "minimum": 0},
+        "graph_admitted_pose_count": {"type": "integer", "minimum": 0},
+        "diagnostic_only_pose_count": {"type": "integer", "minimum": 0},
+        "expression_count": {"type": "integer", "minimum": 0},
+        "mouth_shape_count": {"type": "integer", "minimum": 0},
+        "capability_count": {"type": "integer", "minimum": 0},
+        "diagnostic_count": {"type": "integer", "minimum": 0}
+      }
+    },
+    "pose": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["pose_id", "admission", "roles", "capability_tier", "quality_status", "facing", "locomotion", "action_ids", "clip_ids", "channel_ownership", "support_contact", "planted_anchor", "altitude_class", "wing_mode", "staff_mode", "cell_count", "content_sha256", "source_asset_sha256", "evidence_sha256"],
+      "properties": {
+        "pose_id": {"$ref": "#/$defs/text"},
+        "admission": {"enum": ["graph_admitted", "diagnostic_only"]},
+        "roles": {"$ref": "#/$defs/texts"},
+        "capability_tier": {"enum": ["A", "B", "C"]},
+        "quality_status": {"enum": ["graph_admitted_evidence_bound", "diagnostic_only_not_selectable"]},
+        "facing": {"$ref": "#/$defs/text"},
+        "locomotion": {"$ref": "#/$defs/text"},
+        "action_ids": {"$ref": "#/$defs/texts"},
+        "clip_ids": {"$ref": "#/$defs/texts"},
+        "channel_ownership": {"$ref": "#/$defs/texts"},
+        "support_contact": {"$ref": "#/$defs/text"},
+        "planted_anchor": {"$ref": "#/$defs/nullable_text"},
+        "altitude_class": {"$ref": "#/$defs/text"},
+        "wing_mode": {"$ref": "#/$defs/text"},
+        "staff_mode": {"$ref": "#/$defs/text"},
+        "cell_count": {"type": "integer", "minimum": 1},
+        "content_sha256": {"$ref": "#/$defs/hash"},
+        "source_asset_sha256": {"$ref": "#/$defs/nullable_hash"},
+        "evidence_sha256": {"$ref": "#/$defs/hashes"}
+      }
+    },
+    "mapping": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["action_ids", "clip_ids", "node_ids", "pose_ids", "expression_ids", "mouth_ids", "gaze_ids", "locomotion_ids", "flight_ids", "effect_ids", "prop_ids", "facings", "stage_requirements", "channels", "ownership"],
+      "properties": {
+        "action_ids": {"$ref": "#/$defs/texts"},
+        "clip_ids": {"$ref": "#/$defs/texts"},
+        "node_ids": {"$ref": "#/$defs/texts"},
+        "pose_ids": {"$ref": "#/$defs/texts"},
+        "expression_ids": {"$ref": "#/$defs/texts"},
+        "mouth_ids": {"$ref": "#/$defs/texts"},
+        "gaze_ids": {"$ref": "#/$defs/texts"},
+        "locomotion_ids": {"$ref": "#/$defs/texts"},
+        "flight_ids": {"$ref": "#/$defs/texts"},
+        "effect_ids": {"$ref": "#/$defs/texts"},
+        "prop_ids": {"$ref": "#/$defs/texts"},
+        "facings": {"$ref": "#/$defs/texts"},
+        "stage_requirements": {"$ref": "#/$defs/texts"},
+        "channels": {"$ref": "#/$defs/texts"},
+        "ownership": {"enum": ["whole_pose", "independently_compositable", "none"]}
+      }
+    },
+    "timing": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["authored_fps", "duration_frames", "loop_mode"],
+      "properties": {
+        "authored_fps": {"$ref": "#/$defs/nullable_integer"},
+        "duration_frames": {"$ref": "#/$defs/nullable_integer"},
+        "loop_mode": {"$ref": "#/$defs/text"}
+      }
+    },
+    "transitions": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["legal_entry_node_ids", "legal_exit_clip_ids", "entry_markers", "exit_markers", "minimum_hold_ticks", "interrupt_policy", "commit_markers", "recovery_markers"],
+      "properties": {
+        "legal_entry_node_ids": {"$ref": "#/$defs/texts"},
+        "legal_exit_clip_ids": {"$ref": "#/$defs/texts"},
+        "entry_markers": {"$ref": "#/$defs/texts"},
+        "exit_markers": {"$ref": "#/$defs/texts"},
+        "minimum_hold_ticks": {"type": "integer", "minimum": 0},
+        "interrupt_policy": {"$ref": "#/$defs/text"},
+        "commit_markers": {"$ref": "#/$defs/texts"},
+        "recovery_markers": {"$ref": "#/$defs/texts"}
+      }
+    },
+    "contacts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["root_policy", "support_contacts", "planted_anchors"],
+      "properties": {
+        "root_policy": {"$ref": "#/$defs/text"},
+        "support_contacts": {"$ref": "#/$defs/texts"},
+        "planted_anchors": {"$ref": "#/$defs/texts"}
+      }
+    },
+    "compatibility": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["speech", "locomotion", "compatible_channels", "disabled_channel_behavior"],
+      "properties": {
+        "speech": {"$ref": "#/$defs/text"},
+        "locomotion": {"$ref": "#/$defs/text"},
+        "compatible_channels": {"$ref": "#/$defs/texts"},
+        "disabled_channel_behavior": {"$ref": "#/$defs/text"}
+      }
+    },
+    "accessibility": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["full", "reduced", "still", "enforcement"],
+      "properties": {
+        "full": {"$ref": "#/$defs/text"},
+        "reduced": {"$ref": "#/$defs/text"},
+        "still": {"$ref": "#/$defs/text"},
+        "enforcement": {"$ref": "#/$defs/text"}
+      }
+    },
+    "fallback": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["intent", "capability_id", "reason_code"],
+      "properties": {
+        "intent": {"$ref": "#/$defs/nullable_text"},
+        "capability_id": {"$ref": "#/$defs/nullable_text"},
+        "reason_code": {"$ref": "#/$defs/nullable_text"}
+      }
+    },
+    "quality": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["tier", "status"],
+      "properties": {
+        "tier": {"$ref": "#/$defs/nullable_text"},
+        "status": {"$ref": "#/$defs/text"}
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["source_ids", "evidence_sha256", "content_sha256"],
+      "properties": {
+        "source_ids": {"$ref": "#/$defs/texts"},
+        "evidence_sha256": {"$ref": "#/$defs/hashes"},
+        "content_sha256": {"$ref": "#/$defs/hashes"}
+      }
+    },
+    "runtime_contract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["renderer", "runtime_api_version", "schema_version"],
+      "properties": {
+        "renderer": {"$ref": "#/$defs/text"},
+        "runtime_api_version": {"$ref": "#/$defs/text"},
+        "schema_version": {"const": 1}
+      }
+    },
+    "budget": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["preload_required", "frame_cell_count_max", "memory_bytes", "cost_status"],
+      "properties": {
+        "preload_required": {"type": "boolean"},
+        "frame_cell_count_max": {"type": "integer", "minimum": 0},
+        "memory_bytes": {"$ref": "#/$defs/nullable_integer"},
+        "cost_status": {"$ref": "#/$defs/text"}
+      }
+    },
+    "capability": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["capability_id", "category", "semantic_meaning", "emotional_range", "energy_range", "admission", "mapping", "timing", "transitions", "contacts", "compatibility", "accessibility", "fallback", "quality", "provenance", "runtime_contract", "budget"],
+      "properties": {
+        "capability_id": {"$ref": "#/$defs/text"},
+        "category": {"$ref": "#/$defs/text"},
+        "semantic_meaning": {"$ref": "#/$defs/text"},
+        "emotional_range": {"$ref": "#/$defs/texts"},
+        "energy_range": {"$ref": "#/$defs/texts"},
+        "admission": {"enum": ["graph_admitted", "runtime_overlay", "unsupported"]},
+        "mapping": {"$ref": "#/$defs/mapping"},
+        "timing": {"$ref": "#/$defs/timing"},
+        "transitions": {"$ref": "#/$defs/transitions"},
+        "contacts": {"$ref": "#/$defs/contacts"},
+        "compatibility": {"$ref": "#/$defs/compatibility"},
+        "accessibility": {"$ref": "#/$defs/accessibility"},
+        "fallback": {"$ref": "#/$defs/fallback"},
+        "quality": {"$ref": "#/$defs/quality"},
+        "provenance": {"$ref": "#/$defs/provenance"},
+        "runtime_contract": {"$ref": "#/$defs/runtime_contract"},
+        "budget": {"$ref": "#/$defs/budget"}
+      }
+    },
+    "diagnostic": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["severity", "code", "subject_id", "message"],
+      "properties": {
+        "severity": {"enum": ["info", "warning", "error"]},
+        "code": {"$ref": "#/$defs/text"},
+        "subject_id": {"$ref": "#/$defs/text"},
+        "message": {"$ref": "#/$defs/text"}
+      }
+    }
+  }
+}

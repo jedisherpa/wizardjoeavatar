@@ -5,11 +5,14 @@ import uuid
 from pathlib import Path
 
 from wizard_avatar.prism_signals import (
+    PrismAdvisoryStateMachine,
     PrismAnimationSignalV1,
+    PrismAnimationSignalV2,
     PrismSignalAdapter,
     PrismSignalParser,
     PrismSignalValidationError,
 )
+from wizard_avatar.semantic_animation import map_prism_signal
 
 
 NOW_MS = 1_000_000
@@ -41,6 +44,15 @@ def envelope(
         if payload is None
         else payload,
     }
+
+
+def envelope_v2(*, turn_id="turn-a", utterance_id=None, **overrides):
+    value = envelope(**overrides)
+    value["schema_version"] = 2
+    value["turn_id"] = turn_id
+    if utterance_id is not None:
+        value["utterance_id"] = utterance_id
+    return value
 
 
 class PrismAnimationSignalTests(unittest.TestCase):
@@ -168,6 +180,51 @@ class PrismAnimationSignalTests(unittest.TestCase):
                     payload={"result_count_bucket": "2_plus", "result_count": 10_001},
                 )
             )
+
+    def test_exact_v2_json_is_duplicate_free_and_maps_reviewing(self):
+        fixture_path = (
+            Path(__file__).parent / "fixtures" / "prism_animation_signal_v2.json"
+        )
+        parsed = PrismAnimationSignalV2.from_json(fixture_path.read_bytes())
+        self.assertEqual(parsed.turn_id, "turn-20260715-0017")
+        self.assertEqual(parsed.utterance_id, "utterance-03")
+
+        reviewing = envelope_v2(
+            turn_id="turn-review",
+            payload={"stage": "reviewing", "status": "active"},
+        )
+        intent = map_prism_signal(reviewing, now_ms=NOW_MS)
+        self.assertTrue(intent.recognized)
+        self.assertEqual(intent.cue, "review")
+        self.assertEqual(intent.expression, "focused")
+        self.assertEqual(intent.gesture, "review")
+
+        serialized = json.dumps(reviewing)
+        duplicate = serialized.replace(
+            '"turn_id": "turn-review"',
+            '"turn_id": "turn-review", "turn_id": "turn-review"',
+            1,
+        )
+        for value in (duplicate, serialized.replace('"ttl_ms": 1000', '"ttl_ms": 1.0')):
+            with self.subTest(value=value):
+                with self.assertRaises(PrismSignalValidationError):
+                    PrismAnimationSignalV2.from_json(value)
+
+    def test_v2_requires_safe_bounded_turn_context(self):
+        parsed = PrismAnimationSignalV2.from_mapping(envelope_v2())
+        self.assertEqual(parsed.turn_id, "turn-a")
+        self.assertIsNone(parsed.utterance_id)
+        invalid = (
+            {key: value for key, value in envelope_v2().items() if key != "turn_id"},
+            envelope_v2(turn_id="turn with prose"),
+            envelope_v2(turn_id="t" * 129),
+            envelope_v2(utterance_id="utterance with prose"),
+            envelope_v2(utterance_id="u" * 129),
+        )
+        for value in invalid:
+            with self.subTest(value=value):
+                with self.assertRaises(PrismSignalValidationError):
+                    PrismAnimationSignalV2.from_mapping(value)
         with self.assertRaisesRegex(PrismSignalValidationError, "contradicts"):
             PrismAnimationSignalV1.from_mapping(
                 envelope(
@@ -230,11 +287,95 @@ class PrismSignalParserTests(unittest.TestCase):
     def test_adapter_has_no_network_or_authority_surface(self):
         adapter = PrismSignalAdapter()
         public_names = {name for name in dir(adapter) if not name.startswith("_")}
-        self.assertEqual(public_names, {"active_epoch", "last_sequence", "parse"})
+        self.assertEqual(
+            public_names, {"active_epoch", "last_sequence", "parse", "parse_json"}
+        )
 
         source = inspect.getsource(__import__("wizard_avatar.prism_signals", fromlist=["*"]))
         for forbidden_import in ("socket", "urllib", "requests", "httpx", "websocket"):
             self.assertNotIn("import {}".format(forbidden_import), source)
+
+
+class PrismAdvisoryStateMachineTests(unittest.TestCase):
+    def test_expiry_and_matching_terminal_release_exactly_once(self):
+        machine = PrismAdvisoryStateMachine()
+        machine.accept(
+            envelope_v2(emitted_at_ms=NOW_MS, ttl_ms=25), now_ms=NOW_MS
+        )
+        self.assertEqual(machine.advance(now_ms=NOW_MS + 24).disposition, "retained")
+        expired = machine.advance(now_ms=NOW_MS + 25)
+        self.assertTrue(expired.released)
+        self.assertEqual(expired.release_reason, "expired")
+        self.assertEqual(machine.advance(now_ms=NOW_MS + 26).disposition, "inactive")
+
+        machine.accept(
+            envelope_v2(
+                source_sequence=2,
+                turn_id="turn-b",
+                utterance_id="utterance-b",
+            ),
+            now_ms=NOW_MS,
+        )
+        released = machine.accept(
+            envelope_v2(
+                source_sequence=3,
+                turn_id="turn-b",
+                utterance_id="utterance-b",
+                payload={"stage": "ready", "status": "completed"},
+            ),
+            now_ms=NOW_MS,
+        )
+        self.assertTrue(released.released)
+        self.assertEqual(released.release_reason, "completed")
+
+    def test_stale_terminal_cannot_release_a_newer_turn(self):
+        machine = PrismAdvisoryStateMachine()
+        machine.accept(envelope_v2(source_sequence=1, turn_id="turn-old"), now_ms=NOW_MS)
+        machine.accept(envelope_v2(source_sequence=2, turn_id="turn-new"), now_ms=NOW_MS)
+        stale = machine.accept(
+            envelope_v2(
+                source_sequence=3,
+                turn_id="turn-old",
+                payload={"stage": "ready", "status": "cancelled"},
+            ),
+            now_ms=NOW_MS,
+        )
+        self.assertEqual(stale.disposition, "terminal_ignored")
+        self.assertEqual(stale.release_reason, "turn_mismatch")
+        self.assertEqual(machine.active_signal.turn_id, "turn-new")
+
+    def test_terminal_requires_matching_utterance_and_schema_generation(self):
+        machine = PrismAdvisoryStateMachine()
+        machine.accept(
+            envelope_v2(
+                source_sequence=1,
+                turn_id="turn-a",
+                utterance_id="utterance-new",
+            ),
+            now_ms=NOW_MS,
+        )
+        wrong_utterance = machine.accept(
+            envelope_v2(
+                source_sequence=2,
+                turn_id="turn-a",
+                utterance_id="utterance-old",
+                payload={"stage": "speaking", "status": "failed"},
+            ),
+            now_ms=NOW_MS,
+        )
+        self.assertEqual(wrong_utterance.disposition, "terminal_ignored")
+        self.assertEqual(wrong_utterance.release_reason, "utterance_mismatch")
+
+        legacy_terminal = machine.accept(
+            envelope(
+                source_sequence=3,
+                payload={"stage": "speaking", "status": "cancelled"},
+            ),
+            now_ms=NOW_MS,
+        )
+        self.assertEqual(legacy_terminal.disposition, "terminal_ignored")
+        self.assertEqual(legacy_terminal.release_reason, "turn_unbound")
+        self.assertEqual(machine.active_signal.turn_id, "turn-a")
 
 
 class PrismSignalSchemaTests(unittest.TestCase):
@@ -267,6 +408,20 @@ class PrismSignalSchemaTests(unittest.TestCase):
             '"reply"',
         ):
             self.assertNotIn(forbidden_field, serialized)
+
+    def test_v2_schema_adds_required_turn_and_optional_utterance(self):
+        schema_path = (
+            Path(__file__).parents[2]
+            / "wizard_avatar"
+            / "definitions"
+            / "prism_animation_signal_v2.schema.json"
+        )
+        schema = json.loads(schema_path.read_text(encoding="utf-8"))
+        self.assertFalse(schema["additionalProperties"])
+        self.assertEqual(schema["properties"]["schema_version"]["const"], 2)
+        self.assertIn("turn_id", schema["required"])
+        self.assertNotIn("utterance_id", schema["required"])
+        self.assertEqual(schema["properties"]["turn_id"]["maxLength"], 128)
 
 
 if __name__ == "__main__":

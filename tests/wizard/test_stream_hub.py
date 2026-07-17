@@ -1,4 +1,5 @@
 import asyncio
+import threading
 import unittest
 from types import SimpleNamespace
 from unittest import mock
@@ -83,7 +84,62 @@ class _CheapFrameSource:
         return b"cheap-frame", frame
 
 
+class _FailingFrameSource(_CheapFrameSource):
+    def __init__(self):
+        super().__init__(_FakeMonotonicClock(), ())
+
+    async def next_encoded_frame(self, *_args, **_kwargs):
+        raise RuntimeError("render failed")
+
+
 class StreamHubTests(unittest.IsolatedAsyncioTestCase):
+    async def test_retained_replay_digest_stays_off_the_frame_diagnostics_path(self):
+        hub = WizardFrameHub(_CheapFrameSource(_FakeMonotonicClock(), ()))
+        with mock.patch.object(
+            hub.replay_log,
+            "retained_sha256",
+            wraps=hub.replay_log.retained_sha256,
+        ) as retained_sha256:
+            frame_diagnostics = hub.diagnostics_extra(include_replay_digest=False)
+            requested_diagnostics = hub.diagnostics_extra(include_replay_digest=True)
+
+        self.assertNotIn("replay_retained_sha256", frame_diagnostics)
+        self.assertIn("replay_retained_sha256", requested_diagnostics)
+        self.assertEqual(retained_sha256.call_count, 1)
+
+    async def test_media_score_preparation_runs_off_the_event_loop(self):
+        hub = WizardFrameHub(ProceduralWizardFrameSource(fps=1))
+        event_loop_thread = threading.get_ident()
+        preparation_threads = []
+
+        def prepare(_snapshot):
+            preparation_threads.append(threading.get_ident())
+
+        with (
+            mock.patch.object(hub.performance, "prepare_snapshot", side_effect=prepare),
+            mock.patch.object(hub.performance, "accept_snapshot", return_value="ack"),
+        ):
+            result = await hub.accept_media_session(object(), receipt_monotonic_us=1)
+
+        try:
+            self.assertEqual(result, "ack")
+            self.assertEqual(len(preparation_threads), 1)
+            self.assertNotEqual(preparation_threads[0], event_loop_thread)
+        finally:
+            await hub.stop()
+
+    async def test_background_failure_is_observed_and_reported(self):
+        hub = WizardFrameHub(_FailingFrameSource())
+        await hub.start()
+        task = hub._task
+        self.assertIsNotNone(task)
+        with self.assertRaisesRegex(RuntimeError, "render failed"):
+            await task
+        await asyncio.sleep(0)
+        self.assertEqual(hub.task_error_code, "frame_hub_failed")
+        self.assertEqual(hub.diagnostics_extra()["frame_hub_failure_count"], 1)
+        await hub.stop()
+
     async def test_commands_can_contend_with_frame_loop(self):
         hub = WizardFrameHub(ProceduralWizardFrameSource(fps=60))
         subscriber = await hub.subscribe()
@@ -102,6 +158,35 @@ class StreamHubTests(unittest.IsolatedAsyncioTestCase):
         finally:
             hub.unsubscribe(subscriber)
             await hub.stop()
+
+    async def test_slow_render_does_not_hold_runtime_lock(self):
+        source = ProceduralWizardFrameSource(fps=24)
+        hub = WizardFrameHub(source)
+        render_started = threading.Event()
+        release_render = threading.Event()
+        original_render = source.encode_captured_frame_sync
+
+        def slow_render(state, codec):
+            render_started.set()
+            release_render.wait(timeout=2.0)
+            return original_render(state, codec)
+
+        with mock.patch.object(
+            source,
+            "encode_captured_frame_sync",
+            side_effect=slow_render,
+        ):
+            await hub.start()
+            self.assertTrue(await asyncio.to_thread(render_started.wait, 1.0))
+            try:
+                binding = await asyncio.wait_for(
+                    hub.performance_binding(),
+                    timeout=0.2,
+                )
+                self.assertEqual(binding["wizard_runtime_epoch"], hub.runtime_epoch)
+            finally:
+                release_render.set()
+                await hub.stop()
 
     async def test_subscribers_receive_decodable_contiguous_frames(self):
         hub = WizardFrameHub(ProceduralWizardFrameSource(fps=24))

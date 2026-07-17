@@ -17,6 +17,26 @@ EXPECTED_UV_VERSION="0.11.7"
 TARGET_TRIPLE="$(rustc --print host-tuple)"
 RESOURCE_DEST="$TAURI_DIR/resources/sidecar/$TARGET_TRIPLE/wizard-joe-engine"
 
+# Capture source identity before this script creates or replaces generated
+# resources. Porcelain status includes untracked source files; only the
+# generated sidecar payload is excluded from the dirty decision.
+if SOURCE_COMMIT="$(git -C "$REPOSITORY_ROOT" rev-parse HEAD 2>/dev/null)"; then
+  SOURCE_STATUS="$(
+    git -C "$REPOSITORY_ROOT" status \
+      --porcelain=v1 \
+      --untracked-files=normal \
+      -- . ':(exclude)companion/src-tauri/resources/sidecar/**'
+  )"
+  if [[ -z "$SOURCE_STATUS" ]]; then
+    SOURCE_DIRTY=false
+  else
+    SOURCE_DIRTY=true
+  fi
+else
+  SOURCE_COMMIT=unknown
+  SOURCE_DIRTY=true
+fi
+
 rm -rf "$BUILD_ROOT" "$RESOURCE_DEST"
 mkdir -p "$BUILD_ROOT" "$DIST_DIR" "$WORK_DIR" "$(dirname "$RESOURCE_DEST")"
 
@@ -84,12 +104,6 @@ chmod 755 "$RESOURCE_DEST/wizard-joe-engine"
 LOCK_SHA256="$(shasum -a 256 "$LOCK_FILE" | awk '{print $1}')"
 SIDECAR_SHA256="$(shasum -a 256 "$RESOURCE_DEST/wizard-joe-engine" | awk '{print $1}')"
 PAYLOAD_SHA256="$({ find "$RESOURCE_DEST" -type f -exec shasum -a 256 {} \;; } | LC_ALL=C sort -k 2 | shasum -a 256 | awk '{print $1}')"
-SOURCE_COMMIT="$(git -C "$REPOSITORY_ROOT" rev-parse HEAD 2>/dev/null || printf unknown)"
-if git -C "$REPOSITORY_ROOT" diff --quiet --ignore-submodules HEAD -- 2>/dev/null; then
-  SOURCE_DIRTY=false
-else
-  SOURCE_DIRTY=true
-fi
 PYINSTALLER_VERSION="$($VENV_DIR/bin/pyinstaller --version)"
 
 cat > "$RESOURCE_DEST/build-provenance.json" <<EOF

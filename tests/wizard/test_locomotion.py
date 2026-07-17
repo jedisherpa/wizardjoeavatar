@@ -25,11 +25,11 @@ class LocomotionTests(unittest.TestCase):
         source.apply_command_sync(WizardCommand("move", {"x": 0.0, "z": 3.0}))
         run_seconds(source, 4.0)
         self.assertLess(source.current_state().world_position["z"], 3.2)
-        near_scale = source.current_state().display_scale
+        near_scale = source.diagnostics_dict()["display_scale"]
         source.apply_command_sync(WizardCommand("move", {"x": 0.0, "z": 7.0}))
         run_seconds(source, 5.0)
         self.assertGreater(source.current_state().world_position["z"], 6.8)
-        self.assertLess(source.current_state().display_scale, near_scale)
+        self.assertLess(source.diagnostics_dict()["display_scale"], near_scale)
 
     def test_walk_phase_follows_distance(self):
         source_a = ProceduralWizardFrameSource(fps=24)

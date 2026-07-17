@@ -74,6 +74,7 @@ class CharacterPackageTests(unittest.TestCase):
                 character_package_path=root / "package.json",
             )
             frame = source.render_next_frame()
+            self.assertIsNone(source.animation_graph)
             self.assertEqual(source.current_state().character_id, "second-character")
             self.assertEqual(source.current_state().pose_id, "idle")
             self.assertIn(bytes((ord("#"), 22, 190, 120)), frame.cells)

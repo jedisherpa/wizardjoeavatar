@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://wizardjoe.local/schemas/performance_context_request_v1.schema.json",
+  "title": "PerformanceContextRequestV1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "turn_id",
+    "utterance_id",
+    "media_id",
+    "reply_sha256",
+    "intent",
+    "tone",
+    "sensitivity",
+    "urgency",
+    "relational_stance",
+    "pending_action_posture",
+    "display_profile"
+  ],
+  "properties": {
+    "schema_version": {"type": "integer", "const": 1},
+    "turn_id": {"$ref": "#/$defs/id"},
+    "utterance_id": {"$ref": "#/$defs/id"},
+    "media_id": {"$ref": "#/$defs/id"},
+    "reply_sha256": {"$ref": "#/$defs/hash"},
+    "intent": {"$ref": "#/$defs/semantic_intent"},
+    "tone": {"enum": ["direct", "focused", "measured", "neutral", "playful", "reflective", "serious", "warm"]},
+    "sensitivity": {"enum": ["high_stakes", "ordinary", "restricted", "sensitive"]},
+    "urgency": {"enum": ["critical", "high", "low", "normal"]},
+    "relational_stance": {"enum": ["collaborative", "deferential", "firm", "instructive", "neutral", "supportive"]},
+    "pending_action_posture": {"enum": ["approved", "denied", "failed", "none", "not_required", "pending", "stale"]},
+    "display_profile": {"enum": ["desktop", "mobile"]}
+  },
+  "$defs": {
+    "id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{0,127}$"},
+    "hash": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+    "semantic_intent": {
+      "enum": [
+        "acknowledge", "caution", "celebrate", "characterful_neutral", "clarify",
+        "degraded", "direct", "empathize", "explain", "external_action", "greet",
+        "interrupt", "listen", "neutral", "no_decision", "none", "permission_posture",
+        "present", "question", "reassure", "recall", "reference", "review", "settle",
+        "speak", "think", "topic_reset", "transition", "wait"
+      ]
+    }
+  }
+}

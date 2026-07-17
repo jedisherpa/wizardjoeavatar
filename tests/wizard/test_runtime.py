@@ -170,5 +170,63 @@ class AvatarRuntimeTests(unittest.TestCase):
         self.assertEqual([record["simulation_tick"] for record in tick_records], [60, 120])
 
 
+class ReplayLogRetentionTests(unittest.TestCase):
+    def test_retention_capacity_must_be_a_positive_integer(self):
+        for invalid in (0, -1, True, 1.5):
+            with self.subTest(invalid=invalid):
+                with self.assertRaises(ValueError):
+                    ReplayLog({"schema_version": 1}, max_records=invalid)
+
+    def test_retains_header_and_bounded_tail_with_explicit_diagnostics(self):
+        replay = ReplayLog({"schema_version": 1, "seed": 7}, max_records=3)
+        for tick in range(1, 6):
+            replay.append("tick_state", tick, {"tick": tick})
+
+        self.assertEqual(replay.total_record_count, 6)
+        self.assertEqual(replay.record_count, 6)
+        self.assertEqual(replay.retained_record_count, 3)
+        self.assertEqual(replay.evicted_record_count, 3)
+        self.assertTrue(replay.is_truncated)
+        self.assertEqual(
+            [record["record_sequence"] for record in replay.records],
+            [0, 4, 5],
+        )
+        self.assertEqual(replay.first_retained_sequence, 0)
+        self.assertEqual(
+            replay.retention_diagnostics,
+            {
+                "max_records": 3,
+                "total_record_count": 6,
+                "retained_record_count": 3,
+                "evicted_record_count": 3,
+                "is_truncated": True,
+                "retained_sequence_ranges": ((0, 0), (4, 5)),
+            },
+        )
+
+    def test_full_history_and_retained_window_hashes_are_deterministic(self):
+        bounded = ReplayLog({"schema_version": 1}, max_records=3)
+        complete = ReplayLog({"schema_version": 1}, max_records=10)
+        for tick in range(1, 6):
+            payload = {"tick": tick, "value": tick * 3}
+            bounded.append("tick_state", tick, payload)
+            complete.append("tick_state", tick, payload)
+
+        retained_chunks = tuple(bounded.iter_ndjson_bytes())
+        self.assertEqual(bounded.sha256(), complete.sha256())
+        self.assertEqual(bounded.to_ndjson_bytes(), b"".join(retained_chunks))
+        self.assertEqual(
+            bounded.retained_sha256(),
+            hashlib.sha256(bounded.to_ndjson_bytes()).hexdigest(),
+        )
+
+        repeated = ReplayLog({"schema_version": 1}, max_records=3)
+        for tick in range(1, 6):
+            repeated.append("tick_state", tick, {"tick": tick, "value": tick * 3})
+        self.assertEqual(repeated.sha256(), bounded.sha256())
+        self.assertEqual(repeated.retained_sha256(), bounded.retained_sha256())
+        self.assertEqual(repeated.to_ndjson_bytes(), bounded.to_ndjson_bytes())
+
+
 if __name__ == "__main__":
     unittest.main()

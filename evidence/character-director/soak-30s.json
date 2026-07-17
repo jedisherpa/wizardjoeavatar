@@ -1,0 +1,92 @@
+{
+  "architecture": "asciline_python",
+  "control": {
+    "command_errors": [],
+    "latency_ms_max": 624.21825,
+    "latency_ms_p50": 35.25,
+    "latency_ms_p95": 139.063,
+    "request_count": 211,
+    "sent_control_count": 183,
+    "sent_prism_count": 10
+  },
+  "control_window_actual_seconds": 30.07,
+  "duration_actual_seconds": 30.78,
+  "duration_requested_seconds": 30.0,
+  "failures": [
+    "viewer 0 frame rate below 18.0 fps",
+    "viewer 1 frame rate below 18.0 fps",
+    "viewer 2 frame rate below 18.0 fps",
+    "command latency p95 exceeded 100 ms",
+    "simulation cadence outside 60 Hz tolerance: 54.645",
+    "presentation cadence outside 24 fps tolerance: 6.951"
+  ],
+  "final_hub_actual_fps": 6.401,
+  "final_hub_window_fps": 6.951,
+  "final_state": {
+    "airborne": true,
+    "altitude": 0.8863148596381647,
+    "semantic_cue": "none",
+    "world_position": {
+      "x": -3.2232261371304487,
+      "z": 9.189947812812587
+    }
+  },
+  "final_tick": 41224,
+  "hub_queue_drops": 0,
+  "initial_hub_actual_fps": 6.382,
+  "initial_hub_window_fps": 7.179,
+  "initial_tick": 39542,
+  "result": "failed",
+  "schedule_overruns": 213,
+  "schema_version": 1,
+  "simulation_hz": 54.645,
+  "slow_viewer_enabled": true,
+  "url": "http://127.0.0.1:43998",
+  "viewer_count": 4,
+  "viewers": [
+    {
+      "decode_errors": 0,
+      "error": null,
+      "first_sequence": 5376,
+      "frames": 212,
+      "last_frame_sha256": "e0e4a99bfcd71155a4f2ce9302486b67f4a4865fe672ec06b44479da4b4d0b7d",
+      "last_sequence": 5587,
+      "sequence_regressions": 0,
+      "slow": false,
+      "viewer_id": 0
+    },
+    {
+      "decode_errors": 0,
+      "error": null,
+      "first_sequence": 5376,
+      "frames": 212,
+      "last_frame_sha256": "e0e4a99bfcd71155a4f2ce9302486b67f4a4865fe672ec06b44479da4b4d0b7d",
+      "last_sequence": 5587,
+      "sequence_regressions": 0,
+      "slow": false,
+      "viewer_id": 1
+    },
+    {
+      "decode_errors": 0,
+      "error": null,
+      "first_sequence": 5376,
+      "frames": 212,
+      "last_frame_sha256": "e0e4a99bfcd71155a4f2ce9302486b67f4a4865fe672ec06b44479da4b4d0b7d",
+      "last_sequence": 5587,
+      "sequence_regressions": 0,
+      "slow": false,
+      "viewer_id": 2
+    },
+    {
+      "decode_errors": 0,
+      "error": null,
+      "first_sequence": 5376,
+      "frames": 122,
+      "last_frame_sha256": "41cebf38f0fe15df61f74816d355c2b560219c7a7dd1543339421bba10bb93e3",
+      "last_sequence": 5497,
+      "sequence_regressions": 0,
+      "slow": true,
+      "viewer_id": 3
+    }
+  ]
+}

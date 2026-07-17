@@ -1,0 +1,85 @@
+{
+  "architecture": "asciline_python",
+  "control": {
+    "command_errors": [],
+    "latency_ms_max": 200.36508299999997,
+    "latency_ms_p50": 23.422,
+    "latency_ms_p95": 42.086,
+    "request_count": 1033,
+    "sent_control_count": 922,
+    "sent_prism_count": 40
+  },
+  "control_window_actual_seconds": 120.031,
+  "duration_actual_seconds": 120.156,
+  "duration_requested_seconds": 120.0,
+  "failures": [],
+  "final_hub_actual_fps": 23.939,
+  "final_hub_window_fps": 23.998,
+  "final_state": {
+    "airborne": true,
+    "altitude": 3.692538162200121,
+    "semantic_cue": "listen",
+    "world_position": {
+      "x": -0.5035614732260882,
+      "z": 6.332179928392153
+    }
+  },
+  "final_tick": 7206,
+  "hub_queue_drops": 0,
+  "initial_hub_actual_fps": null,
+  "initial_hub_window_fps": null,
+  "initial_tick": 0,
+  "result": "passed",
+  "schedule_overruns": 5,
+  "schema_version": 1,
+  "simulation_hz": 59.972,
+  "slow_viewer_enabled": true,
+  "url": "http://127.0.0.1:44001",
+  "viewer_count": 4,
+  "viewers": [
+    {
+      "decode_errors": 0,
+      "error": null,
+      "first_sequence": 0,
+      "frames": 2874,
+      "last_frame_sha256": "01a0d3cdf22a02b656158bec19863feee28f6117e9c6a90c2e5e2b3bba08d77b",
+      "last_sequence": 2873,
+      "sequence_regressions": 0,
+      "slow": false,
+      "viewer_id": 0
+    },
+    {
+      "decode_errors": 0,
+      "error": null,
+      "first_sequence": 0,
+      "frames": 2874,
+      "last_frame_sha256": "01a0d3cdf22a02b656158bec19863feee28f6117e9c6a90c2e5e2b3bba08d77b",
+      "last_sequence": 2873,
+      "sequence_regressions": 0,
+      "slow": false,
+      "viewer_id": 1
+    },
+    {
+      "decode_errors": 0,
+      "error": null,
+      "first_sequence": 0,
+      "frames": 2874,
+      "last_frame_sha256": "01a0d3cdf22a02b656158bec19863feee28f6117e9c6a90c2e5e2b3bba08d77b",
+      "last_sequence": 2873,
+      "sequence_regressions": 0,
+      "slow": false,
+      "viewer_id": 2
+    },
+    {
+      "decode_errors": 0,
+      "error": null,
+      "first_sequence": 0,
+      "frames": 495,
+      "last_frame_sha256": "7fe21527e3f76226c42c007bac343be7d70e476c20cfc629242deb70ed8f3b8c",
+      "last_sequence": 494,
+      "sequence_regressions": 0,
+      "slow": true,
+      "viewer_id": 3
+    }
+  ]
+}

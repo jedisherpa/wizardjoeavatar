@@ -1,5 +1,7 @@
 import { frameHash } from "./wizardCodec.ts";
 
+const NARROW_STAGE_BREAKPOINT = 820;
+
 export class WizardCanvas {
   constructor(canvas, selection) {
     this.canvas = canvas;
@@ -62,8 +64,13 @@ export class WizardCanvas {
     this.canvas.height = backingHeight;
     this.backCanvas.width = backingWidth;
     this.backCanvas.height = backingHeight;
-    this.canvas.style.width = `${backingWidth / dpr}px`;
-    this.canvas.style.height = `${backingHeight / dpr}px`;
+    const nativeCssWidth = backingWidth / dpr;
+    const nativeCssHeight = backingHeight / dpr;
+    const presentationScale = viewportWidth <= NARROW_STAGE_BREAKPOINT
+      ? Math.min(viewportWidth / nativeCssWidth, viewportHeight / nativeCssHeight)
+      : 1;
+    this.canvas.style.width = `${nativeCssWidth * presentationScale}px`;
+    this.canvas.style.height = `${nativeCssHeight * presentationScale}px`;
     this.ctx.imageSmoothingEnabled = false;
     this.backCtx.imageSmoothingEnabled = false;
     this.xPos = Array.from({ length: this.cols }, (_, index) => index * deviceCell);

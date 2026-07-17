@@ -1,6 +1,11 @@
+import asyncio
+import hashlib
 import json
 import os
+import tempfile
+import time
 import unittest
+from pathlib import Path
 from unittest import mock
 
 from wizard_avatar.server import create_app
@@ -51,6 +56,55 @@ async def asgi_request(app, method, path, body=b"", headers=(), client="127.0.0.
         if message["type"] == "http.response.body"
     )
     return status, json.loads(response_body) if response_body else None
+
+
+async def asgi_raw_request(app, method, path, body=b"", headers=(), client="127.0.0.1"):
+    messages = []
+    delivered = False
+    response_complete = asyncio.Event()
+
+    async def receive():
+        nonlocal delivered
+        if delivered:
+            await response_complete.wait()
+            return {"type": "http.disconnect"}
+        delivered = True
+        return {"type": "http.request", "body": body, "more_body": False}
+
+    async def send(message):
+        messages.append(message)
+        if message["type"] == "http.response.body" and not message.get("more_body", False):
+            response_complete.set()
+
+    scope = {
+        "type": "http",
+        "asgi": {"version": "3.0"},
+        "http_version": "1.1",
+        "method": method,
+        "scheme": "http",
+        "path": path,
+        "raw_path": path.encode("ascii"),
+        "query_string": b"",
+        "root_path": "",
+        "headers": [
+            (key.lower().encode("ascii"), value.encode("ascii"))
+            for key, value in headers
+        ],
+        "client": (client, 50000),
+        "server": ("127.0.0.1", 43123),
+    }
+    await app(scope, receive, send)
+    start = next(message for message in messages if message["type"] == "http.response.start")
+    response_headers = {
+        key.decode("ascii").lower(): value.decode("ascii")
+        for key, value in start.get("headers", ())
+    }
+    response_body = b"".join(
+        message.get("body", b"")
+        for message in messages
+        if message["type"] == "http.response.body"
+    )
+    return start["status"], response_headers, response_body
 
 
 async def asgi_websocket(app, headers=(), client="127.0.0.1"):
@@ -108,13 +162,34 @@ class CompanionServerTests(unittest.IsolatedAsyncioTestCase):
             with self.assertRaisesRegex(ValueError, "separate"):
                 create_app(companion_mode=True, app_token=APP_TOKEN)
 
+    def test_score_repository_is_configured_from_explicit_runtime_root(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            with mock.patch.dict(
+                os.environ,
+                {"WIZARD_SCORE_ROOT": temporary},
+                clear=True,
+            ):
+                app = create_app(companion_mode=False)
+
+            repository = app.state.frame_hub.performance.score_repository
+            self.assertIsNotNone(repository)
+            self.assertEqual(repository.root, Path(temporary))
+
     async def test_all_companion_mutation_routes_require_app_bearer(self):
         app = self.create_companion_app()
         mutation_paths = sorted(
             route.path
             for route in app.routes
             if "POST" in getattr(route, "methods", set())
-            and route.path != "/api/avatar/wizard/media-session"
+            and route.path
+            not in {
+                "/api/avatar/wizard/media-session",
+                "/api/avatar/wizard/performance-context",
+                "/api/avatar/wizard/governed-speech",
+                "/api/avatar/wizard/governed-speech/revoke",
+                "/api/avatar/wizard/permission-world",
+                "/api/avatar/wizard/prism-signal",
+            }
         )
         self.assertIn("/api/companion/shutdown", mutation_paths)
         self.assertIn("/api/companion/reactions", mutation_paths)
@@ -158,6 +233,23 @@ class CompanionServerTests(unittest.IsolatedAsyncioTestCase):
         self.assertIn("state", payload)
         await app.state.frame_hub.stop()
 
+    async def test_replay_export_hashes_the_retained_response_bytes(self):
+        app = self.create_companion_app()
+        status, headers, body = await asgi_raw_request(
+            app,
+            "GET",
+            "/api/avatar/wizard/replay",
+            headers=LOOPBACK_HEADERS + (("authorization", "Bearer " + APP_TOKEN),),
+        )
+        self.assertEqual(status, 200)
+        self.assertEqual(headers["x-replay-sha256"], hashlib.sha256(body).hexdigest())
+        self.assertEqual(headers["x-replay-cumulative-sha256"], headers["x-replay-sha256"])
+        self.assertEqual(headers["x-replay-total-records"], "1")
+        self.assertEqual(headers["x-replay-retained-records"], "1")
+        self.assertEqual(headers["x-replay-evicted-records"], "0")
+        self.assertEqual(headers["x-replay-truncated"], "false")
+        await app.state.frame_hub.stop()
+
     async def test_reaction_preference_is_strict_and_authenticated(self):
         app = self.create_companion_app()
         headers = LOOPBACK_HEADERS + (
@@ -199,8 +291,140 @@ class CompanionServerTests(unittest.IsolatedAsyncioTestCase):
             "/api/avatar/wizard/stop",
             headers=LOOPBACK_HEADERS + (("authorization", "Bearer " + media_token),),
         )
+        prism_status, _ = await asgi_request(
+            app,
+            "POST",
+            "/api/avatar/wizard/prism-signal",
+            headers=LOOPBACK_HEADERS + (("authorization", "Bearer " + APP_TOKEN),),
+        )
         self.assertEqual(media_status, 401)
         self.assertEqual(command_status, 401)
+        self.assertEqual(prism_status, 401)
+
+    async def test_prism_advisory_uses_connector_credential_and_strict_bounded_json(self):
+        media_token = "distinct-media-token-for-advisory-tests"
+        with mock.patch.dict(
+            os.environ,
+            {
+                "WIZARD_MEDIA_CONNECTOR_ENABLED": "1",
+                "WIZARD_MEDIA_CONNECTOR_TOKEN": media_token,
+            },
+            clear=True,
+        ):
+            app = create_app(companion_mode=True, app_token=APP_TOKEN)
+
+        payload = {
+            "schema_version": 1,
+            "event_id": "00000000-0000-4000-8000-000000000031",
+            "source_epoch": "prism-turn-stream-1",
+            "source_sequence": 1,
+            "emitted_at_ms": int(time.time() * 1000),
+            "ttl_ms": 5_000,
+            "kind": "stage",
+            "classification": "visual_advisory_only",
+            "provenance_class": "runtime_lifecycle",
+            "sanitization_version": 1,
+            "payload": {"stage": "drafting", "status": "active"},
+        }
+        body = json.dumps(payload, separators=(",", ":")).encode("utf-8")
+        headers = LOOPBACK_HEADERS + (
+            ("authorization", "Bearer " + media_token),
+            ("content-type", "application/json"),
+            ("content-length", str(len(body))),
+        )
+        accepted, state = await asgi_request(
+            app, "POST", "/api/avatar/wizard/prism-signal", body, headers
+        )
+        self.assertEqual(accepted, 200)
+        self.assertEqual(state["semantic_signal_sequence"], 1)
+
+        duplicate_body = body.replace(
+            b'"schema_version":1',
+            b'"schema_version":1,"schema_version":1',
+        )
+        duplicate, error = await asgi_request(
+            app,
+            "POST",
+            "/api/avatar/wizard/prism-signal",
+            duplicate_body,
+            LOOPBACK_HEADERS
+            + (
+                ("authorization", "Bearer " + media_token),
+                ("content-type", "application/json"),
+            ),
+        )
+        browser, _ = await asgi_request(
+            app,
+            "POST",
+            "/api/avatar/wizard/prism-signal",
+            body,
+            headers + (("origin", "http://127.0.0.1:43123"),),
+        )
+        self.assertEqual(duplicate, 400)
+        self.assertEqual(error, {"detail": {"code": "visual_advisory_invalid"}})
+        self.assertEqual(browser, 403)
+        await app.state.frame_hub.stop()
+
+    async def test_prism_v2_ingress_preserves_public_errors_and_turn_context(self):
+        media_token = "distinct-media-token-for-v2-advisory-tests"
+        with mock.patch.dict(
+            os.environ,
+            {
+                "WIZARD_MEDIA_CONNECTOR_ENABLED": "1",
+                "WIZARD_MEDIA_CONNECTOR_TOKEN": media_token,
+            },
+            clear=True,
+        ):
+            app = create_app(companion_mode=True, app_token=APP_TOKEN)
+
+        payload = {
+            "schema_version": 2,
+            "event_id": "00000000-0000-4000-8000-000000000032",
+            "turn_id": "turn-server-v2",
+            "utterance_id": "utterance-server-v2",
+            "source_epoch": "prism-turn-stream-2",
+            "source_sequence": 1,
+            "emitted_at_ms": int(time.time() * 1000),
+            "ttl_ms": 5_000,
+            "kind": "stage",
+            "classification": "visual_advisory_only",
+            "provenance_class": "runtime_lifecycle",
+            "sanitization_version": 1,
+            "payload": {"stage": "reviewing", "status": "active"},
+        }
+        body = json.dumps(payload, separators=(",", ":")).encode("utf-8")
+        headers = LOOPBACK_HEADERS + (
+            ("authorization", "Bearer " + media_token),
+            ("content-type", "application/json"),
+            ("content-length", str(len(body))),
+        )
+        accepted, state = await asgi_request(
+            app, "POST", "/api/avatar/wizard/prism-signal", body, headers
+        )
+        self.assertEqual(accepted, 200)
+        self.assertEqual(state["semantic_turn_id"], "turn-server-v2")
+        self.assertEqual(state["semantic_cue"], "review")
+        self.assertEqual(state["expression"], "focused")
+        self.assertEqual(state["action"], "thinking")
+
+        duplicate_body = body.replace(
+            b'"turn_id":"turn-server-v2"',
+            b'"turn_id":"turn-server-v2","turn_id":"turn-server-v2"',
+        )
+        status, error = await asgi_request(
+            app,
+            "POST",
+            "/api/avatar/wizard/prism-signal",
+            duplicate_body,
+            LOOPBACK_HEADERS
+            + (
+                ("authorization", "Bearer " + media_token),
+                ("content-type", "application/json"),
+            ),
+        )
+        self.assertEqual(status, 400)
+        self.assertEqual(error, {"detail": {"code": "visual_advisory_invalid"}})
+        await app.state.frame_hub.stop()
 
     async def test_health_is_public_private_and_literal_loopback_only(self):
         with mock.patch.dict(
@@ -228,11 +452,13 @@ class CompanionServerTests(unittest.IsolatedAsyncioTestCase):
                 "pid",
                 "started_at_monotonic_ms",
                 "frame_hub_running",
+                "frame_hub_error_code",
                 "connector_enabled",
             },
         )
         self.assertEqual(payload["status"], "ready")
         self.assertFalse(payload["frame_hub_running"])
+        self.assertIsNone(payload["frame_hub_error_code"])
         self.assertTrue(payload["connector_enabled"])
         serialized = json.dumps(payload)
         self.assertNotIn(APP_TOKEN, serialized)
@@ -331,18 +557,50 @@ class CompanionServerTests(unittest.IsolatedAsyncioTestCase):
         self.assertTrue(messages[1]["text"].startswith("INIT:"))
         await app.state.frame_hub.stop()
 
-    async def test_compatibility_mode_keeps_mutations_unauthenticated(self):
+    async def test_compatibility_mode_is_local_only_but_keeps_local_mutations_unauthenticated(self):
         with mock.patch.dict(os.environ, {}, clear=True):
             app = create_app(companion_mode=False)
-        status, _ = await asgi_request(
+        remote_status, _ = await asgi_request(
             app,
             "POST",
             "/api/avatar/wizard/stop",
             headers=(("host", "legacy.example"),),
             client="192.0.2.10",
         )
-        self.assertEqual(status, 200)
+        local_status, _ = await asgi_request(
+            app,
+            "POST",
+            "/api/avatar/wizard/stop",
+            headers=LOOPBACK_HEADERS,
+        )
+        self.assertEqual(remote_status, 403)
+        self.assertEqual(local_status, 200)
         await app.state.frame_hub.stop()
+
+    async def test_all_modes_reject_oversized_mutation_bodies_before_parsing(self):
+        with mock.patch.dict(os.environ, {}, clear=True):
+            app = create_app(companion_mode=False)
+        status, payload = await asgi_request(
+            app,
+            "POST",
+            "/api/avatar/wizard/stop",
+            headers=LOOPBACK_HEADERS + (("content-length", str(64 * 1024 + 1)),),
+        )
+        self.assertEqual(status, 413)
+        self.assertEqual(payload, {"detail": "Request body too large"})
+
+    async def test_health_reports_background_hub_failure_truthfully(self):
+        app = self.create_companion_app()
+        app.state.frame_hub._task_error_code = "frame_hub_failed"
+        status, payload = await asgi_request(
+            app,
+            "GET",
+            "/api/companion/health",
+            headers=LOOPBACK_HEADERS,
+        )
+        self.assertEqual(status, 200)
+        self.assertEqual(payload["status"], "degraded")
+        self.assertEqual(payload["frame_hub_error_code"], "frame_hub_failed")
 
 
 if __name__ == "__main__":

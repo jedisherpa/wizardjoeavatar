@@ -1,0 +1,109 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://wizardjoe.local/schemas/permission_world_state_v1.schema.json",
+  "title": "PermissionWorldStateV1",
+  "description": "A hash-sealed, content-free observation of external permission facts. It conveys no grant authority or executable command.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "source_epoch",
+    "observed_at_ms",
+    "permissions",
+    "state_sha256"
+  ],
+  "properties": {
+    "schema_version": {"const": 1},
+    "source_epoch": {"$ref": "#/$defs/contentFreeId"},
+    "observed_at_ms": {"$ref": "#/$defs/time"},
+    "permissions": {
+      "type": "array",
+      "maxItems": 256,
+      "uniqueItems": true,
+      "items": {"$ref": "#/$defs/permission"}
+    },
+    "state_sha256": {"$ref": "#/$defs/hash"}
+  },
+  "$defs": {
+    "contentFreeId": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{0,127}$"
+    },
+    "hash": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "time": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 9007199254740991
+    },
+    "nullableTime": {
+      "oneOf": [
+        {"type": "null"},
+        {"$ref": "#/$defs/time"}
+      ]
+    },
+    "nullableContentFreeId": {
+      "oneOf": [
+        {"type": "null"},
+        {"$ref": "#/$defs/contentFreeId"}
+      ]
+    },
+    "permission": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "capability_kind",
+        "posture",
+        "required_scope_class",
+        "granted_scope_class",
+        "purpose_code",
+        "granted_at_ms",
+        "affected_surfaces",
+        "app_link_state",
+        "expires_at_ms",
+        "revoked"
+      ],
+      "properties": {
+        "capability_kind": {"$ref": "#/$defs/contentFreeId"},
+        "posture": {
+          "enum": ["granted", "denied", "promptable", "unavailable", "unknown"]
+        },
+        "required_scope_class": {"$ref": "#/$defs/contentFreeId"},
+        "granted_scope_class": {"$ref": "#/$defs/nullableContentFreeId"},
+        "purpose_code": {"$ref": "#/$defs/contentFreeId"},
+        "granted_at_ms": {"$ref": "#/$defs/nullableTime"},
+        "affected_surfaces": {
+          "type": "array",
+          "maxItems": 64,
+          "uniqueItems": true,
+          "items": {"$ref": "#/$defs/contentFreeId"}
+        },
+        "app_link_state": {
+          "enum": ["not_required", "linked", "unlinked", "revoked", "unknown"]
+        },
+        "expires_at_ms": {"$ref": "#/$defs/nullableTime"},
+        "revoked": {"type": "boolean"}
+      },
+      "allOf": [
+        {
+          "oneOf": [
+            {
+              "properties": {
+                "granted_scope_class": {"type": "null"},
+                "granted_at_ms": {"type": "null"}
+              }
+            },
+            {
+              "properties": {
+                "granted_scope_class": {"$ref": "#/$defs/contentFreeId"},
+                "granted_at_ms": {"$ref": "#/$defs/time"}
+              }
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

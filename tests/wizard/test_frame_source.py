@@ -187,6 +187,41 @@ class FrameSourceTests(unittest.TestCase):
             )
         )
 
+    def test_vertical_gaze_stays_inside_the_existing_eye_aperture(self):
+        source = ProceduralWizardFrameSource()
+        pose_id = "front_idle"
+        canvas = render_reference_pose_local(pose_id)
+        layouts = [
+            source._reference_eye_layout(
+                canvas,
+                reference_pose_anchor(pose_id, anchor_name),
+            )
+            for anchor_name in ("left_eye", "right_eye")
+        ]
+        source._apply_reference_face_channels(
+            canvas,
+            WizardState(gaze_authoritative=True, gaze_vertical_aim=-1),
+            pose_id,
+            reference_pose_anchor(pose_id, "mouth"),
+        )
+
+        for eye_left, eye_top in layouts:
+            top = [canvas.get(x, eye_top) for x in range(eye_left, eye_left + 5)]
+            bottom = [
+                canvas.get(x, eye_top + 1) for x in range(eye_left, eye_left + 5)
+            ]
+            self.assertEqual(
+                sum(cell.rgb == REFERENCE_EYE_BLUE for cell in top),
+                1,
+            )
+            self.assertEqual(
+                sum(cell.rgb == REFERENCE_EYE_BLUE for cell in bottom),
+                0,
+            )
+            self.assertTrue(
+                all(cell.rgb != (0, 0, 0) for cell in top + bottom)
+            )
+
     def test_open_mouth_has_no_dark_vertical_side_columns(self):
         source = ProceduralWizardFrameSource()
         pose_id = "front_idle"
@@ -194,7 +229,7 @@ class FrameSourceTests(unittest.TestCase):
         mouth_anchor = reference_pose_anchor(pose_id, "mouth")
         source._apply_reference_face_channels(
             canvas,
-            WizardState(action="speaking", time_seconds=0.0),
+            WizardState(action="speaking", mouth="open_medium", time_seconds=0.0),
             pose_id,
             mouth_anchor,
         )
@@ -213,6 +248,39 @@ class FrameSourceTests(unittest.TestCase):
                 for y in range(mouth_anchor[1] - 3, mouth_anchor[1] + 2)
                 for x in range(mouth_anchor[0] - 4, mouth_anchor[0] + 5)
             )
+        )
+
+    def test_media_speaking_action_uses_scheduler_mouth_without_time_override(self):
+        source = ProceduralWizardFrameSource()
+        expression = {"mouth": "smile"}
+
+        for time_seconds in (0.0, 0.1, 1.7, 99.0):
+            with self.subTest(time_seconds=time_seconds):
+                state = WizardState(
+                    action="speaking",
+                    mouth="closed",
+                    expression="explaining",
+                    time_seconds=time_seconds,
+                )
+                self.assertEqual(
+                    source._reference_mouth_shape(state, expression),
+                    "closed",
+                )
+
+        state = WizardState(action="speaking", mouth="rounded", time_seconds=4.2)
+        self.assertEqual(source._reference_mouth_shape(state, expression), "rounded")
+
+    def test_legacy_speech_keeps_explicit_fallback_without_alignment(self):
+        source = ProceduralWizardFrameSource()
+        state = WizardState(
+            action="speaking",
+            speech_id="legacy-speech",
+            mouth="closed",
+            time_seconds=0.0,
+        )
+        self.assertEqual(
+            source._reference_mouth_shape(state, {"mouth": "closed"}),
+            "open_medium",
         )
 
     def test_all_pose_face_edits_remain_inside_anchor_bounds(self):

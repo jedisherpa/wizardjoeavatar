@@ -1,0 +1,304 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://wizardjoe.local/schemas/performance_context_v1.schema.json",
+  "title": "PerformanceContextV1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "runtime", "source", "clock", "conversation", "pipeline",
+    "approval", "character", "display", "governance", "preferences", "control",
+    "evidence", "context_sha256"
+  ],
+  "properties": {
+    "schema_version": {"type": "integer", "const": 1},
+    "runtime": {"$ref": "#/$defs/runtime"},
+    "source": {"$ref": "#/$defs/source"},
+    "clock": {"$ref": "#/$defs/clock"},
+    "conversation": {"$ref": "#/$defs/conversation"},
+    "pipeline": {"$ref": "#/$defs/pipeline"},
+    "approval": {"$ref": "#/$defs/approval"},
+    "character": {"$ref": "#/$defs/character"},
+    "display": {"$ref": "#/$defs/display"},
+    "governance": {"$ref": "#/$defs/governance"},
+    "preferences": {"$ref": "#/$defs/preferences"},
+    "control": {"$ref": "#/$defs/control"},
+    "evidence": {"$ref": "#/$defs/evidence"},
+    "context_sha256": {"$ref": "#/$defs/hash"}
+  },
+  "$defs": {
+    "id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{0,127}$"},
+    "nullable_id": {"oneOf": [{"$ref": "#/$defs/id"}, {"type": "null"}]},
+    "hash": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+    "nullable_hash": {"oneOf": [{"$ref": "#/$defs/hash"}, {"type": "null"}]},
+    "integer": {"type": "integer", "minimum": 0, "maximum": 9007199254740991},
+    "positive_integer": {"type": "integer", "minimum": 1, "maximum": 9007199254740991},
+    "signed_integer": {"type": "integer", "minimum": -9007199254740991, "maximum": 9007199254740991},
+    "semantic_intent": {
+      "enum": [
+        "acknowledge", "caution", "celebrate", "characterful_neutral", "clarify",
+        "degraded", "direct", "empathize", "explain", "external_action", "greet",
+        "interrupt", "listen", "neutral", "no_decision", "none", "permission_posture",
+        "present", "question", "reassure", "recall", "reference", "review", "settle",
+        "speak", "think", "topic_reset", "transition", "wait"
+      ]
+    },
+    "known_channel": {
+      "enum": [
+        "blink", "body_base", "breathing", "camera_motion", "dance", "effects", "eyes",
+        "face", "facing", "flight", "gaze", "gesture", "interruption", "locomotion",
+        "manual_override", "mouth", "permission_posture", "position", "props", "scene_flash",
+        "simulated_depth", "speech", "stage", "text_reveal", "upper_body", "whole_body_pulse",
+        "whole_pose", "world_state"
+      ]
+    },
+    "runtime": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["wizard_runtime_epoch", "simulation_tick", "reconciliation_generation", "created_at_monotonic_ms"],
+      "properties": {
+        "wizard_runtime_epoch": {"$ref": "#/$defs/id"},
+        "simulation_tick": {"$ref": "#/$defs/integer"},
+        "reconciliation_generation": {"$ref": "#/$defs/integer"},
+        "created_at_monotonic_ms": {"$ref": "#/$defs/integer"}
+      }
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "connector_session_id", "snapshot_event_id", "accepted_sequence", "media_epoch",
+        "media_id", "media_sha256", "source_slot", "source_epoch", "turn_id", "utterance_id"
+      ],
+      "properties": {
+        "connector_session_id": {"type": "string", "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"},
+        "snapshot_event_id": {"$ref": "#/$defs/id"},
+        "accepted_sequence": {"$ref": "#/$defs/integer"},
+        "media_epoch": {"$ref": "#/$defs/integer"},
+        "media_id": {"$ref": "#/$defs/id"},
+        "media_sha256": {"$ref": "#/$defs/nullable_hash"},
+        "source_slot": {"enum": ["main", "speech"]},
+        "source_epoch": {"$ref": "#/$defs/id"},
+        "turn_id": {"$ref": "#/$defs/nullable_id"},
+        "utterance_id": {"$ref": "#/$defs/nullable_id"}
+      }
+    },
+    "clock": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["authoritative_media_position_ms", "playback_state", "rate_milli", "snapshot_age_ms", "freshness", "hard_reconcile_reason"],
+      "properties": {
+        "authoritative_media_position_ms": {"$ref": "#/$defs/integer"},
+        "playback_state": {"enum": ["buffering", "empty", "ended", "error", "loading", "paused", "playing", "seeking", "stopped"]},
+        "rate_milli": {"type": "integer", "minimum": 1, "maximum": 8000},
+        "snapshot_age_ms": {"$ref": "#/$defs/integer"},
+        "freshness": {"enum": ["fresh", "stale", "uncertain"]},
+        "hard_reconcile_reason": {"enum": ["controller_takeover", "initial", "none", "reconnect", "resync", "runtime_epoch_changed", "seek", "source_changed", "speech_preempted_main", "speech_restored_main", "track_changed"]}
+      }
+    },
+    "conversation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["intent", "tone", "sensitivity", "urgency", "humor_band", "uncertainty_band", "relational_stance", "response_artifact_id"],
+      "properties": {
+        "intent": {"$ref": "#/$defs/semantic_intent"},
+        "tone": {"enum": ["direct", "focused", "measured", "neutral", "playful", "reflective", "serious", "warm"]},
+        "sensitivity": {"enum": ["high_stakes", "ordinary", "restricted", "sensitive"]},
+        "urgency": {"enum": ["critical", "high", "low", "normal"]},
+        "humor_band": {"type": "integer", "minimum": 0, "maximum": 1000},
+        "uncertainty_band": {"type": "integer", "minimum": 0, "maximum": 1000},
+        "relational_stance": {"enum": ["collaborative", "deferential", "firm", "instructive", "neutral", "supportive"]},
+        "response_artifact_id": {"$ref": "#/$defs/nullable_id"}
+      }
+    },
+    "pipeline": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["observed_stage", "mapped_status", "stage_started_at_monotonic_ms", "expected_next_event", "cancellation_posture", "error_posture", "tts_readiness", "alignment_readiness"],
+      "properties": {
+        "observed_stage": {"enum": ["auditing", "checking_safety", "deciding", "degraded", "drafting", "listening", "needs_clarification", "none", "queued", "reading_you", "ready", "recalling", "referencing", "reviewing", "speaking", "understanding", "waiting_approval"]},
+        "mapped_status": {"enum": ["active", "cancelled", "completed", "failed", "none", "started"]},
+        "stage_started_at_monotonic_ms": {"$ref": "#/$defs/integer"},
+        "expected_next_event": {"oneOf": [{"enum": ["approval_changed", "cancellation_confirmed", "response_released", "speech_ended", "speech_started", "stage_changed", "terminal_posture"]}, {"type": "null"}]},
+        "cancellation_posture": {"enum": ["confirmed", "failed", "not_requested", "output_stopped", "requested"]},
+        "error_posture": {"enum": ["degraded", "none", "recoverable", "terminal"]},
+        "tts_readiness": {"enum": ["failed", "not_requested", "pending", "ready", "unavailable"]},
+        "alignment_readiness": {"enum": ["failed", "not_requested", "pending", "ready", "unavailable"]}
+      }
+    },
+    "approval": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["presentation_state", "presentation_artifact_sha256", "pending_action_posture"],
+      "properties": {
+        "presentation_state": {"enum": ["approved_for_presentation", "denied", "unapproved"]},
+        "presentation_artifact_sha256": {"$ref": "#/$defs/nullable_hash"},
+        "pending_action_posture": {"enum": ["approved", "denied", "failed", "none", "not_required", "pending", "stale"]}
+      },
+      "allOf": [
+        {
+          "if": {"properties": {"presentation_state": {"const": "approved_for_presentation"}}, "required": ["presentation_state"]},
+          "then": {"properties": {"presentation_artifact_sha256": {"$ref": "#/$defs/hash"}}},
+          "else": {"properties": {"presentation_artifact_sha256": {"type": "null"}}}
+        }
+      ]
+    },
+    "position": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["x", "y", "z"],
+      "properties": {"x": {"$ref": "#/$defs/signed_integer"}, "y": {"$ref": "#/$defs/signed_integer"}, "z": {"$ref": "#/$defs/signed_integer"}}
+    },
+    "recent_performance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["performance_id", "intent", "disposition"],
+      "properties": {
+        "performance_id": {"$ref": "#/$defs/id"},
+        "intent": {"$ref": "#/$defs/semantic_intent"},
+        "disposition": {"enum": ["cancelled", "completed", "failed", "fallback", "interrupted", "suppressed"]}
+      }
+    },
+    "character": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["character_id", "package_digest", "manifest_digest", "runtime_api_version", "current_pose_id", "current_action_id", "position_milli", "facing", "gaze", "expression", "world_state", "recent_performance"],
+      "properties": {
+        "character_id": {"$ref": "#/$defs/id"},
+        "package_digest": {"$ref": "#/$defs/hash"},
+        "manifest_digest": {"$ref": "#/$defs/hash"},
+        "runtime_api_version": {"$ref": "#/$defs/positive_integer"},
+        "current_pose_id": {"$ref": "#/$defs/id"},
+        "current_action_id": {"$ref": "#/$defs/id"},
+        "position_milli": {"$ref": "#/$defs/position"},
+        "facing": {"enum": ["east", "north", "northeast", "northwest", "south", "southeast", "southwest", "west"]},
+        "gaze": {"$ref": "#/$defs/id"},
+        "expression": {"$ref": "#/$defs/id"},
+        "world_state": {"$ref": "#/$defs/id"},
+        "recent_performance": {"type": "array", "maxItems": 16, "uniqueItems": true, "items": {"$ref": "#/$defs/recent_performance"}}
+      }
+    },
+    "insets": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["top", "right", "bottom", "left"],
+      "properties": {"top": {"$ref": "#/$defs/integer"}, "right": {"$ref": "#/$defs/integer"}, "bottom": {"$ref": "#/$defs/integer"}, "left": {"$ref": "#/$defs/integer"}}
+    },
+    "normalized_box": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["x", "y", "width", "height"],
+      "properties": {
+        "x": {"type": "integer", "minimum": 0, "maximum": 1000},
+        "y": {"type": "integer", "minimum": 0, "maximum": 1000},
+        "width": {"type": "integer", "minimum": 0, "maximum": 1000},
+        "height": {"type": "integer", "minimum": 0, "maximum": 1000}
+      }
+    },
+    "display": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["width_px", "height_px", "scale_factor_milli", "orientation", "safe_area_px", "caption_area_milli", "stage_bounds_milli"],
+      "properties": {
+        "width_px": {"$ref": "#/$defs/positive_integer"},
+        "height_px": {"$ref": "#/$defs/positive_integer"},
+        "scale_factor_milli": {"type": "integer", "minimum": 1, "maximum": 16000},
+        "orientation": {"enum": ["landscape", "portrait", "square"]},
+        "safe_area_px": {"$ref": "#/$defs/insets"},
+        "caption_area_milli": {"$ref": "#/$defs/normalized_box"},
+        "stage_bounds_milli": {"$ref": "#/$defs/normalized_box"}
+      }
+    },
+    "governance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["allowed_semantic_actions", "denied_semantic_actions", "pending_approval_references", "memory_scope", "external_action_posture", "notification_scope", "linked_surface_state"],
+      "properties": {
+        "allowed_semantic_actions": {"type": "array", "maxItems": 29, "uniqueItems": true, "items": {"$ref": "#/$defs/semantic_intent"}},
+        "denied_semantic_actions": {"type": "array", "maxItems": 29, "uniqueItems": true, "items": {"$ref": "#/$defs/semantic_intent"}},
+        "pending_approval_references": {"type": "array", "maxItems": 65536, "uniqueItems": true, "items": {"$ref": "#/$defs/id"}},
+        "memory_scope": {"enum": ["linked_surface", "none", "session", "turn"]},
+        "external_action_posture": {"enum": ["allowed", "denied", "expired", "not_requested", "pending", "revoked"]},
+        "notification_scope": {"enum": ["current_surface", "linked_surfaces", "none"]},
+        "linked_surface_state": {"enum": ["link_pending", "linked", "revoked", "stale", "unlinked"]}
+      }
+    },
+    "preferences": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["motion_profile", "intensity_band", "disabled_channels", "caption_mode", "progressive_reveal_preference", "voice_preference"],
+      "properties": {
+        "motion_profile": {"enum": ["full", "reduced", "still"]},
+        "intensity_band": {"type": "integer", "minimum": 0, "maximum": 1000},
+        "disabled_channels": {"type": "array", "maxItems": 28, "uniqueItems": true, "items": {"$ref": "#/$defs/known_channel"}},
+        "caption_mode": {"enum": ["auto", "off", "on"]},
+        "progressive_reveal_preference": {"enum": ["disabled", "enabled", "system"]},
+        "voice_preference": {"enum": ["silent", "synchronized", "system"]}
+      }
+    },
+    "channel_claim": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["channel", "owner", "lease_id", "expires_at_monotonic_ms"],
+      "properties": {
+        "channel": {"$ref": "#/$defs/known_channel"},
+        "owner": {"enum": ["performance", "system", "user"]},
+        "lease_id": {"$ref": "#/$defs/id"},
+        "expires_at_monotonic_ms": {"$ref": "#/$defs/integer"}
+      }
+    },
+    "control": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["user_locomotion_lease_id", "user_locomotion_lease_expires_at_monotonic_ms", "manual_override_state", "channel_claims", "cancellation_generation"],
+      "properties": {
+        "user_locomotion_lease_id": {"$ref": "#/$defs/nullable_id"},
+        "user_locomotion_lease_expires_at_monotonic_ms": {"oneOf": [{"$ref": "#/$defs/integer"}, {"type": "null"}]},
+        "manual_override_state": {"enum": ["active", "inactive", "releasing"]},
+        "channel_claims": {"type": "array", "maxItems": 64, "uniqueItems": true, "items": {"$ref": "#/$defs/channel_claim"}},
+        "cancellation_generation": {"$ref": "#/$defs/integer"}
+      },
+      "oneOf": [
+        {"properties": {"user_locomotion_lease_id": {"type": "null"}, "user_locomotion_lease_expires_at_monotonic_ms": {"type": "null"}}},
+        {"properties": {"user_locomotion_lease_id": {"$ref": "#/$defs/id"}, "user_locomotion_lease_expires_at_monotonic_ms": {"$ref": "#/$defs/integer"}}}
+      ]
+    },
+    "source_commit": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["component", "commit"],
+      "properties": {"component": {"$ref": "#/$defs/id"}, "commit": {"type": "string", "pattern": "^[0-9a-f]{40}$"}}
+    },
+    "schema_version_binding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schema_id", "version"],
+      "properties": {"schema_id": {"$ref": "#/$defs/id"}, "version": {"$ref": "#/$defs/positive_integer"}}
+    },
+    "score_binding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["score_id", "score_revision", "score_sha256"],
+      "properties": {
+        "score_id": {"$ref": "#/$defs/nullable_id"},
+        "score_revision": {"oneOf": [{"$ref": "#/$defs/positive_integer"}, {"type": "null"}]},
+        "score_sha256": {"$ref": "#/$defs/nullable_hash"}
+      },
+      "oneOf": [
+        {"properties": {"score_id": {"type": "null"}, "score_revision": {"type": "null"}, "score_sha256": {"type": "null"}}},
+        {"properties": {"score_id": {"$ref": "#/$defs/id"}, "score_revision": {"$ref": "#/$defs/positive_integer"}, "score_sha256": {"$ref": "#/$defs/hash"}}}
+      ]
+    },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["ordered_fingerprints", "source_commits", "schema_versions", "score_binding", "package_digest"],
+      "properties": {
+        "ordered_fingerprints": {"type": "array", "maxItems": 256, "uniqueItems": true, "items": {"$ref": "#/$defs/hash"}},
+        "source_commits": {"type": "array", "maxItems": 32, "uniqueItems": true, "items": {"$ref": "#/$defs/source_commit"}},
+        "schema_versions": {"type": "array", "maxItems": 64, "uniqueItems": true, "items": {"$ref": "#/$defs/schema_version_binding"}},
+        "score_binding": {"$ref": "#/$defs/score_binding"},
+        "package_digest": {"$ref": "#/$defs/hash"}
+      }
+    }
+  }
+}
