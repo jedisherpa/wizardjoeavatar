@@ -183,7 +183,7 @@ checks, sidecar build, Tauri build, and live HTTP contract checks.
 - Companion frontend: 27/27.
 - Companion Rust: 17/17.
 - Strict animation quality: 32/32.
-- Prism media JavaScript: 39/39.
+- Prism media JavaScript: 40/40.
 - Prism frontend production build: pass.
 - Prism Rust workspace and locked release build: pass.
 
@@ -204,9 +204,10 @@ Two-hour, eight-hour, and 24-hour runs remain.
 
 Deterministic desktop, portrait, gaze-left/right, speaking, interruption, and
 permission frames are committed. Strict pixel/transition checks pass, and the
-permission-denied staff removal was manually inspected. Browser automation had
-no available target, and connected real-time/slow-motion/frame-by-frame acting
-review remains.
+permission-denied staff removal was manually inspected. Live browser layout and
+controls were checked at desktop and mobile sizes, with one valid 1038x720
+desktop screenshot retained. Connected real-time, slow-motion, and
+frame-by-frame acting review remains.
 
 ## 25. Governance And Permission Review
 
@@ -236,7 +237,7 @@ An independent fresh-clone or clean-user run remains.
 - Score edits are component-only.
 - Some speech can use restrained scoreless body behavior.
 - No server-confirmed in-flight model-turn cancellation.
-- No browser-driven or complete human animation review.
+- No complete connected human animation review or retained mobile screenshot.
 - No multi-hour soak or independent clean-user run.
 
 ## 28. Deferred Work

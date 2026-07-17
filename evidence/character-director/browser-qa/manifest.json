@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "captured_local_date": "2026-07-16",
+  "runtime": {
+    "python_origin": "http://127.0.0.1:8875",
+    "prism_origin": "http://127.0.0.1:8890",
+    "legacy_origin_untouched": "http://127.0.0.1:8765"
+  },
+  "artifacts": [
+    {
+      "path": "live-desktop-1038x720.png",
+      "sha256": "33e579c200b6255da60f6b043d780c9d625661d7cf55ff9a61256ef70b8d0a6f",
+      "pixel_width": 1038,
+      "pixel_height": 720,
+      "observations": [
+        "canvas_nonblank",
+        "avatar_fully_framed",
+        "nearest_neighbor_pixels_visible",
+        "diagnostics_and_controls_do_not_overlap"
+      ]
+    }
+  ],
+  "interactive_checks_without_retained_artifact": [
+    "mobile_390x844_layout",
+    "play_repeat_stop_controls",
+    "bounded_pose_picker"
+  ],
+  "limitations": [
+    "The mobile layout was checked interactively, but no valid mobile screenshot was retained.",
+    "This is browser-layout evidence, not a connected audiovisual recording or professional acting review."
+  ]
+}

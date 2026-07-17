@@ -49,7 +49,7 @@ The original dirty source trees and the legacy Python listener on
 | Companion frontend | `npm test` in `companion/frontend` | **Pass:** 27/27 |
 | Companion supervisor | `cargo test --manifest-path companion/src-tauri/Cargo.toml` | **Pass:** 17/17 from a rebuilt target |
 | Visual contract | `python3 tools/verify_animation_quality.py --strict` | **Pass:** 32/32 |
-| Prism media | three media test files via `node --test` | **Pass:** 39/39 |
+| Prism media | three media test files via `node --test` | **Pass:** 40/40 |
 | Prism preference regression | active-source preference-change test | **Pass:** playback state and reduced-motion profile preserved |
 | Prism frontend | `npm run build` | **Pass:** Vite production build |
 | Prism Rust | `cargo test --workspace -j 1` | **Pass:** complete workspace before final JavaScript-only fix |
@@ -146,8 +146,12 @@ the staff and staff-only visual residue are removed without opening a cavity in
 the character silhouette. Automated checks verify pixel bounds and visual
 contracts.
 
-The in-app browser-control runtime exposed no browser target, so no automated
-responsive browser screenshots or canvas interaction recording are claimed.
+The in-app browser runtime subsequently verified the live canvas and controls
+at desktop and mobile sizes. One valid 1038x720 desktop screenshot and a
+machine-readable manifest are retained under
+`evidence/character-director/browser-qa/`. The 390x844 mobile layout was checked
+interactively, but no valid mobile screenshot was retained. This is layout and
+control evidence, not a connected audiovisual or professional acting review.
 Generated evidence is not a substitute for real-time, slow-motion, and
 frame-by-frame human review of gaze, blink rhythm, hand arcs, foot contact,
 starts/stops/turns, stillness, and reduced motion.

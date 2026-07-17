@@ -1,0 +1,34 @@
+{
+  "captured_local_date": "2026-07-16",
+  "runtime_origin": "http://127.0.0.1:8875",
+  "session": {
+    "scheduler_state": "paused",
+    "active_source_slot": "main",
+    "accepted_sequence": 8,
+    "media_epoch": 4,
+    "last_disposition": "accepted",
+    "last_error_code": null
+  },
+  "scheduler": {
+    "scheduler_state": "scoreless",
+    "last_ack_disposition": "accepted",
+    "last_error_code": null
+  },
+  "governed_speech": {
+    "active": false,
+    "status": "approval_revoked",
+    "revocation_generation": 5,
+    "replay_approval_count": 2
+  },
+  "permission_world": {
+    "status": "ready",
+    "permission_count": 0,
+    "accepted_count": 88,
+    "rejected_count": 0
+  },
+  "redactions": [
+    "connector bearer token",
+    "runtime and session identifiers",
+    "content and media identity hashes"
+  ]
+}
