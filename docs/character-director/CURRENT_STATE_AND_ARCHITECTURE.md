@@ -16,8 +16,8 @@ score repository/runtime wiring, permission-world projection, and a Companion
 director/debug surface.
 
 It is not yet a production-ready Character Director candidate. Both audited
-trees are dirty and the new work does not yet have an immutable paired commit
-identity. The character-bound compiler and score-edit contract are components
+trees now have an immutable paired implementation identity. The
+character-bound compiler and score-edit contract are components
 rather than a complete production turn-authoring path; normal governed speech
 can still reach Python through the restrained scoreless fallback. Prism's
 permission-world producer sends an empty state, not real grant/deny/revoke
@@ -29,7 +29,8 @@ verification passes; a packaged Tauri supervisor has passed authenticated
 dynamic-port discovery and shutdown; and an authenticated 120-second
 concurrency soak sustains the declared 24 FPS/60 Hz cadence. The remaining
 production gates are real permission authority, connected Prism recordings and
-human visual review, multi-hour soak evidence, and a clean immutable rebuild.
+human visual review, multi-hour soak evidence, and independent clean-user
+reproduction.
 
 The correct direct status is therefore:
 
@@ -41,13 +42,12 @@ authority and connected acceptance evidence.**
 
 | Repository | Branch | HEAD | Working-tree state |
 | --- | --- | --- | --- |
-| Python/Companion | `codex/character-director` | `293a2d84d3376eca3084eb0db9b0cd04fee42f08` | Dirty: 34 tracked files changed plus new Python modules, schemas, tests, fixtures, and this documentation directory |
-| Prism | `codex/character-director-prism` | `bf229c28aa7e7a700a63bd5282607ffc77a052c2` | Dirty: 7 tracked files changed plus `approved_reply.rs`, Rust integration tests, and governed-speech JavaScript/tests |
+| Python/Companion | `codex/character-director` | `84b95fb8aaa4040b9c967c0ef64367ec9139cd26` | Clean implementation commit; final package provenance records `sourceDirty=false` |
+| Prism | `codex/character-director-prism` | `0ead02c630fd3e9d9a69d008b19829e82846a7c5` | Clean governed connector implementation commit |
 
-The Python tracked diff reports 6,316 insertions and 196 deletions. The Prism
-tracked diff reports 4,887 insertions and 331 deletions; those counts exclude
-untracked files. These are inspection facts, not release manifests. The
-uncommitted work cannot be identified by the HEAD hashes alone.
+The implementation commits are the paired source identity. Documentation
+updates after packaging are recorded separately and do not alter the embedded
+sidecar runtime.
 
 ## Runtime architecture
 
@@ -330,7 +330,7 @@ human acceptance evidence into production readiness.
 
 | Area | Current limitation |
 | --- | --- |
-| Immutable candidate identity | Both halves are uncommitted dirty trees. There is no paired candidate manifest or reproducible commit pair for this work. |
+| Independent reproduction | The paired implementation commits and clean package provenance exist, but an independent fresh-clone or clean-user reproduction has not been executed. |
 | Character-bound compilation in live turns | No non-test caller invokes `compile_character_bound_performance`. Governed speech registration captures context but does not compile/publish/select a character-bound score. |
 | Score authoring/publication | Repository loading is wired, but no runtime API or Prism path publishes Character Director compiled scores into the Companion score root. Existing baseline authoring uses `compile_baseline_performance`; the new character-bound function is not connected there. |
 | Score edits | `ScoreEditsV1` and `character_director_score_edits_v1.schema.json` exist, but no edit application, publication, API or UI caller was found. The older `score_edits_v1.schema.json` also remains in the general schema registry. |
@@ -359,9 +359,9 @@ human acceptance evidence into production readiness.
 
 ## Source-level risks and blockers
 
-1. **Dirty-state risk:** architecture spans many uncommitted files in both
-   repositories. Partial staging or independent commits can create a protocol
-   pair that compiles on one side and fails closed on the other.
+1. **Pairing risk:** the two implementation commits form one protocol pair.
+   Promoting only one branch can create a version mismatch that correctly fails
+   closed but does not deliver the intended feature.
 2. **Compiler integration gap:** the strongest new capability/compile work is
    not yet on the live governed speech path. Current speech body behavior can be
    mistaken for character-bound direction because it is visibly animated, but
@@ -412,10 +412,8 @@ is claimed.
    only and unavailable in the director UI.
 3. Connect permission heartbeats to a real, independently authoritative
    permission read model; preserve the empty fail-closed state until then.
-4. Commit the two halves as a named pair and run clean Python, Rust and
-   JavaScript suites plus byte/error-code cross-language fixtures.
-5. Build the final Companion candidate from the immutable commit, verify
-   discovery and token rotation in both launch orders, and record main ->
+4. Publish the named pair and preserve both full hashes in release metadata.
+5. Record main ->
    speech -> main, pause/seek/rate/reconnect/revoke/cancel traces.
 6. Complete connected human visual review, multi-hour packaged soaks,
    clean-user reproduction, reinstall/rollback checks, and only then consider

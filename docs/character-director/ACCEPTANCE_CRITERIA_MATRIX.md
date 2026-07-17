@@ -4,11 +4,9 @@ Audit snapshot: 2026-07-15. This matrix covers both current implementation
 worktrees:
 
 - Python/Companion: `/Users/paul/Documents/WizardJoeAsci/worktrees/wizardjoe-character-director`
-  on `codex/character-director` at committed base `293a2d8`, with the Character
-  Director implementation still uncommitted.
+  on `codex/character-director` at implementation commit `84b95fb8aaa4040b9c967c0ef64367ec9139cd26`.
 - PrismGT: `/Users/paul/Documents/WizardJoeAsci/worktrees/prism-character-director`
-  on `codex/character-director-prism` at committed base `bf229c2`, with the
-  Character Director integration still uncommitted.
+  on `codex/character-director-prism` at implementation commit `0ead02c630fd3e9d9a69d008b19829e82846a7c5`.
 
 This is an acceptance audit, not a declaration of production readiness. The
 source changes and automated coverage are substantial, but the goal is not
@@ -68,7 +66,7 @@ upstream permission producer are absent.
 | 35 | Reduced-motion behavior works. | **Implemented-not-visually-verified** | Compiler/scheduler projections suppress prohibited channels, permission-world overlays become static, and Prism resolves the user/system motion profile. `test_character_bound_compiler.py`, `test_performance_scheduler.py`, and `test_permission_world_visuals.py` passed; required reduced-motion visual/assistive review is absent. |
 | 36 | Automated tests pass. | **Implemented+verified** | Fresh green commands: full Python discovery (428/428), Python scope gate (63 files, zero violations), Companion frontend tests (27/27), Companion Rust tests (17/17), strict animation-quality verification (32/32), Prism frontend tests (39/39), Prism `npm run build`, locked release build, and full Rust workspace tests. The Companion Rust gate was rebuilt after macOS offloaded the worktree target cache to iCloud. |
 | 37 | End-to-end recordings demonstrate the real Python visualizer connected to PrismGT. | **Deferred** | No recording in either current worktree demonstrates the governed Character Director path through a real Prism process and Python visualizer. Existing MP4s under `evidence/animation-quality/` predate this implementation and do not show approved Prism reply -> TTS -> context/registration -> synchronized character -> main-media restoration. |
-| 38 | The application runs from a documented clean environment. | **Deferred** | The pinned sidecar and packaged Tauri supervisor have launched successfully with dynamic-port discovery, authenticated health, binding, and graceful child shutdown. That candidate was built from a dirty development tree; a final immutable-commit rebuild and clean checkout/user acceptance run are still required. |
+| 38 | The application runs from a documented clean environment. | **Partial** | The pinned sidecar and packaged Tauri supervisor were rebuilt from clean commit `84b95fb8` with `sourceDirty=false`; the live app selected dynamic port 63551, published private discovery, reported ready/running/connector-enabled health, and returned an authenticated performance binding while legacy port 8765 remained live. An independent fresh-clone/clean-user run is still required. |
 | 39 | Another engineer can reproduce the system. | **Partial** | `REPRODUCIBLE_SETUP_AND_ROLLBACK.md` and `PRODUCTION_VERIFICATION.md` now provide exact setup, startup, verification, rollback, and evidence commands. They are not yet backed by the final immutable commits and an independent clean-machine or clean-user execution. |
 | 40 | Remaining limitations are stated directly. | **Implemented+verified** | This matrix states the missing producer, recordings, visual review, soak, clean-environment, reproduction, high-level language compiler, and motion-quality gaps directly; the specialist reports also preserve unresolved risks rather than converting them into claims. |
 | 41 | No planned behavior is described as implemented. | **Implemented+verified** | `PHASE0_TRACKER.md` separates the completed design gate from held implementation/production acceptance, `IMPLEMENTATION_WORKFLOW.md` remains framed as planned work, and this matrix credits only current code/tests/evidence while marking missing acceptance work Partial, Blocked, or Deferred. |
@@ -93,10 +91,9 @@ upstream permission producer are absent.
    soak is clean, but required drift, RSS growth, queue stability, reconnect,
    and shutdown measurements have not been produced for two, eight, or 24
    hours.
-5. **No final clean immutable candidate.** A packaged supervisor candidate has
-   passed dynamic-port discovery and lifecycle checks, but it predates the final
-   performance/portability fixes and was built from a dirty tree. The final
-   commit-backed rebuild and clean-user reproduction remain.
+5. **No independent clean-user reproduction.** The final commit-backed package
+   is live and verified, but it was built in the existing development account.
+   A fresh clone or clean-user reproduction and rollback exercise remain.
 
 ## Fresh verification commands
 
@@ -121,8 +118,8 @@ npm run build
 ## Overall verdict
 
 **Partially achieved.** At this snapshot, 24 criteria are
-Implemented+verified, 7 are Implemented-not-visually-verified, 6 are Partial,
-1 is Blocked, and 3 are Deferred. Automated correctness, contract coverage,
+Implemented+verified, 7 are Implemented-not-visually-verified, 7 are Partial,
+1 is Blocked, and 2 are Deferred. Automated correctness, contract coverage,
 short concurrency performance, and package supervision are strong; production
 acceptance is not justified without the real permission producer, current
 Prism-connected recordings and visual review, multi-hour measurements, and a

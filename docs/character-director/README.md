@@ -32,6 +32,7 @@ must remain labelled as planned.
   statuses and evidence.
 - `PRODUCTION_VERIFICATION.md`: fresh automated, package, cadence, security, and
   visual verification results.
+- `FINAL_HANDOFF.md`: ordered 33-section implementation and acceptance handoff.
 - `REPRODUCIBLE_SETUP_AND_ROLLBACK.md`: setup, startup order, troubleshooting,
   rollback, and coexistence procedure.
 - `BASELINE_ENVIRONMENT.md`: pinned implementation boundaries.

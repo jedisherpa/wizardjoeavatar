@@ -32,12 +32,11 @@ No green test is presented as proof of acting quality or external authority.
 
 | Repository | Branch | Base HEAD | State at verification |
 | --- | --- | --- | --- |
-| Python/Companion | `codex/character-director` | `293a2d84d3376eca3084eb0db9b0cd04fee42f08` | Implementation and evidence changes pending final commit |
-| Prism | `codex/character-director-prism` | `bf229c28aa7e7a700a63bd5282607ffc77a052c2` | Connector and governed-speech changes pending final commit |
+| Python/Companion | `codex/character-director` | `84b95fb8aaa4040b9c967c0ef64367ec9139cd26` | Clean implementation commit used for the final package build |
+| Prism | `codex/character-director-prism` | `0ead02c630fd3e9d9a69d008b19829e82846a7c5` | Clean governed connector implementation commit |
 
-The final paired commit identities must replace these base hashes in the release
-receipt after staging and commit. The original dirty source trees and the
-legacy Python listener on `127.0.0.1:8765` were not replaced.
+The original dirty source trees and the legacy Python listener on
+`127.0.0.1:8765` were not replaced.
 
 ## Automated Results
 
@@ -117,10 +116,18 @@ dynamic loopback port, published the private discovery document, passed
 authenticated health and binding checks, and shut the child down gracefully.
 Deep ad-hoc code-sign verification also passed.
 
-That candidate predates the final replay-performance and PNG-portability fixes
-and was built while the source tree was dirty. It is evidence for lifecycle
-design, not the final release artifact. The final package must be rebuilt from
-the immutable commit pair and rerun through the same checks.
+The final package was rebuilt from clean Python commit `84b95fb8`; its embedded
+provenance records the full commit and `sourceDirty: false`. It launched on
+dynamic port `63551`, published the private discovery document, reported
+`ready` health with the frame hub running and connector enabled, and returned a
+valid authenticated performance binding for `wizard-joe-v1`. At the same time,
+the legacy process continued answering its real state contract on port 8765.
+
+Bundle:
+`/Users/paul/Library/Caches/Wizard Joe Companion/build-target/release/bundle/macos/Wizard Joe Companion.app`
+
+This proves the committed package and coexistence path in the current account.
+It does not replace an independent fresh-clone or clean-user reproduction.
 
 ## Visual Evidence
 
@@ -172,12 +179,12 @@ starts/stops/turns, stillness, and reduced motion.
    the implemented stale-performance revocation and remains incomplete.
 6. Real connected recordings and human animation review are absent.
 7. Two-hour, eight-hour, and 24-hour soak gates remain outstanding.
-8. The final immutable-commit package and clean-user reproduction remain.
+8. Independent clean-user reproduction and rollback remain.
 
 ## Promotion Decision
 
 Do not replace the live `127.0.0.1:8765` service or promote the packaged
-candidate yet. Commit both repository halves, rebuild the Companion from the
-clean Python commit, verify the paired Prism commit, run the package lifecycle
-checks, record a real governed Prism performance, and complete the remaining
-visual and long-duration gates first.
+candidate as production yet. The paired commits and clean package lifecycle are
+verified; record a real governed Prism performance and complete the remaining
+permission-authority, visual, clean-user, rollback, and long-duration gates
+first.
