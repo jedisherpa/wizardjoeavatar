@@ -1794,7 +1794,9 @@ async def run_visual_review(
                 decoded_frames=records.decoded_raster_frames,
                 strict_raster_evidence=True,
             )
-            records.contact_verification = contact_report.to_mapping()
+            records.contact_verification = json.loads(
+                json.dumps(contact_report.to_mapping(), sort_keys=True)
+            )
             records.contact_verification["path"] = "contact_verification.json"
             contact_verification_path.write_text(
                 json.dumps(
