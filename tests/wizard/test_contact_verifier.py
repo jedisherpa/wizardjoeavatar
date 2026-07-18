@@ -162,6 +162,26 @@ class ContactVerifierTests(unittest.TestCase):
         self.assertFalse(report.passed)
         self.assertIn("planted_anchor_drift", self._issue_codes(report))
 
+    def test_fixed_root_support_does_not_claim_contact_lock(self):
+        record = next(
+            item
+            for item in self._walk_trace()
+            if item.planted_anchor_stage is not None
+        )
+        released = replace(
+            record,
+            frame_index=record.frame_index + 1,
+            animation_root_policy="fixed",
+            planted_anchor_stage=StagePointV1(
+                record.planted_anchor_stage.x + 4.0,
+                record.planted_anchor_stage.y,
+            ),
+        )
+
+        report = verify_contact_trace((record, released))
+
+        self.assertTrue(report.passed, report.to_mapping())
+
     def test_verifier_rejects_two_cell_raster_span_drift(self):
         records, frames = self._walk_evidence()
         self._add_visible_planted_cells(records, frames)
