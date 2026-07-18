@@ -7,8 +7,9 @@ from wizard_avatar.contact_verifier import (
     verify_contact_trace,
 )
 from wizard_avatar.frame_source import ProceduralWizardFrameSource
+from wizard_avatar.floor import build_background
 from wizard_avatar.models import WizardCommand
-from wizard_avatar.palette import ENV_RGB, RGB
+from wizard_avatar.palette import RGB
 
 
 class ContactVerifierTests(unittest.TestCase):
@@ -55,11 +56,11 @@ class ContactVerifierTests(unittest.TestCase):
     @staticmethod
     def _blank_span(frame, span):
         cells = bytearray(frame.cells)
-        rgb = ENV_RGB["background"]
+        background = build_background(frame.cols, frame.rows).to_frame_bytes()
         for y in range(span.min_y, span.max_y + 1):
             for x in range(span.min_x, span.max_x + 1):
                 offset = (y * frame.cols + x) * 4
-                cells[offset : offset + 4] = bytes((32, *rgb))
+                cells[offset : offset + 4] = background[offset : offset + 4]
         return replace(frame, cells=bytes(cells))
 
     @staticmethod

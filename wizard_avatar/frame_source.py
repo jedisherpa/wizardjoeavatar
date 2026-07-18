@@ -631,10 +631,6 @@ class ProceduralWizardFrameSource:
             and permission_world.motion_profile != "full"
         ):
             effect_intensity = 0.0
-        presented_active_markers = list(state.animation_active_markers)
-        for event in snapshot.pending_marker_events:
-            if event.marker_id not in presented_active_markers:
-                presented_active_markers.append(event.marker_id)
         animation_truth = AnimationTruthTraceV1(
             schema=ANIMATION_TRUTH_TRACE_SCHEMA,
             schema_version=ANIMATION_TRUTH_TRACE_VERSION,
@@ -655,7 +651,7 @@ class ProceduralWizardFrameSource:
             animation_root_policy=state.animation_root_policy,
             support_contact=state.animation_support_contact,
             planted_anchor=state.animation_planted_anchor,
-            active_markers=tuple(presented_active_markers),
+            active_markers=tuple(state.animation_active_markers),
             presentation_marker_events=snapshot.pending_marker_events,
             contact_generation=state.animation_contact_generation,
             contact_started_tick=state.animation_contact_started_tick,

@@ -58,7 +58,7 @@ def _git_identity(root: Path) -> Dict[str, Any]:
 
     try:
         head = run("rev-parse", "HEAD").decode("ascii").strip()
-        tree = run("rev-parse", "HEAD^{tree}").decode("ascii").strip()
+        tree = run("rev-parse", "{}^{{tree}}".format(head)).decode("ascii").strip()
         branch = run("branch", "--show-current").decode("utf-8").strip()
         status = run("status", "--porcelain=v1", "--untracked-files=all")
         tracked_diff = run("diff", "--binary", "HEAD")
@@ -85,10 +85,8 @@ def _git_identity(root: Path) -> Dict[str, Any]:
 
 @lru_cache(maxsize=8)
 def _static_runtime_facts(root_text: str) -> Dict[str, Any]:
-    root = Path(root_text)
     executable = Path(sys.executable).resolve()
     return {
-        "git": _git_identity(root),
         "python_executable": str(executable),
         "python_executable_sha256": (
             _sha256_file(executable) if executable.is_file() else None
@@ -123,7 +121,7 @@ def build_runtime_identity(
         "started_at_monotonic_ns": time.monotonic_ns(),
         "working_directory": str(Path.cwd().resolve()),
         "repository_root": str(root),
-        "git": dict(static["git"]),
+        "git": _git_identity(root),
         "python": {
             "executable": static["python_executable"],
             "executable_sha256": static["python_executable_sha256"],
@@ -140,3 +138,14 @@ def build_runtime_identity(
         "server": dict(server_config or {}),
         "render": dict(render_config),
     }
+
+
+def refresh_runtime_identity(
+    identity: Mapping[str, Any],
+    root: Path,
+) -> Dict[str, Any]:
+    """Refresh mutable source provenance while preserving process identity."""
+
+    refreshed = dict(identity)
+    refreshed["git"] = _git_identity(root.resolve())
+    return refreshed

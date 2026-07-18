@@ -13,6 +13,7 @@ from typing import (
 )
 
 from .animation_trace import AnimationTruthTraceV1, RasterSpanV1
+from .floor import build_background
 from .palette import ENV_RGB
 
 
@@ -371,11 +372,14 @@ def _span_has_foreground_color(
     span: RasterSpanV1,
     background_rgbs: FrozenSet[Tuple[int, int, int]],
 ) -> bool:
+    authored_background = build_background(raster.cols, raster.rows).to_frame_bytes()
     for y in range(span.min_y, span.max_y + 1):
         for x in range(span.min_x, span.max_x + 1):
             offset = (y * raster.cols + x) * 4
             rgb = tuple(raster.cells[offset + 1 : offset + 4])
-            if rgb not in background_rgbs:
+            cell = raster.cells[offset : offset + 4]
+            background_cell = authored_background[offset : offset + 4]
+            if cell != background_cell and rgb not in background_rgbs:
                 return True
     return False
 

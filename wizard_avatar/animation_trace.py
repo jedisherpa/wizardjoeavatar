@@ -106,8 +106,12 @@ class AnimationTruthTraceV1:
     @classmethod
     def from_mapping(cls, value: Mapping[str, Any]) -> "AnimationTruthTraceV1":
         expected = {item.name for item in fields(cls)}
-        if set(value) != expected:
-            missing = sorted(expected.difference(value))
+        supplied = set(value)
+        backward_compatible_missing = supplied == expected.difference(
+            {"presentation_marker_events"}
+        )
+        if supplied != expected and not backward_compatible_missing:
+            missing = sorted(expected.difference(supplied))
             extra = sorted(set(value).difference(expected))
             raise ValueError(
                 "invalid animation truth fields: missing={} extra={}".format(
@@ -117,6 +121,7 @@ class AnimationTruthTraceV1:
             )
         payload = dict(value)
         payload["active_markers"] = tuple(payload["active_markers"])
+        payload.setdefault("presentation_marker_events", ())
         payload["presentation_marker_events"] = tuple(
             AnimationMarkerEventV1(**event)
             for event in payload["presentation_marker_events"]

@@ -479,6 +479,7 @@ def collect_git_provenance(root: Path = ROOT) -> Dict[str, Any]:
 
     try:
         head = run("rev-parse", "HEAD").decode("ascii").strip()
+        head_tree = run("rev-parse", "{}^{{tree}}".format(head)).decode("ascii").strip()
         branch = run("branch", "--show-current").decode("utf-8").strip()
         status = run("status", "--porcelain=v1", "--untracked-files=all")
         tracked_diff = run("diff", "--binary", "HEAD")
@@ -486,8 +487,11 @@ def collect_git_provenance(root: Path = ROOT) -> Dict[str, Any]:
         raise EvidenceFailure("cannot establish Git provenance: {}".format(exc)) from exc
     if not GIT_OBJECT_RE.fullmatch(head):
         raise EvidenceFailure("Git HEAD is not a full SHA-1/SHA-256 object ID")
+    if not GIT_OBJECT_RE.fullmatch(head_tree):
+        raise EvidenceFailure("Git HEAD tree is not a full SHA-1/SHA-256 object ID")
     return {
         "head": head,
+        "head_tree": head_tree,
         "branch": branch,
         "worktree_clean": not status,
         "status_sha256": hashlib.sha256(status).hexdigest(),
@@ -524,21 +528,34 @@ async def request_json_async(
     return result, (time.perf_counter() - started) * 1000.0
 
 
-def runtime_urls(base_url: str) -> Tuple[str, str, str, str, str]:
+def canonical_runtime_base_url(base_url: str) -> str:
     parsed = urllib.parse.urlsplit(base_url)
     if parsed.scheme not in {"http", "https"} or not parsed.netloc:
         raise ValueError("--base-url must be an absolute http(s) URL")
+    if parsed.username is not None or parsed.password is not None:
+        raise ValueError("--base-url must not contain credentials")
+    if parsed.query or parsed.fragment:
+        raise ValueError("--base-url must not contain a query or fragment")
     try:
         port = parsed.port
     except ValueError as exc:
         raise ValueError("--base-url contains an invalid port") from exc
+    if parsed.hostname is None:
+        raise ValueError("--base-url must contain a hostname")
     if port == PROTECTED_LEGACY_PORT:
         raise ValueError("the visual-review harness must never contact protected port 8765")
     base_path = parsed.path.rstrip("/")
-    http_base = urllib.parse.urlunsplit((parsed.scheme, parsed.netloc, base_path, "", ""))
+    host = "[{}]".format(parsed.hostname) if ":" in parsed.hostname else parsed.hostname
+    authority = "{}:{}".format(host, port) if port is not None else host
+    return urllib.parse.urlunsplit((parsed.scheme.lower(), authority, base_path, "", ""))
+
+
+def runtime_urls(base_url: str) -> Tuple[str, str, str, str, str]:
+    http_base = canonical_runtime_base_url(base_url)
+    parsed = urllib.parse.urlsplit(http_base)
     ws_scheme = "wss" if parsed.scheme == "https" else "ws"
     ws_url = urllib.parse.urlunsplit(
-        (ws_scheme, parsed.netloc, base_path + "/ws/avatar/wizard", "codec=adaptive", "")
+        (ws_scheme, parsed.netloc, parsed.path + "/ws/avatar/wizard", "codec=adaptive", "")
     )
     return (
         ws_url,
@@ -584,8 +601,8 @@ def validate_runtime_binding(
         raise EvidenceFailure("runtime Git branch does not match the evidence checkout")
     if git.get("worktree_clean") is not True or provenance.get("worktree_clean") is not True:
         raise EvidenceFailure("runtime and evidence checkout must both start clean")
-    if not GIT_OBJECT_RE.fullmatch(str(git.get("head_tree", ""))):
-        raise EvidenceFailure("runtime Git tree is not content-addressed")
+    if git.get("head_tree") != provenance.get("head_tree"):
+        raise EvidenceFailure("runtime Git tree does not match the evidence checkout HEAD")
     for field in ("status_sha256", "tracked_diff_sha256"):
         if git.get(field) != provenance.get(field):
             raise EvidenceFailure("runtime Git {} does not match the evidence checkout".format(field))
@@ -1450,6 +1467,7 @@ async def run_visual_review(
 ) -> Tuple[Path, Dict[str, Any]]:
     if queue_capacity <= 0 or cell_size <= 0 or sample_every_frames <= 0:
         raise ValueError("queue capacity, cell size, and sample interval must be positive")
+    base_url = canonical_runtime_base_url(base_url)
     output_dir = output_dir.resolve()
     provenance = collect_git_provenance()
     output_dir.mkdir(parents=True, exist_ok=True)
@@ -1575,21 +1593,6 @@ async def run_visual_review(
             except Exception as exc:
                 integrity.invalidate(str(exc))
 
-    try:
-        runtime_identity_end, _ = await request_json_async("GET", runtime_identity_url)
-        if runtime_identity_start is None:
-            raise EvidenceFailure("starting runtime identity was not captured")
-        validate_runtime_binding(
-            runtime_identity_start,
-            runtime_identity_end,
-            provenance,
-            base_url,
-            init,
-        )
-    except Exception as exc:
-        runtime_binding_error = "{}: {}".format(type(exc).__name__, exc)
-        integrity.invalidate("runtime binding failed: {}".format(exc))
-
     if init is None:
         # A failed handshake still emits a structurally inspectable invalid manifest.
         init = InitMetadata("INIT:0:5:1:1:0:0:0", 1.0, 5, 1, 1, 0, 0, 0.0, CELL_BYTES, {})
@@ -1667,6 +1670,21 @@ async def run_visual_review(
                 integrity.invalidate("planted-foot contact verification failed")
         except Exception as exc:
             integrity.invalidate("atomic animation trace capture failed: {}".format(exc))
+
+    try:
+        runtime_identity_end, _ = await request_json_async("GET", runtime_identity_url)
+        if runtime_identity_start is None:
+            raise EvidenceFailure("starting runtime identity was not captured")
+        validate_runtime_binding(
+            runtime_identity_start,
+            runtime_identity_end,
+            provenance,
+            base_url,
+            init,
+        )
+    except Exception as exc:
+        runtime_binding_error = "{}: {}".format(type(exc).__name__, exc)
+        integrity.invalidate("runtime binding failed: {}".format(exc))
 
     for path in records.sample_paths:
         if path.is_file():

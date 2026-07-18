@@ -120,6 +120,16 @@ class ScenarioSchemaTests(unittest.TestCase):
             "http://127.0.0.1:8875/api/avatar/wizard/runtime-identity",
         )
 
+    def test_runtime_urls_reject_credentials_query_and_fragment(self):
+        for value in (
+            "http://user:password@127.0.0.1:8875",
+            "http://127.0.0.1:8875?token=secret",
+            "http://127.0.0.1:8875#secret",
+        ):
+            with self.subTest(value=value):
+                with self.assertRaises(ValueError):
+                    runtime_urls(value)
+
     def test_atomic_trace_selection_requires_exact_frame_hash_and_codec(self):
         digest = "a" * 64
         frames = [{"frame_index": 12, "sha256": digest, "codec_tag": 2}]
@@ -184,7 +194,7 @@ class StrictCaptureTests(unittest.IsolatedAsyncioTestCase):
 
 
 class RuntimeIdentityEndpointTests(unittest.IsolatedAsyncioTestCase):
-    async def test_runtime_identity_is_fixed_and_content_addressed(self):
+    async def test_runtime_process_identity_is_fixed_and_git_is_refreshed(self):
         app = create_app(
             ProceduralWizardFrameSource(80, 45, 24.0),
             runtime_server_config={"host": "127.0.0.1", "port": 8875},
@@ -196,7 +206,9 @@ class RuntimeIdentityEndpointTests(unittest.IsolatedAsyncioTestCase):
         )
         first = await route.endpoint()
         second = await route.endpoint()
-        self.assertEqual(first, second)
+        self.assertEqual(first["runtime_epoch"], second["runtime_epoch"])
+        self.assertEqual(first["pid"], second["pid"])
+        self.assertEqual(first["started_at_utc"], second["started_at_utc"])
         self.assertEqual(first["schema"], "wizard_runtime_identity_v1")
         self.assertEqual(first["server"]["port"], 8875)
         self.assertEqual(
@@ -263,6 +275,7 @@ class ManifestValidationTests(unittest.TestCase):
             "frame_state_pairing": "atomic_animation_truth_trace_v1",
             "provenance": {
                 "head": digest,
+                "head_tree": digest,
                 "branch": "codex/character-director",
                 "worktree_clean": True,
                 "status_sha256": digest,

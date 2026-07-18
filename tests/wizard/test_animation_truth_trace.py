@@ -63,7 +63,7 @@ class AnimationTruthGeometryTests(unittest.TestCase):
                 for marker in trace.active_markers
                 if marker.startswith("action_")
             ],
-            [marker for marker, _ in expected],
+            [],
         )
         self.assertEqual(
             [event.simulation_tick for _, event in events],
@@ -117,6 +117,16 @@ class AnimationTruthGeometryTests(unittest.TestCase):
         following = source.render_captured_candidate_sync(source.capture_render_state())
         source.commit_render_candidate(following)
         self.assertEqual(following.animation_truth.presentation_marker_events, ())
+
+    def test_v1_trace_without_presentation_events_remains_readable(self):
+        source = ProceduralWizardFrameSource(cols=96, rows=54, fps=24)
+        candidate = source.render_captured_candidate_sync(source.capture_render_state())
+        mapping = candidate.animation_truth.to_mapping()
+        del mapping["presentation_marker_events"]
+
+        decoded = AnimationTruthTraceV1.from_mapping(mapping)
+
+        self.assertEqual(decoded.presentation_marker_events, ())
 
     def test_raster_anchor_span_matches_nearest_neighbor_blit(self):
         local = CellCanvas(5, 5)

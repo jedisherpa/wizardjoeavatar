@@ -37,7 +37,7 @@ from .permission_world import (
     PermissionWorldStateV1,
 )
 from .stream import WizardFrameHub
-from .runtime_identity import build_runtime_identity
+from .runtime_identity import build_runtime_identity, refresh_runtime_identity
 
 try:
     from fastapi import Request as FastAPIRequest
@@ -409,7 +409,7 @@ def create_app(
 
     @app.get("/api/avatar/wizard/runtime-identity")
     async def runtime_identity_snapshot():
-        return runtime_identity
+        return refresh_runtime_identity(runtime_identity, ROOT)
 
     @app.get("/api/avatar/wizard/replay")
     async def replay():
