@@ -77,12 +77,12 @@ evidence, and independent clean-user/package reproduction are absent.
    is silent and the short speech lifecycle was not separately visible in the
    sampled public status route. It does not prove scored lip sync,
    interruption, permission change, connector loss, and reconnect.
-2. **No required connected visual review.** Deterministic desktop, portrait,
-   gaze, speaking, interruption, and permission evidence exists and strict
-   frame-quality checks pass. Eye motion, blink rhythm, hand phases, foot
-   contact, starts/stops/turns, stillness, responsive framing, and reduced
-   motion have not yet been reviewed in a real connected performance in real
-   time, slow motion, and frame by frame.
+2. **The required director review is incomplete.** The clean-commit Python
+   baseline under `evidence/character-director/real-runtime-visual-review-2026-07-18-495b3e0/`
+   retains 345 contiguous 24 FPS frames across gaze, locomotion, turns, cast,
+   speech, and interruption with zero detected loss. Browser pixel parity,
+   slow-motion hand/foot review, the 60-second blink/stillness scene, responsive
+   and reduced-motion matrices, and two independent scored reviews remain.
 3. **Long-duration acceptance remains incomplete.** The strict staged V2 run
    passed bounded-client, rolling-cadence, loop-lag, and RSS gates, while the
    historical two-hour V1 run remains duration/throughput evidence only.

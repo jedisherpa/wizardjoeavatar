@@ -33,7 +33,7 @@ No green test is presented as proof of acting quality or external authority.
 
 | Repository | Branch | Base HEAD | State at verification |
 | --- | --- | --- | --- |
-| Python/Companion | `codex/character-director` | `4903699c3f6a9a627fd9b52ee3e5058f5e9c2629` | Permission-bound projection code receipt; documentation follows in a separate commit |
+| Python/Companion | `codex/character-director` | `495b3e04fa1c39f21e7b8ef55cde7d2490d0ef2f` | Strict visual evidence harness, graph-aware transition entry, non-metronomic blink scheduling, and permission-bound projection |
 | Prism | `codex/character-director-prism` | `a53b48d6626c5494336406aaa9b48bd52460d55e` | Canonical permission producer and exact-ACK code receipt |
 
 The original dirty source trees and the legacy Python listener on
@@ -47,7 +47,7 @@ The original dirty source trees and the legacy Python listener on
 | Capability determinism | focused capability and portability suites | **Pass:** 9/9 |
 | Python boundary | `python3 tools/validate_python_scope.py .` | **Pass:** 64 files, zero violations |
 | Python tools | `python3 -m py_compile` for evidence and soak tools | **Pass** |
-| Real-runtime visual evidence | strict ordered-command/WebSocket capture harness | **Pass:** 340 contiguous 24 FPS frames in the pre-commit candidate rehearsal, zero drops/overruns/decoder errors; final commit-bound receipt is generated after the code checkpoint |
+| Real-runtime visual evidence | strict ordered-command/WebSocket capture harness | **Pass:** 345 contiguous 24 FPS frames from clean commit `495b3e0`, zero drops/overruns/gaps/decoder errors, 45 hashed artifacts |
 | Companion frontend | `npm test` in `companion/frontend` | **Pass:** 27/27 |
 | Companion supervisor | `cargo test --manifest-path companion/src-tauri/Cargo.toml` | **Pass:** 17/17 from a rebuilt target |
 | Visual contract | `python3 tools/verify_animation_quality.py --strict` | **Pass:** 32/32 |
