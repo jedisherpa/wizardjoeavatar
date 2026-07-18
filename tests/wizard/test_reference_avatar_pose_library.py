@@ -9,6 +9,7 @@ from wizard_avatar.reference_avatar import (
     reference_pose_anchor,
     reference_pose_ids,
     reference_pose_library_available,
+    reference_pose_presentation_scale,
     reference_pose_root_anchor,
     render_reference_avatar_local,
     render_reference_pose_local,
@@ -73,6 +74,21 @@ class ReferenceAvatarPoseLibraryTests(unittest.TestCase):
         self.assertIn("left_eye", pose.anchors)
         self.assertIn("right_eye", pose.anchors)
         self.assertGreater(len(pose.cells), 1000)
+
+    def test_wide_cast_poses_preserve_authored_subject_density(self):
+        self.assertEqual(
+            get_reference_pose("front_staff_guard_windup").presentation_scale,
+            (96, 78),
+        )
+        self.assertAlmostEqual(
+            reference_pose_presentation_scale("front_staff_block_horizontal"),
+            96 / 75,
+        )
+        self.assertAlmostEqual(
+            reference_pose_presentation_scale("front_magic_staff_thrust"),
+            96 / 73,
+        )
+        self.assertEqual(reference_pose_presentation_scale("front_idle"), 1.0)
 
     def test_walk_transition_poses_are_crisp_endpoint_pixel_graphs(self):
         library = json.loads(

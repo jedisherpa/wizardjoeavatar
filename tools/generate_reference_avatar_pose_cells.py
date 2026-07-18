@@ -318,6 +318,16 @@ def generate_pose_library(
                 "cols": payload["cols"],
                 "rows": payload["rows"],
                 "root_anchor": payload["root_anchor"],
+                **(
+                    {
+                        "presentation_scale": point_from(
+                            pose["presentation_scale"],
+                            field_name=f"{pose['id']}.presentation_scale",
+                        )
+                    }
+                    if "presentation_scale" in pose
+                    else {}
+                ),
                 "facing": pose.get("facing", "south"),
                 "locomotion": pose.get("locomotion", "idle"),
                 "actions": list(pose.get("actions", [])),

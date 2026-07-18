@@ -62,6 +62,7 @@ from .reference_avatar import (
     reference_pose_anchor,
     reference_pose_ids,
     reference_pose_library_available,
+    reference_pose_presentation_scale,
     reference_pose_root_anchor,
     render_reference_pose_local,
 )
@@ -462,6 +463,10 @@ class ProceduralWizardFrameSource:
                 committed_pose_id,
                 state,
                 permission_world,
+            )
+            render_scale *= reference_pose_presentation_scale(
+                pose_id,
+                self.pose_library_path,
             )
             local, root_anchor, mouth_anchor = self._reference_pose_canvas_for_sample(
                 pose_id,

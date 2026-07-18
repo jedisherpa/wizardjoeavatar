@@ -31,6 +31,7 @@ class ReferencePose:
     cols: int
     rows: int
     root_anchor: Tuple[int, int]
+    presentation_scale: Tuple[int, int]
     anchors: Dict[str, Tuple[int, int]]
     cells: Tuple[ReferencePoseCell, ...]
 
@@ -65,6 +66,18 @@ def _reference_pose_map(path: Path = REFERENCE_POSE_CELL_PATH) -> Dict[str, Refe
             raise ValueError("Reference pose is missing an id")
         pose_id = str(raw_pose_id)
         root = pose["root_anchor"]
+        presentation_scale = pose.get("presentation_scale", [1, 1])
+        if (
+            not isinstance(presentation_scale, list)
+            or len(presentation_scale) != 2
+            or any(
+                isinstance(value, bool) or not isinstance(value, int) or value < 1
+                for value in presentation_scale
+            )
+        ):
+            raise ValueError(
+                f"Reference pose {pose_id!r} has an invalid presentation_scale"
+            )
         anchors = {
             str(name): (int(point[0]), int(point[1]))
             for name, point in pose.get("anchors", {}).items()
@@ -84,6 +97,10 @@ def _reference_pose_map(path: Path = REFERENCE_POSE_CELL_PATH) -> Dict[str, Refe
             cols=int(pose["cols"]),
             rows=int(pose["rows"]),
             root_anchor=(int(root[0]), int(root[1])),
+            presentation_scale=(
+                int(presentation_scale[0]),
+                int(presentation_scale[1]),
+            ),
             anchors=anchors,
             cells=cells,
         )
@@ -137,6 +154,14 @@ def reference_pose_anchor(
             f"Reference pose {pose_id!r} is missing anchor {anchor_name!r}; "
             f"available anchors: {available}"
         ) from exc
+
+
+def reference_pose_presentation_scale(
+    pose_id: str,
+    path: Path = REFERENCE_POSE_CELL_PATH,
+) -> float:
+    numerator, denominator = get_reference_pose(pose_id, path).presentation_scale
+    return numerator / denominator
 
 
 def reference_root_anchor() -> Tuple[int, int]:

@@ -136,6 +136,15 @@
         "root_anchor": {
           "$ref": "#/$defs/point"
         },
+        "presentation_scale": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "minItems": 2,
+          "maxItems": 2
+        },
         "facing": {
           "type": "string"
         },

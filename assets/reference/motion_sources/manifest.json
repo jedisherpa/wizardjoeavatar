@@ -623,6 +623,10 @@
       ],
       "phase": 0.25,
       "generation_rows": 78,
+      "presentation_scale": [
+        96,
+        78
+      ],
       "tags": [
         "front",
         "upper_body",
@@ -684,6 +688,10 @@
       ],
       "phase": 0.5,
       "generation_rows": 94,
+      "presentation_scale": [
+        96,
+        94
+      ],
       "tags": [
         "front",
         "upper_body",
@@ -1623,6 +1631,10 @@
       ],
       "phase": null,
       "generation_rows": 73,
+      "presentation_scale": [
+        96,
+        73
+      ],
       "tags": [
         "front",
         "magic",
@@ -1816,6 +1828,10 @@
       ],
       "phase": null,
       "generation_rows": 75,
+      "presentation_scale": [
+        96,
+        75
+      ],
       "tags": [
         "front",
         "defense",
@@ -1842,12 +1858,12 @@
           -51
         ],
         "left_foot": [
-          -14,
-          -1
+          -18,
+          -4
         ],
         "right_foot": [
-          19,
-          -1
+          16,
+          -2
         ],
         "left_hand": [
           -19,
