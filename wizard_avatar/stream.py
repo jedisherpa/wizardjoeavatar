@@ -25,7 +25,7 @@ from .performance_release import (
 from .performance_score import CompiledScoreRepository
 from .permission_world import CapabilityPermissionV1, PermissionWorldStateV1
 from .media_session import MediaSessionAckV1, MediaSessionSnapshotV1
-from .runtime import AvatarRuntime, ReplayLog
+from .runtime import AvatarRuntime, ReplayLog, canonical_sha256
 
 
 _subscriber_ids = count(1)
@@ -426,12 +426,32 @@ class WizardFrameHub:
             # Let command waiters observe their authoritative ack before the
             # synchronous cell compositor begins the presentation frame.
             await asyncio.sleep(0)
+            candidate_renderer = getattr(
+                self.frame_source,
+                "render_captured_candidate_sync",
+                None,
+            )
             captured_renderer = getattr(
                 self.frame_source,
                 "encode_captured_frame_sync",
                 None,
             )
-            if captured_renderer is not None and render_state is not None:
+            render_candidate = None
+            if candidate_renderer is not None and render_state is not None:
+                if self._render_executor is None:
+                    self._render_executor = ThreadPoolExecutor(
+                        max_workers=1,
+                        thread_name_prefix="wizard-frame-render",
+                    )
+                render_candidate = await asyncio.get_running_loop().run_in_executor(
+                    self._render_executor,
+                    candidate_renderer,
+                    render_state,
+                    self.codec,
+                )
+                message = None
+                frame = None
+            elif captured_renderer is not None and render_state is not None:
                 if self._render_executor is None:
                     self._render_executor = ThreadPoolExecutor(
                         max_workers=1,
@@ -458,13 +478,35 @@ class WizardFrameHub:
                     "permission_world_render_policy",
                     None,
                 )
-                if captured_permission_signature != _permission_render_signature(
-                    current_permission_policy
-                ):
+                stale_permission = (
+                    captured_permission_signature
+                    != _permission_render_signature(current_permission_policy)
+                )
+                stale_state = (
+                    render_candidate is not None
+                    and render_candidate.authoritative_state_sha256
+                    != canonical_sha256(self.frame_source.controller.current_state())
+                )
+                if stale_permission or stale_state:
                     self._force_keyframe = True
                     self._stale_render_discard_count += 1
                     next_tick = time.perf_counter()
                     continue
+                if render_candidate is not None:
+                    try:
+                        message, frame = self.frame_source.commit_render_candidate(
+                            render_candidate
+                        )
+                    except ValueError:
+                        # Another owner path committed against this generation.
+                        # Reject the candidate as a whole; never partially
+                        # advance the encoder or presentation transaction.
+                        self._force_keyframe = True
+                        self._stale_render_discard_count += 1
+                        next_tick = time.perf_counter()
+                        continue
+                if message is None or frame is None:
+                    raise RuntimeError("render candidate committed without a transport frame")
                 self._latest_frame = frame
                 self._source_hash_history.append(
                     {

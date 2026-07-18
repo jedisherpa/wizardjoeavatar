@@ -39,7 +39,7 @@ class LocomotionController:
                 self.movement.velocity_z,
                 state.facing,
             )
-            state.facing = step_direction_towards(state.facing, target_facing)
+            state.set_facing(step_direction_towards(state.facing, target_facing))
 
     def move_to(self, x: float, z: float, speed: Optional[float] = None) -> None:
         validate_world_point(x, z)

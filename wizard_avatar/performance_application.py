@@ -630,7 +630,7 @@ class PerformanceApplication:
                 state.pose_override_until = 0.0
                 self._last_applied_pose = resolved.pose_id
             if resolved.facing in DIRECTIONS:
-                state.facing = resolved.facing
+                state.set_facing(resolved.facing)
             if resolved.clip_id:
                 state.animation_clip_id = resolved.clip_id
                 state.animation_clip_tick = resolved.clip_elapsed_ticks
@@ -758,7 +758,7 @@ class PerformanceApplication:
         """Recover the performance stance without moving or overriding a human."""
         if controller.control_arbiter.active_lease is not None:
             return
-        controller.state.facing = "south"
+        controller.state.set_facing("south")
 
     def _clear_governed_speech_state(self, state) -> None:
         if (

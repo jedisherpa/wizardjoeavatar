@@ -166,7 +166,7 @@ class StreamHubTests(unittest.IsolatedAsyncioTestCase):
         hub = WizardFrameHub(source)
         render_started = threading.Event()
         release_render = threading.Event()
-        original_render = source.encode_captured_frame_sync
+        original_render = source.render_captured_candidate_sync
 
         def slow_render(state, codec):
             render_started.set()
@@ -175,7 +175,7 @@ class StreamHubTests(unittest.IsolatedAsyncioTestCase):
 
         with mock.patch.object(
             source,
-            "encode_captured_frame_sync",
+            "render_captured_candidate_sync",
             side_effect=slow_render,
         ):
             await hub.start()
@@ -228,7 +228,7 @@ class StreamHubTests(unittest.IsolatedAsyncioTestCase):
         render_started = threading.Event()
         release_render = threading.Event()
         rendered_policies = []
-        original_render = source.encode_captured_frame_sync
+        original_render = source.render_captured_candidate_sync
 
         def blocked_render(state, codec):
             rendered_policies.append(state.permission_world.visible_props)
@@ -239,7 +239,7 @@ class StreamHubTests(unittest.IsolatedAsyncioTestCase):
 
         with mock.patch.object(
             source,
-            "encode_captured_frame_sync",
+            "render_captured_candidate_sync",
             side_effect=blocked_render,
         ):
             self.assertTrue(await asyncio.to_thread(render_started.wait, 1.0))
@@ -289,7 +289,7 @@ class StreamHubTests(unittest.IsolatedAsyncioTestCase):
         render_started = threading.Event()
         release_render = threading.Event()
         rendered_policies = []
-        original_render = source.encode_captured_frame_sync
+        original_render = source.render_captured_candidate_sync
 
         def blocked_render(render_state, codec):
             rendered_policies.append(render_state.permission_world.visible_props)
@@ -300,7 +300,7 @@ class StreamHubTests(unittest.IsolatedAsyncioTestCase):
 
         with mock.patch.object(
             source,
-            "encode_captured_frame_sync",
+            "render_captured_candidate_sync",
             side_effect=blocked_render,
         ):
             self.assertTrue(await asyncio.to_thread(render_started.wait, 1.0))
@@ -320,6 +320,50 @@ class StreamHubTests(unittest.IsolatedAsyncioTestCase):
                 source.controller.permission_world_render_policy.visible_props,
                 (),
             )
+        finally:
+            release_render.set()
+            await hub.stop()
+
+    async def test_authoritative_state_change_discards_candidate_without_advancing_commit(self):
+        source = ProceduralWizardFrameSource(fps=24)
+        hub = WizardFrameHub(source)
+        render_started = threading.Event()
+        release_render = threading.Event()
+        original_render = source.render_captured_candidate_sync
+        render_count = 0
+
+        def blocked_first_render(render_state, codec):
+            nonlocal render_count
+            render_count += 1
+            if render_count == 1:
+                render_started.set()
+                release_render.wait(timeout=2.0)
+            return original_render(render_state, codec)
+
+        with mock.patch.object(
+            source,
+            "render_captured_candidate_sync",
+            side_effect=blocked_first_render,
+        ):
+            await hub.start()
+            self.assertTrue(await asyncio.to_thread(render_started.wait, 1.0))
+            async with hub._current_lock():
+                # Exercise the legacy immediate-mutation hazard explicitly:
+                # the state revision is unchanged, so only the canonical state
+                # hash can prevent the obsolete raster from committing.
+                source.controller.state.expression = "happy"
+            release_render.set()
+            deadline = asyncio.get_running_loop().time() + 2.0
+            while hub._published_frames < 1:
+                self.assertLess(asyncio.get_running_loop().time(), deadline)
+                await asyncio.sleep(0.01)
+
+        try:
+            self.assertGreaterEqual(hub._stale_render_discard_count, 1)
+            self.assertEqual(hub._latest_frame.frame_index, 0)
+            self.assertEqual(source.frame_index, 1)
+            self.assertEqual(source.presentation_generation, 1)
+            self.assertEqual(source._last_presentation_state.pose_id, "front_idle")
         finally:
             release_render.set()
             await hub.stop()

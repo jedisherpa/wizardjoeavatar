@@ -126,6 +126,7 @@ class WizardState:
     world_position: Dict[str, float] = field(default_factory=lambda: {"x": 0.0, "z": 5.0})
     velocity: Dict[str, float] = field(default_factory=lambda: {"x": 0.0, "z": 0.0})
     facing: str = "south"
+    facing_changed_tick: int = 0
     locomotion: str = "idle"
     action: str = "idle"
     upper_body_action: str = "none"
@@ -177,6 +178,15 @@ class WizardState:
     semantic_transition: str = "inactive"
     semantic_release_reason: Optional[str] = None
 
+    def set_facing(self, facing: str) -> None:
+        """Record facing changes on the authoritative simulation timeline."""
+
+        if facing not in DIRECTIONS:
+            raise ValueError("facing must be one of DIRECTIONS")
+        if facing != self.facing:
+            self.facing = facing
+            self.facing_changed_tick = self.simulation_tick
+
     def reconcile_compatibility_state(self) -> None:
         """Keep legacy action fields consistent with authoritative locomotion."""
 
@@ -209,6 +219,9 @@ class WizardPresentationState:
     animation_clip_id: str
     animation_node_id: str
     animation_transition_id: Optional[str]
+    presented_facing: str
+    gaze_aim: int
+    head_eye_phase: str
 
 
 @dataclass

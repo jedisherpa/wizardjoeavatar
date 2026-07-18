@@ -104,10 +104,12 @@ class WizardAvatarController:
         if intent.face_x is not None and intent.face_z is not None:
             from .views import resolve_direction_from_velocity
 
-            self.state.facing = resolve_direction_from_velocity(
-                intent.face_x,
-                intent.face_z,
-                self.state.facing,
+            self.state.set_facing(
+                resolve_direction_from_velocity(
+                    intent.face_x,
+                    intent.face_z,
+                    self.state.facing,
+                )
             )
         self._step_flight(intent.ascend, intent.mobility_request)
 
@@ -220,7 +222,7 @@ class WizardAvatarController:
             direction = rotate_direction(self.state.facing, -1)
         if direction not in DIRECTIONS:
             raise ValueError(f"Unsupported direction: {direction}")
-        self.state.facing = direction
+        self.state.set_facing(direction)
 
     def _cmd_gaze(self, payload: Dict[str, Any]) -> None:
         target = str(payload.get("target", "automatic"))

@@ -15,7 +15,12 @@ class ViewTests(unittest.TestCase):
         hashes = set()
         for direction in DIRECTIONS:
             source.apply_command_sync(WizardCommand("face", {"direction": direction}))
-            frame = source.render_next_frame()
+            # Facing is a timed performance channel. Advance far enough for
+            # the longest four-sector head turn and settle before comparing
+            # the canonical authored view.
+            for _ in range(24):
+                source.advance_simulation(1.0 / 60.0)
+                frame = source.render_current_frame()
             hashes.add(hashlib.sha256(frame.cells).hexdigest())
         self.assertGreaterEqual(len(hashes), 6)
 

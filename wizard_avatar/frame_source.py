@@ -4,8 +4,9 @@ import asyncio
 import copy
 import math
 import struct
+import threading
 from collections import Counter
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Optional, Tuple
 
@@ -20,6 +21,7 @@ from .controller import WizardAvatarController
 from .diagnostics import FrameDiagnostics
 from .expressions import get_expression
 from .floor import build_background
+from .head_eye import HeadEyeState, advance_head_eye
 from .layers import ROOT_ANCHOR, render_wizard_local
 from .models import (
     Cell,
@@ -48,6 +50,7 @@ from .reference_avatar import (
     reference_pose_root_anchor,
     render_reference_pose_local,
 )
+from .runtime import canonical_sha256
 from .shadow import draw_contact_shadow
 
 
@@ -66,11 +69,74 @@ MEMORY_NOTEBOOK_ARCHIVE = (218, 166, 54)
 
 
 @dataclass(frozen=True)
+class WizardPresentationSnapshot:
+    """Committed presentation state that a pure render candidate extends."""
+
+    generation: int
+    display_pose_id: Optional[str]
+    last_presentation_state: Optional[WizardPresentationState]
+    head_eye_state: HeadEyeState
+
+
+@dataclass(frozen=True)
 class WizardRenderSnapshot:
-    """Complete immutable-input presentation snapshot for the render worker."""
+    """Complete immutable-input transaction for the render worker."""
 
     state: WizardState
     permission_world: Optional[PermissionWorldRenderPolicyV1]
+    authoritative_state_sha256: str = ""
+    frame_index: int = 0
+    previous_encoded_frame: Optional[bytes] = None
+    encoder_generation: int = 0
+    presentation: WizardPresentationSnapshot = field(
+        default_factory=lambda: WizardPresentationSnapshot(
+            0,
+            None,
+            None,
+            HeadEyeState.steady(),
+        )
+    )
+
+    @property
+    def presentation_generation(self) -> int:
+        return self.presentation.generation
+
+
+@dataclass(frozen=True)
+class WizardRenderCandidate:
+    """Pure worker output that changes no committed source state until accepted."""
+
+    authoritative_state_sha256: str
+    base_presentation_generation: int
+    base_encoder_generation: int
+    cols: int
+    rows: int
+    frame_index: int
+    cells: bytes
+    raw_size: int
+    changed_cells: int
+    codec_tag: int
+    encoded_size: int
+    is_keyframe: bool
+    message: bytes
+    shown_frame: bytes
+    presentation: WizardPresentationSnapshot
+
+    @property
+    def frame(self) -> WizardCellFrame:
+        """Materialize a mutable transport DTO without exposing candidate state."""
+
+        return WizardCellFrame(
+            cols=self.cols,
+            rows=self.rows,
+            frame_index=self.frame_index,
+            cells=self.cells,
+            raw_size=self.raw_size,
+            changed_cells=self.changed_cells,
+            codec_tag=self.codec_tag,
+            encoded_size=self.encoded_size,
+            is_keyframe=self.is_keyframe,
+        )
 
 
 class ProceduralWizardFrameSource:
@@ -105,6 +171,13 @@ class ProceduralWizardFrameSource:
         )
         self.frame_index = 0
         self._prev_encoded_frame: Optional[bytes] = None
+        self._encoder_generation = 0
+        self._presentation_lock = threading.RLock()
+        self._presentation_generation = 0
+        self._head_eye_state = HeadEyeState.steady(
+            self.controller.current_state().facing,
+            self.controller.current_state().simulation_tick,
+        )
         self.diagnostics = FrameDiagnostics(fps=self.fps)
         self._display_pose_id: Optional[str] = None
         self._transition_from_pose_id: Optional[str] = None
@@ -145,43 +218,89 @@ class ProceduralWizardFrameSource:
         self.resolve_authoritative_animation_state()
 
     def render_current_frame(self) -> WizardCellFrame:
-        return self._render_current_frame()
+        # Direct rendering is a synchronous owner path. Production rendering
+        # uses the pure candidate/commit API below so stale worker output can be
+        # discarded without advancing presentation state.
+        with self._presentation_lock:
+            snapshot = self._capture_render_state_unlocked()
+            frame, presentation = self._render_snapshot(snapshot)
+            self._commit_presentation_unlocked(
+                presentation,
+                snapshot.presentation_generation,
+            )
+            return frame
 
     def capture_render_state(self) -> WizardRenderSnapshot:
         """Capture the authoritative simulation state for off-thread rendering."""
 
+        with self._presentation_lock:
+            return self._capture_render_state_unlocked()
+
+    def _capture_render_state_unlocked(
+        self,
+        state: Optional[WizardState] = None,
+        permission_world: Optional[PermissionWorldRenderPolicyV1] = None,
+    ) -> WizardRenderSnapshot:
+        captured_state = copy.deepcopy(
+            self.controller.current_state() if state is None else state
+        )
+        captured_permission = (
+            self.controller.permission_world_render_policy
+            if state is None and permission_world is None
+            else permission_world
+        )
         return WizardRenderSnapshot(
-            state=copy.deepcopy(self.controller.current_state()),
-            permission_world=self.controller.permission_world_render_policy,
+            state=captured_state,
+            permission_world=captured_permission,
+            authoritative_state_sha256=canonical_sha256(captured_state),
+            frame_index=self.frame_index,
+            previous_encoded_frame=self._prev_encoded_frame,
+            encoder_generation=self._encoder_generation,
+            presentation=WizardPresentationSnapshot(
+                generation=self._presentation_generation,
+                display_pose_id=self._display_pose_id,
+                last_presentation_state=self._last_presentation_state,
+                head_eye_state=self._head_eye_state,
+            ),
         )
 
     def render_captured_frame(
         self,
         state: WizardRenderSnapshot | WizardState,
     ) -> WizardCellFrame:
-        """Render a previously captured state without reading live simulation state."""
+        """Purely rasterize a captured state without committing presentation."""
 
-        return self._render_current_frame(state)
+        if type(state) is WizardRenderSnapshot:
+            snapshot = state
+        else:
+            with self._presentation_lock:
+                snapshot = self._capture_render_state_unlocked(state=state)
+        frame, _ = self._render_snapshot(snapshot)
+        return frame
 
     def render_next_frame(self) -> WizardCellFrame:
         self.advance_simulation(1.0 / self.fps)
         return self.render_current_frame()
 
-    def _render_current_frame(
+    def _render_snapshot(
         self,
-        captured_state: Optional[WizardRenderSnapshot | WizardState] = None,
-    ) -> WizardCellFrame:
-        if captured_state is None:
-            authoritative_state = self.controller.current_state()
-            permission_world = self.controller.permission_world_render_policy
-        elif type(captured_state) is WizardRenderSnapshot:
-            authoritative_state = captured_state.state
-            permission_world = captured_state.permission_world
-        else:
-            authoritative_state = captured_state
-            permission_world = None
-        state = copy.deepcopy(authoritative_state)
+        snapshot: WizardRenderSnapshot,
+    ) -> tuple[WizardCellFrame, WizardPresentationSnapshot]:
+        state = copy.deepcopy(snapshot.state)
+        permission_world = snapshot.permission_world
         state.reconcile_compatibility_state()
+        head_eye_state, head_eye = advance_head_eye(
+            snapshot.presentation.head_eye_state,
+            state.facing,
+            state.simulation_tick,
+            state.gaze_authoritative,
+            state.gaze_aim,
+            facing_changed_tick=state.facing_changed_tick,
+        )
+        state.facing = head_eye.presented_facing
+        if state.gaze_authoritative or head_eye.phase != "steady":
+            state.gaze_authoritative = True
+            state.gaze_aim = head_eye.gaze_aim
         sx, sy, scale = project_quantized(
             state.world_position["x"],
             state.world_position["z"],
@@ -189,7 +308,7 @@ class ProceduralWizardFrameSource:
             self.rows,
         )
         state.screen_position = {"x": sx, "y": sy}
-        previous_pose_id = self._display_pose_id or state.pose_id
+        previous_pose_id = snapshot.presentation.display_pose_id or state.pose_id
         use_reference_pose_library = reference_pose_library_available(self.pose_library_path)
         if use_reference_pose_library:
             stage = self._permissioned_stage(permission_world)
@@ -275,11 +394,11 @@ class ProceduralWizardFrameSource:
         frame = WizardCellFrame(
             cols=self.cols,
             rows=self.rows,
-            frame_index=self.frame_index,
+            frame_index=snapshot.frame_index,
             cells=cells,
             raw_size=len(cells),
         )
-        self._last_presentation_state = WizardPresentationState(
+        last_presentation_state = WizardPresentationState(
             screen_x=sx,
             screen_y=sy,
             display_scale=render_scale,
@@ -289,8 +408,17 @@ class ProceduralWizardFrameSource:
             animation_clip_id=state.animation_clip_id,
             animation_node_id=state.animation_node_id,
             animation_transition_id=state.animation_transition_id,
+            presented_facing=head_eye.presented_facing,
+            gaze_aim=head_eye.gaze_aim,
+            head_eye_phase=head_eye.phase,
         )
-        return frame
+        presentation = WizardPresentationSnapshot(
+            generation=snapshot.presentation_generation + 1,
+            display_pose_id=pose_id,
+            last_presentation_state=last_presentation_state,
+            head_eye_state=head_eye_state,
+        )
+        return frame, presentation
 
     def _permissioned_stage(
         self,
@@ -434,14 +562,9 @@ class ProceduralWizardFrameSource:
         except KeyError:
             target_mouth = target_root
 
-        if pose_id != self._display_pose_id:
-            self._transition_from_pose_id = self._display_pose_id
-            self._transition_started_at_frame = self.frame_index
-            self._display_pose_id = pose_id
         # Authored square-cell sprites are atomic presentation snapshots. A
         # partial per-cell dissolve creates false limbs and facial artifacts;
         # root anchoring and fixed-tick motion carry continuity between them.
-        self._transition_from_pose_id = None
         return target_canvas, target_root, target_mouth
 
     def _apply_reference_face_channels(
@@ -796,52 +919,144 @@ class ProceduralWizardFrameSource:
         """Advance, render, and encode one frame without requiring an event loop."""
 
         if advance:
-            frame = self.render_next_frame()
-        else:
-            frame = self.render_current_frame()
+            self.advance_simulation(1.0 / self.fps)
+        with self._presentation_lock:
+            snapshot = self._capture_render_state_unlocked()
+            candidate = self.render_captured_candidate_sync(snapshot, codec)
+            return self._commit_render_candidate_unlocked(candidate)
+
+    def render_captured_candidate_sync(
+        self,
+        state: WizardRenderSnapshot,
+        codec: str = "adaptive",
+    ) -> WizardRenderCandidate:
+        """Rasterize and encode a transaction without mutating committed state."""
+
+        if type(state) is not WizardRenderSnapshot:
+            raise TypeError("state must be a WizardRenderSnapshot")
+        captured_state = copy.deepcopy(state.state)
+        captured_hash = canonical_sha256(captured_state)
+        if (
+            state.authoritative_state_sha256
+            and captured_hash != state.authoritative_state_sha256
+        ):
+            raise ValueError("render snapshot state does not match its authoritative hash")
+        worker_snapshot = WizardRenderSnapshot(
+            state=captured_state,
+            permission_world=state.permission_world,
+            authoritative_state_sha256=captured_hash,
+            frame_index=state.frame_index,
+            previous_encoded_frame=state.previous_encoded_frame,
+            encoder_generation=state.encoder_generation,
+            presentation=state.presentation,
+        )
+        frame, presentation = self._render_snapshot(worker_snapshot)
         if codec == "adaptive":
-            encoded = encode_frame(frame.cells, self._prev_encoded_frame, frame.frame_index)
-            self._prev_encoded_frame = encoded.shown_frame
+            encoded = encode_frame(
+                frame.cells,
+                state.previous_encoded_frame,
+                state.frame_index,
+            )
             frame.codec_tag = encoded.tag
             frame.changed_cells = encoded.changed_cells
             frame.encoded_size = encoded.encoded_size
             frame.is_keyframe = encoded.is_keyframe
-            self._update_diagnostics(frame, encoded)
-            self.frame_index += 1
-            return encoded.message, frame
-        message = struct.pack(">I", frame.frame_index) + frame.cells
-        frame.codec_tag = 0
-        frame.encoded_size = len(message)
-        self._prev_encoded_frame = frame.cells
-        self._update_diagnostics(frame, None)
+            message = encoded.message
+            shown_frame = encoded.shown_frame
+        else:
+            message = struct.pack(">I", frame.frame_index) + frame.cells
+            frame.codec_tag = 0
+            frame.encoded_size = len(message)
+            shown_frame = frame.cells
+        return WizardRenderCandidate(
+            authoritative_state_sha256=captured_hash,
+            base_presentation_generation=worker_snapshot.presentation_generation,
+            base_encoder_generation=worker_snapshot.encoder_generation,
+            cols=frame.cols,
+            rows=frame.rows,
+            frame_index=frame.frame_index,
+            cells=frame.cells,
+            raw_size=frame.raw_size,
+            changed_cells=frame.changed_cells,
+            codec_tag=frame.codec_tag,
+            encoded_size=frame.encoded_size,
+            is_keyframe=frame.is_keyframe,
+            message=message,
+            shown_frame=shown_frame,
+            presentation=presentation,
+        )
+
+    def commit_render_candidate(
+        self,
+        candidate: WizardRenderCandidate,
+    ) -> Tuple[bytes, WizardCellFrame]:
+        """Atomically accept one worker candidate into the presentation stream."""
+
+        with self._presentation_lock:
+            return self._commit_render_candidate_unlocked(candidate)
+
+    def _commit_render_candidate_unlocked(
+        self,
+        candidate: WizardRenderCandidate,
+    ) -> Tuple[bytes, WizardCellFrame]:
+        if type(candidate) is not WizardRenderCandidate:
+            raise TypeError("candidate must be a WizardRenderCandidate")
+        if candidate.base_encoder_generation != self._encoder_generation:
+            raise ValueError("stale render candidate encoder generation")
+        if candidate.authoritative_state_sha256 != canonical_sha256(
+            self.controller.current_state()
+        ):
+            raise ValueError("stale render candidate authoritative state")
+        if candidate.frame_index != self.frame_index:
+            raise ValueError("stale render candidate frame index")
+        self._commit_presentation_unlocked(
+            candidate.presentation,
+            candidate.base_presentation_generation,
+        )
+        self._prev_encoded_frame = candidate.shown_frame
+        self._encoder_generation += 1
+        frame = candidate.frame
+        self._update_diagnostics(
+            frame,
+            None,
+        )
         self.frame_index += 1
-        return message, frame
+        return candidate.message, frame
+
+    def _commit_presentation_unlocked(
+        self,
+        presentation: WizardPresentationSnapshot,
+        expected_generation: int,
+    ) -> None:
+        if expected_generation != self._presentation_generation:
+            raise ValueError("stale render candidate presentation generation")
+        if presentation.generation != expected_generation + 1:
+            raise ValueError("invalid render candidate presentation generation")
+        self._display_pose_id = presentation.display_pose_id
+        self._last_presentation_state = presentation.last_presentation_state
+        self._head_eye_state = presentation.head_eye_state
+        self._presentation_generation = presentation.generation
+
+    @property
+    def presentation_generation(self) -> int:
+        with self._presentation_lock:
+            return self._presentation_generation
 
     def encode_captured_frame_sync(
         self,
         state: WizardRenderSnapshot | WizardState,
         codec: str = "adaptive",
     ) -> Tuple[bytes, WizardCellFrame]:
-        """Render and encode a captured state on the presentation worker."""
+        """Compatibility owner path; production workers use pure candidates."""
 
-        frame = self.render_captured_frame(state)
-        if codec == "adaptive":
-            encoded = encode_frame(frame.cells, self._prev_encoded_frame, frame.frame_index)
-            self._prev_encoded_frame = encoded.shown_frame
-            frame.codec_tag = encoded.tag
-            frame.changed_cells = encoded.changed_cells
-            frame.encoded_size = encoded.encoded_size
-            frame.is_keyframe = encoded.is_keyframe
-            self._update_diagnostics(frame, encoded)
-            self.frame_index += 1
-            return encoded.message, frame
-        message = struct.pack(">I", frame.frame_index) + frame.cells
-        frame.codec_tag = 0
-        frame.encoded_size = len(message)
-        self._prev_encoded_frame = frame.cells
-        self._update_diagnostics(frame, None)
-        self.frame_index += 1
-        return message, frame
+        with self._presentation_lock:
+            snapshot = (
+                state
+                if type(state) is WizardRenderSnapshot
+                else self._capture_render_state_unlocked(state=state)
+            )
+            candidate = self.render_captured_candidate_sync(snapshot, codec)
+            return self._commit_render_candidate_unlocked(candidate)
 
     def _update_diagnostics(self, frame: WizardCellFrame, encoded: Optional[EncodedFrame]) -> None:
         self.diagnostics.frame_sequence = frame.frame_index
@@ -866,9 +1081,11 @@ class ProceduralWizardFrameSource:
         return self.controller.apply_command(command)
 
     def reset_encoder(self) -> None:
-        self._prev_encoded_frame = None
-        self.current_state().reconnect_count += 1
-        self.diagnostics.reconnect_count += 1
+        with self._presentation_lock:
+            self._prev_encoded_frame = None
+            self._encoder_generation += 1
+            self.current_state().reconnect_count += 1
+            self.diagnostics.reconnect_count += 1
 
     def diagnostics_dict(self):
         state = self.current_state().as_public_dict()
@@ -881,6 +1098,12 @@ class ProceduralWizardFrameSource:
             "screen_y": presentation.screen_y if presentation else state["screen_position"]["y"],
             "display_scale": presentation.display_scale if presentation else state["display_scale"],
             "facing": state["facing"],
+            "presented_facing": (
+                presentation.presented_facing if presentation else state["facing"]
+            ),
+            "head_eye_phase": (
+                presentation.head_eye_phase if presentation else "steady"
+            ),
             "velocity": state["velocity"],
             "target_point": state["target_point"],
             "walk_phase": state["walk_phase"],
