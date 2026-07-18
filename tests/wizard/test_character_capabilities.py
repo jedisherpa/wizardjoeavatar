@@ -51,20 +51,20 @@ class CharacterCapabilityManifestTests(unittest.TestCase):
         )
         self.assertEqual(
             self.manifest["manifest_sha256"],
-            "sha256:dd669e318b6e9c8f8a611acfcb1a3035da8f6e7306ebdae9495d530da124e531",
+            "sha256:8f6147f74707880ff20706bde16dc505dbbadc311b3bdd50fee006c62d136cb8",
         )
 
     def test_current_character_counts_and_admission_are_truthful(self):
         counts = self.manifest["counts"]
-        self.assertEqual(counts["clip_count"], 28)
-        self.assertEqual(counts["node_count"], 28)
-        self.assertEqual(counts["transition_count"], 53)
+        self.assertEqual(counts["clip_count"], 30)
+        self.assertEqual(counts["node_count"], 30)
+        self.assertEqual(counts["transition_count"], 61)
         self.assertEqual(counts["pose_count"], 89)
         self.assertEqual(counts["graph_admitted_pose_count"], 39)
         self.assertEqual(counts["diagnostic_only_pose_count"], 50)
         self.assertEqual(counts["expression_count"], 10)
         self.assertEqual(counts["mouth_shape_count"], 7)
-        self.assertEqual(counts["capability_count"], 49)
+        self.assertEqual(counts["capability_count"], 51)
         self.assertEqual(counts["diagnostic_count"], 3)
 
         admitted = {
@@ -101,7 +101,10 @@ class CharacterCapabilityManifestTests(unittest.TestCase):
             ["grounded_start", "grounded_stop", "grounded_walk"],
         )
         self.assertEqual(walk["mapping"]["ownership"], "whole_pose")
-        self.assertEqual(walk["contacts"]["support_contacts"], ["left_foot", "right_foot"])
+        self.assertEqual(
+            walk["contacts"]["support_contacts"],
+            ["left_foot", "none", "right_foot"],
+        )
         self.assertEqual(walk["transitions"]["interrupt_policy"], "at_marker")
         self.assertEqual(
             walk["transitions"]["entry_markers"], ["left_contact", "right_contact"]

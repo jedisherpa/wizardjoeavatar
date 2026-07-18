@@ -101,7 +101,7 @@ class PoseSelectionTests(unittest.TestCase):
             AVAILABLE_POSES,
         )
         self.assertEqual(sample.pose_id, "front_idle")
-        self.assertEqual(sample.contact, "left_foot")
+        self.assertEqual(sample.contact, "none")
         self.assertEqual(sample.clip_id, "walk_front")
 
     def test_back_walk_uses_animation_graph_samples(self):
@@ -144,6 +144,166 @@ class PoseSelectionTests(unittest.TestCase):
                 {contact for _, contact in observed},
                 {"left_foot", "right_foot"},
             )
+
+    def test_horizontal_reversals_never_enter_back_walk_during_stepped_turn(self):
+        graph = load_reference_animation_graph_v2()
+        reversals = (
+            (
+                "west_to_east",
+                (
+                    (381, "west", -0.013372),
+                    (382, "northwest", 0.053295),
+                    (383, "north", 0.119962),
+                    (384, "northeast", 0.186629),
+                    (385, "east", 0.253296),
+                ),
+            ),
+            (
+                "east_to_west",
+                (
+                    (481, "east", 0.013372),
+                    (482, "southeast", -0.053295),
+                    (483, "south", -0.119962),
+                    (484, "southwest", -0.186629),
+                    (485, "west", -0.253296),
+                ),
+            ),
+        )
+        for name, ticks in reversals:
+            with self.subTest(reversal=name):
+                state = state_for(
+                    locomotion="walking",
+                    walk_phase=0.5,
+                    animation_node_id="ground_walk",
+                    animation_clip_id="walk_front",
+                )
+                observed_contacts = []
+                for simulation_tick, facing, velocity_x in ticks:
+                    state.simulation_tick = simulation_tick
+                    state.animation_clip_tick += 1
+                    state.facing = facing
+                    state.velocity = {"x": velocity_x, "z": 0.0}
+                    sample = _select_graph_v2_sample(state, graph)
+                    observed_contacts.append(sample.contact)
+                    self.assertEqual(state.animation_node_id, "ground_walk")
+                    self.assertEqual(sample.clip_id, "walk_front")
+                    self.assertNotIn(sample.pose_id, {"back_left", "back_idle", "back_right"})
+                    self.assertIsNone(state.animation_transition_id)
+                    self.assertEqual(state.animation_transition_generation, 0)
+                self.assertEqual(set(observed_contacts), {"right_foot"})
+
+    def test_profile_stops_are_authored_from_either_support_foot(self):
+        graph = load_reference_animation_graph_v2()
+        cases = (
+            (
+                "west",
+                0.0,
+                "left_foot",
+                "ground_stop_left",
+                "profile_left",
+                128,
+                ("walk_front_left", "walk_front_right", "front_idle", "profile_left"),
+            ),
+            (
+                "west",
+                0.5,
+                "right_foot",
+                "ground_stop_left",
+                "profile_left",
+                120,
+                ("walk_front_right", "front_idle", "profile_left"),
+            ),
+            (
+                "east",
+                0.0,
+                "left_foot",
+                "ground_stop_right",
+                "profile_right",
+                128,
+                ("walk_front_left", "walk_front_right", "front_idle", "profile_right"),
+            ),
+            (
+                "east",
+                0.5,
+                "right_foot",
+                "ground_stop_right",
+                "profile_right",
+                120,
+                ("walk_front_right", "front_idle", "profile_right"),
+            ),
+        )
+        for facing, phase, support, stop_node, idle_pose, settled_tick, pose_order in cases:
+            with self.subTest(facing=facing, support=support):
+                state = state_for(
+                    facing=facing,
+                    locomotion="idle",
+                    walk_phase=phase,
+                    animation_node_id="ground_walk",
+                    animation_clip_id="walk_front",
+                    animation_clip_tick=100,
+                    simulation_tick=100,
+                )
+
+                entered = _select_graph_v2_sample(state, graph)
+                self.assertEqual(state.animation_node_id, stop_node)
+                self.assertEqual(entered.contact, support)
+                self.assertEqual(state.animation_transition_generation, 1)
+                self.assertIsNone(state.animation_transition_id)
+
+                observed_poses = [entered.pose_id]
+                while state.animation_node_id == stop_node:
+                    state.simulation_tick += 1
+                    state.animation_clip_tick += 1
+                    sample = _select_graph_v2_sample(state, graph)
+                    observed_poses.append(sample.pose_id)
+                    self.assertLessEqual(state.simulation_tick, settled_tick)
+
+                expected_idle_node = "left_idle" if facing == "west" else "right_idle"
+                self.assertEqual(state.simulation_tick, settled_tick)
+                self.assertEqual(state.animation_node_id, expected_idle_node)
+                self.assertEqual(sample.pose_id, idle_pose)
+                self.assertEqual(sample.contact, "both_feet")
+                self.assertEqual(state.animation_transition_generation, 2)
+                self.assertIsNone(state.animation_transition_id)
+                observed_order = tuple(dict.fromkeys(observed_poses))
+                self.assertEqual(observed_order, pose_order)
+                entry_edge = graph.select_transition("ground_walk", stop_node)
+                exit_edge = graph.select_transition(stop_node, expected_idle_node)
+                self.assertIsNotNone(entry_edge)
+                self.assertIsNotNone(exit_edge)
+                self.assertEqual(entry_edge.contact_policy, "match")
+                self.assertEqual(exit_edge.interrupt_window, "action_recoverable")
+
+    def test_stop_waits_for_authored_contact_instead_of_release_sample(self):
+        graph = load_reference_animation_graph_v2()
+        state = state_for(
+            facing="east",
+            locomotion="idle",
+            walk_phase=0.25,
+            animation_node_id="ground_walk",
+            animation_clip_id="walk_front",
+            animation_clip_tick=20,
+            simulation_tick=20,
+        )
+
+        release = _select_graph_v2_sample(state, graph)
+
+        self.assertEqual(release.pose_id, "front_idle")
+        self.assertEqual(release.active_markers, ("left_release",))
+        self.assertEqual(state.animation_transition_id, "walk_to_stop_right")
+        self.assertEqual(state.animation_transition_phase, "wait_gate")
+
+        for _ in range(20):
+            state.simulation_tick += 1
+            state.animation_clip_tick += 1
+            contacted = _select_graph_v2_sample(state, graph)
+            if state.animation_node_id == "ground_stop_right":
+                break
+
+        self.assertEqual(state.animation_node_id, "ground_stop_right")
+        self.assertEqual(contacted.contact, "right_foot")
+        self.assertEqual(contacted.pose_id, "walk_front_right")
+        self.assertEqual(state.animation_transition_generation, 1)
 
     def test_action_channels_select_available_action_poses(self):
         cases = (
@@ -284,11 +444,12 @@ class PoseSelectionTests(unittest.TestCase):
             state.animation_clip_tick += 1
             settled = _select_graph_v2_sample(state, graph)
             settle_ticks += 1
-            self.assertLess(settle_ticks, 12)
+            self.assertLess(settle_ticks, 17)
 
         self.assertEqual(settled.clip_id, "idle_front")
         self.assertEqual(settled.contact, "both_feet")
         self.assertEqual(state.animation_transition_phase, "stable")
+        self.assertEqual(settle_ticks, 15)
 
     def test_run_charge_progresses_through_recovery_before_idle(self):
         graph = load_reference_animation_graph_v2()
@@ -339,6 +500,15 @@ class PoseSelectionTests(unittest.TestCase):
         self.assertEqual(state.animation_transition_phase, "wait_gate")
 
         state.walk_phase = 0.75
+        state.simulation_tick += 1
+        state.animation_clip_tick += 1
+        release = _select_graph_v2_sample(state, graph)
+
+        self.assertEqual(release.clip_id, "walk_front")
+        self.assertEqual(release.active_markers, ("right_release",))
+        self.assertEqual(state.animation_transition_phase, "wait_gate")
+
+        state.walk_phase = 0.0
         state.simulation_tick += 1
         state.animation_clip_tick += 1
         target = _select_graph_v2_sample(state, graph)

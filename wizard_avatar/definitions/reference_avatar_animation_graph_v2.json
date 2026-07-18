@@ -1320,8 +1320,8 @@
         {
           "pose_id": "front_idle",
           "duration_frames": 4,
-          "support_contact": "left_foot",
-          "planted_anchor": "left_foot",
+          "support_contact": "none",
+          "planted_anchor": null,
           "normalized_distance": 0.25,
           "markers": [
             {
@@ -1346,8 +1346,8 @@
         {
           "pose_id": "walk_front_right_lift",
           "duration_frames": 4,
-          "support_contact": "left_foot",
-          "planted_anchor": "left_foot",
+          "support_contact": "none",
+          "planted_anchor": null,
           "normalized_distance": 0.75,
           "markers": [
             {
@@ -1377,10 +1377,180 @@
       "legal_successors": [
         "walk_front",
         "idle_front",
+        "stop_left",
+        "stop_right",
         "walk_back",
         "run_charge_front",
         "block_front",
         "turn_views"
+      ]
+    },
+    "stop_left": {
+      "clip_id": "stop_left",
+      "family": "transition",
+      "supported_facings": [
+        "west"
+      ],
+      "loop_mode": "once",
+      "phase_source": "time",
+      "root_policy": "contact_locked",
+      "minimum_hold_ticks": 1,
+      "interrupt_policy": "at_marker",
+      "channel_ownership": [
+        "body",
+        "staff",
+        "wings"
+      ],
+      "samples": [
+        {
+          "pose_id": "walk_front_left",
+          "duration_frames": 3,
+          "support_contact": "left_foot",
+          "planted_anchor": "left_foot",
+          "markers": [
+            {
+              "id": "left_contact",
+              "frame_offset": 0
+            }
+          ]
+        },
+        {
+          "pose_id": "walk_front_right",
+          "duration_frames": 3,
+          "support_contact": "right_foot",
+          "planted_anchor": "right_foot",
+          "markers": [
+            {
+              "id": "right_contact",
+              "frame_offset": 0
+            }
+          ]
+        },
+        {
+          "pose_id": "front_idle",
+          "duration_frames": 3,
+          "support_contact": "both_feet",
+          "planted_anchor": "left_foot",
+          "markers": [
+            {
+              "id": "both_contact",
+              "frame_offset": 0
+            }
+          ]
+        },
+        {
+          "pose_id": "profile_left",
+          "duration_frames": 5,
+          "support_contact": "both_feet",
+          "planted_anchor": "left_foot",
+          "markers": [
+            {
+              "id": "action_recoverable",
+              "frame_offset": 2
+            }
+          ]
+        }
+      ],
+      "entry_markers": [
+        "left_contact",
+        "right_contact"
+      ],
+      "exit_markers": [
+        "action_recoverable"
+      ],
+      "secondary_curves": {
+        "body": "walk_bob",
+        "staff": "turn_staff_lag",
+        "robe": "walk_robe_lag"
+      },
+      "legal_successors": [
+        "idle_left",
+        "walk_front",
+        "walk_back"
+      ]
+    },
+    "stop_right": {
+      "clip_id": "stop_right",
+      "family": "transition",
+      "supported_facings": [
+        "east"
+      ],
+      "loop_mode": "once",
+      "phase_source": "time",
+      "root_policy": "contact_locked",
+      "minimum_hold_ticks": 1,
+      "interrupt_policy": "at_marker",
+      "channel_ownership": [
+        "body",
+        "staff",
+        "wings"
+      ],
+      "samples": [
+        {
+          "pose_id": "walk_front_left",
+          "duration_frames": 3,
+          "support_contact": "left_foot",
+          "planted_anchor": "left_foot",
+          "markers": [
+            {
+              "id": "left_contact",
+              "frame_offset": 0
+            }
+          ]
+        },
+        {
+          "pose_id": "walk_front_right",
+          "duration_frames": 3,
+          "support_contact": "right_foot",
+          "planted_anchor": "right_foot",
+          "markers": [
+            {
+              "id": "right_contact",
+              "frame_offset": 0
+            }
+          ]
+        },
+        {
+          "pose_id": "front_idle",
+          "duration_frames": 3,
+          "support_contact": "both_feet",
+          "planted_anchor": "right_foot",
+          "markers": [
+            {
+              "id": "both_contact",
+              "frame_offset": 0
+            }
+          ]
+        },
+        {
+          "pose_id": "profile_right",
+          "duration_frames": 5,
+          "support_contact": "both_feet",
+          "planted_anchor": "right_foot",
+          "markers": [
+            {
+              "id": "action_recoverable",
+              "frame_offset": 2
+            }
+          ]
+        }
+      ],
+      "entry_markers": [
+        "left_contact",
+        "right_contact"
+      ],
+      "exit_markers": [
+        "action_recoverable"
+      ],
+      "secondary_curves": {
+        "body": "walk_bob",
+        "staff": "turn_staff_lag",
+        "robe": "walk_robe_lag"
+      },
+      "legal_successors": [
+        "idle_right",
+        "walk_front",
+        "walk_back"
       ]
     },
     "walk_back": {
@@ -1418,8 +1588,8 @@
         {
           "pose_id": "back_idle",
           "duration_frames": 4,
-          "support_contact": "left_foot",
-          "planted_anchor": "left_foot",
+          "support_contact": "none",
+          "planted_anchor": null,
           "normalized_distance": 0.25,
           "markers": [
             {
@@ -1444,8 +1614,8 @@
         {
           "pose_id": "back_idle",
           "duration_frames": 4,
-          "support_contact": "right_foot",
-          "planted_anchor": "right_foot",
+          "support_contact": "none",
+          "planted_anchor": null,
           "normalized_distance": 0.75,
           "markers": [
             {
@@ -2201,7 +2371,7 @@
           "markers": [
             {
               "id": "action_effect",
-              "frame_offset": 1
+              "frame_offset": 0
             }
           ]
         },
@@ -2229,14 +2399,20 @@
           "duration_frames": 3,
           "support_contact": "both_feet",
           "planted_anchor": "left_foot",
-          "markers": []
+          "markers": [
+            {
+              "id": "action_settled",
+              "frame_offset": 0
+            }
+          ]
         }
       ],
       "entry_markers": [
         "action_commit"
       ],
       "exit_markers": [
-        "action_recoverable"
+        "action_recoverable",
+        "action_settled"
       ],
       "secondary_curves": {
         "staff": "cast_staff_accent",
@@ -3106,6 +3282,20 @@
       ],
       "actions": []
     },
+    "ground_stop_left": {
+      "clip_id": "stop_left",
+      "mobility_modes": [
+        "grounded_stop"
+      ],
+      "actions": []
+    },
+    "ground_stop_right": {
+      "clip_id": "stop_right",
+      "mobility_modes": [
+        "grounded_stop"
+      ],
+      "actions": []
+    },
     "back_walk": {
       "clip_id": "walk_back",
       "mobility_modes": [
@@ -3365,6 +3555,126 @@
       "contact_policy": "match",
       "region_policy": "coherent_pose",
       "interrupt_window": "contact_marker",
+      "fallback_transition_id": null
+    },
+    {
+      "transition_id": "walk_to_stop_left",
+      "source_node_id": "ground_walk",
+      "target_node_id": "ground_stop_left",
+      "priority": 70,
+      "duration_ticks": 0,
+      "timing_mode": "contact",
+      "transition_recipe_id": "contact_match",
+      "phase_policy": "nearest_contact",
+      "root_policy": "contact_locked",
+      "contact_policy": "match",
+      "region_policy": "coherent_pose",
+      "interrupt_window": "contact_marker",
+      "fallback_transition_id": null
+    },
+    {
+      "transition_id": "walk_to_stop_right",
+      "source_node_id": "ground_walk",
+      "target_node_id": "ground_stop_right",
+      "priority": 70,
+      "duration_ticks": 0,
+      "timing_mode": "contact",
+      "transition_recipe_id": "contact_match",
+      "phase_policy": "nearest_contact",
+      "root_policy": "contact_locked",
+      "contact_policy": "match",
+      "region_policy": "coherent_pose",
+      "interrupt_window": "contact_marker",
+      "fallback_transition_id": null
+    },
+    {
+      "transition_id": "stop_left_to_idle",
+      "source_node_id": "ground_stop_left",
+      "target_node_id": "left_idle",
+      "priority": 70,
+      "duration_ticks": 0,
+      "timing_mode": "marker",
+      "transition_recipe_id": "marker_gate",
+      "phase_policy": "restart",
+      "root_policy": "fixed",
+      "contact_policy": "preserve",
+      "region_policy": "coherent_pose",
+      "interrupt_window": "action_recoverable",
+      "fallback_transition_id": null
+    },
+    {
+      "transition_id": "stop_right_to_idle",
+      "source_node_id": "ground_stop_right",
+      "target_node_id": "right_idle",
+      "priority": 70,
+      "duration_ticks": 0,
+      "timing_mode": "marker",
+      "transition_recipe_id": "marker_gate",
+      "phase_policy": "restart",
+      "root_policy": "fixed",
+      "contact_policy": "preserve",
+      "region_policy": "coherent_pose",
+      "interrupt_window": "action_recoverable",
+      "fallback_transition_id": null
+    },
+    {
+      "transition_id": "stop_left_to_walk",
+      "source_node_id": "ground_stop_left",
+      "target_node_id": "ground_walk",
+      "priority": 80,
+      "duration_ticks": 0,
+      "timing_mode": "contact",
+      "transition_recipe_id": "contact_match",
+      "phase_policy": "nearest_contact",
+      "root_policy": "contact_locked",
+      "contact_policy": "match",
+      "region_policy": "coherent_pose",
+      "interrupt_window": "immediate",
+      "fallback_transition_id": null
+    },
+    {
+      "transition_id": "stop_right_to_walk",
+      "source_node_id": "ground_stop_right",
+      "target_node_id": "ground_walk",
+      "priority": 80,
+      "duration_ticks": 0,
+      "timing_mode": "contact",
+      "transition_recipe_id": "contact_match",
+      "phase_policy": "nearest_contact",
+      "root_policy": "contact_locked",
+      "contact_policy": "match",
+      "region_policy": "coherent_pose",
+      "interrupt_window": "immediate",
+      "fallback_transition_id": null
+    },
+    {
+      "transition_id": "stop_left_to_back_walk",
+      "source_node_id": "ground_stop_left",
+      "target_node_id": "back_walk",
+      "priority": 80,
+      "duration_ticks": 0,
+      "timing_mode": "contact",
+      "transition_recipe_id": "contact_match",
+      "phase_policy": "nearest_contact",
+      "root_policy": "contact_locked",
+      "contact_policy": "match",
+      "region_policy": "coherent_pose",
+      "interrupt_window": "immediate",
+      "fallback_transition_id": null
+    },
+    {
+      "transition_id": "stop_right_to_back_walk",
+      "source_node_id": "ground_stop_right",
+      "target_node_id": "back_walk",
+      "priority": 80,
+      "duration_ticks": 0,
+      "timing_mode": "contact",
+      "transition_recipe_id": "contact_match",
+      "phase_policy": "nearest_contact",
+      "root_policy": "contact_locked",
+      "contact_policy": "match",
+      "region_policy": "coherent_pose",
+      "interrupt_window": "immediate",
       "fallback_transition_id": null
     },
     {

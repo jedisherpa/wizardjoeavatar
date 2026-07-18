@@ -7,6 +7,7 @@ from pathlib import Path
 
 from tools.run_character_director_visual_review import (
     CaptureIntegrity,
+    EvidenceFailure,
     FrameGapError,
     ManifestValidationError,
     QueueOverflowError,
@@ -15,6 +16,7 @@ from tools.run_character_director_visual_review import (
     enqueue_decoded_frame,
     parse_init,
     runtime_urls,
+    select_atomic_animation_trace,
     square_cell_image,
     validate_manifest,
     validate_scenarios,
@@ -99,6 +101,36 @@ class ScenarioSchemaTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "never contact protected port 8765"):
             runtime_urls("http://127.0.0.1:8765")
 
+    def test_runtime_urls_include_atomic_animation_trace_endpoint(self):
+        urls = runtime_urls("http://127.0.0.1:8875")
+        self.assertEqual(len(urls), 4)
+        self.assertEqual(
+            urls[-1],
+            "http://127.0.0.1:8875/api/avatar/wizard/animation-trace",
+        )
+
+    def test_atomic_trace_selection_requires_exact_frame_hash_and_codec(self):
+        digest = "a" * 64
+        frames = [{"frame_index": 12, "sha256": digest, "codec_tag": 2}]
+        payload = {
+            "schema": "animation_truth_trace_v1",
+            "records": [
+                {
+                    "frame_index": 12,
+                    "frame_sha256": digest,
+                    "codec_tag": 2,
+                    "simulation_tick": 30,
+                }
+            ],
+        }
+
+        selected = select_atomic_animation_trace(payload, frames)
+        self.assertEqual(selected[0]["simulation_tick"], 30)
+
+        payload["records"][0]["frame_sha256"] = "b" * 64
+        with self.assertRaisesRegex(EvidenceFailure, "hash mismatch"):
+            select_atomic_animation_trace(payload, frames)
+
     def test_square_cell_renderer_uses_rgb_even_for_space_glyphs(self):
         image = square_cell_image(b"\x20\x0a\x14\x1e", 1, 1, 3)
         self.assertEqual(image.size, (3, 3))
@@ -149,7 +181,7 @@ class ManifestValidationTests(unittest.TestCase):
             "valid": True,
             "failure_reason": None,
             "replay_exported": False,
-            "frame_state_pairing": "non_atomic_time_adjacent_observations",
+            "frame_state_pairing": "atomic_animation_truth_trace_v1",
             "provenance": {
                 "head": digest,
                 "branch": "codex/character-director",
@@ -230,8 +262,31 @@ class ManifestValidationTests(unittest.TestCase):
                     "elapsed_seconds": 0.2,
                 },
             ],
+            "animation_truth_trace": {
+                "schema": "animation_truth_trace_v1",
+                "record_count": 2,
+                "first_frame_index": 10,
+                "last_frame_index": 11,
+                "path": "animation_truth_trace.ndjson",
+            },
+            "contact_verification": {
+                "schema": "contact_verification_report_v1",
+                "schema_version": 1,
+                "passed": True,
+                "path": "contact_verification.json",
+            },
             "artifacts": [
-                {"path": "samples/idle.png", "sha256": digest, "bytes": 123}
+                {"path": "samples/idle.png", "sha256": digest, "bytes": 123},
+                {
+                    "path": "animation_truth_trace.ndjson",
+                    "sha256": digest,
+                    "bytes": 456,
+                },
+                {
+                    "path": "contact_verification.json",
+                    "sha256": digest,
+                    "bytes": 456,
+                },
             ],
             "video": {"available": False, "path": None, "codec": None},
             "rendering": {"cell_shape": "square", "pixel_format": "rgb24"},
@@ -264,6 +319,18 @@ class ManifestValidationTests(unittest.TestCase):
             manifest["artifacts"][0].update(
                 bytes=artifact.stat().st_size,
                 sha256=hashlib.sha256(artifact.read_bytes()).hexdigest(),
+            )
+            trace = root / "animation_truth_trace.ndjson"
+            trace.write_bytes(b'{"frame_index":10}\n')
+            manifest["artifacts"][1].update(
+                bytes=trace.stat().st_size,
+                sha256=hashlib.sha256(trace.read_bytes()).hexdigest(),
+            )
+            contact = root / "contact_verification.json"
+            contact.write_bytes(b'{"passed":true}\n')
+            manifest["artifacts"][2].update(
+                bytes=contact.stat().st_size,
+                sha256=hashlib.sha256(contact.read_bytes()).hexdigest(),
             )
             validate_manifest(manifest, root)
 

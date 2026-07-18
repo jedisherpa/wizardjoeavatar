@@ -29,6 +29,8 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from wizard_avatar.commanding import COMMAND_KINDS
+from wizard_avatar.animation_trace import AnimationTruthTraceV1
+from wizard_avatar.contact_verifier import verify_contact_trace
 from wizard_avatar.protocol import CELL_BYTES, decode_frame
 
 
@@ -38,7 +40,7 @@ PROTECTED_LEGACY_PORT = 8765
 SOURCE_ID = "character-director-visual-review"
 MANIFEST_SCHEMA_VERSION = 1
 EVIDENCE_KIND = "external_real_runtime_visual_review"
-PAIRING_DESCRIPTION = "non_atomic_time_adjacent_observations"
+PAIRING_DESCRIPTION = "atomic_animation_truth_trace_v1"
 SHA256_RE = re.compile(r"^[0-9a-f]{64}$")
 GIT_OBJECT_RE = re.compile(r"^(?:[0-9a-f]{40}|[0-9a-f]{64})$")
 SCENARIO_NAME_RE = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
@@ -442,6 +444,8 @@ class CaptureRecords:
     state_snapshots: List[Dict[str, Any]] = field(default_factory=list)
     samples: List[Dict[str, Any]] = field(default_factory=list)
     sample_paths: List[Path] = field(default_factory=list)
+    animation_truth_trace: List[Dict[str, Any]] = field(default_factory=list)
+    contact_verification: Optional[Dict[str, Any]] = None
 
 
 @dataclass
@@ -519,7 +523,7 @@ async def request_json_async(
     return result, (time.perf_counter() - started) * 1000.0
 
 
-def runtime_urls(base_url: str) -> Tuple[str, str, str]:
+def runtime_urls(base_url: str) -> Tuple[str, str, str, str]:
     parsed = urllib.parse.urlsplit(base_url)
     if parsed.scheme not in {"http", "https"} or not parsed.netloc:
         raise ValueError("--base-url must be an absolute http(s) URL")
@@ -539,7 +543,50 @@ def runtime_urls(base_url: str) -> Tuple[str, str, str]:
         ws_url,
         http_base + "/api/avatar/wizard/command",
         http_base + "/api/avatar/wizard/state",
+        http_base + "/api/avatar/wizard/animation-trace",
     )
+
+
+def select_atomic_animation_trace(
+    payload: Mapping[str, Any],
+    frames: Sequence[Mapping[str, Any]],
+) -> List[Dict[str, Any]]:
+    """Select and verify the exact accepted trace record for every wire frame."""
+
+    if payload.get("schema") != "animation_truth_trace_v1":
+        raise EvidenceFailure("runtime returned an unsupported animation trace schema")
+    records = payload.get("records")
+    if not isinstance(records, list):
+        raise EvidenceFailure("runtime animation trace records must be an array")
+    by_index: Dict[int, Mapping[str, Any]] = {}
+    for record in records:
+        if not isinstance(record, Mapping):
+            raise EvidenceFailure("runtime animation trace record must be an object")
+        frame_index = record.get("frame_index")
+        if not isinstance(frame_index, int) or isinstance(frame_index, bool):
+            raise EvidenceFailure("runtime animation trace frame_index must be an integer")
+        if frame_index in by_index:
+            raise EvidenceFailure("runtime animation trace contains duplicate frame indexes")
+        by_index[frame_index] = record
+
+    selected: List[Dict[str, Any]] = []
+    for frame in frames:
+        frame_index = frame["frame_index"]
+        record = by_index.get(frame_index)
+        if record is None:
+            raise EvidenceFailure(
+                "runtime animation trace is missing captured frame {}".format(frame_index)
+            )
+        if record.get("frame_sha256") != frame.get("sha256"):
+            raise EvidenceFailure(
+                "runtime animation trace hash mismatch for frame {}".format(frame_index)
+            )
+        if record.get("codec_tag") != frame.get("codec_tag"):
+            raise EvidenceFailure(
+                "runtime animation trace codec mismatch for frame {}".format(frame_index)
+            )
+        selected.append(dict(record))
+    return selected
 
 
 def square_cell_image(cells: bytes, cols: int, rows: int, cell_size: int):
@@ -923,7 +970,7 @@ def validate_manifest(manifest: Mapping[str, Any], output_dir: Optional[Path] = 
     _manifest_error(manifest.get("replay_exported") is False, "visual capture must not export replay data")
     _manifest_error(
         manifest.get("frame_state_pairing") == PAIRING_DESCRIPTION,
-        "manifest must describe frame/state observations as non-atomic",
+        "manifest must declare atomic animation truth pairing",
     )
 
     init = manifest.get("init")
@@ -997,6 +1044,51 @@ def validate_manifest(manifest: Mapping[str, Any], output_dir: Optional[Path] = 
         _manifest_error(capture.get("first_frame_index") == frames[0]["frame_index"], "first frame mismatch")
         _manifest_error(capture.get("last_frame_index") == frames[-1]["frame_index"], "last frame mismatch")
 
+    trace = manifest.get("animation_truth_trace")
+    _manifest_error(isinstance(trace, Mapping), "manifest requires animation truth trace summary")
+    _manifest_error(
+        trace.get("schema") == "animation_truth_trace_v1",
+        "unsupported animation truth trace schema",
+    )
+    _manifest_error(
+        _plain_int(trace.get("record_count")),
+        "animation truth trace record_count must be nonnegative",
+    )
+    if valid:
+        _manifest_error(
+            trace["record_count"] == len(frames),
+            "animation truth trace frame coverage mismatch",
+        )
+        _manifest_error(
+            trace.get("path") == "animation_truth_trace.ndjson",
+            "animation truth trace artifact path mismatch",
+        )
+        if frames:
+            _manifest_error(
+                trace.get("first_frame_index") == frames[0]["frame_index"],
+                "animation truth trace first frame mismatch",
+            )
+            _manifest_error(
+                trace.get("last_frame_index") == frames[-1]["frame_index"],
+                "animation truth trace last frame mismatch",
+            )
+
+    contact = manifest.get("contact_verification")
+    _manifest_error(isinstance(contact, Mapping), "manifest requires contact verification")
+    _manifest_error(
+        contact.get("schema") == "contact_verification_report_v1",
+        "unsupported contact verification schema",
+    )
+    _manifest_error(
+        isinstance(contact.get("passed"), bool),
+        "contact verification passed must be boolean",
+    )
+    if valid:
+        _manifest_error(contact.get("passed") is True, "contact verification failed")
+        _manifest_error(
+            contact.get("path") == "contact_verification.json",
+            "contact verification artifact path mismatch",
+        )
     commands = manifest.get("commands")
     _manifest_error(isinstance(commands, list), "commands must be an array")
     command_ids = [command.get("command_id") for command in commands if isinstance(command, Mapping)]
@@ -1033,6 +1125,15 @@ def validate_manifest(manifest: Mapping[str, Any], output_dir: Optional[Path] = 
             _manifest_error(sha256_file(candidate) == artifact["sha256"], "artifact SHA-256 mismatch: {}".format(path))
         artifact_paths.append(path)
     _manifest_error(len(artifact_paths) == len(set(artifact_paths)), "artifact paths must be unique")
+    if valid:
+        _manifest_error(
+            trace["path"] in artifact_paths,
+            "animation truth trace is not registered as an artifact",
+        )
+        _manifest_error(
+            contact["path"] in artifact_paths,
+            "contact verification is not registered as an artifact",
+        )
 
     video = manifest.get("video")
     _manifest_error(isinstance(video, Mapping) and isinstance(video.get("available"), bool), "invalid video summary")
@@ -1116,6 +1217,10 @@ def build_manifest(
         integrity.invalidate("capture produced no sampled PNGs")
     if integrity.valid and contact_sheet_path is None:
         integrity.invalidate("capture produced no contact sheet")
+    if integrity.valid and len(records.animation_truth_trace) != len(records.frames):
+        integrity.invalidate("atomic animation trace does not cover every captured frame")
+    if integrity.valid and records.contact_verification is None:
+        integrity.invalidate("contact verification report is missing")
 
     first = records.frames[0]["frame_index"] if records.frames else None
     last = records.frames[-1]["frame_index"] if records.frames else None
@@ -1131,8 +1236,9 @@ def build_manifest(
         "replay_exported": False,
         "frame_state_pairing": PAIRING_DESCRIPTION,
         "frame_state_pairing_note": (
-            "Frame reception timestamps and HTTP state observations are recorded independently; "
-            "no atomic frame/state association is asserted."
+            "Every captured wire frame is matched by frame index, decoded-frame SHA-256, and "
+            "published codec to animation_truth_trace_v1 emitted from the accepted render candidate. "
+            "HTTP state snapshots remain time-adjacent diagnostics only."
         ),
         "provenance": dict(provenance),
         "init": init.to_manifest(),
@@ -1157,6 +1263,32 @@ def build_manifest(
         "commands": records.commands,
         "state_snapshots": records.state_snapshots,
         "frames": records.frames,
+        "animation_truth_trace": {
+            "schema": "animation_truth_trace_v1",
+            "record_count": len(records.animation_truth_trace),
+            "first_frame_index": (
+                records.animation_truth_trace[0]["frame_index"]
+                if records.animation_truth_trace
+                else None
+            ),
+            "last_frame_index": (
+                records.animation_truth_trace[-1]["frame_index"]
+                if records.animation_truth_trace
+                else None
+            ),
+            "path": (
+                "animation_truth_trace.ndjson"
+                if records.animation_truth_trace
+                else None
+            ),
+        },
+        "contact_verification": records.contact_verification
+        or {
+            "schema": "contact_verification_report_v1",
+            "schema_version": 1,
+            "passed": False,
+            "path": None,
+        },
         "samples": records.samples,
         "artifacts": artifacts,
         "video": {
@@ -1190,7 +1322,7 @@ async def run_visual_review(
     output_dir = output_dir.resolve()
     provenance = collect_git_provenance()
     output_dir.mkdir(parents=True, exist_ok=True)
-    ws_url, command_url, state_url = runtime_urls(base_url)
+    ws_url, command_url, state_url, animation_trace_url = runtime_urls(base_url)
     source_epoch = "visual-review-{}".format(uuid.uuid4().hex[:12])
     run_id = source_epoch
     records = CaptureRecords()
@@ -1319,6 +1451,8 @@ async def run_visual_review(
 
     wire_path = output_dir / "wire" / "frames.bin"
     wire_index_path = output_dir / "wire" / "index.ndjson"
+    animation_trace_path = output_dir / "animation_truth_trace.ndjson"
+    contact_verification_path = output_dir / "contact_verification.json"
     if records.frames and wire_path.is_file():
         wire_index_path.write_text(
             "".join(
@@ -1340,6 +1474,40 @@ async def run_visual_review(
             encoding="utf-8",
         )
 
+    if records.frames:
+        try:
+            trace_payload, _ = await request_json_async("GET", animation_trace_url)
+            records.animation_truth_trace = select_atomic_animation_trace(
+                trace_payload,
+                records.frames,
+            )
+            animation_trace_path.write_text(
+                "".join(
+                    json.dumps(record, sort_keys=True, separators=(",", ":")) + "\n"
+                    for record in records.animation_truth_trace
+                ),
+                encoding="utf-8",
+            )
+            contact_report = verify_contact_trace(
+                AnimationTruthTraceV1.from_mapping(record)
+                for record in records.animation_truth_trace
+            )
+            records.contact_verification = contact_report.to_mapping()
+            records.contact_verification["path"] = "contact_verification.json"
+            contact_verification_path.write_text(
+                json.dumps(
+                    records.contact_verification,
+                    indent=2,
+                    sort_keys=True,
+                )
+                + "\n",
+                encoding="utf-8",
+            )
+            if not contact_report.passed:
+                integrity.invalidate("planted-foot contact verification failed")
+        except Exception as exc:
+            integrity.invalidate("atomic animation trace capture failed: {}".format(exc))
+
     for path in records.sample_paths:
         if path.is_file():
             artifacts.append(artifact_record(path, output_dir, "image/png"))
@@ -1351,6 +1519,22 @@ async def run_visual_review(
         artifacts.append(artifact_record(wire_path, output_dir, "application/octet-stream"))
     if wire_index_path.is_file() and wire_index_path.stat().st_size > 0:
         artifacts.append(artifact_record(wire_index_path, output_dir, "application/x-ndjson"))
+    if animation_trace_path.is_file() and animation_trace_path.stat().st_size > 0:
+        artifacts.append(
+            artifact_record(
+                animation_trace_path,
+                output_dir,
+                "application/x-ndjson",
+            )
+        )
+    if contact_verification_path.is_file() and contact_verification_path.stat().st_size > 0:
+        artifacts.append(
+            artifact_record(
+                contact_verification_path,
+                output_dir,
+                "application/json",
+            )
+        )
 
     capture_ended = time.perf_counter()
     manifest = build_manifest(

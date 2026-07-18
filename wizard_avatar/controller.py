@@ -4,6 +4,7 @@ import time
 from collections.abc import Mapping
 from typing import Any, Callable, Dict, Iterable, Optional, Set, Tuple
 
+from .animation_graph import ClipDefinition, load_reference_animation_graph_v2
 from .blink import BlinkScheduler
 from .commanding import CommandEnvelopeV1
 from .control import ControlArbiter, ControlIntentV1
@@ -18,6 +19,9 @@ from .reference_avatar import reference_pose_ids
 from .prism_signals import PrismAdvisoryStateMachine, PrismAnimationSignalV2
 from .semantic_animation import map_prism_signal
 from .views import rotate_direction
+
+
+CAST_SETTLE_PRESENTATION_TICKS = 6
 
 
 class WizardAvatarController:
@@ -47,6 +51,8 @@ class WizardAvatarController:
         self._prism_owned: Dict[str, Any] = {}
         self._prism_suspensions: Dict[str, Set[str]] = {}
         self._prism_manual_suppressed: Set[str] = set()
+        self._queued_speech: Optional[Dict[str, Any]] = None
+        self._cast_settled_seen_tick: Optional[int] = None
         self._time_accumulator = 0.0
 
     def current_state(self) -> WizardState:
@@ -128,7 +134,31 @@ class WizardAvatarController:
             if self.state.time_seconds >= self.state.pose_override_until:
                 self.state.pose_override_id = None
                 self.state.pose_override_until = 0.0
-        if self.state.action != "idle" and self.state.action_until and self.state.time_seconds >= self.state.action_until:
+        if self.state.action == "magic_cast":
+            cast_phase = self._cast_phase()
+            if cast_phase == "settled":
+                if (
+                    self._cast_settled_seen_tick is None
+                    and "action_settled" in self.state.animation_active_markers
+                ):
+                    self._cast_settled_seen_tick = self.state.simulation_tick
+                elif (
+                    self._cast_settled_seen_tick is not None
+                    and self.state.simulation_tick - self._cast_settled_seen_tick
+                    >= CAST_SETTLE_PRESENTATION_TICKS
+                ):
+                    self._finish_cast()
+            elif (
+                self.state.action_until
+                and self.state.time_seconds >= self.state.action_until
+                and cast_phase == "precommit"
+            ):
+                self._cancel_precommit_cast()
+        elif (
+            self.state.action != "idle"
+            and self.state.action_until
+            and self.state.time_seconds >= self.state.action_until
+        ):
             if self.state.action == "reaction" and self.state.action_restore:
                 self._restore_action_after_reaction()
             else:
@@ -138,7 +168,12 @@ class WizardAvatarController:
 
     def _set_action(self, action: str, duration_ms: int) -> None:
         validate_action(action)
-        if action == "reaction" and self.state.action not in {"idle", "reaction"}:
+        previous_action = self.state.action
+        if action == "reaction" and self.state.action not in {
+            "idle",
+            "reaction",
+            "magic_cast",
+        }:
             self.state.action_restore = {
                 "action": self.state.action,
                 "upper_body_action": self.state.upper_body_action,
@@ -154,8 +189,68 @@ class WizardAvatarController:
         self.state.action_until = (
             self.state.time_seconds + max(0, duration_ms) / 1000.0 if duration_ms else 0.0
         )
+        if action != "magic_cast" or previous_action != "magic_cast":
+            self._cast_settled_seen_tick = None
         if action == "walking":
             self.state.locomotion = "walking"
+
+    def _cast_phase(self) -> str:
+        if self.state.animation_clip_id != "cast_front":
+            return "precommit"
+        graph = load_reference_animation_graph_v2()
+        clip = graph.clips["cast_front"]
+        authored_frame = graph.evaluate_clip(
+            "cast_front",
+            self.state.animation_clip_tick,
+        ).authored_frame
+        if authored_frame >= self._marker_frame(clip, "action_settled"):
+            return "settled"
+        if authored_frame >= self._marker_frame(clip, "action_recoverable"):
+            return "recoverable"
+        if authored_frame >= self._marker_frame(clip, "action_commit"):
+            return "committed"
+        return "precommit"
+
+    @staticmethod
+    def _marker_frame(clip: ClipDefinition, marker_id: str) -> int:
+        sample_start = 0
+        for sample in clip.samples:
+            for marker in sample.markers:
+                if marker.marker_id == marker_id:
+                    return sample_start + marker.frame_offset
+            sample_start += sample.duration_frames
+        raise ValueError(f"Animation clip {clip.clip_id!r} has no {marker_id!r} marker")
+
+    def _cancel_precommit_cast(self) -> None:
+        self._set_action("idle", 0)
+        self._retire_cast_projection()
+        self.state.animation_node_id = "ground_idle"
+        self.state.animation_clip_id = "idle_front"
+        self.state.animation_clip_tick = 0
+        self.state.animation_phase_offset = 0.0
+        self.state.animation_transition_id = None
+        self.state.animation_transition_phase = "stable"
+        self.state.animation_transition_target_node_id = None
+        self.state.animation_transition_target_clip_id = None
+        self.state.animation_transition_entry_tick = 0
+        self.state.animation_transition_started_tick = self.state.simulation_tick
+        self.state.animation_transition_commit_tick = self.state.simulation_tick
+        self.state.animation_transition_source_pose_id = None
+        self.state.animation_transition_source_contact = "unknown"
+        self.state.animation_transition_generation += 1
+        self.state.pose_transition_progress = 1.0
+
+    def _finish_cast(self) -> None:
+        self._set_action("idle", 0)
+        self._retire_cast_projection()
+        if self._queued_speech is not None:
+            payload = self._queued_speech
+            self._queued_speech = None
+            self._start_speech(payload)
+
+    def _retire_cast_projection(self) -> None:
+        self._release_prism_channel("action")
+        self._prism_manual_suppressed.add("action")
 
     def _restore_action_after_reaction(self) -> None:
         restore = self.state.action_restore or {}
@@ -246,6 +341,7 @@ class WizardAvatarController:
 
     def _cmd_action(self, payload: Dict[str, Any]) -> None:
         self._manual_override_prism_channel("action")
+        self._queued_speech = None
         action = str(payload["action"])
         duration_ms = int(payload.get("duration_ms", 1600))
         self._set_action(action, duration_ms)
@@ -400,7 +496,25 @@ class WizardAvatarController:
             self.state.mouth = expression_mouth(expression)
 
     def _cmd_speak(self, payload: Dict[str, Any]) -> None:
-        self.suspend_prism_channels(("action", "mouth"), owner="speech")
+        if self.state.action == "magic_cast":
+            if self._cast_phase() == "precommit":
+                self.suspend_prism_channels(("action", "mouth"), owner="speech")
+                self._cancel_precommit_cast()
+                self._start_speech(payload, channels_suspended=True)
+            else:
+                self._queued_speech = dict(payload)
+            return
+        self._queued_speech = None
+        self._start_speech(payload)
+
+    def _start_speech(
+        self,
+        payload: Dict[str, Any],
+        *,
+        channels_suspended: bool = False,
+    ) -> None:
+        if not channels_suspended:
+            self.suspend_prism_channels(("action", "mouth"), owner="speech")
         text = str(payload.get("text", "The stars prefer a tidy spellbook."))
         duration_ms = int(payload.get("duration_ms", max(1200, len(text) * 70)))
         self.state.speech_id = str(payload.get("speech_id", f"speech-{int(time.time() * 1000)}"))
@@ -421,6 +535,7 @@ class WizardAvatarController:
 
     def _cmd_stop(self, payload: Dict[str, Any]) -> None:
         self._manual_override_prism_channel("action")
+        self._queued_speech = None
         self.locomotion.stop()
         self.state.target_point = None
         self.state.velocity["x"] = 0.0

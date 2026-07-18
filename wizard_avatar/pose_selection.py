@@ -29,6 +29,9 @@ BACK_RIGHT_POSE = "back_right"
 EXPLAINING_POSE = "explaining"
 MAGIC_CAST_POSE = "magic_cast"
 DASH_POSE = "run_front_airborne_reach"
+GROUND_STOP_LEFT_NODE = "ground_stop_left"
+GROUND_STOP_RIGHT_NODE = "ground_stop_right"
+GROUND_STOP_NODES = frozenset({GROUND_STOP_LEFT_NODE, GROUND_STOP_RIGHT_NODE})
 
 
 @dataclass(frozen=True)
@@ -39,6 +42,12 @@ class PoseSample:
     phase: float = 0.0
     planted_anchor: Optional[str] = None
     active_markers: tuple[str, ...] = ()
+    sample_index: int = 0
+    sample_frame: int = 0
+    authored_frame: int = 0
+    phase_numerator: int = 0
+    phase_denominator: int = 1
+    root_policy: str = "fixed"
 
 
 def select_reference_pose_id(
@@ -93,6 +102,12 @@ def select_reference_pose_sample(
         phase=sample.phase,
         planted_anchor=sample.planted_anchor,
         active_markers=sample.active_markers,
+        sample_index=sample.sample_index,
+        sample_frame=sample.sample_frame,
+        authored_frame=sample.authored_frame,
+        phase_numerator=sample.phase_numerator,
+        phase_denominator=sample.phase_denominator,
+        root_policy=sample.root_policy,
     )
 
 
@@ -156,7 +171,7 @@ def _request_transition(
             transition,
             source_evaluation,
         )
-    return _pose_sample(source_evaluation, state.animation_clip_id)
+    return _pose_sample(source_evaluation, state.animation_clip_id, graph)
 
 
 def _advance_pending_transition(
@@ -188,7 +203,7 @@ def _advance_pending_transition(
                 transition,
                 source_evaluation,
             )
-        return _pose_sample(source_evaluation, state.animation_clip_id)
+        return _pose_sample(source_evaluation, state.animation_clip_id, graph)
 
     if state.animation_transition_phase == "handoff":
         if state.simulation_tick >= state.animation_transition_commit_tick:
@@ -219,6 +234,12 @@ def _advance_pending_transition(
             phase=source_evaluation.clip_phase,
             planted_anchor=source_evaluation.planted_anchor,
             active_markers=source_evaluation.active_markers,
+            sample_index=source_evaluation.sample_index,
+            sample_frame=source_evaluation.sample_frame,
+            authored_frame=source_evaluation.authored_frame,
+            phase_numerator=source_evaluation.clip_phase_numerator,
+            phase_denominator=source_evaluation.clip_phase_denominator,
+            root_policy=graph.clips[state.animation_clip_id].root_policy,
         )
 
     _clear_transition(state)
@@ -287,7 +308,7 @@ def _begin_transition_handoff(
     state.animation_transition_phase = "handoff"
     state.animation_transition_commit_tick = state.simulation_tick + duration_ticks
     state.pose_transition_progress = 0.0
-    return _pose_sample(source_evaluation, state.animation_clip_id)
+    return _pose_sample(source_evaluation, state.animation_clip_id, graph)
 
 
 def _transition_duration_ticks(
@@ -365,9 +386,8 @@ def _transition_gate_is_open(
 
 
 def _at_contact_boundary(evaluation: ClipEvaluation) -> bool:
-    return evaluation.support_contact != "none" and (
-        evaluation.sample_frame == 0
-        or any(marker.endswith("contact") for marker in evaluation.active_markers)
+    return evaluation.support_contact != "none" and any(
+        marker.endswith("contact") for marker in evaluation.active_markers
     )
 
 
@@ -432,10 +452,14 @@ def _sample_active_clip(state: WizardState, graph: AnimationGraph) -> PoseSample
         state.walk_phase,
         state.animation_phase_offset,
     )
-    return _pose_sample(evaluation, state.animation_clip_id)
+    return _pose_sample(evaluation, state.animation_clip_id, graph)
 
 
-def _pose_sample(evaluation: ClipEvaluation, clip_id: str) -> PoseSample:
+def _pose_sample(
+    evaluation: ClipEvaluation,
+    clip_id: str,
+    graph: AnimationGraph,
+) -> PoseSample:
     return PoseSample(
         pose_id=evaluation.pose_id,
         contact=evaluation.support_contact,
@@ -443,6 +467,12 @@ def _pose_sample(evaluation: ClipEvaluation, clip_id: str) -> PoseSample:
         phase=evaluation.clip_phase,
         planted_anchor=evaluation.planted_anchor,
         active_markers=evaluation.active_markers,
+        sample_index=evaluation.sample_index,
+        sample_frame=evaluation.sample_frame,
+        authored_frame=evaluation.authored_frame,
+        phase_numerator=evaluation.clip_phase_numerator,
+        phase_denominator=evaluation.clip_phase_denominator,
+        root_policy=graph.clips[clip_id].root_policy,
     )
 
 
@@ -566,10 +596,25 @@ def _select_node_id(state: WizardState, graph: AnimationGraph) -> str:
         return action_node
     if airborne:
         return _flight_node_id(state, graph)
+    if state.animation_node_id in GROUND_STOP_NODES and state.locomotion == "idle":
+        stop_clip = graph.clips.get(state.animation_clip_id)
+        if stop_clip is not None and not _clip_marker_reached(
+            graph,
+            stop_clip,
+            state.animation_clip_tick,
+            "action_recoverable",
+        ):
+            return state.animation_node_id
     if state.locomotion == "walking":
-        if state.facing in {"north", "northeast", "northwest"}:
+        travel_facing = _travel_facing_family(state)
+        if travel_facing == "back":
             return _node_for_clip(graph, "walk_back", graph.default_node_id)
         return _node_for_clip(graph, "walk_front", graph.default_node_id)
+    if state.animation_node_id == "ground_walk":
+        if state.facing == "west" and GROUND_STOP_LEFT_NODE in graph.nodes:
+            return GROUND_STOP_LEFT_NODE
+        if state.facing == "east" and GROUND_STOP_RIGHT_NODE in graph.nodes:
+            return GROUND_STOP_RIGHT_NODE
     fallback_clip = str(
         graph.fallbacks["by_facing"].get(
             state.facing,
@@ -577,6 +622,18 @@ def _select_node_id(state: WizardState, graph: AnimationGraph) -> str:
         )
     )
     return _node_for_clip(graph, fallback_clip, graph.default_node_id)
+
+
+def _travel_facing_family(state: WizardState) -> str:
+    """Resolve the locomotion clip from travel, not a stepped presentation turn."""
+
+    velocity_x = float(state.velocity.get("x", 0.0))
+    velocity_z = float(state.velocity.get("z", 0.0))
+    if abs(velocity_x) >= abs(velocity_z) and abs(velocity_x) > 1e-9:
+        return "front"
+    if abs(velocity_z) > 1e-9:
+        return "back" if velocity_z > 0.0 else "front"
+    return "back" if state.facing in {"north", "northeast", "northwest"} else "front"
 
 
 def _effective_action(state: WizardState) -> Optional[str]:

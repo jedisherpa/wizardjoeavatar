@@ -390,6 +390,10 @@ def create_app(
             "history": frame_hub.source_hash_history(),
         }
 
+    @app.get("/api/avatar/wizard/animation-trace")
+    async def animation_trace():
+        return await frame_hub.animation_truth_trace_snapshot()
+
     @app.get("/api/avatar/wizard/replay")
     async def replay():
         replay_log = frame_hub.replay_log

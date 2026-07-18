@@ -5,11 +5,16 @@ import contextlib
 import time
 import uuid
 from concurrent.futures import ThreadPoolExecutor
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, replace as dataclass_replace
 from itertools import count
 from collections import deque
 from typing import Dict, Optional, Set
 
+from .animation_trace import (
+    ANIMATION_TRUTH_TRACE_CAPACITY,
+    ANIMATION_TRUTH_TRACE_SCHEMA,
+    ANIMATION_TRUTH_TRACE_VERSION,
+)
 from .character_capabilities import derive_character_capability_manifest
 from .commanding import CommandAckV1, CommandEnvelopeV1, OrderedCommandInbox, QueuedCommand
 from .frame_hash import frame_hash
@@ -123,6 +128,7 @@ class WizardFrameHub:
         self._stale_render_discard_count = 0
         self._schedule_overruns = 0
         self._source_hash_history = deque(maxlen=240)
+        self._animation_truth_trace = deque(maxlen=ANIMATION_TRUTH_TRACE_CAPACITY)
         self._published_at = deque(maxlen=240)
 
     @property
@@ -206,13 +212,17 @@ class WizardFrameHub:
 
     async def enqueue_keyframe(self, subscriber: WizardSubscriber) -> None:
         async with self._current_lock():
-            frame = self._latest_frame
-        if frame is None:
-            return
-        self._clear_queue(subscriber.queue)
-        subscriber.resync_count += 1
-        self._resync_count += 1
-        subscriber.queue.put_nowait(encode_keyframe(frame.cells, frame.frame_index).message)
+            if self._latest_frame is None:
+                return
+            # A resync must be a normal publication transaction. Re-encoding the
+            # latest frame only for this subscriber creates a second transport
+            # truth for one frame index, which cannot be paired atomically with
+            # the accepted animation trace. Clear stale deltas and force the next
+            # globally committed frame to be a keyframe instead.
+            self._clear_queue(subscriber.queue)
+            self._force_keyframe = True
+            subscriber.resync_count += 1
+            self._resync_count += 1
         self._update_diagnostics()
 
     def force_keyframe(self) -> None:
@@ -257,6 +267,7 @@ class WizardFrameHub:
             "frame_hub_error_code": self._task_error_code,
             "frame_hub_failure_count": self._task_failure_count,
             "source_hash_history_count": len(self._source_hash_history),
+            "animation_truth_trace_count": len(self._animation_truth_trace),
             "runtime_epoch": self.runtime_epoch,
             "simulation_tick": self.runtime.clock.simulation_tick,
             "state_revision": self.runtime.clock.state_revision,
@@ -398,6 +409,20 @@ class WizardFrameHub:
     def source_hash_history(self) -> list[dict]:
         return list(self._source_hash_history)
 
+    async def animation_truth_trace_snapshot(self) -> dict:
+        """Return an immutable in-memory snapshot without touching disk."""
+
+        await self.start()
+        async with self._current_lock():
+            records = tuple(self._animation_truth_trace)
+        return {
+            "schema": ANIMATION_TRUTH_TRACE_SCHEMA,
+            "schema_version": ANIMATION_TRUTH_TRACE_VERSION,
+            "capacity": ANIMATION_TRUTH_TRACE_CAPACITY,
+            "count": len(records),
+            "records": [record.to_mapping() for record in records],
+        }
+
     async def _run(self) -> None:
         frame_interval = 1.0 / self.frame_source.fps
         next_tick = time.perf_counter()
@@ -511,16 +536,33 @@ class WizardFrameHub:
                 self._source_hash_history.append(
                     {
                         "frame_index": frame.frame_index,
-                        "hash": frame_hash(frame.cells),
+                        "hash": (
+                            render_candidate.animation_truth.frame_fnv1a32
+                            if render_candidate is not None
+                            else frame_hash(frame.cells)
+                        ),
                         "codec_tag": frame.codec_tag,
                         "changed_cells": frame.changed_cells,
                         "raw_size": frame.raw_size,
                     }
                 )
                 if self._force_keyframe:
-                    message = encode_keyframe(frame.cells, frame.frame_index).message
+                    forced = encode_keyframe(frame.cells, frame.frame_index)
+                    message = forced.message
                     self._force_keyframe = False
                     self._forced_keyframe_count += 1
+                    if render_candidate is not None:
+                        render_candidate = dataclass_replace(
+                            render_candidate,
+                            animation_truth=render_candidate.animation_truth.with_transport(
+                                codec_tag=forced.tag,
+                                encoded_size=forced.encoded_size,
+                                changed_cells=forced.changed_cells,
+                                is_keyframe=forced.is_keyframe,
+                            ),
+                        )
+                if render_candidate is not None:
+                    self._animation_truth_trace.append(render_candidate.animation_truth)
             self._published_frames += 1
             self._published_at.append(time.perf_counter())
             self._publish(message)

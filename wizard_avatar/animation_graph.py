@@ -59,6 +59,7 @@ MARKER_IDS = frozenset(
         "action_commit",
         "action_effect",
         "action_recoverable",
+        "action_settled",
         "speech_open",
         "speech_close",
         "shush_hold_start",

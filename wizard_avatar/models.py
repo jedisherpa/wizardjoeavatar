@@ -169,6 +169,17 @@ class WizardState:
     animation_transition_source_pose_id: Optional[str] = None
     animation_transition_source_contact: str = "unknown"
     animation_transition_generation: int = 0
+    animation_sample_index: int = 0
+    animation_sample_frame: int = 0
+    animation_authored_frame: int = 0
+    animation_phase_numerator: int = 0
+    animation_phase_denominator: int = 1
+    animation_root_policy: str = "fixed"
+    animation_support_contact: str = "unknown"
+    animation_planted_anchor: Optional[str] = None
+    animation_active_markers: Tuple[str, ...] = ()
+    animation_contact_generation: int = 0
+    animation_contact_started_tick: int = 0
     mobility_mode: str = "grounded_idle"
     airborne: bool = False
     altitude: float = 0.0

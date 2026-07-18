@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import asyncio
 import copy
+import hashlib
 import math
 import struct
 import threading
@@ -11,6 +12,14 @@ from pathlib import Path
 from typing import Optional, Tuple
 
 from .character_package import WIZARD_JOE_PACKAGE_PATH, load_character_package
+from .animation_trace import (
+    ANIMATION_TRUTH_TRACE_SCHEMA,
+    ANIMATION_TRUTH_TRACE_VERSION,
+    AnimationTruthTraceV1,
+    LocalPointV1,
+    StagePointV1,
+    transformed_anchor,
+)
 from .animation_graph import (
     AnimationGraph,
     AnimationGraphValidationError,
@@ -21,6 +30,7 @@ from .controller import WizardAvatarController
 from .diagnostics import FrameDiagnostics
 from .expressions import get_expression
 from .floor import build_background
+from .frame_hash import frame_hash
 from .head_eye import HeadEyeState, advance_head_eye
 from .layers import ROOT_ANCHOR, render_wizard_local
 from .models import (
@@ -38,7 +48,11 @@ from .pose_compositor import (
     copy_pose_canvas,
     touch_up_staff_occlusion,
 )
-from .pose_selection import presentation_pose_for_facing, select_reference_pose_sample
+from .pose_selection import (
+    PoseSample,
+    presentation_pose_for_facing,
+    select_reference_pose_sample,
+)
 from .projection import project_quantized
 from .permission_world import PermissionWorldRenderPolicyV1
 from .protocol import EncodedFrame, encode_frame
@@ -76,6 +90,10 @@ class WizardPresentationSnapshot:
     display_pose_id: Optional[str]
     last_presentation_state: Optional[WizardPresentationState]
     head_eye_state: HeadEyeState
+    contact_generation: int = -1
+    contact_anchor: Optional[str] = None
+    contact_lock_stage: Optional[Tuple[float, float]] = None
+    contact_root_offset: Tuple[float, float] = (0.0, 0.0)
 
 
 @dataclass(frozen=True)
@@ -121,6 +139,7 @@ class WizardRenderCandidate:
     message: bytes
     shown_frame: bytes
     presentation: WizardPresentationSnapshot
+    animation_truth: AnimationTruthTraceV1
 
     @property
     def frame(self) -> WizardCellFrame:
@@ -184,6 +203,10 @@ class ProceduralWizardFrameSource:
         self._transition_started_at_frame = 0
         self._transition_frames = max(2, round(self.fps * 0.12))
         self._last_presentation_state: Optional[WizardPresentationState] = None
+        self._contact_generation = -1
+        self._contact_anchor: Optional[str] = None
+        self._contact_lock_stage: Optional[Tuple[float, float]] = None
+        self._contact_root_offset = (0.0, 0.0)
         self._initialize_authoritative_animation_state()
 
     def _initialize_authoritative_animation_state(self) -> None:
@@ -219,6 +242,37 @@ class ProceduralWizardFrameSource:
         state.animation_transition_source_contact = derived.animation_transition_source_contact
         state.animation_transition_generation = derived.animation_transition_generation
         state.pose_transition_progress = derived.pose_transition_progress
+        self._record_authoritative_pose_sample(state, sample)
+
+    def _record_authoritative_pose_sample(
+        self,
+        state: WizardState,
+        sample: PoseSample,
+    ) -> None:
+        """Persist the exact selected graph sample on the authoritative state."""
+
+        previous_contact = (
+            state.animation_support_contact,
+            state.animation_planted_anchor,
+        )
+        state.animation_support_contact = sample.contact
+        state.animation_planted_anchor = sample.planted_anchor
+        state.animation_active_markers = tuple(sample.active_markers)
+
+        state.animation_sample_index = sample.sample_index
+        state.animation_sample_frame = sample.sample_frame
+        state.animation_authored_frame = sample.authored_frame
+        state.animation_phase_numerator = sample.phase_numerator
+        state.animation_phase_denominator = sample.phase_denominator
+        state.animation_root_policy = sample.root_policy
+
+        current_contact = (
+            state.animation_support_contact,
+            state.animation_planted_anchor,
+        )
+        if current_contact != previous_contact:
+            state.animation_contact_generation += 1
+            state.animation_contact_started_tick = state.simulation_tick
 
     async def next_frame(self) -> WizardCellFrame:
         await asyncio.sleep(0)
@@ -234,7 +288,7 @@ class ProceduralWizardFrameSource:
         # discarded without advancing presentation state.
         with self._presentation_lock:
             snapshot = self._capture_render_state_unlocked()
-            frame, presentation = self._render_snapshot(snapshot)
+            frame, presentation, _ = self._render_snapshot(snapshot)
             self._commit_presentation_unlocked(
                 presentation,
                 snapshot.presentation_generation,
@@ -272,6 +326,10 @@ class ProceduralWizardFrameSource:
                 display_pose_id=self._display_pose_id,
                 last_presentation_state=self._last_presentation_state,
                 head_eye_state=self._head_eye_state,
+                contact_generation=self._contact_generation,
+                contact_anchor=self._contact_anchor,
+                contact_lock_stage=self._contact_lock_stage,
+                contact_root_offset=self._contact_root_offset,
             ),
         )
 
@@ -286,7 +344,7 @@ class ProceduralWizardFrameSource:
         else:
             with self._presentation_lock:
                 snapshot = self._capture_render_state_unlocked(state=state)
-        frame, _ = self._render_snapshot(snapshot)
+        frame, _, _ = self._render_snapshot(snapshot)
         return frame
 
     def render_next_frame(self) -> WizardCellFrame:
@@ -296,10 +354,11 @@ class ProceduralWizardFrameSource:
     def _render_snapshot(
         self,
         snapshot: WizardRenderSnapshot,
-    ) -> tuple[WizardCellFrame, WizardPresentationSnapshot]:
+    ) -> tuple[WizardCellFrame, WizardPresentationSnapshot, AnimationTruthTraceV1]:
         state = copy.deepcopy(snapshot.state)
         permission_world = snapshot.permission_world
         state.reconcile_compatibility_state()
+        authored_pose_id = state.pose_id
         head_eye_state, head_eye = advance_head_eye(
             snapshot.presentation.head_eye_state,
             state.facing,
@@ -345,7 +404,21 @@ class ProceduralWizardFrameSource:
                 permission_world,
             )
             self._apply_reference_face_channels(local, state, pose_id, mouth_anchor)
-            root_screen = self._reference_root_screen(sx, sy, state, render_scale)
+            base_root_screen = self._reference_root_screen(sx, sy, state, render_scale)
+            (
+                root_screen,
+                contact_generation,
+                contact_anchor,
+                contact_lock_stage,
+                contact_root_offset,
+            ) = self._resolve_contact_locked_root(
+                snapshot.presentation,
+                state,
+                pose_id,
+                root_anchor,
+                base_root_screen,
+                render_scale,
+            )
         else:
             stage = self._permissioned_stage(permission_world)
             render_scale = scale
@@ -353,7 +426,12 @@ class ProceduralWizardFrameSource:
             local = render_wizard_local(state)
             root_anchor = ROOT_ANCHOR
             mouth_anchor = None
-            root_screen = (sx, sy)
+            base_root_screen = (sx, sy)
+            root_screen = base_root_screen
+            contact_generation = state.animation_contact_generation
+            contact_anchor = None
+            contact_lock_stage = None
+            contact_root_offset = (0.0, 0.0)
         state.last_pose_id = previous_pose_id
         state.pose_id = pose_id or "procedural"
         lifted = state.airborne or (state.locomotion == "walking" and 0.15 < state.walk_phase < 0.38)
@@ -429,8 +507,123 @@ class ProceduralWizardFrameSource:
             display_pose_id=pose_id,
             last_presentation_state=last_presentation_state,
             head_eye_state=head_eye_state,
+            contact_generation=contact_generation,
+            contact_anchor=contact_anchor,
+            contact_lock_stage=contact_lock_stage,
+            contact_root_offset=contact_root_offset,
         )
-        return frame, presentation
+        planted_anchor_local = None
+        planted_anchor_stage = None
+        planted_anchor_raster_span = None
+        staff_tip_local = None
+        staff_tip_stage = None
+        staff_tip_raster_span = None
+        if pose_id is not None and state.animation_planted_anchor is not None:
+            try:
+                planted_anchor_local = reference_pose_anchor(
+                    pose_id,
+                    state.animation_planted_anchor,
+                    self.pose_library_path,
+                )
+            except KeyError:
+                planted_anchor_local = None
+            if planted_anchor_local is not None:
+                planted_anchor_stage, planted_anchor_raster_span = transformed_anchor(
+                    root_local=root_anchor,
+                    root_stage=root_screen,
+                    anchor_local=planted_anchor_local,
+                    local_size=(local.width, local.height),
+                    scale=render_scale,
+                    horizontal_scale=REFERENCE_POSE_HORIZONTAL_SCALE,
+                )
+        if pose_id is not None:
+            try:
+                staff_tip_local = reference_pose_anchor(
+                    pose_id,
+                    "staff_tip",
+                    self.pose_library_path,
+                )
+            except KeyError:
+                staff_tip_local = None
+            if staff_tip_local is not None:
+                staff_tip_stage, staff_tip_raster_span = transformed_anchor(
+                    root_local=root_anchor,
+                    root_stage=root_screen,
+                    anchor_local=staff_tip_local,
+                    local_size=(local.width, local.height),
+                    scale=render_scale,
+                    horizontal_scale=REFERENCE_POSE_HORIZONTAL_SCALE,
+                )
+        effect_phase, effect_intensity = self._reference_magic_effect_state(state)
+        if not self._permission_surface_visible(
+            permission_world,
+            "effect",
+            "magic_effect",
+        ) or (
+            permission_world is not None
+            and permission_world.motion_profile != "full"
+        ):
+            effect_intensity = 0.0
+        animation_truth = AnimationTruthTraceV1(
+            schema=ANIMATION_TRUTH_TRACE_SCHEMA,
+            schema_version=ANIMATION_TRUTH_TRACE_VERSION,
+            simulation_tick=state.simulation_tick,
+            state_revision=state.state_revision,
+            frame_index=frame.frame_index,
+            authoritative_state_sha256=snapshot.authoritative_state_sha256,
+            authored_pose_id=authored_pose_id,
+            rendered_pose_id=state.pose_id,
+            animation_node_id=state.animation_node_id,
+            animation_clip_id=state.animation_clip_id,
+            animation_clip_tick=state.animation_clip_tick,
+            animation_sample_index=state.animation_sample_index,
+            animation_sample_frame=state.animation_sample_frame,
+            animation_authored_frame=state.animation_authored_frame,
+            animation_phase_numerator=state.animation_phase_numerator,
+            animation_phase_denominator=state.animation_phase_denominator,
+            animation_root_policy=state.animation_root_policy,
+            support_contact=state.animation_support_contact,
+            planted_anchor=state.animation_planted_anchor,
+            active_markers=tuple(state.animation_active_markers),
+            contact_generation=state.animation_contact_generation,
+            contact_started_tick=state.animation_contact_started_tick,
+            world_root_x=state.world_position["x"],
+            world_root_z=state.world_position["z"],
+            altitude=state.altitude,
+            semantic_root_stage=StagePointV1(*base_root_screen),
+            contact_root_offset_stage=StagePointV1(*contact_root_offset),
+            presented_root_stage=StagePointV1(*root_screen),
+            render_scale=render_scale,
+            render_scale_x=(
+                render_scale * REFERENCE_POSE_HORIZONTAL_SCALE
+                if pose_id is not None
+                else render_scale
+            ),
+            render_scale_y=render_scale,
+            root_anchor_local=LocalPointV1(*root_anchor),
+            planted_anchor_local=(
+                None
+                if planted_anchor_local is None
+                else LocalPointV1(*planted_anchor_local)
+            ),
+            planted_anchor_stage=planted_anchor_stage,
+            planted_anchor_raster_span=planted_anchor_raster_span,
+            staff_tip_local=(
+                None if staff_tip_local is None else LocalPointV1(*staff_tip_local)
+            ),
+            staff_tip_stage=staff_tip_stage,
+            staff_tip_raster_span=staff_tip_raster_span,
+            effect_phase=effect_phase,
+            effect_intensity=effect_intensity,
+            presented_facing=head_eye.presented_facing,
+            frame_sha256=hashlib.sha256(cells).hexdigest(),
+            frame_fnv1a32=frame_hash(cells),
+            codec_tag=0,
+            encoded_size=0,
+            changed_cells=0,
+            is_keyframe=False,
+        )
+        return frame, presentation, animation_truth
 
     def _permissioned_stage(
         self,
@@ -857,6 +1050,94 @@ class ProceduralWizardFrameSource:
         ground_y = min(self.rows - 8, sy + 18 * render_scale)
         return sx, ground_y - state.altitude * 8.0 * render_scale
 
+    def _resolve_contact_locked_root(
+        self,
+        presentation: WizardPresentationSnapshot,
+        state: WizardState,
+        pose_id: str,
+        root_anchor: Tuple[int, int],
+        base_root_screen: Tuple[float, float],
+        render_scale: float,
+    ) -> tuple[
+        Tuple[float, float],
+        int,
+        Optional[str],
+        Optional[Tuple[float, float]],
+        Tuple[float, float],
+    ]:
+        active_anchor = (
+            state.animation_planted_anchor
+            if state.animation_root_policy == "contact_locked"
+            and state.animation_support_contact != "none"
+            and not state.airborne
+            else None
+        )
+        if active_anchor is None:
+            offset = tuple(
+                self._approach_zero(value, 1.0)
+                for value in presentation.contact_root_offset
+            )
+            return (
+                (base_root_screen[0] + offset[0], base_root_screen[1] + offset[1]),
+                state.animation_contact_generation,
+                None,
+                None,
+                offset,
+            )
+
+        try:
+            anchor_local = reference_pose_anchor(
+                pose_id,
+                active_anchor,
+                self.pose_library_path,
+            )
+        except KeyError:
+            return (
+                base_root_screen,
+                state.animation_contact_generation,
+                None,
+                None,
+                (0.0, 0.0),
+            )
+
+        scale_x = render_scale * REFERENCE_POSE_HORIZONTAL_SCALE
+        base_anchor = (
+            base_root_screen[0] + (anchor_local[0] - root_anchor[0]) * scale_x,
+            base_root_screen[1] + (anchor_local[1] - root_anchor[1]) * render_scale,
+        )
+        same_contact = (
+            presentation.contact_generation == state.animation_contact_generation
+            and presentation.contact_anchor == active_anchor
+            and presentation.contact_lock_stage is not None
+        )
+        if same_contact:
+            lock_stage = presentation.contact_lock_stage
+            offset = (
+                lock_stage[0] - base_anchor[0],
+                lock_stage[1] - base_anchor[1],
+            )
+        else:
+            offset = presentation.contact_root_offset
+            lock_stage = (
+                base_anchor[0] + offset[0],
+                base_anchor[1] + offset[1],
+            )
+        return (
+            (base_root_screen[0] + offset[0], base_root_screen[1] + offset[1]),
+            state.animation_contact_generation,
+            active_anchor,
+            lock_stage,
+            offset,
+        )
+
+    @staticmethod
+    def _approach_zero(value: float, maximum_step: float) -> float:
+        if value > maximum_step:
+            return value - maximum_step
+        if value < -maximum_step:
+            return value + maximum_step
+        return 0.0
+
     def _draw_reference_animation_overlays(
         self,
         stage: CellCanvas,
@@ -890,21 +1171,31 @@ class ProceduralWizardFrameSource:
             "effect",
             "magic_effect",
         )
-        if effect_visible and state.action in {"magic_cast", "reaction"}:
-            phase = (
-                state.time_seconds * math.tau * 1.4
-                if permission_world is None
-                or permission_world.motion_profile == "full"
-                else 0.0
-            )
-            cx, cy = stage_point(65, 12)
-            for idx in range(14):
-                angle = phase + idx * math.tau / 14.0
-                radius = 4 + (idx % 3)
-                x = round(cx + math.cos(angle) * radius)
-                y = round(cy + math.sin(angle) * radius * 0.7)
-                color = RGB["cyan_magic"] if idx % 2 else RGB["gold_light"]
-                stage.set(x, y, "#", color, "reference_magic_spark")
+        _effect_phase, effect_intensity = self._reference_magic_effect_state(state)
+        full_motion = (
+            permission_world is None or permission_world.motion_profile == "full"
+        )
+        if effect_visible and full_motion and effect_intensity > 0.0 and pose_id is not None:
+            try:
+                staff_tip = reference_pose_anchor(
+                    pose_id,
+                    "staff_tip",
+                    self.pose_library_path,
+                )
+            except KeyError:
+                staff_tip = None
+            if staff_tip is not None:
+                phase = state.animation_authored_frame * math.tau / 7.0
+                cx, cy = stage_point(*staff_tip)
+                stage.set(cx, cy, "#", RGB["gold_light"], "reference_magic_spark")
+                spark_count = max(1, round(14 * effect_intensity))
+                for idx in range(spark_count):
+                    angle = phase + idx * math.tau / 14.0
+                    radius = 2 + round((2 + idx % 3) * effect_intensity)
+                    x = round(cx + math.cos(angle) * radius)
+                    y = round(cy + math.sin(angle) * radius * 0.7)
+                    color = RGB["cyan_magic"] if idx % 2 else RGB["gold_light"]
+                    stage.set(x, y, "#", color, "reference_magic_spark")
 
         if state.action == "thinking":
             colors = ((38, 156, 210), (255, 210, 48), (38, 156, 210))
@@ -914,6 +1205,19 @@ class ProceduralWizardFrameSource:
                     18 - math.sin(state.time_seconds * 4 + offset) * 2,
                 )
                 stage.set(x, y, "#", color, "reference_thinking_bubble")
+
+    @staticmethod
+    def _reference_magic_effect_state(state: WizardState) -> Tuple[str, float]:
+        if state.animation_clip_id != "cast_front":
+            return "inactive", 0.0
+        frame = int(state.animation_authored_frame)
+        if 7 <= frame <= 8:
+            return "stroke", 1.0
+        if 9 <= frame <= 13:
+            return "hold", 1.0
+        if 14 <= frame <= 16:
+            return "recovery", (17 - frame) / 4.0
+        return "inactive", 0.0
 
     async def next_encoded_frame(
         self,
@@ -962,7 +1266,7 @@ class ProceduralWizardFrameSource:
             encoder_generation=state.encoder_generation,
             presentation=state.presentation,
         )
-        frame, presentation = self._render_snapshot(worker_snapshot)
+        frame, presentation, animation_truth = self._render_snapshot(worker_snapshot)
         if codec == "adaptive":
             encoded = encode_frame(
                 frame.cells,
@@ -996,6 +1300,12 @@ class ProceduralWizardFrameSource:
             message=message,
             shown_frame=shown_frame,
             presentation=presentation,
+            animation_truth=animation_truth.with_transport(
+                codec_tag=frame.codec_tag,
+                encoded_size=frame.encoded_size,
+                changed_cells=frame.changed_cells,
+                is_keyframe=frame.is_keyframe,
+            ),
         )
 
     def commit_render_candidate(
@@ -1047,6 +1357,10 @@ class ProceduralWizardFrameSource:
         self._display_pose_id = presentation.display_pose_id
         self._last_presentation_state = presentation.last_presentation_state
         self._head_eye_state = presentation.head_eye_state
+        self._contact_generation = presentation.contact_generation
+        self._contact_anchor = presentation.contact_anchor
+        self._contact_lock_stage = presentation.contact_lock_stage
+        self._contact_root_offset = presentation.contact_root_offset
         self._presentation_generation = presentation.generation
 
     @property

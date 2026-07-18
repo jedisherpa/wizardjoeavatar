@@ -204,7 +204,8 @@ class RuntimeProductionPathTests(unittest.IsolatedAsyncioTestCase):
             self.assertEqual(state.gaze_vertical_aim, before["gaze_vertical_aim"])
             self.assertEqual(state.gaze_authoritative, before["gaze_authoritative"])
             self.assertEqual(state.locomotion, before["locomotion"])
-            self.assertEqual(state.action, before["action"])
+            self.assertEqual(before["action"], "speaking")
+            self.assertEqual(state.action, "idle")
         finally:
             await hub.stop()
 
