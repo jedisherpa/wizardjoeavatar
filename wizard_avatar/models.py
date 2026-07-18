@@ -137,10 +137,12 @@ class WizardState:
     staff_state: str = "held"
     speech_id: Optional[str] = None
     speech_text: Optional[str] = None
+    speech_started_at: float = 0.0
     time_seconds: float = 0.0
     action_until: float = 0.0
     action_restore: Optional[Dict[str, Any]] = None
     speech_until: float = 0.0
+    speech_mouth_authority: str = "none"
     target_point: Optional[Dict[str, float]] = None
     gaze_aim: int = 0
     gaze_vertical_aim: int = 0
@@ -243,6 +245,7 @@ class WizardPresentationState:
     presented_facing: str
     gaze_aim: int
     head_eye_phase: str
+    rendered_mouth_shape: str
 
 
 @dataclass

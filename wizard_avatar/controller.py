@@ -163,7 +163,11 @@ class WizardAvatarController:
                 self._restore_action_after_reaction()
             else:
                 self._set_action("idle", 0)
-        if self.state.speech_id is not None and self.state.time_seconds >= self.state.speech_until:
+        if (
+            self.state.speech_id is not None
+            and self.state.speech_mouth_authority == "local_fallback"
+            and self.state.time_seconds >= self.state.speech_until
+        ):
             self._finish_speech()
 
     def _set_action(self, action: str, duration_ms: int) -> None:
@@ -519,7 +523,9 @@ class WizardAvatarController:
         duration_ms = int(payload.get("duration_ms", max(1200, len(text) * 70)))
         self.state.speech_id = str(payload.get("speech_id", f"speech-{int(time.time() * 1000)}"))
         self.state.speech_text = text
+        self.state.speech_started_at = self.state.time_seconds
         self.state.speech_until = self.state.time_seconds + duration_ms / 1000.0
+        self.state.speech_mouth_authority = "local_fallback"
         self.state.mouth = "open_small"
         if self.state.action in {"idle", "speaking"}:
             self.state.action = "speaking"
@@ -571,7 +577,9 @@ class WizardAvatarController:
     def _finish_speech(self) -> None:
         self.state.speech_id = None
         self.state.speech_text = None
+        self.state.speech_started_at = 0.0
         self.state.speech_until = 0.0
+        self.state.speech_mouth_authority = "none"
         if self.state.action == "speaking":
             self._set_action("idle", 0)
         self.state.mouth = expression_mouth(self.state.expression)

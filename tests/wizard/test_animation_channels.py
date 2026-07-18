@@ -16,6 +16,22 @@ def run_ticks(source, ticks):
 
 
 class AnimationChannelTests(unittest.TestCase):
+    def test_media_aligned_speech_is_not_expired_by_simulation_time(self):
+        source = ProceduralWizardFrameSource()
+        state = source.current_state()
+        state.speech_id = "speech:approved"
+        state.speech_text = "Approved words."
+        state.speech_mouth_authority = "media_alignment"
+        state.speech_until = 0.0
+        state.mouth = "rounded"
+
+        run_ticks(source, 2)
+
+        state = source.current_state()
+        self.assertEqual(state.speech_id, "speech:approved")
+        self.assertEqual(state.speech_mouth_authority, "media_alignment")
+        self.assertEqual(state.mouth, "rounded")
+
     def test_speech_does_not_cancel_locomotion(self):
         source = ProceduralWizardFrameSource()
         self.assertTrue(

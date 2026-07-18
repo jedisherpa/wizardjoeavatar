@@ -275,13 +275,53 @@ class FrameSourceTests(unittest.TestCase):
         state = WizardState(
             action="speaking",
             speech_id="legacy-speech",
+            speech_text="Hello, wizard.",
+            speech_started_at=8.0,
+            speech_until=10.0,
+            speech_mouth_authority="local_fallback",
             mouth="closed",
-            time_seconds=0.0,
+            time_seconds=8.0,
         )
         self.assertEqual(
             source._reference_mouth_shape(state, {"mouth": "closed"}),
-            "open_medium",
+            "open_small",
         )
+
+    def test_aligned_speech_mouth_is_not_replaced_by_local_fallback(self):
+        source = ProceduralWizardFrameSource()
+        state = WizardState(
+            action="speaking",
+            speech_id="speech:approved",
+            speech_mouth_authority="media_alignment",
+            mouth="rounded",
+            time_seconds=41.0,
+        )
+        self.assertEqual(
+            source._reference_mouth_shape(state, {"mouth": "closed"}),
+            "rounded",
+        )
+
+    def test_diagnostics_report_the_projected_fallback_mouth(self):
+        source = ProceduralWizardFrameSource()
+        self.assertTrue(
+            source.apply_command_sync(
+                WizardCommand(
+                    "speak",
+                    {
+                        "text": "Hello, world.",
+                        "duration_ms": 2000,
+                        "speech_id": "diagnostic-speech",
+                    },
+                )
+            ).ok
+        )
+        source.advance_simulation(0.95)
+        source.render_current_frame()
+
+        diagnostics = source.diagnostics_dict()
+        self.assertEqual(diagnostics["mouth_state"], "closed")
+        self.assertEqual(diagnostics["mouth_command_state"], "open_small")
+        self.assertEqual(diagnostics["speech_mouth_authority"], "local_fallback")
 
     def test_all_pose_face_edits_remain_inside_anchor_bounds(self):
         source = ProceduralWizardFrameSource()

@@ -242,8 +242,12 @@ def _draw_expression_overlay(canvas: CellCanvas, state: WizardState, view: Dict[
     mouth_shape = state.mouth
     if state.speech_id is None and mouth_shape == "closed":
         mouth_shape = str(expr.get("mouth", "closed"))
-    if state.speech_id is not None:
-        mouth_shape = fallback_speech_shape(max(0.0, state.speech_until - state.time_seconds))
+    if state.speech_mouth_authority == "local_fallback":
+        mouth_shape = fallback_speech_shape(
+            state.time_seconds - state.speech_started_at,
+            state.speech_until - state.speech_started_at,
+            state.speech_text or "",
+        )
     for mx, my, mark in MOUTH_CELLS[mouth_shape]:
         x = cx + (mx - 17)
         if profile and mx > 17:

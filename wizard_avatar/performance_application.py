@@ -586,6 +586,9 @@ class PerformanceApplication:
             speaking = governed.mouth.speaking
             state.speech_id = governed.speech_id
             state.speech_text = governed.approved_text
+            state.speech_started_at = 0.0
+            state.speech_until = 0.0
+            state.speech_mouth_authority = "media_alignment"
             self._last_governed_speech_id = governed.speech_id
         elif speech_source:
             mouth = "closed"
@@ -767,6 +770,9 @@ class PerformanceApplication:
         ):
             state.speech_id = None
             state.speech_text = None
+            state.speech_started_at = 0.0
+            state.speech_until = 0.0
+            state.speech_mouth_authority = "none"
         self._last_governed_speech_id = None
 
     def _apply_stage_and_gaze(

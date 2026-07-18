@@ -4,6 +4,7 @@ import unittest
 from copy import deepcopy
 
 from wizard_avatar.controller import WizardAvatarController
+from wizard_avatar.frame_source import ProceduralWizardFrameSource
 from wizard_avatar.governed_performance import GovernedPerformanceApprovalV1
 from wizard_avatar.media_session import MediaSessionSnapshotV1
 from wizard_avatar.performance_application import PerformanceApplication
@@ -187,7 +188,15 @@ class GovernedSpeechReleaseTests(unittest.TestCase):
         self.assertEqual(result.media_time_ms, 400)
         self.assertEqual(self.controller.state.speech_text, "Hello")
         self.assertEqual(self.controller.state.speech_id, "speech:turn-0042")
+        self.assertEqual(self.controller.state.speech_mouth_authority, "media_alignment")
         self.assertEqual(self.controller.state.mouth, "smile")
+        self.assertEqual(
+            ProceduralWizardFrameSource._reference_mouth_shape(
+                self.controller.state,
+                {"mouth": "closed"},
+            ),
+            "smile",
+        )
         self.assertIn(self.controller.state.action, {"speaking", "explaining"})
 
     def test_pause_seek_and_replay_reproject_text_and_mouth_from_media_time(self):
@@ -210,6 +219,7 @@ class GovernedSpeechReleaseTests(unittest.TestCase):
         paused = self.application.apply(self.controller, 2_000_000)
         self.assertFalse(paused.active)
         self.assertIsNone(self.controller.state.speech_text)
+        self.assertEqual(self.controller.state.speech_mouth_authority, "none")
         self.assertNotEqual(self.controller.state.mouth, "smile")
 
         self.application.accept_snapshot(

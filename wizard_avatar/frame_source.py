@@ -42,6 +42,7 @@ from .models import (
     WizardPresentationState,
     WizardState,
 )
+from .mouth import fallback_speech_shape
 from .palette import ENV_RGB, RGB
 from .pose_compositor import (
     blit_pose_scaled,
@@ -509,6 +510,10 @@ class ProceduralWizardFrameSource:
         state.pose_id = pose_id or "procedural"
         lifted = state.airborne or (state.locomotion == "walking" and 0.15 < state.walk_phase < 0.38)
         state.display_scale = render_scale
+        rendered_mouth_shape = self._reference_mouth_shape(
+            state,
+            get_expression(state.expression),
+        ) or state.mouth
         shadow_root = (
             root_screen[0],
             root_screen[1] + state.altitude * 8.0 * render_scale,
@@ -574,6 +579,7 @@ class ProceduralWizardFrameSource:
             presented_facing=head_eye.presented_facing,
             gaze_aim=head_eye.gaze_aim,
             head_eye_phase=head_eye.phase,
+            rendered_mouth_shape=rendered_mouth_shape,
         )
         presentation = WizardPresentationSnapshot(
             generation=snapshot.presentation_generation + 1,
@@ -1027,14 +1033,16 @@ class ProceduralWizardFrameSource:
 
     @staticmethod
     def _reference_mouth_shape(state: WizardState, expression: dict) -> Optional[str]:
-        # Legacy local speech has no timing track, so it retains one explicit
-        # deterministic fallback. Media performance never sets speech_id: its
-        # scheduler-selected state.mouth is the sole rendered authority,
-        # including intentionally closed phoneme/silence frames.
+        # Only the local command path needs a degraded timing fallback. Media
+        # and governed speech own state.mouth, including intentional silence.
+        if state.speech_mouth_authority == "local_fallback":
+            return fallback_speech_shape(
+                state.time_seconds - state.speech_started_at,
+                state.speech_until - state.speech_started_at,
+                state.speech_text or "",
+            )
         if state.speech_id is not None:
-            return ("open_medium", "open_small", "closed", "open_small")[
-                int(state.time_seconds * 10) % 4
-            ]
+            return state.mouth
         if state.action == "speaking":
             return state.mouth
         expression_mouth = str(expression.get("mouth", "closed"))
@@ -1518,7 +1526,13 @@ class ProceduralWizardFrameSource:
             "walk_phase": state["walk_phase"],
             "current_action": state["action"],
             "current_expression": state["expression"],
-            "mouth_state": state["mouth"],
+            "mouth_state": (
+                presentation.rendered_mouth_shape
+                if presentation
+                else state["mouth"]
+            ),
+            "mouth_command_state": state["mouth"],
+            "speech_mouth_authority": state["speech_mouth_authority"],
             "pose_id": presentation.pose_id if presentation else state["pose_id"],
             "last_pose_id": presentation.last_pose_id if presentation else state["last_pose_id"],
             "pose_transition_progress": (
