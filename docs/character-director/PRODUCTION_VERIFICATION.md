@@ -18,14 +18,12 @@ clone now installs, passes all 428 tests, starts independently, and emits live
 ASCILINE frames. A limited real Prism-to-Python screen recording is retained,
 and a strict two-hour source soak now passes.
 
-Production promotion remains blocked by four external acceptance gaps:
+Production promotion remains blocked by three external acceptance gaps:
 
-1. Prism does not yet produce permission-world facts from a real authoritative
-   grant/deny/revoke store.
-2. The retained connected recording is silent and does not visibly demonstrate
+1. The retained connected recording is silent and does not visibly demonstrate
    the complete short lip-sync interval, interruption, or reconnect sequence.
-3. Browser-driven and human frame-by-frame animation review is incomplete.
-4. Eight-hour/24-hour V2 soaks plus an independent-user package
+2. Browser-driven and human frame-by-frame animation review is incomplete.
+3. Eight-hour/24-hour V2 soaks plus an independent-user package
    install/rollback are still required; a staged V2 RSS gate now passes.
 
 This report distinguishes source verification from human/product acceptance.
@@ -35,8 +33,8 @@ No green test is presented as proof of acting quality or external authority.
 
 | Repository | Branch | Base HEAD | State at verification |
 | --- | --- | --- | --- |
-| Python/Companion | `codex/character-director` | `cee9de821abe46ec8a91c8860426d85247a0353c` | Pushed Character Director implementation used for fresh-clone reproduction |
-| Prism | `codex/character-director-prism` | `287a0ca` | Pushed governed connector plus active-runtime visualizer redirect |
+| Python/Companion | `codex/character-director` | `4903699c3f6a9a627fd9b52ee3e5058f5e9c2629` | Permission-bound projection code receipt; documentation follows in a separate commit |
+| Prism | `codex/character-director-prism` | `a53b48d6626c5494336406aaa9b48bd52460d55e` | Canonical permission producer and exact-ACK code receipt |
 
 The original dirty source trees and the legacy Python listener on
 `127.0.0.1:8765` were not replaced.
@@ -45,9 +43,9 @@ The original dirty source trees and the legacy Python listener on
 
 | Surface | Command or gate | Result |
 | --- | --- | --- |
-| Python runtime | `python3 -m unittest discover -v` | **Pass:** 444/444 after the soak-harness V2 checkpoint |
+| Python runtime | `python3 -m unittest discover -s tests` | **Pass:** 450/450 |
 | Capability determinism | focused capability and portability suites | **Pass:** 9/9 |
-| Python boundary | `python3 tools/validate_python_scope.py .` | **Pass:** 63 files, zero violations |
+| Python boundary | `python3 tools/validate_python_scope.py .` | **Pass:** 64 files, zero violations |
 | Python tools | `python3 -m py_compile` for evidence and soak tools | **Pass** |
 | Companion frontend | `npm test` in `companion/frontend` | **Pass:** 27/27 |
 | Companion supervisor | `cargo test --manifest-path companion/src-tauri/Cargo.toml` | **Pass:** 17/17 from a rebuilt target |
@@ -55,7 +53,8 @@ The original dirty source trees and the legacy Python listener on
 | Prism media | three media test files via `node --test` | **Pass:** 40/40 |
 | Prism preference regression | active-source preference-change test | **Pass:** playback state and reduced-motion profile preserved |
 | Prism frontend | `npm run build` | **Pass:** Vite production build |
-| Prism Rust | `cargo test --workspace -j 1` | **Pass:** complete workspace before final JavaScript-only fix |
+| Prism core | `cargo test -q -p prism-cdiss-core` | **Pass:** 674/674 primary crate tests plus integration/doc targets |
+| Prism CLI | `cargo test -q -p prism-cdiss-cli` | **Pass:** 297/297 unit tests and 10/10 integration tests |
 | Prism release | locked release build for `prism-dodeca-cli` | **Pass** |
 | Prism repository | `git fsck --full --no-progress` | **Pass** after restoring an iCloud-offloaded packfile |
 | Whitespace/format | `cargo fmt --all --check` and `git diff --check` in Prism | **Pass** |
@@ -147,7 +146,7 @@ derivation remains successful.
 
 Current deterministic capability-manifest hash:
 
-`sha256:761f5faef38a03a801de21915a18a95469797bd3f7e66b59d51c3060bda71fbe`
+`sha256:08b22488f8eb8a71e70fe2977afd45ec7f323b7742adccd4ea01218fb46ac104`
 
 ## Package And Lifecycle
 
@@ -224,8 +223,10 @@ that the isolated connector opened `http://127.0.0.1:8875/` while the legacy
   controlling governed release.
 - Advisory Prism states are content-free and cannot claim producer authority.
 - Permission simulation is isolated from production permission authority.
-- Prism's production permission producer currently emits an empty state; this
-  is truthful fail-closed behavior, not a complete permission integration.
+- Prism derives production character permission facts from its canonical
+  `AgreementStore`; the relay remains content-free and exact-ACK-bound.
+- Permission-bound memory writes are linearized with revoke and expiry, and
+  Python revalidates authority again at frame publication.
 
 ## Current Limitations
 
@@ -236,14 +237,13 @@ that the isolated connector opened `http://127.0.0.1:8875/` while the legacy
    production editing workflow.
 3. Normal governed speech can use restrained scoreless body behavior when no
    externally published character-bound score is attached.
-4. A real permission authority producer is absent.
-5. Server-confirmed cancellation of an in-flight model turn is separate from
+4. Server-confirmed cancellation of an in-flight model turn is separate from
    the implemented stale-performance revocation and remains incomplete.
-6. A limited connected recording exists; complete audiovisual and human
+5. A limited connected recording exists; complete audiovisual and human
    animation review are absent.
-7. The staged bounded-client/RSS V2 soak passes; eight-hour and 24-hour V2
+6. The staged bounded-client/RSS V2 soak passes; eight-hour and 24-hour V2
    gates remain outstanding.
-8. Fresh-clone source reproduction passes; independent-user package install
+7. Fresh-clone source reproduction passes; independent-user package install
    and rollback remain.
 
 ## Promotion Decision
@@ -251,5 +251,5 @@ that the isolated connector opened `http://127.0.0.1:8875/` while the legacy
 Do not replace the live `127.0.0.1:8765` service or promote the packaged
 candidate as production yet. The paired commits and clean package lifecycle are
 verified; record a real governed Prism performance and complete the remaining
-permission-authority, visual, clean-user, rollback, and long-duration gates
+visual, clean-user, rollback, and long-duration gates
 first.
