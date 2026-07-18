@@ -31,6 +31,23 @@ class RasterSpanV1:
 
 
 @dataclass(frozen=True)
+class AnimationMarkerEventV1:
+    """One authored marker crossing retained until an accepted presentation."""
+
+    marker_id: str
+    simulation_tick: int
+    state_revision: int
+    animation_node_id: str
+    animation_clip_id: str
+    animation_clip_tick: int
+    animation_sample_index: int
+    animation_sample_frame: int
+    animation_authored_frame: int
+    animation_phase_numerator: int
+    animation_phase_denominator: int
+
+
+@dataclass(frozen=True)
 class AnimationTruthTraceV1:
     """Atomic provenance for one accepted ASCILINE presentation frame."""
 
@@ -54,6 +71,7 @@ class AnimationTruthTraceV1:
     support_contact: str
     planted_anchor: Optional[str]
     active_markers: Tuple[str, ...]
+    presentation_marker_events: Tuple[AnimationMarkerEventV1, ...]
     contact_generation: int
     contact_started_tick: int
     world_root_x: float
@@ -99,6 +117,10 @@ class AnimationTruthTraceV1:
             )
         payload = dict(value)
         payload["active_markers"] = tuple(payload["active_markers"])
+        payload["presentation_marker_events"] = tuple(
+            AnimationMarkerEventV1(**event)
+            for event in payload["presentation_marker_events"]
+        )
         for name in (
             "semantic_root_stage",
             "contact_root_offset_stage",

@@ -30,7 +30,7 @@ if str(ROOT) not in sys.path:
 
 from wizard_avatar.commanding import COMMAND_KINDS
 from wizard_avatar.animation_trace import AnimationTruthTraceV1
-from wizard_avatar.contact_verifier import verify_contact_trace
+from wizard_avatar.contact_verifier import DecodedRasterFrameV1, verify_contact_trace
 from wizard_avatar.protocol import CELL_BYTES, decode_frame
 
 
@@ -38,7 +38,7 @@ DEFAULT_BASE_URL = "http://127.0.0.1:8875"
 DEFAULT_OUTPUT_DIR = ROOT / "evidence" / "character-director" / "real-runtime-visual-review"
 PROTECTED_LEGACY_PORT = 8765
 SOURCE_ID = "character-director-visual-review"
-MANIFEST_SCHEMA_VERSION = 1
+MANIFEST_SCHEMA_VERSION = 2
 EVIDENCE_KIND = "external_real_runtime_visual_review"
 PAIRING_DESCRIPTION = "atomic_animation_truth_trace_v1"
 SHA256_RE = re.compile(r"^[0-9a-f]{64}$")
@@ -446,6 +446,7 @@ class CaptureRecords:
     sample_paths: List[Path] = field(default_factory=list)
     animation_truth_trace: List[Dict[str, Any]] = field(default_factory=list)
     contact_verification: Optional[Dict[str, Any]] = None
+    decoded_raster_frames: Dict[int, DecodedRasterFrameV1] = field(default_factory=dict)
 
 
 @dataclass
@@ -523,7 +524,7 @@ async def request_json_async(
     return result, (time.perf_counter() - started) * 1000.0
 
 
-def runtime_urls(base_url: str) -> Tuple[str, str, str, str]:
+def runtime_urls(base_url: str) -> Tuple[str, str, str, str, str]:
     parsed = urllib.parse.urlsplit(base_url)
     if parsed.scheme not in {"http", "https"} or not parsed.netloc:
         raise ValueError("--base-url must be an absolute http(s) URL")
@@ -544,7 +545,94 @@ def runtime_urls(base_url: str) -> Tuple[str, str, str, str]:
         http_base + "/api/avatar/wizard/command",
         http_base + "/api/avatar/wizard/state",
         http_base + "/api/avatar/wizard/animation-trace",
+        http_base + "/api/avatar/wizard/runtime-identity",
     )
+
+
+def validate_runtime_binding(
+    start: Mapping[str, Any],
+    end: Mapping[str, Any],
+    provenance: Mapping[str, Any],
+    base_url: str,
+    init: Optional[InitMetadata] = None,
+) -> None:
+    """Require one stable clean runtime built from the harness candidate."""
+
+    if start != end:
+        raise EvidenceFailure("runtime identity changed during capture")
+    if start.get("schema") != "wizard_runtime_identity_v1" or start.get("schema_version") != 1:
+        raise EvidenceFailure("runtime returned an unsupported identity schema")
+    runtime_epoch = start.get("runtime_epoch")
+    if not isinstance(runtime_epoch, str) or not runtime_epoch:
+        raise EvidenceFailure("runtime identity is missing its process epoch")
+    if not _plain_int(start.get("pid"), 1):
+        raise EvidenceFailure("runtime identity is missing its process ID")
+    if not isinstance(start.get("started_at_utc"), str) or not _plain_int(
+        start.get("started_at_monotonic_ns"), 1
+    ):
+        raise EvidenceFailure("runtime identity is missing fixed startup timing")
+    if start.get("repository_root") != str(ROOT.resolve()):
+        raise EvidenceFailure("runtime repository root does not match the evidence checkout")
+    if start.get("working_directory") != str(ROOT.resolve()):
+        raise EvidenceFailure("runtime working directory does not match the evidence checkout")
+    git = start.get("git")
+    if not isinstance(git, Mapping) or git.get("available") is not True:
+        raise EvidenceFailure("runtime cannot establish its Git identity")
+    if git.get("head") != provenance.get("head"):
+        raise EvidenceFailure("runtime Git HEAD does not match the evidence checkout")
+    if git.get("branch") != provenance.get("branch"):
+        raise EvidenceFailure("runtime Git branch does not match the evidence checkout")
+    if git.get("worktree_clean") is not True or provenance.get("worktree_clean") is not True:
+        raise EvidenceFailure("runtime and evidence checkout must both start clean")
+    if not GIT_OBJECT_RE.fullmatch(str(git.get("head_tree", ""))):
+        raise EvidenceFailure("runtime Git tree is not content-addressed")
+    for field in ("status_sha256", "tracked_diff_sha256"):
+        if git.get(field) != provenance.get(field):
+            raise EvidenceFailure("runtime Git {} does not match the evidence checkout".format(field))
+    python = start.get("python")
+    launch = start.get("launch")
+    if not isinstance(python, Mapping) or not SHA256_RE.fullmatch(
+        str(python.get("executable_sha256", ""))
+    ):
+        raise EvidenceFailure("runtime Python executable is not content-addressed")
+    expected_python = Path(sys.executable).resolve()
+    if python.get("executable") != str(expected_python):
+        raise EvidenceFailure("runtime Python executable does not match the evidence harness")
+    if python.get("executable_sha256") != sha256_file(expected_python):
+        raise EvidenceFailure("runtime Python executable hash does not match the evidence harness")
+    if not isinstance(launch, Mapping) or not SHA256_RE.fullmatch(
+        str(launch.get("argv_sha256", ""))
+    ):
+        raise EvidenceFailure("runtime launch command is not content-addressed")
+    argv = launch.get("argv")
+    if not isinstance(argv, list) or not argv or not all(isinstance(item, str) for item in argv):
+        raise EvidenceFailure("runtime launch argv is missing or malformed")
+    argv_sha256 = hashlib.sha256("\0".join(argv).encode("utf-8")).hexdigest()
+    if launch.get("argv_sha256") != argv_sha256:
+        raise EvidenceFailure("runtime launch argv hash does not match its command")
+    expected_launcher = (ROOT / "tools" / "run_wizard_avatar_server.py").resolve()
+    if launch.get("launcher") != str(expected_launcher):
+        raise EvidenceFailure("runtime was not launched by the canonical server entry point")
+    if launch.get("launcher_sha256") != sha256_file(expected_launcher):
+        raise EvidenceFailure("runtime launcher hash does not match the evidence checkout")
+    server = start.get("server")
+    parsed = urllib.parse.urlsplit(base_url)
+    if not isinstance(server, Mapping) or server.get("port") != parsed.port:
+        raise EvidenceFailure("runtime server port does not match the capture endpoint")
+    if server.get("host") != parsed.hostname:
+        raise EvidenceFailure("runtime server host does not match the capture endpoint")
+    if server.get("companion_mode") is not False:
+        raise EvidenceFailure("visual evidence runtime must use isolated non-companion mode")
+    if init is not None:
+        render = start.get("render")
+        expected = {
+            "cols": init.cols,
+            "rows": init.rows,
+            "fps": init.fps,
+            "cell_bytes": init.cell_bytes,
+        }
+        if not isinstance(render, Mapping) or dict(render) != expected:
+            raise EvidenceFailure("runtime render configuration does not match ASCILINE INIT")
 
 
 def select_atomic_animation_trace(
@@ -763,6 +851,11 @@ async def write_frames(
                         "received_at_utc": frame.received_at_utc,
                         "elapsed_seconds": round(frame.received_monotonic - capture_started, 6),
                     }
+                )
+                records.decoded_raster_frames[frame.frame_index] = DecodedRasterFrameV1(
+                    cols=init.cols,
+                    rows=init.rows,
+                    cells=frame.cells,
                 )
                 wire_offset += wire_size
                 image = await asyncio.to_thread(
@@ -1161,7 +1254,43 @@ def validate_manifest(manifest: Mapping[str, Any], output_dir: Optional[Path] = 
             "invalid {}".format(field),
         )
 
+    runtime_binding = manifest.get("runtime_binding")
+    _manifest_error(isinstance(runtime_binding, Mapping), "manifest requires runtime binding")
+    _manifest_error(isinstance(runtime_binding.get("verified"), bool), "invalid runtime binding status")
+    start_identity = runtime_binding.get("start")
+    end_identity = runtime_binding.get("end")
+    _manifest_error(
+        start_identity is None or isinstance(start_identity, Mapping),
+        "invalid starting runtime identity",
+    )
+    _manifest_error(
+        end_identity is None or isinstance(end_identity, Mapping),
+        "invalid ending runtime identity",
+    )
+
     if valid:
+        _manifest_error(runtime_binding["verified"] is True, "valid evidence requires verified runtime binding")
+        try:
+            validate_runtime_binding(
+                start_identity,
+                end_identity,
+                provenance,
+                runtime_binding.get("base_url", ""),
+                InitMetadata(
+                    "manifest",
+                    init["fps"],
+                    5,
+                    init["cols"],
+                    init["rows"],
+                    0,
+                    0,
+                    0.0,
+                    init["cell_bytes"],
+                    {},
+                ),
+            )
+        except (EvidenceFailure, TypeError, ValueError) as exc:
+            raise ManifestValidationError("runtime binding validation failed: {}".format(exc)) from exc
         _manifest_error(manifest["dropped_frames"] == 0, "valid evidence must have zero dropped frames")
         _manifest_error(queue["overrun_count"] == 0, "valid evidence cannot have queue overruns")
         _manifest_error(not gaps, "valid evidence cannot have decoded gaps")
@@ -1205,6 +1334,7 @@ def build_manifest(
     contact_sheet_path: Optional[Path],
     output_dir: Path,
     provenance: Mapping[str, Any],
+    runtime_binding: Mapping[str, Any],
 ) -> Dict[str, Any]:
     ranges = scenario_ranges(scenarios, records.frames)
     if integrity.valid and not records.frames:
@@ -1241,6 +1371,7 @@ def build_manifest(
             "HTTP state snapshots remain time-adjacent diagnostics only."
         ),
         "provenance": dict(provenance),
+        "runtime_binding": dict(runtime_binding),
         "init": init.to_manifest(),
         "timings": {
             "started_at_utc": capture_started_utc,
@@ -1322,7 +1453,7 @@ async def run_visual_review(
     output_dir = output_dir.resolve()
     provenance = collect_git_provenance()
     output_dir.mkdir(parents=True, exist_ok=True)
-    ws_url, command_url, state_url, animation_trace_url = runtime_urls(base_url)
+    ws_url, command_url, state_url, animation_trace_url, runtime_identity_url = runtime_urls(base_url)
     source_epoch = "visual-review-{}".format(uuid.uuid4().hex[:12])
     run_id = source_epoch
     records = CaptureRecords()
@@ -1340,8 +1471,18 @@ async def run_visual_review(
     artifacts: List[Dict[str, Any]] = []
     receiver_task: Optional[asyncio.Task] = None
     writer_task: Optional[asyncio.Task] = None
+    runtime_identity_start: Optional[Dict[str, Any]] = None
+    runtime_identity_end: Optional[Dict[str, Any]] = None
+    runtime_binding_error: Optional[str] = None
 
     try:
+        runtime_identity_start, _ = await request_json_async("GET", runtime_identity_url)
+        validate_runtime_binding(
+            runtime_identity_start,
+            runtime_identity_start,
+            provenance,
+            base_url,
+        )
         async with websockets.connect(
             ws_url,
             max_size=16 * 1024 * 1024,
@@ -1434,6 +1575,21 @@ async def run_visual_review(
             except Exception as exc:
                 integrity.invalidate(str(exc))
 
+    try:
+        runtime_identity_end, _ = await request_json_async("GET", runtime_identity_url)
+        if runtime_identity_start is None:
+            raise EvidenceFailure("starting runtime identity was not captured")
+        validate_runtime_binding(
+            runtime_identity_start,
+            runtime_identity_end,
+            provenance,
+            base_url,
+            init,
+        )
+    except Exception as exc:
+        runtime_binding_error = "{}: {}".format(type(exc).__name__, exc)
+        integrity.invalidate("runtime binding failed: {}".format(exc))
+
     if init is None:
         # A failed handshake still emits a structurally inspectable invalid manifest.
         init = InitMetadata("INIT:0:5:1:1:0:0:0", 1.0, 5, 1, 1, 0, 0, 0.0, CELL_BYTES, {})
@@ -1489,8 +1645,12 @@ async def run_visual_review(
                 encoding="utf-8",
             )
             contact_report = verify_contact_trace(
-                AnimationTruthTraceV1.from_mapping(record)
-                for record in records.animation_truth_trace
+                (
+                    AnimationTruthTraceV1.from_mapping(record)
+                    for record in records.animation_truth_trace
+                ),
+                decoded_frames=records.decoded_raster_frames,
+                strict_raster_evidence=True,
             )
             records.contact_verification = contact_report.to_mapping()
             records.contact_verification["path"] = "contact_verification.json"
@@ -1537,6 +1697,13 @@ async def run_visual_review(
         )
 
     capture_ended = time.perf_counter()
+    runtime_binding = {
+        "verified": runtime_binding_error is None,
+        "failure_reason": runtime_binding_error,
+        "base_url": base_url,
+        "start": runtime_identity_start,
+        "end": runtime_identity_end,
+    }
     manifest = build_manifest(
         integrity,
         init,
@@ -1554,6 +1721,7 @@ async def run_visual_review(
         contact_path,
         output_dir,
         provenance,
+        runtime_binding,
     )
     try:
         validate_manifest(manifest, output_dir)
@@ -1577,6 +1745,7 @@ async def run_visual_review(
                 contact_path,
                 output_dir,
                 provenance,
+                runtime_binding,
             )
             validate_manifest(manifest, output_dir)
         else:

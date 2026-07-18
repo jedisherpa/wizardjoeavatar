@@ -6,7 +6,7 @@ import hashlib
 import math
 import struct
 import threading
-from collections import Counter
+from collections import Counter, deque
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Optional, Tuple
@@ -15,6 +15,7 @@ from .character_package import WIZARD_JOE_PACKAGE_PATH, load_character_package
 from .animation_trace import (
     ANIMATION_TRUTH_TRACE_SCHEMA,
     ANIMATION_TRUTH_TRACE_VERSION,
+    AnimationMarkerEventV1,
     AnimationTruthTraceV1,
     LocalPointV1,
     StagePointV1,
@@ -80,6 +81,15 @@ MEMORY_NOTEBOOK_COVER = (31, 101, 112)
 MEMORY_NOTEBOOK_EDGE = (22, 45, 52)
 MEMORY_NOTEBOOK_PAPER = (241, 230, 190)
 MEMORY_NOTEBOOK_ARCHIVE = (218, 166, 54)
+PRESENTATION_MARKER_IDS = frozenset(
+    {
+        "action_commit",
+        "action_effect",
+        "action_recoverable",
+        "action_settled",
+    }
+)
+PRESENTATION_MARKER_DEDUP_CAPACITY = 256
 
 
 @dataclass(frozen=True)
@@ -94,6 +104,7 @@ class WizardPresentationSnapshot:
     contact_anchor: Optional[str] = None
     contact_lock_stage: Optional[Tuple[float, float]] = None
     contact_root_offset: Tuple[float, float] = (0.0, 0.0)
+    consumed_marker_events: Tuple[AnimationMarkerEventV1, ...] = ()
 
 
 @dataclass(frozen=True)
@@ -106,6 +117,7 @@ class WizardRenderSnapshot:
     frame_index: int = 0
     previous_encoded_frame: Optional[bytes] = None
     encoder_generation: int = 0
+    pending_marker_events: Tuple[AnimationMarkerEventV1, ...] = ()
     presentation: WizardPresentationSnapshot = field(
         default_factory=lambda: WizardPresentationSnapshot(
             0,
@@ -207,6 +219,10 @@ class ProceduralWizardFrameSource:
         self._contact_anchor: Optional[str] = None
         self._contact_lock_stage: Optional[Tuple[float, float]] = None
         self._contact_root_offset = (0.0, 0.0)
+        self._pending_presentation_marker_events: list[AnimationMarkerEventV1] = []
+        self._observed_presentation_marker_keys: deque[tuple[object, ...]] = deque()
+        self._observed_presentation_marker_key_set: set[tuple[object, ...]] = set()
+        self._last_marker_observation_tick = -1
         self._initialize_authoritative_animation_state()
 
     def _initialize_authoritative_animation_state(self) -> None:
@@ -273,6 +289,55 @@ class ProceduralWizardFrameSource:
         if current_contact != previous_contact:
             state.animation_contact_generation += 1
             state.animation_contact_started_tick = state.simulation_tick
+        self._latch_presentation_markers(state)
+
+    def _latch_presentation_markers(self, state: WizardState) -> None:
+        """Retain transient authored events until one frame accepts them."""
+
+        markers = tuple(
+            marker
+            for marker in state.animation_active_markers
+            if marker in PRESENTATION_MARKER_IDS
+        )
+        with self._presentation_lock:
+            if state.simulation_tick < self._last_marker_observation_tick:
+                self._pending_presentation_marker_events.clear()
+                self._observed_presentation_marker_keys.clear()
+                self._observed_presentation_marker_key_set.clear()
+            self._last_marker_observation_tick = state.simulation_tick
+            for marker_id in markers:
+                key = (
+                    marker_id,
+                    state.simulation_tick,
+                    state.state_revision,
+                    state.animation_clip_id,
+                    state.animation_clip_tick,
+                    state.animation_authored_frame,
+                )
+                if key in self._observed_presentation_marker_key_set:
+                    continue
+                event = AnimationMarkerEventV1(
+                    marker_id=marker_id,
+                    simulation_tick=state.simulation_tick,
+                    state_revision=state.state_revision,
+                    animation_node_id=state.animation_node_id,
+                    animation_clip_id=state.animation_clip_id,
+                    animation_clip_tick=state.animation_clip_tick,
+                    animation_sample_index=state.animation_sample_index,
+                    animation_sample_frame=state.animation_sample_frame,
+                    animation_authored_frame=state.animation_authored_frame,
+                    animation_phase_numerator=state.animation_phase_numerator,
+                    animation_phase_denominator=state.animation_phase_denominator,
+                )
+                self._pending_presentation_marker_events.append(event)
+                self._observed_presentation_marker_keys.append(key)
+                self._observed_presentation_marker_key_set.add(key)
+                while (
+                    len(self._observed_presentation_marker_keys)
+                    > PRESENTATION_MARKER_DEDUP_CAPACITY
+                ):
+                    expired = self._observed_presentation_marker_keys.popleft()
+                    self._observed_presentation_marker_key_set.discard(expired)
 
     async def next_frame(self) -> WizardCellFrame:
         await asyncio.sleep(0)
@@ -321,6 +386,7 @@ class ProceduralWizardFrameSource:
             frame_index=self.frame_index,
             previous_encoded_frame=self._prev_encoded_frame,
             encoder_generation=self._encoder_generation,
+            pending_marker_events=tuple(self._pending_presentation_marker_events),
             presentation=WizardPresentationSnapshot(
                 generation=self._presentation_generation,
                 display_pose_id=self._display_pose_id,
@@ -511,6 +577,7 @@ class ProceduralWizardFrameSource:
             contact_anchor=contact_anchor,
             contact_lock_stage=contact_lock_stage,
             contact_root_offset=contact_root_offset,
+            consumed_marker_events=snapshot.pending_marker_events,
         )
         planted_anchor_local = None
         planted_anchor_stage = None
@@ -564,6 +631,10 @@ class ProceduralWizardFrameSource:
             and permission_world.motion_profile != "full"
         ):
             effect_intensity = 0.0
+        presented_active_markers = list(state.animation_active_markers)
+        for event in snapshot.pending_marker_events:
+            if event.marker_id not in presented_active_markers:
+                presented_active_markers.append(event.marker_id)
         animation_truth = AnimationTruthTraceV1(
             schema=ANIMATION_TRUTH_TRACE_SCHEMA,
             schema_version=ANIMATION_TRUTH_TRACE_VERSION,
@@ -584,7 +655,8 @@ class ProceduralWizardFrameSource:
             animation_root_policy=state.animation_root_policy,
             support_contact=state.animation_support_contact,
             planted_anchor=state.animation_planted_anchor,
-            active_markers=tuple(state.animation_active_markers),
+            active_markers=tuple(presented_active_markers),
+            presentation_marker_events=snapshot.pending_marker_events,
             contact_generation=state.animation_contact_generation,
             contact_started_tick=state.animation_contact_started_tick,
             world_root_x=state.world_position["x"],
@@ -1264,6 +1336,7 @@ class ProceduralWizardFrameSource:
             frame_index=state.frame_index,
             previous_encoded_frame=state.previous_encoded_frame,
             encoder_generation=state.encoder_generation,
+            pending_marker_events=state.pending_marker_events,
             presentation=state.presentation,
         )
         frame, presentation, animation_truth = self._render_snapshot(worker_snapshot)
@@ -1361,6 +1434,13 @@ class ProceduralWizardFrameSource:
         self._contact_anchor = presentation.contact_anchor
         self._contact_lock_stage = presentation.contact_lock_stage
         self._contact_root_offset = presentation.contact_root_offset
+        consumed = set(presentation.consumed_marker_events)
+        if consumed:
+            self._pending_presentation_marker_events = [
+                event
+                for event in self._pending_presentation_marker_events
+                if event not in consumed
+            ]
         self._presentation_generation = presentation.generation
 
     @property

@@ -532,6 +532,28 @@ class WizardFrameHub:
                         continue
                 if message is None or frame is None:
                     raise RuntimeError("render candidate committed without a transport frame")
+                if self._force_keyframe:
+                    forced = encode_keyframe(frame.cells, frame.frame_index)
+                    message = forced.message
+                    self._force_keyframe = False
+                    self._forced_keyframe_count += 1
+                    frame = dataclass_replace(
+                        frame,
+                        changed_cells=forced.changed_cells,
+                        codec_tag=forced.tag,
+                        encoded_size=forced.encoded_size,
+                        is_keyframe=forced.is_keyframe,
+                    )
+                    if render_candidate is not None:
+                        render_candidate = dataclass_replace(
+                            render_candidate,
+                            animation_truth=render_candidate.animation_truth.with_transport(
+                                codec_tag=forced.tag,
+                                encoded_size=forced.encoded_size,
+                                changed_cells=forced.changed_cells,
+                                is_keyframe=forced.is_keyframe,
+                            ),
+                        )
                 self._latest_frame = frame
                 self._source_hash_history.append(
                     {
@@ -546,21 +568,6 @@ class WizardFrameHub:
                         "raw_size": frame.raw_size,
                     }
                 )
-                if self._force_keyframe:
-                    forced = encode_keyframe(frame.cells, frame.frame_index)
-                    message = forced.message
-                    self._force_keyframe = False
-                    self._forced_keyframe_count += 1
-                    if render_candidate is not None:
-                        render_candidate = dataclass_replace(
-                            render_candidate,
-                            animation_truth=render_candidate.animation_truth.with_transport(
-                                codec_tag=forced.tag,
-                                encoded_size=forced.encoded_size,
-                                changed_cells=forced.changed_cells,
-                                is_keyframe=forced.is_keyframe,
-                            ),
-                        )
                 if render_candidate is not None:
                     self._animation_truth_trace.append(render_candidate.animation_truth)
             self._published_frames += 1
@@ -748,10 +755,13 @@ class WizardFrameHub:
                 self._queue_drops += 1
                 subscriber.dropped_frame_count += 1
                 self._clear_queue(subscriber.queue)
-                if self._latest_frame is not None:
-                    subscriber.queue.put_nowait(
-                        encode_keyframe(self._latest_frame.cells, self._latest_frame.frame_index).message
-                    )
+                subscriber.resync_count += 1
+                self._resync_count += 1
+                # Recovery rejoins the one global publication stream. Do not
+                # synthesize a subscriber-only encoding of the latest frame:
+                # the next accepted frame is committed as a keyframe, traced
+                # once, and offered unchanged to every recipient.
+                self._force_keyframe = True
 
     def _current_lock(self) -> asyncio.Lock:
         loop = asyncio.get_running_loop()

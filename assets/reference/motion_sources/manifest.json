@@ -1,5 +1,5 @@
 {
-  "version": 81,
+  "version": 82,
   "asset_set_id": "wizardjoe-reference-motion-v1",
   "description": "Source pose PNGs for the repeatable WizardJoe square-cell pose library.",
   "canonical": {
@@ -139,7 +139,13 @@
         "walk",
         "left_foot_lead",
         "wings"
-      ]
+      ],
+      "anchor_offsets": {
+        "left_foot": [
+          0,
+          -3
+        ]
+      }
     },
     {
       "id": "walk_front_right",
@@ -156,7 +162,13 @@
         "walk",
         "right_foot_lead",
         "wings"
-      ]
+      ],
+      "anchor_offsets": {
+        "right_foot": [
+          3,
+          -3
+        ]
+      }
     },
     {
       "id": "back_left",

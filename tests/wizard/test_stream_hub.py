@@ -7,9 +7,9 @@ from unittest import mock
 
 from wizard_avatar.frame_source import ProceduralWizardFrameSource
 from wizard_avatar.models import WizardCellFrame, WizardCommand, WizardState
-from wizard_avatar.protocol import TAG_DELTA, decode_frame
+from wizard_avatar.protocol import TAG_DELTA, decode_frame, encode_frame
 from wizard_avatar.permission_world import CapabilityPermissionV1, PermissionWorldStateV1
-from wizard_avatar.stream import WizardFrameHub
+from wizard_avatar.stream import WizardFrameHub, WizardSubscriber
 
 
 _REAL_ASYNCIO_SLEEP = asyncio.sleep
@@ -392,18 +392,122 @@ class StreamHubTests(unittest.IsolatedAsyncioTestCase):
             hub.unsubscribe(second)
             await hub.stop()
 
-    async def test_resync_enqueues_keyframe_for_one_subscriber(self):
+    async def test_resync_requests_one_global_keyframe_publication(self):
         hub = WizardFrameHub(ProceduralWizardFrameSource(fps=24))
-        subscriber = await hub.subscribe()
+        recovering = await hub.subscribe()
+        current = await hub.subscribe()
         try:
-            await asyncio.wait_for(subscriber.queue.get(), timeout=1.0)
-            await hub.enqueue_keyframe(subscriber)
-            message = await asyncio.wait_for(subscriber.queue.get(), timeout=1.0)
-            self.assertNotEqual(message[4], TAG_DELTA)
-            _, decoded = decode_frame(message, None)
+            await asyncio.wait_for(recovering.queue.get(), timeout=1.0)
+            await asyncio.wait_for(current.queue.get(), timeout=1.0)
+            await hub.enqueue_keyframe(recovering)
+            recovered_message = await asyncio.wait_for(
+                recovering.queue.get(),
+                timeout=1.0,
+            )
+            recovered_index, decoded = decode_frame(recovered_message, None)
+            while True:
+                current_message = await asyncio.wait_for(
+                    current.queue.get(),
+                    timeout=1.0,
+                )
+                current_index = int.from_bytes(current_message[:4], "big")
+                if current_index >= recovered_index:
+                    break
+
+            self.assertEqual(current_index, recovered_index)
+            self.assertEqual(current_message, recovered_message)
+            self.assertNotEqual(recovered_message[4], TAG_DELTA)
             self.assertEqual(len(decoded), 240 * 135 * 4)
         finally:
-            hub.unsubscribe(subscriber)
+            hub.unsubscribe(recovering)
+            hub.unsubscribe(current)
+            await hub.stop()
+
+    async def test_queue_overflow_clears_stale_delta_without_private_reencode(self):
+        hub = WizardFrameHub(_CheapFrameSource(_FakeMonotonicClock(), ()))
+        subscriber = WizardSubscriber(asyncio.Queue(maxsize=1))
+        hub._subscribers.add(subscriber)
+        base = bytes(40)
+        first = bytearray(base)
+        first[0:4] = b"\x01\x01\x01\x01"
+        second = bytearray(first)
+        second[4:8] = b"\x02\x02\x02\x02"
+        stale_delta = encode_frame(bytes(first), base, 1).message
+        overflowing_delta = encode_frame(bytes(second), bytes(first), 2).message
+        self.assertEqual(stale_delta[4], TAG_DELTA)
+        self.assertEqual(overflowing_delta[4], TAG_DELTA)
+        subscriber.queue.put_nowait(stale_delta)
+
+        with mock.patch("wizard_avatar.stream.encode_keyframe") as encode_keyframe:
+            hub._publish(overflowing_delta)
+
+        self.assertTrue(subscriber.queue.empty())
+        self.assertTrue(hub._force_keyframe)
+        self.assertEqual(subscriber.dropped_frame_count, 1)
+        self.assertEqual(subscriber.resync_count, 1)
+        self.assertEqual(hub._queue_drops, 1)
+        self.assertEqual(hub._resync_count, 1)
+        encode_keyframe.assert_not_called()
+
+    async def test_overflow_rejoins_atomic_global_keyframe_and_trace_truth(self):
+        clock = _FakeMonotonicClock()
+        source = ProceduralWizardFrameSource(cols=80, rows=45, fps=10)
+        hub = WizardFrameHub(source)
+        slow = WizardSubscriber(asyncio.Queue(maxsize=1))
+        current = WizardSubscriber(asyncio.Queue(maxsize=8))
+        hub._subscribers.update((slow, current))
+        original_render = source.render_captured_candidate_sync
+
+        def render_three_frames(render_state, codec):
+            if source.frame_index == 3:
+                raise _FrameLoopComplete
+            return original_render(render_state, codec)
+
+        try:
+            with (
+                mock.patch("wizard_avatar.stream.time.perf_counter", clock.perf_counter),
+                mock.patch(
+                    "wizard_avatar.stream.time.perf_counter_ns",
+                    clock.perf_counter_ns,
+                ),
+                mock.patch("wizard_avatar.stream.asyncio.sleep", clock.sleep),
+                mock.patch.object(
+                    source,
+                    "render_captured_candidate_sync",
+                    side_effect=render_three_frames,
+                ),
+            ):
+                with self.assertRaises(_FrameLoopComplete):
+                    await hub._run()
+
+            current_messages = [current.queue.get_nowait() for _ in range(3)]
+            recovered_message = slow.queue.get_nowait()
+            self.assertEqual(recovered_message, current_messages[-1])
+            self.assertNotEqual(recovered_message[4], TAG_DELTA)
+
+            recovered_index, recovered_cells = decode_frame(recovered_message, None)
+            current_cells = None
+            current_index = -1
+            for message in current_messages:
+                current_index, current_cells = decode_frame(message, current_cells)
+            self.assertEqual(recovered_index, current_index)
+            self.assertEqual(recovered_cells, current_cells)
+
+            trace = hub._animation_truth_trace[-1]
+            self.assertEqual(trace.frame_index, recovered_index)
+            self.assertEqual(trace.codec_tag, recovered_message[4])
+            self.assertEqual(trace.encoded_size, len(recovered_message))
+            self.assertTrue(trace.is_keyframe)
+            self.assertEqual(hub._latest_frame.frame_index, recovered_index)
+            self.assertEqual(hub._latest_frame.codec_tag, trace.codec_tag)
+            self.assertEqual(hub._latest_frame.encoded_size, trace.encoded_size)
+            self.assertTrue(hub._latest_frame.is_keyframe)
+            self.assertEqual(hub._source_hash_history[-1]["codec_tag"], trace.codec_tag)
+            self.assertGreaterEqual(hub._forced_keyframe_count, 1)
+            self.assertEqual(hub._queue_drops, 1)
+            self.assertEqual(slow.resync_count, 1)
+        finally:
+            hub._subscribers.clear()
             await hub.stop()
 
     async def test_frame_loop_does_not_replay_missed_deadlines(self):

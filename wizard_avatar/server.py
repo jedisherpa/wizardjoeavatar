@@ -10,7 +10,7 @@ import os
 import time
 from contextlib import asynccontextmanager, suppress
 from pathlib import Path
-from typing import Any, Callable, Dict, Optional
+from typing import Any, Callable, Dict, Mapping, Optional
 from urllib.parse import urlsplit
 
 from .commanding import CommandEnvelopeV1, CommandValidationError
@@ -37,6 +37,7 @@ from .permission_world import (
     PermissionWorldStateV1,
 )
 from .stream import WizardFrameHub
+from .runtime_identity import build_runtime_identity
 
 try:
     from fastapi import Request as FastAPIRequest
@@ -127,6 +128,7 @@ def create_app(
     app_token: Optional[str] = None,
     shutdown_signal: Optional[Callable[[], Any]] = None,
     score_repository: Optional[CompiledScoreRepository] = None,
+    runtime_server_config: Optional[Mapping[str, Any]] = None,
 ):
     try:
         from fastapi import FastAPI, HTTPException, WebSocketDisconnect
@@ -141,6 +143,16 @@ def create_app(
             score_repository = CompiledScoreRepository(Path(score_root).expanduser())
     frame_hub = WizardFrameHub(frame_source, score_repository=score_repository)
     started_at_monotonic_ms = time.monotonic_ns() // 1_000_000
+    runtime_identity = build_runtime_identity(
+        ROOT,
+        render_config={
+            "cols": frame_source.cols,
+            "rows": frame_source.rows,
+            "fps": frame_source.fps,
+            "cell_bytes": 4,
+        },
+        server_config=runtime_server_config,
+    )
     if companion_mode is None:
         companion_mode = os.environ.get("WIZARD_COMPANION_MODE", "").lower() in {
             "1", "true", "yes", "on"
@@ -166,6 +178,7 @@ def create_app(
     app = FastAPI(title="WizardJoeAvatar", lifespan=lifespan)
     app.state.frame_hub = frame_hub
     app.state.shutdown_requested = False
+    app.state.runtime_identity = runtime_identity
 
     @app.middleware("http")
     async def local_runtime_security(request: FastAPIRequest, call_next: Callable[..., Any]):
@@ -393,6 +406,10 @@ def create_app(
     @app.get("/api/avatar/wizard/animation-trace")
     async def animation_trace():
         return await frame_hub.animation_truth_trace_snapshot()
+
+    @app.get("/api/avatar/wizard/runtime-identity")
+    async def runtime_identity_snapshot():
+        return runtime_identity
 
     @app.get("/api/avatar/wizard/replay")
     async def replay():

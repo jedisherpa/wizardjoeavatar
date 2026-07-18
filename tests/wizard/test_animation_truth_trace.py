@@ -6,10 +6,12 @@ from unittest import mock
 
 from wizard_avatar.animation_trace import (
     ANIMATION_TRUTH_TRACE_CAPACITY,
+    AnimationTruthTraceV1,
     transformed_anchor,
 )
 from wizard_avatar.compositor import CellCanvas
 from wizard_avatar.frame_source import ProceduralWizardFrameSource
+from wizard_avatar.models import WizardCommand
 from wizard_avatar.pose_compositor import blit_pose_scaled
 from wizard_avatar.server import create_app
 from wizard_avatar.stream import WizardFrameHub
@@ -18,6 +20,104 @@ from tests.wizard.test_media_session_server import asgi_request
 
 
 class AnimationTruthGeometryTests(unittest.TestCase):
+    def test_cast_markers_are_presented_once_in_order_at_24_fps(self):
+        source = ProceduralWizardFrameSource(cols=96, rows=54, fps=24)
+        result = source.apply_command_sync(
+            WizardCommand("action", {"action": "magic_cast", "duration_ms": 5000})
+        )
+        self.assertTrue(result.ok, result.message)
+
+        traces = []
+        presentation_accumulator = 0
+        for _ in range(60):
+            source.advance_simulation(1 / 60)
+            presentation_accumulator += 24
+            if presentation_accumulator < 60:
+                continue
+            presentation_accumulator -= 60
+            candidate = source.render_captured_candidate_sync(
+                source.capture_render_state()
+            )
+            source.commit_render_candidate(candidate)
+            traces.append(candidate.animation_truth)
+
+        expected = [
+            ("action_commit", 6),
+            ("action_effect", 7),
+            ("action_recoverable", 14),
+            ("action_settled", 17),
+        ]
+        events = [
+            (trace, event)
+            for trace in traces
+            for event in trace.presentation_marker_events
+        ]
+        self.assertEqual(
+            [(event.marker_id, event.animation_authored_frame) for _, event in events],
+            expected,
+        )
+        self.assertEqual(
+            [
+                marker
+                for trace in traces
+                for marker in trace.active_markers
+                if marker.startswith("action_")
+            ],
+            [marker for marker, _ in expected],
+        )
+        self.assertEqual(
+            [event.simulation_tick for _, event in events],
+            sorted(event.simulation_tick for _, event in events),
+        )
+        effect_trace = next(
+            trace
+            for trace, event in events
+            if event.marker_id == "action_effect"
+        )
+        settled_trace = next(
+            trace
+            for trace, event in events
+            if event.marker_id == "action_settled"
+        )
+        self.assertEqual(effect_trace.effect_phase, "stroke")
+        self.assertEqual(effect_trace.effect_intensity, 1.0)
+        self.assertEqual(settled_trace.effect_phase, "inactive")
+        self.assertEqual(settled_trace.effect_intensity, 0.0)
+        self.assertEqual(
+            AnimationTruthTraceV1.from_mapping(effect_trace.to_mapping()),
+            effect_trace,
+        )
+
+    def test_stale_candidate_does_not_consume_latched_marker(self):
+        source = ProceduralWizardFrameSource(cols=96, rows=54, fps=24)
+        result = source.apply_command_sync(
+            WizardCommand("action", {"action": "magic_cast", "duration_ms": 5000})
+        )
+        self.assertTrue(result.ok, result.message)
+
+        while "action_commit" not in source.current_state().animation_active_markers:
+            source.advance_simulation(1 / 60)
+        stale = source.render_captured_candidate_sync(source.capture_render_state())
+        self.assertEqual(
+            [event.marker_id for event in stale.animation_truth.presentation_marker_events],
+            ["action_commit"],
+        )
+
+        source.advance_simulation(1 / 60)
+        with self.assertRaisesRegex(ValueError, "stale render candidate authoritative state"):
+            source.commit_render_candidate(stale)
+
+        accepted = source.render_captured_candidate_sync(source.capture_render_state())
+        source.commit_render_candidate(accepted)
+        self.assertEqual(
+            [event.marker_id for event in accepted.animation_truth.presentation_marker_events],
+            ["action_commit"],
+        )
+
+        following = source.render_captured_candidate_sync(source.capture_render_state())
+        source.commit_render_candidate(following)
+        self.assertEqual(following.animation_truth.presentation_marker_events, ())
+
     def test_raster_anchor_span_matches_nearest_neighbor_blit(self):
         local = CellCanvas(5, 5)
         local.set(3, 2, "#", (1, 2, 3), "anchor")

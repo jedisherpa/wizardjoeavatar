@@ -3,6 +3,7 @@ import hashlib
 import struct
 import tempfile
 import unittest
+import sys
 from pathlib import Path
 
 from tools.run_character_director_visual_review import (
@@ -19,9 +20,15 @@ from tools.run_character_director_visual_review import (
     select_atomic_animation_trace,
     square_cell_image,
     validate_manifest,
+    validate_runtime_binding,
     validate_scenarios,
 )
 from wizard_avatar.protocol import TAG_RAW
+from wizard_avatar.frame_source import ProceduralWizardFrameSource
+from wizard_avatar.server import create_app
+
+
+ROOT = Path(__file__).resolve().parents[2]
 
 
 class InitParsingTests(unittest.TestCase):
@@ -103,10 +110,14 @@ class ScenarioSchemaTests(unittest.TestCase):
 
     def test_runtime_urls_include_atomic_animation_trace_endpoint(self):
         urls = runtime_urls("http://127.0.0.1:8875")
-        self.assertEqual(len(urls), 4)
+        self.assertEqual(len(urls), 5)
+        self.assertEqual(
+            urls[-2],
+            "http://127.0.0.1:8875/api/avatar/wizard/animation-trace",
+        )
         self.assertEqual(
             urls[-1],
-            "http://127.0.0.1:8875/api/avatar/wizard/animation-trace",
+            "http://127.0.0.1:8875/api/avatar/wizard/runtime-identity",
         )
 
     def test_atomic_trace_selection_requires_exact_frame_hash_and_codec(self):
@@ -172,11 +183,79 @@ class StrictCaptureTests(unittest.IsolatedAsyncioTestCase):
         self.assertEqual(decoder.previous_frame, b"abcdefgh")
 
 
+class RuntimeIdentityEndpointTests(unittest.IsolatedAsyncioTestCase):
+    async def test_runtime_identity_is_fixed_and_content_addressed(self):
+        app = create_app(
+            ProceduralWizardFrameSource(80, 45, 24.0),
+            runtime_server_config={"host": "127.0.0.1", "port": 8875},
+        )
+        route = next(
+            route
+            for route in app.routes
+            if getattr(route, "path", None) == "/api/avatar/wizard/runtime-identity"
+        )
+        first = await route.endpoint()
+        second = await route.endpoint()
+        self.assertEqual(first, second)
+        self.assertEqual(first["schema"], "wizard_runtime_identity_v1")
+        self.assertEqual(first["server"]["port"], 8875)
+        self.assertEqual(
+            first["render"],
+            {"cols": 80, "rows": 45, "fps": 24.0, "cell_bytes": 4},
+        )
+        self.assertRegex(first["python"]["executable_sha256"], r"^[0-9a-f]{64}$")
+        self.assertRegex(first["launch"]["argv_sha256"], r"^[0-9a-f]{64}$")
+        await app.state.frame_hub.stop()
+
+
 class ManifestValidationTests(unittest.TestCase):
+    @staticmethod
+    def runtime_identity(digest):
+        python = Path(sys.executable).resolve()
+        launcher = ROOT / "tools" / "run_wizard_avatar_server.py"
+        return {
+            "schema": "wizard_runtime_identity_v1",
+            "schema_version": 1,
+            "runtime_epoch": "runtime-test",
+            "pid": 123,
+            "started_at_utc": "2026-07-18T00:00:00Z",
+            "started_at_monotonic_ns": 123456,
+            "working_directory": str(ROOT),
+            "repository_root": str(ROOT),
+            "git": {
+                "available": True,
+                "head": digest,
+                "head_tree": digest,
+                "branch": "codex/character-director",
+                "worktree_clean": True,
+                "status_sha256": digest,
+                "tracked_diff_sha256": digest,
+            },
+            "python": {
+                "executable": str(python),
+                "executable_sha256": hashlib.sha256(python.read_bytes()).hexdigest(),
+            },
+            "launch": {
+                "argv": [str(launcher), "--port", "8875"],
+                "argv_sha256": hashlib.sha256(
+                    "\0".join([str(launcher), "--port", "8875"]).encode("utf-8")
+                ).hexdigest(),
+                "launcher": str(launcher),
+                "launcher_sha256": hashlib.sha256(launcher.read_bytes()).hexdigest(),
+            },
+            "server": {
+                "host": "127.0.0.1",
+                "port": 8875,
+                "companion_mode": False,
+            },
+            "render": {"cols": 1, "rows": 2, "fps": 24.0, "cell_bytes": 4},
+        }
+
     def valid_manifest(self):
         digest = "a" * 64
+        identity = self.runtime_identity(digest)
         return {
-            "schema_version": 1,
+            "schema_version": 2,
             "evidence_kind": "external_real_runtime_visual_review",
             "valid": True,
             "failure_reason": None,
@@ -189,6 +268,13 @@ class ManifestValidationTests(unittest.TestCase):
                 "status_sha256": digest,
                 "tracked_diff_sha256": digest,
                 "status_lines": [],
+            },
+            "runtime_binding": {
+                "verified": True,
+                "failure_reason": None,
+                "base_url": "http://127.0.0.1:8875",
+                "start": identity,
+                "end": identity,
             },
             "init": {
                 "fps": 24.0,
@@ -302,12 +388,38 @@ class ManifestValidationTests(unittest.TestCase):
             lambda value: value["queue"].update(overrun_count=1),
             lambda value: value["frames"][1].update(frame_index=12),
             lambda value: value.update(frame_state_pairing="atomic"),
+            lambda value: value["runtime_binding"].update(verified=False),
         ):
             invalid = self.valid_manifest()
             mutate(invalid)
             with self.subTest(invalid=invalid):
                 with self.assertRaises(ManifestValidationError):
                     validate_manifest(invalid)
+
+    def test_runtime_binding_rejects_commit_process_and_render_mismatch(self):
+        manifest = self.valid_manifest()
+        binding = manifest["runtime_binding"]
+        validate_runtime_binding(
+            binding["start"],
+            binding["end"],
+            manifest["provenance"],
+            binding["base_url"],
+        )
+        for mutate in (
+            lambda value: value["git"].update(head="b" * 64),
+            lambda value: value.update(runtime_epoch="different"),
+            lambda value: value["server"].update(port=9999),
+        ):
+            end = {key: (dict(value) if isinstance(value, dict) else value) for key, value in binding["end"].items()}
+            mutate(end)
+            with self.subTest(end=end):
+                with self.assertRaises(EvidenceFailure):
+                    validate_runtime_binding(
+                        binding["start"],
+                        end,
+                        manifest["provenance"],
+                        binding["base_url"],
+                    )
 
     def test_verifies_artifact_bytes_and_hashes_when_output_dir_is_supplied(self):
         manifest = self.valid_manifest()

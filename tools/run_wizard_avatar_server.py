@@ -62,6 +62,12 @@ def main() -> None:
         ProceduralWizardFrameSource(args.cols, args.rows, args.fps),
         companion_mode=companion_mode,
         shutdown_signal=shutdown_signal.request,
+        runtime_server_config={
+            "host": args.host,
+            "port": args.port,
+            "companion_mode": companion_mode,
+            "quiet": args.quiet,
+        },
     )
     server = uvicorn.Server(
         uvicorn.Config(
