@@ -2381,13 +2381,6 @@
           "markers": []
         },
         {
-          "pose_id": "front_staff_block_horizontal",
-          "duration_frames": 3,
-          "support_contact": "both_feet",
-          "planted_anchor": "left_foot",
-          "markers": []
-        },
-        {
           "pose_id": "front_staff_guard_windup",
           "duration_frames": 5,
           "support_contact": "both_feet",
@@ -2400,8 +2393,8 @@
           ]
         },
         {
-          "pose_id": "front_staff_block_horizontal",
-          "duration_frames": 2,
+          "pose_id": "front_staff_guard_low",
+          "duration_frames": 3,
           "support_contact": "both_feet",
           "planted_anchor": "left_foot",
           "markers": []

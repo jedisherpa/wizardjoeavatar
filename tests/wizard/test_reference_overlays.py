@@ -36,19 +36,19 @@ class ReferenceOverlayTests(unittest.TestCase):
                 by_authored_frame.setdefault(trace.animation_authored_frame, candidate)
             source.advance_simulation(1 / 60)
 
-        for frame in range(16):
+        for frame in range(14):
             self.assertEqual(by_authored_frame[frame].animation_truth.effect_intensity, 0.0)
-        for frame in range(16, 25):
+        for frame in range(14, 23):
             self.assertEqual(by_authored_frame[frame].animation_truth.effect_intensity, 1.0)
         self.assertEqual(
-            [by_authored_frame[frame].animation_truth.effect_intensity for frame in range(25, 30)],
+            [by_authored_frame[frame].animation_truth.effect_intensity for frame in range(23, 28)],
             [1.0, 0.8, 0.6, 0.4, 0.2],
         )
-        settled = by_authored_frame[30].animation_truth
+        settled = by_authored_frame[28].animation_truth
         self.assertEqual(settled.effect_intensity, 0.0)
         self.assertIn("action_settled", settled.active_markers)
 
-        onset = by_authored_frame[16]
+        onset = by_authored_frame[14]
         tip = onset.animation_truth.staff_tip_stage
         self.assertIsNotNone(tip)
         x, y = round(tip.x), round(tip.y)

@@ -96,7 +96,7 @@ class AnimationChannelTests(unittest.TestCase):
         self.assertEqual(committed.action, "magic_cast")
         self.assertIsNone(committed.speech_id)
 
-        run_ticks(source, 42)
+        run_ticks(source, 37)
         recovering = source.current_state()
         self.assertEqual(recovering.action, "magic_cast")
         self.assertIsNone(recovering.speech_id)

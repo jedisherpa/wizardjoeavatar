@@ -13,6 +13,7 @@ from wizard_avatar.pose_selection import (
     select_reference_pose_id,
     select_reference_pose_sample,
 )
+from wizard_avatar.reference_avatar import get_reference_pose
 
 
 AVAILABLE_POSES = {
@@ -613,9 +614,8 @@ class PoseSelectionTests(unittest.TestCase):
             [
                 "front_idle",
                 "front_staff_guard_low",
-                "front_staff_block_horizontal",
                 "front_staff_guard_windup",
-                "front_staff_block_horizontal",
+                "front_staff_guard_low",
                 "front_magic_staff_thrust",
                 "front_magic_staff_thrust",
                 "front_staff_guard_low",
@@ -623,7 +623,30 @@ class PoseSelectionTests(unittest.TestCase):
             ],
         )
         self.assertNotIn("magic_cast", [sample.pose_id for sample in clip.samples])
-        self.assertEqual(clip.total_frames, 34)
+        self.assertNotIn(
+            "front_staff_block_horizontal",
+            [sample.pose_id for sample in clip.samples],
+        )
+        self.assertEqual(clip.total_frames, 32)
+
+        staff_tip_offsets = []
+        for sample in clip.samples:
+            pose = get_reference_pose(sample.pose_id)
+            density = Fraction(*pose.presentation_scale)
+            staff_tip_offsets.append(
+                Fraction(pose.anchors["staff_tip"][0] - pose.root_anchor[0])
+                * density
+            )
+        self.assertLessEqual(
+            max(
+                abs(current - previous)
+                for previous, current in zip(
+                    staff_tip_offsets,
+                    staff_tip_offsets[1:],
+                )
+            ),
+            50,
+        )
 
     def test_nearest_contact_fallback_breaks_phase_ties_by_earliest_frame(self):
         graph = load_reference_animation_graph_v2()

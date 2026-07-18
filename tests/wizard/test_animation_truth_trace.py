@@ -42,10 +42,10 @@ class AnimationTruthGeometryTests(unittest.TestCase):
             traces.append(candidate.animation_truth)
 
         expected = [
-            ("action_commit", 13),
-            ("action_effect", 16),
-            ("action_recoverable", 25),
-            ("action_settled", 30),
+            ("action_commit", 10),
+            ("action_effect", 14),
+            ("action_recoverable", 23),
+            ("action_settled", 28),
         ]
         events = [
             (trace, event)
