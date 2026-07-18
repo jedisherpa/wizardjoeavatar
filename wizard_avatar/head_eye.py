@@ -106,9 +106,17 @@ def advance_head_eye(
             head_complete_tick=state.head_complete_tick,
             settle_until_tick=state.settle_until_tick,
         )
-        automatic_aim = (
-            EYE_AIM_LEFT if state.turn_direction > 0 else EYE_AIM_RIGHT
-        )
+        # Lead the turn only while the target remains outside the visible head
+        # sector. Once the authored head view reaches its target, re-center the
+        # eyes and use the remaining settle ticks as a stable fixation. Keeping
+        # the eyes pinned sideways through settle creates a conspicuous snap on
+        # the final tick even though the head has already arrived.
+        if sampled_facing == state.target_facing:
+            automatic_aim = EYE_AIM_CENTER
+        else:
+            automatic_aim = (
+                EYE_AIM_LEFT if state.turn_direction > 0 else EYE_AIM_RIGHT
+            )
 
     effective_aim = gaze_aim if gaze_authoritative else automatic_aim
     return next_state, HeadEyePresentation(

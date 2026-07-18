@@ -51,9 +51,34 @@ class HeadEyeCoordinatorTests(unittest.TestCase):
                 "steady",
             ],
         )
-        self.assertTrue(
-            all(frame.automatic_gaze_aim == EYE_AIM_LEFT for frame in frames[:-1])
+        self.assertEqual(
+            [frame.automatic_gaze_aim for frame in frames],
+            [
+                EYE_AIM_LEFT,
+                EYE_AIM_LEFT,
+                EYE_AIM_LEFT,
+                EYE_AIM_LEFT,
+                EYE_AIM_LEFT,
+                EYE_AIM_CENTER,
+                EYE_AIM_CENTER,
+                EYE_AIM_CENTER,
+            ],
         )
+
+    def test_eyes_recenter_when_head_arrives_before_settle_completes(self):
+        coordinator = HeadEyeCoordinator("south")
+
+        leading = coordinator.advance("west", 0)
+        arrived = coordinator.advance("west", 7)
+        settling = coordinator.advance("west", 10)
+
+        self.assertEqual(leading.phase, "leading")
+        self.assertEqual(leading.automatic_gaze_aim, EYE_AIM_LEFT)
+        self.assertEqual(arrived.presented_facing, "west")
+        self.assertEqual(arrived.phase, "turning")
+        self.assertEqual(arrived.automatic_gaze_aim, EYE_AIM_CENTER)
+        self.assertEqual(settling.phase, "settling")
+        self.assertEqual(settling.automatic_gaze_aim, EYE_AIM_CENTER)
 
     def test_turn_in_both_directions_uses_shortest_path(self):
         left = HeadEyeCoordinator("south").advance("west", 0)

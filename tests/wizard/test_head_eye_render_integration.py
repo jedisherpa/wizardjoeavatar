@@ -35,6 +35,10 @@ class HeadEyeRenderIntegrationTests(unittest.TestCase):
         self.assertEqual(samples[-1][1:3], ("north", "back_idle"))
         self.assertEqual(samples[-1][4], "steady")
 
+        target_arrival = next(item for item in samples if item[1] == "north")
+        self.assertEqual(target_arrival[3], 0)
+        self.assertIn(target_arrival[4], {"turning", "settling"})
+
         pose_sequence = []
         for _, _, pose_id, _, _ in samples:
             if not pose_sequence or pose_sequence[-1] != pose_id:
