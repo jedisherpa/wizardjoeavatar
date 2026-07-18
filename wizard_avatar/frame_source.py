@@ -270,6 +270,7 @@ class ProceduralWizardFrameSource:
         previous_contact = (
             state.animation_support_contact,
             state.animation_planted_anchor,
+            state.animation_root_policy,
         )
         state.animation_support_contact = sample.contact
         state.animation_planted_anchor = sample.planted_anchor
@@ -285,6 +286,7 @@ class ProceduralWizardFrameSource:
         current_contact = (
             state.animation_support_contact,
             state.animation_planted_anchor,
+            state.animation_root_policy,
         )
         if current_contact != previous_contact:
             state.animation_contact_generation += 1

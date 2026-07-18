@@ -128,6 +128,32 @@ class AnimationTruthGeometryTests(unittest.TestCase):
 
         self.assertEqual(decoded.presentation_marker_events, ())
 
+    def test_contact_generation_changes_when_root_policy_releases_lock(self):
+        source = ProceduralWizardFrameSource(cols=96, rows=54, fps=24)
+        source.apply_command_sync(
+            WizardCommand("move", {"x": 1.5, "z": 5.0, "speed": 1.0})
+        )
+        for _ in range(120):
+            source.advance_simulation(1 / 60)
+        source.apply_command_sync(WizardCommand("stop", {}))
+
+        previous = None
+        observed = None
+        for _ in range(120):
+            source.advance_simulation(1 / 60)
+            state = source.current_state()
+            current = (
+                state.animation_root_policy,
+                state.animation_contact_generation,
+            )
+            if previous is not None and previous[0] == "contact_locked" and current[0] == "fixed":
+                observed = (previous, current)
+                break
+            previous = current
+
+        self.assertIsNotNone(observed)
+        self.assertGreater(observed[1][1], observed[0][1])
+
     def test_raster_anchor_span_matches_nearest_neighbor_blit(self):
         local = CellCanvas(5, 5)
         local.set(3, 2, "#", (1, 2, 3), "anchor")
