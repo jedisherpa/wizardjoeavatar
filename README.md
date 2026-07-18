@@ -9,6 +9,9 @@ The project is designed around a server-authoritative, editable character assemb
 - [Codex goal entry point](CODEX_GOAL.md)
 - [Section index](docs/INDEX.md)
 - [Visual reference specification](assets/reference/README.md)
+- [Locomotion transition graphs](docs/character-director/LOCOMOTION_TRANSITION_GRAPHS.md)
+- [Authored turn continuity](docs/character-director/AUTHORED_TURN_CONTINUITY.md)
+- [Authored cast continuity](docs/character-director/AUTHORED_CAST_CONTINUITY.md)
 
 ## Core constraints
 
