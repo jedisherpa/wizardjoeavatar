@@ -23,6 +23,27 @@ def phase_runs(scheduler, ticks):
     return runs
 
 
+def presented_phase_runs(scheduler, ticks):
+    phases = []
+    accumulator = 0
+    for _ in range(ticks):
+        phase = scheduler.advance_tick()
+        accumulator += 24
+        if accumulator >= SIMULATION_HZ:
+            accumulator -= SIMULATION_HZ
+            phases.append(phase)
+    runs = []
+    closed = phases[0] >= OPEN_PHASE_LIMIT
+    run_start = 0
+    for index, phase in enumerate(phases[1:], start=1):
+        next_closed = phase >= OPEN_PHASE_LIMIT
+        if next_closed != closed:
+            runs.append((closed, index - run_start))
+            closed = next_closed
+            run_start = index
+    return runs
+
+
 class BlinkSchedulerTests(unittest.TestCase):
     def test_sequence_is_reproducible(self):
         first = BlinkScheduler()
@@ -51,6 +72,13 @@ class BlinkSchedulerTests(unittest.TestCase):
         self.assertTrue(
             all(0.1 * SIMULATION_HZ <= length <= 0.2 * SIMULATION_HZ for length in closure_ticks)
         )
+
+    def test_closures_present_for_three_to_four_frames_at_24_fps(self):
+        runs = presented_phase_runs(BlinkScheduler(), 60 * SIMULATION_HZ)
+        closure_frames = [length for closed, length in runs if closed]
+
+        self.assertGreater(len(closure_frames), 0)
+        self.assertTrue(all(3 <= length <= 4 for length in closure_frames))
 
     def test_reset_restarts_the_same_sequence(self):
         scheduler = BlinkScheduler()

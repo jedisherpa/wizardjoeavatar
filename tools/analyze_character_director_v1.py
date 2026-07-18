@@ -213,8 +213,8 @@ def analyze_v1(
         report,
         "two_blinks_with_bounded_closure",
         len(blink_runs) >= 2
-        and all(2 <= run <= 5 for run in blink_runs[:2])
-        and all(80.0 <= duration <= 220.0 for duration in blink_durations_ms[:2]),
+        and all(3 <= run <= 4 for run in blink_runs[:2])
+        and all(100.0 <= duration <= 200.0 for duration in blink_durations_ms[:2]),
         {"closed_frame_runs": blink_runs, "durations_ms": blink_durations_ms},
     )
 
@@ -294,4 +294,3 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
-

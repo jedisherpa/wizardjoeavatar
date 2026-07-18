@@ -43,9 +43,11 @@ class V1MachineAcceptanceTests(unittest.TestCase):
         add(EXPECTED_SCENARIOS[0], 0, False, False)
         add(EXPECTED_SCENARIOS[0], 0, False, True)
         add(EXPECTED_SCENARIOS[0], 0, False, True)
+        add(EXPECTED_SCENARIOS[0], 0, False, True)
         add(EXPECTED_SCENARIOS[1], -1, True, False)
         add(EXPECTED_SCENARIOS[1], -1, True, False)
         add(EXPECTED_SCENARIOS[2], 0, True, False)
+        add(EXPECTED_SCENARIOS[2], 0, True, True)
         add(EXPECTED_SCENARIOS[2], 0, True, True)
         add(EXPECTED_SCENARIOS[2], 0, True, True)
         add(EXPECTED_SCENARIOS[3], 0, False, False)
@@ -119,4 +121,3 @@ class V1MachineAcceptanceTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
-

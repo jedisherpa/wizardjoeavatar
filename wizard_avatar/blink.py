@@ -5,8 +5,11 @@ class BlinkScheduler:
     SIMULATION_HZ = 60
     MIN_OPEN_TICKS = 150
     MAX_OPEN_TICKS = 390
-    MIN_CLOSED_TICKS = 6
-    MAX_CLOSED_TICKS = 12
+    # Eight to ten simulation ticks keeps closures inside the 100-200 ms
+    # acting contract while guaranteeing three to four visible samples at the
+    # 24 FPS presentation cadence. Six ticks could alias down to two frames.
+    MIN_CLOSED_TICKS = 8
+    MAX_CLOSED_TICKS = 10
 
     def __init__(self, seed: int = 17) -> None:
         self.seed = seed & 0xFFFFFFFF
