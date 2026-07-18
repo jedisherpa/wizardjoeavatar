@@ -42,6 +42,9 @@ must remain labelled as planned.
   atomic staff-slice generation contract.
 - `AUTHORED_TURN_CONTINUITY.md`: eight-direction authored view mapping, turn
   timing contract, and clean runtime evidence.
+- `SPEECH_MOUTH_AUTHORITY.md`: aligned-versus-local mouth ownership,
+  phrase-relative fallback rhythm, presented diagnostics, and clean runtime
+  evidence.
 - `LIVE_E2E_2026-07-16.md`: isolated live connector, browser, and cursor-fix
   receipt with explicit evidence limits.
 - `FINAL_HANDOFF.md`: ordered 33-section implementation and acceptance handoff.
