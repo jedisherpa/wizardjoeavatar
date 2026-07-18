@@ -47,6 +47,12 @@ PAIRING_DESCRIPTION = "atomic_animation_truth_trace_v1"
 SHA256_RE = re.compile(r"^[0-9a-f]{64}$")
 GIT_OBJECT_RE = re.compile(r"^(?:[0-9a-f]{40}|[0-9a-f]{64})$")
 SCENARIO_NAME_RE = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
+SCENARIO_PROGRAM_SCHEMA = "character_director_scenario_program_v1"
+SCENARIO_PROGRAM_VERSION = 1
+SCENARIO_PROGRAM_MAX_BYTES = 64 * 1024
+SCENARIO_PROGRAM_MAX_STEPS = 64
+SCENARIO_PROGRAM_MAX_SECONDS = 10 * 60
+ACCEPTANCE_SCENARIO_RE = re.compile(r"^V(?:[1-9]|10)$")
 
 
 class EvidenceFailure(RuntimeError):
@@ -172,6 +178,82 @@ class Scenario:
 
     def to_mapping(self) -> Dict[str, Any]:
         return asdict(self)
+
+
+@dataclass(frozen=True)
+class ScenarioProgramV1:
+    schema: str
+    schema_version: int
+    program_id: str
+    acceptance_scenario: str
+    scenarios: Tuple[Scenario, ...]
+    source_sha256: str
+    source_bytes: bytes = field(repr=False, compare=False)
+
+    @property
+    def total_duration_seconds(self) -> float:
+        return sum(item.settle_seconds + item.capture_seconds for item in self.scenarios)
+
+    def to_manifest(self) -> Dict[str, Any]:
+        return {
+            "schema": self.schema,
+            "schema_version": self.schema_version,
+            "program_id": self.program_id,
+            "acceptance_scenario": self.acceptance_scenario,
+            "scenario_count": len(self.scenarios),
+            "total_duration_seconds": round(self.total_duration_seconds, 6),
+            "source_sha256": self.source_sha256,
+            "artifact_path": "scenario-program.json",
+        }
+
+
+def load_scenario_program(path: Path) -> ScenarioProgramV1:
+    try:
+        source = path.read_bytes()
+    except OSError as exc:
+        raise ValueError("cannot read scenario program: {}".format(exc)) from exc
+    if not source or len(source) > SCENARIO_PROGRAM_MAX_BYTES:
+        raise ValueError("scenario program must be between 1 and {} bytes".format(SCENARIO_PROGRAM_MAX_BYTES))
+    try:
+        raw = json.loads(source.decode("utf-8"))
+    except (UnicodeDecodeError, json.JSONDecodeError) as exc:
+        raise ValueError("scenario program must be UTF-8 JSON") from exc
+    required = {
+        "schema",
+        "schema_version",
+        "program_id",
+        "acceptance_scenario",
+        "scenarios",
+    }
+    if not isinstance(raw, Mapping) or set(raw) != required:
+        supplied = set(raw) if isinstance(raw, Mapping) else set()
+        raise ValueError(
+            "scenario program schema mismatch; missing={} unknown={}".format(
+                sorted(required.difference(supplied)),
+                sorted(supplied.difference(required)),
+            )
+        )
+    if raw["schema"] != SCENARIO_PROGRAM_SCHEMA or raw["schema_version"] != SCENARIO_PROGRAM_VERSION:
+        raise ValueError("unsupported scenario program schema or version")
+    if not isinstance(raw["program_id"], str) or not SCENARIO_NAME_RE.fullmatch(raw["program_id"]):
+        raise ValueError("scenario program_id must be a lowercase kebab-case identifier")
+    if not isinstance(raw["acceptance_scenario"], str) or not ACCEPTANCE_SCENARIO_RE.fullmatch(raw["acceptance_scenario"]):
+        raise ValueError("acceptance_scenario must be V1 through V10")
+    scenarios = validate_scenarios(raw["scenarios"])
+    if len(scenarios) > SCENARIO_PROGRAM_MAX_STEPS:
+        raise ValueError("scenario program exceeds the step limit")
+    total = sum(item.settle_seconds + item.capture_seconds for item in scenarios)
+    if total > SCENARIO_PROGRAM_MAX_SECONDS:
+        raise ValueError("scenario program exceeds the duration limit")
+    return ScenarioProgramV1(
+        schema=SCENARIO_PROGRAM_SCHEMA,
+        schema_version=SCENARIO_PROGRAM_VERSION,
+        program_id=raw["program_id"],
+        acceptance_scenario=raw["acceptance_scenario"],
+        scenarios=scenarios,
+        source_sha256=hashlib.sha256(source).hexdigest(),
+        source_bytes=source,
+    )
 
 
 def _duration(value: object, name: str, allow_zero: bool) -> float:
@@ -1256,6 +1338,58 @@ def validate_manifest(manifest: Mapping[str, Any], output_dir: Optional[Path] = 
         scenarios = validate_scenarios(raw_scenarios)
     except ValueError as exc:
         raise ManifestValidationError("invalid scenario schema: {}".format(exc)) from exc
+    scenario_program_summary = manifest.get("scenario_program")
+    if scenario_program_summary is not None:
+        expected_program_fields = {
+            "schema",
+            "schema_version",
+            "program_id",
+            "acceptance_scenario",
+            "scenario_count",
+            "total_duration_seconds",
+            "source_sha256",
+            "artifact_path",
+        }
+        _manifest_error(
+            isinstance(scenario_program_summary, Mapping)
+            and set(scenario_program_summary) == expected_program_fields,
+            "invalid scenario program summary",
+        )
+        _manifest_error(
+            scenario_program_summary.get("schema") == SCENARIO_PROGRAM_SCHEMA
+            and scenario_program_summary.get("schema_version") == SCENARIO_PROGRAM_VERSION,
+            "unsupported scenario program summary",
+        )
+        _manifest_error(
+            isinstance(scenario_program_summary.get("program_id"), str)
+            and bool(SCENARIO_NAME_RE.fullmatch(scenario_program_summary["program_id"])),
+            "invalid scenario program ID",
+        )
+        _manifest_error(
+            isinstance(scenario_program_summary.get("acceptance_scenario"), str)
+            and bool(ACCEPTANCE_SCENARIO_RE.fullmatch(scenario_program_summary["acceptance_scenario"])),
+            "invalid acceptance scenario",
+        )
+        _manifest_error(
+            scenario_program_summary.get("scenario_count") == len(scenarios),
+            "scenario program count mismatch",
+        )
+        expected_duration = round(
+            sum(item.settle_seconds + item.capture_seconds for item in scenarios),
+            6,
+        )
+        _manifest_error(
+            scenario_program_summary.get("total_duration_seconds") == expected_duration,
+            "scenario program duration mismatch",
+        )
+        _manifest_error(
+            bool(SHA256_RE.fullmatch(str(scenario_program_summary.get("source_sha256", "")))),
+            "invalid scenario program SHA-256",
+        )
+        _manifest_error(
+            scenario_program_summary.get("artifact_path") == "scenario-program.json",
+            "invalid scenario program artifact path",
+        )
 
     frames = manifest.get("frames")
     _manifest_error(isinstance(frames, list), "frames must be an array")
@@ -1381,6 +1515,28 @@ def validate_manifest(manifest: Mapping[str, Any], output_dir: Optional[Path] = 
                 required_path in artifact_paths,
                 "semantic replay artifact is not registered: {}".format(required_path),
             )
+        if scenario_program_summary is not None:
+            program_path = scenario_program_summary["artifact_path"]
+            _manifest_error(
+                program_path in artifact_paths,
+                "scenario program is not registered as an artifact",
+            )
+            if output_dir is not None:
+                try:
+                    loaded_program = load_scenario_program(output_dir / program_path)
+                except ValueError as exc:
+                    raise ManifestValidationError(
+                        "scenario program replay failed: {}".format(exc)
+                    ) from exc
+                _manifest_error(
+                    loaded_program.to_manifest() == dict(scenario_program_summary),
+                    "scenario program summary differs from its artifact",
+                )
+                _manifest_error(
+                    [item.to_mapping() for item in loaded_program.scenarios]
+                    == [item.to_mapping() for item in scenarios],
+                    "scenario program steps differ from the manifest",
+                )
 
     video = manifest.get("video")
     _manifest_error(isinstance(video, Mapping) and isinstance(video.get("available"), bool), "invalid video summary")
@@ -1491,6 +1647,7 @@ def build_manifest(
     output_dir: Path,
     provenance: Mapping[str, Any],
     runtime_binding: Mapping[str, Any],
+    scenario_program: Optional[ScenarioProgramV1],
 ) -> Dict[str, Any]:
     ranges = scenario_ranges(scenarios, records.frames)
     if integrity.valid and not records.frames:
@@ -1546,6 +1703,9 @@ def build_manifest(
         "decoder_errors": list(integrity.decoder_errors),
         "dropped_frames": dropped_frame_count(integrity, queue_stats),
         "scenarios": [scenario.to_mapping() for scenario in scenarios],
+        "scenario_program": (
+            None if scenario_program is None else scenario_program.to_manifest()
+        ),
         "scenario_ranges": ranges,
         "commands": records.commands,
         "state_snapshots": records.state_snapshots,
@@ -1603,6 +1763,7 @@ async def run_visual_review(
     cell_size: int = 4,
     sample_every_frames: int = 12,
     scenarios: Sequence[Scenario] = DEFAULT_SCENARIOS,
+    scenario_program: Optional[ScenarioProgramV1] = None,
 ) -> Tuple[Path, Dict[str, Any]]:
     if queue_capacity <= 0 or cell_size <= 0 or sample_every_frames <= 0:
         raise ValueError("queue capacity, cell size, and sample interval must be positive")
@@ -1610,6 +1771,12 @@ async def run_visual_review(
     output_dir = output_dir.resolve()
     provenance = collect_git_provenance()
     output_dir.mkdir(parents=True, exist_ok=True)
+    scenario_program_path: Optional[Path] = None
+    if scenario_program is not None:
+        if tuple(scenarios) != scenario_program.scenarios:
+            raise ValueError("scenario program and supplied scenarios disagree")
+        scenario_program_path = output_dir / "scenario-program.json"
+        scenario_program_path.write_bytes(scenario_program.source_bytes)
     ws_url, command_url, state_url, animation_trace_url, runtime_identity_url = runtime_urls(base_url)
     source_epoch = "visual-review-{}".format(uuid.uuid4().hex[:12])
     run_id = source_epoch
@@ -1854,6 +2021,14 @@ async def run_visual_review(
                 "application/json",
             )
         )
+    if scenario_program_path is not None and scenario_program_path.is_file():
+        artifacts.append(
+            artifact_record(
+                scenario_program_path,
+                output_dir,
+                "application/json",
+            )
+        )
 
     capture_ended = time.perf_counter()
     runtime_binding = {
@@ -1881,6 +2056,7 @@ async def run_visual_review(
         output_dir,
         provenance,
         runtime_binding,
+        scenario_program,
     )
     try:
         validate_manifest(manifest, output_dir)
@@ -1905,6 +2081,7 @@ async def run_visual_review(
                 output_dir,
                 provenance,
                 runtime_binding,
+                scenario_program,
             )
             validate_manifest(manifest, output_dir)
         else:
@@ -1924,6 +2101,7 @@ def parse_args(argv: Optional[Sequence[str]] = None) -> argparse.Namespace:
     parser.add_argument("--queue-capacity", type=int, default=16)
     parser.add_argument("--cell-size", type=int, default=4)
     parser.add_argument("--sample-every-frames", type=int, default=12)
+    parser.add_argument("--scenarios-file", type=Path)
     args = parser.parse_args(argv)
     if args.queue_capacity <= 0:
         parser.error("--queue-capacity must be positive")
@@ -1931,11 +2109,24 @@ def parse_args(argv: Optional[Sequence[str]] = None) -> argparse.Namespace:
         parser.error("--cell-size must be positive")
     if args.sample_every_frames <= 0:
         parser.error("--sample-every-frames must be positive")
+    try:
+        args.scenario_program = (
+            None
+            if args.scenarios_file is None
+            else load_scenario_program(args.scenarios_file)
+        )
+    except ValueError as exc:
+        parser.error(str(exc))
     return args
 
 
 def main(argv: Optional[Sequence[str]] = None) -> int:
     args = parse_args(argv)
+    scenarios = (
+        DEFAULT_SCENARIOS
+        if args.scenario_program is None
+        else args.scenario_program.scenarios
+    )
     manifest_path, manifest = asyncio.run(
         run_visual_review(
             args.base_url,
@@ -1943,6 +2134,8 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
             queue_capacity=args.queue_capacity,
             cell_size=args.cell_size,
             sample_every_frames=args.sample_every_frames,
+            scenarios=scenarios,
+            scenario_program=args.scenario_program,
         )
     )
     print(manifest_path)

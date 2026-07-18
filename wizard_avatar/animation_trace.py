@@ -48,6 +48,56 @@ class AnimationMarkerEventV1:
 
 
 @dataclass(frozen=True)
+class PresentationChannelsV1:
+    """Face and acting channels painted into the paired presentation frame."""
+
+    head_eye_phase: str
+    gaze_aim: int
+    gaze_vertical_aim: int
+    gaze_authoritative: bool
+    blink_closed: bool
+    expression: str
+    rendered_mouth_shape: str
+    speech_mouth_authority: str
+    locomotion: str
+    action: str
+
+    @classmethod
+    def from_mapping(cls, value: Mapping[str, Any]) -> "PresentationChannelsV1":
+        expected = {item.name for item in fields(cls)}
+        supplied = set(value) if isinstance(value, Mapping) else set()
+        if not isinstance(value, Mapping) or supplied != expected:
+            raise ValueError(
+                "invalid presentation channel fields: missing={} extra={}".format(
+                    sorted(expected.difference(supplied)),
+                    sorted(supplied.difference(expected)),
+                )
+            )
+        result = cls(**dict(value))
+        if result.head_eye_phase not in {"steady", "leading", "turning", "settling"}:
+            raise ValueError("unsupported head-eye phase")
+        for name in ("gaze_aim", "gaze_vertical_aim"):
+            aim = getattr(result, name)
+            if isinstance(aim, bool) or aim not in {-1, 0, 1}:
+                raise ValueError("{} must be -1, 0, or 1".format(name))
+        if not isinstance(result.gaze_authoritative, bool):
+            raise ValueError("gaze_authoritative must be boolean")
+        if not isinstance(result.blink_closed, bool):
+            raise ValueError("blink_closed must be boolean")
+        for name in (
+            "expression",
+            "rendered_mouth_shape",
+            "speech_mouth_authority",
+            "locomotion",
+            "action",
+        ):
+            item = getattr(result, name)
+            if not isinstance(item, str) or not item or len(item) > 128:
+                raise ValueError("{} must be bounded non-empty text".format(name))
+        return result
+
+
+@dataclass(frozen=True)
 class AnimationTruthTraceV1:
     """Atomic provenance for one accepted ASCILINE presentation frame."""
 
@@ -93,6 +143,7 @@ class AnimationTruthTraceV1:
     effect_phase: str
     effect_intensity: float
     presented_facing: str
+    presentation_channels: Optional[PresentationChannelsV1]
     frame_sha256: str
     frame_fnv1a32: str
     codec_tag: int
@@ -107,10 +158,17 @@ class AnimationTruthTraceV1:
     def from_mapping(cls, value: Mapping[str, Any]) -> "AnimationTruthTraceV1":
         expected = {item.name for item in fields(cls)}
         supplied = set(value)
-        backward_compatible_missing = supplied == expected.difference(
-            {"presentation_marker_events"}
-        )
-        if supplied != expected and not backward_compatible_missing:
+        compatible_field_sets = {
+            frozenset(expected),
+            frozenset(expected.difference({"presentation_marker_events"})),
+            frozenset(expected.difference({"presentation_channels"})),
+            frozenset(
+                expected.difference(
+                    {"presentation_marker_events", "presentation_channels"}
+                )
+            ),
+        }
+        if frozenset(supplied) not in compatible_field_sets:
             missing = sorted(expected.difference(supplied))
             extra = sorted(set(value).difference(expected))
             raise ValueError(
@@ -122,10 +180,15 @@ class AnimationTruthTraceV1:
         payload = dict(value)
         payload["active_markers"] = tuple(payload["active_markers"])
         payload.setdefault("presentation_marker_events", ())
+        payload.setdefault("presentation_channels", None)
         payload["presentation_marker_events"] = tuple(
             AnimationMarkerEventV1(**event)
             for event in payload["presentation_marker_events"]
         )
+        if payload["presentation_channels"] is not None:
+            payload["presentation_channels"] = PresentationChannelsV1.from_mapping(
+                payload["presentation_channels"]
+            )
         for name in (
             "semantic_root_stage",
             "contact_root_offset_stage",

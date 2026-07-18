@@ -16,6 +16,7 @@ from tools.run_character_director_visual_review import (
     QueueStats,
     StrictFrameDecoder,
     enqueue_decoded_frame,
+    load_scenario_program,
     parse_init,
     runtime_urls,
     select_atomic_animation_trace,
@@ -109,6 +110,49 @@ class ScenarioSchemaTests(unittest.TestCase):
     def test_protected_legacy_port_is_never_a_capture_target(self):
         with self.assertRaisesRegex(ValueError, "never contact protected port 8765"):
             runtime_urls("http://127.0.0.1:8765")
+
+    def test_loads_versioned_bounded_scenario_program(self):
+        program = load_scenario_program(
+            ROOT / "tools" / "character_director_scenarios" / "v1-listening.json"
+        )
+
+        self.assertEqual(program.program_id, "v1-listening")
+        self.assertEqual(program.acceptance_scenario, "V1")
+        self.assertEqual(len(program.scenarios), 5)
+        self.assertEqual(program.total_duration_seconds, 12.0)
+        self.assertRegex(program.source_sha256, r"^[0-9a-f]{64}$")
+        self.assertEqual(program.to_manifest()["artifact_path"], "scenario-program.json")
+
+    def test_rejects_unversioned_or_unbounded_scenario_program(self):
+        valid = json.loads(
+            (
+                ROOT
+                / "tools"
+                / "character_director_scenarios"
+                / "v1-listening.json"
+            ).read_text(encoding="utf-8")
+        )
+        invalid_programs = (
+            {key: value for key, value in valid.items() if key != "schema_version"},
+            {**valid, "schema_version": 2},
+            {**valid, "acceptance_scenario": "V11"},
+            {
+                **valid,
+                "scenarios": [
+                    {
+                        **valid["scenarios"][0],
+                        "capture_seconds": 601.0,
+                    }
+                ],
+            },
+        )
+        with tempfile.TemporaryDirectory() as temporary:
+            path = Path(temporary) / "program.json"
+            for raw in invalid_programs:
+                with self.subTest(raw=raw):
+                    path.write_text(json.dumps(raw), encoding="utf-8")
+                    with self.assertRaises(ValueError):
+                        load_scenario_program(path)
 
     def test_runtime_urls_include_atomic_animation_trace_endpoint(self):
         urls = runtime_urls("http://127.0.0.1:8875")

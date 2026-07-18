@@ -128,6 +128,47 @@ class AnimationTruthGeometryTests(unittest.TestCase):
 
         self.assertEqual(decoded.presentation_marker_events, ())
 
+    def test_v1_trace_without_presentation_channels_remains_readable(self):
+        source = ProceduralWizardFrameSource(cols=96, rows=54, fps=24)
+        candidate = source.render_captured_candidate_sync(source.capture_render_state())
+        mapping = candidate.animation_truth.to_mapping()
+        del mapping["presentation_channels"]
+
+        decoded = AnimationTruthTraceV1.from_mapping(mapping)
+
+        self.assertIsNone(decoded.presentation_channels)
+
+    def test_trace_pairs_presented_face_and_acting_channels(self):
+        source = ProceduralWizardFrameSource(cols=96, rows=54, fps=24)
+        source.apply_command_sync(WizardCommand("gaze", {"target": "left"}))
+        source.apply_command_sync(
+            WizardCommand(
+                "speak",
+                {
+                    "speech_id": "trace-speech",
+                    "text": "Evidence needs the painted channels.",
+                    "duration_ms": 1200,
+                },
+            )
+        )
+        source.advance_simulation(1 / 60)
+
+        candidate = source.render_captured_candidate_sync(source.capture_render_state())
+        channels = candidate.animation_truth.presentation_channels
+
+        self.assertIsNotNone(channels)
+        self.assertEqual(channels.gaze_aim, -1)
+        self.assertTrue(channels.gaze_authoritative)
+        self.assertEqual(channels.head_eye_phase, "steady")
+        self.assertEqual(channels.speech_mouth_authority, "local_fallback")
+        self.assertEqual(channels.rendered_mouth_shape, "open_small")
+        self.assertEqual(channels.locomotion, "idle")
+        self.assertEqual(channels.action, "speaking")
+        self.assertEqual(
+            AnimationTruthTraceV1.from_mapping(candidate.animation_truth.to_mapping()),
+            candidate.animation_truth,
+        )
+
     def test_contact_generation_changes_when_root_policy_releases_lock(self):
         source = ProceduralWizardFrameSource(cols=96, rows=54, fps=24)
         source.apply_command_sync(
