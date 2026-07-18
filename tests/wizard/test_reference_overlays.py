@@ -27,7 +27,7 @@ class ReferenceOverlayTests(unittest.TestCase):
         self.assertTrue(result.ok, result.message)
 
         by_authored_frame = {}
-        for _ in range(50):
+        for _ in range(100):
             candidate = source.render_captured_candidate_sync(
                 source.capture_render_state()
             )
@@ -36,19 +36,19 @@ class ReferenceOverlayTests(unittest.TestCase):
                 by_authored_frame.setdefault(trace.animation_authored_frame, candidate)
             source.advance_simulation(1 / 60)
 
-        for frame in range(7):
+        for frame in range(16):
             self.assertEqual(by_authored_frame[frame].animation_truth.effect_intensity, 0.0)
-        for frame in range(7, 14):
+        for frame in range(16, 25):
             self.assertEqual(by_authored_frame[frame].animation_truth.effect_intensity, 1.0)
         self.assertEqual(
-            [by_authored_frame[frame].animation_truth.effect_intensity for frame in range(14, 17)],
-            [0.75, 0.5, 0.25],
+            [by_authored_frame[frame].animation_truth.effect_intensity for frame in range(25, 30)],
+            [1.0, 0.8, 0.6, 0.4, 0.2],
         )
-        settled = by_authored_frame[17].animation_truth
+        settled = by_authored_frame[30].animation_truth
         self.assertEqual(settled.effect_intensity, 0.0)
         self.assertIn("action_settled", settled.active_markers)
 
-        onset = by_authored_frame[7]
+        onset = by_authored_frame[16]
         tip = onset.animation_truth.staff_tip_stage
         self.assertIsNotNone(tip)
         x, y = round(tip.x), round(tip.y)

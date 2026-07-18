@@ -29,7 +29,7 @@ class AnimationTruthGeometryTests(unittest.TestCase):
 
         traces = []
         presentation_accumulator = 0
-        for _ in range(60):
+        for _ in range(100):
             source.advance_simulation(1 / 60)
             presentation_accumulator += 24
             if presentation_accumulator < 60:
@@ -42,10 +42,10 @@ class AnimationTruthGeometryTests(unittest.TestCase):
             traces.append(candidate.animation_truth)
 
         expected = [
-            ("action_commit", 6),
-            ("action_effect", 7),
-            ("action_recoverable", 14),
-            ("action_settled", 17),
+            ("action_commit", 13),
+            ("action_effect", 16),
+            ("action_recoverable", 25),
+            ("action_settled", 30),
         ]
         events = [
             (trace, event)

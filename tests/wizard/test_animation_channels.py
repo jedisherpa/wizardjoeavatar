@@ -77,8 +77,8 @@ class AnimationChannelTests(unittest.TestCase):
                 WizardCommand("action", {"action": "magic_cast", "duration_ms": 5000})
             ).ok
         )
-        run_ticks(source, 16)
-        self.assertEqual(source.current_state().animation_clip_tick, 15)
+        run_ticks(source, 34)
+        self.assertEqual(source.current_state().animation_clip_tick, 33)
 
         self.assertTrue(
             source.apply_command_sync(
@@ -96,7 +96,7 @@ class AnimationChannelTests(unittest.TestCase):
         self.assertEqual(committed.action, "magic_cast")
         self.assertIsNone(committed.speech_id)
 
-        run_ticks(source, 28)
+        run_ticks(source, 42)
         recovering = source.current_state()
         self.assertEqual(recovering.action, "magic_cast")
         self.assertIsNone(recovering.speech_id)
@@ -121,7 +121,7 @@ class AnimationChannelTests(unittest.TestCase):
                 WizardCommand("action", {"action": "magic_cast", "duration_ms": 5000})
             ).ok
         )
-        run_ticks(source, 51)
+        run_ticks(source, 90)
 
         state = source.current_state()
         self.assertEqual(state.action, "idle")
@@ -146,22 +146,22 @@ class AnimationChannelTests(unittest.TestCase):
         source = ProceduralWizardFrameSource()
         self.assertTrue(
             source.apply_command_sync(
-                WizardCommand("action", {"action": "magic_cast", "duration_ms": 300})
+                WizardCommand("action", {"action": "magic_cast", "duration_ms": 700})
             ).ok
         )
 
-        run_ticks(source, 20)
+        run_ticks(source, 43)
         committed = source.current_state()
         self.assertEqual(committed.action, "magic_cast")
         self.assertGreater(committed.time_seconds, committed.action_until)
 
-        run_ticks(source, 31)
+        run_ticks(source, 48)
         settled = source.current_state()
         self.assertEqual(settled.action, "idle")
         self.assertEqual(settled.animation_clip_id, "idle_front")
 
     def test_reaction_never_restores_preempted_cast(self):
-        for phase, ticks in (("precommit", 7), ("committed", 16)):
+        for phase, ticks in (("precommit", 7), ("committed", 34)):
             with self.subTest(phase=phase):
                 source = ProceduralWizardFrameSource()
                 self.assertTrue(

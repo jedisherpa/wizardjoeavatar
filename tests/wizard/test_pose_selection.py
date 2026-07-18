@@ -604,6 +604,27 @@ class PoseSelectionTests(unittest.TestCase):
         self.assertIsNone(state.animation_transition_id)
         self.assertEqual(state.animation_clip_tick, 0)
 
+    def test_cast_clip_uses_authored_staff_arc_without_overhead_pose_swap(self):
+        graph = load_reference_animation_graph_v2()
+        clip = graph.clips["cast_front"]
+
+        self.assertEqual(
+            [sample.pose_id for sample in clip.samples],
+            [
+                "front_idle",
+                "front_staff_guard_low",
+                "front_staff_block_horizontal",
+                "front_staff_guard_windup",
+                "front_staff_block_horizontal",
+                "front_magic_staff_thrust",
+                "front_magic_staff_thrust",
+                "front_staff_guard_low",
+                "front_idle",
+            ],
+        )
+        self.assertNotIn("magic_cast", [sample.pose_id for sample in clip.samples])
+        self.assertEqual(clip.total_frames, 34)
+
     def test_nearest_contact_fallback_breaks_phase_ties_by_earliest_frame(self):
         graph = load_reference_animation_graph_v2()
 

@@ -1281,12 +1281,12 @@ class ProceduralWizardFrameSource:
         if state.animation_clip_id != "cast_front":
             return "inactive", 0.0
         frame = int(state.animation_authored_frame)
-        if 7 <= frame <= 8:
+        if 16 <= frame <= 19:
             return "stroke", 1.0
-        if 9 <= frame <= 13:
+        if 20 <= frame <= 24:
             return "hold", 1.0
-        if 14 <= frame <= 16:
-            return "recovery", (17 - frame) / 4.0
+        if 25 <= frame <= 29:
+            return "recovery", (30 - frame) / 5.0
         return "inactive", 0.0
 
     async def next_encoded_frame(

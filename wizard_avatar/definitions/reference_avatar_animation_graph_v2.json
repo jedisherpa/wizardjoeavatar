@@ -2374,6 +2374,20 @@
           "markers": []
         },
         {
+          "pose_id": "front_staff_guard_low",
+          "duration_frames": 4,
+          "support_contact": "both_feet",
+          "planted_anchor": "left_foot",
+          "markers": []
+        },
+        {
+          "pose_id": "front_staff_block_horizontal",
+          "duration_frames": 3,
+          "support_contact": "both_feet",
+          "planted_anchor": "left_foot",
+          "markers": []
+        },
+        {
           "pose_id": "front_staff_guard_windup",
           "duration_frames": 5,
           "support_contact": "both_feet",
@@ -2386,8 +2400,15 @@
           ]
         },
         {
-          "pose_id": "front_magic_staff_thrust",
+          "pose_id": "front_staff_block_horizontal",
           "duration_frames": 2,
+          "support_contact": "both_feet",
+          "planted_anchor": "left_foot",
+          "markers": []
+        },
+        {
+          "pose_id": "front_magic_staff_thrust",
+          "duration_frames": 4,
           "support_contact": "both_feet",
           "planted_anchor": "left_foot",
           "markers": [
@@ -2398,7 +2419,7 @@
           ]
         },
         {
-          "pose_id": "magic_cast",
+          "pose_id": "front_magic_staff_thrust",
           "duration_frames": 5,
           "support_contact": "both_feet",
           "planted_anchor": "left_foot",
@@ -2406,7 +2427,7 @@
         },
         {
           "pose_id": "front_staff_guard_low",
-          "duration_frames": 3,
+          "duration_frames": 5,
           "support_contact": "both_feet",
           "planted_anchor": "left_foot",
           "markers": [
@@ -2418,7 +2439,7 @@
         },
         {
           "pose_id": "front_idle",
-          "duration_frames": 3,
+          "duration_frames": 4,
           "support_contact": "both_feet",
           "planted_anchor": "left_foot",
           "markers": [
