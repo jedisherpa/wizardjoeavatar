@@ -218,6 +218,7 @@ class PermissionWorldVisualApplicationTests(unittest.TestCase):
             state.animation_clip_id = "cast_front"
             state.pose_override_id = "magic_cast"
             state.pose_override_until = 100.0
+            source.resolve_authoritative_animation_state()
 
         granted_frame = granted.render_current_frame()
         denied_frame = denied.render_current_frame()

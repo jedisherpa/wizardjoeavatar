@@ -672,7 +672,6 @@ class WizardFrameHub:
             "pose": "diagnostic_pose",
             "prism_signal": "visual_signal",
             "mouth": "expression",
-            "speech_stop": "stop",
             "move_relative": "move",
             "walk_left": "move",
             "walk_right": "move",
@@ -683,7 +682,8 @@ class WizardFrameHub:
         kind = aliases.get(command_type, command_type)
         if kind not in {
             "control_intent", "action", "path", "move", "move_to", "circle",
-            "figure_eight", "face", "gaze", "expression", "speak", "stop", "reset",
+            "figure_eight", "face", "gaze", "expression", "speak", "speech_stop",
+            "stop", "reset",
             "diagnostic_pose", "visual_signal",
         }:
             raise ValueError("Unsupported command: {}".format(command_type))

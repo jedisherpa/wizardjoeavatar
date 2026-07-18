@@ -52,6 +52,23 @@ class RenderCommitAtomicityTests(unittest.TestCase):
         with self.assertRaises(dataclasses.FrozenInstanceError):
             first.message = b"mutated"
 
+    def test_rendering_cannot_advance_pending_animation_transition(self):
+        state = self.source.current_state()
+        state.locomotion = "walking"
+        state.walk_phase = 0.1
+        self.source.resolve_authoritative_animation_state()
+        self.assertEqual(state.animation_transition_phase, "wait_gate")
+        authoritative_before = copy.deepcopy(state.as_public_dict())
+        snapshot = self.source.capture_render_state()
+
+        first = self.source.render_captured_candidate_sync(snapshot, "adaptive")
+        second = self.source.render_captured_candidate_sync(snapshot, "adaptive")
+
+        self.assertEqual(first.frame.cells, second.frame.cells)
+        self.assertEqual(state.as_public_dict(), authoritative_before)
+        self.assertEqual(state.animation_node_id, "ground_idle")
+        self.assertEqual(state.animation_transition_id, "idle_to_walk")
+
     def test_commit_advances_every_committed_render_field_once(self):
         snapshot = self.source.capture_render_state()
         candidate = self.source.render_captured_candidate_sync(snapshot, "adaptive")

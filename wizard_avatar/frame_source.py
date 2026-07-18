@@ -38,7 +38,7 @@ from .pose_compositor import (
     copy_pose_canvas,
     touch_up_staff_occlusion,
 )
-from .pose_selection import select_reference_pose_sample
+from .pose_selection import presentation_pose_for_facing, select_reference_pose_sample
 from .projection import project_quantized
 from .permission_world import PermissionWorldRenderPolicyV1
 from .protocol import EncodedFrame, encode_frame
@@ -206,8 +206,19 @@ class ProceduralWizardFrameSource:
         state.pose_id = sample.pose_id
         state.animation_clip_id = derived.animation_clip_id
         state.animation_clip_tick = derived.animation_clip_tick
+        state.animation_phase_offset = derived.animation_phase_offset
         state.animation_node_id = derived.animation_node_id
         state.animation_transition_id = derived.animation_transition_id
+        state.animation_transition_phase = derived.animation_transition_phase
+        state.animation_transition_target_node_id = derived.animation_transition_target_node_id
+        state.animation_transition_target_clip_id = derived.animation_transition_target_clip_id
+        state.animation_transition_entry_tick = derived.animation_transition_entry_tick
+        state.animation_transition_started_tick = derived.animation_transition_started_tick
+        state.animation_transition_commit_tick = derived.animation_transition_commit_tick
+        state.animation_transition_source_pose_id = derived.animation_transition_source_pose_id
+        state.animation_transition_source_contact = derived.animation_transition_source_contact
+        state.animation_transition_generation = derived.animation_transition_generation
+        state.pose_transition_progress = derived.pose_transition_progress
 
     async def next_frame(self) -> WizardCellFrame:
         await asyncio.sleep(0)
@@ -314,13 +325,14 @@ class ProceduralWizardFrameSource:
             stage = self._permissioned_stage(permission_world)
             altitude_scale = max(0.76, 1.0 - state.altitude * 0.07)
             render_scale = scale * REFERENCE_SCALE_MULTIPLIER * altitude_scale
-            pose_sample = select_reference_pose_sample(
-                state,
+            committed_pose_id = presentation_pose_for_facing(
+                state.pose_id,
+                state.animation_clip_id,
+                head_eye.presented_facing,
                 self.pose_ids,
-                self.character_package.animation_graph,
             )
             pose_id = self._permissioned_pose_id(
-                pose_sample.pose_id,
+                committed_pose_id,
                 state,
                 permission_world,
             )

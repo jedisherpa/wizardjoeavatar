@@ -257,14 +257,15 @@ export async function speakWithTts(text, options = {}) {
   if (!cleanText) return;
   const hasBrowserTts = "speechSynthesis" in window && options.audio !== false;
   const durationMs = options.duration_ms || (hasBrowserTts ? 60000 : Math.max(900, cleanText.length * 58));
-  await command("speak", { text: cleanText, duration_ms: durationMs, speech_id: options.speech_id });
+  const speechId = options.speech_id || `browser-speech-${Date.now()}`;
+  await command("speak", { text: cleanText, duration_ms: durationMs, speech_id: speechId });
   if (!hasBrowserTts) return;
   speechSynthesis.cancel();
   const utterance = new SpeechSynthesisUtterance(cleanText);
   if (Number.isFinite(options.rate)) utterance.rate = options.rate;
   if (Number.isFinite(options.pitch)) utterance.pitch = options.pitch;
-  utterance.onend = () => command("speech_stop", {}).catch(console.error);
-  utterance.onerror = () => command("speech_stop", {}).catch(console.error);
+  utterance.onend = () => command("speech_stop", { speech_id: speechId }).catch(console.error);
+  utterance.onerror = () => command("speech_stop", { speech_id: speechId }).catch(console.error);
   speechSynthesis.speak(utterance);
 }
 

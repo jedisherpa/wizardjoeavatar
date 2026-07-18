@@ -316,6 +316,30 @@ class GameControlIntegrationTests(unittest.TestCase):
         self.assertIsNone(state.speech_text)
         self.assertEqual(state.action, "idle")
 
+    def test_stale_speech_stop_cannot_cancel_replacement_utterance(self):
+        controller = WizardAvatarController()
+        controller.apply_command(
+            WizardCommand(
+                "speak",
+                {"speech_id": "line-old", "text": "First line.", "duration_ms": 1000},
+            )
+        )
+        controller.apply_command(
+            WizardCommand(
+                "speak",
+                {"speech_id": "line-new", "text": "Replacement.", "duration_ms": 1000},
+            )
+        )
+
+        stale = controller.apply_command(
+            WizardCommand("speech_stop", {"speech_id": "line-old"})
+        )
+
+        self.assertTrue(stale.ok, stale.message)
+        self.assertEqual(controller.state.speech_id, "line-new")
+        self.assertEqual(controller.state.speech_text, "Replacement.")
+        self.assertEqual(controller.state.mouth, "open_small")
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -146,6 +146,68 @@ class RuntimeProductionPathTests(unittest.IsolatedAsyncioTestCase):
         finally:
             await hub.stop()
 
+    async def test_ordered_speech_stop_preserves_performance_state_in_place(self):
+        source = ProceduralWizardFrameSource()
+        controller = source.controller
+        controller.state.world_position = {"x": 0.42, "z": 4.25}
+        controller.state.velocity = {"x": 0.35, "z": -0.1}
+        controller.state.locomotion = "walking"
+        controller.state.set_facing("east")
+        controller.apply_command(WizardCommand("gaze", {"target": "right"}))
+        controller.apply_command(
+            WizardCommand(
+                "action",
+                {"action": "magic_cast", "duration_ms": 1800},
+            )
+        )
+        controller.apply_command(
+            WizardCommand(
+                "speak",
+                {"speech_id": "ordered-line", "text": "Hold the stage.", "duration_ms": 1800},
+            )
+        )
+        before = controller.current_state().as_public_dict()
+        hub = WizardFrameHub(source)
+        envelope = CommandEnvelopeV1(
+            schema_version=1,
+            command_id="production-speech-stop-1",
+            source_id="production-contract-test",
+            source_kind="api",
+            source_sequence=1,
+            source_epoch="production-speech-stop-session",
+            kind="speech_stop",
+            payload={},
+            issued_tick=0,
+            priority_class="user",
+        )
+
+        try:
+            ack, result = await hub.apply_envelope(envelope)
+
+            self.assertTrue(result.ok, result.message)
+            self.assertEqual(ack.disposition, "applied")
+            state = source.current_state()
+            self.assertIsNone(state.speech_id)
+            self.assertIsNone(state.speech_text)
+            self.assertEqual(state.mouth, "closed")
+            self.assertLess(
+                abs(state.world_position["x"] - before["world_position"]["x"]),
+                0.02,
+            )
+            self.assertLess(
+                abs(state.world_position["z"] - before["world_position"]["z"]),
+                0.02,
+            )
+            self.assertNotEqual(state.world_position, {"x": 0.0, "z": 5.0})
+            self.assertEqual(state.facing, before["facing"])
+            self.assertEqual(state.gaze_aim, before["gaze_aim"])
+            self.assertEqual(state.gaze_vertical_aim, before["gaze_vertical_aim"])
+            self.assertEqual(state.gaze_authoritative, before["gaze_authoritative"])
+            self.assertEqual(state.locomotion, before["locomotion"])
+            self.assertEqual(state.action, before["action"])
+        finally:
+            await hub.stop()
+
 
 class CharacterPackageGraphProductionPathTests(unittest.TestCase):
     def test_frame_source_uses_the_graph_declared_by_its_character_package(self):

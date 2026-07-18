@@ -51,14 +51,14 @@ class CharacterCapabilityManifestTests(unittest.TestCase):
         )
         self.assertEqual(
             self.manifest["manifest_sha256"],
-            "sha256:08b22488f8eb8a71e70fe2977afd45ec7f323b7742adccd4ea01218fb46ac104",
+            "sha256:dd669e318b6e9c8f8a611acfcb1a3035da8f6e7306ebdae9495d530da124e531",
         )
 
     def test_current_character_counts_and_admission_are_truthful(self):
         counts = self.manifest["counts"]
         self.assertEqual(counts["clip_count"], 28)
         self.assertEqual(counts["node_count"], 28)
-        self.assertEqual(counts["transition_count"], 47)
+        self.assertEqual(counts["transition_count"], 53)
         self.assertEqual(counts["pose_count"], 89)
         self.assertEqual(counts["graph_admitted_pose_count"], 39)
         self.assertEqual(counts["diagnostic_only_pose_count"], 50)

@@ -42,6 +42,7 @@ COMMAND_KINDS = frozenset(
         "gaze",
         "expression",
         "speak",
+        "speech_stop",
         "stop",
         "reset",
         "diagnostic_pose",
@@ -299,7 +300,7 @@ class CommandAckV1:
 
 
 def command_priority(envelope: CommandEnvelopeV1) -> int:
-    if envelope.kind in {"stop", "reset"} or envelope.source_kind == "system":
+    if envelope.kind in {"speech_stop", "stop", "reset"} or envelope.source_kind == "system":
         return 100
     if envelope.kind == "action" and envelope.priority_class == "user":
         return 80

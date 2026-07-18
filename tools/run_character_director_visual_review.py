@@ -325,8 +325,8 @@ DEFAULT_SCENARIOS = validate_scenarios(
         },
         {
             "name": "speech-interruption",
-            "kind": "reset",
-            "payload": {},
+            "kind": "speech_stop",
+            "payload": {"speech_id": "character-director-visual-review"},
             "settle_seconds": 0.15,
             "capture_seconds": 0.75,
         },

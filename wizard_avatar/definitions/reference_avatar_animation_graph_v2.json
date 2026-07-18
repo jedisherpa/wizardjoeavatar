@@ -1057,6 +1057,7 @@
       "legal_successors": [
         "idle_front",
         "walk_front",
+        "walk_back",
         "run_charge_front",
         "takeoff_front",
         "turn_views",
@@ -1120,6 +1121,7 @@
       "legal_successors": [
         "idle_back",
         "walk_back",
+        "walk_front",
         "turn_views"
       ]
     },
@@ -1375,6 +1377,7 @@
       "legal_successors": [
         "walk_front",
         "idle_front",
+        "walk_back",
         "run_charge_front",
         "block_front",
         "turn_views"
@@ -1471,6 +1474,7 @@
       "legal_successors": [
         "walk_back",
         "idle_back",
+        "walk_front",
         "turn_views"
       ]
     },
@@ -3361,6 +3365,96 @@
       "contact_policy": "match",
       "region_policy": "coherent_pose",
       "interrupt_window": "contact_marker",
+      "fallback_transition_id": null
+    },
+    {
+      "transition_id": "ground_idle_to_back_walk",
+      "source_node_id": "ground_idle",
+      "target_node_id": "back_walk",
+      "priority": 50,
+      "duration_ticks": 0,
+      "timing_mode": "contact",
+      "transition_recipe_id": "contact_match",
+      "phase_policy": "nearest_contact",
+      "root_policy": "contact_locked",
+      "contact_policy": "match",
+      "region_policy": "coherent_pose",
+      "interrupt_window": "immediate",
+      "fallback_transition_id": null
+    },
+    {
+      "transition_id": "back_idle_to_walk",
+      "source_node_id": "back_idle",
+      "target_node_id": "back_walk",
+      "priority": 50,
+      "duration_ticks": 0,
+      "timing_mode": "contact",
+      "transition_recipe_id": "contact_match",
+      "phase_policy": "nearest_contact",
+      "root_policy": "contact_locked",
+      "contact_policy": "match",
+      "region_policy": "coherent_pose",
+      "interrupt_window": "immediate",
+      "fallback_transition_id": null
+    },
+    {
+      "transition_id": "back_walk_to_idle",
+      "source_node_id": "back_walk",
+      "target_node_id": "back_idle",
+      "priority": 50,
+      "duration_ticks": 0,
+      "timing_mode": "contact",
+      "transition_recipe_id": "contact_match",
+      "phase_policy": "nearest_contact",
+      "root_policy": "contact_locked",
+      "contact_policy": "match",
+      "region_policy": "coherent_pose",
+      "interrupt_window": "contact_marker",
+      "fallback_transition_id": null
+    },
+    {
+      "transition_id": "walk_to_back_walk",
+      "source_node_id": "ground_walk",
+      "target_node_id": "back_walk",
+      "priority": 55,
+      "duration_ticks": 0,
+      "timing_mode": "contact",
+      "transition_recipe_id": "contact_match",
+      "phase_policy": "nearest_contact",
+      "root_policy": "contact_locked",
+      "contact_policy": "match",
+      "region_policy": "coherent_pose",
+      "interrupt_window": "contact_marker",
+      "fallback_transition_id": null
+    },
+    {
+      "transition_id": "back_walk_to_walk",
+      "source_node_id": "back_walk",
+      "target_node_id": "ground_walk",
+      "priority": 55,
+      "duration_ticks": 0,
+      "timing_mode": "contact",
+      "transition_recipe_id": "contact_match",
+      "phase_policy": "nearest_contact",
+      "root_policy": "contact_locked",
+      "contact_policy": "match",
+      "region_policy": "coherent_pose",
+      "interrupt_window": "contact_marker",
+      "fallback_transition_id": null
+    },
+    {
+      "transition_id": "back_idle_to_walk_front",
+      "source_node_id": "back_idle",
+      "target_node_id": "ground_walk",
+      "priority": 50,
+      "duration_ticks": 0,
+      "timing_mode": "contact",
+      "transition_recipe_id": "contact_match",
+      "phase_policy": "nearest_contact",
+      "root_policy": "contact_locked",
+      "contact_policy": "match",
+      "region_policy": "coherent_pose",
+      "interrupt_window": "immediate",
       "fallback_transition_id": null
     },
     {

@@ -1,5 +1,4 @@
 import unittest
-from dataclasses import replace
 from fractions import Fraction
 from math import ceil
 
@@ -67,20 +66,38 @@ class PoseSelectionTests(unittest.TestCase):
     def test_front_walk_uses_animation_graph_samples(self):
         self.assertEqual(
             select_reference_pose_id(
-                state_for(facing="south", locomotion="walking", walk_phase=0.25),
+                state_for(
+                    facing="south",
+                    locomotion="walking",
+                    walk_phase=0.25,
+                    animation_node_id="ground_walk",
+                    animation_clip_id="walk_front",
+                ),
                 AVAILABLE_POSES,
             ),
             "front_idle",
         )
         self.assertEqual(
             select_reference_pose_id(
-                state_for(facing="south", locomotion="walking", walk_phase=0.50),
+                state_for(
+                    facing="south",
+                    locomotion="walking",
+                    walk_phase=0.50,
+                    animation_node_id="ground_walk",
+                    animation_clip_id="walk_front",
+                ),
                 AVAILABLE_POSES,
             ),
             "walk_front_right",
         )
         sample = select_reference_pose_sample(
-            state_for(facing="south", locomotion="walking", walk_phase=0.75),
+            state_for(
+                facing="south",
+                locomotion="walking",
+                walk_phase=0.75,
+                animation_node_id="ground_walk",
+                animation_clip_id="walk_front",
+            ),
             AVAILABLE_POSES,
         )
         self.assertEqual(sample.pose_id, "front_idle")
@@ -96,10 +113,37 @@ class PoseSelectionTests(unittest.TestCase):
         for phase, expected_pose in cases:
             with self.subTest(phase=phase):
                 pose_id = select_reference_pose_id(
-                    state_for(facing="north", locomotion="walking", walk_phase=phase),
+                    state_for(
+                        facing="north",
+                        locomotion="walking",
+                        walk_phase=phase,
+                        animation_node_id="back_walk",
+                        animation_clip_id="walk_back",
+                    ),
                     AVAILABLE_POSES,
                 )
                 self.assertEqual(pose_id, expected_pose)
+
+    def test_horizontal_stage_travel_uses_authored_front_walk_contacts(self):
+        for facing in ("east", "west"):
+            observed = []
+            for phase in (0.0, 0.5):
+                sample = select_reference_pose_sample(
+                    state_for(
+                        facing=facing,
+                        locomotion="walking",
+                        walk_phase=phase,
+                        animation_node_id="ground_walk",
+                        animation_clip_id="walk_front",
+                    )
+                )
+                observed.append((sample.pose_id, sample.contact))
+                self.assertEqual(sample.clip_id, "walk_front")
+                self.assertNotIn(sample.pose_id, {"profile_left", "profile_right"})
+            self.assertEqual(
+                {contact for _, contact in observed},
+                {"left_foot", "right_foot"},
+            )
 
     def test_action_channels_select_available_action_poses(self):
         cases = (
@@ -118,6 +162,10 @@ class PoseSelectionTests(unittest.TestCase):
         for state, expected_node, expected_clip in cases:
             with self.subTest(expected_node=expected_node):
                 sample = select_reference_pose_sample(state, AVAILABLE_POSES)
+                if state.animation_node_id != expected_node:
+                    state.simulation_tick += 1
+                    state.animation_clip_tick += 1
+                    sample = select_reference_pose_sample(state, AVAILABLE_POSES)
                 self.assertEqual(state.animation_node_id, expected_node)
                 self.assertEqual(sample.clip_id, expected_clip)
 
@@ -184,51 +232,121 @@ class PoseSelectionTests(unittest.TestCase):
     def test_graph_transition_is_selected_when_ground_motion_changes(self):
         state = state_for(locomotion="walking", walk_phase=0.1)
         sample = select_reference_pose_sample(state)
-        self.assertEqual(sample.clip_id, "walk_front")
-        self.assertEqual(state.animation_node_id, "ground_walk")
+        self.assertEqual(sample.clip_id, "idle_front")
+        self.assertEqual(state.animation_node_id, "ground_idle")
         self.assertEqual(state.animation_transition_id, "idle_to_walk")
+        self.assertEqual(state.animation_transition_phase, "wait_gate")
 
-    def test_idle_to_walk_updates_graph_metadata_but_walk_phase_governs_pose(self):
+    def test_idle_to_walk_waits_for_minimum_hold_then_commits_atomically(self):
         graph = load_reference_animation_graph_v2()
         state = state_for(
             locomotion="walking",
             walk_phase=0.75,
-            animation_clip_tick=20,
         )
 
+        source = _select_graph_v2_sample(state, graph)
+        self.assertEqual(source.pose_id, "front_idle")
+        self.assertEqual(state.animation_transition_phase, "wait_gate")
+        self.assertEqual(state.animation_transition_id, "idle_to_walk")
+
+        state.simulation_tick += 1
+        state.animation_clip_tick += 1
         sample = _select_graph_v2_sample(state, graph)
 
-        self.assertEqual(sample.pose_id, "walk_front_right_lift")
-        self.assertEqual(sample.phase, 0.75)
+        self.assertEqual(sample.pose_id, "walk_front_left")
+        self.assertEqual(sample.contact, "left_foot")
+        self.assertEqual(sample.phase, 0.0)
         self.assertEqual(state.animation_node_id, "ground_walk")
         self.assertEqual(state.animation_clip_id, "walk_front")
-        self.assertEqual(state.animation_transition_id, "idle_to_walk")
-        self.assertEqual(state.animation_clip_tick, 20)
+        self.assertIsNone(state.animation_transition_id)
+        self.assertEqual(state.animation_transition_phase, "stable")
+        self.assertEqual(state.animation_transition_generation, 1)
 
-    def test_walk_to_idle_enters_frame_with_matching_presented_contact(self):
+    def test_walk_to_idle_retains_walk_until_contact_boundary(self):
         graph = load_reference_animation_graph_v2()
-        idle_with_walk_contacts = replace(
-            graph.clips["idle_front"],
-            samples=graph.clips["walk_back"].samples,
-        )
-        graph = replace(
-            graph,
-            clips={**graph.clips, "idle_front": idle_with_walk_contacts},
-        )
         state = state_for(
             locomotion="idle",
             walk_phase=0.625,
             animation_node_id="ground_walk",
             animation_clip_id="walk_front",
-            animation_clip_tick=0,
+            animation_clip_tick=12,
+            simulation_tick=12,
         )
 
-        sample = _select_graph_v2_sample(state, graph)
-
-        self.assertEqual(sample.contact, "right_foot")
-        self.assertEqual(sample.phase, 0.5)
+        walking = _select_graph_v2_sample(state, graph)
+        self.assertEqual(walking.clip_id, "walk_front")
+        self.assertEqual(state.animation_transition_phase, "wait_gate")
         self.assertEqual(state.animation_transition_id, "walk_to_idle")
-        self.assertEqual(state.animation_clip_tick, 20)
+
+        settle_ticks = 0
+        while state.animation_transition_phase != "stable":
+            state.simulation_tick += 1
+            state.animation_clip_tick += 1
+            settled = _select_graph_v2_sample(state, graph)
+            settle_ticks += 1
+            self.assertLess(settle_ticks, 12)
+
+        self.assertEqual(settled.clip_id, "idle_front")
+        self.assertEqual(settled.contact, "both_feet")
+        self.assertEqual(state.animation_transition_phase, "stable")
+
+    def test_run_charge_progresses_through_recovery_before_idle(self):
+        graph = load_reference_animation_graph_v2()
+        state = state_for(
+            action="idle",
+            animation_node_id="ground_run",
+            animation_clip_id="run_charge_front",
+            animation_clip_tick=30,
+            simulation_tick=30,
+        )
+
+        recovery = _select_graph_v2_sample(state, graph)
+
+        self.assertEqual(state.animation_node_id, "run_recovery")
+        self.assertEqual(recovery.clip_id, "run_land_front")
+        self.assertEqual(state.animation_transition_phase, "stable")
+
+        observed_recovery = {recovery.pose_id}
+        for _ in range(40):
+            state.simulation_tick += 1
+            state.animation_clip_tick += 1
+            sample = _select_graph_v2_sample(state, graph)
+            if state.animation_node_id == "run_recovery":
+                observed_recovery.add(sample.pose_id)
+            if state.animation_node_id == "ground_idle":
+                break
+
+        self.assertEqual(state.animation_node_id, "ground_idle")
+        self.assertIn("front_kneel_staff_brace", observed_recovery)
+        self.assertGreater(len(observed_recovery), 1)
+        self.assertIsNone(state.animation_transition_id)
+
+    def test_front_to_back_reversal_waits_for_contact_and_matches_support(self):
+        graph = load_reference_animation_graph_v2()
+        state = state_for(
+            facing="north",
+            locomotion="walking",
+            walk_phase=0.625,
+            animation_node_id="ground_walk",
+            animation_clip_id="walk_front",
+            animation_clip_tick=12,
+            simulation_tick=12,
+        )
+
+        source = _select_graph_v2_sample(state, graph)
+        self.assertEqual(source.clip_id, "walk_front")
+        self.assertEqual(state.animation_transition_id, "walk_to_back_walk")
+        self.assertEqual(state.animation_transition_phase, "wait_gate")
+
+        state.walk_phase = 0.75
+        state.simulation_tick += 1
+        state.animation_clip_tick += 1
+        target = _select_graph_v2_sample(state, graph)
+
+        self.assertEqual(target.clip_id, "walk_back")
+        self.assertEqual(target.contact, "left_foot")
+        self.assertEqual(state.animation_node_id, "back_walk")
+        self.assertEqual(state.animation_transition_phase, "stable")
 
     def test_preserve_transition_retains_normalized_source_phase(self):
         graph = load_reference_animation_graph_v2()
@@ -241,10 +359,21 @@ class PoseSelectionTests(unittest.TestCase):
             animation_clip_tick=20,
         )
 
-        sample = _select_graph_v2_sample(state, graph)
+        source = _select_graph_v2_sample(state, graph)
+
+        self.assertEqual(source.clip_id, "hover_front")
+        self.assertEqual(state.animation_node_id, "hover")
+        self.assertEqual(state.animation_transition_phase, "handoff")
+        self.assertEqual(state.animation_transition_id, "hover_to_glide")
+        self.assertEqual(state.animation_transition_entry_tick, 23)
+
+        while state.simulation_tick < state.animation_transition_commit_tick:
+            state.simulation_tick += 1
+            state.animation_clip_tick += 1
+            sample = _select_graph_v2_sample(state, graph)
 
         self.assertEqual(state.animation_node_id, "glide")
-        self.assertEqual(state.animation_transition_id, "hover_to_glide")
+        self.assertIsNone(state.animation_transition_id)
         self.assertEqual(state.animation_clip_tick, 23)
         self.assertEqual(sample.phase, 0.5)
 
@@ -256,7 +385,7 @@ class PoseSelectionTests(unittest.TestCase):
 
         self.assertEqual(sample.clip_id, "cast_front")
         self.assertEqual(sample.phase, 0.0)
-        self.assertEqual(state.animation_transition_id, "idle_to_cast")
+        self.assertIsNone(state.animation_transition_id)
         self.assertEqual(state.animation_clip_tick, 0)
 
     def test_nearest_contact_fallback_breaks_phase_ties_by_earliest_frame(self):
@@ -322,6 +451,8 @@ class PoseSelectionTests(unittest.TestCase):
             upper_body_action="explain",
             speech_id="speech-2",
             walk_phase=0.75,
+            animation_node_id="ground_walk",
+            animation_clip_id="walk_front",
         )
         self.assertEqual(
             select_reference_pose_id(speaking_walk, AVAILABLE_POSES),

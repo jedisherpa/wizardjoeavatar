@@ -381,6 +381,12 @@ class WizardAvatarController:
         self._project_active_prism_advisory()
 
     def _cmd_speech_stop(self, payload: Dict[str, Any]) -> None:
+        expected_speech_id = payload.get("speech_id")
+        if (
+            expected_speech_id is not None
+            and str(expected_speech_id) != self.state.speech_id
+        ):
+            return
         self._finish_speech()
 
     def _cmd_expression(self, payload: Dict[str, Any]) -> None:
