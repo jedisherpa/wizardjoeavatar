@@ -43,10 +43,11 @@ The original dirty source trees and the legacy Python listener on
 
 | Surface | Command or gate | Result |
 | --- | --- | --- |
-| Python runtime | `python3 -m unittest discover -s tests` | **Pass:** 450/450 |
+| Python runtime | `python3 -m unittest discover -s tests` | **Pass:** 472/472 |
 | Capability determinism | focused capability and portability suites | **Pass:** 9/9 |
 | Python boundary | `python3 tools/validate_python_scope.py .` | **Pass:** 64 files, zero violations |
 | Python tools | `python3 -m py_compile` for evidence and soak tools | **Pass** |
+| Real-runtime visual evidence | strict ordered-command/WebSocket capture harness | **Pass:** 340 contiguous 24 FPS frames in the pre-commit candidate rehearsal, zero drops/overruns/decoder errors; final commit-bound receipt is generated after the code checkpoint |
 | Companion frontend | `npm test` in `companion/frontend` | **Pass:** 27/27 |
 | Companion supervisor | `cargo test --manifest-path companion/src-tauri/Cargo.toml` | **Pass:** 17/17 from a rebuilt target |
 | Visual contract | `python3 tools/verify_animation_quality.py --strict` | **Pass:** 32/32 |

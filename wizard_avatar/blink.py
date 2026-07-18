@@ -1,6 +1,57 @@
 from __future__ import annotations
 
 
+class BlinkScheduler:
+    SIMULATION_HZ = 60
+    MIN_OPEN_TICKS = 150
+    MAX_OPEN_TICKS = 390
+    MIN_CLOSED_TICKS = 6
+    MAX_CLOSED_TICKS = 12
+
+    def __init__(self, seed: int = 17) -> None:
+        self.seed = seed & 0xFFFFFFFF
+        self.reset()
+
+    def reset(self) -> None:
+        self._random_state = self.seed
+        self._closed = False
+        self._last_open_ticks = 0
+        self._ticks_remaining = self._next_open_ticks()
+
+    @property
+    def phase(self) -> float:
+        return 1.0 if self._closed else 0.0
+
+    def advance_tick(self) -> float:
+        self._ticks_remaining -= 1
+        if self._ticks_remaining == 0:
+            if self._closed:
+                self._closed = False
+                self._ticks_remaining = self._next_open_ticks()
+            else:
+                self._closed = True
+                self._ticks_remaining = self._next_closed_ticks()
+        return self.phase
+
+    def _next_random(self) -> int:
+        self._random_state = (
+            1664525 * self._random_state + 1013904223
+        ) & 0xFFFFFFFF
+        return self._random_state
+
+    def _next_open_ticks(self) -> int:
+        span = self.MAX_OPEN_TICKS - self.MIN_OPEN_TICKS + 1
+        ticks = self.MIN_OPEN_TICKS + self._next_random() % span
+        if ticks == self._last_open_ticks:
+            ticks = self.MIN_OPEN_TICKS + (ticks - self.MIN_OPEN_TICKS + 1) % span
+        self._last_open_ticks = ticks
+        return ticks
+
+    def _next_closed_ticks(self) -> int:
+        span = self.MAX_CLOSED_TICKS - self.MIN_CLOSED_TICKS + 1
+        return self.MIN_CLOSED_TICKS + self._next_random() % span
+
+
 def blink_state(time_seconds: float, seed: int = 17) -> str:
     interval = 3.0 + (seed % 5) * 0.67
     phase = time_seconds % interval

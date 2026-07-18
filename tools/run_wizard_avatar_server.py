@@ -32,6 +32,11 @@ def main() -> None:
     parser.add_argument("--rows", type=int, default=135)
     parser.add_argument("--fps", type=float, default=24.0)
     parser.add_argument(
+        "--quiet",
+        action="store_true",
+        help="Suppress routine access logs for long-running local or evidence sessions.",
+    )
+    parser.add_argument(
         "--companion",
         action="store_true",
         help="Enable app-owned lifecycle and authentication using WIZARD_COMPANION_APP_TOKEN.",
@@ -58,7 +63,15 @@ def main() -> None:
         companion_mode=companion_mode,
         shutdown_signal=shutdown_signal.request,
     )
-    server = uvicorn.Server(uvicorn.Config(app, host=args.host, port=args.port))
+    server = uvicorn.Server(
+        uvicorn.Config(
+            app,
+            host=args.host,
+            port=args.port,
+            access_log=not args.quiet,
+            log_level="warning" if args.quiet else "info",
+        )
+    )
     shutdown_signal.attach(server)
     server.run()
 

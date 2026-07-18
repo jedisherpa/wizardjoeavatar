@@ -45,7 +45,10 @@ ends, pauses, or becomes inaudible, the latest main-media snapshot is restored.
 
 The Prism sidecar port is intentionally dynamic in the packaged desktop app.
 Launch Prism GT from `/Applications` instead of bookmarking a transient sidecar
-URL. **Open Wizard** always targets the stable visualization port `8765`.
+URL. **Open Wizard** uses Prism's same-origin visualizer bridge, which derives a
+credential-free root URL from the active validated connector runtime. A normal
+installed service still uses `8765`; isolated development and verification
+runtimes can use another validated loopback port without replacing it.
 
 ## One-time activation
 
@@ -105,12 +108,15 @@ project from that same audio element clock. Missing or invalid alignment uses a
 deterministic local timing projection; it does not authorize different text.
 
 Permission-world updates use the same connector instance, discovery identity,
-and bearer token. The current Prism runtime does not yet own a generic user
-permission-grant store, so its production producer sends a complete empty
-authority snapshot on a bounded heartbeat. This fail-closed snapshot removes
-only explicitly permission-managed scenery. It never infers grants from CDISS,
-agreements, configured providers, memory availability, credentials, microphone
-UI state, notifications, speech approval, or ledger history. Director
+and bearer token. Production character facts come only from Prism's canonical
+`AgreementStore` within internal scope `local_character_runtime`; browser state
+and Python director simulation are not authority. The first allowlisted mapping
+is `prop:memory_notebook`, with exact `current_character` scope,
+`conversation_continuity` purpose, and `wizard.stage` surface. `/rag on`
+proposes and confirms that typed permission, and `/rag off` revokes it. Unknown
+or mismatched permission records remain invisible. The relay never infers
+grants from configured providers, credentials, microphone UI state,
+notifications, speech approval, or unrelated ledger history. Director
 simulations are separately labeled and cannot control production projection.
 
 ## Runtime behavior
@@ -148,8 +154,9 @@ Governed speech verification must additionally prove:
 4. Text reveal follows the audio element's current time during play, pause,
    seek, and rate changes.
 5. Revocation or a stale turn stops the obsolete performance.
-6. Permission snapshots remain empty until a real permission authority is
-   wired, and no browser route can create grants.
+6. Permission snapshots match the exact current allowlisted authority tuple;
+   wrong scope/purpose/surface, revoke, expiry, unlink, and obsolete connector
+   generations fail closed, and no browser route can create grants.
 
 The local integration proof must observe all three states in order:
 

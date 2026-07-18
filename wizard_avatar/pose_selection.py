@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+from fractions import Fraction
 from pathlib import Path
 from typing import Iterable, Optional, Set
 
@@ -8,6 +9,9 @@ from .animation_graph import (
     ANIMATION_GRAPH_V2_PATH,
     AnimationGraph,
     AnimationGraphValidationError,
+    ClipDefinition,
+    ClipEvaluation,
+    TransitionDefinition,
     load_animation_graph,
 )
 from .character_package import animation_graph_path_for
@@ -88,23 +92,127 @@ def _select_graph_v2_sample(state: WizardState, graph: AnimationGraph) -> PoseSa
     node = graph.nodes[node_id]
     if state.animation_node_id != node_id or state.animation_clip_id != node.clip_id:
         transition = graph.select_transition(state.animation_node_id, node_id)
+        source_evaluation = _presented_clip_evaluation(state, graph)
         state.animation_transition_id = (
             transition.transition_id if transition is not None else None
         )
         state.animation_node_id = node_id
         state.animation_clip_id = node.clip_id
-        state.animation_clip_tick = 0
-    clip = graph.clips[node.clip_id]
-    if node_id in {"ground_walk", "back_walk"} and clip.phase_source == "ground_distance":
-        evaluation = graph.evaluate_clip_phase(node.clip_id, state.walk_phase)
-    else:
-        evaluation = graph.evaluate_clip(node.clip_id, state.animation_clip_tick)
+        state.animation_clip_tick = _transition_entry_tick(
+            graph,
+            node.clip_id,
+            transition,
+            source_evaluation,
+        )
+    evaluation = _evaluate_presented_clip(
+        graph,
+        node_id,
+        node.clip_id,
+        state.animation_clip_tick,
+        state.walk_phase,
+    )
     return PoseSample(
         pose_id=evaluation.pose_id,
         contact=evaluation.support_contact,
         clip_id=node.clip_id,
         phase=evaluation.clip_phase,
     )
+
+
+def _presented_clip_evaluation(
+    state: WizardState,
+    graph: AnimationGraph,
+) -> Optional[ClipEvaluation]:
+    if state.animation_clip_id not in graph.clips:
+        return None
+    return _evaluate_presented_clip(
+        graph,
+        state.animation_node_id,
+        state.animation_clip_id,
+        state.animation_clip_tick,
+        state.walk_phase,
+    )
+
+
+def _evaluate_presented_clip(
+    graph: AnimationGraph,
+    node_id: str,
+    clip_id: str,
+    clip_tick: int,
+    walk_phase: float,
+) -> ClipEvaluation:
+    clip = graph.clips[clip_id]
+    if node_id in {"ground_walk", "back_walk"} and clip.phase_source == "ground_distance":
+        return graph.evaluate_clip_phase(clip_id, walk_phase)
+    return graph.evaluate_clip(clip_id, clip_tick)
+
+
+def _transition_entry_tick(
+    graph: AnimationGraph,
+    target_clip_id: str,
+    transition: Optional[TransitionDefinition],
+    source_evaluation: Optional[ClipEvaluation],
+) -> int:
+    if transition is None or source_evaluation is None:
+        return 0
+    source_phase = Fraction(
+        source_evaluation.clip_phase_numerator,
+        source_evaluation.clip_phase_denominator,
+    )
+    if transition.phase_policy == "preserve":
+        target_frame = int(source_phase * graph.clips[target_clip_id].total_frames)
+    elif transition.phase_policy == "nearest_contact":
+        source_contact = (
+            source_evaluation.support_contact
+            if transition.contact_policy == "match"
+            else None
+        )
+        target_frame = _nearest_contact_entry_frame(
+            graph.clips[target_clip_id],
+            source_contact,
+            source_phase,
+        )
+    else:
+        return 0
+    return _authored_frame_to_tick(target_frame, graph.authored_fps, graph.simulation_hz)
+
+
+def _nearest_contact_entry_frame(
+    clip: ClipDefinition,
+    source_contact: Optional[str],
+    source_phase: Fraction,
+) -> int:
+    sample_frames = []
+    frame = 0
+    for sample in clip.samples:
+        sample_frames.append((frame, sample.support_contact))
+        frame += sample.duration_frames
+    matching_frames = tuple(
+        frame
+        for frame, contact in sample_frames
+        if contact == source_contact
+    )
+    candidates = matching_frames or tuple(frame for frame, _ in sample_frames)
+    normalized_source_phase = source_phase % 1
+    return min(
+        candidates,
+        key=lambda frame: (
+            _circular_phase_distance(
+                normalized_source_phase,
+                Fraction(frame, clip.total_frames),
+            ),
+            frame,
+        ),
+    )
+
+
+def _circular_phase_distance(first: Fraction, second: Fraction) -> Fraction:
+    distance = abs(first - second) % 1
+    return min(distance, 1 - distance)
+
+
+def _authored_frame_to_tick(frame: int, authored_fps: int, simulation_hz: int) -> int:
+    return (frame * simulation_hz + authored_fps - 1) // authored_fps
 
 
 def _select_node_id(state: WizardState, graph: AnimationGraph) -> str:

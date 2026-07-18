@@ -4,6 +4,7 @@ import time
 from collections.abc import Mapping
 from typing import Any, Callable, Dict, Iterable, Optional, Set, Tuple
 
+from .blink import BlinkScheduler
 from .commanding import CommandEnvelopeV1
 from .control import ControlArbiter, ControlIntentV1
 from .expressions import expression_mouth
@@ -33,6 +34,7 @@ class WizardAvatarController:
             raise ValueError("available_pose_ids must not be empty")
         self.character_id = character_id
         self.state = WizardState(character_id=character_id)
+        self._blink_scheduler = BlinkScheduler()
         self.locomotion = LocomotionController()
         self.control_arbiter = ControlArbiter()
         self.prism_advisories = PrismAdvisoryStateMachine()
@@ -75,7 +77,7 @@ class WizardAvatarController:
         self.state.state_revision += 1
         self.state.animation_clip_tick += 1
         self.state.time_seconds = self.state.simulation_tick * SIMULATION_DT
-        self.state.blink_phase = (self.state.blink_phase + SIMULATION_DT / 4.2) % 1.0
+        self.state.blink_phase = self._blink_scheduler.advance_tick()
         self._update_timers()
         transition = self.prism_advisories.advance(now_ms=self._clock_ms())
         if transition.released:
