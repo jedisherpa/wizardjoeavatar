@@ -1,5 +1,5 @@
 {
-  "version": 83,
+  "version": 84,
   "asset_set_id": "wizardjoe-reference-motion-v1",
   "description": "Source pose PNGs for the repeatable WizardJoe square-cell pose library.",
   "canonical": {
@@ -181,6 +181,54 @@
           -3
         ]
       }
+    },
+    {
+      "id": "walk_front_left_to_right",
+      "source": "derived:walk_front_left+walk_front_right@0.5",
+      "derived_blend": {
+        "from_pose_id": "walk_front_left",
+        "to_pose_id": "walk_front_right",
+        "progress": 0.5,
+        "target_atomic_x_min": 56
+      },
+      "description": "root-aligned crisp passing graph between front walk contacts",
+      "facing": "south",
+      "locomotion": "walking",
+      "actions": [
+        "walking"
+      ],
+      "phase": 0.25,
+      "tags": [
+        "front_family",
+        "walk",
+        "passing",
+        "derived_pixel_graph",
+        "wings"
+      ]
+    },
+    {
+      "id": "walk_front_right_to_left",
+      "source": "derived:walk_front_right+walk_front_left@0.5",
+      "derived_blend": {
+        "from_pose_id": "walk_front_right",
+        "to_pose_id": "walk_front_left",
+        "progress": 0.5,
+        "target_atomic_x_min": 56
+      },
+      "description": "root-aligned crisp return graph between front walk contacts",
+      "facing": "south",
+      "locomotion": "walking",
+      "actions": [
+        "walking"
+      ],
+      "phase": 0.75,
+      "tags": [
+        "front_family",
+        "walk",
+        "passing",
+        "derived_pixel_graph",
+        "wings"
+      ]
     },
     {
       "id": "back_left",

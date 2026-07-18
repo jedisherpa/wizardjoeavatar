@@ -17,6 +17,12 @@ from wizard_avatar.reference_avatar import (
 
 ROOT = Path(__file__).resolve().parents[2]
 MANIFEST_PATH = ROOT / "assets" / "reference" / "motion_sources" / "manifest.json"
+GRAPH_PATH = (
+    ROOT
+    / "wizard_avatar"
+    / "definitions"
+    / "reference_avatar_animation_graph_v2.json"
+)
 
 
 class ReferenceAvatarPoseLibraryTests(unittest.TestCase):
@@ -25,7 +31,7 @@ class ReferenceAvatarPoseLibraryTests(unittest.TestCase):
         manifest = json.loads(MANIFEST_PATH.read_text(encoding="utf-8"))
         expected_pose_ids = {pose["id"] for pose in manifest["poses"]}
         self.assertEqual(set(reference_pose_ids()), expected_pose_ids)
-        self.assertEqual(len(expected_pose_ids), 89)
+        self.assertEqual(len(expected_pose_ids), 91)
         self.assertTrue(
             {
                 "front_greeting_wave_wings",
@@ -67,6 +73,76 @@ class ReferenceAvatarPoseLibraryTests(unittest.TestCase):
         self.assertIn("left_eye", pose.anchors)
         self.assertIn("right_eye", pose.anchors)
         self.assertGreater(len(pose.cells), 1000)
+
+    def test_walk_transition_poses_are_crisp_endpoint_pixel_graphs(self):
+        library = json.loads(
+            (
+                ROOT
+                / "wizard_avatar"
+                / "definitions"
+                / "reference_avatar_pose_cells.json"
+            ).read_text(encoding="utf-8")
+        )
+        poses = {pose["id"]: pose for pose in library["poses"]}
+        endpoints = {
+            pose_id: poses[pose_id]
+            for pose_id in ("walk_front_left", "walk_front_right")
+        }
+        endpoint_cells = {
+            pose_id: {
+                (cell["x"], cell["y"]): (
+                    tuple(cell["rgb"]),
+                    cell.get("region", ""),
+                )
+                for cell in pose["cells"]
+            }
+            for pose_id, pose in endpoints.items()
+        }
+        for pose_id in ("walk_front_left_to_right", "walk_front_right_to_left"):
+            with self.subTest(pose_id=pose_id):
+                pose = poses[pose_id]
+                self.assertTrue(pose["source"].startswith("derived:"))
+                self.assertEqual(pose["root_anchor"], [36, 95])
+                for cell in pose["cells"]:
+                    pixel = (tuple(cell["rgb"]), cell.get("region", ""))
+                    coordinate = (cell["x"], cell["y"])
+                    self.assertIn(
+                        pixel,
+                        {
+                            cells.get(coordinate)
+                            for cells in endpoint_cells.values()
+                        },
+                    )
+                target_pose_id = (
+                    "walk_front_right"
+                    if pose_id == "walk_front_left_to_right"
+                    else "walk_front_left"
+                )
+                target = {
+                    (cell["x"], cell["y"]): tuple(cell["rgb"])
+                    for cell in poses[target_pose_id]["cells"]
+                    if cell["x"] >= 56
+                }
+                derived = {
+                    (cell["x"], cell["y"]): tuple(cell["rgb"])
+                    for cell in pose["cells"]
+                    if cell["x"] >= 56
+                }
+                self.assertEqual(derived, target)
+
+    def test_front_walk_clip_contains_no_idle_reset(self):
+        graph = json.loads(GRAPH_PATH.read_text(encoding="utf-8"))
+        samples = graph["clips"]["walk_front"]["samples"]
+        self.assertEqual(
+            [sample["pose_id"] for sample in samples],
+            [
+                "walk_front_left",
+                "walk_front_left_to_right",
+                "walk_front_right",
+                "walk_front_right_to_left",
+            ],
+        )
+        self.assertNotIn("front_idle", {sample["pose_id"] for sample in samples})
 
     def test_render_reference_pose_returns_canvas_copy(self):
         first = render_reference_pose_local("front_idle")

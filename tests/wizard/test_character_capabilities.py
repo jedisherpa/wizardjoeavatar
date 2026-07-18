@@ -51,7 +51,7 @@ class CharacterCapabilityManifestTests(unittest.TestCase):
         )
         self.assertEqual(
             self.manifest["manifest_sha256"],
-            "sha256:eda0ea3ad4bb1907a9763b6d2557fef5e27c489c97688ebb24dadaf549d27d6d",
+            "sha256:7f3f4237fed2b95b6cf729630ee3f65cc7e9ca7db0945472db3708b7b1df193b",
         )
 
     def test_current_character_counts_and_admission_are_truthful(self):
@@ -59,9 +59,9 @@ class CharacterCapabilityManifestTests(unittest.TestCase):
         self.assertEqual(counts["clip_count"], 30)
         self.assertEqual(counts["node_count"], 30)
         self.assertEqual(counts["transition_count"], 61)
-        self.assertEqual(counts["pose_count"], 89)
-        self.assertEqual(counts["graph_admitted_pose_count"], 39)
-        self.assertEqual(counts["diagnostic_only_pose_count"], 50)
+        self.assertEqual(counts["pose_count"], 91)
+        self.assertEqual(counts["graph_admitted_pose_count"], 40)
+        self.assertEqual(counts["diagnostic_only_pose_count"], 51)
         self.assertEqual(counts["expression_count"], 10)
         self.assertEqual(counts["mouth_shape_count"], 7)
         self.assertEqual(counts["capability_count"], 51)
@@ -77,8 +77,8 @@ class CharacterCapabilityManifestTests(unittest.TestCase):
             for pose in self.manifest["poses"]
             if pose["admission"] == "diagnostic_only"
         }
-        self.assertEqual(len(admitted), 39)
-        self.assertEqual(len(diagnostic), 50)
+        self.assertEqual(len(admitted), 40)
+        self.assertEqual(len(diagnostic), 51)
         self.assertFalse(admitted & diagnostic)
         self.assertTrue(all(pose_id.endswith("_close") for pose_id in diagnostic if "_close" in pose_id))
         self.assertFalse(any(pose_id.endswith("_close") for pose_id in admitted))
@@ -133,7 +133,7 @@ class CharacterCapabilityManifestTests(unittest.TestCase):
         )
         self.assertEqual(
             walk["provenance"]["content_sha256"],
-            ["sha256:e1f626c38035a0bf681067cadc71463847d80fb106fc278fa95e120fcded1913"],
+            ["sha256:31d3856f94eaf72b08b5f1871c9fa55bec3994ac8310acb310e567ad07b0109d"],
         )
 
     def test_overlays_and_unsupported_surfaces_are_explicit(self):

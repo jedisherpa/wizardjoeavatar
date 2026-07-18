@@ -288,7 +288,7 @@ class PoseSelectionTests(unittest.TestCase):
 
         release = _select_graph_v2_sample(state, graph)
 
-        self.assertEqual(release.pose_id, "front_idle")
+        self.assertEqual(release.pose_id, "walk_front_left_to_right")
         self.assertEqual(release.active_markers, ("left_release",))
         self.assertEqual(state.animation_transition_id, "walk_to_stop_right")
         self.assertEqual(state.animation_transition_phase, "wait_gate")

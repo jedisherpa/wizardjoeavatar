@@ -8,7 +8,7 @@ from tools.validate_cartoon_animation_program import validate_program
 
 ROOT = Path(__file__).resolve().parents[2]
 CHECKPOINT = "08d8f3aaa181d97ef3d2a29cb5a8362d81a05f12"
-LIBRARY_HASH = "1200e2891902cd1f3147d2c2d298dd2d99313708fbc8e90034376500e1843037"
+LIBRARY_HASH = "00dfb01aa169b52ea29ecb91fb0aec138f78369789d6be084f28a20ff0d9ff91"
 
 
 class CartoonAnimationProgramTests(unittest.TestCase):
@@ -32,7 +32,7 @@ class CartoonAnimationProgramTests(unittest.TestCase):
             "baseline": {
                 "branch": "codex/build-repeatable-avatar-animation",
                 "python_url": "http://127.0.0.1:8765/",
-                "production_pose_count": 89,
+                "production_pose_count": 91,
                 "generated_library_sha256": LIBRARY_HASH,
             },
             "production_architecture": "asciline_python",

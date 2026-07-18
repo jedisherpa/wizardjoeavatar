@@ -34,8 +34,8 @@
         },
         {
           "phase": 0.25,
-          "pose_id": "front_idle",
-          "contact": "both"
+          "pose_id": "walk_front_left_to_right",
+          "contact": "none"
         },
         {
           "phase": 0.5,
@@ -44,8 +44,8 @@
         },
         {
           "phase": 0.75,
-          "pose_id": "front_idle",
-          "contact": "both"
+          "pose_id": "walk_front_right_to_left",
+          "contact": "none"
         }
       ]
     },

@@ -38,6 +38,8 @@ must remain labelled as planned.
   acceptance of the 341-frame runtime, transport, marker, and contact proof.
 - `reviews/RUNTIME_BOUND_CONTACT_653D400_ANIMATION_REVIEW.md`: independent visual
   rejection with frame-specific cast, gait, turn, and speech blockers.
+- `LOCOMOTION_TRANSITION_GRAPHS.md`: deterministic no-idle gait transitions and
+  atomic staff-slice generation contract.
 - `LIVE_E2E_2026-07-16.md`: isolated live connector, browser, and cursor-fix
   receipt with explicit evidence limits.
 - `FINAL_HANDOFF.md`: ordered 33-section implementation and acceptance handoff.

@@ -4,10 +4,18 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import sys
 from pathlib import Path
 from typing import Any
 
 from generate_reference_avatar_cells import ROOT, generate
+
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+
+from wizard_avatar.compositor import CellCanvas
+from wizard_avatar.glyphs import glyph
+from wizard_avatar.pose_compositor import composite_anchor_transition
 
 
 DEFAULT_MANIFEST = ROOT / "assets" / "reference" / "motion_sources" / "manifest.json"
@@ -134,6 +142,91 @@ def normalize_payload_to_canonical(
     }
 
 
+def payload_canvas(payload: dict[str, Any]) -> CellCanvas:
+    canvas = CellCanvas(int(payload["cols"]), int(payload["rows"]))
+    for cell in payload["cells"]:
+        canvas.set(
+            int(cell["x"]),
+            int(cell["y"]),
+            glyph("solid_fill"),
+            tuple(int(channel) for channel in cell["rgb"]),
+            str(cell.get("region", "")),
+        )
+    return canvas
+
+
+def canvas_cells(canvas: CellCanvas) -> list[dict[str, Any]]:
+    cells = []
+    for y, row in enumerate(canvas.cells):
+        for x, cell in enumerate(row):
+            if cell is None:
+                continue
+            payload = {"x": x, "y": y, "rgb": list(cell.rgb)}
+            if cell.layer_id:
+                payload["region"] = cell.layer_id
+            cells.append(payload)
+    return cells
+
+
+def derive_blend_payload(
+    pose: dict[str, Any],
+    normalized_payloads: dict[str, dict[str, Any]],
+    canonical: dict[str, Any],
+    colors: int,
+    coverage_threshold: int,
+) -> dict[str, Any]:
+    blend = pose.get("derived_blend")
+    if not isinstance(blend, dict):
+        raise ValueError(f"{pose['id']}.derived_blend must be an object")
+    from_pose_id = str(blend.get("from_pose_id", ""))
+    to_pose_id = str(blend.get("to_pose_id", ""))
+    if from_pose_id == to_pose_id:
+        raise ValueError(f"{pose['id']} blend endpoints must be different")
+    try:
+        from_payload = normalized_payloads[from_pose_id]
+        to_payload = normalized_payloads[to_pose_id]
+    except KeyError as error:
+        raise ValueError(
+            f"{pose['id']} blend endpoint {error.args[0]!r} is not an authored pose"
+        ) from error
+    progress = float(blend.get("progress", 0.5))
+    if not 0.0 < progress < 1.0:
+        raise ValueError(f"{pose['id']}.derived_blend.progress must be between 0 and 1")
+
+    canvas, root = composite_anchor_transition(
+        payload_canvas(from_payload),
+        payload_canvas(to_payload),
+        tuple(from_payload["root_anchor"]),
+        tuple(to_payload["root_anchor"]),
+        progress,
+    )
+    expected_size = (int(canonical["cols"]), int(canonical["rows"]))
+    if (canvas.width, canvas.height) != expected_size or root != tuple(canonical["root_anchor"]):
+        raise ValueError(f"{pose['id']} blend escaped the canonical canvas or root")
+    target_atomic_x_min = blend.get("target_atomic_x_min")
+    if target_atomic_x_min is not None:
+        target_atomic_x_min = int(target_atomic_x_min)
+        if not 0 <= target_atomic_x_min < canvas.width:
+            raise ValueError(f"{pose['id']}.target_atomic_x_min is outside the canvas")
+        target_canvas = payload_canvas(to_payload)
+        for y in range(canvas.height):
+            for x in range(target_atomic_x_min, canvas.width):
+                canvas.cells[y][x] = target_canvas.get(x, y)
+    return {
+        "source": f"derived:{from_pose_id}+{to_pose_id}@{progress:g}",
+        "source_size": list(expected_size),
+        "source_crop": [0, 0, expected_size[0], expected_size[1]],
+        "canonical_shift": [0, 0],
+        "generation_rows": int(canonical["rows"]),
+        "cols": canvas.width,
+        "rows": canvas.height,
+        "root_anchor": list(root),
+        "quantized_colors": colors,
+        "coverage_threshold": coverage_threshold,
+        "cells": canvas_cells(canvas),
+    }
+
+
 def generate_pose_library(
     manifest_path: Path,
     output_path: Path,
@@ -148,7 +241,8 @@ def generate_pose_library(
     source_dir = manifest_path.parent
     requested_cols = int(manifest.get("canonical", {}).get("cols", 0))
     raw_entries = []
-    for pose in manifest["poses"]:
+    authored_poses = [pose for pose in manifest["poses"] if "derived_blend" not in pose]
+    for pose in authored_poses:
         source_path_value = pose.get("source_path")
         if source_path_value is None:
             source_path = source_dir / pose["source"]
@@ -190,9 +284,28 @@ def generate_pose_library(
         raw_entries.append((pose, payload, generation_rows))
 
     canonical = canonical_config(manifest, [payload for _, payload, _ in raw_entries], rows)
+    normalized_payloads = {
+        pose["id"]: normalize_payload_to_canonical(pose, raw_payload, canonical)
+        for pose, raw_payload, _generation_rows in raw_entries
+    }
+    generation_rows_by_id = {
+        pose["id"]: generation_rows
+        for pose, _raw_payload, generation_rows in raw_entries
+    }
     poses = []
-    for pose, raw_payload, generation_rows in raw_entries:
-        payload = normalize_payload_to_canonical(pose, raw_payload, canonical)
+    for pose in manifest["poses"]:
+        if "derived_blend" in pose:
+            payload = derive_blend_payload(
+                pose,
+                normalized_payloads,
+                canonical,
+                colors,
+                coverage_threshold,
+            )
+            generation_rows = int(payload["generation_rows"])
+        else:
+            payload = normalized_payloads[pose["id"]]
+            generation_rows = generation_rows_by_id[pose["id"]]
         poses.append(
             {
                 "id": pose["id"],
@@ -283,11 +396,15 @@ def main() -> None:
                 "Reference pose generation is not deterministic: "
                 f"{deterministic_sha256} != {second_sha256}"
             )
+    try:
+        output_label = str(args.output.resolve().relative_to(ROOT))
+    except ValueError:
+        output_label = str(args.output.resolve())
     print(
         json.dumps(
             {
                 "source_manifest": library["source_manifest"],
-                "output": str(args.output.relative_to(ROOT)),
+                "output": output_label,
                 "schema_version": library["schema_version"],
                 "asset_set_id": library["asset_set_id"],
                 "sha256": deterministic_sha256,
