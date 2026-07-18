@@ -185,7 +185,7 @@ checks, sidecar build, Tauri build, and live HTTP contract checks.
 
 ## 21. Automated Test Results
 
-- Python: 436/436 after the direction-compiler checkpoint.
+- Python: 444/444 after the soak-harness V2 checkpoint.
 - Python scope gate: 63 files, zero violations.
 - Companion frontend: 27/27.
 - Companion Rust: 17/17.

@@ -25,8 +25,8 @@ Production promotion remains blocked by four external acceptance gaps:
 2. The retained connected recording is silent and does not visibly demonstrate
    the complete short lip-sync interval, interruption, or reconnect sequence.
 3. Browser-driven and human frame-by-frame animation review is incomplete.
-4. Eight-hour/24-hour and RSS growth gates plus an independent-user package
-   install/rollback are still required.
+4. Eight-hour/24-hour V2 soaks plus an independent-user package
+   install/rollback are still required; a staged V2 RSS gate now passes.
 
 This report distinguishes source verification from human/product acceptance.
 No green test is presented as proof of acting quality or external authority.
@@ -45,7 +45,7 @@ The original dirty source trees and the legacy Python listener on
 
 | Surface | Command or gate | Result |
 | --- | --- | --- |
-| Python runtime | `python3 -m unittest discover -v` | **Pass:** 436/436 after the governed direction checkpoint |
+| Python runtime | `python3 -m unittest discover -v` | **Pass:** 444/444 after the soak-harness V2 checkpoint |
 | Capability determinism | focused capability and portability suites | **Pass:** 9/9 |
 | Python boundary | `python3 tools/validate_python_scope.py .` | **Pass:** 63 files, zero violations |
 | Python tools | `python3 -m py_compile` for evidence and soak tools | **Pass** |
@@ -60,6 +60,7 @@ The original dirty source trees and the legacy Python listener on
 | Prism repository | `git fsck --full --no-progress` | **Pass** after restoring an iCloud-offloaded packfile |
 | Whitespace/format | `cargo fmt --all --check` and `git diff --check` in Prism | **Pass** |
 | Fresh GitHub clone | `uv sync --frozen`, full tests, isolated server and WebSocket frame | **Pass:** 428/428, 24.0049 FPS, zero queue drops |
+| Soak harness V2 | bounded clients, rolling cadence, loop lag, RSS growth/slope | **Pass:** strict 12-minute staged receipt |
 
 The Companion Rust build initially stalled because macOS had offloaded its
 rebuildable `target` cache. A clean local rebuild reached the project but ran
@@ -110,6 +111,26 @@ SHA-256:
 `7f57f50ed191a5b182f00b569d3db0909e7a6011b3c615415afe21e1a3e37b82`
 
 See `SOAK_2H_2026-07-17.md` for the exact command and conservative finding.
+
+The replacement V2 harness bounds the client receive queue and message size,
+binds RSS samples to the authenticated health PID, keeps a bounded full-run
+latency histogram, and evaluates cadence, queue pressure, event-loop lag, and
+memory in rolling windows. Its staged 721.110-second strict run passed at
+59.995 Hz simulation and 24.007 FPS presentation with zero rolling cadence
+breaches, 1.871 ms event-loop-lag p95, 1,916,928 bytes peak RSS growth, and an
+8,038,419.286 bytes/hour slope over 601.096 post-warm-up seconds. Normal viewers
+had zero connection, decode, or sequence errors. The deliberate slow viewer
+reconnected 12 times and exposed 73.220 queue drops per minute within the
+declared bounded-backpressure threshold.
+
+Evidence:
+`evidence/character-director/soak-v2-12m-2026-07-17.json`
+
+SHA-256:
+`f4c306bc79525f9374726650f290105f0d11d2f450609b4c36e411bc48e9e0de`
+
+See `SOAK_HARNESS_V2.md`. This validates the V2 harness and staged RSS gate; it
+does not substitute for eight-hour and 24-hour V2 acceptance runs.
 
 The performance correction moved exact retained-replay serialization and
 hashing off the per-frame diagnostics path. Explicit diagnostics and replay
@@ -220,8 +241,8 @@ that the isolated connector opened `http://127.0.0.1:8875/` while the legacy
    the implemented stale-performance revocation and remains incomplete.
 6. A limited connected recording exists; complete audiovisual and human
    animation review are absent.
-7. The two-hour soak passes; RSS sampling plus eight-hour and 24-hour gates
-   remain outstanding.
+7. The staged bounded-client/RSS V2 soak passes; eight-hour and 24-hour V2
+   gates remain outstanding.
 8. Fresh-clone source reproduction passes; independent-user package install
    and rollback remain.
 
