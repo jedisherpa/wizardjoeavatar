@@ -1,0 +1,13 @@
+{
+  "contact_frame_count": 286,
+  "frame_count": 332,
+  "issues": [],
+  "maximum_planted_drift_cells": 2.0097183471152322e-14,
+  "maximum_planted_raster_span_drift_cells": 1.0,
+  "maximum_root_residual_cells": 0.0,
+  "passed": true,
+  "path": "contact_verification.json",
+  "schema": "contact_verification_report_v1",
+  "schema_version": 1,
+  "stance_count": 11
+}
