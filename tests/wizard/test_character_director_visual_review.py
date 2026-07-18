@@ -1,5 +1,6 @@
 import asyncio
 import hashlib
+import json
 import struct
 import tempfile
 import unittest
@@ -19,6 +20,7 @@ from tools.run_character_director_visual_review import (
     runtime_urls,
     select_atomic_animation_trace,
     square_cell_image,
+    validate_artifact_semantics,
     validate_manifest,
     validate_runtime_binding,
     validate_scenarios,
@@ -386,6 +388,8 @@ class ManifestValidationTests(unittest.TestCase):
                     "sha256": digest,
                     "bytes": 456,
                 },
+                {"path": "wire/frames.bin", "sha256": digest, "bytes": 16},
+                {"path": "wire/index.ndjson", "sha256": digest, "bytes": 456},
             ],
             "video": {"available": False, "path": None, "codec": None},
             "rendering": {"cell_shape": "square", "pixel_format": "rgb24"},
@@ -434,7 +438,7 @@ class ManifestValidationTests(unittest.TestCase):
                         binding["base_url"],
                     )
 
-    def test_verifies_artifact_bytes_and_hashes_when_output_dir_is_supplied(self):
+    def test_rejects_hashed_artifacts_that_do_not_replay_semantically(self):
         manifest = self.valid_manifest()
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)
@@ -457,11 +461,32 @@ class ManifestValidationTests(unittest.TestCase):
                 bytes=contact.stat().st_size,
                 sha256=hashlib.sha256(contact.read_bytes()).hexdigest(),
             )
-            validate_manifest(manifest, root)
-
-            artifact.write_bytes(b"tampered")
+            wire = root / "wire" / "frames.bin"
+            wire.parent.mkdir()
+            wire.write_bytes(b"not-replayable")
+            manifest["artifacts"][3].update(
+                bytes=wire.stat().st_size,
+                sha256=hashlib.sha256(wire.read_bytes()).hexdigest(),
+            )
+            index = root / "wire" / "index.ndjson"
+            index.write_text("{}\n{}\n", encoding="utf-8")
+            manifest["artifacts"][4].update(
+                bytes=index.stat().st_size,
+                sha256=hashlib.sha256(index.read_bytes()).hexdigest(),
+            )
             with self.assertRaises(ManifestValidationError):
                 validate_manifest(manifest, root)
+
+    def test_replays_committed_runtime_bound_evidence(self):
+        root = (
+            ROOT
+            / "evidence"
+            / "character-director"
+            / "runtime-bound-contact-653d400-2026-07-18"
+        )
+        manifest = json.loads((root / "manifest.json").read_text(encoding="utf-8"))
+        validate_artifact_semantics(manifest, root)
+        validate_manifest(manifest, root)
 
 
 if __name__ == "__main__":

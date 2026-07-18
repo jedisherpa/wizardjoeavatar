@@ -10,6 +10,7 @@ import json
 import math
 import re
 import shutil
+import struct
 import subprocess
 import sys
 import time
@@ -17,6 +18,7 @@ import urllib.error
 import urllib.parse
 import urllib.request
 import uuid
+import zlib
 from dataclasses import asdict, dataclass, field
 from datetime import datetime, timezone
 from pathlib import Path
@@ -31,6 +33,7 @@ if str(ROOT) not in sys.path:
 from wizard_avatar.commanding import COMMAND_KINDS
 from wizard_avatar.animation_trace import AnimationTruthTraceV1
 from wizard_avatar.contact_verifier import DecodedRasterFrameV1, verify_contact_trace
+from wizard_avatar.frame_hash import frame_hash
 from wizard_avatar.protocol import CELL_BYTES, decode_frame
 
 
@@ -1064,6 +1067,135 @@ def _plain_int(value: object, minimum: int = 0) -> bool:
     return isinstance(value, int) and not isinstance(value, bool) and value >= minimum
 
 
+def _read_ndjson(path: Path, label: str) -> List[Mapping[str, Any]]:
+    records: List[Mapping[str, Any]] = []
+    try:
+        lines = path.read_text(encoding="utf-8").splitlines()
+    except OSError as exc:
+        raise ManifestValidationError("cannot read {}: {}".format(label, exc)) from exc
+    for line_number, line in enumerate(lines, 1):
+        _manifest_error(bool(line.strip()), "{} contains a blank row".format(label))
+        try:
+            record = json.loads(line)
+        except json.JSONDecodeError as exc:
+            raise ManifestValidationError(
+                "{} row {} is not valid JSON: {}".format(label, line_number, exc)
+            ) from exc
+        _manifest_error(isinstance(record, Mapping), "{} rows must be objects".format(label))
+        records.append(record)
+    return records
+
+
+def validate_artifact_semantics(manifest: Mapping[str, Any], output_dir: Path) -> None:
+    """Replay captured transport bytes and independently reconstruct evidence truth."""
+
+    root = output_dir.resolve()
+    wire_path = root / "wire" / "frames.bin"
+    index_path = root / "wire" / "index.ndjson"
+    trace_path = root / "animation_truth_trace.ndjson"
+    contact_path = root / "contact_verification.json"
+    for path, label in (
+        (wire_path, "wire frames"),
+        (index_path, "wire index"),
+        (trace_path, "animation truth trace"),
+        (contact_path, "contact verification"),
+    ):
+        _manifest_error(path.is_file(), "missing semantic artifact: {}".format(label))
+
+    frames = manifest.get("frames")
+    init = manifest.get("init")
+    _manifest_error(isinstance(frames, list), "manifest frames are required for semantic replay")
+    _manifest_error(isinstance(init, Mapping), "manifest INIT is required for semantic replay")
+    index_records = _read_ndjson(index_path, "wire index")
+    trace_mappings = _read_ndjson(trace_path, "animation truth trace")
+    _manifest_error(len(index_records) == len(frames), "wire index frame coverage mismatch")
+    _manifest_error(len(trace_mappings) == len(frames), "truth trace frame coverage mismatch")
+
+    try:
+        wire = wire_path.read_bytes()
+    except OSError as exc:
+        raise ManifestValidationError("cannot read wire frames: {}".format(exc)) from exc
+
+    expected_decoded_length = init.get("expected_decoded_length")
+    cols = init.get("cols")
+    rows = init.get("rows")
+    cell_bytes = init.get("cell_bytes")
+    _manifest_error(_plain_int(expected_decoded_length, 1), "invalid semantic replay frame length")
+    _manifest_error(_plain_int(cols, 1) and _plain_int(rows, 1), "invalid semantic replay raster size")
+    _manifest_error(_plain_int(cell_bytes, 1), "invalid semantic replay cell size")
+
+    previous: Optional[bytes] = None
+    decoded_frames: Dict[int, DecodedRasterFrameV1] = {}
+    trace_records: List[AnimationTruthTraceV1] = []
+    final_offset = 0
+    for position, (frame, index_record, trace_mapping) in enumerate(
+        zip(frames, index_records, trace_mappings)
+    ):
+        _manifest_error(isinstance(frame, Mapping), "manifest frame records must be objects")
+        expected_index = frame.get("frame_index")
+        offset = index_record.get("offset")
+        size = index_record.get("size")
+        _manifest_error(index_record.get("frame_index") == expected_index, "wire index frame mismatch")
+        _manifest_error(index_record.get("codec_tag") == frame.get("codec_tag"), "wire index codec mismatch")
+        _manifest_error(offset == frame.get("wire_offset"), "wire index offset mismatch")
+        _manifest_error(size == frame.get("wire_size"), "wire index size mismatch")
+        _manifest_error(index_record.get("sha256") == frame.get("wire_sha256"), "wire index hash mismatch")
+        _manifest_error(index_record.get("scenario") == frame.get("scenario"), "wire index scenario mismatch")
+        _manifest_error(
+            index_record.get("received_at_utc") == frame.get("received_at_utc"),
+            "wire index receive timestamp mismatch",
+        )
+        _manifest_error(_plain_int(offset) and _plain_int(size, 5), "invalid wire byte range")
+        _manifest_error(offset == final_offset, "wire index byte ranges are not contiguous")
+        end = offset + size
+        _manifest_error(end <= len(wire), "wire byte range exceeds frames.bin")
+        message = wire[offset:end]
+        _manifest_error(hashlib.sha256(message).hexdigest() == frame.get("wire_sha256"), "wire message hash mismatch")
+        _manifest_error(message[4] == frame.get("codec_tag"), "wire message codec tag mismatch")
+        try:
+            decoded_index, decoded = decode_frame(message, previous, cell_bytes=cell_bytes)
+        except (ValueError, zlib.error, struct.error) as exc:
+            raise ManifestValidationError(
+                "wire frame {} failed to decode: {}".format(expected_index, exc)
+            ) from exc
+        _manifest_error(decoded_index == expected_index, "decoded frame index mismatch")
+        _manifest_error(len(decoded) == expected_decoded_length, "decoded frame length mismatch")
+        decoded_sha256 = hashlib.sha256(decoded).hexdigest()
+        _manifest_error(decoded_sha256 == frame.get("sha256"), "decoded frame SHA-256 mismatch")
+
+        try:
+            trace_record = AnimationTruthTraceV1.from_mapping(trace_mapping)
+        except (TypeError, ValueError) as exc:
+            raise ManifestValidationError(
+                "truth trace row {} is invalid: {}".format(position + 1, exc)
+            ) from exc
+        _manifest_error(trace_record.frame_index == expected_index, "truth trace frame index mismatch")
+        _manifest_error(trace_record.codec_tag == frame.get("codec_tag"), "truth trace codec mismatch")
+        _manifest_error(trace_record.encoded_size == size, "truth trace encoded size mismatch")
+        _manifest_error(trace_record.frame_sha256 == decoded_sha256, "truth trace SHA-256 mismatch")
+        _manifest_error(trace_record.frame_fnv1a32 == frame_hash(decoded), "truth trace FNV-1a mismatch")
+
+        decoded_frames[decoded_index] = DecodedRasterFrameV1(cols=cols, rows=rows, cells=decoded)
+        trace_records.append(trace_record)
+        previous = decoded
+        final_offset = end
+
+    _manifest_error(final_offset == len(wire), "frames.bin contains unindexed trailing bytes")
+    recomputed = verify_contact_trace(
+        trace_records,
+        decoded_frames=decoded_frames,
+        strict_raster_evidence=True,
+    ).to_mapping()
+    recomputed["path"] = "contact_verification.json"
+    recomputed = json.loads(json.dumps(recomputed, sort_keys=True))
+    try:
+        stored_contact = json.loads(contact_path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        raise ManifestValidationError("contact verification is not valid JSON: {}".format(exc)) from exc
+    _manifest_error(stored_contact == recomputed, "stored contact report differs from semantic replay")
+    _manifest_error(manifest.get("contact_verification") == recomputed, "manifest contact summary differs from semantic replay")
+
+
 def validate_manifest(manifest: Mapping[str, Any], output_dir: Optional[Path] = None) -> None:
     """Validate evidence semantics; invalid runs remain valid manifest documents."""
 
@@ -1244,6 +1376,11 @@ def validate_manifest(manifest: Mapping[str, Any], output_dir: Optional[Path] = 
             contact["path"] in artifact_paths,
             "contact verification is not registered as an artifact",
         )
+        for required_path in ("wire/frames.bin", "wire/index.ndjson"):
+            _manifest_error(
+                required_path in artifact_paths,
+                "semantic replay artifact is not registered: {}".format(required_path),
+            )
 
     video = manifest.get("video")
     _manifest_error(isinstance(video, Mapping) and isinstance(video.get("available"), bool), "invalid video summary")
@@ -1324,6 +1461,8 @@ def validate_manifest(manifest: Mapping[str, Any], output_dir: Optional[Path] = 
         for item in ranges:
             _manifest_error(_plain_int(item.get("frame_count"), 1), "every valid scenario requires frames")
         _manifest_error(bool(artifacts), "valid evidence requires hashed artifacts")
+        if output_dir is not None:
+            validate_artifact_semantics(manifest, output_dir)
 
 
 def dropped_frame_count(integrity: CaptureIntegrity, queue_stats: QueueStats) -> int:

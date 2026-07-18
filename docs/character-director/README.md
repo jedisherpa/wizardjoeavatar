@@ -34,6 +34,10 @@ must remain labelled as planned.
   visual verification results.
 - `ATOMIC_ANIMATION_TRUTH_2026-07-18.md`: exact frame/trace, contact-lock,
   authored stop/reversal/cast implementation and clean-candidate evidence.
+- `reviews/RUNTIME_BOUND_CONTACT_653D400_TECHNICAL_REVIEW.md`: independent
+  acceptance of the 341-frame runtime, transport, marker, and contact proof.
+- `reviews/RUNTIME_BOUND_CONTACT_653D400_ANIMATION_REVIEW.md`: independent visual
+  rejection with frame-specific cast, gait, turn, and speech blockers.
 - `LIVE_E2E_2026-07-16.md`: isolated live connector, browser, and cursor-fix
   receipt with explicit evidence limits.
 - `FINAL_HANDOFF.md`: ordered 33-section implementation and acceptance handoff.
