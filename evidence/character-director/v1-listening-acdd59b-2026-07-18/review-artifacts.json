@@ -1,0 +1,41 @@
+{
+  "schema": "character_director_review_artifacts_v1",
+  "schema_version": 1,
+  "acceptance_scenario": "V1",
+  "candidate_commit": "acdd59bd3e26e9730735c8169116f23d6bc8bca9",
+  "manifest_sha256": "2371dc8a7ccbc300f20aa23d6955c07b0f66eefaf9e28f405684642562c48a4e",
+  "capture_artifacts": {
+    "normal_speed_video": {
+      "path": "visual-review-7865744cda55-capture.mp4",
+      "sha256": "41d459e3f0956330ecbb3cf195c96b14dd4faa20500bf6fd6aeb3192279af835",
+      "duration_seconds": 12.083333,
+      "fps": 24,
+      "width": 960,
+      "height": 540,
+      "manifest_registered": true
+    },
+    "contact_sheet": {
+      "path": "visual-review-7865744cda55-contact-sheet.png",
+      "sha256": "884d7582af52d251a9a98fc5d8039ec7abb57fd376996ff43f3a267cd9b6c6c6",
+      "manifest_registered": true
+    }
+  },
+  "review_derivatives": {
+    "quarter_speed_video": {
+      "path": "v1-quarter-speed.mp4",
+      "sha256": "57933a953f01968768fc7647b96794a90e3a35d53d197d143c41257a07bb5d08",
+      "duration_seconds": 48.333333,
+      "fps": 24,
+      "width": 960,
+      "height": 540,
+      "manifest_registered": false,
+      "generation": "ffmpeg -i <normal-speed-capture> -an -vf setpts=4.0*PTS,fps=24 -c:v libx264 -pix_fmt yuv420p v1-quarter-speed.mp4"
+    },
+    "machine_acceptance": {
+      "path": "v1-machine-acceptance.json",
+      "sha256": "913c7aad3ca3b269d681d732c482a1ee308e3a7ecc6ada8513b95cd689222371",
+      "manifest_registered": false,
+      "generation": "python3 tools/analyze_character_director_v1.py --manifest manifest.json --output v1-machine-acceptance.json"
+    }
+  }
+}
