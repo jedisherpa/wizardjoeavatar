@@ -52,3 +52,16 @@ Current generated library:
 
 - pose count: 91
 - SHA-256: `00dfb01aa169b52ea29ecb91fb0aec138f78369789d6be084f28a20ff0d9ff91`
+
+## Runtime evidence
+
+`evidence/character-director/locomotion-transitions-eccb583-2026-07-18/`
+is a strict external-runtime capture bound to clean commit `eccb583`. It contains
+341 contiguous decoded frames, the original adaptive wire stream, frame index,
+truth trace, sampled PNGs, H.264 capture, contact sheet, and contact report.
+Semantic replay passed with zero dropped frames and zero contact issues. The
+trace records 87 `walk_front` frames and repeatedly presents the four-pose order
+above without an idle sample.
+
+- manifest SHA-256: `8ba20adbf81af8fb8f11c1c9c71403c16323d1d3effa7fe66af7deef677f94a9`
+- contact report SHA-256: `1151ff81e1108fc6fb954d56374fc83af2fdc7e884a9a00a45f8823358faf96e`
