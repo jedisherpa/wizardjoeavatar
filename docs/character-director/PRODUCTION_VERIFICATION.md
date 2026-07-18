@@ -33,7 +33,7 @@ No green test is presented as proof of acting quality or external authority.
 
 | Repository | Branch | Base HEAD | State at verification |
 | --- | --- | --- | --- |
-| Python/Companion | `codex/character-director` | `e62ddaef8dd9124e4591529e4fb694d93b541c4d` | Transactional render candidates, atomic presentation commit, simulation-tick head-eye coordination, and strict visual evidence |
+| Python/Companion | `codex/character-director` | `4a5af34bef9166e5ffe3fe9651aa7de50935bf9b` | Transactional rendering plus simulation-owned authored transition gates, contact phase rebasing, stopped-contact settle, and speech-only interruption continuity |
 | Prism | `codex/character-director-prism` | `a53b48d6626c5494336406aaa9b48bd52460d55e` | Canonical permission producer and exact-ACK code receipt |
 
 The original dirty source trees and the legacy Python listener on
@@ -43,12 +43,12 @@ The original dirty source trees and the legacy Python listener on
 
 | Surface | Command or gate | Result |
 | --- | --- | --- |
-| Python runtime | `python3 -m unittest discover -s tests -t .` | **Pass:** 495/495 |
+| Python runtime | `python3 -m unittest discover -s tests/wizard -p 'test_*.py'` | **Pass:** 501/501 in 249.050 s |
 | Capability determinism | focused capability and portability suites | **Pass:** 9/9 |
 | Python boundary | `python3 tools/validate_python_scope.py .` | **Pass:** 65 files, zero violations |
 | Python tools | `python3 -m py_compile` for evidence and soak tools | **Pass** |
-| Real-runtime visual capture | strict ordered-command/WebSocket capture harness | **Pass:** 342 contiguous 24 FPS frames from clean commit `e62ddae`, zero drops/overruns/gaps/decoder errors, valid hashed manifest |
-| Independent animation review | two reviews bound to manifest SHA-256 `647e4e6743037198afa5dfba800304c30593b693227469b173534e5aa155aef2` | **Reject:** coherent whole-sprite presentation, but skating locomotion, abrupt pose handoffs, interruption displacement, weak cast recovery, and incomplete V1-V10 evidence |
+| Real-runtime visual capture | strict ordered-command/WebSocket capture harness | **Pass:** 341 contiguous 24 FPS frames from clean commit `4a5af34`, zero drops/overruns/gaps/decoder errors, valid manifest SHA-256 `9b62cf3967d5faa8c04e744977ab38ab75874016fbdee78c134af6c331892522` |
+| Independent animation review | two independent reviews of the new clean capture | **Reject for release; material improvement:** observed-only score increased from 50.0% to 65.9%; terminal reset displacement is eliminated and varied gait reduces static side skating, but locomotion remains 2/4, planted-foot truth is unmeasured, and complete V1-V10 audiovisual evidence remains open |
 | Companion frontend | `npm test` in `companion/frontend` | **Pass:** 27/27 |
 | Companion supervisor | `cargo test --manifest-path companion/src-tauri/Cargo.toml` | **Pass:** 17/17 from a rebuilt target |
 | Visual contract | `python3 tools/verify_animation_quality.py --strict` | **Pass:** 32/32 |
