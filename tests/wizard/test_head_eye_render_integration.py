@@ -39,7 +39,16 @@ class HeadEyeRenderIntegrationTests(unittest.TestCase):
         for _, _, pose_id, _, _ in samples:
             if not pose_sequence or pose_sequence[-1] != pose_id:
                 pose_sequence.append(pose_id)
-        self.assertEqual(pose_sequence, ["front_idle", "profile_left", "back_idle"])
+        self.assertEqual(
+            pose_sequence,
+            [
+                "front_idle",
+                "walk_front_left",
+                "profile_left",
+                "back_left",
+                "back_idle",
+            ],
+        )
 
     def test_same_tick_rerender_cannot_accelerate_head_turn(self):
         source = ProceduralWizardFrameSource(cols=180, rows=101, fps=24)

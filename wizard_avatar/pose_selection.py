@@ -32,6 +32,16 @@ DASH_POSE = "run_front_airborne_reach"
 GROUND_STOP_LEFT_NODE = "ground_stop_left"
 GROUND_STOP_RIGHT_NODE = "ground_stop_right"
 GROUND_STOP_NODES = frozenset({GROUND_STOP_LEFT_NODE, GROUND_STOP_RIGHT_NODE})
+IDLE_PRESENTATION_POSE_BY_FACING = {
+    "south": FRONT_IDLE_POSE,
+    "southeast": WALK_FRONT_RIGHT_POSE,
+    "east": PROFILE_RIGHT_POSE,
+    "northeast": BACK_RIGHT_POSE,
+    "north": BACK_IDLE_POSE,
+    "northwest": BACK_LEFT_POSE,
+    "west": PROFILE_LEFT_POSE,
+    "southwest": WALK_FRONT_LEFT_POSE,
+}
 
 
 @dataclass(frozen=True)
@@ -117,18 +127,11 @@ def presentation_pose_for_facing(
     presented_facing: str,
     available_pose_ids: Optional[Iterable[str]] = None,
 ) -> str:
-    """Choose an authored idle view without advancing animation state."""
+    """Choose the authored view for an idle turn without advancing animation state."""
 
     candidate = pose_id
     if animation_clip_id in {"idle_front", "idle_back", "idle_left", "idle_right"}:
-        if presented_facing in {"north", "northwest", "northeast"}:
-            candidate = BACK_IDLE_POSE
-        elif presented_facing == "west":
-            candidate = PROFILE_LEFT_POSE
-        elif presented_facing == "east":
-            candidate = PROFILE_RIGHT_POSE
-        else:
-            candidate = FRONT_IDLE_POSE
+        candidate = IDLE_PRESENTATION_POSE_BY_FACING.get(presented_facing, pose_id)
     if available_pose_ids is not None and candidate not in set(available_pose_ids):
         return pose_id
     return candidate

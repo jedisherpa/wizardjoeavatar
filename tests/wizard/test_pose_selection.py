@@ -9,6 +9,7 @@ from wizard_avatar.models import ACTIONS, WizardCommand, WizardState
 from wizard_avatar.pose_selection import (
     _nearest_contact_entry_frame,
     _select_graph_v2_sample,
+    presentation_pose_for_facing,
     select_reference_pose_id,
     select_reference_pose_sample,
 )
@@ -62,6 +63,51 @@ class PoseSelectionTests(unittest.TestCase):
             with self.subTest(facing=facing):
                 pose_id = select_reference_pose_id(state_for(facing=facing), AVAILABLE_POSES)
                 self.assertEqual(pose_id, expected_pose)
+
+    def test_idle_turn_presentation_uses_all_eight_authored_views(self):
+        expected_by_facing = {
+            "south": "front_idle",
+            "southeast": "walk_front_right",
+            "east": "profile_right",
+            "northeast": "back_right",
+            "north": "back_idle",
+            "northwest": "back_left",
+            "west": "profile_left",
+            "southwest": "walk_front_left",
+        }
+        for facing, expected_pose in expected_by_facing.items():
+            with self.subTest(facing=facing):
+                self.assertEqual(
+                    presentation_pose_for_facing(
+                        "front_idle",
+                        "idle_front",
+                        facing,
+                        AVAILABLE_POSES,
+                    ),
+                    expected_pose,
+                )
+
+    def test_turn_presentation_does_not_replace_action_pose(self):
+        self.assertEqual(
+            presentation_pose_for_facing(
+                "magic_cast",
+                "cast_front",
+                "northeast",
+                AVAILABLE_POSES,
+            ),
+            "magic_cast",
+        )
+
+    def test_turn_presentation_falls_back_when_authored_view_is_unavailable(self):
+        self.assertEqual(
+            presentation_pose_for_facing(
+                "front_idle",
+                "idle_front",
+                "northeast",
+                {"front_idle"},
+            ),
+            "front_idle",
+        )
 
     def test_front_walk_uses_animation_graph_samples(self):
         self.assertEqual(
