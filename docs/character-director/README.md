@@ -32,6 +32,8 @@ must remain labelled as planned.
   statuses and evidence.
 - `PRODUCTION_VERIFICATION.md`: fresh automated, package, cadence, security, and
   visual verification results.
+- `ATOMIC_ANIMATION_TRUTH_2026-07-18.md`: exact frame/trace, contact-lock,
+  authored stop/reversal/cast implementation and clean-candidate evidence.
 - `LIVE_E2E_2026-07-16.md`: isolated live connector, browser, and cursor-fix
   receipt with explicit evidence limits.
 - `FINAL_HANDOFF.md`: ordered 33-section implementation and acceptance handoff.

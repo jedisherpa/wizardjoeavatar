@@ -33,7 +33,7 @@ No green test is presented as proof of acting quality or external authority.
 
 | Repository | Branch | Base HEAD | State at verification |
 | --- | --- | --- | --- |
-| Python/Companion | `codex/character-director` | `4a5af34bef9166e5ffe3fe9651aa7de50935bf9b` | Transactional rendering plus simulation-owned authored transition gates, contact phase rebasing, stopped-contact settle, and speech-only interruption continuity |
+| Python/Companion | `codex/character-director` | `b7b6101c86b6abd04622935331684b76e3ce8591` | Atomic accepted-frame truth, transactional contact lock, authored reversal/stop, marker-owned cast effect/recovery, and traced transport |
 | Prism | `codex/character-director-prism` | `a53b48d6626c5494336406aaa9b48bd52460d55e` | Canonical permission producer and exact-ACK code receipt |
 
 The original dirty source trees and the legacy Python listener on
@@ -43,12 +43,12 @@ The original dirty source trees and the legacy Python listener on
 
 | Surface | Command or gate | Result |
 | --- | --- | --- |
-| Python runtime | `python3 -m unittest discover -s tests/wizard -p 'test_*.py'` | **Pass:** 501/501 in 249.050 s |
+| Python runtime | `.venv/bin/python -m unittest discover -s tests` | **Pass:** 517/517 in 289.669 s |
 | Capability determinism | focused capability and portability suites | **Pass:** 9/9 |
-| Python boundary | `python3 tools/validate_python_scope.py .` | **Pass:** 65 files, zero violations |
+| Python boundary | `.venv/bin/python tools/validate_python_scope.py .` | **Pass:** 67 files, zero violations |
 | Python tools | `python3 -m py_compile` for evidence and soak tools | **Pass** |
-| Real-runtime visual capture | strict ordered-command/WebSocket capture harness | **Pass:** 341 contiguous 24 FPS frames from clean commit `4a5af34`, zero drops/overruns/gaps/decoder errors, valid manifest SHA-256 `9b62cf3967d5faa8c04e744977ab38ab75874016fbdee78c134af6c331892522` |
-| Independent animation review | two independent reviews of the new clean capture | **Reject for release; material improvement:** observed-only score increased from 50.0% to 65.9%; terminal reset displacement is eliminated and varied gait reduces static side skating, but locomotion remains 2/4, planted-foot truth is unmeasured, and complete V1-V10 audiovisual evidence remains open |
+| Real-runtime visual capture | strict ordered-command/WebSocket/atomic-trace harness | **Pass as engineering evidence:** 340 contiguous 24 FPS frames from clean commit `b7b6101`, zero drops, exact frame/hash/codec trace coverage, 302 declared contact frames, maximum declared drift `1.42e-14` cells, zero root residual, manifest SHA-256 `687cb9319c3b5f595e11b559ded9e10ee18dbba42dc1c1caf32521eddeed7c17` |
+| Independent animation review | two independent reviews of the clean atomic-contact capture | **Reject for release:** 41/100 and 42/100. Contact engineering is materially stronger, but runtime identity, visible-raster contact, presented markers, overflow transport truth, locomotion/cast continuity, and complete V1-V10 evidence remain open. |
 | Companion frontend | `npm test` in `companion/frontend` | **Pass:** 27/27 |
 | Companion supervisor | `cargo test --manifest-path companion/src-tauri/Cargo.toml` | **Pass:** 17/17 from a rebuilt target |
 | Visual contract | `python3 tools/verify_animation_quality.py --strict` | **Pass:** 32/32 |
