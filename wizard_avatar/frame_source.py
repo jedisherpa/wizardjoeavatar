@@ -59,6 +59,10 @@ REFERENCE_EYE_WHITE = (242, 242, 242)
 REFERENCE_EYE_BLUE = (11, 76, 142)
 REFERENCE_SKIN = (234, 167, 75)
 REFERENCE_BROW = (108, 55, 26)
+MEMORY_NOTEBOOK_COVER = (31, 101, 112)
+MEMORY_NOTEBOOK_EDGE = (22, 45, 52)
+MEMORY_NOTEBOOK_PAPER = (241, 230, 190)
+MEMORY_NOTEBOOK_ARCHIVE = (218, 166, 54)
 
 
 @dataclass(frozen=True)
@@ -261,6 +265,12 @@ class ProceduralWizardFrameSource:
             )
         else:
             blit_scaled(stage, local, root_anchor, root_screen, render_scale)
+        self._draw_memory_notebook_overlay(
+            stage,
+            root_screen,
+            render_scale,
+            permission_world,
+        )
         cells = stage.to_frame_bytes()
         frame = WizardCellFrame(
             cols=self.cols,
@@ -309,6 +319,51 @@ class ProceduralWizardFrameSource:
             "prop": (policy.managed_props, policy.visible_props),
         }[surface_class]
         return surface_id not in managed or surface_id in visible
+
+    @staticmethod
+    def _draw_memory_notebook_overlay(
+        stage: CellCanvas,
+        root_screen: Tuple[float, float],
+        scale: float,
+        policy: Optional[PermissionWorldRenderPolicyV1],
+    ) -> None:
+        if (
+            policy is None
+            or policy.source_state_sha256 is None
+            or "memory_notebook" not in policy.managed_props
+            or "memory_notebook" not in policy.visible_props
+        ):
+            return
+
+        cell_size = max(1, round(scale))
+        left = round(root_screen[0] + 36 * scale)
+        top = round(root_screen[1] - 42 * scale)
+        layer_id = "permission_world_memory_notebook"
+
+        def square(x: int, y: int, color: Tuple[int, int, int]) -> None:
+            x0 = left + x * cell_size
+            y0 = top + y * cell_size
+            stage.rect(
+                x0,
+                y0,
+                x0 + cell_size - 1,
+                y0 + cell_size - 1,
+                "#",
+                color,
+                layer_id,
+            )
+
+        for y in range(7):
+            for x in range(7):
+                border = x in {0, 6} or y in {0, 6}
+                square(x, y, MEMORY_NOTEBOOK_EDGE if border else MEMORY_NOTEBOOK_PAPER)
+        for y in range(1, 6):
+            square(1, y, MEMORY_NOTEBOOK_COVER)
+        for x in range(2, 6):
+            square(x, 1, MEMORY_NOTEBOOK_ARCHIVE)
+        for y in (3, 5):
+            for x in range(3, 6):
+                square(x, y, MEMORY_NOTEBOOK_COVER)
 
     def _permissioned_pose_id(
         self,

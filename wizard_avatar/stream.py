@@ -31,6 +31,21 @@ from .runtime import AvatarRuntime, ReplayLog
 _subscriber_ids = count(1)
 
 
+def _permission_render_signature(policy):
+    if policy is None:
+        return None
+    return (
+        policy.source_state_sha256,
+        policy.motion_profile,
+        policy.managed_world_states,
+        policy.managed_effects,
+        policy.managed_props,
+        policy.visible_world_states,
+        policy.visible_effects,
+        policy.visible_props,
+    )
+
+
 @dataclass(eq=False)
 class WizardSubscriber:
     queue: asyncio.Queue[bytes]
@@ -105,6 +120,7 @@ class WizardFrameHub:
         self._queue_drops = 0
         self._resync_count = 0
         self._forced_keyframe_count = 0
+        self._stale_render_discard_count = 0
         self._schedule_overruns = 0
         self._source_hash_history = deque(maxlen=240)
         self._published_at = deque(maxlen=240)
@@ -236,6 +252,7 @@ class WizardFrameHub:
             "resync_count": self._resync_count,
             "slow_subscriber_count": sum(1 for subscriber in self._subscribers if subscriber.dropped_frame_count),
             "forced_keyframe_count": self._forced_keyframe_count,
+            "stale_render_discard_count": self._stale_render_discard_count,
             "schedule_overruns": self._schedule_overruns,
             "frame_hub_error_code": self._task_error_code,
             "frame_hub_failure_count": self._task_failure_count,
@@ -333,7 +350,17 @@ class WizardFrameHub:
     ) -> dict:
         await self.start()
         async with self._current_lock():
-            return dict(self.performance.accept_permission_world(state))
+            now_wall_ms = time.time_ns() // 1_000_000
+            now_monotonic_us = time.perf_counter_ns() // 1000
+            diagnostics = self.performance.accept_permission_world(
+                state,
+                received_at_wall_ms=now_wall_ms,
+            )
+            self.performance._apply_authoritative_permission_world(
+                self.frame_source.controller,
+                now_monotonic_us,
+            )
+            return dict(diagnostics)
 
     async def permission_world_status(self) -> dict:
         await self.start()
@@ -389,6 +416,13 @@ class WizardFrameHub:
                     if capture_render_state is None
                     else capture_render_state()
                 )
+                captured_permission_signature = _permission_render_signature(
+                    getattr(
+                        render_state,
+                        "permission_world",
+                        None,
+                    )
+                )
             # Let command waiters observe their authoritative ack before the
             # synchronous cell compositor begins the presentation frame.
             await asyncio.sleep(0)
@@ -415,6 +449,22 @@ class WizardFrameHub:
                     advance=False,
                 )
             async with self._current_lock():
+                self.performance._apply_authoritative_permission_world(
+                    self.frame_source.controller,
+                    time.perf_counter_ns() // 1000,
+                )
+                current_permission_policy = getattr(
+                    self.frame_source.controller,
+                    "permission_world_render_policy",
+                    None,
+                )
+                if captured_permission_signature != _permission_render_signature(
+                    current_permission_policy
+                ):
+                    self._force_keyframe = True
+                    self._stale_render_discard_count += 1
+                    next_tick = time.perf_counter()
+                    continue
                 self._latest_frame = frame
                 self._source_hash_history.append(
                     {

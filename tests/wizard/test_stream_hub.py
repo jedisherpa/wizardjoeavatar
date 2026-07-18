@@ -1,5 +1,6 @@
 import asyncio
 import threading
+import time
 import unittest
 from types import SimpleNamespace
 from unittest import mock
@@ -7,6 +8,7 @@ from unittest import mock
 from wizard_avatar.frame_source import ProceduralWizardFrameSource
 from wizard_avatar.models import WizardCellFrame, WizardCommand, WizardState
 from wizard_avatar.protocol import TAG_DELTA, decode_frame
+from wizard_avatar.permission_world import CapabilityPermissionV1, PermissionWorldStateV1
 from wizard_avatar.stream import WizardFrameHub
 
 
@@ -187,6 +189,140 @@ class StreamHubTests(unittest.IsolatedAsyncioTestCase):
             finally:
                 release_render.set()
                 await hub.stop()
+
+    async def test_permission_change_discards_in_flight_granted_frame(self):
+        source = ProceduralWizardFrameSource(fps=24)
+        source.controller.state.pose_override_id = "front_idle"
+        source.controller.state.pose_override_until = 100.0
+        hub = WizardFrameHub(source)
+        observed_at_ms = 2_000_000_000_000
+
+        def permission(posture, *, revoked=False):
+            granted = posture == "granted"
+            has_grant = granted or revoked
+            return CapabilityPermissionV1(
+                capability_kind="prop:memory_notebook",
+                posture=posture,
+                required_scope_class="current_character",
+                granted_scope_class="current_character" if has_grant else None,
+                purpose_code="conversation_continuity",
+                granted_at_ms=observed_at_ms - 1 if has_grant else None,
+                affected_surfaces=("wizard.stage",),
+                app_link_state="not_required",
+                expires_at_ms=observed_at_ms + 60_000 if has_grant else None,
+                revoked=revoked,
+            )
+
+        grant = PermissionWorldStateV1.build(
+            source_epoch="permission-source:stream-race",
+            observed_at_ms=observed_at_ms,
+            permissions=(permission("granted"),),
+        )
+        revoke = PermissionWorldStateV1.build(
+            source_epoch="permission-source:stream-race",
+            observed_at_ms=observed_at_ms + 1,
+            permissions=(permission("denied", revoked=True),),
+        )
+
+        await hub.accept_permission_world(grant)
+        render_started = threading.Event()
+        release_render = threading.Event()
+        rendered_policies = []
+        original_render = source.encode_captured_frame_sync
+
+        def blocked_render(state, codec):
+            rendered_policies.append(state.permission_world.visible_props)
+            if not render_started.is_set():
+                render_started.set()
+                release_render.wait(timeout=2.0)
+            return original_render(state, codec)
+
+        with mock.patch.object(
+            source,
+            "encode_captured_frame_sync",
+            side_effect=blocked_render,
+        ):
+            self.assertTrue(await asyncio.to_thread(render_started.wait, 1.0))
+            published_before = hub._published_frames
+            await hub.accept_permission_world(revoke)
+            release_render.set()
+            deadline = asyncio.get_running_loop().time() + 1.0
+            while hub._published_frames == published_before:
+                self.assertLess(asyncio.get_running_loop().time(), deadline)
+                await asyncio.sleep(0.01)
+
+        try:
+            self.assertEqual(rendered_policies[0], ("memory_notebook",))
+            self.assertIn((), rendered_policies[1:])
+            self.assertGreaterEqual(hub._stale_render_discard_count, 1)
+            self.assertEqual(
+                source.controller.permission_world_render_policy.visible_props,
+                (),
+            )
+        finally:
+            release_render.set()
+            await hub.stop()
+
+    async def test_permission_expiry_discards_in_flight_granted_frame(self):
+        source = ProceduralWizardFrameSource(fps=24)
+        hub = WizardFrameHub(source)
+        observed_at_ms = time.time_ns() // 1_000_000
+        state = PermissionWorldStateV1.build(
+            source_epoch="permission-source:stream-expiry",
+            observed_at_ms=observed_at_ms,
+            permissions=(
+                CapabilityPermissionV1(
+                    capability_kind="prop:memory_notebook",
+                    posture="granted",
+                    required_scope_class="current_character",
+                    granted_scope_class="current_character",
+                    purpose_code="conversation_continuity",
+                    granted_at_ms=observed_at_ms - 1,
+                    affected_surfaces=("wizard.stage",),
+                    app_link_state="not_required",
+                    expires_at_ms=observed_at_ms + 200,
+                    revoked=False,
+                ),
+            ),
+        )
+        await hub.accept_permission_world(state)
+        render_started = threading.Event()
+        release_render = threading.Event()
+        rendered_policies = []
+        original_render = source.encode_captured_frame_sync
+
+        def blocked_render(render_state, codec):
+            rendered_policies.append(render_state.permission_world.visible_props)
+            if not render_started.is_set():
+                render_started.set()
+                release_render.wait(timeout=2.0)
+            return original_render(render_state, codec)
+
+        with mock.patch.object(
+            source,
+            "encode_captured_frame_sync",
+            side_effect=blocked_render,
+        ):
+            self.assertTrue(await asyncio.to_thread(render_started.wait, 1.0))
+            published_before = hub._published_frames
+            await asyncio.sleep(0.25)
+            release_render.set()
+            deadline = asyncio.get_running_loop().time() + 1.0
+            while hub._published_frames == published_before:
+                self.assertLess(asyncio.get_running_loop().time(), deadline)
+                await asyncio.sleep(0.01)
+
+        try:
+            self.assertEqual(rendered_policies[0], ("memory_notebook",))
+            self.assertIn((), rendered_policies[1:])
+            self.assertGreaterEqual(hub._stale_render_discard_count, 1)
+            self.assertEqual(
+                source.controller.permission_world_render_policy.visible_props,
+                (),
+            )
+        finally:
+            release_render.set()
+            await hub.stop()
 
     async def test_subscribers_receive_decodable_contiguous_frames(self):
         hub = WizardFrameHub(ProceduralWizardFrameSource(fps=24))

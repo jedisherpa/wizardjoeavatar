@@ -39,12 +39,25 @@ _ROOT_FIELDS = {
     "schema_version",
     "manifest_id",
     "character",
+    "permission_world",
     "sources",
     "counts",
     "poses",
     "capabilities",
     "diagnostics",
     "manifest_sha256",
+}
+_PERMISSION_WORLD_FIELDS = {"bindings"}
+_PERMISSION_WORLD_BINDING_FIELDS = {
+    "world_state_ids",
+    "effect_ids",
+    "prop_ids",
+    "requirements",
+}
+_PERMISSION_WORLD_REQUIREMENT_FIELDS = {
+    "capability_kind",
+    "required_scope_class",
+    "purpose_code",
 }
 _CHARACTER_FIELDS = {
     "character_id",
@@ -614,6 +627,62 @@ def _ownership_capability(
     return result
 
 
+def _permission_prop_overlay_capability(
+    package: CharacterPackage,
+) -> Dict[str, Any]:
+    result = _base_capability(
+        "prop:memory_notebook",
+        "permission_prop_overlay",
+        "permission-bound conversation continuity notebook indicator",
+        "runtime_overlay",
+        package.renderer,
+    )
+    mapping = _empty_mapping()
+    mapping["prop_ids"] = ["memory_notebook"]
+    mapping["channels"] = ["permission_world"]
+    mapping["ownership"] = "independently_compositable"
+    result["mapping"] = mapping
+    result["compatibility"] = {
+        "speech": "compatible",
+        "locomotion": "compatible",
+        "compatible_channels": ["body", "face", "locomotion", "mouth", "speech"],
+        "disabled_channel_behavior": "suppress_without_current_permission",
+    }
+    result["accessibility"] = {
+        "full": "admitted",
+        "reduced": "admitted",
+        "still": "admitted",
+        "enforcement": "runtime_mapped",
+    }
+    result["fallback"] = {
+        "intent": None,
+        "capability_id": None,
+        "reason_code": "permission_world_authority_required",
+    }
+    result["quality"] = {"tier": "runtime", "status": "runtime_supported"}
+    result["provenance"] = {
+        "source_ids": ["permission_world", "runtime_renderer"],
+        "evidence_sha256": [],
+        "content_sha256": [
+            _hash_value(
+                {
+                    "prop_id": "memory_notebook",
+                    "renderer": "projected_square_cells",
+                    "width_cells": 7,
+                    "height_cells": 7,
+                }
+            )
+        ],
+    }
+    result["budget"] = {
+        "preload_required": False,
+        "frame_cell_count_max": 49,
+        "memory_bytes": None,
+        "cost_status": "frame_cells_measured_memory_unmeasured",
+    }
+    return result
+
+
 def _unsupported_capability(
     package: CharacterPackage,
     surface: str,
@@ -760,6 +829,7 @@ def _build_manifest(package_path: Path) -> Dict[str, Any]:
         _ownership_capability(package, channel, evidence_hashes)
         for channel in ("staff", "wings")
     )
+    capabilities.append(_permission_prop_overlay_capability(package))
     capabilities.append(_unsupported_capability(package, "dance", evidence_hashes))
     capabilities.sort(key=lambda item: item["capability_id"])
     diagnostics = _diagnostics(graph)
@@ -773,6 +843,20 @@ def _build_manifest(package_path: Path) -> Dict[str, Any]:
             "renderer": package.renderer,
             "default_pose_id": package.default_pose_id,
             "package_capabilities": sorted(package.capabilities),
+        },
+        "permission_world": {
+            "bindings": {
+                "world_state_ids": [],
+                "effect_ids": [],
+                "prop_ids": ["memory_notebook"],
+                "requirements": [
+                    {
+                        "capability_kind": "prop:memory_notebook",
+                        "required_scope_class": "current_character",
+                        "purpose_code": "conversation_continuity",
+                    }
+                ],
+            }
         },
         "sources": {
             "package_sha256": _file_sha256(package_path),
@@ -971,6 +1055,39 @@ def validate_character_capability_manifest(value: Mapping[str, Any]) -> None:
     if character["package_capabilities"] != sorted(character["package_capabilities"]):
         raise _error("invalid_order", "$.character.package_capabilities", "values must be sorted")
 
+    permission_world = _mapping(root["permission_world"], "$.permission_world")
+    _closed(permission_world, _PERMISSION_WORLD_FIELDS, "$.permission_world")
+    bindings = _mapping(permission_world["bindings"], "$.permission_world.bindings")
+    _closed(bindings, _PERMISSION_WORLD_BINDING_FIELDS, "$.permission_world.bindings")
+    for field in sorted(_PERMISSION_WORLD_BINDING_FIELDS):
+        if field == "requirements":
+            continue
+        values = _texts(bindings[field], "$.permission_world.bindings." + field)
+        if values != sorted(values):
+            raise _error(
+                "invalid_order",
+                "$.permission_world.bindings." + field,
+                "values must be sorted",
+            )
+    requirements = _sequence(
+        bindings["requirements"],
+        "$.permission_world.bindings.requirements",
+    )
+    requirement_capabilities = []
+    for index, raw_requirement in enumerate(requirements):
+        path = "$.permission_world.bindings.requirements[{}]".format(index)
+        requirement = _mapping(raw_requirement, path)
+        _closed(requirement, _PERMISSION_WORLD_REQUIREMENT_FIELDS, path)
+        for field in sorted(_PERMISSION_WORLD_REQUIREMENT_FIELDS):
+            _text(requirement[field], path + "." + field)
+        requirement_capabilities.append(requirement["capability_kind"])
+    if requirement_capabilities != sorted(set(requirement_capabilities)):
+        raise _error(
+            "invalid_order",
+            "$.permission_world.bindings.requirements",
+            "requirements must be unique and sorted by capability_kind",
+        )
+
     sources = _mapping(root["sources"], "$.sources")
     _closed(sources, _SOURCE_FIELDS, "$.sources")
     for field in sorted(_SOURCE_FIELDS - {"evidence"}):
@@ -1048,6 +1165,40 @@ def validate_character_capability_manifest(value: Mapping[str, Any]) -> None:
         raise _error("duplicate_id", "$.capabilities", "duplicate capability ID")
     if capability_ids != sorted(capability_ids):
         raise _error("invalid_order", "$.capabilities", "capabilities must be sorted by capability_id")
+    admitted_surface_ids = {
+        field: {
+            surface_id
+            for capability in capabilities
+            if capability["admission"] != "unsupported"
+            for surface_id in capability["mapping"][field]
+        }
+        for field in ("effect_ids", "prop_ids")
+    }
+    for field, admitted_ids in admitted_surface_ids.items():
+        unadmitted = sorted(set(bindings[field]) - admitted_ids)
+        if unadmitted:
+            raise _error(
+                "permission_binding_unadmitted",
+                "$.permission_world.bindings." + field,
+                "binding lacks an admitted capability mapping: {}".format(
+                    ", ".join(unadmitted)
+                ),
+            )
+    bound_capability_kinds = {
+        "{}:{}".format(surface_class, surface_id)
+        for surface_class, field in (
+            ("world_state", "world_state_ids"),
+            ("effect", "effect_ids"),
+            ("prop", "prop_ids"),
+        )
+        for surface_id in bindings[field]
+    }
+    if set(requirement_capabilities) != bound_capability_kinds:
+        raise _error(
+            "permission_requirement_mismatch",
+            "$.permission_world.bindings.requirements",
+            "each permission-bound capability requires one exact scope/purpose rule",
+        )
     capability_id_set = set(capability_ids)
     clip_capabilities = {
         capability["mapping"]["clip_ids"][0]: capability

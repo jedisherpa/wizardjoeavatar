@@ -9,6 +9,7 @@ from wizard_avatar.permission_world import (
     PERMISSION_WORLD_MAX_BODY_BYTES,
     CapabilityPermissionV1,
     PermissionWorldCapabilityIndexV1,
+    PermissionWorldCapabilityRequirementV1,
     PermissionWorldStateV1,
 )
 from wizard_avatar.server import create_app
@@ -22,6 +23,13 @@ class PermissionWorldServerTests(unittest.IsolatedAsyncioTestCase):
                 world_state_ids=(),
                 effect_ids=("magic_effect",),
                 prop_ids=(),
+                requirements=(
+                    PermissionWorldCapabilityRequirementV1(
+                        "effect:magic_effect",
+                        "current_surface",
+                        "calendar_coordination",
+                    ),
+                ),
             )
         )
 

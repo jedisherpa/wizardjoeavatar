@@ -9,6 +9,7 @@ from wizard_avatar.artifact_hashing import canonical_json_v1, sha256_ref
 from wizard_avatar.permission_world import (
     CapabilityPermissionV1,
     PermissionWorldCapabilityIndexV1,
+    PermissionWorldCapabilityRequirementV1,
     PermissionWorldError,
     PermissionWorldRuntime,
     PermissionWorldStateV1,
@@ -75,10 +76,33 @@ def capability_index():
         world_state_ids=("default",),
         effect_ids=("magic_effect",),
         prop_ids=("staff",),
+        requirements=(
+            PermissionWorldCapabilityRequirementV1(
+                "effect:magic_effect",
+                "current_surface",
+                "calendar_coordination",
+            ),
+            PermissionWorldCapabilityRequirementV1(
+                "prop:staff",
+                "current_surface",
+                "calendar_coordination",
+            ),
+            PermissionWorldCapabilityRequirementV1(
+                "world_state:default",
+                "current_surface",
+                "calendar_coordination",
+            ),
+        ),
     )
 
 
 class PermissionWorldTests(unittest.TestCase):
+    def test_bound_capability_without_scope_and_purpose_rule_is_rejected(self):
+        with self.assertRaises(PermissionWorldError) as caught:
+            PermissionWorldCapabilityIndexV1(prop_ids=("staff",))
+
+        self.assertEqual(caught.exception.code, "permission_requirement_mismatch")
+
     def test_record_exposes_exact_content_free_permission_facts(self):
         record = permission()
 

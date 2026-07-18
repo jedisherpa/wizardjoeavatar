@@ -4,11 +4,12 @@
   "title": "CharacterCapabilityManifestV1",
   "type": "object",
   "additionalProperties": false,
-  "required": ["schema_version", "manifest_id", "character", "sources", "counts", "poses", "capabilities", "diagnostics", "manifest_sha256"],
+  "required": ["schema_version", "manifest_id", "character", "permission_world", "sources", "counts", "poses", "capabilities", "diagnostics", "manifest_sha256"],
   "properties": {
     "schema_version": {"const": 1},
     "manifest_id": {"type": "string", "pattern": "^character-capabilities:[a-z0-9][a-z0-9._-]*:v1$"},
     "character": {"$ref": "#/$defs/character"},
+    "permission_world": {"$ref": "#/$defs/permission_world"},
     "sources": {"$ref": "#/$defs/sources"},
     "counts": {"$ref": "#/$defs/counts"},
     "poses": {"type": "array", "items": {"$ref": "#/$defs/pose"}},
@@ -34,6 +35,38 @@
         "renderer": {"$ref": "#/$defs/text"},
         "default_pose_id": {"$ref": "#/$defs/text"},
         "package_capabilities": {"$ref": "#/$defs/texts"}
+      }
+    },
+    "permission_world": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["bindings"],
+      "properties": {
+        "bindings": {"$ref": "#/$defs/permission_world_bindings"}
+      }
+    },
+    "permission_world_bindings": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["world_state_ids", "effect_ids", "prop_ids", "requirements"],
+      "properties": {
+        "world_state_ids": {"$ref": "#/$defs/texts"},
+        "effect_ids": {"$ref": "#/$defs/texts"},
+        "prop_ids": {"$ref": "#/$defs/texts"},
+        "requirements": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/permission_world_requirement"}
+        }
+      }
+    },
+    "permission_world_requirement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["capability_kind", "required_scope_class", "purpose_code"],
+      "properties": {
+        "capability_kind": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._:-]*$"},
+        "required_scope_class": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._:-]*$"},
+        "purpose_code": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._:-]*$"}
       }
     },
     "evidence_source": {

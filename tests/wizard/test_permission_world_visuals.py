@@ -1,4 +1,5 @@
 import copy
+import hashlib
 import unittest
 
 from wizard_avatar.character_capabilities import derive_character_capability_manifest
@@ -30,6 +31,23 @@ def capability_manifest():
                 "world_state_ids": ["default"],
                 "effect_ids": ["magic_effect", "unsupported_calendar_glow"],
                 "prop_ids": ["staff", "unsupported_book"],
+                "requirements": [
+                    {
+                        "capability_kind": "effect:magic_effect",
+                        "required_scope_class": "current_surface",
+                        "purpose_code": "stage_projection",
+                    },
+                    {
+                        "capability_kind": "prop:staff",
+                        "required_scope_class": "current_surface",
+                        "purpose_code": "stage_projection",
+                    },
+                    {
+                        "capability_kind": "world_state:default",
+                        "required_scope_class": "current_surface",
+                        "purpose_code": "stage_projection",
+                    },
+                ],
             }
         },
         "capabilities": [
@@ -50,6 +68,7 @@ def permission(
     posture="granted",
     revoked=False,
     expires_at_ms=OBSERVED_MS + 1_000,
+    app_link_state="linked",
 ):
     granted = posture == "granted"
     return CapabilityPermissionV1(
@@ -60,17 +79,46 @@ def permission(
         purpose_code="stage_projection",
         granted_at_ms=OBSERVED_MS - 1 if granted else None,
         affected_surfaces=("companion.stage",),
-        app_link_state="linked",
+        app_link_state=app_link_state,
         expires_at_ms=expires_at_ms,
         revoked=revoked,
     )
 
 
-def authority_state(*permissions):
+def authority_state(*permissions, observed_at_ms=OBSERVED_MS):
     return PermissionWorldStateV1.build(
         source_epoch="permission-source:visual-test",
-        observed_at_ms=OBSERVED_MS,
+        observed_at_ms=observed_at_ms,
         permissions=permissions,
+    )
+
+
+def notebook_permission(
+    *,
+    posture="granted",
+    revoked=False,
+    expires_at_ms=OBSERVED_MS + 1_000,
+    app_link_state="linked",
+    granted_scope_class=None,
+    required_scope_class="current_character",
+    purpose_code="conversation_continuity",
+):
+    granted = posture == "granted"
+    return CapabilityPermissionV1(
+        capability_kind="prop:memory_notebook",
+        posture=posture,
+        required_scope_class=required_scope_class,
+        granted_scope_class=(
+            required_scope_class
+            if granted and granted_scope_class is None
+            else granted_scope_class
+        ),
+        purpose_code=purpose_code,
+        granted_at_ms=OBSERVED_MS - 1 if granted else None,
+        affected_surfaces=("wizard.character",),
+        app_link_state=app_link_state,
+        expires_at_ms=expires_at_ms,
+        revoked=revoked,
     )
 
 
@@ -81,6 +129,20 @@ def application_and_source():
         character_id=source.character_package.character_id,
         capability_manifest=capability_manifest(),
     )
+    return application, source
+
+
+def production_application_and_source():
+    source = ProceduralWizardFrameSource(180, 101, 24)
+    application = PerformanceApplication(
+        "permission-production-notebook",
+        character_id=source.character_package.character_id,
+        capability_manifest=derive_character_capability_manifest(
+            source.character_package_path
+        ),
+    )
+    source.controller.state.pose_override_id = "front_idle"
+    source.controller.state.pose_override_until = 100.0
     return application, source
 
 
@@ -317,8 +379,122 @@ class PermissionWorldVisualApplicationTests(unittest.TestCase):
         policy = source.controller.permission_world_render_policy
         self.assertEqual(policy.managed_world_states, ())
         self.assertEqual(policy.managed_effects, ())
-        self.assertEqual(policy.managed_props, ())
+        self.assertEqual(policy.managed_props, ("memory_notebook",))
+        self.assertEqual(policy.visible_props, ())
         self.assertIsNotNone(policy.source_state_sha256)
+        self.assertEqual(source.render_current_frame().cells, baseline.cells)
+
+    def test_production_notebook_no_authority_baseline_and_granted_hash_delta(self):
+        application, source = production_application_and_source()
+        baseline = source.render_current_frame()
+
+        application.apply(source.controller, 1_000_000)
+        no_authority = source.render_current_frame()
+        policy = source.controller.permission_world_render_policy
+        self.assertIsNone(policy.source_state_sha256)
+        self.assertEqual(policy.managed_props, ("memory_notebook",))
+        self.assertEqual(no_authority.cells, baseline.cells)
+
+        application.accept_permission_world(
+            authority_state(notebook_permission())
+        )
+        application.apply(source.controller, 1_000_000)
+        policy = source.controller.permission_world_render_policy
+        self.assertEqual(policy.visible_props, ("memory_notebook",))
+        granted = source.render_current_frame()
+        repeated = source.render_current_frame()
+        self.assertNotEqual(
+            hashlib.sha256(granted.cells).hexdigest(),
+            hashlib.sha256(baseline.cells).hexdigest(),
+        )
+        self.assertEqual(
+            hashlib.sha256(granted.cells).hexdigest(),
+            hashlib.sha256(repeated.cells).hexdigest(),
+        )
+        changed = []
+        for index in range(granted.cols * granted.rows):
+            start = index * 4
+            if granted.cells[start : start + 4] != baseline.cells[start : start + 4]:
+                changed.append((index % granted.cols, index // granted.cols))
+        self.assertEqual(len(changed), 49)
+        self.assertEqual(max(x for x, _ in changed) - min(x for x, _ in changed) + 1, 7)
+        self.assertEqual(max(y for _, y in changed) - min(y for _, y in changed) + 1, 7)
+
+    def test_production_notebook_deny_revoke_expiry_and_unlink_restore_baseline(self):
+        cases = (
+            ("denied", notebook_permission(posture="denied"), 1_001_000),
+            ("revoked", notebook_permission(revoked=True), 1_001_000),
+            (
+                "unlinked",
+                notebook_permission(app_link_state="unlinked"),
+                1_001_000,
+            ),
+            (
+                "scope_mismatch",
+                notebook_permission(granted_scope_class="other_character"),
+                1_001_000,
+            ),
+            (
+                "wrong_expected_scope",
+                notebook_permission(required_scope_class="all_characters"),
+                1_001_000,
+            ),
+            (
+                "wrong_purpose",
+                notebook_permission(purpose_code="unrelated_purpose"),
+                1_001_000,
+            ),
+        )
+        for label, replacement, now_us in cases:
+            with self.subTest(case=label):
+                application, source = production_application_and_source()
+                baseline = source.render_current_frame()
+                application.accept_permission_world(
+                    authority_state(notebook_permission())
+                )
+                application.apply(source.controller, 1_000_000)
+                self.assertNotEqual(source.render_current_frame().cells, baseline.cells)
+
+                application.accept_permission_world(
+                    authority_state(replacement, observed_at_ms=OBSERVED_MS + 1)
+                )
+                application.apply(source.controller, now_us)
+                self.assertEqual(
+                    source.controller.permission_world_render_policy.visible_props,
+                    (),
+                )
+                self.assertEqual(source.render_current_frame().cells, baseline.cells)
+
+        application, source = production_application_and_source()
+        baseline = source.render_current_frame()
+        application.accept_permission_world(
+            authority_state(
+                notebook_permission(expires_at_ms=OBSERVED_MS + 20)
+            )
+        )
+        application.apply(source.controller, 1_000_000)
+        self.assertNotEqual(source.render_current_frame().cells, baseline.cells)
+        application.apply(source.controller, 1_021_000)
+        self.assertEqual(
+            source.controller.permission_world_render_policy.visible_props,
+            (),
+        )
+        self.assertEqual(source.render_current_frame().cells, baseline.cells)
+
+        application, source = production_application_and_source()
+        baseline = source.render_current_frame()
+        already_expired = authority_state(
+            notebook_permission(expires_at_ms=OBSERVED_MS + 20)
+        )
+        application.accept_permission_world(
+            already_expired,
+            received_at_wall_ms=OBSERVED_MS + 21,
+        )
+        application.apply(source.controller, 1_000_000)
+        self.assertEqual(
+            source.controller.permission_world_render_policy.visible_props,
+            (),
+        )
         self.assertEqual(source.render_current_frame().cells, baseline.cells)
 
     def test_simulation_is_labeled_and_cannot_control_production_projection(self):

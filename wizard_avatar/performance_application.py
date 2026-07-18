@@ -127,6 +127,7 @@ class PerformanceApplication:
         self._permission_simulation_observed_ms = 0
         self._permission_visual_source_sha256: Optional[str] = None
         self._permission_visual_origin_monotonic_us: Optional[int] = None
+        self._permission_visual_receipt_wall_ms: Optional[int] = None
 
     @property
     def paused(self) -> bool:
@@ -381,10 +382,16 @@ class PerformanceApplication:
     def accept_permission_world(
         self,
         state: PermissionWorldStateV1,
+        received_at_wall_ms: Optional[int] = None,
     ) -> Mapping[str, object]:
         self.permission_world.accept(state)
         self._permission_visual_source_sha256 = None
         self._permission_visual_origin_monotonic_us = None
+        self._permission_visual_receipt_wall_ms = (
+            state.observed_at_ms
+            if received_at_wall_ms is None
+            else max(state.observed_at_ms, int(received_at_wall_ms))
+        )
         return self.permission_world.diagnostics()
 
     def _apply_authoritative_permission_world(
@@ -425,7 +432,10 @@ class PerformanceApplication:
             origin = now_monotonic_us
             self._permission_visual_origin_monotonic_us = origin
         elapsed_ms = max(0, now_monotonic_us - origin) // 1000
-        evaluated_at_ms = state.observed_at_ms + elapsed_ms
+        receipt_wall_ms = self._permission_visual_receipt_wall_ms
+        if receipt_wall_ms is None:
+            receipt_wall_ms = state.observed_at_ms
+        evaluated_at_ms = max(state.observed_at_ms, receipt_wall_ms) + elapsed_ms
         projection = self.permission_world.project(
             evaluated_at_ms=evaluated_at_ms,
             motion_profile=motion_profile,

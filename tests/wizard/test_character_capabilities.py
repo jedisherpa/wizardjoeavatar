@@ -12,6 +12,7 @@ from wizard_avatar.character_capabilities import (
     require_graph_admitted_pose,
     validate_character_capability_manifest,
 )
+from wizard_avatar.permission_world import PermissionWorldCapabilityIndexV1
 
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -50,7 +51,7 @@ class CharacterCapabilityManifestTests(unittest.TestCase):
         )
         self.assertEqual(
             self.manifest["manifest_sha256"],
-            "sha256:761f5faef38a03a801de21915a18a95469797bd3f7e66b59d51c3060bda71fbe",
+            "sha256:08b22488f8eb8a71e70fe2977afd45ec7f323b7742adccd4ea01218fb46ac104",
         )
 
     def test_current_character_counts_and_admission_are_truthful(self):
@@ -63,7 +64,7 @@ class CharacterCapabilityManifestTests(unittest.TestCase):
         self.assertEqual(counts["diagnostic_only_pose_count"], 50)
         self.assertEqual(counts["expression_count"], 10)
         self.assertEqual(counts["mouth_shape_count"], 7)
-        self.assertEqual(counts["capability_count"], 48)
+        self.assertEqual(counts["capability_count"], 49)
         self.assertEqual(counts["diagnostic_count"], 3)
 
         admitted = {
@@ -156,6 +157,47 @@ class CharacterCapabilityManifestTests(unittest.TestCase):
         self.assertEqual(staff["mapping"]["ownership"], "whole_pose")
         self.assertEqual(wings["mapping"]["ownership"], "whole_pose")
 
+    def test_memory_notebook_is_admitted_and_permission_world_indexed(self):
+        self.assertEqual(
+            self.manifest["permission_world"],
+            {
+                "bindings": {
+                    "world_state_ids": [],
+                    "effect_ids": [],
+                    "prop_ids": ["memory_notebook"],
+                    "requirements": [
+                        {
+                            "capability_kind": "prop:memory_notebook",
+                            "required_scope_class": "current_character",
+                            "purpose_code": "conversation_continuity",
+                        }
+                    ],
+                }
+            },
+        )
+        capability = next(
+            item
+            for item in self.manifest["capabilities"]
+            if item["capability_id"] == "prop:memory_notebook"
+        )
+        self.assertEqual(capability["admission"], "runtime_overlay")
+        self.assertEqual(capability["category"], "permission_prop_overlay")
+        self.assertEqual(capability["mapping"]["prop_ids"], ["memory_notebook"])
+        self.assertEqual(
+            capability["mapping"]["ownership"], "independently_compositable"
+        )
+        self.assertEqual(
+            capability["provenance"]["source_ids"],
+            ["permission_world", "runtime_renderer"],
+        )
+
+        index = PermissionWorldCapabilityIndexV1.from_character_manifest(
+            self.manifest
+        )
+        self.assertEqual(index.world_state_ids, ())
+        self.assertEqual(index.effect_ids, ())
+        self.assertEqual(index.prop_ids, ("memory_notebook",))
+
     def test_compiler_guards_reject_diagnostic_and_unsupported_selection(self):
         self.assertEqual(
             require_admitted_capability(self.manifest, "clip:walk_front")["admission"],
@@ -223,6 +265,14 @@ class CharacterCapabilityManifestTests(unittest.TestCase):
         bad_hash = copy.deepcopy(self.manifest)
         bad_hash["manifest_sha256"] = "sha256:" + "0" * 64
         self.assert_validation_code("hash_mismatch", bad_hash)
+
+        unadmitted_binding = copy.deepcopy(self.manifest)
+        unadmitted_binding["permission_world"]["bindings"]["prop_ids"] = [
+            "unknown_prop"
+        ]
+        self.assert_validation_code(
+            "permission_binding_unadmitted", unadmitted_binding
+        )
 
         admitted_closeup = copy.deepcopy(self.manifest)
         closeup = next(

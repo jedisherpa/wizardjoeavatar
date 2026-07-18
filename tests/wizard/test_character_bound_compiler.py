@@ -77,6 +77,12 @@ def _minimal_manifest(source):
     )
     idle["transitions"]["legal_exit_clip_ids"] = ["idle_front"]
     manifest["capabilities"] = [idle]
+    manifest["permission_world"]["bindings"] = {
+        "world_state_ids": [],
+        "effect_ids": [],
+        "prop_ids": [],
+        "requirements": [],
+    }
     manifest["diagnostics"] = []
     manifest["counts"].update(
         {

@@ -52,7 +52,10 @@ REASON_CODES = frozenset(
         "permission_unavailable",
         "permission_unknown",
         "scope_mismatch",
+        "scope_requirement_mismatch",
         "scope_unproven",
+        "purpose_mismatch",
+        "permission_requirement_absent",
         "character_capability_absent",
         "unsupported_capability_kind",
     }
@@ -436,6 +439,18 @@ class PermissionWorldStateV1:
 
 
 @dataclass(frozen=True)
+class PermissionWorldCapabilityRequirementV1:
+    capability_kind: str
+    required_scope_class: str
+    purpose_code: str
+
+    def __post_init__(self) -> None:
+        _content_free_id(self.capability_kind, "$.capability_kind")
+        _content_free_id(self.required_scope_class, "$.required_scope_class")
+        _content_free_id(self.purpose_code, "$.purpose_code")
+
+
+@dataclass(frozen=True)
 class PermissionWorldCapabilityIndexV1:
     """Surfaces explicitly authored as permission-managed by the character.
 
@@ -448,11 +463,34 @@ class PermissionWorldCapabilityIndexV1:
     world_state_ids: Tuple[str, ...] = ()
     effect_ids: Tuple[str, ...] = ()
     prop_ids: Tuple[str, ...] = ()
+    requirements: Tuple[PermissionWorldCapabilityRequirementV1, ...] = ()
 
     def __post_init__(self) -> None:
         _content_free_ids(self.world_state_ids, "$.world_state_ids")
         _content_free_ids(self.effect_ids, "$.effect_ids")
         _content_free_ids(self.prop_ids, "$.prop_ids")
+        capability_kinds = tuple(item.capability_kind for item in self.requirements)
+        if capability_kinds != tuple(sorted(set(capability_kinds))):
+            raise PermissionWorldError(
+                "invalid_order",
+                "permission requirements must be unique and sorted",
+                "$.requirements",
+            )
+        bound_capability_kinds = {
+            "{}:{}".format(surface_class, surface_id)
+            for surface_class, surface_ids in (
+                ("world_state", self.world_state_ids),
+                ("effect", self.effect_ids),
+                ("prop", self.prop_ids),
+            )
+            for surface_id in surface_ids
+        }
+        if set(capability_kinds) != bound_capability_kinds:
+            raise PermissionWorldError(
+                "permission_requirement_mismatch",
+                "each bound capability requires one exact scope/purpose rule",
+                "$.requirements",
+            )
 
     @classmethod
     def from_character_manifest(
@@ -503,11 +541,53 @@ class PermissionWorldCapabilityIndexV1:
 
         requested_effects = ids("effect_ids")
         requested_props = ids("prop_ids")
+        raw_requirements = bindings.get("requirements", ())
+        if type(raw_requirements) not in (list, tuple):
+            raise PermissionWorldError(
+                "invalid_type",
+                "permission requirements must be an array",
+                "$.character_manifest.permission_world.bindings.requirements",
+            )
+        requirements = []
+        for index, raw_requirement in enumerate(raw_requirements):
+            path = "$.character_manifest.permission_world.bindings.requirements[{}]".format(
+                index
+            )
+            requirement = _mapping(raw_requirement, path)
+            _exact(
+                requirement,
+                ("capability_kind", "required_scope_class", "purpose_code"),
+                path,
+            )
+            requirements.append(
+                PermissionWorldCapabilityRequirementV1(
+                    _content_free_id(requirement.get("capability_kind"), path + ".capability_kind"),
+                    _content_free_id(
+                        requirement.get("required_scope_class"),
+                        path + ".required_scope_class",
+                    ),
+                    _content_free_id(requirement.get("purpose_code"), path + ".purpose_code"),
+                )
+            )
 
         return cls(
             ids("world_state_ids"),
             tuple(item for item in requested_effects if item in admitted["effect_ids"]),
             tuple(item for item in requested_props if item in admitted["prop_ids"]),
+            tuple(requirements),
+        )
+
+    def requirement_for(
+        self,
+        capability_kind: str,
+    ) -> Optional[PermissionWorldCapabilityRequirementV1]:
+        return next(
+            (
+                requirement
+                for requirement in self.requirements
+                if requirement.capability_kind == capability_kind
+            ),
+            None,
         )
 
     def resolve(self, capability_kind: str) -> Tuple[str, Optional[str], str]:
@@ -962,6 +1042,14 @@ def _project_permission(
         return absent("unavailable", expiry_class, "unsupported_capability_kind")
     if support_status == "unsupported":
         return absent("unavailable", expiry_class, "character_capability_absent")
+    if capability_index is not None:
+        requirement = capability_index.requirement_for(permission.capability_kind)
+        if requirement is None:
+            return absent("unavailable", expiry_class, "permission_requirement_absent")
+        if permission.required_scope_class != requirement.required_scope_class:
+            return absent("unavailable", expiry_class, "scope_requirement_mismatch")
+        if permission.purpose_code != requirement.purpose_code:
+            return absent("unavailable", expiry_class, "purpose_mismatch")
 
     if permission.posture == "promptable":
         return PermissionAffordanceV1(
@@ -1343,6 +1431,7 @@ __all__ = [
     "CapabilityPermissionV1",
     "PermissionAffordanceV1",
     "PermissionWorldCapabilityIndexV1",
+    "PermissionWorldCapabilityRequirementV1",
     "PermissionWorldError",
     "PermissionWorldProjectionV1",
     "PermissionWorldRenderPolicyV1",
