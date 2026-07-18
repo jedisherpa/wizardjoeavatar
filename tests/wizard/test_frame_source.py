@@ -153,6 +153,58 @@ class FrameSourceTests(unittest.TestCase):
             self.assertIsNotNone(cell)
             self.assertNotIn(cell.rgb, {REFERENCE_EYE_WHITE, REFERENCE_EYE_BLUE})
 
+    def test_head_breath_preserves_the_authored_neck_seam(self):
+        source = ProceduralWizardFrameSource()
+        pose_id = "front_idle"
+        original = render_reference_pose_local(pose_id)
+        breathed = render_reference_pose_local(pose_id)
+        root_x, _ = reference_pose_anchor(pose_id, "root")
+        _, mouth_y = reference_pose_anchor(pose_id, "mouth")
+
+        source._project_reference_head(
+            breathed,
+            pose_id,
+            pose_id,
+            offset_y=-1,
+        )
+
+        seam_y = mouth_y + 8
+        self.assertEqual(
+            [original.get(x, seam_y) for x in range(root_x - 15, root_x + 16)],
+            [breathed.get(x, seam_y) for x in range(root_x - 15, root_x + 16)],
+        )
+
+    def test_profile_blink_uses_one_bounded_visible_aperture(self):
+        source = ProceduralWizardFrameSource()
+        pose_id = "profile_left"
+        open_canvas = render_reference_pose_local(pose_id)
+        blink_canvas = render_reference_pose_local(pose_id)
+        mouth_anchor = reference_pose_anchor(pose_id, "mouth")
+
+        open_evidence = source._apply_reference_face_channels(
+            open_canvas,
+            WizardState(blink_phase=0.0),
+            pose_id,
+            mouth_anchor,
+        )
+        blink_evidence = source._apply_reference_face_channels(
+            blink_canvas,
+            WizardState(blink_phase=1.0),
+            pose_id,
+            mouth_anchor,
+        )
+
+        self.assertEqual(len(open_evidence.eye_apertures), 1)
+        self.assertEqual(len(open_evidence.eye_blue_cells), 2)
+        self.assertEqual(blink_evidence.blink_painted_cells, 6)
+        self.assertTrue(changed_points(open_canvas, blink_canvas))
+        aperture = open_evidence.eye_apertures[0]
+        for point in open_evidence.eye_blue_cells:
+            self.assertLessEqual(aperture.min_x, point.x)
+            self.assertLessEqual(point.x, aperture.max_x)
+            self.assertLessEqual(aperture.min_y, point.y)
+            self.assertLessEqual(point.y, aperture.max_y)
+
     def test_reference_eye_aim_moves_only_the_blue_centers(self):
         source = ProceduralWizardFrameSource()
         pose_id = "front_idle"

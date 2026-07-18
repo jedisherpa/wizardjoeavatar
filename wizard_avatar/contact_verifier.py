@@ -196,22 +196,22 @@ def verify_contact_trace(
                     "support identity changed without a new contact generation",
                 )
             )
-        if record.animation_root_policy == "contact_locked":
-            point = record.planted_anchor_stage
-            origin = stance_origins.setdefault(
-                record.contact_generation,
-                (point.x, point.y),
-            )
-            drift = math.hypot(point.x - origin[0], point.y - origin[1])
-            max_drift = max(max_drift, drift)
-            if drift > maximum_drift_cells:
-                issues.append(
-                    ContactVerificationIssueV1(
-                        record.frame_index,
-                        "planted_anchor_drift",
-                        "planted anchor drifted {:.6f} output cells".format(drift),
-                    )
+        # Root policy controls correction, not the truth of an explicit planted claim.
+        point = record.planted_anchor_stage
+        origin = stance_origins.setdefault(
+            record.contact_generation,
+            (point.x, point.y),
+        )
+        drift = math.hypot(point.x - origin[0], point.y - origin[1])
+        max_drift = max(max_drift, drift)
+        if drift > maximum_drift_cells:
+            issues.append(
+                ContactVerificationIssueV1(
+                    record.frame_index,
+                    "planted_anchor_drift",
+                    "planted anchor drifted {:.6f} output cells".format(drift),
                 )
+            )
 
         if (
             record.animation_clip_id in locomotion_clips

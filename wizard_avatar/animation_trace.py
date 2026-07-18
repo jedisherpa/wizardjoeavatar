@@ -61,19 +61,57 @@ class PresentationChannelsV1:
     speech_mouth_authority: str
     locomotion: str
     action: str
+    rendered_head_pose_id: str
+    turn_progress_milli: int
+    blink_source: str
+    eye_apertures: Tuple[RasterSpanV1, ...]
+    eye_blue_cells: Tuple[LocalPointV1, ...]
+    blink_painted_cells: int
+    head_offset_x: int
+    head_offset_y: int
 
     @classmethod
     def from_mapping(cls, value: Mapping[str, Any]) -> "PresentationChannelsV1":
         expected = {item.name for item in fields(cls)}
+        added = {
+            "rendered_head_pose_id",
+            "turn_progress_milli",
+            "blink_source",
+            "eye_apertures",
+            "eye_blue_cells",
+            "blink_painted_cells",
+            "head_offset_x",
+            "head_offset_y",
+        }
         supplied = set(value) if isinstance(value, Mapping) else set()
-        if not isinstance(value, Mapping) or supplied != expected:
+        if not isinstance(value, Mapping) or frozenset(supplied) not in {
+            frozenset(expected),
+            frozenset(expected.difference(added)),
+        }:
             raise ValueError(
                 "invalid presentation channel fields: missing={} extra={}".format(
                     sorted(expected.difference(supplied)),
                     sorted(supplied.difference(expected)),
                 )
             )
-        result = cls(**dict(value))
+        payload = dict(value)
+        payload.setdefault("rendered_head_pose_id", "legacy_unspecified")
+        payload.setdefault("turn_progress_milli", 1000)
+        payload.setdefault("blink_source", "legacy_unspecified")
+        payload.setdefault("eye_apertures", ())
+        payload.setdefault("eye_blue_cells", ())
+        payload.setdefault("blink_painted_cells", 0)
+        payload.setdefault("head_offset_x", 0)
+        payload.setdefault("head_offset_y", 0)
+        payload["eye_apertures"] = tuple(
+            item if isinstance(item, RasterSpanV1) else RasterSpanV1(**item)
+            for item in payload["eye_apertures"]
+        )
+        payload["eye_blue_cells"] = tuple(
+            item if isinstance(item, LocalPointV1) else LocalPointV1(**item)
+            for item in payload["eye_blue_cells"]
+        )
+        result = cls(**payload)
         if result.head_eye_phase not in {"steady", "leading", "turning", "settling"}:
             raise ValueError("unsupported head-eye phase")
         for name in ("gaze_aim", "gaze_vertical_aim"):
@@ -84,12 +122,47 @@ class PresentationChannelsV1:
             raise ValueError("gaze_authoritative must be boolean")
         if not isinstance(result.blink_closed, bool):
             raise ValueError("blink_closed must be boolean")
+        if (
+            isinstance(result.turn_progress_milli, bool)
+            or not isinstance(result.turn_progress_milli, int)
+            or not 0 <= result.turn_progress_milli <= 1000
+        ):
+            raise ValueError("turn_progress_milli must be between 0 and 1000")
+        if result.blink_source not in {
+            "none",
+            "scheduler",
+            "turn",
+            "scheduler+turn",
+            "legacy_unspecified",
+        }:
+            raise ValueError("unsupported blink_source")
+        if (
+            isinstance(result.blink_painted_cells, bool)
+            or not isinstance(result.blink_painted_cells, int)
+            or result.blink_painted_cells < 0
+        ):
+            raise ValueError("blink_painted_cells must be nonnegative")
+        for name in ("head_offset_x", "head_offset_y"):
+            offset = getattr(result, name)
+            if isinstance(offset, bool) or not isinstance(offset, int) or abs(offset) > 2:
+                raise ValueError("{} must be an integer within two cells".format(name))
+        for aperture in result.eye_apertures:
+            if aperture.min_x > aperture.max_x or aperture.min_y > aperture.max_y:
+                raise ValueError("eye aperture bounds are inverted")
+        for point in result.eye_blue_cells:
+            if not any(
+                aperture.min_x <= point.x <= aperture.max_x
+                and aperture.min_y <= point.y <= aperture.max_y
+                for aperture in result.eye_apertures
+            ):
+                raise ValueError("blue eye cell escaped every aperture")
         for name in (
             "expression",
             "rendered_mouth_shape",
             "speech_mouth_authority",
             "locomotion",
             "action",
+            "rendered_head_pose_id",
         ):
             item = getattr(result, name)
             if not isinstance(item, str) or not item or len(item) > 128:

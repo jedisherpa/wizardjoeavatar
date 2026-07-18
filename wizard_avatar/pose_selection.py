@@ -34,13 +34,13 @@ GROUND_STOP_RIGHT_NODE = "ground_stop_right"
 GROUND_STOP_NODES = frozenset({GROUND_STOP_LEFT_NODE, GROUND_STOP_RIGHT_NODE})
 IDLE_PRESENTATION_POSE_BY_FACING = {
     "south": FRONT_IDLE_POSE,
-    "southeast": WALK_FRONT_RIGHT_POSE,
+    "southeast": FRONT_IDLE_POSE,
     "east": PROFILE_RIGHT_POSE,
     "northeast": BACK_RIGHT_POSE,
     "north": BACK_IDLE_POSE,
     "northwest": BACK_LEFT_POSE,
     "west": PROFILE_LEFT_POSE,
-    "southwest": WALK_FRONT_LEFT_POSE,
+    "southwest": FRONT_IDLE_POSE,
 }
 
 

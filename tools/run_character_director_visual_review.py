@@ -41,7 +41,8 @@ DEFAULT_BASE_URL = "http://127.0.0.1:8875"
 DEFAULT_OUTPUT_DIR = ROOT / "evidence" / "character-director" / "real-runtime-visual-review"
 PROTECTED_LEGACY_PORT = 8765
 SOURCE_ID = "character-director-visual-review"
-MANIFEST_SCHEMA_VERSION = 2
+MANIFEST_SCHEMA_VERSION = 3
+SUPPORTED_MANIFEST_SCHEMA_VERSIONS = {2, MANIFEST_SCHEMA_VERSION}
 EVIDENCE_KIND = "external_real_runtime_visual_review"
 PAIRING_DESCRIPTION = "atomic_animation_truth_trace_v1"
 SHA256_RE = re.compile(r"^[0-9a-f]{64}$")
@@ -53,6 +54,8 @@ SCENARIO_PROGRAM_MAX_BYTES = 64 * 1024
 SCENARIO_PROGRAM_MAX_STEPS = 64
 SCENARIO_PROGRAM_MAX_SECONDS = 10 * 60
 ACCEPTANCE_SCENARIO_RE = re.compile(r"^V(?:[1-9]|10)$")
+REVIEW_BUNDLE_SCHEMA = "character_director_review_bundle_manifest_v1"
+REVIEW_BUNDLE_VERSION = 1
 
 
 class EvidenceFailure(RuntimeError):
@@ -517,7 +520,7 @@ class DecodedFrame:
     cells: bytes
     received_monotonic: float
     received_at_utc: str
-    scenario: str
+    scenario: Optional[str]
     wire_message: bytes
     codec_tag: int
 
@@ -536,7 +539,30 @@ class CaptureRecords:
 
 @dataclass
 class ScenarioClock:
-    current: str = "bootstrap"
+    """Assign an exact number of subsequently published frames to one scenario."""
+
+    current: Optional[str] = None
+    remaining_frames: int = 0
+    completed: asyncio.Event = field(default_factory=asyncio.Event)
+
+    def activate(self, scenario: str, frame_count: int) -> None:
+        if self.current is not None or self.remaining_frames:
+            raise EvidenceFailure("a scenario capture window is already active")
+        if not scenario or frame_count <= 0:
+            raise ValueError("scenario capture windows require a name and positive frame count")
+        self.current = scenario
+        self.remaining_frames = frame_count
+        self.completed = asyncio.Event()
+
+    def claim(self) -> Optional[str]:
+        scenario = self.current
+        if scenario is None:
+            return None
+        self.remaining_frames -= 1
+        if self.remaining_frames == 0:
+            self.current = None
+            self.completed.set()
+        return scenario
 
 
 def utc_now() -> str:
@@ -801,6 +827,7 @@ class FFmpegSink:
         self.process: Optional[asyncio.subprocess.Process] = None
         self.succeeded = False
         self.error: Optional[str] = None
+        self.frame_count = 0
 
     @property
     def available(self) -> bool:
@@ -847,6 +874,7 @@ class FFmpegSink:
             return
         self.process.stdin.write(rgb)
         await self.process.stdin.drain()
+        self.frame_count += 1
 
     async def close(self) -> None:
         if not self.process:
@@ -899,7 +927,7 @@ async def receive_frames(
                     cells=cells,
                     received_monotonic=time.perf_counter(),
                     received_at_utc=utc_now(),
-                    scenario=scenario_clock.current,
+                    scenario=scenario_clock.claim(),
                     wire_message=bytes(message),
                     codec_tag=message[4],
                 )
@@ -941,6 +969,7 @@ async def write_frames(
                 wire_digest = hashlib.sha256(frame.wire_message).hexdigest()
                 wire_size = len(frame.wire_message)
                 wire_file.write(frame.wire_message)
+                capture_owned = frame.scenario is not None
                 records.frames.append(
                     {
                         "frame_index": frame.frame_index,
@@ -950,6 +979,8 @@ async def write_frames(
                         "wire_size": wire_size,
                         "codec_tag": frame.codec_tag,
                         "scenario": frame.scenario,
+                        "capture_owned": capture_owned,
+                        "presentation_frame_index": processed if capture_owned else None,
                         "received_at_utc": frame.received_at_utc,
                         "elapsed_seconds": round(frame.received_monotonic - capture_started, 6),
                     }
@@ -960,11 +991,17 @@ async def write_frames(
                     cells=frame.cells,
                 )
                 wire_offset += wire_size
-                image = await asyncio.to_thread(
-                    square_cell_image, frame.cells, init.cols, init.rows, cell_size
-                )
-                await sink.write(image.tobytes())
-                should_sample = frame.scenario not in sampled_scenarios or processed % sample_every_frames == 0
+                if capture_owned:
+                    image = await asyncio.to_thread(
+                        square_cell_image, frame.cells, init.cols, init.rows, cell_size
+                    )
+                    await sink.write(image.tobytes())
+                    should_sample = (
+                        frame.scenario not in sampled_scenarios
+                        or processed % sample_every_frames == 0
+                    )
+                else:
+                    should_sample = False
                 if should_sample:
                     sample_name = "{}-{:04d}-{}-frame-{}.png".format(
                         run_id, len(records.samples) + 1, frame.scenario, frame.frame_index
@@ -978,11 +1015,13 @@ async def write_frames(
                             "path": sample_path.relative_to(output_dir).as_posix(),
                             "frame_index": frame.frame_index,
                             "scenario": frame.scenario,
+                            "presentation_frame_index": processed,
                             "frame_sha256": digest,
                         }
                     )
                     sampled_scenarios.add(frame.scenario)
-                processed += 1
+                if capture_owned:
+                    processed += 1
                 queue.task_done()
     except Exception as exc:
         integrity.invalidate("frame writer failed: {}".format(exc))
@@ -997,6 +1036,31 @@ async def wait_or_terminal(seconds: float, terminal: asyncio.Event, integrity: C
     except asyncio.TimeoutError:
         return
     raise EvidenceFailure(integrity.failure_reason or "capture terminated")
+
+
+async def wait_for_scenario_frames(
+    scenario_clock: ScenarioClock,
+    terminal: asyncio.Event,
+    integrity: CaptureIntegrity,
+    timeout_seconds: float,
+) -> None:
+    completion = asyncio.create_task(scenario_clock.completed.wait())
+    terminated = asyncio.create_task(terminal.wait())
+    try:
+        done, _ = await asyncio.wait(
+            (completion, terminated),
+            timeout=timeout_seconds,
+            return_when=asyncio.FIRST_COMPLETED,
+        )
+        if completion in done and completion.result():
+            return
+        if terminated in done and terminated.result():
+            raise EvidenceFailure(integrity.failure_reason or "capture terminated")
+        raise EvidenceFailure("scenario capture window timed out before receiving its frame budget")
+    finally:
+        completion.cancel()
+        terminated.cancel()
+        await asyncio.gather(completion, terminated, return_exceptions=True)
 
 
 async def record_state_snapshot(
@@ -1025,11 +1089,11 @@ async def drive_scenarios(
     records: CaptureRecords,
     terminal: asyncio.Event,
     integrity: CaptureIntegrity,
+    fps: float,
 ) -> None:
     for source_sequence, scenario in enumerate(scenarios, start=1):
         if terminal.is_set():
             raise EvidenceFailure(integrity.failure_reason or "capture terminated")
-        scenario_clock.current = scenario.name
         command_id = "{}-{:04d}-{}".format(source_epoch, source_sequence, scenario.name)
         envelope = {
             "schema_version": 1,
@@ -1077,8 +1141,16 @@ async def drive_scenarios(
                 state_url, "{}-after-ack".format(scenario.name), records
             )
             await wait_or_terminal(scenario.settle_seconds, terminal, integrity)
+            planned_frames = max(1, int(round(scenario.capture_seconds * fps)))
+            outcome["capture_planned_frame_count"] = planned_frames
             outcome["capture_started_at_utc"] = utc_now()
-            await wait_or_terminal(scenario.capture_seconds, terminal, integrity)
+            scenario_clock.activate(scenario.name, planned_frames)
+            await wait_for_scenario_frames(
+                scenario_clock,
+                terminal,
+                integrity,
+                timeout_seconds=max(5.0, scenario.capture_seconds * 3.0),
+            )
             outcome["capture_completed_at_utc"] = utc_now()
         except Exception as exc:
             outcome["error"] = "{}: {}".format(type(exc).__name__, exc)
@@ -1123,6 +1195,285 @@ def artifact_record(path: Path, output_dir: Path, media_type: str) -> Dict[str, 
     }
 
 
+def build_review_bundle_manifest(
+    capture_manifest_path: Path,
+    output_dir: Path,
+    review_artifacts: Sequence[Tuple[str, Path, str, Path]],
+) -> Dict[str, Any]:
+    capture_manifest_path = capture_manifest_path.resolve()
+    output_dir = output_dir.resolve()
+    capture_manifest = json.loads(capture_manifest_path.read_text(encoding="utf-8"))
+    validate_manifest(capture_manifest, output_dir)
+    records = []
+    for role, path, media_type, source_path in review_artifacts:
+        path = path.resolve()
+        source_path = source_path.resolve()
+        records.append(
+            {
+                "role": role,
+                "path": path.relative_to(output_dir).as_posix(),
+                "media_type": media_type,
+                "bytes": path.stat().st_size,
+                "sha256": sha256_file(path),
+                "source_path": source_path.relative_to(output_dir).as_posix(),
+                "source_sha256": sha256_file(source_path),
+            }
+        )
+    manifest = {
+        "schema": REVIEW_BUNDLE_SCHEMA,
+        "schema_version": REVIEW_BUNDLE_VERSION,
+        "run_id": capture_manifest.get("source_epoch"),
+        "candidate_commit": capture_manifest.get("provenance", {}).get("head"),
+        "complete": {item["role"] for item in records}
+        == {"machine_acceptance", "quarter_speed"},
+        "capture_manifest": {
+            "path": capture_manifest_path.relative_to(output_dir).as_posix(),
+            "bytes": capture_manifest_path.stat().st_size,
+            "sha256": sha256_file(capture_manifest_path),
+        },
+        "artifacts": records,
+    }
+    validate_review_bundle_manifest(manifest, output_dir)
+    return manifest
+
+
+def validate_review_bundle_manifest(
+    manifest: Mapping[str, Any],
+    output_dir: Path,
+) -> None:
+    expected_fields = {
+        "schema",
+        "schema_version",
+        "run_id",
+        "candidate_commit",
+        "complete",
+        "capture_manifest",
+        "artifacts",
+    }
+    _manifest_error(
+        isinstance(manifest, Mapping) and set(manifest) == expected_fields,
+        "invalid review bundle manifest schema",
+    )
+    _manifest_error(
+        manifest.get("schema") == REVIEW_BUNDLE_SCHEMA
+        and manifest.get("schema_version") == REVIEW_BUNDLE_VERSION,
+        "unsupported review bundle manifest",
+    )
+    _manifest_error(
+        isinstance(manifest.get("run_id"), str) and manifest["run_id"],
+        "review bundle run ID is missing",
+    )
+    _manifest_error(
+        bool(GIT_OBJECT_RE.fullmatch(str(manifest.get("candidate_commit", "")))),
+        "review bundle candidate commit is invalid",
+    )
+    _manifest_error(isinstance(manifest.get("complete"), bool), "review bundle complete must be boolean")
+
+    root = output_dir.resolve()
+
+    def validate_file_record(record: object, expected_fields: set, label: str) -> Path:
+        _manifest_error(
+            isinstance(record, Mapping) and set(record) == expected_fields,
+            "invalid {} record".format(label),
+        )
+        relative = record.get("path")
+        _manifest_error(
+            isinstance(relative, str)
+            and relative
+            and not Path(relative).is_absolute()
+            and ".." not in Path(relative).parts,
+            "invalid {} path".format(label),
+        )
+        candidate = (root / relative).resolve()
+        try:
+            candidate.relative_to(root)
+        except ValueError as exc:
+            raise ManifestValidationError("{} resolves outside output directory".format(label)) from exc
+        _manifest_error(candidate.is_file(), "missing {}: {}".format(label, relative))
+        _manifest_error(_plain_int(record.get("bytes"), 1), "invalid {} byte count".format(label))
+        _manifest_error(candidate.stat().st_size == record["bytes"], "{} byte count mismatch".format(label))
+        _manifest_error(
+            bool(SHA256_RE.fullmatch(str(record.get("sha256", ""))))
+            and sha256_file(candidate) == record["sha256"],
+            "{} SHA-256 mismatch".format(label),
+        )
+        return candidate
+
+    capture_record = manifest.get("capture_manifest")
+    capture_path = validate_file_record(
+        capture_record,
+        {"path", "bytes", "sha256"},
+        "capture manifest",
+    )
+    capture_manifest = json.loads(capture_path.read_text(encoding="utf-8"))
+    validate_manifest(capture_manifest, root)
+    _manifest_error(
+        manifest["run_id"] == capture_manifest.get("source_epoch"),
+        "review bundle run ID differs from capture manifest",
+    )
+    _manifest_error(
+        manifest["candidate_commit"] == capture_manifest.get("provenance", {}).get("head"),
+        "review bundle candidate differs from capture manifest",
+    )
+
+    artifacts = manifest.get("artifacts")
+    _manifest_error(isinstance(artifacts, list), "review bundle artifacts must be an array")
+    roles = []
+    paths = []
+    for artifact in artifacts:
+        validate_file_record(
+            artifact,
+            {
+                "role",
+                "path",
+                "media_type",
+                "bytes",
+                "sha256",
+                "source_path",
+                "source_sha256",
+            },
+            "review artifact",
+        )
+        role = artifact.get("role")
+        _manifest_error(
+            role in {"machine_acceptance", "quarter_speed"},
+            "unsupported review artifact role",
+        )
+        _manifest_error(
+            isinstance(artifact.get("media_type"), str) and artifact["media_type"],
+            "review artifact media type is missing",
+        )
+        expected_media_type = {
+            "machine_acceptance": "application/json",
+            "quarter_speed": "video/mp4",
+        }[role]
+        _manifest_error(
+            artifact["media_type"] == expected_media_type,
+            "review artifact media type does not match its role",
+        )
+        source_relative = artifact.get("source_path")
+        _manifest_error(
+            isinstance(source_relative, str)
+            and source_relative
+            and not Path(source_relative).is_absolute()
+            and ".." not in Path(source_relative).parts,
+            "invalid review artifact source path",
+        )
+        source = (root / source_relative).resolve()
+        _manifest_error(source.is_file(), "review artifact source does not exist")
+        _manifest_error(
+            bool(SHA256_RE.fullmatch(str(artifact.get("source_sha256", ""))))
+            and sha256_file(source) == artifact["source_sha256"],
+            "review artifact source SHA-256 mismatch",
+        )
+        if role == "machine_acceptance":
+            _manifest_error(
+                artifact["path"] == "v1-machine-acceptance.json"
+                and source_relative == capture_record["path"]
+                and artifact["source_sha256"] == capture_record["sha256"],
+                "machine report is not bound to the immutable capture manifest",
+            )
+        else:
+            _manifest_error(
+                artifact["path"] == "v1-quarter-speed.mp4"
+                and source_relative == capture_manifest.get("video", {}).get("path"),
+                "quarter-speed review is not bound to the normal-speed video",
+            )
+        roles.append(role)
+        paths.append(artifact["path"])
+    _manifest_error(len(roles) == len(set(roles)), "review artifact roles must be unique")
+    _manifest_error(len(paths) == len(set(paths)), "review artifact paths must be unique")
+    expected_complete = set(roles) == {"machine_acceptance", "quarter_speed"}
+    _manifest_error(manifest["complete"] == expected_complete, "review bundle completeness mismatch")
+
+
+def generate_v1_review_products(
+    capture_manifest_path: Path,
+    capture_manifest: Mapping[str, Any],
+) -> Path:
+    output_dir = capture_manifest_path.resolve().parent
+    program = capture_manifest.get("scenario_program")
+    if not isinstance(program, Mapping) or program.get("acceptance_scenario") != "V1":
+        raise EvidenceFailure("V1 review products require a V1 scenario program")
+    video = capture_manifest.get("video")
+    if not isinstance(video, Mapping) or video.get("available") is not True:
+        raise EvidenceFailure("V1 review products require the normal-speed video")
+    ffmpeg = shutil.which("ffmpeg")
+    if ffmpeg is None:
+        raise EvidenceFailure("ffmpeg is required for quarter-speed review output")
+
+    normal_video = (output_dir / video["path"]).resolve()
+    quarter_speed = output_dir / "v1-quarter-speed.mp4"
+    quarter_speed.unlink(missing_ok=True)
+    quarter = subprocess.run(
+        (
+            ffmpeg,
+            "-hide_banner",
+            "-loglevel",
+            "error",
+            "-i",
+            str(normal_video),
+            "-an",
+            "-vf",
+            "setpts=4.0*PTS,fps={:.6f}".format(float(capture_manifest["init"]["fps"])),
+            "-c:v",
+            "libx264",
+            "-pix_fmt",
+            "yuv420p",
+            "-movflags",
+            "+faststart",
+            "-y",
+            str(quarter_speed),
+        ),
+        cwd=str(ROOT),
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        check=False,
+    )
+    if quarter.returncode or not quarter_speed.is_file() or not quarter_speed.stat().st_size:
+        raise EvidenceFailure(
+            "quarter-speed generation failed: {}".format(
+                quarter.stderr.decode("utf-8", errors="replace").strip()
+            )
+        )
+
+    machine_report = output_dir / "v1-machine-acceptance.json"
+    machine_report.unlink(missing_ok=True)
+    analysis = subprocess.run(
+        (
+            sys.executable,
+            str(ROOT / "tools" / "analyze_character_director_v1.py"),
+            "--manifest",
+            str(capture_manifest_path),
+            "--output",
+            str(machine_report),
+        ),
+        cwd=str(ROOT),
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        check=False,
+    )
+    if analysis.returncode not in {0, 1} or not machine_report.is_file() or not machine_report.stat().st_size:
+        raise EvidenceFailure(
+            "V1 machine analysis failed to produce a report: {}".format(
+                analysis.stderr.decode("utf-8", errors="replace").strip()
+            )
+        )
+
+    bundle = build_review_bundle_manifest(
+        capture_manifest_path,
+        output_dir,
+        (
+            ("quarter_speed", quarter_speed, "video/mp4", normal_video),
+            ("machine_acceptance", machine_report, "application/json", capture_manifest_path),
+        ),
+    )
+    bundle_path = output_dir / "review-bundle-manifest.json"
+    bundle_path.write_text(json.dumps(bundle, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    validate_review_bundle_manifest(bundle, output_dir)
+    return bundle_path
+
+
 def scenario_ranges(scenarios: Sequence[Scenario], frames: Sequence[Mapping[str, Any]]) -> List[Dict[str, Any]]:
     ranges = []
     for scenario in scenarios:
@@ -1133,11 +1484,70 @@ def scenario_ranges(scenarios: Sequence[Scenario], frames: Sequence[Mapping[str,
                 "first_frame_index": selected[0]["frame_index"] if selected else None,
                 "last_frame_index": selected[-1]["frame_index"] if selected else None,
                 "frame_count": len(selected),
+                "first_presentation_frame_index": (
+                    selected[0]["presentation_frame_index"] if selected else None
+                ),
+                "last_presentation_frame_index": (
+                    selected[-1]["presentation_frame_index"] if selected else None
+                ),
                 "first_received_at_utc": selected[0]["received_at_utc"] if selected else None,
                 "last_received_at_utc": selected[-1]["received_at_utc"] if selected else None,
             }
         )
     return ranges
+
+
+def collect_runtime_observations(
+    runtime_identity: Mapping[str, Any],
+    records: CaptureRecords,
+) -> Dict[str, Any]:
+    """Reconcile process identity with command/state runtime observations."""
+
+    process_epoch = runtime_identity.get("runtime_epoch")
+    if not isinstance(process_epoch, str) or not process_epoch:
+        raise EvidenceFailure("runtime identity process epoch is missing")
+
+    snapshot_epochs: List[str] = []
+    subscriber_counts: List[int] = []
+    for snapshot in records.state_snapshots:
+        body = snapshot.get("body")
+        diagnostics = body.get("diagnostics") if isinstance(body, Mapping) else None
+        if not isinstance(diagnostics, Mapping):
+            raise EvidenceFailure("state snapshot is missing diagnostics")
+        epoch = diagnostics.get("runtime_epoch")
+        subscribers = diagnostics.get("subscriber_count")
+        if not isinstance(epoch, str) or not epoch:
+            raise EvidenceFailure("state snapshot is missing command runtime epoch")
+        if not _plain_int(subscribers, 1):
+            raise EvidenceFailure("state snapshot has an invalid subscriber count")
+        snapshot_epochs.append(epoch)
+        subscriber_counts.append(subscribers)
+
+    acknowledgement_epochs: List[str] = []
+    for command in records.commands:
+        ack = command.get("ack")
+        epoch = ack.get("runtime_epoch") if isinstance(ack, Mapping) else None
+        if not isinstance(epoch, str) or not epoch:
+            raise EvidenceFailure("command acknowledgement is missing runtime epoch")
+        acknowledgement_epochs.append(epoch)
+
+    if not snapshot_epochs or not acknowledgement_epochs:
+        raise EvidenceFailure("runtime observations require snapshots and acknowledgements")
+    command_epochs = set(snapshot_epochs + acknowledgement_epochs)
+    if len(command_epochs) != 1:
+        raise EvidenceFailure("command runtime epoch changed during capture")
+    if len(set(subscriber_counts)) != 1:
+        raise EvidenceFailure("subscriber count changed during capture")
+
+    return {
+        "schema": "character_director_runtime_observations_v1",
+        "schema_version": 1,
+        "identity_process_epoch": process_epoch,
+        "command_runtime_epoch": next(iter(command_epochs)),
+        "subscriber_count": subscriber_counts[0],
+        "snapshot_count": len(snapshot_epochs),
+        "acknowledgement_count": len(acknowledgement_epochs),
+    }
 
 
 def _manifest_error(condition: bool, message: str) -> None:
@@ -1223,6 +1633,16 @@ def validate_artifact_semantics(manifest: Mapping[str, Any], output_dir: Path) -
         _manifest_error(size == frame.get("wire_size"), "wire index size mismatch")
         _manifest_error(index_record.get("sha256") == frame.get("wire_sha256"), "wire index hash mismatch")
         _manifest_error(index_record.get("scenario") == frame.get("scenario"), "wire index scenario mismatch")
+        if manifest.get("schema_version") >= 3:
+            _manifest_error(
+                index_record.get("capture_owned") == frame.get("capture_owned"),
+                "wire index ownership mismatch",
+            )
+            _manifest_error(
+                index_record.get("presentation_frame_index")
+                == frame.get("presentation_frame_index"),
+                "wire index presentation order mismatch",
+            )
         _manifest_error(
             index_record.get("received_at_utc") == frame.get("received_at_utc"),
             "wire index receive timestamp mismatch",
@@ -1282,7 +1702,11 @@ def validate_manifest(manifest: Mapping[str, Any], output_dir: Optional[Path] = 
     """Validate evidence semantics; invalid runs remain valid manifest documents."""
 
     _manifest_error(isinstance(manifest, Mapping), "manifest must be an object")
-    _manifest_error(manifest.get("schema_version") == MANIFEST_SCHEMA_VERSION, "unsupported schema_version")
+    schema_version = manifest.get("schema_version")
+    _manifest_error(
+        schema_version in SUPPORTED_MANIFEST_SCHEMA_VERSIONS,
+        "unsupported schema_version",
+    )
     _manifest_error(manifest.get("evidence_kind") == EVIDENCE_KIND, "unsupported evidence_kind")
     valid = manifest.get("valid")
     _manifest_error(isinstance(valid, bool), "valid must be boolean")
@@ -1401,7 +1825,21 @@ def validate_manifest(manifest: Mapping[str, Any], output_dir: Optional[Path] = 
         _manifest_error(_plain_int(frame.get("wire_offset")), "wire offset must be nonnegative")
         _manifest_error(_plain_int(frame.get("wire_size"), 5), "wire message must include header")
         _manifest_error(frame.get("codec_tag") in {0, 1, 2, 3}, "invalid adaptive codec tag")
-        _manifest_error(isinstance(frame.get("scenario"), str), "frame scenario must be text")
+        if schema_version >= 3:
+            capture_owned = frame.get("capture_owned")
+            _manifest_error(isinstance(capture_owned, bool), "frame capture_owned must be boolean")
+            _manifest_error(
+                (capture_owned and isinstance(frame.get("scenario"), str) and bool(frame["scenario"]))
+                or (not capture_owned and frame.get("scenario") is None),
+                "frame scenario ownership is inconsistent",
+            )
+            presentation_index = frame.get("presentation_frame_index")
+            _manifest_error(
+                (_plain_int(presentation_index) if capture_owned else presentation_index is None),
+                "frame presentation index is inconsistent with ownership",
+            )
+        else:
+            _manifest_error(isinstance(frame.get("scenario"), str), "frame scenario must be text")
         if index:
             _manifest_error(
                 frame["frame_index"] == frames[index - 1]["frame_index"] + 1,
@@ -1416,6 +1854,25 @@ def validate_manifest(manifest: Mapping[str, Any], output_dir: Optional[Path] = 
     capture = manifest.get("capture")
     _manifest_error(isinstance(capture, Mapping), "manifest requires capture summary")
     _manifest_error(capture.get("frame_count") == len(frames), "capture frame count mismatch")
+    if schema_version >= 3:
+        owned_frame_count = sum(frame.get("capture_owned") is True for frame in frames)
+        presentation_indexes = [
+            frame["presentation_frame_index"]
+            for frame in frames
+            if frame.get("capture_owned") is True
+        ]
+        _manifest_error(
+            presentation_indexes == list(range(owned_frame_count)),
+            "presentation frame indexes are not contiguous",
+        )
+        _manifest_error(
+            capture.get("owned_frame_count") == owned_frame_count,
+            "owned capture frame count mismatch",
+        )
+        _manifest_error(
+            capture.get("unowned_frame_count") == len(frames) - owned_frame_count,
+            "unowned capture frame count mismatch",
+        )
     if frames:
         _manifest_error(capture.get("first_frame_index") == frames[0]["frame_index"], "first frame mismatch")
         _manifest_error(capture.get("last_frame_index") == frames[-1]["frame_index"], "last frame mismatch")
@@ -1478,6 +1935,41 @@ def validate_manifest(manifest: Mapping[str, Any], output_dir: Optional[Path] = 
     range_names = [item.get("name") for item in ranges if isinstance(item, Mapping)]
     _manifest_error(len(range_names) == len(ranges), "scenario ranges must be objects")
     _manifest_error(range_names == [scenario.name for scenario in scenarios], "scenario range names/order mismatch")
+    if schema_version >= 3:
+        commands_by_scenario = {
+            command.get("scenario"): command
+            for command in commands
+            if isinstance(command, Mapping)
+        }
+        for item in ranges:
+            selected = [
+                frame for frame in frames if frame.get("scenario") == item["name"]
+            ]
+            _manifest_error(
+                item.get("frame_count") == len(selected)
+                and item.get("first_frame_index")
+                == (selected[0]["frame_index"] if selected else None)
+                and item.get("last_frame_index")
+                == (selected[-1]["frame_index"] if selected else None),
+                "scenario range contains pre/post-window spill",
+            )
+            _manifest_error(
+                item.get("first_presentation_frame_index")
+                == (selected[0]["presentation_frame_index"] if selected else None)
+                and item.get("last_presentation_frame_index")
+                == (selected[-1]["presentation_frame_index"] if selected else None),
+                "scenario range presentation indexes are inconsistent",
+            )
+            command = commands_by_scenario.get(item["name"])
+            _manifest_error(
+                isinstance(command, Mapping)
+                and _plain_int(command.get("capture_planned_frame_count"), 1),
+                "scenario command is missing its exact frame plan",
+            )
+            _manifest_error(
+                item.get("frame_count") == command["capture_planned_frame_count"],
+                "scenario range contains pre/post-window spill",
+            )
 
     artifacts = manifest.get("artifacts")
     _manifest_error(isinstance(artifacts, list), "artifacts must be an array")
@@ -1577,6 +2069,70 @@ def validate_manifest(manifest: Mapping[str, Any], output_dir: Optional[Path] = 
         end_identity is None or isinstance(end_identity, Mapping),
         "invalid ending runtime identity",
     )
+    if schema_version >= 3:
+        observations = manifest.get("runtime_observations")
+        expected_observation_fields = {
+            "schema",
+            "schema_version",
+            "identity_process_epoch",
+            "command_runtime_epoch",
+            "subscriber_count",
+            "snapshot_count",
+            "acknowledgement_count",
+        }
+        _manifest_error(
+            isinstance(observations, Mapping)
+            and set(observations) == expected_observation_fields,
+            "invalid runtime observations schema",
+        )
+        _manifest_error(
+            observations.get("schema") == "character_director_runtime_observations_v1"
+            and observations.get("schema_version") == 1,
+            "unsupported runtime observations",
+        )
+        if valid:
+            _manifest_error(
+                isinstance(observations.get("identity_process_epoch"), str)
+                and observations["identity_process_epoch"]
+                == start_identity.get("runtime_epoch"),
+                "process epoch differs from runtime identity",
+            )
+            _manifest_error(
+                isinstance(observations.get("command_runtime_epoch"), str)
+                and observations["command_runtime_epoch"],
+                "command runtime epoch is missing",
+            )
+            _manifest_error(
+                observations.get("subscriber_count") == 1
+                and manifest.get("subscriber_count") == 1,
+                "valid evidence requires one consistently observed subscriber",
+            )
+            _manifest_error(
+                observations.get("snapshot_count") == len(manifest.get("state_snapshots", ())),
+                "runtime observation snapshot count mismatch",
+            )
+            _manifest_error(
+                observations.get("acknowledgement_count") == len(commands),
+                "runtime observation acknowledgement count mismatch",
+            )
+            for command in commands:
+                _manifest_error(
+                    command["ack"].get("runtime_epoch")
+                    == observations["command_runtime_epoch"],
+                    "command acknowledgement runtime epoch mismatch",
+                )
+            for snapshot in manifest.get("state_snapshots", ()):
+                diagnostics = snapshot.get("body", {}).get("diagnostics", {})
+                _manifest_error(
+                    diagnostics.get("runtime_epoch")
+                    == observations["command_runtime_epoch"],
+                    "state snapshot runtime epoch mismatch",
+                )
+                _manifest_error(
+                    diagnostics.get("subscriber_count")
+                    == observations["subscriber_count"],
+                    "state snapshot subscriber count mismatch",
+                )
 
     if valid:
         _manifest_error(runtime_binding["verified"] is True, "valid evidence requires verified runtime binding")
@@ -1616,6 +2172,19 @@ def validate_manifest(manifest: Mapping[str, Any], output_dir: Optional[Path] = 
             _manifest_error(command.get("state_snapshot") is not None, "valid evidence requires state snapshot")
         for item in ranges:
             _manifest_error(_plain_int(item.get("frame_count"), 1), "every valid scenario requires frames")
+        if schema_version >= 3:
+            _manifest_error(
+                video["available"] is True,
+                "valid evidence requires an H.264 review video",
+            )
+            _manifest_error(
+                video.get("path") in artifact_paths,
+                "normal-speed video is not registered as an artifact",
+            )
+            _manifest_error(
+                video.get("frame_count") == capture.get("owned_frame_count"),
+                "review video must contain exactly the scenario-owned frames",
+            )
         _manifest_error(bool(artifacts), "valid evidence requires hashed artifacts")
         if output_dir is not None:
             validate_artifact_semantics(manifest, output_dir)
@@ -1647,6 +2216,7 @@ def build_manifest(
     output_dir: Path,
     provenance: Mapping[str, Any],
     runtime_binding: Mapping[str, Any],
+    runtime_observations: Mapping[str, Any],
     scenario_program: Optional[ScenarioProgramV1],
 ) -> Dict[str, Any]:
     ranges = scenario_ranges(scenarios, records.frames)
@@ -1654,6 +2224,8 @@ def build_manifest(
         integrity.invalidate("capture produced no decoded frames")
     if integrity.valid and any(item["frame_count"] == 0 for item in ranges):
         integrity.invalidate("one or more scenarios captured no frames")
+    if integrity.valid and not sink.available:
+        integrity.invalidate("ffmpeg is required for exact-frame visual evidence")
     if integrity.valid and sink.available and not sink.succeeded:
         integrity.invalidate("ffmpeg was available but no H.264 MP4 was produced")
     if integrity.valid and not records.sample_paths:
@@ -1664,6 +2236,12 @@ def build_manifest(
         integrity.invalidate("atomic animation trace does not cover every captured frame")
     if integrity.valid and records.contact_verification is None:
         integrity.invalidate("contact verification report is missing")
+    owned_frame_count = sum(frame.get("capture_owned") is True for frame in records.frames)
+    planned_frame_count = sum(
+        int(command.get("capture_planned_frame_count", 0)) for command in records.commands
+    )
+    if integrity.valid and owned_frame_count != planned_frame_count:
+        integrity.invalidate("scenario-owned frame count differs from the exact capture plan")
 
     first = records.frames[0]["frame_index"] if records.frames else None
     last = records.frames[-1]["frame_index"] if records.frames else None
@@ -1675,7 +2253,8 @@ def build_manifest(
         "base_runtime": "external",
         "source_id": SOURCE_ID,
         "source_epoch": source_epoch,
-        "subscriber_count": 1,
+        "subscriber_count": runtime_observations.get("subscriber_count"),
+        "runtime_observations": dict(runtime_observations),
         "replay_exported": False,
         "frame_state_pairing": PAIRING_DESCRIPTION,
         "frame_state_pairing_note": (
@@ -1695,6 +2274,8 @@ def build_manifest(
         },
         "capture": {
             "frame_count": len(records.frames),
+            "owned_frame_count": owned_frame_count,
+            "unowned_frame_count": len(records.frames) - owned_frame_count,
             "first_frame_index": first,
             "last_frame_index": last,
         },
@@ -1743,6 +2324,7 @@ def build_manifest(
             "available": sink.succeeded,
             "path": sink.output_path.relative_to(output_dir).as_posix() if sink.succeeded else None,
             "codec": "h264" if sink.succeeded else None,
+            "frame_count": sink.frame_count,
             "error": sink.error,
         },
         "rendering": {
@@ -1798,6 +2380,15 @@ async def run_visual_review(
     runtime_identity_start: Optional[Dict[str, Any]] = None
     runtime_identity_end: Optional[Dict[str, Any]] = None
     runtime_binding_error: Optional[str] = None
+    runtime_observations: Dict[str, Any] = {
+        "schema": "character_director_runtime_observations_v1",
+        "schema_version": 1,
+        "identity_process_epoch": None,
+        "command_runtime_epoch": None,
+        "subscriber_count": None,
+        "snapshot_count": 0,
+        "acknowledgement_count": 0,
+    }
 
     try:
         runtime_identity_start, _ = await request_json_async("GET", runtime_identity_url)
@@ -1866,6 +2457,7 @@ async def run_visual_review(
                 records,
                 terminal,
                 integrity,
+                init.fps,
             )
             await record_state_snapshot(state_url, "capture-end", records)
             closing.set()
@@ -1929,6 +2521,8 @@ async def run_visual_review(
                         "size": frame["wire_size"],
                         "sha256": frame["wire_sha256"],
                         "scenario": frame["scenario"],
+                        "capture_owned": frame["capture_owned"],
+                        "presentation_frame_index": frame["presentation_frame_index"],
                         "received_at_utc": frame["received_at_utc"],
                     },
                     sort_keys=True,
@@ -1994,6 +2588,21 @@ async def run_visual_review(
         runtime_binding_error = "{}: {}".format(type(exc).__name__, exc)
         integrity.invalidate("runtime binding failed: {}".format(exc))
 
+    if runtime_identity_start is not None:
+        try:
+            runtime_observations = collect_runtime_observations(
+                runtime_identity_start,
+                records,
+            )
+            if runtime_observations["subscriber_count"] != 1:
+                integrity.invalidate(
+                    "strict evidence requires exactly one ASCILINE subscriber; observed {}".format(
+                        runtime_observations["subscriber_count"]
+                    )
+                )
+        except EvidenceFailure as exc:
+            integrity.invalidate("runtime observations failed: {}".format(exc))
+
     for path in records.sample_paths:
         if path.is_file():
             artifacts.append(artifact_record(path, output_dir, "image/png"))
@@ -2056,6 +2665,7 @@ async def run_visual_review(
         output_dir,
         provenance,
         runtime_binding,
+        runtime_observations,
         scenario_program,
     )
     try:
@@ -2081,6 +2691,7 @@ async def run_visual_review(
                 output_dir,
                 provenance,
                 runtime_binding,
+                runtime_observations,
                 scenario_program,
             )
             validate_manifest(manifest, output_dir)
@@ -2142,6 +2753,16 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     if not manifest["valid"]:
         print("INVALID: {}".format(manifest["failure_reason"]), file=sys.stderr)
         return 1
+    if (
+        args.scenario_program is not None
+        and args.scenario_program.acceptance_scenario == "V1"
+    ):
+        try:
+            bundle_path = generate_v1_review_products(manifest_path, manifest)
+        except (EvidenceFailure, ManifestValidationError, OSError, ValueError) as exc:
+            print("INVALID REVIEW BUNDLE: {}".format(exc), file=sys.stderr)
+            return 1
+        print(bundle_path)
     print("VALID: {} contiguous frames, zero dropped frames".format(manifest["capture"]["frame_count"]))
     return 0
 

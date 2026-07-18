@@ -46,18 +46,19 @@ def _compact(values: Sequence[object]) -> List[object]:
     return result
 
 
-def _closed_runs(records: Sequence[Mapping[str, Any]]) -> List[int]:
-    runs: List[int] = []
-    current = 0
-    for record in records:
+def _closed_ranges(records: Sequence[Mapping[str, Any]]) -> List[Tuple[int, int]]:
+    runs: List[Tuple[int, int]] = []
+    start: Optional[int] = None
+    for index, record in enumerate(records):
         channels = record["presentation_channels"]
         if channels["blink_closed"]:
-            current += 1
-        elif current:
-            runs.append(current)
-            current = 0
-    if current:
-        runs.append(current)
+            if start is None:
+                start = index
+        elif start is not None:
+            runs.append((start, index))
+            start = None
+    if start is not None:
+        runs.append((start, len(records)))
     return runs
 
 
@@ -175,6 +176,7 @@ def analyze_v1(
 
     turn_facings = [item.get("presented_facing") for item in turn_records]
     turn_phases = [item["head_eye_phase"] for item in turn]
+    turn_head_poses = [item.get("rendered_head_pose_id") for item in turn]
     target_indexes = [
         index for index, facing in enumerate(turn_facings) if facing == "west"
     ]
@@ -202,20 +204,81 @@ def analyze_v1(
             "first_target_gaze_aim": (
                 None if first_target is None else turn[first_target]["gaze_aim"]
             ),
+            "rendered_head_pose_sequence": _compact(turn_head_poses),
+        },
+    )
+    _check(
+        report,
+        "head_only_turn_uses_no_locomotion_pose",
+        bool(turn_records)
+        and all(item.get("rendered_pose_id") == "front_idle" for item in turn_records)
+        and "walk_front_left" not in turn_head_poses
+        and "walk_front_right" not in turn_head_poses
+        and "profile_left" in turn_head_poses,
+        {
+            "body_pose_sequence": _compact(
+                [item.get("rendered_pose_id") for item in turn_records]
+            ),
+            "head_pose_sequence": _compact(turn_head_poses),
         },
     )
 
     all_trace = [trace for _, trace in paired]
-    blink_runs = _closed_runs(all_trace) if not missing_channels else []
+    blink_ranges = _closed_ranges(all_trace) if not missing_channels else []
+    blink_runs = [end - start for start, end in blink_ranges]
     fps = float(manifest.get("init", {}).get("fps", 0.0) or 0.0)
     blink_durations_ms = [round(run * 1000.0 / fps, 3) for run in blink_runs] if fps else []
+    visible_blink_runs = []
+    for start, end in blink_ranges:
+        painted = all(
+            int(all_trace[index]["presentation_channels"].get("blink_painted_cells", 0))
+            > 0
+            for index in range(start, end)
+        )
+        changed_on_close = start == 0 or (
+            all_trace[start].get("frame_sha256")
+            != all_trace[start - 1].get("frame_sha256")
+        )
+        changed_on_open = end == len(all_trace) or (
+            all_trace[end - 1].get("frame_sha256")
+            != all_trace[end].get("frame_sha256")
+        )
+        visible_blink_runs.append(painted and changed_on_close and changed_on_open)
     _check(
         report,
         "two_blinks_with_bounded_closure",
         len(blink_runs) >= 2
         and all(3 <= run <= 4 for run in blink_runs[:2])
-        and all(100.0 <= duration <= 200.0 for duration in blink_durations_ms[:2]),
-        {"closed_frame_runs": blink_runs, "durations_ms": blink_durations_ms},
+        and all(100.0 <= duration <= 200.0 for duration in blink_durations_ms[:2])
+        and all(visible_blink_runs[:2]),
+        {
+            "closed_frame_runs": blink_runs,
+            "durations_ms": blink_durations_ms,
+            "visible_runs": visible_blink_runs,
+        },
+    )
+
+    eye_bound_failures = []
+    for trace in all_trace:
+        channels_value = trace["presentation_channels"]
+        apertures = channels_value.get("eye_apertures", ())
+        for point in channels_value.get("eye_blue_cells", ()):
+            if not any(
+                aperture["min_x"] <= point["x"] <= aperture["max_x"]
+                and aperture["min_y"] <= point["y"] <= aperture["max_y"]
+                for aperture in apertures
+            ):
+                eye_bound_failures.append(trace.get("frame_index"))
+    _check(
+        report,
+        "explicit_eye_aperture_bounds",
+        bool(all_trace)
+        and all(
+            item["presentation_channels"].get("eye_apertures")
+            for item in all_trace
+        )
+        and not eye_bound_failures,
+        {"escaped_frames": eye_bound_failures},
     )
 
     roots = [(item.get("world_root_x"), item.get("world_root_z")) for item in all_trace]
@@ -226,6 +289,7 @@ def analyze_v1(
         "z": max(root_z) - min(root_z) if root_z else math.inf,
     }
     all_channels = [item["presentation_channels"] for item in all_trace if isinstance(item.get("presentation_channels"), Mapping)]
+    unique_frame_hashes = len({item.get("frame_sha256") for item in all_trace})
     _check(
         report,
         "listening_stillness_and_silence",
@@ -235,13 +299,15 @@ def analyze_v1(
         and all(item["locomotion"] == "idle" for item in all_channels)
         and all(item["action"] == "idle" for item in all_channels)
         and all(item["rendered_mouth_shape"] == "closed" for item in all_channels)
-        and all(item["speech_mouth_authority"] == "none" for item in all_channels),
+        and all(item["speech_mouth_authority"] == "none" for item in all_channels)
+        and unique_frame_hashes >= 8,
         {
             "root_span": root_span,
             "locomotion_values": sorted({item["locomotion"] for item in all_channels}),
             "action_values": sorted({item["action"] for item in all_channels}),
             "mouth_values": sorted({item["rendered_mouth_shape"] for item in all_channels}),
             "speech_authorities": sorted({item["speech_mouth_authority"] for item in all_channels}),
+            "unique_presented_frame_hashes": unique_frame_hashes,
         },
     )
 
@@ -252,7 +318,9 @@ def analyze_v1(
         "blink_durations_ms": blink_durations_ms,
         "turn_facing_sequence": _compact(turn_facings),
         "turn_phase_sequence": _compact(turn_phases),
+        "turn_head_pose_sequence": _compact(turn_head_poses),
         "root_span": root_span,
+        "unique_presented_frame_hashes": unique_frame_hashes,
     }
     report["passed"] = bool(report["checks"]) and all(
         item["passed"] for item in report["checks"]

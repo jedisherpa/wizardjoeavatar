@@ -6,15 +6,20 @@ import tempfile
 import unittest
 import sys
 from pathlib import Path
+from unittest import mock
 
 from tools.run_character_director_visual_review import (
+    CaptureRecords,
     CaptureIntegrity,
     EvidenceFailure,
     FrameGapError,
     ManifestValidationError,
     QueueOverflowError,
     QueueStats,
+    ScenarioClock,
     StrictFrameDecoder,
+    build_review_bundle_manifest,
+    collect_runtime_observations,
     enqueue_decoded_frame,
     load_scenario_program,
     parse_init,
@@ -23,6 +28,7 @@ from tools.run_character_director_visual_review import (
     square_cell_image,
     validate_artifact_semantics,
     validate_manifest,
+    validate_review_bundle_manifest,
     validate_runtime_binding,
     validate_scenarios,
 )
@@ -205,6 +211,20 @@ class ScenarioSchemaTests(unittest.TestCase):
 
 
 class StrictCaptureTests(unittest.IsolatedAsyncioTestCase):
+    async def test_scenario_clock_owns_exact_frame_budget_without_spill(self):
+        clock = ScenarioClock()
+
+        self.assertIsNone(clock.claim())
+        clock.activate("listen-left", 3)
+        self.assertEqual([clock.claim(), clock.claim(), clock.claim()], ["listen-left"] * 3)
+        self.assertTrue(clock.completed.is_set())
+        self.assertIsNone(clock.claim())
+        self.assertIsNone(clock.current)
+
+        clock.activate("return-viewer", 2)
+        self.assertEqual([clock.claim(), clock.claim()], ["return-viewer"] * 2)
+        self.assertTrue(clock.completed.is_set())
+
     async def test_queue_overflow_is_terminal_and_never_drops_silently(self):
         queue = asyncio.Queue(maxsize=1)
         stats = QueueStats(capacity=1)
@@ -313,7 +333,7 @@ class ManifestValidationTests(unittest.TestCase):
         digest = "a" * 64
         identity = self.runtime_identity(digest)
         return {
-            "schema_version": 2,
+            "schema_version": 3,
             "evidence_kind": "external_real_runtime_visual_review",
             "valid": True,
             "failure_reason": None,
@@ -335,6 +355,16 @@ class ManifestValidationTests(unittest.TestCase):
                 "start": identity,
                 "end": identity,
             },
+            "runtime_observations": {
+                "schema": "character_director_runtime_observations_v1",
+                "schema_version": 1,
+                "identity_process_epoch": "runtime-test",
+                "command_runtime_epoch": "command-runtime-test",
+                "subscriber_count": 1,
+                "snapshot_count": 1,
+                "acknowledgement_count": 1,
+            },
+            "subscriber_count": 1,
             "init": {
                 "fps": 24.0,
                 "cols": 1,
@@ -349,6 +379,8 @@ class ManifestValidationTests(unittest.TestCase):
             },
             "capture": {
                 "frame_count": 2,
+                "owned_frame_count": 2,
+                "unowned_frame_count": 0,
                 "first_frame_index": 10,
                 "last_frame_index": 11,
             },
@@ -371,6 +403,8 @@ class ManifestValidationTests(unittest.TestCase):
                     "first_frame_index": 10,
                     "last_frame_index": 11,
                     "frame_count": 2,
+                    "first_presentation_frame_index": 0,
+                    "last_presentation_frame_index": 1,
                 }
             ],
             "commands": [
@@ -378,7 +412,11 @@ class ManifestValidationTests(unittest.TestCase):
                     "scenario": "idle",
                     "command_id": "visual-review-0001-idle",
                     "source_sequence": 1,
-                    "ack": {"disposition": "applied"},
+                    "capture_planned_frame_count": 2,
+                    "ack": {
+                        "disposition": "applied",
+                        "runtime_epoch": "command-runtime-test",
+                    },
                     "response_state": {},
                     "state_snapshot": {},
                 }
@@ -392,6 +430,8 @@ class ManifestValidationTests(unittest.TestCase):
                     "wire_size": 8,
                     "codec_tag": 0,
                     "scenario": "idle",
+                    "capture_owned": True,
+                    "presentation_frame_index": 0,
                     "received_at_utc": "2026-07-18T00:00:00Z",
                     "elapsed_seconds": 0.1,
                 },
@@ -403,6 +443,8 @@ class ManifestValidationTests(unittest.TestCase):
                     "wire_size": 8,
                     "codec_tag": 0,
                     "scenario": "idle",
+                    "capture_owned": True,
+                    "presentation_frame_index": 1,
                     "received_at_utc": "2026-07-18T00:00:00Z",
                     "elapsed_seconds": 0.2,
                 },
@@ -420,6 +462,16 @@ class ManifestValidationTests(unittest.TestCase):
                 "passed": True,
                 "path": "contact_verification.json",
             },
+            "state_snapshots": [
+                {
+                    "body": {
+                        "diagnostics": {
+                            "runtime_epoch": "command-runtime-test",
+                            "subscriber_count": 1,
+                        }
+                    }
+                }
+            ],
             "artifacts": [
                 {"path": "samples/idle.png", "sha256": digest, "bytes": 123},
                 {
@@ -434,8 +486,14 @@ class ManifestValidationTests(unittest.TestCase):
                 },
                 {"path": "wire/frames.bin", "sha256": digest, "bytes": 16},
                 {"path": "wire/index.ndjson", "sha256": digest, "bytes": 456},
+                {"path": "capture.mp4", "sha256": digest, "bytes": 456},
             ],
-            "video": {"available": False, "path": None, "codec": None},
+            "video": {
+                "available": True,
+                "path": "capture.mp4",
+                "codec": "h264",
+                "frame_count": 2,
+            },
             "rendering": {"cell_shape": "square", "pixel_format": "rgb24"},
         }
 
@@ -482,6 +540,106 @@ class ManifestValidationTests(unittest.TestCase):
                         binding["base_url"],
                     )
 
+    def test_runtime_observations_reconcile_command_epoch_and_subscribers(self):
+        records = CaptureRecords(
+            commands=[
+                {"ack": {"runtime_epoch": "command-runtime-a"}},
+                {"ack": {"runtime_epoch": "command-runtime-a"}},
+            ],
+            state_snapshots=[
+                {
+                    "body": {
+                        "diagnostics": {
+                            "runtime_epoch": "command-runtime-a",
+                            "subscriber_count": 1,
+                        }
+                    }
+                },
+                {
+                    "body": {
+                        "diagnostics": {
+                            "runtime_epoch": "command-runtime-a",
+                            "subscriber_count": 1,
+                        }
+                    }
+                },
+            ],
+        )
+        observations = collect_runtime_observations(
+            {"runtime_epoch": "process-runtime-a"},
+            records,
+        )
+        self.assertEqual(observations["identity_process_epoch"], "process-runtime-a")
+        self.assertEqual(observations["command_runtime_epoch"], "command-runtime-a")
+        self.assertEqual(observations["subscriber_count"], 1)
+
+        records.state_snapshots[1]["body"]["diagnostics"]["subscriber_count"] = 2
+        with self.assertRaisesRegex(EvidenceFailure, "subscriber count changed"):
+            collect_runtime_observations({"runtime_epoch": "process-runtime-a"}, records)
+
+        records.state_snapshots[1]["body"]["diagnostics"]["subscriber_count"] = 1
+        records.commands[1]["ack"]["runtime_epoch"] = "command-runtime-b"
+        with self.assertRaisesRegex(EvidenceFailure, "runtime epoch changed"):
+            collect_runtime_observations({"runtime_epoch": "process-runtime-a"}, records)
+
+    def test_schema_three_rejects_scenario_spill_and_snapshot_conflicts(self):
+        manifest = self.valid_manifest()
+        manifest["frames"][0].update(
+            capture_owned=False,
+            scenario=None,
+            presentation_frame_index=None,
+        )
+        manifest["frames"][1]["presentation_frame_index"] = 0
+        manifest["capture"].update(owned_frame_count=1, unowned_frame_count=1)
+        manifest["video"]["frame_count"] = 1
+        with self.assertRaisesRegex(ManifestValidationError, "pre/post-window spill"):
+            validate_manifest(manifest)
+
+        manifest = self.valid_manifest()
+        manifest["state_snapshots"][0]["body"]["diagnostics"]["subscriber_count"] = 2
+        with self.assertRaisesRegex(ManifestValidationError, "subscriber count mismatch"):
+            validate_manifest(manifest)
+
+    def test_review_bundle_binds_capture_machine_and_quarter_speed_artifacts(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            capture = self.valid_manifest()
+            capture["source_epoch"] = "visual-review-test"
+            capture["video"]["path"] = "normal-speed.mp4"
+            capture_manifest = root / "manifest.json"
+            capture_manifest.write_text(json.dumps(capture), encoding="utf-8")
+            capture_manifest_bytes = capture_manifest.read_bytes()
+            normal_video = root / "normal-speed.mp4"
+            normal_video.write_bytes(b"normal-video")
+            quarter_speed = root / "v1-quarter-speed.mp4"
+            quarter_speed.write_bytes(b"quarter-speed-video")
+            machine_report = root / "v1-machine-acceptance.json"
+            machine_report.write_text('{"passed":false}\n', encoding="utf-8")
+
+            with mock.patch(
+                "tools.run_character_director_visual_review.validate_manifest"
+            ):
+                bundle = build_review_bundle_manifest(
+                    capture_manifest,
+                    root,
+                    (
+                        ("quarter_speed", quarter_speed, "video/mp4", normal_video),
+                        (
+                            "machine_acceptance",
+                            machine_report,
+                            "application/json",
+                            capture_manifest,
+                        ),
+                    ),
+                )
+                self.assertTrue(bundle["complete"])
+                self.assertEqual(capture_manifest.read_bytes(), capture_manifest_bytes)
+                validate_review_bundle_manifest(bundle, root)
+
+                bundle["artifacts"][0]["source_sha256"] = "b" * 64
+                with self.assertRaisesRegex(ManifestValidationError, "source SHA-256 mismatch"):
+                    validate_review_bundle_manifest(bundle, root)
+
     def test_rejects_hashed_artifacts_that_do_not_replay_semantically(self):
         manifest = self.valid_manifest()
         with tempfile.TemporaryDirectory() as temporary:
@@ -521,7 +679,7 @@ class ManifestValidationTests(unittest.TestCase):
             with self.assertRaises(ManifestValidationError):
                 validate_manifest(manifest, root)
 
-    def test_replays_committed_runtime_bound_evidence(self):
+    def test_rejects_historical_runtime_evidence_with_unverified_contact(self):
         root = (
             ROOT
             / "evidence"
@@ -529,8 +687,11 @@ class ManifestValidationTests(unittest.TestCase):
             / "runtime-bound-contact-653d400-2026-07-18"
         )
         manifest = json.loads((root / "manifest.json").read_text(encoding="utf-8"))
-        validate_artifact_semantics(manifest, root)
-        validate_manifest(manifest, root)
+        with self.assertRaisesRegex(
+            ManifestValidationError,
+            "stored contact report differs from semantic replay",
+        ):
+            validate_artifact_semantics(manifest, root)
 
 
 if __name__ == "__main__":

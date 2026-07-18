@@ -4,7 +4,7 @@ import unittest
 from tools.analyze_character_director_v1 import EXPECTED_SCENARIOS, analyze_v1
 
 
-def channels(gaze, authoritative, blink, phase):
+def channels(gaze, authoritative, blink, phase, facing):
     return {
         "head_eye_phase": phase,
         "gaze_aim": gaze,
@@ -16,6 +16,18 @@ def channels(gaze, authoritative, blink, phase):
         "speech_mouth_authority": "none",
         "locomotion": "idle",
         "action": "idle",
+        "rendered_head_pose_id": (
+            "profile_left" if facing == "west" else "front_idle"
+        ),
+        "turn_progress_milli": 1000 if facing == "west" else 500,
+        "blink_source": "scheduler" if blink else "none",
+        "eye_apertures": [
+            {"min_x": 10, "max_x": 14, "min_y": 5, "max_y": 6}
+        ],
+        "eye_blue_cells": (
+            [] if blink else [{"x": 12, "y": 5}, {"x": 12, "y": 6}]
+        ),
+        "blink_painted_cells": 10 if blink else 0,
     }
 
 
@@ -34,8 +46,10 @@ class V1MachineAcceptanceTests(unittest.TestCase):
                     "world_root_x": 0.0,
                     "world_root_z": 5.0,
                     "presented_facing": facing,
+                    "rendered_pose_id": "front_idle",
+                    "frame_sha256": "fixture-frame-{:03d}".format(index),
                     "presentation_channels": channels(
-                        gaze, authoritative, blink, phase
+                        gaze, authoritative, blink, phase, facing
                     ),
                 }
             )

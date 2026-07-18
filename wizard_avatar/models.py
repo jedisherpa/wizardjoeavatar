@@ -246,6 +246,11 @@ class WizardPresentationState:
     gaze_aim: int
     head_eye_phase: str
     rendered_mouth_shape: str
+    rendered_head_pose_id: str
+    turn_progress_milli: int
+    blink_source: str
+    head_offset_x: int
+    head_offset_y: int
 
 
 @dataclass

@@ -19,6 +19,7 @@ from .animation_trace import (
     AnimationTruthTraceV1,
     LocalPointV1,
     PresentationChannelsV1,
+    RasterSpanV1,
     StagePointV1,
     transformed_anchor,
 )
@@ -93,6 +94,29 @@ PRESENTATION_MARKER_IDS = frozenset(
     }
 )
 PRESENTATION_MARKER_DEDUP_CAPACITY = 256
+
+
+@dataclass(frozen=True)
+class ReferenceEyeAperture:
+    left: int
+    top: int
+    width: int
+    height: int = 2
+
+    def span(self) -> RasterSpanV1:
+        return RasterSpanV1(
+            min_x=self.left,
+            max_x=self.left + self.width - 1,
+            min_y=self.top,
+            max_y=self.top + self.height - 1,
+        )
+
+
+@dataclass(frozen=True)
+class ReferenceFaceEvidence:
+    eye_apertures: Tuple[RasterSpanV1, ...] = ()
+    eye_blue_cells: Tuple[LocalPointV1, ...] = ()
+    blink_painted_cells: int = 0
 
 
 @dataclass(frozen=True)
@@ -438,6 +462,23 @@ class ProceduralWizardFrameSource:
             state.gaze_aim,
             facing_changed_tick=state.facing_changed_tick,
         )
+        scheduler_blink_closed = state.blink_phase >= 0.965
+        if head_eye.turn_blink_closed:
+            state.blink_phase = 1.0
+        blink_source = (
+            "scheduler+turn"
+            if scheduler_blink_closed and head_eye.turn_blink_closed
+            else "scheduler"
+            if scheduler_blink_closed
+            else "turn"
+            if head_eye.turn_blink_closed
+            else "none"
+        )
+        head_offset_y = self._idle_head_breath_offset(
+            state,
+            head_eye.phase,
+            head_eye.presented_facing,
+        )
         state.facing = head_eye.presented_facing
         if state.gaze_authoritative or head_eye.phase != "steady":
             state.gaze_authoritative = True
@@ -451,15 +492,24 @@ class ProceduralWizardFrameSource:
         state.screen_position = {"x": sx, "y": sy}
         previous_pose_id = snapshot.presentation.display_pose_id or state.pose_id
         use_reference_pose_library = reference_pose_library_available(self.pose_library_path)
+        rendered_head_pose_id = state.pose_id
+        face_evidence = ReferenceFaceEvidence()
         if use_reference_pose_library:
             stage = self._permissioned_stage(permission_world)
             altitude_scale = max(0.76, 1.0 - state.altitude * 0.07)
             render_scale = scale * REFERENCE_SCALE_MULTIPLIER * altitude_scale
-            committed_pose_id = presentation_pose_for_facing(
+            requested_head_pose_id = presentation_pose_for_facing(
                 state.pose_id,
                 state.animation_clip_id,
                 head_eye.presented_facing,
                 self.pose_ids,
+            )
+            committed_pose_id = (
+                snapshot.presentation.display_pose_id
+                if state.animation_clip_id
+                in {"idle_front", "idle_back", "idle_left", "idle_right"}
+                and snapshot.presentation.display_pose_id in self.pose_ids
+                else state.pose_id
             )
             pose_id = self._permissioned_pose_id(
                 committed_pose_id,
@@ -473,12 +523,52 @@ class ProceduralWizardFrameSource:
             local, root_anchor, mouth_anchor = self._reference_pose_canvas_for_sample(
                 pose_id,
             )
+            if (
+                state.animation_clip_id
+                in {"idle_front", "idle_back", "idle_left", "idle_right"}
+                and (
+                    requested_head_pose_id != pose_id
+                    or head_eye.head_offset_x != 0
+                    or head_offset_y != 0
+                )
+                and requested_head_pose_id in self.pose_ids
+            ):
+                self._project_reference_head(
+                    local,
+                    pose_id,
+                    requested_head_pose_id,
+                    head_eye.head_offset_x,
+                    head_offset_y,
+                )
+                rendered_head_pose_id = requested_head_pose_id
+                mouth_anchor = reference_pose_anchor(
+                    requested_head_pose_id,
+                    "mouth",
+                    self.pose_library_path,
+                )
+                mouth_anchor = (
+                    mouth_anchor[0] + head_eye.head_offset_x,
+                    mouth_anchor[1] + head_offset_y,
+                )
+            else:
+                rendered_head_pose_id = pose_id
             self._apply_reference_permission_surfaces(
                 local,
                 pose_id,
                 permission_world,
             )
-            self._apply_reference_face_channels(local, state, pose_id, mouth_anchor)
+            face_evidence = self._apply_reference_face_channels(
+                local,
+                state,
+                rendered_head_pose_id,
+                mouth_anchor,
+                head_eye.head_offset_x
+                if rendered_head_pose_id != pose_id
+                or head_eye.head_offset_x != 0
+                or head_offset_y != 0
+                else 0,
+                head_offset_y,
+            )
             base_root_screen = self._reference_root_screen(sx, sy, state, render_scale)
             (
                 root_screen,
@@ -581,6 +671,11 @@ class ProceduralWizardFrameSource:
             gaze_aim=head_eye.gaze_aim,
             head_eye_phase=head_eye.phase,
             rendered_mouth_shape=rendered_mouth_shape,
+            rendered_head_pose_id=rendered_head_pose_id,
+            turn_progress_milli=head_eye.turn_progress_milli,
+            blink_source=blink_source,
+            head_offset_x=head_eye.head_offset_x,
+            head_offset_y=head_offset_y,
         )
         presentation = WizardPresentationSnapshot(
             generation=snapshot.presentation_generation + 1,
@@ -709,6 +804,14 @@ class ProceduralWizardFrameSource:
                 speech_mouth_authority=state.speech_mouth_authority,
                 locomotion=state.locomotion,
                 action=state.action,
+                rendered_head_pose_id=rendered_head_pose_id,
+                turn_progress_milli=head_eye.turn_progress_milli,
+                blink_source=blink_source,
+                eye_apertures=face_evidence.eye_apertures,
+                eye_blue_cells=face_evidence.eye_blue_cells,
+                blink_painted_cells=face_evidence.blink_painted_cells,
+                head_offset_x=head_eye.head_offset_x,
+                head_offset_y=head_offset_y,
             ),
             frame_sha256=hashlib.sha256(cells).hexdigest(),
             frame_fnv1a32=frame_hash(cells),
@@ -866,45 +969,166 @@ class ProceduralWizardFrameSource:
         # root anchoring and fixed-tick motion carry continuity between them.
         return target_canvas, target_root, target_mouth
 
+    def _project_reference_head(
+        self,
+        target: CellCanvas,
+        target_pose_id: str,
+        head_pose_id: str,
+        offset_x: int = 0,
+        offset_y: int = 0,
+    ) -> None:
+        """Project a head view onto a stable authored body pixel graph.
+
+        Listening turns own the head and eyes, not locomotion. Keeping the
+        target body's feet, hands, wings, and staff intact prevents a face cue
+        from silently substituting a walk or profile-body silhouette.
+        """
+
+        source = render_reference_pose_local(head_pose_id, self.pose_library_path)
+        target_root = reference_pose_root_anchor(target_pose_id, self.pose_library_path)
+        source_root = reference_pose_root_anchor(head_pose_id, self.pose_library_path)
+        target_mouth = reference_pose_anchor(
+            target_pose_id,
+            "mouth",
+            self.pose_library_path,
+        )
+
+        def in_head_mask(x: int, y: int, root_x: int, mouth_y: int) -> bool:
+            if y < mouth_y - 14:
+                return abs(x - root_x) <= 15
+            return y <= mouth_y + 8 and abs(x - root_x) <= 15
+
+        clear_bottom = target_mouth[1] + 8 + min(0, int(offset_y))
+        for y in range(target.height):
+            for x in range(target.width):
+                if (
+                    y <= clear_bottom
+                    and in_head_mask(x, y, target_root[0], target_mouth[1])
+                ):
+                    target.clear_cell(x, y)
+
+        dx = target_root[0] - source_root[0] + int(offset_x)
+        dy = target_root[1] - source_root[1] + int(offset_y)
+        source_mouth = reference_pose_anchor(
+            head_pose_id,
+            "mouth",
+            self.pose_library_path,
+        )
+        for y in range(source.height):
+            for x in range(source.width):
+                if not in_head_mask(x, y, source_root[0], source_mouth[1]):
+                    continue
+                cell = source.get(x, y)
+                target_x = x + dx
+                target_y = y + dy
+                if cell is not None and target.in_bounds(target_x, target_y):
+                    target.cells[target_y][target_x] = cell
+
+    @staticmethod
+    def _idle_head_breath_offset(
+        state: WizardState,
+        head_eye_phase: str,
+        presented_facing: str,
+    ) -> int:
+        """Return one restrained pixel-art inhale without moving the body root."""
+
+        if (
+            head_eye_phase != "steady"
+            or presented_facing != "south"
+            or state.locomotion != "idle"
+            or state.action != "idle"
+            or state.speech_mouth_authority != "none"
+        ):
+            return 0
+        phase = state.simulation_tick % 180
+        return -1 if 24 <= phase < 48 else 0
+
     def _apply_reference_face_channels(
         self,
         canvas: CellCanvas,
         state: WizardState,
         pose_id: str,
         mouth_anchor: Tuple[int, int],
-    ) -> None:
+        head_offset_x: int = 0,
+        head_offset_y: int = 0,
+    ) -> ReferenceFaceEvidence:
         eye_layouts = []
+        seen_apertures = set()
         for anchor_name in ("left_eye", "right_eye"):
             try:
                 anchor = reference_pose_anchor(pose_id, anchor_name, self.pose_library_path)
             except KeyError:
                 continue
-            layout = self._reference_eye_layout(canvas, anchor)
-            if layout is not None:
-                eye_layouts.append((anchor_name, *layout))
+            shifted_anchor = (
+                anchor[0] + int(head_offset_x),
+                anchor[1] + int(head_offset_y),
+            )
+            if pose_id == "profile_left" and anchor_name == "left_eye":
+                aperture = ReferenceEyeAperture(
+                    shifted_anchor[0] - 3,
+                    shifted_anchor[1] - 1,
+                    3,
+                )
+            elif pose_id == "profile_right" and anchor_name == "right_eye":
+                aperture = ReferenceEyeAperture(
+                    shifted_anchor[0] + 1,
+                    shifted_anchor[1] - 1,
+                    3,
+                )
+            elif pose_id in {"profile_left", "profile_right"}:
+                aperture = None
+            else:
+                aperture = self._reference_eye_aperture(canvas, shifted_anchor)
+            if aperture is not None:
+                key = (aperture.left, aperture.top, aperture.width, aperture.height)
+                if key not in seen_apertures:
+                    seen_apertures.add(key)
+                    eye_layouts.append((anchor_name, aperture))
 
         # Rear views and occluded action poses still carry approximate anchors.
         # Existing cool/white eye pixels are the authority for face visibility.
         if not eye_layouts:
-            return
+            return ReferenceFaceEvidence()
 
         blink = state.blink_phase >= 0.965
         eye_aim = self._reference_eye_aim(state)
         expression = get_expression(state.expression)
-        for anchor_name, eye_left, eye_top in eye_layouts:
+        blue_cells = []
+        blink_painted_cells = 0
+        for anchor_name, aperture in eye_layouts:
+            eye_left = aperture.left
+            eye_top = aperture.top
+            eye_right = eye_left + aperture.width
             eye_index = 0 if anchor_name == "left_eye" else 1
-            skin = self._sample_reference_skin(canvas, eye_left + 2, eye_top)
-            for y in range(eye_top, eye_top + 2):
-                for x in range(eye_left, eye_left + 5):
+            skin = self._sample_reference_skin(
+                canvas,
+                eye_left + aperture.width // 2,
+                eye_top,
+            )
+            for y in range(eye_top, eye_top + aperture.height):
+                for x in range(eye_left, eye_right):
                     color = skin if blink else REFERENCE_EYE_WHITE
                     layer = "reference_blink" if blink else "reference_eye_white"
                     canvas.set(x, y, "#", color, layer)
+                    if blink:
+                        blink_painted_cells += 1
 
             if blink:
-                for x in range(eye_left + 1, eye_left + 4):
-                    canvas.set(x, eye_top + 1, "#", REFERENCE_BROW, "reference_blink")
+                line_start = eye_left + 1 if aperture.width > 2 else eye_left
+                line_end = eye_right - 1 if aperture.width > 2 else eye_right
+                for x in range(line_start, line_end):
+                    canvas.set(
+                        x,
+                        eye_top + aperture.height - 1,
+                        "#",
+                        REFERENCE_BROW,
+                        "reference_blink",
+                    )
             else:
-                blue_x = eye_left + 2 + eye_aim
+                blue_x = max(
+                    eye_left,
+                    min(eye_right - 1, eye_left + aperture.width // 2 + eye_aim),
+                )
                 vertical_aim = max(-1, min(1, int(state.gaze_vertical_aim)))
                 blue_rows = (
                     (eye_top, eye_top + 1)
@@ -921,6 +1145,7 @@ class ProceduralWizardFrameSource:
                         rgb=REFERENCE_EYE_BLUE,
                         layer_id="reference_eye_blue",
                     )
+                    blue_cells.append(LocalPointV1(blue_x, y))
 
             if state.expression != "neutral":
                 self._draw_reference_brow(
@@ -940,6 +1165,11 @@ class ProceduralWizardFrameSource:
         mouth_shape = self._reference_mouth_shape(state, expression)
         if mouth_shape is not None:
             self._draw_reference_mouth(canvas, mouth_anchor, mouth_shape)
+        return ReferenceFaceEvidence(
+            eye_apertures=tuple(aperture.span() for _, aperture in eye_layouts),
+            eye_blue_cells=tuple(blue_cells),
+            blink_painted_cells=blink_painted_cells,
+        )
 
     @staticmethod
     def _is_reference_eye_pixel(cell: Optional[Cell]) -> bool:
@@ -956,21 +1186,41 @@ class ProceduralWizardFrameSource:
         canvas: CellCanvas,
         anchor: Tuple[int, int],
     ) -> Optional[Tuple[int, int]]:
+        aperture = self._reference_eye_aperture(canvas, anchor)
+        if aperture is None:
+            return None
+        return aperture.left, aperture.top
+
+    def _reference_eye_aperture(
+        self,
+        canvas: CellCanvas,
+        anchor: Tuple[int, int],
+        allow_sparse: bool = False,
+    ) -> Optional[ReferenceEyeAperture]:
         anchor_x, anchor_y = anchor
         candidates = []
         for y in range(anchor_y - 3, anchor_y + 3):
             for x in range(anchor_x - 4, anchor_x + 5):
                 if self._is_reference_eye_pixel(canvas.get(x, y)):
                     candidates.append((x, y))
-        if len(candidates) < 2:
+        if not candidates:
             return None
+        if len(candidates) == 1:
+            if not allow_sparse:
+                return None
+            center_x, center_y = candidates[0]
+            return ReferenceEyeAperture(
+                left=center_x - 1,
+                top=min(center_y, anchor_y) - 1,
+                width=3,
+            )
         min_x = min(x for x, _ in candidates)
         max_x = max(x for x, _ in candidates)
         min_y = min(y for _, y in candidates)
         max_y = max(y for _, y in candidates)
         center_x = (min_x + max_x) // 2
         eye_top = (min_y + max_y) // 2
-        return center_x - 2, eye_top
+        return ReferenceEyeAperture(left=center_x - 2, top=eye_top, width=5)
 
     @staticmethod
     def _reference_eye_aim(state: WizardState) -> int:

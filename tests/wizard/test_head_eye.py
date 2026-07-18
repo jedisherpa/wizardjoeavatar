@@ -22,7 +22,7 @@ class HeadEyeCoordinatorTests(unittest.TestCase):
 
     def test_opposite_turn_uses_eye_lead_adjacent_views_and_settle(self):
         coordinator = HeadEyeCoordinator("south")
-        ticks = (0, 7, 8, 11, 14, 17, 18, 23)
+        ticks = (0, 9, 10, 16, 22, 28, 29, 40)
         frames = [coordinator.advance("north", tick) for tick in ticks]
 
         self.assertEqual(
@@ -69,8 +69,8 @@ class HeadEyeCoordinatorTests(unittest.TestCase):
         coordinator = HeadEyeCoordinator("south")
 
         leading = coordinator.advance("west", 0)
-        arrived = coordinator.advance("west", 7)
-        settling = coordinator.advance("west", 10)
+        arrived = coordinator.advance("west", 12)
+        settling = coordinator.advance("west", 13)
 
         self.assertEqual(leading.phase, "leading")
         self.assertEqual(leading.automatic_gaze_aim, EYE_AIM_LEFT)
@@ -107,10 +107,10 @@ class HeadEyeCoordinatorTests(unittest.TestCase):
 
     def test_tick_jump_catches_up_without_render_call_count(self):
         state, _ = advance_head_eye(HeadEyeState.steady("south"), "north", 0)
-        state, output = advance_head_eye(state, "north", 17)
+        state, output = advance_head_eye(state, "north", 28)
         self.assertEqual(output.presented_facing, "north")
         self.assertEqual(output.phase, "turning")
-        state, output = advance_head_eye(state, "north", 23)
+        state, output = advance_head_eye(state, "north", 40)
         self.assertEqual(output.phase, "steady")
 
     def test_discarded_first_candidate_does_not_delay_turn_timing(self):
@@ -140,8 +140,8 @@ class HeadEyeCoordinatorTests(unittest.TestCase):
     def test_retarget_starts_from_current_visible_facing(self):
         coordinator = HeadEyeCoordinator("south")
         coordinator.advance("north", 0)
-        visible = coordinator.advance("north", 11)
-        retargeted = coordinator.advance("southeast", 11)
+        visible = coordinator.advance("north", 17)
+        retargeted = coordinator.advance("southeast", 17)
 
         self.assertEqual(visible.presented_facing, "west")
         self.assertEqual(retargeted.presented_facing, "west")
@@ -151,8 +151,8 @@ class HeadEyeCoordinatorTests(unittest.TestCase):
     def test_retarget_to_visible_facing_cancels_cleanly(self):
         coordinator = HeadEyeCoordinator("south")
         coordinator.advance("north", 0)
-        coordinator.advance("north", 11)
-        cancelled = coordinator.advance("west", 11)
+        coordinator.advance("north", 17)
+        cancelled = coordinator.advance("west", 17)
         self.assertEqual(cancelled.presented_facing, "west")
         self.assertEqual(cancelled.phase, "steady")
 

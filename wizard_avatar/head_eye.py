@@ -9,9 +9,11 @@ from .models import DIRECTIONS
 EYE_AIM_LEFT = -1
 EYE_AIM_CENTER = 0
 EYE_AIM_RIGHT = 1
-SECTOR_STEP_TICKS = 3
-SETTLE_TICKS = 6
-_LEAD_TICKS_BY_DISTANCE = (0, 3, 4, 6, 8)
+SECTOR_STEP_TICKS = 6
+SETTLE_TICKS = 12
+_LEAD_TICKS_BY_DISTANCE = (0, 4, 6, 8, 10)
+_TURN_BLINK_LEAD_TICKS = 4
+_TURN_BLINK_TRAIL_TICKS = 5
 
 
 @dataclass(frozen=True)
@@ -52,6 +54,9 @@ class HeadEyePresentation:
     automatic_gaze_aim: int
     gaze_authoritative: bool
     phase: str
+    turn_progress_milli: int
+    turn_blink_closed: bool
+    head_offset_x: int
 
 
 def advance_head_eye(
@@ -119,12 +124,18 @@ def advance_head_eye(
             )
 
     effective_aim = gaze_aim if gaze_authoritative else automatic_aim
+    turn_progress_milli = _turn_progress_milli(state, simulation_tick)
+    turn_blink_closed = _turn_blink_closed(state, simulation_tick)
+    head_offset_x = _head_settle_offset(state, simulation_tick)
     return next_state, HeadEyePresentation(
         presented_facing=sampled_facing,
         gaze_aim=effective_aim,
         automatic_gaze_aim=automatic_aim,
         gaze_authoritative=gaze_authoritative,
         phase=phase,
+        turn_progress_milli=turn_progress_milli,
+        turn_blink_closed=turn_blink_closed,
+        head_offset_x=head_offset_x,
     )
 
 
@@ -209,6 +220,32 @@ def _phase_at(state: HeadEyeState, tick: int) -> str:
     return "settling"
 
 
+def _turn_progress_milli(state: HeadEyeState, tick: int) -> int:
+    if state.sector_distance == 0:
+        return 1000
+    duration = max(1, state.head_complete_tick - state.requested_tick)
+    elapsed = max(0, min(duration, tick - state.requested_tick))
+    return (elapsed * 1000) // duration
+
+
+def _turn_blink_closed(state: HeadEyeState, tick: int) -> bool:
+    if state.sector_distance < 2:
+        return False
+    return (
+        state.head_complete_tick - _TURN_BLINK_LEAD_TICKS
+        <= tick
+        < state.head_complete_tick + _TURN_BLINK_TRAIL_TICKS
+    )
+
+
+def _head_settle_offset(state: HeadEyeState, tick: int) -> int:
+    if state.sector_distance < 2 or tick < state.head_complete_tick:
+        return 0
+    if tick >= state.head_complete_tick + SETTLE_TICKS // 2:
+        return 0
+    return state.turn_direction
+
+
 def _shortest_turn(current: str, target: str) -> Tuple[int, int]:
     current_index = DIRECTIONS.index(current)
     target_index = DIRECTIONS.index(target)
@@ -227,6 +264,9 @@ def _steady_presentation(facing: str) -> HeadEyePresentation:
         automatic_gaze_aim=EYE_AIM_CENTER,
         gaze_authoritative=False,
         phase="steady",
+        turn_progress_milli=1000,
+        turn_blink_closed=False,
+        head_offset_x=0,
     )
 
 

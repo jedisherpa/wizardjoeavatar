@@ -162,7 +162,35 @@ class ContactVerifierTests(unittest.TestCase):
         self.assertFalse(report.passed)
         self.assertIn("planted_anchor_drift", self._issue_codes(report))
 
-    def test_fixed_root_support_does_not_claim_contact_lock(self):
+    def test_fixed_root_declared_planted_contact_rejects_drift(self):
+        record = next(
+            item
+            for item in self._walk_trace()
+            if item.planted_anchor_stage is not None
+        )
+        fixed = replace(
+            record,
+            animation_root_policy="fixed",
+            support_contact="both_feet",
+            planted_anchor="left_foot",
+        )
+        moved = replace(
+            fixed,
+            frame_index=record.frame_index + 1,
+            planted_anchor_stage=StagePointV1(
+                record.planted_anchor_stage.x + 4.0,
+                record.planted_anchor_stage.y,
+            ),
+        )
+
+        report = verify_contact_trace((fixed, moved))
+
+        self.assertFalse(report.passed)
+        self.assertEqual(report.stance_count, 1)
+        self.assertAlmostEqual(report.maximum_planted_drift_cells, 4.0)
+        self.assertIn("planted_anchor_drift", self._issue_codes(report))
+
+    def test_fixed_root_without_planted_contact_remains_valid(self):
         record = next(
             item
             for item in self._walk_trace()
@@ -170,17 +198,18 @@ class ContactVerifierTests(unittest.TestCase):
         )
         released = replace(
             record,
-            frame_index=record.frame_index + 1,
             animation_root_policy="fixed",
-            planted_anchor_stage=StagePointV1(
-                record.planted_anchor_stage.x + 4.0,
-                record.planted_anchor_stage.y,
-            ),
+            support_contact="none",
+            planted_anchor=None,
+            planted_anchor_local=None,
+            planted_anchor_stage=None,
+            planted_anchor_raster_span=None,
         )
 
-        report = verify_contact_trace((record, released))
+        report = verify_contact_trace((released,))
 
         self.assertTrue(report.passed, report.to_mapping())
+        self.assertEqual(report.stance_count, 0)
 
     def test_verifier_rejects_two_cell_raster_span_drift(self):
         records, frames = self._walk_evidence()
