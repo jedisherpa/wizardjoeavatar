@@ -2352,13 +2352,11 @@ async def run_visual_review(
     base_url = canonical_runtime_base_url(base_url)
     output_dir = output_dir.resolve()
     provenance = collect_git_provenance()
-    output_dir.mkdir(parents=True, exist_ok=True)
-    scenario_program_path: Optional[Path] = None
-    if scenario_program is not None:
-        if tuple(scenarios) != scenario_program.scenarios:
-            raise ValueError("scenario program and supplied scenarios disagree")
-        scenario_program_path = output_dir / "scenario-program.json"
-        scenario_program_path.write_bytes(scenario_program.source_bytes)
+    scenario_program_path = (
+        None if scenario_program is None else output_dir / "scenario-program.json"
+    )
+    if scenario_program is not None and tuple(scenarios) != scenario_program.scenarios:
+        raise ValueError("scenario program and supplied scenarios disagree")
     ws_url, command_url, state_url, animation_trace_url, runtime_identity_url = runtime_urls(base_url)
     source_epoch = "visual-review-{}".format(uuid.uuid4().hex[:12])
     run_id = source_epoch
@@ -2398,6 +2396,12 @@ async def run_visual_review(
             provenance,
             base_url,
         )
+        # Seal both clean Git identities before writing evidence inside the
+        # checkout. Otherwise the evidence directory itself makes the live
+        # runtime appear dirty and invalidates an otherwise reproducible run.
+        output_dir.mkdir(parents=True, exist_ok=True)
+        if scenario_program_path is not None and scenario_program is not None:
+            scenario_program_path.write_bytes(scenario_program.source_bytes)
         async with websockets.connect(
             ws_url,
             max_size=16 * 1024 * 1024,
@@ -2463,6 +2467,13 @@ async def run_visual_review(
             closing.set()
             await socket.close()
     except Exception as exc:
+        output_dir.mkdir(parents=True, exist_ok=True)
+        if (
+            scenario_program_path is not None
+            and scenario_program is not None
+            and not scenario_program_path.exists()
+        ):
+            scenario_program_path.write_bytes(scenario_program.source_bytes)
         integrity.invalidate("{}: {}".format(type(exc).__name__, exc))
         terminal.set()
     finally:

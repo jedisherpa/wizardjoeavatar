@@ -24,6 +24,7 @@ from tools.run_character_director_visual_review import (
     load_scenario_program,
     parse_init,
     runtime_urls,
+    run_visual_review,
     select_atomic_animation_trace,
     square_cell_image,
     validate_artifact_semantics,
@@ -211,6 +212,49 @@ class ScenarioSchemaTests(unittest.TestCase):
 
 
 class StrictCaptureTests(unittest.IsolatedAsyncioTestCase):
+    async def test_seals_runtime_identity_before_creating_evidence_output(self):
+        class StopAfterSealCheck(Exception):
+            pass
+
+        provenance = {
+            "head": "a" * 40,
+            "head_tree": "b" * 40,
+            "branch": "codex/test",
+            "worktree_clean": True,
+            "status_sha256": hashlib.sha256(b"").hexdigest(),
+            "tracked_diff_sha256": hashlib.sha256(b"").hexdigest(),
+            "status_lines": [],
+        }
+        identity_checks = []
+        with tempfile.TemporaryDirectory() as temporary:
+            output = Path(temporary) / "not-created-yet"
+
+            def seal_check(*_args, **_kwargs):
+                identity_checks.append(output.exists())
+                if len(identity_checks) == 1:
+                    raise StopAfterSealCheck("stop after ordering assertion")
+
+            with mock.patch(
+                "tools.run_character_director_visual_review.collect_git_provenance",
+                return_value=provenance,
+            ), mock.patch(
+                "tools.run_character_director_visual_review.request_json_async",
+                new=mock.AsyncMock(return_value=({}, 0.0)),
+            ), mock.patch(
+                "tools.run_character_director_visual_review.validate_runtime_binding",
+                side_effect=seal_check,
+            ), mock.patch(
+                "tools.run_character_director_visual_review.validate_manifest",
+            ):
+                await run_visual_review(
+                    "http://127.0.0.1:8896",
+                    output,
+                    scenarios=(),
+                )
+
+        self.assertGreaterEqual(len(identity_checks), 1)
+        self.assertFalse(identity_checks[0])
+
     async def test_scenario_clock_owns_exact_frame_budget_without_spill(self):
         clock = ScenarioClock()
 
