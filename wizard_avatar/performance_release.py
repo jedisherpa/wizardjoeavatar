@@ -25,7 +25,12 @@ from .performance_context import (
     URGENCIES,
     PerformanceContextV1,
 )
-from .voice_alignment import VoiceAlignmentEvaluationV1, VoiceAlignmentV1
+from .voice_alignment import (
+    VoiceAlignmentEvaluationV1,
+    VoiceAlignmentV1,
+    VoicePresentationTrackV1,
+    compile_voice_presentation,
+)
 
 
 GOVERNED_SPEECH_SCHEMA_VERSION = 1
@@ -286,6 +291,7 @@ class _ActiveGovernedSpeech:
     approval: GovernedPerformanceApprovalV1
     context: PerformanceContextV1
     alignment: VoiceAlignmentV1
+    presentation: VoicePresentationTrackV1
     expires_at_monotonic_us: int
 
 
@@ -385,6 +391,7 @@ class GovernedSpeechRuntime:
             approval,
             context,
             alignment,
+            compile_voice_presentation(alignment),
             now_monotonic_us + remaining_ms * 1000,
         )
         self._last_code = "release_active"
@@ -412,7 +419,18 @@ class GovernedSpeechRuntime:
         ):
             self.clear("binding_changed")
             return None
-        mouth = active.alignment.evaluate(media_time_ms)
+        aligned = active.alignment.evaluate(media_time_ms)
+        mouth_shape, speaking = active.presentation.evaluate(media_time_ms)
+        mouth = VoiceAlignmentEvaluationV1(
+            media_time_ms=aligned.media_time_ms,
+            reveal_boundary=aligned.reveal_boundary,
+            mouth_shape=mouth_shape,
+            speaking=speaking,
+            terminal=aligned.terminal,
+            mouth_policy=(
+                "ended" if aligned.terminal else "presentation_stabilized_v1"
+            ),
+        )
         return GovernedSpeechEvaluationV1(
             approved_text=active.approved_text[: mouth.reveal_boundary],
             mouth=mouth,
@@ -441,6 +459,9 @@ class GovernedSpeechRuntime:
             ),
             "alignment_hash_prefix": (
                 None if active is None else active.alignment.alignment_sha256[7:19]
+            ),
+            "mouth_presentation_policy": (
+                None if active is None else "presentation_stabilized_v1"
             ),
             "turn_hash_prefix": (
                 None

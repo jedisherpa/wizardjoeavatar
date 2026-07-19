@@ -12,6 +12,16 @@ SCENARIOS = (
     ("speech-return-center-two", 156, 0),
 )
 MOUTHS = ("closed", "open_small", "open_medium", "open_wide", "rounded")
+MOUTH_SEQUENCE = (
+    "closed",
+    "open_small",
+    "open_medium",
+    "open_wide",
+    "open_medium",
+    "rounded",
+    "open_medium",
+    "open_small",
+)
 
 
 def evidence():
@@ -19,10 +29,10 @@ def evidence():
     trace = []
     frame_index = 1000
     global_offset = 0
-    blink_offsets = {100, 101, 102, 103, 302, 303, 304, 305}
+    blink_offsets = {96, 97, 98, 99, 300, 301, 302, 303}
     for scenario, count, gaze in SCENARIOS:
         for _ in range(count):
-            mouth = MOUTHS[global_offset % len(MOUTHS)]
+            mouth = MOUTH_SEQUENCE[(global_offset // 3) % len(MOUTH_SEQUENCE)]
             blink_closed = global_offset in blink_offsets
             mouth_digest = "{:064x}".format(MOUTHS.index(mouth) + 1)
             frames.append(
@@ -161,6 +171,21 @@ class CharacterDirectorV2AcceptanceTests(unittest.TestCase):
         self.assertTrue(all(check["passed"] for check in report["checks"]))
         self.assertEqual(report["metrics"]["body_still_percentage"], 100.0)
         self.assertEqual(report["metrics"]["av_edge_offset_ms"], 20)
+
+    def test_one_frame_viseme_chatter_fails_presentation_cadence(self):
+        manifest, trace, receipt = evidence()
+        invalid_trace = copy.deepcopy(trace)
+        for index, item in enumerate(invalid_trace):
+            mouth = MOUTHS[index % len(MOUTHS)]
+            channels = item["presentation_channels"]
+            channels["rendered_mouth_shape"] = mouth
+            channels["mouth_pixel_sha256"] = "{:064x}".format(
+                MOUTHS.index(mouth) + 1
+            )
+        report = analyze(manifest, invalid_trace, receipt)
+        failed = {check["name"] for check in report["checks"] if not check["passed"]}
+        self.assertFalse(report["passed"])
+        self.assertIn("readable_mouth_presentation_cadence", failed)
 
     def test_wrong_authority_and_excessive_av_offset_fail(self):
         manifest, trace, receipt = evidence()

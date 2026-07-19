@@ -231,6 +231,10 @@ class GovernedSpeechReleaseTests(unittest.TestCase):
             (seeked.media_time_ms, self.controller.state.speech_text, self.controller.state.mouth),
             (2_000, TEXT, "open_wide"),
         )
+        self.assertEqual(
+            self.application.governed_speech.diagnostics()["mouth_presentation_policy"],
+            "presentation_stabilized_v1",
+        )
 
         self.application.accept_snapshot(
             speech_snapshot(4, "playing", 400, cause="seeked"),

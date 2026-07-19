@@ -8,6 +8,7 @@ from wizard_avatar.models import MOUTH_SHAPES
 from wizard_avatar.voice_alignment import (
     VoiceAlignmentError,
     VoiceAlignmentV1,
+    compile_voice_presentation,
     evaluate_voice_alignment,
 )
 
@@ -181,6 +182,50 @@ class VoiceAlignmentTests(unittest.TestCase):
             self.assertTrue(state.speaking)
             self.assertNotEqual(state.mouth_shape, "closed")
             self.assertEqual(state.mouth_policy, "absolute_duration_fallback_v1")
+
+    def test_presentation_track_has_readable_holds_and_bounded_aperture_changes(self):
+        alignment = VoiceAlignmentV1.from_mapping(alignment_mapping(with_phonemes=False))
+        first = compile_voice_presentation(alignment)
+        second = compile_voice_presentation(
+            VoiceAlignmentV1.from_mapping(copy.deepcopy(alignment_mapping(with_phonemes=False)))
+        )
+        self.assertEqual(first, second)
+
+        runs = []
+        for shape in first.mouth_shapes:
+            if runs and runs[-1][0] == shape:
+                runs[-1][1] += 1
+            else:
+                runs.append([shape, 1])
+        self.assertTrue(all(length >= 3 for _, length in runs[1:-1]))
+        aperture = {
+            "closed": 0,
+            "open_small": 1,
+            "rounded": 1,
+            "smile": 1,
+            "frown": 1,
+            "open_medium": 2,
+            "open_wide": 3,
+        }
+        self.assertTrue(
+            all(
+                abs(aperture[left] - aperture[right]) <= 1
+                for (left, _), (right, _) in zip(runs, runs[1:])
+            )
+        )
+        for media_time_ms in range(0, alignment.duration_ms + 200, 17):
+            self.assertEqual(first.evaluate(media_time_ms), second.evaluate(media_time_ms))
+
+    def test_presentation_track_coarticulates_only_short_internal_gaps(self):
+        value = alignment_mapping(with_phonemes=False)
+        value["word_spans"][1]["start_ms"] = 480
+        alignment = VoiceAlignmentV1.from_mapping(value)
+        track = compile_voice_presentation(alignment)
+
+        self.assertEqual(track.evaluate(50), ("closed", False))
+        self.assertNotEqual(track.evaluate(440), ("closed", False))
+        self.assertTrue(track.evaluate(500)[1])
+        self.assertEqual(track.evaluate(alignment.duration_ms), ("closed", False))
 
     def test_cold_seek_and_linear_evaluation_match_exactly(self):
         value = alignment_mapping(with_phonemes=False)

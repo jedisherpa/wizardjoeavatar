@@ -42,6 +42,15 @@ EXPECTED_FRAME_COUNTS = {
     "speech-return-center-two": 156,
 }
 OPEN_MOUTHS = {"open_small", "open_medium", "open_wide", "rounded"}
+MOUTH_APERTURE = {
+    "closed": 0,
+    "open_small": 1,
+    "rounded": 1,
+    "smile": 1,
+    "frown": 1,
+    "open_medium": 2,
+    "open_wide": 3,
+}
 
 
 def _check(report: Dict[str, Any], name: str, passed: bool, detail: object) -> None:
@@ -77,6 +86,18 @@ def _time_regressions(values: Sequence[int]) -> List[int]:
         for earlier, later in zip(values, values[1:])
         if later < earlier
     ]
+
+
+def _mouth_runs(channels: Sequence[Mapping[str, Any]]) -> List[Tuple[str, int]]:
+    runs: List[Tuple[str, int]] = []
+    for item in channels:
+        shape = str(item.get("rendered_mouth_shape"))
+        if runs and runs[-1][0] == shape:
+            previous_shape, previous_length = runs[-1]
+            runs[-1] = (previous_shape, previous_length + 1)
+        else:
+            runs.append((shape, 1))
+    return runs
 
 
 def analyze_v2(
@@ -211,7 +232,11 @@ def analyze_v2(
     )
 
     all_trace = [trace for _, trace in paired]
+    owned_trace = [
+        trace for frame, trace in paired if frame.get("capture_owned") is True
+    ]
     channels = [trace["presentation_channels"] for trace in all_trace]
+    owned_channels = [trace["presentation_channels"] for trace in owned_trace]
     authorities = sorted({item.get("speech_mouth_authority") for item in channels})
     actions = sorted({item.get("action") for item in channels})
     locomotion = sorted({item.get("locomotion") for item in channels})
@@ -268,6 +293,70 @@ def analyze_v2(
                 for shape, values in mouth_pixel_counts.items()
                 if values
             },
+        },
+    )
+
+    mouth_runs = _mouth_runs(owned_channels)
+    mouth_switch_count = max(0, len(mouth_runs) - 1)
+    mouth_duration_seconds = len(owned_channels) / fps if fps else 0.0
+    mouth_switch_rate = (
+        mouth_switch_count / mouth_duration_seconds
+        if mouth_duration_seconds > 0.0
+        else math.inf
+    )
+    short_internal_runs = [
+        {"run_index": index, "shape": shape, "frames": length}
+        for index, (shape, length) in enumerate(mouth_runs[1:-1], start=1)
+        if length < 3
+    ]
+    aperture_jumps = []
+    for index, ((left, _), (right, _)) in enumerate(
+        zip(mouth_runs, mouth_runs[1:])
+    ):
+        left_rank = MOUTH_APERTURE.get(left)
+        right_rank = MOUTH_APERTURE.get(right)
+        if left_rank is None or right_rank is None:
+            aperture_jumps.append(
+                {
+                    "transition_index": index,
+                    "from": left,
+                    "to": right,
+                    "aperture_delta": None,
+                }
+            )
+            continue
+        delta = abs(left_rank - right_rank)
+        if delta > 1:
+            aperture_jumps.append(
+                {
+                    "transition_index": index,
+                    "from": left,
+                    "to": right,
+                    "aperture_delta": delta,
+                }
+            )
+    run_length_counts = Counter(length for _, length in mouth_runs)
+    _check(
+        report,
+        "readable_mouth_presentation_cadence",
+        bool(mouth_runs)
+        and mouth_switch_rate <= 8.0
+        and not short_internal_runs
+        and not aperture_jumps,
+        {
+            "run_count": len(mouth_runs),
+            "switch_count": mouth_switch_count,
+            "switches_per_second": round(mouth_switch_rate, 3)
+            if math.isfinite(mouth_switch_rate)
+            else None,
+            "maximum_switches_per_second": 8.0,
+            "run_length_frame_counts": {
+                str(length): count
+                for length, count in sorted(run_length_counts.items())
+            },
+            "minimum_internal_hold_frames": 3,
+            "short_internal_runs": short_internal_runs,
+            "aperture_jumps": aperture_jumps,
         },
     )
 
@@ -571,6 +660,13 @@ def analyze_v2(
         "blink_durations_ms": blink_durations_ms,
         "blink_onset_mouths": blink_onset_mouths,
         "mouth_shape_counts": mouth_counts,
+        "mouth_presentation_run_count": len(mouth_runs),
+        "mouth_presentation_switch_count": mouth_switch_count,
+        "mouth_presentation_switches_per_second": round(mouth_switch_rate, 3)
+        if math.isfinite(mouth_switch_rate)
+        else None,
+        "mouth_presentation_short_internal_run_count": len(short_internal_runs),
+        "mouth_presentation_aperture_jump_count": len(aperture_jumps),
         "action_values": actions,
         "speech_authorities": authorities,
         "unique_presented_frame_hashes": len(
