@@ -11,9 +11,26 @@ if str(TOOLS) not in sys.path:
 
 from drive_prism_governed_speech import (
     BrowserCaptureFailure,
+    establish_audio_user_gesture,
     manifest_artifact_path,
     validate_disposable_loopback_url,
 )
+
+
+class FakeCdp:
+    def __init__(self, target=None, activated=True):
+        self.target = target
+        self.activated = activated
+        self.commands = []
+        self.evaluations = 0
+
+    async def evaluate(self, _script):
+        self.evaluations += 1
+        return self.target if self.evaluations == 1 else self.activated
+
+    async def command(self, method, params=None):
+        self.commands.append((method, params))
+        return {}
 
 
 class GovernedSpeechDriverTests(unittest.TestCase):
@@ -85,6 +102,26 @@ class GovernedSpeechDriverTests(unittest.TestCase):
             with self.subTest(value=value), self.assertRaises(ValueError):
                 validate_disposable_loopback_url(value, "wizard")
 
+
+class GovernedSpeechDriverAsyncTests(unittest.IsolatedAsyncioTestCase):
+    async def test_audio_activation_uses_real_cdp_pointer_gesture(self):
+        cdp = FakeCdp({"x": 120.5, "y": 640.25})
+
+        await establish_audio_user_gesture(cdp)
+
+        self.assertEqual(
+            [params["type"] for _, params in cdp.commands],
+            ["mousePressed", "mouseReleased"],
+        )
+        self.assertTrue(
+            all(method == "Input.dispatchMouseEvent" for method, _ in cdp.commands)
+        )
+
+    async def test_audio_activation_fails_without_prompt_or_user_activation(self):
+        with self.assertRaises(BrowserCaptureFailure):
+            await establish_audio_user_gesture(FakeCdp(None))
+        with self.assertRaises(BrowserCaptureFailure):
+            await establish_audio_user_gesture(FakeCdp({"x": 10, "y": 10}, False))
 
 if __name__ == "__main__":
     unittest.main()

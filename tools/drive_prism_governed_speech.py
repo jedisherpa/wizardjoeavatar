@@ -151,6 +151,43 @@ async def submit_prompt(cdp: CDPClient, prompt: str) -> None:
     raise BrowserCaptureFailure("Prism prompt did not become submittable")
 
 
+async def establish_audio_user_gesture(cdp: CDPClient) -> None:
+    target = await cdp.evaluate(
+        """
+        (() => {
+          const prompt = document.querySelector('textarea[aria-label="Message CDISS"]');
+          if (!prompt) return null;
+          const rect = prompt.getBoundingClientRect();
+          prompt.scrollIntoView({block: 'nearest', inline: 'nearest'});
+          return {
+            x: Math.max(1, Math.min(window.innerWidth - 1, rect.left + rect.width / 2)),
+            y: Math.max(1, Math.min(window.innerHeight - 1, rect.top + rect.height / 2))
+          };
+        })()
+        """
+    )
+    if (
+        not isinstance(target, Mapping)
+        or not isinstance(target.get("x"), (int, float))
+        or not isinstance(target.get("y"), (int, float))
+    ):
+        raise BrowserCaptureFailure("could not locate the Prism prompt for audio activation")
+    event = {
+        "x": float(target["x"]),
+        "y": float(target["y"]),
+        "button": "left",
+        "clickCount": 1,
+    }
+    await cdp.command("Input.dispatchMouseEvent", {**event, "type": "mousePressed"})
+    await cdp.command("Input.dispatchMouseEvent", {**event, "type": "mouseReleased"})
+    await asyncio.sleep(0.1)
+    activated = await cdp.evaluate(
+        "Boolean(navigator.userActivation && navigator.userActivation.hasBeenActive)"
+    )
+    if activated is not True:
+        raise BrowserCaptureFailure("Chrome did not accept the audio activation gesture")
+
+
 async def install_media_session_probe(cdp: CDPClient) -> None:
     installed = await cdp.evaluate(
         """
@@ -740,6 +777,7 @@ async def run(args: argparse.Namespace) -> None:
                     require_completed_greeting=not args.capture_opening,
                 )
                 await install_media_session_probe(cdp)
+                await establish_audio_user_gesture(cdp)
                 if not args.capture_opening:
                     await submit_prompt(cdp, args.prompt)
                 edge = await wait_for_capture_edge(
