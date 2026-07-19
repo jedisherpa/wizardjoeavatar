@@ -60,7 +60,7 @@ contact sheet, and scenario program.
 | Artifact | SHA-256 |
 | --- | --- |
 | `manifest.json` | `84a8e1bc50e684122e6275ce740d95b49985e8d54c8bdba2af4a2e686ec1e3a3` |
-| `review-bundle-manifest.json` | `9a632a2a09b181b0db33a0b0d0f3271400f6c4b26b3bffc8c2a407b6c6357cc8` |
+| `review-bundle-manifest.json` | `156491501d5b28c81e494d523eb368dd63ceb4bc2498aa3ae521615efddc594b` |
 | `scenario-program.json` | `3655beceec5c696f881d607d8eeaf8e2613397b3a4249c49106a3d7ffbb983aa` |
 | `animation_truth_trace.ndjson` | `2e06079628278687660eda8a3ddd4617f509ac7e3e35c91ac737629e95de9aec` |
 | `contact_verification.json` | `166d6ae60c50a8e49fdeee2a9013774c258ff62bef95e44713b21c58c4539efe` |
