@@ -99,6 +99,7 @@ class CrispPoseTransitionTests(unittest.TestCase):
             ((2, 2), (7, 5)),
             0.6,
             radius=2.0,
+            repair_axis_x=6,
         )
 
         self.assertEqual(middle.get(7, 8), body)
@@ -117,10 +118,16 @@ class CrispPoseTransitionTests(unittest.TestCase):
         target.set(1, 2, "#", (210, 140, 80), "hand")
         args = (source, target, ((2, 5), (5, 4)), ((1, 2), (5, 4)), 0.4)
 
-        first = composite_localized_landmark_transition(*args, radius=2.5)
-        second = composite_localized_landmark_transition(*args, radius=2.5)
+        first = composite_localized_landmark_transition(*args, radius=2.5, repair_axis_x=4)
+        second = composite_localized_landmark_transition(*args, radius=2.5, repair_axis_x=4)
         exact = composite_localized_landmark_transition(
-            source, target, ((2, 5), (5, 4)), ((1, 2), (5, 4)), 0.0, radius=2.5
+            source,
+            target,
+            ((2, 5), (5, 4)),
+            ((1, 2), (5, 4)),
+            0.0,
+            radius=2.5,
+            repair_axis_x=4,
         )
 
         self.assertEqual(cell_signature(first), cell_signature(second))

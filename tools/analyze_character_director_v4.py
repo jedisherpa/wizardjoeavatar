@@ -295,7 +295,8 @@ def analyze_v4(
     ]
     endpoint_colors = {
         "explain": _pose_colors("front_idle") | _pose_colors("explaining"),
-        "point": _pose_colors("front_idle") | _pose_colors("point_front_contact_locked"),
+        "point": _pose_colors("front_idle")
+        | _pose_colors("front_point_direct_staff_held"),
     }
     color_failures = []
     for family, prefix in (("explain", "explain_front_in_"), ("point", "point_front_in_")):

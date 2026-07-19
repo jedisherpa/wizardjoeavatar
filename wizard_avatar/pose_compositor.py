@@ -423,6 +423,7 @@ def composite_localized_landmark_transition(
     progress: float,
     *,
     radius: float,
+    repair_axis_x: int,
 ) -> CellCanvas:
     """Bake one articulated appendage over an otherwise stable source pose.
 
@@ -454,13 +455,16 @@ def composite_localized_landmark_transition(
     out = from_canvas.copy()
     for y in range(out.height):
         for x in range(out.width):
-            cell = from_canvas.get(x, y)
             if (
-                cell is not None
-                and _gesture_material(cell.rgb)
+                _gesture_cell(from_canvas, x, y)
                 and _distance_to_segment((x, y), source_hand, source_joint) <= radius
             ):
-                out.clear_cell(x, y)
+                out.cells[y][x] = _gesture_backfill(
+                    from_canvas,
+                    x,
+                    y,
+                    repair_axis_x,
+                )
 
     min_x = max(0, math.floor(min(middle_chain[0][0], middle_chain[1][0]) - radius - 1))
     max_x = min(out.width - 1, math.ceil(max(middle_chain[0][0], middle_chain[1][0]) + radius + 1))
@@ -477,8 +481,14 @@ def composite_localized_landmark_transition(
                 (sample_x, sample_y), endpoint_chain[0], endpoint_chain[1]
             ) > radius:
                 continue
-            cell = endpoint_canvas.get(round(sample_x), round(sample_y))
-            if cell is not None and _gesture_material(cell.rgb):
+            sample_cell_x = round(sample_x)
+            sample_cell_y = round(sample_y)
+            cell = endpoint_canvas.get(sample_cell_x, sample_cell_y)
+            if cell is not None and _gesture_cell(
+                endpoint_canvas,
+                sample_cell_x,
+                sample_cell_y,
+            ):
                 out.cells[y][x] = cell
     return out
 
@@ -547,12 +557,51 @@ def _distance_to_segment(
     return math.hypot(point[0] - nearest_x, point[1] - nearest_y)
 
 
-def _gesture_material(rgb: tuple[int, int, int]) -> bool:
+def _gesture_primary_material(rgb: tuple[int, int, int]) -> bool:
     red, green, blue = rgb
     skin = red >= 140 and red > green * 1.06 and green > blue * 1.02
     robe = blue >= 90 and blue > red * 1.05 and blue >= green * 0.88
-    dark_outline = max(rgb) <= 105
-    return skin or robe or dark_outline
+    return skin or robe
+
+
+def _gesture_cell(canvas: CellCanvas, x: int, y: int) -> bool:
+    cell = canvas.get(x, y)
+    if cell is None:
+        return False
+    if _gesture_primary_material(cell.rgb):
+        return True
+    if max(cell.rgb) > 105:
+        return False
+    return any(
+        neighbor is not None and _gesture_primary_material(neighbor.rgb)
+        for neighbor_y in range(y - 1, y + 2)
+        for neighbor_x in range(x - 1, x + 2)
+        if (neighbor_x, neighbor_y) != (x, y)
+        for neighbor in (canvas.get(neighbor_x, neighbor_y),)
+    )
+
+
+def _gesture_backfill(
+    canvas: CellCanvas,
+    x: int,
+    y: int,
+    repair_axis_x: int,
+) -> Cell | None:
+    mirrored = canvas.get(2 * repair_axis_x - x, y)
+    if mirrored is not None and not _skin_material(mirrored.rgb):
+        return mirrored
+    for radius in range(1, 6):
+        candidates = (
+            (x - radius, y),
+            (x + radius, y),
+            (x, y - radius),
+            (x, y + radius),
+        )
+        for candidate_x, candidate_y in candidates:
+            candidate = canvas.get(candidate_x, candidate_y)
+            if candidate is not None and not _skin_material(candidate.rgb):
+                return candidate
+    return None
 
 
 def _inverse_landmark_sample(

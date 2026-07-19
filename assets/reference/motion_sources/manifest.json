@@ -1832,8 +1832,8 @@
         "progress_milli": 200,
         "localized_region": {
           "anchor_name": "left_hand",
-          "pivot_offset_from_root": [-8, -48],
-          "radius": 9
+          "pivot_offset_from_root": [-8, -45],
+          "radius": 7
         }
       },
       "facing": "south",
@@ -1860,8 +1860,8 @@
         "progress_milli": 400,
         "localized_region": {
           "anchor_name": "left_hand",
-          "pivot_offset_from_root": [-8, -48],
-          "radius": 9
+          "pivot_offset_from_root": [-8, -45],
+          "radius": 7
         }
       },
       "facing": "south",
@@ -1888,8 +1888,8 @@
         "progress_milli": 600,
         "localized_region": {
           "anchor_name": "left_hand",
-          "pivot_offset_from_root": [-8, -48],
-          "radius": 9
+          "pivot_offset_from_root": [-8, -45],
+          "radius": 7
         }
       },
       "facing": "south",
@@ -1916,8 +1916,8 @@
         "progress_milli": 800,
         "localized_region": {
           "anchor_name": "left_hand",
-          "pivot_offset_from_root": [-8, -48],
-          "radius": 9
+          "pivot_offset_from_root": [-8, -45],
+          "radius": 7
         }
       },
       "facing": "south",
@@ -3603,8 +3603,8 @@
         "lock_anchor": "left_foot",
         "localized_region": {
           "anchor_name": "left_hand",
-          "pivot_offset_from_root": [-8, -48],
-          "radius": 9
+          "pivot_offset_from_root": [-8, -45],
+          "radius": 7
         }
       },
       "facing": "south",
@@ -3631,8 +3631,8 @@
         "lock_anchor": "left_foot",
         "localized_region": {
           "anchor_name": "left_hand",
-          "pivot_offset_from_root": [-8, -48],
-          "radius": 9
+          "pivot_offset_from_root": [-8, -45],
+          "radius": 7
         }
       },
       "facing": "south",
@@ -3659,8 +3659,8 @@
         "lock_anchor": "left_foot",
         "localized_region": {
           "anchor_name": "left_hand",
-          "pivot_offset_from_root": [-8, -48],
-          "radius": 9
+          "pivot_offset_from_root": [-8, -45],
+          "radius": 7
         }
       },
       "facing": "south",
@@ -3687,8 +3687,8 @@
         "lock_anchor": "left_foot",
         "localized_region": {
           "anchor_name": "left_hand",
-          "pivot_offset_from_root": [-8, -48],
-          "radius": 9
+          "pivot_offset_from_root": [-8, -45],
+          "radius": 7
         }
       },
       "facing": "south",
@@ -3715,8 +3715,8 @@
         "lock_anchor": "left_foot",
         "localized_region": {
           "anchor_name": "left_hand",
-          "pivot_offset_from_root": [-8, -48],
-          "radius": 9
+          "pivot_offset_from_root": [-8, -45],
+          "radius": 7
         }
       },
       "facing": "south",

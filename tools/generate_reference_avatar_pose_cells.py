@@ -409,6 +409,7 @@ def derive_landmark_warp_payload(
             (tuple(to_anchors[anchor_name]), target_pivot),
             progress,
             radius=radius,
+            repair_axis_x=from_anchors["root"][0],
         )
     anchors = {
         name: [
