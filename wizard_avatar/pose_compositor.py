@@ -423,6 +423,7 @@ def composite_localized_landmark_transition(
     progress: float,
     *,
     radius: float,
+    hand_radius: float,
     repair_axis_x: int,
 ) -> CellCanvas:
     """Bake one articulated appendage over an otherwise stable source pose.
@@ -449,14 +450,16 @@ def composite_localized_landmark_transition(
         _interpolate_point(source_hand, target_hand, progress),
         _interpolate_point(source_joint, target_joint, progress),
     )
-    endpoint_canvas = from_canvas if progress <= 0.5 else to_canvas
-    endpoint_chain = source_chain if progress <= 0.5 else target_chain
+    endpoint_canvas = to_canvas
+    endpoint_chain = target_chain
 
     out = from_canvas.copy()
     for y in range(out.height):
         for x in range(out.width):
+            source_cell = from_canvas.get(x, y)
             if (
-                _gesture_cell(from_canvas, x, y)
+                source_cell is not None
+                and _skin_material(source_cell.rgb)
                 and _distance_to_segment((x, y), source_hand, source_joint) <= radius
             ):
                 out.cells[y][x] = _gesture_backfill(
@@ -466,10 +469,11 @@ def composite_localized_landmark_transition(
                     repair_axis_x,
                 )
 
-    min_x = max(0, math.floor(min(middle_chain[0][0], middle_chain[1][0]) - radius - 1))
-    max_x = min(out.width - 1, math.ceil(max(middle_chain[0][0], middle_chain[1][0]) + radius + 1))
-    min_y = max(0, math.floor(min(middle_chain[0][1], middle_chain[1][1]) - radius - 1))
-    max_y = min(out.height - 1, math.ceil(max(middle_chain[0][1], middle_chain[1][1]) + radius + 1))
+    bounds_radius = max(radius, hand_radius)
+    min_x = max(0, math.floor(min(middle_chain[0][0], middle_chain[1][0]) - bounds_radius - 1))
+    max_x = min(out.width - 1, math.ceil(max(middle_chain[0][0], middle_chain[1][0]) + bounds_radius + 1))
+    min_y = max(0, math.floor(min(middle_chain[0][1], middle_chain[1][1]) - bounds_radius - 1))
+    max_y = min(out.height - 1, math.ceil(max(middle_chain[0][1], middle_chain[1][1]) + bounds_radius + 1))
     for y in range(min_y, max_y + 1):
         for x in range(min_x, max_x + 1):
             sample_x, sample_y = _map_between_segment_frames(
@@ -477,9 +481,13 @@ def composite_localized_landmark_transition(
                 middle_chain,
                 endpoint_chain,
             )
-            if _distance_to_segment(
-                (sample_x, sample_y), endpoint_chain[0], endpoint_chain[1]
-            ) > radius:
+            if not _in_articulated_region(
+                (sample_x, sample_y),
+                endpoint_chain[0],
+                endpoint_chain[1],
+                radius,
+                hand_radius,
+            ):
                 continue
             sample_cell_x = round(sample_x)
             sample_cell_y = round(sample_y)
@@ -555,6 +563,23 @@ def _distance_to_segment(
     nearest_x = start[0] + along * delta_x
     nearest_y = start[1] + along * delta_y
     return math.hypot(point[0] - nearest_x, point[1] - nearest_y)
+
+
+def _in_articulated_region(
+    point: tuple[float, float],
+    hand: tuple[int, int],
+    joint: tuple[int, int],
+    radius: float,
+    hand_radius: float,
+) -> bool:
+    if _distance_to_segment(point, hand, joint) <= radius:
+        return True
+    hand_dx = point[0] - hand[0]
+    hand_dy = point[1] - hand[1]
+    joint_dx = joint[0] - hand[0]
+    joint_dy = joint[1] - hand[1]
+    points_away_from_joint = hand_dx * joint_dx + hand_dy * joint_dy <= 0.0
+    return points_away_from_joint and math.hypot(hand_dx, hand_dy) <= hand_radius
 
 
 def _gesture_primary_material(rgb: tuple[int, int, int]) -> bool:

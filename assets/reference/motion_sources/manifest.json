@@ -1833,7 +1833,8 @@
         "localized_region": {
           "anchor_name": "left_hand",
           "pivot_offset_from_root": [-8, -45],
-          "radius": 7
+          "radius": 7,
+          "hand_radius": 16
         }
       },
       "facing": "south",
@@ -1861,7 +1862,8 @@
         "localized_region": {
           "anchor_name": "left_hand",
           "pivot_offset_from_root": [-8, -45],
-          "radius": 7
+          "radius": 7,
+          "hand_radius": 16
         }
       },
       "facing": "south",
@@ -1889,7 +1891,8 @@
         "localized_region": {
           "anchor_name": "left_hand",
           "pivot_offset_from_root": [-8, -45],
-          "radius": 7
+          "radius": 7,
+          "hand_radius": 16
         }
       },
       "facing": "south",
@@ -1917,7 +1920,8 @@
         "localized_region": {
           "anchor_name": "left_hand",
           "pivot_offset_from_root": [-8, -45],
-          "radius": 7
+          "radius": 7,
+          "hand_radius": 16
         }
       },
       "facing": "south",
@@ -3604,7 +3608,8 @@
         "localized_region": {
           "anchor_name": "left_hand",
           "pivot_offset_from_root": [-8, -45],
-          "radius": 7
+          "radius": 7,
+          "hand_radius": 16
         }
       },
       "facing": "south",
@@ -3632,7 +3637,8 @@
         "localized_region": {
           "anchor_name": "left_hand",
           "pivot_offset_from_root": [-8, -45],
-          "radius": 7
+          "radius": 7,
+          "hand_radius": 16
         }
       },
       "facing": "south",
@@ -3660,7 +3666,8 @@
         "localized_region": {
           "anchor_name": "left_hand",
           "pivot_offset_from_root": [-8, -45],
-          "radius": 7
+          "radius": 7,
+          "hand_radius": 16
         }
       },
       "facing": "south",
@@ -3688,7 +3695,8 @@
         "localized_region": {
           "anchor_name": "left_hand",
           "pivot_offset_from_root": [-8, -45],
-          "radius": 7
+          "radius": 7,
+          "hand_radius": 16
         }
       },
       "facing": "south",
@@ -3716,7 +3724,8 @@
         "localized_region": {
           "anchor_name": "left_hand",
           "pivot_offset_from_root": [-8, -45],
-          "radius": 7
+          "radius": 7,
+          "hand_radius": 16
         }
       },
       "facing": "south",

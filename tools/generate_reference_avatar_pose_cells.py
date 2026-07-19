@@ -394,6 +394,7 @@ def derive_landmark_warp_payload(
             field_name=f"{pose['id']}.localized_region.pivot_offset_from_root",
         )
         radius = float(localized_region.get("radius", 0.0))
+        hand_radius = float(localized_region.get("hand_radius", radius))
         source_pivot = (
             from_anchors["root"][0] + pivot_offset[0],
             from_anchors["root"][1] + pivot_offset[1],
@@ -409,6 +410,7 @@ def derive_landmark_warp_payload(
             (tuple(to_anchors[anchor_name]), target_pivot),
             progress,
             radius=radius,
+            hand_radius=hand_radius,
             repair_axis_x=from_anchors["root"][0],
         )
     anchors = {
