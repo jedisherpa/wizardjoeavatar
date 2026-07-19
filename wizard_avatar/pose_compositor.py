@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import math
+from typing import Optional, Tuple
 
 from .compositor import CellCanvas
 
@@ -141,13 +142,14 @@ def blit_pose_scaled(
     root_screen: tuple[float, float],
     scale: float,
     horizontal_scale: float = 1.0,
-) -> None:
+) -> Optional[Tuple[int, int, int, int]]:
     scale_x = max(0.001, scale * horizontal_scale)
     scale_y = max(0.001, scale)
     dest_width = max(1, round(local.width * scale_x))
     dest_height = max(1, round(local.height * scale_y))
     origin_x = round(root_screen[0] - root_local[0] * scale_x)
     origin_y = round(root_screen[1] - root_local[1] * scale_y)
+    occupied: Optional[Tuple[int, int, int, int]] = None
 
     for dy in range(dest_height):
         sy = min(local.height - 1, int(dy / scale_y))
@@ -157,8 +159,18 @@ def blit_pose_scaled(
             if cell is not None:
                 stage_x = origin_x + dx
                 stage_y = origin_y + dy
+                if occupied is None:
+                    occupied = (stage_x, stage_x, stage_y, stage_y)
+                else:
+                    occupied = (
+                        min(occupied[0], stage_x),
+                        max(occupied[1], stage_x),
+                        min(occupied[2], stage_y),
+                        max(occupied[3], stage_y),
+                    )
                 if stage.in_bounds(stage_x, stage_y):
                     stage.cells[stage_y][stage_x] = cell
+    return occupied
 
 
 def composite_crisp_transition(

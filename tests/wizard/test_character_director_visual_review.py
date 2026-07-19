@@ -19,7 +19,9 @@ from tools.run_character_director_visual_review import (
     ScenarioClock,
     StrictFrameDecoder,
     build_review_bundle_manifest,
+    add_transition_samples,
     collect_runtime_observations,
+    create_contact_sheet,
     enqueue_decoded_frame,
     load_scenario_program,
     parse_init,
@@ -34,6 +36,7 @@ from tools.run_character_director_visual_review import (
     validate_scenarios,
 )
 from wizard_avatar.protocol import TAG_RAW
+from wizard_avatar.contact_verifier import DecodedRasterFrameV1
 from wizard_avatar.frame_source import ProceduralWizardFrameSource
 from wizard_avatar.server import create_app
 
@@ -209,6 +212,94 @@ class ScenarioSchemaTests(unittest.TestCase):
         image = square_cell_image(b"\x20\x0a\x14\x1e", 1, 1, 3)
         self.assertEqual(image.size, (3, 3))
         self.assertEqual(set(image.getdata()), {(10, 20, 30)})
+
+    def test_transition_samples_and_contact_sheet_preserve_traceability(self):
+        digest_a = "a" * 64
+        digest_b = "b" * 64
+        state_a = "c" * 64
+        state_b = "d" * 64
+        records = CaptureRecords(
+            frames=[
+                {
+                    "frame_index": 10,
+                    "scenario": "listen",
+                    "presentation_frame_index": 0,
+                    "sha256": digest_a,
+                    "capture_owned": True,
+                },
+                {
+                    "frame_index": 11,
+                    "scenario": "listen",
+                    "presentation_frame_index": 1,
+                    "sha256": digest_b,
+                    "capture_owned": True,
+                },
+            ],
+            commands=[{"scenario": "listen", "command_id": "command-123"}],
+            samples=[
+                {
+                    "path": "samples/cadence.png",
+                    "frame_index": 10,
+                    "scenario": "listen",
+                    "presentation_frame_index": 0,
+                    "frame_sha256": digest_a,
+                    "sample_reason": "scenario_start",
+                }
+            ],
+            animation_truth_trace=[
+                {
+                    "frame_index": 10,
+                    "simulation_tick": 20,
+                    "authoritative_state_sha256": state_a,
+                    "presentation_channels": {
+                        "rendered_head_pose_id": "front_idle",
+                        "head_eye_phase": "eyes_lead",
+                        "blink_closed": False,
+                        "head_offset_x": 0,
+                        "head_offset_y": 0,
+                    },
+                },
+                {
+                    "frame_index": 11,
+                    "simulation_tick": 21,
+                    "authoritative_state_sha256": state_b,
+                    "presentation_channels": {
+                        "rendered_head_pose_id": "walk_front_left",
+                        "head_eye_phase": "head_follow",
+                        "blink_closed": False,
+                        "head_offset_x": -1,
+                        "head_offset_y": 0,
+                    },
+                },
+            ],
+            decoded_raster_frames={
+                10: DecodedRasterFrameV1(2, 1, b" \xff\xff\xff \xff\xff\xff"),
+                11: DecodedRasterFrameV1(2, 1, b"#\x10\x20\x30 \xff\xff\xff"),
+            },
+        )
+        init = parse_init("INIT:24:5:2:1:0:0:0.000")
+
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            (root / "samples").mkdir()
+            square_cell_image(records.decoded_raster_frames[10].cells, 2, 1, 2).save(
+                root / "samples" / "cadence.png"
+            )
+            add_transition_samples(records, init, root, "run", 2)
+            self.assertEqual([sample["frame_index"] for sample in records.samples], [10, 11])
+            self.assertEqual(records.samples[1]["sample_reason"], "presentation_transition")
+
+            contact = root / "contact.png"
+            create_contact_sheet(
+                records.samples,
+                records.animation_truth_trace,
+                records.commands,
+                root,
+                contact,
+                24.0,
+            )
+            self.assertTrue(contact.is_file())
+            self.assertGreater(contact.stat().st_size, 0)
 
 
 class StrictCaptureTests(unittest.IsolatedAsyncioTestCase):
@@ -693,6 +784,38 @@ class ManifestValidationTests(unittest.TestCase):
             quarter_speed.write_bytes(b"quarter-speed-video")
             machine_report = root / "v1-machine-acceptance.json"
             machine_report.write_text('{"passed":false}\n', encoding="utf-8")
+            browser_video = root / "v1-browser-layout.mp4"
+            browser_video.write_bytes(b"browser-layout-video")
+            browser_metrics = root / "v1-browser-layout-metrics.json"
+            browser_metrics.write_text(
+                json.dumps(
+                    {
+                        "schema": "character_director_browser_layout_v1",
+                        "schema_version": 1,
+                        "run_id": capture["source_epoch"],
+                        "candidate_commit": capture["provenance"]["head"],
+                        "capture_manifest_sha256": hashlib.sha256(
+                            capture_manifest.read_bytes()
+                        ).hexdigest(),
+                        "frame_count": 2,
+                        "expected_frame_count": 2,
+                        "final_client_metrics": {
+                            "decodeErrorCount": 0,
+                            "canvas": {
+                                "cols": capture["init"]["cols"],
+                                "rows": capture["init"]["rows"],
+                            },
+                        },
+                        "page_errors": [],
+                        "video_path": browser_video.name,
+                        "video_bytes": browser_video.stat().st_size,
+                        "video_sha256": hashlib.sha256(
+                            browser_video.read_bytes()
+                        ).hexdigest(),
+                    }
+                ),
+                encoding="utf-8",
+            )
 
             with mock.patch(
                 "tools.run_character_director_visual_review.validate_manifest"
@@ -708,6 +831,12 @@ class ManifestValidationTests(unittest.TestCase):
                             "application/json",
                             capture_manifest,
                         ),
+                        (
+                            "browser_layout",
+                            browser_video,
+                            "video/mp4",
+                            browser_metrics,
+                        ),
                     ),
                 )
                 self.assertTrue(bundle["complete"])
@@ -717,6 +846,23 @@ class ManifestValidationTests(unittest.TestCase):
                 bundle["artifacts"][0]["source_sha256"] = "b" * 64
                 with self.assertRaisesRegex(ManifestValidationError, "source SHA-256 mismatch"):
                     validate_review_bundle_manifest(bundle, root)
+
+                legacy_bundle = build_review_bundle_manifest(
+                    capture_manifest,
+                    root,
+                    (
+                        ("quarter_speed", quarter_speed, "video/mp4", normal_video),
+                        (
+                            "machine_acceptance",
+                            machine_report,
+                            "application/json",
+                            capture_manifest,
+                        ),
+                    ),
+                )
+                legacy_bundle["schema_version"] = 1
+                legacy_bundle["complete"] = True
+                validate_review_bundle_manifest(legacy_bundle, root)
 
     def test_rejects_hashed_artifacts_that_do_not_replay_semantically(self):
         manifest = self.valid_manifest()

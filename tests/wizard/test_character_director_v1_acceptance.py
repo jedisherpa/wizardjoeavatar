@@ -51,6 +51,12 @@ class V1MachineAcceptanceTests(unittest.TestCase):
                     "world_root_z": 5.0,
                     "presented_facing": facing,
                     "rendered_pose_id": "front_idle",
+                    "silhouette_raster_span": {
+                        "min_x": 50,
+                        "max_x": 130,
+                        "min_y": 5,
+                        "max_y": 94,
+                    },
                     "frame_sha256": "fixture-frame-{:03d}".format(index),
                     "presentation_channels": channels(
                         gaze, authoritative, blink, phase, facing
@@ -102,7 +108,7 @@ class V1MachineAcceptanceTests(unittest.TestCase):
                 for item in records
             ],
             "commands": commands,
-            "init": {"fps": 24.0},
+            "init": {"fps": 24.0, "cols": 180, "rows": 101},
         }
         return manifest, records
 
@@ -152,6 +158,21 @@ class V1MachineAcceptanceTests(unittest.TestCase):
             if item["name"] == "authored_three_quarter_head_bridge"
         )
         self.assertFalse(bridge_check["passed"])
+
+    def test_rejects_clipped_silhouette(self):
+        manifest, records = self.fixture()
+        damaged = copy.deepcopy(records)
+        damaged[0]["silhouette_raster_span"]["min_y"] = 0
+
+        report = analyze_v1(manifest, damaged)
+
+        self.assertFalse(report["passed"])
+        framing_check = next(
+            item
+            for item in report["checks"]
+            if item["name"] == "canonical_silhouette_margins"
+        )
+        self.assertFalse(framing_check["passed"])
 
 
 if __name__ == "__main__":

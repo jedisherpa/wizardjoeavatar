@@ -93,6 +93,17 @@ class HeadEyeRenderIntegrationTests(unittest.TestCase):
             traces.append(candidate.animation_truth)
 
         self.assertEqual({trace.rendered_pose_id for trace in traces}, {"front_idle"})
+        self.assertEqual({trace.render_scale for trace in traces}, {traces[0].render_scale})
+        self.assertTrue(
+            all(
+                trace.silhouette_raster_span is not None
+                and trace.silhouette_raster_span.min_x >= 4
+                and trace.silhouette_raster_span.max_x <= 175
+                and trace.silhouette_raster_span.min_y >= 4
+                and trace.silhouette_raster_span.max_y <= 94
+                for trace in traces
+            )
+        )
         self.assertEqual(
             {trace.presentation_channels.head_offset_y for trace in traces},
             {-1, 0},

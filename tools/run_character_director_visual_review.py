@@ -55,7 +55,8 @@ SCENARIO_PROGRAM_MAX_STEPS = 64
 SCENARIO_PROGRAM_MAX_SECONDS = 10 * 60
 ACCEPTANCE_SCENARIO_RE = re.compile(r"^V(?:[1-9]|10)$")
 REVIEW_BUNDLE_SCHEMA = "character_director_review_bundle_manifest_v1"
-REVIEW_BUNDLE_VERSION = 1
+REVIEW_BUNDLE_VERSION = 2
+SUPPORTED_REVIEW_BUNDLE_VERSIONS = {1, REVIEW_BUNDLE_VERSION}
 
 
 class EvidenceFailure(RuntimeError):
@@ -1052,6 +1053,11 @@ async def write_frames(
                             "scenario": frame.scenario,
                             "presentation_frame_index": processed,
                             "frame_sha256": digest,
+                            "sample_reason": (
+                                "scenario_start"
+                                if frame.scenario not in sampled_scenarios
+                                else "cadence"
+                            ),
                         }
                     )
                     sampled_scenarios.add(frame.scenario)
@@ -1194,16 +1200,90 @@ async def drive_scenarios(
             raise
 
 
-def create_contact_sheet(sample_paths: Sequence[Path], output_path: Path) -> None:
-    if not sample_paths:
+def add_transition_samples(
+    records: CaptureRecords,
+    init: InitMetadata,
+    output_dir: Path,
+    run_id: str,
+    cell_size: int,
+) -> None:
+    """Add exact event-boundary frames omitted by cadence-only sampling."""
+
+    frame_by_index = {item["frame_index"]: item for item in records.frames}
+    sampled_indexes = {item["frame_index"] for item in records.samples}
+    previous_signature = None
+    for trace in records.animation_truth_trace:
+        channels = trace.get("presentation_channels") or {}
+        signature = (
+            channels.get("rendered_head_pose_id"),
+            channels.get("head_eye_phase"),
+            channels.get("blink_closed"),
+            channels.get("head_offset_x"),
+            channels.get("head_offset_y"),
+        )
+        if previous_signature is None or signature != previous_signature:
+            frame_index = trace["frame_index"]
+            if frame_index not in sampled_indexes:
+                raster = records.decoded_raster_frames.get(frame_index)
+                frame = frame_by_index.get(frame_index)
+                if raster is None or frame is None or not frame.get("capture_owned"):
+                    raise EvidenceFailure(
+                        "transition sample {} has no owned decoded frame".format(
+                            frame_index
+                        )
+                    )
+                sample_name = "{}-event-{:04d}-{}-frame-{}.png".format(
+                    run_id,
+                    len(records.samples) + 1,
+                    frame.get("scenario"),
+                    frame_index,
+                )
+                sample_path = output_dir / "samples" / sample_name
+                image = square_cell_image(
+                    raster.cells,
+                    raster.cols,
+                    raster.rows,
+                    cell_size,
+                )
+                image.save(sample_path, "PNG")
+                records.sample_paths.append(sample_path)
+                records.samples.append(
+                    {
+                        "path": sample_path.relative_to(output_dir).as_posix(),
+                        "frame_index": frame_index,
+                        "scenario": frame.get("scenario"),
+                        "presentation_frame_index": frame.get(
+                            "presentation_frame_index"
+                        ),
+                        "frame_sha256": frame.get("sha256"),
+                        "sample_reason": "presentation_transition",
+                    }
+                )
+                sampled_indexes.add(frame_index)
+        previous_signature = signature
+
+
+def create_contact_sheet(
+    samples: Sequence[Mapping[str, Any]],
+    animation_truth_trace: Sequence[Mapping[str, Any]],
+    commands: Sequence[Mapping[str, Any]],
+    output_dir: Path,
+    output_path: Path,
+    fps: float,
+) -> None:
+    if not samples:
         raise EvidenceFailure("cannot create contact sheet without sampled PNGs")
     from PIL import Image, ImageDraw
 
-    columns = min(3, len(sample_paths))
-    thumb_width = 384
-    label_height = 28
+    trace_by_index = {item.get("frame_index"): item for item in animation_truth_trace}
+    command_by_scenario = {item.get("scenario"): item for item in commands}
+    ordered_samples = sorted(samples, key=lambda item: item["frame_index"])
+    columns = min(3, len(ordered_samples))
+    thumb_width = 540
+    label_height = 68
     loaded = []
-    for path in sample_paths:
+    for sample in ordered_samples:
+        path = output_dir / sample["path"]
         with Image.open(path) as source:
             image = source.convert("RGB")
             thumb_height = max(1, round(image.height * thumb_width / image.width))
@@ -1212,11 +1292,39 @@ def create_contact_sheet(sample_paths: Sequence[Path], output_path: Path) -> Non
     rows = math.ceil(len(loaded) / columns)
     sheet = Image.new("RGB", (columns * thumb_width, rows * (thumb_height + label_height)), "white")
     draw = ImageDraw.Draw(sheet)
-    for index, (path, image) in enumerate(zip(sample_paths, loaded)):
+    for index, (sample, image) in enumerate(zip(ordered_samples, loaded)):
         x = (index % columns) * thumb_width
         y = (index // columns) * (thumb_height + label_height)
         sheet.paste(image, (x, y))
-        draw.text((x + 6, y + thumb_height + 7), path.stem[-72:], fill=(20, 20, 20))
+        trace = trace_by_index.get(sample["frame_index"], {})
+        command = command_by_scenario.get(sample.get("scenario"), {})
+        presentation_index = sample.get("presentation_frame_index")
+        presentation_seconds = (
+            float(presentation_index) / fps
+            if isinstance(presentation_index, int) and fps > 0
+            else 0.0
+        )
+        label = (
+            "frame={} tick={} time={:.3f}s scenario={} reason={}\n"
+            "command={}\n"
+            "state_sha256={}\n"
+            "frame_sha256={}"
+        ).format(
+            sample["frame_index"],
+            trace.get("simulation_tick", "missing"),
+            presentation_seconds,
+            sample.get("scenario"),
+            sample.get("sample_reason", "legacy"),
+            command.get("command_id", "missing"),
+            trace.get("authoritative_state_sha256", "missing"),
+            sample.get("frame_sha256", "missing"),
+        )
+        draw.multiline_text(
+            (x + 6, y + thumb_height + 4),
+            label,
+            fill=(20, 20, 20),
+            spacing=1,
+        )
     output_path.parent.mkdir(parents=True, exist_ok=True)
     sheet.save(output_path, "PNG")
 
@@ -1260,7 +1368,7 @@ def build_review_bundle_manifest(
         "run_id": capture_manifest.get("source_epoch"),
         "candidate_commit": capture_manifest.get("provenance", {}).get("head"),
         "complete": {item["role"] for item in records}
-        == {"machine_acceptance", "quarter_speed"},
+        == {"browser_layout", "machine_acceptance", "quarter_speed"},
         "capture_manifest": {
             "path": capture_manifest_path.relative_to(output_dir).as_posix(),
             "bytes": capture_manifest_path.stat().st_size,
@@ -1291,7 +1399,7 @@ def validate_review_bundle_manifest(
     )
     _manifest_error(
         manifest.get("schema") == REVIEW_BUNDLE_SCHEMA
-        and manifest.get("schema_version") == REVIEW_BUNDLE_VERSION,
+        and manifest.get("schema_version") in SUPPORTED_REVIEW_BUNDLE_VERSIONS,
         "unsupported review bundle manifest",
     )
     _manifest_error(
@@ -1370,8 +1478,11 @@ def validate_review_bundle_manifest(
             "review artifact",
         )
         role = artifact.get("role")
+        supported_roles = {"machine_acceptance", "quarter_speed"}
+        if manifest["schema_version"] >= 2:
+            supported_roles.add("browser_layout")
         _manifest_error(
-            role in {"machine_acceptance", "quarter_speed"},
+            role in supported_roles,
             "unsupported review artifact role",
         )
         _manifest_error(
@@ -1379,6 +1490,7 @@ def validate_review_bundle_manifest(
             "review artifact media type is missing",
         )
         expected_media_type = {
+            "browser_layout": "video/mp4",
             "machine_acceptance": "application/json",
             "quarter_speed": "video/mp4",
         }[role]
@@ -1408,17 +1520,54 @@ def validate_review_bundle_manifest(
                 and artifact["source_sha256"] == capture_record["sha256"],
                 "machine report is not bound to the immutable capture manifest",
             )
-        else:
+        elif role == "quarter_speed":
             _manifest_error(
                 artifact["path"] == "v1-quarter-speed.mp4"
                 and source_relative == capture_manifest.get("video", {}).get("path"),
                 "quarter-speed review is not bound to the normal-speed video",
             )
+        else:
+            _manifest_error(
+                artifact["path"] == "v1-browser-layout.mp4"
+                and source_relative == "v1-browser-layout-metrics.json",
+                "browser layout review is not bound to its metrics",
+            )
+            browser_metrics = json.loads(source.read_text(encoding="utf-8"))
+            _manifest_error(
+                browser_metrics.get("schema") == "character_director_browser_layout_v1"
+                and browser_metrics.get("schema_version") == 1,
+                "unsupported browser layout metrics",
+            )
+            _manifest_error(
+                browser_metrics.get("run_id") == manifest["run_id"]
+                and browser_metrics.get("candidate_commit") == manifest["candidate_commit"]
+                and browser_metrics.get("capture_manifest_sha256") == capture_record["sha256"],
+                "browser layout metrics are not bound to this capture",
+            )
+            _manifest_error(
+                browser_metrics.get("video_path") == artifact["path"]
+                and browser_metrics.get("video_sha256") == artifact["sha256"]
+                and browser_metrics.get("video_bytes") == artifact["bytes"],
+                "browser layout metrics do not bind the browser video",
+            )
+            final_metrics = browser_metrics.get("final_client_metrics", {})
+            canvas_metrics = final_metrics.get("canvas", {})
+            _manifest_error(
+                browser_metrics.get("frame_count") == browser_metrics.get("expected_frame_count")
+                and final_metrics.get("decodeErrorCount") == 0
+                and canvas_metrics.get("cols") == capture_manifest.get("init", {}).get("cols")
+                and canvas_metrics.get("rows") == capture_manifest.get("init", {}).get("rows")
+                and not browser_metrics.get("page_errors"),
+                "browser layout metrics failed runtime integrity checks",
+            )
         roles.append(role)
         paths.append(artifact["path"])
     _manifest_error(len(roles) == len(set(roles)), "review artifact roles must be unique")
     _manifest_error(len(paths) == len(set(paths)), "review artifact paths must be unique")
-    expected_complete = set(roles) == {"machine_acceptance", "quarter_speed"}
+    expected_complete_roles = {"machine_acceptance", "quarter_speed"}
+    if manifest["schema_version"] >= 2:
+        expected_complete_roles.add("browser_layout")
+    expected_complete = set(roles) == expected_complete_roles
     _manifest_error(manifest["complete"] == expected_complete, "review bundle completeness mismatch")
 
 
@@ -1495,12 +1644,46 @@ def generate_v1_review_products(
             )
         )
 
+    browser_video = output_dir / "v1-browser-layout.mp4"
+    browser_metrics = output_dir / "v1-browser-layout-metrics.json"
+    browser_video.unlink(missing_ok=True)
+    browser_metrics.unlink(missing_ok=True)
+    browser_capture = subprocess.run(
+        (
+            sys.executable,
+            str(ROOT / "tools" / "record_character_director_browser.py"),
+            "--manifest",
+            str(capture_manifest_path),
+            "--video",
+            str(browser_video),
+            "--metrics",
+            str(browser_metrics),
+        ),
+        cwd=str(ROOT),
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        check=False,
+    )
+    if (
+        browser_capture.returncode
+        or not browser_video.is_file()
+        or not browser_video.stat().st_size
+        or not browser_metrics.is_file()
+        or not browser_metrics.stat().st_size
+    ):
+        raise EvidenceFailure(
+            "V1 browser layout capture failed: {}".format(
+                browser_capture.stderr.decode("utf-8", errors="replace").strip()
+            )
+        )
+
     bundle = build_review_bundle_manifest(
         capture_manifest_path,
         output_dir,
         (
             ("quarter_speed", quarter_speed, "video/mp4", normal_video),
             ("machine_acceptance", machine_report, "application/json", capture_manifest_path),
+            ("browser_layout", browser_video, "video/mp4", browser_metrics),
         ),
     )
     bundle_path = output_dir / "review-bundle-manifest.json"
@@ -2545,14 +2728,6 @@ async def run_visual_review(
     if sink is None:
         sink = FFmpegSink(None, output_dir / "{}-capture.mp4".format(run_id), 4, 4, 1.0)
 
-    if records.sample_paths:
-        candidate = output_dir / "{}-contact-sheet.png".format(run_id)
-        try:
-            await asyncio.to_thread(create_contact_sheet, records.sample_paths, candidate)
-            contact_path = candidate
-        except Exception as exc:
-            integrity.invalidate("contact sheet generation failed: {}".format(exc))
-
     wire_path = output_dir / "wire" / "frames.bin"
     wire_index_path = output_dir / "wire" / "index.ndjson"
     animation_trace_path = output_dir / "animation_truth_trace.ndjson"
@@ -2619,6 +2794,30 @@ async def run_visual_review(
                 integrity.invalidate("planted-foot contact verification failed")
         except Exception as exc:
             integrity.invalidate("atomic animation trace capture failed: {}".format(exc))
+
+    if records.animation_truth_trace:
+        candidate = output_dir / "{}-contact-sheet.png".format(run_id)
+        try:
+            await asyncio.to_thread(
+                add_transition_samples,
+                records,
+                init,
+                output_dir,
+                run_id,
+                cell_size,
+            )
+            await asyncio.to_thread(
+                create_contact_sheet,
+                records.samples,
+                records.animation_truth_trace,
+                records.commands,
+                output_dir,
+                candidate,
+                init.fps,
+            )
+            contact_path = candidate
+        except Exception as exc:
+            integrity.invalidate("contact sheet generation failed: {}".format(exc))
 
     try:
         runtime_identity_end, _ = await request_json_async("GET", runtime_identity_url)

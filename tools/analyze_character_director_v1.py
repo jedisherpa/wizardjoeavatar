@@ -239,6 +239,15 @@ def analyze_v1(
     blink_runs = [end - start for start, end in blink_ranges]
     fps = float(manifest.get("init", {}).get("fps", 0.0) or 0.0)
     blink_durations_ms = [round(run * 1000.0 / fps, 3) for run in blink_runs] if fps else []
+    blink_onset_times = [
+        _utc(paired[start][0].get("received_at_utc"))
+        for start, _end in blink_ranges
+        if start < len(paired)
+    ]
+    blink_intervals_seconds = [
+        round((later - earlier).total_seconds(), 3)
+        for earlier, later in zip(blink_onset_times, blink_onset_times[1:])
+    ]
     visible_blink_runs = []
     for start, end in blink_ranges:
         painted = all(
@@ -268,6 +277,13 @@ def analyze_v1(
             "visible_runs": visible_blink_runs,
         },
     )
+    _check(
+        report,
+        "blink_onset_intervals",
+        len(blink_intervals_seconds) >= 1
+        and all(2.5 <= interval <= 6.5 for interval in blink_intervals_seconds),
+        {"intervals_seconds": blink_intervals_seconds},
+    )
 
     eye_bound_failures = []
     for trace in all_trace:
@@ -290,6 +306,39 @@ def analyze_v1(
         )
         and not eye_bound_failures,
         {"escaped_frames": eye_bound_failures},
+    )
+
+    init = manifest.get("init", {})
+    cols = int(init.get("cols", 0) or 0)
+    rows = int(init.get("rows", 0) or 0)
+    framing_failures = []
+    for trace in all_trace:
+        span = trace.get("silhouette_raster_span")
+        if not isinstance(span, Mapping):
+            framing_failures.append(
+                {"frame_index": trace.get("frame_index"), "reason": "missing_span"}
+            )
+            continue
+        if not (
+            span.get("min_x", -1) >= 4
+            and span.get("max_x", cols) <= cols - 1 - 4
+            and span.get("min_y", -1) >= 4
+            and span.get("max_y", rows) <= rows - 1 - 6
+        ):
+            framing_failures.append(
+                {"frame_index": trace.get("frame_index"), "span": dict(span)}
+            )
+    _check(
+        report,
+        "canonical_silhouette_margins",
+        cols > 0 and rows > 0 and bool(all_trace) and not framing_failures,
+        {
+            "cols": cols,
+            "rows": rows,
+            "required_margins": {"top": 4, "side": 4, "bottom": 6},
+            "failure_count": len(framing_failures),
+            "failures": framing_failures[:20],
+        },
     )
 
     roots = [(item.get("world_root_x"), item.get("world_root_z")) for item in all_trace]
@@ -327,6 +376,7 @@ def analyze_v1(
         "paired_trace_count": len(paired),
         "blink_count": len(blink_runs),
         "blink_durations_ms": blink_durations_ms,
+        "blink_intervals_seconds": blink_intervals_seconds,
         "turn_facing_sequence": _compact(turn_facings),
         "turn_phase_sequence": _compact(turn_phases),
         "turn_head_pose_sequence": _compact(turn_head_poses),

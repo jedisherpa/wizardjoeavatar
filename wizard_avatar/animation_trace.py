@@ -213,6 +213,7 @@ class AnimationTruthTraceV1:
     staff_tip_local: Optional[LocalPointV1]
     staff_tip_stage: Optional[StagePointV1]
     staff_tip_raster_span: Optional[RasterSpanV1]
+    silhouette_raster_span: Optional[RasterSpanV1]
     effect_phase: str
     effect_intensity: float
     presented_facing: str
@@ -231,15 +232,20 @@ class AnimationTruthTraceV1:
     def from_mapping(cls, value: Mapping[str, Any]) -> "AnimationTruthTraceV1":
         expected = {item.name for item in fields(cls)}
         supplied = set(value)
+        optional_compatibility_fields = (
+            "presentation_marker_events",
+            "presentation_channels",
+            "silhouette_raster_span",
+        )
         compatible_field_sets = {
-            frozenset(expected),
-            frozenset(expected.difference({"presentation_marker_events"})),
-            frozenset(expected.difference({"presentation_channels"})),
             frozenset(
                 expected.difference(
-                    {"presentation_marker_events", "presentation_channels"}
+                    field
+                    for index, field in enumerate(optional_compatibility_fields)
+                    if mask & (1 << index)
                 )
-            ),
+            )
+            for mask in range(1 << len(optional_compatibility_fields))
         }
         if frozenset(supplied) not in compatible_field_sets:
             missing = sorted(expected.difference(supplied))
@@ -254,6 +260,7 @@ class AnimationTruthTraceV1:
         payload["active_markers"] = tuple(payload["active_markers"])
         payload.setdefault("presentation_marker_events", ())
         payload.setdefault("presentation_channels", None)
+        payload.setdefault("silhouette_raster_span", None)
         payload["presentation_marker_events"] = tuple(
             AnimationMarkerEventV1(**event)
             for event in payload["presentation_marker_events"]
@@ -278,7 +285,11 @@ class AnimationTruthTraceV1:
         ):
             point = payload[name]
             payload[name] = None if point is None else LocalPointV1(**point)
-        for name in ("planted_anchor_raster_span", "staff_tip_raster_span"):
+        for name in (
+            "planted_anchor_raster_span",
+            "staff_tip_raster_span",
+            "silhouette_raster_span",
+        ):
             span = payload[name]
             payload[name] = None if span is None else RasterSpanV1(**span)
         result = cls(**payload)

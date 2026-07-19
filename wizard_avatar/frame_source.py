@@ -74,6 +74,11 @@ from .shadow import draw_contact_shadow
 
 
 REFERENCE_POSE_HORIZONTAL_SCALE = 1.18
+REFERENCE_TOP_MARGIN_CELLS = 4
+REFERENCE_SIDE_MARGIN_CELLS = 4
+REFERENCE_BOTTOM_MARGIN_CELLS = 6
+REFERENCE_HEAD_MOTION_RESERVE_CELLS = 1
+REFERENCE_RASTER_SAFETY_CELLS = 1
 REFERENCE_MOUTH_OPEN = (132, 30, 22)
 REFERENCE_MOUTH_DARK = (78, 39, 20)
 REFERENCE_TEETH = (250, 238, 209)
@@ -463,6 +468,17 @@ class ProceduralWizardFrameSource:
             facing_changed_tick=state.facing_changed_tick,
         )
         scheduler_blink_closed = state.blink_phase >= 0.965
+        scheduler_blink_suppressed = (
+            scheduler_blink_closed
+            and not head_eye.turn_blink_closed
+            and state.facing_changed_tick > 0
+            and 0
+            <= state.simulation_tick - state.facing_changed_tick
+            < 150
+        )
+        if scheduler_blink_suppressed:
+            scheduler_blink_closed = False
+            state.blink_phase = 0.0
         if head_eye.turn_blink_closed:
             state.blink_phase = 1.0
         blink_source = (
@@ -522,6 +538,18 @@ class ProceduralWizardFrameSource:
             )
             local, root_anchor, mouth_anchor = self._reference_pose_canvas_for_sample(
                 pose_id,
+            )
+            provisional_root_screen = self._reference_root_screen(
+                sx,
+                sy,
+                state,
+                render_scale,
+            )
+            render_scale = self._fit_reference_scale_to_stage(
+                local,
+                root_anchor,
+                provisional_root_screen,
+                render_scale,
             )
             if (
                 state.animation_clip_id
@@ -621,8 +649,9 @@ class ProceduralWizardFrameSource:
                 render_scale,
                 lifted=lifted,
             )
+        silhouette_raster_span = None
         if pose_id is not None:
-            blit_pose_scaled(
+            occupied = blit_pose_scaled(
                 stage,
                 local,
                 root_anchor,
@@ -630,6 +659,13 @@ class ProceduralWizardFrameSource:
                 render_scale,
                 REFERENCE_POSE_HORIZONTAL_SCALE,
             )
+            if occupied is not None:
+                silhouette_raster_span = RasterSpanV1(
+                    min_x=occupied[0],
+                    max_x=occupied[1],
+                    min_y=occupied[2],
+                    max_y=occupied[3],
+                )
             self._draw_reference_animation_overlays(
                 stage,
                 state,
@@ -790,6 +826,7 @@ class ProceduralWizardFrameSource:
             ),
             staff_tip_stage=staff_tip_stage,
             staff_tip_raster_span=staff_tip_raster_span,
+            silhouette_raster_span=silhouette_raster_span,
             effect_phase=effect_phase,
             effect_intensity=effect_intensity,
             presented_facing=head_eye.presented_facing,
@@ -1398,6 +1435,69 @@ class ProceduralWizardFrameSource:
     ) -> Tuple[float, float]:
         ground_y = min(self.rows - 8, sy + 18 * render_scale)
         return sx, ground_y - state.altitude * 8.0 * render_scale
+
+    def _fit_reference_scale_to_stage(
+        self,
+        canvas: CellCanvas,
+        root_anchor: Tuple[int, int],
+        root_screen: Tuple[float, float],
+        requested_scale: float,
+    ) -> float:
+        """Cap scale so the complete authored silhouette remains reviewable."""
+
+        occupied = [
+            (x, y)
+            for y, row in enumerate(canvas.cells)
+            for x, cell in enumerate(row)
+            if cell is not None
+        ]
+        if not occupied:
+            return requested_scale
+        min_x = min(point[0] for point in occupied) - REFERENCE_HEAD_MOTION_RESERVE_CELLS
+        max_x = max(point[0] for point in occupied) + REFERENCE_HEAD_MOTION_RESERVE_CELLS
+        min_y = min(point[1] for point in occupied) - REFERENCE_HEAD_MOTION_RESERVE_CELLS
+        max_y = max(point[1] for point in occupied)
+        root_x, root_y = root_anchor
+        stage_x, stage_y = root_screen
+        limits = [requested_scale]
+
+        left_extent = (root_x - min_x) * REFERENCE_POSE_HORIZONTAL_SCALE
+        right_extent = (max_x - root_x) * REFERENCE_POSE_HORIZONTAL_SCALE
+        top_extent = root_y - min_y
+        bottom_extent = max_y - root_y
+        if left_extent > 0:
+            limits.append(
+                (stage_x - REFERENCE_SIDE_MARGIN_CELLS - REFERENCE_RASTER_SAFETY_CELLS)
+                / left_extent
+            )
+        if right_extent > 0:
+            limits.append(
+                (
+                    self.cols
+                    - 1
+                    - REFERENCE_SIDE_MARGIN_CELLS
+                    - REFERENCE_RASTER_SAFETY_CELLS
+                    - stage_x
+                )
+                / right_extent
+            )
+        if top_extent > 0:
+            limits.append(
+                (stage_y - REFERENCE_TOP_MARGIN_CELLS - REFERENCE_RASTER_SAFETY_CELLS)
+                / top_extent
+            )
+        if bottom_extent > 0:
+            limits.append(
+                (
+                    self.rows
+                    - 1
+                    - REFERENCE_BOTTOM_MARGIN_CELLS
+                    - REFERENCE_RASTER_SAFETY_CELLS
+                    - stage_y
+                )
+                / bottom_extent
+            )
+        return max(0.001, min(limits))
 
     def _resolve_contact_locked_root(
         self,
