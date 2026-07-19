@@ -1352,8 +1352,9 @@ class ProceduralWizardFrameSource:
         if input_active:
             source = input_source
         elif visible:
-            held_source = previous_source if previous_source != "none" else "scheduler"
-            source = held_source if "presentation_hold" in held_source else held_source + "+presentation_hold"
+            # The hold preserves the originating semantic source. It is a
+            # projector timing guarantee, not a new protocol-level blink kind.
+            source = previous_source if previous_source != "none" else "scheduler"
         else:
             source = "none"
         return visible, next_remaining, source

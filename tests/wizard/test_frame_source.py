@@ -31,6 +31,7 @@ class FrameSourceTests(unittest.TestCase):
         remaining = 0
         source_name = "none"
         visible_frames = []
+        source_names = []
         for input_active in (True, True, False, False, False):
             visible, remaining, source_name = source._resolve_presentation_blink(
                 input_active=input_active,
@@ -40,9 +41,11 @@ class FrameSourceTests(unittest.TestCase):
                 previous_source=source_name,
             )
             visible_frames.append(visible)
+            source_names.append(source_name)
             previous_input = input_active
 
         self.assertEqual(visible_frames, [True, True, True, True, False])
+        self.assertEqual(source_names, ["scheduler"] * 4 + ["none"])
         self.assertEqual(remaining, 0)
 
     def test_direct_procedural_frame_source_shape(self):
