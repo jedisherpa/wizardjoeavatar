@@ -94,7 +94,7 @@ capture with:
   --output <capture>/v3-machine-acceptance.json
 ```
 
-The analyzer fails closed unless the transport is contiguous, exactly 276
+The analyzer fails closed unless the transport is contiguous, exactly 312
 scenario-owned frames form individually contiguous scenario blocks, and any
 unowned frame is a bounded transition between those blocks. Every owned frame
 must pair with a truth record; all three casts must use the canonical atomic
@@ -112,7 +112,7 @@ and technical reviews passed, but independent animation review found two
 blocking defects: the staff changed construction inside each cast and the first
 cast capture skipped late recovery frames. The current implementation directly
 addresses both findings by transforming the complete source staff graph and by
-capturing 48 owned frames for every cast. It is not accepted until a fresh,
+capturing 60 owned frames for every cast. It is not accepted until a fresh,
 clean-commit capture passes the strengthened analyzer and both independent
 reviewers issue explicit PASS verdicts.
 

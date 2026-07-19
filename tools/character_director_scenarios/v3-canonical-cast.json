@@ -16,21 +16,21 @@
       "kind": "action",
       "payload": {"action": "magic_cast", "duration_ms": 1600},
       "settle_seconds": 0.0,
-      "capture_seconds": 2.0
+      "capture_seconds": 2.5
     },
     {
       "name": "v3-hold-one",
       "kind": "gaze",
       "payload": {"target": "viewer"},
       "settle_seconds": 0.0,
-      "capture_seconds": 2.0
+      "capture_seconds": 2.5
     },
     {
       "name": "v3-cast-two",
       "kind": "action",
       "payload": {"action": "magic_cast", "duration_ms": 1600},
       "settle_seconds": 0.0,
-      "capture_seconds": 2.0
+      "capture_seconds": 2.5
     },
     {
       "name": "v3-hold-two",

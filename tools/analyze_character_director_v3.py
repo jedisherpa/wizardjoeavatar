@@ -35,11 +35,11 @@ EXPECTED_SCENARIOS = (
 )
 EXPECTED_FRAME_COUNTS = {
     "v3-ready": 12,
-    "v3-cast-one": 48,
+    "v3-cast-one": 60,
     "v3-hold-one": 48,
-    "v3-cast-two": 48,
+    "v3-cast-two": 60,
     "v3-hold-two": 48,
-    "v3-cast-three": 48,
+    "v3-cast-three": 60,
     "v3-settle": 24,
 }
 CAST_SCENARIOS = ("v3-cast-one", "v3-cast-two", "v3-cast-three")
@@ -178,7 +178,7 @@ def analyze_v3(
         isinstance(program, Mapping)
         and program.get("program_id") == "v3-canonical-cast"
         and program.get("acceptance_scenario") == "V3"
-        and program.get("total_duration_seconds") == 11.5,
+        and program.get("total_duration_seconds") == 13.0,
         program,
     )
     scenario_names = tuple(item.get("name") for item in manifest.get("scenarios", ()))
@@ -238,7 +238,7 @@ def analyze_v3(
         "complete_contiguous_capture",
         len(frames) == len(trace_records) == len(complete)
         and not missing
-        and len(owned_frames) == 276
+        and len(owned_frames) == 312
         and transport_contiguous
         and scenario_blocks_contiguous
         and unowned_are_bounded_transitions

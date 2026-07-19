@@ -18,7 +18,7 @@ def fixture():
         "scenario_program": {
             "program_id": "v3-canonical-cast",
             "acceptance_scenario": "V3",
-            "total_duration_seconds": 11.5,
+            "total_duration_seconds": 13.0,
         },
         "scenarios": [{"name": name} for name in EXPECTED_SCENARIOS],
         "init": {"cols": 240, "rows": 135, "fps": 24.0},
@@ -109,7 +109,7 @@ class CharacterDirectorV3AcceptanceTests(unittest.TestCase):
         report = analyze_v3(manifest, traces)
 
         self.assertTrue(report["passed"], report)
-        self.assertEqual(report["metrics"]["frame_count"], 276)
+        self.assertEqual(report["metrics"]["frame_count"], 312)
         self.assertEqual(report["metrics"]["staff_continuity_failure_count"], 0)
 
     def test_staff_jump_and_missing_marker_fail_closed(self):
@@ -202,7 +202,7 @@ class CharacterDirectorV3AcceptanceTests(unittest.TestCase):
 
         self.assertTrue(report["passed"], report)
         capture = check(report, "complete_contiguous_capture")
-        self.assertEqual(capture["detail"]["unowned_transition_frame_indexes"], [60])
+        self.assertEqual(capture["detail"]["unowned_transition_frame_indexes"], [72])
         coverage = check(report, "authored_coverage_and_terminal_neutral")
         self.assertTrue(coverage["passed"])
 
