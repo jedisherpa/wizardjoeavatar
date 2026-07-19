@@ -372,65 +372,52 @@ async def browser_speech_state(cdp: CDPClient) -> Mapping[str, Any]:
 async def resume_speech_playback_with_user_gesture(
     cdp: CDPClient,
 ) -> Mapping[str, Any]:
-    result = await cdp.command(
-        "Runtime.evaluate",
-        {
-            "expression": """
-            (() => {
-              const audio = document.querySelector('audio[data-source-slot="speech"]');
-              if (!audio) return {attempted:false, reason:'missing_speech_audio'};
-              if (!audio.src) return {attempted:false, reason:'missing_source'};
-              if (audio.ended) return {attempted:false, reason:'already_ended'};
-              if (!audio.paused) return {attempted:false, reason:'already_playing'};
-              if (audio.readyState < 2) return {attempted:false, reason:'not_ready'};
-              window.__wizardPlaybackRecovery = {
-                attemptedAtMs: Math.round(performance.now()),
-                status: 'pending'
-              };
-              try {
-                const playResult = audio.play();
-                Promise.resolve(playResult).then(() => {
-                  window.__wizardPlaybackRecovery = {
-                    attemptedAtMs: window.__wizardPlaybackRecovery?.attemptedAtMs ?? null,
-                    settledAtMs: Math.round(performance.now()),
-                    status: audio.paused ? 'resolved_paused' : 'playing'
-                  };
-                }).catch(error => {
-                  window.__wizardPlaybackRecovery = {
-                    attemptedAtMs: window.__wizardPlaybackRecovery?.attemptedAtMs ?? null,
-                    settledAtMs: Math.round(performance.now()),
-                    status: 'rejected',
-                    errorName: error?.name ?? 'Error'
-                  };
-                });
-                return {attempted:true, status:'pending'};
-              } catch (error) {
-                window.__wizardPlaybackRecovery = {
-                  attemptedAtMs: window.__wizardPlaybackRecovery?.attemptedAtMs ?? null,
-                  settledAtMs: Math.round(performance.now()),
-                  status: 'threw',
-                  errorName: error?.name ?? 'Error'
-                };
-                return {
-                  attempted:true,
-                  status:'threw',
-                  errorName:error?.name ?? 'Error'
-                };
-              }
-            })()
-            """,
-            "awaitPromise": False,
-            "returnByValue": True,
-            "userGesture": True,
-        },
+    target = await cdp.evaluate(
+        """
+        (() => {
+          const prompt = document.querySelector('textarea[aria-label="Message CDISS"]');
+          if (!prompt) return null;
+          const rect = prompt.getBoundingClientRect();
+          return {
+            x: Math.max(1, Math.min(window.innerWidth - 1, rect.left + rect.width / 2)),
+            y: Math.max(1, Math.min(window.innerHeight - 1, rect.top + rect.height / 2))
+          };
+        })()
+        """
     )
-    remote_object = result.get("result", {}) if isinstance(result, Mapping) else {}
-    if remote_object.get("subtype") == "error":
-        raise BrowserCaptureFailure(
-            "browser playback recovery evaluation failed: {}".format(remote_object)
-        )
-    value = remote_object.get("value")
-    return value if isinstance(value, Mapping) else {}
+    if (
+        not isinstance(target, Mapping)
+        or not isinstance(target.get("x"), (int, float))
+        or not isinstance(target.get("y"), (int, float))
+    ):
+        return {"attempted": False, "reason": "missing_gesture_target"}
+    event = {
+        "x": float(target["x"]),
+        "y": float(target["y"]),
+        "button": "left",
+        "clickCount": 1,
+    }
+    await cdp.command("Input.dispatchMouseEvent", {**event, "type": "mousePressed"})
+    await cdp.command("Input.dispatchMouseEvent", {**event, "type": "mouseReleased"})
+    await asyncio.sleep(0.1)
+    value = await cdp.evaluate(
+        """
+        (() => {
+          const audio = document.querySelector('audio[data-source-slot="speech"]');
+          const status = !audio?.src
+            ? 'gesture_dispatched_no_source'
+            : !audio.paused && !audio.ended
+              ? 'playing'
+              : 'awaiting_application_resume';
+          window.__wizardPlaybackRecovery = {
+            attemptedAtMs: Math.round(performance.now()),
+            status
+          };
+          return {attempted:true, status};
+        })()
+        """
+    )
+    return value if isinstance(value, Mapping) else {"attempted": True}
 
 
 async def retain_governed_audio(cdp: CDPClient, output_dir: Path) -> Mapping[str, Any]:
