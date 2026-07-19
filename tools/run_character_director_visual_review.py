@@ -683,10 +683,15 @@ def validate_runtime_binding(
     provenance: Mapping[str, Any],
     base_url: str,
     init: Optional[InitMetadata] = None,
+    evidence_output_dir: Optional[Path] = None,
 ) -> None:
     """Require one stable clean runtime built from the harness candidate."""
 
-    if start != end:
+    immutable_start = dict(start)
+    immutable_end = dict(end)
+    immutable_start.pop("git", None)
+    immutable_end.pop("git", None)
+    if immutable_start != immutable_end:
         raise EvidenceFailure("runtime identity changed during capture")
     if start.get("schema") != "wizard_runtime_identity_v1" or start.get("schema_version") != 1:
         raise EvidenceFailure("runtime returned an unsupported identity schema")
@@ -704,8 +709,11 @@ def validate_runtime_binding(
     if start.get("working_directory") != str(ROOT.resolve()):
         raise EvidenceFailure("runtime working directory does not match the evidence checkout")
     git = start.get("git")
+    end_git = end.get("git")
     if not isinstance(git, Mapping) or git.get("available") is not True:
         raise EvidenceFailure("runtime cannot establish its Git identity")
+    if not isinstance(end_git, Mapping) or end_git.get("available") is not True:
+        raise EvidenceFailure("runtime lost its Git identity during capture")
     if git.get("head") != provenance.get("head"):
         raise EvidenceFailure("runtime Git HEAD does not match the evidence checkout")
     if git.get("branch") != provenance.get("branch"):
@@ -717,6 +725,33 @@ def validate_runtime_binding(
     for field in ("status_sha256", "tracked_diff_sha256"):
         if git.get(field) != provenance.get(field):
             raise EvidenceFailure("runtime Git {} does not match the evidence checkout".format(field))
+    for field in ("head", "head_tree", "branch", "tracked_diff_sha256"):
+        if end_git.get(field) != git.get(field):
+            raise EvidenceFailure("runtime Git {} changed during capture".format(field))
+    if end_git.get("worktree_clean") is True:
+        if end_git.get("status_sha256") != git.get("status_sha256"):
+            raise EvidenceFailure("runtime Git status changed during capture")
+    else:
+        if evidence_output_dir is None:
+            raise EvidenceFailure("runtime worktree became dirty during capture")
+        try:
+            allowed_root = evidence_output_dir.resolve().relative_to(ROOT.resolve())
+        except ValueError as exc:
+            raise EvidenceFailure(
+                "runtime worktree dirtiness is outside the evidence checkout"
+            ) from exc
+        allowed_text = allowed_root.as_posix().rstrip("/")
+        status_lines = end_git.get("status_lines")
+        if not isinstance(status_lines, list) or not status_lines:
+            raise EvidenceFailure("runtime dirty status is missing its path evidence")
+        for line in status_lines:
+            if not isinstance(line, str) or not line.startswith("?? "):
+                raise EvidenceFailure("runtime tracked source changed during capture")
+            path = line[3:].rstrip("/")
+            if path != allowed_text and not path.startswith(allowed_text + "/"):
+                raise EvidenceFailure(
+                    "runtime worktree changed outside the evidence output directory"
+                )
     python = start.get("python")
     launch = start.get("launch")
     if not isinstance(python, Mapping) or not SHA256_RE.fullmatch(
@@ -2154,6 +2189,7 @@ def validate_manifest(manifest: Mapping[str, Any], output_dir: Optional[Path] = 
                     init["cell_bytes"],
                     {},
                 ),
+                output_dir,
             )
         except (EvidenceFailure, TypeError, ValueError) as exc:
             raise ManifestValidationError("runtime binding validation failed: {}".format(exc)) from exc
@@ -2594,6 +2630,7 @@ async def run_visual_review(
             provenance,
             base_url,
             init,
+            output_dir,
         )
     except Exception as exc:
         runtime_binding_error = "{}: {}".format(type(exc).__name__, exc)

@@ -71,6 +71,7 @@ def _git_identity(root: Path) -> Dict[str, Any]:
             "worktree_clean": False,
             "status_sha256": None,
             "tracked_diff_sha256": None,
+            "status_lines": [],
         }
     return {
         "available": True,
@@ -80,6 +81,7 @@ def _git_identity(root: Path) -> Dict[str, Any]:
         "worktree_clean": not status,
         "status_sha256": hashlib.sha256(status).hexdigest(),
         "tracked_diff_sha256": hashlib.sha256(tracked_diff).hexdigest(),
+        "status_lines": status.decode("utf-8", errors="replace").splitlines(),
     }
 
 

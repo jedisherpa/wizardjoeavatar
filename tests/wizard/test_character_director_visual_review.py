@@ -352,6 +352,7 @@ class ManifestValidationTests(unittest.TestCase):
                 "worktree_clean": True,
                 "status_sha256": digest,
                 "tracked_diff_sha256": digest,
+                "status_lines": [],
             },
             "python": {
                 "executable": str(python),
@@ -583,6 +584,39 @@ class ManifestValidationTests(unittest.TestCase):
                         manifest["provenance"],
                         binding["base_url"],
                     )
+
+    def test_runtime_binding_allows_only_its_untracked_evidence_output(self):
+        manifest = self.valid_manifest()
+        binding = manifest["runtime_binding"]
+        start = binding["start"]
+        end = json.loads(json.dumps(start))
+        output = ROOT / "evidence" / "character-director" / "strict-run"
+        end["git"].update(
+            worktree_clean=False,
+            status_sha256="c" * 64,
+            status_lines=[
+                "?? evidence/character-director/strict-run/manifest.json",
+                "?? evidence/character-director/strict-run/wire/frames.bin",
+            ],
+        )
+
+        validate_runtime_binding(
+            start,
+            end,
+            manifest["provenance"],
+            binding["base_url"],
+            evidence_output_dir=output,
+        )
+
+        end["git"]["status_lines"].append("?? unrelated.txt")
+        with self.assertRaisesRegex(EvidenceFailure, "outside the evidence output"):
+            validate_runtime_binding(
+                start,
+                end,
+                manifest["provenance"],
+                binding["base_url"],
+                evidence_output_dir=output,
+            )
 
     def test_runtime_observations_reconcile_command_epoch_and_subscribers(self):
         records = CaptureRecords(
