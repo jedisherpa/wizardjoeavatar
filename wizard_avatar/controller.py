@@ -5,7 +5,7 @@ from collections.abc import Mapping
 from typing import Any, Callable, Dict, Iterable, Optional, Set, Tuple
 
 from .animation_graph import ClipDefinition, load_reference_animation_graph_v2
-from .blink import BlinkScheduler
+from .blink import BlinkScheduler, blink_seed_for_character
 from .commanding import CommandEnvelopeV1
 from .control import ControlArbiter, ControlIntentV1
 from .expressions import expression_mouth
@@ -38,7 +38,9 @@ class WizardAvatarController:
             raise ValueError("available_pose_ids must not be empty")
         self.character_id = character_id
         self.state = WizardState(character_id=character_id)
-        self._blink_scheduler = BlinkScheduler()
+        self._blink_scheduler = BlinkScheduler(
+            seed=blink_seed_for_character(character_id)
+        )
         self.locomotion = LocomotionController()
         self.control_arbiter = ControlArbiter()
         self.prism_advisories = PrismAdvisoryStateMachine()

@@ -1,5 +1,14 @@
 from __future__ import annotations
 
+import zlib
+
+
+def blink_seed_for_character(character_id: str) -> int:
+    """Return a stable, compact blink phase seed for one character."""
+    if not character_id:
+        raise ValueError("character_id must not be empty")
+    return 1 + zlib.crc32(character_id.encode("utf-8")) % 100
+
 
 class BlinkScheduler:
     SIMULATION_HZ = 60

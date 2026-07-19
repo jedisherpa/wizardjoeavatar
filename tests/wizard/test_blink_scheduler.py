@@ -1,7 +1,7 @@
 import copy
 import unittest
 
-from wizard_avatar.blink import BlinkScheduler
+from wizard_avatar.blink import BlinkScheduler, blink_seed_for_character
 from wizard_avatar.controller import WizardAvatarController
 from wizard_avatar.models import WizardCommand
 
@@ -45,6 +45,21 @@ def presented_phase_runs(scheduler, ticks, presentation_hz=24):
 
 
 class BlinkSchedulerTests(unittest.TestCase):
+    def test_character_seed_is_stable_and_character_specific(self):
+        self.assertEqual(blink_seed_for_character("asciline-wizard-v1"), 5)
+        self.assertEqual(
+            blink_seed_for_character("asciline-wizard-v1"),
+            blink_seed_for_character("asciline-wizard-v1"),
+        )
+        self.assertNotEqual(
+            blink_seed_for_character("asciline-wizard-v1"),
+            blink_seed_for_character("another-character"),
+        )
+
+    def test_character_seed_rejects_an_empty_identity(self):
+        with self.assertRaises(ValueError):
+            blink_seed_for_character("")
+
     def test_sequence_is_reproducible(self):
         first = BlinkScheduler()
         second = BlinkScheduler()
