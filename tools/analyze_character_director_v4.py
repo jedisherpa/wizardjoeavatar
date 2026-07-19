@@ -52,9 +52,9 @@ EXPECTED_EXPLAIN_MARKERS = (
 )
 EXPECTED_POINT_MARKERS = (
     ("action_commit", 2),
-    ("action_effect", 6),
-    ("action_recoverable", 16),
-    ("action_settled", 17),
+    ("action_effect", 7),
+    ("action_recoverable", 18),
+    ("action_settled", 19),
 )
 
 
@@ -284,9 +284,11 @@ def analyze_v4(
         "point_front_in_20",
         "point_front_in_40",
         "point_front_in_60",
+        "point_front_in_70",
         "point_front_in_80",
         *(["point_front_contact_locked"] * 6),
         "point_front_in_80",
+        "point_front_in_70",
         "point_front_in_60",
         "point_front_in_40",
         "point_front_in_20",
@@ -299,8 +301,12 @@ def analyze_v4(
         | _pose_colors("front_point_direct_staff_held"),
     }
     color_failures = []
+    transition_amounts = {
+        "explain": (20, 40, 60, 80),
+        "point": (20, 40, 60, 70, 80),
+    }
     for family, prefix in (("explain", "explain_front_in_"), ("point", "point_front_in_")):
-        for amount in (20, 40, 60, 80):
+        for amount in transition_amounts[family]:
             pose_id = f"{prefix}{amount}"
             unexpected = _pose_colors(pose_id) - endpoint_colors[family]
             if unexpected:

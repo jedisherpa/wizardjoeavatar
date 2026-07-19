@@ -3684,6 +3684,35 @@
       ]
     },
     {
+      "id": "point_front_in_70",
+      "source": "derived_landmark_warp:front_idle+front_point_direct_staff_held@700/1000:lock=left_foot",
+      "description": "authored direct-point anticipation at 70 percent",
+      "derived_landmark_warp": {
+        "from_pose_id": "front_idle",
+        "to_pose_id": "front_point_direct_staff_held",
+        "progress_milli": 700,
+        "lock_anchor": "left_foot",
+        "localized_region": {
+          "anchor_name": "left_hand",
+          "pivot_offset_from_root": [-8, -45],
+          "radius": 7,
+          "hand_radius": 16
+        }
+      },
+      "facing": "south",
+      "locomotion": "idle",
+      "actions": [
+        "pointing"
+      ],
+      "phase": 0.7,
+      "tags": [
+        "front",
+        "pointing",
+        "authored_pixel_graph",
+        "landmark_warp"
+      ]
+    },
+    {
       "id": "point_front_in_80",
       "source": "derived_landmark_warp:front_idle+front_point_direct_staff_held@800/1000:lock=left_foot",
       "description": "authored direct-point anticipation at 80 percent",

@@ -892,6 +892,18 @@
       "staff_mode": "carried",
       "capability_tier": "A"
     },
+    "point_front_in_70": {
+      "roles": [
+        "clip_sample",
+        "transition_sample"
+      ],
+      "altitude_class": "grounded",
+      "support_contact": "both_feet",
+      "planted_anchor": "left_foot",
+      "wing_mode": "extended",
+      "staff_mode": "carried",
+      "capability_tier": "A"
+    },
     "point_front_in_80": {
       "roles": [
         "clip_sample",
@@ -3568,6 +3580,13 @@
           "markers": []
         },
         {
+          "pose_id": "point_front_in_70",
+          "duration_frames": 1,
+          "support_contact": "both_feet",
+          "planted_anchor": "left_foot",
+          "markers": []
+        },
+        {
           "pose_id": "point_front_in_80",
           "duration_frames": 1,
           "support_contact": "both_feet",
@@ -3588,6 +3607,13 @@
         },
         {
           "pose_id": "point_front_in_80",
+          "duration_frames": 1,
+          "support_contact": "both_feet",
+          "planted_anchor": "left_foot",
+          "markers": []
+        },
+        {
+          "pose_id": "point_front_in_70",
           "duration_frames": 1,
           "support_contact": "both_feet",
           "planted_anchor": "left_foot",
