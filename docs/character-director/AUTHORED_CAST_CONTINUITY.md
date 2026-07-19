@@ -76,8 +76,7 @@ defensive pose, guard, and thrust snapshots are no longer used by `cast_front`.
 
 ## Verification
 
-The current focused V3/V4 pose, generator, analyzer, and capability suite
-passes 37 of 37 tests. The deterministic offline rebuild command is:
+The deterministic offline rebuild command is:
 
 ```bash
 .venv/bin/python tools/generate_reference_avatar_pose_cells.py \
@@ -107,19 +106,25 @@ effect phases must begin at the staff event; contact must verify; and every
 cast silhouette must remain inside the 240 by 135 stage. Normal-speed,
 quarter-speed, and browser-layout review remain separate gates.
 
+V3 is accepted on the clean runtime candidate
+`dba348be4ff0af21f868491cbd8de877c13d3ee2`. The published bundle at
+`evidence/character-director/v3-canonical-cast-dba348b-2026-07-19/` contains
+314 contiguous transport frames, exactly 312 owned frames, full recovery
+`23..30` in every cast, all twelve machine gates passing, zero browser or
+transport drops, and normal and quarter-speed review media. The independent
+animation and technical reports both conclude `Verdict: PASS V3`.
+
 The `a72f791` proof bundle is retained as rejected audit evidence. Its machine
 and technical reviews passed, but independent animation review found two
 blocking defects: the staff changed construction inside each cast and the first
-cast capture skipped late recovery frames. The current implementation directly
-addresses both findings by transforming the complete source staff graph and by
-capturing 60 owned frames for every cast. It is not accepted until a fresh,
-clean-commit capture passes the strengthened analyzer and both independent
-reviewers issue explicit PASS verdicts.
+cast capture skipped late recovery frames. The accepted implementation closes
+both findings by transforming the complete source staff graph and by capturing
+60 owned frames for every cast.
 
 The earlier `092f78e` bundle also remains rejected audit evidence. Independent technical
 review found that its hold scenarios rendered stale final cast poses even after
 the controller settled to `front_idle`; it also found the initially published
-bundle incomplete. The final candidate removes that feedback path, adds an
+bundle incomplete. The accepted candidate removes that feedback path, adds an
 end-to-end settle regression, and includes every declared sample and wire file.
 
 The previous `a8d0e28` evidence predates this authored rig and is retained only

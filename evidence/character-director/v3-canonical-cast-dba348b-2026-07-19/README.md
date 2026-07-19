@@ -1,8 +1,8 @@
 # V3 Canonical Cast Evidence
 
-Status: machine PASS; primary normal-speed, quarter-speed, contact-sheet, and
-browser-layout inspection PASS; independent animation and technical reviews
-pending at publication.
+Status: **ACCEPTED V3**. Machine analysis, primary normal-speed,
+quarter-speed, contact-sheet, and browser-layout inspection, independent
+animation review, and independent technical review all PASS.
 
 This bundle was captured from the real Python ASCILINE projector at
 `http://127.0.0.1:8896`, bound to clean candidate
@@ -28,10 +28,15 @@ and 8875 were not modified.
 - normal video: 312 frames at 24 FPS over 13 seconds
 - quarter-speed video: 1,248 frames at 24 FPS over 52 seconds
 
-The strengthened V3 analyzer passes all twelve checks. Machine acceptance does
-not substitute for animation judgment; the candidate remains unaccepted until
-independent animation and technical reviewers both issue explicit PASS
-verdicts against this exact bundle.
+The strengthened V3 analyzer passes all twelve checks. Independent reviewers
+then evaluated this exact corrected bundle without substituting machine results
+for animation judgment:
+
+- `docs/character-director/reviews/V3_CANONICAL_CAST_DBA348B_ANIMATION_REVIEW.md`
+  concludes `Verdict: PASS V3`.
+- `docs/character-director/reviews/V3_CANONICAL_CAST_DBA348B_TECHNICAL_REVIEW.md`
+  concludes `Verdict: PASS V3` after deterministic replay, hash validation,
+  and adversarial fail-closed checks.
 
 ## Replay
 
