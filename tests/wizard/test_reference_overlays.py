@@ -58,6 +58,40 @@ class ReferenceOverlayTests(unittest.TestCase):
             RGB["gold_light"],
         )
 
+    def test_cast_settle_renders_authoritative_neutral_pose(self):
+        source = ProceduralWizardFrameSource()
+        result = source.apply_command_sync(
+            WizardCommand("action", {"action": "magic_cast", "duration_ms": 5000})
+        )
+        self.assertTrue(result.ok, result.message)
+
+        presented_cast_poses = set()
+        settled = None
+        for _ in range(120):
+            source.advance_simulation(1 / 60)
+            candidate = source.render_captured_candidate_sync(
+                source.capture_render_state()
+            )
+            source.commit_render_candidate(candidate)
+            trace = candidate.animation_truth
+            if trace.animation_clip_id == "cast_front":
+                presented_cast_poses.add(trace.rendered_pose_id)
+            if (
+                trace.animation_clip_id == "idle_front"
+                and trace.presentation_channels is not None
+                and trace.presentation_channels.action == "idle"
+            ):
+                settled = trace
+                break
+
+        self.assertTrue(
+            any(pose_id.startswith("cast_front_") for pose_id in presented_cast_poses)
+        )
+        self.assertIsNotNone(settled)
+        self.assertEqual(settled.authored_pose_id, "front_idle")
+        self.assertEqual(settled.rendered_pose_id, "front_idle")
+        self.assertEqual(source._display_pose_id, "front_idle")
+
 
 if __name__ == "__main__":
     unittest.main()

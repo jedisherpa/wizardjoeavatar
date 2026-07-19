@@ -134,6 +134,28 @@ class CharacterDirectorV3AcceptanceTests(unittest.TestCase):
         self.assertFalse(check(report, "continuous_repeatable_staff_arc")["passed"])
         self.assertFalse(check(report, "authored_marker_order_per_cast")["passed"])
 
+    def test_exact_terminal_neutral_may_follow_cast_capture(self):
+        manifest, traces = fixture()
+        for trace in traces:
+            if (
+                trace["animation_clip_id"] == "cast_front"
+                and trace["animation_authored_frame"] == 31
+            ):
+                trace["animation_authored_frame"] = 30
+                trace["rendered_pose_id"] = "cast_front_30"
+                pose = get_reference_pose("cast_front_30")
+                trace["staff_tip_local"] = {
+                    "x": pose.anchors["staff_tip"][0],
+                    "y": pose.anchors["staff_tip"][1],
+                }
+
+        report = analyze_v3(manifest, traces)
+
+        self.assertTrue(report["passed"], report)
+        coverage = check(report, "authored_coverage_and_terminal_neutral")
+        self.assertTrue(coverage["passed"])
+        self.assertTrue(coverage["detail"]["terminal_frame_31_is_exact_neutral"])
+
 
 if __name__ == "__main__":
     unittest.main()

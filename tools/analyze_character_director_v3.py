@@ -107,6 +107,13 @@ def _marker_events(records: Sequence[Mapping[str, Any]]) -> List[Tuple[str, int]
     return result
 
 
+def _pose_cells(pose_id: str) -> set[Tuple[int, int, Tuple[int, int, int]]]:
+    return {
+        (cell.x, cell.y, cell.rgb)
+        for cell in get_reference_pose(pose_id).cells
+    }
+
+
 def analyze_v3(
     manifest: Mapping[str, Any],
     trace_records: Sequence[Mapping[str, Any]],
@@ -207,12 +214,78 @@ def analyze_v3(
         },
     )
 
+    cast_poses = [get_reference_pose(f"cast_front_{frame:02d}") for frame in range(32)]
+    front_idle = get_reference_pose("front_idle")
+    static_tip_failures = []
+    for frame, (left, right) in enumerate(zip(cast_poses, cast_poses[1:])):
+        left_tip = left.anchors["staff_tip"]
+        right_tip = right.anchors["staff_tip"]
+        if max(abs(right_tip[0] - left_tip[0]), abs(right_tip[1] - left_tip[1])) > 2:
+            static_tip_failures.append(frame)
+    neutral_cells = _pose_cells("front_idle")
+    _check(
+        report,
+        "complete_static_cast_graph_contract",
+        not static_tip_failures
+        and {pose.anchors["staff_hand"] for pose in cast_poses} == {(56, 50)}
+        and _pose_cells("cast_front_00") == neutral_cells
+        and _pose_cells("cast_front_31") == neutral_cells
+        and cast_poses[0].anchors["staff_tip"] == front_idle.anchors["staff_tip"]
+        and cast_poses[-1].anchors["staff_tip"] == front_idle.anchors["staff_tip"],
+        {
+            "pose_count": len(cast_poses),
+            "staff_hand_anchors": sorted({pose.anchors["staff_hand"] for pose in cast_poses}),
+            "staff_tip_step_failures": static_tip_failures,
+            "frame_zero_is_exact_neutral": _pose_cells("cast_front_00") == neutral_cells,
+            "frame_31_is_exact_neutral": _pose_cells("cast_front_31") == neutral_cells,
+        },
+    )
+
     marker_detail = {name: _marker_events(by_scenario[name]) for name in CAST_SCENARIOS}
     _check(
         report,
         "authored_marker_order_per_cast",
         all(tuple(marker_detail[name]) == EXPECTED_MARKERS for name in CAST_SCENARIOS),
         marker_detail,
+    )
+
+    following_scenario = {
+        "v3-cast-one": "v3-hold-one",
+        "v3-cast-two": "v3-hold-two",
+        "v3-cast-three": "v3-settle",
+    }
+    observed_by_cast = {
+        name: sorted(
+            {
+                int(trace["animation_authored_frame"])
+                for trace in by_scenario[name]
+                if trace.get("animation_clip_id") == "cast_front"
+            }
+        )
+        for name in CAST_SCENARIOS
+    }
+    observed_union = sorted({frame for frames_seen in observed_by_cast.values() for frame in frames_seen})
+    terminal_neutral = {
+        name: bool(by_scenario[following_scenario[name]])
+        and by_scenario[following_scenario[name]][0].get("rendered_pose_id") == "front_idle"
+        for name in CAST_SCENARIOS
+    }
+    required_beats = {0, 10, 14, 23, 28}
+    _check(
+        report,
+        "authored_coverage_and_terminal_neutral",
+        set(observed_union) >= set(range(31))
+        and all(required_beats.issubset(observed_by_cast[name]) for name in CAST_SCENARIOS)
+        and all(terminal_neutral.values())
+        and _pose_cells("cast_front_31") == neutral_cells,
+        {
+            "observed_by_cast": observed_by_cast,
+            "observed_union": observed_union,
+            "required_nonterminal_frames": list(range(31)),
+            "required_beats_per_cast": sorted(required_beats),
+            "following_neutral_by_cast": terminal_neutral,
+            "terminal_frame_31_is_exact_neutral": _pose_cells("cast_front_31") == neutral_cells,
+        },
     )
 
     world_roots = [
@@ -341,6 +414,7 @@ def analyze_v3(
         "owned_frame_count": len(owned_frames),
         "cast_trace_count": len(authored_records),
         "observed_cast_authored_frames": sorted(tip_by_authored_frame),
+        "static_cast_pose_count": len(cast_poses),
         "world_root_max_axis_drift": root_drift,
         "stage_root_max_axis_drift": stage_root_drift,
         "staff_hand_max_axis_drift": hand_drift,

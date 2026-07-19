@@ -259,14 +259,15 @@ def derive_cast_rig_payload(
     target_tip = absolute_offset("target_staff_tip_offset")
     target_hand = absolute_offset("target_staff_hand_offset")
     canvas = payload_canvas(base_payload)
-    author_cast_staff_graph(
-        canvas,
-        source_staff_tip=source_tip,
-        source_staff_hand=source_hand,
-        root_anchor=tuple(root),
-        target_staff_tip=target_tip,
-        target_staff_hand=target_hand,
-    )
+    if (target_tip, target_hand) != (source_tip, source_hand):
+        author_cast_staff_graph(
+            canvas,
+            source_staff_tip=source_tip,
+            source_staff_hand=source_hand,
+            root_anchor=tuple(root),
+            target_staff_tip=target_tip,
+            target_staff_hand=target_hand,
+        )
     return {
         "source": (
             f"derived_cast_rig:{base_pose_id}:"

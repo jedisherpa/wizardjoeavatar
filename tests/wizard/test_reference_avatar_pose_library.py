@@ -56,6 +56,15 @@ class ReferenceAvatarPoseLibraryTests(unittest.TestCase):
         self.assertEqual(front_idle.anchors["staff_hand"], poses[0].anchors["staff_hand"])
         self.assertEqual(front_idle.anchors["staff_tip"], poses[0].anchors["staff_tip"])
         self.assertEqual(front_idle.anchors["staff_tip"], poses[-1].anchors["staff_tip"])
+        front_cells = {(cell.x, cell.y, cell.rgb) for cell in front_idle.cells}
+        self.assertEqual(
+            {(cell.x, cell.y, cell.rgb) for cell in poses[0].cells},
+            front_cells,
+        )
+        self.assertEqual(
+            {(cell.x, cell.y, cell.rgb) for cell in poses[-1].cells},
+            front_cells,
+        )
         for previous, current in zip(poses, poses[1:]):
             tip_a = previous.anchors["staff_tip"]
             tip_b = current.anchors["staff_tip"]

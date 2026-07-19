@@ -548,13 +548,11 @@ class ProceduralWizardFrameSource:
                 head_eye.presented_facing,
                 self.pose_ids,
             )
-            committed_pose_id = (
-                snapshot.presentation.display_pose_id
-                if state.animation_clip_id
-                in {"idle_front", "idle_back", "idle_left", "idle_right"}
-                and snapshot.presentation.display_pose_id in self.pose_ids
-                else state.pose_id
-            )
+            # Candidate freshness already binds this render to the authoritative
+            # state hash. A previous presentation pose is evidence, not an
+            # alternate pose authority; retaining it here freezes the final
+            # action frame forever after the controller settles into idle.
+            committed_pose_id = state.pose_id
             pose_id = self._permissioned_pose_id(
                 committed_pose_id,
                 state,
