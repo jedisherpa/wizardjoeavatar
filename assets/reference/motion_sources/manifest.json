@@ -1,5 +1,5 @@
 {
-  "version": 86,
+  "version": 87,
   "asset_set_id": "wizardjoe-reference-motion-v1",
   "description": "Source pose PNGs for the repeatable WizardJoe square-cell pose library.",
   "canonical": {
@@ -3574,12 +3574,13 @@
     },
     {
       "id": "point_front_in_20",
-      "source": "derived_landmark_warp:front_idle+front_point_direct_staff_held@200/1000",
+      "source": "derived_landmark_warp:front_idle+front_point_direct_staff_held@200/1000:lock=left_foot",
       "description": "authored direct-point anticipation at 20 percent",
       "derived_landmark_warp": {
         "from_pose_id": "front_idle",
         "to_pose_id": "front_point_direct_staff_held",
-        "progress_milli": 200
+        "progress_milli": 200,
+        "lock_anchor": "left_foot"
       },
       "facing": "south",
       "locomotion": "idle",
@@ -3596,12 +3597,13 @@
     },
     {
       "id": "point_front_in_40",
-      "source": "derived_landmark_warp:front_idle+front_point_direct_staff_held@400/1000",
+      "source": "derived_landmark_warp:front_idle+front_point_direct_staff_held@400/1000:lock=left_foot",
       "description": "authored direct-point anticipation at 40 percent",
       "derived_landmark_warp": {
         "from_pose_id": "front_idle",
         "to_pose_id": "front_point_direct_staff_held",
-        "progress_milli": 400
+        "progress_milli": 400,
+        "lock_anchor": "left_foot"
       },
       "facing": "south",
       "locomotion": "idle",
@@ -3618,12 +3620,13 @@
     },
     {
       "id": "point_front_in_60",
-      "source": "derived_landmark_warp:front_idle+front_point_direct_staff_held@600/1000",
+      "source": "derived_landmark_warp:front_idle+front_point_direct_staff_held@600/1000:lock=left_foot",
       "description": "authored direct-point anticipation at 60 percent",
       "derived_landmark_warp": {
         "from_pose_id": "front_idle",
         "to_pose_id": "front_point_direct_staff_held",
-        "progress_milli": 600
+        "progress_milli": 600,
+        "lock_anchor": "left_foot"
       },
       "facing": "south",
       "locomotion": "idle",
@@ -3640,12 +3643,13 @@
     },
     {
       "id": "point_front_in_80",
-      "source": "derived_landmark_warp:front_idle+front_point_direct_staff_held@800/1000",
+      "source": "derived_landmark_warp:front_idle+front_point_direct_staff_held@800/1000:lock=left_foot",
       "description": "authored direct-point anticipation at 80 percent",
       "derived_landmark_warp": {
         "from_pose_id": "front_idle",
         "to_pose_id": "front_point_direct_staff_held",
-        "progress_milli": 800
+        "progress_milli": 800,
+        "lock_anchor": "left_foot"
       },
       "facing": "south",
       "locomotion": "idle",
@@ -3658,6 +3662,30 @@
         "pointing",
         "authored_pixel_graph",
         "landmark_warp"
+      ]
+    },
+    {
+      "id": "point_front_contact_locked",
+      "source": "derived_landmark_warp:front_idle+front_point_direct_staff_held@1000/1000:lock=left_foot",
+      "description": "direct-point endpoint baked to the neutral left-foot contact",
+      "derived_landmark_warp": {
+        "from_pose_id": "front_idle",
+        "to_pose_id": "front_point_direct_staff_held",
+        "progress_milli": 1000,
+        "lock_anchor": "left_foot"
+      },
+      "facing": "south",
+      "locomotion": "idle",
+      "actions": [
+        "pointing"
+      ],
+      "phase": 1.0,
+      "tags": [
+        "front",
+        "pointing",
+        "authored_pixel_graph",
+        "landmark_warp",
+        "contact_locked"
       ]
     },
     {

@@ -151,6 +151,31 @@ class CharacterDirectorV4AcceptanceTests(unittest.TestCase):
         self.assertFalse(check(report, "planted_root_during_all_gestures")["passed"])
         self.assertFalse(check(report, "gesture_silhouettes_within_canonical_stage")["passed"])
 
+    def test_missing_observed_point_frame_fails_closed(self):
+        manifest, traces = fixture()
+        broken = [
+            trace
+            for trace in traces
+            if not (
+                trace["animation_clip_id"] == "point_front"
+                and trace["animation_authored_frame"] == 8
+            )
+        ]
+        missing_index = next(
+            frame["frame_index"]
+            for frame in manifest["frames"]
+            if frame["scenario"] == POINT_SCENARIO
+            and frame["frame_index"] not in {trace["frame_index"] for trace in broken}
+        )
+        manifest["frames"] = [
+            frame for frame in manifest["frames"] if frame["frame_index"] != missing_index
+        ]
+
+        report = analyze_v4(manifest, broken)
+
+        self.assertFalse(report["passed"])
+        self.assertFalse(check(report, "thought_group_holds_and_recovery")["passed"])
+
 
 if __name__ == "__main__":
     unittest.main()

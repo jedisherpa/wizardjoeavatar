@@ -329,11 +329,33 @@ def derive_landmark_warp_payload(
         ) from error
 
     progress_milli = int(warp.get("progress_milli", 500))
-    if not 0 < progress_milli < 1000:
-        raise ValueError(f"{pose['id']}.derived_landmark_warp.progress_milli must be 1..999")
+    if not 0 < progress_milli <= 1000:
+        raise ValueError(f"{pose['id']}.derived_landmark_warp.progress_milli must be 1..1000")
     progress = progress_milli / 1000.0
     from_anchors = resolve_anchors(manifest, from_pose, from_payload)
     to_anchors = resolve_anchors(manifest, to_pose, to_payload)
+    to_canvas = payload_canvas(to_payload)
+    lock_anchor = warp.get("lock_anchor")
+    if lock_anchor is not None:
+        if not isinstance(lock_anchor, str) or not lock_anchor:
+            raise ValueError(f"{pose['id']}.derived_landmark_warp.lock_anchor must be a name")
+        if lock_anchor not in from_anchors or lock_anchor not in to_anchors:
+            raise ValueError(f"{pose['id']} lock anchor {lock_anchor!r} is missing")
+        delta_x = from_anchors[lock_anchor][0] - to_anchors[lock_anchor][0]
+        delta_y = from_anchors[lock_anchor][1] - to_anchors[lock_anchor][1]
+        aligned = CellCanvas(to_canvas.width, to_canvas.height)
+        for y in range(to_canvas.height):
+            for x in range(to_canvas.width):
+                cell = to_canvas.get(x, y)
+                target_x = x + delta_x
+                target_y = y + delta_y
+                if cell is not None and 0 <= target_x < aligned.width and 0 <= target_y < aligned.height:
+                    aligned.cells[target_y][target_x] = cell
+        to_canvas = aligned
+        to_anchors = {
+            name: [point[0] + delta_x, point[1] + delta_y]
+            for name, point in to_anchors.items()
+        }
     requested_names = tuple(
         str(name)
         for name in warp.get(
@@ -354,7 +376,7 @@ def derive_landmark_warp_payload(
     )
     canvas = composite_landmark_warp_transition(
         payload_canvas(from_payload),
-        payload_canvas(to_payload),
+        to_canvas,
         control_pairs,
         progress,
     )
@@ -372,6 +394,7 @@ def derive_landmark_warp_payload(
         "source": (
             f"derived_landmark_warp:{from_pose_id}+{to_pose_id}@"
             f"{progress_milli}/1000"
+            + (f":lock={lock_anchor}" if lock_anchor is not None else "")
         ),
         "source_size": [int(canonical["cols"]), int(canonical["rows"])],
         "source_crop": [0, 0, int(canonical["cols"]), int(canonical["rows"])],

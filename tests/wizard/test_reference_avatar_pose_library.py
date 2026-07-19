@@ -32,7 +32,7 @@ class ReferenceAvatarPoseLibraryTests(unittest.TestCase):
         manifest = json.loads(MANIFEST_PATH.read_text(encoding="utf-8"))
         expected_pose_ids = {pose["id"] for pose in manifest["poses"]}
         self.assertEqual(set(reference_pose_ids()), expected_pose_ids)
-        self.assertEqual(len(expected_pose_ids), 131)
+        self.assertEqual(len(expected_pose_ids), 132)
         self.assertTrue(
             {
                 "front_greeting_wave_wings",
@@ -45,6 +45,7 @@ class ReferenceAvatarPoseLibraryTests(unittest.TestCase):
                 "explain_front_in_80",
                 "point_front_in_20",
                 "point_front_in_80",
+                "point_front_contact_locked",
             }.issubset(expected_pose_ids)
         )
 
@@ -69,6 +70,13 @@ class ReferenceAvatarPoseLibraryTests(unittest.TestCase):
             self.assertTrue(pose["source"].startswith("derived_landmark_warp:"))
             self.assertEqual(pose["root_anchor"], [36, 95])
             self.assertTrue(pose["cells"])
+
+        neutral_left_foot = get_reference_pose("front_idle").anchors["left_foot"]
+        for pose_id in {
+            *(f"point_front_in_{amount}" for amount in (20, 40, 60, 80)),
+            "point_front_contact_locked",
+        }:
+            self.assertEqual(get_reference_pose(pose_id).anchors["left_foot"], neutral_left_foot)
 
     def test_cast_frames_are_baked_atomic_pixel_graphs_with_continuous_anchors(self):
         poses = [get_reference_pose(f"cast_front_{frame:02d}") for frame in range(32)]

@@ -250,7 +250,9 @@ def analyze_v4(
         "thought_group_holds_and_recovery",
         set().union(*(set(frames_seen) for frames_seen in explain_coverage.values()))
         >= set(range(20))
-        and set(point_coverage) >= set(range(18))
+        and set(point_coverage) >= set(range(1, 18))
+        and by_scenario[POINT_SCENARIO]
+        and by_scenario[POINT_SCENARIO][0].get("rendered_pose_id") == "front_idle"
         and not any(hold_pose_failures.values()),
         {
             "explain_authored_coverage": explain_coverage,
@@ -283,7 +285,7 @@ def analyze_v4(
         "point_front_in_40",
         "point_front_in_60",
         "point_front_in_80",
-        *(["front_point_direct_staff_held"] * 6),
+        *(["point_front_contact_locked"] * 6),
         "point_front_in_80",
         "point_front_in_60",
         "point_front_in_40",
@@ -293,7 +295,7 @@ def analyze_v4(
     ]
     endpoint_colors = {
         "explain": _pose_colors("front_idle") | _pose_colors("explaining"),
-        "point": _pose_colors("front_idle") | _pose_colors("front_point_direct_staff_held"),
+        "point": _pose_colors("front_idle") | _pose_colors("point_front_contact_locked"),
     }
     color_failures = []
     for family, prefix in (("explain", "explain_front_in_"), ("point", "point_front_in_")):
@@ -310,7 +312,9 @@ def analyze_v4(
         and not color_failures
         and get_reference_pose("front_idle").root_anchor
         == get_reference_pose("explaining").root_anchor
-        == get_reference_pose("front_point_direct_staff_held").root_anchor,
+        == get_reference_pose("point_front_contact_locked").root_anchor
+        and get_reference_pose("front_idle").anchors["left_foot"]
+        == get_reference_pose("point_front_contact_locked").anchors["left_foot"],
         {
             "explain_sequence": explain_sequence,
             "point_sequence": point_sequence,

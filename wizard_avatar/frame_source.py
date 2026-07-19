@@ -96,6 +96,8 @@ PRESENTATION_MARKER_IDS = frozenset(
         "action_effect",
         "action_recoverable",
         "action_settled",
+        "speech_open",
+        "speech_close",
     }
 )
 PRESENTATION_MARKER_DEDUP_CAPACITY = 256

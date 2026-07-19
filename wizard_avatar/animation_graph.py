@@ -924,7 +924,7 @@ def _clip_markers(clip: ClipDefinition) -> Tuple[Tuple[int, str], ...]:
         for marker in sample.markers:
             markers.append((cursor + marker.frame_offset, marker.marker_id))
         cursor += sample.duration_frames
-    return tuple(sorted(markers, key=lambda item: (item[0], item[1])))
+    return tuple(sorted(markers, key=lambda item: item[0]))
 
 
 def _markers_crossed(
@@ -953,7 +953,7 @@ def _markers_crossed(
             event_tick = _ceil_div(absolute_frame * simulation_hz, authored_fps)
             if previous_tick < event_tick <= current_tick:
                 occurrences.append((event_tick, absolute_frame, marker_id))
-    occurrences.sort()
+    occurrences.sort(key=lambda item: (item[0], item[1]))
     return tuple(marker_id for _, _, marker_id in occurrences)
 
 

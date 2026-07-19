@@ -20,6 +20,31 @@ from tests.wizard.test_media_session_server import asgi_request
 
 
 class AnimationTruthGeometryTests(unittest.TestCase):
+    def test_explain_markers_include_speech_window_in_presented_order(self):
+        source = ProceduralWizardFrameSource(cols=96, rows=54, fps=24)
+        result = source.apply_command_sync(
+            WizardCommand("action", {"action": "explaining", "duration_ms": 1200})
+        )
+        self.assertTrue(result.ok, result.message)
+
+        for _ in range(90):
+            source.advance_simulation(1 / 60)
+        candidate = source.render_captured_candidate_sync(source.capture_render_state())
+        source.commit_render_candidate(candidate)
+        events = candidate.animation_truth.presentation_marker_events
+
+        self.assertEqual(
+            [(event.marker_id, event.animation_authored_frame) for event in events],
+            [
+                ("action_commit", 2),
+                ("speech_open", 6),
+                ("action_effect", 6),
+                ("speech_close", 13),
+                ("action_recoverable", 18),
+                ("action_settled", 19),
+            ],
+        )
+
     def test_cast_markers_are_presented_once_in_order_at_24_fps(self):
         source = ProceduralWizardFrameSource(cols=96, rows=54, fps=24)
         result = source.apply_command_sync(
