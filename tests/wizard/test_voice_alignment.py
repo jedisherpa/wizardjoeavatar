@@ -217,6 +217,44 @@ class VoiceAlignmentTests(unittest.TestCase):
         for media_time_ms in range(0, alignment.duration_ms + 200, 17):
             self.assertEqual(first.evaluate(media_time_ms), second.evaluate(media_time_ms))
 
+    def test_long_fallback_track_closes_and_reopens_on_readable_phrase_beats(self):
+        value = alignment_mapping(with_phonemes=False)
+        value["duration_ms"] = 6_000
+        value["word_spans"] = [
+            {
+                "start_ms": 0,
+                "end_ms": 6_000,
+                "start_char": 0,
+                "end_char": len(APPROVED_TEXT),
+            }
+        ]
+        track = compile_voice_presentation(VoiceAlignmentV1.from_mapping(value))
+        runs = []
+        for shape in track.mouth_shapes:
+            if runs and runs[-1][0] == shape:
+                runs[-1][1] += 1
+            else:
+                runs.append([shape, 1])
+        aperture = {
+            "closed": 0,
+            "open_small": 1,
+            "rounded": 1,
+            "smile": 1,
+            "frown": 1,
+            "open_medium": 2,
+            "open_wide": 3,
+        }
+
+        self.assertGreater(track.mouth_shapes.count("closed"), 0)
+        self.assertTrue(all(track.speaking_frames))
+        self.assertTrue(all(length >= 4 for _, length in runs[1:-1]))
+        self.assertTrue(
+            all(
+                abs(aperture[left] - aperture[right]) <= 1
+                for (left, _), (right, _) in zip(runs, runs[1:])
+            )
+        )
+
     def test_presentation_track_coarticulates_only_short_internal_gaps(self):
         value = alignment_mapping(with_phonemes=False)
         value["word_spans"][1]["start_ms"] = 480

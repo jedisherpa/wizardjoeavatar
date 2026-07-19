@@ -229,7 +229,7 @@ class GovernedSpeechReleaseTests(unittest.TestCase):
         seeked = self.application.apply(self.controller, 2_100_000)
         self.assertEqual(
             (seeked.media_time_ms, self.controller.state.speech_text, self.controller.state.mouth),
-            (2_000, TEXT, "open_wide"),
+            (2_000, TEXT, "open_medium"),
         )
         self.assertEqual(
             self.application.governed_speech.diagnostics()["mouth_presentation_policy"],

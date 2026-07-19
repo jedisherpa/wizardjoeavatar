@@ -52,8 +52,10 @@ _FALLBACK_MOUTHS = (
 )
 _FALLBACK_STEP_MS = 90
 _PRESENTATION_FPS = 24
-_PRESENTATION_BEAT_FRAMES = 4
+_PRESENTATION_BEAT_FRAMES = 5
 _PRESENTATION_COARTICULATION_FRAMES = 4
+_PRESENTATION_FALLBACK_CLOSURE_CADENCE = 12
+_PRESENTATION_FALLBACK_CLOSURE_BEATS = 3
 _MOUTH_APERTURE = {
     "closed": 0,
     "open_small": 1,
@@ -598,16 +600,13 @@ def _bridge_aperture(previous: str, target: str) -> str:
 def _presentation_hold_widths(frame_count: int) -> Tuple[int, ...]:
     if frame_count < 2:
         return ()
-    if frame_count <= 5:
+    if frame_count <= 7:
         return (frame_count,)
-    full_holds, remainder = divmod(frame_count, _PRESENTATION_BEAT_FRAMES)
-    if remainder == 0:
-        return (_PRESENTATION_BEAT_FRAMES,) * full_holds
-    if remainder == 1:
-        return (_PRESENTATION_BEAT_FRAMES,) * (full_holds - 1) + (5,)
-    if remainder == 2:
-        return (_PRESENTATION_BEAT_FRAMES,) * (full_holds - 1) + (3, 3)
-    return (_PRESENTATION_BEAT_FRAMES,) * full_holds + (3,)
+    hold_count = max(1, (frame_count + _PRESENTATION_BEAT_FRAMES // 2) // _PRESENTATION_BEAT_FRAMES)
+    while hold_count > 1 and frame_count // hold_count < 4:
+        hold_count -= 1
+    width, wider_count = divmod(frame_count, hold_count)
+    return (width + 1,) * wider_count + (width,) * (hold_count - wider_count)
 
 
 def _sample_raw_presentation(
@@ -720,7 +719,17 @@ def compile_voice_presentation(
         cursor = island_start
         for hold_index, (target, width) in enumerate(zip(targets, hold_widths)):
             maximum_rank = min(3, len(targets) - hold_index)
-            desired = target
+            fallback_closure_phase = (
+                hold_index % _PRESENTATION_FALLBACK_CLOSURE_CADENCE
+            )
+            fallback_closing = (
+                not alignment.phoneme_spans
+                and len(targets) >= _PRESENTATION_FALLBACK_CLOSURE_CADENCE
+                and fallback_closure_phase
+                >= _PRESENTATION_FALLBACK_CLOSURE_CADENCE
+                - _PRESENTATION_FALLBACK_CLOSURE_BEATS
+            )
+            desired = "closed" if fallback_closing else target
             if _MOUTH_APERTURE[desired] > maximum_rank:
                 desired = _APERTURE_BRIDGE[maximum_rank]
             presented = _bridge_aperture(previous, desired)
