@@ -15,7 +15,10 @@ if str(ROOT) not in sys.path:
 
 from wizard_avatar.compositor import CellCanvas
 from wizard_avatar.glyphs import glyph
-from wizard_avatar.pose_compositor import composite_anchor_transition
+from wizard_avatar.pose_compositor import (
+    author_cast_staff_graph,
+    composite_anchor_transition,
+)
 
 
 DEFAULT_MANIFEST = ROOT / "assets" / "reference" / "motion_sources" / "manifest.json"
@@ -227,6 +230,62 @@ def derive_blend_payload(
     }
 
 
+def derive_cast_rig_payload(
+    pose: dict[str, Any],
+    normalized_payloads: dict[str, dict[str, Any]],
+    canonical: dict[str, Any],
+    colors: int,
+    coverage_threshold: int,
+) -> dict[str, Any]:
+    rig = pose.get("derived_cast_rig")
+    if not isinstance(rig, dict):
+        raise ValueError(f"{pose['id']}.derived_cast_rig must be an object")
+    base_pose_id = str(rig.get("base_pose_id", ""))
+    try:
+        base_payload = normalized_payloads[base_pose_id]
+    except KeyError as error:
+        raise ValueError(
+            f"{pose['id']} cast rig base {base_pose_id!r} is not an authored pose"
+        ) from error
+
+    root = point_from(base_payload["root_anchor"], field_name=f"{pose['id']}.root")
+
+    def absolute_offset(field_name: str) -> tuple[int, int]:
+        offset = point_from(rig[field_name], field_name=f"{pose['id']}.{field_name}")
+        return root[0] + offset[0], root[1] + offset[1]
+
+    source_tip = absolute_offset("source_staff_tip_offset")
+    source_hand = absolute_offset("source_staff_hand_offset")
+    target_tip = absolute_offset("target_staff_tip_offset")
+    target_hand = absolute_offset("target_staff_hand_offset")
+    canvas = payload_canvas(base_payload)
+    author_cast_staff_graph(
+        canvas,
+        source_staff_tip=source_tip,
+        source_staff_hand=source_hand,
+        root_anchor=tuple(root),
+        target_staff_tip=target_tip,
+        target_staff_hand=target_hand,
+    )
+    return {
+        "source": (
+            f"derived_cast_rig:{base_pose_id}:"
+            f"hand={target_hand[0]},{target_hand[1]}:"
+            f"tip={target_tip[0]},{target_tip[1]}"
+        ),
+        "source_size": [int(canonical["cols"]), int(canonical["rows"])],
+        "source_crop": [0, 0, int(canonical["cols"]), int(canonical["rows"])],
+        "canonical_shift": [0, 0],
+        "generation_rows": int(canonical["rows"]),
+        "cols": canvas.width,
+        "rows": canvas.height,
+        "root_anchor": root,
+        "quantized_colors": colors,
+        "coverage_threshold": coverage_threshold,
+        "cells": canvas_cells(canvas),
+    }
+
+
 def generate_pose_library(
     manifest_path: Path,
     output_path: Path,
@@ -236,13 +295,54 @@ def generate_pose_library(
     coverage_threshold: int,
     colors: int,
     write_output: bool = True,
+    reuse_authored_library_path: Path | None = None,
 ) -> dict:
     manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
     source_dir = manifest_path.parent
     requested_cols = int(manifest.get("canonical", {}).get("cols", 0))
+    reused_authored: dict[str, dict[str, Any]] = {}
+    if reuse_authored_library_path is not None:
+        reuse_path = reuse_authored_library_path.resolve()
+        reused_library = json.loads(reuse_path.read_text(encoding="utf-8"))
+        reused_authored = {
+            str(existing["id"]): existing
+            for existing in reused_library.get("poses", [])
+            if isinstance(existing, dict) and "id" in existing
+        }
+        if not reused_authored:
+            raise ValueError(f"No reusable authored poses found in {reuse_path}")
+
     raw_entries = []
-    authored_poses = [pose for pose in manifest["poses"] if "derived_blend" not in pose]
+    authored_poses = [
+        pose
+        for pose in manifest["poses"]
+        if "derived_blend" not in pose and "derived_cast_rig" not in pose
+    ]
     for pose in authored_poses:
+        if reused_authored:
+            try:
+                existing = reused_authored[pose["id"]]
+            except KeyError as error:
+                raise ValueError(
+                    f"Reusable library is missing authored pose {pose['id']!r}"
+                ) from error
+            payload = {
+                "source": existing["source"],
+                "source_size": existing["source_size"],
+                "source_crop": existing["source_crop"],
+                "cols": existing["cols"],
+                "rows": existing["rows"],
+                "root_anchor": existing["root_anchor"],
+                "quantized_colors": existing.get("quantized_colors", colors),
+                "coverage_threshold": existing.get(
+                    "coverage_threshold",
+                    coverage_threshold,
+                ),
+                "cells": existing["cells"],
+            }
+            generation_rows = int(existing.get("generation_rows", rows))
+            raw_entries.append((pose, payload, generation_rows))
+            continue
         source_path_value = pose.get("source_path")
         if source_path_value is None:
             source_path = source_dir / pose["source"]
@@ -296,6 +396,15 @@ def generate_pose_library(
     for pose in manifest["poses"]:
         if "derived_blend" in pose:
             payload = derive_blend_payload(
+                pose,
+                normalized_payloads,
+                canonical,
+                colors,
+                coverage_threshold,
+            )
+            generation_rows = int(payload["generation_rows"])
+        elif "derived_cast_rig" in pose:
+            payload = derive_cast_rig_payload(
                 pose,
                 normalized_payloads,
                 canonical,
@@ -378,6 +487,16 @@ def main() -> None:
         action="store_true",
         help="Generate the pose library twice and fail if the serialized payload differs.",
     )
+    parser.add_argument(
+        "--reuse-authored-library",
+        nargs="?",
+        const=DEFAULT_OUTPUT,
+        type=Path,
+        help=(
+            "Reuse authored pose cells from an existing audited library while "
+            "rebuilding derived graphs; defaults to the output library"
+        ),
+    )
     args = parser.parse_args()
     library = generate_pose_library(
         args.manifest,
@@ -387,6 +506,7 @@ def main() -> None:
         threshold=args.threshold,
         coverage_threshold=args.coverage_threshold,
         colors=args.colors,
+        reuse_authored_library_path=args.reuse_authored_library,
     )
     deterministic_sha256 = hashlib.sha256(stable_json(library).encode("utf-8")).hexdigest()
     if args.check_deterministic:
@@ -399,6 +519,7 @@ def main() -> None:
             coverage_threshold=args.coverage_threshold,
             colors=args.colors,
             write_output=False,
+            reuse_authored_library_path=args.reuse_authored_library,
         )
         second_sha256 = hashlib.sha256(stable_json(second).encode("utf-8")).hexdigest()
         if second_sha256 != deterministic_sha256:

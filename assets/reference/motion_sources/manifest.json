@@ -1,5 +1,5 @@
 {
-  "version": 84,
+  "version": 85,
   "asset_set_id": "wizardjoe-reference-motion-v1",
   "description": "Source pose PNGs for the repeatable WizardJoe square-cell pose library.",
   "canonical": {
@@ -73,7 +73,1489 @@
         "idle",
         "staff_held",
         "wings"
-      ]
+      ],
+      "anchor_offsets": {
+        "staff_hand": [
+          20,
+          -45
+        ],
+        "staff_tip": [
+          22,
+          -83
+        ]
+      }
+    },
+    {
+      "id": "cast_front_00",
+      "description": "authored cast frame 0: stable body with rigged staff arc",
+      "derived_cast_rig": {
+        "base_pose_id": "front_idle",
+        "source_staff_tip_offset": [
+          22,
+          -83
+        ],
+        "source_staff_hand_offset": [
+          20,
+          -45
+        ],
+        "target_staff_tip_offset": [
+          22,
+          -83
+        ],
+        "target_staff_hand_offset": [
+          20,
+          -45
+        ]
+      },
+      "facing": "south",
+      "locomotion": "idle",
+      "actions": [
+        "magic_cast"
+      ],
+      "phase": 0,
+      "tags": [
+        "front",
+        "cast",
+        "authored_pixel_graph",
+        "rigged_staff",
+        "wings"
+      ],
+      "anchor_offsets": {
+        "staff_hand": [
+          20,
+          -45
+        ],
+        "staff_tip": [
+          22,
+          -83
+        ]
+      }
+    },
+    {
+      "id": "cast_front_01",
+      "description": "authored cast frame 1: stable body with rigged staff arc",
+      "derived_cast_rig": {
+        "base_pose_id": "front_idle",
+        "source_staff_tip_offset": [
+          22,
+          -83
+        ],
+        "source_staff_hand_offset": [
+          20,
+          -45
+        ],
+        "target_staff_tip_offset": [
+          22,
+          -83
+        ],
+        "target_staff_hand_offset": [
+          20,
+          -45
+        ]
+      },
+      "facing": "south",
+      "locomotion": "idle",
+      "actions": [
+        "magic_cast"
+      ],
+      "phase": 0.032258,
+      "tags": [
+        "front",
+        "cast",
+        "authored_pixel_graph",
+        "rigged_staff",
+        "wings"
+      ],
+      "anchor_offsets": {
+        "staff_hand": [
+          20,
+          -45
+        ],
+        "staff_tip": [
+          22,
+          -83
+        ]
+      }
+    },
+    {
+      "id": "cast_front_02",
+      "description": "authored cast frame 2: stable body with rigged staff arc",
+      "derived_cast_rig": {
+        "base_pose_id": "front_idle",
+        "source_staff_tip_offset": [
+          22,
+          -83
+        ],
+        "source_staff_hand_offset": [
+          20,
+          -45
+        ],
+        "target_staff_tip_offset": [
+          22,
+          -83
+        ],
+        "target_staff_hand_offset": [
+          20,
+          -45
+        ]
+      },
+      "facing": "south",
+      "locomotion": "idle",
+      "actions": [
+        "magic_cast"
+      ],
+      "phase": 0.064516,
+      "tags": [
+        "front",
+        "cast",
+        "authored_pixel_graph",
+        "rigged_staff",
+        "wings"
+      ],
+      "anchor_offsets": {
+        "staff_hand": [
+          20,
+          -45
+        ],
+        "staff_tip": [
+          22,
+          -83
+        ]
+      }
+    },
+    {
+      "id": "cast_front_03",
+      "description": "authored cast frame 3: stable body with rigged staff arc",
+      "derived_cast_rig": {
+        "base_pose_id": "front_idle",
+        "source_staff_tip_offset": [
+          22,
+          -83
+        ],
+        "source_staff_hand_offset": [
+          20,
+          -45
+        ],
+        "target_staff_tip_offset": [
+          23,
+          -82
+        ],
+        "target_staff_hand_offset": [
+          20,
+          -45
+        ]
+      },
+      "facing": "south",
+      "locomotion": "idle",
+      "actions": [
+        "magic_cast"
+      ],
+      "phase": 0.096774,
+      "tags": [
+        "front",
+        "cast",
+        "authored_pixel_graph",
+        "rigged_staff",
+        "wings"
+      ],
+      "anchor_offsets": {
+        "staff_hand": [
+          20,
+          -45
+        ],
+        "staff_tip": [
+          23,
+          -82
+        ]
+      }
+    },
+    {
+      "id": "cast_front_04",
+      "description": "authored cast frame 4: stable body with rigged staff arc",
+      "derived_cast_rig": {
+        "base_pose_id": "front_idle",
+        "source_staff_tip_offset": [
+          22,
+          -83
+        ],
+        "source_staff_hand_offset": [
+          20,
+          -45
+        ],
+        "target_staff_tip_offset": [
+          24,
+          -81
+        ],
+        "target_staff_hand_offset": [
+          20,
+          -45
+        ]
+      },
+      "facing": "south",
+      "locomotion": "idle",
+      "actions": [
+        "magic_cast"
+      ],
+      "phase": 0.129032,
+      "tags": [
+        "front",
+        "cast",
+        "authored_pixel_graph",
+        "rigged_staff",
+        "wings"
+      ],
+      "anchor_offsets": {
+        "staff_hand": [
+          20,
+          -45
+        ],
+        "staff_tip": [
+          24,
+          -81
+        ]
+      }
+    },
+    {
+      "id": "cast_front_05",
+      "description": "authored cast frame 5: stable body with rigged staff arc",
+      "derived_cast_rig": {
+        "base_pose_id": "front_idle",
+        "source_staff_tip_offset": [
+          22,
+          -83
+        ],
+        "source_staff_hand_offset": [
+          20,
+          -45
+        ],
+        "target_staff_tip_offset": [
+          25,
+          -80
+        ],
+        "target_staff_hand_offset": [
+          20,
+          -45
+        ]
+      },
+      "facing": "south",
+      "locomotion": "idle",
+      "actions": [
+        "magic_cast"
+      ],
+      "phase": 0.16129,
+      "tags": [
+        "front",
+        "cast",
+        "authored_pixel_graph",
+        "rigged_staff",
+        "wings"
+      ],
+      "anchor_offsets": {
+        "staff_hand": [
+          20,
+          -45
+        ],
+        "staff_tip": [
+          25,
+          -80
+        ]
+      }
+    },
+    {
+      "id": "cast_front_06",
+      "description": "authored cast frame 6: stable body with rigged staff arc",
+      "derived_cast_rig": {
+        "base_pose_id": "front_idle",
+        "source_staff_tip_offset": [
+          22,
+          -83
+        ],
+        "source_staff_hand_offset": [
+          20,
+          -45
+        ],
+        "target_staff_tip_offset": [
+          26,
+          -79
+        ],
+        "target_staff_hand_offset": [
+          20,
+          -45
+        ]
+      },
+      "facing": "south",
+      "locomotion": "idle",
+      "actions": [
+        "magic_cast"
+      ],
+      "phase": 0.193548,
+      "tags": [
+        "front",
+        "cast",
+        "authored_pixel_graph",
+        "rigged_staff",
+        "wings"
+      ],
+      "anchor_offsets": {
+        "staff_hand": [
+          20,
+          -45
+        ],
+        "staff_tip": [
+          26,
+          -79
+        ]
+      }
+    },
+    {
+      "id": "cast_front_07",
+      "description": "authored cast frame 7: stable body with rigged staff arc",
+      "derived_cast_rig": {
+        "base_pose_id": "front_idle",
+        "source_staff_tip_offset": [
+          22,
+          -83
+        ],
+        "source_staff_hand_offset": [
+          20,
+          -45
+        ],
+        "target_staff_tip_offset": [
+          26,
+          -79
+        ],
+        "target_staff_hand_offset": [
+          20,
+          -45
+        ]
+      },
+      "facing": "south",
+      "locomotion": "idle",
+      "actions": [
+        "magic_cast"
+      ],
+      "phase": 0.225806,
+      "tags": [
+        "front",
+        "cast",
+        "authored_pixel_graph",
+        "rigged_staff",
+        "wings"
+      ],
+      "anchor_offsets": {
+        "staff_hand": [
+          20,
+          -45
+        ],
+        "staff_tip": [
+          26,
+          -79
+        ]
+      }
+    },
+    {
+      "id": "cast_front_08",
+      "description": "authored cast frame 8: stable body with rigged staff arc",
+      "derived_cast_rig": {
+        "base_pose_id": "front_idle",
+        "source_staff_tip_offset": [
+          22,
+          -83
+        ],
+        "source_staff_hand_offset": [
+          20,
+          -45
+        ],
+        "target_staff_tip_offset": [
+          26,
+          -79
+        ],
+        "target_staff_hand_offset": [
+          20,
+          -45
+        ]
+      },
+      "facing": "south",
+      "locomotion": "idle",
+      "actions": [
+        "magic_cast"
+      ],
+      "phase": 0.258065,
+      "tags": [
+        "front",
+        "cast",
+        "authored_pixel_graph",
+        "rigged_staff",
+        "wings"
+      ],
+      "anchor_offsets": {
+        "staff_hand": [
+          20,
+          -45
+        ],
+        "staff_tip": [
+          26,
+          -79
+        ]
+      }
+    },
+    {
+      "id": "cast_front_09",
+      "description": "authored cast frame 9: stable body with rigged staff arc",
+      "derived_cast_rig": {
+        "base_pose_id": "front_idle",
+        "source_staff_tip_offset": [
+          22,
+          -83
+        ],
+        "source_staff_hand_offset": [
+          20,
+          -45
+        ],
+        "target_staff_tip_offset": [
+          26,
+          -79
+        ],
+        "target_staff_hand_offset": [
+          20,
+          -45
+        ]
+      },
+      "facing": "south",
+      "locomotion": "idle",
+      "actions": [
+        "magic_cast"
+      ],
+      "phase": 0.290323,
+      "tags": [
+        "front",
+        "cast",
+        "authored_pixel_graph",
+        "rigged_staff",
+        "wings"
+      ],
+      "anchor_offsets": {
+        "staff_hand": [
+          20,
+          -45
+        ],
+        "staff_tip": [
+          26,
+          -79
+        ]
+      }
+    },
+    {
+      "id": "cast_front_10",
+      "description": "authored cast frame 10: stable body with rigged staff arc",
+      "derived_cast_rig": {
+        "base_pose_id": "front_idle",
+        "source_staff_tip_offset": [
+          22,
+          -83
+        ],
+        "source_staff_hand_offset": [
+          20,
+          -45
+        ],
+        "target_staff_tip_offset": [
+          26,
+          -79
+        ],
+        "target_staff_hand_offset": [
+          20,
+          -45
+        ]
+      },
+      "facing": "south",
+      "locomotion": "idle",
+      "actions": [
+        "magic_cast"
+      ],
+      "phase": 0.322581,
+      "tags": [
+        "front",
+        "cast",
+        "authored_pixel_graph",
+        "rigged_staff",
+        "wings"
+      ],
+      "anchor_offsets": {
+        "staff_hand": [
+          20,
+          -45
+        ],
+        "staff_tip": [
+          26,
+          -79
+        ]
+      }
+    },
+    {
+      "id": "cast_front_11",
+      "description": "authored cast frame 11: stable body with rigged staff arc",
+      "derived_cast_rig": {
+        "base_pose_id": "front_idle",
+        "source_staff_tip_offset": [
+          22,
+          -83
+        ],
+        "source_staff_hand_offset": [
+          20,
+          -45
+        ],
+        "target_staff_tip_offset": [
+          25,
+          -78
+        ],
+        "target_staff_hand_offset": [
+          20,
+          -45
+        ]
+      },
+      "facing": "south",
+      "locomotion": "idle",
+      "actions": [
+        "magic_cast"
+      ],
+      "phase": 0.354839,
+      "tags": [
+        "front",
+        "cast",
+        "authored_pixel_graph",
+        "rigged_staff",
+        "wings"
+      ],
+      "anchor_offsets": {
+        "staff_hand": [
+          20,
+          -45
+        ],
+        "staff_tip": [
+          25,
+          -78
+        ]
+      }
+    },
+    {
+      "id": "cast_front_12",
+      "description": "authored cast frame 12: stable body with rigged staff arc",
+      "derived_cast_rig": {
+        "base_pose_id": "front_idle",
+        "source_staff_tip_offset": [
+          22,
+          -83
+        ],
+        "source_staff_hand_offset": [
+          20,
+          -45
+        ],
+        "target_staff_tip_offset": [
+          24,
+          -78
+        ],
+        "target_staff_hand_offset": [
+          20,
+          -45
+        ]
+      },
+      "facing": "south",
+      "locomotion": "idle",
+      "actions": [
+        "magic_cast"
+      ],
+      "phase": 0.387097,
+      "tags": [
+        "front",
+        "cast",
+        "authored_pixel_graph",
+        "rigged_staff",
+        "wings"
+      ],
+      "anchor_offsets": {
+        "staff_hand": [
+          20,
+          -45
+        ],
+        "staff_tip": [
+          24,
+          -78
+        ]
+      }
+    },
+    {
+      "id": "cast_front_13",
+      "description": "authored cast frame 13: stable body with rigged staff arc",
+      "derived_cast_rig": {
+        "base_pose_id": "front_idle",
+        "source_staff_tip_offset": [
+          22,
+          -83
+        ],
+        "source_staff_hand_offset": [
+          20,
+          -45
+        ],
+        "target_staff_tip_offset": [
+          23,
+          -78
+        ],
+        "target_staff_hand_offset": [
+          20,
+          -45
+        ]
+      },
+      "facing": "south",
+      "locomotion": "idle",
+      "actions": [
+        "magic_cast"
+      ],
+      "phase": 0.419355,
+      "tags": [
+        "front",
+        "cast",
+        "authored_pixel_graph",
+        "rigged_staff",
+        "wings"
+      ],
+      "anchor_offsets": {
+        "staff_hand": [
+          20,
+          -45
+        ],
+        "staff_tip": [
+          23,
+          -78
+        ]
+      }
+    },
+    {
+      "id": "cast_front_14",
+      "description": "authored cast frame 14: stable body with rigged staff arc",
+      "derived_cast_rig": {
+        "base_pose_id": "front_idle",
+        "source_staff_tip_offset": [
+          22,
+          -83
+        ],
+        "source_staff_hand_offset": [
+          20,
+          -45
+        ],
+        "target_staff_tip_offset": [
+          22,
+          -78
+        ],
+        "target_staff_hand_offset": [
+          20,
+          -45
+        ]
+      },
+      "facing": "south",
+      "locomotion": "idle",
+      "actions": [
+        "magic_cast"
+      ],
+      "phase": 0.451613,
+      "tags": [
+        "front",
+        "cast",
+        "authored_pixel_graph",
+        "rigged_staff",
+        "wings"
+      ],
+      "anchor_offsets": {
+        "staff_hand": [
+          20,
+          -45
+        ],
+        "staff_tip": [
+          22,
+          -78
+        ]
+      }
+    },
+    {
+      "id": "cast_front_15",
+      "description": "authored cast frame 15: stable body with rigged staff arc",
+      "derived_cast_rig": {
+        "base_pose_id": "front_idle",
+        "source_staff_tip_offset": [
+          22,
+          -83
+        ],
+        "source_staff_hand_offset": [
+          20,
+          -45
+        ],
+        "target_staff_tip_offset": [
+          20,
+          -78
+        ],
+        "target_staff_hand_offset": [
+          20,
+          -45
+        ]
+      },
+      "facing": "south",
+      "locomotion": "idle",
+      "actions": [
+        "magic_cast"
+      ],
+      "phase": 0.483871,
+      "tags": [
+        "front",
+        "cast",
+        "authored_pixel_graph",
+        "rigged_staff",
+        "wings"
+      ],
+      "anchor_offsets": {
+        "staff_hand": [
+          20,
+          -45
+        ],
+        "staff_tip": [
+          20,
+          -78
+        ]
+      }
+    },
+    {
+      "id": "cast_front_16",
+      "description": "authored cast frame 16: stable body with rigged staff arc",
+      "derived_cast_rig": {
+        "base_pose_id": "front_idle",
+        "source_staff_tip_offset": [
+          22,
+          -83
+        ],
+        "source_staff_hand_offset": [
+          20,
+          -45
+        ],
+        "target_staff_tip_offset": [
+          18,
+          -78
+        ],
+        "target_staff_hand_offset": [
+          20,
+          -45
+        ]
+      },
+      "facing": "south",
+      "locomotion": "idle",
+      "actions": [
+        "magic_cast"
+      ],
+      "phase": 0.516129,
+      "tags": [
+        "front",
+        "cast",
+        "authored_pixel_graph",
+        "rigged_staff",
+        "wings"
+      ],
+      "anchor_offsets": {
+        "staff_hand": [
+          20,
+          -45
+        ],
+        "staff_tip": [
+          18,
+          -78
+        ]
+      }
+    },
+    {
+      "id": "cast_front_17",
+      "description": "authored cast frame 17: stable body with rigged staff arc",
+      "derived_cast_rig": {
+        "base_pose_id": "front_idle",
+        "source_staff_tip_offset": [
+          22,
+          -83
+        ],
+        "source_staff_hand_offset": [
+          20,
+          -45
+        ],
+        "target_staff_tip_offset": [
+          16,
+          -78
+        ],
+        "target_staff_hand_offset": [
+          20,
+          -45
+        ]
+      },
+      "facing": "south",
+      "locomotion": "idle",
+      "actions": [
+        "magic_cast"
+      ],
+      "phase": 0.548387,
+      "tags": [
+        "front",
+        "cast",
+        "authored_pixel_graph",
+        "rigged_staff",
+        "wings"
+      ],
+      "anchor_offsets": {
+        "staff_hand": [
+          20,
+          -45
+        ],
+        "staff_tip": [
+          16,
+          -78
+        ]
+      }
+    },
+    {
+      "id": "cast_front_18",
+      "description": "authored cast frame 18: stable body with rigged staff arc",
+      "derived_cast_rig": {
+        "base_pose_id": "front_idle",
+        "source_staff_tip_offset": [
+          22,
+          -83
+        ],
+        "source_staff_hand_offset": [
+          20,
+          -45
+        ],
+        "target_staff_tip_offset": [
+          16,
+          -78
+        ],
+        "target_staff_hand_offset": [
+          20,
+          -45
+        ]
+      },
+      "facing": "south",
+      "locomotion": "idle",
+      "actions": [
+        "magic_cast"
+      ],
+      "phase": 0.580645,
+      "tags": [
+        "front",
+        "cast",
+        "authored_pixel_graph",
+        "rigged_staff",
+        "wings"
+      ],
+      "anchor_offsets": {
+        "staff_hand": [
+          20,
+          -45
+        ],
+        "staff_tip": [
+          16,
+          -78
+        ]
+      }
+    },
+    {
+      "id": "cast_front_19",
+      "description": "authored cast frame 19: stable body with rigged staff arc",
+      "derived_cast_rig": {
+        "base_pose_id": "front_idle",
+        "source_staff_tip_offset": [
+          22,
+          -83
+        ],
+        "source_staff_hand_offset": [
+          20,
+          -45
+        ],
+        "target_staff_tip_offset": [
+          16,
+          -78
+        ],
+        "target_staff_hand_offset": [
+          20,
+          -45
+        ]
+      },
+      "facing": "south",
+      "locomotion": "idle",
+      "actions": [
+        "magic_cast"
+      ],
+      "phase": 0.612903,
+      "tags": [
+        "front",
+        "cast",
+        "authored_pixel_graph",
+        "rigged_staff",
+        "wings"
+      ],
+      "anchor_offsets": {
+        "staff_hand": [
+          20,
+          -45
+        ],
+        "staff_tip": [
+          16,
+          -78
+        ]
+      }
+    },
+    {
+      "id": "cast_front_20",
+      "description": "authored cast frame 20: stable body with rigged staff arc",
+      "derived_cast_rig": {
+        "base_pose_id": "front_idle",
+        "source_staff_tip_offset": [
+          22,
+          -83
+        ],
+        "source_staff_hand_offset": [
+          20,
+          -45
+        ],
+        "target_staff_tip_offset": [
+          16,
+          -78
+        ],
+        "target_staff_hand_offset": [
+          20,
+          -45
+        ]
+      },
+      "facing": "south",
+      "locomotion": "idle",
+      "actions": [
+        "magic_cast"
+      ],
+      "phase": 0.645161,
+      "tags": [
+        "front",
+        "cast",
+        "authored_pixel_graph",
+        "rigged_staff",
+        "wings"
+      ],
+      "anchor_offsets": {
+        "staff_hand": [
+          20,
+          -45
+        ],
+        "staff_tip": [
+          16,
+          -78
+        ]
+      }
+    },
+    {
+      "id": "cast_front_21",
+      "description": "authored cast frame 21: stable body with rigged staff arc",
+      "derived_cast_rig": {
+        "base_pose_id": "front_idle",
+        "source_staff_tip_offset": [
+          22,
+          -83
+        ],
+        "source_staff_hand_offset": [
+          20,
+          -45
+        ],
+        "target_staff_tip_offset": [
+          16,
+          -78
+        ],
+        "target_staff_hand_offset": [
+          20,
+          -45
+        ]
+      },
+      "facing": "south",
+      "locomotion": "idle",
+      "actions": [
+        "magic_cast"
+      ],
+      "phase": 0.677419,
+      "tags": [
+        "front",
+        "cast",
+        "authored_pixel_graph",
+        "rigged_staff",
+        "wings"
+      ],
+      "anchor_offsets": {
+        "staff_hand": [
+          20,
+          -45
+        ],
+        "staff_tip": [
+          16,
+          -78
+        ]
+      }
+    },
+    {
+      "id": "cast_front_22",
+      "description": "authored cast frame 22: stable body with rigged staff arc",
+      "derived_cast_rig": {
+        "base_pose_id": "front_idle",
+        "source_staff_tip_offset": [
+          22,
+          -83
+        ],
+        "source_staff_hand_offset": [
+          20,
+          -45
+        ],
+        "target_staff_tip_offset": [
+          16,
+          -78
+        ],
+        "target_staff_hand_offset": [
+          20,
+          -45
+        ]
+      },
+      "facing": "south",
+      "locomotion": "idle",
+      "actions": [
+        "magic_cast"
+      ],
+      "phase": 0.709677,
+      "tags": [
+        "front",
+        "cast",
+        "authored_pixel_graph",
+        "rigged_staff",
+        "wings"
+      ],
+      "anchor_offsets": {
+        "staff_hand": [
+          20,
+          -45
+        ],
+        "staff_tip": [
+          16,
+          -78
+        ]
+      }
+    },
+    {
+      "id": "cast_front_23",
+      "description": "authored cast frame 23: stable body with rigged staff arc",
+      "derived_cast_rig": {
+        "base_pose_id": "front_idle",
+        "source_staff_tip_offset": [
+          22,
+          -83
+        ],
+        "source_staff_hand_offset": [
+          20,
+          -45
+        ],
+        "target_staff_tip_offset": [
+          18,
+          -78
+        ],
+        "target_staff_hand_offset": [
+          20,
+          -45
+        ]
+      },
+      "facing": "south",
+      "locomotion": "idle",
+      "actions": [
+        "magic_cast"
+      ],
+      "phase": 0.741935,
+      "tags": [
+        "front",
+        "cast",
+        "authored_pixel_graph",
+        "rigged_staff",
+        "wings"
+      ],
+      "anchor_offsets": {
+        "staff_hand": [
+          20,
+          -45
+        ],
+        "staff_tip": [
+          18,
+          -78
+        ]
+      }
+    },
+    {
+      "id": "cast_front_24",
+      "description": "authored cast frame 24: stable body with rigged staff arc",
+      "derived_cast_rig": {
+        "base_pose_id": "front_idle",
+        "source_staff_tip_offset": [
+          22,
+          -83
+        ],
+        "source_staff_hand_offset": [
+          20,
+          -45
+        ],
+        "target_staff_tip_offset": [
+          20,
+          -79
+        ],
+        "target_staff_hand_offset": [
+          20,
+          -45
+        ]
+      },
+      "facing": "south",
+      "locomotion": "idle",
+      "actions": [
+        "magic_cast"
+      ],
+      "phase": 0.774194,
+      "tags": [
+        "front",
+        "cast",
+        "authored_pixel_graph",
+        "rigged_staff",
+        "wings"
+      ],
+      "anchor_offsets": {
+        "staff_hand": [
+          20,
+          -45
+        ],
+        "staff_tip": [
+          20,
+          -79
+        ]
+      }
+    },
+    {
+      "id": "cast_front_25",
+      "description": "authored cast frame 25: stable body with rigged staff arc",
+      "derived_cast_rig": {
+        "base_pose_id": "front_idle",
+        "source_staff_tip_offset": [
+          22,
+          -83
+        ],
+        "source_staff_hand_offset": [
+          20,
+          -45
+        ],
+        "target_staff_tip_offset": [
+          22,
+          -80
+        ],
+        "target_staff_hand_offset": [
+          20,
+          -45
+        ]
+      },
+      "facing": "south",
+      "locomotion": "idle",
+      "actions": [
+        "magic_cast"
+      ],
+      "phase": 0.806452,
+      "tags": [
+        "front",
+        "cast",
+        "authored_pixel_graph",
+        "rigged_staff",
+        "wings"
+      ],
+      "anchor_offsets": {
+        "staff_hand": [
+          20,
+          -45
+        ],
+        "staff_tip": [
+          22,
+          -80
+        ]
+      }
+    },
+    {
+      "id": "cast_front_26",
+      "description": "authored cast frame 26: stable body with rigged staff arc",
+      "derived_cast_rig": {
+        "base_pose_id": "front_idle",
+        "source_staff_tip_offset": [
+          22,
+          -83
+        ],
+        "source_staff_hand_offset": [
+          20,
+          -45
+        ],
+        "target_staff_tip_offset": [
+          23,
+          -81
+        ],
+        "target_staff_hand_offset": [
+          20,
+          -45
+        ]
+      },
+      "facing": "south",
+      "locomotion": "idle",
+      "actions": [
+        "magic_cast"
+      ],
+      "phase": 0.83871,
+      "tags": [
+        "front",
+        "cast",
+        "authored_pixel_graph",
+        "rigged_staff",
+        "wings"
+      ],
+      "anchor_offsets": {
+        "staff_hand": [
+          20,
+          -45
+        ],
+        "staff_tip": [
+          23,
+          -81
+        ]
+      }
+    },
+    {
+      "id": "cast_front_27",
+      "description": "authored cast frame 27: stable body with rigged staff arc",
+      "derived_cast_rig": {
+        "base_pose_id": "front_idle",
+        "source_staff_tip_offset": [
+          22,
+          -83
+        ],
+        "source_staff_hand_offset": [
+          20,
+          -45
+        ],
+        "target_staff_tip_offset": [
+          22,
+          -82
+        ],
+        "target_staff_hand_offset": [
+          20,
+          -45
+        ]
+      },
+      "facing": "south",
+      "locomotion": "idle",
+      "actions": [
+        "magic_cast"
+      ],
+      "phase": 0.870968,
+      "tags": [
+        "front",
+        "cast",
+        "authored_pixel_graph",
+        "rigged_staff",
+        "wings"
+      ],
+      "anchor_offsets": {
+        "staff_hand": [
+          20,
+          -45
+        ],
+        "staff_tip": [
+          22,
+          -82
+        ]
+      }
+    },
+    {
+      "id": "cast_front_28",
+      "description": "authored cast frame 28: stable body with rigged staff arc",
+      "derived_cast_rig": {
+        "base_pose_id": "front_idle",
+        "source_staff_tip_offset": [
+          22,
+          -83
+        ],
+        "source_staff_hand_offset": [
+          20,
+          -45
+        ],
+        "target_staff_tip_offset": [
+          22,
+          -83
+        ],
+        "target_staff_hand_offset": [
+          20,
+          -45
+        ]
+      },
+      "facing": "south",
+      "locomotion": "idle",
+      "actions": [
+        "magic_cast"
+      ],
+      "phase": 0.903226,
+      "tags": [
+        "front",
+        "cast",
+        "authored_pixel_graph",
+        "rigged_staff",
+        "wings"
+      ],
+      "anchor_offsets": {
+        "staff_hand": [
+          20,
+          -45
+        ],
+        "staff_tip": [
+          22,
+          -83
+        ]
+      }
+    },
+    {
+      "id": "cast_front_29",
+      "description": "authored cast frame 29: stable body with rigged staff arc",
+      "derived_cast_rig": {
+        "base_pose_id": "front_idle",
+        "source_staff_tip_offset": [
+          22,
+          -83
+        ],
+        "source_staff_hand_offset": [
+          20,
+          -45
+        ],
+        "target_staff_tip_offset": [
+          22,
+          -83
+        ],
+        "target_staff_hand_offset": [
+          20,
+          -45
+        ]
+      },
+      "facing": "south",
+      "locomotion": "idle",
+      "actions": [
+        "magic_cast"
+      ],
+      "phase": 0.935484,
+      "tags": [
+        "front",
+        "cast",
+        "authored_pixel_graph",
+        "rigged_staff",
+        "wings"
+      ],
+      "anchor_offsets": {
+        "staff_hand": [
+          20,
+          -45
+        ],
+        "staff_tip": [
+          22,
+          -83
+        ]
+      }
+    },
+    {
+      "id": "cast_front_30",
+      "description": "authored cast frame 30: stable body with rigged staff arc",
+      "derived_cast_rig": {
+        "base_pose_id": "front_idle",
+        "source_staff_tip_offset": [
+          22,
+          -83
+        ],
+        "source_staff_hand_offset": [
+          20,
+          -45
+        ],
+        "target_staff_tip_offset": [
+          22,
+          -83
+        ],
+        "target_staff_hand_offset": [
+          20,
+          -45
+        ]
+      },
+      "facing": "south",
+      "locomotion": "idle",
+      "actions": [
+        "magic_cast"
+      ],
+      "phase": 0.967742,
+      "tags": [
+        "front",
+        "cast",
+        "authored_pixel_graph",
+        "rigged_staff",
+        "wings"
+      ],
+      "anchor_offsets": {
+        "staff_hand": [
+          20,
+          -45
+        ],
+        "staff_tip": [
+          22,
+          -83
+        ]
+      }
+    },
+    {
+      "id": "cast_front_31",
+      "description": "authored cast frame 31: stable body with rigged staff arc",
+      "derived_cast_rig": {
+        "base_pose_id": "front_idle",
+        "source_staff_tip_offset": [
+          22,
+          -83
+        ],
+        "source_staff_hand_offset": [
+          20,
+          -45
+        ],
+        "target_staff_tip_offset": [
+          22,
+          -83
+        ],
+        "target_staff_hand_offset": [
+          20,
+          -45
+        ]
+      },
+      "facing": "south",
+      "locomotion": "idle",
+      "actions": [
+        "magic_cast"
+      ],
+      "phase": 1,
+      "tags": [
+        "front",
+        "cast",
+        "authored_pixel_graph",
+        "rigged_staff",
+        "wings"
+      ],
+      "anchor_offsets": {
+        "staff_hand": [
+          20,
+          -45
+        ],
+        "staff_tip": [
+          22,
+          -83
+        ]
+      }
     },
     {
       "id": "back_idle",

@@ -478,9 +478,21 @@ def load_pose_catalog(
         cells = _sequence(library_pose.get("cells"), f"{library_path}.poses[{pose_id!r}].cells")
         if not cells:
             raise _path_error(f"{library_path}.poses[{pose_id!r}].cells", "must not be empty")
+        source_value = manifest_pose.get("source")
+        if source_value is None and "derived_cast_rig" in manifest_pose:
+            source_value = library_pose.get("source")
+            source = _string(source_value, f"{library_path}.poses[{pose_id!r}].source")
+            if not source.startswith("derived_cast_rig:"):
+                raise _path_error(
+                    f"{library_path}.poses[{pose_id!r}].source",
+                    "derived cast pose must retain derived_cast_rig provenance",
+                )
+        else:
+            source = _string(source_value, f"{base}.source")
+
         catalog[pose_id] = PoseMetadata(
             pose_id=pose_id,
-            source=_string(manifest_pose.get("source"), f"{base}.source"),
+            source=source,
             description=str(manifest_pose.get("description", "")),
             facing=facing,
             locomotion=locomotion,

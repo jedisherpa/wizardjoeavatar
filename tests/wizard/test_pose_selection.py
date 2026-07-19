@@ -605,29 +605,22 @@ class PoseSelectionTests(unittest.TestCase):
         self.assertIsNone(state.animation_transition_id)
         self.assertEqual(state.animation_clip_tick, 0)
 
-    def test_cast_clip_uses_authored_staff_arc_without_overhead_pose_swap(self):
+    def test_cast_clip_uses_frame_complete_rigged_staff_arc(self):
         graph = load_reference_animation_graph_v2()
         clip = graph.clips["cast_front"]
 
         self.assertEqual(
             [sample.pose_id for sample in clip.samples],
-            [
-                "front_idle",
-                "front_staff_guard_low",
-                "front_staff_guard_windup",
-                "front_staff_guard_low",
-                "front_magic_staff_thrust",
-                "front_magic_staff_thrust",
-                "front_staff_guard_low",
-                "front_idle",
-            ],
+            [f"cast_front_{frame:02d}" for frame in range(32)],
         )
         self.assertNotIn("magic_cast", [sample.pose_id for sample in clip.samples])
-        self.assertNotIn(
-            "front_staff_block_horizontal",
-            [sample.pose_id for sample in clip.samples],
-        )
+        self.assertTrue(all(sample.duration_frames == 1 for sample in clip.samples))
         self.assertEqual(clip.total_frames, 32)
+        self.assertTrue(
+            graph.pose_catalog["cast_front_00"].source.startswith(
+                "derived_cast_rig:front_idle:"
+            )
+        )
 
         staff_tip_offsets = []
         for sample in clip.samples:
@@ -645,7 +638,7 @@ class PoseSelectionTests(unittest.TestCase):
                     staff_tip_offsets[1:],
                 )
             ),
-            50,
+            2,
         )
 
     def test_nearest_contact_fallback_breaks_phase_ties_by_earliest_frame(self):

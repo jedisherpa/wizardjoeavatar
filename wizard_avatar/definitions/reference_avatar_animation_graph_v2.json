@@ -30,6 +30,358 @@
       "staff_mode": "carried",
       "capability_tier": "A"
     },
+    "cast_front_00": {
+      "roles": [
+        "clip_sample"
+      ],
+      "altitude_class": "grounded",
+      "support_contact": "both_feet",
+      "planted_anchor": "left_foot",
+      "wing_mode": "extended",
+      "staff_mode": "attack",
+      "capability_tier": "A"
+    },
+    "cast_front_01": {
+      "roles": [
+        "clip_sample"
+      ],
+      "altitude_class": "grounded",
+      "support_contact": "both_feet",
+      "planted_anchor": "left_foot",
+      "wing_mode": "extended",
+      "staff_mode": "attack",
+      "capability_tier": "A"
+    },
+    "cast_front_02": {
+      "roles": [
+        "clip_sample"
+      ],
+      "altitude_class": "grounded",
+      "support_contact": "both_feet",
+      "planted_anchor": "left_foot",
+      "wing_mode": "extended",
+      "staff_mode": "attack",
+      "capability_tier": "A"
+    },
+    "cast_front_03": {
+      "roles": [
+        "clip_sample"
+      ],
+      "altitude_class": "grounded",
+      "support_contact": "both_feet",
+      "planted_anchor": "left_foot",
+      "wing_mode": "extended",
+      "staff_mode": "attack",
+      "capability_tier": "A"
+    },
+    "cast_front_04": {
+      "roles": [
+        "clip_sample"
+      ],
+      "altitude_class": "grounded",
+      "support_contact": "both_feet",
+      "planted_anchor": "left_foot",
+      "wing_mode": "extended",
+      "staff_mode": "attack",
+      "capability_tier": "A"
+    },
+    "cast_front_05": {
+      "roles": [
+        "clip_sample"
+      ],
+      "altitude_class": "grounded",
+      "support_contact": "both_feet",
+      "planted_anchor": "left_foot",
+      "wing_mode": "extended",
+      "staff_mode": "attack",
+      "capability_tier": "A"
+    },
+    "cast_front_06": {
+      "roles": [
+        "clip_sample"
+      ],
+      "altitude_class": "grounded",
+      "support_contact": "both_feet",
+      "planted_anchor": "left_foot",
+      "wing_mode": "extended",
+      "staff_mode": "attack",
+      "capability_tier": "A"
+    },
+    "cast_front_07": {
+      "roles": [
+        "clip_sample"
+      ],
+      "altitude_class": "grounded",
+      "support_contact": "both_feet",
+      "planted_anchor": "left_foot",
+      "wing_mode": "extended",
+      "staff_mode": "attack",
+      "capability_tier": "A"
+    },
+    "cast_front_08": {
+      "roles": [
+        "clip_sample"
+      ],
+      "altitude_class": "grounded",
+      "support_contact": "both_feet",
+      "planted_anchor": "left_foot",
+      "wing_mode": "extended",
+      "staff_mode": "attack",
+      "capability_tier": "A"
+    },
+    "cast_front_09": {
+      "roles": [
+        "clip_sample"
+      ],
+      "altitude_class": "grounded",
+      "support_contact": "both_feet",
+      "planted_anchor": "left_foot",
+      "wing_mode": "extended",
+      "staff_mode": "attack",
+      "capability_tier": "A"
+    },
+    "cast_front_10": {
+      "roles": [
+        "clip_sample"
+      ],
+      "altitude_class": "grounded",
+      "support_contact": "both_feet",
+      "planted_anchor": "left_foot",
+      "wing_mode": "extended",
+      "staff_mode": "attack",
+      "capability_tier": "A"
+    },
+    "cast_front_11": {
+      "roles": [
+        "clip_sample"
+      ],
+      "altitude_class": "grounded",
+      "support_contact": "both_feet",
+      "planted_anchor": "left_foot",
+      "wing_mode": "extended",
+      "staff_mode": "attack",
+      "capability_tier": "A"
+    },
+    "cast_front_12": {
+      "roles": [
+        "clip_sample"
+      ],
+      "altitude_class": "grounded",
+      "support_contact": "both_feet",
+      "planted_anchor": "left_foot",
+      "wing_mode": "extended",
+      "staff_mode": "attack",
+      "capability_tier": "A"
+    },
+    "cast_front_13": {
+      "roles": [
+        "clip_sample"
+      ],
+      "altitude_class": "grounded",
+      "support_contact": "both_feet",
+      "planted_anchor": "left_foot",
+      "wing_mode": "extended",
+      "staff_mode": "attack",
+      "capability_tier": "A"
+    },
+    "cast_front_14": {
+      "roles": [
+        "clip_sample"
+      ],
+      "altitude_class": "grounded",
+      "support_contact": "both_feet",
+      "planted_anchor": "left_foot",
+      "wing_mode": "extended",
+      "staff_mode": "attack",
+      "capability_tier": "A"
+    },
+    "cast_front_15": {
+      "roles": [
+        "clip_sample"
+      ],
+      "altitude_class": "grounded",
+      "support_contact": "both_feet",
+      "planted_anchor": "left_foot",
+      "wing_mode": "extended",
+      "staff_mode": "attack",
+      "capability_tier": "A"
+    },
+    "cast_front_16": {
+      "roles": [
+        "clip_sample"
+      ],
+      "altitude_class": "grounded",
+      "support_contact": "both_feet",
+      "planted_anchor": "left_foot",
+      "wing_mode": "extended",
+      "staff_mode": "attack",
+      "capability_tier": "A"
+    },
+    "cast_front_17": {
+      "roles": [
+        "clip_sample"
+      ],
+      "altitude_class": "grounded",
+      "support_contact": "both_feet",
+      "planted_anchor": "left_foot",
+      "wing_mode": "extended",
+      "staff_mode": "attack",
+      "capability_tier": "A"
+    },
+    "cast_front_18": {
+      "roles": [
+        "clip_sample"
+      ],
+      "altitude_class": "grounded",
+      "support_contact": "both_feet",
+      "planted_anchor": "left_foot",
+      "wing_mode": "extended",
+      "staff_mode": "attack",
+      "capability_tier": "A"
+    },
+    "cast_front_19": {
+      "roles": [
+        "clip_sample"
+      ],
+      "altitude_class": "grounded",
+      "support_contact": "both_feet",
+      "planted_anchor": "left_foot",
+      "wing_mode": "extended",
+      "staff_mode": "attack",
+      "capability_tier": "A"
+    },
+    "cast_front_20": {
+      "roles": [
+        "clip_sample"
+      ],
+      "altitude_class": "grounded",
+      "support_contact": "both_feet",
+      "planted_anchor": "left_foot",
+      "wing_mode": "extended",
+      "staff_mode": "attack",
+      "capability_tier": "A"
+    },
+    "cast_front_21": {
+      "roles": [
+        "clip_sample"
+      ],
+      "altitude_class": "grounded",
+      "support_contact": "both_feet",
+      "planted_anchor": "left_foot",
+      "wing_mode": "extended",
+      "staff_mode": "attack",
+      "capability_tier": "A"
+    },
+    "cast_front_22": {
+      "roles": [
+        "clip_sample"
+      ],
+      "altitude_class": "grounded",
+      "support_contact": "both_feet",
+      "planted_anchor": "left_foot",
+      "wing_mode": "extended",
+      "staff_mode": "attack",
+      "capability_tier": "A"
+    },
+    "cast_front_23": {
+      "roles": [
+        "clip_sample"
+      ],
+      "altitude_class": "grounded",
+      "support_contact": "both_feet",
+      "planted_anchor": "left_foot",
+      "wing_mode": "extended",
+      "staff_mode": "attack",
+      "capability_tier": "A"
+    },
+    "cast_front_24": {
+      "roles": [
+        "clip_sample"
+      ],
+      "altitude_class": "grounded",
+      "support_contact": "both_feet",
+      "planted_anchor": "left_foot",
+      "wing_mode": "extended",
+      "staff_mode": "attack",
+      "capability_tier": "A"
+    },
+    "cast_front_25": {
+      "roles": [
+        "clip_sample"
+      ],
+      "altitude_class": "grounded",
+      "support_contact": "both_feet",
+      "planted_anchor": "left_foot",
+      "wing_mode": "extended",
+      "staff_mode": "attack",
+      "capability_tier": "A"
+    },
+    "cast_front_26": {
+      "roles": [
+        "clip_sample"
+      ],
+      "altitude_class": "grounded",
+      "support_contact": "both_feet",
+      "planted_anchor": "left_foot",
+      "wing_mode": "extended",
+      "staff_mode": "attack",
+      "capability_tier": "A"
+    },
+    "cast_front_27": {
+      "roles": [
+        "clip_sample"
+      ],
+      "altitude_class": "grounded",
+      "support_contact": "both_feet",
+      "planted_anchor": "left_foot",
+      "wing_mode": "extended",
+      "staff_mode": "attack",
+      "capability_tier": "A"
+    },
+    "cast_front_28": {
+      "roles": [
+        "clip_sample"
+      ],
+      "altitude_class": "grounded",
+      "support_contact": "both_feet",
+      "planted_anchor": "left_foot",
+      "wing_mode": "extended",
+      "staff_mode": "attack",
+      "capability_tier": "A"
+    },
+    "cast_front_29": {
+      "roles": [
+        "clip_sample"
+      ],
+      "altitude_class": "grounded",
+      "support_contact": "both_feet",
+      "planted_anchor": "left_foot",
+      "wing_mode": "extended",
+      "staff_mode": "attack",
+      "capability_tier": "A"
+    },
+    "cast_front_30": {
+      "roles": [
+        "clip_sample"
+      ],
+      "altitude_class": "grounded",
+      "support_contact": "both_feet",
+      "planted_anchor": "left_foot",
+      "wing_mode": "extended",
+      "staff_mode": "attack",
+      "capability_tier": "A"
+    },
+    "cast_front_31": {
+      "roles": [
+        "clip_sample"
+      ],
+      "altitude_class": "grounded",
+      "support_contact": "both_feet",
+      "planted_anchor": "left_foot",
+      "wing_mode": "extended",
+      "staff_mode": "attack",
+      "capability_tier": "A"
+    },
     "back_idle": {
       "roles": [
         "clip_sample",
@@ -392,7 +744,7 @@
     },
     "front_magic_staff_thrust": {
       "roles": [
-        "clip_sample"
+        "diagnostic_only"
       ],
       "altitude_class": "grounded",
       "support_contact": "both_feet",
@@ -2367,41 +2719,111 @@
       ],
       "samples": [
         {
-          "pose_id": "front_idle",
-          "duration_frames": 2,
+          "pose_id": "cast_front_00",
+          "duration_frames": 1,
           "support_contact": "both_feet",
           "planted_anchor": "left_foot",
           "markers": []
         },
         {
-          "pose_id": "front_staff_guard_low",
-          "duration_frames": 4,
+          "pose_id": "cast_front_01",
+          "duration_frames": 1,
           "support_contact": "both_feet",
           "planted_anchor": "left_foot",
           "markers": []
         },
         {
-          "pose_id": "front_staff_guard_windup",
-          "duration_frames": 5,
+          "pose_id": "cast_front_02",
+          "duration_frames": 1,
+          "support_contact": "both_feet",
+          "planted_anchor": "left_foot",
+          "markers": []
+        },
+        {
+          "pose_id": "cast_front_03",
+          "duration_frames": 1,
+          "support_contact": "both_feet",
+          "planted_anchor": "left_foot",
+          "markers": []
+        },
+        {
+          "pose_id": "cast_front_04",
+          "duration_frames": 1,
+          "support_contact": "both_feet",
+          "planted_anchor": "left_foot",
+          "markers": []
+        },
+        {
+          "pose_id": "cast_front_05",
+          "duration_frames": 1,
+          "support_contact": "both_feet",
+          "planted_anchor": "left_foot",
+          "markers": []
+        },
+        {
+          "pose_id": "cast_front_06",
+          "duration_frames": 1,
+          "support_contact": "both_feet",
+          "planted_anchor": "left_foot",
+          "markers": []
+        },
+        {
+          "pose_id": "cast_front_07",
+          "duration_frames": 1,
+          "support_contact": "both_feet",
+          "planted_anchor": "left_foot",
+          "markers": []
+        },
+        {
+          "pose_id": "cast_front_08",
+          "duration_frames": 1,
+          "support_contact": "both_feet",
+          "planted_anchor": "left_foot",
+          "markers": []
+        },
+        {
+          "pose_id": "cast_front_09",
+          "duration_frames": 1,
+          "support_contact": "both_feet",
+          "planted_anchor": "left_foot",
+          "markers": []
+        },
+        {
+          "pose_id": "cast_front_10",
+          "duration_frames": 1,
           "support_contact": "both_feet",
           "planted_anchor": "left_foot",
           "markers": [
             {
               "id": "action_commit",
-              "frame_offset": 4
+              "frame_offset": 0
             }
           ]
         },
         {
-          "pose_id": "front_staff_guard_low",
-          "duration_frames": 3,
+          "pose_id": "cast_front_11",
+          "duration_frames": 1,
           "support_contact": "both_feet",
           "planted_anchor": "left_foot",
           "markers": []
         },
         {
-          "pose_id": "front_magic_staff_thrust",
-          "duration_frames": 4,
+          "pose_id": "cast_front_12",
+          "duration_frames": 1,
+          "support_contact": "both_feet",
+          "planted_anchor": "left_foot",
+          "markers": []
+        },
+        {
+          "pose_id": "cast_front_13",
+          "duration_frames": 1,
+          "support_contact": "both_feet",
+          "planted_anchor": "left_foot",
+          "markers": []
+        },
+        {
+          "pose_id": "cast_front_14",
+          "duration_frames": 1,
           "support_contact": "both_feet",
           "planted_anchor": "left_foot",
           "markers": [
@@ -2412,15 +2834,64 @@
           ]
         },
         {
-          "pose_id": "front_magic_staff_thrust",
-          "duration_frames": 5,
+          "pose_id": "cast_front_15",
+          "duration_frames": 1,
           "support_contact": "both_feet",
           "planted_anchor": "left_foot",
           "markers": []
         },
         {
-          "pose_id": "front_staff_guard_low",
-          "duration_frames": 5,
+          "pose_id": "cast_front_16",
+          "duration_frames": 1,
+          "support_contact": "both_feet",
+          "planted_anchor": "left_foot",
+          "markers": []
+        },
+        {
+          "pose_id": "cast_front_17",
+          "duration_frames": 1,
+          "support_contact": "both_feet",
+          "planted_anchor": "left_foot",
+          "markers": []
+        },
+        {
+          "pose_id": "cast_front_18",
+          "duration_frames": 1,
+          "support_contact": "both_feet",
+          "planted_anchor": "left_foot",
+          "markers": []
+        },
+        {
+          "pose_id": "cast_front_19",
+          "duration_frames": 1,
+          "support_contact": "both_feet",
+          "planted_anchor": "left_foot",
+          "markers": []
+        },
+        {
+          "pose_id": "cast_front_20",
+          "duration_frames": 1,
+          "support_contact": "both_feet",
+          "planted_anchor": "left_foot",
+          "markers": []
+        },
+        {
+          "pose_id": "cast_front_21",
+          "duration_frames": 1,
+          "support_contact": "both_feet",
+          "planted_anchor": "left_foot",
+          "markers": []
+        },
+        {
+          "pose_id": "cast_front_22",
+          "duration_frames": 1,
+          "support_contact": "both_feet",
+          "planted_anchor": "left_foot",
+          "markers": []
+        },
+        {
+          "pose_id": "cast_front_23",
+          "duration_frames": 1,
           "support_contact": "both_feet",
           "planted_anchor": "left_foot",
           "markers": [
@@ -2431,8 +2902,36 @@
           ]
         },
         {
-          "pose_id": "front_idle",
-          "duration_frames": 4,
+          "pose_id": "cast_front_24",
+          "duration_frames": 1,
+          "support_contact": "both_feet",
+          "planted_anchor": "left_foot",
+          "markers": []
+        },
+        {
+          "pose_id": "cast_front_25",
+          "duration_frames": 1,
+          "support_contact": "both_feet",
+          "planted_anchor": "left_foot",
+          "markers": []
+        },
+        {
+          "pose_id": "cast_front_26",
+          "duration_frames": 1,
+          "support_contact": "both_feet",
+          "planted_anchor": "left_foot",
+          "markers": []
+        },
+        {
+          "pose_id": "cast_front_27",
+          "duration_frames": 1,
+          "support_contact": "both_feet",
+          "planted_anchor": "left_foot",
+          "markers": []
+        },
+        {
+          "pose_id": "cast_front_28",
+          "duration_frames": 1,
           "support_contact": "both_feet",
           "planted_anchor": "left_foot",
           "markers": [
@@ -2441,6 +2940,27 @@
               "frame_offset": 0
             }
           ]
+        },
+        {
+          "pose_id": "cast_front_29",
+          "duration_frames": 1,
+          "support_contact": "both_feet",
+          "planted_anchor": "left_foot",
+          "markers": []
+        },
+        {
+          "pose_id": "cast_front_30",
+          "duration_frames": 1,
+          "support_contact": "both_feet",
+          "planted_anchor": "left_foot",
+          "markers": []
+        },
+        {
+          "pose_id": "cast_front_31",
+          "duration_frames": 1,
+          "support_contact": "both_feet",
+          "planted_anchor": "left_foot",
+          "markers": []
         }
       ],
       "entry_markers": [

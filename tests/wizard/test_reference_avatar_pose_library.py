@@ -32,15 +32,62 @@ class ReferenceAvatarPoseLibraryTests(unittest.TestCase):
         manifest = json.loads(MANIFEST_PATH.read_text(encoding="utf-8"))
         expected_pose_ids = {pose["id"] for pose in manifest["poses"]}
         self.assertEqual(set(reference_pose_ids()), expected_pose_ids)
-        self.assertEqual(len(expected_pose_ids), 91)
+        self.assertEqual(len(expected_pose_ids), 123)
         self.assertTrue(
             {
                 "front_greeting_wave_wings",
                 "front_magic_staff_spark_wings",
                 "feeling_joy_full",
                 "feeling_love_close",
+                "cast_front_00",
+                "cast_front_31",
             }.issubset(expected_pose_ids)
         )
+
+    def test_cast_frames_are_baked_atomic_pixel_graphs_with_continuous_anchors(self):
+        poses = [get_reference_pose(f"cast_front_{frame:02d}") for frame in range(32)]
+        front_idle = get_reference_pose("front_idle")
+
+        self.assertTrue(
+            all(pose.description.startswith("authored cast frame") for pose in poses)
+        )
+        self.assertEqual({pose.root_anchor for pose in poses}, {(36, 95)})
+        self.assertEqual({pose.anchors["staff_hand"] for pose in poses}, {(56, 50)})
+        self.assertEqual(front_idle.anchors["staff_hand"], poses[0].anchors["staff_hand"])
+        self.assertEqual(front_idle.anchors["staff_tip"], poses[0].anchors["staff_tip"])
+        self.assertEqual(front_idle.anchors["staff_tip"], poses[-1].anchors["staff_tip"])
+        for previous, current in zip(poses, poses[1:]):
+            tip_a = previous.anchors["staff_tip"]
+            tip_b = current.anchors["staff_tip"]
+            self.assertLessEqual(abs(tip_b[0] - tip_a[0]), 2)
+            self.assertLessEqual(abs(tip_b[1] - tip_a[1]), 2)
+
+        library = json.loads(
+            (
+                ROOT
+                / "wizard_avatar"
+                / "definitions"
+                / "reference_avatar_pose_cells.json"
+            ).read_text(encoding="utf-8")
+        )
+        cast_payloads = {
+            pose["id"]: pose
+            for pose in library["poses"]
+            if pose["id"].startswith("cast_front_")
+        }
+        stable_body = None
+        for frame in range(32):
+            payload = cast_payloads[f"cast_front_{frame:02d}"]
+            self.assertTrue(payload["source"].startswith("derived_cast_rig:"))
+            body = {
+                (cell["x"], cell["y"], tuple(cell["rgb"]), cell.get("region", ""))
+                for cell in payload["cells"]
+                if cell["x"] < 35
+            }
+            if stable_body is None:
+                stable_body = body
+            else:
+                self.assertEqual(body, stable_body)
 
     def test_all_reference_poses_share_canonical_canvas_and_root(self):
         for pose_id in reference_pose_ids():

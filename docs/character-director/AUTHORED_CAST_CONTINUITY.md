@@ -31,40 +31,70 @@ not a coherent intermediate for the leftward spell release.
 
 ## Choreography Contract
 
-The 32-frame `cast_front` clip is:
+The V3 correction replaces the eight full-body snapshots with 32 complete
+`cast_front_00` through `cast_front_31` pixel graphs. Each graph is generated
+offline from the stable `front_idle` body. The generator removes the flattened
+staff and authors a rigid staff appendage around one fixed grip; every output
+is then stored as colored pixel nodes in the canonical pose library.
 
-1. `front_idle`, 2 frames
-2. `front_staff_guard_low`, 4 frames
-3. `front_staff_guard_windup`, 5 frames
-4. `front_staff_guard_low`, 3 frames
-5. `front_magic_staff_thrust`, 4-frame effect stroke
-6. `front_magic_staff_thrust`, 5-frame effect hold
-7. `front_staff_guard_low`, 5-frame recovery
-8. `front_idle`, 4-frame settle
+The live visualizer still projects one complete pixel graph for every frame.
+It does not load the PNG reference, dissolve between images, or construct
+partial limbs at runtime.
+
+The 32 frames retain the existing performance phases:
+
+1. neutral and preparation, frames 0-5
+2. windup and commitment, frames 6-10
+3. recoil into the stroke, frames 11-13
+4. effect stroke, frames 14-17
+5. effect hold, frames 18-22
+6. recovery, frames 23-27
+7. settled neutral, frames 28-31
 
 Markers occur at authored frames 10 (`action_commit`), 14
 (`action_effect`), 23 (`action_recoverable`), and 28 (`action_settled`). Speech
 before commit may cancel the cast; speech after commit waits through recovery.
-The magic effect follows the authored thrust staff tip and fades over recovery.
+The magic effect follows the per-frame staff-tip anchor and fades over recovery.
 
-Regression tests forbid both the old overhead `magic_cast` swap and the
-horizontal defensive pose in this clip. They also normalize each sampled staff
-tip by its pose-density ratio and cap consecutive horizontal travel at 50 local
-cells.
+Adjacent authored staff-tip coordinates differ by at most two local cells. The
+staff hand remains fixed at local cell `(56, 50)`, so the grip cannot switch
+hands or teleport across the silhouette. Root, feet, body, face, robe, and
+wings remain structurally identical through the cast; only the authored prop
+appendage and effect change.
+
+Regression tests require the exact 32-frame graph sequence, one authored frame
+per sample, a fixed grip, and no more than two cells of adjacent staff-tip
+travel. The old overhead `magic_cast`, horizontal defensive pose, guard, and
+thrust snapshots are no longer used by `cast_front`.
 
 ## Verification
 
-Focused pose, channel, marker, overlay, contact, and truth tests passed 64 of
-64. `tools/validate_cartoon_animation_program.py` checked 140 Python production
-paths with zero violations.
+Focused pose, channel, marker, overlay, contact, permission, and V3 analyzer
+tests pass 66 of 66. The deterministic offline rebuild command is:
 
-`evidence/character-director/cast-continuity-a8d0e28-2026-07-18/` is a strict
-external-runtime capture bound to clean commit `a8d0e28`. It contains 339
-contiguous decoded frames with zero drops, gaps, or decoder errors. Runtime
-identity was stable from capture start to end. Contact verification passed all
-339 frames with zero issues, zero root residual, and effectively zero planted
-anchor drift.
+```bash
+.venv/bin/python tools/generate_reference_avatar_pose_cells.py \
+  --reuse-authored-library --check-deterministic
+```
 
-- manifest SHA-256: `949e836fef5428aa2e3bf3cefc61af1a64767ae69b9922ec8634e81281e60f24`
-- contact report SHA-256: `84732328390d660ed969574d7b24a36582d7d2105c5090fa0a7e6718e82fae52`
-- truth trace SHA-256: `9f19f0ac7dc1b4d1eacb64efc737370c8346792b303a1b06ddc79ca17eacf956`
+The strict runtime proof uses
+`tools/character_director_scenarios/v3-canonical-cast.json`, then evaluates the
+capture with:
+
+```bash
+.venv/bin/python tools/analyze_character_director_v3.py \
+  --manifest <capture>/manifest.json \
+  --output <capture>/v3-machine-acceptance.json
+```
+
+The analyzer fails closed unless all 240 frames are owned, contiguous, and
+paired with truth records; all three casts use the canonical atomic pose for
+their authored frame; roots and the staff grip remain fixed; staff-tip travel
+is no greater than two local cells per authored frame; all four markers occur
+once and in order in every cast; effect phases begin at the staff event; contact
+verification passes; and every cast silhouette remains inside the 240 by 135
+stage. Normal-speed and quarter-speed review remain separate required gates.
+
+The previous `a8d0e28` evidence predates this authored rig and is retained only
+as historical comparison. It is not acceptance evidence for the current V3
+implementation.
