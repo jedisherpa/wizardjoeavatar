@@ -1,0 +1,57 @@
+{
+  "schema": "character_director_scenario_program_v1",
+  "schema_version": 1,
+  "program_id": "v4-thought-groups",
+  "acceptance_scenario": "V4",
+  "scenarios": [
+    {
+      "name": "v4-ready",
+      "kind": "reset",
+      "payload": {},
+      "settle_seconds": 0.0,
+      "capture_seconds": 0.5
+    },
+    {
+      "name": "v4-thought-one-explain",
+      "kind": "action",
+      "payload": {"action": "explaining", "duration_ms": 1200},
+      "settle_seconds": 0.0,
+      "capture_seconds": 1.25
+    },
+    {
+      "name": "v4-thought-one-hold",
+      "kind": "gaze",
+      "payload": {"target": "viewer"},
+      "settle_seconds": 0.0,
+      "capture_seconds": 0.75
+    },
+    {
+      "name": "v4-thought-two-explain",
+      "kind": "action",
+      "payload": {"action": "explaining", "duration_ms": 1200},
+      "settle_seconds": 0.0,
+      "capture_seconds": 1.25
+    },
+    {
+      "name": "v4-thought-two-hold",
+      "kind": "gaze",
+      "payload": {"target": "viewer"},
+      "settle_seconds": 0.0,
+      "capture_seconds": 0.75
+    },
+    {
+      "name": "v4-thought-three-point",
+      "kind": "action",
+      "payload": {"action": "pointing", "duration_ms": 1200},
+      "settle_seconds": 0.0,
+      "capture_seconds": 1.25
+    },
+    {
+      "name": "v4-settle",
+      "kind": "gaze",
+      "payload": {"target": "viewer"},
+      "settle_seconds": 0.0,
+      "capture_seconds": 1.0
+    }
+  ]
+}

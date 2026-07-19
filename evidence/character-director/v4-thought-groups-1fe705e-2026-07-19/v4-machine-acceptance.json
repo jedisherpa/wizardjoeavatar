@@ -1,0 +1,301 @@
+{
+  "acceptance_scenario": "V4",
+  "checks": [
+    {
+      "detail": {
+        "acceptance_scenario": "V4",
+        "artifact_path": "scenario-program.json",
+        "program_id": "v4-thought-groups",
+        "scenario_count": 7,
+        "schema": "character_director_scenario_program_v1",
+        "schema_version": 1,
+        "source_sha256": "76966a3bf4b19c43800e49e697e921e35231aa3f2c4097bb6af9186e9277a5ce",
+        "total_duration_seconds": 6.75
+      },
+      "name": "scenario_program_identity",
+      "passed": true
+    },
+    {
+      "detail": [
+        "v4-ready",
+        "v4-thought-one-explain",
+        "v4-thought-one-hold",
+        "v4-thought-two-explain",
+        "v4-thought-two-hold",
+        "v4-thought-three-point",
+        "v4-settle"
+      ],
+      "name": "scenario_order",
+      "passed": true
+    },
+    {
+      "detail": {
+        "frame_count": 168,
+        "missing_trace_frames": [],
+        "owned_frame_count": 162,
+        "scenario_blocks_contiguous": true,
+        "scenario_frame_counts": {
+          "v4-ready": 12,
+          "v4-settle": 24,
+          "v4-thought-one-explain": 30,
+          "v4-thought-one-hold": 18,
+          "v4-thought-three-point": 30,
+          "v4-thought-two-explain": 30,
+          "v4-thought-two-hold": 18
+        },
+        "trace_count": 168,
+        "transport_contiguous": true,
+        "unowned_are_bounded_transitions": true,
+        "unowned_transition_frame_indexes": [
+          12,
+          43,
+          62,
+          93,
+          112,
+          143
+        ]
+      },
+      "name": "complete_contiguous_capture",
+      "passed": true
+    },
+    {
+      "detail": {
+        "explain": {
+          "v4-thought-one-explain": [
+            [
+              "action_commit",
+              2
+            ],
+            [
+              "speech_open",
+              6
+            ],
+            [
+              "action_effect",
+              6
+            ],
+            [
+              "speech_close",
+              13
+            ],
+            [
+              "action_recoverable",
+              18
+            ],
+            [
+              "action_settled",
+              19
+            ]
+          ],
+          "v4-thought-two-explain": [
+            [
+              "action_commit",
+              2
+            ],
+            [
+              "speech_open",
+              6
+            ],
+            [
+              "action_effect",
+              6
+            ],
+            [
+              "speech_close",
+              13
+            ],
+            [
+              "action_recoverable",
+              18
+            ],
+            [
+              "action_settled",
+              19
+            ]
+          ]
+        },
+        "point": [
+          [
+            "action_commit",
+            2
+          ],
+          [
+            "action_effect",
+            7
+          ],
+          [
+            "action_recoverable",
+            18
+          ],
+          [
+            "action_settled",
+            19
+          ]
+        ]
+      },
+      "name": "three_motivated_strokes_in_authored_order",
+      "passed": true
+    },
+    {
+      "detail": {
+        "explain_authored_coverage": {
+          "v4-thought-one-explain": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ],
+          "v4-thought-two-explain": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ]
+        },
+        "hold_pose_failures": {
+          "v4-settle": [],
+          "v4-thought-one-hold": [],
+          "v4-thought-two-hold": []
+        },
+        "point_authored_coverage": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19
+        ]
+      },
+      "name": "thought_group_holds_and_recovery",
+      "passed": true
+    },
+    {
+      "detail": {
+        "color_failures": [],
+        "explain_sequence": [
+          "front_idle",
+          "front_idle",
+          "explain_front_in_20",
+          "explain_front_in_40",
+          "explain_front_in_60",
+          "explain_front_in_80",
+          "explain_front_contact_locked",
+          "explain_front_contact_locked",
+          "explain_front_contact_locked",
+          "explain_front_contact_locked",
+          "explain_front_contact_locked",
+          "explain_front_contact_locked",
+          "explain_front_contact_locked",
+          "explain_front_contact_locked",
+          "explain_front_in_80",
+          "explain_front_in_60",
+          "explain_front_in_40",
+          "explain_front_in_20",
+          "front_idle",
+          "front_idle"
+        ],
+        "point_sequence": [
+          "front_idle",
+          "front_idle",
+          "point_front_in_20",
+          "point_front_in_40",
+          "point_front_in_60",
+          "point_front_in_70",
+          "point_front_in_80",
+          "point_front_contact_locked",
+          "point_front_contact_locked",
+          "point_front_contact_locked",
+          "point_front_contact_locked",
+          "point_front_contact_locked",
+          "point_front_contact_locked",
+          "point_front_in_80",
+          "point_front_in_70",
+          "point_front_in_60",
+          "point_front_in_40",
+          "point_front_in_20",
+          "front_idle",
+          "front_idle"
+        ]
+      },
+      "name": "atomic_landmark_warp_graph_contract",
+      "passed": true
+    },
+    {
+      "detail": {
+        "contact_passed": true,
+        "maximum_planted_drift_cells": 0.0,
+        "stage_root_max_axis_drift": 0.0,
+        "world_root_max_axis_drift": 0.0
+      },
+      "name": "planted_root_during_all_gestures",
+      "passed": true
+    },
+    {
+      "detail": {
+        "clipped_frames": [],
+        "stage": [
+          240,
+          135
+        ]
+      },
+      "name": "gesture_silhouettes_within_canonical_stage",
+      "passed": true
+    }
+  ],
+  "metrics": {
+    "action_trace_count": 81,
+    "clipped_frame_count": 0,
+    "frame_count": 168,
+    "owned_frame_count": 162,
+    "stage_root_max_axis_drift": 0.0,
+    "stroke_count": 3,
+    "world_root_max_axis_drift": 0.0
+  },
+  "passed": true,
+  "review_boundary": "Machine checks do not replace normal-speed and quarter-speed review of gesture motivation, accents, silhouette, restraint, and acting rhythm.",
+  "schema": "character_director_v4_machine_acceptance_v1",
+  "schema_version": 1
+}
