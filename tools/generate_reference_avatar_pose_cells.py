@@ -19,6 +19,7 @@ from wizard_avatar.pose_compositor import (
     author_cast_staff_graph,
     composite_anchor_transition,
     composite_landmark_warp_transition,
+    composite_localized_landmark_transition,
 )
 
 
@@ -374,12 +375,41 @@ def derive_landmark_warp_payload(
         (tuple(from_anchors[name]), tuple(to_anchors[name]))
         for name in requested_names
     )
-    canvas = composite_landmark_warp_transition(
-        payload_canvas(from_payload),
-        to_canvas,
-        control_pairs,
-        progress,
-    )
+    localized_region = warp.get("localized_region")
+    if localized_region is None:
+        canvas = composite_landmark_warp_transition(
+            payload_canvas(from_payload),
+            to_canvas,
+            control_pairs,
+            progress,
+        )
+    else:
+        if not isinstance(localized_region, dict):
+            raise ValueError(f"{pose['id']}.localized_region must be an object")
+        anchor_name = str(localized_region.get("anchor_name", ""))
+        if anchor_name not in from_anchors or anchor_name not in to_anchors:
+            raise ValueError(f"{pose['id']} localized anchor {anchor_name!r} is missing")
+        pivot_offset = point_from(
+            localized_region.get("pivot_offset_from_root"),
+            field_name=f"{pose['id']}.localized_region.pivot_offset_from_root",
+        )
+        radius = float(localized_region.get("radius", 0.0))
+        source_pivot = (
+            from_anchors["root"][0] + pivot_offset[0],
+            from_anchors["root"][1] + pivot_offset[1],
+        )
+        target_pivot = (
+            to_anchors["root"][0] + pivot_offset[0],
+            to_anchors["root"][1] + pivot_offset[1],
+        )
+        canvas = composite_localized_landmark_transition(
+            payload_canvas(from_payload),
+            to_canvas,
+            (tuple(from_anchors[anchor_name]), source_pivot),
+            (tuple(to_anchors[anchor_name]), target_pivot),
+            progress,
+            radius=radius,
+        )
     anchors = {
         name: [
             from_anchors[name][axis]
@@ -395,6 +425,7 @@ def derive_landmark_warp_payload(
             f"derived_landmark_warp:{from_pose_id}+{to_pose_id}@"
             f"{progress_milli}/1000"
             + (f":lock={lock_anchor}" if lock_anchor is not None else "")
+            + (":localized" if localized_region is not None else "")
         ),
         "source_size": [int(canonical["cols"]), int(canonical["rows"])],
         "source_crop": [0, 0, int(canonical["cols"]), int(canonical["rows"])],

@@ -1829,7 +1829,12 @@
       "derived_landmark_warp": {
         "from_pose_id": "front_idle",
         "to_pose_id": "explaining",
-        "progress_milli": 200
+        "progress_milli": 200,
+        "localized_region": {
+          "anchor_name": "left_hand",
+          "pivot_offset_from_root": [-8, -48],
+          "radius": 9
+        }
       },
       "facing": "south",
       "locomotion": "idle",
@@ -1852,7 +1857,12 @@
       "derived_landmark_warp": {
         "from_pose_id": "front_idle",
         "to_pose_id": "explaining",
-        "progress_milli": 400
+        "progress_milli": 400,
+        "localized_region": {
+          "anchor_name": "left_hand",
+          "pivot_offset_from_root": [-8, -48],
+          "radius": 9
+        }
       },
       "facing": "south",
       "locomotion": "idle",
@@ -1875,7 +1885,12 @@
       "derived_landmark_warp": {
         "from_pose_id": "front_idle",
         "to_pose_id": "explaining",
-        "progress_milli": 600
+        "progress_milli": 600,
+        "localized_region": {
+          "anchor_name": "left_hand",
+          "pivot_offset_from_root": [-8, -48],
+          "radius": 9
+        }
       },
       "facing": "south",
       "locomotion": "idle",
@@ -1898,7 +1913,12 @@
       "derived_landmark_warp": {
         "from_pose_id": "front_idle",
         "to_pose_id": "explaining",
-        "progress_milli": 800
+        "progress_milli": 800,
+        "localized_region": {
+          "anchor_name": "left_hand",
+          "pivot_offset_from_root": [-8, -48],
+          "radius": 9
+        }
       },
       "facing": "south",
       "locomotion": "idle",
@@ -3580,7 +3600,12 @@
         "from_pose_id": "front_idle",
         "to_pose_id": "front_point_direct_staff_held",
         "progress_milli": 200,
-        "lock_anchor": "left_foot"
+        "lock_anchor": "left_foot",
+        "localized_region": {
+          "anchor_name": "left_hand",
+          "pivot_offset_from_root": [-8, -48],
+          "radius": 9
+        }
       },
       "facing": "south",
       "locomotion": "idle",
@@ -3603,7 +3628,12 @@
         "from_pose_id": "front_idle",
         "to_pose_id": "front_point_direct_staff_held",
         "progress_milli": 400,
-        "lock_anchor": "left_foot"
+        "lock_anchor": "left_foot",
+        "localized_region": {
+          "anchor_name": "left_hand",
+          "pivot_offset_from_root": [-8, -48],
+          "radius": 9
+        }
       },
       "facing": "south",
       "locomotion": "idle",
@@ -3626,7 +3656,12 @@
         "from_pose_id": "front_idle",
         "to_pose_id": "front_point_direct_staff_held",
         "progress_milli": 600,
-        "lock_anchor": "left_foot"
+        "lock_anchor": "left_foot",
+        "localized_region": {
+          "anchor_name": "left_hand",
+          "pivot_offset_from_root": [-8, -48],
+          "radius": 9
+        }
       },
       "facing": "south",
       "locomotion": "idle",
@@ -3649,7 +3684,12 @@
         "from_pose_id": "front_idle",
         "to_pose_id": "front_point_direct_staff_held",
         "progress_milli": 800,
-        "lock_anchor": "left_foot"
+        "lock_anchor": "left_foot",
+        "localized_region": {
+          "anchor_name": "left_hand",
+          "pivot_offset_from_root": [-8, -48],
+          "radius": 9
+        }
       },
       "facing": "south",
       "locomotion": "idle",
@@ -3672,7 +3712,12 @@
         "from_pose_id": "front_idle",
         "to_pose_id": "front_point_direct_staff_held",
         "progress_milli": 1000,
-        "lock_anchor": "left_foot"
+        "lock_anchor": "left_foot",
+        "localized_region": {
+          "anchor_name": "left_hand",
+          "pivot_offset_from_root": [-8, -48],
+          "radius": 9
+        }
       },
       "facing": "south",
       "locomotion": "idle",

@@ -6,6 +6,7 @@ from wizard_avatar.models import Cell
 from wizard_avatar.pose_compositor import (
     composite_anchor_transition,
     composite_landmark_warp_transition,
+    composite_localized_landmark_transition,
 )
 
 
@@ -77,6 +78,53 @@ class CrispPoseTransitionTests(unittest.TestCase):
         target = CellCanvas(3, 3)
         with self.assertRaisesRegex(ValueError, "at least one control"):
             composite_landmark_warp_transition(source, target, (), 0.5)
+
+    def test_localized_warp_keeps_unrelated_body_cells_stable(self):
+        source = CellCanvas(12, 10)
+        target = CellCanvas(12, 10)
+        body = Cell("#", (20, 80, 180), "body")
+        skin = Cell("#", (220, 150, 90), "hand")
+        for y in range(3, 9):
+            source.cells[y][7] = body
+            target.cells[y][7] = body
+        source.cells[6][4] = skin
+        source.cells[6][5] = body
+        target.cells[2][2] = skin
+        target.cells[3][3] = body
+
+        middle = composite_localized_landmark_transition(
+            source,
+            target,
+            ((4, 6), (7, 5)),
+            ((2, 2), (7, 5)),
+            0.6,
+            radius=2.0,
+        )
+
+        self.assertEqual(middle.get(7, 8), body)
+        self.assertTrue(
+            any(
+                middle.get(x, y) == skin
+                for y in range(2, 7)
+                for x in range(1, 6)
+            )
+        )
+
+    def test_localized_warp_is_deterministic_and_source_exact_at_zero(self):
+        source = CellCanvas(8, 8)
+        target = CellCanvas(8, 8)
+        source.set(2, 5, "#", (210, 140, 80), "hand")
+        target.set(1, 2, "#", (210, 140, 80), "hand")
+        args = (source, target, ((2, 5), (5, 4)), ((1, 2), (5, 4)), 0.4)
+
+        first = composite_localized_landmark_transition(*args, radius=2.5)
+        second = composite_localized_landmark_transition(*args, radius=2.5)
+        exact = composite_localized_landmark_transition(
+            source, target, ((2, 5), (5, 4)), ((1, 2), (5, 4)), 0.0, radius=2.5
+        )
+
+        self.assertEqual(cell_signature(first), cell_signature(second))
+        self.assertEqual(cell_signature(exact), cell_signature(source))
 
 
 if __name__ == "__main__":
