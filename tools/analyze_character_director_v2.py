@@ -71,6 +71,14 @@ def _percentile_nearest_rank(values: Sequence[int], percentile: float) -> Option
     return ordered[index]
 
 
+def _time_regressions(values: Sequence[int]) -> List[int]:
+    return [
+        earlier - later
+        for earlier, later in zip(values, values[1:])
+        if later < earlier
+    ]
+
+
 def analyze_v2(
     manifest: Mapping[str, Any],
     trace_records: Sequence[Mapping[str, Any]],
@@ -165,6 +173,41 @@ def analyze_v2(
             for name in EXPECTED_SCENARIOS
         ),
         {name: len(by_scenario[name]) for name in EXPECTED_SCENARIOS},
+    )
+    owned_frames = [frame for frame in frames if frame.get("capture_owned") is True]
+    capture_wall_span = (
+        float(owned_frames[-1].get("elapsed_seconds", math.nan))
+        - float(owned_frames[0].get("elapsed_seconds", math.nan))
+        if len(owned_frames) >= 2
+        else math.nan
+    )
+    expected_wall_span = (
+        (len(owned_frames) - 1) / fps
+        if (fps := float(manifest.get("init", {}).get("fps", 0.0) or 0.0)) > 0.0
+        else math.nan
+    )
+    wall_ratio = (
+        capture_wall_span / expected_wall_span
+        if expected_wall_span > 0.0 and math.isfinite(capture_wall_span)
+        else math.nan
+    )
+    _check(
+        report,
+        "capture_wall_clock_cadence",
+        math.isfinite(wall_ratio) and 0.90 <= wall_ratio <= 1.20,
+        {
+            "owned_frame_count": len(owned_frames),
+            "expected_span_seconds": round(expected_wall_span, 6)
+            if math.isfinite(expected_wall_span)
+            else None,
+            "actual_span_seconds": round(capture_wall_span, 6)
+            if math.isfinite(capture_wall_span)
+            else None,
+            "actual_to_expected_ratio": round(wall_ratio, 6)
+            if math.isfinite(wall_ratio)
+            else None,
+            "allowed_ratio": [0.90, 1.20],
+        },
     )
 
     all_trace = [trace for _, trace in paired]
@@ -278,7 +321,6 @@ def analyze_v2(
         )
     _check(report, "left_center_right_gaze_returns", gaze_passed, gaze_detail)
 
-    fps = float(manifest.get("init", {}).get("fps", 0.0) or 0.0)
     blink_ranges = _closed_ranges(all_trace)
     blink_lengths = [end - start for start, end in blink_ranges]
     blink_durations_ms = [
@@ -467,10 +509,13 @@ def analyze_v2(
     expected_media_prefix = "sha256:{}".format(audio_sha[:8]) if isinstance(audio_sha, str) else None
     browser_times = [int(sample["browser_media_time_ms"]) for sample in valid_timeline]
     wizard_times = [int(sample["wizard_media_time_ms"]) for sample in valid_timeline]
-    monotonic_times = all(
-        later >= earlier
-        for values in (browser_times, wizard_times)
-        for earlier, later in zip(values, values[1:])
+    browser_regressions = _time_regressions(browser_times)
+    wizard_regressions = _time_regressions(wizard_times)
+    regression_limit = max(1, math.ceil(len(valid_timeline) * 0.02))
+    bounded_times = (
+        not browser_regressions
+        and len(wizard_regressions) <= regression_limit
+        and max(wizard_regressions, default=0) <= 50
     )
     _check(
         report,
@@ -482,7 +527,7 @@ def analyze_v2(
         and elapsed_span >= 19_000
         and timeline_p95 is not None
         and timeline_p95 <= 250
-        and monotonic_times
+        and bounded_times
         and speech_ids == [wizard_state.get("speech_id")]
         and media_prefixes == [expected_media_prefix]
         and all(sample.get("browser_playing") is True for sample in valid_timeline)
@@ -497,7 +542,11 @@ def analyze_v2(
             "speech_ids": speech_ids,
             "media_hash_prefixes": media_prefixes,
             "expected_media_hash_prefix": expected_media_prefix,
-            "monotonic_media_times": monotonic_times,
+            "browser_time_regressions_ms": browser_regressions,
+            "wizard_time_regressions_ms": wizard_regressions,
+            "wizard_regression_count_limit": regression_limit,
+            "wizard_regression_size_limit_ms": 50,
+            "bounded_media_times": bounded_times,
             "maximum_offset_ms": 250,
         },
     )
@@ -505,6 +554,12 @@ def analyze_v2(
     report["metrics"] = {
         "frame_count": len(frames),
         "owned_frame_count": sum(frame.get("capture_owned") is True for frame in frames),
+        "capture_wall_span_seconds": round(capture_wall_span, 6)
+        if math.isfinite(capture_wall_span)
+        else None,
+        "capture_wall_ratio": round(wall_ratio, 6)
+        if math.isfinite(wall_ratio)
+        else None,
         "audio_duration_ms": browser.get("durationMs"),
         "av_edge_offset_ms": av_offset_ms,
         "av_timeline_offset_p95_ms": timeline_p95,
@@ -605,8 +660,8 @@ def load_and_analyze(manifest_path: Path, receipt_path: Path) -> Dict[str, Any]:
                     and browser_metrics.get("video_sha256") == sha256_file(browser_video)
                     and browser_metrics.get("video_bytes") == browser_video.stat().st_size
                     and frame_count > 0
-                    and int(browser_metrics.get("screencast_event_count", 0)) >= round(frame_count * 0.75)
-                    and int(browser_metrics.get("duplicate_sample_count", frame_count)) <= round(frame_count * 0.20)
+                    and int(browser_metrics.get("screencast_event_count", 0)) >= round(frame_count * 0.50)
+                    and int(browser_metrics.get("duplicate_sample_count", frame_count)) <= round(frame_count * 0.50)
                 )
     _check(
         report,

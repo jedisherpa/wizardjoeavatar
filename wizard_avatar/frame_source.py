@@ -258,6 +258,7 @@ class ProceduralWizardFrameSource:
         self._observed_presentation_marker_keys: deque[tuple[object, ...]] = deque()
         self._observed_presentation_marker_key_set: set[tuple[object, ...]] = set()
         self._last_marker_observation_tick = -1
+        self._reference_body_hash_cache: dict[tuple[object, ...], str] = {}
         self._initialize_authoritative_animation_state()
 
     def _initialize_authoritative_animation_state(self) -> None:
@@ -588,6 +589,24 @@ class ProceduralWizardFrameSource:
                 pose_id,
                 permission_world,
             )
+            body_pixel_sha256 = self._reference_body_pixel_sha256(
+                local,
+                pose_id=pose_id,
+                rendered_head_pose_id=rendered_head_pose_id,
+                head_offset_x=(
+                    head_eye.head_offset_x
+                    if rendered_head_pose_id != pose_id
+                    or head_eye.head_offset_x != 0
+                    or head_offset_y != 0
+                    else 0
+                ),
+                head_offset_y=head_offset_y,
+                staff_visible=self._permission_surface_visible(
+                    permission_world,
+                    "prop",
+                    "staff",
+                ),
+            )
             face_evidence = self._apply_reference_face_channels(
                 local,
                 state,
@@ -599,6 +618,7 @@ class ProceduralWizardFrameSource:
                 or head_offset_y != 0
                 else 0,
                 head_offset_y,
+                body_pixel_sha256,
             )
             base_root_screen = self._reference_root_screen(sx, sy, state, render_scale)
             (
@@ -1097,6 +1117,7 @@ class ProceduralWizardFrameSource:
         mouth_anchor: Tuple[int, int],
         head_offset_x: int = 0,
         head_offset_y: int = 0,
+        body_pixel_sha256: str = "legacy_unspecified",
     ) -> ReferenceFaceEvidence:
         eye_layouts = []
         seen_apertures = set()
@@ -1134,9 +1155,12 @@ class ProceduralWizardFrameSource:
         # Rear views and occluded action poses still carry approximate anchors.
         # Existing cool/white eye pixels are the authority for face visibility.
         if not eye_layouts:
-            body_hash, mouth_hash, mouth_count = self._reference_pixel_evidence(canvas)
+            mouth_hash, mouth_count = self._reference_mouth_pixel_evidence(
+                canvas,
+                mouth_anchor,
+            )
             return ReferenceFaceEvidence(
-                body_pixel_sha256=body_hash,
+                body_pixel_sha256=body_pixel_sha256,
                 mouth_pixel_sha256=mouth_hash,
                 mouth_painted_cells=mouth_count,
             )
@@ -1216,34 +1240,67 @@ class ProceduralWizardFrameSource:
         mouth_shape = self._reference_mouth_shape(state, expression)
         if mouth_shape is not None:
             self._draw_reference_mouth(canvas, mouth_anchor, mouth_shape)
-        body_hash, mouth_hash, mouth_count = self._reference_pixel_evidence(canvas)
+        mouth_hash, mouth_count = self._reference_mouth_pixel_evidence(
+            canvas,
+            mouth_anchor,
+        )
         return ReferenceFaceEvidence(
             eye_apertures=tuple(aperture.span() for _, aperture in eye_layouts),
             eye_blue_cells=tuple(blue_cells),
             blink_painted_cells=blink_painted_cells,
-            body_pixel_sha256=body_hash,
+            body_pixel_sha256=body_pixel_sha256,
             mouth_pixel_sha256=mouth_hash,
             mouth_painted_cells=mouth_count,
         )
 
     @staticmethod
-    def _reference_pixel_evidence(canvas: CellCanvas) -> Tuple[str, str, int]:
-        """Hash visible body and mouth pixels as separate acting regions."""
+    def _reference_mouth_pixel_evidence(
+        canvas: CellCanvas,
+        mouth_anchor: Tuple[int, int],
+    ) -> Tuple[str, int]:
+        """Hash the fixed visible mouth region without a full-canvas Python scan."""
 
-        body = hashlib.sha256()
         mouth = hashlib.sha256()
         mouth_count = 0
-        for y, row in enumerate(canvas.cells):
-            for x, cell in enumerate(row):
-                if cell is None:
-                    continue
-                record = struct.pack(">HH", x, y) + cell.to_bytes()
-                if cell.layer_id.startswith("reference_mouth"):
-                    mouth.update(record)
+        anchor_x, anchor_y = mouth_anchor
+        for y in range(anchor_y - 3, anchor_y + 2):
+            for x in range(anchor_x - 5, anchor_x + 6):
+                cell = canvas.get(x, y)
+                mouth.update(struct.pack(">HH", x, y))
+                mouth.update(cell.to_bytes() if cell is not None else b"\x00\x00\x00\x00")
+                if cell is not None and (
+                    cell.layer_id.startswith("reference_mouth")
+                    or cell.layer_id == "reference_teeth"
+                ):
                     mouth_count += 1
-                if not cell.layer_id.startswith("reference_"):
-                    body.update(record)
-        return body.hexdigest(), mouth.hexdigest(), mouth_count
+        return mouth.hexdigest(), mouth_count
+
+    def _reference_body_pixel_sha256(
+        self,
+        canvas: CellCanvas,
+        *,
+        pose_id: str,
+        rendered_head_pose_id: str,
+        head_offset_x: int,
+        head_offset_y: int,
+        staff_visible: bool,
+    ) -> str:
+        """Hash one deterministic pre-face body graph per visual composition."""
+
+        key = (
+            pose_id,
+            rendered_head_pose_id,
+            int(head_offset_x),
+            int(head_offset_y),
+            bool(staff_visible),
+        )
+        digest = self._reference_body_hash_cache.get(key)
+        if digest is None:
+            digest = hashlib.sha256(canvas.to_frame_bytes()).hexdigest()
+            if len(self._reference_body_hash_cache) >= 256:
+                self._reference_body_hash_cache.clear()
+            self._reference_body_hash_cache[key] = digest
+        return digest
 
     @staticmethod
     def _is_reference_eye_pixel(cell: Optional[Cell]) -> bool:

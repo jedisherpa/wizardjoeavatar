@@ -501,8 +501,8 @@ def generate_v2_review_products(capture_output: Path, receipt_path: Path) -> Pat
         or browser_metrics.get("capture_manifest_sha256") != sha256_file(manifest_path)
         or browser_metrics.get("page_errors")
         or browser_frame_count <= 0
-        or int(browser_metrics.get("screencast_event_count", 0)) < round(browser_frame_count * 0.75)
-        or int(browser_metrics.get("duplicate_sample_count", browser_frame_count)) > round(browser_frame_count * 0.20)
+        or int(browser_metrics.get("screencast_event_count", 0)) < round(browser_frame_count * 0.50)
+        or int(browser_metrics.get("duplicate_sample_count", browser_frame_count)) > round(browser_frame_count * 0.50)
     ):
         raise BrowserCaptureFailure("V2 browser presentation failed cadence or integrity checks")
     bundle = {

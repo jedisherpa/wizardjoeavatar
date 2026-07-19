@@ -30,6 +30,7 @@ def evidence():
                     "frame_index": frame_index,
                     "scenario": scenario,
                     "capture_owned": True,
+                    "elapsed_seconds": global_offset / 24.0,
                 }
             )
             trace.append(
@@ -241,6 +242,26 @@ class CharacterDirectorV2AcceptanceTests(unittest.TestCase):
         failed = {check["name"] for check in report["checks"] if not check["passed"]}
         self.assertFalse(report["passed"])
         self.assertIn("browser_wizard_av_timeline_alignment", failed)
+
+    def test_tiny_wizard_clock_reconciliation_is_bounded(self):
+        manifest, trace, receipt = evidence()
+        samples = receipt["av_timeline"]["samples"]
+        samples[100]["wizard_media_time_ms"] = samples[99]["wizard_media_time_ms"] - 16
+        samples[100]["absolute_offset_ms"] = abs(
+            samples[100]["browser_media_time_ms"]
+            - samples[100]["wizard_media_time_ms"]
+        )
+        report = analyze(manifest, trace, receipt)
+        self.assertTrue(report["passed"])
+
+    def test_slow_wall_clock_capture_cannot_masquerade_as_twenty_seconds(self):
+        manifest, trace, receipt = evidence()
+        for frame in manifest["frames"]:
+            frame["elapsed_seconds"] *= 2.0
+        report = analyze(manifest, trace, receipt)
+        failed = {check["name"] for check in report["checks"] if not check["passed"]}
+        self.assertFalse(report["passed"])
+        self.assertIn("capture_wall_clock_cadence", failed)
 
 
 if __name__ == "__main__":
