@@ -5,9 +5,11 @@ from __future__ import annotations
 
 import argparse
 import asyncio
+import hashlib
 import json
 import os
 import subprocess
+import sys
 import tempfile
 import time
 from pathlib import Path
@@ -25,9 +27,10 @@ from record_character_director_browser import (
 
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_PROMPT = (
-    "Tell me a warm ninety-five-word story about a traveler who pauses at "
-    "sunset to listen to a friend. This is only a creative writing request; "
-    "no action or clarification is needed."
+    "Tell me a warm story of exactly one hundred eighty words about a traveler "
+    "who pauses at sunset to listen to a friend. Begin directly with the story, "
+    "keep the pace calm, and finish the story without asking a question. This is "
+    "only a creative writing request; no action or clarification is needed."
 )
 SCHEMA = "character_director_prism_governed_speech_v1"
 
@@ -226,6 +229,18 @@ async def run(args: argparse.Namespace) -> None:
                     connector_token,
                     args.timeout,
                 )
+                duration_ms = edge.get("browser", {}).get("durationMs")
+                minimum_duration_ms = round(args.minimum_audio_seconds * 1000)
+                if (
+                    not isinstance(duration_ms, int)
+                    or duration_ms < minimum_duration_ms
+                ):
+                    raise BrowserCaptureFailure(
+                        "governed audio is {} ms; at least {} ms is required".format(
+                            duration_ms,
+                            minimum_duration_ms,
+                        )
+                    )
                 receipt = {
                     "schema": SCHEMA,
                     "schema_version": 1,
@@ -233,7 +248,7 @@ async def run(args: argparse.Namespace) -> None:
                     "capture_edge": edge,
                     "prism_url": args.prism_url,
                     "wizard_url": args.wizard_url,
-                    "prompt_sha256": __import__("hashlib").sha256(
+                    "prompt_sha256": hashlib.sha256(
                         args.prompt.encode("utf-8")
                     ).hexdigest(),
                     "initial_browser_state": initial,
@@ -245,6 +260,51 @@ async def run(args: argparse.Namespace) -> None:
                     encoding="utf-8",
                 )
                 print("CAPTURE_EDGE {}".format(args.receipt), flush=True)
+                if args.capture_output is not None:
+                    capture_command = (
+                        sys.executable,
+                        str(ROOT / "tools" / "run_character_director_visual_review.py"),
+                        "--base-url",
+                        args.wizard_url,
+                        "--output-dir",
+                        str(args.capture_output),
+                        "--scenarios-file",
+                        str(args.scenarios_file),
+                        "--sample-every-frames",
+                        "12",
+                    )
+                    capture = await asyncio.to_thread(
+                        subprocess.run,
+                        capture_command,
+                        cwd=str(ROOT),
+                        stdout=subprocess.PIPE,
+                        stderr=subprocess.PIPE,
+                        check=False,
+                    )
+                    receipt["atomic_capture"] = {
+                        "command": list(capture_command[1:]),
+                        "exit_code": capture.returncode,
+                        "output_dir": str(args.capture_output),
+                        "stdout": capture.stdout.decode(
+                            "utf-8", errors="replace"
+                        ).strip(),
+                        "stderr": capture.stderr.decode(
+                            "utf-8", errors="replace"
+                        ).strip(),
+                    }
+                    receipt["completed_at_utc"] = utc_now()
+                    args.receipt.write_text(
+                        json.dumps(receipt, indent=2, sort_keys=True) + "\n",
+                        encoding="utf-8",
+                    )
+                    if capture.returncode:
+                        raise BrowserCaptureFailure(
+                            "atomic V2 capture failed: {}".format(
+                                receipt["atomic_capture"]["stderr"]
+                                or receipt["atomic_capture"]["stdout"]
+                            )
+                        )
+                    print("ATOMIC_CAPTURE {}".format(args.capture_output), flush=True)
                 hold_until = time.monotonic() + args.hold_seconds
                 while time.monotonic() < hold_until:
                     state = await browser_speech_state(cdp)
@@ -270,10 +330,29 @@ def parse_args(argv: Optional[Sequence[str]] = None) -> argparse.Namespace:
     parser.add_argument("--receipt", type=Path, required=True)
     parser.add_argument("--timeout", type=float, default=120.0)
     parser.add_argument("--hold-seconds", type=float, default=40.0)
+    parser.add_argument("--minimum-audio-seconds", type=float, default=24.0)
+    parser.add_argument("--capture-output", type=Path)
+    parser.add_argument(
+        "--scenarios-file",
+        type=Path,
+        default=ROOT
+        / "tools"
+        / "character_director_scenarios"
+        / "v2-governed-speech.json",
+    )
     args = parser.parse_args(argv)
-    if args.timeout <= 0 or args.hold_seconds <= 0:
+    if (
+        args.timeout <= 0
+        or args.hold_seconds <= 0
+        or args.minimum_audio_seconds <= 0
+    ):
         parser.error("timeouts must be positive")
     args.receipt = args.receipt.resolve()
+    args.scenarios_file = args.scenarios_file.resolve()
+    if not args.scenarios_file.is_file():
+        parser.error("--scenarios-file does not exist")
+    if args.capture_output is not None:
+        args.capture_output = args.capture_output.resolve()
     return args
 
 

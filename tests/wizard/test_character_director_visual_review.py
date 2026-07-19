@@ -301,6 +301,61 @@ class ScenarioSchemaTests(unittest.TestCase):
             self.assertTrue(contact.is_file())
             self.assertGreater(contact.stat().st_size, 0)
 
+    def test_transition_sampling_ignores_unowned_preroll(self):
+        digest = "a" * 64
+        records = CaptureRecords(
+            frames=[
+                {
+                    "frame_index": 9,
+                    "capture_owned": False,
+                    "scenario": None,
+                    "presentation_frame_index": None,
+                    "sha256": digest,
+                },
+                {
+                    "frame_index": 10,
+                    "capture_owned": True,
+                    "scenario": "speech",
+                    "presentation_frame_index": 0,
+                    "sha256": digest,
+                },
+            ],
+            animation_truth_trace=[
+                {
+                    "frame_index": 9,
+                    "presentation_channels": {
+                        "rendered_head_pose_id": "front_idle",
+                        "head_eye_phase": "steady",
+                        "blink_closed": False,
+                        "head_offset_x": 0,
+                        "head_offset_y": 0,
+                    },
+                },
+                {
+                    "frame_index": 10,
+                    "presentation_channels": {
+                        "rendered_head_pose_id": "front_idle",
+                        "head_eye_phase": "steady",
+                        "blink_closed": False,
+                        "head_offset_x": 0,
+                        "head_offset_y": 0,
+                    },
+                },
+            ],
+            decoded_raster_frames={
+                9: DecodedRasterFrameV1(1, 1, b" \xff\xff\xff"),
+                10: DecodedRasterFrameV1(1, 1, b"#\x10\x20\x30"),
+            },
+        )
+        init = parse_init("INIT:24:5:1:1:0:0:0.000")
+
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            (root / "samples").mkdir()
+            add_transition_samples(records, init, root, "run", 2)
+
+        self.assertEqual(records.samples, [])
+
 
 class StrictCaptureTests(unittest.IsolatedAsyncioTestCase):
     async def test_seals_runtime_identity_before_creating_evidence_output(self):

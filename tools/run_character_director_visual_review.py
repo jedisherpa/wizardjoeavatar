@@ -1213,6 +1213,8 @@ def add_transition_samples(
     sampled_indexes = {item["frame_index"] for item in records.samples}
     previous_signature = None
     for trace in records.animation_truth_trace:
+        frame_index = trace["frame_index"]
+        frame = frame_by_index.get(frame_index)
         channels = trace.get("presentation_channels") or {}
         signature = (
             channels.get("rendered_head_pose_id"),
@@ -1221,12 +1223,13 @@ def add_transition_samples(
             channels.get("head_offset_x"),
             channels.get("head_offset_y"),
         )
+        if frame is None or not frame.get("capture_owned"):
+            previous_signature = signature
+            continue
         if previous_signature is None or signature != previous_signature:
-            frame_index = trace["frame_index"]
             if frame_index not in sampled_indexes:
                 raster = records.decoded_raster_frames.get(frame_index)
-                frame = frame_by_index.get(frame_index)
-                if raster is None or frame is None or not frame.get("capture_owned"):
+                if raster is None:
                     raise EvidenceFailure(
                         "transition sample {} has no owned decoded frame".format(
                             frame_index
