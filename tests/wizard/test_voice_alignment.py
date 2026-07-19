@@ -6,6 +6,7 @@ from dataclasses import FrozenInstanceError
 
 from wizard_avatar.models import MOUTH_SHAPES
 from wizard_avatar.voice_alignment import (
+    VOICE_PRESENTATION_MAX_DURATION_MS,
     VoiceAlignmentError,
     VoiceAlignmentV1,
     compile_voice_presentation,
@@ -226,6 +227,60 @@ class VoiceAlignmentTests(unittest.TestCase):
         self.assertNotEqual(track.evaluate(440), ("closed", False))
         self.assertTrue(track.evaluate(500)[1])
         self.assertEqual(track.evaluate(alignment.duration_ms), ("closed", False))
+
+    def test_presentation_track_preserves_long_silence(self):
+        value = alignment_mapping(with_phonemes=False)
+        value["word_spans"][1]["start_ms"] = 750
+        alignment = VoiceAlignmentV1.from_mapping(value)
+        track = compile_voice_presentation(alignment)
+
+        self.assertEqual(track.evaluate(550), ("closed", False))
+        self.assertEqual(track.evaluate(650), ("closed", False))
+
+    def test_presentation_track_precloses_before_terminal_boundary(self):
+        value = alignment_mapping()
+        value["word_spans"][-1]["end_ms"] = value["duration_ms"]
+        value["phoneme_spans"][-1]["end_ms"] = value["duration_ms"]
+        alignment = VoiceAlignmentV1.from_mapping(value)
+        track = compile_voice_presentation(alignment)
+        aperture = {
+            "closed": 0,
+            "open_small": 1,
+            "rounded": 1,
+            "smile": 1,
+            "frown": 1,
+            "open_medium": 2,
+            "open_wide": 3,
+        }
+
+        before_terminal = track.evaluate(alignment.duration_ms - 1)
+        self.assertTrue(before_terminal[1])
+        self.assertLessEqual(aperture[before_terminal[0]], 1)
+        self.assertEqual(track.evaluate(alignment.duration_ms), ("closed", False))
+
+    def test_presentation_track_quantizes_arbitrary_onset_without_one_frame_pop(self):
+        value = alignment_mapping(with_phonemes=False)
+        value["word_spans"][0]["start_ms"] = 140
+        alignment = VoiceAlignmentV1.from_mapping(value)
+        track = compile_voice_presentation(alignment)
+
+        self.assertEqual(track.evaluate(150), ("closed", False))
+        runs = []
+        for shape in track.mouth_shapes:
+            if runs and runs[-1][0] == shape:
+                runs[-1][1] += 1
+            else:
+                runs.append([shape, 1])
+        self.assertTrue(all(length >= 3 for _, length in runs[1:-1]))
+
+    def test_presentation_compile_is_bounded_and_rejects_oversized_chunks(self):
+        value = alignment_mapping(with_phonemes=False)
+        value["duration_ms"] = VOICE_PRESENTATION_MAX_DURATION_MS + 1
+        alignment = VoiceAlignmentV1.from_mapping(value)
+
+        with self.assertRaises(VoiceAlignmentError) as caught:
+            compile_voice_presentation(alignment)
+        self.assertEqual(caught.exception.code, "presentation_duration_unsupported")
 
     def test_cold_seek_and_linear_evaluation_match_exactly(self):
         value = alignment_mapping(with_phonemes=False)

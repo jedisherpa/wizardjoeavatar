@@ -19,6 +19,7 @@ from .models import MOUTH_SHAPES
 
 VOICE_ALIGNMENT_SCHEMA_VERSION = 1
 VOICE_ALIGNMENT_MAX_BODY_BYTES = 256 * 1024
+VOICE_PRESENTATION_MAX_DURATION_MS = 60 * 60 * 1000
 
 _ID_PATTERN = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._:-]{0,127}$")
 _SHA256_PATTERN = re.compile(r"^sha256:[0-9a-f]{64}$")
@@ -560,6 +561,77 @@ def _bridge_aperture(previous: str, target: str) -> str:
     return _APERTURE_BRIDGE[previous_rank + direction]
 
 
+def _active_beats_until_silence(
+    beat_targets: Sequence[Tuple[str, bool]],
+) -> Tuple[int, ...]:
+    remaining = 0
+    result = [0] * len(beat_targets)
+    for index in range(len(beat_targets) - 1, -1, -1):
+        if beat_targets[index][1]:
+            remaining += 1
+        else:
+            remaining = 0
+        result[index] = remaining
+    return tuple(result)
+
+
+def _sample_raw_presentation(
+    alignment: VoiceAlignmentV1,
+    frame_count: int,
+    fps: int,
+) -> Tuple[Tuple[str, ...], Tuple[bool, ...]]:
+    """Sample a monotonic alignment in O(frames + spans) time."""
+
+    shapes = []
+    speaking = []
+    if alignment.phoneme_spans:
+        spans = alignment.phoneme_spans
+        span_index = 0
+        for frame_index in range(frame_count):
+            sample_ms = min(
+                alignment.duration_ms - 1,
+                (frame_index * 1000 + 500) // fps,
+            )
+            while span_index < len(spans) and spans[span_index].end_ms <= sample_ms:
+                span_index += 1
+            active = (
+                spans[span_index]
+                if span_index < len(spans)
+                and spans[span_index].start_ms <= sample_ms < spans[span_index].end_ms
+                else None
+            )
+            if active is None or active.phoneme_class == "rest":
+                shapes.append("closed")
+                speaking.append(False)
+            else:
+                shapes.append(_PHONEME_MOUTHS[active.phoneme_class])
+                speaking.append(True)
+        return tuple(shapes), tuple(speaking)
+
+    spans = alignment.word_spans or alignment.character_spans
+    span_index = 0
+    fallback_seed = int(alignment.alignment_sha256[7:15], 16)
+    for frame_index in range(frame_count):
+        sample_ms = min(
+            alignment.duration_ms - 1,
+            (frame_index * 1000 + 500) // fps,
+        )
+        while span_index < len(spans) and spans[span_index].end_ms <= sample_ms:
+            span_index += 1
+        active = (
+            span_index < len(spans)
+            and spans[span_index].start_ms <= sample_ms < spans[span_index].end_ms
+        )
+        if not active:
+            shapes.append("closed")
+            speaking.append(False)
+            continue
+        phase = (sample_ms + fallback_seed) // _FALLBACK_STEP_MS
+        shapes.append(_FALLBACK_MOUTHS[phase % len(_FALLBACK_MOUTHS)])
+        speaking.append(True)
+    return tuple(shapes), tuple(speaking)
+
+
 def compile_voice_presentation(
     alignment: VoiceAlignmentV1,
     fps: int = _PRESENTATION_FPS,
@@ -570,17 +642,36 @@ def compile_voice_presentation(
         raise TypeError("alignment must be a VoiceAlignmentV1")
     if type(fps) is not int or fps <= 0:
         raise ValueError("fps must be a positive integer")
-    frame_count = max(1, (alignment.duration_ms * fps + 999) // 1000)
-    raw_shapes = []
-    raw_speaking = []
-    for frame_index in range(frame_count):
-        sample_ms = min(
-            alignment.duration_ms - 1,
-            (frame_index * 1000 + 500) // fps,
+    if alignment.duration_ms > VOICE_PRESENTATION_MAX_DURATION_MS:
+        raise _error(
+            "presentation_duration_unsupported",
+            "$.duration_ms",
+            "presentation duration exceeds the one-hour chunk boundary",
         )
-        evaluation = alignment.evaluate(sample_ms)
-        raw_shapes.append(evaluation.mouth_shape)
-        raw_speaking.append(evaluation.speaking)
+    frame_count = max(1, (alignment.duration_ms * fps + 999) // 1000)
+    sampled_shapes, sampled_speaking = _sample_raw_presentation(
+        alignment,
+        frame_count,
+        fps,
+    )
+    raw_shapes = list(sampled_shapes)
+    raw_speaking = list(sampled_speaking)
+
+    first_raw_speaking = next(
+        (index for index, active in enumerate(raw_speaking) if active),
+        frame_count,
+    )
+    presentation_start = min(
+        frame_count,
+        (
+            (first_raw_speaking + _PRESENTATION_BEAT_FRAMES - 1)
+            // _PRESENTATION_BEAT_FRAMES
+        )
+        * _PRESENTATION_BEAT_FRAMES,
+    )
+    for frame_index in range(presentation_start):
+        raw_shapes[frame_index] = "closed"
+        raw_speaking[frame_index] = False
 
     shapes, speaking = _coarticulate_short_gaps(raw_shapes, raw_speaking)
     beat_targets = []
@@ -589,29 +680,25 @@ def compile_voice_presentation(
         beat_targets.append(
             _representative_beat_shape(shapes[start:end], speaking[start:end])
         )
+    beats_until_silence = _active_beats_until_silence(beat_targets)
 
     presented_shapes = []
     presented_speaking = []
     previous = "closed"
     for beat_index, (target, active) in enumerate(beat_targets):
         desired = target if active else "closed"
+        if active:
+            maximum_rank = min(3, beats_until_silence[beat_index])
+            if _MOUTH_APERTURE[desired] > maximum_rank:
+                desired = _APERTURE_BRIDGE[maximum_rank]
         presented = _bridge_aperture(previous, desired)
-        active_presentation = active or presented != "closed"
         width = min(
             _PRESENTATION_BEAT_FRAMES,
             frame_count - beat_index * _PRESENTATION_BEAT_FRAMES,
         )
         presented_shapes.extend((presented,) * width)
-        presented_speaking.extend((active_presentation,) * width)
+        presented_speaking.extend((active,) * width)
         previous = presented
-
-    first_raw_speaking = next(
-        (index for index, active in enumerate(raw_speaking) if active),
-        frame_count,
-    )
-    for frame_index in range(first_raw_speaking):
-        presented_shapes[frame_index] = "closed"
-        presented_speaking[frame_index] = False
 
     return VoicePresentationTrackV1(
         duration_ms=alignment.duration_ms,
@@ -674,6 +761,7 @@ def evaluate_voice_alignment(
 
 __all__ = [
     "VOICE_ALIGNMENT_SCHEMA_VERSION",
+    "VOICE_PRESENTATION_MAX_DURATION_MS",
     "PhonemeTimingSpanV1",
     "TextTimingSpanV1",
     "VoiceAlignmentDiagnosticsV1",

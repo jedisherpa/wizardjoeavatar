@@ -42,6 +42,8 @@ EXPECTED_FRAME_COUNTS = {
     "speech-return-center-two": 156,
 }
 OPEN_MOUTHS = {"open_small", "open_medium", "open_wide", "rounded"}
+MINIMUM_MOUTH_SWITCHES = 20
+MAXIMUM_MOUTH_SWITCHES_PER_SECOND = 8.0
 MOUTH_APERTURE = {
     "closed": 0,
     "open_small": 1,
@@ -98,6 +100,36 @@ def _mouth_runs(channels: Sequence[Mapping[str, Any]]) -> List[Tuple[str, int]]:
         else:
             runs.append((shape, 1))
     return runs
+
+
+def _owned_channel_segments(
+    paired: Sequence[Tuple[Mapping[str, Any], Mapping[str, Any]]],
+) -> List[List[Mapping[str, Any]]]:
+    segments: List[List[Mapping[str, Any]]] = []
+    current: List[Mapping[str, Any]] = []
+    previous_index: Optional[int] = None
+    for frame, trace in paired:
+        frame_index = frame.get("frame_index")
+        owned = frame.get("capture_owned") is True
+        contiguous = (
+            type(frame_index) is int
+            and previous_index is not None
+            and frame_index == previous_index + 1
+        )
+        if not owned:
+            if current:
+                segments.append(current)
+                current = []
+            previous_index = None
+            continue
+        if current and not contiguous:
+            segments.append(current)
+            current = []
+        current.append(trace["presentation_channels"])
+        previous_index = frame_index if type(frame_index) is int else None
+    if current:
+        segments.append(current)
+    return segments
 
 
 def analyze_v2(
@@ -232,22 +264,22 @@ def analyze_v2(
     )
 
     all_trace = [trace for _, trace in paired]
-    owned_trace = [
-        trace for frame, trace in paired if frame.get("capture_owned") is True
-    ]
     channels = [trace["presentation_channels"] for trace in all_trace]
-    owned_channels = [trace["presentation_channels"] for trace in owned_trace]
-    authorities = sorted({item.get("speech_mouth_authority") for item in channels})
-    actions = sorted({item.get("action") for item in channels})
-    locomotion = sorted({item.get("locomotion") for item in channels})
+    owned_channel_segments = _owned_channel_segments(paired)
+    owned_channels = [
+        channel for segment in owned_channel_segments for channel in segment
+    ]
+    authorities = sorted({item.get("speech_mouth_authority") for item in owned_channels})
+    actions = sorted({item.get("action") for item in owned_channels})
+    locomotion = sorted({item.get("locomotion") for item in owned_channels})
     mouth_counts: Dict[str, int] = {}
-    for item in channels:
+    for item in owned_channels:
         shape = str(item.get("rendered_mouth_shape"))
         mouth_counts[shape] = mouth_counts.get(shape, 0) + 1
     _check(
         report,
         "governed_aligned_speech_authority",
-        bool(channels)
+        bool(owned_channels)
         and authorities == ["media_alignment"]
         and set(actions).issubset({"speaking", "explaining"})
         and locomotion == ["idle"],
@@ -266,7 +298,7 @@ def analyze_v2(
     )
     mouth_pixel_hashes: Dict[str, set] = {}
     mouth_pixel_counts: Dict[str, List[int]] = {}
-    for item in channels:
+    for item in owned_channels:
         shape = str(item.get("rendered_mouth_shape"))
         mouth_pixel_hashes.setdefault(shape, set()).add(item.get("mouth_pixel_sha256"))
         mouth_pixel_counts.setdefault(shape, []).append(int(item.get("mouth_painted_cells", 0)))
@@ -285,7 +317,7 @@ def analyze_v2(
             and min(mouth_pixel_counts[shape]) > 0
             for shape, hashes in visible_mouth_hashes.items()
         )
-        and len({next(iter(value)) for value in mouth_pixel_hashes.values()}) >= 5,
+        and len({hashes[0] for hashes in visible_mouth_hashes.values()}) >= 5,
         {
             "pixel_hashes_by_shape": visible_mouth_hashes,
             "painted_cell_ranges": {
@@ -296,8 +328,11 @@ def analyze_v2(
         },
     )
 
-    mouth_runs = _mouth_runs(owned_channels)
-    mouth_switch_count = max(0, len(mouth_runs) - 1)
+    mouth_run_segments = [
+        _mouth_runs(segment) for segment in owned_channel_segments if segment
+    ]
+    mouth_runs = [run for segment in mouth_run_segments for run in segment]
+    mouth_switch_count = sum(max(0, len(segment) - 1) for segment in mouth_run_segments)
     mouth_duration_seconds = len(owned_channels) / fps if fps else 0.0
     mouth_switch_rate = (
         mouth_switch_count / mouth_duration_seconds
@@ -305,51 +340,56 @@ def analyze_v2(
         else math.inf
     )
     short_internal_runs = [
-        {"run_index": index, "shape": shape, "frames": length}
-        for index, (shape, length) in enumerate(mouth_runs[1:-1], start=1)
+        {
+            "segment_index": segment_index,
+            "run_index": run_index,
+            "shape": shape,
+            "frames": length,
+        }
+        for segment_index, segment in enumerate(mouth_run_segments)
+        for run_index, (shape, length) in enumerate(segment[1:-1], start=1)
         if length < 3
     ]
     aperture_jumps = []
-    for index, ((left, _), (right, _)) in enumerate(
-        zip(mouth_runs, mouth_runs[1:])
-    ):
-        left_rank = MOUTH_APERTURE.get(left)
-        right_rank = MOUTH_APERTURE.get(right)
-        if left_rank is None or right_rank is None:
-            aperture_jumps.append(
-                {
-                    "transition_index": index,
-                    "from": left,
-                    "to": right,
-                    "aperture_delta": None,
-                }
+    for segment_index, segment in enumerate(mouth_run_segments):
+        for transition_index, ((left, _), (right, _)) in enumerate(
+            zip(segment, segment[1:])
+        ):
+            left_rank = MOUTH_APERTURE.get(left)
+            right_rank = MOUTH_APERTURE.get(right)
+            delta = (
+                None
+                if left_rank is None or right_rank is None
+                else abs(left_rank - right_rank)
             )
-            continue
-        delta = abs(left_rank - right_rank)
-        if delta > 1:
-            aperture_jumps.append(
-                {
-                    "transition_index": index,
-                    "from": left,
-                    "to": right,
-                    "aperture_delta": delta,
-                }
-            )
+            if delta is None or delta > 1:
+                aperture_jumps.append(
+                    {
+                        "segment_index": segment_index,
+                        "transition_index": transition_index,
+                        "from": left,
+                        "to": right,
+                        "aperture_delta": delta,
+                    }
+                )
     run_length_counts = Counter(length for _, length in mouth_runs)
     _check(
         report,
         "readable_mouth_presentation_cadence",
         bool(mouth_runs)
-        and mouth_switch_rate <= 8.0
+        and mouth_switch_count >= MINIMUM_MOUTH_SWITCHES
+        and mouth_switch_rate <= MAXIMUM_MOUTH_SWITCHES_PER_SECOND
         and not short_internal_runs
         and not aperture_jumps,
         {
             "run_count": len(mouth_runs),
+            "segment_count": len(mouth_run_segments),
             "switch_count": mouth_switch_count,
             "switches_per_second": round(mouth_switch_rate, 3)
             if math.isfinite(mouth_switch_rate)
             else None,
-            "maximum_switches_per_second": 8.0,
+            "minimum_switch_count": MINIMUM_MOUTH_SWITCHES,
+            "maximum_switches_per_second": MAXIMUM_MOUTH_SWITCHES_PER_SECOND,
             "run_length_frame_counts": {
                 str(length): count
                 for length, count in sorted(run_length_counts.items())

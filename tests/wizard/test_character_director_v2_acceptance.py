@@ -1,7 +1,7 @@
 import copy
 import unittest
 
-from tools.analyze_character_director_v2 import analyze_v2
+from tools.analyze_character_director_v2 import _owned_channel_segments, analyze_v2
 
 
 SCENARIOS = (
@@ -186,6 +186,41 @@ class CharacterDirectorV2AcceptanceTests(unittest.TestCase):
         failed = {check["name"] for check in report["checks"] if not check["passed"]}
         self.assertFalse(report["passed"])
         self.assertIn("readable_mouth_presentation_cadence", failed)
+
+    def test_nonowned_frames_cannot_supply_owned_mouth_evidence(self):
+        manifest, trace, receipt = evidence()
+        invalid_manifest = copy.deepcopy(manifest)
+        invalid_trace = copy.deepcopy(trace)
+        for item in invalid_trace:
+            channels = item["presentation_channels"]
+            channels["rendered_mouth_shape"] = "closed"
+            channels["mouth_pixel_sha256"] = "0" * 64
+        next_index = invalid_manifest["frames"][-1]["frame_index"] + 1
+        for offset, mouth in enumerate(MOUTHS):
+            frame = copy.deepcopy(invalid_manifest["frames"][-1])
+            frame.update({"frame_index": next_index + offset, "capture_owned": False})
+            item = copy.deepcopy(invalid_trace[-1])
+            item["frame_index"] = next_index + offset
+            item["presentation_channels"]["rendered_mouth_shape"] = mouth
+            item["presentation_channels"]["mouth_pixel_sha256"] = "{:064x}".format(offset + 1)
+            invalid_manifest["frames"].append(frame)
+            invalid_trace.append(item)
+
+        report = analyze(invalid_manifest, invalid_trace, receipt)
+        failed = {check["name"] for check in report["checks"] if not check["passed"]}
+        self.assertIn("aligned_mouth_shape_coverage", failed)
+        self.assertIn("visible_mouth_pixel_animation", failed)
+        self.assertIn("readable_mouth_presentation_cadence", failed)
+
+    def test_owned_segments_do_not_stitch_across_capture_cuts(self):
+        paired = [
+            ({"frame_index": 1, "capture_owned": True}, {"presentation_channels": {"rendered_mouth_shape": "closed"}}),
+            ({"frame_index": 2, "capture_owned": True}, {"presentation_channels": {"rendered_mouth_shape": "closed"}}),
+            ({"frame_index": 3, "capture_owned": False}, {"presentation_channels": {"rendered_mouth_shape": "open_wide"}}),
+            ({"frame_index": 4, "capture_owned": True}, {"presentation_channels": {"rendered_mouth_shape": "closed"}}),
+        ]
+
+        self.assertEqual([len(segment) for segment in _owned_channel_segments(paired)], [2, 1])
 
     def test_wrong_authority_and_excessive_av_offset_fail(self):
         manifest, trace, receipt = evidence()

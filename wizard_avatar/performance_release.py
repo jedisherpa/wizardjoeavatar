@@ -26,6 +26,7 @@ from .performance_context import (
     PerformanceContextV1,
 )
 from .voice_alignment import (
+    VOICE_PRESENTATION_MAX_DURATION_MS,
     VoiceAlignmentEvaluationV1,
     VoiceAlignmentV1,
     VoicePresentationTrackV1,
@@ -361,6 +362,8 @@ class GovernedSpeechRuntime:
             raise _error("media_mismatch", "$.alignment")
         if snapshot.media.duration_ms is not None and alignment.duration_ms != snapshot.media.duration_ms:
             raise _error("duration_mismatch", "$.alignment.duration_ms")
+        if alignment.duration_ms > VOICE_PRESENTATION_MAX_DURATION_MS:
+            raise _error("presentation_duration_unsupported", "$.alignment.duration_ms")
         if approval.speech_media.kind == "media":
             expected_identity = alignment.media_id
         elif approval.speech_media.kind == "speech":
@@ -385,13 +388,14 @@ class GovernedSpeechRuntime:
             self.gate.authorize_many(approval, _REQUIRED_SINKS, current, now_wall_ms)
         except GovernedPerformanceError as exc:
             raise _error(exc.code, exc.path) from exc
+        presentation = compile_voice_presentation(alignment)
         remaining_ms = approval.expires_at_ms - now_wall_ms
         self._active = _ActiveGovernedSpeech(
             registration.approved_text,
             approval,
             context,
             alignment,
-            compile_voice_presentation(alignment),
+            presentation,
             now_monotonic_us + remaining_ms * 1000,
         )
         self._last_code = "release_active"
