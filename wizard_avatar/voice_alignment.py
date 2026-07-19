@@ -596,7 +596,7 @@ def _bridge_aperture(previous: str, target: str) -> str:
 
 
 def _presentation_hold_widths(frame_count: int) -> Tuple[int, ...]:
-    if frame_count <= 0:
+    if frame_count < 2:
         return ()
     if frame_count <= 5:
         return (frame_count,)

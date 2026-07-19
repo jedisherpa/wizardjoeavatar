@@ -289,6 +289,18 @@ class VoiceAlignmentTests(unittest.TestCase):
         self.assertEqual(track.speaking_frames, (False, True, True, False, False, False, False, False))
         self.assertTrue(all(track.mouth_shapes[index] != "closed" for index in (1, 2)))
 
+    def test_presentation_track_suppresses_one_frame_visual_pop(self):
+        value = alignment_mapping(with_phonemes=False)
+        value["duration_ms"] = 200
+        value["word_spans"] = [
+            {"start_ms": 41, "end_ms": 85, "start_char": 0, "end_char": len(APPROVED_TEXT)}
+        ]
+        alignment = VoiceAlignmentV1.from_mapping(value)
+        track = compile_voice_presentation(alignment)
+
+        self.assertFalse(any(track.speaking_frames))
+        self.assertEqual(set(track.mouth_shapes), {"closed"})
+
     def test_presentation_compile_is_bounded_and_rejects_oversized_chunks(self):
         value = alignment_mapping(with_phonemes=False)
         value["duration_ms"] = VOICE_PRESENTATION_MAX_DURATION_MS + 1

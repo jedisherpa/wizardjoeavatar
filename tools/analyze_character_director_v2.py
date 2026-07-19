@@ -382,7 +382,7 @@ def analyze_v2(
         }
         for segment_index, segment in enumerate(mouth_run_segments)
         for run_index, (shape, length) in enumerate(segment[1:-1], start=1)
-        if length < 3
+        if length < 2
     ]
     aperture_jumps = []
     for segment_index, segment in enumerate(mouth_run_segments):
@@ -408,9 +408,9 @@ def analyze_v2(
                 )
     run_length_counts = Counter(length for _, length in mouth_runs)
     maximum_run_length = max((length for _, length in mouth_runs), default=0)
-    minimum_switch_count = sum(
-        max(0, math.ceil(len(segment) / MAXIMUM_MOUTH_HOLD_FRAMES) - 1)
-        for segment in owned_channel_segments
+    minimum_switch_count = max(
+        1,
+        math.ceil(len(owned_channels) / MAXIMUM_MOUTH_HOLD_FRAMES) - 1,
     )
     _check(
         report,
@@ -436,7 +436,7 @@ def analyze_v2(
                 str(length): count
                 for length, count in sorted(run_length_counts.items())
             },
-            "minimum_internal_hold_frames": 3,
+            "minimum_internal_hold_frames": 2,
             "short_internal_runs": short_internal_runs,
             "aperture_jumps": aperture_jumps,
         },

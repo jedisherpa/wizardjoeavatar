@@ -258,6 +258,22 @@ class CharacterDirectorV2AcceptanceTests(unittest.TestCase):
         failed = {check["name"] for check in report["checks"] if not check["passed"]}
         self.assertIn("visible_blinks_during_speech", failed)
 
+    def test_capture_cuts_cannot_reset_static_mouth_activity_requirement(self):
+        manifest, trace, receipt = evidence()
+        invalid_manifest = copy.deepcopy(manifest)
+        invalid_trace = copy.deepcopy(trace)
+        for index, item in enumerate(invalid_trace):
+            mouth = MOUTHS[(index // 60) % len(MOUTHS)]
+            channels = item["presentation_channels"]
+            channels["rendered_mouth_shape"] = mouth
+            channels["mouth_pixel_sha256"] = "{:064x}".format(MOUTHS.index(mouth) + 1)
+            if index and index % 60 == 0:
+                invalid_manifest["frames"][index]["capture_owned"] = False
+
+        report = analyze(invalid_manifest, invalid_trace, receipt)
+        failed = {check["name"] for check in report["checks"] if not check["passed"]}
+        self.assertIn("readable_mouth_presentation_cadence", failed)
+
     def test_wrong_authority_and_excessive_av_offset_fail(self):
         manifest, trace, receipt = evidence()
         invalid_trace = copy.deepcopy(trace)
