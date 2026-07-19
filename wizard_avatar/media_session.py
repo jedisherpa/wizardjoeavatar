@@ -393,6 +393,15 @@ class MediaSessionSnapshotV1:
         if cause not in SNAPSHOT_CAUSES:
             raise MediaSessionError("invalid_enum", "unsupported snapshot cause", "$.cause")
         media = MediaIdentityV1.from_mapping(_require_mapping(value.get("media"), "$.media"))
+        performance = PerformanceSelectionV1.from_mapping(
+            _require_mapping(value.get("performance"), "$.performance")
+        )
+        if media.source_slot == "speech" and performance.mode != "speech":
+            raise MediaSessionError(
+                "invalid_enum",
+                "speech slot requires speech performance mode",
+                "$.performance.mode",
+            )
         return cls(
             schema_version=MEDIA_SESSION_SCHEMA_VERSION,
             message_id=_require_pattern(value.get("message_id"), UUID_V4_PATTERN, "$.message_id"),
@@ -409,9 +418,7 @@ class MediaSessionSnapshotV1:
             playback=PlaybackSnapshotV1.from_mapping(
                 _require_mapping(value.get("playback"), "$.playback"), media.duration_ms
             ),
-            performance=PerformanceSelectionV1.from_mapping(
-                _require_mapping(value.get("performance"), "$.performance")
-            ),
+            performance=performance,
         )
 
     @classmethod

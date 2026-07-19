@@ -104,6 +104,15 @@ class MediaSessionContractTests(unittest.TestCase):
             MediaSessionSnapshotV1.from_mapping(invalid)
         self.assertEqual(error.exception.code, "invalid_enum")
 
+    def test_speech_slot_rejects_a_leaked_main_performance_mode(self):
+        invalid = snapshot_mapping(source_slot="speech", kind="tts", mode="music")
+
+        with self.assertRaises(MediaSessionError) as error:
+            MediaSessionSnapshotV1.from_mapping(invalid)
+
+        self.assertEqual(error.exception.code, "invalid_enum")
+        self.assertEqual(error.exception.path, "$.performance.mode")
+
     def test_golden_snapshot_documents_qualified_hash_and_integer_wire_format(self):
         fixture = (
             Path(__file__).resolve().parent
