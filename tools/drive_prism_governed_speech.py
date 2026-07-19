@@ -27,10 +27,13 @@ from record_character_director_browser import (
 
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_PROMPT = (
-    "Tell me a warm story of exactly one hundred eighty words about a traveler "
-    "who pauses at sunset to listen to a friend. Begin directly with the story, "
-    "keep the pace calm, and finish the story without asking a question. This is "
-    "only a creative writing request; no action or clarification is needed."
+    "Tell me a detailed warm fictional story in five complete paragraphs about a "
+    "traveler who pauses at sunset to listen carefully to a friend. Include the "
+    "setting, the friend's concern, the traveler's attentive response, their walk "
+    "across an old bridge, and a calm resolution beneath the first stars. Give "
+    "each paragraph several full sentences and finish the story without asking a "
+    "question. This is only a creative-writing request; no action, clarification, "
+    "or advice is needed."
 )
 SCHEMA = "character_director_prism_governed_speech_v1"
 
@@ -46,7 +49,11 @@ def get_json(url: str, token: str = "") -> Mapping[str, Any]:
     return value
 
 
-async def wait_for_prism(cdp: CDPClient, timeout: float) -> Dict[str, Any]:
+async def wait_for_prism(
+    cdp: CDPClient,
+    timeout: float,
+    require_completed_greeting: bool = True,
+) -> Dict[str, Any]:
     deadline = time.monotonic() + timeout
     while time.monotonic() < deadline:
         state = await cdp.evaluate(
@@ -55,10 +62,14 @@ async def wait_for_prism(cdp: CDPClient, timeout: float) -> Dict[str, Any]:
               const prompt = document.querySelector('textarea[aria-label="Message CDISS"]');
               const status = document.querySelector('.prism-wizard-status small');
               const audio = document.querySelectorAll('audio')[1];
+              const completedAgentMessages = [...document.querySelectorAll(
+                '.prism-dodecahedron-cdiss-message.is-agent p'
+              )].filter(node => node.textContent?.trim()).length;
               return {
                 promptReady: Boolean(prompt && !prompt.disabled),
                 connector: status?.textContent?.trim() ?? null,
-                audioPresent: Boolean(audio)
+                audioPresent: Boolean(audio),
+                completedAgentMessages
               };
             })()
             """
@@ -67,6 +78,10 @@ async def wait_for_prism(cdp: CDPClient, timeout: float) -> Dict[str, Any]:
             isinstance(state, dict)
             and state.get("promptReady")
             and state.get("audioPresent")
+            and (
+                not require_completed_greeting
+                or int(state.get("completedAgentMessages", 0)) > 0
+            )
             and "connected" in str(state.get("connector", "")).lower()
         ):
             return state
@@ -116,10 +131,29 @@ async def browser_speech_state(cdp: CDPClient) -> Mapping[str, Any]:
     value = await cdp.evaluate(
         """
         (() => {
-          const audio = document.querySelectorAll('audio')[1];
+          const audios = [...document.querySelectorAll('audio')];
+          const audio = audios[1];
           const stage = [...document.querySelectorAll('*')]
             .find(node => node.children.length === 0 && node.textContent?.trim() === 'Speaking');
+          const messages = [...document.querySelectorAll(
+            '.prism-dodecahedron-cdiss-message'
+          )].slice(-6).map(node => ({
+            role: [...node.classList].find(name => name.startsWith('is-')) ?? null,
+            speaker: node.querySelector('strong')?.textContent?.trim() ?? null,
+            text: node.querySelector('p')?.textContent?.trim() ?? null
+          }));
           return {
+            audioCount: audios.length,
+            audios: audios.map((candidate, index) => ({
+              index,
+              paused: candidate.paused,
+              ended: candidate.ended,
+              currentTimeMs: Math.round(candidate.currentTime * 1000),
+              durationMs: Number.isFinite(candidate.duration)
+                ? Math.round(candidate.duration * 1000)
+                : null,
+              readyState: candidate.readyState
+            })),
             paused: audio?.paused ?? true,
             ended: audio?.ended ?? false,
             currentTimeMs: Math.round((audio?.currentTime ?? 0) * 1000),
@@ -127,7 +161,8 @@ async def browser_speech_state(cdp: CDPClient) -> Mapping[str, Any]:
               ? Math.round(audio.duration * 1000)
               : null,
             readyState: audio?.readyState ?? 0,
-            stageVisible: Boolean(stage)
+            stageVisible: Boolean(stage),
+            messages
           };
         })()
         """
@@ -142,6 +177,7 @@ async def wait_for_capture_edge(
     timeout: float,
 ) -> Dict[str, Any]:
     deadline = time.monotonic() + timeout
+    last_observation: Dict[str, Any] = {}
     while time.monotonic() < deadline:
         browser = await browser_speech_state(cdp)
         status = await asyncio.to_thread(
@@ -156,6 +192,22 @@ async def wait_for_capture_edge(
         application = status.get("application", {})
         governed = status.get("governed_speech", {})
         wizard_state = state.get("state", {})
+        last_observation = {
+            "browser": dict(browser),
+            "application": application,
+            "governed_speech": governed,
+            "wizard_state": {
+                "simulation_tick": wizard_state.get("simulation_tick"),
+                "speech_id": wizard_state.get("speech_id"),
+                "speech_mouth_authority": wizard_state.get(
+                    "speech_mouth_authority"
+                ),
+                "mouth": wizard_state.get("mouth"),
+                "action": wizard_state.get("action"),
+            },
+            "browser_console_events": cdp.console_events[-20:],
+            "browser_page_errors": cdp.page_errors[-20:],
+        }
         if (
             browser.get("paused") is False
             and browser.get("ended") is False
@@ -179,7 +231,11 @@ async def wait_for_capture_edge(
                 },
             }
         await asyncio.sleep(0.05)
-    raise BrowserCaptureFailure("governed speech did not reach the real capture edge")
+    raise BrowserCaptureFailure(
+        "governed speech did not reach the real capture edge; last observation: {}".format(
+            json.dumps(last_observation, sort_keys=True)
+        )
+    )
 
 
 async def run(args: argparse.Namespace) -> None:
@@ -221,8 +277,13 @@ async def run(args: argparse.Namespace) -> None:
                 await cdp.command("Runtime.enable")
                 await cdp.command("Log.enable")
                 await cdp.command("Page.bringToFront")
-                initial = await wait_for_prism(cdp, args.timeout)
-                await submit_prompt(cdp, args.prompt)
+                initial = await wait_for_prism(
+                    cdp,
+                    args.timeout,
+                    require_completed_greeting=not args.capture_opening,
+                )
+                if not args.capture_opening:
+                    await submit_prompt(cdp, args.prompt)
                 edge = await wait_for_capture_edge(
                     cdp,
                     args.wizard_url,
@@ -250,7 +311,12 @@ async def run(args: argparse.Namespace) -> None:
                     "wizard_url": args.wizard_url,
                     "prompt_sha256": hashlib.sha256(
                         args.prompt.encode("utf-8")
-                    ).hexdigest(),
+                    ).hexdigest()
+                    if not args.capture_opening
+                    else None,
+                    "performance_source": "startup_greeting"
+                    if args.capture_opening
+                    else "submitted_prompt",
                     "initial_browser_state": initial,
                     "browser_console_events": cdp.console_events,
                     "browser_page_errors": cdp.page_errors,
@@ -292,12 +358,18 @@ async def run(args: argparse.Namespace) -> None:
                             "utf-8", errors="replace"
                         ).strip(),
                     }
+                    manifest_path = args.capture_output / "manifest.json"
+                    if capture.returncode == 0 and not manifest_path.is_file():
+                        receipt["atomic_capture"]["exit_code"] = 1
+                        receipt["atomic_capture"]["stderr"] = (
+                            "capture exited without creating manifest.json"
+                        )
                     receipt["completed_at_utc"] = utc_now()
                     args.receipt.write_text(
                         json.dumps(receipt, indent=2, sort_keys=True) + "\n",
                         encoding="utf-8",
                     )
-                    if capture.returncode:
+                    if receipt["atomic_capture"]["exit_code"]:
                         raise BrowserCaptureFailure(
                             "atomic V2 capture failed: {}".format(
                                 receipt["atomic_capture"]["stderr"]
@@ -327,6 +399,7 @@ def parse_args(argv: Optional[Sequence[str]] = None) -> argparse.Namespace:
     parser.add_argument("--prism-url", default="http://127.0.0.1:8890")
     parser.add_argument("--wizard-url", default="http://127.0.0.1:8896")
     parser.add_argument("--prompt", default=DEFAULT_PROMPT)
+    parser.add_argument("--capture-opening", action="store_true")
     parser.add_argument("--receipt", type=Path, required=True)
     parser.add_argument("--timeout", type=float, default=120.0)
     parser.add_argument("--hold-seconds", type=float, default=40.0)
