@@ -14,6 +14,8 @@ from drive_prism_governed_speech import (
     establish_audio_user_gesture,
     manifest_artifact_path,
     resume_speech_playback_with_user_gesture,
+    summarize_governed_registration_request,
+    summarize_media_session_request,
     validate_disposable_loopback_url,
 )
 
@@ -36,6 +38,65 @@ class FakeCdp:
 
 
 class GovernedSpeechDriverTests(unittest.TestCase):
+    def test_summarizes_only_media_binding_and_playback_fields(self):
+        event = {
+            "requestId": "42.1",
+            "request": {
+                "postData": __import__("json").dumps(
+                    {
+                        "sequence": 7,
+                        "media_epoch": 3,
+                        "cause": "playing",
+                        "media": {
+                            "source_slot": "speech",
+                            "media_id": "media:sha256:abc",
+                            "media_sha256": "sha256:abc",
+                        },
+                        "playback": {"state": "playing", "position_ms": 25},
+                        "performance": {
+                            "character_id": "wizard-joe-v1",
+                            "character_package_sha256": "sha256:def",
+                        },
+                        "private_text": "must not be copied",
+                    }
+                )
+            },
+        }
+
+        summary = summarize_media_session_request(event)
+
+        self.assertEqual(summary["sequence"], 7)
+        self.assertEqual(summary["source_slot"], "speech")
+        self.assertNotIn("private_text", summary)
+
+    def test_summarizes_governed_registration_source_binding(self):
+        event = {
+            "requestId": "42.2",
+            "request": {
+                "postData": __import__("json").dumps(
+                    {
+                        "performance_context": {
+                            "source": {
+                                "connector_session_id": "session",
+                                "accepted_sequence": 6,
+                                "media_epoch": 3,
+                                "source_slot": "speech",
+                                "media_id": "media:sha256:abc",
+                                "media_sha256": "sha256:abc",
+                            }
+                        },
+                        "approved_text": "must not be copied",
+                    }
+                )
+            },
+        }
+
+        summary = summarize_governed_registration_request(event)
+
+        self.assertEqual(summary["accepted_sequence"], 6)
+        self.assertEqual(summary["media_epoch"], 3)
+        self.assertNotIn("approved_text", summary)
+
     def test_resolves_contact_sheet_from_validated_artifact_inventory(self):
         with tempfile.TemporaryDirectory() as temporary:
             output = Path(temporary)

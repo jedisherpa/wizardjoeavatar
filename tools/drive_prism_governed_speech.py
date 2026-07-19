@@ -42,6 +42,7 @@ DEFAULT_PROMPT = (
 )
 SCHEMA = "character_director_prism_governed_speech_v1"
 MEDIA_SESSION_ROUTE = "/api/connectors/wizard/media-session"
+GOVERNED_SPEECH_ROUTE = "/api/connectors/wizard/governed-speech"
 PROTECTED_LOCAL_PORTS = frozenset({8765, 8875})
 AV_TIMELINE_SCHEMA = "character_director_av_timeline_v1"
 REVIEW_BUNDLE_SCHEMA = "character_director_v2_review_bundle_v1"
@@ -71,6 +72,53 @@ def get_json(url: str, token: str = "") -> Mapping[str, Any]:
     if not isinstance(value, Mapping):
         raise BrowserCaptureFailure("expected a JSON object from {}".format(url))
     return value
+
+
+def _request_json(event: Mapping[str, Any]) -> Mapping[str, Any]:
+    post_data = event.get("request", {}).get("postData")
+    if not isinstance(post_data, str):
+        return {}
+    try:
+        value = json.loads(post_data)
+    except (TypeError, ValueError):
+        return {}
+    return value if isinstance(value, Mapping) else {}
+
+
+def summarize_media_session_request(event: Mapping[str, Any]) -> Mapping[str, Any]:
+    payload = _request_json(event)
+    media = payload.get("media", {})
+    playback = payload.get("playback", {})
+    performance = payload.get("performance", {})
+    return {
+        "request_id": event.get("requestId"),
+        "sequence": payload.get("sequence"),
+        "media_epoch": payload.get("media_epoch"),
+        "cause": payload.get("cause"),
+        "source_slot": media.get("source_slot"),
+        "media_id": media.get("media_id"),
+        "media_sha256": media.get("media_sha256"),
+        "playback_state": playback.get("state"),
+        "position_ms": playback.get("position_ms"),
+        "character_id": performance.get("character_id"),
+        "character_package_sha256": performance.get("character_package_sha256"),
+    }
+
+
+def summarize_governed_registration_request(
+    event: Mapping[str, Any],
+) -> Mapping[str, Any]:
+    payload = _request_json(event)
+    source = payload.get("performance_context", {}).get("source", {})
+    return {
+        "request_id": event.get("requestId"),
+        "connector_session_id": source.get("connector_session_id"),
+        "accepted_sequence": source.get("accepted_sequence"),
+        "media_epoch": source.get("media_epoch"),
+        "source_slot": source.get("source_slot"),
+        "media_id": source.get("media_id"),
+        "media_sha256": source.get("media_sha256"),
+    }
 
 
 async def wait_for_prism(
@@ -195,6 +243,31 @@ async def install_media_session_probe(cdp: CDPClient) -> None:
           if (window.__wizardMediaSessionProbeInstalled) return true;
           const originalFetch = window.fetch.bind(window);
           window.__wizardMediaSessionProbe = [];
+          window.__wizardMediaElementEvents = [];
+          const observedEvents = [
+            'loadedmetadata', 'durationchange', 'play', 'playing', 'pause',
+            'waiting', 'stalled', 'seeking', 'seeked', 'ratechange', 'ended',
+            'emptied', 'error', 'volumechange'
+          ];
+          for (const audio of document.querySelectorAll('audio')) {
+            for (const eventName of observedEvents) {
+              audio.addEventListener(eventName, () => {
+                window.__wizardMediaElementEvents.push({
+                  event: eventName,
+                  sourceSlot: audio.dataset.sourceSlot ?? null,
+                  paused: audio.paused,
+                  ended: audio.ended,
+                  muted: audio.muted,
+                  volume: audio.volume,
+                  readyState: audio.readyState,
+                  currentTimeMs: Math.round(audio.currentTime * 1000),
+                  observedAtMs: Math.round(performance.now())
+                });
+                window.__wizardMediaElementEvents =
+                  window.__wizardMediaElementEvents.slice(-40);
+              }, {capture: true});
+            }
+          }
           window.fetch = async (...args) => {
             const input = args[0];
             const init = args[1] ?? {};
@@ -260,7 +333,11 @@ async def browser_speech_state(cdp: CDPClient) -> Mapping[str, Any]:
               durationMs: Number.isFinite(candidate.duration)
                 ? Math.round(candidate.duration * 1000)
                 : null,
-              readyState: candidate.readyState
+              readyState: candidate.readyState,
+              muted: candidate.muted,
+              volume: candidate.volume,
+              networkState: candidate.networkState,
+              errorCode: candidate.error?.code ?? null
             })),
             paused: audio?.paused ?? true,
             ended: audio?.ended ?? false,
@@ -269,8 +346,19 @@ async def browser_speech_state(cdp: CDPClient) -> Mapping[str, Any]:
               ? Math.round(audio.duration * 1000)
               : null,
             readyState: audio?.readyState ?? 0,
+            muted: audio?.muted ?? false,
+            volume: audio?.volume ?? 1,
+            networkState: audio?.networkState ?? 0,
+            errorCode: audio?.error?.code ?? null,
             stageVisible: Boolean(stage),
             messages,
+            playbackRecovery: window.__wizardPlaybackRecovery ?? null,
+            governedSpeechTrace: Array.isArray(window.__prismGovernedSpeechTrace)
+              ? window.__prismGovernedSpeechTrace.slice(-20)
+              : [],
+            mediaElementEvents: Array.isArray(window.__wizardMediaElementEvents)
+              ? window.__wizardMediaElementEvents.slice(-20)
+              : [],
             mediaSessionProbe: Array.isArray(window.__wizardMediaSessionProbe)
               ? window.__wizardMediaSessionProbe.slice(-8)
               : []
@@ -744,14 +832,26 @@ async def wait_for_capture_edge(
             edge_samples.append(edge_sample)
             edge_samples = edge_samples[-20:]
         media_requests = [
-            {
-                "request_id": event.get("requestId"),
-                "url": event.get("request", {}).get("url"),
-                "method": event.get("request", {}).get("method"),
-            }
+            summarize_media_session_request(event)
             for event in cdp.network_requests
             if MEDIA_SESSION_ROUTE in str(event.get("request", {}).get("url", ""))
         ][-8:]
+        media_transition_requests = [
+            summary
+            for summary in (
+                summarize_media_session_request(event)
+                for event in cdp.network_requests
+                if MEDIA_SESSION_ROUTE
+                in str(event.get("request", {}).get("url", ""))
+            )
+            if summary.get("cause") != "heartbeat"
+        ][-20:]
+        governed_registration_requests = [
+            summarize_governed_registration_request(event)
+            for event in cdp.network_requests
+            if GOVERNED_SPEECH_ROUTE
+            in str(event.get("request", {}).get("url", ""))
+        ][-2:]
         media_responses = [
             {
                 "request_id": event.get("requestId"),
@@ -778,7 +878,9 @@ async def wait_for_capture_edge(
             "browser_console_event_count": len(cdp.console_events),
             "browser_page_error_count": len(cdp.page_errors),
             "media_session_requests": media_requests,
+            "media_session_transition_requests": media_transition_requests,
             "media_session_responses": media_responses,
+            "governed_registration_requests": governed_registration_requests,
             "edge_samples": edge_samples,
             "playback_recovery_attempts": playback_recovery_attempts,
         }
