@@ -554,6 +554,22 @@ class StreamHubTests(unittest.IsolatedAsyncioTestCase):
             ),
             "simulation advanced beyond the fake monotonic clock",
         )
+        simulation_gaps = [
+            later - earlier
+            for earlier, later in zip(
+                source.simulation_times,
+                source.simulation_times[1:],
+            )
+        ]
+        self.assertTrue(
+            all(gap <= frame_interval + 1e-9 for gap in simulation_gaps),
+            "a missed deadline skipped presentation-rate simulation states",
+        )
+        self.assertGreater(
+            hub._presentation_clock_dropped_ns,
+            0,
+            "the dropped presentation-clock debt was not measured",
+        )
         self.assertAlmostEqual(
             scheduled_sleeps[1],
             frame_interval,

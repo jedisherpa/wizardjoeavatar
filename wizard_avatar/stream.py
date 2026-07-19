@@ -127,6 +127,8 @@ class WizardFrameHub:
         self._forced_keyframe_count = 0
         self._stale_render_discard_count = 0
         self._schedule_overruns = 0
+        self._runtime_loop_observed_ns: Optional[int] = None
+        self._presentation_clock_dropped_ns = 0
         self._source_hash_history = deque(maxlen=240)
         self._animation_truth_trace = deque(maxlen=ANIMATION_TRUTH_TRACE_CAPACITY)
         self._published_at = deque(maxlen=240)
@@ -138,7 +140,12 @@ class WizardFrameHub:
     async def start(self) -> None:
         if self._task is None or self._task.done():
             self._started_at = time.perf_counter()
-            self.runtime.advance_to(time.perf_counter_ns())
+            now_ns = time.perf_counter_ns()
+            if self._runtime_loop_observed_ns is None:
+                self.runtime.advance_to(now_ns)
+            # A stopped or overloaded projector does not create a simulation
+            # debt that may be replayed as skipped authored poses.
+            self._runtime_loop_observed_ns = now_ns
             self._task_error_code = None
             if self._render_executor is None:
                 self._render_executor = ThreadPoolExecutor(
@@ -264,6 +271,7 @@ class WizardFrameHub:
             "forced_keyframe_count": self._forced_keyframe_count,
             "stale_render_discard_count": self._stale_render_discard_count,
             "schedule_overruns": self._schedule_overruns,
+            "presentation_clock_dropped_ns": self._presentation_clock_dropped_ns,
             "frame_hub_error_code": self._task_error_code,
             "frame_hub_failure_count": self._task_failure_count,
             "source_hash_history_count": len(self._source_hash_history),
@@ -425,10 +433,29 @@ class WizardFrameHub:
 
     async def _run(self) -> None:
         frame_interval = 1.0 / self.frame_source.fps
+        frame_interval_ns = round(frame_interval * 1_000_000_000)
         next_tick = time.perf_counter()
         while True:
             async with self._current_lock():
-                advance_result = self.runtime.advance_to(time.perf_counter_ns())
+                now_ns = time.perf_counter_ns()
+                if self._runtime_loop_observed_ns is None:
+                    advance_result = self.runtime.advance_to(now_ns)
+                else:
+                    observed_elapsed_ns = max(
+                        0,
+                        now_ns - self._runtime_loop_observed_ns,
+                    )
+                    accepted_elapsed_ns = min(
+                        observed_elapsed_ns,
+                        frame_interval_ns,
+                    )
+                    self._presentation_clock_dropped_ns += (
+                        observed_elapsed_ns - accepted_elapsed_ns
+                    )
+                    advance_result = self.runtime.advance_elapsed_ns(
+                        accepted_elapsed_ns
+                    )
+                self._runtime_loop_observed_ns = now_ns
                 if advance_result.steps == 0 and self.command_inbox.pending_count:
                     self.runtime.step_tick()
                 capture_render_state = getattr(
