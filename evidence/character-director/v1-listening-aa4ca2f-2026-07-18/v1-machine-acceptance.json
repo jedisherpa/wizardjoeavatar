@@ -1,0 +1,230 @@
+{
+  "acceptance_scenario": "V1",
+  "checks": [
+    {
+      "detail": {
+        "acceptance_scenario": "V1",
+        "artifact_path": "scenario-program.json",
+        "program_id": "v1-listening",
+        "scenario_count": 5,
+        "schema": "character_director_scenario_program_v1",
+        "schema_version": 1,
+        "source_sha256": "0d551aa6eb41f37e4ecb6c4bb62a8cb296af801e3585737870902ce8fca34388",
+        "total_duration_seconds": 12.0
+      },
+      "name": "scenario_program_identity",
+      "passed": true
+    },
+    {
+      "detail": [
+        "v1-viewer-listen",
+        "v1-left-target",
+        "v1-viewer-return",
+        "v1-release-gaze",
+        "v1-ninety-degree-turn"
+      ],
+      "name": "scenario_order",
+      "passed": true
+    },
+    {
+      "detail": {
+        "frame_count": 288,
+        "missing_channel_frames": [],
+        "paired_count": 288,
+        "trace_count": 288
+      },
+      "name": "atomic_channel_coverage",
+      "passed": true
+    },
+    {
+      "detail": {
+        "v1-left-target": 60,
+        "v1-ninety-degree-turn": 102,
+        "v1-release-gaze": 6,
+        "v1-viewer-listen": 60,
+        "v1-viewer-return": 60
+      },
+      "name": "acknowledged_capture_windows",
+      "passed": true
+    },
+    {
+      "detail": {
+        "left_aims": [
+          -1
+        ],
+        "released_authority": [
+          false
+        ],
+        "return_aims": [
+          0
+        ],
+        "viewer_aims": [
+          0
+        ]
+      },
+      "name": "viewer_left_viewer_gaze",
+      "passed": true
+    },
+    {
+      "detail": {
+        "facing_sequence": [
+          "south",
+          "southwest",
+          "west"
+        ],
+        "first_target_frame_offset": 5,
+        "first_target_gaze_aim": 0,
+        "phase_sequence": [
+          "leading",
+          "turning",
+          "settling",
+          "steady"
+        ],
+        "rendered_head_pose_sequence": [
+          "front_idle",
+          "walk_front_left",
+          "profile_left"
+        ]
+      },
+      "name": "ninety_degree_eye_lead_head_follow_settle",
+      "passed": true
+    },
+    {
+      "detail": {
+        "body_pose_sequence": [
+          "front_idle"
+        ],
+        "head_pose_sequence": [
+          "front_idle",
+          "walk_front_left",
+          "profile_left"
+        ]
+      },
+      "name": "head_only_turn_uses_no_locomotion_pose",
+      "passed": true
+    },
+    {
+      "detail": {
+        "body_pose_sequence": [
+          "front_idle"
+        ],
+        "head_pose_sequence": [
+          "front_idle",
+          "walk_front_left",
+          "profile_left"
+        ]
+      },
+      "name": "authored_three_quarter_head_bridge",
+      "passed": true
+    },
+    {
+      "detail": {
+        "closed_frame_runs": [
+          3,
+          3
+        ],
+        "durations_ms": [
+          125.0,
+          125.0
+        ],
+        "visible_runs": [
+          true,
+          true
+        ]
+      },
+      "name": "two_blinks_with_bounded_closure",
+      "passed": true
+    },
+    {
+      "detail": {
+        "intervals_seconds": [
+          5.128
+        ]
+      },
+      "name": "blink_onset_intervals",
+      "passed": true
+    },
+    {
+      "detail": {
+        "escaped_frames": []
+      },
+      "name": "explicit_eye_aperture_bounds",
+      "passed": true
+    },
+    {
+      "detail": {
+        "cols": 240,
+        "failure_count": 0,
+        "failures": [],
+        "required_margins": {
+          "bottom": 6,
+          "side": 4,
+          "top": 4
+        },
+        "rows": 135
+      },
+      "name": "canonical_silhouette_margins",
+      "passed": true
+    },
+    {
+      "detail": {
+        "action_values": [
+          "idle"
+        ],
+        "locomotion_values": [
+          "idle"
+        ],
+        "mouth_values": [
+          "closed"
+        ],
+        "root_span": {
+          "x": 0.0,
+          "z": 0.0
+        },
+        "speech_authorities": [
+          "none"
+        ],
+        "unique_presented_frame_hashes": 12
+      },
+      "name": "listening_stillness_and_silence",
+      "passed": true
+    }
+  ],
+  "metrics": {
+    "blink_count": 2,
+    "blink_durations_ms": [
+      125.0,
+      125.0
+    ],
+    "blink_intervals_seconds": [
+      5.128
+    ],
+    "frame_count": 288,
+    "paired_trace_count": 288,
+    "root_span": {
+      "x": 0.0,
+      "z": 0.0
+    },
+    "turn_facing_sequence": [
+      "south",
+      "southwest",
+      "west"
+    ],
+    "turn_head_pose_sequence": [
+      "front_idle",
+      "walk_front_left",
+      "profile_left"
+    ],
+    "turn_phase_sequence": [
+      "leading",
+      "turning",
+      "settling",
+      "steady"
+    ],
+    "unique_presented_frame_hashes": 12
+  },
+  "passed": true,
+  "review_boundary": "Machine checks do not replace normal-speed, quarter-speed, or two-independent-reviewer acting judgment.",
+  "schema": "character_director_v1_machine_acceptance_v1",
+  "schema_version": 1
+}
