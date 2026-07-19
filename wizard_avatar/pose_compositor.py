@@ -415,6 +415,146 @@ def composite_landmark_warp_transition(
     return out
 
 
+def composite_localized_landmark_transition(
+    from_canvas: CellCanvas,
+    to_canvas: CellCanvas,
+    source_chain: tuple[tuple[int, int], tuple[int, int]],
+    target_chain: tuple[tuple[int, int], tuple[int, int]],
+    progress: float,
+    *,
+    radius: float,
+) -> CellCanvas:
+    """Bake one articulated appendage over an otherwise stable source pose.
+
+    Reference poses are flattened pixel graphs, not layered sprites. A global
+    landmark warp therefore changes the face, body, wings, and prop when only
+    one arm is meant to act. This offline authoring primitive isolates cells
+    near a hand-to-joint chain, removes that appendage from the source graph,
+    and rigidly carries one complete endpoint raster to the interpolated chain.
+    The resulting frame remains a single atomic colored-cell graph.
+    """
+
+    if (from_canvas.width, from_canvas.height) != (to_canvas.width, to_canvas.height):
+        raise ValueError("localized-warp canvases must have matching dimensions")
+    if radius <= 0.0:
+        raise ValueError("localized warp radius must be positive")
+    if progress <= 0.0:
+        return from_canvas.copy()
+
+    progress = min(1.0, progress)
+    source_hand, source_joint = source_chain
+    target_hand, target_joint = target_chain
+    middle_chain = (
+        _interpolate_point(source_hand, target_hand, progress),
+        _interpolate_point(source_joint, target_joint, progress),
+    )
+    endpoint_canvas = from_canvas if progress <= 0.5 else to_canvas
+    endpoint_chain = source_chain if progress <= 0.5 else target_chain
+
+    out = from_canvas.copy()
+    for y in range(out.height):
+        for x in range(out.width):
+            cell = from_canvas.get(x, y)
+            if (
+                cell is not None
+                and _gesture_material(cell.rgb)
+                and _distance_to_segment((x, y), source_hand, source_joint) <= radius
+            ):
+                out.clear_cell(x, y)
+
+    min_x = max(0, math.floor(min(middle_chain[0][0], middle_chain[1][0]) - radius - 1))
+    max_x = min(out.width - 1, math.ceil(max(middle_chain[0][0], middle_chain[1][0]) + radius + 1))
+    min_y = max(0, math.floor(min(middle_chain[0][1], middle_chain[1][1]) - radius - 1))
+    max_y = min(out.height - 1, math.ceil(max(middle_chain[0][1], middle_chain[1][1]) + radius + 1))
+    for y in range(min_y, max_y + 1):
+        for x in range(min_x, max_x + 1):
+            sample_x, sample_y = _map_between_segment_frames(
+                (float(x), float(y)),
+                middle_chain,
+                endpoint_chain,
+            )
+            if _distance_to_segment(
+                (sample_x, sample_y), endpoint_chain[0], endpoint_chain[1]
+            ) > radius:
+                continue
+            cell = endpoint_canvas.get(round(sample_x), round(sample_y))
+            if cell is not None and _gesture_material(cell.rgb):
+                out.cells[y][x] = cell
+    return out
+
+
+def _interpolate_point(
+    source: tuple[int, int],
+    target: tuple[int, int],
+    progress: float,
+) -> tuple[float, float]:
+    return (
+        source[0] + (target[0] - source[0]) * progress,
+        source[1] + (target[1] - source[1]) * progress,
+    )
+
+
+def _map_between_segment_frames(
+    point: tuple[float, float],
+    from_chain: tuple[tuple[float, float], tuple[float, float]],
+    to_chain: tuple[tuple[int, int], tuple[int, int]],
+) -> tuple[float, float]:
+    from_hand, from_joint = from_chain
+    to_hand, to_joint = to_chain
+    from_dx = from_joint[0] - from_hand[0]
+    from_dy = from_joint[1] - from_hand[1]
+    to_dx = to_joint[0] - to_hand[0]
+    to_dy = to_joint[1] - to_hand[1]
+    from_length = math.hypot(from_dx, from_dy)
+    to_length = math.hypot(to_dx, to_dy)
+    if from_length < 1.0 or to_length < 1.0:
+        raise ValueError("localized warp chains must have distinct endpoints")
+    along = (
+        (point[0] - from_hand[0]) * from_dx
+        + (point[1] - from_hand[1]) * from_dy
+    ) / (from_length * from_length)
+    perpendicular = (
+        -(point[0] - from_hand[0]) * from_dy
+        + (point[1] - from_hand[1]) * from_dx
+    ) / from_length
+    to_unit_perpendicular = (-to_dy / to_length, to_dx / to_length)
+    return (
+        to_hand[0] + along * to_dx + perpendicular * to_unit_perpendicular[0],
+        to_hand[1] + along * to_dy + perpendicular * to_unit_perpendicular[1],
+    )
+
+
+def _distance_to_segment(
+    point: tuple[float, float],
+    start: tuple[float, float] | tuple[int, int],
+    end: tuple[float, float] | tuple[int, int],
+) -> float:
+    delta_x = end[0] - start[0]
+    delta_y = end[1] - start[1]
+    length_squared = delta_x * delta_x + delta_y * delta_y
+    if length_squared <= 0.0:
+        return math.hypot(point[0] - start[0], point[1] - start[1])
+    along = max(
+        0.0,
+        min(
+            1.0,
+            ((point[0] - start[0]) * delta_x + (point[1] - start[1]) * delta_y)
+            / length_squared,
+        ),
+    )
+    nearest_x = start[0] + along * delta_x
+    nearest_y = start[1] + along * delta_y
+    return math.hypot(point[0] - nearest_x, point[1] - nearest_y)
+
+
+def _gesture_material(rgb: tuple[int, int, int]) -> bool:
+    red, green, blue = rgb
+    skin = red >= 140 and red > green * 1.06 and green > blue * 1.02
+    robe = blue >= 90 and blue > red * 1.05 and blue >= green * 0.88
+    dark_outline = max(rgb) <= 105
+    return skin or robe or dark_outline
+
+
 def _inverse_landmark_sample(
     x: float,
     y: float,
