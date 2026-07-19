@@ -504,6 +504,9 @@ def analyze_v2(
     visible_blinks = []
     blink_onset_mouths = []
     blink_frame_mouths = []
+    blink_frame_authorities = []
+    blink_frame_sources = []
+    blink_mouth_transition_count = 0
     for segment_index, start, end in blink_ranges:
         segment = owned_trace_segments[segment_index]
         segment_channels = [item["presentation_channels"] for item in segment]
@@ -519,6 +522,19 @@ def analyze_v2(
         blink_frame_mouths.extend(
             segment_channels[index].get("rendered_mouth_shape")
             for index in range(start, end)
+        )
+        blink_frame_authorities.extend(
+            segment_channels[index].get("speech_mouth_authority")
+            for index in range(start, end)
+        )
+        blink_frame_sources.extend(
+            segment_channels[index].get("blink_source")
+            for index in range(start, end)
+        )
+        blink_mouth_transition_count += sum(
+            segment_channels[index - 1].get("rendered_mouth_shape")
+            != segment_channels[index].get("rendered_mouth_shape")
+            for index in range(start + 1, end)
         )
     _check(
         report,
@@ -536,12 +552,22 @@ def analyze_v2(
     _check(
         report,
         "mouth_blink_independence",
-        "closed" in blink_frame_mouths
-        and bool(OPEN_MOUTHS.intersection(blink_frame_mouths))
-        and len(set(blink_onset_mouths)) >= 2,
+        len(set(blink_onset_mouths)) >= 2
+        and blink_mouth_transition_count >= 1
+        and all(
+            authority == "media_alignment"
+            for authority in blink_frame_authorities
+        )
+        and all(
+            source in {"scheduler", "turn"}
+            for source in blink_frame_sources
+        ),
         {
             "blink_onset_mouths": blink_onset_mouths,
             "blink_frame_mouths": sorted(set(blink_frame_mouths)),
+            "blink_mouth_transition_count": blink_mouth_transition_count,
+            "blink_frame_authorities": sorted(set(blink_frame_authorities)),
+            "blink_frame_sources": sorted(set(blink_frame_sources)),
         },
     )
 

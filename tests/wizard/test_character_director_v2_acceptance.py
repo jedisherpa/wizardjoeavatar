@@ -59,6 +59,7 @@ def evidence():
                         "gaze_aim": gaze,
                         "gaze_authoritative": True,
                         "blink_closed": blink_closed,
+                        "blink_source": "scheduler" if blink_closed else "none",
                         "blink_painted_cells": 8 if blink_closed else 0,
                         "body_pixel_sha256": "a" * 64,
                         "mouth_pixel_sha256": mouth_digest,
@@ -300,6 +301,38 @@ class CharacterDirectorV2AcceptanceTests(unittest.TestCase):
         failed = {check["name"] for check in report["checks"] if not check["passed"]}
         self.assertFalse(report["passed"])
         self.assertIn("mouth_blink_independence", failed)
+
+    def test_blink_independence_does_not_require_closed_mouth_overlap(self):
+        manifest, trace, receipt = evidence()
+        independent_trace = copy.deepcopy(trace)
+        blink_shapes = ("open_small", "open_medium")
+        blink_run_index = -1
+        blink_was_closed = False
+        for item in independent_trace:
+            channels = item["presentation_channels"]
+            blink_closed = bool(channels["blink_closed"])
+            if blink_closed and not blink_was_closed:
+                blink_run_index += 1
+            if blink_closed:
+                channels["rendered_mouth_shape"] = blink_shapes[
+                    blink_run_index % len(blink_shapes)
+                ]
+                if blink_run_index == 0:
+                    channels["rendered_mouth_shape"] = (
+                        "open_small"
+                        if channels["mouth_pixel_sha256"].endswith("1")
+                        else "open_medium"
+                    )
+            blink_was_closed = blink_closed
+
+        report = analyze(manifest, independent_trace, receipt)
+        check = next(
+            item
+            for item in report["checks"]
+            if item["name"] == "mouth_blink_independence"
+        )
+        self.assertNotIn("closed", check["detail"]["blink_frame_mouths"])
+        self.assertTrue(check["passed"], check)
 
     def test_pose_popping_fails_body_pixel_stillness(self):
         manifest, trace, receipt = evidence()
