@@ -107,6 +107,23 @@ class CharacterDirectorV4AcceptanceTests(unittest.TestCase):
         self.assertEqual(report["metrics"]["frame_count"], 162)
         self.assertEqual(report["metrics"]["stroke_count"], 3)
 
+    def test_first_owned_gesture_frame_may_follow_bounded_transition(self):
+        manifest, traces = fixture()
+        for scenario in (*EXPLAIN_SCENARIOS, POINT_SCENARIO):
+            first_frame_index = next(
+                frame["frame_index"]
+                for frame in manifest["frames"]
+                if frame["scenario"] == scenario
+            )
+            first_trace = next(
+                trace for trace in traces if trace["frame_index"] == first_frame_index
+            )
+            first_trace["animation_authored_frame"] = 1
+
+        report = analyze_v4(manifest, traces)
+
+        self.assertTrue(report["passed"], report)
+
     def test_missing_stroke_and_non_neutral_hold_fail_closed(self):
         manifest, traces = fixture()
         broken = copy.deepcopy(traces)

@@ -249,8 +249,8 @@ def analyze_v4(
         report,
         "thought_group_holds_and_recovery",
         set().union(*(set(frames_seen) for frames_seen in explain_coverage.values()))
-        >= set(range(20))
-        and set(point_coverage) >= set(range(1, 18))
+        >= set(range(1, 20))
+        and set(point_coverage) >= set(range(1, 20))
         and by_scenario[POINT_SCENARIO]
         and by_scenario[POINT_SCENARIO][0].get("rendered_pose_id") == "front_idle"
         and not any(hold_pose_failures.values()),
