@@ -1,0 +1,57 @@
+{
+  "schema": "character_director_scenario_program_v1",
+  "schema_version": 1,
+  "program_id": "v3-canonical-cast",
+  "acceptance_scenario": "V3",
+  "scenarios": [
+    {
+      "name": "v3-ready",
+      "kind": "reset",
+      "payload": {},
+      "settle_seconds": 0.0,
+      "capture_seconds": 0.5
+    },
+    {
+      "name": "v3-cast-one",
+      "kind": "action",
+      "payload": {"action": "magic_cast", "duration_ms": 1600},
+      "settle_seconds": 0.0,
+      "capture_seconds": 1.5
+    },
+    {
+      "name": "v3-hold-one",
+      "kind": "gaze",
+      "payload": {"target": "viewer"},
+      "settle_seconds": 0.0,
+      "capture_seconds": 2.0
+    },
+    {
+      "name": "v3-cast-two",
+      "kind": "action",
+      "payload": {"action": "magic_cast", "duration_ms": 1600},
+      "settle_seconds": 0.0,
+      "capture_seconds": 1.5
+    },
+    {
+      "name": "v3-hold-two",
+      "kind": "gaze",
+      "payload": {"target": "viewer"},
+      "settle_seconds": 0.0,
+      "capture_seconds": 2.0
+    },
+    {
+      "name": "v3-cast-three",
+      "kind": "action",
+      "payload": {"action": "magic_cast", "duration_ms": 1600},
+      "settle_seconds": 0.0,
+      "capture_seconds": 1.5
+    },
+    {
+      "name": "v3-settle",
+      "kind": "gaze",
+      "payload": {"target": "viewer"},
+      "settle_seconds": 0.0,
+      "capture_seconds": 1.0
+    }
+  ]
+}
