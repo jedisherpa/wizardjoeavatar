@@ -359,6 +359,42 @@ def _parse_utc(value: str) -> datetime:
     return datetime.fromisoformat(value.replace("Z", "+00:00"))
 
 
+def manifest_artifact_path(
+    manifest: Mapping[str, Any],
+    output_dir: Path,
+    *,
+    path_suffix: str,
+    media_type: str,
+) -> Path:
+    matches = [
+        record
+        for record in manifest.get("artifacts", ())
+        if isinstance(record, Mapping)
+        and record.get("media_type") == media_type
+        and str(record.get("path", "")).endswith(path_suffix)
+    ]
+    if len(matches) != 1:
+        raise BrowserCaptureFailure(
+            "expected exactly one {} artifact ending in {!r}".format(
+                media_type,
+                path_suffix,
+            )
+        )
+    relative = Path(str(matches[0]["path"]))
+    if relative.is_absolute() or ".." in relative.parts:
+        raise BrowserCaptureFailure("manifest artifact path escapes capture output")
+    candidate = (output_dir / relative).resolve()
+    try:
+        candidate.relative_to(output_dir.resolve())
+    except ValueError as exc:
+        raise BrowserCaptureFailure(
+            "manifest artifact path escapes capture output"
+        ) from exc
+    if not candidate.is_file():
+        raise BrowserCaptureFailure("manifest artifact is missing: {}".format(relative))
+    return candidate
+
+
 def generate_v2_review_products(capture_output: Path, receipt_path: Path) -> Path:
     manifest_path = capture_output / "manifest.json"
     manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
@@ -487,7 +523,12 @@ def generate_v2_review_products(capture_output: Path, receipt_path: Path) -> Pat
             )
         )
 
-    contact_sheet = capture_output / str(manifest["contact_sheet"]["path"])
+    contact_sheet = manifest_artifact_path(
+        manifest,
+        capture_output,
+        path_suffix="-contact-sheet.png",
+        media_type="image/png",
+    )
     browser_record = receipt.get("browser_presentation", {})
     browser_video = capture_output / str(browser_record.get("video_path", ""))
     browser_metrics_path = capture_output / str(browser_record.get("metrics_path", ""))

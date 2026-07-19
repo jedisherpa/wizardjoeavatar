@@ -1,4 +1,5 @@
 import sys
+import tempfile
 import unittest
 from pathlib import Path
 
@@ -8,10 +9,56 @@ TOOLS = ROOT / "tools"
 if str(TOOLS) not in sys.path:
     sys.path.insert(0, str(TOOLS))
 
-from drive_prism_governed_speech import validate_disposable_loopback_url
+from drive_prism_governed_speech import (
+    BrowserCaptureFailure,
+    manifest_artifact_path,
+    validate_disposable_loopback_url,
+)
 
 
 class GovernedSpeechDriverTests(unittest.TestCase):
+    def test_resolves_contact_sheet_from_validated_artifact_inventory(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            output = Path(temporary)
+            contact_sheet = output / "capture-contact-sheet.png"
+            contact_sheet.write_bytes(b"png")
+            manifest = {
+                "artifacts": [
+                    {
+                        "path": contact_sheet.name,
+                        "media_type": "image/png",
+                    }
+                ]
+            }
+            self.assertEqual(
+                manifest_artifact_path(
+                    manifest,
+                    output,
+                    path_suffix="-contact-sheet.png",
+                    media_type="image/png",
+                ),
+                contact_sheet.resolve(),
+            )
+
+    def test_rejects_missing_or_escaping_review_artifact(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            output = Path(temporary)
+            for artifact_path in ("missing-contact-sheet.png", "../escape-contact-sheet.png"):
+                manifest = {
+                    "artifacts": [
+                        {"path": artifact_path, "media_type": "image/png"}
+                    ]
+                }
+                with self.subTest(path=artifact_path), self.assertRaises(
+                    BrowserCaptureFailure
+                ):
+                    manifest_artifact_path(
+                        manifest,
+                        output,
+                        path_suffix="-contact-sheet.png",
+                        media_type="image/png",
+                    )
+
     def test_accepts_explicit_disposable_loopback_endpoint(self):
         self.assertEqual(
             validate_disposable_loopback_url("http://127.0.0.1:8896/", "wizard"),
