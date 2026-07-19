@@ -1,0 +1,43 @@
+{
+  "schema": "character_director_scenario_program_v1",
+  "schema_version": 1,
+  "program_id": "v2-governed-speech",
+  "acceptance_scenario": "V2",
+  "scenarios": [
+    {
+      "name": "speech-steady-center",
+      "kind": "gaze",
+      "payload": {"target": "center"},
+      "settle_seconds": 0.0,
+      "capture_seconds": 3.5
+    },
+    {
+      "name": "speech-gaze-left",
+      "kind": "gaze",
+      "payload": {"target": "left"},
+      "settle_seconds": 0.0,
+      "capture_seconds": 3.0
+    },
+    {
+      "name": "speech-return-center-one",
+      "kind": "gaze",
+      "payload": {"target": "center"},
+      "settle_seconds": 0.0,
+      "capture_seconds": 4.0
+    },
+    {
+      "name": "speech-gaze-right",
+      "kind": "gaze",
+      "payload": {"target": "right"},
+      "settle_seconds": 0.0,
+      "capture_seconds": 3.0
+    },
+    {
+      "name": "speech-return-center-two",
+      "kind": "gaze",
+      "payload": {"target": "center"},
+      "settle_seconds": 0.0,
+      "capture_seconds": 6.5
+    }
+  ]
+}
