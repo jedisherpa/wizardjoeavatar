@@ -148,12 +148,13 @@ def analyze_v3(
     paired = [(frame, trace_by_index.get(frame.get("frame_index"))) for frame in frames]
     missing = [frame.get("frame_index") for frame, trace in paired if trace is None]
     complete = [(frame, trace) for frame, trace in paired if trace is not None]
-    owned_frames = [frame for frame in frames if frame.get("capture_owned") is True]
-    owned_indexes = [frame.get("frame_index") for frame in owned_frames]
-    contiguous = bool(owned_indexes) and all(
+    frame_indexes = [frame.get("frame_index") for frame in frames]
+    transport_contiguous = bool(frame_indexes) and all(
         type(left) is int and type(right) is int and right == left + 1
-        for left, right in zip(owned_indexes, owned_indexes[1:])
+        for left, right in zip(frame_indexes, frame_indexes[1:])
     )
+    owned_frames = [frame for frame in frames if frame.get("capture_owned") is True]
+    unowned_frames = [frame for frame in frames if frame.get("capture_owned") is not True]
     counts = {
         name: sum(
             frame.get("capture_owned") is True and frame.get("scenario") == name
@@ -161,20 +162,55 @@ def analyze_v3(
         )
         for name in EXPECTED_SCENARIOS
     }
+    scenario_indexes = {
+        name: [
+            frame.get("frame_index")
+            for frame in frames
+            if frame.get("capture_owned") is True and frame.get("scenario") == name
+        ]
+        for name in EXPECTED_SCENARIOS
+    }
+    scenario_blocks_contiguous = all(
+        indexes
+        and all(
+            type(left) is int and type(right) is int and right == left + 1
+            for left, right in zip(indexes, indexes[1:])
+        )
+        for indexes in scenario_indexes.values()
+    )
+    boundary_gaps = [
+        range(scenario_indexes[left][-1] + 1, scenario_indexes[right][0])
+        for left, right in zip(EXPECTED_SCENARIOS, EXPECTED_SCENARIOS[1:])
+    ]
+    unowned_indexes = [frame.get("frame_index") for frame in unowned_frames]
+    unowned_are_bounded_transitions = (
+        len(unowned_frames) <= len(EXPECTED_SCENARIOS) - 1
+        and all(frame.get("scenario") is None for frame in unowned_frames)
+        and all(
+            type(index) is int
+            and any(index in boundary_gap for boundary_gap in boundary_gaps)
+            for index in unowned_indexes
+        )
+    )
     _check(
         report,
         "complete_contiguous_capture",
-        len(frames) == len(trace_records) == len(complete) == 240
+        len(frames) == len(trace_records) == len(complete)
         and not missing
         and len(owned_frames) == 240
-        and contiguous
+        and transport_contiguous
+        and scenario_blocks_contiguous
+        and unowned_are_bounded_transitions
         and counts == EXPECTED_FRAME_COUNTS,
         {
             "frame_count": len(frames),
             "trace_count": len(trace_records),
             "owned_frame_count": len(owned_frames),
+            "unowned_transition_frame_indexes": unowned_indexes,
             "missing_trace_frames": missing,
-            "contiguous": contiguous,
+            "transport_contiguous": transport_contiguous,
+            "scenario_blocks_contiguous": scenario_blocks_contiguous,
+            "unowned_are_bounded_transitions": unowned_are_bounded_transitions,
             "scenario_frame_counts": counts,
         },
     )
@@ -270,19 +306,18 @@ def analyze_v3(
         and by_scenario[following_scenario[name]][0].get("rendered_pose_id") == "front_idle"
         for name in CAST_SCENARIOS
     }
-    required_beats = {0, 10, 14, 23, 28}
     _check(
         report,
         "authored_coverage_and_terminal_neutral",
         set(observed_union) >= set(range(31))
-        and all(required_beats.issubset(observed_by_cast[name]) for name in CAST_SCENARIOS)
+        and all(tuple(marker_detail[name]) == EXPECTED_MARKERS for name in CAST_SCENARIOS)
         and all(terminal_neutral.values())
         and _pose_cells("cast_front_31") == neutral_cells,
         {
             "observed_by_cast": observed_by_cast,
             "observed_union": observed_union,
             "required_nonterminal_frames": list(range(31)),
-            "required_beats_per_cast": sorted(required_beats),
+            "marker_events_per_cast": marker_detail,
             "following_neutral_by_cast": terminal_neutral,
             "terminal_frame_31_is_exact_neutral": _pose_cells("cast_front_31") == neutral_cells,
         },

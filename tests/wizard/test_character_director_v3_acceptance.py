@@ -156,6 +156,53 @@ class CharacterDirectorV3AcceptanceTests(unittest.TestCase):
         self.assertTrue(coverage["passed"])
         self.assertTrue(coverage["detail"]["terminal_frame_31_is_exact_neutral"])
 
+    def test_boundary_transport_frame_and_latched_marker_event_are_accepted(self):
+        manifest, traces = fixture()
+        first_hold = next(
+            index
+            for index, frame in enumerate(manifest["frames"])
+            if frame["scenario"] == "v3-hold-one"
+        )
+        boundary_index = manifest["frames"][first_hold]["frame_index"]
+        manifest["frames"].insert(
+            first_hold,
+            {
+                "frame_index": boundary_index,
+                "capture_owned": False,
+                "scenario": None,
+            },
+        )
+        boundary_trace = copy.deepcopy(traces[boundary_index - 1])
+        boundary_trace["frame_index"] = boundary_index
+        traces.insert(boundary_index, boundary_trace)
+        for frame in manifest["frames"][first_hold + 1 :]:
+            frame["frame_index"] += 1
+        for trace in traces[boundary_index + 1 :]:
+            trace["frame_index"] += 1
+
+        marker_sample = next(
+            trace
+            for trace in traces
+            if trace["animation_clip_id"] == "cast_front"
+            and trace["animation_authored_frame"] == 14
+            and trace["presentation_marker_events"]
+        )
+        pose = get_reference_pose("cast_front_13")
+        marker_sample["animation_authored_frame"] = 13
+        marker_sample["rendered_pose_id"] = "cast_front_13"
+        marker_sample["staff_tip_local"] = {
+            "x": pose.anchors["staff_tip"][0],
+            "y": pose.anchors["staff_tip"][1],
+        }
+
+        report = analyze_v3(manifest, traces)
+
+        self.assertTrue(report["passed"], report)
+        capture = check(report, "complete_contiguous_capture")
+        self.assertEqual(capture["detail"]["unowned_transition_frame_indexes"], [48])
+        coverage = check(report, "authored_coverage_and_terminal_neutral")
+        self.assertTrue(coverage["passed"])
+
 
 if __name__ == "__main__":
     unittest.main()
