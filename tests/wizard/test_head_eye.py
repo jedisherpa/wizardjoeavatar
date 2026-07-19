@@ -85,7 +85,7 @@ class HeadEyeCoordinatorTests(unittest.TestCase):
 
         coordinator.advance("west", 0)
         arrived = coordinator.advance("west", 18)
-        visible_overshoot = coordinator.advance("west", 20)
+        visible_overshoot = coordinator.advance("west", 21)
         settled = coordinator.advance("west", 30)
 
         self.assertTrue(arrived.turn_blink_closed)
