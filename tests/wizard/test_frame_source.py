@@ -25,6 +25,26 @@ def changed_points(before, after):
 
 
 class FrameSourceTests(unittest.TestCase):
+    def test_presentation_blink_latches_short_input_for_four_frames(self):
+        source = ProceduralWizardFrameSource()
+        previous_input = False
+        remaining = 0
+        source_name = "none"
+        visible_frames = []
+        for input_active in (True, True, False, False, False):
+            visible, remaining, source_name = source._resolve_presentation_blink(
+                input_active=input_active,
+                previous_input_active=previous_input,
+                previous_frames_remaining=remaining,
+                input_source="scheduler" if input_active else "none",
+                previous_source=source_name,
+            )
+            visible_frames.append(visible)
+            previous_input = input_active
+
+        self.assertEqual(visible_frames, [True, True, True, True, False])
+        self.assertEqual(remaining, 0)
+
     def test_direct_procedural_frame_source_shape(self):
         source = ProceduralWizardFrameSource(240, 135, 24)
         frame = source.render_next_frame()

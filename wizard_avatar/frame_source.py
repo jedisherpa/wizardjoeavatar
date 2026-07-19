@@ -140,6 +140,9 @@ class WizardPresentationSnapshot:
     contact_lock_stage: Optional[Tuple[float, float]] = None
     contact_root_offset: Tuple[float, float] = (0.0, 0.0)
     consumed_marker_events: Tuple[AnimationMarkerEventV1, ...] = ()
+    blink_input_active: bool = False
+    blink_visible_frames_remaining: int = 0
+    blink_source: str = "none"
 
 
 @dataclass(frozen=True)
@@ -259,6 +262,9 @@ class ProceduralWizardFrameSource:
         self._observed_presentation_marker_key_set: set[tuple[object, ...]] = set()
         self._last_marker_observation_tick = -1
         self._reference_body_hash_cache: dict[tuple[object, ...], str] = {}
+        self._blink_input_active = False
+        self._blink_visible_frames_remaining = 0
+        self._blink_source = "none"
         self._initialize_authoritative_animation_state()
 
     def _initialize_authoritative_animation_state(self) -> None:
@@ -434,6 +440,9 @@ class ProceduralWizardFrameSource:
                 contact_anchor=self._contact_anchor,
                 contact_lock_stage=self._contact_lock_stage,
                 contact_root_offset=self._contact_root_offset,
+                blink_input_active=self._blink_input_active,
+                blink_visible_frames_remaining=self._blink_visible_frames_remaining,
+                blink_source=self._blink_source,
             ),
         )
 
@@ -494,6 +503,21 @@ class ProceduralWizardFrameSource:
             if head_eye.turn_blink_closed
             else "none"
         )
+        blink_input_active = scheduler_blink_closed or head_eye.turn_blink_closed
+        (
+            presentation_blink_closed,
+            blink_visible_frames_remaining,
+            blink_source,
+        ) = self._resolve_presentation_blink(
+            input_active=blink_input_active,
+            previous_input_active=snapshot.presentation.blink_input_active,
+            previous_frames_remaining=(
+                snapshot.presentation.blink_visible_frames_remaining
+            ),
+            input_source=blink_source,
+            previous_source=snapshot.presentation.blink_source,
+        )
+        state.blink_phase = 1.0 if presentation_blink_closed else 0.0
         head_offset_y = self._idle_head_breath_offset(
             state,
             head_eye.phase,
@@ -746,6 +770,13 @@ class ProceduralWizardFrameSource:
             contact_lock_stage=contact_lock_stage,
             contact_root_offset=contact_root_offset,
             consumed_marker_events=snapshot.pending_marker_events,
+            blink_input_active=blink_input_active,
+            blink_visible_frames_remaining=blink_visible_frames_remaining,
+            blink_source=(
+                blink_source
+                if presentation_blink_closed
+                else "none"
+            ),
         )
         planted_anchor_local = None
         planted_anchor_stage = None
@@ -1301,6 +1332,31 @@ class ProceduralWizardFrameSource:
                 self._reference_body_hash_cache.clear()
             self._reference_body_hash_cache[key] = digest
         return digest
+
+    @staticmethod
+    def _resolve_presentation_blink(
+        *,
+        input_active: bool,
+        previous_input_active: bool,
+        previous_frames_remaining: int,
+        input_source: str,
+        previous_source: str,
+    ) -> Tuple[bool, int, str]:
+        """Latch each blink onset for four committed presentation frames."""
+
+        remaining = max(0, int(previous_frames_remaining))
+        if input_active and not previous_input_active:
+            remaining = max(remaining, 4)
+        visible = bool(input_active or remaining > 0)
+        next_remaining = max(0, remaining - 1) if visible else 0
+        if input_active:
+            source = input_source
+        elif visible:
+            held_source = previous_source if previous_source != "none" else "scheduler"
+            source = held_source if "presentation_hold" in held_source else held_source + "+presentation_hold"
+        else:
+            source = "none"
+        return visible, next_remaining, source
 
     @staticmethod
     def _is_reference_eye_pixel(cell: Optional[Cell]) -> bool:
@@ -1902,6 +1958,11 @@ class ProceduralWizardFrameSource:
         self._contact_anchor = presentation.contact_anchor
         self._contact_lock_stage = presentation.contact_lock_stage
         self._contact_root_offset = presentation.contact_root_offset
+        self._blink_input_active = presentation.blink_input_active
+        self._blink_visible_frames_remaining = (
+            presentation.blink_visible_frames_remaining
+        )
+        self._blink_source = presentation.blink_source
         consumed = set(presentation.consumed_marker_events)
         if consumed:
             self._pending_presentation_marker_events = [
