@@ -1,0 +1,32 @@
+{
+  "artifacts": [
+    {
+      "bytes": 101946,
+      "media_type": "video/mp4",
+      "path": "v1-quarter-speed.mp4",
+      "role": "quarter_speed",
+      "sha256": "c1264f9e39a5ce8437d361edb2c34e713ef32131fe21f82af48c0b6c9492f813",
+      "source_path": "visual-review-c818b172bb09-capture.mp4",
+      "source_sha256": "2eb5ce9ade9f6822ccd6d1aea34c3b7e1f2a6009a6cf909bd65c7cf237349505"
+    },
+    {
+      "bytes": 4457,
+      "media_type": "application/json",
+      "path": "v1-machine-acceptance.json",
+      "role": "machine_acceptance",
+      "sha256": "f6fb60811c06d8f2c0924ac94cd578e7e658070bef3c599b15d6e00d5189d480",
+      "source_path": "manifest.json",
+      "source_sha256": "85977b432f5ce28057464efc93cb73fcb9058556a78fad2ccd855919a0256294"
+    }
+  ],
+  "candidate_commit": "6c2767a53189b07f6cd9b12d73a4b41dc4b9c65d",
+  "capture_manifest": {
+    "bytes": 309891,
+    "path": "manifest.json",
+    "sha256": "85977b432f5ce28057464efc93cb73fcb9058556a78fad2ccd855919a0256294"
+  },
+  "complete": true,
+  "run_id": "visual-review-c818b172bb09",
+  "schema": "character_director_review_bundle_manifest_v1",
+  "schema_version": 1
+}

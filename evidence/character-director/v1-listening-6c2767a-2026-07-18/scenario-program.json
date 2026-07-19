@@ -1,0 +1,51 @@
+{
+  "schema": "character_director_scenario_program_v1",
+  "schema_version": 1,
+  "program_id": "v1-listening",
+  "acceptance_scenario": "V1",
+  "scenarios": [
+    {
+      "name": "v1-viewer-listen",
+      "kind": "reset",
+      "payload": {},
+      "settle_seconds": 0.0,
+      "capture_seconds": 2.5
+    },
+    {
+      "name": "v1-left-target",
+      "kind": "gaze",
+      "payload": {
+        "target": "left"
+      },
+      "settle_seconds": 0.0,
+      "capture_seconds": 2.5
+    },
+    {
+      "name": "v1-viewer-return",
+      "kind": "gaze",
+      "payload": {
+        "target": "viewer"
+      },
+      "settle_seconds": 0.0,
+      "capture_seconds": 2.5
+    },
+    {
+      "name": "v1-release-gaze",
+      "kind": "gaze",
+      "payload": {
+        "target": "automatic"
+      },
+      "settle_seconds": 0.0,
+      "capture_seconds": 0.25
+    },
+    {
+      "name": "v1-ninety-degree-turn",
+      "kind": "face",
+      "payload": {
+        "direction": "west"
+      },
+      "settle_seconds": 0.0,
+      "capture_seconds": 4.25
+    }
+  ]
+}
