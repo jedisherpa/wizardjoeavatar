@@ -1939,6 +1939,36 @@
       ]
     },
     {
+      "id": "explain_front_contact_locked",
+      "source": "derived_landmark_warp:front_idle+explaining@1000/1000",
+      "description": "explanatory endpoint baked over the canonical neutral body",
+      "derived_landmark_warp": {
+        "from_pose_id": "front_idle",
+        "to_pose_id": "explaining",
+        "progress_milli": 1000,
+        "localized_region": {
+          "anchor_name": "left_hand",
+          "pivot_offset_from_root": [-8, -45],
+          "radius": 7,
+          "hand_radius": 16
+        }
+      },
+      "facing": "south",
+      "locomotion": "idle",
+      "actions": [
+        "explaining",
+        "speaking"
+      ],
+      "phase": 1.0,
+      "tags": [
+        "front",
+        "explain",
+        "authored_pixel_graph",
+        "landmark_warp",
+        "contact_locked"
+      ]
+    },
+    {
       "id": "magic_cast",
       "source": "magic_cast.png",
       "description": "front magic-cast pose with raised staff and spark hand",

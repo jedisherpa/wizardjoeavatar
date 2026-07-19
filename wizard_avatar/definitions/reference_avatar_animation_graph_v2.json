@@ -486,6 +486,17 @@
     },
     "explaining": {
       "roles": [
+        "diagnostic_only"
+      ],
+      "altitude_class": "grounded",
+      "support_contact": "both_feet",
+      "planted_anchor": "left_foot",
+      "wing_mode": "extended",
+      "staff_mode": "carried",
+      "capability_tier": "C"
+    },
+    "explain_front_contact_locked": {
+      "roles": [
         "clip_sample"
       ],
       "altitude_class": "grounded",
@@ -3451,7 +3462,7 @@
           "markers": []
         },
         {
-          "pose_id": "explaining",
+          "pose_id": "explain_front_contact_locked",
           "duration_frames": 8,
           "support_contact": "both_feet",
           "planted_anchor": "left_foot",

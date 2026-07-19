@@ -270,7 +270,7 @@ def analyze_v4(
         "explain_front_in_40",
         "explain_front_in_60",
         "explain_front_in_80",
-        *(["explaining"] * 8),
+        *(["explain_front_contact_locked"] * 8),
         "explain_front_in_80",
         "explain_front_in_60",
         "explain_front_in_40",
@@ -318,7 +318,7 @@ def analyze_v4(
         and point_sequence == expected_point
         and not color_failures
         and get_reference_pose("front_idle").root_anchor
-        == get_reference_pose("explaining").root_anchor
+        == get_reference_pose("explain_front_contact_locked").root_anchor
         == get_reference_pose("point_front_contact_locked").root_anchor
         and get_reference_pose("front_idle").anchors["left_foot"]
         == get_reference_pose("point_front_contact_locked").anchors["left_foot"],
