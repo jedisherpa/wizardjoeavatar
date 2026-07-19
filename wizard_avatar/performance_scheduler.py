@@ -534,10 +534,6 @@ class PerformanceScheduler:
             if "mouth" not in disabled:
                 mouth_shape = ("closed", "open", "wide", "open")[(media_time_ms // 120) % 4]
                 owned_channels.update({"mouth", "speech"})
-            if profile is not AccessibilityMotionProfile.STILL and "upper_body" not in disabled:
-                gesture_phase = (media_time_ms // 1200) % 2
-                body_mapping_id = "body.speaking_restrained.{}".format(gesture_phase)
-                owned_channels.add("gesture")
             track_values["scoreless_speech"] = MappingProxyType(
                 {
                     "fallback": "duration_only_speech",

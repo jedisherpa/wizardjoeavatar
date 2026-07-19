@@ -14,6 +14,7 @@ import tempfile
 import time
 from pathlib import Path
 from typing import Any, Dict, Mapping, Optional, Sequence
+from urllib.parse import urlsplit
 from urllib.request import Request, urlopen
 
 from record_character_director_browser import (
@@ -37,6 +38,22 @@ DEFAULT_PROMPT = (
 )
 SCHEMA = "character_director_prism_governed_speech_v1"
 MEDIA_SESSION_ROUTE = "/api/connectors/wizard/media-session"
+PROTECTED_LOCAL_PORTS = frozenset({8765, 8875})
+
+
+def validate_disposable_loopback_url(value: str, label: str) -> str:
+    parsed = urlsplit(value)
+    if parsed.scheme != "http" or parsed.hostname not in {"127.0.0.1", "localhost"}:
+        raise ValueError("{} must use an HTTP loopback endpoint".format(label))
+    if parsed.username or parsed.password or parsed.query or parsed.fragment:
+        raise ValueError("{} must not contain credentials, query, or fragment".format(label))
+    if parsed.port is None:
+        raise ValueError("{} must include an explicit disposable port".format(label))
+    if parsed.port in PROTECTED_LOCAL_PORTS:
+        raise ValueError("{} uses protected local port {}".format(label, parsed.port))
+    if parsed.path not in {"", "/"}:
+        raise ValueError("{} must target the endpoint root".format(label))
+    return value.rstrip("/")
 
 
 def get_json(url: str, token: str = "") -> Mapping[str, Any]:
@@ -62,7 +79,7 @@ async def wait_for_prism(
             (() => {
               const prompt = document.querySelector('textarea[aria-label="Message CDISS"]');
               const status = document.querySelector('.prism-wizard-status small');
-              const audio = document.querySelectorAll('audio')[1];
+              const audio = document.querySelector('audio[data-source-slot="speech"]');
               const completedAgentMessages = [...document.querySelectorAll(
                 '.prism-dodecahedron-cdiss-message.is-agent p'
               )].filter(node => node.textContent?.trim()).length;
@@ -142,17 +159,15 @@ async def install_media_session_probe(cdp: CDPClient) -> None:
             if (!url.includes('/api/connectors/wizard/media-session')) {
               return originalFetch(...args);
             }
-            const requestBody = typeof init.body === 'string'
-              ? init.body.slice(0, 16_384)
-              : null;
+            const requestBytes = typeof init.body === 'string' ? init.body.length : 0;
             try {
               const response = await originalFetch(...args);
               const responseBody = await response.clone().text();
               window.__wizardMediaSessionProbe.push({
                 url,
                 status: response.status,
-                requestBody,
-                responseBody: responseBody.slice(0, 2_048)
+                requestBytes,
+                responseBytes: responseBody.length
               });
               window.__wizardMediaSessionProbe = window.__wizardMediaSessionProbe.slice(-20);
               return response;
@@ -160,8 +175,9 @@ async def install_media_session_probe(cdp: CDPClient) -> None:
               window.__wizardMediaSessionProbe.push({
                 url,
                 status: null,
-                requestBody,
-                responseBody: String(error).slice(0, 2_048)
+                requestBytes,
+                responseBytes: 0,
+                errorName: error?.name ?? 'Error'
               });
               window.__wizardMediaSessionProbe = window.__wizardMediaSessionProbe.slice(-20);
               throw error;
@@ -181,20 +197,20 @@ async def browser_speech_state(cdp: CDPClient) -> Mapping[str, Any]:
         """
         (() => {
           const audios = [...document.querySelectorAll('audio')];
-          const audio = audios[1];
+          const audio = document.querySelector('audio[data-source-slot="speech"]');
           const stage = [...document.querySelectorAll('*')]
             .find(node => node.children.length === 0 && node.textContent?.trim() === 'Speaking');
           const messages = [...document.querySelectorAll(
             '.prism-dodecahedron-cdiss-message'
           )].slice(-6).map(node => ({
             role: [...node.classList].find(name => name.startsWith('is-')) ?? null,
-            speaker: node.querySelector('strong')?.textContent?.trim() ?? null,
-            text: node.querySelector('p')?.textContent?.trim() ?? null
+            textLength: node.querySelector('p')?.textContent?.trim().length ?? 0
           }));
           return {
             audioCount: audios.length,
             audios: audios.map((candidate, index) => ({
               index,
+              sourceSlot: candidate.dataset.sourceSlot ?? null,
               paused: candidate.paused,
               ended: candidate.ended,
               currentTimeMs: Math.round(candidate.currentTime * 1000),
@@ -272,7 +288,6 @@ async def wait_for_capture_edge(
                 "request_id": event.get("requestId"),
                 "url": event.get("request", {}).get("url"),
                 "method": event.get("request", {}).get("method"),
-                "post_data": event.get("request", {}).get("postData"),
             }
             for event in cdp.network_requests
             if MEDIA_SESSION_ROUTE in str(event.get("request", {}).get("url", ""))
@@ -300,8 +315,8 @@ async def wait_for_capture_edge(
                 "mouth": wizard_state.get("mouth"),
                 "action": wizard_state.get("action"),
             },
-            "browser_console_events": cdp.console_events[-20:],
-            "browser_page_errors": cdp.page_errors[-20:],
+            "browser_console_event_count": len(cdp.console_events),
+            "browser_page_error_count": len(cdp.page_errors),
             "media_session_requests": media_requests,
             "media_session_responses": media_responses,
             "edge_samples": edge_samples,
@@ -418,8 +433,8 @@ async def run(args: argparse.Namespace) -> None:
                     if args.capture_opening
                     else "submitted_prompt",
                     "initial_browser_state": initial,
-                    "browser_console_events": cdp.console_events,
-                    "browser_page_errors": cdp.page_errors,
+                    "browser_console_event_count": len(cdp.console_events),
+                    "browser_page_error_count": len(cdp.page_errors),
                 }
                 args.receipt.write_text(
                     json.dumps(receipt, indent=2, sort_keys=True) + "\n",
@@ -520,6 +535,11 @@ def parse_args(argv: Optional[Sequence[str]] = None) -> argparse.Namespace:
         or args.minimum_audio_seconds <= 0
     ):
         parser.error("timeouts must be positive")
+    try:
+        args.prism_url = validate_disposable_loopback_url(args.prism_url, "--prism-url")
+        args.wizard_url = validate_disposable_loopback_url(args.wizard_url, "--wizard-url")
+    except ValueError as exc:
+        parser.error(str(exc))
     args.receipt = args.receipt.resolve()
     args.scenarios_file = args.scenarios_file.resolve()
     if not args.scenarios_file.is_file():

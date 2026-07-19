@@ -106,6 +106,21 @@ class PerformanceApplicationTests(unittest.TestCase):
         self.assertEqual(restored.source_slot, "main")
         self.assertEqual(restored.media_time_ms, 300)
 
+    def test_scoreless_speech_keeps_one_neutral_body_pose(self):
+        speech = snapshot_mapping(slot="main", kind="audiobook", mode="speech")
+        self.accept(speech, 0)
+        snapshot = self.application.scheduler.coordinator.accepted_snapshot
+        resolved = self.application.scheduler.current_state(100_000)
+        actions = [
+            self.application._resolve_action(
+                snapshot,
+                replace(resolved, media_time_ms=media_time_ms),
+                True,
+            )
+            for media_time_ms in (100, 1300, 2500, 3700)
+        ]
+        self.assertEqual(actions, ["speaking"] * 4)
+
     def test_active_control_lease_keeps_body_authority(self):
         self.accept(snapshot_mapping(), 0)
         self.controller.apply_command(

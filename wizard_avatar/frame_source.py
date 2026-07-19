@@ -122,6 +122,9 @@ class ReferenceFaceEvidence:
     eye_apertures: Tuple[RasterSpanV1, ...] = ()
     eye_blue_cells: Tuple[LocalPointV1, ...] = ()
     blink_painted_cells: int = 0
+    body_pixel_sha256: str = "legacy_unspecified"
+    mouth_pixel_sha256: str = "legacy_unspecified"
+    mouth_painted_cells: int = 0
 
 
 @dataclass(frozen=True)
@@ -847,6 +850,9 @@ class ProceduralWizardFrameSource:
                 eye_apertures=face_evidence.eye_apertures,
                 eye_blue_cells=face_evidence.eye_blue_cells,
                 blink_painted_cells=face_evidence.blink_painted_cells,
+                body_pixel_sha256=face_evidence.body_pixel_sha256,
+                mouth_pixel_sha256=face_evidence.mouth_pixel_sha256,
+                mouth_painted_cells=face_evidence.mouth_painted_cells,
                 head_offset_x=head_eye.head_offset_x,
                 head_offset_y=head_offset_y,
             ),
@@ -1128,7 +1134,12 @@ class ProceduralWizardFrameSource:
         # Rear views and occluded action poses still carry approximate anchors.
         # Existing cool/white eye pixels are the authority for face visibility.
         if not eye_layouts:
-            return ReferenceFaceEvidence()
+            body_hash, mouth_hash, mouth_count = self._reference_pixel_evidence(canvas)
+            return ReferenceFaceEvidence(
+                body_pixel_sha256=body_hash,
+                mouth_pixel_sha256=mouth_hash,
+                mouth_painted_cells=mouth_count,
+            )
 
         blink = state.blink_phase >= 0.965
         eye_aim = self._reference_eye_aim(state)
@@ -1205,11 +1216,34 @@ class ProceduralWizardFrameSource:
         mouth_shape = self._reference_mouth_shape(state, expression)
         if mouth_shape is not None:
             self._draw_reference_mouth(canvas, mouth_anchor, mouth_shape)
+        body_hash, mouth_hash, mouth_count = self._reference_pixel_evidence(canvas)
         return ReferenceFaceEvidence(
             eye_apertures=tuple(aperture.span() for _, aperture in eye_layouts),
             eye_blue_cells=tuple(blue_cells),
             blink_painted_cells=blink_painted_cells,
+            body_pixel_sha256=body_hash,
+            mouth_pixel_sha256=mouth_hash,
+            mouth_painted_cells=mouth_count,
         )
+
+    @staticmethod
+    def _reference_pixel_evidence(canvas: CellCanvas) -> Tuple[str, str, int]:
+        """Hash visible body and mouth pixels as separate acting regions."""
+
+        body = hashlib.sha256()
+        mouth = hashlib.sha256()
+        mouth_count = 0
+        for y, row in enumerate(canvas.cells):
+            for x, cell in enumerate(row):
+                if cell is None:
+                    continue
+                record = struct.pack(">HH", x, y) + cell.to_bytes()
+                if cell.layer_id.startswith("reference_mouth"):
+                    mouth.update(record)
+                    mouth_count += 1
+                if not cell.layer_id.startswith("reference_"):
+                    body.update(record)
+        return body.hexdigest(), mouth.hexdigest(), mouth_count
 
     @staticmethod
     def _is_reference_eye_pixel(cell: Optional[Cell]) -> bool:

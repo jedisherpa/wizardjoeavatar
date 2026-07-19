@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import math
+import re
 from dataclasses import asdict, dataclass, fields, replace
 from typing import Any, Mapping, Optional, Tuple
 
@@ -67,13 +68,16 @@ class PresentationChannelsV1:
     eye_apertures: Tuple[RasterSpanV1, ...]
     eye_blue_cells: Tuple[LocalPointV1, ...]
     blink_painted_cells: int
+    body_pixel_sha256: str
+    mouth_pixel_sha256: str
+    mouth_painted_cells: int
     head_offset_x: int
     head_offset_y: int
 
     @classmethod
     def from_mapping(cls, value: Mapping[str, Any]) -> "PresentationChannelsV1":
         expected = {item.name for item in fields(cls)}
-        added = {
+        legacy_added = {
             "rendered_head_pose_id",
             "turn_progress_milli",
             "blink_source",
@@ -83,11 +87,18 @@ class PresentationChannelsV1:
             "head_offset_x",
             "head_offset_y",
         }
+        pixel_evidence_added = {
+            "body_pixel_sha256",
+            "mouth_pixel_sha256",
+            "mouth_painted_cells",
+        }
         supplied = set(value) if isinstance(value, Mapping) else set()
-        if not isinstance(value, Mapping) or frozenset(supplied) not in {
+        compatible = {
             frozenset(expected),
-            frozenset(expected.difference(added)),
-        }:
+            frozenset(expected.difference(pixel_evidence_added)),
+            frozenset(expected.difference(legacy_added | pixel_evidence_added)),
+        }
+        if not isinstance(value, Mapping) or frozenset(supplied) not in compatible:
             raise ValueError(
                 "invalid presentation channel fields: missing={} extra={}".format(
                     sorted(expected.difference(supplied)),
@@ -101,6 +112,9 @@ class PresentationChannelsV1:
         payload.setdefault("eye_apertures", ())
         payload.setdefault("eye_blue_cells", ())
         payload.setdefault("blink_painted_cells", 0)
+        payload.setdefault("body_pixel_sha256", "legacy_unspecified")
+        payload.setdefault("mouth_pixel_sha256", "legacy_unspecified")
+        payload.setdefault("mouth_painted_cells", 0)
         payload.setdefault("head_offset_x", 0)
         payload.setdefault("head_offset_y", 0)
         payload["eye_apertures"] = tuple(
@@ -142,6 +156,16 @@ class PresentationChannelsV1:
             or result.blink_painted_cells < 0
         ):
             raise ValueError("blink_painted_cells must be nonnegative")
+        if (
+            isinstance(result.mouth_painted_cells, bool)
+            or not isinstance(result.mouth_painted_cells, int)
+            or result.mouth_painted_cells < 0
+        ):
+            raise ValueError("mouth_painted_cells must be nonnegative")
+        for name in ("body_pixel_sha256", "mouth_pixel_sha256"):
+            digest = getattr(result, name)
+            if digest != "legacy_unspecified" and not re.fullmatch(r"[0-9a-f]{64}", digest):
+                raise ValueError("{} must be a SHA-256 digest".format(name))
         for name in ("head_offset_x", "head_offset_y"):
             offset = getattr(result, name)
             if isinstance(offset, bool) or not isinstance(offset, int) or abs(offset) > 2:

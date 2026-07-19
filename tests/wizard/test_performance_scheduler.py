@@ -350,7 +350,8 @@ class SnapshotSchedulerTests(unittest.TestCase):
         self.assertEqual(ack.scheduler_state, "scoreless")
         self.assertTrue(first.speaking)
         self.assertIn(first.mouth_shape, {"closed", "open", "wide"})
-        self.assertIn("gesture", first.owned_channels)
+        self.assertEqual(first.body_mapping_id, "body.characterful_neutral")
+        self.assertNotIn("gesture", first.owned_channels)
         self.assertEqual(first.resolution_hash, second.resolution_hash)
         rendered = json.dumps(first.to_dict(), sort_keys=True)
         for forbidden in ("text", "audio", "url", "path", "transcript"):

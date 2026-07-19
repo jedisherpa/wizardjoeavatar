@@ -712,7 +712,9 @@ class PerformanceApplication:
             if isinstance(candidate, str) and candidate in ACTIONS:
                 return candidate
         if speaking:
-            return "speaking" if (resolved.media_time_ms // 1200) % 2 == 0 else "explaining"
+            # Scoreless speech owns the face, not a repeating whole-body pose.
+            # Authored gesture tracks above may still request a motivated accent.
+            return "speaking"
         if snapshot.performance.mode == "music":
             return ("flourish", "staff_spin", "celebrate", "reaction")[(resolved.media_time_ms // 500) % 4]
         return None
