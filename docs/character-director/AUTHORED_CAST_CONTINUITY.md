@@ -69,8 +69,9 @@ thrust snapshots are no longer used by `cast_front`.
 
 ## Verification
 
-Focused pose, channel, marker, overlay, contact, permission, and V3 analyzer
-tests pass 66 of 66. The deterministic offline rebuild command is:
+Focused runtime, pose, channel, marker, overlay, contact, permission, and V3
+tests passed 96 of 96. The capture and review-contract suite subsequently
+passed 33 of 33. The deterministic offline rebuild command is:
 
 ```bash
 .venv/bin/python tools/generate_reference_avatar_pose_cells.py \
@@ -87,13 +88,32 @@ capture with:
   --output <capture>/v3-machine-acceptance.json
 ```
 
-The analyzer fails closed unless all 240 frames are owned, contiguous, and
-paired with truth records; all three casts use the canonical atomic pose for
-their authored frame; roots and the staff grip remain fixed; staff-tip travel
-is no greater than two local cells per authored frame; all four markers occur
-once and in order in every cast; effect phases begin at the staff event; contact
-verification passes; and every cast silhouette remains inside the 240 by 135
-stage. Normal-speed and quarter-speed review remain separate required gates.
+The analyzer fails closed unless the transport is contiguous, exactly 240
+scenario-owned frames form individually contiguous scenario blocks, and any
+unowned frame is a bounded transition between those blocks. Every owned frame
+must pair with a truth record; all three casts must use the canonical atomic
+pose for their presented authored frame; the repeated casts must collectively
+cover frames 0 through 30; frame 31 must equal the following neutral graph;
+roots and the staff grip must remain fixed; staff-tip travel must stay within
+two local cells per authored frame; all four markers must occur once and in
+order in every cast; effect phases must begin at the staff event; contact must
+verify; and every cast silhouette must remain inside the 240 by 135 stage.
+Normal-speed, quarter-speed, and browser-layout review remain separate gates.
+
+The final V3 candidate proof is
+`evidence/character-director/v3-canonical-cast-a72f791-2026-07-19/`, bound to
+clean commit `a72f7915479787ba8cd65da2f5075ec99400c16c`. Its machine report passes
+all eleven V3 checks over 242 contiguous transport frames and exactly 240 owned
+frames, with zero drift, continuity, effect, clipping, decode, or queue
+failures. The complete review manifest binds the machine report, normal and
+quarter-speed videos, browser replay, and browser metrics. Browser replay has
+zero page or console errors and zero presentation faults.
+
+The `092f78e` bundle remains as rejected audit evidence. Independent technical
+review found that its hold scenarios rendered stale final cast poses even after
+the controller settled to `front_idle`; it also found the initially published
+bundle incomplete. The final candidate removes that feedback path, adds an
+end-to-end settle regression, and includes every declared sample and wire file.
 
 The previous `a8d0e28` evidence predates this authored rig and is retained only
 as historical comparison. It is not acceptance evidence for the current V3
