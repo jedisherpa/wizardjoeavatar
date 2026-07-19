@@ -57,6 +57,8 @@ ACCEPTANCE_SCENARIO_RE = re.compile(r"^V(?:[1-9]|10)$")
 REVIEW_BUNDLE_SCHEMA = "character_director_review_bundle_manifest_v1"
 REVIEW_BUNDLE_VERSION = 2
 SUPPORTED_REVIEW_BUNDLE_VERSIONS = {1, REVIEW_BUNDLE_VERSION}
+SENSITIVE_TEXT_FIELDS = frozenset({"speech_text"})
+CONTENT_MINIMIZATION_SCHEMA = "evidence_content_minimization_v1"
 
 
 class EvidenceFailure(RuntimeError):
@@ -77,6 +79,63 @@ class FrameDecodeError(EvidenceFailure):
 
 class ManifestValidationError(ValueError):
     pass
+
+
+def _text_evidence(value: str) -> Dict[str, Any]:
+    encoded = value.encode("utf-8")
+    return {
+        "sha256": hashlib.sha256(encoded).hexdigest(),
+        "utf8_bytes": len(encoded),
+        "character_count": len(value),
+    }
+
+
+def minimize_evidence_content(value: Any) -> Any:
+    """Replace sensitive runtime text with non-reversible verification metadata."""
+
+    if isinstance(value, Mapping):
+        result: Dict[str, Any] = {}
+        for key, item in value.items():
+            if key in SENSITIVE_TEXT_FIELDS:
+                evidence_key = "{}_evidence".format(key)
+                if evidence_key in value:
+                    raise EvidenceFailure(
+                        "runtime payload contains both {} and {}".format(key, evidence_key)
+                    )
+                if not isinstance(item, str):
+                    raise EvidenceFailure("runtime payload {} must be text".format(key))
+                result[evidence_key] = _text_evidence(item)
+            else:
+                result[key] = minimize_evidence_content(item)
+        return result
+    if isinstance(value, (list, tuple)):
+        return [minimize_evidence_content(item) for item in value]
+    return value
+
+
+def validate_evidence_content_minimization(value: Any, path: str = "$") -> None:
+    """Reject raw sensitive text or malformed replacement evidence anywhere in a manifest."""
+
+    if isinstance(value, Mapping):
+        for key, item in value.items():
+            item_path = "{}.{}".format(path, key)
+            _manifest_error(
+                key not in SENSITIVE_TEXT_FIELDS,
+                "raw sensitive field remains in evidence: {}".format(item_path),
+            )
+            if key in {"{}_evidence".format(name) for name in SENSITIVE_TEXT_FIELDS}:
+                _manifest_error(
+                    isinstance(item, Mapping)
+                    and set(item) == {"sha256", "utf8_bytes", "character_count"}
+                    and bool(SHA256_RE.fullmatch(str(item.get("sha256", ""))))
+                    and _plain_int(item.get("utf8_bytes"))
+                    and _plain_int(item.get("character_count")),
+                    "invalid sensitive-text evidence: {}".format(item_path),
+                )
+            validate_evidence_content_minimization(item, item_path)
+    elif isinstance(value, (list, tuple)):
+        for index, item in enumerate(value):
+            validate_evidence_content_minimization(item, "{}[{}]".format(path, index))
 
 
 @dataclass(frozen=True)
@@ -1115,7 +1174,7 @@ async def record_state_snapshot(
         "label": label,
         "observed_at_utc": observed_at,
         "request_latency_ms": round(latency_ms, 3),
-        "body": body,
+        "body": minimize_evidence_content(body),
     }
     records.state_snapshots.append(snapshot)
     return snapshot
@@ -1169,7 +1228,7 @@ async def drive_scenarios(
             outcome["request_completed_at_utc"] = utc_now()
             outcome["request_latency_ms"] = round(latency_ms, 3)
             outcome["ack"] = response.get("ack")
-            outcome["response_state"] = response.get("state")
+            outcome["response_state"] = minimize_evidence_content(response.get("state"))
             if not isinstance(outcome["ack"], dict):
                 raise EvidenceFailure("command {} returned no acknowledgement".format(command_id))
             if outcome["ack"].get("command_id") != command_id:
@@ -1929,6 +1988,15 @@ def validate_manifest(manifest: Mapping[str, Any], output_dir: Optional[Path] = 
         "unsupported schema_version",
     )
     _manifest_error(manifest.get("evidence_kind") == EVIDENCE_KIND, "unsupported evidence_kind")
+    content_minimization = manifest.get("content_minimization")
+    _manifest_error(
+        isinstance(content_minimization, Mapping)
+        and content_minimization.get("schema") == CONTENT_MINIMIZATION_SCHEMA
+        and content_minimization.get("sensitive_fields") == sorted(SENSITIVE_TEXT_FIELDS)
+        and content_minimization.get("replacement") == "sha256_and_size_metadata",
+        "manifest must declare sensitive-content minimization",
+    )
+    validate_evidence_content_minimization(manifest)
     valid = manifest.get("valid")
     _manifest_error(isinstance(valid, bool), "valid must be boolean")
     reason = manifest.get("failure_reason")
@@ -2470,9 +2538,14 @@ def build_manifest(
 
     first = records.frames[0]["frame_index"] if records.frames else None
     last = records.frames[-1]["frame_index"] if records.frames else None
-    return {
+    manifest = {
         "schema_version": MANIFEST_SCHEMA_VERSION,
         "evidence_kind": EVIDENCE_KIND,
+        "content_minimization": {
+            "schema": CONTENT_MINIMIZATION_SCHEMA,
+            "sensitive_fields": sorted(SENSITIVE_TEXT_FIELDS),
+            "replacement": "sha256_and_size_metadata",
+        },
         "valid": integrity.valid,
         "failure_reason": integrity.failure_reason,
         "base_runtime": "external",
@@ -2561,6 +2634,7 @@ def build_manifest(
             "glyph_byte_ignored": True,
         },
     }
+    return minimize_evidence_content(manifest)
 
 
 async def run_visual_review(

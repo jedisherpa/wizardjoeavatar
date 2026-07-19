@@ -24,12 +24,14 @@ from tools.run_character_director_visual_review import (
     create_contact_sheet,
     enqueue_decoded_frame,
     load_scenario_program,
+    minimize_evidence_content,
     parse_init,
     runtime_urls,
     run_visual_review,
     select_atomic_animation_trace,
     square_cell_image,
     validate_artifact_semantics,
+    validate_evidence_content_minimization,
     validate_manifest,
     validate_review_bundle_manifest,
     validate_runtime_binding,
@@ -526,6 +528,11 @@ class ManifestValidationTests(unittest.TestCase):
         return {
             "schema_version": 3,
             "evidence_kind": "external_real_runtime_visual_review",
+            "content_minimization": {
+                "schema": "evidence_content_minimization_v1",
+                "sensitive_fields": ["speech_text"],
+                "replacement": "sha256_and_size_metadata",
+            },
             "valid": True,
             "failure_reason": None,
             "replay_exported": False,
@@ -705,6 +712,45 @@ class ManifestValidationTests(unittest.TestCase):
             with self.subTest(invalid=invalid):
                 with self.assertRaises(ManifestValidationError):
                     validate_manifest(invalid)
+
+    def test_sensitive_runtime_text_is_minimized_recursively(self):
+        speech = "A governed line with a snowman \u2603 and no place in machine evidence."
+        minimized = minimize_evidence_content(
+            {
+                "state": {"speech_text": speech},
+                "history": [{"speech_text": "short"}],
+            }
+        )
+
+        encoded = speech.encode("utf-8")
+        self.assertNotIn("speech_text", minimized["state"])
+        self.assertEqual(
+            minimized["state"]["speech_text_evidence"],
+            {
+                "sha256": hashlib.sha256(encoded).hexdigest(),
+                "utf8_bytes": len(encoded),
+                "character_count": len(speech),
+            },
+        )
+        self.assertNotIn(speech, json.dumps(minimized))
+        validate_evidence_content_minimization(minimized)
+
+    def test_manifest_rejects_raw_or_malformed_sensitive_text(self):
+        raw = self.valid_manifest()
+        raw["commands"][0]["response_state"] = {"speech_text": "do not serialize"}
+        with self.assertRaisesRegex(ManifestValidationError, "raw sensitive field"):
+            validate_manifest(raw)
+
+        malformed = self.valid_manifest()
+        malformed["commands"][0]["response_state"] = {
+            "speech_text_evidence": {
+                "sha256": "not-a-digest",
+                "utf8_bytes": 16,
+                "character_count": 16,
+            }
+        }
+        with self.assertRaisesRegex(ManifestValidationError, "invalid sensitive-text evidence"):
+            validate_manifest(malformed)
 
     def test_runtime_binding_rejects_commit_process_and_render_mismatch(self):
         manifest = self.valid_manifest()
