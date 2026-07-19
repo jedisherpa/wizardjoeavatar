@@ -42,8 +42,8 @@ EXPECTED_FRAME_COUNTS = {
     "speech-return-center-two": 156,
 }
 OPEN_MOUTHS = {"open_small", "open_medium", "open_wide", "rounded"}
-MINIMUM_MOUTH_SWITCHES = 20
 MAXIMUM_MOUTH_SWITCHES_PER_SECOND = 8.0
+MAXIMUM_MOUTH_HOLD_FRAMES = 72
 MOUTH_APERTURE = {
     "closed": 0,
     "open_small": 1,
@@ -126,6 +126,36 @@ def _owned_channel_segments(
             segments.append(current)
             current = []
         current.append(trace["presentation_channels"])
+        previous_index = frame_index if type(frame_index) is int else None
+    if current:
+        segments.append(current)
+    return segments
+
+
+def _owned_trace_segments(
+    paired: Sequence[Tuple[Mapping[str, Any], Mapping[str, Any]]],
+) -> List[List[Mapping[str, Any]]]:
+    segments: List[List[Mapping[str, Any]]] = []
+    current: List[Mapping[str, Any]] = []
+    previous_index: Optional[int] = None
+    for frame, trace in paired:
+        frame_index = frame.get("frame_index")
+        owned = frame.get("capture_owned") is True
+        contiguous = (
+            type(frame_index) is int
+            and previous_index is not None
+            and frame_index == previous_index + 1
+        )
+        if not owned:
+            if current:
+                segments.append(current)
+                current = []
+            previous_index = None
+            continue
+        if current and not contiguous:
+            segments.append(current)
+            current = []
+        current.append(trace)
         previous_index = frame_index if type(frame_index) is int else None
     if current:
         segments.append(current)
@@ -264,8 +294,12 @@ def analyze_v2(
     )
 
     all_trace = [trace for _, trace in paired]
-    channels = [trace["presentation_channels"] for trace in all_trace]
-    owned_channel_segments = _owned_channel_segments(paired)
+    owned_trace_segments = _owned_trace_segments(paired)
+    owned_trace = [trace for segment in owned_trace_segments for trace in segment]
+    owned_channel_segments = [
+        [trace["presentation_channels"] for trace in segment]
+        for segment in owned_trace_segments
+    ]
     owned_channels = [
         channel for segment in owned_channel_segments for channel in segment
     ]
@@ -373,12 +407,18 @@ def analyze_v2(
                     }
                 )
     run_length_counts = Counter(length for _, length in mouth_runs)
+    maximum_run_length = max((length for _, length in mouth_runs), default=0)
+    minimum_switch_count = sum(
+        max(0, math.ceil(len(segment) / MAXIMUM_MOUTH_HOLD_FRAMES) - 1)
+        for segment in owned_channel_segments
+    )
     _check(
         report,
         "readable_mouth_presentation_cadence",
         bool(mouth_runs)
-        and mouth_switch_count >= MINIMUM_MOUTH_SWITCHES
+        and mouth_switch_count >= minimum_switch_count
         and mouth_switch_rate <= MAXIMUM_MOUTH_SWITCHES_PER_SECOND
+        and maximum_run_length <= MAXIMUM_MOUTH_HOLD_FRAMES
         and not short_internal_runs
         and not aperture_jumps,
         {
@@ -388,8 +428,10 @@ def analyze_v2(
             "switches_per_second": round(mouth_switch_rate, 3)
             if math.isfinite(mouth_switch_rate)
             else None,
-            "minimum_switch_count": MINIMUM_MOUTH_SWITCHES,
+            "minimum_switch_count": minimum_switch_count,
             "maximum_switches_per_second": MAXIMUM_MOUTH_SWITCHES_PER_SECOND,
+            "maximum_hold_frames": MAXIMUM_MOUTH_HOLD_FRAMES,
+            "observed_maximum_hold_frames": maximum_run_length,
             "run_length_frame_counts": {
                 str(length): count
                 for length, count in sorted(run_length_counts.items())
@@ -450,26 +492,33 @@ def analyze_v2(
         )
     _check(report, "left_center_right_gaze_returns", gaze_passed, gaze_detail)
 
-    blink_ranges = _closed_ranges(all_trace)
-    blink_lengths = [end - start for start, end in blink_ranges]
+    blink_ranges = [
+        (segment_index, start, end)
+        for segment_index, segment in enumerate(owned_trace_segments)
+        for start, end in _closed_ranges(segment)
+    ]
+    blink_lengths = [end - start for _, start, end in blink_ranges]
     blink_durations_ms = [
         round(length * 1000.0 / fps, 3) for length in blink_lengths
     ] if fps else []
     visible_blinks = []
     blink_onset_mouths = []
     blink_frame_mouths = []
-    for start, end in blink_ranges:
+    for segment_index, start, end in blink_ranges:
+        segment = owned_trace_segments[segment_index]
+        segment_channels = [item["presentation_channels"] for item in segment]
         visible_blinks.append(
             all(
-                int(channels[index].get("blink_painted_cells", 0)) > 0
+                int(segment_channels[index].get("blink_painted_cells", 0)) > 0
                 for index in range(start, end)
             )
-            and (start == 0 or all_trace[start]["frame_sha256"] != all_trace[start - 1]["frame_sha256"])
-            and (end == len(all_trace) or all_trace[end - 1]["frame_sha256"] != all_trace[end]["frame_sha256"])
+            and (start == 0 or segment[start]["frame_sha256"] != segment[start - 1]["frame_sha256"])
+            and (end == len(segment) or segment[end - 1]["frame_sha256"] != segment[end]["frame_sha256"])
         )
-        blink_onset_mouths.append(channels[start].get("rendered_mouth_shape"))
+        blink_onset_mouths.append(segment_channels[start].get("rendered_mouth_shape"))
         blink_frame_mouths.extend(
-            channels[index].get("rendered_mouth_shape") for index in range(start, end)
+            segment_channels[index].get("rendered_mouth_shape")
+            for index in range(start, end)
         )
     _check(
         report,
@@ -498,7 +547,7 @@ def analyze_v2(
 
     roots = [
         (float(item.get("world_root_x", math.inf)), float(item.get("world_root_z", math.inf)))
-        for item in all_trace
+        for item in owned_trace
     ]
     baseline_root = roots[0] if roots else (math.inf, math.inf)
     planted_frames = sum(
@@ -506,17 +555,20 @@ def analyze_v2(
         and trace.get("animation_root_policy") == "fixed"
         and trace.get("support_contact") == "both_feet"
         and trace["presentation_channels"].get("locomotion") == "idle"
-        for root, trace in zip(roots, all_trace)
+        for root, trace in zip(roots, owned_trace)
     )
-    body_hashes = [item.get("body_pixel_sha256") for item in channels]
+    body_hashes = [
+        item["presentation_channels"].get("body_pixel_sha256")
+        for item in owned_trace
+    ]
     body_hash_counts = Counter(body_hashes)
     dominant_body_count = body_hash_counts.most_common(1)[0][1] if body_hash_counts else 0
     body_still_percentage = round(
         100.0 * dominant_body_count / len(body_hashes), 3
     ) if body_hashes else 0.0
     planted_percentage = round(
-        100.0 * planted_frames / len(all_trace), 3
-    ) if all_trace else 0.0
+        100.0 * planted_frames / len(owned_trace), 3
+    ) if owned_trace else 0.0
     contact = manifest.get("contact_verification", {})
     _check(
         report,
@@ -541,7 +593,7 @@ def analyze_v2(
     )
 
     eye_failures = []
-    for trace in all_trace:
+    for trace in owned_trace:
         presented = trace["presentation_channels"]
         apertures = presented.get("eye_apertures", ())
         for point in presented.get("eye_blue_cells", ()):
@@ -554,8 +606,8 @@ def analyze_v2(
     _check(
         report,
         "eye_pixels_remain_in_apertures",
-        bool(all_trace)
-        and all(item["presentation_channels"].get("eye_apertures") for item in all_trace)
+        bool(owned_trace)
+        and all(item["presentation_channels"].get("eye_apertures") for item in owned_trace)
         and not eye_failures,
         {"escaped_frames": eye_failures},
     )

@@ -234,8 +234,9 @@ class VoiceAlignmentTests(unittest.TestCase):
         alignment = VoiceAlignmentV1.from_mapping(value)
         track = compile_voice_presentation(alignment)
 
-        self.assertEqual(track.evaluate(550), ("closed", False))
-        self.assertEqual(track.evaluate(650), ("closed", False))
+        for media_time_ms in (400, 450, 499, 550, 650, 667, 700, 749):
+            with self.subTest(media_time_ms=media_time_ms):
+                self.assertEqual(track.evaluate(media_time_ms), ("closed", False))
 
     def test_presentation_track_precloses_before_terminal_boundary(self):
         value = alignment_mapping()
@@ -253,9 +254,11 @@ class VoiceAlignmentTests(unittest.TestCase):
             "open_wide": 3,
         }
 
-        before_terminal = track.evaluate(alignment.duration_ms - 1)
-        self.assertTrue(before_terminal[1])
-        self.assertLessEqual(aperture[before_terminal[0]], 1)
+        last_speaking_index = max(
+            index for index, active in enumerate(track.speaking_frames) if active
+        )
+        self.assertLessEqual(aperture[track.mouth_shapes[last_speaking_index]], 1)
+        self.assertEqual(track.evaluate(alignment.duration_ms - 1), ("closed", False))
         self.assertEqual(track.evaluate(alignment.duration_ms), ("closed", False))
 
     def test_presentation_track_quantizes_arbitrary_onset_without_one_frame_pop(self):
@@ -265,6 +268,7 @@ class VoiceAlignmentTests(unittest.TestCase):
         track = compile_voice_presentation(alignment)
 
         self.assertEqual(track.evaluate(150), ("closed", False))
+        self.assertTrue(track.evaluate(170)[1])
         runs = []
         for shape in track.mouth_shapes:
             if runs and runs[-1][0] == shape:
@@ -272,6 +276,18 @@ class VoiceAlignmentTests(unittest.TestCase):
             else:
                 runs.append([shape, 1])
         self.assertTrue(all(length >= 3 for _, length in runs[1:-1]))
+
+    def test_presentation_track_preserves_short_offbeat_speech_island(self):
+        value = alignment_mapping(with_phonemes=False)
+        value["duration_ms"] = 300
+        value["word_spans"] = [
+            {"start_ms": 21, "end_ms": 150, "start_char": 0, "end_char": len(APPROVED_TEXT)}
+        ]
+        alignment = VoiceAlignmentV1.from_mapping(value)
+        track = compile_voice_presentation(alignment)
+
+        self.assertEqual(track.speaking_frames, (False, True, True, False, False, False, False, False))
+        self.assertTrue(all(track.mouth_shapes[index] != "closed" for index in (1, 2)))
 
     def test_presentation_compile_is_bounded_and_rejects_oversized_chunks(self):
         value = alignment_mapping(with_phonemes=False)

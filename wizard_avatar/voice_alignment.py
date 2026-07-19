@@ -514,26 +514,60 @@ def _reveal_boundary(alignment: VoiceAlignmentV1, media_time_ms: int) -> int:
     return spans[index].end_char if index >= 0 else 0
 
 
-def _coarticulate_short_gaps(
+def _presentation_speech_intervals(
+    alignment: VoiceAlignmentV1,
+    fps: int,
+) -> Tuple[Tuple[int, int], ...]:
+    if alignment.phoneme_spans:
+        source = (
+            (span.start_ms, span.end_ms)
+            for span in alignment.phoneme_spans
+            if span.phoneme_class != "rest"
+        )
+    else:
+        source = (
+            (span.start_ms, span.end_ms)
+            for span in (alignment.word_spans or alignment.character_spans)
+        )
+    merged = []
+    for start_ms, end_ms in source:
+        if (
+            merged
+            and (start_ms - merged[-1][1]) * fps
+            <= _PRESENTATION_COARTICULATION_FRAMES * 1000
+        ):
+            merged[-1] = (merged[-1][0], end_ms)
+        else:
+            merged.append((start_ms, end_ms))
+    return tuple(merged)
+
+
+def _apply_presentation_envelope(
+    alignment: VoiceAlignmentV1,
     shapes: Sequence[str],
     speaking: Sequence[bool],
+    fps: int,
 ) -> Tuple[Tuple[str, ...], Tuple[bool, ...]]:
-    result_shapes = list(shapes)
-    result_speaking = list(speaking)
-    index = 0
-    while index < len(result_speaking):
-        if result_speaking[index]:
-            index += 1
-            continue
-        end = index + 1
-        while end < len(result_speaking) and not result_speaking[end]:
-            end += 1
-        bounded = index > 0 and end < len(result_speaking)
-        if bounded and end - index <= _PRESENTATION_COARTICULATION_FRAMES:
-            for gap_index in range(index, end):
-                result_shapes[gap_index] = "open_small"
-                result_speaking[gap_index] = True
-        index = end
+    intervals = _presentation_speech_intervals(alignment, fps)
+    result_shapes = ["closed"] * len(shapes)
+    result_speaking = [False] * len(shapes)
+    interval_index = 0
+    for frame_index, sampled_shape in enumerate(shapes):
+        frame_start = frame_index * 1000
+        frame_end = (frame_index + 1) * 1000
+        while (
+            interval_index < len(intervals)
+            and intervals[interval_index][1] * fps < frame_end
+        ):
+            interval_index += 1
+        if interval_index >= len(intervals):
+            break
+        start_ms, end_ms = intervals[interval_index]
+        if frame_start >= start_ms * fps and frame_end <= end_ms * fps:
+            result_shapes[frame_index] = (
+                sampled_shape if speaking[frame_index] else "open_small"
+            )
+            result_speaking[frame_index] = True
     return tuple(result_shapes), tuple(result_speaking)
 
 
@@ -541,9 +575,9 @@ def _representative_beat_shape(
     shapes: Sequence[str],
     speaking: Sequence[bool],
 ) -> Tuple[str, bool]:
-    voiced_indices = [index for index, active in enumerate(speaking) if active]
-    if not voiced_indices:
+    if not speaking or not all(speaking):
         return "closed", False
+    voiced_indices = list(range(len(speaking)))
     midpoint = (len(shapes) - 1) / 2.0
     selected_index = min(
         voiced_indices,
@@ -561,18 +595,19 @@ def _bridge_aperture(previous: str, target: str) -> str:
     return _APERTURE_BRIDGE[previous_rank + direction]
 
 
-def _active_beats_until_silence(
-    beat_targets: Sequence[Tuple[str, bool]],
-) -> Tuple[int, ...]:
-    remaining = 0
-    result = [0] * len(beat_targets)
-    for index in range(len(beat_targets) - 1, -1, -1):
-        if beat_targets[index][1]:
-            remaining += 1
-        else:
-            remaining = 0
-        result[index] = remaining
-    return tuple(result)
+def _presentation_hold_widths(frame_count: int) -> Tuple[int, ...]:
+    if frame_count <= 0:
+        return ()
+    if frame_count <= 5:
+        return (frame_count,)
+    full_holds, remainder = divmod(frame_count, _PRESENTATION_BEAT_FRAMES)
+    if remainder == 0:
+        return (_PRESENTATION_BEAT_FRAMES,) * full_holds
+    if remainder == 1:
+        return (_PRESENTATION_BEAT_FRAMES,) * (full_holds - 1) + (5,)
+    if remainder == 2:
+        return (_PRESENTATION_BEAT_FRAMES,) * (full_holds - 1) + (3, 3)
+    return (_PRESENTATION_BEAT_FRAMES,) * full_holds + (3,)
 
 
 def _sample_raw_presentation(
@@ -654,51 +689,46 @@ def compile_voice_presentation(
         frame_count,
         fps,
     )
-    raw_shapes = list(sampled_shapes)
-    raw_speaking = list(sampled_speaking)
-
-    first_raw_speaking = next(
-        (index for index, active in enumerate(raw_speaking) if active),
-        frame_count,
+    shapes, speaking = _apply_presentation_envelope(
+        alignment,
+        sampled_shapes,
+        sampled_speaking,
+        fps,
     )
-    presentation_start = min(
-        frame_count,
-        (
-            (first_raw_speaking + _PRESENTATION_BEAT_FRAMES - 1)
-            // _PRESENTATION_BEAT_FRAMES
-        )
-        * _PRESENTATION_BEAT_FRAMES,
-    )
-    for frame_index in range(presentation_start):
-        raw_shapes[frame_index] = "closed"
-        raw_speaking[frame_index] = False
+    presented_shapes = ["closed"] * frame_count
+    presented_speaking = [False] * frame_count
+    island_start = 0
+    while island_start < frame_count:
+        if not speaking[island_start]:
+            island_start += 1
+            continue
+        island_end = island_start + 1
+        while island_end < frame_count and speaking[island_end]:
+            island_end += 1
+        hold_widths = _presentation_hold_widths(island_end - island_start)
+        targets = []
+        cursor = island_start
+        for width in hold_widths:
+            target, _active = _representative_beat_shape(
+                shapes[cursor : cursor + width],
+                speaking[cursor : cursor + width],
+            )
+            targets.append(target)
+            cursor += width
 
-    shapes, speaking = _coarticulate_short_gaps(raw_shapes, raw_speaking)
-    beat_targets = []
-    for start in range(0, frame_count, _PRESENTATION_BEAT_FRAMES):
-        end = min(frame_count, start + _PRESENTATION_BEAT_FRAMES)
-        beat_targets.append(
-            _representative_beat_shape(shapes[start:end], speaking[start:end])
-        )
-    beats_until_silence = _active_beats_until_silence(beat_targets)
-
-    presented_shapes = []
-    presented_speaking = []
-    previous = "closed"
-    for beat_index, (target, active) in enumerate(beat_targets):
-        desired = target if active else "closed"
-        if active:
-            maximum_rank = min(3, beats_until_silence[beat_index])
+        previous = "closed"
+        cursor = island_start
+        for hold_index, (target, width) in enumerate(zip(targets, hold_widths)):
+            maximum_rank = min(3, len(targets) - hold_index)
+            desired = target
             if _MOUTH_APERTURE[desired] > maximum_rank:
                 desired = _APERTURE_BRIDGE[maximum_rank]
-        presented = _bridge_aperture(previous, desired)
-        width = min(
-            _PRESENTATION_BEAT_FRAMES,
-            frame_count - beat_index * _PRESENTATION_BEAT_FRAMES,
-        )
-        presented_shapes.extend((presented,) * width)
-        presented_speaking.extend((active,) * width)
-        previous = presented
+            presented = _bridge_aperture(previous, desired)
+            presented_shapes[cursor : cursor + width] = [presented] * width
+            presented_speaking[cursor : cursor + width] = [True] * width
+            previous = presented
+            cursor += width
+        island_start = island_end
 
     return VoicePresentationTrackV1(
         duration_ms=alignment.duration_ms,

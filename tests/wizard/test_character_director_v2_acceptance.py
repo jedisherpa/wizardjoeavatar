@@ -222,6 +222,42 @@ class CharacterDirectorV2AcceptanceTests(unittest.TestCase):
 
         self.assertEqual([len(segment) for segment in _owned_channel_segments(paired)], [2, 1])
 
+    def test_predominantly_static_mouth_fails_maximum_hold_gate(self):
+        manifest, trace, receipt = evidence()
+        invalid_trace = copy.deepcopy(trace)
+        for index, item in enumerate(invalid_trace):
+            mouth = MOUTH_SEQUENCE[min(index // 4, len(MOUTH_SEQUENCE) - 1)]
+            channels = item["presentation_channels"]
+            channels["rendered_mouth_shape"] = mouth
+            channels["mouth_pixel_sha256"] = "{:064x}".format(MOUTHS.index(mouth) + 1)
+
+        report = analyze(manifest, invalid_trace, receipt)
+        failed = {check["name"] for check in report["checks"] if not check["passed"]}
+        self.assertIn("readable_mouth_presentation_cadence", failed)
+
+    def test_nonowned_blinks_cannot_supply_owned_blink_evidence(self):
+        manifest, trace, receipt = evidence()
+        invalid_manifest = copy.deepcopy(manifest)
+        invalid_trace = copy.deepcopy(trace)
+        for item in invalid_trace:
+            channels = item["presentation_channels"]
+            channels["blink_closed"] = False
+            channels["blink_painted_cells"] = 0
+        next_index = invalid_manifest["frames"][-1]["frame_index"] + 1
+        for offset in range(8):
+            frame = copy.deepcopy(invalid_manifest["frames"][-1])
+            frame.update({"frame_index": next_index + offset, "capture_owned": False})
+            item = copy.deepcopy(invalid_trace[-1])
+            item["frame_index"] = next_index + offset
+            item["presentation_channels"]["blink_closed"] = True
+            item["presentation_channels"]["blink_painted_cells"] = 8
+            invalid_manifest["frames"].append(frame)
+            invalid_trace.append(item)
+
+        report = analyze(invalid_manifest, invalid_trace, receipt)
+        failed = {check["name"] for check in report["checks"] if not check["passed"]}
+        self.assertIn("visible_blinks_during_speech", failed)
+
     def test_wrong_authority_and_excessive_av_offset_fail(self):
         manifest, trace, receipt = evidence()
         invalid_trace = copy.deepcopy(trace)
