@@ -34,13 +34,16 @@ GROUND_STOP_RIGHT_NODE = "ground_stop_right"
 GROUND_STOP_NODES = frozenset({GROUND_STOP_LEFT_NODE, GROUND_STOP_RIGHT_NODE})
 IDLE_PRESENTATION_POSE_BY_FACING = {
     "south": FRONT_IDLE_POSE,
-    "southeast": FRONT_IDLE_POSE,
+    # These two authored walk poses donate only their three-quarter head
+    # silhouettes during an idle turn. The frame source keeps the planted
+    # idle body, hands, wings, staff, and contact graph unchanged.
+    "southeast": WALK_FRONT_RIGHT_POSE,
     "east": PROFILE_RIGHT_POSE,
     "northeast": BACK_RIGHT_POSE,
     "north": BACK_IDLE_POSE,
     "northwest": BACK_LEFT_POSE,
     "west": PROFILE_LEFT_POSE,
-    "southwest": FRONT_IDLE_POSE,
+    "southwest": WALK_FRONT_LEFT_POSE,
 }
 
 

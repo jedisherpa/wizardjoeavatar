@@ -1034,14 +1034,17 @@ class ProceduralWizardFrameSource:
 
         if (
             head_eye_phase != "steady"
-            or presented_facing != "south"
+            or presented_facing not in {"south", "west", "east"}
             or state.locomotion != "idle"
             or state.action != "idle"
             or state.speech_mouth_authority != "none"
         ):
             return 0
-        phase = state.simulation_tick % 180
-        return -1 if 24 <= phase < 48 else 0
+        # Two unevenly spaced inhales in a six-second phrase avoid the
+        # metronomic three-second bob. Profile holds retain the same restrained
+        # head-only life without disturbing the planted body graph.
+        phase = state.simulation_tick % 360
+        return -1 if 36 <= phase < 48 or 228 <= phase < 240 else 0
 
     def _apply_reference_face_channels(
         self,

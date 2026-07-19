@@ -9,11 +9,11 @@ from .models import DIRECTIONS
 EYE_AIM_LEFT = -1
 EYE_AIM_CENTER = 0
 EYE_AIM_RIGHT = 1
-SECTOR_STEP_TICKS = 6
-SETTLE_TICKS = 12
+SECTOR_STEP_TICKS = 12
+SETTLE_TICKS = 18
 _LEAD_TICKS_BY_DISTANCE = (0, 4, 6, 8, 10)
 _TURN_BLINK_LEAD_TICKS = 4
-_TURN_BLINK_TRAIL_TICKS = 5
+_TURN_BLINK_TRAIL_TICKS = 2
 
 
 @dataclass(frozen=True)
@@ -241,7 +241,10 @@ def _turn_blink_closed(state: HeadEyeState, tick: int) -> bool:
 def _head_settle_offset(state: HeadEyeState, tick: int) -> int:
     if state.sector_distance < 2 or tick < state.head_complete_tick:
         return 0
-    if tick >= state.head_complete_tick + SETTLE_TICKS // 2:
+    # Hold a one-cell overshoot after the turn blink opens, then return to the
+    # authored anchor. At presentation cadence this reads as a deliberate
+    # settle instead of hiding the entire settle inside the blink.
+    if tick >= state.head_complete_tick + (SETTLE_TICKS * 2) // 3:
         return 0
     return state.turn_direction
 

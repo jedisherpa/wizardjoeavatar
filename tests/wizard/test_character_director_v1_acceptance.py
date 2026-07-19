@@ -17,7 +17,11 @@ def channels(gaze, authoritative, blink, phase, facing):
         "locomotion": "idle",
         "action": "idle",
         "rendered_head_pose_id": (
-            "profile_left" if facing == "west" else "front_idle"
+            "profile_left"
+            if facing == "west"
+            else "walk_front_left"
+            if facing == "southwest"
+            else "front_idle"
         ),
         "turn_progress_milli": 1000 if facing == "west" else 500,
         "blink_source": "scheduler" if blink else "none",
@@ -131,6 +135,23 @@ class V1MachineAcceptanceTests(unittest.TestCase):
             if item["name"] == "ninety_degree_eye_lead_head_follow_settle"
         )
         self.assertFalse(turn_check["passed"])
+
+    def test_rejects_turn_without_authored_three_quarter_head_bridge(self):
+        manifest, records = self.fixture()
+        damaged = copy.deepcopy(records)
+        for item in damaged:
+            if item["presented_facing"] == "southwest":
+                item["presentation_channels"]["rendered_head_pose_id"] = "front_idle"
+
+        report = analyze_v1(manifest, damaged)
+
+        self.assertFalse(report["passed"])
+        bridge_check = next(
+            item
+            for item in report["checks"]
+            if item["name"] == "authored_three_quarter_head_bridge"
+        )
+        self.assertFalse(bridge_check["passed"])
 
 
 if __name__ == "__main__":

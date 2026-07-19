@@ -212,14 +212,25 @@ def analyze_v1(
         "head_only_turn_uses_no_locomotion_pose",
         bool(turn_records)
         and all(item.get("rendered_pose_id") == "front_idle" for item in turn_records)
-        and "walk_front_left" not in turn_head_poses
-        and "walk_front_right" not in turn_head_poses
         and "profile_left" in turn_head_poses,
         {
             "body_pose_sequence": _compact(
                 [item.get("rendered_pose_id") for item in turn_records]
             ),
             "head_pose_sequence": _compact(turn_head_poses),
+        },
+    )
+    _check(
+        report,
+        "authored_three_quarter_head_bridge",
+        bool(turn_records)
+        and _compact(turn_head_poses)
+        == ["front_idle", "walk_front_left", "profile_left"],
+        {
+            "head_pose_sequence": _compact(turn_head_poses),
+            "body_pose_sequence": _compact(
+                [item.get("rendered_pose_id") for item in turn_records]
+            ),
         },
     )
 

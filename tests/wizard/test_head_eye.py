@@ -22,7 +22,7 @@ class HeadEyeCoordinatorTests(unittest.TestCase):
 
     def test_opposite_turn_uses_eye_lead_adjacent_views_and_settle(self):
         coordinator = HeadEyeCoordinator("south")
-        ticks = (0, 9, 10, 16, 22, 28, 29, 40)
+        ticks = (0, 9, 10, 22, 34, 46, 47, 64)
         frames = [coordinator.advance("north", tick) for tick in ticks]
 
         self.assertEqual(
@@ -69,8 +69,8 @@ class HeadEyeCoordinatorTests(unittest.TestCase):
         coordinator = HeadEyeCoordinator("south")
 
         leading = coordinator.advance("west", 0)
-        arrived = coordinator.advance("west", 12)
-        settling = coordinator.advance("west", 13)
+        arrived = coordinator.advance("west", 18)
+        settling = coordinator.advance("west", 19)
 
         self.assertEqual(leading.phase, "leading")
         self.assertEqual(leading.automatic_gaze_aim, EYE_AIM_LEFT)
@@ -79,6 +79,21 @@ class HeadEyeCoordinatorTests(unittest.TestCase):
         self.assertEqual(arrived.automatic_gaze_aim, EYE_AIM_CENTER)
         self.assertEqual(settling.phase, "settling")
         self.assertEqual(settling.automatic_gaze_aim, EYE_AIM_CENTER)
+
+    def test_turn_blink_opens_before_one_cell_overshoot_settles(self):
+        coordinator = HeadEyeCoordinator("south")
+
+        coordinator.advance("west", 0)
+        arrived = coordinator.advance("west", 18)
+        visible_overshoot = coordinator.advance("west", 20)
+        settled = coordinator.advance("west", 30)
+
+        self.assertTrue(arrived.turn_blink_closed)
+        self.assertEqual(arrived.head_offset_x, 1)
+        self.assertFalse(visible_overshoot.turn_blink_closed)
+        self.assertEqual(visible_overshoot.head_offset_x, 1)
+        self.assertEqual(settled.head_offset_x, 0)
+        self.assertEqual(settled.phase, "settling")
 
     def test_turn_in_both_directions_uses_shortest_path(self):
         left = HeadEyeCoordinator("south").advance("west", 0)
@@ -107,10 +122,10 @@ class HeadEyeCoordinatorTests(unittest.TestCase):
 
     def test_tick_jump_catches_up_without_render_call_count(self):
         state, _ = advance_head_eye(HeadEyeState.steady("south"), "north", 0)
-        state, output = advance_head_eye(state, "north", 28)
+        state, output = advance_head_eye(state, "north", 46)
         self.assertEqual(output.presented_facing, "north")
         self.assertEqual(output.phase, "turning")
-        state, output = advance_head_eye(state, "north", 40)
+        state, output = advance_head_eye(state, "north", 64)
         self.assertEqual(output.phase, "steady")
 
     def test_discarded_first_candidate_does_not_delay_turn_timing(self):
@@ -140,8 +155,8 @@ class HeadEyeCoordinatorTests(unittest.TestCase):
     def test_retarget_starts_from_current_visible_facing(self):
         coordinator = HeadEyeCoordinator("south")
         coordinator.advance("north", 0)
-        visible = coordinator.advance("north", 17)
-        retargeted = coordinator.advance("southeast", 17)
+        visible = coordinator.advance("north", 23)
+        retargeted = coordinator.advance("southeast", 23)
 
         self.assertEqual(visible.presented_facing, "west")
         self.assertEqual(retargeted.presented_facing, "west")
@@ -151,8 +166,8 @@ class HeadEyeCoordinatorTests(unittest.TestCase):
     def test_retarget_to_visible_facing_cancels_cleanly(self):
         coordinator = HeadEyeCoordinator("south")
         coordinator.advance("north", 0)
-        coordinator.advance("north", 17)
-        cancelled = coordinator.advance("west", 17)
+        coordinator.advance("north", 23)
+        cancelled = coordinator.advance("west", 23)
         self.assertEqual(cancelled.presented_facing, "west")
         self.assertEqual(cancelled.phase, "steady")
 

@@ -15,7 +15,7 @@ class HeadEyeRenderIntegrationTests(unittest.TestCase):
         )
 
         samples = []
-        for _ in range(48):
+        for _ in range(66):
             source.advance_simulation(1.0 / 60.0)
             source.render_current_frame()
             presentation = source._last_presentation_state
@@ -50,6 +50,7 @@ class HeadEyeRenderIntegrationTests(unittest.TestCase):
             pose_sequence,
             [
                 "front_idle",
+                "walk_front_left",
                 "profile_left",
                 "back_left",
                 "back_idle",
@@ -94,7 +95,7 @@ class HeadEyeRenderIntegrationTests(unittest.TestCase):
         self.assertEqual({trace.rendered_pose_id for trace in traces}, {"front_idle"})
         self.assertEqual(
             {trace.presentation_channels.head_offset_y for trace in traces},
-            {0},
+            {-1, 0},
         )
         self.assertIn(
             "profile_left",
@@ -102,6 +103,33 @@ class HeadEyeRenderIntegrationTests(unittest.TestCase):
                 trace.presentation_channels.rendered_head_pose_id
                 for trace in traces
             },
+        )
+        self.assertIn(
+            "walk_front_left",
+            {
+                trace.presentation_channels.rendered_head_pose_id
+                for trace in traces
+            },
+        )
+        three_quarter = [
+            trace
+            for trace in traces
+            if trace.presentation_channels.rendered_head_pose_id
+            == "walk_front_left"
+        ]
+        self.assertGreaterEqual(len(three_quarter), 10)
+        breathing = [
+            trace
+            for trace in traces
+            if trace.presentation_channels.head_offset_y == -1
+        ]
+        self.assertTrue(breathing)
+        self.assertTrue(
+            all(
+                trace.presentation_channels.rendered_head_pose_id == "profile_left"
+                and trace.presentation_channels.head_eye_phase == "steady"
+                for trace in breathing
+            )
         )
         planted = [
             (trace.planted_anchor_stage.x, trace.planted_anchor_stage.y)
@@ -129,8 +157,8 @@ class HeadEyeRenderIntegrationTests(unittest.TestCase):
         source.commit_render_candidate(initial)
 
         state = source.current_state()
-        state.simulation_tick = 24
-        state.state_revision = 24
+        state.simulation_tick = 36
+        state.state_revision = 36
         inhale = source.render_captured_candidate_sync(source.capture_render_state())
         inhale_again = source.render_captured_candidate_sync(source.capture_render_state())
 
@@ -152,11 +180,25 @@ class HeadEyeRenderIntegrationTests(unittest.TestCase):
             release.animation_truth.planted_anchor_stage,
         )
 
-        state.simulation_tick = 24
+        state.simulation_tick = 36
         state.state_revision = 49
         state.speech_mouth_authority = "media_alignment"
         speech = source.render_captured_candidate_sync(source.capture_render_state())
         self.assertEqual(speech.animation_truth.presentation_channels.head_offset_y, 0)
+
+    def test_profile_listening_hold_keeps_restrained_head_only_breath(self):
+        source = ProceduralWizardFrameSource(cols=180, rows=101, fps=24)
+        state = source.current_state()
+
+        state.simulation_tick = 228
+        state.locomotion = "idle"
+        state.action = "idle"
+        state.speech_mouth_authority = "none"
+
+        self.assertEqual(source._idle_head_breath_offset(state, "steady", "west"), -1)
+        self.assertEqual(source._idle_head_breath_offset(state, "steady", "east"), -1)
+        self.assertEqual(source._idle_head_breath_offset(state, "settling", "west"), 0)
+        self.assertEqual(source._idle_head_breath_offset(state, "steady", "north"), 0)
 
     def test_discarded_first_turn_candidate_catches_up_to_same_visible_tick(self):
         committed = ProceduralWizardFrameSource(cols=180, rows=101, fps=24)

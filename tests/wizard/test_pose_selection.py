@@ -68,13 +68,13 @@ class PoseSelectionTests(unittest.TestCase):
     def test_idle_turn_presentation_uses_all_eight_authored_views(self):
         expected_by_facing = {
             "south": "front_idle",
-            "southeast": "front_idle",
+            "southeast": "walk_front_right",
             "east": "profile_right",
             "northeast": "back_right",
             "north": "back_idle",
             "northwest": "back_left",
             "west": "profile_left",
-            "southwest": "front_idle",
+            "southwest": "walk_front_left",
         }
         for facing, expected_pose in expected_by_facing.items():
             with self.subTest(facing=facing):
