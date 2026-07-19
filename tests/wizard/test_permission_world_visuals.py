@@ -179,8 +179,21 @@ class PermissionWorldVisualApplicationTests(unittest.TestCase):
         sx, sy, scale = project_quantized(
             state.world_position["x"], state.world_position["z"], 180, 101
         )
-        render_scale = scale * 0.90
+        requested_scale = scale * 0.90
         root = reference_pose_root_anchor("front_idle", source.pose_library_path)
+        local, _, _ = source._reference_pose_canvas_for_sample("front_idle")
+        provisional_root_screen = source._reference_root_screen(
+            sx,
+            sy,
+            state,
+            requested_scale,
+        )
+        render_scale = source._fit_reference_scale_to_stage(
+            local,
+            root,
+            provisional_root_screen,
+            requested_scale,
+        )
         tip = reference_pose_anchor("front_idle", "staff_tip", source.pose_library_path)
         hand = reference_pose_anchor("front_idle", "staff_hand", source.pose_library_path)
         shaft = (
