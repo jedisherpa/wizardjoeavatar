@@ -1,0 +1,937 @@
+{
+  "acceptance_scenario": "V3",
+  "checks": [
+    {
+      "detail": {
+        "acceptance_scenario": "V3",
+        "artifact_path": "scenario-program.json",
+        "program_id": "v3-canonical-cast",
+        "scenario_count": 7,
+        "schema": "character_director_scenario_program_v1",
+        "schema_version": 1,
+        "source_sha256": "3655beceec5c696f881d607d8eeaf8e2613397b3a4249c49106a3d7ffbb983aa",
+        "total_duration_seconds": 13.0
+      },
+      "name": "scenario_program_identity",
+      "passed": true
+    },
+    {
+      "detail": [
+        "v3-ready",
+        "v3-cast-one",
+        "v3-hold-one",
+        "v3-cast-two",
+        "v3-hold-two",
+        "v3-cast-three",
+        "v3-settle"
+      ],
+      "name": "scenario_order",
+      "passed": true
+    },
+    {
+      "detail": {
+        "frame_count": 314,
+        "missing_trace_frames": [],
+        "owned_frame_count": 312,
+        "scenario_blocks_contiguous": true,
+        "scenario_frame_counts": {
+          "v3-cast-one": 60,
+          "v3-cast-three": 60,
+          "v3-cast-two": 60,
+          "v3-hold-one": 48,
+          "v3-hold-two": 48,
+          "v3-ready": 12,
+          "v3-settle": 24
+        },
+        "trace_count": 314,
+        "transport_contiguous": true,
+        "unowned_are_bounded_transitions": true,
+        "unowned_transition_frame_indexes": [
+          120,
+          229
+        ]
+      },
+      "name": "complete_contiguous_capture",
+      "passed": true
+    },
+    {
+      "detail": {
+        "cast_trace_count": 91,
+        "mismatches": [],
+        "pose_ids": [
+          "cast_front_00",
+          "cast_front_01",
+          "cast_front_02",
+          "cast_front_03",
+          "cast_front_04",
+          "cast_front_05",
+          "cast_front_06",
+          "cast_front_07",
+          "cast_front_08",
+          "cast_front_09",
+          "cast_front_10",
+          "cast_front_11",
+          "cast_front_12",
+          "cast_front_13",
+          "cast_front_14",
+          "cast_front_15",
+          "cast_front_16",
+          "cast_front_17",
+          "cast_front_18",
+          "cast_front_19",
+          "cast_front_20",
+          "cast_front_21",
+          "cast_front_22",
+          "cast_front_23",
+          "cast_front_24",
+          "cast_front_25",
+          "cast_front_26",
+          "cast_front_27",
+          "cast_front_28",
+          "cast_front_29",
+          "cast_front_30"
+        ]
+      },
+      "name": "canonical_atomic_cast_poses",
+      "passed": true
+    },
+    {
+      "detail": {
+        "frame_31_is_exact_neutral": true,
+        "frame_zero_is_exact_neutral": true,
+        "pose_count": 32,
+        "staff_hand_anchors": [
+          [
+            56,
+            50
+          ]
+        ],
+        "staff_tip_step_failures": []
+      },
+      "name": "complete_static_cast_graph_contract",
+      "passed": true
+    },
+    {
+      "detail": {
+        "adjacent_changes": [
+          {
+            "changed_bounds": null,
+            "changed_cell_count": 0,
+            "from_frame": 0,
+            "left_cell_count": 313,
+            "nearest_cell_distance": 0.0,
+            "right_cell_count": 313,
+            "to_frame": 1
+          },
+          {
+            "changed_bounds": null,
+            "changed_cell_count": 0,
+            "from_frame": 1,
+            "left_cell_count": 313,
+            "nearest_cell_distance": 0.0,
+            "right_cell_count": 313,
+            "to_frame": 2
+          },
+          {
+            "changed_bounds": [
+              50,
+              11,
+              61,
+              94
+            ],
+            "changed_cell_count": 222,
+            "from_frame": 2,
+            "left_cell_count": 313,
+            "nearest_cell_distance": 1.0,
+            "right_cell_count": 313,
+            "to_frame": 3
+          },
+          {
+            "changed_bounds": [
+              48,
+              11,
+              62,
+              94
+            ],
+            "changed_cell_count": 242,
+            "from_frame": 3,
+            "left_cell_count": 313,
+            "nearest_cell_distance": 2.0,
+            "right_cell_count": 313,
+            "to_frame": 4
+          },
+          {
+            "changed_bounds": [
+              47,
+              11,
+              63,
+              94
+            ],
+            "changed_cell_count": 245,
+            "from_frame": 4,
+            "left_cell_count": 313,
+            "nearest_cell_distance": 2.0,
+            "right_cell_count": 315,
+            "to_frame": 5
+          },
+          {
+            "changed_bounds": [
+              46,
+              11,
+              64,
+              94
+            ],
+            "changed_cell_count": 242,
+            "from_frame": 5,
+            "left_cell_count": 315,
+            "nearest_cell_distance": 2.0,
+            "right_cell_count": 312,
+            "to_frame": 6
+          },
+          {
+            "changed_bounds": [
+              44,
+              11,
+              66,
+              93
+            ],
+            "changed_cell_count": 274,
+            "from_frame": 6,
+            "left_cell_count": 312,
+            "nearest_cell_distance": 2.0,
+            "right_cell_count": 317,
+            "to_frame": 7
+          },
+          {
+            "changed_bounds": null,
+            "changed_cell_count": 0,
+            "from_frame": 7,
+            "left_cell_count": 317,
+            "nearest_cell_distance": 0.0,
+            "right_cell_count": 317,
+            "to_frame": 8
+          },
+          {
+            "changed_bounds": null,
+            "changed_cell_count": 0,
+            "from_frame": 8,
+            "left_cell_count": 317,
+            "nearest_cell_distance": 0.0,
+            "right_cell_count": 317,
+            "to_frame": 9
+          },
+          {
+            "changed_bounds": null,
+            "changed_cell_count": 0,
+            "from_frame": 9,
+            "left_cell_count": 317,
+            "nearest_cell_distance": 0.0,
+            "right_cell_count": 317,
+            "to_frame": 10
+          },
+          {
+            "changed_bounds": [
+              43,
+              11,
+              67,
+              93
+            ],
+            "changed_cell_count": 228,
+            "from_frame": 10,
+            "left_cell_count": 317,
+            "nearest_cell_distance": 3.0,
+            "right_cell_count": 316,
+            "to_frame": 11
+          },
+          {
+            "changed_bounds": [
+              43,
+              11,
+              67,
+              92
+            ],
+            "changed_cell_count": 64,
+            "from_frame": 11,
+            "left_cell_count": 316,
+            "nearest_cell_distance": 1.0,
+            "right_cell_count": 320,
+            "to_frame": 12
+          },
+          {
+            "changed_bounds": [
+              43,
+              12,
+              67,
+              93
+            ],
+            "changed_cell_count": 60,
+            "from_frame": 12,
+            "left_cell_count": 320,
+            "nearest_cell_distance": 1.0,
+            "right_cell_count": 321,
+            "to_frame": 13
+          },
+          {
+            "changed_bounds": null,
+            "changed_cell_count": 0,
+            "from_frame": 13,
+            "left_cell_count": 321,
+            "nearest_cell_distance": 0.0,
+            "right_cell_count": 321,
+            "to_frame": 14
+          },
+          {
+            "changed_bounds": null,
+            "changed_cell_count": 0,
+            "from_frame": 14,
+            "left_cell_count": 321,
+            "nearest_cell_distance": 0.0,
+            "right_cell_count": 321,
+            "to_frame": 15
+          },
+          {
+            "changed_bounds": null,
+            "changed_cell_count": 0,
+            "from_frame": 15,
+            "left_cell_count": 321,
+            "nearest_cell_distance": 0.0,
+            "right_cell_count": 321,
+            "to_frame": 16
+          },
+          {
+            "changed_bounds": null,
+            "changed_cell_count": 0,
+            "from_frame": 16,
+            "left_cell_count": 321,
+            "nearest_cell_distance": 0.0,
+            "right_cell_count": 321,
+            "to_frame": 17
+          },
+          {
+            "changed_bounds": null,
+            "changed_cell_count": 0,
+            "from_frame": 17,
+            "left_cell_count": 321,
+            "nearest_cell_distance": 0.0,
+            "right_cell_count": 321,
+            "to_frame": 18
+          },
+          {
+            "changed_bounds": null,
+            "changed_cell_count": 0,
+            "from_frame": 18,
+            "left_cell_count": 321,
+            "nearest_cell_distance": 0.0,
+            "right_cell_count": 321,
+            "to_frame": 19
+          },
+          {
+            "changed_bounds": null,
+            "changed_cell_count": 0,
+            "from_frame": 19,
+            "left_cell_count": 321,
+            "nearest_cell_distance": 0.0,
+            "right_cell_count": 321,
+            "to_frame": 20
+          },
+          {
+            "changed_bounds": null,
+            "changed_cell_count": 0,
+            "from_frame": 20,
+            "left_cell_count": 321,
+            "nearest_cell_distance": 0.0,
+            "right_cell_count": 321,
+            "to_frame": 21
+          },
+          {
+            "changed_bounds": null,
+            "changed_cell_count": 0,
+            "from_frame": 21,
+            "left_cell_count": 321,
+            "nearest_cell_distance": 0.0,
+            "right_cell_count": 321,
+            "to_frame": 22
+          },
+          {
+            "changed_bounds": [
+              43,
+              11,
+              67,
+              93
+            ],
+            "changed_cell_count": 299,
+            "from_frame": 22,
+            "left_cell_count": 321,
+            "nearest_cell_distance": 3.0,
+            "right_cell_count": 317,
+            "to_frame": 23
+          },
+          {
+            "changed_bounds": [
+              44,
+              11,
+              66,
+              93
+            ],
+            "changed_cell_count": 274,
+            "from_frame": 23,
+            "left_cell_count": 317,
+            "nearest_cell_distance": 2.0,
+            "right_cell_count": 312,
+            "to_frame": 24
+          },
+          {
+            "changed_bounds": [
+              46,
+              11,
+              64,
+              94
+            ],
+            "changed_cell_count": 242,
+            "from_frame": 24,
+            "left_cell_count": 312,
+            "nearest_cell_distance": 2.0,
+            "right_cell_count": 315,
+            "to_frame": 25
+          },
+          {
+            "changed_bounds": [
+              47,
+              11,
+              63,
+              94
+            ],
+            "changed_cell_count": 245,
+            "from_frame": 25,
+            "left_cell_count": 315,
+            "nearest_cell_distance": 2.0,
+            "right_cell_count": 313,
+            "to_frame": 26
+          },
+          {
+            "changed_bounds": [
+              48,
+              11,
+              62,
+              94
+            ],
+            "changed_cell_count": 242,
+            "from_frame": 26,
+            "left_cell_count": 313,
+            "nearest_cell_distance": 2.0,
+            "right_cell_count": 313,
+            "to_frame": 27
+          },
+          {
+            "changed_bounds": [
+              50,
+              11,
+              61,
+              94
+            ],
+            "changed_cell_count": 222,
+            "from_frame": 27,
+            "left_cell_count": 313,
+            "nearest_cell_distance": 1.0,
+            "right_cell_count": 313,
+            "to_frame": 28
+          },
+          {
+            "changed_bounds": null,
+            "changed_cell_count": 0,
+            "from_frame": 28,
+            "left_cell_count": 313,
+            "nearest_cell_distance": 0.0,
+            "right_cell_count": 313,
+            "to_frame": 29
+          },
+          {
+            "changed_bounds": null,
+            "changed_cell_count": 0,
+            "from_frame": 29,
+            "left_cell_count": 313,
+            "nearest_cell_distance": 0.0,
+            "right_cell_count": 313,
+            "to_frame": 30
+          },
+          {
+            "changed_bounds": null,
+            "changed_cell_count": 0,
+            "from_frame": 30,
+            "left_cell_count": 313,
+            "nearest_cell_distance": 0.0,
+            "right_cell_count": 313,
+            "to_frame": 31
+          }
+        ],
+        "failures": [],
+        "maximum_changed_cell_count": 299,
+        "maximum_nearest_cell_distance": 3.0,
+        "neutral_staff_cell_count": 313
+      },
+      "name": "full_staff_raster_object_continuity",
+      "passed": true
+    },
+    {
+      "detail": {
+        "v3-cast-one": [
+          [
+            "action_commit",
+            10
+          ],
+          [
+            "action_effect",
+            14
+          ],
+          [
+            "action_recoverable",
+            23
+          ],
+          [
+            "action_settled",
+            28
+          ]
+        ],
+        "v3-cast-three": [
+          [
+            "action_commit",
+            10
+          ],
+          [
+            "action_effect",
+            14
+          ],
+          [
+            "action_recoverable",
+            23
+          ],
+          [
+            "action_settled",
+            28
+          ]
+        ],
+        "v3-cast-two": [
+          [
+            "action_commit",
+            10
+          ],
+          [
+            "action_effect",
+            14
+          ],
+          [
+            "action_recoverable",
+            23
+          ],
+          [
+            "action_settled",
+            28
+          ]
+        ]
+      },
+      "name": "authored_marker_order_per_cast",
+      "passed": true
+    },
+    {
+      "detail": {
+        "following_neutral_by_cast": {
+          "v3-cast-one": true,
+          "v3-cast-three": true,
+          "v3-cast-two": true
+        },
+        "marker_events_per_cast": {
+          "v3-cast-one": [
+            [
+              "action_commit",
+              10
+            ],
+            [
+              "action_effect",
+              14
+            ],
+            [
+              "action_recoverable",
+              23
+            ],
+            [
+              "action_settled",
+              28
+            ]
+          ],
+          "v3-cast-three": [
+            [
+              "action_commit",
+              10
+            ],
+            [
+              "action_effect",
+              14
+            ],
+            [
+              "action_recoverable",
+              23
+            ],
+            [
+              "action_settled",
+              28
+            ]
+          ],
+          "v3-cast-two": [
+            [
+              "action_commit",
+              10
+            ],
+            [
+              "action_effect",
+              14
+            ],
+            [
+              "action_recoverable",
+              23
+            ],
+            [
+              "action_settled",
+              28
+            ]
+          ]
+        },
+        "observed_by_cast": {
+          "v3-cast-one": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22,
+            23,
+            24,
+            25,
+            26,
+            27,
+            28,
+            29,
+            30
+          ],
+          "v3-cast-three": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22,
+            23,
+            24,
+            25,
+            26,
+            27,
+            28,
+            29,
+            30
+          ],
+          "v3-cast-two": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22,
+            23,
+            24,
+            25,
+            26,
+            27,
+            28,
+            29,
+            30
+          ]
+        },
+        "observed_union": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          30
+        ],
+        "recovery_coverage_per_cast": {
+          "v3-cast-one": [
+            23,
+            24,
+            25,
+            26,
+            27,
+            28,
+            29,
+            30
+          ],
+          "v3-cast-three": [
+            23,
+            24,
+            25,
+            26,
+            27,
+            28,
+            29,
+            30
+          ],
+          "v3-cast-two": [
+            23,
+            24,
+            25,
+            26,
+            27,
+            28,
+            29,
+            30
+          ]
+        },
+        "recovery_gaps_per_cast": {
+          "v3-cast-one": [],
+          "v3-cast-three": [],
+          "v3-cast-two": []
+        },
+        "required_nonterminal_frames": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          30
+        ],
+        "required_recovery_frames_per_cast": [
+          23,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          30
+        ],
+        "terminal_frame_31_is_exact_neutral": true
+      },
+      "name": "authored_coverage_and_terminal_neutral",
+      "passed": true
+    },
+    {
+      "detail": {
+        "contact_passed": true,
+        "maximum_planted_drift_cells": 0.0,
+        "staff_hand_max_axis_drift": 0.0,
+        "stage_root_max_axis_drift": 0.0,
+        "world_root_max_axis_drift": 0.0
+      },
+      "name": "planted_root_and_fixed_staff_grip",
+      "passed": true
+    },
+    {
+      "detail": {
+        "continuity_failures": [],
+        "maximum_axis_cells_per_authored_frame": 2.0,
+        "observed_authored_frames": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          30
+        ],
+        "repeated_frame_conflicts": {}
+      },
+      "name": "continuous_repeatable_staff_arc",
+      "passed": true
+    },
+    {
+      "detail": [],
+      "name": "effect_follows_authored_staff_event",
+      "passed": true
+    },
+    {
+      "detail": {
+        "clipped_frames": [],
+        "stage": [
+          240,
+          135
+        ]
+      },
+      "name": "cast_silhouette_within_canonical_stage",
+      "passed": true
+    }
+  ],
+  "metrics": {
+    "cast_trace_count": 91,
+    "clipped_frame_count": 0,
+    "effect_failure_count": 0,
+    "frame_count": 314,
+    "observed_cast_authored_frames": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30
+    ],
+    "owned_frame_count": 312,
+    "staff_continuity_failure_count": 0,
+    "staff_hand_max_axis_drift": 0.0,
+    "staff_raster_failure_count": 0,
+    "staff_raster_maximum_changed_cell_count": 299,
+    "staff_raster_maximum_nearest_cell_distance": 3.0,
+    "stage_root_max_axis_drift": 0.0,
+    "static_cast_pose_count": 32,
+    "world_root_max_axis_drift": 0.0
+  },
+  "passed": true,
+  "review_boundary": "Machine checks do not replace normal-speed and quarter-speed review of silhouette, staging, acting, and effect readability.",
+  "schema": "character_director_v3_machine_acceptance_v1",
+  "schema_version": 1
+}
