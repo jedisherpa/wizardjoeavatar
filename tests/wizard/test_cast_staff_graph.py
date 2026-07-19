@@ -1,6 +1,6 @@
 import unittest
 
-from wizard_avatar.pose_compositor import author_cast_staff_graph
+from wizard_avatar.pose_compositor import authored_staff_cells, author_cast_staff_graph
 from wizard_avatar.reference_avatar import render_reference_pose_local
 
 
@@ -14,7 +14,7 @@ class CastStaffGraphTests(unittest.TestCase):
             "source_staff_tip": (58, 12),
             "source_staff_hand": (56, 50),
             "root_anchor": (36, 95),
-            "target_staff_tip": (52, 17),
+            "target_staff_tip": (64, 19),
             "target_staff_hand": (56, 50),
         }
         author_cast_staff_graph(first, **kwargs)
@@ -30,6 +30,31 @@ class CastStaffGraphTests(unittest.TestCase):
                     if red >= 145 and red > green * 1.08 and green > blue * 1.05:
                         preserved_skin += 1
         self.assertGreater(preserved_skin, 0)
+        source_staff = authored_staff_cells(original, (58, 12), (56, 50), (36, 95))
+        target_staff = authored_staff_cells(first, (64, 19), (56, 50), (36, 95))
+        self.assertTrue({cell.rgb for cell in target_staff.values()}.issubset(
+            {cell.rgb for cell in source_staff.values()}
+        ))
+        self.assertGreaterEqual(len(target_staff), int(len(source_staff) * 0.85))
+        self.assertLessEqual(len(target_staff), int(len(source_staff) * 1.20))
+
+    def test_neutral_target_preserves_exact_staff_and_character_graph(self):
+        canvas = render_reference_pose_local("front_idle")
+        original = canvas.copy()
+
+        author_cast_staff_graph(
+            canvas,
+            source_staff_tip=(58, 12),
+            source_staff_hand=(56, 50),
+            root_anchor=(36, 95),
+            target_staff_tip=(58, 12),
+            target_staff_hand=(56, 50),
+        )
+
+        self.assertEqual(
+            [[None if cell is None else cell.to_bytes() for cell in row] for row in canvas.cells],
+            [[None if cell is None else cell.to_bytes() for cell in row] for row in original.cells],
+        )
 
     def test_cast_staff_rejects_collapsed_geometry(self):
         canvas = render_reference_pose_local("front_idle")

@@ -51,7 +51,7 @@ class CharacterCapabilityManifestTests(unittest.TestCase):
         )
         self.assertEqual(
             self.manifest["manifest_sha256"],
-            "sha256:7f3f4237fed2b95b6cf729630ee3f65cc7e9ca7db0945472db3708b7b1df193b",
+            "sha256:2564620bb34dd90319d0f1c9aae0520b0e468b8432d18b7189680d1840434fa3",
         )
 
     def test_current_character_counts_and_admission_are_truthful(self):
@@ -59,9 +59,9 @@ class CharacterCapabilityManifestTests(unittest.TestCase):
         self.assertEqual(counts["clip_count"], 30)
         self.assertEqual(counts["node_count"], 30)
         self.assertEqual(counts["transition_count"], 61)
-        self.assertEqual(counts["pose_count"], 91)
-        self.assertEqual(counts["graph_admitted_pose_count"], 40)
-        self.assertEqual(counts["diagnostic_only_pose_count"], 51)
+        self.assertEqual(counts["pose_count"], 131)
+        self.assertEqual(counts["graph_admitted_pose_count"], 79)
+        self.assertEqual(counts["diagnostic_only_pose_count"], 52)
         self.assertEqual(counts["expression_count"], 10)
         self.assertEqual(counts["mouth_shape_count"], 7)
         self.assertEqual(counts["capability_count"], 51)
@@ -77,8 +77,8 @@ class CharacterCapabilityManifestTests(unittest.TestCase):
             for pose in self.manifest["poses"]
             if pose["admission"] == "diagnostic_only"
         }
-        self.assertEqual(len(admitted), 40)
-        self.assertEqual(len(diagnostic), 51)
+        self.assertEqual(len(admitted), 79)
+        self.assertEqual(len(diagnostic), 52)
         self.assertFalse(admitted & diagnostic)
         self.assertTrue(all(pose_id.endswith("_close") for pose_id in diagnostic if "_close" in pose_id))
         self.assertFalse(any(pose_id.endswith("_close") for pose_id in admitted))

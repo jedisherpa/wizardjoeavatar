@@ -22,6 +22,7 @@ class ReferencePoseCell:
     x: int
     y: int
     rgb: Tuple[int, int, int]
+    region: str = ""
 
 
 @dataclass(frozen=True)
@@ -88,6 +89,7 @@ def _reference_pose_map(path: Path = REFERENCE_POSE_CELL_PATH) -> Dict[str, Refe
                 x=int(cell["x"]),
                 y=int(cell["y"]),
                 rgb=tuple(int(channel) for channel in cell["rgb"]),
+                region=str(cell.get("region", "")),
             )
             for cell in pose.get("cells", [])
         )
@@ -181,7 +183,13 @@ def _render_reference_pose_canvas(
     canvas = CellCanvas(pose.cols, pose.rows)
     layer_id = f"{REFERENCE_LAYER_ID}:{pose.pose_id}"
     for cell in pose.cells:
-        canvas.set(cell.x, cell.y, glyph("solid_fill"), cell.rgb, layer_id)
+        canvas.set(
+            cell.x,
+            cell.y,
+            glyph("solid_fill"),
+            cell.rgb,
+            cell.region or layer_id,
+        )
     return canvas
 
 

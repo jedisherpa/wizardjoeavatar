@@ -1,5 +1,5 @@
 {
-  "version": 85,
+  "version": 86,
   "asset_set_id": "wizardjoe-reference-motion-v1",
   "description": "Source pose PNGs for the repeatable WizardJoe square-cell pose library.",
   "canonical": {
@@ -14,6 +14,40 @@
     "crop_strategy": "per_pose_subject_crop_then_canonical_canvas_v1"
   },
   "palette_id": "per_pose_quantized_64",
+  "derived_cast_tip_overrides": {
+    "cast_front_00": [22, -83],
+    "cast_front_01": [22, -83],
+    "cast_front_02": [22, -83],
+    "cast_front_03": [23, -82],
+    "cast_front_04": [24, -81],
+    "cast_front_05": [25, -80],
+    "cast_front_06": [26, -79],
+    "cast_front_07": [27, -78],
+    "cast_front_08": [27, -78],
+    "cast_front_09": [27, -78],
+    "cast_front_10": [27, -78],
+    "cast_front_11": [28, -78],
+    "cast_front_12": [28, -77],
+    "cast_front_13": [28, -76],
+    "cast_front_14": [28, -76],
+    "cast_front_15": [28, -76],
+    "cast_front_16": [28, -76],
+    "cast_front_17": [28, -76],
+    "cast_front_18": [28, -76],
+    "cast_front_19": [28, -76],
+    "cast_front_20": [28, -76],
+    "cast_front_21": [28, -76],
+    "cast_front_22": [28, -76],
+    "cast_front_23": [27, -78],
+    "cast_front_24": [26, -79],
+    "cast_front_25": [25, -80],
+    "cast_front_26": [24, -81],
+    "cast_front_27": [23, -82],
+    "cast_front_28": [22, -83],
+    "cast_front_29": [22, -83],
+    "cast_front_30": [22, -83],
+    "cast_front_31": [22, -83]
+  },
   "anchor_space": "root_relative_cells",
   "default_anchor_offsets": {
     "root": [
@@ -1768,6 +1802,116 @@
         "gesture",
         "staff_held",
         "wings"
+      ],
+      "anchor_offsets": {
+        "left_hand": [
+          -29,
+          -51
+        ],
+        "right_hand": [
+          20,
+          -45
+        ],
+        "staff_hand": [
+          20,
+          -45
+        ],
+        "staff_tip": [
+          22,
+          -83
+        ]
+      }
+    },
+    {
+      "id": "explain_front_in_20",
+      "source": "derived_landmark_warp:front_idle+explaining@200/1000",
+      "description": "authored explanatory anticipation at 20 percent",
+      "derived_landmark_warp": {
+        "from_pose_id": "front_idle",
+        "to_pose_id": "explaining",
+        "progress_milli": 200
+      },
+      "facing": "south",
+      "locomotion": "idle",
+      "actions": [
+        "explaining",
+        "speaking"
+      ],
+      "phase": 0.2,
+      "tags": [
+        "front",
+        "explain",
+        "authored_pixel_graph",
+        "landmark_warp"
+      ]
+    },
+    {
+      "id": "explain_front_in_40",
+      "source": "derived_landmark_warp:front_idle+explaining@400/1000",
+      "description": "authored explanatory anticipation at 40 percent",
+      "derived_landmark_warp": {
+        "from_pose_id": "front_idle",
+        "to_pose_id": "explaining",
+        "progress_milli": 400
+      },
+      "facing": "south",
+      "locomotion": "idle",
+      "actions": [
+        "explaining",
+        "speaking"
+      ],
+      "phase": 0.4,
+      "tags": [
+        "front",
+        "explain",
+        "authored_pixel_graph",
+        "landmark_warp"
+      ]
+    },
+    {
+      "id": "explain_front_in_60",
+      "source": "derived_landmark_warp:front_idle+explaining@600/1000",
+      "description": "authored explanatory anticipation at 60 percent",
+      "derived_landmark_warp": {
+        "from_pose_id": "front_idle",
+        "to_pose_id": "explaining",
+        "progress_milli": 600
+      },
+      "facing": "south",
+      "locomotion": "idle",
+      "actions": [
+        "explaining",
+        "speaking"
+      ],
+      "phase": 0.6,
+      "tags": [
+        "front",
+        "explain",
+        "authored_pixel_graph",
+        "landmark_warp"
+      ]
+    },
+    {
+      "id": "explain_front_in_80",
+      "source": "derived_landmark_warp:front_idle+explaining@800/1000",
+      "description": "authored explanatory anticipation at 80 percent",
+      "derived_landmark_warp": {
+        "from_pose_id": "front_idle",
+        "to_pose_id": "explaining",
+        "progress_milli": 800
+      },
+      "facing": "south",
+      "locomotion": "idle",
+      "actions": [
+        "explaining",
+        "speaking"
+      ],
+      "phase": 0.8,
+      "tags": [
+        "front",
+        "explain",
+        "authored_pixel_graph",
+        "landmark_warp"
       ]
     },
     {
@@ -3427,6 +3571,94 @@
           -83
         ]
       }
+    },
+    {
+      "id": "point_front_in_20",
+      "source": "derived_landmark_warp:front_idle+front_point_direct_staff_held@200/1000",
+      "description": "authored direct-point anticipation at 20 percent",
+      "derived_landmark_warp": {
+        "from_pose_id": "front_idle",
+        "to_pose_id": "front_point_direct_staff_held",
+        "progress_milli": 200
+      },
+      "facing": "south",
+      "locomotion": "idle",
+      "actions": [
+        "pointing"
+      ],
+      "phase": 0.2,
+      "tags": [
+        "front",
+        "pointing",
+        "authored_pixel_graph",
+        "landmark_warp"
+      ]
+    },
+    {
+      "id": "point_front_in_40",
+      "source": "derived_landmark_warp:front_idle+front_point_direct_staff_held@400/1000",
+      "description": "authored direct-point anticipation at 40 percent",
+      "derived_landmark_warp": {
+        "from_pose_id": "front_idle",
+        "to_pose_id": "front_point_direct_staff_held",
+        "progress_milli": 400
+      },
+      "facing": "south",
+      "locomotion": "idle",
+      "actions": [
+        "pointing"
+      ],
+      "phase": 0.4,
+      "tags": [
+        "front",
+        "pointing",
+        "authored_pixel_graph",
+        "landmark_warp"
+      ]
+    },
+    {
+      "id": "point_front_in_60",
+      "source": "derived_landmark_warp:front_idle+front_point_direct_staff_held@600/1000",
+      "description": "authored direct-point anticipation at 60 percent",
+      "derived_landmark_warp": {
+        "from_pose_id": "front_idle",
+        "to_pose_id": "front_point_direct_staff_held",
+        "progress_milli": 600
+      },
+      "facing": "south",
+      "locomotion": "idle",
+      "actions": [
+        "pointing"
+      ],
+      "phase": 0.6,
+      "tags": [
+        "front",
+        "pointing",
+        "authored_pixel_graph",
+        "landmark_warp"
+      ]
+    },
+    {
+      "id": "point_front_in_80",
+      "source": "derived_landmark_warp:front_idle+front_point_direct_staff_held@800/1000",
+      "description": "authored direct-point anticipation at 80 percent",
+      "derived_landmark_warp": {
+        "from_pose_id": "front_idle",
+        "to_pose_id": "front_point_direct_staff_held",
+        "progress_milli": 800
+      },
+      "facing": "south",
+      "locomotion": "idle",
+      "actions": [
+        "pointing"
+      ],
+      "phase": 0.8,
+      "tags": [
+        "front",
+        "pointing",
+        "authored_pixel_graph",
+        "landmark_warp"
+      ]
     },
     {
       "id": "front_celebrate_jump_staff_up",

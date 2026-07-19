@@ -1,5 +1,6 @@
 import copy
 import unittest
+from unittest.mock import patch
 
 from tools.analyze_character_director_v3 import (
     CAST_SCENARIOS,
@@ -7,6 +8,7 @@ from tools.analyze_character_director_v3 import (
     EXPECTED_MARKERS,
     EXPECTED_SCENARIOS,
     analyze_v3,
+    _staff_raster,
 )
 from wizard_avatar.reference_avatar import get_reference_pose
 
@@ -16,7 +18,7 @@ def fixture():
         "scenario_program": {
             "program_id": "v3-canonical-cast",
             "acceptance_scenario": "V3",
-            "total_duration_seconds": 10.0,
+            "total_duration_seconds": 11.5,
         },
         "scenarios": [{"name": name} for name in EXPECTED_SCENARIOS],
         "init": {"cols": 240, "rows": 135, "fps": 24.0},
@@ -38,12 +40,13 @@ def fixture():
                     "scenario": scenario,
                 }
             )
-            authored_frame = min(local_frame, 31) if is_cast else 0
-            pose_id = f"cast_front_{authored_frame:02d}" if is_cast else "front_idle"
+            active_cast = is_cast and local_frame < 32
+            authored_frame = local_frame if active_cast else 0
+            pose_id = f"cast_front_{authored_frame:02d}" if active_cast else "front_idle"
             pose = get_reference_pose(pose_id)
             marker_events = []
             for marker_id, marker_frame in EXPECTED_MARKERS:
-                if is_cast and authored_frame == marker_frame and local_frame == marker_frame:
+                if active_cast and authored_frame == marker_frame:
                     marker_events.append(
                         {
                             "marker_id": marker_id,
@@ -52,20 +55,20 @@ def fixture():
                     )
             effect_phase = "inactive"
             effect_intensity = 0.0
-            if is_cast and 14 <= authored_frame < 18:
+            if active_cast and 14 <= authored_frame < 18:
                 effect_phase = "stroke"
                 effect_intensity = 1.0
-            elif is_cast and 18 <= authored_frame < 23:
+            elif active_cast and 18 <= authored_frame < 23:
                 effect_phase = "hold"
                 effect_intensity = 1.0
-            elif is_cast and 23 <= authored_frame < 28:
+            elif active_cast and 23 <= authored_frame < 28:
                 effect_phase = "recovery"
                 effect_intensity = (28 - authored_frame) / 5.0
             traces.append(
                 {
                     "frame_index": frame_index,
                     "rendered_pose_id": pose_id,
-                    "animation_clip_id": "cast_front" if is_cast else "idle_front",
+                    "animation_clip_id": "cast_front" if active_cast else "idle_front",
                     "animation_authored_frame": authored_frame,
                     "presentation_marker_events": marker_events,
                     "world_root_x": 0.0,
@@ -106,7 +109,7 @@ class CharacterDirectorV3AcceptanceTests(unittest.TestCase):
         report = analyze_v3(manifest, traces)
 
         self.assertTrue(report["passed"], report)
-        self.assertEqual(report["metrics"]["frame_count"], 240)
+        self.assertEqual(report["metrics"]["frame_count"], 276)
         self.assertEqual(report["metrics"]["staff_continuity_failure_count"], 0)
 
     def test_staff_jump_and_missing_marker_fail_closed(self):
@@ -199,9 +202,49 @@ class CharacterDirectorV3AcceptanceTests(unittest.TestCase):
 
         self.assertTrue(report["passed"], report)
         capture = check(report, "complete_contiguous_capture")
-        self.assertEqual(capture["detail"]["unowned_transition_frame_indexes"], [48])
+        self.assertEqual(capture["detail"]["unowned_transition_frame_indexes"], [60])
         coverage = check(report, "authored_coverage_and_terminal_neutral")
         self.assertTrue(coverage["passed"])
+
+    def test_each_cast_must_present_complete_recovery(self):
+        manifest, traces = fixture()
+        broken = copy.deepcopy(traces)
+        first_cast_indexes = {
+            frame["frame_index"]
+            for frame in manifest["frames"]
+            if frame["scenario"] == "v3-cast-one"
+        }
+        for trace in broken:
+            if trace["frame_index"] in first_cast_indexes and trace.get(
+                "animation_authored_frame"
+            ) == 26:
+                trace["animation_authored_frame"] = 27
+                trace["rendered_pose_id"] = "cast_front_27"
+
+        report = analyze_v3(manifest, broken)
+
+        self.assertFalse(report["passed"])
+        coverage = check(report, "authored_coverage_and_terminal_neutral")
+        self.assertFalse(coverage["passed"])
+        self.assertNotIn(26, coverage["detail"]["recovery_coverage_per_cast"]["v3-cast-one"])
+
+    def test_full_staff_raster_discontinuity_fails_closed(self):
+        manifest, traces = fixture()
+
+        def broken_raster(pose_id):
+            raster = dict(_staff_raster(pose_id))
+            if pose_id == "cast_front_15":
+                raster[(0, 0)] = (255, 0, 255)
+            return raster
+
+        with patch(
+            "tools.analyze_character_director_v3._staff_raster",
+            side_effect=broken_raster,
+        ):
+            report = analyze_v3(manifest, traces)
+
+        self.assertFalse(report["passed"])
+        self.assertFalse(check(report, "full_staff_raster_object_continuity")["passed"])
 
 
 if __name__ == "__main__":

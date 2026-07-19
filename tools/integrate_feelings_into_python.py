@@ -15,7 +15,7 @@ METADATA_PATH = ROOT / "assets" / "reference" / "motion_sources" / "feelings_pyt
 GRAPH_PATH = ROOT / "wizard_avatar" / "definitions" / "reference_avatar_animation_graph_v2.json"
 LIBRARY_PATH = ROOT / "wizard_avatar" / "definitions" / "reference_avatar_pose_cells.json"
 EXPECTED_NEW_POSES = 50
-EXPECTED_TOTAL_POSES = 123
+EXPECTED_TOTAL_POSES = 131
 
 
 def stable_json(payload: Any) -> str:

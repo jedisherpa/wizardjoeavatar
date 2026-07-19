@@ -32,7 +32,7 @@ class ReferenceAvatarPoseLibraryTests(unittest.TestCase):
         manifest = json.loads(MANIFEST_PATH.read_text(encoding="utf-8"))
         expected_pose_ids = {pose["id"] for pose in manifest["poses"]}
         self.assertEqual(set(reference_pose_ids()), expected_pose_ids)
-        self.assertEqual(len(expected_pose_ids), 123)
+        self.assertEqual(len(expected_pose_ids), 131)
         self.assertTrue(
             {
                 "front_greeting_wave_wings",
@@ -41,8 +41,34 @@ class ReferenceAvatarPoseLibraryTests(unittest.TestCase):
                 "feeling_love_close",
                 "cast_front_00",
                 "cast_front_31",
+                "explain_front_in_20",
+                "explain_front_in_80",
+                "point_front_in_20",
+                "point_front_in_80",
             }.issubset(expected_pose_ids)
         )
+
+    def test_explain_and_point_inbetweens_are_baked_landmark_warp_graphs(self):
+        library = json.loads(
+            (
+                ROOT
+                / "wizard_avatar"
+                / "definitions"
+                / "reference_avatar_pose_cells.json"
+            ).read_text(encoding="utf-8")
+        )
+        by_id = {pose["id"]: pose for pose in library["poses"]}
+        expected = {
+            *(f"explain_front_in_{amount}" for amount in (20, 40, 60, 80)),
+            *(f"point_front_in_{amount}" for amount in (20, 40, 60, 80)),
+        }
+
+        self.assertEqual({pose_id for pose_id in by_id if pose_id in expected}, expected)
+        for pose_id in expected:
+            pose = by_id[pose_id]
+            self.assertTrue(pose["source"].startswith("derived_landmark_warp:"))
+            self.assertEqual(pose["root_anchor"], [36, 95])
+            self.assertTrue(pose["cells"])
 
     def test_cast_frames_are_baked_atomic_pixel_graphs_with_continuous_anchors(self):
         poses = [get_reference_pose(f"cast_front_{frame:02d}") for frame in range(32)]

@@ -18,6 +18,7 @@ from wizard_avatar.glyphs import glyph
 from wizard_avatar.pose_compositor import (
     author_cast_staff_graph,
     composite_anchor_transition,
+    composite_landmark_warp_transition,
 )
 
 
@@ -231,7 +232,9 @@ def derive_blend_payload(
 
 
 def derive_cast_rig_payload(
+    manifest: dict[str, Any],
     pose: dict[str, Any],
+    poses_by_id: dict[str, dict[str, Any]],
     normalized_payloads: dict[str, dict[str, Any]],
     canonical: dict[str, Any],
     colors: int,
@@ -256,18 +259,29 @@ def derive_cast_rig_payload(
 
     source_tip = absolute_offset("source_staff_tip_offset")
     source_hand = absolute_offset("source_staff_hand_offset")
-    target_tip = absolute_offset("target_staff_tip_offset")
+    tip_overrides = manifest.get("derived_cast_tip_overrides", {})
+    target_tip_offset = tip_overrides.get(pose["id"])
+    if target_tip_offset is None:
+        target_tip = absolute_offset("target_staff_tip_offset")
+    else:
+        override = point_from(
+            target_tip_offset,
+            field_name=f"derived_cast_tip_overrides.{pose['id']}",
+        )
+        target_tip = root[0] + override[0], root[1] + override[1]
     target_hand = absolute_offset("target_staff_hand_offset")
     canvas = payload_canvas(base_payload)
-    if (target_tip, target_hand) != (source_tip, source_hand):
-        author_cast_staff_graph(
-            canvas,
-            source_staff_tip=source_tip,
-            source_staff_hand=source_hand,
-            root_anchor=tuple(root),
-            target_staff_tip=target_tip,
-            target_staff_hand=target_hand,
-        )
+    author_cast_staff_graph(
+        canvas,
+        source_staff_tip=source_tip,
+        source_staff_hand=source_hand,
+        root_anchor=tuple(root),
+        target_staff_tip=target_tip,
+        target_staff_hand=target_hand,
+    )
+    base_anchors = resolve_anchors(manifest, poses_by_id[base_pose_id], base_payload)
+    base_anchors["staff_hand"] = [target_hand[0], target_hand[1]]
+    base_anchors["staff_tip"] = [target_tip[0], target_tip[1]]
     return {
         "source": (
             f"derived_cast_rig:{base_pose_id}:"
@@ -281,6 +295,92 @@ def derive_cast_rig_payload(
         "cols": canvas.width,
         "rows": canvas.height,
         "root_anchor": root,
+        "resolved_anchors": base_anchors,
+        "quantized_colors": colors,
+        "coverage_threshold": coverage_threshold,
+        "cells": canvas_cells(canvas),
+    }
+
+
+def derive_landmark_warp_payload(
+    manifest: dict[str, Any],
+    pose: dict[str, Any],
+    poses_by_id: dict[str, dict[str, Any]],
+    normalized_payloads: dict[str, dict[str, Any]],
+    canonical: dict[str, Any],
+    colors: int,
+    coverage_threshold: int,
+) -> dict[str, Any]:
+    warp = pose.get("derived_landmark_warp")
+    if not isinstance(warp, dict):
+        raise ValueError(f"{pose['id']}.derived_landmark_warp must be an object")
+    from_pose_id = str(warp.get("from_pose_id", ""))
+    to_pose_id = str(warp.get("to_pose_id", ""))
+    if from_pose_id == to_pose_id:
+        raise ValueError(f"{pose['id']} warp endpoints must be different")
+    try:
+        from_pose = poses_by_id[from_pose_id]
+        to_pose = poses_by_id[to_pose_id]
+        from_payload = normalized_payloads[from_pose_id]
+        to_payload = normalized_payloads[to_pose_id]
+    except KeyError as error:
+        raise ValueError(
+            f"{pose['id']} warp endpoint {error.args[0]!r} is not an authored pose"
+        ) from error
+
+    progress_milli = int(warp.get("progress_milli", 500))
+    if not 0 < progress_milli < 1000:
+        raise ValueError(f"{pose['id']}.derived_landmark_warp.progress_milli must be 1..999")
+    progress = progress_milli / 1000.0
+    from_anchors = resolve_anchors(manifest, from_pose, from_payload)
+    to_anchors = resolve_anchors(manifest, to_pose, to_payload)
+    requested_names = tuple(
+        str(name)
+        for name in warp.get(
+            "anchor_names",
+            REQUIRED_ANCHORS,
+        )
+    )
+    missing = [
+        name
+        for name in requested_names
+        if name not in from_anchors or name not in to_anchors
+    ]
+    if missing:
+        raise ValueError(f"{pose['id']} warp anchors are missing: {', '.join(missing)}")
+    control_pairs = tuple(
+        (tuple(from_anchors[name]), tuple(to_anchors[name]))
+        for name in requested_names
+    )
+    canvas = composite_landmark_warp_transition(
+        payload_canvas(from_payload),
+        payload_canvas(to_payload),
+        control_pairs,
+        progress,
+    )
+    anchors = {
+        name: [
+            from_anchors[name][axis]
+            + ((to_anchors[name][axis] - from_anchors[name][axis]) * progress_milli) // 1000
+            for axis in (0, 1)
+        ]
+        for name in sorted(set(from_anchors) & set(to_anchors))
+    }
+    root = point_from(canonical["root_anchor"], field_name="canonical.root_anchor")
+    anchors["root"] = root
+    return {
+        "source": (
+            f"derived_landmark_warp:{from_pose_id}+{to_pose_id}@"
+            f"{progress_milli}/1000"
+        ),
+        "source_size": [int(canonical["cols"]), int(canonical["rows"])],
+        "source_crop": [0, 0, int(canonical["cols"]), int(canonical["rows"])],
+        "canonical_shift": [0, 0],
+        "generation_rows": int(canonical["rows"]),
+        "cols": canvas.width,
+        "rows": canvas.height,
+        "root_anchor": root,
+        "resolved_anchors": anchors,
         "quantized_colors": colors,
         "coverage_threshold": coverage_threshold,
         "cells": canvas_cells(canvas),
@@ -317,7 +417,9 @@ def generate_pose_library(
     authored_poses = [
         pose
         for pose in manifest["poses"]
-        if "derived_blend" not in pose and "derived_cast_rig" not in pose
+        if "derived_blend" not in pose
+        and "derived_cast_rig" not in pose
+        and "derived_landmark_warp" not in pose
     ]
     for pose in authored_poses:
         if reused_authored:
@@ -393,6 +495,7 @@ def generate_pose_library(
         pose["id"]: generation_rows
         for pose, _raw_payload, generation_rows in raw_entries
     }
+    poses_by_id = {str(pose["id"]): pose for pose in manifest["poses"]}
     poses = []
     for pose in manifest["poses"]:
         if "derived_blend" in pose:
@@ -406,7 +509,20 @@ def generate_pose_library(
             generation_rows = int(payload["generation_rows"])
         elif "derived_cast_rig" in pose:
             payload = derive_cast_rig_payload(
+                manifest,
                 pose,
+                poses_by_id,
+                normalized_payloads,
+                canonical,
+                colors,
+                coverage_threshold,
+            )
+            generation_rows = int(payload["generation_rows"])
+        elif "derived_landmark_warp" in pose:
+            payload = derive_landmark_warp_payload(
+                manifest,
+                pose,
+                poses_by_id,
                 normalized_payloads,
                 canonical,
                 colors,
@@ -444,7 +560,8 @@ def generate_pose_library(
                 "phase": pose.get("phase"),
                 "tags": list(pose.get("tags", [])),
                 "anchor_space": "local_cells",
-                "anchors": resolve_anchors(manifest, pose, payload),
+                "anchors": payload.get("resolved_anchors")
+                or resolve_anchors(manifest, pose, payload),
                 "quantized_colors": payload["quantized_colors"],
                 "coverage_threshold": payload["coverage_threshold"],
                 "cells": payload["cells"],

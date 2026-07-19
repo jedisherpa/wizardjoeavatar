@@ -3,7 +3,10 @@ import unittest
 
 from wizard_avatar.compositor import CellCanvas
 from wizard_avatar.models import Cell
-from wizard_avatar.pose_compositor import composite_anchor_transition
+from wizard_avatar.pose_compositor import (
+    composite_anchor_transition,
+    composite_landmark_warp_transition,
+)
 
 
 def cell_signature(canvas):
@@ -49,6 +52,31 @@ class CrispPoseTransitionTests(unittest.TestCase):
         first, _ = composite_anchor_transition(source, target, (1, 2), (1, 2), 0.375)
         second, _ = composite_anchor_transition(source, target, (1, 2), (1, 2), 0.375)
         self.assertEqual(cell_signature(first), cell_signature(second))
+
+    def test_landmark_warp_endpoints_are_exact_and_intermediate_is_deterministic(self):
+        source = CellCanvas(7, 5)
+        target = CellCanvas(7, 5)
+        for x in range(1, 4):
+            source.set(x, 2, "#", (10 + x, 20, 30), "source")
+            target.set(x + 2, 2, "#", (200 + x, 120, 20), "target")
+        controls = (((1, 2), (3, 2)), ((3, 2), (5, 2)))
+
+        first = composite_landmark_warp_transition(source, target, controls, 0.0)
+        last = composite_landmark_warp_transition(source, target, controls, 1.0)
+        middle_a = composite_landmark_warp_transition(source, target, controls, 0.5)
+        middle_b = composite_landmark_warp_transition(source, target, controls, 0.5)
+
+        self.assertEqual(cell_signature(first), cell_signature(source))
+        self.assertEqual(cell_signature(last), cell_signature(target))
+        self.assertEqual(cell_signature(middle_a), cell_signature(middle_b))
+        self.assertNotEqual(cell_signature(middle_a), cell_signature(source))
+        self.assertNotEqual(cell_signature(middle_a), cell_signature(target))
+
+    def test_landmark_warp_rejects_missing_controls(self):
+        source = CellCanvas(3, 3)
+        target = CellCanvas(3, 3)
+        with self.assertRaisesRegex(ValueError, "at least one control"):
+            composite_landmark_warp_transition(source, target, (), 0.5)
 
 
 if __name__ == "__main__":

@@ -16,7 +16,7 @@
       "kind": "action",
       "payload": {"action": "magic_cast", "duration_ms": 1600},
       "settle_seconds": 0.0,
-      "capture_seconds": 1.5
+      "capture_seconds": 2.0
     },
     {
       "name": "v3-hold-one",
@@ -30,7 +30,7 @@
       "kind": "action",
       "payload": {"action": "magic_cast", "duration_ms": 1600},
       "settle_seconds": 0.0,
-      "capture_seconds": 1.5
+      "capture_seconds": 2.0
     },
     {
       "name": "v3-hold-two",
@@ -44,7 +44,7 @@
       "kind": "action",
       "payload": {"action": "magic_cast", "duration_ms": 1600},
       "settle_seconds": 0.0,
-      "capture_seconds": 1.5
+      "capture_seconds": 2.0
     },
     {
       "name": "v3-settle",

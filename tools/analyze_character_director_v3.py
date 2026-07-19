@@ -16,7 +16,11 @@ if str(ROOT) not in sys.path:
 
 from tools.run_character_director_visual_review import validate_manifest
 from wizard_avatar.animation_trace import AnimationTruthTraceV1
-from wizard_avatar.reference_avatar import get_reference_pose
+from wizard_avatar.pose_compositor import authored_staff_cells
+from wizard_avatar.reference_avatar import (
+    get_reference_pose,
+    render_reference_pose_local,
+)
 
 
 REPORT_SCHEMA = "character_director_v3_machine_acceptance_v1"
@@ -31,11 +35,11 @@ EXPECTED_SCENARIOS = (
 )
 EXPECTED_FRAME_COUNTS = {
     "v3-ready": 12,
-    "v3-cast-one": 36,
+    "v3-cast-one": 48,
     "v3-hold-one": 48,
-    "v3-cast-two": 36,
+    "v3-cast-two": 48,
     "v3-hold-two": 48,
-    "v3-cast-three": 36,
+    "v3-cast-three": 48,
     "v3-settle": 24,
 }
 CAST_SCENARIOS = ("v3-cast-one", "v3-cast-two", "v3-cast-three")
@@ -46,6 +50,11 @@ EXPECTED_MARKERS = (
     ("action_settled", 28),
 )
 MAXIMUM_STAFF_AXIS_CELLS_PER_AUTHORED_FRAME = 2.0
+# Inverse-nearest rigid rotation can move the outside edge of the staff's
+# asymmetric hook one cell farther than its authored tip anchor. A value of
+# three is the measured grid-quantization bound; palette, count, endpoints,
+# and the two-cell anchor bound below still fail closed on prop replacement.
+MAXIMUM_STAFF_RASTER_DISTANCE_PER_AUTHORED_FRAME = 3.0
 
 
 def _check(report: Dict[str, Any], name: str, passed: bool, detail: object) -> None:
@@ -114,6 +123,38 @@ def _pose_cells(pose_id: str) -> set[Tuple[int, int, Tuple[int, int, int]]]:
     }
 
 
+def _staff_raster(pose_id: str) -> Dict[Tuple[int, int], Tuple[int, int, int]]:
+    pose = get_reference_pose(pose_id)
+    canvas = render_reference_pose_local(pose_id)
+    return {
+        point: cell.rgb
+        for point, cell in authored_staff_cells(
+            canvas,
+            pose.anchors["staff_tip"],
+            pose.anchors["staff_hand"],
+            pose.root_anchor,
+        ).items()
+    }
+
+
+def _raster_nearest_distance(
+    left: Mapping[Tuple[int, int], Tuple[int, int, int]],
+    right: Mapping[Tuple[int, int], Tuple[int, int, int]],
+) -> float:
+    if not left or not right:
+        return math.inf
+
+    def directed(source: Sequence[Tuple[int, int]], target: Sequence[Tuple[int, int]]) -> int:
+        return max(
+            min(max(abs(x - tx), abs(y - ty)) for tx, ty in target)
+            for x, y in source
+        )
+
+    left_points = tuple(left)
+    right_points = tuple(right)
+    return float(max(directed(left_points, right_points), directed(right_points, left_points)))
+
+
 def analyze_v3(
     manifest: Mapping[str, Any],
     trace_records: Sequence[Mapping[str, Any]],
@@ -137,7 +178,7 @@ def analyze_v3(
         isinstance(program, Mapping)
         and program.get("program_id") == "v3-canonical-cast"
         and program.get("acceptance_scenario") == "V3"
-        and program.get("total_duration_seconds") == 10.0,
+        and program.get("total_duration_seconds") == 11.5,
         program,
     )
     scenario_names = tuple(item.get("name") for item in manifest.get("scenarios", ()))
@@ -197,7 +238,7 @@ def analyze_v3(
         "complete_contiguous_capture",
         len(frames) == len(trace_records) == len(complete)
         and not missing
-        and len(owned_frames) == 240
+        and len(owned_frames) == 276
         and transport_contiguous
         and scenario_blocks_contiguous
         and unowned_are_bounded_transitions
@@ -259,6 +300,45 @@ def analyze_v3(
         if max(abs(right_tip[0] - left_tip[0]), abs(right_tip[1] - left_tip[1])) > 2:
             static_tip_failures.append(frame)
     neutral_cells = _pose_cells("front_idle")
+    staff_rasters = {
+        frame: _staff_raster(f"cast_front_{frame:02d}")
+        for frame in range(32)
+    }
+    neutral_staff = staff_rasters[0]
+    staff_raster_failures = []
+    staff_raster_changes = []
+    for frame in range(31):
+        left = staff_rasters[frame]
+        right = staff_rasters[frame + 1]
+        changed_points = {
+            point
+            for point in set(left) | set(right)
+            if left.get(point) != right.get(point)
+        }
+        changed_bounds = None
+        if changed_points:
+            xs = [point[0] for point in changed_points]
+            ys = [point[1] for point in changed_points]
+            changed_bounds = [min(xs), min(ys), max(xs), max(ys)]
+        nearest_distance = _raster_nearest_distance(left, right)
+        change = {
+            "from_frame": frame,
+            "to_frame": frame + 1,
+            "changed_cell_count": len(changed_points),
+            "changed_bounds": changed_bounds,
+            "nearest_cell_distance": nearest_distance,
+            "left_cell_count": len(left),
+            "right_cell_count": len(right),
+        }
+        staff_raster_changes.append(change)
+        if (
+            nearest_distance > MAXIMUM_STAFF_RASTER_DISTANCE_PER_AUTHORED_FRAME
+            or not set(left.values()).issubset(set(neutral_staff.values()))
+            or not set(right.values()).issubset(set(neutral_staff.values()))
+            or not 0.85 <= len(left) / len(neutral_staff) <= 1.20
+            or not 0.85 <= len(right) / len(neutral_staff) <= 1.20
+        ):
+            staff_raster_failures.append(change)
     _check(
         report,
         "complete_static_cast_graph_contract",
@@ -274,6 +354,24 @@ def analyze_v3(
             "staff_tip_step_failures": static_tip_failures,
             "frame_zero_is_exact_neutral": _pose_cells("cast_front_00") == neutral_cells,
             "frame_31_is_exact_neutral": _pose_cells("cast_front_31") == neutral_cells,
+        },
+    )
+    _check(
+        report,
+        "full_staff_raster_object_continuity",
+        not staff_raster_failures
+        and staff_rasters[0] == neutral_staff
+        and staff_rasters[31] == neutral_staff,
+        {
+            "neutral_staff_cell_count": len(neutral_staff),
+            "maximum_changed_cell_count": max(
+                change["changed_cell_count"] for change in staff_raster_changes
+            ),
+            "maximum_nearest_cell_distance": max(
+                change["nearest_cell_distance"] for change in staff_raster_changes
+            ),
+            "adjacent_changes": staff_raster_changes,
+            "failures": staff_raster_failures,
         },
     )
 
@@ -301,6 +399,18 @@ def analyze_v3(
         for name in CAST_SCENARIOS
     }
     observed_union = sorted({frame for frames_seen in observed_by_cast.values() for frame in frames_seen})
+    recovery_coverage = {
+        name: sorted(set(observed_by_cast[name]) & set(range(23, 31)))
+        for name in CAST_SCENARIOS
+    }
+    recovery_gaps = {
+        name: [
+            [left, right]
+            for left, right in zip(recovery_coverage[name], recovery_coverage[name][1:])
+            if right != left + 1
+        ]
+        for name in CAST_SCENARIOS
+    }
     terminal_neutral = {
         name: bool(by_scenario[following_scenario[name]])
         and by_scenario[following_scenario[name]][0].get("rendered_pose_id") == "front_idle"
@@ -310,6 +420,8 @@ def analyze_v3(
         report,
         "authored_coverage_and_terminal_neutral",
         set(observed_union) >= set(range(31))
+        and all(set(recovery_coverage[name]) == set(range(23, 31)) for name in CAST_SCENARIOS)
+        and not any(recovery_gaps.values())
         and all(tuple(marker_detail[name]) == EXPECTED_MARKERS for name in CAST_SCENARIOS)
         and all(terminal_neutral.values())
         and _pose_cells("cast_front_31") == neutral_cells,
@@ -317,6 +429,9 @@ def analyze_v3(
             "observed_by_cast": observed_by_cast,
             "observed_union": observed_union,
             "required_nonterminal_frames": list(range(31)),
+            "required_recovery_frames_per_cast": list(range(23, 31)),
+            "recovery_coverage_per_cast": recovery_coverage,
+            "recovery_gaps_per_cast": recovery_gaps,
             "marker_events_per_cast": marker_detail,
             "following_neutral_by_cast": terminal_neutral,
             "terminal_frame_31_is_exact_neutral": _pose_cells("cast_front_31") == neutral_cells,
@@ -450,6 +565,13 @@ def analyze_v3(
         "cast_trace_count": len(authored_records),
         "observed_cast_authored_frames": sorted(tip_by_authored_frame),
         "static_cast_pose_count": len(cast_poses),
+        "staff_raster_maximum_changed_cell_count": max(
+            change["changed_cell_count"] for change in staff_raster_changes
+        ),
+        "staff_raster_maximum_nearest_cell_distance": max(
+            change["nearest_cell_distance"] for change in staff_raster_changes
+        ),
+        "staff_raster_failure_count": len(staff_raster_failures),
         "world_root_max_axis_drift": root_drift,
         "stage_root_max_axis_drift": stage_root_drift,
         "staff_hand_max_axis_drift": hand_drift,

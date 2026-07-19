@@ -34,8 +34,12 @@ not a coherent intermediate for the leftward spell release.
 The V3 correction replaces the eight full-body snapshots with 32 complete
 `cast_front_00` through `cast_front_31` pixel graphs. Each graph is generated
 offline from the stable `front_idle` body. The generator removes the flattened
-staff and authors a rigid staff appendage around one fixed grip; every output
-is then stored as colored pixel nodes in the canonical pose library.
+staff and inverse-nearest rotates the complete neutral staff pixel graph around
+one fixed grip. The source hook, shaft width, length, and palette therefore
+remain authoritative instead of being replaced by a synthetic line; every
+output is stored as colored pixel nodes in the canonical pose library. A
+`cast_staff_rigid` region tag gives offline acceptance an exact prop raster
+without changing the projected pixels.
 
 The live visualizer still projects one complete pixel graph for every frame.
 It does not load the PNG reference, dissolve between images, or construct
@@ -64,14 +68,16 @@ appendage and effect change.
 
 Regression tests require the exact 32-frame graph sequence, one authored frame
 per sample, a fixed grip, and no more than two cells of adjacent staff-tip
-travel. The old overhead `magic_cast`, horizontal defensive pose, guard, and
-thrust snapshots are no longer used by `cast_front`.
+travel. The asymmetric hook can move at most three cells at its outside edge
+during an inverse-nearest rotation; this measured square-grid bound is checked
+separately together with exact neutral endpoints, source-palette preservation,
+and a narrow staff-cell-count ratio. The old overhead `magic_cast`, horizontal
+defensive pose, guard, and thrust snapshots are no longer used by `cast_front`.
 
 ## Verification
 
-Focused runtime, pose, channel, marker, overlay, contact, permission, and V3
-tests passed 96 of 96. The capture and review-contract suite subsequently
-passed 33 of 33. The deterministic offline rebuild command is:
+The current focused V3/V4 pose, generator, analyzer, and capability suite
+passes 37 of 37 tests. The deterministic offline rebuild command is:
 
 ```bash
 .venv/bin/python tools/generate_reference_avatar_pose_cells.py \
@@ -88,28 +94,29 @@ capture with:
   --output <capture>/v3-machine-acceptance.json
 ```
 
-The analyzer fails closed unless the transport is contiguous, exactly 240
+The analyzer fails closed unless the transport is contiguous, exactly 276
 scenario-owned frames form individually contiguous scenario blocks, and any
 unowned frame is a bounded transition between those blocks. Every owned frame
 must pair with a truth record; all three casts must use the canonical atomic
-pose for their presented authored frame; the repeated casts must collectively
-cover frames 0 through 30; frame 31 must equal the following neutral graph;
+pose for their presented authored frame; every cast must include every recovery
+frame from 23 through 30; frame 31 must equal the following neutral graph;
 roots and the staff grip must remain fixed; staff-tip travel must stay within
-two local cells per authored frame; all four markers must occur once and in
-order in every cast; effect phases must begin at the staff event; contact must
-verify; and every cast silhouette must remain inside the 240 by 135 stage.
-Normal-speed, quarter-speed, and browser-layout review remain separate gates.
+two local cells and the complete staff raster within three local cells per
+authored frame; all four markers must occur once and in order in every cast;
+effect phases must begin at the staff event; contact must verify; and every
+cast silhouette must remain inside the 240 by 135 stage. Normal-speed,
+quarter-speed, and browser-layout review remain separate gates.
 
-The final V3 candidate proof is
-`evidence/character-director/v3-canonical-cast-a72f791-2026-07-19/`, bound to
-clean commit `a72f7915479787ba8cd65da2f5075ec99400c16c`. Its machine report passes
-all eleven V3 checks over 242 contiguous transport frames and exactly 240 owned
-frames, with zero drift, continuity, effect, clipping, decode, or queue
-failures. The complete review manifest binds the machine report, normal and
-quarter-speed videos, browser replay, and browser metrics. Browser replay has
-zero page or console errors and zero presentation faults.
+The `a72f791` proof bundle is retained as rejected audit evidence. Its machine
+and technical reviews passed, but independent animation review found two
+blocking defects: the staff changed construction inside each cast and the first
+cast capture skipped late recovery frames. The current implementation directly
+addresses both findings by transforming the complete source staff graph and by
+capturing 48 owned frames for every cast. It is not accepted until a fresh,
+clean-commit capture passes the strengthened analyzer and both independent
+reviewers issue explicit PASS verdicts.
 
-The `092f78e` bundle remains as rejected audit evidence. Independent technical
+The earlier `092f78e` bundle also remains rejected audit evidence. Independent technical
 review found that its hold scenarios rendered stale final cast poses even after
 the controller settled to `front_idle`; it also found the initially published
 bundle incomplete. The final candidate removes that feedback path, adds an

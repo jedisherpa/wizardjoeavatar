@@ -1,10 +1,10 @@
 from __future__ import annotations
 
 import math
-from typing import Optional, Tuple
+from typing import Optional, Sequence, Tuple
 
 from .compositor import CellCanvas
-from .palette import RGB
+from .models import Cell
 
 
 def copy_pose_canvas(canvas: CellCanvas) -> CellCanvas:
@@ -64,6 +64,36 @@ def resolve_authored_staff_anchors(
     )
 
 
+def authored_staff_cells(
+    canvas: CellCanvas,
+    staff_tip: tuple[int, int],
+    staff_hand: tuple[int, int],
+    root_anchor: tuple[int, int] | None = None,
+) -> dict[tuple[int, int], Cell]:
+    """Return the complete authored staff raster keyed by local cell."""
+
+    tagged = {
+        (x, y): cell
+        for y, row in enumerate(canvas.cells)
+        for x, cell in enumerate(row)
+        if cell is not None and cell.layer_id == "cast_staff_rigid"
+    }
+    if tagged:
+        return tagged
+    resolved_tip, resolved_hand = resolve_authored_staff_anchors(
+        canvas,
+        staff_tip,
+        staff_hand,
+        root_anchor,
+    )
+    result = {}
+    for point in _staff_mask(canvas, resolved_tip, resolved_hand):
+        cell = canvas.get(*point)
+        if cell is not None:
+            result[point] = cell
+    return result
+
+
 def author_cast_staff_graph(
     canvas: CellCanvas,
     *,
@@ -73,12 +103,12 @@ def author_cast_staff_graph(
     target_staff_tip: tuple[int, int],
     target_staff_hand: tuple[int, int],
 ) -> None:
-    """Replace one flattened staff with a complete authored pixel appendage.
+    """Rotate the authored neutral staff as one complete pixel appendage.
 
-    The character body remains an atomic source graph. Only the staff prop is
-    rebuilt, pivoting around a fixed authored grip. The result is baked into
-    the pose library by the offline generator; this function is not a runtime
-    dissolve or an image render path.
+    The character body remains an atomic source graph. The staff's original
+    shaft, hook, width, palette, and length are rigidly transformed around a
+    fixed authored grip. The result is baked into the pose library by the
+    offline generator; this function is not a runtime render path.
     """
 
     original = canvas.copy()
@@ -88,84 +118,48 @@ def author_cast_staff_graph(
         source_staff_hand,
         root_anchor,
     )
-    clear_authored_staff(
-        canvas,
-        resolved_tip,
-        resolved_hand,
-        None,
-    )
+    staff_cells = authored_staff_cells(original, resolved_tip, resolved_hand)
+    if not staff_cells:
+        raise ValueError("authored staff mask is empty")
+    for x, y in staff_cells:
+        canvas.clear_cell(x, y)
 
-    hand_x, hand_y = target_staff_hand
-    tip_x, tip_y = target_staff_tip
-    axis_x = tip_x - hand_x
-    axis_y = tip_y - hand_y
-    axis_length = math.hypot(axis_x, axis_y)
-    if axis_length < 1.0:
+    source_axis_x = resolved_tip[0] - resolved_hand[0]
+    source_axis_y = resolved_tip[1] - resolved_hand[1]
+    target_axis_x = target_staff_tip[0] - target_staff_hand[0]
+    target_axis_y = target_staff_tip[1] - target_staff_hand[1]
+    source_length = math.hypot(source_axis_x, source_axis_y)
+    target_length = math.hypot(target_axis_x, target_axis_y)
+    if source_length < 1.0 or target_length < 1.0:
         raise ValueError("cast staff tip and hand must be distinct")
-    unit_x = axis_x / axis_length
-    unit_y = axis_y / axis_length
-    perp_x = -unit_y
-    perp_y = unit_x
+    source_unit = (source_axis_x / source_length, source_axis_y / source_length)
+    target_unit = (target_axis_x / target_length, target_axis_y / target_length)
+    cosine = source_unit[0] * target_unit[0] + source_unit[1] * target_unit[1]
+    sine = source_unit[0] * target_unit[1] - source_unit[1] * target_unit[0]
 
-    bottom = (
-        round(hand_x - unit_x * 30.0),
-        round(hand_y - unit_y * 30.0),
-    )
-    canvas.line(
-        bottom[0],
-        bottom[1],
-        tip_x,
-        tip_y,
-        "#",
-        RGB["brown_dark"],
-        "cast_staff_outline",
-        2,
-    )
-    canvas.line(
-        bottom[0],
-        bottom[1],
-        tip_x,
-        tip_y,
-        "#",
-        RGB["brown"],
-        "cast_staff_shaft",
-        1,
-    )
-
-    # The crook is authored in the staff's local basis, so it rotates as one
-    # rigid prop instead of changing shape between frames.
-    hook_local = ((0, 0), (-4, 0), (-7, -2), (-7, -6), (-4, -8), (-2, -7))
-    hook = [
-        (
-            round(tip_x + perp_x * across + unit_x * along),
-            round(tip_y + perp_y * across + unit_y * along),
-        )
-        for across, along in hook_local
-    ]
-    for start, end in zip(hook, hook[1:]):
-        canvas.line(
-            start[0],
-            start[1],
-            end[0],
-            end[1],
-            "#",
-            RGB["brown_dark"],
-            "cast_staff_crook_outline",
-            2,
-        )
-        canvas.line(
-            start[0],
-            start[1],
-            end[0],
-            end[1],
-            "#",
-            RGB["brown"],
-            "cast_staff_crook",
-            1,
-        )
+    # Inverse nearest-cell sampling preserves a solid square-cell graph while
+    # retaining the exact source material at every destination cell.
+    for y in range(canvas.height):
+        for x in range(canvas.width):
+            target_dx = x - target_staff_hand[0]
+            target_dy = y - target_staff_hand[1]
+            source_dx = cosine * target_dx + sine * target_dy
+            source_dy = -sine * target_dx + cosine * target_dy
+            source_point = (
+                round(resolved_hand[0] + source_dx),
+                round(resolved_hand[1] + source_dy),
+            )
+            source_cell = staff_cells.get(source_point)
+            if source_cell is not None:
+                canvas.cells[y][x] = Cell(
+                    source_cell.glyph,
+                    source_cell.rgb,
+                    "cast_staff_rigid",
+                )
 
     # Restore the authored skin pixels over the shaft so the grip remains
     # unambiguous and the staff cannot paint across the hand.
+    hand_x, hand_y = target_staff_hand
     for y in range(hand_y - 5, hand_y + 6):
         for x in range(hand_x - 5, hand_x + 6):
             cell = original.get(x, y)
@@ -372,6 +366,79 @@ def composite_anchor_transition(
             else:
                 out.cells[y][x] = from_cell
     return out, (root_x, root_y)
+
+
+def composite_landmark_warp_transition(
+    from_canvas: CellCanvas,
+    to_canvas: CellCanvas,
+    control_pairs: Sequence[tuple[tuple[int, int], tuple[int, int]]],
+    progress: float,
+) -> CellCanvas:
+    """Bake a deterministic, nearest-cell landmark warp between atomic poses.
+
+    This is an offline authoring primitive. It moves each endpoint graph toward
+    interpolated anatomical landmarks. Each intermediate uses one complete
+    endpoint graph, switching texture authority once at the motion midpoint;
+    this avoids color-confetti dissolves. The visualizer still receives one
+    complete colored-cell graph per frame, with no runtime interpolation.
+    """
+
+    if (from_canvas.width, from_canvas.height) != (to_canvas.width, to_canvas.height):
+        raise ValueError("landmark-warp canvases must have matching dimensions")
+    if not control_pairs:
+        raise ValueError("landmark warp requires at least one control pair")
+    if progress <= 0.0:
+        return from_canvas.copy()
+    if progress >= 1.0:
+        return to_canvas.copy()
+
+    controls = tuple(
+        (
+            (float(source[0]), float(source[1])),
+            (float(target[0]), float(target[1])),
+        )
+        for source, target in control_pairs
+    )
+    out = CellCanvas(from_canvas.width, from_canvas.height)
+    for y in range(out.height):
+        for x in range(out.width):
+            endpoint = "source" if progress <= 0.5 else "target"
+            sample_x, sample_y = _inverse_landmark_sample(
+                float(x),
+                float(y),
+                controls,
+                progress,
+                endpoint=endpoint,
+            )
+            canvas = from_canvas if endpoint == "source" else to_canvas
+            out.cells[y][x] = canvas.get(round(sample_x), round(sample_y))
+    return out
+
+
+def _inverse_landmark_sample(
+    x: float,
+    y: float,
+    controls: Sequence[tuple[tuple[float, float], tuple[float, float]]],
+    progress: float,
+    *,
+    endpoint: str,
+) -> tuple[float, float]:
+    weighted_dx = 0.0
+    weighted_dy = 0.0
+    total_weight = 0.0
+    for source, target in controls:
+        middle_x = source[0] + (target[0] - source[0]) * progress
+        middle_y = source[1] + (target[1] - source[1]) * progress
+        distance_squared = (x - middle_x) ** 2 + (y - middle_y) ** 2
+        weight = 1.0 / (distance_squared + 4.0)
+        endpoint_point = source if endpoint == "source" else target
+        weighted_dx += (endpoint_point[0] - middle_x) * weight
+        weighted_dy += (endpoint_point[1] - middle_y) * weight
+        total_weight += weight
+    return (
+        x + weighted_dx / total_weight,
+        y + weighted_dy / total_weight,
+    )
 
 
 def translate_anchor(
