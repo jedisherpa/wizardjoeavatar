@@ -5,13 +5,16 @@ from __future__ import annotations
 
 import argparse
 import asyncio
+import base64
 import hashlib
 import json
 import os
+import shutil
 import subprocess
 import sys
 import tempfile
 import time
+from datetime import datetime
 from pathlib import Path
 from typing import Any, Dict, Mapping, Optional, Sequence
 from urllib.parse import urlsplit
@@ -22,6 +25,7 @@ from record_character_director_browser import (
     CDPClient,
     CHROME,
     free_loopback_port,
+    sha256_file,
     utc_now,
     wait_for_page_target,
 )
@@ -39,6 +43,8 @@ DEFAULT_PROMPT = (
 SCHEMA = "character_director_prism_governed_speech_v1"
 MEDIA_SESSION_ROUTE = "/api/connectors/wizard/media-session"
 PROTECTED_LOCAL_PORTS = frozenset({8765, 8875})
+AV_TIMELINE_SCHEMA = "character_director_av_timeline_v1"
+REVIEW_BUNDLE_SCHEMA = "character_director_v2_review_bundle_v1"
 
 
 def validate_disposable_loopback_url(value: str, label: str) -> str:
@@ -238,6 +244,296 @@ async def browser_speech_state(cdp: CDPClient) -> Mapping[str, Any]:
     return value if isinstance(value, Mapping) else {}
 
 
+async def retain_governed_audio(cdp: CDPClient, output_dir: Path) -> Mapping[str, Any]:
+    value = await cdp.evaluate(
+        """
+        (async () => {
+          const audio = document.querySelector('audio[data-source-slot="speech"]');
+          if (!audio?.currentSrc) return null;
+          const response = await fetch(audio.currentSrc);
+          if (!response.ok) throw new Error('governed_audio_fetch_failed');
+          const blob = await response.blob();
+          const bytes = new Uint8Array(await blob.arrayBuffer());
+          let binary = '';
+          for (let offset = 0; offset < bytes.length; offset += 32768) {
+            binary += String.fromCharCode(...bytes.subarray(offset, offset + 32768));
+          }
+          return {
+            base64: btoa(binary),
+            mediaType: blob.type || response.headers.get('content-type') || 'application/octet-stream'
+          };
+        })()
+        """
+    )
+    if not isinstance(value, Mapping) or not isinstance(value.get("base64"), str):
+        raise BrowserCaptureFailure("governed audio artifact was unavailable")
+    try:
+        payload = base64.b64decode(value["base64"], validate=True)
+    except (ValueError, TypeError) as exc:
+        raise BrowserCaptureFailure("governed audio artifact was not valid base64") from exc
+    if not payload:
+        raise BrowserCaptureFailure("governed audio artifact was empty")
+    media_type = str(value.get("mediaType") or "application/octet-stream").split(";", 1)[0]
+    suffix = ".mp3" if media_type in {"audio/mpeg", "audio/mp3"} else ".wav" if media_type == "audio/wav" else ".bin"
+    output_dir.mkdir(parents=True, exist_ok=True)
+    path = output_dir / ("governed-speech-audio" + suffix)
+    path.write_bytes(payload)
+    return {
+        "path": path.name,
+        "media_type": media_type,
+        "bytes": path.stat().st_size,
+        "sha256": sha256_file(path),
+    }
+
+
+async def collect_av_timeline(
+    cdp: CDPClient,
+    wizard_url: str,
+    connector_token: str,
+    capture_task: "asyncio.Task[subprocess.CompletedProcess]",
+) -> Mapping[str, Any]:
+    started = time.monotonic()
+    samples = []
+    while True:
+        browser = await browser_speech_state(cdp)
+        status = await asyncio.to_thread(
+            get_json,
+            wizard_url + "/api/avatar/wizard/media-session/status",
+            connector_token,
+        )
+        state = await asyncio.to_thread(
+            get_json,
+            wizard_url + "/api/avatar/wizard/state",
+        )
+        application = status.get("application", {})
+        session = status.get("session", {})
+        wizard_state = state.get("state", {})
+        browser_time = browser.get("currentTimeMs")
+        wizard_time = application.get("media_time_ms")
+        samples.append(
+            {
+                "observed_at_utc": utc_now(),
+                "elapsed_ms": round((time.monotonic() - started) * 1000),
+                "browser_media_time_ms": browser_time,
+                "wizard_media_time_ms": wizard_time,
+                "absolute_offset_ms": (
+                    abs(int(browser_time) - int(wizard_time))
+                    if isinstance(browser_time, int) and isinstance(wizard_time, int)
+                    else None
+                ),
+                "browser_playing": browser.get("paused") is False and browser.get("ended") is False,
+                "application_active": application.get("active") is True,
+                "application_source_slot": application.get("source_slot"),
+                "speech_id": wizard_state.get("speech_id"),
+                "speech_mouth_authority": wizard_state.get("speech_mouth_authority"),
+                "media_hash_prefix": session.get("media_hash_prefix"),
+            }
+        )
+        if capture_task.done():
+            break
+        await asyncio.sleep(0.1)
+    return {
+        "schema": AV_TIMELINE_SCHEMA,
+        "schema_version": 1,
+        "sample_interval_target_ms": 100,
+        "samples": samples,
+    }
+
+
+def _artifact(path: Path, output_dir: Path, media_type: str) -> Mapping[str, Any]:
+    return {
+        "path": path.resolve().relative_to(output_dir.resolve()).as_posix(),
+        "media_type": media_type,
+        "bytes": path.stat().st_size,
+        "sha256": sha256_file(path),
+    }
+
+
+def _parse_utc(value: str) -> datetime:
+    return datetime.fromisoformat(value.replace("Z", "+00:00"))
+
+
+def generate_v2_review_products(capture_output: Path, receipt_path: Path) -> Path:
+    manifest_path = capture_output / "manifest.json"
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    video_record = manifest.get("video", {})
+    normal_video = capture_output / str(video_record.get("path", ""))
+    if not video_record.get("available") or not normal_video.is_file():
+        raise BrowserCaptureFailure("V2 review products require a normal-speed video")
+    ffmpeg = shutil.which("ffmpeg")
+    if ffmpeg is None:
+        raise BrowserCaptureFailure("ffmpeg is required for V2 review products")
+
+    copied_receipt = capture_output / "governed-speech-receipt.json"
+    if receipt_path.resolve() != copied_receipt.resolve():
+        shutil.copyfile(receipt_path, copied_receipt)
+    receipt = json.loads(copied_receipt.read_text(encoding="utf-8"))
+    audio_record = receipt.get("audio_artifact", {})
+    audio_path = capture_output / str(audio_record.get("path", ""))
+    if not audio_path.is_file() or sha256_file(audio_path) != audio_record.get("sha256"):
+        raise BrowserCaptureFailure("retained governed audio failed integrity verification")
+
+    machine_report = capture_output / "v2-machine-acceptance.json"
+    analysis = subprocess.run(
+        (
+            sys.executable,
+            str(ROOT / "tools" / "analyze_character_director_v2.py"),
+            "--manifest",
+            str(manifest_path),
+            "--receipt",
+            str(copied_receipt),
+            "--output",
+            str(machine_report),
+        ),
+        cwd=str(ROOT),
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        check=False,
+    )
+    if analysis.returncode or not machine_report.is_file():
+        raise BrowserCaptureFailure(
+            "V2 machine acceptance failed: {}".format(
+                analysis.stderr.decode("utf-8", errors="replace").strip()
+                or analysis.stdout.decode("utf-8", errors="replace").strip()
+            )
+        )
+
+    fps = float(manifest["init"]["fps"])
+    quarter_speed = capture_output / "v2-quarter-speed.mp4"
+    quarter = subprocess.run(
+        (
+            ffmpeg,
+            "-hide_banner",
+            "-loglevel",
+            "error",
+            "-i",
+            str(normal_video),
+            "-an",
+            "-vf",
+            "setpts=4.0*PTS,fps={:.6f}".format(fps),
+            "-c:v",
+            "libx264",
+            "-pix_fmt",
+            "yuv420p",
+            "-movflags",
+            "+faststart",
+            "-y",
+            str(quarter_speed),
+        ),
+        cwd=str(ROOT),
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        check=False,
+    )
+    if quarter.returncode or not quarter_speed.is_file() or not quarter_speed.stat().st_size:
+        raise BrowserCaptureFailure(
+            "V2 quarter-speed generation failed: {}".format(
+                quarter.stderr.decode("utf-8", errors="replace").strip()
+            )
+        )
+
+    first_frame_utc = _parse_utc(manifest["frames"][0]["received_at_utc"])
+    timeline_samples = receipt["av_timeline"]["samples"]
+    nearest = min(
+        timeline_samples,
+        key=lambda sample: abs(
+            (_parse_utc(sample["observed_at_utc"]) - first_frame_utc).total_seconds()
+        ),
+    )
+    audio_offset_seconds = max(0.0, float(nearest["browser_media_time_ms"]) / 1000.0)
+    audible_review = capture_output / "v2-audible-review.mp4"
+    audible = subprocess.run(
+        (
+            ffmpeg,
+            "-hide_banner",
+            "-loglevel",
+            "error",
+            "-i",
+            str(normal_video),
+            "-ss",
+            "{:.6f}".format(audio_offset_seconds),
+            "-i",
+            str(audio_path),
+            "-map",
+            "0:v:0",
+            "-map",
+            "1:a:0",
+            "-c:v",
+            "copy",
+            "-c:a",
+            "aac",
+            "-t",
+            "20.0",
+            "-movflags",
+            "+faststart",
+            "-y",
+            str(audible_review),
+        ),
+        cwd=str(ROOT),
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        check=False,
+    )
+    if audible.returncode or not audible_review.is_file() or not audible_review.stat().st_size:
+        raise BrowserCaptureFailure(
+            "V2 audible review generation failed: {}".format(
+                audible.stderr.decode("utf-8", errors="replace").strip()
+            )
+        )
+
+    contact_sheet = capture_output / str(manifest["contact_sheet"]["path"])
+    browser_record = receipt.get("browser_presentation", {})
+    browser_video = capture_output / str(browser_record.get("video_path", ""))
+    browser_metrics_path = capture_output / str(browser_record.get("metrics_path", ""))
+    if not browser_video.is_file() or not browser_metrics_path.is_file():
+        raise BrowserCaptureFailure("V2 browser presentation artifacts are missing")
+    browser_metrics = json.loads(browser_metrics_path.read_text(encoding="utf-8"))
+    browser_frame_count = int(browser_metrics.get("frame_count", 0))
+    if (
+        browser_metrics.get("schema") != "character_director_browser_layout_v1"
+        or browser_metrics.get("candidate_commit") != manifest["provenance"]["head"]
+        or browser_metrics.get("capture_manifest_sha256") != sha256_file(manifest_path)
+        or browser_metrics.get("page_errors")
+        or browser_frame_count <= 0
+        or int(browser_metrics.get("screencast_event_count", 0)) < round(browser_frame_count * 0.75)
+        or int(browser_metrics.get("duplicate_sample_count", browser_frame_count)) > round(browser_frame_count * 0.20)
+    ):
+        raise BrowserCaptureFailure("V2 browser presentation failed cadence or integrity checks")
+    bundle = {
+        "schema": REVIEW_BUNDLE_SCHEMA,
+        "schema_version": 1,
+        "acceptance_scenario": "V2",
+        "run_id": manifest["source_epoch"],
+        "candidate_commit": manifest["provenance"]["head"],
+        "audio_offset_seconds": round(audio_offset_seconds, 6),
+        "complete_for_independent_review": True,
+        "artifacts": {
+            "capture_manifest": _artifact(manifest_path, capture_output, "application/json"),
+            "speech_receipt": _artifact(copied_receipt, capture_output, "application/json"),
+            "animation_truth_trace": _artifact(
+                capture_output / manifest["animation_truth_trace"]["path"],
+                capture_output,
+                "application/x-ndjson",
+            ),
+            "normal_speed_video": _artifact(normal_video, capture_output, "video/mp4"),
+            "audible_review_video": _artifact(audible_review, capture_output, "video/mp4"),
+            "quarter_speed_video": _artifact(quarter_speed, capture_output, "video/mp4"),
+            "browser_presentation_video": _artifact(browser_video, capture_output, "video/mp4"),
+            "browser_presentation_metrics": _artifact(
+                browser_metrics_path,
+                capture_output,
+                "application/json",
+            ),
+            "retained_audio": _artifact(audio_path, capture_output, str(audio_record["media_type"])),
+            "machine_acceptance": _artifact(machine_report, capture_output, "application/json"),
+            "contact_sheet": _artifact(contact_sheet, capture_output, "image/png"),
+        },
+    }
+    bundle_path = capture_output / "v2-review-bundle-manifest.json"
+    bundle_path.write_text(json.dumps(bundle, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    return bundle_path
+
+
 async def wait_for_capture_edge(
     cdp: CDPClient,
     wizard_url: str,
@@ -417,6 +713,11 @@ async def run(args: argparse.Namespace) -> None:
                             minimum_duration_ms,
                         )
                     )
+                audio_artifact = (
+                    await retain_governed_audio(cdp, args.capture_output)
+                    if args.capture_output is not None
+                    else None
+                )
                 receipt = {
                     "schema": SCHEMA,
                     "schema_version": 1,
@@ -432,6 +733,7 @@ async def run(args: argparse.Namespace) -> None:
                     "performance_source": "startup_greeting"
                     if args.capture_opening
                     else "submitted_prompt",
+                    "audio_artifact": audio_artifact,
                     "initial_browser_state": initial,
                     "browser_console_event_count": len(cdp.console_events),
                     "browser_page_error_count": len(cdp.page_errors),
@@ -454,14 +756,26 @@ async def run(args: argparse.Namespace) -> None:
                         "--sample-every-frames",
                         "12",
                     )
-                    capture = await asyncio.to_thread(
-                        subprocess.run,
-                        capture_command,
-                        cwd=str(ROOT),
-                        stdout=subprocess.PIPE,
-                        stderr=subprocess.PIPE,
-                        check=False,
+                    capture_task = asyncio.create_task(
+                        asyncio.to_thread(
+                            subprocess.run,
+                            capture_command,
+                            cwd=str(ROOT),
+                            stdout=subprocess.PIPE,
+                            stderr=subprocess.PIPE,
+                            check=False,
+                        )
                     )
+                    timeline_task = asyncio.create_task(
+                        collect_av_timeline(
+                            cdp,
+                            args.wizard_url,
+                            connector_token,
+                            capture_task,
+                        )
+                    )
+                    capture = await capture_task
+                    receipt["av_timeline"] = await timeline_task
                     receipt["atomic_capture"] = {
                         "command": list(capture_command[1:]),
                         "exit_code": capture.returncode,
@@ -479,6 +793,48 @@ async def run(args: argparse.Namespace) -> None:
                         receipt["atomic_capture"]["stderr"] = (
                             "capture exited without creating manifest.json"
                         )
+                    if receipt["atomic_capture"]["exit_code"] == 0:
+                        manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+                        runtime_binding = manifest.get("runtime_binding", {})
+                        runtime_start = runtime_binding.get("start", {})
+                        receipt["atomic_capture"].update(
+                            {
+                                "manifest_sha256": sha256_file(manifest_path),
+                                "source_epoch": manifest.get("source_epoch"),
+                                "candidate_commit": manifest.get("provenance", {}).get("head"),
+                                "runtime_epoch": runtime_start.get("runtime_epoch"),
+                                "first_frame_received_at_utc": manifest.get("frames", [{}])[0].get("received_at_utc"),
+                                "last_frame_received_at_utc": manifest.get("frames", [{}])[-1].get("received_at_utc"),
+                            }
+                        )
+                        browser_video = args.capture_output / "v2-browser-presentation.mp4"
+                        browser_metrics = args.capture_output / "v2-browser-presentation-metrics.json"
+                        browser_command = (
+                            sys.executable,
+                            str(ROOT / "tools" / "record_character_director_browser.py"),
+                            "--manifest",
+                            str(manifest_path),
+                            "--video",
+                            str(browser_video),
+                            "--metrics",
+                            str(browser_metrics),
+                        )
+                        browser_capture = await asyncio.to_thread(
+                            subprocess.run,
+                            browser_command,
+                            cwd=str(ROOT),
+                            stdout=subprocess.PIPE,
+                            stderr=subprocess.PIPE,
+                            check=False,
+                        )
+                        receipt["browser_presentation"] = {
+                            "command": list(browser_command[1:]),
+                            "exit_code": browser_capture.returncode,
+                            "video_path": browser_video.name,
+                            "metrics_path": browser_metrics.name,
+                            "stdout": browser_capture.stdout.decode("utf-8", errors="replace").strip(),
+                            "stderr": browser_capture.stderr.decode("utf-8", errors="replace").strip(),
+                        }
                     receipt["completed_at_utc"] = utc_now()
                     args.receipt.write_text(
                         json.dumps(receipt, indent=2, sort_keys=True) + "\n",
@@ -491,7 +847,16 @@ async def run(args: argparse.Namespace) -> None:
                                 or receipt["atomic_capture"]["stdout"]
                             )
                         )
+                    if receipt.get("browser_presentation", {}).get("exit_code"):
+                        raise BrowserCaptureFailure(
+                            "V2 browser presentation capture failed: {}".format(
+                                receipt["browser_presentation"]["stderr"]
+                                or receipt["browser_presentation"]["stdout"]
+                            )
+                        )
                     print("ATOMIC_CAPTURE {}".format(args.capture_output), flush=True)
+                    bundle_path = generate_v2_review_products(args.capture_output, args.receipt)
+                    print("REVIEW_BUNDLE {}".format(bundle_path), flush=True)
                 hold_until = time.monotonic() + args.hold_seconds
                 while time.monotonic() < hold_until:
                     state = await browser_speech_state(cdp)
@@ -518,7 +883,7 @@ def parse_args(argv: Optional[Sequence[str]] = None) -> argparse.Namespace:
     parser.add_argument("--receipt", type=Path, required=True)
     parser.add_argument("--timeout", type=float, default=120.0)
     parser.add_argument("--hold-seconds", type=float, default=40.0)
-    parser.add_argument("--minimum-audio-seconds", type=float, default=24.0)
+    parser.add_argument("--minimum-audio-seconds", type=float, default=45.0)
     parser.add_argument("--capture-output", type=Path)
     parser.add_argument(
         "--scenarios-file",
