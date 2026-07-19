@@ -421,7 +421,10 @@ def analyze_v2(
         and isinstance(audio_artifact, Mapping)
         and isinstance(audio_artifact.get("sha256"), str)
         and len(audio_artifact["sha256"]) == 64
-        and int(audio_artifact.get("bytes", 0)) > 0,
+        and int(audio_artifact.get("bytes", 0)) > 0
+        and audio_artifact.get("speech_id") == wizard_state.get("speech_id")
+        and str(audio_artifact.get("declared_sha256", "")).removeprefix("sha256:")
+        == audio_artifact.get("sha256"),
         {
             "receipt_schema": receipt.get("schema"),
             "duration_ms": browser.get("durationMs"),

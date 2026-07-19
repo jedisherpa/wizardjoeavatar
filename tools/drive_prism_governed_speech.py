@@ -245,44 +245,50 @@ async def browser_speech_state(cdp: CDPClient) -> Mapping[str, Any]:
 
 
 async def retain_governed_audio(cdp: CDPClient, output_dir: Path) -> Mapping[str, Any]:
-    value = await cdp.evaluate(
-        """
-        (async () => {
-          const audio = document.querySelector('audio[data-source-slot="speech"]');
-          if (!audio?.currentSrc) return null;
-          const response = await fetch(audio.currentSrc);
-          if (!response.ok) throw new Error('governed_audio_fetch_failed');
-          const blob = await response.blob();
-          const bytes = new Uint8Array(await blob.arrayBuffer());
-          let binary = '';
-          for (let offset = 0; offset < bytes.length; offset += 32768) {
-            binary += String.fromCharCode(...bytes.subarray(offset, offset + 32768));
-          }
-          return {
-            base64: btoa(binary),
-            mediaType: blob.type || response.headers.get('content-type') || 'application/octet-stream'
-          };
-        })()
-        """
+    candidates = []
+    for event in cdp.network_responses:
+        response = event.get("response", {})
+        url = str(response.get("url", ""))
+        if url.rstrip("/").endswith("/api/tts"):
+            candidates.append(event)
+    if not candidates:
+        raise BrowserCaptureFailure("governed /api/tts response was unavailable")
+    event = candidates[-1]
+    value = await cdp.command(
+        "Network.getResponseBody",
+        {"requestId": event.get("requestId")},
     )
-    if not isinstance(value, Mapping) or not isinstance(value.get("base64"), str):
-        raise BrowserCaptureFailure("governed audio artifact was unavailable")
+    body = value.get("body") if isinstance(value, Mapping) else None
+    if not isinstance(body, str):
+        raise BrowserCaptureFailure("governed /api/tts body was unavailable")
     try:
-        payload = base64.b64decode(value["base64"], validate=True)
-    except (ValueError, TypeError) as exc:
-        raise BrowserCaptureFailure("governed audio artifact was not valid base64") from exc
+        payload = base64.b64decode(body, validate=True) if value.get("base64Encoded") else body.encode("latin-1")
+    except (UnicodeEncodeError, ValueError, TypeError) as exc:
+        raise BrowserCaptureFailure("governed /api/tts body could not be decoded") from exc
     if not payload:
         raise BrowserCaptureFailure("governed audio artifact was empty")
-    media_type = str(value.get("mediaType") or "application/octet-stream").split(";", 1)[0]
+    response = event.get("response", {})
+    headers = {
+        str(key).lower(): str(header_value)
+        for key, header_value in response.get("headers", {}).items()
+    }
+    media_type = str(headers.get("content-type") or response.get("mimeType") or "application/octet-stream").split(";", 1)[0]
     suffix = ".mp3" if media_type in {"audio/mpeg", "audio/mp3"} else ".wav" if media_type == "audio/wav" else ".bin"
     output_dir.mkdir(parents=True, exist_ok=True)
     path = output_dir / ("governed-speech-audio" + suffix)
     path.write_bytes(payload)
+    artifact_sha256 = sha256_file(path)
+    declared_sha256 = headers.get("x-prism-audio-sha256")
+    if declared_sha256 and declared_sha256.removeprefix("sha256:") != artifact_sha256:
+        raise BrowserCaptureFailure("governed audio digest differs from its TTS identity header")
     return {
         "path": path.name,
         "media_type": media_type,
         "bytes": path.stat().st_size,
-        "sha256": sha256_file(path),
+        "sha256": artifact_sha256,
+        "declared_sha256": declared_sha256,
+        "speech_id": headers.get("x-prism-speech-id"),
+        "turn_id": headers.get("x-prism-turn-id"),
     }
 
 

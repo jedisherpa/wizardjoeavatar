@@ -89,6 +89,9 @@ def evidence():
             "media_type": "audio/mpeg",
             "bytes": 4096,
             "sha256": "d" * 64,
+            "declared_sha256": "d" * 64,
+            "speech_id": "speech:test-v2",
+            "turn_id": "turn:test-v2",
         },
         "atomic_capture": {
             "exit_code": 0,
