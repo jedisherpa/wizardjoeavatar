@@ -66,6 +66,9 @@ class CDPClient:
         self.screencast_event = asyncio.Event()
         self.console_events = []
         self.page_errors = []
+        self.network_requests = []
+        self.network_responses = []
+        self.network_failures = []
 
     async def connect(self) -> None:
         self.websocket = await websockets.connect(
@@ -112,6 +115,15 @@ class CDPClient:
                 entry = params.get("entry", {})
                 if entry.get("level") in {"error", "warning"}:
                     self.console_events.append(params)
+            elif method == "Network.requestWillBeSent":
+                self.network_requests.append(params)
+                self.network_requests = self.network_requests[-200:]
+            elif method == "Network.responseReceived":
+                self.network_responses.append(params)
+                self.network_responses = self.network_responses[-200:]
+            elif method == "Network.loadingFailed":
+                self.network_failures.append(params)
+                self.network_failures = self.network_failures[-200:]
 
     async def command(self, method: str, params: Optional[Mapping[str, Any]] = None) -> Any:
         if self.websocket is None:

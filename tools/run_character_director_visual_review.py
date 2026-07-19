@@ -1136,6 +1136,7 @@ async def drive_scenarios(
         if terminal.is_set():
             raise EvidenceFailure(integrity.failure_reason or "capture terminated")
         command_id = "{}-{:04d}-{}".format(source_epoch, source_sequence, scenario.name)
+        planned_frames = max(1, int(round(scenario.capture_seconds * fps)))
         envelope = {
             "schema_version": 1,
             "command_id": command_id,
@@ -1155,6 +1156,7 @@ async def drive_scenarios(
             "source_sequence": source_sequence,
             "kind": scenario.kind,
             "payload": scenario.payload,
+            "capture_planned_frame_count": planned_frames,
             "request_started_at_utc": utc_now(),
             "ack": None,
             "response_state": None,
@@ -1182,8 +1184,6 @@ async def drive_scenarios(
                 state_url, "{}-after-ack".format(scenario.name), records
             )
             await wait_or_terminal(scenario.settle_seconds, terminal, integrity)
-            planned_frames = max(1, int(round(scenario.capture_seconds * fps)))
-            outcome["capture_planned_frame_count"] = planned_frames
             outcome["capture_started_at_utc"] = utc_now()
             scenario_clock.activate(scenario.name, planned_frames)
             await wait_for_scenario_frames(
@@ -2182,15 +2182,18 @@ def validate_manifest(manifest: Mapping[str, Any], output_dir: Optional[Path] = 
                 "scenario range presentation indexes are inconsistent",
             )
             command = commands_by_scenario.get(item["name"])
+            if not valid and command is None:
+                continue
             _manifest_error(
                 isinstance(command, Mapping)
                 and _plain_int(command.get("capture_planned_frame_count"), 1),
                 "scenario command is missing its exact frame plan",
             )
-            _manifest_error(
-                item.get("frame_count") == command["capture_planned_frame_count"],
-                "scenario range contains pre/post-window spill",
-            )
+            if valid:
+                _manifest_error(
+                    item.get("frame_count") == command["capture_planned_frame_count"],
+                    "scenario range contains pre/post-window spill",
+                )
 
     artifacts = manifest.get("artifacts")
     _manifest_error(isinstance(artifacts, list), "artifacts must be an array")

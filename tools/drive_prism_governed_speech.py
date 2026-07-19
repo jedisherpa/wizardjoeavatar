@@ -36,6 +36,7 @@ DEFAULT_PROMPT = (
     "or advice is needed."
 )
 SCHEMA = "character_director_prism_governed_speech_v1"
+MEDIA_SESSION_ROUTE = "/api/connectors/wizard/media-session"
 
 
 def get_json(url: str, token: str = "") -> Mapping[str, Any]:
@@ -127,6 +128,54 @@ async def submit_prompt(cdp: CDPClient, prompt: str) -> None:
     raise BrowserCaptureFailure("Prism prompt did not become submittable")
 
 
+async def install_media_session_probe(cdp: CDPClient) -> None:
+    installed = await cdp.evaluate(
+        """
+        (() => {
+          if (window.__wizardMediaSessionProbeInstalled) return true;
+          const originalFetch = window.fetch.bind(window);
+          window.__wizardMediaSessionProbe = [];
+          window.fetch = async (...args) => {
+            const input = args[0];
+            const init = args[1] ?? {};
+            const url = typeof input === 'string' ? input : input?.url ?? '';
+            if (!url.includes('/api/connectors/wizard/media-session')) {
+              return originalFetch(...args);
+            }
+            const requestBody = typeof init.body === 'string'
+              ? init.body.slice(0, 16_384)
+              : null;
+            try {
+              const response = await originalFetch(...args);
+              const responseBody = await response.clone().text();
+              window.__wizardMediaSessionProbe.push({
+                url,
+                status: response.status,
+                requestBody,
+                responseBody: responseBody.slice(0, 2_048)
+              });
+              window.__wizardMediaSessionProbe = window.__wizardMediaSessionProbe.slice(-20);
+              return response;
+            } catch (error) {
+              window.__wizardMediaSessionProbe.push({
+                url,
+                status: null,
+                requestBody,
+                responseBody: String(error).slice(0, 2_048)
+              });
+              window.__wizardMediaSessionProbe = window.__wizardMediaSessionProbe.slice(-20);
+              throw error;
+            }
+          };
+          window.__wizardMediaSessionProbeInstalled = true;
+          return true;
+        })()
+        """
+    )
+    if installed is not True:
+        raise BrowserCaptureFailure("could not install the media-session wire probe")
+
+
 async def browser_speech_state(cdp: CDPClient) -> Mapping[str, Any]:
     value = await cdp.evaluate(
         """
@@ -162,7 +211,10 @@ async def browser_speech_state(cdp: CDPClient) -> Mapping[str, Any]:
               : null,
             readyState: audio?.readyState ?? 0,
             stageVisible: Boolean(stage),
-            messages
+            messages,
+            mediaSessionProbe: Array.isArray(window.__wizardMediaSessionProbe)
+              ? window.__wizardMediaSessionProbe.slice(-8)
+              : []
           };
         })()
         """
@@ -178,6 +230,7 @@ async def wait_for_capture_edge(
 ) -> Dict[str, Any]:
     deadline = time.monotonic() + timeout
     last_observation: Dict[str, Any] = {}
+    edge_samples = []
     while time.monotonic() < deadline:
         browser = await browser_speech_state(cdp)
         status = await asyncio.to_thread(
@@ -192,6 +245,48 @@ async def wait_for_capture_edge(
         application = status.get("application", {})
         governed = status.get("governed_speech", {})
         wizard_state = state.get("state", {})
+        edge_sample = {
+            "browser_playing": browser.get("paused") is False
+            and browser.get("ended") is False
+            and int(browser.get("currentTimeMs", 0)) > 0,
+            "browser_time_ms": int(browser.get("currentTimeMs", 0)),
+            "application_active": application.get("active") is True,
+            "application_source_slot": application.get("source_slot"),
+            "governed_active": governed.get("active") is True,
+            "governed_status": governed.get("status"),
+            "mouth_authority": wizard_state.get("speech_mouth_authority"),
+            "wizard_action": wizard_state.get("action"),
+            "wizard_mouth": wizard_state.get("mouth"),
+            "simulation_tick": wizard_state.get("simulation_tick"),
+        }
+        if (
+            edge_sample["browser_playing"]
+            or edge_sample["application_active"]
+            or edge_sample["governed_active"]
+            or edge_sample["mouth_authority"] == "media_alignment"
+        ):
+            edge_samples.append(edge_sample)
+            edge_samples = edge_samples[-20:]
+        media_requests = [
+            {
+                "request_id": event.get("requestId"),
+                "url": event.get("request", {}).get("url"),
+                "method": event.get("request", {}).get("method"),
+                "post_data": event.get("request", {}).get("postData"),
+            }
+            for event in cdp.network_requests
+            if MEDIA_SESSION_ROUTE in str(event.get("request", {}).get("url", ""))
+        ][-8:]
+        media_responses = [
+            {
+                "request_id": event.get("requestId"),
+                "url": event.get("response", {}).get("url"),
+                "status": event.get("response", {}).get("status"),
+                "mime_type": event.get("response", {}).get("mimeType"),
+            }
+            for event in cdp.network_responses
+            if MEDIA_SESSION_ROUTE in str(event.get("response", {}).get("url", ""))
+        ][-8:]
         last_observation = {
             "browser": dict(browser),
             "application": application,
@@ -207,6 +302,9 @@ async def wait_for_capture_edge(
             },
             "browser_console_events": cdp.console_events[-20:],
             "browser_page_errors": cdp.page_errors[-20:],
+            "media_session_requests": media_requests,
+            "media_session_responses": media_responses,
+            "edge_samples": edge_samples,
         }
         if (
             browser.get("paused") is False
@@ -276,12 +374,14 @@ async def run(args: argparse.Namespace) -> None:
                 await cdp.command("Page.enable")
                 await cdp.command("Runtime.enable")
                 await cdp.command("Log.enable")
+                await cdp.command("Network.enable")
                 await cdp.command("Page.bringToFront")
                 initial = await wait_for_prism(
                     cdp,
                     args.timeout,
                     require_completed_greeting=not args.capture_opening,
                 )
+                await install_media_session_probe(cdp)
                 if not args.capture_opening:
                     await submit_prompt(cdp, args.prompt)
                 edge = await wait_for_capture_edge(
