@@ -102,6 +102,8 @@ def minimize_evidence_content(value: Any) -> Any:
                     raise EvidenceFailure(
                         "runtime payload contains both {} and {}".format(key, evidence_key)
                     )
+                if item is None:
+                    continue
                 if not isinstance(item, str):
                     raise EvidenceFailure("runtime payload {} must be text".format(key))
                 result[evidence_key] = _text_evidence(item)

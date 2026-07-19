@@ -735,6 +735,14 @@ class ManifestValidationTests(unittest.TestCase):
         self.assertNotIn(speech, json.dumps(minimized))
         validate_evidence_content_minimization(minimized)
 
+    def test_nullable_sensitive_runtime_text_is_omitted(self):
+        minimized = minimize_evidence_content(
+            {"state": {"speech_text": None, "speech_id": None}}
+        )
+
+        self.assertEqual(minimized, {"state": {"speech_id": None}})
+        validate_evidence_content_minimization(minimized)
+
     def test_manifest_rejects_raw_or_malformed_sensitive_text(self):
         raw = self.valid_manifest()
         raw["commands"][0]["response_state"] = {"speech_text": "do not serialize"}
