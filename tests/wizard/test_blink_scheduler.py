@@ -23,12 +23,12 @@ def phase_runs(scheduler, ticks):
     return runs
 
 
-def presented_phase_runs(scheduler, ticks):
+def presented_phase_runs(scheduler, ticks, presentation_hz=24):
     phases = []
     accumulator = 0
     for _ in range(ticks):
         phase = scheduler.advance_tick()
-        accumulator += 24
+        accumulator += presentation_hz
         if accumulator >= SIMULATION_HZ:
             accumulator -= SIMULATION_HZ
             phases.append(phase)
@@ -79,6 +79,20 @@ class BlinkSchedulerTests(unittest.TestCase):
 
         self.assertGreater(len(closure_frames), 0)
         self.assertTrue(all(3 <= length <= 4 for length in closure_frames))
+
+    def test_closures_remain_visible_across_accepted_delivery_band(self):
+        for presentation_hz in range(20, 25):
+            runs = presented_phase_runs(
+                BlinkScheduler(),
+                60 * SIMULATION_HZ,
+                presentation_hz=presentation_hz,
+            )
+            closure_frames = [length for closed, length in runs if closed]
+            self.assertGreater(len(closure_frames), 0)
+            self.assertTrue(
+                all(3 <= length <= 4 for length in closure_frames),
+                (presentation_hz, closure_frames),
+            )
 
     def test_reset_restarts_the_same_sequence(self):
         scheduler = BlinkScheduler()
