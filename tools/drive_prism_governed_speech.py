@@ -281,6 +281,70 @@ async def browser_speech_state(cdp: CDPClient) -> Mapping[str, Any]:
     return value if isinstance(value, Mapping) else {}
 
 
+async def resume_speech_playback_with_user_gesture(
+    cdp: CDPClient,
+) -> Mapping[str, Any]:
+    result = await cdp.command(
+        "Runtime.evaluate",
+        {
+            "expression": """
+            (() => {
+              const audio = document.querySelector('audio[data-source-slot="speech"]');
+              if (!audio) return {attempted:false, reason:'missing_speech_audio'};
+              if (!audio.src) return {attempted:false, reason:'missing_source'};
+              if (audio.ended) return {attempted:false, reason:'already_ended'};
+              if (!audio.paused) return {attempted:false, reason:'already_playing'};
+              if (audio.readyState < 2) return {attempted:false, reason:'not_ready'};
+              window.__wizardPlaybackRecovery = {
+                attemptedAtMs: Math.round(performance.now()),
+                status: 'pending'
+              };
+              try {
+                const playResult = audio.play();
+                Promise.resolve(playResult).then(() => {
+                  window.__wizardPlaybackRecovery = {
+                    attemptedAtMs: window.__wizardPlaybackRecovery?.attemptedAtMs ?? null,
+                    settledAtMs: Math.round(performance.now()),
+                    status: audio.paused ? 'resolved_paused' : 'playing'
+                  };
+                }).catch(error => {
+                  window.__wizardPlaybackRecovery = {
+                    attemptedAtMs: window.__wizardPlaybackRecovery?.attemptedAtMs ?? null,
+                    settledAtMs: Math.round(performance.now()),
+                    status: 'rejected',
+                    errorName: error?.name ?? 'Error'
+                  };
+                });
+                return {attempted:true, status:'pending'};
+              } catch (error) {
+                window.__wizardPlaybackRecovery = {
+                  attemptedAtMs: window.__wizardPlaybackRecovery?.attemptedAtMs ?? null,
+                  settledAtMs: Math.round(performance.now()),
+                  status: 'threw',
+                  errorName: error?.name ?? 'Error'
+                };
+                return {
+                  attempted:true,
+                  status:'threw',
+                  errorName:error?.name ?? 'Error'
+                };
+              }
+            })()
+            """,
+            "awaitPromise": False,
+            "returnByValue": True,
+            "userGesture": True,
+        },
+    )
+    remote_object = result.get("result", {}) if isinstance(result, Mapping) else {}
+    if remote_object.get("subtype") == "error":
+        raise BrowserCaptureFailure(
+            "browser playback recovery evaluation failed: {}".format(remote_object)
+        )
+    value = remote_object.get("value")
+    return value if isinstance(value, Mapping) else {}
+
+
 async def retain_governed_audio(cdp: CDPClient, output_dir: Path) -> Mapping[str, Any]:
     candidates = []
     for event in cdp.network_responses:
@@ -627,6 +691,8 @@ async def wait_for_capture_edge(
     deadline = time.monotonic() + timeout
     last_observation: Dict[str, Any] = {}
     edge_samples = []
+    playback_recovery_attempts = []
+    next_playback_recovery_at = 0.0
     while time.monotonic() < deadline:
         browser = await browser_speech_state(cdp)
         status = await asyncio.to_thread(
@@ -641,6 +707,20 @@ async def wait_for_capture_edge(
         application = status.get("application", {})
         governed = status.get("governed_speech", {})
         wizard_state = state.get("state", {})
+        now = time.monotonic()
+        if (
+            len(playback_recovery_attempts) < 3
+            and now >= next_playback_recovery_at
+            and governed.get("active") is True
+            and application.get("active") is not True
+            and browser.get("paused") is True
+            and browser.get("ended") is False
+            and int(browser.get("readyState", 0)) >= 2
+        ):
+            recovery = dict(await resume_speech_playback_with_user_gesture(cdp))
+            recovery["attempted_at_utc"] = utc_now()
+            playback_recovery_attempts.append(recovery)
+            next_playback_recovery_at = now + 1.0
         edge_sample = {
             "browser_playing": browser.get("paused") is False
             and browser.get("ended") is False
@@ -700,6 +780,7 @@ async def wait_for_capture_edge(
             "media_session_requests": media_requests,
             "media_session_responses": media_responses,
             "edge_samples": edge_samples,
+            "playback_recovery_attempts": playback_recovery_attempts,
         }
         if (
             browser.get("paused") is False
@@ -722,6 +803,7 @@ async def wait_for_capture_edge(
                     ),
                     "mouth": wizard_state.get("mouth"),
                 },
+                "playback_recovery_attempts": playback_recovery_attempts,
             }
         await asyncio.sleep(0.05)
     raise BrowserCaptureFailure(

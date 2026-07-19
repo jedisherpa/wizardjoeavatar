@@ -13,14 +13,16 @@ from drive_prism_governed_speech import (
     BrowserCaptureFailure,
     establish_audio_user_gesture,
     manifest_artifact_path,
+    resume_speech_playback_with_user_gesture,
     validate_disposable_loopback_url,
 )
 
 
 class FakeCdp:
-    def __init__(self, target=None, activated=True):
+    def __init__(self, target=None, activated=True, command_result=None):
         self.target = target
         self.activated = activated
+        self.command_result = command_result
         self.commands = []
         self.evaluations = 0
 
@@ -30,7 +32,7 @@ class FakeCdp:
 
     async def command(self, method, params=None):
         self.commands.append((method, params))
-        return {}
+        return self.command_result or {}
 
 
 class GovernedSpeechDriverTests(unittest.TestCase):
@@ -122,6 +124,32 @@ class GovernedSpeechDriverAsyncTests(unittest.IsolatedAsyncioTestCase):
             await establish_audio_user_gesture(FakeCdp(None))
         with self.assertRaises(BrowserCaptureFailure):
             await establish_audio_user_gesture(FakeCdp({"x": 10, "y": 10}, False))
+
+    async def test_playback_recovery_invokes_native_play_with_user_gesture(self):
+        cdp = FakeCdp(
+            command_result={
+                "result": {
+                    "type": "object",
+                    "value": {"attempted": True, "status": "pending"},
+                }
+            }
+        )
+
+        result = await resume_speech_playback_with_user_gesture(cdp)
+
+        self.assertEqual(result, {"attempted": True, "status": "pending"})
+        self.assertEqual(len(cdp.commands), 1)
+        method, params = cdp.commands[0]
+        self.assertEqual(method, "Runtime.evaluate")
+        self.assertTrue(params["userGesture"])
+        self.assertFalse(params["awaitPromise"])
+        self.assertIn("audio.play()", params["expression"])
+
+    async def test_playback_recovery_surfaces_browser_evaluation_error(self):
+        cdp = FakeCdp(command_result={"result": {"subtype": "error"}})
+
+        with self.assertRaises(BrowserCaptureFailure):
+            await resume_speech_playback_with_user_gesture(cdp)
 
 if __name__ == "__main__":
     unittest.main()
