@@ -370,6 +370,8 @@ async def capture_browser_layout(
                         "{:.6f}".format(fps),
                         "-i",
                         str(frames_dir / "%06d.jpg"),
+                        "-vf",
+                        "pad=ceil(iw/2)*2:ceil(ih/2)*2",
                         "-c:v",
                         "libx264",
                         "-pix_fmt",
