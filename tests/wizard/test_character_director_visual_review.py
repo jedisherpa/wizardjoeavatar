@@ -973,6 +973,66 @@ class ManifestValidationTests(unittest.TestCase):
                 legacy_bundle["complete"] = True
                 validate_review_bundle_manifest(legacy_bundle, root)
 
+                capture["scenario_program"] = {"acceptance_scenario": "V3"}
+                capture_manifest.write_text(json.dumps(capture), encoding="utf-8")
+                v3_quarter = root / "v3-quarter-speed.mp4"
+                v3_quarter.write_bytes(b"v3-quarter-speed-video")
+                v3_machine = root / "v3-machine-acceptance.json"
+                v3_machine.write_text('{"passed":true}\n', encoding="utf-8")
+                v3_browser = root / "v3-browser-layout.mp4"
+                v3_browser.write_bytes(b"v3-browser-layout-video")
+                v3_metrics = root / "v3-browser-layout-metrics.json"
+                v3_metrics.write_text(
+                    json.dumps(
+                        {
+                            "schema": "character_director_browser_layout_v1",
+                            "schema_version": 1,
+                            "run_id": capture["source_epoch"],
+                            "candidate_commit": capture["provenance"]["head"],
+                            "capture_manifest_sha256": hashlib.sha256(
+                                capture_manifest.read_bytes()
+                            ).hexdigest(),
+                            "frame_count": 2,
+                            "expected_frame_count": 2,
+                            "final_client_metrics": {
+                                "decodeErrorCount": 0,
+                                "canvas": {
+                                    "cols": capture["init"]["cols"],
+                                    "rows": capture["init"]["rows"],
+                                },
+                            },
+                            "page_errors": [],
+                            "video_path": v3_browser.name,
+                            "video_bytes": v3_browser.stat().st_size,
+                            "video_sha256": hashlib.sha256(
+                                v3_browser.read_bytes()
+                            ).hexdigest(),
+                        }
+                    ),
+                    encoding="utf-8",
+                )
+                v3_bundle = build_review_bundle_manifest(
+                    capture_manifest,
+                    root,
+                    (
+                        ("quarter_speed", v3_quarter, "video/mp4", normal_video),
+                        (
+                            "machine_acceptance",
+                            v3_machine,
+                            "application/json",
+                            capture_manifest,
+                        ),
+                        (
+                            "browser_layout",
+                            v3_browser,
+                            "video/mp4",
+                            v3_metrics,
+                        ),
+                    ),
+                )
+                self.assertTrue(v3_bundle["complete"])
+                validate_review_bundle_manifest(v3_bundle, root)
+
     def test_rejects_hashed_artifacts_that_do_not_replay_semantically(self):
         manifest = self.valid_manifest()
         with tempfile.TemporaryDirectory() as temporary:

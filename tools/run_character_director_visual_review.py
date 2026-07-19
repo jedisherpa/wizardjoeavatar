@@ -1514,6 +1514,18 @@ def validate_review_bundle_manifest(
     )
     capture_manifest = json.loads(capture_path.read_text(encoding="utf-8"))
     validate_manifest(capture_manifest, root)
+    scenario_program = capture_manifest.get("scenario_program")
+    acceptance_scenario = (
+        scenario_program.get("acceptance_scenario")
+        if isinstance(scenario_program, Mapping)
+        else "V1"
+    )
+    _manifest_error(
+        isinstance(acceptance_scenario, str)
+        and bool(ACCEPTANCE_SCENARIO_RE.fullmatch(acceptance_scenario)),
+        "review bundle acceptance scenario is invalid",
+    )
+    artifact_prefix = acceptance_scenario.lower()
     _manifest_error(
         manifest["run_id"] == capture_manifest.get("source_epoch"),
         "review bundle run ID differs from capture manifest",
@@ -1579,21 +1591,22 @@ def validate_review_bundle_manifest(
         )
         if role == "machine_acceptance":
             _manifest_error(
-                artifact["path"] == "v1-machine-acceptance.json"
+                artifact["path"] == "{}-machine-acceptance.json".format(artifact_prefix)
                 and source_relative == capture_record["path"]
                 and artifact["source_sha256"] == capture_record["sha256"],
                 "machine report is not bound to the immutable capture manifest",
             )
         elif role == "quarter_speed":
             _manifest_error(
-                artifact["path"] == "v1-quarter-speed.mp4"
+                artifact["path"] == "{}-quarter-speed.mp4".format(artifact_prefix)
                 and source_relative == capture_manifest.get("video", {}).get("path"),
                 "quarter-speed review is not bound to the normal-speed video",
             )
         else:
             _manifest_error(
-                artifact["path"] == "v1-browser-layout.mp4"
-                and source_relative == "v1-browser-layout-metrics.json",
+                artifact["path"] == "{}-browser-layout.mp4".format(artifact_prefix)
+                and source_relative
+                == "{}-browser-layout-metrics.json".format(artifact_prefix),
                 "browser layout review is not bound to its metrics",
             )
             browser_metrics = json.loads(source.read_text(encoding="utf-8"))
