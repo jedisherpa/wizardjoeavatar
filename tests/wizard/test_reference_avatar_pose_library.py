@@ -90,6 +90,12 @@ class ReferenceAvatarPoseLibraryTests(unittest.TestCase):
             by_id["stop_front_from_right_passing_100"]["cells"],
             by_id["front_idle"]["cells"],
         )
+        right_contact_staff_x = [
+            by_id[f"stop_front_from_right_{amount}"]["anchors"]["staff_tip"][0]
+            for amount in (25, 50, 75, 100)
+        ]
+        self.assertTrue(all(50 <= x <= 60 for x in right_contact_staff_x))
+        self.assertLessEqual(max(right_contact_staff_x) - min(right_contact_staff_x), 8)
 
     def test_explain_and_point_inbetweens_are_baked_landmark_warp_graphs(self):
         library = json.loads(

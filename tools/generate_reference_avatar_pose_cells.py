@@ -21,6 +21,7 @@ from wizard_avatar.pose_compositor import (
     composite_landmark_splat_transition,
     composite_landmark_warp_transition,
     composite_localized_landmark_transition,
+    resolve_authored_staff_anchors,
 )
 
 
@@ -336,7 +337,24 @@ def derive_landmark_warp_payload(
     progress = progress_milli / 1000.0
     from_anchors = resolve_anchors(manifest, from_pose, from_payload)
     to_anchors = resolve_anchors(manifest, to_pose, to_payload)
+    from_canvas = payload_canvas(from_payload)
     to_canvas = payload_canvas(to_payload)
+
+    def resolve_staff_geometry(
+        canvas: CellCanvas,
+        anchors: dict[str, list[int]],
+    ) -> None:
+        staff_tip, staff_hand = resolve_authored_staff_anchors(
+            canvas,
+            tuple(anchors["staff_tip"]),
+            tuple(anchors["staff_hand"]),
+            tuple(anchors["root"]),
+        )
+        anchors["staff_tip"] = list(staff_tip)
+        anchors["staff_hand"] = list(staff_hand)
+
+    resolve_staff_geometry(from_canvas, from_anchors)
+    resolve_staff_geometry(to_canvas, to_anchors)
     lock_anchor = warp.get("lock_anchor")
     if lock_anchor is not None:
         if not isinstance(lock_anchor, str) or not lock_anchor:
@@ -381,14 +399,14 @@ def derive_landmark_warp_payload(
     if localized_region is None:
         if method == "inverse_sample":
             canvas = composite_landmark_warp_transition(
-                payload_canvas(from_payload),
+                from_canvas,
                 to_canvas,
                 control_pairs,
                 progress,
             )
         elif method == "topology_splat":
             canvas = composite_landmark_splat_transition(
-                payload_canvas(from_payload),
+                from_canvas,
                 to_canvas,
                 control_pairs,
                 progress,
@@ -416,7 +434,7 @@ def derive_landmark_warp_payload(
             to_anchors["root"][1] + pivot_offset[1],
         )
         canvas = composite_localized_landmark_transition(
-            payload_canvas(from_payload),
+            from_canvas,
             to_canvas,
             (tuple(from_anchors[anchor_name]), source_pivot),
             (tuple(to_anchors[anchor_name]), target_pivot),
