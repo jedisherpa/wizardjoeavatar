@@ -31,7 +31,23 @@ MAGIC_CAST_POSE = "magic_cast"
 DASH_POSE = "run_front_airborne_reach"
 GROUND_STOP_LEFT_NODE = "ground_stop_left"
 GROUND_STOP_RIGHT_NODE = "ground_stop_right"
-GROUND_STOP_NODES = frozenset({GROUND_STOP_LEFT_NODE, GROUND_STOP_RIGHT_NODE})
+GROUND_STOP_FRONT_LEFT_NODE = "ground_stop_front_left"
+GROUND_STOP_FRONT_RIGHT_NODE = "ground_stop_front_right"
+GROUND_STOP_FRONT_LEFT_PASSING_NODE = "ground_stop_front_left_passing"
+GROUND_STOP_FRONT_RIGHT_PASSING_NODE = "ground_stop_front_right_passing"
+GROUND_STOP_NODE_BY_WALK_POSE = {
+    WALK_FRONT_LEFT_POSE: GROUND_STOP_FRONT_LEFT_NODE,
+    WALK_FRONT_RIGHT_POSE: GROUND_STOP_FRONT_RIGHT_NODE,
+    "walk_front_left_to_right": GROUND_STOP_FRONT_LEFT_PASSING_NODE,
+    "walk_front_right_to_left": GROUND_STOP_FRONT_RIGHT_PASSING_NODE,
+}
+GROUND_STOP_NODES = frozenset(
+    {
+        GROUND_STOP_LEFT_NODE,
+        GROUND_STOP_RIGHT_NODE,
+        *GROUND_STOP_NODE_BY_WALK_POSE.values(),
+    }
+)
 IDLE_PRESENTATION_POSE_BY_FACING = {
     "south": FRONT_IDLE_POSE,
     # These two authored walk poses donate only their three-quarter head
@@ -621,6 +637,9 @@ def _select_node_id(state: WizardState, graph: AnimationGraph) -> str:
             return GROUND_STOP_LEFT_NODE
         if state.facing == "east" and GROUND_STOP_RIGHT_NODE in graph.nodes:
             return GROUND_STOP_RIGHT_NODE
+        front_stop_node = GROUND_STOP_NODE_BY_WALK_POSE.get(state.pose_id)
+        if front_stop_node in graph.nodes:
+            return front_stop_node
     fallback_clip = str(
         graph.fallbacks["by_facing"].get(
             state.facing,

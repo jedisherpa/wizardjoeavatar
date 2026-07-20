@@ -498,6 +498,60 @@ class PoseSelectionTests(unittest.TestCase):
         self.assertEqual(state.animation_transition_phase, "stable")
         self.assertEqual(settle_ticks, 15)
 
+    def test_front_walk_stops_through_phase_matched_authored_settle(self):
+        graph = load_reference_animation_graph_v2()
+        cases = (
+            ("walk_front_left", "ground_stop_front_left", "stop_front_from_left"),
+            ("walk_front_right", "ground_stop_front_right", "stop_front_from_right"),
+            (
+                "walk_front_left_to_right",
+                "ground_stop_front_left_passing",
+                "stop_front_from_left_passing",
+            ),
+            (
+                "walk_front_right_to_left",
+                "ground_stop_front_right_passing",
+                "stop_front_from_right_passing",
+            ),
+        )
+        for source_pose, stop_node, family in cases:
+            with self.subTest(source_pose=source_pose):
+                state = state_for(
+                    locomotion="idle",
+                    pose_id=source_pose,
+                    animation_node_id="ground_walk",
+                    animation_clip_id="walk_front",
+                    animation_clip_tick=100,
+                    simulation_tick=100,
+                )
+
+                sample = _select_graph_v2_sample(state, graph)
+                self.assertEqual(state.animation_node_id, stop_node)
+                self.assertEqual(sample.pose_id, source_pose)
+                observed = [sample.pose_id]
+                for _ in range(60):
+                    state.simulation_tick += 1
+                    state.animation_clip_tick += 1
+                    sample = _select_graph_v2_sample(state, graph)
+                    observed.append(sample.pose_id)
+                    if state.animation_node_id == "ground_idle":
+                        break
+
+                self.assertEqual(state.animation_node_id, "ground_idle")
+                self.assertEqual(sample.pose_id, "front_idle")
+                compact = tuple(dict.fromkeys(observed))
+                self.assertEqual(
+                    compact,
+                    (
+                        source_pose,
+                        f"{family}_25",
+                        f"{family}_50",
+                        f"{family}_75",
+                        f"{family}_100",
+                        "front_idle",
+                    ),
+                )
+
     def test_run_charge_progresses_through_recovery_before_idle(self):
         graph = load_reference_animation_graph_v2()
         state = state_for(

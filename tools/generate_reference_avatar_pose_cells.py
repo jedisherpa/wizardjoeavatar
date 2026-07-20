@@ -326,7 +326,7 @@ def derive_landmark_warp_payload(
         to_payload = normalized_payloads[to_pose_id]
     except KeyError as error:
         raise ValueError(
-            f"{pose['id']} warp endpoint {error.args[0]!r} is not an authored pose"
+            f"{pose['id']} warp endpoint {error.args[0]!r} is not an available earlier pose"
         ) from error
 
     progress_milli = int(warp.get("progress_milli", 500))
@@ -589,6 +589,10 @@ def generate_pose_library(
         else:
             payload = normalized_payloads[pose["id"]]
             generation_rows = generation_rows_by_id[pose["id"]]
+        # Derived graphs become valid inputs for later derived graphs in the
+        # manifest. This preserves a deterministic, acyclic authoring order
+        # while keeping every runtime pose as a fully baked pixel graph.
+        normalized_payloads[pose["id"]] = payload
         poses.append(
             {
                 "id": pose["id"],

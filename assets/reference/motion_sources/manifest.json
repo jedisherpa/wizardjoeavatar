@@ -1747,6 +1747,262 @@
       ]
     },
     {
+      "id": "stop_front_from_left_25",
+      "source": "derived_landmark_warp:walk_front_left+front_idle@250/1000:lock=left_foot",
+      "description": "front stop settle from left contact at 25 percent",
+      "derived_landmark_warp": {
+        "from_pose_id": "walk_front_left",
+        "to_pose_id": "front_idle",
+        "progress_milli": 250,
+        "lock_anchor": "left_foot"
+      },
+      "facing": "south",
+      "locomotion": "idle",
+      "actions": ["walking", "stop"],
+      "phase": 0.25,
+      "tags": ["front_family", "stop", "left_foot", "authored_pixel_graph", "landmark_warp"]
+    },
+    {
+      "id": "stop_front_from_left_50",
+      "source": "derived_landmark_warp:walk_front_left+front_idle@500/1000:lock=left_foot",
+      "description": "front stop settle from left contact at 50 percent",
+      "derived_landmark_warp": {
+        "from_pose_id": "walk_front_left",
+        "to_pose_id": "front_idle",
+        "progress_milli": 500,
+        "lock_anchor": "left_foot"
+      },
+      "facing": "south",
+      "locomotion": "idle",
+      "actions": ["walking", "stop"],
+      "phase": 0.5,
+      "tags": ["front_family", "stop", "left_foot", "authored_pixel_graph", "landmark_warp"]
+    },
+    {
+      "id": "stop_front_from_left_75",
+      "source": "derived_landmark_warp:walk_front_left+front_idle@750/1000:lock=left_foot",
+      "description": "front stop settle from left contact at 75 percent",
+      "derived_landmark_warp": {
+        "from_pose_id": "walk_front_left",
+        "to_pose_id": "front_idle",
+        "progress_milli": 750,
+        "lock_anchor": "left_foot"
+      },
+      "facing": "south",
+      "locomotion": "idle",
+      "actions": ["walking", "stop"],
+      "phase": 0.75,
+      "tags": ["front_family", "stop", "left_foot", "authored_pixel_graph", "landmark_warp"]
+    },
+    {
+      "id": "stop_front_from_left_100",
+      "source": "derived_landmark_warp:walk_front_left+front_idle@1000/1000:lock=left_foot",
+      "description": "front stop planted endpoint from left contact",
+      "derived_landmark_warp": {
+        "from_pose_id": "walk_front_left",
+        "to_pose_id": "front_idle",
+        "progress_milli": 1000,
+        "lock_anchor": "left_foot"
+      },
+      "facing": "south",
+      "locomotion": "idle",
+      "actions": ["walking", "stop"],
+      "phase": 1.0,
+      "tags": ["front_family", "stop", "left_foot", "authored_pixel_graph", "landmark_warp"]
+    },
+    {
+      "id": "stop_front_from_right_25",
+      "source": "derived_landmark_warp:walk_front_right+front_idle@250/1000:lock=right_foot",
+      "description": "front stop settle from right contact at 25 percent",
+      "derived_landmark_warp": {
+        "from_pose_id": "walk_front_right",
+        "to_pose_id": "front_idle",
+        "progress_milli": 250,
+        "lock_anchor": "right_foot"
+      },
+      "facing": "south",
+      "locomotion": "idle",
+      "actions": ["walking", "stop"],
+      "phase": 0.25,
+      "tags": ["front_family", "stop", "right_foot", "authored_pixel_graph", "landmark_warp"]
+    },
+    {
+      "id": "stop_front_from_right_50",
+      "source": "derived_landmark_warp:walk_front_right+front_idle@500/1000:lock=right_foot",
+      "description": "front stop settle from right contact at 50 percent",
+      "derived_landmark_warp": {
+        "from_pose_id": "walk_front_right",
+        "to_pose_id": "front_idle",
+        "progress_milli": 500,
+        "lock_anchor": "right_foot"
+      },
+      "facing": "south",
+      "locomotion": "idle",
+      "actions": ["walking", "stop"],
+      "phase": 0.5,
+      "tags": ["front_family", "stop", "right_foot", "authored_pixel_graph", "landmark_warp"]
+    },
+    {
+      "id": "stop_front_from_right_75",
+      "source": "derived_landmark_warp:walk_front_right+front_idle@750/1000:lock=right_foot",
+      "description": "front stop settle from right contact at 75 percent",
+      "derived_landmark_warp": {
+        "from_pose_id": "walk_front_right",
+        "to_pose_id": "front_idle",
+        "progress_milli": 750,
+        "lock_anchor": "right_foot"
+      },
+      "facing": "south",
+      "locomotion": "idle",
+      "actions": ["walking", "stop"],
+      "phase": 0.75,
+      "tags": ["front_family", "stop", "right_foot", "authored_pixel_graph", "landmark_warp"]
+    },
+    {
+      "id": "stop_front_from_right_100",
+      "source": "derived_landmark_warp:walk_front_right+front_idle@1000/1000:lock=right_foot",
+      "description": "front stop planted endpoint from right contact",
+      "derived_landmark_warp": {
+        "from_pose_id": "walk_front_right",
+        "to_pose_id": "front_idle",
+        "progress_milli": 1000,
+        "lock_anchor": "right_foot"
+      },
+      "facing": "south",
+      "locomotion": "idle",
+      "actions": ["walking", "stop"],
+      "phase": 1.0,
+      "tags": ["front_family", "stop", "right_foot", "authored_pixel_graph", "landmark_warp"]
+    },
+    {
+      "id": "stop_front_from_left_passing_25",
+      "source": "derived_landmark_warp:walk_front_left_to_right+front_idle@250/1000:lock=root",
+      "description": "front stop settle from left release at 25 percent",
+      "derived_landmark_warp": {
+        "from_pose_id": "walk_front_left_to_right",
+        "to_pose_id": "front_idle",
+        "progress_milli": 250,
+        "lock_anchor": "root"
+      },
+      "facing": "south",
+      "locomotion": "idle",
+      "actions": ["walking", "stop"],
+      "phase": 0.25,
+      "tags": ["front_family", "stop", "passing", "authored_pixel_graph", "landmark_warp"]
+    },
+    {
+      "id": "stop_front_from_left_passing_50",
+      "source": "derived_landmark_warp:walk_front_left_to_right+front_idle@500/1000:lock=root",
+      "description": "front stop settle from left release at 50 percent",
+      "derived_landmark_warp": {
+        "from_pose_id": "walk_front_left_to_right",
+        "to_pose_id": "front_idle",
+        "progress_milli": 500,
+        "lock_anchor": "root"
+      },
+      "facing": "south",
+      "locomotion": "idle",
+      "actions": ["walking", "stop"],
+      "phase": 0.5,
+      "tags": ["front_family", "stop", "passing", "authored_pixel_graph", "landmark_warp"]
+    },
+    {
+      "id": "stop_front_from_left_passing_75",
+      "source": "derived_landmark_warp:walk_front_left_to_right+front_idle@750/1000:lock=root",
+      "description": "front stop settle from left release at 75 percent",
+      "derived_landmark_warp": {
+        "from_pose_id": "walk_front_left_to_right",
+        "to_pose_id": "front_idle",
+        "progress_milli": 750,
+        "lock_anchor": "root"
+      },
+      "facing": "south",
+      "locomotion": "idle",
+      "actions": ["walking", "stop"],
+      "phase": 0.75,
+      "tags": ["front_family", "stop", "passing", "authored_pixel_graph", "landmark_warp"]
+    },
+    {
+      "id": "stop_front_from_left_passing_100",
+      "source": "derived_landmark_warp:walk_front_left_to_right+front_idle@1000/1000:lock=root",
+      "description": "front stop endpoint from left release",
+      "derived_landmark_warp": {
+        "from_pose_id": "walk_front_left_to_right",
+        "to_pose_id": "front_idle",
+        "progress_milli": 1000,
+        "lock_anchor": "root"
+      },
+      "facing": "south",
+      "locomotion": "idle",
+      "actions": ["walking", "stop"],
+      "phase": 1.0,
+      "tags": ["front_family", "stop", "passing", "authored_pixel_graph", "landmark_warp"]
+    },
+    {
+      "id": "stop_front_from_right_passing_25",
+      "source": "derived_landmark_warp:walk_front_right_to_left+front_idle@250/1000:lock=root",
+      "description": "front stop settle from right release at 25 percent",
+      "derived_landmark_warp": {
+        "from_pose_id": "walk_front_right_to_left",
+        "to_pose_id": "front_idle",
+        "progress_milli": 250,
+        "lock_anchor": "root"
+      },
+      "facing": "south",
+      "locomotion": "idle",
+      "actions": ["walking", "stop"],
+      "phase": 0.25,
+      "tags": ["front_family", "stop", "passing", "authored_pixel_graph", "landmark_warp"]
+    },
+    {
+      "id": "stop_front_from_right_passing_50",
+      "source": "derived_landmark_warp:walk_front_right_to_left+front_idle@500/1000:lock=root",
+      "description": "front stop settle from right release at 50 percent",
+      "derived_landmark_warp": {
+        "from_pose_id": "walk_front_right_to_left",
+        "to_pose_id": "front_idle",
+        "progress_milli": 500,
+        "lock_anchor": "root"
+      },
+      "facing": "south",
+      "locomotion": "idle",
+      "actions": ["walking", "stop"],
+      "phase": 0.5,
+      "tags": ["front_family", "stop", "passing", "authored_pixel_graph", "landmark_warp"]
+    },
+    {
+      "id": "stop_front_from_right_passing_75",
+      "source": "derived_landmark_warp:walk_front_right_to_left+front_idle@750/1000:lock=root",
+      "description": "front stop settle from right release at 75 percent",
+      "derived_landmark_warp": {
+        "from_pose_id": "walk_front_right_to_left",
+        "to_pose_id": "front_idle",
+        "progress_milli": 750,
+        "lock_anchor": "root"
+      },
+      "facing": "south",
+      "locomotion": "idle",
+      "actions": ["walking", "stop"],
+      "phase": 0.75,
+      "tags": ["front_family", "stop", "passing", "authored_pixel_graph", "landmark_warp"]
+    },
+    {
+      "id": "stop_front_from_right_passing_100",
+      "source": "derived_landmark_warp:walk_front_right_to_left+front_idle@1000/1000:lock=root",
+      "description": "front stop endpoint from right release",
+      "derived_landmark_warp": {
+        "from_pose_id": "walk_front_right_to_left",
+        "to_pose_id": "front_idle",
+        "progress_milli": 1000,
+        "lock_anchor": "root"
+      },
+      "facing": "south",
+      "locomotion": "idle",
+      "actions": ["walking", "stop"],
+      "phase": 1.0,
+      "tags": ["front_family", "stop", "passing", "authored_pixel_graph", "landmark_warp"]
+    },
+    {
       "id": "back_left",
       "source": "back_left.png",
       "description": "rear three-quarter left walk or turn pose",

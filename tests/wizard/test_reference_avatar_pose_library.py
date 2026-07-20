@@ -32,7 +32,7 @@ class ReferenceAvatarPoseLibraryTests(unittest.TestCase):
         manifest = json.loads(MANIFEST_PATH.read_text(encoding="utf-8"))
         expected_pose_ids = {pose["id"] for pose in manifest["poses"]}
         self.assertEqual(set(reference_pose_ids()), expected_pose_ids)
-        self.assertEqual(len(expected_pose_ids), 134)
+        self.assertEqual(len(expected_pose_ids), 150)
         self.assertTrue(
             {
                 "front_greeting_wave_wings",
@@ -46,7 +46,45 @@ class ReferenceAvatarPoseLibraryTests(unittest.TestCase):
                 "point_front_in_20",
                 "point_front_in_80",
                 "point_front_contact_locked",
+                "stop_front_from_left_25",
+                "stop_front_from_right_100",
+                "stop_front_from_left_passing_25",
+                "stop_front_from_right_passing_100",
             }.issubset(expected_pose_ids)
+        )
+
+    def test_front_stop_inbetweens_are_baked_ordered_pixel_graphs(self):
+        library = json.loads(
+            (
+                ROOT
+                / "wizard_avatar"
+                / "definitions"
+                / "reference_avatar_pose_cells.json"
+            ).read_text(encoding="utf-8")
+        )
+        by_id = {pose["id"]: pose for pose in library["poses"]}
+        families = (
+            "stop_front_from_left",
+            "stop_front_from_right",
+            "stop_front_from_left_passing",
+            "stop_front_from_right_passing",
+        )
+        for family in families:
+            with self.subTest(family=family):
+                poses = [by_id[f"{family}_{amount}"] for amount in (25, 50, 75, 100)]
+                self.assertTrue(
+                    all(pose["source"].startswith("derived_landmark_warp:") for pose in poses)
+                )
+                self.assertTrue(all(pose["cells"] for pose in poses))
+                self.assertEqual({tuple(pose["root_anchor"]) for pose in poses}, {(36, 95)})
+
+        self.assertEqual(
+            by_id["stop_front_from_left_passing_100"]["cells"],
+            by_id["front_idle"]["cells"],
+        )
+        self.assertEqual(
+            by_id["stop_front_from_right_passing_100"]["cells"],
+            by_id["front_idle"]["cells"],
         )
 
     def test_explain_and_point_inbetweens_are_baked_landmark_warp_graphs(self):

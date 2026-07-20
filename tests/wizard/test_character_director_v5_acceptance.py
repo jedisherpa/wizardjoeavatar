@@ -84,6 +84,14 @@ def fixture():
     ]
     scale = 2.55 / sum(raw_steps)
     steps = [value * scale for value in raw_steps]
+    stop_poses = (
+        [("walk_front_right", "right_foot")] * 2
+        + [("stop_front_from_right_25", "right_foot")] * 2
+        + [("stop_front_from_right_50", "right_foot")] * 2
+        + [("stop_front_from_right_75", "right_foot")] * 2
+        + [("stop_front_from_right_100", "right_foot")] * 2
+        + [("front_idle", "both_feet")] * 3
+    )
     cumulative = 0.0
     completed_cycles = 0
     for local_frame in range(EXPECTED_FRAME_COUNTS["v5-three-cycle-walk"]):
@@ -105,7 +113,8 @@ def fixture():
                 pose, contact = "walk_front_right_to_left", "none"
             clip = "walk_front"
         else:
-            pose, contact, clip = "front_idle", "both_feet", "idle_front"
+            pose, contact = stop_poses[local_frame - len(steps)]
+            clip = "stop_front_right"
         append(
             "v5-three-cycle-walk",
             _trace(0, 5.0 - cumulative, clip, pose, contact, markers),
@@ -167,6 +176,18 @@ class CharacterDirectorV5AcceptanceTests(unittest.TestCase):
 
         self.assertFalse(report["passed"])
         self.assertFalse(check(report, "decelerated_stop_profile")["passed"])
+
+    def test_missing_authored_stop_inbetween_fails_closed(self):
+        manifest, traces = fixture()
+        broken = copy.deepcopy(traces)
+        for trace in broken:
+            if trace["rendered_pose_id"] == "stop_front_from_right_50":
+                trace["rendered_pose_id"] = "stop_front_from_right_75"
+
+        report = analyze_v5(manifest, broken)
+
+        self.assertFalse(report["passed"])
+        self.assertFalse(check(report, "front_walk_pose_and_stop_settle")["passed"])
 
     def test_contact_drift_target_error_and_clipping_fail_closed(self):
         manifest, traces = fixture()

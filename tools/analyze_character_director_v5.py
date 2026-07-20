@@ -33,6 +33,40 @@ EXPECTED_WALK_POSES = {
     "walk_front_right",
     "walk_front_right_to_left",
 }
+EXPECTED_STOP_POSES = {
+    "stop_front_left": (
+        "walk_front_left",
+        "stop_front_from_left_25",
+        "stop_front_from_left_50",
+        "stop_front_from_left_75",
+        "stop_front_from_left_100",
+        "front_idle",
+    ),
+    "stop_front_right": (
+        "walk_front_right",
+        "stop_front_from_right_25",
+        "stop_front_from_right_50",
+        "stop_front_from_right_75",
+        "stop_front_from_right_100",
+        "front_idle",
+    ),
+    "stop_front_left_passing": (
+        "walk_front_left_to_right",
+        "stop_front_from_left_passing_25",
+        "stop_front_from_left_passing_50",
+        "stop_front_from_left_passing_75",
+        "stop_front_from_left_passing_100",
+        "front_idle",
+    ),
+    "stop_front_right_passing": (
+        "walk_front_right_to_left",
+        "stop_front_from_right_passing_25",
+        "stop_front_from_right_passing_50",
+        "stop_front_from_right_passing_75",
+        "stop_front_from_right_passing_100",
+        "front_idle",
+    ),
+}
 
 
 def _check(report: Dict[str, Any], name: str, passed: bool, detail: object) -> None:
@@ -346,24 +380,56 @@ def analyze_v5(
         for trace in walk
         if trace.get("animation_clip_id") == "walk_front"
     }
+    owned_performance = walk + settle
+    stop_records = [
+        trace
+        for trace in owned_performance
+        if trace.get("animation_clip_id") in EXPECTED_STOP_POSES
+    ]
+    stop_clip_ids = tuple(
+        dict.fromkeys(str(trace.get("animation_clip_id")) for trace in stop_records)
+    )
+    stop_pose_sequence = tuple(
+        dict.fromkeys(str(trace.get("rendered_pose_id")) for trace in stop_records)
+    )
+    expected_stop_sequence = (
+        EXPECTED_STOP_POSES.get(stop_clip_ids[0], ())
+        if len(stop_clip_ids) == 1
+        else ()
+    )
+    last_stop_offset = max(
+        (
+            index
+            for index, trace in enumerate(owned_performance)
+            if trace.get("animation_clip_id") in EXPECTED_STOP_POSES
+        ),
+        default=-1,
+    )
+    final_idle = owned_performance[last_stop_offset + 1 :]
     _check(
         report,
         "front_walk_pose_and_stop_settle",
         observed_walk_poses == EXPECTED_WALK_POSES
         and target_error <= 0.08
-        and bool(settle)
+        and len(stop_clip_ids) == 1
+        and stop_pose_sequence == expected_stop_sequence
+        and len(final_idle) >= 8
         and all(
             trace.get("animation_clip_id") == "idle_front"
             and trace.get("rendered_pose_id") == "front_idle"
             and trace.get("support_contact") == "both_feet"
-            for trace in settle
+            for trace in final_idle
         ),
         {
             "observed_walk_poses": sorted(str(item) for item in observed_walk_poses),
+            "stop_clip_ids": list(stop_clip_ids),
+            "stop_pose_sequence": list(stop_pose_sequence),
+            "expected_stop_pose_sequence": list(expected_stop_sequence),
             "target": list(TARGET),
             "final_root": list(final_root) if final_root is not None else None,
             "target_error": target_error,
             "settle_frame_count": len(settle),
+            "final_idle_frame_count": len(final_idle),
         },
     )
 
