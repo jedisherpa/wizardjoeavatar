@@ -92,6 +92,7 @@ class CrispPoseTransitionTests(unittest.TestCase):
         first = composite_landmark_splat_transition(source, target, controls, 0.0)
         middle_a = composite_landmark_splat_transition(source, target, controls, 0.5)
         middle_b = composite_landmark_splat_transition(source, target, controls, 0.5)
+        late = composite_landmark_splat_transition(source, target, controls, 0.875)
         last = composite_landmark_splat_transition(source, target, controls, 1.0)
 
         self.assertEqual(cell_signature(first), cell_signature(source))
@@ -99,6 +100,10 @@ class CrispPoseTransitionTests(unittest.TestCase):
         self.assertEqual(cell_signature(middle_a), cell_signature(middle_b))
         self.assertEqual(
             {cell.layer_id for row in middle_a.cells for cell in row if cell is not None},
+            {"source"},
+        )
+        self.assertEqual(
+            {cell.layer_id for row in late.cells for cell in row if cell is not None},
             {"source"},
         )
         self.assertGreaterEqual(

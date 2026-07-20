@@ -426,9 +426,12 @@ def composite_landmark_splat_transition(
     Inverse sampling can stretch a bent limb into a hollow ribbon when a
     flattened pose moves a long distance. This authoring primitive instead
     carries every occupied endpoint cell forward toward the interpolated rig.
-    It switches endpoint authority once, at the midpoint, and repairs only
-    enclosed one-cell raster gaps. Colors are never averaged and the result is
-    still one complete atomic pixel graph for the runtime projector.
+    Every nonterminal frame carries the intact source topology toward the
+    target landmarks. The exact target graph is substituted only at the
+    endpoint, when both landmark geometries coincide. This avoids a global
+    mid-transition silhouette switch. Enclosed one-cell raster gaps are
+    repaired, colors are never averaged, and the result remains one complete
+    atomic pixel graph for the runtime projector.
     """
 
     if (from_canvas.width, from_canvas.height) != (to_canvas.width, to_canvas.height):
@@ -447,8 +450,8 @@ def composite_landmark_splat_transition(
         )
         for source, target in control_pairs
     )
-    endpoint = "source" if progress <= 0.5 else "target"
-    canvas = from_canvas if endpoint == "source" else to_canvas
+    endpoint = "source"
+    canvas = from_canvas
     out = CellCanvas(canvas.width, canvas.height)
     priorities: dict[tuple[int, int], tuple[float, int, int]] = {}
     for y, row in enumerate(canvas.cells):
