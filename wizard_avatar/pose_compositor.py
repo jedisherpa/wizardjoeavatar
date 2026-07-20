@@ -447,7 +447,7 @@ def composite_landmark_splat_transition(
         )
         for source, target in control_pairs
     )
-    endpoint = "source" if progress < 0.5 else "target"
+    endpoint = "source" if progress <= 0.5 else "target"
     canvas = from_canvas if endpoint == "source" else to_canvas
     out = CellCanvas(canvas.width, canvas.height)
     priorities: dict[tuple[int, int], tuple[float, int, int]] = {}

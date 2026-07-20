@@ -85,8 +85,8 @@ class CrispPoseTransitionTests(unittest.TestCase):
         target = CellCanvas(9, 7)
         for y in range(2, 5):
             for x in range(1, 4):
-                source.set(x, y, "#", (20 + x, 80 + y, 170), "body")
-                target.set(x + 3, y, "#", (120 + x, 60 + y, 40), "body")
+                source.set(x, y, "#", (20 + x, 80 + y, 170), "source")
+                target.set(x + 3, y, "#", (120 + x, 60 + y, 40), "target")
         controls = (((1, 3), (4, 3)), ((3, 3), (6, 3)))
 
         first = composite_landmark_splat_transition(source, target, controls, 0.0)
@@ -97,6 +97,10 @@ class CrispPoseTransitionTests(unittest.TestCase):
         self.assertEqual(cell_signature(first), cell_signature(source))
         self.assertEqual(cell_signature(last), cell_signature(target))
         self.assertEqual(cell_signature(middle_a), cell_signature(middle_b))
+        self.assertEqual(
+            {cell.layer_id for row in middle_a.cells for cell in row if cell is not None},
+            {"source"},
+        )
         self.assertGreaterEqual(
             sum(cell is not None for row in middle_a.cells for cell in row),
             8,
