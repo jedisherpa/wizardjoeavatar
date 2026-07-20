@@ -88,8 +88,10 @@ def fixture():
         [("walk_front_right", "right_foot")] * 2
         + [("stop_front_from_right_25", "right_foot")] * 2
         + [("stop_front_from_right_50", "right_foot")] * 2
-        + [("stop_front_from_right_75", "right_foot")] * 2
-        + [("stop_front_from_right_100", "right_foot")] * 2
+        + [("stop_front_from_right_625", "right_foot")]
+        + [("stop_front_from_right_75", "right_foot")]
+        + [("stop_front_from_right_875", "right_foot")]
+        + [("stop_front_from_right_100", "right_foot")]
         + [("front_idle", "both_feet")] * 3
     )
     cumulative = 0.0

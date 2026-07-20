@@ -32,7 +32,7 @@ class ReferenceAvatarPoseLibraryTests(unittest.TestCase):
         manifest = json.loads(MANIFEST_PATH.read_text(encoding="utf-8"))
         expected_pose_ids = {pose["id"] for pose in manifest["poses"]}
         self.assertEqual(set(reference_pose_ids()), expected_pose_ids)
-        self.assertEqual(len(expected_pose_ids), 150)
+        self.assertEqual(len(expected_pose_ids), 158)
         self.assertTrue(
             {
                 "front_greeting_wave_wings",
@@ -47,9 +47,13 @@ class ReferenceAvatarPoseLibraryTests(unittest.TestCase):
                 "point_front_in_80",
                 "point_front_contact_locked",
                 "stop_front_from_left_25",
+                "stop_front_from_left_625",
                 "stop_front_from_right_100",
+                "stop_front_from_right_875",
                 "stop_front_from_left_passing_25",
+                "stop_front_from_left_passing_625",
                 "stop_front_from_right_passing_100",
+                "stop_front_from_right_passing_875",
             }.issubset(expected_pose_ids)
         )
 
@@ -71,7 +75,10 @@ class ReferenceAvatarPoseLibraryTests(unittest.TestCase):
         )
         for family in families:
             with self.subTest(family=family):
-                poses = [by_id[f"{family}_{amount}"] for amount in (25, 50, 75, 100)]
+                poses = [
+                    by_id[f"{family}_{amount}"]
+                    for amount in (25, 50, 625, 75, 875, 100)
+                ]
                 self.assertTrue(
                     all(
                         pose["source"].startswith("derived_landmark_warp:")
@@ -92,7 +99,7 @@ class ReferenceAvatarPoseLibraryTests(unittest.TestCase):
         )
         right_contact_staff_x = [
             by_id[f"stop_front_from_right_{amount}"]["anchors"]["staff_tip"][0]
-            for amount in (25, 50, 75, 100)
+            for amount in (25, 50, 625, 75, 875, 100)
         ]
         self.assertTrue(all(50 <= x <= 60 for x in right_contact_staff_x))
         self.assertLessEqual(max(right_contact_staff_x) - min(right_contact_staff_x), 8)

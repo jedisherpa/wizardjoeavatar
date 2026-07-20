@@ -480,7 +480,25 @@
       "staff_mode": "carried",
       "capability_tier": "A"
     },
+    "stop_front_from_left_625": {
+      "roles": ["clip_sample", "transition_sample"],
+      "altitude_class": "grounded",
+      "support_contact": "left_foot",
+      "planted_anchor": "left_foot",
+      "wing_mode": "extended",
+      "staff_mode": "carried",
+      "capability_tier": "A"
+    },
     "stop_front_from_left_75": {
+      "roles": ["clip_sample", "transition_sample"],
+      "altitude_class": "grounded",
+      "support_contact": "left_foot",
+      "planted_anchor": "left_foot",
+      "wing_mode": "extended",
+      "staff_mode": "carried",
+      "capability_tier": "A"
+    },
+    "stop_front_from_left_875": {
       "roles": ["clip_sample", "transition_sample"],
       "altitude_class": "grounded",
       "support_contact": "left_foot",
@@ -516,7 +534,25 @@
       "staff_mode": "carried",
       "capability_tier": "A"
     },
+    "stop_front_from_right_625": {
+      "roles": ["clip_sample", "transition_sample"],
+      "altitude_class": "grounded",
+      "support_contact": "right_foot",
+      "planted_anchor": "right_foot",
+      "wing_mode": "extended",
+      "staff_mode": "carried",
+      "capability_tier": "A"
+    },
     "stop_front_from_right_75": {
+      "roles": ["clip_sample", "transition_sample"],
+      "altitude_class": "grounded",
+      "support_contact": "right_foot",
+      "planted_anchor": "right_foot",
+      "wing_mode": "extended",
+      "staff_mode": "carried",
+      "capability_tier": "A"
+    },
+    "stop_front_from_right_875": {
       "roles": ["clip_sample", "transition_sample"],
       "altitude_class": "grounded",
       "support_contact": "right_foot",
@@ -552,7 +588,25 @@
       "staff_mode": "carried",
       "capability_tier": "A"
     },
+    "stop_front_from_left_passing_625": {
+      "roles": ["clip_sample", "transition_sample"],
+      "altitude_class": "grounded",
+      "support_contact": "none",
+      "planted_anchor": null,
+      "wing_mode": "extended",
+      "staff_mode": "carried",
+      "capability_tier": "A"
+    },
     "stop_front_from_left_passing_75": {
+      "roles": ["clip_sample", "transition_sample"],
+      "altitude_class": "grounded",
+      "support_contact": "none",
+      "planted_anchor": null,
+      "wing_mode": "extended",
+      "staff_mode": "carried",
+      "capability_tier": "A"
+    },
+    "stop_front_from_left_passing_875": {
       "roles": ["clip_sample", "transition_sample"],
       "altitude_class": "grounded",
       "support_contact": "none",
@@ -588,7 +642,25 @@
       "staff_mode": "carried",
       "capability_tier": "A"
     },
+    "stop_front_from_right_passing_625": {
+      "roles": ["clip_sample", "transition_sample"],
+      "altitude_class": "grounded",
+      "support_contact": "none",
+      "planted_anchor": null,
+      "wing_mode": "extended",
+      "staff_mode": "carried",
+      "capability_tier": "A"
+    },
     "stop_front_from_right_passing_75": {
+      "roles": ["clip_sample", "transition_sample"],
+      "altitude_class": "grounded",
+      "support_contact": "none",
+      "planted_anchor": null,
+      "wing_mode": "extended",
+      "staff_mode": "carried",
+      "capability_tier": "A"
+    },
+    "stop_front_from_right_passing_875": {
       "roles": ["clip_sample", "transition_sample"],
       "altitude_class": "grounded",
       "support_contact": "none",
@@ -2070,8 +2142,22 @@
           "markers": []
         },
         {
+          "pose_id": "stop_front_from_left_625",
+          "duration_frames": 1,
+          "support_contact": "left_foot",
+          "planted_anchor": "left_foot",
+          "markers": []
+        },
+        {
           "pose_id": "stop_front_from_left_75",
           "duration_frames": 2,
+          "support_contact": "left_foot",
+          "planted_anchor": "left_foot",
+          "markers": []
+        },
+        {
+          "pose_id": "stop_front_from_left_875",
+          "duration_frames": 1,
           "support_contact": "left_foot",
           "planted_anchor": "left_foot",
           "markers": []
@@ -2136,8 +2222,22 @@
           "markers": []
         },
         {
+          "pose_id": "stop_front_from_right_625",
+          "duration_frames": 1,
+          "support_contact": "right_foot",
+          "planted_anchor": "right_foot",
+          "markers": []
+        },
+        {
           "pose_id": "stop_front_from_right_75",
           "duration_frames": 2,
+          "support_contact": "right_foot",
+          "planted_anchor": "right_foot",
+          "markers": []
+        },
+        {
+          "pose_id": "stop_front_from_right_875",
+          "duration_frames": 1,
           "support_contact": "right_foot",
           "planted_anchor": "right_foot",
           "markers": []
@@ -2189,7 +2289,9 @@
         },
         {"pose_id": "stop_front_from_left_passing_25", "duration_frames": 2, "support_contact": "none", "planted_anchor": null, "markers": []},
         {"pose_id": "stop_front_from_left_passing_50", "duration_frames": 2, "support_contact": "none", "planted_anchor": null, "markers": []},
+        {"pose_id": "stop_front_from_left_passing_625", "duration_frames": 1, "support_contact": "none", "planted_anchor": null, "markers": []},
         {"pose_id": "stop_front_from_left_passing_75", "duration_frames": 2, "support_contact": "none", "planted_anchor": null, "markers": []},
+        {"pose_id": "stop_front_from_left_passing_875", "duration_frames": 1, "support_contact": "none", "planted_anchor": null, "markers": []},
         {"pose_id": "stop_front_from_left_passing_100", "duration_frames": 2, "support_contact": "none", "planted_anchor": null, "markers": []},
         {
           "pose_id": "front_idle",
@@ -2227,7 +2329,9 @@
         },
         {"pose_id": "stop_front_from_right_passing_25", "duration_frames": 2, "support_contact": "none", "planted_anchor": null, "markers": []},
         {"pose_id": "stop_front_from_right_passing_50", "duration_frames": 2, "support_contact": "none", "planted_anchor": null, "markers": []},
+        {"pose_id": "stop_front_from_right_passing_625", "duration_frames": 1, "support_contact": "none", "planted_anchor": null, "markers": []},
         {"pose_id": "stop_front_from_right_passing_75", "duration_frames": 2, "support_contact": "none", "planted_anchor": null, "markers": []},
+        {"pose_id": "stop_front_from_right_passing_875", "duration_frames": 1, "support_contact": "none", "planted_anchor": null, "markers": []},
         {"pose_id": "stop_front_from_right_passing_100", "duration_frames": 2, "support_contact": "none", "planted_anchor": null, "markers": []},
         {
           "pose_id": "front_idle",
