@@ -158,14 +158,21 @@ class LocomotionController:
             self.movement.velocity_x = 0.0
             self.movement.velocity_z = 0.0
             return
-        desired_speed = self.movement.speed
-        if dist < 0.45:
-            desired_speed *= max(0.25, dist / 0.45)
+        desired_speed = min(
+            self.movement.speed,
+            math.sqrt(2.0 * self.movement.deceleration * dist),
+        )
         desired_vx = dx / dist * desired_speed
         desired_vz = dz / dist * desired_speed
         ax = desired_vx - self.movement.velocity_x
         az = desired_vz - self.movement.velocity_z
-        accel_limit = self.movement.acceleration * dt
+        current_speed = math.hypot(self.movement.velocity_x, self.movement.velocity_z)
+        rate = (
+            self.movement.deceleration
+            if desired_speed < current_speed
+            else self.movement.acceleration
+        )
+        accel_limit = rate * dt
         delta = math.hypot(ax, az)
         if delta > accel_limit:
             ax = ax / delta * accel_limit
@@ -194,7 +201,14 @@ class LocomotionController:
         self.movement.position_z += self.movement.velocity_z * dt
 
     def _arrived(self, target: Tuple[float, float]) -> bool:
-        return math.hypot(target[0] - self.movement.position_x, target[1] - self.movement.position_z) <= self.movement.arrival_tolerance
+        error = math.hypot(
+            target[0] - self.movement.position_x,
+            target[1] - self.movement.position_z,
+        )
+        speed = math.hypot(self.movement.velocity_x, self.movement.velocity_z)
+        return error <= 1e-9 or (
+            error <= min(self.movement.arrival_tolerance, 0.001) and speed <= 0.01
+        )
 
     def _advance_path_or_stop(self) -> None:
         if not self.path.active:

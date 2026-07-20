@@ -50,6 +50,39 @@ class LocomotionTests(unittest.TestCase):
         state = source.current_state()
         self.assertLess(math.hypot(state.world_position["x"] - 1.0, state.world_position["z"] - 5.0), 0.08)
 
+    def test_target_arrival_decelerates_without_a_late_snap(self):
+        source = ProceduralWizardFrameSource(fps=24)
+        source.apply_command_sync(
+            WizardCommand("move", {"x": 0.0, "z": 2.45, "speed": 1.25})
+        )
+        observations = []
+        previous_position = dict(source.current_state().world_position)
+        previous_tick = source.current_state().simulation_tick
+        for _ in range(96):
+            source.render_next_frame()
+            state = source.current_state()
+            elapsed_ticks = state.simulation_tick - previous_tick
+            distance = math.hypot(
+                state.world_position["x"] - previous_position["x"],
+                state.world_position["z"] - previous_position["z"],
+            )
+            observations.append(distance * 60.0 / elapsed_ticks)
+            previous_position = dict(state.world_position)
+            previous_tick = state.simulation_tick
+
+        peak = max(observations)
+        last_cruise = max(
+            index for index, speed in enumerate(observations) if speed >= peak * 0.9
+        )
+        tail = observations[last_cruise:]
+        self.assertGreaterEqual(len({round(speed, 2) for speed in tail}), 5)
+        self.assertTrue(
+            all(right <= left + 0.08 for left, right in zip(tail, tail[1:])),
+            tail,
+        )
+        self.assertEqual(source.current_state().locomotion, "idle")
+        self.assertAlmostEqual(source.current_state().world_position["z"], 2.45)
+
 
 if __name__ == "__main__":
     unittest.main()

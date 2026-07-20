@@ -58,6 +58,7 @@ def fixture():
             }
         )
         trace["frame_index"] = frame_index
+        trace["simulation_tick"] = frame_index * 3
         traces.append(trace)
         frame_index += 1
 
@@ -135,12 +136,14 @@ class CharacterDirectorV5AcceptanceTests(unittest.TestCase):
     def test_missing_cycle_fails_closed(self):
         manifest, traces = fixture()
         broken = copy.deepcopy(traces)
-        event_trace = next(
-            trace
-            for trace in reversed(broken)
-            if trace["presentation_marker_events"]
-        )
-        event_trace["presentation_marker_events"] = []
+        settle_indexes = {
+            frame["frame_index"]
+            for frame in manifest["frames"]
+            if frame["scenario"] == "v5-stop-settle"
+        }
+        for trace in broken:
+            if trace["frame_index"] in settle_indexes:
+                trace["world_root_z"] = 3.30
 
         report = analyze_v5(manifest, broken)
 

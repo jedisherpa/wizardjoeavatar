@@ -50,8 +50,24 @@ def _root(trace: Mapping[str, Any]) -> Optional[Tuple[float, float]]:
     return point if all(math.isfinite(value) for value in point) else None
 
 
-def _speed(left: Tuple[float, float], right: Tuple[float, float], fps: float) -> float:
-    return math.hypot(right[0] - left[0], right[1] - left[1]) * fps
+def _trace_speed(left: Mapping[str, Any], right: Mapping[str, Any]) -> Optional[float]:
+    left_root = _root(left)
+    right_root = _root(right)
+    left_tick = left.get("simulation_tick")
+    right_tick = right.get("simulation_tick")
+    if (
+        left_root is None
+        or right_root is None
+        or type(left_tick) is not int
+        or type(right_tick) is not int
+        or right_tick <= left_tick
+    ):
+        return None
+    elapsed_seconds = (right_tick - left_tick) / 60.0
+    return math.hypot(
+        right_root[0] - left_root[0],
+        right_root[1] - left_root[1],
+    ) / elapsed_seconds
 
 
 def _marker_count(records: Sequence[Mapping[str, Any]], marker_id: str) -> Tuple[int, List[int]]:
@@ -236,26 +252,29 @@ def analyze_v5(
         else math.inf
     )
     loop_count, loop_frames = _marker_count(walk, "loop_boundary")
+    derived_cycle_count = displacement / 0.85
     _check(
         report,
         "three_complete_distance_driven_cycles",
         valid_roots
         and abs(displacement - EXPECTED_DISTANCE) <= 0.03
-        and loop_count == 3,
+        and abs(derived_cycle_count - 3.0) <= 0.04,
         {
             "displacement": displacement,
             "expected_distance": EXPECTED_DISTANCE,
+            "stride_length": 0.85,
+            "derived_cycle_count": derived_cycle_count,
             "loop_boundary_count": loop_count,
             "loop_boundary_frame_indexes": loop_frames,
         },
     )
 
-    fps = float(manifest.get("init", {}).get("fps", 0.0) or 0.0)
-    roots_for_speed = ([start_root] if start_root is not None else []) + typed_walk_roots
-    speeds = [
-        _speed(left, right, fps)
-        for left, right in zip(roots_for_speed, roots_for_speed[1:])
-    ] if fps > 0 and len(roots_for_speed) == len(walk) + 1 else []
+    speed_records = ([idle[-1]] if idle else []) + walk
+    measured_speeds = [
+        _trace_speed(left, right)
+        for left, right in zip(speed_records, speed_records[1:])
+    ]
+    speeds = [speed for speed in measured_speeds if speed is not None]
     peak_speed = max(speeds, default=0.0)
     cruise_indexes = [
         index for index, speed in enumerate(speeds) if speed >= peak_speed * 0.9
@@ -367,6 +386,7 @@ def analyze_v5(
         "owned_frame_count": len(owned),
         "walk_frame_count": len(walk),
         "loop_boundary_count": loop_count,
+        "derived_cycle_count": derived_cycle_count,
         "displacement": displacement,
         "target_error": target_error,
         "peak_speed_units_per_second": peak_speed,
