@@ -1,7 +1,11 @@
 import unittest
 
 from wizard_avatar.pose_compositor import authored_staff_cells, author_cast_staff_graph
-from wizard_avatar.reference_avatar import render_reference_pose_local
+from wizard_avatar.reference_avatar import (
+    reference_pose_anchor,
+    reference_pose_root_anchor,
+    render_reference_pose_local,
+)
 
 
 class CastStaffGraphTests(unittest.TestCase):
@@ -68,6 +72,30 @@ class CastStaffGraphTests(unittest.TestCase):
                 target_staff_tip=(56, 50),
                 target_staff_hand=(56, 50),
             )
+
+    def test_stop_inbetweens_keep_staff_as_one_vertical_raster(self):
+        for family in (
+            "stop_front_from_left",
+            "stop_front_from_right",
+            "stop_front_from_left_passing",
+            "stop_front_from_right_passing",
+        ):
+            for amount in (625, 75, 875):
+                pose_id = f"{family}_{amount}"
+                with self.subTest(pose_id=pose_id):
+                    canvas = render_reference_pose_local(pose_id)
+                    staff = authored_staff_cells(
+                        canvas,
+                        reference_pose_anchor(pose_id, "staff_tip"),
+                        reference_pose_anchor(pose_id, "staff_hand"),
+                        reference_pose_root_anchor(pose_id),
+                    )
+                    rows = sorted({y for _x, y in staff})
+                    self.assertGreaterEqual(len(rows), 30)
+                    self.assertLessEqual(
+                        max(next_y - y for y, next_y in zip(rows, rows[1:])),
+                        2,
+                    )
 
 
 if __name__ == "__main__":

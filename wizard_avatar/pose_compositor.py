@@ -427,11 +427,12 @@ def composite_landmark_splat_transition(
     flattened pose moves a long distance. This authoring primitive instead
     carries every occupied endpoint cell forward toward the interpolated rig.
     Both endpoint graphs are carried toward the interpolated landmarks. After
-    the midpoint, target topology replaces source topology in one contiguous
-    band from the planted feet upward. This staged handoff preserves readable
-    body masses without a global silhouette pop or a scattered pixel dissolve.
-    Enclosed one-cell raster gaps are repaired, colors are never averaged, and
-    the result remains one complete atomic graph for the runtime projector.
+    the midpoint, target topology replaces source topology from the planted
+    feet upward at authored body boundaries. The staff is then repainted as one
+    complete rigid raster. This staged handoff preserves readable body masses
+    and prop continuity without a scattered pixel dissolve. Enclosed one-cell
+    raster gaps are repaired, colors are never averaged, and the result remains
+    one complete atomic graph for the runtime projector.
     """
 
     if (from_canvas.width, from_canvas.height) != (to_canvas.width, to_canvas.height):
@@ -465,14 +466,51 @@ def composite_landmark_splat_transition(
         endpoint="target",
     )
     out = CellCanvas(from_canvas.width, from_canvas.height)
-    target_start_y = max(
-        0,
-        min(out.height, math.floor(out.height * (2.0 - 2.0 * progress))),
-    )
+    # These ratios correspond to the feet/hem, lower-robe, and hat boundaries
+    # in the canonical 72x96 graph. Arbitrary moving scan lines bisect the robe,
+    # face, and prop; stable anatomical boundaries read as intentional poses.
+    if progress <= 0.625:
+        target_start_y = round(out.height * 0.75)
+    elif progress <= 0.75:
+        target_start_y = round(out.height * 0.65)
+    else:
+        target_start_y = round(out.height * 0.25)
     for y in range(out.height):
         canvas = target_splat if y >= target_start_y else source_splat
         for x in range(out.width):
             out.cells[y][x] = canvas.get(x, y)
+
+    # The canonical authoring contract orders root, face, feet, hands, then the
+    # staff hand/tip. Treat that prop as one rigid appendage instead of allowing
+    # the anatomical handoff band to cut its shaft in two. Short synthetic rigs
+    # used by unit tests simply skip this canonical-only repair.
+    if len(controls) >= 10:
+        middle = tuple(
+            (
+                round(source[0] + (target[0] - source[0]) * progress),
+                round(source[1] + (target[1] - source[1]) * progress),
+            )
+            for source, target in controls
+        )
+        root = middle[0]
+        staff_hand = middle[8]
+        staff_tip = middle[9]
+        source_staff = authored_staff_cells(
+            source_splat,
+            staff_tip,
+            staff_hand,
+            root,
+        )
+        target_staff = authored_staff_cells(
+            target_splat,
+            staff_tip,
+            staff_hand,
+            root,
+        )
+        for x, y in source_staff.keys() | target_staff.keys():
+            out.clear_cell(x, y)
+        for (x, y), cell in target_staff.items():
+            out.cells[y][x] = cell
     _repair_enclosed_splat_gaps(out)
     return out
 
