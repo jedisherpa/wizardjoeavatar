@@ -421,14 +421,17 @@ def composite_landmark_splat_transition(
     control_pairs: Sequence[tuple[tuple[int, int], tuple[int, int]]],
     progress: float,
 ) -> CellCanvas:
-    """Bake a color-preserving cell correspondence between atomic poses.
+    """Bake a topology-preserving landmark transition from intact pixel cells.
 
-    Each occupied source cell is paired with the nearest still-available
-    target cell of the same palette color. Anatomical landmarks guide that
-    search, while the matched square itself travels on a direct pixel-space
-    trajectory. Surplus endpoint cells are retired or introduced gradually.
-    This avoids both hollow inverse-sampled limbs and a global topology switch;
-    colors are never averaged and runtime still receives one atomic graph.
+    Inverse sampling can stretch a bent limb into a hollow ribbon when a
+    flattened pose moves a long distance. This authoring primitive instead
+    carries every occupied endpoint cell forward toward the interpolated rig.
+    Every nonterminal frame carries the intact source topology toward the
+    target landmarks. The exact target graph is substituted only at the
+    endpoint, when both landmark geometries coincide. This avoids a global
+    mid-transition silhouette switch. Enclosed one-cell raster gaps are
+    repaired, colors are never averaged, and the result remains one complete
+    atomic pixel graph for the runtime projector.
     """
 
     if (from_canvas.width, from_canvas.height) != (to_canvas.width, to_canvas.height):
@@ -447,149 +450,37 @@ def composite_landmark_splat_transition(
         )
         for source, target in control_pairs
     )
-    source_cells = [
-        (x, y, cell)
-        for y, row in enumerate(from_canvas.cells)
-        for x, cell in enumerate(row)
-        if cell is not None
-    ]
-    target_cells = [
-        (x, y, cell)
-        for y, row in enumerate(to_canvas.cells)
-        for x, cell in enumerate(row)
-        if cell is not None
-    ]
-    available_by_color: dict[tuple[int, int, int], set[tuple[int, int]]] = {}
-    target_cell_by_point: dict[tuple[int, int], Cell] = {}
-    for x, y, cell in target_cells:
-        available_by_color.setdefault(cell.rgb, set()).add((x, y))
-        target_cell_by_point[(x, y)] = cell
-
-    projected_sources: dict[
-        tuple[int, int, int],
-        list[tuple[float, float, int, int, Cell]],
-    ] = {}
-    matched: list[tuple[int, int, Cell, int, int]] = []
-    unmatched_source: list[tuple[int, int, Cell, float, float]] = []
-    for source_x, source_y, source_cell in source_cells:
-        projected_x, projected_y = _forward_landmark_destination(
-            float(source_x),
-            float(source_y),
-            controls,
-            1.0,
-            endpoint="source",
-        )
-        projected_sources.setdefault(source_cell.rgb, []).append(
-            (projected_x, projected_y, source_x, source_y, source_cell)
-        )
-        candidates = available_by_color.get(source_cell.rgb)
-        if not candidates:
-            unmatched_source.append(
-                (source_x, source_y, source_cell, projected_x, projected_y)
+    endpoint = "source"
+    canvas = from_canvas
+    out = CellCanvas(canvas.width, canvas.height)
+    priorities: dict[tuple[int, int], tuple[float, int, int]] = {}
+    for y, row in enumerate(canvas.cells):
+        for x, cell in enumerate(row):
+            if cell is None:
+                continue
+            destination_x, destination_y = _forward_landmark_destination(
+                float(x),
+                float(y),
+                controls,
+                progress,
+                endpoint=endpoint,
             )
-            continue
-        target_x, target_y = min(
-            candidates,
-            key=lambda point: (
-                (point[0] - projected_x) ** 2 + (point[1] - projected_y) ** 2,
-                point[1],
-                point[0],
-            ),
-        )
-        candidates.remove((target_x, target_y))
-        matched.append((source_x, source_y, source_cell, target_x, target_y))
-
-    unmatched_target = [
-        (target_x, target_y, target_cell_by_point[(target_x, target_y)])
-        for candidates in available_by_color.values()
-        for target_x, target_y in sorted(candidates, key=lambda point: (point[1], point[0]))
-    ]
-    all_target_by_color: dict[tuple[int, int, int], list[tuple[int, int]]] = {}
-    for target_x, target_y, target_cell in target_cells:
-        all_target_by_color.setdefault(target_cell.rgb, []).append((target_x, target_y))
-
-    out = CellCanvas(from_canvas.width, from_canvas.height)
-    priorities: dict[tuple[int, int], tuple[float, int, int, int]] = {}
-
-    def place(
-        cell: Cell,
-        destination_x: float,
-        destination_y: float,
-        source_x: int,
-        source_y: int,
-        rank: int,
-    ) -> None:
-        # Half-up quantization keeps rigid runs stable at half-cell positions.
-        target_x = math.floor(destination_x + 0.5)
-        target_y = math.floor(destination_y + 0.5)
-        if not (0 <= target_x < out.width and 0 <= target_y < out.height):
-            return
-        priority = (
-            (destination_x - target_x) ** 2 + (destination_y - target_y) ** 2,
-            rank,
-            source_y,
-            source_x,
-        )
-        key = (target_x, target_y)
-        if key not in priorities or priority < priorities[key]:
-            priorities[key] = priority
-            out.cells[target_y][target_x] = cell
-
-    for source_x, source_y, source_cell, target_x, target_y in matched:
-        place(
-            source_cell,
-            source_x + (target_x - source_x) * progress,
-            source_y + (target_y - source_y) * progress,
-            source_x,
-            source_y,
-            0,
-        )
-
-    for source_x, source_y, source_cell, projected_x, projected_y in unmatched_source:
-        if _cell_threshold(source_x, source_y) < progress:
-            continue
-        candidates = all_target_by_color.get(source_cell.rgb, ())
-        destination = min(
-            candidates,
-            key=lambda point: (
-                (point[0] - projected_x) ** 2 + (point[1] - projected_y) ** 2,
-                point[1],
-                point[0],
-            ),
-            default=(source_x, source_y),
-        )
-        place(
-            source_cell,
-            source_x + (destination[0] - source_x) * progress,
-            source_y + (destination[1] - source_y) * progress,
-            source_x,
-            source_y,
-            1,
-        )
-
-    for target_x, target_y, target_cell in unmatched_target:
-        if _cell_threshold(target_x, target_y) >= progress:
-            continue
-        candidates = projected_sources.get(target_cell.rgb, ())
-        if candidates:
-            _projected_x, _projected_y, source_x, source_y, _source_cell = min(
-                candidates,
-                key=lambda candidate: (
-                    (candidate[0] - target_x) ** 2 + (candidate[1] - target_y) ** 2,
-                    candidate[3],
-                    candidate[2],
-                ),
+            # Python's bankers rounding collapses adjacent cells at exact
+            # half-cell translations. Pixel authoring needs stable half-up
+            # quantization so a rigid row remains a rigid row.
+            target_x = math.floor(destination_x + 0.5)
+            target_y = math.floor(destination_y + 0.5)
+            if not (0 <= target_x < out.width and 0 <= target_y < out.height):
+                continue
+            priority = (
+                (destination_x - target_x) ** 2 + (destination_y - target_y) ** 2,
+                y,
+                x,
             )
-        else:
-            source_x, source_y = target_x, target_y
-        place(
-            target_cell,
-            source_x + (target_x - source_x) * progress,
-            source_y + (target_y - source_y) * progress,
-            target_x,
-            target_y,
-            1,
-        )
+            key = (target_x, target_y)
+            if key not in priorities or priority < priorities[key]:
+                priorities[key] = priority
+                out.cells[target_y][target_x] = cell
 
     _repair_enclosed_splat_gaps(out)
     return out

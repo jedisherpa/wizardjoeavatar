@@ -100,23 +100,12 @@ class CrispPoseTransitionTests(unittest.TestCase):
         self.assertEqual(cell_signature(middle_a), cell_signature(middle_b))
         self.assertEqual(
             {cell.layer_id for row in middle_a.cells for cell in row if cell is not None},
-            {"source", "target"},
+            {"source"},
         )
-        self.assertIn(
-            "target",
+        self.assertEqual(
             {cell.layer_id for row in late.cells for cell in row if cell is not None},
+            {"source"},
         )
-        middle_source_count = sum(
-            cell is not None and cell.layer_id == "source"
-            for row in middle_a.cells
-            for cell in row
-        )
-        late_source_count = sum(
-            cell is not None and cell.layer_id == "source"
-            for row in late.cells
-            for cell in row
-        )
-        self.assertLess(late_source_count, middle_source_count)
         self.assertGreaterEqual(
             sum(cell is not None for row in middle_a.cells for cell in row),
             8,
