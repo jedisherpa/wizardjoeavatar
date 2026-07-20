@@ -10,6 +10,21 @@ from tools.analyze_character_director_v5 import (
 
 
 def _trace(frame_index, root_z, clip_id, pose_id, contact, markers=()):
+    if pose_id in {
+        "walk_front_right",
+        "stop_front_from_right_25",
+        "stop_front_from_right_50",
+        "stop_front_from_right_625",
+    }:
+        body_hash = "atomic-walk-contact"
+    elif pose_id in {
+        "stop_front_from_right_75",
+        "stop_front_from_right_875",
+        "stop_front_from_right_100",
+    }:
+        body_hash = "atomic-idle-recovery"
+    else:
+        body_hash = f"authored-{pose_id}"
     return {
         "frame_index": frame_index,
         "world_root_x": 0.0,
@@ -21,6 +36,7 @@ def _trace(frame_index, root_z, clip_id, pose_id, contact, markers=()):
             {"marker_id": marker, "animation_authored_frame": 15}
             for marker in markers
         ],
+        "presentation_channels": {"body_pixel_sha256": body_hash},
         "silhouette_raster_span": {
             "min_x": 72,
             "max_x": 168,
@@ -211,6 +227,18 @@ class CharacterDirectorV5AcceptanceTests(unittest.TestCase):
 
         self.assertFalse(report["passed"])
         self.assertFalse(check(report, "front_walk_pose_and_stop_settle")["passed"])
+
+    def test_partial_stop_topology_fails_closed(self):
+        manifest, traces = fixture()
+        broken = copy.deepcopy(traces)
+        for trace in broken:
+            if trace["rendered_pose_id"] == "stop_front_from_right_625":
+                trace["presentation_channels"]["body_pixel_sha256"] = "partial-row-wipe"
+
+        report = analyze_v5(manifest, broken)
+
+        self.assertFalse(report["passed"])
+        self.assertFalse(check(report, "atomic_stop_pose_topology")["passed"])
 
     def test_contact_drift_target_error_and_clipping_fail_closed(self):
         manifest, traces = fixture()

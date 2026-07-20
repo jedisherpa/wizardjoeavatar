@@ -447,6 +447,46 @@ def analyze_v5(
         },
     )
 
+    pose_body_hashes = {
+        pose_id: sorted(
+            {
+                str(trace.get("presentation_channels", {}).get("body_pixel_sha256"))
+                for trace in stop_records
+                if trace.get("rendered_pose_id") == pose_id
+                and trace.get("presentation_channels", {}).get("body_pixel_sha256")
+            }
+        )
+        for pose_id in stop_pose_sequence
+    }
+    anticipation = stop_pose_sequence[:4]
+    recovery = stop_pose_sequence[4:7]
+    anticipation_hashes = {
+        body_hash
+        for pose_id in anticipation
+        for body_hash in pose_body_hashes.get(pose_id, ())
+    }
+    recovery_hashes = {
+        body_hash
+        for pose_id in recovery
+        for body_hash in pose_body_hashes.get(pose_id, ())
+    }
+    _check(
+        report,
+        "atomic_stop_pose_topology",
+        len(stop_pose_sequence) == 8
+        and all(len(pose_body_hashes.get(pose_id, ())) == 1 for pose_id in stop_pose_sequence)
+        and len(anticipation_hashes) == 1
+        and len(recovery_hashes) == 1
+        and anticipation_hashes != recovery_hashes,
+        {
+            "pose_body_hashes": pose_body_hashes,
+            "anticipation_pose_ids": list(anticipation),
+            "anticipation_hashes": sorted(anticipation_hashes),
+            "recovery_pose_ids": list(recovery),
+            "recovery_hashes": sorted(recovery_hashes),
+        },
+    )
+
     cols = int(manifest.get("init", {}).get("cols", 0) or 0)
     rows = int(manifest.get("init", {}).get("rows", 0) or 0)
     clipped = [
