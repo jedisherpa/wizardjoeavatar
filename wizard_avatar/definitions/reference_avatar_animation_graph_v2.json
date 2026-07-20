@@ -2143,7 +2143,7 @@
         },
         {
           "pose_id": "stop_front_from_left_625",
-          "duration_frames": 1,
+          "duration_frames": 2,
           "support_contact": "left_foot",
           "planted_anchor": "left_foot",
           "markers": []
@@ -2157,7 +2157,7 @@
         },
         {
           "pose_id": "stop_front_from_left_875",
-          "duration_frames": 1,
+          "duration_frames": 2,
           "support_contact": "left_foot",
           "planted_anchor": "left_foot",
           "markers": []
@@ -2223,7 +2223,7 @@
         },
         {
           "pose_id": "stop_front_from_right_625",
-          "duration_frames": 1,
+          "duration_frames": 2,
           "support_contact": "right_foot",
           "planted_anchor": "right_foot",
           "markers": []
@@ -2237,7 +2237,7 @@
         },
         {
           "pose_id": "stop_front_from_right_875",
-          "duration_frames": 1,
+          "duration_frames": 2,
           "support_contact": "right_foot",
           "planted_anchor": "right_foot",
           "markers": []
@@ -2289,9 +2289,9 @@
         },
         {"pose_id": "stop_front_from_left_passing_25", "duration_frames": 2, "support_contact": "none", "planted_anchor": null, "markers": []},
         {"pose_id": "stop_front_from_left_passing_50", "duration_frames": 2, "support_contact": "none", "planted_anchor": null, "markers": []},
-        {"pose_id": "stop_front_from_left_passing_625", "duration_frames": 1, "support_contact": "none", "planted_anchor": null, "markers": []},
+        {"pose_id": "stop_front_from_left_passing_625", "duration_frames": 2, "support_contact": "none", "planted_anchor": null, "markers": []},
         {"pose_id": "stop_front_from_left_passing_75", "duration_frames": 2, "support_contact": "none", "planted_anchor": null, "markers": []},
-        {"pose_id": "stop_front_from_left_passing_875", "duration_frames": 1, "support_contact": "none", "planted_anchor": null, "markers": []},
+        {"pose_id": "stop_front_from_left_passing_875", "duration_frames": 2, "support_contact": "none", "planted_anchor": null, "markers": []},
         {"pose_id": "stop_front_from_left_passing_100", "duration_frames": 2, "support_contact": "none", "planted_anchor": null, "markers": []},
         {
           "pose_id": "front_idle",
@@ -2329,9 +2329,9 @@
         },
         {"pose_id": "stop_front_from_right_passing_25", "duration_frames": 2, "support_contact": "none", "planted_anchor": null, "markers": []},
         {"pose_id": "stop_front_from_right_passing_50", "duration_frames": 2, "support_contact": "none", "planted_anchor": null, "markers": []},
-        {"pose_id": "stop_front_from_right_passing_625", "duration_frames": 1, "support_contact": "none", "planted_anchor": null, "markers": []},
+        {"pose_id": "stop_front_from_right_passing_625", "duration_frames": 2, "support_contact": "none", "planted_anchor": null, "markers": []},
         {"pose_id": "stop_front_from_right_passing_75", "duration_frames": 2, "support_contact": "none", "planted_anchor": null, "markers": []},
-        {"pose_id": "stop_front_from_right_passing_875", "duration_frames": 1, "support_contact": "none", "planted_anchor": null, "markers": []},
+        {"pose_id": "stop_front_from_right_passing_875", "duration_frames": 2, "support_contact": "none", "planted_anchor": null, "markers": []},
         {"pose_id": "stop_front_from_right_passing_100", "duration_frames": 2, "support_contact": "none", "planted_anchor": null, "markers": []},
         {
           "pose_id": "front_idle",

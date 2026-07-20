@@ -104,7 +104,7 @@ class CrispPoseTransitionTests(unittest.TestCase):
         )
         self.assertEqual(
             {cell.layer_id for row in late.cells for cell in row if cell is not None},
-            {"source"},
+            {"target"},
         )
         self.assertGreaterEqual(
             sum(cell is not None for row in middle_a.cells for cell in row),

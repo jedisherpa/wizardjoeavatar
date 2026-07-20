@@ -426,12 +426,12 @@ def composite_landmark_splat_transition(
     Inverse sampling can stretch a bent limb into a hollow ribbon when a
     flattened pose moves a long distance. This authoring primitive instead
     carries every occupied endpoint cell forward toward the interpolated rig.
-    Every nonterminal frame carries the intact source topology toward the
-    target landmarks. The exact target graph is substituted only at the
-    endpoint, when both landmark geometries coincide. This avoids a global
-    mid-transition silhouette switch. Enclosed one-cell raster gaps are
-    repaired, colors are never averaged, and the result remains one complete
-    atomic pixel graph for the runtime projector.
+    Both endpoint graphs are carried toward the interpolated landmarks. After
+    the midpoint, target topology replaces source topology in one contiguous
+    band from the planted feet upward. This staged handoff preserves readable
+    body masses without a global silhouette pop or a scattered pixel dissolve.
+    Enclosed one-cell raster gaps are repaired, colors are never averaged, and
+    the result remains one complete atomic graph for the runtime projector.
     """
 
     if (from_canvas.width, from_canvas.height) != (to_canvas.width, to_canvas.height):
@@ -450,8 +450,40 @@ def composite_landmark_splat_transition(
         )
         for source, target in control_pairs
     )
-    endpoint = "source"
-    canvas = from_canvas
+    source_splat = _splat_landmark_endpoint(
+        from_canvas,
+        controls,
+        progress,
+        endpoint="source",
+    )
+    if progress <= 0.5:
+        return source_splat
+    target_splat = _splat_landmark_endpoint(
+        to_canvas,
+        controls,
+        progress,
+        endpoint="target",
+    )
+    out = CellCanvas(from_canvas.width, from_canvas.height)
+    target_start_y = max(
+        0,
+        min(out.height, math.floor(out.height * (2.0 - 2.0 * progress))),
+    )
+    for y in range(out.height):
+        canvas = target_splat if y >= target_start_y else source_splat
+        for x in range(out.width):
+            out.cells[y][x] = canvas.get(x, y)
+    _repair_enclosed_splat_gaps(out)
+    return out
+
+
+def _splat_landmark_endpoint(
+    canvas: CellCanvas,
+    controls: Sequence[tuple[tuple[float, float], tuple[float, float]]],
+    progress: float,
+    *,
+    endpoint: str,
+) -> CellCanvas:
     out = CellCanvas(canvas.width, canvas.height)
     priorities: dict[tuple[int, int], tuple[float, int, int]] = {}
     for y, row in enumerate(canvas.cells):
