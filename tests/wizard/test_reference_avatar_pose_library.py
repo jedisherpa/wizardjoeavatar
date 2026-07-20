@@ -88,6 +88,11 @@ class ReferenceAvatarPoseLibraryTests(unittest.TestCase):
                 )
                 self.assertTrue(all(pose["cells"] for pose in poses))
                 self.assertEqual({tuple(pose["root_anchor"]) for pose in poses}, {(36, 95)})
+                self.assertEqual(poses[0]["cells"], poses[1]["cells"])
+                self.assertEqual(poses[1]["cells"], poses[2]["cells"])
+                self.assertEqual(poses[3]["cells"], poses[4]["cells"])
+                self.assertEqual(poses[4]["cells"], poses[5]["cells"])
+                self.assertNotEqual(poses[2]["cells"], poses[3]["cells"])
 
         self.assertEqual(
             by_id["stop_front_from_left_passing_100"]["cells"],
