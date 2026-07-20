@@ -194,10 +194,16 @@ def analyze_v5(
         ]
         for name in EXPECTED_SCENARIOS
     }
-    bounded_ranges = [
-        range(scenario_indexes[left][-1] + 1, scenario_indexes[right][0])
-        for left, right in zip(EXPECTED_SCENARIOS, EXPECTED_SCENARIOS[1:])
-    ] if all(scenario_indexes.values()) else []
+    bounded_ranges = []
+    if indexes and all(scenario_indexes.values()):
+        bounded_ranges.append(range(indexes[0], scenario_indexes[EXPECTED_SCENARIOS[0]][0]))
+        bounded_ranges.extend(
+            range(scenario_indexes[left][-1] + 1, scenario_indexes[right][0])
+            for left, right in zip(EXPECTED_SCENARIOS, EXPECTED_SCENARIOS[1:])
+        )
+        bounded_ranges.append(
+            range(scenario_indexes[EXPECTED_SCENARIOS[-1]][-1] + 1, indexes[-1] + 1)
+        )
     unowned_indexes = [frame.get("frame_index") for frame in unowned]
     unowned_bounded = (
         len(unowned) <= 2

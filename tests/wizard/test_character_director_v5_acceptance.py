@@ -142,6 +142,27 @@ class CharacterDirectorV5AcceptanceTests(unittest.TestCase):
         self.assertEqual(report["metrics"]["loop_boundary_count"], 3)
         self.assertAlmostEqual(report["metrics"]["displacement"], 2.55)
 
+    def test_single_leading_transport_boundary_is_bounded(self):
+        manifest, traces = fixture()
+        for frame in manifest["frames"]:
+            frame["frame_index"] += 1
+        for trace in traces:
+            trace["frame_index"] += 1
+            trace["simulation_tick"] += 3
+        manifest["frames"].insert(
+            0,
+            {"frame_index": 0, "capture_owned": False, "scenario": None},
+        )
+        leading = copy.deepcopy(traces[0])
+        leading["frame_index"] = 0
+        leading["simulation_tick"] = 0
+        traces.insert(0, leading)
+
+        report = analyze_v5(manifest, traces)
+
+        self.assertTrue(report["passed"], report)
+        self.assertTrue(check(report, "complete_contiguous_capture")["passed"])
+
     def test_missing_cycle_fails_closed(self):
         manifest, traces = fixture()
         broken = copy.deepcopy(traces)
