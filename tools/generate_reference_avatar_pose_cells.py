@@ -18,6 +18,7 @@ from wizard_avatar.glyphs import glyph
 from wizard_avatar.pose_compositor import (
     author_cast_staff_graph,
     composite_anchor_transition,
+    composite_landmark_splat_transition,
     composite_landmark_warp_transition,
     composite_localized_landmark_transition,
 )
@@ -376,13 +377,24 @@ def derive_landmark_warp_payload(
         for name in requested_names
     )
     localized_region = warp.get("localized_region")
+    method = str(warp.get("method", "inverse_sample"))
     if localized_region is None:
-        canvas = composite_landmark_warp_transition(
-            payload_canvas(from_payload),
-            to_canvas,
-            control_pairs,
-            progress,
-        )
+        if method == "inverse_sample":
+            canvas = composite_landmark_warp_transition(
+                payload_canvas(from_payload),
+                to_canvas,
+                control_pairs,
+                progress,
+            )
+        elif method == "topology_splat":
+            canvas = composite_landmark_splat_transition(
+                payload_canvas(from_payload),
+                to_canvas,
+                control_pairs,
+                progress,
+            )
+        else:
+            raise ValueError(f"{pose['id']}.derived_landmark_warp.method is unsupported")
     else:
         if not isinstance(localized_region, dict):
             raise ValueError(f"{pose['id']}.localized_region must be an object")
@@ -429,6 +441,7 @@ def derive_landmark_warp_payload(
             f"{progress_milli}/1000"
             + (f":lock={lock_anchor}" if lock_anchor is not None else "")
             + (":localized" if localized_region is not None else "")
+            + (f":method={method}" if method != "inverse_sample" else "")
         ),
         "source_size": [int(canonical["cols"]), int(canonical["rows"])],
         "source_crop": [0, 0, int(canonical["cols"]), int(canonical["rows"])],

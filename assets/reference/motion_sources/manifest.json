@@ -1748,13 +1748,14 @@
     },
     {
       "id": "stop_front_from_left_25",
-      "source": "derived_landmark_warp:walk_front_left+front_idle@250/1000:lock=left_foot",
+      "source": "derived_landmark_warp:walk_front_left+front_idle@250/1000:lock=left_foot:method=topology_splat",
       "description": "front stop settle from left contact at 25 percent",
       "derived_landmark_warp": {
         "from_pose_id": "walk_front_left",
         "to_pose_id": "front_idle",
         "progress_milli": 250,
-        "lock_anchor": "left_foot"
+        "lock_anchor": "left_foot",
+        "method": "topology_splat"
       },
       "facing": "south",
       "locomotion": "idle",
@@ -1764,13 +1765,14 @@
     },
     {
       "id": "stop_front_from_left_50",
-      "source": "derived_landmark_warp:walk_front_left+front_idle@500/1000:lock=left_foot",
+      "source": "derived_landmark_warp:walk_front_left+front_idle@500/1000:lock=left_foot:method=topology_splat",
       "description": "front stop settle from left contact at 50 percent",
       "derived_landmark_warp": {
         "from_pose_id": "walk_front_left",
         "to_pose_id": "front_idle",
         "progress_milli": 500,
-        "lock_anchor": "left_foot"
+        "lock_anchor": "left_foot",
+        "method": "topology_splat"
       },
       "facing": "south",
       "locomotion": "idle",
@@ -1780,13 +1782,14 @@
     },
     {
       "id": "stop_front_from_left_75",
-      "source": "derived_landmark_warp:walk_front_left+front_idle@750/1000:lock=left_foot",
+      "source": "derived_landmark_warp:walk_front_left+front_idle@750/1000:lock=left_foot:method=topology_splat",
       "description": "front stop settle from left contact at 75 percent",
       "derived_landmark_warp": {
         "from_pose_id": "walk_front_left",
         "to_pose_id": "front_idle",
         "progress_milli": 750,
-        "lock_anchor": "left_foot"
+        "lock_anchor": "left_foot",
+        "method": "topology_splat"
       },
       "facing": "south",
       "locomotion": "idle",
@@ -1796,13 +1799,14 @@
     },
     {
       "id": "stop_front_from_left_100",
-      "source": "derived_landmark_warp:walk_front_left+front_idle@1000/1000:lock=left_foot",
+      "source": "derived_landmark_warp:walk_front_left+front_idle@1000/1000:lock=left_foot:method=topology_splat",
       "description": "front stop planted endpoint from left contact",
       "derived_landmark_warp": {
         "from_pose_id": "walk_front_left",
         "to_pose_id": "front_idle",
         "progress_milli": 1000,
-        "lock_anchor": "left_foot"
+        "lock_anchor": "left_foot",
+        "method": "topology_splat"
       },
       "facing": "south",
       "locomotion": "idle",
@@ -1812,13 +1816,14 @@
     },
     {
       "id": "stop_front_from_right_25",
-      "source": "derived_landmark_warp:walk_front_right+front_idle@250/1000:lock=right_foot",
+      "source": "derived_landmark_warp:walk_front_right+front_idle@250/1000:lock=right_foot:method=topology_splat",
       "description": "front stop settle from right contact at 25 percent",
       "derived_landmark_warp": {
         "from_pose_id": "walk_front_right",
         "to_pose_id": "front_idle",
         "progress_milli": 250,
-        "lock_anchor": "right_foot"
+        "lock_anchor": "right_foot",
+        "method": "topology_splat"
       },
       "facing": "south",
       "locomotion": "idle",
@@ -1828,13 +1833,14 @@
     },
     {
       "id": "stop_front_from_right_50",
-      "source": "derived_landmark_warp:walk_front_right+front_idle@500/1000:lock=right_foot",
+      "source": "derived_landmark_warp:walk_front_right+front_idle@500/1000:lock=right_foot:method=topology_splat",
       "description": "front stop settle from right contact at 50 percent",
       "derived_landmark_warp": {
         "from_pose_id": "walk_front_right",
         "to_pose_id": "front_idle",
         "progress_milli": 500,
-        "lock_anchor": "right_foot"
+        "lock_anchor": "right_foot",
+        "method": "topology_splat"
       },
       "facing": "south",
       "locomotion": "idle",
@@ -1844,13 +1850,14 @@
     },
     {
       "id": "stop_front_from_right_75",
-      "source": "derived_landmark_warp:walk_front_right+front_idle@750/1000:lock=right_foot",
+      "source": "derived_landmark_warp:walk_front_right+front_idle@750/1000:lock=right_foot:method=topology_splat",
       "description": "front stop settle from right contact at 75 percent",
       "derived_landmark_warp": {
         "from_pose_id": "walk_front_right",
         "to_pose_id": "front_idle",
         "progress_milli": 750,
-        "lock_anchor": "right_foot"
+        "lock_anchor": "right_foot",
+        "method": "topology_splat"
       },
       "facing": "south",
       "locomotion": "idle",
@@ -1860,13 +1867,14 @@
     },
     {
       "id": "stop_front_from_right_100",
-      "source": "derived_landmark_warp:walk_front_right+front_idle@1000/1000:lock=right_foot",
+      "source": "derived_landmark_warp:walk_front_right+front_idle@1000/1000:lock=right_foot:method=topology_splat",
       "description": "front stop planted endpoint from right contact",
       "derived_landmark_warp": {
         "from_pose_id": "walk_front_right",
         "to_pose_id": "front_idle",
         "progress_milli": 1000,
-        "lock_anchor": "right_foot"
+        "lock_anchor": "right_foot",
+        "method": "topology_splat"
       },
       "facing": "south",
       "locomotion": "idle",
@@ -1876,13 +1884,14 @@
     },
     {
       "id": "stop_front_from_left_passing_25",
-      "source": "derived_landmark_warp:walk_front_left_to_right+front_idle@250/1000:lock=root",
+      "source": "derived_landmark_warp:walk_front_left_to_right+front_idle@250/1000:lock=root:method=topology_splat",
       "description": "front stop settle from left release at 25 percent",
       "derived_landmark_warp": {
         "from_pose_id": "walk_front_left_to_right",
         "to_pose_id": "front_idle",
         "progress_milli": 250,
-        "lock_anchor": "root"
+        "lock_anchor": "root",
+        "method": "topology_splat"
       },
       "facing": "south",
       "locomotion": "idle",
@@ -1892,13 +1901,14 @@
     },
     {
       "id": "stop_front_from_left_passing_50",
-      "source": "derived_landmark_warp:walk_front_left_to_right+front_idle@500/1000:lock=root",
+      "source": "derived_landmark_warp:walk_front_left_to_right+front_idle@500/1000:lock=root:method=topology_splat",
       "description": "front stop settle from left release at 50 percent",
       "derived_landmark_warp": {
         "from_pose_id": "walk_front_left_to_right",
         "to_pose_id": "front_idle",
         "progress_milli": 500,
-        "lock_anchor": "root"
+        "lock_anchor": "root",
+        "method": "topology_splat"
       },
       "facing": "south",
       "locomotion": "idle",
@@ -1908,13 +1918,14 @@
     },
     {
       "id": "stop_front_from_left_passing_75",
-      "source": "derived_landmark_warp:walk_front_left_to_right+front_idle@750/1000:lock=root",
+      "source": "derived_landmark_warp:walk_front_left_to_right+front_idle@750/1000:lock=root:method=topology_splat",
       "description": "front stop settle from left release at 75 percent",
       "derived_landmark_warp": {
         "from_pose_id": "walk_front_left_to_right",
         "to_pose_id": "front_idle",
         "progress_milli": 750,
-        "lock_anchor": "root"
+        "lock_anchor": "root",
+        "method": "topology_splat"
       },
       "facing": "south",
       "locomotion": "idle",
@@ -1924,13 +1935,14 @@
     },
     {
       "id": "stop_front_from_left_passing_100",
-      "source": "derived_landmark_warp:walk_front_left_to_right+front_idle@1000/1000:lock=root",
+      "source": "derived_landmark_warp:walk_front_left_to_right+front_idle@1000/1000:lock=root:method=topology_splat",
       "description": "front stop endpoint from left release",
       "derived_landmark_warp": {
         "from_pose_id": "walk_front_left_to_right",
         "to_pose_id": "front_idle",
         "progress_milli": 1000,
-        "lock_anchor": "root"
+        "lock_anchor": "root",
+        "method": "topology_splat"
       },
       "facing": "south",
       "locomotion": "idle",
@@ -1940,13 +1952,14 @@
     },
     {
       "id": "stop_front_from_right_passing_25",
-      "source": "derived_landmark_warp:walk_front_right_to_left+front_idle@250/1000:lock=root",
+      "source": "derived_landmark_warp:walk_front_right_to_left+front_idle@250/1000:lock=root:method=topology_splat",
       "description": "front stop settle from right release at 25 percent",
       "derived_landmark_warp": {
         "from_pose_id": "walk_front_right_to_left",
         "to_pose_id": "front_idle",
         "progress_milli": 250,
-        "lock_anchor": "root"
+        "lock_anchor": "root",
+        "method": "topology_splat"
       },
       "facing": "south",
       "locomotion": "idle",
@@ -1956,13 +1969,14 @@
     },
     {
       "id": "stop_front_from_right_passing_50",
-      "source": "derived_landmark_warp:walk_front_right_to_left+front_idle@500/1000:lock=root",
+      "source": "derived_landmark_warp:walk_front_right_to_left+front_idle@500/1000:lock=root:method=topology_splat",
       "description": "front stop settle from right release at 50 percent",
       "derived_landmark_warp": {
         "from_pose_id": "walk_front_right_to_left",
         "to_pose_id": "front_idle",
         "progress_milli": 500,
-        "lock_anchor": "root"
+        "lock_anchor": "root",
+        "method": "topology_splat"
       },
       "facing": "south",
       "locomotion": "idle",
@@ -1972,13 +1986,14 @@
     },
     {
       "id": "stop_front_from_right_passing_75",
-      "source": "derived_landmark_warp:walk_front_right_to_left+front_idle@750/1000:lock=root",
+      "source": "derived_landmark_warp:walk_front_right_to_left+front_idle@750/1000:lock=root:method=topology_splat",
       "description": "front stop settle from right release at 75 percent",
       "derived_landmark_warp": {
         "from_pose_id": "walk_front_right_to_left",
         "to_pose_id": "front_idle",
         "progress_milli": 750,
-        "lock_anchor": "root"
+        "lock_anchor": "root",
+        "method": "topology_splat"
       },
       "facing": "south",
       "locomotion": "idle",
@@ -1988,13 +2003,14 @@
     },
     {
       "id": "stop_front_from_right_passing_100",
-      "source": "derived_landmark_warp:walk_front_right_to_left+front_idle@1000/1000:lock=root",
+      "source": "derived_landmark_warp:walk_front_right_to_left+front_idle@1000/1000:lock=root:method=topology_splat",
       "description": "front stop endpoint from right release",
       "derived_landmark_warp": {
         "from_pose_id": "walk_front_right_to_left",
         "to_pose_id": "front_idle",
         "progress_milli": 1000,
-        "lock_anchor": "root"
+        "lock_anchor": "root",
+        "method": "topology_splat"
       },
       "facing": "south",
       "locomotion": "idle",

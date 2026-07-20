@@ -73,7 +73,11 @@ class ReferenceAvatarPoseLibraryTests(unittest.TestCase):
             with self.subTest(family=family):
                 poses = [by_id[f"{family}_{amount}"] for amount in (25, 50, 75, 100)]
                 self.assertTrue(
-                    all(pose["source"].startswith("derived_landmark_warp:") for pose in poses)
+                    all(
+                        pose["source"].startswith("derived_landmark_warp:")
+                        and pose["source"].endswith(":method=topology_splat")
+                        for pose in poses
+                    )
                 )
                 self.assertTrue(all(pose["cells"] for pose in poses))
                 self.assertEqual({tuple(pose["root_anchor"]) for pose in poses}, {(36, 95)})

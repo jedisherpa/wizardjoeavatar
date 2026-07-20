@@ -415,6 +415,74 @@ def composite_landmark_warp_transition(
     return out
 
 
+def composite_landmark_splat_transition(
+    from_canvas: CellCanvas,
+    to_canvas: CellCanvas,
+    control_pairs: Sequence[tuple[tuple[int, int], tuple[int, int]]],
+    progress: float,
+) -> CellCanvas:
+    """Bake a topology-preserving landmark transition from intact pixel cells.
+
+    Inverse sampling can stretch a bent limb into a hollow ribbon when a
+    flattened pose moves a long distance. This authoring primitive instead
+    carries every occupied endpoint cell forward toward the interpolated rig.
+    It switches endpoint authority once, at the midpoint, and repairs only
+    enclosed one-cell raster gaps. Colors are never averaged and the result is
+    still one complete atomic pixel graph for the runtime projector.
+    """
+
+    if (from_canvas.width, from_canvas.height) != (to_canvas.width, to_canvas.height):
+        raise ValueError("landmark-splat canvases must have matching dimensions")
+    if not control_pairs:
+        raise ValueError("landmark splat requires at least one control pair")
+    if progress <= 0.0:
+        return from_canvas.copy()
+    if progress >= 1.0:
+        return to_canvas.copy()
+
+    controls = tuple(
+        (
+            (float(source[0]), float(source[1])),
+            (float(target[0]), float(target[1])),
+        )
+        for source, target in control_pairs
+    )
+    endpoint = "source" if progress < 0.5 else "target"
+    canvas = from_canvas if endpoint == "source" else to_canvas
+    out = CellCanvas(canvas.width, canvas.height)
+    priorities: dict[tuple[int, int], tuple[float, int, int]] = {}
+    for y, row in enumerate(canvas.cells):
+        for x, cell in enumerate(row):
+            if cell is None:
+                continue
+            destination_x, destination_y = _forward_landmark_destination(
+                float(x),
+                float(y),
+                controls,
+                progress,
+                endpoint=endpoint,
+            )
+            # Python's bankers rounding collapses adjacent cells at exact
+            # half-cell translations. Pixel authoring needs stable half-up
+            # quantization so a rigid row remains a rigid row.
+            target_x = math.floor(destination_x + 0.5)
+            target_y = math.floor(destination_y + 0.5)
+            if not (0 <= target_x < out.width and 0 <= target_y < out.height):
+                continue
+            priority = (
+                (destination_x - target_x) ** 2 + (destination_y - target_y) ** 2,
+                y,
+                x,
+            )
+            key = (target_x, target_y)
+            if key not in priorities or priority < priorities[key]:
+                priorities[key] = priority
+                out.cells[target_y][target_x] = cell
+
+    _repair_enclosed_splat_gaps(out)
+    return out
+
+
 def composite_localized_landmark_transition(
     from_canvas: CellCanvas,
     to_canvas: CellCanvas,
@@ -653,6 +721,65 @@ def _inverse_landmark_sample(
         x + weighted_dx / total_weight,
         y + weighted_dy / total_weight,
     )
+
+
+def _forward_landmark_destination(
+    x: float,
+    y: float,
+    controls: Sequence[tuple[tuple[float, float], tuple[float, float]]],
+    progress: float,
+    *,
+    endpoint: str,
+) -> tuple[float, float]:
+    weighted_dx = 0.0
+    weighted_dy = 0.0
+    total_weight = 0.0
+    for source, target in controls:
+        endpoint_point = source if endpoint == "source" else target
+        middle_x = source[0] + (target[0] - source[0]) * progress
+        middle_y = source[1] + (target[1] - source[1]) * progress
+        distance_squared = (x - endpoint_point[0]) ** 2 + (y - endpoint_point[1]) ** 2
+        weight = 1.0 / (distance_squared + 4.0)
+        weighted_dx += (middle_x - endpoint_point[0]) * weight
+        weighted_dy += (middle_y - endpoint_point[1]) * weight
+        total_weight += weight
+    return x + weighted_dx / total_weight, y + weighted_dy / total_weight
+
+
+def _repair_enclosed_splat_gaps(canvas: CellCanvas) -> None:
+    repairs: list[tuple[int, int, Cell]] = []
+    for y in range(1, canvas.height - 1):
+        for x in range(1, canvas.width - 1):
+            if canvas.get(x, y) is not None:
+                continue
+            cardinal = (
+                canvas.get(x - 1, y),
+                canvas.get(x + 1, y),
+                canvas.get(x, y - 1),
+                canvas.get(x, y + 1),
+            )
+            if sum(cell is not None for cell in cardinal) < 3:
+                continue
+            neighbors = [
+                cell
+                for neighbor_y in range(y - 1, y + 2)
+                for neighbor_x in range(x - 1, x + 2)
+                for cell in (canvas.get(neighbor_x, neighbor_y),)
+                if cell is not None
+            ]
+            if len(neighbors) < 6:
+                continue
+            chosen = max(
+                neighbors,
+                key=lambda cell: (
+                    sum(candidate.rgb == cell.rgb for candidate in neighbors),
+                    cell.rgb,
+                    cell.layer_id,
+                ),
+            )
+            repairs.append((x, y, chosen))
+    for x, y, cell in repairs:
+        canvas.cells[y][x] = cell
 
 
 def translate_anchor(
