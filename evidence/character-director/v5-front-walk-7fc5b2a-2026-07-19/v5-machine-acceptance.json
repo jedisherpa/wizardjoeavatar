@@ -1,0 +1,232 @@
+{
+  "acceptance_scenario": "V5",
+  "checks": [
+    {
+      "detail": {
+        "acceptance_scenario": "V5",
+        "artifact_path": "scenario-program.json",
+        "program_id": "v5-front-walk",
+        "scenario_count": 3,
+        "schema": "character_director_scenario_program_v1",
+        "schema_version": 1,
+        "source_sha256": "59e1eca48d138439830681a78b53ca3dc4809d668d1c48fb28491bb63a137ff8",
+        "total_duration_seconds": 4.25
+      },
+      "name": "scenario_program_identity",
+      "passed": true
+    },
+    {
+      "detail": [
+        "v5-idle",
+        "v5-three-cycle-walk",
+        "v5-stop-settle"
+      ],
+      "name": "scenario_order",
+      "passed": true
+    },
+    {
+      "detail": {
+        "frame_count": 102,
+        "owned_frame_count": 102,
+        "scenario_frame_counts": {
+          "v5-idle": 12,
+          "v5-stop-settle": 24,
+          "v5-three-cycle-walk": 66
+        },
+        "trace_count": 102,
+        "transport_contiguous": true,
+        "unowned_are_bounded_transitions": true,
+        "unowned_transition_frame_indexes": []
+      },
+      "name": "complete_contiguous_capture",
+      "passed": true
+    },
+    {
+      "detail": {
+        "first_walk_owned_frame_offset": 0,
+        "idle_frame_count": 12
+      },
+      "name": "idle_and_bounded_walk_start",
+      "passed": true
+    },
+    {
+      "detail": {
+        "derived_cycle_count": 3.0,
+        "displacement": 2.55,
+        "expected_distance": 2.55,
+        "loop_boundary_count": 0,
+        "loop_boundary_frame_indexes": [],
+        "stride_length": 0.85
+      },
+      "name": "three_complete_distance_driven_cycles",
+      "passed": true
+    },
+    {
+      "detail": {
+        "deceleration_tail_speeds": [
+          1.189863546794081,
+          0.9815302134607506,
+          0.7731968801274158,
+          0.6065302134607498,
+          0.33874269295111503,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "distinct_tail_speed_count": 6,
+        "peak_speed_units_per_second": 1.2500000000000089,
+        "tail_rise_indexes": [],
+        "zero_speed_suffix_frames": 11
+      },
+      "name": "decelerated_stop_profile",
+      "passed": true
+    },
+    {
+      "detail": {
+        "alternates": true,
+        "collapsed_support_contacts": [
+          "left_foot",
+          "right_foot",
+          "left_foot",
+          "right_foot",
+          "left_foot",
+          "right_foot"
+        ],
+        "contact_passed": true,
+        "maximum_planted_drift_cells": 0.0
+      },
+      "name": "alternating_contacts_without_planted_drift",
+      "passed": true
+    },
+    {
+      "detail": {
+        "expected_stop_pose_sequence": [
+          "walk_front_right",
+          "stop_front_from_right_25",
+          "stop_front_from_right_50",
+          "stop_front_from_right_625",
+          "stop_front_from_right_75",
+          "stop_front_from_right_875",
+          "stop_front_from_right_100",
+          "front_idle"
+        ],
+        "final_idle_frame_count": 18,
+        "final_root": [
+          0.0,
+          2.45
+        ],
+        "observed_walk_poses": [
+          "walk_front_left",
+          "walk_front_left_to_right",
+          "walk_front_right",
+          "walk_front_right_to_left"
+        ],
+        "settle_frame_count": 24,
+        "stop_clip_ids": [
+          "stop_front_right"
+        ],
+        "stop_pose_sequence": [
+          "walk_front_right",
+          "stop_front_from_right_25",
+          "stop_front_from_right_50",
+          "stop_front_from_right_625",
+          "stop_front_from_right_75",
+          "stop_front_from_right_875",
+          "stop_front_from_right_100",
+          "front_idle"
+        ],
+        "target": [
+          0.0,
+          2.45
+        ],
+        "target_error": 0.0
+      },
+      "name": "front_walk_pose_and_stop_settle",
+      "passed": true
+    },
+    {
+      "detail": {
+        "anticipation_hashes": [
+          "6154698e6ffdcd05361243cd4a902eec2895a97f334cb8473bd84deeb52ef485"
+        ],
+        "anticipation_pose_ids": [
+          "walk_front_right",
+          "stop_front_from_right_25",
+          "stop_front_from_right_50",
+          "stop_front_from_right_625"
+        ],
+        "pose_body_hashes": {
+          "front_idle": [
+            "169deab5f4d04a7c47a3d82718097a4332cec66a4e6d3143c06e4fb8e02077c7"
+          ],
+          "stop_front_from_right_100": [
+            "7f614986d9cd168422be66b1891af4093be7812c93a044ad7243547821869967"
+          ],
+          "stop_front_from_right_25": [
+            "6154698e6ffdcd05361243cd4a902eec2895a97f334cb8473bd84deeb52ef485"
+          ],
+          "stop_front_from_right_50": [
+            "6154698e6ffdcd05361243cd4a902eec2895a97f334cb8473bd84deeb52ef485"
+          ],
+          "stop_front_from_right_625": [
+            "6154698e6ffdcd05361243cd4a902eec2895a97f334cb8473bd84deeb52ef485"
+          ],
+          "stop_front_from_right_75": [
+            "7f614986d9cd168422be66b1891af4093be7812c93a044ad7243547821869967"
+          ],
+          "stop_front_from_right_875": [
+            "7f614986d9cd168422be66b1891af4093be7812c93a044ad7243547821869967"
+          ],
+          "walk_front_right": [
+            "6154698e6ffdcd05361243cd4a902eec2895a97f334cb8473bd84deeb52ef485"
+          ]
+        },
+        "recovery_hashes": [
+          "7f614986d9cd168422be66b1891af4093be7812c93a044ad7243547821869967"
+        ],
+        "recovery_pose_ids": [
+          "stop_front_from_right_75",
+          "stop_front_from_right_875",
+          "stop_front_from_right_100"
+        ]
+      },
+      "name": "atomic_stop_pose_topology",
+      "passed": true
+    },
+    {
+      "detail": {
+        "clipped_frames": [],
+        "stage": [
+          240,
+          135
+        ]
+      },
+      "name": "walk_silhouette_within_canonical_stage",
+      "passed": true
+    }
+  ],
+  "metrics": {
+    "clipped_frame_count": 0,
+    "contact_change_count": 6,
+    "derived_cycle_count": 3.0,
+    "displacement": 2.55,
+    "frame_count": 102,
+    "loop_boundary_count": 0,
+    "owned_frame_count": 102,
+    "peak_speed_units_per_second": 1.2500000000000089,
+    "target_error": 0.0,
+    "walk_frame_count": 66
+  },
+  "passed": true,
+  "review_boundary": "Machine checks do not replace normal-speed and quarter-speed review of weight transfer, cadence, foot skating, and stop settle.",
+  "schema": "character_director_v5_machine_acceptance_v1",
+  "schema_version": 1
+}

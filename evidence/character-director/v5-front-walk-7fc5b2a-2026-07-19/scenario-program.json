@@ -1,0 +1,29 @@
+{
+  "schema": "character_director_scenario_program_v1",
+  "schema_version": 1,
+  "program_id": "v5-front-walk",
+  "acceptance_scenario": "V5",
+  "scenarios": [
+    {
+      "name": "v5-idle",
+      "kind": "reset",
+      "payload": {},
+      "settle_seconds": 0.0,
+      "capture_seconds": 0.5
+    },
+    {
+      "name": "v5-three-cycle-walk",
+      "kind": "move",
+      "payload": {"x": 0.0, "z": 2.45, "speed": 1.25},
+      "settle_seconds": 0.0,
+      "capture_seconds": 2.75
+    },
+    {
+      "name": "v5-stop-settle",
+      "kind": "gaze",
+      "payload": {"target": "viewer"},
+      "settle_seconds": 0.0,
+      "capture_seconds": 1.0
+    }
+  ]
+}
