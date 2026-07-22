@@ -197,7 +197,7 @@ class AnimationTruthGeometryTests(unittest.TestCase):
     def test_contact_generation_changes_when_root_policy_releases_lock(self):
         source = ProceduralWizardFrameSource(cols=96, rows=54, fps=24)
         source.apply_command_sync(
-            WizardCommand("move", {"x": 1.5, "z": 5.0, "speed": 1.0})
+            WizardCommand("move", {"x": 0.0, "z": 3.0, "speed": 1.0})
         )
         for _ in range(120):
             source.advance_simulation(1 / 60)
