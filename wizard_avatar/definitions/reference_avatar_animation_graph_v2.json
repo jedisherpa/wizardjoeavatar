@@ -418,6 +418,28 @@
       "staff_mode": "carried",
       "capability_tier": "B"
     },
+    "walk_profile_left_passing": {
+      "roles": [
+        "clip_sample"
+      ],
+      "altitude_class": "grounded",
+      "support_contact": "none",
+      "planted_anchor": null,
+      "wing_mode": "hidden",
+      "staff_mode": "carried",
+      "capability_tier": "B"
+    },
+    "walk_profile_right_passing": {
+      "roles": [
+        "clip_sample"
+      ],
+      "altitude_class": "grounded",
+      "support_contact": "none",
+      "planted_anchor": null,
+      "wing_mode": "hidden",
+      "staff_mode": "carried",
+      "capability_tier": "B"
+    },
     "walk_front_left": {
       "roles": [
         "clip_sample"
@@ -1777,6 +1799,8 @@
       "legal_successors": [
         "idle_front",
         "walk_front",
+        "walk_left",
+        "walk_right",
         "walk_back",
         "run_charge_front",
         "takeoff_front",
@@ -1842,6 +1866,8 @@
         "idle_back",
         "walk_back",
         "walk_front",
+        "walk_left",
+        "walk_right",
         "turn_views"
       ]
     },
@@ -1889,6 +1915,7 @@
       },
       "legal_successors": [
         "idle_left",
+        "walk_left",
         "turn_views"
       ]
     },
@@ -1936,6 +1963,7 @@
       },
       "legal_successors": [
         "idle_right",
+        "walk_right",
         "turn_views"
       ]
     },
@@ -2096,6 +2124,8 @@
       },
       "legal_successors": [
         "walk_front",
+        "walk_left",
+        "walk_right",
         "idle_front",
         "stop_front_left",
         "stop_front_right",
@@ -2106,6 +2136,198 @@
         "walk_back",
         "run_charge_front",
         "block_front",
+        "turn_views"
+      ]
+    },
+    "walk_left": {
+      "clip_id": "walk_left",
+      "family": "locomotion",
+      "supported_facings": [
+        "west"
+      ],
+      "loop_mode": "loop",
+      "phase_source": "ground_distance",
+      "root_policy": "contact_locked",
+      "minimum_hold_ticks": 1,
+      "interrupt_policy": "at_marker",
+      "channel_ownership": [
+        "body",
+        "staff"
+      ],
+      "samples": [
+        {
+          "pose_id": "profile_left",
+          "duration_frames": 4,
+          "support_contact": "left_foot",
+          "planted_anchor": "left_foot",
+          "normalized_distance": 0.0,
+          "markers": [
+            {
+              "id": "left_contact",
+              "frame_offset": 0
+            }
+          ]
+        },
+        {
+          "pose_id": "walk_profile_left_passing",
+          "duration_frames": 4,
+          "support_contact": "none",
+          "planted_anchor": null,
+          "normalized_distance": 0.25,
+          "markers": [
+            {
+              "id": "left_release",
+              "frame_offset": 0
+            }
+          ]
+        },
+        {
+          "pose_id": "profile_left",
+          "duration_frames": 4,
+          "support_contact": "right_foot",
+          "planted_anchor": "right_foot",
+          "normalized_distance": 0.5,
+          "markers": [
+            {
+              "id": "right_contact",
+              "frame_offset": 0
+            }
+          ]
+        },
+        {
+          "pose_id": "walk_profile_left_passing",
+          "duration_frames": 4,
+          "support_contact": "none",
+          "planted_anchor": null,
+          "normalized_distance": 0.75,
+          "markers": [
+            {
+              "id": "right_release",
+              "frame_offset": 0
+            },
+            {
+              "id": "loop_boundary",
+              "frame_offset": 3
+            }
+          ]
+        }
+      ],
+      "entry_markers": [
+        "left_contact",
+        "right_contact"
+      ],
+      "exit_markers": [
+        "left_contact",
+        "right_contact"
+      ],
+      "secondary_curves": {
+        "body": "walk_bob",
+        "staff": "walk_staff_lag",
+        "robe": "walk_robe_lag"
+      },
+      "legal_successors": [
+        "walk_left",
+        "walk_right",
+        "walk_front",
+        "walk_back",
+        "stop_left",
+        "idle_left",
+        "turn_views"
+      ]
+    },
+    "walk_right": {
+      "clip_id": "walk_right",
+      "family": "locomotion",
+      "supported_facings": [
+        "east"
+      ],
+      "loop_mode": "loop",
+      "phase_source": "ground_distance",
+      "root_policy": "contact_locked",
+      "minimum_hold_ticks": 1,
+      "interrupt_policy": "at_marker",
+      "channel_ownership": [
+        "body",
+        "staff"
+      ],
+      "samples": [
+        {
+          "pose_id": "profile_right",
+          "duration_frames": 4,
+          "support_contact": "left_foot",
+          "planted_anchor": "left_foot",
+          "normalized_distance": 0.0,
+          "markers": [
+            {
+              "id": "left_contact",
+              "frame_offset": 0
+            }
+          ]
+        },
+        {
+          "pose_id": "walk_profile_right_passing",
+          "duration_frames": 4,
+          "support_contact": "none",
+          "planted_anchor": null,
+          "normalized_distance": 0.25,
+          "markers": [
+            {
+              "id": "left_release",
+              "frame_offset": 0
+            }
+          ]
+        },
+        {
+          "pose_id": "profile_right",
+          "duration_frames": 4,
+          "support_contact": "right_foot",
+          "planted_anchor": "right_foot",
+          "normalized_distance": 0.5,
+          "markers": [
+            {
+              "id": "right_contact",
+              "frame_offset": 0
+            }
+          ]
+        },
+        {
+          "pose_id": "walk_profile_right_passing",
+          "duration_frames": 4,
+          "support_contact": "none",
+          "planted_anchor": null,
+          "normalized_distance": 0.75,
+          "markers": [
+            {
+              "id": "right_release",
+              "frame_offset": 0
+            },
+            {
+              "id": "loop_boundary",
+              "frame_offset": 3
+            }
+          ]
+        }
+      ],
+      "entry_markers": [
+        "left_contact",
+        "right_contact"
+      ],
+      "exit_markers": [
+        "left_contact",
+        "right_contact"
+      ],
+      "secondary_curves": {
+        "body": "walk_bob",
+        "staff": "walk_staff_lag",
+        "robe": "walk_robe_lag"
+      },
+      "legal_successors": [
+        "walk_right",
+        "walk_left",
+        "walk_front",
+        "walk_back",
+        "stop_right",
+        "idle_right",
         "turn_views"
       ]
     },
@@ -2429,6 +2651,7 @@
       },
       "legal_successors": [
         "idle_left",
+        "walk_left",
         "walk_front",
         "walk_back"
       ]
@@ -2513,6 +2736,7 @@
       },
       "legal_successors": [
         "idle_right",
+        "walk_right",
         "walk_front",
         "walk_back"
       ]
@@ -2609,6 +2833,8 @@
         "walk_back",
         "idle_back",
         "walk_front",
+        "walk_left",
+        "walk_right",
         "turn_views"
       ]
     },
@@ -4576,6 +4802,24 @@
       ],
       "actions": []
     },
+    "ground_walk_left": {
+      "clip_id": "walk_left",
+      "mobility_modes": [
+        "grounded_start",
+        "grounded_walk",
+        "grounded_stop"
+      ],
+      "actions": []
+    },
+    "ground_walk_right": {
+      "clip_id": "walk_right",
+      "mobility_modes": [
+        "grounded_start",
+        "grounded_walk",
+        "grounded_stop"
+      ],
+      "actions": []
+    },
     "ground_stop_front_left": {
       "clip_id": "stop_front_left",
       "mobility_modes": ["grounded_stop"],
@@ -4846,6 +5090,276 @@
       "source_node_id": "ground_idle",
       "target_node_id": "ground_walk",
       "priority": 50,
+      "duration_ticks": 0,
+      "timing_mode": "contact",
+      "transition_recipe_id": "contact_match",
+      "phase_policy": "nearest_contact",
+      "root_policy": "contact_locked",
+      "contact_policy": "match",
+      "region_policy": "coherent_pose",
+      "interrupt_window": "immediate",
+      "fallback_transition_id": null
+    },
+    {
+      "transition_id": "idle_to_walk_left",
+      "source_node_id": "ground_idle",
+      "target_node_id": "ground_walk_left",
+      "priority": 50,
+      "duration_ticks": 0,
+      "timing_mode": "contact",
+      "transition_recipe_id": "contact_match",
+      "phase_policy": "nearest_contact",
+      "root_policy": "contact_locked",
+      "contact_policy": "match",
+      "region_policy": "coherent_pose",
+      "interrupt_window": "immediate",
+      "fallback_transition_id": null
+    },
+    {
+      "transition_id": "idle_to_walk_right",
+      "source_node_id": "ground_idle",
+      "target_node_id": "ground_walk_right",
+      "priority": 50,
+      "duration_ticks": 0,
+      "timing_mode": "contact",
+      "transition_recipe_id": "contact_match",
+      "phase_policy": "nearest_contact",
+      "root_policy": "contact_locked",
+      "contact_policy": "match",
+      "region_policy": "coherent_pose",
+      "interrupt_window": "immediate",
+      "fallback_transition_id": null
+    },
+    {
+      "transition_id": "left_idle_to_walk_left",
+      "source_node_id": "left_idle",
+      "target_node_id": "ground_walk_left",
+      "priority": 50,
+      "duration_ticks": 0,
+      "timing_mode": "contact",
+      "transition_recipe_id": "contact_match",
+      "phase_policy": "nearest_contact",
+      "root_policy": "contact_locked",
+      "contact_policy": "match",
+      "region_policy": "coherent_pose",
+      "interrupt_window": "immediate",
+      "fallback_transition_id": null
+    },
+    {
+      "transition_id": "right_idle_to_walk_right",
+      "source_node_id": "right_idle",
+      "target_node_id": "ground_walk_right",
+      "priority": 50,
+      "duration_ticks": 0,
+      "timing_mode": "contact",
+      "transition_recipe_id": "contact_match",
+      "phase_policy": "nearest_contact",
+      "root_policy": "contact_locked",
+      "contact_policy": "match",
+      "region_policy": "coherent_pose",
+      "interrupt_window": "immediate",
+      "fallback_transition_id": null
+    },
+    {
+      "transition_id": "walk_to_walk_left",
+      "source_node_id": "ground_walk",
+      "target_node_id": "ground_walk_left",
+      "priority": 65,
+      "duration_ticks": 0,
+      "timing_mode": "contact",
+      "transition_recipe_id": "contact_match",
+      "phase_policy": "nearest_contact",
+      "root_policy": "contact_locked",
+      "contact_policy": "match",
+      "region_policy": "coherent_pose",
+      "interrupt_window": "contact_marker",
+      "fallback_transition_id": null
+    },
+    {
+      "transition_id": "walk_to_walk_right",
+      "source_node_id": "ground_walk",
+      "target_node_id": "ground_walk_right",
+      "priority": 65,
+      "duration_ticks": 0,
+      "timing_mode": "contact",
+      "transition_recipe_id": "contact_match",
+      "phase_policy": "nearest_contact",
+      "root_policy": "contact_locked",
+      "contact_policy": "match",
+      "region_policy": "coherent_pose",
+      "interrupt_window": "contact_marker",
+      "fallback_transition_id": null
+    },
+    {
+      "transition_id": "walk_left_to_walk",
+      "source_node_id": "ground_walk_left",
+      "target_node_id": "ground_walk",
+      "priority": 65,
+      "duration_ticks": 0,
+      "timing_mode": "contact",
+      "transition_recipe_id": "contact_match",
+      "phase_policy": "nearest_contact",
+      "root_policy": "contact_locked",
+      "contact_policy": "match",
+      "region_policy": "coherent_pose",
+      "interrupt_window": "contact_marker",
+      "fallback_transition_id": null
+    },
+    {
+      "transition_id": "walk_right_to_walk",
+      "source_node_id": "ground_walk_right",
+      "target_node_id": "ground_walk",
+      "priority": 65,
+      "duration_ticks": 0,
+      "timing_mode": "contact",
+      "transition_recipe_id": "contact_match",
+      "phase_policy": "nearest_contact",
+      "root_policy": "contact_locked",
+      "contact_policy": "match",
+      "region_policy": "coherent_pose",
+      "interrupt_window": "contact_marker",
+      "fallback_transition_id": null
+    },
+    {
+      "transition_id": "walk_left_to_walk_right",
+      "source_node_id": "ground_walk_left",
+      "target_node_id": "ground_walk_right",
+      "priority": 75,
+      "duration_ticks": 0,
+      "timing_mode": "contact",
+      "transition_recipe_id": "contact_match",
+      "phase_policy": "nearest_contact",
+      "root_policy": "contact_locked",
+      "contact_policy": "match",
+      "region_policy": "coherent_pose",
+      "interrupt_window": "contact_marker",
+      "fallback_transition_id": null
+    },
+    {
+      "transition_id": "walk_right_to_walk_left",
+      "source_node_id": "ground_walk_right",
+      "target_node_id": "ground_walk_left",
+      "priority": 75,
+      "duration_ticks": 0,
+      "timing_mode": "contact",
+      "transition_recipe_id": "contact_match",
+      "phase_policy": "nearest_contact",
+      "root_policy": "contact_locked",
+      "contact_policy": "match",
+      "region_policy": "coherent_pose",
+      "interrupt_window": "contact_marker",
+      "fallback_transition_id": null
+    },
+    {
+      "transition_id": "back_walk_to_walk_left",
+      "source_node_id": "back_walk",
+      "target_node_id": "ground_walk_left",
+      "priority": 65,
+      "duration_ticks": 0,
+      "timing_mode": "contact",
+      "transition_recipe_id": "contact_match",
+      "phase_policy": "nearest_contact",
+      "root_policy": "contact_locked",
+      "contact_policy": "match",
+      "region_policy": "coherent_pose",
+      "interrupt_window": "contact_marker",
+      "fallback_transition_id": null
+    },
+    {
+      "transition_id": "back_walk_to_walk_right",
+      "source_node_id": "back_walk",
+      "target_node_id": "ground_walk_right",
+      "priority": 65,
+      "duration_ticks": 0,
+      "timing_mode": "contact",
+      "transition_recipe_id": "contact_match",
+      "phase_policy": "nearest_contact",
+      "root_policy": "contact_locked",
+      "contact_policy": "match",
+      "region_policy": "coherent_pose",
+      "interrupt_window": "contact_marker",
+      "fallback_transition_id": null
+    },
+    {
+      "transition_id": "walk_left_to_back_walk",
+      "source_node_id": "ground_walk_left",
+      "target_node_id": "back_walk",
+      "priority": 65,
+      "duration_ticks": 0,
+      "timing_mode": "contact",
+      "transition_recipe_id": "contact_match",
+      "phase_policy": "nearest_contact",
+      "root_policy": "contact_locked",
+      "contact_policy": "match",
+      "region_policy": "coherent_pose",
+      "interrupt_window": "contact_marker",
+      "fallback_transition_id": null
+    },
+    {
+      "transition_id": "walk_right_to_back_walk",
+      "source_node_id": "ground_walk_right",
+      "target_node_id": "back_walk",
+      "priority": 65,
+      "duration_ticks": 0,
+      "timing_mode": "contact",
+      "transition_recipe_id": "contact_match",
+      "phase_policy": "nearest_contact",
+      "root_policy": "contact_locked",
+      "contact_policy": "match",
+      "region_policy": "coherent_pose",
+      "interrupt_window": "contact_marker",
+      "fallback_transition_id": null
+    },
+    {
+      "transition_id": "walk_left_to_stop_left",
+      "source_node_id": "ground_walk_left",
+      "target_node_id": "ground_stop_left",
+      "priority": 80,
+      "duration_ticks": 0,
+      "timing_mode": "contact",
+      "transition_recipe_id": "contact_match",
+      "phase_policy": "nearest_contact",
+      "root_policy": "contact_locked",
+      "contact_policy": "match",
+      "region_policy": "coherent_pose",
+      "interrupt_window": "contact_marker",
+      "fallback_transition_id": null
+    },
+    {
+      "transition_id": "walk_right_to_stop_right",
+      "source_node_id": "ground_walk_right",
+      "target_node_id": "ground_stop_right",
+      "priority": 80,
+      "duration_ticks": 0,
+      "timing_mode": "contact",
+      "transition_recipe_id": "contact_match",
+      "phase_policy": "nearest_contact",
+      "root_policy": "contact_locked",
+      "contact_policy": "match",
+      "region_policy": "coherent_pose",
+      "interrupt_window": "contact_marker",
+      "fallback_transition_id": null
+    },
+    {
+      "transition_id": "stop_left_to_walk_left",
+      "source_node_id": "ground_stop_left",
+      "target_node_id": "ground_walk_left",
+      "priority": 80,
+      "duration_ticks": 0,
+      "timing_mode": "contact",
+      "transition_recipe_id": "contact_match",
+      "phase_policy": "nearest_contact",
+      "root_policy": "contact_locked",
+      "contact_policy": "match",
+      "region_policy": "coherent_pose",
+      "interrupt_window": "immediate",
+      "fallback_transition_id": null
+    },
+    {
+      "transition_id": "stop_right_to_walk_right",
+      "source_node_id": "ground_stop_right",
+      "target_node_id": "ground_walk_right",
+      "priority": 80,
       "duration_ticks": 0,
       "timing_mode": "contact",
       "transition_recipe_id": "contact_match",

@@ -171,8 +171,17 @@ class PoseSelectionTests(unittest.TestCase):
                 )
                 self.assertEqual(pose_id, expected_pose)
 
-    def test_horizontal_stage_travel_uses_authored_front_walk_contacts(self):
-        for facing in ("east", "west"):
+    def test_horizontal_stage_travel_uses_directional_profile_contacts(self):
+        cases = {
+            "east": ("ground_walk_right", "walk_right", "profile_right", 1.0),
+            "west": ("ground_walk_left", "walk_left", "profile_left", -1.0),
+        }
+        for facing, (
+            expected_node,
+            expected_clip,
+            expected_contact_pose,
+            velocity_x,
+        ) in cases.items():
             observed = []
             for phase in (0.0, 0.5):
                 sample = select_reference_pose_sample(
@@ -180,19 +189,20 @@ class PoseSelectionTests(unittest.TestCase):
                         facing=facing,
                         locomotion="walking",
                         walk_phase=phase,
-                        animation_node_id="ground_walk",
-                        animation_clip_id="walk_front",
+                        animation_node_id=expected_node,
+                        animation_clip_id=expected_clip,
+                        velocity={"x": velocity_x, "z": 0.0},
                     )
                 )
                 observed.append((sample.pose_id, sample.contact))
-                self.assertEqual(sample.clip_id, "walk_front")
-                self.assertNotIn(sample.pose_id, {"profile_left", "profile_right"})
+                self.assertEqual(sample.clip_id, expected_clip)
+                self.assertEqual(sample.pose_id, expected_contact_pose)
             self.assertEqual(
                 {contact for _, contact in observed},
                 {"left_foot", "right_foot"},
             )
 
-    def test_horizontal_reversals_never_enter_back_walk_during_stepped_turn(self):
+    def test_horizontal_reversals_preserve_profile_contact_through_handoff(self):
         graph = load_reference_animation_graph_v2()
         reversals = (
             (
@@ -225,6 +235,7 @@ class PoseSelectionTests(unittest.TestCase):
                     animation_clip_id="walk_front",
                 )
                 observed_contacts = []
+                observed_clips = []
                 for simulation_tick, facing, velocity_x in ticks:
                     state.simulation_tick = simulation_tick
                     state.animation_clip_tick += 1
@@ -232,12 +243,18 @@ class PoseSelectionTests(unittest.TestCase):
                     state.velocity = {"x": velocity_x, "z": 0.0}
                     sample = _select_graph_v2_sample(state, graph)
                     observed_contacts.append(sample.contact)
-                    self.assertEqual(state.animation_node_id, "ground_walk")
-                    self.assertEqual(sample.clip_id, "walk_front")
+                    observed_clips.append(sample.clip_id)
                     self.assertNotIn(sample.pose_id, {"back_left", "back_idle", "back_right"})
-                    self.assertIsNone(state.animation_transition_id)
-                    self.assertEqual(state.animation_transition_generation, 0)
+                    self.assertNotEqual(sample.clip_id, "walk_back")
                 self.assertEqual(set(observed_contacts), {"right_foot"})
+                expected_clips = (
+                    ("walk_left", "walk_right")
+                    if name == "west_to_east"
+                    else ("walk_right", "walk_left")
+                )
+                self.assertEqual(tuple(dict.fromkeys(observed_clips)), expected_clips)
+                self.assertEqual(state.animation_transition_phase, "stable")
+                self.assertEqual(state.animation_transition_generation, 2)
 
     def test_profile_stops_are_authored_from_either_support_foot(self):
         graph = load_reference_animation_graph_v2()

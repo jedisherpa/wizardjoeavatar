@@ -48,6 +48,9 @@ GROUND_STOP_NODES = frozenset(
         *GROUND_STOP_NODE_BY_WALK_POSE.values(),
     }
 )
+GROUND_WALK_NODES = frozenset(
+    {"ground_walk", "ground_walk_left", "ground_walk_right", "back_walk"}
+)
 IDLE_PRESENTATION_POSE_BY_FACING = {
     "south": FRONT_IDLE_POSE,
     # These two authored walk poses donate only their three-quarter head
@@ -523,7 +526,7 @@ def _evaluate_presented_clip(
     phase_offset: float = 0.0,
 ) -> ClipEvaluation:
     clip = graph.clips[clip_id]
-    if node_id in {"ground_walk", "back_walk"} and clip.phase_source == "ground_distance":
+    if node_id in GROUND_WALK_NODES and clip.phase_source == "ground_distance":
         return graph.evaluate_clip_phase(clip_id, walk_phase + phase_offset)
     return graph.evaluate_clip(clip_id, clip_tick)
 
@@ -631,8 +634,12 @@ def _select_node_id(state: WizardState, graph: AnimationGraph) -> str:
         travel_facing = _travel_facing_family(state)
         if travel_facing == "back":
             return _node_for_clip(graph, "walk_back", graph.default_node_id)
+        if travel_facing == "left":
+            return _node_for_clip(graph, "walk_left", graph.default_node_id)
+        if travel_facing == "right":
+            return _node_for_clip(graph, "walk_right", graph.default_node_id)
         return _node_for_clip(graph, "walk_front", graph.default_node_id)
-    if state.animation_node_id == "ground_walk":
+    if state.animation_node_id in GROUND_WALK_NODES:
         if state.facing == "west" and GROUND_STOP_LEFT_NODE in graph.nodes:
             return GROUND_STOP_LEFT_NODE
         if state.facing == "east" and GROUND_STOP_RIGHT_NODE in graph.nodes:
@@ -655,7 +662,7 @@ def _travel_facing_family(state: WizardState) -> str:
     velocity_x = float(state.velocity.get("x", 0.0))
     velocity_z = float(state.velocity.get("z", 0.0))
     if abs(velocity_x) >= abs(velocity_z) and abs(velocity_x) > 1e-9:
-        return "front"
+        return "right" if velocity_x > 0.0 else "left"
     if abs(velocity_z) > 1e-9:
         return "back" if velocity_z > 0.0 else "front"
     return "back" if state.facing in {"north", "northeast", "northwest"} else "front"

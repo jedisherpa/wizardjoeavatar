@@ -234,6 +234,70 @@ def derive_blend_payload(
     }
 
 
+def derive_translation_payload(
+    manifest: dict[str, Any],
+    pose: dict[str, Any],
+    poses_by_id: dict[str, dict[str, Any]],
+    normalized_payloads: dict[str, dict[str, Any]],
+    canonical: dict[str, Any],
+    colors: int,
+    coverage_threshold: int,
+) -> dict[str, Any]:
+    """Bake a complete source graph at a small root-relative cell offset."""
+
+    translation = pose["derived_translation"]
+    source_pose_id = str(translation["source_pose_id"])
+    try:
+        source = normalized_payloads[source_pose_id]
+    except KeyError as error:
+        raise ValueError(
+            f"{pose['id']} translation source {source_pose_id!r} is not an available earlier pose"
+        ) from error
+    offset = point_from(
+        translation.get("offset", [0, 0]),
+        field_name=f"{pose['id']}.derived_translation.offset",
+    )
+    cols = int(canonical["cols"])
+    rows = int(canonical["rows"])
+    cells = []
+    for cell in source["cells"]:
+        x = int(cell["x"]) + offset[0]
+        y = int(cell["y"]) + offset[1]
+        if not (0 <= x < cols and 0 <= y < rows):
+            raise ValueError(
+                f"{pose['id']} translated cell leaves the canonical canvas: ({x}, {y})"
+            )
+        cells.append({**cell, "x": x, "y": y})
+
+    source_anchors = source.get("resolved_anchors") or resolve_anchors(
+        manifest,
+        poses_by_id[source_pose_id],
+        source,
+    )
+    anchors = {
+        name: [int(point[0]) + offset[0], int(point[1]) + offset[1]]
+        for name, point in source_anchors.items()
+    }
+    root = point_from(canonical["root_anchor"], field_name="canonical.root_anchor")
+    anchors["root"] = root
+    return {
+        "source": (
+            f"derived_translation:{source_pose_id}@{offset[0]},{offset[1]}"
+        ),
+        "source_size": [cols, rows],
+        "source_crop": [0, 0, cols, rows],
+        "canonical_shift": [0, 0],
+        "generation_rows": rows,
+        "cols": cols,
+        "rows": rows,
+        "root_anchor": root,
+        "resolved_anchors": anchors,
+        "quantized_colors": colors,
+        "coverage_threshold": coverage_threshold,
+        "cells": cells,
+    }
+
+
 def derive_cast_rig_payload(
     manifest: dict[str, Any],
     pose: dict[str, Any],
@@ -508,6 +572,7 @@ def generate_pose_library(
         if "derived_blend" not in pose
         and "derived_cast_rig" not in pose
         and "derived_landmark_warp" not in pose
+        and "derived_translation" not in pose
     ]
     for pose in authored_poses:
         if reused_authored:
@@ -608,6 +673,17 @@ def generate_pose_library(
             generation_rows = int(payload["generation_rows"])
         elif "derived_landmark_warp" in pose:
             payload = derive_landmark_warp_payload(
+                manifest,
+                pose,
+                poses_by_id,
+                normalized_payloads,
+                canonical,
+                colors,
+                coverage_threshold,
+            )
+            generation_rows = int(payload["generation_rows"])
+        elif "derived_translation" in pose:
+            payload = derive_translation_payload(
                 manifest,
                 pose,
                 poses_by_id,

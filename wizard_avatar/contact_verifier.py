@@ -21,6 +21,8 @@ DEFAULT_LOCOMOTION_CLIP_IDS = frozenset(
     {
         "walk_front",
         "walk_back",
+        "walk_left",
+        "walk_right",
         "run_charge_front",
         "run_land_front",
     }

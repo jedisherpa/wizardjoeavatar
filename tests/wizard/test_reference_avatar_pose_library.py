@@ -32,7 +32,7 @@ class ReferenceAvatarPoseLibraryTests(unittest.TestCase):
         manifest = json.loads(MANIFEST_PATH.read_text(encoding="utf-8"))
         expected_pose_ids = {pose["id"] for pose in manifest["poses"]}
         self.assertEqual(set(reference_pose_ids()), expected_pose_ids)
-        self.assertEqual(len(expected_pose_ids), 158)
+        self.assertEqual(len(expected_pose_ids), 160)
         self.assertTrue(
             {
                 "front_greeting_wave_wings",
@@ -54,8 +54,42 @@ class ReferenceAvatarPoseLibraryTests(unittest.TestCase):
                 "stop_front_from_left_passing_625",
                 "stop_front_from_right_passing_100",
                 "stop_front_from_right_passing_875",
+                "walk_profile_left_passing",
+                "walk_profile_right_passing",
             }.issubset(expected_pose_ids)
         )
+
+    def test_side_walk_passing_graphs_are_complete_one_cell_lifts(self):
+        library = json.loads(
+            (
+                ROOT
+                / "wizard_avatar"
+                / "definitions"
+                / "reference_avatar_pose_cells.json"
+            ).read_text(encoding="utf-8")
+        )
+        by_id = {pose["id"]: pose for pose in library["poses"]}
+        for facing in ("left", "right"):
+            with self.subTest(facing=facing):
+                source = by_id[f"profile_{facing}"]
+                passing = by_id[f"walk_profile_{facing}_passing"]
+                self.assertEqual(
+                    passing["source"],
+                    f"derived_translation:profile_{facing}@0,-1",
+                )
+                self.assertEqual(passing["root_anchor"], [36, 95])
+                source_cells = {
+                    (cell["x"], cell["y"], tuple(cell["rgb"]), cell.get("region", ""))
+                    for cell in source["cells"]
+                }
+                passing_cells = {
+                    (cell["x"], cell["y"] + 1, tuple(cell["rgb"]), cell.get("region", ""))
+                    for cell in passing["cells"]
+                }
+                self.assertEqual(passing_cells, source_cells)
+                for anchor, point in source["anchors"].items():
+                    expected = point if anchor == "root" else [point[0], point[1] - 1]
+                    self.assertEqual(passing["anchors"][anchor], expected)
 
     def test_front_stop_inbetweens_are_baked_ordered_pixel_graphs(self):
         library = json.loads(

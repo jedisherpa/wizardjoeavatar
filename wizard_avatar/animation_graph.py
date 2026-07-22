@@ -489,6 +489,13 @@ def load_pose_catalog(
                 )
         else:
             source = _string(source_value, f"{base}.source")
+        if "derived_translation" in manifest_pose and not source.startswith(
+            "derived_translation:"
+        ):
+            raise _path_error(
+                f"{library_path}.poses[{pose_id!r}].source",
+                "translated pose must retain derived_translation provenance",
+            )
 
         catalog[pose_id] = PoseMetadata(
             pose_id=pose_id,

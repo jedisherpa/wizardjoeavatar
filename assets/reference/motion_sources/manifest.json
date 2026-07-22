@@ -1627,6 +1627,10 @@
         "left_foot": [
           -5,
           -1
+        ],
+        "right_foot": [
+          4,
+          -2
         ]
       }
     },
@@ -1646,11 +1650,65 @@
         "idle"
       ],
       "anchor_offsets": {
+        "left_foot": [
+          -8,
+          -2
+        ],
         "right_foot": [
           6,
           -2
         ]
       }
+    },
+    {
+      "id": "walk_profile_left_passing",
+      "source": "derived_translation:profile_left@0,-1",
+      "description": "left-facing side-walk passing graph with a one-cell body lift",
+      "derived_translation": {
+        "source_pose_id": "profile_left",
+        "offset": [
+          0,
+          -1
+        ]
+      },
+      "facing": "west",
+      "locomotion": "walking",
+      "actions": [
+        "walking"
+      ],
+      "phase": 0.25,
+      "tags": [
+        "profile",
+        "left",
+        "walk",
+        "passing",
+        "derived_pixel_graph"
+      ]
+    },
+    {
+      "id": "walk_profile_right_passing",
+      "source": "derived_translation:profile_right@0,-1",
+      "description": "right-facing side-walk passing graph with a one-cell body lift",
+      "derived_translation": {
+        "source_pose_id": "profile_right",
+        "offset": [
+          0,
+          -1
+        ]
+      },
+      "facing": "east",
+      "locomotion": "walking",
+      "actions": [
+        "walking"
+      ],
+      "phase": 0.25,
+      "tags": [
+        "profile",
+        "right",
+        "walk",
+        "passing",
+        "derived_pixel_graph"
+      ]
     },
     {
       "id": "walk_front_left",
