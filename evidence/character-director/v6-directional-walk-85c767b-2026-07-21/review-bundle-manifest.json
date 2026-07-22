@@ -1,0 +1,41 @@
+{
+  "artifacts": [
+    {
+      "bytes": 232689,
+      "media_type": "video/mp4",
+      "path": "v6-quarter-speed.mp4",
+      "role": "quarter_speed",
+      "sha256": "fd4d1aa09e15552dd40c12589b288ef8469571e21a52ad59c4400a1213d9f5c5",
+      "source_path": "visual-review-e6a51fe3698b-capture.mp4",
+      "source_sha256": "787c4567ae167d0f191858d4b1b12aa340332ff6a3f373d65a55f8a5ec95a9dd"
+    },
+    {
+      "bytes": 5255,
+      "media_type": "application/json",
+      "path": "v6-machine-acceptance.json",
+      "role": "machine_acceptance",
+      "sha256": "890b20006b30c150e435203adf50af863ee1a15f683e809d8cdba0af967bdc98",
+      "source_path": "manifest.json",
+      "source_sha256": "4e355d43fe80298fe8779fac5d088ca828ec1e9251f70ea34fc694a396ebeb5f"
+    },
+    {
+      "bytes": 222087,
+      "media_type": "video/mp4",
+      "path": "v6-browser-layout.mp4",
+      "role": "browser_layout",
+      "sha256": "802325d07b023a973020fc39d085825adc4b19fc0251289be2756f89f6149f85",
+      "source_path": "v6-browser-layout-metrics.json",
+      "source_sha256": "a67de04c25da7a6c986dffa2026d0581ad7bf673b6377f41483787ec65fad5e5"
+    }
+  ],
+  "candidate_commit": "85c767ba9c39693536cf6c707a5716f93d08c963",
+  "capture_manifest": {
+    "bytes": 296741,
+    "path": "manifest.json",
+    "sha256": "4e355d43fe80298fe8779fac5d088ca828ec1e9251f70ea34fc694a396ebeb5f"
+  },
+  "complete": true,
+  "run_id": "visual-review-e6a51fe3698b",
+  "schema": "character_director_review_bundle_manifest_v1",
+  "schema_version": 2
+}

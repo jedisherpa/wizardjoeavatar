@@ -1,0 +1,43 @@
+{
+  "schema": "character_director_scenario_program_v1",
+  "schema_version": 1,
+  "program_id": "v6-directional-walk",
+  "acceptance_scenario": "V6",
+  "scenarios": [
+    {
+      "name": "v6-idle",
+      "kind": "reset",
+      "payload": {},
+      "settle_seconds": 0.0,
+      "capture_seconds": 0.5
+    },
+    {
+      "name": "v6-south-approach",
+      "kind": "move",
+      "payload": {"x": 0.0, "z": 2.0, "speed": 1.25},
+      "settle_seconds": 0.0,
+      "capture_seconds": 1.0
+    },
+    {
+      "name": "v6-turn-east",
+      "kind": "move",
+      "payload": {"x": 2.4, "z": 3.8, "speed": 1.25},
+      "settle_seconds": 0.0,
+      "capture_seconds": 1.75
+    },
+    {
+      "name": "v6-reverse-west",
+      "kind": "move",
+      "payload": {"x": -2.4, "z": 3.8, "speed": 1.25},
+      "settle_seconds": 0.0,
+      "capture_seconds": 4.5
+    },
+    {
+      "name": "v6-stop-settle",
+      "kind": "gaze",
+      "payload": {"target": "viewer"},
+      "settle_seconds": 0.0,
+      "capture_seconds": 1.0
+    }
+  ]
+}
