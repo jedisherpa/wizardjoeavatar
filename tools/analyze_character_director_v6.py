@@ -18,7 +18,7 @@ from tools.run_character_director_visual_review import validate_manifest
 from wizard_avatar.animation_trace import AnimationTruthTraceV1
 
 
-REPORT_SCHEMA = "character_director_v6_machine_acceptance_v1"
+REPORT_SCHEMA = "character_director_v6_machine_acceptance_v2"
 EXPECTED_SCENARIOS = (
     "v6-idle",
     "v6-south-approach",
@@ -45,9 +45,42 @@ FACINGS = (
     "southeast",
 )
 WALK_CLIPS = {"walk_front", "walk_left", "walk_right"}
-PROFILE_POSES = {
-    "walk_left": {"profile_left", "walk_profile_left_passing"},
-    "walk_right": {"profile_right", "walk_profile_right_passing"},
+PROFILE_POSE_SEQUENCES = {
+    "walk_left": (
+        "walk_profile_left_contact_left",
+        "walk_profile_left_passing_left_to_right",
+        "walk_profile_left_contact_right",
+        "walk_profile_left_passing_right_to_left",
+    ),
+    "walk_right": (
+        "walk_profile_right_contact_left",
+        "walk_profile_right_passing_left_to_right",
+        "walk_profile_right_contact_right",
+        "walk_profile_right_passing_right_to_left",
+    ),
+}
+TRANSITION_POSE_SEQUENCES = {
+    "turn_front_to_east": (
+        "walk_front_right",
+        "turn_south_east_33",
+        "turn_south_east_67",
+        "walk_profile_right_contact_left",
+    ),
+    "reverse_east_to_west": (
+        "walk_profile_right_contact_right",
+        "turn_south_east_67",
+        "turn_south_east_33",
+        "turn_front_crossover_plant",
+        "turn_south_west_33",
+        "turn_south_west_67",
+        "walk_profile_left_contact_left",
+    ),
+}
+DEPRECATED_PROFILE_POSES = {
+    "profile_left",
+    "profile_right",
+    "walk_profile_left_passing",
+    "walk_profile_right_passing",
 }
 
 
@@ -281,12 +314,22 @@ def analyze_v6(
     directional_ok = True
     for clip_id, records in (("walk_right", east), ("walk_left", west)):
         clip_records = [trace for trace in records if trace.get("animation_clip_id") == clip_id]
-        poses = {str(trace.get("rendered_pose_id")) for trace in clip_records}
-        directional[clip_id] = {"frame_count": len(clip_records), "poses": sorted(poses)}
+        poses = tuple(_collapsed(clip_records, "rendered_pose_id"))
+        expected = PROFILE_POSE_SEQUENCES[clip_id]
+        directional[clip_id] = {
+            "frame_count": len(clip_records),
+            "collapsed_pose_sequence": list(poses),
+            "expected_pose_sequence": list(expected),
+        }
         directional_ok = (
             directional_ok
             and len(clip_records) >= 12
-            and poses == PROFILE_POSES[clip_id]
+            and len(poses) >= len(expected)
+            and all(pose in poses for pose in expected)
+            and all(
+                poses.index(left) < poses.index(right)
+                for left, right in zip(expected, expected[1:])
+            )
         )
     observed_walk_clips = {
         trace.get("animation_clip_id")
@@ -300,6 +343,36 @@ def analyze_v6(
         and observed_walk_clips.issubset(WALK_CLIPS)
         and "walk_back" not in observed_walk_clips,
         {"directional": directional, "observed_walk_clips": sorted(observed_walk_clips)},
+    )
+
+    transition_topology: Dict[str, Any] = {}
+    transition_ok = True
+    for clip_id, records in (
+        ("turn_front_to_east", east),
+        ("reverse_east_to_west", west),
+    ):
+        clip_records = [trace for trace in records if trace.get("animation_clip_id") == clip_id]
+        poses = tuple(_collapsed(clip_records, "rendered_pose_id"))
+        expected = TRANSITION_POSE_SEQUENCES[clip_id]
+        transition_topology[clip_id] = {
+            "frame_count": len(clip_records),
+            "collapsed_pose_sequence": list(poses),
+            "expected_pose_sequence": list(expected),
+        }
+        transition_ok = transition_ok and len(clip_records) >= len(expected) and poses == expected
+    all_motion_poses = {
+        str(trace.get("rendered_pose_id"))
+        for trace in south + east + west
+    }
+    deprecated_observed = sorted(all_motion_poses.intersection(DEPRECATED_PROFILE_POSES))
+    _check(
+        report,
+        "authored_turn_reversal_pose_topology",
+        transition_ok and not deprecated_observed,
+        {
+            "transitions": transition_topology,
+            "deprecated_profile_poses_observed": deprecated_observed,
+        },
     )
 
     motion = south + east + west

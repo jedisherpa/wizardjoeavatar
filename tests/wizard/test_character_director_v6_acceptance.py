@@ -73,19 +73,49 @@ def fixture():
         )
         append("v6-south-approach", (0.0, 5.0 - 1.2 * progress), "south", "walk_front", pose, support)
 
+    east_turn_poses = (
+        "walk_front_right",
+        "turn_south_east_33",
+        "turn_south_east_67",
+        "walk_profile_right_contact_left",
+    )
+    right_gait = (
+        "walk_profile_right_contact_left",
+        "walk_profile_right_passing_left_to_right",
+        "walk_profile_right_contact_right",
+        "walk_profile_right_passing_right_to_left",
+    )
+    left_gait = (
+        "walk_profile_left_contact_left",
+        "walk_profile_left_passing_left_to_right",
+        "walk_profile_left_contact_right",
+        "walk_profile_left_passing_right_to_left",
+    )
+
     for local in range(EXPECTED_FRAME_COUNTS["v6-turn-east"]):
         progress = (local + 1) / EXPECTED_FRAME_COUNTS["v6-turn-east"]
         facing = "south" if local < 4 else ("southeast" if local < 8 else "east")
         support = contact(local)
-        if local < 8:
-            clip = "walk_front"
-            pose = "walk_front_right" if support == "right_foot" else "walk_front_left"
+        if local < 12:
+            clip = "turn_front_to_east"
+            pose = east_turn_poses[min(local // 3, len(east_turn_poses) - 1)]
         else:
             clip = "walk_right"
-            pose = "profile_right" if support != "none" else "walk_profile_right_passing"
+            pose = right_gait[((local - 12) // 4) % len(right_gait)]
+            if local == 12:
+                support = "left_foot"
         append("v6-turn-east", (2.4 * progress, 3.8), facing, clip, pose, support)
 
     moving_frames = 95
+    reversal_poses = (
+        "walk_profile_right_contact_right",
+        "turn_south_east_67",
+        "turn_south_east_33",
+        "turn_front_crossover_plant",
+        "turn_south_west_33",
+        "turn_south_west_67",
+        "walk_profile_left_contact_left",
+    )
     for local in range(EXPECTED_FRAME_COUNTS["v6-reverse-west"]):
         progress = min(1.0, (local + 1) / moving_frames)
         facing = (
@@ -96,12 +126,14 @@ def fixture():
             "west"
         )
         support = contact(local)
-        if local < 8:
-            clip = "walk_right"
-            pose = "profile_right" if support != "none" else "walk_profile_right_passing"
+        if local < 21:
+            clip = "reverse_east_to_west"
+            pose = reversal_poses[min(local // 3, len(reversal_poses) - 1)]
         elif local < 98:
             clip = "walk_left"
-            pose = "profile_left" if support != "none" else "walk_profile_left_passing"
+            pose = left_gait[((local - 21) // 4) % len(left_gait)]
+            if local == 21:
+                support = "left_foot"
         else:
             clip = "stop_left"
             pose = "walk_front_left"
@@ -146,6 +178,19 @@ class CharacterDirectorV6AcceptanceTests(unittest.TestCase):
         report = analyze_v6(manifest, damaged)
         self.assertFalse(report["passed"])
         self.assertFalse(check(report, "directional_profile_clip_alignment")["passed"])
+
+    def test_placeholder_profile_and_missing_turn_inbetweens_fail_topology(self):
+        manifest, traces = fixture()
+        damaged = copy.deepcopy(traces)
+        for trace in damaged:
+            if trace["animation_clip_id"] == "walk_right":
+                trace["rendered_pose_id"] = "profile_right"
+            if trace["animation_clip_id"] == "turn_front_to_east":
+                trace["rendered_pose_id"] = "walk_front_right"
+        report = analyze_v6(manifest, damaged)
+        self.assertFalse(report["passed"])
+        self.assertFalse(check(report, "directional_profile_clip_alignment")["passed"])
+        self.assertFalse(check(report, "authored_turn_reversal_pose_topology")["passed"])
 
     def test_contact_drift_root_jump_target_error_and_clipping_fail_closed(self):
         manifest, traces = fixture()
