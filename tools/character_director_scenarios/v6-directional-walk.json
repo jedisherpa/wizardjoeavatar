@@ -21,7 +21,7 @@
     {
       "name": "v6-turn-east",
       "kind": "move",
-      "payload": {"x": 1.2, "z": 3.8, "speed": 1.25},
+      "payload": {"x": 1.6, "z": 3.8, "speed": 1.25},
       "settle_seconds": 0.0,
       "capture_seconds": 1.75
     },
