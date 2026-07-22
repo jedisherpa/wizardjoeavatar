@@ -173,17 +173,53 @@ class PoseSelectionTests(unittest.TestCase):
 
     def test_horizontal_stage_travel_uses_directional_profile_contacts(self):
         cases = {
-            "east": ("ground_walk_right", "walk_right", "profile_right", 1.0),
-            "west": ("ground_walk_left", "walk_left", "profile_left", -1.0),
+            "east": (
+                "ground_walk_right",
+                "walk_right",
+                1.0,
+                (
+                    (0.0, "walk_profile_right_contact_left", "left_foot"),
+                    (
+                        0.25,
+                        "walk_profile_right_passing_left_to_right",
+                        "left_foot",
+                    ),
+                    (0.5, "walk_profile_right_contact_right", "right_foot"),
+                    (
+                        0.75,
+                        "walk_profile_right_passing_right_to_left",
+                        "right_foot",
+                    ),
+                ),
+            ),
+            "west": (
+                "ground_walk_left",
+                "walk_left",
+                -1.0,
+                (
+                    (0.0, "walk_profile_left_contact_left", "left_foot"),
+                    (
+                        0.25,
+                        "walk_profile_left_passing_left_to_right",
+                        "left_foot",
+                    ),
+                    (0.5, "walk_profile_left_contact_right", "right_foot"),
+                    (
+                        0.75,
+                        "walk_profile_left_passing_right_to_left",
+                        "right_foot",
+                    ),
+                ),
+            ),
         }
         for facing, (
             expected_node,
             expected_clip,
-            expected_contact_pose,
             velocity_x,
+            expected_samples,
         ) in cases.items():
             observed = []
-            for phase in (0.0, 0.5):
+            for phase, expected_pose, expected_contact in expected_samples:
                 sample = select_reference_pose_sample(
                     state_for(
                         facing=facing,
@@ -196,63 +232,133 @@ class PoseSelectionTests(unittest.TestCase):
                 )
                 observed.append((sample.pose_id, sample.contact))
                 self.assertEqual(sample.clip_id, expected_clip)
-                self.assertEqual(sample.pose_id, expected_contact_pose)
+                self.assertEqual(sample.pose_id, expected_pose)
+                self.assertEqual(sample.contact, expected_contact)
+                self.assertEqual(sample.planted_anchor, expected_contact)
+                self.assertEqual(sample.root_policy, "contact_locked")
             self.assertEqual(
                 {contact for _, contact in observed},
                 {"left_foot", "right_foot"},
             )
 
-    def test_horizontal_reversals_preserve_profile_contact_through_handoff(self):
+    def test_front_to_east_turn_presents_authored_quarter_views_before_profile_walk(self):
+        graph = load_reference_animation_graph_v2()
+        state = state_for(
+            facing="southeast",
+            locomotion="walking",
+            walk_phase=0.5,
+            velocity={"x": 1.0, "z": 0.0},
+            animation_node_id="ground_walk",
+            animation_clip_id="walk_front",
+        )
+        observed = []
+        for _ in range(70):
+            sample = _select_graph_v2_sample(state, graph)
+            if not observed or observed[-1] != sample.pose_id:
+                observed.append(sample.pose_id)
+            self.assertEqual(sample.root_policy, "contact_locked")
+            self.assertIn(sample.contact, {"left_foot", "right_foot"})
+            state.simulation_tick += 1
+            state.animation_clip_tick += 1
+            if state.animation_node_id == "ground_walk_right":
+                break
+
+        self.assertEqual(
+            observed,
+            [
+                "walk_front_right",
+                "turn_south_east_33",
+                "turn_south_east_67",
+                "walk_profile_right_contact_left",
+            ],
+        )
+        self.assertEqual(state.animation_node_id, "ground_walk_right")
+        self.assertEqual(sample.clip_id, "walk_right")
+        self.assertEqual(sample.contact, "left_foot")
+
+    def test_horizontal_reversals_use_authored_crossover_phrases(self):
         graph = load_reference_animation_graph_v2()
         reversals = (
             (
                 "west_to_east",
+                "west",
+                "ground_walk_left",
+                "walk_left",
+                0.0,
+                1.0,
+                "ground_walk_right",
                 (
-                    (381, "west", -0.013372),
-                    (382, "northwest", 0.053295),
-                    (383, "north", 0.119962),
-                    (384, "northeast", 0.186629),
-                    (385, "east", 0.253296),
+                    "walk_profile_left_contact_left",
+                    "turn_south_west_67",
+                    "turn_south_west_33",
+                    "turn_front_crossover_plant",
+                    "turn_south_east_33",
+                    "turn_south_east_67",
+                    "walk_profile_right_contact_right",
                 ),
             ),
             (
                 "east_to_west",
+                "east",
+                "ground_walk_right",
+                "walk_right",
+                0.5,
+                -1.0,
+                "ground_walk_left",
                 (
-                    (481, "east", 0.013372),
-                    (482, "southeast", -0.053295),
-                    (483, "south", -0.119962),
-                    (484, "southwest", -0.186629),
-                    (485, "west", -0.253296),
+                    "walk_profile_right_contact_right",
+                    "turn_south_east_67",
+                    "turn_south_east_33",
+                    "turn_front_crossover_plant",
+                    "turn_south_west_33",
+                    "turn_south_west_67",
+                    "walk_profile_left_contact_left",
                 ),
             ),
         )
-        for name, ticks in reversals:
+        for (
+            name,
+            facing,
+            source_node,
+            source_clip,
+            phase,
+            velocity_x,
+            target_node,
+            expected_poses,
+        ) in reversals:
             with self.subTest(reversal=name):
                 state = state_for(
+                    facing=facing,
                     locomotion="walking",
-                    walk_phase=0.5,
-                    animation_node_id="ground_walk",
-                    animation_clip_id="walk_front",
+                    walk_phase=phase,
+                    velocity={"x": velocity_x, "z": 0.0},
+                    animation_node_id=source_node,
+                    animation_clip_id=source_clip,
                 )
-                observed_contacts = []
-                observed_clips = []
-                for simulation_tick, facing, velocity_x in ticks:
-                    state.simulation_tick = simulation_tick
-                    state.animation_clip_tick += 1
-                    state.facing = facing
-                    state.velocity = {"x": velocity_x, "z": 0.0}
+                observed_poses = []
+                observed_turn_clips = set()
+                for _ in range(100):
                     sample = _select_graph_v2_sample(state, graph)
-                    observed_contacts.append(sample.contact)
-                    observed_clips.append(sample.clip_id)
-                    self.assertNotIn(sample.pose_id, {"back_left", "back_idle", "back_right"})
-                    self.assertNotEqual(sample.clip_id, "walk_back")
-                self.assertEqual(set(observed_contacts), {"right_foot"})
-                expected_clips = (
-                    ("walk_left", "walk_right")
-                    if name == "west_to_east"
-                    else ("walk_right", "walk_left")
+                    if state.animation_node_id.startswith("ground_reverse_"):
+                        observed_turn_clips.add(sample.clip_id)
+                        self.assertEqual(sample.root_policy, "contact_locked")
+                        self.assertIn(sample.contact, {"left_foot", "right_foot"})
+                        if not observed_poses or observed_poses[-1] != sample.pose_id:
+                            observed_poses.append(sample.pose_id)
+                    state.simulation_tick += 1
+                    state.animation_clip_tick += 1
+                    if state.animation_node_id == target_node:
+                        break
+                self.assertEqual(tuple(observed_poses), expected_poses)
+                self.assertEqual(
+                    observed_turn_clips,
+                    {
+                        "reverse_west_to_east"
+                        if name == "west_to_east"
+                        else "reverse_east_to_west"
+                    },
                 )
-                self.assertEqual(tuple(dict.fromkeys(observed_clips)), expected_clips)
+                self.assertEqual(state.animation_node_id, target_node)
                 self.assertEqual(state.animation_transition_phase, "stable")
                 self.assertEqual(state.animation_transition_generation, 2)
 

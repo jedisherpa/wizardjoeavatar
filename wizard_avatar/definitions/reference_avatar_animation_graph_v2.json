@@ -420,7 +420,7 @@
     },
     "walk_profile_left_passing": {
       "roles": [
-        "clip_sample"
+        "diagnostic_only"
       ],
       "altitude_class": "grounded",
       "support_contact": "none",
@@ -431,7 +431,7 @@
     },
     "walk_profile_right_passing": {
       "roles": [
-        "clip_sample"
+        "diagnostic_only"
       ],
       "altitude_class": "grounded",
       "support_contact": "none",
@@ -439,6 +439,123 @@
       "wing_mode": "hidden",
       "staff_mode": "carried",
       "capability_tier": "B"
+    },
+    "walk_profile_left_contact_left": {
+      "roles": ["clip_sample"],
+      "altitude_class": "grounded",
+      "support_contact": "left_foot",
+      "planted_anchor": "left_foot",
+      "wing_mode": "extended",
+      "staff_mode": "carried",
+      "capability_tier": "A"
+    },
+    "walk_profile_left_passing_left_to_right": {
+      "roles": ["clip_sample"],
+      "altitude_class": "grounded",
+      "support_contact": "left_foot",
+      "planted_anchor": "left_foot",
+      "wing_mode": "extended",
+      "staff_mode": "carried",
+      "capability_tier": "A"
+    },
+    "walk_profile_left_contact_right": {
+      "roles": ["clip_sample"],
+      "altitude_class": "grounded",
+      "support_contact": "right_foot",
+      "planted_anchor": "right_foot",
+      "wing_mode": "extended",
+      "staff_mode": "carried",
+      "capability_tier": "A"
+    },
+    "walk_profile_left_passing_right_to_left": {
+      "roles": ["clip_sample"],
+      "altitude_class": "grounded",
+      "support_contact": "right_foot",
+      "planted_anchor": "right_foot",
+      "wing_mode": "extended",
+      "staff_mode": "carried",
+      "capability_tier": "A"
+    },
+    "walk_profile_right_contact_left": {
+      "roles": ["clip_sample"],
+      "altitude_class": "grounded",
+      "support_contact": "left_foot",
+      "planted_anchor": "left_foot",
+      "wing_mode": "extended",
+      "staff_mode": "carried",
+      "capability_tier": "A"
+    },
+    "walk_profile_right_passing_left_to_right": {
+      "roles": ["clip_sample"],
+      "altitude_class": "grounded",
+      "support_contact": "left_foot",
+      "planted_anchor": "left_foot",
+      "wing_mode": "extended",
+      "staff_mode": "carried",
+      "capability_tier": "A"
+    },
+    "walk_profile_right_contact_right": {
+      "roles": ["clip_sample"],
+      "altitude_class": "grounded",
+      "support_contact": "right_foot",
+      "planted_anchor": "right_foot",
+      "wing_mode": "extended",
+      "staff_mode": "carried",
+      "capability_tier": "A"
+    },
+    "walk_profile_right_passing_right_to_left": {
+      "roles": ["clip_sample"],
+      "altitude_class": "grounded",
+      "support_contact": "right_foot",
+      "planted_anchor": "right_foot",
+      "wing_mode": "extended",
+      "staff_mode": "carried",
+      "capability_tier": "A"
+    },
+    "turn_south_east_33": {
+      "roles": ["clip_sample", "transition_sample"],
+      "altitude_class": "grounded",
+      "support_contact": "right_foot",
+      "planted_anchor": "right_foot",
+      "wing_mode": "extended",
+      "staff_mode": "carried",
+      "capability_tier": "A"
+    },
+    "turn_south_east_67": {
+      "roles": ["clip_sample", "transition_sample"],
+      "altitude_class": "grounded",
+      "support_contact": "right_foot",
+      "planted_anchor": "right_foot",
+      "wing_mode": "extended",
+      "staff_mode": "carried",
+      "capability_tier": "A"
+    },
+    "turn_front_crossover_plant": {
+      "roles": ["clip_sample", "transition_sample"],
+      "altitude_class": "grounded",
+      "support_contact": "left_foot",
+      "planted_anchor": "left_foot",
+      "wing_mode": "extended",
+      "staff_mode": "carried",
+      "capability_tier": "A"
+    },
+    "turn_south_west_33": {
+      "roles": ["clip_sample", "transition_sample"],
+      "altitude_class": "grounded",
+      "support_contact": "left_foot",
+      "planted_anchor": "left_foot",
+      "wing_mode": "extended",
+      "staff_mode": "carried",
+      "capability_tier": "A"
+    },
+    "turn_south_west_67": {
+      "roles": ["clip_sample", "transition_sample"],
+      "altitude_class": "grounded",
+      "support_contact": "left_foot",
+      "planted_anchor": "left_foot",
+      "wing_mode": "extended",
+      "staff_mode": "carried",
+      "capability_tier": "A"
     },
     "walk_front_left": {
       "roles": [
@@ -1801,6 +1918,8 @@
         "walk_front",
         "walk_left",
         "walk_right",
+        "turn_front_to_east",
+        "turn_front_to_west",
         "walk_back",
         "run_charge_front",
         "takeoff_front",
@@ -2126,6 +2245,8 @@
         "walk_front",
         "walk_left",
         "walk_right",
+        "turn_front_to_east",
+        "turn_front_to_west",
         "idle_front",
         "stop_front_left",
         "stop_front_right",
@@ -2156,7 +2277,7 @@
       ],
       "samples": [
         {
-          "pose_id": "profile_left",
+          "pose_id": "walk_profile_left_contact_left",
           "duration_frames": 4,
           "support_contact": "left_foot",
           "planted_anchor": "left_foot",
@@ -2169,10 +2290,10 @@
           ]
         },
         {
-          "pose_id": "walk_profile_left_passing",
+          "pose_id": "walk_profile_left_passing_left_to_right",
           "duration_frames": 4,
-          "support_contact": "none",
-          "planted_anchor": null,
+          "support_contact": "left_foot",
+          "planted_anchor": "left_foot",
           "normalized_distance": 0.25,
           "markers": [
             {
@@ -2182,7 +2303,7 @@
           ]
         },
         {
-          "pose_id": "profile_left",
+          "pose_id": "walk_profile_left_contact_right",
           "duration_frames": 4,
           "support_contact": "right_foot",
           "planted_anchor": "right_foot",
@@ -2195,10 +2316,10 @@
           ]
         },
         {
-          "pose_id": "walk_profile_left_passing",
+          "pose_id": "walk_profile_left_passing_right_to_left",
           "duration_frames": 4,
-          "support_contact": "none",
-          "planted_anchor": null,
+          "support_contact": "right_foot",
+          "planted_anchor": "right_foot",
           "normalized_distance": 0.75,
           "markers": [
             {
@@ -2230,6 +2351,8 @@
         "walk_right",
         "walk_front",
         "walk_back",
+        "turn_front_to_west",
+        "reverse_west_to_east",
         "stop_left",
         "idle_left",
         "turn_views"
@@ -2252,7 +2375,7 @@
       ],
       "samples": [
         {
-          "pose_id": "profile_right",
+          "pose_id": "walk_profile_right_contact_left",
           "duration_frames": 4,
           "support_contact": "left_foot",
           "planted_anchor": "left_foot",
@@ -2265,10 +2388,10 @@
           ]
         },
         {
-          "pose_id": "walk_profile_right_passing",
+          "pose_id": "walk_profile_right_passing_left_to_right",
           "duration_frames": 4,
-          "support_contact": "none",
-          "planted_anchor": null,
+          "support_contact": "left_foot",
+          "planted_anchor": "left_foot",
           "normalized_distance": 0.25,
           "markers": [
             {
@@ -2278,7 +2401,7 @@
           ]
         },
         {
-          "pose_id": "profile_right",
+          "pose_id": "walk_profile_right_contact_right",
           "duration_frames": 4,
           "support_contact": "right_foot",
           "planted_anchor": "right_foot",
@@ -2291,10 +2414,10 @@
           ]
         },
         {
-          "pose_id": "walk_profile_right_passing",
+          "pose_id": "walk_profile_right_passing_right_to_left",
           "duration_frames": 4,
-          "support_contact": "none",
-          "planted_anchor": null,
+          "support_contact": "right_foot",
+          "planted_anchor": "right_foot",
           "normalized_distance": 0.75,
           "markers": [
             {
@@ -2326,10 +2449,250 @@
         "walk_left",
         "walk_front",
         "walk_back",
+        "turn_front_to_east",
+        "reverse_east_to_west",
         "stop_right",
         "idle_right",
         "turn_views"
       ]
+    },
+    "turn_front_to_east": {
+      "clip_id": "turn_front_to_east",
+      "family": "transition",
+      "supported_facings": ["south", "southeast", "east"],
+      "loop_mode": "once",
+      "phase_source": "time",
+      "root_policy": "contact_locked",
+      "minimum_hold_ticks": 1,
+      "interrupt_policy": "uninterruptible",
+      "channel_ownership": ["body", "staff", "wings"],
+      "samples": [
+        {
+          "pose_id": "walk_front_right",
+          "duration_frames": 2,
+          "support_contact": "right_foot",
+          "planted_anchor": "right_foot",
+          "markers": [{"id": "right_contact", "frame_offset": 0}]
+        },
+        {
+          "pose_id": "turn_south_east_33",
+          "duration_frames": 3,
+          "support_contact": "right_foot",
+          "planted_anchor": "right_foot",
+          "markers": []
+        },
+        {
+          "pose_id": "turn_south_east_67",
+          "duration_frames": 3,
+          "support_contact": "right_foot",
+          "planted_anchor": "right_foot",
+          "markers": []
+        },
+        {
+          "pose_id": "walk_profile_right_contact_left",
+          "duration_frames": 4,
+          "support_contact": "left_foot",
+          "planted_anchor": "left_foot",
+          "markers": [{"id": "left_contact", "frame_offset": 0}]
+        }
+      ],
+      "entry_markers": ["right_contact"],
+      "exit_markers": ["left_contact"],
+      "secondary_curves": {
+        "body": "walk_bob",
+        "staff": "walk_staff_lag",
+        "robe": "walk_robe_lag"
+      },
+      "legal_successors": ["walk_right", "stop_right", "idle_right"]
+    },
+    "turn_front_to_west": {
+      "clip_id": "turn_front_to_west",
+      "family": "transition",
+      "supported_facings": ["south", "southwest", "west"],
+      "loop_mode": "once",
+      "phase_source": "time",
+      "root_policy": "contact_locked",
+      "minimum_hold_ticks": 1,
+      "interrupt_policy": "uninterruptible",
+      "channel_ownership": ["body", "staff", "wings"],
+      "samples": [
+        {
+          "pose_id": "walk_front_left",
+          "duration_frames": 2,
+          "support_contact": "left_foot",
+          "planted_anchor": "left_foot",
+          "markers": [{"id": "left_contact", "frame_offset": 0}]
+        },
+        {
+          "pose_id": "turn_south_west_33",
+          "duration_frames": 3,
+          "support_contact": "left_foot",
+          "planted_anchor": "left_foot",
+          "markers": []
+        },
+        {
+          "pose_id": "turn_south_west_67",
+          "duration_frames": 3,
+          "support_contact": "left_foot",
+          "planted_anchor": "left_foot",
+          "markers": []
+        },
+        {
+          "pose_id": "walk_profile_left_contact_right",
+          "duration_frames": 4,
+          "support_contact": "right_foot",
+          "planted_anchor": "right_foot",
+          "markers": [{"id": "right_contact", "frame_offset": 0}]
+        }
+      ],
+      "entry_markers": ["left_contact"],
+      "exit_markers": ["right_contact"],
+      "secondary_curves": {
+        "body": "walk_bob",
+        "staff": "walk_staff_lag",
+        "robe": "walk_robe_lag"
+      },
+      "legal_successors": ["walk_left", "stop_left", "idle_left"]
+    },
+    "reverse_east_to_west": {
+      "clip_id": "reverse_east_to_west",
+      "family": "transition",
+      "supported_facings": ["east", "southeast", "south", "southwest", "west"],
+      "loop_mode": "once",
+      "phase_source": "time",
+      "root_policy": "contact_locked",
+      "minimum_hold_ticks": 1,
+      "interrupt_policy": "uninterruptible",
+      "channel_ownership": ["body", "staff", "wings"],
+      "samples": [
+        {
+          "pose_id": "walk_profile_right_contact_right",
+          "duration_frames": 3,
+          "support_contact": "right_foot",
+          "planted_anchor": "right_foot",
+          "markers": [{"id": "right_contact", "frame_offset": 0}]
+        },
+        {
+          "pose_id": "turn_south_east_67",
+          "duration_frames": 3,
+          "support_contact": "right_foot",
+          "planted_anchor": "right_foot",
+          "markers": []
+        },
+        {
+          "pose_id": "turn_south_east_33",
+          "duration_frames": 3,
+          "support_contact": "right_foot",
+          "planted_anchor": "right_foot",
+          "markers": []
+        },
+        {
+          "pose_id": "turn_front_crossover_plant",
+          "duration_frames": 4,
+          "support_contact": "left_foot",
+          "planted_anchor": "left_foot",
+          "markers": [{"id": "left_contact", "frame_offset": 0}]
+        },
+        {
+          "pose_id": "turn_south_west_33",
+          "duration_frames": 3,
+          "support_contact": "left_foot",
+          "planted_anchor": "left_foot",
+          "markers": []
+        },
+        {
+          "pose_id": "turn_south_west_67",
+          "duration_frames": 3,
+          "support_contact": "left_foot",
+          "planted_anchor": "left_foot",
+          "markers": []
+        },
+        {
+          "pose_id": "walk_profile_left_contact_left",
+          "duration_frames": 4,
+          "support_contact": "left_foot",
+          "planted_anchor": "left_foot",
+          "markers": [{"id": "left_contact", "frame_offset": 0}]
+        }
+      ],
+      "entry_markers": ["right_contact"],
+      "exit_markers": ["left_contact"],
+      "secondary_curves": {
+        "body": "walk_bob",
+        "staff": "walk_staff_lag",
+        "robe": "walk_robe_lag"
+      },
+      "legal_successors": ["walk_left", "stop_left", "idle_left"]
+    },
+    "reverse_west_to_east": {
+      "clip_id": "reverse_west_to_east",
+      "family": "transition",
+      "supported_facings": ["west", "southwest", "south", "southeast", "east"],
+      "loop_mode": "once",
+      "phase_source": "time",
+      "root_policy": "contact_locked",
+      "minimum_hold_ticks": 1,
+      "interrupt_policy": "uninterruptible",
+      "channel_ownership": ["body", "staff", "wings"],
+      "samples": [
+        {
+          "pose_id": "walk_profile_left_contact_left",
+          "duration_frames": 3,
+          "support_contact": "left_foot",
+          "planted_anchor": "left_foot",
+          "markers": [{"id": "left_contact", "frame_offset": 0}]
+        },
+        {
+          "pose_id": "turn_south_west_67",
+          "duration_frames": 3,
+          "support_contact": "left_foot",
+          "planted_anchor": "left_foot",
+          "markers": []
+        },
+        {
+          "pose_id": "turn_south_west_33",
+          "duration_frames": 3,
+          "support_contact": "left_foot",
+          "planted_anchor": "left_foot",
+          "markers": []
+        },
+        {
+          "pose_id": "turn_front_crossover_plant",
+          "duration_frames": 4,
+          "support_contact": "left_foot",
+          "planted_anchor": "left_foot",
+          "markers": []
+        },
+        {
+          "pose_id": "turn_south_east_33",
+          "duration_frames": 3,
+          "support_contact": "right_foot",
+          "planted_anchor": "right_foot",
+          "markers": [{"id": "right_contact", "frame_offset": 0}]
+        },
+        {
+          "pose_id": "turn_south_east_67",
+          "duration_frames": 3,
+          "support_contact": "right_foot",
+          "planted_anchor": "right_foot",
+          "markers": []
+        },
+        {
+          "pose_id": "walk_profile_right_contact_right",
+          "duration_frames": 4,
+          "support_contact": "right_foot",
+          "planted_anchor": "right_foot",
+          "markers": [{"id": "right_contact", "frame_offset": 0}]
+        }
+      ],
+      "entry_markers": ["left_contact"],
+      "exit_markers": ["right_contact"],
+      "secondary_curves": {
+        "body": "walk_bob",
+        "staff": "walk_staff_lag",
+        "robe": "walk_robe_lag"
+      },
+      "legal_successors": ["walk_right", "stop_right", "idle_right"]
     },
     "stop_front_left": {
       "clip_id": "stop_front_left",
@@ -4820,6 +5183,26 @@
       ],
       "actions": []
     },
+    "ground_turn_front_to_east": {
+      "clip_id": "turn_front_to_east",
+      "mobility_modes": ["grounded_start", "grounded_walk", "grounded_stop"],
+      "actions": []
+    },
+    "ground_turn_front_to_west": {
+      "clip_id": "turn_front_to_west",
+      "mobility_modes": ["grounded_start", "grounded_walk", "grounded_stop"],
+      "actions": []
+    },
+    "ground_reverse_east_to_west": {
+      "clip_id": "reverse_east_to_west",
+      "mobility_modes": ["grounded_walk", "grounded_stop"],
+      "actions": []
+    },
+    "ground_reverse_west_to_east": {
+      "clip_id": "reverse_west_to_east",
+      "mobility_modes": ["grounded_walk", "grounded_stop"],
+      "actions": []
+    },
     "ground_stop_front_left": {
       "clip_id": "stop_front_left",
       "mobility_modes": ["grounded_stop"],
@@ -5085,6 +5468,66 @@
     }
   },
   "transitions": [
+    {
+      "transition_id": "turn_front_to_east_to_walk_right",
+      "source_node_id": "ground_turn_front_to_east",
+      "target_node_id": "ground_walk_right",
+      "priority": 90,
+      "duration_ticks": 0,
+      "timing_mode": "contact",
+      "transition_recipe_id": "contact_match",
+      "phase_policy": "nearest_contact",
+      "root_policy": "contact_locked",
+      "contact_policy": "match",
+      "region_policy": "coherent_pose",
+      "interrupt_window": "immediate",
+      "fallback_transition_id": null
+    },
+    {
+      "transition_id": "turn_front_to_west_to_walk_left",
+      "source_node_id": "ground_turn_front_to_west",
+      "target_node_id": "ground_walk_left",
+      "priority": 90,
+      "duration_ticks": 0,
+      "timing_mode": "contact",
+      "transition_recipe_id": "contact_match",
+      "phase_policy": "nearest_contact",
+      "root_policy": "contact_locked",
+      "contact_policy": "match",
+      "region_policy": "coherent_pose",
+      "interrupt_window": "immediate",
+      "fallback_transition_id": null
+    },
+    {
+      "transition_id": "reverse_east_to_west_to_walk_left",
+      "source_node_id": "ground_reverse_east_to_west",
+      "target_node_id": "ground_walk_left",
+      "priority": 95,
+      "duration_ticks": 0,
+      "timing_mode": "contact",
+      "transition_recipe_id": "contact_match",
+      "phase_policy": "nearest_contact",
+      "root_policy": "contact_locked",
+      "contact_policy": "match",
+      "region_policy": "coherent_pose",
+      "interrupt_window": "immediate",
+      "fallback_transition_id": null
+    },
+    {
+      "transition_id": "reverse_west_to_east_to_walk_right",
+      "source_node_id": "ground_reverse_west_to_east",
+      "target_node_id": "ground_walk_right",
+      "priority": 95,
+      "duration_ticks": 0,
+      "timing_mode": "contact",
+      "transition_recipe_id": "contact_match",
+      "phase_policy": "nearest_contact",
+      "root_policy": "contact_locked",
+      "contact_policy": "match",
+      "region_policy": "coherent_pose",
+      "interrupt_window": "immediate",
+      "fallback_transition_id": null
+    },
     {
       "transition_id": "idle_to_walk",
       "source_node_id": "ground_idle",

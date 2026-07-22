@@ -51,6 +51,19 @@ GROUND_STOP_NODES = frozenset(
 GROUND_WALK_NODES = frozenset(
     {"ground_walk", "ground_walk_left", "ground_walk_right", "back_walk"}
 )
+DIRECTIONAL_TURN_ENDPOINTS = {
+    "ground_turn_front_to_east": "right",
+    "ground_turn_front_to_west": "left",
+    "ground_reverse_east_to_west": "left",
+    "ground_reverse_west_to_east": "right",
+}
+DIRECTIONAL_TURN_NODES = frozenset(DIRECTIONAL_TURN_ENDPOINTS)
+LEFT_ORIENTED_NODES = frozenset(
+    {"left_idle", "ground_walk_left", GROUND_STOP_LEFT_NODE}
+)
+RIGHT_ORIENTED_NODES = frozenset(
+    {"right_idle", "ground_walk_right", GROUND_STOP_RIGHT_NODE}
+)
 IDLE_PRESENTATION_POSE_BY_FACING = {
     "south": FRONT_IDLE_POSE,
     # These two authored walk poses donate only their three-quarter head
@@ -621,6 +634,10 @@ def _select_node_id(state: WizardState, graph: AnimationGraph) -> str:
         return action_node
     if airborne:
         return _flight_node_id(state, graph)
+    if state.animation_node_id in DIRECTIONAL_TURN_NODES:
+        turn_node = _continue_directional_turn(state, graph)
+        if turn_node is not None:
+            return turn_node
     if state.animation_node_id in GROUND_STOP_NODES and state.locomotion == "idle":
         stop_clip = graph.clips.get(state.animation_clip_id)
         if stop_clip is not None and not _clip_marker_reached(
@@ -634,10 +651,8 @@ def _select_node_id(state: WizardState, graph: AnimationGraph) -> str:
         travel_facing = _travel_facing_family(state)
         if travel_facing == "back":
             return _node_for_clip(graph, "walk_back", graph.default_node_id)
-        if travel_facing == "left":
-            return _node_for_clip(graph, "walk_left", graph.default_node_id)
-        if travel_facing == "right":
-            return _node_for_clip(graph, "walk_right", graph.default_node_id)
+        if travel_facing in {"left", "right"}:
+            return _directional_ground_node(state, graph, travel_facing)
         return _node_for_clip(graph, "walk_front", graph.default_node_id)
     if state.animation_node_id in GROUND_WALK_NODES:
         if state.facing == "west" and GROUND_STOP_LEFT_NODE in graph.nodes:
@@ -654,6 +669,106 @@ def _select_node_id(state: WizardState, graph: AnimationGraph) -> str:
         )
     )
     return _node_for_clip(graph, fallback_clip, graph.default_node_id)
+
+
+def _continue_directional_turn(
+    state: WizardState,
+    graph: AnimationGraph,
+) -> Optional[str]:
+    """Hold an authored body turn until its final contact is presented."""
+
+    if not _active_once_clip_complete(state, graph):
+        return state.animation_node_id
+    endpoint = DIRECTIONAL_TURN_ENDPOINTS[state.animation_node_id]
+    if state.locomotion != "walking":
+        stop_node = (
+            GROUND_STOP_RIGHT_NODE
+            if endpoint == "right"
+            else GROUND_STOP_LEFT_NODE
+        )
+        return stop_node if stop_node in graph.nodes else None
+    travel_facing = _travel_facing_family(state)
+    if travel_facing in {"left", "right"}:
+        return _node_for_clip(
+            graph,
+            "walk_right" if travel_facing == "right" else "walk_left",
+            graph.default_node_id,
+        )
+    return None
+
+
+def _active_once_clip_complete(state: WizardState, graph: AnimationGraph) -> bool:
+    clip = graph.clips.get(state.animation_clip_id)
+    if clip is None or clip.loop_mode == "loop":
+        return False
+    return (
+        state.animation_clip_tick * graph.authored_fps
+        >= clip.total_frames * graph.simulation_hz
+    )
+
+
+def _directional_ground_node(
+    state: WizardState,
+    graph: AnimationGraph,
+    travel_facing: str,
+) -> str:
+    target_clip = "walk_right" if travel_facing == "right" else "walk_left"
+    target_node = _node_for_clip(graph, target_clip, graph.default_node_id)
+    orientation = _ground_orientation(state)
+    if orientation == travel_facing:
+        return target_node
+
+    evaluation = _presented_clip_evaluation(state, graph)
+    if orientation == "left" and travel_facing == "right":
+        if (
+            state.animation_clip_id == "walk_left"
+            and evaluation is not None
+            and evaluation.support_contact != "left_foot"
+        ):
+            return state.animation_node_id
+        return "ground_reverse_west_to_east"
+    if orientation == "right" and travel_facing == "left":
+        if (
+            state.animation_clip_id == "walk_right"
+            and evaluation is not None
+            and evaluation.support_contact != "right_foot"
+        ):
+            return state.animation_node_id
+        return "ground_reverse_east_to_west"
+    if orientation == "front":
+        required_contact = (
+            "right_foot" if travel_facing == "right" else "left_foot"
+        )
+        if (
+            state.animation_clip_id == "walk_front"
+            and evaluation is not None
+            and evaluation.support_contact != required_contact
+        ):
+            return state.animation_node_id
+        return (
+            "ground_turn_front_to_east"
+            if travel_facing == "right"
+            else "ground_turn_front_to_west"
+        )
+    return target_node
+
+
+def _ground_orientation(state: WizardState) -> Optional[str]:
+    if state.animation_node_id in LEFT_ORIENTED_NODES:
+        return "left"
+    if state.animation_node_id in RIGHT_ORIENTED_NODES:
+        return "right"
+    if state.animation_node_id in {
+        "ground_idle",
+        "ground_walk",
+        *GROUND_STOP_NODE_BY_WALK_POSE.values(),
+    }:
+        if state.facing == "west":
+            return "left"
+        if state.facing == "east":
+            return "right"
+        return "front"
+    return None
 
 
 def _travel_facing_family(state: WizardState) -> str:

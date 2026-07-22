@@ -101,6 +101,12 @@ PRESENTATION_MARKER_IDS = frozenset(
     }
 )
 PRESENTATION_MARKER_DEDUP_CAPACITY = 256
+IDLE_BODY_FACING_BY_CLIP = {
+    "idle_front": "south",
+    "idle_back": "north",
+    "idle_left": "west",
+    "idle_right": "east",
+}
 
 
 @dataclass(frozen=True)
@@ -279,6 +285,14 @@ class ProceduralWizardFrameSource:
 
         state = self.controller.current_state()
         derived = copy.deepcopy(state)
+        if (
+            state.locomotion == "idle"
+            and state.animation_clip_id in IDLE_BODY_FACING_BY_CLIP
+        ):
+            # Facing commands animate the head and eyes over the planted idle
+            # body. Resolve semantic body selection from its current authored
+            # orientation while the presentation layer turns toward the target.
+            derived.facing = IDLE_BODY_FACING_BY_CLIP[state.animation_clip_id]
         sample = select_reference_pose_sample(
             derived,
             self.pose_ids,
