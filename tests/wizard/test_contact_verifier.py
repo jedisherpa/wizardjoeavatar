@@ -361,6 +361,45 @@ class ContactVerifierTests(unittest.TestCase):
             self._issue_codes(report),
         )
 
+    def test_non_locomotion_phrase_resets_support_alternation(self):
+        records = self._walk_trace()
+        stance_supports = []
+        for record in records:
+            if record.support_contact not in {"left_foot", "right_foot"}:
+                continue
+            if any(record.contact_generation == item[0] for item in stance_supports):
+                continue
+            stance_supports.append((record.contact_generation, record.support_contact))
+        self.assertGreaterEqual(len(stance_supports), 2)
+        first_generation, first_support = stance_supports[0]
+        separator_index = max(
+            index
+            for index, record in enumerate(records)
+            if record.contact_generation == first_generation
+        )
+        later_generations = [generation for generation, _ in stance_supports[1:]]
+        opposite_support = (
+            "left_foot" if first_support == "right_foot" else "right_foot"
+        )
+        support_by_generation = {
+            generation: first_support if offset % 2 == 0 else opposite_support
+            for offset, generation in enumerate(later_generations)
+        }
+        for index, record in enumerate(records):
+            if index == separator_index:
+                records[index] = replace(record, animation_clip_id="stop_right")
+            elif record.contact_generation in support_by_generation:
+                support = support_by_generation[record.contact_generation]
+                records[index] = replace(
+                    record,
+                    support_contact=support,
+                    planted_anchor=support,
+                )
+
+        report = verify_contact_trace(records)
+
+        self.assertTrue(report.passed, report.to_mapping())
+
 
 if __name__ == "__main__":
     unittest.main()

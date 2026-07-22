@@ -134,6 +134,12 @@ def verify_contact_trace(
             )
         previous_generation = max(previous_generation, record.contact_generation)
 
+        if record.animation_clip_id not in locomotion_clips:
+            # A stop, idle, action, or other non-locomotion phrase ends the
+            # contiguous gait ledger. A later walk may legitimately lead with
+            # either foot; alternation is enforced again inside that phrase.
+            previous_locomotion_support = None
+
         expected_x = (
             record.semantic_root_stage.x + record.contact_root_offset_stage.x
         )
