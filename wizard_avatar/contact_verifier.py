@@ -23,6 +23,10 @@ DEFAULT_LOCOMOTION_CLIP_IDS = frozenset(
         "walk_back",
         "walk_left",
         "walk_right",
+        "turn_front_to_east",
+        "turn_front_to_west",
+        "reverse_east_to_west",
+        "reverse_west_to_east",
         "run_charge_front",
         "run_land_front",
     }

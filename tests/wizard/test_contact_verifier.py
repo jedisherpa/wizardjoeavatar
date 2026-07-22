@@ -3,6 +3,7 @@ from dataclasses import replace
 
 from wizard_avatar.animation_trace import RasterSpanV1, StagePointV1
 from wizard_avatar.contact_verifier import (
+    DEFAULT_LOCOMOTION_CLIP_IDS,
     DecodedRasterFrameV1,
     verify_contact_trace,
 )
@@ -13,6 +14,16 @@ from wizard_avatar.palette import RGB
 
 
 class ContactVerifierTests(unittest.TestCase):
+    def test_authored_direction_changes_participate_in_support_alternation(self):
+        self.assertTrue(
+            {
+                "turn_front_to_east",
+                "turn_front_to_west",
+                "reverse_east_to_west",
+                "reverse_west_to_east",
+            }.issubset(DEFAULT_LOCOMOTION_CLIP_IDS)
+        )
+
     def _walk_evidence(self):
         source = ProceduralWizardFrameSource()
         result = source.apply_command_sync(
