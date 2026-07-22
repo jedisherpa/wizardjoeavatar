@@ -144,7 +144,7 @@ def normalize_payload_to_canonical(
         "cols": cols,
         "rows": rows,
         "root_anchor": canonical_root,
-        "canonical_shift": [dx, dy],
+        "canonical_shift": list(payload.get("canonical_shift", [dx, dy])),
         "cells": normalized_cells,
     }
 
@@ -575,13 +575,8 @@ def generate_pose_library(
         and "derived_translation" not in pose
     ]
     for pose in authored_poses:
-        if reused_authored:
-            try:
-                existing = reused_authored[pose["id"]]
-            except KeyError as error:
-                raise ValueError(
-                    f"Reusable library is missing authored pose {pose['id']!r}"
-                ) from error
+        existing = reused_authored.get(str(pose["id"]))
+        if existing is not None:
             payload = {
                 "source": existing["source"],
                 "source_size": existing["source_size"],
@@ -589,6 +584,7 @@ def generate_pose_library(
                 "cols": existing["cols"],
                 "rows": existing["rows"],
                 "root_anchor": existing["root_anchor"],
+                "canonical_shift": existing.get("canonical_shift", [0, 0]),
                 "quantized_colors": existing.get("quantized_colors", colors),
                 "coverage_threshold": existing.get(
                     "coverage_threshold",
@@ -616,6 +612,9 @@ def generate_pose_library(
             threshold=threshold,
             coverage_threshold=coverage_threshold,
             colors=colors,
+            minimum_alpha_component_pixels=int(
+                pose.get("minimum_alpha_component_pixels", 16)
+            ),
         )
         while requested_cols and int(payload["cols"]) > requested_cols:
             fitted_rows = max(
@@ -635,6 +634,9 @@ def generate_pose_library(
                 threshold=threshold,
                 coverage_threshold=coverage_threshold,
                 colors=colors,
+                minimum_alpha_component_pixels=int(
+                    pose.get("minimum_alpha_component_pixels", 16)
+                ),
             )
         temp_output.unlink(missing_ok=True)
         raw_entries.append((pose, payload, generation_rows))

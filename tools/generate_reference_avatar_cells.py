@@ -30,6 +30,50 @@ def initial_subject_mask(image: Image.Image, threshold: float) -> Image.Image:
     return mask
 
 
+def alpha_subject_mask(image: Image.Image, minimum_component_pixels: int = 16) -> Image.Image:
+    """Keep authored alpha while removing detached matte debris."""
+
+    alpha = image.getchannel("A")
+    binary = alpha.point(lambda value: 1 if value else 0, mode="1")
+    src = binary.load()
+    visited = Image.new("1", binary.size, 0)
+    seen = visited.load()
+    kept = Image.new("L", binary.size, 0)
+    dst = kept.load()
+
+    for y in range(binary.height):
+        for x in range(binary.width):
+            if not src[x, y] or seen[x, y]:
+                continue
+            queue: deque[Tuple[int, int]] = deque([(x, y)])
+            seen[x, y] = 1
+            component = []
+            while queue:
+                current_x, current_y = queue.popleft()
+                component.append((current_x, current_y))
+                for next_x, next_y in (
+                    (current_x + 1, current_y),
+                    (current_x - 1, current_y),
+                    (current_x, current_y + 1),
+                    (current_x, current_y - 1),
+                ):
+                    if (
+                        0 <= next_x < binary.width
+                        and 0 <= next_y < binary.height
+                        and src[next_x, next_y]
+                        and not seen[next_x, next_y]
+                    ):
+                        seen[next_x, next_y] = 1
+                        queue.append((next_x, next_y))
+            if len(component) < minimum_component_pixels:
+                continue
+            for component_x, component_y in component:
+                dst[component_x, component_y] = alpha.getpixel(
+                    (component_x, component_y)
+                )
+    return kept
+
+
 def subject_bounds(mask: Image.Image) -> Tuple[int, int, int, int]:
     bbox = mask.getbbox()
     if bbox is None:
@@ -107,14 +151,27 @@ def generate(
     threshold: float,
     coverage_threshold: int,
     colors: int,
+    minimum_alpha_component_pixels: int = 16,
 ) -> dict:
-    source = Image.open(input_path).convert("RGB")
-    rough_mask = initial_subject_mask(source, threshold)
+    opened = Image.open(input_path)
+    rgba_source = opened.convert("RGBA")
+    source = rgba_source.convert("RGB")
+    alpha_extrema = rgba_source.getchannel("A").getextrema()
+    has_authored_alpha = alpha_extrema[0] < 255
+    rough_mask = (
+        alpha_subject_mask(rgba_source, minimum_alpha_component_pixels)
+        if has_authored_alpha
+        else initial_subject_mask(source, threshold)
+    )
     crop_bounds = expand_bounds(subject_bounds(rough_mask), source.size, margin)
     crop_box = (crop_bounds[0], crop_bounds[1], crop_bounds[2] + 1, crop_bounds[3] + 1)
     cropped = source.crop(crop_box)
     cropped_mask = rough_mask.crop(crop_box)
-    solid_mask = filled_subject_mask(cropped_mask)
+    solid_mask = (
+        cropped_mask
+        if has_authored_alpha
+        else filled_subject_mask(cropped_mask)
+    )
 
     cols = max(1, round(rows * cropped.width / cropped.height))
     resample = Image.Resampling.BOX
@@ -147,6 +204,7 @@ def main() -> None:
     parser.add_argument("--threshold", type=float, default=30.0)
     parser.add_argument("--coverage-threshold", type=int, default=24)
     parser.add_argument("--colors", type=int, default=64)
+    parser.add_argument("--minimum-alpha-component-pixels", type=int, default=16)
     args = parser.parse_args()
     payload = generate(
         args.input,
@@ -156,6 +214,7 @@ def main() -> None:
         args.threshold,
         args.coverage_threshold,
         args.colors,
+        args.minimum_alpha_component_pixels,
     )
     print(json.dumps({k: payload[k] for k in ["source", "source_crop", "cols", "rows", "root_anchor"]}, indent=2))
 

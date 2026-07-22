@@ -32,7 +32,7 @@ class ReferenceAvatarPoseLibraryTests(unittest.TestCase):
         manifest = json.loads(MANIFEST_PATH.read_text(encoding="utf-8"))
         expected_pose_ids = {pose["id"] for pose in manifest["poses"]}
         self.assertEqual(set(reference_pose_ids()), expected_pose_ids)
-        self.assertEqual(len(expected_pose_ids), 160)
+        self.assertEqual(len(expected_pose_ids), 173)
         self.assertTrue(
             {
                 "front_greeting_wave_wings",
@@ -56,10 +56,23 @@ class ReferenceAvatarPoseLibraryTests(unittest.TestCase):
                 "stop_front_from_right_passing_875",
                 "walk_profile_left_passing",
                 "walk_profile_right_passing",
+                "walk_profile_left_contact_left",
+                "walk_profile_left_passing_left_to_right",
+                "walk_profile_left_contact_right",
+                "walk_profile_left_passing_right_to_left",
+                "walk_profile_right_contact_left",
+                "walk_profile_right_passing_left_to_right",
+                "walk_profile_right_contact_right",
+                "walk_profile_right_passing_right_to_left",
+                "turn_south_east_33",
+                "turn_south_east_67",
+                "turn_front_crossover_plant",
+                "turn_south_west_33",
+                "turn_south_west_67",
             }.issubset(expected_pose_ids)
         )
 
-    def test_side_walk_passing_graphs_are_complete_one_cell_lifts(self):
+    def test_directional_walk_uses_four_distinct_authored_graphs_per_side(self):
         library = json.loads(
             (
                 ROOT
@@ -71,25 +84,78 @@ class ReferenceAvatarPoseLibraryTests(unittest.TestCase):
         by_id = {pose["id"]: pose for pose in library["poses"]}
         for facing in ("left", "right"):
             with self.subTest(facing=facing):
-                source = by_id[f"profile_{facing}"]
-                passing = by_id[f"walk_profile_{facing}_passing"]
-                self.assertEqual(
-                    passing["source"],
-                    f"derived_translation:profile_{facing}@0,-1",
+                pose_ids = (
+                    f"walk_profile_{facing}_contact_left",
+                    f"walk_profile_{facing}_passing_left_to_right",
+                    f"walk_profile_{facing}_contact_right",
+                    f"walk_profile_{facing}_passing_right_to_left",
                 )
-                self.assertEqual(passing["root_anchor"], [36, 95])
-                source_cells = {
-                    (cell["x"], cell["y"], tuple(cell["rgb"]), cell.get("region", ""))
-                    for cell in source["cells"]
-                }
-                passing_cells = {
-                    (cell["x"], cell["y"] + 1, tuple(cell["rgb"]), cell.get("region", ""))
-                    for cell in passing["cells"]
-                }
-                self.assertEqual(passing_cells, source_cells)
-                for anchor, point in source["anchors"].items():
-                    expected = point if anchor == "root" else [point[0], point[1] - 1]
-                    self.assertEqual(passing["anchors"][anchor], expected)
+                poses = [by_id[pose_id] for pose_id in pose_ids]
+                self.assertTrue(
+                    all(pose["source"].endswith("_v2.png") for pose in poses)
+                )
+                self.assertEqual(
+                    len({json.dumps(pose["cells"], sort_keys=True) for pose in poses}),
+                    4,
+                )
+                self.assertEqual(
+                    [pose["phase"] for pose in poses],
+                    [0.0, 0.25, 0.5, 0.75],
+                )
+                self.assertEqual(
+                    {tuple(pose["root_anchor"]) for pose in poses},
+                    {(36, 95)},
+                )
+
+    def test_v6_walk_and_turn_anchors_land_on_authored_pixels(self):
+        library = json.loads(
+            (
+                ROOT
+                / "wizard_avatar"
+                / "definitions"
+                / "reference_avatar_pose_cells.json"
+            ).read_text(encoding="utf-8")
+        )
+        by_id = {pose["id"]: pose for pose in library["poses"]}
+        pose_ids = {
+            *(f"walk_profile_left_{phase}" for phase in (
+                "contact_left",
+                "passing_left_to_right",
+                "contact_right",
+                "passing_right_to_left",
+            )),
+            *(f"walk_profile_right_{phase}" for phase in (
+                "contact_left",
+                "passing_left_to_right",
+                "contact_right",
+                "passing_right_to_left",
+            )),
+            "turn_south_east_33",
+            "turn_south_east_67",
+            "turn_front_crossover_plant",
+            "turn_south_west_33",
+            "turn_south_west_67",
+        }
+        required = {
+            "left_eye",
+            "right_eye",
+            "mouth",
+            "left_foot",
+            "right_foot",
+            "left_hand",
+            "right_hand",
+            "staff_hand",
+            "staff_tip",
+        }
+        for pose_id in pose_ids:
+            with self.subTest(pose_id=pose_id):
+                pose = by_id[pose_id]
+                occupied = {(cell["x"], cell["y"]) for cell in pose["cells"]}
+                self.assertTrue(required.issubset(pose["anchors"]))
+                for anchor_id in required:
+                    self.assertIn(tuple(pose["anchors"][anchor_id]), occupied)
+                self.assertGreaterEqual(pose["anchors"]["left_foot"][1], 83)
+                self.assertGreaterEqual(pose["anchors"]["right_foot"][1], 83)
 
     def test_front_stop_inbetweens_are_baked_ordered_pixel_graphs(self):
         library = json.loads(

@@ -1,5 +1,5 @@
 {
-  "version": 87,
+  "version": 88,
   "asset_set_id": "wizardjoe-reference-motion-v1",
   "description": "Source pose PNGs for the repeatable WizardJoe square-cell pose library.",
   "canonical": {
@@ -1708,6 +1708,397 @@
         "walk",
         "passing",
         "derived_pixel_graph"
+      ]
+    },
+    {
+      "id": "walk_profile_left_contact_left",
+      "source": "walk_profile_left_contact_a_v2.png",
+      "description": "authored west-facing walk contact with left support",
+      "facing": "west",
+      "locomotion": "walking",
+      "actions": [
+        "walking"
+      ],
+      "phase": 0.0,
+      "anchor_offsets": {
+        "left_eye": [-8, -70],
+        "right_eye": [-7, -70],
+        "mouth": [-9, -64],
+        "left_foot": [-12, -3],
+        "right_foot": [6, -3],
+        "left_hand": [8, -30],
+        "right_hand": [-19, -44],
+        "staff_hand": [-19, -44],
+        "staff_tip": [-22, -83]
+      },
+      "tags": [
+        "profile",
+        "left",
+        "walk",
+        "contact",
+        "left_support",
+        "authored_pixel_graph",
+        "v6_resubmission"
+      ]
+    },
+    {
+      "id": "walk_profile_left_passing_left_to_right",
+      "source": "walk_profile_left_passing_a_v2.png",
+      "description": "authored west-facing passing pose from left to right support",
+      "facing": "west",
+      "locomotion": "walking",
+      "actions": [
+        "walking"
+      ],
+      "phase": 0.25,
+      "anchor_offsets": {
+        "left_eye": [-7, -70],
+        "right_eye": [-6, -70],
+        "mouth": [-8, -64],
+        "left_foot": [-7, -3],
+        "right_foot": [12, -5],
+        "left_hand": [6, -30],
+        "right_hand": [-19, -44],
+        "staff_hand": [-19, -44],
+        "staff_tip": [-22, -83]
+      },
+      "tags": [
+        "profile",
+        "left",
+        "walk",
+        "passing",
+        "authored_pixel_graph",
+        "v6_resubmission"
+      ]
+    },
+    {
+      "id": "walk_profile_left_contact_right",
+      "source": "walk_profile_left_contact_b_v2.png",
+      "description": "authored west-facing walk contact with right support",
+      "facing": "west",
+      "locomotion": "walking",
+      "actions": [
+        "walking"
+      ],
+      "phase": 0.5,
+      "anchor_offsets": {
+        "left_eye": [-7, -70],
+        "right_eye": [-6, -70],
+        "mouth": [-8, -64],
+        "left_foot": [7, -4],
+        "right_foot": [-11, -3],
+        "left_hand": [9, -30],
+        "right_hand": [-18, -44],
+        "staff_hand": [-18, -44],
+        "staff_tip": [-22, -83]
+      },
+      "tags": [
+        "profile",
+        "left",
+        "walk",
+        "contact",
+        "right_support",
+        "authored_pixel_graph",
+        "v6_resubmission"
+      ]
+    },
+    {
+      "id": "walk_profile_left_passing_right_to_left",
+      "source": "walk_profile_left_passing_b_v2.png",
+      "description": "authored west-facing passing pose from right to left support",
+      "facing": "west",
+      "locomotion": "walking",
+      "actions": [
+        "walking"
+      ],
+      "phase": 0.75,
+      "anchor_offsets": {
+        "left_eye": [-6, -70],
+        "right_eye": [-5, -70],
+        "mouth": [-7, -64],
+        "left_foot": [16, -7],
+        "right_foot": [-8, -3],
+        "left_hand": [8, -30],
+        "right_hand": [-19, -44],
+        "staff_hand": [-19, -44],
+        "staff_tip": [-22, -83]
+      },
+      "tags": [
+        "profile",
+        "left",
+        "walk",
+        "passing",
+        "authored_pixel_graph",
+        "v6_resubmission"
+      ]
+    },
+    {
+      "id": "walk_profile_right_contact_left",
+      "source": "walk_profile_right_contact_a_v2.png",
+      "description": "authored east-facing walk contact with left support",
+      "facing": "east",
+      "locomotion": "walking",
+      "actions": [
+        "walking"
+      ],
+      "phase": 0.0,
+      "anchor_offsets": {
+        "left_eye": [7, -70],
+        "right_eye": [8, -70],
+        "mouth": [10, -64],
+        "left_foot": [8, -3],
+        "right_foot": [-10, -4],
+        "left_hand": [-7, -29],
+        "right_hand": [22, -42],
+        "staff_hand": [22, -42],
+        "staff_tip": [26, -77]
+      },
+      "tags": [
+        "profile",
+        "right",
+        "walk",
+        "contact",
+        "left_support",
+        "authored_pixel_graph",
+        "v6_resubmission"
+      ]
+    },
+    {
+      "id": "walk_profile_right_passing_left_to_right",
+      "source": "walk_profile_right_passing_a_v2.png",
+      "description": "authored east-facing passing pose from left to right support",
+      "facing": "east",
+      "locomotion": "walking",
+      "actions": [
+        "walking"
+      ],
+      "phase": 0.25,
+      "anchor_offsets": {
+        "left_eye": [7, -70],
+        "right_eye": [8, -70],
+        "mouth": [10, -64],
+        "left_foot": [-12, -3],
+        "right_foot": [4, -3],
+        "left_hand": [-7, -29],
+        "right_hand": [22, -42],
+        "staff_hand": [22, -42],
+        "staff_tip": [26, -77]
+      },
+      "tags": [
+        "profile",
+        "right",
+        "walk",
+        "passing",
+        "authored_pixel_graph",
+        "v6_resubmission"
+      ]
+    },
+    {
+      "id": "walk_profile_right_contact_right",
+      "source": "walk_profile_right_contact_b_v2.png",
+      "description": "authored east-facing walk contact with right support",
+      "facing": "east",
+      "locomotion": "walking",
+      "actions": [
+        "walking"
+      ],
+      "phase": 0.5,
+      "anchor_offsets": {
+        "left_eye": [7, -70],
+        "right_eye": [8, -70],
+        "mouth": [10, -64],
+        "left_foot": [-13, -4],
+        "right_foot": [12, -3],
+        "left_hand": [-7, -29],
+        "right_hand": [22, -42],
+        "staff_hand": [22, -42],
+        "staff_tip": [26, -77]
+      },
+      "tags": [
+        "profile",
+        "right",
+        "walk",
+        "contact",
+        "right_support",
+        "authored_pixel_graph",
+        "v6_resubmission"
+      ]
+    },
+    {
+      "id": "walk_profile_right_passing_right_to_left",
+      "source": "walk_profile_right_passing_b_v2.png",
+      "description": "authored east-facing passing pose from right to left support",
+      "facing": "east",
+      "locomotion": "walking",
+      "actions": [
+        "walking"
+      ],
+      "phase": 0.75,
+      "anchor_offsets": {
+        "left_eye": [7, -70],
+        "right_eye": [8, -70],
+        "mouth": [10, -64],
+        "left_foot": [-12, -5],
+        "right_foot": [6, -3],
+        "left_hand": [-7, -29],
+        "right_hand": [22, -42],
+        "staff_hand": [22, -42],
+        "staff_tip": [26, -77]
+      },
+      "tags": [
+        "profile",
+        "right",
+        "walk",
+        "passing",
+        "authored_pixel_graph",
+        "v6_resubmission"
+      ]
+    },
+    {
+      "id": "turn_south_east_33",
+      "source": "turn_southeast_pivot_v2.png",
+      "description": "authored front-dominant southeast planted pivot",
+      "facing": "southeast",
+      "locomotion": "walking",
+      "actions": [
+        "walking"
+      ],
+      "phase": null,
+      "anchor_offsets": {
+        "left_eye": [0, -69],
+        "right_eye": [7, -69],
+        "mouth": [3, -64],
+        "left_foot": [-14, -3],
+        "right_foot": [18, -3],
+        "left_hand": [0, -30],
+        "right_hand": [17, -44],
+        "staff_hand": [17, -44],
+        "staff_tip": [25, -86]
+      },
+      "tags": [
+        "turn",
+        "southeast",
+        "front_dominant",
+        "authored_pixel_graph",
+        "v6_resubmission"
+      ]
+    },
+    {
+      "id": "turn_south_east_67",
+      "source": "turn_east_brake_v2.png",
+      "minimum_alpha_component_pixels": 128,
+      "description": "authored profile-dominant southeast planted pivot",
+      "facing": "southeast",
+      "locomotion": "walking",
+      "actions": [
+        "walking"
+      ],
+      "phase": null,
+      "anchor_offsets": {
+        "left_eye": [8, -68],
+        "right_eye": [10, -68],
+        "mouth": [12, -63],
+        "left_foot": [-17, -3],
+        "right_foot": [11, -3],
+        "left_hand": [-1, -29],
+        "right_hand": [21, -40],
+        "staff_hand": [21, -40],
+        "staff_tip": [28, -78]
+      },
+      "tags": [
+        "turn",
+        "southeast",
+        "profile_dominant",
+        "authored_pixel_graph",
+        "v6_resubmission"
+      ]
+    },
+    {
+      "id": "turn_front_crossover_plant",
+      "source": "turn_south_crossover_v2.png",
+      "description": "authored front-facing crossover plant for reversal",
+      "facing": "south",
+      "locomotion": "walking",
+      "actions": [
+        "walking"
+      ],
+      "phase": null,
+      "anchor_offsets": {
+        "left_eye": [-5, -72],
+        "right_eye": [6, -72],
+        "mouth": [0, -67],
+        "left_foot": [-1, -3],
+        "right_foot": [-7, -12],
+        "left_hand": [-8, -34],
+        "right_hand": [18, -50],
+        "staff_hand": [18, -50],
+        "staff_tip": [19, -88]
+      },
+      "tags": [
+        "turn",
+        "south",
+        "crossover",
+        "plant",
+        "authored_pixel_graph",
+        "v6_resubmission"
+      ]
+    },
+    {
+      "id": "turn_south_west_33",
+      "source": "turn_south_west_33_v2.png",
+      "description": "authored front-dominant southwest planted pivot",
+      "facing": "southwest",
+      "locomotion": "walking",
+      "actions": [
+        "walking"
+      ],
+      "phase": null,
+      "anchor_offsets": {
+        "left_eye": [-12, -68],
+        "right_eye": [-7, -68],
+        "mouth": [-10, -63],
+        "left_foot": [-10, -3],
+        "right_foot": [6, -4],
+        "left_hand": [-4, -33],
+        "right_hand": [-18, -44],
+        "staff_hand": [-18, -44],
+        "staff_tip": [-19, -83]
+      },
+      "tags": [
+        "turn",
+        "southwest",
+        "front_dominant",
+        "authored_pixel_graph",
+        "v6_resubmission"
+      ]
+    },
+    {
+      "id": "turn_south_west_67",
+      "source": "turn_south_west_67_v2.png",
+      "description": "authored profile-dominant southwest planted pivot",
+      "facing": "southwest",
+      "locomotion": "walking",
+      "actions": [
+        "walking"
+      ],
+      "phase": null,
+      "anchor_offsets": {
+        "left_eye": [-8, -69],
+        "right_eye": [-7, -69],
+        "mouth": [-11, -64],
+        "left_foot": [-7, -3],
+        "right_foot": [5, -4],
+        "left_hand": [-8, -33],
+        "right_hand": [-18, -46],
+        "staff_hand": [-18, -46],
+        "staff_tip": [-20, -83]
+      },
+      "tags": [
+        "turn",
+        "southwest",
+        "profile_dominant",
+        "authored_pixel_graph",
+        "v6_resubmission"
       ]
     },
     {
