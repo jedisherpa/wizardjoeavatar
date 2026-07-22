@@ -521,6 +521,15 @@
       "staff_mode": "carried",
       "capability_tier": "A"
     },
+    "turn_south_east_50": {
+      "roles": ["clip_sample", "transition_sample"],
+      "altitude_class": "grounded",
+      "support_contact": "right_foot",
+      "planted_anchor": "right_foot",
+      "wing_mode": "extended",
+      "staff_mode": "carried",
+      "capability_tier": "A"
+    },
     "turn_south_east_67": {
       "roles": ["clip_sample", "transition_sample"],
       "altitude_class": "grounded",
@@ -540,6 +549,15 @@
       "capability_tier": "A"
     },
     "turn_south_west_33": {
+      "roles": ["clip_sample", "transition_sample"],
+      "altitude_class": "grounded",
+      "support_contact": "left_foot",
+      "planted_anchor": "left_foot",
+      "wing_mode": "extended",
+      "staff_mode": "carried",
+      "capability_tier": "A"
+    },
+    "turn_south_west_50": {
       "roles": ["clip_sample", "transition_sample"],
       "altitude_class": "grounded",
       "support_contact": "left_foot",
@@ -2602,6 +2620,13 @@
           "markers": []
         },
         {
+          "pose_id": "turn_south_east_50",
+          "duration_frames": 2,
+          "support_contact": "right_foot",
+          "planted_anchor": "right_foot",
+          "markers": []
+        },
+        {
           "pose_id": "turn_south_east_67",
           "duration_frames": 3,
           "support_contact": "right_foot",
@@ -2646,6 +2671,13 @@
         {
           "pose_id": "turn_south_west_33",
           "duration_frames": 3,
+          "support_contact": "left_foot",
+          "planted_anchor": "left_foot",
+          "markers": []
+        },
+        {
+          "pose_id": "turn_south_west_50",
+          "duration_frames": 2,
           "support_contact": "left_foot",
           "planted_anchor": "left_foot",
           "markers": []
@@ -2700,6 +2732,13 @@
           "markers": []
         },
         {
+          "pose_id": "turn_south_east_50",
+          "duration_frames": 2,
+          "support_contact": "right_foot",
+          "planted_anchor": "right_foot",
+          "markers": []
+        },
+        {
           "pose_id": "turn_south_east_33",
           "duration_frames": 3,
           "support_contact": "right_foot",
@@ -2744,6 +2783,13 @@
         {
           "pose_id": "turn_south_west_33",
           "duration_frames": 3,
+          "support_contact": "left_foot",
+          "planted_anchor": "left_foot",
+          "markers": []
+        },
+        {
+          "pose_id": "turn_south_west_50",
+          "duration_frames": 2,
           "support_contact": "left_foot",
           "planted_anchor": "left_foot",
           "markers": []
@@ -2798,6 +2844,13 @@
           "markers": []
         },
         {
+          "pose_id": "turn_south_west_50",
+          "duration_frames": 2,
+          "support_contact": "left_foot",
+          "planted_anchor": "left_foot",
+          "markers": []
+        },
+        {
           "pose_id": "turn_south_west_33",
           "duration_frames": 3,
           "support_contact": "left_foot",
@@ -2817,6 +2870,13 @@
           "support_contact": "right_foot",
           "planted_anchor": "right_foot",
           "markers": [{"id": "right_contact", "frame_offset": 0}]
+        },
+        {
+          "pose_id": "turn_south_east_50",
+          "duration_frames": 2,
+          "support_contact": "right_foot",
+          "planted_anchor": "right_foot",
+          "markers": []
         },
         {
           "pose_id": "turn_south_east_67",

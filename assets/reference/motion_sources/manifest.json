@@ -2014,6 +2014,29 @@
       ]
     },
     {
+      "id": "turn_south_east_50",
+      "source": "derived_landmark_warp:turn_south_east_33+turn_south_east_67@500/1000:lock=right_foot",
+      "description": "planted southeast pivot midpoint",
+      "derived_landmark_warp": {
+        "from_pose_id": "turn_south_east_33",
+        "to_pose_id": "turn_south_east_67",
+        "progress_milli": 500,
+        "lock_anchor": "right_foot",
+        "method": "inverse_sample"
+      },
+      "facing": "southeast",
+      "locomotion": "walking",
+      "actions": ["walking"],
+      "phase": null,
+      "tags": [
+        "turn",
+        "southeast",
+        "inbetween",
+        "derived_pixel_graph",
+        "v6_continuity"
+      ]
+    },
+    {
       "id": "turn_front_crossover_plant",
       "source": "turn_south_crossover_v2.png",
       "description": "authored front-facing crossover plant for reversal",
@@ -2099,6 +2122,29 @@
         "profile_dominant",
         "authored_pixel_graph",
         "v6_resubmission"
+      ]
+    },
+    {
+      "id": "turn_south_west_50",
+      "source": "derived_landmark_warp:turn_south_west_33+turn_south_west_67@500/1000:lock=left_foot",
+      "description": "planted southwest pivot midpoint",
+      "derived_landmark_warp": {
+        "from_pose_id": "turn_south_west_33",
+        "to_pose_id": "turn_south_west_67",
+        "progress_milli": 500,
+        "lock_anchor": "left_foot",
+        "method": "inverse_sample"
+      },
+      "facing": "southwest",
+      "locomotion": "walking",
+      "actions": ["walking"],
+      "phase": null,
+      "tags": [
+        "turn",
+        "southwest",
+        "inbetween",
+        "derived_pixel_graph",
+        "v6_continuity"
       ]
     },
     {

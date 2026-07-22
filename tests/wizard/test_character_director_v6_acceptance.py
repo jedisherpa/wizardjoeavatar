@@ -18,7 +18,7 @@ def fixture():
         "scenario_program": {
             "program_id": "v6-directional-walk",
             "acceptance_scenario": "V6",
-            "total_duration_seconds": 8.75,
+            "total_duration_seconds": 9.25,
         },
         "scenarios": [{"name": name} for name in EXPECTED_SCENARIOS],
         "init": {"cols": 240, "rows": 135, "fps": 24.0},
@@ -90,6 +90,7 @@ def fixture():
         "turn_front_to_east_entry_50",
         "turn_front_to_east_entry_75",
         "turn_south_east_33",
+        "turn_south_east_50",
         "turn_south_east_67",
         "walk_profile_right_contact_left",
     )
@@ -110,13 +111,13 @@ def fixture():
         progress = (local + 1) / EXPECTED_FRAME_COUNTS["v6-turn-east"]
         facing = "south" if local < 4 else ("southeast" if local < 8 else "east")
         support = contact(local)
-        if local < 21:
+        if local < 24:
             clip = "turn_front_to_east"
             pose = east_turn_poses[min(local // 3, len(east_turn_poses) - 1)]
         else:
             clip = "walk_right"
-            pose = right_gait[((local - 21) // 4) % len(right_gait)]
-            if local == 21:
+            pose = right_gait[((local - 24) // 4) % len(right_gait)]
+            if local == 24:
                 support = "left_foot"
         append("v6-turn-east", (2.4 * progress, 3.8), facing, clip, pose, support)
 
@@ -124,6 +125,7 @@ def fixture():
     reversal_poses = (
         "walk_profile_right_contact_right",
         "turn_south_east_67",
+        "turn_south_east_50",
         "turn_south_east_33",
         "turn_front_crossover_plant",
         "turn_crossover_to_west_25",
@@ -131,6 +133,7 @@ def fixture():
         "turn_crossover_to_west_75",
         "turn_crossover_to_west_875",
         "turn_south_west_33",
+        "turn_south_west_50",
         "turn_south_west_67",
         "walk_profile_left_contact_left",
     )
@@ -144,13 +147,13 @@ def fixture():
             "west"
         )
         support = contact(local)
-        if local < 33:
+        if local < 39:
             clip = "reverse_east_to_west"
             pose = reversal_poses[min(local // 3, len(reversal_poses) - 1)]
         elif local < 98:
             clip = "walk_left"
-            pose = left_gait[((local - 33) // 4) % len(left_gait)]
-            if local == 33:
+            pose = left_gait[((local - 39) // 4) % len(left_gait)]
+            if local == 39:
                 support = "left_foot"
         else:
             clip = "stop_left"

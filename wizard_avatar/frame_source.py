@@ -1162,6 +1162,9 @@ class ProceduralWizardFrameSource:
             return None
         transition_target = state.animation_transition_target_node_id or ""
         transition_owns_body = state.animation_clip_id in {
+            "walk_front",
+            "walk_left",
+            "walk_right",
             "turn_front_to_east",
             "turn_front_to_west",
             "reverse_east_to_west",

@@ -31,7 +31,7 @@ EXPECTED_SCENARIOS = (
 EXPECTED_FRAME_COUNTS = {
     "v6-idle": 12,
     "v6-south-approach": 24,
-    "v6-turn-east": 42,
+    "v6-turn-east": 54,
     "v6-reverse-west": 108,
     "v6-stop-settle": 24,
 }
@@ -68,12 +68,14 @@ TRANSITION_POSE_SEQUENCES = {
         "turn_front_to_east_entry_50",
         "turn_front_to_east_entry_75",
         "turn_south_east_33",
+        "turn_south_east_50",
         "turn_south_east_67",
         "walk_profile_right_contact_left",
     ),
     "reverse_east_to_west": (
         "walk_profile_right_contact_right",
         "turn_south_east_67",
+        "turn_south_east_50",
         "turn_south_east_33",
         "turn_front_crossover_plant",
         "turn_crossover_to_west_25",
@@ -81,6 +83,7 @@ TRANSITION_POSE_SEQUENCES = {
         "turn_crossover_to_west_75",
         "turn_crossover_to_west_875",
         "turn_south_west_33",
+        "turn_south_west_50",
         "turn_south_west_67",
         "walk_profile_left_contact_left",
     ),
@@ -280,7 +283,7 @@ def analyze_v6(
         isinstance(program, Mapping)
         and program.get("program_id") == "v6-directional-walk"
         and program.get("acceptance_scenario") == "V6"
-        and program.get("total_duration_seconds") == 8.75,
+        and program.get("total_duration_seconds") == 9.25,
         program,
     )
     scenario_names = tuple(item.get("name") for item in manifest.get("scenarios", ()))

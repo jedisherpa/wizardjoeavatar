@@ -44,7 +44,7 @@ class FrameSourceTests(unittest.TestCase):
             pose_id="walk_profile_right_contact_left",
             animation_clip_id="walk_right",
         )
-        self.assertIsNone(source._authored_body_facing(walking))
+        self.assertEqual(source._authored_body_facing(walking), "east")
 
     def test_presentation_blink_latches_short_input_for_four_frames(self):
         source = ProceduralWizardFrameSource()
