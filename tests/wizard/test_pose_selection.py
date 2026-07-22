@@ -266,7 +266,7 @@ class PoseSelectionTests(unittest.TestCase):
                 "ground_stop_left",
                 "profile_left",
                 128,
-                ("walk_front_left", "walk_front_right", "front_idle", "profile_left"),
+                ("profile_left",),
             ),
             (
                 "west",
@@ -275,7 +275,7 @@ class PoseSelectionTests(unittest.TestCase):
                 "ground_stop_left",
                 "profile_left",
                 120,
-                ("walk_front_right", "front_idle", "profile_left"),
+                ("profile_left",),
             ),
             (
                 "east",
@@ -284,7 +284,7 @@ class PoseSelectionTests(unittest.TestCase):
                 "ground_stop_right",
                 "profile_right",
                 128,
-                ("walk_front_left", "walk_front_right", "front_idle", "profile_right"),
+                ("profile_right",),
             ),
             (
                 "east",
@@ -293,7 +293,7 @@ class PoseSelectionTests(unittest.TestCase):
                 "ground_stop_right",
                 "profile_right",
                 120,
-                ("walk_front_right", "front_idle", "profile_right"),
+                ("profile_right",),
             ),
         )
         for facing, phase, support, stop_node, idle_pose, settled_tick, pose_order in cases:
@@ -302,8 +302,12 @@ class PoseSelectionTests(unittest.TestCase):
                     facing=facing,
                     locomotion="idle",
                     walk_phase=phase,
-                    animation_node_id="ground_walk",
-                    animation_clip_id="walk_front",
+                    animation_node_id=(
+                        "ground_walk_left" if facing == "west" else "ground_walk_right"
+                    ),
+                    animation_clip_id=(
+                        "walk_left" if facing == "west" else "walk_right"
+                    ),
                     animation_clip_tick=100,
                     simulation_tick=100,
                 )
@@ -331,7 +335,10 @@ class PoseSelectionTests(unittest.TestCase):
                 self.assertIsNone(state.animation_transition_id)
                 observed_order = tuple(dict.fromkeys(observed_poses))
                 self.assertEqual(observed_order, pose_order)
-                entry_edge = graph.select_transition("ground_walk", stop_node)
+                entry_edge = graph.select_transition(
+                    "ground_walk_left" if facing == "west" else "ground_walk_right",
+                    stop_node,
+                )
                 exit_edge = graph.select_transition(stop_node, expected_idle_node)
                 self.assertIsNotNone(entry_edge)
                 self.assertIsNotNone(exit_edge)
@@ -366,7 +373,7 @@ class PoseSelectionTests(unittest.TestCase):
 
         self.assertEqual(state.animation_node_id, "ground_stop_right")
         self.assertEqual(contacted.contact, "right_foot")
-        self.assertEqual(contacted.pose_id, "walk_front_right")
+        self.assertEqual(contacted.pose_id, "profile_right")
         self.assertEqual(state.animation_transition_generation, 1)
 
     def test_action_channels_select_available_action_poses(self):

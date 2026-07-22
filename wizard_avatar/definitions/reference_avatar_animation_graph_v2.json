@@ -1871,7 +1871,7 @@
         "turn_views"
       ]
     },
-    "idle_left": {
+  "idle_left": {
       "clip_id": "idle_left",
       "family": "idle",
       "supported_facings": [
@@ -1879,7 +1879,7 @@
       ],
       "loop_mode": "loop",
       "phase_source": "time",
-      "root_policy": "fixed",
+    "root_policy": "contact_locked",
       "minimum_hold_ticks": 1,
       "interrupt_policy": "immediate",
       "channel_ownership": [
@@ -1919,7 +1919,7 @@
         "turn_views"
       ]
     },
-    "idle_right": {
+  "idle_right": {
       "clip_id": "idle_right",
       "family": "idle",
       "supported_facings": [
@@ -1927,7 +1927,7 @@
       ],
       "loop_mode": "loop",
       "phase_source": "time",
-      "root_policy": "fixed",
+    "root_policy": "contact_locked",
       "minimum_hold_ticks": 1,
       "interrupt_policy": "immediate",
       "channel_ownership": [
@@ -2571,7 +2571,7 @@
       "secondary_curves": {"body": "walk_bob", "staff": "walk_staff_lag", "robe": "walk_robe_lag"},
       "legal_successors": ["idle_front", "walk_front", "walk_back"]
     },
-    "stop_left": {
+  "stop_left": {
       "clip_id": "stop_left",
       "family": "transition",
       "supported_facings": [
@@ -2589,7 +2589,7 @@
       ],
       "samples": [
         {
-          "pose_id": "walk_front_left",
+        "pose_id": "profile_left",
           "duration_frames": 3,
           "support_contact": "left_foot",
           "planted_anchor": "left_foot",
@@ -2601,7 +2601,7 @@
           ]
         },
         {
-          "pose_id": "walk_front_right",
+        "pose_id": "profile_left",
           "duration_frames": 3,
           "support_contact": "right_foot",
           "planted_anchor": "right_foot",
@@ -2613,7 +2613,7 @@
           ]
         },
         {
-          "pose_id": "front_idle",
+        "pose_id": "profile_left",
           "duration_frames": 3,
           "support_contact": "both_feet",
           "planted_anchor": "left_foot",
@@ -2656,7 +2656,7 @@
         "walk_back"
       ]
     },
-    "stop_right": {
+  "stop_right": {
       "clip_id": "stop_right",
       "family": "transition",
       "supported_facings": [
@@ -2674,7 +2674,7 @@
       ],
       "samples": [
         {
-          "pose_id": "walk_front_left",
+        "pose_id": "profile_right",
           "duration_frames": 3,
           "support_contact": "left_foot",
           "planted_anchor": "left_foot",
@@ -2686,7 +2686,7 @@
           ]
         },
         {
-          "pose_id": "walk_front_right",
+        "pose_id": "profile_right",
           "duration_frames": 3,
           "support_contact": "right_foot",
           "planted_anchor": "right_foot",
@@ -2698,7 +2698,7 @@
           ]
         },
         {
-          "pose_id": "front_idle",
+        "pose_id": "profile_right",
           "duration_frames": 3,
           "support_contact": "both_feet",
           "planted_anchor": "right_foot",

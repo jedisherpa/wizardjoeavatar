@@ -91,6 +91,29 @@ class ContactVerifierTests(unittest.TestCase):
         self.assertLessEqual(report.maximum_planted_drift_cells, 1e-6)
         self.assertLessEqual(report.maximum_root_residual_cells, 1e-6)
 
+    def test_profile_stop_keeps_contact_locked_through_idle(self):
+        source = ProceduralWizardFrameSource()
+        result = source.apply_command_sync(
+            WizardCommand("move", {"x": 0.6, "z": 5.0, "speed": 1.25})
+        )
+        self.assertTrue(result.ok, result.message)
+        records = []
+        for _ in range(72):
+            source.advance_simulation(1 / source.fps)
+            candidate = source.render_captured_candidate_sync(
+                source.capture_render_state()
+            )
+            source.commit_render_candidate(candidate)
+            records.append(candidate.animation_truth)
+
+        clips = {record.animation_clip_id for record in records}
+        report = verify_contact_trace(records)
+
+        self.assertIn("stop_right", clips)
+        self.assertIn("idle_right", clips)
+        self.assertTrue(report.passed, report.to_mapping())
+        self.assertLessEqual(report.maximum_planted_drift_cells, 1.0)
+
     def test_strict_raster_evidence_accepts_visible_planted_cells(self):
         records, frames = self._walk_evidence()
         sample = next(iter(frames.values()))
