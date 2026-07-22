@@ -51,20 +51,20 @@ class CharacterCapabilityManifestTests(unittest.TestCase):
         )
         self.assertEqual(
             self.manifest["manifest_sha256"],
-            "sha256:48f2727977a8bd5bfa1620702d8584d6407f437f5d4d359885a39db4747202e0",
+            "sha256:3f9ff9f185a9bd2c20be78718bd03b80e2fcf259c7d96d0afdd03e275448efa3",
         )
 
     def test_current_character_counts_and_admission_are_truthful(self):
         counts = self.manifest["counts"]
-        self.assertEqual(counts["clip_count"], 30)
-        self.assertEqual(counts["node_count"], 30)
-        self.assertEqual(counts["transition_count"], 61)
-        self.assertEqual(counts["pose_count"], 134)
-        self.assertEqual(counts["graph_admitted_pose_count"], 80)
-        self.assertEqual(counts["diagnostic_only_pose_count"], 54)
+        self.assertEqual(counts["clip_count"], 40)
+        self.assertEqual(counts["node_count"], 40)
+        self.assertEqual(counts["transition_count"], 91)
+        self.assertEqual(counts["pose_count"], 184)
+        self.assertEqual(counts["graph_admitted_pose_count"], 128)
+        self.assertEqual(counts["diagnostic_only_pose_count"], 56)
         self.assertEqual(counts["expression_count"], 10)
         self.assertEqual(counts["mouth_shape_count"], 7)
-        self.assertEqual(counts["capability_count"], 51)
+        self.assertEqual(counts["capability_count"], 61)
         self.assertEqual(counts["diagnostic_count"], 3)
 
         admitted = {
@@ -77,8 +77,8 @@ class CharacterCapabilityManifestTests(unittest.TestCase):
             for pose in self.manifest["poses"]
             if pose["admission"] == "diagnostic_only"
         }
-        self.assertEqual(len(admitted), 80)
-        self.assertEqual(len(diagnostic), 54)
+        self.assertEqual(len(admitted), 128)
+        self.assertEqual(len(diagnostic), 56)
         self.assertFalse(admitted & diagnostic)
         self.assertTrue(all(pose_id.endswith("_close") for pose_id in diagnostic if "_close" in pose_id))
         self.assertFalse(any(pose_id.endswith("_close") for pose_id in admitted))

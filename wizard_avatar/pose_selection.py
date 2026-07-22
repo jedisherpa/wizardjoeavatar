@@ -392,6 +392,20 @@ def _transition_gate_is_open(
         if not markers and not any(reached(marker) for marker in clip.exit_markers):
             return False
 
+    if (
+        transition.contact_policy == "match"
+        and state.animation_transition_target_clip_id == "stop_left"
+    ):
+        target_clip_id = state.animation_transition_target_clip_id
+        target_clip = graph.clips.get(target_clip_id or "")
+        if (
+            target_clip is not None
+            and evaluation.support_contact not in {
+                sample.support_contact for sample in target_clip.samples
+            }
+        ):
+            return False
+
     window = transition.interrupt_window
     if window == "contact_marker":
         if not _at_contact_boundary(evaluation):

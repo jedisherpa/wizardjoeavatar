@@ -6,6 +6,11 @@ from tools.analyze_character_director_v6 import (
     EXPECTED_SCENARIOS,
     analyze_v6,
 )
+from wizard_avatar.animation_graph import load_pose_catalog
+from wizard_avatar.reference_avatar import reference_pose_anchor
+
+
+POSE_CATALOG = load_pose_catalog()
 
 
 def fixture():
@@ -29,6 +34,8 @@ def fixture():
 
     def append(scenario, root, facing, clip, pose, contact):
         nonlocal frame_index
+        facing = POSE_CATALOG[pose].facing
+        staff_tip = reference_pose_anchor(pose, "staff_tip")
         manifest["frames"].append(
             {"frame_index": frame_index, "capture_owned": True, "scenario": scenario}
         )
@@ -50,6 +57,10 @@ def fixture():
                     "min_y": 18,
                     "max_y": 126,
                 },
+                "presented_root_stage": {"x": 0.0, "y": 0.0},
+                "staff_tip_stage": {"x": staff_tip[0], "y": staff_tip[1]},
+                "render_scale_x": 1.0,
+                "render_scale_y": 1.0,
             }
         )
         frame_index += 1
@@ -75,6 +86,9 @@ def fixture():
 
     east_turn_poses = (
         "walk_front_right",
+        "turn_front_to_east_entry_25",
+        "turn_front_to_east_entry_50",
+        "turn_front_to_east_entry_75",
         "turn_south_east_33",
         "turn_south_east_67",
         "walk_profile_right_contact_left",
@@ -96,13 +110,13 @@ def fixture():
         progress = (local + 1) / EXPECTED_FRAME_COUNTS["v6-turn-east"]
         facing = "south" if local < 4 else ("southeast" if local < 8 else "east")
         support = contact(local)
-        if local < 12:
+        if local < 21:
             clip = "turn_front_to_east"
             pose = east_turn_poses[min(local // 3, len(east_turn_poses) - 1)]
         else:
             clip = "walk_right"
-            pose = right_gait[((local - 12) // 4) % len(right_gait)]
-            if local == 12:
+            pose = right_gait[((local - 21) // 4) % len(right_gait)]
+            if local == 21:
                 support = "left_foot"
         append("v6-turn-east", (2.4 * progress, 3.8), facing, clip, pose, support)
 
@@ -112,6 +126,10 @@ def fixture():
         "turn_south_east_67",
         "turn_south_east_33",
         "turn_front_crossover_plant",
+        "turn_crossover_to_west_25",
+        "turn_crossover_to_west_50",
+        "turn_crossover_to_west_75",
+        "turn_crossover_to_west_875",
         "turn_south_west_33",
         "turn_south_west_67",
         "walk_profile_left_contact_left",
@@ -126,18 +144,25 @@ def fixture():
             "west"
         )
         support = contact(local)
-        if local < 21:
+        if local < 33:
             clip = "reverse_east_to_west"
             pose = reversal_poses[min(local // 3, len(reversal_poses) - 1)]
         elif local < 98:
             clip = "walk_left"
-            pose = left_gait[((local - 21) // 4) % len(left_gait)]
-            if local == 21:
+            pose = left_gait[((local - 33) // 4) % len(left_gait)]
+            if local == 33:
                 support = "left_foot"
         else:
             clip = "stop_left"
-            pose = "walk_front_left"
-            support = "left_foot"
+            stop_poses = (
+                "walk_profile_left_passing_left_to_right",
+                "stop_profile_left_from_left_25",
+                "stop_profile_left_from_left_50",
+                "stop_profile_left_from_left_75",
+                "stop_profile_left_from_left_100",
+            )
+            pose = stop_poses[min((local - 98) // 2, len(stop_poses) - 1)]
+            support = "both_feet" if pose.endswith("_100") else "left_foot"
         append("v6-reverse-west", (2.4 - 4.8 * progress, 3.8), facing, clip, pose, support)
 
     for _ in range(EXPECTED_FRAME_COUNTS["v6-stop-settle"]):
@@ -168,6 +193,42 @@ class CharacterDirectorV6AcceptanceTests(unittest.TestCase):
         report = analyze_v6(manifest, traces)
         self.assertFalse(report["passed"])
         self.assertFalse(check(report, "readable_90_degree_turn")["passed"])
+
+    def test_pose_facing_mismatch_fails_body_alignment_gate(self):
+        manifest, traces = fixture()
+        damaged = copy.deepcopy(traces)
+        target = next(
+            trace
+            for trace in damaged
+            if trace["rendered_pose_id"] == "turn_front_to_east_entry_50"
+        )
+        target["presented_facing"] = "east"
+        report = analyze_v6(manifest, damaged)
+        self.assertFalse(report["passed"])
+        self.assertFalse(check(report, "rendered_pose_facing_alignment")["passed"])
+
+    def test_staff_tip_teleport_fails_continuity_gate(self):
+        manifest, traces = fixture()
+        damaged = copy.deepcopy(traces)
+        target = next(
+            trace
+            for trace in damaged
+            if trace["rendered_pose_id"] == "turn_crossover_to_west_50"
+        )
+        target["staff_tip_stage"]["x"] += 30.0
+        report = analyze_v6(manifest, damaged)
+        self.assertFalse(report["passed"])
+        self.assertFalse(check(report, "turn_staff_path_continuity")["passed"])
+
+    def test_static_profile_stop_fails_performed_settle_gate(self):
+        manifest, traces = fixture()
+        damaged = copy.deepcopy(traces)
+        for trace in damaged:
+            if trace["animation_clip_id"] == "stop_left":
+                trace["rendered_pose_id"] = "profile_left"
+        report = analyze_v6(manifest, damaged)
+        self.assertFalse(report["passed"])
+        self.assertFalse(check(report, "target_stop_and_profile_settle")["passed"])
 
     def test_front_pose_used_for_side_travel_fails_alignment(self):
         manifest, traces = fixture()

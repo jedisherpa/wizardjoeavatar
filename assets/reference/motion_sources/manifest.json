@@ -2105,7 +2105,7 @@
       "id": "walk_front_left",
       "source": "walk_front_left.png",
       "description": "front walk cycle phase with left-foot lead",
-      "facing": "southwest",
+      "facing": "south",
       "locomotion": "walking",
       "actions": [
         "walking"
@@ -2121,14 +2121,16 @@
         "left_foot": [
           0,
           -3
-        ]
+        ],
+        "staff_hand": [20, -45],
+        "staff_tip": [22, -83]
       }
     },
     {
       "id": "walk_front_right",
       "source": "walk_front_right.png",
       "description": "front walk cycle phase with right-foot lead",
-      "facing": "southeast",
+      "facing": "south",
       "locomotion": "walking",
       "actions": [
         "walking"
@@ -2144,7 +2146,9 @@
         "right_foot": [
           3,
           -3
-        ]
+        ],
+        "staff_hand": [20, -45],
+        "staff_tip": [22, -83]
       }
     },
     {
@@ -8023,6 +8027,193 @@
           -50
         ]
       }
+    },
+    {
+      "id": "turn_front_to_east_entry_25",
+      "source": "derived_landmark_warp:walk_front_right+turn_south_east_33@250/1000:lock=right_foot",
+      "description": "planted front-to-east pivot at 25 percent",
+      "derived_landmark_warp": {
+        "from_pose_id": "walk_front_right",
+        "to_pose_id": "turn_south_east_33",
+        "progress_milli": 250,
+        "lock_anchor": "right_foot",
+        "method": "inverse_sample"
+      },
+      "facing": "south",
+      "locomotion": "walking",
+      "actions": ["walking"],
+      "phase": null,
+      "tags": ["turn", "southeast", "inbetween", "derived_pixel_graph", "v6_continuity"]
+    },
+    {
+      "id": "turn_front_to_east_entry_50",
+      "source": "derived_landmark_warp:walk_front_right+turn_south_east_33@500/1000:lock=right_foot",
+      "description": "planted front-to-east pivot at 50 percent",
+      "derived_landmark_warp": {
+        "from_pose_id": "walk_front_right",
+        "to_pose_id": "turn_south_east_33",
+        "progress_milli": 500,
+        "lock_anchor": "right_foot",
+        "method": "inverse_sample"
+      },
+      "facing": "southeast",
+      "locomotion": "walking",
+      "actions": ["walking"],
+      "phase": null,
+      "tags": ["turn", "southeast", "inbetween", "derived_pixel_graph", "v6_continuity"]
+    },
+    {
+      "id": "turn_front_to_east_entry_75",
+      "source": "derived_landmark_warp:walk_front_right+turn_south_east_33@750/1000:lock=right_foot",
+      "description": "planted front-to-east pivot at 75 percent",
+      "derived_landmark_warp": {
+        "from_pose_id": "walk_front_right",
+        "to_pose_id": "turn_south_east_33",
+        "progress_milli": 750,
+        "lock_anchor": "right_foot",
+        "method": "inverse_sample"
+      },
+      "facing": "southeast",
+      "locomotion": "walking",
+      "actions": ["walking"],
+      "phase": null,
+      "tags": ["turn", "southeast", "inbetween", "derived_pixel_graph", "v6_continuity"]
+    },
+    {
+      "id": "turn_crossover_to_west_25",
+      "source": "derived_landmark_warp:turn_front_crossover_plant+turn_south_west_33@250/1000:lock=left_foot",
+      "description": "planted reversal crossover-to-west pivot at 25 percent",
+      "derived_landmark_warp": {
+        "from_pose_id": "turn_front_crossover_plant",
+        "to_pose_id": "turn_south_west_33",
+        "progress_milli": 250,
+        "lock_anchor": "left_foot",
+        "method": "inverse_sample"
+      },
+      "facing": "south",
+      "locomotion": "walking",
+      "actions": ["walking"],
+      "phase": null,
+      "tags": ["turn", "southwest", "reversal", "inbetween", "derived_pixel_graph", "v6_continuity"]
+    },
+    {
+      "id": "turn_crossover_to_west_50",
+      "source": "derived_landmark_warp:turn_front_crossover_plant+turn_south_west_33@500/1000:lock=left_foot",
+      "description": "planted reversal crossover-to-west pivot at 50 percent",
+      "derived_landmark_warp": {
+        "from_pose_id": "turn_front_crossover_plant",
+        "to_pose_id": "turn_south_west_33",
+        "progress_milli": 500,
+        "lock_anchor": "left_foot",
+        "method": "inverse_sample"
+      },
+      "facing": "southwest",
+      "locomotion": "walking",
+      "actions": ["walking"],
+      "phase": null,
+      "tags": ["turn", "southwest", "reversal", "inbetween", "derived_pixel_graph", "v6_continuity"]
+    },
+    {
+      "id": "turn_crossover_to_west_75",
+      "source": "derived_landmark_warp:turn_front_crossover_plant+turn_south_west_33@750/1000:lock=left_foot",
+      "description": "planted reversal crossover-to-west pivot at 75 percent",
+      "derived_landmark_warp": {
+        "from_pose_id": "turn_front_crossover_plant",
+        "to_pose_id": "turn_south_west_33",
+        "progress_milli": 750,
+        "lock_anchor": "left_foot",
+        "method": "inverse_sample"
+      },
+      "facing": "southwest",
+      "locomotion": "walking",
+      "actions": ["walking"],
+      "phase": null,
+      "tags": ["turn", "southwest", "reversal", "inbetween", "derived_pixel_graph", "v6_continuity"]
+    },
+    {
+      "id": "turn_crossover_to_west_875",
+      "source": "derived_landmark_warp:turn_front_crossover_plant+turn_south_west_33@875/1000:lock=left_foot",
+      "description": "planted reversal crossover-to-west pivot at 87.5 percent",
+      "derived_landmark_warp": {
+        "from_pose_id": "turn_front_crossover_plant",
+        "to_pose_id": "turn_south_west_33",
+        "progress_milli": 875,
+        "lock_anchor": "left_foot",
+        "method": "inverse_sample"
+      },
+      "facing": "southwest",
+      "locomotion": "walking",
+      "actions": ["walking"],
+      "phase": null,
+      "tags": ["turn", "southwest", "reversal", "inbetween", "derived_pixel_graph", "v6_continuity"]
+    },
+    {
+      "id": "stop_profile_left_from_left_25",
+      "source": "derived_landmark_warp:walk_profile_left_passing_left_to_right+profile_left@250/1000:lock=left_foot",
+      "description": "west stop absorption from left support at 25 percent",
+      "derived_landmark_warp": {
+        "from_pose_id": "walk_profile_left_passing_left_to_right",
+        "to_pose_id": "profile_left",
+        "progress_milli": 250,
+        "lock_anchor": "left_foot",
+        "method": "inverse_sample"
+      },
+      "facing": "west",
+      "locomotion": "idle",
+      "actions": ["walking", "stop"],
+      "phase": 0.25,
+      "tags": ["profile", "left", "stop", "left_foot", "derived_pixel_graph", "v6_continuity"]
+    },
+    {
+      "id": "stop_profile_left_from_left_50",
+      "source": "derived_landmark_warp:walk_profile_left_passing_left_to_right+profile_left@500/1000:lock=left_foot",
+      "description": "west stop absorption from left support at 50 percent",
+      "derived_landmark_warp": {
+        "from_pose_id": "walk_profile_left_passing_left_to_right",
+        "to_pose_id": "profile_left",
+        "progress_milli": 500,
+        "lock_anchor": "left_foot",
+        "method": "inverse_sample"
+      },
+      "facing": "west",
+      "locomotion": "idle",
+      "actions": ["walking", "stop"],
+      "phase": 0.5,
+      "tags": ["profile", "left", "stop", "left_foot", "derived_pixel_graph", "v6_continuity"]
+    },
+    {
+      "id": "stop_profile_left_from_left_75",
+      "source": "derived_landmark_warp:walk_profile_left_passing_left_to_right+profile_left@750/1000:lock=left_foot",
+      "description": "west stop absorption from left support at 75 percent",
+      "derived_landmark_warp": {
+        "from_pose_id": "walk_profile_left_passing_left_to_right",
+        "to_pose_id": "profile_left",
+        "progress_milli": 750,
+        "lock_anchor": "left_foot",
+        "method": "inverse_sample"
+      },
+      "facing": "west",
+      "locomotion": "idle",
+      "actions": ["walking", "stop"],
+      "phase": 0.75,
+      "tags": ["profile", "left", "stop", "left_foot", "derived_pixel_graph", "v6_continuity"]
+    },
+    {
+      "id": "stop_profile_left_from_left_100",
+      "source": "derived_landmark_warp:walk_profile_left_passing_left_to_right+profile_left@1000/1000:lock=left_foot",
+      "description": "west stop recovery from left support",
+      "derived_landmark_warp": {
+        "from_pose_id": "walk_profile_left_passing_left_to_right",
+        "to_pose_id": "profile_left",
+        "progress_milli": 1000,
+        "lock_anchor": "left_foot",
+        "method": "inverse_sample"
+      },
+      "facing": "west",
+      "locomotion": "idle",
+      "actions": ["walking", "stop"],
+      "phase": 1.0,
+      "tags": ["profile", "left", "stop", "left_foot", "derived_pixel_graph", "v6_continuity"]
     }
   ]
 }

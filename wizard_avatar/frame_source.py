@@ -488,14 +488,34 @@ class ProceduralWizardFrameSource:
         permission_world = snapshot.permission_world
         state.reconcile_compatibility_state()
         authored_pose_id = state.pose_id
+        authored_body_facing = self._authored_body_facing(state)
         head_eye_state, head_eye = advance_head_eye(
             snapshot.presentation.head_eye_state,
-            state.facing,
+            authored_body_facing or state.facing,
             state.simulation_tick,
             state.gaze_authoritative,
             state.gaze_aim,
             facing_changed_tick=state.facing_changed_tick,
         )
+        if (
+            authored_body_facing is not None
+            and head_eye.presented_facing != authored_body_facing
+        ):
+            # Whole-pose transition graphs already author the head, torso,
+            # wings, hand, and staff as one physical turn. Present their
+            # declared sector atomically so pathing cannot lead the body.
+            head_eye_state = HeadEyeState.steady(
+                authored_body_facing,
+                state.simulation_tick,
+            )
+            head_eye_state, head_eye = advance_head_eye(
+                head_eye_state,
+                authored_body_facing,
+                state.simulation_tick,
+                state.gaze_authoritative,
+                state.gaze_aim,
+                facing_changed_tick=state.simulation_tick,
+            )
         scheduler_blink_closed = state.blink_phase >= 0.965
         scheduler_blink_suppressed = (
             scheduler_blink_closed
@@ -1132,6 +1152,28 @@ class ProceduralWizardFrameSource:
                 if cell is not None and target.in_bounds(target_x, target_y):
                     target.cells[target_y][target_x] = cell
 
+    def _authored_body_facing(self, state: WizardState) -> Optional[str]:
+        """Return the facing owned by a whole-pose locomotion transition."""
+
+        if self.animation_graph is None:
+            return None
+        clip = self.animation_graph.clips.get(state.animation_clip_id)
+        if clip is None:
+            return None
+        transition_target = state.animation_transition_target_node_id or ""
+        transition_owns_body = state.animation_clip_id in {
+            "turn_front_to_east",
+            "turn_front_to_west",
+            "reverse_east_to_west",
+            "reverse_west_to_east",
+            "stop_left",
+            "stop_right",
+        } or transition_target.startswith(("ground_turn_", "ground_reverse_"))
+        if not transition_owns_body:
+            return None
+        pose = self.animation_graph.pose_catalog.get(state.pose_id)
+        return pose.facing if pose is not None else None
+
     @staticmethod
     def _idle_head_breath_offset(
         state: WizardState,
@@ -1311,7 +1353,11 @@ class ProceduralWizardFrameSource:
         for y in range(anchor_y - 3, anchor_y + 2):
             for x in range(anchor_x - 5, anchor_x + 6):
                 cell = canvas.get(x, y)
-                mouth.update(struct.pack(">HH", x, y))
+                # Generic character packages can place a small mouth region
+                # partly outside their local canvas. Preserve those signed
+                # coordinates in the evidence hash instead of rejecting an
+                # otherwise valid package.
+                mouth.update(struct.pack(">ii", x, y))
                 mouth.update(cell.to_bytes() if cell is not None else b"\x00\x00\x00\x00")
                 if cell is not None and (
                     cell.layer_id.startswith("reference_mouth")

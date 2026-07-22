@@ -25,6 +25,27 @@ def changed_points(before, after):
 
 
 class FrameSourceTests(unittest.TestCase):
+    def test_authored_turn_pose_owns_presented_facing(self):
+        source = ProceduralWizardFrameSource()
+        cases = (
+            ("walk_front_right", "turn_front_to_east", "south"),
+            ("turn_front_to_east_entry_50", "turn_front_to_east", "southeast"),
+            ("walk_profile_right_contact_left", "turn_front_to_east", "east"),
+            ("turn_front_crossover_plant", "reverse_east_to_west", "south"),
+            ("turn_crossover_to_west_50", "reverse_east_to_west", "southwest"),
+            ("stop_profile_left_from_left_75", "stop_left", "west"),
+        )
+        for pose_id, clip_id, expected in cases:
+            with self.subTest(pose_id=pose_id):
+                state = WizardState(pose_id=pose_id, animation_clip_id=clip_id)
+                self.assertEqual(source._authored_body_facing(state), expected)
+
+        walking = WizardState(
+            pose_id="walk_profile_right_contact_left",
+            animation_clip_id="walk_right",
+        )
+        self.assertIsNone(source._authored_body_facing(walking))
+
     def test_presentation_blink_latches_short_input_for_four_frames(self):
         source = ProceduralWizardFrameSource()
         previous_input = False

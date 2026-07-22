@@ -15,10 +15,12 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from tools.run_character_director_visual_review import validate_manifest
+from wizard_avatar.animation_graph import load_pose_catalog
 from wizard_avatar.animation_trace import AnimationTruthTraceV1
+from wizard_avatar.reference_avatar import reference_pose_anchor, reference_pose_root_anchor
 
 
-REPORT_SCHEMA = "character_director_v6_machine_acceptance_v2"
+REPORT_SCHEMA = "character_director_v6_machine_acceptance_v3"
 EXPECTED_SCENARIOS = (
     "v6-idle",
     "v6-south-approach",
@@ -62,6 +64,9 @@ PROFILE_POSE_SEQUENCES = {
 TRANSITION_POSE_SEQUENCES = {
     "turn_front_to_east": (
         "walk_front_right",
+        "turn_front_to_east_entry_25",
+        "turn_front_to_east_entry_50",
+        "turn_front_to_east_entry_75",
         "turn_south_east_33",
         "turn_south_east_67",
         "walk_profile_right_contact_left",
@@ -71,11 +76,24 @@ TRANSITION_POSE_SEQUENCES = {
         "turn_south_east_67",
         "turn_south_east_33",
         "turn_front_crossover_plant",
+        "turn_crossover_to_west_25",
+        "turn_crossover_to_west_50",
+        "turn_crossover_to_west_75",
+        "turn_crossover_to_west_875",
         "turn_south_west_33",
         "turn_south_west_67",
         "walk_profile_left_contact_left",
     ),
 }
+STOP_LEFT_POSE_SEQUENCE = (
+    "walk_profile_left_passing_left_to_right",
+    "stop_profile_left_from_left_25",
+    "stop_profile_left_from_left_50",
+    "stop_profile_left_from_left_75",
+    "stop_profile_left_from_left_100",
+)
+MAX_TURN_STAFF_TIP_STEP = 14.0
+MAX_TURN_STAFF_GRIP_STEP = 12.5
 DEPRECATED_PROFILE_POSES = {
     "profile_left",
     "profile_right",
@@ -94,6 +112,69 @@ def _root(trace: Mapping[str, Any]) -> Optional[Tuple[float, float]]:
         return None
     point = float(values[0]), float(values[1])
     return point if all(math.isfinite(value) for value in point) else None
+
+
+def _stage_point(trace: Mapping[str, Any], field: str) -> Optional[Tuple[float, float]]:
+    value = trace.get(field)
+    if not isinstance(value, Mapping):
+        return None
+    coordinates = value.get("x"), value.get("y")
+    if any(
+        isinstance(item, bool) or not isinstance(item, (int, float))
+        for item in coordinates
+    ):
+        return None
+    point = float(coordinates[0]), float(coordinates[1])
+    return point if all(math.isfinite(item) for item in point) else None
+
+
+def _pose_anchor_stage(
+    trace: Mapping[str, Any],
+    anchor_name: str,
+) -> Optional[Tuple[float, float]]:
+    pose_id = trace.get("rendered_pose_id")
+    root_stage = _stage_point(trace, "presented_root_stage")
+    if not isinstance(pose_id, str) or root_stage is None:
+        return None
+    scale_x = trace.get("render_scale_x")
+    scale_y = trace.get("render_scale_y")
+    if any(
+        isinstance(value, bool) or not isinstance(value, (int, float))
+        for value in (scale_x, scale_y)
+    ):
+        return None
+    try:
+        anchor = reference_pose_anchor(pose_id, anchor_name)
+        root = reference_pose_root_anchor(pose_id)
+    except KeyError:
+        return None
+    return (
+        root_stage[0] + (anchor[0] - root[0]) * float(scale_x),
+        root_stage[1] + (anchor[1] - root[1]) * float(scale_y),
+    )
+
+
+def _adjacent_stage_steps(
+    records: Sequence[Mapping[str, Any]],
+    resolver,
+) -> Tuple[List[float], List[Dict[str, Any]]]:
+    steps: List[float] = []
+    missing: List[Dict[str, Any]] = []
+    for left, right in zip(records, records[1:]):
+        if right.get("frame_index") != left.get("frame_index", -2) + 1:
+            continue
+        left_point = resolver(left)
+        right_point = resolver(right)
+        if left_point is None or right_point is None:
+            missing.append(
+                {
+                    "left_frame": left.get("frame_index"),
+                    "right_frame": right.get("frame_index"),
+                }
+            )
+            continue
+        steps.append(math.dist(left_point, right_point))
+    return steps, missing
 
 
 def _collapsed(records: Sequence[Mapping[str, Any]], field: str) -> List[str]:
@@ -317,6 +398,28 @@ def analyze_v6(
         west_turn,
     )
 
+    pose_catalog = load_pose_catalog()
+    facing_mismatches = []
+    for trace in south + east + west:
+        pose_id = trace.get("rendered_pose_id")
+        metadata = pose_catalog.get(str(pose_id))
+        expected_facing = metadata.facing if metadata is not None else None
+        if expected_facing != trace.get("presented_facing"):
+            facing_mismatches.append(
+                {
+                    "frame_index": trace.get("frame_index"),
+                    "pose_id": pose_id,
+                    "authored_facing": expected_facing,
+                    "presented_facing": trace.get("presented_facing"),
+                }
+            )
+    _check(
+        report,
+        "rendered_pose_facing_alignment",
+        not facing_mismatches,
+        {"mismatches": facing_mismatches},
+    )
+
     directional: Dict[str, Any] = {}
     directional_ok = True
     for clip_id, records in (("walk_right", east), ("walk_left", west)):
@@ -378,6 +481,38 @@ def analyze_v6(
         {
             "transitions": transition_topology,
             "deprecated_profile_poses_observed": deprecated_observed,
+        },
+    )
+
+    turn_records = [
+        trace
+        for trace in east + west
+        if trace.get("animation_clip_id") in TRANSITION_POSE_SEQUENCES
+    ]
+    tip_steps, missing_tip = _adjacent_stage_steps(
+        turn_records,
+        lambda trace: _stage_point(trace, "staff_tip_stage"),
+    )
+    grip_steps, missing_grip = _adjacent_stage_steps(
+        turn_records,
+        lambda trace: _pose_anchor_stage(trace, "staff_hand"),
+    )
+    _check(
+        report,
+        "turn_staff_path_continuity",
+        bool(tip_steps)
+        and bool(grip_steps)
+        and not missing_tip
+        and not missing_grip
+        and max(tip_steps) <= MAX_TURN_STAFF_TIP_STEP
+        and max(grip_steps) <= MAX_TURN_STAFF_GRIP_STEP,
+        {
+            "maximum_staff_tip_step": max(tip_steps, default=math.inf),
+            "maximum_staff_grip_step": max(grip_steps, default=math.inf),
+            "staff_tip_limit": MAX_TURN_STAFF_TIP_STEP,
+            "staff_grip_limit": MAX_TURN_STAFF_GRIP_STEP,
+            "missing_tip_pairs": missing_tip,
+            "missing_grip_pairs": missing_grip,
         },
     )
 
@@ -446,6 +581,10 @@ def analyze_v6(
     final_root = _root(settle[-1]) if settle else None
     target_error = math.dist(final_root, TARGET) if final_root is not None else math.inf
     all_finish = west + settle
+    stop_records = [
+        trace for trace in all_finish if trace.get("animation_clip_id") == "stop_left"
+    ]
+    stop_poses = tuple(_collapsed(stop_records, "rendered_pose_id"))
     zero_suffix = 0
     finish_roots = [_root(trace) for trace in all_finish]
     for left, right in reversed(list(zip(finish_roots, finish_roots[1:]))):
@@ -457,7 +596,8 @@ def analyze_v6(
         report,
         "target_stop_and_profile_settle",
         target_error <= 0.08
-        and any(trace.get("animation_clip_id") == "stop_left" for trace in all_finish)
+        and _contains_sequence(stop_poses, STOP_LEFT_POSE_SEQUENCE)
+        and len(set(stop_poses)) >= len(STOP_LEFT_POSE_SEQUENCE)
         and len(settle) >= 8
         and all(
             trace.get("animation_clip_id") == "idle_left"
@@ -471,6 +611,8 @@ def analyze_v6(
             "final_root": list(final_root) if final_root is not None else None,
             "target_error": target_error,
             "zero_speed_suffix_frames": zero_suffix,
+            "collapsed_stop_pose_sequence": list(stop_poses),
+            "required_stop_pose_sequence": list(STOP_LEFT_POSE_SEQUENCE),
         },
     )
 

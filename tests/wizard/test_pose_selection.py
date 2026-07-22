@@ -267,6 +267,9 @@ class PoseSelectionTests(unittest.TestCase):
             observed,
             [
                 "walk_front_right",
+                "turn_front_to_east_entry_25",
+                "turn_front_to_east_entry_50",
+                "turn_front_to_east_entry_75",
                 "turn_south_east_33",
                 "turn_south_east_67",
                 "walk_profile_right_contact_left",
@@ -327,6 +330,10 @@ class PoseSelectionTests(unittest.TestCase):
                     "turn_south_east_67",
                     "turn_south_east_33",
                     "turn_front_crossover_plant",
+                    "turn_crossover_to_west_25",
+                    "turn_crossover_to_west_50",
+                    "turn_crossover_to_west_75",
+                    "turn_crossover_to_west_875",
                     "turn_south_west_33",
                     "turn_south_west_67",
                     "walk_profile_left_contact_left",
@@ -388,8 +395,15 @@ class PoseSelectionTests(unittest.TestCase):
                 "left_foot",
                 "ground_stop_left",
                 "profile_left",
-                128,
-                ("profile_left",),
+                123,
+                (
+                    "walk_profile_left_passing_left_to_right",
+                    "stop_profile_left_from_left_25",
+                    "stop_profile_left_from_left_50",
+                    "stop_profile_left_from_left_75",
+                    "stop_profile_left_from_left_100",
+                    "profile_left",
+                ),
             ),
             (
                 "west",
@@ -397,8 +411,17 @@ class PoseSelectionTests(unittest.TestCase):
                 "right_foot",
                 "ground_stop_left",
                 "profile_left",
-                120,
-                ("profile_left",),
+                143,
+                (
+                    "walk_profile_left_contact_right",
+                    "walk_profile_left_passing_right_to_left",
+                    "walk_profile_left_passing_left_to_right",
+                    "stop_profile_left_from_left_25",
+                    "stop_profile_left_from_left_50",
+                    "stop_profile_left_from_left_75",
+                    "stop_profile_left_from_left_100",
+                    "profile_left",
+                ),
             ),
             (
                 "east",
@@ -435,21 +458,19 @@ class PoseSelectionTests(unittest.TestCase):
                     simulation_tick=100,
                 )
 
-                entered = _select_graph_v2_sample(state, graph)
-                self.assertEqual(state.animation_node_id, stop_node)
-                self.assertEqual(entered.contact, support)
-                self.assertEqual(state.animation_transition_generation, 1)
-                self.assertIsNone(state.animation_transition_id)
-
-                observed_poses = [entered.pose_id]
-                while state.animation_node_id == stop_node:
+                sample = _select_graph_v2_sample(state, graph)
+                observed_poses = [sample.pose_id]
+                stop_observed = state.animation_node_id == stop_node
+                expected_idle_node = "left_idle" if facing == "west" else "right_idle"
+                while state.animation_node_id != expected_idle_node:
                     state.simulation_tick += 1
                     state.animation_clip_tick += 1
                     sample = _select_graph_v2_sample(state, graph)
                     observed_poses.append(sample.pose_id)
+                    stop_observed = stop_observed or state.animation_node_id == stop_node
                     self.assertLessEqual(state.simulation_tick, settled_tick)
 
-                expected_idle_node = "left_idle" if facing == "west" else "right_idle"
+                self.assertTrue(stop_observed)
                 self.assertEqual(state.simulation_tick, settled_tick)
                 self.assertEqual(state.animation_node_id, expected_idle_node)
                 self.assertEqual(sample.pose_id, idle_pose)
