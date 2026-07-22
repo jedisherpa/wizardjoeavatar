@@ -118,6 +118,13 @@ def _collapsed_contacts(records: Sequence[Mapping[str, Any]]) -> List[str]:
     return result
 
 
+def _contains_sequence(values: Sequence[str], expected: Sequence[str]) -> bool:
+    if not expected or len(values) < len(expected):
+        return False
+    width = len(expected)
+    return any(tuple(values[index:index + width]) == tuple(expected) for index in range(len(values) - width + 1))
+
+
 def _sector_delta(left: str, right: str) -> int:
     raw = FACINGS.index(right) - FACINGS.index(left)
     return ((raw + 4) % 8) - 4
@@ -324,12 +331,7 @@ def analyze_v6(
         directional_ok = (
             directional_ok
             and len(clip_records) >= 12
-            and len(poses) >= len(expected)
-            and all(pose in poses for pose in expected)
-            and all(
-                poses.index(left) < poses.index(right)
-                for left, right in zip(expected, expected[1:])
-            )
+            and _contains_sequence(poses, expected)
         )
     observed_walk_clips = {
         trace.get("animation_clip_id")
@@ -363,6 +365,10 @@ def analyze_v6(
     all_motion_poses = {
         str(trace.get("rendered_pose_id"))
         for trace in south + east + west
+        if trace.get("animation_clip_id") in {
+            *WALK_CLIPS,
+            *TRANSITION_POSE_SEQUENCES,
+        }
     }
     deprecated_observed = sorted(all_motion_poses.intersection(DEPRECATED_PROFILE_POSES))
     _check(

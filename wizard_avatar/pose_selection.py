@@ -763,10 +763,9 @@ def _ground_orientation(state: WizardState) -> Optional[str]:
         "ground_walk",
         *GROUND_STOP_NODE_BY_WALK_POSE.values(),
     }:
-        if state.facing == "west":
-            return "left"
-        if state.facing == "east":
-            return "right"
+        # These nodes own front-facing body clips. Pathing advances the
+        # presentation-facing metadata before the authored body turn begins,
+        # so state.facing cannot be used as the body orientation here.
         return "front"
     return None
 

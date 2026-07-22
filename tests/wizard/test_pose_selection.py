@@ -276,6 +276,23 @@ class PoseSelectionTests(unittest.TestCase):
         self.assertEqual(sample.clip_id, "walk_right")
         self.assertEqual(sample.contact, "left_foot")
 
+    def test_front_body_turn_is_not_skipped_when_pathing_facing_already_reached_east(self):
+        graph = load_reference_animation_graph_v2()
+        state = state_for(
+            facing="east",
+            locomotion="walking",
+            walk_phase=0.5,
+            velocity={"x": 1.0, "z": 0.0},
+            animation_node_id="ground_walk",
+            animation_clip_id="walk_front",
+        )
+
+        sample = _select_graph_v2_sample(state, graph)
+
+        self.assertEqual(state.animation_node_id, "ground_turn_front_to_east")
+        self.assertEqual(sample.clip_id, "turn_front_to_east")
+        self.assertEqual(sample.pose_id, "walk_front_right")
+
     def test_horizontal_reversals_use_authored_crossover_phrases(self):
         graph = load_reference_animation_graph_v2()
         reversals = (
