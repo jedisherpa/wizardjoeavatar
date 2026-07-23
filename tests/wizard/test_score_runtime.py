@@ -6,9 +6,10 @@ from dataclasses import FrozenInstanceError
 from pathlib import Path
 
 from wizard_avatar.performance_score import CompiledScoreLoader, CompiledScoreRepository
-from wizard_avatar.score_runtime import ScoreRuntime
+from wizard_avatar.score_runtime import SCORE_ADMISSION_MISMATCH, ScoreRuntime
 
 from tests.wizard.test_performance_scheduler import bound_snapshot, runtime_score
+from tests.wizard.test_performance_score import digest
 
 
 def make_repository(root):
@@ -24,6 +25,14 @@ def changed_snapshot(snapshot, **changes):
         section, name = dotted_name.split(".", 1)
         value[section][name] = replacement
     return type(snapshot).from_mapping(value)
+
+
+def score_with_references(score, **references):
+    document = copy.deepcopy(score.to_dict())
+    document["tracks"][0]["cues"][1].update(references)
+    return CompiledScoreLoader(
+        contract_validator=lambda _name, _value: None
+    ).from_mapping(document)
 
 
 class ScoreRuntimeTests(unittest.TestCase):
@@ -131,6 +140,159 @@ class ScoreRuntimeTests(unittest.TestCase):
         self.assertEqual(prepared.code, "scoreless_v1")
         self.assertIsNone(prepared.score)
         self.assertIsNone(self.runtime.resolve(scoreless))
+
+    def test_capacity_must_be_a_positive_integer(self):
+        for capacity in (0, -1, True, 1.5):
+            with self.subTest(capacity=capacity):
+                with self.assertRaises(ValueError):
+                    ScoreRuntime(self.repository, capacity=capacity)
+
+    def test_ready_scores_share_bounded_lru_retention_with_results(self):
+        runtime = ScoreRuntime(self.repository, capacity=2)
+        scores = [
+            runtime_score(
+                media_id="media:sha256:" + character * 64,
+                media_hash=digest(character),
+            )
+            for character in ("1", "2", "3")
+        ]
+        snapshots = [bound_snapshot(score) for score in scores]
+        for score, snapshot in zip(scores[:2], snapshots[:2]):
+            self.repository.publish(score)
+            self.assertTrue(runtime.prepare_snapshot(snapshot).ready)
+        self.assertIsNotNone(runtime.resolve(snapshots[0]))
+        self.repository.publish(scores[2])
+        self.assertTrue(runtime.prepare_snapshot(snapshots[2]).ready)
+
+        self.assertIsNotNone(runtime.resolve(snapshots[0]))
+        self.assertIsNone(runtime.resolve(snapshots[1]))
+        self.assertIsNotNone(runtime.resolve(snapshots[2]))
+        diagnostics = runtime.diagnostics_mapping(snapshots[2])
+        self.assertEqual(diagnostics["cache_entries"], 2)
+        self.assertEqual(diagnostics["result_entries"], 2)
+        self.assertEqual(diagnostics["evictions"], 1)
+        self.assertEqual(diagnostics["capacity"], 2)
+
+    def test_failure_results_are_bounded_across_one_thousand_bindings(self):
+        capacity = 31
+        runtime = ScoreRuntime(self.repository, capacity=capacity)
+        last_snapshot = None
+        for index in range(1000):
+            last_snapshot = changed_snapshot(
+                self.snapshot,
+                **{"performance.score_id": f"compiled:missing-{index:04d}"},
+            )
+            self.assertEqual(
+                runtime.prepare_snapshot(last_snapshot).code,
+                "score_not_ready",
+            )
+
+        self.assertIsNotNone(last_snapshot)
+        diagnostics = runtime.diagnostics_mapping(last_snapshot)
+        self.assertEqual(diagnostics["cache_entries"], 0)
+        self.assertEqual(diagnostics["result_entries"], capacity)
+        self.assertEqual(diagnostics["evictions"], 1000 - capacity)
+        self.assertEqual(diagnostics["capacity"], capacity)
+
+    def test_active_package_pose_graph_and_manifest_identities_fail_closed(self):
+        document = copy.deepcopy(self.score.to_dict())
+        document["character"]["manifest_digest"] = digest("e")
+        score = CompiledScoreLoader(
+            contract_validator=lambda _name, _value: None
+        ).from_mapping(document)
+        snapshot = bound_snapshot(score)
+        self.repository.publish(score)
+        character = score.document["character"]
+        matching = {
+            "package_digest": character["package_digest"],
+            "manifest_digest": character["manifest_digest"],
+            "pose_library_digest": character["pose_library_digest"],
+            "graph_digest": character["graph_digest"],
+        }
+        self.assertTrue(
+            ScoreRuntime(self.repository, **matching)
+            .prepare_snapshot(snapshot)
+            .ready
+        )
+
+        mutations = {
+            "package_digest": digest("0"),
+            "manifest_digest": digest("1"),
+            "pose_library_digest": digest("2"),
+            "graph_digest": digest("3"),
+        }
+        for field, stale_digest in mutations.items():
+            with self.subTest(field=field):
+                active = dict(matching)
+                active[field] = stale_digest
+                runtime = ScoreRuntime(self.repository, **active)
+                prepared = runtime.prepare_snapshot(snapshot)
+                self.assertFalse(prepared.ready)
+                self.assertEqual(prepared.code, SCORE_ADMISSION_MISMATCH)
+                self.assertIsNone(runtime.resolve(snapshot))
+
+    def test_configured_manifest_identity_is_required_in_score_document(self):
+        self.repository.publish(self.score)
+        runtime = ScoreRuntime(
+            self.repository,
+            manifest_digest=digest("e"),
+        )
+
+        prepared = runtime.prepare_snapshot(self.snapshot)
+
+        self.assertFalse(prepared.ready)
+        self.assertEqual(prepared.code, SCORE_ADMISSION_MISMATCH)
+        self.assertIsNone(runtime.resolve(self.snapshot))
+
+    def test_unknown_pose_clip_and_node_ids_fail_closed(self):
+        admitted = {
+            "admitted_pose_ids": {"pose:known"},
+            "admitted_clip_ids": {"clip:known"},
+            "admitted_node_ids": {"node:known"},
+        }
+        known = {
+            "pose_id": "pose:known",
+            "clip_id": "clip:known",
+            "node_id": "node:known",
+        }
+        for field in ("pose_id", "clip_id", "node_id"):
+            with self.subTest(field=field):
+                temporary = tempfile.TemporaryDirectory()
+                self.addCleanup(temporary.cleanup)
+                repository = make_repository(temporary.name)
+                references = dict(known)
+                references[field] = field + ":unknown"
+                score = score_with_references(self.score, **references)
+                snapshot = bound_snapshot(score)
+                repository.publish(score)
+                runtime = ScoreRuntime(repository, **admitted)
+
+                prepared = runtime.prepare_snapshot(snapshot)
+
+                self.assertFalse(prepared.ready)
+                self.assertEqual(prepared.code, SCORE_ADMISSION_MISMATCH)
+                self.assertIsNone(runtime.resolve(snapshot))
+
+    def test_admitted_pose_clip_and_node_ids_prepare_normally(self):
+        score = score_with_references(
+            self.score,
+            pose_id="pose:known",
+            clip_id="clip:known",
+            node_id="node:known",
+        )
+        snapshot = bound_snapshot(score)
+        self.repository.publish(score)
+        runtime = ScoreRuntime(
+            self.repository,
+            admitted_pose_ids={"pose:known"},
+            admitted_clip_ids={"clip:known"},
+            admitted_node_ids={"node:known"},
+        )
+
+        prepared = runtime.prepare_snapshot(snapshot)
+
+        self.assertTrue(prepared.ready)
+        self.assertIs(runtime.resolve(snapshot), prepared.score)
 
 
 if __name__ == "__main__":
