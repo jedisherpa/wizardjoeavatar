@@ -1,0 +1,174 @@
+{
+  "batch_id": "batch-01",
+  "reviewer": "Codex literal visual overlay reviewer",
+  "range": {
+    "start": "WJPA-0001",
+    "end": "WJPA-0032"
+  },
+  "reviewed_count": 32,
+  "approved_count": 32,
+  "rejected_count": 0,
+  "overall_status": "approved",
+  "entries": [
+    {
+      "pose_id": "WJPA-0001",
+      "status": "approved",
+      "visual_note": "Front neutral source and projection align exactly; overlay shows no doubled edges, mismatch marks, clipping, displacement, or added geometry."
+    },
+    {
+      "pose_id": "WJPA-0002",
+      "status": "approved",
+      "visual_note": "Front three-quarter-left silhouette, face, wings, hand, and staff coincide cleanly with no visible projection defect."
+    },
+    {
+      "pose_id": "WJPA-0003",
+      "status": "approved",
+      "visual_note": "Left-profile contours and narrow wing/staff details remain coincident; no ghosting, clipping, or non-source pixels are visible."
+    },
+    {
+      "pose_id": "WJPA-0004",
+      "status": "approved",
+      "visual_note": "Back three-quarter-left projection preserves the hat, beard, robe, wings, and staff placement without doubled contours or mismatch marks."
+    },
+    {
+      "pose_id": "WJPA-0005",
+      "status": "approved",
+      "visual_note": "Rear neutral source and projection are visually identical, including both wing edges and staff; no displacement or clipping is present."
+    },
+    {
+      "pose_id": "WJPA-0006",
+      "status": "approved",
+      "visual_note": "Back three-quarter-right geometry aligns throughout the asymmetrical robe, shoes, wings, head, and staff with no visible differences."
+    },
+    {
+      "pose_id": "WJPA-0007",
+      "status": "approved",
+      "visual_note": "Right-profile source and projection coincide on all thin extremities and side contours; no doubled edge or extra geometry is visible."
+    },
+    {
+      "pose_id": "WJPA-0008",
+      "status": "approved",
+      "visual_note": "Front three-quarter-right stance is faithfully projected, including bent arm, hand, feet, wings, and staff with a clean overlay."
+    },
+    {
+      "pose_id": "WJPA-0009",
+      "status": "approved",
+      "visual_note": "Side pose with separated staff remains pixel-aligned across the full silhouette; no occlusion error, clipping, or mismatch mark appears."
+    },
+    {
+      "pose_id": "WJPA-0010",
+      "status": "approved",
+      "visual_note": "Rear pose with partly folded wings matches exactly in both panels and overlay, with no missing wing, hand, staff, or robe pixels."
+    },
+    {
+      "pose_id": "WJPA-0011",
+      "status": "approved",
+      "visual_note": "Relaxed planted-staff pose has a single aligned contour and identical internal colors; no projection artifact is visible."
+    },
+    {
+      "pose_id": "WJPA-0012",
+      "status": "approved",
+      "visual_note": "Balanced idle pose aligns on hat tip, wing tips, shoes, hands, and staff with no clipping, displacement, or colored defect marks."
+    },
+    {
+      "pose_id": "WJPA-0013",
+      "status": "approved",
+      "visual_note": "Warm camera-ready idle is visually identical between source and projection; transparent overlay reveals no doubled edges."
+    },
+    {
+      "pose_id": "WJPA-0014",
+      "status": "approved",
+      "visual_note": "Attentive idle preserves the angled arm and hand placement exactly, with clean silhouette and color alignment throughout."
+    },
+    {
+      "pose_id": "WJPA-0015",
+      "status": "approved",
+      "visual_note": "Speaking-ready idle projects without any visible geometry or color deviation; all outer edges remain unclipped and coincident."
+    },
+    {
+      "pose_id": "WJPA-0016",
+      "status": "approved",
+      "visual_note": "Listening-ready idle matches the source across face, beard, robe, wings, staff, and hands with no overlay ghosting."
+    },
+    {
+      "pose_id": "WJPA-0017",
+      "status": "approved",
+      "visual_note": "Two-hand staff-rest pose retains exact hand, staff, face, robe, and wing geometry; no missing or extra marks are visible."
+    },
+    {
+      "pose_id": "WJPA-0018",
+      "status": "approved",
+      "visual_note": "Carried-staff stepping silhouette and raised limbs align exactly; no doubled boundary, clipping, or displaced pixels appear."
+    },
+    {
+      "pose_id": "WJPA-0019",
+      "status": "approved",
+      "visual_note": "Folded-wing idle source and projection are visually coincident, including narrow colored wing runs and staff edges."
+    },
+    {
+      "pose_id": "WJPA-0020",
+      "status": "approved",
+      "visual_note": "Displayed-wing idle preserves the broader wing silhouette and all internal colors without mismatch marks or source-external geometry."
+    },
+    {
+      "pose_id": "WJPA-0021",
+      "status": "approved",
+      "visual_note": "Neutral listening gesture aligns at the fingers, chin, face, staff, wings, and feet with no visible projection differences."
+    },
+    {
+      "pose_id": "WJPA-0022",
+      "status": "approved",
+      "visual_note": "Warm listening pose preserves the head tilt and open palm exactly; overlay remains clean with no doubled or displaced contours."
+    },
+    {
+      "pose_id": "WJPA-0023",
+      "status": "approved",
+      "visual_note": "Intense listening pose matches source geometry and color placement throughout, including separated staff and wing edges."
+    },
+    {
+      "pose_id": "WJPA-0024",
+      "status": "approved",
+      "visual_note": "Offscreen-left listening pose retains the angled head, hand, robe, wings, and staff exactly with no clipping or ghosting."
+    },
+    {
+      "pose_id": "WJPA-0025",
+      "status": "approved",
+      "visual_note": "Offscreen-right listening pose is fully coincident in source, projection, and overlay; no mismatch indicator is visible."
+    },
+    {
+      "pose_id": "WJPA-0026",
+      "status": "approved",
+      "visual_note": "Upward listening pose preserves the extreme head angle and hand-to-ear contour without doubled edges or altered geometry."
+    },
+    {
+      "pose_id": "WJPA-0027",
+      "status": "approved",
+      "visual_note": "Considering pose aligns exactly at the tilted face, chin hand, robe, staff, wings, and feet; overlay shows no defects."
+    },
+    {
+      "pose_id": "WJPA-0028",
+      "status": "approved",
+      "visual_note": "Upward-recall pose retains the diagonal head and facial details with no color mismatch, displacement, clipping, or added pixels."
+    },
+    {
+      "pose_id": "WJPA-0029",
+      "status": "approved",
+      "visual_note": "Staff-lean thinking pose remains exactly aligned along the diagonal staff, crossed hands, body, and wing silhouettes."
+    },
+    {
+      "pose_id": "WJPA-0030",
+      "status": "approved",
+      "visual_note": "Pacing-preparation pose preserves raised-foot and bent-body geometry; no doubled edge, clipping, or projection-only mark appears."
+    },
+    {
+      "pose_id": "WJPA-0031",
+      "status": "approved",
+      "visual_note": "Small-realization expression and raised hand are visually identical between source and projection with a clean transparent overlay."
+    },
+    {
+      "pose_id": "WJPA-0032",
+      "status": "approved",
+      "visual_note": "Clear-realization open-hand gesture, face, wings, robe, and staff align exactly; no visible mismatch or non-source geometry remains."
+    }
+  ]
+}

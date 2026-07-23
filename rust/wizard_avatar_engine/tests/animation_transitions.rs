@@ -30,7 +30,7 @@ fn advance_until(
 #[test]
 fn wiz_anim_003_speech_and_gesture_overlay_locomotion_without_restarting_phase() {
     let mut controller = WizardAvatarController::default();
-    command(&mut controller, "move", json!({"x": 3.0, "z": 5.0}));
+    command(&mut controller, "move", json!({"x": 2.0, "z": 5.0}));
     controller.advance(0.4);
     let phase_before = controller.current_state().walk_phase;
     command(
@@ -225,15 +225,16 @@ fn authored_pose_channel_handoffs_replaces_and_restores_deterministically() {
         &mut controller,
         "pose",
         json!({
-            "pose_id": "front_staff_guard_windup",
+            "pose_id": "staff_raise_vertical",
             "transition_ms": 200,
-            "duration_ms": 1000
+            "duration_ms": 1000,
+            "restore_pose_id": "idle_warm_camera_ready"
         }),
     );
     let first_generation = controller.current_state().pose_generation;
     assert_eq!(
         controller.current_state().pose_id.as_deref(),
-        Some("front_staff_guard_windup")
+        Some("staff_raise_vertical")
     );
     assert!(!controller.current_state().pose_handoff);
 
@@ -242,18 +243,18 @@ fn authored_pose_channel_handoffs_replaces_and_restores_deterministically() {
         &mut controller,
         "pose",
         json!({
-            "pose_id": "front_magic_staff_thrust",
+            "pose_id": "staff_aim_forward",
             "transition_ms": 200,
             "duration_ms": 300
         }),
     );
     advance_until(&mut controller, 600, |state| {
         state.pose_generation > first_generation
-            && state.pose_id.as_deref() == Some("front_magic_staff_thrust")
+            && state.pose_id.as_deref() == Some("staff_aim_forward")
     });
     let replacement_generation = controller.current_state().pose_generation;
     advance_until(&mut controller, 600, |state| {
         state.pose_generation > replacement_generation
-            && state.pose_id.as_deref() == Some("front_staff_guard_windup")
+            && state.pose_id.as_deref() == Some("staff_raise_vertical")
     });
 }

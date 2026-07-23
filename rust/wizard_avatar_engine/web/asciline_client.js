@@ -1,9 +1,9 @@
 import { makeDecoder, TAG_DELTA } from "./asciline_codec.js";
 import { CompleteFrameQueue } from "./canvas_renderer.js";
 
-const DEFAULT_MAX_MESSAGES = 4;
-const DEFAULT_MAX_BYTES = 2 * 1024 * 1024;
-const DEFAULT_MAX_AGE_MS = 250;
+const DEFAULT_MAX_MESSAGES = 16;
+const DEFAULT_MAX_BYTES = 8 * 1024 * 1024;
+const DEFAULT_MAX_AGE_MS = 1000;
 
 export function inspectEnvelope(message) {
   const bytes = message instanceof Uint8Array ? message : new Uint8Array(message);
@@ -96,7 +96,12 @@ export class AscilineStreamClient {
     this.onResync = options.onResync ?? (() => {});
     this.generation = 0;
     this.presentationQueue = new CompleteFrameQueue(2);
-    this.encodedQueue = new BoundedByteQueue(4, 2 * 1024 * 1024, 250, this.now);
+    this.encodedQueue = new BoundedByteQueue(
+      DEFAULT_MAX_MESSAGES,
+      DEFAULT_MAX_BYTES,
+      DEFAULT_MAX_AGE_MS,
+      this.now,
+    );
     this.decodeActive = false;
     this.activeDrain = null;
     this.awaitingKeyframe = true;
@@ -125,7 +130,7 @@ export class AscilineStreamClient {
     this.generation += 1;
     this.encodedQueue.clear();
     this.presentationQueue.clear();
-    this.decoder?.reset();
+    this.decoder = this.metadata ? this.decoderFactory(this.metadata.cellBytes) : null;
     this.decodeActive = false;
     this.activeDrain = null;
     this.awaitingKeyframe = true;
@@ -207,7 +212,9 @@ export class AscilineStreamClient {
     const shouldNotify = !this.resyncRequested;
     this.encodedQueue.clear();
     this.presentationQueue.clear();
-    this.decoder?.reset();
+    // An inflate from the previous generation may still complete. Give the new
+    // generation a fresh decoder so stale completion cannot restore old delta history.
+    this.decoder = this.metadata ? this.decoderFactory(this.metadata.cellBytes) : null;
     this.awaitingKeyframe = true;
     this.expectedSequence = null;
     this.generation += 1;

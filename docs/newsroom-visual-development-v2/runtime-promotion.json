@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "status": "promoted_from_visually_verified_native_graphs",
+  "promotion_manifest_path": "rust/wizard_avatar_engine/assets/newsroom/v2/promotion-manifest.json",
+  "promotion_manifest_sha256": "a05e963be797963a85c9da76e93e6101e1117165b04e7a19f30aa5a8cffe8604",
+  "layer_admission_ledger_sha256": "1548255d916ff2d545e4c4ca68b5dd20b122891f60374d305ded73654ab4ff46",
+  "source_count": 6,
+  "target_count": 27,
+  "foreground_pixel_count": 4233630,
+  "policy": "Runtime assets are byte-identical copies of approved transparent pixel graphs. No PNG, SVG, resampling, cropping, procedural reconstruction, or camera-board artwork is promoted."
+}

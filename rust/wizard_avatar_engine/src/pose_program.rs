@@ -340,6 +340,8 @@ pub fn is_authored_pose_id(pose_id: &str) -> bool {
         })
         || crate::pose::PoseLibrary::reference()
             .is_ok_and(|library| library.for_id(pose_id).is_some())
+        || crate::pose_graph_runtime::runtime_pose_graph_catalog()
+            .is_ok_and(|catalog| catalog.for_runtime_pose_id(pose_id).is_some())
 }
 
 const fn spec(

@@ -7,7 +7,7 @@ use crate::newsroom::{
 };
 use crate::runtime::{AvatarRuntime, RuntimeSnapshot};
 use crate::runtime_clock::{CatchUpDropped, RuntimeClock};
-use crate::state::WizardState;
+use crate::state::{SceneMode, WizardState};
 use serde::Serialize;
 use std::sync::atomic::{AtomicU64, Ordering};
 use std::sync::Arc;
@@ -27,6 +27,7 @@ pub struct FramePacket {
     pub full_cells: Arc<[u8]>,
     pub is_keyframe: bool,
     pub diagnostics: FrameDiagnostics,
+    pub state: Arc<WizardState>,
 }
 
 #[derive(Clone, Debug)]
@@ -36,6 +37,7 @@ pub struct BootstrapFrame {
     pub simulation_tick: u64,
     pub encoded: Arc<[u8]>,
     pub full_cells: Arc<[u8]>,
+    pub state: Arc<WizardState>,
 }
 
 #[derive(Clone, Debug, Serialize)]
@@ -156,6 +158,12 @@ impl AvatarFrameHub {
         self.runtime.write().await.apply_newsroom_cue(cue)
     }
 
+    pub async fn set_scene_mode(&self, mode: SceneMode) -> WizardState {
+        let mut runtime = self.runtime.write().await;
+        runtime.set_scene_mode(mode);
+        runtime.current_state().clone()
+    }
+
     pub async fn latest_newsroom_receipt(&self) -> Option<NewsroomCueReceiptV1> {
         self.runtime.read().await.latest_newsroom_receipt().cloned()
     }
@@ -192,6 +200,7 @@ impl AvatarFrameHub {
                     simulation_tick: packet.simulation_tick,
                     encoded: Arc::from(encoded.message),
                     full_cells: packet.full_cells.clone(),
+                    state: Arc::clone(&packet.state),
                 })
             })
             .transpose()
@@ -260,6 +269,7 @@ async fn run_render_producer(hub: Arc<AvatarFrameHub>, mut source: ProceduralWiz
             full_cells: Arc::from(frame.cells),
             is_keyframe: frame.is_keyframe,
             diagnostics: source.diagnostics(),
+            state: Arc::clone(&sample.current),
         });
         *hub.latest.write().await = Some(packet.clone());
         let _ = hub.sender.send(packet);

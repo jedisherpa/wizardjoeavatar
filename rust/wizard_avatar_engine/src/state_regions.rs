@@ -1169,6 +1169,7 @@ impl From<&AvatarSemanticStateV1> for WizardState {
             facing_blend: 1.0,
             facing_pose_handoff: true,
             locomotion,
+            scene_mode: crate::state::SceneMode::Studio,
             action,
             previous_upper_body_action: upper_body_action,
             upper_body_action,

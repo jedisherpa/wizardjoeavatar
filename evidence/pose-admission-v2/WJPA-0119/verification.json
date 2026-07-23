@@ -1,0 +1,76 @@
+{
+  "schema_version": 2,
+  "compiler_id": "wizard-avatar-production-alpha-v1",
+  "sequence": 119,
+  "pose_id": "WJPA-0119",
+  "semantic_id": "hand_invite",
+  "source_pack": "wizard_joe_base_250_alpha",
+  "source_archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+  "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/119_hand_invite.png",
+  "source_png_sha256": "21d5758545c0c788f27f0a553324921a4382300e417a37d9189907d039b219f3",
+  "frame": {
+    "width": 1254,
+    "height": 1254
+  },
+  "foreground_bounds": {
+    "x": 177,
+    "y": 69,
+    "width": 876,
+    "height": 1116
+  },
+  "safe_margin_px": 69,
+  "transparent_corners": true,
+  "foreground_pixel_count": 529840,
+  "exact_rgba_equal": true,
+  "rgba_mismatch": {
+    "pixel_count": 0,
+    "channel_count": 0
+  },
+  "metrics": {
+    "source_foreground_pixels": 529840,
+    "graph_foreground_pixels": 529840,
+    "intersection_pixels": 529840,
+    "union_pixels": 529840,
+    "missing_pixels": 0,
+    "extra_pixels": 0,
+    "color_matched_pixels": 529840,
+    "color_mismatched_pixels": 0,
+    "silhouette_precision": 1.0,
+    "silhouette_recall": 1.0,
+    "silhouette_iou": 1.0,
+    "foreground_color_match_ratio": 1.0,
+    "foreground_color_fidelity": 1.0
+  },
+  "overlay_counts": {
+    "matched": 529840,
+    "missing": 0,
+    "extra": 0,
+    "mismatched": 0
+  },
+  "graph_path": "graphs/WJPA-0119.pixelgraph.json.gz",
+  "graph_sha256": "ce9973bf2a11ae55c248ee70a0a58738d799b725506bf769872b3c5d24734405",
+  "artifacts": {
+    "source_png": {
+      "path": "evidence/WJPA-0119/source.png",
+      "sha256": "21d5758545c0c788f27f0a553324921a4382300e417a37d9189907d039b219f3"
+    },
+    "projected_png": {
+      "path": "evidence/WJPA-0119/projected.png",
+      "sha256": "032a8de1b5e66c40a29fa36bdf24bb7cfd4f79a88863190a3eca1ad74c4a1a67"
+    },
+    "transparent_overlay_png": {
+      "path": "evidence/WJPA-0119/transparent-overlay.png",
+      "sha256": "833c644828b46d36f8d717590891ab41bc62a51136d4d9cd2046e436e3419deb"
+    },
+    "composite_png": {
+      "path": "evidence/WJPA-0119/composite.png",
+      "sha256": "032a8de1b5e66c40a29fa36bdf24bb7cfd4f79a88863190a3eca1ad74c4a1a67"
+    },
+    "comparison_png": {
+      "path": "evidence/WJPA-0119/comparison.png",
+      "sha256": "21c61f0c7ac7b5e93d75fe10c61f78eb26b48dc7e605917dc7b384821dcc4177"
+    }
+  },
+  "technical_status": "exact_rgba_verified",
+  "visual_review_status": "approved_transparent_overlay_review"
+}

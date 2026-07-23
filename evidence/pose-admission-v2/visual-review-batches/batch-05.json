@@ -1,0 +1,174 @@
+{
+  "batch_id": "batch-05",
+  "reviewer": "Codex visual overlay reviewer",
+  "range": {
+    "first_pose_id": "WJPA-0129",
+    "last_pose_id": "WJPA-0160"
+  },
+  "reviewed_count": 32,
+  "approved_count": 32,
+  "rejected_count": 0,
+  "overall_status": "approved",
+  "entries": [
+    {
+      "pose_id": "WJPA-0129",
+      "status": "approved",
+      "visual_note": "Book, hands, wings, staff, face, robe, and feet align exactly; no doubled edges, mismatch marks, clipping, displacement, or added geometry."
+    },
+    {
+      "pose_id": "WJPA-0130",
+      "status": "approved",
+      "visual_note": "Writing pose and fine book-page details match source exactly; overlay is clean with no edge doubling or displaced pixels."
+    },
+    {
+      "pose_id": "WJPA-0131",
+      "status": "approved",
+      "visual_note": "Both open hands, sleeves, wings, staff, and silhouette align cleanly; no missing, extra, or mismatched geometry is visible."
+    },
+    {
+      "pose_id": "WJPA-0132",
+      "status": "approved",
+      "visual_note": "Held cube and supporting fingers match the source precisely; no clipping, displacement, doubled contours, or color mismatch marks."
+    },
+    {
+      "pose_id": "WJPA-0133",
+      "status": "approved",
+      "visual_note": "Faint cyan interface plane and touch effect are preserved exactly with the full character; overlay shows no doubled or missing edges."
+    },
+    {
+      "pose_id": "WJPA-0134",
+      "status": "approved",
+      "visual_note": "Angled interface plane, fingertip effect, staff, and character silhouette align exactly; no extra fragments or displacement."
+    },
+    {
+      "pose_id": "WJPA-0135",
+      "status": "approved",
+      "visual_note": "Desk surface, seated body, extended leg, wings, and staff match source without clipping, doubled edges, or non-source geometry."
+    },
+    {
+      "pose_id": "WJPA-0136",
+      "status": "approved",
+      "visual_note": "Left-turn anticipation silhouette is fully preserved; hat, wing tips, staff, robe hem, hands, and feet show exact placement."
+    },
+    {
+      "pose_id": "WJPA-0137",
+      "status": "approved",
+      "visual_note": "Mid-turn profile matches source exactly; no visible edge doubling, mismatch coloration, clipping, or displaced components."
+    },
+    {
+      "pose_id": "WJPA-0138",
+      "status": "approved",
+      "visual_note": "Completed left profile, staff, single visible wing, robe, and feet align precisely with no missing or extra pixels."
+    },
+    {
+      "pose_id": "WJPA-0139",
+      "status": "approved",
+      "visual_note": "Walk-start stride preserves staff angle, wing silhouette, robe opening, hands, and both feet with exact source alignment."
+    },
+    {
+      "pose_id": "WJPA-0140",
+      "status": "approved",
+      "visual_note": "Down-step walk frame matches source across hat, profile, wings, staff, robe swing, and foot placement; overlay is clean."
+    },
+    {
+      "pose_id": "WJPA-0141",
+      "status": "approved",
+      "visual_note": "Contact-step frame is exact, including staff base, robe folds, wing tips, and planted/advancing feet; no visual defects."
+    },
+    {
+      "pose_id": "WJPA-0142",
+      "status": "approved",
+      "visual_note": "Passing-step pose aligns fully; staff, hands, wing edge, robe panels, and feet show no clipping, doubling, or displacement."
+    },
+    {
+      "pose_id": "WJPA-0143",
+      "status": "approved",
+      "visual_note": "Up-step profile and all silhouette extremities match source exactly; no colored mismatch marks or non-source fragments."
+    },
+    {
+      "pose_id": "WJPA-0144",
+      "status": "approved",
+      "visual_note": "Opposite contact step preserves hat tip, staff, wing, robe, hand, and feet with exact projected placement."
+    },
+    {
+      "pose_id": "WJPA-0145",
+      "status": "approved",
+      "visual_note": "Walk-stop anticipation pose matches source edge for edge; no clipping, doubled contours, displacement, or added geometry."
+    },
+    {
+      "pose_id": "WJPA-0146",
+      "status": "approved",
+      "visual_note": "Walk-stop plant frame is visually exact, including staff, wings, robe hem, hands, and square foot silhouettes."
+    },
+    {
+      "pose_id": "WJPA-0147",
+      "status": "approved",
+      "visual_note": "Settled walk-stop pose aligns precisely; full staff and both wing tips remain intact with no mismatch artifacts."
+    },
+    {
+      "pose_id": "WJPA-0148",
+      "status": "approved",
+      "visual_note": "Right-turn anticipation preserves face, bent arms, staff, broad wings, robe, and feet without visible differences."
+    },
+    {
+      "pose_id": "WJPA-0149",
+      "status": "approved",
+      "visual_note": "Right-turn mid pose matches source exactly; no edge doubling, color mismatch marks, clipping, or component displacement."
+    },
+    {
+      "pose_id": "WJPA-0150",
+      "status": "approved",
+      "visual_note": "Completed right profile retains hat tip, beard, rear wing, staff, robe, hands, and feet with exact alignment."
+    },
+    {
+      "pose_id": "WJPA-0151",
+      "status": "approved",
+      "visual_note": "Run anticipation pose, swept staff, wing tips, trailing robe, and staggered feet match source with no artifacts."
+    },
+    {
+      "pose_id": "WJPA-0152",
+      "status": "approved",
+      "visual_note": "Run push-off frame is visually exact across raised leg, staff, hands, wings, hat, and flowing robe silhouette."
+    },
+    {
+      "pose_id": "WJPA-0153",
+      "status": "approved",
+      "visual_note": "Run extension frame preserves staff hook, separated feet, wing tips, robe motion, hands, and face without mismatch."
+    },
+    {
+      "pose_id": "WJPA-0154",
+      "status": "approved",
+      "visual_note": "Run flight frame aligns precisely; no clipping or doubled edges on hat, wings, staff, robe tails, or extended legs."
+    },
+    {
+      "pose_id": "WJPA-0155",
+      "status": "approved",
+      "visual_note": "Run landing frame matches source exactly, including curled staff head, wings, arms, robe sweep, and foot positions."
+    },
+    {
+      "pose_id": "WJPA-0156",
+      "status": "approved",
+      "visual_note": "Run brake pose is fully aligned; horizontal staff, open palm, wings, robe, and wide stride show no added or missing geometry."
+    },
+    {
+      "pose_id": "WJPA-0157",
+      "status": "approved",
+      "visual_note": "Run settle frame preserves upright staff, wings, fists, robe panels, face, and planted feet with exact correspondence."
+    },
+    {
+      "pose_id": "WJPA-0158",
+      "status": "approved",
+      "visual_note": "Crouch preparation pose matches source across compressed robe, bent legs, wings, staff, hands, and facial details."
+    },
+    {
+      "pose_id": "WJPA-0159",
+      "status": "approved",
+      "visual_note": "Jump takeoff pose aligns exactly; lifted foot, forward fist, staff, wings, robe opening, and extremities are intact."
+    },
+    {
+      "pose_id": "WJPA-0160",
+      "status": "approved",
+      "visual_note": "Jump ascent pose preserves both raised feet, staff, wings, hands, robe spread, hat, and face with no visual mismatch."
+    }
+  ]
+}

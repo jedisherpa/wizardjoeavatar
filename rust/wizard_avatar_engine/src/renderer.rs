@@ -1,11 +1,14 @@
 use crate::cell::{Cell, CellCanvas};
 use crate::controller::{blink_state, fallback_speech_shape};
 use crate::geometry::quantize_scale;
+use crate::newsroom_scene::newsroom_scene_elements;
 use crate::palette::{env, lerp_rgb, rgb, Rgb};
 use crate::pose::{sample_pose, AnchorId, PointF, PoseSample};
 use crate::projection::{project_world_to_screen, FLOOR_RATIO, HORIZON_RATIO};
+use crate::scene::{compose_over, SceneElement, SceneLayerKind};
 use crate::state::{
-    Action, EffectState, Expression, MouthShape, PlantedFoot, UpperBodyAction, WizardState,
+    Action, EffectState, Expression, MouthShape, PlantedFoot, SceneMode, UpperBodyAction,
+    WizardState,
 };
 use std::collections::BTreeMap;
 use std::sync::{Mutex, OnceLock};
@@ -75,22 +78,65 @@ pub fn render_stage(state: &WizardState, cols: usize, rows: usize) -> CellCanvas
     let Ok(sample) = sample_pose(state) else {
         return build_background(cols, rows);
     };
-    let mut stage = build_background(cols, rows);
+    let mut shadow = CellCanvas::new(cols, rows);
     draw_contact_shadow(
-        &mut stage,
+        &mut shadow,
         state.screen_position.x,
         state.screen_position.y,
         state.display_scale,
         state.planted_foot,
     );
-    stage.blit_scaled(
+    let mut body = CellCanvas::new(cols, rows);
+    body.blit_scaled(
         &sample.canvas,
         sample.root,
         (state.screen_position.x, state.screen_position.y),
         state.display_scale,
     );
-    draw_pose_anchored_layers(&mut stage, state, &sample);
-    stage
+    let mut performance_details = CellCanvas::new(cols, rows);
+    draw_pose_anchored_layers(&mut performance_details, state, &sample);
+    let character_elements = [
+        SceneElement::from_canvas(
+            "wizard_joe_contact_shadow",
+            SceneLayerKind::Character,
+            0,
+            &shadow,
+        ),
+        SceneElement::from_canvas("wizard_joe_body", SceneLayerKind::Character, 10, &body),
+        SceneElement::from_canvas(
+            "wizard_joe_performance_details",
+            SceneLayerKind::Character,
+            20,
+            &performance_details,
+        ),
+    ];
+    let mut elements = if state.scene_mode != SceneMode::Studio {
+        newsroom_scene_elements(state.scene_mode, cols, rows)
+    } else {
+        Vec::new()
+    };
+    elements.extend(character_elements);
+    let base = if state.scene_mode != SceneMode::Studio {
+        CellCanvas::filled(cols, rows, Cell::new(b' ', env::BACKGROUND))
+    } else {
+        build_background(cols, rows)
+    };
+    compose_over(base, &elements).expect("renderer creates a valid categorized scene")
+}
+
+#[must_use]
+pub fn render_environment(state: &WizardState, cols: usize, rows: usize) -> CellCanvas {
+    let elements = if state.scene_mode != SceneMode::Studio {
+        newsroom_scene_elements(state.scene_mode, cols, rows)
+    } else {
+        Vec::new()
+    };
+    let base = if state.scene_mode != SceneMode::Studio {
+        CellCanvas::filled(cols, rows, Cell::new(b' ', env::BACKGROUND))
+    } else {
+        build_background(cols, rows)
+    };
+    compose_over(base, &elements).expect("renderer creates valid environment layers")
 }
 
 #[must_use]
@@ -501,5 +547,38 @@ mod tests {
             .to_frame_bytes()
             .chunks_exact(4)
             .any(|cell| cell[0] == b'.'));
+    }
+
+    #[test]
+    fn categorized_scene_matches_the_approved_direct_composition() {
+        let mut state = WizardState::default();
+        let (x, y, scale) = project_quantized(0.0, 5.0, 480, 270);
+        state.screen_position.x = x;
+        state.screen_position.y = y;
+        state.display_scale = scale;
+        state.action = Action::MagicCast;
+        state.expression = Expression::Explaining;
+
+        let sample = sample_pose(&state).expect("pose sample");
+        let mut direct = build_background(480, 270);
+        draw_contact_shadow(
+            &mut direct,
+            state.screen_position.x,
+            state.screen_position.y,
+            state.display_scale,
+            state.planted_foot,
+        );
+        direct.blit_scaled(
+            &sample.canvas,
+            sample.root,
+            (state.screen_position.x, state.screen_position.y),
+            state.display_scale,
+        );
+        draw_pose_anchored_layers(&mut direct, &state, &sample);
+
+        assert_eq!(
+            render_stage(&state, 480, 270).to_frame_bytes(),
+            direct.to_frame_bytes()
+        );
     }
 }

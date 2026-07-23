@@ -289,6 +289,40 @@ pub enum Locomotion {
     Turn,
 }
 
+#[derive(Clone, Copy, Debug, Default, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "snake_case")]
+pub enum SceneMode {
+    #[default]
+    Studio,
+    NewsroomMain,
+    NewsroomExplainer,
+    NewsroomInterview,
+    NewsroomBreaking,
+    NewsroomProps,
+    NewsroomOverlays,
+    NewsroomCameraA,
+    NewsroomCameraB,
+}
+
+impl FromStr for SceneMode {
+    type Err = String;
+
+    fn from_str(value: &str) -> Result<Self, Self::Err> {
+        match value {
+            "studio" => Ok(Self::Studio),
+            "newsroom" | "newsroom_main" => Ok(Self::NewsroomMain),
+            "newsroom_explainer" => Ok(Self::NewsroomExplainer),
+            "newsroom_interview" => Ok(Self::NewsroomInterview),
+            "newsroom_breaking" => Ok(Self::NewsroomBreaking),
+            "newsroom_props" => Ok(Self::NewsroomProps),
+            "newsroom_overlays" => Ok(Self::NewsroomOverlays),
+            "newsroom_camera_a" => Ok(Self::NewsroomCameraA),
+            "newsroom_camera_b" => Ok(Self::NewsroomCameraB),
+            other => Err(format!("unsupported scene: {other}")),
+        }
+    }
+}
+
 impl Locomotion {
     pub const ALL: [Self; 3] = [Self::Idle, Self::Walking, Self::Turn];
 }
@@ -362,6 +396,8 @@ pub struct WizardState {
     pub facing_blend: f32,
     pub facing_pose_handoff: bool,
     pub locomotion: Locomotion,
+    #[serde(default)]
+    pub scene_mode: SceneMode,
     pub action: Action,
     pub previous_upper_body_action: UpperBodyAction,
     pub upper_body_action: UpperBodyAction,
@@ -422,6 +458,7 @@ impl Default for WizardState {
             facing_blend: 1.0,
             facing_pose_handoff: true,
             locomotion: Locomotion::Idle,
+            scene_mode: SceneMode::Studio,
             action: Action::Idle,
             previous_upper_body_action: UpperBodyAction::None,
             upper_body_action: UpperBodyAction::None,

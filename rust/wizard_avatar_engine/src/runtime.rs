@@ -1,6 +1,6 @@
 use crate::controller::{CommandResult, WizardAvatarController, WizardCommand};
 use crate::newsroom::{NewsPerformanceCueV1, NewsroomCueReceiptV1, NewsroomError};
-use crate::state::WizardState;
+use crate::state::{SceneMode, WizardState};
 use std::collections::{BTreeMap, VecDeque};
 use std::sync::Arc;
 
@@ -89,6 +89,11 @@ impl AvatarRuntime {
         let receipt = self.controller.apply_newsroom_cue(cue)?;
         self.current = Arc::new(self.controller.current_state().clone());
         Ok(receipt)
+    }
+
+    pub fn set_scene_mode(&mut self, mode: SceneMode) {
+        self.controller.state_mut().scene_mode = mode;
+        self.current = Arc::new(self.controller.current_state().clone());
     }
 
     #[must_use]

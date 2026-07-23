@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "ledger_id": "wizard_joe_newsroom_v2_admission",
+  "source_manifest_path": "evidence/newsroom-visual-development-v2/scene-manifest.json",
+  "source_manifest_sha256": "0bddadf7b3c7fd943d7dad82f6be04270414c3f21d4657eb9304b5d8e0793e3a",
+  "required_fidelity": 0.95,
+  "expected_source_count": 6,
+  "verified_source_count": 6,
+  "awaiting_visual_comparison_count": 0,
+  "failed_source_count": 0,
+  "queued_source_count": 0,
+  "entries": [
+    {
+      "sequence": 1,
+      "source_id": "main_anchor_desk_v2",
+      "source_sha256": "eadb20c060f0e4b2183d8e655eee92f0d9b053cb2dc7957c7737bb5e4b4191aa",
+      "source_kind": "character_free_set_plate",
+      "status": "visually_verified",
+      "graph_path": "evidence/newsroom-visual-development-v2/pixelgraph-admission/main_anchor_desk_v2/pixelgraph.json.gz",
+      "graph_sha256": "12a972c5a31a2c886c243c82f59c78d922385f2dabf6d0ee8f746a3aed287715",
+      "verification_report_path": "evidence/newsroom-visual-development-v2/pixelgraph-admission/main_anchor_desk_v2/verification.json",
+      "silhouette_iou": 1.0,
+      "foreground_color_fidelity": 1.0
+    },
+    {
+      "sequence": 2,
+      "source_id": "standing_explainer_wall_v2",
+      "source_sha256": "59c7cc1954ad6eb10407a29ec916f69f7d899472639b1dc4dc2bfa43d37e7199",
+      "source_kind": "character_free_set_plate",
+      "status": "visually_verified",
+      "graph_path": "evidence/newsroom-visual-development-v2/pixelgraph-admission/standing_explainer_wall_v2/pixelgraph.json.gz",
+      "graph_sha256": "6d768a4bef143257eb625acf4be410360e9c489992be2ffcb5762f61153ee1af",
+      "verification_report_path": "evidence/newsroom-visual-development-v2/pixelgraph-admission/standing_explainer_wall_v2/verification.json",
+      "silhouette_iou": 1.0,
+      "foreground_color_fidelity": 1.0
+    },
+    {
+      "sequence": 3,
+      "source_id": "cohost_interview_v2",
+      "source_sha256": "bccc4e46a225cfd2b0b41a63da8c2b5f09007d847a5d84bf357a11140ea48ed3",
+      "source_kind": "character_free_set_plate",
+      "status": "visually_verified",
+      "graph_path": "evidence/newsroom-visual-development-v2/pixelgraph-admission/cohost_interview_v2/pixelgraph.json.gz",
+      "graph_sha256": "adc650540317e37a4e90c52514d1e24b9376e623a4f47d93916fbc6b6009af4a",
+      "verification_report_path": "evidence/newsroom-visual-development-v2/pixelgraph-admission/cohost_interview_v2/verification.json",
+      "silhouette_iou": 1.0,
+      "foreground_color_fidelity": 1.0
+    },
+    {
+      "sequence": 4,
+      "source_id": "magical_breaking_field_v2",
+      "source_sha256": "4b0618343a3d7d7d2957a35e3cda11d1f63ee80c313df8c3a94f65429cf27a2c",
+      "source_kind": "character_free_set_plate",
+      "status": "visually_verified",
+      "graph_path": "evidence/newsroom-visual-development-v2/pixelgraph-admission/magical_breaking_field_v2/pixelgraph.json.gz",
+      "graph_sha256": "945a1bd385ee18e5b76c4ab454b7f2aea403082cc2fc965a262bc6e58b6d0791",
+      "verification_report_path": "evidence/newsroom-visual-development-v2/pixelgraph-admission/magical_breaking_field_v2/verification.json",
+      "silhouette_iou": 1.0,
+      "foreground_color_fidelity": 1.0
+    },
+    {
+      "sequence": 5,
+      "source_id": "studio_furniture_displays_v2",
+      "source_sha256": "92e86b8c4b96ace81b6dba8ef154d6c6d7e6e4f80379f64dd126461e5faab94e",
+      "source_kind": "character_free_object_board",
+      "status": "visually_verified",
+      "graph_path": "evidence/newsroom-visual-development-v2/pixelgraph-admission/studio_furniture_displays_v2/pixelgraph.json.gz",
+      "graph_sha256": "a8d2055a8f38906d223d6131477bebd784c79bd3770ea6cefd124187c033a326",
+      "verification_report_path": "evidence/newsroom-visual-development-v2/pixelgraph-admission/studio_furniture_displays_v2/verification.json",
+      "silhouette_iou": 1.0,
+      "foreground_color_fidelity": 1.0
+    },
+    {
+      "sequence": 6,
+      "source_id": "broadcast_magic_overlays_v2",
+      "source_sha256": "a04e819396ec36e0d46112db5200996f18f631afde8d770d1e8149d3af56efa3",
+      "source_kind": "character_free_object_board",
+      "status": "visually_verified",
+      "graph_path": "evidence/newsroom-visual-development-v2/pixelgraph-admission/broadcast_magic_overlays_v2/pixelgraph.json.gz",
+      "graph_sha256": "b8e5000640cb363cf7d43db872fd8b8acfd9e1830e7ae95079ecf54f3d346390",
+      "verification_report_path": "evidence/newsroom-visual-development-v2/pixelgraph-admission/broadcast_magic_overlays_v2/verification.json",
+      "silhouette_iou": 1.0,
+      "foreground_color_fidelity": 1.0
+    }
+  ]
+}

@@ -1,5 +1,6 @@
 import { AscilineStreamClient, parseInit } from "./asciline_client.js";
 import { CellStageRenderer } from "./canvas_renderer.js";
+import { PixelGraphAvatarRenderer } from "./pixel_graph_renderer.js";
 import { createMotionTourLoop } from "./motion_tour.js";
 import {
   buildNewsroomCue,
@@ -8,6 +9,7 @@ import {
 } from "./newsroom_controls.js";
 
 const canvas = document.getElementById("avatar-canvas");
+const pixelGraphCanvas = document.getElementById("pixelgraph-canvas");
 const diagnostics = {
   ws: document.getElementById("diag-ws"),
   fps: document.getElementById("diag-fps"),
@@ -17,6 +19,7 @@ const diagnostics = {
 };
 const stateLabel = document.getElementById("state-label");
 const renderer = new CellStageRenderer(canvas, 480, 270);
+const pixelGraphRenderer = new PixelGraphAvatarRenderer(pixelGraphCanvas, 480, 270);
 const connection = document.getElementById("connection");
 const connectionLabel = connection.querySelector(".connection-label");
 const modeButtons = [...document.querySelectorAll("[data-mode-target]")];
@@ -28,6 +31,7 @@ const cueStatus = document.getElementById("cue-status");
 const cueResultTitle = document.getElementById("cue-result-title");
 const cueResultDetail = document.getElementById("cue-result-detail");
 const newsProgram = document.getElementById("news-program");
+const newsScene = document.getElementById("news-scene");
 const newsSensitivity = document.getElementById("news-sensitivity");
 const newsIntensity = document.getElementById("news-intensity");
 const newsIntensityValue = document.getElementById("news-intensity-value");
@@ -37,11 +41,16 @@ let reconnectTimer = null;
 let frameCount = 0;
 let lastFpsAt = performance.now();
 const tourButton = document.getElementById("tour");
+const motionClipSelect = document.getElementById("motion-clip");
+const motionClipButton = document.getElementById("motion-clip-play");
+const poseSourceSelect = document.getElementById("pose-source");
+const poseSourceButton = document.getElementById("pose-source-show");
 let newsroomSequence = 1;
 let newsroomGeneration = 1;
 let newsroomBusy = false;
 let newsroomCursorSynced = false;
 let countValue = 0;
+let poseClipCatalog = new Map();
 
 function setConnectionState(state, label = state) {
   diagnostics.ws.textContent = label;
@@ -68,6 +77,10 @@ function resizeCanvas() {
   const rect = canvas.getBoundingClientRect();
   const dpr = window.devicePixelRatio || 1;
   renderer.resize(Math.max(1, Math.round(rect.width * dpr)), Math.max(1, Math.round(rect.height * dpr)));
+  pixelGraphRenderer.resize(
+    Math.max(1, Math.round(rect.width * dpr)),
+    Math.max(1, Math.round(rect.height * dpr)),
+  );
 }
 
 function animationFrame(now) {
@@ -80,6 +93,7 @@ function animationFrame(now) {
       lastFpsAt = now;
     }
   }
+  pixelGraphRenderer.present(now);
   requestAnimationFrame(animationFrame);
 }
 
@@ -100,6 +114,16 @@ function connect() {
         renderer.configure(metadata.cols, metadata.rows);
         renderer.queue = stream.presentationQueue;
         resizeCanvas();
+      } else if (event.data.startsWith("{")) {
+        try {
+          const message = JSON.parse(event.data);
+          if (message.type === "pixelgraph_state") {
+            pixelGraphRenderer.updateState(message);
+            motionClipButton.setAttribute("aria-pressed", String(Boolean(message.pose_clip_id)));
+          }
+        } catch {
+          setConnectionState("error", "state_decode");
+        }
       }
       return;
     }
@@ -162,6 +186,12 @@ function setMode(mode) {
     clearMotionTour();
     syncNewsroomCursor();
   }
+  const scene = newsroom ? newsScene.value : "studio";
+  pixelGraphRenderer.preloadSceneForeground(scene)
+    .then(() => post("scene", { scene }))
+    .catch(() => {
+      setConnectionState("error", "scene");
+    });
   requestAnimationFrame(resizeCanvas);
 }
 
@@ -292,6 +322,31 @@ document.getElementById("expression").addEventListener("change", (event) => {
   clearMotionTour();
   post("expression", { expression: event.target.value });
 });
+motionClipButton.addEventListener("click", async () => {
+  clearMotionTour();
+  const option = motionClipSelect.selectedOptions[0];
+  const clip = poseClipCatalog.get(option.value);
+  if (!clip) {
+    setConnectionState("error", "clip_catalog");
+    return;
+  }
+  motionClipButton.disabled = true;
+  try {
+    await pixelGraphRenderer.preloadPoseIds(clip.steps.map((step) => step.pose_id));
+    await post("pose-clip", {
+      clip_id: clip.id,
+      loop: option.dataset.loopable === "true",
+    });
+  } catch {
+    setConnectionState("error", "clip_preload");
+  } finally {
+    motionClipButton.disabled = false;
+  }
+});
+poseSourceButton.addEventListener("click", () => {
+  clearMotionTour();
+  post("pose", poseSourceSelect.value ? { pose_id: poseSourceSelect.value } : { pose_id: null });
+});
 tourButton.addEventListener("click", () => motionTour.start());
 document.getElementById("speak").addEventListener("click", () => {
   clearMotionTour();
@@ -310,6 +365,13 @@ modeButtons.forEach((button) => {
 newsIntensity.addEventListener("input", () => { newsIntensityValue.textContent = newsIntensity.value; });
 newsProgram.addEventListener("change", () => {
   newsroomBug.textContent = newsProgram.selectedOptions[0].textContent;
+});
+newsScene.addEventListener("change", () => {
+  pixelGraphRenderer.preloadSceneForeground(newsScene.value)
+    .then(() => post("scene", { scene: newsScene.value }))
+    .catch(() => {
+      setConnectionState("error", "scene");
+    });
 });
 window.addEventListener("keydown", (event) => {
   if (document.body.dataset.mode !== "studio") return;
@@ -345,9 +407,38 @@ canvas.addEventListener("contextrestored", () => {
   stream.resume("context_restore");
   resizeCanvas();
 });
+pixelGraphCanvas.addEventListener("contextlost", (event) => {
+  event.preventDefault();
+});
+pixelGraphCanvas.addEventListener("contextrestored", () => {
+  pixelGraphRenderer.restoreContext();
+  resizeCanvas();
+});
 window.addEventListener("resize", resizeCanvas);
 
 renderNewsroomCommands();
+Promise.all([
+  pixelGraphRenderer.loadCatalog(),
+  requestJson("/api/avatar/wizard/v2/pose-clips/catalog"),
+])
+  .then(([catalog, clipCatalog]) => {
+    if (clipCatalog.schema_version !== 1 || clipCatalog.clip_count !== clipCatalog.clips.length) {
+      throw new Error("Pose clip catalog is incomplete");
+    }
+    poseClipCatalog = new Map(clipCatalog.clips.map((clip) => [clip.id, clip]));
+    for (const option of motionClipSelect.querySelectorAll("option")) {
+      if (!poseClipCatalog.has(option.value)) throw new Error(`Missing pose clip ${option.value}`);
+    }
+    const fragment = document.createDocumentFragment();
+    for (const entry of catalog.entries) {
+      const option = document.createElement("option");
+      option.value = entry.source_record_id;
+      option.textContent = `${entry.source_record_id} · ${entry.display_name}`;
+      fragment.append(option);
+    }
+    poseSourceSelect.append(fragment);
+  })
+  .catch(() => setConnectionState("error", "pose_catalog"));
 resizeCanvas();
 requestAnimationFrame(animationFrame);
 connect();

@@ -1,0 +1,16 @@
+{
+  "schema_version": 2,
+  "compiler_id": "wizard-avatar-production-alpha-v1",
+  "source_count": 260,
+  "base_pose_count": 250,
+  "forward_flight_count": 10,
+  "exact_rgba_verified_count": 260,
+  "graph_count": 260,
+  "visual_review_pending_count": 0,
+  "failed_count": 0,
+  "frame": {
+    "width": 1254,
+    "height": 1254
+  },
+  "policy": "Every source PNG is hash-verified from its pinned ZIP, decoded as RGBA8 at 1254x1254, checked against its declared safe bounds, converted sequentially into a native colored-run PixelGraph, serialized, read back, projected, and required to match every RGBA byte including alpha. PNG evidence is never a runtime dependency."
+}

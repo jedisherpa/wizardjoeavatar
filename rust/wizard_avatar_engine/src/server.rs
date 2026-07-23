@@ -3,10 +3,20 @@ use crate::controller::WizardCommand;
 use crate::frame_source::ProceduralWizardFrameSource;
 use crate::hub::AvatarFrameHub;
 use crate::newsroom::{NewsPerformanceCueV1, NewsroomError};
+use crate::newsroom_scene::{
+    newsroom_foreground_catalog, newsroom_foreground_graph_asset, newsroom_post_character_catalog,
+    newsroom_post_character_graph_asset,
+};
+use crate::pose_graph_runtime::{
+    previous_runtime_pose_id, resolved_runtime_pose_id, runtime_actor_transform,
+    runtime_pose_graph_catalog, verify_graph_bytes, RuntimePoseGraphEntry,
+};
 use anyhow::Context;
+use axum::body::Body;
 use axum::extract::ws::{Message, WebSocket, WebSocketUpgrade};
-use axum::extract::{DefaultBodyLimit, Query, State};
-use axum::http::StatusCode;
+use axum::extract::{DefaultBodyLimit, Path, Query, State};
+use axum::http::header::{CACHE_CONTROL, CONTENT_ENCODING, CONTENT_TYPE, ETAG};
+use axum::http::{HeaderValue, StatusCode};
 use axum::response::{Html, IntoResponse, Response};
 use axum::routing::{get, post};
 use axum::{Json, Router};
@@ -14,6 +24,7 @@ use futures_util::{SinkExt, StreamExt};
 use serde::Deserialize;
 use serde_json::{json, Value};
 use std::net::SocketAddr;
+use std::str::FromStr;
 use std::sync::Arc;
 use tokio::net::TcpListener;
 
@@ -52,6 +63,43 @@ pub fn app(source: ProceduralWizardFrameSource) -> Router {
         .route("/avatar/asciline_codec.js", get(asciline_codec_js))
         .route("/avatar/asciline_client.js", get(asciline_client_js))
         .route("/avatar/canvas_renderer.js", get(canvas_renderer_js))
+        .route(
+            "/avatar/pixel_graph_renderer.js",
+            get(pixel_graph_renderer_js),
+        )
+        .route("/avatar/pixel_graph_worker.js", get(pixel_graph_worker_js))
+        .route(
+            "/api/avatar/wizard/v2/pose-graphs/catalog",
+            get(pose_graph_catalog),
+        )
+        .route(
+            "/api/avatar/wizard/v2/pose-graphs/semantic/:semantic_id",
+            get(pose_graph_by_semantic),
+        )
+        .route(
+            "/api/avatar/wizard/v2/pose-graphs/source/:source_record_id",
+            get(pose_graph_by_source),
+        )
+        .route(
+            "/api/avatar/wizard/v2/pose-clips/catalog",
+            get(pose_clip_catalog),
+        )
+        .route(
+            "/api/avatar/wizard/v2/newsroom-graphs/foreground/catalog",
+            get(newsroom_foreground_graph_catalog),
+        )
+        .route(
+            "/api/avatar/wizard/v2/newsroom-graphs/foreground/:scene/:target_id",
+            get(newsroom_foreground_graph),
+        )
+        .route(
+            "/api/avatar/wizard/v2/newsroom-graphs/post-character/catalog",
+            get(newsroom_post_character_graph_catalog),
+        )
+        .route(
+            "/api/avatar/wizard/v2/newsroom-graphs/post-character/:scene/:target_id",
+            get(newsroom_post_character_graph),
+        )
         .route(
             "/avatar/reference-avatar-cells.json",
             get(reference_avatar_cells_json),
@@ -98,6 +146,9 @@ pub fn app(source: ProceduralWizardFrameSource) -> Router {
         )
         .route("/api/avatar/wizard/face", post(command_face))
         .route("/api/avatar/wizard/action", post(command_action))
+        .route("/api/avatar/wizard/pose", post(command_pose))
+        .route("/api/avatar/wizard/pose-clip", post(command_pose_clip))
+        .route("/api/avatar/wizard/scene", post(command_scene))
         .route("/api/avatar/wizard/expression", post(command_expression))
         .route("/api/avatar/wizard/speak", post(command_speak))
         .route("/api/avatar/wizard/stop", post(command_stop))
@@ -162,6 +213,20 @@ async fn canvas_renderer_js() -> impl IntoResponse {
     )
 }
 
+async fn pixel_graph_renderer_js() -> impl IntoResponse {
+    (
+        [("content-type", "application/javascript; charset=utf-8")],
+        include_str!("../web/pixel_graph_renderer.js"),
+    )
+}
+
+async fn pixel_graph_worker_js() -> impl IntoResponse {
+    (
+        [("content-type", "application/javascript; charset=utf-8")],
+        include_str!("../web/pixel_graph_worker.js"),
+    )
+}
+
 async fn reference_avatar_cells_json() -> impl IntoResponse {
     (
         [("content-type", "application/json; charset=utf-8")],
@@ -183,9 +248,191 @@ async fn state(State(app): State<AppState>) -> Json<Value> {
         "build": {
             "git_sha": crate::BUILD_GIT_SHA,
         },
+        "runtime_pose_id": resolved_runtime_pose_id(&state),
         "state": state,
         "diagnostics": diagnostics,
     }))
+}
+
+async fn pose_graph_catalog() -> Response {
+    match runtime_pose_graph_catalog() {
+        Ok(catalog) => Json(catalog.manifest().clone()).into_response(),
+        Err(error) => (
+            StatusCode::INTERNAL_SERVER_ERROR,
+            Json(json!({
+                "error": "runtime_pose_graph_catalog_unavailable",
+                "message": error,
+            })),
+        )
+            .into_response(),
+    }
+}
+
+async fn pose_clip_catalog() -> Json<Value> {
+    Json(json!({
+        "schema_version": 1,
+        "clip_count": crate::pose_clip::POSE_CLIPS.len(),
+        "clips": crate::pose_clip::POSE_CLIPS,
+    }))
+}
+
+async fn newsroom_foreground_graph_catalog(
+) -> Json<crate::newsroom_scene::NewsroomForegroundCatalog> {
+    Json(newsroom_foreground_catalog())
+}
+
+async fn newsroom_post_character_graph_catalog(
+) -> Json<crate::newsroom_scene::NewsroomForegroundCatalog> {
+    Json(newsroom_post_character_catalog())
+}
+
+async fn newsroom_foreground_graph(Path((scene, target_id)): Path<(String, String)>) -> Response {
+    let Ok(mode) = crate::state::SceneMode::from_str(&scene) else {
+        return (
+            StatusCode::NOT_FOUND,
+            Json(json!({"error": "newsroom_foreground_scene_not_found", "scene": scene})),
+        )
+            .into_response();
+    };
+    let Some((sha256, bytes)) = newsroom_foreground_graph_asset(mode, &target_id) else {
+        return (
+            StatusCode::NOT_FOUND,
+            Json(json!({
+                "error": "newsroom_foreground_graph_not_found",
+                "scene": scene,
+                "target_id": target_id,
+            })),
+        )
+            .into_response();
+    };
+    newsroom_graph_response(sha256, bytes)
+}
+
+async fn newsroom_post_character_graph(
+    Path((scene, target_id)): Path<(String, String)>,
+) -> Response {
+    let Ok(mode) = crate::state::SceneMode::from_str(&scene) else {
+        return (
+            StatusCode::NOT_FOUND,
+            Json(json!({"error": "newsroom_post_character_scene_not_found", "scene": scene})),
+        )
+            .into_response();
+    };
+    let Some((sha256, bytes)) = newsroom_post_character_graph_asset(mode, &target_id) else {
+        return (
+            StatusCode::NOT_FOUND,
+            Json(json!({
+                "error": "newsroom_post_character_graph_not_found",
+                "scene": scene,
+                "target_id": target_id,
+            })),
+        )
+            .into_response();
+    };
+    newsroom_graph_response(sha256, bytes)
+}
+
+fn newsroom_graph_response(sha256: &str, bytes: &'static [u8]) -> Response {
+    let etag = HeaderValue::from_str(&format!("\"{sha256}\""))
+        .expect("promoted newsroom graph hash is a valid header value");
+    Response::builder()
+        .status(StatusCode::OK)
+        .header(CONTENT_TYPE, "application/json; charset=utf-8")
+        .header(CONTENT_ENCODING, "gzip")
+        .header(CACHE_CONTROL, "public, max-age=31536000, immutable")
+        .header(ETAG, etag)
+        .body(Body::from(bytes))
+        .expect("newsroom foreground response headers are valid")
+}
+
+async fn pose_graph_by_semantic(Path(semantic_id): Path<String>) -> Response {
+    let Ok(catalog) = runtime_pose_graph_catalog() else {
+        return pose_graph_catalog_unavailable();
+    };
+    let Some(entry) = catalog.primary_for_semantic_id(&semantic_id) else {
+        return pose_graph_not_found("semantic_id", &semantic_id);
+    };
+    serve_pose_graph(catalog, entry).await
+}
+
+async fn pose_graph_by_source(Path(source_record_id): Path<String>) -> Response {
+    let Ok(catalog) = runtime_pose_graph_catalog() else {
+        return pose_graph_catalog_unavailable();
+    };
+    let Some(entry) = catalog.for_source_record_id(&source_record_id) else {
+        return pose_graph_not_found("source_record_id", &source_record_id);
+    };
+    serve_pose_graph(catalog, entry).await
+}
+
+async fn serve_pose_graph(
+    catalog: &crate::pose_graph_runtime::RuntimePoseGraphCatalog,
+    entry: &RuntimePoseGraphEntry,
+) -> Response {
+    let path = match catalog.graph_path(entry) {
+        Ok(path) => path,
+        Err(error) => {
+            return (
+                StatusCode::INTERNAL_SERVER_ERROR,
+                Json(json!({"error": "pose_graph_storage_unavailable", "message": error})),
+            )
+                .into_response();
+        }
+    };
+    let bytes = match tokio::fs::read(&path).await {
+        Ok(bytes) => bytes,
+        Err(error) => {
+            return (
+                StatusCode::INTERNAL_SERVER_ERROR,
+                Json(json!({
+                    "error": "pose_graph_read_failed",
+                    "message": format!("read {}: {error}", path.display()),
+                })),
+            )
+                .into_response();
+        }
+    };
+    if let Err(error) = verify_graph_bytes(entry, &bytes) {
+        return (
+            StatusCode::INTERNAL_SERVER_ERROR,
+            Json(json!({"error": "pose_graph_integrity_failed", "message": error})),
+        )
+            .into_response();
+    }
+    let etag = match HeaderValue::from_str(&format!("\"{}\"", entry.graph_sha256)) {
+        Ok(value) => value,
+        Err(error) => {
+            return (
+                StatusCode::INTERNAL_SERVER_ERROR,
+                Json(json!({"error": "pose_graph_etag_failed", "message": error.to_string()})),
+            )
+                .into_response();
+        }
+    };
+    Response::builder()
+        .status(StatusCode::OK)
+        .header(CONTENT_TYPE, "application/json; charset=utf-8")
+        .header(CONTENT_ENCODING, "gzip")
+        .header(CACHE_CONTROL, "public, max-age=31536000, immutable")
+        .header(ETAG, etag)
+        .body(Body::from(bytes))
+        .expect("pose graph response headers are valid")
+}
+
+fn pose_graph_catalog_unavailable() -> Response {
+    (
+        StatusCode::INTERNAL_SERVER_ERROR,
+        Json(json!({"error": "runtime_pose_graph_catalog_unavailable"})),
+    )
+        .into_response()
+}
+
+fn pose_graph_not_found(field: &str, value: &str) -> Response {
+    (
+        StatusCode::NOT_FOUND,
+        Json(json!({"error": "pose_graph_not_found", field: value})),
+    )
+        .into_response()
 }
 
 async fn capabilities() -> Response {
@@ -331,6 +578,43 @@ async fn command_action(
     apply_command(app, "action", payload).await
 }
 
+async fn command_pose(
+    State(app): State<AppState>,
+    Json(payload): Json<Value>,
+) -> impl IntoResponse {
+    apply_command(app, "pose", payload).await
+}
+
+async fn command_pose_clip(
+    State(app): State<AppState>,
+    Json(payload): Json<Value>,
+) -> impl IntoResponse {
+    apply_command(app, "pose_clip", payload).await
+}
+
+async fn command_scene(
+    State(app): State<AppState>,
+    Json(payload): Json<Value>,
+) -> impl IntoResponse {
+    let Some(scene) = payload.get("scene").and_then(Value::as_str) else {
+        return (
+            StatusCode::BAD_REQUEST,
+            Json(json!({"ok": false, "message": "scene is required"})),
+        );
+    };
+    let Ok(mode) = crate::state::SceneMode::from_str(scene) else {
+        return (
+            StatusCode::BAD_REQUEST,
+            Json(json!({"ok": false, "message": format!("unsupported scene: {scene}")})),
+        );
+    };
+    let state = app.hub.set_scene_mode(mode).await;
+    (
+        StatusCode::OK,
+        Json(json!({"ok": true, "message": "ok", "state": state})),
+    )
+}
+
 async fn command_expression(
     State(app): State<AppState>,
     Json(payload): Json<Value>,
@@ -458,6 +742,9 @@ async fn handle_socket(socket: WebSocket, app: AppState, codec: String) {
                             }
                             continue;
                         }
+                        if send_frame_state(&mut sender, packet.sequence, packet.simulation_tick, &packet.state).await.is_err() {
+                            break;
+                        }
                         if sender.send(Message::Binary(packet.encoded.to_vec())).await.is_err() {
                             break;
                         }
@@ -484,9 +771,196 @@ async fn send_bootstrap(
     let Some(bootstrap) = bootstrap else {
         return Ok(None);
     };
+    send_frame_state(
+        sender,
+        bootstrap.sequence,
+        bootstrap.simulation_tick,
+        &bootstrap.state,
+    )
+    .await?;
     sender
         .send(Message::Binary(bootstrap.encoded.to_vec()))
         .await
         .map_err(|_| ())?;
     Ok(Some(bootstrap.sequence))
+}
+
+async fn send_frame_state(
+    sender: &mut futures_util::stream::SplitSink<WebSocket, Message>,
+    sequence: u32,
+    simulation_tick: u64,
+    state: &crate::state::WizardState,
+) -> Result<(), ()> {
+    sender
+        .send(Message::Text(
+            pixelgraph_state_payload(sequence, simulation_tick, state).to_string(),
+        ))
+        .await
+        .map_err(|_| ())
+}
+
+fn pixelgraph_state_payload(
+    sequence: u32,
+    simulation_tick: u64,
+    state: &crate::state::WizardState,
+) -> Value {
+    json!({
+        "type": "pixelgraph_state",
+        "sequence": sequence,
+        "simulation_tick": simulation_tick,
+        "pose_id": resolved_runtime_pose_id(state),
+        "previous_pose_id": previous_runtime_pose_id(state),
+        "presentation_pose_id": presentation_pose_id(state),
+        "presentation_override_active": presentation_override_active(state),
+        "pose_blend": state.pose_blend,
+        "world_position": state.world_position,
+        "actor_transform": runtime_actor_transform(state),
+        "velocity": state.velocity,
+        "facing": state.facing,
+        "locomotion": state.locomotion,
+        "action": state.action,
+        "effect_state": state.effect_state,
+        "scene_mode": state.scene_mode,
+        "walk_phase": state.walk_phase,
+        "contact_marker": state.contact_marker,
+        "pose_clip_id": state.pose_clip_id,
+        "pose_clip_step": state.pose_clip_step,
+        "pose_clip_generation": state.pose_clip_generation,
+        "speech_active": state.speech_id.is_some(),
+        "speech_id": state.speech_id,
+        "expression": state.expression,
+        "mouth": state.mouth,
+    })
+}
+
+fn presentation_pose_id(state: &crate::state::WizardState) -> String {
+    if !presentation_override_active(state) {
+        return resolved_runtime_pose_id(state);
+    }
+    if state.speech_id.is_some() {
+        return mouth_graph_pose_id(state.mouth).to_string();
+    }
+    expression_graph_pose_id(state.expression).to_string()
+}
+
+fn presentation_override_active(state: &crate::state::WizardState) -> bool {
+    use crate::state::{Direction, Expression, Locomotion, MouthShape};
+
+    state.pose_id.is_none()
+        && state.pose_clip_id.is_none()
+        && state.locomotion == Locomotion::Idle
+        && state.facing == Direction::South
+        && (state.speech_id.is_some()
+            || state.expression != Expression::Neutral
+            || state.mouth != MouthShape::Closed)
+}
+
+fn expression_graph_pose_id(expression: crate::state::Expression) -> &'static str {
+    use crate::state::Expression;
+
+    match expression {
+        Expression::Neutral => "emotion_neutral",
+        Expression::Happy => "emotion_joy",
+        Expression::Amused => "emotion_amused",
+        Expression::Thinking => "emotion_contemplative",
+        Expression::Surprised => "emotion_surprise",
+        Expression::Worried => "emotion_concern",
+        Expression::Confident => "emotion_confident",
+        Expression::Focused => "emotion_determined",
+        Expression::Skeptical => "emotion_skepticism",
+        Expression::Explaining => "speak_explain_open",
+    }
+}
+
+fn mouth_graph_pose_id(mouth: crate::state::MouthShape) -> &'static str {
+    use crate::state::MouthShape;
+
+    match mouth {
+        MouthShape::Closed => "idle_speaking_ready",
+        MouthShape::OpenSmall => "speak_explain_precise",
+        MouthShape::OpenMedium => "speak_explain_sequence",
+        MouthShape::OpenWide => "speak_emphasize_high",
+        MouthShape::Rounded => "speak_question",
+        MouthShape::Smile => "speak_reassure",
+        MouthShape::Frown => "emotion_sadness",
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use crate::state::{Direction, Expression, Locomotion, MouthShape, WizardState};
+
+    #[test]
+    fn authored_expression_and_mouth_presentations_resolve_to_verified_graphs() {
+        let catalog = runtime_pose_graph_catalog().expect("runtime graph catalog");
+        for expression in Expression::ALL {
+            assert!(
+                catalog
+                    .primary_for_semantic_id(expression_graph_pose_id(expression))
+                    .is_some(),
+                "missing expression graph for {expression:?}"
+            );
+        }
+        for mouth in [
+            MouthShape::Closed,
+            MouthShape::OpenSmall,
+            MouthShape::OpenMedium,
+            MouthShape::OpenWide,
+            MouthShape::Rounded,
+            MouthShape::Smile,
+            MouthShape::Frown,
+        ] {
+            assert!(
+                catalog
+                    .primary_for_semantic_id(mouth_graph_pose_id(mouth))
+                    .is_some(),
+                "missing mouth graph for {mouth:?}"
+            );
+        }
+    }
+
+    #[test]
+    fn pixelgraph_state_transmits_the_actual_mouth_and_authored_presentation_pose() {
+        let mut state = WizardState {
+            speech_id: Some("speech-test".to_string()),
+            mouth: MouthShape::OpenWide,
+            expression: Expression::Happy,
+            ..WizardState::default()
+        };
+        let payload = pixelgraph_state_payload(17, 29, &state);
+        assert_eq!(payload["sequence"], 17);
+        assert_eq!(payload["simulation_tick"], 29);
+        assert_eq!(payload["speech_active"], true);
+        assert_eq!(payload["speech_id"], "speech-test");
+        assert_eq!(payload["mouth"], "open_wide");
+        assert_eq!(payload["expression"], "happy");
+        assert_eq!(payload["presentation_override_active"], true);
+        assert_eq!(payload["presentation_pose_id"], "speak_emphasize_high");
+
+        state.speech_id = None;
+        state.mouth = MouthShape::Smile;
+        let expression_payload = pixelgraph_state_payload(18, 30, &state);
+        assert_eq!(expression_payload["presentation_pose_id"], "emotion_joy");
+    }
+
+    #[test]
+    fn facial_presentation_never_replaces_explicit_choreography_or_locomotion() {
+        let mut explicit = WizardState {
+            pose_id: Some("magic_cast_begin".to_string()),
+            expression: Expression::Surprised,
+            mouth: MouthShape::OpenWide,
+            ..WizardState::default()
+        };
+        assert!(!presentation_override_active(&explicit));
+        assert_eq!(presentation_pose_id(&explicit), "magic_cast_begin");
+
+        explicit.pose_id = None;
+        explicit.locomotion = Locomotion::Walking;
+        assert!(!presentation_override_active(&explicit));
+
+        explicit.locomotion = Locomotion::Idle;
+        explicit.facing = Direction::East;
+        assert!(!presentation_override_active(&explicit));
+    }
 }

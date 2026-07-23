@@ -1,9 +1,10 @@
-use crate::animation::reference_pose_id_for_state;
 use crate::pose::transition_ticks_for;
+use crate::pose_graph_runtime::implicit_runtime_pose_id;
 use crate::pose_playback::{PosePlayback, DEFAULT_POSE_TRANSITION_TICKS};
 use crate::state::WizardState;
+use serde::Serialize;
 
-#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Serialize)]
 pub struct PoseClipStep {
     pub pose_id: &'static str,
     pub hold_ticks: u16,
@@ -13,7 +14,9 @@ pub struct PoseClipStep {
 impl PoseClipStep {
     #[must_use]
     pub const fn effective_transition_ticks(self) -> u16 {
-        if self.transition_ticks < DEFAULT_POSE_TRANSITION_TICKS {
+        if self.transition_ticks == 0 {
+            0
+        } else if self.transition_ticks < DEFAULT_POSE_TRANSITION_TICKS {
             DEFAULT_POSE_TRANSITION_TICKS
         } else {
             self.transition_ticks
@@ -21,7 +24,7 @@ impl PoseClipStep {
     }
 }
 
-#[derive(Clone, Copy, Debug)]
+#[derive(Clone, Copy, Debug, Serialize)]
 pub struct PoseClipDefinition {
     pub id: &'static str,
     pub steps: &'static [PoseClipStep],
@@ -37,132 +40,183 @@ const fn step(pose_id: &'static str, hold_ticks: u16, transition_ticks: u16) -> 
 }
 
 const GROUND_WALK: &[PoseClipStep] = &[
-    step("walk_front_left", 12, 10),
-    step("walk_front_right_lift", 12, 10),
-    step("walk_front_right", 12, 10),
+    step("walk_contact_left", 8, 0),
+    step("walk_passing_left", 8, 0),
+    step("walk_up_left", 8, 0),
+    step("walk_contact_right", 8, 0),
 ];
 const GROUND_RUN: &[PoseClipStep] = &[
-    step("walk_front_right", 10, 9),
-    step("walk_front_right_lift", 9, 8),
-    step("front_run_charge_right_plant", 9, 8),
-    step("run_front_airborne_reach", 9, 8),
-    step("run_front_airborne_drive", 9, 8),
-    step("front_run_charge_right_plant", 10, 8),
-    step("walk_front_left", 11, 9),
+    step("run_passing", 5, 0),
+    step("run_contact_left", 5, 0),
+    step("run_flight_phase", 5, 0),
+    step("run_contact_right", 5, 0),
 ];
 const HOVER_FLAP: &[PoseClipStep] = &[
-    step("fly_front_hover_ready", 12, 10),
-    step("fly_front_knee_up", 10, 9),
-    step("fly_front_wings_up", 9, 8),
-    step("fly_front_wings_down", 9, 8),
-    step("fly_front_hover_neutral", 12, 9),
+    step("fly_forward_camera_top_recovery", 6, 0),
+    step("fly_forward_camera_early_powerstroke", 6, 0),
+    step("fly_forward_camera_mid_powerstroke", 6, 0),
+    step("fly_forward_camera_late_powerstroke", 6, 0),
+    step("fly_forward_camera_bottom_powerstroke", 6, 0),
+    step("fly_forward_camera_early_recovery", 6, 0),
+    step("fly_forward_camera_mid_recovery", 6, 0),
+    step("fly_forward_camera_late_recovery", 6, 0),
+    step("fly_forward_camera_near_top_recovery", 6, 0),
+    step("fly_forward_camera_loop_close", 6, 0),
 ];
 const BANK_GLIDE: &[PoseClipStep] = &[
-    step("fly_front_hover_neutral", 12, 10),
-    step("fly_southwest_banked_staff", 12, 10),
-    step("fly_southeast_banked_staff", 12, 10),
-    step("fly_southeast_forward_glide", 14, 10),
-    step("fly_southeast_staff_forward", 12, 9),
-    step("fly_southeast_cheer", 12, 9),
-    step("fly_southeast_banked_staff", 12, 10),
-    step("fly_front_hover_neutral", 14, 10),
+    step("flight_hover_neutral", 12, 0),
+    step("flight_bank_left", 12, 0),
+    step("flight_glide_forward", 14, 0),
+    step("flight_bank_right", 12, 0),
+    step("flight_staff_forward", 12, 0),
+    step("flight_hover_neutral", 14, 0),
 ];
 const STAFF_COMBO: &[PoseClipStep] = &[
-    step("front_staff_guard_windup", 14, 10),
-    step("front_staff_guard_low", 12, 9),
-    step("front_staff_block_horizontal", 12, 9),
-    step("front_magic_staff_thrust", 12, 8),
-    step("magic_cast", 14, 9),
-    step("front_staff_spin_flourish", 16, 10),
+    step("staff_grip_default", 12, 10),
+    step("staff_two_hand_grip", 12, 10),
+    step("staff_raise_vertical", 12, 8),
+    step("staff_aim_forward", 12, 8),
+    step("staff_sweep_horizontal", 12, 8),
+    step("magic_cast_begin", 10, 8),
+    step("magic_cast_hold", 14, 8),
+    step("magic_cast_release", 10, 8),
+    step("magic_cast_recover", 14, 10),
 ];
 const REACTION_RECOVER: &[PoseClipStep] = &[
-    step("front_crouch_guard", 11, 9),
-    step("front_reaction_jump_fist_staff", 12, 9),
-    step("front_airborne_fall_back_staff", 11, 9),
-    step("front_crouch_landing_staff_plant", 12, 9),
-    step("front_crouch_reaction_staff_planted", 12, 9),
-    step("front_kneel_staff_brace", 14, 10),
+    step("crouch_prepare", 10, 0),
+    step("jump_launch", 8, 0),
+    step("jump_apex", 8, 0),
+    step("jump_descent", 8, 0),
+    step("jump_land_contact", 8, 0),
+    step("jump_land_recovery", 12, 0),
+    step("locomotion_return_home", 14, 10),
 ];
 const CELEBRATE: &[PoseClipStep] = &[
-    step("front_victory_cast", 14, 10),
-    step("front_celebrate_jump_staff_up", 12, 9),
-    step("front_celebrate_wings_staff_up", 16, 10),
-    step("front_victory_cast", 12, 9),
+    step("emotion_excited", 14, 10),
+    step("emotion_triumphant", 16, 10),
+    step("magic_mastery_hero", 16, 10),
+    step("hero_declaration", 18, 10),
 ];
 const CONVERSATION: &[PoseClipStep] = &[
-    step("explaining", 18, 10),
-    step("front_point_direct_staff_held", 16, 10),
-    step("front_shush_secret_staff_held", 16, 10),
-    step("front_victory_cast", 14, 10),
+    step("listen_user_warm", 16, 10),
+    step("speak_explain_open", 14, 10),
+    step("speak_explain_sequence", 14, 10),
+    step("speak_clarify", 14, 10),
+    step("speech_yield_floor", 16, 10),
 ];
-const EXPLAIN: &[PoseClipStep] = &[step("explaining", 72, 10)];
-const POINT: &[PoseClipStep] = &[step("front_point_direct_staff_held", 72, 10)];
-const THINK: &[PoseClipStep] = &[step("front_shush_secret_staff_held", 72, 10)];
+const EXPLAIN: &[PoseClipStep] = &[
+    step("speak_explain_open", 18, 10),
+    step("speak_explain_precise", 18, 10),
+    step("speak_explain_sequence", 18, 10),
+    step("speak_summarize", 18, 10),
+];
+const POINT: &[PoseClipStep] = &[
+    step("hand_point_screen_left", 18, 10),
+    step("hand_point_screen_right", 18, 10),
+    step("hand_point_up", 18, 10),
+    step("hand_point_down", 18, 10),
+];
+const THINK: &[PoseClipStep] = &[
+    step("think_consider", 20, 10),
+    step("think_upward_recall", 20, 10),
+    step("realization_small", 16, 10),
+    step("realization_clear", 16, 10),
+];
 const WJFL_RUN: &[PoseClipStep] = &[
-    step("run_front_cross_step_wings_staff", 10, 9),
-    step("run_front_stride_wings_staff", 10, 9),
-    step("front_run_charge_wings", 10, 9),
-    step("run_front_stride_wings_staff", 10, 9),
+    step("run_start", 7, 0),
+    step("run_passing", 5, 0),
+    step("run_contact_left", 5, 0),
+    step("run_flight_phase", 5, 0),
+    step("run_contact_right", 5, 0),
 ];
 const WJFL_GUARD: &[PoseClipStep] = &[
-    step("front_idle_wings", 14, 10),
-    step("front_crouch_guard_wings", 12, 10),
-    step("front_kneel_staff_brace_wings", 12, 10),
-    step("front_crouch_staff_planted_wings", 12, 10),
-    step("front_crouch_hand_plant_wings", 12, 10),
-    step("front_staff_guard_windup_wings", 12, 10),
-    step("front_staff_guard_horizontal_wings", 12, 10),
-    step("front_staff_guard_low_wings", 12, 10),
-    step("front_staff_block_wings", 12, 10),
-    step("front_magic_staff_thrust_wings", 12, 10),
-    step("front_staff_spin_wings", 14, 10),
-    step("front_idle_wings", 14, 10),
+    step("idle_wings_displayed", 14, 10),
+    step("staff_grip_default", 12, 10),
+    step("staff_two_hand_grip", 12, 10),
+    step("staff_plant", 12, 10),
+    step("staff_raise_vertical", 12, 10),
+    step("staff_aim_forward", 12, 10),
+    step("staff_sweep_horizontal", 12, 10),
+    step("idle_staff_two_hand_rest", 14, 10),
 ];
 const WJFL_REACTION: &[PoseClipStep] = &[
-    step("front_idle_wings", 14, 10),
-    step("front_reaction_jump_wings_staff", 12, 10),
-    step("front_airborne_fall_back_wings", 12, 10),
-    step("front_celebrate_jump_wings", 12, 10),
-    step("front_victory_cast_wings", 14, 10),
-    step("front_celebrate_staff_up_wings", 14, 10),
-    step("front_idle_wings", 14, 10),
+    step("emotion_surprise", 14, 10),
+    step("emotion_shock", 14, 10),
+    step("magic_mishap_start", 12, 10),
+    step("magic_mishap_blast", 12, 10),
+    step("magic_mishap_smoke_reveal", 14, 10),
+    step("comedy_recover_dignity", 16, 10),
+    step("emotion_recover_composure", 16, 10),
 ];
 const WJFL_SOCIAL: &[PoseClipStep] = &[
-    step("front_idle_wings", 16, 10),
-    step("front_greeting_wave_wings", 14, 10),
-    step("front_explaining_open_hand_wings", 14, 10),
-    step("front_explaining_both_hands_wings", 14, 10),
-    step("front_point_direct_wings", 14, 10),
-    step("front_point_side_wings", 14, 10),
-    step("front_thinking_hand_chin_wings", 16, 10),
-    step("front_shush_wings", 16, 10),
-    step("front_sincere_hand_heart_wings", 16, 10),
-    step("front_playful_kick_wings", 14, 10),
-    step("front_magic_staff_raise_wings", 14, 10),
-    step("front_magic_staff_spark_wings", 16, 10),
-    step("front_idle_wings", 16, 10),
+    step("hand_open_relaxed", 16, 10),
+    step("hand_present_screen_right", 14, 10),
+    step("hand_present_screen_left", 14, 10),
+    step("hand_invite", 14, 10),
+    step("speak_reassure", 14, 10),
+    step("speak_persuade", 14, 10),
+    step("speak_confide", 16, 10),
+    step("emotion_gratitude", 16, 10),
+    step("idle_warm_camera_ready", 16, 10),
 ];
 const WJFL_FEELINGS: &[PoseClipStep] = &[
-    step("feeling_joy_full", 16, 10),
-    step("feeling_joy_close", 14, 10),
-    step("feeling_sadness_full", 16, 10),
-    step("feeling_sadness_close", 14, 10),
-    step("feeling_anger_full", 16, 10),
-    step("feeling_anger_close", 14, 10),
-    step("feeling_fear_full", 16, 10),
-    step("feeling_fear_close", 14, 10),
-    step("feeling_shame_full", 16, 10),
-    step("feeling_shame_close", 14, 10),
-    step("feeling_disgust_full", 16, 10),
-    step("feeling_disgust_close", 14, 10),
-    step("feeling_surprise_full", 16, 10),
-    step("feeling_surprise_close", 14, 10),
-    step("feeling_pride_full", 16, 10),
-    step("feeling_pride_close", 14, 10),
-    step("feeling_guilt_full", 16, 10),
-    step("feeling_guilt_close", 14, 10),
-    step("feeling_love_full", 16, 10),
-    step("feeling_love_close", 14, 10),
+    step("emotion_neutral", 14, 10),
+    step("emotion_joy", 14, 10),
+    step("emotion_amused", 14, 10),
+    step("emotion_excited", 14, 10),
+    step("emotion_curious", 14, 10),
+    step("emotion_confident", 14, 10),
+    step("emotion_compassion", 14, 10),
+    step("emotion_proud", 14, 10),
+    step("emotion_playful", 14, 10),
+    step("emotion_relief", 14, 10),
+    step("emotion_gratitude", 14, 10),
+    step("emotion_surprise", 14, 10),
+    step("emotion_shock", 14, 10),
+    step("emotion_confusion", 14, 10),
+    step("emotion_skepticism", 14, 10),
+    step("emotion_concern", 14, 10),
+    step("emotion_sadness", 14, 10),
+    step("emotion_grief_restrained", 14, 10),
+    step("emotion_shame", 14, 10),
+    step("emotion_embarrassed", 14, 10),
+    step("emotion_fear", 14, 10),
+    step("emotion_anxiety", 14, 10),
+    step("emotion_anger", 14, 10),
+    step("emotion_frustration", 14, 10),
+    step("emotion_determined", 14, 10),
+    step("emotion_defiant", 14, 10),
+    step("emotion_disappointed", 14, 10),
+    step("emotion_exhausted", 14, 10),
+    step("emotion_fatigued_speaking", 14, 10),
+    step("emotion_contemplative", 14, 10),
+    step("emotion_serene", 14, 10),
+    step("emotion_solemn", 14, 10),
+    step("emotion_hopeful", 14, 10),
+    step("emotion_triumphant", 14, 10),
+    step("emotion_recover_composure", 14, 10),
+];
+const DANCE_GROOVE: &[PoseClipStep] = &[
+    step("dance_ready", 12, 0),
+    step("dance_step_left", 12, 0),
+    step("dance_step_right", 12, 0),
+    step("dance_bounce_down", 12, 0),
+    step("dance_bounce_up", 12, 0),
+    step("dance_turn_prepare", 12, 0),
+    step("dance_turn_mid", 12, 0),
+    step("dance_turn_finish", 12, 0),
+    step("dance_wing_flourish", 12, 0),
+    step("dance_kick", 12, 0),
+    step("dance_slide", 12, 0),
+    step("dance_finale", 16, 0),
+];
+const BREAKDANCE: &[PoseClipStep] = &[
+    step("dance_staff_twirl_start", 12, 0),
+    step("dance_staff_twirl_mid", 12, 0),
+    step("dance_staff_twirl_catch", 12, 0),
+    step("dance_low_freeze", 14, 0),
+    step("dance_high_freeze", 14, 0),
+    step("hero_dance_freeze", 18, 0),
 ];
 
 pub const POSE_CLIPS: &[PoseClipDefinition] = &[
@@ -178,6 +232,11 @@ pub const POSE_CLIPS: &[PoseClipDefinition] = &[
     },
     PoseClipDefinition {
         id: "hover_flap",
+        steps: HOVER_FLAP,
+        loopable: true,
+    },
+    PoseClipDefinition {
+        id: "forward_camera_flight",
         steps: HOVER_FLAP,
         loopable: true,
     },
@@ -246,7 +305,99 @@ pub const POSE_CLIPS: &[PoseClipDefinition] = &[
         steps: WJFL_FEELINGS,
         loopable: true,
     },
+    PoseClipDefinition {
+        id: "dance_groove",
+        steps: DANCE_GROOVE,
+        loopable: true,
+    },
+    PoseClipDefinition {
+        id: "breakdance",
+        steps: BREAKDANCE,
+        loopable: true,
+    },
 ];
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use crate::pose_graph_runtime::runtime_pose_graph_catalog;
+    use std::collections::BTreeSet;
+
+    #[test]
+    fn every_clip_step_resolves_to_an_exact_replacement_graph() {
+        let catalog = runtime_pose_graph_catalog().expect("runtime graph catalog");
+        let clip_poses = POSE_CLIPS
+            .iter()
+            .flat_map(|clip| clip.steps.iter().map(|step| step.pose_id))
+            .collect::<BTreeSet<_>>();
+        let manifest = catalog.manifest();
+        let missing = clip_poses
+            .iter()
+            .filter(|pose_id| catalog.primary_for_semantic_id(pose_id).is_none())
+            .collect::<Vec<_>>();
+        assert!(missing.is_empty(), "clip poses missing graphs: {missing:?}");
+        assert!(manifest.entries.iter().all(|entry| {
+            entry.primary_for_semantic_id
+                && entry.exact_rgba_equal
+                && entry.control_groups.iter().any(|group| group == "all")
+        }));
+    }
+
+    #[test]
+    fn ground_walk_contains_the_four_authored_stride_phases() {
+        assert_eq!(
+            GROUND_WALK
+                .iter()
+                .map(|step| step.pose_id)
+                .collect::<Vec<_>>(),
+            [
+                "walk_contact_left",
+                "walk_passing_left",
+                "walk_up_left",
+                "walk_contact_right"
+            ]
+        );
+    }
+
+    #[test]
+    fn forward_camera_flight_is_the_exact_ten_frame_sixty_tick_cycle() {
+        assert_eq!(HOVER_FLAP.len(), 10);
+        assert_eq!(
+            HOVER_FLAP
+                .iter()
+                .map(|step| step.pose_id)
+                .collect::<Vec<_>>(),
+            [
+                "fly_forward_camera_top_recovery",
+                "fly_forward_camera_early_powerstroke",
+                "fly_forward_camera_mid_powerstroke",
+                "fly_forward_camera_late_powerstroke",
+                "fly_forward_camera_bottom_powerstroke",
+                "fly_forward_camera_early_recovery",
+                "fly_forward_camera_mid_recovery",
+                "fly_forward_camera_late_recovery",
+                "fly_forward_camera_near_top_recovery",
+                "fly_forward_camera_loop_close",
+            ]
+        );
+        assert!(HOVER_FLAP
+            .iter()
+            .all(|step| step.hold_ticks == 6 && step.transition_ticks == 0));
+        assert_eq!(
+            HOVER_FLAP
+                .iter()
+                .map(|step| u32::from(step.hold_ticks))
+                .sum::<u32>(),
+            60
+        );
+        assert_eq!(
+            pose_clip_definition("forward_camera_flight")
+                .expect("forward camera flight alias")
+                .steps,
+            HOVER_FLAP
+        );
+    }
+}
 
 #[must_use]
 pub fn pose_clip_definition(id: &str) -> Option<&'static PoseClipDefinition> {
@@ -344,7 +495,7 @@ impl PoseClipPlayback {
                 self.clear(state);
                 if restore_to_direction {
                     if let Some(presented) = presented {
-                        let direction_pose = reference_pose_id_for_state(state).to_string();
+                        let direction_pose = implicit_runtime_pose_id(state).to_string();
                         pose_playback.return_to_direction(
                             direction_pose,
                             presented,
@@ -378,9 +529,16 @@ impl PoseClipPlayback {
             .or_else(|| pose_playback.presented_pose().map(str::to_owned))
             .or_else(|| state.pose_id.clone())
             .unwrap_or_else(|| step.pose_id.to_string());
-        let transition_ticks =
-            transition_ticks_for(&presented, step.pose_id, step.effective_transition_ticks());
-        pose_playback.interrupt(step.pose_id, presented, tick, transition_ticks, None, None);
+        let requested_transition_ticks = step.effective_transition_ticks();
+        let transition_ticks = if requested_transition_ticks == 0 {
+            pose_playback.cut(step.pose_id, tick);
+            0
+        } else {
+            let transition_ticks =
+                transition_ticks_for(&presented, step.pose_id, requested_transition_ticks);
+            pose_playback.interrupt(step.pose_id, presented, tick, transition_ticks, None, None);
+            transition_ticks
+        };
         self.next_step_tick = tick + u64::from(step.hold_ticks.max(transition_ticks));
         self.step_index += 1;
         self.write_state(state);

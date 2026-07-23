@@ -1,0 +1,174 @@
+{
+  "batch_id": "batch-02",
+  "reviewer": "Codex literal transparent-overlay reviewer",
+  "range": {
+    "start": "WJPA-0033",
+    "end": "WJPA-0064"
+  },
+  "reviewed_count": 32,
+  "approved_count": 32,
+  "rejected_count": 0,
+  "overall_status": "approved",
+  "entries": [
+    {
+      "pose_id": "WJPA-0033",
+      "status": "approved",
+      "visual_note": "Source and projection align exactly; nod silhouette, hat tip, wings, hand, and staff show no doubled edges, mismatch marks, clipping, or displacement."
+    },
+    {
+      "pose_id": "WJPA-0034",
+      "status": "approved",
+      "visual_note": "Open-hand agree pose is visually identical across panels; overlay is clean around fingers, sleeves, wings, shoes, and staff."
+    },
+    {
+      "pose_id": "WJPA-0035",
+      "status": "approved",
+      "visual_note": "Tilted uncertain pose overlays cleanly with no contour doubling at the hat, face, extended hand, robe, wings, or staff."
+    },
+    {
+      "pose_id": "WJPA-0036",
+      "status": "approved",
+      "visual_note": "Patient waiting stance matches the source exactly; no missing, extra, shifted, clipped, or non-source geometry is visible."
+    },
+    {
+      "pose_id": "WJPA-0037",
+      "status": "approved",
+      "visual_note": "Alert waiting stance has exact silhouette and color placement; fist, bent arm, robe edges, wings, and staff remain aligned."
+    },
+    {
+      "pose_id": "WJPA-0038",
+      "status": "approved",
+      "visual_note": "Listen-to-speak transition pose is clean; mouth, raised fingers, sleeves, wing tips, shoes, and staff show no overlay artifacts."
+    },
+    {
+      "pose_id": "WJPA-0039",
+      "status": "approved",
+      "visual_note": "Speak-to-listen transition reproduces the source without doubled contours, mismatch colors, clipping, or displacement."
+    },
+    {
+      "pose_id": "WJPA-0040",
+      "status": "approved",
+      "visual_note": "Neutral settle frame is visually exact; the fine hat, beard, hand, robe, wing, shoe, and staff boundaries all align."
+    },
+    {
+      "pose_id": "WJPA-0041",
+      "status": "approved",
+      "visual_note": "Open explanation pose matches exactly; mouth interior, open palm, sleeves, wings, robe hem, shoes, and staff are artifact-free."
+    },
+    {
+      "pose_id": "WJPA-0042",
+      "status": "approved",
+      "visual_note": "Precise explanation gesture overlays perfectly, including the pinched fingers, face, wing silhouette, robe, and staff."
+    },
+    {
+      "pose_id": "WJPA-0043",
+      "status": "approved",
+      "visual_note": "Sequence explanation pose has no visible divergence; pointing hand, mouth, sleeves, wings, shoes, and staff align exactly."
+    },
+    {
+      "pose_id": "WJPA-0044",
+      "status": "approved",
+      "visual_note": "Term-definition pose is visually identical; raised thumb, mouth, hat, robe, wings, and staff show no doubled or shifted edges."
+    },
+    {
+      "pose_id": "WJPA-0045",
+      "status": "approved",
+      "visual_note": "Clarifying gesture matches the source exactly with clean open-hand, sleeve, wing, robe, shoe, and staff contours."
+    },
+    {
+      "pose_id": "WJPA-0046",
+      "status": "approved",
+      "visual_note": "Summary pose is clean across all panels; curved hand, facial features, wings, garment, and staff have no mismatched geometry."
+    },
+    {
+      "pose_id": "WJPA-0047",
+      "status": "approved",
+      "visual_note": "Low-emphasis pointing frame aligns exactly; fingertip, mouth, sleeves, wing tips, robe hem, shoes, and staff are intact."
+    },
+    {
+      "pose_id": "WJPA-0048",
+      "status": "approved",
+      "visual_note": "Medium-emphasis pose has exact source/projected placement and a clean overlay around fist, arms, wings, robe, and staff."
+    },
+    {
+      "pose_id": "WJPA-0049",
+      "status": "approved",
+      "visual_note": "High-emphasis raised-arm pose matches exactly; extended hand and arm, hat, wings, robe, shoes, and staff show no clipping."
+    },
+    {
+      "pose_id": "WJPA-0050",
+      "status": "approved",
+      "visual_note": "Confiding pose is visually identical; hand-to-chest gesture, face, wings, robe, shoes, and staff have no overlay defects."
+    },
+    {
+      "pose_id": "WJPA-0051",
+      "status": "approved",
+      "visual_note": "Reassuring open-palm pose aligns exactly, with no doubled edges or colored discrepancy marks on any silhouette boundary."
+    },
+    {
+      "pose_id": "WJPA-0052",
+      "status": "approved",
+      "visual_note": "Warning pose overlays perfectly; raised palm and separated fingers, mouth, wings, robe, shoes, and staff remain exact."
+    },
+    {
+      "pose_id": "WJPA-0053",
+      "status": "approved",
+      "visual_note": "Challenge stance is an exact visual match; diagonal staff, both fists, leaning body, hat, wings, and feet show no displacement."
+    },
+    {
+      "pose_id": "WJPA-0054",
+      "status": "approved",
+      "visual_note": "Persuasive gesture matches source geometry and color exactly; hand, facial features, wings, robe, and staff are clean."
+    },
+    {
+      "pose_id": "WJPA-0055",
+      "status": "approved",
+      "visual_note": "Questioning pose has exact placement throughout; open palm, eyebrows, wing tips, garment edges, shoes, and staff show no defects."
+    },
+    {
+      "pose_id": "WJPA-0056",
+      "status": "approved",
+      "visual_note": "Answering pose is visually identical; curled pointing hand, face, wings, robe, shoes, and staff have no missing or extra pixels."
+    },
+    {
+      "pose_id": "WJPA-0057",
+      "status": "approved",
+      "visual_note": "Quotation gesture overlays exactly; paired raised fingers, hand opening, face, wings, robe, and staff remain artifact-free."
+    },
+    {
+      "pose_id": "WJPA-0058",
+      "status": "approved",
+      "visual_note": "Book-reading pose matches the source exactly; book pages and cover, supporting hand, wings, robe, shoes, and staff align."
+    },
+    {
+      "pose_id": "WJPA-0059",
+      "status": "approved",
+      "visual_note": "Count-one pose is clean; isolated raised finger, hand joints, face, wings, garment, shoes, and staff show no overlay mismatch."
+    },
+    {
+      "pose_id": "WJPA-0060",
+      "status": "approved",
+      "visual_note": "Count-two pose overlays perfectly, including the separated fingers, hand silhouette, facial details, wings, robe, and staff."
+    },
+    {
+      "pose_id": "WJPA-0061",
+      "status": "approved",
+      "visual_note": "Count-three pose is visually exact; three raised fingers, thumb fold, face, wings, robe, shoes, and staff align without artifacts."
+    },
+    {
+      "pose_id": "WJPA-0062",
+      "status": "approved",
+      "visual_note": "News presenter opening pose matches exactly; extended palm, mouth, wings, robe, shoes, and staff show no clipping or displacement."
+    },
+    {
+      "pose_id": "WJPA-0063",
+      "status": "approved",
+      "visual_note": "Serious news presenter pose is artifact-free; closed hand, facial expression, wing edges, garment, shoes, and staff align."
+    },
+    {
+      "pose_id": "WJPA-0064",
+      "status": "approved",
+      "visual_note": "Left graphic-pointing pose matches exactly; extended fingertip and arm, turned face, hat, wings, robe, shoes, and staff are unclipped and aligned."
+    }
+  ]
+}

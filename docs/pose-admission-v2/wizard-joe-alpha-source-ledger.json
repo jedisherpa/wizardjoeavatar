@@ -1,0 +1,4261 @@
+{
+  "schema_version": 2,
+  "compiler_id": "wizard-avatar-production-alpha-v1",
+  "expected_source_count": 260,
+  "archives": [
+    {
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_filename": "Wizard_Joe_Production_Alpha_Set_001_250_v001.zip",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "manifest_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/manifests/alpha_asset_manifest_v001.json",
+      "manifest_status": "approved_production_alpha_set"
+    },
+    {
+      "source_pack": "wizard_joe_forward_camera_flight_cycle",
+      "archive_filename": "Wizard_Joe_Forward_Camera_Flight_Alpha_Cycle_v001 (1).zip",
+      "archive_sha256": "7d2a7d7390d1fb95147bf834cc45849dbfee50a9f42ba05abe99c50e37cf9e49",
+      "manifest_member": "Wizard_Joe_Forward_Camera_Flight_Alpha_Cycle_v001/flight_cycle_manifest_v001.json",
+      "manifest_status": "candidate_review"
+    }
+  ],
+  "entries": [
+    {
+      "sequence": 1,
+      "pose_id": "WJPA-0001",
+      "semantic_id": "turn_front_neutral",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/001_turn_front_neutral.png",
+      "source_png_sha256": "77df26857cda430f2096643a6bc479038e2fbe3c8997b4bb52eb560751ce7975",
+      "manifest_status": "pass",
+      "category": "orientation",
+      "motion": {
+        "family": "turn",
+        "phase": "hold",
+        "direction": "front"
+      }
+    },
+    {
+      "sequence": 2,
+      "pose_id": "WJPA-0002",
+      "semantic_id": "turn_front_3q_left",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/002_turn_front_3q_left.png",
+      "source_png_sha256": "af0c2e7e823e41f5b56f25d4c2ffdc51ca71ac62db5dea6168d9a30616a10334",
+      "manifest_status": "pass",
+      "category": "orientation",
+      "motion": {
+        "family": "turn",
+        "phase": "hold",
+        "direction": "left"
+      }
+    },
+    {
+      "sequence": 3,
+      "pose_id": "WJPA-0003",
+      "semantic_id": "turn_left_profile",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/003_turn_left_profile.png",
+      "source_png_sha256": "6695bcaa17eec0a2b580688b6ae8e991d8a78cea6c75cdd1e6acc8c93d571983",
+      "manifest_status": "pass",
+      "category": "orientation",
+      "motion": {
+        "family": "turn",
+        "phase": "hold",
+        "direction": "left"
+      }
+    },
+    {
+      "sequence": 4,
+      "pose_id": "WJPA-0004",
+      "semantic_id": "turn_back_3q_left",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/004_turn_back_3q_left.png",
+      "source_png_sha256": "31d928b927a87b3261dbec8a30a31be7ca416b299728c2672ec410a3e0e28231",
+      "manifest_status": "pass",
+      "category": "orientation",
+      "motion": {
+        "family": "turn",
+        "phase": "hold",
+        "direction": "left"
+      }
+    },
+    {
+      "sequence": 5,
+      "pose_id": "WJPA-0005",
+      "semantic_id": "turn_back_neutral",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/005_turn_back_neutral.png",
+      "source_png_sha256": "593146bbbebb4a79270473d73774c54dca4a84e7e22998627a898d897f15e996",
+      "manifest_status": "pass",
+      "category": "orientation",
+      "motion": {
+        "family": "turn",
+        "phase": "hold",
+        "direction": "back"
+      }
+    },
+    {
+      "sequence": 6,
+      "pose_id": "WJPA-0006",
+      "semantic_id": "turn_back_3q_right",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/006_turn_back_3q_right.png",
+      "source_png_sha256": "9914c8a8323457fcae2aedd304c4372cc184b2ddcb5fe1533c9a86e17d3b8e5a",
+      "manifest_status": "pass",
+      "category": "orientation",
+      "motion": {
+        "family": "turn",
+        "phase": "hold",
+        "direction": "right"
+      }
+    },
+    {
+      "sequence": 7,
+      "pose_id": "WJPA-0007",
+      "semantic_id": "turn_right_profile",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/007_turn_right_profile.png",
+      "source_png_sha256": "8d8ab31b940c9e8f659c1e6e22848bf309036911ef9c0bbc4c9df7269f9d66bc",
+      "manifest_status": "pass",
+      "category": "orientation",
+      "motion": {
+        "family": "turn",
+        "phase": "hold",
+        "direction": "right"
+      }
+    },
+    {
+      "sequence": 8,
+      "pose_id": "WJPA-0008",
+      "semantic_id": "turn_front_3q_right",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/008_turn_front_3q_right.png",
+      "source_png_sha256": "946ffdc8c94029653232c501486b9e92748aeb79766327389421feed4e154b36",
+      "manifest_status": "pass",
+      "category": "orientation",
+      "motion": {
+        "family": "turn",
+        "phase": "hold",
+        "direction": "right"
+      }
+    },
+    {
+      "sequence": 9,
+      "pose_id": "WJPA-0009",
+      "semantic_id": "neutral_side_no_staff_occlusion",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/009_neutral_side_no_staff_occlusion.png",
+      "source_png_sha256": "5d3014a64df780614d72d0c0a3a721680f7e499eed73c4e81b467d54b31411c8",
+      "manifest_status": "pass",
+      "category": "orientation",
+      "motion": {
+        "family": "neutral",
+        "phase": "hold",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 10,
+      "pose_id": "WJPA-0010",
+      "semantic_id": "neutral_back_wings_part_folded",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/010_neutral_back_wings_part_folded.png",
+      "source_png_sha256": "4b6cece5f237f85a2d66d6acb59f8cedeef6c63fd37237217ea495da4632e494",
+      "manifest_status": "pass",
+      "category": "orientation",
+      "motion": {
+        "family": "neutral",
+        "phase": "hold",
+        "direction": "back"
+      }
+    },
+    {
+      "sequence": 11,
+      "pose_id": "WJPA-0011",
+      "semantic_id": "idle_relaxed_staff_planted",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/011_idle_relaxed_staff_planted.png",
+      "source_png_sha256": "5fe656ff38900cec0aec1878085c4caa9db0cd849d24a7648f4046528821da2f",
+      "manifest_status": "pass",
+      "category": "idle",
+      "motion": {
+        "family": "idle",
+        "phase": "hold",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 12,
+      "pose_id": "WJPA-0012",
+      "semantic_id": "idle_balanced_no_weight_shift",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/012_idle_balanced_no_weight_shift.png",
+      "source_png_sha256": "6762117b698207331625401f5aa83b05fdc77d6b1c77b4c5f1d175a5da7cbe23",
+      "manifest_status": "pass",
+      "category": "idle",
+      "motion": {
+        "family": "idle",
+        "phase": "hold",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 13,
+      "pose_id": "WJPA-0013",
+      "semantic_id": "idle_warm_camera_ready",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/013_idle_warm_camera_ready.png",
+      "source_png_sha256": "9ff506d635b427fb02c2ebf3d51ed2704ad14b2ad0d8b42d93adb021ffe0f2db",
+      "manifest_status": "pass",
+      "category": "idle",
+      "motion": {
+        "family": "idle",
+        "phase": "anticipation",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 14,
+      "pose_id": "WJPA-0014",
+      "semantic_id": "idle_attentive",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/014_idle_attentive.png",
+      "source_png_sha256": "5656213760fcbedb361dd81371e7dc2b1ed2597b805177a79a6fcfc6bb1bd0e8",
+      "manifest_status": "pass",
+      "category": "idle",
+      "motion": {
+        "family": "idle",
+        "phase": "hold",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 15,
+      "pose_id": "WJPA-0015",
+      "semantic_id": "idle_speaking_ready",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/015_idle_speaking_ready.png",
+      "source_png_sha256": "46cdaa6a1251318b632bf3759223cba0b4ffc482cb3f042b0eb81c2a6d38320d",
+      "manifest_status": "pass",
+      "category": "idle",
+      "motion": {
+        "family": "idle",
+        "phase": "anticipation",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 16,
+      "pose_id": "WJPA-0016",
+      "semantic_id": "idle_listening_ready",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/016_idle_listening_ready.png",
+      "source_png_sha256": "8e3bc0584b0e78107fe68e8b0eecbb40a48153b5e0e5fec5ea1e1468ef58b6ac",
+      "manifest_status": "pass",
+      "category": "idle",
+      "motion": {
+        "family": "idle",
+        "phase": "anticipation",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 17,
+      "pose_id": "WJPA-0017",
+      "semantic_id": "idle_staff_two_hand_rest",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/017_idle_staff_two_hand_rest.png",
+      "source_png_sha256": "85736d5241976c12ff4f968574ee47f0aca78290b8c8aef68f5f05606a520fa7",
+      "manifest_status": "pass",
+      "category": "idle",
+      "motion": {
+        "family": "idle",
+        "phase": "hold",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 18,
+      "pose_id": "WJPA-0018",
+      "semantic_id": "idle_staff_carried",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/018_idle_staff_carried.png",
+      "source_png_sha256": "c5dc2e80c8338d386ca32d936cfc4690bf8f587d94336425926c2abf60c5fabe",
+      "manifest_status": "pass",
+      "category": "idle",
+      "motion": {
+        "family": "idle",
+        "phase": "hold",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 19,
+      "pose_id": "WJPA-0019",
+      "semantic_id": "idle_wings_folded",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/019_idle_wings_folded.png",
+      "source_png_sha256": "304f858454e4c075528ad2facbb85c0164d96c8099d269974c0685669f05eccb",
+      "manifest_status": "pass",
+      "category": "idle",
+      "motion": {
+        "family": "idle",
+        "phase": "hold",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 20,
+      "pose_id": "WJPA-0020",
+      "semantic_id": "idle_wings_displayed",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/020_idle_wings_displayed.png",
+      "source_png_sha256": "d0d54be0a7ea6ca21358fb0293dc6952a751eed4ef929e0f621c8da0953075d9",
+      "manifest_status": "pass",
+      "category": "idle",
+      "motion": {
+        "family": "idle",
+        "phase": "hold",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 21,
+      "pose_id": "WJPA-0021",
+      "semantic_id": "listen_user_neutral",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/021_listen_user_neutral.png",
+      "source_png_sha256": "92478ed9c085e7ad9bd1c22a46b6f9cca9add40ca6cc67f8d3904dd44d7ae8af",
+      "manifest_status": "pass",
+      "category": "listening",
+      "motion": {
+        "family": "listen",
+        "phase": "hold",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 22,
+      "pose_id": "WJPA-0022",
+      "semantic_id": "listen_user_warm",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/022_listen_user_warm.png",
+      "source_png_sha256": "769ac15b94ccc3292c4e496bd7f7917f9d8016c95856692757bb3ae145eb0acd",
+      "manifest_status": "pass",
+      "category": "listening",
+      "motion": {
+        "family": "listen",
+        "phase": "hold",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 23,
+      "pose_id": "WJPA-0023",
+      "semantic_id": "listen_user_intense",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/023_listen_user_intense.png",
+      "source_png_sha256": "360be52551b1c7b25e24eae8460558eb4957a0029d975517877c24b209715dd8",
+      "manifest_status": "pass",
+      "category": "listening",
+      "motion": {
+        "family": "listen",
+        "phase": "hold",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 24,
+      "pose_id": "WJPA-0024",
+      "semantic_id": "listen_offscreen_left",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/024_listen_offscreen_left.png",
+      "source_png_sha256": "060048949503de8f10ef32c6dd37fb353923d34d82afb34555facff22f8d6168",
+      "manifest_status": "pass",
+      "category": "listening",
+      "motion": {
+        "family": "listen",
+        "phase": "hold",
+        "direction": "screen_left"
+      }
+    },
+    {
+      "sequence": 25,
+      "pose_id": "WJPA-0025",
+      "semantic_id": "listen_offscreen_right",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/025_listen_offscreen_right.png",
+      "source_png_sha256": "a6385ccec16cbddc3dcc7a7667050bcd839b54d7d5798d59be59a8cbdc6c2bf3",
+      "manifest_status": "pass",
+      "category": "listening",
+      "motion": {
+        "family": "listen",
+        "phase": "hold",
+        "direction": "screen_right"
+      }
+    },
+    {
+      "sequence": 26,
+      "pose_id": "WJPA-0026",
+      "semantic_id": "listen_upward",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/026_listen_upward.png",
+      "source_png_sha256": "4fec58a0480027c468fb792231cbb34d6474c470b07613820939ea41829d2671",
+      "manifest_status": "pass",
+      "category": "listening",
+      "motion": {
+        "family": "listen",
+        "phase": "hold",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 27,
+      "pose_id": "WJPA-0027",
+      "semantic_id": "think_consider",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/027_think_consider.png",
+      "source_png_sha256": "8039d14469cd3f835b7e1d93c23a62f202e6414281beb8676f8cdfabde67a18f",
+      "manifest_status": "pass",
+      "category": "cognition_transition",
+      "motion": {
+        "family": "think",
+        "phase": "hold",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 28,
+      "pose_id": "WJPA-0028",
+      "semantic_id": "think_upward_recall",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/028_think_upward_recall.png",
+      "source_png_sha256": "e70e0ceaf173cb74cf5a3199ba0fa925b7f9ec35f6000e01972aebd233699d82",
+      "manifest_status": "pass",
+      "category": "cognition_transition",
+      "motion": {
+        "family": "think",
+        "phase": "hold",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 29,
+      "pose_id": "WJPA-0029",
+      "semantic_id": "think_staff_lean",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/029_think_staff_lean.png",
+      "source_png_sha256": "26fd3b73cb4b7394bafb9f77b4d0c44eebc4fec859d84aff042942b18ed0315f",
+      "manifest_status": "pass",
+      "category": "cognition_transition",
+      "motion": {
+        "family": "think",
+        "phase": "hold",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 30,
+      "pose_id": "WJPA-0030",
+      "semantic_id": "think_pace_prepare",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/030_think_pace_prepare.png",
+      "source_png_sha256": "055c432930a15115fcaebc0a3a2dfe2ecce2a58976662d2b505bf656261c6b6b",
+      "manifest_status": "pass",
+      "category": "cognition_transition",
+      "motion": {
+        "family": "think",
+        "phase": "anticipation",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 31,
+      "pose_id": "WJPA-0031",
+      "semantic_id": "realization_small",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/031_realization_small.png",
+      "source_png_sha256": "b4ccc233c90a32e847025f9da9d5512c90c13fa0dcdba6123d90e382d33ca627",
+      "manifest_status": "pass",
+      "category": "cognition_transition",
+      "motion": {
+        "family": "realization",
+        "phase": "hold",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 32,
+      "pose_id": "WJPA-0032",
+      "semantic_id": "realization_clear",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/032_realization_clear.png",
+      "source_png_sha256": "160650ed75f3ff0091c11642365c84b9b45dbd6a64e33df178e89f20f3d9e4d2",
+      "manifest_status": "pass",
+      "category": "cognition_transition",
+      "motion": {
+        "family": "realization",
+        "phase": "hold",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 33,
+      "pose_id": "WJPA-0033",
+      "semantic_id": "acknowledge_small_nod",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/033_acknowledge_small_nod.png",
+      "source_png_sha256": "609dc4254d5f4f616328e0da991680e561019530b6cb1a2a37b793c310af10bf",
+      "manifest_status": "pass",
+      "category": "cognition_transition",
+      "motion": {
+        "family": "acknowledge",
+        "phase": "hold",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 34,
+      "pose_id": "WJPA-0034",
+      "semantic_id": "acknowledge_agree",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/034_acknowledge_agree.png",
+      "source_png_sha256": "b140a5cd05331231bb70e6bf5de76d65e30e00efb8cdd79747a87d18484211a9",
+      "manifest_status": "pass",
+      "category": "cognition_transition",
+      "motion": {
+        "family": "acknowledge",
+        "phase": "hold",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 35,
+      "pose_id": "WJPA-0035",
+      "semantic_id": "acknowledge_uncertain",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/035_acknowledge_uncertain.png",
+      "source_png_sha256": "66d1762e68ad3e9c07daa644f1a53ee581c744fd4b9b03f3c55d4e27ba274460",
+      "manifest_status": "pass",
+      "category": "cognition_transition",
+      "motion": {
+        "family": "acknowledge",
+        "phase": "hold",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 36,
+      "pose_id": "WJPA-0036",
+      "semantic_id": "wait_patient",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/036_wait_patient.png",
+      "source_png_sha256": "7e15d84c81c52b64bfc4d2a360f821a9a18c6ecf19234e75001f73ec944bd16b",
+      "manifest_status": "pass",
+      "category": "cognition_transition",
+      "motion": {
+        "family": "wait",
+        "phase": "hold",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 37,
+      "pose_id": "WJPA-0037",
+      "semantic_id": "wait_alert",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/037_wait_alert.png",
+      "source_png_sha256": "9ddaa17c8e29b8822ff8bcada0aa7f47676d0eb9250bd8a2c13ad401516972cb",
+      "manifest_status": "pass",
+      "category": "cognition_transition",
+      "motion": {
+        "family": "wait",
+        "phase": "hold",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 38,
+      "pose_id": "WJPA-0038",
+      "semantic_id": "shift_listen_to_speak",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/038_shift_listen_to_speak.png",
+      "source_png_sha256": "002e2cd2716f51d517032868999caf8b6d532e4f74a73c268e6049bb51661d80",
+      "manifest_status": "pass",
+      "category": "cognition_transition",
+      "motion": {
+        "family": "shift",
+        "phase": "hold",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 39,
+      "pose_id": "WJPA-0039",
+      "semantic_id": "shift_speak_to_listen",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/039_shift_speak_to_listen.png",
+      "source_png_sha256": "2a873e630c7d350cf0d14fa03ab84bf8b84d4ebe40465d014c2c8937380e9f50",
+      "manifest_status": "pass",
+      "category": "cognition_transition",
+      "motion": {
+        "family": "shift",
+        "phase": "hold",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 40,
+      "pose_id": "WJPA-0040",
+      "semantic_id": "settle_to_neutral",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/040_settle_to_neutral.png",
+      "source_png_sha256": "25440f68e555644682ba7a4314bd24c15a4f53a0cf36bd04fa8ab7ffac08e69e",
+      "manifest_status": "pass",
+      "category": "cognition_transition",
+      "motion": {
+        "family": "settle",
+        "phase": "recovery",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 41,
+      "pose_id": "WJPA-0041",
+      "semantic_id": "speak_explain_open",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/041_speak_explain_open.png",
+      "source_png_sha256": "779a5681ff1fc7b7f9ae90748d92e3f06bf4d796cd26f61452d75ae416948ffa",
+      "manifest_status": "pass",
+      "category": "speech",
+      "motion": {
+        "family": "speak",
+        "phase": "initiation",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 42,
+      "pose_id": "WJPA-0042",
+      "semantic_id": "speak_explain_precise",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/042_speak_explain_precise.png",
+      "source_png_sha256": "c1f1d3f23b9ef7892075b464d7eccfd790f5c993bb552d7ef2d262e9577bb5ce",
+      "manifest_status": "pass",
+      "category": "speech",
+      "motion": {
+        "family": "speak",
+        "phase": "hold",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 43,
+      "pose_id": "WJPA-0043",
+      "semantic_id": "speak_explain_sequence",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/043_speak_explain_sequence.png",
+      "source_png_sha256": "a837e91fef609a97d4525b215e266f9c601fc20be5a45af1cea2a1d35fe9162c",
+      "manifest_status": "pass",
+      "category": "speech",
+      "motion": {
+        "family": "speak",
+        "phase": "action",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 44,
+      "pose_id": "WJPA-0044",
+      "semantic_id": "speak_define_term",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/044_speak_define_term.png",
+      "source_png_sha256": "14bddcbbce348a291957c24b85caff6588492cd02251717fa5413db73cf709c8",
+      "manifest_status": "pass",
+      "category": "speech",
+      "motion": {
+        "family": "speak",
+        "phase": "hold",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 45,
+      "pose_id": "WJPA-0045",
+      "semantic_id": "speak_clarify",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/045_speak_clarify.png",
+      "source_png_sha256": "56a46829977684b1528d98b492b65ad32dd1b9275093ae4ad6da646e40a9b365",
+      "manifest_status": "pass",
+      "category": "speech",
+      "motion": {
+        "family": "speak",
+        "phase": "hold",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 46,
+      "pose_id": "WJPA-0046",
+      "semantic_id": "speak_summarize",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/046_speak_summarize.png",
+      "source_png_sha256": "8df5287412a2259e16fdf01ff54e36eb7b053ca7806748537d973373f0b48f2e",
+      "manifest_status": "pass",
+      "category": "speech",
+      "motion": {
+        "family": "speak",
+        "phase": "hold",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 47,
+      "pose_id": "WJPA-0047",
+      "semantic_id": "speak_emphasize_low",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/047_speak_emphasize_low.png",
+      "source_png_sha256": "303b43b5d48934c0b8b962bb0106ca5be4d806eb15c9a7c3e7f95073eab0f01d",
+      "manifest_status": "pass",
+      "category": "speech",
+      "motion": {
+        "family": "speak",
+        "phase": "hold",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 48,
+      "pose_id": "WJPA-0048",
+      "semantic_id": "speak_emphasize_medium",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/048_speak_emphasize_medium.png",
+      "source_png_sha256": "0578c8a707b68292e54f296dbe9729f3f359e8d82b134a24fa7448acd9dc1620",
+      "manifest_status": "pass",
+      "category": "speech",
+      "motion": {
+        "family": "speak",
+        "phase": "hold",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 49,
+      "pose_id": "WJPA-0049",
+      "semantic_id": "speak_emphasize_high",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/049_speak_emphasize_high.png",
+      "source_png_sha256": "94f3650a00a1bbf159cd412747b3bfdba46859eae5eb3ba75a546c0155d9dcfc",
+      "manifest_status": "pass",
+      "category": "speech",
+      "motion": {
+        "family": "speak",
+        "phase": "hold",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 50,
+      "pose_id": "WJPA-0050",
+      "semantic_id": "speak_confide",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/050_speak_confide.png",
+      "source_png_sha256": "5efa0b5eb57403d428c0fcacba5995bf1b0818b4fdd5174ab091948d8e53682b",
+      "manifest_status": "pass",
+      "category": "speech",
+      "motion": {
+        "family": "speak",
+        "phase": "hold",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 51,
+      "pose_id": "WJPA-0051",
+      "semantic_id": "speak_reassure",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/051_speak_reassure.png",
+      "source_png_sha256": "ea75318236b31e926f808520ffa0dad841ce8f75824118add7d5811c209b1460",
+      "manifest_status": "pass",
+      "category": "speech",
+      "motion": {
+        "family": "speak",
+        "phase": "hold",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 52,
+      "pose_id": "WJPA-0052",
+      "semantic_id": "speak_warn",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/052_speak_warn.png",
+      "source_png_sha256": "54433ce10a1dbfdf2f8645bd58299af1aba8ab6c332d974520c7df4fe45c8507",
+      "manifest_status": "pass",
+      "category": "speech",
+      "motion": {
+        "family": "speak",
+        "phase": "hold",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 53,
+      "pose_id": "WJPA-0053",
+      "semantic_id": "speak_challenge",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/053_speak_challenge.png",
+      "source_png_sha256": "d1e4c027e5f62d7d2b80a90dd86aee834d368a4604a3671528bcc688d4f45c11",
+      "manifest_status": "pass",
+      "category": "speech",
+      "motion": {
+        "family": "speak",
+        "phase": "hold",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 54,
+      "pose_id": "WJPA-0054",
+      "semantic_id": "speak_persuade",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/054_speak_persuade.png",
+      "source_png_sha256": "1bdd724c658547655e7c1ff37886555b638c48d54d420ae5d7acf6a506551eb3",
+      "manifest_status": "pass",
+      "category": "speech",
+      "motion": {
+        "family": "speak",
+        "phase": "hold",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 55,
+      "pose_id": "WJPA-0055",
+      "semantic_id": "speak_question",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/055_speak_question.png",
+      "source_png_sha256": "4f295cb3f17de06561ebd6679621c29d44119d11f3170b4baa47956688f96955",
+      "manifest_status": "pass",
+      "category": "speech",
+      "motion": {
+        "family": "speak",
+        "phase": "hold",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 56,
+      "pose_id": "WJPA-0056",
+      "semantic_id": "speak_answer",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/056_speak_answer.png",
+      "source_png_sha256": "17292f8215dc921678fad523b5a51b41967861a594523baceab57b5f9da2b194",
+      "manifest_status": "pass",
+      "category": "speech",
+      "motion": {
+        "family": "speak",
+        "phase": "hold",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 57,
+      "pose_id": "WJPA-0057",
+      "semantic_id": "speak_quote",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/057_speak_quote.png",
+      "source_png_sha256": "08729ce71f955883dfba540f7645a6ab2ea4a1ceb1fed07bbe451ffef4746ddb",
+      "manifest_status": "pass",
+      "category": "speech",
+      "motion": {
+        "family": "speak",
+        "phase": "hold",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 58,
+      "pose_id": "WJPA-0058",
+      "semantic_id": "speak_read_book",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/058_speak_read_book.png",
+      "source_png_sha256": "b44e11f5688ee752c58aa0c99b3644cf9b29e9b83d8230f5880fa63014935d0c",
+      "manifest_status": "pass",
+      "category": "speech",
+      "motion": {
+        "family": "speak",
+        "phase": "hold",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 59,
+      "pose_id": "WJPA-0059",
+      "semantic_id": "speak_count_one",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/059_speak_count_one.png",
+      "source_png_sha256": "0edae004ba441ddf0522db30c6abb7af494156670dec392373c183ed39fc69ca",
+      "manifest_status": "pass",
+      "category": "speech",
+      "motion": {
+        "family": "speak",
+        "phase": "hold",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 60,
+      "pose_id": "WJPA-0060",
+      "semantic_id": "speak_count_two",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/060_speak_count_two.png",
+      "source_png_sha256": "628672ecb1732ff8dc7bf20cbae70348d723e31a1dd8926c7fbdc2c7e150eff6",
+      "manifest_status": "pass",
+      "category": "speech",
+      "motion": {
+        "family": "speak",
+        "phase": "hold",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 61,
+      "pose_id": "WJPA-0061",
+      "semantic_id": "speak_count_three",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/061_speak_count_three.png",
+      "source_png_sha256": "99f0485b06db4f2318c234ce200e879fb79dd848d03805af89c22f31a0ba6b87",
+      "manifest_status": "pass",
+      "category": "speech",
+      "motion": {
+        "family": "speak",
+        "phase": "hold",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 62,
+      "pose_id": "WJPA-0062",
+      "semantic_id": "news_presenter_open",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/062_news_presenter_open.png",
+      "source_png_sha256": "d7c3825018f5a47db18b82982358cf1ca78dd5bc3d1606e58893294e0984fa49",
+      "manifest_status": "pass",
+      "category": "newsroom_performance",
+      "motion": {
+        "family": "news",
+        "phase": "initiation",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 63,
+      "pose_id": "WJPA-0063",
+      "semantic_id": "news_presenter_serious",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/063_news_presenter_serious.png",
+      "source_png_sha256": "199d0d41677973fc8bf8e7a5c38cc09cdd62cb0203db29d10b6fe39f0731ac8c",
+      "manifest_status": "pass",
+      "category": "newsroom_performance",
+      "motion": {
+        "family": "news",
+        "phase": "hold",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 64,
+      "pose_id": "WJPA-0064",
+      "semantic_id": "news_point_graphic_left",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/064_news_point_graphic_left.png",
+      "source_png_sha256": "5148deb2ba443d5d914938d090bfb05cf7149a548f6657fd7455d466dd250337",
+      "manifest_status": "pass",
+      "category": "newsroom_performance",
+      "motion": {
+        "family": "news",
+        "phase": "hold",
+        "direction": "left"
+      }
+    },
+    {
+      "sequence": 65,
+      "pose_id": "WJPA-0065",
+      "semantic_id": "news_point_graphic_right",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/065_news_point_graphic_right.png",
+      "source_png_sha256": "ca670c05c7385691b53a791ae6705181ebfe6c1caec7a8e08dc590dcdeb46963",
+      "manifest_status": "pass",
+      "category": "newsroom_performance",
+      "motion": {
+        "family": "news",
+        "phase": "hold",
+        "direction": "right"
+      }
+    },
+    {
+      "sequence": 66,
+      "pose_id": "WJPA-0066",
+      "semantic_id": "news_field_report",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/066_news_field_report.png",
+      "source_png_sha256": "17894bac1bcf5f79283dd83305afd07422005466ffae5817b7ebc4ad2bd185aa",
+      "manifest_status": "pass",
+      "category": "newsroom_performance",
+      "motion": {
+        "family": "news",
+        "phase": "hold",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 67,
+      "pose_id": "WJPA-0067",
+      "semantic_id": "story_begin",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/067_story_begin.png",
+      "source_png_sha256": "a114f2fb1aa2105fe16b8afa91d251d8ef7324a7f0448ef21f3950989826f870",
+      "manifest_status": "pass",
+      "category": "storytelling",
+      "motion": {
+        "family": "story",
+        "phase": "anticipation",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 68,
+      "pose_id": "WJPA-0068",
+      "semantic_id": "story_build",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/068_story_build.png",
+      "source_png_sha256": "fed556d744e71db3fa61c00e182c84845f95b51ad46959ff9b3a04411e847494",
+      "manifest_status": "pass",
+      "category": "storytelling",
+      "motion": {
+        "family": "story",
+        "phase": "action",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 69,
+      "pose_id": "WJPA-0069",
+      "semantic_id": "story_suspense",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/069_story_suspense.png",
+      "source_png_sha256": "751b4a9c55e992d46c6b922973f69568ab96b1e4bd63068d38f1f3db4f4e9c74",
+      "manifest_status": "pass",
+      "category": "storytelling",
+      "motion": {
+        "family": "story",
+        "phase": "hold",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 70,
+      "pose_id": "WJPA-0070",
+      "semantic_id": "story_reveal",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/070_story_reveal.png",
+      "source_png_sha256": "bae6538be2dfc3d9686830931f5d716ad93ff7c094dadfbeb23452f81229d040",
+      "manifest_status": "pass",
+      "category": "storytelling",
+      "motion": {
+        "family": "story",
+        "phase": "hold",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 71,
+      "pose_id": "WJPA-0071",
+      "semantic_id": "story_character_voice",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/071_story_character_voice.png",
+      "source_png_sha256": "c05530c9c787856acd4e8ccb6d522ec73bd870bf64311c89926ef064e4fed656",
+      "manifest_status": "pass",
+      "category": "storytelling",
+      "motion": {
+        "family": "story",
+        "phase": "hold",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 72,
+      "pose_id": "WJPA-0072",
+      "semantic_id": "story_moral",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/072_story_moral.png",
+      "source_png_sha256": "db9a8da709517b57af459288f0e72d811a279c57c63c91e0ba0bbcdc38c08183",
+      "manifest_status": "pass",
+      "category": "storytelling",
+      "motion": {
+        "family": "story",
+        "phase": "hold",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 73,
+      "pose_id": "WJPA-0073",
+      "semantic_id": "speech_interrupted",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/073_speech_interrupted.png",
+      "source_png_sha256": "6a0f26c68bcc9fd64105836a7c2b571fc771cdd17f1de19b27ea321957f8fb31",
+      "manifest_status": "pass",
+      "category": "speech",
+      "motion": {
+        "family": "speech",
+        "phase": "hold",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 74,
+      "pose_id": "WJPA-0074",
+      "semantic_id": "speech_resume",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/074_speech_resume.png",
+      "source_png_sha256": "1b10823320d36cb0564cafc7d1c5d15ba854f15e6c2cd9eb05d620cfa3ae7749",
+      "manifest_status": "pass",
+      "category": "speech",
+      "motion": {
+        "family": "speech",
+        "phase": "hold",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 75,
+      "pose_id": "WJPA-0075",
+      "semantic_id": "speech_yield_floor",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/075_speech_yield_floor.png",
+      "source_png_sha256": "e59a577edccbc9bc7aa20ac4d551fbe9bd2f91f087335293ef058f545ee477e3",
+      "manifest_status": "pass",
+      "category": "speech",
+      "motion": {
+        "family": "speech",
+        "phase": "hold",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 76,
+      "pose_id": "WJPA-0076",
+      "semantic_id": "emotion_neutral",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/076_emotion_neutral.png",
+      "source_png_sha256": "2a188b9eabefcb37b753a4c418ae8a9543fbc4baf4870390328c4c21baa08617",
+      "manifest_status": "pass",
+      "category": "emotion",
+      "motion": {
+        "family": "emotion",
+        "phase": "hold",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 77,
+      "pose_id": "WJPA-0077",
+      "semantic_id": "emotion_joy",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/077_emotion_joy.png",
+      "source_png_sha256": "170cbf01e12173da9787f6ff49a7b882d1ec93b9377ae68ed009ffba52aca8ec",
+      "manifest_status": "pass",
+      "category": "emotion",
+      "motion": {
+        "family": "emotion",
+        "phase": "hold",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 78,
+      "pose_id": "WJPA-0078",
+      "semantic_id": "emotion_amused",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/078_emotion_amused.png",
+      "source_png_sha256": "d20f6638a1481e2bf25a9233637a2bd4548457274724a8d981b1a34a957516cd",
+      "manifest_status": "pass",
+      "category": "emotion",
+      "motion": {
+        "family": "emotion",
+        "phase": "hold",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 79,
+      "pose_id": "WJPA-0079",
+      "semantic_id": "emotion_excited",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/079_emotion_excited.png",
+      "source_png_sha256": "00b38039dcb63486500ebbe2fe4f5c79d5b25745978992fbd3df7d2d6632db50",
+      "manifest_status": "pass",
+      "category": "emotion",
+      "motion": {
+        "family": "emotion",
+        "phase": "hold",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 80,
+      "pose_id": "WJPA-0080",
+      "semantic_id": "emotion_curious",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/080_emotion_curious.png",
+      "source_png_sha256": "4124969091636f023f4d471cb54e9a0feee41ddfa25d123463db6890e99711f9",
+      "manifest_status": "pass",
+      "category": "emotion",
+      "motion": {
+        "family": "emotion",
+        "phase": "hold",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 81,
+      "pose_id": "WJPA-0081",
+      "semantic_id": "emotion_confident",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/081_emotion_confident.png",
+      "source_png_sha256": "541578dcc0fc9f518b4950f0eb6f27bfd663bdf45c25dba47a4b7e43b55e82ad",
+      "manifest_status": "pass",
+      "category": "emotion",
+      "motion": {
+        "family": "emotion",
+        "phase": "hold",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 82,
+      "pose_id": "WJPA-0082",
+      "semantic_id": "emotion_compassion",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/082_emotion_compassion.png",
+      "source_png_sha256": "e2bdd314dba9ea73c3e97e622e42ee170d9a44c201976c90b14bc7f54bbdcc1e",
+      "manifest_status": "pass",
+      "category": "emotion",
+      "motion": {
+        "family": "emotion",
+        "phase": "hold",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 83,
+      "pose_id": "WJPA-0083",
+      "semantic_id": "emotion_proud",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/083_emotion_proud.png",
+      "source_png_sha256": "be55147c06b0cd173bf5317f6b899f2da915a8c3ea41b45510dd813bda9745b8",
+      "manifest_status": "pass",
+      "category": "emotion",
+      "motion": {
+        "family": "emotion",
+        "phase": "hold",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 84,
+      "pose_id": "WJPA-0084",
+      "semantic_id": "emotion_playful",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/084_emotion_playful.png",
+      "source_png_sha256": "981e7076298d08bbc4db7a6e348c75b062439c5b57bc008c7feadcec39fb6b20",
+      "manifest_status": "pass",
+      "category": "emotion",
+      "motion": {
+        "family": "emotion",
+        "phase": "hold",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 85,
+      "pose_id": "WJPA-0085",
+      "semantic_id": "emotion_relief",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/085_emotion_relief.png",
+      "source_png_sha256": "4cb6b7c331c0fd14c99fb4614debdfffed62593a56005f68fbdc10aeace42c13",
+      "manifest_status": "pass",
+      "category": "emotion",
+      "motion": {
+        "family": "emotion",
+        "phase": "hold",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 86,
+      "pose_id": "WJPA-0086",
+      "semantic_id": "emotion_gratitude",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/086_emotion_gratitude.png",
+      "source_png_sha256": "fa7b813d6115567504ab3b3de8bed65bee14b6862a9616d926db043c885cecbf",
+      "manifest_status": "pass",
+      "category": "emotion",
+      "motion": {
+        "family": "emotion",
+        "phase": "hold",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 87,
+      "pose_id": "WJPA-0087",
+      "semantic_id": "emotion_surprise",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/087_emotion_surprise.png",
+      "source_png_sha256": "b8bafeedb32a6e44abfac2ba0ea826dea446ebd4958854693e934b1f5e37a83f",
+      "manifest_status": "pass",
+      "category": "emotion",
+      "motion": {
+        "family": "emotion",
+        "phase": "hold",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 88,
+      "pose_id": "WJPA-0088",
+      "semantic_id": "emotion_shock",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/088_emotion_shock.png",
+      "source_png_sha256": "7c7e1a28fca56d8b0ba700737f2cf197aa4e03732c4b7ad1b2e49e689a8e7333",
+      "manifest_status": "pass",
+      "category": "emotion",
+      "motion": {
+        "family": "emotion",
+        "phase": "hold",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 89,
+      "pose_id": "WJPA-0089",
+      "semantic_id": "emotion_confusion",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/089_emotion_confusion.png",
+      "source_png_sha256": "18ae0857351ca84d8186ebd9c6ace673db401626b47dc1fff0c0a3afef7fa7ce",
+      "manifest_status": "pass",
+      "category": "emotion",
+      "motion": {
+        "family": "emotion",
+        "phase": "hold",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 90,
+      "pose_id": "WJPA-0090",
+      "semantic_id": "emotion_skepticism",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/090_emotion_skepticism.png",
+      "source_png_sha256": "eeba1179643caea85c65fdfb69b47d90c20870bddb22f60cc6fb190560eed366",
+      "manifest_status": "pass",
+      "category": "emotion",
+      "motion": {
+        "family": "emotion",
+        "phase": "hold",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 91,
+      "pose_id": "WJPA-0091",
+      "semantic_id": "emotion_concern",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/091_emotion_concern.png",
+      "source_png_sha256": "b5eb782fbc006e5df0729a4d4e589c5476e2b83117bf7058e89fecb50f4ff8d4",
+      "manifest_status": "pass",
+      "category": "emotion",
+      "motion": {
+        "family": "emotion",
+        "phase": "hold",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 92,
+      "pose_id": "WJPA-0092",
+      "semantic_id": "emotion_sadness",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/092_emotion_sadness.png",
+      "source_png_sha256": "2afa411ae69144fa8076e9d8e1316c6820d5481825294e7ea831dd90c3503a92",
+      "manifest_status": "pass",
+      "category": "emotion",
+      "motion": {
+        "family": "emotion",
+        "phase": "hold",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 93,
+      "pose_id": "WJPA-0093",
+      "semantic_id": "emotion_grief_restrained",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/093_emotion_grief_restrained.png",
+      "source_png_sha256": "e76e919093d98d33b09fa9499dc277317bae88879ef81732dc7ce57fa6ecec4a",
+      "manifest_status": "pass",
+      "category": "emotion",
+      "motion": {
+        "family": "emotion",
+        "phase": "hold",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 94,
+      "pose_id": "WJPA-0094",
+      "semantic_id": "emotion_shame",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/094_emotion_shame.png",
+      "source_png_sha256": "8a60a86963b654108f9ddfc27a27f8f7dc9a5d9303492b04c6f456d388e1256f",
+      "manifest_status": "pass",
+      "category": "emotion",
+      "motion": {
+        "family": "emotion",
+        "phase": "hold",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 95,
+      "pose_id": "WJPA-0095",
+      "semantic_id": "emotion_embarrassed",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/095_emotion_embarrassed.png",
+      "source_png_sha256": "6f385fa96bc54c401baf70e18e86f489823efb5d114c47dbda3b04a7d607add6",
+      "manifest_status": "pass",
+      "category": "emotion",
+      "motion": {
+        "family": "emotion",
+        "phase": "hold",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 96,
+      "pose_id": "WJPA-0096",
+      "semantic_id": "emotion_fear",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/096_emotion_fear.png",
+      "source_png_sha256": "47ea68143bd63886f9bf74933fea1d0f075047fa80fa672636243fd0077bace8",
+      "manifest_status": "pass",
+      "category": "emotion",
+      "motion": {
+        "family": "emotion",
+        "phase": "hold",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 97,
+      "pose_id": "WJPA-0097",
+      "semantic_id": "emotion_anxiety",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/097_emotion_anxiety.png",
+      "source_png_sha256": "c5db35e35cdc550c77c44ccb614a9dc41c17c75405cac1a3417cce288b58bf19",
+      "manifest_status": "pass",
+      "category": "emotion",
+      "motion": {
+        "family": "emotion",
+        "phase": "hold",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 98,
+      "pose_id": "WJPA-0098",
+      "semantic_id": "emotion_anger",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/098_emotion_anger.png",
+      "source_png_sha256": "c66bbe23eafdda40aa778b551a1bde49216e824d4ea961b6f54888f7b947f41d",
+      "manifest_status": "pass",
+      "category": "emotion",
+      "motion": {
+        "family": "emotion",
+        "phase": "hold",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 99,
+      "pose_id": "WJPA-0099",
+      "semantic_id": "emotion_frustration",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/099_emotion_frustration.png",
+      "source_png_sha256": "02375cc2e361e33a1d8dfb414fcdb739e28fc95f371f01180ae4b9b00178e988",
+      "manifest_status": "pass",
+      "category": "emotion",
+      "motion": {
+        "family": "emotion",
+        "phase": "hold",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 100,
+      "pose_id": "WJPA-0100",
+      "semantic_id": "emotion_determined",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/100_emotion_determined.png",
+      "source_png_sha256": "873c440ff6beabe941cf72cce51954708542e7987f660a1dca251944fb731893",
+      "manifest_status": "pass",
+      "category": "emotion",
+      "motion": {
+        "family": "emotion",
+        "phase": "hold",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 101,
+      "pose_id": "WJPA-0101",
+      "semantic_id": "emotion_defiant",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/101_emotion_defiant.png",
+      "source_png_sha256": "e411fc7a63219bcdb36d55194fdf7ed7e05fc736f71cf52d35de59816a7b9f6d",
+      "manifest_status": "pass",
+      "category": "emotion",
+      "motion": {
+        "family": "emotion",
+        "phase": "hold",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 102,
+      "pose_id": "WJPA-0102",
+      "semantic_id": "emotion_disappointed",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/102_emotion_disappointed.png",
+      "source_png_sha256": "1f99fda1c64683d30627262758813954e06d7ab56c0523973dff5cac27064154",
+      "manifest_status": "pass",
+      "category": "emotion",
+      "motion": {
+        "family": "emotion",
+        "phase": "hold",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 103,
+      "pose_id": "WJPA-0103",
+      "semantic_id": "emotion_exhausted",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/103_emotion_exhausted.png",
+      "source_png_sha256": "d4fe12f22e4d39932d85a00f0da42431cf8444a0ee9da8a35f2113a73b43a6fc",
+      "manifest_status": "pass",
+      "category": "emotion",
+      "motion": {
+        "family": "emotion",
+        "phase": "hold",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 104,
+      "pose_id": "WJPA-0104",
+      "semantic_id": "emotion_fatigued_speaking",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/104_emotion_fatigued_speaking.png",
+      "source_png_sha256": "1ce28507354a7a56c2e3a2e999b4ea3d72aeaca40cb965cdaca15a79f6732bf2",
+      "manifest_status": "pass",
+      "category": "emotion",
+      "motion": {
+        "family": "emotion",
+        "phase": "hold",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 105,
+      "pose_id": "WJPA-0105",
+      "semantic_id": "emotion_contemplative",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/105_emotion_contemplative.png",
+      "source_png_sha256": "1c5688a6bc9bd830954e854881aec44e934965b09d1c44de007d5d5fa1d97d06",
+      "manifest_status": "pass",
+      "category": "emotion",
+      "motion": {
+        "family": "emotion",
+        "phase": "hold",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 106,
+      "pose_id": "WJPA-0106",
+      "semantic_id": "emotion_serene",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/106_emotion_serene.png",
+      "source_png_sha256": "742a84661e099bc1e5730b75ba582f097bd9c2c7b6663e8774aacc99989862ed",
+      "manifest_status": "pass",
+      "category": "emotion",
+      "motion": {
+        "family": "emotion",
+        "phase": "hold",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 107,
+      "pose_id": "WJPA-0107",
+      "semantic_id": "emotion_solemn",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/107_emotion_solemn.png",
+      "source_png_sha256": "8cc69a3ef205ef3e81ed6fe66ae165f706e45188229ff390473a8462b164a5b2",
+      "manifest_status": "pass",
+      "category": "emotion",
+      "motion": {
+        "family": "emotion",
+        "phase": "hold",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 108,
+      "pose_id": "WJPA-0108",
+      "semantic_id": "emotion_hopeful",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/108_emotion_hopeful.png",
+      "source_png_sha256": "c7f7fb0f5dd41bb5a016e6cb54edc7fe43866f93146cc60305fe719eac43c486",
+      "manifest_status": "pass",
+      "category": "emotion",
+      "motion": {
+        "family": "emotion",
+        "phase": "hold",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 109,
+      "pose_id": "WJPA-0109",
+      "semantic_id": "emotion_triumphant",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/109_emotion_triumphant.png",
+      "source_png_sha256": "b2f9584d2a1d6178d0487a90b5b48ea81e5bd16ab7abf518c0c39cd2a94ed4b5",
+      "manifest_status": "pass",
+      "category": "emotion",
+      "motion": {
+        "family": "emotion",
+        "phase": "hold",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 110,
+      "pose_id": "WJPA-0110",
+      "semantic_id": "emotion_recover_composure",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/110_emotion_recover_composure.png",
+      "source_png_sha256": "8e730d814dd57c0f58345744c0a849d428c92f5c92bc6b26e8850ede2d62b206",
+      "manifest_status": "pass",
+      "category": "emotion",
+      "motion": {
+        "family": "emotion",
+        "phase": "recovery",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 111,
+      "pose_id": "WJPA-0111",
+      "semantic_id": "hand_open_relaxed",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/111_hand_open_relaxed.png",
+      "source_png_sha256": "39736dacbdfb685757bbae49f3c00c7440b9f9fcdd13676e2b5cbe2b99b84d59",
+      "manifest_status": "pass",
+      "category": "hand_gesture",
+      "motion": {
+        "family": "hand",
+        "phase": "initiation",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 112,
+      "pose_id": "WJPA-0112",
+      "semantic_id": "hand_present_screen_right",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/112_hand_present_screen_right.png",
+      "source_png_sha256": "72df5299ac9463c320c593fb9e8fa88efc9f82b67fe832de3a1f26e16df970eb",
+      "manifest_status": "pass",
+      "category": "hand_gesture",
+      "motion": {
+        "family": "hand",
+        "phase": "hold",
+        "direction": "screen_right"
+      }
+    },
+    {
+      "sequence": 113,
+      "pose_id": "WJPA-0113",
+      "semantic_id": "hand_present_screen_left",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/113_hand_present_screen_left.png",
+      "source_png_sha256": "15b1ffea6237964052146206ba9f801a476bdddbc6a4896b42c076e52b988c56",
+      "manifest_status": "pass",
+      "category": "hand_gesture",
+      "motion": {
+        "family": "hand",
+        "phase": "hold",
+        "direction": "screen_left"
+      }
+    },
+    {
+      "sequence": 114,
+      "pose_id": "WJPA-0114",
+      "semantic_id": "hand_point_screen_left",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/114_hand_point_screen_left.png",
+      "source_png_sha256": "e3bc1fb5399cb7912c2b7d6544a6fc75c92e6ee29df788b9cc02af50e7fee678",
+      "manifest_status": "pass",
+      "category": "hand_gesture",
+      "motion": {
+        "family": "hand",
+        "phase": "hold",
+        "direction": "screen_left"
+      }
+    },
+    {
+      "sequence": 115,
+      "pose_id": "WJPA-0115",
+      "semantic_id": "hand_point_screen_right",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/115_hand_point_screen_right.png",
+      "source_png_sha256": "330cfb61303274ae76b291533c737734e07f9516eb3f599de6e7c26021d33986",
+      "manifest_status": "pass",
+      "category": "hand_gesture",
+      "motion": {
+        "family": "hand",
+        "phase": "hold",
+        "direction": "screen_right"
+      }
+    },
+    {
+      "sequence": 116,
+      "pose_id": "WJPA-0116",
+      "semantic_id": "hand_point_up",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/116_hand_point_up.png",
+      "source_png_sha256": "24b3e3453df09d4993e1246a59f89a9024530ed519398b40c76cc299193f6453",
+      "manifest_status": "pass",
+      "category": "hand_gesture",
+      "motion": {
+        "family": "hand",
+        "phase": "hold",
+        "direction": "up"
+      }
+    },
+    {
+      "sequence": 117,
+      "pose_id": "WJPA-0117",
+      "semantic_id": "hand_point_down",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/117_hand_point_down.png",
+      "source_png_sha256": "2d0981f6de2a6dd6ce6e571f38101add2571475336a9bd601555a4aa97d7ccef",
+      "manifest_status": "pass",
+      "category": "hand_gesture",
+      "motion": {
+        "family": "hand",
+        "phase": "hold",
+        "direction": "down"
+      }
+    },
+    {
+      "sequence": 118,
+      "pose_id": "WJPA-0118",
+      "semantic_id": "hand_stop",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/118_hand_stop.png",
+      "source_png_sha256": "fd7c4c9b2c4ba2c618fc239884b11fd083c18c45902ea3ef9b9233edeaec3a38",
+      "manifest_status": "pass",
+      "category": "hand_gesture",
+      "motion": {
+        "family": "hand",
+        "phase": "recovery",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 119,
+      "pose_id": "WJPA-0119",
+      "semantic_id": "hand_invite",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/119_hand_invite.png",
+      "source_png_sha256": "21d5758545c0c788f27f0a553324921a4382300e417a37d9189907d039b219f3",
+      "manifest_status": "pass",
+      "category": "hand_gesture",
+      "motion": {
+        "family": "hand",
+        "phase": "hold",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 120,
+      "pose_id": "WJPA-0120",
+      "semantic_id": "hand_fist_resolve",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/120_hand_fist_resolve.png",
+      "source_png_sha256": "ecbe5c07c7e1dd3271ace39ba53afcdc8ed9dea2fad3cc9704dfbb5fdbe6a40d",
+      "manifest_status": "pass",
+      "category": "hand_gesture",
+      "motion": {
+        "family": "hand",
+        "phase": "hold",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 121,
+      "pose_id": "WJPA-0121",
+      "semantic_id": "staff_grip_default",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/121_staff_grip_default.png",
+      "source_png_sha256": "b69b8e1ce39c22fca377af827f26edb621c2f0316008ddef7e87cea4a15954bd",
+      "manifest_status": "pass",
+      "category": "prop_interaction",
+      "motion": {
+        "family": "staff",
+        "phase": "hold",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 122,
+      "pose_id": "WJPA-0122",
+      "semantic_id": "staff_two_hand_grip",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/122_staff_two_hand_grip.png",
+      "source_png_sha256": "e9219b4a149372ddbace0559680692bc9a0b38482eeb2e75854d03aac9dcbea1",
+      "manifest_status": "pass",
+      "category": "prop_interaction",
+      "motion": {
+        "family": "staff",
+        "phase": "hold",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 123,
+      "pose_id": "WJPA-0123",
+      "semantic_id": "staff_plant",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/123_staff_plant.png",
+      "source_png_sha256": "cedf7313abb086da9c092754cabc24a1349efa901f257c972310d520d44014f0",
+      "manifest_status": "pass",
+      "category": "prop_interaction",
+      "motion": {
+        "family": "staff",
+        "phase": "impact",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 124,
+      "pose_id": "WJPA-0124",
+      "semantic_id": "staff_raise_vertical",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/124_staff_raise_vertical.png",
+      "source_png_sha256": "c0e542674b4899cec728a1dcf4be3f63e432918ee483343714cd9089d6ff749d",
+      "manifest_status": "pass",
+      "category": "prop_interaction",
+      "motion": {
+        "family": "staff",
+        "phase": "initiation",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 125,
+      "pose_id": "WJPA-0125",
+      "semantic_id": "staff_aim_forward",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/125_staff_aim_forward.png",
+      "source_png_sha256": "9e8c23c898dbfd16b96503eac2cf5f00cd05276223aead1885308289aa54b594",
+      "manifest_status": "pass",
+      "category": "prop_interaction",
+      "motion": {
+        "family": "staff",
+        "phase": "hold",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 126,
+      "pose_id": "WJPA-0126",
+      "semantic_id": "staff_sweep_horizontal",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/126_staff_sweep_horizontal.png",
+      "source_png_sha256": "720db0f145ab04e2c3627b61b2d862d486b1952c31ba8a7e96869d58cf2deb40",
+      "manifest_status": "pass",
+      "category": "prop_interaction",
+      "motion": {
+        "family": "staff",
+        "phase": "hold",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 127,
+      "pose_id": "WJPA-0127",
+      "semantic_id": "staff_hand_transfer",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/127_staff_hand_transfer.png",
+      "source_png_sha256": "b43dce6866c8569961887557e4581db881d83c40683e32c1b4ceab38e2ad8263",
+      "manifest_status": "pass",
+      "category": "prop_interaction",
+      "motion": {
+        "family": "staff",
+        "phase": "hold",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 128,
+      "pose_id": "WJPA-0128",
+      "semantic_id": "hold_book_closed",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/128_hold_book_closed.png",
+      "source_png_sha256": "7c38de705fedfa73c94c8231bced6bdc767e7da5c347be67f515cbce7e3281fa",
+      "manifest_status": "pass",
+      "category": "prop_interaction",
+      "motion": {
+        "family": "hold",
+        "phase": "action",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 129,
+      "pose_id": "WJPA-0129",
+      "semantic_id": "hold_book_open",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/129_hold_book_open.png",
+      "source_png_sha256": "f706588cac51321dce67b8de836105c7b87601a97c55d6aad24e6563aaa61e05",
+      "manifest_status": "pass",
+      "category": "prop_interaction",
+      "motion": {
+        "family": "hold",
+        "phase": "initiation",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 130,
+      "pose_id": "WJPA-0130",
+      "semantic_id": "write_in_book",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/130_write_in_book.png",
+      "source_png_sha256": "86547b802a84e66823616c47fb6829645bbba6c2ce94de532ad2e8cd2c24c80f",
+      "manifest_status": "pass",
+      "category": "prop_interaction",
+      "motion": {
+        "family": "write",
+        "phase": "hold",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 131,
+      "pose_id": "WJPA-0131",
+      "semantic_id": "receive_object",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/131_receive_object.png",
+      "source_png_sha256": "b95e4537182d27d0295df0bf6e7e1f9d9752c6f6ae729fd7d106fc747e0d600f",
+      "manifest_status": "pass",
+      "category": "prop_interaction",
+      "motion": {
+        "family": "receive",
+        "phase": "hold",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 132,
+      "pose_id": "WJPA-0132",
+      "semantic_id": "offer_object",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/132_offer_object.png",
+      "source_png_sha256": "39fc25669492b0e19b46376bc87bdd0b09eec9d5830b5a99ca761655f49a06d7",
+      "manifest_status": "pass",
+      "category": "prop_interaction",
+      "motion": {
+        "family": "offer",
+        "phase": "hold",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 133,
+      "pose_id": "WJPA-0133",
+      "semantic_id": "touch_ui_panel",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/133_touch_ui_panel.png",
+      "source_png_sha256": "bcd107f0cdeee5be26d43764193dc3a7139adcaec2233df9e605ec686a4abc47",
+      "manifest_status": "pass",
+      "category": "prop_interaction",
+      "motion": {
+        "family": "touch",
+        "phase": "hold",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 134,
+      "pose_id": "WJPA-0134",
+      "semantic_id": "drag_ui_panel",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/134_drag_ui_panel.png",
+      "source_png_sha256": "d91c86a41dd590ee937d5b3df1c7a944c1e1e2fa24f5a92f7888819612ccfd8a",
+      "manifest_status": "pass",
+      "category": "prop_interaction",
+      "motion": {
+        "family": "drag",
+        "phase": "hold",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 135,
+      "pose_id": "WJPA-0135",
+      "semantic_id": "lean_on_ledge",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/135_lean_on_ledge.png",
+      "source_png_sha256": "ed198485163ab087daec05b140faab9034b661252e1188519be69187780a2ea0",
+      "manifest_status": "pass",
+      "category": "prop_interaction",
+      "motion": {
+        "family": "lean",
+        "phase": "hold",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 136,
+      "pose_id": "WJPA-0136",
+      "semantic_id": "turn_left_anticipation",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/136_turn_left_anticipation.png",
+      "source_png_sha256": "073a60b864024dd0c9e2c55cc1bee7445f6808993bcd4eca9c4c694578bad393",
+      "manifest_status": "pass",
+      "category": "orientation",
+      "motion": {
+        "family": "turn",
+        "phase": "anticipation",
+        "direction": "left"
+      }
+    },
+    {
+      "sequence": 137,
+      "pose_id": "WJPA-0137",
+      "semantic_id": "turn_left_mid",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/137_turn_left_mid.png",
+      "source_png_sha256": "684f8792c3f1edf6ef0afbb6213819fe5e5933bd1c717b6a71c5519190824d0f",
+      "manifest_status": "pass",
+      "category": "orientation",
+      "motion": {
+        "family": "turn",
+        "phase": "action",
+        "direction": "left"
+      }
+    },
+    {
+      "sequence": 138,
+      "pose_id": "WJPA-0138",
+      "semantic_id": "turn_left_complete",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/138_turn_left_complete.png",
+      "source_png_sha256": "1b8460e9e981b62a3ae45dacb127f2b219c4cb329759cc82ea86094787a84bf5",
+      "manifest_status": "pass",
+      "category": "orientation",
+      "motion": {
+        "family": "turn",
+        "phase": "impact",
+        "direction": "left"
+      }
+    },
+    {
+      "sequence": 139,
+      "pose_id": "WJPA-0139",
+      "semantic_id": "walk_start_left",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/139_walk_start_left.png",
+      "source_png_sha256": "517fa444b822ce4f58fdd1e876d51bc4f1df08065616ea186a53864f95af6f6d",
+      "manifest_status": "pass",
+      "category": "ground_locomotion",
+      "motion": {
+        "family": "walk",
+        "phase": "anticipation",
+        "direction": "left",
+        "loop_group": "walk_cycle"
+      }
+    },
+    {
+      "sequence": 140,
+      "pose_id": "WJPA-0140",
+      "semantic_id": "walk_down_left",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/140_walk_down_left.png",
+      "source_png_sha256": "a581d41a33aa1cc63d3f429dbe2999e0803bfcbcc65921fdff26d24b30a4d8cb",
+      "manifest_status": "pass",
+      "category": "ground_locomotion",
+      "motion": {
+        "family": "walk",
+        "phase": "hold",
+        "direction": "left",
+        "loop_group": "walk_cycle"
+      }
+    },
+    {
+      "sequence": 141,
+      "pose_id": "WJPA-0141",
+      "semantic_id": "walk_contact_left",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/141_walk_contact_left.png",
+      "source_png_sha256": "341fb6193b77e13585509e787dd1da8485a84fba9e97e70a1341dc38db9d7cf1",
+      "manifest_status": "pass",
+      "category": "ground_locomotion",
+      "motion": {
+        "family": "walk",
+        "phase": "impact",
+        "direction": "left",
+        "loop_group": "walk_cycle"
+      }
+    },
+    {
+      "sequence": 142,
+      "pose_id": "WJPA-0142",
+      "semantic_id": "walk_passing_left",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/142_walk_passing_left.png",
+      "source_png_sha256": "392529c1f0437b63e564528d7129b772c75d29979079d526566b6e3ac53a18cd",
+      "manifest_status": "pass",
+      "category": "ground_locomotion",
+      "motion": {
+        "family": "walk",
+        "phase": "action",
+        "direction": "left",
+        "loop_group": "walk_cycle"
+      }
+    },
+    {
+      "sequence": 143,
+      "pose_id": "WJPA-0143",
+      "semantic_id": "walk_up_left",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/143_walk_up_left.png",
+      "source_png_sha256": "259b0044f1c6aa2442b9cb56b1ce683658d884aa610ae11c3134513148ac0b39",
+      "manifest_status": "pass",
+      "category": "ground_locomotion",
+      "motion": {
+        "family": "walk",
+        "phase": "hold",
+        "direction": "left",
+        "loop_group": "walk_cycle"
+      }
+    },
+    {
+      "sequence": 144,
+      "pose_id": "WJPA-0144",
+      "semantic_id": "walk_contact_right",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/144_walk_contact_right.png",
+      "source_png_sha256": "8b526e712e9ffd6c31d4aff4f5a47a6a2a7b66fff99261ce71b1b3dc6895fc9c",
+      "manifest_status": "pass",
+      "category": "ground_locomotion",
+      "motion": {
+        "family": "walk",
+        "phase": "impact",
+        "direction": "right",
+        "loop_group": "walk_cycle"
+      }
+    },
+    {
+      "sequence": 145,
+      "pose_id": "WJPA-0145",
+      "semantic_id": "walk_stop_anticipation",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/145_walk_stop_anticipation.png",
+      "source_png_sha256": "8386deace506602cb88b6619a707c9dea4e1d26c91e954157f52fc9a7f5aebc6",
+      "manifest_status": "pass",
+      "category": "ground_locomotion",
+      "motion": {
+        "family": "walk",
+        "phase": "anticipation",
+        "direction": "neutral",
+        "loop_group": "walk_cycle"
+      }
+    },
+    {
+      "sequence": 146,
+      "pose_id": "WJPA-0146",
+      "semantic_id": "walk_stop_plant",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/146_walk_stop_plant.png",
+      "source_png_sha256": "a9d1efd7b00b349b42f86811e736c8c2c1bb4b5b5fc493747e1084230536bae0",
+      "manifest_status": "pass",
+      "category": "ground_locomotion",
+      "motion": {
+        "family": "walk",
+        "phase": "impact",
+        "direction": "neutral",
+        "loop_group": "walk_cycle"
+      }
+    },
+    {
+      "sequence": 147,
+      "pose_id": "WJPA-0147",
+      "semantic_id": "walk_stop_settle",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/147_walk_stop_settle.png",
+      "source_png_sha256": "0c5bb234444b4f9db4501eb2504b8255efe3cae944101d4bc4a2ffad688521bb",
+      "manifest_status": "pass",
+      "category": "ground_locomotion",
+      "motion": {
+        "family": "walk",
+        "phase": "recovery",
+        "direction": "neutral",
+        "loop_group": "walk_cycle"
+      }
+    },
+    {
+      "sequence": 148,
+      "pose_id": "WJPA-0148",
+      "semantic_id": "turn_right_anticipation",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/148_turn_right_anticipation.png",
+      "source_png_sha256": "944c0b6c2193ffb40aa3299223d930e57257d9d776756c36b354c018d711d137",
+      "manifest_status": "pass",
+      "category": "orientation",
+      "motion": {
+        "family": "turn",
+        "phase": "anticipation",
+        "direction": "right"
+      }
+    },
+    {
+      "sequence": 149,
+      "pose_id": "WJPA-0149",
+      "semantic_id": "turn_right_mid",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/149_turn_right_mid.png",
+      "source_png_sha256": "3ddb427613c96d4a65217c91825042c49b698901477b4108d31a88a1b380ee13",
+      "manifest_status": "pass",
+      "category": "orientation",
+      "motion": {
+        "family": "turn",
+        "phase": "action",
+        "direction": "right"
+      }
+    },
+    {
+      "sequence": 150,
+      "pose_id": "WJPA-0150",
+      "semantic_id": "turn_right_complete",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/150_turn_right_complete.png",
+      "source_png_sha256": "48c0674312c23701561f4a4db29b91341a4a111588b5e4b4ad77a355dd51638e",
+      "manifest_status": "pass",
+      "category": "orientation",
+      "motion": {
+        "family": "turn",
+        "phase": "impact",
+        "direction": "right"
+      }
+    },
+    {
+      "sequence": 151,
+      "pose_id": "WJPA-0151",
+      "semantic_id": "run_start",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/151_run_start.png",
+      "source_png_sha256": "abf26d7ffab43a2ab067c0e2980414e29e8cfd760cf11906c227d67c4c04c8ff",
+      "manifest_status": "pass",
+      "category": "ground_locomotion",
+      "motion": {
+        "family": "run",
+        "phase": "anticipation",
+        "direction": "neutral",
+        "loop_group": "run_cycle"
+      }
+    },
+    {
+      "sequence": 152,
+      "pose_id": "WJPA-0152",
+      "semantic_id": "run_passing",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/152_run_passing.png",
+      "source_png_sha256": "b09a49414ee12a89d08486c1bcc6f165d46616183f1ab7b98bc9ddc35977ca7c",
+      "manifest_status": "pass",
+      "category": "ground_locomotion",
+      "motion": {
+        "family": "run",
+        "phase": "action",
+        "direction": "neutral",
+        "loop_group": "run_cycle"
+      }
+    },
+    {
+      "sequence": 153,
+      "pose_id": "WJPA-0153",
+      "semantic_id": "run_contact_left",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/153_run_contact_left.png",
+      "source_png_sha256": "c766ecf1350ae9cb4b5aa926302fce4699e7d687c119f6a532f9c08d59181992",
+      "manifest_status": "pass",
+      "category": "ground_locomotion",
+      "motion": {
+        "family": "run",
+        "phase": "impact",
+        "direction": "left",
+        "loop_group": "run_cycle"
+      }
+    },
+    {
+      "sequence": 154,
+      "pose_id": "WJPA-0154",
+      "semantic_id": "run_flight_phase",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/154_run_flight_phase.png",
+      "source_png_sha256": "d522abaff9aa440ef591d8080436443b7d51566622f1c3355d31a700b7a2e3d6",
+      "manifest_status": "pass",
+      "category": "ground_locomotion",
+      "motion": {
+        "family": "run",
+        "phase": "hold",
+        "direction": "neutral",
+        "loop_group": "run_cycle"
+      }
+    },
+    {
+      "sequence": 155,
+      "pose_id": "WJPA-0155",
+      "semantic_id": "run_contact_right",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/155_run_contact_right.png",
+      "source_png_sha256": "54b755de7195f6ed6faaac679939756352874565c27872ce42aea6cdf2ee75d8",
+      "manifest_status": "pass",
+      "category": "ground_locomotion",
+      "motion": {
+        "family": "run",
+        "phase": "impact",
+        "direction": "right",
+        "loop_group": "run_cycle"
+      }
+    },
+    {
+      "sequence": 156,
+      "pose_id": "WJPA-0156",
+      "semantic_id": "run_stop_brake",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/156_run_stop_brake.png",
+      "source_png_sha256": "f80ceda9be7d917503b2287136cebacb09c869366322e8a0fa24edbaae36d48e",
+      "manifest_status": "pass",
+      "category": "ground_locomotion",
+      "motion": {
+        "family": "run",
+        "phase": "recovery",
+        "direction": "neutral",
+        "loop_group": "run_cycle"
+      }
+    },
+    {
+      "sequence": 157,
+      "pose_id": "WJPA-0157",
+      "semantic_id": "run_stop_recover",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/157_run_stop_recover.png",
+      "source_png_sha256": "d1e3f7e9f98691d2bd41688aebfacb6f7afa3d988375ca7601d0f3a28edb13c3",
+      "manifest_status": "pass",
+      "category": "ground_locomotion",
+      "motion": {
+        "family": "run",
+        "phase": "recovery",
+        "direction": "neutral",
+        "loop_group": "run_cycle"
+      }
+    },
+    {
+      "sequence": 158,
+      "pose_id": "WJPA-0158",
+      "semantic_id": "crouch_prepare",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/158_crouch_prepare.png",
+      "source_png_sha256": "60094baee44be1c384b56165c37d643305ede4630f09d86d287be8bf68bbf9db",
+      "manifest_status": "pass",
+      "category": "ground_locomotion",
+      "motion": {
+        "family": "crouch",
+        "phase": "anticipation",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 159,
+      "pose_id": "WJPA-0159",
+      "semantic_id": "jump_launch",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/159_jump_launch.png",
+      "source_png_sha256": "ed83eed8bf3f4aba90acba0ade48543338a6fed2b689ae8a71018c60cdf20ac8",
+      "manifest_status": "pass",
+      "category": "ground_locomotion",
+      "motion": {
+        "family": "jump",
+        "phase": "initiation",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 160,
+      "pose_id": "WJPA-0160",
+      "semantic_id": "jump_apex",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/160_jump_apex.png",
+      "source_png_sha256": "94a701e7121e0a6c61720188dce844062b46b081246a04d9e595e4dcde57feff",
+      "manifest_status": "pass",
+      "category": "ground_locomotion",
+      "motion": {
+        "family": "jump",
+        "phase": "action",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 161,
+      "pose_id": "WJPA-0161",
+      "semantic_id": "jump_descent",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/161_jump_descent.png",
+      "source_png_sha256": "de44b9672cd4347fad64a2a40ce0da6e18f0ceae0740b18c9609d55ceb39e5ce",
+      "manifest_status": "pass",
+      "category": "ground_locomotion",
+      "motion": {
+        "family": "jump",
+        "phase": "hold",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 162,
+      "pose_id": "WJPA-0162",
+      "semantic_id": "jump_land_contact",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/162_jump_land_contact.png",
+      "source_png_sha256": "4045246199d2935212242ca5ee9f00418fed715ada5bcb305ecba329b39f44ed",
+      "manifest_status": "pass",
+      "category": "ground_locomotion",
+      "motion": {
+        "family": "jump",
+        "phase": "impact",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 163,
+      "pose_id": "WJPA-0163",
+      "semantic_id": "jump_land_recovery",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/163_jump_land_recovery.png",
+      "source_png_sha256": "077d0169fd9bd320964d3a09060b48e559f4c3c086c1442270266949dbebbe72",
+      "manifest_status": "pass",
+      "category": "ground_locomotion",
+      "motion": {
+        "family": "jump",
+        "phase": "recovery",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 164,
+      "pose_id": "WJPA-0164",
+      "semantic_id": "fall_forward_start",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/164_fall_forward_start.png",
+      "source_png_sha256": "ac732c4f04d90c0f754960ba25882eaca69994c886171141fd5eaa73a6e45aa1",
+      "manifest_status": "pass",
+      "category": "ground_locomotion",
+      "motion": {
+        "family": "fall",
+        "phase": "anticipation",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 165,
+      "pose_id": "WJPA-0165",
+      "semantic_id": "fall_forward_catch",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/165_fall_forward_catch.png",
+      "source_png_sha256": "7755110442e578851ee86dc18c2093345a6769cf6375af5d99be33b152afb86f",
+      "manifest_status": "pass",
+      "category": "ground_locomotion",
+      "motion": {
+        "family": "fall",
+        "phase": "hold",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 166,
+      "pose_id": "WJPA-0166",
+      "semantic_id": "kneel_one_knee",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/166_kneel_one_knee.png",
+      "source_png_sha256": "ea7d175f3d2021b52e9b71ad19105636454a3e490b94ec661c6c7bc5d53ebb56",
+      "manifest_status": "pass",
+      "category": "ground_locomotion",
+      "motion": {
+        "family": "kneel",
+        "phase": "hold",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 167,
+      "pose_id": "WJPA-0167",
+      "semantic_id": "sit_ground",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/167_sit_ground.png",
+      "source_png_sha256": "66d8a3154e57c18690485b06e8f418b08da47cdfbc83b6d5307b02c076ece58c",
+      "manifest_status": "pass",
+      "category": "ground_locomotion",
+      "motion": {
+        "family": "sit",
+        "phase": "hold",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 168,
+      "pose_id": "WJPA-0168",
+      "semantic_id": "rise_from_ground",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/168_rise_from_ground.png",
+      "source_png_sha256": "bb20ebbb71aa45e8b783ee5b04a4d4c183c29de3582017d32a38302081cc51b0",
+      "manifest_status": "pass",
+      "category": "ground_locomotion",
+      "motion": {
+        "family": "rise",
+        "phase": "hold",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 169,
+      "pose_id": "WJPA-0169",
+      "semantic_id": "sidestep_dodge",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/169_sidestep_dodge.png",
+      "source_png_sha256": "87c5227223ca315434c003cc821b177d84795a38d759634a8c9615597e78cfca",
+      "manifest_status": "pass",
+      "category": "ground_locomotion",
+      "motion": {
+        "family": "sidestep",
+        "phase": "hold",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 170,
+      "pose_id": "WJPA-0170",
+      "semantic_id": "locomotion_return_home",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/170_locomotion_return_home.png",
+      "source_png_sha256": "18f2c322ea50246c14f253c76c9015b53084e1e36084cce52c6225698c11ee1b",
+      "manifest_status": "pass",
+      "category": "ground_locomotion",
+      "motion": {
+        "family": "locomotion",
+        "phase": "recovery",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 171,
+      "pose_id": "WJPA-0171",
+      "semantic_id": "flight_takeoff_crouch",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/171_flight_takeoff_crouch.png",
+      "source_png_sha256": "70bf20aaf83e5e945595ccec38c5f9fe83e8634a46431c7daed2c02a2581b5b9",
+      "manifest_status": "pass",
+      "category": "flight",
+      "motion": {
+        "family": "flight",
+        "phase": "anticipation",
+        "direction": "neutral",
+        "loop_group": "flight_cycle"
+      }
+    },
+    {
+      "sequence": 172,
+      "pose_id": "WJPA-0172",
+      "semantic_id": "flight_takeoff_push",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/172_flight_takeoff_push.png",
+      "source_png_sha256": "12298ef49f67030866a37ed56b29d7ab27425051c93555792ce48b61549c0235",
+      "manifest_status": "pass",
+      "category": "flight",
+      "motion": {
+        "family": "flight",
+        "phase": "initiation",
+        "direction": "neutral",
+        "loop_group": "flight_cycle"
+      }
+    },
+    {
+      "sequence": 173,
+      "pose_id": "WJPA-0173",
+      "semantic_id": "flight_takeoff_clear",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/173_flight_takeoff_clear.png",
+      "source_png_sha256": "b1eddad3fed05f5610bd76d760de5d4a05a3d5a30fc66903e8f61786ac9fc955",
+      "manifest_status": "pass",
+      "category": "flight",
+      "motion": {
+        "family": "flight",
+        "phase": "hold",
+        "direction": "neutral",
+        "loop_group": "flight_cycle"
+      }
+    },
+    {
+      "sequence": 174,
+      "pose_id": "WJPA-0174",
+      "semantic_id": "flight_powerstroke_down",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/174_flight_powerstroke_down.png",
+      "source_png_sha256": "42bcc72bb96242bf68aa70bb6b297c2aef33291c1820229742556a7448297309",
+      "manifest_status": "pass",
+      "category": "flight",
+      "motion": {
+        "family": "flight",
+        "phase": "hold",
+        "direction": "down",
+        "loop_group": "flight_cycle"
+      }
+    },
+    {
+      "sequence": 175,
+      "pose_id": "WJPA-0175",
+      "semantic_id": "flight_recoverystroke_up",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/175_flight_recoverystroke_up.png",
+      "source_png_sha256": "568b81c45d28f85fb7ddf7fd5409f642030c91a6c8e3bc69a5a86b87fab0ba7d",
+      "manifest_status": "pass",
+      "category": "flight",
+      "motion": {
+        "family": "flight",
+        "phase": "hold",
+        "direction": "up",
+        "loop_group": "flight_cycle"
+      }
+    },
+    {
+      "sequence": 176,
+      "pose_id": "WJPA-0176",
+      "semantic_id": "flight_hover_neutral",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/176_flight_hover_neutral.png",
+      "source_png_sha256": "cb1d4f0c67e7d65f2a36be5fcc62423028db76c42722a230c181b125dc78d289",
+      "manifest_status": "pass",
+      "category": "flight",
+      "motion": {
+        "family": "flight",
+        "phase": "hold",
+        "direction": "neutral",
+        "loop_group": "flight_cycle"
+      }
+    },
+    {
+      "sequence": 177,
+      "pose_id": "WJPA-0177",
+      "semantic_id": "flight_glide_forward",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/177_flight_glide_forward.png",
+      "source_png_sha256": "a72dd9c70192c4ed198b946cc33e1bdd3f94f130c92d1c7301532ee5ae3734a1",
+      "manifest_status": "pass",
+      "category": "flight",
+      "motion": {
+        "family": "flight",
+        "phase": "hold",
+        "direction": "neutral",
+        "loop_group": "flight_cycle"
+      }
+    },
+    {
+      "sequence": 178,
+      "pose_id": "WJPA-0178",
+      "semantic_id": "flight_bank_left",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/178_flight_bank_left.png",
+      "source_png_sha256": "08ea86c1d0e24676d33345bb86957c2280b20251a442e6aa54e2c72c200671bb",
+      "manifest_status": "pass",
+      "category": "flight",
+      "motion": {
+        "family": "flight",
+        "phase": "hold",
+        "direction": "left",
+        "loop_group": "flight_cycle"
+      }
+    },
+    {
+      "sequence": 179,
+      "pose_id": "WJPA-0179",
+      "semantic_id": "flight_bank_right",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/179_flight_bank_right.png",
+      "source_png_sha256": "4c6f4374fc37ff15abaa40d5c9102a26a97c90c04ebb2d7bd6d1849d910e1961",
+      "manifest_status": "pass",
+      "category": "flight",
+      "motion": {
+        "family": "flight",
+        "phase": "hold",
+        "direction": "right",
+        "loop_group": "flight_cycle"
+      }
+    },
+    {
+      "sequence": 180,
+      "pose_id": "WJPA-0180",
+      "semantic_id": "flight_turn_toward_camera",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/180_flight_turn_toward_camera.png",
+      "source_png_sha256": "d1e465b90f8dde02e389e5f6ce3539ef5d69bf9a5eb3bd3f501b9002b30bc442",
+      "manifest_status": "pass",
+      "category": "flight",
+      "motion": {
+        "family": "flight",
+        "phase": "hold",
+        "direction": "toward_camera",
+        "loop_group": "flight_cycle"
+      }
+    },
+    {
+      "sequence": 181,
+      "pose_id": "WJPA-0181",
+      "semantic_id": "flight_turn_away_camera",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/181_flight_turn_away_camera.png",
+      "source_png_sha256": "e4d9898eaeb93f8056603289604ae9b334abd54e994b033be95bbcb7fe4de769",
+      "manifest_status": "pass",
+      "category": "flight",
+      "motion": {
+        "family": "flight",
+        "phase": "hold",
+        "direction": "away_camera",
+        "loop_group": "flight_cycle"
+      }
+    },
+    {
+      "sequence": 182,
+      "pose_id": "WJPA-0182",
+      "semantic_id": "flight_ascend",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/182_flight_ascend.png",
+      "source_png_sha256": "5e45b13f154742c601d3f04d99476ced5f23f565b1b5f04ef635f76c316c2d77",
+      "manifest_status": "pass",
+      "category": "flight",
+      "motion": {
+        "family": "flight",
+        "phase": "hold",
+        "direction": "neutral",
+        "loop_group": "flight_cycle"
+      }
+    },
+    {
+      "sequence": 183,
+      "pose_id": "WJPA-0183",
+      "semantic_id": "flight_descend",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/183_flight_descend.png",
+      "source_png_sha256": "91f463e7e58d883dd0acf790e82802508dc8a4c63d174e2056f8cec38dcb30a9",
+      "manifest_status": "pass",
+      "category": "flight",
+      "motion": {
+        "family": "flight",
+        "phase": "hold",
+        "direction": "neutral",
+        "loop_group": "flight_cycle"
+      }
+    },
+    {
+      "sequence": 184,
+      "pose_id": "WJPA-0184",
+      "semantic_id": "flight_accelerate",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/184_flight_accelerate.png",
+      "source_png_sha256": "c3129ec267da58c2bea2ae901269c178b09c2cf0edbc6f0d7ce4660a628317d4",
+      "manifest_status": "pass",
+      "category": "flight",
+      "motion": {
+        "family": "flight",
+        "phase": "hold",
+        "direction": "neutral",
+        "loop_group": "flight_cycle"
+      }
+    },
+    {
+      "sequence": 185,
+      "pose_id": "WJPA-0185",
+      "semantic_id": "flight_brake",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/185_flight_brake.png",
+      "source_png_sha256": "a3b1e8347d660795ca6874ddc4f42ee0d6a8d0b2a03b055eef02e7a7283d350e",
+      "manifest_status": "pass",
+      "category": "flight",
+      "motion": {
+        "family": "flight",
+        "phase": "hold",
+        "direction": "neutral",
+        "loop_group": "flight_cycle"
+      }
+    },
+    {
+      "sequence": 186,
+      "pose_id": "WJPA-0186",
+      "semantic_id": "flight_stationary_listen",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/186_flight_stationary_listen.png",
+      "source_png_sha256": "509bc2db7e3f118da9f89bfa8badd1a13d44c6d00c1b635d543e0eb146a47fe6",
+      "manifest_status": "pass",
+      "category": "flight",
+      "motion": {
+        "family": "flight",
+        "phase": "hold",
+        "direction": "neutral",
+        "loop_group": "flight_cycle"
+      }
+    },
+    {
+      "sequence": 187,
+      "pose_id": "WJPA-0187",
+      "semantic_id": "flight_stationary_speak",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/187_flight_stationary_speak.png",
+      "source_png_sha256": "9d2368e760fb22dfb3aa0f39f01b435598fe256d8aa80245908a1bf836320682",
+      "manifest_status": "pass",
+      "category": "flight",
+      "motion": {
+        "family": "flight",
+        "phase": "hold",
+        "direction": "neutral",
+        "loop_group": "flight_cycle"
+      }
+    },
+    {
+      "sequence": 188,
+      "pose_id": "WJPA-0188",
+      "semantic_id": "flight_staff_forward",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/188_flight_staff_forward.png",
+      "source_png_sha256": "0ed9db454fcba71398ef922771bfbf892ba5f9f1ea340ae99aba1946a18ea44f",
+      "manifest_status": "pass",
+      "category": "flight",
+      "motion": {
+        "family": "flight",
+        "phase": "hold",
+        "direction": "neutral",
+        "loop_group": "flight_cycle"
+      }
+    },
+    {
+      "sequence": 189,
+      "pose_id": "WJPA-0189",
+      "semantic_id": "flight_magic_cast",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/189_flight_magic_cast.png",
+      "source_png_sha256": "cc40b1354fcd4d63c3c0086c0f225218bb646b74e80f1b8b1aae4343de6b2ee8",
+      "manifest_status": "pass",
+      "category": "flight",
+      "motion": {
+        "family": "flight",
+        "phase": "hold",
+        "direction": "neutral",
+        "loop_group": "flight_cycle"
+      }
+    },
+    {
+      "sequence": 190,
+      "pose_id": "WJPA-0190",
+      "semantic_id": "flight_reach",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/190_flight_reach.png",
+      "source_png_sha256": "2f9a7b5a0d4fef93ab477e13ca55ea7d8c16b27da7dc47ce6a3cdedfa7ab4d33",
+      "manifest_status": "pass",
+      "category": "flight",
+      "motion": {
+        "family": "flight",
+        "phase": "hold",
+        "direction": "neutral",
+        "loop_group": "flight_cycle"
+      }
+    },
+    {
+      "sequence": 191,
+      "pose_id": "WJPA-0191",
+      "semantic_id": "flight_recover_turbulence",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/191_flight_recover_turbulence.png",
+      "source_png_sha256": "63141d489ec4bcb070081b2461ba21d664dba77144eb927218335d2a345bd17a",
+      "manifest_status": "pass",
+      "category": "flight",
+      "motion": {
+        "family": "flight",
+        "phase": "recovery",
+        "direction": "neutral",
+        "loop_group": "flight_cycle"
+      }
+    },
+    {
+      "sequence": 192,
+      "pose_id": "WJPA-0192",
+      "semantic_id": "flight_glide_staff_tucked",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/192_flight_glide_staff_tucked.png",
+      "source_png_sha256": "d8a8353cc9b9e46d066d3a68df6d24fb07da7f091697b8f5eebc3f1f1d18f21f",
+      "manifest_status": "pass",
+      "category": "flight",
+      "motion": {
+        "family": "flight",
+        "phase": "hold",
+        "direction": "neutral",
+        "loop_group": "flight_cycle"
+      }
+    },
+    {
+      "sequence": 193,
+      "pose_id": "WJPA-0193",
+      "semantic_id": "flight_landing_approach",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/193_flight_landing_approach.png",
+      "source_png_sha256": "f1473ea1cbb040cea5c3b811ab3a31a524feb516eea74c97666a7bfc4169d735",
+      "manifest_status": "pass",
+      "category": "flight",
+      "motion": {
+        "family": "flight",
+        "phase": "hold",
+        "direction": "neutral",
+        "loop_group": "flight_cycle"
+      }
+    },
+    {
+      "sequence": 194,
+      "pose_id": "WJPA-0194",
+      "semantic_id": "flight_landing_contact",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/194_flight_landing_contact.png",
+      "source_png_sha256": "c0732882f6676db8499de139dc3144c249e70f1e40f739ef8ef5a5f1cf9f8a8f",
+      "manifest_status": "pass",
+      "category": "flight",
+      "motion": {
+        "family": "flight",
+        "phase": "impact",
+        "direction": "neutral",
+        "loop_group": "flight_cycle"
+      }
+    },
+    {
+      "sequence": 195,
+      "pose_id": "WJPA-0195",
+      "semantic_id": "flight_landing_settle",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/195_flight_landing_settle.png",
+      "source_png_sha256": "151557b53d3c9b621cc9b3a691db26d536784d41359b43a39cc128f1e6f900da",
+      "manifest_status": "pass",
+      "category": "flight",
+      "motion": {
+        "family": "flight",
+        "phase": "recovery",
+        "direction": "neutral",
+        "loop_group": "flight_cycle"
+      }
+    },
+    {
+      "sequence": 196,
+      "pose_id": "WJPA-0196",
+      "semantic_id": "magic_sense",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/196_magic_sense.png",
+      "source_png_sha256": "cb9b2f71ad11429447027dba4eaa6434062214108b0c99ad9bb2d80c175466f9",
+      "manifest_status": "pass",
+      "category": "magic",
+      "motion": {
+        "family": "magic",
+        "phase": "hold",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 197,
+      "pose_id": "WJPA-0197",
+      "semantic_id": "magic_prepare_small",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/197_magic_prepare_small.png",
+      "source_png_sha256": "d9a6ded1b38f1a00f79c886c2cf54e2ebdf7ff4c6b58faef6b8073962210c095",
+      "manifest_status": "pass",
+      "category": "magic",
+      "motion": {
+        "family": "magic",
+        "phase": "anticipation",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 198,
+      "pose_id": "WJPA-0198",
+      "semantic_id": "magic_gather_staff",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/198_magic_gather_staff.png",
+      "source_png_sha256": "5e99eb14e0b67d90f84345ad37f1816b2490d3195bb4bdd5fcb35a7228e98e9a",
+      "manifest_status": "pass",
+      "category": "magic",
+      "motion": {
+        "family": "magic",
+        "phase": "initiation",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 199,
+      "pose_id": "WJPA-0199",
+      "semantic_id": "magic_gather_hand",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/199_magic_gather_hand.png",
+      "source_png_sha256": "6636c0845646f4ff57ad3763772eb43e8f5f067168db1383d4f95b6d7e7aea46",
+      "manifest_status": "pass",
+      "category": "magic",
+      "motion": {
+        "family": "magic",
+        "phase": "initiation",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 200,
+      "pose_id": "WJPA-0200",
+      "semantic_id": "magic_trace_symbol",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/200_magic_trace_symbol.png",
+      "source_png_sha256": "b843d238c94b3855b4eb0816bcb424f61c8a37d546ffb8188b470743e762346c",
+      "manifest_status": "pass",
+      "category": "magic",
+      "motion": {
+        "family": "magic",
+        "phase": "hold",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 201,
+      "pose_id": "WJPA-0201",
+      "semantic_id": "magic_raise_staff",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/201_magic_raise_staff.png",
+      "source_png_sha256": "cc28af01d598bd8e8a1f7797bab724ac709b03ef2e6954b6bbe9f8bb77fb59b4",
+      "manifest_status": "pass",
+      "category": "magic",
+      "motion": {
+        "family": "magic",
+        "phase": "initiation",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 202,
+      "pose_id": "WJPA-0202",
+      "semantic_id": "magic_charge",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/202_magic_charge.png",
+      "source_png_sha256": "45f78032e770b8b70a7e8c9ee67e325999770bfe15ca80632f03769592cccb25",
+      "manifest_status": "pass",
+      "category": "magic",
+      "motion": {
+        "family": "magic",
+        "phase": "hold",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 203,
+      "pose_id": "WJPA-0203",
+      "semantic_id": "magic_cast_begin",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/203_magic_cast_begin.png",
+      "source_png_sha256": "18244740542102fe53ac83c5f13e0056851a99f2f059384cf572504d6074e871",
+      "manifest_status": "pass",
+      "category": "magic",
+      "motion": {
+        "family": "magic",
+        "phase": "anticipation",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 204,
+      "pose_id": "WJPA-0204",
+      "semantic_id": "magic_cast_release",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/204_magic_cast_release.png",
+      "source_png_sha256": "2969aa58da5afb93ef3db32a5355b520181b3be6051e35f0590068906ad145ce",
+      "manifest_status": "pass",
+      "category": "magic",
+      "motion": {
+        "family": "magic",
+        "phase": "impact",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 205,
+      "pose_id": "WJPA-0205",
+      "semantic_id": "magic_cast_hold",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/205_magic_cast_hold.png",
+      "source_png_sha256": "f0fc9c74be3f7b87e65e363c5142f172b258a0c21bd809b8c708d763485cc18c",
+      "manifest_status": "pass",
+      "category": "magic",
+      "motion": {
+        "family": "magic",
+        "phase": "action",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 206,
+      "pose_id": "WJPA-0206",
+      "semantic_id": "magic_cast_recoil",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/206_magic_cast_recoil.png",
+      "source_png_sha256": "ecc2c85009da6d4120de0cb4fb37b763e0f3800604376e79115331a159023c96",
+      "manifest_status": "pass",
+      "category": "magic",
+      "motion": {
+        "family": "magic",
+        "phase": "impact",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 207,
+      "pose_id": "WJPA-0207",
+      "semantic_id": "magic_cast_recover",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/207_magic_cast_recover.png",
+      "source_png_sha256": "de0c7020e31077d05e2a3446b918735745913e74d213c5565b7d9d71a9d2d186",
+      "manifest_status": "pass",
+      "category": "magic",
+      "motion": {
+        "family": "magic",
+        "phase": "recovery",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 208,
+      "pose_id": "WJPA-0208",
+      "semantic_id": "magic_shield_raise",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/208_magic_shield_raise.png",
+      "source_png_sha256": "2b290a601acecbaf16cc41c2524836f02e793c87e78a7d482b0666b570fe9bd6",
+      "manifest_status": "pass",
+      "category": "magic",
+      "motion": {
+        "family": "magic",
+        "phase": "initiation",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 209,
+      "pose_id": "WJPA-0209",
+      "semantic_id": "magic_shield_hold",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/209_magic_shield_hold.png",
+      "source_png_sha256": "824d87b7e7b006886929313d2deb9b9745ef7bf9137d80739c6c9a30400495d6",
+      "manifest_status": "pass",
+      "category": "magic",
+      "motion": {
+        "family": "magic",
+        "phase": "action",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 210,
+      "pose_id": "WJPA-0210",
+      "semantic_id": "magic_shield_break",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/210_magic_shield_break.png",
+      "source_png_sha256": "c96fb1871bbc1f950a077c27f1048e43794239c67fd61e2af86367e1db0410aa",
+      "manifest_status": "pass",
+      "category": "magic",
+      "motion": {
+        "family": "magic",
+        "phase": "hold",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 211,
+      "pose_id": "WJPA-0211",
+      "semantic_id": "magic_levitate_object",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/211_magic_levitate_object.png",
+      "source_png_sha256": "1466c69cf4f4fc0df0e65a6e24750cece40259cee9ff7570dbd9a257df65c1e9",
+      "manifest_status": "pass",
+      "category": "magic",
+      "motion": {
+        "family": "magic",
+        "phase": "hold",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 212,
+      "pose_id": "WJPA-0212",
+      "semantic_id": "magic_open_portal",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/212_magic_open_portal.png",
+      "source_png_sha256": "6a02ab05ac5e9806cff08c5eac8726d9b70a6a2920e113551ecb8f1d9ffb5109",
+      "manifest_status": "pass",
+      "category": "magic",
+      "motion": {
+        "family": "magic",
+        "phase": "initiation",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 213,
+      "pose_id": "WJPA-0213",
+      "semantic_id": "magic_close_portal",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/213_magic_close_portal.png",
+      "source_png_sha256": "88427e8393c24995ee5389dc805c9da7e3440b199bb7771e65d2b4a7ce5fd085",
+      "manifest_status": "pass",
+      "category": "magic",
+      "motion": {
+        "family": "magic",
+        "phase": "recovery",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 214,
+      "pose_id": "WJPA-0214",
+      "semantic_id": "magic_transform_reaction",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/214_magic_transform_reaction.png",
+      "source_png_sha256": "f74326c90a5798b3afaa8962c10ae2014ddae220f93d0f4d27166a226cbef87d",
+      "manifest_status": "pass",
+      "category": "magic",
+      "motion": {
+        "family": "magic",
+        "phase": "hold",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 215,
+      "pose_id": "WJPA-0215",
+      "semantic_id": "magic_book_open",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/215_magic_book_open.png",
+      "source_png_sha256": "51d410de43b5345ec4e3eacc9d4535e664c0ced83771d0afb171783fcd73e217",
+      "manifest_status": "pass",
+      "category": "magic",
+      "motion": {
+        "family": "magic",
+        "phase": "initiation",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 216,
+      "pose_id": "WJPA-0216",
+      "semantic_id": "magic_read_incantation",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/216_magic_read_incantation.png",
+      "source_png_sha256": "c795fa67418809777f486ca9cfae47027d309da42326d35980631729d21f3cfd",
+      "manifest_status": "pass",
+      "category": "magic",
+      "motion": {
+        "family": "magic",
+        "phase": "hold",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 217,
+      "pose_id": "WJPA-0217",
+      "semantic_id": "magic_mishap_start",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/217_magic_mishap_start.png",
+      "source_png_sha256": "6b0ffe2a07169480165f275e45cc5ca74519f4a02b777e9814a4787cf32aca2d",
+      "manifest_status": "pass",
+      "category": "magic",
+      "motion": {
+        "family": "magic",
+        "phase": "anticipation",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 218,
+      "pose_id": "WJPA-0218",
+      "semantic_id": "magic_mishap_blast",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/218_magic_mishap_blast.png",
+      "source_png_sha256": "6298003f9b10528cbe7f26ef8868db7b85cfc36ba2fc9e936cee0a9cdb890786",
+      "manifest_status": "pass",
+      "category": "magic",
+      "motion": {
+        "family": "magic",
+        "phase": "hold",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 219,
+      "pose_id": "WJPA-0219",
+      "semantic_id": "magic_mishap_smoke_reveal",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/219_magic_mishap_smoke_reveal.png",
+      "source_png_sha256": "b87fb9e8618490885917ee70aea771570ca8de94de07a340fac87c8fb0cc88a6",
+      "manifest_status": "pass",
+      "category": "magic",
+      "motion": {
+        "family": "magic",
+        "phase": "hold",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 220,
+      "pose_id": "WJPA-0220",
+      "semantic_id": "magic_mastery_hero",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/220_magic_mastery_hero.png",
+      "source_png_sha256": "1f62f847e152bac4da28d1362488ab6fd6b3740261d6b1442cccb699c8d16e47",
+      "manifest_status": "pass",
+      "category": "magic",
+      "motion": {
+        "family": "magic",
+        "phase": "hold",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 221,
+      "pose_id": "WJPA-0221",
+      "semantic_id": "dance_ready",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/221_dance_ready.png",
+      "source_png_sha256": "64e7c2a4a7a5fc2c2f55048d08746ed2b23fc9d937f13b9736bf7c31af89e524",
+      "manifest_status": "pass",
+      "category": "dance",
+      "motion": {
+        "family": "dance",
+        "phase": "anticipation",
+        "direction": "neutral",
+        "loop_group": "dance_sequence"
+      }
+    },
+    {
+      "sequence": 222,
+      "pose_id": "WJPA-0222",
+      "semantic_id": "dance_step_left",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/222_dance_step_left.png",
+      "source_png_sha256": "2dab49c54f7d1cbc259f21028e6a0191ec43c757a78d01a93d578b8990b1eb0b",
+      "manifest_status": "pass",
+      "category": "dance",
+      "motion": {
+        "family": "dance",
+        "phase": "hold",
+        "direction": "left",
+        "loop_group": "dance_sequence"
+      }
+    },
+    {
+      "sequence": 223,
+      "pose_id": "WJPA-0223",
+      "semantic_id": "dance_step_right",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/223_dance_step_right.png",
+      "source_png_sha256": "2cf6f84ecc0e73886a231e28437a687538ca9d1f3092c572326b6aca9e8d2ea2",
+      "manifest_status": "pass",
+      "category": "dance",
+      "motion": {
+        "family": "dance",
+        "phase": "hold",
+        "direction": "right",
+        "loop_group": "dance_sequence"
+      }
+    },
+    {
+      "sequence": 224,
+      "pose_id": "WJPA-0224",
+      "semantic_id": "dance_bounce_down",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/224_dance_bounce_down.png",
+      "source_png_sha256": "66fe9c70ed0e3cb3300dd7447810193245ad0b1a73c69ca668e2f42b3c505271",
+      "manifest_status": "pass",
+      "category": "dance",
+      "motion": {
+        "family": "dance",
+        "phase": "hold",
+        "direction": "down",
+        "loop_group": "dance_sequence"
+      }
+    },
+    {
+      "sequence": 225,
+      "pose_id": "WJPA-0225",
+      "semantic_id": "dance_bounce_up",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/225_dance_bounce_up.png",
+      "source_png_sha256": "9e1411171ed3fae0964f00cf934697a0f387c561b2e56352a88ab7bd8a756fe6",
+      "manifest_status": "pass",
+      "category": "dance",
+      "motion": {
+        "family": "dance",
+        "phase": "hold",
+        "direction": "up",
+        "loop_group": "dance_sequence"
+      }
+    },
+    {
+      "sequence": 226,
+      "pose_id": "WJPA-0226",
+      "semantic_id": "dance_turn_prepare",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/226_dance_turn_prepare.png",
+      "source_png_sha256": "419b42ccf823c90d2be1f8e2358035b1d625b333e1442b5401f4f5147f3eb5b6",
+      "manifest_status": "pass",
+      "category": "dance",
+      "motion": {
+        "family": "dance",
+        "phase": "anticipation",
+        "direction": "neutral",
+        "loop_group": "dance_sequence"
+      }
+    },
+    {
+      "sequence": 227,
+      "pose_id": "WJPA-0227",
+      "semantic_id": "dance_turn_mid",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/227_dance_turn_mid.png",
+      "source_png_sha256": "cfff1edc54aed34ceba046e7844e2f30e5408fa1d39213e47f0ebe9bca3239f6",
+      "manifest_status": "pass",
+      "category": "dance",
+      "motion": {
+        "family": "dance",
+        "phase": "action",
+        "direction": "neutral",
+        "loop_group": "dance_sequence"
+      }
+    },
+    {
+      "sequence": 228,
+      "pose_id": "WJPA-0228",
+      "semantic_id": "dance_turn_finish",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/228_dance_turn_finish.png",
+      "source_png_sha256": "711009d23f5fdab88bdf5067efc5de9aefca7ab443584dd86802988808ea45d0",
+      "manifest_status": "pass",
+      "category": "dance",
+      "motion": {
+        "family": "dance",
+        "phase": "impact",
+        "direction": "neutral",
+        "loop_group": "dance_sequence"
+      }
+    },
+    {
+      "sequence": 229,
+      "pose_id": "WJPA-0229",
+      "semantic_id": "dance_staff_twirl_start",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/229_dance_staff_twirl_start.png",
+      "source_png_sha256": "f00eb53cac0dab73c7bbdaa9c45bb192fe8f77e1994581ac25a6d258d11b9176",
+      "manifest_status": "pass",
+      "category": "dance",
+      "motion": {
+        "family": "dance",
+        "phase": "anticipation",
+        "direction": "neutral",
+        "loop_group": "dance_sequence"
+      }
+    },
+    {
+      "sequence": 230,
+      "pose_id": "WJPA-0230",
+      "semantic_id": "dance_staff_twirl_mid",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/230_dance_staff_twirl_mid.png",
+      "source_png_sha256": "15db221bf2d574cb36f9fc0caadcf05b2b0dc8c3332816d22aba2f12e7c04455",
+      "manifest_status": "pass",
+      "category": "dance",
+      "motion": {
+        "family": "dance",
+        "phase": "action",
+        "direction": "neutral",
+        "loop_group": "dance_sequence"
+      }
+    },
+    {
+      "sequence": 231,
+      "pose_id": "WJPA-0231",
+      "semantic_id": "dance_staff_twirl_catch",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/231_dance_staff_twirl_catch.png",
+      "source_png_sha256": "2e3b48644579ec892bceb5b2b60c62f2cbac5de151b9e45d55072f65b6f38cdc",
+      "manifest_status": "pass",
+      "category": "dance",
+      "motion": {
+        "family": "dance",
+        "phase": "hold",
+        "direction": "neutral",
+        "loop_group": "dance_sequence"
+      }
+    },
+    {
+      "sequence": 232,
+      "pose_id": "WJPA-0232",
+      "semantic_id": "dance_wing_flourish",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/232_dance_wing_flourish.png",
+      "source_png_sha256": "42ef8dbb34daff1355eeb720ae54a5cba904a3da89a3b1f0aea5b751bc1c2f14",
+      "manifest_status": "pass",
+      "category": "dance",
+      "motion": {
+        "family": "dance",
+        "phase": "hold",
+        "direction": "neutral",
+        "loop_group": "dance_sequence"
+      }
+    },
+    {
+      "sequence": 233,
+      "pose_id": "WJPA-0233",
+      "semantic_id": "dance_kick",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/233_dance_kick.png",
+      "source_png_sha256": "58840d4c3ef7b47c76ce0b07cbf26534f05b436882151adf3561f32a9656c3ec",
+      "manifest_status": "pass",
+      "category": "dance",
+      "motion": {
+        "family": "dance",
+        "phase": "hold",
+        "direction": "neutral",
+        "loop_group": "dance_sequence"
+      }
+    },
+    {
+      "sequence": 234,
+      "pose_id": "WJPA-0234",
+      "semantic_id": "dance_slide",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/234_dance_slide.png",
+      "source_png_sha256": "2f84e2c0db7469e1c6fc5932b3201902de65bdad05b7df579e1f1d3d0680ca06",
+      "manifest_status": "pass",
+      "category": "dance",
+      "motion": {
+        "family": "dance",
+        "phase": "hold",
+        "direction": "neutral",
+        "loop_group": "dance_sequence"
+      }
+    },
+    {
+      "sequence": 235,
+      "pose_id": "WJPA-0235",
+      "semantic_id": "dance_low_freeze",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/235_dance_low_freeze.png",
+      "source_png_sha256": "e48575dbb6c1250159ac1a5e461b3722ebe2170a846fa46182353dce1379edc6",
+      "manifest_status": "pass",
+      "category": "dance",
+      "motion": {
+        "family": "dance",
+        "phase": "hold",
+        "direction": "neutral",
+        "loop_group": "dance_sequence"
+      }
+    },
+    {
+      "sequence": 236,
+      "pose_id": "WJPA-0236",
+      "semantic_id": "dance_high_freeze",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/236_dance_high_freeze.png",
+      "source_png_sha256": "72134a71eaec5ee60f8d2c0e7046b4855226f4cb87c6a89f13c9e2a823e7c5b0",
+      "manifest_status": "pass",
+      "category": "dance",
+      "motion": {
+        "family": "dance",
+        "phase": "hold",
+        "direction": "neutral",
+        "loop_group": "dance_sequence"
+      }
+    },
+    {
+      "sequence": 237,
+      "pose_id": "WJPA-0237",
+      "semantic_id": "dance_finale",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/237_dance_finale.png",
+      "source_png_sha256": "0bf9ce812e245e9f6f89b8396a95dc24605c1d9cfce8100b0ab1dec09c6b1845",
+      "manifest_status": "pass",
+      "category": "dance",
+      "motion": {
+        "family": "dance",
+        "phase": "hold",
+        "direction": "neutral",
+        "loop_group": "dance_sequence"
+      }
+    },
+    {
+      "sequence": 238,
+      "pose_id": "WJPA-0238",
+      "semantic_id": "comedy_double_take_one",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/238_comedy_double_take_one.png",
+      "source_png_sha256": "347ec35853010e68f5657fe70793deee19bd80d394b229d1c439f8ba68d4dbe2",
+      "manifest_status": "pass",
+      "category": "comedy",
+      "motion": {
+        "family": "comedy",
+        "phase": "hold",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 239,
+      "pose_id": "WJPA-0239",
+      "semantic_id": "comedy_double_take_two",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/239_comedy_double_take_two.png",
+      "source_png_sha256": "418d1b235f4c51825070d236295a68ba20552f2121174472b1a5a2791f9134a2",
+      "manifest_status": "pass",
+      "category": "comedy",
+      "motion": {
+        "family": "comedy",
+        "phase": "hold",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 240,
+      "pose_id": "WJPA-0240",
+      "semantic_id": "comedy_staff_tangle",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/240_comedy_staff_tangle.png",
+      "source_png_sha256": "dafa490c7c39042e182c5e85b021c3534e69b93b8f96f17293ee688835503b8f",
+      "manifest_status": "pass",
+      "category": "comedy",
+      "motion": {
+        "family": "comedy",
+        "phase": "hold",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 241,
+      "pose_id": "WJPA-0241",
+      "semantic_id": "comedy_hat_save",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/241_comedy_hat_save.png",
+      "source_png_sha256": "8212a47f09332f54b18325d8d476902b76b609b4e359b8e5d7b6dfddc830a485",
+      "manifest_status": "pass",
+      "category": "comedy",
+      "motion": {
+        "family": "comedy",
+        "phase": "hold",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 242,
+      "pose_id": "WJPA-0242",
+      "semantic_id": "comedy_stumble",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/242_comedy_stumble.png",
+      "source_png_sha256": "59826f1291ede8301ec8d51e56b81d48019f62a4ee581c05bc8a770dacc800b7",
+      "manifest_status": "pass",
+      "category": "comedy",
+      "motion": {
+        "family": "comedy",
+        "phase": "hold",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 243,
+      "pose_id": "WJPA-0243",
+      "semantic_id": "comedy_recover_dignity",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/243_comedy_recover_dignity.png",
+      "source_png_sha256": "a7190a24e97a54ca3be94410151665c34bf3833983492ba88c585514065957fc",
+      "manifest_status": "pass",
+      "category": "comedy",
+      "motion": {
+        "family": "comedy",
+        "phase": "recovery",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 244,
+      "pose_id": "WJPA-0244",
+      "semantic_id": "hero_dance_freeze",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/244_hero_dance_freeze.png",
+      "source_png_sha256": "4caf24580a196bfc3a94b342ca358cb0ca5a35c264bef9ebd7b9b25dfce42aeb",
+      "manifest_status": "pass",
+      "category": "hero_camera",
+      "motion": {
+        "family": "hero",
+        "phase": "hold",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 245,
+      "pose_id": "WJPA-0245",
+      "semantic_id": "hero_declaration",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/245_hero_declaration.png",
+      "source_png_sha256": "033efe20455f0b7edff08c96b2eb1c306e2325d2e11882f11d805cc39721009d",
+      "manifest_status": "pass",
+      "category": "hero_camera",
+      "motion": {
+        "family": "hero",
+        "phase": "hold",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 246,
+      "pose_id": "WJPA-0246",
+      "semantic_id": "camera_approach",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/246_camera_approach.png",
+      "source_png_sha256": "8a3368819924f77ae573d95756d4c464265f3ed89c8ce76c8bc4c011c4e4e200",
+      "manifest_status": "pass",
+      "category": "hero_camera",
+      "motion": {
+        "family": "camera",
+        "phase": "hold",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 247,
+      "pose_id": "WJPA-0247",
+      "semantic_id": "camera_intimate_hold",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/247_camera_intimate_hold.png",
+      "source_png_sha256": "8ca2a542fc4d152e32735da1338d50826e593835d9caee8df6f8b38be57e5ec0",
+      "manifest_status": "pass",
+      "category": "hero_camera",
+      "motion": {
+        "family": "camera",
+        "phase": "action",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 248,
+      "pose_id": "WJPA-0248",
+      "semantic_id": "camera_retreat",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/248_camera_retreat.png",
+      "source_png_sha256": "f7a9f0fe011514daa2da8fa215d0fb7bcf01abc15f10603db23acd7dbde620d7",
+      "manifest_status": "pass",
+      "category": "hero_camera",
+      "motion": {
+        "family": "camera",
+        "phase": "hold",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 249,
+      "pose_id": "WJPA-0249",
+      "semantic_id": "hero_bow",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/249_hero_bow.png",
+      "source_png_sha256": "bc01cc0f27380936bf72c9a8e7af42492d3a98dcf4aad9c2d26468b6a9cd9648",
+      "manifest_status": "pass",
+      "category": "hero_camera",
+      "motion": {
+        "family": "hero",
+        "phase": "hold",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 250,
+      "pose_id": "WJPA-0250",
+      "semantic_id": "final_recovery_home",
+      "source_pack": "wizard_joe_base_250_alpha",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "source_member": "Wizard_Joe_Production_Alpha_Set_001_250_v001/alphas_srgb_v001/250_final_recovery_home.png",
+      "source_png_sha256": "eae6d83c86e0b7a7e2f4e178cc126768852bb479171b266b077f2fde5593aa91",
+      "manifest_status": "pass",
+      "category": "hero_camera",
+      "motion": {
+        "family": "final",
+        "phase": "recovery",
+        "direction": "neutral"
+      }
+    },
+    {
+      "sequence": 251,
+      "pose_id": "WJFF-0001",
+      "semantic_id": "fly_forward_camera_top_recovery",
+      "source_pack": "wizard_joe_forward_camera_flight_cycle",
+      "archive_sha256": "7d2a7d7390d1fb95147bf834cc45849dbfee50a9f42ba05abe99c50e37cf9e49",
+      "source_member": "Wizard_Joe_Forward_Camera_Flight_Alpha_Cycle_v001/alphas/WJFF_001_top_recovery.png",
+      "source_png_sha256": "dd911adf02e618167fedf461bf0103b0a8f7453a1e42c0179b9363b927e897e1",
+      "manifest_status": "candidate_review",
+      "category": "flight",
+      "motion": {
+        "family": "forward_camera_flight",
+        "phase": "recovery",
+        "direction": "neutral",
+        "loop_group": "forward_camera_flight_cycle",
+        "playback_fps": 10
+      }
+    },
+    {
+      "sequence": 252,
+      "pose_id": "WJFF-0002",
+      "semantic_id": "fly_forward_camera_early_powerstroke",
+      "source_pack": "wizard_joe_forward_camera_flight_cycle",
+      "archive_sha256": "7d2a7d7390d1fb95147bf834cc45849dbfee50a9f42ba05abe99c50e37cf9e49",
+      "source_member": "Wizard_Joe_Forward_Camera_Flight_Alpha_Cycle_v001/alphas/WJFF_002_early_powerstroke.png",
+      "source_png_sha256": "a4d23cbddfa310eba303702e73602ee3ab1bcde60ae6150d9616195b08a83814",
+      "manifest_status": "candidate_review",
+      "category": "flight",
+      "motion": {
+        "family": "forward_camera_flight",
+        "phase": "initiation",
+        "direction": "neutral",
+        "loop_group": "forward_camera_flight_cycle",
+        "playback_fps": 10
+      }
+    },
+    {
+      "sequence": 253,
+      "pose_id": "WJFF-0003",
+      "semantic_id": "fly_forward_camera_mid_powerstroke",
+      "source_pack": "wizard_joe_forward_camera_flight_cycle",
+      "archive_sha256": "7d2a7d7390d1fb95147bf834cc45849dbfee50a9f42ba05abe99c50e37cf9e49",
+      "source_member": "Wizard_Joe_Forward_Camera_Flight_Alpha_Cycle_v001/alphas/WJFF_003_mid_powerstroke.png",
+      "source_png_sha256": "ee7b7718f42e2eb3ecd839f57afdd54c45aaf1b54b4cf7227487ec826cc1932e",
+      "manifest_status": "candidate_review",
+      "category": "flight",
+      "motion": {
+        "family": "forward_camera_flight",
+        "phase": "action",
+        "direction": "neutral",
+        "loop_group": "forward_camera_flight_cycle",
+        "playback_fps": 10
+      }
+    },
+    {
+      "sequence": 254,
+      "pose_id": "WJFF-0004",
+      "semantic_id": "fly_forward_camera_late_powerstroke",
+      "source_pack": "wizard_joe_forward_camera_flight_cycle",
+      "archive_sha256": "7d2a7d7390d1fb95147bf834cc45849dbfee50a9f42ba05abe99c50e37cf9e49",
+      "source_member": "Wizard_Joe_Forward_Camera_Flight_Alpha_Cycle_v001/alphas/WJFF_004_late_powerstroke.png",
+      "source_png_sha256": "c85f0dd5ffe090618e992449895d6b41960df1ac213ea15b1ea213999686439c",
+      "manifest_status": "candidate_review",
+      "category": "flight",
+      "motion": {
+        "family": "forward_camera_flight",
+        "phase": "impact",
+        "direction": "neutral",
+        "loop_group": "forward_camera_flight_cycle",
+        "playback_fps": 10
+      }
+    },
+    {
+      "sequence": 255,
+      "pose_id": "WJFF-0005",
+      "semantic_id": "fly_forward_camera_bottom_powerstroke",
+      "source_pack": "wizard_joe_forward_camera_flight_cycle",
+      "archive_sha256": "7d2a7d7390d1fb95147bf834cc45849dbfee50a9f42ba05abe99c50e37cf9e49",
+      "source_member": "Wizard_Joe_Forward_Camera_Flight_Alpha_Cycle_v001/alphas/WJFF_005_bottom_powerstroke.png",
+      "source_png_sha256": "946f76fede0aaca1aa507c0aa878ded12ce9a4ac3aa5c89362f572df9fd55c01",
+      "manifest_status": "candidate_review",
+      "category": "flight",
+      "motion": {
+        "family": "forward_camera_flight",
+        "phase": "impact",
+        "direction": "neutral",
+        "loop_group": "forward_camera_flight_cycle",
+        "playback_fps": 10
+      }
+    },
+    {
+      "sequence": 256,
+      "pose_id": "WJFF-0006",
+      "semantic_id": "fly_forward_camera_early_recovery",
+      "source_pack": "wizard_joe_forward_camera_flight_cycle",
+      "archive_sha256": "7d2a7d7390d1fb95147bf834cc45849dbfee50a9f42ba05abe99c50e37cf9e49",
+      "source_member": "Wizard_Joe_Forward_Camera_Flight_Alpha_Cycle_v001/alphas/WJFF_006_early_recovery.png",
+      "source_png_sha256": "aae5da0086abf21c80b9e7b5a65336581d41d983d20ea5fb5bfbea39af3a185d",
+      "manifest_status": "candidate_review",
+      "category": "flight",
+      "motion": {
+        "family": "forward_camera_flight",
+        "phase": "initiation",
+        "direction": "neutral",
+        "loop_group": "forward_camera_flight_cycle",
+        "playback_fps": 10
+      }
+    },
+    {
+      "sequence": 257,
+      "pose_id": "WJFF-0007",
+      "semantic_id": "fly_forward_camera_mid_recovery",
+      "source_pack": "wizard_joe_forward_camera_flight_cycle",
+      "archive_sha256": "7d2a7d7390d1fb95147bf834cc45849dbfee50a9f42ba05abe99c50e37cf9e49",
+      "source_member": "Wizard_Joe_Forward_Camera_Flight_Alpha_Cycle_v001/alphas/WJFF_007_mid_recovery.png",
+      "source_png_sha256": "d232a2d866e16e37f650ba907052fc226526791b81f622be55e0850ac592ceec",
+      "manifest_status": "candidate_review",
+      "category": "flight",
+      "motion": {
+        "family": "forward_camera_flight",
+        "phase": "action",
+        "direction": "neutral",
+        "loop_group": "forward_camera_flight_cycle",
+        "playback_fps": 10
+      }
+    },
+    {
+      "sequence": 258,
+      "pose_id": "WJFF-0008",
+      "semantic_id": "fly_forward_camera_late_recovery",
+      "source_pack": "wizard_joe_forward_camera_flight_cycle",
+      "archive_sha256": "7d2a7d7390d1fb95147bf834cc45849dbfee50a9f42ba05abe99c50e37cf9e49",
+      "source_member": "Wizard_Joe_Forward_Camera_Flight_Alpha_Cycle_v001/alphas/WJFF_008_late_recovery.png",
+      "source_png_sha256": "309057a966640bf46795c81d189815b99e9405513969cb7e2bec612d8706222f",
+      "manifest_status": "candidate_review",
+      "category": "flight",
+      "motion": {
+        "family": "forward_camera_flight",
+        "phase": "impact",
+        "direction": "neutral",
+        "loop_group": "forward_camera_flight_cycle",
+        "playback_fps": 10
+      }
+    },
+    {
+      "sequence": 259,
+      "pose_id": "WJFF-0009",
+      "semantic_id": "fly_forward_camera_near_top_recovery",
+      "source_pack": "wizard_joe_forward_camera_flight_cycle",
+      "archive_sha256": "7d2a7d7390d1fb95147bf834cc45849dbfee50a9f42ba05abe99c50e37cf9e49",
+      "source_member": "Wizard_Joe_Forward_Camera_Flight_Alpha_Cycle_v001/alphas/WJFF_009_near_top_recovery.png",
+      "source_png_sha256": "aa0149c51755f58c3ce6c69129b2ad4c781370463e6b933ce26090c2651cd4b4",
+      "manifest_status": "candidate_review",
+      "category": "flight",
+      "motion": {
+        "family": "forward_camera_flight",
+        "phase": "recovery",
+        "direction": "neutral",
+        "loop_group": "forward_camera_flight_cycle",
+        "playback_fps": 10
+      }
+    },
+    {
+      "sequence": 260,
+      "pose_id": "WJFF-0010",
+      "semantic_id": "fly_forward_camera_loop_close",
+      "source_pack": "wizard_joe_forward_camera_flight_cycle",
+      "archive_sha256": "7d2a7d7390d1fb95147bf834cc45849dbfee50a9f42ba05abe99c50e37cf9e49",
+      "source_member": "Wizard_Joe_Forward_Camera_Flight_Alpha_Cycle_v001/alphas/WJFF_010_loop_close.png",
+      "source_png_sha256": "f1cda9c97508edd2e9fb65596d13272a950d47884047cf165e37110ec179b241",
+      "manifest_status": "candidate_review",
+      "category": "flight",
+      "motion": {
+        "family": "forward_camera_flight",
+        "phase": "recovery",
+        "direction": "neutral",
+        "loop_group": "forward_camera_flight_cycle",
+        "playback_fps": 10
+      }
+    }
+  ]
+}

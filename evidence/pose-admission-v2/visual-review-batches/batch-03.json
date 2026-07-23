@@ -1,0 +1,174 @@
+{
+  "batch_id": "batch-03",
+  "reviewer": "Codex",
+  "range": {
+    "start": "WJPA-0065",
+    "end": "WJPA-0096"
+  },
+  "reviewed_count": 32,
+  "approved_count": 32,
+  "rejected_count": 0,
+  "overall_status": "approved",
+  "entries": [
+    {
+      "pose_id": "WJPA-0065",
+      "status": "approved",
+      "visual_note": "News pointing silhouette aligns exactly; hand, staff, wing tips, and robe edges show no doubling, clipping, or mismatch marks."
+    },
+    {
+      "pose_id": "WJPA-0066",
+      "status": "approved",
+      "visual_note": "Field-report pose matches panel-for-panel; raised fist, face, staff, wings, and feet remain clean and fully registered."
+    },
+    {
+      "pose_id": "WJPA-0067",
+      "status": "approved",
+      "visual_note": "Story-begin gesture is preserved exactly with clean open-hand fingers, hat tip, staff, wings, and lower silhouette."
+    },
+    {
+      "pose_id": "WJPA-0068",
+      "status": "approved",
+      "visual_note": "Wide story-building gesture has exact source/projected alignment; no displaced hand, staff, wing, hat, or robe geometry."
+    },
+    {
+      "pose_id": "WJPA-0069",
+      "status": "approved",
+      "visual_note": "Suspense pose is visually identical; compact hand, mouth detail, staff, wing edges, and shoes show no mismatch."
+    },
+    {
+      "pose_id": "WJPA-0070",
+      "status": "approved",
+      "visual_note": "Reveal pose aligns cleanly across the extended palm and full silhouette with no doubled contours or clipped extremities."
+    },
+    {
+      "pose_id": "WJPA-0071",
+      "status": "approved",
+      "visual_note": "Character-voice finger gesture and facial detail match exactly; staff, wings, robe, and feet remain source-faithful."
+    },
+    {
+      "pose_id": "WJPA-0072",
+      "status": "approved",
+      "visual_note": "Hand-over-heart moral pose shows exact registration with no extra pixels, missing edges, displacement, or clipping."
+    },
+    {
+      "pose_id": "WJPA-0073",
+      "status": "approved",
+      "visual_note": "Interrupted-speech stop hand, face, staff, wings, robe, and feet align without any visible doubled edge."
+    },
+    {
+      "pose_id": "WJPA-0074",
+      "status": "approved",
+      "visual_note": "Resumed-speech open hand and full-body silhouette match the source exactly; no colored mismatch marks are visible."
+    },
+    {
+      "pose_id": "WJPA-0075",
+      "status": "approved",
+      "visual_note": "Yield-floor gesture is preserved exactly, including palm contour, neutral face, staff bend, wings, and lower robe."
+    },
+    {
+      "pose_id": "WJPA-0076",
+      "status": "approved",
+      "visual_note": "Neutral emotion pose has exact bilateral alignment; hat, face, relaxed arm, staff, wings, robe, and shoes are clean."
+    },
+    {
+      "pose_id": "WJPA-0077",
+      "status": "approved",
+      "visual_note": "Joy pose matches exactly through the high raised fist, smile, staff, wing tips, robe, and grounded feet."
+    },
+    {
+      "pose_id": "WJPA-0078",
+      "status": "approved",
+      "visual_note": "Amused pose is visually identical; subtle face and chest-hand geometry show no displacement or missing pixels."
+    },
+    {
+      "pose_id": "WJPA-0079",
+      "status": "approved",
+      "visual_note": "Excited wide stance and raised fist retain exact source geometry with no clipping at wings, staff, hat, or feet."
+    },
+    {
+      "pose_id": "WJPA-0080",
+      "status": "approved",
+      "visual_note": "Curious lean aligns exactly; tilted hat, open palm, angled staff, wings, robe, and shoes show no doubled contours."
+    },
+    {
+      "pose_id": "WJPA-0081",
+      "status": "approved",
+      "visual_note": "Confident hand-on-hip pose matches panel-for-panel with clean interior gaps and complete staff and wing edges."
+    },
+    {
+      "pose_id": "WJPA-0082",
+      "status": "approved",
+      "visual_note": "Compassion pose preserves the lowered open hand and softened face exactly; no mismatch or non-source geometry appears."
+    },
+    {
+      "pose_id": "WJPA-0083",
+      "status": "approved",
+      "visual_note": "Proud pose is exactly registered across hand-on-hip arm, face, staff, wings, robe hem, and shoes."
+    },
+    {
+      "pose_id": "WJPA-0084",
+      "status": "approved",
+      "visual_note": "Playful forward point and lifted foot align precisely; extremities and broad silhouette remain unclipped and artifact-free."
+    },
+    {
+      "pose_id": "WJPA-0085",
+      "status": "approved",
+      "visual_note": "Relief pose matches exactly, including chest hand, smile, hat tip, staff, wings, and complete lower silhouette."
+    },
+    {
+      "pose_id": "WJPA-0086",
+      "status": "approved",
+      "visual_note": "Gratitude pose has exact overlay registration with no doubled edges around the chest hand, face, wings, or staff."
+    },
+    {
+      "pose_id": "WJPA-0087",
+      "status": "approved",
+      "visual_note": "Surprise pose preserves the foreshortened open hand, wide face, spread wings, staff, robe, and feet exactly."
+    },
+    {
+      "pose_id": "WJPA-0088",
+      "status": "approved",
+      "visual_note": "Shock pose aligns through the diagonal staff grip, open mouth, bent body, wings, and stance without mismatch marks."
+    },
+    {
+      "pose_id": "WJPA-0089",
+      "status": "approved",
+      "visual_note": "Confusion lean and open palm match the source exactly; hat, face, wings, staff, robe, and shoes remain clean."
+    },
+    {
+      "pose_id": "WJPA-0090",
+      "status": "approved",
+      "visual_note": "Skeptical expression and compact fist are precisely preserved with no displacement, clipping, or added geometry."
+    },
+    {
+      "pose_id": "WJPA-0091",
+      "status": "approved",
+      "visual_note": "Concern pose is visually identical, including chest hand, facial detail, staff contour, wing tips, robe, and feet."
+    },
+    {
+      "pose_id": "WJPA-0092",
+      "status": "approved",
+      "visual_note": "Sadness pose matches exactly; lowered hand, slumped shoulders, face, staff, wings, and lower body show no artifacts."
+    },
+    {
+      "pose_id": "WJPA-0093",
+      "status": "approved",
+      "visual_note": "Restrained-grief pose has exact bowed-head and chest-hand alignment with no doubled edge or missing silhouette pixel."
+    },
+    {
+      "pose_id": "WJPA-0094",
+      "status": "approved",
+      "visual_note": "Shame pose preserves the inward fold, bowed face, staff grip, wings, robe, and feet without displacement or clipping."
+    },
+    {
+      "pose_id": "WJPA-0095",
+      "status": "approved",
+      "visual_note": "Embarrassed cheek-hand pose matches exactly; face, fingers, staff, wings, robe, and shoes remain source-faithful."
+    },
+    {
+      "pose_id": "WJPA-0096",
+      "status": "approved",
+      "visual_note": "Fear pose aligns exactly across the nearest raised palm, wide wings, face, staff, robe, and feet with no artifacts."
+    }
+  ]
+}

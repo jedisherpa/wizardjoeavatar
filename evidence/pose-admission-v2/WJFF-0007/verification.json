@@ -1,0 +1,76 @@
+{
+  "schema_version": 2,
+  "compiler_id": "wizard-avatar-production-alpha-v1",
+  "sequence": 257,
+  "pose_id": "WJFF-0007",
+  "semantic_id": "fly_forward_camera_mid_recovery",
+  "source_pack": "wizard_joe_forward_camera_flight_cycle",
+  "source_archive_sha256": "7d2a7d7390d1fb95147bf834cc45849dbfee50a9f42ba05abe99c50e37cf9e49",
+  "source_member": "Wizard_Joe_Forward_Camera_Flight_Alpha_Cycle_v001/alphas/WJFF_007_mid_recovery.png",
+  "source_png_sha256": "d232a2d866e16e37f650ba907052fc226526791b81f622be55e0850ac592ceec",
+  "frame": {
+    "width": 1254,
+    "height": 1254
+  },
+  "foreground_bounds": {
+    "x": 79,
+    "y": 212,
+    "width": 1046,
+    "height": 799
+  },
+  "safe_margin_px": 69,
+  "transparent_corners": true,
+  "foreground_pixel_count": 296751,
+  "exact_rgba_equal": true,
+  "rgba_mismatch": {
+    "pixel_count": 0,
+    "channel_count": 0
+  },
+  "metrics": {
+    "source_foreground_pixels": 296751,
+    "graph_foreground_pixels": 296751,
+    "intersection_pixels": 296751,
+    "union_pixels": 296751,
+    "missing_pixels": 0,
+    "extra_pixels": 0,
+    "color_matched_pixels": 296751,
+    "color_mismatched_pixels": 0,
+    "silhouette_precision": 1.0,
+    "silhouette_recall": 1.0,
+    "silhouette_iou": 1.0,
+    "foreground_color_match_ratio": 1.0,
+    "foreground_color_fidelity": 1.0
+  },
+  "overlay_counts": {
+    "matched": 296751,
+    "missing": 0,
+    "extra": 0,
+    "mismatched": 0
+  },
+  "graph_path": "graphs/WJFF-0007.pixelgraph.json.gz",
+  "graph_sha256": "69e375d6fec520872063b8d2d984f6d1f9817e9d7bbbd3540d1beeb8d445c0fd",
+  "artifacts": {
+    "source_png": {
+      "path": "evidence/WJFF-0007/source.png",
+      "sha256": "d232a2d866e16e37f650ba907052fc226526791b81f622be55e0850ac592ceec"
+    },
+    "projected_png": {
+      "path": "evidence/WJFF-0007/projected.png",
+      "sha256": "3c293f25670ab7ca386f221b28e33613e21d1e72727e501c890c6dfd3eb30d50"
+    },
+    "transparent_overlay_png": {
+      "path": "evidence/WJFF-0007/transparent-overlay.png",
+      "sha256": "ba41c27965baedae15065b5f6ca2934f5cf4fb49b8004ab0eaf540cd303eed2d"
+    },
+    "composite_png": {
+      "path": "evidence/WJFF-0007/composite.png",
+      "sha256": "3c293f25670ab7ca386f221b28e33613e21d1e72727e501c890c6dfd3eb30d50"
+    },
+    "comparison_png": {
+      "path": "evidence/WJFF-0007/comparison.png",
+      "sha256": "184497a44573d40e6f8f9fcd41e9bf32030fe887899191289be561db1d20a4aa"
+    }
+  },
+  "technical_status": "exact_rgba_verified",
+  "visual_review_status": "approved_transparent_overlay_review"
+}

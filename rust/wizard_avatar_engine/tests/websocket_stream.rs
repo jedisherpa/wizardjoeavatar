@@ -33,18 +33,17 @@ async fn adaptive_websocket_reconstructs_wizard_frame() {
         other => panic!("expected INIT text, got {other:?}"),
     }
 
-    let frame_message = socket
-        .next()
-        .await
-        .expect("frame message")
-        .expect("frame ok");
-    let Message::Binary(bytes) = frame_message else {
-        panic!("expected binary frame");
-    };
+    let (pixelgraph_state, bytes) = next_pixelgraph_state_and_binary(&mut socket).await;
+    assert_eq!(pixelgraph_state["type"], "pixelgraph_state");
+    assert!(pixelgraph_state["sequence"].as_u64().is_some());
+    assert!(pixelgraph_state["pose_id"].as_str().is_some());
+    assert!(pixelgraph_state["presentation_pose_id"].as_str().is_some());
+    assert!(pixelgraph_state["mouth"].as_str().is_some());
+    assert!(!bytes.is_empty());
     let (_frame_index, decoded, tag) = decode_frame(&bytes, None, CELL_BYTES).expect("decode");
     assert_ne!(tag, CodecTag::Delta);
     assert_eq!(decoded.len(), DEFAULT_COLS * DEFAULT_ROWS * CELL_BYTES);
-    assert!(decoded.chunks_exact(CELL_BYTES).any(|cell| cell[0] == b'#'));
+    assert!(decoded.iter().any(|byte| *byte != 0));
 
     socket.close(None).await.expect("close websocket");
     server_task.abort();
@@ -165,6 +164,40 @@ async fn next_binary(
     }
 }
 
+async fn next_pixelgraph_state_and_binary(
+    socket: &mut tokio_tungstenite::WebSocketStream<
+        tokio_tungstenite::MaybeTlsStream<tokio::net::TcpStream>,
+    >,
+) -> (serde_json::Value, Vec<u8>) {
+    let mut state = None;
+    let mut binary = None;
+    for _ in 0..4 {
+        let message = socket
+            .next()
+            .await
+            .expect("bootstrap message")
+            .expect("bootstrap message ok");
+        match message {
+            Message::Text(text) if text.starts_with('{') => {
+                let value: serde_json::Value =
+                    serde_json::from_str(&text).expect("pixelgraph state JSON");
+                if value["type"] == "pixelgraph_state" {
+                    state = Some(value);
+                }
+            }
+            Message::Binary(bytes) => binary = Some(bytes),
+            _ => {}
+        }
+        if state.is_some() && binary.is_some() {
+            break;
+        }
+    }
+    (
+        state.expect("pixelgraph state during bootstrap"),
+        binary.expect("binary frame during bootstrap"),
+    )
+}
+
 #[tokio::test]
 async fn websocket_accepts_semantic_commands_and_streams_updated_frames() {
     let listener = TcpListener::bind("127.0.0.1:0").await.expect("bind");
@@ -178,14 +211,7 @@ async fn websocket_accepts_semantic_commands_and_streams_updated_frames() {
         .await
         .expect("connect websocket");
     let _init = socket.next().await.expect("init message").expect("init ok");
-    let first = socket
-        .next()
-        .await
-        .expect("first frame")
-        .expect("first frame ok");
-    let Message::Binary(first_bytes) = first else {
-        panic!("expected first binary frame");
-    };
+    let first_bytes = next_binary(&mut socket).await;
     let (_first_index, first_decoded, _) =
         decode_frame(&first_bytes, None, CELL_BYTES).expect("decode first");
 
@@ -201,25 +227,43 @@ async fn websocket_accepts_semantic_commands_and_streams_updated_frames() {
         .expect("send action");
 
     let mut previous = Some(first_decoded);
-    let mut saw_cyan_magic = false;
-    for _ in 0..8 {
+    let mut saw_magic_state = false;
+    let mut saw_binary_after_command = false;
+    for _ in 0..16 {
         let message = socket
             .next()
             .await
             .expect("command frame")
             .expect("command frame ok");
-        let Message::Binary(bytes) = message else {
-            continue;
-        };
-        let (_index, decoded, _) =
-            decode_frame(&bytes, previous.as_deref(), CELL_BYTES).expect("decode command frame");
-        saw_cyan_magic |= decoded
-            .chunks_exact(CELL_BYTES)
-            .any(|cell| cell[0] == b'*' && cell[1] == 0x26 && cell[2] == 0xd7 && cell[3] == 0xe8);
-        previous = Some(decoded);
+        match message {
+            Message::Text(text) if text.starts_with('{') => {
+                let state: serde_json::Value =
+                    serde_json::from_str(&text).expect("pixelgraph state JSON");
+                saw_magic_state |= state["type"] == "pixelgraph_state"
+                    && state["action"] == "magic_cast"
+                    && state["effect_state"] == "cast";
+            }
+            Message::Binary(bytes) => {
+                let (_index, decoded, _) = decode_frame(&bytes, previous.as_deref(), CELL_BYTES)
+                    .expect("decode command frame");
+                previous = Some(decoded);
+                saw_binary_after_command = true;
+            }
+            _ => {}
+        }
+        if saw_magic_state && saw_binary_after_command {
+            break;
+        }
     }
 
-    assert!(saw_cyan_magic);
+    assert!(
+        saw_magic_state,
+        "semantic action is visible in pixelgraph state"
+    );
+    assert!(
+        saw_binary_after_command,
+        "binary environment stream continues after a semantic command"
+    );
     socket.close(None).await.expect("close websocket");
     server_task.abort();
 }

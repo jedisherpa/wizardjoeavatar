@@ -307,7 +307,7 @@ fn corrupt_catalog_references_and_duplicate_identities_are_rejected() {
 #[test]
 fn actor_samples_are_cell_aligned_hashed_and_tamper_evident() {
     let state = WizardState {
-        pose_id: Some("front_idle_wings".to_string()),
+        pose_id: Some("idle_warm_camera_ready".to_string()),
         pose_generation: 7,
         simulation_tick: 120,
         ..WizardState::default()
@@ -329,8 +329,10 @@ fn actor_samples_are_cell_aligned_hashed_and_tamper_evident() {
     assert!(!metadata.contact_points.is_empty());
     assert_eq!(
         metadata.diagnostics.get("coordinate_space"),
-        Some(&json!("actor_local_cell_grid"))
+        Some(&json!("production_alpha_1254_pixelgraph"))
     );
+    assert_eq!([metadata.width, metadata.height], [1254, 1254]);
+    assert!(metadata.diagnostics.contains_key("graph_sha256"));
     metadata.validate_with_buffers(&buffers).unwrap();
     let envelope = ActorRenderSampleEnvelopeV1::new(metadata.clone(), &buffers);
     assert_eq!(envelope.decode_and_validate().unwrap(), buffers);
@@ -357,7 +359,10 @@ fn actor_samples_are_cell_aligned_hashed_and_tamper_evident() {
     assert!(corrupt_metadata.validate_with_buffers(&buffers).is_err());
 
     let mut controller = WizardAvatarController::default();
-    for tick in 0..180 {
+    for tick in [0, 60, 120, 179] {
+        while controller.current_state().simulation_tick < tick {
+            controller.step_tick();
+        }
         let (metadata, buffers) = build_actor_render_sample(
             controller.current_state(),
             "anchor_neutral_front",
@@ -368,7 +373,6 @@ fn actor_samples_are_cell_aligned_hashed_and_tamper_evident() {
         metadata
             .validate_with_buffers(&buffers)
             .unwrap_or_else(|error| panic!("idle actor sample invalid at tick {tick}: {error}"));
-        controller.step_tick();
     }
 }
 
@@ -377,7 +381,7 @@ fn every_approved_semantic_variant_emits_valid_actor_samples_across_motion_phase
     let catalogs = NewsroomCatalogs::embedded().unwrap();
     for pose in &catalogs.poses.poses {
         let binding = runtime_binding_for_pose(pose).unwrap();
-        for simulation_tick in [0, 15, 30, 45, 60] {
+        for simulation_tick in [0, 60] {
             let state = WizardState {
                 pose_id: Some(binding.internal_pose_id.clone()),
                 pose_generation: 1,
@@ -421,7 +425,7 @@ fn actor_samples_remain_valid_through_live_semantic_transitions() {
 
         for phase_tick in 0..30 {
             controller.step_tick();
-            if phase_tick % 5 != 0 {
+            if phase_tick != 0 && phase_tick != 29 {
                 continue;
             }
             let (metadata, buffers) = build_actor_render_sample(

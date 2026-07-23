@@ -6,8 +6,8 @@ use crate::newsroom::{
 };
 use crate::pathing::PathCurve;
 use crate::pose_clip::PoseClipPlayback;
+use crate::pose_graph_runtime::runtime_pose_graph_catalog;
 use crate::pose_playback::{PosePlayback, DEFAULT_POSE_TRANSITION_TICKS};
-use crate::pose_program::is_authored_pose_id;
 use crate::state::{
     Action, Direction, Expression, Locomotion, MouthShape, PlantedFoot, Velocity, WizardState,
     WorldPoint,
@@ -18,13 +18,65 @@ use std::collections::VecDeque;
 use std::f32::consts::{FRAC_PI_4, PI, TAU};
 use std::str::FromStr;
 
-pub const WORLD_X_MIN: f32 = -5.0;
-pub const WORLD_X_MAX: f32 = 5.0;
 pub const WORLD_Z_NEAR: f32 = 1.5;
-pub const WORLD_Z_FAR: f32 = 10.0;
+pub const WORLD_Z_FAR: f32 = 9.25;
 pub const SIMULATION_HZ: f32 = 60.0;
 pub const SIMULATION_DT: f32 = 1.0 / SIMULATION_HZ;
 pub const STRIDE_LENGTH: f32 = 0.85;
+
+// These values mirror the graph projector. The opaque envelope is the union of
+// the 260 replacement alpha masters on their authored 1254-square canvas; the
+// motion allowances cover the maximum walk lean, weight-transfer scale, and
+// lateral/vertical offsets.
+const PROJECTION_FAR_Z: f32 = 10.0;
+const PROJECTION_FAR_SCALE: f32 = 1.4;
+const PROJECTION_SCALE_RANGE: f32 = 0.8;
+pub const CANONICAL_STAGE_COLS: f32 = 120.0;
+pub const CANONICAL_STAGE_ROWS: f32 = 72.0;
+const STAGE_COLS: f32 = 480.0;
+const STAGE_ROWS: f32 = 270.0;
+const STAGE_CENTER_X: f32 = STAGE_COLS * 0.5;
+const STAGE_HORIZON_Y: f32 = STAGE_ROWS * 0.48;
+const STAGE_NEAR_ROOT_Y: f32 = STAGE_ROWS * 0.88;
+const WORLD_TO_STAGE_X: f32 = STAGE_COLS * 0.075;
+const GRAPH_FRAME_SIZE: f32 = 1254.0;
+const PROJECTED_GRAPH_SIZE: f32 = 96.0;
+const GRAPH_OPAQUE_MIN_X: f32 = 69.0;
+const GRAPH_OPAQUE_MAX_X_EXCLUSIVE: f32 = 1185.0;
+const GRAPH_OPAQUE_MIN_Y: f32 = 69.0;
+const GRAPH_OPAQUE_MAX_Y_EXCLUSIVE: f32 = 1185.0;
+const MAX_ACTOR_SCALE_X: f32 = 1.012;
+const MIN_ACTOR_SCALE_Y: f32 = 0.988;
+const MAX_ACTOR_OFFSET_X: f32 = 0.9;
+const MAX_ACTOR_LIFT: f32 = 2.2;
+const MAX_LEAN_SIN: f32 = 0.052_335_955;
+const MAX_LEAN_COS: f32 = 0.998_629_5;
+const VIEWPORT_EPSILON: f32 = 0.001;
+const PATH_VALIDATION_STEP: f32 = 0.01;
+const MAX_PATH_VALIDATION_SAMPLES: usize = 200_000;
+const GRAPH_LEFT_FROM_ROOT: f32 =
+    (0.5 - GRAPH_OPAQUE_MIN_X / GRAPH_FRAME_SIZE) * PROJECTED_GRAPH_SIZE;
+const GRAPH_RIGHT_FROM_ROOT: f32 =
+    (GRAPH_OPAQUE_MAX_X_EXCLUSIVE / GRAPH_FRAME_SIZE - 0.5) * PROJECTED_GRAPH_SIZE;
+const GRAPH_TOP_FROM_ROOT: f32 =
+    (1.0 - GRAPH_OPAQUE_MIN_Y / GRAPH_FRAME_SIZE) * PROJECTED_GRAPH_SIZE;
+const GRAPH_BOTTOM_ABOVE_ROOT: f32 =
+    (1.0 - GRAPH_OPAQUE_MAX_Y_EXCLUSIVE / GRAPH_FRAME_SIZE) * PROJECTED_GRAPH_SIZE;
+const MAX_GRAPH_X_FROM_ROOT: f32 = if GRAPH_LEFT_FROM_ROOT > GRAPH_RIGHT_FROM_ROOT {
+    GRAPH_LEFT_FROM_ROOT
+} else {
+    GRAPH_RIGHT_FROM_ROOT
+};
+const MAX_HORIZONTAL_EXTENT_PER_SCALE: f32 =
+    MAX_GRAPH_X_FROM_ROOT * MAX_ACTOR_SCALE_X * MAX_LEAN_COS + GRAPH_TOP_FROM_ROOT * MAX_LEAN_SIN;
+const SUPPORTED_FAR_DEPTH: f32 =
+    (PROJECTION_FAR_Z - WORLD_Z_FAR) / (PROJECTION_FAR_Z - WORLD_Z_NEAR);
+const SUPPORTED_FAR_SCALE: f32 =
+    PROJECTION_FAR_SCALE + SUPPORTED_FAR_DEPTH * PROJECTION_SCALE_RANGE;
+pub const WORLD_X_MAX: f32 = (STAGE_CENTER_X
+    - (MAX_HORIZONTAL_EXTENT_PER_SCALE * SUPPORTED_FAR_SCALE + MAX_ACTOR_OFFSET_X))
+    / (WORLD_TO_STAGE_X * SUPPORTED_FAR_SCALE);
+pub const WORLD_X_MIN: f32 = -WORLD_X_MAX;
 #[derive(Clone, Copy, Debug, Eq, Hash, Ord, PartialEq, PartialOrd, Serialize, Deserialize)]
 #[serde(rename_all = "snake_case")]
 pub enum ControllerCommandKind {
@@ -264,7 +316,7 @@ impl WizardAvatarController {
         let catalogs = embedded_newsroom_catalogs()?;
         let mut performance =
             resolve_newsroom_cue(&cue, &NewsroomMotionPolicyV1::default(), catalogs)?;
-        if !is_authored_pose_id(&performance.internal_pose_id) {
+        if !is_runtime_pose_id(&performance.internal_pose_id) {
             return Err(NewsroomError::UnsupportedInternalPose(
                 performance.internal_pose_id,
             ));
@@ -518,17 +570,9 @@ impl WizardAvatarController {
             z: number(payload, "center_z", 5.0)?,
         };
         let radius = number(payload, "radius", 2.0)?;
-        if radius <= 0.0 {
+        if !radius.is_finite() || radius <= 0.0 {
             return Err("circle radius must be positive".to_string());
         }
-        validate_world_point(WorldPoint {
-            x: center.x - radius,
-            z: center.z - radius,
-        })?;
-        validate_world_point(WorldPoint {
-            x: center.x + radius,
-            z: center.z + radius,
-        })?;
         let dx = self.state.world_position.x - center.x;
         let dz = self.state.world_position.z - center.z;
         let start_angle = if dx.abs() + dz.abs() > f32::EPSILON {
@@ -553,17 +597,9 @@ impl WizardAvatarController {
             z: number(payload, "center_z", 5.0)?,
         };
         let radius = number(payload, "radius", 1.4)?;
-        if radius <= 0.0 {
+        if !radius.is_finite() || radius <= 0.0 {
             return Err("figure-eight radius must be positive".to_string());
         }
-        validate_world_point(WorldPoint {
-            x: center.x - radius,
-            z: center.z - radius * 0.5,
-        })?;
-        validate_world_point(WorldPoint {
-            x: center.x + radius,
-            z: center.z + radius * 0.5,
-        })?;
         self.prepare_curve(
             PathCurve::figure_eight(center, radius),
             number(payload, "speed", self.movement.max_speed)?,
@@ -628,8 +664,8 @@ impl WizardAvatarController {
             self.pose_playback.clear(&mut self.state);
             return Ok(());
         }
-        let pose_id = string(payload, "pose_id", "front_idle")?;
-        if !is_authored_pose_id(&pose_id) {
+        let pose_id = string(payload, "pose_id", "idle_warm_camera_ready")?;
+        if !is_runtime_pose_id(&pose_id) {
             return Err(format!("unsupported pose: {pose_id}"));
         }
         let transition_ms = number(payload, "transition_ms", 240.0)?.max(1.0) as u64;
@@ -647,7 +683,7 @@ impl WizardAvatarController {
             .map(str::to_owned)
             .or_else(|| (duration_ms > 0).then_some(presented.clone()));
         if let Some(restore) = restore_to.as_deref() {
-            if !is_authored_pose_id(restore) {
+            if !is_runtime_pose_id(restore) {
                 return Err(format!("unsupported restore pose: {restore}"));
             }
         }
@@ -675,7 +711,7 @@ impl WizardAvatarController {
             .and_then(Value::as_str)
             .map(str::to_owned);
         if let Some(restore) = restore_to.as_deref() {
-            if !is_authored_pose_id(restore) {
+            if !is_runtime_pose_id(restore) {
                 return Err(format!("unsupported restore pose: {restore}"));
             }
         }
@@ -754,7 +790,8 @@ impl WizardAvatarController {
 
     fn move_to(&mut self, point: WorldPoint, speed: f32) -> Result<(), String> {
         validate_world_point(point)?;
-        if speed <= 0.0 {
+        validate_motion_segment(self.state.world_position, point)?;
+        if !speed.is_finite() || speed <= 0.0 {
             return Err("speed must be positive".to_string());
         }
         self.cancel_path();
@@ -776,11 +813,13 @@ impl WizardAvatarController {
     }
 
     fn prepare_curve(&mut self, curve: PathCurve, speed: f32, looped: bool) -> Result<(), String> {
-        if speed <= 0.0 {
+        if !speed.is_finite() || speed <= 0.0 {
             return Err("path speed must be positive".to_string());
         }
+        validate_curve_viewport(&curve)?;
         let start = curve.sample(0.0).position;
         if world_distance(self.state.world_position, start) > self.movement.arrival_tolerance {
+            validate_motion_segment(self.state.world_position, start)?;
             self.cancel_path();
             self.path.pending_curve = Some(curve);
             self.path.speed = speed;
@@ -795,9 +834,10 @@ impl WizardAvatarController {
     }
 
     fn activate_curve(&mut self, curve: PathCurve, speed: f32, looped: bool) -> Result<(), String> {
-        if speed <= 0.0 {
+        if !speed.is_finite() || speed <= 0.0 {
             return Err("path speed must be positive".to_string());
         }
+        validate_curve_viewport(&curve)?;
         self.path.generation += 1;
         self.path.curve = Some(curve);
         self.path.pending_curve = None;
@@ -872,8 +912,14 @@ impl WizardAvatarController {
             self.step_deceleration();
         }
 
-        self.state.world_position.x = self.state.world_position.x.clamp(WORLD_X_MIN, WORLD_X_MAX);
         self.state.world_position.z = self.state.world_position.z.clamp(WORLD_Z_NEAR, WORLD_Z_FAR);
+        let (safe_x_min, safe_x_max) = viewport_safe_x_bounds(self.state.world_position.z);
+        let unclamped_x = self.state.world_position.x;
+        self.state.world_position.x = unclamped_x.clamp(safe_x_min, safe_x_max);
+        if self.state.world_position.x != unclamped_x {
+            self.state.velocity.x = 0.0;
+            self.movement.desired_velocity.x = 0.0;
+        }
         let travelled = world_distance(before, self.state.world_position);
         if travelled > 0.0 {
             self.state.walk_phase = (self.state.walk_phase + travelled / STRIDE_LENGTH).fract();
@@ -1062,14 +1108,14 @@ impl WizardAvatarController {
 
 fn pose_id_for_direction(direction: Direction) -> &'static str {
     match direction {
-        Direction::South => "front_idle",
-        Direction::SouthWest => "walk_front_left",
-        Direction::West => "profile_left",
-        Direction::NorthWest => "back_left",
-        Direction::North => "back_idle",
-        Direction::NorthEast => "back_right",
-        Direction::East => "profile_right",
-        Direction::SouthEast => "walk_front_right",
+        Direction::South => "idle_warm_camera_ready",
+        Direction::SouthWest => "turn_front_3q_left",
+        Direction::West => "turn_left_profile",
+        Direction::NorthWest => "turn_back_3q_left",
+        Direction::North => "turn_back_neutral",
+        Direction::NorthEast => "turn_back_3q_right",
+        Direction::East => "turn_right_profile",
+        Direction::SouthEast => "turn_front_3q_right",
     }
 }
 
@@ -1135,16 +1181,124 @@ fn update_facing_handoff(state: &mut WizardState) {
     }
 }
 
+#[derive(Clone, Copy, Debug)]
+struct ActorViewportBounds {
+    left: f32,
+    right: f32,
+    top: f32,
+    bottom: f32,
+}
+
+fn projection_depth(z: f32) -> f32 {
+    ((PROJECTION_FAR_Z - z) / (PROJECTION_FAR_Z - WORLD_Z_NEAR)).clamp(0.0, 1.0)
+}
+
+fn projection_scale(z: f32) -> f32 {
+    PROJECTION_FAR_SCALE + projection_depth(z) * PROJECTION_SCALE_RANGE
+}
+
+fn viewport_safe_x_bounds(z: f32) -> (f32, f32) {
+    let scale = projection_scale(z);
+    let horizontal_extent = MAX_HORIZONTAL_EXTENT_PER_SCALE * scale + MAX_ACTOR_OFFSET_X;
+    let max_x = (STAGE_CENTER_X - horizontal_extent) / (WORLD_TO_STAGE_X * scale);
+    (-max_x, max_x)
+}
+
+fn projected_actor_bounds(point: WorldPoint) -> ActorViewportBounds {
+    let depth = projection_depth(point.z);
+    let scale = projection_scale(point.z);
+    let root_x = STAGE_CENTER_X + point.x * WORLD_TO_STAGE_X * scale;
+    let root_y = STAGE_HORIZON_Y + depth * (STAGE_NEAR_ROOT_Y - STAGE_HORIZON_Y);
+    let horizontal_extent = MAX_HORIZONTAL_EXTENT_PER_SCALE * scale + MAX_ACTOR_OFFSET_X;
+    let top_extent = (GRAPH_TOP_FROM_ROOT * MAX_LEAN_COS
+        + MAX_GRAPH_X_FROM_ROOT * MAX_ACTOR_SCALE_X * MAX_LEAN_SIN)
+        * scale
+        + MAX_ACTOR_LIFT;
+    let bottom_from_root = (MAX_GRAPH_X_FROM_ROOT * MAX_ACTOR_SCALE_X * MAX_LEAN_SIN
+        - GRAPH_BOTTOM_ABOVE_ROOT * MIN_ACTOR_SCALE_Y * MAX_LEAN_COS)
+        * scale;
+    ActorViewportBounds {
+        left: root_x - horizontal_extent,
+        right: root_x + horizontal_extent,
+        top: root_y - top_extent,
+        bottom: root_y + bottom_from_root,
+    }
+}
+
 fn validate_world_point(point: WorldPoint) -> Result<(), String> {
-    if !(WORLD_X_MIN..=WORLD_X_MAX).contains(&point.x) {
-        return Err(format!("x must be between {WORLD_X_MIN} and {WORLD_X_MAX}"));
+    if !point.x.is_finite() || !point.z.is_finite() {
+        return Err("world coordinates must be finite".to_string());
     }
     if !(WORLD_Z_NEAR..=WORLD_Z_FAR).contains(&point.z) {
         return Err(format!(
             "z must be between {WORLD_Z_NEAR} and {WORLD_Z_FAR}"
         ));
     }
+    let (safe_x_min, safe_x_max) = viewport_safe_x_bounds(point.z);
+    if !(safe_x_min..=safe_x_max).contains(&point.x) {
+        return Err(format!(
+            "x must be between {safe_x_min:.3} and {safe_x_max:.3} at z={:.3} to keep the complete actor in view",
+            point.z
+        ));
+    }
+    let bounds = projected_actor_bounds(point);
+    if bounds.left < -VIEWPORT_EPSILON
+        || bounds.right > STAGE_COLS + VIEWPORT_EPSILON
+        || bounds.top < -VIEWPORT_EPSILON
+        || bounds.bottom > STAGE_ROWS + VIEWPORT_EPSILON
+    {
+        return Err(format!(
+            "world point ({:.3}, {:.3}) projects outside the complete-actor viewport",
+            point.x, point.z
+        ));
+    }
     Ok(())
+}
+
+fn validate_motion_segment(start: WorldPoint, end: WorldPoint) -> Result<(), String> {
+    validate_world_point(start).map_err(|error| format!("movement start is unsafe: {error}"))?;
+    validate_world_point(end).map_err(|error| format!("movement target is unsafe: {error}"))?;
+    let length = world_distance(start, end);
+    let sample_count = validation_sample_count(length)?;
+    for index in 1..sample_count {
+        let alpha = index as f32 / sample_count as f32;
+        let point = WorldPoint {
+            x: start.x + (end.x - start.x) * alpha,
+            z: start.z + (end.z - start.z) * alpha,
+        };
+        validate_world_point(point).map_err(|error| {
+            format!("movement segment leaves the safe viewport at {alpha:.3}: {error}")
+        })?;
+    }
+    Ok(())
+}
+
+fn validate_curve_viewport(curve: &PathCurve) -> Result<(), String> {
+    let total_length = curve.total_length();
+    let sample_count = validation_sample_count(total_length)?;
+    for index in 0..=sample_count {
+        let distance = total_length * index as f32 / sample_count as f32;
+        let point = curve.sample(distance).position;
+        validate_world_point(point).map_err(|error| {
+            format!(
+                "path leaves the safe viewport at distance {distance:.3}/{total_length:.3}: {error}"
+            )
+        })?;
+    }
+    Ok(())
+}
+
+fn validation_sample_count(length: f32) -> Result<usize, String> {
+    if !length.is_finite() || length < 0.0 {
+        return Err("movement path length must be finite".to_string());
+    }
+    let sample_count = (length / PATH_VALIDATION_STEP).ceil().max(1.0) as usize;
+    if sample_count > MAX_PATH_VALIDATION_SAMPLES {
+        return Err(format!(
+            "movement path requires {sample_count} viewport samples, exceeding the {MAX_PATH_VALIDATION_SAMPLES} safety limit"
+        ));
+    }
+    Ok(sample_count)
 }
 
 fn move_velocity_towards(current: Velocity, target: Velocity, max_delta: f32) -> Velocity {
@@ -1228,6 +1382,12 @@ fn number(payload: &Value, key: &str, default: f32) -> Result<f32, String> {
     })
 }
 
+fn is_runtime_pose_id(pose_id: &str) -> bool {
+    runtime_pose_graph_catalog()
+        .map(|catalog| catalog.for_runtime_pose_id(pose_id).is_some())
+        .unwrap_or(false)
+}
+
 fn bool_value(payload: &Value, key: &str, default: bool) -> bool {
     payload.get(key).and_then(Value::as_bool).unwrap_or(default)
 }
@@ -1263,7 +1423,7 @@ mod tests {
         let mut controller = WizardAvatarController::default();
         assert!(
             controller
-                .apply_command(WizardCommand::new("move", json!({"x": 3.0, "z": 5.0})))
+                .apply_command(WizardCommand::new("move", json!({"x": 2.0, "z": 5.0})))
                 .ok
         );
         assert!(
@@ -1277,6 +1437,148 @@ mod tests {
         controller.advance(0.25);
         assert_eq!(controller.current_state().locomotion, Locomotion::Walking);
         assert!(controller.current_state().speech_id.is_some());
+    }
+
+    fn assert_complete_actor_visible(point: WorldPoint) {
+        let bounds = projected_actor_bounds(point);
+        assert!(
+            bounds.left >= -VIEWPORT_EPSILON,
+            "left edge {} at {point:?}",
+            bounds.left
+        );
+        assert!(
+            bounds.right <= STAGE_COLS + VIEWPORT_EPSILON,
+            "right edge {} at {point:?}",
+            bounds.right
+        );
+        assert!(
+            bounds.top >= -VIEWPORT_EPSILON,
+            "top edge {} at {point:?}",
+            bounds.top
+        );
+        assert!(
+            bounds.bottom <= STAGE_ROWS + VIEWPORT_EPSILON,
+            "bottom edge {} at {point:?}",
+            bounds.bottom
+        );
+        let canonical = ActorViewportBounds {
+            left: bounds.left * CANONICAL_STAGE_COLS / STAGE_COLS,
+            right: bounds.right * CANONICAL_STAGE_COLS / STAGE_COLS,
+            top: bounds.top * CANONICAL_STAGE_ROWS / STAGE_ROWS,
+            bottom: bounds.bottom * CANONICAL_STAGE_ROWS / STAGE_ROWS,
+        };
+        assert!(canonical.left >= -VIEWPORT_EPSILON);
+        assert!(canonical.right <= CANONICAL_STAGE_COLS + VIEWPORT_EPSILON);
+        assert!(canonical.top >= -VIEWPORT_EPSILON);
+        assert!(canonical.bottom <= CANONICAL_STAGE_ROWS + VIEWPORT_EPSILON);
+    }
+
+    #[test]
+    fn viewport_safe_x_bounds_preserve_the_complete_actor_at_every_supported_depth() {
+        for step in 0..=34 {
+            let z = WORLD_Z_NEAR + (WORLD_Z_FAR - WORLD_Z_NEAR) * step as f32 / 34.0;
+            let (left, right) = viewport_safe_x_bounds(z);
+            assert!(left < 0.0 && right > 0.0);
+            assert!((left + right).abs() < 1e-5);
+            for x in [left, 0.0, right] {
+                let point = WorldPoint { x, z };
+                validate_world_point(point).expect("projection-safe point");
+                assert_complete_actor_visible(point);
+            }
+            assert!(validate_world_point(WorldPoint { x: left - 0.01, z }).is_err());
+            assert!(validate_world_point(WorldPoint { x: right + 0.01, z }).is_err());
+        }
+        let (far_left, far_right) = viewport_safe_x_bounds(WORLD_Z_FAR);
+        assert!((far_left - WORLD_X_MIN).abs() < 1e-5);
+        assert!((far_right - WORLD_X_MAX).abs() < 1e-5);
+    }
+
+    #[test]
+    fn directional_walks_arrive_with_left_and_right_endpoints_fully_visible() {
+        for z in [WORLD_Z_NEAR, 5.0, WORLD_Z_FAR] {
+            for (command, sign) in [("walk_left", -1.0_f32), ("walk_right", 1.0_f32)] {
+                let mut controller = WizardAvatarController::default();
+                controller.state_mut().world_position.z = z;
+                let (_, safe_right) = viewport_safe_x_bounds(z);
+                let distance = safe_right - 0.01;
+                let result = controller
+                    .apply_command(WizardCommand::new(command, json!({"distance": distance})));
+                assert!(result.ok, "{command} at z={z}: {}", result.message);
+
+                for _ in 0..600 {
+                    controller.step_tick();
+                    assert_complete_actor_visible(controller.current_state().world_position);
+                    if controller.current_state().target_point.is_none() {
+                        break;
+                    }
+                }
+                let state = controller.current_state();
+                assert!(
+                    state.target_point.is_none(),
+                    "{command} at z={z} did not arrive"
+                );
+                assert!((state.world_position.x - sign * distance).abs() < 0.001);
+                assert_complete_actor_visible(state.world_position);
+            }
+        }
+    }
+
+    #[test]
+    fn directional_walks_reject_unreachable_targets_without_mutating_motion() {
+        for (command, sign) in [("walk_left", -1.0_f32), ("walk_right", 1.0_f32)] {
+            let mut controller = WizardAvatarController::default();
+            let start = controller.current_state().world_position;
+            let (_, safe_right) = viewport_safe_x_bounds(start.z);
+            let result = controller.apply_command(WizardCommand::new(
+                command,
+                json!({"distance": safe_right + 0.01}),
+            ));
+            assert!(!result.ok, "{command} accepted an unreachable target");
+            assert!(result.message.contains("complete actor in view"));
+            assert_eq!(controller.current_state().world_position, start);
+            assert!(controller.current_state().target_point.is_none());
+            assert_eq!(
+                controller.current_state().velocity,
+                Velocity { x: 0.0, z: 0.0 }
+            );
+            assert_eq!(sign * result.state.world_position.x, 0.0);
+        }
+    }
+
+    #[test]
+    fn spline_overshoot_is_rejected_even_when_every_control_point_is_safe() {
+        let mut controller = WizardAvatarController::default();
+        let result = controller.apply_command(WizardCommand::new(
+            "path",
+            json!({
+                "points": [
+                    {"x": 0.0, "z": 5.0},
+                    {"x": 2.2, "z": 5.0},
+                    {"x": 2.2, "z": 5.0},
+                    {"x": -2.2, "z": 5.0}
+                ],
+                "speed": 1.0
+            }),
+        ));
+        assert!(!result.ok);
+        assert!(result.message.contains("path leaves the safe viewport"));
+        assert!(controller.current_state().target_point.is_none());
+        assert_eq!(
+            controller.current_state().world_position,
+            WorldPoint { x: 0.0, z: 5.0 }
+        );
+    }
+
+    #[test]
+    fn unsupported_far_depth_is_rejected_before_motion_is_armed() {
+        let mut controller = WizardAvatarController::default();
+        let result = controller.apply_command(WizardCommand::new(
+            "move",
+            json!({"x": 0.0, "z": WORLD_Z_FAR + 0.01}),
+        ));
+        assert!(!result.ok);
+        assert!(result.message.contains("z must be between"));
+        assert!(controller.current_state().target_point.is_none());
     }
 
     #[test]

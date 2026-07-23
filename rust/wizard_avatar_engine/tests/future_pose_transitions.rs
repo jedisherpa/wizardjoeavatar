@@ -1,11 +1,9 @@
 use serde_json::json;
-use std::collections::BTreeMap;
+use std::collections::{BTreeMap, BTreeSet};
 use wizard_avatar_engine::controller::{WizardAvatarController, WizardCommand};
-use wizard_avatar_engine::pose::{
-    analyze_region_fragmentation, sample_pose, PoseLibrary, RegionId,
-};
-use wizard_avatar_engine::quality::{
-    FrameQualityFailure, FrameQualityReport, FrameQualitySnapshot, FrameQualityThresholds,
+use wizard_avatar_engine::pose_graph_runtime::{
+    project_runtime_pose_graph, runtime_pose_graph_catalog, RuntimePoseGraphEntry,
+    RUNTIME_POSE_GRAPH_COUNT,
 };
 
 fn command(controller: &mut WizardAvatarController, pose_id: &str, transition_ms: u64) {
@@ -13,76 +11,98 @@ fn command(controller: &mut WizardAvatarController, pose_id: &str, transition_ms
         "pose",
         json!({"pose_id": pose_id, "transition_ms": transition_ms}),
     ));
-    assert!(result.ok, "{}", result.message);
+    assert!(result.ok, "{}: {}", pose_id, result.message);
+}
+
+fn assert_exact_promoted_graph(entry: &RuntimePoseGraphEntry) {
+    assert!(entry.primary_for_semantic_id);
+    assert!(entry.exact_rgba_equal);
+    assert_eq!(entry.silhouette_iou_millionths, 1_000_000);
+    assert_eq!(entry.foreground_color_fidelity_millionths, 1_000_000);
+    assert_eq!(entry.foreground_color_match_ratio_millionths, 1_000_000);
+    assert_eq!(entry.rgba_mismatch_pixel_count, 0);
+    assert_eq!(entry.rgba_mismatch_channel_count, 0);
+
+    let raster = project_runtime_pose_graph(&entry.semantic_id)
+        .unwrap_or_else(|error| panic!("project {}: {error}", entry.semantic_id));
+    assert_eq!(raster.entry.source_record_id, entry.source_record_id);
+    assert_eq!(
+        [u32::from(raster.width), u32::from(raster.height)],
+        entry.frame
+    );
+    assert_eq!(
+        raster
+            .coverage_mask
+            .iter()
+            .map(|value| u64::from(*value))
+            .sum::<u64>(),
+        entry.foreground_pixel_count
+    );
+    assert_eq!(
+        raster.rgba.len(),
+        usize::from(raster.width) * usize::from(raster.height) * 4
+    );
 }
 
 #[test]
-fn every_authored_new_pose_neighbor_transition_passes_the_frame_breakup_gate() {
-    let library = PoseLibrary::reference().expect("pose library");
-    let imported = library
-        .pose_ids()
-        .filter_map(|pose_id| {
-            let pose = library.for_id(pose_id)?;
-            pose.motion.candidate_id.as_ref().map(|_| {
-                (
-                    pose.id.clone(),
-                    pose.motion.authored_transition_neighbors.clone(),
+fn every_authored_production_alpha_neighbor_is_exact_and_controller_reachable() {
+    let catalog = runtime_pose_graph_catalog().expect("runtime pose graph catalog");
+    let entries = &catalog.manifest().entries;
+    assert_eq!(entries.len(), RUNTIME_POSE_GRAPH_COUNT);
+
+    let by_semantic = entries
+        .iter()
+        .map(|entry| (entry.semantic_id.as_str(), entry))
+        .collect::<BTreeMap<_, _>>();
+    assert_eq!(by_semantic.len(), RUNTIME_POSE_GRAPH_COUNT);
+
+    for entry in entries {
+        assert_exact_promoted_graph(entry);
+    }
+
+    let mut directed_edges = BTreeSet::new();
+    for target in entries {
+        for source_id in &target.authored_transition_neighbors {
+            let source = by_semantic.get(source_id.as_str()).unwrap_or_else(|| {
+                panic!(
+                    "{} references missing transition neighbor {source_id}",
+                    target.semantic_id
                 )
-            })
-        })
-        .collect::<Vec<_>>();
-    assert_eq!(imported.len(), 79);
+            });
+            assert!(directed_edges.insert((source.semantic_id.clone(), target.semantic_id.clone())));
 
-    let thresholds = FrameQualityThresholds {
-        maximum_face_anchor_step: 4.0,
-        maximum_staff_anchor_step: 6.0,
-        maximum_free_foot_step: 8.0,
-        ..FrameQualityThresholds::default()
-    };
-    let mut failures = Vec::<FrameQualityFailure>::new();
-    let mut fragmented_regions = BTreeMap::<RegionId, usize>::new();
-    let mut transitions = 0usize;
-    let mut frame_index = 0u64;
-
-    for (target, neighbors) in imported {
-        for source in neighbors {
             let mut controller = WizardAvatarController::default();
-            command(&mut controller, &source, 1);
+            command(&mut controller, &source.semantic_id, 1);
             controller.advance(0.1);
-            command(&mut controller, &target, 240);
-            let transition_id = format!("{source}-to-{target}");
-            let mut snapshots = Vec::new();
-            for _ in 0..18 {
-                controller.step_tick();
-                let sample = sample_pose(controller.current_state()).expect("sample transition");
-                for (region, excess) in analyze_region_fragmentation(&sample) {
-                    *fragmented_regions.entry(region).or_default() += excess;
+            command(&mut controller, &target.semantic_id, 240);
+
+            let state = controller.current_state();
+            assert_eq!(state.pose_id.as_deref(), Some(target.semantic_id.as_str()));
+            assert_eq!(
+                state.previous_pose_id.as_deref(),
+                Some(source.semantic_id.as_str())
+            );
+            assert!(!state.pose_handoff);
+
+            for _ in 0..20 {
+                if controller.current_state().pose_handoff {
+                    break;
                 }
-                snapshots.push(
-                    FrameQualitySnapshot::from_pose(
-                        transition_id.clone(),
-                        sample.pose_id.clone(),
-                        frame_index,
-                        &sample,
-                    )
-                    .expect("quality snapshot"),
-                );
-                frame_index += 1;
+                controller.step_tick();
             }
-            let report = FrameQualityReport::inspect_sequence(&snapshots, thresholds);
-            failures.extend(report.failures);
-            transitions += 1;
+            let state = controller.current_state();
+            assert!(
+                state.pose_handoff,
+                "{} -> {}",
+                source.semantic_id, target.semantic_id
+            );
+            assert_eq!(state.pose_id.as_deref(), Some(target.semantic_id.as_str()));
         }
     }
 
-    assert!(
-        transitions >= 300,
-        "transition matrix is unexpectedly small"
+    assert_eq!(
+        directed_edges.len(),
+        480,
+        "production-alpha authored transition census changed"
     );
-    let mut by_rule = BTreeMap::<String, usize>::new();
-    for failure in &failures {
-        *by_rule.entry(failure.rule.clone()).or_default() += 1;
-    }
-    let examples = failures.iter().take(24).collect::<Vec<_>>();
-    assert!(failures.is_empty(), "{} of {transitions} authored transitions failed; by rule {by_rule:?}; fragmented regions {fragmented_regions:?}; examples {examples:#?}", failures.len());
 }

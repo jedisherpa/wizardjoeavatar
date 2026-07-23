@@ -1,7 +1,7 @@
 use crate::capability_manifest::wizard_capability_document;
 use crate::motion_catalog::shadow_motion_catalog;
-use crate::pose::{sample_pose, AnchorId, RegionBounds, RegionId};
-use crate::state::{PlantedFoot, WizardState};
+use crate::pose_graph_runtime::{project_runtime_pose_graph, resolved_runtime_pose_id};
+use crate::state::WizardState;
 use base64::engine::general_purpose::STANDARD as BASE64_STANDARD;
 use base64::Engine;
 use serde::de::{self, Visitor};
@@ -1098,12 +1098,10 @@ fn runtime_pose_for_semantic(semantic_pose: &str) -> Option<&'static str> {
         | "desk_seated_listening"
         | "desk_microphone_ready"
         | "turn_to_camera"
-        | "wings_resting"
-        | "closeup_skeptical" => "front_idle_wings",
-        "anchor_open_ready" | "wings_welcome_open" => "front_greeting_wave_wings",
-        "anchor_staff_planted" | "stand_from_desk" | "sit_at_desk" => {
-            "front_crouch_staff_planted_wings"
-        }
+        | "wings_resting" => "idle_warm_camera_ready",
+        "closeup_skeptical" => "emotion_skepticism",
+        "anchor_open_ready" | "wings_welcome_open" => "hand_open_relaxed",
+        "anchor_staff_planted" | "stand_from_desk" | "sit_at_desk" => "staff_plant",
         "explain_one_hand"
         | "explain_precise"
         | "emphasis_small"
@@ -1113,18 +1111,15 @@ fn runtime_pose_for_semantic(semantic_pose: &str) -> Option<&'static str> {
         | "define_term"
         | "zoom_out_context"
         | "zoom_in_detail"
-        | "desk_seated_speaking" => "front_explaining_open_hand_wings",
-        "explain_two_hands" | "compare_left_right" | "weighing_options" => {
-            "front_explaining_both_hands_wings"
+        | "desk_seated_speaking" => "speak_explain_precise",
+        "explain_two_hands" | "compare_left_right" | "weighing_options" => "speak_explain_sequence",
+        "emphasis_large" | "wings_emphasis" => "speak_emphasize_high",
+        "clarify_uncertainty" | "think_hand_chin" | "fact_check_focus" | "desk_review_notes" => {
+            "emotion_contemplative"
         }
-        "emphasis_large" | "wings_emphasis" => "front_victory_cast_wings",
-        "clarify_uncertainty"
-        | "think_hand_chin"
-        | "fact_check_focus"
-        | "curious"
-        | "desk_review_notes" => "front_thinking_hand_chin_wings",
+        "curious" => "emotion_curious",
         "important_context" | "point_source_card" | "urgent_warning" | "source_emphasis" => {
-            "front_point_direct_wings"
+            "hand_point_screen_right"
         }
         "point_headline_left"
         | "point_headline_right"
@@ -1133,28 +1128,28 @@ fn runtime_pose_for_semantic(semantic_pose: &str) -> Option<&'static str> {
         | "point_city_window"
         | "trace_timeline"
         | "desk_seated_pointing"
-        | "turn_to_graphic" => "front_point_side_wings",
-        "staff_point_graphic" => "front_point_direct_staff_held",
-        "breaking_alert_initial" | "teleport_puff_arrival" => "front_reaction_jump_wings_staff",
-        "correction_sober" => "feeling_guilt_full",
-        "correction_apology" | "empathetic" => "front_sincere_hand_heart_wings",
-        "warm_good_news" => "feeling_joy_full",
-        "amused_light" | "closeup_signoff" => "feeling_joy_close",
-        "surprised_bounded" => "feeling_surprise_full",
-        "concerned" => "feeling_sadness_full",
-        "confident_resolve" | "proud_bounded" => "feeling_pride_full",
+        | "turn_to_graphic" => "hand_point_screen_left",
+        "staff_point_graphic" => "staff_aim_forward",
+        "breaking_alert_initial" | "teleport_puff_arrival" => "emotion_shock",
+        "correction_sober" => "emotion_shame",
+        "correction_apology" | "empathetic" => "emotion_compassion",
+        "warm_good_news" => "emotion_joy",
+        "amused_light" | "closeup_signoff" => "emotion_amused",
+        "surprised_bounded" => "emotion_surprise",
+        "concerned" => "emotion_concern",
+        "confident_resolve" | "proud_bounded" => "emotion_confident",
         "enter_from_left" | "walk_to_anchor_mark" | "walk_to_explainer_wall" | "exit_stage" => {
-            "walk_front_right"
+            "walk_contact_right"
         }
-        "enter_from_right" | "walk_to_correspondent_window" => "walk_front_left",
+        "enter_from_right" | "walk_to_correspondent_window" => "walk_contact_left",
         "orb_low_glow" | "orb_breaking_pulse" | "orb_correction_dim" | "magic_reveal_headline" => {
-            "front_magic_staff_spark_wings"
+            "magic_cast_hold"
         }
-        "conjure_chart" | "summon_source_scroll" => "front_magic_staff_raise_wings",
-        "staff_misfire_recover" => "front_crouch_reaction_staff_planted",
-        "wings_folded_serious" => "front_crouch_guard_wings",
-        "closeup_warm" => "feeling_love_close",
-        "closeup_concerned" => "feeling_sadness_close",
+        "conjure_chart" | "summon_source_scroll" => "magic_raise_staff",
+        "staff_misfire_recover" => "magic_mishap_smoke_reveal",
+        "wings_folded_serious" => "emotion_solemn",
+        "closeup_warm" => "emotion_compassion",
+        "closeup_concerned" => "emotion_concern",
         _ => return None,
     })
 }
@@ -1374,68 +1369,43 @@ pub fn build_actor_render_sample(
             "invalid generation, engine commit, or semantic pose".to_string(),
         ));
     }
-    let sample = sample_pose(state).map_err(NewsroomError::ActorSample)?;
-    let width = u16::try_from(sample.canvas.width)
-        .map_err(|_| NewsroomError::ActorSample("actor width exceeds u16".to_string()))?;
-    let height = u16::try_from(sample.canvas.height)
-        .map_err(|_| NewsroomError::ActorSample("actor height exceeds u16".to_string()))?;
+    let runtime_pose_id = resolved_runtime_pose_id(state);
+    let raster =
+        project_runtime_pose_graph(&runtime_pose_id).map_err(NewsroomError::ActorSample)?;
+    let width = raster.width;
+    let height = raster.height;
     if width == 0 || height == 0 || width > 2_048 || height > 2_048 {
         return Err(NewsroomError::ActorSample(
             "actor dimensions are outside 1..=2048".to_string(),
         ));
     }
 
-    let mut rgb = Vec::with_capacity(usize::from(width) * usize::from(height) * 3);
-    let mut coverage_mask = Vec::with_capacity(usize::from(width) * usize::from(height));
-    let mut occupied = Vec::new();
-    for y in 0..i32::from(height) {
-        for x in 0..i32::from(width) {
-            if let Some(cell) = sample.canvas.get(x, y) {
-                rgb.extend_from_slice(&[cell.rgb.0, cell.rgb.1, cell.rgb.2]);
-                coverage_mask.push(1);
-                occupied.push((x, y));
-            } else {
-                rgb.extend_from_slice(&[255, 255, 255]);
-                coverage_mask.push(0);
-            }
-        }
-    }
-    let bounds = bounds_for_points(&occupied).ok_or_else(|| {
-        NewsroomError::ActorSample("actor sample contains no occupied cells".to_string())
-    })?;
-    let root = point_from_anchor(&sample, AnchorId::Root, width, height);
-    let mut contact_points = Vec::new();
-    if matches!(state.planted_foot, PlantedFoot::Left | PlantedFoot::Both) {
-        contact_points.push(point_from_anchor(
-            &sample,
-            AnchorId::LeftFoot,
-            width,
-            height,
-        ));
-    }
-    if matches!(state.planted_foot, PlantedFoot::Right | PlantedFoot::Both) {
-        contact_points.push(point_from_anchor(
-            &sample,
-            AnchorId::RightFoot,
-            width,
-            height,
-        ));
-    }
-    let staff_bounds = sample
-        .region_bounds
-        .get(&RegionId::Staff)
-        .copied()
-        .and_then(|bounds| rect_from_region(bounds, width, height));
-    let wing_bounds = union_regions(
-        sample.region_bounds.get(&RegionId::AdornmentLeft).copied(),
-        sample.region_bounds.get(&RegionId::AdornmentRight).copied(),
-    )
-    .and_then(|bounds| rect_from_region(bounds, width, height));
+    let rgb = raster.rgb_white_background.clone();
+    let coverage_mask = raster.coverage_mask.clone();
+    let bounds = ActorRectV1 {
+        x: i32::from(raster.foreground_bounds[0]),
+        y: i32::from(raster.foreground_bounds[1]),
+        width: u32::from(raster.foreground_bounds[2]),
+        height: u32::from(raster.foreground_bounds[3]),
+    };
+    let root = ActorPointV1 {
+        x: i32::try_from(raster.entry.anchor_x)
+            .unwrap_or(i32::from(width))
+            .clamp(0, i32::from(width)),
+        y: i32::try_from(raster.entry.anchor_y)
+            .unwrap_or(i32::from(height))
+            .clamp(0, i32::from(height)),
+    };
+    let contact_points = if raster.entry.contact_mode == "airborne" {
+        Vec::new()
+    } else {
+        vec![root]
+    };
     let state_bytes =
         serde_json::to_vec(state).map_err(|error| NewsroomError::ActorSample(error.to_string()))?;
     let state_hash = sha256_hex(&state_bytes);
-    let rgb_sha256 = sha256_hex(&rgb);
-    let coverage_mask_sha256 = sha256_hex(&coverage_mask);
+    let rgb_sha256 = raster.rgb_sha256.clone();
+    let coverage_mask_sha256 = raster.coverage_mask_sha256.clone();
     let character_package = character_package_sha256()?.to_string();
     let actor_layer_hash = actor_layer_hash(
         &rgb_sha256,
@@ -1454,12 +1424,29 @@ pub fn build_actor_render_sample(
         .and_then(|value| value.as_str().map(str::to_owned))
         .unwrap_or_else(|| "closed".to_string());
     let mut diagnostics = BTreeMap::new();
-    diagnostics.insert("source_pose_id".to_string(), sample.pose_id.into());
-    diagnostics.insert("occupied_cells".to_string(), occupied.len().into());
-    diagnostics.insert("pixel_format".to_string(), "rgb8_cell_aligned".into());
+    diagnostics.insert(
+        "source_pose_id".to_string(),
+        raster.entry.semantic_id.clone().into(),
+    );
+    diagnostics.insert(
+        "source_record_id".to_string(),
+        raster.entry.source_record_id.clone().into(),
+    );
+    diagnostics.insert(
+        "graph_sha256".to_string(),
+        raster.entry.graph_sha256.clone().into(),
+    );
+    diagnostics.insert(
+        "occupied_pixels".to_string(),
+        raster.entry.foreground_pixel_count.into(),
+    );
+    diagnostics.insert(
+        "pixel_format".to_string(),
+        "rgb8_plus_binary_coverage_from_rgba_pixelgraph".into(),
+    );
     diagnostics.insert(
         "coordinate_space".to_string(),
-        "actor_local_cell_grid".into(),
+        "production_alpha_1254_pixelgraph".into(),
     );
     diagnostics.insert("origin".to_string(), "top_left".into());
 
@@ -1476,8 +1463,8 @@ pub fn build_actor_render_sample(
         bounds,
         root,
         contact_points,
-        staff_bounds,
-        wing_bounds,
+        staff_bounds: None,
+        wing_bounds: None,
         semantic_pose: semantic_pose.to_string(),
         expression,
         mouth,
@@ -1492,61 +1479,6 @@ pub fn build_actor_render_sample(
     };
     metadata.validate_with_buffers(&buffers)?;
     Ok((metadata, buffers))
-}
-
-fn point_from_anchor(
-    sample: &crate::pose::PoseSample,
-    anchor: AnchorId,
-    width: u16,
-    height: u16,
-) -> ActorPointV1 {
-    let point = sample.anchors[&anchor].round();
-    ActorPointV1 {
-        x: point.0.clamp(0, i32::from(width)),
-        y: point.1.clamp(0, i32::from(height)),
-    }
-}
-
-fn rect_from_region(bounds: RegionBounds, width: u16, height: u16) -> Option<ActorRectV1> {
-    let min_x = bounds.min_x.max(0);
-    let min_y = bounds.min_y.max(0);
-    let max_x = bounds.max_x.min(i32::from(width) - 1);
-    let max_y = bounds.max_y.min(i32::from(height) - 1);
-    if min_x > max_x || min_y > max_y {
-        return None;
-    }
-    Some(ActorRectV1 {
-        x: min_x,
-        y: min_y,
-        width: u32::try_from(max_x - min_x + 1).ok()?,
-        height: u32::try_from(max_y - min_y + 1).ok()?,
-    })
-}
-
-fn union_regions(left: Option<RegionBounds>, right: Option<RegionBounds>) -> Option<RegionBounds> {
-    match (left, right) {
-        (Some(left), Some(right)) => Some(RegionBounds {
-            min_x: left.min_x.min(right.min_x),
-            min_y: left.min_y.min(right.min_y),
-            max_x: left.max_x.max(right.max_x),
-            max_y: left.max_y.max(right.max_y),
-        }),
-        (Some(bounds), None) | (None, Some(bounds)) => Some(bounds),
-        (None, None) => None,
-    }
-}
-
-fn bounds_for_points(points: &[(i32, i32)]) -> Option<ActorRectV1> {
-    let min_x = points.iter().map(|point| point.0).min()?;
-    let min_y = points.iter().map(|point| point.1).min()?;
-    let max_x = points.iter().map(|point| point.0).max()?;
-    let max_y = points.iter().map(|point| point.1).max()?;
-    Some(ActorRectV1 {
-        x: min_x,
-        y: min_y,
-        width: u32::try_from(max_x - min_x + 1).ok()?,
-        height: u32::try_from(max_y - min_y + 1).ok()?,
-    })
 }
 
 #[derive(Clone, Copy, Debug, Eq, Hash, Ord, PartialEq, PartialOrd, Serialize, Deserialize)]

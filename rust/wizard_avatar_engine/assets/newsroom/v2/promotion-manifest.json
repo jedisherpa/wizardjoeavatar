@@ -1,0 +1,451 @@
+{
+  "schema_version": 1,
+  "promotion_id": "wizard_joe_newsroom_v2_native_pixelgraphs",
+  "layer_admission_ledger_path": "docs/newsroom-visual-development-v2/layer-admission-ledger.json",
+  "layer_admission_ledger_sha256": "1548255d916ff2d545e4c4ca68b5dd20b122891f60374d305ded73654ab4ff46",
+  "source_manifest_sha256": "0bddadf7b3c7fd943d7dad82f6be04270414c3f21d4657eb9304b5d8e0793e3a",
+  "target_specs_sha256": "c50c7bdb7f532d7b10dc7521c94a14489dfa3ffba82a6a1abe0fa36f65b36db8",
+  "minimum_visual_alignment": 0.95,
+  "runtime_raster_assets": false,
+  "native_canvas": [
+    1672,
+    941
+  ],
+  "source_count": 6,
+  "target_count": 27,
+  "foreground_pixel_count": 4233630,
+  "scenes": [
+    {
+      "source_id": "main_anchor_desk_v2",
+      "source_graph_sha256": "12a972c5a31a2c886c243c82f59c78d922385f2dabf6d0ee8f746a3aed287715",
+      "source_target_spec_sha256": "cb81a281d59c4ee40d7e5581d3d9024b4dcddc8a0193cda4d864a533507e2392",
+      "verification_report_path": "evidence/newsroom-visual-development-v2/layer-admission/main_anchor_desk_v2/verification.json",
+      "verification_report_sha256": "1030764d784fba1c82af4992664d8005e5ee1bac5a18eb31501d9f653cafd90e",
+      "targets": [
+        {
+          "id": "main_anchor_desk_foreground",
+          "semantic_layer": "foreground",
+          "order": 10,
+          "anchor": [
+            840,
+            865
+          ],
+          "occlusion": "May hide legs and lower robe; must not hide face, hat, required hand gesture, or captions.",
+          "foreground_pixel_count": 218977,
+          "evidence_graph_path": "evidence/newsroom-visual-development-v2/layer-admission/main_anchor_desk_v2/main_anchor_desk_foreground.pixelgraph.json.gz",
+          "evidence_graph_sha256": "aeac53d7f36b0a69b07fb04bb555a3acbc8744abd12a51a1e43012ea3b2478fa",
+          "runtime_graph_path": "rust/wizard_avatar_engine/assets/newsroom/v2/graphs/main_anchor_desk_v2/main_anchor_desk_foreground.pixelgraph.json.gz"
+        },
+        {
+          "id": "main_anchor_rear_set",
+          "semantic_layer": "set_piece",
+          "order": 0,
+          "anchor": [
+            836,
+            865
+          ],
+          "occlusion": "Always behind the character and editorial overlays.",
+          "foreground_pixel_count": 741157,
+          "evidence_graph_path": "evidence/newsroom-visual-development-v2/layer-admission/main_anchor_desk_v2/main_anchor_rear_set.pixelgraph.json.gz",
+          "evidence_graph_sha256": "509c2ee4f72bbe2fc99568abcf44886a746b37aeacf0d5480a9cf8d69effc796",
+          "runtime_graph_path": "rust/wizard_avatar_engine/assets/newsroom/v2/graphs/main_anchor_desk_v2/main_anchor_rear_set.pixelgraph.json.gz"
+        }
+      ]
+    },
+    {
+      "source_id": "standing_explainer_wall_v2",
+      "source_graph_sha256": "6d768a4bef143257eb625acf4be410360e9c489992be2ffcb5762f61153ee1af",
+      "source_target_spec_sha256": "7973682f9ea9c02d90cd22d45d35353d969df8c1be0e33632c08c849e2eb0001",
+      "verification_report_path": "evidence/newsroom-visual-development-v2/layer-admission/standing_explainer_wall_v2/verification.json",
+      "verification_report_sha256": "b4b490f3d3ceda17d2d1f3db332b35c00b92c11b994c99b4643d67063440aa10",
+      "targets": [
+        {
+          "id": "explainer_lectern_foreground",
+          "semantic_layer": "foreground",
+          "order": 10,
+          "anchor": [
+            405,
+            730
+          ],
+          "occlusion": "May hide lower torso only when the character is explicitly behind the lectern.",
+          "foreground_pixel_count": 43105,
+          "evidence_graph_path": "evidence/newsroom-visual-development-v2/layer-admission/standing_explainer_wall_v2/explainer_lectern_foreground.pixelgraph.json.gz",
+          "evidence_graph_sha256": "0d9b5e70ca5a15395ca52bd82e9fc295feda49c43d45de8dda945012cc1b433a",
+          "runtime_graph_path": "rust/wizard_avatar_engine/assets/newsroom/v2/graphs/standing_explainer_wall_v2/explainer_lectern_foreground.pixelgraph.json.gz"
+        },
+        {
+          "id": "explainer_rear_set",
+          "semantic_layer": "set_piece",
+          "order": 0,
+          "anchor": [
+            836,
+            850
+          ],
+          "occlusion": "Always behind the presenter.",
+          "foreground_pixel_count": 639380,
+          "evidence_graph_path": "evidence/newsroom-visual-development-v2/layer-admission/standing_explainer_wall_v2/explainer_rear_set.pixelgraph.json.gz",
+          "evidence_graph_sha256": "51c8b29383eb842c528a7f479e5c0455e02c23d33ac80306e9089c1d3f558541",
+          "runtime_graph_path": "rust/wizard_avatar_engine/assets/newsroom/v2/graphs/standing_explainer_wall_v2/explainer_rear_set.pixelgraph.json.gz"
+        }
+      ]
+    },
+    {
+      "source_id": "cohost_interview_v2",
+      "source_graph_sha256": "adc650540317e37a4e90c52514d1e24b9376e623a4f47d93916fbc6b6009af4a",
+      "source_target_spec_sha256": "d9069eeecb669983f1ef01c3ab7d4f62c54a447fdaa127e3b86e2158dd7f817b",
+      "verification_report_path": "evidence/newsroom-visual-development-v2/layer-admission/cohost_interview_v2/verification.json",
+      "verification_report_sha256": "2a9bff4c2446d3f35305bfd0119ce3a6f7a1235c344428f537f3a67b29a2affe",
+      "targets": [
+        {
+          "id": "interview_left_chair_foreground",
+          "semantic_layer": "foreground",
+          "order": 10,
+          "anchor": [
+            405,
+            755
+          ],
+          "occlusion": "May cover the seated character's feet and lower robe only.",
+          "foreground_pixel_count": 90633,
+          "evidence_graph_path": "evidence/newsroom-visual-development-v2/layer-admission/cohost_interview_v2/interview_left_chair_foreground.pixelgraph.json.gz",
+          "evidence_graph_sha256": "4e342da47fe58548db8c3be5599890d70d21cd6a3f712b011140b04ac4a56bae",
+          "runtime_graph_path": "rust/wizard_avatar_engine/assets/newsroom/v2/graphs/cohost_interview_v2/interview_left_chair_foreground.pixelgraph.json.gz"
+        },
+        {
+          "id": "interview_table_foreground",
+          "semantic_layer": "foreground",
+          "order": 20,
+          "anchor": [
+            830,
+            760
+          ],
+          "occlusion": "May cover feet and the lowest robe cells only.",
+          "foreground_pixel_count": 37945,
+          "evidence_graph_path": "evidence/newsroom-visual-development-v2/layer-admission/cohost_interview_v2/interview_table_foreground.pixelgraph.json.gz",
+          "evidence_graph_sha256": "c85c8980daa0a96b296355063e1cf8bbf9520ce2d12d114ef3daa705672d576d",
+          "runtime_graph_path": "rust/wizard_avatar_engine/assets/newsroom/v2/graphs/cohost_interview_v2/interview_table_foreground.pixelgraph.json.gz"
+        },
+        {
+          "id": "interview_right_chair_foreground",
+          "semantic_layer": "foreground",
+          "order": 30,
+          "anchor": [
+            1255,
+            755
+          ],
+          "occlusion": "May cover the seated character's feet and lower robe only.",
+          "foreground_pixel_count": 93408,
+          "evidence_graph_path": "evidence/newsroom-visual-development-v2/layer-admission/cohost_interview_v2/interview_right_chair_foreground.pixelgraph.json.gz",
+          "evidence_graph_sha256": "03e64303fbe7d558dd803e324247dacc0e37bd46413da8fa90a9017f528ca9e8",
+          "runtime_graph_path": "rust/wizard_avatar_engine/assets/newsroom/v2/graphs/cohost_interview_v2/interview_right_chair_foreground.pixelgraph.json.gz"
+        },
+        {
+          "id": "interview_rear_set",
+          "semantic_layer": "set_piece",
+          "order": 0,
+          "anchor": [
+            836,
+            880
+          ],
+          "occlusion": "Always behind both characters and the foreground furniture.",
+          "foreground_pixel_count": 672237,
+          "evidence_graph_path": "evidence/newsroom-visual-development-v2/layer-admission/cohost_interview_v2/interview_rear_set.pixelgraph.json.gz",
+          "evidence_graph_sha256": "22cf2f5c52e0d3ff1fbda0648fee4bf5fe121a3a4c09155f193c2d60c68e0f5b",
+          "runtime_graph_path": "rust/wizard_avatar_engine/assets/newsroom/v2/graphs/cohost_interview_v2/interview_rear_set.pixelgraph.json.gz"
+        }
+      ]
+    },
+    {
+      "source_id": "magical_breaking_field_v2",
+      "source_graph_sha256": "945a1bd385ee18e5b76c4ab454b7f2aea403082cc2fc965a262bc6e58b6d0791",
+      "source_target_spec_sha256": "2efd46e9f8f993a0d1e7c07e088bc14f58a83241e53a784844c5cd2d65ed545d",
+      "verification_report_path": "evidence/newsroom-visual-development-v2/layer-admission/magical_breaking_field_v2/verification.json",
+      "verification_report_sha256": "cbcee3fa983e52f00c1d79d9f55ed1353a04d6f200f9613ceda2285e18eca0a4",
+      "targets": [
+        {
+          "id": "breaking_lectern_foreground",
+          "semantic_layer": "foreground",
+          "order": 10,
+          "anchor": [
+            480,
+            735
+          ],
+          "occlusion": "May hide lower torso only when explicitly used as a lectern.",
+          "foreground_pixel_count": 39453,
+          "evidence_graph_path": "evidence/newsroom-visual-development-v2/layer-admission/magical_breaking_field_v2/breaking_lectern_foreground.pixelgraph.json.gz",
+          "evidence_graph_sha256": "68cd3fc9b0faf591d9ae434551d415074620434827d1c536c124b2518653f207",
+          "runtime_graph_path": "rust/wizard_avatar_engine/assets/newsroom/v2/graphs/magical_breaking_field_v2/breaking_lectern_foreground.pixelgraph.json.gz"
+        },
+        {
+          "id": "breaking_platform_foreground",
+          "semantic_layer": "foreground",
+          "order": 20,
+          "anchor": [
+            840,
+            850
+          ],
+          "occlusion": "May hide feet only.",
+          "foreground_pixel_count": 68340,
+          "evidence_graph_path": "evidence/newsroom-visual-development-v2/layer-admission/magical_breaking_field_v2/breaking_platform_foreground.pixelgraph.json.gz",
+          "evidence_graph_sha256": "bcd582682132d16728c1e875d564233300e237af1b3e2c5d3d41a24150d9b60d",
+          "runtime_graph_path": "rust/wizard_avatar_engine/assets/newsroom/v2/graphs/magical_breaking_field_v2/breaking_platform_foreground.pixelgraph.json.gz"
+        },
+        {
+          "id": "breaking_rear_set",
+          "semantic_layer": "set_piece",
+          "order": 0,
+          "anchor": [
+            836,
+            850
+          ],
+          "occlusion": "Portal, control towers, and rear platform remain behind the character.",
+          "foreground_pixel_count": 530839,
+          "evidence_graph_path": "evidence/newsroom-visual-development-v2/layer-admission/magical_breaking_field_v2/breaking_rear_set.pixelgraph.json.gz",
+          "evidence_graph_sha256": "b75012bde603804304594b274dec8e6c2caf5edfa38230b8a4169424e1697357",
+          "runtime_graph_path": "rust/wizard_avatar_engine/assets/newsroom/v2/graphs/magical_breaking_field_v2/breaking_rear_set.pixelgraph.json.gz"
+        }
+      ]
+    },
+    {
+      "source_id": "studio_furniture_displays_v2",
+      "source_graph_sha256": "a8d2055a8f38906d223d6131477bebd784c79bd3770ea6cefd124187c033a326",
+      "source_target_spec_sha256": "ac8ef0ba18fc21d9a280d816161ddaafc3e442233edc303af33aedc0426bebfd",
+      "verification_report_path": "evidence/newsroom-visual-development-v2/layer-admission/studio_furniture_displays_v2/verification.json",
+      "verification_report_sha256": "c16e82c609aa91542918dd8200e1e0ec6a53cf70c0cae2fda022ec929707c97e",
+      "targets": [
+        {
+          "id": "prop_desk",
+          "semantic_layer": "foreground",
+          "order": 10,
+          "anchor": [
+            295,
+            360
+          ],
+          "occlusion": "May hide lower body.",
+          "foreground_pixel_count": 95237,
+          "evidence_graph_path": "evidence/newsroom-visual-development-v2/layer-admission/studio_furniture_displays_v2/prop_desk.pixelgraph.json.gz",
+          "evidence_graph_sha256": "d4d077aa24a508b85677c1dbebfa4f70aec468704d961d61473b86a35f62d1d7",
+          "runtime_graph_path": "rust/wizard_avatar_engine/assets/newsroom/v2/graphs/studio_furniture_displays_v2/prop_desk.pixelgraph.json.gz"
+        },
+        {
+          "id": "prop_chair_front",
+          "semantic_layer": "foreground",
+          "order": 20,
+          "anchor": [
+            785,
+            365
+          ],
+          "occlusion": "May hide feet and lower robe when seated.",
+          "foreground_pixel_count": 76628,
+          "evidence_graph_path": "evidence/newsroom-visual-development-v2/layer-admission/studio_furniture_displays_v2/prop_chair_front.pixelgraph.json.gz",
+          "evidence_graph_sha256": "f0e37b1a501547669ce2f0d0964d28de33b926a2abbd372fa6e3dafddfaeac44",
+          "runtime_graph_path": "rust/wizard_avatar_engine/assets/newsroom/v2/graphs/studio_furniture_displays_v2/prop_chair_front.pixelgraph.json.gz"
+        },
+        {
+          "id": "prop_chair_side",
+          "semantic_layer": "prop",
+          "order": 20,
+          "anchor": [
+            1160,
+            365
+          ],
+          "occlusion": "Placed behind or beside the character according to blocking.",
+          "foreground_pixel_count": 58461,
+          "evidence_graph_path": "evidence/newsroom-visual-development-v2/layer-admission/studio_furniture_displays_v2/prop_chair_side.pixelgraph.json.gz",
+          "evidence_graph_sha256": "4991ae1a4f59dd606e2f20a0547a077f8c8e5dee12d2814fe372e35e9c97dfb6",
+          "runtime_graph_path": "rust/wizard_avatar_engine/assets/newsroom/v2/graphs/studio_furniture_displays_v2/prop_chair_side.pixelgraph.json.gz"
+        },
+        {
+          "id": "prop_lectern",
+          "semantic_layer": "foreground",
+          "order": 30,
+          "anchor": [
+            1495,
+            375
+          ],
+          "occlusion": "May hide lower torso only when explicitly used.",
+          "foreground_pixel_count": 38767,
+          "evidence_graph_path": "evidence/newsroom-visual-development-v2/layer-admission/studio_furniture_displays_v2/prop_lectern.pixelgraph.json.gz",
+          "evidence_graph_sha256": "887e5c10414ab45eb2f5212d56f4a7bde9d665c54bc08a53f94ba96c24a15aaa",
+          "runtime_graph_path": "rust/wizard_avatar_engine/assets/newsroom/v2/graphs/studio_furniture_displays_v2/prop_lectern.pixelgraph.json.gz"
+        },
+        {
+          "id": "prop_display_large",
+          "semantic_layer": "set_piece",
+          "order": 10,
+          "anchor": [
+            310,
+            835
+          ],
+          "occlusion": "Always behind the character.",
+          "foreground_pixel_count": 169187,
+          "evidence_graph_path": "evidence/newsroom-visual-development-v2/layer-admission/studio_furniture_displays_v2/prop_display_large.pixelgraph.json.gz",
+          "evidence_graph_sha256": "03935db54b504046ea46a832cb52572253435b5b4f78ca5ce21f9d41bcb86d5d",
+          "runtime_graph_path": "rust/wizard_avatar_engine/assets/newsroom/v2/graphs/studio_furniture_displays_v2/prop_display_large.pixelgraph.json.gz"
+        },
+        {
+          "id": "prop_display_small",
+          "semantic_layer": "set_piece",
+          "order": 20,
+          "anchor": [
+            790,
+            825
+          ],
+          "occlusion": "Always behind the character.",
+          "foreground_pixel_count": 65959,
+          "evidence_graph_path": "evidence/newsroom-visual-development-v2/layer-admission/studio_furniture_displays_v2/prop_display_small.pixelgraph.json.gz",
+          "evidence_graph_sha256": "1f3144bd27739a887b5d6aba76f548e6ee72d7e07f16c41ddb97b2238a498029",
+          "runtime_graph_path": "rust/wizard_avatar_engine/assets/newsroom/v2/graphs/studio_furniture_displays_v2/prop_display_small.pixelgraph.json.gz"
+        },
+        {
+          "id": "prop_light_tower",
+          "semantic_layer": "set_piece",
+          "order": 30,
+          "anchor": [
+            1130,
+            835
+          ],
+          "occlusion": "Always behind the character.",
+          "foreground_pixel_count": 50048,
+          "evidence_graph_path": "evidence/newsroom-visual-development-v2/layer-admission/studio_furniture_displays_v2/prop_light_tower.pixelgraph.json.gz",
+          "evidence_graph_sha256": "52cf22b92840341e45fec9f95ab3664fdf7716ecc6e12aebce2d23d9ff458038",
+          "runtime_graph_path": "rust/wizard_avatar_engine/assets/newsroom/v2/graphs/studio_furniture_displays_v2/prop_light_tower.pixelgraph.json.gz"
+        },
+        {
+          "id": "prop_side_table",
+          "semantic_layer": "prop",
+          "order": 40,
+          "anchor": [
+            1465,
+            835
+          ],
+          "occlusion": "May sit beside the character; does not cover face or gestures.",
+          "foreground_pixel_count": 52462,
+          "evidence_graph_path": "evidence/newsroom-visual-development-v2/layer-admission/studio_furniture_displays_v2/prop_side_table.pixelgraph.json.gz",
+          "evidence_graph_sha256": "80b97aa9a71bd7b7cfc42828487870e2e82221a5f2583c56cb167378cab2c974",
+          "runtime_graph_path": "rust/wizard_avatar_engine/assets/newsroom/v2/graphs/studio_furniture_displays_v2/prop_side_table.pixelgraph.json.gz"
+        }
+      ]
+    },
+    {
+      "source_id": "broadcast_magic_overlays_v2",
+      "source_graph_sha256": "b8e5000640cb363cf7d43db872fd8b8acfd9e1830e7ae95079ecf54f3d346390",
+      "source_target_spec_sha256": "1884588e0560de5d0f6a15d7d055f5738a90d253f214815ab04e72f230aca6b6",
+      "verification_report_path": "evidence/newsroom-visual-development-v2/layer-admission/broadcast_magic_overlays_v2/verification.json",
+      "verification_report_sha256": "4612be885b29f9d8210fb574adb2fbc445e175a8890471dbd24c4047627297d6",
+      "targets": [
+        {
+          "id": "magic_portal_console",
+          "semantic_layer": "prop",
+          "order": 10,
+          "anchor": [
+            260,
+            425
+          ],
+          "occlusion": "Placed behind the character unless explicitly used.",
+          "foreground_pixel_count": 85311,
+          "evidence_graph_path": "evidence/newsroom-visual-development-v2/layer-admission/broadcast_magic_overlays_v2/magic_portal_console.pixelgraph.json.gz",
+          "evidence_graph_sha256": "723ae72f04e71e607998e2d2c21fe2a3e0dd4f90a9524c16e4ad77cbd587090d",
+          "runtime_graph_path": "rust/wizard_avatar_engine/assets/newsroom/v2/graphs/broadcast_magic_overlays_v2/magic_portal_console.pixelgraph.json.gz"
+        },
+        {
+          "id": "magic_breaking_beacon",
+          "semantic_layer": "effect",
+          "order": 20,
+          "anchor": [
+            635,
+            425
+          ],
+          "occlusion": "Never covers face, captions, or source attribution.",
+          "foreground_pixel_count": 38900,
+          "evidence_graph_path": "evidence/newsroom-visual-development-v2/layer-admission/broadcast_magic_overlays_v2/magic_breaking_beacon.pixelgraph.json.gz",
+          "evidence_graph_sha256": "09c531e3b339565cbdef4b163f3e43465d79c65ecffb0e394b3852a9f372c3a8",
+          "runtime_graph_path": "rust/wizard_avatar_engine/assets/newsroom/v2/graphs/broadcast_magic_overlays_v2/magic_breaking_beacon.pixelgraph.json.gz"
+        },
+        {
+          "id": "magic_crystal_light",
+          "semantic_layer": "prop",
+          "order": 30,
+          "anchor": [
+            990,
+            425
+          ],
+          "occlusion": "Placed behind or beside the character.",
+          "foreground_pixel_count": 21896,
+          "evidence_graph_path": "evidence/newsroom-visual-development-v2/layer-admission/broadcast_magic_overlays_v2/magic_crystal_light.pixelgraph.json.gz",
+          "evidence_graph_sha256": "57b33cbd140c40dac345dc940704c881ebbe2a6e8eee6ade62f2fe894c7e422f",
+          "runtime_graph_path": "rust/wizard_avatar_engine/assets/newsroom/v2/graphs/broadcast_magic_overlays_v2/magic_crystal_light.pixelgraph.json.gz"
+        },
+        {
+          "id": "magic_ring",
+          "semantic_layer": "prop",
+          "order": 40,
+          "anchor": [
+            1385,
+            435
+          ],
+          "occlusion": "Placed behind the character unless held.",
+          "foreground_pixel_count": 72047,
+          "evidence_graph_path": "evidence/newsroom-visual-development-v2/layer-admission/broadcast_magic_overlays_v2/magic_ring.pixelgraph.json.gz",
+          "evidence_graph_sha256": "f23c5c0b9f2aebd752528e6a912dd0551bb171d77d671d0ee687c9f2d820cd0a",
+          "runtime_graph_path": "rust/wizard_avatar_engine/assets/newsroom/v2/graphs/broadcast_magic_overlays_v2/magic_ring.pixelgraph.json.gz"
+        },
+        {
+          "id": "overlay_lower_third_blank",
+          "semantic_layer": "broadcast_overlay",
+          "order": 100,
+          "anchor": [
+            280,
+            810
+          ],
+          "occlusion": "May cover lower body only; never face, required gesture, captions, or source attribution.",
+          "foreground_pixel_count": 71444,
+          "evidence_graph_path": "evidence/newsroom-visual-development-v2/layer-admission/broadcast_magic_overlays_v2/overlay_lower_third_blank.pixelgraph.json.gz",
+          "evidence_graph_sha256": "6ce9bfdd98876d78050ffd12d28862b36f16c75a740f0a402670dcbb20ed18c3",
+          "runtime_graph_path": "rust/wizard_avatar_engine/assets/newsroom/v2/graphs/broadcast_magic_overlays_v2/overlay_lower_third_blank.pixelgraph.json.gz"
+        },
+        {
+          "id": "overlay_source_card_blank",
+          "semantic_layer": "broadcast_overlay",
+          "order": 110,
+          "anchor": [
+            700,
+            815
+          ],
+          "occlusion": "Placed outside the face-safe zone.",
+          "foreground_pixel_count": 67268,
+          "evidence_graph_path": "evidence/newsroom-visual-development-v2/layer-admission/broadcast_magic_overlays_v2/overlay_source_card_blank.pixelgraph.json.gz",
+          "evidence_graph_sha256": "66f5ee81da60ca2694e6492179708d3b0475b31a354596f7269206c3acad9ce9",
+          "runtime_graph_path": "rust/wizard_avatar_engine/assets/newsroom/v2/graphs/broadcast_magic_overlays_v2/overlay_source_card_blank.pixelgraph.json.gz"
+        },
+        {
+          "id": "overlay_two_box_blank",
+          "semantic_layer": "broadcast_overlay",
+          "order": 120,
+          "anchor": [
+            1090,
+            815
+          ],
+          "occlusion": "Uses verified actor windows and remains above the set.",
+          "foreground_pixel_count": 86756,
+          "evidence_graph_path": "evidence/newsroom-visual-development-v2/layer-admission/broadcast_magic_overlays_v2/overlay_two_box_blank.pixelgraph.json.gz",
+          "evidence_graph_sha256": "15c00ddca7fc5519b548060cbae50d023731232c6ac96a39a130ba609e7554bc",
+          "runtime_graph_path": "rust/wizard_avatar_engine/assets/newsroom/v2/graphs/broadcast_magic_overlays_v2/overlay_two_box_blank.pixelgraph.json.gz"
+        },
+        {
+          "id": "effect_sparkle_cluster",
+          "semantic_layer": "effect",
+          "order": 130,
+          "anchor": [
+            1470,
+            810
+          ],
+          "occlusion": "Optional; never covers face, captions, or source attribution.",
+          "foreground_pixel_count": 7785,
+          "evidence_graph_path": "evidence/newsroom-visual-development-v2/layer-admission/broadcast_magic_overlays_v2/effect_sparkle_cluster.pixelgraph.json.gz",
+          "evidence_graph_sha256": "df1cae7d7c294515e7c39e335a22019b51808a948b5bc127aa2c18bc33798100",
+          "runtime_graph_path": "rust/wizard_avatar_engine/assets/newsroom/v2/graphs/broadcast_magic_overlays_v2/effect_sparkle_cluster.pixelgraph.json.gz"
+        }
+      ]
+    }
+  ]
+}

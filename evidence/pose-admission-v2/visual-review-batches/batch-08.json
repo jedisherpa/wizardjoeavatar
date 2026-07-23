@@ -1,0 +1,238 @@
+{
+  "batch_id": "batch-08",
+  "ranges": [
+    {
+      "start": "WJPA-0225",
+      "end": "WJPA-0250",
+      "inclusive": true
+    },
+    {
+      "start": "WJFF-0001",
+      "end": "WJFF-0010",
+      "inclusive": true
+    }
+  ],
+  "reviewer": "Codex",
+  "reviewed_count": 36,
+  "approved_count": 36,
+  "rejected_count": 0,
+  "status": "approved",
+  "results": [
+    {
+      "id": "WJPA-0225",
+      "decision": "approved",
+      "notes": "Source and projected graph align exactly across the raised hand, hat, face, staff, wings, robe, and feet; no doubled edges, shifts, missing or extra pixels, cropping, or alpha artifacts.",
+      "comparison_path": "evidence/pose-admission-v2/WJPA-0225/comparison.png"
+    },
+    {
+      "id": "WJPA-0226",
+      "decision": "approved",
+      "notes": "Source and projection are fully registered through both staff grips, hat tip, facial details, wing edges, robe hem, and lifted foot with no visible mismatch or alpha artifact.",
+      "comparison_path": "evidence/pose-admission-v2/WJPA-0226/comparison.png"
+    },
+    {
+      "id": "WJPA-0227",
+      "decision": "approved",
+      "notes": "The turned running pose matches exactly, including the angled hat, staff, hands, wings, flared robe, and both shoes; no doubling, displacement, clipping, or alpha defect is visible.",
+      "comparison_path": "evidence/pose-admission-v2/WJPA-0227/comparison.png"
+    },
+    {
+      "id": "WJPA-0228",
+      "decision": "approved",
+      "notes": "Raised palm, face, hat, staff, rainbow wings, robe panels, and lifted foot align exactly with no extra or missing pixels, cropping, edge doubling, or transparency artifact.",
+      "comparison_path": "evidence/pose-admission-v2/WJPA-0228/comparison.png"
+    },
+    {
+      "id": "WJPA-0229",
+      "decision": "approved",
+      "notes": "The diagonal two-handed staff pose is visually identical in source and projection; staff hook, fingers, face, wing tips, robe, and feet remain clean and fully registered.",
+      "comparison_path": "evidence/pose-admission-v2/WJPA-0229/comparison.png"
+    },
+    {
+      "id": "WJPA-0230",
+      "decision": "approved",
+      "notes": "Source and projected graph match exactly across the crouched stance, two staff grips, facial details, broad wings, robe edges, and shoes with no alpha or cropping artifacts.",
+      "comparison_path": "evidence/pose-admission-v2/WJPA-0230/comparison.png"
+    },
+    {
+      "id": "WJPA-0231",
+      "decision": "approved",
+      "notes": "The diagonal staff presentation is fully aligned, including hat tip, hands, staff hook, wing contours, crossed legs, robe hems, and feet; no mismatch is visible.",
+      "comparison_path": "evidence/pose-admission-v2/WJPA-0231/comparison.png"
+    },
+    {
+      "id": "WJPA-0232",
+      "decision": "approved",
+      "notes": "Open palm, staff hand, face, hat, wing edges, robe silhouette, and both feet remain exactly registered with no doubled contours, missing pixels, clipping, or alpha artifact.",
+      "comparison_path": "evidence/pose-admission-v2/WJPA-0232/comparison.png"
+    },
+    {
+      "id": "WJPA-0233",
+      "decision": "approved",
+      "notes": "The seated pointing pose aligns exactly through the pointing fingers, staff, face, hat, wings, crossed legs, robe, and shoes with no projection or transparency defects.",
+      "comparison_path": "evidence/pose-admission-v2/WJPA-0233/comparison.png"
+    },
+    {
+      "id": "WJPA-0234",
+      "decision": "approved",
+      "notes": "Extended hand, long sleeves, staff, facial detail, wings, running stride, robe tail, and shoes match source-for-source without shifts, doubled edges, clipping, or alpha artifacts.",
+      "comparison_path": "evidence/pose-admission-v2/WJPA-0234/comparison.png"
+    },
+    {
+      "id": "WJPA-0235",
+      "decision": "approved",
+      "notes": "Foreshortened open hand, diagonal staff, face, hat, wing blocks, crouched robe, and feet are fully registered; no missing or extra pixels, crop, doubling, or alpha issue appears.",
+      "comparison_path": "evidence/pose-admission-v2/WJPA-0235/comparison.png"
+    },
+    {
+      "id": "WJPA-0236",
+      "decision": "approved",
+      "notes": "The airborne wave pose matches exactly across the raised hand, staff grip and hook, face, hat, wing tips, bent legs, robe, and shoes with clean transparency.",
+      "comparison_path": "evidence/pose-admission-v2/WJPA-0236/comparison.png"
+    },
+    {
+      "id": "WJPA-0237",
+      "decision": "approved",
+      "notes": "Open-hand presentation and upright staff align exactly; hat, facial features, wings, robe panels, stance, and feet show no edge doubling, displacement, clipping, or alpha artifact.",
+      "comparison_path": "evidence/pose-admission-v2/WJPA-0237/comparison.png"
+    },
+    {
+      "id": "WJPA-0238",
+      "decision": "approved",
+      "notes": "The compact caution gesture is visually identical in source and projection, including fingers, staff, face, hat, wings, robe, and feet; no mismatch or alpha defect is visible.",
+      "comparison_path": "evidence/pose-admission-v2/WJPA-0238/comparison.png"
+    },
+    {
+      "id": "WJPA-0239",
+      "decision": "approved",
+      "notes": "Foreshortened spread hand, surprised face, staff, hat, wing contours, robe silhouette, and feet are exactly aligned with no doubled edges, pixel loss, cropping, or alpha artifacts.",
+      "comparison_path": "evidence/pose-admission-v2/WJPA-0239/comparison.png"
+    },
+    {
+      "id": "WJPA-0240",
+      "decision": "approved",
+      "notes": "The braced diagonal staff pose matches panel-for-panel across both hands, face, hat, wings, robe folds, stance, and shoes; no shift, doubling, clipping, or alpha issue appears.",
+      "comparison_path": "evidence/pose-admission-v2/WJPA-0240/comparison.png"
+    },
+    {
+      "id": "WJPA-0241",
+      "decision": "approved",
+      "notes": "Hat-touching airborne pose is fully registered through both hands, staff, face, wing tips, lifted legs, robe hems, and shoes with no missing pixels or transparency artifacts.",
+      "comparison_path": "evidence/pose-admission-v2/WJPA-0241/comparison.png"
+    },
+    {
+      "id": "WJPA-0242",
+      "decision": "approved",
+      "notes": "Leaning open-palm pose matches exactly, including the foreshortened fingers, staff hook, face, hat, wings, robe panels, and feet; no projection or alpha mismatch is visible.",
+      "comparison_path": "evidence/pose-admission-v2/WJPA-0242/comparison.png"
+    },
+    {
+      "id": "WJPA-0243",
+      "decision": "approved",
+      "notes": "Temple-touch gesture, calm face, staff, hat, wing edges, straight robe, and feet align exactly without doubled contours, shifts, missing or extra pixels, crop, or alpha defects.",
+      "comparison_path": "evidence/pose-admission-v2/WJPA-0243/comparison.png"
+    },
+    {
+      "id": "WJPA-0244",
+      "decision": "approved",
+      "notes": "Raised open hand, staff grip, face, hat, wings, lifted knee, robe silhouette, and shoes remain fully registered with no visible mismatch or transparency artifact.",
+      "comparison_path": "evidence/pose-admission-v2/WJPA-0244/comparison.png"
+    },
+    {
+      "id": "WJPA-0245",
+      "decision": "approved",
+      "notes": "The wide staff-and-open-hand pose is exact across fingers, staff, face, hat, wing span, robe panels, stance, and feet with no doubling, crop, missing pixels, or alpha issue.",
+      "comparison_path": "evidence/pose-admission-v2/WJPA-0245/comparison.png"
+    },
+    {
+      "id": "WJPA-0246",
+      "decision": "approved",
+      "notes": "Open palm, staff hand, neutral face, hat tip, wings, walking robe, and feet match source and projection exactly with clean edges and transparency.",
+      "comparison_path": "evidence/pose-admission-v2/WJPA-0246/comparison.png"
+    },
+    {
+      "id": "WJPA-0247",
+      "decision": "approved",
+      "notes": "The upright explanatory pose aligns exactly through the open hand, staff, face, hat, wing contours, robe hem, and shoes; no displacement, clipping, or alpha artifact is present.",
+      "comparison_path": "evidence/pose-admission-v2/WJPA-0247/comparison.png"
+    },
+    {
+      "id": "WJPA-0248",
+      "decision": "approved",
+      "notes": "Source and projected graph are fully registered across the extended palm, staff grip, face, hat, wings, long robe, rear foot, and foreground shoe with no visible defect.",
+      "comparison_path": "evidence/pose-admission-v2/WJPA-0248/comparison.png"
+    },
+    {
+      "id": "WJPA-0249",
+      "decision": "approved",
+      "notes": "Bowed hand-over-heart pose matches exactly, including the hat, face, staff, wings, sleeve edges, robe, and feet; no doubled edge, pixel mismatch, crop, or alpha artifact appears.",
+      "comparison_path": "evidence/pose-admission-v2/WJPA-0249/comparison.png"
+    },
+    {
+      "id": "WJPA-0250",
+      "decision": "approved",
+      "notes": "Front-facing neutral pose aligns exactly across hat, face, relaxed hand, staff and grip, symmetrical wings, robe panels, and feet with no visible projection or alpha mismatch.",
+      "comparison_path": "evidence/pose-admission-v2/WJPA-0250/comparison.png"
+    },
+    {
+      "id": "WJFF-0001",
+      "decision": "approved",
+      "notes": "Flight-frame source and projection align exactly across the high swept wings and membranes, hat, face, staff, fist, robe, and feet; no doubling, crop, or alpha mismatch is visible.",
+      "comparison_path": "evidence/pose-admission-v2/WJFF-0001/comparison.png"
+    },
+    {
+      "id": "WJFF-0002",
+      "decision": "approved",
+      "notes": "Broad arched wings, interior wing details, hat, face, arms, staff, robe, and feet remain fully registered with no missing or extra pixels, edge shift, cropping, or alpha artifact.",
+      "comparison_path": "evidence/pose-admission-v2/WJFF-0002/comparison.png"
+    },
+    {
+      "id": "WJFF-0003",
+      "decision": "approved",
+      "notes": "The horizontal flight pose matches exactly through both long wing edges, feather bands, hat, face, fist, staff, robe, and feet with clean overlay registration.",
+      "comparison_path": "evidence/pose-admission-v2/WJFF-0003/comparison.png"
+    },
+    {
+      "id": "WJFF-0004",
+      "decision": "approved",
+      "notes": "Downswept wing frame is visually identical in source and projection, including interior wing gaps, staff, hands, face, hat, robe, and feet; no mismatch or alpha defect appears.",
+      "comparison_path": "evidence/pose-admission-v2/WJFF-0004/comparison.png"
+    },
+    {
+      "id": "WJFF-0005",
+      "decision": "approved",
+      "notes": "Source and projected graph align exactly across the lowered rainbow wings and their fine interior edges, hat, face, staff, hands, robe, and feet with no visible artifacts.",
+      "comparison_path": "evidence/pose-admission-v2/WJFF-0005/comparison.png"
+    },
+    {
+      "id": "WJFF-0006",
+      "decision": "approved",
+      "notes": "Wide arched flight silhouette matches panel-for-panel; wing bands and edge pixels, hat, face, staff, fist, robe, and feet show no shift, doubling, crop, or alpha mismatch.",
+      "comparison_path": "evidence/pose-admission-v2/WJFF-0006/comparison.png"
+    },
+    {
+      "id": "WJFF-0007",
+      "decision": "approved",
+      "notes": "Nearly horizontal wing frame aligns exactly, including the fine lower wing edge pixels, hat, face, staff, hands, robe, and feet; no missing or extra projection pixels are visible.",
+      "comparison_path": "evidence/pose-admission-v2/WJFF-0007/comparison.png"
+    },
+    {
+      "id": "WJFF-0008",
+      "decision": "approved",
+      "notes": "High swept wings and colored membranes are fully registered with the source; hat, face, fist, staff, robe, and feet also show no doubling, clipping, shift, or alpha artifact.",
+      "comparison_path": "evidence/pose-admission-v2/WJFF-0008/comparison.png"
+    },
+    {
+      "id": "WJFF-0009",
+      "decision": "approved",
+      "notes": "Source and projection match exactly across the raised wings, membrane boundaries, hat, face, staff, fist, robe, and feet with no edge displacement, cropping, or transparency mismatch.",
+      "comparison_path": "evidence/pose-admission-v2/WJFF-0009/comparison.png"
+    },
+    {
+      "id": "WJFF-0010",
+      "decision": "approved",
+      "notes": "Final flight frame aligns exactly through both high wings and interior membranes, hat, face, staff, fist, robe, and feet; no doubled edges, missing pixels, crop, or alpha artifact is visible.",
+      "comparison_path": "evidence/pose-admission-v2/WJFF-0010/comparison.png"
+    }
+  ]
+}

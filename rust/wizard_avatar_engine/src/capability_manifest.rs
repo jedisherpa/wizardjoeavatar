@@ -18,6 +18,7 @@ use crate::pose_asset::{
     embedded_pose_archive_sha256, load_embedded_pose_library, IMPORTED_POSE_SCHEMA_VERSION,
 };
 use crate::pose_clip::{PoseClipDefinition, POSE_CLIPS};
+use crate::pose_graph_runtime::runtime_pose_graph_catalog;
 use crate::state::{Direction, Expression, Locomotion, WizardState};
 use serde::{Deserialize, Serialize};
 use sha2::{Digest, Sha256};
@@ -819,28 +820,19 @@ fn legacy_clip_entry(
     clip: &PoseClipDefinition,
     library: &PoseLibrary,
 ) -> Result<CapabilityEntryV1, String> {
-    let directions = sorted_unique(
-        clip.steps
-            .iter()
-            .filter_map(|step| library.for_id(step.pose_id).map(|pose| pose.direction)),
-    );
-    let staff_count = clip
+    let step_metadata = clip
         .steps
         .iter()
-        .filter(|step| {
-            library
-                .for_id(step.pose_id)
-                .is_some_and(|pose| pose.motion.staff_present)
-        })
+        .map(|step| legacy_clip_pose_metadata(step.pose_id, library))
+        .collect::<Result<Vec<_>, _>>()?;
+    let directions = sorted_unique(step_metadata.iter().map(|metadata| metadata.direction));
+    let staff_count = step_metadata
+        .iter()
+        .filter(|metadata| metadata.staff_present)
         .count();
-    let effect_count = clip
-        .steps
+    let effect_count = step_metadata
         .iter()
-        .filter(|step| {
-            library
-                .for_id(step.pose_id)
-                .is_some_and(|pose| pose.motion.effect_present)
-        })
+        .filter(|metadata| metadata.effect_present)
         .count();
     let mut props = Vec::new();
     props.extend(prop_coverage(
@@ -899,6 +891,44 @@ fn legacy_clip_entry(
         narrative_uses: applicable(legacy_clip_narrative_uses(category)),
         inappropriate_uses: applicable([InappropriateUseV1::MediaTimeChoreographyWithoutScore]),
         fallback: FallbackTopologyV1::NotApplicable,
+    })
+}
+
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+struct LegacyClipPoseMetadata {
+    direction: Direction,
+    staff_present: bool,
+    effect_present: bool,
+}
+
+fn legacy_clip_pose_metadata(
+    pose_id: &str,
+    library: &PoseLibrary,
+) -> Result<LegacyClipPoseMetadata, String> {
+    if let Some(pose) = library.for_id(pose_id) {
+        return Ok(LegacyClipPoseMetadata {
+            direction: pose.direction,
+            staff_present: pose.motion.staff_present,
+            effect_present: pose.motion.effect_present,
+        });
+    }
+
+    let graph = runtime_pose_graph_catalog()?
+        .primary_for_semantic_id(pose_id)
+        .ok_or_else(|| format!("legacy clip references unknown pose {pose_id}"))?;
+    let direction = graph
+        .direction
+        .parse::<Direction>()
+        .map_err(|error| format!("legacy clip pose {pose_id} has invalid direction: {error}"))?;
+    let staff_present = pose_id.contains("staff")
+        || graph.category == "prop_interaction"
+        || graph.category == "magic";
+    let effect_present =
+        graph.category == "magic" || pose_id.contains("magic") || pose_id.contains("effect");
+    Ok(LegacyClipPoseMetadata {
+        direction,
+        staff_present,
+        effect_present,
     })
 }
 
@@ -2084,11 +2114,14 @@ fn pose_family_narrative_uses(family: PoseMotionFamily) -> Vec<NarrativeUseV1> {
 fn legacy_clip_category(id: &str) -> Result<LegacyClipCategoryV1, String> {
     let category = match id {
         "ground_walk" | "ground_run" | "wjfl_run" => LegacyClipCategoryV1::GroundLocomotion,
-        "hover_flap" | "bank_glide" => LegacyClipCategoryV1::FlightPoseSequence,
+        "hover_flap" | "forward_camera_flight" | "bank_glide" => {
+            LegacyClipCategoryV1::FlightPoseSequence
+        }
         "staff_combo" | "reaction_recover" | "wjfl_guard" | "wjfl_reaction" => {
             LegacyClipCategoryV1::Action
         }
-        "celebrate" => LegacyClipCategoryV1::Celebration,
+        "celebrate" | "dance_groove" => LegacyClipCategoryV1::Celebration,
+        "breakdance" => LegacyClipCategoryV1::Action,
         "wjfl_feelings" => LegacyClipCategoryV1::EmotionShowcase,
         "conversation" | "explain" | "point" | "think" | "wjfl_social" => {
             LegacyClipCategoryV1::Conversation
@@ -2111,7 +2144,7 @@ fn legacy_clip_energy(category: LegacyClipCategoryV1) -> u8 {
 
 fn legacy_clip_emotions(id: &str) -> Vec<Emotion> {
     match id {
-        "celebrate" => vec![Emotion::Joy, Emotion::Pride],
+        "celebrate" | "dance_groove" => vec![Emotion::Joy, Emotion::Pride],
         "reaction_recover" | "wjfl_reaction" => vec![Emotion::Surprise],
         "wjfl_feelings" => non_neutral_emotions(),
         _ => Vec::new(),

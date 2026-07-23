@@ -16,7 +16,7 @@ use wizard_avatar_engine::evidence::{
 };
 use wizard_avatar_engine::frame_source::{DEFAULT_COLS, DEFAULT_ROWS};
 use wizard_avatar_engine::pose::{
-    analyze_pose_topology, sample_pose, AnchorId, PoseSample, PoseTopologyMetrics,
+    analyze_pose_topology, sample_pose, AnchorId, PoseLibrary, PoseSample, PoseTopologyMetrics,
 };
 use wizard_avatar_engine::projection::project_world_to_screen;
 use wizard_avatar_engine::projection::{ProjectedPoseContext, ProjectionHistory};
@@ -511,9 +511,26 @@ fn render_cells(
     state: &WizardState,
     projection: &mut ProjectionHistory,
 ) -> anyhow::Result<(Vec<u8>, StageMetrics, PoseTopologyMetrics, PoseSample)> {
-    let pose = sample_pose(state).map_err(anyhow::Error::msg)?;
-    let context = projection.project(state, &pose, DEFAULT_COLS, DEFAULT_ROWS);
     let mut sampled = state.clone();
+    let library = PoseLibrary::reference().map_err(anyhow::Error::msg)?;
+    if sampled
+        .pose_id
+        .as_deref()
+        .is_some_and(|pose_id| library.for_id(pose_id).is_none())
+    {
+        // This binary preserves the retired cell-renderer evidence contract. New
+        // production-alpha poses are verified by pixelgraph_runtime_evidence;
+        // use the directional cell fallback here instead of asking the old
+        // procedural library to interpret a graph-only semantic ID.
+        sampled.pose_id = None;
+        sampled.previous_pose_id = None;
+        sampled.pose_blend = 1.0;
+        sampled.pose_handoff = true;
+        sampled.pose_clip_id = None;
+        sampled.pose_clip_step = None;
+    }
+    let pose = sample_pose(&sampled).map_err(anyhow::Error::msg)?;
+    let context = projection.project(state, &pose, DEFAULT_COLS, DEFAULT_ROWS);
     sampled.screen_position = ScreenPoint {
         x: context.quantized_root.0 as f32,
         y: context.quantized_root.1 as f32,
@@ -1019,7 +1036,7 @@ fn transition_recipes() -> Vec<ReplayTransition> {
             "walk -> turn",
             locomotion,
             vec![cmd("move", json!({"x": 2.0, "z": 5.0}))],
-            vec![cmd("move", json!({"x": 2.0, "z": 3.0}))],
+            vec![cmd("move", json!({"x": 1.75, "z": 3.0}))],
             false,
         ),
         recipe(
@@ -1027,7 +1044,7 @@ fn transition_recipes() -> Vec<ReplayTransition> {
             "turn -> walk",
             locomotion,
             vec![cmd("face", json!({"direction": "southeast"}))],
-            vec![cmd("move", json!({"x": 2.0, "z": 3.0}))],
+            vec![cmd("move", json!({"x": 1.75, "z": 3.0}))],
             false,
         ),
         recipe(
@@ -1254,7 +1271,7 @@ fn transition_recipes() -> Vec<ReplayTransition> {
             "staff during turning",
             actions,
             vec![cmd("move", json!({"x": 2.0, "z": 5.0}))],
-            vec![cmd("move", json!({"x": 2.0, "z": 3.0}))],
+            vec![cmd("move", json!({"x": 1.75, "z": 3.0}))],
             false,
         ),
         recipe(

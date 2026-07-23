@@ -11,6 +11,7 @@ serde = { version = "1", features = ["derive"] }
 serde_json = "1"
 sha2 = "0.10"
 thiserror = "2"
+zip = { version = "2", default-features = false, features = ["deflate"] }
 
 [lib]
 name = "wizard_avatar_pose_tool"
@@ -27,3 +28,67 @@ path = "src/feelings_intake_main.rs"
 [[bin]]
 name = "wizard-avatar-pose-promote"
 path = "src/pose_promote_main.rs"
+
+[[bin]]
+name = "wizard-avatar-pixelgraph-promote"
+path = "src/pixelgraph_promote_main.rs"
+
+[[bin]]
+name = "wizard-avatar-source-ledger"
+path = "src/source_ledger_main.rs"
+
+[[bin]]
+name = "wizard-avatar-pose-ingest-one"
+path = "src/pose_ingest_one_main.rs"
+
+[[bin]]
+name = "wizard-avatar-pose-review-one"
+path = "src/pose_review_one_main.rs"
+
+[[bin]]
+name = "wizard-avatar-pose-reject-one"
+path = "src/pose_reject_one_main.rs"
+
+[[bin]]
+name = "wizard-avatar-pose-reopen-one"
+path = "src/pose_reopen_one_main.rs"
+
+[[bin]]
+name = "wizard-avatar-pose-exclude-non-pose"
+path = "src/pose_exclude_non_pose_main.rs"
+
+[[bin]]
+name = "wizard-avatar-matte-audit"
+path = "src/matte_audit_main.rs"
+
+[[bin]]
+name = "wizard-avatar-pixel-sample"
+path = "src/pixel_sample_main.rs"
+
+[[bin]]
+name = "wizard-avatar-newsroom-ingest-one"
+path = "src/newsroom_ingest_one_main.rs"
+
+[[bin]]
+name = "wizard-avatar-newsroom-review-one"
+path = "src/newsroom_review_one_main.rs"
+
+[[bin]]
+name = "wizard-avatar-newsroom-layer-compile-one"
+path = "src/newsroom_layer_compile_one_main.rs"
+
+[[bin]]
+name = "wizard-avatar-newsroom-layer-review-one"
+path = "src/newsroom_layer_review_one_main.rs"
+
+[[bin]]
+name = "wizard-avatar-newsroom-promote"
+path = "src/newsroom_promote_main.rs"
+
+[[bin]]
+name = "wizard-avatar-production-alpha"
+path = "src/production_alpha_main.rs"
+
+[[bin]]
+name = "wizard-avatar-production-alpha-finalize"
+path = "src/production_alpha_finalize_main.rs"

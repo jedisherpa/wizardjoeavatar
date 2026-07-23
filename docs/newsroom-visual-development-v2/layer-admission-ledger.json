@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "ledger_id": "wizard_joe_newsroom_v2_layer_admission",
+  "source_admission_ledger_path": "docs/newsroom-visual-development-v2/admission-ledger.json",
+  "source_admission_ledger_sha256": "09bf54612394b0c8514c7213aea609f2b7d71bf9321ee2b2ace9714b2ce65f6a",
+  "source_manifest_sha256": "0bddadf7b3c7fd943d7dad82f6be04270414c3f21d4657eb9304b5d8e0793e3a",
+  "target_specs_path": "evidence/newsroom-visual-development-v2/target-specs.json",
+  "target_specs_sha256": "c50c7bdb7f532d7b10dc7521c94a14489dfa3ffba82a6a1abe0fa36f65b36db8",
+  "expected_source_count": 6,
+  "verified_source_count": 6,
+  "awaiting_visual_comparison_count": 0,
+  "failed_source_count": 0,
+  "queued_source_count": 0,
+  "entries": [
+    {
+      "sequence": 1,
+      "source_id": "main_anchor_desk_v2",
+      "source_graph_sha256": "12a972c5a31a2c886c243c82f59c78d922385f2dabf6d0ee8f746a3aed287715",
+      "source_target_spec_sha256": "cb81a281d59c4ee40d7e5581d3d9024b4dcddc8a0193cda4d864a533507e2392",
+      "status": "visually_verified",
+      "verification_report_path": "evidence/newsroom-visual-development-v2/layer-admission/main_anchor_desk_v2/verification.json",
+      "recomposition_iou": 1.0,
+      "recomposition_color_fidelity": 1.0
+    },
+    {
+      "sequence": 2,
+      "source_id": "standing_explainer_wall_v2",
+      "source_graph_sha256": "6d768a4bef143257eb625acf4be410360e9c489992be2ffcb5762f61153ee1af",
+      "source_target_spec_sha256": "7973682f9ea9c02d90cd22d45d35353d969df8c1be0e33632c08c849e2eb0001",
+      "status": "visually_verified",
+      "verification_report_path": "evidence/newsroom-visual-development-v2/layer-admission/standing_explainer_wall_v2/verification.json",
+      "recomposition_iou": 1.0,
+      "recomposition_color_fidelity": 1.0
+    },
+    {
+      "sequence": 3,
+      "source_id": "cohost_interview_v2",
+      "source_graph_sha256": "adc650540317e37a4e90c52514d1e24b9376e623a4f47d93916fbc6b6009af4a",
+      "source_target_spec_sha256": "d9069eeecb669983f1ef01c3ab7d4f62c54a447fdaa127e3b86e2158dd7f817b",
+      "status": "visually_verified",
+      "verification_report_path": "evidence/newsroom-visual-development-v2/layer-admission/cohost_interview_v2/verification.json",
+      "recomposition_iou": 1.0,
+      "recomposition_color_fidelity": 1.0
+    },
+    {
+      "sequence": 4,
+      "source_id": "magical_breaking_field_v2",
+      "source_graph_sha256": "945a1bd385ee18e5b76c4ab454b7f2aea403082cc2fc965a262bc6e58b6d0791",
+      "source_target_spec_sha256": "2efd46e9f8f993a0d1e7c07e088bc14f58a83241e53a784844c5cd2d65ed545d",
+      "status": "visually_verified",
+      "verification_report_path": "evidence/newsroom-visual-development-v2/layer-admission/magical_breaking_field_v2/verification.json",
+      "recomposition_iou": 1.0,
+      "recomposition_color_fidelity": 1.0
+    },
+    {
+      "sequence": 5,
+      "source_id": "studio_furniture_displays_v2",
+      "source_graph_sha256": "a8d2055a8f38906d223d6131477bebd784c79bd3770ea6cefd124187c033a326",
+      "source_target_spec_sha256": "ac8ef0ba18fc21d9a280d816161ddaafc3e442233edc303af33aedc0426bebfd",
+      "status": "visually_verified",
+      "verification_report_path": "evidence/newsroom-visual-development-v2/layer-admission/studio_furniture_displays_v2/verification.json",
+      "recomposition_iou": 1.0,
+      "recomposition_color_fidelity": 1.0
+    },
+    {
+      "sequence": 6,
+      "source_id": "broadcast_magic_overlays_v2",
+      "source_graph_sha256": "b8e5000640cb363cf7d43db872fd8b8acfd9e1830e7ae95079ecf54f3d346390",
+      "source_target_spec_sha256": "1884588e0560de5d0f6a15d7d055f5738a90d253f214815ab04e72f230aca6b6",
+      "status": "visually_verified",
+      "verification_report_path": "evidence/newsroom-visual-development-v2/layer-admission/broadcast_magic_overlays_v2/verification.json",
+      "recomposition_iou": 1.0,
+      "recomposition_color_fidelity": 1.0
+    }
+  ]
+}

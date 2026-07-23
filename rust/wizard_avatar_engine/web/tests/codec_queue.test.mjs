@@ -109,11 +109,12 @@ test("resync and invalidate clear stale complete presentation frames", () => {
 
 test("resync invalidates an in-flight decode before it can present", async () => {
   let release;
-  let resetCount = 0;
+  let decoderCount = 0;
   const pending = new Promise((resolve) => { release = resolve; });
   const client = new AscilineStreamClient({
     decoderFactory: () => ({
-      reset() { resetCount += 1; },
+      id: decoderCount += 1,
+      reset() {},
       async decode() {
         await pending;
         return { frameIndex: 1, frame: new Uint8Array([32, 255, 255, 255]) };
@@ -128,9 +129,46 @@ test("resync invalidates an in-flight decode before it can present", async () =>
   client.requestResync("generation_reset");
   release();
   await drain;
-  assert.equal(resetCount, 1);
+  assert.equal(decoderCount, 2, "resync replaces rather than resets the in-flight decoder");
   assert.equal(client.presentationQueue.length, 0);
   assert.equal(client.awaitingKeyframe, true);
+});
+
+test("stale decoder completion cannot poison the replacement generation", async () => {
+  let releaseFirst;
+  const firstPending = new Promise((resolve) => { releaseFirst = resolve; });
+  let decoderCount = 0;
+  const histories = [];
+  const client = new AscilineStreamClient({
+    decoderFactory: () => {
+      const decoderId = decoderCount += 1;
+      let previous = null;
+      return {
+        reset() { previous = null; },
+        async decode(message) {
+          const { sequence } = inspectEnvelope(message);
+          if (decoderId === 1) await firstPending;
+          previous = sequence;
+          histories.push([decoderId, previous]);
+          return { frameIndex: sequence, frame: new Uint8Array([32, 255, 255, 255]) };
+        },
+      };
+    },
+    sendControl() {},
+    now: () => 0,
+  });
+  client.beginGeneration({ fps: 24, cols: 1, rows: 1, epoch: 17, cellBytes: 4, codec: 1 });
+  client.enqueue(envelope(1, 0, [32, 255, 255, 255]));
+  const staleDrain = client.drain();
+  client.requestResync("queue_overflow");
+  client.enqueue(envelope(2, 0, [32, 255, 255, 255]));
+  await client.drain();
+  releaseFirst();
+  await staleDrain;
+
+  assert.deepEqual(histories, [[2, 2], [1, 1]]);
+  assert.deepEqual(client.presentationQueue.items.map((frame) => frame.sequence), [2]);
+  assert.equal(client.lastValidSequence, 2);
 });
 
 test("hidden resume drops stale work and requests one fresh keyframe", () => {

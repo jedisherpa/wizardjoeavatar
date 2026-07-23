@@ -2,7 +2,7 @@ use crate::codec::{encode_frame, CodecError, CodecTag, EncodedFrame, CELL_BYTES}
 use crate::controller::{CommandResult, WizardAvatarController, WizardCommand};
 use crate::pose::sample_pose;
 use crate::projection::ProjectionHistory;
-use crate::renderer::render_stage;
+use crate::renderer::{render_environment, render_stage};
 use crate::state::{ScreenPoint, WizardState};
 use serde::Serialize;
 
@@ -116,7 +116,7 @@ impl ProceduralWizardFrameSource {
 
     pub fn sample_state(&mut self, state: &WizardState) -> WizardCellFrame {
         let mut sampled_state = state.clone();
-        let cells = if let Ok(pose) = sample_pose(&sampled_state) {
+        if let Ok(pose) = sample_pose(&sampled_state) {
             let context = self
                 .projection
                 .project(&sampled_state, &pose, self.cols, self.rows);
@@ -125,10 +125,8 @@ impl ProceduralWizardFrameSource {
                 y: context.quantized_root.1 as f32,
             };
             sampled_state.display_scale = context.quantized_scale;
-            render_stage(&sampled_state, self.cols, self.rows).to_frame_bytes()
-        } else {
-            render_state_to_cells(&mut sampled_state, self.cols, self.rows)
-        };
+        }
+        let cells = render_environment(&sampled_state, self.cols, self.rows).to_frame_bytes();
         WizardCellFrame {
             cols: self.cols,
             rows: self.rows,
@@ -230,6 +228,8 @@ fn apply_encoded_stats(frame: &mut WizardCellFrame, encoded: &EncodedFrame) {
 mod tests {
     use super::*;
     use crate::codec::decode_frame;
+    use crate::renderer::build_background;
+    use crate::state::SceneMode;
 
     #[test]
     fn source_emits_direct_procedural_frame() {
@@ -237,7 +237,7 @@ mod tests {
         let frame = source.next_frame();
         assert_eq!(frame.cells.len(), DEFAULT_COLS * DEFAULT_ROWS * CELL_BYTES);
         assert_eq!(frame.frame_index, 0);
-        assert!(frame.cells.chunks_exact(4).any(|cell| cell[0] == b'#'));
+        assert!(frame.cells.chunks_exact(4).any(|cell| cell[0] == b'.'));
     }
 
     #[test]
@@ -259,5 +259,24 @@ mod tests {
             .next_encoded_frame("adaptive")
             .expect("after reset command");
         assert!(frame.is_keyframe);
+    }
+
+    #[test]
+    fn pixelgraph_only_pose_keeps_the_newsroom_environment() {
+        let mut source = ProceduralWizardFrameSource::default();
+        let state = WizardState {
+            scene_mode: SceneMode::NewsroomMain,
+            pose_id: Some("dance_groove_step".to_string()),
+            ..WizardState::default()
+        };
+        assert!(sample_pose(&state).is_err());
+
+        let frame = source.sample_state(&state);
+        let expected = render_environment(&state, DEFAULT_COLS, DEFAULT_ROWS).to_frame_bytes();
+        assert_eq!(frame.cells, expected);
+        assert_ne!(
+            frame.cells,
+            build_background(DEFAULT_COLS, DEFAULT_ROWS).to_frame_bytes()
+        );
     }
 }

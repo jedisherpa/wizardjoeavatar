@@ -1,9 +1,8 @@
 use serde_json::json;
 use std::collections::BTreeSet;
 use wizard_avatar_engine::controller::{WizardAvatarController, WizardCommand};
-use wizard_avatar_engine::pose::PoseLibrary;
 use wizard_avatar_engine::pose_clip::POSE_CLIPS;
-use wizard_avatar_engine::pose_program::FUTURE_POSE_MOTION_SPECS;
+use wizard_avatar_engine::pose_graph_runtime::runtime_pose_graph_catalog;
 
 fn command(
     controller: &mut WizardAvatarController,
@@ -15,8 +14,8 @@ fn command(
 }
 
 #[test]
-fn rust_clips_cover_every_new_catalog_record_and_resolve_every_step() {
-    let library = PoseLibrary::reference().expect("pose library");
+fn rust_clips_resolve_every_step_against_the_replacement_catalog() {
+    let catalog = runtime_pose_graph_catalog().expect("replacement pose graph catalog");
     let clip_ids = POSE_CLIPS
         .iter()
         .map(|clip| clip.id)
@@ -27,37 +26,18 @@ fn rust_clips_cover_every_new_catalog_record_and_resolve_every_step() {
         .iter()
         .flat_map(|clip| clip.steps.iter().map(|step| step.pose_id))
         .collect::<BTreeSet<_>>();
-    for spec in FUTURE_POSE_MOTION_SPECS {
-        assert!(
-            covered.contains(spec.semantic_id),
-            "{} is not scheduled by a Rust clip",
-            spec.semantic_id
-        );
-    }
-    let wjfl = library
-        .pose_ids()
-        .filter_map(|id| library.for_id(id))
-        .filter_map(|pose| {
-            pose.motion
-                .candidate_id
-                .as_deref()
-                .filter(|candidate| candidate.starts_with("WJFL-"))
-                .map(|_| pose.id.as_str())
-        })
-        .collect::<BTreeSet<_>>();
-    assert_eq!(wjfl.len(), 50);
-    for pose_id in wjfl {
-        assert!(
-            covered.contains(pose_id),
-            "{pose_id} is not scheduled by a Rust clip"
-        );
-    }
     for pose_id in covered {
         assert!(
-            library.for_id(pose_id).is_some(),
-            "{pose_id} does not resolve"
+            catalog.for_runtime_pose_id(pose_id).is_some(),
+            "{pose_id} does not resolve to a promoted replacement graph"
         );
     }
+    assert_eq!(catalog.manifest().entries.len(), 260);
+    assert!(catalog
+        .manifest()
+        .entries
+        .iter()
+        .all(|entry| entry.primary_for_semantic_id && entry.exact_rgba_equal));
 }
 
 #[test]
@@ -91,7 +71,10 @@ fn one_shot_clip_restores_and_replacement_cancels_the_old_generation() {
     }
     let interrupted_pose = controller.current_state().pose_id.clone();
     let interrupted_blend = controller.current_state().pose_blend;
-    assert!(interrupted_blend < 1.0);
+    assert_eq!(
+        interrupted_blend, 1.0,
+        "authored flight frames are exact cuts"
+    );
     command(
         &mut controller,
         "pose_clip",
@@ -101,8 +84,16 @@ fn one_shot_clip_restores_and_replacement_cancels_the_old_generation() {
         controller.current_state().pose_clip_id.as_deref(),
         Some("staff_combo")
     );
-    assert_eq!(controller.current_state().pose_id, interrupted_pose);
-    assert_eq!(controller.current_state().pose_blend, interrupted_blend);
+    assert_eq!(
+        controller.current_state().pose_id.as_deref(),
+        Some("staff_grip_default")
+    );
+    assert_eq!(
+        controller.current_state().previous_pose_id,
+        interrupted_pose,
+        "replacement must enter from the exact flight frame that was visible"
+    );
+    assert!(controller.current_state().pose_blend < 1.0);
     assert!(controller.current_state().pose_clip_generation > first_generation);
 
     let mut replacement_started = false;
@@ -125,7 +116,7 @@ fn one_shot_clip_restores_and_replacement_cancels_the_old_generation() {
     command(
         &mut controller,
         "pose",
-        json!({"pose_id":"front_idle", "transition_ms":120}),
+        json!({"pose_id":"idle_warm_camera_ready", "transition_ms":120}),
     );
     assert_eq!(controller.current_state().pose_clip_id, None);
 }
@@ -195,17 +186,35 @@ fn action_commands_use_the_same_rust_clip_scheduler() {
 }
 
 #[test]
+fn raw_pose_commands_reject_retired_graph_ids() {
+    let mut controller = WizardAvatarController::default();
+    let retired = controller.apply_command(WizardCommand::new(
+        "pose",
+        json!({"pose_id":"front_idle_wings", "transition_ms":120}),
+    ));
+    assert!(!retired.ok);
+    assert!(retired.message.contains("unsupported pose"));
+
+    let retired_restore = controller.apply_command(WizardCommand::new(
+        "pose_clip",
+        json!({"clip_id":"point", "restore_pose_id":"front_idle_wings"}),
+    ));
+    assert!(!retired_restore.ok);
+    assert!(retired_restore.message.contains("unsupported restore pose"));
+}
+
+#[test]
 fn a_clip_enters_from_the_current_direction_pose() {
     let mut controller = WizardAvatarController::default();
     command(&mut controller, "pose_clip", json!({"clip_id":"point"}));
 
     controller.step_tick();
     let state = controller.current_state();
+    assert_eq!(state.pose_id.as_deref(), Some("hand_point_screen_left"));
     assert_eq!(
-        state.pose_id.as_deref(),
-        Some("front_point_direct_staff_held")
+        state.previous_pose_id.as_deref(),
+        Some("idle_warm_camera_ready")
     );
-    assert_eq!(state.previous_pose_id.as_deref(), Some("front_idle"));
     assert!(state.pose_blend < 1.0);
     assert!(!state.pose_handoff);
 }
@@ -222,7 +231,7 @@ fn idle_returns_through_the_direction_pose_before_clearing_the_override() {
     }
     assert_eq!(
         controller.current_state().pose_id.as_deref(),
-        Some("front_point_direct_staff_held")
+        Some("hand_point_screen_left")
     );
 
     command(
@@ -232,7 +241,7 @@ fn idle_returns_through_the_direction_pose_before_clearing_the_override() {
     );
     assert_eq!(
         controller.current_state().previous_pose_id.as_deref(),
-        Some("front_point_direct_staff_held")
+        Some("hand_point_screen_left")
     );
     for _ in 0..180 {
         controller.step_tick();

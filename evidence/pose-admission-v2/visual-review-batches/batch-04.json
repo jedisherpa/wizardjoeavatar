@@ -1,0 +1,174 @@
+{
+  "batch_id": "batch-04",
+  "reviewer": "Codex",
+  "range": {
+    "start": "WJPA-0097",
+    "end": "WJPA-0128"
+  },
+  "reviewed_count": 32,
+  "approved_count": 32,
+  "rejected_count": 0,
+  "overall_status": "approved",
+  "entries": [
+    {
+      "pose_id": "WJPA-0097",
+      "status": "approved",
+      "visual_note": "Anxious hand-to-chest pose aligns exactly; face, fingers, staff, wing tips, robe, and shoes show no doubling, clipping, or mismatch marks."
+    },
+    {
+      "pose_id": "WJPA-0098",
+      "status": "approved",
+      "visual_note": "Angry planted pose is identical panel-for-panel; clenched fist, brows, staff, wings, robe edges, and feet remain fully registered."
+    },
+    {
+      "pose_id": "WJPA-0099",
+      "status": "approved",
+      "visual_note": "Frustrated head-touch silhouette matches exactly with clean fingers, hat point, facial detail, staff, wings, and lower body."
+    },
+    {
+      "pose_id": "WJPA-0100",
+      "status": "approved",
+      "visual_note": "Determined stance preserves the complete source silhouette; fist, staff grip, wing edges, robe split, and shoes have no visible displacement."
+    },
+    {
+      "pose_id": "WJPA-0101",
+      "status": "approved",
+      "visual_note": "Skeptical crossed-arm pose is precisely aligned; overlapping arms, hand, face, staff, wings, robe, and feet show no added or missing geometry."
+    },
+    {
+      "pose_id": "WJPA-0102",
+      "status": "approved",
+      "visual_note": "Concerned open-hand pose matches the source exactly; palm and fingertips, tilted head, staff, wing tips, robe, and shoes remain clean."
+    },
+    {
+      "pose_id": "WJPA-0103",
+      "status": "approved",
+      "visual_note": "Tired leaning pose has exact source/projected registration with no doubled contour around the tilted hat, face, hanging arm, staff, wings, or feet."
+    },
+    {
+      "pose_id": "WJPA-0104",
+      "status": "approved",
+      "visual_note": "Reassuring gesture is preserved exactly; thumb, fingers, expression, staff, wings, robe hem, and shoes show no clipping or mismatch."
+    },
+    {
+      "pose_id": "WJPA-0105",
+      "status": "approved",
+      "visual_note": "Thoughtful chin-hand pose aligns cleanly across the overlapping hand and beard, staff, wings, hat, robe, and feet."
+    },
+    {
+      "pose_id": "WJPA-0106",
+      "status": "approved",
+      "visual_note": "Friendly open-palm pose is visually identical; palm silhouette, face, staff grip, wing tips, robe edges, and shoes remain fully registered."
+    },
+    {
+      "pose_id": "WJPA-0107",
+      "status": "approved",
+      "visual_note": "Sincere hand-over-heart pose matches exactly with clean sleeve overlap, fingers, staff, wings, robe split, and feet."
+    },
+    {
+      "pose_id": "WJPA-0108",
+      "status": "approved",
+      "visual_note": "Grateful raised-hand gesture shows exact alignment; spread fingers, hat, face, staff, wings, robe, and shoes contain no doubled edges."
+    },
+    {
+      "pose_id": "WJPA-0109",
+      "status": "approved",
+      "visual_note": "Triumphant raised-fist pose is source-faithful throughout the fist, long sleeve, face, staff, wings, robe, and feet."
+    },
+    {
+      "pose_id": "WJPA-0110",
+      "status": "approved",
+      "visual_note": "Relieved neutral gesture matches panel-for-panel; relaxed hand, face, staff, wing tips, robe edges, and shoes show no mismatch marks."
+    },
+    {
+      "pose_id": "WJPA-0111",
+      "status": "approved",
+      "visual_note": "Palm-up hand gesture retains exact silhouette and placement across the fingers, sleeves, staff, wings, hat, robe, and feet."
+    },
+    {
+      "pose_id": "WJPA-0112",
+      "status": "approved",
+      "visual_note": "Two-hand presentation pose aligns exactly; horizontal palm and supporting sleeve, staff grip, wings, robe, and shoes remain clean."
+    },
+    {
+      "pose_id": "WJPA-0113",
+      "status": "approved",
+      "visual_note": "Extended open-hand gesture is visually identical with no clipping or displacement at the fingertips, sleeve, face, staff, wings, robe, or feet."
+    },
+    {
+      "pose_id": "WJPA-0114",
+      "status": "approved",
+      "visual_note": "Long pointing gesture preserves every source contour; extended finger, arm, staff, hat, wings, robe edges, and shoes show no doubling."
+    },
+    {
+      "pose_id": "WJPA-0115",
+      "status": "approved",
+      "visual_note": "Cross-body pointing pose matches exactly through the pointing hand, overlapping sleeves, staff grip, wings, robe, and feet."
+    },
+    {
+      "pose_id": "WJPA-0116",
+      "status": "approved",
+      "visual_note": "Raised index-finger pose is fully registered; fingertip, hand joints, long sleeve, face, staff, wings, robe, and shoes show no mismatch."
+    },
+    {
+      "pose_id": "WJPA-0117",
+      "status": "approved",
+      "visual_note": "Downward pointing gesture aligns cleanly across the angled head, finger, arm, staff, wing tips, robe, and feet with no extra geometry."
+    },
+    {
+      "pose_id": "WJPA-0118",
+      "status": "approved",
+      "visual_note": "Stop-palm pose matches panel-for-panel; all five fingers, cuff opening, staff, wings, face, robe, and shoes remain source-exact."
+    },
+    {
+      "pose_id": "WJPA-0119",
+      "status": "approved",
+      "visual_note": "Conversational palm-up pose is precisely aligned; hand and fingertips, tilted head, staff, wings, robe split, and feet show no visible artifacts."
+    },
+    {
+      "pose_id": "WJPA-0120",
+      "status": "approved",
+      "visual_note": "Hand-to-chest emphasis pose preserves the exact source silhouette with clean fist, facial detail, staff grip, wings, robe, and shoes."
+    },
+    {
+      "pose_id": "WJPA-0121",
+      "status": "approved",
+      "visual_note": "Neutral hand pose aligns exactly throughout the small hanging hand, staff, face, wings, robe hem, and feet; no clipping or mismatch marks are visible."
+    },
+    {
+      "pose_id": "WJPA-0122",
+      "status": "approved",
+      "visual_note": "Double staff-grip pose is identical across both overlapping hands, sleeves, staff hook, wings, hat, robe, and shoes."
+    },
+    {
+      "pose_id": "WJPA-0123",
+      "status": "approved",
+      "visual_note": "Single staff-grip stance matches exactly; free fist, staff hand, face, wings, robe contours, and feet show no displacement or added pixels."
+    },
+    {
+      "pose_id": "WJPA-0124",
+      "status": "approved",
+      "visual_note": "Vertical raised-staff pose remains fully source-faithful; elevated staff hook, hand, muted wing interiors, robe, and shoes align without clipping."
+    },
+    {
+      "pose_id": "WJPA-0125",
+      "status": "approved",
+      "visual_note": "Diagonal staff-ready pose aligns exactly across the wide staff silhouette, both grips, face, wings, bent robe legs, and shoes."
+    },
+    {
+      "pose_id": "WJPA-0126",
+      "status": "approved",
+      "visual_note": "Horizontal staff pose is perfectly registered from hook to far tip; both hands, wings, hat, robe stance, and feet show no mismatch."
+    },
+    {
+      "pose_id": "WJPA-0127",
+      "status": "approved",
+      "visual_note": "Close two-hand staff hold matches panel-for-panel; hands, staff segments, face, wing tips, robe edges, and shoes remain clean."
+    },
+    {
+      "pose_id": "WJPA-0128",
+      "status": "approved",
+      "visual_note": "Book-holding pose is source-exact; book covers, page edges, gold emblem, hands, staff, wings, robe, and feet show no doubling or non-source geometry."
+    }
+  ]
+}

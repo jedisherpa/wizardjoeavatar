@@ -24,6 +24,7 @@ use wizard_avatar_engine::motion_catalog::{embedded_motion_graph_json, shadow_mo
 use wizard_avatar_engine::motion_graph::{CapabilityTier, MOTION_GRAPH_SCHEMA_VERSION};
 use wizard_avatar_engine::pose::PoseLibrary;
 use wizard_avatar_engine::pose_clip::POSE_CLIPS;
+use wizard_avatar_engine::pose_graph_runtime::runtime_pose_graph_catalog;
 use wizard_avatar_engine::server;
 use wizard_avatar_engine::state::{
     Action, Direction, EffectState, Expression, Locomotion, MouthShape, StaffState,
@@ -31,7 +32,7 @@ use wizard_avatar_engine::state::{
 };
 
 const EXPECTED_MANIFEST_SHA256: &str =
-    "4ef14b34a6ce9b8b81c89e59a25b9f5fd142aff19757069d692b39422650b482";
+    "c23ac67eb8c493df980165a3776b081a6bbe2074c5b0731fcdd8db587ffbc36a";
 
 fn ids_for(
     manifest: &wizard_avatar_engine::capability_manifest::CapabilityManifestV1,
@@ -69,7 +70,7 @@ fn manifest_is_an_exact_census_of_runtime_and_contract_registries() {
         .graph;
 
     assert_eq!(manifest.schema_version, CAPABILITY_MANIFEST_SCHEMA_VERSION);
-    assert_eq!(manifest.capabilities.len(), 209);
+    assert_eq!(manifest.capabilities.len(), 212);
     assert_eq!(manifest.character_id, WizardState::default().character_id);
     assert_eq!(manifest.pose_geometry_count, library.pose_ids().count());
     assert_eq!(manifest.pose_alias_count, library.alias_count());
@@ -597,24 +598,12 @@ fn legacy_clip_props_include_exact_staff_and_effect_coverage() {
         let staff_count = clip
             .steps
             .iter()
-            .filter(|step| {
-                library
-                    .for_id(step.pose_id)
-                    .expect("step pose")
-                    .motion
-                    .staff_present
-            })
+            .filter(|step| expected_pose_prop_presence(library, step.pose_id).0)
             .count();
         let effect_count = clip
             .steps
             .iter()
-            .filter(|step| {
-                library
-                    .for_id(step.pose_id)
-                    .expect("step pose")
-                    .motion
-                    .effect_present
-            })
+            .filter(|step| expected_pose_prop_presence(library, step.pose_id).1)
             .count();
         let mut expected = BTreeSet::new();
         add_expected_prop(
@@ -650,6 +639,27 @@ fn legacy_clip_props_include_exact_staff_and_effect_coverage() {
     assert!(staff_combo
         .prop_requirements
         .contains(&PropRequirementV1::EffectSomeSamples));
+}
+
+fn expected_pose_prop_presence(library: &PoseLibrary, pose_id: &str) -> (bool, bool) {
+    if let Some(pose) = library.for_id(pose_id) {
+        return (pose.motion.staff_present, pose.motion.effect_present);
+    }
+
+    let graph = runtime_pose_graph_catalog()
+        .expect("runtime graph catalog")
+        .primary_for_semantic_id(pose_id)
+        .expect("promoted clip-step graph");
+    assert!(
+        graph.control_groups.iter().any(|group| group == "all"),
+        "non-library clip step {pose_id} must be an audited production graph"
+    );
+    let staff_present = pose_id.contains("staff")
+        || graph.category == "prop_interaction"
+        || graph.category == "magic";
+    let effect_present =
+        graph.category == "magic" || pose_id.contains("magic") || pose_id.contains("effect");
+    (staff_present, effect_present)
 }
 
 #[test]
@@ -792,27 +802,21 @@ fn stop_behavior_supersedes_an_in_flight_raw_pose_transition() {
     let started = controller.apply_command(WizardCommand::new(
         "pose",
         serde_json::json!({
-            "pose_id": "front_magic_staff_thrust",
+            "pose_id": "magic_cast_release",
             "transition_ms": 1_000
         }),
     ));
     assert!(started.ok);
-    assert_eq!(
-        started.state.pose_id.as_deref(),
-        Some("front_magic_staff_thrust")
-    );
+    assert_eq!(started.state.pose_id.as_deref(), Some("magic_cast_release"));
 
     let stopped = controller.apply_command(WizardCommand::new("stop", serde_json::json!({})));
     assert!(stopped.ok);
-    assert_ne!(
-        stopped.state.pose_id.as_deref(),
-        Some("front_magic_staff_thrust")
-    );
+    assert_ne!(stopped.state.pose_id.as_deref(), Some("magic_cast_release"));
     for _ in 0..60 {
         controller.step_tick();
         assert_ne!(
             controller.current_state().pose_id.as_deref(),
-            Some("front_magic_staff_thrust")
+            Some("magic_cast_release")
         );
     }
     assert_eq!(

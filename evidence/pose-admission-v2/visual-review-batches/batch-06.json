@@ -1,0 +1,174 @@
+{
+  "batch_id": "batch-06",
+  "reviewer": "Codex literal visual overlay reviewer",
+  "range": {
+    "start": "WJPA-0161",
+    "end": "WJPA-0192"
+  },
+  "reviewed_count": 32,
+  "approved_count": 32,
+  "rejected_count": 0,
+  "overall_status": "approved",
+  "entries": [
+    {
+      "pose_id": "WJPA-0161",
+      "status": "approved",
+      "visual_note": "Source and projection align exactly across the airborne silhouette, wings, staff, hands, and feet; overlay shows no doubled edges, mismatch marks, clipping, or added geometry."
+    },
+    {
+      "pose_id": "WJPA-0162",
+      "status": "approved",
+      "visual_note": "Crouched landing pose is identically placed in both panels; hat, wing tips, robe folds, boots, and staff remain clean in the transparent overlay."
+    },
+    {
+      "pose_id": "WJPA-0163",
+      "status": "approved",
+      "visual_note": "Standing recovery silhouette and all fine staff and wing edges coincide with no displacement, colored mismatch marks, clipping, or extra pixels."
+    },
+    {
+      "pose_id": "WJPA-0164",
+      "status": "approved",
+      "visual_note": "Side-leaning action pose matches source geometry exactly; extended robe, fingers, wings, boots, and staff produce a single clean overlay contour."
+    },
+    {
+      "pose_id": "WJPA-0165",
+      "status": "approved",
+      "visual_note": "Low braced pose is visually identical between source and projection, including the planted hand, wing extremities, robe hem, boots, and staff."
+    },
+    {
+      "pose_id": "WJPA-0166",
+      "status": "approved",
+      "visual_note": "Kneeling pose, narrow ground details, staff, hat, face, and wings retain exact placement with no doubled edges or non-source geometry."
+    },
+    {
+      "pose_id": "WJPA-0167",
+      "status": "approved",
+      "visual_note": "Seated silhouette aligns cleanly at both boots, trailing robe, outstretched hand, wing tips, and staff; no visual mismatch is present."
+    },
+    {
+      "pose_id": "WJPA-0168",
+      "status": "approved",
+      "visual_note": "Rising crouch matches pixel-for-pixel visually, with clean hand, knee, boot, staff, hat, and wing contours and no clipping."
+    },
+    {
+      "pose_id": "WJPA-0169",
+      "status": "approved",
+      "visual_note": "Wide dodge pose preserves the full extended arm, open hand, robe sweep, wings, boots, and separate staff without displacement or additions."
+    },
+    {
+      "pose_id": "WJPA-0170",
+      "status": "approved",
+      "visual_note": "Front home pose is identically composed in both panels; vertical staff, hat tip, wings, robe hem, hands, and boots overlay without doubling."
+    },
+    {
+      "pose_id": "WJPA-0171",
+      "status": "approved",
+      "visual_note": "Flight anticipation silhouette aligns exactly, including high wing tips, crouched body, both hands, boots, and angled staff."
+    },
+    {
+      "pose_id": "WJPA-0172",
+      "status": "approved",
+      "visual_note": "Initial airborne pose shows exact source-to-projection placement across spread wings, hanging boots, robe edge, hands, and staff."
+    },
+    {
+      "pose_id": "WJPA-0173",
+      "status": "approved",
+      "visual_note": "Level flight pose matches cleanly at the long wing edges, floating feet, robe sweep, hand, face, hat, and isolated staff."
+    },
+    {
+      "pose_id": "WJPA-0174",
+      "status": "approved",
+      "visual_note": "Vertical hover pose retains the complete down-swept wings, boots, robe, staff, fingers, and hat with no clipping or overlay separation."
+    },
+    {
+      "pose_id": "WJPA-0175",
+      "status": "approved",
+      "visual_note": "Upstroke flight pose is visually exact; both raised wing extremities, robe, feet, free hand, and staff remain single-contoured."
+    },
+    {
+      "pose_id": "WJPA-0176",
+      "status": "approved",
+      "visual_note": "Front hover pose matches source geometry throughout the lowered wings, body, boots, hands, hat, and parallel staff."
+    },
+    {
+      "pose_id": "WJPA-0177",
+      "status": "approved",
+      "visual_note": "Banked hover silhouette and asymmetrical wings align exactly, with no doubled border around the hat, robe, boots, hands, or staff."
+    },
+    {
+      "pose_id": "WJPA-0178",
+      "status": "approved",
+      "visual_note": "Dynamic banked flight pose preserves both widely separated wings, tilted body, boots, hands, hat, and staff without mismatch marks."
+    },
+    {
+      "pose_id": "WJPA-0179",
+      "status": "approved",
+      "visual_note": "Opposite bank pose overlays exactly at all wing steps, robe contours, feet, face, hand, and diagonal staff."
+    },
+    {
+      "pose_id": "WJPA-0180",
+      "status": "approved",
+      "visual_note": "Airborne turn pose matches cleanly across the broad wing, small rear wing, robe, boots, open hand, face, and staff."
+    },
+    {
+      "pose_id": "WJPA-0181",
+      "status": "approved",
+      "visual_note": "Rear flight view is identically placed, including hair and hat silhouette, layered wings, trailing robe, boots, hand, and staff."
+    },
+    {
+      "pose_id": "WJPA-0182",
+      "status": "approved",
+      "visual_note": "Climbing flight pose has exact alignment at raised staff tip, spread wings, angled body, hand, robe, and boots with no clipping."
+    },
+    {
+      "pose_id": "WJPA-0183",
+      "status": "approved",
+      "visual_note": "Descending flight silhouette matches source placement at the tilted face, wing tips, sleeves, robe, boots, and long staff."
+    },
+    {
+      "pose_id": "WJPA-0184",
+      "status": "approved",
+      "visual_note": "Horizontal prone-flight pose aligns precisely, including low body profile, outstretched wings, boots, hands, and horizontal staff."
+    },
+    {
+      "pose_id": "WJPA-0185",
+      "status": "approved",
+      "visual_note": "Front flight settle pose preserves symmetric wings, floating boots, robe hem, hands, hat, and separate staff with no overlay divergence."
+    },
+    {
+      "pose_id": "WJPA-0186",
+      "status": "approved",
+      "visual_note": "Front hover pose matches exactly across the full wing span, upright body, boots, fist, hat, hand grip, and vertical staff."
+    },
+    {
+      "pose_id": "WJPA-0187",
+      "status": "approved",
+      "visual_note": "Open-hand hover pose is visually identical, with clean fingers, sleeves, robe, boots, wings, hat, and staff boundaries."
+    },
+    {
+      "pose_id": "WJPA-0188",
+      "status": "approved",
+      "visual_note": "Banked flight pose retains exact geometry in the tucked hand, robe sweep, boots, wings, face, hat, and diagonal staff."
+    },
+    {
+      "pose_id": "WJPA-0189",
+      "status": "approved",
+      "visual_note": "Wide-gesture flight silhouette aligns cleanly at the separated fingers, wing tips, robe, feet, gripping hand, and angled staff."
+    },
+    {
+      "pose_id": "WJPA-0190",
+      "status": "approved",
+      "visual_note": "Forward-reaching flight pose matches exactly around the extended fingers, hat tip, wings, robe, boots, and staff grip."
+    },
+    {
+      "pose_id": "WJPA-0191",
+      "status": "approved",
+      "visual_note": "Turning airborne pose preserves the tilted head, offset wings, extended hand, robe, boots, and staff with no doubled or missing edges."
+    },
+    {
+      "pose_id": "WJPA-0192",
+      "status": "approved",
+      "visual_note": "Fast horizontal flight pose is a clean visual match across the large wing span, foreshortened body, staff held across the torso, robe, and boots."
+    }
+  ]
+}

@@ -43,7 +43,7 @@ test("responsive resize redraws the last complete frame without waiting for the 
 
   renderer.resize(800, 450);
 
-  assert.equal(visible.calls.filter(([name]) => name === "fillRect").length, 1);
+  assert.equal(visible.calls.filter(([name]) => name === "fillRect").length, 2);
   assert.equal(visible.calls.filter(([name]) => name === "drawImage").length, 1);
 });
 
@@ -66,7 +66,13 @@ test("enqueue performs zero visible writes and rAF commits one complete frame", 
 
   assert.equal(renderer.present(0), true);
   assert.equal(logical.calls.filter(([name]) => name === "putImageData").length, 1);
+  assert.equal(visible.calls.filter(([name]) => name === "fillRect").length, 1);
   assert.equal(visible.calls.filter(([name]) => name === "drawImage").length, 1);
+  assert.ok(
+    visible.calls.findIndex(([name]) => name === "fillRect")
+      < visible.calls.findIndex(([name]) => name === "drawImage"),
+    "the full white canvas is restored before the logical frame is presented",
+  );
   const image = logical.calls.find(([name]) => name === "putImageData")[1];
   assert.deepEqual([...image.data], [1, 2, 3, 255, 4, 5, 6, 255]);
 });

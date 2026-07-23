@@ -2,12 +2,15 @@ name: Rust News Anchor CI
 
 on:
   push:
-    branches: [codex/rust-news-anchor-engine]
+    branches: [codex/rust-news-anchor-engine, codex/rust-pixelgraph-primary]
   pull_request:
     paths:
       - ".github/workflows/rust-news-anchor-ci.yml"
       - "rust/wizard_avatar_engine/**"
+      - "rust/wizard_avatar_pose_tool/**"
       - "docs/news-anchor-implementation/**"
+      - "docs/pose-admission/**"
+      - "docs/PIXELGRAPH_EVIDENCE.md"
       - "evidence/animation-quality/final/**"
       - "evidence/pose-library-expansion/rust-v4/animation-verification/**"
   workflow_dispatch:
@@ -35,13 +38,21 @@ jobs:
           components: rustfmt, clippy
       - uses: Swatinem/rust-cache@v2
         with:
-          workspaces: rust/wizard_avatar_engine
-      - name: Format
-        run: cargo fmt --manifest-path rust/wizard_avatar_engine/Cargo.toml --all -- --check
-      - name: Clippy
-        run: cargo clippy --manifest-path rust/wizard_avatar_engine/Cargo.toml --locked --all-targets --all-features -- -D warnings
+          workspaces: |
+            rust/wizard_avatar_engine
+            rust/wizard_avatar_pose_tool
+      - name: Format Rust workspaces
+        run: |
+          cargo fmt --manifest-path rust/wizard_avatar_engine/Cargo.toml --all -- --check
+          cargo fmt --manifest-path rust/wizard_avatar_pose_tool/Cargo.toml --all -- --check
+      - name: Clippy Rust workspaces
+        run: |
+          cargo clippy --manifest-path rust/wizard_avatar_engine/Cargo.toml --locked --all-targets --all-features -- -D warnings
+          cargo clippy --manifest-path rust/wizard_avatar_pose_tool/Cargo.toml --locked --all-targets --all-features -- -D warnings
       - name: Test complete Rust engine
         run: cargo test --manifest-path rust/wizard_avatar_engine/Cargo.toml --locked --all-targets
+      - name: Test complete Rust pose tool
+        run: cargo test --manifest-path rust/wizard_avatar_pose_tool/Cargo.toml --locked --all-targets
       - name: Test browser modules
         run: node --test rust/wizard_avatar_engine/web/tests/*.test.mjs
       - name: Build pinned release server
@@ -57,5 +68,11 @@ jobs:
             evidence/animation-quality/final/soak/configurations.json
             evidence/pose-library-expansion/rust-v4/animation-verification/manifest.json
             evidence/pose-library-expansion/rust-v4/animation-verification/timeline-contact-sheet.png
+            evidence/runtime-pixelgraph-qa/source-frame-audit.json
+            evidence/runtime-pixelgraph-qa/source-frame-contact-sheet.png
+            evidence/runtime-pixelgraph-qa/live-newsroom-main-occlusion.png
+            evidence/runtime-pixelgraph-qa/live-newsroom-explainer.png
+            evidence/runtime-pixelgraph-qa/deterministic-animation-frames/animation-frame-audit.json
+            evidence/runtime-pixelgraph-qa/deterministic-animation-frames/*/contact-sheet.png
           if-no-files-found: error
           retention-days: 30

@@ -1,0 +1,207 @@
+{
+  "batch_id": "batch-07",
+  "range": {
+    "start": "WJPA-0193",
+    "end": "WJPA-0224",
+    "inclusive": true
+  },
+  "reviewer": "Codex visual reviewer",
+  "reviewed_count": 32,
+  "approved_count": 32,
+  "rejected_count": 0,
+  "status": "approved",
+  "results": [
+    {
+      "id": "WJPA-0193",
+      "decision": "approved",
+      "notes": "Source and projected graph align exactly across the wide wings, extended hand, robe, feet, hat, and staff; overlay shows no doubled edges, shifts, cropping, or alpha artifacts.",
+      "comparison_path": "evidence/pose-admission-v2/WJPA-0193/comparison.png"
+    },
+    {
+      "id": "WJPA-0194",
+      "decision": "approved",
+      "notes": "Low stance, spread wings, open hand, staff, hat, and lower silhouette remain exactly registered with no missing or extra pixels.",
+      "comparison_path": "evidence/pose-admission-v2/WJPA-0194/comparison.png"
+    },
+    {
+      "id": "WJPA-0195",
+      "decision": "approved",
+      "notes": "Standing pose aligns exactly at the folded wing edges, face, hanging hand, robe hem, feet, and full staff with a clean overlay.",
+      "comparison_path": "evidence/pose-admission-v2/WJPA-0195/comparison.png"
+    },
+    {
+      "id": "WJPA-0196",
+      "decision": "approved",
+      "notes": "Diagonal staff, both hands, tilted head, wings, robe, and separated feet coincide without ghosting, clipping, or projection-only pixels.",
+      "comparison_path": "evidence/pose-admission-v2/WJPA-0196/comparison.png"
+    },
+    {
+      "id": "WJPA-0197",
+      "decision": "approved",
+      "notes": "Chest gesture and upright staff are exactly aligned; hat tip, wing runs, robe edges, and feet show no doubled boundaries or alpha defects.",
+      "comparison_path": "evidence/pose-admission-v2/WJPA-0197/comparison.png"
+    },
+    {
+      "id": "WJPA-0198",
+      "decision": "approved",
+      "notes": "Two-hand diagonal staff pose matches throughout the hands, face, wing tips, robe, and shoes with no displacement or cropping.",
+      "comparison_path": "evidence/pose-admission-v2/WJPA-0198/comparison.png"
+    },
+    {
+      "id": "WJPA-0199",
+      "decision": "approved",
+      "notes": "Open-palm standing pose is exactly registered across the palm, staff, hat, wings, robe opening, and feet; overlay remains single-edged.",
+      "comparison_path": "evidence/pose-admission-v2/WJPA-0199/comparison.png"
+    },
+    {
+      "id": "WJPA-0200",
+      "decision": "approved",
+      "notes": "Wide diagonal staff and extended open hand align exactly with the source; no doubled edges, missing geometry, or alpha fringe is visible.",
+      "comparison_path": "evidence/pose-admission-v2/WJPA-0200/comparison.png"
+    },
+    {
+      "id": "WJPA-0201",
+      "decision": "approved",
+      "notes": "Raised-staff pose preserves the tall extremity, hand grips, wing points, robe hem, and shoes exactly without clipping or shifts.",
+      "comparison_path": "evidence/pose-admission-v2/WJPA-0201/comparison.png"
+    },
+    {
+      "id": "WJPA-0202",
+      "decision": "approved",
+      "notes": "Crouched staff pose aligns exactly at the small raised hand, staff hook, face, layered wings, robe, and feet with no extra pixels.",
+      "comparison_path": "evidence/pose-admission-v2/WJPA-0202/comparison.png"
+    },
+    {
+      "id": "WJPA-0203",
+      "decision": "approved",
+      "notes": "Extended palm and crossing staff remain coincident with the source; hat, facial features, wings, robe, and shoes show no visual mismatch.",
+      "comparison_path": "evidence/pose-admission-v2/WJPA-0203/comparison.png"
+    },
+    {
+      "id": "WJPA-0204",
+      "decision": "approved",
+      "notes": "Raised grip, diagonal staff, open hand, wing contours, robe panels, and feet align exactly without ghosting or alpha artifacts.",
+      "comparison_path": "evidence/pose-admission-v2/WJPA-0204/comparison.png"
+    },
+    {
+      "id": "WJPA-0205",
+      "decision": "approved",
+      "notes": "Splayed fingers, diagonal staff, altered wing color runs, face, robe, and shoes match exactly with no missing, extra, or shifted pixels.",
+      "comparison_path": "evidence/pose-admission-v2/WJPA-0205/comparison.png"
+    },
+    {
+      "id": "WJPA-0206",
+      "decision": "approved",
+      "notes": "Leaning pose aligns exactly along the hand gesture, raised staff, hat tip, wing edges, robe folds, and foot silhouettes; overlay is clean.",
+      "comparison_path": "evidence/pose-admission-v2/WJPA-0206/comparison.png"
+    },
+    {
+      "id": "WJPA-0207",
+      "decision": "approved",
+      "notes": "Front-facing neutral stance matches across the staff, clenched hand, face, hat, wings, robe, and feet with no doubled contours or clipping.",
+      "comparison_path": "evidence/pose-admission-v2/WJPA-0207/comparison.png"
+    },
+    {
+      "id": "WJPA-0208",
+      "decision": "approved",
+      "notes": "Walking stop gesture is exactly registered at the raised palm, angled staff, broad wings, crossed robe, and lifted foot; no alpha defect appears.",
+      "comparison_path": "evidence/pose-admission-v2/WJPA-0208/comparison.png"
+    },
+    {
+      "id": "WJPA-0209",
+      "decision": "approved",
+      "notes": "Close stop-palm silhouette, staff, face, wing tips, robe, and feet coincide exactly without missing edges, shifts, or transparency artifacts.",
+      "comparison_path": "evidence/pose-admission-v2/WJPA-0209/comparison.png"
+    },
+    {
+      "id": "WJPA-0210",
+      "decision": "approved",
+      "notes": "Recoiling pose aligns exactly at the raised hand and fingers, staff, facial opening, angled wings, robe, and feet with no doubled edges.",
+      "comparison_path": "evidence/pose-admission-v2/WJPA-0210/comparison.png"
+    },
+    {
+      "id": "WJPA-0211",
+      "decision": "approved",
+      "notes": "Extended-arm pose preserves the long sleeve, open hand, diagonal staff, wing geometry, robe, and shoes exactly with no cropping or ghosting.",
+      "comparison_path": "evidence/pose-admission-v2/WJPA-0211/comparison.png"
+    },
+    {
+      "id": "WJPA-0212",
+      "decision": "approved",
+      "notes": "Wide staff-and-palm pose matches source geometry throughout the tall staff hook, fingers, wings, robe, and stance; overlay is artifact-free.",
+      "comparison_path": "evidence/pose-admission-v2/WJPA-0212/comparison.png"
+    },
+    {
+      "id": "WJPA-0213",
+      "decision": "approved",
+      "notes": "Two-hand staff grip aligns exactly across the hands, staff, stern face, hat, wings, robe hem, and feet with no visible mismatch.",
+      "comparison_path": "evidence/pose-admission-v2/WJPA-0213/comparison.png"
+    },
+    {
+      "id": "WJPA-0214",
+      "decision": "approved",
+      "notes": "Open-mouth presentation pose remains exactly registered at the palm, staff, facial opening, wings, robe, and feet; no alpha fringe is visible.",
+      "comparison_path": "evidence/pose-admission-v2/WJPA-0214/comparison.png"
+    },
+    {
+      "id": "WJPA-0215",
+      "decision": "approved",
+      "notes": "Book-reading pose aligns exactly along the page edges, covers, hands, upright staff, face, wings, robe, and shoes without cropping.",
+      "comparison_path": "evidence/pose-admission-v2/WJPA-0215/comparison.png"
+    },
+    {
+      "id": "WJPA-0216",
+      "decision": "approved",
+      "notes": "Front book-reading pose matches at the open pages, book spine, both hands, staff, facial opening, wings, robe, and feet with no artifacts.",
+      "comparison_path": "evidence/pose-admission-v2/WJPA-0216/comparison.png"
+    },
+    {
+      "id": "WJPA-0217",
+      "decision": "approved",
+      "notes": "Concerned stop gesture aligns exactly across the palm, staff hook, face, wings, robe, and wide stance; overlay shows no doubled boundary.",
+      "comparison_path": "evidence/pose-admission-v2/WJPA-0217/comparison.png"
+    },
+    {
+      "id": "WJPA-0218",
+      "decision": "approved",
+      "notes": "Falling pose matches exactly at the spread hand, raised staff, hat, wing points, robe panels, and lifted shoes with no clipping or alpha artifacts.",
+      "comparison_path": "evidence/pose-admission-v2/WJPA-0218/comparison.png"
+    },
+    {
+      "id": "WJPA-0219",
+      "decision": "approved",
+      "notes": "Head-scratch standing pose is exactly registered across the hat-touching hand, staff, face, hanging wings, robe, and feet with a clean overlay.",
+      "comparison_path": "evidence/pose-admission-v2/WJPA-0219/comparison.png"
+    },
+    {
+      "id": "WJPA-0220",
+      "decision": "approved",
+      "notes": "Front presentation pose aligns exactly at the open palm, staff, face, symmetrical wing edges, robe hem, and feet with no extra pixels.",
+      "comparison_path": "evidence/pose-admission-v2/WJPA-0220/comparison.png"
+    },
+    {
+      "id": "WJPA-0221",
+      "decision": "approved",
+      "notes": "Cheerful bent-knee pose matches the source at the fist, staff, facial details, wings, robe opening, and shoes without ghosting or cropping.",
+      "comparison_path": "evidence/pose-admission-v2/WJPA-0221/comparison.png"
+    },
+    {
+      "id": "WJPA-0222",
+      "decision": "approved",
+      "notes": "Lifted-foot gesture aligns exactly across the fist, staff, smiling face, wing tips, robe hem, and both shoes; no alpha defect is visible.",
+      "comparison_path": "evidence/pose-admission-v2/WJPA-0222/comparison.png"
+    },
+    {
+      "id": "WJPA-0223",
+      "decision": "approved",
+      "notes": "Pointing walking pose preserves the finger, hand, upright staff, smiling face, wings, robe, and raised foot exactly with no doubled edges.",
+      "comparison_path": "evidence/pose-admission-v2/WJPA-0223/comparison.png"
+    },
+    {
+      "id": "WJPA-0224",
+      "decision": "approved",
+      "notes": "Seated pose aligns exactly at the lap hand, staff, face, hat, broad wing edges, robe, and feet; overlay shows no shift, crop, or alpha artifact.",
+      "comparison_path": "evidence/pose-admission-v2/WJPA-0224/comparison.png"
+    }
+  ]
+}

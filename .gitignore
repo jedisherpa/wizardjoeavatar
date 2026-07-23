@@ -9,6 +9,7 @@ rust/*/target/
 .env.*
 *.log
 .DS_Store
+.pose-admission-owner-*
 .mypy_cache/
 external/
 evidence/animation-quality/final/tmp/
@@ -30,3 +31,14 @@ evidence/wizard/**/*.html
 !evidence/wizard/rust-performance/
 !evidence/wizard/rust-performance/README.md
 !evidence/wizard/rust-performance/performance-summary.json
+
+# Full-fidelity pixelgraph review packages are published as GitHub release
+# artifacts. Keep compact manifests, source-frame captures, and contact sheets
+# in Git while excluding reproducible per-frame and per-source working images.
+evidence/*.zip
+evidence/pose-admission/
+evidence/pose-admission-v2/**/*.png
+evidence/newsroom-visual-development/
+evidence/newsroom-visual-development-v2/
+evidence/runtime-pixelgraph-qa/deterministic-animation-frames/**/frame-*.png
+evidence/runtime-pixelgraph-qa-v6/**/frame-*.png

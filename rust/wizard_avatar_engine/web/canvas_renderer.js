@@ -108,6 +108,8 @@ export class CellStageRenderer {
       this.rows,
     );
     this.visibleContext.imageSmoothingEnabled = false;
+    this.visibleContext.fillStyle = "#fff";
+    this.visibleContext.fillRect(0, 0, this.visibleCanvas.width, this.visibleCanvas.height);
     this.visibleContext.drawImage(
       this.logicalCanvas,
       0,
