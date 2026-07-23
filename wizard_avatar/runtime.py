@@ -4,6 +4,7 @@ import copy
 import hashlib
 import json
 import math
+from collections import deque
 from dataclasses import dataclass, fields, is_dataclass
 from enum import Enum
 from types import MappingProxyType
@@ -18,6 +19,7 @@ ACCUMULATOR_TICK_UNITS = 1_000_000_000
 DEFAULT_MAX_CATCH_UP_TICKS = 8
 DEFAULT_REPLAY_STATE_INTERVAL_TICKS = TICK_RATE
 DEFAULT_REPLAY_MAX_RECORDS = 4096
+DEFAULT_RUNTIME_EVENT_CAPACITY = 256
 
 StateT = TypeVar("StateT")
 PresentationT = TypeVar("PresentationT")
@@ -269,6 +271,7 @@ class AvatarRuntime(Generic[StateT, PresentationT]):
         max_catch_up_ticks: int = DEFAULT_MAX_CATCH_UP_TICKS,
         replay_log: Optional[ReplayLog] = None,
         replay_state_interval_ticks: int = DEFAULT_REPLAY_STATE_INTERVAL_TICKS,
+        event_capacity: int = DEFAULT_RUNTIME_EVENT_CAPACITY,
     ) -> None:
         if not runtime_epoch:
             raise ValueError("runtime_epoch must not be empty")
@@ -282,6 +285,12 @@ class AvatarRuntime(Generic[StateT, PresentationT]):
             or replay_state_interval_ticks <= 0
         ):
             raise ValueError("replay_state_interval_ticks must be a positive integer")
+        if (
+            isinstance(event_capacity, bool)
+            or not isinstance(event_capacity, int)
+            or event_capacity <= 0
+        ):
+            raise ValueError("event_capacity must be a positive integer")
         self.runtime_epoch = runtime_epoch
         self.inbox = inbox or OrderedCommandInbox(runtime_epoch)
         if self.inbox.runtime_epoch != runtime_epoch:
@@ -295,7 +304,9 @@ class AvatarRuntime(Generic[StateT, PresentationT]):
         self._dropped_accumulator_units = 0
         self._max_catch_up_ticks = max_catch_up_ticks
         self._last_monotonic_ns: Optional[int] = None
-        self._events: list[RuntimeEvent] = []
+        self._events = deque(maxlen=event_capacity)
+        self._event_capacity = event_capacity
+        self._event_eviction_count = 0
         self._replay_log = replay_log
         self._replay_state_interval_ticks = replay_state_interval_ticks
         frozen = freeze_snapshot_value(initial_state)
@@ -395,7 +406,7 @@ class AvatarRuntime(Generic[StateT, PresentationT]):
     def advance_elapsed_ns(self, elapsed_ns: int) -> RuntimeAdvanceResult[StateT, PresentationT]:
         if isinstance(elapsed_ns, bool) or not isinstance(elapsed_ns, int) or elapsed_ns < 0:
             raise ValueError("elapsed_ns must be a non-negative integer")
-        event_start = len(self._events)
+        emitted_events = []
         self._accumulator_units += elapsed_ns * TICK_RATE
         due_ticks = self._accumulator_units // ACCUMULATOR_TICK_UNITS
         steps = min(due_ticks, self._max_catch_up_ticks)
@@ -416,18 +427,20 @@ class AvatarRuntime(Generic[StateT, PresentationT]):
                     }
                 ),
             )
+            if len(self._events) == self._event_capacity:
+                self._event_eviction_count += 1
             self._events.append(event)
+            emitted_events.append(event)
             if self._replay_log is not None:
                 self._replay_log.append(event.event_type, self._simulation_tick, event.details)
         for _ in range(steps):
             self.step_tick()
-        new_events = tuple(self._events[event_start:])
         return RuntimeAdvanceResult(
             snapshot=self._snapshot,
             steps=steps,
             dropped_ticks=dropped_ticks,
             elapsed_ns=elapsed_ns,
-            events=new_events,
+            events=tuple(emitted_events),
         )
 
     def current_snapshot(self) -> RuntimeSnapshot[StateT, PresentationT]:
@@ -437,6 +450,15 @@ class AvatarRuntime(Generic[StateT, PresentationT]):
         events = tuple(self._events)
         self._events.clear()
         return events
+
+    @property
+    def event_retention_diagnostics(self) -> Mapping[str, object]:
+        return {
+            "event_capacity": self._event_capacity,
+            "retained_event_count": len(self._events),
+            "evicted_event_count": self._event_eviction_count,
+            "is_truncated": self._event_eviction_count > 0,
+        }
 
     def _build_presentation(self, state: StateT, tick: int) -> Optional[PresentationT]:
         if self._presentation_factory is None:
@@ -451,6 +473,7 @@ __all__ = [
     "DEFAULT_MAX_CATCH_UP_TICKS",
     "DEFAULT_REPLAY_MAX_RECORDS",
     "DEFAULT_REPLAY_STATE_INTERVAL_TICKS",
+    "DEFAULT_RUNTIME_EVENT_CAPACITY",
     "ReplayLog",
     "RuntimeAdvanceResult",
     "RuntimeClock",

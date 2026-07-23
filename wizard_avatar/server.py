@@ -38,7 +38,7 @@ from .permission_world import (
     PermissionWorldError,
     PermissionWorldStateV1,
 )
-from .stream import WizardFrameHub
+from .stream import SubscriberLimitError, WizardFrameHub
 from .runtime_identity import build_runtime_identity, refresh_runtime_identity
 
 try:
@@ -444,7 +444,11 @@ def create_app(
 
     @app.get("/api/avatar/wizard/runtime-identity")
     async def runtime_identity_snapshot():
-        return refresh_runtime_identity(runtime_identity, ROOT)
+        return await asyncio.to_thread(
+            refresh_runtime_identity,
+            runtime_identity,
+            ROOT,
+        )
 
     @app.get("/api/avatar/wizard/hd-profile")
     async def hd_profile():
@@ -743,7 +747,11 @@ def create_app(
         await websocket.send_text(
             f"INIT:{frame_source.fps}:5:{frame_source.cols}:{frame_source.rows}:0:0:0.000"
         )
-        subscriber = await frame_hub.subscribe()
+        try:
+            subscriber = await frame_hub.subscribe()
+        except SubscriberLimitError:
+            await websocket.close(code=1013, reason="avatar subscriber limit reached")
+            return
 
         async def receiver():
             try:

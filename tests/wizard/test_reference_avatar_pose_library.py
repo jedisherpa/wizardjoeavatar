@@ -3,6 +3,10 @@ import unittest
 from pathlib import Path
 
 from wizard_avatar.compositor import CellCanvas
+from wizard_avatar.motion_manifest import (
+    expand_derived_bridge_series,
+    hd_source_import_policy,
+)
 from wizard_avatar.reference_avatar import (
     REFERENCE_FRONT_IDLE_POSE_ID,
     get_reference_pose,
@@ -27,12 +31,69 @@ GRAPH_PATH = (
 
 
 class ReferenceAvatarPoseLibraryTests(unittest.TestCase):
+    def test_hd_sources_are_approved_for_offline_graph_derivation_only(self):
+        manifest = json.loads(MANIFEST_PATH.read_text(encoding="utf-8"))
+        policy = hd_source_import_policy(manifest)
+        self.assertEqual(policy["purpose"], "offline_canonical_graph_derivation")
+        self.assertEqual(
+            policy["required_approval_state"],
+            "approved_production_alpha",
+        )
+        self.assertFalse(policy["native_runtime_admission_required"])
+        self.assertEqual(
+            policy["derived_runtime_admission_authority"],
+            "wizard_avatar/definitions/reference_avatar_animation_graph_v2.json",
+        )
+
+        hd_index = json.loads(
+            (
+                ROOT
+                / "assets"
+                / "reference"
+                / "hd_canonical"
+                / "compiled"
+                / "library-index.json"
+            ).read_text(encoding="utf-8")
+        )
+        hd_metadata = {
+            pose_id: {
+                "approval_state": shard["approval_state"],
+                "runtime_admitted": shard["runtime_admitted"],
+            }
+            for shard in hd_index["shards"]
+            for pose_id in shard["pose_ids"]
+        }
+        for pose in manifest["poses"]:
+            hd_pose_id = pose.get("hd_pose_id")
+            if hd_pose_id is None:
+                continue
+            with self.subTest(pose_id=pose["id"], hd_pose_id=hd_pose_id):
+                metadata = hd_metadata[hd_pose_id]
+                self.assertEqual(
+                    metadata["approval_state"],
+                    policy["required_approval_state"],
+                )
+                self.assertFalse(metadata["runtime_admitted"])
+
+    def test_hd_source_policy_rejects_candidate_review_scope(self):
+        manifest = json.loads(MANIFEST_PATH.read_text(encoding="utf-8"))
+        invalid_policy = dict(manifest["hd_source_import_policy"])
+        invalid_policy["required_approval_state"] = "candidate_review"
+        with self.assertRaisesRegex(
+            ValueError,
+            "approved production alpha",
+        ):
+            hd_source_import_policy(
+                {**manifest, "hd_source_import_policy": invalid_policy}
+            )
+
     def test_pose_library_loads_expected_pose_ids(self):
         self.assertTrue(reference_pose_library_available())
         manifest = json.loads(MANIFEST_PATH.read_text(encoding="utf-8"))
-        expected_pose_ids = {pose["id"] for pose in manifest["poses"]}
+        expanded_manifest = expand_derived_bridge_series(manifest)
+        expected_pose_ids = {pose["id"] for pose in expanded_manifest["poses"]}
         self.assertEqual(set(reference_pose_ids()), expected_pose_ids)
-        self.assertEqual(len(expected_pose_ids), 186)
+        self.assertEqual(len(expected_pose_ids), 236)
         self.assertTrue(
             {
                 "front_greeting_wave_wings",
@@ -72,6 +133,23 @@ class ReferenceAvatarPoseLibraryTests(unittest.TestCase):
             }.issubset(expected_pose_ids)
         )
 
+    def test_graph_classification_matches_actual_clip_reachability(self):
+        graph = json.loads(GRAPH_PATH.read_text(encoding="utf-8"))
+        sampled_pose_ids = {
+            sample["pose_id"]
+            for clip in graph["clips"].values()
+            for sample in clip["samples"]
+        }
+        classified_sample_ids = {
+            pose_id
+            for pose_id, classification in graph["pose_classification"].items()
+            if "clip_sample" in classification["roles"]
+        }
+        self.assertEqual(classified_sample_ids, sampled_pose_ids)
+        for pose_id, classification in graph["pose_classification"].items():
+            if pose_id not in sampled_pose_ids:
+                self.assertIn("diagnostic_only", classification["roles"])
+
     def test_directional_walk_uses_four_distinct_authored_graphs_per_side(self):
         library = json.loads(
             (
@@ -106,6 +184,37 @@ class ReferenceAvatarPoseLibraryTests(unittest.TestCase):
                     {tuple(pose["root_anchor"]) for pose in poses},
                     {(36, 95)},
                 )
+
+    def test_directional_gait_bridge_support_anchors_remain_visible(self):
+        library = json.loads(
+            (
+                ROOT
+                / "wizard_avatar"
+                / "definitions"
+                / "reference_avatar_pose_cells.json"
+            ).read_text(encoding="utf-8")
+        )
+        by_id = {pose["id"]: pose for pose in library["poses"]}
+        bridge_supports = {
+            "contact_left_to_passing": "left_foot",
+            "passing_to_contact_right": "left_foot",
+            "contact_right_to_passing": "right_foot",
+            "passing_to_contact_left": "right_foot",
+        }
+        for facing in ("left", "right"):
+            for bridge, support_anchor in bridge_supports.items():
+                for amount in (250, 500, 750):
+                    pose_id = f"walk_profile_{facing}_{bridge}_{amount}"
+                    with self.subTest(pose_id=pose_id):
+                        pose = by_id[pose_id]
+                        occupied = {
+                            (cell["x"], cell["y"])
+                            for cell in pose["cells"]
+                        }
+                        self.assertIn(
+                            tuple(pose["anchors"][support_anchor]),
+                            occupied,
+                        )
 
     def test_v6_walk_and_turn_anchors_land_on_authored_pixels(self):
         library = json.loads(

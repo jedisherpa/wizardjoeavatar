@@ -406,7 +406,12 @@ def load_pose_catalog(
 ) -> Mapping[str, PoseMetadata]:
     """Load and cross-check metadata from the source manifest and cell library."""
 
-    manifest = _mapping(_load_json(Path(manifest_path)), str(manifest_path))
+    from .motion_manifest import expand_derived_bridge_series
+
+    manifest = _mapping(
+        expand_derived_bridge_series(_load_json(Path(manifest_path))),
+        str(manifest_path),
+    )
     library = _mapping(_load_json(Path(library_path)), str(library_path))
     manifest_poses = _sequence(manifest.get("poses"), f"{manifest_path}.poses")
     library_poses = _sequence(library.get("poses"), f"{library_path}.poses")

@@ -16,6 +16,8 @@ def clear_authored_staff(
     staff_tip: tuple[int, int],
     staff_hand: tuple[int, int],
     root_anchor: tuple[int, int] | None = None,
+    *,
+    aggressive: bool = False,
 ) -> int:
     """Remove the authored staff using its manifest-required anchor geometry.
 
@@ -32,7 +34,11 @@ def clear_authored_staff(
         staff_hand,
         root_anchor,
     )
-    selected = _staff_mask(canvas, resolved_tip, resolved_hand)
+    selected = (
+        _staff_clear_mask(canvas, resolved_tip, resolved_hand)
+        if aggressive
+        else _staff_mask(canvas, resolved_tip, resolved_hand)
+    )
     for x, y in selected:
         canvas.clear_cell(x, y)
     return len(selected)
@@ -124,8 +130,38 @@ def author_cast_staff_graph(
     for x, y in staff_cells:
         canvas.clear_cell(x, y)
 
-    source_axis_x = resolved_tip[0] - resolved_hand[0]
-    source_axis_y = resolved_tip[1] - resolved_hand[1]
+    paint_rigid_staff_graph(
+        canvas,
+        staff_cells=staff_cells,
+        source_staff_tip=resolved_tip,
+        source_staff_hand=resolved_hand,
+        target_staff_tip=target_staff_tip,
+        target_staff_hand=target_staff_hand,
+        skin_canvas=original,
+    )
+
+
+def paint_rigid_staff_graph(
+    canvas: CellCanvas,
+    *,
+    staff_cells: dict[tuple[int, int], Cell],
+    source_staff_tip: tuple[int, int],
+    source_staff_hand: tuple[int, int],
+    target_staff_tip: tuple[int, int],
+    target_staff_hand: tuple[int, int],
+    skin_canvas: CellCanvas | None = None,
+) -> None:
+    """Paint a complete authored staff at a new grip and axis.
+
+    This lower-level form is used by offline transition authoring after the
+    source staff has been separated from the body graph. It keeps the prop
+    rigid while the arm and silhouette follow their own landmark transition.
+    """
+
+    if not staff_cells:
+        raise ValueError("authored staff mask is empty")
+    source_axis_x = source_staff_tip[0] - source_staff_hand[0]
+    source_axis_y = source_staff_tip[1] - source_staff_hand[1]
     target_axis_x = target_staff_tip[0] - target_staff_hand[0]
     target_axis_y = target_staff_tip[1] - target_staff_hand[1]
     source_length = math.hypot(source_axis_x, source_axis_y)
@@ -146,8 +182,8 @@ def author_cast_staff_graph(
             source_dx = cosine * target_dx + sine * target_dy
             source_dy = -sine * target_dx + cosine * target_dy
             source_point = (
-                round(resolved_hand[0] + source_dx),
-                round(resolved_hand[1] + source_dy),
+                round(source_staff_hand[0] + source_dx),
+                round(source_staff_hand[1] + source_dy),
             )
             source_cell = staff_cells.get(source_point)
             if source_cell is not None:
@@ -159,12 +195,17 @@ def author_cast_staff_graph(
 
     # Restore the authored skin pixels over the shaft so the grip remains
     # unambiguous and the staff cannot paint across the hand.
-    hand_x, hand_y = target_staff_hand
-    for y in range(hand_y - 5, hand_y + 6):
-        for x in range(hand_x - 5, hand_x + 6):
-            cell = original.get(x, y)
-            if cell is not None and _skin_material(cell.rgb):
-                canvas.cells[y][x] = cell
+    if skin_canvas is not None:
+        hand_x, hand_y = target_staff_hand
+        for y in range(hand_y - 5, hand_y + 6):
+            for x in range(hand_x - 5, hand_x + 6):
+                cell = skin_canvas.get(x, y)
+                if (
+                    cell is not None
+                    and canvas.in_bounds(x, y)
+                    and _skin_material(cell.rgb)
+                ):
+                    canvas.cells[y][x] = cell
 
 
 def touch_up_staff_occlusion(
@@ -241,11 +282,50 @@ def _staff_mask(
     return selected
 
 
+def _staff_clear_mask(
+    canvas: CellCanvas,
+    staff_tip: tuple[int, int],
+    staff_hand: tuple[int, int],
+) -> list[tuple[int, int]]:
+    """Return a wider erase corridor that also captures prop outlines."""
+
+    tip_x, tip_y = staff_tip
+    hand_x, hand_y = staff_hand
+    delta_x = hand_x - tip_x
+    delta_y = hand_y - tip_y
+    length_squared = delta_x * delta_x + delta_y * delta_y
+    if length_squared == 0:
+        return []
+    length = math.sqrt(length_squared)
+    selected = []
+    for y in range(canvas.height):
+        for x in range(canvas.width):
+            cell = canvas.get(x, y)
+            if cell is None:
+                continue
+            along = ((x - tip_x) * delta_x + (y - tip_y) * delta_y) / length_squared
+            distance = abs((x - tip_x) * delta_y - (y - tip_y) * delta_x) / length
+            near_shaft = -0.22 <= along <= 2.35 and distance <= 5.25
+            near_crook = math.hypot(x - tip_x, y - tip_y) <= 11.0
+            if not (near_shaft or near_crook):
+                continue
+            red, green, blue = cell.rgb
+            chromatic_costume = (
+                blue > red * 1.35
+                or green > red * 1.35
+                or (red > 110 and red > green * 2.2)
+            )
+            if not chromatic_costume:
+                selected.append((x, y))
+    return selected
+
+
 def _staff_material(rgb: tuple[int, int, int]) -> bool:
     red, green, blue = rgb
     brown = (
         red >= 45
         and red >= green * 1.12
+        and green >= red * 0.28
         and green >= blue * 0.90
         and blue <= 135
     )

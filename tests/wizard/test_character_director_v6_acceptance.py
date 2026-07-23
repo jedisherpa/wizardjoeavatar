@@ -87,12 +87,12 @@ def fixture():
 
     east_turn_poses = (
         "walk_front_right",
-        "turn_front_to_east_entry_25",
-        "turn_front_to_east_entry_50",
-        "turn_front_to_east_entry_75",
-        "turn_south_east_33",
-        "turn_south_east_50",
-        "turn_south_east_67",
+        "turn_front_to_right_entry_250",
+        "turn_front_to_right_entry_500",
+        "turn_front_to_right_entry_750",
+        "hd_turn_right_anticipation",
+        "hd_turn_right_mid",
+        "hd_turn_right_complete",
         "walk_profile_right_contact_left",
     )
     right_gait = (
@@ -125,17 +125,18 @@ def fixture():
     moving_frames = 95
     reversal_poses = (
         "walk_profile_right_contact_right",
-        "turn_south_east_67",
-        "turn_south_east_50",
-        "turn_south_east_33",
-        "turn_front_crossover_plant",
-        "turn_crossover_to_west_25",
-        "turn_crossover_to_west_50",
-        "turn_crossover_to_west_75",
-        "turn_crossover_to_west_875",
-        "turn_south_west_33",
-        "turn_south_west_50",
-        "turn_south_west_67",
+        "hd_turn_right_complete",
+        "hd_turn_right_mid",
+        "hd_turn_right_anticipation",
+        "hd_turn_front_neutral",
+        "hd_turn_left_anticipation",
+        "hd_turn_left_mid",
+        "turn_left_mid_to_complete_166",
+        "turn_left_mid_to_complete_333",
+        "turn_left_mid_to_complete_500",
+        "turn_left_mid_to_complete_667",
+        "turn_left_mid_to_complete_833",
+        "hd_turn_left_complete",
         "walk_profile_left_contact_left",
     )
     for local in range(EXPECTED_FRAME_COUNTS["v6-reverse-west"]):
@@ -148,25 +149,34 @@ def fixture():
             "west"
         )
         support = contact(local)
-        if local < 39:
+        if local < 42:
             clip = "reverse_east_to_west"
             pose = reversal_poses[min(local // 3, len(reversal_poses) - 1)]
-        elif local < 98:
+        elif local < 96:
             clip = "walk_left"
-            pose = left_gait[((local - 39) // 4) % len(left_gait)]
-            if local == 39:
+            pose = left_gait[((local - 42) // 4) % len(left_gait)]
+            if local == 42:
                 support = "left_foot"
         else:
             clip = "stop_left"
             stop_poses = (
                 "walk_profile_left_passing_left_to_right",
-                "stop_profile_left_from_left_25",
-                "stop_profile_left_from_left_50",
-                "stop_profile_left_from_left_75",
-                "stop_profile_left_from_left_100",
+                "stop_profile_left_hd_settle_200",
+                "stop_profile_left_hd_settle_400",
+                "stop_profile_left_hd_settle_600",
+                "stop_profile_left_hd_settle_800",
+                "hd_turn_left_complete",
             )
-            pose = stop_poses[min((local - 98) // 2, len(stop_poses) - 1)]
-            support = "both_feet" if pose.endswith("_100") else "left_foot"
+            pose = stop_poses[min((local - 96) // 2, len(stop_poses) - 1)]
+            support = (
+                "both_feet"
+                if pose in {
+                    "stop_profile_left_hd_settle_600",
+                    "stop_profile_left_hd_settle_800",
+                    "hd_turn_left_complete",
+                }
+                else "left_foot"
+            )
         append("v6-reverse-west", (2.4 - 4.8 * progress, 3.8), facing, clip, pose, support)
 
     for _ in range(EXPECTED_FRAME_COUNTS["v6-stop-settle"]):
@@ -216,7 +226,7 @@ class CharacterDirectorV6AcceptanceTests(unittest.TestCase):
         target = next(
             trace
             for trace in damaged
-            if trace["rendered_pose_id"] == "turn_front_to_east_entry_50"
+            if trace["rendered_pose_id"] == "hd_turn_right_mid"
         )
         target["presented_facing"] = "east"
         report = analyze_v6(manifest, damaged)
@@ -229,7 +239,7 @@ class CharacterDirectorV6AcceptanceTests(unittest.TestCase):
         target = next(
             trace
             for trace in damaged
-            if trace["rendered_pose_id"] == "turn_crossover_to_west_50"
+            if trace["rendered_pose_id"] == "turn_left_mid_to_complete_500"
         )
         target["staff_tip_stage"]["x"] += 30.0
         report = analyze_v6(manifest, damaged)

@@ -1,5 +1,5 @@
 {
-  "version": 88,
+  "version": 90,
   "asset_set_id": "wizardjoe-reference-motion-v1",
   "description": "Source pose PNGs for the repeatable WizardJoe square-cell pose library.",
   "canonical": {
@@ -13,7 +13,195 @@
     "root_anchor_strategy": "fixed_canonical_root_v1",
     "crop_strategy": "per_pose_subject_crop_then_canonical_canvas_v1"
   },
-  "palette_id": "per_pose_quantized_64",
+  "palette_id": "wizardjoe_canonical_64_v1",
+  "canonical_palette_path": "assets/reference/motion_sources/canonical_palette_v1.json",
+  "hd_pose_library_path": "assets/reference/hd_canonical/compiled/library-index.json",
+  "hd_pose_library_sha256": "ebb62aa0266b40dbcb1f85469235ebf8b882c669fb9387d5b5664e9bc2358a95",
+  "hd_source_import_policy": {
+    "purpose": "offline_canonical_graph_derivation",
+    "required_approval_state": "approved_production_alpha",
+    "native_runtime_admission_required": false,
+    "derived_runtime_admission_authority": "wizard_avatar/definitions/reference_avatar_animation_graph_v2.json"
+  },
+  "derived_bridge_series": [
+    {
+      "id_prefix": "walk_profile_right_contact_left_to_passing",
+      "description": "east gait left-contact to passing bridge",
+      "from_pose_id": "walk_profile_right_contact_left",
+      "to_pose_id": "walk_profile_right_passing_left_to_right",
+      "progress_milli": [250, 500, 750],
+      "lock_anchor": "left_foot",
+      "prealign_lock_anchor": false,
+      "method": "inverse_sample",
+      "facing": "east",
+      "locomotion": "walking",
+      "actions": ["walking"],
+      "tags": ["profile", "right", "walk", "inbetween", "v6_continuity"]
+    },
+    {
+      "id_prefix": "walk_profile_right_passing_to_contact_right",
+      "description": "east gait passing to right-contact bridge",
+      "from_pose_id": "walk_profile_right_passing_left_to_right",
+      "to_pose_id": "walk_profile_right_contact_right",
+      "progress_milli": [250, 500, 750],
+      "lock_anchor": "left_foot",
+      "prealign_lock_anchor": false,
+      "method": "inverse_sample",
+      "facing": "east",
+      "locomotion": "walking",
+      "actions": ["walking"],
+      "tags": ["profile", "right", "walk", "inbetween", "v6_continuity"]
+    },
+    {
+      "id_prefix": "walk_profile_right_contact_right_to_passing",
+      "description": "east gait right-contact to passing bridge",
+      "from_pose_id": "walk_profile_right_contact_right",
+      "to_pose_id": "walk_profile_right_passing_right_to_left",
+      "progress_milli": [250, 500, 750],
+      "lock_anchor": "right_foot",
+      "prealign_lock_anchor": false,
+      "method": "inverse_sample",
+      "facing": "east",
+      "locomotion": "walking",
+      "actions": ["walking"],
+      "tags": ["profile", "right", "walk", "inbetween", "v6_continuity"]
+    },
+    {
+      "id_prefix": "walk_profile_right_passing_to_contact_left",
+      "description": "east gait passing to left-contact bridge",
+      "from_pose_id": "walk_profile_right_passing_right_to_left",
+      "to_pose_id": "walk_profile_right_contact_left",
+      "progress_milli": [250, 500, 750],
+      "lock_anchor": "right_foot",
+      "prealign_lock_anchor": false,
+      "method": "inverse_sample",
+      "facing": "east",
+      "locomotion": "walking",
+      "actions": ["walking"],
+      "tags": ["profile", "right", "walk", "inbetween", "v6_continuity"]
+    },
+    {
+      "id_prefix": "walk_profile_left_contact_left_to_passing",
+      "description": "west gait left-contact to passing bridge",
+      "from_pose_id": "walk_profile_left_contact_left",
+      "to_pose_id": "walk_profile_left_passing_left_to_right",
+      "progress_milli": [250, 500, 750],
+      "lock_anchor": "left_foot",
+      "prealign_lock_anchor": false,
+      "method": "inverse_sample",
+      "facing": "west",
+      "locomotion": "walking",
+      "actions": ["walking"],
+      "tags": ["profile", "left", "walk", "inbetween", "v6_continuity"]
+    },
+    {
+      "id_prefix": "walk_profile_left_passing_to_contact_right",
+      "description": "west gait passing to right-contact bridge",
+      "from_pose_id": "walk_profile_left_passing_left_to_right",
+      "to_pose_id": "walk_profile_left_contact_right",
+      "progress_milli": [250, 500, 750],
+      "lock_anchor": "left_foot",
+      "prealign_lock_anchor": false,
+      "method": "inverse_sample",
+      "facing": "west",
+      "locomotion": "walking",
+      "actions": ["walking"],
+      "tags": ["profile", "left", "walk", "inbetween", "v6_continuity"]
+    },
+    {
+      "id_prefix": "walk_profile_left_contact_right_to_passing",
+      "description": "west gait right-contact to passing bridge",
+      "from_pose_id": "walk_profile_left_contact_right",
+      "to_pose_id": "walk_profile_left_passing_right_to_left",
+      "progress_milli": [250, 500, 750],
+      "lock_anchor": "right_foot",
+      "prealign_lock_anchor": false,
+      "method": "inverse_sample",
+      "facing": "west",
+      "locomotion": "walking",
+      "actions": ["walking"],
+      "tags": ["profile", "left", "walk", "inbetween", "v6_continuity"]
+    },
+    {
+      "id_prefix": "walk_profile_left_passing_to_contact_left",
+      "description": "west gait passing to left-contact bridge",
+      "from_pose_id": "walk_profile_left_passing_right_to_left",
+      "to_pose_id": "walk_profile_left_contact_left",
+      "progress_milli": [250, 500, 750],
+      "lock_anchor": "right_foot",
+      "prealign_lock_anchor": false,
+      "method": "inverse_sample",
+      "facing": "west",
+      "locomotion": "walking",
+      "actions": ["walking"],
+      "tags": ["profile", "left", "walk", "inbetween", "v6_continuity"]
+    },
+    {
+      "id_prefix": "turn_front_to_right_entry",
+      "description": "front gait into east-turn anticipation",
+      "from_pose_id": "walk_front_right",
+      "to_pose_id": "hd_turn_right_anticipation",
+      "progress_milli": [250, 500, 750],
+      "lock_anchor": "root",
+      "method": "inverse_sample",
+      "facing": "southeast",
+      "locomotion": "walking",
+      "actions": ["walking"],
+      "tags": ["front", "right", "turn", "inbetween", "v6_continuity"]
+    },
+    {
+      "id_prefix": "turn_front_to_left_entry",
+      "description": "front gait into west-turn anticipation",
+      "from_pose_id": "walk_front_left",
+      "to_pose_id": "hd_turn_left_anticipation",
+      "progress_milli": [250, 500, 750],
+      "lock_anchor": "root",
+      "method": "inverse_sample",
+      "facing": "southwest",
+      "locomotion": "walking",
+      "actions": ["walking"],
+      "tags": ["front", "left", "turn", "inbetween", "v6_continuity"]
+    },
+    {
+      "id_prefix": "turn_left_mid_to_complete",
+      "description": "west turn hand, staff, and silhouette transfer",
+      "from_pose_id": "hd_turn_left_mid",
+      "to_pose_id": "hd_turn_left_complete",
+      "progress_milli": [166, 333, 500, 667, 833],
+      "lock_anchor": "root",
+      "method": "inverse_sample",
+      "facing": "west",
+      "locomotion": "walking",
+      "actions": ["walking"],
+      "tags": ["profile", "left", "turn", "inbetween", "v6_continuity"]
+    },
+    {
+      "id_prefix": "stop_profile_left_hd_settle",
+      "description": "west walk deceleration into a planted profile settle",
+      "from_pose_id": "walk_profile_left_passing_left_to_right",
+      "to_pose_id": "hd_turn_left_complete",
+      "progress_milli": [200, 400, 600, 800],
+      "lock_anchor": "root",
+      "method": "inverse_sample",
+      "facing": "west",
+      "locomotion": "idle",
+      "actions": ["walking", "stop"],
+      "tags": ["profile", "left", "stop", "inbetween", "v6_continuity"]
+    },
+    {
+      "id_prefix": "stop_profile_right_hd_settle",
+      "description": "east walk deceleration into a planted profile settle",
+      "from_pose_id": "walk_profile_right_passing_right_to_left",
+      "to_pose_id": "hd_turn_right_complete",
+      "progress_milli": [200, 400, 600, 800],
+      "lock_anchor": "root",
+      "method": "inverse_sample",
+      "facing": "east",
+      "locomotion": "idle",
+      "actions": ["walking", "stop"],
+      "tags": ["profile", "right", "stop", "inbetween", "v6_continuity"]
+    }
+  ],
   "derived_cast_tip_overrides": {
     "cast_front_00": [22, -83],
     "cast_front_01": [22, -83],
@@ -1727,9 +1915,9 @@
         "left_foot": [-12, -3],
         "right_foot": [6, -3],
         "left_hand": [8, -30],
-        "right_hand": [-19, -44],
-        "staff_hand": [-19, -44],
-        "staff_tip": [-22, -83]
+        "right_hand": [-21, -44],
+        "staff_hand": [-21, -44],
+        "staff_tip": [-25, -83]
       },
       "tags": [
         "profile",
@@ -1971,8 +2159,8 @@
         "left_foot": [-14, -3],
         "right_foot": [18, -3],
         "left_hand": [0, -30],
-        "right_hand": [17, -44],
-        "staff_hand": [17, -44],
+        "right_hand": [24, -44],
+        "staff_hand": [24, -44],
         "staff_tip": [25, -86]
       },
       "tags": [
@@ -8260,6 +8448,153 @@
       "actions": ["walking", "stop"],
       "phase": 1.0,
       "tags": ["profile", "left", "stop", "left_foot", "derived_pixel_graph", "v6_continuity"]
+    },
+    {
+      "id": "hd_turn_front_neutral",
+      "source": "hd_pose:001_turn_front_neutral",
+      "hd_pose_id": "001_turn_front_neutral",
+      "description": "Approved HD front-neutral turn center baked to the canonical graph",
+      "facing": "south",
+      "locomotion": "idle",
+      "actions": ["walking"],
+      "anchor_offsets": {
+        "left_eye": [-5, -70],
+        "right_eye": [5, -70],
+        "mouth": [0, -59],
+        "left_foot": [-8, -1],
+        "right_foot": [8, -1],
+        "left_hand": [-16, -43],
+        "right_hand": [16, -43],
+        "staff_hand": [20, -45],
+        "staff_tip": [22, -83]
+      },
+      "tags": ["hd_source", "approved_production_alpha", "turn", "south", "v6_continuity"]
+    },
+    {
+      "id": "hd_turn_right_complete",
+      "source": "hd_pose:150_turn_right_complete",
+      "hd_pose_id": "150_turn_right_complete",
+      "description": "Approved HD east-profile turn completion baked to the canonical graph",
+      "facing": "east",
+      "locomotion": "walking",
+      "actions": ["walking"],
+      "anchor_offsets": {
+        "left_eye": [7, -70],
+        "right_eye": [8, -70],
+        "mouth": [10, -64],
+        "left_foot": [-8, -2],
+        "right_foot": [6, -2],
+        "left_hand": [-7, -29],
+        "right_hand": [22, -42],
+        "staff_hand": [22, -42],
+        "staff_tip": [26, -77]
+      },
+      "tags": ["hd_source", "approved_production_alpha", "turn", "east", "v6_continuity"]
+    },
+    {
+      "id": "hd_turn_right_mid",
+      "source": "hd_pose:149_turn_right_mid",
+      "hd_pose_id": "149_turn_right_mid",
+      "description": "Approved HD southeast turn midpoint baked to the canonical graph",
+      "facing": "southeast",
+      "locomotion": "walking",
+      "actions": ["walking"],
+      "anchor_offsets": {
+        "left_eye": [5, -69],
+        "right_eye": [9, -69],
+        "mouth": [8, -64],
+        "left_foot": [-12, -3],
+        "right_foot": [13, -3],
+        "left_hand": [-1, -30],
+        "right_hand": [20, -42],
+        "staff_hand": [20, -42],
+        "staff_tip": [27, -81]
+      },
+      "tags": ["hd_source", "approved_production_alpha", "turn", "southeast", "v6_continuity"]
+    },
+    {
+      "id": "hd_turn_right_anticipation",
+      "source": "hd_pose:148_turn_right_anticipation",
+      "hd_pose_id": "148_turn_right_anticipation",
+      "description": "Approved HD front-dominant right-turn anticipation baked to the canonical graph",
+      "facing": "southeast",
+      "locomotion": "walking",
+      "actions": ["walking"],
+      "anchor_offsets": {
+        "left_eye": [0, -69],
+        "right_eye": [7, -69],
+        "mouth": [3, -64],
+        "left_foot": [-14, -3],
+        "right_foot": [18, -3],
+        "left_hand": [0, -30],
+        "right_hand": [17, -44],
+        "staff_hand": [17, -44],
+        "staff_tip": [25, -86]
+      },
+      "tags": ["hd_source", "approved_production_alpha", "turn", "southeast", "v6_continuity"]
+    },
+    {
+      "id": "hd_turn_left_anticipation",
+      "source": "hd_pose:136_turn_left_anticipation",
+      "hd_pose_id": "136_turn_left_anticipation",
+      "description": "Approved HD front-dominant left-turn anticipation baked to the canonical graph",
+      "facing": "southwest",
+      "locomotion": "walking",
+      "actions": ["walking"],
+      "anchor_offsets": {
+        "left_eye": [-5, -69],
+        "right_eye": [1, -69],
+        "mouth": [-3, -64],
+        "left_foot": [-14, -3],
+        "right_foot": [14, -3],
+        "left_hand": [-2, -30],
+        "right_hand": [17, -44],
+        "staff_hand": [17, -44],
+        "staff_tip": [24, -86]
+      },
+      "tags": ["hd_source", "approved_production_alpha", "turn", "southwest", "v6_continuity"]
+    },
+    {
+      "id": "hd_turn_left_mid",
+      "source": "hd_pose:137_turn_left_mid",
+      "hd_pose_id": "137_turn_left_mid",
+      "description": "Approved HD southwest turn midpoint baked to the canonical graph",
+      "facing": "southwest",
+      "locomotion": "walking",
+      "actions": ["walking"],
+      "anchor_offsets": {
+        "left_eye": [-9, -69],
+        "right_eye": [-5, -69],
+        "mouth": [-8, -64],
+        "left_foot": [-11, -3],
+        "right_foot": [10, -3],
+        "left_hand": [-4, -31],
+        "right_hand": [22, -43],
+        "staff_hand": [22, -43],
+        "staff_tip": [23, -83]
+      },
+      "tags": ["hd_source", "approved_production_alpha", "turn", "southwest", "v6_continuity"]
+    },
+    {
+      "id": "hd_turn_left_complete",
+      "source": "hd_pose:138_turn_left_complete",
+      "hd_pose_id": "138_turn_left_complete",
+      "description": "Approved HD west-profile turn completion baked to the canonical graph",
+      "facing": "west",
+      "locomotion": "walking",
+      "actions": ["walking"],
+      "anchor_offsets": {
+        "left_eye": [-8, -70],
+        "right_eye": [-7, -70],
+        "mouth": [-9, -64],
+        "left_foot": [-5, -2],
+        "right_foot": [4, -2],
+        "left_hand": [7, -30],
+        "right_hand": [-19, -44],
+        "staff_hand": [-19, -44],
+        "staff_tip": [-22, -83]
+      },
+      "tags": ["hd_source", "approved_production_alpha", "turn", "west", "v6_continuity"]
     }
   ]
 }

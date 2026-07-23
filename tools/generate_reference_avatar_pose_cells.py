@@ -6,21 +6,29 @@ import hashlib
 import json
 import sys
 from pathlib import Path
-from typing import Any
+from typing import Any, Sequence
 
-from generate_reference_avatar_cells import ROOT, generate
+from generate_reference_avatar_cells import ROOT, generate, generate_from_image
 
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from wizard_avatar.compositor import CellCanvas
 from wizard_avatar.glyphs import glyph
+from wizard_avatar.hd_pose_artifact import HDPoseLibrary, sha256_path
+from wizard_avatar.motion_manifest import (
+    expand_derived_bridge_series,
+    hd_source_import_policy,
+)
 from wizard_avatar.pose_compositor import (
+    authored_staff_cells,
     author_cast_staff_graph,
+    clear_authored_staff,
     composite_anchor_transition,
     composite_landmark_splat_transition,
     composite_landmark_warp_transition,
     composite_localized_landmark_transition,
+    paint_rigid_staff_graph,
     resolve_authored_staff_anchors,
 )
 
@@ -43,6 +51,103 @@ REQUIRED_ANCHORS = (
 
 def stable_json(payload: dict[str, Any]) -> str:
     return json.dumps(payload, indent=2, sort_keys=False) + "\n"
+
+
+def load_canonical_palette(
+    manifest: dict[str, Any],
+) -> tuple[tuple[int, int, int], ...] | None:
+    raw_path = manifest.get("canonical_palette_path")
+    if raw_path is None:
+        return None
+    if not isinstance(raw_path, str) or not raw_path:
+        raise ValueError("canonical_palette_path must be a nonempty string")
+    palette_path = Path(raw_path)
+    if not palette_path.is_absolute():
+        palette_path = ROOT / palette_path
+    payload = json.loads(palette_path.read_text(encoding="utf-8"))
+    raw_colors = payload.get("colors")
+    if not isinstance(raw_colors, list) or not raw_colors:
+        raise ValueError(f"{palette_path}: colors must be a nonempty list")
+    colors_list: list[tuple[int, int, int]] = []
+    for index, color in enumerate(raw_colors):
+        if not isinstance(color, list) or len(color) != 3:
+            raise ValueError(
+                f"{palette_path}.colors[{index}] must contain three channels"
+            )
+        if any(isinstance(channel, bool) or not isinstance(channel, int) for channel in color):
+            raise ValueError(
+                f"{palette_path}.colors[{index}] channels must be integers"
+            )
+        colors_list.append((color[0], color[1], color[2]))
+    colors = tuple(colors_list)
+    if any(channel < 0 or channel > 255 for color in colors for channel in color):
+        raise ValueError(f"{palette_path}: palette channels must be in the range 0..255")
+    if len(set(colors)) != len(colors):
+        raise ValueError(f"{palette_path}: palette colors must be unique")
+    if len(colors) > 256:
+        raise ValueError(f"{palette_path}: palette cannot contain more than 256 colors")
+    return colors
+
+
+def load_hd_pose_library(
+    manifest: dict[str, Any],
+    *,
+    required: bool,
+) -> HDPoseLibrary | None:
+    raw_path = manifest.get("hd_pose_library_path")
+    if raw_path is None:
+        if required:
+            raise ValueError("hd_pose_library_path is required by an authored pose")
+        return None
+    if not isinstance(raw_path, str) or not raw_path:
+        raise ValueError("hd_pose_library_path must be a nonempty string")
+    index_path = Path(raw_path)
+    if not index_path.is_absolute():
+        index_path = ROOT / index_path
+    expected_sha256 = manifest.get("hd_pose_library_sha256")
+    if not isinstance(expected_sha256, str) or len(expected_sha256) != 64:
+        raise ValueError("hd_pose_library_sha256 must be a SHA-256 hex digest")
+    actual_sha256 = sha256_path(index_path)
+    if actual_sha256 != expected_sha256:
+        raise ValueError("HD pose library index checksum does not match the manifest")
+    return HDPoseLibrary(index_path)
+
+
+def remap_payload_palette(
+    payload: dict[str, Any],
+    palette_colors: Sequence[tuple[int, int, int]] | None,
+) -> dict[str, Any]:
+    if palette_colors is None:
+        return payload
+    palette = tuple(palette_colors)
+    nearest_cache: dict[tuple[int, int, int], tuple[int, int, int]] = {}
+
+    def nearest(raw: Sequence[int]) -> tuple[int, int, int]:
+        rgb = tuple(int(channel) for channel in raw)
+        cached = nearest_cache.get(rgb)
+        if cached is not None:
+            return cached
+        selected = min(
+            palette,
+            key=lambda candidate: (
+                sum(
+                    (rgb[channel] - candidate[channel]) ** 2
+                    for channel in range(3)
+                ),
+                candidate,
+            ),
+        )
+        nearest_cache[rgb] = selected
+        return selected
+
+    return {
+        **payload,
+        "quantized_colors": len(palette),
+        "cells": [
+            {**cell, "rgb": list(nearest(cell["rgb"]))}
+            for cell in payload["cells"]
+        ],
+    }
 
 
 def point_from(value: object, *, field_name: str) -> list[int]:
@@ -407,7 +512,10 @@ def derive_landmark_warp_payload(
     def resolve_staff_geometry(
         canvas: CellCanvas,
         anchors: dict[str, list[int]],
+        endpoint_pose: dict[str, Any],
     ) -> None:
+        if "hd_source" in endpoint_pose.get("tags", []):
+            return
         staff_tip, staff_hand = resolve_authored_staff_anchors(
             canvas,
             tuple(anchors["staff_tip"]),
@@ -417,29 +525,69 @@ def derive_landmark_warp_payload(
         anchors["staff_tip"] = list(staff_tip)
         anchors["staff_hand"] = list(staff_hand)
 
-    resolve_staff_geometry(from_canvas, from_anchors)
-    resolve_staff_geometry(to_canvas, to_anchors)
+    resolve_staff_geometry(from_canvas, from_anchors, from_pose)
+    resolve_staff_geometry(to_canvas, to_anchors, to_pose)
+    staff_transition = warp.get("staff_transition")
+    if staff_transition not in {None, "rigid"}:
+        raise ValueError(
+            f"{pose['id']}.derived_landmark_warp.staff_transition is unsupported"
+        )
+    rigid_staff_cells = None
+    if staff_transition == "rigid":
+        rigid_staff_cells = authored_staff_cells(
+            from_canvas,
+            tuple(from_anchors["staff_tip"]),
+            tuple(from_anchors["staff_hand"]),
+            None if "hd_source" in from_pose.get("tags", []) else tuple(from_anchors["root"]),
+        )
+        if not rigid_staff_cells:
+            raise ValueError(f"{pose['id']} rigid staff source mask is empty")
+        clear_authored_staff(
+            from_canvas,
+            tuple(from_anchors["staff_tip"]),
+            tuple(from_anchors["staff_hand"]),
+            None if "hd_source" in from_pose.get("tags", []) else tuple(from_anchors["root"]),
+            aggressive=True,
+        )
+        clear_authored_staff(
+            to_canvas,
+            tuple(to_anchors["staff_tip"]),
+            tuple(to_anchors["staff_hand"]),
+            None if "hd_source" in to_pose.get("tags", []) else tuple(to_anchors["root"]),
+            aggressive=True,
+        )
     lock_anchor = warp.get("lock_anchor")
+    prealign_lock_anchor = warp.get("prealign_lock_anchor", True)
+    if not isinstance(prealign_lock_anchor, bool):
+        raise ValueError(
+            f"{pose['id']}.derived_landmark_warp.prealign_lock_anchor "
+            "must be a boolean"
+        )
     if lock_anchor is not None:
         if not isinstance(lock_anchor, str) or not lock_anchor:
             raise ValueError(f"{pose['id']}.derived_landmark_warp.lock_anchor must be a name")
         if lock_anchor not in from_anchors or lock_anchor not in to_anchors:
             raise ValueError(f"{pose['id']} lock anchor {lock_anchor!r} is missing")
-        delta_x = from_anchors[lock_anchor][0] - to_anchors[lock_anchor][0]
-        delta_y = from_anchors[lock_anchor][1] - to_anchors[lock_anchor][1]
-        aligned = CellCanvas(to_canvas.width, to_canvas.height)
-        for y in range(to_canvas.height):
-            for x in range(to_canvas.width):
-                cell = to_canvas.get(x, y)
-                target_x = x + delta_x
-                target_y = y + delta_y
-                if cell is not None and 0 <= target_x < aligned.width and 0 <= target_y < aligned.height:
-                    aligned.cells[target_y][target_x] = cell
-        to_canvas = aligned
-        to_anchors = {
-            name: [point[0] + delta_x, point[1] + delta_y]
-            for name, point in to_anchors.items()
-        }
+        if prealign_lock_anchor:
+            delta_x = from_anchors[lock_anchor][0] - to_anchors[lock_anchor][0]
+            delta_y = from_anchors[lock_anchor][1] - to_anchors[lock_anchor][1]
+            aligned = CellCanvas(to_canvas.width, to_canvas.height)
+            for y in range(to_canvas.height):
+                for x in range(to_canvas.width):
+                    cell = to_canvas.get(x, y)
+                    target_x = x + delta_x
+                    target_y = y + delta_y
+                    if (
+                        cell is not None
+                        and 0 <= target_x < aligned.width
+                        and 0 <= target_y < aligned.height
+                    ):
+                        aligned.cells[target_y][target_x] = cell
+            to_canvas = aligned
+            to_anchors = {
+                name: [point[0] + delta_x, point[1] + delta_y]
+                for name, point in to_anchors.items()
+            }
     requested_names = tuple(
         str(name)
         for name in warp.get(
@@ -447,6 +595,10 @@ def derive_landmark_warp_payload(
             REQUIRED_ANCHORS,
         )
     )
+    if staff_transition == "rigid":
+        requested_names = tuple(
+            name for name in requested_names if name != "staff_tip"
+        )
     missing = [
         name
         for name in requested_names
@@ -507,6 +659,43 @@ def derive_landmark_warp_payload(
             hand_radius=hand_radius,
             repair_axis_x=from_anchors["root"][0],
         )
+    if (
+        prealign_lock_anchor
+        and lock_anchor in {"left_foot", "right_foot"}
+    ):
+        foot_x, foot_y = from_anchors[lock_anchor]
+        for y in range(max(0, foot_y - 10), min(canvas.height, foot_y + 4)):
+            for x in range(max(0, foot_x - 8), min(canvas.width, foot_x + 9)):
+                canvas.cells[y][x] = from_canvas.cells[y][x]
+    if rigid_staff_cells is not None:
+        skin_canvas = canvas.copy()
+        target_hand = tuple(
+            from_anchors["staff_hand"][axis]
+            + (
+                (to_anchors["staff_hand"][axis] - from_anchors["staff_hand"][axis])
+                * progress_milli
+            )
+            // 1000
+            for axis in (0, 1)
+        )
+        target_tip = tuple(
+            from_anchors["staff_tip"][axis]
+            + (
+                (to_anchors["staff_tip"][axis] - from_anchors["staff_tip"][axis])
+                * progress_milli
+            )
+            // 1000
+            for axis in (0, 1)
+        )
+        paint_rigid_staff_graph(
+            canvas,
+            staff_cells=rigid_staff_cells,
+            source_staff_tip=tuple(from_anchors["staff_tip"]),
+            source_staff_hand=tuple(from_anchors["staff_hand"]),
+            target_staff_tip=target_tip,
+            target_staff_hand=target_hand,
+            skin_canvas=skin_canvas,
+        )
     anchors = {
         name: [
             from_anchors[name][axis]
@@ -515,6 +704,27 @@ def derive_landmark_warp_payload(
         ]
         for name in sorted(set(from_anchors) & set(to_anchors))
     }
+    if lock_anchor in {"left_foot", "right_foot"}:
+        requested_x, requested_y = anchors[lock_anchor]
+        occupied = [
+            (x, y)
+            for y in range(canvas.height)
+            for x in range(canvas.width)
+            if canvas.get(x, y) is not None
+        ]
+        anchors[lock_anchor] = list(
+            min(
+                occupied,
+                key=lambda point: (
+                    (point[0] - requested_x) ** 2
+                    + (point[1] - requested_y) ** 2,
+                    abs(point[1] - requested_y),
+                    abs(point[0] - requested_x),
+                    point[1],
+                    point[0],
+                ),
+            )
+        )
     root = point_from(canonical["root_anchor"], field_name="canonical.root_anchor")
     anchors["root"] = root
     return {
@@ -524,6 +734,11 @@ def derive_landmark_warp_payload(
             + (f":lock={lock_anchor}" if lock_anchor is not None else "")
             + (":localized" if localized_region is not None else "")
             + (f":method={method}" if method != "inverse_sample" else "")
+            + (
+                f":staff={staff_transition}"
+                if staff_transition is not None
+                else ""
+            )
         ),
         "source_size": [int(canonical["cols"]), int(canonical["rows"])],
         "source_crop": [0, 0, int(canonical["cols"]), int(canonical["rows"])],
@@ -550,7 +765,10 @@ def generate_pose_library(
     write_output: bool = True,
     reuse_authored_library_path: Path | None = None,
 ) -> dict:
-    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    manifest = expand_derived_bridge_series(
+        json.loads(manifest_path.read_text(encoding="utf-8"))
+    )
+    palette_colors = load_canonical_palette(manifest)
     source_dir = manifest_path.parent
     requested_cols = int(manifest.get("canonical", {}).get("cols", 0))
     reused_authored: dict[str, dict[str, Any]] = {}
@@ -574,6 +792,16 @@ def generate_pose_library(
         and "derived_landmark_warp" not in pose
         and "derived_translation" not in pose
     ]
+    hd_library = load_hd_pose_library(
+        manifest,
+        required=any("hd_pose_id" in pose for pose in authored_poses),
+    )
+    hd_import_policy = (
+        hd_source_import_policy(manifest)
+        if hd_library is not None
+        and any("hd_pose_id" in pose for pose in authored_poses)
+        else None
+    )
     for pose in authored_poses:
         existing = reused_authored.get(str(pose["id"]))
         if existing is not None:
@@ -595,27 +823,63 @@ def generate_pose_library(
             generation_rows = int(existing.get("generation_rows", rows))
             raw_entries.append((pose, payload, generation_rows))
             continue
-        source_path_value = pose.get("source_path")
-        if source_path_value is None:
-            source_path = source_dir / pose["source"]
-        else:
-            source_path = Path(source_path_value)
-            if not source_path.is_absolute():
-                source_path = ROOT / source_path
         temp_output = output_path.parent / f".{pose['id']}.tmp.json"
         generation_rows = int(pose.get("generation_rows", rows))
-        payload = generate(
-            source_path,
-            temp_output,
-            rows=generation_rows,
-            margin=margin,
-            threshold=threshold,
-            coverage_threshold=coverage_threshold,
-            colors=colors,
-            minimum_alpha_component_pixels=int(
-                pose.get("minimum_alpha_component_pixels", 16)
-            ),
-        )
+
+        def generate_authored_payload(authored_rows: int) -> dict[str, Any]:
+            common = {
+                "rows": authored_rows,
+                "margin": margin,
+                "threshold": threshold,
+                "coverage_threshold": coverage_threshold,
+                "colors": colors,
+                "minimum_alpha_component_pixels": int(
+                    pose.get("minimum_alpha_component_pixels", 16)
+                ),
+                "palette_colors": palette_colors,
+            }
+            hd_pose_id = pose.get("hd_pose_id")
+            if hd_pose_id is not None:
+                if not isinstance(hd_pose_id, str) or not hd_pose_id:
+                    raise ValueError(f"{pose['id']}.hd_pose_id must be nonempty")
+                if hd_library is None:
+                    raise ValueError(f"{pose['id']} requires the HD pose library")
+                if hd_import_policy is None:
+                    raise ValueError(f"{pose['id']} requires an HD source import policy")
+                metadata = hd_library.pose_metadata.get(hd_pose_id)
+                if metadata is None:
+                    raise ValueError(f"{pose['id']} references an unknown HD pose")
+                if (
+                    metadata["approval_state"]
+                    != hd_import_policy["required_approval_state"]
+                ):
+                    raise ValueError(
+                        f"{pose['id']} references HD art outside the approved "
+                        "offline-authoring scope"
+                    )
+                if (
+                    hd_import_policy["native_runtime_admission_required"]
+                    and not metadata["runtime_admitted"]
+                ):
+                    raise ValueError(
+                        f"{pose['id']} requires native HD runtime admission"
+                    )
+                return generate_from_image(
+                    hd_library.load_pose(hd_pose_id),
+                    f"hd_pose:{hd_pose_id}",
+                    temp_output,
+                    **common,
+                )
+            source_path_value = pose.get("source_path")
+            if source_path_value is None:
+                source_path = source_dir / pose["source"]
+            else:
+                source_path = Path(source_path_value)
+                if not source_path.is_absolute():
+                    source_path = ROOT / source_path
+            return generate(source_path, temp_output, **common)
+
+        payload = generate_authored_payload(generation_rows)
         while requested_cols and int(payload["cols"]) > requested_cols:
             fitted_rows = max(
                 1,
@@ -626,18 +890,7 @@ def generate_pose_library(
             if fitted_rows < 1:
                 raise ValueError(f"{pose['id']} cannot fit the canonical width")
             generation_rows = fitted_rows
-            payload = generate(
-                source_path,
-                temp_output,
-                rows=generation_rows,
-                margin=margin,
-                threshold=threshold,
-                coverage_threshold=coverage_threshold,
-                colors=colors,
-                minimum_alpha_component_pixels=int(
-                    pose.get("minimum_alpha_component_pixels", 16)
-                ),
-            )
+            payload = generate_authored_payload(generation_rows)
         temp_output.unlink(missing_ok=True)
         raw_entries.append((pose, payload, generation_rows))
 
@@ -698,6 +951,7 @@ def generate_pose_library(
         else:
             payload = normalized_payloads[pose["id"]]
             generation_rows = generation_rows_by_id[pose["id"]]
+        payload = remap_payload_palette(payload, palette_colors)
         # Derived graphs become valid inputs for later derived graphs in the
         # manifest. This preserves a deterministic, acyclic authoring order
         # while keeping every runtime pose as a fully baked pixel graph.
@@ -744,10 +998,20 @@ def generate_pose_library(
         "asset_set_id": manifest.get("asset_set_id", "wizardjoe-reference-motion-v1"),
         "source_manifest": str(manifest_path.relative_to(ROOT)),
         "canonical": canonical,
-        "palette": palette_summary(
-            poses,
-            manifest.get("palette_id", f"per_pose_quantized_{colors}"),
-        ),
+        "palette": {
+            **palette_summary(
+                poses,
+                manifest.get("palette_id", f"per_pose_quantized_{colors}"),
+            ),
+            **(
+                {
+                    "declared_color_count": len(palette_colors),
+                    "source": str(manifest["canonical_palette_path"]),
+                }
+                if palette_colors is not None
+                else {}
+            ),
+        },
         "rows": rows,
         "margin": margin,
         "threshold": threshold,

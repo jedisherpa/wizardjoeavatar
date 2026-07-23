@@ -267,12 +267,12 @@ class PoseSelectionTests(unittest.TestCase):
             observed,
             [
                 "walk_front_right",
-                "turn_front_to_east_entry_25",
-                "turn_front_to_east_entry_50",
-                "turn_front_to_east_entry_75",
-                "turn_south_east_33",
-                "turn_south_east_50",
-                "turn_south_east_67",
+                "turn_front_to_right_entry_250",
+                "turn_front_to_right_entry_500",
+                "turn_front_to_right_entry_750",
+                "hd_turn_right_anticipation",
+                "hd_turn_right_mid",
+                "hd_turn_right_complete",
                 "walk_profile_right_contact_left",
             ],
         )
@@ -310,13 +310,18 @@ class PoseSelectionTests(unittest.TestCase):
                 "ground_walk_right",
                 (
                     "walk_profile_left_contact_left",
-                    "turn_south_west_67",
-                    "turn_south_west_50",
-                    "turn_south_west_33",
-                    "turn_front_crossover_plant",
-                    "turn_south_east_33",
-                    "turn_south_east_50",
-                    "turn_south_east_67",
+                    "hd_turn_left_complete",
+                    "turn_left_mid_to_complete_833",
+                    "turn_left_mid_to_complete_667",
+                    "turn_left_mid_to_complete_500",
+                    "turn_left_mid_to_complete_333",
+                    "turn_left_mid_to_complete_166",
+                    "hd_turn_left_mid",
+                    "hd_turn_left_anticipation",
+                    "hd_turn_front_neutral",
+                    "hd_turn_right_anticipation",
+                    "hd_turn_right_mid",
+                    "hd_turn_right_complete",
                     "walk_profile_right_contact_right",
                 ),
             ),
@@ -330,17 +335,18 @@ class PoseSelectionTests(unittest.TestCase):
                 "ground_walk_left",
                 (
                     "walk_profile_right_contact_right",
-                    "turn_south_east_67",
-                    "turn_south_east_50",
-                    "turn_south_east_33",
-                    "turn_front_crossover_plant",
-                    "turn_crossover_to_west_25",
-                    "turn_crossover_to_west_50",
-                    "turn_crossover_to_west_75",
-                    "turn_crossover_to_west_875",
-                    "turn_south_west_33",
-                    "turn_south_west_50",
-                    "turn_south_west_67",
+                    "hd_turn_right_complete",
+                    "hd_turn_right_mid",
+                    "hd_turn_right_anticipation",
+                    "hd_turn_front_neutral",
+                    "hd_turn_left_anticipation",
+                    "hd_turn_left_mid",
+                    "turn_left_mid_to_complete_166",
+                    "turn_left_mid_to_complete_333",
+                    "turn_left_mid_to_complete_500",
+                    "turn_left_mid_to_complete_667",
+                    "turn_left_mid_to_complete_833",
+                    "hd_turn_left_complete",
                     "walk_profile_left_contact_left",
                 ),
             ),
@@ -371,7 +377,10 @@ class PoseSelectionTests(unittest.TestCase):
                     if state.animation_node_id.startswith("ground_reverse_"):
                         observed_turn_clips.add(sample.clip_id)
                         self.assertEqual(sample.root_policy, "contact_locked")
-                        self.assertIn(sample.contact, {"left_foot", "right_foot"})
+                        self.assertIn(
+                            sample.contact,
+                            {"left_foot", "right_foot", "both_feet"},
+                        )
                         if not observed_poses or observed_poses[-1] != sample.pose_id:
                             observed_poses.append(sample.pose_id)
                     state.simulation_tick += 1
@@ -400,13 +409,14 @@ class PoseSelectionTests(unittest.TestCase):
                 "left_foot",
                 "ground_stop_left",
                 "profile_left",
-                123,
+                133,
                 (
                     "walk_profile_left_passing_left_to_right",
-                    "stop_profile_left_from_left_25",
-                    "stop_profile_left_from_left_50",
-                    "stop_profile_left_from_left_75",
-                    "stop_profile_left_from_left_100",
+                    "stop_profile_left_hd_settle_200",
+                    "stop_profile_left_hd_settle_400",
+                    "stop_profile_left_hd_settle_600",
+                    "stop_profile_left_hd_settle_800",
+                    "hd_turn_left_complete",
                     "profile_left",
                 ),
             ),
@@ -416,15 +426,22 @@ class PoseSelectionTests(unittest.TestCase):
                 "right_foot",
                 "ground_stop_left",
                 "profile_left",
-                143,
+                153,
                 (
                     "walk_profile_left_contact_right",
+                    "walk_profile_left_contact_right_to_passing_250",
+                    "walk_profile_left_contact_right_to_passing_500",
+                    "walk_profile_left_contact_right_to_passing_750",
                     "walk_profile_left_passing_right_to_left",
+                    "walk_profile_left_passing_to_contact_left_250",
+                    "walk_profile_left_passing_to_contact_left_500",
+                    "walk_profile_left_passing_to_contact_left_750",
                     "walk_profile_left_passing_left_to_right",
-                    "stop_profile_left_from_left_25",
-                    "stop_profile_left_from_left_50",
-                    "stop_profile_left_from_left_75",
-                    "stop_profile_left_from_left_100",
+                    "stop_profile_left_hd_settle_200",
+                    "stop_profile_left_hd_settle_400",
+                    "stop_profile_left_hd_settle_600",
+                    "stop_profile_left_hd_settle_800",
+                    "hd_turn_left_complete",
                     "profile_left",
                 ),
             ),
@@ -434,8 +451,16 @@ class PoseSelectionTests(unittest.TestCase):
                 "left_foot",
                 "ground_stop_right",
                 "profile_right",
-                128,
-                ("profile_right",),
+                133,
+                (
+                    "walk_profile_right_passing_right_to_left",
+                    "stop_profile_right_hd_settle_200",
+                    "stop_profile_right_hd_settle_400",
+                    "stop_profile_right_hd_settle_600",
+                    "stop_profile_right_hd_settle_800",
+                    "hd_turn_right_complete",
+                    "profile_right",
+                ),
             ),
             (
                 "east",
@@ -443,8 +468,14 @@ class PoseSelectionTests(unittest.TestCase):
                 "right_foot",
                 "ground_stop_right",
                 "profile_right",
-                120,
-                ("profile_right",),
+                123,
+                (
+                    "stop_profile_right_hd_settle_400",
+                    "stop_profile_right_hd_settle_600",
+                    "stop_profile_right_hd_settle_800",
+                    "hd_turn_right_complete",
+                    "profile_right",
+                ),
             ),
         )
         for facing, phase, support, stop_node, idle_pose, settled_tick, pose_order in cases:
@@ -522,7 +553,7 @@ class PoseSelectionTests(unittest.TestCase):
 
         self.assertEqual(state.animation_node_id, "ground_stop_right")
         self.assertEqual(contacted.contact, "right_foot")
-        self.assertEqual(contacted.pose_id, "profile_right")
+        self.assertEqual(contacted.pose_id, "stop_profile_right_hd_settle_400")
         self.assertEqual(state.animation_transition_generation, 1)
 
     def test_action_channels_select_available_action_poses(self):

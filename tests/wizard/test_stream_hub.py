@@ -392,6 +392,21 @@ class StreamHubTests(unittest.IsolatedAsyncioTestCase):
             hub.unsubscribe(second)
             await hub.stop()
 
+    async def test_subscriber_count_is_bounded_and_reported(self):
+        hub = WizardFrameHub(ProceduralWizardFrameSource(fps=24), max_subscribers=2)
+        first = await hub.subscribe()
+        second = await hub.subscribe()
+        try:
+            with self.assertRaisesRegex(RuntimeError, "subscriber limit"):
+                await hub.subscribe()
+            diagnostics = hub.diagnostics_extra()
+            self.assertEqual(diagnostics["subscriber_count"], 2)
+            self.assertEqual(diagnostics["subscriber_capacity"], 2)
+        finally:
+            hub.unsubscribe(first)
+            hub.unsubscribe(second)
+            await hub.stop()
+
     async def test_resync_requests_one_global_keyframe_publication(self):
         hub = WizardFrameHub(ProceduralWizardFrameSource(fps=24))
         recovering = await hub.subscribe()

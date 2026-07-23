@@ -34,6 +34,11 @@ from .runtime import AvatarRuntime, ReplayLog, canonical_sha256
 
 
 _subscriber_ids = count(1)
+DEFAULT_MAX_SUBSCRIBERS = 64
+
+
+class SubscriberLimitError(RuntimeError):
+    pass
 
 
 def _permission_render_signature(policy):
@@ -65,9 +70,17 @@ class WizardFrameHub:
         frame_source: ProceduralWizardFrameSource,
         codec: str = "adaptive",
         score_repository: Optional[CompiledScoreRepository] = None,
+        max_subscribers: int = DEFAULT_MAX_SUBSCRIBERS,
     ) -> None:
+        if (
+            isinstance(max_subscribers, bool)
+            or not isinstance(max_subscribers, int)
+            or max_subscribers <= 0
+        ):
+            raise ValueError("max_subscribers must be a positive integer")
         self.frame_source = frame_source
         self.codec = codec
+        self.max_subscribers = max_subscribers
         self.runtime_epoch = "wizard-{}".format(uuid.uuid4().hex)
         package_path = getattr(self.frame_source, "character_package_path", None)
         capability_manifest = (
@@ -206,6 +219,8 @@ class WizardFrameHub:
 
     async def subscribe(self, max_queue_size: int = 8) -> WizardSubscriber:
         await self.start()
+        if len(self._subscribers) >= self.max_subscribers:
+            raise SubscriberLimitError("avatar subscriber limit reached")
         subscriber = WizardSubscriber(asyncio.Queue(maxsize=max_queue_size))
         self._subscribers.add(subscriber)
         if self._latest_frame is not None:
@@ -263,6 +278,7 @@ class WizardFrameHub:
             )
         diagnostics = {
             "subscriber_count": len(self._subscribers),
+            "subscriber_capacity": self.max_subscribers,
             "hub_actual_fps": self._published_frames / elapsed,
             "hub_window_fps": presentation_window,
             "hub_queue_drops": self._queue_drops,
@@ -280,6 +296,7 @@ class WizardFrameHub:
             "simulation_tick": self.runtime.clock.simulation_tick,
             "state_revision": self.runtime.clock.state_revision,
             "runtime_state_hash": self.runtime.current_snapshot().state_hash,
+            **self.runtime.event_retention_diagnostics,
             "ordered_command_pending": self.command_inbox.pending_count,
             **self.command_inbox.source_retention_diagnostics,
             "replay_record_count": self.replay_log.total_record_count,

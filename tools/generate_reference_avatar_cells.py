@@ -5,7 +5,7 @@ import argparse
 import json
 from collections import deque
 from pathlib import Path
-from typing import Iterable, Tuple
+from typing import Iterable, Sequence, Tuple
 
 from PIL import Image
 
@@ -143,8 +143,35 @@ def iter_cells(image: Image.Image, mask: Image.Image, coverage_threshold: int) -
                 yield {"x": x, "y": y, "rgb": list(rgb[x, y])}
 
 
-def generate(
-    input_path: Path,
+def palette_image(colors: Sequence[Tuple[int, int, int]]) -> Image.Image:
+    if not colors or len(colors) > 256:
+        raise ValueError("A canonical palette must contain 1..256 colors")
+    flattened = [
+        int(channel)
+        for color in colors
+        for channel in color
+    ]
+    if any(channel < 0 or channel > 255 for channel in flattened):
+        raise ValueError("Canonical palette channels must be in the range 0..255")
+    flattened.extend([0] * (768 - len(flattened)))
+    image = Image.new("P", (1, 1))
+    image.putpalette(flattened)
+    return image
+
+
+def quantize_to_palette(
+    image: Image.Image,
+    colors: Sequence[Tuple[int, int, int]],
+) -> Image.Image:
+    return image.convert("RGB").quantize(
+        palette=palette_image(colors),
+        dither=Image.Dither.NONE,
+    ).convert("RGB")
+
+
+def generate_from_image(
+    opened: Image.Image,
+    source_label: str,
     output_path: Path,
     rows: int,
     margin: int,
@@ -152,8 +179,8 @@ def generate(
     coverage_threshold: int,
     colors: int,
     minimum_alpha_component_pixels: int = 16,
+    palette_colors: Sequence[Tuple[int, int, int]] | None = None,
 ) -> dict:
-    opened = Image.open(input_path)
     rgba_source = opened.convert("RGBA")
     source = rgba_source.convert("RGB")
     alpha_extrema = rgba_source.getchannel("A").getextrema()
@@ -176,23 +203,60 @@ def generate(
     cols = max(1, round(rows * cropped.width / cropped.height))
     resample = Image.Resampling.BOX
     tile_image = cropped.resize((cols, rows), resample)
-    tile_image = tile_image.quantize(colors=colors, method=Image.Quantize.MEDIANCUT).convert("RGB")
+    if palette_colors is None:
+        tile_image = tile_image.quantize(
+            colors=colors,
+            method=Image.Quantize.MEDIANCUT,
+        ).convert("RGB")
+    else:
+        tile_image = quantize_to_palette(tile_image, palette_colors)
     tile_mask = solid_mask.resize((cols, rows), resample)
 
     payload = {
-        "source": str(input_path.relative_to(ROOT) if input_path.is_relative_to(ROOT) else input_path),
+        "source": source_label,
         "source_size": [source.width, source.height],
         "source_crop": [crop_bounds[0], crop_bounds[1], crop_bounds[2], crop_bounds[3]],
         "cols": cols,
         "rows": rows,
         "root_anchor": [cols // 2, rows - 1],
-        "quantized_colors": colors,
+        "quantized_colors": len(palette_colors) if palette_colors is not None else colors,
         "coverage_threshold": coverage_threshold,
         "cells": list(iter_cells(tile_image, tile_mask, coverage_threshold)),
     }
     output_path.parent.mkdir(parents=True, exist_ok=True)
     output_path.write_text(json.dumps(payload, indent=2), encoding="utf-8")
     return payload
+
+
+def generate(
+    input_path: Path,
+    output_path: Path,
+    rows: int,
+    margin: int,
+    threshold: float,
+    coverage_threshold: int,
+    colors: int,
+    minimum_alpha_component_pixels: int = 16,
+    palette_colors: Sequence[Tuple[int, int, int]] | None = None,
+) -> dict:
+    source_label = str(
+        input_path.relative_to(ROOT)
+        if input_path.is_relative_to(ROOT)
+        else input_path
+    )
+    with Image.open(input_path) as opened:
+        return generate_from_image(
+            opened,
+            source_label,
+            output_path,
+            rows,
+            margin,
+            threshold,
+            coverage_threshold,
+            colors,
+            minimum_alpha_component_pixels,
+            palette_colors,
+        )
 
 
 def main() -> None:
@@ -205,7 +269,19 @@ def main() -> None:
     parser.add_argument("--coverage-threshold", type=int, default=24)
     parser.add_argument("--colors", type=int, default=64)
     parser.add_argument("--minimum-alpha-component-pixels", type=int, default=16)
+    parser.add_argument(
+        "--palette",
+        type=Path,
+        help="Optional canonical palette JSON containing a colors array.",
+    )
     args = parser.parse_args()
+    palette_colors = None
+    if args.palette is not None:
+        palette_payload = json.loads(args.palette.read_text(encoding="utf-8"))
+        palette_colors = tuple(
+            tuple(int(channel) for channel in color)
+            for color in palette_payload["colors"]
+        )
     payload = generate(
         args.input,
         args.output,
@@ -215,6 +291,7 @@ def main() -> None:
         args.coverage_threshold,
         args.colors,
         args.minimum_alpha_component_pixels,
+        palette_colors,
     )
     print(json.dumps({k: payload[k] for k in ["source", "source_crop", "cols", "rows", "root_anchor"]}, indent=2))
 

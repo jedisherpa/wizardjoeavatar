@@ -96,6 +96,35 @@ class AvatarRuntimeTests(unittest.TestCase):
         self.assertAlmostEqual(runtime.clock.dropped_simulation_seconds, 112 / 60.0)
         self.assertEqual(result.events[0].event_type, "runtime.catch_up_dropped")
 
+    def test_runtime_events_retain_a_bounded_tail_without_losing_current_result(self):
+        runtime = AvatarRuntime(
+            initial_state={"ticks": 0, "last_tick": 0, "dt_values": [], "commands": []},
+            reducer=counter_reducer,
+            runtime_epoch="runtime-a",
+            event_capacity=3,
+        )
+        for _ in range(10):
+            result = runtime.advance_elapsed_ns(2_000_000_000)
+            self.assertEqual(len(result.events), 1)
+            self.assertEqual(result.events[0].event_type, "runtime.catch_up_dropped")
+
+        self.assertEqual(len(runtime.drain_events()), 3)
+        self.assertEqual(
+            runtime.event_retention_diagnostics,
+            {
+                "event_capacity": 3,
+                "retained_event_count": 0,
+                "evicted_event_count": 7,
+                "is_truncated": True,
+            },
+        )
+
+    def test_runtime_event_capacity_must_be_positive(self):
+        for invalid in (0, -1, True, 1.5):
+            with self.subTest(invalid=invalid):
+                with self.assertRaisesRegex(ValueError, "event_capacity"):
+                    AvatarRuntime({}, lambda state, _due, _tick, _dt: state, "runtime-a", event_capacity=invalid)
+
     def test_clock_rejects_backwards_time(self):
         runtime = make_runtime()
         runtime.advance_to(100)
