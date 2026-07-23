@@ -1,0 +1,690 @@
+{
+  "pack_id": "wizard_joe_forward_camera_flight_cycle",
+  "version": "v001",
+  "status": "candidate_review",
+  "frame_count": 10,
+  "playback": {
+    "fps": 10,
+    "order": [
+      "WJFF_001_top_recovery.png",
+      "WJFF_002_early_powerstroke.png",
+      "WJFF_003_mid_powerstroke.png",
+      "WJFF_004_late_powerstroke.png",
+      "WJFF_005_bottom_powerstroke.png",
+      "WJFF_006_early_recovery.png",
+      "WJFF_007_mid_recovery.png",
+      "WJFF_008_late_recovery.png",
+      "WJFF_009_near_top_recovery.png",
+      "WJFF_010_loop_close.png"
+    ],
+    "loop_transition": "WJFF_010_loop_close.png -> WJFF_001_top_recovery.png"
+  },
+  "canvas": {
+    "width": 1254,
+    "height": 1254,
+    "color_space": "sRGB",
+    "alpha": true
+  },
+  "normalization": {
+    "method": "connected_chroma_extraction_then_common_scale_face_anchor_translation",
+    "target_face_x": 644,
+    "target_face_y": 510,
+    "safe_margin_px": 69,
+    "common_scale": 0.93292,
+    "bob_offsets_y": [
+      8,
+      4,
+      0,
+      -4,
+      -8,
+      -4,
+      0,
+      4,
+      8,
+      9
+    ]
+  },
+  "runtime_note": "Apply forward root/camera translation separately; do not animate per-frame scale.",
+  "assets": [
+    {
+      "frame": 1,
+      "filename": "WJFF_001_top_recovery.png",
+      "dimensions": {
+        "width": 1254,
+        "height": 1254
+      },
+      "color_space": "sRGB",
+      "alpha": true,
+      "identity_lock_version": "wizard-joe-lock-v001",
+      "source_sha256": "d1e1019c539fdeaea530b17da67fa80f8ddc001101aea4fe266065dce0d237d8",
+      "alpha_sha256": "72e3bcfad3adf8dd92a0951594719d2ac7511005b8c7cc7e985f5380129418da",
+      "output_sha256": "dd911adf02e618167fedf461bf0103b0a8f7453a1e42c0179b9363b927e897e1",
+      "chroma_key_rgb": [
+        13,
+        247,
+        10
+      ],
+      "source_bbox": {
+        "x": 187,
+        "y": 65,
+        "width": 883,
+        "height": 1018,
+        "right": 1070,
+        "bottom": 1083,
+        "centerX": 628.5,
+        "centerY": 574,
+        "transparent": 1161849,
+        "partial": 441,
+        "opaque": 410226
+      },
+      "face_anchor": {
+        "x": 675.5,
+        "y": 518.5,
+        "width": 255,
+        "height": 233,
+        "pixels": 26299
+      },
+      "target_face_anchor": {
+        "x": 644,
+        "y": 518
+      },
+      "bob_offset_y": 8,
+      "placement": {
+        "left": 188,
+        "top": 95,
+        "width": 824,
+        "height": 950
+      },
+      "normalized_bbox": {
+        "x": 188,
+        "y": 95,
+        "width": 824,
+        "height": 950,
+        "right": 1012,
+        "bottom": 1045,
+        "centerX": 600,
+        "centerY": 570,
+        "transparent": 1206587,
+        "partial": 16843,
+        "opaque": 349086
+      },
+      "qa_status": "candidate_review"
+    },
+    {
+      "frame": 2,
+      "filename": "WJFF_002_early_powerstroke.png",
+      "dimensions": {
+        "width": 1254,
+        "height": 1254
+      },
+      "color_space": "sRGB",
+      "alpha": true,
+      "identity_lock_version": "wizard-joe-lock-v001",
+      "source_sha256": "1ff6e41ead0aa00ed64ef9cdaa6bbd58f18a615d16f4a170dcdcfb78857ec335",
+      "alpha_sha256": "af4569b79b768a054f1ed2b5e9d998cd22f8e6a36fb91707b1e83f661f392131",
+      "output_sha256": "a4d23cbddfa310eba303702e73602ee3ab1bcde60ae6150d9616195b08a83814",
+      "chroma_key_rgb": [
+        4,
+        249,
+        7
+      ],
+      "source_bbox": {
+        "x": 64,
+        "y": 154,
+        "width": 1117,
+        "height": 907,
+        "right": 1181,
+        "bottom": 1061,
+        "centerX": 622.5,
+        "centerY": 607.5,
+        "transparent": 1194881,
+        "partial": 845,
+        "opaque": 376790
+      },
+      "face_anchor": {
+        "x": 619.5,
+        "y": 472,
+        "width": 183,
+        "height": 224,
+        "pixels": 20086
+      },
+      "target_face_anchor": {
+        "x": 644,
+        "y": 514
+      },
+      "bob_offset_y": 4,
+      "placement": {
+        "left": 126,
+        "top": 217,
+        "width": 1042,
+        "height": 846
+      },
+      "normalized_bbox": {
+        "x": 126,
+        "y": 217,
+        "width": 1042,
+        "height": 846,
+        "right": 1168,
+        "bottom": 1063,
+        "centerX": 647,
+        "centerY": 640,
+        "transparent": 1232415,
+        "partial": 23221,
+        "opaque": 316880
+      },
+      "qa_status": "candidate_review"
+    },
+    {
+      "frame": 3,
+      "filename": "WJFF_003_mid_powerstroke.png",
+      "dimensions": {
+        "width": 1254,
+        "height": 1254
+      },
+      "color_space": "sRGB",
+      "alpha": true,
+      "identity_lock_version": "wizard-joe-lock-v001",
+      "source_sha256": "e424950ca79ea28d1c970bf147e4046eb11d5a298073d103c43cbd84159e99f7",
+      "alpha_sha256": "ac15f05a088816270a94506e1a2ff355d2811d3e4473a05b104e6e81e3107c3c",
+      "output_sha256": "ee7b7718f42e2eb3ecd839f57afdd54c45aaf1b54b4cf7227487ec826cc1932e",
+      "chroma_key_rgb": [
+        4,
+        249,
+        8
+      ],
+      "source_bbox": {
+        "x": 37,
+        "y": 119,
+        "width": 1180,
+        "height": 866,
+        "right": 1217,
+        "bottom": 985,
+        "centerX": 627,
+        "centerY": 552,
+        "transparent": 1192502,
+        "partial": 498,
+        "opaque": 379516
+      },
+      "face_anchor": {
+        "x": 640,
+        "y": 422.5,
+        "width": 182,
+        "height": 199,
+        "pixels": 17613
+      },
+      "target_face_anchor": {
+        "x": 644,
+        "y": 510
+      },
+      "bob_offset_y": 0,
+      "placement": {
+        "left": 81,
+        "top": 227,
+        "width": 1101,
+        "height": 808
+      },
+      "normalized_bbox": {
+        "x": 81,
+        "y": 227,
+        "width": 1101,
+        "height": 808,
+        "right": 1182,
+        "bottom": 1035,
+        "centerX": 631.5,
+        "centerY": 631,
+        "transparent": 1232572,
+        "partial": 18132,
+        "opaque": 321812
+      },
+      "qa_status": "candidate_review"
+    },
+    {
+      "frame": 4,
+      "filename": "WJFF_004_late_powerstroke.png",
+      "dimensions": {
+        "width": 1254,
+        "height": 1254
+      },
+      "color_space": "sRGB",
+      "alpha": true,
+      "identity_lock_version": "wizard-joe-lock-v001",
+      "source_sha256": "22c8300cb1f05f9e9eb3c3564bd6c6e29c16857f26ad31cdbe58affbda1176a3",
+      "alpha_sha256": "d344bc7daf4e73443cd26d01f0d522c2ca0c77cb81035b70b917148f999a0112",
+      "output_sha256": "c85f0dd5ffe090618e992449895d6b41960df1ac213ea15b1ea213999686439c",
+      "chroma_key_rgb": [
+        7,
+        248,
+        12
+      ],
+      "source_bbox": {
+        "x": 122,
+        "y": 105,
+        "width": 980,
+        "height": 947,
+        "right": 1102,
+        "bottom": 1052,
+        "centerX": 612,
+        "centerY": 578.5,
+        "transparent": 1196797,
+        "partial": 644,
+        "opaque": 375075
+      },
+      "face_anchor": {
+        "x": 638.5,
+        "y": 424,
+        "width": 203,
+        "height": 230,
+        "pixels": 25237
+      },
+      "target_face_anchor": {
+        "x": 644,
+        "y": 506
+      },
+      "bob_offset_y": -4,
+      "placement": {
+        "left": 162,
+        "top": 208,
+        "width": 914,
+        "height": 883
+      },
+      "normalized_bbox": {
+        "x": 162,
+        "y": 208,
+        "width": 914,
+        "height": 883,
+        "right": 1076,
+        "bottom": 1091,
+        "centerX": 619,
+        "centerY": 649.5,
+        "transparent": 1235040,
+        "partial": 21438,
+        "opaque": 316038
+      },
+      "qa_status": "candidate_review"
+    },
+    {
+      "frame": 5,
+      "filename": "WJFF_005_bottom_powerstroke.png",
+      "dimensions": {
+        "width": 1254,
+        "height": 1254
+      },
+      "color_space": "sRGB",
+      "alpha": true,
+      "identity_lock_version": "wizard-joe-lock-v001",
+      "source_sha256": "2533d81912951266261dbf5c1ea830acba3aa0a7dd51ba66bce5f77403233220",
+      "alpha_sha256": "43fb6c903f03bc5dda090c5ee0577396ce1a6d8558b057c9af90f2c4d37ff770",
+      "output_sha256": "946f76fede0aaca1aa507c0aa878ded12ce9a4ac3aa5c89362f572df9fd55c01",
+      "chroma_key_rgb": [
+        3,
+        249,
+        3
+      ],
+      "source_bbox": {
+        "x": 101,
+        "y": 129,
+        "width": 1045,
+        "height": 932,
+        "right": 1146,
+        "bottom": 1061,
+        "centerX": 623.5,
+        "centerY": 595,
+        "transparent": 1166097,
+        "partial": 991,
+        "opaque": 405428
+      },
+      "face_anchor": {
+        "x": 652,
+        "y": 429,
+        "width": 188,
+        "height": 208,
+        "pixels": 20728
+      },
+      "target_face_anchor": {
+        "x": 644,
+        "y": 502
+      },
+      "bob_offset_y": -8,
+      "placement": {
+        "left": 130,
+        "top": 222,
+        "width": 975,
+        "height": 869
+      },
+      "normalized_bbox": {
+        "x": 130,
+        "y": 222,
+        "width": 975,
+        "height": 869,
+        "right": 1105,
+        "bottom": 1091,
+        "centerX": 617.5,
+        "centerY": 656.5,
+        "transparent": 1207270,
+        "partial": 23071,
+        "opaque": 342175
+      },
+      "qa_status": "candidate_review"
+    },
+    {
+      "frame": 6,
+      "filename": "WJFF_006_early_recovery.png",
+      "dimensions": {
+        "width": 1254,
+        "height": 1254
+      },
+      "color_space": "sRGB",
+      "alpha": true,
+      "identity_lock_version": "wizard-joe-lock-v001",
+      "source_sha256": "0e9fa8b534ab8b34811be60f8261c4c11ccaad5627b89702a88af4cb56f89873",
+      "alpha_sha256": "678d99c0a52374050be53b166875338848572a4fbdab16490fbf967c293cceea",
+      "output_sha256": "aae5da0086abf21c80b9e7b5a65336581d41d983d20ea5fb5bfbea39af3a185d",
+      "chroma_key_rgb": [
+        13,
+        240,
+        17
+      ],
+      "source_bbox": {
+        "x": 50,
+        "y": 216,
+        "width": 1139,
+        "height": 819,
+        "right": 1189,
+        "bottom": 1035,
+        "centerX": 619.5,
+        "centerY": 625.5,
+        "transparent": 1228577,
+        "partial": 873,
+        "opaque": 343066
+      },
+      "face_anchor": {
+        "x": 633.5,
+        "y": 509.5,
+        "width": 165,
+        "height": 193,
+        "pixels": 18101
+      },
+      "target_face_anchor": {
+        "x": 644,
+        "y": 506
+      },
+      "bob_offset_y": -4,
+      "placement": {
+        "left": 100,
+        "top": 232,
+        "width": 1063,
+        "height": 764
+      },
+      "normalized_bbox": {
+        "x": 100,
+        "y": 232,
+        "width": 1063,
+        "height": 764,
+        "right": 1163,
+        "bottom": 996,
+        "centerX": 631.5,
+        "centerY": 614,
+        "transparent": 1262577,
+        "partial": 21164,
+        "opaque": 288775
+      },
+      "qa_status": "candidate_review"
+    },
+    {
+      "frame": 7,
+      "filename": "WJFF_007_mid_recovery.png",
+      "dimensions": {
+        "width": 1254,
+        "height": 1254
+      },
+      "color_space": "sRGB",
+      "alpha": true,
+      "identity_lock_version": "wizard-joe-lock-v001",
+      "source_sha256": "ccec6e4ef9b61241ecb1bb063c7a5b5e543815a7c5c547fa014ddd833e69f313",
+      "alpha_sha256": "215973bfe14b6ef2e3669c5faa5ab53b926f00a403878c3babe0d664fa630881",
+      "output_sha256": "d232a2d866e16e37f650ba907052fc226526791b81f622be55e0850ac592ceec",
+      "chroma_key_rgb": [
+        9,
+        236,
+        9
+      ],
+      "source_bbox": {
+        "x": 38,
+        "y": 198,
+        "width": 1121,
+        "height": 856,
+        "right": 1159,
+        "bottom": 1054,
+        "centerX": 598.5,
+        "centerY": 626,
+        "transparent": 1241985,
+        "partial": 501,
+        "opaque": 330030
+      },
+      "face_anchor": {
+        "x": 643.5,
+        "y": 517,
+        "width": 193,
+        "height": 210,
+        "pixels": 22729
+      },
+      "target_face_anchor": {
+        "x": 644,
+        "y": 510
+      },
+      "bob_offset_y": 0,
+      "placement": {
+        "left": 79,
+        "top": 212,
+        "width": 1046,
+        "height": 799
+      },
+      "normalized_bbox": {
+        "x": 79,
+        "y": 212,
+        "width": 1046,
+        "height": 799,
+        "right": 1125,
+        "bottom": 1011,
+        "centerX": 602,
+        "centerY": 611.5,
+        "transparent": 1275765,
+        "partial": 17383,
+        "opaque": 279368
+      },
+      "qa_status": "candidate_review"
+    },
+    {
+      "frame": 8,
+      "filename": "WJFF_008_late_recovery.png",
+      "dimensions": {
+        "width": 1254,
+        "height": 1254
+      },
+      "color_space": "sRGB",
+      "alpha": true,
+      "identity_lock_version": "wizard-joe-lock-v001",
+      "source_sha256": "cd01294a122d08715bd93331c129850662ae76d71dcd33210eb7d88cbd3b654d",
+      "alpha_sha256": "79c5e5c2fe8eb074fee5bd439db0fbf19ceff5bd3b0da2c656dceaba117f646e",
+      "output_sha256": "309057a966640bf46795c81d189815b99e9405513969cb7e2bec612d8706222f",
+      "chroma_key_rgb": [
+        10,
+        235,
+        9
+      ],
+      "source_bbox": {
+        "x": 198,
+        "y": 111,
+        "width": 862,
+        "height": 955,
+        "right": 1060,
+        "bottom": 1066,
+        "centerX": 629,
+        "centerY": 588.5,
+        "transparent": 1195233,
+        "partial": 458,
+        "opaque": 376825
+      },
+      "face_anchor": {
+        "x": 644.5,
+        "y": 502.5,
+        "width": 195,
+        "height": 211,
+        "pixels": 21945
+      },
+      "target_face_anchor": {
+        "x": 644,
+        "y": 514
+      },
+      "bob_offset_y": 4,
+      "placement": {
+        "left": 227,
+        "top": 149,
+        "width": 804,
+        "height": 891
+      },
+      "normalized_bbox": {
+        "x": 227,
+        "y": 149,
+        "width": 804,
+        "height": 891,
+        "right": 1031,
+        "bottom": 1040,
+        "centerX": 629,
+        "centerY": 594.5,
+        "transparent": 1236033,
+        "partial": 16238,
+        "opaque": 320245
+      },
+      "qa_status": "candidate_review"
+    },
+    {
+      "frame": 9,
+      "filename": "WJFF_009_near_top_recovery.png",
+      "dimensions": {
+        "width": 1254,
+        "height": 1254
+      },
+      "color_space": "sRGB",
+      "alpha": true,
+      "identity_lock_version": "wizard-joe-lock-v001",
+      "source_sha256": "84375394737de7fcc33ef85da63f8011d4e6588510bbf6b4d9521edf4b209644",
+      "alpha_sha256": "0580f8dba7d6bd4ee68b57732feb03726791ae653b8d043beeb462200727a6db",
+      "output_sha256": "aa0149c51755f58c3ce6c69129b2ad4c781370463e6b933ce26090c2651cd4b4",
+      "chroma_key_rgb": [
+        11,
+        235,
+        14
+      ],
+      "source_bbox": {
+        "x": 214,
+        "y": 106,
+        "width": 820,
+        "height": 1001,
+        "right": 1034,
+        "bottom": 1107,
+        "centerX": 624,
+        "centerY": 606.5,
+        "transparent": 1177940,
+        "partial": 495,
+        "opaque": 394081
+      },
+      "face_anchor": {
+        "x": 674.5,
+        "y": 542.5,
+        "width": 257,
+        "height": 225,
+        "pixels": 26630
+      },
+      "target_face_anchor": {
+        "x": 644,
+        "y": 518
+      },
+      "bob_offset_y": 8,
+      "placement": {
+        "left": 214,
+        "top": 111,
+        "width": 765,
+        "height": 934
+      },
+      "normalized_bbox": {
+        "x": 214,
+        "y": 111,
+        "width": 765,
+        "height": 934,
+        "right": 979,
+        "bottom": 1045,
+        "centerX": 596.5,
+        "centerY": 578,
+        "transparent": 1220704,
+        "partial": 16359,
+        "opaque": 335453
+      },
+      "qa_status": "candidate_review"
+    },
+    {
+      "frame": 10,
+      "filename": "WJFF_010_loop_close.png",
+      "dimensions": {
+        "width": 1254,
+        "height": 1254
+      },
+      "color_space": "sRGB",
+      "alpha": true,
+      "identity_lock_version": "wizard-joe-lock-v001",
+      "source_sha256": "abc0e2fd7dc1dc4a655de1b704a9ee5ec408280a8541e5c35cf90844841a9720",
+      "alpha_sha256": "b876cdf9637028a6082b7bb14063940510cb1bc23a9013770c9f05013530caad",
+      "output_sha256": "f1cda9c97508edd2e9fb65596d13272a950d47884047cf165e37110ec179b241",
+      "chroma_key_rgb": [
+        14,
+        234,
+        15
+      ],
+      "source_bbox": {
+        "x": 146,
+        "y": 131,
+        "width": 963,
+        "height": 953,
+        "right": 1109,
+        "bottom": 1084,
+        "centerX": 627.5,
+        "centerY": 607.5,
+        "transparent": 1173099,
+        "partial": 411,
+        "opaque": 399006
+      },
+      "face_anchor": {
+        "x": 643.5,
+        "y": 530,
+        "width": 193,
+        "height": 212,
+        "pixels": 22777
+      },
+      "target_face_anchor": {
+        "x": 644,
+        "y": 519
+      },
+      "bob_offset_y": 9,
+      "placement": {
+        "left": 180,
+        "top": 147,
+        "width": 898,
+        "height": 889
+      },
+      "normalized_bbox": {
+        "x": 180,
+        "y": 147,
+        "width": 898,
+        "height": 889,
+        "right": 1078,
+        "bottom": 1036,
+        "centerX": 629,
+        "centerY": 591.5,
+        "transparent": 1216456,
+        "partial": 16973,
+        "opaque": 339087
+      },
+      "qa_status": "candidate_review"
+    }
+  ]
+}

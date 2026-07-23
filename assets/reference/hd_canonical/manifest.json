@@ -1,0 +1,68 @@
+{
+  "schema_version": 2,
+  "asset_set_id": "wizardjoe-production-alpha-v001",
+  "authority": "user_supplied_production_alpha_archives",
+  "supersedes": [
+    "single_frame_staff_regeneration",
+    "white_matte_identity_extraction"
+  ],
+  "master_profile": {
+    "profile_id": "wizardjoe_hd_alpha_1254_v001",
+    "canvas_width": 1254,
+    "canvas_height": 1254,
+    "baseline_y": 1185,
+    "minimum_margin": 69,
+    "color_space": "sRGB",
+    "alpha_mode": "straight"
+  },
+  "sources": {
+    "production_alpha_set": {
+      "archive_filename": "Wizard_Joe_Production_Alpha_Set_001_250_v001.zip",
+      "archive_sha256": "dc367a89f5f592dad1db8d0d16dcf12ff5600659e4ee2f87b32b25e8227f4b80",
+      "archive_prefix": "Wizard_Joe_Production_Alpha_Set_001_250_v001",
+      "manifest_path": "manifests/alpha_asset_manifest_v001.json",
+      "alpha_directory": "alphas_srgb_v001",
+      "pack_id": "wizard_joe_base_250_alpha",
+      "status": "approved_production_alpha_set",
+      "frame_count": 250,
+      "approval_scope": "transparent still masters"
+    },
+    "forward_camera_flight_cycle": {
+      "archive_filename": "Wizard_Joe_Forward_Camera_Flight_Alpha_Cycle_v001 (1).zip",
+      "archive_sha256": "7d2a7d7390d1fb95147bf834cc45849dbfee50a9f42ba05abe99c50e37cf9e49",
+      "archive_prefix": "Wizard_Joe_Forward_Camera_Flight_Alpha_Cycle_v001",
+      "manifest_path": "flight_cycle_manifest_v001.json",
+      "alpha_directory": "alphas",
+      "pack_id": "wizard_joe_forward_camera_flight_cycle",
+      "status": "candidate_review",
+      "frame_count": 10,
+      "approval_scope": "source available; animation admission remains gated"
+    }
+  },
+  "categories": [
+    {"id": "canonical_001_020", "range": [1, 20]},
+    {"id": "listen_think_021_040", "range": [21, 40]},
+    {"id": "speech_041_075", "range": [41, 75]},
+    {"id": "emotion_076_110", "range": [76, 110]},
+    {"id": "hands_staff_props_111_135", "range": [111, 135]},
+    {"id": "ground_136_170", "range": [136, 170]},
+    {"id": "flight_171_195", "range": [171, 195]},
+    {"id": "magic_196_220", "range": [196, 220]},
+    {"id": "dance_comedy_hero_221_250", "range": [221, 250]}
+  ],
+  "runtime_policy": {
+    "render_assets": "compressed colored RGBA pixel nodes in .wjpose shards",
+    "png_usage": "immutable source/reference input only",
+    "projector_profile": "native 1254x1254 with CSS-only scaling",
+    "production_pose_runtime_admitted": false,
+    "forward_flight_runtime_admitted": false
+  },
+  "compiled_library_index": {
+    "path": "compiled/library-index.json",
+    "sha256": "ebb62aa0266b40dbcb1f85469235ebf8b882c669fb9387d5b5664e9bc2358a95",
+    "pose_count": 260,
+    "approved_pose_count": 250,
+    "candidate_pose_count": 10,
+    "runtime_admitted": false
+  }
+}

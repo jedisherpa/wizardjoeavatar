@@ -109,6 +109,7 @@ export class WizardClient {
     const fps = parseFloat(parts[1]);
     const cols = parseInt(parts[3], 10);
     const rows = parseInt(parts[4], 10);
+    const renderMode = parts[8] === "rgba" ? "rgba" : "cells";
     this.targetFps = Number.isFinite(fps) && fps > 0 ? fps : DEFAULT_TARGET_FPS;
     this.frameIntervalMs = 1000 / this.targetFps;
     this.maxBufferedFrames = Math.max(6, Math.ceil(this.targetFps / 3));
@@ -121,7 +122,7 @@ export class WizardClient {
     this.hashHistory = [];
     this.ignoreDeltasUntilKeyframe = false;
     this.metrics.targetFps = this.targetFps;
-    this.canvasRenderer.configure(cols, rows);
+    this.canvasRenderer.configure(cols, rows, renderMode);
   }
 
   async pumpDecode() {

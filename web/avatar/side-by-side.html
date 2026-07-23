@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Wizard Joe Animation Comparison</title>
+    <link rel="stylesheet" href="/avatar/compare.css?v=hd-alpha-v1" />
+  </head>
+  <body>
+    <header class="compare-header">
+      <div>
+        <strong>Wizard Joe</strong>
+        <span>Animation comparison</span>
+      </div>
+      <nav aria-label="Comparison controls">
+        <button id="play-both" type="button">▶ <span>Play both</span></button>
+        <button id="pause-hd" type="button">Ⅱ <span>Pause HD</span></button>
+        <button id="restart" type="button">↻ <span>Restart</span></button>
+      </nav>
+    </header>
+    <main class="comparison">
+      <section>
+        <h1>Current live animation</h1>
+        <iframe id="live-player" title="Current live Wizard Joe animation" src="/?embedded=1"></iframe>
+      </section>
+      <section>
+        <h1>All 260 HD alpha frames</h1>
+        <iframe
+          id="hd-player"
+          title="HD Wizard Joe forward-flight animation"
+          src="/?hd-sequence=all_hd_frames"
+        ></iframe>
+      </section>
+    </main>
+    <script type="module" src="/avatar/compare.js?v=hd-alpha-v1"></script>
+  </body>
+</html>

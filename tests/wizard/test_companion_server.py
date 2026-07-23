@@ -454,12 +454,16 @@ class CompanionServerTests(unittest.IsolatedAsyncioTestCase):
                 "frame_hub_running",
                 "frame_hub_error_code",
                 "connector_enabled",
+                "hd_review_projection",
+                "hd_runtime_admitted",
             },
         )
         self.assertEqual(payload["status"], "ready")
         self.assertFalse(payload["frame_hub_running"])
         self.assertIsNone(payload["frame_hub_error_code"])
         self.assertTrue(payload["connector_enabled"])
+        self.assertTrue(payload["hd_review_projection"])
+        self.assertFalse(payload["hd_runtime_admitted"])
         serialized = json.dumps(payload)
         self.assertNotIn(APP_TOKEN, serialized)
         self.assertNotIn("distinct-media-token", serialized)
@@ -479,6 +483,67 @@ class CompanionServerTests(unittest.IsolatedAsyncioTestCase):
             client="192.0.2.10",
         )
         self.assertEqual(remote_status, 403)
+
+    async def test_hd_review_projection_serves_decoded_pixel_graph(self):
+        app = self.create_companion_app()
+        authenticated = LOOPBACK_HEADERS + (
+            ("authorization", "Bearer " + APP_TOKEN),
+        )
+        status, profile = await asgi_request(
+            app, "GET", "/api/avatar/wizard/hd-profile", headers=authenticated
+        )
+        self.assertEqual(status, 200)
+        self.assertEqual(len(profile["pose_ids"]), 260)
+        self.assertIn("001_turn_front_neutral", profile["pose_ids"])
+        self.assertIn("wjff_001_top_recovery", profile["pose_ids"])
+        self.assertEqual(profile["profile"]["canvas_width"], 1254)
+        self.assertEqual(profile["profile"]["canvas_height"], 1254)
+        self.assertTrue(profile["review_projection"])
+        self.assertFalse(profile["runtime_admitted"])
+        self.assertEqual(
+            profile["pose_metadata"]["001_turn_front_neutral"]["approval_state"],
+            "approved_production_alpha",
+        )
+        self.assertEqual(
+            profile["pose_metadata"]["wjff_001_top_recovery"]["approval_state"],
+            "candidate_review",
+        )
+        self.assertEqual(len(profile["sequences"]["all_hd_frames"]["pose_ids"]), 260)
+        self.assertEqual(profile["sequences"]["all_hd_frames"]["fps"], 6)
+
+        status, headers, body = await asgi_raw_request(
+            app,
+            "GET",
+            "/api/avatar/wizard/hd-pose/001_turn_front_neutral",
+            headers=authenticated,
+        )
+        self.assertEqual(status, 200)
+        self.assertEqual(headers["x-pixel-format"], "rgba8")
+        self.assertEqual(headers["x-approval-state"], "approved_production_alpha")
+        self.assertEqual(headers["x-runtime-admitted"], "false")
+        self.assertEqual(len(body), 1254 * 1254 * 4)
+        self.assertEqual(headers["x-pose-sha256"], hashlib.sha256(body).hexdigest())
+
+        missing_status, _ = await asgi_request(
+            app, "GET", "/api/avatar/wizard/hd-pose/missing", headers=authenticated
+        )
+        self.assertEqual(missing_status, 404)
+        await app.state.frame_hub.stop()
+
+    async def test_side_by_side_player_is_served_with_both_runtime_views(self):
+        app = self.create_companion_app()
+        authenticated = LOOPBACK_HEADERS + (
+            ("authorization", "Bearer " + APP_TOKEN),
+        )
+        status, headers, body = await asgi_raw_request(
+            app, "GET", "/side-by-side", headers=authenticated
+        )
+        self.assertEqual(status, 200)
+        self.assertIn("text/html", headers["content-type"])
+        self.assertIn(b"Current live animation", body)
+        self.assertIn(b"All 260 HD alpha frames", body)
+        self.assertIn(b"hd-sequence=all_hd_frames", body)
+        await app.state.frame_hub.stop()
 
     async def test_browser_origin_cannot_request_shutdown(self):
         signal = mock.Mock()

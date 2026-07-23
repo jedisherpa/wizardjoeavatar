@@ -1,0 +1,138 @@
+:root {
+  color-scheme: light;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: #eef1f3;
+  color: #17201d;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+}
+
+body {
+  display: grid;
+  grid-template-rows: 58px minmax(0, 1fr);
+}
+
+.compare-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 8px 16px;
+  border-bottom: 1px solid #c9d0ce;
+  background: #ffffff;
+}
+
+.compare-header > div {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  min-width: 0;
+}
+
+.compare-header strong {
+  font-size: 15px;
+}
+
+.compare-header span {
+  color: #65706c;
+  font-size: 13px;
+}
+
+nav {
+  display: flex;
+  gap: 8px;
+}
+
+button {
+  min-height: 36px;
+  padding: 0 12px;
+  border: 1px solid #aeb8b4;
+  border-radius: 6px;
+  background: #ffffff;
+  color: #17201d;
+  font: inherit;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #f3f6f5;
+}
+
+.comparison {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  min-height: 0;
+}
+
+section {
+  display: grid;
+  grid-template-rows: 34px minmax(0, 1fr);
+  min-width: 0;
+  min-height: 0;
+  border-right: 1px solid #c9d0ce;
+  background: #ffffff;
+}
+
+section:last-child {
+  border-right: 0;
+}
+
+h1 {
+  margin: 0;
+  padding: 8px 12px;
+  border-bottom: 1px solid #dde2e0;
+  color: #4b5753;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  background: #ffffff;
+}
+
+@media (max-width: 760px) {
+  body {
+    grid-template-rows: auto minmax(0, 1fr);
+  }
+
+  .compare-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .compare-header > div span {
+    display: none;
+  }
+
+  nav {
+    width: 100%;
+  }
+
+  button {
+    flex: 1;
+    padding: 0 8px;
+  }
+
+  .comparison {
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(2, minmax(0, 1fr));
+  }
+
+  section {
+    border-right: 0;
+    border-bottom: 1px solid #c9d0ce;
+  }
+}

@@ -9,12 +9,14 @@ import json
 import os
 import time
 from contextlib import asynccontextmanager, suppress
+from functools import lru_cache
 from pathlib import Path
 from typing import Any, Callable, Dict, Mapping, Optional
 from urllib.parse import urlsplit
 
 from .commanding import CommandEnvelopeV1, CommandValidationError
 from .frame_source import ProceduralWizardFrameSource
+from .hd_pose_artifact import HDPoseLibrary, sha256_path
 from .models import WizardCommand
 from .media_session import (
     MEDIA_SESSION_MAX_BODY_BYTES,
@@ -50,10 +52,19 @@ except ImportError:  # pragma: no cover - create_app reports the install command
 ROOT = Path(__file__).resolve().parent.parent
 WEB_DIR = ROOT / "web" / "avatar"
 DEFINITIONS_DIR = ROOT / "wizard_avatar" / "definitions"
+HD_CANONICAL_DIR = ROOT / "assets" / "reference" / "hd_canonical"
 COMPANION_HEALTH_SCHEMA_VERSION = 1
 COMPANION_PROTOCOL_VERSION = 1
 MAX_API_MUTATION_BODY_BYTES = 64 * 1024
 MAX_WEBSOCKET_COMMAND_BYTES = 64 * 1024
+
+
+@lru_cache(maxsize=2)
+def _load_hd_pose_library(index_path: str, expected_sha256: str) -> HDPoseLibrary:
+    path = Path(index_path)
+    if sha256_path(path) != expected_sha256:
+        raise ValueError("HD pose library index checksum mismatch")
+    return HDPoseLibrary(path, cache_size_per_shard=2)
 
 
 def is_literal_loopback_host(host: str) -> bool:
@@ -132,7 +143,7 @@ def create_app(
 ):
     try:
         from fastapi import FastAPI, HTTPException, WebSocketDisconnect
-        from fastapi.responses import FileResponse, HTMLResponse, JSONResponse, StreamingResponse
+        from fastapi.responses import FileResponse, HTMLResponse, JSONResponse, Response, StreamingResponse
     except ImportError as exc:
         raise RuntimeError("Install server dependencies with: python3 -m pip install -r requirements.txt") from exc
 
@@ -152,6 +163,14 @@ def create_app(
             "cell_bytes": 4,
         },
         server_config=runtime_server_config,
+    )
+    hd_manifest = json.loads(
+        (HD_CANONICAL_DIR / "manifest.json").read_text(encoding="utf-8")
+    )
+    hd_index_record = hd_manifest["compiled_library_index"]
+    hd_index_path = HD_CANONICAL_DIR / hd_index_record["path"]
+    hd_library = _load_hd_pose_library(
+        str(hd_index_path), str(hd_index_record["sha256"])
     )
     if companion_mode is None:
         companion_mode = os.environ.get("WIZARD_COMPANION_MODE", "").lower() in {
@@ -303,6 +322,12 @@ def create_app(
     async def root():
         return HTMLResponse((WEB_DIR / "index.html").read_text(encoding="utf-8"))
 
+    @app.get("/side-by-side")
+    async def side_by_side():
+        return HTMLResponse(
+            (WEB_DIR / "side-by-side.html").read_text(encoding="utf-8")
+        )
+
     @app.get("/api/companion/health")
     async def companion_health(request: FastAPIRequest):
         loopback_error = _loopback_error(request)
@@ -327,6 +352,8 @@ def create_app(
             "frame_hub_running": hub_task is not None and not hub_task.done(),
             "frame_hub_error_code": hub_error_code,
             "connector_enabled": connector_enabled and bool(connector_token),
+            "hd_review_projection": True,
+            "hd_runtime_admitted": bool(hd_library.index["runtime_admitted"]),
         }
 
     @app.post("/api/companion/shutdown")
@@ -365,6 +392,8 @@ def create_app(
             "wizardDemo.ts",
             "wizardCodec.ts",
             "style.css",
+            "compare.css",
+            "compare.js",
         }
         if filename not in allowed:
             raise HTTPException(status_code=404, detail="Not found")
@@ -383,7 +412,13 @@ def create_app(
                 DEFINITIONS_DIR / "wizard_joe_character_package.json",
                 media_type="application/json",
             )
-        media = "application/javascript" if filename.endswith(".ts") else None
+        media = (
+            "application/javascript"
+            if filename.endswith((".ts", ".js"))
+            else "text/css"
+            if filename.endswith(".css")
+            else None
+        )
         return FileResponse(WEB_DIR / filename, media_type=media)
 
     @app.get("/api/avatar/wizard/state")
@@ -410,6 +445,42 @@ def create_app(
     @app.get("/api/avatar/wizard/runtime-identity")
     async def runtime_identity_snapshot():
         return refresh_runtime_identity(runtime_identity, ROOT)
+
+    @app.get("/api/avatar/wizard/hd-profile")
+    async def hd_profile():
+        return {
+            "schema_version": 1,
+            "asset_set_id": hd_library.index["asset_set_id"],
+            "profile": hd_library.index["profile"],
+            "pose_ids": list(hd_library.pose_ids),
+            "pose_metadata": hd_library.pose_metadata,
+            "sequences": hd_library.index["sequences"],
+            "library_index_sha256": hd_index_record["sha256"],
+            "review_projection": bool(hd_library.index["review_projection"]),
+            "runtime_admitted": bool(hd_library.index["runtime_admitted"]),
+        }
+
+    @app.get("/api/avatar/wizard/hd-pose/{pose_id}")
+    async def hd_pose(pose_id: str):
+        if pose_id not in hd_library.pose_shards:
+            raise HTTPException(status_code=404, detail="HD pose not found")
+        rgba = hd_library.load_rgba(pose_id)
+        width, height = hd_library.canvas_size
+        metadata = hd_library.pose_metadata[pose_id]
+        return Response(
+            content=rgba,
+            media_type="application/octet-stream",
+            headers={
+                "X-Pixel-Format": "rgba8",
+                "X-Canvas-Width": str(width),
+                "X-Canvas-Height": str(height),
+                "X-Pose-SHA256": hashlib.sha256(rgba).hexdigest(),
+                "X-Artifact-SHA256": str(metadata["artifact_sha256"]),
+                "X-Approval-State": str(metadata["approval_state"]),
+                "X-Runtime-Admitted": str(metadata["runtime_admitted"]).lower(),
+                "Cache-Control": "no-store",
+            },
+        )
 
     @app.get("/api/avatar/wizard/replay")
     async def replay():
