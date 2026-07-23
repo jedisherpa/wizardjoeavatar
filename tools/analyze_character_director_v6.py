@@ -35,6 +35,43 @@ EXPECTED_FRAME_COUNTS = {
     "v6-reverse-west": 108,
     "v6-stop-settle": 24,
 }
+EXPECTED_SCENARIO_SPECS = (
+    {
+        "name": "v6-idle",
+        "kind": "reset",
+        "payload": {},
+        "settle_seconds": 0.0,
+        "capture_seconds": 0.5,
+    },
+    {
+        "name": "v6-south-approach",
+        "kind": "move",
+        "payload": {"x": 0.0, "z": 2.0, "speed": 1.25},
+        "settle_seconds": 0.0,
+        "capture_seconds": 1.0,
+    },
+    {
+        "name": "v6-turn-east",
+        "kind": "move",
+        "payload": {"x": 2.4, "z": 3.8, "speed": 1.25},
+        "settle_seconds": 0.0,
+        "capture_seconds": 2.25,
+    },
+    {
+        "name": "v6-reverse-west",
+        "kind": "move",
+        "payload": {"x": -2.4, "z": 3.8, "speed": 1.25},
+        "settle_seconds": 0.0,
+        "capture_seconds": 4.5,
+    },
+    {
+        "name": "v6-stop-settle",
+        "kind": "gaze",
+        "payload": {"target": "viewer"},
+        "settle_seconds": 0.0,
+        "capture_seconds": 1.0,
+    },
+)
 TARGET = (-2.4, 3.8)
 FACINGS = (
     "south",
@@ -286,8 +323,18 @@ def analyze_v6(
         and program.get("total_duration_seconds") == 9.25,
         program,
     )
-    scenario_names = tuple(item.get("name") for item in manifest.get("scenarios", ()))
+    scenarios = manifest.get("scenarios", ())
+    scenario_names = tuple(item.get("name") for item in scenarios)
     _check(report, "scenario_order", scenario_names == EXPECTED_SCENARIOS, list(scenario_names))
+    _check(
+        report,
+        "scenario_directional_targets",
+        list(scenarios) == list(EXPECTED_SCENARIO_SPECS),
+        {
+            "expected": EXPECTED_SCENARIO_SPECS,
+            "observed": scenarios,
+        },
+    )
 
     frames = manifest.get("frames", ())
     trace_by_index = {item.get("frame_index"): item for item in trace_records}

@@ -4,6 +4,7 @@ import unittest
 from tools.analyze_character_director_v6 import (
     EXPECTED_FRAME_COUNTS,
     EXPECTED_SCENARIOS,
+    EXPECTED_SCENARIO_SPECS,
     analyze_v6,
 )
 from wizard_avatar.animation_graph import load_pose_catalog
@@ -20,7 +21,7 @@ def fixture():
             "acceptance_scenario": "V6",
             "total_duration_seconds": 9.25,
         },
-        "scenarios": [{"name": name} for name in EXPECTED_SCENARIOS],
+        "scenarios": copy.deepcopy(list(EXPECTED_SCENARIO_SPECS)),
         "init": {"cols": 240, "rows": 135, "fps": 24.0},
         "contact_verification": {
             "passed": True,
@@ -196,6 +197,18 @@ class CharacterDirectorV6AcceptanceTests(unittest.TestCase):
         report = analyze_v6(manifest, traces)
         self.assertFalse(report["passed"])
         self.assertFalse(check(report, "readable_90_degree_turn")["passed"])
+
+    def test_short_east_target_fails_directional_scenario_gate(self):
+        manifest, traces = fixture()
+        turn = next(
+            scenario
+            for scenario in manifest["scenarios"]
+            if scenario["name"] == "v6-turn-east"
+        )
+        turn["payload"]["x"] = 1.6
+        report = analyze_v6(manifest, traces)
+        self.assertFalse(report["passed"])
+        self.assertFalse(check(report, "scenario_directional_targets")["passed"])
 
     def test_pose_facing_mismatch_fails_body_alignment_gate(self):
         manifest, traces = fixture()
