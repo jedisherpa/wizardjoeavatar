@@ -464,7 +464,7 @@ def create_app(
     async def hd_pose(pose_id: str):
         if pose_id not in hd_library.pose_shards:
             raise HTTPException(status_code=404, detail="HD pose not found")
-        rgba = hd_library.load_rgba(pose_id)
+        rgba = await asyncio.to_thread(hd_library.load_rgba, pose_id)
         width, height = hd_library.canvas_size
         metadata = hd_library.pose_metadata[pose_id]
         return Response(

@@ -3,6 +3,7 @@ from __future__ import annotations
 import hashlib
 import json
 import struct
+import threading
 import zlib
 from collections import OrderedDict
 from dataclasses import dataclass
@@ -91,6 +92,7 @@ class HDPoseArtifact:
         self.header: dict[str, object]
         self.records: dict[str, PoseRecord]
         self._cache: OrderedDict[str, bytes] = OrderedDict()
+        self._cache_lock = threading.Lock()
         with self.path.open("rb") as source:
             self.header, self.records = self._read_index(source)
 
@@ -130,26 +132,27 @@ class HDPoseArtifact:
         return header, records
 
     def load_rgba(self, pose_id: str) -> bytes:
-        cached = self._cache.pop(pose_id, None)
-        if cached is not None:
-            self._cache[pose_id] = cached
-            return cached
-        record = self.records.get(pose_id)
-        if record is None:
-            raise KeyError(pose_id)
-        with self.path.open("rb") as source:
-            source.seek(record.payload_offset)
-            compressed = source.read(record.compressed_size)
-        raw = zlib.decompress(compressed)
-        if len(raw) != record.raw_size:
-            raise ValueError(f"HD pose payload size mismatch: {pose_id}")
-        expected_size = self.canvas_size[0] * self.canvas_size[1] * 4
-        if len(raw) != expected_size:
-            raise ValueError(f"HD pose RGBA size mismatch: {pose_id}")
-        self._cache[pose_id] = raw
-        while len(self._cache) > self.cache_size:
-            self._cache.popitem(last=False)
-        return raw
+        with self._cache_lock:
+            cached = self._cache.pop(pose_id, None)
+            if cached is not None:
+                self._cache[pose_id] = cached
+                return cached
+            record = self.records.get(pose_id)
+            if record is None:
+                raise KeyError(pose_id)
+            with self.path.open("rb") as source:
+                source.seek(record.payload_offset)
+                compressed = source.read(record.compressed_size)
+            raw = zlib.decompress(compressed)
+            if len(raw) != record.raw_size:
+                raise ValueError(f"HD pose payload size mismatch: {pose_id}")
+            expected_size = self.canvas_size[0] * self.canvas_size[1] * 4
+            if len(raw) != expected_size:
+                raise ValueError(f"HD pose RGBA size mismatch: {pose_id}")
+            self._cache[pose_id] = raw
+            while len(self._cache) > self.cache_size:
+                self._cache.popitem(last=False)
+            return raw
 
     def load_pose(self, pose_id: str) -> Image.Image:
         return Image.frombytes("RGBA", self.canvas_size, self.load_rgba(pose_id))

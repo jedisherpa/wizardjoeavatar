@@ -3,11 +3,13 @@ import hashlib
 import json
 import os
 import tempfile
+import threading
 import time
 import unittest
 from pathlib import Path
 from unittest import mock
 
+from wizard_avatar.hd_pose_artifact import HDPoseLibrary
 from wizard_avatar.server import create_app
 
 
@@ -530,7 +532,33 @@ class CompanionServerTests(unittest.IsolatedAsyncioTestCase):
         self.assertEqual(missing_status, 404)
         await app.state.frame_hub.stop()
 
-    async def test_side_by_side_player_is_served_with_both_runtime_views(self):
+    async def test_hd_review_projection_decodes_off_the_event_loop(self):
+        app = self.create_companion_app()
+        authenticated = LOOPBACK_HEADERS + (
+            ("authorization", "Bearer " + APP_TOKEN),
+        )
+        loop_thread = threading.get_ident()
+        worker_threads = []
+        original = HDPoseLibrary.load_rgba
+
+        def instrumented(library, pose_id):
+            worker_threads.append(threading.get_ident())
+            return original(library, pose_id)
+
+        with mock.patch.object(HDPoseLibrary, "load_rgba", instrumented):
+            status, _, _ = await asgi_raw_request(
+                app,
+                "GET",
+                "/api/avatar/wizard/hd-pose/001_turn_front_neutral",
+                headers=authenticated,
+            )
+
+        self.assertEqual(status, 200)
+        self.assertTrue(worker_threads)
+        self.assertNotEqual(worker_threads[0], loop_thread)
+        await app.state.frame_hub.stop()
+
+    async def test_side_by_side_player_is_served_with_live_and_review_views(self):
         app = self.create_companion_app()
         authenticated = LOOPBACK_HEADERS + (
             ("authorization", "Bearer " + APP_TOKEN),
