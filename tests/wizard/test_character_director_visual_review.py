@@ -974,6 +974,9 @@ class ManifestValidationTests(unittest.TestCase):
             transport="media_session",
         )
         manifest["commands"][0]["ack"]["disposition"] = "accepted"
+        manifest["commands"][0]["ack"]["wizard_runtime_epoch"] = (
+            manifest["commands"][0]["ack"].pop("runtime_epoch")
+        )
 
         validate_manifest(manifest)
 
@@ -1092,8 +1095,14 @@ class ManifestValidationTests(unittest.TestCase):
     def test_runtime_observations_reconcile_command_epoch_and_subscribers(self):
         records = CaptureRecords(
             commands=[
-                {"ack": {"runtime_epoch": "command-runtime-a"}},
-                {"ack": {"runtime_epoch": "command-runtime-a"}},
+                {
+                    "transport": "command",
+                    "ack": {"runtime_epoch": "command-runtime-a"},
+                },
+                {
+                    "transport": "media_session",
+                    "ack": {"wizard_runtime_epoch": "command-runtime-a"},
+                },
             ],
             state_snapshots=[
                 {
@@ -1127,7 +1136,7 @@ class ManifestValidationTests(unittest.TestCase):
             collect_runtime_observations({"runtime_epoch": "process-runtime-a"}, records)
 
         records.state_snapshots[1]["body"]["diagnostics"]["subscriber_count"] = 1
-        records.commands[1]["ack"]["runtime_epoch"] = "command-runtime-b"
+        records.commands[1]["ack"]["wizard_runtime_epoch"] = "command-runtime-b"
         with self.assertRaisesRegex(EvidenceFailure, "runtime epoch changed"):
             collect_runtime_observations({"runtime_epoch": "process-runtime-a"}, records)
 

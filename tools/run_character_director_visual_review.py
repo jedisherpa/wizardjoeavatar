@@ -2444,6 +2444,19 @@ def scenario_ranges(scenarios: Sequence[Scenario], frames: Sequence[Mapping[str,
     return ranges
 
 
+def _acknowledgement_runtime_epoch(command: Mapping[str, Any]) -> Optional[str]:
+    ack = command.get("ack")
+    if not isinstance(ack, Mapping):
+        return None
+    field = (
+        "wizard_runtime_epoch"
+        if command.get("transport", "command") == "media_session"
+        else "runtime_epoch"
+    )
+    value = ack.get(field)
+    return value if isinstance(value, str) and value else None
+
+
 def collect_runtime_observations(
     runtime_identity: Mapping[str, Any],
     records: CaptureRecords,
@@ -2472,10 +2485,13 @@ def collect_runtime_observations(
 
     acknowledgement_epochs: List[str] = []
     for command in records.commands:
-        ack = command.get("ack")
-        epoch = ack.get("runtime_epoch") if isinstance(ack, Mapping) else None
-        if not isinstance(epoch, str) or not epoch:
-            raise EvidenceFailure("command acknowledgement is missing runtime epoch")
+        epoch = _acknowledgement_runtime_epoch(command)
+        if epoch is None:
+            raise EvidenceFailure(
+                "{} acknowledgement is missing runtime epoch".format(
+                    command.get("transport", "command")
+                )
+            )
         acknowledgement_epochs.append(epoch)
 
     if not snapshot_epochs or not acknowledgement_epochs:
@@ -3123,7 +3139,7 @@ def validate_manifest(manifest: Mapping[str, Any], output_dir: Optional[Path] = 
             )
             for command in commands:
                 _manifest_error(
-                    command["ack"].get("runtime_epoch")
+                    _acknowledgement_runtime_epoch(command)
                     == observations["command_runtime_epoch"],
                     "command acknowledgement runtime epoch mismatch",
                 )
