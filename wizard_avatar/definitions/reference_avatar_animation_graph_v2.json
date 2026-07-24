@@ -3550,22 +3550,22 @@
         {
           "pose_id": "turn_front_to_right_entry_500",
           "duration_frames": 1,
-          "support_contact": "right_foot",
-          "planted_anchor": "right_foot",
+          "support_contact": "none",
+          "planted_anchor": null,
           "markers": []
         },
         {
           "pose_id": "turn_front_to_right_entry_750",
           "duration_frames": 1,
-          "support_contact": "right_foot",
-          "planted_anchor": "right_foot",
+          "support_contact": "none",
+          "planted_anchor": null,
           "markers": []
         },
         {
           "pose_id": "hd_turn_right_anticipation",
           "duration_frames": 3,
-          "support_contact": "right_foot",
-          "planted_anchor": "right_foot",
+          "support_contact": "none",
+          "planted_anchor": null,
           "markers": []
         },
         {

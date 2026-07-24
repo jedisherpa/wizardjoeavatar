@@ -5,6 +5,7 @@ from tools.analyze_character_director_v6 import (
     EXPECTED_FRAME_COUNTS,
     EXPECTED_SCENARIOS,
     EXPECTED_SCENARIO_SPECS,
+    PROFILE_POSE_SEQUENCES,
     analyze_v6,
 )
 from wizard_avatar.animation_graph import load_pose_catalog
@@ -95,18 +96,8 @@ def fixture():
         "hd_turn_right_complete",
         "walk_profile_right_contact_left",
     )
-    right_gait = (
-        "walk_profile_right_contact_left",
-        "walk_profile_right_passing_left_to_right",
-        "walk_profile_right_contact_right",
-        "walk_profile_right_passing_right_to_left",
-    )
-    left_gait = (
-        "walk_profile_left_contact_left",
-        "walk_profile_left_passing_left_to_right",
-        "walk_profile_left_contact_right",
-        "walk_profile_left_passing_right_to_left",
-    )
+    right_gait = PROFILE_POSE_SEQUENCES["walk_right"]
+    left_gait = PROFILE_POSE_SEQUENCES["walk_left"]
 
     for local in range(EXPECTED_FRAME_COUNTS["v6-turn-east"]):
         progress = (local + 1) / EXPECTED_FRAME_COUNTS["v6-turn-east"]
@@ -117,7 +108,7 @@ def fixture():
             pose = east_turn_poses[min(local // 3, len(east_turn_poses) - 1)]
         else:
             clip = "walk_right"
-            pose = right_gait[((local - 24) // 4) % len(right_gait)]
+            pose = right_gait[(local - 24) % len(right_gait)]
             if local == 24:
                 support = "left_foot"
         append("v6-turn-east", (2.4 * progress, 3.8), facing, clip, pose, support)
@@ -154,7 +145,7 @@ def fixture():
             pose = reversal_poses[min(local // 3, len(reversal_poses) - 1)]
         elif local < 96:
             clip = "walk_left"
-            pose = left_gait[((local - 42) // 4) % len(left_gait)]
+            pose = left_gait[(local - 42) % len(left_gait)]
             if local == 42:
                 support = "left_foot"
         else:
