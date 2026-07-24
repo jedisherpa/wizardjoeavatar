@@ -1,0 +1,343 @@
+{
+  "acceptance_scenario": "V9",
+  "checks": [
+    {
+      "detail": {
+        "acceptance_scenario": "V9",
+        "artifact_path": "scenario-program.json",
+        "maximum_capture_frame_count": 648,
+        "program_id": "v9-accessibility-profiles",
+        "scenario_count": 3,
+        "schema": "character_director_scenario_program_v2",
+        "schema_version": 2,
+        "source_sha256": "d302c9b0f6c5dee0ced674af7c65c862f33d79fe81fd2a31ee384eb4e6a1da5f"
+      },
+      "name": "scenario_program_identity",
+      "passed": true
+    },
+    {
+      "detail": {
+        "frame_counts": {
+          "full": 216,
+          "reduced": 216,
+          "still": 216
+        },
+        "trace_profiles": {
+          "full": [
+            "full"
+          ],
+          "reduced": [
+            "reduced"
+          ],
+          "still": [
+            "still"
+          ]
+        },
+        "transport_contiguous": {
+          "full": true,
+          "reduced": true,
+          "still": true
+        }
+      },
+      "name": "three_exact_profile_ranges",
+      "passed": true
+    },
+    {
+      "detail": {
+        "all_media_acks_accepted": true,
+        "command_count": 27,
+        "package_hashes": [
+          "sha256:e35d9fee572e8f984a25a3776e2be51e1920b2a09f568170f12ccd3f0851b387"
+        ],
+        "score_hashes": [
+          "sha256:aeb1fc8a4f41ebb8dba62eb7b68bcc08473ae9666d586ec221d288774ef3ef6f"
+        ],
+        "score_ids": [
+          "compiled:v9-accessibility-profiles"
+        ],
+        "sequences": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27
+        ]
+      },
+      "name": "one_authenticated_score_bound_media_replay",
+      "passed": true
+    },
+    {
+      "detail": {
+        "actions": [
+          "explaining",
+          "idle",
+          "magic_cast",
+          "pointing",
+          "speaking",
+          "walking"
+        ],
+        "body_hash_count": 22,
+        "cast_effect_frame_count": 17,
+        "walk_root_x_span": 32.67
+      },
+      "name": "full_profile_preserves_authored_body_performance",
+      "passed": true
+    },
+    {
+      "detail": {
+        "reduced": {
+          "actions": [
+            "idle"
+          ],
+          "body_hash_count": 1,
+          "effect_frame_count": 0,
+          "locomotion": [
+            "idle"
+          ],
+          "owned_channels": [
+            "eyes",
+            "face",
+            "gaze",
+            "mouth",
+            "speech"
+          ],
+          "passed": true,
+          "root_count": 1,
+          "suppression_codes": [
+            "accessibility_projection",
+            "motion_profile_projection"
+          ]
+        },
+        "still": {
+          "actions": [
+            "idle"
+          ],
+          "body_hash_count": 1,
+          "effect_frame_count": 0,
+          "locomotion": [
+            "idle"
+          ],
+          "owned_channels": [
+            "eyes",
+            "face",
+            "gaze",
+            "mouth",
+            "speech"
+          ],
+          "passed": true,
+          "root_count": 1,
+          "suppression_codes": [
+            "accessibility_projection",
+            "motion_profile_projection"
+          ]
+        }
+      },
+      "name": "reduced_and_still_suppress_all_body_motion",
+      "passed": true
+    },
+    {
+      "detail": {
+        "full": {
+          "explaining_expression_frame_count": 129,
+          "gaze_aims": [
+            0,
+            1
+          ],
+          "mouth_active_frame_count": 118,
+          "mouth_hash_count": 8,
+          "passed": true
+        },
+        "reduced": {
+          "explaining_expression_frame_count": 129,
+          "gaze_aims": [
+            0,
+            1
+          ],
+          "mouth_active_frame_count": 129,
+          "mouth_hash_count": 3,
+          "passed": true
+        },
+        "still": {
+          "explaining_expression_frame_count": 129,
+          "gaze_aims": [
+            0,
+            1
+          ],
+          "mouth_active_frame_count": 129,
+          "mouth_hash_count": 3,
+          "passed": true
+        }
+      },
+      "name": "speech_face_mouth_and_gaze_intent_survive_projection",
+      "passed": true
+    },
+    {
+      "detail": {
+        "full": {
+          "count": 214,
+          "sample": [
+            "sha256:02b1ca1865cd6abf4b26677c4b269f759511e5be26fa7b4661c6b7dd3338c827",
+            "sha256:03db490699d7f5b40104153dc5b18980ba30e521659ea69b9e386adb4767dab2",
+            "sha256:0415d83b0042f639b3abb334355db1869e71dae68b459819981251345d362113"
+          ]
+        },
+        "reduced": {
+          "count": 216,
+          "sample": [
+            "sha256:00f5e3ee7e5a6733dd4ab459647aed253d35c6343e1899482dc21da24b085648",
+            "sha256:01e28999ca7d4e93f8edcb7e6d0f21768199f7888098f644274667e9d92f3caa",
+            "sha256:02531b8de77ae9649d10d1b178e65d8975bd72054db76d3f8ac26c517b8b21b9"
+          ]
+        },
+        "still": {
+          "count": 216,
+          "sample": [
+            "sha256:065ea1ba24ea323d5ee7891bc478340848740c825f3e885003e3b9731c860574",
+            "sha256:076c5e6662cbb5c45ee583869c1002337f77596ec7e6672416a21feac8ac7f15",
+            "sha256:078d2bc8fa622844a405ada2101a76759db6954dc21c6033cf58d813aca5db32"
+          ]
+        }
+      },
+      "name": "profile_specific_resolution_is_traceable",
+      "passed": true
+    },
+    {
+      "detail": {
+        "clipped_frames": [],
+        "contact_passed": true,
+        "stage": [
+          240,
+          135
+        ]
+      },
+      "name": "canonical_stage_and_contact_integrity",
+      "passed": true
+    }
+  ],
+  "metrics": {
+    "full": {
+      "actions": [
+        "explaining",
+        "idle",
+        "magic_cast",
+        "pointing",
+        "speaking",
+        "walking"
+      ],
+      "body_hash_count": 22,
+      "effect_frame_count": 17,
+      "frame_count": 216,
+      "gaze_aims": [
+        0,
+        1
+      ],
+      "locomotion": [
+        "idle",
+        "walking"
+      ],
+      "mouth_active_frame_count": 123,
+      "mouth_hash_count": 8,
+      "owned_channels": [
+        "body",
+        "effects",
+        "eyes",
+        "face",
+        "gaze",
+        "gesture",
+        "locomotion",
+        "mouth",
+        "speech",
+        "stage"
+      ],
+      "root_count": 3,
+      "root_x_span": 65.1222,
+      "suppression_codes": []
+    },
+    "reduced": {
+      "actions": [
+        "idle"
+      ],
+      "body_hash_count": 1,
+      "effect_frame_count": 0,
+      "frame_count": 216,
+      "gaze_aims": [
+        0,
+        1
+      ],
+      "locomotion": [
+        "idle"
+      ],
+      "mouth_active_frame_count": 134,
+      "mouth_hash_count": 3,
+      "owned_channels": [
+        "eyes",
+        "face",
+        "gaze",
+        "mouth",
+        "speech"
+      ],
+      "root_count": 1,
+      "root_x_span": 0.0,
+      "suppression_codes": [
+        "accessibility_projection",
+        "motion_profile_projection"
+      ]
+    },
+    "still": {
+      "actions": [
+        "idle"
+      ],
+      "body_hash_count": 1,
+      "effect_frame_count": 0,
+      "frame_count": 216,
+      "gaze_aims": [
+        0,
+        1
+      ],
+      "locomotion": [
+        "idle"
+      ],
+      "mouth_active_frame_count": 134,
+      "mouth_hash_count": 3,
+      "owned_channels": [
+        "eyes",
+        "face",
+        "gaze",
+        "mouth",
+        "speech"
+      ],
+      "root_count": 1,
+      "root_x_span": 0.0,
+      "suppression_codes": [
+        "accessibility_projection",
+        "motion_profile_projection"
+      ]
+    }
+  },
+  "passed": true,
+  "review_boundary": "Machine checks prove transport, score identity, channel suppression, framing, and pixel behavior. Human normal-speed and quarter-speed review must still judge whether retained face and mouth acting reads well.",
+  "schema": "character_director_v9_machine_acceptance_v1",
+  "schema_version": 1
+}
