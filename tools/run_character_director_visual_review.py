@@ -3146,12 +3146,15 @@ def build_manifest(
         integrity.invalidate("contact verification report is missing")
     owned_frame_count = sum(frame.get("capture_owned") is True for frame in records.frames)
     for command in records.commands:
+        planned_value = command.get("capture_planned_frame_count")
+        if isinstance(planned_value, bool) or not isinstance(planned_value, int):
+            continue
         actual = sum(
             frame.get("capture_owned") is True
             and frame.get("scenario") == command.get("scenario")
             for frame in records.frames
         )
-        planned = int(command.get("capture_planned_frame_count", 0))
+        planned = planned_value
         mode = command.get("capture_timing_mode", "fixed")
         if integrity.valid and (
             actual <= 0
