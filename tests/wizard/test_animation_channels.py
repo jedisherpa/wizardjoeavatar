@@ -145,7 +145,7 @@ class AnimationChannelTests(unittest.TestCase):
                 WizardCommand("action", {"action": "magic_cast", "duration_ms": 5000})
             ).ok
         )
-        run_ticks(source, 93)
+        run_ticks(source, 96)
 
         state = source.current_state()
         self.assertEqual(state.action, "idle")
@@ -179,7 +179,7 @@ class AnimationChannelTests(unittest.TestCase):
         self.assertEqual(committed.action, "magic_cast")
         self.assertGreater(committed.time_seconds, committed.action_until)
 
-        run_ticks(source, 50)
+        run_ticks(source, 53)
         settled = source.current_state()
         self.assertEqual(settled.action, "idle")
         self.assertEqual(settled.animation_clip_id, "idle_front")

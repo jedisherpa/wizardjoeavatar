@@ -21,7 +21,7 @@ from .semantic_animation import map_prism_signal
 from .views import rotate_direction
 
 
-CAST_SETTLE_PRESENTATION_TICKS = 6
+CAST_SETTLE_PRESENTATION_TICKS = 9
 
 
 class WizardAvatarController:
