@@ -79,6 +79,7 @@ REFERENCE_SIDE_MARGIN_CELLS = 4
 REFERENCE_BOTTOM_MARGIN_CELLS = 6
 REFERENCE_HEAD_MOTION_RESERVE_CELLS = 1
 REFERENCE_RASTER_SAFETY_CELLS = 1
+REFERENCE_CONTACT_ROOT_RESERVE_CELLS = 21
 REFERENCE_MOUTH_OPEN = (132, 30, 22)
 REFERENCE_MOUTH_DARK = (78, 39, 20)
 REFERENCE_TEETH = (250, 238, 209)
@@ -665,6 +666,13 @@ class ProceduralWizardFrameSource:
                 state,
                 render_scale,
             )
+            provisional_root_screen = self._fit_reference_root_to_stage(
+                local,
+                root_anchor,
+                provisional_root_screen,
+                render_scale,
+                side_reserve=REFERENCE_CONTACT_ROOT_RESERVE_CELLS,
+            )
             render_scale = self._fit_reference_scale_to_stage(
                 local,
                 root_anchor,
@@ -736,7 +744,13 @@ class ProceduralWizardFrameSource:
                 head_offset_y,
                 body_pixel_sha256,
             )
-            base_root_screen = self._reference_root_screen(sx, sy, state, render_scale)
+            base_root_screen = self._fit_reference_root_to_stage(
+                local,
+                root_anchor,
+                self._reference_root_screen(sx, sy, state, render_scale),
+                render_scale,
+                side_reserve=REFERENCE_CONTACT_ROOT_RESERVE_CELLS,
+            )
             (
                 root_screen,
                 contact_generation,
@@ -750,6 +764,38 @@ class ProceduralWizardFrameSource:
                 root_anchor,
                 base_root_screen,
                 render_scale,
+            )
+            if contact_anchor is not None and contact_lock_stage is not None:
+                contact_anchor_local = reference_pose_anchor(
+                    pose_id,
+                    contact_anchor,
+                    self.pose_library_path,
+                )
+                render_scale = self._fit_reference_scale_to_contact_lock(
+                    local,
+                    contact_anchor_local,
+                    contact_lock_stage,
+                    render_scale,
+                )
+                root_screen = (
+                    contact_lock_stage[0]
+                    - (contact_anchor_local[0] - root_anchor[0])
+                    * render_scale
+                    * REFERENCE_POSE_HORIZONTAL_SCALE,
+                    contact_lock_stage[1]
+                    - (contact_anchor_local[1] - root_anchor[1])
+                    * render_scale,
+                )
+            else:
+                root_screen = self._fit_reference_root_to_stage(
+                    local,
+                    root_anchor,
+                    root_screen,
+                    render_scale,
+                )
+            contact_root_offset = (
+                root_screen[0] - base_root_screen[0],
+                root_screen[1] - base_root_screen[1],
             )
         else:
             stage = self._permissioned_stage(permission_world)
@@ -1775,6 +1821,137 @@ class ProceduralWizardFrameSource:
         if top_extent > 0:
             limits.append(
                 (stage_y - REFERENCE_TOP_MARGIN_CELLS - REFERENCE_RASTER_SAFETY_CELLS)
+                / top_extent
+            )
+        if bottom_extent > 0:
+            limits.append(
+                (
+                    self.rows
+                    - 1
+                    - REFERENCE_BOTTOM_MARGIN_CELLS
+                    - REFERENCE_RASTER_SAFETY_CELLS
+                    - stage_y
+                )
+                / bottom_extent
+            )
+        return max(0.001, min(limits))
+
+    def _fit_reference_root_to_stage(
+        self,
+        canvas: CellCanvas,
+        root_anchor: Tuple[int, int],
+        root_screen: Tuple[float, float],
+        render_scale: float,
+        side_reserve: int = 0,
+    ) -> Tuple[float, float]:
+        """Keep the final contact-adjusted silhouette inside the safe stage."""
+
+        occupied = [
+            (x, y)
+            for y, row in enumerate(canvas.cells)
+            for x, cell in enumerate(row)
+            if cell is not None
+        ]
+        if not occupied:
+            return root_screen
+        min_x = min(point[0] for point in occupied) - REFERENCE_HEAD_MOTION_RESERVE_CELLS
+        max_x = max(point[0] for point in occupied) + REFERENCE_HEAD_MOTION_RESERVE_CELLS
+        min_y = min(point[1] for point in occupied) - REFERENCE_HEAD_MOTION_RESERVE_CELLS
+        max_y = max(point[1] for point in occupied)
+        root_x, root_y = root_anchor
+        scale_x = render_scale * REFERENCE_POSE_HORIZONTAL_SCALE
+        left_extent = (root_x - min_x) * scale_x
+        right_extent = (max_x - root_x) * scale_x
+        top_extent = (root_y - min_y) * render_scale
+        bottom_extent = (max_y - root_y) * render_scale
+        minimum_x = (
+            REFERENCE_SIDE_MARGIN_CELLS
+            + REFERENCE_RASTER_SAFETY_CELLS
+            + side_reserve
+            + left_extent
+        )
+        maximum_x = (
+            self.cols
+            - 1
+            - REFERENCE_SIDE_MARGIN_CELLS
+            - REFERENCE_RASTER_SAFETY_CELLS
+            - side_reserve
+            - right_extent
+        )
+        minimum_y = (
+            REFERENCE_TOP_MARGIN_CELLS
+            + REFERENCE_RASTER_SAFETY_CELLS
+            + top_extent
+        )
+        maximum_y = (
+            self.rows
+            - 1
+            - REFERENCE_BOTTOM_MARGIN_CELLS
+            - REFERENCE_RASTER_SAFETY_CELLS
+            - bottom_extent
+        )
+        if minimum_x > maximum_x or minimum_y > maximum_y:
+            return root_screen
+        return (
+            min(max(root_screen[0], minimum_x), maximum_x),
+            min(max(root_screen[1], minimum_y), maximum_y),
+        )
+
+    def _fit_reference_scale_to_contact_lock(
+        self,
+        canvas: CellCanvas,
+        anchor_local: Tuple[int, int],
+        anchor_stage: Tuple[float, float],
+        requested_scale: float,
+    ) -> float:
+        """Preserve a planted anchor while fitting its full pose to the stage."""
+
+        occupied = [
+            (x, y)
+            for y, row in enumerate(canvas.cells)
+            for x, cell in enumerate(row)
+            if cell is not None
+        ]
+        if not occupied:
+            return requested_scale
+        min_x = min(point[0] for point in occupied) - REFERENCE_HEAD_MOTION_RESERVE_CELLS
+        max_x = max(point[0] for point in occupied) + REFERENCE_HEAD_MOTION_RESERVE_CELLS
+        min_y = min(point[1] for point in occupied) - REFERENCE_HEAD_MOTION_RESERVE_CELLS
+        max_y = max(point[1] for point in occupied)
+        anchor_x, anchor_y = anchor_local
+        stage_x, stage_y = anchor_stage
+        limits = [requested_scale]
+        left_extent = (anchor_x - min_x) * REFERENCE_POSE_HORIZONTAL_SCALE
+        right_extent = (max_x - anchor_x) * REFERENCE_POSE_HORIZONTAL_SCALE
+        top_extent = anchor_y - min_y
+        bottom_extent = max_y - anchor_y
+        if left_extent > 0:
+            limits.append(
+                (
+                    stage_x
+                    - REFERENCE_SIDE_MARGIN_CELLS
+                    - REFERENCE_RASTER_SAFETY_CELLS
+                )
+                / left_extent
+            )
+        if right_extent > 0:
+            limits.append(
+                (
+                    self.cols
+                    - 1
+                    - REFERENCE_SIDE_MARGIN_CELLS
+                    - REFERENCE_RASTER_SAFETY_CELLS
+                    - stage_x
+                )
+                / right_extent
+            )
+        if top_extent > 0:
+            limits.append(
+                (
+                    stage_y
+                    - REFERENCE_TOP_MARGIN_CELLS
+                    - REFERENCE_RASTER_SAFETY_CELLS
+                )
                 / top_extent
             )
         if bottom_extent > 0:

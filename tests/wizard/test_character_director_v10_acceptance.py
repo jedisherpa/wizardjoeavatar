@@ -277,6 +277,23 @@ class CharacterDirectorV10AcceptanceTests(unittest.TestCase):
         desktop = report["metrics"]["browser_profiles"][0]
         self.assertFalse(desktop["checks"]["avatar_avoids_controls"])
 
+    def test_edge_pass_that_never_reaches_safe_boundary_fails_closed(self):
+        manifest, traces, profiles = fixture()
+        broken = copy.deepcopy(traces)
+        for trace in broken:
+            frame_index = trace["frame_index"]
+            if 384 <= frame_index < 408:
+                trace["silhouette_raster_span"]["min_x"] = 31
+            if 504 <= frame_index < 528:
+                trace["silhouette_raster_span"]["max_x"] = 208
+
+        report = analyze_v10(manifest, broken, profiles, MANIFEST_SHA256)
+
+        self.assertFalse(report["passed"])
+        self.assertFalse(
+            check(report, "edge_pass_reaches_safe_frame_boundary")["passed"]
+        )
+
     def test_nonintegral_physical_projection_fails_closed(self):
         manifest, traces, profiles = fixture()
         broken = copy.deepcopy(profiles)

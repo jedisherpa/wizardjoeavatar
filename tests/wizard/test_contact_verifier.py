@@ -141,6 +141,41 @@ class ContactVerifierTests(unittest.TestCase):
         self.assertGreaterEqual(min(span.min_y for span in spans), 0)
         self.assertLess(max(span.max_y for span in spans), source.rows)
 
+    def test_v10_edge_pass_keeps_contact_recovery_inside_safe_margins(self):
+        source = ProceduralWizardFrameSource(cols=240, rows=135)
+        scenarios = (
+            (WizardCommand("reset", {}), 48),
+            (WizardCommand("move", {"x": 0.0, "z": 1.5, "speed": 2.0}), 96),
+            (WizardCommand("move", {"x": 0.0, "z": 10.0, "speed": 2.0}), 144),
+            (WizardCommand("move", {"x": -3.2, "z": 5.0, "speed": 2.0}), 120),
+            (WizardCommand("move", {"x": 3.2, "z": 5.0, "speed": 2.0}), 120),
+        )
+        records = []
+        for command, frame_count in scenarios:
+            result = source.apply_command_sync(command)
+            self.assertTrue(result.ok, result.message)
+            for _ in range(frame_count):
+                source.advance_simulation(1 / source.fps)
+                candidate = source.render_captured_candidate_sync(
+                    source.capture_render_state()
+                )
+                source.commit_render_candidate(candidate)
+                records.append(candidate.animation_truth)
+
+        spans = [
+            record.silhouette_raster_span
+            for record in records
+            if record.silhouette_raster_span is not None
+        ]
+        report = verify_contact_trace(records)
+
+        self.assertEqual(len(records), 528)
+        self.assertTrue(report.passed, report.to_mapping())
+        self.assertGreaterEqual(min(span.min_x for span in spans), 4)
+        self.assertLessEqual(max(span.max_x for span in spans), 235)
+        self.assertGreaterEqual(min(span.min_y for span in spans), 4)
+        self.assertLessEqual(max(span.max_y for span in spans), 128)
+
     def test_profile_stop_keeps_contact_locked_through_idle(self):
         source = ProceduralWizardFrameSource()
         result = source.apply_command_sync(

@@ -46,6 +46,7 @@ EXPECTED_TARGETS = {
 }
 EXPECTED_TOTAL_FRAMES = sum(EXPECTED_FRAME_COUNTS.values())
 TERMINAL_HOLD_FRAMES = 24
+EDGE_SAFE_BOUNDARY_MARGIN_CELLS = 30
 REQUIRED_PROFILES = {
     "desktop-dpr1": (1280, 720, 1.0, False),
     "desktop-dpr2": (1280, 720, 2.0, False),
@@ -617,8 +618,10 @@ def analyze_v10(
     ]
     edge_pass = (
         all(item is not None for item in left_spans + right_spans)
-        and max(item[0] for item in left_spans if item is not None) <= 12
-        and min(item[1] for item in right_spans if item is not None) >= cols - 1 - 12
+        and max(item[0] for item in left_spans if item is not None)
+        <= EDGE_SAFE_BOUNDARY_MARGIN_CELLS
+        and min(item[1] for item in right_spans if item is not None)
+        >= cols - 1 - EDGE_SAFE_BOUNDARY_MARGIN_CELLS
     )
     _check(
         report,
@@ -630,6 +633,9 @@ def analyze_v10(
             ),
             "right_terminal_max_x": sorted(
                 {item[1] for item in right_spans if item is not None}
+            ),
+            "maximum_safe_boundary_margin_cells": (
+                EDGE_SAFE_BOUNDARY_MARGIN_CELLS
             ),
         },
     )
