@@ -1,12 +1,15 @@
 import asyncio
 import json
+import tempfile
 import unittest
 from pathlib import Path
 
 from tools.record_character_director_browser import (
     BrowserCaptureFailure,
+    load_expected_start_identity,
     parse_args,
     parse_browser_scenario_program,
+    presentation_identity_errors,
     scenario_capture_events,
     wait_for_presented_advance,
 )
@@ -35,6 +38,139 @@ def program_v2(scenarios):
 
 
 class BrowserScenarioProgramTests(unittest.TestCase):
+    def test_start_identity_is_loaded_from_first_owned_trace_frame(self):
+        with tempfile.TemporaryDirectory() as directory:
+            evidence_dir = Path(directory)
+            (evidence_dir / "animation_truth_trace.ndjson").write_text(
+                json.dumps(
+                    {
+                        "frame_index": 7,
+                        "frame_fnv1a32": "fnv1a32:0123abcd",
+                        "world_root_x": -3.2,
+                        "world_root_z": 5.0,
+                        "presented_facing": "west",
+                        "presentation_channels": {
+                            "action": "idle",
+                            "expression": "neutral",
+                            "rendered_mouth_shape": "closed",
+                        },
+                    }
+                )
+                + "\n",
+                encoding="utf-8",
+            )
+            manifest = {
+                "animation_truth_trace": {
+                    "path": "animation_truth_trace.ndjson",
+                },
+                "scenario_ranges": [{"first_frame_index": 7}],
+            }
+
+            identity = load_expected_start_identity(manifest, evidence_dir)
+
+        self.assertEqual(identity["frame_index"], 7)
+        self.assertEqual(identity["frame_fnv1a32"], "fnv1a32:0123abcd")
+        self.assertEqual(identity["world_root_x"], -3.2)
+        self.assertEqual(identity["presented_facing"], "west")
+
+    def test_start_identity_rejects_stale_diagnostics_and_canvas(self):
+        expected = {
+            "frame_index": 0,
+            "frame_fnv1a32": "fnv1a32:0123abcd",
+            "world_root_x": 0.0,
+            "world_root_z": 5.0,
+            "presented_facing": "south",
+            "action": "idle",
+            "expression": "neutral",
+            "mouth": "closed",
+        }
+        snapshot = {
+            "client_metrics": {
+                "presentedFrames": 13,
+                "rawQueueDepth": 0,
+                "decodedQueueDepth": 2,
+                "canvas": {
+                    "lastPresentedLogicalHash": "fnv1a32:deadbeef",
+                    "dpr": 1.0,
+                },
+            },
+            "state_response": {
+                "state": {
+                    "world_position": {"x": 3.2, "z": 5.0},
+                    "facing": "east",
+                    "action": "idle",
+                    "expression": "neutral",
+                },
+                "diagnostics": {"presented_facing": "east"},
+            },
+            "diagnostics_text": (
+                "x 3.20  z 5.00\nfacing east\n"
+                "action idle  face neutral\ncell 4px  dpr 1.00"
+            ),
+        }
+
+        errors = presentation_identity_errors(
+            snapshot,
+            expected,
+            device_scale_factor=1.0,
+            baseline=10,
+            minimum_frames=3,
+        )
+
+        self.assertIn("canvas_hash_mismatch", errors)
+        self.assertIn("runtime_x_mismatch", errors)
+        self.assertIn("runtime_facing_mismatch", errors)
+        self.assertIn("presented_facing_mismatch", errors)
+        self.assertTrue(
+            any(error.startswith("diagnostics_text_mismatch") for error in errors)
+        )
+
+    def test_start_identity_accepts_synchronized_browser_state(self):
+        expected = {
+            "frame_index": 0,
+            "frame_fnv1a32": "fnv1a32:0123abcd",
+            "world_root_x": 0.0,
+            "world_root_z": 5.0,
+            "presented_facing": "south",
+            "action": "idle",
+            "expression": "neutral",
+            "mouth": "closed",
+        }
+        snapshot = {
+            "client_metrics": {
+                "presentedFrames": 13,
+                "rawQueueDepth": 0,
+                "decodedQueueDepth": 2,
+                "canvas": {
+                    "lastPresentedLogicalHash": "fnv1a32:0123abcd",
+                    "dpr": 2.0,
+                },
+            },
+            "state_response": {
+                "state": {
+                    "world_position": {"x": 0.0, "z": 5.0},
+                    "facing": "south",
+                    "action": "idle",
+                    "expression": "neutral",
+                },
+                "diagnostics": {"presented_facing": "south"},
+            },
+            "diagnostics_text": (
+                "x 0.00  z 5.00\nfacing south\n"
+                "action idle  face neutral\ncell 8px  dpr 2.00"
+            ),
+        }
+
+        errors = presentation_identity_errors(
+            snapshot,
+            expected,
+            device_scale_factor=2.0,
+            baseline=10,
+            minimum_frames=3,
+        )
+
+        self.assertEqual(errors, ())
+
     def test_reset_preroll_waits_for_three_drained_presentations(self):
         class FakeCDP:
             def __init__(self):
@@ -160,6 +296,8 @@ class BrowserScenarioProgramTests(unittest.TestCase):
         )
 
         self.assertEqual(parsed.schema_version, 1)
+        self.assertEqual(parsed.program_id, "browser-v1")
+        self.assertEqual(parsed.acceptance_scenario, "V1")
         self.assertEqual(
             [scenario.capture_frames for scenario in parsed.scenarios],
             [1, 30],

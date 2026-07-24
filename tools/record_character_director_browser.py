@@ -71,6 +71,8 @@ class BrowserScenario:
 class BrowserScenarioProgram:
     schema: str
     schema_version: int
+    program_id: str
+    acceptance_scenario: str
     scenarios: Tuple[BrowserScenario, ...]
 
     @property
@@ -299,6 +301,8 @@ def parse_browser_scenario_program(
     return BrowserScenarioProgram(
         schema=schema,
         schema_version=schema_version,
+        program_id=program["program_id"],
+        acceptance_scenario=program["acceptance_scenario"],
         scenarios=tuple(scenarios),
     )
 
@@ -524,6 +528,215 @@ async def wait_for_presented_advance(
     )
 
 
+def load_expected_start_identity(
+    manifest: Mapping[str, Any],
+    evidence_dir: Path,
+) -> Dict[str, Any]:
+    trace_metadata = manifest.get("animation_truth_trace")
+    ranges = manifest.get("scenario_ranges")
+    if (
+        not isinstance(trace_metadata, Mapping)
+        or not isinstance(ranges, Sequence)
+        or isinstance(ranges, (str, bytes))
+        or not ranges
+        or not isinstance(ranges[0], Mapping)
+    ):
+        raise BrowserCaptureFailure("capture manifest has no first scenario trace range")
+    relative_path = trace_metadata.get("path")
+    frame_index = ranges[0].get("first_frame_index")
+    if not isinstance(relative_path, str) or type(frame_index) is not int:
+        raise BrowserCaptureFailure("capture manifest start trace identity is invalid")
+    trace_path = (evidence_dir / relative_path).resolve()
+    try:
+        trace_path.relative_to(evidence_dir.resolve())
+    except ValueError as exc:
+        raise BrowserCaptureFailure("capture trace escapes the evidence directory") from exc
+    if not trace_path.is_file():
+        raise BrowserCaptureFailure("capture trace is missing")
+
+    record = None
+    with trace_path.open("r", encoding="utf-8") as stream:
+        for line in stream:
+            if not line.strip():
+                continue
+            candidate = json.loads(line)
+            if candidate.get("frame_index") == frame_index:
+                record = candidate
+                break
+    channels = record.get("presentation_channels") if isinstance(record, Mapping) else None
+    required = {
+        "frame_index": frame_index,
+        "frame_fnv1a32": record.get("frame_fnv1a32") if isinstance(record, Mapping) else None,
+        "world_root_x": record.get("world_root_x") if isinstance(record, Mapping) else None,
+        "world_root_z": record.get("world_root_z") if isinstance(record, Mapping) else None,
+        "presented_facing": record.get("presented_facing") if isinstance(record, Mapping) else None,
+        "action": channels.get("action") if isinstance(channels, Mapping) else None,
+        "expression": channels.get("expression") if isinstance(channels, Mapping) else None,
+        "mouth": channels.get("rendered_mouth_shape") if isinstance(channels, Mapping) else None,
+    }
+    if (
+        not isinstance(required["frame_fnv1a32"], str)
+        or not re.fullmatch(r"fnv1a32:[0-9a-f]{8}", required["frame_fnv1a32"])
+    ):
+        raise BrowserCaptureFailure("capture trace start identity is incomplete")
+    if any(
+        not isinstance(required[field], str)
+        for field in ("presented_facing", "action", "expression", "mouth")
+    ):
+        raise BrowserCaptureFailure("capture trace start identity is incomplete")
+    for field in ("world_root_x", "world_root_z"):
+        value = required[field]
+        if isinstance(value, bool) or not isinstance(value, (int, float)):
+            raise BrowserCaptureFailure("capture trace start identity is incomplete")
+        if not math.isfinite(float(value)):
+            raise BrowserCaptureFailure("capture trace start identity is incomplete")
+        required[field] = float(value)
+    return required
+
+
+async def browser_presentation_snapshot(cdp: CDPClient) -> Dict[str, Any]:
+    snapshot = await cdp.evaluate(
+        """
+        (async () => {
+          const response = await fetch('/api/avatar/wizard/state', {cache:'no-store'});
+          return {
+            client_metrics: window.__wizardJoeMetrics(),
+            state_response: response.ok ? await response.json() : null,
+            diagnostics_text: document.querySelector('#diagnostics')?.textContent || ''
+          };
+        })()
+        """
+    )
+    if not isinstance(snapshot, dict):
+        raise BrowserCaptureFailure("browser start identity snapshot is unavailable")
+    return snapshot
+
+
+def presentation_identity_errors(
+    snapshot: Mapping[str, Any],
+    expected: Mapping[str, Any],
+    device_scale_factor: float,
+    baseline: Optional[int] = None,
+    minimum_frames: int = 0,
+) -> Tuple[str, ...]:
+    errors = []
+    client = snapshot.get("client_metrics")
+    state_response = snapshot.get("state_response")
+    diagnostics_text = snapshot.get("diagnostics_text")
+    if not isinstance(client, Mapping):
+        return ("missing_client_metrics",)
+    if baseline is not None and client.get("presentedFrames", 0) < baseline + minimum_frames:
+        errors.append("presentation_not_advanced")
+    if client.get("rawQueueDepth") != 0:
+        errors.append("raw_queue_not_drained")
+    decoded_depth = client.get("decodedQueueDepth")
+    if type(decoded_depth) is not int or not 0 <= decoded_depth <= 2:
+        errors.append("decoded_queue_out_of_bounds")
+    canvas = client.get("canvas")
+    if not isinstance(canvas, Mapping):
+        errors.append("missing_canvas_metrics")
+    else:
+        if canvas.get("lastPresentedLogicalHash") != expected.get("frame_fnv1a32"):
+            errors.append("canvas_hash_mismatch")
+        observed_dpr = canvas.get("dpr")
+        if (
+            isinstance(observed_dpr, bool)
+            or not isinstance(observed_dpr, (int, float))
+            or not math.isfinite(float(observed_dpr))
+            or float(observed_dpr) != float(device_scale_factor)
+        ):
+            errors.append("canvas_dpr_mismatch")
+
+    state = state_response.get("state") if isinstance(state_response, Mapping) else None
+    diagnostics = (
+        state_response.get("diagnostics")
+        if isinstance(state_response, Mapping)
+        else None
+    )
+    position = state.get("world_position") if isinstance(state, Mapping) else None
+    if not isinstance(position, Mapping):
+        errors.append("missing_runtime_position")
+    else:
+        for coordinate, expected_field in (
+            ("x", "world_root_x"),
+            ("z", "world_root_z"),
+        ):
+            observed = position.get(coordinate)
+            target = expected.get(expected_field)
+            if (
+                isinstance(observed, bool)
+                or not isinstance(observed, (int, float))
+                or not math.isfinite(float(observed))
+                or abs(float(observed) - float(target)) > 0.01
+            ):
+                errors.append("runtime_{}_mismatch".format(coordinate))
+    if not isinstance(state, Mapping) or state.get("facing") != expected.get(
+        "presented_facing"
+    ):
+        errors.append("runtime_facing_mismatch")
+    if not isinstance(state, Mapping) or state.get("action") != expected.get("action"):
+        errors.append("runtime_action_mismatch")
+    if not isinstance(state, Mapping) or state.get("expression") != expected.get(
+        "expression"
+    ):
+        errors.append("runtime_expression_mismatch")
+    if not isinstance(diagnostics, Mapping) or diagnostics.get(
+        "presented_facing"
+    ) != expected.get("presented_facing"):
+        errors.append("presented_facing_mismatch")
+
+    if not isinstance(diagnostics_text, str):
+        errors.append("missing_diagnostics_text")
+    else:
+        required_lines = (
+            "x {:.2f}  z {:.2f}".format(
+                float(expected["world_root_x"]),
+                float(expected["world_root_z"]),
+            ),
+            "facing {}".format(expected["presented_facing"]),
+            "action {}".format(expected["action"]),
+            "dpr {:.2f}".format(device_scale_factor),
+        )
+        for required_line in required_lines:
+            if required_line not in diagnostics_text:
+                errors.append("diagnostics_text_mismatch:{}".format(required_line))
+    return tuple(errors)
+
+
+async def wait_for_start_identity(
+    cdp: CDPClient,
+    expected: Mapping[str, Any],
+    device_scale_factor: float,
+    baseline: int,
+    minimum_frames: int = 3,
+    timeout: float = 8.0,
+) -> Dict[str, Any]:
+    deadline = time.monotonic() + timeout
+    latest: Dict[str, Any] = {}
+    consecutive_matches = 0
+    latest_errors: Tuple[str, ...] = ()
+    while time.monotonic() < deadline:
+        latest = await browser_presentation_snapshot(cdp)
+        latest_errors = presentation_identity_errors(
+            latest,
+            expected,
+            device_scale_factor,
+            baseline=baseline,
+            minimum_frames=minimum_frames,
+        )
+        if latest_errors:
+            consecutive_matches = 0
+        else:
+            consecutive_matches += 1
+            if consecutive_matches >= 2:
+                return latest
+        await asyncio.sleep(0.05)
+    raise BrowserCaptureFailure(
+        "browser did not present a synchronized start identity: errors={} "
+        "snapshot={}".format(latest_errors, latest)
+    )
+
+
 async def post_browser_command(
     cdp: CDPClient,
     source_epoch: str,
@@ -595,6 +808,10 @@ async def capture_browser_layout(
         json.loads(scenario_path.read_text(encoding="utf-8")),
         fps,
     )
+    expected_start_identity = load_expected_start_identity(
+        manifest,
+        capture_manifest_path.resolve().parent,
+    )
     expected_frames = program.expected_frame_count
     if not CHROME.is_file():
         raise BrowserCaptureFailure("Google Chrome is required for browser layout proof")
@@ -635,6 +852,8 @@ async def capture_browser_layout(
             started_at = utc_now()
             commands = []
             sampled_sequences = []
+            synchronized_pre_roll = None
+            first_encoded_identity = None
             try:
                 websocket_url = await wait_for_page_target(port)
                 cdp = CDPClient(websocket_url)
@@ -705,7 +924,15 @@ async def capture_browser_layout(
                 initial_presented = int(
                     pre_roll_baseline.get("presentedFrames", 0)
                 )
-                await wait_for_presented_advance(cdp, initial_presented)
+                synchronized_pre_roll = await wait_for_start_identity(
+                    cdp,
+                    expected_start_identity,
+                    device_scale_factor,
+                    initial_presented,
+                )
+                cdp.latest_screencast = None
+                cdp.latest_screencast_sequence = 0
+                cdp.screencast_event.clear()
                 await cdp.command(
                     "Page.startScreencast",
                     {
@@ -744,6 +971,20 @@ async def capture_browser_layout(
                                 raise BrowserCaptureFailure(
                                     "Chrome produced no screencast frame"
                                 )
+                            if output_index == 0:
+                                first_encoded_identity = await browser_presentation_snapshot(
+                                    cdp
+                                )
+                                first_errors = presentation_identity_errors(
+                                    first_encoded_identity,
+                                    expected_start_identity,
+                                    device_scale_factor,
+                                )
+                                if first_errors:
+                                    raise BrowserCaptureFailure(
+                                        "first encoded browser frame identity mismatch: "
+                                        "{}".format(first_errors)
+                                    )
                             output_index += 1
                             sequence = cdp.latest_screencast_sequence
                             if sequence == previous_sequence:
@@ -841,11 +1082,21 @@ async def capture_browser_layout(
                     "expected_frame_count": expected_frames,
                     "scenario_program_schema": program.schema,
                     "scenario_program_schema_version": program.schema_version,
+                    "scenario_program_id": program.program_id,
+                    "acceptance_scenario": program.acceptance_scenario,
                     "screencast_event_count": cdp.latest_screencast_sequence,
                     "duplicate_sample_count": duplicate_frames,
                     "sampled_screencast_sequences": sampled_sequences,
                     "commands": commands,
                     "initial_client_metrics": initial_metrics,
+                    "expected_start_identity": expected_start_identity,
+                    "synchronized_pre_roll": synchronized_pre_roll,
+                    "first_encoded_identity": {
+                        **(first_encoded_identity or {}),
+                        "screencast_sequence": (
+                            sampled_sequences[0] if sampled_sequences else None
+                        ),
+                    },
                     "final_client_metrics": final_metrics,
                     "console_events": cdp.console_events,
                     "page_errors": cdp.page_errors,

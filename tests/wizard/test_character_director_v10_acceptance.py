@@ -63,9 +63,16 @@ def fixture():
             traces.append(
                 {
                     "frame_index": frame_index,
+                    "frame_fnv1a32": "fnv1a32:0123abcd",
                     "world_root_x": root_x,
                     "world_root_z": root_z,
+                    "presented_facing": "south",
                     "render_scale": scale,
+                    "presentation_channels": {
+                        "action": "idle",
+                        "expression": "neutral",
+                        "rendered_mouth_shape": "closed",
+                    },
                     "silhouette_raster_span": {
                         "min_x": min_x,
                         "max_x": max_x,
@@ -114,6 +121,40 @@ def browser_profile(name, width, height, dpr, mobile, canvas_rect, device_cell):
         "verticalUiReserveCssPx": 144,
         "safeViewportHeight": height - 144,
     }
+    expected_start_identity = {
+        "frame_index": 0,
+        "frame_fnv1a32": "fnv1a32:0123abcd",
+        "world_root_x": 0.0,
+        "world_root_z": 5.0,
+        "presented_facing": "south",
+        "action": "idle",
+        "expression": "neutral",
+        "mouth": "closed",
+    }
+    identity_snapshot = {
+        "client_metrics": {
+            "presentedFrames": 8,
+            "rawQueueDepth": 0,
+            "decodedQueueDepth": 2,
+            "canvas": {
+                "lastPresentedLogicalHash": "fnv1a32:0123abcd",
+                "dpr": dpr,
+            },
+        },
+        "state_response": {
+            "state": {
+                "world_position": {"x": 0.0, "z": 5.0},
+                "facing": "south",
+                "action": "idle",
+                "expression": "neutral",
+            },
+            "diagnostics": {"presented_facing": "south"},
+        },
+        "diagnostics_text": (
+            "x 0.00  z 5.00\nfacing south\n"
+            "action idle  face neutral\ncell 4px  dpr {:.2f}".format(dpr)
+        ),
+    }
     return {
         "schema": "character_director_browser_layout_v1",
         "schema_version": 1,
@@ -135,6 +176,12 @@ def browser_profile(name, width, height, dpr, mobile, canvas_rect, device_cell):
         },
         "frame_count": EXPECTED_TOTAL_FRAMES,
         "expected_frame_count": EXPECTED_TOTAL_FRAMES,
+        "expected_start_identity": expected_start_identity,
+        "synchronized_pre_roll": copy.deepcopy(identity_snapshot),
+        "first_encoded_identity": {
+            **copy.deepcopy(identity_snapshot),
+            "screencast_sequence": 1,
+        },
         "final_client_metrics": {
             "decodeErrorCount": 0,
             "droppedFrames": 0,
@@ -253,6 +300,26 @@ class CharacterDirectorV10AcceptanceTests(unittest.TestCase):
         self.assertFalse(report["passed"])
         mobile = report["metrics"]["browser_profiles"][2]
         self.assertFalse(mobile["checks"]["runtime_integrity"])
+
+    def test_stale_first_encoded_frame_fails_closed(self):
+        manifest, traces, profiles = fixture()
+        broken = copy.deepcopy(profiles)
+        broken[0]["first_encoded_identity"]["diagnostics_text"] = (
+            "x 3.20  z 5.00\nfacing east\n"
+            "action idle  face neutral\ncell 4px  dpr 1.00"
+        )
+
+        report = analyze_v10(manifest, traces, broken, MANIFEST_SHA256)
+
+        self.assertFalse(report["passed"])
+        desktop = report["metrics"]["browser_profiles"][0]
+        self.assertFalse(
+            desktop["checks"]["synchronized_first_encoded_frame"]
+        )
+        self.assertIn(
+            "first_encoded_identity:diagnostics_text_mismatch",
+            desktop["start_identity"]["failures"],
+        )
 
 
 if __name__ == "__main__":

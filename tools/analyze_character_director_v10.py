@@ -127,6 +127,148 @@ def _css_pixels(value: object) -> Optional[float]:
     return result if math.isfinite(result) and result > 0 else None
 
 
+def _expected_browser_start(
+    traces: Sequence[Mapping[str, Any]],
+) -> Optional[Dict[str, Any]]:
+    if not traces:
+        return None
+    first = min(traces, key=lambda item: item.get("frame_index", math.inf))
+    channels = first.get("presentation_channels")
+    if not isinstance(channels, Mapping):
+        return None
+    result = {
+        "frame_index": first.get("frame_index"),
+        "frame_fnv1a32": first.get("frame_fnv1a32"),
+        "world_root_x": first.get("world_root_x"),
+        "world_root_z": first.get("world_root_z"),
+        "presented_facing": first.get("presented_facing"),
+        "action": channels.get("action"),
+        "expression": channels.get("expression"),
+        "mouth": channels.get("rendered_mouth_shape"),
+    }
+    if (
+        type(result["frame_index"]) is not int
+        or not isinstance(result["frame_fnv1a32"], str)
+        or not re.fullmatch(r"fnv1a32:[0-9a-f]{8}", result["frame_fnv1a32"])
+        or any(
+            _finite(result[field]) is None
+            for field in ("world_root_x", "world_root_z")
+        )
+        or any(
+            not isinstance(result[field], str)
+            for field in ("presented_facing", "action", "expression", "mouth")
+        )
+    ):
+        return None
+    return result
+
+
+def _browser_start_identity_report(
+    metrics: Mapping[str, Any],
+    traces: Sequence[Mapping[str, Any]],
+    dpr: float,
+) -> Dict[str, Any]:
+    expected = _expected_browser_start(traces)
+    declared = metrics.get("expected_start_identity")
+    snapshots = {
+        "synchronized_pre_roll": metrics.get("synchronized_pre_roll"),
+        "first_encoded_identity": metrics.get("first_encoded_identity"),
+    }
+    failures: List[str] = []
+    if expected is None or declared != expected:
+        failures.append("declared_start_identity_mismatch")
+    for label, snapshot in snapshots.items():
+        if not isinstance(snapshot, Mapping) or expected is None:
+            failures.append("{}:missing".format(label))
+            continue
+        client = snapshot.get("client_metrics")
+        state_response = snapshot.get("state_response")
+        diagnostics_text = snapshot.get("diagnostics_text")
+        canvas = client.get("canvas") if isinstance(client, Mapping) else None
+        state = (
+            state_response.get("state")
+            if isinstance(state_response, Mapping)
+            else None
+        )
+        diagnostics = (
+            state_response.get("diagnostics")
+            if isinstance(state_response, Mapping)
+            else None
+        )
+        position = state.get("world_position") if isinstance(state, Mapping) else None
+        if not isinstance(client, Mapping):
+            failures.append("{}:missing_client_metrics".format(label))
+            continue
+        if client.get("rawQueueDepth") != 0:
+            failures.append("{}:raw_queue_not_drained".format(label))
+        decoded_depth = client.get("decodedQueueDepth")
+        if type(decoded_depth) is not int or not 0 <= decoded_depth <= 2:
+            failures.append("{}:decoded_queue_out_of_bounds".format(label))
+        if (
+            not isinstance(canvas, Mapping)
+            or canvas.get("lastPresentedLogicalHash")
+            != expected["frame_fnv1a32"]
+            or _finite(canvas.get("dpr")) != dpr
+        ):
+            failures.append("{}:canvas_identity_mismatch".format(label))
+        if not isinstance(position, Mapping):
+            failures.append("{}:missing_runtime_position".format(label))
+        else:
+            for coordinate, expected_field in (
+                ("x", "world_root_x"),
+                ("z", "world_root_z"),
+            ):
+                observed = _finite(position.get(coordinate))
+                target = _finite(expected[expected_field])
+                if (
+                    observed is None
+                    or target is None
+                    or abs(observed - target) > 0.01
+                ):
+                    failures.append(
+                        "{}:runtime_{}_mismatch".format(label, coordinate)
+                    )
+        if (
+            not isinstance(state, Mapping)
+            or state.get("facing") != expected["presented_facing"]
+            or state.get("action") != expected["action"]
+            or state.get("expression") != expected["expression"]
+        ):
+            failures.append("{}:runtime_state_mismatch".format(label))
+        if (
+            not isinstance(diagnostics, Mapping)
+            or diagnostics.get("presented_facing")
+            != expected["presented_facing"]
+        ):
+            failures.append("{}:presented_facing_mismatch".format(label))
+        required_text = (
+            "x {:.2f}  z {:.2f}".format(
+                float(expected["world_root_x"]),
+                float(expected["world_root_z"]),
+            ),
+            "facing {}".format(expected["presented_facing"]),
+            "action {}".format(expected["action"]),
+            "dpr {:.2f}".format(dpr),
+        )
+        if not isinstance(diagnostics_text, str) or any(
+            item not in diagnostics_text for item in required_text
+        ):
+            failures.append("{}:diagnostics_text_mismatch".format(label))
+    first = snapshots["first_encoded_identity"]
+    if (
+        not isinstance(first, Mapping)
+        or type(first.get("screencast_sequence")) is not int
+        or first.get("screencast_sequence") <= 0
+    ):
+        failures.append("first_encoded_identity:invalid_screencast_sequence")
+    return {
+        "passed": not failures,
+        "expected": expected,
+        "declared": declared,
+        "failures": failures,
+    }
+
+
 def _profile_report(
     metrics: Mapping[str, Any],
     manifest: Mapping[str, Any],
@@ -189,6 +331,9 @@ def _profile_report(
         and not metrics.get("page_errors")
         and not metrics.get("console_events")
     )
+    start_identity = _browser_start_identity_report(metrics, traces, dpr)
+    result["checks"]["synchronized_first_encoded_frame"] = start_identity["passed"]
+    result["start_identity"] = start_identity
 
     canvas_inside = False
     letterbox = False
