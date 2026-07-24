@@ -70,6 +70,29 @@ class FrameSourceTests(unittest.TestCase):
         self.assertEqual(source_names, ["scheduler"] * 4 + ["none"])
         self.assertEqual(remaining, 0)
 
+    def test_presentation_blink_caps_long_input_at_four_frames(self):
+        source = ProceduralWizardFrameSource()
+        previous_input = False
+        remaining = 0
+        source_name = "none"
+        visible_frames = []
+        for input_active in (True, True, True, True, True, False):
+            visible, remaining, source_name = source._resolve_presentation_blink(
+                input_active=input_active,
+                previous_input_active=previous_input,
+                previous_frames_remaining=remaining,
+                input_source="scheduler" if input_active else "none",
+                previous_source=source_name,
+            )
+            visible_frames.append(visible)
+            previous_input = input_active
+
+        self.assertEqual(
+            visible_frames,
+            [True, True, True, True, False, False],
+        )
+        self.assertEqual(source_name, "none")
+
     def test_scheduler_blink_waits_for_stable_body_action(self):
         source = ProceduralWizardFrameSource()
 

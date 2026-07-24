@@ -1447,9 +1447,9 @@ class ProceduralWizardFrameSource:
         remaining = max(0, int(previous_frames_remaining))
         if input_active and not previous_input_active:
             remaining = max(remaining, 4)
-        visible = bool(input_active or remaining > 0)
+        visible = remaining > 0
         next_remaining = max(0, remaining - 1) if visible else 0
-        if input_active:
+        if visible and input_active:
             source = input_source
         elif visible:
             # The hold preserves the originating semantic source. It is a
