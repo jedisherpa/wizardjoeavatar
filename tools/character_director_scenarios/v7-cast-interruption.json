@@ -37,9 +37,9 @@
       "capture_seconds": 0.5
     },
     {
-      "name": "v7-postcommit-reset",
-      "kind": "reset",
-      "payload": {},
+      "name": "v7-postcommit-ready",
+      "kind": "gaze",
+      "payload": {"target": "viewer"},
       "settle_seconds": 0.0,
       "capture_seconds": 0.5
     },
