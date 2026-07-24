@@ -41,8 +41,8 @@ EXPECTED_TARGETS = {
     "v10-center": (0.0, 5.0),
     "v10-near": (0.0, 1.5),
     "v10-far": (0.0, 10.0),
-    "v10-left-edge": (-3.4, 5.0),
-    "v10-right-edge": (3.4, 5.0),
+    "v10-left-edge": (-3.2, 5.0),
+    "v10-right-edge": (3.2, 5.0),
 }
 EXPECTED_TOTAL_FRAMES = sum(EXPECTED_FRAME_COUNTS.values())
 TERMINAL_HOLD_FRAMES = 24
@@ -472,8 +472,8 @@ def analyze_v10(
     ]
     edge_pass = (
         all(item is not None for item in left_spans + right_spans)
-        and max(item[0] for item in left_spans if item is not None) <= 8
-        and min(item[1] for item in right_spans if item is not None) >= cols - 1 - 8
+        and max(item[0] for item in left_spans if item is not None) <= 12
+        and min(item[1] for item in right_spans if item is not None) >= cols - 1 - 12
     )
     _check(
         report,

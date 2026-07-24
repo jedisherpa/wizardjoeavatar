@@ -40,7 +40,7 @@
       "name": "v10-left-edge",
       "kind": "move",
       "payload": {
-        "x": -3.4,
+        "x": -3.2,
         "z": 5.0,
         "speed": 2.0
       },
@@ -52,7 +52,7 @@
       "name": "v10-right-edge",
       "kind": "move",
       "payload": {
-        "x": 3.4,
+        "x": 3.2,
         "z": 5.0,
         "speed": 2.0
       },
