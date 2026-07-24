@@ -151,6 +151,7 @@ class WizardPresentationSnapshot:
     blink_input_active: bool = False
     blink_visible_frames_remaining: int = 0
     blink_source: str = "none"
+    pending_scheduler_blink: bool = False
 
 
 @dataclass(frozen=True)
@@ -273,6 +274,7 @@ class ProceduralWizardFrameSource:
         self._blink_input_active = False
         self._blink_visible_frames_remaining = 0
         self._blink_source = "none"
+        self._pending_scheduler_blink = False
         self._initialize_authoritative_animation_state()
 
     def _initialize_authoritative_animation_state(self) -> None:
@@ -459,6 +461,7 @@ class ProceduralWizardFrameSource:
                 blink_input_active=self._blink_input_active,
                 blink_visible_frames_remaining=self._blink_visible_frames_remaining,
                 blink_source=self._blink_source,
+                pending_scheduler_blink=self._pending_scheduler_blink,
             ),
         )
 
@@ -516,7 +519,10 @@ class ProceduralWizardFrameSource:
                 state.gaze_aim,
                 facing_changed_tick=state.simulation_tick,
             )
-        scheduler_blink_closed = state.blink_phase >= 0.965
+        scheduler_blink_closed = (
+            state.blink_phase >= 0.965
+            or snapshot.presentation.pending_scheduler_blink
+        )
         scheduler_blink_suppressed = (
             scheduler_blink_closed
             and not head_eye.turn_blink_closed
@@ -530,6 +536,7 @@ class ProceduralWizardFrameSource:
                 )
             )
         )
+        pending_scheduler_blink = scheduler_blink_suppressed
         if scheduler_blink_suppressed:
             scheduler_blink_closed = False
             state.blink_phase = 0.0
@@ -824,6 +831,7 @@ class ProceduralWizardFrameSource:
                 if presentation_blink_closed
                 else "none"
             ),
+            pending_scheduler_blink=pending_scheduler_blink,
         )
         planted_anchor_local = None
         planted_anchor_stage = None
@@ -2056,6 +2064,7 @@ class ProceduralWizardFrameSource:
             presentation.blink_visible_frames_remaining
         )
         self._blink_source = presentation.blink_source
+        self._pending_scheduler_blink = presentation.pending_scheduler_blink
         consumed = set(presentation.consumed_marker_events)
         if consumed:
             self._pending_presentation_marker_events = [
@@ -2141,6 +2150,7 @@ class ProceduralWizardFrameSource:
             self._blink_input_active = False
             self._blink_visible_frames_remaining = 0
             self._blink_source = "none"
+            self._pending_scheduler_blink = False
 
     def reset_encoder(self) -> None:
         with self._presentation_lock:

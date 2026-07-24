@@ -1,5 +1,6 @@
 import asyncio
 import unittest
+from dataclasses import replace
 
 from wizard_avatar.frame_source import (
     REFERENCE_EYE_BLUE,
@@ -92,6 +93,35 @@ class FrameSourceTests(unittest.TestCase):
                 WizardState(action="idle", locomotion="walking")
             )
         )
+
+    def test_deferred_scheduler_blink_releases_on_first_stable_frame(self):
+        source = ProceduralWizardFrameSource()
+        blocked_snapshot = source._capture_render_state_unlocked(
+            state=WizardState(
+                action="explaining",
+                locomotion="idle",
+                blink_phase=1.0,
+            )
+        )
+        _, blocked_presentation, _ = source._render_snapshot(blocked_snapshot)
+
+        self.assertTrue(blocked_presentation.pending_scheduler_blink)
+        self.assertEqual(blocked_presentation.blink_visible_frames_remaining, 0)
+
+        stable_snapshot = replace(
+            blocked_snapshot,
+            state=WizardState(
+                action="idle",
+                locomotion="idle",
+                blink_phase=0.0,
+            ),
+            presentation=blocked_presentation,
+        )
+        _, released_presentation, _ = source._render_snapshot(stable_snapshot)
+
+        self.assertFalse(released_presentation.pending_scheduler_blink)
+        self.assertEqual(released_presentation.blink_visible_frames_remaining, 3)
+        self.assertEqual(released_presentation.blink_source, "scheduler")
 
     def test_direct_procedural_frame_source_shape(self):
         source = ProceduralWizardFrameSource(240, 135, 24)
