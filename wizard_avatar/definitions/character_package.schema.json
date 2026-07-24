@@ -9,8 +9,8 @@
     "character_id": {"type": "string", "minLength": 1},
     "display_name": {"type": "string", "minLength": 1},
     "renderer": {"const": "asciline_square_cells"},
-    "pose_library": {"type": "string", "minLength": 1},
-    "animation_graph": {"type": "string", "minLength": 1},
+    "pose_library": {"type": "string", "minLength": 1, "pattern": "^(?!/)(?![A-Za-z]:[\\\\/])(?!\\\\\\\\).+$"},
+    "animation_graph": {"type": "string", "minLength": 1, "pattern": "^(?!/)(?![A-Za-z]:[\\\\/])(?!\\\\\\\\).+$"},
     "default_pose_id": {"type": "string", "minLength": 1},
     "capabilities": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1}}
   }

@@ -694,6 +694,7 @@ def _parse_clip(value: Any, path: str, catalog: Mapping[str, PoseMetadata]) -> C
 def parse_animation_graph(
     payload: Any,
     pose_catalog: Optional[Mapping[str, PoseMetadata]] = None,
+    pose_manifest_path: Path = REFERENCE_POSE_MANIFEST_PATH,
 ) -> AnimationGraph:
     """Strictly parse graph v2 data and validate all cross-references."""
 
@@ -727,7 +728,8 @@ def parse_animation_graph(
         raise _path_error("pose_catalog", "must not be empty")
     # The catalog was cross-checked while loading. The graph asset ID is checked
     # against the canonical source manifest below without rereading pose cells.
-    manifest = _mapping(_load_json(REFERENCE_POSE_MANIFEST_PATH), str(REFERENCE_POSE_MANIFEST_PATH))
+    manifest_path = Path(pose_manifest_path)
+    manifest = _mapping(_load_json(manifest_path), str(manifest_path))
     catalog_asset_ids.add(_string(manifest.get("asset_set_id"), "manifest.asset_set_id"))
     if len(catalog_asset_ids) != 1:
         raise _path_error("$.asset_set_id", "does not match the pose catalog")
@@ -909,13 +911,53 @@ def parse_animation_graph(
     )
 
 
-@lru_cache(maxsize=16)
-def _load_animation_graph_cached(path: str) -> AnimationGraph:
-    return parse_animation_graph(_load_json(Path(path)))
+@lru_cache(maxsize=32)
+def _load_animation_graph_cached(
+    path: str,
+    manifest_path: str,
+    library_path: str,
+) -> AnimationGraph:
+    return _load_animation_graph_uncached(path, manifest_path, library_path)
 
 
-def load_animation_graph(path: Path = ANIMATION_GRAPH_V2_PATH) -> AnimationGraph:
-    return _load_animation_graph_cached(str(Path(path).resolve()))
+def _load_animation_graph_uncached(
+    path: str,
+    manifest_path: str,
+    library_path: str,
+) -> AnimationGraph:
+    catalog = load_pose_catalog(
+        Path(manifest_path),
+        Path(library_path),
+    )
+    return parse_animation_graph(
+        _load_json(Path(path)),
+        pose_catalog=catalog,
+        pose_manifest_path=Path(manifest_path),
+    )
+
+
+def load_animation_graph(
+    path: Path = ANIMATION_GRAPH_V2_PATH,
+    *,
+    pose_manifest_path: Path = REFERENCE_POSE_MANIFEST_PATH,
+    pose_library_path: Path = REFERENCE_POSE_LIBRARY_PATH,
+    use_cache: bool = True,
+) -> AnimationGraph:
+    arguments = (
+        str(Path(path).resolve()),
+        str(Path(pose_manifest_path).resolve()),
+        str(Path(pose_library_path).resolve()),
+    )
+    if use_cache:
+        return _load_animation_graph_cached(*arguments)
+    return _load_animation_graph_uncached(*arguments)
+
+
+def clear_animation_graph_cache() -> None:
+    """Drop parsed graph state after a newly validated package replaces bytes."""
+
+    _load_animation_graph_cached.cache_clear()
+    load_reference_animation_graph_v2.cache_clear()
 
 
 @lru_cache(maxsize=1)
@@ -994,6 +1036,7 @@ __all__ = [
     "TransitionDefinition",
     "TransitionRecipe",
     "load_animation_graph",
+    "clear_animation_graph_cache",
     "load_pose_catalog",
     "load_reference_animation_graph_v2",
     "parse_animation_graph",

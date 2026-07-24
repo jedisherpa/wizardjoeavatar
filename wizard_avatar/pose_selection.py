@@ -7,6 +7,8 @@ from typing import Iterable, Optional, Set
 
 from .animation_graph import (
     ANIMATION_GRAPH_V2_PATH,
+    REFERENCE_POSE_LIBRARY_PATH,
+    REFERENCE_POSE_MANIFEST_PATH,
     AnimationGraph,
     AnimationGraphValidationError,
     ClipDefinition,
@@ -99,11 +101,15 @@ def select_reference_pose_id(
     state: WizardState,
     available_pose_ids: Optional[Iterable[str]] = None,
     animation_graph_path: Optional[Path] = None,
+    pose_manifest_path: Optional[Path] = None,
+    pose_library_path: Optional[Path] = None,
 ) -> str:
     return select_reference_pose_sample(
         state,
         available_pose_ids,
         animation_graph_path,
+        pose_manifest_path,
+        pose_library_path,
     ).pose_id
 
 
@@ -111,6 +117,8 @@ def select_reference_pose_sample(
     state: WizardState,
     available_pose_ids: Optional[Iterable[str]] = None,
     animation_graph_path: Optional[Path] = None,
+    pose_manifest_path: Optional[Path] = None,
+    pose_library_path: Optional[Path] = None,
 ) -> PoseSample:
     available = set(available_pose_ids if available_pose_ids is not None else reference_pose_ids())
     if not available:
@@ -130,7 +138,19 @@ def select_reference_pose_sample(
             if animation_graph_path is not None
             else animation_graph_path_for(state.character_id) or ANIMATION_GRAPH_V2_PATH
         )
-        graph = load_animation_graph(graph_path)
+        graph = load_animation_graph(
+            graph_path,
+            pose_manifest_path=(
+                Path(pose_manifest_path)
+                if pose_manifest_path is not None
+                else REFERENCE_POSE_MANIFEST_PATH
+            ),
+            pose_library_path=(
+                Path(pose_library_path)
+                if pose_library_path is not None
+                else REFERENCE_POSE_LIBRARY_PATH
+            ),
+        )
         sample = _select_graph_v2_sample(state, graph)
     except (AnimationGraphValidationError, FileNotFoundError, KeyError, OSError, TypeError, ValueError):
         requested = _select_requested_pose_id(state)

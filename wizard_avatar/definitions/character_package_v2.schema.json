@@ -1,0 +1,106 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://wizardjoe.local/schemas/character_package_v2.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "character_id",
+    "display_name",
+    "runtime_api",
+    "renderer",
+    "renderer_adapter_id",
+    "assets",
+    "default_pose_id",
+    "capabilities"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 2
+    },
+    "character_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "display_name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "runtime_api": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "min",
+        "max"
+      ],
+      "properties": {
+        "min": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "max": {
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    },
+    "renderer": {
+      "const": "asciline_square_cells"
+    },
+    "renderer_adapter_id": {
+      "type": "string",
+      "pattern": "^asciline\\.[a-z0-9][a-z0-9._-]*$"
+    },
+    "assets": {
+      "type": "object",
+      "minProperties": 5,
+      "required": [
+        "pose_library",
+        "pose_manifest",
+        "animation_graph",
+        "runtime_profile",
+        "capability_manifest"
+      ],
+      "additionalProperties": false,
+      "patternProperties": {
+        "^[a-z][a-z0-9_]{0,63}$": {
+          "$ref": "#/$defs/asset"
+        }
+      }
+    },
+    "default_pose_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "capabilities": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    }
+  },
+  "$defs": {
+    "asset": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path",
+        "sha256"
+      ],
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^(?!/)(?![A-Za-z]:[\\\\/])(?!\\\\\\\\).+$"
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        }
+      }
+    }
+  }
+}

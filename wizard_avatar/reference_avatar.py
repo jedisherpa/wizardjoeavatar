@@ -49,6 +49,14 @@ def load_reference_pose_library(path: Path = REFERENCE_POSE_CELL_PATH) -> dict:
         return json.load(handle)
 
 
+def clear_reference_pose_cache() -> None:
+    """Drop parsed pose and rendered-canvas caches after package admission."""
+
+    load_reference_pose_library.cache_clear()
+    _reference_pose_map.cache_clear()
+    _render_reference_pose_canvas.cache_clear()
+
+
 @lru_cache(maxsize=None)
 def _reference_pose_map(path: Path = REFERENCE_POSE_CELL_PATH) -> Dict[str, ReferencePose]:
     library_path = Path(path).resolve()

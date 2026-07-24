@@ -24,6 +24,7 @@ from .animation_trace import (
     transformed_anchor,
 )
 from .animation_graph import (
+    REFERENCE_POSE_MANIFEST_PATH,
     AnimationGraph,
     AnimationGraphValidationError,
     load_animation_graph,
@@ -273,7 +274,12 @@ class ProceduralWizardFrameSource:
         self.character_package = load_character_package(self.character_package_path)
         try:
             self.animation_graph: Optional[AnimationGraph] = load_animation_graph(
-                self.character_package.animation_graph
+                self.character_package.animation_graph,
+                pose_manifest_path=(
+                    self.character_package.pose_manifest
+                    or REFERENCE_POSE_MANIFEST_PATH
+                ),
+                pose_library_path=self.character_package.pose_library,
             )
         except AnimationGraphValidationError:
             # Generic character packages may still carry the legacy/minimal
@@ -338,6 +344,11 @@ class ProceduralWizardFrameSource:
             derived,
             self.pose_ids,
             self.character_package.animation_graph,
+            (
+                self.character_package.pose_manifest
+                or REFERENCE_POSE_MANIFEST_PATH
+            ),
+            self.character_package.pose_library,
         )
         if state.pose_id != sample.pose_id:
             state.last_pose_id = state.pose_id

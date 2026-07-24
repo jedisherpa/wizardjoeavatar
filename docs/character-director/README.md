@@ -54,6 +54,16 @@ must remain labelled as planned.
 - `V9_ACCESSIBILITY_ACCEPTANCE_2026-07-24.md`: accepted full, reduced, and
   still motion profiles, with machine proof, product-owner approval, and an
   explicit audiovisual evidence boundary.
+- `V10_PRODUCTION_ACCEPTANCE_CANDIDATE_2026-07-24.md`: frozen responsive
+  framing candidate `9138f16d` and its still-pending product-owner gate.
+- `CHARACTER_PARITY_ROLLOUT.md`: one-character-at-a-time package, runtime,
+  governance, evidence, review, and registration gates.
+- `CHARACTER_PORTABILITY_FOUNDATION_2026-07-24.md`: implemented hash-bound
+  package and registry boundary, closed review findings, verification, and
+  remaining Serena admission work.
+- `SERENA_QUILL_MIGRATION_AUDIT_2026-07-24.md`: frozen Serena source census,
+  compatibility findings, rejected shortcuts, and first-candidate admission
+  sequence.
 - `GAZE_SETTLE_CONTINUITY.md`: eye-lead, target-arrival re-centering, stable
   fixation, focused tests, and clean runtime evidence.
 - `SPEECH_MOUTH_AUTHORITY.md`: aligned-versus-local mouth ownership,

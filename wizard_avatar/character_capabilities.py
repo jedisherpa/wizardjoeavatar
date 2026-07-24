@@ -805,6 +805,12 @@ def _diagnostics(graph: AnimationGraph) -> Tuple[CapabilityDiagnostic, ...]:
 def _build_manifest(package_path: Path) -> Dict[str, Any]:
     package_path = Path(package_path).resolve()
     package = load_character_package(package_path)
+    if package.schema_version != 1 or package.character_id != "wizard-joe-v1":
+        raise _error(
+            "unsupported_package",
+            "$.character",
+            "derived capability manifests currently support only the Wizard Joe V1 compatibility package",
+        )
     graph = load_animation_graph(package.animation_graph)
     pose_library_raw = _read_json(package.pose_library)
     expression_raw = _read_json(EXPRESSIONS_PATH)
