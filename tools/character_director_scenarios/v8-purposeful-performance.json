@@ -1,0 +1,123 @@
+{
+  "schema": "character_director_scenario_program_v2",
+  "schema_version": 2,
+  "program_id": "v8-purposeful-performance",
+  "acceptance_scenario": "V8",
+  "scenarios": [
+    {
+      "name": "v8-continuous-performance",
+      "kind": "reset",
+      "payload": {},
+      "timing": {
+        "capture_frames": 1440,
+        "scheduled_commands": [
+          {
+            "name": "v8-phrase-one",
+            "at_frame": 96,
+            "kind": "speak",
+            "payload": {
+              "speech_id": "v8-phrase-1",
+              "text": "The same clear idea deserves a fresh, deliberate performance.",
+              "duration_ms": 2600
+            }
+          },
+          {
+            "name": "v8-gesture-one",
+            "at_frame": 192,
+            "kind": "action",
+            "payload": {
+              "action": "explaining",
+              "duration_ms": 1200
+            }
+          },
+          {
+            "name": "v8-listen-left",
+            "at_frame": 288,
+            "kind": "gaze",
+            "payload": {
+              "target": "left"
+            }
+          },
+          {
+            "name": "v8-return-viewer-one",
+            "at_frame": 336,
+            "kind": "gaze",
+            "payload": {
+              "target": "viewer"
+            }
+          },
+          {
+            "name": "v8-phrase-two",
+            "at_frame": 432,
+            "kind": "speak",
+            "payload": {
+              "speech_id": "v8-phrase-2",
+              "text": "The same clear idea deserves a fresh, deliberate performance.",
+              "duration_ms": 2600
+            }
+          },
+          {
+            "name": "v8-gesture-two",
+            "at_frame": 528,
+            "kind": "action",
+            "payload": {
+              "action": "pointing",
+              "duration_ms": 1200
+            }
+          },
+          {
+            "name": "v8-listen-right",
+            "at_frame": 624,
+            "kind": "gaze",
+            "payload": {
+              "target": "right"
+            }
+          },
+          {
+            "name": "v8-return-viewer-two",
+            "at_frame": 672,
+            "kind": "gaze",
+            "payload": {
+              "target": "viewer"
+            }
+          },
+          {
+            "name": "v8-phrase-three",
+            "at_frame": 768,
+            "kind": "speak",
+            "payload": {
+              "speech_id": "v8-phrase-3",
+              "text": "The same clear idea deserves a fresh, deliberate performance.",
+              "duration_ms": 2600
+            }
+          },
+          {
+            "name": "v8-gesture-three",
+            "at_frame": 864,
+            "kind": "action",
+            "payload": {
+              "action": "explaining",
+              "duration_ms": 1200
+            }
+          },
+          {
+            "name": "v8-listen-up",
+            "at_frame": 960,
+            "kind": "gaze",
+            "payload": {
+              "target": "up"
+            }
+          },
+          {
+            "name": "v8-final-viewer-hold",
+            "at_frame": 1008,
+            "kind": "gaze",
+            "payload": {
+              "target": "viewer"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

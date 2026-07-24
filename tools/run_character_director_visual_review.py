@@ -283,6 +283,7 @@ class ScenarioV2:
     capture_frames: Optional[int] = None
     until_trace: Optional[TraceTriggerV2] = None
     max_frames: Optional[int] = None
+    scheduled_commands: Tuple["ScheduledCommandV2", ...] = ()
 
     def planned_frame_count(self, fps: float) -> int:
         del fps
@@ -292,6 +293,10 @@ class ScenarioV2:
         timing: Dict[str, Any]
         if self.capture_frames is not None:
             timing = {"capture_frames": self.capture_frames}
+            if self.scheduled_commands:
+                timing["scheduled_commands"] = [
+                    command.to_mapping() for command in self.scheduled_commands
+                ]
         else:
             timing = {
                 "until_trace": self.until_trace.to_mapping() if self.until_trace else {},
@@ -303,6 +308,17 @@ class ScenarioV2:
             "payload": self.payload,
             "timing": timing,
         }
+
+
+@dataclass(frozen=True)
+class ScheduledCommandV2:
+    name: str
+    at_frame: int
+    kind: str
+    payload: Dict[str, Any]
+
+    def to_mapping(self) -> Dict[str, Any]:
+        return asdict(self)
 
 
 @dataclass(frozen=True)
@@ -534,6 +550,53 @@ def _trace_trigger_v2(value: object) -> TraceTriggerV2:
     )
 
 
+def _scheduled_commands_v2(
+    values: object,
+    capture_frames: int,
+) -> Tuple[ScheduledCommandV2, ...]:
+    if isinstance(values, (str, bytes)) or not isinstance(values, Sequence) or not values:
+        raise ValueError("timing.scheduled_commands must be a non-empty sequence")
+    result: List[ScheduledCommandV2] = []
+    names = set()
+    previous_frame = 0
+    required = {"name", "at_frame", "kind", "payload"}
+    for index, value in enumerate(values):
+        if not isinstance(value, Mapping) or set(value) != required:
+            raise ValueError("scheduled command {} schema mismatch".format(index))
+        name = value["name"]
+        at_frame = value["at_frame"]
+        kind = value["kind"]
+        payload = value["payload"]
+        if not isinstance(name, str) or not SCENARIO_NAME_RE.fullmatch(name):
+            raise ValueError("scheduled command name must be a lowercase kebab-case identifier")
+        if name in names:
+            raise ValueError("scheduled command names must be unique within a capture")
+        if (
+            isinstance(at_frame, bool)
+            or not isinstance(at_frame, int)
+            or at_frame <= previous_frame
+            or at_frame >= capture_frames
+        ):
+            raise ValueError(
+                "scheduled command at_frame values must be strictly increasing within the capture"
+            )
+        if not isinstance(kind, str) or kind not in COMMAND_KINDS:
+            raise ValueError("unsupported scheduled command kind: {}".format(kind))
+        if not isinstance(payload, Mapping):
+            raise ValueError("scheduled command payload must be an object")
+        names.add(name)
+        previous_frame = at_frame
+        result.append(
+            ScheduledCommandV2(
+                name=name,
+                at_frame=at_frame,
+                kind=kind,
+                payload=_copy_json(payload),
+            )
+        )
+    return tuple(result)
+
+
 def validate_scenarios_v2(values: Sequence[Mapping[str, Any]]) -> Tuple[ScenarioV2, ...]:
     if isinstance(values, (str, bytes)) or not isinstance(values, Sequence) or not values:
         raise ValueError("scenarios must be a non-empty sequence")
@@ -562,13 +625,25 @@ def validate_scenarios_v2(values: Sequence[Mapping[str, Any]]) -> Tuple[Scenario
         if not isinstance(timing, Mapping):
             raise ValueError("scenario timing must be an object")
         supplied_timing = set(timing)
-        if supplied_timing == {"capture_frames"}:
+        if supplied_timing in (
+            {"capture_frames"},
+            {"capture_frames", "scheduled_commands"},
+        ):
+            capture_frames = _positive_integer(
+                timing["capture_frames"], "timing.capture_frames"
+            )
             scenario = ScenarioV2(
                 name=name,
                 kind=kind,
                 payload=_copy_json(payload),
-                capture_frames=_positive_integer(
-                    timing["capture_frames"], "timing.capture_frames"
+                capture_frames=capture_frames,
+                scheduled_commands=(
+                    _scheduled_commands_v2(
+                        timing["scheduled_commands"],
+                        capture_frames,
+                    )
+                    if "scheduled_commands" in timing
+                    else ()
                 ),
             )
         elif supplied_timing == {"until_trace", "max_frames"}:
@@ -812,6 +887,7 @@ class ScenarioClock:
 
     current: Optional[str] = None
     remaining_frames: int = 0
+    claimed_frames: int = 0
     completed: asyncio.Event = field(default_factory=asyncio.Event)
 
     def activate(self, scenario: str, frame_count: int) -> None:
@@ -821,6 +897,7 @@ class ScenarioClock:
             raise ValueError("scenario capture windows require a name and positive frame count")
         self.current = scenario
         self.remaining_frames = frame_count
+        self.claimed_frames = 0
         self.completed = asyncio.Event()
 
     def claim(self) -> Optional[str]:
@@ -828,6 +905,7 @@ class ScenarioClock:
         if scenario is None:
             return None
         self.remaining_frames -= 1
+        self.claimed_frames += 1
         if self.remaining_frames == 0:
             self.current = None
             self.completed.set()
@@ -1489,6 +1567,107 @@ async def record_state_snapshot(
     return snapshot
 
 
+async def dispatch_scheduled_commands(
+    scenario: ScenarioV2,
+    command_url: str,
+    source_epoch: str,
+    first_source_sequence: int,
+    scenario_clock: ScenarioClock,
+    records: CaptureRecords,
+    terminal: asyncio.Event,
+    integrity: CaptureIntegrity,
+    fps: float,
+) -> None:
+    for offset, command in enumerate(scenario.scheduled_commands):
+        while (
+            not terminal.is_set()
+            and scenario_clock.current == scenario.name
+            and scenario_clock.claimed_frames < command.at_frame
+        ):
+            await asyncio.sleep(min(0.01, 1.0 / fps / 4.0))
+        if terminal.is_set():
+            raise EvidenceFailure(integrity.failure_reason or "capture terminated")
+        if (
+            scenario_clock.current != scenario.name
+            or scenario_clock.claimed_frames < command.at_frame
+        ):
+            raise EvidenceFailure(
+                "scheduled command {} missed frame boundary {}".format(
+                    command.name,
+                    command.at_frame,
+                )
+            )
+
+        source_sequence = first_source_sequence + offset
+        command_id = "{}-{:04d}-{}".format(
+            source_epoch,
+            source_sequence,
+            command.name,
+        )
+        envelope = {
+            "schema_version": 1,
+            "command_id": command_id,
+            "source_id": SOURCE_ID,
+            "source_kind": "api",
+            "source_sequence": source_sequence,
+            "source_epoch": source_epoch,
+            "kind": command.kind,
+            "payload": command.payload,
+            "priority_class": "user",
+        }
+        outcome: Dict[str, Any] = {
+            "scenario": command.name,
+            "scheduled_for_scenario": scenario.name,
+            "scheduled_at_frame": command.at_frame,
+            "dispatch_observed_after_frame_count": scenario_clock.claimed_frames,
+            "command_id": command_id,
+            "source_id": SOURCE_ID,
+            "source_epoch": source_epoch,
+            "source_sequence": source_sequence,
+            "kind": command.kind,
+            "payload": command.payload,
+            "request_started_at_utc": utc_now(),
+            "ack": None,
+            "response_state": None,
+            "error": None,
+        }
+        records.commands.append(outcome)
+        scheduled_task: Optional[asyncio.Task[None]] = None
+        try:
+            response, latency_ms = await request_json_async(
+                "POST",
+                command_url,
+                envelope,
+            )
+            outcome["request_completed_at_utc"] = utc_now()
+            outcome["request_latency_ms"] = round(latency_ms, 3)
+            outcome["dispatch_completed_after_frame_count"] = scenario_clock.claimed_frames
+            outcome["ack"] = response.get("ack")
+            outcome["response_state"] = minimize_evidence_content(response.get("state"))
+            if not isinstance(outcome["ack"], dict):
+                raise EvidenceFailure(
+                    "scheduled command {} returned no acknowledgement".format(command_id)
+                )
+            if outcome["ack"].get("command_id") != command_id:
+                raise EvidenceFailure("scheduled command acknowledgement ID mismatch")
+            if outcome["ack"].get("source_sequence") != source_sequence:
+                raise EvidenceFailure("scheduled command acknowledgement sequence mismatch")
+            if outcome["ack"].get("disposition") != "applied":
+                raise EvidenceFailure(
+                    "scheduled command {} was not applied: {}".format(
+                        command_id,
+                        outcome["ack"].get("disposition"),
+                    )
+                )
+        except Exception as exc:
+            outcome["error"] = "{}: {}".format(type(exc).__name__, exc)
+            integrity.invalidate(
+                "scheduled command {} failed: {}".format(command.name, exc)
+            )
+            terminal.set()
+            raise
+
+
 async def drive_scenarios(
     scenarios: Sequence[Any],
     command_url: str,
@@ -1501,9 +1680,17 @@ async def drive_scenarios(
     integrity: CaptureIntegrity,
     fps: float,
 ) -> None:
-    for source_sequence, scenario in enumerate(scenarios, start=1):
+    next_source_sequence = 1
+    for scenario in scenarios:
         if terminal.is_set():
             raise EvidenceFailure(integrity.failure_reason or "capture terminated")
+        source_sequence = next_source_sequence
+        scheduled_commands = (
+            scenario.scheduled_commands
+            if isinstance(scenario, ScenarioV2)
+            else ()
+        )
+        next_source_sequence += 1 + len(scheduled_commands)
         command_id = "{}-{:04d}-{}".format(source_epoch, source_sequence, scenario.name)
         planned_frames = (
             scenario.planned_frame_count(fps)
@@ -1574,6 +1761,24 @@ async def drive_scenarios(
             )
             outcome["capture_started_at_utc"] = utc_now()
             scenario_clock.activate(scenario.name, planned_frames)
+            scheduled_task = (
+                asyncio.create_task(
+                    dispatch_scheduled_commands(
+                        scenario,
+                        command_url,
+                        source_epoch,
+                        source_sequence + 1,
+                        scenario_clock,
+                        records,
+                        terminal,
+                        integrity,
+                        fps,
+                    )
+                )
+                if isinstance(scenario, ScenarioV2)
+                and scenario.scheduled_commands
+                else None
+            )
             if isinstance(scenario, ScenarioV2) and scenario.until_trace is not None:
                 outcome["trace_trigger_observation"] = await wait_for_trace_trigger(
                     scenario,
@@ -1596,8 +1801,13 @@ async def drive_scenarios(
                     integrity,
                     timeout_seconds=max(5.0, capture_seconds * 3.0),
                 )
+            if scheduled_task is not None:
+                await scheduled_task
             outcome["capture_completed_at_utc"] = utc_now()
         except Exception as exc:
+            if scheduled_task is not None:
+                scheduled_task.cancel()
+                await asyncio.gather(scheduled_task, return_exceptions=True)
             outcome["error"] = "{}: {}".format(type(exc).__name__, exc)
             integrity.invalidate("scenario {} failed: {}".format(scenario.name, exc))
             terminal.set()

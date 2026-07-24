@@ -201,6 +201,95 @@ class ScenarioSchemaTests(unittest.TestCase):
                 with self.assertRaises(ValueError):
                     validate_scenarios_v2(scenarios)
 
+    def test_loads_continuous_capture_with_strict_scheduled_commands(self):
+        scenarios = validate_scenarios_v2(
+            [
+                {
+                    "name": "continuous-performance",
+                    "kind": "reset",
+                    "payload": {},
+                    "timing": {
+                        "capture_frames": 1440,
+                        "scheduled_commands": [
+                            {
+                                "name": "phrase-one",
+                                "at_frame": 120,
+                                "kind": "speak",
+                                "payload": {
+                                    "speech_id": "v8-phrase-one",
+                                    "text": "A repeated phrase.",
+                                    "duration_ms": 2400,
+                                },
+                            },
+                            {
+                                "name": "gesture-one",
+                                "at_frame": 240,
+                                "kind": "action",
+                                "payload": {
+                                    "action": "explaining",
+                                    "duration_ms": 1200,
+                                },
+                            },
+                        ],
+                    },
+                }
+            ]
+        )
+
+        self.assertEqual(scenarios[0].capture_frames, 1440)
+        self.assertEqual(len(scenarios[0].scheduled_commands), 2)
+        self.assertEqual(scenarios[0].scheduled_commands[0].at_frame, 120)
+        self.assertEqual(
+            scenarios[0].to_mapping()["timing"]["scheduled_commands"][1]["kind"],
+            "action",
+        )
+
+        invalid_schedules = (
+            [dict(scenarios[0].scheduled_commands[0].to_mapping(), at_frame=0)],
+            [
+                scenarios[0].scheduled_commands[0].to_mapping(),
+                dict(scenarios[0].scheduled_commands[1].to_mapping(), at_frame=120),
+            ],
+            [dict(scenarios[0].scheduled_commands[0].to_mapping(), at_frame=1440)],
+        )
+        for scheduled_commands in invalid_schedules:
+            with self.subTest(scheduled_commands=scheduled_commands):
+                with self.assertRaises(ValueError):
+                    validate_scenarios_v2(
+                        [
+                            {
+                                "name": "continuous-performance",
+                                "kind": "reset",
+                                "payload": {},
+                                "timing": {
+                                    "capture_frames": 1440,
+                                    "scheduled_commands": scheduled_commands,
+                                },
+                            }
+                        ]
+                    )
+
+    def test_loads_v8_as_one_continuous_sixty_second_take(self):
+        program = load_scenario_program(
+            ROOT
+            / "tools"
+            / "character_director_scenarios"
+            / "v8-purposeful-performance.json"
+        )
+
+        self.assertEqual(program.acceptance_scenario, "V8")
+        self.assertEqual(program.maximum_capture_frame_count, 1440)
+        self.assertEqual(len(program.scenarios), 1)
+        self.assertEqual(len(program.scenarios[0].scheduled_commands), 12)
+        self.assertEqual(
+            [
+                command.payload["speech_id"]
+                for command in program.scenarios[0].scheduled_commands
+                if command.kind == "speak"
+            ],
+            ["v8-phrase-1", "v8-phrase-2", "v8-phrase-3"],
+        )
+
     def test_rejects_unversioned_or_unbounded_scenario_program(self):
         valid = json.loads(
             (
@@ -504,11 +593,13 @@ class StrictCaptureTests(unittest.IsolatedAsyncioTestCase):
         self.assertIsNone(clock.claim())
         clock.activate("listen-left", 3)
         self.assertEqual([clock.claim(), clock.claim(), clock.claim()], ["listen-left"] * 3)
+        self.assertEqual(clock.claimed_frames, 3)
         self.assertTrue(clock.completed.is_set())
         self.assertIsNone(clock.claim())
         self.assertIsNone(clock.current)
 
         clock.activate("return-viewer", 2)
+        self.assertEqual(clock.claimed_frames, 0)
         self.assertEqual([clock.claim(), clock.claim()], ["return-viewer"] * 2)
         self.assertTrue(clock.completed.is_set())
 
