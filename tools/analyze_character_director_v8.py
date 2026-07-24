@@ -25,7 +25,13 @@ from wizard_avatar.animation_trace import AnimationTruthTraceV1
 
 REPORT_SCHEMA = "character_director_v8_machine_acceptance_v2"
 SCENARIO = "v8-continuous-performance"
+AV_PREROLL_SCENARIO = "v8-governed-speech-preroll"
 EXPECTED_FRAMES = 1440
+AV_PREROLL_FRAMES = 960
+PROGRAM_FRAME_COUNTS = {
+    "v8-purposeful-performance": EXPECTED_FRAMES,
+    "v8-purposeful-performance-av": EXPECTED_FRAMES + AV_PREROLL_FRAMES,
+}
 EXPECTED_SPEECH_IDS = ("v8-phrase-1", "v8-phrase-2", "v8-phrase-3")
 EXPECTED_GESTURES = ("v8-gesture-one", "v8-gesture-two", "v8-gesture-three")
 MINIMUM_GESTURE_SPACING_FRAMES = 192
@@ -132,15 +138,17 @@ def analyze_v8(
         ),
     }
     program = manifest.get("scenario_program")
+    program_id = program.get("program_id") if isinstance(program, Mapping) else None
     _check(
         report,
         "scenario_program_identity",
         isinstance(program, Mapping)
         and program.get("schema") == "character_director_scenario_program_v2"
         and program.get("schema_version") == 2
-        and program.get("program_id") == "v8-purposeful-performance"
+        and program_id in PROGRAM_FRAME_COUNTS
         and program.get("acceptance_scenario") == "V8"
-        and program.get("maximum_capture_frame_count") == EXPECTED_FRAMES,
+        and program.get("maximum_capture_frame_count")
+        == PROGRAM_FRAME_COUNTS.get(program_id),
         program,
     )
 
@@ -170,7 +178,7 @@ def analyze_v8(
         and not missing_trace
         and contiguous
         and all(
-            frame.get("scenario") in {None, SCENARIO}
+            frame.get("scenario") in {None, SCENARIO, AV_PREROLL_SCENARIO}
             for frame in frames
         ),
         {

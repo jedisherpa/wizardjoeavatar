@@ -5,6 +5,8 @@ from pathlib import Path
 
 import tools.analyze_character_director_v8 as v8_analyzer
 from tools.analyze_character_director_v8 import (
+    AV_PREROLL_FRAMES,
+    AV_PREROLL_SCENARIO,
     EXPECTED_FRAMES,
     EXPECTED_GESTURES,
     EXPECTED_SPEECH_IDS,
@@ -166,6 +168,35 @@ class CharacterDirectorV8AcceptanceTests(unittest.TestCase):
         self.assertTrue(report["passed"], report)
         self.assertEqual(report["metrics"]["owned_frame_count"], EXPECTED_FRAMES)
         self.assertEqual(report["metrics"]["gesture_effect_count"], 3)
+
+    def test_governed_speech_preroll_preserves_canonical_v8_acceptance(self):
+        manifest, traces = fixture()
+        manifest["scenario_program"]["program_id"] = "v8-purposeful-performance-av"
+        manifest["scenario_program"]["maximum_capture_frame_count"] = (
+            EXPECTED_FRAMES + AV_PREROLL_FRAMES
+        )
+        manifest["frames"] = [
+            {
+                "frame_index": index,
+                "capture_owned": True,
+                "scenario": AV_PREROLL_SCENARIO,
+            }
+            for index in range(AV_PREROLL_FRAMES)
+        ] + [
+            {
+                "frame_index": AV_PREROLL_FRAMES + index,
+                "capture_owned": True,
+                "scenario": SCENARIO,
+            }
+            for index in range(EXPECTED_FRAMES)
+        ]
+        for trace in traces:
+            trace["frame_index"] += AV_PREROLL_FRAMES
+
+        report = analyze_v8(manifest, traces)
+
+        self.assertTrue(report["passed"], report)
+        self.assertEqual(report["metrics"]["owned_frame_count"], EXPECTED_FRAMES)
 
     def test_changed_repeated_phrase_fails_closed(self):
         manifest, traces = fixture()

@@ -13,6 +13,7 @@ from drive_prism_governed_speech import (
     BrowserCaptureFailure,
     establish_audio_user_gesture,
     manifest_artifact_path,
+    parse_args,
     resume_speech_playback_with_user_gesture,
     summarize_governed_registration_request,
     summarize_media_session_request,
@@ -47,6 +48,23 @@ class FakeCdp:
 
 
 class GovernedSpeechDriverTests(unittest.TestCase):
+    def test_can_defer_v2_specific_review_products(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            scenario = root / "scenario.json"
+            scenario.write_text("{}", encoding="utf-8")
+            args = parse_args(
+                [
+                    "--receipt",
+                    str(root / "receipt.json"),
+                    "--scenarios-file",
+                    str(scenario),
+                    "--defer-review-products",
+                ]
+            )
+
+        self.assertTrue(args.defer_review_products)
+
     def test_summarizes_only_media_binding_and_playback_fields(self):
         event = {
             "requestId": "42.1",

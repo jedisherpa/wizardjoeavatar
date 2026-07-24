@@ -1111,8 +1111,13 @@ async def run(args: argparse.Namespace) -> None:
                             )
                         )
                     print("ATOMIC_CAPTURE {}".format(args.capture_output), flush=True)
-                    bundle_path = generate_v2_review_products(args.capture_output, args.receipt)
-                    print("REVIEW_BUNDLE {}".format(bundle_path), flush=True)
+                    if args.defer_review_products:
+                        print("REVIEW_PRODUCTS_DEFERRED", flush=True)
+                    else:
+                        bundle_path = generate_v2_review_products(
+                            args.capture_output, args.receipt
+                        )
+                        print("REVIEW_BUNDLE {}".format(bundle_path), flush=True)
                 hold_until = time.monotonic() + args.hold_seconds
                 while time.monotonic() < hold_until:
                     state = await browser_speech_state(cdp)
@@ -1141,6 +1146,14 @@ def parse_args(argv: Optional[Sequence[str]] = None) -> argparse.Namespace:
     parser.add_argument("--hold-seconds", type=float, default=40.0)
     parser.add_argument("--minimum-audio-seconds", type=float, default=45.0)
     parser.add_argument("--capture-output", type=Path)
+    parser.add_argument(
+        "--defer-review-products",
+        action="store_true",
+        help=(
+            "Stop after atomic capture and browser replay so a scenario-specific "
+            "acceptance analyzer can produce the final review bundle."
+        ),
+    )
     parser.add_argument(
         "--scenarios-file",
         type=Path,
