@@ -3070,14 +3070,26 @@ def validate_manifest(manifest: Mapping[str, Any], output_dir: Optional[Path] = 
         _manifest_error(not gaps, "valid evidence cannot have decoded gaps")
         _manifest_error(not errors, "valid evidence cannot have decoder errors")
         _manifest_error(bool(frames), "valid evidence requires decoded frames")
-        _manifest_error(len(commands) == len(scenarios), "valid evidence requires one command per scenario")
+        capture_owner_commands = [
+            command
+            for command in commands
+            if _plain_int(command.get("capture_planned_frame_count"), 1)
+        ]
+        _manifest_error(
+            len(capture_owner_commands) == len(scenarios),
+            "valid evidence requires one capture-owning command per scenario",
+        )
         for command in commands:
             _manifest_error(
                 isinstance(command.get("ack"), Mapping) and command["ack"].get("disposition") == "applied",
                 "valid evidence requires applied command acknowledgements",
             )
             _manifest_error(command.get("response_state") is not None, "valid evidence requires response state")
-            _manifest_error(command.get("state_snapshot") is not None, "valid evidence requires state snapshot")
+        for command in capture_owner_commands:
+            _manifest_error(
+                command.get("state_snapshot") is not None,
+                "valid evidence requires capture-owner state snapshots",
+            )
         for item in ranges:
             _manifest_error(_plain_int(item.get("frame_count"), 1), "every valid scenario requires frames")
         if schema_version >= 3:
