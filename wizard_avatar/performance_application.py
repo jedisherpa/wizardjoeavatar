@@ -3,6 +3,7 @@ from __future__ import annotations
 from dataclasses import dataclass, replace
 from typing import Mapping, Optional
 
+from .animation_graph import load_reference_animation_graph_v2
 from .controller import WizardAvatarController
 from .expressions import expression_mouth
 from .media_session import MediaSessionAckV1, MediaSessionCoordinator, MediaSessionSnapshotV1
@@ -105,6 +106,7 @@ class PerformanceApplication:
                 self.score_runtime.resolve if self.score_runtime is not None else None
             ),
         )
+        self.animation_graph = load_reference_animation_graph_v2()
         self._last_applied_action: Optional[str] = None
         self._last_applied_pose: Optional[str] = None
         self._last_applied_mouth: Optional[str] = None
@@ -734,8 +736,8 @@ class PerformanceApplication:
         if state.action == "walking":
             controller._set_action("idle", 0)
 
-    @staticmethod
     def _resolve_action(
+        self,
         snapshot: MediaSessionSnapshotV1,
         resolved: ResolvedPerformanceState,
         speaking: bool,
@@ -746,6 +748,13 @@ class PerformanceApplication:
             candidate = value.get("action")
             if isinstance(candidate, str) and candidate in ACTIONS:
                 return candidate
+        node = self.animation_graph.nodes.get(resolved.node_id)
+        if node is not None:
+            for candidate in node.actions:
+                if candidate in ACTIONS:
+                    return candidate
+        if resolved.owned_channels & {"locomotion", "stage", "position"}:
+            return "walking"
         if speaking:
             # Scoreless speech owns the face, not a repeating whole-body pose.
             # Authored gesture tracks above may still request a motivated accent.

@@ -9,6 +9,7 @@ from unittest import mock
 from wizard_avatar.controller import WizardAvatarController
 from wizard_avatar.media_session import MediaSessionSnapshotV1
 from wizard_avatar.performance_application import PerformanceApplication
+from wizard_avatar.performance_scheduler import AccessibilityMotionProfile
 from wizard_avatar.performance_score import CompiledScoreLoader, CompiledScoreRepository
 
 from tests.wizard.test_performance_scheduler import bound_snapshot, runtime_score
@@ -168,6 +169,30 @@ class PerformanceApplicationTests(unittest.TestCase):
         self.assertEqual(
             self.controller.state.performance_motion_profile,
             "reduced",
+        )
+
+    def test_compiled_node_and_stage_channels_resolve_native_actions(self):
+        resolved = self.application.scheduler.evaluate(0)
+        cast = replace(
+            resolved,
+            motion_profile=AccessibilityMotionProfile.FULL,
+            node_id="cast",
+        )
+        walk = replace(
+            resolved,
+            motion_profile=AccessibilityMotionProfile.FULL,
+            node_id="ground_walk",
+            owned_channels=frozenset({"locomotion", "stage"}),
+        )
+        media = MediaSessionSnapshotV1.from_mapping(snapshot_mapping())
+
+        self.assertEqual(
+            self.application._resolve_action(media, cast, False),
+            "magic_cast",
+        )
+        self.assertEqual(
+            self.application._resolve_action(media, walk, False),
+            "walking",
         )
 
     def test_active_control_lease_keeps_body_authority(self):
