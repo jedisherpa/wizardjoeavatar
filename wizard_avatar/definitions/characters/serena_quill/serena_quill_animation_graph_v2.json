@@ -8642,7 +8642,6 @@
       "deescalation": "pose_deescalation",
       "explaining": "pose_facilitation",
       "human_referral": "pose_referral_human_help",
-      "jump": "pose_jump_airborne",
       "listening": "pose_active_listening",
       "magic_cast": "pose_luminous_encouragement",
       "mentoring_invitation": "pose_mentoring_invitation",
@@ -8973,9 +8972,7 @@
       ]
     },
     "node_jump_airborne": {
-      "actions": [
-        "jump"
-      ],
+      "actions": [],
       "clip_id": "pose_jump_airborne",
       "mobility_modes": [
         "airborne"

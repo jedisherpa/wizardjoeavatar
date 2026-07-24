@@ -305,6 +305,8 @@ class ProceduralWizardFrameSource:
         self.controller = WizardAvatarController(
             controller_pose_ids,
             self.character_package.character_id,
+            animation_graph=self.animation_graph,
+            runtime_profile=self.character_package.runtime_profile_contract,
         )
         self.frame_index = 0
         self._prev_encoded_frame: Optional[bytes] = None
@@ -369,6 +371,7 @@ class ProceduralWizardFrameSource:
                 else DEFAULT_REQUIRED_POSE_ANCHORS
             ),
             fail_closed=self.character_package.schema_version >= 2,
+            runtime_profile=self.character_package.runtime_profile_contract,
         )
         if state.pose_id != sample.pose_id:
             state.last_pose_id = state.pose_id

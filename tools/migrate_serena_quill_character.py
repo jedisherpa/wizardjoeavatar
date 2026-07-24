@@ -56,7 +56,7 @@ EVIDENCE_BACKED_MOTION_IDS = {
 OUTPUTS = {
     "pose_manifest": CHARACTER_DIR / "serena_quill_pose_manifest.json",
     "animation_graph": CHARACTER_DIR / "serena_quill_animation_graph_v2.json",
-    "runtime_profile": CHARACTER_DIR / "serena_quill_runtime_profile_v1.json",
+    "runtime_profile": CHARACTER_DIR / "serena_quill_runtime_profile_v2.json",
     "capability_manifest": CHARACTER_DIR / "serena_quill_capability_profile_v1.json",
     "intake_manifest": CHARACTER_DIR / "serena_quill_intake_manifest.json",
     "package": CHARACTER_DIR / "serena_quill_character_package_v2.json",
@@ -302,10 +302,9 @@ def _runtime_profile() -> Mapping[str, Any]:
         action_id: pose_id
         for action_id, pose_id in source["action_poses"].items()
         if pose_id not in MOTION_IDS
-        or pose_id in EVIDENCE_BACKED_MOTION_IDS
     }
     return {
-        "schema_version": 1,
+        "schema_version": 2,
         "character_id": CHARACTER_ID,
         "default_pose_id": source["default_pose_id"],
         "presentation_scale": [22, 25],
@@ -320,6 +319,15 @@ def _runtime_profile() -> Mapping[str, Any]:
             "flight": [],
         },
         "speech_poses": list(source["speech_poses"]),
+        "speech_pose_map": {
+            "closed": "viseme_closed_lips",
+            "open_small": "viseme_slightly_open",
+            "open_medium": "viseme_open_vowel",
+            "open_wide": "viseme_wide_vowel",
+            "rounded": "viseme_rounded_vowel",
+            "smile": "viseme_smile_speaking",
+            "frown": "viseme_frown_speaking",
+        },
         "blink_poses": dict(source["blink_poses"]),
         "props": {
             "orb": {

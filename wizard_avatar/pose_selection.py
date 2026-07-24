@@ -18,6 +18,7 @@ from .animation_graph import (
     load_animation_graph,
 )
 from .character_package import animation_graph_path_for
+from .character_runtime_profile import CharacterRuntimeProfile
 from .models import WizardState
 from .reference_avatar import reference_pose_ids
 
@@ -106,6 +107,7 @@ def select_reference_pose_id(
     pose_library_path: Optional[Path] = None,
     required_anchors: Optional[Iterable[str]] = None,
     fail_closed: bool = False,
+    runtime_profile: Optional[CharacterRuntimeProfile] = None,
 ) -> str:
     return select_reference_pose_sample(
         state,
@@ -115,6 +117,7 @@ def select_reference_pose_id(
         pose_library_path,
         required_anchors,
         fail_closed,
+        runtime_profile,
     ).pose_id
 
 
@@ -126,6 +129,7 @@ def select_reference_pose_sample(
     pose_library_path: Optional[Path] = None,
     required_anchors: Optional[Iterable[str]] = None,
     fail_closed: bool = False,
+    runtime_profile: Optional[CharacterRuntimeProfile] = None,
 ) -> PoseSample:
     available = set(available_pose_ids if available_pose_ids is not None else reference_pose_ids())
     if not available:
@@ -174,7 +178,7 @@ def select_reference_pose_sample(
                 contact="showcase",
                 clip_id="pose_showcase",
             )
-        sample = _select_graph_v2_sample(state, graph)
+        sample = _select_graph_v2_sample(state, graph, runtime_profile)
     except (
         AnimationGraphValidationError,
         FileNotFoundError,
@@ -224,8 +228,12 @@ def presentation_pose_for_facing(
     return candidate
 
 
-def _select_graph_v2_sample(state: WizardState, graph: AnimationGraph) -> PoseSample:
-    desired_node_id = _select_node_id(state, graph)
+def _select_graph_v2_sample(
+    state: WizardState,
+    graph: AnimationGraph,
+    runtime_profile: Optional[CharacterRuntimeProfile] = None,
+) -> PoseSample:
+    desired_node_id = _select_node_id(state, graph, runtime_profile)
     desired_node = graph.nodes[desired_node_id]
     if state.animation_node_id not in graph.nodes or state.animation_clip_id not in graph.clips:
         return _commit_target(state, graph, desired_node_id, desired_node.clip_id, 0)
@@ -684,7 +692,18 @@ def _authored_frame_to_tick(frame: int, authored_fps: int, simulation_hz: int) -
     return (frame * simulation_hz + authored_fps - 1) // authored_fps
 
 
-def _select_node_id(state: WizardState, graph: AnimationGraph) -> str:
+def _select_node_id(
+    state: WizardState,
+    graph: AnimationGraph,
+    runtime_profile: Optional[CharacterRuntimeProfile] = None,
+) -> str:
+    profile_node = _runtime_profile_face_node_id(
+        state,
+        graph,
+        runtime_profile,
+    )
+    if profile_node is not None:
+        return profile_node
     airborne = state.airborne or state.mobility_mode in {
         "takeoff",
         "hover",
@@ -741,6 +760,36 @@ def _select_node_id(state: WizardState, graph: AnimationGraph) -> str:
         )
     )
     return _node_for_clip(graph, fallback_clip, graph.default_node_id)
+
+
+def _runtime_profile_face_node_id(
+    state: WizardState,
+    graph: AnimationGraph,
+    runtime_profile: Optional[CharacterRuntimeProfile],
+) -> Optional[str]:
+    if runtime_profile is None:
+        return None
+    pose_id: Optional[str] = None
+    stable_for_blink = (
+        state.locomotion == "idle"
+        and state.action in {"idle", "speaking"}
+    )
+    if state.blink_phase >= 0.965 and stable_for_blink:
+        pose_id = runtime_profile.blink_poses["closed"]
+    elif state.speech_id is not None and runtime_profile.speech_pose_map:
+        pose_id = runtime_profile.speech_pose_map.get(
+            state.mouth,
+            runtime_profile.speech_pose_map["closed"],
+        )
+    if pose_id is None:
+        return None
+    for node in graph.nodes.values():
+        clip = graph.clips[node.clip_id]
+        if any(sample.pose_id == pose_id for sample in clip.samples):
+            return node.node_id
+    raise AnimationGraphValidationError(
+        "runtime profile pose is not reachable in graph: {}".format(pose_id)
+    )
 
 
 def _continue_directional_turn(
@@ -881,10 +930,22 @@ def _action_node_id(
 ) -> Optional[str]:
     if action is None:
         return None
+    compatible_mobility = {mobility}
+    if mobility.startswith("grounded_"):
+        compatible_mobility.add("grounded")
+    if mobility in {
+        "takeoff",
+        "landing",
+        "hover",
+        "flight_travel",
+        "flight_bank",
+    }:
+        compatible_mobility.add("airborne")
     matches = [
         node.node_id
         for node in graph.nodes.values()
-        if action in node.actions and mobility in node.mobility_modes
+        if action in node.actions
+        and compatible_mobility.intersection(node.mobility_modes)
     ]
     return matches[0] if matches else None
 

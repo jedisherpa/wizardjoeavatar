@@ -37,6 +37,10 @@ class CharacterRuntimeProfileTests(unittest.TestCase):
             self.assertEqual(profile.props["orb"].anchor, "orb")
             self.assertIn("neutral_front", profile.referenced_pose_ids())
             self.assertIn("walk_contact_left", profile.referenced_pose_ids())
+            self.assertEqual(
+                profile.speech_pose_map["open_wide"],
+                "viseme_open_vowel",
+            )
 
     def test_required_and_optional_anchors_must_be_disjoint(self):
         with tempfile.TemporaryDirectory() as directory:
@@ -48,6 +52,32 @@ class CharacterRuntimeProfileTests(unittest.TestCase):
             with self.assertRaisesRegex(
                 CharacterRuntimeProfileValidationError,
                 "overlap",
+            ):
+                load_character_runtime_profile(path)
+
+    def test_v1_profile_without_speech_map_remains_compatible(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "profile.json"
+            payload = self._profile()
+            payload["schema_version"] = 1
+            payload.pop("speech_pose_map")
+            path.write_text(json.dumps(payload), encoding="utf-8")
+
+            profile = load_character_runtime_profile(path)
+
+            self.assertEqual(profile.schema_version, 1)
+            self.assertEqual(dict(profile.speech_pose_map), {})
+
+    def test_v2_profile_requires_complete_speech_map(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "profile.json"
+            payload = self._profile()
+            payload["speech_pose_map"].pop("rounded")
+            path.write_text(json.dumps(payload), encoding="utf-8")
+
+            with self.assertRaisesRegex(
+                CharacterRuntimeProfileValidationError,
+                "all runtime mouth shapes",
             ):
                 load_character_runtime_profile(path)
 
@@ -71,7 +101,7 @@ class CharacterRuntimeProfileTests(unittest.TestCase):
     @staticmethod
     def _profile():
         return {
-            "schema_version": 1,
+            "schema_version": 2,
             "character_id": "serena-quill-v1",
             "default_pose_id": "neutral_front",
             "presentation_scale": [22, 25],
@@ -115,6 +145,15 @@ class CharacterRuntimeProfileTests(unittest.TestCase):
                 "flight": [],
             },
             "speech_poses": ["viseme_rest", "viseme_open_vowel"],
+            "speech_pose_map": {
+                "closed": "viseme_rest",
+                "open_small": "viseme_open_vowel",
+                "open_medium": "viseme_open_vowel",
+                "open_wide": "viseme_open_vowel",
+                "rounded": "viseme_open_vowel",
+                "smile": "viseme_open_vowel",
+                "frown": "viseme_open_vowel",
+            },
             "blink_poses": {
                 "open": "blink_open",
                 "half_closed": "blink_half_closed",

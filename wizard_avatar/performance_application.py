@@ -3,7 +3,8 @@ from __future__ import annotations
 from dataclasses import dataclass, replace
 from typing import Mapping, Optional
 
-from .animation_graph import load_reference_animation_graph_v2
+from .animation_graph import AnimationGraph, load_reference_animation_graph_v2
+from .character_runtime_profile import CharacterRuntimeProfile
 from .controller import WizardAvatarController
 from .expressions import expression_mouth
 from .media_session import MediaSessionAckV1, MediaSessionCoordinator, MediaSessionSnapshotV1
@@ -91,6 +92,8 @@ class PerformanceApplication:
         package_digest: str = "sha256:" + "0" * 64,
         manifest_digest: str = "sha256:" + "0" * 64,
         capability_manifest: Optional[Mapping[str, object]] = None,
+        animation_graph: Optional[AnimationGraph] = None,
+        runtime_profile: Optional[CharacterRuntimeProfile] = None,
     ) -> None:
         self.runtime_epoch = runtime_epoch
         self.character_id = character_id
@@ -106,7 +109,12 @@ class PerformanceApplication:
                 self.score_runtime.resolve if self.score_runtime is not None else None
             ),
         )
-        self.animation_graph = load_reference_animation_graph_v2()
+        self.animation_graph = (
+            animation_graph
+            if animation_graph is not None
+            else load_reference_animation_graph_v2()
+        )
+        self.runtime_profile = runtime_profile
         self._last_applied_action: Optional[str] = None
         self._last_applied_pose: Optional[str] = None
         self._last_applied_mouth: Optional[str] = None
@@ -131,6 +139,13 @@ class PerformanceApplication:
         self._permission_visual_source_sha256: Optional[str] = None
         self._permission_visual_origin_monotonic_us: Optional[int] = None
         self._permission_visual_receipt_wall_ms: Optional[int] = None
+
+    def supports_action(self, action: str) -> bool:
+        if self.runtime_profile is None:
+            return action in ACTIONS
+        if action == "walking":
+            return bool(self.runtime_profile.locomotion_cycles.get("walk", ()))
+        return action in {"idle", "speaking"} or action in self.runtime_profile.action_poses
 
     @property
     def paused(self) -> bool:
@@ -631,8 +646,13 @@ class PerformanceApplication:
         if body_allowed:
             self._suspend_prism_channels(controller, ("action",))
             if resolved.motion_profile is AccessibilityMotionProfile.FULL:
-                action = self._resolve_action(snapshot, resolved, speaking)
-                if action is not None and action in ACTIONS:
+                action = self._resolve_action(
+                    snapshot,
+                    resolved,
+                    speaking,
+                    controller,
+                )
+                if action is not None and controller.supports_action(action):
                     controller._set_action(action, 0)
                     self._last_applied_action = action
                 elif (
@@ -741,31 +761,46 @@ class PerformanceApplication:
         snapshot: MediaSessionSnapshotV1,
         resolved: ResolvedPerformanceState,
         speaking: bool,
+        controller: Optional[WizardAvatarController] = None,
     ) -> Optional[str]:
+        supports_action = (
+            controller.supports_action
+            if controller is not None
+            else self.supports_action
+        )
         if resolved.motion_profile is not AccessibilityMotionProfile.FULL:
             return None
         for value in resolved.track_values.values():
             candidate = value.get("action")
-            if isinstance(candidate, str) and candidate in ACTIONS:
+            if isinstance(candidate, str) and supports_action(candidate):
                 return candidate
         node = self.animation_graph.nodes.get(resolved.node_id)
         if node is not None:
             for candidate in node.actions:
-                if candidate in ACTIONS:
+                if supports_action(candidate):
                     return candidate
         if resolved.owned_channels & {"locomotion", "stage", "position"}:
-            return "walking"
+            return "walking" if supports_action("walking") else None
         if speaking:
             # Scoreless speech owns the face, not a repeating whole-body pose.
             # Authored gesture tracks above may still request a motivated accent.
             return "speaking"
         if snapshot.performance.mode == "music":
-            return ("flourish", "staff_spin", "celebrate", "reaction")[(resolved.media_time_ms // 500) % 4]
+            candidates = tuple(
+                action
+                for action in ("flourish", "staff_spin", "celebrate", "reaction")
+                if supports_action(action)
+            )
+            if candidates:
+                return candidates[(resolved.media_time_ms // 500) % len(candidates)]
         return None
 
     def _release_body_projection(self, controller: WizardAvatarController) -> None:
         state = controller.state
-        if state.action in _PERFORMANCE_ACTIONS:
+        if (
+            self._last_applied_action is not None
+            and state.action == self._last_applied_action
+        ) or state.action in _PERFORMANCE_ACTIONS:
             controller._set_action("idle", 0)
         if self._last_applied_pose is not None and state.pose_override_id == self._last_applied_pose:
             state.pose_override_id = None

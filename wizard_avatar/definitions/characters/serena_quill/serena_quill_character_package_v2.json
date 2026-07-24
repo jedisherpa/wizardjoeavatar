@@ -2,7 +2,7 @@
   "assets": {
     "animation_graph": {
       "path": "serena_quill_animation_graph_v2.json",
-      "sha256": "sha256:aecfba8f5360482a5b24847916a73daf030a582e3e26e38f7bac540790efde9f"
+      "sha256": "sha256:0974dca8c198a4ff41e0cdcb75fd6eb1ee8bff371b539c3ac85429b3b6cfc0bd"
     },
     "capability_manifest": {
       "path": "serena_quill_capability_profile_v1.json",
@@ -26,11 +26,11 @@
     },
     "pose_manifest": {
       "path": "serena_quill_pose_manifest.json",
-      "sha256": "sha256:6ae18212d89155a63b50fdb1631d2535f75006cd5ead516ffb1f90f88bdb1fec"
+      "sha256": "sha256:403ea1a5bea0075267115ff45f3d285cd47c877efdf1e3acf174b697c3633899"
     },
     "runtime_profile": {
-      "path": "serena_quill_runtime_profile_v1.json",
-      "sha256": "sha256:fc4f72f865e0820b83c9522b99039b8028d01ead12361239a54ad16e42b9e71c"
+      "path": "serena_quill_runtime_profile_v2.json",
+      "sha256": "sha256:7d0cd620b907634f8743e9d08992ae1f591017dfae2a662d7e8e051ab91aa230"
     },
     "source_animation_matrix": {
       "path": "intake/serena_quill_animation_matrix.json",

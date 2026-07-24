@@ -3031,7 +3031,7 @@
     },
     {
       "actions": [
-        "jump"
+        "idle"
       ],
       "admission": "graph_admitted",
       "composition": "whole_pose",

@@ -64,6 +64,11 @@ must remain labelled as planned.
 - `SERENA_QUILL_MIGRATION_AUDIT_2026-07-24.md`: frozen Serena source census,
   compatibility findings, rejected shortcuts, and first-candidate admission
   sequence.
+- `SERENA_RUNTIME_BOOT_2026-07-24.md`: Serena's hash-bound boot through the
+  existing Python hub, server, renderer, and runtime identity.
+- `SERENA_PACKAGE_CONTROLS_2026-07-24.md`: package-owned facing, actions,
+  whole-pose blink and speech mappings, truthful locomotion denial, and
+  focused regression evidence.
 - `GAZE_SETTLE_CONTINUITY.md`: eye-lead, target-arrival re-centering, stable
   fixation, focused tests, and clean runtime evidence.
 - `SPEECH_MOUTH_AUTHORITY.md`: aligned-versus-local mouth ownership,

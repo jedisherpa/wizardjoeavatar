@@ -4,8 +4,9 @@ import time
 from collections.abc import Mapping
 from typing import Any, Callable, Dict, Iterable, Optional, Set, Tuple
 
-from .animation_graph import ClipDefinition, load_reference_animation_graph_v2
+from .animation_graph import AnimationGraph, ClipDefinition, load_reference_animation_graph_v2
 from .blink import BlinkScheduler, blink_seed_for_character
+from .character_runtime_profile import CharacterRuntimeProfile
 from .commanding import CommandEnvelopeV1
 from .control import ControlArbiter, ControlIntentV1
 from .expressions import expression_mouth
@@ -30,6 +31,8 @@ class WizardAvatarController:
         available_pose_ids: Optional[Iterable[str]] = None,
         character_id: str = "asciline-wizard-v1",
         clock_ms: Optional[Callable[[], int]] = None,
+        animation_graph: Optional[AnimationGraph] = None,
+        runtime_profile: Optional[CharacterRuntimeProfile] = None,
     ) -> None:
         self.available_pose_ids = tuple(
             available_pose_ids if available_pose_ids is not None else reference_pose_ids()
@@ -37,7 +40,15 @@ class WizardAvatarController:
         if not self.available_pose_ids:
             raise ValueError("available_pose_ids must not be empty")
         self.character_id = character_id
+        self.animation_graph = (
+            animation_graph
+            if animation_graph is not None
+            else load_reference_animation_graph_v2()
+        )
+        self.runtime_profile = runtime_profile
         self.state = WizardState(character_id=character_id)
+        if runtime_profile is not None and "staff" not in runtime_profile.props:
+            self.state.staff_state = "none"
         self._blink_scheduler = BlinkScheduler(
             seed=blink_seed_for_character(character_id)
         )
@@ -56,6 +67,43 @@ class WizardAvatarController:
         self._queued_speech: Optional[Dict[str, Any]] = None
         self._cast_settled_seen_tick: Optional[int] = None
         self._time_accumulator = 0.0
+
+    def supports_action(self, action: str) -> bool:
+        if self.runtime_profile is None:
+            try:
+                validate_action(action)
+            except ValueError:
+                return False
+            return True
+        if action == "walking":
+            return self.supports_locomotion_cycle("walk")
+        return action in {"idle", "speaking"} or action in self.runtime_profile.action_poses
+
+    def supports_locomotion_cycle(self, cycle: str) -> bool:
+        if self.runtime_profile is None:
+            return cycle in {"walk", "run", "flight"}
+        return bool(self.runtime_profile.locomotion_cycles.get(cycle, ()))
+
+    def _require_locomotion_cycle(self, cycle: str) -> None:
+        if not self.supports_locomotion_cycle(cycle):
+            raise ValueError(
+                "{} locomotion is not admitted by character package".format(cycle)
+            )
+
+    def _uses_authored_wizard_cast_protocol(self) -> bool:
+        clip = self.animation_graph.clips.get("cast_front")
+        if clip is None:
+            return False
+        marker_ids = {
+            marker.marker_id
+            for sample in clip.samples
+            for marker in sample.markers
+        }
+        return {
+            "action_commit",
+            "action_recoverable",
+            "action_settled",
+        }.issubset(marker_ids)
 
     def current_state(self) -> WizardState:
         return self.state
@@ -136,7 +184,10 @@ class WizardAvatarController:
             if self.state.time_seconds >= self.state.pose_override_until:
                 self.state.pose_override_id = None
                 self.state.pose_override_until = 0.0
-        if self.state.action == "magic_cast":
+        if (
+            self.state.action == "magic_cast"
+            and self._uses_authored_wizard_cast_protocol()
+        ):
             cast_phase = self._cast_phase()
             if cast_phase == "settled":
                 if (
@@ -173,7 +224,8 @@ class WizardAvatarController:
             self._finish_speech()
 
     def _set_action(self, action: str, duration_ms: int) -> None:
-        validate_action(action)
+        if not self.supports_action(action):
+            raise ValueError("Unsupported action: {}".format(action))
         previous_action = self.state.action
         if action == "reaction" and self.state.action not in {
             "idle",
@@ -188,7 +240,10 @@ class WizardAvatarController:
             }
         elif action != "reaction":
             self.state.action_restore = None
-        upper, staff = channels_for_action(action)
+        if self.runtime_profile is None:
+            upper, staff = channels_for_action(action)
+        else:
+            upper, staff = "none", self.state.staff_state
         self.state.action = action
         self.state.upper_body_action = upper
         self.state.staff_state = staff
@@ -203,7 +258,7 @@ class WizardAvatarController:
     def _cast_phase(self) -> str:
         if self.state.animation_clip_id != "cast_front":
             return "precommit"
-        graph = load_reference_animation_graph_v2()
+        graph = self.animation_graph
         clip = graph.clips["cast_front"]
         authored_frame = graph.evaluate_clip(
             "cast_front",
@@ -271,6 +326,7 @@ class WizardAvatarController:
         self.state.action_restore = None
 
     def _cmd_move(self, payload: Dict[str, Any]) -> None:
+        self._require_locomotion_cycle("walk")
         x = float(payload["x"])
         z = float(payload["z"])
         speed = float(payload.get("speed", self.locomotion.movement.speed))
@@ -279,6 +335,7 @@ class WizardAvatarController:
         self.state.target_point = {"x": x, "z": z}
 
     def _cmd_move_relative(self, payload: Dict[str, Any]) -> None:
+        self._require_locomotion_cycle("walk")
         dx = float(payload.get("dx", 0.0))
         dz = float(payload.get("dz", 0.0))
         speed = float(payload.get("speed", self.locomotion.movement.speed))
@@ -286,6 +343,7 @@ class WizardAvatarController:
         self._set_action("walking", 0)
 
     def _cmd_path(self, payload: Dict[str, Any]) -> None:
+        self._require_locomotion_cycle("walk")
         points = [
             (float(point["x"]), float(point["z"]))
             for point in payload.get("points", [])
@@ -296,6 +354,7 @@ class WizardAvatarController:
         self._set_action("walking", 0)
 
     def _cmd_circle(self, payload: Dict[str, Any]) -> None:
+        self._require_locomotion_cycle("walk")
         center_x = float(payload.get("center_x", 0.0))
         center_z = float(payload.get("center_z", 5.0))
         radius = float(payload.get("radius", 2.0))
@@ -307,6 +366,7 @@ class WizardAvatarController:
         self._set_action("walking", 0)
 
     def _cmd_figure_eight(self, payload: Dict[str, Any]) -> None:
+        self._require_locomotion_cycle("walk")
         points = figure_eight_points(
             float(payload.get("center_x", 0.0)),
             float(payload.get("center_z", 5.0)),
@@ -346,10 +406,12 @@ class WizardAvatarController:
         self.state.gaze_authoritative = True
 
     def _cmd_action(self, payload: Dict[str, Any]) -> None:
+        action = str(payload["action"])
+        if not self.supports_action(action):
+            raise ValueError("Unsupported action: {}".format(action))
+        duration_ms = self._duration_ms(payload, default=1600)
         self._manual_override_prism_channel("action")
         self._queued_speech = None
-        action = str(payload["action"])
-        duration_ms = int(payload.get("duration_ms", 1600))
         self._set_action(action, duration_ms)
 
     def _cmd_pose(self, payload: Dict[str, Any]) -> None:
@@ -388,6 +450,14 @@ class WizardAvatarController:
             priority_class=priority_class,
         )
         intent = ControlIntentV1.from_mapping(intent_payload)
+        moving = abs(intent.move_x) > 1e-9 or abs(intent.move_z) > 1e-9
+        if moving:
+            self._require_locomotion_cycle("run" if intent.run else "walk")
+        if (
+            abs(intent.ascend) > 1e-9
+            or intent.mobility_request in {"takeoff", "land"}
+        ):
+            self._require_locomotion_cycle("flight")
         decision = self.control_arbiter.submit(
             envelope,
             intent,
@@ -468,7 +538,7 @@ class WizardAvatarController:
                 "reorient": "explaining",
             }
             action = advisory_actions.get(intent.gesture)
-            if action is not None:
+            if action is not None and self.supports_action(action):
                 self._prism_projection["action"] = {
                     "action": action,
                     "duration_ms": min(
@@ -502,16 +572,55 @@ class WizardAvatarController:
             self.state.mouth = expression_mouth(expression)
 
     def _cmd_speak(self, payload: Dict[str, Any]) -> None:
-        if self.state.action == "magic_cast":
+        speech_payload = self._validated_speech_payload(payload)
+        if (
+            self.state.action == "magic_cast"
+            and self._uses_authored_wizard_cast_protocol()
+        ):
             if self._cast_phase() == "precommit":
                 self.suspend_prism_channels(("action", "mouth"), owner="speech")
                 self._cancel_precommit_cast()
-                self._start_speech(payload, channels_suspended=True)
+                self._start_speech(speech_payload, channels_suspended=True)
             else:
-                self._queued_speech = dict(payload)
+                self._queued_speech = speech_payload
             return
         self._queued_speech = None
-        self._start_speech(payload)
+        self._start_speech(speech_payload)
+
+    @staticmethod
+    def _duration_ms(payload: Mapping[str, Any], *, default: int) -> int:
+        raw = payload.get("duration_ms", default)
+        if isinstance(raw, bool):
+            raise ValueError("duration_ms must be a non-negative integer")
+        try:
+            duration_ms = int(raw)
+        except (TypeError, ValueError) as exc:
+            raise ValueError(
+                "duration_ms must be a non-negative integer"
+            ) from exc
+        if duration_ms < 0:
+            raise ValueError("duration_ms must be a non-negative integer")
+        return duration_ms
+
+    def _validated_speech_payload(
+        self,
+        payload: Mapping[str, Any],
+    ) -> Dict[str, Any]:
+        text = str(
+            payload.get("text", "The stars prefer a tidy spellbook.")
+        )
+        duration_ms = self._duration_ms(
+            payload,
+            default=max(1200, len(text) * 70),
+        )
+        speech_id = str(
+            payload.get("speech_id", "speech-{}".format(int(time.time() * 1000)))
+        )
+        return {
+            "speech_id": speech_id,
+            "text": text,
+            "duration_ms": duration_ms,
+        }
 
     def _start_speech(
         self,
@@ -521,9 +630,9 @@ class WizardAvatarController:
     ) -> None:
         if not channels_suspended:
             self.suspend_prism_channels(("action", "mouth"), owner="speech")
-        text = str(payload.get("text", "The stars prefer a tidy spellbook."))
-        duration_ms = int(payload.get("duration_ms", max(1200, len(text) * 70)))
-        self.state.speech_id = str(payload.get("speech_id", f"speech-{int(time.time() * 1000)}"))
+        text = str(payload["text"])
+        duration_ms = int(payload["duration_ms"])
+        self.state.speech_id = str(payload["speech_id"])
         self.state.speech_text = text
         self.state.speech_started_at = self.state.time_seconds
         self.state.speech_until = self.state.time_seconds + duration_ms / 1000.0
@@ -531,8 +640,11 @@ class WizardAvatarController:
         self.state.mouth = "open_small"
         if self.state.action in {"idle", "speaking"}:
             self.state.action = "speaking"
-            self.state.upper_body_action = "explain"
-            self.state.staff_state = "held"
+            if self.runtime_profile is None:
+                self.state.upper_body_action = "explain"
+                self.state.staff_state = "held"
+            else:
+                self.state.upper_body_action = "none"
             self.state.action_until = 0.0
 
     def _cmd_mouth(self, payload: Dict[str, Any]) -> None:
@@ -552,7 +664,13 @@ class WizardAvatarController:
         self._set_action("idle", 0)
 
     def _cmd_reset(self, payload: Dict[str, Any]) -> None:
-        self.__init__(self.available_pose_ids, self.character_id, self._clock_ms)
+        self.__init__(
+            self.available_pose_ids,
+            self.character_id,
+            self._clock_ms,
+            self.animation_graph,
+            self.runtime_profile,
+        )
 
     def suspend_prism_channels(self, channels: Iterable[str], *, owner: str) -> None:
         """Temporarily yield Prism-owned presentation channels to a stronger owner."""

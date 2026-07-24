@@ -564,7 +564,7 @@ class CharacterPackageTests(unittest.TestCase):
                 ],
             },
             "runtime-profile.json": {
-                "schema_version": 1,
+                "schema_version": 2,
                 "character_id": "portable-character-v1",
                 "default_pose_id": "idle",
                 "presentation_scale": [1, 1],
@@ -588,6 +588,7 @@ class CharacterPackageTests(unittest.TestCase):
                     "flight": [],
                 },
                 "speech_poses": [],
+                "speech_pose_map": {},
                 "blink_poses": {
                     "open": "idle",
                     "half_closed": "idle",

@@ -73,7 +73,7 @@ UPPER_BODY_ACTIONS = (
     "celebrate",
     "staff_forward",
 )
-STAFF_STATES = ("held", "point", "cast", "rest", "guard", "spin")
+STAFF_STATES = ("none", "held", "point", "cast", "rest", "guard", "spin")
 
 
 @dataclass(frozen=True)

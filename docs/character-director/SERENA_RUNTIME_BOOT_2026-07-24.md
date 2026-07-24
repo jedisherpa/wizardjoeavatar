@@ -17,9 +17,11 @@ parity.
 
 - Character ID: `serena-quill-v1`
 - Package SHA-256:
-  `sha256:05797d7760d19e2698b4e9a1d168938ae71106b831dc531fb7a970c58086c428`
+  `sha256:30b5540c8d13cf579776961ce1b31839513a4e184355ec7a35cd16b4a98bc4e5`
 - Capability-profile SHA-256:
   `sha256:9519827d02aaa1cd2535074b3eb1d3c21cdd5f3a71c788d5126fc6e84294853d`
+- Runtime-profile V2 SHA-256:
+  `sha256:7d0cd620b907634f8743e9d08992ae1f591017dfae2a662d7e8e051ab91aa230`
 - Initial node: `node_neutral_front`
 - Initial clip: `pose_neutral_front`
 - Initial pose: `neutral_front`
@@ -85,10 +87,12 @@ running and returned HTTP 200 throughout this work.
 
 ## Remaining Serena Gates
 
-1. Package-profile-driven action, facing, blink, and speech control.
-2. Truthful fallback for incomplete walk, run, flight, turn, and landing cycles.
-3. Governed score and media-session parity through the existing connector.
-4. Deterministic interruption, accessibility, and replay evidence.
-5. Desktop and mobile visual review.
-6. Independent animation review and product approval.
-7. Exact package-hash registration and deployment proof.
+Package-profile-driven action, facing, blink, and speech-pose control is now
+implemented and documented in `SERENA_PACKAGE_CONTROLS_2026-07-24.md`.
+
+1. Author and admit complete walk, run, flight, turn, and landing cycles.
+2. Governed score and media-session parity through the existing connector.
+3. Deterministic interruption, accessibility, and replay evidence.
+4. Desktop and mobile visual review.
+5. Independent animation review and product approval.
+6. Exact package-hash registration and deployment proof.

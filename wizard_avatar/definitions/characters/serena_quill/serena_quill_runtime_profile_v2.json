@@ -6,7 +6,6 @@
     "deescalation": "deescalation",
     "explaining": "facilitation",
     "human_referral": "referral_human_help",
-    "jump": "jump_airborne",
     "listening": "active_listening",
     "magic_cast": "luminous_encouragement",
     "mentoring_invitation": "mentoring_invitation",
@@ -74,7 +73,16 @@
     "left_hand",
     "right_hand"
   ],
-  "schema_version": 1,
+  "schema_version": 2,
+  "speech_pose_map": {
+    "closed": "viseme_closed_lips",
+    "frown": "viseme_frown_speaking",
+    "open_medium": "viseme_open_vowel",
+    "open_small": "viseme_slightly_open",
+    "open_wide": "viseme_wide_vowel",
+    "rounded": "viseme_rounded_vowel",
+    "smile": "viseme_smile_speaking"
+  },
   "speech_poses": [
     "viseme_rest",
     "viseme_closed_lips",

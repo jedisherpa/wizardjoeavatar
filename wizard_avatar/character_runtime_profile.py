@@ -22,6 +22,17 @@ FACINGS = frozenset(
 )
 LOCOMOTION_CYCLES = frozenset({"walk", "run", "flight"})
 BLINK_STATES = frozenset({"open", "half_closed", "closed"})
+SPEECH_MOUTH_SHAPES = frozenset(
+    {
+        "closed",
+        "open_small",
+        "open_medium",
+        "open_wide",
+        "rounded",
+        "smile",
+        "frown",
+    }
+)
 PROP_COMPOSITIONS = frozenset({"whole_pose", "overlay"})
 _IDENTIFIER = re.compile(r"^[a-z][a-z0-9_]{0,63}$")
 
@@ -51,6 +62,7 @@ class CharacterRuntimeProfile:
     expression_aliases: Mapping[str, str]
     locomotion_cycles: Mapping[str, Tuple[str, ...]]
     speech_poses: Tuple[str, ...]
+    speech_pose_map: Mapping[str, str]
     blink_poses: Mapping[str, str]
     props: Mapping[str, PropBinding]
 
@@ -60,6 +72,7 @@ class CharacterRuntimeProfile:
             *self.facing_poses.values(),
             *self.action_poses.values(),
             *self.speech_poses,
+            *self.speech_pose_map.values(),
             *self.blink_poses.values(),
         }
         for cycle in self.locomotion_cycles.values():
@@ -93,7 +106,7 @@ def _parse_character_runtime_profile(
         raise CharacterRuntimeProfileValidationError(
             "runtime profile must be an object"
         )
-    required = {
+    common_fields = {
         "schema_version",
         "character_id",
         "default_pose_id",
@@ -108,11 +121,21 @@ def _parse_character_runtime_profile(
         "blink_poses",
         "props",
     }
-    _closed(raw, required, "runtime profile")
-    if raw["schema_version"] != 1 or isinstance(raw["schema_version"], bool):
+    schema_version = raw.get("schema_version")
+    if (
+        isinstance(schema_version, bool)
+        or not isinstance(schema_version, int)
+        or schema_version not in {1, 2}
+    ):
         raise CharacterRuntimeProfileValidationError(
-            "schema_version must be 1"
+            "schema_version must be 1 or 2"
         )
+    fields = (
+        common_fields
+        if schema_version == 1
+        else common_fields | {"speech_pose_map"}
+    )
+    _closed(raw, fields, "runtime profile")
     character_id = _text(raw["character_id"], "character_id")
     default_pose_id = _text(raw["default_pose_id"], "default_pose_id")
     presentation_scale = _positive_pair(
@@ -170,6 +193,30 @@ def _parse_character_runtime_profile(
         "speech_poses",
         allow_empty=True,
     )
+    if schema_version == 1:
+        speech_pose_map: Mapping[str, str] = MappingProxyType({})
+    else:
+        speech_pose_map = _string_mapping(
+            raw["speech_pose_map"],
+            "speech_pose_map",
+        )
+        if speech_poses and set(speech_pose_map) != SPEECH_MOUTH_SHAPES:
+            raise CharacterRuntimeProfileValidationError(
+                "speech_pose_map must define all runtime mouth shapes exactly"
+            )
+        if not speech_poses and speech_pose_map:
+            raise CharacterRuntimeProfileValidationError(
+                "speech_pose_map must be empty when speech_poses is empty"
+            )
+        unknown_speech_poses = sorted(
+            set(speech_pose_map.values()) - set(speech_poses)
+        )
+        if unknown_speech_poses:
+            raise CharacterRuntimeProfileValidationError(
+                "speech_pose_map references undeclared speech poses: {}".format(
+                    ", ".join(unknown_speech_poses)
+                )
+            )
     blink_poses = _string_mapping(raw["blink_poses"], "blink_poses")
     if set(blink_poses) != BLINK_STATES:
         raise CharacterRuntimeProfileValidationError(
@@ -180,7 +227,7 @@ def _parse_character_runtime_profile(
         set(required_anchors) | set(optional_anchors),
     )
     return CharacterRuntimeProfile(
-        schema_version=1,
+        schema_version=schema_version,
         character_id=character_id,
         default_pose_id=default_pose_id,
         presentation_scale=presentation_scale,
@@ -191,6 +238,7 @@ def _parse_character_runtime_profile(
         expression_aliases=expression_aliases,
         locomotion_cycles=locomotion_cycles,
         speech_poses=speech_poses,
+        speech_pose_map=speech_pose_map,
         blink_poses=blink_poses,
         props=props,
     )

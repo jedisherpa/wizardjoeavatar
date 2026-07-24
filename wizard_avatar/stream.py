@@ -152,6 +152,14 @@ class WizardFrameHub:
             package_digest=package_digest,
             manifest_digest=manifest_digest,
             capability_manifest=capability_manifest,
+            animation_graph=getattr(self.frame_source, "animation_graph", None),
+            runtime_profile=(
+                getattr(
+                    self.frame_source.character_package,
+                    "runtime_profile_contract",
+                    None,
+                )
+            ),
         )
         self.command_inbox = OrderedCommandInbox(self.runtime_epoch)
         self.replay_log = ReplayLog(
