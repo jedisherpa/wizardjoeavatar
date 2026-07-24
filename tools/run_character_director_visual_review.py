@@ -894,26 +894,42 @@ class ScenarioClock:
     current: Optional[str] = None
     remaining_frames: int = 0
     claimed_frames: int = 0
+    minimum_frame_index: Optional[int] = None
     completed: asyncio.Event = field(default_factory=asyncio.Event)
 
-    def activate(self, scenario: str, frame_count: int) -> None:
+    def activate(
+        self,
+        scenario: str,
+        frame_count: int,
+        *,
+        minimum_frame_index: Optional[int] = None,
+    ) -> None:
         if self.current is not None or self.remaining_frames:
             raise EvidenceFailure("a scenario capture window is already active")
         if not scenario or frame_count <= 0:
             raise ValueError("scenario capture windows require a name and positive frame count")
+        if minimum_frame_index is not None and minimum_frame_index < 0:
+            raise ValueError("minimum frame index must be non-negative")
         self.current = scenario
         self.remaining_frames = frame_count
         self.claimed_frames = 0
+        self.minimum_frame_index = minimum_frame_index
         self.completed = asyncio.Event()
 
-    def claim(self) -> Optional[str]:
+    def claim(self, frame_index: Optional[int] = None) -> Optional[str]:
         scenario = self.current
         if scenario is None:
+            return None
+        if (
+            self.minimum_frame_index is not None
+            and (frame_index is None or frame_index < self.minimum_frame_index)
+        ):
             return None
         self.remaining_frames -= 1
         self.claimed_frames += 1
         if self.remaining_frames == 0:
             self.current = None
+            self.minimum_frame_index = None
             self.completed.set()
         return scenario
 
@@ -924,6 +940,7 @@ class ScenarioClock:
             )
         self.current = None
         self.remaining_frames = 0
+        self.minimum_frame_index = None
         self.completed.set()
 
 
@@ -1362,7 +1379,7 @@ async def receive_frames(
                     cells=cells,
                     received_monotonic=time.perf_counter(),
                     received_at_utc=utc_now(),
-                    scenario=scenario_clock.claim(),
+                    scenario=scenario_clock.claim(frame_index),
                     wire_message=bytes(message),
                     codec_tag=message[4],
                 )
@@ -1591,6 +1608,78 @@ async def record_state_snapshot(
     }
     records.state_snapshots.append(snapshot)
     return snapshot
+
+
+async def record_projected_media_state(
+    state_url: str,
+    label: str,
+    payload: Mapping[str, Any],
+    records: CaptureRecords,
+    *,
+    timeout_seconds: float = 2.0,
+) -> Dict[str, Any]:
+    """Record the first published state that reflects an accepted media snapshot."""
+
+    performance = payload.get("performance")
+    expected_profile = (
+        performance.get("motion_profile")
+        if isinstance(performance, Mapping)
+        else None
+    )
+    expected_score_id = (
+        performance.get("score_id")
+        if isinstance(performance, Mapping)
+        else None
+    )
+    expected_sequence = payload.get("sequence")
+    if (
+        not isinstance(expected_profile, str)
+        or not expected_profile
+        or not isinstance(expected_score_id, str)
+        or not expected_score_id
+        or not _plain_int(expected_sequence, 1)
+    ):
+        raise EvidenceFailure("media-session projection target is incomplete")
+
+    deadline = time.monotonic() + timeout_seconds
+    while True:
+        observed_at = utc_now()
+        body, latency_ms = await request_json_async("GET", state_url)
+        diagnostics = body.get("diagnostics") if isinstance(body, Mapping) else None
+        media = (
+            diagnostics.get("media_performance")
+            if isinstance(diagnostics, Mapping)
+            else None
+        )
+        scheduler = media.get("scheduler") if isinstance(media, Mapping) else None
+        session = media.get("session") if isinstance(media, Mapping) else None
+        state = body.get("state") if isinstance(body, Mapping) else None
+        accepted_sequence = (
+            session.get("accepted_sequence")
+            if isinstance(session, Mapping)
+            else None
+        )
+        if (
+            isinstance(scheduler, Mapping)
+            and scheduler.get("motion_profile") == expected_profile
+            and scheduler.get("score_id") == expected_score_id
+            and isinstance(state, Mapping)
+            and state.get("performance_motion_profile") == expected_profile
+            and _plain_int(accepted_sequence, expected_sequence)
+        ):
+            snapshot = {
+                "label": label,
+                "observed_at_utc": observed_at,
+                "request_latency_ms": round(latency_ms, 3),
+                "body": minimize_evidence_content(body),
+            }
+            records.state_snapshots.append(snapshot)
+            return snapshot
+        if time.monotonic() >= deadline:
+            raise EvidenceFailure(
+                "media-session projection was not published before capture"
+            )
+        await asyncio.sleep(0.01)
 
 
 async def dispatch_runtime_operation(
@@ -1851,16 +1940,42 @@ async def drive_scenarios(
             outcome["transport"] = transport
             outcome["ack"] = ack
             outcome["response_state"] = response_state
-            outcome["state_snapshot"] = await record_state_snapshot(
-                state_url, "{}-after-ack".format(scenario.name), records
+            outcome["state_snapshot"] = (
+                await record_projected_media_state(
+                    state_url,
+                    "{}-after-projection".format(scenario.name),
+                    scenario.payload,
+                    records,
+                )
+                if scenario.kind == MEDIA_SESSION_SCENARIO_KIND
+                else await record_state_snapshot(
+                    state_url,
+                    "{}-after-ack".format(scenario.name),
+                    records,
+                )
             )
             await wait_or_terminal(
                 scenario.settle_seconds if isinstance(scenario, Scenario) else 0.0,
                 terminal,
                 integrity,
             )
+            snapshot_diagnostics = outcome["state_snapshot"]["body"].get(
+                "diagnostics",
+                {},
+            )
+            published_frame_index = snapshot_diagnostics.get("frame_sequence")
+            minimum_frame_index = (
+                published_frame_index + 1
+                if scenario.kind == MEDIA_SESSION_SCENARIO_KIND
+                and _plain_int(published_frame_index)
+                else None
+            )
             outcome["capture_started_at_utc"] = utc_now()
-            scenario_clock.activate(scenario.name, planned_frames)
+            scenario_clock.activate(
+                scenario.name,
+                planned_frames,
+                minimum_frame_index=minimum_frame_index,
+            )
             scheduled_task = (
                 asyncio.create_task(
                     dispatch_scheduled_commands(

@@ -671,6 +671,17 @@ class StrictCaptureTests(unittest.IsolatedAsyncioTestCase):
         self.assertEqual([clock.claim(), clock.claim()], ["return-viewer"] * 2)
         self.assertTrue(clock.completed.is_set())
 
+    async def test_scenario_clock_rejects_frames_at_or_before_projection_boundary(self):
+        clock = ScenarioClock()
+        clock.activate("profile", 2, minimum_frame_index=42)
+
+        self.assertIsNone(clock.claim(40))
+        self.assertIsNone(clock.claim(41))
+        self.assertEqual(clock.claimed_frames, 0)
+        self.assertEqual(clock.claim(42), "profile")
+        self.assertEqual(clock.claim(43), "profile")
+        self.assertTrue(clock.completed.is_set())
+
     async def test_queue_overflow_is_terminal_and_never_drops_silently(self):
         queue = asyncio.Queue(maxsize=1)
         stats = QueueStats(capacity=1)
