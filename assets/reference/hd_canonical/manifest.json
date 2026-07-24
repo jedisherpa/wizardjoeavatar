@@ -57,6 +57,12 @@
     "production_pose_runtime_admitted": false,
     "forward_flight_runtime_admitted": false
   },
+  "runtime_compatibility": {
+    "character_id": "wizard-joe-v1",
+    "character_package_sha256": "sha256:e35d9fee572e8f984a25a3776e2be51e1920b2a09f568170f12ccd3f0851b387",
+    "pose_library_sha256": "sha256:3712f7198d275bbdbe2fbfed7e734ee3f246b33e3aa78aa223a06a522b59d1b7",
+    "animation_graph_sha256": "sha256:32318b425ccfbf51f652aee91dcc6ef802d4f6a953bf4581b8c52a770e046be3"
+  },
   "compiled_library_index": {
     "path": "compiled/library-index.json",
     "sha256": "ebb62aa0266b40dbcb1f85469235ebf8b882c669fb9387d5b5664e9bc2358a95",

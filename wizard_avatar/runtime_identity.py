@@ -101,6 +101,8 @@ def build_runtime_identity(
     *,
     render_config: Mapping[str, Any],
     server_config: Mapping[str, Any] | None = None,
+    runtime_epoch_prefix: str = "wizard",
+    character_config: Mapping[str, Any] | None = None,
 ) -> Dict[str, Any]:
     """Build immutable, non-secret startup identity for evidence binding."""
 
@@ -117,7 +119,10 @@ def build_runtime_identity(
     return {
         "schema": RUNTIME_IDENTITY_SCHEMA,
         "schema_version": RUNTIME_IDENTITY_SCHEMA_VERSION,
-        "runtime_epoch": "wizard-runtime-{}".format(uuid.uuid4().hex),
+        "runtime_epoch": "{}-runtime-{}".format(
+            runtime_epoch_prefix,
+            uuid.uuid4().hex,
+        ),
         "pid": os.getpid(),
         "started_at_utc": started_at_utc,
         "started_at_monotonic_ns": time.monotonic_ns(),
@@ -139,6 +144,7 @@ def build_runtime_identity(
         },
         "server": dict(server_config or {}),
         "render": dict(render_config),
+        "character": dict(character_config or {}),
     }
 
 

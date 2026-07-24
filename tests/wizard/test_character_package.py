@@ -595,7 +595,25 @@ class CharacterPackageTests(unittest.TestCase):
                 },
                 "props": {},
             },
-            "capabilities.json": {"capabilities": ["idle"]},
+            "capabilities.json": {
+                "schema_version": 1,
+                "character_id": "portable-character-v1",
+                "renderer_adapter_id": "asciline.pixel_graph.v1",
+                "runtime_api_version": 1,
+                "status": "test_fixture",
+                "capabilities": ["idle"],
+                "counts": {
+                    "clip_count": 1,
+                    "diagnostic_only_pose_count": 0,
+                    "graph_admitted_pose_count": 1,
+                    "node_count": 1,
+                    "pose_count": 1,
+                    "transition_count": 0,
+                },
+                "graph_admitted_pose_ids": ["idle"],
+                "diagnostic_only_pose_ids": [],
+                "denied_or_pending": [],
+            },
         }
         for name, payload in files.items():
             (root / name).write_text(

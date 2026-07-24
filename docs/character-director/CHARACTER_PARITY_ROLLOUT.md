@@ -27,7 +27,7 @@ runtime API range.
 
 | Order | Character | Frozen source commit | State |
 | ---: | --- | --- | --- |
-| 1 | Serena Quill | `196c2389` | Strict migration candidate; not registered |
+| 1 | Serena Quill | `196c2389` | Existing Python hub/server boot passed; controls and performance pending; not registered |
 | 2 | Aurelia Finch | `5514fe9b` | Source discovered |
 | 3 | Selene Hart | `e64f868f` | Source discovered |
 | 4 | Thorne Vale | `582fb82d` | Source discovered |

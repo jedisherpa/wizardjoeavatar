@@ -327,6 +327,16 @@ def _load_v2_package(
                 "runtime_profile references poses absent from graph clips: "
                 + ", ".join(missing_runtime_poses)
             )
+        _validate_v2_capability_profile(
+            asset_contents["capability_manifest"],
+            character_id=str(raw["character_id"]),
+            renderer_adapter_id=str(raw["renderer_adapter_id"]),
+            runtime_api_min=runtime_api_min,
+            runtime_api_max=runtime_api_max,
+            package_capabilities=capabilities,
+            pose_ids=pose_ids,
+            animation_graph=animation_graph_contract,
+        )
         register_verified_animation_assets(
             {
                 assets["animation_graph"].path: assets[
@@ -473,6 +483,123 @@ def _graph_pose_ids(raw: Any) -> set[str]:
             if isinstance(sample, Mapping) and isinstance(sample.get("pose_id"), str):
                 result.add(sample["pose_id"])
     return result
+
+
+def _validate_v2_capability_profile(
+    content: bytes,
+    *,
+    character_id: str,
+    renderer_adapter_id: str,
+    runtime_api_min: int,
+    runtime_api_max: int,
+    package_capabilities: Tuple[str, ...],
+    pose_ids: set[str],
+    animation_graph: Any,
+) -> None:
+    try:
+        raw = json.loads(content.decode("utf-8"))
+    except (UnicodeError, json.JSONDecodeError) as exc:
+        raise CharacterPackageValidationError(
+            "capability_manifest is invalid JSON"
+        ) from exc
+    required = {
+        "schema_version",
+        "character_id",
+        "renderer_adapter_id",
+        "runtime_api_version",
+        "status",
+        "capabilities",
+        "counts",
+        "graph_admitted_pose_ids",
+        "diagnostic_only_pose_ids",
+        "denied_or_pending",
+    }
+    if not isinstance(raw, Mapping):
+        raise CharacterPackageValidationError(
+            "capability_manifest must be an object"
+        )
+    if set(raw) != required:
+        raise CharacterPackageValidationError(
+            "capability_manifest fields do not match capability profile v1"
+        )
+    if raw["schema_version"] != 1 or isinstance(raw["schema_version"], bool):
+        raise CharacterPackageValidationError(
+            "capability_manifest schema_version must be 1"
+        )
+    if raw["character_id"] != character_id:
+        raise CharacterPackageValidationError(
+            "capability_manifest character_id does not match package"
+        )
+    if raw["renderer_adapter_id"] != renderer_adapter_id:
+        raise CharacterPackageValidationError(
+            "capability_manifest renderer_adapter_id does not match package"
+        )
+    runtime_api_version = raw["runtime_api_version"]
+    if (
+        isinstance(runtime_api_version, bool)
+        or not isinstance(runtime_api_version, int)
+        or runtime_api_version not in SUPPORTED_CHARACTER_RUNTIME_API_VERSIONS
+        or not runtime_api_min <= runtime_api_version <= runtime_api_max
+    ):
+        raise CharacterPackageValidationError(
+            "capability_manifest runtime_api_version is incompatible"
+        )
+    if (
+        not isinstance(raw["status"], str)
+        or _ASSET_ROLE.fullmatch(raw["status"]) is None
+    ):
+        raise CharacterPackageValidationError(
+            "capability_manifest status must be a lowercase identifier"
+        )
+    if tuple(_capabilities(raw["capabilities"])) != package_capabilities:
+        raise CharacterPackageValidationError(
+            "capability_manifest capabilities do not match package"
+        )
+
+    def unique_texts(field: str) -> Tuple[str, ...]:
+        value = raw[field]
+        if (
+            not isinstance(value, list)
+            or any(not isinstance(item, str) or not item for item in value)
+            or len(set(value)) != len(value)
+        ):
+            raise CharacterPackageValidationError(
+                "capability_manifest {} must contain unique text".format(field)
+            )
+        return tuple(value)
+
+    admitted = unique_texts("graph_admitted_pose_ids")
+    diagnostic = unique_texts("diagnostic_only_pose_ids")
+    unique_texts("denied_or_pending")
+    admitted_set = set(admitted)
+    diagnostic_set = set(diagnostic)
+    selectable_pose_ids = set(animation_graph.selectable_pose_ids())
+    if admitted_set != selectable_pose_ids:
+        raise CharacterPackageValidationError(
+            "capability_manifest admitted poses do not match graph reachability"
+        )
+    if diagnostic_set != pose_ids - selectable_pose_ids:
+        raise CharacterPackageValidationError(
+            "capability_manifest diagnostic poses do not match pose library"
+        )
+    if admitted_set & diagnostic_set or admitted_set | diagnostic_set != pose_ids:
+        raise CharacterPackageValidationError(
+            "capability_manifest pose admission is not an exact partition"
+        )
+
+    counts = raw["counts"]
+    expected_counts = {
+        "clip_count": len(animation_graph.clips),
+        "diagnostic_only_pose_count": len(diagnostic_set),
+        "graph_admitted_pose_count": len(admitted_set),
+        "node_count": len(animation_graph.nodes),
+        "pose_count": len(pose_ids),
+        "transition_count": len(animation_graph.transitions),
+    }
+    if not isinstance(counts, Mapping) or dict(counts) != expected_counts:
+        raise CharacterPackageValidationError(
+            "capability_manifest counts do not match package assets"
+        )
 
 
 __all__ = [

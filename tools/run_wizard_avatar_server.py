@@ -32,6 +32,14 @@ def main() -> None:
     parser.add_argument("--rows", type=int, default=135)
     parser.add_argument("--fps", type=float, default=24.0)
     parser.add_argument(
+        "--character-package",
+        type=Path,
+        help=(
+            "Boot one hash-verified character package through the existing "
+            "Python hub and server. Defaults to Wizard Joe."
+        ),
+    )
+    parser.add_argument(
         "--quiet",
         action="store_true",
         help="Suppress routine access logs for long-running local or evidence sessions.",
@@ -59,7 +67,12 @@ def main() -> None:
 
     shutdown_signal = ServerShutdownSignal()
     app = create_app(
-        ProceduralWizardFrameSource(args.cols, args.rows, args.fps),
+        ProceduralWizardFrameSource(
+            args.cols,
+            args.rows,
+            args.fps,
+            character_package_path=args.character_package,
+        ),
         companion_mode=companion_mode,
         shutdown_signal=shutdown_signal.request,
         runtime_server_config={

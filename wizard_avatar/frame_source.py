@@ -1176,7 +1176,12 @@ class ProceduralWizardFrameSource:
         state: WizardState,
         policy: Optional[PermissionWorldRenderPolicyV1],
     ) -> str:
-        if not self._permission_surface_visible(policy, "prop", "staff"):
+        profile = self.character_package.runtime_profile_contract
+        has_staff = profile is None or "staff" in profile.props
+        if (
+            has_staff
+            and not self._permission_surface_visible(policy, "prop", "staff")
+        ):
             # Authored poses flatten the hand, wing, and staff into one graph.
             # Resolve to the neutral graph before the staffless reconstruction
             # so denied props never expose a damaged action silhouette.
@@ -1212,6 +1217,9 @@ class ProceduralWizardFrameSource:
         pose_id: str,
         policy: Optional[PermissionWorldRenderPolicyV1],
     ) -> None:
+        profile = self.character_package.runtime_profile_contract
+        if profile is not None and "staff" not in profile.props:
+            return
         if self._permission_surface_visible(policy, "prop", "staff"):
             return
         original = canvas.copy()
@@ -1373,6 +1381,16 @@ class ProceduralWizardFrameSource:
         head_offset_y: int = 0,
         body_pixel_sha256: str = "legacy_unspecified",
     ) -> ReferenceFaceEvidence:
+        if self.character_package.runtime_profile_contract is not None:
+            mouth_hash, mouth_count = self._reference_mouth_pixel_evidence(
+                canvas,
+                mouth_anchor,
+            )
+            return ReferenceFaceEvidence(
+                body_pixel_sha256=body_pixel_sha256,
+                mouth_pixel_sha256=mouth_hash,
+                mouth_painted_cells=mouth_count,
+            )
         eye_layouts = []
         seen_apertures = set()
         for anchor_name in ("left_eye", "right_eye"):

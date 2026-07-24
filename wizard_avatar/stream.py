@@ -2,13 +2,16 @@ from __future__ import annotations
 
 import asyncio
 import contextlib
+import hashlib
+import json
+import re
 import time
 import uuid
 from concurrent.futures import ThreadPoolExecutor
 from dataclasses import dataclass, field, replace as dataclass_replace
 from itertools import count
 from collections import deque
-from typing import Dict, Optional, Set
+from typing import Dict, Mapping, Optional, Set
 
 from .animation_trace import (
     ANIMATION_TRUTH_TRACE_CAPACITY,
@@ -35,10 +38,60 @@ from .runtime import AvatarRuntime, ReplayLog, canonical_sha256
 
 _subscriber_ids = count(1)
 DEFAULT_MAX_SUBSCRIBERS = 64
+_RUNTIME_EPOCH_COMPONENT = re.compile(r"[^a-z0-9]+")
 
 
 class SubscriberLimitError(RuntimeError):
     pass
+
+
+def character_runtime_epoch_prefix(character_id: str) -> str:
+    """Return a stable content-free epoch namespace for one character runtime."""
+
+    if character_id == "wizard-joe-v1":
+        return "wizard"
+    normalized = _RUNTIME_EPOCH_COMPONENT.sub(
+        "_",
+        str(character_id).strip().lower(),
+    ).strip("_")
+    normalized = re.sub(r"_v[0-9]+$", "", normalized)
+    if not normalized:
+        raise ValueError("character_id must contain an epoch-safe identifier")
+    return normalized
+
+
+def _package_capability_manifest(
+    frame_source: ProceduralWizardFrameSource,
+) -> tuple[Mapping[str, object] | None, str, str]:
+    package = frame_source.character_package
+    if not hasattr(package, "schema_version"):
+        empty_digest = "sha256:" + "0" * 64
+        return None, empty_digest, empty_digest
+    if package.schema_version == 1:
+        manifest = derive_character_capability_manifest(
+            frame_source.character_package_path
+        )
+        return (
+            manifest,
+            str(manifest["sources"]["package_sha256"]),
+            str(manifest["manifest_sha256"]),
+        )
+
+    asset = package.assets["capability_manifest"]
+    content = asset.path.read_bytes()
+    actual_sha256 = "sha256:" + hashlib.sha256(content).hexdigest()
+    if actual_sha256 != asset.sha256:
+        raise ValueError("verified character capability manifest bytes changed")
+    parsed = json.loads(content.decode("utf-8"))
+    if not isinstance(parsed, dict):
+        raise ValueError("character capability manifest must be an object")
+    if parsed.get("schema_version") != 1:
+        raise ValueError(
+            "runtime requires a versioned character capability profile"
+        )
+    if parsed.get("character_id") != package.character_id:
+        raise ValueError("character capability manifest character_id mismatch")
+    return parsed, package.package_sha256, asset.sha256
 
 
 def _permission_render_signature(policy):
@@ -81,27 +134,23 @@ class WizardFrameHub:
         self.frame_source = frame_source
         self.codec = codec
         self.max_subscribers = max_subscribers
-        self.runtime_epoch = "wizard-{}".format(uuid.uuid4().hex)
-        package_path = getattr(self.frame_source, "character_package_path", None)
-        capability_manifest = (
-            derive_character_capability_manifest(package_path)
-            if package_path is not None
-            else None
+        self.runtime_epoch = "{}-{}".format(
+            character_runtime_epoch_prefix(
+                self.frame_source.character_package.character_id
+            ),
+            uuid.uuid4().hex,
         )
+        (
+            capability_manifest,
+            package_digest,
+            manifest_digest,
+        ) = _package_capability_manifest(self.frame_source)
         self.performance = PerformanceApplication(
             self.runtime_epoch,
             score_repository=score_repository,
             character_id=self.frame_source.character_package.character_id,
-            package_digest=(
-                "sha256:" + "0" * 64
-                if capability_manifest is None
-                else str(capability_manifest["sources"]["package_sha256"])
-            ),
-            manifest_digest=(
-                "sha256:" + "0" * 64
-                if capability_manifest is None
-                else str(capability_manifest["manifest_sha256"])
-            ),
+            package_digest=package_digest,
+            manifest_digest=manifest_digest,
             capability_manifest=capability_manifest,
         )
         self.command_inbox = OrderedCommandInbox(self.runtime_epoch)

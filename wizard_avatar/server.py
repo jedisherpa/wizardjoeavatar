@@ -38,7 +38,11 @@ from .permission_world import (
     PermissionWorldError,
     PermissionWorldStateV1,
 )
-from .stream import SubscriberLimitError, WizardFrameHub
+from .stream import (
+    SubscriberLimitError,
+    WizardFrameHub,
+    character_runtime_epoch_prefix,
+)
 from .runtime_identity import build_runtime_identity, refresh_runtime_identity
 
 try:
@@ -163,15 +167,37 @@ def create_app(
             "cell_bytes": 4,
         },
         server_config=runtime_server_config,
+        runtime_epoch_prefix=character_runtime_epoch_prefix(
+            frame_source.character_package.character_id
+        ),
+        character_config={
+            "character_id": frame_source.character_package.character_id,
+            "character_package_sha256": (
+                frame_source.character_package.package_sha256
+            ),
+        },
     )
     hd_manifest = json.loads(
         (HD_CANONICAL_DIR / "manifest.json").read_text(encoding="utf-8")
     )
-    hd_index_record = hd_manifest["compiled_library_index"]
-    hd_index_path = HD_CANONICAL_DIR / hd_index_record["path"]
-    hd_library = _load_hd_pose_library(
-        str(hd_index_path), str(hd_index_record["sha256"])
-    )
+    hd_compatibility = hd_manifest["runtime_compatibility"]
+    package = frame_source.character_package
+    hd_index_record = None
+    hd_library = None
+    if (
+        package.character_id == hd_compatibility["character_id"]
+        and package.package_sha256
+        == hd_compatibility["character_package_sha256"]
+        and package.assets["pose_library"].sha256
+        == hd_compatibility["pose_library_sha256"]
+        and package.assets["animation_graph"].sha256
+        == hd_compatibility["animation_graph_sha256"]
+    ):
+        hd_index_record = hd_manifest["compiled_library_index"]
+        hd_index_path = HD_CANONICAL_DIR / hd_index_record["path"]
+        hd_library = _load_hd_pose_library(
+            str(hd_index_path), str(hd_index_record["sha256"])
+        )
     if companion_mode is None:
         companion_mode = os.environ.get("WIZARD_COMPANION_MODE", "").lower() in {
             "1", "true", "yes", "on"
@@ -352,8 +378,14 @@ def create_app(
             "frame_hub_running": hub_task is not None and not hub_task.done(),
             "frame_hub_error_code": hub_error_code,
             "connector_enabled": connector_enabled and bool(connector_token),
-            "hd_review_projection": True,
-            "hd_runtime_admitted": bool(hd_library.index["runtime_admitted"]),
+            "hd_review_projection": (
+                hd_library is not None
+                and bool(hd_library.index["review_projection"])
+            ),
+            "hd_runtime_admitted": (
+                hd_library is not None
+                and bool(hd_library.index["runtime_admitted"])
+            ),
         }
 
     @app.post("/api/companion/shutdown")
@@ -452,6 +484,11 @@ def create_app(
 
     @app.get("/api/avatar/wizard/hd-profile")
     async def hd_profile():
+        if hd_library is None or hd_index_record is None:
+            raise HTTPException(
+                status_code=404,
+                detail="HD review projection is unavailable for this character",
+            )
         return {
             "schema_version": 1,
             "asset_set_id": hd_library.index["asset_set_id"],
@@ -466,6 +503,11 @@ def create_app(
 
     @app.get("/api/avatar/wizard/hd-pose/{pose_id}")
     async def hd_pose(pose_id: str):
+        if hd_library is None:
+            raise HTTPException(
+                status_code=404,
+                detail="HD review projection is unavailable for this character",
+            )
         if pose_id not in hd_library.pose_shards:
             raise HTTPException(status_code=404, detail="HD pose not found")
         rgba = await asyncio.to_thread(hd_library.load_rgba, pose_id)
