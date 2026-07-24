@@ -25,6 +25,7 @@ from tools.run_character_director_visual_review import (
     dispatch_runtime_operation,
     enqueue_decoded_frame,
     load_scenario_program,
+    merge_animation_trace_snapshot,
     minimize_evidence_content,
     parse_init,
     runtime_urls,
@@ -432,6 +433,43 @@ class RuntimeOperationDispatchTests(unittest.IsolatedAsyncioTestCase):
         payload["records"][0]["frame_sha256"] = "b" * 64
         with self.assertRaisesRegex(EvidenceFailure, "hash mismatch"):
             select_atomic_animation_trace(payload, frames)
+
+    def test_trace_snapshots_merge_across_bounded_runtime_windows(self):
+        retained = {}
+        merge_animation_trace_snapshot(
+            {
+                "schema": "animation_truth_trace_v1",
+                "records": [
+                    {"frame_index": 1, "frame_sha256": "a"},
+                    {"frame_index": 2, "frame_sha256": "b"},
+                ],
+            },
+            retained,
+        )
+        merge_animation_trace_snapshot(
+            {
+                "schema": "animation_truth_trace_v1",
+                "records": [
+                    {"frame_index": 2, "frame_sha256": "b"},
+                    {"frame_index": 3, "frame_sha256": "c"},
+                ],
+            },
+            retained,
+        )
+
+        self.assertEqual(sorted(retained), [1, 2, 3])
+
+    def test_trace_snapshot_conflicts_fail_closed(self):
+        retained = {2: {"frame_index": 2, "frame_sha256": "b"}}
+
+        with self.assertRaisesRegex(EvidenceFailure, "conflicts at frame 2"):
+            merge_animation_trace_snapshot(
+                {
+                    "schema": "animation_truth_trace_v1",
+                    "records": [{"frame_index": 2, "frame_sha256": "changed"}],
+                },
+                retained,
+            )
 
     def test_contact_verification_excludes_transport_warmup_frames(self):
         source = ProceduralWizardFrameSource()

@@ -883,6 +883,9 @@ class CaptureRecords:
     samples: List[Dict[str, Any]] = field(default_factory=list)
     sample_paths: List[Path] = field(default_factory=list)
     animation_truth_trace: List[Dict[str, Any]] = field(default_factory=list)
+    animation_truth_trace_snapshots: Dict[int, Dict[str, Any]] = field(
+        default_factory=dict
+    )
     contact_verification: Optional[Dict[str, Any]] = None
     decoded_raster_frames: Dict[int, DecodedRasterFrameV1] = field(default_factory=dict)
 
@@ -1237,6 +1240,40 @@ def select_atomic_animation_trace(
             )
         selected.append(dict(record))
     return selected
+
+
+def merge_animation_trace_snapshot(
+    payload: Mapping[str, Any],
+    retained: Dict[int, Dict[str, Any]],
+) -> None:
+    """Retain bounded runtime trace snapshots without accepting conflicts."""
+
+    if payload.get("schema") != "animation_truth_trace_v1":
+        raise EvidenceFailure("runtime returned an unsupported animation trace schema")
+    records = payload.get("records")
+    if not isinstance(records, list):
+        raise EvidenceFailure("runtime animation trace records must be an array")
+    snapshot_indexes = set()
+    for record in records:
+        if not isinstance(record, Mapping):
+            raise EvidenceFailure("runtime animation trace record must be an object")
+        frame_index = record.get("frame_index")
+        if not isinstance(frame_index, int) or isinstance(frame_index, bool):
+            raise EvidenceFailure("runtime animation trace frame_index must be an integer")
+        if frame_index in snapshot_indexes:
+            raise EvidenceFailure(
+                "runtime animation trace snapshot contains duplicate frame indexes"
+            )
+        snapshot_indexes.add(frame_index)
+        normalized = dict(record)
+        previous = retained.get(frame_index)
+        if previous is not None and previous != normalized:
+            raise EvidenceFailure(
+                "runtime animation trace snapshot conflicts at frame {}".format(
+                    frame_index
+                )
+            )
+        retained[frame_index] = normalized
 
 
 def select_capture_owned_contact_records(
@@ -2020,6 +2057,11 @@ async def drive_scenarios(
                 )
             if scheduled_task is not None:
                 await scheduled_task
+            trace_payload, _ = await request_json_async("GET", animation_trace_url)
+            merge_animation_trace_snapshot(
+                trace_payload,
+                records.animation_truth_trace_snapshots,
+            )
             outcome["capture_completed_at_utc"] = utc_now()
         except Exception as exc:
             if scheduled_task is not None:
@@ -3894,8 +3936,18 @@ async def run_visual_review(
     if records.frames:
         try:
             trace_payload, _ = await request_json_async("GET", animation_trace_url)
-            records.animation_truth_trace = select_atomic_animation_trace(
+            merge_animation_trace_snapshot(
                 trace_payload,
+                records.animation_truth_trace_snapshots,
+            )
+            records.animation_truth_trace = select_atomic_animation_trace(
+                {
+                    "schema": "animation_truth_trace_v1",
+                    "records": [
+                        records.animation_truth_trace_snapshots[index]
+                        for index in sorted(records.animation_truth_trace_snapshots)
+                    ],
+                },
                 records.frames,
             )
             animation_trace_path.write_text(
