@@ -515,7 +515,7 @@ async def wait_for_presented_advance(
             isinstance(latest, dict)
             and latest.get("presentedFrames", 0) >= baseline + minimum_frames
             and latest.get("rawQueueDepth") == 0
-            and latest.get("decodedQueueDepth") == 0
+            and 0 <= latest.get("decodedQueueDepth", -1) <= 2
         ):
             return latest
         await asyncio.sleep(0.05)

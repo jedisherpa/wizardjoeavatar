@@ -52,7 +52,7 @@ class BrowserScenarioProgramTests(unittest.TestCase):
                     {
                         "presentedFrames": 13,
                         "rawQueueDepth": 0,
-                        "decodedQueueDepth": 0,
+                        "decodedQueueDepth": 2,
                     },
                 ]
 
