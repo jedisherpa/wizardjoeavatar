@@ -2648,8 +2648,23 @@ def validate_manifest(manifest: Mapping[str, Any], output_dir: Optional[Path] = 
                 "scenario command is missing its exact frame plan",
             )
             if valid:
+                timing_mode = command.get("capture_timing_mode", "fixed")
+                captured_count = item.get("frame_count")
+                planned_count = command["capture_planned_frame_count"]
                 _manifest_error(
-                    item.get("frame_count") == command["capture_planned_frame_count"],
+                    (
+                        timing_mode == "fixed"
+                        and captured_count == planned_count
+                    )
+                    or (
+                        timing_mode == "trace_trigger"
+                        and _plain_int(captured_count, 1)
+                        and captured_count <= planned_count
+                        and isinstance(
+                            command.get("trace_trigger_observation"),
+                            Mapping,
+                        )
+                    ),
                     "scenario range contains pre/post-window spill",
                 )
 
