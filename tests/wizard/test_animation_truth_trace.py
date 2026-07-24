@@ -260,6 +260,38 @@ class AnimationTruthGeometryTests(unittest.TestCase):
         }
         self.assertEqual(rendered, expected)
 
+    def test_subpixel_anchor_uses_nearest_sampled_destination_cell(self):
+        local = CellCanvas(7, 7)
+        for y in range(4, 7):
+            for x in range(2, 5):
+                local.set(x, y, "#", (1, 2, 3), "foot")
+        stage = CellCanvas(40, 30)
+        root_local = (3, 6)
+        root_stage = (17.0, 22.0)
+        scale = 0.675
+
+        blit_pose_scaled(
+            stage,
+            local,
+            root_local,
+            root_stage,
+            scale,
+            1.0,
+        )
+        _, span = transformed_anchor(
+            root_local=root_local,
+            root_stage=root_stage,
+            anchor_local=(3, 5),
+            local_size=(local.width, local.height),
+            scale=scale,
+            horizontal_scale=1.0,
+        )
+
+        self.assertIsNotNone(span)
+        self.assertEqual(span.min_x, span.max_x)
+        self.assertEqual(span.min_y, span.max_y)
+        self.assertIsNotNone(stage.get(span.min_x, span.min_y))
+
     def test_candidate_preserves_exact_authoritative_sample_and_frame_hash(self):
         source = ProceduralWizardFrameSource(cols=96, rows=54, fps=24)
         state = source.current_state()

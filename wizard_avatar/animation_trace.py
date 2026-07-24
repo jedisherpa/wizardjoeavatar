@@ -414,6 +414,18 @@ def transformed_anchor(
     dest_height = max(1, round(local_size[1] * scale_y))
     x_span = _source_cell_destination_span(anchor_local[0], scale_x, dest_width)
     y_span = _source_cell_destination_span(anchor_local[1], scale_y, dest_height)
+    if x_span is None and scale_x < 1.0:
+        x_span = _nearest_destination_cell(
+            anchor_local[0],
+            scale_x,
+            dest_width,
+        )
+    if y_span is None and scale_y < 1.0:
+        y_span = _nearest_destination_cell(
+            anchor_local[1],
+            scale_y,
+            dest_height,
+        )
     if x_span is None or y_span is None:
         return stage_point, None
     return stage_point, RasterSpanV1(
@@ -436,3 +448,18 @@ def _source_cell_destination_span(
     while last >= first and int(last / scale) != source_coordinate:
         last -= 1
     return None if first > last else (first, last)
+
+
+def _nearest_destination_cell(
+    source_coordinate: int,
+    scale: float,
+    destination_size: int,
+) -> tuple[int, int]:
+    """Represent a subpixel anchor by the nearest sampled destination cell."""
+
+    projected_center = (source_coordinate + 0.5) * scale - 0.5
+    destination = min(
+        destination_size - 1,
+        max(0, int(round(projected_center))),
+    )
+    return destination, destination
