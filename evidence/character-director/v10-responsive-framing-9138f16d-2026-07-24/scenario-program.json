@@ -1,0 +1,64 @@
+{
+  "schema": "character_director_scenario_program_v2",
+  "schema_version": 2,
+  "program_id": "v10-responsive-framing",
+  "acceptance_scenario": "V10",
+  "scenarios": [
+    {
+      "name": "v10-center",
+      "kind": "reset",
+      "payload": {},
+      "timing": {
+        "capture_frames": 48
+      }
+    },
+    {
+      "name": "v10-near",
+      "kind": "move",
+      "payload": {
+        "x": 0.0,
+        "z": 1.5,
+        "speed": 2.0
+      },
+      "timing": {
+        "capture_frames": 96
+      }
+    },
+    {
+      "name": "v10-far",
+      "kind": "move",
+      "payload": {
+        "x": 0.0,
+        "z": 10.0,
+        "speed": 2.0
+      },
+      "timing": {
+        "capture_frames": 144
+      }
+    },
+    {
+      "name": "v10-left-edge",
+      "kind": "move",
+      "payload": {
+        "x": -3.2,
+        "z": 5.0,
+        "speed": 2.0
+      },
+      "timing": {
+        "capture_frames": 120
+      }
+    },
+    {
+      "name": "v10-right-edge",
+      "kind": "move",
+      "payload": {
+        "x": 3.2,
+        "z": 5.0,
+        "speed": 2.0
+      },
+      "timing": {
+        "capture_frames": 120
+      }
+    }
+  ]
+}

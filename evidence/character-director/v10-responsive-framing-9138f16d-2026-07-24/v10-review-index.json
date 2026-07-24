@@ -1,0 +1,88 @@
+{
+  "schema": "character_director_v10_review_index_v1",
+  "schema_version": 1,
+  "acceptance_scenario": "V10",
+  "candidate_commit": "9138f16d18ff822b885f4b4ed385c7373a40741f",
+  "candidate_tree": "0deecf1be9dedfc2894e9c918c36ed5c814ec6fc",
+  "machine_acceptance": {
+    "passed": true,
+    "path": "v10-machine-acceptance.json",
+    "sha256": "fd3241e001c1035e8a5e7676ff960f1c78ae966dd0c01783936511eeeb658dfc"
+  },
+  "evidence": [
+    {
+      "path": "manifest.json",
+      "sha256": "cdc1595fbb010f1ea71858af04498b4c12daa1ebcc603c0945f1406c7a065277"
+    },
+    {
+      "path": "visual-review-2523503818bc-capture.mp4",
+      "sha256": "9714083dc033dbf7c656ec0bd60d29337af89656ae491e5528d387b9cc7870f3"
+    },
+    {
+      "path": "v10-quarter-speed.mp4",
+      "sha256": "23044abdf443f045265eb464402d75ad274ebace66f995cee19c60d04c875720"
+    },
+    {
+      "path": "visual-review-2523503818bc-contact-sheet.png",
+      "sha256": "2b5e7f636c8042dac777e315efdd2b14a8edb410bbdd4f052cc9ccc22b282b16"
+    },
+    {
+      "path": "v10-browser-desktop-dpr1.mp4",
+      "sha256": "2c01149cfa79ca371be46cffce9ad67ce02662a1f601d5ba55303b238d34e310"
+    },
+    {
+      "path": "v10-browser-desktop-dpr1-metrics.json",
+      "sha256": "f4dd4b2948ba9b59677823d602b9f1d8861a0016e99f607db329ac5fbeab3a52"
+    },
+    {
+      "path": "v10-browser-desktop-dpr2.mp4",
+      "sha256": "d77f930c024cd31d13628296dbf3f7faaf3a271f83a4528a7a3b92d82b4e0e39"
+    },
+    {
+      "path": "v10-browser-desktop-dpr2-metrics.json",
+      "sha256": "8fb9433cbce5dc12baa4238557a443418cb1229c233cb7df95cdcc963e6d3240"
+    },
+    {
+      "path": "v10-browser-mobile-dpr3.mp4",
+      "sha256": "375add9681a7d1f17373bc441a05529ac90c0574715d7feb1a112517a6e3fbea"
+    },
+    {
+      "path": "v10-browser-mobile-dpr3-metrics.json",
+      "sha256": "a14455983ba2f327a5d8715ac6d09c34a60c2e6607e89ebc068c0503d8743354"
+    },
+    {
+      "path": "contact_verification.json",
+      "sha256": "33f4dce366e92de79404dccc8aa2c7089e9b04dcb8b14a6336c9c2581c428ffa"
+    },
+    {
+      "path": "animation_truth_trace.ndjson",
+      "sha256": "9b05ccbdc3f486e87b160b3c31bd08ed0058b04850c2e8a49b140f9ec584f66d"
+    }
+  ],
+  "independent_reviews": [
+    {
+      "role": "animation_and_motion_director",
+      "verdict": "pass",
+      "framing_score_out_of_4": 3,
+      "blocker": false,
+      "hard_failure": false,
+      "path": "docs/character-director/reviews/V10_RESPONSIVE_FRAMING_9138F16D_ANIMATION_REVIEW.md",
+      "sha256": "448f8bd4664c9c2e94f7f9c6278d28171192869becf0a95387d01662f254e511"
+    },
+    {
+      "role": "technical_acceptance_reviewer",
+      "verdict": "pass",
+      "framing_score_out_of_4": 4,
+      "blocker": false,
+      "hard_failure": false,
+      "path": "docs/character-director/reviews/V10_RESPONSIVE_FRAMING_9138F16D_TECHNICAL_REVIEW.md",
+      "sha256": "9432b5878bf58933252864d52a0fcb6ba3d8188fd8d61ab4e2cba199769a9366"
+    }
+  ],
+  "scenario_verdict": "product_approval_ready",
+  "product_owner_approval": {
+    "status": "pending",
+    "note": "The 2026-07-24 V9 rubber stamp applies only to V9."
+  },
+  "aggregate_release_status": "pending_full_matrix_acceptance"
+}

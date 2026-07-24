@@ -1,0 +1,428 @@
+{
+  "acceptance_scenario": "V10",
+  "analyzer": {
+    "path": "tools/analyze_character_director_v10.py",
+    "sha256": "9ee607ae794ebf30d6aaea9344b28483b45aa700fc4ec4a5e8f92146c7191fca"
+  },
+  "checks": [
+    {
+      "detail": {
+        "acceptance_scenario": "V10",
+        "artifact_path": "scenario-program.json",
+        "maximum_capture_frame_count": 528,
+        "program_id": "v10-responsive-framing",
+        "scenario_count": 5,
+        "schema": "character_director_scenario_program_v2",
+        "schema_version": 2,
+        "source_sha256": "19c85cf75fe71895cde5d764496e241c72a235b066f9d5b327f39467d7da054b"
+      },
+      "name": "scenario_program_identity",
+      "passed": true
+    },
+    {
+      "detail": [
+        "v10-center",
+        "v10-near",
+        "v10-far",
+        "v10-left-edge",
+        "v10-right-edge"
+      ],
+      "name": "scenario_order",
+      "passed": true
+    },
+    {
+      "detail": {
+        "manifest_frame_count": 533,
+        "owned_frame_count": 528,
+        "scenario_frame_counts": {
+          "v10-center": 48,
+          "v10-far": 144,
+          "v10-left-edge": 120,
+          "v10-near": 96,
+          "v10-right-edge": 120
+        },
+        "trace_count": 533,
+        "transport_contiguous": true
+      },
+      "name": "complete_contiguous_capture",
+      "passed": true
+    },
+    {
+      "detail": {
+        "failure_count": 0,
+        "failures": [],
+        "required_margins": {
+          "bottom": 6,
+          "side": 4,
+          "top": 4
+        },
+        "stage": [
+          240,
+          135
+        ]
+      },
+      "name": "canonical_silhouette_margins",
+      "passed": true
+    },
+    {
+      "detail": {
+        "v10-center": {
+          "maximum_error": 0.0,
+          "mean_render_scale": 1.125,
+          "passed": true,
+          "target": [
+            0.0,
+            5.0
+          ],
+          "terminal_root_span": 0.0
+        },
+        "v10-far": {
+          "maximum_error": 0.0,
+          "mean_render_scale": 0.6750000000000003,
+          "passed": true,
+          "target": [
+            0.0,
+            10.0
+          ],
+          "terminal_root_span": 0.0
+        },
+        "v10-left-edge": {
+          "maximum_error": 0.0,
+          "mean_render_scale": 1.125,
+          "passed": true,
+          "target": [
+            -3.2,
+            5.0
+          ],
+          "terminal_root_span": 0.0
+        },
+        "v10-near": {
+          "maximum_error": 0.0,
+          "mean_render_scale": 1.2842105263157892,
+          "passed": true,
+          "target": [
+            0.0,
+            1.5
+          ],
+          "terminal_root_span": 0.0
+        },
+        "v10-right-edge": {
+          "maximum_error": 0.0,
+          "mean_render_scale": 1.125,
+          "passed": true,
+          "target": [
+            3.2,
+            5.0
+          ],
+          "terminal_root_span": 0.0
+        }
+      },
+      "name": "terminal_target_holds",
+      "passed": true
+    },
+    {
+      "detail": {
+        "v10-center": 1.125,
+        "v10-far": 0.6750000000000003,
+        "v10-left-edge": 1.125,
+        "v10-near": 1.2842105263157892,
+        "v10-right-edge": 1.125
+      },
+      "name": "near_center_far_scale_order",
+      "passed": true
+    },
+    {
+      "detail": {
+        "left_terminal_min_x": [
+          28
+        ],
+        "maximum_safe_boundary_margin_cells": 30,
+        "right_terminal_max_x": [
+          213
+        ]
+      },
+      "name": "edge_pass_reaches_safe_frame_boundary",
+      "passed": true
+    },
+    {
+      "detail": {
+        "contact_frame_count": 359,
+        "frame_count": 528,
+        "issues": [],
+        "maximum_planted_drift_cells": 1.4210854715202004e-14,
+        "maximum_planted_raster_span_drift_cells": 1.0,
+        "maximum_root_residual_cells": 0.0,
+        "passed": true,
+        "path": "contact_verification.json",
+        "schema": "contact_verification_report_v1",
+        "schema_version": 1,
+        "stance_count": 65
+      },
+      "name": "grounding_contact_verification",
+      "passed": true
+    },
+    {
+      "detail": [
+        {
+          "checks": {
+            "avatar_avoids_controls": true,
+            "canvas_containment_aspect_letterbox": true,
+            "capture_binding": true,
+            "exact_viewport": true,
+            "integer_physical_pixel_projection": true,
+            "runtime_integrity": true,
+            "synchronized_first_encoded_frame": true
+          },
+          "name": "desktop-dpr1",
+          "overlap_failure_count": 0,
+          "overlap_failures": [],
+          "passed": true,
+          "start_identity": {
+            "declared": {
+              "action": "idle",
+              "expression": "neutral",
+              "frame_fnv1a32": "fnv1a32:99face05",
+              "frame_index": 0,
+              "mouth": "closed",
+              "presented_facing": "south",
+              "world_root_x": 0.0,
+              "world_root_z": 5.0
+            },
+            "expected": {
+              "action": "idle",
+              "expression": "neutral",
+              "frame_fnv1a32": "fnv1a32:99face05",
+              "frame_index": 0,
+              "mouth": "closed",
+              "presented_facing": "south",
+              "world_root_x": 0.0,
+              "world_root_z": 5.0
+            },
+            "failures": [],
+            "passed": true
+          }
+        },
+        {
+          "checks": {
+            "avatar_avoids_controls": true,
+            "canvas_containment_aspect_letterbox": true,
+            "capture_binding": true,
+            "exact_viewport": true,
+            "integer_physical_pixel_projection": true,
+            "runtime_integrity": true,
+            "synchronized_first_encoded_frame": true
+          },
+          "name": "desktop-dpr2",
+          "overlap_failure_count": 0,
+          "overlap_failures": [],
+          "passed": true,
+          "start_identity": {
+            "declared": {
+              "action": "idle",
+              "expression": "neutral",
+              "frame_fnv1a32": "fnv1a32:99face05",
+              "frame_index": 0,
+              "mouth": "closed",
+              "presented_facing": "south",
+              "world_root_x": 0.0,
+              "world_root_z": 5.0
+            },
+            "expected": {
+              "action": "idle",
+              "expression": "neutral",
+              "frame_fnv1a32": "fnv1a32:99face05",
+              "frame_index": 0,
+              "mouth": "closed",
+              "presented_facing": "south",
+              "world_root_x": 0.0,
+              "world_root_z": 5.0
+            },
+            "failures": [],
+            "passed": true
+          }
+        },
+        {
+          "checks": {
+            "avatar_avoids_controls": true,
+            "canvas_containment_aspect_letterbox": true,
+            "capture_binding": true,
+            "exact_viewport": true,
+            "integer_physical_pixel_projection": true,
+            "runtime_integrity": true,
+            "synchronized_first_encoded_frame": true
+          },
+          "name": "mobile-390x844-dpr3",
+          "overlap_failure_count": 0,
+          "overlap_failures": [],
+          "passed": true,
+          "start_identity": {
+            "declared": {
+              "action": "idle",
+              "expression": "neutral",
+              "frame_fnv1a32": "fnv1a32:99face05",
+              "frame_index": 0,
+              "mouth": "closed",
+              "presented_facing": "south",
+              "world_root_x": 0.0,
+              "world_root_z": 5.0
+            },
+            "expected": {
+              "action": "idle",
+              "expression": "neutral",
+              "frame_fnv1a32": "fnv1a32:99face05",
+              "frame_index": 0,
+              "mouth": "closed",
+              "presented_facing": "south",
+              "world_root_x": 0.0,
+              "world_root_z": 5.0
+            },
+            "failures": [],
+            "passed": true
+          }
+        }
+      ],
+      "name": "responsive_browser_profile_matrix",
+      "passed": true
+    }
+  ],
+  "metrics": {
+    "browser_profiles": [
+      {
+        "checks": {
+          "avatar_avoids_controls": true,
+          "canvas_containment_aspect_letterbox": true,
+          "capture_binding": true,
+          "exact_viewport": true,
+          "integer_physical_pixel_projection": true,
+          "runtime_integrity": true,
+          "synchronized_first_encoded_frame": true
+        },
+        "name": "desktop-dpr1",
+        "overlap_failure_count": 0,
+        "overlap_failures": [],
+        "passed": true,
+        "start_identity": {
+          "declared": {
+            "action": "idle",
+            "expression": "neutral",
+            "frame_fnv1a32": "fnv1a32:99face05",
+            "frame_index": 0,
+            "mouth": "closed",
+            "presented_facing": "south",
+            "world_root_x": 0.0,
+            "world_root_z": 5.0
+          },
+          "expected": {
+            "action": "idle",
+            "expression": "neutral",
+            "frame_fnv1a32": "fnv1a32:99face05",
+            "frame_index": 0,
+            "mouth": "closed",
+            "presented_facing": "south",
+            "world_root_x": 0.0,
+            "world_root_z": 5.0
+          },
+          "failures": [],
+          "passed": true
+        }
+      },
+      {
+        "checks": {
+          "avatar_avoids_controls": true,
+          "canvas_containment_aspect_letterbox": true,
+          "capture_binding": true,
+          "exact_viewport": true,
+          "integer_physical_pixel_projection": true,
+          "runtime_integrity": true,
+          "synchronized_first_encoded_frame": true
+        },
+        "name": "desktop-dpr2",
+        "overlap_failure_count": 0,
+        "overlap_failures": [],
+        "passed": true,
+        "start_identity": {
+          "declared": {
+            "action": "idle",
+            "expression": "neutral",
+            "frame_fnv1a32": "fnv1a32:99face05",
+            "frame_index": 0,
+            "mouth": "closed",
+            "presented_facing": "south",
+            "world_root_x": 0.0,
+            "world_root_z": 5.0
+          },
+          "expected": {
+            "action": "idle",
+            "expression": "neutral",
+            "frame_fnv1a32": "fnv1a32:99face05",
+            "frame_index": 0,
+            "mouth": "closed",
+            "presented_facing": "south",
+            "world_root_x": 0.0,
+            "world_root_z": 5.0
+          },
+          "failures": [],
+          "passed": true
+        }
+      },
+      {
+        "checks": {
+          "avatar_avoids_controls": true,
+          "canvas_containment_aspect_letterbox": true,
+          "capture_binding": true,
+          "exact_viewport": true,
+          "integer_physical_pixel_projection": true,
+          "runtime_integrity": true,
+          "synchronized_first_encoded_frame": true
+        },
+        "name": "mobile-390x844-dpr3",
+        "overlap_failure_count": 0,
+        "overlap_failures": [],
+        "passed": true,
+        "start_identity": {
+          "declared": {
+            "action": "idle",
+            "expression": "neutral",
+            "frame_fnv1a32": "fnv1a32:99face05",
+            "frame_index": 0,
+            "mouth": "closed",
+            "presented_facing": "south",
+            "world_root_x": 0.0,
+            "world_root_z": 5.0
+          },
+          "expected": {
+            "action": "idle",
+            "expression": "neutral",
+            "frame_fnv1a32": "fnv1a32:99face05",
+            "frame_index": 0,
+            "mouth": "closed",
+            "presented_facing": "south",
+            "world_root_x": 0.0,
+            "world_root_z": 5.0
+          },
+          "failures": [],
+          "passed": true
+        }
+      }
+    ],
+    "owned_frame_count": 528,
+    "scenario_frame_counts": {
+      "v10-center": 48,
+      "v10-far": 144,
+      "v10-left-edge": 120,
+      "v10-near": 96,
+      "v10-right-edge": 120
+    },
+    "terminal_scales": {
+      "v10-center": 1.125,
+      "v10-far": 0.6750000000000003,
+      "v10-left-edge": 1.125,
+      "v10-near": 1.2842105263157892,
+      "v10-right-edge": 1.125
+    }
+  },
+  "passed": true,
+  "review_boundary": "Machine checks prove transport, crop margins, target positions, browser sizing, physical-pixel projection, and control overlap. Two human reviewers must still judge scale, grounding, portrait balance, and readability at normal and quarter speed.",
+  "schema": "character_director_v10_machine_acceptance_v1",
+  "schema_version": 1
+}
