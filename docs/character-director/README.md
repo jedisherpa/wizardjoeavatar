@@ -53,6 +53,9 @@ must remain labelled as planned.
 - `SPEECH_MOUTH_AUTHORITY.md`: aligned-versus-local mouth ownership,
   phrase-relative fallback rhythm, presented diagnostics, and clean runtime
   evidence.
+- `RUNTIME_EPOCH_CONTRACT.md`: remote-command and per-character process
+  identity fields for Wizard, Robin, Speech, Dragon, Kingfisher, and the full
+  Joeville roster.
 - `LIVE_E2E_2026-07-16.md`: isolated live connector, browser, and cursor-fix
   receipt with explicit evidence limits.
 - `FINAL_HANDOFF.md`: ordered 33-section implementation and acceptance handoff.
