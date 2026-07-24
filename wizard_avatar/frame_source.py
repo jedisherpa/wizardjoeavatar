@@ -884,7 +884,11 @@ class ProceduralWizardFrameSource:
             animation_root_policy=state.animation_root_policy,
             support_contact=state.animation_support_contact,
             planted_anchor=state.animation_planted_anchor,
-            active_markers=tuple(state.animation_active_markers),
+            active_markers=tuple(
+                marker
+                for marker in state.animation_active_markers
+                if marker not in PRESENTATION_MARKER_IDS
+            ),
             presentation_marker_events=snapshot.pending_marker_events,
             contact_generation=state.animation_contact_generation,
             contact_started_tick=state.animation_contact_started_tick,

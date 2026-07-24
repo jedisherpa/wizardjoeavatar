@@ -210,6 +210,7 @@
       ],
       "properties": {
         "clip_id": { "type": "string", "minLength": 1 },
+        "authored_fps": { "type": "integer", "minimum": 1 },
         "family": {
           "enum": ["idle", "locomotion", "flight", "action", "reaction", "speech", "transition"]
         },

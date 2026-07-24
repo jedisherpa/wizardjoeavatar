@@ -133,6 +133,7 @@ class ClipDefinition:
     exit_markers: Tuple[str, ...]
     secondary_curves: Mapping[str, str]
     legal_successors: Tuple[str, ...]
+    authored_fps: Optional[int]
 
     @property
     def total_frames(self) -> int:
@@ -230,7 +231,8 @@ class AnimationGraph:
         except KeyError as exc:
             raise KeyError(f"Unknown animation clip {clip_id!r}") from exc
 
-        absolute_frame = (elapsed_ticks * self.authored_fps) // self.simulation_hz
+        authored_fps = clip.authored_fps or self.authored_fps
+        absolute_frame = (elapsed_ticks * authored_fps) // self.simulation_hz
         total_frames = clip.total_frames
         if clip.loop_mode == "loop":
             local_frame = absolute_frame % total_frames
@@ -246,7 +248,7 @@ class AnimationGraph:
             clip,
             previous_tick,
             elapsed_ticks,
-            self.authored_fps,
+            authored_fps,
             self.simulation_hz,
         )
         return ClipEvaluation(
@@ -277,7 +279,8 @@ class AnimationGraph:
         sample = clip.samples[sample_index]
         return ClipEvaluation(
             clip_id=clip.clip_id,
-            elapsed_ticks=(authored_frame * self.simulation_hz) // self.authored_fps,
+            elapsed_ticks=(authored_frame * self.simulation_hz)
+            // (clip.authored_fps or self.authored_fps),
             authored_frame=authored_frame,
             loop_index=0,
             sample_index=sample_index,
@@ -609,7 +612,7 @@ def _parse_clip(value: Any, path: str, catalog: Mapping[str, PoseMetadata]) -> C
         "secondary_curves",
         "legal_successors",
     }
-    _keys(raw, path, required)
+    _keys(raw, path, required, {"authored_fps"})
     clip_id = _string(raw["clip_id"], f"{path}.clip_id")
     supported_facings = _string_tuple(raw["supported_facings"], f"{path}.supported_facings")
     for index, facing in enumerate(supported_facings):
@@ -680,6 +683,11 @@ def _parse_clip(value: Any, path: str, catalog: Mapping[str, PoseMetadata]) -> C
         exit_markers=exit_markers,
         secondary_curves=curves,
         legal_successors=_string_tuple(raw["legal_successors"], f"{path}.legal_successors"),
+        authored_fps=(
+            None
+            if "authored_fps" not in raw
+            else _integer(raw["authored_fps"], f"{path}.authored_fps", 1)
+        ),
     )
 
 

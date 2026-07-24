@@ -451,7 +451,8 @@ def _clip_marker_reached(
 ) -> bool:
     if clip.loop_mode == "loop":
         return False
-    authored_frame = (elapsed_ticks * graph.authored_fps) // graph.simulation_hz
+    authored_fps = clip.authored_fps or graph.authored_fps
+    authored_frame = (elapsed_ticks * authored_fps) // graph.simulation_hz
     sample_start = 0
     for sample in clip.samples:
         for marker in sample.markers:
@@ -585,7 +586,12 @@ def _transition_entry_tick(
         )
     else:
         return 0
-    return _authored_frame_to_tick(target_frame, graph.authored_fps, graph.simulation_hz)
+    target_clip = graph.clips[target_clip_id]
+    return _authored_frame_to_tick(
+        target_frame,
+        target_clip.authored_fps or graph.authored_fps,
+        graph.simulation_hz,
+    )
 
 
 def _nearest_contact_entry_frame(
@@ -716,7 +722,7 @@ def _active_once_clip_complete(state: WizardState, graph: AnimationGraph) -> boo
     if clip is None or clip.loop_mode == "loop":
         return False
     return (
-        state.animation_clip_tick * graph.authored_fps
+        state.animation_clip_tick * (clip.authored_fps or graph.authored_fps)
         >= clip.total_frames * graph.simulation_hz
     )
 

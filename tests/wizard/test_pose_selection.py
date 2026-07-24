@@ -621,12 +621,35 @@ class PoseSelectionTests(unittest.TestCase):
                 )
                 observed = set()
                 clip = graph.clips[node.clip_id]
-                ticks = ceil(clip.total_frames * graph.simulation_hz / graph.authored_fps)
+                ticks = ceil(
+                    clip.total_frames
+                    * graph.simulation_hz
+                    / (clip.authored_fps or graph.authored_fps)
+                )
                 for tick in range(ticks + 1):
                     state.animation_clip_tick = tick
                     observed.add(select_reference_pose_sample(state).pose_id)
                 expected = {sample.pose_id for sample in clip.samples}
                 self.assertEqual(observed, expected)
+
+    def test_cast_playback_cannot_skip_authored_frames_at_projector_cadence(self):
+        graph = load_reference_animation_graph_v2()
+        clip = graph.clips["cast_front"]
+        self.assertEqual(clip.authored_fps, 20)
+
+        for phase_tick in range(3):
+            with self.subTest(phase_tick=phase_tick):
+                authored = [
+                    graph.evaluate_clip(
+                        "cast_front",
+                        phase_tick + round(frame * graph.simulation_hz / 24),
+                    ).authored_frame
+                    for frame in range(40)
+                ]
+                self.assertLessEqual(
+                    max(right - left for left, right in zip(authored, authored[1:])),
+                    1,
+                )
 
     def test_controller_accepts_every_graph_declared_action(self):
         graph = load_reference_animation_graph_v2()

@@ -468,7 +468,7 @@ def _clip_capability(
         "ownership": "whole_pose",
     }
     result["timing"] = {
-        "authored_fps": graph.authored_fps,
+        "authored_fps": clip.authored_fps or graph.authored_fps,
         "duration_frames": clip.total_frames,
         "loop_mode": clip.loop_mode,
     }

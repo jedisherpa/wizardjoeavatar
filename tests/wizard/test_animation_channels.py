@@ -112,17 +112,25 @@ class AnimationChannelTests(unittest.TestCase):
         self.assertEqual(committed.action, "magic_cast")
         self.assertIsNone(committed.speech_id)
 
-        run_ticks(source, 37)
-        recovering = source.current_state()
-        self.assertEqual(recovering.action, "magic_cast")
-        self.assertIsNone(recovering.speech_id)
-        self.assertIn("action_settled", recovering.animation_active_markers)
+        recovery_ticks = 0
+        observed_authored_frames = []
+        observed_markers = set()
+        while source.current_state().speech_id is None and recovery_ticks < 71:
+            run_ticks(source, 1)
+            recovery_ticks += 1
+            state = source.current_state()
+            if state.animation_clip_id == "cast_front":
+                observed_authored_frames.append(state.animation_authored_frame)
+            observed_markers.update(state.animation_active_markers)
 
-        run_ticks(source, 7)
         speaking = source.current_state()
         self.assertEqual(speaking.action, "speaking")
         self.assertEqual(speaking.staff_state, "held")
         self.assertEqual(speaking.speech_id, "queued-after-commit")
+        self.assertLessEqual(recovery_ticks, 70)
+        self.assertIn("action_recoverable", observed_markers)
+        self.assertIn("action_settled", observed_markers)
+        self.assertTrue(set(range(23, 31)).issubset(observed_authored_frames))
 
         run_seconds(source, 0.4)
         settled = source.current_state()
@@ -137,7 +145,7 @@ class AnimationChannelTests(unittest.TestCase):
                 WizardCommand("action", {"action": "magic_cast", "duration_ms": 5000})
             ).ok
         )
-        run_ticks(source, 90)
+        run_ticks(source, 93)
 
         state = source.current_state()
         self.assertEqual(state.action, "idle")
@@ -171,7 +179,7 @@ class AnimationChannelTests(unittest.TestCase):
         self.assertEqual(committed.action, "magic_cast")
         self.assertGreater(committed.time_seconds, committed.action_until)
 
-        run_ticks(source, 48)
+        run_ticks(source, 50)
         settled = source.current_state()
         self.assertEqual(settled.action, "idle")
         self.assertEqual(settled.animation_clip_id, "idle_front")

@@ -5455,6 +5455,7 @@
     },
     "cast_front": {
       "clip_id": "cast_front",
+      "authored_fps": 20,
       "family": "action",
       "supported_facings": [
         "south"
