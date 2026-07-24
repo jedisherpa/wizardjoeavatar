@@ -22,6 +22,7 @@ from tools.run_character_director_visual_review import (
     add_transition_samples,
     collect_runtime_observations,
     create_contact_sheet,
+    dispatch_runtime_operation,
     enqueue_decoded_frame,
     load_scenario_program,
     minimize_evidence_content,
@@ -268,6 +269,73 @@ class ScenarioSchemaTests(unittest.TestCase):
                             }
                         ]
                     )
+
+    def test_media_session_is_an_explicit_scenario_transport(self):
+        scenarios = validate_scenarios_v2(
+            [
+                {
+                    "name": "full-profile",
+                    "kind": "media_session",
+                    "payload": {
+                        "schema": "prism_media_session_v1",
+                        "schema_version": 1,
+                    },
+                    "timing": {"capture_frames": 24},
+                }
+            ]
+        )
+
+        self.assertEqual(scenarios[0].kind, "media_session")
+
+
+class RuntimeOperationDispatchTests(unittest.IsolatedAsyncioTestCase):
+    async def test_authenticated_media_session_uses_accepted_ack(self):
+        accepted = {
+            "schema": "prism_media_session_ack_v1",
+            "schema_version": 1,
+            "disposition": "accepted",
+            "accepted_sequence": 7,
+        }
+        with mock.patch(
+            "tools.run_character_director_visual_review.request_json_async",
+            new=mock.AsyncMock(return_value=(accepted, 2.5)),
+        ) as request:
+            response, ack, state, latency_ms, transport = (
+                await dispatch_runtime_operation(
+                    kind="media_session",
+                    payload={"sequence": 7},
+                    envelope={},
+                    command_url="http://127.0.0.1:8875/api/avatar/wizard/command",
+                    media_url="http://127.0.0.1:8875/api/avatar/wizard/media-session",
+                    media_token="proof-token",
+                )
+            )
+
+        self.assertEqual(response, accepted)
+        self.assertEqual(ack, accepted)
+        self.assertEqual(state, accepted)
+        self.assertEqual(latency_ms, 2.5)
+        self.assertEqual(transport, "media_session")
+        request.assert_awaited_once_with(
+            "POST",
+            "http://127.0.0.1:8875/api/avatar/wizard/media-session",
+            {"sequence": 7},
+            {"Authorization": "Bearer proof-token"},
+        )
+
+    async def test_media_session_requires_connector_token(self):
+        with self.assertRaisesRegex(
+            EvidenceFailure,
+            "WIZARD_MEDIA_CONNECTOR_TOKEN",
+        ):
+            await dispatch_runtime_operation(
+                kind="media_session",
+                payload={"sequence": 7},
+                envelope={},
+                command_url="http://127.0.0.1:8875/api/avatar/wizard/command",
+                media_url="http://127.0.0.1:8875/api/avatar/wizard/media-session",
+                media_token=None,
+            )
 
     def test_loads_v8_as_one_continuous_sixty_second_take(self):
         program = load_scenario_program(
@@ -898,6 +966,23 @@ class ManifestValidationTests(unittest.TestCase):
             with self.subTest(invalid=invalid):
                 with self.assertRaises(ManifestValidationError):
                     validate_manifest(invalid)
+
+    def test_validates_media_session_ack_transport(self):
+        manifest = self.valid_manifest()
+        manifest["commands"][0].update(
+            kind="media_session",
+            transport="media_session",
+        )
+        manifest["commands"][0]["ack"]["disposition"] = "accepted"
+
+        validate_manifest(manifest)
+
+        manifest["commands"][0]["ack"]["disposition"] = "applied"
+        with self.assertRaisesRegex(
+            ManifestValidationError,
+            "accepted media_session",
+        ):
+            validate_manifest(manifest)
 
     def test_sensitive_runtime_text_is_minimized_recursively(self):
         speech = "A governed line with a snowman \u2603 and no place in machine evidence."

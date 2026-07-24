@@ -8,6 +8,7 @@ import asyncio
 import hashlib
 import json
 import math
+import os
 import re
 import shutil
 import struct
@@ -61,6 +62,8 @@ REVIEW_BUNDLE_VERSION = 2
 SUPPORTED_REVIEW_BUNDLE_VERSIONS = {1, REVIEW_BUNDLE_VERSION}
 SENSITIVE_TEXT_FIELDS = frozenset({"speech_text"})
 CONTENT_MINIMIZATION_SCHEMA = "evidence_content_minimization_v1"
+MEDIA_SESSION_SCENARIO_KIND = "media_session"
+SCENARIO_KINDS = frozenset(COMMAND_KINDS) | {MEDIA_SESSION_SCENARIO_KIND}
 
 
 class EvidenceFailure(RuntimeError):
@@ -488,7 +491,7 @@ def validate_scenarios(values: Sequence[Mapping[str, Any]]) -> Tuple[Scenario, .
             raise ValueError("scenario name must be a lowercase kebab-case identifier")
         if name in names:
             raise ValueError("scenario names must be unique")
-        if not isinstance(kind, str) or kind not in COMMAND_KINDS:
+        if not isinstance(kind, str) or kind not in SCENARIO_KINDS:
             raise ValueError("unsupported scenario command kind: {}".format(kind))
         if not isinstance(payload, Mapping):
             raise ValueError("scenario payload must be an object")
@@ -580,7 +583,7 @@ def _scheduled_commands_v2(
             raise ValueError(
                 "scheduled command at_frame values must be strictly increasing within the capture"
             )
-        if not isinstance(kind, str) or kind not in COMMAND_KINDS:
+        if not isinstance(kind, str) or kind not in SCENARIO_KINDS:
             raise ValueError("unsupported scheduled command kind: {}".format(kind))
         if not isinstance(payload, Mapping):
             raise ValueError("scheduled command payload must be an object")
@@ -618,7 +621,7 @@ def validate_scenarios_v2(values: Sequence[Mapping[str, Any]]) -> Tuple[Scenario
             raise ValueError("scenario name must be a lowercase kebab-case identifier")
         if name in names:
             raise ValueError("scenario names must be unique")
-        if not isinstance(kind, str) or kind not in COMMAND_KINDS:
+        if not isinstance(kind, str) or kind not in SCENARIO_KINDS:
             raise ValueError("unsupported scenario command kind: {}".format(kind))
         if not isinstance(payload, Mapping):
             raise ValueError("scenario payload must be an object")
@@ -967,9 +970,16 @@ def collect_git_provenance(root: Path = ROOT) -> Dict[str, Any]:
     }
 
 
-def request_json(method: str, url: str, payload: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
+def request_json(
+    method: str,
+    url: str,
+    payload: Optional[Dict[str, Any]] = None,
+    extra_headers: Optional[Mapping[str, str]] = None,
+) -> Dict[str, Any]:
     data = None
     headers = {"Accept": "application/json"}
+    if extra_headers:
+        headers.update(extra_headers)
     if payload is not None:
         data = json.dumps(payload, separators=(",", ":"), allow_nan=False).encode("utf-8")
         headers["Content-Type"] = "application/json"
@@ -988,10 +998,19 @@ def request_json(method: str, url: str, payload: Optional[Dict[str, Any]] = None
 
 
 async def request_json_async(
-    method: str, url: str, payload: Optional[Dict[str, Any]] = None
+    method: str,
+    url: str,
+    payload: Optional[Dict[str, Any]] = None,
+    extra_headers: Optional[Mapping[str, str]] = None,
 ) -> Tuple[Dict[str, Any], float]:
     started = time.perf_counter()
-    result = await asyncio.to_thread(request_json, method, url, payload)
+    result = await asyncio.to_thread(
+        request_json,
+        method,
+        url,
+        payload,
+        extra_headers,
+    )
     return result, (time.perf_counter() - started) * 1000.0
 
 
@@ -1031,6 +1050,10 @@ def runtime_urls(base_url: str) -> Tuple[str, str, str, str, str]:
         http_base + "/api/avatar/wizard/animation-trace",
         http_base + "/api/avatar/wizard/runtime-identity",
     )
+
+
+def media_session_url(base_url: str) -> str:
+    return canonical_runtime_base_url(base_url) + "/api/avatar/wizard/media-session"
 
 
 def validate_runtime_binding(
@@ -1567,9 +1590,72 @@ async def record_state_snapshot(
     return snapshot
 
 
+async def dispatch_runtime_operation(
+    *,
+    kind: str,
+    payload: Dict[str, Any],
+    envelope: Dict[str, Any],
+    command_url: str,
+    media_url: str,
+    media_token: Optional[str],
+) -> Tuple[Dict[str, Any], Dict[str, Any], Any, float, str]:
+    if kind == MEDIA_SESSION_SCENARIO_KIND:
+        if not media_token:
+            raise EvidenceFailure(
+                "media-session scenarios require WIZARD_MEDIA_CONNECTOR_TOKEN"
+            )
+        response, latency_ms = await request_json_async(
+            "POST",
+            media_url,
+            payload,
+            {"Authorization": "Bearer " + media_token},
+        )
+        ack = response
+        if ack.get("disposition") != "accepted":
+            raise EvidenceFailure(
+                "media-session snapshot was not accepted: {}".format(
+                    ack.get("disposition")
+                )
+            )
+        return response, ack, minimize_evidence_content(response), latency_ms, "media_session"
+
+    response, latency_ms = await request_json_async(
+        "POST",
+        command_url,
+        envelope,
+    )
+    ack = response.get("ack")
+    if not isinstance(ack, dict):
+        raise EvidenceFailure(
+            "command {} returned no acknowledgement".format(
+                envelope["command_id"]
+            )
+        )
+    if ack.get("command_id") != envelope["command_id"]:
+        raise EvidenceFailure("command acknowledgement ID mismatch")
+    if ack.get("source_sequence") != envelope["source_sequence"]:
+        raise EvidenceFailure("command acknowledgement sequence mismatch")
+    if ack.get("disposition") != "applied":
+        raise EvidenceFailure(
+            "command {} was not applied: {}".format(
+                envelope["command_id"],
+                ack.get("disposition"),
+            )
+        )
+    return (
+        response,
+        ack,
+        minimize_evidence_content(response.get("state")),
+        latency_ms,
+        "command",
+    )
+
+
 async def dispatch_scheduled_commands(
     scenario: ScenarioV2,
     command_url: str,
+    media_url: str,
+    media_token: Optional[str],
     source_epoch: str,
     first_source_sequence: int,
     scenario_clock: ScenarioClock,
@@ -1625,6 +1711,11 @@ async def dispatch_scheduled_commands(
             "source_epoch": source_epoch,
             "source_sequence": source_sequence,
             "kind": command.kind,
+            "transport": (
+                "media_session"
+                if command.kind == MEDIA_SESSION_SCENARIO_KIND
+                else "command"
+            ),
             "payload": command.payload,
             "request_started_at_utc": utc_now(),
             "ack": None,
@@ -1634,31 +1725,26 @@ async def dispatch_scheduled_commands(
         records.commands.append(outcome)
         scheduled_task: Optional[asyncio.Task[None]] = None
         try:
-            response, latency_ms = await request_json_async(
-                "POST",
-                command_url,
-                envelope,
+            (
+                _response,
+                ack,
+                response_state,
+                latency_ms,
+                transport,
+            ) = await dispatch_runtime_operation(
+                kind=command.kind,
+                payload=command.payload,
+                envelope=envelope,
+                command_url=command_url,
+                media_url=media_url,
+                media_token=media_token,
             )
             outcome["request_completed_at_utc"] = utc_now()
             outcome["request_latency_ms"] = round(latency_ms, 3)
             outcome["dispatch_completed_after_frame_count"] = scenario_clock.claimed_frames
-            outcome["ack"] = response.get("ack")
-            outcome["response_state"] = minimize_evidence_content(response.get("state"))
-            if not isinstance(outcome["ack"], dict):
-                raise EvidenceFailure(
-                    "scheduled command {} returned no acknowledgement".format(command_id)
-                )
-            if outcome["ack"].get("command_id") != command_id:
-                raise EvidenceFailure("scheduled command acknowledgement ID mismatch")
-            if outcome["ack"].get("source_sequence") != source_sequence:
-                raise EvidenceFailure("scheduled command acknowledgement sequence mismatch")
-            if outcome["ack"].get("disposition") != "applied":
-                raise EvidenceFailure(
-                    "scheduled command {} was not applied: {}".format(
-                        command_id,
-                        outcome["ack"].get("disposition"),
-                    )
-                )
+            outcome["transport"] = transport
+            outcome["ack"] = ack
+            outcome["response_state"] = response_state
         except Exception as exc:
             outcome["error"] = "{}: {}".format(type(exc).__name__, exc)
             integrity.invalidate(
@@ -1671,6 +1757,8 @@ async def dispatch_scheduled_commands(
 async def drive_scenarios(
     scenarios: Sequence[Any],
     command_url: str,
+    media_url: str,
+    media_token: Optional[str],
     state_url: str,
     animation_trace_url: str,
     source_epoch: str,
@@ -1715,6 +1803,11 @@ async def drive_scenarios(
             "source_epoch": source_epoch,
             "source_sequence": source_sequence,
             "kind": scenario.kind,
+            "transport": (
+                "media_session"
+                if scenario.kind == MEDIA_SESSION_SCENARIO_KIND
+                else "command"
+            ),
             "payload": scenario.payload,
             "capture_planned_frame_count": planned_frames,
             "capture_timing_mode": (
@@ -1736,21 +1829,25 @@ async def drive_scenarios(
         }
         records.commands.append(outcome)
         try:
-            response, latency_ms = await request_json_async("POST", command_url, envelope)
+            (
+                _response,
+                ack,
+                response_state,
+                latency_ms,
+                transport,
+            ) = await dispatch_runtime_operation(
+                kind=scenario.kind,
+                payload=scenario.payload,
+                envelope=envelope,
+                command_url=command_url,
+                media_url=media_url,
+                media_token=media_token,
+            )
             outcome["request_completed_at_utc"] = utc_now()
             outcome["request_latency_ms"] = round(latency_ms, 3)
-            outcome["ack"] = response.get("ack")
-            outcome["response_state"] = minimize_evidence_content(response.get("state"))
-            if not isinstance(outcome["ack"], dict):
-                raise EvidenceFailure("command {} returned no acknowledgement".format(command_id))
-            if outcome["ack"].get("command_id") != command_id:
-                raise EvidenceFailure("command acknowledgement ID mismatch")
-            if outcome["ack"].get("source_sequence") != source_sequence:
-                raise EvidenceFailure("command acknowledgement sequence mismatch")
-            if outcome["ack"].get("disposition") != "applied":
-                raise EvidenceFailure(
-                    "command {} was not applied: {}".format(command_id, outcome["ack"].get("disposition"))
-                )
+            outcome["transport"] = transport
+            outcome["ack"] = ack
+            outcome["response_state"] = response_state
             outcome["state_snapshot"] = await record_state_snapshot(
                 state_url, "{}-after-ack".format(scenario.name), records
             )
@@ -1766,6 +1863,8 @@ async def drive_scenarios(
                     dispatch_scheduled_commands(
                         scenario,
                         command_url,
+                        media_url,
+                        media_token,
                         source_epoch,
                         source_sequence + 1,
                         scenario_clock,
@@ -3080,9 +3179,21 @@ def validate_manifest(manifest: Mapping[str, Any], output_dir: Optional[Path] = 
             "valid evidence requires one capture-owning command per scenario",
         )
         for command in commands:
+            transport = command.get("transport", "command")
+            expected_disposition = (
+                "accepted" if transport == "media_session" else "applied"
+            )
             _manifest_error(
-                isinstance(command.get("ack"), Mapping) and command["ack"].get("disposition") == "applied",
-                "valid evidence requires applied command acknowledgements",
+                transport in {"command", "media_session"},
+                "valid evidence requires a recognized command transport",
+            )
+            _manifest_error(
+                isinstance(command.get("ack"), Mapping)
+                and command["ack"].get("disposition") == expected_disposition,
+                "valid evidence requires {} {} acknowledgements".format(
+                    expected_disposition,
+                    transport,
+                ),
             )
             _manifest_error(command.get("response_state") is not None, "valid evidence requires response state")
         for command in capture_owner_commands:
@@ -3298,6 +3409,8 @@ async def run_visual_review(
     if scenario_program is not None and tuple(scenarios) != scenario_program.scenarios:
         raise ValueError("scenario program and supplied scenarios disagree")
     ws_url, command_url, state_url, animation_trace_url, runtime_identity_url = runtime_urls(base_url)
+    media_url = media_session_url(base_url)
+    media_token = os.environ.get("WIZARD_MEDIA_CONNECTOR_TOKEN")
     source_epoch = "visual-review-{}".format(uuid.uuid4().hex[:12])
     run_id = source_epoch
     records = CaptureRecords()
@@ -3395,6 +3508,8 @@ async def run_visual_review(
             await drive_scenarios(
                 scenarios,
                 command_url,
+                media_url,
+                media_token,
                 state_url,
                 animation_trace_url,
                 source_epoch,
