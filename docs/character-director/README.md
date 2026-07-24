@@ -48,6 +48,9 @@ must remain labelled as planned.
 - `V7_INTERRUPTION_ACCEPTANCE_2026-07-23.md`: accepted trace-triggered
   pre-commit cancellation and post-commit cast recovery proof at commit
   `8217ccc2`.
+- `V8_ACCEPTANCE_CANDIDATE_2026-07-24.md`: machine-passed purposeful
+  performance, authenticated governed AV, zero-drop browser replay, and the
+  explicit pending product-owner gate for candidate `b34368e9`.
 - `V9_ACCESSIBILITY_ACCEPTANCE_2026-07-24.md`: accepted full, reduced, and
   still motion profiles, with machine proof, product-owner approval, and an
   explicit audiovisual evidence boundary.

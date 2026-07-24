@@ -1,0 +1,97 @@
+{
+  "artifacts": [
+    {
+      "bytes": 9906,
+      "media_type": "application/json",
+      "path": "v8-machine-acceptance.json",
+      "role": "machine_acceptance",
+      "sha256": "06015ac8f208062bc4b5a701cd53453d210b02f198ae0bfc2415efe417ae5fcb",
+      "source_path": "manifest.json",
+      "source_sha256": "cafdebfd3c7d24511603dcaa49cb316613c280168c47168626f400a4646d398e"
+    },
+    {
+      "bytes": 607349,
+      "media_type": "video/mp4",
+      "path": "v8-quarter-speed.mp4",
+      "role": "quarter_speed",
+      "sha256": "799e626598ccd5c4bca64470f50af589deffaae7cb979527d64e2f0f7dd4fd58",
+      "source_path": "visual-review-f8d7726254c4-capture.mp4",
+      "source_sha256": "a5b213e0d0074ffe11f2e53c7bbc7c0f0d142a4b10cdf519ff37e60d78822ce7"
+    },
+    {
+      "bytes": 714351,
+      "media_type": "video/mp4",
+      "path": "v8-browser-layout.mp4",
+      "role": "browser_layout",
+      "sha256": "c41e23ffbc8b2c3072cb1ba8f3abd79035b55aeda5dbef8aaf45136f70018a39",
+      "source_path": "v8-browser-layout-metrics.json",
+      "source_sha256": "fecae2d85956723d36f13afc042cc4eaddc90fd04e883d041c5f3a6e5a2a1d3f"
+    },
+    {
+      "bytes": 19148,
+      "media_type": "text/x-python",
+      "path": "v8-analyzer.py",
+      "role": "analyzer",
+      "sha256": "bc24a732d9d5b8ddf516be81c05b5189f45e49ca2e518c37e117530e2212defe",
+      "source_path": "v8-analyzer.py",
+      "source_sha256": "bc24a732d9d5b8ddf516be81c05b5189f45e49ca2e518c37e117530e2212defe"
+    },
+    {
+      "bytes": 484876,
+      "media_type": "audio/mpeg",
+      "path": "v8-retained-audio.mp3",
+      "role": "retained_audio",
+      "sha256": "24ea0ac0fa27fde7746c1731c7146669714de78c71a4088d20eb3fc49bd512b7",
+      "source_path": "v8-retained-audio.mp3",
+      "source_sha256": "24ea0ac0fa27fde7746c1731c7146669714de78c71a4088d20eb3fc49bd512b7"
+    },
+    {
+      "bytes": 376726,
+      "media_type": "application/json",
+      "path": "v8-av-timeline.json",
+      "role": "av_timeline",
+      "sha256": "0a0f6b9485e5282f6360277dfb83eeb09a3aa7c0665d33c3f8a7f58313c3aac9",
+      "source_path": "v8-av-timeline.json",
+      "source_sha256": "0a0f6b9485e5282f6360277dfb83eeb09a3aa7c0665d33c3f8a7f58313c3aac9"
+    },
+    {
+      "bytes": 679046,
+      "media_type": "video/mp4",
+      "path": "v8-audible-review.mp4",
+      "role": "audible_review",
+      "sha256": "a1f55ac51cd06e502a17ee2333fa789c744fdb1f211548d67b4f4ec714ac8cd7",
+      "source_path": "visual-review-f8d7726254c4-capture.mp4",
+      "source_sha256": "a5b213e0d0074ffe11f2e53c7bbc7c0f0d142a4b10cdf519ff37e60d78822ce7"
+    },
+    {
+      "bytes": 2156,
+      "media_type": "text/markdown",
+      "path": "V8_INDEPENDENT_REVIEW.md",
+      "role": "independent_review",
+      "sha256": "fd2b44273b9542426363b6f3a64a27e77bbafba92913d91584223ec304c785e8",
+      "source_path": "V8_INDEPENDENT_REVIEW.md",
+      "source_sha256": "fd2b44273b9542426363b6f3a64a27e77bbafba92913d91584223ec304c785e8"
+    }
+  ],
+  "candidate_commit": "b34368e9166aeb71dfe50b7b31c71165f1a35151",
+  "capture_manifest": {
+    "bytes": 1508409,
+    "path": "manifest.json",
+    "sha256": "cafdebfd3c7d24511603dcaa49cb316613c280168c47168626f400a4646d398e"
+  },
+  "complete": false,
+  "required_roles": [
+    "analyzer",
+    "audible_review",
+    "av_timeline",
+    "browser_layout",
+    "independent_review",
+    "machine_acceptance",
+    "product_owner_approval",
+    "quarter_speed",
+    "retained_audio"
+  ],
+  "run_id": "visual-review-f8d7726254c4",
+  "schema": "character_director_review_bundle_manifest_v1",
+  "schema_version": 3
+}

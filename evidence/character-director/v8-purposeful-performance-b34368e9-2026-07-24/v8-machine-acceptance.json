@@ -1,0 +1,369 @@
+{
+  "acceptance_scenario": "V8",
+  "analyzer_provenance": {
+    "path": "tools/analyze_character_director_v8.py",
+    "repository_branch": "codex/v8-proof-61a4a1d",
+    "repository_head": "b34368e9166aeb71dfe50b7b31c71165f1a35151",
+    "repository_head_tree": "ea63cc23460d45c18832bc998cfa68ff9bc655f0",
+    "repository_tracked_diff_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "repository_worktree_clean": true,
+    "sha256": "bc24a732d9d5b8ddf516be81c05b5189f45e49ca2e518c37e117530e2212defe"
+  },
+  "checks": [
+    {
+      "detail": {
+        "acceptance_scenario": "V8",
+        "artifact_path": "scenario-program.json",
+        "maximum_capture_frame_count": 2400,
+        "program_id": "v8-purposeful-performance-av",
+        "scenario_count": 2,
+        "schema": "character_director_scenario_program_v2",
+        "schema_version": 2,
+        "source_sha256": "89c4cae479d257b7acb45ef41cc7e9c53695d774abcf68ef47c60d66b8e053f7"
+      },
+      "name": "scenario_program_identity",
+      "passed": true
+    },
+    {
+      "detail": {
+        "first_owned_frame": 2194,
+        "last_owned_frame": 3633,
+        "missing_trace_frames": [],
+        "owned_frame_count": 1440,
+        "owned_transport_contiguous": true,
+        "trace_count": 1440
+      },
+      "name": "continuous_sixty_second_capture",
+      "passed": true
+    },
+    {
+      "detail": {
+        "v8-final-viewer-hold": {
+          "completed": 1008,
+          "observed": 1008,
+          "scheduled": 1008
+        },
+        "v8-gesture-one": {
+          "completed": 192,
+          "observed": 192,
+          "scheduled": 192
+        },
+        "v8-gesture-three": {
+          "completed": 864,
+          "observed": 864,
+          "scheduled": 864
+        },
+        "v8-gesture-two": {
+          "completed": 528,
+          "observed": 528,
+          "scheduled": 528
+        },
+        "v8-listen-left": {
+          "completed": 288,
+          "observed": 288,
+          "scheduled": 288
+        },
+        "v8-listen-right": {
+          "completed": 625,
+          "observed": 624,
+          "scheduled": 624
+        },
+        "v8-listen-up": {
+          "completed": 960,
+          "observed": 960,
+          "scheduled": 960
+        },
+        "v8-phrase-one": {
+          "completed": 96,
+          "observed": 96,
+          "scheduled": 96
+        },
+        "v8-phrase-three": {
+          "completed": 768,
+          "observed": 768,
+          "scheduled": 768
+        },
+        "v8-phrase-two": {
+          "completed": 432,
+          "observed": 432,
+          "scheduled": 432
+        },
+        "v8-return-viewer-one": {
+          "completed": 336,
+          "observed": 336,
+          "scheduled": 336
+        },
+        "v8-return-viewer-two": {
+          "completed": 673,
+          "observed": 672,
+          "scheduled": 672
+        }
+      },
+      "name": "bounded_trace_synchronized_command_schedule",
+      "passed": true
+    },
+    {
+      "detail": {
+        "phrase_body_stillness": {
+          "v8-phrase-1": 1.0,
+          "v8-phrase-2": 1.0,
+          "v8-phrase-3": 1.0
+        },
+        "phrase_frame_counts": {
+          "v8-phrase-1": 62,
+          "v8-phrase-2": 63,
+          "v8-phrase-3": 62
+        },
+        "phrase_sha256": [
+          "bebc556656bd677dcd40af67b291d86dd4af68c21cedade85430b30e05f9fb9a",
+          "bebc556656bd677dcd40af67b291d86dd4af68c21cedade85430b30e05f9fb9a",
+          "bebc556656bd677dcd40af67b291d86dd4af68c21cedade85430b30e05f9fb9a"
+        ],
+        "speech_ids": [
+          "v8-phrase-1",
+          "v8-phrase-2",
+          "v8-phrase-3"
+        ]
+      },
+      "name": "three_identical_phrases_with_distinct_identity",
+      "passed": true
+    },
+    {
+      "detail": {
+        "effect_event_frames": [
+          2392,
+          2729,
+          3064
+        ],
+        "effect_spacing_frames": [
+          337,
+          335
+        ],
+        "gesture_commands": [
+          "v8-gesture-one",
+          "v8-gesture-two",
+          "v8-gesture-three"
+        ]
+      },
+      "name": "three_deliberate_gestures",
+      "passed": true
+    },
+    {
+      "detail": {
+        "body_stillness_ratio": 0.9562195969423211,
+        "detected_nonconstant_loop_period_frames": null,
+        "searched_period_frames": [
+          2,
+          191
+        ]
+      },
+      "name": "purposeful_stillness_without_short_exact_loop",
+      "passed": true
+    },
+    {
+      "detail": {
+        "allowed_interval_frames": [
+          60,
+          156
+        ],
+        "blink_count": 13,
+        "closure_lengths_frames": [
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4
+        ],
+        "distinct_interval_count": 12,
+        "open_intervals_frames": [
+          83,
+          92,
+          132,
+          113,
+          74,
+          135,
+          126,
+          68,
+          96,
+          93,
+          114,
+          116
+        ]
+      },
+      "name": "varied_natural_blinks",
+      "passed": true
+    },
+    {
+      "detail": {
+        "closures": [
+          {
+            "body_hash_count": 1,
+            "first_frame_index": 2331,
+            "last_frame_index": 2334,
+            "passed": true,
+            "root_count": 1
+          },
+          {
+            "body_hash_count": 1,
+            "first_frame_index": 2414,
+            "last_frame_index": 2417,
+            "passed": true,
+            "root_count": 1
+          },
+          {
+            "body_hash_count": 1,
+            "first_frame_index": 2506,
+            "last_frame_index": 2509,
+            "passed": true,
+            "root_count": 1
+          },
+          {
+            "body_hash_count": 1,
+            "first_frame_index": 2638,
+            "last_frame_index": 2641,
+            "passed": true,
+            "root_count": 1
+          },
+          {
+            "body_hash_count": 1,
+            "first_frame_index": 2751,
+            "last_frame_index": 2754,
+            "passed": true,
+            "root_count": 1
+          },
+          {
+            "body_hash_count": 1,
+            "first_frame_index": 2825,
+            "last_frame_index": 2828,
+            "passed": true,
+            "root_count": 1
+          },
+          {
+            "body_hash_count": 1,
+            "first_frame_index": 2960,
+            "last_frame_index": 2963,
+            "passed": true,
+            "root_count": 1
+          },
+          {
+            "body_hash_count": 1,
+            "first_frame_index": 3086,
+            "last_frame_index": 3089,
+            "passed": true,
+            "root_count": 1
+          },
+          {
+            "body_hash_count": 1,
+            "first_frame_index": 3154,
+            "last_frame_index": 3157,
+            "passed": true,
+            "root_count": 1
+          },
+          {
+            "body_hash_count": 1,
+            "first_frame_index": 3250,
+            "last_frame_index": 3253,
+            "passed": true,
+            "root_count": 1
+          },
+          {
+            "body_hash_count": 1,
+            "first_frame_index": 3343,
+            "last_frame_index": 3346,
+            "passed": true,
+            "root_count": 1
+          },
+          {
+            "body_hash_count": 1,
+            "first_frame_index": 3457,
+            "last_frame_index": 3460,
+            "passed": true,
+            "root_count": 1
+          },
+          {
+            "body_hash_count": 1,
+            "first_frame_index": 3573,
+            "last_frame_index": 3576,
+            "passed": true,
+            "root_count": 1
+          }
+        ]
+      },
+      "name": "blink_body_and_root_stability",
+      "passed": true
+    },
+    {
+      "detail": {
+        "final_body_hash_count": 1,
+        "final_frame_count": 48,
+        "final_head_offsets": [
+          [
+            0,
+            0
+          ]
+        ],
+        "final_pose_ids": [
+          "front_idle"
+        ],
+        "final_root_count": 1,
+        "maximum_presented_root_axis_step": 0.0
+      },
+      "name": "stable_root_and_final_hold",
+      "passed": true
+    },
+    {
+      "detail": {
+        "clipped_frames": [],
+        "contact_passed": true,
+        "stage": [
+          240,
+          135
+        ]
+      },
+      "name": "canonical_stage_and_contact_integrity",
+      "passed": true
+    },
+    {
+      "detail": {
+        "analyzer": {
+          "path": "tools/analyze_character_director_v8.py",
+          "repository_branch": "codex/v8-proof-61a4a1d",
+          "repository_head": "b34368e9166aeb71dfe50b7b31c71165f1a35151",
+          "repository_head_tree": "ea63cc23460d45c18832bc998cfa68ff9bc655f0",
+          "repository_tracked_diff_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "repository_worktree_clean": true,
+          "sha256": "bc24a732d9d5b8ddf516be81c05b5189f45e49ca2e518c37e117530e2212defe"
+        },
+        "capture_candidate": {
+          "head": "b34368e9166aeb71dfe50b7b31c71165f1a35151",
+          "head_tree": "ea63cc23460d45c18832bc998cfa68ff9bc655f0",
+          "tracked_diff_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      "name": "analyzer_matches_capture_candidate",
+      "passed": true
+    }
+  ],
+  "metrics": {
+    "blink_count": 13,
+    "body_stillness_ratio": 0.9562195969423211,
+    "clipped_frame_count": 0,
+    "detected_nonconstant_loop_period_frames": null,
+    "distinct_blink_interval_count": 12,
+    "gesture_effect_count": 3,
+    "maximum_presented_root_axis_step": 0.0,
+    "owned_frame_count": 1440
+  },
+  "passed": true,
+  "review_boundary": "Machine checks do not replace normal-speed and quarter-speed review of purposeful stillness, repeated-phrase freshness, and acting appeal.",
+  "schema": "character_director_v8_machine_acceptance_v2",
+  "schema_version": 2
+}
