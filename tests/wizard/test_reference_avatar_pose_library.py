@@ -413,6 +413,9 @@ class ReferenceAvatarPoseLibraryTests(unittest.TestCase):
                     self.assertLess(anchor[0], pose.cols)
                     self.assertGreaterEqual(anchor[1], 0)
                     self.assertLess(anchor[1], pose.rows)
+                occupied = {(cell.x, cell.y) for cell in pose.cells}
+                self.assertIn(pose.anchors["left_foot"], occupied)
+                self.assertIn(pose.anchors["right_foot"], occupied)
 
     def test_airborne_dash_uses_explicit_fit_and_anchors(self):
         pose = get_reference_pose("run_front_airborne_reach")

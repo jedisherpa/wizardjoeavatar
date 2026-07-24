@@ -102,6 +102,45 @@ class ContactVerifierTests(unittest.TestCase):
         self.assertLessEqual(report.maximum_planted_drift_cells, 1e-6)
         self.assertLessEqual(report.maximum_root_residual_cells, 1e-6)
 
+    def test_profile_release_recenters_without_contact_pop_or_stage_escape(self):
+        source = ProceduralWizardFrameSource(cols=240, rows=135)
+        result = source.apply_command_sync(
+            WizardCommand("move", {"x": -3.5, "z": 5.0})
+        )
+        self.assertTrue(result.ok, result.message)
+        records = []
+        for _ in range(128):
+            source.advance_simulation(1 / source.fps)
+            candidate = source.render_captured_candidate_sync(
+                source.capture_render_state()
+            )
+            source.commit_render_candidate(candidate)
+            records.append(candidate.animation_truth)
+
+        release_to_contact_steps = []
+        for left, right in zip(records, records[1:]):
+            if left.support_contact != "none" or right.support_contact == "none":
+                continue
+            release_to_contact_steps.append(
+                max(
+                    abs(right.presented_root_stage.x - left.presented_root_stage.x),
+                    abs(right.presented_root_stage.y - left.presented_root_stage.y),
+                )
+            )
+        spans = [
+            record.silhouette_raster_span
+            for record in records
+            if record.silhouette_raster_span is not None
+        ]
+
+        self.assertGreater(len(release_to_contact_steps), 2)
+        self.assertLessEqual(max(release_to_contact_steps), 2.0)
+        self.assertTrue(spans)
+        self.assertGreaterEqual(min(span.min_x for span in spans), 0)
+        self.assertLess(max(span.max_x for span in spans), source.cols)
+        self.assertGreaterEqual(min(span.min_y for span in spans), 0)
+        self.assertLess(max(span.max_y for span in spans), source.rows)
+
     def test_profile_stop_keeps_contact_locked_through_idle(self):
         source = ProceduralWizardFrameSource()
         result = source.apply_command_sync(

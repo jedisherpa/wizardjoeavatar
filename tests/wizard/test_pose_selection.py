@@ -182,13 +182,13 @@ class PoseSelectionTests(unittest.TestCase):
                     (
                         0.25,
                         "walk_profile_right_passing_left_to_right",
-                        "left_foot",
+                        "none",
                     ),
                     (0.5, "walk_profile_right_contact_right", "right_foot"),
                     (
                         0.75,
                         "walk_profile_right_passing_right_to_left",
-                        "right_foot",
+                        "none",
                     ),
                 ),
             ),
@@ -201,13 +201,13 @@ class PoseSelectionTests(unittest.TestCase):
                     (
                         0.25,
                         "walk_profile_left_passing_left_to_right",
-                        "left_foot",
+                        "none",
                     ),
                     (0.5, "walk_profile_left_contact_right", "right_foot"),
                     (
                         0.75,
                         "walk_profile_left_passing_right_to_left",
-                        "right_foot",
+                        "none",
                     ),
                 ),
             ),
@@ -234,11 +234,14 @@ class PoseSelectionTests(unittest.TestCase):
                 self.assertEqual(sample.clip_id, expected_clip)
                 self.assertEqual(sample.pose_id, expected_pose)
                 self.assertEqual(sample.contact, expected_contact)
-                self.assertEqual(sample.planted_anchor, expected_contact)
+                self.assertEqual(
+                    sample.planted_anchor,
+                    None if expected_contact == "none" else expected_contact,
+                )
                 self.assertEqual(sample.root_policy, "contact_locked")
             self.assertEqual(
                 {contact for _, contact in observed},
-                {"left_foot", "right_foot"},
+                {"left_foot", "right_foot", "none"},
             )
 
     def test_front_to_east_turn_presents_authored_quarter_views_before_profile_walk(self):
@@ -252,12 +255,14 @@ class PoseSelectionTests(unittest.TestCase):
             animation_clip_id="walk_front",
         )
         observed = []
+        observed_contacts = set()
         for _ in range(70):
             sample = _select_graph_v2_sample(state, graph)
             if not observed or observed[-1] != sample.pose_id:
                 observed.append(sample.pose_id)
             self.assertEqual(sample.root_policy, "contact_locked")
-            self.assertIn(sample.contact, {"left_foot", "right_foot"})
+            self.assertIn(sample.contact, {"left_foot", "right_foot", "none"})
+            observed_contacts.add(sample.contact)
             state.simulation_tick += 1
             state.animation_clip_tick += 1
             if state.animation_node_id == "ground_walk_right":
@@ -279,6 +284,7 @@ class PoseSelectionTests(unittest.TestCase):
         self.assertEqual(state.animation_node_id, "ground_walk_right")
         self.assertEqual(sample.clip_id, "walk_right")
         self.assertEqual(sample.contact, "left_foot")
+        self.assertEqual(observed_contacts, {"right_foot", "left_foot", "none"})
 
     def test_front_body_turn_is_not_skipped_when_pathing_facing_already_reached_east(self):
         graph = load_reference_animation_graph_v2()
@@ -372,6 +378,7 @@ class PoseSelectionTests(unittest.TestCase):
                 )
                 observed_poses = []
                 observed_turn_clips = set()
+                observed_contacts = set()
                 for _ in range(100):
                     sample = _select_graph_v2_sample(state, graph)
                     if state.animation_node_id.startswith("ground_reverse_"):
@@ -379,8 +386,9 @@ class PoseSelectionTests(unittest.TestCase):
                         self.assertEqual(sample.root_policy, "contact_locked")
                         self.assertIn(
                             sample.contact,
-                            {"left_foot", "right_foot", "both_feet"},
+                            {"left_foot", "right_foot", "both_feet", "none"},
                         )
+                        observed_contacts.add(sample.contact)
                         if not observed_poses or observed_poses[-1] != sample.pose_id:
                             observed_poses.append(sample.pose_id)
                     state.simulation_tick += 1
@@ -399,6 +407,7 @@ class PoseSelectionTests(unittest.TestCase):
                 self.assertEqual(state.animation_node_id, target_node)
                 self.assertEqual(state.animation_transition_phase, "stable")
                 self.assertEqual(state.animation_transition_generation, 2)
+                self.assertIn("none", observed_contacts)
 
     def test_profile_stops_are_authored_from_either_support_foot(self):
         graph = load_reference_animation_graph_v2()

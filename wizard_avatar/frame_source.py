@@ -1734,7 +1734,7 @@ class ProceduralWizardFrameSource:
         )
         if active_anchor is None:
             offset = tuple(
-                self._approach_zero(value, 1.0)
+                self._approach_zero(value, 2.5)
                 for value in presentation.contact_root_offset
             )
             return (
@@ -1777,11 +1777,11 @@ class ProceduralWizardFrameSource:
                 lock_stage[1] - base_anchor[1],
             )
         else:
-            offset = presentation.contact_root_offset
-            lock_stage = (
-                base_anchor[0] + offset[0],
-                base_anchor[1] + offset[1],
-            )
+            # Each authored stance establishes a fresh world-space plant.
+            # Carrying the previous foot's correction forward double-counts
+            # locomotion and eventually walks the silhouette off the stage.
+            offset = (0.0, 0.0)
+            lock_stage = base_anchor
         return (
             (base_root_screen[0] + offset[0], base_root_screen[1] + offset[1]),
             state.animation_contact_generation,

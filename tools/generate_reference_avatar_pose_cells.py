@@ -150,6 +150,40 @@ def remap_payload_palette(
     }
 
 
+def snap_foot_anchors_to_visible_cells(
+    payload: dict[str, Any],
+    anchors: dict[str, list[int]],
+) -> dict[str, list[int]]:
+    """Bind contact anchors to authored foreground instead of transparent space."""
+
+    occupied = tuple(
+        (int(cell["x"]), int(cell["y"]))
+        for cell in payload["cells"]
+    )
+    if not occupied:
+        raise ValueError("pose payload cannot snap anchors without visible cells")
+    snapped = {name: list(point) for name, point in anchors.items()}
+    for name in ("left_foot", "right_foot"):
+        point = snapped.get(name)
+        if point is None:
+            continue
+        requested_x, requested_y = point
+        snapped[name] = list(
+            min(
+                occupied,
+                key=lambda candidate: (
+                    (candidate[0] - requested_x) ** 2
+                    + (candidate[1] - requested_y) ** 2,
+                    abs(candidate[1] - requested_y),
+                    abs(candidate[0] - requested_x),
+                    candidate[1],
+                    candidate[0],
+                ),
+            )
+        )
+    return snapped
+
+
 def point_from(value: object, *, field_name: str) -> list[int]:
     if not isinstance(value, list) or len(value) != 2:
         raise ValueError(f"{field_name} must be a two-item coordinate list")
@@ -704,27 +738,10 @@ def derive_landmark_warp_payload(
         ]
         for name in sorted(set(from_anchors) & set(to_anchors))
     }
-    if lock_anchor in {"left_foot", "right_foot"}:
-        requested_x, requested_y = anchors[lock_anchor]
-        occupied = [
-            (x, y)
-            for y in range(canvas.height)
-            for x in range(canvas.width)
-            if canvas.get(x, y) is not None
-        ]
-        anchors[lock_anchor] = list(
-            min(
-                occupied,
-                key=lambda point: (
-                    (point[0] - requested_x) ** 2
-                    + (point[1] - requested_y) ** 2,
-                    abs(point[1] - requested_y),
-                    abs(point[0] - requested_x),
-                    point[1],
-                    point[0],
-                ),
-            )
-        )
+    anchors = snap_foot_anchors_to_visible_cells(
+        {"cells": canvas_cells(canvas)},
+        anchors,
+    )
     root = point_from(canonical["root_anchor"], field_name="canonical.root_anchor")
     anchors["root"] = root
     return {
@@ -952,6 +969,15 @@ def generate_pose_library(
             payload = normalized_payloads[pose["id"]]
             generation_rows = generation_rows_by_id[pose["id"]]
         payload = remap_payload_palette(payload, palette_colors)
+        anchors = payload.get("resolved_anchors") or resolve_anchors(
+            manifest,
+            pose,
+            payload,
+        )
+        payload["resolved_anchors"] = snap_foot_anchors_to_visible_cells(
+            payload,
+            anchors,
+        )
         # Derived graphs become valid inputs for later derived graphs in the
         # manifest. This preserves a deterministic, acyclic authoring order
         # while keeping every runtime pose as a fully baked pixel graph.
@@ -984,8 +1010,7 @@ def generate_pose_library(
                 "phase": pose.get("phase"),
                 "tags": list(pose.get("tags", [])),
                 "anchor_space": "local_cells",
-                "anchors": payload.get("resolved_anchors")
-                or resolve_anchors(manifest, pose, payload),
+                "anchors": payload["resolved_anchors"],
                 "quantized_colors": payload["quantized_colors"],
                 "coverage_threshold": payload["coverage_threshold"],
                 "cells": payload["cells"],
