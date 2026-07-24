@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "character_id": "serena-quill-v1",
+  "scale_multiplier": 0.88,
+  "default_pose_id": "neutral_front",
+  "facing_poses": {
+    "south": "neutral_front",
+    "southwest": "neutral_three_quarter_left",
+    "west": "neutral_left_profile",
+    "northwest": "neutral_back_three_quarter_left",
+    "north": "neutral_back",
+    "northeast": "neutral_back_three_quarter_right",
+    "east": "neutral_right_profile",
+    "southeast": "neutral_three_quarter_right"
+  },
+  "action_poses": {
+    "explaining": "facilitation",
+    "pointing": "referral_human_help",
+    "thinking": "reflective_question",
+    "reaction": "emotional_climate_check",
+    "celebrating": "careful_celebration",
+    "containment": "settled_presence",
+    "magic_cast": "luminous_encouragement",
+    "turn_left": "turn_left",
+    "turn_right": "turn_right",
+    "crouch": "crouch",
+    "jump": "jump_airborne",
+    "fall": "fall",
+    "land": "land_contact",
+    "listening": "active_listening",
+    "mentoring_invitation": "mentoring_invitation",
+    "consent_pause": "consent_pause",
+    "orb_reassurance": "orb_reassurance",
+    "protective_wing_fold": "protective_wing_fold",
+    "human_referral": "referral_human_help",
+    "deescalation": "deescalation",
+    "settled_presence": "settled_presence"
+  },
+  "expression_aliases": {
+    "happy": "joy",
+    "amused": "amusement",
+    "surprised": "surprise",
+    "worried": "concern",
+    "confident": "confidence",
+    "skeptical": "skepticism",
+    "thinking": "contemplation",
+    "focused": "determination",
+    "explaining": "curiosity"
+  },
+  "walking_cycle": [
+    "walk_contact_left",
+    "walk_down_left",
+    "walk_passing_right",
+    "walk_up_right"
+  ],
+  "running_cycle": ["run_contact_left", "run_passing_right"],
+  "airborne_poses": {},
+  "speech_poses": [
+    "viseme_rest",
+    "viseme_closed_lips",
+    "viseme_slightly_open",
+    "viseme_wide_vowel",
+    "viseme_open_vowel",
+    "viseme_rounded_vowel",
+    "viseme_teeth_consonant",
+    "viseme_lower_lip_consonant",
+    "viseme_tongue_consonant",
+    "viseme_smile_speaking",
+    "viseme_frown_speaking",
+    "viseme_speech_emphasis",
+    "viseme_breath_pause"
+  ],
+  "blink_poses": {
+    "open": "blink_open",
+    "half_closed": "blink_half_closed",
+    "closed": "blink_closed"
+  }
+}

@@ -1,0 +1,94 @@
+{
+  "attachment_points": [
+    "mouth",
+    "left_eye",
+    "right_eye",
+    "left_hand",
+    "right_hand",
+    "left_foot",
+    "right_foot",
+    "orb"
+  ],
+  "character_id": "serena-quill-v1",
+  "derivation": {
+    "approved_worksheets": "assets/reference/personas/serena-quill/canonical-worksheets",
+    "canonical_reference": "assets/reference/personas/serena-quill/canonical-voxel.png",
+    "flattened_runtime_dependency": false,
+    "generation_profile": "assets/reference/personas/serena-quill/generation-profile.json",
+    "original_reference": "assets/reference/personas/serena-quill/source-reference.png",
+    "runtime_art": "deterministic worksheet-derived direct cell library"
+  },
+  "display_name": "Serena Quill",
+  "hashes": {
+    "animation_graph_sha256": "25cd9eb67320d31182a58b0bec0e6b9e037e9ce948d4b00c78096fd2c8ace23e",
+    "animation_matrix_sha256": "bb9731d964e936a448f8348981bf89fb86df48cf6bf65e685871826568ea8263",
+    "canonical_reference_sha256": "e1a0d2eac7a867b0bbf60810de5cfab40f328bceba6f61b2a18c717b8bcc0349",
+    "character_package_sha256": "1973d1c7a726c0daf23ab56b22491c74b704c4aa6764546df93dbbfe20598de9",
+    "extraction_audit_sha256": "577eb6f58dd03ce95a08243cbd40dc5f1f1309cc532e1ae5c433f5adc3bd790f",
+    "extraction_item_count": 124,
+    "generation_profile_sha256": "25de4fb4ed3718ca948981bffcfbb66fc5c51ef28897e772966d7ca9721dc6ab",
+    "original_reference_sha256": "1a388910b47b351427981f029dfac90366ffbc9bf891f7bcb294994381d19d3d",
+    "pixel_graph_library_sha256": "0f6da5165d029632edba67a12791ca545a5d74d3c81b2c1a98922c7e2f0232fa",
+    "pose_library_sha256": "8aaa6fc0ba3fb0a2a92a0d3ba5f95101b0ea06deba625b9e3f17ad36368c22e4",
+    "runtime_profile_sha256": "43e06748c51f1d3b9896ce396329146e751efe13e0a737542ca982c8491f504e",
+    "worksheet_sha256": {
+      "01-identity-sheet-candidate-v3.png": "a6405defd8a031426bd3f3c2f0bbe426ed5a766f6f5063290cd46ebbd5047fbb",
+      "02-turnaround-sheet-candidate-v1.png": "d476d6aa2d1c2961135a6e6774bde2fc50d765174cddca0cec9c273201bfdafd",
+      "03-neutral-base-poses-candidate-v1.png": "be5702f9e655dac6bf9b826bf162588d0d6cf69f91ddb1e3cf3ead6f8697fdf2",
+      "04-expression-sheet-candidate-v1.png": "f163614a617a6ca601e9862d4b04843ec77b8d9bf53c9b60926951cb8fba1f71",
+      "05-speech-viseme-sheet-candidate-v1.png": "f35dc783f6192a99f6b422c7cc1dd5408d74d8afb57c84277f40aee87582a29f",
+      "06-hand-prop-sheet-candidate-v1.png": "b7ef9f1f79840efc0892f52590341e8847dbb2bd01a1d29456e773ce27661c41",
+      "07-ground-motion-sheet-candidate-v1.png": "85082be9d7566eefe4af68301896ec4d41ec9fb8c5745e7c1840e983500a4413",
+      "08-signature-actions-sheet-candidate-v1.png": "6f3db8f1ab455a593f33af235ba634041899a7d174264c2ab15d7b18271e7c94",
+      "09-interaction-poses-candidate-v1.png": "353b91fc8492aac9f544a79584545dfcd12388416584d43633b9ccec341c856e"
+    }
+  },
+  "identity_lock": {
+    "articulated": [
+      "brows",
+      "eyelids",
+      "mouth",
+      "head inclination",
+      "shoulders",
+      "elbows",
+      "wrists",
+      "hands",
+      "spine",
+      "hips",
+      "knees",
+      "ankles",
+      "robe folds",
+      "wing breathing",
+      "halo secondary lag",
+      "orb luminosity"
+    ],
+    "default_prop": "warm orange-gold orb",
+    "immutable": [
+      "bright-orange stepped bob",
+      "complete centered circular golden halo",
+      "two broad symmetrical warm-cream stepped wings",
+      "warm-cream floor-length broad-sleeved robe",
+      "softly squared peach face",
+      "dark rectangular eyes",
+      "fixed voxel scale and cube seams",
+      "one fixed-size warm orange-gold orb when present"
+    ],
+    "personality": "compassionate bright consent-aware emotionally attentive with gentle feminine movement and plain still containment"
+  },
+  "origin": {
+    "baseline_y": 91,
+    "cols": 72,
+    "root_anchor": [
+      36,
+      91
+    ],
+    "rows": 96,
+    "safe_inset": {
+      "bottom": 4,
+      "left": 4,
+      "right": 4,
+      "top": 4
+    }
+  },
+  "schema_version": 1
+}

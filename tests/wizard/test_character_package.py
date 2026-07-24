@@ -5,13 +5,20 @@ import unittest
 from pathlib import Path
 
 from wizard_avatar.artifact_hashing import sha256_ref
-from wizard_avatar.animation_graph import load_animation_graph
+from wizard_avatar.animation_graph import (
+    AnimationGraphValidationError,
+    clear_animation_graph_cache,
+    load_animation_graph,
+)
 from wizard_avatar.character_package import (
     CharacterPackageValidationError,
     load_character_package,
 )
 from wizard_avatar.frame_source import ProceduralWizardFrameSource
-from wizard_avatar.reference_avatar import get_reference_pose
+from wizard_avatar.reference_avatar import (
+    clear_reference_pose_cache,
+    get_reference_pose,
+)
 
 
 class CharacterPackageTests(unittest.TestCase):
@@ -100,6 +107,11 @@ class CharacterPackageTests(unittest.TestCase):
                 package.renderer_adapter_id,
                 "asciline.pixel_graph.v1",
             )
+            self.assertIsNotNone(package.runtime_profile_contract)
+            self.assertIn(
+                "root",
+                package.runtime_profile_contract.required_anchors,
+            )
             self.assertEqual(
                 set(package.assets),
                 {
@@ -113,6 +125,37 @@ class CharacterPackageTests(unittest.TestCase):
             self.assertEqual(
                 package.assets["pose_library"].sha256,
                 sha256_ref((root / "poses.json").read_bytes()),
+            )
+
+    def test_v2_runtime_uses_package_presentation_scale(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            package_path = self._write_v2_package(root)
+            profile_path = root / "runtime-profile.json"
+            profile = json.loads(profile_path.read_text(encoding="utf-8"))
+            profile["presentation_scale"] = [1, 2]
+            profile_path.write_text(
+                json.dumps(profile, sort_keys=True),
+                encoding="utf-8",
+            )
+            package_raw = json.loads(package_path.read_text(encoding="utf-8"))
+            package_raw["assets"]["runtime_profile"]["sha256"] = sha256_ref(
+                profile_path.read_bytes()
+            )
+            package_path.write_text(
+                json.dumps(package_raw, sort_keys=True),
+                encoding="utf-8",
+            )
+            package = load_character_package(package_path)
+            source = ProceduralWizardFrameSource.__new__(
+                ProceduralWizardFrameSource
+            )
+            source.character_package = package
+            source.pose_library_path = package.pose_library
+
+            self.assertEqual(
+                source._reference_presentation_scale("idle"),
+                0.5,
             )
 
     def test_v2_package_rejects_asset_tampering(self):
@@ -208,6 +251,119 @@ class CharacterPackageTests(unittest.TestCase):
                 "portable-character-graph-v2-revised",
             )
             self.assertEqual(revised_pose.cells[0].rgb, (12, 34, 56))
+
+    def test_v2_runtime_rejects_asset_changes_after_admission(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            package = load_character_package(self._write_v2_package(root))
+
+            pose_path = root / "poses.json"
+            original_pose_bytes = pose_path.read_bytes()
+            pose_path.write_text('{"tampered":true}', encoding="utf-8")
+            clear_reference_pose_cache()
+            with self.assertRaisesRegex(
+                ValueError,
+                "Verified reference pose library bytes changed",
+            ):
+                get_reference_pose("idle", package.pose_library)
+
+            pose_path.write_bytes(original_pose_bytes)
+            graph_path = root / "graph.json"
+            graph_path.write_text('{"tampered":true}', encoding="utf-8")
+            clear_animation_graph_cache()
+            with self.assertRaisesRegex(
+                AnimationGraphValidationError,
+                "verified asset bytes changed",
+            ):
+                load_animation_graph(
+                    package.animation_graph,
+                    pose_manifest_path=package.pose_manifest,
+                    pose_library_path=package.pose_library,
+                )
+
+    def test_v2_profile_references_must_be_selectable_graph_samples(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            package_path = self._write_v2_package(root)
+
+            poses_path = root / "poses.json"
+            poses = json.loads(poses_path.read_text(encoding="utf-8"))
+            other = dict(poses["poses"][0])
+            other["id"] = "other"
+            other["source"] = "generated:other"
+            poses["poses"].append(other)
+            poses_path.write_text(
+                json.dumps(poses, sort_keys=True),
+                encoding="utf-8",
+            )
+
+            manifest_path = root / "pose-manifest.json"
+            manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+            other_manifest = dict(manifest["poses"][0])
+            other_manifest["id"] = "other"
+            other_manifest["source"] = "generated:other"
+            manifest["poses"].append(other_manifest)
+            manifest_path.write_text(
+                json.dumps(manifest, sort_keys=True),
+                encoding="utf-8",
+            )
+
+            graph_path = root / "graph.json"
+            graph = json.loads(graph_path.read_text(encoding="utf-8"))
+            graph["pose_classification"]["other"] = {
+                "roles": ["clip_sample"],
+                "altitude_class": "grounded",
+                "support_contact": "none",
+                "planted_anchor": None,
+                "wing_mode": "hidden",
+                "staff_mode": "absent",
+                "capability_tier": "A",
+            }
+            other_clip = dict(graph["clips"]["idle"])
+            other_clip["clip_id"] = "other"
+            other_clip["samples"] = [
+                {
+                    "pose_id": "other",
+                    "duration_frames": 1,
+                    "support_contact": "none",
+                    "planted_anchor": None,
+                    "markers": [],
+                }
+            ]
+            graph["clips"]["other"] = other_clip
+            graph_path.write_text(
+                json.dumps(graph, sort_keys=True),
+                encoding="utf-8",
+            )
+
+            profile_path = root / "runtime-profile.json"
+            profile = json.loads(profile_path.read_text(encoding="utf-8"))
+            profile["facing_poses"]["north"] = "other"
+            profile_path.write_text(
+                json.dumps(profile, sort_keys=True),
+                encoding="utf-8",
+            )
+
+            package = json.loads(package_path.read_text(encoding="utf-8"))
+            for role, path in (
+                ("pose_library", poses_path),
+                ("pose_manifest", manifest_path),
+                ("animation_graph", graph_path),
+                ("runtime_profile", profile_path),
+            ):
+                package["assets"][role]["sha256"] = sha256_ref(
+                    path.read_bytes()
+                )
+            package_path.write_text(
+                json.dumps(package, sort_keys=True),
+                encoding="utf-8",
+            )
+
+            with self.assertRaisesRegex(
+                CharacterPackageValidationError,
+                "absent from graph clips: other",
+            ):
+                load_character_package(package_path)
 
     def test_v2_package_rejects_unsupported_adapter_and_runtime_api(self):
         with tempfile.TemporaryDirectory() as directory:
@@ -407,7 +563,38 @@ class CharacterPackageTests(unittest.TestCase):
                     }
                 ],
             },
-            "runtime-profile.json": {"default_pose_id": "idle"},
+            "runtime-profile.json": {
+                "schema_version": 1,
+                "character_id": "portable-character-v1",
+                "default_pose_id": "idle",
+                "presentation_scale": [1, 1],
+                "required_anchors": sorted(anchors),
+                "optional_anchors": [],
+                "facing_poses": {
+                    "north": "idle",
+                    "northeast": "idle",
+                    "east": "idle",
+                    "southeast": "idle",
+                    "south": "idle",
+                    "southwest": "idle",
+                    "west": "idle",
+                    "northwest": "idle",
+                },
+                "action_poses": {},
+                "expression_aliases": {},
+                "locomotion_cycles": {
+                    "walk": [],
+                    "run": [],
+                    "flight": [],
+                },
+                "speech_poses": [],
+                "blink_poses": {
+                    "open": "idle",
+                    "half_closed": "idle",
+                    "closed": "idle",
+                },
+                "props": {},
+            },
             "capabilities.json": {"capabilities": ["idle"]},
         }
         for name, payload in files.items():

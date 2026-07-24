@@ -8,11 +8,16 @@ from types import MappingProxyType
 from typing import Any, Mapping, Tuple
 
 from .artifact_hashing import sha256_ref
+from .character_runtime_profile import (
+    CharacterRuntimeProfile,
+    CharacterRuntimeProfileValidationError,
+    load_character_runtime_profile_bytes,
+)
 
 
 DEFINITIONS_DIR = Path(__file__).with_name("definitions")
 WIZARD_JOE_PACKAGE_PATH = DEFINITIONS_DIR / "wizard_joe_character_package.json"
-_ANIMATION_GRAPHS_BY_CHARACTER_ID: dict[str, Path] = {}
+_ANIMATION_GRAPHS_BY_CHARACTER_ID: Mapping[str, Path] = MappingProxyType({})
 _SHA256_REF = re.compile(r"^sha256:[0-9a-f]{64}$")
 _ASSET_ROLE = re.compile(r"^[a-z][a-z0-9_]{0,63}$")
 SUPPORTED_CHARACTER_RUNTIME_API_VERSIONS = frozenset({1})
@@ -58,6 +63,7 @@ class CharacterPackage:
     animation_graph: Path
     pose_manifest: Path | None
     runtime_profile: Path | None
+    runtime_profile_contract: CharacterRuntimeProfile | None
     capability_manifest: Path | None
     default_pose_id: str
     capabilities: Tuple[str, ...]
@@ -126,7 +132,11 @@ def _load_v1_package(
             ),
         }
     )
-    _validate_pose_and_graph(raw["default_pose_id"], pose_library, animation_graph)
+    _validate_pose_and_graph(
+        raw["default_pose_id"],
+        pose_library.read_bytes(),
+        animation_graph.read_bytes(),
+    )
     return CharacterPackage(
         schema_version=1,
         package_path=package_path,
@@ -142,6 +152,7 @@ def _load_v1_package(
         animation_graph=animation_graph,
         pose_manifest=None,
         runtime_profile=None,
+        runtime_profile_contract=None,
         capability_manifest=None,
         default_pose_id=str(raw["default_pose_id"]),
         capabilities=capabilities,
@@ -213,6 +224,7 @@ def _load_v2_package(
             "assets missing required roles: {}".format(", ".join(missing_roles))
         )
     assets: dict[str, CharacterAsset] = {}
+    asset_contents: dict[str, bytes] = {}
     resolved_paths: set[Path] = set()
     for role, descriptor in assets_raw.items():
         if not isinstance(role, str) or _ASSET_ROLE.fullmatch(role) is None:
@@ -238,7 +250,8 @@ def _load_v2_package(
             raise CharacterPackageValidationError(
                 "assets.{}.sha256 must be a lowercase SHA-256 reference".format(role)
             )
-        actual_hash = sha256_ref(asset_path.read_bytes())
+        content = asset_path.read_bytes()
+        actual_hash = sha256_ref(content)
         if actual_hash != declared_hash:
             raise CharacterPackageValidationError(
                 "assets.{}.sha256 does not match asset bytes".format(role)
@@ -248,26 +261,89 @@ def _load_v2_package(
             path=asset_path,
             sha256=actual_hash,
         )
+        asset_contents[role] = content
 
     pose_library = assets["pose_library"].path
     animation_graph = assets["animation_graph"].path
-    _validate_pose_and_graph(raw["default_pose_id"], pose_library, animation_graph)
+    _validate_pose_and_graph(
+        raw["default_pose_id"],
+        asset_contents["pose_library"],
+        asset_contents["animation_graph"],
+    )
+    try:
+        runtime_profile_contract = load_character_runtime_profile_bytes(
+            asset_contents["runtime_profile"]
+        )
+    except CharacterRuntimeProfileValidationError as exc:
+        raise CharacterPackageValidationError(
+            "runtime_profile is invalid: {}".format(exc)
+        ) from exc
+    if runtime_profile_contract.character_id != raw["character_id"]:
+        raise CharacterPackageValidationError(
+            "runtime_profile character_id does not match package"
+        )
+    if runtime_profile_contract.default_pose_id != raw["default_pose_id"]:
+        raise CharacterPackageValidationError(
+            "runtime_profile default_pose_id does not match package"
+        )
+    pose_ids = _pose_ids(
+        json.loads(asset_contents["pose_library"].decode("utf-8"))
+    )
+    missing_profile_poses = sorted(
+        set(runtime_profile_contract.referenced_pose_ids()) - pose_ids
+    )
+    if missing_profile_poses:
+        raise CharacterPackageValidationError(
+            "runtime_profile references unknown poses: {}".format(
+                ", ".join(missing_profile_poses)
+            )
+        )
     try:
         from .animation_graph import (
             AnimationGraphValidationError,
-            clear_animation_graph_cache,
             load_animation_graph,
+            register_verified_animation_assets,
         )
-        from .reference_avatar import clear_reference_pose_cache
+        from .reference_avatar import register_verified_reference_pose_library
 
-        load_animation_graph(
+        animation_graph_contract = load_animation_graph(
             animation_graph,
             pose_manifest_path=assets["pose_manifest"].path,
             pose_library_path=pose_library,
+            required_anchors=runtime_profile_contract.required_anchors,
+            expected_asset_hashes={
+                "animation_graph": assets["animation_graph"].sha256,
+                "pose_manifest": assets["pose_manifest"].sha256,
+                "pose_library": assets["pose_library"].sha256,
+            },
             use_cache=False,
         )
-        clear_animation_graph_cache()
-        clear_reference_pose_cache()
+        missing_runtime_poses = sorted(
+            set(runtime_profile_contract.referenced_pose_ids())
+            - animation_graph_contract.selectable_pose_ids()
+        )
+        if missing_runtime_poses:
+            raise CharacterPackageValidationError(
+                "runtime_profile references poses absent from graph clips: "
+                + ", ".join(missing_runtime_poses)
+            )
+        register_verified_animation_assets(
+            {
+                assets["animation_graph"].path: assets[
+                    "animation_graph"
+                ].sha256,
+                assets["pose_manifest"].path: assets[
+                    "pose_manifest"
+                ].sha256,
+                assets["pose_library"].path: assets["pose_library"].sha256,
+            }
+        )
+        register_verified_reference_pose_library(
+            assets["pose_library"].path,
+            assets["pose_library"].sha256,
+        )
+    except CharacterPackageValidationError:
+        raise
     except (AnimationGraphValidationError, OSError, ValueError) as exc:
         raise CharacterPackageValidationError(
             "animation_graph is not a valid package-owned graph v2: {}".format(exc)
@@ -287,6 +363,7 @@ def _load_v2_package(
         animation_graph=animation_graph,
         pose_manifest=assets["pose_manifest"].path,
         runtime_profile=assets["runtime_profile"].path,
+        runtime_profile_contract=runtime_profile_contract,
         capability_manifest=assets["capability_manifest"].path,
         default_pose_id=str(raw["default_pose_id"]),
         capabilities=capabilities,
@@ -295,13 +372,13 @@ def _load_v2_package(
 
 def _validate_pose_and_graph(
     default_pose_id: Any,
-    pose_library: Path,
-    animation_graph: Path,
+    pose_library: bytes,
+    animation_graph: bytes,
 ) -> None:
     try:
-        pose_raw = json.loads(pose_library.read_text(encoding="utf-8"))
-        graph_raw = json.loads(animation_graph.read_text(encoding="utf-8"))
-    except (OSError, UnicodeError, json.JSONDecodeError) as exc:
+        pose_raw = json.loads(pose_library.decode("utf-8"))
+        graph_raw = json.loads(animation_graph.decode("utf-8"))
+    except (UnicodeError, json.JSONDecodeError) as exc:
         raise CharacterPackageValidationError(str(exc)) from exc
     pose_ids = _pose_ids(pose_raw)
     if default_pose_id not in pose_ids:
@@ -346,12 +423,12 @@ def replace_admitted_character_packages(
 ) -> None:
     """Atomically publish graphs only after a complete registry validates."""
 
+    global _ANIMATION_GRAPHS_BY_CHARACTER_ID
     admitted = {
         character_id: package.animation_graph
         for character_id, package in packages.items()
     }
-    _ANIMATION_GRAPHS_BY_CHARACTER_ID.clear()
-    _ANIMATION_GRAPHS_BY_CHARACTER_ID.update(admitted)
+    _ANIMATION_GRAPHS_BY_CHARACTER_ID = MappingProxyType(admitted)
 
 
 def _package_asset(package_path: Path, value: Any, name: str) -> Path:

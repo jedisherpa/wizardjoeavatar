@@ -1,8 +1,13 @@
+import tempfile
 import unittest
 from fractions import Fraction
 from math import ceil
+from pathlib import Path
 
-from wizard_avatar.animation_graph import load_reference_animation_graph_v2
+from wizard_avatar.animation_graph import (
+    AnimationGraphValidationError,
+    load_reference_animation_graph_v2,
+)
 from wizard_avatar.controller import WizardAvatarController
 from wizard_avatar.gestures import ACTION_TO_CHANNELS
 from wizard_avatar.models import ACTIONS, WizardCommand, WizardState
@@ -39,6 +44,19 @@ def state_for(**overrides):
 
 
 class PoseSelectionTests(unittest.TestCase):
+    def test_strict_character_selection_does_not_fallback_on_graph_failure(self):
+        with tempfile.TemporaryDirectory() as directory:
+            graph_path = Path(directory) / "invalid-graph.json"
+            graph_path.write_text('{"schema_version":2}', encoding="utf-8")
+
+            with self.assertRaises(AnimationGraphValidationError):
+                select_reference_pose_sample(
+                    state_for(),
+                    AVAILABLE_POSES,
+                    animation_graph_path=graph_path,
+                    fail_closed=True,
+                )
+
     def test_pose_override_selects_requested_pose_above_locomotion(self):
         state = state_for(
             locomotion="walking",

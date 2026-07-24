@@ -1,0 +1,174 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://wizardjoe.local/schemas/character_runtime_profile_v1.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "character_id",
+    "default_pose_id",
+    "presentation_scale",
+    "required_anchors",
+    "optional_anchors",
+    "facing_poses",
+    "action_poses",
+    "expression_aliases",
+    "locomotion_cycles",
+    "speech_poses",
+    "blink_poses",
+    "props"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "character_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "default_pose_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "presentation_scale": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 2,
+      "items": {
+        "type": "integer",
+        "minimum": 1
+      }
+    },
+    "required_anchors": {
+      "$ref": "#/$defs/identifiers"
+    },
+    "optional_anchors": {
+      "$ref": "#/$defs/optional_identifiers"
+    },
+    "facing_poses": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "north",
+        "northeast",
+        "east",
+        "southeast",
+        "south",
+        "southwest",
+        "west",
+        "northwest"
+      ],
+      "properties": {
+        "north": {"$ref": "#/$defs/text"},
+        "northeast": {"$ref": "#/$defs/text"},
+        "east": {"$ref": "#/$defs/text"},
+        "southeast": {"$ref": "#/$defs/text"},
+        "south": {"$ref": "#/$defs/text"},
+        "southwest": {"$ref": "#/$defs/text"},
+        "west": {"$ref": "#/$defs/text"},
+        "northwest": {"$ref": "#/$defs/text"}
+      }
+    },
+    "action_poses": {
+      "$ref": "#/$defs/text_map"
+    },
+    "expression_aliases": {
+      "$ref": "#/$defs/text_map"
+    },
+    "locomotion_cycles": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["walk", "run", "flight"],
+      "properties": {
+        "walk": {"$ref": "#/$defs/texts"},
+        "run": {"$ref": "#/$defs/texts"},
+        "flight": {"$ref": "#/$defs/texts"}
+      }
+    },
+    "speech_poses": {
+      "$ref": "#/$defs/texts"
+    },
+    "blink_poses": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["open", "half_closed", "closed"],
+      "properties": {
+        "open": {"$ref": "#/$defs/text"},
+        "half_closed": {"$ref": "#/$defs/text"},
+        "closed": {"$ref": "#/$defs/text"}
+      }
+    },
+    "props": {
+      "type": "object",
+      "additionalProperties": false,
+      "patternProperties": {
+        "^[a-z][a-z0-9_]{0,63}$": {
+          "$ref": "#/$defs/prop"
+        }
+      }
+    }
+  },
+  "$defs": {
+    "text": {
+      "type": "string",
+      "minLength": 1
+    },
+    "identifier": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9_]{0,63}$"
+    },
+    "texts": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/text"
+      }
+    },
+    "identifiers": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/identifier"
+      }
+    },
+    "optional_identifiers": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/identifier"
+      }
+    },
+    "text_map": {
+      "type": "object",
+      "additionalProperties": false,
+      "patternProperties": {
+        "^[a-z][a-z0-9_]{0,63}$": {
+          "$ref": "#/$defs/text"
+        }
+      }
+    },
+    "prop": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["composition", "anchor", "permission_capability"],
+      "properties": {
+        "composition": {
+          "enum": ["whole_pose", "overlay"]
+        },
+        "anchor": {
+          "oneOf": [
+            {"type": "null"},
+            {"$ref": "#/$defs/identifier"}
+          ]
+        },
+        "permission_capability": {
+          "oneOf": [
+            {"type": "null"},
+            {"$ref": "#/$defs/identifier"}
+          ]
+        }
+      }
+    }
+  }
+}

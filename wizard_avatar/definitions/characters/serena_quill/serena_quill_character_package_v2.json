@@ -1,0 +1,61 @@
+{
+  "assets": {
+    "animation_graph": {
+      "path": "serena_quill_animation_graph_v2.json",
+      "sha256": "sha256:aecfba8f5360482a5b24847916a73daf030a582e3e26e38f7bac540790efde9f"
+    },
+    "capability_manifest": {
+      "path": "serena_quill_capability_profile_v1.json",
+      "sha256": "sha256:9519827d02aaa1cd2535074b3eb1d3c21cdd5f3a71c788d5126fc6e84294853d"
+    },
+    "extraction_audit": {
+      "path": "intake/serena_quill_extraction_audit.json",
+      "sha256": "sha256:577eb6f58dd03ce95a08243cbd40dc5f1f1309cc532e1ae5c433f5adc3bd790f"
+    },
+    "intake_manifest": {
+      "path": "serena_quill_intake_manifest.json",
+      "sha256": "sha256:924a83c4013c657217637cb6b22582c2aaa934f404892c8e0040ced6503ec98a"
+    },
+    "pixel_graph_library": {
+      "path": "intake/serena_quill_pixel_graphs.json",
+      "sha256": "sha256:0f6da5165d029632edba67a12791ca545a5d74d3c81b2c1a98922c7e2f0232fa"
+    },
+    "pose_library": {
+      "path": "intake/serena_quill_pose_cells.json",
+      "sha256": "sha256:8aaa6fc0ba3fb0a2a92a0d3ba5f95101b0ea06deba625b9e3f17ad36368c22e4"
+    },
+    "pose_manifest": {
+      "path": "serena_quill_pose_manifest.json",
+      "sha256": "sha256:6ae18212d89155a63b50fdb1631d2535f75006cd5ead516ffb1f90f88bdb1fec"
+    },
+    "runtime_profile": {
+      "path": "serena_quill_runtime_profile_v1.json",
+      "sha256": "sha256:fc4f72f865e0820b83c9522b99039b8028d01ead12361239a54ad16e42b9e71c"
+    },
+    "source_animation_matrix": {
+      "path": "intake/serena_quill_animation_matrix.json",
+      "sha256": "sha256:bb9731d964e936a448f8348981bf89fb86df48cf6bf65e685871826568ea8263"
+    },
+    "source_character_manifest": {
+      "path": "intake/serena_quill_character_manifest.json",
+      "sha256": "sha256:2ed81123cce1ac7a6cc2a1c2f22de550f5edb8cd68f1284affec2469d035003a"
+    }
+  },
+  "capabilities": [
+    "eight_direction_static_facing",
+    "evidence_backed_static_actions",
+    "speech_whole_pose_frames",
+    "blink_whole_pose_frames",
+    "orb_whole_pose_states"
+  ],
+  "character_id": "serena-quill-v1",
+  "default_pose_id": "neutral_front",
+  "display_name": "Serena Quill",
+  "renderer": "asciline_square_cells",
+  "renderer_adapter_id": "asciline.pixel_graph.v1",
+  "runtime_api": {
+    "max": 1,
+    "min": 1
+  },
+  "schema_version": 2
+}

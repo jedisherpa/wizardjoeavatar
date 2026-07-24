@@ -24,6 +24,7 @@ from .animation_trace import (
     transformed_anchor,
 )
 from .animation_graph import (
+    DEFAULT_REQUIRED_POSE_ANCHORS,
     REFERENCE_POSE_MANIFEST_PATH,
     AnimationGraph,
     AnimationGraphValidationError,
@@ -280,16 +281,29 @@ class ProceduralWizardFrameSource:
                     or REFERENCE_POSE_MANIFEST_PATH
                 ),
                 pose_library_path=self.character_package.pose_library,
+                required_anchors=(
+                    self.character_package.runtime_profile_contract.required_anchors
+                    if self.character_package.runtime_profile_contract is not None
+                    else DEFAULT_REQUIRED_POSE_ANCHORS
+                ),
             )
         except AnimationGraphValidationError:
+            if self.character_package.schema_version >= 2:
+                raise
             # Generic character packages may still carry the legacy/minimal
             # graph accepted by the package loader. Permission rendering must
             # not make Wizard Joe's v2 graph a cross-character requirement.
             self.animation_graph = None
         self.pose_library_path = self.character_package.pose_library
         self.pose_ids = reference_pose_ids(self.pose_library_path)
+        controller_pose_ids = (
+            self.animation_graph.selectable_pose_ids()
+            if self.character_package.schema_version >= 2
+            and self.animation_graph is not None
+            else self.pose_ids
+        )
         self.controller = WizardAvatarController(
-            self.pose_ids,
+            controller_pose_ids,
             self.character_package.character_id,
         )
         self.frame_index = 0
@@ -349,6 +363,12 @@ class ProceduralWizardFrameSource:
                 or REFERENCE_POSE_MANIFEST_PATH
             ),
             self.character_package.pose_library,
+            (
+                self.character_package.runtime_profile_contract.required_anchors
+                if self.character_package.runtime_profile_contract is not None
+                else DEFAULT_REQUIRED_POSE_ANCHORS
+            ),
+            fail_closed=self.character_package.schema_version >= 2,
         )
         if state.pose_id != sample.pose_id:
             state.last_pose_id = state.pose_id
@@ -664,10 +684,7 @@ class ProceduralWizardFrameSource:
                 state,
                 permission_world,
             )
-            render_scale *= reference_pose_presentation_scale(
-                pose_id,
-                self.pose_library_path,
-            )
+            render_scale *= self._reference_presentation_scale(pose_id)
             local, root_anchor, mouth_anchor = self._reference_pose_canvas_for_sample(
                 pose_id,
             )
@@ -1178,6 +1195,16 @@ class ProceduralWizardFrameSource:
         )
         fallback = self.animation_graph.clips[fallback_id]
         return fallback.samples[0].pose_id
+
+    def _reference_presentation_scale(self, pose_id: str) -> float:
+        profile = self.character_package.runtime_profile_contract
+        if profile is not None:
+            numerator, denominator = profile.presentation_scale
+            return numerator / denominator
+        return reference_pose_presentation_scale(
+            pose_id,
+            self.pose_library_path,
+        )
 
     def _apply_reference_permission_surfaces(
         self,

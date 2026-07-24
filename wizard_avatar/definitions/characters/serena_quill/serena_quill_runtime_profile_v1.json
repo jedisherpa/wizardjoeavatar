@@ -1,0 +1,93 @@
+{
+  "action_poses": {
+    "celebrating": "careful_celebration",
+    "consent_pause": "consent_pause",
+    "containment": "settled_presence",
+    "deescalation": "deescalation",
+    "explaining": "facilitation",
+    "human_referral": "referral_human_help",
+    "jump": "jump_airborne",
+    "listening": "active_listening",
+    "magic_cast": "luminous_encouragement",
+    "mentoring_invitation": "mentoring_invitation",
+    "orb_reassurance": "orb_reassurance",
+    "pointing": "referral_human_help",
+    "protective_wing_fold": "protective_wing_fold",
+    "reaction": "emotional_climate_check",
+    "settled_presence": "settled_presence",
+    "thinking": "reflective_question"
+  },
+  "blink_poses": {
+    "closed": "blink_closed",
+    "half_closed": "blink_half_closed",
+    "open": "blink_open"
+  },
+  "character_id": "serena-quill-v1",
+  "default_pose_id": "neutral_front",
+  "expression_aliases": {
+    "amused": "amusement",
+    "confident": "confidence",
+    "explaining": "curiosity",
+    "focused": "determination",
+    "happy": "joy",
+    "skeptical": "skepticism",
+    "surprised": "surprise",
+    "thinking": "contemplation",
+    "worried": "concern"
+  },
+  "facing_poses": {
+    "east": "neutral_right_profile",
+    "north": "neutral_back",
+    "northeast": "neutral_back_three_quarter_right",
+    "northwest": "neutral_back_three_quarter_left",
+    "south": "neutral_front",
+    "southeast": "neutral_three_quarter_right",
+    "southwest": "neutral_three_quarter_left",
+    "west": "neutral_left_profile"
+  },
+  "locomotion_cycles": {
+    "flight": [],
+    "run": [],
+    "walk": []
+  },
+  "optional_anchors": [
+    "orb"
+  ],
+  "presentation_scale": [
+    22,
+    25
+  ],
+  "props": {
+    "orb": {
+      "anchor": "orb",
+      "composition": "whole_pose",
+      "permission_capability": null
+    }
+  },
+  "required_anchors": [
+    "root",
+    "mouth",
+    "left_eye",
+    "right_eye",
+    "left_foot",
+    "right_foot",
+    "left_hand",
+    "right_hand"
+  ],
+  "schema_version": 1,
+  "speech_poses": [
+    "viseme_rest",
+    "viseme_closed_lips",
+    "viseme_slightly_open",
+    "viseme_wide_vowel",
+    "viseme_open_vowel",
+    "viseme_rounded_vowel",
+    "viseme_teeth_consonant",
+    "viseme_lower_lip_consonant",
+    "viseme_tongue_consonant",
+    "viseme_smile_speaking",
+    "viseme_frown_speaking",
+    "viseme_speech_emphasis",
+    "viseme_breath_pause"
+  ]
+}

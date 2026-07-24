@@ -2,9 +2,11 @@ from __future__ import annotations
 
 import hashlib
 import json
+import threading
 from dataclasses import dataclass
 from functools import lru_cache
 from pathlib import Path
+from types import MappingProxyType
 from typing import Any, Dict, Iterable, Mapping, Optional, Sequence, Tuple
 
 
@@ -14,6 +16,20 @@ ANIMATION_GRAPH_V2_PATH = DEFINITIONS_DIR / "reference_avatar_animation_graph_v2
 ANIMATION_GRAPH_V2_SCHEMA_PATH = DEFINITIONS_DIR / "reference_avatar_animation_graph_v2.schema.json"
 REFERENCE_POSE_LIBRARY_PATH = DEFINITIONS_DIR / "reference_avatar_pose_cells.json"
 REFERENCE_POSE_MANIFEST_PATH = ROOT / "assets" / "reference" / "motion_sources" / "manifest.json"
+DEFAULT_REQUIRED_POSE_ANCHORS = (
+    "root",
+    "mouth",
+    "left_eye",
+    "right_eye",
+    "left_foot",
+    "right_foot",
+    "left_hand",
+    "right_hand",
+    "staff_hand",
+    "staff_tip",
+)
+_VERIFIED_ANIMATION_ASSET_HASHES: Mapping[Path, str] = MappingProxyType({})
+_VERIFIED_ANIMATION_ASSET_LOCK = threading.RLock()
 
 FACINGS = frozenset(
     {
@@ -319,12 +335,42 @@ class AnimationGraph:
         )
         return max(matches, key=lambda transition: transition.priority, default=None)
 
+    def runtime_node_ids(self) -> frozenset[str]:
+        # The runtime's documented fallback hard-commits to a requested node
+        # when no authored transition exists. Every node is therefore runtime
+        # reachable; clips without a node remain deliberately unselectable.
+        return frozenset(self.nodes)
 
-def _load_json(path: Path) -> Any:
+    def selectable_pose_ids(self) -> frozenset[str]:
+        reachable_clips = {
+            self.nodes[node_id].clip_id
+            for node_id in self.runtime_node_ids()
+        }
+        return frozenset(
+            sample.pose_id
+            for clip_id in reachable_clips
+            for sample in self.clips[clip_id].samples
+        )
+
+
+def _load_json(
+    path: Path,
+    expected_sha256: Optional[str] = None,
+) -> Any:
     try:
-        with path.open("r", encoding="utf-8") as handle:
-            return json.load(handle)
-    except json.JSONDecodeError as exc:
+        content = path.read_bytes()
+        expected = (
+            expected_sha256
+            if expected_sha256 is not None
+            else _VERIFIED_ANIMATION_ASSET_HASHES.get(path.resolve())
+        )
+        actual = "sha256:" + hashlib.sha256(content).hexdigest()
+        if expected is not None and actual != expected:
+            raise AnimationGraphValidationError(
+                "{}: verified asset bytes changed".format(path)
+            )
+        return json.loads(content.decode("utf-8"))
+    except (UnicodeError, json.JSONDecodeError) as exc:
         raise AnimationGraphValidationError(f"{path}: invalid JSON: {exc}") from exc
 
 
@@ -406,16 +452,38 @@ def _point(value: Any, path: str) -> Tuple[int, int]:
 def load_pose_catalog(
     manifest_path: Path = REFERENCE_POSE_MANIFEST_PATH,
     library_path: Path = REFERENCE_POSE_LIBRARY_PATH,
+    required_anchors: Iterable[str] = DEFAULT_REQUIRED_POSE_ANCHORS,
+    *,
+    expected_manifest_sha256: Optional[str] = None,
+    expected_library_sha256: Optional[str] = None,
 ) -> Mapping[str, PoseMetadata]:
     """Load and cross-check metadata from the source manifest and cell library."""
 
     from .motion_manifest import expand_derived_bridge_series
 
+    required_anchor_set = frozenset(required_anchors)
+    if not required_anchor_set or "root" not in required_anchor_set:
+        raise _path_error(
+            "required_anchors",
+            "must include root and must not be empty",
+        )
+
     manifest = _mapping(
-        expand_derived_bridge_series(_load_json(Path(manifest_path))),
+        expand_derived_bridge_series(
+            _load_json(
+                Path(manifest_path),
+                expected_manifest_sha256,
+            )
+        ),
         str(manifest_path),
     )
-    library = _mapping(_load_json(Path(library_path)), str(library_path))
+    library = _mapping(
+        _load_json(
+            Path(library_path),
+            expected_library_sha256,
+        ),
+        str(library_path),
+    )
     manifest_poses = _sequence(manifest.get("poses"), f"{manifest_path}.poses")
     library_poses = _sequence(library.get("poses"), f"{library_path}.poses")
     manifest_asset_set = _string(manifest.get("asset_set_id"), f"{manifest_path}.asset_set_id")
@@ -457,7 +525,7 @@ def load_pose_catalog(
             ("phase", phase),
             ("tags", list(tags)),
         ):
-            if library_pose.get(field) != expected:
+            if field in library_pose and library_pose[field] != expected:
                 raise _path_error(
                     f"{library_path}.poses[{pose_id!r}].{field}",
                     "does not match source manifest",
@@ -468,19 +536,7 @@ def load_pose_catalog(
             _string(name, f"anchors key for {pose_id}"): _point(point, f"anchors.{pose_id}.{name}")
             for name, point in anchors_raw.items()
         }
-        required_anchors = {
-            "root",
-            "mouth",
-            "left_eye",
-            "right_eye",
-            "left_foot",
-            "right_foot",
-            "left_hand",
-            "right_hand",
-            "staff_hand",
-            "staff_tip",
-        }
-        missing_anchors = sorted(required_anchors - set(anchors))
+        missing_anchors = sorted(required_anchor_set - set(anchors))
         if missing_anchors:
             raise _path_error(f"anchors.{pose_id}", f"missing anchors: {', '.join(missing_anchors)}")
         cells = _sequence(library_pose.get("cells"), f"{library_path}.poses[{pose_id!r}].cells")
@@ -695,6 +751,7 @@ def parse_animation_graph(
     payload: Any,
     pose_catalog: Optional[Mapping[str, PoseMetadata]] = None,
     pose_manifest_path: Path = REFERENCE_POSE_MANIFEST_PATH,
+    expected_pose_manifest_sha256: Optional[str] = None,
 ) -> AnimationGraph:
     """Strictly parse graph v2 data and validate all cross-references."""
 
@@ -729,7 +786,13 @@ def parse_animation_graph(
     # The catalog was cross-checked while loading. The graph asset ID is checked
     # against the canonical source manifest below without rereading pose cells.
     manifest_path = Path(pose_manifest_path)
-    manifest = _mapping(_load_json(manifest_path), str(manifest_path))
+    manifest = _mapping(
+        _load_json(
+            manifest_path,
+            expected_pose_manifest_sha256,
+        ),
+        str(manifest_path),
+    )
     catalog_asset_ids.add(_string(manifest.get("asset_set_id"), "manifest.asset_set_id"))
     if len(catalog_asset_ids) != 1:
         raise _path_error("$.asset_set_id", "does not match the pose catalog")
@@ -916,23 +979,46 @@ def _load_animation_graph_cached(
     path: str,
     manifest_path: str,
     library_path: str,
+    required_anchors: Tuple[str, ...],
+    expected_graph_sha256: Optional[str],
+    expected_manifest_sha256: Optional[str],
+    expected_library_sha256: Optional[str],
 ) -> AnimationGraph:
-    return _load_animation_graph_uncached(path, manifest_path, library_path)
+    return _load_animation_graph_uncached(
+        path,
+        manifest_path,
+        library_path,
+        required_anchors,
+        expected_graph_sha256,
+        expected_manifest_sha256,
+        expected_library_sha256,
+    )
 
 
 def _load_animation_graph_uncached(
     path: str,
     manifest_path: str,
     library_path: str,
+    required_anchors: Tuple[str, ...],
+    expected_graph_sha256: Optional[str],
+    expected_manifest_sha256: Optional[str],
+    expected_library_sha256: Optional[str],
 ) -> AnimationGraph:
     catalog = load_pose_catalog(
         Path(manifest_path),
         Path(library_path),
+        required_anchors,
+        expected_manifest_sha256=expected_manifest_sha256,
+        expected_library_sha256=expected_library_sha256,
     )
     return parse_animation_graph(
-        _load_json(Path(path)),
+        _load_json(
+            Path(path),
+            expected_graph_sha256,
+        ),
         pose_catalog=catalog,
         pose_manifest_path=Path(manifest_path),
+        expected_pose_manifest_sha256=expected_manifest_sha256,
     )
 
 
@@ -941,12 +1027,31 @@ def load_animation_graph(
     *,
     pose_manifest_path: Path = REFERENCE_POSE_MANIFEST_PATH,
     pose_library_path: Path = REFERENCE_POSE_LIBRARY_PATH,
+    required_anchors: Iterable[str] = DEFAULT_REQUIRED_POSE_ANCHORS,
+    expected_asset_hashes: Optional[Mapping[str, str]] = None,
     use_cache: bool = True,
 ) -> AnimationGraph:
+    graph_path = Path(path).resolve()
+    manifest_path = Path(pose_manifest_path).resolve()
+    library_path = Path(pose_library_path).resolve()
+    explicit = expected_asset_hashes or {}
     arguments = (
-        str(Path(path).resolve()),
-        str(Path(pose_manifest_path).resolve()),
-        str(Path(pose_library_path).resolve()),
+        str(graph_path),
+        str(manifest_path),
+        str(library_path),
+        tuple(sorted(set(required_anchors))),
+        explicit.get(
+            "animation_graph",
+            _VERIFIED_ANIMATION_ASSET_HASHES.get(graph_path),
+        ),
+        explicit.get(
+            "pose_manifest",
+            _VERIFIED_ANIMATION_ASSET_HASHES.get(manifest_path),
+        ),
+        explicit.get(
+            "pose_library",
+            _VERIFIED_ANIMATION_ASSET_HASHES.get(library_path),
+        ),
     )
     if use_cache:
         return _load_animation_graph_cached(*arguments)
@@ -958,6 +1063,21 @@ def clear_animation_graph_cache() -> None:
 
     _load_animation_graph_cached.cache_clear()
     load_reference_animation_graph_v2.cache_clear()
+
+
+def register_verified_animation_assets(
+    assets: Mapping[Path, str],
+) -> None:
+    """Bind future graph parsing to package-admitted asset hashes."""
+
+    global _VERIFIED_ANIMATION_ASSET_HASHES
+    with _VERIFIED_ANIMATION_ASSET_LOCK:
+        updated = dict(_VERIFIED_ANIMATION_ASSET_HASHES)
+        for raw_path, sha256 in assets.items():
+            path = Path(raw_path).resolve()
+            updated[path] = sha256
+        _VERIFIED_ANIMATION_ASSET_HASHES = MappingProxyType(updated)
+        clear_animation_graph_cache()
 
 
 @lru_cache(maxsize=1)
@@ -1022,6 +1142,7 @@ def _markers_crossed(
 __all__ = [
     "ANIMATION_GRAPH_V2_PATH",
     "ANIMATION_GRAPH_V2_SCHEMA_PATH",
+    "DEFAULT_REQUIRED_POSE_ANCHORS",
     "REFERENCE_POSE_LIBRARY_PATH",
     "REFERENCE_POSE_MANIFEST_PATH",
     "AnimationGraph",
@@ -1040,4 +1161,5 @@ __all__ = [
     "load_pose_catalog",
     "load_reference_animation_graph_v2",
     "parse_animation_graph",
+    "register_verified_animation_assets",
 ]

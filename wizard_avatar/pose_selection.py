@@ -7,6 +7,7 @@ from typing import Iterable, Optional, Set
 
 from .animation_graph import (
     ANIMATION_GRAPH_V2_PATH,
+    DEFAULT_REQUIRED_POSE_ANCHORS,
     REFERENCE_POSE_LIBRARY_PATH,
     REFERENCE_POSE_MANIFEST_PATH,
     AnimationGraph,
@@ -103,6 +104,8 @@ def select_reference_pose_id(
     animation_graph_path: Optional[Path] = None,
     pose_manifest_path: Optional[Path] = None,
     pose_library_path: Optional[Path] = None,
+    required_anchors: Optional[Iterable[str]] = None,
+    fail_closed: bool = False,
 ) -> str:
     return select_reference_pose_sample(
         state,
@@ -110,6 +113,8 @@ def select_reference_pose_id(
         animation_graph_path,
         pose_manifest_path,
         pose_library_path,
+        required_anchors,
+        fail_closed,
     ).pose_id
 
 
@@ -119,12 +124,14 @@ def select_reference_pose_sample(
     animation_graph_path: Optional[Path] = None,
     pose_manifest_path: Optional[Path] = None,
     pose_library_path: Optional[Path] = None,
+    required_anchors: Optional[Iterable[str]] = None,
+    fail_closed: bool = False,
 ) -> PoseSample:
     available = set(available_pose_ids if available_pose_ids is not None else reference_pose_ids())
     if not available:
         raise ValueError("No reference poses are available")
     state.reconcile_compatibility_state()
-    if state.pose_override_id is not None:
+    if state.pose_override_id is not None and not fail_closed:
         pose_id = _first_available(
             state.pose_override_id,
             (_idle_pose_id(state.facing), FRONT_IDLE_POSE),
@@ -150,9 +157,34 @@ def select_reference_pose_sample(
                 if pose_library_path is not None
                 else REFERENCE_POSE_LIBRARY_PATH
             ),
+            required_anchors=(
+                tuple(required_anchors)
+                if required_anchors is not None
+                else DEFAULT_REQUIRED_POSE_ANCHORS
+            ),
         )
+        if state.pose_override_id is not None:
+            if state.pose_override_id not in graph.selectable_pose_ids():
+                raise AnimationGraphValidationError(
+                    "Pose override is not selectable in the admitted graph: "
+                    + state.pose_override_id
+                )
+            return PoseSample(
+                pose_id=state.pose_override_id,
+                contact="showcase",
+                clip_id="pose_showcase",
+            )
         sample = _select_graph_v2_sample(state, graph)
-    except (AnimationGraphValidationError, FileNotFoundError, KeyError, OSError, TypeError, ValueError):
+    except (
+        AnimationGraphValidationError,
+        FileNotFoundError,
+        KeyError,
+        OSError,
+        TypeError,
+        ValueError,
+    ):
+        if fail_closed:
+            raise
         requested = _select_requested_pose_id(state)
         pose_id = _first_available(requested, _fallbacks_for(requested, state), available)
         return PoseSample(pose_id=pose_id, phase=state.walk_phase % 1.0)

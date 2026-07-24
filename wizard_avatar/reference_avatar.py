@@ -1,9 +1,12 @@
 from __future__ import annotations
 
+import hashlib
 import json
+import threading
 from dataclasses import dataclass
 from functools import lru_cache
 from pathlib import Path
+from types import MappingProxyType
 from typing import Dict, Mapping, Tuple
 
 from .compositor import CellCanvas
@@ -15,6 +18,8 @@ REFERENCE_POSE_CELL_PATH = Path(__file__).with_name("definitions") / "reference_
 REFERENCE_FRONT_IDLE_POSE_ID = "front_idle"
 REFERENCE_LAYER_ID = "reference_voxel_png"
 REFERENCE_SCALE_MULTIPLIER = 0.90
+_VERIFIED_POSE_LIBRARY_HASHES: Mapping[Path, str] = MappingProxyType({})
+_VERIFIED_POSE_LIBRARY_HASH_LOCK = threading.RLock()
 
 
 @dataclass(frozen=True)
@@ -45,8 +50,32 @@ def _load_reference_payload() -> dict:
 
 @lru_cache(maxsize=None)
 def load_reference_pose_library(path: Path = REFERENCE_POSE_CELL_PATH) -> dict:
-    with open(Path(path).resolve(), "r", encoding="utf-8") as handle:
-        return json.load(handle)
+    library_path = Path(path).resolve()
+    content = library_path.read_bytes()
+    expected = _VERIFIED_POSE_LIBRARY_HASHES.get(library_path)
+    actual = "sha256:" + hashlib.sha256(content).hexdigest()
+    if expected is not None and actual != expected:
+        raise ValueError(
+            "Verified reference pose library bytes changed: {}".format(
+                library_path
+            )
+        )
+    return json.loads(content.decode("utf-8"))
+
+
+def register_verified_reference_pose_library(
+    path: Path,
+    sha256: str,
+) -> None:
+    """Bind later pose parsing to the bytes admitted by a character package."""
+
+    global _VERIFIED_POSE_LIBRARY_HASHES
+    with _VERIFIED_POSE_LIBRARY_HASH_LOCK:
+        library_path = Path(path).resolve()
+        updated = dict(_VERIFIED_POSE_LIBRARY_HASHES)
+        updated[library_path] = sha256
+        _VERIFIED_POSE_LIBRARY_HASHES = MappingProxyType(updated)
+        clear_reference_pose_cache()
 
 
 def clear_reference_pose_cache() -> None:

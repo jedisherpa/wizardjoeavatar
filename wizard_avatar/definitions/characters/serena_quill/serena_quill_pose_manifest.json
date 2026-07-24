@@ -1,0 +1,3910 @@
+{
+  "asset_set_id": "serena-quill-worksheet-motion-v1",
+  "character_id": "serena-quill-v1",
+  "optional_anchors": [
+    "orb"
+  ],
+  "poses": [
+    {
+      "actions": [
+        "idle"
+      ],
+      "admission": "graph_admitted",
+      "composition": "whole_pose",
+      "contact_profile": {
+        "altitude_class": "grounded",
+        "evidence": "unreviewed_static",
+        "planted_anchor": null,
+        "root_policy": "fixed",
+        "support_contact": "none"
+      },
+      "description": "neutral front",
+      "facing": "south",
+      "features": {
+        "halo": true,
+        "orb": false,
+        "wings": true
+      },
+      "id": "neutral_front",
+      "locomotion": "idle",
+      "phase": null,
+      "provenance": {
+        "migration_status": "graph_admitted",
+        "source_commit": "196c2389c71ca5276eed594d822d29b76310dd2f",
+        "source_graph_kind": "full_body_graph"
+      },
+      "source": "assets/reference/personas/serena-quill/canonical-worksheets/02-turnaround-sheet-candidate-v1.png#panel-0",
+      "tags": [
+        "neutral",
+        "full_body_graph",
+        "graph_admitted",
+        "unreviewed_static"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "admission": "graph_admitted",
+      "composition": "whole_pose",
+      "contact_profile": {
+        "altitude_class": "grounded",
+        "evidence": "unreviewed_static",
+        "planted_anchor": null,
+        "root_policy": "fixed",
+        "support_contact": "none"
+      },
+      "description": "neutral three quarter left",
+      "facing": "southwest",
+      "features": {
+        "halo": true,
+        "orb": false,
+        "wings": true
+      },
+      "id": "neutral_three_quarter_left",
+      "locomotion": "idle",
+      "phase": null,
+      "provenance": {
+        "migration_status": "graph_admitted",
+        "source_commit": "196c2389c71ca5276eed594d822d29b76310dd2f",
+        "source_graph_kind": "full_body_graph"
+      },
+      "source": "assets/reference/personas/serena-quill/canonical-worksheets/02-turnaround-sheet-candidate-v1.png#panel-1",
+      "tags": [
+        "neutral",
+        "full_body_graph",
+        "graph_admitted",
+        "unreviewed_static"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "admission": "graph_admitted",
+      "composition": "whole_pose",
+      "contact_profile": {
+        "altitude_class": "grounded",
+        "evidence": "unreviewed_static",
+        "planted_anchor": null,
+        "root_policy": "fixed",
+        "support_contact": "none"
+      },
+      "description": "neutral left profile",
+      "facing": "west",
+      "features": {
+        "halo": true,
+        "orb": false,
+        "wings": true
+      },
+      "id": "neutral_left_profile",
+      "locomotion": "idle",
+      "phase": null,
+      "provenance": {
+        "migration_status": "graph_admitted",
+        "source_commit": "196c2389c71ca5276eed594d822d29b76310dd2f",
+        "source_graph_kind": "full_body_graph"
+      },
+      "source": "assets/reference/personas/serena-quill/canonical-worksheets/02-turnaround-sheet-candidate-v1.png#panel-2",
+      "tags": [
+        "neutral",
+        "full_body_graph",
+        "graph_admitted",
+        "unreviewed_static"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "admission": "graph_admitted",
+      "composition": "whole_pose",
+      "contact_profile": {
+        "altitude_class": "grounded",
+        "evidence": "unreviewed_static",
+        "planted_anchor": null,
+        "root_policy": "fixed",
+        "support_contact": "none"
+      },
+      "description": "neutral back three quarter left",
+      "facing": "northwest",
+      "features": {
+        "halo": true,
+        "orb": false,
+        "wings": true
+      },
+      "id": "neutral_back_three_quarter_left",
+      "locomotion": "idle",
+      "phase": null,
+      "provenance": {
+        "migration_status": "graph_admitted",
+        "source_commit": "196c2389c71ca5276eed594d822d29b76310dd2f",
+        "source_graph_kind": "full_body_graph"
+      },
+      "source": "assets/reference/personas/serena-quill/canonical-worksheets/02-turnaround-sheet-candidate-v1.png#panel-3",
+      "tags": [
+        "neutral",
+        "full_body_graph",
+        "graph_admitted",
+        "unreviewed_static"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "admission": "graph_admitted",
+      "composition": "whole_pose",
+      "contact_profile": {
+        "altitude_class": "grounded",
+        "evidence": "unreviewed_static",
+        "planted_anchor": null,
+        "root_policy": "fixed",
+        "support_contact": "none"
+      },
+      "description": "neutral back",
+      "facing": "north",
+      "features": {
+        "halo": true,
+        "orb": false,
+        "wings": true
+      },
+      "id": "neutral_back",
+      "locomotion": "idle",
+      "phase": null,
+      "provenance": {
+        "migration_status": "graph_admitted",
+        "source_commit": "196c2389c71ca5276eed594d822d29b76310dd2f",
+        "source_graph_kind": "full_body_graph"
+      },
+      "source": "assets/reference/personas/serena-quill/canonical-worksheets/02-turnaround-sheet-candidate-v1.png#panel-4",
+      "tags": [
+        "neutral",
+        "full_body_graph",
+        "graph_admitted",
+        "unreviewed_static"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "admission": "graph_admitted",
+      "composition": "whole_pose",
+      "contact_profile": {
+        "altitude_class": "grounded",
+        "evidence": "unreviewed_static",
+        "planted_anchor": null,
+        "root_policy": "fixed",
+        "support_contact": "none"
+      },
+      "description": "neutral back three quarter right",
+      "facing": "northeast",
+      "features": {
+        "halo": true,
+        "orb": false,
+        "wings": true
+      },
+      "id": "neutral_back_three_quarter_right",
+      "locomotion": "idle",
+      "phase": null,
+      "provenance": {
+        "migration_status": "graph_admitted",
+        "source_commit": "196c2389c71ca5276eed594d822d29b76310dd2f",
+        "source_graph_kind": "full_body_graph"
+      },
+      "source": "assets/reference/personas/serena-quill/canonical-worksheets/02-turnaround-sheet-candidate-v1.png#panel-5",
+      "tags": [
+        "neutral",
+        "full_body_graph",
+        "graph_admitted",
+        "unreviewed_static"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "admission": "graph_admitted",
+      "composition": "whole_pose",
+      "contact_profile": {
+        "altitude_class": "grounded",
+        "evidence": "unreviewed_static",
+        "planted_anchor": null,
+        "root_policy": "fixed",
+        "support_contact": "none"
+      },
+      "description": "neutral right profile",
+      "facing": "east",
+      "features": {
+        "halo": true,
+        "orb": false,
+        "wings": true
+      },
+      "id": "neutral_right_profile",
+      "locomotion": "idle",
+      "phase": null,
+      "provenance": {
+        "migration_status": "graph_admitted",
+        "source_commit": "196c2389c71ca5276eed594d822d29b76310dd2f",
+        "source_graph_kind": "full_body_graph"
+      },
+      "source": "assets/reference/personas/serena-quill/canonical-worksheets/02-turnaround-sheet-candidate-v1.png#panel-6",
+      "tags": [
+        "neutral",
+        "full_body_graph",
+        "graph_admitted",
+        "unreviewed_static"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "admission": "graph_admitted",
+      "composition": "whole_pose",
+      "contact_profile": {
+        "altitude_class": "grounded",
+        "evidence": "unreviewed_static",
+        "planted_anchor": null,
+        "root_policy": "fixed",
+        "support_contact": "none"
+      },
+      "description": "neutral three quarter right",
+      "facing": "southeast",
+      "features": {
+        "halo": true,
+        "orb": false,
+        "wings": true
+      },
+      "id": "neutral_three_quarter_right",
+      "locomotion": "idle",
+      "phase": null,
+      "provenance": {
+        "migration_status": "graph_admitted",
+        "source_commit": "196c2389c71ca5276eed594d822d29b76310dd2f",
+        "source_graph_kind": "full_body_graph"
+      },
+      "source": "assets/reference/personas/serena-quill/canonical-worksheets/02-turnaround-sheet-candidate-v1.png#panel-7",
+      "tags": [
+        "neutral",
+        "full_body_graph",
+        "graph_admitted",
+        "unreviewed_static"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "admission": "graph_admitted",
+      "composition": "whole_pose",
+      "contact_profile": {
+        "altitude_class": "grounded",
+        "evidence": "unreviewed_static",
+        "planted_anchor": null,
+        "root_policy": "fixed",
+        "support_contact": "none"
+      },
+      "description": "neutral base front",
+      "facing": "south",
+      "features": {
+        "halo": true,
+        "orb": true,
+        "wings": true
+      },
+      "id": "neutral_base_front",
+      "locomotion": "idle",
+      "phase": null,
+      "provenance": {
+        "migration_status": "graph_admitted",
+        "source_commit": "196c2389c71ca5276eed594d822d29b76310dd2f",
+        "source_graph_kind": "full_body_graph"
+      },
+      "source": "assets/reference/personas/serena-quill/canonical-worksheets/03-neutral-base-poses-candidate-v1.png#panel-0",
+      "tags": [
+        "neutral",
+        "full_body_graph",
+        "graph_admitted",
+        "unreviewed_static"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "admission": "graph_admitted",
+      "composition": "whole_pose",
+      "contact_profile": {
+        "altitude_class": "grounded",
+        "evidence": "unreviewed_static",
+        "planted_anchor": null,
+        "root_policy": "fixed",
+        "support_contact": "none"
+      },
+      "description": "neutral base three quarter",
+      "facing": "southwest",
+      "features": {
+        "halo": true,
+        "orb": true,
+        "wings": true
+      },
+      "id": "neutral_base_three_quarter",
+      "locomotion": "idle",
+      "phase": null,
+      "provenance": {
+        "migration_status": "graph_admitted",
+        "source_commit": "196c2389c71ca5276eed594d822d29b76310dd2f",
+        "source_graph_kind": "full_body_graph"
+      },
+      "source": "assets/reference/personas/serena-quill/canonical-worksheets/03-neutral-base-poses-candidate-v1.png#panel-1",
+      "tags": [
+        "neutral",
+        "full_body_graph",
+        "graph_admitted",
+        "unreviewed_static"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "admission": "graph_admitted",
+      "composition": "whole_pose",
+      "contact_profile": {
+        "altitude_class": "grounded",
+        "evidence": "unreviewed_static",
+        "planted_anchor": null,
+        "root_policy": "fixed",
+        "support_contact": "none"
+      },
+      "description": "neutral base profile",
+      "facing": "west",
+      "features": {
+        "halo": true,
+        "orb": true,
+        "wings": true
+      },
+      "id": "neutral_base_profile",
+      "locomotion": "idle",
+      "phase": null,
+      "provenance": {
+        "migration_status": "graph_admitted",
+        "source_commit": "196c2389c71ca5276eed594d822d29b76310dd2f",
+        "source_graph_kind": "full_body_graph"
+      },
+      "source": "assets/reference/personas/serena-quill/canonical-worksheets/03-neutral-base-poses-candidate-v1.png#panel-2",
+      "tags": [
+        "neutral",
+        "full_body_graph",
+        "graph_admitted",
+        "unreviewed_static"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "admission": "graph_admitted",
+      "composition": "whole_pose",
+      "contact_profile": {
+        "altitude_class": "grounded",
+        "evidence": "unreviewed_static",
+        "planted_anchor": null,
+        "root_policy": "fixed",
+        "support_contact": "none"
+      },
+      "description": "neutral base back",
+      "facing": "north",
+      "features": {
+        "halo": true,
+        "orb": true,
+        "wings": true
+      },
+      "id": "neutral_base_back",
+      "locomotion": "idle",
+      "phase": null,
+      "provenance": {
+        "migration_status": "graph_admitted",
+        "source_commit": "196c2389c71ca5276eed594d822d29b76310dd2f",
+        "source_graph_kind": "full_body_graph"
+      },
+      "source": "assets/reference/personas/serena-quill/canonical-worksheets/03-neutral-base-poses-candidate-v1.png#panel-3",
+      "tags": [
+        "neutral",
+        "full_body_graph",
+        "graph_admitted",
+        "unreviewed_static"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "admission": "graph_admitted",
+      "composition": "whole_pose",
+      "contact_profile": {
+        "altitude_class": "grounded",
+        "evidence": "unreviewed_static",
+        "planted_anchor": null,
+        "root_policy": "fixed",
+        "support_contact": "none"
+      },
+      "description": "idle relaxed",
+      "facing": "south",
+      "features": {
+        "halo": true,
+        "orb": true,
+        "wings": true
+      },
+      "id": "idle_relaxed",
+      "locomotion": "idle",
+      "phase": null,
+      "provenance": {
+        "migration_status": "graph_admitted",
+        "source_commit": "196c2389c71ca5276eed594d822d29b76310dd2f",
+        "source_graph_kind": "full_body_graph"
+      },
+      "source": "assets/reference/personas/serena-quill/canonical-worksheets/03-neutral-base-poses-candidate-v1.png#panel-4",
+      "tags": [
+        "idle",
+        "full_body_graph",
+        "graph_admitted",
+        "unreviewed_static"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "admission": "graph_admitted",
+      "composition": "whole_pose",
+      "contact_profile": {
+        "altitude_class": "grounded",
+        "evidence": "unreviewed_static",
+        "planted_anchor": null,
+        "root_policy": "fixed",
+        "support_contact": "none"
+      },
+      "description": "idle attentive",
+      "facing": "south",
+      "features": {
+        "halo": true,
+        "orb": true,
+        "wings": true
+      },
+      "id": "idle_attentive",
+      "locomotion": "idle",
+      "phase": null,
+      "provenance": {
+        "migration_status": "graph_admitted",
+        "source_commit": "196c2389c71ca5276eed594d822d29b76310dd2f",
+        "source_graph_kind": "full_body_graph"
+      },
+      "source": "assets/reference/personas/serena-quill/canonical-worksheets/03-neutral-base-poses-candidate-v1.png#panel-5",
+      "tags": [
+        "idle",
+        "full_body_graph",
+        "graph_admitted",
+        "unreviewed_static"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "admission": "graph_admitted",
+      "composition": "whole_pose",
+      "contact_profile": {
+        "altitude_class": "grounded",
+        "evidence": "unreviewed_static",
+        "planted_anchor": null,
+        "root_policy": "fixed",
+        "support_contact": "none"
+      },
+      "description": "idle speaking",
+      "facing": "south",
+      "features": {
+        "halo": true,
+        "orb": true,
+        "wings": true
+      },
+      "id": "idle_speaking",
+      "locomotion": "idle",
+      "phase": null,
+      "provenance": {
+        "migration_status": "graph_admitted",
+        "source_commit": "196c2389c71ca5276eed594d822d29b76310dd2f",
+        "source_graph_kind": "full_body_graph"
+      },
+      "source": "assets/reference/personas/serena-quill/canonical-worksheets/03-neutral-base-poses-candidate-v1.png#panel-6",
+      "tags": [
+        "idle",
+        "full_body_graph",
+        "graph_admitted",
+        "unreviewed_static"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "admission": "graph_admitted",
+      "composition": "whole_pose",
+      "contact_profile": {
+        "altitude_class": "grounded",
+        "evidence": "unreviewed_static",
+        "planted_anchor": null,
+        "root_policy": "fixed",
+        "support_contact": "none"
+      },
+      "description": "idle listening",
+      "facing": "south",
+      "features": {
+        "halo": true,
+        "orb": true,
+        "wings": true
+      },
+      "id": "idle_listening",
+      "locomotion": "idle",
+      "phase": null,
+      "provenance": {
+        "migration_status": "graph_admitted",
+        "source_commit": "196c2389c71ca5276eed594d822d29b76310dd2f",
+        "source_graph_kind": "full_body_graph"
+      },
+      "source": "assets/reference/personas/serena-quill/canonical-worksheets/03-neutral-base-poses-candidate-v1.png#panel-7",
+      "tags": [
+        "idle",
+        "full_body_graph",
+        "graph_admitted",
+        "unreviewed_static"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "admission": "graph_admitted",
+      "composition": "whole_pose",
+      "contact_profile": {
+        "altitude_class": "grounded",
+        "evidence": "unreviewed_static",
+        "planted_anchor": null,
+        "root_policy": "fixed",
+        "support_contact": "none"
+      },
+      "description": "expression neutral",
+      "facing": "south",
+      "features": {
+        "halo": true,
+        "orb": true,
+        "wings": true
+      },
+      "id": "expression_neutral",
+      "locomotion": "idle",
+      "phase": null,
+      "provenance": {
+        "migration_status": "graph_admitted",
+        "source_commit": "196c2389c71ca5276eed594d822d29b76310dd2f",
+        "source_graph_kind": "full_body_graph"
+      },
+      "source": "assets/reference/personas/serena-quill/canonical-worksheets/04-expression-sheet-candidate-v1.png#panel-0",
+      "tags": [
+        "expression",
+        "full_body_graph",
+        "graph_admitted",
+        "unreviewed_static"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "admission": "graph_admitted",
+      "composition": "whole_pose",
+      "contact_profile": {
+        "altitude_class": "grounded",
+        "evidence": "unreviewed_static",
+        "planted_anchor": null,
+        "root_policy": "fixed",
+        "support_contact": "none"
+      },
+      "description": "expression calm",
+      "facing": "south",
+      "features": {
+        "halo": true,
+        "orb": true,
+        "wings": true
+      },
+      "id": "expression_calm",
+      "locomotion": "idle",
+      "phase": null,
+      "provenance": {
+        "migration_status": "graph_admitted",
+        "source_commit": "196c2389c71ca5276eed594d822d29b76310dd2f",
+        "source_graph_kind": "full_body_graph"
+      },
+      "source": "assets/reference/personas/serena-quill/canonical-worksheets/04-expression-sheet-candidate-v1.png#panel-1",
+      "tags": [
+        "expression",
+        "full_body_graph",
+        "graph_admitted",
+        "unreviewed_static"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "admission": "graph_admitted",
+      "composition": "whole_pose",
+      "contact_profile": {
+        "altitude_class": "grounded",
+        "evidence": "unreviewed_static",
+        "planted_anchor": null,
+        "root_policy": "fixed",
+        "support_contact": "none"
+      },
+      "description": "expression joy",
+      "facing": "south",
+      "features": {
+        "halo": true,
+        "orb": true,
+        "wings": true
+      },
+      "id": "expression_joy",
+      "locomotion": "idle",
+      "phase": null,
+      "provenance": {
+        "migration_status": "graph_admitted",
+        "source_commit": "196c2389c71ca5276eed594d822d29b76310dd2f",
+        "source_graph_kind": "full_body_graph"
+      },
+      "source": "assets/reference/personas/serena-quill/canonical-worksheets/04-expression-sheet-candidate-v1.png#panel-2",
+      "tags": [
+        "expression",
+        "full_body_graph",
+        "graph_admitted",
+        "unreviewed_static"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "admission": "graph_admitted",
+      "composition": "whole_pose",
+      "contact_profile": {
+        "altitude_class": "grounded",
+        "evidence": "unreviewed_static",
+        "planted_anchor": null,
+        "root_policy": "fixed",
+        "support_contact": "none"
+      },
+      "description": "expression amusement",
+      "facing": "south",
+      "features": {
+        "halo": true,
+        "orb": true,
+        "wings": true
+      },
+      "id": "expression_amusement",
+      "locomotion": "idle",
+      "phase": null,
+      "provenance": {
+        "migration_status": "graph_admitted",
+        "source_commit": "196c2389c71ca5276eed594d822d29b76310dd2f",
+        "source_graph_kind": "full_body_graph"
+      },
+      "source": "assets/reference/personas/serena-quill/canonical-worksheets/04-expression-sheet-candidate-v1.png#panel-3",
+      "tags": [
+        "expression",
+        "full_body_graph",
+        "graph_admitted",
+        "unreviewed_static"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "admission": "graph_admitted",
+      "composition": "whole_pose",
+      "contact_profile": {
+        "altitude_class": "grounded",
+        "evidence": "unreviewed_static",
+        "planted_anchor": null,
+        "root_policy": "fixed",
+        "support_contact": "none"
+      },
+      "description": "expression excitement",
+      "facing": "south",
+      "features": {
+        "halo": true,
+        "orb": true,
+        "wings": true
+      },
+      "id": "expression_excitement",
+      "locomotion": "idle",
+      "phase": null,
+      "provenance": {
+        "migration_status": "graph_admitted",
+        "source_commit": "196c2389c71ca5276eed594d822d29b76310dd2f",
+        "source_graph_kind": "full_body_graph"
+      },
+      "source": "assets/reference/personas/serena-quill/canonical-worksheets/04-expression-sheet-candidate-v1.png#panel-4",
+      "tags": [
+        "expression",
+        "full_body_graph",
+        "graph_admitted",
+        "unreviewed_static"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "admission": "graph_admitted",
+      "composition": "whole_pose",
+      "contact_profile": {
+        "altitude_class": "grounded",
+        "evidence": "unreviewed_static",
+        "planted_anchor": null,
+        "root_policy": "fixed",
+        "support_contact": "none"
+      },
+      "description": "expression curiosity",
+      "facing": "south",
+      "features": {
+        "halo": true,
+        "orb": true,
+        "wings": true
+      },
+      "id": "expression_curiosity",
+      "locomotion": "idle",
+      "phase": null,
+      "provenance": {
+        "migration_status": "graph_admitted",
+        "source_commit": "196c2389c71ca5276eed594d822d29b76310dd2f",
+        "source_graph_kind": "full_body_graph"
+      },
+      "source": "assets/reference/personas/serena-quill/canonical-worksheets/04-expression-sheet-candidate-v1.png#panel-5",
+      "tags": [
+        "expression",
+        "full_body_graph",
+        "graph_admitted",
+        "unreviewed_static"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "admission": "graph_admitted",
+      "composition": "whole_pose",
+      "contact_profile": {
+        "altitude_class": "grounded",
+        "evidence": "unreviewed_static",
+        "planted_anchor": null,
+        "root_policy": "fixed",
+        "support_contact": "none"
+      },
+      "description": "expression confidence",
+      "facing": "south",
+      "features": {
+        "halo": true,
+        "orb": true,
+        "wings": true
+      },
+      "id": "expression_confidence",
+      "locomotion": "idle",
+      "phase": null,
+      "provenance": {
+        "migration_status": "graph_admitted",
+        "source_commit": "196c2389c71ca5276eed594d822d29b76310dd2f",
+        "source_graph_kind": "full_body_graph"
+      },
+      "source": "assets/reference/personas/serena-quill/canonical-worksheets/04-expression-sheet-candidate-v1.png#panel-6",
+      "tags": [
+        "expression",
+        "full_body_graph",
+        "graph_admitted",
+        "unreviewed_static"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "admission": "graph_admitted",
+      "composition": "whole_pose",
+      "contact_profile": {
+        "altitude_class": "grounded",
+        "evidence": "unreviewed_static",
+        "planted_anchor": null,
+        "root_policy": "fixed",
+        "support_contact": "none"
+      },
+      "description": "expression compassion",
+      "facing": "south",
+      "features": {
+        "halo": true,
+        "orb": true,
+        "wings": true
+      },
+      "id": "expression_compassion",
+      "locomotion": "idle",
+      "phase": null,
+      "provenance": {
+        "migration_status": "graph_admitted",
+        "source_commit": "196c2389c71ca5276eed594d822d29b76310dd2f",
+        "source_graph_kind": "full_body_graph"
+      },
+      "source": "assets/reference/personas/serena-quill/canonical-worksheets/04-expression-sheet-candidate-v1.png#panel-7",
+      "tags": [
+        "expression",
+        "full_body_graph",
+        "graph_admitted",
+        "unreviewed_static"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "admission": "graph_admitted",
+      "composition": "whole_pose",
+      "contact_profile": {
+        "altitude_class": "grounded",
+        "evidence": "unreviewed_static",
+        "planted_anchor": null,
+        "root_policy": "fixed",
+        "support_contact": "none"
+      },
+      "description": "expression surprise",
+      "facing": "south",
+      "features": {
+        "halo": true,
+        "orb": true,
+        "wings": true
+      },
+      "id": "expression_surprise",
+      "locomotion": "idle",
+      "phase": null,
+      "provenance": {
+        "migration_status": "graph_admitted",
+        "source_commit": "196c2389c71ca5276eed594d822d29b76310dd2f",
+        "source_graph_kind": "full_body_graph"
+      },
+      "source": "assets/reference/personas/serena-quill/canonical-worksheets/04-expression-sheet-candidate-v1.png#panel-8",
+      "tags": [
+        "expression",
+        "full_body_graph",
+        "graph_admitted",
+        "unreviewed_static"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "admission": "graph_admitted",
+      "composition": "whole_pose",
+      "contact_profile": {
+        "altitude_class": "grounded",
+        "evidence": "unreviewed_static",
+        "planted_anchor": null,
+        "root_policy": "fixed",
+        "support_contact": "none"
+      },
+      "description": "expression confusion",
+      "facing": "south",
+      "features": {
+        "halo": true,
+        "orb": true,
+        "wings": true
+      },
+      "id": "expression_confusion",
+      "locomotion": "idle",
+      "phase": null,
+      "provenance": {
+        "migration_status": "graph_admitted",
+        "source_commit": "196c2389c71ca5276eed594d822d29b76310dd2f",
+        "source_graph_kind": "full_body_graph"
+      },
+      "source": "assets/reference/personas/serena-quill/canonical-worksheets/04-expression-sheet-candidate-v1.png#panel-9",
+      "tags": [
+        "expression",
+        "full_body_graph",
+        "graph_admitted",
+        "unreviewed_static"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "admission": "graph_admitted",
+      "composition": "whole_pose",
+      "contact_profile": {
+        "altitude_class": "grounded",
+        "evidence": "unreviewed_static",
+        "planted_anchor": null,
+        "root_policy": "fixed",
+        "support_contact": "none"
+      },
+      "description": "expression skepticism",
+      "facing": "south",
+      "features": {
+        "halo": true,
+        "orb": true,
+        "wings": true
+      },
+      "id": "expression_skepticism",
+      "locomotion": "idle",
+      "phase": null,
+      "provenance": {
+        "migration_status": "graph_admitted",
+        "source_commit": "196c2389c71ca5276eed594d822d29b76310dd2f",
+        "source_graph_kind": "full_body_graph"
+      },
+      "source": "assets/reference/personas/serena-quill/canonical-worksheets/04-expression-sheet-candidate-v1.png#panel-10",
+      "tags": [
+        "expression",
+        "full_body_graph",
+        "graph_admitted",
+        "unreviewed_static"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "admission": "graph_admitted",
+      "composition": "whole_pose",
+      "contact_profile": {
+        "altitude_class": "grounded",
+        "evidence": "unreviewed_static",
+        "planted_anchor": null,
+        "root_policy": "fixed",
+        "support_contact": "none"
+      },
+      "description": "expression concern",
+      "facing": "south",
+      "features": {
+        "halo": true,
+        "orb": true,
+        "wings": true
+      },
+      "id": "expression_concern",
+      "locomotion": "idle",
+      "phase": null,
+      "provenance": {
+        "migration_status": "graph_admitted",
+        "source_commit": "196c2389c71ca5276eed594d822d29b76310dd2f",
+        "source_graph_kind": "full_body_graph"
+      },
+      "source": "assets/reference/personas/serena-quill/canonical-worksheets/04-expression-sheet-candidate-v1.png#panel-11",
+      "tags": [
+        "expression",
+        "full_body_graph",
+        "graph_admitted",
+        "unreviewed_static"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "admission": "graph_admitted",
+      "composition": "whole_pose",
+      "contact_profile": {
+        "altitude_class": "grounded",
+        "evidence": "unreviewed_static",
+        "planted_anchor": null,
+        "root_policy": "fixed",
+        "support_contact": "none"
+      },
+      "description": "expression sadness",
+      "facing": "south",
+      "features": {
+        "halo": true,
+        "orb": true,
+        "wings": true
+      },
+      "id": "expression_sadness",
+      "locomotion": "idle",
+      "phase": null,
+      "provenance": {
+        "migration_status": "graph_admitted",
+        "source_commit": "196c2389c71ca5276eed594d822d29b76310dd2f",
+        "source_graph_kind": "full_body_graph"
+      },
+      "source": "assets/reference/personas/serena-quill/canonical-worksheets/04-expression-sheet-candidate-v1.png#panel-12",
+      "tags": [
+        "expression",
+        "full_body_graph",
+        "graph_admitted",
+        "unreviewed_static"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "admission": "graph_admitted",
+      "composition": "whole_pose",
+      "contact_profile": {
+        "altitude_class": "grounded",
+        "evidence": "unreviewed_static",
+        "planted_anchor": null,
+        "root_policy": "fixed",
+        "support_contact": "none"
+      },
+      "description": "expression shame",
+      "facing": "south",
+      "features": {
+        "halo": true,
+        "orb": true,
+        "wings": true
+      },
+      "id": "expression_shame",
+      "locomotion": "idle",
+      "phase": null,
+      "provenance": {
+        "migration_status": "graph_admitted",
+        "source_commit": "196c2389c71ca5276eed594d822d29b76310dd2f",
+        "source_graph_kind": "full_body_graph"
+      },
+      "source": "assets/reference/personas/serena-quill/canonical-worksheets/04-expression-sheet-candidate-v1.png#panel-13",
+      "tags": [
+        "expression",
+        "full_body_graph",
+        "graph_admitted",
+        "unreviewed_static"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "admission": "graph_admitted",
+      "composition": "whole_pose",
+      "contact_profile": {
+        "altitude_class": "grounded",
+        "evidence": "unreviewed_static",
+        "planted_anchor": null,
+        "root_policy": "fixed",
+        "support_contact": "none"
+      },
+      "description": "expression embarrassment",
+      "facing": "south",
+      "features": {
+        "halo": true,
+        "orb": true,
+        "wings": true
+      },
+      "id": "expression_embarrassment",
+      "locomotion": "idle",
+      "phase": null,
+      "provenance": {
+        "migration_status": "graph_admitted",
+        "source_commit": "196c2389c71ca5276eed594d822d29b76310dd2f",
+        "source_graph_kind": "full_body_graph"
+      },
+      "source": "assets/reference/personas/serena-quill/canonical-worksheets/04-expression-sheet-candidate-v1.png#panel-14",
+      "tags": [
+        "expression",
+        "full_body_graph",
+        "graph_admitted",
+        "unreviewed_static"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "admission": "graph_admitted",
+      "composition": "whole_pose",
+      "contact_profile": {
+        "altitude_class": "grounded",
+        "evidence": "unreviewed_static",
+        "planted_anchor": null,
+        "root_policy": "fixed",
+        "support_contact": "none"
+      },
+      "description": "expression fear",
+      "facing": "south",
+      "features": {
+        "halo": true,
+        "orb": true,
+        "wings": true
+      },
+      "id": "expression_fear",
+      "locomotion": "idle",
+      "phase": null,
+      "provenance": {
+        "migration_status": "graph_admitted",
+        "source_commit": "196c2389c71ca5276eed594d822d29b76310dd2f",
+        "source_graph_kind": "full_body_graph"
+      },
+      "source": "assets/reference/personas/serena-quill/canonical-worksheets/04-expression-sheet-candidate-v1.png#panel-15",
+      "tags": [
+        "expression",
+        "full_body_graph",
+        "graph_admitted",
+        "unreviewed_static"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "admission": "graph_admitted",
+      "composition": "whole_pose",
+      "contact_profile": {
+        "altitude_class": "grounded",
+        "evidence": "unreviewed_static",
+        "planted_anchor": null,
+        "root_policy": "fixed",
+        "support_contact": "none"
+      },
+      "description": "expression anxiety",
+      "facing": "south",
+      "features": {
+        "halo": true,
+        "orb": true,
+        "wings": true
+      },
+      "id": "expression_anxiety",
+      "locomotion": "idle",
+      "phase": null,
+      "provenance": {
+        "migration_status": "graph_admitted",
+        "source_commit": "196c2389c71ca5276eed594d822d29b76310dd2f",
+        "source_graph_kind": "full_body_graph"
+      },
+      "source": "assets/reference/personas/serena-quill/canonical-worksheets/04-expression-sheet-candidate-v1.png#panel-16",
+      "tags": [
+        "expression",
+        "full_body_graph",
+        "graph_admitted",
+        "unreviewed_static"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "admission": "graph_admitted",
+      "composition": "whole_pose",
+      "contact_profile": {
+        "altitude_class": "grounded",
+        "evidence": "unreviewed_static",
+        "planted_anchor": null,
+        "root_policy": "fixed",
+        "support_contact": "none"
+      },
+      "description": "expression anger",
+      "facing": "south",
+      "features": {
+        "halo": true,
+        "orb": true,
+        "wings": true
+      },
+      "id": "expression_anger",
+      "locomotion": "idle",
+      "phase": null,
+      "provenance": {
+        "migration_status": "graph_admitted",
+        "source_commit": "196c2389c71ca5276eed594d822d29b76310dd2f",
+        "source_graph_kind": "full_body_graph"
+      },
+      "source": "assets/reference/personas/serena-quill/canonical-worksheets/04-expression-sheet-candidate-v1.png#panel-17",
+      "tags": [
+        "expression",
+        "full_body_graph",
+        "graph_admitted",
+        "unreviewed_static"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "admission": "graph_admitted",
+      "composition": "whole_pose",
+      "contact_profile": {
+        "altitude_class": "grounded",
+        "evidence": "unreviewed_static",
+        "planted_anchor": null,
+        "root_policy": "fixed",
+        "support_contact": "none"
+      },
+      "description": "expression frustration",
+      "facing": "south",
+      "features": {
+        "halo": true,
+        "orb": true,
+        "wings": true
+      },
+      "id": "expression_frustration",
+      "locomotion": "idle",
+      "phase": null,
+      "provenance": {
+        "migration_status": "graph_admitted",
+        "source_commit": "196c2389c71ca5276eed594d822d29b76310dd2f",
+        "source_graph_kind": "full_body_graph"
+      },
+      "source": "assets/reference/personas/serena-quill/canonical-worksheets/04-expression-sheet-candidate-v1.png#panel-18",
+      "tags": [
+        "expression",
+        "full_body_graph",
+        "graph_admitted",
+        "unreviewed_static"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "admission": "graph_admitted",
+      "composition": "whole_pose",
+      "contact_profile": {
+        "altitude_class": "grounded",
+        "evidence": "unreviewed_static",
+        "planted_anchor": null,
+        "root_policy": "fixed",
+        "support_contact": "none"
+      },
+      "description": "expression determination",
+      "facing": "south",
+      "features": {
+        "halo": true,
+        "orb": true,
+        "wings": true
+      },
+      "id": "expression_determination",
+      "locomotion": "idle",
+      "phase": null,
+      "provenance": {
+        "migration_status": "graph_admitted",
+        "source_commit": "196c2389c71ca5276eed594d822d29b76310dd2f",
+        "source_graph_kind": "full_body_graph"
+      },
+      "source": "assets/reference/personas/serena-quill/canonical-worksheets/04-expression-sheet-candidate-v1.png#panel-19",
+      "tags": [
+        "expression",
+        "full_body_graph",
+        "graph_admitted",
+        "unreviewed_static"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "admission": "graph_admitted",
+      "composition": "whole_pose",
+      "contact_profile": {
+        "altitude_class": "grounded",
+        "evidence": "unreviewed_static",
+        "planted_anchor": null,
+        "root_policy": "fixed",
+        "support_contact": "none"
+      },
+      "description": "expression fatigue",
+      "facing": "south",
+      "features": {
+        "halo": true,
+        "orb": true,
+        "wings": true
+      },
+      "id": "expression_fatigue",
+      "locomotion": "idle",
+      "phase": null,
+      "provenance": {
+        "migration_status": "graph_admitted",
+        "source_commit": "196c2389c71ca5276eed594d822d29b76310dd2f",
+        "source_graph_kind": "full_body_graph"
+      },
+      "source": "assets/reference/personas/serena-quill/canonical-worksheets/04-expression-sheet-candidate-v1.png#panel-20",
+      "tags": [
+        "expression",
+        "full_body_graph",
+        "graph_admitted",
+        "unreviewed_static"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "admission": "graph_admitted",
+      "composition": "whole_pose",
+      "contact_profile": {
+        "altitude_class": "grounded",
+        "evidence": "unreviewed_static",
+        "planted_anchor": null,
+        "root_policy": "fixed",
+        "support_contact": "none"
+      },
+      "description": "expression contemplation",
+      "facing": "south",
+      "features": {
+        "halo": true,
+        "orb": true,
+        "wings": true
+      },
+      "id": "expression_contemplation",
+      "locomotion": "idle",
+      "phase": null,
+      "provenance": {
+        "migration_status": "graph_admitted",
+        "source_commit": "196c2389c71ca5276eed594d822d29b76310dd2f",
+        "source_graph_kind": "full_body_graph"
+      },
+      "source": "assets/reference/personas/serena-quill/canonical-worksheets/04-expression-sheet-candidate-v1.png#panel-21",
+      "tags": [
+        "expression",
+        "full_body_graph",
+        "graph_admitted",
+        "unreviewed_static"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "admission": "graph_admitted",
+      "composition": "whole_pose",
+      "contact_profile": {
+        "altitude_class": "grounded",
+        "evidence": "unreviewed_static",
+        "planted_anchor": null,
+        "root_policy": "fixed",
+        "support_contact": "none"
+      },
+      "description": "expression mentoring reassurance",
+      "facing": "south",
+      "features": {
+        "halo": true,
+        "orb": true,
+        "wings": true
+      },
+      "id": "expression_mentoring_reassurance",
+      "locomotion": "idle",
+      "phase": null,
+      "provenance": {
+        "migration_status": "graph_admitted",
+        "source_commit": "196c2389c71ca5276eed594d822d29b76310dd2f",
+        "source_graph_kind": "full_body_graph"
+      },
+      "source": "assets/reference/personas/serena-quill/canonical-worksheets/04-expression-sheet-candidate-v1.png#panel-22",
+      "tags": [
+        "expression",
+        "full_body_graph",
+        "graph_admitted",
+        "unreviewed_static"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "admission": "graph_admitted",
+      "composition": "whole_pose",
+      "contact_profile": {
+        "altitude_class": "grounded",
+        "evidence": "unreviewed_static",
+        "planted_anchor": null,
+        "root_policy": "fixed",
+        "support_contact": "none"
+      },
+      "description": "expression settled listening",
+      "facing": "south",
+      "features": {
+        "halo": true,
+        "orb": true,
+        "wings": true
+      },
+      "id": "expression_settled_listening",
+      "locomotion": "idle",
+      "phase": null,
+      "provenance": {
+        "migration_status": "graph_admitted",
+        "source_commit": "196c2389c71ca5276eed594d822d29b76310dd2f",
+        "source_graph_kind": "full_body_graph"
+      },
+      "source": "assets/reference/personas/serena-quill/canonical-worksheets/04-expression-sheet-candidate-v1.png#panel-23",
+      "tags": [
+        "expression",
+        "full_body_graph",
+        "graph_admitted",
+        "unreviewed_static"
+      ]
+    },
+    {
+      "actions": [
+        "speaking"
+      ],
+      "admission": "graph_admitted",
+      "composition": "whole_pose",
+      "contact_profile": {
+        "altitude_class": "grounded",
+        "evidence": "unreviewed_static",
+        "planted_anchor": null,
+        "root_policy": "fixed",
+        "support_contact": "none"
+      },
+      "description": "viseme rest",
+      "facing": "south",
+      "features": {
+        "halo": true,
+        "orb": false,
+        "wings": true
+      },
+      "id": "viseme_rest",
+      "locomotion": "idle",
+      "phase": null,
+      "provenance": {
+        "migration_status": "graph_admitted",
+        "source_commit": "196c2389c71ca5276eed594d822d29b76310dd2f",
+        "source_graph_kind": "full_body_graph"
+      },
+      "source": "assets/reference/personas/serena-quill/canonical-worksheets/05-speech-viseme-sheet-candidate-v1.png#panel-0",
+      "tags": [
+        "speech",
+        "full_body_graph",
+        "graph_admitted",
+        "unreviewed_static"
+      ]
+    },
+    {
+      "actions": [
+        "speaking"
+      ],
+      "admission": "graph_admitted",
+      "composition": "whole_pose",
+      "contact_profile": {
+        "altitude_class": "grounded",
+        "evidence": "unreviewed_static",
+        "planted_anchor": null,
+        "root_policy": "fixed",
+        "support_contact": "none"
+      },
+      "description": "viseme closed lips",
+      "facing": "south",
+      "features": {
+        "halo": true,
+        "orb": false,
+        "wings": true
+      },
+      "id": "viseme_closed_lips",
+      "locomotion": "idle",
+      "phase": null,
+      "provenance": {
+        "migration_status": "graph_admitted",
+        "source_commit": "196c2389c71ca5276eed594d822d29b76310dd2f",
+        "source_graph_kind": "full_body_graph"
+      },
+      "source": "assets/reference/personas/serena-quill/canonical-worksheets/05-speech-viseme-sheet-candidate-v1.png#panel-1",
+      "tags": [
+        "speech",
+        "full_body_graph",
+        "graph_admitted",
+        "unreviewed_static"
+      ]
+    },
+    {
+      "actions": [
+        "speaking"
+      ],
+      "admission": "graph_admitted",
+      "composition": "whole_pose",
+      "contact_profile": {
+        "altitude_class": "grounded",
+        "evidence": "unreviewed_static",
+        "planted_anchor": null,
+        "root_policy": "fixed",
+        "support_contact": "none"
+      },
+      "description": "viseme slightly open",
+      "facing": "south",
+      "features": {
+        "halo": true,
+        "orb": false,
+        "wings": true
+      },
+      "id": "viseme_slightly_open",
+      "locomotion": "idle",
+      "phase": null,
+      "provenance": {
+        "migration_status": "graph_admitted",
+        "source_commit": "196c2389c71ca5276eed594d822d29b76310dd2f",
+        "source_graph_kind": "full_body_graph"
+      },
+      "source": "assets/reference/personas/serena-quill/canonical-worksheets/05-speech-viseme-sheet-candidate-v1.png#panel-2",
+      "tags": [
+        "speech",
+        "full_body_graph",
+        "graph_admitted",
+        "unreviewed_static"
+      ]
+    },
+    {
+      "actions": [
+        "speaking"
+      ],
+      "admission": "graph_admitted",
+      "composition": "whole_pose",
+      "contact_profile": {
+        "altitude_class": "grounded",
+        "evidence": "unreviewed_static",
+        "planted_anchor": null,
+        "root_policy": "fixed",
+        "support_contact": "none"
+      },
+      "description": "viseme wide vowel",
+      "facing": "south",
+      "features": {
+        "halo": true,
+        "orb": false,
+        "wings": true
+      },
+      "id": "viseme_wide_vowel",
+      "locomotion": "idle",
+      "phase": null,
+      "provenance": {
+        "migration_status": "graph_admitted",
+        "source_commit": "196c2389c71ca5276eed594d822d29b76310dd2f",
+        "source_graph_kind": "full_body_graph"
+      },
+      "source": "assets/reference/personas/serena-quill/canonical-worksheets/05-speech-viseme-sheet-candidate-v1.png#panel-3",
+      "tags": [
+        "speech",
+        "full_body_graph",
+        "graph_admitted",
+        "unreviewed_static"
+      ]
+    },
+    {
+      "actions": [
+        "speaking"
+      ],
+      "admission": "graph_admitted",
+      "composition": "whole_pose",
+      "contact_profile": {
+        "altitude_class": "grounded",
+        "evidence": "unreviewed_static",
+        "planted_anchor": null,
+        "root_policy": "fixed",
+        "support_contact": "none"
+      },
+      "description": "viseme open vowel",
+      "facing": "south",
+      "features": {
+        "halo": true,
+        "orb": false,
+        "wings": true
+      },
+      "id": "viseme_open_vowel",
+      "locomotion": "idle",
+      "phase": null,
+      "provenance": {
+        "migration_status": "graph_admitted",
+        "source_commit": "196c2389c71ca5276eed594d822d29b76310dd2f",
+        "source_graph_kind": "full_body_graph"
+      },
+      "source": "assets/reference/personas/serena-quill/canonical-worksheets/05-speech-viseme-sheet-candidate-v1.png#panel-4",
+      "tags": [
+        "speech",
+        "full_body_graph",
+        "graph_admitted",
+        "unreviewed_static"
+      ]
+    },
+    {
+      "actions": [
+        "speaking"
+      ],
+      "admission": "graph_admitted",
+      "composition": "whole_pose",
+      "contact_profile": {
+        "altitude_class": "grounded",
+        "evidence": "unreviewed_static",
+        "planted_anchor": null,
+        "root_policy": "fixed",
+        "support_contact": "none"
+      },
+      "description": "viseme rounded vowel",
+      "facing": "south",
+      "features": {
+        "halo": true,
+        "orb": false,
+        "wings": true
+      },
+      "id": "viseme_rounded_vowel",
+      "locomotion": "idle",
+      "phase": null,
+      "provenance": {
+        "migration_status": "graph_admitted",
+        "source_commit": "196c2389c71ca5276eed594d822d29b76310dd2f",
+        "source_graph_kind": "full_body_graph"
+      },
+      "source": "assets/reference/personas/serena-quill/canonical-worksheets/05-speech-viseme-sheet-candidate-v1.png#panel-5",
+      "tags": [
+        "speech",
+        "full_body_graph",
+        "graph_admitted",
+        "unreviewed_static"
+      ]
+    },
+    {
+      "actions": [
+        "speaking"
+      ],
+      "admission": "graph_admitted",
+      "composition": "whole_pose",
+      "contact_profile": {
+        "altitude_class": "grounded",
+        "evidence": "unreviewed_static",
+        "planted_anchor": null,
+        "root_policy": "fixed",
+        "support_contact": "none"
+      },
+      "description": "viseme teeth consonant",
+      "facing": "south",
+      "features": {
+        "halo": true,
+        "orb": false,
+        "wings": true
+      },
+      "id": "viseme_teeth_consonant",
+      "locomotion": "idle",
+      "phase": null,
+      "provenance": {
+        "migration_status": "graph_admitted",
+        "source_commit": "196c2389c71ca5276eed594d822d29b76310dd2f",
+        "source_graph_kind": "full_body_graph"
+      },
+      "source": "assets/reference/personas/serena-quill/canonical-worksheets/05-speech-viseme-sheet-candidate-v1.png#panel-6",
+      "tags": [
+        "speech",
+        "full_body_graph",
+        "graph_admitted",
+        "unreviewed_static"
+      ]
+    },
+    {
+      "actions": [
+        "speaking"
+      ],
+      "admission": "graph_admitted",
+      "composition": "whole_pose",
+      "contact_profile": {
+        "altitude_class": "grounded",
+        "evidence": "unreviewed_static",
+        "planted_anchor": null,
+        "root_policy": "fixed",
+        "support_contact": "none"
+      },
+      "description": "viseme lower lip consonant",
+      "facing": "south",
+      "features": {
+        "halo": true,
+        "orb": false,
+        "wings": true
+      },
+      "id": "viseme_lower_lip_consonant",
+      "locomotion": "idle",
+      "phase": null,
+      "provenance": {
+        "migration_status": "graph_admitted",
+        "source_commit": "196c2389c71ca5276eed594d822d29b76310dd2f",
+        "source_graph_kind": "full_body_graph"
+      },
+      "source": "assets/reference/personas/serena-quill/canonical-worksheets/05-speech-viseme-sheet-candidate-v1.png#panel-7",
+      "tags": [
+        "speech",
+        "full_body_graph",
+        "graph_admitted",
+        "unreviewed_static"
+      ]
+    },
+    {
+      "actions": [
+        "speaking"
+      ],
+      "admission": "graph_admitted",
+      "composition": "whole_pose",
+      "contact_profile": {
+        "altitude_class": "grounded",
+        "evidence": "unreviewed_static",
+        "planted_anchor": null,
+        "root_policy": "fixed",
+        "support_contact": "none"
+      },
+      "description": "viseme tongue consonant",
+      "facing": "south",
+      "features": {
+        "halo": true,
+        "orb": false,
+        "wings": true
+      },
+      "id": "viseme_tongue_consonant",
+      "locomotion": "idle",
+      "phase": null,
+      "provenance": {
+        "migration_status": "graph_admitted",
+        "source_commit": "196c2389c71ca5276eed594d822d29b76310dd2f",
+        "source_graph_kind": "full_body_graph"
+      },
+      "source": "assets/reference/personas/serena-quill/canonical-worksheets/05-speech-viseme-sheet-candidate-v1.png#panel-8",
+      "tags": [
+        "speech",
+        "full_body_graph",
+        "graph_admitted",
+        "unreviewed_static"
+      ]
+    },
+    {
+      "actions": [
+        "speaking"
+      ],
+      "admission": "graph_admitted",
+      "composition": "whole_pose",
+      "contact_profile": {
+        "altitude_class": "grounded",
+        "evidence": "unreviewed_static",
+        "planted_anchor": null,
+        "root_policy": "fixed",
+        "support_contact": "none"
+      },
+      "description": "viseme smile speaking",
+      "facing": "south",
+      "features": {
+        "halo": true,
+        "orb": false,
+        "wings": true
+      },
+      "id": "viseme_smile_speaking",
+      "locomotion": "idle",
+      "phase": null,
+      "provenance": {
+        "migration_status": "graph_admitted",
+        "source_commit": "196c2389c71ca5276eed594d822d29b76310dd2f",
+        "source_graph_kind": "full_body_graph"
+      },
+      "source": "assets/reference/personas/serena-quill/canonical-worksheets/05-speech-viseme-sheet-candidate-v1.png#panel-9",
+      "tags": [
+        "speech",
+        "full_body_graph",
+        "graph_admitted",
+        "unreviewed_static"
+      ]
+    },
+    {
+      "actions": [
+        "speaking"
+      ],
+      "admission": "graph_admitted",
+      "composition": "whole_pose",
+      "contact_profile": {
+        "altitude_class": "grounded",
+        "evidence": "unreviewed_static",
+        "planted_anchor": null,
+        "root_policy": "fixed",
+        "support_contact": "none"
+      },
+      "description": "viseme frown speaking",
+      "facing": "south",
+      "features": {
+        "halo": true,
+        "orb": false,
+        "wings": true
+      },
+      "id": "viseme_frown_speaking",
+      "locomotion": "idle",
+      "phase": null,
+      "provenance": {
+        "migration_status": "graph_admitted",
+        "source_commit": "196c2389c71ca5276eed594d822d29b76310dd2f",
+        "source_graph_kind": "full_body_graph"
+      },
+      "source": "assets/reference/personas/serena-quill/canonical-worksheets/05-speech-viseme-sheet-candidate-v1.png#panel-10",
+      "tags": [
+        "speech",
+        "full_body_graph",
+        "graph_admitted",
+        "unreviewed_static"
+      ]
+    },
+    {
+      "actions": [
+        "speaking"
+      ],
+      "admission": "graph_admitted",
+      "composition": "whole_pose",
+      "contact_profile": {
+        "altitude_class": "grounded",
+        "evidence": "unreviewed_static",
+        "planted_anchor": null,
+        "root_policy": "fixed",
+        "support_contact": "none"
+      },
+      "description": "viseme speech emphasis",
+      "facing": "south",
+      "features": {
+        "halo": true,
+        "orb": false,
+        "wings": true
+      },
+      "id": "viseme_speech_emphasis",
+      "locomotion": "idle",
+      "phase": null,
+      "provenance": {
+        "migration_status": "graph_admitted",
+        "source_commit": "196c2389c71ca5276eed594d822d29b76310dd2f",
+        "source_graph_kind": "full_body_graph"
+      },
+      "source": "assets/reference/personas/serena-quill/canonical-worksheets/05-speech-viseme-sheet-candidate-v1.png#panel-11",
+      "tags": [
+        "speech",
+        "full_body_graph",
+        "graph_admitted",
+        "unreviewed_static"
+      ]
+    },
+    {
+      "actions": [
+        "speaking"
+      ],
+      "admission": "graph_admitted",
+      "composition": "whole_pose",
+      "contact_profile": {
+        "altitude_class": "grounded",
+        "evidence": "unreviewed_static",
+        "planted_anchor": null,
+        "root_policy": "fixed",
+        "support_contact": "none"
+      },
+      "description": "viseme breath pause",
+      "facing": "south",
+      "features": {
+        "halo": true,
+        "orb": false,
+        "wings": true
+      },
+      "id": "viseme_breath_pause",
+      "locomotion": "idle",
+      "phase": null,
+      "provenance": {
+        "migration_status": "graph_admitted",
+        "source_commit": "196c2389c71ca5276eed594d822d29b76310dd2f",
+        "source_graph_kind": "full_body_graph"
+      },
+      "source": "assets/reference/personas/serena-quill/canonical-worksheets/05-speech-viseme-sheet-candidate-v1.png#panel-12",
+      "tags": [
+        "speech",
+        "full_body_graph",
+        "graph_admitted",
+        "unreviewed_static"
+      ]
+    },
+    {
+      "actions": [
+        "speaking"
+      ],
+      "admission": "graph_admitted",
+      "composition": "whole_pose",
+      "contact_profile": {
+        "altitude_class": "grounded",
+        "evidence": "unreviewed_static",
+        "planted_anchor": null,
+        "root_policy": "fixed",
+        "support_contact": "none"
+      },
+      "description": "blink open",
+      "facing": "south",
+      "features": {
+        "halo": true,
+        "orb": false,
+        "wings": true
+      },
+      "id": "blink_open",
+      "locomotion": "idle",
+      "phase": null,
+      "provenance": {
+        "migration_status": "graph_admitted",
+        "source_commit": "196c2389c71ca5276eed594d822d29b76310dd2f",
+        "source_graph_kind": "full_body_graph"
+      },
+      "source": "assets/reference/personas/serena-quill/canonical-worksheets/05-speech-viseme-sheet-candidate-v1.png#panel-13",
+      "tags": [
+        "speech",
+        "full_body_graph",
+        "graph_admitted",
+        "unreviewed_static"
+      ]
+    },
+    {
+      "actions": [
+        "speaking"
+      ],
+      "admission": "graph_admitted",
+      "composition": "whole_pose",
+      "contact_profile": {
+        "altitude_class": "grounded",
+        "evidence": "unreviewed_static",
+        "planted_anchor": null,
+        "root_policy": "fixed",
+        "support_contact": "none"
+      },
+      "description": "blink half closed",
+      "facing": "south",
+      "features": {
+        "halo": true,
+        "orb": false,
+        "wings": true
+      },
+      "id": "blink_half_closed",
+      "locomotion": "idle",
+      "phase": null,
+      "provenance": {
+        "migration_status": "graph_admitted",
+        "source_commit": "196c2389c71ca5276eed594d822d29b76310dd2f",
+        "source_graph_kind": "full_body_graph"
+      },
+      "source": "assets/reference/personas/serena-quill/canonical-worksheets/05-speech-viseme-sheet-candidate-v1.png#panel-14",
+      "tags": [
+        "speech",
+        "full_body_graph",
+        "graph_admitted",
+        "unreviewed_static"
+      ]
+    },
+    {
+      "actions": [
+        "speaking"
+      ],
+      "admission": "graph_admitted",
+      "composition": "whole_pose",
+      "contact_profile": {
+        "altitude_class": "grounded",
+        "evidence": "unreviewed_static",
+        "planted_anchor": null,
+        "root_policy": "fixed",
+        "support_contact": "none"
+      },
+      "description": "blink closed",
+      "facing": "south",
+      "features": {
+        "halo": true,
+        "orb": false,
+        "wings": true
+      },
+      "id": "blink_closed",
+      "locomotion": "idle",
+      "phase": null,
+      "provenance": {
+        "migration_status": "graph_admitted",
+        "source_commit": "196c2389c71ca5276eed594d822d29b76310dd2f",
+        "source_graph_kind": "full_body_graph"
+      },
+      "source": "assets/reference/personas/serena-quill/canonical-worksheets/05-speech-viseme-sheet-candidate-v1.png#panel-15",
+      "tags": [
+        "speech",
+        "full_body_graph",
+        "graph_admitted",
+        "unreviewed_static"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "admission": "diagnostic_only",
+      "composition": "region_overlay",
+      "contact_profile": {
+        "altitude_class": "grounded",
+        "evidence": "unresolved_diagnostic",
+        "planted_anchor": null,
+        "root_policy": "fixed",
+        "support_contact": "none"
+      },
+      "description": "hand open relaxed",
+      "facing": "south",
+      "features": {
+        "halo": false,
+        "orb": false,
+        "wings": false
+      },
+      "id": "hand_open_relaxed",
+      "locomotion": "idle",
+      "phase": null,
+      "provenance": {
+        "migration_status": "diagnostic_only",
+        "source_commit": "196c2389c71ca5276eed594d822d29b76310dd2f",
+        "source_graph_kind": "feature_graph"
+      },
+      "source": "assets/reference/personas/serena-quill/canonical-worksheets/06-hand-prop-sheet-candidate-v1.png#panel-0",
+      "tags": [
+        "feature",
+        "feature_graph",
+        "diagnostic_only",
+        "unresolved_diagnostic"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "admission": "diagnostic_only",
+      "composition": "region_overlay",
+      "contact_profile": {
+        "altitude_class": "grounded",
+        "evidence": "unresolved_diagnostic",
+        "planted_anchor": null,
+        "root_policy": "fixed",
+        "support_contact": "none"
+      },
+      "description": "hand closed relaxed",
+      "facing": "south",
+      "features": {
+        "halo": false,
+        "orb": false,
+        "wings": false
+      },
+      "id": "hand_closed_relaxed",
+      "locomotion": "idle",
+      "phase": null,
+      "provenance": {
+        "migration_status": "diagnostic_only",
+        "source_commit": "196c2389c71ca5276eed594d822d29b76310dd2f",
+        "source_graph_kind": "feature_graph"
+      },
+      "source": "assets/reference/personas/serena-quill/canonical-worksheets/06-hand-prop-sheet-candidate-v1.png#panel-1",
+      "tags": [
+        "feature",
+        "feature_graph",
+        "diagnostic_only",
+        "unresolved_diagnostic"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "admission": "diagnostic_only",
+      "composition": "region_overlay",
+      "contact_profile": {
+        "altitude_class": "grounded",
+        "evidence": "unresolved_diagnostic",
+        "planted_anchor": null,
+        "root_policy": "fixed",
+        "support_contact": "none"
+      },
+      "description": "hand safe fist",
+      "facing": "south",
+      "features": {
+        "halo": false,
+        "orb": false,
+        "wings": false
+      },
+      "id": "hand_safe_fist",
+      "locomotion": "idle",
+      "phase": null,
+      "provenance": {
+        "migration_status": "diagnostic_only",
+        "source_commit": "196c2389c71ca5276eed594d822d29b76310dd2f",
+        "source_graph_kind": "feature_graph"
+      },
+      "source": "assets/reference/personas/serena-quill/canonical-worksheets/06-hand-prop-sheet-candidate-v1.png#panel-2",
+      "tags": [
+        "feature",
+        "feature_graph",
+        "diagnostic_only",
+        "unresolved_diagnostic"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "admission": "diagnostic_only",
+      "composition": "region_overlay",
+      "contact_profile": {
+        "altitude_class": "grounded",
+        "evidence": "unresolved_diagnostic",
+        "planted_anchor": null,
+        "root_policy": "fixed",
+        "support_contact": "none"
+      },
+      "description": "hand gentle point",
+      "facing": "south",
+      "features": {
+        "halo": false,
+        "orb": false,
+        "wings": false
+      },
+      "id": "hand_gentle_point",
+      "locomotion": "idle",
+      "phase": null,
+      "provenance": {
+        "migration_status": "diagnostic_only",
+        "source_commit": "196c2389c71ca5276eed594d822d29b76310dd2f",
+        "source_graph_kind": "feature_graph"
+      },
+      "source": "assets/reference/personas/serena-quill/canonical-worksheets/06-hand-prop-sheet-candidate-v1.png#panel-3",
+      "tags": [
+        "feature",
+        "feature_graph",
+        "diagnostic_only",
+        "unresolved_diagnostic"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "admission": "diagnostic_only",
+      "composition": "region_overlay",
+      "contact_profile": {
+        "altitude_class": "grounded",
+        "evidence": "unresolved_diagnostic",
+        "planted_anchor": null,
+        "root_policy": "fixed",
+        "support_contact": "none"
+      },
+      "description": "hand presenting",
+      "facing": "south",
+      "features": {
+        "halo": false,
+        "orb": false,
+        "wings": false
+      },
+      "id": "hand_presenting",
+      "locomotion": "idle",
+      "phase": null,
+      "provenance": {
+        "migration_status": "diagnostic_only",
+        "source_commit": "196c2389c71ca5276eed594d822d29b76310dd2f",
+        "source_graph_kind": "feature_graph"
+      },
+      "source": "assets/reference/personas/serena-quill/canonical-worksheets/06-hand-prop-sheet-candidate-v1.png#panel-4",
+      "tags": [
+        "feature",
+        "feature_graph",
+        "diagnostic_only",
+        "unresolved_diagnostic"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "admission": "diagnostic_only",
+      "composition": "region_overlay",
+      "contact_profile": {
+        "altitude_class": "grounded",
+        "evidence": "unresolved_diagnostic",
+        "planted_anchor": null,
+        "root_policy": "fixed",
+        "support_contact": "none"
+      },
+      "description": "hand reaching",
+      "facing": "south",
+      "features": {
+        "halo": false,
+        "orb": false,
+        "wings": false
+      },
+      "id": "hand_reaching",
+      "locomotion": "idle",
+      "phase": null,
+      "provenance": {
+        "migration_status": "diagnostic_only",
+        "source_commit": "196c2389c71ca5276eed594d822d29b76310dd2f",
+        "source_graph_kind": "feature_graph"
+      },
+      "source": "assets/reference/personas/serena-quill/canonical-worksheets/06-hand-prop-sheet-candidate-v1.png#panel-5",
+      "tags": [
+        "feature",
+        "feature_graph",
+        "diagnostic_only",
+        "unresolved_diagnostic"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "admission": "diagnostic_only",
+      "composition": "region_overlay",
+      "contact_profile": {
+        "altitude_class": "grounded",
+        "evidence": "unresolved_diagnostic",
+        "planted_anchor": null,
+        "root_policy": "fixed",
+        "support_contact": "none"
+      },
+      "description": "prop orb two hand cradle",
+      "facing": "south",
+      "features": {
+        "halo": false,
+        "orb": true,
+        "wings": false
+      },
+      "id": "prop_orb_two_hand_cradle",
+      "locomotion": "idle",
+      "phase": null,
+      "provenance": {
+        "migration_status": "diagnostic_only",
+        "source_commit": "196c2389c71ca5276eed594d822d29b76310dd2f",
+        "source_graph_kind": "feature_graph"
+      },
+      "source": "assets/reference/personas/serena-quill/canonical-worksheets/06-hand-prop-sheet-candidate-v1.png#panel-6",
+      "tags": [
+        "feature",
+        "feature_graph",
+        "diagnostic_only",
+        "unresolved_diagnostic"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "admission": "diagnostic_only",
+      "composition": "region_overlay",
+      "contact_profile": {
+        "altitude_class": "grounded",
+        "evidence": "unresolved_diagnostic",
+        "planted_anchor": null,
+        "root_policy": "fixed",
+        "support_contact": "none"
+      },
+      "description": "prop orb one hand support",
+      "facing": "south",
+      "features": {
+        "halo": false,
+        "orb": true,
+        "wings": false
+      },
+      "id": "prop_orb_one_hand_support",
+      "locomotion": "idle",
+      "phase": null,
+      "provenance": {
+        "migration_status": "diagnostic_only",
+        "source_commit": "196c2389c71ca5276eed594d822d29b76310dd2f",
+        "source_graph_kind": "feature_graph"
+      },
+      "source": "assets/reference/personas/serena-quill/canonical-worksheets/06-hand-prop-sheet-candidate-v1.png#panel-7",
+      "tags": [
+        "feature",
+        "feature_graph",
+        "diagnostic_only",
+        "unresolved_diagnostic"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "admission": "diagnostic_only",
+      "composition": "region_overlay",
+      "contact_profile": {
+        "altitude_class": "grounded",
+        "evidence": "unresolved_diagnostic",
+        "planted_anchor": null,
+        "root_policy": "fixed",
+        "support_contact": "none"
+      },
+      "description": "prop orb lowered",
+      "facing": "south",
+      "features": {
+        "halo": false,
+        "orb": true,
+        "wings": false
+      },
+      "id": "prop_orb_lowered",
+      "locomotion": "idle",
+      "phase": null,
+      "provenance": {
+        "migration_status": "diagnostic_only",
+        "source_commit": "196c2389c71ca5276eed594d822d29b76310dd2f",
+        "source_graph_kind": "feature_graph"
+      },
+      "source": "assets/reference/personas/serena-quill/canonical-worksheets/06-hand-prop-sheet-candidate-v1.png#panel-8",
+      "tags": [
+        "feature",
+        "feature_graph",
+        "diagnostic_only",
+        "unresolved_diagnostic"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "admission": "diagnostic_only",
+      "composition": "region_overlay",
+      "contact_profile": {
+        "altitude_class": "grounded",
+        "evidence": "unresolved_diagnostic",
+        "planted_anchor": null,
+        "root_policy": "fixed",
+        "support_contact": "none"
+      },
+      "description": "prop orb offered",
+      "facing": "south",
+      "features": {
+        "halo": false,
+        "orb": true,
+        "wings": false
+      },
+      "id": "prop_orb_offered",
+      "locomotion": "idle",
+      "phase": null,
+      "provenance": {
+        "migration_status": "diagnostic_only",
+        "source_commit": "196c2389c71ca5276eed594d822d29b76310dd2f",
+        "source_graph_kind": "feature_graph"
+      },
+      "source": "assets/reference/personas/serena-quill/canonical-worksheets/06-hand-prop-sheet-candidate-v1.png#panel-9",
+      "tags": [
+        "feature",
+        "feature_graph",
+        "diagnostic_only",
+        "unresolved_diagnostic"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "admission": "diagnostic_only",
+      "composition": "region_overlay",
+      "contact_profile": {
+        "altitude_class": "grounded",
+        "evidence": "unresolved_diagnostic",
+        "planted_anchor": null,
+        "root_policy": "fixed",
+        "support_contact": "none"
+      },
+      "description": "prop orb received",
+      "facing": "south",
+      "features": {
+        "halo": false,
+        "orb": true,
+        "wings": false
+      },
+      "id": "prop_orb_received",
+      "locomotion": "idle",
+      "phase": null,
+      "provenance": {
+        "migration_status": "diagnostic_only",
+        "source_commit": "196c2389c71ca5276eed594d822d29b76310dd2f",
+        "source_graph_kind": "feature_graph"
+      },
+      "source": "assets/reference/personas/serena-quill/canonical-worksheets/06-hand-prop-sheet-candidate-v1.png#panel-10",
+      "tags": [
+        "feature",
+        "feature_graph",
+        "diagnostic_only",
+        "unresolved_diagnostic"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "admission": "diagnostic_only",
+      "composition": "region_overlay",
+      "contact_profile": {
+        "altitude_class": "grounded",
+        "evidence": "unresolved_diagnostic",
+        "planted_anchor": null,
+        "root_policy": "fixed",
+        "support_contact": "none"
+      },
+      "description": "prop orb transfer",
+      "facing": "south",
+      "features": {
+        "halo": false,
+        "orb": true,
+        "wings": false
+      },
+      "id": "prop_orb_transfer",
+      "locomotion": "idle",
+      "phase": null,
+      "provenance": {
+        "migration_status": "diagnostic_only",
+        "source_commit": "196c2389c71ca5276eed594d822d29b76310dd2f",
+        "source_graph_kind": "feature_graph"
+      },
+      "source": "assets/reference/personas/serena-quill/canonical-worksheets/06-hand-prop-sheet-candidate-v1.png#panel-11",
+      "tags": [
+        "feature",
+        "feature_graph",
+        "diagnostic_only",
+        "unresolved_diagnostic"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "admission": "diagnostic_only",
+      "composition": "region_overlay",
+      "contact_profile": {
+        "altitude_class": "grounded",
+        "evidence": "unresolved_diagnostic",
+        "planted_anchor": null,
+        "root_policy": "fixed",
+        "support_contact": "none"
+      },
+      "description": "prop orb reassurance",
+      "facing": "south",
+      "features": {
+        "halo": false,
+        "orb": true,
+        "wings": false
+      },
+      "id": "prop_orb_reassurance",
+      "locomotion": "idle",
+      "phase": null,
+      "provenance": {
+        "migration_status": "diagnostic_only",
+        "source_commit": "196c2389c71ca5276eed594d822d29b76310dd2f",
+        "source_graph_kind": "feature_graph"
+      },
+      "source": "assets/reference/personas/serena-quill/canonical-worksheets/06-hand-prop-sheet-candidate-v1.png#panel-12",
+      "tags": [
+        "feature",
+        "feature_graph",
+        "diagnostic_only",
+        "unresolved_diagnostic"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "admission": "diagnostic_only",
+      "composition": "region_overlay",
+      "contact_profile": {
+        "altitude_class": "grounded",
+        "evidence": "unresolved_diagnostic",
+        "planted_anchor": null,
+        "root_policy": "fixed",
+        "support_contact": "none"
+      },
+      "description": "hand consent pause",
+      "facing": "south",
+      "features": {
+        "halo": false,
+        "orb": true,
+        "wings": false
+      },
+      "id": "hand_consent_pause",
+      "locomotion": "idle",
+      "phase": null,
+      "provenance": {
+        "migration_status": "diagnostic_only",
+        "source_commit": "196c2389c71ca5276eed594d822d29b76310dd2f",
+        "source_graph_kind": "feature_graph"
+      },
+      "source": "assets/reference/personas/serena-quill/canonical-worksheets/06-hand-prop-sheet-candidate-v1.png#panel-13",
+      "tags": [
+        "feature",
+        "feature_graph",
+        "diagnostic_only",
+        "unresolved_diagnostic"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "admission": "diagnostic_only",
+      "composition": "region_overlay",
+      "contact_profile": {
+        "altitude_class": "grounded",
+        "evidence": "unresolved_diagnostic",
+        "planted_anchor": null,
+        "root_policy": "fixed",
+        "support_contact": "none"
+      },
+      "description": "prop orb release",
+      "facing": "south",
+      "features": {
+        "halo": false,
+        "orb": true,
+        "wings": false
+      },
+      "id": "prop_orb_release",
+      "locomotion": "idle",
+      "phase": null,
+      "provenance": {
+        "migration_status": "diagnostic_only",
+        "source_commit": "196c2389c71ca5276eed594d822d29b76310dd2f",
+        "source_graph_kind": "feature_graph"
+      },
+      "source": "assets/reference/personas/serena-quill/canonical-worksheets/06-hand-prop-sheet-candidate-v1.png#panel-14",
+      "tags": [
+        "feature",
+        "feature_graph",
+        "diagnostic_only",
+        "unresolved_diagnostic"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "admission": "diagnostic_only",
+      "composition": "region_overlay",
+      "contact_profile": {
+        "altitude_class": "grounded",
+        "evidence": "unresolved_diagnostic",
+        "planted_anchor": null,
+        "root_policy": "fixed",
+        "support_contact": "none"
+      },
+      "description": "prop orb settled listening",
+      "facing": "south",
+      "features": {
+        "halo": false,
+        "orb": true,
+        "wings": false
+      },
+      "id": "prop_orb_settled_listening",
+      "locomotion": "idle",
+      "phase": null,
+      "provenance": {
+        "migration_status": "diagnostic_only",
+        "source_commit": "196c2389c71ca5276eed594d822d29b76310dd2f",
+        "source_graph_kind": "feature_graph"
+      },
+      "source": "assets/reference/personas/serena-quill/canonical-worksheets/06-hand-prop-sheet-candidate-v1.png#panel-15",
+      "tags": [
+        "feature",
+        "feature_graph",
+        "diagnostic_only",
+        "unresolved_diagnostic"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "admission": "graph_admitted",
+      "composition": "whole_pose",
+      "contact_profile": {
+        "altitude_class": "grounded",
+        "evidence": "pose_id_exact",
+        "planted_anchor": "left_foot",
+        "root_policy": "contact_locked",
+        "support_contact": "left_foot"
+      },
+      "description": "walk contact left",
+      "facing": "south",
+      "features": {
+        "halo": true,
+        "orb": false,
+        "wings": true
+      },
+      "id": "walk_contact_left",
+      "locomotion": "walk",
+      "phase": 0.0,
+      "provenance": {
+        "migration_status": "graph_admitted",
+        "source_commit": "196c2389c71ca5276eed594d822d29b76310dd2f",
+        "source_graph_kind": "full_body_graph"
+      },
+      "source": "assets/reference/personas/serena-quill/canonical-worksheets/07-ground-motion-sheet-candidate-v1.png#panel-0",
+      "tags": [
+        "motion",
+        "full_body_graph",
+        "graph_admitted",
+        "pose_id_exact"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "admission": "diagnostic_only",
+      "composition": "whole_pose",
+      "contact_profile": {
+        "altitude_class": "grounded",
+        "evidence": "unresolved_diagnostic",
+        "planted_anchor": null,
+        "root_policy": "fixed",
+        "support_contact": "none"
+      },
+      "description": "walk down left",
+      "facing": "south",
+      "features": {
+        "halo": true,
+        "orb": false,
+        "wings": true
+      },
+      "id": "walk_down_left",
+      "locomotion": "walk",
+      "phase": 0.25,
+      "provenance": {
+        "migration_status": "diagnostic_only",
+        "source_commit": "196c2389c71ca5276eed594d822d29b76310dd2f",
+        "source_graph_kind": "full_body_graph"
+      },
+      "source": "assets/reference/personas/serena-quill/canonical-worksheets/07-ground-motion-sheet-candidate-v1.png#panel-1",
+      "tags": [
+        "motion",
+        "full_body_graph",
+        "diagnostic_only",
+        "unresolved_diagnostic"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "admission": "diagnostic_only",
+      "composition": "whole_pose",
+      "contact_profile": {
+        "altitude_class": "grounded",
+        "evidence": "unresolved_diagnostic",
+        "planted_anchor": null,
+        "root_policy": "fixed",
+        "support_contact": "none"
+      },
+      "description": "walk passing right",
+      "facing": "south",
+      "features": {
+        "halo": true,
+        "orb": false,
+        "wings": true
+      },
+      "id": "walk_passing_right",
+      "locomotion": "walk",
+      "phase": 0.5,
+      "provenance": {
+        "migration_status": "diagnostic_only",
+        "source_commit": "196c2389c71ca5276eed594d822d29b76310dd2f",
+        "source_graph_kind": "full_body_graph"
+      },
+      "source": "assets/reference/personas/serena-quill/canonical-worksheets/07-ground-motion-sheet-candidate-v1.png#panel-2",
+      "tags": [
+        "motion",
+        "full_body_graph",
+        "diagnostic_only",
+        "unresolved_diagnostic"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "admission": "diagnostic_only",
+      "composition": "whole_pose",
+      "contact_profile": {
+        "altitude_class": "grounded",
+        "evidence": "unresolved_diagnostic",
+        "planted_anchor": null,
+        "root_policy": "fixed",
+        "support_contact": "none"
+      },
+      "description": "walk up right",
+      "facing": "south",
+      "features": {
+        "halo": true,
+        "orb": false,
+        "wings": true
+      },
+      "id": "walk_up_right",
+      "locomotion": "walk",
+      "phase": 0.75,
+      "provenance": {
+        "migration_status": "diagnostic_only",
+        "source_commit": "196c2389c71ca5276eed594d822d29b76310dd2f",
+        "source_graph_kind": "full_body_graph"
+      },
+      "source": "assets/reference/personas/serena-quill/canonical-worksheets/07-ground-motion-sheet-candidate-v1.png#panel-3",
+      "tags": [
+        "motion",
+        "full_body_graph",
+        "diagnostic_only",
+        "unresolved_diagnostic"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "admission": "graph_admitted",
+      "composition": "whole_pose",
+      "contact_profile": {
+        "altitude_class": "grounded",
+        "evidence": "pose_id_exact",
+        "planted_anchor": "left_foot",
+        "root_policy": "contact_locked",
+        "support_contact": "left_foot"
+      },
+      "description": "run contact left",
+      "facing": "south",
+      "features": {
+        "halo": true,
+        "orb": false,
+        "wings": true
+      },
+      "id": "run_contact_left",
+      "locomotion": "run",
+      "phase": 0.0,
+      "provenance": {
+        "migration_status": "graph_admitted",
+        "source_commit": "196c2389c71ca5276eed594d822d29b76310dd2f",
+        "source_graph_kind": "full_body_graph"
+      },
+      "source": "assets/reference/personas/serena-quill/canonical-worksheets/07-ground-motion-sheet-candidate-v1.png#panel-4",
+      "tags": [
+        "motion",
+        "full_body_graph",
+        "graph_admitted",
+        "pose_id_exact"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "admission": "diagnostic_only",
+      "composition": "whole_pose",
+      "contact_profile": {
+        "altitude_class": "grounded",
+        "evidence": "unresolved_diagnostic",
+        "planted_anchor": null,
+        "root_policy": "fixed",
+        "support_contact": "none"
+      },
+      "description": "run passing right",
+      "facing": "south",
+      "features": {
+        "halo": true,
+        "orb": false,
+        "wings": true
+      },
+      "id": "run_passing_right",
+      "locomotion": "run",
+      "phase": 0.5,
+      "provenance": {
+        "migration_status": "diagnostic_only",
+        "source_commit": "196c2389c71ca5276eed594d822d29b76310dd2f",
+        "source_graph_kind": "full_body_graph"
+      },
+      "source": "assets/reference/personas/serena-quill/canonical-worksheets/07-ground-motion-sheet-candidate-v1.png#panel-5",
+      "tags": [
+        "motion",
+        "full_body_graph",
+        "diagnostic_only",
+        "unresolved_diagnostic"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "admission": "diagnostic_only",
+      "composition": "whole_pose",
+      "contact_profile": {
+        "altitude_class": "grounded",
+        "evidence": "unresolved_diagnostic",
+        "planted_anchor": null,
+        "root_policy": "fixed",
+        "support_contact": "none"
+      },
+      "description": "start",
+      "facing": "south",
+      "features": {
+        "halo": true,
+        "orb": false,
+        "wings": true
+      },
+      "id": "start",
+      "locomotion": "transition",
+      "phase": null,
+      "provenance": {
+        "migration_status": "diagnostic_only",
+        "source_commit": "196c2389c71ca5276eed594d822d29b76310dd2f",
+        "source_graph_kind": "full_body_graph"
+      },
+      "source": "assets/reference/personas/serena-quill/canonical-worksheets/07-ground-motion-sheet-candidate-v1.png#panel-6",
+      "tags": [
+        "motion",
+        "full_body_graph",
+        "diagnostic_only",
+        "unresolved_diagnostic"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "admission": "diagnostic_only",
+      "composition": "whole_pose",
+      "contact_profile": {
+        "altitude_class": "grounded",
+        "evidence": "unresolved_diagnostic",
+        "planted_anchor": null,
+        "root_policy": "fixed",
+        "support_contact": "none"
+      },
+      "description": "stop",
+      "facing": "south",
+      "features": {
+        "halo": true,
+        "orb": false,
+        "wings": true
+      },
+      "id": "stop",
+      "locomotion": "transition",
+      "phase": null,
+      "provenance": {
+        "migration_status": "diagnostic_only",
+        "source_commit": "196c2389c71ca5276eed594d822d29b76310dd2f",
+        "source_graph_kind": "full_body_graph"
+      },
+      "source": "assets/reference/personas/serena-quill/canonical-worksheets/07-ground-motion-sheet-candidate-v1.png#panel-7",
+      "tags": [
+        "motion",
+        "full_body_graph",
+        "diagnostic_only",
+        "unresolved_diagnostic"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "admission": "diagnostic_only",
+      "composition": "whole_pose",
+      "contact_profile": {
+        "altitude_class": "grounded",
+        "evidence": "unresolved_diagnostic",
+        "planted_anchor": null,
+        "root_policy": "fixed",
+        "support_contact": "none"
+      },
+      "description": "turn left",
+      "facing": "south",
+      "features": {
+        "halo": true,
+        "orb": false,
+        "wings": true
+      },
+      "id": "turn_left",
+      "locomotion": "transition",
+      "phase": null,
+      "provenance": {
+        "migration_status": "diagnostic_only",
+        "source_commit": "196c2389c71ca5276eed594d822d29b76310dd2f",
+        "source_graph_kind": "full_body_graph"
+      },
+      "source": "assets/reference/personas/serena-quill/canonical-worksheets/07-ground-motion-sheet-candidate-v1.png#panel-8",
+      "tags": [
+        "motion",
+        "full_body_graph",
+        "diagnostic_only",
+        "unresolved_diagnostic"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "admission": "diagnostic_only",
+      "composition": "whole_pose",
+      "contact_profile": {
+        "altitude_class": "grounded",
+        "evidence": "unresolved_diagnostic",
+        "planted_anchor": null,
+        "root_policy": "fixed",
+        "support_contact": "none"
+      },
+      "description": "turn right",
+      "facing": "south",
+      "features": {
+        "halo": true,
+        "orb": false,
+        "wings": true
+      },
+      "id": "turn_right",
+      "locomotion": "transition",
+      "phase": null,
+      "provenance": {
+        "migration_status": "diagnostic_only",
+        "source_commit": "196c2389c71ca5276eed594d822d29b76310dd2f",
+        "source_graph_kind": "full_body_graph"
+      },
+      "source": "assets/reference/personas/serena-quill/canonical-worksheets/07-ground-motion-sheet-candidate-v1.png#panel-9",
+      "tags": [
+        "motion",
+        "full_body_graph",
+        "diagnostic_only",
+        "unresolved_diagnostic"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "admission": "diagnostic_only",
+      "composition": "whole_pose",
+      "contact_profile": {
+        "altitude_class": "grounded",
+        "evidence": "unresolved_diagnostic",
+        "planted_anchor": null,
+        "root_policy": "fixed",
+        "support_contact": "none"
+      },
+      "description": "crouch",
+      "facing": "south",
+      "features": {
+        "halo": true,
+        "orb": false,
+        "wings": true
+      },
+      "id": "crouch",
+      "locomotion": "transition",
+      "phase": null,
+      "provenance": {
+        "migration_status": "diagnostic_only",
+        "source_commit": "196c2389c71ca5276eed594d822d29b76310dd2f",
+        "source_graph_kind": "full_body_graph"
+      },
+      "source": "assets/reference/personas/serena-quill/canonical-worksheets/07-ground-motion-sheet-candidate-v1.png#panel-10",
+      "tags": [
+        "motion",
+        "full_body_graph",
+        "diagnostic_only",
+        "unresolved_diagnostic"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "admission": "diagnostic_only",
+      "composition": "whole_pose",
+      "contact_profile": {
+        "altitude_class": "grounded",
+        "evidence": "unresolved_diagnostic",
+        "planted_anchor": null,
+        "root_policy": "fixed",
+        "support_contact": "none"
+      },
+      "description": "jump anticipation",
+      "facing": "south",
+      "features": {
+        "halo": true,
+        "orb": false,
+        "wings": true
+      },
+      "id": "jump_anticipation",
+      "locomotion": "transition",
+      "phase": null,
+      "provenance": {
+        "migration_status": "diagnostic_only",
+        "source_commit": "196c2389c71ca5276eed594d822d29b76310dd2f",
+        "source_graph_kind": "full_body_graph"
+      },
+      "source": "assets/reference/personas/serena-quill/canonical-worksheets/07-ground-motion-sheet-candidate-v1.png#panel-11",
+      "tags": [
+        "motion",
+        "full_body_graph",
+        "diagnostic_only",
+        "unresolved_diagnostic"
+      ]
+    },
+    {
+      "actions": [
+        "jump"
+      ],
+      "admission": "graph_admitted",
+      "composition": "whole_pose",
+      "contact_profile": {
+        "altitude_class": "airborne",
+        "evidence": "pose_id_exact",
+        "planted_anchor": null,
+        "root_policy": "air_trajectory",
+        "support_contact": "none"
+      },
+      "description": "jump airborne",
+      "facing": "south",
+      "features": {
+        "halo": true,
+        "orb": false,
+        "wings": true
+      },
+      "id": "jump_airborne",
+      "locomotion": "airborne",
+      "phase": null,
+      "provenance": {
+        "migration_status": "graph_admitted",
+        "source_commit": "196c2389c71ca5276eed594d822d29b76310dd2f",
+        "source_graph_kind": "full_body_graph"
+      },
+      "source": "assets/reference/personas/serena-quill/canonical-worksheets/07-ground-motion-sheet-candidate-v1.png#panel-12",
+      "tags": [
+        "motion",
+        "full_body_graph",
+        "graph_admitted",
+        "pose_id_exact"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "admission": "diagnostic_only",
+      "composition": "whole_pose",
+      "contact_profile": {
+        "altitude_class": "airborne",
+        "evidence": "unresolved_diagnostic",
+        "planted_anchor": null,
+        "root_policy": "fixed",
+        "support_contact": "none"
+      },
+      "description": "fall",
+      "facing": "south",
+      "features": {
+        "halo": true,
+        "orb": false,
+        "wings": true
+      },
+      "id": "fall",
+      "locomotion": "airborne",
+      "phase": null,
+      "provenance": {
+        "migration_status": "diagnostic_only",
+        "source_commit": "196c2389c71ca5276eed594d822d29b76310dd2f",
+        "source_graph_kind": "full_body_graph"
+      },
+      "source": "assets/reference/personas/serena-quill/canonical-worksheets/07-ground-motion-sheet-candidate-v1.png#panel-13",
+      "tags": [
+        "motion",
+        "full_body_graph",
+        "diagnostic_only",
+        "unresolved_diagnostic"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "admission": "diagnostic_only",
+      "composition": "whole_pose",
+      "contact_profile": {
+        "altitude_class": "grounded",
+        "evidence": "unresolved_diagnostic",
+        "planted_anchor": null,
+        "root_policy": "fixed",
+        "support_contact": "none"
+      },
+      "description": "land contact",
+      "facing": "south",
+      "features": {
+        "halo": true,
+        "orb": false,
+        "wings": true
+      },
+      "id": "land_contact",
+      "locomotion": "transition",
+      "phase": null,
+      "provenance": {
+        "migration_status": "diagnostic_only",
+        "source_commit": "196c2389c71ca5276eed594d822d29b76310dd2f",
+        "source_graph_kind": "full_body_graph"
+      },
+      "source": "assets/reference/personas/serena-quill/canonical-worksheets/07-ground-motion-sheet-candidate-v1.png#panel-14",
+      "tags": [
+        "motion",
+        "full_body_graph",
+        "diagnostic_only",
+        "unresolved_diagnostic"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "admission": "diagnostic_only",
+      "composition": "whole_pose",
+      "contact_profile": {
+        "altitude_class": "grounded",
+        "evidence": "unresolved_diagnostic",
+        "planted_anchor": null,
+        "root_policy": "fixed",
+        "support_contact": "none"
+      },
+      "description": "land recovery",
+      "facing": "south",
+      "features": {
+        "halo": true,
+        "orb": false,
+        "wings": true
+      },
+      "id": "land_recovery",
+      "locomotion": "transition",
+      "phase": null,
+      "provenance": {
+        "migration_status": "diagnostic_only",
+        "source_commit": "196c2389c71ca5276eed594d822d29b76310dd2f",
+        "source_graph_kind": "full_body_graph"
+      },
+      "source": "assets/reference/personas/serena-quill/canonical-worksheets/07-ground-motion-sheet-candidate-v1.png#panel-15",
+      "tags": [
+        "motion",
+        "full_body_graph",
+        "diagnostic_only",
+        "unresolved_diagnostic"
+      ]
+    },
+    {
+      "actions": [
+        "mentoring_invitation"
+      ],
+      "admission": "graph_admitted",
+      "composition": "whole_pose",
+      "contact_profile": {
+        "altitude_class": "grounded",
+        "evidence": "unreviewed_static",
+        "planted_anchor": null,
+        "root_policy": "fixed",
+        "support_contact": "none"
+      },
+      "description": "mentoring invitation",
+      "facing": "south",
+      "features": {
+        "halo": true,
+        "orb": false,
+        "wings": true
+      },
+      "id": "mentoring_invitation",
+      "locomotion": "idle",
+      "phase": null,
+      "provenance": {
+        "migration_status": "graph_admitted",
+        "source_commit": "196c2389c71ca5276eed594d822d29b76310dd2f",
+        "source_graph_kind": "full_body_graph"
+      },
+      "source": "assets/reference/personas/serena-quill/canonical-worksheets/08-signature-actions-sheet-candidate-v1.png#panel-0",
+      "tags": [
+        "signature",
+        "full_body_graph",
+        "graph_admitted",
+        "unreviewed_static"
+      ]
+    },
+    {
+      "actions": [
+        "reaction"
+      ],
+      "admission": "graph_admitted",
+      "composition": "whole_pose",
+      "contact_profile": {
+        "altitude_class": "grounded",
+        "evidence": "unreviewed_static",
+        "planted_anchor": null,
+        "root_policy": "fixed",
+        "support_contact": "none"
+      },
+      "description": "emotional climate check",
+      "facing": "south",
+      "features": {
+        "halo": true,
+        "orb": false,
+        "wings": true
+      },
+      "id": "emotional_climate_check",
+      "locomotion": "idle",
+      "phase": null,
+      "provenance": {
+        "migration_status": "graph_admitted",
+        "source_commit": "196c2389c71ca5276eed594d822d29b76310dd2f",
+        "source_graph_kind": "full_body_graph"
+      },
+      "source": "assets/reference/personas/serena-quill/canonical-worksheets/08-signature-actions-sheet-candidate-v1.png#panel-1",
+      "tags": [
+        "signature",
+        "full_body_graph",
+        "graph_admitted",
+        "unreviewed_static"
+      ]
+    },
+    {
+      "actions": [
+        "consent_pause"
+      ],
+      "admission": "graph_admitted",
+      "composition": "whole_pose",
+      "contact_profile": {
+        "altitude_class": "grounded",
+        "evidence": "unreviewed_static",
+        "planted_anchor": null,
+        "root_policy": "fixed",
+        "support_contact": "none"
+      },
+      "description": "consent pause",
+      "facing": "south",
+      "features": {
+        "halo": true,
+        "orb": false,
+        "wings": true
+      },
+      "id": "consent_pause",
+      "locomotion": "idle",
+      "phase": null,
+      "provenance": {
+        "migration_status": "graph_admitted",
+        "source_commit": "196c2389c71ca5276eed594d822d29b76310dd2f",
+        "source_graph_kind": "full_body_graph"
+      },
+      "source": "assets/reference/personas/serena-quill/canonical-worksheets/08-signature-actions-sheet-candidate-v1.png#panel-2",
+      "tags": [
+        "signature",
+        "full_body_graph",
+        "graph_admitted",
+        "unreviewed_static"
+      ]
+    },
+    {
+      "actions": [
+        "explaining"
+      ],
+      "admission": "graph_admitted",
+      "composition": "whole_pose",
+      "contact_profile": {
+        "altitude_class": "grounded",
+        "evidence": "unreviewed_static",
+        "planted_anchor": null,
+        "root_policy": "fixed",
+        "support_contact": "none"
+      },
+      "description": "facilitation",
+      "facing": "south",
+      "features": {
+        "halo": true,
+        "orb": false,
+        "wings": true
+      },
+      "id": "facilitation",
+      "locomotion": "idle",
+      "phase": null,
+      "provenance": {
+        "migration_status": "graph_admitted",
+        "source_commit": "196c2389c71ca5276eed594d822d29b76310dd2f",
+        "source_graph_kind": "full_body_graph"
+      },
+      "source": "assets/reference/personas/serena-quill/canonical-worksheets/08-signature-actions-sheet-candidate-v1.png#panel-3",
+      "tags": [
+        "signature",
+        "full_body_graph",
+        "graph_admitted",
+        "unreviewed_static"
+      ]
+    },
+    {
+      "actions": [
+        "orb_reassurance"
+      ],
+      "admission": "graph_admitted",
+      "composition": "whole_pose",
+      "contact_profile": {
+        "altitude_class": "grounded",
+        "evidence": "unreviewed_static",
+        "planted_anchor": null,
+        "root_policy": "fixed",
+        "support_contact": "none"
+      },
+      "description": "orb reassurance",
+      "facing": "south",
+      "features": {
+        "halo": true,
+        "orb": true,
+        "wings": true
+      },
+      "id": "orb_reassurance",
+      "locomotion": "idle",
+      "phase": null,
+      "provenance": {
+        "migration_status": "graph_admitted",
+        "source_commit": "196c2389c71ca5276eed594d822d29b76310dd2f",
+        "source_graph_kind": "full_body_graph"
+      },
+      "source": "assets/reference/personas/serena-quill/canonical-worksheets/08-signature-actions-sheet-candidate-v1.png#panel-4",
+      "tags": [
+        "signature",
+        "full_body_graph",
+        "graph_admitted",
+        "unreviewed_static"
+      ]
+    },
+    {
+      "actions": [
+        "protective_wing_fold"
+      ],
+      "admission": "graph_admitted",
+      "composition": "whole_pose",
+      "contact_profile": {
+        "altitude_class": "grounded",
+        "evidence": "unreviewed_static",
+        "planted_anchor": null,
+        "root_policy": "fixed",
+        "support_contact": "none"
+      },
+      "description": "protective wing fold",
+      "facing": "south",
+      "features": {
+        "halo": true,
+        "orb": false,
+        "wings": true
+      },
+      "id": "protective_wing_fold",
+      "locomotion": "idle",
+      "phase": null,
+      "provenance": {
+        "migration_status": "graph_admitted",
+        "source_commit": "196c2389c71ca5276eed594d822d29b76310dd2f",
+        "source_graph_kind": "full_body_graph"
+      },
+      "source": "assets/reference/personas/serena-quill/canonical-worksheets/08-signature-actions-sheet-candidate-v1.png#panel-5",
+      "tags": [
+        "signature",
+        "full_body_graph",
+        "graph_admitted",
+        "unreviewed_static"
+      ]
+    },
+    {
+      "actions": [
+        "human_referral",
+        "pointing"
+      ],
+      "admission": "graph_admitted",
+      "composition": "whole_pose",
+      "contact_profile": {
+        "altitude_class": "grounded",
+        "evidence": "unreviewed_static",
+        "planted_anchor": null,
+        "root_policy": "fixed",
+        "support_contact": "none"
+      },
+      "description": "referral human help",
+      "facing": "south",
+      "features": {
+        "halo": true,
+        "orb": false,
+        "wings": true
+      },
+      "id": "referral_human_help",
+      "locomotion": "idle",
+      "phase": null,
+      "provenance": {
+        "migration_status": "graph_admitted",
+        "source_commit": "196c2389c71ca5276eed594d822d29b76310dd2f",
+        "source_graph_kind": "full_body_graph"
+      },
+      "source": "assets/reference/personas/serena-quill/canonical-worksheets/08-signature-actions-sheet-candidate-v1.png#panel-6",
+      "tags": [
+        "signature",
+        "full_body_graph",
+        "graph_admitted",
+        "unreviewed_static"
+      ]
+    },
+    {
+      "actions": [
+        "listening"
+      ],
+      "admission": "graph_admitted",
+      "composition": "whole_pose",
+      "contact_profile": {
+        "altitude_class": "grounded",
+        "evidence": "unreviewed_static",
+        "planted_anchor": null,
+        "root_policy": "fixed",
+        "support_contact": "none"
+      },
+      "description": "active listening",
+      "facing": "south",
+      "features": {
+        "halo": true,
+        "orb": false,
+        "wings": true
+      },
+      "id": "active_listening",
+      "locomotion": "idle",
+      "phase": null,
+      "provenance": {
+        "migration_status": "graph_admitted",
+        "source_commit": "196c2389c71ca5276eed594d822d29b76310dd2f",
+        "source_graph_kind": "full_body_graph"
+      },
+      "source": "assets/reference/personas/serena-quill/canonical-worksheets/08-signature-actions-sheet-candidate-v1.png#panel-7",
+      "tags": [
+        "signature",
+        "full_body_graph",
+        "graph_admitted",
+        "unreviewed_static"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "admission": "graph_admitted",
+      "composition": "whole_pose",
+      "contact_profile": {
+        "altitude_class": "grounded",
+        "evidence": "unreviewed_static",
+        "planted_anchor": null,
+        "root_policy": "fixed",
+        "support_contact": "none"
+      },
+      "description": "compassionate agreement",
+      "facing": "south",
+      "features": {
+        "halo": true,
+        "orb": false,
+        "wings": true
+      },
+      "id": "compassionate_agreement",
+      "locomotion": "idle",
+      "phase": null,
+      "provenance": {
+        "migration_status": "graph_admitted",
+        "source_commit": "196c2389c71ca5276eed594d822d29b76310dd2f",
+        "source_graph_kind": "full_body_graph"
+      },
+      "source": "assets/reference/personas/serena-quill/canonical-worksheets/08-signature-actions-sheet-candidate-v1.png#panel-8",
+      "tags": [
+        "signature",
+        "full_body_graph",
+        "graph_admitted",
+        "unreviewed_static"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "admission": "graph_admitted",
+      "composition": "whole_pose",
+      "contact_profile": {
+        "altitude_class": "grounded",
+        "evidence": "unreviewed_static",
+        "planted_anchor": null,
+        "root_policy": "fixed",
+        "support_contact": "none"
+      },
+      "description": "safe disagreement",
+      "facing": "south",
+      "features": {
+        "halo": true,
+        "orb": false,
+        "wings": true
+      },
+      "id": "safe_disagreement",
+      "locomotion": "idle",
+      "phase": null,
+      "provenance": {
+        "migration_status": "graph_admitted",
+        "source_commit": "196c2389c71ca5276eed594d822d29b76310dd2f",
+        "source_graph_kind": "full_body_graph"
+      },
+      "source": "assets/reference/personas/serena-quill/canonical-worksheets/08-signature-actions-sheet-candidate-v1.png#panel-9",
+      "tags": [
+        "signature",
+        "full_body_graph",
+        "graph_admitted",
+        "unreviewed_static"
+      ]
+    },
+    {
+      "actions": [
+        "thinking"
+      ],
+      "admission": "graph_admitted",
+      "composition": "whole_pose",
+      "contact_profile": {
+        "altitude_class": "grounded",
+        "evidence": "unreviewed_static",
+        "planted_anchor": null,
+        "root_policy": "fixed",
+        "support_contact": "none"
+      },
+      "description": "reflective question",
+      "facing": "south",
+      "features": {
+        "halo": true,
+        "orb": false,
+        "wings": true
+      },
+      "id": "reflective_question",
+      "locomotion": "idle",
+      "phase": null,
+      "provenance": {
+        "migration_status": "graph_admitted",
+        "source_commit": "196c2389c71ca5276eed594d822d29b76310dd2f",
+        "source_graph_kind": "full_body_graph"
+      },
+      "source": "assets/reference/personas/serena-quill/canonical-worksheets/08-signature-actions-sheet-candidate-v1.png#panel-10",
+      "tags": [
+        "signature",
+        "full_body_graph",
+        "graph_admitted",
+        "unreviewed_static"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "admission": "graph_admitted",
+      "composition": "whole_pose",
+      "contact_profile": {
+        "altitude_class": "grounded",
+        "evidence": "unreviewed_static",
+        "planted_anchor": null,
+        "root_policy": "fixed",
+        "support_contact": "none"
+      },
+      "description": "supportive answer",
+      "facing": "south",
+      "features": {
+        "halo": true,
+        "orb": false,
+        "wings": true
+      },
+      "id": "supportive_answer",
+      "locomotion": "idle",
+      "phase": null,
+      "provenance": {
+        "migration_status": "graph_admitted",
+        "source_commit": "196c2389c71ca5276eed594d822d29b76310dd2f",
+        "source_graph_kind": "full_body_graph"
+      },
+      "source": "assets/reference/personas/serena-quill/canonical-worksheets/08-signature-actions-sheet-candidate-v1.png#panel-11",
+      "tags": [
+        "signature",
+        "full_body_graph",
+        "graph_admitted",
+        "unreviewed_static"
+      ]
+    },
+    {
+      "actions": [
+        "magic_cast"
+      ],
+      "admission": "graph_admitted",
+      "composition": "whole_pose",
+      "contact_profile": {
+        "altitude_class": "grounded",
+        "evidence": "unreviewed_static",
+        "planted_anchor": null,
+        "root_policy": "fixed",
+        "support_contact": "none"
+      },
+      "description": "luminous encouragement",
+      "facing": "south",
+      "features": {
+        "halo": true,
+        "orb": true,
+        "wings": true
+      },
+      "id": "luminous_encouragement",
+      "locomotion": "idle",
+      "phase": null,
+      "provenance": {
+        "migration_status": "graph_admitted",
+        "source_commit": "196c2389c71ca5276eed594d822d29b76310dd2f",
+        "source_graph_kind": "full_body_graph"
+      },
+      "source": "assets/reference/personas/serena-quill/canonical-worksheets/08-signature-actions-sheet-candidate-v1.png#panel-12",
+      "tags": [
+        "signature",
+        "full_body_graph",
+        "graph_admitted",
+        "unreviewed_static"
+      ]
+    },
+    {
+      "actions": [
+        "celebrating"
+      ],
+      "admission": "graph_admitted",
+      "composition": "whole_pose",
+      "contact_profile": {
+        "altitude_class": "grounded",
+        "evidence": "unreviewed_static",
+        "planted_anchor": null,
+        "root_policy": "fixed",
+        "support_contact": "none"
+      },
+      "description": "careful celebration",
+      "facing": "south",
+      "features": {
+        "halo": true,
+        "orb": true,
+        "wings": true
+      },
+      "id": "careful_celebration",
+      "locomotion": "idle",
+      "phase": null,
+      "provenance": {
+        "migration_status": "graph_admitted",
+        "source_commit": "196c2389c71ca5276eed594d822d29b76310dd2f",
+        "source_graph_kind": "full_body_graph"
+      },
+      "source": "assets/reference/personas/serena-quill/canonical-worksheets/08-signature-actions-sheet-candidate-v1.png#panel-13",
+      "tags": [
+        "signature",
+        "full_body_graph",
+        "graph_admitted",
+        "unreviewed_static"
+      ]
+    },
+    {
+      "actions": [
+        "deescalation"
+      ],
+      "admission": "graph_admitted",
+      "composition": "whole_pose",
+      "contact_profile": {
+        "altitude_class": "grounded",
+        "evidence": "unreviewed_static",
+        "planted_anchor": null,
+        "root_policy": "fixed",
+        "support_contact": "none"
+      },
+      "description": "deescalation",
+      "facing": "south",
+      "features": {
+        "halo": true,
+        "orb": false,
+        "wings": true
+      },
+      "id": "deescalation",
+      "locomotion": "idle",
+      "phase": null,
+      "provenance": {
+        "migration_status": "graph_admitted",
+        "source_commit": "196c2389c71ca5276eed594d822d29b76310dd2f",
+        "source_graph_kind": "full_body_graph"
+      },
+      "source": "assets/reference/personas/serena-quill/canonical-worksheets/08-signature-actions-sheet-candidate-v1.png#panel-14",
+      "tags": [
+        "signature",
+        "full_body_graph",
+        "graph_admitted",
+        "unreviewed_static"
+      ]
+    },
+    {
+      "actions": [
+        "containment",
+        "settled_presence"
+      ],
+      "admission": "graph_admitted",
+      "composition": "whole_pose",
+      "contact_profile": {
+        "altitude_class": "grounded",
+        "evidence": "unreviewed_static",
+        "planted_anchor": null,
+        "root_policy": "fixed",
+        "support_contact": "none"
+      },
+      "description": "settled presence",
+      "facing": "south",
+      "features": {
+        "halo": true,
+        "orb": false,
+        "wings": true
+      },
+      "id": "settled_presence",
+      "locomotion": "idle",
+      "phase": null,
+      "provenance": {
+        "migration_status": "graph_admitted",
+        "source_commit": "196c2389c71ca5276eed594d822d29b76310dd2f",
+        "source_graph_kind": "full_body_graph"
+      },
+      "source": "assets/reference/personas/serena-quill/canonical-worksheets/08-signature-actions-sheet-candidate-v1.png#panel-15",
+      "tags": [
+        "signature",
+        "full_body_graph",
+        "graph_admitted",
+        "unreviewed_static"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "admission": "graph_admitted",
+      "composition": "whole_pose",
+      "contact_profile": {
+        "altitude_class": "grounded",
+        "evidence": "unreviewed_static",
+        "planted_anchor": null,
+        "root_policy": "fixed",
+        "support_contact": "none"
+      },
+      "description": "interaction open stance",
+      "facing": "south",
+      "features": {
+        "halo": true,
+        "orb": false,
+        "wings": true
+      },
+      "id": "interaction_open_stance",
+      "locomotion": "idle",
+      "phase": null,
+      "provenance": {
+        "migration_status": "graph_admitted",
+        "source_commit": "196c2389c71ca5276eed594d822d29b76310dd2f",
+        "source_graph_kind": "full_body_graph"
+      },
+      "source": "assets/reference/personas/serena-quill/canonical-worksheets/09-interaction-poses-candidate-v1.png#panel-0",
+      "tags": [
+        "interaction",
+        "full_body_graph",
+        "graph_admitted",
+        "unreviewed_static"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "admission": "graph_admitted",
+      "composition": "whole_pose",
+      "contact_profile": {
+        "altitude_class": "grounded",
+        "evidence": "unreviewed_static",
+        "planted_anchor": null,
+        "root_policy": "fixed",
+        "support_contact": "none"
+      },
+      "description": "interaction closed stance",
+      "facing": "south",
+      "features": {
+        "halo": true,
+        "orb": false,
+        "wings": true
+      },
+      "id": "interaction_closed_stance",
+      "locomotion": "idle",
+      "phase": null,
+      "provenance": {
+        "migration_status": "graph_admitted",
+        "source_commit": "196c2389c71ca5276eed594d822d29b76310dd2f",
+        "source_graph_kind": "full_body_graph"
+      },
+      "source": "assets/reference/personas/serena-quill/canonical-worksheets/09-interaction-poses-candidate-v1.png#panel-1",
+      "tags": [
+        "interaction",
+        "full_body_graph",
+        "graph_admitted",
+        "unreviewed_static"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "admission": "graph_admitted",
+      "composition": "whole_pose",
+      "contact_profile": {
+        "altitude_class": "grounded",
+        "evidence": "unreviewed_static",
+        "planted_anchor": null,
+        "root_policy": "fixed",
+        "support_contact": "none"
+      },
+      "description": "interaction safe fist",
+      "facing": "south",
+      "features": {
+        "halo": true,
+        "orb": false,
+        "wings": true
+      },
+      "id": "interaction_safe_fist",
+      "locomotion": "idle",
+      "phase": null,
+      "provenance": {
+        "migration_status": "graph_admitted",
+        "source_commit": "196c2389c71ca5276eed594d822d29b76310dd2f",
+        "source_graph_kind": "full_body_graph"
+      },
+      "source": "assets/reference/personas/serena-quill/canonical-worksheets/09-interaction-poses-candidate-v1.png#panel-2",
+      "tags": [
+        "interaction",
+        "full_body_graph",
+        "graph_admitted",
+        "unreviewed_static"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "admission": "graph_admitted",
+      "composition": "whole_pose",
+      "contact_profile": {
+        "altitude_class": "grounded",
+        "evidence": "unreviewed_static",
+        "planted_anchor": null,
+        "root_policy": "fixed",
+        "support_contact": "none"
+      },
+      "description": "interaction forward reach",
+      "facing": "south",
+      "features": {
+        "halo": true,
+        "orb": false,
+        "wings": true
+      },
+      "id": "interaction_forward_reach",
+      "locomotion": "idle",
+      "phase": null,
+      "provenance": {
+        "migration_status": "graph_admitted",
+        "source_commit": "196c2389c71ca5276eed594d822d29b76310dd2f",
+        "source_graph_kind": "full_body_graph"
+      },
+      "source": "assets/reference/personas/serena-quill/canonical-worksheets/09-interaction-poses-candidate-v1.png#panel-3",
+      "tags": [
+        "interaction",
+        "full_body_graph",
+        "graph_admitted",
+        "unreviewed_static"
+      ]
+    }
+  ],
+  "required_anchors": [
+    "root",
+    "mouth",
+    "left_eye",
+    "right_eye",
+    "left_foot",
+    "right_foot",
+    "left_hand",
+    "right_hand"
+  ],
+  "schema_version": 1
+}
