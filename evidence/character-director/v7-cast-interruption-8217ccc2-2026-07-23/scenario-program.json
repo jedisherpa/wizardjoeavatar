@@ -1,0 +1,70 @@
+{
+  "schema": "character_director_scenario_program_v2",
+  "schema_version": 2,
+  "program_id": "v7-cast-interruption",
+  "acceptance_scenario": "V7",
+  "scenarios": [
+    {
+      "name": "v7-ready",
+      "kind": "reset",
+      "payload": {},
+      "timing": {"capture_frames": 12}
+    },
+    {
+      "name": "v7-precommit-cast",
+      "kind": "action",
+      "payload": {"action": "magic_cast", "duration_ms": 5000},
+      "timing": {
+        "until_trace": {"clip": "cast_front", "authored_frame": 8},
+        "max_frames": 12
+      }
+    },
+    {
+      "name": "v7-precommit-new-turn",
+      "kind": "speak",
+      "payload": {
+        "speech_id": "v7-precommit-new-turn",
+        "text": "A new thought takes the stage.",
+        "duration_ms": 900
+      },
+      "timing": {"capture_frames": 36}
+    },
+    {
+      "name": "v7-precommit-settle",
+      "kind": "gaze",
+      "payload": {"target": "viewer"},
+      "timing": {"capture_frames": 12}
+    },
+    {
+      "name": "v7-postcommit-ready",
+      "kind": "gaze",
+      "payload": {"target": "viewer"},
+      "timing": {"capture_frames": 12}
+    },
+    {
+      "name": "v7-postcommit-cast",
+      "kind": "action",
+      "payload": {"action": "magic_cast", "duration_ms": 5000},
+      "timing": {
+        "until_trace": {"marker_id": "action_commit", "authored_frame": 10},
+        "max_frames": 16
+      }
+    },
+    {
+      "name": "v7-postcommit-new-turn",
+      "kind": "speak",
+      "payload": {
+        "speech_id": "v7-postcommit-new-turn",
+        "text": "The committed action resolves before this thought.",
+        "duration_ms": 900
+      },
+      "timing": {"capture_frames": 54}
+    },
+    {
+      "name": "v7-final-settle",
+      "kind": "gaze",
+      "payload": {"target": "viewer"},
+      "timing": {"capture_frames": 18}
+    }
+  ]
+}

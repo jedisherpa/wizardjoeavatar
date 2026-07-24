@@ -1,0 +1,195 @@
+{
+  "acceptance_scenario": "V7",
+  "checks": [
+    {
+      "detail": {
+        "acceptance_scenario": "V7",
+        "artifact_path": "scenario-program.json",
+        "maximum_capture_frame_count": 172,
+        "program_id": "v7-cast-interruption",
+        "scenario_count": 8,
+        "schema": "character_director_scenario_program_v2",
+        "schema_version": 2,
+        "source_sha256": "d9b78c640ea1ce43dc21c325966ec9206e13ff27c3b265832c48914e8fee0d26"
+      },
+      "name": "scenario_program_identity",
+      "passed": true
+    },
+    {
+      "detail": [
+        "v7-ready",
+        "v7-precommit-cast",
+        "v7-precommit-new-turn",
+        "v7-precommit-settle",
+        "v7-postcommit-ready",
+        "v7-postcommit-cast",
+        "v7-postcommit-new-turn",
+        "v7-final-settle"
+      ],
+      "name": "scenario_order",
+      "passed": true
+    },
+    {
+      "detail": {
+        "frame_count": 173,
+        "missing_trace_frames": [],
+        "owned_frame_count": 167,
+        "scenario_frame_counts": {
+          "v7-final-settle": 18,
+          "v7-postcommit-cast": 13,
+          "v7-postcommit-new-turn": 54,
+          "v7-postcommit-ready": 12,
+          "v7-precommit-cast": 10,
+          "v7-precommit-new-turn": 36,
+          "v7-precommit-settle": 12,
+          "v7-ready": 12
+        },
+        "transport_contiguous": true,
+        "unowned_frame_indexes": [
+          12,
+          23,
+          72,
+          85,
+          99,
+          154
+        ]
+      },
+      "name": "complete_contiguous_capture",
+      "passed": true
+    },
+    {
+      "detail": [
+        "v7-ready",
+        "v7-precommit-cast",
+        "v7-precommit-new-turn",
+        "v7-precommit-settle",
+        "v7-postcommit-ready",
+        "v7-postcommit-cast",
+        "v7-postcommit-new-turn",
+        "v7-final-settle"
+      ],
+      "name": "scenario_blocks_are_contiguous",
+      "passed": true
+    },
+    {
+      "detail": {
+        "postcommit": {
+          "animation_authored_frame": 10,
+          "animation_clip_id": "cast_front",
+          "frame_index": 98,
+          "marker_id": "action_commit",
+          "simulation_tick": 242,
+          "state_revision": 242
+        },
+        "precommit": {
+          "animation_authored_frame": 8,
+          "animation_clip_id": "cast_front",
+          "frame_index": 21,
+          "marker_id": null,
+          "simulation_tick": 54,
+          "state_revision": 54
+        }
+      },
+      "name": "trace_triggered_interrupt_boundaries",
+      "passed": true
+    },
+    {
+      "detail": {
+        "cast_frames_after_speech_start": [],
+        "marker_events": [],
+        "speech_start_owned_frame_offset": 0
+      },
+      "name": "precommit_interrupt_cancels_without_effect",
+      "passed": true
+    },
+    {
+      "detail": {
+        "action_settled_frame": 120,
+        "first_speech_frame": 124,
+        "marker_events": [
+          [
+            "action_commit",
+            10,
+            98
+          ],
+          [
+            "action_effect",
+            14,
+            103
+          ],
+          [
+            "action_recoverable",
+            23,
+            113
+          ],
+          [
+            "action_settled",
+            28,
+            120
+          ]
+        ],
+        "recoverable_to_speech_frames": 11,
+        "speech_start_owned_frame_offset": 24
+      },
+      "name": "postcommit_interrupt_finishes_recovery_then_speaks",
+      "passed": true
+    },
+    {
+      "detail": {
+        "maximum_presented_root_axis_step": 0.0
+      },
+      "name": "interruption_root_continuity",
+      "passed": true
+    },
+    {
+      "detail": {
+        "terminal_actions": [
+          "idle",
+          "idle",
+          "idle",
+          "idle",
+          "idle",
+          "idle",
+          "idle",
+          "idle"
+        ],
+        "terminal_pose_ids": [
+          "front_idle",
+          "front_idle",
+          "front_idle",
+          "front_idle",
+          "front_idle",
+          "front_idle",
+          "front_idle",
+          "front_idle"
+        ]
+      },
+      "name": "final_neutral_settle",
+      "passed": true
+    },
+    {
+      "detail": {
+        "clipped_frames": [],
+        "stage": [
+          240,
+          135
+        ]
+      },
+      "name": "interruption_performance_within_canonical_stage",
+      "passed": true
+    }
+  ],
+  "metrics": {
+    "clipped_frame_count": 0,
+    "frame_count": 173,
+    "maximum_presented_root_axis_step": 0.0,
+    "owned_frame_count": 167,
+    "postcommit_marker_count": 4,
+    "postcommit_speech_start_offset": 24,
+    "precommit_speech_start_offset": 0
+  },
+  "passed": true,
+  "review_boundary": "Machine checks do not replace normal-speed and quarter-speed review of interruption recovery, emotional continuity, and pose appeal.",
+  "schema": "character_director_v7_machine_acceptance_v1",
+  "schema_version": 1
+}
