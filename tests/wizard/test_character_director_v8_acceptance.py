@@ -69,7 +69,7 @@ def fixture():
         ],
     }
 
-    blink_starts = (60, 180, 315, 465, 630, 810, 1005, 1215, 1370)
+    blink_starts = (60, 180, 315, 465, 590, 730, 860, 1015, 1135, 1270, 1420)
     speech_ranges = {
         EXPECTED_SPEECH_IDS[0]: range(97, 159),
         EXPECTED_SPEECH_IDS[1]: range(433, 495),
@@ -200,6 +200,34 @@ class CharacterDirectorV8AcceptanceTests(unittest.TestCase):
             trace["presentation_channels"]["blink_closed"] = (
                 trace["frame_index"] % 120 < 3
             )
+
+        report = analyze_v8(manifest, broken)
+
+        self.assertFalse(report["passed"])
+        self.assertFalse(check(report, "varied_natural_blinks")["passed"])
+
+    def test_blink_with_body_or_root_change_fails_closed(self):
+        manifest, traces = fixture()
+        broken = copy.deepcopy(traces)
+        broken[61]["presentation_channels"]["body_pixel_sha256"] = "moving-body"
+        broken[62]["presented_root_stage"]["x"] = 121.0
+
+        report = analyze_v8(manifest, broken)
+
+        self.assertFalse(report["passed"])
+        self.assertFalse(
+            check(report, "blink_body_and_root_stability")["passed"]
+        )
+
+    def test_blink_interval_outside_contract_fails_closed(self):
+        manifest, traces = fixture()
+        broken = copy.deepcopy(traces)
+        for trace in broken:
+            trace["presentation_channels"]["blink_closed"] = False
+        starts = (60, 120, 181, 243, 306, 370, 435, 501, 668)
+        for start in starts:
+            for index in range(start, start + 3):
+                broken[index]["presentation_channels"]["blink_closed"] = True
 
         report = analyze_v8(manifest, broken)
 

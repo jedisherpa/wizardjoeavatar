@@ -69,6 +69,30 @@ class FrameSourceTests(unittest.TestCase):
         self.assertEqual(source_names, ["scheduler"] * 4 + ["none"])
         self.assertEqual(remaining, 0)
 
+    def test_scheduler_blink_waits_for_stable_body_action(self):
+        source = ProceduralWizardFrameSource()
+
+        self.assertTrue(
+            source._scheduler_blink_body_is_stable(
+                WizardState(action="idle", locomotion="idle")
+            )
+        )
+        self.assertTrue(
+            source._scheduler_blink_body_is_stable(
+                WizardState(action="speaking", locomotion="idle")
+            )
+        )
+        self.assertFalse(
+            source._scheduler_blink_body_is_stable(
+                WizardState(action="explaining", locomotion="idle")
+            )
+        )
+        self.assertFalse(
+            source._scheduler_blink_body_is_stable(
+                WizardState(action="idle", locomotion="walking")
+            )
+        )
+
     def test_direct_procedural_frame_source_shape(self):
         source = ProceduralWizardFrameSource(240, 135, 24)
         frame = source.render_next_frame()

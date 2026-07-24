@@ -520,10 +520,15 @@ class ProceduralWizardFrameSource:
         scheduler_blink_suppressed = (
             scheduler_blink_closed
             and not head_eye.turn_blink_closed
-            and state.facing_changed_tick > 0
-            and 0
-            <= state.simulation_tick - state.facing_changed_tick
-            < 150
+            and (
+                not self._scheduler_blink_body_is_stable(state)
+                or (
+                    state.facing_changed_tick > 0
+                    and 0
+                    <= state.simulation_tick - state.facing_changed_tick
+                    < 150
+                )
+            )
         )
         if scheduler_blink_suppressed:
             scheduler_blink_closed = False
@@ -559,6 +564,14 @@ class ProceduralWizardFrameSource:
             head_eye.phase,
             head_eye.presented_facing,
         )
+        if (
+            presentation_blink_closed
+            and snapshot.presentation.blink_visible_frames_remaining > 0
+            and snapshot.presentation.last_presentation_state is not None
+        ):
+            head_offset_y = (
+                snapshot.presentation.last_presentation_state.head_offset_y
+            )
         state.facing = head_eye.presented_facing
         if state.gaze_authoritative or head_eye.phase != "steady":
             state.gaze_authoritative = True
@@ -1208,6 +1221,12 @@ class ProceduralWizardFrameSource:
         # head-only life without disturbing the planted body graph.
         phase = state.simulation_tick % 360
         return -1 if 36 <= phase < 48 or 228 <= phase < 240 else 0
+
+    @staticmethod
+    def _scheduler_blink_body_is_stable(state: WizardState) -> bool:
+        """Defer ambient blinks while an authored body action is changing."""
+
+        return state.locomotion == "idle" and state.action in {"idle", "speaking"}
 
     def _apply_reference_face_channels(
         self,

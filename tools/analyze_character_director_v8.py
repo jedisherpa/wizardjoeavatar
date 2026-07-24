@@ -26,6 +26,8 @@ EXPECTED_SPEECH_IDS = ("v8-phrase-1", "v8-phrase-2", "v8-phrase-3")
 EXPECTED_GESTURES = ("v8-gesture-one", "v8-gesture-two", "v8-gesture-three")
 MINIMUM_GESTURE_SPACING_FRAMES = 192
 MINIMUM_BLINK_COUNT = 8
+MINIMUM_BLINK_INTERVAL_FRAMES = 60
+MAXIMUM_BLINK_INTERVAL_FRAMES = 156
 MINIMUM_BODY_STILLNESS = 0.70
 MINIMUM_PHRASE_STILLNESS = 0.90
 
@@ -301,18 +303,54 @@ def analyze_v8(
     blink_intervals = [
         right[0] - left[0] for left, right in zip(blink_ranges, blink_ranges[1:])
     ]
+    blink_stability = []
+    for start, end in blink_ranges:
+        closed = owned_traces[start:end]
+        body_hashes = {
+            _channels(trace).get("body_pixel_sha256") for trace in closed
+        }
+        roots = {_point(trace) for trace in closed}
+        blink_stability.append(
+            {
+                "first_frame_index": closed[0].get("frame_index") if closed else None,
+                "last_frame_index": closed[-1].get("frame_index") if closed else None,
+                "body_hash_count": len(body_hashes),
+                "root_count": len(roots),
+                "passed": bool(closed)
+                and len(body_hashes) == 1
+                and len(roots) == 1
+                and None not in roots,
+            }
+        )
     _check(
         report,
         "varied_natural_blinks",
         len(blink_ranges) >= MINIMUM_BLINK_COUNT
         and all(3 <= length <= 4 for length in blink_lengths)
+        and all(
+            MINIMUM_BLINK_INTERVAL_FRAMES
+            <= interval
+            <= MAXIMUM_BLINK_INTERVAL_FRAMES
+            for interval in blink_intervals
+        )
         and len(set(blink_intervals)) >= 3,
         {
             "blink_count": len(blink_ranges),
             "closure_lengths_frames": blink_lengths,
             "open_intervals_frames": blink_intervals,
+            "allowed_interval_frames": [
+                MINIMUM_BLINK_INTERVAL_FRAMES,
+                MAXIMUM_BLINK_INTERVAL_FRAMES,
+            ],
             "distinct_interval_count": len(set(blink_intervals)),
         },
+    )
+    _check(
+        report,
+        "blink_body_and_root_stability",
+        bool(blink_stability)
+        and all(item["passed"] for item in blink_stability),
+        {"closures": blink_stability},
     )
 
     roots = [_point(trace) for trace in owned_traces]
