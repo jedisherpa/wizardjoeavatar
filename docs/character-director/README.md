@@ -20,6 +20,20 @@ timing, capability truth, and verification gates before implementation. Every
 implemented claim must link to code and behavioral evidence. Planned behavior
 must remain labelled as planned.
 
+## Local Character Observer
+
+Run the approved HD Wizard Joe baseline beside the character package currently
+under development without touching the protected service on port 8765:
+
+```bash
+python3 tools/run_character_observer.py
+```
+
+The observer opens on `http://127.0.0.1:8665/`, with isolated character
+runtimes on ports 8666 and 8667. Select another candidate package with
+`--current-package PATH --current-label NAME`. The observer is loopback-only
+and terminates both child runtimes when it stops.
+
 ## Documentation Map
 
 - `PRIMARY_RESEARCH.md`: primary-source research record.
