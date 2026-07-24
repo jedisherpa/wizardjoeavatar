@@ -272,6 +272,24 @@ def _contains_sequence(values: Sequence[str], expected: Sequence[str]) -> bool:
     return any(tuple(values[index:index + width]) == tuple(expected) for index in range(len(values) - width + 1))
 
 
+def _profile_pose_phase(pose_id: str) -> Optional[str]:
+    if "_contact_left_to_passing_" in pose_id or pose_id.endswith("_contact_left"):
+        return "left_contact"
+    if (
+        pose_id.endswith("_passing_left_to_right")
+        or "_passing_to_contact_right_" in pose_id
+    ):
+        return "left_to_right"
+    if "_contact_right_to_passing_" in pose_id or pose_id.endswith("_contact_right"):
+        return "right_contact"
+    if (
+        pose_id.endswith("_passing_right_to_left")
+        or "_passing_to_contact_left_" in pose_id
+    ):
+        return "right_to_left"
+    return None
+
+
 def _sector_delta(left: str, right: str) -> int:
     raw = FACINGS.index(right) - FACINGS.index(left)
     return ((raw + 4) % 8) - 4
@@ -502,15 +520,36 @@ def analyze_v6(
         clip_records = [trace for trace in records if trace.get("animation_clip_id") == clip_id]
         poses = tuple(_collapsed(clip_records, "rendered_pose_id"))
         expected = PROFILE_POSE_SEQUENCES[clip_id]
+        phases = tuple(
+            _collapsed(
+                [
+                    {"phase": phase}
+                    for pose_id in poses
+                    if (phase := _profile_pose_phase(pose_id)) is not None
+                ],
+                "phase",
+            )
+        )
+        expected_phases = (
+            "left_contact",
+            "left_to_right",
+            "right_contact",
+            "right_to_left",
+        )
+        observed_authored_pose_count = len(set(poses).intersection(expected))
         directional[clip_id] = {
             "frame_count": len(clip_records),
             "collapsed_pose_sequence": list(poses),
             "expected_pose_sequence": list(expected),
+            "collapsed_phase_sequence": list(phases),
+            "expected_phase_sequence": list(expected_phases),
+            "observed_authored_pose_count": observed_authored_pose_count,
         }
         directional_ok = (
             directional_ok
             and len(clip_records) >= 12
-            and _contains_sequence(poses, expected)
+            and observed_authored_pose_count >= 8
+            and _contains_sequence(phases, expected_phases)
         )
     observed_walk_clips = {
         trace.get("animation_clip_id")

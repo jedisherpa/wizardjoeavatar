@@ -3827,35 +3827,35 @@
         },
         {
           "pose_id": "turn_left_mid_to_complete_166",
-          "duration_frames": 1,
+          "duration_frames": 3,
           "support_contact": "none",
           "planted_anchor": null,
           "markers": []
         },
         {
           "pose_id": "turn_left_mid_to_complete_333",
-          "duration_frames": 1,
+          "duration_frames": 3,
           "support_contact": "none",
           "planted_anchor": null,
           "markers": []
         },
         {
           "pose_id": "turn_left_mid_to_complete_500",
-          "duration_frames": 1,
+          "duration_frames": 3,
           "support_contact": "none",
           "planted_anchor": null,
           "markers": []
         },
         {
           "pose_id": "turn_left_mid_to_complete_667",
-          "duration_frames": 1,
+          "duration_frames": 3,
           "support_contact": "none",
           "planted_anchor": null,
           "markers": []
         },
         {
           "pose_id": "turn_left_mid_to_complete_833",
-          "duration_frames": 1,
+          "duration_frames": 3,
           "support_contact": "none",
           "planted_anchor": null,
           "markers": []

@@ -379,7 +379,7 @@ class PoseSelectionTests(unittest.TestCase):
                 observed_poses = []
                 observed_turn_clips = set()
                 observed_contacts = set()
-                for _ in range(100):
+                for _ in range(160):
                     sample = _select_graph_v2_sample(state, graph)
                     if state.animation_node_id.startswith("ground_reverse_"):
                         observed_turn_clips.add(sample.clip_id)
