@@ -7,10 +7,15 @@ from unittest import mock
 from wizard_avatar.animation_trace import (
     ANIMATION_TRUTH_TRACE_CAPACITY,
     AnimationTruthTraceV1,
+    RasterSpanV1,
+    StagePointV1,
     transformed_anchor,
 )
 from wizard_avatar.compositor import CellCanvas
-from wizard_avatar.frame_source import ProceduralWizardFrameSource
+from wizard_avatar.frame_source import (
+    ProceduralWizardFrameSource,
+    _visible_character_anchor_span,
+)
 from wizard_avatar.models import WizardCommand
 from wizard_avatar.pose_compositor import blit_pose_scaled
 from wizard_avatar.server import create_app
@@ -291,6 +296,19 @@ class AnimationTruthGeometryTests(unittest.TestCase):
         self.assertEqual(span.min_x, span.max_x)
         self.assertEqual(span.min_y, span.max_y)
         self.assertIsNotNone(stage.get(span.min_x, span.min_y))
+
+    def test_subpixel_anchor_proxy_moves_to_nearest_painted_character_cell(self):
+        stage = CellCanvas(20, 20)
+        stage.set(10, 11, ".", (230, 230, 230), "floor")
+        stage.set(11, 10, "#", (80, 50, 20), "boot")
+
+        span = _visible_character_anchor_span(
+            stage,
+            StagePointV1(10.0, 10.0),
+            RasterSpanV1(10, 10, 10, 10),
+        )
+
+        self.assertEqual(span, RasterSpanV1(11, 11, 10, 10))
 
     def test_candidate_preserves_exact_authoritative_sample_and_frame_hash(self):
         source = ProceduralWizardFrameSource(cols=96, rows=54, fps=24)

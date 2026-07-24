@@ -109,6 +109,44 @@ IDLE_BODY_FACING_BY_CLIP = {
 }
 
 
+def _visible_character_anchor_span(
+    stage: CellCanvas,
+    point: StagePointV1,
+    candidate: Optional[RasterSpanV1],
+    search_radius: int = 5,
+) -> Optional[RasterSpanV1]:
+    """Bind a subpixel semantic anchor to the nearest painted character cell."""
+
+    excluded_layers = {"background", "floor", "contact_shadow"}
+
+    def painted(x: int, y: int) -> bool:
+        cell = stage.get(x, y)
+        return cell is not None and cell.layer_id not in excluded_layers
+
+    if candidate is not None and any(
+        painted(x, y)
+        for y in range(candidate.min_y, candidate.max_y + 1)
+        for x in range(candidate.min_x, candidate.max_x + 1)
+    ):
+        return candidate
+
+    center_x = round(point.x)
+    center_y = round(point.y)
+    candidates = sorted(
+        (
+            (offset_x * offset_x + offset_y * offset_y, abs(offset_y), abs(offset_x), x, y)
+            for offset_y in range(-search_radius, search_radius + 1)
+            for offset_x in range(-search_radius, search_radius + 1)
+            for x, y in [(center_x + offset_x, center_y + offset_y)]
+            if stage.in_bounds(x, y) and painted(x, y)
+        )
+    )
+    if not candidates:
+        return None
+    _, _, _, x, y = candidates[0]
+    return RasterSpanV1(min_x=x, max_x=x, min_y=y, max_y=y)
+
+
 @dataclass(frozen=True)
 class ReferenceEyeAperture:
     left: int
@@ -856,6 +894,11 @@ class ProceduralWizardFrameSource:
                     local_size=(local.width, local.height),
                     scale=render_scale,
                     horizontal_scale=REFERENCE_POSE_HORIZONTAL_SCALE,
+                )
+                planted_anchor_raster_span = _visible_character_anchor_span(
+                    stage,
+                    planted_anchor_stage,
+                    planted_anchor_raster_span,
                 )
         if pose_id is not None:
             try:
