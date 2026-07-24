@@ -987,6 +987,34 @@ class ManifestValidationTests(unittest.TestCase):
         ):
             validate_manifest(manifest)
 
+    def test_validates_version_two_runtime_epoch_map(self):
+        manifest = self.valid_manifest()
+        manifest["commands"][0]["ack"]["wizard_runtime_epoch"] = "wizard-runtime-test"
+        manifest["runtime_observations"] = {
+            "schema": "character_director_runtime_observations_v2",
+            "schema_version": 2,
+            "identity_process_epoch": "runtime-test",
+            "command_runtime_epoch": "command-runtime-test",
+            "runtime_epochs": {
+                "runtime_epoch": "command-runtime-test",
+                "wizard_runtime_epoch": "wizard-runtime-test",
+            },
+            "subscriber_count": 1,
+            "snapshot_count": 1,
+            "acknowledgement_count": 1,
+        }
+
+        validate_manifest(manifest)
+
+        manifest["runtime_observations"]["runtime_epochs"][
+            "wizard_runtime_epoch"
+        ] = "different"
+        with self.assertRaisesRegex(
+            ManifestValidationError,
+            "acknowledgement runtime epoch mismatch",
+        ):
+            validate_manifest(manifest)
+
     def test_sensitive_runtime_text_is_minimized_recursively(self):
         speech = "A governed line with a snowman \u2603 and no place in machine evidence."
         minimized = minimize_evidence_content(
@@ -1103,6 +1131,10 @@ class ManifestValidationTests(unittest.TestCase):
                     "transport": "media_session",
                     "ack": {"wizard_runtime_epoch": "command-runtime-a"},
                 },
+                {
+                    "transport": "media_session",
+                    "ack": {"wizard_runtime_epoch": "command-runtime-a"},
+                },
             ],
             state_snapshots=[
                 {
@@ -1129,6 +1161,13 @@ class ManifestValidationTests(unittest.TestCase):
         )
         self.assertEqual(observations["identity_process_epoch"], "process-runtime-a")
         self.assertEqual(observations["command_runtime_epoch"], "command-runtime-a")
+        self.assertEqual(
+            observations["runtime_epochs"],
+            {
+                "runtime_epoch": "command-runtime-a",
+                "wizard_runtime_epoch": "command-runtime-a",
+            },
+        )
         self.assertEqual(observations["subscriber_count"], 1)
 
         records.state_snapshots[1]["body"]["diagnostics"]["subscriber_count"] = 2
@@ -1136,9 +1175,67 @@ class ManifestValidationTests(unittest.TestCase):
             collect_runtime_observations({"runtime_epoch": "process-runtime-a"}, records)
 
         records.state_snapshots[1]["body"]["diagnostics"]["subscriber_count"] = 1
-        records.commands[1]["ack"]["wizard_runtime_epoch"] = "command-runtime-b"
+        records.commands[2]["ack"]["wizard_runtime_epoch"] = "command-runtime-b"
         with self.assertRaisesRegex(EvidenceFailure, "runtime epoch changed"):
             collect_runtime_observations({"runtime_epoch": "process-runtime-a"}, records)
+
+    def test_runtime_observations_include_every_joeville_character_epoch(self):
+        character_fields = (
+            "wizard_runtime_epoch",
+            "robin_runtime_epoch",
+            "dragon_runtime_epoch",
+            "kingfisher_runtime_epoch",
+            "crystail_runtime_epoch",
+            "falcor_runtime_epoch",
+            "serena_quill_runtime_epoch",
+            "aurelia_finch_runtime_epoch",
+            "selene_hart_runtime_epoch",
+            "thorne_vale_runtime_epoch",
+            "elara_voss_runtime_epoch",
+            "kai_renner_runtime_epoch",
+            "mira_solen_runtime_epoch",
+            "draven_holt_runtime_epoch",
+            "liora_kane_runtime_epoch",
+            "rohan_slate_runtime_epoch",
+            "finn_calder_runtime_epoch",
+            "orion_vale_runtime_epoch",
+        )
+        character_epochs = {
+            field: "epoch-{:02d}".format(index)
+            for index, field in enumerate(character_fields, 1)
+        }
+        records = CaptureRecords(
+            commands=[
+                {
+                    "transport": "media_session",
+                    "ack": character_epochs,
+                }
+            ],
+            state_snapshots=[
+                {
+                    "body": {
+                        "diagnostics": {
+                            "runtime_epoch": "remote-command-runtime-a",
+                            "subscriber_count": 1,
+                        }
+                    }
+                }
+            ],
+        )
+
+        observations = collect_runtime_observations(
+            {"runtime_epoch": "process-runtime-a"},
+            records,
+        )
+
+        self.assertEqual(observations["schema_version"], 2)
+        self.assertEqual(
+            observations["runtime_epochs"],
+            {
+                "runtime_epoch": "remote-command-runtime-a",
+                **character_epochs,
+            },
+        )
 
     def test_schema_three_rejects_scenario_spill_and_snapshot_conflicts(self):
         manifest = self.valid_manifest()

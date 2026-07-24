@@ -48,6 +48,9 @@ EVIDENCE_KIND = "external_real_runtime_visual_review"
 PAIRING_DESCRIPTION = "atomic_animation_truth_trace_v1"
 SHA256_RE = re.compile(r"^[0-9a-f]{64}$")
 GIT_OBJECT_RE = re.compile(r"^(?:[0-9a-f]{40}|[0-9a-f]{64})$")
+NAMESPACED_RUNTIME_EPOCH_RE = re.compile(
+    r"^[a-z][a-z0-9_]{0,63}_runtime_epoch$"
+)
 SCENARIO_NAME_RE = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
 SCENARIO_PROGRAM_SCHEMA = "character_director_scenario_program_v1"
 SCENARIO_PROGRAM_VERSION = 1
@@ -2444,17 +2447,31 @@ def scenario_ranges(scenarios: Sequence[Scenario], frames: Sequence[Mapping[str,
     return ranges
 
 
-def _acknowledgement_runtime_epoch(command: Mapping[str, Any]) -> Optional[str]:
+def _acknowledgement_runtime_epochs(command: Mapping[str, Any]) -> Dict[str, str]:
     ack = command.get("ack")
     if not isinstance(ack, Mapping):
-        return None
-    field = (
-        "wizard_runtime_epoch"
-        if command.get("transport", "command") == "media_session"
-        else "runtime_epoch"
-    )
-    value = ack.get(field)
-    return value if isinstance(value, str) and value else None
+        return {}
+    epochs: Dict[str, str] = {}
+    for key, value in ack.items():
+        if not isinstance(key, str):
+            continue
+        if key != "runtime_epoch" and NAMESPACED_RUNTIME_EPOCH_RE.fullmatch(key) is None:
+            continue
+        if not isinstance(value, str) or not value:
+            return {}
+        epochs[key] = value
+    return epochs
+
+
+def _acknowledgement_runtime_epoch(command: Mapping[str, Any]) -> Optional[str]:
+    """Return the remote-command epoch retained by the v1 evidence schema."""
+
+    epochs = _acknowledgement_runtime_epochs(command)
+    if "runtime_epoch" in epochs:
+        return epochs["runtime_epoch"]
+    if len(epochs) == 1:
+        return next(iter(epochs.values()))
+    return None
 
 
 def collect_runtime_observations(
@@ -2483,33 +2500,46 @@ def collect_runtime_observations(
         snapshot_epochs.append(epoch)
         subscriber_counts.append(subscribers)
 
-    acknowledgement_epochs: List[str] = []
+    acknowledgement_epochs: Dict[str, set[str]] = {}
     for command in records.commands:
-        epoch = _acknowledgement_runtime_epoch(command)
-        if epoch is None:
+        epochs = _acknowledgement_runtime_epochs(command)
+        if not epochs:
             raise EvidenceFailure(
-                "{} acknowledgement is missing runtime epoch".format(
+                "{} acknowledgement is missing runtime epochs".format(
                     command.get("transport", "command")
                 )
             )
-        acknowledgement_epochs.append(epoch)
+        for field, epoch in epochs.items():
+            acknowledgement_epochs.setdefault(field, set()).add(epoch)
 
     if not snapshot_epochs or not acknowledgement_epochs:
         raise EvidenceFailure("runtime observations require snapshots and acknowledgements")
-    command_epochs = set(snapshot_epochs + acknowledgement_epochs)
+    for field, epochs in acknowledgement_epochs.items():
+        if len(epochs) != 1:
+            raise EvidenceFailure(
+                "runtime epoch changed during capture for {}".format(field)
+            )
+    command_epochs = set(snapshot_epochs)
+    command_epochs.update(acknowledgement_epochs.get("runtime_epoch", set()))
     if len(command_epochs) != 1:
         raise EvidenceFailure("command runtime epoch changed during capture")
     if len(set(subscriber_counts)) != 1:
         raise EvidenceFailure("subscriber count changed during capture")
 
+    runtime_epochs = {
+        field: next(iter(epochs))
+        for field, epochs in sorted(acknowledgement_epochs.items())
+    }
+    runtime_epochs["runtime_epoch"] = next(iter(command_epochs))
     return {
-        "schema": "character_director_runtime_observations_v1",
-        "schema_version": 1,
+        "schema": "character_director_runtime_observations_v2",
+        "schema_version": 2,
         "identity_process_epoch": process_epoch,
         "command_runtime_epoch": next(iter(command_epochs)),
+        "runtime_epochs": runtime_epochs,
         "subscriber_count": subscriber_counts[0],
         "snapshot_count": len(snapshot_epochs),
-        "acknowledgement_count": len(acknowledgement_epochs),
+        "acknowledgement_count": len(records.commands),
     }
 
 
@@ -3093,7 +3123,7 @@ def validate_manifest(manifest: Mapping[str, Any], output_dir: Optional[Path] = 
     )
     if schema_version >= 3:
         observations = manifest.get("runtime_observations")
-        expected_observation_fields = {
+        v1_observation_fields = {
             "schema",
             "schema_version",
             "identity_process_epoch",
@@ -3102,14 +3132,25 @@ def validate_manifest(manifest: Mapping[str, Any], output_dir: Optional[Path] = 
             "snapshot_count",
             "acknowledgement_count",
         }
+        v2_observation_fields = v1_observation_fields | {"runtime_epochs"}
         _manifest_error(
             isinstance(observations, Mapping)
-            and set(observations) == expected_observation_fields,
+            and set(observations)
+            in (v1_observation_fields, v2_observation_fields),
             "invalid runtime observations schema",
         )
+        observation_version = observations.get("schema_version")
         _manifest_error(
-            observations.get("schema") == "character_director_runtime_observations_v1"
-            and observations.get("schema_version") == 1,
+            (
+                observations.get("schema") == "character_director_runtime_observations_v1"
+                and observation_version == 1
+                and set(observations) == v1_observation_fields
+            )
+            or (
+                observations.get("schema") == "character_director_runtime_observations_v2"
+                and observation_version == 2
+                and set(observations) == v2_observation_fields
+            ),
             "unsupported runtime observations",
         )
         if valid:
@@ -3124,6 +3165,28 @@ def validate_manifest(manifest: Mapping[str, Any], output_dir: Optional[Path] = 
                 and observations["command_runtime_epoch"],
                 "command runtime epoch is missing",
             )
+            runtime_epochs = observations.get("runtime_epochs")
+            if observation_version == 2:
+                _manifest_error(
+                    isinstance(runtime_epochs, Mapping)
+                    and bool(runtime_epochs)
+                    and all(
+                        isinstance(field, str)
+                        and (
+                            field == "runtime_epoch"
+                            or NAMESPACED_RUNTIME_EPOCH_RE.fullmatch(field) is not None
+                        )
+                        and isinstance(epoch, str)
+                        and bool(epoch)
+                        for field, epoch in runtime_epochs.items()
+                    ),
+                    "runtime epoch map is invalid",
+                )
+                _manifest_error(
+                    runtime_epochs.get("runtime_epoch")
+                    == observations["command_runtime_epoch"],
+                    "remote-command runtime epoch mismatch",
+                )
             _manifest_error(
                 observations.get("subscriber_count") == 1
                 and manifest.get("subscriber_count") == 1,
@@ -3138,11 +3201,22 @@ def validate_manifest(manifest: Mapping[str, Any], output_dir: Optional[Path] = 
                 "runtime observation acknowledgement count mismatch",
             )
             for command in commands:
-                _manifest_error(
-                    _acknowledgement_runtime_epoch(command)
-                    == observations["command_runtime_epoch"],
-                    "command acknowledgement runtime epoch mismatch",
-                )
+                acknowledgement_epochs = _acknowledgement_runtime_epochs(command)
+                if observation_version == 1:
+                    _manifest_error(
+                        _acknowledgement_runtime_epoch(command)
+                        == observations["command_runtime_epoch"],
+                        "command acknowledgement runtime epoch mismatch",
+                    )
+                else:
+                    _manifest_error(
+                        bool(acknowledgement_epochs)
+                        and all(
+                            runtime_epochs.get(field) == epoch
+                            for field, epoch in acknowledgement_epochs.items()
+                        ),
+                        "command acknowledgement runtime epoch mismatch",
+                    )
             for snapshot in manifest.get("state_snapshots", ()):
                 diagnostics = snapshot.get("body", {}).get("diagnostics", {})
                 _manifest_error(
@@ -3448,10 +3522,11 @@ async def run_visual_review(
     runtime_identity_end: Optional[Dict[str, Any]] = None
     runtime_binding_error: Optional[str] = None
     runtime_observations: Dict[str, Any] = {
-        "schema": "character_director_runtime_observations_v1",
-        "schema_version": 1,
+        "schema": "character_director_runtime_observations_v2",
+        "schema_version": 2,
         "identity_process_epoch": None,
         "command_runtime_epoch": None,
+        "runtime_epochs": {},
         "subscriber_count": None,
         "snapshot_count": 0,
         "acknowledgement_count": 0,
