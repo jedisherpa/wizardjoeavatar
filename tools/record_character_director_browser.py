@@ -501,6 +501,29 @@ async def wait_for_wizard(cdp: CDPClient, timeout: float = 20.0) -> Dict[str, An
     )
 
 
+async def wait_for_presented_advance(
+    cdp: CDPClient,
+    baseline: int,
+    minimum_frames: int = 3,
+    timeout: float = 5.0,
+) -> Dict[str, Any]:
+    deadline = time.monotonic() + timeout
+    latest: object = None
+    while time.monotonic() < deadline:
+        latest = await cdp.evaluate("window.__wizardJoeMetrics()")
+        if (
+            isinstance(latest, dict)
+            and latest.get("presentedFrames", 0) >= baseline + minimum_frames
+            and latest.get("rawQueueDepth") == 0
+            and latest.get("decodedQueueDepth") == 0
+        ):
+            return latest
+        await asyncio.sleep(0.05)
+    raise BrowserCaptureFailure(
+        "browser did not present the reset pre-roll: {}".format(latest)
+    )
+
+
 async def post_browser_command(
     cdp: CDPClient,
     source_epoch: str,
@@ -666,6 +689,23 @@ async def capture_browser_layout(
                     })()
                     """
                 )
+                pre_roll_baseline = await cdp.evaluate(
+                    "window.__wizardJoeMetrics()"
+                )
+                source_sequence = 1
+                commands.append(
+                    await post_browser_command(
+                        cdp,
+                        source_epoch,
+                        source_sequence,
+                        program.scenarios[0].command.to_mapping(),
+                    )
+                )
+                source_sequence += 1
+                initial_presented = int(
+                    pre_roll_baseline.get("presentedFrames", 0)
+                )
+                await wait_for_presented_advance(cdp, initial_presented)
                 await cdp.command(
                     "Page.startScreencast",
                     {
@@ -681,17 +721,17 @@ async def capture_browser_layout(
                 previous_sequence = None
                 duplicate_frames = 0
                 output_index = 0
-                source_sequence = 1
-                for scenario in program.scenarios:
-                    commands.append(
-                        await post_browser_command(
-                            cdp,
-                            source_epoch,
-                            source_sequence,
-                            scenario.command.to_mapping(),
+                for scenario_index, scenario in enumerate(program.scenarios):
+                    if scenario_index:
+                        commands.append(
+                            await post_browser_command(
+                                cdp,
+                                source_epoch,
+                                source_sequence,
+                                scenario.command.to_mapping(),
+                            )
                         )
-                    )
-                    source_sequence += 1
+                        source_sequence += 1
                     if scenario.settle_seconds > 0:
                         await asyncio.sleep(scenario.settle_seconds)
                     next_frame_at = max(next_frame_at, time.perf_counter())

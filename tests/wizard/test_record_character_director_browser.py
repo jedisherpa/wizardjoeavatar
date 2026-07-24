@@ -1,3 +1,4 @@
+import asyncio
 import json
 import unittest
 from pathlib import Path
@@ -7,6 +8,7 @@ from tools.record_character_director_browser import (
     parse_args,
     parse_browser_scenario_program,
     scenario_capture_events,
+    wait_for_presented_advance,
 )
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -33,6 +35,42 @@ def program_v2(scenarios):
 
 
 class BrowserScenarioProgramTests(unittest.TestCase):
+    def test_reset_preroll_waits_for_three_drained_presentations(self):
+        class FakeCDP:
+            def __init__(self):
+                self.results = [
+                    {
+                        "presentedFrames": 11,
+                        "rawQueueDepth": 0,
+                        "decodedQueueDepth": 0,
+                    },
+                    {
+                        "presentedFrames": 13,
+                        "rawQueueDepth": 1,
+                        "decodedQueueDepth": 0,
+                    },
+                    {
+                        "presentedFrames": 13,
+                        "rawQueueDepth": 0,
+                        "decodedQueueDepth": 0,
+                    },
+                ]
+
+            async def evaluate(self, expression):
+                self.assert_expression = expression
+                return self.results.pop(0)
+
+        result = asyncio.run(
+            wait_for_presented_advance(
+                FakeCDP(),
+                baseline=10,
+                minimum_frames=3,
+                timeout=1.0,
+            )
+        )
+
+        self.assertEqual(result["presentedFrames"], 13)
+
     def test_exact_desktop_and_mobile_viewport_profiles_parse(self):
         desktop = parse_args(
             [
