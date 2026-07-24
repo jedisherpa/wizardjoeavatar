@@ -1,12 +1,16 @@
 import copy
+import tempfile
 import unittest
+from pathlib import Path
 
+import tools.analyze_character_director_v8 as v8_analyzer
 from tools.analyze_character_director_v8 import (
     EXPECTED_FRAMES,
     EXPECTED_GESTURES,
     EXPECTED_SPEECH_IDS,
     SCENARIO,
     analyze_v8,
+    bind_analyzer_provenance,
 )
 
 
@@ -233,6 +237,63 @@ class CharacterDirectorV8AcceptanceTests(unittest.TestCase):
 
         self.assertFalse(report["passed"])
         self.assertFalse(check(report, "varied_natural_blinks")["passed"])
+
+    def test_analyzer_provenance_must_match_capture_candidate(self):
+        manifest, traces = fixture()
+        manifest["provenance"] = {
+            "head": "a" * 40,
+            "head_tree": "b" * 40,
+            "tracked_diff_sha256": "c" * 64,
+        }
+        report = analyze_v8(manifest, traces)
+        with tempfile.TemporaryDirectory() as temporary:
+            analyzer = Path(temporary) / "analyze_character_director_v8.py"
+            analyzer.write_text("# fixture\n", encoding="utf-8")
+            bind_analyzer_provenance(
+                report,
+                manifest,
+                {
+                    "available": True,
+                    "head": "d" * 40,
+                    "head_tree": "b" * 40,
+                    "branch": "codex/test",
+                    "worktree_clean": True,
+                    "tracked_diff_sha256": "c" * 64,
+                },
+                analyzer,
+            )
+
+        self.assertFalse(report["passed"])
+        self.assertFalse(
+            check(report, "analyzer_matches_capture_candidate")["passed"]
+        )
+
+    def test_matching_analyzer_provenance_preserves_pass(self):
+        manifest, traces = fixture()
+        manifest["provenance"] = {
+            "head": "a" * 40,
+            "head_tree": "b" * 40,
+            "tracked_diff_sha256": "c" * 64,
+        }
+        report = analyze_v8(manifest, traces)
+        bind_analyzer_provenance(
+            report,
+            manifest,
+            {
+                "available": True,
+                "head": "a" * 40,
+                "head_tree": "b" * 40,
+                "branch": "codex/test",
+                "worktree_clean": True,
+                "tracked_diff_sha256": "c" * 64,
+            },
+            Path(v8_analyzer.__file__),
+        )
+
+        self.assertTrue(report["passed"], report)
+        self.assertTrue(
+            check(report, "analyzer_matches_capture_candidate")["passed"]
+        )
 
 
 if __name__ == "__main__":

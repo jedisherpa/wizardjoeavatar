@@ -15,11 +15,15 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from tools.run_character_director_visual_review import validate_manifest
+from tools.run_character_director_visual_review import (
+    collect_git_provenance,
+    sha256_file,
+    validate_manifest,
+)
 from wizard_avatar.animation_trace import AnimationTruthTraceV1
 
 
-REPORT_SCHEMA = "character_director_v8_machine_acceptance_v1"
+REPORT_SCHEMA = "character_director_v8_machine_acceptance_v2"
 SCENARIO = "v8-continuous-performance"
 EXPECTED_FRAMES = 1440
 EXPECTED_SPEECH_IDS = ("v8-phrase-1", "v8-phrase-2", "v8-phrase-3")
@@ -117,7 +121,7 @@ def analyze_v8(
 ) -> Dict[str, Any]:
     report: Dict[str, Any] = {
         "schema": REPORT_SCHEMA,
-        "schema_version": 1,
+        "schema_version": 2,
         "acceptance_scenario": "V8",
         "passed": False,
         "checks": [],
@@ -436,6 +440,51 @@ def analyze_v8(
     return report
 
 
+def bind_analyzer_provenance(
+    report: Dict[str, Any],
+    manifest: Mapping[str, Any],
+    git: Mapping[str, Any],
+    analyzer_path: Path,
+) -> None:
+    candidate = manifest.get("provenance")
+    candidate = candidate if isinstance(candidate, Mapping) else {}
+    try:
+        relative_path = analyzer_path.resolve().relative_to(ROOT.resolve()).as_posix()
+    except ValueError:
+        relative_path = str(analyzer_path.resolve())
+    identity = {
+        "path": relative_path,
+        "sha256": sha256_file(analyzer_path),
+        "repository_head": git.get("head"),
+        "repository_head_tree": git.get("head_tree"),
+        "repository_branch": git.get("branch"),
+        "repository_worktree_clean": git.get("worktree_clean"),
+        "repository_tracked_diff_sha256": git.get("tracked_diff_sha256"),
+    }
+    report["analyzer_provenance"] = identity
+    _check(
+        report,
+        "analyzer_matches_capture_candidate",
+        relative_path == "tools/analyze_character_director_v8.py"
+        and git.get("available") is True
+        and git.get("head") == candidate.get("head")
+        and git.get("head_tree") == candidate.get("head_tree")
+        and git.get("worktree_clean") is True
+        and git.get("tracked_diff_sha256") == candidate.get("tracked_diff_sha256"),
+        {
+            "analyzer": identity,
+            "capture_candidate": {
+                "head": candidate.get("head"),
+                "head_tree": candidate.get("head_tree"),
+                "tracked_diff_sha256": candidate.get("tracked_diff_sha256"),
+            },
+        },
+    )
+    report["passed"] = bool(report["checks"]) and all(
+        item["passed"] for item in report["checks"]
+    )
+
+
 def load_and_analyze(manifest_path: Path) -> Dict[str, Any]:
     evidence_dir = manifest_path.resolve().parent
     manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
@@ -447,7 +496,14 @@ def load_and_analyze(manifest_path: Path) -> Dict[str, Any]:
             traces.append(
                 AnimationTruthTraceV1.from_mapping(json.loads(line)).to_mapping()
             )
-    return analyze_v8(manifest, traces)
+    report = analyze_v8(manifest, traces)
+    bind_analyzer_provenance(
+        report,
+        manifest,
+        collect_git_provenance(),
+        Path(__file__),
+    )
+    return report
 
 
 def parse_args(argv: Optional[Sequence[str]] = None) -> argparse.Namespace:
