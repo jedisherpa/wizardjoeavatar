@@ -8,27 +8,312 @@ import asyncio
 import base64
 import hashlib
 import json
+import math
+import re
 import shutil
 import socket
 import subprocess
+import sys
 import tempfile
 import time
 import urllib.request
 import uuid
+from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any, Dict, Mapping, Optional, Sequence
+from typing import Any, Dict, Iterator, Mapping, Optional, Sequence, Tuple
 
 import websockets
 
 ROOT = Path(__file__).resolve().parents[1]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+
+from wizard_avatar.commanding import COMMAND_KINDS
+
 CHROME = Path("/Applications/Google Chrome.app/Contents/MacOS/Google Chrome")
 SCHEMA = "character_director_browser_layout_v1"
 SOURCE_ID = "character-director-browser-review"
+SCENARIO_PROGRAM_V1 = ("character_director_scenario_program_v1", 1)
+SCENARIO_PROGRAM_V2 = ("character_director_scenario_program_v2", 2)
+SCENARIO_NAME_RE = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
+ACCEPTANCE_SCENARIO_RE = re.compile(r"^V(?:[1-9]|10)$")
 
 
 class BrowserCaptureFailure(RuntimeError):
     pass
+
+
+@dataclass(frozen=True)
+class BrowserCommand:
+    name: str
+    kind: str
+    payload: Dict[str, Any]
+    at_frame: Optional[int] = None
+
+    def to_mapping(self) -> Dict[str, Any]:
+        return {
+            "name": self.name,
+            "kind": self.kind,
+            "payload": self.payload,
+        }
+
+
+@dataclass(frozen=True)
+class BrowserScenario:
+    command: BrowserCommand
+    settle_seconds: float
+    capture_frames: int
+    scheduled_commands: Tuple[BrowserCommand, ...] = ()
+
+
+@dataclass(frozen=True)
+class BrowserScenarioProgram:
+    schema: str
+    schema_version: int
+    scenarios: Tuple[BrowserScenario, ...]
+
+    @property
+    def expected_frame_count(self) -> int:
+        return sum(scenario.capture_frames for scenario in self.scenarios)
+
+
+def _finite_number(value: object, field: str, allow_zero: bool) -> float:
+    if isinstance(value, bool) or not isinstance(value, (int, float)):
+        raise BrowserCaptureFailure("{} must be a finite number".format(field))
+    result = float(value)
+    if not math.isfinite(result) or result < 0 or (not allow_zero and result == 0):
+        qualifier = "nonnegative" if allow_zero else "positive"
+        raise BrowserCaptureFailure("{} must be {}".format(field, qualifier))
+    return result
+
+
+def _positive_integer(value: object, field: str) -> int:
+    if isinstance(value, bool) or not isinstance(value, int) or value <= 0:
+        raise BrowserCaptureFailure("{} must be a positive integer".format(field))
+    return value
+
+
+def _json_object(value: object, field: str) -> Dict[str, Any]:
+    if not isinstance(value, Mapping):
+        raise BrowserCaptureFailure("{} must be an object".format(field))
+    try:
+        encoded = json.dumps(value, allow_nan=False, separators=(",", ":"))
+        decoded = json.loads(encoded)
+    except (TypeError, ValueError) as exc:
+        raise BrowserCaptureFailure(
+            "{} must contain only finite JSON values".format(field)
+        ) from exc
+    if not isinstance(decoded, dict) or any(not isinstance(key, str) for key in value):
+        raise BrowserCaptureFailure("{} keys must be strings".format(field))
+    return decoded
+
+
+def _browser_command(
+    value: Mapping[str, Any],
+    required: set,
+    field: str,
+    at_frame: Optional[int] = None,
+) -> BrowserCommand:
+    supplied = set(value)
+    if supplied != required:
+        raise BrowserCaptureFailure(
+            "{} schema mismatch; missing={} unknown={}".format(
+                field,
+                sorted(required - supplied),
+                sorted(supplied - required),
+            )
+        )
+    name = value["name"]
+    kind = value["kind"]
+    if not isinstance(name, str) or not SCENARIO_NAME_RE.fullmatch(name):
+        raise BrowserCaptureFailure(
+            "{} name must be a lowercase kebab-case identifier".format(field)
+        )
+    if not isinstance(kind, str) or kind not in COMMAND_KINDS:
+        raise BrowserCaptureFailure(
+            "unsupported {} command kind: {}".format(field, kind)
+        )
+    return BrowserCommand(
+        name=name,
+        kind=kind,
+        payload=_json_object(value["payload"], "{} payload".format(field)),
+        at_frame=at_frame,
+    )
+
+
+def parse_browser_scenario_program(
+    program: object,
+    fps: float,
+) -> BrowserScenarioProgram:
+    fps = _finite_number(fps, "fps", allow_zero=False)
+    required = {
+        "schema",
+        "schema_version",
+        "program_id",
+        "acceptance_scenario",
+        "scenarios",
+    }
+    if not isinstance(program, Mapping) or set(program) != required:
+        supplied = set(program) if isinstance(program, Mapping) else set()
+        raise BrowserCaptureFailure(
+            "scenario program schema mismatch; missing={} unknown={}".format(
+                sorted(required - supplied),
+                sorted(supplied - required),
+            )
+        )
+    schema = program["schema"]
+    schema_version = program["schema_version"]
+    if (
+        not isinstance(schema, str)
+        or isinstance(schema_version, bool)
+        or not isinstance(schema_version, int)
+    ):
+        raise BrowserCaptureFailure("unsupported scenario program schema or version")
+    schema_pair = (schema, schema_version)
+    if schema_pair not in {SCENARIO_PROGRAM_V1, SCENARIO_PROGRAM_V2}:
+        raise BrowserCaptureFailure("unsupported scenario program schema or version")
+    if (
+        not isinstance(program["program_id"], str)
+        or not SCENARIO_NAME_RE.fullmatch(program["program_id"])
+    ):
+        raise BrowserCaptureFailure(
+            "scenario program_id must be a lowercase kebab-case identifier"
+        )
+    if (
+        not isinstance(program["acceptance_scenario"], str)
+        or not ACCEPTANCE_SCENARIO_RE.fullmatch(program["acceptance_scenario"])
+    ):
+        raise BrowserCaptureFailure("acceptance_scenario must be V1 through V10")
+    raw_scenarios = program["scenarios"]
+    if (
+        isinstance(raw_scenarios, (str, bytes))
+        or not isinstance(raw_scenarios, Sequence)
+        or not raw_scenarios
+    ):
+        raise BrowserCaptureFailure("scenarios must be a non-empty sequence")
+
+    scenarios = []
+    scenario_names = set()
+    for scenario_index, value in enumerate(raw_scenarios):
+        field = "scenario {}".format(scenario_index)
+        if not isinstance(value, Mapping):
+            raise BrowserCaptureFailure("{} must be an object".format(field))
+        if schema_pair == SCENARIO_PROGRAM_V1:
+            command = _browser_command(
+                value,
+                {"name", "kind", "payload", "settle_seconds", "capture_seconds"},
+                field,
+            )
+            settle_seconds = _finite_number(
+                value["settle_seconds"],
+                "{} settle_seconds".format(field),
+                allow_zero=True,
+            )
+            capture_seconds = _finite_number(
+                value["capture_seconds"],
+                "{} capture_seconds".format(field),
+                allow_zero=False,
+            )
+            capture_frames = max(1, int(round(capture_seconds * fps)))
+            scheduled_commands: Tuple[BrowserCommand, ...] = ()
+        else:
+            command = _browser_command(
+                value,
+                {"name", "kind", "payload", "timing"},
+                field,
+            )
+            timing = value["timing"]
+            if not isinstance(timing, Mapping):
+                raise BrowserCaptureFailure("{} timing must be an object".format(field))
+            if set(timing) not in (
+                {"capture_frames"},
+                {"capture_frames", "scheduled_commands"},
+            ):
+                raise BrowserCaptureFailure(
+                    "{} v2 timing supports only capture_frames with optional "
+                    "scheduled_commands".format(field)
+                )
+            capture_frames = _positive_integer(
+                timing["capture_frames"],
+                "{} timing.capture_frames".format(field),
+            )
+            settle_seconds = 0.0
+            scheduled_values = timing.get("scheduled_commands", ())
+            if "scheduled_commands" in timing and (
+                isinstance(scheduled_values, (str, bytes))
+                or not isinstance(scheduled_values, Sequence)
+                or not scheduled_values
+            ):
+                raise BrowserCaptureFailure(
+                    "{} timing.scheduled_commands must be a non-empty sequence".format(
+                        field
+                    )
+                )
+            parsed_scheduled = []
+            scheduled_names = set()
+            previous_frame = 0
+            for command_index, scheduled in enumerate(scheduled_values):
+                command_field = "{} scheduled command {}".format(field, command_index)
+                if not isinstance(scheduled, Mapping):
+                    raise BrowserCaptureFailure(
+                        "{} must be an object".format(command_field)
+                    )
+                at_frame = scheduled.get("at_frame")
+                if (
+                    isinstance(at_frame, bool)
+                    or not isinstance(at_frame, int)
+                    or at_frame <= previous_frame
+                    or at_frame >= capture_frames
+                ):
+                    raise BrowserCaptureFailure(
+                        "{} at_frame values must be strictly increasing within "
+                        "the capture".format(field)
+                    )
+                parsed = _browser_command(
+                    scheduled,
+                    {"name", "at_frame", "kind", "payload"},
+                    command_field,
+                    at_frame=at_frame,
+                )
+                if parsed.name in scheduled_names:
+                    raise BrowserCaptureFailure(
+                        "{} scheduled command names must be unique".format(field)
+                    )
+                scheduled_names.add(parsed.name)
+                previous_frame = at_frame
+                parsed_scheduled.append(parsed)
+            scheduled_commands = tuple(parsed_scheduled)
+
+        if command.name in scenario_names:
+            raise BrowserCaptureFailure("scenario names must be unique")
+        scenario_names.add(command.name)
+        scenarios.append(
+            BrowserScenario(
+                command=command,
+                settle_seconds=settle_seconds,
+                capture_frames=capture_frames,
+                scheduled_commands=scheduled_commands,
+            )
+        )
+    return BrowserScenarioProgram(
+        schema=schema,
+        schema_version=schema_version,
+        scenarios=tuple(scenarios),
+    )
+
+
+def scenario_capture_events(
+    scenario: BrowserScenario,
+) -> Iterator[Tuple[int, Optional[BrowserCommand]]]:
+    scheduled_by_frame = {
+        command.at_frame: command for command in scenario.scheduled_commands
+    }
+    for frame_offset in range(1, scenario.capture_frames + 1):
+        yield frame_offset, None
+        scheduled = scheduled_by_frame.get(frame_offset)
+        if scheduled is not None:
+            yield frame_offset, scheduled
 
 
 def utc_now() -> str:
@@ -255,15 +540,12 @@ async def capture_browser_layout(
     if ":8765" in base_url:
         raise BrowserCaptureFailure("browser proof must not contact protected port 8765")
     scenario_path = capture_manifest_path.parent / "scenario-program.json"
-    program = json.loads(scenario_path.read_text(encoding="utf-8"))
-    scenarios = program.get("scenarios")
-    if not isinstance(scenarios, list) or not scenarios:
-        raise BrowserCaptureFailure("browser proof requires copied scenario program steps")
     fps = float(manifest["init"]["fps"])
-    expected_frames = sum(
-        max(1, int(round(float(item["capture_seconds"]) * fps)))
-        for item in scenarios
+    program = parse_browser_scenario_program(
+        json.loads(scenario_path.read_text(encoding="utf-8")),
+        fps,
     )
+    expected_frames = program.expected_frame_count
     if not CHROME.is_file():
         raise BrowserCaptureFailure("Google Chrome is required for browser layout proof")
     ffmpeg = shutil.which("ffmpeg")
@@ -343,35 +625,65 @@ async def capture_browser_layout(
                 previous_sequence = None
                 duplicate_frames = 0
                 output_index = 0
-                for source_sequence, scenario in enumerate(scenarios, start=1):
+                source_sequence = 1
+                for scenario in program.scenarios:
                     commands.append(
-                        await post_browser_command(cdp, source_epoch, source_sequence, scenario)
-                    )
-                    settle = float(scenario["settle_seconds"])
-                    if settle > 0:
-                        await asyncio.sleep(settle)
-                    next_frame_at = max(next_frame_at, time.perf_counter())
-                    frame_count = max(1, int(round(float(scenario["capture_seconds"]) * fps)))
-                    for _ in range(frame_count):
-                        delay = next_frame_at - time.perf_counter()
-                        if delay > 0:
-                            await asyncio.sleep(delay)
-                        if cdp.latest_screencast is None:
-                            raise BrowserCaptureFailure("Chrome produced no screencast frame")
-                        output_index += 1
-                        sequence = cdp.latest_screencast_sequence
-                        if sequence == previous_sequence:
-                            duplicate_frames += 1
-                        sampled_sequences.append(sequence)
-                        (frames_dir / "{:06d}.jpg".format(output_index)).write_bytes(
-                            cdp.latest_screencast
+                        await post_browser_command(
+                            cdp,
+                            source_epoch,
+                            source_sequence,
+                            scenario.command.to_mapping(),
                         )
-                        previous_sequence = sequence
-                        next_frame_at += 1.0 / fps
+                    )
+                    source_sequence += 1
+                    if scenario.settle_seconds > 0:
+                        await asyncio.sleep(scenario.settle_seconds)
+                    next_frame_at = max(next_frame_at, time.perf_counter())
+                    for frame_offset, scheduled in scenario_capture_events(scenario):
+                        if scheduled is None:
+                            delay = next_frame_at - time.perf_counter()
+                            if delay > 0:
+                                await asyncio.sleep(delay)
+                            if cdp.latest_screencast is None:
+                                raise BrowserCaptureFailure(
+                                    "Chrome produced no screencast frame"
+                                )
+                            output_index += 1
+                            sequence = cdp.latest_screencast_sequence
+                            if sequence == previous_sequence:
+                                duplicate_frames += 1
+                            sampled_sequences.append(sequence)
+                            (
+                                frames_dir / "{:06d}.jpg".format(output_index)
+                            ).write_bytes(cdp.latest_screencast)
+                            previous_sequence = sequence
+                            next_frame_at += 1.0 / fps
+                            continue
+                        outcome = await post_browser_command(
+                            cdp,
+                            source_epoch,
+                            source_sequence,
+                            scheduled.to_mapping(),
+                        )
+                        outcome.update(
+                            {
+                                "scheduled_for_scenario": scenario.command.name,
+                                "scheduled_at_frame": scheduled.at_frame,
+                                "dispatch_observed_after_frame_count": frame_offset,
+                            }
+                        )
+                        commands.append(outcome)
+                        source_sequence += 1
+                        next_frame_at = max(next_frame_at, time.perf_counter())
                 await cdp.command("Page.stopScreencast")
                 final_metrics = await cdp.evaluate("window.__wizardJoeMetrics()")
                 if output_index != expected_frames:
-                    raise BrowserCaptureFailure("browser capture frame budget mismatch")
+                    raise BrowserCaptureFailure(
+                        "browser capture frame budget mismatch: expected {}, captured {}".format(
+                            expected_frames,
+                            output_index,
+                        )
+                    )
                 encoded = subprocess.run(
                     (
                         ffmpeg,
@@ -419,6 +731,8 @@ async def capture_browser_layout(
                     "fps": fps,
                     "frame_count": output_index,
                     "expected_frame_count": expected_frames,
+                    "scenario_program_schema": program.schema,
+                    "scenario_program_schema_version": program.schema_version,
                     "screencast_event_count": cdp.latest_screencast_sequence,
                     "duplicate_sample_count": duplicate_frames,
                     "sampled_screencast_sequences": sampled_sequences,
