@@ -31,13 +31,22 @@ EXPECTED_SCENARIOS = (
 )
 EXPECTED_FRAME_COUNTS = {
     "v7-ready": 12,
-    "v7-precommit-cast": 3,
+    "v7-precommit-cast": 11,
     "v7-precommit-new-turn": 36,
     "v7-precommit-settle": 12,
     "v7-postcommit-ready": 12,
-    "v7-postcommit-cast": 6,
+    "v7-postcommit-cast": 13,
     "v7-postcommit-new-turn": 54,
     "v7-final-settle": 18,
+}
+FIXED_FRAME_COUNTS = {
+    name: count
+    for name, count in EXPECTED_FRAME_COUNTS.items()
+    if name not in {"v7-precommit-cast", "v7-postcommit-cast"}
+}
+TRIGGER_FRAME_BOUNDS = {
+    "v7-precommit-cast": 12,
+    "v7-postcommit-cast": 16,
 }
 EXPECTED_MARKERS = (
     "action_commit",
@@ -110,9 +119,11 @@ def analyze_v7(
         report,
         "scenario_program_identity",
         isinstance(program, Mapping)
+        and program.get("schema") == "character_director_scenario_program_v2"
+        and program.get("schema_version") == 2
         and program.get("program_id") == "v7-cast-interruption"
         and program.get("acceptance_scenario") == "V7"
-        and program.get("total_duration_seconds") == 6.375,
+        and program.get("maximum_capture_frame_count") == 172,
         program,
     )
     scenario_names = tuple(item.get("name") for item in manifest.get("scenarios", ()))
@@ -140,11 +151,14 @@ def analyze_v7(
         "complete_contiguous_capture",
         len(frames) == len(trace_records)
         and not missing_trace
-        and len(owned) == sum(EXPECTED_FRAME_COUNTS.values())
+        and all(counts[name] == count for name, count in FIXED_FRAME_COUNTS.items())
+        and all(
+            1 <= counts[name] <= maximum
+            for name, maximum in TRIGGER_FRAME_BOUNDS.items()
+        )
         and len(unowned) <= len(EXPECTED_SCENARIOS) - 1
         and all(frame.get("scenario") is None for frame in unowned)
-        and contiguous
-        and counts == EXPECTED_FRAME_COUNTS,
+        and contiguous,
         {
             "frame_count": len(frames),
             "owned_frame_count": len(owned),
@@ -164,6 +178,42 @@ def analyze_v7(
         ]
         for name in EXPECTED_SCENARIOS
     }
+    owned_scenario_order: List[object] = []
+    for frame in owned:
+        scenario_name = frame.get("scenario")
+        if not owned_scenario_order or owned_scenario_order[-1] != scenario_name:
+            owned_scenario_order.append(scenario_name)
+    _check(
+        report,
+        "scenario_blocks_are_contiguous",
+        tuple(owned_scenario_order) == EXPECTED_SCENARIOS,
+        owned_scenario_order,
+    )
+
+    commands = {
+        item.get("scenario"): item
+        for item in manifest.get("commands", ())
+        if isinstance(item, Mapping)
+    }
+    pre_trigger = commands.get("v7-precommit-cast", {}).get(
+        "trace_trigger_observation"
+    )
+    post_trigger = commands.get("v7-postcommit-cast", {}).get(
+        "trace_trigger_observation"
+    )
+    _check(
+        report,
+        "trace_triggered_interrupt_boundaries",
+        isinstance(pre_trigger, Mapping)
+        and pre_trigger.get("animation_clip_id") == "cast_front"
+        and pre_trigger.get("animation_authored_frame") == 8
+        and pre_trigger.get("marker_id") is None
+        and isinstance(post_trigger, Mapping)
+        and post_trigger.get("animation_clip_id") == "cast_front"
+        and post_trigger.get("animation_authored_frame") == 10
+        and post_trigger.get("marker_id") == "action_commit",
+        {"precommit": pre_trigger, "postcommit": post_trigger},
+    )
 
     pre_cast = by_scenario["v7-precommit-cast"]
     pre_turn = by_scenario["v7-precommit-new-turn"]
@@ -203,24 +253,45 @@ def analyze_v7(
     post_records = post_cast + post_turn
     post_events = _events(post_records)
     post_markers = [item[0] for item in post_events]
+    post_marker_pairs = [(item[0], item[1]) for item in post_events]
     post_speech_offsets = [
         index for index, trace in enumerate(post_turn)
         if _channels(trace).get("speech_mouth_authority") != "none"
         and _channels(trace).get("action") == "speaking"
     ]
     settled_event = next((item for item in post_events if item[0] == "action_settled"), None)
+    recoverable_event = next(
+        (item for item in post_events if item[0] == "action_recoverable"),
+        None,
+    )
     first_speech_frame = (
         post_turn[post_speech_offsets[0]].get("frame_index") if post_speech_offsets else None
     )
     _check(
         report,
         "postcommit_interrupt_finishes_recovery_then_speaks",
-        post_markers == list(EXPECTED_MARKERS)
+        post_marker_pairs
+        == [
+            ("action_commit", 10),
+            ("action_effect", 14),
+            ("action_recoverable", 23),
+            ("action_settled", 28),
+        ]
         and bool(post_speech_offsets)
-        and post_speech_offsets[0] <= 12
         and settled_event is not None
+        and recoverable_event is not None
         and type(first_speech_frame) is int
         and settled_event[2] <= first_speech_frame
+        and first_speech_frame - recoverable_event[2] <= 12
+        and _channels(post_turn[post_speech_offsets[0]]).get("speech_id")
+        == "v7-postcommit-new-turn"
+        and set(range(23, 31)).issubset(
+            {
+                trace.get("animation_authored_frame")
+                for trace in post_records
+                if trace.get("animation_clip_id") == "cast_front"
+            }
+        )
         and all(
             trace.get("animation_clip_id") != "cast_front"
             and trace.get("effect_phase") == "inactive"
@@ -232,6 +303,11 @@ def analyze_v7(
             "speech_start_owned_frame_offset": post_speech_offsets[0] if post_speech_offsets else None,
             "action_settled_frame": settled_event[2] if settled_event else None,
             "first_speech_frame": first_speech_frame,
+            "recoverable_to_speech_frames": (
+                first_speech_frame - recoverable_event[2]
+                if recoverable_event is not None and type(first_speech_frame) is int
+                else None
+            ),
         },
     )
 

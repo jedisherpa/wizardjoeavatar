@@ -60,6 +60,7 @@ class PresentationChannelsV1:
     expression: str
     rendered_mouth_shape: str
     speech_mouth_authority: str
+    speech_id: Optional[str]
     locomotion: str
     action: str
     rendered_head_pose_id: str
@@ -86,6 +87,7 @@ class PresentationChannelsV1:
             "blink_painted_cells",
             "head_offset_x",
             "head_offset_y",
+            "speech_id",
         }
         pixel_evidence_added = {
             "body_pixel_sha256",
@@ -117,6 +119,7 @@ class PresentationChannelsV1:
         payload.setdefault("mouth_painted_cells", 0)
         payload.setdefault("head_offset_x", 0)
         payload.setdefault("head_offset_y", 0)
+        payload.setdefault("speech_id", None)
         payload["eye_apertures"] = tuple(
             item if isinstance(item, RasterSpanV1) else RasterSpanV1(**item)
             for item in payload["eye_apertures"]
@@ -134,6 +137,8 @@ class PresentationChannelsV1:
                 raise ValueError("{} must be -1, 0, or 1".format(name))
         if not isinstance(result.gaze_authoritative, bool):
             raise ValueError("gaze_authoritative must be boolean")
+        if result.speech_id is not None and not isinstance(result.speech_id, str):
+            raise ValueError("speech_id must be text or null")
         if not isinstance(result.blink_closed, bool):
             raise ValueError("blink_closed must be boolean")
         if (

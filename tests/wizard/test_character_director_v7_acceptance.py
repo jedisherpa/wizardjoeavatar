@@ -12,19 +12,49 @@ from tools.analyze_character_director_v7 import (
 def fixture():
     manifest = {
         "scenario_program": {
+            "schema": "character_director_scenario_program_v2",
+            "schema_version": 2,
             "program_id": "v7-cast-interruption",
             "acceptance_scenario": "V7",
-            "total_duration_seconds": 6.375,
+            "maximum_capture_frame_count": 172,
         },
         "scenarios": [{"name": name} for name in EXPECTED_SCENARIOS],
+        "commands": [
+            {
+                "scenario": "v7-precommit-cast",
+                "trace_trigger_observation": {
+                    "animation_clip_id": "cast_front",
+                    "animation_authored_frame": 8,
+                    "marker_id": None,
+                },
+            },
+            {
+                "scenario": "v7-postcommit-cast",
+                "trace_trigger_observation": {
+                    "animation_clip_id": "cast_front",
+                    "animation_authored_frame": 10,
+                    "marker_id": "action_commit",
+                },
+            },
+        ],
         "init": {"cols": 240, "rows": 135, "fps": 24.0},
         "frames": [],
     }
     traces = []
     frame_index = 0
 
-    def append(scenario, *, clip="idle_front", action="idle", authority="none",
-               effect_phase="inactive", effect_intensity=0.0, markers=()):
+    def append(
+        scenario,
+        *,
+        clip="idle_front",
+        authored_frame=0,
+        action="idle",
+        authority="none",
+        speech_id=None,
+        effect_phase="inactive",
+        effect_intensity=0.0,
+        markers=(),
+    ):
         nonlocal frame_index
         manifest["frames"].append(
             {"frame_index": frame_index, "capture_owned": True, "scenario": scenario}
@@ -33,7 +63,12 @@ def fixture():
             {
                 "frame_index": frame_index,
                 "animation_clip_id": clip,
-                "rendered_pose_id": "cast_front_08" if clip == "cast_front" else "front_idle",
+                "animation_authored_frame": authored_frame,
+                "rendered_pose_id": (
+                    "cast_front_{:02d}".format(authored_frame)
+                    if clip == "cast_front"
+                    else "front_idle"
+                ),
                 "effect_phase": effect_phase,
                 "effect_intensity": effect_intensity,
                 "presentation_marker_events": [
@@ -53,6 +88,7 @@ def fixture():
                 "presentation_channels": {
                     "action": action,
                     "speech_mouth_authority": authority,
+                    "speech_id": speech_id,
                 },
             }
         )
@@ -62,42 +98,71 @@ def fixture():
         count = EXPECTED_FRAME_COUNTS[scenario]
         for local in range(count):
             if scenario == "v7-precommit-cast":
-                append(scenario, clip="cast_front", action="magic_cast")
-            elif scenario == "v7-precommit-new-turn" and local < 22:
-                append(scenario, action="speaking", authority="local_fallback")
-            elif scenario == "v7-postcommit-cast":
-                markers = ()
-                if local == 4:
-                    markers = (("action_commit", 10),)
-                if local == 5:
-                    markers = (("action_effect", 14),)
                 append(
                     scenario,
                     clip="cast_front",
+                    authored_frame=round(local * 8 / max(1, count - 1)),
                     action="magic_cast",
-                    effect_phase="stroke" if local == 5 else "inactive",
-                    effect_intensity=1.0 if local == 5 else 0.0,
+                )
+            elif scenario == "v7-precommit-new-turn" and local < 22:
+                append(
+                    scenario,
+                    action="speaking",
+                    authority="local_fallback",
+                    speech_id="v7-precommit-new-turn",
+                )
+            elif scenario == "v7-postcommit-cast":
+                markers = ()
+                if local == 12:
+                    markers = (("action_commit", 10),)
+                append(
+                    scenario,
+                    clip="cast_front",
+                    authored_frame=round(local * 10 / max(1, count - 1)),
+                    action="magic_cast",
                     markers=markers,
                 )
             elif scenario == "v7-postcommit-new-turn":
-                if local == 2:
+                if local == 1:
                     append(
                         scenario,
                         clip="cast_front",
+                        authored_frame=14,
+                        action="magic_cast",
+                        effect_phase="stroke",
+                        effect_intensity=1.0,
+                        markers=(("action_effect", 14),),
+                    )
+                elif local == 6:
+                    append(
+                        scenario,
+                        clip="cast_front",
+                        authored_frame=23,
                         action="magic_cast",
                         effect_phase="recovery",
                         effect_intensity=0.4,
                         markers=(("action_recoverable", 23),),
                     )
-                elif local == 4:
+                elif 7 <= local <= 13:
+                    markers = (
+                        (("action_settled", 28),)
+                        if local == 11
+                        else ()
+                    )
                     append(
                         scenario,
                         clip="cast_front",
+                        authored_frame=23 + local - 6,
                         action="magic_cast",
-                        markers=(("action_settled", 28),),
+                        markers=markers,
                     )
-                elif 5 <= local < 27:
-                    append(scenario, action="speaking", authority="local_fallback")
+                elif 14 <= local < 36:
+                    append(
+                        scenario,
+                        action="speaking",
+                        authority="local_fallback",
+                        speech_id="v7-postcommit-new-turn",
+                    )
                 else:
                     append(scenario)
             else:

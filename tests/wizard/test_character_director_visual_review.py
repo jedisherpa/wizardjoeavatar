@@ -37,6 +37,7 @@ from tools.run_character_director_visual_review import (
     validate_review_bundle_manifest,
     validate_runtime_binding,
     validate_scenarios,
+    validate_scenarios_v2,
 )
 from wizard_avatar.protocol import TAG_RAW
 from wizard_avatar.contact_verifier import DecodedRasterFrameV1
@@ -135,6 +136,70 @@ class ScenarioSchemaTests(unittest.TestCase):
         self.assertEqual(program.total_duration_seconds, 12.0)
         self.assertRegex(program.source_sha256, r"^[0-9a-f]{64}$")
         self.assertEqual(program.to_manifest()["artifact_path"], "scenario-program.json")
+
+    def test_loads_trace_triggered_scenario_program_v2(self):
+        program = load_scenario_program(
+            ROOT
+            / "tools"
+            / "character_director_scenarios"
+            / "v7-cast-interruption.json"
+        )
+
+        self.assertEqual(program.schema_version, 2)
+        self.assertEqual(program.acceptance_scenario, "V7")
+        self.assertEqual(program.maximum_capture_frame_count, 172)
+        self.assertEqual(program.scenarios[1].until_trace.clip, "cast_front")
+        self.assertEqual(program.scenarios[1].until_trace.authored_frame, 8)
+        self.assertEqual(program.scenarios[5].until_trace.marker_id, "action_commit")
+        self.assertEqual(program.scenarios[5].max_frames, 16)
+
+    def test_rejects_ambiguous_or_unbounded_scenario_program_v2_timing(self):
+        base = {
+            "name": "cast",
+            "kind": "action",
+            "payload": {"action": "magic_cast"},
+        }
+        invalid = (
+            [{**base, "timing": {"until_trace": {"clip": "cast_front", "authored_frame": 8}}}],
+            [
+                {
+                    **base,
+                    "timing": {
+                        "capture_frames": 12,
+                        "max_frames": 12,
+                    },
+                }
+            ],
+            [
+                {
+                    **base,
+                    "timing": {
+                        "until_trace": {
+                            "clip": "cast_front",
+                            "marker_id": "action_commit",
+                            "authored_frame": 10,
+                        },
+                        "max_frames": 16,
+                    },
+                }
+            ],
+            [
+                {
+                    **base,
+                    "timing": {
+                        "until_trace": {
+                            "marker_id": "unknown_marker",
+                            "authored_frame": 10,
+                        },
+                        "max_frames": 16,
+                    },
+                }
+            ],
+        )
+        for scenarios in invalid:
+            with self.subTest(scenarios=scenarios):
+                with self.assertRaises(ValueError):
+                    validate_scenarios_v2(scenarios)
 
     def test_rejects_unversioned_or_unbounded_scenario_program(self):
         valid = json.loads(

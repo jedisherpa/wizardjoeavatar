@@ -50,6 +50,8 @@ GIT_OBJECT_RE = re.compile(r"^(?:[0-9a-f]{40}|[0-9a-f]{64})$")
 SCENARIO_NAME_RE = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
 SCENARIO_PROGRAM_SCHEMA = "character_director_scenario_program_v1"
 SCENARIO_PROGRAM_VERSION = 1
+SCENARIO_PROGRAM_V2_SCHEMA = "character_director_scenario_program_v2"
+SCENARIO_PROGRAM_V2_VERSION = 2
 SCENARIO_PROGRAM_MAX_BYTES = 64 * 1024
 SCENARIO_PROGRAM_MAX_STEPS = 64
 SCENARIO_PROGRAM_MAX_SECONDS = 10 * 60
@@ -246,6 +248,64 @@ class Scenario:
 
 
 @dataclass(frozen=True)
+class TraceTriggerV2:
+    authored_frame: int
+    clip: Optional[str] = None
+    marker_id: Optional[str] = None
+
+    def matches(self, trace: Mapping[str, Any]) -> bool:
+        if self.clip is not None:
+            return (
+                trace.get("animation_clip_id") == self.clip
+                and trace.get("animation_authored_frame") == self.authored_frame
+            )
+        return any(
+            isinstance(event, Mapping)
+            and event.get("marker_id") == self.marker_id
+            and event.get("animation_authored_frame") == self.authored_frame
+            for event in trace.get("presentation_marker_events", ())
+        )
+
+    def to_mapping(self) -> Dict[str, Any]:
+        result: Dict[str, Any] = {"authored_frame": self.authored_frame}
+        if self.clip is not None:
+            result["clip"] = self.clip
+        if self.marker_id is not None:
+            result["marker_id"] = self.marker_id
+        return result
+
+
+@dataclass(frozen=True)
+class ScenarioV2:
+    name: str
+    kind: str
+    payload: Dict[str, Any]
+    capture_frames: Optional[int] = None
+    until_trace: Optional[TraceTriggerV2] = None
+    max_frames: Optional[int] = None
+
+    def planned_frame_count(self, fps: float) -> int:
+        del fps
+        return self.capture_frames if self.capture_frames is not None else int(self.max_frames or 0)
+
+    def to_mapping(self) -> Dict[str, Any]:
+        timing: Dict[str, Any]
+        if self.capture_frames is not None:
+            timing = {"capture_frames": self.capture_frames}
+        else:
+            timing = {
+                "until_trace": self.until_trace.to_mapping() if self.until_trace else {},
+                "max_frames": self.max_frames,
+            }
+        return {
+            "name": self.name,
+            "kind": self.kind,
+            "payload": self.payload,
+            "timing": timing,
+        }
+
+
+@dataclass(frozen=True)
 class ScenarioProgramV1:
     schema: str
     schema_version: int
@@ -272,7 +332,34 @@ class ScenarioProgramV1:
         }
 
 
-def load_scenario_program(path: Path) -> ScenarioProgramV1:
+@dataclass(frozen=True)
+class ScenarioProgramV2:
+    schema: str
+    schema_version: int
+    program_id: str
+    acceptance_scenario: str
+    scenarios: Tuple[ScenarioV2, ...]
+    source_sha256: str
+    source_bytes: bytes = field(repr=False, compare=False)
+
+    @property
+    def maximum_capture_frame_count(self) -> int:
+        return sum(item.planned_frame_count(24.0) for item in self.scenarios)
+
+    def to_manifest(self) -> Dict[str, Any]:
+        return {
+            "schema": self.schema,
+            "schema_version": self.schema_version,
+            "program_id": self.program_id,
+            "acceptance_scenario": self.acceptance_scenario,
+            "scenario_count": len(self.scenarios),
+            "maximum_capture_frame_count": self.maximum_capture_frame_count,
+            "source_sha256": self.source_sha256,
+            "artifact_path": "scenario-program.json",
+        }
+
+
+def load_scenario_program(path: Path) -> Any:
     try:
         source = path.read_bytes()
     except OSError as exc:
@@ -298,21 +385,39 @@ def load_scenario_program(path: Path) -> ScenarioProgramV1:
                 sorted(supplied.difference(required)),
             )
         )
-    if raw["schema"] != SCENARIO_PROGRAM_SCHEMA or raw["schema_version"] != SCENARIO_PROGRAM_VERSION:
+    schema_pair = raw["schema"], raw["schema_version"]
+    if schema_pair not in {
+        (SCENARIO_PROGRAM_SCHEMA, SCENARIO_PROGRAM_VERSION),
+        (SCENARIO_PROGRAM_V2_SCHEMA, SCENARIO_PROGRAM_V2_VERSION),
+    }:
         raise ValueError("unsupported scenario program schema or version")
     if not isinstance(raw["program_id"], str) or not SCENARIO_NAME_RE.fullmatch(raw["program_id"]):
         raise ValueError("scenario program_id must be a lowercase kebab-case identifier")
     if not isinstance(raw["acceptance_scenario"], str) or not ACCEPTANCE_SCENARIO_RE.fullmatch(raw["acceptance_scenario"]):
         raise ValueError("acceptance_scenario must be V1 through V10")
-    scenarios = validate_scenarios(raw["scenarios"])
+    scenarios = (
+        validate_scenarios(raw["scenarios"])
+        if schema_pair == (SCENARIO_PROGRAM_SCHEMA, SCENARIO_PROGRAM_VERSION)
+        else validate_scenarios_v2(raw["scenarios"])
+    )
     if len(scenarios) > SCENARIO_PROGRAM_MAX_STEPS:
         raise ValueError("scenario program exceeds the step limit")
-    total = sum(item.settle_seconds + item.capture_seconds for item in scenarios)
-    if total > SCENARIO_PROGRAM_MAX_SECONDS:
-        raise ValueError("scenario program exceeds the duration limit")
-    return ScenarioProgramV1(
-        schema=SCENARIO_PROGRAM_SCHEMA,
-        schema_version=SCENARIO_PROGRAM_VERSION,
+    if schema_pair == (SCENARIO_PROGRAM_SCHEMA, SCENARIO_PROGRAM_VERSION):
+        total = sum(item.settle_seconds + item.capture_seconds for item in scenarios)
+        if total > SCENARIO_PROGRAM_MAX_SECONDS:
+            raise ValueError("scenario program exceeds the duration limit")
+        return ScenarioProgramV1(
+            schema=SCENARIO_PROGRAM_SCHEMA,
+            schema_version=SCENARIO_PROGRAM_VERSION,
+            program_id=raw["program_id"],
+            acceptance_scenario=raw["acceptance_scenario"],
+            scenarios=scenarios,
+            source_sha256=hashlib.sha256(source).hexdigest(),
+            source_bytes=source,
+        )
+    return ScenarioProgramV2(
+        schema=SCENARIO_PROGRAM_V2_SCHEMA,
+        schema_version=SCENARIO_PROGRAM_V2_VERSION,
         program_id=raw["program_id"],
         acceptance_scenario=raw["acceptance_scenario"],
         scenarios=scenarios,
@@ -382,6 +487,108 @@ def validate_scenarios(values: Sequence[Mapping[str, Any]]) -> Tuple[Scenario, .
                 capture_seconds=_duration(value["capture_seconds"], "capture_seconds", False),
             )
         )
+    return tuple(result)
+
+
+def _positive_integer(value: object, name: str) -> int:
+    if isinstance(value, bool) or not isinstance(value, int) or value <= 0:
+        raise ValueError("{} must be a positive integer".format(name))
+    return value
+
+
+def _trace_trigger_v2(value: object) -> TraceTriggerV2:
+    if not isinstance(value, Mapping):
+        raise ValueError("until_trace must be an object")
+    supplied = set(value)
+    if supplied not in (
+        {"clip", "authored_frame"},
+        {"marker_id", "authored_frame"},
+    ):
+        raise ValueError(
+            "until_trace requires exactly authored_frame and either clip or marker_id"
+        )
+    authored_frame = value.get("authored_frame")
+    if isinstance(authored_frame, bool) or not isinstance(authored_frame, int) or authored_frame < 0:
+        raise ValueError("until_trace.authored_frame must be a nonnegative integer")
+    clip = value.get("clip")
+    marker_id = value.get("marker_id")
+    if clip is not None and (
+        not isinstance(clip, str) or not SCENARIO_NAME_RE.fullmatch(clip.replace("_", "-"))
+    ):
+        raise ValueError("until_trace.clip must be a lowercase clip identifier")
+    if marker_id is not None and (
+        not isinstance(marker_id, str)
+        or marker_id
+        not in {
+            "action_commit",
+            "action_effect",
+            "action_recoverable",
+            "action_settled",
+        }
+    ):
+        raise ValueError("until_trace.marker_id is not an accepted action marker")
+    return TraceTriggerV2(
+        authored_frame=authored_frame,
+        clip=clip,
+        marker_id=marker_id,
+    )
+
+
+def validate_scenarios_v2(values: Sequence[Mapping[str, Any]]) -> Tuple[ScenarioV2, ...]:
+    if isinstance(values, (str, bytes)) or not isinstance(values, Sequence) or not values:
+        raise ValueError("scenarios must be a non-empty sequence")
+    required = {"name", "kind", "payload", "timing"}
+    result: List[ScenarioV2] = []
+    names = set()
+    for index, value in enumerate(values):
+        if not isinstance(value, Mapping):
+            raise ValueError("scenario {} must be an object".format(index))
+        if set(value) != required:
+            raise ValueError("scenario {} schema mismatch".format(index))
+        name, kind, payload, timing = (
+            value["name"],
+            value["kind"],
+            value["payload"],
+            value["timing"],
+        )
+        if not isinstance(name, str) or not SCENARIO_NAME_RE.fullmatch(name):
+            raise ValueError("scenario name must be a lowercase kebab-case identifier")
+        if name in names:
+            raise ValueError("scenario names must be unique")
+        if not isinstance(kind, str) or kind not in COMMAND_KINDS:
+            raise ValueError("unsupported scenario command kind: {}".format(kind))
+        if not isinstance(payload, Mapping):
+            raise ValueError("scenario payload must be an object")
+        if not isinstance(timing, Mapping):
+            raise ValueError("scenario timing must be an object")
+        supplied_timing = set(timing)
+        if supplied_timing == {"capture_frames"}:
+            scenario = ScenarioV2(
+                name=name,
+                kind=kind,
+                payload=_copy_json(payload),
+                capture_frames=_positive_integer(
+                    timing["capture_frames"], "timing.capture_frames"
+                ),
+            )
+        elif supplied_timing == {"until_trace", "max_frames"}:
+            scenario = ScenarioV2(
+                name=name,
+                kind=kind,
+                payload=_copy_json(payload),
+                until_trace=_trace_trigger_v2(timing["until_trace"]),
+                max_frames=_positive_integer(timing["max_frames"], "timing.max_frames"),
+            )
+        else:
+            raise ValueError(
+                "scenario timing requires capture_frames or until_trace plus max_frames"
+            )
+        names.add(name)
+        result.append(scenario)
+    if sum(item.planned_frame_count(24.0) for item in result) > int(
+        SCENARIO_PROGRAM_MAX_SECONDS * 24
+    ):
+        raise ValueError("scenario program exceeds the frame budget")
     return tuple(result)
 
 
@@ -625,6 +832,15 @@ class ScenarioClock:
             self.current = None
             self.completed.set()
         return scenario
+
+    def finish(self, scenario: str) -> None:
+        if self.current != scenario:
+            raise EvidenceFailure(
+                "cannot finish inactive scenario capture window: {}".format(scenario)
+            )
+        self.current = None
+        self.remaining_frames = 0
+        self.completed.set()
 
 
 def utc_now() -> str:
@@ -1183,6 +1399,79 @@ async def wait_for_scenario_frames(
         await asyncio.gather(completion, terminated, return_exceptions=True)
 
 
+def _matching_trigger_record(
+    payload: Mapping[str, Any],
+    records: CaptureRecords,
+    scenario: str,
+    trigger: TraceTriggerV2,
+) -> Optional[Dict[str, Any]]:
+    if payload.get("schema") != "animation_truth_trace_v1":
+        raise EvidenceFailure("runtime returned an unsupported animation trace schema")
+    trace_records = payload.get("records")
+    if not isinstance(trace_records, list):
+        raise EvidenceFailure("runtime animation trace records must be an array")
+    owned_indexes = {
+        frame.get("frame_index")
+        for frame in records.frames
+        if frame.get("capture_owned") is True and frame.get("scenario") == scenario
+    }
+    matches = [
+        trace
+        for trace in trace_records
+        if isinstance(trace, Mapping)
+        and trace.get("frame_index") in owned_indexes
+        and trigger.matches(trace)
+    ]
+    if not matches:
+        return None
+    return dict(min(matches, key=lambda item: int(item["frame_index"])))
+
+
+async def wait_for_trace_trigger(
+    scenario: ScenarioV2,
+    animation_trace_url: str,
+    scenario_clock: ScenarioClock,
+    records: CaptureRecords,
+    terminal: asyncio.Event,
+    integrity: CaptureIntegrity,
+    fps: float,
+) -> Dict[str, Any]:
+    if scenario.until_trace is None or scenario.max_frames is None:
+        raise ValueError("trace-triggered scenarios require a trigger and frame bound")
+    deadline = time.monotonic() + max(5.0, scenario.max_frames / fps * 3.0)
+    while time.monotonic() < deadline:
+        if terminal.is_set():
+            raise EvidenceFailure(integrity.failure_reason or "capture terminated")
+        payload, _ = await request_json_async("GET", animation_trace_url)
+        matched = _matching_trigger_record(
+            payload,
+            records,
+            scenario.name,
+            scenario.until_trace,
+        )
+        if matched is not None:
+            if scenario_clock.current == scenario.name:
+                scenario_clock.finish(scenario.name)
+            return {
+                "frame_index": matched.get("frame_index"),
+                "simulation_tick": matched.get("simulation_tick"),
+                "state_revision": matched.get("state_revision"),
+                "animation_clip_id": matched.get("animation_clip_id"),
+                "animation_authored_frame": matched.get("animation_authored_frame"),
+                "marker_id": scenario.until_trace.marker_id,
+            }
+        if scenario_clock.completed.is_set():
+            break
+        await asyncio.sleep(min(0.05, 1.0 / fps))
+    raise EvidenceFailure(
+        "scenario {} reached its {}-frame bound without trace trigger {}".format(
+            scenario.name,
+            scenario.max_frames,
+            scenario.until_trace.to_mapping(),
+        )
+    )
+
+
 async def record_state_snapshot(
     state_url: str,
     label: str,
@@ -1201,9 +1490,10 @@ async def record_state_snapshot(
 
 
 async def drive_scenarios(
-    scenarios: Sequence[Scenario],
+    scenarios: Sequence[Any],
     command_url: str,
     state_url: str,
+    animation_trace_url: str,
     source_epoch: str,
     scenario_clock: ScenarioClock,
     records: CaptureRecords,
@@ -1215,7 +1505,11 @@ async def drive_scenarios(
         if terminal.is_set():
             raise EvidenceFailure(integrity.failure_reason or "capture terminated")
         command_id = "{}-{:04d}-{}".format(source_epoch, source_sequence, scenario.name)
-        planned_frames = max(1, int(round(scenario.capture_seconds * fps)))
+        planned_frames = (
+            scenario.planned_frame_count(fps)
+            if isinstance(scenario, ScenarioV2)
+            else max(1, int(round(scenario.capture_seconds * fps)))
+        )
         envelope = {
             "schema_version": 1,
             "command_id": command_id,
@@ -1236,6 +1530,17 @@ async def drive_scenarios(
             "kind": scenario.kind,
             "payload": scenario.payload,
             "capture_planned_frame_count": planned_frames,
+            "capture_timing_mode": (
+                "trace_trigger"
+                if isinstance(scenario, ScenarioV2) and scenario.until_trace is not None
+                else "fixed"
+            ),
+            "trace_trigger": (
+                scenario.until_trace.to_mapping()
+                if isinstance(scenario, ScenarioV2) and scenario.until_trace is not None
+                else None
+            ),
+            "trace_trigger_observation": None,
             "request_started_at_utc": utc_now(),
             "ack": None,
             "response_state": None,
@@ -1262,15 +1567,35 @@ async def drive_scenarios(
             outcome["state_snapshot"] = await record_state_snapshot(
                 state_url, "{}-after-ack".format(scenario.name), records
             )
-            await wait_or_terminal(scenario.settle_seconds, terminal, integrity)
-            outcome["capture_started_at_utc"] = utc_now()
-            scenario_clock.activate(scenario.name, planned_frames)
-            await wait_for_scenario_frames(
-                scenario_clock,
+            await wait_or_terminal(
+                scenario.settle_seconds if isinstance(scenario, Scenario) else 0.0,
                 terminal,
                 integrity,
-                timeout_seconds=max(5.0, scenario.capture_seconds * 3.0),
             )
+            outcome["capture_started_at_utc"] = utc_now()
+            scenario_clock.activate(scenario.name, planned_frames)
+            if isinstance(scenario, ScenarioV2) and scenario.until_trace is not None:
+                outcome["trace_trigger_observation"] = await wait_for_trace_trigger(
+                    scenario,
+                    animation_trace_url,
+                    scenario_clock,
+                    records,
+                    terminal,
+                    integrity,
+                    fps,
+                )
+            else:
+                capture_seconds = (
+                    scenario.capture_seconds
+                    if isinstance(scenario, Scenario)
+                    else planned_frames / fps
+                )
+                await wait_for_scenario_frames(
+                    scenario_clock,
+                    terminal,
+                    integrity,
+                    timeout_seconds=max(5.0, capture_seconds * 3.0),
+                )
             outcome["capture_completed_at_utc"] = utc_now()
         except Exception as exc:
             outcome["error"] = "{}: {}".format(type(exc).__name__, exc)
@@ -2080,30 +2405,55 @@ def validate_manifest(manifest: Mapping[str, Any], output_dir: Optional[Path] = 
     _manifest_error(isinstance(errors, list), "decoder_errors must be an array")
 
     raw_scenarios = manifest.get("scenarios")
+    scenario_program_summary = manifest.get("scenario_program")
     try:
-        scenarios = validate_scenarios(raw_scenarios)
+        scenarios = (
+            validate_scenarios_v2(raw_scenarios)
+            if isinstance(scenario_program_summary, Mapping)
+            and scenario_program_summary.get("schema") == SCENARIO_PROGRAM_V2_SCHEMA
+            else validate_scenarios(raw_scenarios)
+        )
     except ValueError as exc:
         raise ManifestValidationError("invalid scenario schema: {}".format(exc)) from exc
-    scenario_program_summary = manifest.get("scenario_program")
     if scenario_program_summary is not None:
-        expected_program_fields = {
-            "schema",
-            "schema_version",
-            "program_id",
-            "acceptance_scenario",
-            "scenario_count",
-            "total_duration_seconds",
-            "source_sha256",
-            "artifact_path",
-        }
+        is_v2 = scenario_program_summary.get("schema") == SCENARIO_PROGRAM_V2_SCHEMA
+        expected_program_fields = (
+            {
+                "schema",
+                "schema_version",
+                "program_id",
+                "acceptance_scenario",
+                "scenario_count",
+                "maximum_capture_frame_count",
+                "source_sha256",
+                "artifact_path",
+            }
+            if is_v2
+            else {
+                "schema",
+                "schema_version",
+                "program_id",
+                "acceptance_scenario",
+                "scenario_count",
+                "total_duration_seconds",
+                "source_sha256",
+                "artifact_path",
+            }
+        )
         _manifest_error(
             isinstance(scenario_program_summary, Mapping)
             and set(scenario_program_summary) == expected_program_fields,
             "invalid scenario program summary",
         )
         _manifest_error(
-            scenario_program_summary.get("schema") == SCENARIO_PROGRAM_SCHEMA
-            and scenario_program_summary.get("schema_version") == SCENARIO_PROGRAM_VERSION,
+            (
+                scenario_program_summary.get("schema"),
+                scenario_program_summary.get("schema_version"),
+            )
+            in {
+                (SCENARIO_PROGRAM_SCHEMA, SCENARIO_PROGRAM_VERSION),
+                (SCENARIO_PROGRAM_V2_SCHEMA, SCENARIO_PROGRAM_V2_VERSION),
+            },
             "unsupported scenario program summary",
         )
         _manifest_error(
@@ -2120,14 +2470,21 @@ def validate_manifest(manifest: Mapping[str, Any], output_dir: Optional[Path] = 
             scenario_program_summary.get("scenario_count") == len(scenarios),
             "scenario program count mismatch",
         )
-        expected_duration = round(
-            sum(item.settle_seconds + item.capture_seconds for item in scenarios),
-            6,
-        )
-        _manifest_error(
-            scenario_program_summary.get("total_duration_seconds") == expected_duration,
-            "scenario program duration mismatch",
-        )
+        if is_v2:
+            _manifest_error(
+                scenario_program_summary.get("maximum_capture_frame_count")
+                == sum(item.planned_frame_count(24.0) for item in scenarios),
+                "scenario program frame budget mismatch",
+            )
+        else:
+            expected_duration = round(
+                sum(item.settle_seconds + item.capture_seconds for item in scenarios),
+                6,
+            )
+            _manifest_error(
+                scenario_program_summary.get("total_duration_seconds") == expected_duration,
+                "scenario program duration mismatch",
+            )
         _manifest_error(
             bool(SHA256_RE.fullmatch(str(scenario_program_summary.get("source_sha256", "")))),
             "invalid scenario program SHA-256",
@@ -2563,11 +2920,22 @@ def build_manifest(
     if integrity.valid and records.contact_verification is None:
         integrity.invalidate("contact verification report is missing")
     owned_frame_count = sum(frame.get("capture_owned") is True for frame in records.frames)
-    planned_frame_count = sum(
-        int(command.get("capture_planned_frame_count", 0)) for command in records.commands
-    )
-    if integrity.valid and owned_frame_count != planned_frame_count:
-        integrity.invalidate("scenario-owned frame count differs from the exact capture plan")
+    for command in records.commands:
+        actual = sum(
+            frame.get("capture_owned") is True
+            and frame.get("scenario") == command.get("scenario")
+            for frame in records.frames
+        )
+        planned = int(command.get("capture_planned_frame_count", 0))
+        mode = command.get("capture_timing_mode", "fixed")
+        if integrity.valid and (
+            actual <= 0
+            or (mode == "fixed" and actual != planned)
+            or (mode == "trace_trigger" and actual > planned)
+        ):
+            integrity.invalidate(
+                "scenario-owned frame count violates its {} capture plan".format(mode)
+            )
 
     first = records.frames[0]["frame_index"] if records.frames else None
     last = records.frames[-1]["frame_index"] if records.frames else None
@@ -2788,6 +3156,7 @@ async def run_visual_review(
                 scenarios,
                 command_url,
                 state_url,
+                animation_trace_url,
                 source_epoch,
                 scenario_clock,
                 records,

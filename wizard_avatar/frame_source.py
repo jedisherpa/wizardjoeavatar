@@ -927,6 +927,7 @@ class ProceduralWizardFrameSource:
                 expression=state.expression,
                 rendered_mouth_shape=rendered_mouth_shape,
                 speech_mouth_authority=state.speech_mouth_authority,
+                speech_id=state.speech_id,
                 locomotion=state.locomotion,
                 action=state.action,
                 rendered_head_pose_id=rendered_head_pose_id,
