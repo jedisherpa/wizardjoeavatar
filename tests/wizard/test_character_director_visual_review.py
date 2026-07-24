@@ -28,6 +28,7 @@ from tools.run_character_director_visual_review import (
     parse_init,
     runtime_urls,
     run_visual_review,
+    select_capture_owned_contact_records,
     select_atomic_animation_trace,
     square_cell_image,
     validate_artifact_semantics,
@@ -209,6 +210,35 @@ class ScenarioSchemaTests(unittest.TestCase):
         payload["records"][0]["frame_sha256"] = "b" * 64
         with self.assertRaisesRegex(EvidenceFailure, "hash mismatch"):
             select_atomic_animation_trace(payload, frames)
+
+    def test_contact_verification_excludes_transport_warmup_frames(self):
+        source = ProceduralWizardFrameSource()
+        records = []
+        frames = []
+        for capture_owned in (False, True):
+            source.advance_simulation(1 / source.fps)
+            candidate = source.render_captured_candidate_sync(
+                source.capture_render_state()
+            )
+            source.commit_render_candidate(candidate)
+            records.append(candidate.animation_truth)
+            frames.append(
+                {
+                    "frame_index": candidate.frame.frame_index,
+                    "capture_owned": capture_owned,
+                }
+            )
+
+        selected = select_capture_owned_contact_records(records, frames)
+
+        self.assertEqual(len(selected), 1)
+        self.assertEqual(selected[0].frame_index, records[1].frame_index)
+
+        legacy = select_capture_owned_contact_records(
+            records,
+            [{"frame_index": record.frame_index} for record in records],
+        )
+        self.assertEqual(legacy, tuple(records))
 
     def test_square_cell_renderer_uses_rgb_even_for_space_glyphs(self):
         image = square_cell_image(b"\x20\x0a\x14\x1e", 1, 1, 3)

@@ -902,6 +902,24 @@ def select_atomic_animation_trace(
     return selected
 
 
+def select_capture_owned_contact_records(
+    records: Sequence[AnimationTruthTraceV1],
+    frames: Sequence[Mapping[str, Any]],
+) -> Tuple[AnimationTruthTraceV1, ...]:
+    """Keep transport warmup rows replayable without treating them as proof."""
+
+    if len(records) != len(frames):
+        raise EvidenceFailure("contact record and frame counts differ")
+    ownership_declared = any("capture_owned" in frame for frame in frames)
+    selected = []
+    for record, frame in zip(records, frames):
+        if record.frame_index != frame.get("frame_index"):
+            raise EvidenceFailure("contact record and frame indexes differ")
+        if not ownership_declared or frame.get("capture_owned") is True:
+            selected.append(record)
+    return tuple(selected)
+
+
 def square_cell_image(cells: bytes, cols: int, rows: int, cell_size: int):
     from PIL import Image
 
@@ -1979,7 +1997,7 @@ def validate_artifact_semantics(manifest: Mapping[str, Any], output_dir: Path) -
 
     _manifest_error(final_offset == len(wire), "frames.bin contains unindexed trailing bytes")
     recomputed = verify_contact_trace(
-        trace_records,
+        select_capture_owned_contact_records(trace_records, frames),
         decoded_frames=decoded_frames,
         strict_raster_evidence=True,
     ).to_mapping()
@@ -2865,9 +2883,12 @@ async def run_visual_review(
                 encoding="utf-8",
             )
             contact_report = verify_contact_trace(
-                (
-                    AnimationTruthTraceV1.from_mapping(record)
-                    for record in records.animation_truth_trace
+                select_capture_owned_contact_records(
+                    tuple(
+                        AnimationTruthTraceV1.from_mapping(record)
+                        for record in records.animation_truth_trace
+                    ),
+                    records.frames,
                 ),
                 decoded_frames=records.decoded_raster_frames,
                 strict_raster_evidence=True,

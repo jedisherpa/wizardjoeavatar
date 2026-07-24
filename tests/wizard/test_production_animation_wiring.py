@@ -13,6 +13,29 @@ from wizard_avatar.stream import WizardFrameHub
 
 
 class RuntimeProductionPathTests(unittest.IsolatedAsyncioTestCase):
+    async def test_runtime_reset_rebases_presentation_contact_state(self):
+        source = ProceduralWizardFrameSource()
+        source.apply_command_sync(WizardCommand("move", {"x": -2.0, "z": 5.0}))
+        for _ in range(24):
+            source.advance_simulation(1 / source.fps)
+            candidate = source.render_captured_candidate_sync(
+                source.capture_render_state()
+            )
+            source.commit_render_candidate(candidate)
+        self.assertNotEqual(source._contact_root_offset, (0.0, 0.0))
+        hub = WizardFrameHub(source)
+
+        try:
+            result = await hub.apply_command(WizardCommand("reset", {}))
+
+            self.assertTrue(result.ok, result.message)
+            self.assertEqual(source._contact_root_offset, (0.0, 0.0))
+            self.assertIsNone(source._contact_anchor)
+            self.assertIsNone(source._contact_lock_stage)
+            self.assertEqual(source.current_state().world_position["x"], 0.0)
+        finally:
+            await hub.stop()
+
     async def test_frame_hub_command_flows_through_runtime_inbox_and_replay_log(self):
         source = ProceduralWizardFrameSource()
         hub = WizardFrameHub(source)

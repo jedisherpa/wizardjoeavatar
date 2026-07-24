@@ -2074,10 +2074,44 @@ class ProceduralWizardFrameSource:
 
     async def apply_command(self, command: WizardCommand) -> CommandResult:
         await asyncio.sleep(0)
-        return self.controller.apply_command(command)
+        result = self.controller.apply_command(command)
+        if result.ok and command.type == "reset":
+            self.reset_presentation_for_authoritative_reset()
+        return result
 
     def apply_command_sync(self, command: WizardCommand) -> CommandResult:
-        return self.controller.apply_command(command)
+        result = self.controller.apply_command(command)
+        if result.ok and command.type == "reset":
+            self.reset_presentation_for_authoritative_reset()
+        return result
+
+    def reset_presentation_for_authoritative_reset(self) -> None:
+        """Discard presentation state that belongs to the pre-reset timeline."""
+
+        with self._presentation_lock:
+            state = self.controller.current_state()
+            self._prev_encoded_frame = None
+            self._encoder_generation += 1
+            self._presentation_generation += 1
+            self._display_pose_id = None
+            self._transition_from_pose_id = None
+            self._transition_started_at_frame = self.frame_index
+            self._last_presentation_state = None
+            self._head_eye_state = HeadEyeState.steady(
+                state.facing,
+                state.simulation_tick,
+            )
+            self._contact_generation = -1
+            self._contact_anchor = None
+            self._contact_lock_stage = None
+            self._contact_root_offset = (0.0, 0.0)
+            self._pending_presentation_marker_events.clear()
+            self._observed_presentation_marker_keys.clear()
+            self._observed_presentation_marker_key_set.clear()
+            self._last_marker_observation_tick = state.simulation_tick
+            self._blink_input_active = False
+            self._blink_visible_frames_remaining = 0
+            self._blink_source = "none"
 
     def reset_encoder(self) -> None:
         with self._presentation_lock:

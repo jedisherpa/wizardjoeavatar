@@ -4,6 +4,7 @@ import re
 import unittest
 
 from wizard_avatar.frame_source import ProceduralWizardFrameSource
+from wizard_avatar.models import WizardCommand
 
 
 class RenderCommitAtomicityTests(unittest.TestCase):
@@ -161,6 +162,33 @@ class RenderCommitAtomicityTests(unittest.TestCase):
             ),
             presentation_before,
         )
+
+    def test_authoritative_reset_discards_pre_reset_contact_presentation(self):
+        self.source.apply_command_sync(
+            WizardCommand("move", {"x": -2.0, "z": 5.0})
+        )
+        for _ in range(24):
+            self.source.advance_simulation(1 / self.source.fps)
+            candidate = self.source.render_captured_candidate_sync(
+                self.source.capture_render_state(),
+                "adaptive",
+            )
+            self.source.commit_render_candidate(candidate)
+        stale = self.source.render_captured_candidate_sync(
+            self.source.capture_render_state(),
+            "adaptive",
+        )
+        self.assertNotEqual(self.source._contact_root_offset, (0.0, 0.0))
+
+        result = self.source.apply_command_sync(WizardCommand("reset", {}))
+
+        self.assertTrue(result.ok, result.message)
+        self.assertEqual(self.source._contact_root_offset, (0.0, 0.0))
+        self.assertIsNone(self.source._contact_anchor)
+        self.assertIsNone(self.source._contact_lock_stage)
+        self.assertIsNone(self.source._prev_encoded_frame)
+        with self.assertRaisesRegex(ValueError, "encoder generation"):
+            self.source.commit_render_candidate(stale)
 
     def test_encoder_reset_rejects_pre_reset_candidate_and_forces_keyframe(self):
         first = self.source.render_captured_candidate_sync(

@@ -693,6 +693,8 @@ class WizardFrameHub:
             result = controller.apply_command(
                 WizardCommand(command_type, dict(envelope.payload))
             )
+            if result.ok and command_type == "reset":
+                self.frame_source.reset_presentation_for_authoritative_reset()
             self._command_results[envelope.command_id] = result
             if not result.ok:
                 self.command_inbox.mark_rejected(
