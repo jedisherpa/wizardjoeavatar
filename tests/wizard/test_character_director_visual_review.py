@@ -1183,6 +1183,7 @@ class ManifestValidationTests(unittest.TestCase):
         character_fields = (
             "wizard_runtime_epoch",
             "robin_runtime_epoch",
+            "speech_runtime_epoch",
             "dragon_runtime_epoch",
             "kingfisher_runtime_epoch",
             "crystail_runtime_epoch",

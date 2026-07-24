@@ -1200,6 +1200,7 @@ class ProceduralWizardFrameSource:
             or state.locomotion != "idle"
             or state.action != "idle"
             or state.speech_mouth_authority != "none"
+            or state.performance_motion_profile in {"reduced", "still"}
         ):
             return 0
         # Two unevenly spaced inhales in a six-second phrase avoid the

@@ -211,6 +211,22 @@ class HeadEyeRenderIntegrationTests(unittest.TestCase):
         self.assertEqual(source._idle_head_breath_offset(state, "settling", "west"), 0)
         self.assertEqual(source._idle_head_breath_offset(state, "steady", "north"), 0)
 
+    def test_accessibility_profiles_suppress_idle_head_breath(self):
+        source = ProceduralWizardFrameSource(cols=180, rows=101, fps=24)
+        state = source.current_state()
+        state.simulation_tick = 228
+        state.locomotion = "idle"
+        state.action = "idle"
+        state.speech_mouth_authority = "none"
+
+        for profile in ("reduced", "still"):
+            with self.subTest(profile=profile):
+                state.performance_motion_profile = profile
+                self.assertEqual(
+                    source._idle_head_breath_offset(state, "steady", "south"),
+                    0,
+                )
+
     def test_discarded_first_turn_candidate_catches_up_to_same_visible_tick(self):
         committed = ProceduralWizardFrameSource(cols=180, rows=101, fps=24)
         discarded = ProceduralWizardFrameSource(cols=180, rows=101, fps=24)
