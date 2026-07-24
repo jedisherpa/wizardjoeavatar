@@ -247,6 +247,10 @@ class AnimationTruthTraceV1:
     effect_intensity: float
     presented_facing: str
     presentation_channels: Optional[PresentationChannelsV1]
+    performance_motion_profile: str
+    performance_resolution_hash: Optional[str]
+    performance_owned_channels: Tuple[str, ...]
+    performance_suppression_codes: Tuple[str, ...]
     frame_sha256: str
     frame_fnv1a32: str
     codec_tag: int
@@ -265,6 +269,10 @@ class AnimationTruthTraceV1:
             "presentation_marker_events",
             "presentation_channels",
             "silhouette_raster_span",
+            "performance_motion_profile",
+            "performance_resolution_hash",
+            "performance_owned_channels",
+            "performance_suppression_codes",
         )
         compatible_field_sets = {
             frozenset(
@@ -290,6 +298,16 @@ class AnimationTruthTraceV1:
         payload.setdefault("presentation_marker_events", ())
         payload.setdefault("presentation_channels", None)
         payload.setdefault("silhouette_raster_span", None)
+        payload.setdefault("performance_motion_profile", "none")
+        payload.setdefault("performance_resolution_hash", None)
+        payload.setdefault("performance_owned_channels", ())
+        payload.setdefault("performance_suppression_codes", ())
+        payload["performance_owned_channels"] = tuple(
+            payload["performance_owned_channels"]
+        )
+        payload["performance_suppression_codes"] = tuple(
+            payload["performance_suppression_codes"]
+        )
         payload["presentation_marker_events"] = tuple(
             AnimationMarkerEventV1(**event)
             for event in payload["presentation_marker_events"]
@@ -326,6 +344,33 @@ class AnimationTruthTraceV1:
             raise ValueError("unsupported animation truth schema")
         if result.schema_version != ANIMATION_TRUTH_TRACE_VERSION:
             raise ValueError("unsupported animation truth schema version")
+        if result.performance_motion_profile not in {
+            "none",
+            "full",
+            "reduced",
+            "still",
+        }:
+            raise ValueError("unsupported performance motion profile")
+        if (
+            result.performance_resolution_hash is not None
+            and not re.fullmatch(
+                r"sha256:[0-9a-f]{64}",
+                result.performance_resolution_hash,
+            )
+        ):
+            raise ValueError("performance resolution hash must be qualified SHA-256")
+        for name in (
+            "performance_owned_channels",
+            "performance_suppression_codes",
+        ):
+            values = getattr(result, name)
+            if tuple(sorted(set(values))) != values:
+                raise ValueError("{} must be sorted and unique".format(name))
+            if any(
+                not isinstance(item, str) or not item or len(item) > 128
+                for item in values
+            ):
+                raise ValueError("{} must contain bounded text".format(name))
         return result
 
     def with_transport(

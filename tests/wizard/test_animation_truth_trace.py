@@ -268,6 +268,12 @@ class AnimationTruthGeometryTests(unittest.TestCase):
         state.animation_clip_id = "walk_front"
         state.animation_transition_phase = "stable"
         state.walk_phase = 0.56
+        state.performance_motion_profile = "reduced"
+        state.performance_resolution_hash = "sha256:" + "a" * 64
+        state.performance_owned_channels = ("blink", "mouth", "speech")
+        state.performance_suppression_codes = (
+            "motion_profile_projection",
+        )
         source.resolve_authoritative_animation_state()
 
         snapshot = source.capture_render_state()
@@ -291,6 +297,19 @@ class AnimationTruthGeometryTests(unittest.TestCase):
         self.assertEqual(trace.support_contact, evaluation.support_contact)
         self.assertEqual(trace.planted_anchor, evaluation.planted_anchor)
         self.assertEqual(trace.active_markers, evaluation.active_markers)
+        self.assertEqual(trace.performance_motion_profile, "reduced")
+        self.assertEqual(
+            trace.performance_resolution_hash,
+            "sha256:" + "a" * 64,
+        )
+        self.assertEqual(
+            trace.performance_owned_channels,
+            ("blink", "mouth", "speech"),
+        )
+        self.assertEqual(
+            trace.performance_suppression_codes,
+            ("motion_profile_projection",),
+        )
         self.assertEqual(trace.frame_sha256, hashlib.sha256(candidate.cells).hexdigest())
         self.assertEqual(trace.codec_tag, candidate.codec_tag)
         self.assertEqual(trace.encoded_size, candidate.encoded_size)
@@ -299,6 +318,18 @@ class AnimationTruthGeometryTests(unittest.TestCase):
         self.assertIsNotNone(trace.planted_anchor_local)
         self.assertIsNotNone(trace.planted_anchor_stage)
         self.assertIsNotNone(trace.planted_anchor_raster_span)
+
+        legacy = trace.to_mapping()
+        for name in (
+            "performance_motion_profile",
+            "performance_resolution_hash",
+            "performance_owned_channels",
+            "performance_suppression_codes",
+        ):
+            legacy.pop(name)
+        parsed = AnimationTruthTraceV1.from_mapping(legacy)
+        self.assertEqual(parsed.performance_motion_profile, "none")
+        self.assertIsNone(parsed.performance_resolution_hash)
 
 
 class AnimationTruthHubTests(unittest.IsolatedAsyncioTestCase):

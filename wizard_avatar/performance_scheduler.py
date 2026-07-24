@@ -43,6 +43,11 @@ class SchedulerState(str, Enum):
 
 REDUCED_PROHIBITED_CHANNELS = frozenset(
     {
+        "body",
+        "body_base",
+        "gesture",
+        "effects",
+        "transition",
         "locomotion",
         "stage",
         "position",
@@ -55,7 +60,9 @@ REDUCED_PROHIBITED_CHANNELS = frozenset(
         "scene_flash",
     }
 )
-REDUCED_PROHIBITED_TRACKS = frozenset({"locomotion", "stage", "dance"})
+REDUCED_PROHIBITED_TRACKS = frozenset(
+    {"body_base", "locomotion", "stage", "gesture", "dance", "effects", "transition"}
+)
 STILL_ALLOWED_CHANNELS = frozenset({"speech", "mouth", "face", "eyes", "gaze", "blink"})
 TRACK_DEFAULT_CHANNEL = {
     "narrative_state": "narrative_state",
@@ -528,6 +535,7 @@ class PerformanceScheduler:
         owned_channels: set[str] = set()
         channel_owners: Dict[str, str] = {}
         track_values: Dict[str, Mapping[str, object]] = {}
+        suppressions: list[SchedulerSuppressionRecord] = []
 
         if mode in {"narrative", "speech"} and active and not terminal:
             speaking = True
@@ -543,9 +551,18 @@ class PerformanceScheduler:
             )
         elif mode == "music" and active and not terminal:
             groove_phase = (media_time_ms // 500) % 4
-            if profile is not AccessibilityMotionProfile.STILL and "upper_body" not in disabled:
+            if profile is AccessibilityMotionProfile.FULL and "upper_body" not in disabled:
                 body_mapping_id = "body.music_groove_restrained.{}".format(groove_phase)
                 owned_channels.add("gesture")
+            elif profile is not AccessibilityMotionProfile.FULL:
+                suppressions.append(
+                    SchedulerSuppressionRecord(
+                        reason_code="accessibility_projection",
+                        winning_owner="accessibility:" + profile.value,
+                        losing_owner="scoreless:music",
+                        cue_id="scoreless.music.groove",
+                    )
+                )
             track_values["scoreless_music"] = MappingProxyType(
                 {
                     "fallback": "time_based_groove",
@@ -589,7 +606,9 @@ class PerformanceScheduler:
             "mouth_shape": mouth_shape,
             "speaking": speaking,
             "owned_channels": sorted(owned_channels),
-            "suppressed_requests": [],
+            "suppressed_requests": [
+                record.to_dict() for record in suppressions
+            ],
             "fallback_records": fallback_records,
         }
         return ResolvedPerformanceState(
@@ -614,7 +633,7 @@ class PerformanceScheduler:
             mouth_shape=mouth_shape,
             speaking=speaking,
             owned_channels=frozenset(owned_channels),
-            suppressed_requests=(),
+            suppressed_requests=tuple(suppressions),
             fallback_records=fallback_records,
             resolution_hash=_state_hash(identity),
         )

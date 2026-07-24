@@ -121,6 +121,55 @@ class PerformanceApplicationTests(unittest.TestCase):
         ]
         self.assertEqual(actions, ["speaking"] * 4)
 
+    def test_reduced_and_still_scoreless_media_keep_body_idle(self):
+        for profile in ("reduced", "still"):
+            with self.subTest(profile=profile):
+                application = PerformanceApplication(
+                    "wizard-runtime-{}".format(profile)
+                )
+                controller = WizardAvatarController()
+                media = snapshot_mapping(kind="music", mode="music")
+                media["performance"]["motion_profile"] = profile
+                application.accept_snapshot(
+                    MediaSessionSnapshotV1.from_mapping(media),
+                    0,
+                )
+
+                result = application.apply(controller, 500_000)
+
+                self.assertTrue(result.active)
+                self.assertIsNone(result.action)
+                self.assertEqual(controller.state.action, "idle")
+                self.assertEqual(
+                    controller.state.performance_motion_profile,
+                    profile,
+                )
+                self.assertIn(
+                    "motion_profile_projection",
+                    controller.state.performance_suppression_codes,
+                )
+
+    def test_reduced_profile_releases_previously_applied_body_action(self):
+        full = snapshot_mapping(kind="music", mode="music")
+        self.accept(full, 0)
+        self.assertEqual(
+            self.application.apply(self.controller, 500_000).action,
+            "staff_spin",
+        )
+
+        reduced = snapshot_mapping(sequence=1, kind="music", mode="music")
+        reduced["cause"] = "heartbeat"
+        reduced["performance"]["motion_profile"] = "reduced"
+        self.accept(reduced, 600_000)
+        result = self.application.apply(self.controller, 600_000)
+
+        self.assertIsNone(result.action)
+        self.assertEqual(self.controller.state.action, "idle")
+        self.assertEqual(
+            self.controller.state.performance_motion_profile,
+            "reduced",
+        )
+
     def test_active_control_lease_keeps_body_authority(self):
         self.accept(snapshot_mapping(), 0)
         self.controller.apply_command(

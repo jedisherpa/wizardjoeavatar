@@ -200,6 +200,10 @@ class WizardState:
     semantic_expires_at_ms: Optional[int] = None
     semantic_transition: str = "inactive"
     semantic_release_reason: Optional[str] = None
+    performance_motion_profile: str = "none"
+    performance_resolution_hash: Optional[str] = None
+    performance_owned_channels: Tuple[str, ...] = ()
+    performance_suppression_codes: Tuple[str, ...] = ()
 
     def set_facing(self, facing: str) -> None:
         """Record facing changes on the authoritative simulation timeline."""

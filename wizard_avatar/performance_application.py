@@ -15,6 +15,7 @@ from .performance_release import (
     PerformanceContextRequestV1,
 )
 from .performance_scheduler import (
+    AccessibilityMotionProfile,
     PerformanceScheduler,
     ResolvedPerformanceState,
     SchedulerState,
@@ -554,10 +555,12 @@ class PerformanceApplication:
         snapshot = self.scheduler.coordinator.accepted_snapshot
         if self._paused:
             self._release_owned_state(controller)
+            self._clear_performance_trace_state(controller)
             self._last_result = PerformanceApplicationResult(False, None, None, None, None, None)
             return self._last_result
         if snapshot is None or not self._is_live(snapshot, now_monotonic_us):
             self._release_owned_state(controller)
+            self._clear_performance_trace_state(controller)
             self._last_result = PerformanceApplicationResult(False, None, None, None, None, None)
             return self._last_result
         if (
@@ -565,6 +568,7 @@ class PerformanceApplication:
             and self.scheduler.scheduler_state is SchedulerState.ERROR
         ):
             self._release_owned_state(controller)
+            self._clear_performance_trace_state(controller)
             self._last_result = PerformanceApplicationResult(
                 False, None, None, None, None, None
             )
@@ -624,21 +628,45 @@ class PerformanceApplication:
         action: Optional[str] = None
         if body_allowed:
             self._suspend_prism_channels(controller, ("action",))
-            action = self._resolve_action(snapshot, resolved, speaking)
-            if action is not None and action in ACTIONS:
-                controller._set_action(action, 0)
-                self._last_applied_action = action
-            if resolved.pose_id and resolved.pose_id in controller.available_pose_ids:
-                state.pose_override_id = resolved.pose_id
-                state.pose_override_until = 0.0
-                self._last_applied_pose = resolved.pose_id
-            if resolved.facing in DIRECTIONS:
-                state.set_facing(resolved.facing)
-            if resolved.clip_id:
-                state.animation_clip_id = resolved.clip_id
-                state.animation_clip_tick = resolved.clip_elapsed_ticks
-            if resolved.node_id:
-                state.animation_node_id = resolved.node_id
+            if resolved.motion_profile is AccessibilityMotionProfile.FULL:
+                action = self._resolve_action(snapshot, resolved, speaking)
+                if action is not None and action in ACTIONS:
+                    controller._set_action(action, 0)
+                    self._last_applied_action = action
+                elif (
+                    self._last_applied_action is not None
+                    and state.action == self._last_applied_action
+                ):
+                    controller._set_action("idle", 0)
+                    self._last_applied_action = None
+                if resolved.pose_id and resolved.pose_id in controller.available_pose_ids:
+                    state.pose_override_id = resolved.pose_id
+                    state.pose_override_until = 0.0
+                    self._last_applied_pose = resolved.pose_id
+                elif (
+                    self._last_applied_pose is not None
+                    and state.pose_override_id == self._last_applied_pose
+                ):
+                    state.pose_override_id = None
+                    state.pose_override_until = 0.0
+                    self._last_applied_pose = None
+                if resolved.facing in DIRECTIONS:
+                    state.set_facing(resolved.facing)
+                if resolved.clip_id:
+                    state.animation_clip_id = resolved.clip_id
+                    state.animation_clip_tick = resolved.clip_elapsed_ticks
+                if resolved.node_id:
+                    state.animation_node_id = resolved.node_id
+            else:
+                self._release_body_projection(controller)
+                self._application_suppressions += (
+                    {
+                        "channel": "body",
+                        "reason_code": "motion_profile_projection",
+                    },
+                )
+
+        self._publish_performance_trace_state(controller, resolved)
 
         self._last_result = PerformanceApplicationResult(
             active=True,
@@ -676,6 +704,11 @@ class PerformanceApplication:
         state = controller.state
         if controller.control_arbiter.active_lease is not None:
             return False
+        if (
+            self._last_applied_action is not None
+            and state.action == self._last_applied_action
+        ):
+            return True
         if state.action in _PERFORMANCE_ACTIONS or state.action == "idle":
             return True
         return bool(state.action_until and state.time_seconds >= state.action_until)
@@ -707,6 +740,8 @@ class PerformanceApplication:
         resolved: ResolvedPerformanceState,
         speaking: bool,
     ) -> Optional[str]:
+        if resolved.motion_profile is not AccessibilityMotionProfile.FULL:
+            return None
         for value in resolved.track_values.values():
             candidate = value.get("action")
             if isinstance(candidate, str) and candidate in ACTIONS:
@@ -718,6 +753,45 @@ class PerformanceApplication:
         if snapshot.performance.mode == "music":
             return ("flourish", "staff_spin", "celebrate", "reaction")[(resolved.media_time_ms // 500) % 4]
         return None
+
+    def _release_body_projection(self, controller: WizardAvatarController) -> None:
+        state = controller.state
+        if state.action in _PERFORMANCE_ACTIONS:
+            controller._set_action("idle", 0)
+        if self._last_applied_pose is not None and state.pose_override_id == self._last_applied_pose:
+            state.pose_override_id = None
+            state.pose_override_until = 0.0
+        self._last_applied_action = None
+        self._last_applied_pose = None
+
+    @staticmethod
+    def _clear_performance_trace_state(controller: WizardAvatarController) -> None:
+        state = controller.state
+        state.performance_motion_profile = "none"
+        state.performance_resolution_hash = None
+        state.performance_owned_channels = ()
+        state.performance_suppression_codes = ()
+
+    def _publish_performance_trace_state(
+        self,
+        controller: WizardAvatarController,
+        resolved: ResolvedPerformanceState,
+    ) -> None:
+        scheduler_codes = {
+            record.reason_code for record in resolved.suppressed_requests
+        }
+        application_codes = {
+            str(record.get("reason_code"))
+            for record in self._application_suppressions
+            if record.get("reason_code")
+        }
+        state = controller.state
+        state.performance_motion_profile = resolved.motion_profile.value
+        state.performance_resolution_hash = resolved.resolution_hash
+        state.performance_owned_channels = tuple(sorted(resolved.owned_channels))
+        state.performance_suppression_codes = tuple(
+            sorted(scheduler_codes | application_codes)
+        )
 
     def _release_owned_state(self, controller: WizardAvatarController) -> None:
         state = controller.state

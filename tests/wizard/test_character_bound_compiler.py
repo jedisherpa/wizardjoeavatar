@@ -192,10 +192,15 @@ class CharacterBoundPerformanceCompilerTests(unittest.TestCase):
         reduced_score = compile_character_bound_performance(reduced, score, self.manifest)
         still_score = compile_character_bound_performance(still, score, self.manifest)
 
-        reduced_cue = reduced_score["tracks"][0]["cues"][0]
-        self.assertNotIn("mouth", reduced_cue["owned_channels"])
+        self.assertEqual(reduced_score["tracks"][0]["cues"], [])
         self.assertTrue(
             any(record["reason_code"] == "channel_disabled" for record in reduced_score["fallback_records"])
+        )
+        self.assertTrue(
+            any(
+                record["reason_code"] == "motion_profile_projection"
+                for record in reduced_score["fallback_records"]
+            )
         )
         still_cue = still_score["tracks"][0]["cues"][0]
         self.assertEqual(still_cue["owned_channels"], ["mouth"])
