@@ -1,0 +1,553 @@
+{
+  "acceptance_scenario": "V6",
+  "checks": [
+    {
+      "detail": {
+        "acceptance_scenario": "V6",
+        "artifact_path": "scenario-program.json",
+        "program_id": "v6-directional-walk",
+        "scenario_count": 5,
+        "schema": "character_director_scenario_program_v1",
+        "schema_version": 1,
+        "source_sha256": "68df5ff020375be26ceefd8a1ba3978c54f4d22cc908ee0100c31b792662bbf4",
+        "total_duration_seconds": 9.25
+      },
+      "name": "scenario_program_identity",
+      "passed": true
+    },
+    {
+      "detail": [
+        "v6-idle",
+        "v6-south-approach",
+        "v6-turn-east",
+        "v6-reverse-west",
+        "v6-stop-settle"
+      ],
+      "name": "scenario_order",
+      "passed": true
+    },
+    {
+      "detail": {
+        "expected": [
+          {
+            "capture_seconds": 0.5,
+            "kind": "reset",
+            "name": "v6-idle",
+            "payload": {},
+            "settle_seconds": 0.0
+          },
+          {
+            "capture_seconds": 1.0,
+            "kind": "move",
+            "name": "v6-south-approach",
+            "payload": {
+              "speed": 1.25,
+              "x": 0.0,
+              "z": 2.0
+            },
+            "settle_seconds": 0.0
+          },
+          {
+            "capture_seconds": 2.25,
+            "kind": "move",
+            "name": "v6-turn-east",
+            "payload": {
+              "speed": 1.25,
+              "x": 2.4,
+              "z": 3.8
+            },
+            "settle_seconds": 0.0
+          },
+          {
+            "capture_seconds": 4.5,
+            "kind": "move",
+            "name": "v6-reverse-west",
+            "payload": {
+              "speed": 1.25,
+              "x": -2.4,
+              "z": 3.8
+            },
+            "settle_seconds": 0.0
+          },
+          {
+            "capture_seconds": 1.0,
+            "kind": "gaze",
+            "name": "v6-stop-settle",
+            "payload": {
+              "target": "viewer"
+            },
+            "settle_seconds": 0.0
+          }
+        ],
+        "observed": [
+          {
+            "capture_seconds": 0.5,
+            "kind": "reset",
+            "name": "v6-idle",
+            "payload": {},
+            "settle_seconds": 0.0
+          },
+          {
+            "capture_seconds": 1.0,
+            "kind": "move",
+            "name": "v6-south-approach",
+            "payload": {
+              "speed": 1.25,
+              "x": 0.0,
+              "z": 2.0
+            },
+            "settle_seconds": 0.0
+          },
+          {
+            "capture_seconds": 2.25,
+            "kind": "move",
+            "name": "v6-turn-east",
+            "payload": {
+              "speed": 1.25,
+              "x": 2.4,
+              "z": 3.8
+            },
+            "settle_seconds": 0.0
+          },
+          {
+            "capture_seconds": 4.5,
+            "kind": "move",
+            "name": "v6-reverse-west",
+            "payload": {
+              "speed": 1.25,
+              "x": -2.4,
+              "z": 3.8
+            },
+            "settle_seconds": 0.0
+          },
+          {
+            "capture_seconds": 1.0,
+            "kind": "gaze",
+            "name": "v6-stop-settle",
+            "payload": {
+              "target": "viewer"
+            },
+            "settle_seconds": 0.0
+          }
+        ]
+      },
+      "name": "scenario_directional_targets",
+      "passed": true
+    },
+    {
+      "detail": {
+        "frame_count": 222,
+        "owned_frame_count": 222,
+        "scenario_frame_counts": {
+          "v6-idle": 12,
+          "v6-reverse-west": 108,
+          "v6-south-approach": 24,
+          "v6-stop-settle": 24,
+          "v6-turn-east": 54
+        },
+        "trace_count": 222,
+        "transport_contiguous": true,
+        "unowned_frame_indexes": []
+      },
+      "name": "complete_contiguous_capture",
+      "passed": true
+    },
+    {
+      "detail": {
+        "motion_start_owned_frame_offsets": {
+          "v6-reverse-west": 0,
+          "v6-south-approach": 0,
+          "v6-turn-east": 0
+        }
+      },
+      "name": "idle_and_motion_response_within_two_frames",
+      "passed": true
+    },
+    {
+      "detail": {
+        "collapsed_facings": [
+          "south",
+          "southeast",
+          "east"
+        ],
+        "cumulative_sector_delta": -2,
+        "per_tick_violations": [],
+        "sector_deltas": [
+          -1,
+          -1
+        ]
+      },
+      "name": "readable_90_degree_turn",
+      "passed": true
+    },
+    {
+      "detail": {
+        "collapsed_facings": [
+          "east",
+          "southeast",
+          "south",
+          "southwest",
+          "west"
+        ],
+        "cumulative_sector_delta": 4,
+        "per_tick_violations": [],
+        "sector_deltas": [
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "name": "readable_180_degree_reversal",
+      "passed": true
+    },
+    {
+      "detail": {
+        "mismatches": []
+      },
+      "name": "rendered_pose_facing_alignment",
+      "passed": true
+    },
+    {
+      "detail": {
+        "directional": {
+          "walk_left": {
+            "collapsed_phase_sequence": [
+              "left_contact",
+              "left_to_right",
+              "right_contact",
+              "right_to_left",
+              "left_contact",
+              "left_to_right",
+              "right_contact",
+              "right_to_left",
+              "left_contact",
+              "left_to_right",
+              "right_contact",
+              "right_to_left"
+            ],
+            "collapsed_pose_sequence": [
+              "walk_profile_left_contact_left",
+              "walk_profile_left_contact_left_to_passing_250",
+              "walk_profile_left_contact_left_to_passing_500",
+              "walk_profile_left_contact_left_to_passing_750",
+              "walk_profile_left_passing_left_to_right",
+              "walk_profile_left_passing_to_contact_right_250",
+              "walk_profile_left_passing_to_contact_right_500",
+              "walk_profile_left_passing_to_contact_right_750",
+              "walk_profile_left_contact_right",
+              "walk_profile_left_contact_right_to_passing_250",
+              "walk_profile_left_contact_right_to_passing_500",
+              "walk_profile_left_contact_right_to_passing_750",
+              "walk_profile_left_passing_right_to_left",
+              "walk_profile_left_passing_to_contact_left_250",
+              "walk_profile_left_passing_to_contact_left_500",
+              "walk_profile_left_passing_to_contact_left_750",
+              "walk_profile_left_contact_left",
+              "walk_profile_left_contact_left_to_passing_250",
+              "walk_profile_left_contact_left_to_passing_500",
+              "walk_profile_left_contact_left_to_passing_750",
+              "walk_profile_left_passing_left_to_right",
+              "walk_profile_left_passing_to_contact_right_250",
+              "walk_profile_left_passing_to_contact_right_750",
+              "walk_profile_left_contact_right_to_passing_250",
+              "walk_profile_left_contact_right_to_passing_750",
+              "walk_profile_left_passing_to_contact_left_250",
+              "walk_profile_left_passing_to_contact_left_500",
+              "walk_profile_left_passing_to_contact_left_750",
+              "walk_profile_left_contact_left",
+              "walk_profile_left_contact_left_to_passing_250",
+              "walk_profile_left_contact_left_to_passing_500",
+              "walk_profile_left_contact_left_to_passing_750",
+              "walk_profile_left_passing_left_to_right",
+              "walk_profile_left_passing_to_contact_right_250",
+              "walk_profile_left_passing_to_contact_right_500",
+              "walk_profile_left_passing_to_contact_right_750",
+              "walk_profile_left_contact_right",
+              "walk_profile_left_contact_right_to_passing_250",
+              "walk_profile_left_contact_right_to_passing_500",
+              "walk_profile_left_contact_right_to_passing_750",
+              "walk_profile_left_passing_right_to_left",
+              "walk_profile_left_passing_to_contact_left_250",
+              "walk_profile_left_passing_to_contact_left_500",
+              "walk_profile_left_passing_to_contact_left_750"
+            ],
+            "expected_phase_sequence": [
+              "left_contact",
+              "left_to_right",
+              "right_contact",
+              "right_to_left"
+            ],
+            "expected_pose_sequence": [
+              "walk_profile_left_contact_left",
+              "walk_profile_left_contact_left_to_passing_250",
+              "walk_profile_left_contact_left_to_passing_500",
+              "walk_profile_left_contact_left_to_passing_750",
+              "walk_profile_left_passing_left_to_right",
+              "walk_profile_left_passing_to_contact_right_250",
+              "walk_profile_left_passing_to_contact_right_500",
+              "walk_profile_left_passing_to_contact_right_750",
+              "walk_profile_left_contact_right",
+              "walk_profile_left_contact_right_to_passing_250",
+              "walk_profile_left_contact_right_to_passing_500",
+              "walk_profile_left_contact_right_to_passing_750",
+              "walk_profile_left_passing_right_to_left",
+              "walk_profile_left_passing_to_contact_left_250",
+              "walk_profile_left_passing_to_contact_left_500",
+              "walk_profile_left_passing_to_contact_left_750"
+            ],
+            "frame_count": 51,
+            "observed_authored_pose_count": 16
+          },
+          "walk_right": {
+            "collapsed_phase_sequence": [
+              "left_contact",
+              "left_to_right",
+              "right_contact",
+              "right_to_left",
+              "left_contact",
+              "left_to_right"
+            ],
+            "collapsed_pose_sequence": [
+              "walk_profile_right_contact_left",
+              "walk_profile_right_contact_left_to_passing_250",
+              "walk_profile_right_contact_left_to_passing_750",
+              "walk_profile_right_passing_to_contact_right_250",
+              "walk_profile_right_passing_to_contact_right_750",
+              "walk_profile_right_contact_right_to_passing_250",
+              "walk_profile_right_contact_right_to_passing_500",
+              "walk_profile_right_contact_right_to_passing_750",
+              "walk_profile_right_passing_right_to_left",
+              "walk_profile_right_passing_to_contact_left_250",
+              "walk_profile_right_passing_to_contact_left_500",
+              "walk_profile_right_passing_to_contact_left_750",
+              "walk_profile_right_contact_left",
+              "walk_profile_right_contact_left_to_passing_250",
+              "walk_profile_right_contact_left_to_passing_500",
+              "walk_profile_right_contact_left_to_passing_750",
+              "walk_profile_right_passing_left_to_right",
+              "walk_profile_right_passing_to_contact_right_250"
+            ],
+            "expected_phase_sequence": [
+              "left_contact",
+              "left_to_right",
+              "right_contact",
+              "right_to_left"
+            ],
+            "expected_pose_sequence": [
+              "walk_profile_right_contact_left",
+              "walk_profile_right_contact_left_to_passing_250",
+              "walk_profile_right_contact_left_to_passing_500",
+              "walk_profile_right_contact_left_to_passing_750",
+              "walk_profile_right_passing_left_to_right",
+              "walk_profile_right_passing_to_contact_right_250",
+              "walk_profile_right_passing_to_contact_right_500",
+              "walk_profile_right_passing_to_contact_right_750",
+              "walk_profile_right_contact_right",
+              "walk_profile_right_contact_right_to_passing_250",
+              "walk_profile_right_contact_right_to_passing_500",
+              "walk_profile_right_contact_right_to_passing_750",
+              "walk_profile_right_passing_right_to_left",
+              "walk_profile_right_passing_to_contact_left_250",
+              "walk_profile_right_passing_to_contact_left_500",
+              "walk_profile_right_passing_to_contact_left_750"
+            ],
+            "frame_count": 25,
+            "observed_authored_pose_count": 14
+          }
+        },
+        "observed_walk_clips": [
+          "walk_front",
+          "walk_left",
+          "walk_right"
+        ]
+      },
+      "name": "directional_profile_clip_alignment",
+      "passed": true
+    },
+    {
+      "detail": {
+        "deprecated_profile_poses_observed": [],
+        "transitions": {
+          "reverse_east_to_west": {
+            "collapsed_pose_sequence": [
+              "walk_profile_right_contact_right",
+              "hd_turn_right_complete",
+              "hd_turn_right_mid",
+              "hd_turn_right_anticipation",
+              "hd_turn_front_neutral",
+              "hd_turn_left_anticipation",
+              "hd_turn_left_mid",
+              "turn_left_mid_to_complete_166",
+              "turn_left_mid_to_complete_333",
+              "turn_left_mid_to_complete_500",
+              "turn_left_mid_to_complete_667",
+              "turn_left_mid_to_complete_833",
+              "hd_turn_left_complete",
+              "walk_profile_left_contact_left"
+            ],
+            "expected_pose_sequence": [
+              "walk_profile_right_contact_right",
+              "hd_turn_right_complete",
+              "hd_turn_right_mid",
+              "hd_turn_right_anticipation",
+              "hd_turn_front_neutral",
+              "hd_turn_left_anticipation",
+              "hd_turn_left_mid",
+              "turn_left_mid_to_complete_166",
+              "turn_left_mid_to_complete_333",
+              "turn_left_mid_to_complete_500",
+              "turn_left_mid_to_complete_667",
+              "turn_left_mid_to_complete_833",
+              "hd_turn_left_complete",
+              "walk_profile_left_contact_left"
+            ],
+            "frame_count": 42
+          },
+          "turn_front_to_east": {
+            "collapsed_pose_sequence": [
+              "walk_front_right",
+              "turn_front_to_right_entry_250",
+              "turn_front_to_right_entry_500",
+              "turn_front_to_right_entry_750",
+              "hd_turn_right_anticipation",
+              "hd_turn_right_mid",
+              "hd_turn_right_complete",
+              "walk_profile_right_contact_left"
+            ],
+            "expected_pose_sequence": [
+              "walk_front_right",
+              "turn_front_to_right_entry_250",
+              "turn_front_to_right_entry_500",
+              "turn_front_to_right_entry_750",
+              "hd_turn_right_anticipation",
+              "hd_turn_right_mid",
+              "hd_turn_right_complete",
+              "walk_profile_right_contact_left"
+            ],
+            "frame_count": 19
+          }
+        }
+      },
+      "name": "authored_turn_reversal_pose_topology",
+      "passed": true
+    },
+    {
+      "detail": {
+        "maximum_staff_grip_step": 11.706750000000014,
+        "maximum_staff_tip_step": 13.167000000000002,
+        "missing_grip_pairs": [],
+        "missing_tip_pairs": [],
+        "staff_grip_limit": 12.5,
+        "staff_tip_limit": 14.0
+      },
+      "name": "turn_staff_path_continuity",
+      "passed": true
+    },
+    {
+      "detail": {
+        "collapsed_support_contacts": [
+          "left_foot",
+          "right_foot",
+          "left_foot",
+          "right_foot",
+          "left_foot",
+          "right_foot",
+          "left_foot",
+          "right_foot",
+          "left_foot",
+          "right_foot",
+          "left_foot",
+          "right_foot",
+          "left_foot",
+          "right_foot",
+          "left_foot"
+        ],
+        "phases_valid": true,
+        "walk_clip_switches": [
+          {
+            "contact": "left_foot",
+            "frame_index": 65,
+            "from": "turn_front_to_east",
+            "to": "walk_right"
+          },
+          {
+            "contact": "left_foot",
+            "frame_index": 137,
+            "from": "reverse_east_to_west",
+            "to": "walk_left"
+          }
+        ]
+      },
+      "name": "phase_and_support_continuity",
+      "passed": true
+    },
+    {
+      "detail": {
+        "contact_passed": true,
+        "maximum_planted_drift_cells": 2.842170943040401e-14,
+        "maximum_planted_raster_span_drift_cells": 1.0,
+        "maximum_world_root_step": 0.06250000000000044
+      },
+      "name": "contact_and_root_continuity",
+      "passed": true
+    },
+    {
+      "detail": {
+        "collapsed_stop_pose_sequence": [
+          "walk_profile_left_passing_left_to_right",
+          "stop_profile_left_hd_settle_200",
+          "stop_profile_left_hd_settle_400",
+          "stop_profile_left_hd_settle_600",
+          "stop_profile_left_hd_settle_800",
+          "hd_turn_left_complete"
+        ],
+        "final_root": [
+          -2.4,
+          3.8
+        ],
+        "required_stop_pose_sequence": [
+          "walk_profile_left_passing_left_to_right",
+          "stop_profile_left_hd_settle_200",
+          "stop_profile_left_hd_settle_400",
+          "stop_profile_left_hd_settle_600",
+          "stop_profile_left_hd_settle_800",
+          "hd_turn_left_complete"
+        ],
+        "target": [
+          -2.4,
+          3.8
+        ],
+        "target_error": 0.0,
+        "zero_speed_suffix_frames": 34
+      },
+      "name": "target_stop_and_profile_settle",
+      "passed": true
+    },
+    {
+      "detail": {
+        "clipped_frames": [],
+        "stage": [
+          240,
+          135
+        ]
+      },
+      "name": "directional_walk_within_canonical_stage",
+      "passed": true
+    }
+  ],
+  "metrics": {
+    "clipped_frame_count": 0,
+    "contact_change_count": 15,
+    "east_turn_sector_count": 2,
+    "frame_count": 222,
+    "maximum_world_root_step": 0.06250000000000044,
+    "owned_frame_count": 222,
+    "reversal_sector_count": 4,
+    "target_error": 0.0
+  },
+  "passed": true,
+  "review_boundary": "Machine checks do not replace normal-speed and quarter-speed review of turn anticipation, weight, silhouette readability, reversal, and foot skating.",
+  "schema": "character_director_v6_machine_acceptance_v3",
+  "schema_version": 1
+}

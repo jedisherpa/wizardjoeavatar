@@ -42,6 +42,9 @@ must remain labelled as planned.
   atomic staff-slice generation contract.
 - `AUTHORED_TURN_CONTINUITY.md`: eight-direction authored view mapping, turn
   timing contract, and clean runtime evidence.
+- `V6_DIRECTIONAL_ACCEPTANCE_2026-07-23.md`: accepted 222-frame directional
+  turn, reversal, profile gait, contact, and stop/settle proof at commit
+  `17637c53`.
 - `GAZE_SETTLE_CONTINUITY.md`: eye-lead, target-arrival re-centering, stable
   fixation, focused tests, and clean runtime evidence.
 - `SPEECH_MOUTH_AUTHORITY.md`: aligned-versus-local mouth ownership,
