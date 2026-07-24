@@ -530,6 +530,9 @@ async def capture_browser_layout(
     output_metrics: Path,
     width: int,
     height: int,
+    device_scale_factor: float = 1.0,
+    mobile: bool = False,
+    profile: str = "desktop-dpr1",
 ) -> None:
     manifest = json.loads(capture_manifest_path.read_text(encoding="utf-8"))
     if not manifest.get("valid"):
@@ -592,6 +595,20 @@ async def capture_browser_layout(
                 await cdp.command("Page.enable")
                 await cdp.command("Runtime.enable")
                 await cdp.command("Log.enable")
+                await cdp.command(
+                    "Emulation.setDeviceMetricsOverride",
+                    {
+                        "width": width,
+                        "height": height,
+                        "deviceScaleFactor": device_scale_factor,
+                        "mobile": mobile,
+                        "screenWidth": width,
+                        "screenHeight": height,
+                        "positionX": 0,
+                        "positionY": 0,
+                    },
+                )
+                await cdp.command("Page.reload", {"ignoreCache": True})
                 await cdp.command("Page.bringToFront")
                 initial_metrics = await wait_for_wizard(cdp)
                 layout = await cdp.evaluate(
@@ -601,9 +618,24 @@ async def capture_browser_layout(
                         const value = element.getBoundingClientRect();
                         return {x:value.x,y:value.y,width:value.width,height:value.height};
                       };
+                      const canvas = document.querySelector('#wizard-canvas');
+                      const context = canvas.getContext('2d');
                       return {
                         viewport:{width:innerWidth,height:innerHeight,dpr:devicePixelRatio},
-                        canvas:rect(document.querySelector('#wizard-canvas')),
+                        visualViewport:window.visualViewport ? {
+                          width:window.visualViewport.width,
+                          height:window.visualViewport.height,
+                          scale:window.visualViewport.scale,
+                          offsetLeft:window.visualViewport.offsetLeft,
+                          offsetTop:window.visualViewport.offsetTop
+                        } : null,
+                        canvas:{
+                          ...rect(canvas),
+                          backingWidth:canvas.width,
+                          backingHeight:canvas.height,
+                          imageRendering:getComputedStyle(canvas).imageRendering,
+                          imageSmoothingEnabled:context.imageSmoothingEnabled
+                        },
                         toolbar:rect(document.querySelector('.toolbar')),
                         mediaStatus:rect(document.querySelector('.media-status'))
                       };
@@ -724,9 +756,21 @@ async def capture_browser_layout(
                     "candidate_commit": manifest["provenance"]["head"],
                     "capture_manifest_sha256": sha256_file(capture_manifest_path),
                     "runtime_epoch": manifest["runtime_binding"]["start"]["runtime_epoch"],
+                    "viewport_profile": {
+                        "name": profile,
+                        "width": width,
+                        "height": height,
+                        "device_scale_factor": device_scale_factor,
+                        "mobile": mobile,
+                    },
                     "started_at_utc": started_at,
                     "completed_at_utc": utc_now(),
-                    "viewport": {"width": width, "height": height, "device_scale_factor": 1},
+                    "viewport": {
+                        "width": width,
+                        "height": height,
+                        "device_scale_factor": device_scale_factor,
+                        "mobile": mobile,
+                    },
                     "layout": layout,
                     "fps": fps,
                     "frame_count": output_index,
@@ -767,9 +811,24 @@ def parse_args(argv: Optional[Sequence[str]] = None) -> argparse.Namespace:
     parser.add_argument("--metrics", type=Path, required=True)
     parser.add_argument("--width", type=int, default=1280)
     parser.add_argument("--height", type=int, default=720)
+    parser.add_argument("--device-scale-factor", type=float, default=1.0)
+    parser.add_argument("--mobile", action="store_true")
+    parser.add_argument("--profile", default="desktop-dpr1")
     args = parser.parse_args(argv)
     if args.width < 640 or args.height < 360:
-        parser.error("browser viewport must be at least 640x360")
+        if not args.mobile or args.width < 320 or args.height < 568:
+            parser.error(
+                "desktop viewport must be at least 640x360 and mobile "
+                "viewport must be at least 320x568"
+            )
+    if not math.isfinite(args.device_scale_factor) or not (
+        1.0 <= args.device_scale_factor <= 4.0
+    ):
+        parser.error("device scale factor must be between 1 and 4")
+    if not isinstance(args.profile, str) or not SCENARIO_NAME_RE.fullmatch(
+        args.profile
+    ):
+        parser.error("profile must be a lowercase kebab-case identifier")
     return args
 
 
@@ -783,6 +842,9 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
                 args.metrics.resolve(),
                 args.width,
                 args.height,
+                args.device_scale_factor,
+                args.mobile,
+                args.profile,
             )
         )
     except (BrowserCaptureFailure, OSError, ValueError, KeyError) as exc:

@@ -1,6 +1,7 @@
 import { frameHash } from "./wizardCodec.ts";
 
 const DENSE_PIXEL_THRESHOLD = 262144;
+const PROJECTOR_UI_VERTICAL_RESERVE_CSS_PX = 144;
 
 export class WizardCanvas {
   constructor(canvas, selection) {
@@ -16,6 +17,8 @@ export class WizardCanvas {
     this.cellWidth = 8;
     this.cellHeight = 8;
     this.tileSize = 8;
+    this.verticalUiReserveCssPx = 0;
+    this.safeViewportHeight = 0;
     this.xPos = [];
     this.yPos = [];
     this.selectionBuffer = null;
@@ -56,9 +59,15 @@ export class WizardCanvas {
     const viewportWidth = Math.max(1, window.innerWidth || document.documentElement.clientWidth || this.cols * 8);
     const viewportHeight = Math.max(1, window.innerHeight || document.documentElement.clientHeight || this.rows * 8);
     const dpr = Math.max(1, window.devicePixelRatio || 1);
+    const verticalUiReserveCssPx = document.body.classList.contains("hd-review")
+      ? 0
+      : PROJECTOR_UI_VERTICAL_RESERVE_CSS_PX;
+    const safeViewportHeight = Math.max(1, viewportHeight - verticalUiReserveCssPx);
+    this.verticalUiReserveCssPx = verticalUiReserveCssPx;
+    this.safeViewportHeight = safeViewportHeight;
     if (this.renderMode !== "cells") {
       const aspect = this.cols / this.rows;
-      const cssWidth = Math.max(1, Math.min(viewportWidth, viewportHeight * aspect, this.cols));
+      const cssWidth = Math.max(1, Math.min(viewportWidth, safeViewportHeight * aspect, this.cols));
       const cssHeight = cssWidth / aspect;
       const changed = this.canvas.width !== this.cols || this.canvas.height !== this.rows;
       this.dpr = dpr;
@@ -84,7 +93,7 @@ export class WizardCanvas {
     }
     const deviceCell = Math.max(1, Math.floor(Math.min(
       viewportWidth * dpr / this.cols,
-      viewportHeight * dpr / this.rows,
+      safeViewportHeight * dpr / this.rows,
     )));
     const backingWidth = this.cols * deviceCell;
     const backingHeight = this.rows * deviceCell;
@@ -243,6 +252,8 @@ export class WizardCanvas {
       selectionUpdates: this.selectionUpdates,
       lastPresentedLogicalHash: this.lastPresentedLogicalHash,
       renderMode: this.renderMode,
+      verticalUiReserveCssPx: this.verticalUiReserveCssPx,
+      safeViewportHeight: this.safeViewportHeight,
     };
   }
 }

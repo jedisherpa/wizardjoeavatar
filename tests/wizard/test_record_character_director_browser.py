@@ -4,6 +4,7 @@ from pathlib import Path
 
 from tools.record_character_director_browser import (
     BrowserCaptureFailure,
+    parse_args,
     parse_browser_scenario_program,
     scenario_capture_events,
 )
@@ -32,6 +33,71 @@ def program_v2(scenarios):
 
 
 class BrowserScenarioProgramTests(unittest.TestCase):
+    def test_exact_desktop_and_mobile_viewport_profiles_parse(self):
+        desktop = parse_args(
+            [
+                "--manifest",
+                "manifest.json",
+                "--video",
+                "desktop.mp4",
+                "--metrics",
+                "desktop.json",
+                "--width",
+                "1280",
+                "--height",
+                "720",
+                "--device-scale-factor",
+                "2",
+                "--profile",
+                "desktop-dpr2",
+            ]
+        )
+        mobile = parse_args(
+            [
+                "--manifest",
+                "manifest.json",
+                "--video",
+                "mobile.mp4",
+                "--metrics",
+                "mobile.json",
+                "--width",
+                "390",
+                "--height",
+                "844",
+                "--device-scale-factor",
+                "3",
+                "--mobile",
+                "--profile",
+                "mobile-390x844-dpr3",
+            ]
+        )
+
+        self.assertEqual(desktop.device_scale_factor, 2.0)
+        self.assertFalse(desktop.mobile)
+        self.assertEqual(mobile.device_scale_factor, 3.0)
+        self.assertTrue(mobile.mobile)
+
+    def test_invalid_viewport_profiles_fail_closed(self):
+        invalid = (
+            ["--device-scale-factor", "0.5"],
+            ["--device-scale-factor", "5"],
+            ["--profile", "Desktop DPR1"],
+            ["--width", "390", "--height", "844"],
+            ["--width", "300", "--height", "844", "--mobile"],
+        )
+        base = [
+            "--manifest",
+            "manifest.json",
+            "--video",
+            "capture.mp4",
+            "--metrics",
+            "metrics.json",
+        ]
+
+        for values in invalid:
+            with self.subTest(values=values), self.assertRaises(SystemExit):
+                parse_args(base + values)
+
     def test_v1_preserves_seconds_based_frame_budget(self):
         parsed = parse_browser_scenario_program(
             program_v1(
@@ -146,6 +212,34 @@ class BrowserScenarioProgramTests(unittest.TestCase):
         self.assertEqual(
             [command.at_frame for command in parsed.scenarios[0].scheduled_commands],
             [96, 192, 288, 336, 432, 528, 624, 672, 768, 864, 960, 1008],
+        )
+
+    def test_real_v10_fixture_reports_exact_capture_budget(self):
+        fixture = json.loads(
+            (
+                ROOT
+                / "tools"
+                / "character_director_scenarios"
+                / "v10-responsive-framing.json"
+            ).read_text(encoding="utf-8")
+        )
+
+        parsed = parse_browser_scenario_program(fixture, fps=24.0)
+
+        self.assertEqual(parsed.expected_frame_count, 528)
+        self.assertEqual(
+            [scenario.command.name for scenario in parsed.scenarios],
+            [
+                "v10-center",
+                "v10-near",
+                "v10-far",
+                "v10-left-edge",
+                "v10-right-edge",
+            ],
+        )
+        self.assertEqual(
+            [scenario.capture_frames for scenario in parsed.scenarios],
+            [48, 96, 144, 120, 120],
         )
 
     def test_v2_fails_closed_on_unsupported_or_ambiguous_timing(self):
