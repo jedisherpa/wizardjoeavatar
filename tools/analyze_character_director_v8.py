@@ -326,14 +326,24 @@ def analyze_v8(
         _channels(trace).get("body_pixel_sha256") for trace in final
     }
     final_roots = {_point(trace) for trace in final}
+    final_poses = {trace.get("rendered_pose_id") for trace in final}
+    final_head_offsets = {
+        (
+            _channels(trace).get("head_offset_x", 0),
+            _channels(trace).get("head_offset_y", 0),
+        )
+        for trace in final
+    }
     _check(
         report,
         "stable_root_and_final_hold",
         bool(root_steps)
         and max(root_steps) <= 1.0
         and len(final) == 48
-        and len(final_body_hashes) == 1
+        and len(final_body_hashes) <= 2
         and len(final_roots) == 1
+        and len(final_poses) == 1
+        and final_head_offsets.issubset({(0, 0), (0, -1)})
         and all(
             _channels(trace).get("action") == "idle"
             and _channels(trace).get("speech_id") is None
@@ -343,6 +353,8 @@ def analyze_v8(
             "maximum_presented_root_axis_step": max(root_steps, default=math.inf),
             "final_body_hash_count": len(final_body_hashes),
             "final_root_count": len(final_roots),
+            "final_pose_ids": sorted(str(value) for value in final_poses),
+            "final_head_offsets": sorted([list(value) for value in final_head_offsets]),
             "final_frame_count": len(final),
         },
     )

@@ -101,6 +101,8 @@ def fixture():
                 index - gesture_ranges[gesture_index].start,
             )
             if gesture_index is not None
+            else "idle-head-breath"
+            if 1395 <= index < 1399
             else "idle-body"
         )
         gaze = -1 if 288 <= index < 336 else 1 if 624 <= index < 672 else 0
@@ -139,6 +141,8 @@ def fixture():
                     "gaze_aim": gaze,
                     "gaze_vertical_aim": vertical_gaze,
                     "blink_closed": blink_closed,
+                    "head_offset_x": 0,
+                    "head_offset_y": -1 if 1395 <= index < 1399 else 0,
                 },
             }
         )
