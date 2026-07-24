@@ -466,7 +466,6 @@ def bind_analyzer_provenance(
         report,
         "analyzer_matches_capture_candidate",
         relative_path == "tools/analyze_character_director_v8.py"
-        and git.get("available") is True
         and git.get("head") == candidate.get("head")
         and git.get("head_tree") == candidate.get("head_tree")
         and git.get("worktree_clean") is True
