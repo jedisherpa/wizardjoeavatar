@@ -461,12 +461,14 @@ async def wait_for_page_target(port: int, timeout: float = 10.0) -> str:
     raise BrowserCaptureFailure("Chrome DevTools page target did not become ready")
 
 
-async def wait_for_wizard(cdp: CDPClient, timeout: float = 10.0) -> Dict[str, Any]:
+async def wait_for_wizard(cdp: CDPClient, timeout: float = 20.0) -> Dict[str, Any]:
     deadline = time.monotonic() + timeout
+    last_metrics: object = None
     while time.monotonic() < deadline:
         metrics = await cdp.evaluate(
             "typeof window.__wizardJoeMetrics === 'function' ? window.__wizardJoeMetrics() : null"
         )
+        last_metrics = metrics
         if (
             isinstance(metrics, dict)
             and metrics.get("presentedFrames", 0) >= 2
@@ -474,7 +476,29 @@ async def wait_for_wizard(cdp: CDPClient, timeout: float = 10.0) -> Dict[str, An
         ):
             return metrics
         await asyncio.sleep(0.1)
-    raise BrowserCaptureFailure("browser wizard canvas did not present frames")
+    diagnostics = await cdp.evaluate(
+        """
+        (() => ({
+          href:location.href,
+          readyState:document.readyState,
+          metricsType:typeof window.__wizardJoeMetrics,
+          websocketReadyState:typeof window.__wizardJoeMetrics === 'function'
+            ? window.__wizardJoeMetrics()?.websocketReadyState ?? null
+            : null,
+          bodyText:(document.body?.innerText || '').slice(0, 500)
+        }))()
+        """
+    )
+    raise BrowserCaptureFailure(
+        "browser wizard canvas did not present frames: {}".format(
+            {
+                "last_metrics": last_metrics,
+                "diagnostics": diagnostics,
+                "page_errors": cdp.page_errors,
+                "console_events": cdp.console_events,
+            }
+        )
+    )
 
 
 async def post_browser_command(
