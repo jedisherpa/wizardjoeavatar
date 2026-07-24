@@ -269,8 +269,8 @@ def build_score_document() -> Dict[str, object]:
                         node_id="ground_walk",
                         execution={
                             "trajectory": {
-                                "source_position_milli": [350, 0],
-                                "destination_position_milli": [650, 0],
+                                "source_position_milli": [350, 600],
+                                "destination_position_milli": [650, 600],
                                 "easing_id": "smoothstep_v1",
                             },
                             "facing": "south",
