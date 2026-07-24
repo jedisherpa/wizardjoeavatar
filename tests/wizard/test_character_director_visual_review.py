@@ -1422,6 +1422,127 @@ class ManifestValidationTests(unittest.TestCase):
                 self.assertTrue(v3_bundle["complete"])
                 validate_review_bundle_manifest(v3_bundle, root)
 
+    def test_extended_review_bundle_binds_retained_analyzer(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            capture = self.valid_manifest()
+            capture["source_epoch"] = "visual-review-v8"
+            capture["scenario_program"] = {"acceptance_scenario": "V8"}
+            capture["video"]["path"] = "normal-speed.mp4"
+            capture_manifest = root / "manifest.json"
+            capture_manifest.write_text(json.dumps(capture), encoding="utf-8")
+            normal_video = root / "normal-speed.mp4"
+            normal_video.write_bytes(b"normal-video")
+            quarter_speed = root / "v8-quarter-speed.mp4"
+            quarter_speed.write_bytes(b"quarter-speed")
+            analyzer = root / "v8-analyzer.py"
+            analyzer.write_text("# retained analyzer\n", encoding="utf-8")
+            machine_report = root / "v8-machine-acceptance.json"
+            machine_report.write_text(
+                json.dumps(
+                    {
+                        "passed": True,
+                        "analyzer_provenance": {
+                            "sha256": hashlib.sha256(
+                                analyzer.read_bytes()
+                            ).hexdigest(),
+                            "repository_head": capture["provenance"]["head"],
+                        },
+                    }
+                ),
+                encoding="utf-8",
+            )
+            browser_video = root / "v8-browser-layout.mp4"
+            browser_video.write_bytes(b"browser-video")
+            browser_metrics = root / "v8-browser-layout-metrics.json"
+            browser_metrics.write_text(
+                json.dumps(
+                    {
+                        "schema": "character_director_browser_layout_v1",
+                        "schema_version": 1,
+                        "run_id": capture["source_epoch"],
+                        "candidate_commit": capture["provenance"]["head"],
+                        "capture_manifest_sha256": hashlib.sha256(
+                            capture_manifest.read_bytes()
+                        ).hexdigest(),
+                        "frame_count": 2,
+                        "expected_frame_count": 2,
+                        "final_client_metrics": {
+                            "decodeErrorCount": 0,
+                            "canvas": {
+                                "cols": capture["init"]["cols"],
+                                "rows": capture["init"]["rows"],
+                            },
+                        },
+                        "page_errors": [],
+                        "video_path": browser_video.name,
+                        "video_bytes": browser_video.stat().st_size,
+                        "video_sha256": hashlib.sha256(
+                            browser_video.read_bytes()
+                        ).hexdigest(),
+                    }
+                ),
+                encoding="utf-8",
+            )
+
+            with mock.patch(
+                "tools.run_character_director_visual_review.validate_manifest"
+            ):
+                bundle = build_review_bundle_manifest(
+                    capture_manifest,
+                    root,
+                    (
+                        ("quarter_speed", quarter_speed, "video/mp4", normal_video),
+                        (
+                            "machine_acceptance",
+                            machine_report,
+                            "application/json",
+                            capture_manifest,
+                        ),
+                        (
+                            "browser_layout",
+                            browser_video,
+                            "video/mp4",
+                            browser_metrics,
+                        ),
+                        (
+                            "analyzer",
+                            analyzer,
+                            "text/x-python",
+                            analyzer,
+                        ),
+                    ),
+                    required_roles=(
+                        "analyzer",
+                        "browser_layout",
+                        "machine_acceptance",
+                        "quarter_speed",
+                    ),
+                )
+
+                self.assertEqual(bundle["schema_version"], 3)
+                self.assertTrue(bundle["complete"])
+                validate_review_bundle_manifest(bundle, root)
+
+                machine_report.write_text(
+                    '{"passed":true,"analyzer_provenance":{}}\n',
+                    encoding="utf-8",
+                )
+                machine_record = next(
+                    item
+                    for item in bundle["artifacts"]
+                    if item["role"] == "machine_acceptance"
+                )
+                machine_record["bytes"] = machine_report.stat().st_size
+                machine_record["sha256"] = hashlib.sha256(
+                    machine_report.read_bytes()
+                ).hexdigest()
+                with self.assertRaisesRegex(
+                    ManifestValidationError,
+                    "retained analyzer",
+                ):
+                    validate_review_bundle_manifest(bundle, root)
+
     def test_rejects_hashed_artifacts_that_do_not_replay_semantically(self):
         manifest = self.valid_manifest()
         with tempfile.TemporaryDirectory() as temporary:

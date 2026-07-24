@@ -61,8 +61,8 @@ SCENARIO_PROGRAM_MAX_STEPS = 64
 SCENARIO_PROGRAM_MAX_SECONDS = 10 * 60
 ACCEPTANCE_SCENARIO_RE = re.compile(r"^V(?:[1-9]|10)$")
 REVIEW_BUNDLE_SCHEMA = "character_director_review_bundle_manifest_v1"
-REVIEW_BUNDLE_VERSION = 2
-SUPPORTED_REVIEW_BUNDLE_VERSIONS = {1, REVIEW_BUNDLE_VERSION}
+REVIEW_BUNDLE_VERSION = 3
+SUPPORTED_REVIEW_BUNDLE_VERSIONS = {1, 2, REVIEW_BUNDLE_VERSION}
 SENSITIVE_TEXT_FIELDS = frozenset({"speech_text"})
 CONTENT_MINIMIZATION_SCHEMA = "evidence_content_minimization_v1"
 MEDIA_SESSION_SCENARIO_KIND = "media_session"
@@ -2176,6 +2176,7 @@ def build_review_bundle_manifest(
     capture_manifest_path: Path,
     output_dir: Path,
     review_artifacts: Sequence[Tuple[str, Path, str, Path]],
+    required_roles: Optional[Sequence[str]] = None,
 ) -> Dict[str, Any]:
     capture_manifest_path = capture_manifest_path.resolve()
     output_dir = output_dir.resolve()
@@ -2196,13 +2197,19 @@ def build_review_bundle_manifest(
                 "source_sha256": sha256_file(source_path),
             }
         )
+    roles = {item["role"] for item in records}
+    schema_version = 3 if required_roles is not None else 2
+    expected_roles = (
+        set(required_roles)
+        if required_roles is not None
+        else {"browser_layout", "machine_acceptance", "quarter_speed"}
+    )
     manifest = {
         "schema": REVIEW_BUNDLE_SCHEMA,
-        "schema_version": REVIEW_BUNDLE_VERSION,
+        "schema_version": schema_version,
         "run_id": capture_manifest.get("source_epoch"),
         "candidate_commit": capture_manifest.get("provenance", {}).get("head"),
-        "complete": {item["role"] for item in records}
-        == {"browser_layout", "machine_acceptance", "quarter_speed"},
+        "complete": roles == expected_roles,
         "capture_manifest": {
             "path": capture_manifest_path.relative_to(output_dir).as_posix(),
             "bytes": capture_manifest_path.stat().st_size,
@@ -2210,6 +2217,8 @@ def build_review_bundle_manifest(
         },
         "artifacts": records,
     }
+    if schema_version >= 3:
+        manifest["required_roles"] = sorted(expected_roles)
     validate_review_bundle_manifest(manifest, output_dir)
     return manifest
 
@@ -2227,6 +2236,8 @@ def validate_review_bundle_manifest(
         "capture_manifest",
         "artifacts",
     }
+    if isinstance(manifest, Mapping) and manifest.get("schema_version") == 3:
+        expected_fields.add("required_roles")
     _manifest_error(
         isinstance(manifest, Mapping) and set(manifest) == expected_fields,
         "invalid review bundle manifest schema",
@@ -2310,7 +2321,7 @@ def validate_review_bundle_manifest(
     roles = []
     paths = []
     for artifact in artifacts:
-        validate_file_record(
+        artifact_path = validate_file_record(
             artifact,
             {
                 "role",
@@ -2327,6 +2338,17 @@ def validate_review_bundle_manifest(
         supported_roles = {"machine_acceptance", "quarter_speed"}
         if manifest["schema_version"] >= 2:
             supported_roles.add("browser_layout")
+        if manifest["schema_version"] >= 3:
+            supported_roles.update(
+                {
+                    "analyzer",
+                    "retained_audio",
+                    "av_timeline",
+                    "audible_review",
+                    "independent_review",
+                    "product_owner_approval",
+                }
+            )
         _manifest_error(
             role in supported_roles,
             "unsupported review artifact role",
@@ -2335,13 +2357,23 @@ def validate_review_bundle_manifest(
             isinstance(artifact.get("media_type"), str) and artifact["media_type"],
             "review artifact media type is missing",
         )
-        expected_media_type = {
+        expected_media_types = {
             "browser_layout": "video/mp4",
             "machine_acceptance": "application/json",
             "quarter_speed": "video/mp4",
-        }[role]
+            "analyzer": "text/x-python",
+            "av_timeline": "application/json",
+            "audible_review": "video/mp4",
+            "independent_review": "text/markdown",
+            "product_owner_approval": "text/markdown",
+        }
+        expected_media_type = expected_media_types.get(role)
         _manifest_error(
-            artifact["media_type"] == expected_media_type,
+            (
+                role == "retained_audio"
+                and artifact["media_type"] in {"audio/mpeg", "audio/mp3", "audio/wav"}
+            )
+            or artifact["media_type"] == expected_media_type,
             "review artifact media type does not match its role",
         )
         source_relative = artifact.get("source_path")
@@ -2372,7 +2404,7 @@ def validate_review_bundle_manifest(
                 and source_relative == capture_manifest.get("video", {}).get("path"),
                 "quarter-speed review is not bound to the normal-speed video",
             )
-        else:
+        elif role == "browser_layout":
             _manifest_error(
                 artifact["path"] == "{}-browser-layout.mp4".format(artifact_prefix)
                 and source_relative
@@ -2407,13 +2439,74 @@ def validate_review_bundle_manifest(
                 and not browser_metrics.get("page_errors"),
                 "browser layout metrics failed runtime integrity checks",
             )
+        elif role == "analyzer":
+            machine = next(
+                (
+                    item
+                    for item in artifacts
+                    if isinstance(item, Mapping)
+                    and item.get("role") == "machine_acceptance"
+                ),
+                None,
+            )
+            _manifest_error(
+                source_relative == artifact["path"],
+                "analyzer artifact must be self-sourced",
+            )
+            _manifest_error(
+                isinstance(machine, Mapping),
+                "analyzer artifact requires a machine acceptance report",
+            )
+            machine_path = (root / str(machine.get("path", ""))).resolve()
+            machine_report = json.loads(machine_path.read_text(encoding="utf-8"))
+            analyzer_identity = machine_report.get("analyzer_provenance", {})
+            _manifest_error(
+                analyzer_identity.get("sha256") == artifact["sha256"]
+                and analyzer_identity.get("repository_head")
+                == manifest["candidate_commit"],
+                "machine report is not bound to the retained analyzer",
+            )
+        elif role == "av_timeline":
+            timeline = json.loads(artifact_path.read_text(encoding="utf-8"))
+            samples = timeline.get("samples")
+            _manifest_error(
+                timeline.get("schema") == "character_director_av_timeline_v1"
+                and timeline.get("schema_version") == 1
+                and isinstance(samples, list)
+                and bool(samples),
+                "unsupported or empty AV timeline",
+            )
+        elif role in {"retained_audio", "independent_review", "product_owner_approval"}:
+            _manifest_error(
+                source_relative == artifact["path"],
+                "{} artifact must be self-sourced".format(role),
+            )
+        elif role == "audible_review":
+            _manifest_error(
+                source_relative == capture_manifest.get("video", {}).get("path"),
+                "audible review is not bound to the normal-speed video",
+            )
         roles.append(role)
         paths.append(artifact["path"])
     _manifest_error(len(roles) == len(set(roles)), "review artifact roles must be unique")
     _manifest_error(len(paths) == len(set(paths)), "review artifact paths must be unique")
-    expected_complete_roles = {"machine_acceptance", "quarter_speed"}
-    if manifest["schema_version"] >= 2:
-        expected_complete_roles.add("browser_layout")
+    if manifest["schema_version"] >= 3:
+        required_roles = manifest.get("required_roles")
+        _manifest_error(
+            isinstance(required_roles, list)
+            and bool(required_roles)
+            and all(
+                isinstance(role, str) and role in supported_roles
+                for role in required_roles
+            )
+            and required_roles == sorted(set(required_roles)),
+            "review bundle required roles are invalid",
+        )
+        expected_complete_roles = set(required_roles)
+    else:
+        expected_complete_roles = {"machine_acceptance", "quarter_speed"}
+        if manifest["schema_version"] >= 2:
+            expected_complete_roles.add("browser_layout")
     expected_complete = set(roles) == expected_complete_roles
     _manifest_error(manifest["complete"] == expected_complete, "review bundle completeness mismatch")
 
