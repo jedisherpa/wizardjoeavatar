@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000">
+  <defs>
+    <linearGradient id="land" x1="0" x2="1"><stop stop-color="#dbe8d0"/><stop offset=".55" stop-color="#f4e7c5"/><stop offset="1" stop-color="#e7d8b3"/></linearGradient>
+    <linearGradient id="ridge" x1="0" x2="0" y1="0" y2="1"><stop stop-color="#556b52"/><stop offset="1" stop-color="#8c8065"/></linearGradient>
+    <style>
+      .title{font:700 34px system-ui;fill:#172b36}.label{font:700 18px system-ui;fill:#172b36}.small{font:14px system-ui;fill:#29424b}.road{stroke:#c7895d;stroke-width:14;fill:none;stroke-linecap:round}.walk{stroke:#f7f0d7;stroke-width:6;fill:none;stroke-dasharray:12 9}.creek{stroke:#3a93b8;stroke-width:20;fill:none;stroke-linecap:round}.trail{stroke:#69744e;stroke-width:8;fill:none;stroke-dasharray:8 8}.set{fill:#fff8e6;stroke:#172b36;stroke-width:3}.district{fill:none;stroke:#fff;stroke-width:3;stroke-dasharray:12 8}.arrow{stroke:#172b36;stroke-width:3;marker-end:url(#a)}
+    </style>
+    <marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#172b36"/></marker>
+  </defs>
+  <rect width="1600" height="1000" fill="url(#land)"/>
+  <path d="M0 0H420L360 100 430 190 340 280 410 390 300 520 390 650 320 800 390 1000H0Z" fill="url(#ridge)"/>
+  <path d="M48 115 180 40 260 145 345 55 420 170" fill="none" stroke="#d8b77a" stroke-width="30" stroke-linejoin="bevel"/>
+  <text x="30" y="45" class="label" fill="#fff">WEST • FLATIRON RIDGE</text>
+  <path class="creek" d="M170 660 C400 610 520 700 720 650 S1080 550 1580 620"/>
+  <path class="road" d="M1510 820 C1260 760 1100 760 930 690 S610 520 450 480"/>
+  <path class="road" d="M560 180 C710 260 730 380 780 520 S920 760 1010 960"/>
+  <path class="road" d="M600 440 C850 390 1110 390 1450 410"/>
+  <path class="walk" d="M650 380 H1130 V520 H650Z"/>
+  <path class="trail" d="M470 570 C370 490 300 390 270 240"/>
+  <path class="trail" d="M450 515 C340 590 300 690 250 830"/>
+  <path class="trail" d="M390 245 C460 170 520 150 600 165"/>
+  <rect x="600" y="325" width="590" height="270" rx="40" class="district"/><text x="620" y="350" class="small">DOWNTOWN / LANTERN WALK</text>
+  <rect x="980" y="520" width="520" height="250" rx="40" class="district"/><text x="1000" y="545" class="small">WELLNESS / CREEK CORRIDOR</text>
+  <rect x="1130" y="750" width="420" height="200" rx="40" class="district"/><text x="1150" y="780" class="small">SUNWARD RESIDENTIAL</text>
+  <rect x="360" y="420" width="300" height="250" rx="40" class="district"/><text x="390" y="450" class="small">GRACE MEADOW</text>
+  <rect x="350" y="90" width="360" height="260" rx="40" class="district"/><text x="380" y="120" class="small">CASTLE RIDGE</text>
+  <g transform="translate(485 165)"><path d="M0 75 45 35 90 75V150H0Z" class="set"/><path d="M18 42V5H38V45M55 45V12H76V52" class="set"/><text x="-5" y="176" class="label">CAS Castle Grace</text></g>
+  <g transform="translate(390 250)"><circle r="38" class="set"/><circle r="21" fill="none" stroke="#69744e" stroke-width="7"/><text x="48" y="5" class="label">MED Thirteen Stones</text></g>
+  <g transform="translate(455 510)"><rect width="110" height="72" rx="8" class="set"/><text x="8" y="45" class="label">CHA</text><text x="-28" y="98" class="small">Grace Meadow Hall</text></g>
+  <g transform="translate(245 820)"><path d="M0 0 Q50 -80 100 0 Q45 42 0 0" fill="#8fd0e4" stroke="#172b36" stroke-width="3"/><text x="115" y="0" class="label">FAL Joeville Falls</text></g>
+  <g transform="translate(675 395)"><rect width="130" height="75" rx="10" class="set"/><text x="18" y="45" class="label">COF</text><text y="100" class="small">Lantern &amp; Lark</text></g>
+  <g transform="translate(835 395)"><rect width="140" height="75" rx="10" class="set"/><text x="32" y="45" class="label">PRL</text><text y="100" class="small">Lantern Walk</text></g>
+  <g transform="translate(1010 395)"><circle cx="45" cy="38" r="40" class="set"/><text x="20" y="45" class="label">PLZ</text><text x="0" y="100" class="small">Civic Weave</text></g>
+  <g transform="translate(1030 560)"><rect width="125" height="65" rx="10" class="set"/><text x="35" y="41" class="label">JUI</text><text x="0" y="88" class="small">Brightroot</text></g>
+  <g transform="translate(1180 560)"><rect width="125" height="65" rx="10" class="set"/><text x="33" y="41" class="label">TON</text><text x="0" y="88" class="small">Juniper Tonic</text></g>
+  <g transform="translate(1330 560)"><rect width="125" height="65" rx="10" class="set"/><text x="35" y="41" class="label">GRO</text><text x="0" y="88" class="small">Commons Market</text></g>
+  <g transform="translate(880 600)"><rect width="125" height="65" rx="10" class="set"/><text x="37" y="41" class="label">SUS</text><text x="0" y="88" class="small">Riverstone Sushi</text></g>
+  <g transform="translate(720 590)"><path d="M0 35 Q60 -10 120 35" fill="none" stroke="#172b36" stroke-width="10"/><text x="28" y="72" class="label">BRG</text></g>
+  <g transform="translate(1220 820)"><path d="M0 75V15H100V75" class="set"/><text x="28" y="55" class="label">RES</text><text x="-5" y="100" class="small">Sunward homes</text></g>
+  <g transform="translate(1450 800)"><path d="M0 75V0M0 12H90" class="arrow"/><text x="-60" y="105" class="small">ENT East Gate</text></g>
+  <g transform="translate(560 650)"><rect width="130" height="70" rx="10" class="set"/><text x="38" y="43" class="label">DAN</text><text y="94" class="small">Current Hall</text></g>
+  <g transform="translate(340 370)"><circle r="24" class="set"/><text x="35" y="6" class="label">TRH</text></g>
+  <g transform="translate(260 210)"><path d="M0 45 55 0 110 45" fill="none" stroke="#172b36" stroke-width="8"/><text x="20" y="75" class="label">OVR</text></g>
+  <text x="1040" y="50" class="title">JOEVILLE PRODUCTION CONTINUITY MAP v1</text>
+  <text x="1040" y="84" class="small">Fictional geography • mountains west • Joeville Creek west-to-east • morning light from east</text>
+  <path d="M1470 120V55" class="arrow"/><text x="1440" y="145" class="label">N</text>
+  <g transform="translate(1040 110)"><text class="label">Continuity travel bands</text><text y="32" class="small">Downtown ↔ Creek: 4–8 min walk</text><text y="56" class="small">Downtown ↔ Meadow: 8–12 min cycle / 15–20 min walk</text><text y="80" class="small">Meadow ↔ Castle: 10–15 min uphill walk</text><text y="104" class="small">Downtown ↔ Falls: explicit canyon-road transition, 20–30 min</text><text y="128" class="small">Creek ↔ Residential/East Gate: 8–15 min walk</text></g>
+</svg>

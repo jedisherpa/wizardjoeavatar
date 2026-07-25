@@ -1,0 +1,14 @@
+slot,character_id,display_name,source_path,status,package_canvas,root_anchor,pose_count,required_next_gate
+01,wizard-joe-v1,Wizard Joe,/Users/paul/Documents/WizardJoeAsci/WizardJoeAvatar,READY-PRIMARY,72x96,"36,95",89,retain regression coverage
+02,crystail-v1,CrystAIl,/Users/paul/Documents/WizardJoeAsci/research-sources/wizardjoeavatar-remote/research-sources/worktrees/crystail-implementation,READY-ON-BRANCH,72x96,"36,91",63,merge or designate branch as runtime base
+03,,,TBD,READY-TO-INTAKE,,,,provide source path and stable character name
+04,,,TBD,READY-TO-INTAKE,,,,provide source path and stable character name
+05,,,TBD,READY-TO-INTAKE,,,,provide source path and stable character name
+06,,,TBD,READY-TO-INTAKE,,,,provide source path and stable character name
+07,,,TBD,READY-TO-INTAKE,,,,provide source path and stable character name
+08,,,TBD,READY-TO-INTAKE,,,,provide source path and stable character name
+09,,,TBD,READY-TO-INTAKE,,,,provide source path and stable character name
+10,,,TBD,READY-TO-INTAKE,,,,provide source path and stable character name
+11,,,TBD,READY-TO-INTAKE,,,,provide source path and stable character name
+12,,,TBD,READY-TO-INTAKE,,,,provide source path and stable character name
+13,,,TBD,READY-TO-INTAKE,,,,provide source path and stable character name

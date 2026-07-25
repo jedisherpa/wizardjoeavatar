@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
+  <style>.h{font:700 30px system-ui;fill:#18313a}.t{font:16px system-ui;fill:#29424b}.s{font:13px system-ui;fill:#52656b}.grid{stroke:#dce3df;stroke-width:1}.known{fill:#2679b7;stroke:#163746;stroke-width:3}.candidate{fill:#3d8a52;stroke:#163746;stroke-width:3}.missing{fill:#f8f2e1;stroke:#b78552;stroke-width:3;stroke-dasharray:8 6}</style>
+  <rect width="1600" height="900" fill="#fff"/>
+  <g class="grid"> 
+    <path d="M80 100V800M180 100V800M280 100V800M380 100V800M480 100V800M580 100V800M680 100V800M780 100V800M880 100V800M980 100V800M1080 100V800M1180 100V800M1280 100V800M1380 100V800M1480 100V800"/>
+    <path d="M80 200H1480M80 300H1480M80 400H1480M80 500H1480M80 600H1480M80 700H1480M80 800H1480"/>
+  </g>
+  <text x="80" y="55" class="h">Joeville Character-to-Environment Scale Intake — 2 OF 13 READY</text>
+  <text x="80" y="85" class="t">Wizard Joe: primary checkout, 72×96, root (36,95). CrystAIl: ready on dedicated branch, 72×96, root (36,91). Eleven character sources await intake.</text>
+  <path d="M95 800V540H210V800Z" class="known"/><path d="M112 540 150 460 194 540" class="known"/><text x="95" y="835" class="t">01 Wizard Joe</text><text x="95" y="857" class="s">REGISTERED • 72×96 package canvas</text>
+  <path d="M235 800V510H350V800Z" class="candidate"/><path d="M260 510 292 450 327 510" class="candidate"/><text x="235" y="835" class="t">02 CrystAIl</text><text x="235" y="857" class="s">READY ON BRANCH • 63 poses</text>
+  <g>
+    <path d="M385 800V525H450V800Z" class="missing"/><path d="M475 800V525H540V800Z" class="missing"/><path d="M565 800V525H630V800Z" class="missing"/><path d="M655 800V525H720V800Z" class="missing"/><path d="M745 800V525H810V800Z" class="missing"/><path d="M835 800V525H900V800Z" class="missing"/><path d="M925 800V525H990V800Z" class="missing"/><path d="M1015 800V525H1080V800Z" class="missing"/><path d="M1105 800V525H1170V800Z" class="missing"/><path d="M1195 800V525H1260V800Z" class="missing"/><path d="M1285 800V525H1350V800Z" class="missing"/>
+    <text x="385" y="835" class="t">03–13 READY TO INTAKE</text><text x="385" y="857" class="s">Need source paths, names, turnarounds, roots, bounds and prop reach</text>
+  </g>
+  <rect x="80" y="120" width="550" height="250" rx="12" fill="#f8f2e1" stroke="#b78552" stroke-width="2"/>
+  <text x="105" y="155" class="h">Required before scale lock</text>
+  <text x="105" y="190" class="t">• all 13 stable character IDs and package versions</text><text x="105" y="220" class="t">• neutral front/profile/back renders at canonical scale</text><text x="105" y="250" class="t">• root, head-top, hand, seat, prop, and shadow anchors</text><text x="105" y="280" class="t">• maximum width in idle, gesture, wings, staff, and dance poses</text><text x="105" y="310" class="t">• seated knee/hip height and doorway/clearance tests</text><text x="105" y="340" class="t">• multi-character compositor and overlap policy</text>
+</svg>
