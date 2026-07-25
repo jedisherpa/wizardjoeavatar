@@ -1,0 +1,210 @@
+{
+  "artifact_sha256": "1e9b791070658d79d1a517557c819d900d5c656429f3b643bb268e2fe4374781",
+  "character_id": "selene-hart",
+  "contract_id": "selene-hart-review-motion-v001",
+  "library_index_sha256": "86f5ff6587bf1714991e8a0ac66d40007bc25b5c5a0ecef0a960e5f7a12439b4",
+  "profile_id": "wizardjoe_hd_alpha_1254_v001",
+  "review_projection": true,
+  "runtime_admitted": false,
+  "schema_version": 1,
+  "sequences": {
+    "g7": {
+      "entry_handoffs": [
+        "front_idle"
+      ],
+      "exit_handoffs": [
+        "front_idle",
+        "g8"
+      ],
+      "family": "prop_communication",
+      "fps": 8,
+      "frames": [
+        {
+          "baseline_y": 1185,
+          "duration_ms": 125,
+          "frame_index": 1,
+          "hold_marker": false,
+          "interruptible": true,
+          "phase": "Attentive planted receipt with the striped hoop upright at her right side.",
+          "pose_id": "selene_hart_motion_037",
+          "root_policy": "fixed",
+          "support_contact": "dual_foot_grounded"
+        },
+        {
+          "baseline_y": 1185,
+          "duration_ms": 125,
+          "frame_index": 2,
+          "hold_marker": false,
+          "interruptible": false,
+          "phase": "Preparatory two-hand raise of the vertical hoop.",
+          "pose_id": "selene_hart_motion_038",
+          "root_policy": "fixed",
+          "support_contact": "dual_foot_grounded"
+        },
+        {
+          "baseline_y": 1185,
+          "duration_ms": 125,
+          "frame_index": 3,
+          "hold_marker": true,
+          "interruptible": true,
+          "phase": "Centered vertical hoop focus held with both hands.",
+          "pose_id": "selene_hart_motion_039",
+          "root_policy": "fixed",
+          "support_contact": "dual_foot_grounded"
+        },
+        {
+          "baseline_y": 1185,
+          "duration_ms": 125,
+          "frame_index": 4,
+          "hold_marker": false,
+          "interruptible": false,
+          "phase": "Open-palm indication through the stable hoop frame.",
+          "pose_id": "selene_hart_motion_040",
+          "root_policy": "fixed",
+          "support_contact": "dual_foot_grounded"
+        },
+        {
+          "baseline_y": 1185,
+          "duration_ms": 125,
+          "frame_index": 5,
+          "hold_marker": true,
+          "interruptible": false,
+          "phase": "Warm viewer-facing explanation with the hoop supported at her right.",
+          "pose_id": "selene_hart_motion_041",
+          "root_policy": "fixed",
+          "support_contact": "dual_foot_grounded"
+        },
+        {
+          "baseline_y": 1185,
+          "duration_ms": 125,
+          "frame_index": 6,
+          "hold_marker": false,
+          "interruptible": true,
+          "phase": "Resolved recovery with the hoop upright and one hand near her sternum.",
+          "pose_id": "selene_hart_motion_042",
+          "root_policy": "fixed",
+          "support_contact": "dual_foot_grounded"
+        }
+      ],
+      "intent": "receive_frame_focus_explain",
+      "interrupt_policy": "marker_safe",
+      "loop_mode": "loop",
+      "pose_ids": [
+        "selene_hart_motion_037",
+        "selene_hart_motion_038",
+        "selene_hart_motion_039",
+        "selene_hart_motion_040",
+        "selene_hart_motion_041",
+        "selene_hart_motion_042"
+      ]
+    },
+    "g8": {
+      "entry_handoffs": [
+        "front_idle",
+        "g7"
+      ],
+      "exit_handoffs": [
+        "front_idle"
+      ],
+      "family": "governance_boundary",
+      "fps": 8,
+      "frames": [
+        {
+          "baseline_y": 1185,
+          "duration_ms": 125,
+          "frame_index": 1,
+          "hold_marker": false,
+          "interruptible": true,
+          "phase": "Calm frontal readiness with the hoop upright at her right side.",
+          "pose_id": "selene_hart_motion_043",
+          "root_policy": "fixed",
+          "support_contact": "dual_foot_grounded"
+        },
+        {
+          "baseline_y": 1185,
+          "duration_ms": 125,
+          "frame_index": 2,
+          "hold_marker": false,
+          "interruptible": false,
+          "phase": "Grounded hoop contact establishes a visible standard.",
+          "pose_id": "selene_hart_motion_044",
+          "root_policy": "fixed",
+          "support_contact": "dual_foot_grounded"
+        },
+        {
+          "baseline_y": 1185,
+          "duration_ms": 125,
+          "frame_index": 3,
+          "hold_marker": true,
+          "interruptible": true,
+          "phase": "Low calm not-yet boundary with the hoop stage-anchored.",
+          "pose_id": "selene_hart_motion_045",
+          "root_policy": "fixed",
+          "support_contact": "dual_foot_grounded"
+        },
+        {
+          "baseline_y": 1185,
+          "duration_ms": 125,
+          "frame_index": 4,
+          "hold_marker": false,
+          "interruptible": false,
+          "phase": "Downward verification gesture identifies the visible criterion.",
+          "pose_id": "selene_hart_motion_046",
+          "root_policy": "fixed",
+          "support_contact": "dual_foot_grounded"
+        },
+        {
+          "baseline_y": 1185,
+          "duration_ms": 125,
+          "frame_index": 5,
+          "hold_marker": true,
+          "interruptible": false,
+          "phase": "Restrained palm-up redirect offers the next step.",
+          "pose_id": "selene_hart_motion_047",
+          "root_policy": "fixed",
+          "support_contact": "dual_foot_grounded"
+        },
+        {
+          "baseline_y": 1185,
+          "duration_ms": 125,
+          "frame_index": 6,
+          "hold_marker": false,
+          "interruptible": true,
+          "phase": "Grounded quarter-right handoff with the hoop restored to carry.",
+          "pose_id": "selene_hart_motion_048",
+          "root_policy": "fixed",
+          "support_contact": "dual_foot_grounded"
+        }
+      ],
+      "intent": "prepare_boundary_verify_redirect_handoff",
+      "interrupt_policy": "marker_safe",
+      "loop_mode": "hold_last",
+      "pose_ids": [
+        "selene_hart_motion_043",
+        "selene_hart_motion_044",
+        "selene_hart_motion_045",
+        "selene_hart_motion_046",
+        "selene_hart_motion_047",
+        "selene_hart_motion_048"
+      ]
+    }
+  },
+  "status": "pending_visual_parity",
+  "transitions": [
+    {
+      "from": "g7",
+      "status": "deferred_until_character_package",
+      "to": "front_idle"
+    },
+    {
+      "from": "g7",
+      "status": "resolved",
+      "to": "g8"
+    },
+    {
+      "from": "g8",
+      "status": "deferred_until_character_package",
+      "to": "front_idle"
+    }
+  ]
+}

@@ -173,12 +173,28 @@ All six authored poses passed individual full-size projection on port 8667.
 Port 8665 now presents the complete candidate beside approved HD Wizard Joe.
 Product visual approval is still pending and runtime admission remains false.
 
+Selene Hart is now the third incomplete roster character to reach a complete
+48-pose review candidate. Her immutable supplied poses `001`-`036` were merged
+with twelve new full-size RGBA poses for:
+
+- `g7`: receive, raise, frame, indicate, explain, and resolve with the hoop.
+- `g8`: establish a visible standard, set a calm boundary, verify, redirect,
+  and hand off.
+
+The individual full-size gate rejected five damaged soft-matte intermediates.
+Those frames were extracted again with a hard key and rebuilt before technical
+acceptance. Two consecutive corrected builds produced matching artifact and
+library-index hashes. Port 8665 presents the corrected candidate beside
+approved HD Wizard Joe. Product visual approval is still pending and runtime
+admission remains false.
+
 | Character | Candidate poses | Missing poses | State |
 | --- | ---: | ---: | --- |
 | Orion Vale | 48 | 0 | Full-size technical review passed; product visual approval pending |
 | Aurelia Finch | 48 | 0 | Full-size technical review passed; product visual approval pending |
-| Remaining roster | 384 | 96 | Authoring/review required |
-| **Total** | **480** | **96** | **576 target slots** |
+| Selene Hart | 48 | 0 | Full-size technical review passed; product visual approval pending |
+| Remaining roster | 348 | 84 | Authoring/review required |
+| **Total** | **492** | **84** | **576 target slots** |
 
 Orion candidate receipts:
 
@@ -196,6 +212,14 @@ Aurelia candidate receipts:
 - Review motion contract: `51057a8f201423174447c502d6760ec164c50e0141ff212e7bf929895ad42d4b`
 - Contact sheet: `83b4b403d428950ebad8dad967d1a08df255ea60732a3285848dee8eb0b219b0`
 
+Selene candidate receipts:
+
+- Artifact: `1e9b791070658d79d1a517557c819d900d5c656429f3b643bb268e2fe4374781`
+- Library index: `86f5ff6587bf1714991e8a0ac66d40007bc25b5c5a0ecef0a960e5f7a12439b4`
+- Reconstruction: `22ede6b8587d329a30d80fcf40f8d99bfa48e04ffc72428b4aa2562b9e077f39`
+- Review motion contract: `8ca2f01db315099fd2c469a750c54a421201b29521440c0304a73bc7d3869075`
+- Contact sheet: `fe3cffec7b288b0d24b0b7b708e169bdaa6d2c7cf0dbab375997f15740a4c730`
+
 ## Roster Boundary
 
 The archives also contain Crystail. Crystail remains
@@ -209,7 +233,7 @@ and count parity rather than an automatic quality waiver.
 
 ## Next Build Order
 
-1. Author the 102 remaining frames as explicitly new art, one character at a
+1. Author the 84 remaining frames as explicitly new art, one character at a
    time, using the character's compiled supplied set as visual authority.
 2. Rebuild each completed 48-pose artifact twice and require identical hashes.
 3. Review every full-size frame and motion sequence beside approved HD Wizard

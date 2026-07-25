@@ -1,0 +1,84 @@
+{
+  "artifact_sha256": "1e9b791070658d79d1a517557c819d900d5c656429f3b643bb268e2fe4374781",
+  "candidate_pose_count": 48,
+  "character_id": "selene-hart",
+  "checks": {
+    "all_authored_poses_projected_full_size": true,
+    "dual_foot_contacts_stable": true,
+    "g7_prop_communication_verified": true,
+    "g8_governance_boundary_verified": true,
+    "hoop_continuity_verified": true,
+    "transparent_backgrounds": true,
+    "uncropped_silhouettes": true
+  },
+  "library_index_sha256": "86f5ff6587bf1714991e8a0ac66d40007bc25b5c5a0ecef0a960e5f7a12439b4",
+  "product_visual_approval": "pending",
+  "rejected_intermediates": {
+    "reason": "soft matte reduced character alpha and contaminated full-size projection",
+    "pose_ids": [
+      "selene_hart_motion_042",
+      "selene_hart_motion_043",
+      "selene_hart_motion_044",
+      "selene_hart_motion_045",
+      "selene_hart_motion_048"
+    ]
+  },
+  "review_projection": true,
+  "review_url": "http://127.0.0.1:8665/",
+  "runtime_admitted": false,
+  "schema_version": 1,
+  "screenshots": [
+    {
+      "path": "8665-side-by-side.png",
+      "sha256": "e4ada49574661220645597257211159b2893a1088d7c110d2d8885518b044426"
+    },
+    {
+      "path": "selene_hart_motion_037-full-size.png",
+      "sha256": "59f99470d40c4dfe716d951b873b802386c9ba7cdae3d200b1b5182082272263"
+    },
+    {
+      "path": "selene_hart_motion_038-full-size.png",
+      "sha256": "cce6aadab3812fdf19433cc0fc8a481d4054830ccf7bddd9b6d33b46d118a596"
+    },
+    {
+      "path": "selene_hart_motion_039-full-size.png",
+      "sha256": "c9f3192af13c17c0cf1bedb1bc73bcd51761b2cad9c34c6551f5a27f2e39a861"
+    },
+    {
+      "path": "selene_hart_motion_040-full-size.png",
+      "sha256": "3c264f18b2f21d1afca840ae4487a8ccf68caef7fc942050faa38966e068931c"
+    },
+    {
+      "path": "selene_hart_motion_041-full-size.png",
+      "sha256": "89ba5f39a02c27016a3b5ae3ec7641f58c7594691a1ea8c69089f719b64dfdbb"
+    },
+    {
+      "path": "selene_hart_motion_042-full-size.png",
+      "sha256": "8d51fd6bff6ede69e6768727c4e8716d918ea31c255e1beabb0533030fbe7f19"
+    },
+    {
+      "path": "selene_hart_motion_043-full-size.png",
+      "sha256": "4b7fda23699dfbefdf3db722920399393a10b096ae33d57f62abdbc0deb26e68"
+    },
+    {
+      "path": "selene_hart_motion_044-full-size.png",
+      "sha256": "5d5c0285923e95533fd04891c90af3b2f92c22b63dae07781e431cc1ad608138"
+    },
+    {
+      "path": "selene_hart_motion_045-full-size.png",
+      "sha256": "1e285da893f80a054b0631afd5be7c536248f0ae2ad7f29fa07a196f22224189"
+    },
+    {
+      "path": "selene_hart_motion_046-full-size.png",
+      "sha256": "fe627af513393607c2000b172500bfaba418c8f4f02a61e08edaca0274d9b459"
+    },
+    {
+      "path": "selene_hart_motion_047-full-size.png",
+      "sha256": "b30d800d5a11880998d787763130e5114df0d19a5e52cd8ad0fbedc2e6222541"
+    },
+    {
+      "path": "selene_hart_motion_048-full-size.png",
+      "sha256": "043229ffaefc9300bb68d5edb6f53d60ca21bbcabd8021c5752196d549a316b3"
+    }
+  ]
+}

@@ -1,0 +1,351 @@
+{
+  "approval_state": "pending_visual_parity",
+  "authoring_brief_sha256": "24bcfd409d29c53a5219443adbaa84224937090911b8ded16211737d28666369",
+  "authority_manifest_sha256": "740f35730f4aa1e6c6ef96be80115c5b0e117397f792d57fdf5360452bbe78c8",
+  "canonicalization": "integer_translation_only_no_resampling",
+  "character_id": "selene-hart",
+  "existing_artifact_sha256": "15679165338fd94a38188172d7532c23514918edf8a99e7656994f77c51ae8ad",
+  "existing_reconstruction_sha256": "d1f8c00b17d2426c46ff89a4bac13f95dbd10daf36a075809b75f3ad17f4dd88",
+  "generation_method": "built_in_imagegen_flat_chroma_then_local_alpha_extraction",
+  "profile_id": "wizardjoe_hd_alpha_1254_v001",
+  "runtime_admitted": false,
+  "schema_version": 1,
+  "sequences": {
+    "g7": {
+      "fps": 8,
+      "frames": [
+        {
+          "alpha_extracted_path": "alpha-extracted/selene_hart_motion_037.png",
+          "alpha_extracted_sha256": "8a44ba6e96142103ea07eea652baaae6fd3a0e62915acb53f11893dfd8cc5f02",
+          "authorship": "authored_full_size_imagegen_v1",
+          "brief_id": "selene-g7-receipt",
+          "canonical_bbox": [
+            442,
+            121,
+            812,
+            1185
+          ],
+          "chroma_source_path": "chroma-source/selene_hart_motion_037.png",
+          "chroma_source_sha256": "f0f071f65baf310f27fb2c49a0ab39916802a958daf27c8c13f27b52dbf1dbbc",
+          "continuity": "Clean front-facing entry from planted idle with the hoop upright beside her right leg and a soft asymmetrical stance.",
+          "forbidden": "Exact duplicate of motion 025, walking stride, hoop behind the body, missing hoop, or identity drift.",
+          "frame_index": 1,
+          "pose_id": "selene_hart_motion_037",
+          "pose_summary": "Attentive planted receipt with the striped hoop upright at her right side.",
+          "rgba_sha256": "159a99de7c7b27bd902d29fde36a2a0bd677a6d814056db6cd9b797765625af2",
+          "slot_id": "motion-037",
+          "source_path": "frames/selene_hart_motion_037.png",
+          "source_sha256": "d3c80e3d774cab25513bc5d47c72a8516e2e0804a5ec363c8fbfc0b2e7692328"
+        },
+        {
+          "alpha_extracted_path": "alpha-extracted/selene_hart_motion_038.png",
+          "alpha_extracted_sha256": "e275a18aceb95cbe133c0eb61d6baf7fa3b989b451f0969a29849255970633c6",
+          "authorship": "authored_full_size_imagegen_v1",
+          "brief_id": "selene-g7-raise-frame",
+          "canonical_bbox": [
+            395,
+            126,
+            859,
+            1185
+          ],
+          "chroma_source_path": "chroma-source/selene_hart_motion_038.png",
+          "chroma_source_sha256": "64913a5ebbb3adb81824c0c5e21a09803030d9bacd2d0e9a14341e7ede573348",
+          "continuity": "Both hands guide the upright hoop from her right side toward the center of her torso while both feet remain planted.",
+          "forbidden": "Hoop teleport, horizontal hoop, obscured face, foot slide, or detached hands.",
+          "frame_index": 2,
+          "pose_id": "selene_hart_motion_038",
+          "pose_summary": "Preparatory two-hand raise of the vertical hoop.",
+          "rgba_sha256": "0159e4b6888c2f5c557b8e393ed0abcce6e37ff0e95546cdbb6f0e86155d03c0",
+          "slot_id": "motion-038",
+          "source_path": "frames/selene_hart_motion_038.png",
+          "source_sha256": "761e557fa08dfd925705755048ff2500e96b593e3e0ad45bfc2c2fb5594d8e52"
+        },
+        {
+          "alpha_extracted_path": "alpha-extracted/selene_hart_motion_039.png",
+          "alpha_extracted_sha256": "83a4e04fee0f6c8c1832c749b88f4a75d78901c7a8f97eb7d3b3a3b0c50474c2",
+          "authorship": "authored_full_size_imagegen_v1",
+          "brief_id": "selene-g7-focus",
+          "canonical_bbox": [
+            394,
+            126,
+            859,
+            1185
+          ],
+          "chroma_source_path": "chroma-source/selene_hart_motion_039.png",
+          "chroma_source_sha256": "695c7670e91f7110ce5e1f30e620e971d2c0dbf25262ec1feb7b688ff862171c",
+          "continuity": "The hoop settles vertically in front of her torso with her face visible above its inner opening and her gaze directed through the frame.",
+          "forbidden": "Hoop covering the face, one-handed float, crouch, scale change, or broken circular shape.",
+          "frame_index": 3,
+          "pose_id": "selene_hart_motion_039",
+          "pose_summary": "Centered vertical hoop focus held with both hands.",
+          "rgba_sha256": "b2cdc9f13fc5c1e92a97750ae9b548221186570067106f58cbaa2a86b0c354d0",
+          "slot_id": "motion-039",
+          "source_path": "frames/selene_hart_motion_039.png",
+          "source_sha256": "e6aa9d6c325620f4267488be39c34136b84d2d9c2a38868a9b944f04a1607c97"
+        },
+        {
+          "alpha_extracted_path": "alpha-extracted/selene_hart_motion_040.png",
+          "alpha_extracted_sha256": "bae6a7fa0966cb1dbedef9ece16f0698ac4d63bb1fb7346bcbfa18dfe0b69d05",
+          "authorship": "authored_full_size_imagegen_v1",
+          "brief_id": "selene-g7-indicate",
+          "canonical_bbox": [
+            376,
+            120,
+            877,
+            1185
+          ],
+          "chroma_source_path": "chroma-source/selene_hart_motion_040.png",
+          "chroma_source_sha256": "2d41fc032930b7eea7fa49409296c7e6909def98e82c5617fa8eb239dac399c7",
+          "continuity": "Her left hand releases into a low open-palm indication through the hoop while her right hand keeps it upright and stable.",
+          "forbidden": "Pointing finger, wave, hoop tilt, extra prop, or hand crossing the face.",
+          "frame_index": 4,
+          "pose_id": "selene_hart_motion_040",
+          "pose_summary": "Open-palm indication through the stable hoop frame.",
+          "rgba_sha256": "a7d4acf2b03f8d84ccf5e6af2b9e7986cc9e19674854e3ee9f61b43468c3d5a1",
+          "slot_id": "motion-040",
+          "source_path": "frames/selene_hart_motion_040.png",
+          "source_sha256": "b7661283d3ed385c996de3b9b670138e416b30b19b5639b809f0cb71fae19614"
+        },
+        {
+          "alpha_extracted_path": "alpha-extracted/selene_hart_motion_041.png",
+          "alpha_extracted_sha256": "81ae60460d8070646ea5eb3f27e10ee35a2c79b76ed06d65cdec7185ba179466",
+          "authorship": "authored_full_size_imagegen_v1",
+          "brief_id": "selene-g7-explain",
+          "canonical_bbox": [
+            382,
+            120,
+            872,
+            1185
+          ],
+          "chroma_source_path": "chroma-source/selene_hart_motion_041.png",
+          "chroma_source_sha256": "54b84198369148afd2475c84987fed3a50d8e00054822bfff33d94b0dc72a111",
+          "continuity": "The hoop shifts slightly back toward her right side as the open hand turns toward the viewer for the principal explanation stroke.",
+          "forbidden": "Sales-pitch arm spread, wave, missing hoop, crossed feet, or exaggerated lean.",
+          "frame_index": 5,
+          "pose_id": "selene_hart_motion_041",
+          "pose_summary": "Warm viewer-facing explanation with the hoop supported at her right.",
+          "rgba_sha256": "4823ad8c28c3ade81cf4280d657db55bce250194755d5de7f6fa787083ec6868",
+          "slot_id": "motion-041",
+          "source_path": "frames/selene_hart_motion_041.png",
+          "source_sha256": "7eb2d7a369d434f2c917ef13e1549071f53b943cb00af65f5fca80ce3165d3a7"
+        },
+        {
+          "alpha_extracted_path": "alpha-extracted/selene_hart_motion_042.png",
+          "alpha_extracted_sha256": "e6f101790c447dc30e13054a10b3cd6faee85cb93349b9a9a600b1ef7cf80d9d",
+          "authorship": "authored_full_size_imagegen_v1",
+          "brief_id": "selene-g7-recover",
+          "canonical_bbox": [
+            445,
+            118,
+            810,
+            1185
+          ],
+          "chroma_source_path": "chroma-source/selene_hart_motion_042.png",
+          "chroma_source_sha256": "b8d239be52f6a70ba8a6c7304f380c5723c83c15d9467545c148e7fdd3797d9e",
+          "continuity": "The open hand retracts toward her sternum and the hoop returns upright beside her right leg without dropping or changing size.",
+          "forbidden": "Exact idle duplicate, abrupt arm drop, hoop disappearance, root displacement, or closed hostile posture.",
+          "frame_index": 6,
+          "pose_id": "selene_hart_motion_042",
+          "pose_summary": "Resolved recovery with the hoop upright and one hand near her sternum.",
+          "rgba_sha256": "21b6f19ee204122332983ddab990eee3d37908d11c03691f3474687b73de0262",
+          "slot_id": "motion-042",
+          "source_path": "frames/selene_hart_motion_042.png",
+          "source_sha256": "7c24bc9725c1327da46077772a085522f62b565d0ef735514b33e1329d2f7292"
+        }
+      ],
+      "intent": "receive_frame_focus_explain",
+      "loop": true,
+      "motion_contract": {
+        "entry_handoffs": [
+          "front_idle"
+        ],
+        "exit_handoffs": [
+          "front_idle",
+          "g8"
+        ],
+        "family": "prop_communication",
+        "hold_frame_indices": [
+          3,
+          5
+        ],
+        "interrupt_policy": "marker_safe",
+        "interruptible_frame_indices": [
+          1,
+          3,
+          6
+        ],
+        "loop_mode": "loop",
+        "root_policy": "fixed",
+        "support_policy": "dual_foot_grounded"
+      }
+    },
+    "g8": {
+      "fps": 8,
+      "frames": [
+        {
+          "alpha_extracted_path": "alpha-extracted/selene_hart_motion_043.png",
+          "alpha_extracted_sha256": "d9ae7ca3100633ea4cec0ce026610c81dfad2ffa1bca5d69b3173568789c6b60",
+          "authorship": "authored_full_size_imagegen_v1",
+          "brief_id": "selene-g8-readiness",
+          "canonical_bbox": [
+            412,
+            106,
+            841,
+            1185
+          ],
+          "chroma_source_path": "chroma-source/selene_hart_motion_043.png",
+          "chroma_source_sha256": "1d56e465fb0e6dbc29ffd340aa8ddf1716c887789e752a8b9371ecf7aba85b9f",
+          "continuity": "Enters from front idle or frame 042 with the hoop upright at her right side and her weight centered.",
+          "forbidden": "Exact idle duplicate, walking stride, airborne feet, one-handed float, or hoop behind the body.",
+          "frame_index": 1,
+          "pose_id": "selene_hart_motion_043",
+          "pose_summary": "Calm frontal readiness with the hoop upright at her right side.",
+          "rgba_sha256": "a9685348834907a296e5482aa10b4474eea45ee9d61e0a1169ab60f4b300086a",
+          "slot_id": "motion-043",
+          "source_path": "frames/selene_hart_motion_043.png",
+          "source_sha256": "69cb3a7cbdabe5a542e499f24a6c7e0c9a08da95d5bc65198ac74a5d739e6dbc"
+        },
+        {
+          "alpha_extracted_path": "alpha-extracted/selene_hart_motion_044.png",
+          "alpha_extracted_sha256": "4841d7d5a5ce15fa0aa8e53acf02bb87126ad899fa4d3b464838f24cac39272b",
+          "authorship": "authored_full_size_imagegen_v1",
+          "brief_id": "selene-g8-anchor-standard",
+          "canonical_bbox": [
+            431,
+            106,
+            823,
+            1185
+          ],
+          "chroma_source_path": "chroma-source/selene_hart_motion_044.png",
+          "chroma_source_sha256": "862e71f4154dfa41eb1e6ba3ddc412401baf6618c3304a0d2492d89536d9444c",
+          "continuity": "The hoop lowers in her right hand until its bottom makes clear contact with the stage beside her right foot.",
+          "forbidden": "Hoop teleport, broken circle, foot slide, hidden face, floating hoop, or hair and costume drift.",
+          "frame_index": 2,
+          "pose_id": "selene_hart_motion_044",
+          "pose_summary": "Grounded hoop contact establishes a visible standard.",
+          "rgba_sha256": "f4161c08174bc60698968b60d2f64b27f15da1ce59559535ba2e137befd961f1",
+          "slot_id": "motion-044",
+          "source_path": "frames/selene_hart_motion_044.png",
+          "source_sha256": "8c69ae56525767d05fb67d8dad1fb5e086eea3f35f9421569489ba3be9fff27e"
+        },
+        {
+          "alpha_extracted_path": "alpha-extracted/selene_hart_motion_045.png",
+          "alpha_extracted_sha256": "09c798db438520858f522c8535a530eabe947a8d2b54f42a5927f7d981730e38",
+          "authorship": "authored_full_size_imagegen_v1",
+          "brief_id": "selene-g8-not-yet",
+          "canonical_bbox": [
+            422,
+            105,
+            832,
+            1185
+          ],
+          "chroma_source_path": "chroma-source/selene_hart_motion_045.png",
+          "chroma_source_sha256": "ce27d86ccdbc45c788bb5e0176cf44019194770f6b1886331ef41af2aa539a65",
+          "continuity": "Her left hand forms a compact palm-out boundary at sternum height while her right hand and the hoop-bottom contacts remain fixed.",
+          "forbidden": "Hostile shove, large wave, raised arm, hoop movement, fist, or threatening expression.",
+          "frame_index": 3,
+          "pose_id": "selene_hart_motion_045",
+          "pose_summary": "Low calm not-yet boundary with the hoop stage-anchored.",
+          "rgba_sha256": "744205e5dbe5685b2ff8d112c64e4ff82a2b4eb64a770f3c9291f1c4538c05de",
+          "slot_id": "motion-045",
+          "source_path": "frames/selene_hart_motion_045.png",
+          "source_sha256": "6e41f50a9d090a36d09173133418b426d7e27126130ace44e89390afefdada53"
+        },
+        {
+          "alpha_extracted_path": "alpha-extracted/selene_hart_motion_046.png",
+          "alpha_extracted_sha256": "7436167a723e10f9025d67ee93f959a6f5152d7df2629edd675cda5d6829438e",
+          "authorship": "authored_full_size_imagegen_v1",
+          "brief_id": "selene-g8-verify",
+          "canonical_bbox": [
+            434,
+            111,
+            820,
+            1185
+          ],
+          "chroma_source_path": "chroma-source/selene_hart_motion_046.png",
+          "chroma_source_sha256": "1530bd14d941b1cf6ac589fcd9c973ebacd615f6baf448bdc8e194f4416482a9",
+          "continuity": "Her left palm rotates down toward the open center of the stage-anchored hoop as her gaze follows the criterion.",
+          "forbidden": "Pointing at the viewer, hoop movement, grip change, root movement, extra prop, or face occlusion.",
+          "frame_index": 4,
+          "pose_id": "selene_hart_motion_046",
+          "pose_summary": "Downward verification gesture identifies the visible criterion.",
+          "rgba_sha256": "ce1f87b3ad8b11116823dcd250580de3de8a06c24ba87d8f2c414b7924be1146",
+          "slot_id": "motion-046",
+          "source_path": "frames/selene_hart_motion_046.png",
+          "source_sha256": "9b8b17aae978c3cb2def69753a6e7e336b58276e7dcd4e64abb0764a01e4a94b"
+        },
+        {
+          "alpha_extracted_path": "alpha-extracted/selene_hart_motion_047.png",
+          "alpha_extracted_sha256": "9f8abc18e815bd8b723f41722229341b0d641db7f0ef6bf1c78ffaadce8a33e5",
+          "authorship": "authored_full_size_imagegen_v1",
+          "brief_id": "selene-g8-next-step",
+          "canonical_bbox": [
+            424,
+            111,
+            829,
+            1185
+          ],
+          "chroma_source_path": "chroma-source/selene_hart_motion_047.png",
+          "chroma_source_sha256": "d95f91b3d3d8d0a041f23e4c3a1fceaf9ecc6e160e2e1e75e81d71e644c50641",
+          "continuity": "Her left hand unfolds palm-up toward the viewer while the hoop remains anchored, and her expression softens into a usable redirect.",
+          "forbidden": "Sales-pitch spread, wave, hoop movement, walking stride, or hand discontinuity.",
+          "frame_index": 5,
+          "pose_id": "selene_hart_motion_047",
+          "pose_summary": "Restrained palm-up redirect offers the next step.",
+          "rgba_sha256": "0922477b46e7f5a97b5ac8458013f9bacaebf73dcaccb8c2cb0cb87ffec01128",
+          "slot_id": "motion-047",
+          "source_path": "frames/selene_hart_motion_047.png",
+          "source_sha256": "f8643b889297bb6e50a3f22497ed597c647ea4db1222a7f6cd7987e2f49fc657"
+        },
+        {
+          "alpha_extracted_path": "alpha-extracted/selene_hart_motion_048.png",
+          "alpha_extracted_sha256": "da149cbcf008024e2f0568edcff157b0a871756907bfd2fcdc14aff2506666a5",
+          "authorship": "authored_full_size_imagegen_v1",
+          "brief_id": "selene-g8-handoff",
+          "canonical_bbox": [
+            434,
+            108,
+            820,
+            1185
+          ],
+          "chroma_source_path": "chroma-source/selene_hart_motion_048.png",
+          "chroma_source_sha256": "0ba46d45480092c86c847d597c588da81df4459e8c4e37919ddf8f0f89b67f07",
+          "continuity": "The hoop lifts cleanly back into right-side carry as her body settles into a grounded quarter-right handoff.",
+          "forbidden": "Large wave, exact idle duplicate, hoop disappearance, airborne foot, or abrupt profile snap.",
+          "frame_index": 6,
+          "pose_id": "selene_hart_motion_048",
+          "pose_summary": "Grounded quarter-right handoff with the hoop restored to carry.",
+          "rgba_sha256": "5181ecdf47e29f5b1b21bfbc00babc0b0f5a382dd05c039c4c5e968502946b03",
+          "slot_id": "motion-048",
+          "source_path": "frames/selene_hart_motion_048.png",
+          "source_sha256": "3bb36b444b1b975777bba3b7711d0390b7f7bfa1254b3e9506deb8dc112b4840"
+        }
+      ],
+      "intent": "prepare_boundary_verify_redirect_handoff",
+      "loop": false,
+      "motion_contract": {
+        "entry_handoffs": [
+          "front_idle",
+          "g7"
+        ],
+        "exit_handoffs": [
+          "front_idle"
+        ],
+        "family": "governance_boundary",
+        "hold_frame_indices": [
+          3,
+          5
+        ],
+        "interrupt_policy": "marker_safe",
+        "interruptible_frame_indices": [
+          1,
+          3,
+          6
+        ],
+        "loop_mode": "hold_last",
+        "root_policy": "fixed",
+        "support_policy": "dual_foot_grounded"
+      }
+    }
+  }
+}
