@@ -106,6 +106,11 @@ Every one of the 576 slots must independently preserve:
 
 The default for every slot is `runtime_admitted: false`.
 
+The generic persona/character/package admission protocol now exists in
+`CHARACTER_ADMISSION_CONTRACT_V1.md`. That protocol is an available release
+gate, not an automatic promotion: none of these alternate libraries has been
+added to the production registry.
+
 ## Compiled Source Checkpoint
 
 All 462 supplied authority-roster poses have now been reconstructed as
@@ -161,4 +166,7 @@ and count parity rather than an automatic quality waiver.
 4. Record product approval against the exact artifact and library-index hashes.
 5. Compile character packages, semantic motion graphs, contacts, transitions,
    and interruption behavior only after visual approval.
-6. Keep runtime admission denied until package-level acceptance passes.
+6. Create the character's exact persona/character/package admission only after
+   package-level acceptance passes.
+7. Keep runtime admission denied until the admission digest, governed
+   audiovisual acceptance bundle, and rollback deployment are approved.

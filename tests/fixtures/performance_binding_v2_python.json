@@ -1,0 +1,14 @@
+{
+  "admission": {
+    "character_id": "wizard-joe-v1",
+    "package_digest": "sha256:e35d9fee572e8f984a25a3776e2be51e1920b2a09f568170f12ccd3f0851b387",
+    "persona_id": "persona:wizard-joe",
+    "schema_version": 1
+  },
+  "admission_sha256": "sha256:d7b23f23ea0c7bda0fafeeb1dfb92d48d60a6ab5ed95e61bc48d232d09cc1199",
+  "binding_sha256": "sha256:65b8855865c296fa350c7c0a6720204096bf93f0d39ae252399431ab7a7c53f5",
+  "reconciliation_generation": 9007199254740991,
+  "revocation_generation": 0,
+  "schema_version": 2,
+  "wizard_runtime_epoch": "wizard:python-fixture-v2"
+}

@@ -6,6 +6,8 @@ import time
 from typing import Iterable, Mapping, Optional
 
 from .animation_graph import AnimationGraph, load_reference_animation_graph_v2
+from .artifact_hashing import canonical_json_v1, sha256_ref
+from .character_registry import CharacterRegistry
 from .character_runtime_profile import CharacterRuntimeProfile
 from .controller import WizardAvatarController
 from .expressions import expression_mouth
@@ -122,11 +124,30 @@ class PerformanceApplication:
         admitted_clip_ids: Optional[Iterable[str]] = None,
         admitted_node_ids: Optional[Iterable[str]] = None,
         allow_scoreless_governed_speech: bool = False,
+        character_registry: Optional[CharacterRegistry] = None,
     ) -> None:
         self.runtime_epoch = runtime_epoch
         self.character_id = character_id
         self.package_digest = package_digest
         self.manifest_digest = manifest_digest
+        character_admission = (
+            None
+            if character_registry is None
+            else character_registry.resolve_admission(
+                character_id,
+                package_digest,
+            )
+        )
+        self.character_admission = character_admission
+        self.persona_id = (
+            None if character_admission is None else character_admission.persona_id
+        )
+        self.admission_sha256 = (
+            None
+            if character_admission is None
+            else character_admission.admission_sha256
+        )
+        self.runtime_admitted = character_admission is not None
         character_manifest = (
             capability_manifest.get("character")
             if isinstance(capability_manifest, Mapping)
@@ -203,6 +224,38 @@ class PerformanceApplication:
         self._live_score_preparations: OrderedDict[
             tuple[str, int, str], _LiveScorePreparationGrant
         ] = OrderedDict()
+
+    def _require_runtime_admission(self) -> None:
+        if (
+            not self.runtime_admitted
+            or self.character_admission is None
+            or self.persona_id is None
+            or self.admission_sha256 is None
+        ):
+            raise GovernedSpeechError(
+                "character_not_runtime_admitted",
+                "$.performance_context.character",
+            )
+
+    def performance_binding(self) -> Mapping[str, object]:
+        self._require_runtime_admission()
+        admission = self.character_admission
+        if admission is None:
+            raise GovernedSpeechError("character_not_runtime_admitted")
+        content = {
+            "schema_version": 2,
+            "wizard_runtime_epoch": self.runtime_epoch,
+            "admission": dict(admission.content_dict()),
+            "admission_sha256": admission.admission_sha256,
+            "reconciliation_generation": (
+                self.scheduler.coordinator.reconciliation_generation
+            ),
+            "revocation_generation": self.governed_speech.revocation_generation,
+        }
+        return {
+            **content,
+            "binding_sha256": sha256_ref(canonical_json_v1(content)),
+        }
 
     def supports_action(self, action: str) -> bool:
         if self.runtime_profile is None:
@@ -316,6 +369,7 @@ class PerformanceApplication:
     ) -> PerformanceContextV1:
         """Freeze a content-free context against the pending speech source."""
 
+        self._require_runtime_admission()
         snapshot = self.scheduler.coordinator.snapshot_for_slot("speech")
         receipt_us = self.scheduler.coordinator.receipt_for_slot("speech")
         if snapshot is None or receipt_us is None:
@@ -488,6 +542,7 @@ class PerformanceApplication:
     ) -> CompiledLiveSpeechScoreV1:
         """Compile an unpublished preliminary-context score off the event loop."""
 
+        self._require_runtime_admission()
         if self.score_runtime is None:
             raise GovernedSpeechError("score_repository_not_ready")
         if self.capability_manifest is None:
@@ -505,6 +560,7 @@ class PerformanceApplication:
         self,
         compiled: CompiledLiveSpeechScoreV1,
     ) -> PreparedLiveSpeechScoreV1:
+        self._require_runtime_admission()
         if self.score_repository is None:
             raise GovernedSpeechError("score_repository_not_ready")
         try:
@@ -643,6 +699,7 @@ class PerformanceApplication:
         now_wall_ms: int,
         now_monotonic_us: int,
     ) -> Mapping[str, object]:
+        self._require_runtime_admission()
         snapshot = self.scheduler.coordinator.snapshot_for_slot("speech")
         if snapshot is None:
             raise GovernedSpeechError("media_session_not_ready")
@@ -704,6 +761,9 @@ class PerformanceApplication:
             runtime_epoch=self.runtime_epoch,
             character_id=self.character_id,
             package_digest=self.package_digest,
+            persona_id=self.persona_id,
+            admission_sha256=self.admission_sha256,
+            runtime_admitted=self.runtime_admitted,
             reconciliation_generation=self.scheduler.coordinator.reconciliation_generation,
             now_wall_ms=now_wall_ms,
             now_monotonic_us=now_monotonic_us,

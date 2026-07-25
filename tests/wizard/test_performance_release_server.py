@@ -6,6 +6,7 @@ import unittest
 from copy import deepcopy
 from unittest import mock
 
+from wizard_avatar.artifact_hashing import canonical_json_v1, sha256_ref
 from wizard_avatar.governed_performance import GovernedPerformanceApprovalV1
 from wizard_avatar.media_session import MEDIA_SESSION_MAX_BODY_BYTES
 from wizard_avatar.performance_context import PerformanceContextV1
@@ -17,7 +18,6 @@ from tests.wizard.test_media_session import snapshot_mapping
 from tests.wizard.test_media_session_server import asgi_request
 from tests.wizard.test_performance_release import (
     MEDIA_ID,
-    PACKAGE_DIGEST,
     TEXT,
     alignment_mapping,
     context_request_mapping,
@@ -73,18 +73,39 @@ class GovernedSpeechServerTests(unittest.IsolatedAsyncioTestCase):
                 {
                     "schema_version",
                     "wizard_runtime_epoch",
-                    "character_id",
-                    "package_digest",
+                    "admission",
+                    "admission_sha256",
+                    "binding_sha256",
                     "reconciliation_generation",
                     "revocation_generation",
                 },
             )
-            self.assertEqual(binding["schema_version"], 1)
+            self.assertEqual(binding["schema_version"], 2)
             self.assertEqual(
-                binding["character_id"], app.state.frame_hub.performance.character_id
+                binding["admission"]["character_id"],
+                app.state.frame_hub.performance.character_id,
             )
             self.assertEqual(
-                binding["package_digest"], app.state.frame_hub.performance.package_digest
+                binding["admission"]["package_digest"],
+                app.state.frame_hub.performance.package_digest,
+            )
+            self.assertEqual(
+                binding["admission"]["persona_id"],
+                "persona:wizard-joe",
+            )
+            self.assertEqual(
+                binding["admission_sha256"],
+                app.state.frame_hub.performance.admission_sha256,
+            )
+            self.assertEqual(
+                binding["admission_sha256"],
+                sha256_ref(canonical_json_v1(binding["admission"])),
+            )
+            binding_content = dict(binding)
+            del binding_content["binding_sha256"]
+            self.assertEqual(
+                binding["binding_sha256"],
+                sha256_ref(canonical_json_v1(binding_content)),
             )
             serialized = json.dumps(binding)
             for private_value in (TEXT, "approved_text", "prompt", "transcript"):
@@ -227,7 +248,7 @@ class GovernedSpeechServerTests(unittest.IsolatedAsyncioTestCase):
         app = connector_app()
         package_digest = app.state.frame_hub.performance.package_digest
         character_id = app.state.frame_hub.performance.character_id
-        self.assertNotEqual(package_digest, PACKAGE_DIGEST)
+        self.assertRegex(package_digest, r"^sha256:[0-9a-f]{64}$")
         pending = snapshot_mapping(
             sequence=0,
             media_epoch=4,
@@ -361,7 +382,18 @@ class GovernedSpeechServerTests(unittest.IsolatedAsyncioTestCase):
             self.assertEqual(registered["turn_id"], approval.turn_id)
             self.assertEqual(registered["speech_id"], "speech:turn-0042")
             self.assertEqual(registered["character_id"], character_id)
+            self.assertEqual(registered["persona_id"], "persona:wizard-joe")
             self.assertEqual(registered["package_digest"], package_digest)
+            self.assertEqual(
+                registered["admission_sha256"],
+                app.state.frame_hub.performance.admission_sha256,
+            )
+            self.assertEqual(
+                registered["binding_sha256"],
+                app.state.frame_hub.performance.performance_binding()[
+                    "binding_sha256"
+                ],
+            )
             self.assertEqual(registered["media_id"], MEDIA_ID)
             self.assertEqual(
                 registered["media_sha256"],

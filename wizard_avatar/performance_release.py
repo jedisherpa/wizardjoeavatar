@@ -45,14 +45,6 @@ _PENDING_ACTION_POSTURES = frozenset(
     {"none", "not_required", "pending", "approved", "denied", "stale", "failed"}
 )
 _REQUIRED_SINKS = ("animation", "speech", "text")
-_CANONICAL_PERSONA_CHARACTER_BINDINGS = {
-    "serena-quill": (
-        "serena-quill-v1",
-        "sha256:30b5540c8d13cf579776961ce1b31839513a4e184355ec7a35cd16b4a98bc4e5",
-    ),
-}
-
-
 class GovernedSpeechError(ValueError):
     """Stable release failure that never includes approved text."""
 
@@ -301,6 +293,8 @@ class _ActiveGovernedSpeech:
     presentation: VoicePresentationTrackV1
     expires_at_monotonic_us: int
     reconciliation_generation: int
+    persona_id: str
+    admission_sha256: str
 
 
 class GovernedSpeechRuntime:
@@ -324,6 +318,9 @@ class GovernedSpeechRuntime:
         runtime_epoch: str,
         character_id: str,
         package_digest: str,
+        persona_id: Optional[str],
+        admission_sha256: Optional[str],
+        runtime_admitted: bool,
         reconciliation_generation: int,
         now_wall_ms: int,
         now_monotonic_us: int,
@@ -385,39 +382,32 @@ class GovernedSpeechRuntime:
             raise _error("character_mismatch", "$.performance_context.character")
         if context.character.package_digest != package_digest or approval.package_digest != package_digest:
             raise _error("package_mismatch", "$.performance_context.character")
+        if (
+            not runtime_admitted
+            or persona_id is None
+            or admission_sha256 is None
+        ):
+            raise _error(
+                "character_not_runtime_admitted",
+                "$.performance_context.character",
+            )
+        _sha256(admission_sha256, "$.character_admission.admission_sha256")
         if alignment.approved_content_sha256 != approval.reply_sha256:
             raise _error("content_mismatch", "$.alignment.approved_content_sha256")
-        if character_id != "wizard-joe" and approval.persona_id is None:
+        if approval.persona_id is None:
             raise _error("missing_persona_identity", "$.approval.persona_id")
-        if character_id != "wizard-joe" and approval.voice_id is None:
-            raise _error("missing_voice_identity", "$.approval.voice_id")
-        if approval.voice_id is not None and approval.voice_id != alignment.voice_id:
-            raise _error("voice_mismatch", "$.approval.voice_id")
-        canonical_binding = (
-            None
-            if approval.persona_id is None
-            else _CANONICAL_PERSONA_CHARACTER_BINDINGS.get(approval.persona_id)
-        )
-        canonical_persona_for_character = next(
-            (
-                persona_id
-                for persona_id, (bound_character_id, _bound_package_digest)
-                in _CANONICAL_PERSONA_CHARACTER_BINDINGS.items()
-                if bound_character_id == character_id
-            ),
-            None,
-        )
         if (
-            canonical_binding is not None
-            and canonical_binding != (character_id, package_digest)
-        ) or (
-            canonical_persona_for_character is not None
-            and approval.persona_id != canonical_persona_for_character
+            approval.persona_id is not None
+            and approval.persona_id != persona_id
         ):
             raise _error(
                 "persona_character_binding_mismatch",
                 "$.approval.persona_id",
             )
+        if approval.voice_id is None:
+            raise _error("missing_voice_identity", "$.approval.voice_id")
+        if approval.voice_id is not None and approval.voice_id != alignment.voice_id:
+            raise _error("voice_mismatch", "$.approval.voice_id")
         if alignment.approved_text_length != len(registration.approved_text):
             raise _error("text_length_mismatch", "$.alignment.approved_text_length")
         if alignment.media_id != snapshot.media.media_id or alignment.media_sha256 != snapshot.media.media_sha256:
@@ -460,6 +450,8 @@ class GovernedSpeechRuntime:
             presentation,
             now_monotonic_us + remaining_ms * 1000,
             reconciliation_generation,
+            persona_id,
+            admission_sha256,
         )
         self._last_code = "release_active"
 
@@ -510,6 +502,8 @@ class GovernedSpeechRuntime:
             active.presentation,
             active.expires_at_monotonic_us,
             reconciliation_generation,
+            active.persona_id,
+            active.admission_sha256,
         )
 
     def evaluate(
@@ -620,8 +614,14 @@ class GovernedSpeechRuntime:
             "character_id": (
                 None if active is None else active.context.character.character_id
             ),
+            "persona_id": (
+                None if active is None else active.persona_id
+            ),
             "package_digest": (
                 None if active is None else active.context.character.package_digest
+            ),
+            "admission_sha256": (
+                None if active is None else active.admission_sha256
             ),
             "media_id": (
                 None if active is None else active.alignment.media_id

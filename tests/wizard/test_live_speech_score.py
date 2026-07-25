@@ -5,6 +5,7 @@ from unittest import mock
 from tests.wizard.test_media_session import snapshot
 from tests.wizard.test_performance_context import context_mapping
 from wizard_avatar.character_capabilities import derive_character_capability_manifest
+from wizard_avatar.character_registry import load_character_registry
 from wizard_avatar.controller import WizardAvatarController
 from wizard_avatar.live_speech_score import (
     LiveSpeechScoreError,
@@ -50,6 +51,17 @@ class LiveSpeechScoreTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.manifest = derive_character_capability_manifest()
+
+    @classmethod
+    def registry(cls, context):
+        registry = load_character_registry()
+        admission = registry.resolve_admission(
+            context.character.character_id,
+            context.character.package_digest,
+        )
+        if admission is None:
+            raise AssertionError("test context is not admitted by the production registry")
+        return registry
 
     def test_compiles_publishes_and_reuses_deterministic_content_free_score(self):
         context = speech_context(self.manifest)
@@ -140,6 +152,7 @@ class LiveSpeechScoreTests(unittest.TestCase):
                 package_digest=context.character.package_digest,
                 manifest_digest=context.character.manifest_digest,
                 capability_manifest=self.manifest,
+                character_registry=self.registry(context),
             )
             compiled = application.compile_live_speech_score(
                 context,
@@ -174,6 +187,7 @@ class LiveSpeechScoreTests(unittest.TestCase):
                 package_digest=context.character.package_digest,
                 manifest_digest=context.character.manifest_digest,
                 capability_manifest=self.manifest,
+                character_registry=self.registry(context),
             )
             controller = WizardAvatarController()
             application.revoke_governed_speech(1, controller)

@@ -3,6 +3,7 @@ import json
 import unittest
 from copy import deepcopy
 
+from wizard_avatar.character_registry import load_character_registry
 from wizard_avatar.controller import WizardAvatarController
 from wizard_avatar.frame_source import ProceduralWizardFrameSource
 from wizard_avatar.governed_performance import GovernedPerformanceApprovalV1
@@ -20,7 +21,11 @@ from tests.wizard.test_media_session import snapshot_mapping
 
 
 TEXT = "Hello quiet world."
-PACKAGE_DIGEST = "sha256:" + "a" * 64
+CHARACTER_REGISTRY = load_character_registry()
+CHARACTER_ID = CHARACTER_REGISTRY.default_character_id
+CHARACTER_PACKAGE = CHARACTER_REGISTRY.get(CHARACTER_ID)
+CHARACTER_ADMISSION = CHARACTER_REGISTRY.admission_for_character(CHARACTER_ID)
+PACKAGE_DIGEST = CHARACTER_PACKAGE.package_sha256
 MANIFEST_DIGEST = "sha256:" + "b" * 64
 MEDIA_DIGEST = "sha256:" + "2" * 64
 MEDIA_ID = "media:sha256:" + "2" * 64
@@ -54,6 +59,7 @@ def speech_snapshot(
     value["performance"]["score_id"] = None
     value["performance"]["score_revision"] = None
     value["performance"]["score_sha256"] = None
+    value["performance"]["character_id"] = CHARACTER_ID
     value["performance"]["character_package_sha256"] = PACKAGE_DIGEST
     return MediaSessionSnapshotV1.from_mapping(value)
 
@@ -104,12 +110,13 @@ class GovernedSpeechReleaseTests(unittest.TestCase):
     def setUp(self):
         self.application = PerformanceApplication(
             "runtime:test:0001",
-            character_id="wizard-joe",
+            character_id=CHARACTER_ID,
             package_digest=PACKAGE_DIGEST,
             manifest_digest=MANIFEST_DIGEST,
             allow_scoreless_governed_speech=True,
+            character_registry=CHARACTER_REGISTRY,
         )
-        self.controller = WizardAvatarController(("front_idle",), "wizard-joe")
+        self.controller = WizardAvatarController(("front_idle",), CHARACTER_ID)
         self.application.accept_snapshot(speech_snapshot(), 1_000_000)
         self.context = self.application.capture_performance_context(
             PerformanceContextRequestV1.from_mapping(context_request_mapping()),
@@ -138,8 +145,10 @@ class GovernedSpeechReleaseTests(unittest.TestCase):
                 "sha256": MEDIA_DIGEST,
             },
             "performance_context_sha256": context.context_sha256,
-            "character_id": "wizard-joe",
+            "character_id": CHARACTER_ID,
             "package_digest": PACKAGE_DIGEST,
+            "persona_id": "persona:wizard-joe",
+            "voice_id": alignment["voice_id"],
             "allowed_sinks": ["animation", "speech", "text"],
             "issued_at_ms": 1_000,
             "expires_at_ms": 5_000,
@@ -277,8 +286,13 @@ class GovernedSpeechReleaseTests(unittest.TestCase):
         )
         self.assertEqual(receipt["turn_id"], registration.approval.turn_id)
         self.assertEqual(receipt["speech_id"], registration.alignment.speech_id)
-        self.assertEqual(receipt["character_id"], "wizard-joe")
+        self.assertEqual(receipt["character_id"], CHARACTER_ID)
+        self.assertEqual(receipt["persona_id"], "persona:wizard-joe")
         self.assertEqual(receipt["package_digest"], PACKAGE_DIGEST)
+        self.assertEqual(
+            receipt["admission_sha256"],
+            CHARACTER_ADMISSION.admission_sha256,
+        )
         self.assertEqual(receipt["media_id"], MEDIA_ID)
         self.assertEqual(receipt["media_sha256"], MEDIA_DIGEST)
         self.assertEqual(
@@ -290,6 +304,40 @@ class GovernedSpeechReleaseTests(unittest.TestCase):
             "presentation_stabilized_v1",
         )
         self.assertNotIn(TEXT, json.dumps(receipt))
+
+    def test_unregistered_character_cannot_release_governed_speech(self):
+        unregistered = PerformanceApplication(
+            "runtime:test:0001",
+            character_id=CHARACTER_ID,
+            package_digest=PACKAGE_DIGEST,
+            manifest_digest=MANIFEST_DIGEST,
+            allow_scoreless_governed_speech=True,
+        )
+        unregistered.accept_snapshot(speech_snapshot(), 1_000_000)
+
+        with self.assertRaises(GovernedSpeechError) as caught:
+            unregistered.register_governed_speech(
+                self.registration(),
+                now_wall_ms=1_100,
+                now_monotonic_us=1_020_000,
+            )
+
+        self.assertEqual(caught.exception.code, "character_not_runtime_admitted")
+
+    def test_admitted_character_rejects_a_foreign_persona(self):
+        with self.assertRaises(GovernedSpeechError) as caught:
+            self.application.register_governed_speech(
+                self.registration(
+                    approval_overrides={"persona_id": "persona:foreign"}
+                ),
+                now_wall_ms=1_100,
+                now_monotonic_us=1_020_000,
+            )
+
+        self.assertEqual(
+            caught.exception.code,
+            "persona_character_binding_mismatch",
+        )
 
     def test_expected_speech_id_guards_governed_interruption(self):
         self.application.register_governed_speech(
@@ -341,9 +389,10 @@ class GovernedSpeechReleaseTests(unittest.TestCase):
     def test_scoreless_registration_requires_explicit_compatibility_opt_in(self):
         strict = PerformanceApplication(
             "runtime:test:0001",
-            character_id="wizard-joe",
+            character_id=CHARACTER_ID,
             package_digest=PACKAGE_DIGEST,
             manifest_digest=MANIFEST_DIGEST,
+            character_registry=CHARACTER_REGISTRY,
         )
         strict.accept_snapshot(speech_snapshot(), 1_000_000)
 
@@ -594,10 +643,11 @@ class GovernedSpeechReleaseTests(unittest.TestCase):
 
         fresh = PerformanceApplication(
             "runtime:test:0001",
-            character_id="wizard-joe",
+            character_id=CHARACTER_ID,
             package_digest=PACKAGE_DIGEST,
             manifest_digest=MANIFEST_DIGEST,
             allow_scoreless_governed_speech=True,
+            character_registry=CHARACTER_REGISTRY,
         )
         fresh.accept_snapshot(speech_snapshot(), 1_000_000)
         fresh.register_governed_speech(

@@ -6,10 +6,10 @@ Date: 2026-07-25
 
 - Python repository: `jedisherpa/wizardjoeavatar`
 - Python branch: `codex/character-director`
-- Python commit: `f73a013614f75d389964a42637a45f20497e3140`
+- Python audited base commit: `7eb53f5c33ff6f7230fe68178735135013864735`
 - Prism repository: `jedisherpa/prism-geometry-talk`
 - Prism branch: `codex/character-director-prism`
-- Prism commit: `dd503d0`
+- Prism audited base commit: `8429624`
 - Python architecture: the existing ASCILINE Python runtime, frame hub,
   projector, scheduler, controller, and server
 - Prism architecture: the existing browser media observer and existing Rust
@@ -65,13 +65,27 @@ then rerunning the suite produced 314/314 passing tests.
 
 The latest integrated behavior now guarantees:
 
+- every governed persona is resolved from a strict runtime-admission contract;
 - non-Wizard governed speech must carry persona and voice identity;
 - the voice identity must match the timing artifact;
-- Serena is bound to her exact character and package;
+- persona, character, package, and admission identity are hash-bound;
+- reply approval freezes the exact active binding before TTS begins;
+- review-only characters are rejected before context capture, score
+  compilation, score publication, or registration;
 - the browser, Rust relay, and Python runtime validate an exact registration
   receipt before synchronized playback;
 - the receipt binds approval, alignment, turn, speech, character, package,
-  media, reconciliation, revocation, and mouth-presentation policy;
+  admission, persona, media, reconciliation, revocation, performance binding,
+  and mouth-presentation policy;
+- the browser refreshes and validates the binding before TTS, after score
+  adoption, and immediately before audio playback;
+- the Rust relay fetches and freezes a fresh Python binding while holding the
+  governed bridge lock, requires it to equal the approval-time binding, and
+  validates the Python receipt against it;
+- browser registration attempts are serialized, and any failure after a
+  correlated remote receipt triggers compensating revocation before playback;
+- Rust accepts compensation only after Python returns the exact inactive,
+  identity-cleared revocation receipt and generation;
 - a stale speech-stop callback cannot cancel a replacement utterance;
 - Serena speech uses package-authored whole-pose visemes instead of a competing
   body projection;
@@ -153,28 +167,23 @@ explicitly sets `allowScorelessCompatibility: true`; a `404` or `501` response
 without both opt-ins fails closed. The LaunchAgent installer now provisions a
 persistent app-owned `WIZARD_SCORE_ROOT`.
 
-## Highest-Impact Roster Architecture Gap
+## Highest-Impact Roster Architecture Gap: Remediated
 
-Persona-to-character identity is still implemented as a Serena-specific
-constant in both Python and Prism. The production registry binds character
-packages but does not declare persona identity. That is sufficient for the
-Serena gate and unsafe as a roster architecture.
+`CHARACTER_ADMISSION_CONTRACT_V1.md` defines the generic, hash-bound
+persona/character/package admission contract. The production registry is now
+schema version 2 and derives runtime authority from exact registry membership.
+Python publishes the tuple through performance binding V2; browser and Rust
+consumers independently verify the admission and binding digests; approval,
+timing, registration, receipt, and playback boundaries fail closed on drift.
 
-The scalable successor must:
+Wizard Joe's old binding V1 is accepted only for his exact frozen tuple. It is
+not a generic compatibility exemption. No additional character has been
+admitted by this architecture change.
 
-1. declare persona identity in a strict, hash-bound character admission
-   contract;
-2. derive allowed persona/character/package tuples from that contract;
-3. publish the active tuple through the existing performance binding;
-4. validate it at approval, timing, registration, receipt, and playback
-   boundaries;
-5. fail closed for review-only or unregistered characters;
-6. preserve Wizard Joe V1 compatibility without weakening non-Wizard checks.
-
-No additional character should enter the production registry before this
-identity contract exists. This gate is independent from automatic score
-attachment: identity controls who may perform, while score attachment controls
-what purposeful performance they execute.
+The remaining protocol gap is the media-session snapshot itself: its current V1
+shape carries character and package identity while persona/admission continuity
+is held in the separately verified performance binding. A media-session V2 must
+carry the complete tuple without silently changing V1.
 
 ## Character Parity State
 
@@ -205,10 +214,14 @@ superseded, rejected, or diagnostic before any evidence commit.
 
 ## Next Gates
 
-The next runtime implementation gate is automatic live character-bound score
-compilation, publication, and snapshot attachment. The next roster-admission
-gate is the generic persona/character/package identity contract. The next
-acceptance gate after both is a current audible
+Automatic live character-bound score compilation, publication, and snapshot
+attachment and the generic persona/character/package admission contract are
+implemented. The next protocol gate is a versioned media-session V2 that binds
+persona and admission identity into the accepted snapshot and preserves exact
+tuple continuity across browser, Rust, and Python.
+
+After that protocol gate, characters must be admitted one at a time under
+`CHARACTER_ADMISSION_CONTRACT_V1.md`. The next acceptance gate is a current audible
 Prism-to-Python governed-speech scenario that proves:
 
 - exact identity receipt correlation;

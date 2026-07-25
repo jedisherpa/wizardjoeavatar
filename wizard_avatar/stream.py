@@ -11,6 +11,7 @@ from concurrent.futures import ThreadPoolExecutor
 from dataclasses import dataclass, field, replace as dataclass_replace
 from itertools import count
 from collections import deque
+from pathlib import Path
 from typing import Dict, Mapping, Optional, Set
 
 from .animation_trace import (
@@ -19,6 +20,7 @@ from .animation_trace import (
     ANIMATION_TRUTH_TRACE_VERSION,
 )
 from .character_capabilities import derive_character_capability_manifest
+from .character_registry import load_character_registry
 from .commanding import CommandAckV1, CommandEnvelopeV1, OrderedCommandInbox, QueuedCommand
 from .frame_hash import frame_hash
 from .frame_source import ProceduralWizardFrameSource
@@ -27,6 +29,7 @@ from .protocol import encode_keyframe
 from .performance_application import PerformanceApplication
 from .performance_context import PerformanceContextV1
 from .performance_release import (
+    GovernedSpeechError,
     GovernedSpeechRegistrationV1,
     PerformanceContextRequestV1,
 )
@@ -166,6 +169,7 @@ class WizardFrameHub:
         score_repository: Optional[CompiledScoreRepository] = None,
         max_subscribers: int = DEFAULT_MAX_SUBSCRIBERS,
         allow_scoreless_governed_speech: bool = False,
+        character_registry_path: Optional[Path] = None,
     ) -> None:
         if (
             isinstance(max_subscribers, bool)
@@ -197,6 +201,11 @@ class WizardFrameHub:
             self.frame_source,
             capability_manifest,
         )
+        registry = (
+            load_character_registry()
+            if character_registry_path is None
+            else load_character_registry(character_registry_path)
+        )
         self.performance = PerformanceApplication(
             self.runtime_epoch,
             score_repository=score_repository,
@@ -218,6 +227,7 @@ class WizardFrameHub:
             admitted_clip_ids=admitted_clip_ids,
             admitted_node_ids=admitted_node_ids,
             allow_scoreless_governed_speech=allow_scoreless_governed_speech,
+            character_registry=registry,
         )
         self.command_inbox = OrderedCommandInbox(self.runtime_epoch)
         self.replay_log = ReplayLog(
@@ -448,18 +458,7 @@ class WizardFrameHub:
 
         await self.start()
         async with self._current_lock():
-            return {
-                "schema_version": 1,
-                "wizard_runtime_epoch": self.performance.runtime_epoch,
-                "character_id": self.performance.character_id,
-                "package_digest": self.performance.package_digest,
-                "reconciliation_generation": (
-                    self.performance.scheduler.coordinator.reconciliation_generation
-                ),
-                "revocation_generation": (
-                    self.performance.governed_speech.revocation_generation
-                ),
-            }
+            return dict(self.performance.performance_binding())
 
     async def capture_performance_context(
         self,
@@ -536,6 +535,9 @@ class WizardFrameHub:
                 now_monotonic_us=time.perf_counter_ns() // 1000,
             )
             receipt = dict(self.performance.governed_speech.diagnostics())
+            receipt["binding_sha256"] = self.performance.performance_binding()[
+                "binding_sha256"
+            ]
             receipt.update(authoritative_score)
             return receipt
 

@@ -1,6 +1,10 @@
+import json
+import shutil
+import tempfile
 import unittest
 from pathlib import Path
 
+from wizard_avatar.character_registry import CharacterAdmissionV1
 from wizard_avatar.frame_source import ProceduralWizardFrameSource
 from wizard_avatar.governed_performance import GovernedPerformanceApprovalV1
 from wizard_avatar.media_session import MediaSessionSnapshotV1
@@ -34,13 +38,48 @@ SERENA_PACKAGE_PATH = (
 
 
 class SerenaPackageControlTests(unittest.IsolatedAsyncioTestCase):
-    def create_source(self):
+    def create_source(self, package_path=SERENA_PACKAGE_PATH):
         return ProceduralWizardFrameSource(
             cols=96,
             rows=54,
             fps=24,
-            character_package_path=SERENA_PACKAGE_PATH,
+            character_package_path=package_path,
         )
+
+    def create_admitted_source(self):
+        temporary = tempfile.TemporaryDirectory()
+        self.addCleanup(temporary.cleanup)
+        root = Path(temporary.name)
+        package_root = root / "serena_quill"
+        shutil.copytree(SERENA_PACKAGE_PATH.parent, package_root)
+        package_path = package_root / SERENA_PACKAGE_PATH.name
+        source = self.create_source(package_path)
+        package = source.character_package
+        admission = CharacterAdmissionV1.build(
+            persona_id="serena-quill",
+            character_id=package.character_id,
+            package_sha256=package.package_sha256,
+        )
+        registry_path = root / "character_registry.json"
+        registry_path.write_text(
+            json.dumps(
+                {
+                    "schema_version": 2,
+                    "default_character_id": package.character_id,
+                    "characters": [
+                        {
+                            "character_id": package.character_id,
+                            "persona_id": admission.persona_id,
+                            "package": str(package_path.relative_to(root)),
+                            "package_sha256": package.package_sha256,
+                            "admission_sha256": admission.admission_sha256,
+                        }
+                    ],
+                }
+            ),
+            encoding="utf-8",
+        )
+        return source, registry_path
 
     def test_staffless_package_state_is_in_public_runtime_vocabulary(self):
         source = self.create_source()
@@ -256,10 +295,11 @@ class SerenaPackageControlTests(unittest.IsolatedAsyncioTestCase):
         await hub.stop()
 
     async def test_governed_speech_viseme_owns_serenas_whole_pose(self):
-        source = self.create_source()
+        source, registry_path = self.create_admitted_source()
         hub = WizardFrameHub(
             source,
             allow_scoreless_governed_speech=True,
+            character_registry_path=registry_path,
         )
         performance = hub.performance
         package_digest = performance.package_digest
@@ -417,6 +457,65 @@ class SerenaPackageControlTests(unittest.IsolatedAsyncioTestCase):
             "whole_pose_speech_authority",
             source.controller.state.performance_suppression_codes,
         )
+        await hub.stop()
+
+    async def test_review_only_serena_cannot_enter_the_governed_pipeline(self):
+        source = self.create_source()
+        hub = WizardFrameHub(
+            source,
+            allow_scoreless_governed_speech=True,
+        )
+        performance = hub.performance
+        pending = snapshot_mapping(
+            sequence=0,
+            media_epoch=4,
+            state="paused",
+            position_ms=0,
+            source_slot="speech",
+            kind="tts",
+            media_id=MEDIA_ID,
+            mode="speech",
+            with_hashes=True,
+        )
+        pending["performance"].update(
+            {
+                "score_id": None,
+                "score_revision": None,
+                "score_sha256": None,
+                "character_id": performance.character_id,
+                "character_package_sha256": performance.package_digest,
+            }
+        )
+        performance.accept_snapshot(
+            MediaSessionSnapshotV1.from_mapping(pending),
+            1_000_000,
+        )
+
+        with self.assertRaises(GovernedSpeechError) as context_denied:
+            performance.capture_performance_context(
+                PerformanceContextRequestV1.from_mapping(
+                    context_request_mapping()
+                ),
+                source.controller,
+                1_010_000,
+            )
+        with self.assertRaises(GovernedSpeechError) as binding_denied:
+            await hub.performance_binding()
+        with self.assertRaises(GovernedSpeechError) as compile_denied:
+            performance.compile_live_speech_score(None, duration_ms=1)
+        with self.assertRaises(GovernedSpeechError) as publish_denied:
+            performance.publish_live_speech_score(None)
+
+        for denied in (
+            context_denied,
+            binding_denied,
+            compile_denied,
+            publish_denied,
+        ):
+            self.assertEqual(
+                denied.exception.code,
+                "character_not_runtime_admitted",
+            )
         await hub.stop()
 
 

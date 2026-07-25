@@ -614,7 +614,13 @@ def create_app(
     @app.get("/api/avatar/wizard/performance-binding")
     async def performance_binding(request: FastAPIRequest):
         require_connector(request)
-        return await frame_hub.performance_binding()
+        try:
+            return await frame_hub.performance_binding()
+        except GovernedSpeechError as exc:
+            raise HTTPException(
+                status_code=409,
+                detail={"code": exc.code, "path": exc.path},
+            ) from exc
 
     @app.post("/api/avatar/wizard/performance-context")
     async def performance_context(request: FastAPIRequest):
