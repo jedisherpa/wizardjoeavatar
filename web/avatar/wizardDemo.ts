@@ -46,15 +46,22 @@ async function start() {
       let playing = true;
       let frameIndex = 0;
       let framesDrawn = 0;
+      let completed = false;
       const frameInterval = 1000 / Number(sequence.fps);
       let stopped = false;
       const drawLoop = async () => {
-        if (playing) {
+        if (playing && !completed) {
           const pixels = await loadPose(sequence.pose_ids[frameIndex]);
           if (stopped) return;
           canvas.draw(pixels);
-          frameIndex = (frameIndex + 1) % sequence.pose_ids.length;
           framesDrawn++;
+          const finalFrame = frameIndex === sequence.pose_ids.length - 1;
+          if (finalFrame && !sequence.loop) {
+            completed = true;
+            playing = false;
+          } else {
+            frameIndex = (frameIndex + 1) % sequence.pose_ids.length;
+          }
         }
         setTimeout(drawLoop, playing ? frameInterval : 80);
       };
@@ -62,6 +69,10 @@ async function start() {
       addEventListener("message", (event) => {
         if (event.origin !== location.origin || event.data?.type !== "wizard-hd-play") return;
         playing = Boolean(event.data.playing);
+        if (playing && completed) {
+          completed = false;
+          frameIndex = 0;
+        }
       });
       document.body.dataset.hdReviewStep = "ready";
       window.__wizardJoeMetrics = () => ({
@@ -73,6 +84,7 @@ async function start() {
         poseId: sequence.pose_ids[(frameIndex + sequence.pose_ids.length - 1) % sequence.pose_ids.length],
         framesDrawn,
         playing,
+        completed,
         libraryIndexSha256: manifest.library_index_sha256,
         canvas: canvas.getMetrics(),
       });

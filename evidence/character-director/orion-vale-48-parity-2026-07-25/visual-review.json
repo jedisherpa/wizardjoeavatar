@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "character_id": "orion-vale",
+  "candidate_pose_count": 48,
+  "review_url": "http://127.0.0.1:8665/",
+  "review_projection": true,
+  "runtime_admitted": false,
+  "product_visual_approval": "pending",
+  "library_index_sha256": "4e2333aedde7d48edae5b9431c97f275d4aeab38441211a6fdaa26c87a93a943",
+  "artifact_sha256": "53b769a5a6c1ef2ed9c129e750699614f4ed3d87cd21436ada4e0cd60bdd70ab",
+  "checks": {
+    "all_authored_poses_projected_full_size": true,
+    "uncropped_silhouettes": true,
+    "transparent_backgrounds": true,
+    "g7_loop_verified": true,
+    "g8_holds_final_pose": true,
+    "g8_final_pose_id": "orion_vale_motion_048"
+  },
+  "screenshots": [
+    {
+      "path": "8665-side-by-side.png",
+      "sha256": "1b79116833e2ee856b91ed58dc2cf480ae71954c8c8f00fff62f72508519a161"
+    },
+    {
+      "path": "g8-final-hold-pose-048.png",
+      "sha256": "507632d67b9b03e8c1675d782742e73a99a6bc3846be89baddbee6cd0b659eb7"
+    }
+  ]
+}

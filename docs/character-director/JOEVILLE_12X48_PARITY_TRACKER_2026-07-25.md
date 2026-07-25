@@ -145,6 +145,36 @@ Joe on the left and the character currently under work on the right. The
 alternate projector accepts only indexes with `review_projection: true` and
 `runtime_admitted: false`; admitted indexes fail closed.
 
+## Authored Parity Progress
+
+Orion Vale is the first incomplete roster character to reach a complete
+48-pose review candidate. His immutable supplied poses `001`-`036` were merged
+with 12 new full-size RGBA poses for:
+
+- `g7`: listen, consider, explain, and recover.
+- `g8`: alert, hold, boundary, verify, redirect, and grounded exit prep.
+
+The build preserves the supplied 36 RGBA records byte-for-byte. New inputs are
+canonical 1254x1254 transparent PNG authoring sources; the projector reads the
+compiled `.wjpose`, not those PNGs. Two clean-directory builds produced
+matching artifact, index, contact-sheet, reconstruction, and motion-contract
+hashes. All 12 new poses passed individual full-size projection on port 8665.
+Product visual approval is still pending and runtime admission remains false.
+
+| Character | Candidate poses | Missing poses | State |
+| --- | ---: | ---: | --- |
+| Orion Vale | 48 | 0 | Full-size technical review passed; product visual approval pending |
+| Remaining roster | 426 | 102 | Authoring/review required |
+| **Total** | **474** | **102** | **576 target slots** |
+
+Orion candidate receipts:
+
+- Artifact: `53b769a5a6c1ef2ed9c129e750699614f4ed3d87cd21436ada4e0cd60bdd70ab`
+- Library index: `4e2333aedde7d48edae5b9431c97f275d4aeab38441211a6fdaa26c87a93a943`
+- Reconstruction: `9bdeabec0c0691d9b8bee258932ed80927605b16ebc5c9458369c85cde2f89df`
+- Review motion contract: `ce5ebba539f5511ba70e089e4e9840ce22b536fd0a039eb7f37edbf09fed1738`
+- Contact sheet: `389f03a1a742366df723510809be0d1466699976fa768c73ad8444b60b3e0271`
+
 ## Roster Boundary
 
 The archives also contain Crystail. Crystail remains
@@ -158,14 +188,15 @@ and count parity rather than an automatic quality waiver.
 
 ## Next Build Order
 
-1. Author the 114 missing frames as explicitly new art, one character at a
+1. Author the 102 remaining frames as explicitly new art, one character at a
    time, using the character's compiled supplied set as visual authority.
 2. Rebuild each completed 48-pose artifact twice and require identical hashes.
 3. Review every full-size frame and motion sequence beside approved HD Wizard
    Joe on port 8665.
 4. Record product approval against the exact artifact and library-index hashes.
-5. Compile character packages, semantic motion graphs, contacts, transitions,
-   and interruption behavior only after visual approval.
+5. Preserve review motion contracts during authoring; compile admitted
+   character packages and production semantic graphs only after visual
+   approval.
 6. Create the character's exact persona/character/package admission only after
    package-level acceptance passes.
 7. Keep runtime admission denied until the admission digest, governed

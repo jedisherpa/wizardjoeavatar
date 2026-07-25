@@ -1,0 +1,351 @@
+{
+  "approval_state": "pending_visual_parity",
+  "authoring_brief_sha256": "417f6555e21f4005d7756277d70f3cb6b2f723962bd2a633b3c2b16dd7ae9f2c",
+  "authority_manifest_sha256": "740f35730f4aa1e6c6ef96be80115c5b0e117397f792d57fdf5360452bbe78c8",
+  "canonicalization": "integer_translation_only_no_resampling",
+  "character_id": "orion-vale",
+  "existing_artifact_sha256": "e621945a608fd599f7a277fe4dd54e05886667795addb853485f06cc7fb804c9",
+  "existing_reconstruction_sha256": "31b00984c19b3c11d85784e6411701c252e4bb3ce401a568309fb49e1741694f",
+  "generation_method": "built_in_imagegen_flat_chroma_then_local_alpha_extraction",
+  "profile_id": "wizardjoe_hd_alpha_1254_v001",
+  "runtime_admitted": false,
+  "schema_version": 1,
+  "sequences": {
+    "g7": {
+      "fps": 8,
+      "frames": [
+        {
+          "alpha_extracted_path": "alpha-extracted/orion_vale_motion_037.png",
+          "alpha_extracted_sha256": "03f1baf194b54adf4d47234de3d3913c8da82f560b97ec5696c0ec7cc7585dd5",
+          "authorship": "authored_full_size_imagegen_v1",
+          "brief_id": "orion-g7-receipt",
+          "canonical_bbox": [
+            414,
+            146,
+            841,
+            1185
+          ],
+          "chroma_source_path": "chroma-source/orion_vale_motion_037.png",
+          "chroma_source_sha256": "b7be8a00bfdce3a3c47268327d65aad192b2fbb615cbd7656d55ad67f712d6e5",
+          "continuity": "Clean entry from front idle; preserve planted contacts.",
+          "forbidden": "Wave, walking stride, perfectly symmetrical mannequin stance.",
+          "frame_index": 1,
+          "pose_id": "orion_vale_motion_037",
+          "pose_summary": "Attentive planted receipt with soft asymmetry.",
+          "rgba_sha256": "7622e4fd948d902e3da67d9a3a42826654b9b4d2a2573e42d4d57641e948bdf1",
+          "slot_id": "motion-037",
+          "source_path": "frames/orion_vale_motion_037.png",
+          "source_sha256": "4075581e1dd8089610e72b831eae54743a12609e1c7010aa59fe35e2a40e514d"
+        },
+        {
+          "alpha_extracted_path": "alpha-extracted/orion_vale_motion_038.png",
+          "alpha_extracted_sha256": "8325e7bbaa7c0edb0ae9cdb7a652fe636d668570bdf751171931094bd4bb50c2",
+          "authorship": "authored_full_size_imagegen_v1",
+          "brief_id": "orion-g7-active-listen",
+          "canonical_bbox": [
+            423,
+            197,
+            830,
+            1185
+          ],
+          "chroma_source_path": "chroma-source/orion_vale_motion_038.png",
+          "chroma_source_sha256": "6c4e1cbee00d73cd671eb960c1ea82dbb04382fcdc66cee32cc39167db72b778",
+          "continuity": "Head, chest, and shoulders advance subtly from frame 037.",
+          "forbidden": "Crouch, scale change, or foot slide.",
+          "frame_index": 2,
+          "pose_id": "orion_vale_motion_038",
+          "pose_summary": "Forward listening incline with curious head tilt.",
+          "rgba_sha256": "4b28a155afb6377f1d7ed512bcb2e58713a66a5ff3a1a7995f2c5fc5e74ee30f",
+          "slot_id": "motion-038",
+          "source_path": "frames/orion_vale_motion_038.png",
+          "source_sha256": "33bdcb36c57eea884c574da200dc6c3dc2f4f748a86e1d5b33d4a5c97fddef2c"
+        },
+        {
+          "alpha_extracted_path": "alpha-extracted/orion_vale_motion_039.png",
+          "alpha_extracted_sha256": "c6af32b21300f5f309ea86bd865b47bee4cf139c5e86aeeddbd6f91df1932ac0",
+          "authorship": "authored_full_size_imagegen_v1",
+          "brief_id": "orion-g7-consider",
+          "canonical_bbox": [
+            430,
+            134,
+            824,
+            1185
+          ],
+          "chroma_source_path": "chroma-source/orion_vale_motion_039.png",
+          "chroma_source_sha256": "c24cc213907bed0645c09379d09ed2308dca38bd7e6a643b74fffccf0c5df969",
+          "continuity": "Right hand follows a readable low-to-chin arc.",
+          "forbidden": "Obscured glasses, hand fused into beard, exaggerated sadness.",
+          "frame_index": 3,
+          "pose_id": "orion_vale_motion_039",
+          "pose_summary": "Hand-to-chin consideration with downturned gaze.",
+          "rgba_sha256": "258d7b869809b9a68ac4391faafbe13f4a30cfa86b66704b0026f726ea23de7d",
+          "slot_id": "motion-039",
+          "source_path": "frames/orion_vale_motion_039.png",
+          "source_sha256": "621c427480aad4d5506a93deeba4265277a98c79e23b877ed8e85360786ed555"
+        },
+        {
+          "alpha_extracted_path": "alpha-extracted/orion_vale_motion_040.png",
+          "alpha_extracted_sha256": "e9dc8c0551a9de880c21351c74846775bdcb821b68aba0ad52ada57520d6c88d",
+          "authorship": "authored_full_size_imagegen_v1",
+          "brief_id": "orion-g7-realization",
+          "canonical_bbox": [
+            422,
+            150,
+            833,
+            1185
+          ],
+          "chroma_source_path": "chroma-source/orion_vale_motion_040.png",
+          "chroma_source_sha256": "1d9425766d041c28496e69316cecb016fbc9239a406f9a0c650bffb2daa795f9",
+          "continuity": "Thinking hand separates and rotates palm-up near sternum.",
+          "forbidden": "Hand teleport, pointing, or identity drift.",
+          "frame_index": 4,
+          "pose_id": "orion_vale_motion_040",
+          "pose_summary": "Realization preparation with returning eye contact.",
+          "rgba_sha256": "4d153c68d121d2c4b0a32b3d791fff3afba0b3c56f21b41a323e0a2b70dce41c",
+          "slot_id": "motion-040",
+          "source_path": "frames/orion_vale_motion_040.png",
+          "source_sha256": "928fa997ae0e7f499c123a598ac164a10a7a7a5b1982fa8e462317e0291c3730"
+        },
+        {
+          "alpha_extracted_path": "alpha-extracted/orion_vale_motion_041.png",
+          "alpha_extracted_sha256": "abb5eb92525207e76f14be7aa9b739fdc36130a38406c152b9ac993ceb49e47b",
+          "authorship": "authored_full_size_imagegen_v1",
+          "brief_id": "orion-g7-explanation",
+          "canonical_bbox": [
+            346,
+            158,
+            908,
+            1185
+          ],
+          "chroma_source_path": "chroma-source/orion_vale_motion_041.png",
+          "chroma_source_sha256": "c3ca436c8ff7b6cc19b8e18b851a2c2c508396e07ec220cf6e4d2f589b6a9447",
+          "continuity": "Principal open-palm stroke from frame 040.",
+          "forbidden": "Wave, both arms spreading, or sales-pitch exaggeration.",
+          "frame_index": 5,
+          "pose_id": "orion_vale_motion_041",
+          "pose_summary": "One-handed open-palm explanation.",
+          "rgba_sha256": "b0853a1fb70ef1edd9f489da02dbe9143e53ef6e845480a15b3e6ec71951f4a9",
+          "slot_id": "motion-041",
+          "source_path": "frames/orion_vale_motion_041.png",
+          "source_sha256": "b7bb472162cab5316aada8b72af3b94bcbc3ed4290a6b2c80ecb61a1b5bb4ad9"
+        },
+        {
+          "alpha_extracted_path": "alpha-extracted/orion_vale_motion_042.png",
+          "alpha_extracted_sha256": "c2d71ce21ad470e7846ced8d8032273e50d53b38dcf5cc7a496514a5a04ff638",
+          "authorship": "authored_full_size_imagegen_v1",
+          "brief_id": "orion-g7-recovery",
+          "canonical_bbox": [
+            421,
+            149,
+            833,
+            1185
+          ],
+          "chroma_source_path": "chroma-source/orion_vale_motion_042.png",
+          "chroma_source_sha256": "196da74ec25d2947bd315266e054b9cb1a7e03b1e17a169af013a4c420a57cd9",
+          "continuity": "Retracts cleanly toward frame 037 without dropping the arm.",
+          "forbidden": "Exact idle duplicate, abrupt arm drop, root displacement.",
+          "frame_index": 6,
+          "pose_id": "orion_vale_motion_042",
+          "pose_summary": "Warm resolved recovery with hand near sternum.",
+          "rgba_sha256": "a49e3587323c71c4ffd8a1eaf46878500f5a1245fc26b7b92f0004c2ed0d7eaa",
+          "slot_id": "motion-042",
+          "source_path": "frames/orion_vale_motion_042.png",
+          "source_sha256": "e05e355a24e0d223d4da08a90ddb6b41f428ab40a53394d70c003a3439e0d426"
+        }
+      ],
+      "intent": "listen_consider_explain",
+      "loop": true,
+      "motion_contract": {
+        "entry_handoffs": [
+          "front_idle"
+        ],
+        "exit_handoffs": [
+          "front_idle",
+          "g8"
+        ],
+        "family": "communication",
+        "hold_frame_indices": [
+          2,
+          5
+        ],
+        "interrupt_policy": "marker_safe",
+        "interruptible_frame_indices": [
+          1,
+          2,
+          6
+        ],
+        "loop_mode": "loop",
+        "root_policy": "fixed",
+        "support_policy": "dual_foot_grounded"
+      }
+    },
+    "g8": {
+      "fps": 8,
+      "frames": [
+        {
+          "alpha_extracted_path": "alpha-extracted/orion_vale_motion_043.png",
+          "alpha_extracted_sha256": "57ab4a696a19ac5abc91d9f20946d9995b19c1574d44605451f9f2c066a79ec4",
+          "authorship": "authored_full_size_imagegen_v1",
+          "brief_id": "orion-g8-alert",
+          "canonical_bbox": [
+            416,
+            145,
+            839,
+            1185
+          ],
+          "chroma_source_path": "chroma-source/orion_vale_motion_043.png",
+          "chroma_source_sha256": "5696043495bbcd24972b470e0d05abb46ba3810064be640cad72f330e73b0d00",
+          "continuity": "Enters from front idle or frame 042.",
+          "forbidden": "Hostility, smile, wave, or duplicated idle.",
+          "frame_index": 1,
+          "pose_id": "orion_vale_motion_043",
+          "pose_summary": "Calm alert preparation.",
+          "rgba_sha256": "a59eec4f5471808fd8eece764744f16d2b190ac8e4d3b00a7ed50add9e2fa622",
+          "slot_id": "motion-043",
+          "source_path": "frames/orion_vale_motion_043.png",
+          "source_sha256": "f9ccf956e2282a7872cb5631813ba64b4b5b2228b38fc9b41c269b0a156c05c0"
+        },
+        {
+          "alpha_extracted_path": "alpha-extracted/orion_vale_motion_044.png",
+          "alpha_extracted_sha256": "626d16ef62244d27700126ce72dde3840f2cd81e8d7b68f72acc7de9338d3866",
+          "authorship": "authored_full_size_imagegen_v1",
+          "brief_id": "orion-g8-hold-anticipation",
+          "canonical_bbox": [
+            424,
+            162,
+            830,
+            1185
+          ],
+          "chroma_source_path": "chroma-source/orion_vale_motion_044.png",
+          "chroma_source_sha256": "8150b26b97d83af025b48319da4ef60a168e11526057f2a3cf1628aa0d667e84",
+          "continuity": "Right forearm folds forward while feet remain locked.",
+          "forbidden": "Raised side-wave path, shrug, or backward foot slide.",
+          "frame_index": 2,
+          "pose_id": "orion_vale_motion_044",
+          "pose_summary": "Low centered hold anticipation.",
+          "rgba_sha256": "eb37baad97f54e4f6766d57b024035c60665ded236a0dbd3c07ebbfaa3d3ac55",
+          "slot_id": "motion-044",
+          "source_path": "frames/orion_vale_motion_044.png",
+          "source_sha256": "0b1b4c1b3eed9b0a945cce394df0cd17aff1744c4be82094f0bc3966f4368373"
+        },
+        {
+          "alpha_extracted_path": "alpha-extracted/orion_vale_motion_045.png",
+          "alpha_extracted_sha256": "6e8bda76c2fee8d19ee1bf520fa7129703c07ebc3118cca2d18d15b021eb3682",
+          "authorship": "authored_full_size_imagegen_v1",
+          "brief_id": "orion-g8-boundary",
+          "canonical_bbox": [
+            440,
+            180,
+            814,
+            1185
+          ],
+          "chroma_source_path": "chroma-source/orion_vale_motion_045.png",
+          "chroma_source_sha256": "29790fb9cab072bd10e38cf2521b6783778e210ad6ff254a3b285eca66321de8",
+          "continuity": "Principal centered boundary stroke from frame 044.",
+          "forbidden": "Hand above shoulder, cheerful wave, fist, or threat.",
+          "frame_index": 3,
+          "pose_id": "orion_vale_motion_045",
+          "pose_summary": "Calm readable stop palm at sternum height.",
+          "rgba_sha256": "23d13b536e0e1224ab10b48d5060041d280a7772b29aca5e5ecb8a3f818c84fd",
+          "slot_id": "motion-045",
+          "source_path": "frames/orion_vale_motion_045.png",
+          "source_sha256": "f1a496580355778c0c2e09f8fbe01aa9ecf920fee88e23c5f33c8369c31dd567"
+        },
+        {
+          "alpha_extracted_path": "alpha-extracted/orion_vale_motion_046.png",
+          "alpha_extracted_sha256": "a301f10a471c12a041d7d2f8497e2eedc6ed675323ebf5c8e95416190ee336f1",
+          "authorship": "authored_full_size_imagegen_v1",
+          "brief_id": "orion-g8-verify",
+          "canonical_bbox": [
+            389,
+            144,
+            865,
+            1185
+          ],
+          "chroma_source_path": "chroma-source/orion_vale_motion_046.png",
+          "chroma_source_sha256": "5b1e8f8c24738308fa2d0b0c981a2c1e8891bb410fe46f6722f33d75b1363af2",
+          "continuity": "Eyes lead a controlled quarter-turn while stop hand releases.",
+          "forbidden": "Two full gestures, crossed arms, or root pop.",
+          "frame_index": 4,
+          "pose_id": "orion_vale_motion_046",
+          "pose_summary": "Verify and release into route selection.",
+          "rgba_sha256": "c590518b991d621472dee646dbcd449951d1f7c6669cc07693f729e2559fc30e",
+          "slot_id": "motion-046",
+          "source_path": "frames/orion_vale_motion_046.png",
+          "source_sha256": "932f5f67e16a4e00b692fc8d180440450f31881492dc47563fa4d926c70a721c"
+        },
+        {
+          "alpha_extracted_path": "alpha-extracted/orion_vale_motion_047.png",
+          "alpha_extracted_sha256": "60e23fe127789ecca775455938f6f4d67f214c314dcd432c6c55e6b43caafe6d",
+          "authorship": "authored_full_size_imagegen_v1",
+          "brief_id": "orion-g8-redirect",
+          "canonical_bbox": [
+            344,
+            153,
+            909,
+            1185
+          ],
+          "chroma_source_path": "chroma-source/orion_vale_motion_047.png",
+          "chroma_source_sha256": "358b4c254b712cd028869173ab96db65d3f67041677b6da962c73d7ee483f859",
+          "continuity": "Completes the turn and acknowledges viewer.",
+          "forbidden": "Pointing, wave shape, or copied profile pose.",
+          "frame_index": 5,
+          "pose_id": "orion_vale_motion_047",
+          "pose_summary": "Open-hand directional redirect.",
+          "rgba_sha256": "70a9d94ed579e6e3787555183c3c978942a6f52e6535d0afa7c1f70f4e117dc3",
+          "slot_id": "motion-047",
+          "source_path": "frames/orion_vale_motion_047.png",
+          "source_sha256": "d609f49f53d67d4065e8295c6867fa1733fc688aa05e3927662240d48bf05098"
+        },
+        {
+          "alpha_extracted_path": "alpha-extracted/orion_vale_motion_048.png",
+          "alpha_extracted_sha256": "31984f0940bb3cd8bd64f3f1955cb42e841a9a9514bc077d6b6034c25ff00cb6",
+          "authorship": "authored_full_size_imagegen_v1",
+          "brief_id": "orion-g8-exit-preparation",
+          "canonical_bbox": [
+            388,
+            156,
+            866,
+            1185
+          ],
+          "chroma_source_path": "chroma-source/orion_vale_motion_048.png",
+          "chroma_source_sha256": "3ca4c3c29c3bcf2d309c6f2f447f070cc9afc1869a2add2ee39575da5f6be6c0",
+          "continuity": "Trailing toe remains in contact for profile-walk handoff.",
+          "forbidden": "Airborne foot, full stride, high gesture, or coat teleport.",
+          "frame_index": 6,
+          "pose_id": "orion_vale_motion_048",
+          "pose_summary": "Three-quarter invitation and grounded pre-step.",
+          "rgba_sha256": "fd2cd46a87d782b79f2bf0fe1489045d4077adfd5df5beccac6315ebebbd4855",
+          "slot_id": "motion-048",
+          "source_path": "frames/orion_vale_motion_048.png",
+          "source_sha256": "66ae9690e95abc1a00d28e69b0713c8a1b2b4a41a5d1e875bf831cbc659fb1f4"
+        }
+      ],
+      "intent": "boundary_verify_redirect",
+      "loop": false,
+      "motion_contract": {
+        "entry_handoffs": [
+          "front_idle",
+          "g7"
+        ],
+        "exit_handoffs": [
+          "front_idle",
+          "profile_walk"
+        ],
+        "family": "governance_boundary",
+        "hold_frame_indices": [
+          3
+        ],
+        "interrupt_policy": "marker_safe",
+        "interruptible_frame_indices": [
+          1,
+          3,
+          6
+        ],
+        "loop_mode": "hold_last",
+        "root_policy": "fixed",
+        "support_policy": "dual_foot_grounded"
+      }
+    }
+  }
+}
