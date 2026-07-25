@@ -1,0 +1,182 @@
+{
+  "approval_state": "pending_visual_parity",
+  "authoring_brief_sha256": "736e39954582e12ca9216414edde0d24514d600b2f3afb96a25c11a3402fd5a6",
+  "authority_manifest_sha256": "740f35730f4aa1e6c6ef96be80115c5b0e117397f792d57fdf5360452bbe78c8",
+  "canonicalization": "integer_translation_only_no_resampling",
+  "character_id": "aurelia-finch",
+  "existing_artifact_sha256": "66efd7f3450e768ef3ec5426ff590aaddfc83d26838ad42c29689faf8eeb5f8d",
+  "existing_reconstruction_sha256": "5b15587ed75d0929e668f911db12eb5bb3ac0e0ebceca09b9f4111ac2f983573",
+  "generation_method": "built_in_imagegen_flat_chroma_then_local_alpha_extraction",
+  "profile_id": "wizardjoe_hd_alpha_1254_v001",
+  "runtime_admitted": false,
+  "schema_version": 1,
+  "sequences": {
+    "g7": {
+      "fps": 8,
+      "frames": [
+        {
+          "alpha_extracted_path": "alpha-extracted/aurelia_finch_motion_043.png",
+          "alpha_extracted_sha256": "13cae0d5b50e2d645b15b9c86305223c5909c12f2c7d5eda94858bb7bab47f34",
+          "authorship": "authored_full_size_imagegen_v1",
+          "brief_id": "aurelia-g7-receipt",
+          "canonical_bbox": [
+            468,
+            219,
+            786,
+            1185
+          ],
+          "chroma_source_path": "chroma-source/aurelia_finch_motion_043.png",
+          "chroma_source_sha256": "25aa0a5fe17be18ae8aad783cb900bfff141ea1dd92aba197ab5e2c41a64f0a9",
+          "continuity": "Clean front-facing entry from planted idle with the closed book resting at her left hip.",
+          "forbidden": "Profile view, walking stride, wave, missing book, or identity drift.",
+          "frame_index": 1,
+          "pose_id": "aurelia_finch_motion_043",
+          "pose_summary": "Attentive front-facing receipt with soft asymmetry and closed book.",
+          "rgba_sha256": "604ba24480d962675bfc5e76802e5ff17e74472dc2102ecca6eab6ddfa1ab74c",
+          "slot_id": "motion-043",
+          "source_path": "frames/aurelia_finch_motion_043.png",
+          "source_sha256": "0b5e6b784c36f7b4b8752babb2126a666c986ab98fc2e2af61bf1d233cf244f0"
+        },
+        {
+          "alpha_extracted_path": "alpha-extracted/aurelia_finch_motion_044.png",
+          "alpha_extracted_sha256": "0fdefede7929f0b92b1249643c8f8d17bb57d13b68e73adcff26d3f80d135827",
+          "authorship": "authored_full_size_imagegen_v1",
+          "brief_id": "aurelia-g7-raise-book",
+          "canonical_bbox": [
+            474,
+            215,
+            780,
+            1185
+          ],
+          "chroma_source_path": "chroma-source/aurelia_finch_motion_044.png",
+          "chroma_source_sha256": "8a53a94bf6fe513c9f700fca396ccd822886064bd0179cf140cc8d7f378f1df0",
+          "continuity": "The closed book rises from her left hip toward her sternum while both feet remain locked.",
+          "forbidden": "Open book, arm teleport, foot slide, or hat and hair drift.",
+          "frame_index": 2,
+          "pose_id": "aurelia_finch_motion_044",
+          "pose_summary": "Preparatory book raise with focused eye line.",
+          "rgba_sha256": "bd86ab62ea86ac4305e744a2ef8087965d191732cc280a55354698b192d70065",
+          "slot_id": "motion-044",
+          "source_path": "frames/aurelia_finch_motion_044.png",
+          "source_sha256": "1cd47be3a98db4c2c4f16a31fb5482823441f19a5697ffd87e77bbce24da2372"
+        },
+        {
+          "alpha_extracted_path": "alpha-extracted/aurelia_finch_motion_045.png",
+          "alpha_extracted_sha256": "db7ec91dac209e999e6063a816f52e5fbf57dfd2cde70849e76acfd5c9ff4926",
+          "authorship": "authored_full_size_imagegen_v1",
+          "brief_id": "aurelia-g7-consult",
+          "canonical_bbox": [
+            457,
+            216,
+            796,
+            1185
+          ],
+          "chroma_source_path": "chroma-source/aurelia_finch_motion_045.png",
+          "chroma_source_sha256": "051dffd1af58abf61fe6a29067a762c1bfd11fab2378ca307a516e23f85fc1d7",
+          "continuity": "The book opens naturally from frame 044 and her gaze drops to the pages.",
+          "forbidden": "Floating pages, unreadable hand placement, closed book, or exaggerated crouch.",
+          "frame_index": 3,
+          "pose_id": "aurelia_finch_motion_045",
+          "pose_summary": "Grounded open-book consultation with downturned gaze.",
+          "rgba_sha256": "6920131fb47f7b4408299623aec449d36251d59afb599cb9a3981e005e02f0db",
+          "slot_id": "motion-045",
+          "source_path": "frames/aurelia_finch_motion_045.png",
+          "source_sha256": "7f58cf6f7362f37219d339fa855dae10235f545ebc69dfde8df2cb35daf716cd"
+        },
+        {
+          "alpha_extracted_path": "alpha-extracted/aurelia_finch_motion_046.png",
+          "alpha_extracted_sha256": "fed56031bf9d3afccc6102d2149b1fc674349422f11b6db1b10838b0dac94db0",
+          "authorship": "authored_full_size_imagegen_v1",
+          "brief_id": "aurelia-g7-mark-passage",
+          "canonical_bbox": [
+            462,
+            219,
+            792,
+            1185
+          ],
+          "chroma_source_path": "chroma-source/aurelia_finch_motion_046.png",
+          "chroma_source_sha256": "216e0a43308ce8f972a9ab65a38d7bd4306d3bf0da0346c22794aedb263688c9",
+          "continuity": "Her right index finger travels a short readable arc to a passage while the left hand supports the open book.",
+          "forbidden": "Pointing at the viewer, duplicated frame 045, floating book, or obscured face.",
+          "frame_index": 4,
+          "pose_id": "aurelia_finch_motion_046",
+          "pose_summary": "Specific passage verification with one finger marking the page.",
+          "rgba_sha256": "2a1aa0e1c39c2b7395e49f7ce9e8bd066203201893bd3cba3cd48a9543faf2bd",
+          "slot_id": "motion-046",
+          "source_path": "frames/aurelia_finch_motion_046.png",
+          "source_sha256": "28c7f73acf77dd90a066f5e2549c39ed6c961bc8268fda95947531eb26144bf5"
+        },
+        {
+          "alpha_extracted_path": "alpha-extracted/aurelia_finch_motion_047.png",
+          "alpha_extracted_sha256": "6689c4e210ae16e3fee6e40358ab255ca9dea05ec306f6f57371134848b6712c",
+          "authorship": "authored_full_size_imagegen_v1",
+          "brief_id": "aurelia-g7-explain",
+          "canonical_bbox": [
+            387,
+            210,
+            866,
+            1185
+          ],
+          "chroma_source_path": "chroma-source/aurelia_finch_motion_047.png",
+          "chroma_source_sha256": "00cf9d9533f8dc46c178567a6a587238886865c851df538e1d22b350dab4ca01",
+          "continuity": "She returns eye contact and rotates the marking hand into a low open-palm explanation while keeping the book open.",
+          "forbidden": "Wave, sales-pitch spread, book disappearance, or both arms raised.",
+          "frame_index": 5,
+          "pose_id": "aurelia_finch_motion_047",
+          "pose_summary": "Warm evidence-backed explanation with open book and low open palm.",
+          "rgba_sha256": "ed956ed04dd5592c6adcab143d0c7927745f25e75aee1baa2294171ca87c1fbf",
+          "slot_id": "motion-047",
+          "source_path": "frames/aurelia_finch_motion_047.png",
+          "source_sha256": "ee5459bc999fe2c5decce1c02257ed3ad218159a7a9b059b9c0bd11046b3e800"
+        },
+        {
+          "alpha_extracted_path": "alpha-extracted/aurelia_finch_motion_048.png",
+          "alpha_extracted_sha256": "fb1e8fb9119dab4db915694df21483ba551ae92d682eb2770a6c8e26392032ed",
+          "authorship": "authored_full_size_imagegen_v1",
+          "brief_id": "aurelia-g7-recover",
+          "canonical_bbox": [
+            475,
+            217,
+            778,
+            1185
+          ],
+          "chroma_source_path": "chroma-source/aurelia_finch_motion_048.png",
+          "chroma_source_sha256": "1dd372e4566feef7f88d90ee50e5198afe5ac592bdd10dd035920fd1c945e61e",
+          "continuity": "The book closes and settles against her sternum for a calm handoff back to front idle.",
+          "forbidden": "Exact idle duplicate, abrupt arm drop, foot movement, or book returning to the wrong side.",
+          "frame_index": 6,
+          "pose_id": "aurelia_finch_motion_048",
+          "pose_summary": "Resolved attentive recovery with closed book held close.",
+          "rgba_sha256": "f9e33b7103337473b1e73733e04c64c4e55b5e0a716e751cf3cbce5b4485d98a",
+          "slot_id": "motion-048",
+          "source_path": "frames/aurelia_finch_motion_048.png",
+          "source_sha256": "30a9065e7a014f4b2c8f314fb26f01386c57e49db70e0387bd39b0ec42b089c1"
+        }
+      ],
+      "intent": "receive_consult_verify_explain",
+      "loop": true,
+      "motion_contract": {
+        "entry_handoffs": [
+          "front_idle"
+        ],
+        "exit_handoffs": [
+          "front_idle"
+        ],
+        "family": "evidence_communication",
+        "hold_frame_indices": [
+          3,
+          5
+        ],
+        "interrupt_policy": "marker_safe",
+        "interruptible_frame_indices": [
+          1,
+          3,
+          6
+        ],
+        "loop_mode": "loop",
+        "root_policy": "fixed",
+        "support_policy": "dual_foot_grounded"
+      }
+    }
+  }
+}

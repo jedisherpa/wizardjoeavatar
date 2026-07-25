@@ -1,0 +1,49 @@
+{
+  "artifact_sha256": "e7e44013b9356720357e9dc0114909ddaadee34a3e26d2de666751b7e7d136ad",
+  "candidate_pose_count": 48,
+  "character_id": "aurelia-finch",
+  "checks": {
+    "all_authored_poses_projected_full_size": true,
+    "book_continuity_verified": true,
+    "dual_foot_contacts_stable": true,
+    "g7_loop_verified": true,
+    "transparent_backgrounds": true,
+    "uncropped_silhouettes": true
+  },
+  "library_index_sha256": "b4d19c01b0771a1ed49a52c42051a4a82c9e347efc6152d9023b2656f596e9b1",
+  "product_visual_approval": "pending",
+  "review_projection": true,
+  "review_url": "http://127.0.0.1:8665/",
+  "runtime_admitted": false,
+  "schema_version": 1,
+  "screenshots": [
+    {
+      "path": "8665-side-by-side.png",
+      "sha256": "9ebf6a5d243be1f22880a1fc7276d456df355f0a4b0d52fe631556c5ec111485"
+    },
+    {
+      "path": "aurelia_finch_motion_043-full-size.png",
+      "sha256": "4a2da01862c5a2fa9d7b8b1e11493c9f30cbb2b880c861ae4e1191c6a7c0d3fc"
+    },
+    {
+      "path": "aurelia_finch_motion_044-full-size.png",
+      "sha256": "3b8fa6084cc25aa42342e7d3dc6f1b2413612b4f45ae6c557b32f3af7a3839ba"
+    },
+    {
+      "path": "aurelia_finch_motion_045-full-size.png",
+      "sha256": "0a8ab98ad6def718b72fbb58b451c8c500879727a89be10fbc0afdbb04f14b5a"
+    },
+    {
+      "path": "aurelia_finch_motion_046-full-size.png",
+      "sha256": "ca1c022c39efb8ed6567a31065c1f9b63cfb75ce45ac9579098415cb075816d8"
+    },
+    {
+      "path": "aurelia_finch_motion_047-full-size.png",
+      "sha256": "c84f1e95fc97437bfac5ccf2af7f8c6b396e22a0ed7a63974de61fcee7ac02fc"
+    },
+    {
+      "path": "aurelia_finch_motion_048-full-size.png",
+      "sha256": "61d5e519f435eea0799f647d3238b99e3659dcf68bed65b80160d6a6b3424e00"
+    }
+  ]
+}

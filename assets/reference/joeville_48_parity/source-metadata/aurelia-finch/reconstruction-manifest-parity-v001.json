@@ -1,0 +1,1425 @@
+{
+  "artifact": {
+    "bytes": 33509456,
+    "path": "compiled/aurelia-finch/aurelia-finch-candidate-authored-parity-v001.wjpose",
+    "pose_count": 48,
+    "pose_ids": [
+      "aurelia_finch_motion_001",
+      "aurelia_finch_motion_002",
+      "aurelia_finch_motion_003",
+      "aurelia_finch_motion_004",
+      "aurelia_finch_motion_005",
+      "aurelia_finch_motion_006",
+      "aurelia_finch_motion_007",
+      "aurelia_finch_motion_008",
+      "aurelia_finch_motion_009",
+      "aurelia_finch_motion_010",
+      "aurelia_finch_motion_011",
+      "aurelia_finch_motion_012",
+      "aurelia_finch_motion_013",
+      "aurelia_finch_motion_014",
+      "aurelia_finch_motion_015",
+      "aurelia_finch_motion_016",
+      "aurelia_finch_motion_017",
+      "aurelia_finch_motion_018",
+      "aurelia_finch_motion_019",
+      "aurelia_finch_motion_020",
+      "aurelia_finch_motion_021",
+      "aurelia_finch_motion_022",
+      "aurelia_finch_motion_023",
+      "aurelia_finch_motion_024",
+      "aurelia_finch_motion_025",
+      "aurelia_finch_motion_026",
+      "aurelia_finch_motion_027",
+      "aurelia_finch_motion_028",
+      "aurelia_finch_motion_029",
+      "aurelia_finch_motion_030",
+      "aurelia_finch_motion_031",
+      "aurelia_finch_motion_032",
+      "aurelia_finch_motion_033",
+      "aurelia_finch_motion_034",
+      "aurelia_finch_motion_035",
+      "aurelia_finch_motion_036",
+      "aurelia_finch_motion_037",
+      "aurelia_finch_motion_038",
+      "aurelia_finch_motion_039",
+      "aurelia_finch_motion_040",
+      "aurelia_finch_motion_041",
+      "aurelia_finch_motion_042",
+      "aurelia_finch_motion_043",
+      "aurelia_finch_motion_044",
+      "aurelia_finch_motion_045",
+      "aurelia_finch_motion_046",
+      "aurelia_finch_motion_047",
+      "aurelia_finch_motion_048"
+    ],
+    "sha256": "e7e44013b9356720357e9dc0114909ddaadee34a3e26d2de666751b7e7d136ad"
+  },
+  "authored_manifest": {
+    "path": "authored-source/aurelia-finch/authored-g7-v001.json",
+    "sha256": "9e479e3072030af885c4d9686ba32e2808d57212913e8f1651e6f26f8f62b51e"
+  },
+  "authority_manifest_sha256": "740f35730f4aa1e6c6ef96be80115c5b0e117397f792d57fdf5360452bbe78c8",
+  "character_id": "aurelia-finch",
+  "compiled_pose_count": 48,
+  "display_name": "Aurelia Finch",
+  "existing_reconstruction_manifest": {
+    "path": "source-metadata/aurelia-finch/reconstruction-manifest-v001.json",
+    "sha256": "5b15587ed75d0929e668f911db12eb5bb3ac0e0ebceca09b9f4111ac2f983573"
+  },
+  "existing_source_artifact": {
+    "path": "compiled/aurelia-finch/aurelia-finch-candidate-source-motion-v001.wjpose",
+    "sha256": "66efd7f3450e768ef3ec5426ff590aaddfc83d26838ad42c29689faf8eeb5f8d"
+  },
+  "library_index": {
+    "path": "compiled/aurelia-finch/library-index.json",
+    "sha256": "b4d19c01b0771a1ed49a52c42051a4a82c9e347efc6152d9023b2656f596e9b1"
+  },
+  "missing_sequences": [],
+  "poses": [
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-001",
+      "normalization_scale": 1.60114778,
+      "output_bbox": [
+        478,
+        69,
+        776,
+        1185
+      ],
+      "pose_id": "aurelia_finch_motion_001",
+      "rgba_sha256": "3b00da2d474451cd9382306ff83b41c21ccaf2cc6e3dfef678cb7876bac4e855",
+      "runtime_admitted": false,
+      "sequence_id": "g1",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        66,
+        85,
+        252,
+        782
+      ],
+      "source_frame_index": 1,
+      "source_member": "sheet-aurelia-finch-g1.png",
+      "source_member_sha256": "0ae2ef633b800de0f41494de8229c18a1906ed9cbdbea9fc0354063005f9b235"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-002",
+      "normalization_scale": 1.60114778,
+      "output_bbox": [
+        476,
+        69,
+        777,
+        1185
+      ],
+      "pose_id": "aurelia_finch_motion_002",
+      "rgba_sha256": "a3ea724e72c9f19ec52f8ec0aea20c9d269e5a5861f98463d23927fc6c9dcc73",
+      "runtime_admitted": false,
+      "sequence_id": "g1",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        367,
+        85,
+        555,
+        782
+      ],
+      "source_frame_index": 2,
+      "source_member": "sheet-aurelia-finch-g1.png",
+      "source_member_sha256": "0ae2ef633b800de0f41494de8229c18a1906ed9cbdbea9fc0354063005f9b235"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-003",
+      "normalization_scale": 1.60114778,
+      "output_bbox": [
+        478,
+        71,
+        777,
+        1182
+      ],
+      "pose_id": "aurelia_finch_motion_003",
+      "rgba_sha256": "dd07d2263c0af9fcb52fb2e8426abe81d1263c5f662a9db113274ac0923ff048",
+      "runtime_admitted": false,
+      "sequence_id": "g1",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        668,
+        86,
+        855,
+        780
+      ],
+      "source_frame_index": 3,
+      "source_member": "sheet-aurelia-finch-g1.png",
+      "source_member_sha256": "0ae2ef633b800de0f41494de8229c18a1906ed9cbdbea9fc0354063005f9b235"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-004",
+      "normalization_scale": 1.60114778,
+      "output_bbox": [
+        410,
+        109,
+        844,
+        1179
+      ],
+      "pose_id": "aurelia_finch_motion_004",
+      "rgba_sha256": "f32efa1bf6f4254c74c079d28c1ad6f009ec5a35ed2527292072bfd018ed19f6",
+      "runtime_admitted": false,
+      "sequence_id": "g1",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        914,
+        110,
+        1185,
+        778
+      ],
+      "source_frame_index": 4,
+      "source_member": "sheet-aurelia-finch-g1.png",
+      "source_member_sha256": "0ae2ef633b800de0f41494de8229c18a1906ed9cbdbea9fc0354063005f9b235"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-005",
+      "normalization_scale": 1.60114778,
+      "output_bbox": [
+        380,
+        144,
+        873,
+        1169
+      ],
+      "pose_id": "aurelia_finch_motion_005",
+      "rgba_sha256": "746ec8c39c500cafea049421d1959004cb952102540624fae3b5052b37e1edc1",
+      "runtime_admitted": false,
+      "sequence_id": "g1",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        1227,
+        132,
+        1535,
+        772
+      ],
+      "source_frame_index": 5,
+      "source_member": "sheet-aurelia-finch-g1.png",
+      "source_member_sha256": "0ae2ef633b800de0f41494de8229c18a1906ed9cbdbea9fc0354063005f9b235"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-006",
+      "normalization_scale": 1.60114778,
+      "output_bbox": [
+        422,
+        133,
+        832,
+        1171
+      ],
+      "pose_id": "aurelia_finch_motion_006",
+      "rgba_sha256": "98a74e3dd367539f92f42395343c38509521ec92237901dfb74eeacc325b04f8",
+      "runtime_admitted": false,
+      "sequence_id": "g1",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        1567,
+        125,
+        1823,
+        773
+      ],
+      "source_frame_index": 6,
+      "source_member": "sheet-aurelia-finch-g1.png",
+      "source_member_sha256": "0ae2ef633b800de0f41494de8229c18a1906ed9cbdbea9fc0354063005f9b235"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-007",
+      "normalization_scale": 1.84158416,
+      "output_bbox": [
+        412,
+        69,
+        841,
+        1165
+      ],
+      "pose_id": "aurelia_finch_motion_007",
+      "rgba_sha256": "d825334aeed76b121091aefa0e17dc0cd177d9d322bff9c243c630b162d60a48",
+      "runtime_admitted": false,
+      "sequence_id": "g2",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        77,
+        97,
+        310,
+        692
+      ],
+      "source_frame_index": 1,
+      "source_member": "sheet-aurelia-finch-g2.png",
+      "source_member_sha256": "f279ed7a08dc743934fbc76989ceb22fc1665170dbcf04038dd7651619d80592"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-008",
+      "normalization_scale": 1.84158416,
+      "output_bbox": [
+        440,
+        69,
+        814,
+        1185
+      ],
+      "pose_id": "aurelia_finch_motion_008",
+      "rgba_sha256": "6f90d4ea3d6535a330237fbafa3f3553167179f457ce760501b32b9de9f29a12",
+      "runtime_admitted": false,
+      "sequence_id": "g2",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        346,
+        97,
+        549,
+        703
+      ],
+      "source_frame_index": 2,
+      "source_member": "sheet-aurelia-finch-g2.png",
+      "source_member_sha256": "f279ed7a08dc743934fbc76989ceb22fc1665170dbcf04038dd7651619d80592"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-009",
+      "normalization_scale": 1.84158416,
+      "output_bbox": [
+        420,
+        69,
+        834,
+        1172
+      ],
+      "pose_id": "aurelia_finch_motion_009",
+      "rgba_sha256": "b309bf65faf2d7b99553d815b111ad9d611eff6eb08510250574bbb0cf26872c",
+      "runtime_admitted": false,
+      "sequence_id": "g2",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        665,
+        97,
+        890,
+        696
+      ],
+      "source_frame_index": 3,
+      "source_member": "sheet-aurelia-finch-g2.png",
+      "source_member_sha256": "f279ed7a08dc743934fbc76989ceb22fc1665170dbcf04038dd7651619d80592"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-010",
+      "normalization_scale": 1.84158416,
+      "output_bbox": [
+        406,
+        71,
+        848,
+        1185
+      ],
+      "pose_id": "aurelia_finch_motion_010",
+      "rgba_sha256": "859ceb66048f1d911b6f755ec09d24273ced7c616c804ab4c70a7734f293a7ef",
+      "runtime_admitted": false,
+      "sequence_id": "g2",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        926,
+        98,
+        1166,
+        703
+      ],
+      "source_frame_index": 4,
+      "source_member": "sheet-aurelia-finch-g2.png",
+      "source_member_sha256": "f279ed7a08dc743934fbc76989ceb22fc1665170dbcf04038dd7651619d80592"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-011",
+      "normalization_scale": 1.84158416,
+      "output_bbox": [
+        270,
+        145,
+        985,
+        1167
+      ],
+      "pose_id": "aurelia_finch_motion_011",
+      "rgba_sha256": "931f6fca8a4f84ba44da57f7afde26252b097226db770c7b8b1a3834b505ddf7",
+      "runtime_admitted": false,
+      "sequence_id": "g2",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        1214,
+        138,
+        1602,
+        693
+      ],
+      "source_frame_index": 5,
+      "source_member": "sheet-aurelia-finch-g2.png",
+      "source_member_sha256": "f279ed7a08dc743934fbc76989ceb22fc1665170dbcf04038dd7651619d80592"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-012",
+      "normalization_scale": 1.84158416,
+      "output_bbox": [
+        337,
+        284,
+        917,
+        1177
+      ],
+      "pose_id": "aurelia_finch_motion_012",
+      "rgba_sha256": "f164224fe94872586e686b23b192415f43d1bb3301198cf65c0f2b9f7ee20b5e",
+      "runtime_admitted": false,
+      "sequence_id": "g2",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        1629,
+        214,
+        1944,
+        699
+      ],
+      "source_frame_index": 6,
+      "source_member": "sheet-aurelia-finch-g2.png",
+      "source_member_sha256": "f279ed7a08dc743934fbc76989ceb22fc1665170dbcf04038dd7651619d80592"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-013",
+      "normalization_scale": 1.85074627,
+      "output_bbox": [
+        306,
+        352,
+        948,
+        1181
+      ],
+      "pose_id": "aurelia_finch_motion_013",
+      "rgba_sha256": "fc1f3a36a3804933430b98e9af235eee1af6e43e168f988703531a45bbbe0179",
+      "runtime_admitted": false,
+      "sequence_id": "g3",
+      "source_archive_id": "sprites-2",
+      "source_archive_sha256": "570d20086ad833b018188eee9c7d3368e5a156139e67c62b474f86cb50bfa749",
+      "source_bbox": [
+        25,
+        242,
+        372,
+        690
+      ],
+      "source_frame_index": 1,
+      "source_member": "sheet-aurelia-finch-g3.png",
+      "source_member_sha256": "e1b55839dd9560a70cbb9cfa310b530f46cbc7cd7ce56d2f715aa3ae579ea246"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-014",
+      "normalization_scale": 1.85074627,
+      "output_bbox": [
+        381,
+        350,
+        873,
+        1185
+      ],
+      "pose_id": "aurelia_finch_motion_014",
+      "rgba_sha256": "8eb85ae4e78de11d046cc1500ea29d8424b47538cec042021ef37b879a9bd40c",
+      "runtime_admitted": false,
+      "sequence_id": "g3",
+      "source_archive_id": "sprites-2",
+      "source_archive_sha256": "570d20086ad833b018188eee9c7d3368e5a156139e67c62b474f86cb50bfa749",
+      "source_bbox": [
+        401,
+        241,
+        667,
+        692
+      ],
+      "source_frame_index": 2,
+      "source_member": "sheet-aurelia-finch-g3.png",
+      "source_member_sha256": "e1b55839dd9560a70cbb9cfa310b530f46cbc7cd7ce56d2f715aa3ae579ea246"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-015",
+      "normalization_scale": 1.85074627,
+      "output_bbox": [
+        334,
+        345,
+        919,
+        1183
+      ],
+      "pose_id": "aurelia_finch_motion_015",
+      "rgba_sha256": "99f8e61caeeadd614c3389a809d6fd1860772037a99f70e27988183973615e51",
+      "runtime_admitted": false,
+      "sequence_id": "g3",
+      "source_archive_id": "sprites-2",
+      "source_archive_sha256": "570d20086ad833b018188eee9c7d3368e5a156139e67c62b474f86cb50bfa749",
+      "source_bbox": [
+        712,
+        238,
+        1028,
+        691
+      ],
+      "source_frame_index": 3,
+      "source_member": "sheet-aurelia-finch-g3.png",
+      "source_member_sha256": "e1b55839dd9560a70cbb9cfa310b530f46cbc7cd7ce56d2f715aa3ae579ea246"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-016",
+      "normalization_scale": 1.85074627,
+      "output_bbox": [
+        438,
+        511,
+        817,
+        1185
+      ],
+      "pose_id": "aurelia_finch_motion_016",
+      "rgba_sha256": "f9e2283d54d90bd72e3085e727aa9dcea7745a75ade05ee87e172f2ddc1d0d49",
+      "runtime_admitted": false,
+      "sequence_id": "g3",
+      "source_archive_id": "sprites-2",
+      "source_archive_sha256": "570d20086ad833b018188eee9c7d3368e5a156139e67c62b474f86cb50bfa749",
+      "source_bbox": [
+        1075,
+        328,
+        1280,
+        692
+      ],
+      "source_frame_index": 4,
+      "source_member": "sheet-aurelia-finch-g3.png",
+      "source_member_sha256": "e1b55839dd9560a70cbb9cfa310b530f46cbc7cd7ce56d2f715aa3ae579ea246"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-017",
+      "normalization_scale": 1.85074627,
+      "output_bbox": [
+        403,
+        245,
+        851,
+        1104
+      ],
+      "pose_id": "aurelia_finch_motion_017",
+      "rgba_sha256": "40cbb17e59404eee6a9fb2b0b9d8fc5bfa9db4d414db1177b192ef5725bb1023",
+      "runtime_admitted": false,
+      "sequence_id": "g3",
+      "source_archive_id": "sprites-2",
+      "source_archive_sha256": "570d20086ad833b018188eee9c7d3368e5a156139e67c62b474f86cb50bfa749",
+      "source_bbox": [
+        1339,
+        184,
+        1581,
+        648
+      ],
+      "source_frame_index": 5,
+      "source_member": "sheet-aurelia-finch-g3.png",
+      "source_member_sha256": "e1b55839dd9560a70cbb9cfa310b530f46cbc7cd7ce56d2f715aa3ae579ea246"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-018",
+      "normalization_scale": 1.85074627,
+      "output_bbox": [
+        438,
+        69,
+        817,
+        893
+      ],
+      "pose_id": "aurelia_finch_motion_018",
+      "rgba_sha256": "419a04fff164f8bcd2b4928fb42e4c604caaa15fc2145bf501960f196a554872",
+      "runtime_admitted": false,
+      "sequence_id": "g3",
+      "source_archive_id": "sprites-2",
+      "source_archive_sha256": "570d20086ad833b018188eee9c7d3368e5a156139e67c62b474f86cb50bfa749",
+      "source_bbox": [
+        1632,
+        89,
+        1837,
+        534
+      ],
+      "source_frame_index": 6,
+      "source_member": "sheet-aurelia-finch-g3.png",
+      "source_member_sha256": "e1b55839dd9560a70cbb9cfa310b530f46cbc7cd7ce56d2f715aa3ae579ea246"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-019",
+      "normalization_scale": 1.69863014,
+      "output_bbox": [
+        414,
+        69,
+        839,
+        1044
+      ],
+      "pose_id": "aurelia_finch_motion_019",
+      "rgba_sha256": "c09a2b8c067d7b9868a855b013a4e0a819e88da2e99e92a160282ec5610b1c82",
+      "runtime_admitted": false,
+      "sequence_id": "g4",
+      "source_archive_id": "sprites-2",
+      "source_archive_sha256": "570d20086ad833b018188eee9c7d3368e5a156139e67c62b474f86cb50bfa749",
+      "source_bbox": [
+        88,
+        86,
+        338,
+        660
+      ],
+      "source_frame_index": 1,
+      "source_member": "sheet-aurelia-finch-g4.png",
+      "source_member_sha256": "0c50e0df302104dd4bc224fd1a769dd9d936a9c7f7d8d4b3060a25cd849aaead"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-020",
+      "normalization_scale": 1.69863014,
+      "output_bbox": [
+        432,
+        414,
+        823,
+        1158
+      ],
+      "pose_id": "aurelia_finch_motion_020",
+      "rgba_sha256": "75f89a1109d1c87cdf84522762b6c1403f032fadce5e80f28f9e2721bcce2b08",
+      "runtime_admitted": false,
+      "sequence_id": "g4",
+      "source_archive_id": "sprites-2",
+      "source_archive_sha256": "570d20086ad833b018188eee9c7d3368e5a156139e67c62b474f86cb50bfa749",
+      "source_bbox": [
+        374,
+        289,
+        604,
+        727
+      ],
+      "source_frame_index": 2,
+      "source_member": "sheet-aurelia-finch-g4.png",
+      "source_member_sha256": "0c50e0df302104dd4bc224fd1a769dd9d936a9c7f7d8d4b3060a25cd849aaead"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-021",
+      "normalization_scale": 1.69863014,
+      "output_bbox": [
+        389,
+        261,
+        865,
+        1156
+      ],
+      "pose_id": "aurelia_finch_motion_021",
+      "rgba_sha256": "47ba110bcf53abfe5f4b4ebf6765f72f2ed7897b0d09b2c9c02c916769f69543",
+      "runtime_admitted": false,
+      "sequence_id": "g4",
+      "source_archive_id": "sprites-2",
+      "source_archive_sha256": "570d20086ad833b018188eee9c7d3368e5a156139e67c62b474f86cb50bfa749",
+      "source_bbox": [
+        626,
+        199,
+        906,
+        726
+      ],
+      "source_frame_index": 3,
+      "source_member": "sheet-aurelia-finch-g4.png",
+      "source_member_sha256": "0c50e0df302104dd4bc224fd1a769dd9d936a9c7f7d8d4b3060a25cd849aaead"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-022",
+      "normalization_scale": 1.69863014,
+      "output_bbox": [
+        408,
+        234,
+        845,
+        1165
+      ],
+      "pose_id": "aurelia_finch_motion_022",
+      "rgba_sha256": "361f0b5a5958d3b14fd33d6b5d31757621ead50525ac13d58525437b3aa6b77f",
+      "runtime_admitted": false,
+      "sequence_id": "g4",
+      "source_archive_id": "sprites-2",
+      "source_archive_sha256": "570d20086ad833b018188eee9c7d3368e5a156139e67c62b474f86cb50bfa749",
+      "source_bbox": [
+        941,
+        183,
+        1198,
+        731
+      ],
+      "source_frame_index": 4,
+      "source_member": "sheet-aurelia-finch-g4.png",
+      "source_member_sha256": "0c50e0df302104dd4bc224fd1a769dd9d936a9c7f7d8d4b3060a25cd849aaead"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-023",
+      "normalization_scale": 1.69863014,
+      "output_bbox": [
+        496,
+        227,
+        758,
+        1185
+      ],
+      "pose_id": "aurelia_finch_motion_023",
+      "rgba_sha256": "c5684dcb0337c2798476e035ea47207d23bdffc9c0405ca3fcfb2a97f39f8b62",
+      "runtime_admitted": false,
+      "sequence_id": "g4",
+      "source_archive_id": "sprites-2",
+      "source_archive_sha256": "570d20086ad833b018188eee9c7d3368e5a156139e67c62b474f86cb50bfa749",
+      "source_bbox": [
+        1288,
+        179,
+        1442,
+        743
+      ],
+      "source_frame_index": 5,
+      "source_member": "sheet-aurelia-finch-g4.png",
+      "source_member_sha256": "0c50e0df302104dd4bc224fd1a769dd9d936a9c7f7d8d4b3060a25cd849aaead"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-024",
+      "normalization_scale": 1.69863014,
+      "output_bbox": [
+        453,
+        230,
+        801,
+        1185
+      ],
+      "pose_id": "aurelia_finch_motion_024",
+      "rgba_sha256": "33af16fa442de96618d855ac739df48bc30fc6ecc6de5bfa8be150e390206019",
+      "runtime_admitted": false,
+      "sequence_id": "g4",
+      "source_archive_id": "sprites-2",
+      "source_archive_sha256": "570d20086ad833b018188eee9c7d3368e5a156139e67c62b474f86cb50bfa749",
+      "source_bbox": [
+        1541,
+        181,
+        1746,
+        743
+      ],
+      "source_frame_index": 6,
+      "source_member": "sheet-aurelia-finch-g4.png",
+      "source_member_sha256": "0c50e0df302104dd4bc224fd1a769dd9d936a9c7f7d8d4b3060a25cd849aaead"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-025",
+      "normalization_scale": 1.74647887,
+      "output_bbox": [
+        441,
+        86,
+        813,
+        1185
+      ],
+      "pose_id": "aurelia_finch_motion_025",
+      "rgba_sha256": "5a45ab45e76ac7c50096fe4fbfa9546f3aa52f47842c1b5d54ba1584b57ac434",
+      "runtime_admitted": false,
+      "sequence_id": "g5",
+      "source_archive_id": "sprites-2",
+      "source_archive_sha256": "570d20086ad833b018188eee9c7d3368e5a156139e67c62b474f86cb50bfa749",
+      "source_bbox": [
+        70,
+        142,
+        283,
+        771
+      ],
+      "source_frame_index": 1,
+      "source_member": "sheet-aurelia-finch-g5.png",
+      "source_member_sha256": "46778af0d5e6044f340f3d7ea03f5e8ac218f5a77bfc84a3c15e4c9e07f834b2"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-026",
+      "normalization_scale": 1.74647887,
+      "output_bbox": [
+        434,
+        81,
+        820,
+        1185
+      ],
+      "pose_id": "aurelia_finch_motion_026",
+      "rgba_sha256": "fbf06bbfc00ace2a92b7fb459129b87ee9ad27e8dbe5036a3670d2bf08d24f4b",
+      "runtime_admitted": false,
+      "sequence_id": "g5",
+      "source_archive_id": "sprites-2",
+      "source_archive_sha256": "570d20086ad833b018188eee9c7d3368e5a156139e67c62b474f86cb50bfa749",
+      "source_bbox": [
+        340,
+        139,
+        561,
+        771
+      ],
+      "source_frame_index": 2,
+      "source_member": "sheet-aurelia-finch-g5.png",
+      "source_member_sha256": "46778af0d5e6044f340f3d7ea03f5e8ac218f5a77bfc84a3c15e4c9e07f834b2"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-027",
+      "normalization_scale": 1.74647887,
+      "output_bbox": [
+        434,
+        97,
+        820,
+        1185
+      ],
+      "pose_id": "aurelia_finch_motion_027",
+      "rgba_sha256": "8c1c820e4e774d9715c5dc88bd4e7a30ef89b52c63b97c8884adbb3982b2cc62",
+      "runtime_admitted": false,
+      "sequence_id": "g5",
+      "source_archive_id": "sprites-2",
+      "source_archive_sha256": "570d20086ad833b018188eee9c7d3368e5a156139e67c62b474f86cb50bfa749",
+      "source_bbox": [
+        623,
+        148,
+        844,
+        771
+      ],
+      "source_frame_index": 3,
+      "source_member": "sheet-aurelia-finch-g5.png",
+      "source_member_sha256": "46778af0d5e6044f340f3d7ea03f5e8ac218f5a77bfc84a3c15e4c9e07f834b2"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-028",
+      "normalization_scale": 1.74647887,
+      "output_bbox": [
+        432,
+        90,
+        823,
+        1185
+      ],
+      "pose_id": "aurelia_finch_motion_028",
+      "rgba_sha256": "38bb87ea7e3c26832c266fc51788e13edb9318bd7725f4c758f5c287fb5cf707",
+      "runtime_admitted": false,
+      "sequence_id": "g5",
+      "source_archive_id": "sprites-2",
+      "source_archive_sha256": "570d20086ad833b018188eee9c7d3368e5a156139e67c62b474f86cb50bfa749",
+      "source_bbox": [
+        918,
+        144,
+        1142,
+        771
+      ],
+      "source_frame_index": 4,
+      "source_member": "sheet-aurelia-finch-g5.png",
+      "source_member_sha256": "46778af0d5e6044f340f3d7ea03f5e8ac218f5a77bfc84a3c15e4c9e07f834b2"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-029",
+      "normalization_scale": 1.74647887,
+      "output_bbox": [
+        430,
+        99,
+        823,
+        1185
+      ],
+      "pose_id": "aurelia_finch_motion_029",
+      "rgba_sha256": "2f315cd3be84b71abf16af00248f41a8373c817c20a1b6647506b9a82d0e632e",
+      "runtime_admitted": false,
+      "sequence_id": "g5",
+      "source_archive_id": "sprites-2",
+      "source_archive_sha256": "570d20086ad833b018188eee9c7d3368e5a156139e67c62b474f86cb50bfa749",
+      "source_bbox": [
+        1224,
+        149,
+        1449,
+        771
+      ],
+      "source_frame_index": 5,
+      "source_member": "sheet-aurelia-finch-g5.png",
+      "source_member_sha256": "46778af0d5e6044f340f3d7ea03f5e8ac218f5a77bfc84a3c15e4c9e07f834b2"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-030",
+      "normalization_scale": 1.74647887,
+      "output_bbox": [
+        420,
+        69,
+        834,
+        963
+      ],
+      "pose_id": "aurelia_finch_motion_030",
+      "rgba_sha256": "ea85fb9e7f551ed7f26dd0e9f20cb5f1b74e9b886376acef28415f3356fd761f",
+      "runtime_admitted": false,
+      "sequence_id": "g5",
+      "source_archive_id": "sprites-2",
+      "source_archive_sha256": "570d20086ad833b018188eee9c7d3368e5a156139e67c62b474f86cb50bfa749",
+      "source_bbox": [
+        1488,
+        132,
+        1725,
+        644
+      ],
+      "source_frame_index": 6,
+      "source_member": "sheet-aurelia-finch-g5.png",
+      "source_member_sha256": "46778af0d5e6044f340f3d7ea03f5e8ac218f5a77bfc84a3c15e4c9e07f834b2"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-031",
+      "normalization_scale": 1.76303318,
+      "output_bbox": [
+        446,
+        111,
+        809,
+        1179
+      ],
+      "pose_id": "aurelia_finch_motion_031",
+      "rgba_sha256": "77865b11123dc3fb3991f2f79f79d008afe8fe628dd4b951eb4194894a09a062",
+      "runtime_admitted": false,
+      "sequence_id": "g6",
+      "source_archive_id": "sprites-2",
+      "source_archive_sha256": "570d20086ad833b018188eee9c7d3368e5a156139e67c62b474f86cb50bfa749",
+      "source_bbox": [
+        105,
+        109,
+        311,
+        715
+      ],
+      "source_frame_index": 1,
+      "source_member": "sheet-aurelia-finch-g6.png",
+      "source_member_sha256": "1b3b9289c61b997839d603a78422c3bbdb9f0ca00f739a8d0c33357388ff40bf"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-032",
+      "normalization_scale": 1.76303318,
+      "output_bbox": [
+        440,
+        138,
+        814,
+        1185
+      ],
+      "pose_id": "aurelia_finch_motion_032",
+      "rgba_sha256": "019cda8d2bba3b049a2917a53fa07e00af72bcede239d60a6d6ae8c8fd886244",
+      "runtime_admitted": false,
+      "sequence_id": "g6",
+      "source_archive_id": "sprites-2",
+      "source_archive_sha256": "570d20086ad833b018188eee9c7d3368e5a156139e67c62b474f86cb50bfa749",
+      "source_bbox": [
+        407,
+        124,
+        619,
+        718
+      ],
+      "source_frame_index": 2,
+      "source_member": "sheet-aurelia-finch-g6.png",
+      "source_member_sha256": "1b3b9289c61b997839d603a78422c3bbdb9f0ca00f739a8d0c33357388ff40bf"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-033",
+      "normalization_scale": 1.76303318,
+      "output_bbox": [
+        446,
+        124,
+        807,
+        1180
+      ],
+      "pose_id": "aurelia_finch_motion_033",
+      "rgba_sha256": "5ec854c8a0e1b093f237dd0f93cc75b85ebc0506eeb030a913738a4335eed7bf",
+      "runtime_admitted": false,
+      "sequence_id": "g6",
+      "source_archive_id": "sprites-2",
+      "source_archive_sha256": "570d20086ad833b018188eee9c7d3368e5a156139e67c62b474f86cb50bfa749",
+      "source_bbox": [
+        694,
+        116,
+        899,
+        715
+      ],
+      "source_frame_index": 3,
+      "source_member": "sheet-aurelia-finch-g6.png",
+      "source_member_sha256": "1b3b9289c61b997839d603a78422c3bbdb9f0ca00f739a8d0c33357388ff40bf"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-034",
+      "normalization_scale": 1.76303318,
+      "output_bbox": [
+        430,
+        113,
+        823,
+        1185
+      ],
+      "pose_id": "aurelia_finch_motion_034",
+      "rgba_sha256": "df2ea4c1fd80c69e183c1b307b8de0708f71f2d5bfa11397e2ecd75d9f8a8a0a",
+      "runtime_admitted": false,
+      "sequence_id": "g6",
+      "source_archive_id": "sprites-2",
+      "source_archive_sha256": "570d20086ad833b018188eee9c7d3368e5a156139e67c62b474f86cb50bfa749",
+      "source_bbox": [
+        997,
+        110,
+        1220,
+        718
+      ],
+      "source_frame_index": 4,
+      "source_member": "sheet-aurelia-finch-g6.png",
+      "source_member_sha256": "1b3b9289c61b997839d603a78422c3bbdb9f0ca00f739a8d0c33357388ff40bf"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-035",
+      "normalization_scale": 1.76303318,
+      "output_bbox": [
+        444,
+        113,
+        811,
+        1180
+      ],
+      "pose_id": "aurelia_finch_motion_035",
+      "rgba_sha256": "4701fef549023c7e6d41e59a8d4221847e4b287a4541bb86acf7c0fb437ffcc4",
+      "runtime_admitted": false,
+      "sequence_id": "g6",
+      "source_archive_id": "sprites-2",
+      "source_archive_sha256": "570d20086ad833b018188eee9c7d3368e5a156139e67c62b474f86cb50bfa749",
+      "source_bbox": [
+        1313,
+        110,
+        1521,
+        715
+      ],
+      "source_frame_index": 5,
+      "source_member": "sheet-aurelia-finch-g6.png",
+      "source_member_sha256": "1b3b9289c61b997839d603a78422c3bbdb9f0ca00f739a8d0c33357388ff40bf"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-036",
+      "normalization_scale": 1.76303318,
+      "output_bbox": [
+        427,
+        69,
+        827,
+        984
+      ],
+      "pose_id": "aurelia_finch_motion_036",
+      "rgba_sha256": "b880b0b5434edd506558f091ba49c291e6906f736f0c653784e9485ba50febb2",
+      "runtime_admitted": false,
+      "sequence_id": "g6",
+      "source_archive_id": "sprites-2",
+      "source_archive_sha256": "570d20086ad833b018188eee9c7d3368e5a156139e67c62b474f86cb50bfa749",
+      "source_bbox": [
+        1603,
+        85,
+        1830,
+        604
+      ],
+      "source_frame_index": 6,
+      "source_member": "sheet-aurelia-finch-g6.png",
+      "source_member_sha256": "1b3b9289c61b997839d603a78422c3bbdb9f0ca00f739a8d0c33357388ff40bf"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-037",
+      "normalization_scale": 1.65578635,
+      "output_bbox": [
+        480,
+        125,
+        775,
+        1185
+      ],
+      "pose_id": "aurelia_finch_motion_037",
+      "rgba_sha256": "8a0388bfdbc4a0af70ed9da913b24a3014e86f1a37ce000c2d776ede4aee88ed",
+      "runtime_admitted": false,
+      "sequence_id": "base",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        74,
+        131,
+        252,
+        771
+      ],
+      "source_frame_index": 1,
+      "source_member": "sheet-aurelia-finch.png",
+      "source_member_sha256": "9b026c8000433d7e8a0db812a2e002c90591738f53f2bb723ac0ac459486a40f"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-038",
+      "normalization_scale": 1.65578635,
+      "output_bbox": [
+        392,
+        150,
+        862,
+        1163
+      ],
+      "pose_id": "aurelia_finch_motion_038",
+      "rgba_sha256": "949d87f2b0a4560755deadba21d7e000fa9f7bdca04592e9890790681fcb76b6",
+      "runtime_admitted": false,
+      "sequence_id": "base",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        316,
+        146,
+        600,
+        758
+      ],
+      "source_frame_index": 2,
+      "source_member": "sheet-aurelia-finch.png",
+      "source_member_sha256": "9b026c8000433d7e8a0db812a2e002c90591738f53f2bb723ac0ac459486a40f"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-039",
+      "normalization_scale": 1.65578635,
+      "output_bbox": [
+        414,
+        165,
+        841,
+        1168
+      ],
+      "pose_id": "aurelia_finch_motion_039",
+      "rgba_sha256": "105b53f6af86dea9450df13de77a72ec5f0b04285abcda873296b03610bc731b",
+      "runtime_admitted": false,
+      "sequence_id": "base",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        647,
+        155,
+        905,
+        761
+      ],
+      "source_frame_index": 3,
+      "source_member": "sheet-aurelia-finch.png",
+      "source_member_sha256": "9b026c8000433d7e8a0db812a2e002c90591738f53f2bb723ac0ac459486a40f"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-040",
+      "normalization_scale": 1.65578635,
+      "output_bbox": [
+        399,
+        168,
+        855,
+        1170
+      ],
+      "pose_id": "aurelia_finch_motion_040",
+      "rgba_sha256": "33293c7636830d21d4f2f2663cc968e1fc27ee95983c36b16587bc5bcd82a975",
+      "runtime_admitted": false,
+      "sequence_id": "base",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        912,
+        157,
+        1188,
+        762
+      ],
+      "source_frame_index": 4,
+      "source_member": "sheet-aurelia-finch.png",
+      "source_member_sha256": "9b026c8000433d7e8a0db812a2e002c90591738f53f2bb723ac0ac459486a40f"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-041",
+      "normalization_scale": 1.65578635,
+      "output_bbox": [
+        424,
+        165,
+        830,
+        1172
+      ],
+      "pose_id": "aurelia_finch_motion_041",
+      "rgba_sha256": "b3fcbb97a7ab68278bdc6ba4093992ce1da5744461ba5ba63a3ec82167d02116",
+      "runtime_admitted": false,
+      "sequence_id": "base",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        1227,
+        155,
+        1472,
+        763
+      ],
+      "source_frame_index": 5,
+      "source_member": "sheet-aurelia-finch.png",
+      "source_member_sha256": "9b026c8000433d7e8a0db812a2e002c90591738f53f2bb723ac0ac459486a40f"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-042",
+      "normalization_scale": 1.65578635,
+      "output_bbox": [
+        428,
+        69,
+        825,
+        889
+      ],
+      "pose_id": "aurelia_finch_motion_042",
+      "rgba_sha256": "b468c96b17893827b12f810bb65dec75e3003e05e2cfaafa715dd9827bb897a2",
+      "runtime_admitted": false,
+      "sequence_id": "base",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        1510,
+        97,
+        1750,
+        592
+      ],
+      "source_frame_index": 6,
+      "source_member": "sheet-aurelia-finch.png",
+      "source_member_sha256": "9b026c8000433d7e8a0db812a2e002c90591738f53f2bb723ac0ac459486a40f"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "authorship": "authored_full_size_imagegen_v1",
+      "brief_id": "aurelia-g7-receipt",
+      "motion_slot_id": "motion-043",
+      "normalization_scale": 1.0,
+      "output_bbox": [
+        468,
+        219,
+        786,
+        1185
+      ],
+      "pose_id": "aurelia_finch_motion_043",
+      "rgba_sha256": "604ba24480d962675bfc5e76802e5ff17e74472dc2102ecca6eab6ddfa1ab74c",
+      "runtime_admitted": false,
+      "sequence_id": "g7",
+      "source_bbox": [
+        468,
+        219,
+        786,
+        1185
+      ],
+      "source_frame_index": 1,
+      "source_height": 1254,
+      "source_path": "frames/aurelia_finch_motion_043.png",
+      "source_rgba_sha256": "604ba24480d962675bfc5e76802e5ff17e74472dc2102ecca6eab6ddfa1ab74c",
+      "source_sha256": "0b5e6b784c36f7b4b8752babb2126a666c986ab98fc2e2af61bf1d233cf244f0",
+      "source_width": 1254
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "authorship": "authored_full_size_imagegen_v1",
+      "brief_id": "aurelia-g7-raise-book",
+      "motion_slot_id": "motion-044",
+      "normalization_scale": 1.0,
+      "output_bbox": [
+        474,
+        215,
+        780,
+        1185
+      ],
+      "pose_id": "aurelia_finch_motion_044",
+      "rgba_sha256": "bd86ab62ea86ac4305e744a2ef8087965d191732cc280a55354698b192d70065",
+      "runtime_admitted": false,
+      "sequence_id": "g7",
+      "source_bbox": [
+        474,
+        215,
+        780,
+        1185
+      ],
+      "source_frame_index": 2,
+      "source_height": 1254,
+      "source_path": "frames/aurelia_finch_motion_044.png",
+      "source_rgba_sha256": "bd86ab62ea86ac4305e744a2ef8087965d191732cc280a55354698b192d70065",
+      "source_sha256": "1cd47be3a98db4c2c4f16a31fb5482823441f19a5697ffd87e77bbce24da2372",
+      "source_width": 1254
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "authorship": "authored_full_size_imagegen_v1",
+      "brief_id": "aurelia-g7-consult",
+      "motion_slot_id": "motion-045",
+      "normalization_scale": 1.0,
+      "output_bbox": [
+        457,
+        216,
+        796,
+        1185
+      ],
+      "pose_id": "aurelia_finch_motion_045",
+      "rgba_sha256": "6920131fb47f7b4408299623aec449d36251d59afb599cb9a3981e005e02f0db",
+      "runtime_admitted": false,
+      "sequence_id": "g7",
+      "source_bbox": [
+        457,
+        216,
+        796,
+        1185
+      ],
+      "source_frame_index": 3,
+      "source_height": 1254,
+      "source_path": "frames/aurelia_finch_motion_045.png",
+      "source_rgba_sha256": "6920131fb47f7b4408299623aec449d36251d59afb599cb9a3981e005e02f0db",
+      "source_sha256": "7f58cf6f7362f37219d339fa855dae10235f545ebc69dfde8df2cb35daf716cd",
+      "source_width": 1254
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "authorship": "authored_full_size_imagegen_v1",
+      "brief_id": "aurelia-g7-mark-passage",
+      "motion_slot_id": "motion-046",
+      "normalization_scale": 1.0,
+      "output_bbox": [
+        462,
+        219,
+        792,
+        1185
+      ],
+      "pose_id": "aurelia_finch_motion_046",
+      "rgba_sha256": "2a1aa0e1c39c2b7395e49f7ce9e8bd066203201893bd3cba3cd48a9543faf2bd",
+      "runtime_admitted": false,
+      "sequence_id": "g7",
+      "source_bbox": [
+        462,
+        219,
+        792,
+        1185
+      ],
+      "source_frame_index": 4,
+      "source_height": 1254,
+      "source_path": "frames/aurelia_finch_motion_046.png",
+      "source_rgba_sha256": "2a1aa0e1c39c2b7395e49f7ce9e8bd066203201893bd3cba3cd48a9543faf2bd",
+      "source_sha256": "28c7f73acf77dd90a066f5e2549c39ed6c961bc8268fda95947531eb26144bf5",
+      "source_width": 1254
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "authorship": "authored_full_size_imagegen_v1",
+      "brief_id": "aurelia-g7-explain",
+      "motion_slot_id": "motion-047",
+      "normalization_scale": 1.0,
+      "output_bbox": [
+        387,
+        210,
+        866,
+        1185
+      ],
+      "pose_id": "aurelia_finch_motion_047",
+      "rgba_sha256": "ed956ed04dd5592c6adcab143d0c7927745f25e75aee1baa2294171ca87c1fbf",
+      "runtime_admitted": false,
+      "sequence_id": "g7",
+      "source_bbox": [
+        387,
+        210,
+        866,
+        1185
+      ],
+      "source_frame_index": 5,
+      "source_height": 1254,
+      "source_path": "frames/aurelia_finch_motion_047.png",
+      "source_rgba_sha256": "ed956ed04dd5592c6adcab143d0c7927745f25e75aee1baa2294171ca87c1fbf",
+      "source_sha256": "ee5459bc999fe2c5decce1c02257ed3ad218159a7a9b059b9c0bd11046b3e800",
+      "source_width": 1254
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "authorship": "authored_full_size_imagegen_v1",
+      "brief_id": "aurelia-g7-recover",
+      "motion_slot_id": "motion-048",
+      "normalization_scale": 1.0,
+      "output_bbox": [
+        475,
+        217,
+        778,
+        1185
+      ],
+      "pose_id": "aurelia_finch_motion_048",
+      "rgba_sha256": "f9e33b7103337473b1e73733e04c64c4e55b5e0a716e751cf3cbce5b4485d98a",
+      "runtime_admitted": false,
+      "sequence_id": "g7",
+      "source_bbox": [
+        475,
+        217,
+        778,
+        1185
+      ],
+      "source_frame_index": 6,
+      "source_height": 1254,
+      "source_path": "frames/aurelia_finch_motion_048.png",
+      "source_rgba_sha256": "f9e33b7103337473b1e73733e04c64c4e55b5e0a716e751cf3cbce5b4485d98a",
+      "source_sha256": "30a9065e7a014f4b2c8f314fb26f01386c57e49db70e0387bd39b0ec42b089c1",
+      "source_width": 1254
+    }
+  ],
+  "review_contact_sheet": {
+    "path": "source-metadata/aurelia-finch/parity-motion-contact-sheet-v001.png",
+    "sha256": "83b4b403d428950ebad8dad967d1a08df255ea60732a3285848dee8eb0b219b0"
+  },
+  "review_motion_contract": {
+    "path": "source-metadata/aurelia-finch/review-motion-contract-v001.json",
+    "sha256": "51057a8f201423174447c502d6760ec164c50e0141ff212e7bf929895ad42d4b"
+  },
+  "runtime_admitted": false,
+  "schema_version": 1,
+  "sequences": {
+    "base": [
+      "aurelia_finch_motion_037",
+      "aurelia_finch_motion_038",
+      "aurelia_finch_motion_039",
+      "aurelia_finch_motion_040",
+      "aurelia_finch_motion_041",
+      "aurelia_finch_motion_042"
+    ],
+    "g1": [
+      "aurelia_finch_motion_001",
+      "aurelia_finch_motion_002",
+      "aurelia_finch_motion_003",
+      "aurelia_finch_motion_004",
+      "aurelia_finch_motion_005",
+      "aurelia_finch_motion_006"
+    ],
+    "g2": [
+      "aurelia_finch_motion_007",
+      "aurelia_finch_motion_008",
+      "aurelia_finch_motion_009",
+      "aurelia_finch_motion_010",
+      "aurelia_finch_motion_011",
+      "aurelia_finch_motion_012"
+    ],
+    "g3": [
+      "aurelia_finch_motion_013",
+      "aurelia_finch_motion_014",
+      "aurelia_finch_motion_015",
+      "aurelia_finch_motion_016",
+      "aurelia_finch_motion_017",
+      "aurelia_finch_motion_018"
+    ],
+    "g4": [
+      "aurelia_finch_motion_019",
+      "aurelia_finch_motion_020",
+      "aurelia_finch_motion_021",
+      "aurelia_finch_motion_022",
+      "aurelia_finch_motion_023",
+      "aurelia_finch_motion_024"
+    ],
+    "g5": [
+      "aurelia_finch_motion_025",
+      "aurelia_finch_motion_026",
+      "aurelia_finch_motion_027",
+      "aurelia_finch_motion_028",
+      "aurelia_finch_motion_029",
+      "aurelia_finch_motion_030"
+    ],
+    "g6": [
+      "aurelia_finch_motion_031",
+      "aurelia_finch_motion_032",
+      "aurelia_finch_motion_033",
+      "aurelia_finch_motion_034",
+      "aurelia_finch_motion_035",
+      "aurelia_finch_motion_036"
+    ],
+    "g7": [
+      "aurelia_finch_motion_043",
+      "aurelia_finch_motion_044",
+      "aurelia_finch_motion_045",
+      "aurelia_finch_motion_046",
+      "aurelia_finch_motion_047",
+      "aurelia_finch_motion_048"
+    ]
+  },
+  "status": "pending_visual_parity",
+  "target_pose_count": 48
+}

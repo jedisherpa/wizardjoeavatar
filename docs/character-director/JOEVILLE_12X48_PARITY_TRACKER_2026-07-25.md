@@ -147,7 +147,7 @@ alternate projector accepts only indexes with `review_projection: true` and
 
 ## Authored Parity Progress
 
-Orion Vale is the first incomplete roster character to reach a complete
+Orion Vale was the first incomplete roster character to reach a complete
 48-pose review candidate. His immutable supplied poses `001`-`036` were merged
 with 12 new full-size RGBA poses for:
 
@@ -161,11 +161,24 @@ matching artifact, index, contact-sheet, reconstruction, and motion-contract
 hashes. All 12 new poses passed individual full-size projection on port 8665.
 Product visual approval is still pending and runtime admission remains false.
 
+Aurelia Finch is now the second incomplete roster character to reach a
+complete 48-pose review candidate. Her immutable supplied poses `001`-`042`
+were merged with six new full-size RGBA poses for a book-centered communication
+sequence:
+
+- `g7`: receive, raise the source, consult, verify a passage, explain, recover.
+
+Two consecutive builds produced matching artifact and library-index hashes.
+All six authored poses passed individual full-size projection on port 8667.
+Port 8665 now presents the complete candidate beside approved HD Wizard Joe.
+Product visual approval is still pending and runtime admission remains false.
+
 | Character | Candidate poses | Missing poses | State |
 | --- | ---: | ---: | --- |
 | Orion Vale | 48 | 0 | Full-size technical review passed; product visual approval pending |
-| Remaining roster | 426 | 102 | Authoring/review required |
-| **Total** | **474** | **102** | **576 target slots** |
+| Aurelia Finch | 48 | 0 | Full-size technical review passed; product visual approval pending |
+| Remaining roster | 384 | 96 | Authoring/review required |
+| **Total** | **480** | **96** | **576 target slots** |
 
 Orion candidate receipts:
 
@@ -174,6 +187,14 @@ Orion candidate receipts:
 - Reconstruction: `9bdeabec0c0691d9b8bee258932ed80927605b16ebc5c9458369c85cde2f89df`
 - Review motion contract: `ce5ebba539f5511ba70e089e4e9840ce22b536fd0a039eb7f37edbf09fed1738`
 - Contact sheet: `389f03a1a742366df723510809be0d1466699976fa768c73ad8444b60b3e0271`
+
+Aurelia candidate receipts:
+
+- Artifact: `e7e44013b9356720357e9dc0114909ddaadee34a3e26d2de666751b7e7d136ad`
+- Library index: `b4d19c01b0771a1ed49a52c42051a4a82c9e347efc6152d9023b2656f596e9b1`
+- Reconstruction: `74aaaef9de21cca18429eb87d9bde97491bf0ef650b4eecbc8ba8cca803c549f`
+- Review motion contract: `51057a8f201423174447c502d6760ec164c50e0141ff212e7bf929895ad42d4b`
+- Contact sheet: `83b4b403d428950ebad8dad967d1a08df255ea60732a3285848dee8eb0b219b0`
 
 ## Roster Boundary
 
