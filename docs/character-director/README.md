@@ -34,9 +34,22 @@ runtimes on ports 8666 and 8667. Select another candidate package with
 `--current-package PATH --current-label NAME`. The observer is loopback-only
 and terminates both child runtimes when it stops.
 
+For a Wizard-to-Wizard source-art gate, run one isolated Joe runtime and place
+an approved baseline sequence beside a candidate sequence:
+
+```bash
+python3 tools/run_character_observer.py \
+  --review-sequence phazer_all \
+  --current-label "Wizard Joe Phazer motion" \
+  --current-meta "48 reconstructed alpha candidates"
+```
+
 ## Documentation Map
 
 - `PRIMARY_RESEARCH.md`: primary-source research record.
+- `HD_ALPHA_SOURCE_ADOPTION.md`: HD source authority and projector boundary.
+- `WIZARD_JOE_PHAZER_INTAKE_2026-07-24.md`: 48-frame Phazer archive census,
+  reconstruction, gate status, and review procedure.
 - `reports/README.md`: specialist reports and ownership map.
 - `PHASE0_TRACKER.md`: accountable design and implementation gates.
 - `PHASE0_SYNTHESIS.md`: binding cross-repository architecture.

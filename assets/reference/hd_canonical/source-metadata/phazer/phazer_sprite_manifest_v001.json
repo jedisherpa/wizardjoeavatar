@@ -1,0 +1,82 @@
+{
+  "schema_version": 1,
+  "pack_id": "wizard_joe_phazer_motion_v001",
+  "status": "candidate_visual_parity",
+  "archive_filename": "WizardJoePhazerSprites.zip",
+  "archive_sha256": "636b9ddf8a5edff9db9de8f2eaa9ecf930b73bfe2b1d428b5111195ff4aec450",
+  "frame_count": 48,
+  "frames_per_sheet": 6,
+  "background_contract": "baked_light_checkerboard",
+  "output_contract": {
+    "canvas_width": 1254,
+    "canvas_height": 1254,
+    "baseline_y": 1185,
+    "minimum_margin": 69,
+    "color_space": "sRGB",
+    "alpha_mode": "straight",
+    "runtime_encoding": "rgba8-zlib"
+  },
+  "extraction": {
+    "background_min_channel": 225,
+    "background_max_channel_spread": 32,
+    "minimum_component_area": 24,
+    "maximum_source_scale": 2.1,
+    "frame_grouping": "nearest_expected_center_by_component_centroid"
+  },
+  "sheets": [
+    {
+      "member": "sheet-wizard-joe.png",
+      "width": 2172,
+      "height": 724,
+      "sequence_id": "phazer_side_launch_a"
+    },
+    {
+      "member": "sheet-wizard-joe-w2.png",
+      "width": 2172,
+      "height": 724,
+      "sequence_id": "phazer_side_launch_b"
+    },
+    {
+      "member": "sheet-wizard-joe-w3.png",
+      "width": 2182,
+      "height": 721,
+      "sequence_id": "phazer_side_launch_c"
+    },
+    {
+      "member": "sheet-wizard-joe-w4.png",
+      "width": 2172,
+      "height": 724,
+      "sequence_id": "phazer_wing_cycle_a"
+    },
+    {
+      "member": "sheet-wizard-joe-w5.png",
+      "width": 2172,
+      "height": 724,
+      "sequence_id": "phazer_wing_cycle_b"
+    },
+    {
+      "member": "sheet-wizard-joe-w6.png",
+      "width": 2172,
+      "height": 724,
+      "sequence_id": "phazer_wing_cycle_c"
+    },
+    {
+      "member": "sheet-wizard-joe-w7.png",
+      "width": 1983,
+      "height": 793,
+      "sequence_id": "phazer_front_motion"
+    },
+    {
+      "member": "sheet-wizard-joe-w8.png",
+      "width": 1983,
+      "height": 793,
+      "sequence_id": "phazer_back_motion"
+    }
+  ],
+  "approval": {
+    "source_pose_authority": "user_supplied_contact_sheets",
+    "transparent_alpha_reconstruction": "pending_review",
+    "visual_parity": "pending_review",
+    "runtime_admitted": false
+  }
+}

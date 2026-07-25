@@ -495,9 +495,10 @@ class CompanionServerTests(unittest.IsolatedAsyncioTestCase):
             app, "GET", "/api/avatar/wizard/hd-profile", headers=authenticated
         )
         self.assertEqual(status, 200)
-        self.assertEqual(len(profile["pose_ids"]), 260)
+        self.assertEqual(len(profile["pose_ids"]), 308)
         self.assertIn("001_turn_front_neutral", profile["pose_ids"])
         self.assertIn("wjff_001_top_recovery", profile["pose_ids"])
+        self.assertIn("phazer_001_s01_f01", profile["pose_ids"])
         self.assertEqual(profile["profile"]["canvas_width"], 1254)
         self.assertEqual(profile["profile"]["canvas_height"], 1254)
         self.assertTrue(profile["review_projection"])
@@ -510,8 +511,20 @@ class CompanionServerTests(unittest.IsolatedAsyncioTestCase):
             profile["pose_metadata"]["wjff_001_top_recovery"]["approval_state"],
             "candidate_review",
         )
-        self.assertEqual(len(profile["sequences"]["all_hd_frames"]["pose_ids"]), 260)
+        self.assertEqual(
+            profile["pose_metadata"]["phazer_001_s01_f01"]["approval_state"],
+            "candidate_visual_parity",
+        )
+        self.assertFalse(
+            profile["pose_metadata"]["phazer_001_s01_f01"]["runtime_admitted"]
+        )
+        self.assertEqual(len(profile["sequences"]["all_hd_frames"]["pose_ids"]), 308)
         self.assertEqual(profile["sequences"]["all_hd_frames"]["fps"], 6)
+        self.assertEqual(
+            len(profile["sequences"]["approved_hd_frames"]["pose_ids"]), 250
+        )
+        self.assertEqual(len(profile["sequences"]["phazer_all"]["pose_ids"]), 48)
+        self.assertEqual(profile["sequences"]["phazer_all"]["fps"], 8)
 
         status, headers, body = await asgi_raw_request(
             app,
@@ -569,7 +582,7 @@ class CompanionServerTests(unittest.IsolatedAsyncioTestCase):
         self.assertEqual(status, 200)
         self.assertIn("text/html", headers["content-type"])
         self.assertIn(b"Current live animation", body)
-        self.assertIn(b"All 260 HD alpha frames", body)
+        self.assertIn(b"All HD review frames", body)
         self.assertIn(b"hd-sequence=all_hd_frames", body)
         await app.state.frame_hub.stop()
 

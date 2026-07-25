@@ -59,9 +59,15 @@ def _observer_html(
     *,
     joe_port: int,
     current_port: int,
+    joe_path: str,
+    current_path: str,
     current_label: str,
+    current_meta: str,
 ) -> bytes:
     safe_label = html.escape(current_label)
+    safe_current_meta = html.escape(current_meta)
+    safe_joe_path = html.escape(joe_path, quote=True)
+    safe_current_path = html.escape(current_path, quote=True)
     return f"""<!doctype html>
 <html lang="en">
   <head>
@@ -147,23 +153,23 @@ def _observer_html(
       <section>
         <div class="panel-title">
           <h1>HD Wizard Joe</h1>
-          <span>260 approved alpha frames</span>
+          <span>250 approved source frames</span>
         </div>
         <iframe
           id="joe"
           title="HD Wizard Joe approved animation"
-          src="http://127.0.0.1:{joe_port}/?hd-sequence=all_hd_frames"
+          src="http://127.0.0.1:{joe_port}{safe_joe_path}"
         ></iframe>
       </section>
       <section>
         <div class="panel-title">
           <h1>{safe_label}</h1>
-          <span>current package candidate</span>
+          <span>{safe_current_meta}</span>
         </div>
         <iframe
           id="current"
           title="{safe_label} current animation package"
-          src="http://127.0.0.1:{current_port}/?embedded=1"
+          src="http://127.0.0.1:{current_port}{safe_current_path}"
         ></iframe>
       </section>
     </main>
@@ -201,14 +207,20 @@ def _observer_html(
 class ObserverHandler(BaseHTTPRequestHandler):
     joe_port = 0
     current_port = 0
+    joe_path = "/?hd-sequence=approved_hd_frames"
+    current_path = "/?embedded=1"
     current_label = ""
+    current_meta = ""
 
     def do_GET(self) -> None:
         if self.path in {"/", "/index.html"}:
             body = _observer_html(
                 joe_port=self.joe_port,
                 current_port=self.current_port,
+                joe_path=self.joe_path,
+                current_path=self.current_path,
                 current_label=self.current_label,
+                current_meta=self.current_meta,
             )
             self._respond(200, "text/html; charset=utf-8", body)
             return
@@ -270,27 +282,49 @@ def main() -> None:
     parser.add_argument("--port", type=int, default=8665)
     parser.add_argument("--joe-port", type=int, default=8666)
     parser.add_argument("--current-port", type=int, default=8667)
+    parser.add_argument("--joe-sequence", default="approved_hd_frames")
+    parser.add_argument(
+        "--review-sequence",
+        help="Compare a second Wizard Joe HD sequence instead of starting another character.",
+    )
     parser.add_argument(
         "--current-package",
         type=Path,
         default=DEFAULT_CURRENT_PACKAGE,
     )
     parser.add_argument("--current-label", default="Serena Quill")
+    parser.add_argument("--current-meta", default="current package candidate")
     parser.add_argument("--startup-timeout", type=float, default=20.0)
     args = parser.parse_args()
 
     if args.host != "127.0.0.1":
         parser.error("the observer binds only to 127.0.0.1")
-    ports = {args.port, args.joe_port, args.current_port}
-    if len(ports) != 3 or any(port < 1 or port > 65535 for port in ports):
-        parser.error("observer and runtime ports must be distinct valid TCP ports")
+    active_ports = (
+        {args.port, args.joe_port}
+        if args.review_sequence
+        else {args.port, args.joe_port, args.current_port}
+    )
+    expected_port_count = 2 if args.review_sequence else 3
+    if len(active_ports) != expected_port_count or any(
+        port < 1 or port > 65535 for port in active_ports
+    ):
+        parser.error("observer and active runtime ports must be distinct valid TCP ports")
     current_package = args.current_package.expanduser().resolve()
-    if not current_package.is_file():
+    if not args.review_sequence and not current_package.is_file():
         parser.error(f"current character package not found: {current_package}")
 
     ObserverHandler.joe_port = args.joe_port
-    ObserverHandler.current_port = args.current_port
+    ObserverHandler.current_port = (
+        args.joe_port if args.review_sequence else args.current_port
+    )
+    ObserverHandler.joe_path = f"/?hd-sequence={args.joe_sequence}"
+    ObserverHandler.current_path = (
+        f"/?hd-sequence={args.review_sequence}"
+        if args.review_sequence
+        else "/?embedded=1"
+    )
     ObserverHandler.current_label = args.current_label
+    ObserverHandler.current_meta = args.current_meta
     server = ThreadingHTTPServer((args.host, args.port), ObserverHandler)
     processes: list[subprocess.Popen[bytes]] = []
     stopping = threading.Event()
@@ -308,22 +342,24 @@ def main() -> None:
     try:
         joe = subprocess.Popen(common + ["--port", str(args.joe_port)], cwd=ROOT)
         processes.append(joe)
-        current = subprocess.Popen(
-            common
-            + [
-                "--port",
-                str(args.current_port),
-                "--character-package",
-                str(current_package),
-            ],
-            cwd=ROOT,
-        )
-        processes.append(current)
         _wait_ready(joe, args.joe_port, args.startup_timeout)
-        _wait_ready(current, args.current_port, args.startup_timeout)
+        if not args.review_sequence:
+            current = subprocess.Popen(
+                common
+                + [
+                    "--port",
+                    str(args.current_port),
+                    "--character-package",
+                    str(current_package),
+                ],
+                cwd=ROOT,
+            )
+            processes.append(current)
+            _wait_ready(current, args.current_port, args.startup_timeout)
         print(
             f"Character observer ready at http://{args.host}:{args.port}/ "
-            f"(HD Joe {args.joe_port}, {args.current_label} {args.current_port})",
+            f"(HD Joe {args.joe_port}, {args.current_label} "
+            f"{ObserverHandler.current_port})",
             flush=True,
         )
         server.serve_forever(poll_interval=0.25)
