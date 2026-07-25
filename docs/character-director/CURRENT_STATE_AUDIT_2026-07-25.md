@@ -138,11 +138,15 @@ receipt mismatch fail closed. Runtime resolution loads the exact immutable score
 generation named by the accepted ID, revision, digest, package, and media
 binding rather than consulting the mutable current-score pointer. Publication
 also creates a bounded, one-use server-side grant. Registration must advance
-the accepted sequence and media epoch while retaining the exact connector
-session, media, turn, utterance, approval artifact, character, and package from
-`C0`; successful registration consumes the grant. Historical and cross-turn
-score replay therefore fails closed. Scoreless governed speech is disabled by
-default.
+to exactly the next accepted sequence and media epoch while retaining the exact
+connector session, media, turn, utterance, approval artifact, character, and
+package from `C0`. Grants expire after 30 seconds, are invalidated by a
+superseding speech cursor or revocation, and are consumed by successful
+registration. Historical, skipped-epoch, and cross-turn score replay therefore
+fail closed. Generated `compiled:speech:*` artifacts have a 2,048-generation
+global retention cap that protects outstanding grants and the currently
+accepted speech score while excluding authored scores. Scoreless governed
+speech is disabled by default.
 During a staggered local upgrade it is available only when Python explicitly
 sets `WIZARD_ALLOW_SCORELESS_GOVERNED_SPEECH=1` and the Prism controller
 explicitly sets `allowScorelessCompatibility: true`; a `404` or `501` response

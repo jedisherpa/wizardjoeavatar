@@ -1,4 +1,5 @@
 import json
+import os
 import tempfile
 import unittest
 from pathlib import Path
@@ -230,6 +231,77 @@ class PerformanceScoreTests(unittest.TestCase):
             self.assertEqual(
                 repository.load_current(digest("f")).compiled_score_id,
                 second.compiled_score_id,
+            )
+
+    def test_live_score_retention_prunes_only_old_unprotected_generations(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            repository = CompiledScoreRepository(temporary, self.loader)
+            publications = []
+            for ordinal, character in enumerate(("1", "2", "3"), start=1):
+                document = score_document()
+                document["compiled_score_id"] = "compiled:speech:{}".format(
+                    ordinal
+                )
+                document["media"]["media_id"] = "media:speech:{}".format(
+                    ordinal
+                )
+                document["media"]["media_sha256"] = digest(character)
+                score = self.loader.from_mapping(document)
+                publication = repository.publish(score)
+                publications.append(publication)
+                manifest = (
+                    Path(temporary)
+                    / "media"
+                    / (character * 64)
+                    / "scores"
+                    / publication.score_id
+                    / str(publication.revision)
+                    / "manifest.json"
+                )
+                os.utime(manifest, ns=(ordinal, ordinal))
+
+            first, second, third = publications
+            deleted = repository.prune_live_generations(
+                protected_bindings=(
+                    (
+                        first.media_sha256,
+                        first.compiled_score_id,
+                        first.revision,
+                        first.score_sha256,
+                    ),
+                ),
+                max_generations=2,
+            )
+
+            self.assertEqual(deleted, 1)
+            self.assertEqual(
+                repository.load_binding(
+                    media_sha256=first.media_sha256,
+                    compiled_score_id=first.compiled_score_id,
+                    revision=first.revision,
+                    score_sha256=first.score_sha256,
+                    package_digest=first.package_digest,
+                ).compiled_score_id,
+                first.compiled_score_id,
+            )
+            with self.assertRaises(ScoreValidationError) as pruned:
+                repository.load_binding(
+                    media_sha256=second.media_sha256,
+                    compiled_score_id=second.compiled_score_id,
+                    revision=second.revision,
+                    score_sha256=second.score_sha256,
+                    package_digest=second.package_digest,
+                )
+            self.assertEqual(pruned.exception.code, "score_not_ready")
+            self.assertEqual(
+                repository.load_binding(
+                    media_sha256=third.media_sha256,
+                    compiled_score_id=third.compiled_score_id,
+                    revision=third.revision,
+                    score_sha256=third.score_sha256,
+                    package_digest=third.package_digest,
+                ).compiled_score_id,
+                third.compiled_score_id,
             )
 
     def test_corrupt_pointer_is_not_silently_ignored(self):

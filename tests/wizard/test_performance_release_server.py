@@ -626,6 +626,37 @@ class GovernedSpeechServerTests(unittest.IsolatedAsyncioTestCase):
                 "score_binding_mismatch",
             )
 
+            late_context_value = deepcopy(final_context)
+            late_context_value.pop("context_sha256")
+            late_context_value["source"]["accepted_sequence"] += 1
+            late_context_value["source"]["media_epoch"] += 1
+            late_context = PerformanceContextV1.build(
+                late_context_value
+            ).to_dict()
+            late_approval = approval_for(
+                late_context,
+                "approval:server-score-late-cursor",
+            )
+            late_registration = {
+                "schema_version": 1,
+                "approved_text": TEXT,
+                "approval": late_approval.to_dict(),
+                "performance_context": late_context,
+                "alignment": alignment_mapping(),
+            }
+            late_status, late_response = await asgi_request(
+                app,
+                "POST",
+                "/api/avatar/wizard/governed-speech",
+                json.dumps(late_registration).encode("utf-8"),
+                TOKEN_HEADERS,
+            )
+            self.assertEqual(late_status, 409, late_response)
+            self.assertEqual(
+                late_response["detail"]["code"],
+                "score_preparation_mismatch",
+            )
+
             replay_context_value = deepcopy(final_context)
             replay_context_value.pop("context_sha256")
             replay_context_value["source"]["turn_id"] = "turn:replayed"

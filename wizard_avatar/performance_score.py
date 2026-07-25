@@ -586,6 +586,13 @@ class CompiledScoreRepository:
         except (OSError, UnicodeDecodeError, json.JSONDecodeError, ScoreValidationError) as exc:
             raise ScoreValidationError("cache_corrupt", "current score pointer is corrupt") from exc
         mapping = _require_mapping(value, "$.current")
+        return self._publication_from_mapping(mapping, "$.current")
+
+    @staticmethod
+    def _publication_from_mapping(
+        mapping: Mapping[str, object],
+        path: str,
+    ) -> ScorePublication:
         expected = {
             "schema_version",
             "media_sha256",
@@ -598,12 +605,28 @@ class CompiledScoreRepository:
         if set(mapping) != expected or mapping.get("schema_version") != 1:
             raise ScoreValidationError("cache_corrupt", "current score pointer shape is invalid")
         return ScorePublication(
-            media_sha256=_require_sha256(mapping.get("media_sha256"), "$.current.media_sha256"),
-            score_id=_require_id(mapping.get("score_id"), "$.current.score_id"),
-            revision=_require_int(mapping.get("revision"), "$.current.revision", minimum=1),
-            score_sha256=_require_sha256(mapping.get("score_sha256"), "$.current.score_sha256"),
-            compiled_score_id=_require_id(mapping.get("compiled_score_id"), "$.current.compiled_score_id"),
-            package_digest=_require_sha256(mapping.get("package_digest"), "$.current.package_digest"),
+            media_sha256=_require_sha256(
+                mapping.get("media_sha256"),
+                path + ".media_sha256",
+            ),
+            score_id=_require_id(mapping.get("score_id"), path + ".score_id"),
+            revision=_require_int(
+                mapping.get("revision"),
+                path + ".revision",
+                minimum=1,
+            ),
+            score_sha256=_require_sha256(
+                mapping.get("score_sha256"),
+                path + ".score_sha256",
+            ),
+            compiled_score_id=_require_id(
+                mapping.get("compiled_score_id"),
+                path + ".compiled_score_id",
+            ),
+            package_digest=_require_sha256(
+                mapping.get("package_digest"),
+                path + ".package_digest",
+            ),
         )
 
     def _replace_pointer(self, publication: ScorePublication) -> None:
@@ -722,6 +745,99 @@ class CompiledScoreRepository:
                     "requested score generation is not published",
                 )
             return self.load_revision(publication)
+
+    def prune_live_generations(
+        self,
+        *,
+        protected_bindings: Iterable[Tuple[str, str, int, str]],
+        max_generations: int,
+    ) -> int:
+        """Bound generated live-speech artifacts without touching authored scores."""
+
+        if not _is_int(max_generations) or max_generations < 1:
+            raise ValueError("max_generations must be a positive integer")
+        protected = {
+            (
+                _require_sha256(media_sha256, "protected.media_sha256"),
+                _require_id(score_id, "protected.score_id"),
+                _require_int(revision, "protected.revision", minimum=1),
+                _require_sha256(score_sha256, "protected.score_sha256"),
+            )
+            for media_sha256, score_id, revision, score_sha256 in protected_bindings
+        }
+        with self._publication_lock():
+            candidates = []
+            for manifest_path in self.root.glob(
+                "media/*/scores/compiled:speech:*/*/manifest.json"
+            ):
+                try:
+                    value = json.loads(
+                        manifest_path.read_text("utf-8"),
+                        object_pairs_hook=_pairs_without_duplicates,
+                    )
+                    publication = self._publication_from_mapping(
+                        _require_mapping(value, "$.manifest"),
+                        "$.manifest",
+                    )
+                    if not publication.compiled_score_id.startswith(
+                        "compiled:speech:"
+                    ):
+                        continue
+                    modified_ns = manifest_path.stat().st_mtime_ns
+                except (
+                    OSError,
+                    UnicodeDecodeError,
+                    json.JSONDecodeError,
+                    ScoreValidationError,
+                ):
+                    continue
+                candidates.append(
+                    (
+                        modified_ns,
+                        str(manifest_path),
+                        publication,
+                        manifest_path.parent,
+                    )
+                )
+            candidates.sort(key=lambda candidate: (candidate[0], candidate[1]))
+            removable = max(0, len(candidates) - max_generations)
+            deleted = 0
+            for _modified, _path, publication, generation in candidates:
+                if deleted >= removable:
+                    break
+                binding = (
+                    publication.media_sha256,
+                    publication.compiled_score_id,
+                    publication.revision,
+                    publication.score_sha256,
+                )
+                if binding in protected:
+                    continue
+                pointer = self._read_pointer(publication.media_sha256)
+                if (
+                    pointer is not None
+                    and pointer.compiled_score_id
+                    == publication.compiled_score_id
+                    and pointer.revision == publication.revision
+                    and pointer.score_sha256 == publication.score_sha256
+                ):
+                    (self._media_root(publication.media_sha256) / "current.json").unlink()
+                    self._fsync_directory(
+                        self._media_root(publication.media_sha256)
+                    )
+                shutil.rmtree(generation)
+                for parent in (generation.parent, generation.parent.parent):
+                    try:
+                        parent.rmdir()
+                    except OSError:
+                        break
+                deleted += 1
+            if len(candidates) - deleted > max_generations:
+                raise ScoreValidationError(
+                    "score_retention_capacity",
+                    "live score retention is full of protected generations",
+                )
+            return deleted
 
     def select_revision(self, publication: ScorePublication) -> None:
         """Atomically repoint current to an existing validated revision for rollback."""

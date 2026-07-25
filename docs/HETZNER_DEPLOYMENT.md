@@ -50,4 +50,6 @@ until live score preparation, exact-generation reload, and a score-bound
 registration receipt have been exercised through the private connector. The
 same smoke test must prove that an altered turn or utterance cannot redeem a
 published score and that a successful registration consumes its one-use
-preparation grant.
+preparation grant. It must also prove exact next-epoch admission, 30-second
+monotonic expiry, supersession invalidation, and bounded generated-live-score
+retention.

@@ -1,6 +1,8 @@
 import tempfile
 import unittest
+from unittest import mock
 
+from tests.wizard.test_media_session import snapshot
 from tests.wizard.test_performance_context import context_mapping
 from wizard_avatar.character_capabilities import derive_character_capability_manifest
 from wizard_avatar.live_speech_score import (
@@ -9,6 +11,7 @@ from wizard_avatar.live_speech_score import (
     publish_live_speech_score,
 )
 from wizard_avatar.performance_context import PerformanceContextV1
+from wizard_avatar.performance_application import PerformanceApplication
 from wizard_avatar.performance_score import CompiledScoreRepository
 
 
@@ -123,6 +126,41 @@ class LiveSpeechScoreTests(unittest.TestCase):
                             capability_manifest=self.manifest,
                         )
                     self.assertEqual(caught.exception.code, "media_duration_not_ready")
+
+    def test_published_preparation_grant_expires_monotonically(self):
+        context = speech_context(self.manifest)
+        with tempfile.TemporaryDirectory() as temporary:
+            repository = CompiledScoreRepository(temporary)
+            application = PerformanceApplication(
+                context.runtime.wizard_runtime_epoch,
+                score_repository=repository,
+                character_id=context.character.character_id,
+                package_digest=context.character.package_digest,
+                manifest_digest=context.character.manifest_digest,
+                capability_manifest=self.manifest,
+            )
+            compiled = application.compile_live_speech_score(
+                context,
+                duration_ms=875,
+            )
+            with mock.patch(
+                "wizard_avatar.performance_application.time.monotonic_ns",
+                return_value=1_000_000,
+            ):
+                prepared = application.publish_live_speech_score(compiled)
+            key = (
+                prepared.score_binding.score_id,
+                prepared.score_binding.score_revision,
+                prepared.score_binding.score_sha256,
+            )
+            grant = application._live_score_preparations[key]
+
+            application._reconcile_live_score_preparations(
+                snapshot(with_hashes=False),
+                grant.expires_at_monotonic_us + 1,
+            )
+
+            self.assertNotIn(key, application._live_score_preparations)
 
 
 if __name__ == "__main__":

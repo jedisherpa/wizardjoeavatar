@@ -126,9 +126,18 @@ pointer, so identical audio bytes in concurrent turns cannot substitute scores.
 Python also records a bounded, one-use preparation grant when publication
 succeeds. Registration must present the same connector session, media identity,
 turn, utterance, presentation artifact, character, and package from `C0`, with
-strictly newer accepted sequence and media epoch values. A rejected
-registration does not consume the grant; a successful registration does.
-Missing, expired, replayed, or cross-turn grants fail closed.
+the immediately following accepted sequence and media epoch values. Grants
+expire after 30 seconds and are invalidated when another accepted speech
+snapshot supersedes the expected scored cursor or governance revokes speech. A
+rejected registration does not consume an otherwise valid grant; a successful
+registration does. Missing, expired, replayed, skipped-epoch, or cross-turn
+grants fail closed.
+
+Generated live-speech artifacts are globally capped at 2,048 immutable
+generations. Before publication, Python prunes only the oldest unprotected
+`compiled:speech:*` generation; outstanding grants and the currently accepted
+speech score are protected. Authored audiobook and non-speech scores are never
+part of this retention pass.
 
 Permission-world updates use the same connector instance, discovery identity,
 and bearer token. Production character facts come only from Prism's canonical

@@ -657,7 +657,11 @@ def create_app(
                 status_code=409
                 if (
                     exc.code.endswith(("mismatch", "not_ready"))
-                    or exc.code == "score_preparation_required"
+                    or exc.code
+                    in {
+                        "score_preparation_expired",
+                        "score_preparation_required",
+                    }
                 )
                 else 400,
                 detail={"code": exc.code, "path": exc.path},

@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from collections import OrderedDict
 from dataclasses import dataclass, replace
+import time
 from typing import Iterable, Mapping, Optional
 
 from .animation_graph import AnimationGraph, load_reference_animation_graph_v2
@@ -30,7 +31,7 @@ from .performance_scheduler import (
     ResolvedPerformanceState,
     SchedulerState,
 )
-from .performance_score import CompiledScoreRepository
+from .performance_score import CompiledScoreRepository, ScoreValidationError
 from .permission_world import (
     CapabilityPermissionV1,
     PermissionWorldCapabilityIndexV1,
@@ -52,6 +53,8 @@ from .score_runtime import (
 
 _UNBOUND_DIGEST = "sha256:" + "0" * 64
 _LIVE_SCORE_PREPARATION_CAPACITY = 256
+_LIVE_SCORE_PREPARATION_TTL_US = 30_000_000
+_LIVE_SCORE_RETENTION_LIMIT = 2_048
 
 
 _MOUTH_MAP = {
@@ -91,6 +94,12 @@ class PerformanceApplicationResult:
             "mouth": self.mouth,
             "resolution_hash": self.resolution_hash,
         }
+
+
+@dataclass(frozen=True)
+class _LiveScorePreparationGrant:
+    prepared: PreparedLiveSpeechScoreV1
+    expires_at_monotonic_us: int
 
 
 class PerformanceApplication:
@@ -192,7 +201,7 @@ class PerformanceApplication:
         self._permission_visual_origin_monotonic_us: Optional[int] = None
         self._permission_visual_receipt_wall_ms: Optional[int] = None
         self._live_score_preparations: OrderedDict[
-            tuple[str, int, str], PreparedLiveSpeechScoreV1
+            tuple[str, int, str], _LiveScorePreparationGrant
         ] = OrderedDict()
 
     def supports_action(self, action: str) -> bool:
@@ -233,6 +242,10 @@ class PerformanceApplication:
             and acceptance.snapshot is snapshot
             and ack.disposition == "accepted"
         ):
+            self._reconcile_live_score_preparations(
+                snapshot,
+                receipt_monotonic_us,
+            )
             self.governed_speech.reconcile(
                 snapshot,
                 acceptance.reconciliation_generation,
@@ -495,26 +508,90 @@ class PerformanceApplication:
         if self.score_repository is None:
             raise GovernedSpeechError("score_repository_not_ready")
         try:
+            protected_bindings = [
+                (
+                    grant.prepared.score_binding.media_sha256,
+                    grant.prepared.score_binding.score_id,
+                    grant.prepared.score_binding.score_revision,
+                    grant.prepared.score_binding.score_sha256,
+                )
+                for grant in self._live_score_preparations.values()
+            ]
+            speech_snapshot = self.scheduler.coordinator.snapshot_for_slot("speech")
+            if (
+                speech_snapshot is not None
+                and speech_snapshot.media.media_sha256 is not None
+                and speech_snapshot.performance.score_id is not None
+                and speech_snapshot.performance.score_revision is not None
+                and speech_snapshot.performance.score_sha256 is not None
+            ):
+                protected_bindings.append(
+                    (
+                        speech_snapshot.media.media_sha256,
+                        speech_snapshot.performance.score_id,
+                        speech_snapshot.performance.score_revision,
+                        speech_snapshot.performance.score_sha256,
+                    )
+                )
+            self.score_repository.prune_live_generations(
+                protected_bindings=protected_bindings,
+                max_generations=_LIVE_SCORE_RETENTION_LIMIT - 1,
+            )
             prepared = publish_live_speech_score(
                 compiled,
                 repository=self.score_repository,
             )
-        except LiveSpeechScoreError as exc:
+        except (LiveSpeechScoreError, ScoreValidationError) as exc:
             raise GovernedSpeechError(exc.code, exc.path) from exc
         binding = prepared.score_binding
         key = (binding.score_id, binding.score_revision, binding.score_sha256)
-        self._live_score_preparations[key] = prepared
+        self._live_score_preparations[key] = _LiveScorePreparationGrant(
+            prepared=prepared,
+            expires_at_monotonic_us=(
+                time.monotonic_ns() // 1000 + _LIVE_SCORE_PREPARATION_TTL_US
+            ),
+        )
         self._live_score_preparations.move_to_end(key)
         while len(self._live_score_preparations) > _LIVE_SCORE_PREPARATION_CAPACITY:
             self._live_score_preparations.popitem(last=False)
         return prepared
 
+    def _reconcile_live_score_preparations(
+        self,
+        snapshot: MediaSessionSnapshotV1,
+        now_monotonic_us: int,
+    ) -> None:
+        for key, grant in tuple(self._live_score_preparations.items()):
+            preliminary = grant.prepared.preliminary_context
+            binding = grant.prepared.score_binding
+            expired = now_monotonic_us > grant.expires_at_monotonic_us
+            superseded = (
+                snapshot.media.source_slot == "speech"
+                and not (
+                    snapshot.connector_session_id
+                    == preliminary.source.connector_session_id
+                    and snapshot.sequence
+                    == preliminary.source.accepted_sequence + 1
+                    and snapshot.media_epoch == preliminary.source.media_epoch + 1
+                    and snapshot.media.media_id == binding.media_id
+                    and snapshot.media.media_sha256 == binding.media_sha256
+                    and snapshot.performance.score_id == binding.score_id
+                    and snapshot.performance.score_revision
+                    == binding.score_revision
+                    and snapshot.performance.score_sha256
+                    == binding.score_sha256
+                )
+            )
+            if expired or superseded:
+                self._live_score_preparations.pop(key, None)
+
     @staticmethod
     def _validate_live_score_preparation(
-        prepared: PreparedLiveSpeechScoreV1,
+        grant: _LiveScorePreparationGrant,
         registration: GovernedSpeechRegistrationV1,
         snapshot: MediaSessionSnapshotV1,
     ) -> None:
+        prepared = grant.prepared
         preliminary = prepared.preliminary_context
         final = registration.performance_context
         approval = registration.approval
@@ -535,8 +612,8 @@ class PerformanceApplication:
             and preliminary.source.turn_id == final.source.turn_id
             and preliminary.source.utterance_id == final.source.utterance_id
             and final.source.accepted_sequence
-            > preliminary.source.accepted_sequence
-            and final.source.media_epoch > preliminary.source.media_epoch
+            == preliminary.source.accepted_sequence + 1
+            and final.source.media_epoch == preliminary.source.media_epoch + 1
         )
         identity_matches = (
             preliminary.runtime.wizard_runtime_epoch
@@ -610,6 +687,12 @@ class PerformanceApplication:
                     "score_preparation_required",
                     "$.performance_context.evidence.score_binding",
                 )
+            if now_monotonic_us > live_preparation.expires_at_monotonic_us:
+                self._live_score_preparations.pop(key, None)
+                raise GovernedSpeechError(
+                    "score_preparation_expired",
+                    "$.performance_context.evidence.score_binding",
+                )
             self._validate_live_score_preparation(
                 live_preparation,
                 registration,
@@ -635,6 +718,7 @@ class PerformanceApplication:
         generation: int,
         controller: WizardAvatarController,
     ) -> None:
+        self._live_score_preparations.clear()
         self.governed_speech.revoke(generation)
         self._release_owned_state(controller)
         self._orient_toward_viewer_after_interruption(controller)
