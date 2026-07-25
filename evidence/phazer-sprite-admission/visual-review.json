@@ -56,18 +56,18 @@
     "WJPS-0047",
     "WJPS-0048"
   ],
-  "compiler_id": "wizard-avatar-phazer-sprites-v1",
+  "compiler_id": "wizard-avatar-phazer-sprites-v2",
   "decision": "approved_transparent_overlay_review",
   "notes": "All 48 projected silhouettes and the difficult overlapping-wing source regions were inspected. The native graphs preserve the selected source figure exactly after matte isolation.",
   "projected_contact_sheet": {
     "path": "projected-contact-sheet.png",
-    "sha256": "ae2565a1f90c215f9b1818b66db32042441d16da18edc2c8c378712b3b7649ca"
+    "sha256": "f0dacec9ea262bf70f8513a35f8c3ae4093a6f50c4b3c5fd212f65a4f4ed5ff5"
   },
   "reviewed_pose_count": 48,
   "reviewer": "Codex visual frame review",
   "schema_version": 1,
   "transparent_overlay_contact_sheet": {
     "path": "transparent-overlay-contact-sheet.png",
-    "sha256": "859e1b4ab34ffdbc606ee3f1e1ca58eb29abc62084f2d21b913ef27f10f65e84"
+    "sha256": "fcb1f00e10697054b5d3b23e2cc0b80570cee56d920ef968ef83ae3995579b0f"
   }
 }

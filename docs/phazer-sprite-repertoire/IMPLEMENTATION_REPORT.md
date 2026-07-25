@@ -15,7 +15,7 @@
 
 ## Runtime Result
 
-- Compiler ID: `wizard-avatar-production-alpha-plus-phazer-v1`
+- Compiler ID: `wizard-avatar-production-alpha-plus-phazer-v2`
 - Runtime path: `rust/wizard_avatar_engine/assets/pose_graphs/v7`
 - Total runtime poses: 308
 - Unique semantic poses: 308
@@ -31,6 +31,15 @@ The sheets are treated as authored movement, not as interchangeable still poses.
 airborne support, facing, phase, and loopability are recorded per sequence. Frames use zero
 synthetic transition ticks so the source poses remain intact; timing is authored through hold
 ticks. The engine's actor translation remains responsible for travel across the stage.
+
+All 48 Phazer frames use one uniform 47:20 nearest-neighbor enlargement before canonical
+placement. The enlargement replicates authored color pixels without interpolation, preserves
+relative choreography across the sheets, and brings the occupied silhouette into the same
+approximately 1100-cell height band as the established Wizard Joe runtime poses.
+
+The browser requests every immutable graph URL with its catalog `graph_sha256`. A promoted graph
+therefore receives a new cache key, preventing an earlier lower-resolution graph from surviving a
+runtime catalog upgrade.
 
 ## Verification Result
 

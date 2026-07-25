@@ -33,6 +33,14 @@ export function projectWorldToStage(worldPosition, cols, rows) {
   };
 }
 
+export function buildPoseGraphPath(poseId, sourceIdentity, entry) {
+  const base = sourceIdentity
+    ? `/api/avatar/wizard/v2/pose-graphs/source/${encodeURIComponent(poseId)}`
+    : `/api/avatar/wizard/v2/pose-graphs/semantic/${encodeURIComponent(poseId)}`;
+  const version = entry?.graph_sha256 ?? entry?.graph_id;
+  return version ? `${base}?v=${encodeURIComponent(version)}` : base;
+}
+
 export function buildPixelGraphRaster(graph) {
   if (graph?.schema_version !== 1) throw new Error("Unsupported pixel graph schema");
   const width = graph?.frame?.width;
@@ -404,9 +412,7 @@ export class PixelGraphAvatarRenderer {
   async loadPose(poseId) {
     const entry = this.entryForPoseId(poseId);
     const sourceIdentity = this.sourceEntries.has(poseId);
-    const path = sourceIdentity
-      ? `/api/avatar/wizard/v2/pose-graphs/source/${encodeURIComponent(poseId)}`
-      : `/api/avatar/wizard/v2/pose-graphs/semantic/${encodeURIComponent(poseId)}`;
+    const path = buildPoseGraphPath(poseId, sourceIdentity, entry);
     const raster = this.worker
       ? await this.loadPoseInWorker(poseId, path, entry)
       : await this.loadPoseInline(poseId, path, entry);

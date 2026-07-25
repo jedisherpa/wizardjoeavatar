@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import {
+  buildPoseGraphPath,
   buildPixelGraphRaster,
   PixelGraphAvatarRenderer,
   projectWorldToStage,
@@ -45,6 +46,17 @@ test("pixel graph projector rejects truncated run payloads", () => {
         runs: [{ x: 1, y: 1, palette_indices: [0, 0] }],
       }),
     /leaves its frame/,
+  );
+});
+
+test("pose graph URLs are immutable only within one catalog hash", () => {
+  assert.equal(
+    buildPoseGraphPath("walk contact/left", false, { graph_sha256: "abc123" }),
+    "/api/avatar/wizard/v2/pose-graphs/semantic/walk%20contact%2Fleft?v=abc123",
+  );
+  assert.equal(
+    buildPoseGraphPath("WJPS-0001", true, { graph_sha256: "def456" }),
+    "/api/avatar/wizard/v2/pose-graphs/source/WJPS-0001?v=def456",
   );
 });
 

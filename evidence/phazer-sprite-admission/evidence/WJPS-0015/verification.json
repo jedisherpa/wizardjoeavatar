@@ -1,5 +1,5 @@
 {
-  "compiler_id": "wizard-avatar-phazer-sprites-v1",
+  "compiler_id": "wizard-avatar-phazer-sprites-v2",
   "evidence": {
     "isolated_composite": "isolated-composite.png",
     "projected": "projected.png",
@@ -8,17 +8,17 @@
     "transparent_overlay": "transparent-overlay.png"
   },
   "exact_projection": true,
-  "foreground_pixel_count": 63032,
+  "foreground_pixel_count": 347893,
   "foreground_source_match_millionths": 1000000,
-  "graph_sha256": "1139df5ee8885c6d317acbdbdb3e3b7f9ed678a9ce50f5acf349f87c2f73a6a8",
+  "graph_sha256": "07bc3dbe49a3aadc58ef07110016d4d6f95b3e624351f36f02637ef3028ced60",
   "isolated_bounds": [
-    8,
-    8,
-    308,
-    378
+    19,
+    19,
+    723,
+    888
   ],
   "pose_id": "WJPS-0015",
-  "removed_matte_pixel_count": 64624,
+  "removed_matte_pixel_count": 356793,
   "schema_version": 1,
   "semantic_id": "phazer_side_leap_frame_03",
   "sheet_crop": [
@@ -29,6 +29,22 @@
   ],
   "sheet_frame": 3,
   "sheet_member": "sheet-wizard-joe-w3.png",
-  "source_png_sha256": "12a0843216f4ba249da69d66b5ec7c7b5136bdc3b6745b369a36dd614b72b05c",
+  "source_png_sha256": "f9a8b48e49c508085b56c3815f6261c56eb52197b75f073393bc5329f05a94af",
+  "source_scale": {
+    "anchor_preservation": "ground_contact",
+    "denominator": 20,
+    "filter": "nearest_neighbor",
+    "numerator": 47,
+    "original_offset_y": 787,
+    "original_size": [
+      324,
+      394
+    ],
+    "scaled_offset_y": 266,
+    "scaled_size": [
+      761,
+      926
+    ]
+  },
   "visual_review_status": "approved_transparent_overlay_review"
 }

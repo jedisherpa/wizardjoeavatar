@@ -8,7 +8,7 @@ use std::path::{Path, PathBuf};
 use std::sync::{Arc, Mutex, OnceLock};
 
 pub const RUNTIME_POSE_GRAPH_SCHEMA_VERSION: u32 = 2;
-pub const RUNTIME_POSE_GRAPH_COMPILER_ID: &str = "wizard-avatar-production-alpha-plus-phazer-v1";
+pub const RUNTIME_POSE_GRAPH_COMPILER_ID: &str = "wizard-avatar-production-alpha-plus-phazer-v2";
 pub const RUNTIME_POSE_GRAPH_COUNT: usize = 308;
 pub const RUNTIME_UNIQUE_SEMANTIC_COUNT: usize = 308;
 pub const RUNTIME_SOURCE_RECORD_COUNT: usize = 308;

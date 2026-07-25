@@ -5,7 +5,7 @@ use crate::{
     write_pixel_graph, ArchiveProvenance, ForegroundBounds, FrameSpec, IsolationConfig,
     NormalizedPose, OverlayPalette, RuntimeAlphaEntry, VerificationConfig,
 };
-use image::{imageops, DynamicImage, ImageFormat, Rgba, RgbaImage};
+use image::{imageops, imageops::FilterType, DynamicImage, ImageFormat, Rgba, RgbaImage};
 use serde::{Deserialize, Serialize};
 use sha2::{Digest, Sha256};
 use std::collections::VecDeque;
@@ -15,7 +15,7 @@ use std::io::Read;
 use std::path::{Path, PathBuf};
 use zip::ZipArchive;
 
-pub const PHAZER_COMPILER_ID: &str = "wizard-avatar-phazer-sprites-v1";
+pub const PHAZER_COMPILER_ID: &str = "wizard-avatar-phazer-sprites-v2";
 pub const PHAZER_ARCHIVE_SHA256: &str =
     "636b9ddf8a5edff9db9de8f2eaa9ecf930b73bfe2b1d428b5111195ff4aec450";
 pub const DEFAULT_PHAZER_ARCHIVE: &str = "/Users/paul/Downloads/WizardJoePhazerSprites.zip";
@@ -26,6 +26,8 @@ const FRAME: FrameSpec = FrameSpec {
 };
 const FRAMES_PER_SHEET: usize = 6;
 const FIRST_RUNTIME_SEQUENCE: usize = 261;
+const PHAZER_SCALE_NUMERATOR: u32 = 47;
+const PHAZER_SCALE_DENOMINATOR: u32 = 20;
 
 #[derive(Clone, Copy)]
 struct SheetSpec {
@@ -520,7 +522,7 @@ pub fn promote_phazer_sprite_archive(
     }
 
     runtime["compiler_id"] =
-        serde_json::Value::String("wizard-avatar-production-alpha-plus-phazer-v1".to_string());
+        serde_json::Value::String("wizard-avatar-production-alpha-plus-phazer-v2".to_string());
     runtime["source_count"] = serde_json::json!(308);
     runtime["verified_pose_count"] = serde_json::json!(308);
     runtime["primary_pose_count"] = serde_json::json!(308);
@@ -601,7 +603,7 @@ pub fn promote_phazer_sprite_archive(
 
     Ok(PhazerPromotionReceipt {
         schema_version: 1,
-        compiler_id: "wizard-avatar-production-alpha-plus-phazer-v1".to_string(),
+        compiler_id: "wizard-avatar-production-alpha-plus-phazer-v2".to_string(),
         source_runtime_pose_count: 260,
         added_pose_count: 48,
         runtime_pose_count: 308,
@@ -630,10 +632,23 @@ fn process_one_frame(
     let crop_top = full_bounds.top.saturating_sub(8);
     let crop_bottom = (full_bounds.bottom + 8).min(segment.image.height() - 1);
     let crop_height = crop_bottom - crop_top + 1;
-    let cell =
+    let original_cell =
         imageops::crop_imm(sheet, segment.left, crop_top, segment.width, crop_height).to_image();
-    let isolated_image =
+    let original_isolated =
         imageops::crop_imm(&segment.image, 0, crop_top, segment.width, crop_height).to_image();
+    let original_bounds = alpha_bounds(&original_isolated)
+        .ok_or_else(|| PhazerIntakeError::Invariant(format!("{pose_id} contains no foreground")))?;
+    let original_foreground_pixels = original_isolated
+        .pixels()
+        .filter(|pixel| pixel[3] > 0)
+        .count() as u64;
+    let original_source_match = count_foreground_source_match(&original_cell, &original_isolated);
+    require(
+        original_source_match == original_foreground_pixels,
+        format!("{pose_id} changed a retained archive pixel before scaling"),
+    )?;
+    let cell = upscale_phazer_source(&original_cell);
+    let isolated_image = upscale_phazer_source(&original_isolated);
     let bounds = alpha_bounds(&isolated_image)
         .ok_or_else(|| PhazerIntakeError::Invariant(format!("{pose_id} contains no foreground")))?;
     let foreground_pixels = isolated_image.pixels().filter(|pixel| pixel[3] > 0).count() as u64;
@@ -641,12 +656,20 @@ fn process_one_frame(
         foreground_pixels > 20_000,
         format!("{pose_id} has implausibly little foreground"),
     )?;
-    let offset_y = target_baseline
+    let original_offset_y = target_baseline
         .checked_sub(sheet_baseline)
         .and_then(|offset| offset.checked_add(crop_top))
         .ok_or_else(|| {
             PhazerIntakeError::Invariant(format!("{pose_id} vertical normalization overflowed"))
         })?;
+    let airborne = spec.airborne_frames.contains(&(frame_index + 1));
+    let offset_y = anchored_scaled_offset_y(
+        original_bounds,
+        bounds,
+        original_offset_y,
+        isolated_image.height(),
+        airborne,
+    )?;
     let normalized = normalize_phazer_to_frame(&isolated_image, offset_y)?;
     let source = normalized.image.clone();
     let source_path = output_root
@@ -689,9 +712,8 @@ fn process_one_frame(
         OverlayPalette::default(),
     )?;
     let composite = composite_graph_over_source(&source, &projected, 128)?;
-    let original_normalized = normalize_phazer_to_frame(&cell, offset_y)?.image;
     let source_graph_overlay =
-        blend_tinted_graph_over_original(&original_normalized, &projected, [0, 190, 255], 128);
+        blend_tinted_graph_over_original(&source, &projected, [0, 190, 255], 128);
     let evidence_dir = output_root.join("evidence").join(pose_id);
     save_png(&projected, &evidence_dir.join("projected.png"))?;
     save_png(
@@ -710,7 +732,6 @@ fn process_one_frame(
         format!("{pose_id} changed a retained source pixel"),
     )?;
     let total_pixels = u64::from(cell.width()) * u64::from(cell.height());
-    let airborne = spec.airborne_frames.contains(&(frame_index + 1));
     let phase = RuntimePhase {
         numerator: (frame_index + 1) as u16,
         denominator: FRAMES_PER_SHEET as u16,
@@ -785,6 +806,16 @@ fn process_one_frame(
         "sheet_member": spec.member,
         "sheet_frame": frame_index + 1,
         "sheet_crop": [segment.left, crop_top, segment.width, crop_height],
+        "source_scale": {
+            "filter": "nearest_neighbor",
+            "numerator": PHAZER_SCALE_NUMERATOR,
+            "denominator": PHAZER_SCALE_DENOMINATOR,
+            "original_size": [original_cell.width(), original_cell.height()],
+            "scaled_size": [cell.width(), cell.height()],
+            "anchor_preservation": if airborne { "body_center" } else { "ground_contact" },
+            "original_offset_y": original_offset_y,
+            "scaled_offset_y": offset_y
+        },
         "isolated_bounds": [bounds.left, bounds.top, bounds.width(), bounds.height()],
         "foreground_pixel_count": foreground_pixels,
         "removed_matte_pixel_count": total_pixels - foreground_pixels,
@@ -873,6 +904,52 @@ fn normalize_phazer_to_frame(
         offset_x,
         offset_y,
     })
+}
+
+fn scaled_dimension(value: u32) -> u32 {
+    ((u64::from(value) * u64::from(PHAZER_SCALE_NUMERATOR)
+        + u64::from(PHAZER_SCALE_DENOMINATOR / 2))
+        / u64::from(PHAZER_SCALE_DENOMINATOR)) as u32
+}
+
+fn upscale_phazer_source(source: &RgbaImage) -> RgbaImage {
+    imageops::resize(
+        source,
+        scaled_dimension(source.width()),
+        scaled_dimension(source.height()),
+        FilterType::Nearest,
+    )
+}
+
+fn anchored_scaled_offset_y(
+    original_bounds: ForegroundBounds,
+    scaled_bounds: ForegroundBounds,
+    original_offset_y: u32,
+    scaled_source_height: u32,
+    airborne: bool,
+) -> Result<u32, PhazerIntakeError> {
+    let original_anchor = if airborne {
+        (original_bounds.top + original_bounds.bottom) / 2
+    } else {
+        original_bounds.bottom
+    };
+    let scaled_anchor = if airborne {
+        (scaled_bounds.top + scaled_bounds.bottom) / 2
+    } else {
+        scaled_bounds.bottom
+    };
+    let target_anchor = i64::from(original_offset_y) + i64::from(original_anchor);
+    let desired_offset = target_anchor - i64::from(scaled_anchor);
+    let max_offset = FRAME
+        .height
+        .checked_sub(scaled_source_height)
+        .ok_or_else(|| {
+            PhazerIntakeError::Invariant(format!(
+                "scaled Phazer source height {scaled_source_height} exceeds {}",
+                FRAME.height
+            ))
+        })?;
+    Ok(desired_offset.clamp(0, i64::from(max_offset)) as u32)
 }
 
 #[derive(Clone, Debug)]
@@ -1371,6 +1448,55 @@ mod tests {
                 .collect::<BTreeSet<_>>()
                 .len(),
             SHEETS.len()
+        );
+    }
+
+    #[test]
+    fn phazer_scale_matches_the_established_runtime_silhouette_resolution() {
+        assert_eq!(scaled_dimension(468), 1100);
+        assert_eq!(scaled_dimension(484), 1137);
+        assert!(scaled_dimension(495) <= FRAME.width);
+    }
+
+    #[test]
+    fn nearest_neighbor_upscale_only_replicates_authored_colors() {
+        let mut source = RgbaImage::new(2, 2);
+        source.put_pixel(0, 0, Rgba([10, 20, 30, 255]));
+        source.put_pixel(1, 0, Rgba([40, 50, 60, 255]));
+        source.put_pixel(0, 1, Rgba([70, 80, 90, 255]));
+        let scaled = upscale_phazer_source(&source);
+        assert_eq!(scaled.dimensions(), (5, 5));
+        assert!(scaled.pixels().all(|pixel| {
+            matches!(
+                pixel.0,
+                [0, 0, 0, 0] | [10, 20, 30, 255] | [40, 50, 60, 255] | [70, 80, 90, 255]
+            )
+        }));
+    }
+
+    #[test]
+    fn scaled_ground_and_airborne_poses_preserve_their_authored_anchor() {
+        let original = ForegroundBounds {
+            left: 4,
+            top: 8,
+            right: 103,
+            bottom: 407,
+        };
+        let scaled = ForegroundBounds {
+            left: 9,
+            top: 19,
+            right: 244,
+            bottom: 958,
+        };
+        let grounded =
+            anchored_scaled_offset_y(original, scaled, 777, 987, false).expect("grounded offset");
+        assert_eq!(grounded + scaled.bottom, 777 + original.bottom);
+
+        let airborne =
+            anchored_scaled_offset_y(original, scaled, 300, 987, true).expect("airborne offset");
+        assert_eq!(
+            airborne + (scaled.top + scaled.bottom) / 2,
+            300 + (original.top + original.bottom) / 2
         );
     }
 }

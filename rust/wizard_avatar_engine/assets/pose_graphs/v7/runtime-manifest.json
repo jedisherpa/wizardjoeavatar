@@ -23,7 +23,7 @@
     }
   ],
   "base_pose_count": 250,
-  "compiler_id": "wizard-avatar-production-alpha-plus-phazer-v1",
+  "compiler_id": "wizard-avatar-production-alpha-plus-phazer-v2",
   "entries": [
     {
       "anchor_kind": "ground_contact",
@@ -14117,18 +14117,18 @@
       "exact_rgba_equal": true,
       "foreground_color_fidelity_millionths": 1000000,
       "foreground_color_match_ratio_millionths": 1000000,
-      "foreground_pixel_count": 80877,
+      "foreground_pixel_count": 446418,
       "frame": [
         1254,
         1254
       ],
       "graph_id": "wjps-0001-pixelgraph-v1",
       "graph_path": "graphs/WJPS-0001.pixelgraph.json.gz",
-      "graph_sha256": "a5191a5aec8b50155d3e5d3d59c81a1a43576166baeebea4f2bc3534d9ab4c91",
+      "graph_sha256": "841c61b8b84608d12d1cada14208ae968b687dcd237bd78352ce109a1201b3f0",
       "motion_family": "ground_to_air",
       "offset": [
-        459,
-        709
+        233,
+        67
       ],
       "phase": {
         "denominator": 6,
@@ -14145,10 +14145,10 @@
       "source_entry": "sheet-wizard-joe.png#frame-01",
       "source_pack": "wizard_joe_phazer_sprites",
       "source_record_id": "WJPS-0001",
-      "source_sha256": "739841818470a9973c72c8c294edbb1d3b673c732dcd2b695ff5f59a8cd7e553",
+      "source_sha256": "b10319075d4c014067eca798e57e80658f5a585eaf297fe52ccec6855c7334c9",
       "source_size": [
-        335,
-        484
+        787,
+        1137
       ]
     },
     {
@@ -14175,18 +14175,18 @@
       "exact_rgba_equal": true,
       "foreground_color_fidelity_millionths": 1000000,
       "foreground_color_match_ratio_millionths": 1000000,
-      "foreground_pixel_count": 79612,
+      "foreground_pixel_count": 439992,
       "frame": [
         1254,
         1254
       ],
       "graph_id": "wjps-0002-pixelgraph-v1",
       "graph_path": "graphs/WJPS-0002.pixelgraph.json.gz",
-      "graph_sha256": "7598f1deafd23f8776c8c78f04e9c706c532df265a4ccbe3a72ec96f398e47b5",
+      "graph_sha256": "7fbd3130a3f9c2d5c7151ae2e229f00db67ae2d8f0b1982a4db7736d6c1dba02",
       "motion_family": "ground_to_air",
       "offset": [
-        469,
-        725
+        255,
+        104
       ],
       "phase": {
         "denominator": 6,
@@ -14203,10 +14203,10 @@
       "source_entry": "sheet-wizard-joe.png#frame-02",
       "source_pack": "wizard_joe_phazer_sprites",
       "source_record_id": "WJPS-0002",
-      "source_sha256": "e4c47feb38aa817c4a4a66b92ba5196fc7289294582c2e17c414046a9f599a4a",
+      "source_sha256": "cce0a9b6e59b55426677866aedc81656fd93fcf83ff5f0ad652ae7560712fe48",
       "source_size": [
-        316,
-        468
+        743,
+        1100
       ]
     },
     {
@@ -14233,18 +14233,18 @@
       "exact_rgba_equal": true,
       "foreground_color_fidelity_millionths": 1000000,
       "foreground_color_match_ratio_millionths": 1000000,
-      "foreground_pixel_count": 80412,
+      "foreground_pixel_count": 443929,
       "frame": [
         1254,
         1254
       ],
       "graph_id": "wjps-0003-pixelgraph-v1",
       "graph_path": "graphs/WJPS-0003.pixelgraph.json.gz",
-      "graph_sha256": "7a2c5b4f5b876634a3f18760250dfd3b03ac78568b9b763fd347c7419338bbd8",
+      "graph_sha256": "d774855cc9756c2250a63713ad1e6cd63fe38d1e6afbfea13b2f678a8fc88011",
       "motion_family": "ground_to_air",
       "offset": [
-        468,
-        721
+        254,
+        99
       ],
       "phase": {
         "denominator": 6,
@@ -14261,10 +14261,10 @@
       "source_entry": "sheet-wizard-joe.png#frame-03",
       "source_pack": "wizard_joe_phazer_sprites",
       "source_record_id": "WJPS-0003",
-      "source_sha256": "7037d31b36e5976acbb1c45ecba0292d3e2bd0102fcb9790c74f4d5c842957bf",
+      "source_sha256": "aafede2b92d19284f9a0068064ca01baa86a29fd2d94535cba869baf66aebc2b",
       "source_size": [
-        317,
-        469
+        745,
+        1102
       ]
     },
     {
@@ -14291,18 +14291,18 @@
       "exact_rgba_equal": true,
       "foreground_color_fidelity_millionths": 1000000,
       "foreground_color_match_ratio_millionths": 1000000,
-      "foreground_pixel_count": 80077,
+      "foreground_pixel_count": 442416,
       "frame": [
         1254,
         1254
       ],
       "graph_id": "wjps-0004-pixelgraph-v1",
       "graph_path": "graphs/WJPS-0004.pixelgraph.json.gz",
-      "graph_sha256": "f4a3f7b335ca80e4d94293a2399e3b39fa0790f7764e13f59079a9f90bf7b241",
+      "graph_sha256": "1d17ee43318d1ee7cb4f71280aa49b10291f3c08a4681621a3465deb3117d54c",
       "motion_family": "ground_to_air",
       "offset": [
-        469,
-        721
+        255,
+        95
       ],
       "phase": {
         "denominator": 6,
@@ -14319,10 +14319,10 @@
       "source_entry": "sheet-wizard-joe.png#frame-04",
       "source_pack": "wizard_joe_phazer_sprites",
       "source_record_id": "WJPS-0004",
-      "source_sha256": "bf5cbe73597ab4f79760f08f589879f214093ce64ca755656eaee70bc35b4ba9",
+      "source_sha256": "6c53981c873931bf868d620ed3be78ce1576b1dcc74d7ad4b564c2901aeef3ce",
       "source_size": [
-        316,
-        472
+        743,
+        1109
       ]
     },
     {
@@ -14349,18 +14349,18 @@
       "exact_rgba_equal": true,
       "foreground_color_fidelity_millionths": 1000000,
       "foreground_color_match_ratio_millionths": 1000000,
-      "foreground_pixel_count": 80316,
+      "foreground_pixel_count": 443768,
       "frame": [
         1254,
         1254
       ],
       "graph_id": "wjps-0005-pixelgraph-v1",
       "graph_path": "graphs/WJPS-0005.pixelgraph.json.gz",
-      "graph_sha256": "89f1d855fb67eeb4ce2e336437480d58d0208da35ef938371e831a9bc5538c3b",
+      "graph_sha256": "5580187ab78282e33f5669eb92644cec5612b6e5121cc34fd3b4b39ebd906ce7",
       "motion_family": "ground_to_air",
       "offset": [
-        464,
-        722
+        245,
+        97
       ],
       "phase": {
         "denominator": 6,
@@ -14377,16 +14377,16 @@
       "source_entry": "sheet-wizard-joe.png#frame-05",
       "source_pack": "wizard_joe_phazer_sprites",
       "source_record_id": "WJPS-0005",
-      "source_sha256": "135680f3d5d77caf3410b274ec3069df8c35d69c5af8620bb875ee6cb2269269",
+      "source_sha256": "ef889322302e5b447a1eb91a5eb3cdc92e5224c72ef808b3a2c0ef6e4ae22072",
       "source_size": [
-        325,
-        471
+        764,
+        1107
       ]
     },
     {
       "anchor_kind": "body_center",
       "anchor_x": 626,
-      "anchor_y": 894,
+      "anchor_y": 710,
       "authored_transition_neighbors": [
         "phazer_side_walk_takeoff_frame_05",
         "phazer_side_walk_takeoff_frame_01"
@@ -14407,18 +14407,18 @@
       "exact_rgba_equal": true,
       "foreground_color_fidelity_millionths": 1000000,
       "foreground_color_match_ratio_millionths": 1000000,
-      "foreground_pixel_count": 81076,
+      "foreground_pixel_count": 447775,
       "frame": [
         1254,
         1254
       ],
       "graph_id": "wjps-0006-pixelgraph-v1",
       "graph_path": "graphs/WJPS-0006.pixelgraph.json.gz",
-      "graph_sha256": "508ae5e3a3fff8fa7c11a61b95381fe1141c1afc4c45ff654121fd975aa6d320",
+      "graph_sha256": "34196ee8c4f2f820a19773451e9bc028be9a304abcabefa36100b672212bc7b6",
       "motion_family": "ground_to_air",
       "offset": [
-        451,
-        664
+        213,
+        168
       ],
       "phase": {
         "denominator": 6,
@@ -14435,10 +14435,10 @@
       "source_entry": "sheet-wizard-joe.png#frame-06",
       "source_pack": "wizard_joe_phazer_sprites",
       "source_record_id": "WJPS-0006",
-      "source_sha256": "4131d9716f7ca3d6fabc296bbc608d3c9598c329d2dbfd5c747822031a952091",
+      "source_sha256": "cf1317cc67f6e7367e99401c9affb695e995eec3c67253abc9acac8619a703ee",
       "source_size": [
-        352,
-        462
+        827,
+        1086
       ]
     },
     {
@@ -14465,18 +14465,18 @@
       "exact_rgba_equal": true,
       "foreground_color_fidelity_millionths": 1000000,
       "foreground_color_match_ratio_millionths": 1000000,
-      "foreground_pixel_count": 84235,
+      "foreground_pixel_count": 465634,
       "frame": [
         1254,
         1254
       ],
       "graph_id": "wjps-0007-pixelgraph-v1",
       "graph_path": "graphs/WJPS-0007.pixelgraph.json.gz",
-      "graph_sha256": "3ec9dbf38c706ce384aec68ba52b223637226319753cd1e1737f470b4430f6ac",
+      "graph_sha256": "598a5667018e8a5971c7d98e567729f25a7193ad9a733fd7b3b9901f7798b969",
       "motion_family": "ground_run",
       "offset": [
-        469,
-        719
+        255,
+        91
       ],
       "phase": {
         "denominator": 6,
@@ -14493,10 +14493,10 @@
       "source_entry": "sheet-wizard-joe-w2.png#frame-01",
       "source_pack": "wizard_joe_phazer_sprites",
       "source_record_id": "WJPS-0007",
-      "source_sha256": "5fe570915ec2036549c78a6fc91578cbf9501b9f1cb22e55792784bff49bc786",
+      "source_sha256": "d90398addac7f159c94abbe691e556670f2f503410a8a8f83d59724686ce64ec",
       "source_size": [
-        316,
-        473
+        743,
+        1112
       ]
     },
     {
@@ -14523,18 +14523,18 @@
       "exact_rgba_equal": true,
       "foreground_color_fidelity_millionths": 1000000,
       "foreground_color_match_ratio_millionths": 1000000,
-      "foreground_pixel_count": 77967,
+      "foreground_pixel_count": 430270,
       "frame": [
         1254,
         1254
       ],
       "graph_id": "wjps-0008-pixelgraph-v1",
       "graph_path": "graphs/WJPS-0008.pixelgraph.json.gz",
-      "graph_sha256": "e17c9013b744f096f3100964f49925e84f64ae6d8b35114a57272a38c8d013a5",
+      "graph_sha256": "74b6896bcc8e03060c515079ec8c66d12bad4fd7145bfe6d2820dd1348e776fc",
       "motion_family": "ground_run",
       "offset": [
-        478,
-        717
+        277,
+        87
       ],
       "phase": {
         "denominator": 6,
@@ -14551,10 +14551,10 @@
       "source_entry": "sheet-wizard-joe-w2.png#frame-02",
       "source_pack": "wizard_joe_phazer_sprites",
       "source_record_id": "WJPS-0008",
-      "source_sha256": "3dac665062d6093d3aab199fe24fd642ed2cd56efb7f64302aa448846591ec55",
+      "source_sha256": "f4ffe141bc0ea39b81789221eec16c3808450bb515e33832c923a76dee45aebc",
       "source_size": [
-        298,
-        475
+        700,
+        1116
       ]
     },
     {
@@ -14581,18 +14581,18 @@
       "exact_rgba_equal": true,
       "foreground_color_fidelity_millionths": 1000000,
       "foreground_color_match_ratio_millionths": 1000000,
-      "foreground_pixel_count": 81963,
+      "foreground_pixel_count": 452580,
       "frame": [
         1254,
         1254
       ],
       "graph_id": "wjps-0009-pixelgraph-v1",
       "graph_path": "graphs/WJPS-0009.pixelgraph.json.gz",
-      "graph_sha256": "59e38304e1578299d35ece92273298e8a554547738da783f57341160e28014cb",
+      "graph_sha256": "6d2226a5ca88d7d95ab623f63919b7580b2365e02b1520f004ffa02db0528399",
       "motion_family": "ground_run",
       "offset": [
-        475,
-        717
+        271,
+        85
       ],
       "phase": {
         "denominator": 6,
@@ -14609,10 +14609,10 @@
       "source_entry": "sheet-wizard-joe-w2.png#frame-03",
       "source_pack": "wizard_joe_phazer_sprites",
       "source_record_id": "WJPS-0009",
-      "source_sha256": "0864ec06c6325cc057e30e2b57054364809408d49b8769def93e791909d6fc33",
+      "source_sha256": "448ee9ecccc394957772b42cfc47f56cee566f70d42d4093524a458b9c25b337",
       "source_size": [
-        303,
-        476
+        712,
+        1119
       ]
     },
     {
@@ -14639,18 +14639,18 @@
       "exact_rgba_equal": true,
       "foreground_color_fidelity_millionths": 1000000,
       "foreground_color_match_ratio_millionths": 1000000,
-      "foreground_pixel_count": 79769,
+      "foreground_pixel_count": 440263,
       "frame": [
         1254,
         1254
       ],
       "graph_id": "wjps-0010-pixelgraph-v1",
       "graph_path": "graphs/WJPS-0010.pixelgraph.json.gz",
-      "graph_sha256": "04c7638a90878fffadf7844a4fc2d7fe564d094b781067d15ce8c321f3f96152",
+      "graph_sha256": "f7b1a0c4c446239d00478357137480bc33a222c9adee315df0610b4bdf1abc3d",
       "motion_family": "ground_run",
       "offset": [
-        467,
-        726
+        251,
+        107
       ],
       "phase": {
         "denominator": 6,
@@ -14667,10 +14667,10 @@
       "source_entry": "sheet-wizard-joe-w2.png#frame-04",
       "source_pack": "wizard_joe_phazer_sprites",
       "source_record_id": "WJPS-0010",
-      "source_sha256": "fd483227a5e44e864c82ebc93524d2f57833ed0db6a94e464335c0b0b0c5b6fc",
+      "source_sha256": "2aa7d01147d6eb530a5215225f619ee2f67bb71d9fde67600413139e30df9f44",
       "source_size": [
-        320,
-        467
+        752,
+        1097
       ]
     },
     {
@@ -14697,18 +14697,18 @@
       "exact_rgba_equal": true,
       "foreground_color_fidelity_millionths": 1000000,
       "foreground_color_match_ratio_millionths": 1000000,
-      "foreground_pixel_count": 78141,
+      "foreground_pixel_count": 431330,
       "frame": [
         1254,
         1254
       ],
       "graph_id": "wjps-0011-pixelgraph-v1",
       "graph_path": "graphs/WJPS-0011.pixelgraph.json.gz",
-      "graph_sha256": "ee9604c7a52b5ebb418d26ad533be076b4a74d0f745a1b21dd35279655bc1b01",
+      "graph_sha256": "74056dab6fd6bb72e46ddb555c558c8be05cdafe7ac3f21146a441923fa609ed",
       "motion_family": "ground_run",
       "offset": [
-        443,
-        749
+        196,
+        162
       ],
       "phase": {
         "denominator": 6,
@@ -14725,10 +14725,10 @@
       "source_entry": "sheet-wizard-joe-w2.png#frame-05",
       "source_pack": "wizard_joe_phazer_sprites",
       "source_record_id": "WJPS-0011",
-      "source_sha256": "54e5f2f291e2910585a9c995f33b27b09cf24732869fca65a30291415357e017",
+      "source_sha256": "aeecd6bc3c4c381e39b7db74733292df570da39cc690ee2e61dd4306efde5f6c",
       "source_size": [
-        367,
-        443
+        862,
+        1041
       ]
     },
     {
@@ -14755,18 +14755,18 @@
       "exact_rgba_equal": true,
       "foreground_color_fidelity_millionths": 1000000,
       "foreground_color_match_ratio_millionths": 1000000,
-      "foreground_pixel_count": 69949,
+      "foreground_pixel_count": 386455,
       "frame": [
         1254,
         1254
       ],
       "graph_id": "wjps-0012-pixelgraph-v1",
       "graph_path": "graphs/WJPS-0012.pixelgraph.json.gz",
-      "graph_sha256": "a7ba9d13114c758357a4187d64a597cfc1cc9d66ae9e60b074b19c313e41c25c",
+      "graph_sha256": "728e17144d310ee1851d6a3e597a083a8c4cde99b4d142d7f219386bb411981d",
       "motion_family": "ground_run",
       "offset": [
-        463,
-        770
+        241,
+        211
       ],
       "phase": {
         "denominator": 6,
@@ -14783,10 +14783,10 @@
       "source_entry": "sheet-wizard-joe-w2.png#frame-06",
       "source_pack": "wizard_joe_phazer_sprites",
       "source_record_id": "WJPS-0012",
-      "source_sha256": "594b0d456112ea83b13c26282b93edda32133987c668622bfff9808d41e169f9",
+      "source_sha256": "df9f626ca483759df7795e9dbfb9320decd4cc32c1f7be73a4919f81555ba49b",
       "source_size": [
-        328,
-        422
+        771,
+        992
       ]
     },
     {
@@ -14813,18 +14813,18 @@
       "exact_rgba_equal": true,
       "foreground_color_fidelity_millionths": 1000000,
       "foreground_color_match_ratio_millionths": 1000000,
-      "foreground_pixel_count": 65093,
+      "foreground_pixel_count": 359634,
       "frame": [
         1254,
         1254
       ],
       "graph_id": "wjps-0013-pixelgraph-v1",
       "graph_path": "graphs/WJPS-0013.pixelgraph.json.gz",
-      "graph_sha256": "93bb80d5d31097a4613fe486fe70932d11f578b42a9bd9c2c4b9f5dd1f7650aa",
+      "graph_sha256": "e11dd09038283c62c3d40ae154936594dc66903fd4a94cac36e1f5f5a9d17a55",
       "motion_family": "ground_to_air",
       "offset": [
-        464,
-        787
+        244,
+        267
       ],
       "phase": {
         "denominator": 6,
@@ -14841,10 +14841,10 @@
       "source_entry": "sheet-wizard-joe-w3.png#frame-01",
       "source_pack": "wizard_joe_phazer_sprites",
       "source_record_id": "WJPS-0013",
-      "source_sha256": "1dad1c453d825fcda2f3bbd18e3f7e01f9eccd6d10dd2e42c073dadd09dfab7c",
+      "source_sha256": "5054613ff0d34973a15140a0c9b1d3e3f263ab85955c9680bce5a5ff2873d4e3",
       "source_size": [
-        326,
-        393
+        766,
+        924
       ]
     },
     {
@@ -14871,18 +14871,18 @@
       "exact_rgba_equal": true,
       "foreground_color_fidelity_millionths": 1000000,
       "foreground_color_match_ratio_millionths": 1000000,
-      "foreground_pixel_count": 63871,
+      "foreground_pixel_count": 352566,
       "frame": [
         1254,
         1254
       ],
       "graph_id": "wjps-0014-pixelgraph-v1",
       "graph_path": "graphs/WJPS-0014.pixelgraph.json.gz",
-      "graph_sha256": "b8232a3ead94ce76b013b57624a99e9d5110d6fa3c08d17af3e46d5127b6452c",
+      "graph_sha256": "2046dc49669f549705f41bc410b562f57c3fc59679b96441303bd5429a3980a3",
       "motion_family": "ground_to_air",
       "offset": [
-        468,
-        786
+        253,
+        257
       ],
       "phase": {
         "denominator": 6,
@@ -14899,10 +14899,10 @@
       "source_entry": "sheet-wizard-joe-w3.png#frame-02",
       "source_pack": "wizard_joe_phazer_sprites",
       "source_record_id": "WJPS-0014",
-      "source_sha256": "74e493b411c69a63900c25faf925101b4444b453c65797eb456be909bfd988e4",
+      "source_sha256": "62e56699522c6d64d817e7ec161d410961f167ec54aef2c99ba25ea4ef7726c9",
       "source_size": [
-        318,
-        400
+        747,
+        940
       ]
     },
     {
@@ -14929,18 +14929,18 @@
       "exact_rgba_equal": true,
       "foreground_color_fidelity_millionths": 1000000,
       "foreground_color_match_ratio_millionths": 1000000,
-      "foreground_pixel_count": 63032,
+      "foreground_pixel_count": 347893,
       "frame": [
         1254,
         1254
       ],
       "graph_id": "wjps-0015-pixelgraph-v1",
       "graph_path": "graphs/WJPS-0015.pixelgraph.json.gz",
-      "graph_sha256": "1139df5ee8885c6d317acbdbdb3e3b7f9ed678a9ce50f5acf349f87c2f73a6a8",
+      "graph_sha256": "07bc3dbe49a3aadc58ef07110016d4d6f95b3e624351f36f02637ef3028ced60",
       "motion_family": "ground_to_air",
       "offset": [
-        465,
-        787
+        246,
+        266
       ],
       "phase": {
         "denominator": 6,
@@ -14957,10 +14957,10 @@
       "source_entry": "sheet-wizard-joe-w3.png#frame-03",
       "source_pack": "wizard_joe_phazer_sprites",
       "source_record_id": "WJPS-0015",
-      "source_sha256": "12a0843216f4ba249da69d66b5ec7c7b5136bdc3b6745b369a36dd614b72b05c",
+      "source_sha256": "f9a8b48e49c508085b56c3815f6261c56eb52197b75f073393bc5329f05a94af",
       "source_size": [
-        324,
-        394
+        761,
+        926
       ]
     },
     {
@@ -14987,18 +14987,18 @@
       "exact_rgba_equal": true,
       "foreground_color_fidelity_millionths": 1000000,
       "foreground_color_match_ratio_millionths": 1000000,
-      "foreground_pixel_count": 56211,
+      "foreground_pixel_count": 310402,
       "frame": [
         1254,
         1254
       ],
       "graph_id": "wjps-0016-pixelgraph-v1",
       "graph_path": "graphs/WJPS-0016.pixelgraph.json.gz",
-      "graph_sha256": "d46d4edb2481d0d5c0a10d6dd9bd83ab8d51dde366e7f2f76cd44d7f8ea4f53f",
+      "graph_sha256": "f4155b7d2209f820b4164ef541c6f99c5f23b3fe94ce269638d7bcc76b502d17",
       "motion_family": "ground_to_air",
       "offset": [
-        469,
-        834
+        257,
+        360
       ],
       "phase": {
         "denominator": 6,
@@ -15015,16 +15015,16 @@
       "source_entry": "sheet-wizard-joe-w3.png#frame-04",
       "source_pack": "wizard_joe_phazer_sprites",
       "source_record_id": "WJPS-0016",
-      "source_sha256": "7bbeb25c2816c944079fe194feaaa96e3613e31aa642b1498b48f0d1242863e0",
+      "source_sha256": "374f25e4f10e6653c839305fe87624c85b33abb69930a3fc88d0586eabb7da3c",
       "source_size": [
-        315,
-        359
+        740,
+        844
       ]
     },
     {
       "anchor_kind": "body_center",
       "anchor_x": 626,
-      "anchor_y": 939,
+      "anchor_y": 743,
       "authored_transition_neighbors": [
         "phazer_side_leap_frame_04",
         "phazer_side_leap_frame_06"
@@ -15045,18 +15045,18 @@
       "exact_rgba_equal": true,
       "foreground_color_fidelity_millionths": 1000000,
       "foreground_color_match_ratio_millionths": 1000000,
-      "foreground_pixel_count": 63022,
+      "foreground_pixel_count": 348007,
       "frame": [
         1254,
         1254
       ],
       "graph_id": "wjps-0017-pixelgraph-v1",
       "graph_path": "graphs/WJPS-0017.pixelgraph.json.gz",
-      "graph_sha256": "1eff6b36fc92901d672c34b249a8bf0de3b6689fdd14722f1f2e6b52515ff1cd",
+      "graph_sha256": "f2278f01bc0fb5fcef80f6a8ef6a0743b56a8f3a9ebbf36b804786114527d823",
       "motion_family": "ground_to_air",
       "offset": [
-        472,
-        723
+        264,
+        234
       ],
       "phase": {
         "denominator": 6,
@@ -15073,16 +15073,16 @@
       "source_entry": "sheet-wizard-joe-w3.png#frame-05",
       "source_pack": "wizard_joe_phazer_sprites",
       "source_record_id": "WJPS-0017",
-      "source_sha256": "6632261ffa4ccf8ff6d16124b6530b7d9050c83635e37a2803762a885c29129d",
+      "source_sha256": "edee8b96504d23aaf8ad8d6f9f2bf8bb15b57497f17f90d0b2b5a5f1782c5367",
       "source_size": [
-        309,
-        434
+        726,
+        1020
       ]
     },
     {
       "anchor_kind": "body_center",
       "anchor_x": 626,
-      "anchor_y": 834,
+      "anchor_y": 756,
       "authored_transition_neighbors": [
         "phazer_side_leap_frame_05",
         "phazer_side_leap_frame_01"
@@ -15103,18 +15103,18 @@
       "exact_rgba_equal": true,
       "foreground_color_fidelity_millionths": 1000000,
       "foreground_color_match_ratio_millionths": 1000000,
-      "foreground_pixel_count": 65008,
+      "foreground_pixel_count": 359025,
       "frame": [
         1254,
         1254
       ],
       "graph_id": "wjps-0018-pixelgraph-v1",
       "graph_path": "graphs/WJPS-0018.pixelgraph.json.gz",
-      "graph_sha256": "438b9ca8a5039766e61422b91688f7ca7b74aa0da0e55437d7986a0331302af2",
+      "graph_sha256": "ae279e8edf8fc0430f24f8bdf77c9bbe07d59ea111d9ffaf8e179dc30fcd7e83",
       "motion_family": "ground_to_air",
       "offset": [
-        468,
-        623
+        254,
+        260
       ],
       "phase": {
         "denominator": 6,
@@ -15131,10 +15131,10 @@
       "source_entry": "sheet-wizard-joe-w3.png#frame-06",
       "source_pack": "wizard_joe_phazer_sprites",
       "source_record_id": "WJPS-0018",
-      "source_sha256": "ae6cc2c682e6a915224c17938086833b02bc5ff175f35d34ea5bbbd071c82af8",
+      "source_sha256": "eda0e76116f8ff0166659eaa6b5458671aa81c04f4ba32daf578286cca696185",
       "source_size": [
-        317,
-        423
+        745,
+        994
       ]
     },
     {
@@ -15161,18 +15161,18 @@
       "exact_rgba_equal": true,
       "foreground_color_fidelity_millionths": 1000000,
       "foreground_color_match_ratio_millionths": 1000000,
-      "foreground_pixel_count": 51432,
+      "foreground_pixel_count": 283874,
       "frame": [
         1254,
         1254
       ],
       "graph_id": "wjps-0019-pixelgraph-v1",
       "graph_path": "graphs/WJPS-0019.pixelgraph.json.gz",
-      "graph_sha256": "f5d0fa079a76d5b985de2426585ced87beabbc20cbcfcf62f39268dc8c484d60",
+      "graph_sha256": "65ccb5b2e7d4702903fd9b1f070e592a909ed79235672fdf286203cda7f292e5",
       "motion_family": "wing_deploy",
       "offset": [
-        506,
-        798
+        344,
+        276
       ],
       "phase": {
         "denominator": 6,
@@ -15189,10 +15189,10 @@
       "source_entry": "sheet-wizard-joe-w4.png#frame-01",
       "source_pack": "wizard_joe_phazer_sprites",
       "source_record_id": "WJPS-0019",
-      "source_sha256": "f92550587afc52c74547ac15c64094be26b3d990def533dc54eace8bb49420f8",
+      "source_sha256": "537c5994bf753829594905e14a9dc5ffa2e421f5c1c89d24880d3dd02d4e4526",
       "source_size": [
-        241,
-        395
+        566,
+        928
       ]
     },
     {
@@ -15219,18 +15219,18 @@
       "exact_rgba_equal": true,
       "foreground_color_fidelity_millionths": 1000000,
       "foreground_color_match_ratio_millionths": 1000000,
-      "foreground_pixel_count": 56676,
+      "foreground_pixel_count": 313339,
       "frame": [
         1254,
         1254
       ],
       "graph_id": "wjps-0020-pixelgraph-v1",
       "graph_path": "graphs/WJPS-0020.pixelgraph.json.gz",
-      "graph_sha256": "6d291c4506bbe98800cf879093c9e97a1ba3dab6f73cf1a14ccbb5fb6bca0819",
+      "graph_sha256": "1ba4bff2f34f71e8bc0b8c4200b29a90c8e9c3d1b43ed42185f5a0fb4e4b9eb2",
       "motion_family": "wing_deploy",
       "offset": [
-        469,
-        800
+        255,
+        280
       ],
       "phase": {
         "denominator": 6,
@@ -15247,10 +15247,10 @@
       "source_entry": "sheet-wizard-joe-w4.png#frame-02",
       "source_pack": "wizard_joe_phazer_sprites",
       "source_record_id": "WJPS-0020",
-      "source_sha256": "792801b164b425af2b706f67f1ee0427e62d9cc85b5ce53b0f58ec2dcb90998c",
+      "source_sha256": "62212e8164c7089ccba8a50dc60f85a7f2bfb17c4ccfcd7e9f8b4fbd2f1bec79",
       "source_size": [
-        316,
-        393
+        743,
+        924
       ]
     },
     {
@@ -15277,18 +15277,18 @@
       "exact_rgba_equal": true,
       "foreground_color_fidelity_millionths": 1000000,
       "foreground_color_match_ratio_millionths": 1000000,
-      "foreground_pixel_count": 58830,
+      "foreground_pixel_count": 324851,
       "frame": [
         1254,
         1254
       ],
       "graph_id": "wjps-0021-pixelgraph-v1",
       "graph_path": "graphs/WJPS-0021.pixelgraph.json.gz",
-      "graph_sha256": "d8b0ed72544ece95fd419cc78cc9ac3c1df8ef3666de5aeaad26173ba9d345bb",
+      "graph_sha256": "7bd0661f5fd6cb783ffced4d29294862ccdd19e3195dc4809155abf6d0d1701f",
       "motion_family": "wing_deploy",
       "offset": [
-        464,
-        846
+        244,
+        390
       ],
       "phase": {
         "denominator": 6,
@@ -15305,10 +15305,10 @@
       "source_entry": "sheet-wizard-joe-w4.png#frame-03",
       "source_pack": "wizard_joe_phazer_sprites",
       "source_record_id": "WJPS-0021",
-      "source_sha256": "7ff1d684e2d935062417a1759cee3d568bdcd1353e79eac5baa8e0f00735cdae",
+      "source_sha256": "c01d17f19f576ce82136c6f057a7d66fb17e2f9383cf0b93d3bc3984fac9ce9a",
       "source_size": [
-        326,
-        346
+        766,
+        813
       ]
     },
     {
@@ -15335,18 +15335,18 @@
       "exact_rgba_equal": true,
       "foreground_color_fidelity_millionths": 1000000,
       "foreground_color_match_ratio_millionths": 1000000,
-      "foreground_pixel_count": 70902,
+      "foreground_pixel_count": 391579,
       "frame": [
         1254,
         1254
       ],
       "graph_id": "wjps-0022-pixelgraph-v1",
       "graph_path": "graphs/WJPS-0022.pixelgraph.json.gz",
-      "graph_sha256": "b67cfe484afd9c4dfab2efb6d72e57cbecf909d2f42963d9efe75c8f1d4be235",
+      "graph_sha256": "5385da6e0fee8ceb976fa1126560bd670ee128341949c0f4504beab87f66467a",
       "motion_family": "wing_deploy",
       "offset": [
-        412,
-        792
+        121,
+        262
       ],
       "phase": {
         "denominator": 6,
@@ -15363,16 +15363,16 @@
       "source_entry": "sheet-wizard-joe-w4.png#frame-04",
       "source_pack": "wizard_joe_phazer_sprites",
       "source_record_id": "WJPS-0022",
-      "source_sha256": "343cb87467c90026104eed53c7ec56b1d1233e56152057443ee9d224244a0d84",
+      "source_sha256": "b97934950d774ba96dc19b0c19f191507abdc5e045d5648d48a84d5d7a086537",
       "source_size": [
-        430,
-        401
+        1011,
+        942
       ]
     },
     {
       "anchor_kind": "body_center",
       "anchor_x": 626,
-      "anchor_y": 982,
+      "anchor_y": 804,
       "authored_transition_neighbors": [
         "phazer_side_wing_open_frame_04",
         "phazer_side_wing_open_frame_06"
@@ -15393,18 +15393,18 @@
       "exact_rgba_equal": true,
       "foreground_color_fidelity_millionths": 1000000,
       "foreground_color_match_ratio_millionths": 1000000,
-      "foreground_pixel_count": 53848,
+      "foreground_pixel_count": 297617,
       "frame": [
         1254,
         1254
       ],
       "graph_id": "wjps-0023-pixelgraph-v1",
       "graph_path": "graphs/WJPS-0023.pixelgraph.json.gz",
-      "graph_sha256": "9a60a692bfe169451066e6c369d172c9a8f18e7591bdc51c8c7854935f3989ec",
+      "graph_sha256": "370b8bb254cfb4dc1524b562aa297bb798eaebd771358311d0da70fabe944abf",
       "motion_family": "wing_deploy",
       "offset": [
-        480,
-        792
+        282,
+        356
       ],
       "phase": {
         "denominator": 6,
@@ -15421,16 +15421,16 @@
       "source_entry": "sheet-wizard-joe-w4.png#frame-05",
       "source_pack": "wizard_joe_phazer_sprites",
       "source_record_id": "WJPS-0023",
-      "source_sha256": "892940f9750814f9fca35e3cc98c94a6898ccaa23e190362516b75fc87b0d260",
+      "source_sha256": "55359dbe9e3a886ae60647c86ff81b97489391c8cca8ed449eda335d56e42ef8",
       "source_size": [
-        293,
-        382
+        689,
+        898
       ]
     },
     {
       "anchor_kind": "body_center",
       "anchor_x": 626,
-      "anchor_y": 949,
+      "anchor_y": 773,
       "authored_transition_neighbors": [
         "phazer_side_wing_open_frame_05",
         "phazer_side_wing_open_frame_01"
@@ -15451,18 +15451,18 @@
       "exact_rgba_equal": true,
       "foreground_color_fidelity_millionths": 1000000,
       "foreground_color_match_ratio_millionths": 1000000,
-      "foreground_pixel_count": 63981,
+      "foreground_pixel_count": 353173,
       "frame": [
         1254,
         1254
       ],
       "graph_id": "wjps-0024-pixelgraph-v1",
       "graph_path": "graphs/WJPS-0024.pixelgraph.json.gz",
-      "graph_sha256": "5f2e736a04879d1233229b5c094752a3b403beca9fc101fa50f17e9a92c27c58",
+      "graph_sha256": "a571ef929d2851a6f1cf6c0a19ded85bf8d184c58c31ba6bcadb24fa8dc6f2c3",
       "motion_family": "wing_deploy",
       "offset": [
-        469,
-        745
+        257,
+        293
       ],
       "phase": {
         "denominator": 6,
@@ -15479,16 +15479,16 @@
       "source_entry": "sheet-wizard-joe-w4.png#frame-06",
       "source_pack": "wizard_joe_phazer_sprites",
       "source_record_id": "WJPS-0024",
-      "source_sha256": "87c40866b92c00193a02eb5632e6e0b3511800af19278ec30e7ecf844594c7bc",
+      "source_sha256": "eece32a36810f13d0b26c5ad61a63b8079474a30d45cf27c470056fb2ea7e3a4",
       "source_size": [
-        315,
-        409
+        740,
+        961
       ]
     },
     {
       "anchor_kind": "body_center",
       "anchor_x": 626,
-      "anchor_y": 884,
+      "anchor_y": 760,
       "authored_transition_neighbors": [
         "phazer_side_flap_cycle_frame_06",
         "phazer_side_flap_cycle_frame_02"
@@ -15509,18 +15509,18 @@
       "exact_rgba_equal": true,
       "foreground_color_fidelity_millionths": 1000000,
       "foreground_color_match_ratio_millionths": 1000000,
-      "foreground_pixel_count": 67483,
+      "foreground_pixel_count": 372433,
       "frame": [
         1254,
         1254
       ],
       "graph_id": "wjps-0025-pixelgraph-v1",
       "graph_path": "graphs/WJPS-0025.pixelgraph.json.gz",
-      "graph_sha256": "c54ffe26b56d22a25c3f71a5d51b30bdae509a91e4f99ba51562215ce2130e79",
+      "graph_sha256": "f3fd24c68fcb85f1d133576535566f31c93e34bdd73c15ab75c07f2a23e9ea93",
       "motion_family": "flight",
       "offset": [
-        458,
-        675
+        230,
+        267
       ],
       "phase": {
         "denominator": 6,
@@ -15537,16 +15537,16 @@
       "source_entry": "sheet-wizard-joe-w5.png#frame-01",
       "source_pack": "wizard_joe_phazer_sprites",
       "source_record_id": "WJPS-0025",
-      "source_sha256": "68bd49951a0e8cf726468730c9980caf35b40a70d875f24942e6c0c4b1a5936e",
+      "source_sha256": "270e420170275a09167574441bba48a6743369e3aed4762cbf039f6b8cfa5cc3",
       "source_size": [
-        338,
-        420
+        794,
+        987
       ]
     },
     {
       "anchor_kind": "body_center",
       "anchor_x": 626,
-      "anchor_y": 909,
+      "anchor_y": 818,
       "authored_transition_neighbors": [
         "phazer_side_flap_cycle_frame_01",
         "phazer_side_flap_cycle_frame_03"
@@ -15567,18 +15567,18 @@
       "exact_rgba_equal": true,
       "foreground_color_fidelity_millionths": 1000000,
       "foreground_color_match_ratio_millionths": 1000000,
-      "foreground_pixel_count": 49842,
+      "foreground_pixel_count": 275131,
       "frame": [
         1254,
         1254
       ],
       "graph_id": "wjps-0026-pixelgraph-v1",
       "graph_path": "graphs/WJPS-0026.pixelgraph.json.gz",
-      "graph_sha256": "e968f2b49653c2f802e59db09b3da73f3b2982a029791bb0bee1959972cbbe50",
+      "graph_sha256": "611130a2286fea66a7807bdefbd4d7ba2a56829a138dc2c0fae56dcd3dbf16e1",
       "motion_family": "flight",
       "offset": [
-        463,
-        725
+        243,
+        384
       ],
       "phase": {
         "denominator": 6,
@@ -15595,16 +15595,16 @@
       "source_entry": "sheet-wizard-joe-w5.png#frame-02",
       "source_pack": "wizard_joe_phazer_sprites",
       "source_record_id": "WJPS-0026",
-      "source_sha256": "6dc6c709e1b52a754eb11533e97fbe1bc481d04fd4571715ca4de1d0c9495bf8",
+      "source_sha256": "364768f12ebe6d34762502565e4b3e8a387c69659b6c8558651275d72b291272",
       "source_size": [
-        327,
-        370
+        768,
+        870
       ]
     },
     {
       "anchor_kind": "body_center",
       "anchor_x": 626,
-      "anchor_y": 914,
+      "anchor_y": 829,
       "authored_transition_neighbors": [
         "phazer_side_flap_cycle_frame_02",
         "phazer_side_flap_cycle_frame_04"
@@ -15625,18 +15625,18 @@
       "exact_rgba_equal": true,
       "foreground_color_fidelity_millionths": 1000000,
       "foreground_color_match_ratio_millionths": 1000000,
-      "foreground_pixel_count": 55686,
+      "foreground_pixel_count": 307378,
       "frame": [
         1254,
         1254
       ],
       "graph_id": "wjps-0027-pixelgraph-v1",
       "graph_path": "graphs/WJPS-0027.pixelgraph.json.gz",
-      "graph_sha256": "4db2f974c5cdb950343ea73e6d66a2ea72a34b98752941c47f2a3ffd69a15fe1",
+      "graph_sha256": "634d56827f6400dba3d4d9958db0ea99087129cff2449be675837328cb3f2964",
       "motion_family": "flight",
       "offset": [
-        408,
-        734
+        112,
+        406
       ],
       "phase": {
         "denominator": 6,
@@ -15653,16 +15653,16 @@
       "source_entry": "sheet-wizard-joe-w5.png#frame-03",
       "source_pack": "wizard_joe_phazer_sprites",
       "source_record_id": "WJPS-0027",
-      "source_sha256": "9b648cf70b350fa98aed23626d14e9ae9e0790107cd20e3e53a0ac129b8baa8b",
+      "source_sha256": "5aa672c6c2b77d81464a95bc1bccee58622ae1b37e567a8049e3463b48982f06",
       "source_size": [
-        438,
-        361
+        1029,
+        848
       ]
     },
     {
       "anchor_kind": "body_center",
       "anchor_x": 626,
-      "anchor_y": 923,
+      "anchor_y": 817,
       "authored_transition_neighbors": [
         "phazer_side_flap_cycle_frame_03",
         "phazer_side_flap_cycle_frame_05"
@@ -15683,18 +15683,18 @@
       "exact_rgba_equal": true,
       "foreground_color_fidelity_millionths": 1000000,
       "foreground_color_match_ratio_millionths": 1000000,
-      "foreground_pixel_count": 47555,
+      "foreground_pixel_count": 262587,
       "frame": [
         1254,
         1254
       ],
       "graph_id": "wjps-0028-pixelgraph-v1",
       "graph_path": "graphs/WJPS-0028.pixelgraph.json.gz",
-      "graph_sha256": "26807ecfaf35e153fa6999143fc3ba3ec02af13524ad470031462c1a9054dfd4",
+      "graph_sha256": "56b844f654ec504ef9818193d60d438969309215e35764ece9017b00eee5b436",
       "motion_family": "flight",
       "offset": [
-        481,
-        738
+        284,
+        382
       ],
       "phase": {
         "denominator": 6,
@@ -15711,16 +15711,16 @@
       "source_entry": "sheet-wizard-joe-w5.png#frame-04",
       "source_pack": "wizard_joe_phazer_sprites",
       "source_record_id": "WJPS-0028",
-      "source_sha256": "a1d66794257df1b0c40fe6dc8fa0e70a37b16d2b534d9fd53d68df792c200596",
+      "source_sha256": "38e5a8535a291e33be4565fadd8869893e45cf12ebfe2aa6e797eec1f73622a2",
       "source_size": [
-        292,
-        371
+        686,
+        872
       ]
     },
     {
       "anchor_kind": "body_center",
       "anchor_x": 626,
-      "anchor_y": 919,
+      "anchor_y": 836,
       "authored_transition_neighbors": [
         "phazer_side_flap_cycle_frame_04",
         "phazer_side_flap_cycle_frame_06"
@@ -15741,18 +15741,18 @@
       "exact_rgba_equal": true,
       "foreground_color_fidelity_millionths": 1000000,
       "foreground_color_match_ratio_millionths": 1000000,
-      "foreground_pixel_count": 47911,
+      "foreground_pixel_count": 264519,
       "frame": [
         1254,
         1254
       ],
       "graph_id": "wjps-0029-pixelgraph-v1",
       "graph_path": "graphs/WJPS-0029.pixelgraph.json.gz",
-      "graph_sha256": "6f4c00a15b319d98ba2e472187d6eaa3282217a202386dec90f62f8fa698cfe8",
+      "graph_sha256": "7329b16ad4c2cd32f78f58fa01ecad8a524118aaa713b539492172ed947eb041",
       "motion_family": "flight",
       "offset": [
-        453,
-        742
+        219,
+        420
       ],
       "phase": {
         "denominator": 6,
@@ -15769,16 +15769,16 @@
       "source_entry": "sheet-wizard-joe-w5.png#frame-05",
       "source_pack": "wizard_joe_phazer_sprites",
       "source_record_id": "WJPS-0029",
-      "source_sha256": "f910d90fe578698352e79397dcdce91cdece7cae84577167430b1a984149b017",
+      "source_sha256": "ab5812805e3e35763a8407ef4ffbd084b7ec99f6c81b27278e4d18e572d6022f",
       "source_size": [
-        347,
-        355
+        815,
+        834
       ]
     },
     {
       "anchor_kind": "body_center",
       "anchor_x": 626,
-      "anchor_y": 887,
+      "anchor_y": 766,
       "authored_transition_neighbors": [
         "phazer_side_flap_cycle_frame_05",
         "phazer_side_flap_cycle_frame_01"
@@ -15799,18 +15799,18 @@
       "exact_rgba_equal": true,
       "foreground_color_fidelity_millionths": 1000000,
       "foreground_color_match_ratio_millionths": 1000000,
-      "foreground_pixel_count": 57900,
+      "foreground_pixel_count": 319733,
       "frame": [
         1254,
         1254
       ],
       "graph_id": "wjps-0030-pixelgraph-v1",
       "graph_path": "graphs/WJPS-0030.pixelgraph.json.gz",
-      "graph_sha256": "ad362044a3c09ff3e76da88588f164467596b670ce1be03176b5d78b66cd4fdb",
+      "graph_sha256": "0815b7c85fca0f884db5489c8fa492574a1259bf8c0f99965bc2de0538727929",
       "motion_family": "flight",
       "offset": [
-        466,
-        680
+        248,
+        279
       ],
       "phase": {
         "denominator": 6,
@@ -15827,16 +15827,16 @@
       "source_entry": "sheet-wizard-joe-w5.png#frame-06",
       "source_pack": "wizard_joe_phazer_sprites",
       "source_record_id": "WJPS-0030",
-      "source_sha256": "384492c162289088973cde54dd454725050487053a17b4d17e2e81a563311676",
+      "source_sha256": "79ee7b7019c16f802975b4d0d85fa889863efe7bdd4c73340e5c8ba8b5dff51e",
       "source_size": [
-        322,
-        415
+        757,
+        975
       ]
     },
     {
       "anchor_kind": "body_center",
       "anchor_x": 626,
-      "anchor_y": 1026,
+      "anchor_y": 895,
       "authored_transition_neighbors": [
         "phazer_side_flight_transition_frame_06",
         "phazer_side_flight_transition_frame_02"
@@ -15857,18 +15857,18 @@
       "exact_rgba_equal": true,
       "foreground_color_fidelity_millionths": 1000000,
       "foreground_color_match_ratio_millionths": 1000000,
-      "foreground_pixel_count": 50047,
+      "foreground_pixel_count": 276469,
       "frame": [
         1254,
         1254
       ],
       "graph_id": "wjps-0031-pixelgraph-v1",
       "graph_path": "graphs/WJPS-0031.pixelgraph.json.gz",
-      "graph_sha256": "0fa10d6051be76f37035960b1d817d93dbc56ad399f60575e21444e6b8262837",
+      "graph_sha256": "b4284627b425cc080b9fd4fee5b7fc798c2fa0df4d047ee15e489104b51e0a08",
       "motion_family": "air_to_ground",
       "offset": [
-        377,
-        874
+        39,
+        537
       ],
       "phase": {
         "denominator": 6,
@@ -15885,16 +15885,16 @@
       "source_entry": "sheet-wizard-joe-w6.png#frame-01",
       "source_pack": "wizard_joe_phazer_sprites",
       "source_record_id": "WJPS-0031",
-      "source_sha256": "0df35452c457816747acc38c0a5cc451b711e732bbcd21ab44a98398bb733063",
+      "source_sha256": "1883190dc81d53e74339518395f0692aaa1bd5d40c7df672a9ddde4c562917e9",
       "source_size": [
-        500,
-        305
+        1175,
+        717
       ]
     },
     {
       "anchor_kind": "body_center",
       "anchor_x": 626,
-      "anchor_y": 986,
+      "anchor_y": 791,
       "authored_transition_neighbors": [
         "phazer_side_flight_transition_frame_01",
         "phazer_side_flight_transition_frame_03"
@@ -15915,18 +15915,18 @@
       "exact_rgba_equal": true,
       "foreground_color_fidelity_millionths": 1000000,
       "foreground_color_match_ratio_millionths": 1000000,
-      "foreground_pixel_count": 50970,
+      "foreground_pixel_count": 281781,
       "frame": [
         1254,
         1254
       ],
       "graph_id": "wjps-0032-pixelgraph-v1",
       "graph_path": "graphs/WJPS-0032.pixelgraph.json.gz",
-      "graph_sha256": "6392845e8d218f81484e9345744c335e5787b0d6f230cf2865ad4ac583ccc817",
+      "graph_sha256": "58c12b96e6875b972da0e2da34c9b671ea104890bbe5d14b577d860190169832",
       "motion_family": "air_to_ground",
       "offset": [
-        480,
-        790
+        282,
+        330
       ],
       "phase": {
         "denominator": 6,
@@ -15943,16 +15943,16 @@
       "source_entry": "sheet-wizard-joe-w6.png#frame-02",
       "source_pack": "wizard_joe_phazer_sprites",
       "source_record_id": "WJPS-0032",
-      "source_sha256": "ae4f55e29f9d3458d55191ca909e168c1a7eaf1641f2987318d4a0ab0f04caae",
+      "source_sha256": "6f61fe0b55bd30cf35b5ddd2e6c826630b1ba1d51b0c775c33297ea59f98277d",
       "source_size": [
-        293,
-        393
+        689,
+        924
       ]
     },
     {
       "anchor_kind": "body_center",
       "anchor_x": 626,
-      "anchor_y": 1014,
+      "anchor_y": 869,
       "authored_transition_neighbors": [
         "phazer_side_flight_transition_frame_02",
         "phazer_side_flight_transition_frame_04"
@@ -15973,18 +15973,18 @@
       "exact_rgba_equal": true,
       "foreground_color_fidelity_millionths": 1000000,
       "foreground_color_match_ratio_millionths": 1000000,
-      "foreground_pixel_count": 40065,
+      "foreground_pixel_count": 221026,
       "frame": [
         1254,
         1254
       ],
       "graph_id": "wjps-0033-pixelgraph-v1",
       "graph_path": "graphs/WJPS-0033.pixelgraph.json.gz",
-      "graph_sha256": "674594797b88fa5e51e849ad05f5e84389e9d9e0ed0bc6e862f0eeaa09f89f12",
+      "graph_sha256": "d8cb48a22b926cfd5f4c5ecf1c8e61642e5bd66263fc4794a08aa04c3b28cd45",
       "motion_family": "air_to_ground",
       "offset": [
-        449,
-        851
+        210,
+        486
       ],
       "phase": {
         "denominator": 6,
@@ -16001,16 +16001,16 @@
       "source_entry": "sheet-wizard-joe-w6.png#frame-03",
       "source_pack": "wizard_joe_phazer_sprites",
       "source_record_id": "WJPS-0033",
-      "source_sha256": "20e1d4dd748c2aa7193d9578be761da98a5197580b9094df8c0b2fd318234b62",
+      "source_sha256": "25d9e6c5319d8f2c7b3584418bba62a336d220d4d7f8522d4dc1eee97a50d9e1",
       "source_size": [
-        355,
-        327
+        834,
+        768
       ]
     },
     {
       "anchor_kind": "body_center",
       "anchor_x": 626,
-      "anchor_y": 1002,
+      "anchor_y": 824,
       "authored_transition_neighbors": [
         "phazer_side_flight_transition_frame_03",
         "phazer_side_flight_transition_frame_05"
@@ -16031,18 +16031,18 @@
       "exact_rgba_equal": true,
       "foreground_color_fidelity_millionths": 1000000,
       "foreground_color_match_ratio_millionths": 1000000,
-      "foreground_pixel_count": 50009,
+      "foreground_pixel_count": 276093,
       "frame": [
         1254,
         1254
       ],
       "graph_id": "wjps-0034-pixelgraph-v1",
       "graph_path": "graphs/WJPS-0034.pixelgraph.json.gz",
-      "graph_sha256": "490759003db46d7f99b6b0e7d470ece034daf2348c743a521f259d81b20ab883",
+      "graph_sha256": "7cfb5e6c810727b4e4e607015280edfb74a3035be576d1c5dc67e1faebec6b1b",
       "motion_family": "air_to_ground",
       "offset": [
-        483,
-        820
+        290,
+        396
       ],
       "phase": {
         "denominator": 6,
@@ -16059,16 +16059,16 @@
       "source_entry": "sheet-wizard-joe-w6.png#frame-04",
       "source_pack": "wizard_joe_phazer_sprites",
       "source_record_id": "WJPS-0034",
-      "source_sha256": "df24a4a6c108f7b8e084b018e005834e2d3f0f038e112203bcf254a795376b2a",
+      "source_sha256": "34edcb731166cdd132c278d675073c318eb0f0d8eb29b411f49b14d4f2ba90c3",
       "source_size": [
-        287,
-        365
+        674,
+        858
       ]
     },
     {
       "anchor_kind": "body_center",
       "anchor_x": 626,
-      "anchor_y": 1040,
+      "anchor_y": 895,
       "authored_transition_neighbors": [
         "phazer_side_flight_transition_frame_04",
         "phazer_side_flight_transition_frame_06"
@@ -16089,18 +16089,18 @@
       "exact_rgba_equal": true,
       "foreground_color_fidelity_millionths": 1000000,
       "foreground_color_match_ratio_millionths": 1000000,
-      "foreground_pixel_count": 43895,
+      "foreground_pixel_count": 242488,
       "frame": [
         1254,
         1254
       ],
       "graph_id": "wjps-0035-pixelgraph-v1",
       "graph_path": "graphs/WJPS-0035.pixelgraph.json.gz",
-      "graph_sha256": "2c5c58a2531b30dc12639ae475c60c280047a6b4ab6cbe07783e8aa9359a9d97",
+      "graph_sha256": "78aa25d059b8afc60e16845b378c5f1b9b9df5b12edaa1203c0d87340e5a7e9c",
       "motion_family": "air_to_ground",
       "offset": [
-        474,
-        888
+        267,
+        537
       ],
       "phase": {
         "denominator": 6,
@@ -16117,10 +16117,10 @@
       "source_entry": "sheet-wizard-joe-w6.png#frame-05",
       "source_pack": "wizard_joe_phazer_sprites",
       "source_record_id": "WJPS-0035",
-      "source_sha256": "877b27296b35204e9e6096d80ede057ed7c2efc610a061e7cade255bb8068936",
+      "source_sha256": "9afd6ae17f73ce42b1fce52da74338bc109b6cb8bfbaaf47b5c8b2c03a69b397",
       "source_size": [
-        306,
-        305
+        719,
+        717
       ]
     },
     {
@@ -16147,18 +16147,18 @@
       "exact_rgba_equal": true,
       "foreground_color_fidelity_millionths": 1000000,
       "foreground_color_match_ratio_millionths": 1000000,
-      "foreground_pixel_count": 40488,
+      "foreground_pixel_count": 223357,
       "frame": [
         1254,
         1254
       ],
       "graph_id": "wjps-0036-pixelgraph-v1",
       "graph_path": "graphs/WJPS-0036.pixelgraph.json.gz",
-      "graph_sha256": "c1be903005c2c192e6c8620ff6110fbda31078db96ec615fa94c95bb1629570e",
+      "graph_sha256": "f9276ce383fd63e361e1489b857fbd369e2d6dc10d2d16b833f3fda2ce9c4823",
       "motion_family": "air_to_ground",
       "offset": [
-        522,
-        852
+        381,
+        403
       ],
       "phase": {
         "denominator": 6,
@@ -16175,10 +16175,10 @@
       "source_entry": "sheet-wizard-joe-w6.png#frame-06",
       "source_pack": "wizard_joe_phazer_sprites",
       "source_record_id": "WJPS-0036",
-      "source_sha256": "1f083a3cda561a7c90c91ff1107289525a6c3769657c9ca8b028d31e6a6263a1",
+      "source_sha256": "adf412ffc4b3875efd878c27496fbf2fe59054ff7cf20e2194ce3efe9bc01052",
       "source_size": [
-        209,
-        341
+        491,
+        801
       ]
     },
     {
@@ -16205,18 +16205,18 @@
       "exact_rgba_equal": true,
       "foreground_color_fidelity_millionths": 1000000,
       "foreground_color_match_ratio_millionths": 1000000,
-      "foreground_pixel_count": 82698,
+      "foreground_pixel_count": 456656,
       "frame": [
         1254,
         1254
       ],
       "graph_id": "wjps-0037-pixelgraph-v1",
       "graph_path": "graphs/WJPS-0037.pixelgraph.json.gz",
-      "graph_sha256": "9a9b3397d525aad3f0e16ee616427bff3de9abc75530114d9810f2a618eb6319",
+      "graph_sha256": "6f97da54b9edfc7ba004c0567f55d8e19067baf64f9a949c0258a8de3f3500a5",
       "motion_family": "ground_to_air",
       "offset": [
-        480,
-        696
+        282,
+        39
       ],
       "phase": {
         "denominator": 6,
@@ -16233,10 +16233,10 @@
       "source_entry": "sheet-wizard-joe-w7.png#frame-01",
       "source_pack": "wizard_joe_phazer_sprites",
       "source_record_id": "WJPS-0037",
-      "source_sha256": "6753a784cbeceb326fef8369fad4f17810843262b9fa4e366054287ca38a4f01",
+      "source_sha256": "61668ced2e62056eb0dc50a18c9facd2a731e8f19edbc8e2d0f009544398c7f6",
       "source_size": [
-        293,
-        495
+        689,
+        1163
       ]
     },
     {
@@ -16263,18 +16263,18 @@
       "exact_rgba_equal": true,
       "foreground_color_fidelity_millionths": 1000000,
       "foreground_color_match_ratio_millionths": 1000000,
-      "foreground_pixel_count": 76852,
+      "foreground_pixel_count": 424298,
       "frame": [
         1254,
         1254
       ],
       "graph_id": "wjps-0038-pixelgraph-v1",
       "graph_path": "graphs/WJPS-0038.pixelgraph.json.gz",
-      "graph_sha256": "e0e71a4daebffc3954d0feeb37ea10d366bc4024311ba0e8d7d95e19c093da99",
+      "graph_sha256": "ca5cbcb862a6e398f74d139944b9f6cd93f3ceea6f08c4c324d8892e24f12e56",
       "motion_family": "ground_to_air",
       "offset": [
-        483,
-        709
+        288,
+        67
       ],
       "phase": {
         "denominator": 6,
@@ -16291,10 +16291,10 @@
       "source_entry": "sheet-wizard-joe-w7.png#frame-02",
       "source_pack": "wizard_joe_phazer_sprites",
       "source_record_id": "WJPS-0038",
-      "source_sha256": "0db6cbb64e58369786177fbcd16035c5354b5d9220fee7259fce2d69bc827a4b",
+      "source_sha256": "409ef77923f87f26cc0a73b2ffaa74bb5bdc6f568f2cfa20eb6c1cec117bd648",
       "source_size": [
-        288,
-        484
+        677,
+        1137
       ]
     },
     {
@@ -16321,18 +16321,18 @@
       "exact_rgba_equal": true,
       "foreground_color_fidelity_millionths": 1000000,
       "foreground_color_match_ratio_millionths": 1000000,
-      "foreground_pixel_count": 75724,
+      "foreground_pixel_count": 417945,
       "frame": [
         1254,
         1254
       ],
       "graph_id": "wjps-0039-pixelgraph-v1",
       "graph_path": "graphs/WJPS-0039.pixelgraph.json.gz",
-      "graph_sha256": "3dfa856f7a2f00e38b79d2341646053377edeb0dcfc2ff640c18c4890e2f617e",
+      "graph_sha256": "37f0fec8fa143d3373d17c6c5eb35120eda828e8340232aa50fcff4b160d341b",
       "motion_family": "ground_to_air",
       "offset": [
-        482,
-        710
+        287,
+        69
       ],
       "phase": {
         "denominator": 6,
@@ -16349,10 +16349,10 @@
       "source_entry": "sheet-wizard-joe-w7.png#frame-03",
       "source_pack": "wizard_joe_phazer_sprites",
       "source_record_id": "WJPS-0039",
-      "source_sha256": "9ea6f3ad47187c652d2d84d478c251fe3f79b67367df706cb24e4cf68e549271",
+      "source_sha256": "ed5f74c664ce3b5e58a4d583447fc821a4d5f07d6ea3a7dbd96a6a7213ed1632",
       "source_size": [
-        289,
-        483
+        679,
+        1135
       ]
     },
     {
@@ -16379,18 +16379,18 @@
       "exact_rgba_equal": true,
       "foreground_color_fidelity_millionths": 1000000,
       "foreground_color_match_ratio_millionths": 1000000,
-      "foreground_pixel_count": 76094,
+      "foreground_pixel_count": 420064,
       "frame": [
         1254,
         1254
       ],
       "graph_id": "wjps-0040-pixelgraph-v1",
       "graph_path": "graphs/WJPS-0040.pixelgraph.json.gz",
-      "graph_sha256": "03c6594baaebf9d0c8f38c908b091ab1ecef2050646c152a94a3abfeab658b1c",
+      "graph_sha256": "76d088ff0cb6e1433e32292a43b24de2ceb71e8a2f3b66eddb76c437e3da2a67",
       "motion_family": "ground_to_air",
       "offset": [
-        485,
-        709
+        294,
+        67
       ],
       "phase": {
         "denominator": 6,
@@ -16407,10 +16407,10 @@
       "source_entry": "sheet-wizard-joe-w7.png#frame-04",
       "source_pack": "wizard_joe_phazer_sprites",
       "source_record_id": "WJPS-0040",
-      "source_sha256": "bbe9b21ef3c5050aac11ddf6e0d10795ea70540d4dd64ec086e9cc86a8021f1f",
+      "source_sha256": "e905d254fc4b676ffac9ae9bd8ef26549ce189fac8b2374697e0d2d7ecedb4c8",
       "source_size": [
-        283,
-        484
+        665,
+        1137
       ]
     },
     {
@@ -16437,18 +16437,18 @@
       "exact_rgba_equal": true,
       "foreground_color_fidelity_millionths": 1000000,
       "foreground_color_match_ratio_millionths": 1000000,
-      "foreground_pixel_count": 76454,
+      "foreground_pixel_count": 422580,
       "frame": [
         1254,
         1254
       ],
       "graph_id": "wjps-0041-pixelgraph-v1",
       "graph_path": "graphs/WJPS-0041.pixelgraph.json.gz",
-      "graph_sha256": "d27422264c20b1d5d5b592b4140ebf01a99fe0d6b0104f63c22bd4a08d0b417e",
+      "graph_sha256": "2eaede75af9aa9603800d5c8bb9788a5b89bd2ed9cc8e2ce7c84e73ace92113c",
       "motion_family": "ground_to_air",
       "offset": [
-        482,
-        696
+        286,
+        60
       ],
       "phase": {
         "denominator": 6,
@@ -16465,16 +16465,16 @@
       "source_entry": "sheet-wizard-joe-w7.png#frame-05",
       "source_pack": "wizard_joe_phazer_sprites",
       "source_record_id": "WJPS-0041",
-      "source_sha256": "1c5b44037f6053a461134c45a0ae34699b7a55eb82ff9ff03e39b5fd83603e88",
+      "source_sha256": "dc7ebe967c6bc902792aa012254640eda7a6fd566cf27192d758ce68600f9056",
       "source_size": [
-        290,
-        479
+        682,
+        1126
       ]
     },
     {
       "anchor_kind": "body_center",
       "anchor_x": 626,
-      "anchor_y": 868,
+      "anchor_y": 750,
       "authored_transition_neighbors": [
         "phazer_front_walk_hover_frame_05",
         "phazer_front_walk_hover_frame_01"
@@ -16495,18 +16495,18 @@
       "exact_rgba_equal": true,
       "foreground_color_fidelity_millionths": 1000000,
       "foreground_color_match_ratio_millionths": 1000000,
-      "foreground_pixel_count": 71838,
+      "foreground_pixel_count": 396612,
       "frame": [
         1254,
         1254
       ],
       "graph_id": "wjps-0042-pixelgraph-v1",
       "graph_path": "graphs/WJPS-0042.pixelgraph.json.gz",
-      "graph_sha256": "94c9431588e1a011173dc5fbf2faca968b64f52461a6ebd9a177944d59fbbddf",
+      "graph_sha256": "04fdfc14f8ae320d6695ba41d5ce67321094235cb1b33a92a2ea9ea655d241a0",
       "motion_family": "ground_to_air",
       "offset": [
-        466,
-        655
+        250,
+        248
       ],
       "phase": {
         "denominator": 6,
@@ -16523,10 +16523,10 @@
       "source_entry": "sheet-wizard-joe-w7.png#frame-06",
       "source_pack": "wizard_joe_phazer_sprites",
       "source_record_id": "WJPS-0042",
-      "source_sha256": "6811f2778c27c3e62e176caa9b3488f686e239dbd340d27dff41231538cb6964",
+      "source_sha256": "5b2b4e1030713b653183de7bc67e98b074e1631b866759759f34b75f09da6adb",
       "source_size": [
-        321,
-        428
+        754,
+        1006
       ]
     },
     {
@@ -16553,18 +16553,18 @@
       "exact_rgba_equal": true,
       "foreground_color_fidelity_millionths": 1000000,
       "foreground_color_match_ratio_millionths": 1000000,
-      "foreground_pixel_count": 71688,
+      "foreground_pixel_count": 395814,
       "frame": [
         1254,
         1254
       ],
       "graph_id": "wjps-0043-pixelgraph-v1",
       "graph_path": "graphs/WJPS-0043.pixelgraph.json.gz",
-      "graph_sha256": "0e58f71d91247ec50ab365403d61fa648164d286c69e7974bbec0700c19a5a94",
+      "graph_sha256": "2f58b7acdc2fc241ecde5465533d80a08033784c7bdc6af763412b496358c35d",
       "motion_family": "ground_to_air",
       "offset": [
-        489,
-        733
+        304,
+        131
       ],
       "phase": {
         "denominator": 6,
@@ -16581,10 +16581,10 @@
       "source_entry": "sheet-wizard-joe-w8.png#frame-01",
       "source_pack": "wizard_joe_phazer_sprites",
       "source_record_id": "WJPS-0043",
-      "source_sha256": "f6f199c8a67d1cffd91578495af294d399c90b0abb8283367a9f9c1eecaa8e37",
+      "source_sha256": "e2cb38bf13f94d59abd6f14939fb0a6e3d5fb960960ffba79d61e7c79bdcd5fb",
       "source_size": [
-        275,
-        454
+        646,
+        1067
       ]
     },
     {
@@ -16611,18 +16611,18 @@
       "exact_rgba_equal": true,
       "foreground_color_fidelity_millionths": 1000000,
       "foreground_color_match_ratio_millionths": 1000000,
-      "foreground_pixel_count": 69361,
+      "foreground_pixel_count": 383520,
       "frame": [
         1254,
         1254
       ],
       "graph_id": "wjps-0044-pixelgraph-v1",
       "graph_path": "graphs/WJPS-0044.pixelgraph.json.gz",
-      "graph_sha256": "907a45a07f829c6713feda5569476180000e0ba070d8a07cb232fd44a7c6eb01",
+      "graph_sha256": "a4f79de7f5c408eabce35c29d61dfbf01aef3b33d7ed1342ba0661e070b1b07a",
       "motion_family": "ground_to_air",
       "offset": [
-        479,
-        739
+        279,
+        138
       ],
       "phase": {
         "denominator": 6,
@@ -16639,10 +16639,10 @@
       "source_entry": "sheet-wizard-joe-w8.png#frame-02",
       "source_pack": "wizard_joe_phazer_sprites",
       "source_record_id": "WJPS-0044",
-      "source_sha256": "5b3ae22ba59068cc36aba6e6f2ebf16cee9fbd091a110c7eee08bbcb0e4d8b88",
+      "source_sha256": "8d6095f6e4695a3c95574f25285053811bdc746facdffac28ad7f069675575c1",
       "source_size": [
-        296,
-        453
+        696,
+        1065
       ]
     },
     {
@@ -16669,18 +16669,18 @@
       "exact_rgba_equal": true,
       "foreground_color_fidelity_millionths": 1000000,
       "foreground_color_match_ratio_millionths": 1000000,
-      "foreground_pixel_count": 70119,
+      "foreground_pixel_count": 387354,
       "frame": [
         1254,
         1254
       ],
       "graph_id": "wjps-0045-pixelgraph-v1",
       "graph_path": "graphs/WJPS-0045.pixelgraph.json.gz",
-      "graph_sha256": "defacc0e42a180f600f6841f7c2e19042d40e5bcf29b741cd5b8e625d71f09fd",
+      "graph_sha256": "05b51ae5363db470134613d327f11394dfbd5703fd92c6bf283f939f43ea36f2",
       "motion_family": "ground_to_air",
       "offset": [
-        478,
-        742
+        278,
+        144
       ],
       "phase": {
         "denominator": 6,
@@ -16697,10 +16697,10 @@
       "source_entry": "sheet-wizard-joe-w8.png#frame-03",
       "source_pack": "wizard_joe_phazer_sprites",
       "source_record_id": "WJPS-0045",
-      "source_sha256": "0bab4ad99d2adb8f56df0827bdeb9b50e064b819a8df8c54c44f40bff9227571",
+      "source_sha256": "e24d9a52a4e652879fda2ce71eef1f987776a5f0a503c13b261be7fd3786af94",
       "source_size": [
-        297,
-        451
+        698,
+        1060
       ]
     },
     {
@@ -16727,18 +16727,18 @@
       "exact_rgba_equal": true,
       "foreground_color_fidelity_millionths": 1000000,
       "foreground_color_match_ratio_millionths": 1000000,
-      "foreground_pixel_count": 68237,
+      "foreground_pixel_count": 376846,
       "frame": [
         1254,
         1254
       ],
       "graph_id": "wjps-0046-pixelgraph-v1",
       "graph_path": "graphs/WJPS-0046.pixelgraph.json.gz",
-      "graph_sha256": "d55336ce54c232d3cde431ca79bddaf8cae23472db4e1b3482831ac070399706",
+      "graph_sha256": "3d4d8477fe59a724c623f25171f998ce97b5066d4dcd167d7b76372e4678455c",
       "motion_family": "ground_to_air",
       "offset": [
-        479,
-        743
+        280,
+        146
       ],
       "phase": {
         "denominator": 6,
@@ -16755,10 +16755,10 @@
       "source_entry": "sheet-wizard-joe-w8.png#frame-04",
       "source_pack": "wizard_joe_phazer_sprites",
       "source_record_id": "WJPS-0046",
-      "source_sha256": "754586e04a35efb4693c38468d37afaed75dd44c50f624d60798429132b9cff9",
+      "source_sha256": "1753790cc3329d16c8ed7e0057dcdcc8bb1e9e6134d44fb89c79a6503ddcb27c",
       "source_size": [
-        295,
-        450
+        693,
+        1058
       ]
     },
     {
@@ -16785,18 +16785,18 @@
       "exact_rgba_equal": true,
       "foreground_color_fidelity_millionths": 1000000,
       "foreground_color_match_ratio_millionths": 1000000,
-      "foreground_pixel_count": 67074,
+      "foreground_pixel_count": 370211,
       "frame": [
         1254,
         1254
       ],
       "graph_id": "wjps-0047-pixelgraph-v1",
       "graph_path": "graphs/WJPS-0047.pixelgraph.json.gz",
-      "graph_sha256": "5db3e55cad853ff6ebffa584cb12cee7388787c0705915436aae00194b368965",
+      "graph_sha256": "95f54b0acb7e88439c666cd040e34a39599be3167a561aef4cd5f355de8fa2e9",
       "motion_family": "ground_to_air",
       "offset": [
-        483,
-        742
+        288,
+        150
       ],
       "phase": {
         "denominator": 6,
@@ -16813,16 +16813,16 @@
       "source_entry": "sheet-wizard-joe-w8.png#frame-05",
       "source_pack": "wizard_joe_phazer_sprites",
       "source_record_id": "WJPS-0047",
-      "source_sha256": "42e072282e9d35fa49d4f4ccb8ceaf597ff5f9123a4c3acb50ab9bfede154aa1",
+      "source_sha256": "51b924cd5846c1d30993f6cf3cf54219e32e64d8a9ebcc7428b805874daa1d2f",
       "source_size": [
-        288,
-        447
+        677,
+        1050
       ]
     },
     {
       "anchor_kind": "body_center",
       "anchor_x": 626,
-      "anchor_y": 926,
+      "anchor_y": 744,
       "authored_transition_neighbors": [
         "phazer_rear_walk_hover_frame_05",
         "phazer_rear_walk_hover_frame_01"
@@ -16843,18 +16843,18 @@
       "exact_rgba_equal": true,
       "foreground_color_fidelity_millionths": 1000000,
       "foreground_color_match_ratio_millionths": 1000000,
-      "foreground_pixel_count": 67088,
+      "foreground_pixel_count": 370872,
       "frame": [
         1254,
         1254
       ],
       "graph_id": "wjps-0048-pixelgraph-v1",
       "graph_path": "graphs/WJPS-0048.pixelgraph.json.gz",
-      "graph_sha256": "63177ec6c231306f986ca6445463a0860bf6b56da6d65c045363d2bcd75b6fe4",
+      "graph_sha256": "b7f528f0f01bcd5d7bc4664031e22bf8aea44a7892c83a8a4150c7342a3347f2",
       "motion_family": "ground_to_air",
       "offset": [
-        486,
-        710
+        295,
+        236
       ],
       "phase": {
         "denominator": 6,
@@ -16871,10 +16871,10 @@
       "source_entry": "sheet-wizard-joe-w8.png#frame-06",
       "source_pack": "wizard_joe_phazer_sprites",
       "source_record_id": "WJPS-0048",
-      "source_sha256": "fe0882908c1b67498be2ae0e901143f197f4e68807027bdae56893b861a3b7d2",
+      "source_sha256": "b7d39e4200616c0218fbcecc2b874a13dd5d4f40f999526eae7ff82458b1c07c",
       "source_size": [
-        282,
-        433
+        663,
+        1018
       ]
     }
   ],
