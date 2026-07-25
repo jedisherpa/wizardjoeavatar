@@ -5,6 +5,7 @@ from unittest import mock
 from tests.wizard.test_media_session import snapshot
 from tests.wizard.test_performance_context import context_mapping
 from wizard_avatar.character_capabilities import derive_character_capability_manifest
+from wizard_avatar.controller import WizardAvatarController
 from wizard_avatar.live_speech_score import (
     LiveSpeechScoreError,
     compile_live_speech_score,
@@ -12,6 +13,7 @@ from wizard_avatar.live_speech_score import (
 )
 from wizard_avatar.performance_context import PerformanceContextV1
 from wizard_avatar.performance_application import PerformanceApplication
+from wizard_avatar.performance_release import GovernedSpeechError
 from wizard_avatar.performance_score import CompiledScoreRepository
 
 
@@ -144,7 +146,7 @@ class LiveSpeechScoreTests(unittest.TestCase):
                 duration_ms=875,
             )
             with mock.patch(
-                "wizard_avatar.performance_application.time.monotonic_ns",
+                "wizard_avatar.performance_application.time.perf_counter_ns",
                 return_value=1_000_000,
             ):
                 prepared = application.publish_live_speech_score(compiled)
@@ -160,6 +162,39 @@ class LiveSpeechScoreTests(unittest.TestCase):
                 grant.expires_at_monotonic_us + 1,
             )
 
+            self.assertNotIn(key, application._live_score_preparations)
+
+    def test_stale_revocation_does_not_destroy_newer_preparation_grant(self):
+        context = speech_context(self.manifest)
+        with tempfile.TemporaryDirectory() as temporary:
+            application = PerformanceApplication(
+                context.runtime.wizard_runtime_epoch,
+                score_repository=CompiledScoreRepository(temporary),
+                character_id=context.character.character_id,
+                package_digest=context.character.package_digest,
+                manifest_digest=context.character.manifest_digest,
+                capability_manifest=self.manifest,
+            )
+            controller = WizardAvatarController()
+            application.revoke_governed_speech(1, controller)
+            prepared = application.publish_live_speech_score(
+                application.compile_live_speech_score(
+                    context,
+                    duration_ms=875,
+                )
+            )
+            key = (
+                prepared.score_binding.score_id,
+                prepared.score_binding.score_revision,
+                prepared.score_binding.score_sha256,
+            )
+
+            with self.assertRaises(GovernedSpeechError) as stale:
+                application.revoke_governed_speech(1, controller)
+
+            self.assertEqual(stale.exception.code, "revocation_generation_stale")
+            self.assertIn(key, application._live_score_preparations)
+            application.revoke_governed_speech(2, controller)
             self.assertNotIn(key, application._live_score_preparations)
 
 

@@ -548,7 +548,7 @@ class PerformanceApplication:
         self._live_score_preparations[key] = _LiveScorePreparationGrant(
             prepared=prepared,
             expires_at_monotonic_us=(
-                time.monotonic_ns() // 1000 + _LIVE_SCORE_PREPARATION_TTL_US
+                time.perf_counter_ns() // 1000 + _LIVE_SCORE_PREPARATION_TTL_US
             ),
         )
         self._live_score_preparations.move_to_end(key)
@@ -718,8 +718,8 @@ class PerformanceApplication:
         generation: int,
         controller: WizardAvatarController,
     ) -> None:
-        self._live_score_preparations.clear()
         self.governed_speech.revoke(generation)
+        self._live_score_preparations.clear()
         self._release_owned_state(controller)
         self._orient_toward_viewer_after_interruption(controller)
 

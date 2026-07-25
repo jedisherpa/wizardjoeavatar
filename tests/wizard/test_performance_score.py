@@ -236,6 +236,12 @@ class PerformanceScoreTests(unittest.TestCase):
     def test_live_score_retention_prunes_only_old_unprotected_generations(self):
         with tempfile.TemporaryDirectory() as temporary:
             repository = CompiledScoreRepository(temporary, self.loader)
+            authored_document = score_document()
+            authored_document["media"]["media_id"] = "media:authored"
+            authored_document["media"]["media_sha256"] = digest("4")
+            authored = repository.publish(
+                self.loader.from_mapping(authored_document)
+            )
             publications = []
             for ordinal, character in enumerate(("1", "2", "3"), start=1):
                 document = score_document()
@@ -293,6 +299,9 @@ class PerformanceScoreTests(unittest.TestCase):
                     package_digest=second.package_digest,
                 )
             self.assertEqual(pruned.exception.code, "score_not_ready")
+            with self.assertRaises(ScoreValidationError) as pointer:
+                repository.load_current(second.media_sha256)
+            self.assertEqual(pointer.exception.code, "score_not_ready")
             self.assertEqual(
                 repository.load_binding(
                     media_sha256=third.media_sha256,
@@ -302,6 +311,10 @@ class PerformanceScoreTests(unittest.TestCase):
                     package_digest=third.package_digest,
                 ).compiled_score_id,
                 third.compiled_score_id,
+            )
+            self.assertEqual(
+                repository.load_current(authored.media_sha256).compiled_score_id,
+                authored.compiled_score_id,
             )
 
     def test_corrupt_pointer_is_not_silently_ignored(self):
