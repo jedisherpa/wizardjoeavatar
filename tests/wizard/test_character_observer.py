@@ -1,6 +1,6 @@
 import unittest
 
-from tools.run_character_observer import _observer_html
+from tools.run_character_observer import _observer_health, _observer_html
 
 
 class CharacterObserverTests(unittest.TestCase):
@@ -35,6 +35,28 @@ class CharacterObserverTests(unittest.TestCase):
         self.assertIn(b"&quot;candidate&quot;", body)
         self.assertIn(b"hd-sequence=&lt;candidate&gt;", body)
         self.assertIn(b"hd-sequence=&quot;approved&quot;", body)
+
+    def test_observer_health_names_review_character_without_claiming_admission(self):
+        payload = _observer_health(
+            joe={"status": "ready", "character_id": "wizard-joe-v1"},
+            current={"status": "ready", "character_id": "wizard-joe-v1"},
+            current_label="Orion Vale",
+            current_meta="36 supplied motions",
+            review_character_id="orion-vale",
+            review_projection=True,
+            runtime_admitted=False,
+        )
+
+        self.assertEqual(payload["status"], "ready")
+        self.assertEqual(payload["baseline"]["display_name"], "HD Wizard Joe")
+        self.assertEqual(payload["review"]["character_id"], "orion-vale")
+        self.assertEqual(payload["review"]["display_name"], "Orion Vale")
+        self.assertTrue(payload["review"]["review_projection"])
+        self.assertFalse(payload["review"]["runtime_admitted"])
+        self.assertEqual(
+            payload["review"]["runtime"]["character_id"],
+            "wizard-joe-v1",
+        )
 
 
 if __name__ == "__main__":

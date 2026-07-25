@@ -55,6 +55,35 @@ def _wait_ready(process: subprocess.Popen[bytes], port: int, timeout: float) -> 
     raise TimeoutError(f"character runtime on port {port} did not become ready")
 
 
+def _observer_health(
+    *,
+    joe: dict[str, Any],
+    current: dict[str, Any],
+    current_label: str,
+    current_meta: str,
+    review_character_id: str | None,
+    review_projection: bool,
+    runtime_admitted: bool,
+) -> dict[str, Any]:
+    ready = joe.get("status") == "ready" and current.get("status") == "ready"
+    return {
+        "schema_version": 1,
+        "status": "ready" if ready else "degraded",
+        "baseline": {
+            "display_name": "HD Wizard Joe",
+            "runtime": joe,
+        },
+        "review": {
+            "character_id": review_character_id,
+            "display_name": current_label,
+            "summary": current_meta,
+            "review_projection": review_projection,
+            "runtime_admitted": runtime_admitted,
+            "runtime": current,
+        },
+    }
+
+
 def _observer_html(
     *,
     joe_port: int,
@@ -211,6 +240,9 @@ class ObserverHandler(BaseHTTPRequestHandler):
     current_path = "/?embedded=1"
     current_label = ""
     current_meta = ""
+    review_character_id: str | None = None
+    review_projection = False
+    runtime_admitted = False
 
     def do_GET(self) -> None:
         if self.path in {"/", "/index.html"}:
@@ -227,16 +259,15 @@ class ObserverHandler(BaseHTTPRequestHandler):
         if self.path == "/health":
             joe = _health(self.joe_port)
             current = _health(self.current_port)
-            payload = {
-                "status": (
-                    "ready"
-                    if joe.get("status") == "ready"
-                    and current.get("status") == "ready"
-                    else "degraded"
-                ),
-                "joe": joe,
-                "current": current,
-            }
+            payload = _observer_health(
+                joe=joe,
+                current=current,
+                current_label=self.current_label,
+                current_meta=self.current_meta,
+                review_character_id=self.review_character_id,
+                review_projection=self.review_projection,
+                runtime_admitted=self.runtime_admitted,
+            )
             self._respond(
                 200,
                 "application/json",
@@ -334,6 +365,16 @@ def main() -> None:
         parser.error(
             f"review library index not found: {review_library_index}"
         )
+    review_identity: dict[str, Any] = {}
+    if review_library_index is not None:
+        try:
+            review_identity = json.loads(
+                review_library_index.read_text(encoding="utf-8")
+            )
+        except (OSError, json.JSONDecodeError) as exc:
+            parser.error(f"review library index is unreadable: {exc}")
+        if not isinstance(review_identity, dict):
+            parser.error("review library index must contain a JSON object")
 
     ObserverHandler.joe_port = args.joe_port
     ObserverHandler.current_port = (
@@ -351,6 +392,17 @@ def main() -> None:
     )
     ObserverHandler.current_label = args.current_label
     ObserverHandler.current_meta = args.current_meta
+    ObserverHandler.review_character_id = (
+        review_identity.get("character_id")
+        if isinstance(review_identity.get("character_id"), str)
+        else None
+    )
+    ObserverHandler.review_projection = (
+        review_identity.get("review_projection") is True
+    )
+    ObserverHandler.runtime_admitted = (
+        review_identity.get("runtime_admitted") is True
+    )
     server = ThreadingHTTPServer((args.host, args.port), ObserverHandler)
     processes: list[subprocess.Popen[bytes]] = []
     stopping = threading.Event()
