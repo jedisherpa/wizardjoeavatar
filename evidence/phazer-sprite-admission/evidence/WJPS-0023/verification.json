@@ -1,0 +1,34 @@
+{
+  "compiler_id": "wizard-avatar-phazer-sprites-v1",
+  "evidence": {
+    "isolated_composite": "isolated-composite.png",
+    "projected": "projected.png",
+    "source": "source.png",
+    "source_graph_overlay": "source-graph-overlay.png",
+    "transparent_overlay": "transparent-overlay.png"
+  },
+  "exact_projection": true,
+  "foreground_pixel_count": 53848,
+  "foreground_source_match_millionths": 1000000,
+  "graph_sha256": "9a60a692bfe169451066e6c369d172c9a8f18e7591bdc51c8c7854935f3989ec",
+  "isolated_bounds": [
+    8,
+    8,
+    277,
+    366
+  ],
+  "pose_id": "WJPS-0023",
+  "removed_matte_pixel_count": 58078,
+  "schema_version": 1,
+  "semantic_id": "phazer_side_wing_open_frame_05",
+  "sheet_crop": [
+    1470,
+    178,
+    293,
+    382
+  ],
+  "sheet_frame": 5,
+  "sheet_member": "sheet-wizard-joe-w4.png",
+  "source_png_sha256": "892940f9750814f9fca35e3cc98c94a6898ccaa23e190362516b75fc87b0d260",
+  "visual_review_status": "approved_transparent_overlay_review"
+}

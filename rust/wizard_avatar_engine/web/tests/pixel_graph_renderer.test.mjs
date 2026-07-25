@@ -74,6 +74,55 @@ test("renderer falls back cleanly when workers are unavailable", () => {
   assert.equal(canvas.dataset.graphWorker, "fallback");
 });
 
+test("renderer admits the complete 308-pose v7 catalog", async () => {
+  const context = {
+    clearRect() {},
+    drawImage() {},
+    putImageData() {},
+    imageSmoothingEnabled: true,
+  };
+  const canvas = {
+    width: 1,
+    height: 1,
+    dataset: {},
+    getContext: () => context,
+  };
+  const entries = Array.from({ length: 308 }, (_, index) => ({
+    source_record_id: `source-${index}`,
+    semantic_id: `pose-${index}`,
+    primary_for_semantic_id: true,
+    foreground_pixel_count: 1,
+    authored_transition_neighbors: [],
+  }));
+  const renderer = new PixelGraphAvatarRenderer(canvas, 480, 270, {
+    createWorker: () => null,
+    createCanvas: () => ({ width: 1, height: 1, getContext: () => context }),
+    fetch: async (url) => ({
+      ok: true,
+      json: async () =>
+        url.endsWith("/pose-graphs/catalog")
+          ? {
+              schema_version: 2,
+              frame: [1254, 1254],
+              verified_pose_count: 308,
+              unique_semantic_pose_count: 308,
+              entries,
+            }
+          : {
+              schema_version: 1,
+              native_canvas: [480, 270],
+              scenes: [],
+            },
+    }),
+  });
+
+  const catalog = await renderer.loadCatalog();
+  assert.equal(catalog.entries.length, 308);
+  assert.equal(renderer.primaryEntries.size, 308);
+  assert.equal(renderer.sourceEntries.size, 308);
+  assert.equal(canvas.dataset.graphStatus, "catalog_ready");
+});
+
 test("all semantic post-character newsroom graphs paint after the complete actor graph", () => {
   const draws = [];
   const context = {

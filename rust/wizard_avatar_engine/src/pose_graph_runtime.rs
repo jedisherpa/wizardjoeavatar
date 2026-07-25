@@ -8,17 +8,18 @@ use std::path::{Path, PathBuf};
 use std::sync::{Arc, Mutex, OnceLock};
 
 pub const RUNTIME_POSE_GRAPH_SCHEMA_VERSION: u32 = 2;
-pub const RUNTIME_POSE_GRAPH_COMPILER_ID: &str = "wizard-avatar-production-alpha-v1";
-pub const RUNTIME_POSE_GRAPH_COUNT: usize = 260;
-pub const RUNTIME_UNIQUE_SEMANTIC_COUNT: usize = 260;
-pub const RUNTIME_SOURCE_RECORD_COUNT: usize = 260;
+pub const RUNTIME_POSE_GRAPH_COMPILER_ID: &str = "wizard-avatar-production-alpha-plus-phazer-v1";
+pub const RUNTIME_POSE_GRAPH_COUNT: usize = 308;
+pub const RUNTIME_UNIQUE_SEMANTIC_COUNT: usize = 308;
+pub const RUNTIME_SOURCE_RECORD_COUNT: usize = 308;
 pub const RUNTIME_BASE_POSE_COUNT: usize = 250;
 pub const RUNTIME_FORWARD_FLIGHT_COUNT: usize = 10;
+pub const RUNTIME_PHAZER_POSE_COUNT: usize = 48;
 const RUNTIME_RASTER_CACHE_LIMIT: usize = 16;
 
 const EMBEDDED_RUNTIME_MANIFEST: &str = include_str!(concat!(
     env!("CARGO_MANIFEST_DIR"),
-    "/assets/pose_graphs/v6/runtime-manifest.json"
+    "/assets/pose_graphs/v7/runtime-manifest.json"
 ));
 
 #[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
@@ -78,6 +79,7 @@ pub struct RuntimePoseGraphManifest {
     pub source_count: usize,
     pub base_pose_count: usize,
     pub forward_flight_count: usize,
+    pub phazer_pose_count: usize,
     pub verified_pose_count: usize,
     pub primary_pose_count: usize,
     pub unique_semantic_pose_count: usize,
@@ -539,13 +541,13 @@ pub fn runtime_graph_directory() -> Result<PathBuf, String> {
     }
     if let Ok(executable) = std::env::current_exe() {
         if let Some(parent) = executable.parent() {
-            let packaged = parent.join("assets/pose_graphs/v6");
+            let packaged = parent.join("assets/pose_graphs/v7");
             if packaged.is_dir() {
                 return Ok(packaged);
             }
         }
     }
-    let development = Path::new(env!("CARGO_MANIFEST_DIR")).join("assets/pose_graphs/v6");
+    let development = Path::new(env!("CARGO_MANIFEST_DIR")).join("assets/pose_graphs/v7");
     if development.is_dir() {
         return Ok(development);
     }
@@ -564,6 +566,7 @@ fn validate_manifest(manifest: &RuntimePoseGraphManifest) -> Result<(), String> 
     if manifest.source_count != RUNTIME_SOURCE_RECORD_COUNT
         || manifest.base_pose_count != RUNTIME_BASE_POSE_COUNT
         || manifest.forward_flight_count != RUNTIME_FORWARD_FLIGHT_COUNT
+        || manifest.phazer_pose_count != RUNTIME_PHAZER_POSE_COUNT
         || manifest.verified_pose_count != RUNTIME_POSE_GRAPH_COUNT
         || manifest.primary_pose_count != RUNTIME_POSE_GRAPH_COUNT
         || manifest.unique_semantic_pose_count != RUNTIME_UNIQUE_SEMANTIC_COUNT
@@ -572,7 +575,7 @@ fn validate_manifest(manifest: &RuntimePoseGraphManifest) -> Result<(), String> 
     {
         return Err("runtime pose graph manifest counts/frame are not authoritative".to_string());
     }
-    if manifest.archives.len() != 2
+    if manifest.archives.len() != 3
         || manifest
             .archives
             .iter()
@@ -637,8 +640,11 @@ mod tests {
     #[test]
     fn embedded_catalog_has_every_verified_graph_and_control_identity() {
         let catalog = runtime_pose_graph_catalog().expect("runtime graph catalog");
-        assert_eq!(catalog.manifest().entries.len(), 260);
-        assert_eq!(catalog.primary_by_semantic_id.len(), 260);
+        assert_eq!(catalog.manifest().entries.len(), RUNTIME_POSE_GRAPH_COUNT);
+        assert_eq!(
+            catalog.primary_by_semantic_id.len(),
+            RUNTIME_UNIQUE_SEMANTIC_COUNT
+        );
         assert!(catalog
             .primary_for_semantic_id("idle_warm_camera_ready")
             .is_some());
@@ -650,6 +656,7 @@ mod tests {
             .is_some());
         assert!(catalog.for_source_record_id("WJPA-0250").is_some());
         assert!(catalog.for_source_record_id("WJFF-0010").is_some());
+        assert!(catalog.for_source_record_id("WJPS-0048").is_some());
         assert_eq!(
             catalog
                 .for_runtime_pose_id("WJFF-0010")
@@ -668,7 +675,12 @@ mod tests {
 
     #[test]
     fn graph_projection_reconstructs_base_and_flight_runtime_frames() {
-        for pose_id in ["WJPA-0001", "idle_warm_camera_ready", "WJFF-0010"] {
+        for pose_id in [
+            "WJPA-0001",
+            "idle_warm_camera_ready",
+            "WJFF-0010",
+            "phazer_rear_walk_hover_frame_06",
+        ] {
             let raster = project_runtime_pose_graph(pose_id).expect("project runtime graph");
             assert_eq!([raster.width, raster.height], [1254, 1254]);
             assert_eq!(raster.rgba.len(), 1254 * 1254 * 4);

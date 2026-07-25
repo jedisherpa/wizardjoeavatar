@@ -32,7 +32,7 @@ fn rust_clips_resolve_every_step_against_the_replacement_catalog() {
             "{pose_id} does not resolve to a promoted replacement graph"
         );
     }
-    assert_eq!(catalog.manifest().entries.len(), 260);
+    assert_eq!(catalog.manifest().entries.len(), 308);
     assert!(catalog
         .manifest()
         .entries

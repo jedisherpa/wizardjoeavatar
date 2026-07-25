@@ -218,6 +218,120 @@ const BREAKDANCE: &[PoseClipStep] = &[
     step("dance_high_freeze", 14, 0),
     step("hero_dance_freeze", 18, 0),
 ];
+const PHAZER_SIDE_WALK_TAKEOFF: &[PoseClipStep] = &[
+    step("phazer_side_walk_takeoff_frame_01", 6, 0),
+    step("phazer_side_walk_takeoff_frame_02", 6, 0),
+    step("phazer_side_walk_takeoff_frame_03", 6, 0),
+    step("phazer_side_walk_takeoff_frame_04", 6, 0),
+    step("phazer_side_walk_takeoff_frame_05", 6, 0),
+    step("phazer_side_walk_takeoff_frame_06", 8, 0),
+];
+const PHAZER_SIDE_RUN: &[PoseClipStep] = &[
+    step("phazer_side_run_frame_01", 5, 0),
+    step("phazer_side_run_frame_02", 5, 0),
+    step("phazer_side_run_frame_03", 5, 0),
+    step("phazer_side_run_frame_04", 5, 0),
+    step("phazer_side_run_frame_05", 5, 0),
+    step("phazer_side_run_frame_06", 5, 0),
+];
+const PHAZER_SIDE_LEAP: &[PoseClipStep] = &[
+    step("phazer_side_leap_frame_01", 5, 0),
+    step("phazer_side_leap_frame_02", 5, 0),
+    step("phazer_side_leap_frame_03", 5, 0),
+    step("phazer_side_leap_frame_04", 6, 0),
+    step("phazer_side_leap_frame_05", 7, 0),
+    step("phazer_side_leap_frame_06", 8, 0),
+];
+const PHAZER_SIDE_WING_OPEN: &[PoseClipStep] = &[
+    step("phazer_side_wing_open_frame_01", 7, 0),
+    step("phazer_side_wing_open_frame_02", 7, 0),
+    step("phazer_side_wing_open_frame_03", 7, 0),
+    step("phazer_side_wing_open_frame_04", 7, 0),
+    step("phazer_side_wing_open_frame_05", 7, 0),
+    step("phazer_side_wing_open_frame_06", 9, 0),
+];
+const PHAZER_SIDE_FLAP_CYCLE: &[PoseClipStep] = &[
+    step("phazer_side_flap_cycle_frame_01", 6, 0),
+    step("phazer_side_flap_cycle_frame_02", 6, 0),
+    step("phazer_side_flap_cycle_frame_03", 6, 0),
+    step("phazer_side_flap_cycle_frame_04", 6, 0),
+    step("phazer_side_flap_cycle_frame_05", 6, 0),
+    step("phazer_side_flap_cycle_frame_06", 6, 0),
+];
+const PHAZER_SIDE_FLIGHT_TRANSITION: &[PoseClipStep] = &[
+    step("phazer_side_flight_transition_frame_01", 6, 0),
+    step("phazer_side_flight_transition_frame_02", 6, 0),
+    step("phazer_side_flight_transition_frame_03", 6, 0),
+    step("phazer_side_flight_transition_frame_04", 6, 0),
+    step("phazer_side_flight_transition_frame_05", 7, 0),
+    step("phazer_side_flight_transition_frame_06", 9, 0),
+];
+const PHAZER_FRONT_WALK_HOVER: &[PoseClipStep] = &[
+    step("phazer_front_walk_hover_frame_01", 6, 0),
+    step("phazer_front_walk_hover_frame_02", 6, 0),
+    step("phazer_front_walk_hover_frame_03", 6, 0),
+    step("phazer_front_walk_hover_frame_04", 6, 0),
+    step("phazer_front_walk_hover_frame_05", 6, 0),
+    step("phazer_front_walk_hover_frame_06", 8, 0),
+];
+const PHAZER_REAR_WALK_HOVER: &[PoseClipStep] = &[
+    step("phazer_rear_walk_hover_frame_01", 6, 0),
+    step("phazer_rear_walk_hover_frame_02", 6, 0),
+    step("phazer_rear_walk_hover_frame_03", 6, 0),
+    step("phazer_rear_walk_hover_frame_04", 6, 0),
+    step("phazer_rear_walk_hover_frame_05", 6, 0),
+    step("phazer_rear_walk_hover_frame_06", 8, 0),
+];
+const PHAZER_REPERTOIRE_LOOP: &[PoseClipStep] = &[
+    step("phazer_side_walk_takeoff_frame_01", 6, 0),
+    step("phazer_side_walk_takeoff_frame_02", 6, 0),
+    step("phazer_side_walk_takeoff_frame_03", 6, 0),
+    step("phazer_side_walk_takeoff_frame_04", 6, 0),
+    step("phazer_side_walk_takeoff_frame_05", 6, 0),
+    step("phazer_side_walk_takeoff_frame_06", 6, 0),
+    step("phazer_side_run_frame_01", 5, 0),
+    step("phazer_side_run_frame_02", 5, 0),
+    step("phazer_side_run_frame_03", 5, 0),
+    step("phazer_side_run_frame_04", 5, 0),
+    step("phazer_side_run_frame_05", 5, 0),
+    step("phazer_side_run_frame_06", 5, 0),
+    step("phazer_side_leap_frame_01", 6, 0),
+    step("phazer_side_leap_frame_02", 6, 0),
+    step("phazer_side_leap_frame_03", 6, 0),
+    step("phazer_side_leap_frame_04", 6, 0),
+    step("phazer_side_leap_frame_05", 6, 0),
+    step("phazer_side_leap_frame_06", 6, 0),
+    step("phazer_side_wing_open_frame_01", 6, 0),
+    step("phazer_side_wing_open_frame_02", 6, 0),
+    step("phazer_side_wing_open_frame_03", 6, 0),
+    step("phazer_side_wing_open_frame_04", 6, 0),
+    step("phazer_side_wing_open_frame_05", 6, 0),
+    step("phazer_side_wing_open_frame_06", 6, 0),
+    step("phazer_side_flap_cycle_frame_01", 6, 0),
+    step("phazer_side_flap_cycle_frame_02", 6, 0),
+    step("phazer_side_flap_cycle_frame_03", 6, 0),
+    step("phazer_side_flap_cycle_frame_04", 6, 0),
+    step("phazer_side_flap_cycle_frame_05", 6, 0),
+    step("phazer_side_flap_cycle_frame_06", 6, 0),
+    step("phazer_side_flight_transition_frame_01", 6, 0),
+    step("phazer_side_flight_transition_frame_02", 6, 0),
+    step("phazer_side_flight_transition_frame_03", 6, 0),
+    step("phazer_side_flight_transition_frame_04", 6, 0),
+    step("phazer_side_flight_transition_frame_05", 6, 0),
+    step("phazer_side_flight_transition_frame_06", 6, 0),
+    step("phazer_front_walk_hover_frame_01", 6, 0),
+    step("phazer_front_walk_hover_frame_02", 6, 0),
+    step("phazer_front_walk_hover_frame_03", 6, 0),
+    step("phazer_front_walk_hover_frame_04", 6, 0),
+    step("phazer_front_walk_hover_frame_05", 6, 0),
+    step("phazer_front_walk_hover_frame_06", 6, 0),
+    step("phazer_rear_walk_hover_frame_01", 6, 0),
+    step("phazer_rear_walk_hover_frame_02", 6, 0),
+    step("phazer_rear_walk_hover_frame_03", 6, 0),
+    step("phazer_rear_walk_hover_frame_04", 6, 0),
+    step("phazer_rear_walk_hover_frame_05", 6, 0),
+    step("phazer_rear_walk_hover_frame_06", 6, 0),
+];
 
 pub const POSE_CLIPS: &[PoseClipDefinition] = &[
     PoseClipDefinition {
@@ -315,6 +429,51 @@ pub const POSE_CLIPS: &[PoseClipDefinition] = &[
         steps: BREAKDANCE,
         loopable: true,
     },
+    PoseClipDefinition {
+        id: "phazer_side_walk_takeoff",
+        steps: PHAZER_SIDE_WALK_TAKEOFF,
+        loopable: false,
+    },
+    PoseClipDefinition {
+        id: "phazer_side_run",
+        steps: PHAZER_SIDE_RUN,
+        loopable: true,
+    },
+    PoseClipDefinition {
+        id: "phazer_side_leap",
+        steps: PHAZER_SIDE_LEAP,
+        loopable: false,
+    },
+    PoseClipDefinition {
+        id: "phazer_side_wing_open",
+        steps: PHAZER_SIDE_WING_OPEN,
+        loopable: false,
+    },
+    PoseClipDefinition {
+        id: "phazer_side_flap_cycle",
+        steps: PHAZER_SIDE_FLAP_CYCLE,
+        loopable: true,
+    },
+    PoseClipDefinition {
+        id: "phazer_side_flight_transition",
+        steps: PHAZER_SIDE_FLIGHT_TRANSITION,
+        loopable: false,
+    },
+    PoseClipDefinition {
+        id: "phazer_front_walk_hover",
+        steps: PHAZER_FRONT_WALK_HOVER,
+        loopable: false,
+    },
+    PoseClipDefinition {
+        id: "phazer_rear_walk_hover",
+        steps: PHAZER_REAR_WALK_HOVER,
+        loopable: false,
+    },
+    PoseClipDefinition {
+        id: "phazer_repertoire_loop",
+        steps: PHAZER_REPERTOIRE_LOOP,
+        loopable: true,
+    },
 ];
 
 #[cfg(test)]
@@ -395,6 +554,24 @@ mod tests {
                 .expect("forward camera flight alias")
                 .steps,
             HOVER_FLAP
+        );
+    }
+
+    #[test]
+    fn phazer_repertoire_loop_contains_every_new_frame_once() {
+        assert_eq!(PHAZER_REPERTOIRE_LOOP.len(), 48);
+        assert_eq!(
+            PHAZER_REPERTOIRE_LOOP
+                .iter()
+                .map(|step| step.pose_id)
+                .collect::<std::collections::BTreeSet<_>>()
+                .len(),
+            48
+        );
+        assert!(
+            pose_clip_definition("phazer_repertoire_loop")
+                .expect("Phazer repertoire loop")
+                .loopable
         );
     }
 }

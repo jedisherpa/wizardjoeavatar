@@ -25,7 +25,7 @@ pub const SIMULATION_DT: f32 = 1.0 / SIMULATION_HZ;
 pub const STRIDE_LENGTH: f32 = 0.85;
 
 // These values mirror the graph projector. The opaque envelope is the union of
-// the 260 replacement alpha masters on their authored 1254-square canvas; the
+// the complete replacement alpha and Phazer masters on their authored 1254-square canvas; the
 // motion allowances cover the maximum walk lean, weight-transfer scale, and
 // lateral/vertical offsets.
 const PROJECTION_FAR_Z: f32 = 10.0;

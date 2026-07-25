@@ -45,7 +45,7 @@ fn assert_exact_promoted_graph(entry: &RuntimePoseGraphEntry) {
 }
 
 #[test]
-fn every_authored_production_alpha_neighbor_is_exact_and_controller_reachable() {
+fn every_authored_runtime_neighbor_is_exact_and_controller_reachable() {
     let catalog = runtime_pose_graph_catalog().expect("runtime pose graph catalog");
     let entries = &catalog.manifest().entries;
     assert_eq!(entries.len(), RUNTIME_POSE_GRAPH_COUNT);
@@ -102,7 +102,7 @@ fn every_authored_production_alpha_neighbor_is_exact_and_controller_reachable() 
 
     assert_eq!(
         directed_edges.len(),
-        480,
-        "production-alpha authored transition census changed"
+        576,
+        "runtime authored transition census changed"
     );
 }

@@ -1,0 +1,4278 @@
+{
+  "schema_version": 1,
+  "compiler_id": "wizard-avatar-phazer-sprites-v1",
+  "archive": {
+    "source_pack": "wizard_joe_phazer_sprites",
+    "archive_filename": "WizardJoePhazerSprites.zip",
+    "archive_sha256": "636b9ddf8a5edff9db9de8f2eaa9ecf930b73bfe2b1d428b5111195ff4aec450",
+    "manifest_member": "implicit:six-horizontal-cells-per-sheet",
+    "manifest_status": "user_supplied_for_repertoire"
+  },
+  "frame": [
+    1254,
+    1254
+  ],
+  "sheet_count": 8,
+  "frame_count": 48,
+  "visual_review_status": "approved_transparent_overlay_review",
+  "entries": [
+    {
+      "sequence": 261,
+      "pose_id": "WJPS-0001",
+      "semantic_id": "phazer_side_walk_takeoff_frame_01",
+      "sheet_member": "sheet-wizard-joe.png",
+      "sheet_sha256": "902d5533a0752813f25fa9cd97fee93ef4048a92525ee06963be5e42fbc6d5c7",
+      "sheet_frame": 1,
+      "sheet_crop": [
+        27,
+        137,
+        335,
+        484
+      ],
+      "isolated_bounds": [
+        8,
+        8,
+        319,
+        468
+      ],
+      "foreground_pixel_count": 80877,
+      "removed_matte_pixel_count": 81263,
+      "source_png_sha256": "739841818470a9973c72c8c294edbb1d3b673c732dcd2b695ff5f59a8cd7e553",
+      "graph_sha256": "a5191a5aec8b50155d3e5d3d59c81a1a43576166baeebea4f2bc3534d9ab4c91",
+      "exact_projection": true,
+      "foreground_source_match_millionths": 1000000,
+      "graph_path": "graphs/WJPS-0001.pixelgraph.json.gz",
+      "evidence_path": "evidence/WJPS-0001",
+      "runtime": {
+        "sequence": 261,
+        "source_record_id": "WJPS-0001",
+        "candidate_id": "WJPS-0001",
+        "pose_id": "WJPS-0001",
+        "semantic_id": "phazer_side_walk_takeoff_frame_01",
+        "display_name": "Phazer Side Walk Takeoff Frame 01",
+        "source_archive": "WizardJoePhazerSprites.zip",
+        "source_entry": "sheet-wizard-joe.png#frame-01",
+        "source_sha256": "739841818470a9973c72c8c294edbb1d3b673c732dcd2b695ff5f59a8cd7e553",
+        "graph_path": "graphs/WJPS-0001.pixelgraph.json.gz",
+        "graph_sha256": "a5191a5aec8b50155d3e5d3d59c81a1a43576166baeebea4f2bc3534d9ab4c91",
+        "graph_id": "wjps-0001-pixelgraph-v1",
+        "frame": [
+          1254,
+          1254
+        ],
+        "source_size": [
+          335,
+          484
+        ],
+        "offset": [
+          459,
+          709
+        ],
+        "foreground_pixel_count": 80877,
+        "motion_family": "ground_to_air",
+        "contact_mode": "both_feet",
+        "phase": {
+          "numerator": 1,
+          "denominator": 6
+        },
+        "direction": "east",
+        "authored_transition_neighbors": [
+          "phazer_side_walk_takeoff_frame_06",
+          "phazer_side_walk_takeoff_frame_02"
+        ],
+        "control_groups": [
+          "all",
+          "phazer",
+          "ground_to_air",
+          "clip:phazer_side_walk_takeoff",
+          "pack:wizard_joe_phazer_sprites"
+        ],
+        "primary_for_semantic_id": true,
+        "silhouette_iou_millionths": 1000000,
+        "foreground_color_fidelity_millionths": 1000000,
+        "foreground_color_match_ratio_millionths": 1000000,
+        "exact_rgba_equal": true,
+        "rgba_mismatch_pixel_count": 0,
+        "rgba_mismatch_channel_count": 0,
+        "source_pack": "wizard_joe_phazer_sprites",
+        "category": "phazer_animation",
+        "anchor_kind": "ground_contact",
+        "anchor_x": 626,
+        "anchor_y": 1184,
+        "evidence_path": "evidence/WJPS-0001"
+      }
+    },
+    {
+      "sequence": 262,
+      "pose_id": "WJPS-0002",
+      "semantic_id": "phazer_side_walk_takeoff_frame_02",
+      "sheet_member": "sheet-wizard-joe.png",
+      "sheet_sha256": "902d5533a0752813f25fa9cd97fee93ef4048a92525ee06963be5e42fbc6d5c7",
+      "sheet_frame": 2,
+      "sheet_crop": [
+        382,
+        153,
+        316,
+        468
+      ],
+      "isolated_bounds": [
+        8,
+        8,
+        300,
+        452
+      ],
+      "foreground_pixel_count": 79612,
+      "removed_matte_pixel_count": 68276,
+      "source_png_sha256": "e4c47feb38aa817c4a4a66b92ba5196fc7289294582c2e17c414046a9f599a4a",
+      "graph_sha256": "7598f1deafd23f8776c8c78f04e9c706c532df265a4ccbe3a72ec96f398e47b5",
+      "exact_projection": true,
+      "foreground_source_match_millionths": 1000000,
+      "graph_path": "graphs/WJPS-0002.pixelgraph.json.gz",
+      "evidence_path": "evidence/WJPS-0002",
+      "runtime": {
+        "sequence": 262,
+        "source_record_id": "WJPS-0002",
+        "candidate_id": "WJPS-0002",
+        "pose_id": "WJPS-0002",
+        "semantic_id": "phazer_side_walk_takeoff_frame_02",
+        "display_name": "Phazer Side Walk Takeoff Frame 02",
+        "source_archive": "WizardJoePhazerSprites.zip",
+        "source_entry": "sheet-wizard-joe.png#frame-02",
+        "source_sha256": "e4c47feb38aa817c4a4a66b92ba5196fc7289294582c2e17c414046a9f599a4a",
+        "graph_path": "graphs/WJPS-0002.pixelgraph.json.gz",
+        "graph_sha256": "7598f1deafd23f8776c8c78f04e9c706c532df265a4ccbe3a72ec96f398e47b5",
+        "graph_id": "wjps-0002-pixelgraph-v1",
+        "frame": [
+          1254,
+          1254
+        ],
+        "source_size": [
+          316,
+          468
+        ],
+        "offset": [
+          469,
+          725
+        ],
+        "foreground_pixel_count": 79612,
+        "motion_family": "ground_to_air",
+        "contact_mode": "both_feet",
+        "phase": {
+          "numerator": 2,
+          "denominator": 6
+        },
+        "direction": "east",
+        "authored_transition_neighbors": [
+          "phazer_side_walk_takeoff_frame_01",
+          "phazer_side_walk_takeoff_frame_03"
+        ],
+        "control_groups": [
+          "all",
+          "phazer",
+          "ground_to_air",
+          "clip:phazer_side_walk_takeoff",
+          "pack:wizard_joe_phazer_sprites"
+        ],
+        "primary_for_semantic_id": true,
+        "silhouette_iou_millionths": 1000000,
+        "foreground_color_fidelity_millionths": 1000000,
+        "foreground_color_match_ratio_millionths": 1000000,
+        "exact_rgba_equal": true,
+        "rgba_mismatch_pixel_count": 0,
+        "rgba_mismatch_channel_count": 0,
+        "source_pack": "wizard_joe_phazer_sprites",
+        "category": "phazer_animation",
+        "anchor_kind": "ground_contact",
+        "anchor_x": 626,
+        "anchor_y": 1184,
+        "evidence_path": "evidence/WJPS-0002"
+      }
+    },
+    {
+      "sequence": 263,
+      "pose_id": "WJPS-0003",
+      "semantic_id": "phazer_side_walk_takeoff_frame_03",
+      "sheet_member": "sheet-wizard-joe.png",
+      "sheet_sha256": "902d5533a0752813f25fa9cd97fee93ef4048a92525ee06963be5e42fbc6d5c7",
+      "sheet_frame": 3,
+      "sheet_crop": [
+        732,
+        149,
+        317,
+        469
+      ],
+      "isolated_bounds": [
+        8,
+        8,
+        301,
+        453
+      ],
+      "foreground_pixel_count": 80412,
+      "removed_matte_pixel_count": 68261,
+      "source_png_sha256": "7037d31b36e5976acbb1c45ecba0292d3e2bd0102fcb9790c74f4d5c842957bf",
+      "graph_sha256": "7a2c5b4f5b876634a3f18760250dfd3b03ac78568b9b763fd347c7419338bbd8",
+      "exact_projection": true,
+      "foreground_source_match_millionths": 1000000,
+      "graph_path": "graphs/WJPS-0003.pixelgraph.json.gz",
+      "evidence_path": "evidence/WJPS-0003",
+      "runtime": {
+        "sequence": 263,
+        "source_record_id": "WJPS-0003",
+        "candidate_id": "WJPS-0003",
+        "pose_id": "WJPS-0003",
+        "semantic_id": "phazer_side_walk_takeoff_frame_03",
+        "display_name": "Phazer Side Walk Takeoff Frame 03",
+        "source_archive": "WizardJoePhazerSprites.zip",
+        "source_entry": "sheet-wizard-joe.png#frame-03",
+        "source_sha256": "7037d31b36e5976acbb1c45ecba0292d3e2bd0102fcb9790c74f4d5c842957bf",
+        "graph_path": "graphs/WJPS-0003.pixelgraph.json.gz",
+        "graph_sha256": "7a2c5b4f5b876634a3f18760250dfd3b03ac78568b9b763fd347c7419338bbd8",
+        "graph_id": "wjps-0003-pixelgraph-v1",
+        "frame": [
+          1254,
+          1254
+        ],
+        "source_size": [
+          317,
+          469
+        ],
+        "offset": [
+          468,
+          721
+        ],
+        "foreground_pixel_count": 80412,
+        "motion_family": "ground_to_air",
+        "contact_mode": "both_feet",
+        "phase": {
+          "numerator": 3,
+          "denominator": 6
+        },
+        "direction": "east",
+        "authored_transition_neighbors": [
+          "phazer_side_walk_takeoff_frame_02",
+          "phazer_side_walk_takeoff_frame_04"
+        ],
+        "control_groups": [
+          "all",
+          "phazer",
+          "ground_to_air",
+          "clip:phazer_side_walk_takeoff",
+          "pack:wizard_joe_phazer_sprites"
+        ],
+        "primary_for_semantic_id": true,
+        "silhouette_iou_millionths": 1000000,
+        "foreground_color_fidelity_millionths": 1000000,
+        "foreground_color_match_ratio_millionths": 1000000,
+        "exact_rgba_equal": true,
+        "rgba_mismatch_pixel_count": 0,
+        "rgba_mismatch_channel_count": 0,
+        "source_pack": "wizard_joe_phazer_sprites",
+        "category": "phazer_animation",
+        "anchor_kind": "ground_contact",
+        "anchor_x": 626,
+        "anchor_y": 1181,
+        "evidence_path": "evidence/WJPS-0003"
+      }
+    },
+    {
+      "sequence": 264,
+      "pose_id": "WJPS-0004",
+      "semantic_id": "phazer_side_walk_takeoff_frame_04",
+      "sheet_member": "sheet-wizard-joe.png",
+      "sheet_sha256": "902d5533a0752813f25fa9cd97fee93ef4048a92525ee06963be5e42fbc6d5c7",
+      "sheet_frame": 4,
+      "sheet_crop": [
+        1079,
+        149,
+        316,
+        472
+      ],
+      "isolated_bounds": [
+        8,
+        8,
+        300,
+        456
+      ],
+      "foreground_pixel_count": 80077,
+      "removed_matte_pixel_count": 69075,
+      "source_png_sha256": "bf5cbe73597ab4f79760f08f589879f214093ce64ca755656eaee70bc35b4ba9",
+      "graph_sha256": "f4a3f7b335ca80e4d94293a2399e3b39fa0790f7764e13f59079a9f90bf7b241",
+      "exact_projection": true,
+      "foreground_source_match_millionths": 1000000,
+      "graph_path": "graphs/WJPS-0004.pixelgraph.json.gz",
+      "evidence_path": "evidence/WJPS-0004",
+      "runtime": {
+        "sequence": 264,
+        "source_record_id": "WJPS-0004",
+        "candidate_id": "WJPS-0004",
+        "pose_id": "WJPS-0004",
+        "semantic_id": "phazer_side_walk_takeoff_frame_04",
+        "display_name": "Phazer Side Walk Takeoff Frame 04",
+        "source_archive": "WizardJoePhazerSprites.zip",
+        "source_entry": "sheet-wizard-joe.png#frame-04",
+        "source_sha256": "bf5cbe73597ab4f79760f08f589879f214093ce64ca755656eaee70bc35b4ba9",
+        "graph_path": "graphs/WJPS-0004.pixelgraph.json.gz",
+        "graph_sha256": "f4a3f7b335ca80e4d94293a2399e3b39fa0790f7764e13f59079a9f90bf7b241",
+        "graph_id": "wjps-0004-pixelgraph-v1",
+        "frame": [
+          1254,
+          1254
+        ],
+        "source_size": [
+          316,
+          472
+        ],
+        "offset": [
+          469,
+          721
+        ],
+        "foreground_pixel_count": 80077,
+        "motion_family": "ground_to_air",
+        "contact_mode": "both_feet",
+        "phase": {
+          "numerator": 4,
+          "denominator": 6
+        },
+        "direction": "east",
+        "authored_transition_neighbors": [
+          "phazer_side_walk_takeoff_frame_03",
+          "phazer_side_walk_takeoff_frame_05"
+        ],
+        "control_groups": [
+          "all",
+          "phazer",
+          "ground_to_air",
+          "clip:phazer_side_walk_takeoff",
+          "pack:wizard_joe_phazer_sprites"
+        ],
+        "primary_for_semantic_id": true,
+        "silhouette_iou_millionths": 1000000,
+        "foreground_color_fidelity_millionths": 1000000,
+        "foreground_color_match_ratio_millionths": 1000000,
+        "exact_rgba_equal": true,
+        "rgba_mismatch_pixel_count": 0,
+        "rgba_mismatch_channel_count": 0,
+        "source_pack": "wizard_joe_phazer_sprites",
+        "category": "phazer_animation",
+        "anchor_kind": "ground_contact",
+        "anchor_x": 626,
+        "anchor_y": 1184,
+        "evidence_path": "evidence/WJPS-0004"
+      }
+    },
+    {
+      "sequence": 265,
+      "pose_id": "WJPS-0005",
+      "semantic_id": "phazer_side_walk_takeoff_frame_05",
+      "sheet_member": "sheet-wizard-joe.png",
+      "sheet_sha256": "902d5533a0752813f25fa9cd97fee93ef4048a92525ee06963be5e42fbc6d5c7",
+      "sheet_frame": 5,
+      "sheet_crop": [
+        1411,
+        150,
+        325,
+        471
+      ],
+      "isolated_bounds": [
+        8,
+        8,
+        309,
+        455
+      ],
+      "foreground_pixel_count": 80316,
+      "removed_matte_pixel_count": 72759,
+      "source_png_sha256": "135680f3d5d77caf3410b274ec3069df8c35d69c5af8620bb875ee6cb2269269",
+      "graph_sha256": "89f1d855fb67eeb4ce2e336437480d58d0208da35ef938371e831a9bc5538c3b",
+      "exact_projection": true,
+      "foreground_source_match_millionths": 1000000,
+      "graph_path": "graphs/WJPS-0005.pixelgraph.json.gz",
+      "evidence_path": "evidence/WJPS-0005",
+      "runtime": {
+        "sequence": 265,
+        "source_record_id": "WJPS-0005",
+        "candidate_id": "WJPS-0005",
+        "pose_id": "WJPS-0005",
+        "semantic_id": "phazer_side_walk_takeoff_frame_05",
+        "display_name": "Phazer Side Walk Takeoff Frame 05",
+        "source_archive": "WizardJoePhazerSprites.zip",
+        "source_entry": "sheet-wizard-joe.png#frame-05",
+        "source_sha256": "135680f3d5d77caf3410b274ec3069df8c35d69c5af8620bb875ee6cb2269269",
+        "graph_path": "graphs/WJPS-0005.pixelgraph.json.gz",
+        "graph_sha256": "89f1d855fb67eeb4ce2e336437480d58d0208da35ef938371e831a9bc5538c3b",
+        "graph_id": "wjps-0005-pixelgraph-v1",
+        "frame": [
+          1254,
+          1254
+        ],
+        "source_size": [
+          325,
+          471
+        ],
+        "offset": [
+          464,
+          722
+        ],
+        "foreground_pixel_count": 80316,
+        "motion_family": "ground_to_air",
+        "contact_mode": "both_feet",
+        "phase": {
+          "numerator": 5,
+          "denominator": 6
+        },
+        "direction": "east",
+        "authored_transition_neighbors": [
+          "phazer_side_walk_takeoff_frame_04",
+          "phazer_side_walk_takeoff_frame_06"
+        ],
+        "control_groups": [
+          "all",
+          "phazer",
+          "ground_to_air",
+          "clip:phazer_side_walk_takeoff",
+          "pack:wizard_joe_phazer_sprites"
+        ],
+        "primary_for_semantic_id": true,
+        "silhouette_iou_millionths": 1000000,
+        "foreground_color_fidelity_millionths": 1000000,
+        "foreground_color_match_ratio_millionths": 1000000,
+        "exact_rgba_equal": true,
+        "rgba_mismatch_pixel_count": 0,
+        "rgba_mismatch_channel_count": 0,
+        "source_pack": "wizard_joe_phazer_sprites",
+        "category": "phazer_animation",
+        "anchor_kind": "ground_contact",
+        "anchor_x": 626,
+        "anchor_y": 1184,
+        "evidence_path": "evidence/WJPS-0005"
+      }
+    },
+    {
+      "sequence": 266,
+      "pose_id": "WJPS-0006",
+      "semantic_id": "phazer_side_walk_takeoff_frame_06",
+      "sheet_member": "sheet-wizard-joe.png",
+      "sheet_sha256": "902d5533a0752813f25fa9cd97fee93ef4048a92525ee06963be5e42fbc6d5c7",
+      "sheet_frame": 6,
+      "sheet_crop": [
+        1752,
+        92,
+        352,
+        462
+      ],
+      "isolated_bounds": [
+        8,
+        8,
+        336,
+        446
+      ],
+      "foreground_pixel_count": 81076,
+      "removed_matte_pixel_count": 81548,
+      "source_png_sha256": "4131d9716f7ca3d6fabc296bbc608d3c9598c329d2dbfd5c747822031a952091",
+      "graph_sha256": "508ae5e3a3fff8fa7c11a61b95381fe1141c1afc4c45ff654121fd975aa6d320",
+      "exact_projection": true,
+      "foreground_source_match_millionths": 1000000,
+      "graph_path": "graphs/WJPS-0006.pixelgraph.json.gz",
+      "evidence_path": "evidence/WJPS-0006",
+      "runtime": {
+        "sequence": 266,
+        "source_record_id": "WJPS-0006",
+        "candidate_id": "WJPS-0006",
+        "pose_id": "WJPS-0006",
+        "semantic_id": "phazer_side_walk_takeoff_frame_06",
+        "display_name": "Phazer Side Walk Takeoff Frame 06",
+        "source_archive": "WizardJoePhazerSprites.zip",
+        "source_entry": "sheet-wizard-joe.png#frame-06",
+        "source_sha256": "4131d9716f7ca3d6fabc296bbc608d3c9598c329d2dbfd5c747822031a952091",
+        "graph_path": "graphs/WJPS-0006.pixelgraph.json.gz",
+        "graph_sha256": "508ae5e3a3fff8fa7c11a61b95381fe1141c1afc4c45ff654121fd975aa6d320",
+        "graph_id": "wjps-0006-pixelgraph-v1",
+        "frame": [
+          1254,
+          1254
+        ],
+        "source_size": [
+          352,
+          462
+        ],
+        "offset": [
+          451,
+          664
+        ],
+        "foreground_pixel_count": 81076,
+        "motion_family": "ground_to_air",
+        "contact_mode": "airborne",
+        "phase": {
+          "numerator": 6,
+          "denominator": 6
+        },
+        "direction": "east",
+        "authored_transition_neighbors": [
+          "phazer_side_walk_takeoff_frame_05",
+          "phazer_side_walk_takeoff_frame_01"
+        ],
+        "control_groups": [
+          "all",
+          "phazer",
+          "ground_to_air",
+          "clip:phazer_side_walk_takeoff",
+          "pack:wizard_joe_phazer_sprites"
+        ],
+        "primary_for_semantic_id": true,
+        "silhouette_iou_millionths": 1000000,
+        "foreground_color_fidelity_millionths": 1000000,
+        "foreground_color_match_ratio_millionths": 1000000,
+        "exact_rgba_equal": true,
+        "rgba_mismatch_pixel_count": 0,
+        "rgba_mismatch_channel_count": 0,
+        "source_pack": "wizard_joe_phazer_sprites",
+        "category": "phazer_animation",
+        "anchor_kind": "body_center",
+        "anchor_x": 626,
+        "anchor_y": 894,
+        "evidence_path": "evidence/WJPS-0006"
+      }
+    },
+    {
+      "sequence": 267,
+      "pose_id": "WJPS-0007",
+      "semantic_id": "phazer_side_run_frame_01",
+      "sheet_member": "sheet-wizard-joe-w2.png",
+      "sheet_sha256": "8e56626aa20731a0e92409166cdd4955b237517465b5cced4aa023799cc95b7b",
+      "sheet_frame": 1,
+      "sheet_crop": [
+        28,
+        130,
+        316,
+        473
+      ],
+      "isolated_bounds": [
+        8,
+        8,
+        300,
+        457
+      ],
+      "foreground_pixel_count": 84235,
+      "removed_matte_pixel_count": 65233,
+      "source_png_sha256": "5fe570915ec2036549c78a6fc91578cbf9501b9f1cb22e55792784bff49bc786",
+      "graph_sha256": "3ec9dbf38c706ce384aec68ba52b223637226319753cd1e1737f470b4430f6ac",
+      "exact_projection": true,
+      "foreground_source_match_millionths": 1000000,
+      "graph_path": "graphs/WJPS-0007.pixelgraph.json.gz",
+      "evidence_path": "evidence/WJPS-0007",
+      "runtime": {
+        "sequence": 267,
+        "source_record_id": "WJPS-0007",
+        "candidate_id": "WJPS-0007",
+        "pose_id": "WJPS-0007",
+        "semantic_id": "phazer_side_run_frame_01",
+        "display_name": "Phazer Side Run Frame 01",
+        "source_archive": "WizardJoePhazerSprites.zip",
+        "source_entry": "sheet-wizard-joe-w2.png#frame-01",
+        "source_sha256": "5fe570915ec2036549c78a6fc91578cbf9501b9f1cb22e55792784bff49bc786",
+        "graph_path": "graphs/WJPS-0007.pixelgraph.json.gz",
+        "graph_sha256": "3ec9dbf38c706ce384aec68ba52b223637226319753cd1e1737f470b4430f6ac",
+        "graph_id": "wjps-0007-pixelgraph-v1",
+        "frame": [
+          1254,
+          1254
+        ],
+        "source_size": [
+          316,
+          473
+        ],
+        "offset": [
+          469,
+          719
+        ],
+        "foreground_pixel_count": 84235,
+        "motion_family": "ground_run",
+        "contact_mode": "both_feet",
+        "phase": {
+          "numerator": 1,
+          "denominator": 6
+        },
+        "direction": "east",
+        "authored_transition_neighbors": [
+          "phazer_side_run_frame_06",
+          "phazer_side_run_frame_02"
+        ],
+        "control_groups": [
+          "all",
+          "phazer",
+          "ground_run",
+          "clip:phazer_side_run",
+          "pack:wizard_joe_phazer_sprites"
+        ],
+        "primary_for_semantic_id": true,
+        "silhouette_iou_millionths": 1000000,
+        "foreground_color_fidelity_millionths": 1000000,
+        "foreground_color_match_ratio_millionths": 1000000,
+        "exact_rgba_equal": true,
+        "rgba_mismatch_pixel_count": 0,
+        "rgba_mismatch_channel_count": 0,
+        "source_pack": "wizard_joe_phazer_sprites",
+        "category": "phazer_animation",
+        "anchor_kind": "ground_contact",
+        "anchor_x": 626,
+        "anchor_y": 1183,
+        "evidence_path": "evidence/WJPS-0007"
+      }
+    },
+    {
+      "sequence": 268,
+      "pose_id": "WJPS-0008",
+      "semantic_id": "phazer_side_run_frame_02",
+      "sheet_member": "sheet-wizard-joe-w2.png",
+      "sheet_sha256": "8e56626aa20731a0e92409166cdd4955b237517465b5cced4aa023799cc95b7b",
+      "sheet_frame": 2,
+      "sheet_crop": [
+        368,
+        128,
+        298,
+        475
+      ],
+      "isolated_bounds": [
+        8,
+        8,
+        282,
+        459
+      ],
+      "foreground_pixel_count": 77967,
+      "removed_matte_pixel_count": 63583,
+      "source_png_sha256": "3dac665062d6093d3aab199fe24fd642ed2cd56efb7f64302aa448846591ec55",
+      "graph_sha256": "e17c9013b744f096f3100964f49925e84f64ae6d8b35114a57272a38c8d013a5",
+      "exact_projection": true,
+      "foreground_source_match_millionths": 1000000,
+      "graph_path": "graphs/WJPS-0008.pixelgraph.json.gz",
+      "evidence_path": "evidence/WJPS-0008",
+      "runtime": {
+        "sequence": 268,
+        "source_record_id": "WJPS-0008",
+        "candidate_id": "WJPS-0008",
+        "pose_id": "WJPS-0008",
+        "semantic_id": "phazer_side_run_frame_02",
+        "display_name": "Phazer Side Run Frame 02",
+        "source_archive": "WizardJoePhazerSprites.zip",
+        "source_entry": "sheet-wizard-joe-w2.png#frame-02",
+        "source_sha256": "3dac665062d6093d3aab199fe24fd642ed2cd56efb7f64302aa448846591ec55",
+        "graph_path": "graphs/WJPS-0008.pixelgraph.json.gz",
+        "graph_sha256": "e17c9013b744f096f3100964f49925e84f64ae6d8b35114a57272a38c8d013a5",
+        "graph_id": "wjps-0008-pixelgraph-v1",
+        "frame": [
+          1254,
+          1254
+        ],
+        "source_size": [
+          298,
+          475
+        ],
+        "offset": [
+          478,
+          717
+        ],
+        "foreground_pixel_count": 77967,
+        "motion_family": "ground_run",
+        "contact_mode": "both_feet",
+        "phase": {
+          "numerator": 2,
+          "denominator": 6
+        },
+        "direction": "east",
+        "authored_transition_neighbors": [
+          "phazer_side_run_frame_01",
+          "phazer_side_run_frame_03"
+        ],
+        "control_groups": [
+          "all",
+          "phazer",
+          "ground_run",
+          "clip:phazer_side_run",
+          "pack:wizard_joe_phazer_sprites"
+        ],
+        "primary_for_semantic_id": true,
+        "silhouette_iou_millionths": 1000000,
+        "foreground_color_fidelity_millionths": 1000000,
+        "foreground_color_match_ratio_millionths": 1000000,
+        "exact_rgba_equal": true,
+        "rgba_mismatch_pixel_count": 0,
+        "rgba_mismatch_channel_count": 0,
+        "source_pack": "wizard_joe_phazer_sprites",
+        "category": "phazer_animation",
+        "anchor_kind": "ground_contact",
+        "anchor_x": 626,
+        "anchor_y": 1183,
+        "evidence_path": "evidence/WJPS-0008"
+      }
+    },
+    {
+      "sequence": 269,
+      "pose_id": "WJPS-0009",
+      "semantic_id": "phazer_side_run_frame_03",
+      "sheet_member": "sheet-wizard-joe-w2.png",
+      "sheet_sha256": "8e56626aa20731a0e92409166cdd4955b237517465b5cced4aa023799cc95b7b",
+      "sheet_frame": 3,
+      "sheet_crop": [
+        710,
+        128,
+        303,
+        476
+      ],
+      "isolated_bounds": [
+        8,
+        8,
+        287,
+        460
+      ],
+      "foreground_pixel_count": 81963,
+      "removed_matte_pixel_count": 62265,
+      "source_png_sha256": "0864ec06c6325cc057e30e2b57054364809408d49b8769def93e791909d6fc33",
+      "graph_sha256": "59e38304e1578299d35ece92273298e8a554547738da783f57341160e28014cb",
+      "exact_projection": true,
+      "foreground_source_match_millionths": 1000000,
+      "graph_path": "graphs/WJPS-0009.pixelgraph.json.gz",
+      "evidence_path": "evidence/WJPS-0009",
+      "runtime": {
+        "sequence": 269,
+        "source_record_id": "WJPS-0009",
+        "candidate_id": "WJPS-0009",
+        "pose_id": "WJPS-0009",
+        "semantic_id": "phazer_side_run_frame_03",
+        "display_name": "Phazer Side Run Frame 03",
+        "source_archive": "WizardJoePhazerSprites.zip",
+        "source_entry": "sheet-wizard-joe-w2.png#frame-03",
+        "source_sha256": "0864ec06c6325cc057e30e2b57054364809408d49b8769def93e791909d6fc33",
+        "graph_path": "graphs/WJPS-0009.pixelgraph.json.gz",
+        "graph_sha256": "59e38304e1578299d35ece92273298e8a554547738da783f57341160e28014cb",
+        "graph_id": "wjps-0009-pixelgraph-v1",
+        "frame": [
+          1254,
+          1254
+        ],
+        "source_size": [
+          303,
+          476
+        ],
+        "offset": [
+          475,
+          717
+        ],
+        "foreground_pixel_count": 81963,
+        "motion_family": "ground_run",
+        "contact_mode": "both_feet",
+        "phase": {
+          "numerator": 3,
+          "denominator": 6
+        },
+        "direction": "east",
+        "authored_transition_neighbors": [
+          "phazer_side_run_frame_02",
+          "phazer_side_run_frame_04"
+        ],
+        "control_groups": [
+          "all",
+          "phazer",
+          "ground_run",
+          "clip:phazer_side_run",
+          "pack:wizard_joe_phazer_sprites"
+        ],
+        "primary_for_semantic_id": true,
+        "silhouette_iou_millionths": 1000000,
+        "foreground_color_fidelity_millionths": 1000000,
+        "foreground_color_match_ratio_millionths": 1000000,
+        "exact_rgba_equal": true,
+        "rgba_mismatch_pixel_count": 0,
+        "rgba_mismatch_channel_count": 0,
+        "source_pack": "wizard_joe_phazer_sprites",
+        "category": "phazer_animation",
+        "anchor_kind": "ground_contact",
+        "anchor_x": 626,
+        "anchor_y": 1184,
+        "evidence_path": "evidence/WJPS-0009"
+      }
+    },
+    {
+      "sequence": 270,
+      "pose_id": "WJPS-0010",
+      "semantic_id": "phazer_side_run_frame_04",
+      "sheet_member": "sheet-wizard-joe-w2.png",
+      "sheet_sha256": "8e56626aa20731a0e92409166cdd4955b237517465b5cced4aa023799cc95b7b",
+      "sheet_frame": 4,
+      "sheet_crop": [
+        1064,
+        137,
+        320,
+        467
+      ],
+      "isolated_bounds": [
+        8,
+        8,
+        304,
+        451
+      ],
+      "foreground_pixel_count": 79769,
+      "removed_matte_pixel_count": 69671,
+      "source_png_sha256": "fd483227a5e44e864c82ebc93524d2f57833ed0db6a94e464335c0b0b0c5b6fc",
+      "graph_sha256": "04c7638a90878fffadf7844a4fc2d7fe564d094b781067d15ce8c321f3f96152",
+      "exact_projection": true,
+      "foreground_source_match_millionths": 1000000,
+      "graph_path": "graphs/WJPS-0010.pixelgraph.json.gz",
+      "evidence_path": "evidence/WJPS-0010",
+      "runtime": {
+        "sequence": 270,
+        "source_record_id": "WJPS-0010",
+        "candidate_id": "WJPS-0010",
+        "pose_id": "WJPS-0010",
+        "semantic_id": "phazer_side_run_frame_04",
+        "display_name": "Phazer Side Run Frame 04",
+        "source_archive": "WizardJoePhazerSprites.zip",
+        "source_entry": "sheet-wizard-joe-w2.png#frame-04",
+        "source_sha256": "fd483227a5e44e864c82ebc93524d2f57833ed0db6a94e464335c0b0b0c5b6fc",
+        "graph_path": "graphs/WJPS-0010.pixelgraph.json.gz",
+        "graph_sha256": "04c7638a90878fffadf7844a4fc2d7fe564d094b781067d15ce8c321f3f96152",
+        "graph_id": "wjps-0010-pixelgraph-v1",
+        "frame": [
+          1254,
+          1254
+        ],
+        "source_size": [
+          320,
+          467
+        ],
+        "offset": [
+          467,
+          726
+        ],
+        "foreground_pixel_count": 79769,
+        "motion_family": "ground_run",
+        "contact_mode": "both_feet",
+        "phase": {
+          "numerator": 4,
+          "denominator": 6
+        },
+        "direction": "east",
+        "authored_transition_neighbors": [
+          "phazer_side_run_frame_03",
+          "phazer_side_run_frame_05"
+        ],
+        "control_groups": [
+          "all",
+          "phazer",
+          "ground_run",
+          "clip:phazer_side_run",
+          "pack:wizard_joe_phazer_sprites"
+        ],
+        "primary_for_semantic_id": true,
+        "silhouette_iou_millionths": 1000000,
+        "foreground_color_fidelity_millionths": 1000000,
+        "foreground_color_match_ratio_millionths": 1000000,
+        "exact_rgba_equal": true,
+        "rgba_mismatch_pixel_count": 0,
+        "rgba_mismatch_channel_count": 0,
+        "source_pack": "wizard_joe_phazer_sprites",
+        "category": "phazer_animation",
+        "anchor_kind": "ground_contact",
+        "anchor_x": 626,
+        "anchor_y": 1184,
+        "evidence_path": "evidence/WJPS-0010"
+      }
+    },
+    {
+      "sequence": 271,
+      "pose_id": "WJPS-0011",
+      "semantic_id": "phazer_side_run_frame_05",
+      "sheet_member": "sheet-wizard-joe-w2.png",
+      "sheet_sha256": "8e56626aa20731a0e92409166cdd4955b237517465b5cced4aa023799cc95b7b",
+      "sheet_frame": 5,
+      "sheet_crop": [
+        1413,
+        160,
+        367,
+        443
+      ],
+      "isolated_bounds": [
+        8,
+        8,
+        351,
+        427
+      ],
+      "foreground_pixel_count": 78141,
+      "removed_matte_pixel_count": 84440,
+      "source_png_sha256": "54e5f2f291e2910585a9c995f33b27b09cf24732869fca65a30291415357e017",
+      "graph_sha256": "ee9604c7a52b5ebb418d26ad533be076b4a74d0f745a1b21dd35279655bc1b01",
+      "exact_projection": true,
+      "foreground_source_match_millionths": 1000000,
+      "graph_path": "graphs/WJPS-0011.pixelgraph.json.gz",
+      "evidence_path": "evidence/WJPS-0011",
+      "runtime": {
+        "sequence": 271,
+        "source_record_id": "WJPS-0011",
+        "candidate_id": "WJPS-0011",
+        "pose_id": "WJPS-0011",
+        "semantic_id": "phazer_side_run_frame_05",
+        "display_name": "Phazer Side Run Frame 05",
+        "source_archive": "WizardJoePhazerSprites.zip",
+        "source_entry": "sheet-wizard-joe-w2.png#frame-05",
+        "source_sha256": "54e5f2f291e2910585a9c995f33b27b09cf24732869fca65a30291415357e017",
+        "graph_path": "graphs/WJPS-0011.pixelgraph.json.gz",
+        "graph_sha256": "ee9604c7a52b5ebb418d26ad533be076b4a74d0f745a1b21dd35279655bc1b01",
+        "graph_id": "wjps-0011-pixelgraph-v1",
+        "frame": [
+          1254,
+          1254
+        ],
+        "source_size": [
+          367,
+          443
+        ],
+        "offset": [
+          443,
+          749
+        ],
+        "foreground_pixel_count": 78141,
+        "motion_family": "ground_run",
+        "contact_mode": "both_feet",
+        "phase": {
+          "numerator": 5,
+          "denominator": 6
+        },
+        "direction": "east",
+        "authored_transition_neighbors": [
+          "phazer_side_run_frame_04",
+          "phazer_side_run_frame_06"
+        ],
+        "control_groups": [
+          "all",
+          "phazer",
+          "ground_run",
+          "clip:phazer_side_run",
+          "pack:wizard_joe_phazer_sprites"
+        ],
+        "primary_for_semantic_id": true,
+        "silhouette_iou_millionths": 1000000,
+        "foreground_color_fidelity_millionths": 1000000,
+        "foreground_color_match_ratio_millionths": 1000000,
+        "exact_rgba_equal": true,
+        "rgba_mismatch_pixel_count": 0,
+        "rgba_mismatch_channel_count": 0,
+        "source_pack": "wizard_joe_phazer_sprites",
+        "category": "phazer_animation",
+        "anchor_kind": "ground_contact",
+        "anchor_x": 626,
+        "anchor_y": 1183,
+        "evidence_path": "evidence/WJPS-0011"
+      }
+    },
+    {
+      "sequence": 272,
+      "pose_id": "WJPS-0012",
+      "semantic_id": "phazer_side_run_frame_06",
+      "sheet_member": "sheet-wizard-joe-w2.png",
+      "sheet_sha256": "8e56626aa20731a0e92409166cdd4955b237517465b5cced4aa023799cc95b7b",
+      "sheet_frame": 6,
+      "sheet_crop": [
+        1798,
+        181,
+        328,
+        422
+      ],
+      "isolated_bounds": [
+        8,
+        8,
+        312,
+        406
+      ],
+      "foreground_pixel_count": 69949,
+      "removed_matte_pixel_count": 68467,
+      "source_png_sha256": "594b0d456112ea83b13c26282b93edda32133987c668622bfff9808d41e169f9",
+      "graph_sha256": "a7ba9d13114c758357a4187d64a597cfc1cc9d66ae9e60b074b19c313e41c25c",
+      "exact_projection": true,
+      "foreground_source_match_millionths": 1000000,
+      "graph_path": "graphs/WJPS-0012.pixelgraph.json.gz",
+      "evidence_path": "evidence/WJPS-0012",
+      "runtime": {
+        "sequence": 272,
+        "source_record_id": "WJPS-0012",
+        "candidate_id": "WJPS-0012",
+        "pose_id": "WJPS-0012",
+        "semantic_id": "phazer_side_run_frame_06",
+        "display_name": "Phazer Side Run Frame 06",
+        "source_archive": "WizardJoePhazerSprites.zip",
+        "source_entry": "sheet-wizard-joe-w2.png#frame-06",
+        "source_sha256": "594b0d456112ea83b13c26282b93edda32133987c668622bfff9808d41e169f9",
+        "graph_path": "graphs/WJPS-0012.pixelgraph.json.gz",
+        "graph_sha256": "a7ba9d13114c758357a4187d64a597cfc1cc9d66ae9e60b074b19c313e41c25c",
+        "graph_id": "wjps-0012-pixelgraph-v1",
+        "frame": [
+          1254,
+          1254
+        ],
+        "source_size": [
+          328,
+          422
+        ],
+        "offset": [
+          463,
+          770
+        ],
+        "foreground_pixel_count": 69949,
+        "motion_family": "ground_run",
+        "contact_mode": "both_feet",
+        "phase": {
+          "numerator": 6,
+          "denominator": 6
+        },
+        "direction": "east",
+        "authored_transition_neighbors": [
+          "phazer_side_run_frame_05",
+          "phazer_side_run_frame_01"
+        ],
+        "control_groups": [
+          "all",
+          "phazer",
+          "ground_run",
+          "clip:phazer_side_run",
+          "pack:wizard_joe_phazer_sprites"
+        ],
+        "primary_for_semantic_id": true,
+        "silhouette_iou_millionths": 1000000,
+        "foreground_color_fidelity_millionths": 1000000,
+        "foreground_color_match_ratio_millionths": 1000000,
+        "exact_rgba_equal": true,
+        "rgba_mismatch_pixel_count": 0,
+        "rgba_mismatch_channel_count": 0,
+        "source_pack": "wizard_joe_phazer_sprites",
+        "category": "phazer_animation",
+        "anchor_kind": "ground_contact",
+        "anchor_x": 626,
+        "anchor_y": 1183,
+        "evidence_path": "evidence/WJPS-0012"
+      }
+    },
+    {
+      "sequence": 273,
+      "pose_id": "WJPS-0013",
+      "semantic_id": "phazer_side_leap_frame_01",
+      "sheet_member": "sheet-wizard-joe-w3.png",
+      "sheet_sha256": "b6e26c650af386819ab9a293bcc2368465fd2bfb8358da754a0c06332aca228d",
+      "sheet_frame": 1,
+      "sheet_crop": [
+        62,
+        221,
+        326,
+        393
+      ],
+      "isolated_bounds": [
+        8,
+        8,
+        310,
+        377
+      ],
+      "foreground_pixel_count": 65093,
+      "removed_matte_pixel_count": 63025,
+      "source_png_sha256": "1dad1c453d825fcda2f3bbd18e3f7e01f9eccd6d10dd2e42c073dadd09dfab7c",
+      "graph_sha256": "93bb80d5d31097a4613fe486fe70932d11f578b42a9bd9c2c4b9f5dd1f7650aa",
+      "exact_projection": true,
+      "foreground_source_match_millionths": 1000000,
+      "graph_path": "graphs/WJPS-0013.pixelgraph.json.gz",
+      "evidence_path": "evidence/WJPS-0013",
+      "runtime": {
+        "sequence": 273,
+        "source_record_id": "WJPS-0013",
+        "candidate_id": "WJPS-0013",
+        "pose_id": "WJPS-0013",
+        "semantic_id": "phazer_side_leap_frame_01",
+        "display_name": "Phazer Side Leap Frame 01",
+        "source_archive": "WizardJoePhazerSprites.zip",
+        "source_entry": "sheet-wizard-joe-w3.png#frame-01",
+        "source_sha256": "1dad1c453d825fcda2f3bbd18e3f7e01f9eccd6d10dd2e42c073dadd09dfab7c",
+        "graph_path": "graphs/WJPS-0013.pixelgraph.json.gz",
+        "graph_sha256": "93bb80d5d31097a4613fe486fe70932d11f578b42a9bd9c2c4b9f5dd1f7650aa",
+        "graph_id": "wjps-0013-pixelgraph-v1",
+        "frame": [
+          1254,
+          1254
+        ],
+        "source_size": [
+          326,
+          393
+        ],
+        "offset": [
+          464,
+          787
+        ],
+        "foreground_pixel_count": 65093,
+        "motion_family": "ground_to_air",
+        "contact_mode": "both_feet",
+        "phase": {
+          "numerator": 1,
+          "denominator": 6
+        },
+        "direction": "east",
+        "authored_transition_neighbors": [
+          "phazer_side_leap_frame_06",
+          "phazer_side_leap_frame_02"
+        ],
+        "control_groups": [
+          "all",
+          "phazer",
+          "ground_to_air",
+          "clip:phazer_side_leap",
+          "pack:wizard_joe_phazer_sprites"
+        ],
+        "primary_for_semantic_id": true,
+        "silhouette_iou_millionths": 1000000,
+        "foreground_color_fidelity_millionths": 1000000,
+        "foreground_color_match_ratio_millionths": 1000000,
+        "exact_rgba_equal": true,
+        "rgba_mismatch_pixel_count": 0,
+        "rgba_mismatch_channel_count": 0,
+        "source_pack": "wizard_joe_phazer_sprites",
+        "category": "phazer_animation",
+        "anchor_kind": "ground_contact",
+        "anchor_x": 626,
+        "anchor_y": 1171,
+        "evidence_path": "evidence/WJPS-0013"
+      }
+    },
+    {
+      "sequence": 274,
+      "pose_id": "WJPS-0014",
+      "semantic_id": "phazer_side_leap_frame_02",
+      "sheet_member": "sheet-wizard-joe-w3.png",
+      "sheet_sha256": "b6e26c650af386819ab9a293bcc2368465fd2bfb8358da754a0c06332aca228d",
+      "sheet_frame": 2,
+      "sheet_crop": [
+        422,
+        220,
+        318,
+        400
+      ],
+      "isolated_bounds": [
+        8,
+        8,
+        302,
+        384
+      ],
+      "foreground_pixel_count": 63871,
+      "removed_matte_pixel_count": 63329,
+      "source_png_sha256": "74e493b411c69a63900c25faf925101b4444b453c65797eb456be909bfd988e4",
+      "graph_sha256": "b8232a3ead94ce76b013b57624a99e9d5110d6fa3c08d17af3e46d5127b6452c",
+      "exact_projection": true,
+      "foreground_source_match_millionths": 1000000,
+      "graph_path": "graphs/WJPS-0014.pixelgraph.json.gz",
+      "evidence_path": "evidence/WJPS-0014",
+      "runtime": {
+        "sequence": 274,
+        "source_record_id": "WJPS-0014",
+        "candidate_id": "WJPS-0014",
+        "pose_id": "WJPS-0014",
+        "semantic_id": "phazer_side_leap_frame_02",
+        "display_name": "Phazer Side Leap Frame 02",
+        "source_archive": "WizardJoePhazerSprites.zip",
+        "source_entry": "sheet-wizard-joe-w3.png#frame-02",
+        "source_sha256": "74e493b411c69a63900c25faf925101b4444b453c65797eb456be909bfd988e4",
+        "graph_path": "graphs/WJPS-0014.pixelgraph.json.gz",
+        "graph_sha256": "b8232a3ead94ce76b013b57624a99e9d5110d6fa3c08d17af3e46d5127b6452c",
+        "graph_id": "wjps-0014-pixelgraph-v1",
+        "frame": [
+          1254,
+          1254
+        ],
+        "source_size": [
+          318,
+          400
+        ],
+        "offset": [
+          468,
+          786
+        ],
+        "foreground_pixel_count": 63871,
+        "motion_family": "ground_to_air",
+        "contact_mode": "both_feet",
+        "phase": {
+          "numerator": 2,
+          "denominator": 6
+        },
+        "direction": "east",
+        "authored_transition_neighbors": [
+          "phazer_side_leap_frame_01",
+          "phazer_side_leap_frame_03"
+        ],
+        "control_groups": [
+          "all",
+          "phazer",
+          "ground_to_air",
+          "clip:phazer_side_leap",
+          "pack:wizard_joe_phazer_sprites"
+        ],
+        "primary_for_semantic_id": true,
+        "silhouette_iou_millionths": 1000000,
+        "foreground_color_fidelity_millionths": 1000000,
+        "foreground_color_match_ratio_millionths": 1000000,
+        "exact_rgba_equal": true,
+        "rgba_mismatch_pixel_count": 0,
+        "rgba_mismatch_channel_count": 0,
+        "source_pack": "wizard_joe_phazer_sprites",
+        "category": "phazer_animation",
+        "anchor_kind": "ground_contact",
+        "anchor_x": 626,
+        "anchor_y": 1177,
+        "evidence_path": "evidence/WJPS-0014"
+      }
+    },
+    {
+      "sequence": 275,
+      "pose_id": "WJPS-0015",
+      "semantic_id": "phazer_side_leap_frame_03",
+      "sheet_member": "sheet-wizard-joe-w3.png",
+      "sheet_sha256": "b6e26c650af386819ab9a293bcc2368465fd2bfb8358da754a0c06332aca228d",
+      "sheet_frame": 3,
+      "sheet_crop": [
+        774,
+        221,
+        324,
+        394
+      ],
+      "isolated_bounds": [
+        8,
+        8,
+        308,
+        378
+      ],
+      "foreground_pixel_count": 63032,
+      "removed_matte_pixel_count": 64624,
+      "source_png_sha256": "12a0843216f4ba249da69d66b5ec7c7b5136bdc3b6745b369a36dd614b72b05c",
+      "graph_sha256": "1139df5ee8885c6d317acbdbdb3e3b7f9ed678a9ce50f5acf349f87c2f73a6a8",
+      "exact_projection": true,
+      "foreground_source_match_millionths": 1000000,
+      "graph_path": "graphs/WJPS-0015.pixelgraph.json.gz",
+      "evidence_path": "evidence/WJPS-0015",
+      "runtime": {
+        "sequence": 275,
+        "source_record_id": "WJPS-0015",
+        "candidate_id": "WJPS-0015",
+        "pose_id": "WJPS-0015",
+        "semantic_id": "phazer_side_leap_frame_03",
+        "display_name": "Phazer Side Leap Frame 03",
+        "source_archive": "WizardJoePhazerSprites.zip",
+        "source_entry": "sheet-wizard-joe-w3.png#frame-03",
+        "source_sha256": "12a0843216f4ba249da69d66b5ec7c7b5136bdc3b6745b369a36dd614b72b05c",
+        "graph_path": "graphs/WJPS-0015.pixelgraph.json.gz",
+        "graph_sha256": "1139df5ee8885c6d317acbdbdb3e3b7f9ed678a9ce50f5acf349f87c2f73a6a8",
+        "graph_id": "wjps-0015-pixelgraph-v1",
+        "frame": [
+          1254,
+          1254
+        ],
+        "source_size": [
+          324,
+          394
+        ],
+        "offset": [
+          465,
+          787
+        ],
+        "foreground_pixel_count": 63032,
+        "motion_family": "ground_to_air",
+        "contact_mode": "both_feet",
+        "phase": {
+          "numerator": 3,
+          "denominator": 6
+        },
+        "direction": "east",
+        "authored_transition_neighbors": [
+          "phazer_side_leap_frame_02",
+          "phazer_side_leap_frame_04"
+        ],
+        "control_groups": [
+          "all",
+          "phazer",
+          "ground_to_air",
+          "clip:phazer_side_leap",
+          "pack:wizard_joe_phazer_sprites"
+        ],
+        "primary_for_semantic_id": true,
+        "silhouette_iou_millionths": 1000000,
+        "foreground_color_fidelity_millionths": 1000000,
+        "foreground_color_match_ratio_millionths": 1000000,
+        "exact_rgba_equal": true,
+        "rgba_mismatch_pixel_count": 0,
+        "rgba_mismatch_channel_count": 0,
+        "source_pack": "wizard_joe_phazer_sprites",
+        "category": "phazer_animation",
+        "anchor_kind": "ground_contact",
+        "anchor_x": 626,
+        "anchor_y": 1172,
+        "evidence_path": "evidence/WJPS-0015"
+      }
+    },
+    {
+      "sequence": 276,
+      "pose_id": "WJPS-0016",
+      "semantic_id": "phazer_side_leap_frame_04",
+      "sheet_member": "sheet-wizard-joe-w3.png",
+      "sheet_sha256": "b6e26c650af386819ab9a293bcc2368465fd2bfb8358da754a0c06332aca228d",
+      "sheet_frame": 4,
+      "sheet_crop": [
+        1120,
+        268,
+        315,
+        359
+      ],
+      "isolated_bounds": [
+        8,
+        8,
+        299,
+        343
+      ],
+      "foreground_pixel_count": 56211,
+      "removed_matte_pixel_count": 56874,
+      "source_png_sha256": "7bbeb25c2816c944079fe194feaaa96e3613e31aa642b1498b48f0d1242863e0",
+      "graph_sha256": "d46d4edb2481d0d5c0a10d6dd9bd83ab8d51dde366e7f2f76cd44d7f8ea4f53f",
+      "exact_projection": true,
+      "foreground_source_match_millionths": 1000000,
+      "graph_path": "graphs/WJPS-0016.pixelgraph.json.gz",
+      "evidence_path": "evidence/WJPS-0016",
+      "runtime": {
+        "sequence": 276,
+        "source_record_id": "WJPS-0016",
+        "candidate_id": "WJPS-0016",
+        "pose_id": "WJPS-0016",
+        "semantic_id": "phazer_side_leap_frame_04",
+        "display_name": "Phazer Side Leap Frame 04",
+        "source_archive": "WizardJoePhazerSprites.zip",
+        "source_entry": "sheet-wizard-joe-w3.png#frame-04",
+        "source_sha256": "7bbeb25c2816c944079fe194feaaa96e3613e31aa642b1498b48f0d1242863e0",
+        "graph_path": "graphs/WJPS-0016.pixelgraph.json.gz",
+        "graph_sha256": "d46d4edb2481d0d5c0a10d6dd9bd83ab8d51dde366e7f2f76cd44d7f8ea4f53f",
+        "graph_id": "wjps-0016-pixelgraph-v1",
+        "frame": [
+          1254,
+          1254
+        ],
+        "source_size": [
+          315,
+          359
+        ],
+        "offset": [
+          469,
+          834
+        ],
+        "foreground_pixel_count": 56211,
+        "motion_family": "ground_to_air",
+        "contact_mode": "both_feet",
+        "phase": {
+          "numerator": 4,
+          "denominator": 6
+        },
+        "direction": "east",
+        "authored_transition_neighbors": [
+          "phazer_side_leap_frame_03",
+          "phazer_side_leap_frame_05"
+        ],
+        "control_groups": [
+          "all",
+          "phazer",
+          "ground_to_air",
+          "clip:phazer_side_leap",
+          "pack:wizard_joe_phazer_sprites"
+        ],
+        "primary_for_semantic_id": true,
+        "silhouette_iou_millionths": 1000000,
+        "foreground_color_fidelity_millionths": 1000000,
+        "foreground_color_match_ratio_millionths": 1000000,
+        "exact_rgba_equal": true,
+        "rgba_mismatch_pixel_count": 0,
+        "rgba_mismatch_channel_count": 0,
+        "source_pack": "wizard_joe_phazer_sprites",
+        "category": "phazer_animation",
+        "anchor_kind": "ground_contact",
+        "anchor_x": 626,
+        "anchor_y": 1184,
+        "evidence_path": "evidence/WJPS-0016"
+      }
+    },
+    {
+      "sequence": 277,
+      "pose_id": "WJPS-0017",
+      "semantic_id": "phazer_side_leap_frame_05",
+      "sheet_member": "sheet-wizard-joe-w3.png",
+      "sheet_sha256": "b6e26c650af386819ab9a293bcc2368465fd2bfb8358da754a0c06332aca228d",
+      "sheet_frame": 5,
+      "sheet_crop": [
+        1450,
+        157,
+        309,
+        434
+      ],
+      "isolated_bounds": [
+        8,
+        8,
+        293,
+        418
+      ],
+      "foreground_pixel_count": 63022,
+      "removed_matte_pixel_count": 71084,
+      "source_png_sha256": "6632261ffa4ccf8ff6d16124b6530b7d9050c83635e37a2803762a885c29129d",
+      "graph_sha256": "1eff6b36fc92901d672c34b249a8bf0de3b6689fdd14722f1f2e6b52515ff1cd",
+      "exact_projection": true,
+      "foreground_source_match_millionths": 1000000,
+      "graph_path": "graphs/WJPS-0017.pixelgraph.json.gz",
+      "evidence_path": "evidence/WJPS-0017",
+      "runtime": {
+        "sequence": 277,
+        "source_record_id": "WJPS-0017",
+        "candidate_id": "WJPS-0017",
+        "pose_id": "WJPS-0017",
+        "semantic_id": "phazer_side_leap_frame_05",
+        "display_name": "Phazer Side Leap Frame 05",
+        "source_archive": "WizardJoePhazerSprites.zip",
+        "source_entry": "sheet-wizard-joe-w3.png#frame-05",
+        "source_sha256": "6632261ffa4ccf8ff6d16124b6530b7d9050c83635e37a2803762a885c29129d",
+        "graph_path": "graphs/WJPS-0017.pixelgraph.json.gz",
+        "graph_sha256": "1eff6b36fc92901d672c34b249a8bf0de3b6689fdd14722f1f2e6b52515ff1cd",
+        "graph_id": "wjps-0017-pixelgraph-v1",
+        "frame": [
+          1254,
+          1254
+        ],
+        "source_size": [
+          309,
+          434
+        ],
+        "offset": [
+          472,
+          723
+        ],
+        "foreground_pixel_count": 63022,
+        "motion_family": "ground_to_air",
+        "contact_mode": "airborne",
+        "phase": {
+          "numerator": 5,
+          "denominator": 6
+        },
+        "direction": "east",
+        "authored_transition_neighbors": [
+          "phazer_side_leap_frame_04",
+          "phazer_side_leap_frame_06"
+        ],
+        "control_groups": [
+          "all",
+          "phazer",
+          "ground_to_air",
+          "clip:phazer_side_leap",
+          "pack:wizard_joe_phazer_sprites"
+        ],
+        "primary_for_semantic_id": true,
+        "silhouette_iou_millionths": 1000000,
+        "foreground_color_fidelity_millionths": 1000000,
+        "foreground_color_match_ratio_millionths": 1000000,
+        "exact_rgba_equal": true,
+        "rgba_mismatch_pixel_count": 0,
+        "rgba_mismatch_channel_count": 0,
+        "source_pack": "wizard_joe_phazer_sprites",
+        "category": "phazer_animation",
+        "anchor_kind": "body_center",
+        "anchor_x": 626,
+        "anchor_y": 939,
+        "evidence_path": "evidence/WJPS-0017"
+      }
+    },
+    {
+      "sequence": 278,
+      "pose_id": "WJPS-0018",
+      "semantic_id": "phazer_side_leap_frame_06",
+      "sheet_member": "sheet-wizard-joe-w3.png",
+      "sheet_sha256": "b6e26c650af386819ab9a293bcc2368465fd2bfb8358da754a0c06332aca228d",
+      "sheet_frame": 6,
+      "sheet_crop": [
+        1805,
+        57,
+        317,
+        423
+      ],
+      "isolated_bounds": [
+        8,
+        8,
+        301,
+        407
+      ],
+      "foreground_pixel_count": 65008,
+      "removed_matte_pixel_count": 69083,
+      "source_png_sha256": "ae6cc2c682e6a915224c17938086833b02bc5ff175f35d34ea5bbbd071c82af8",
+      "graph_sha256": "438b9ca8a5039766e61422b91688f7ca7b74aa0da0e55437d7986a0331302af2",
+      "exact_projection": true,
+      "foreground_source_match_millionths": 1000000,
+      "graph_path": "graphs/WJPS-0018.pixelgraph.json.gz",
+      "evidence_path": "evidence/WJPS-0018",
+      "runtime": {
+        "sequence": 278,
+        "source_record_id": "WJPS-0018",
+        "candidate_id": "WJPS-0018",
+        "pose_id": "WJPS-0018",
+        "semantic_id": "phazer_side_leap_frame_06",
+        "display_name": "Phazer Side Leap Frame 06",
+        "source_archive": "WizardJoePhazerSprites.zip",
+        "source_entry": "sheet-wizard-joe-w3.png#frame-06",
+        "source_sha256": "ae6cc2c682e6a915224c17938086833b02bc5ff175f35d34ea5bbbd071c82af8",
+        "graph_path": "graphs/WJPS-0018.pixelgraph.json.gz",
+        "graph_sha256": "438b9ca8a5039766e61422b91688f7ca7b74aa0da0e55437d7986a0331302af2",
+        "graph_id": "wjps-0018-pixelgraph-v1",
+        "frame": [
+          1254,
+          1254
+        ],
+        "source_size": [
+          317,
+          423
+        ],
+        "offset": [
+          468,
+          623
+        ],
+        "foreground_pixel_count": 65008,
+        "motion_family": "ground_to_air",
+        "contact_mode": "airborne",
+        "phase": {
+          "numerator": 6,
+          "denominator": 6
+        },
+        "direction": "east",
+        "authored_transition_neighbors": [
+          "phazer_side_leap_frame_05",
+          "phazer_side_leap_frame_01"
+        ],
+        "control_groups": [
+          "all",
+          "phazer",
+          "ground_to_air",
+          "clip:phazer_side_leap",
+          "pack:wizard_joe_phazer_sprites"
+        ],
+        "primary_for_semantic_id": true,
+        "silhouette_iou_millionths": 1000000,
+        "foreground_color_fidelity_millionths": 1000000,
+        "foreground_color_match_ratio_millionths": 1000000,
+        "exact_rgba_equal": true,
+        "rgba_mismatch_pixel_count": 0,
+        "rgba_mismatch_channel_count": 0,
+        "source_pack": "wizard_joe_phazer_sprites",
+        "category": "phazer_animation",
+        "anchor_kind": "body_center",
+        "anchor_x": 626,
+        "anchor_y": 834,
+        "evidence_path": "evidence/WJPS-0018"
+      }
+    },
+    {
+      "sequence": 279,
+      "pose_id": "WJPS-0019",
+      "semantic_id": "phazer_side_wing_open_frame_01",
+      "sheet_member": "sheet-wizard-joe-w4.png",
+      "sheet_sha256": "3b139f8b8897d0147c856328b9fbda66117852a060a3b1bdc2e4b505c0d39a37",
+      "sheet_frame": 1,
+      "sheet_crop": [
+        69,
+        184,
+        241,
+        395
+      ],
+      "isolated_bounds": [
+        8,
+        8,
+        225,
+        379
+      ],
+      "foreground_pixel_count": 51432,
+      "removed_matte_pixel_count": 43763,
+      "source_png_sha256": "f92550587afc52c74547ac15c64094be26b3d990def533dc54eace8bb49420f8",
+      "graph_sha256": "f5d0fa079a76d5b985de2426585ced87beabbc20cbcfcf62f39268dc8c484d60",
+      "exact_projection": true,
+      "foreground_source_match_millionths": 1000000,
+      "graph_path": "graphs/WJPS-0019.pixelgraph.json.gz",
+      "evidence_path": "evidence/WJPS-0019",
+      "runtime": {
+        "sequence": 279,
+        "source_record_id": "WJPS-0019",
+        "candidate_id": "WJPS-0019",
+        "pose_id": "WJPS-0019",
+        "semantic_id": "phazer_side_wing_open_frame_01",
+        "display_name": "Phazer Side Wing Open Frame 01",
+        "source_archive": "WizardJoePhazerSprites.zip",
+        "source_entry": "sheet-wizard-joe-w4.png#frame-01",
+        "source_sha256": "f92550587afc52c74547ac15c64094be26b3d990def533dc54eace8bb49420f8",
+        "graph_path": "graphs/WJPS-0019.pixelgraph.json.gz",
+        "graph_sha256": "f5d0fa079a76d5b985de2426585ced87beabbc20cbcfcf62f39268dc8c484d60",
+        "graph_id": "wjps-0019-pixelgraph-v1",
+        "frame": [
+          1254,
+          1254
+        ],
+        "source_size": [
+          241,
+          395
+        ],
+        "offset": [
+          506,
+          798
+        ],
+        "foreground_pixel_count": 51432,
+        "motion_family": "wing_deploy",
+        "contact_mode": "both_feet",
+        "phase": {
+          "numerator": 1,
+          "denominator": 6
+        },
+        "direction": "east",
+        "authored_transition_neighbors": [
+          "phazer_side_wing_open_frame_06",
+          "phazer_side_wing_open_frame_02"
+        ],
+        "control_groups": [
+          "all",
+          "phazer",
+          "wing_deploy",
+          "clip:phazer_side_wing_open",
+          "pack:wizard_joe_phazer_sprites"
+        ],
+        "primary_for_semantic_id": true,
+        "silhouette_iou_millionths": 1000000,
+        "foreground_color_fidelity_millionths": 1000000,
+        "foreground_color_match_ratio_millionths": 1000000,
+        "exact_rgba_equal": true,
+        "rgba_mismatch_pixel_count": 0,
+        "rgba_mismatch_channel_count": 0,
+        "source_pack": "wizard_joe_phazer_sprites",
+        "category": "phazer_animation",
+        "anchor_kind": "ground_contact",
+        "anchor_x": 626,
+        "anchor_y": 1184,
+        "evidence_path": "evidence/WJPS-0019"
+      }
+    },
+    {
+      "sequence": 280,
+      "pose_id": "WJPS-0020",
+      "semantic_id": "phazer_side_wing_open_frame_02",
+      "sheet_member": "sheet-wizard-joe-w4.png",
+      "sheet_sha256": "3b139f8b8897d0147c856328b9fbda66117852a060a3b1bdc2e4b505c0d39a37",
+      "sheet_frame": 2,
+      "sheet_crop": [
+        344,
+        186,
+        316,
+        393
+      ],
+      "isolated_bounds": [
+        8,
+        8,
+        300,
+        377
+      ],
+      "foreground_pixel_count": 56676,
+      "removed_matte_pixel_count": 67512,
+      "source_png_sha256": "792801b164b425af2b706f67f1ee0427e62d9cc85b5ce53b0f58ec2dcb90998c",
+      "graph_sha256": "6d291c4506bbe98800cf879093c9e97a1ba3dab6f73cf1a14ccbb5fb6bca0819",
+      "exact_projection": true,
+      "foreground_source_match_millionths": 1000000,
+      "graph_path": "graphs/WJPS-0020.pixelgraph.json.gz",
+      "evidence_path": "evidence/WJPS-0020",
+      "runtime": {
+        "sequence": 280,
+        "source_record_id": "WJPS-0020",
+        "candidate_id": "WJPS-0020",
+        "pose_id": "WJPS-0020",
+        "semantic_id": "phazer_side_wing_open_frame_02",
+        "display_name": "Phazer Side Wing Open Frame 02",
+        "source_archive": "WizardJoePhazerSprites.zip",
+        "source_entry": "sheet-wizard-joe-w4.png#frame-02",
+        "source_sha256": "792801b164b425af2b706f67f1ee0427e62d9cc85b5ce53b0f58ec2dcb90998c",
+        "graph_path": "graphs/WJPS-0020.pixelgraph.json.gz",
+        "graph_sha256": "6d291c4506bbe98800cf879093c9e97a1ba3dab6f73cf1a14ccbb5fb6bca0819",
+        "graph_id": "wjps-0020-pixelgraph-v1",
+        "frame": [
+          1254,
+          1254
+        ],
+        "source_size": [
+          316,
+          393
+        ],
+        "offset": [
+          469,
+          800
+        ],
+        "foreground_pixel_count": 56676,
+        "motion_family": "wing_deploy",
+        "contact_mode": "both_feet",
+        "phase": {
+          "numerator": 2,
+          "denominator": 6
+        },
+        "direction": "east",
+        "authored_transition_neighbors": [
+          "phazer_side_wing_open_frame_01",
+          "phazer_side_wing_open_frame_03"
+        ],
+        "control_groups": [
+          "all",
+          "phazer",
+          "wing_deploy",
+          "clip:phazer_side_wing_open",
+          "pack:wizard_joe_phazer_sprites"
+        ],
+        "primary_for_semantic_id": true,
+        "silhouette_iou_millionths": 1000000,
+        "foreground_color_fidelity_millionths": 1000000,
+        "foreground_color_match_ratio_millionths": 1000000,
+        "exact_rgba_equal": true,
+        "rgba_mismatch_pixel_count": 0,
+        "rgba_mismatch_channel_count": 0,
+        "source_pack": "wizard_joe_phazer_sprites",
+        "category": "phazer_animation",
+        "anchor_kind": "ground_contact",
+        "anchor_x": 626,
+        "anchor_y": 1184,
+        "evidence_path": "evidence/WJPS-0020"
+      }
+    },
+    {
+      "sequence": 281,
+      "pose_id": "WJPS-0021",
+      "semantic_id": "phazer_side_wing_open_frame_03",
+      "sheet_member": "sheet-wizard-joe-w4.png",
+      "sheet_sha256": "3b139f8b8897d0147c856328b9fbda66117852a060a3b1bdc2e4b505c0d39a37",
+      "sheet_frame": 3,
+      "sheet_crop": [
+        721,
+        232,
+        326,
+        346
+      ],
+      "isolated_bounds": [
+        8,
+        8,
+        310,
+        330
+      ],
+      "foreground_pixel_count": 58830,
+      "removed_matte_pixel_count": 53966,
+      "source_png_sha256": "7ff1d684e2d935062417a1759cee3d568bdcd1353e79eac5baa8e0f00735cdae",
+      "graph_sha256": "d8b0ed72544ece95fd419cc78cc9ac3c1df8ef3666de5aeaad26173ba9d345bb",
+      "exact_projection": true,
+      "foreground_source_match_millionths": 1000000,
+      "graph_path": "graphs/WJPS-0021.pixelgraph.json.gz",
+      "evidence_path": "evidence/WJPS-0021",
+      "runtime": {
+        "sequence": 281,
+        "source_record_id": "WJPS-0021",
+        "candidate_id": "WJPS-0021",
+        "pose_id": "WJPS-0021",
+        "semantic_id": "phazer_side_wing_open_frame_03",
+        "display_name": "Phazer Side Wing Open Frame 03",
+        "source_archive": "WizardJoePhazerSprites.zip",
+        "source_entry": "sheet-wizard-joe-w4.png#frame-03",
+        "source_sha256": "7ff1d684e2d935062417a1759cee3d568bdcd1353e79eac5baa8e0f00735cdae",
+        "graph_path": "graphs/WJPS-0021.pixelgraph.json.gz",
+        "graph_sha256": "d8b0ed72544ece95fd419cc78cc9ac3c1df8ef3666de5aeaad26173ba9d345bb",
+        "graph_id": "wjps-0021-pixelgraph-v1",
+        "frame": [
+          1254,
+          1254
+        ],
+        "source_size": [
+          326,
+          346
+        ],
+        "offset": [
+          464,
+          846
+        ],
+        "foreground_pixel_count": 58830,
+        "motion_family": "wing_deploy",
+        "contact_mode": "both_feet",
+        "phase": {
+          "numerator": 3,
+          "denominator": 6
+        },
+        "direction": "east",
+        "authored_transition_neighbors": [
+          "phazer_side_wing_open_frame_02",
+          "phazer_side_wing_open_frame_04"
+        ],
+        "control_groups": [
+          "all",
+          "phazer",
+          "wing_deploy",
+          "clip:phazer_side_wing_open",
+          "pack:wizard_joe_phazer_sprites"
+        ],
+        "primary_for_semantic_id": true,
+        "silhouette_iou_millionths": 1000000,
+        "foreground_color_fidelity_millionths": 1000000,
+        "foreground_color_match_ratio_millionths": 1000000,
+        "exact_rgba_equal": true,
+        "rgba_mismatch_pixel_count": 0,
+        "rgba_mismatch_channel_count": 0,
+        "source_pack": "wizard_joe_phazer_sprites",
+        "category": "phazer_animation",
+        "anchor_kind": "ground_contact",
+        "anchor_x": 626,
+        "anchor_y": 1183,
+        "evidence_path": "evidence/WJPS-0021"
+      }
+    },
+    {
+      "sequence": 282,
+      "pose_id": "WJPS-0022",
+      "semantic_id": "phazer_side_wing_open_frame_04",
+      "sheet_member": "sheet-wizard-joe-w4.png",
+      "sheet_sha256": "3b139f8b8897d0147c856328b9fbda66117852a060a3b1bdc2e4b505c0d39a37",
+      "sheet_frame": 4,
+      "sheet_crop": [
+        1048,
+        178,
+        430,
+        401
+      ],
+      "isolated_bounds": [
+        8,
+        8,
+        414,
+        385
+      ],
+      "foreground_pixel_count": 70902,
+      "removed_matte_pixel_count": 101528,
+      "source_png_sha256": "343cb87467c90026104eed53c7ec56b1d1233e56152057443ee9d224244a0d84",
+      "graph_sha256": "b67cfe484afd9c4dfab2efb6d72e57cbecf909d2f42963d9efe75c8f1d4be235",
+      "exact_projection": true,
+      "foreground_source_match_millionths": 1000000,
+      "graph_path": "graphs/WJPS-0022.pixelgraph.json.gz",
+      "evidence_path": "evidence/WJPS-0022",
+      "runtime": {
+        "sequence": 282,
+        "source_record_id": "WJPS-0022",
+        "candidate_id": "WJPS-0022",
+        "pose_id": "WJPS-0022",
+        "semantic_id": "phazer_side_wing_open_frame_04",
+        "display_name": "Phazer Side Wing Open Frame 04",
+        "source_archive": "WizardJoePhazerSprites.zip",
+        "source_entry": "sheet-wizard-joe-w4.png#frame-04",
+        "source_sha256": "343cb87467c90026104eed53c7ec56b1d1233e56152057443ee9d224244a0d84",
+        "graph_path": "graphs/WJPS-0022.pixelgraph.json.gz",
+        "graph_sha256": "b67cfe484afd9c4dfab2efb6d72e57cbecf909d2f42963d9efe75c8f1d4be235",
+        "graph_id": "wjps-0022-pixelgraph-v1",
+        "frame": [
+          1254,
+          1254
+        ],
+        "source_size": [
+          430,
+          401
+        ],
+        "offset": [
+          412,
+          792
+        ],
+        "foreground_pixel_count": 70902,
+        "motion_family": "wing_deploy",
+        "contact_mode": "both_feet",
+        "phase": {
+          "numerator": 4,
+          "denominator": 6
+        },
+        "direction": "east",
+        "authored_transition_neighbors": [
+          "phazer_side_wing_open_frame_03",
+          "phazer_side_wing_open_frame_05"
+        ],
+        "control_groups": [
+          "all",
+          "phazer",
+          "wing_deploy",
+          "clip:phazer_side_wing_open",
+          "pack:wizard_joe_phazer_sprites"
+        ],
+        "primary_for_semantic_id": true,
+        "silhouette_iou_millionths": 1000000,
+        "foreground_color_fidelity_millionths": 1000000,
+        "foreground_color_match_ratio_millionths": 1000000,
+        "exact_rgba_equal": true,
+        "rgba_mismatch_pixel_count": 0,
+        "rgba_mismatch_channel_count": 0,
+        "source_pack": "wizard_joe_phazer_sprites",
+        "category": "phazer_animation",
+        "anchor_kind": "ground_contact",
+        "anchor_x": 626,
+        "anchor_y": 1184,
+        "evidence_path": "evidence/WJPS-0022"
+      }
+    },
+    {
+      "sequence": 283,
+      "pose_id": "WJPS-0023",
+      "semantic_id": "phazer_side_wing_open_frame_05",
+      "sheet_member": "sheet-wizard-joe-w4.png",
+      "sheet_sha256": "3b139f8b8897d0147c856328b9fbda66117852a060a3b1bdc2e4b505c0d39a37",
+      "sheet_frame": 5,
+      "sheet_crop": [
+        1470,
+        178,
+        293,
+        382
+      ],
+      "isolated_bounds": [
+        8,
+        8,
+        277,
+        366
+      ],
+      "foreground_pixel_count": 53848,
+      "removed_matte_pixel_count": 58078,
+      "source_png_sha256": "892940f9750814f9fca35e3cc98c94a6898ccaa23e190362516b75fc87b0d260",
+      "graph_sha256": "9a60a692bfe169451066e6c369d172c9a8f18e7591bdc51c8c7854935f3989ec",
+      "exact_projection": true,
+      "foreground_source_match_millionths": 1000000,
+      "graph_path": "graphs/WJPS-0023.pixelgraph.json.gz",
+      "evidence_path": "evidence/WJPS-0023",
+      "runtime": {
+        "sequence": 283,
+        "source_record_id": "WJPS-0023",
+        "candidate_id": "WJPS-0023",
+        "pose_id": "WJPS-0023",
+        "semantic_id": "phazer_side_wing_open_frame_05",
+        "display_name": "Phazer Side Wing Open Frame 05",
+        "source_archive": "WizardJoePhazerSprites.zip",
+        "source_entry": "sheet-wizard-joe-w4.png#frame-05",
+        "source_sha256": "892940f9750814f9fca35e3cc98c94a6898ccaa23e190362516b75fc87b0d260",
+        "graph_path": "graphs/WJPS-0023.pixelgraph.json.gz",
+        "graph_sha256": "9a60a692bfe169451066e6c369d172c9a8f18e7591bdc51c8c7854935f3989ec",
+        "graph_id": "wjps-0023-pixelgraph-v1",
+        "frame": [
+          1254,
+          1254
+        ],
+        "source_size": [
+          293,
+          382
+        ],
+        "offset": [
+          480,
+          792
+        ],
+        "foreground_pixel_count": 53848,
+        "motion_family": "wing_deploy",
+        "contact_mode": "airborne",
+        "phase": {
+          "numerator": 5,
+          "denominator": 6
+        },
+        "direction": "east",
+        "authored_transition_neighbors": [
+          "phazer_side_wing_open_frame_04",
+          "phazer_side_wing_open_frame_06"
+        ],
+        "control_groups": [
+          "all",
+          "phazer",
+          "wing_deploy",
+          "clip:phazer_side_wing_open",
+          "pack:wizard_joe_phazer_sprites"
+        ],
+        "primary_for_semantic_id": true,
+        "silhouette_iou_millionths": 1000000,
+        "foreground_color_fidelity_millionths": 1000000,
+        "foreground_color_match_ratio_millionths": 1000000,
+        "exact_rgba_equal": true,
+        "rgba_mismatch_pixel_count": 0,
+        "rgba_mismatch_channel_count": 0,
+        "source_pack": "wizard_joe_phazer_sprites",
+        "category": "phazer_animation",
+        "anchor_kind": "body_center",
+        "anchor_x": 626,
+        "anchor_y": 982,
+        "evidence_path": "evidence/WJPS-0023"
+      }
+    },
+    {
+      "sequence": 284,
+      "pose_id": "WJPS-0024",
+      "semantic_id": "phazer_side_wing_open_frame_06",
+      "sheet_member": "sheet-wizard-joe-w4.png",
+      "sheet_sha256": "3b139f8b8897d0147c856328b9fbda66117852a060a3b1bdc2e4b505c0d39a37",
+      "sheet_frame": 6,
+      "sheet_crop": [
+        1804,
+        131,
+        315,
+        409
+      ],
+      "isolated_bounds": [
+        8,
+        8,
+        299,
+        393
+      ],
+      "foreground_pixel_count": 63981,
+      "removed_matte_pixel_count": 64854,
+      "source_png_sha256": "87c40866b92c00193a02eb5632e6e0b3511800af19278ec30e7ecf844594c7bc",
+      "graph_sha256": "5f2e736a04879d1233229b5c094752a3b403beca9fc101fa50f17e9a92c27c58",
+      "exact_projection": true,
+      "foreground_source_match_millionths": 1000000,
+      "graph_path": "graphs/WJPS-0024.pixelgraph.json.gz",
+      "evidence_path": "evidence/WJPS-0024",
+      "runtime": {
+        "sequence": 284,
+        "source_record_id": "WJPS-0024",
+        "candidate_id": "WJPS-0024",
+        "pose_id": "WJPS-0024",
+        "semantic_id": "phazer_side_wing_open_frame_06",
+        "display_name": "Phazer Side Wing Open Frame 06",
+        "source_archive": "WizardJoePhazerSprites.zip",
+        "source_entry": "sheet-wizard-joe-w4.png#frame-06",
+        "source_sha256": "87c40866b92c00193a02eb5632e6e0b3511800af19278ec30e7ecf844594c7bc",
+        "graph_path": "graphs/WJPS-0024.pixelgraph.json.gz",
+        "graph_sha256": "5f2e736a04879d1233229b5c094752a3b403beca9fc101fa50f17e9a92c27c58",
+        "graph_id": "wjps-0024-pixelgraph-v1",
+        "frame": [
+          1254,
+          1254
+        ],
+        "source_size": [
+          315,
+          409
+        ],
+        "offset": [
+          469,
+          745
+        ],
+        "foreground_pixel_count": 63981,
+        "motion_family": "wing_deploy",
+        "contact_mode": "airborne",
+        "phase": {
+          "numerator": 6,
+          "denominator": 6
+        },
+        "direction": "east",
+        "authored_transition_neighbors": [
+          "phazer_side_wing_open_frame_05",
+          "phazer_side_wing_open_frame_01"
+        ],
+        "control_groups": [
+          "all",
+          "phazer",
+          "wing_deploy",
+          "clip:phazer_side_wing_open",
+          "pack:wizard_joe_phazer_sprites"
+        ],
+        "primary_for_semantic_id": true,
+        "silhouette_iou_millionths": 1000000,
+        "foreground_color_fidelity_millionths": 1000000,
+        "foreground_color_match_ratio_millionths": 1000000,
+        "exact_rgba_equal": true,
+        "rgba_mismatch_pixel_count": 0,
+        "rgba_mismatch_channel_count": 0,
+        "source_pack": "wizard_joe_phazer_sprites",
+        "category": "phazer_animation",
+        "anchor_kind": "body_center",
+        "anchor_x": 626,
+        "anchor_y": 949,
+        "evidence_path": "evidence/WJPS-0024"
+      }
+    },
+    {
+      "sequence": 285,
+      "pose_id": "WJPS-0025",
+      "semantic_id": "phazer_side_flap_cycle_frame_01",
+      "sheet_member": "sheet-wizard-joe-w5.png",
+      "sheet_sha256": "88b6717333c57d6065d540936d8f2e7af16333ffae9fe16f7ff6ec6df9b97876",
+      "sheet_frame": 1,
+      "sheet_crop": [
+        40,
+        121,
+        338,
+        420
+      ],
+      "isolated_bounds": [
+        8,
+        8,
+        322,
+        404
+      ],
+      "foreground_pixel_count": 67483,
+      "removed_matte_pixel_count": 74477,
+      "source_png_sha256": "68bd49951a0e8cf726468730c9980caf35b40a70d875f24942e6c0c4b1a5936e",
+      "graph_sha256": "c54ffe26b56d22a25c3f71a5d51b30bdae509a91e4f99ba51562215ce2130e79",
+      "exact_projection": true,
+      "foreground_source_match_millionths": 1000000,
+      "graph_path": "graphs/WJPS-0025.pixelgraph.json.gz",
+      "evidence_path": "evidence/WJPS-0025",
+      "runtime": {
+        "sequence": 285,
+        "source_record_id": "WJPS-0025",
+        "candidate_id": "WJPS-0025",
+        "pose_id": "WJPS-0025",
+        "semantic_id": "phazer_side_flap_cycle_frame_01",
+        "display_name": "Phazer Side Flap Cycle Frame 01",
+        "source_archive": "WizardJoePhazerSprites.zip",
+        "source_entry": "sheet-wizard-joe-w5.png#frame-01",
+        "source_sha256": "68bd49951a0e8cf726468730c9980caf35b40a70d875f24942e6c0c4b1a5936e",
+        "graph_path": "graphs/WJPS-0025.pixelgraph.json.gz",
+        "graph_sha256": "c54ffe26b56d22a25c3f71a5d51b30bdae509a91e4f99ba51562215ce2130e79",
+        "graph_id": "wjps-0025-pixelgraph-v1",
+        "frame": [
+          1254,
+          1254
+        ],
+        "source_size": [
+          338,
+          420
+        ],
+        "offset": [
+          458,
+          675
+        ],
+        "foreground_pixel_count": 67483,
+        "motion_family": "flight",
+        "contact_mode": "airborne",
+        "phase": {
+          "numerator": 1,
+          "denominator": 6
+        },
+        "direction": "east",
+        "authored_transition_neighbors": [
+          "phazer_side_flap_cycle_frame_06",
+          "phazer_side_flap_cycle_frame_02"
+        ],
+        "control_groups": [
+          "all",
+          "phazer",
+          "flight",
+          "clip:phazer_side_flap_cycle",
+          "pack:wizard_joe_phazer_sprites"
+        ],
+        "primary_for_semantic_id": true,
+        "silhouette_iou_millionths": 1000000,
+        "foreground_color_fidelity_millionths": 1000000,
+        "foreground_color_match_ratio_millionths": 1000000,
+        "exact_rgba_equal": true,
+        "rgba_mismatch_pixel_count": 0,
+        "rgba_mismatch_channel_count": 0,
+        "source_pack": "wizard_joe_phazer_sprites",
+        "category": "phazer_animation",
+        "anchor_kind": "body_center",
+        "anchor_x": 626,
+        "anchor_y": 884,
+        "evidence_path": "evidence/WJPS-0025"
+      }
+    },
+    {
+      "sequence": 286,
+      "pose_id": "WJPS-0026",
+      "semantic_id": "phazer_side_flap_cycle_frame_02",
+      "sheet_member": "sheet-wizard-joe-w5.png",
+      "sheet_sha256": "88b6717333c57d6065d540936d8f2e7af16333ffae9fe16f7ff6ec6df9b97876",
+      "sheet_frame": 2,
+      "sheet_crop": [
+        384,
+        171,
+        327,
+        370
+      ],
+      "isolated_bounds": [
+        8,
+        8,
+        311,
+        354
+      ],
+      "foreground_pixel_count": 49842,
+      "removed_matte_pixel_count": 71148,
+      "source_png_sha256": "6dc6c709e1b52a754eb11533e97fbe1bc481d04fd4571715ca4de1d0c9495bf8",
+      "graph_sha256": "e968f2b49653c2f802e59db09b3da73f3b2982a029791bb0bee1959972cbbe50",
+      "exact_projection": true,
+      "foreground_source_match_millionths": 1000000,
+      "graph_path": "graphs/WJPS-0026.pixelgraph.json.gz",
+      "evidence_path": "evidence/WJPS-0026",
+      "runtime": {
+        "sequence": 286,
+        "source_record_id": "WJPS-0026",
+        "candidate_id": "WJPS-0026",
+        "pose_id": "WJPS-0026",
+        "semantic_id": "phazer_side_flap_cycle_frame_02",
+        "display_name": "Phazer Side Flap Cycle Frame 02",
+        "source_archive": "WizardJoePhazerSprites.zip",
+        "source_entry": "sheet-wizard-joe-w5.png#frame-02",
+        "source_sha256": "6dc6c709e1b52a754eb11533e97fbe1bc481d04fd4571715ca4de1d0c9495bf8",
+        "graph_path": "graphs/WJPS-0026.pixelgraph.json.gz",
+        "graph_sha256": "e968f2b49653c2f802e59db09b3da73f3b2982a029791bb0bee1959972cbbe50",
+        "graph_id": "wjps-0026-pixelgraph-v1",
+        "frame": [
+          1254,
+          1254
+        ],
+        "source_size": [
+          327,
+          370
+        ],
+        "offset": [
+          463,
+          725
+        ],
+        "foreground_pixel_count": 49842,
+        "motion_family": "flight",
+        "contact_mode": "airborne",
+        "phase": {
+          "numerator": 2,
+          "denominator": 6
+        },
+        "direction": "east",
+        "authored_transition_neighbors": [
+          "phazer_side_flap_cycle_frame_01",
+          "phazer_side_flap_cycle_frame_03"
+        ],
+        "control_groups": [
+          "all",
+          "phazer",
+          "flight",
+          "clip:phazer_side_flap_cycle",
+          "pack:wizard_joe_phazer_sprites"
+        ],
+        "primary_for_semantic_id": true,
+        "silhouette_iou_millionths": 1000000,
+        "foreground_color_fidelity_millionths": 1000000,
+        "foreground_color_match_ratio_millionths": 1000000,
+        "exact_rgba_equal": true,
+        "rgba_mismatch_pixel_count": 0,
+        "rgba_mismatch_channel_count": 0,
+        "source_pack": "wizard_joe_phazer_sprites",
+        "category": "phazer_animation",
+        "anchor_kind": "body_center",
+        "anchor_x": 626,
+        "anchor_y": 909,
+        "evidence_path": "evidence/WJPS-0026"
+      }
+    },
+    {
+      "sequence": 287,
+      "pose_id": "WJPS-0027",
+      "semantic_id": "phazer_side_flap_cycle_frame_03",
+      "sheet_member": "sheet-wizard-joe-w5.png",
+      "sheet_sha256": "88b6717333c57d6065d540936d8f2e7af16333ffae9fe16f7ff6ec6df9b97876",
+      "sheet_frame": 3,
+      "sheet_crop": [
+        733,
+        180,
+        438,
+        361
+      ],
+      "isolated_bounds": [
+        8,
+        8,
+        422,
+        345
+      ],
+      "foreground_pixel_count": 55686,
+      "removed_matte_pixel_count": 102432,
+      "source_png_sha256": "9b648cf70b350fa98aed23626d14e9ae9e0790107cd20e3e53a0ac129b8baa8b",
+      "graph_sha256": "4db2f974c5cdb950343ea73e6d66a2ea72a34b98752941c47f2a3ffd69a15fe1",
+      "exact_projection": true,
+      "foreground_source_match_millionths": 1000000,
+      "graph_path": "graphs/WJPS-0027.pixelgraph.json.gz",
+      "evidence_path": "evidence/WJPS-0027",
+      "runtime": {
+        "sequence": 287,
+        "source_record_id": "WJPS-0027",
+        "candidate_id": "WJPS-0027",
+        "pose_id": "WJPS-0027",
+        "semantic_id": "phazer_side_flap_cycle_frame_03",
+        "display_name": "Phazer Side Flap Cycle Frame 03",
+        "source_archive": "WizardJoePhazerSprites.zip",
+        "source_entry": "sheet-wizard-joe-w5.png#frame-03",
+        "source_sha256": "9b648cf70b350fa98aed23626d14e9ae9e0790107cd20e3e53a0ac129b8baa8b",
+        "graph_path": "graphs/WJPS-0027.pixelgraph.json.gz",
+        "graph_sha256": "4db2f974c5cdb950343ea73e6d66a2ea72a34b98752941c47f2a3ffd69a15fe1",
+        "graph_id": "wjps-0027-pixelgraph-v1",
+        "frame": [
+          1254,
+          1254
+        ],
+        "source_size": [
+          438,
+          361
+        ],
+        "offset": [
+          408,
+          734
+        ],
+        "foreground_pixel_count": 55686,
+        "motion_family": "flight",
+        "contact_mode": "airborne",
+        "phase": {
+          "numerator": 3,
+          "denominator": 6
+        },
+        "direction": "east",
+        "authored_transition_neighbors": [
+          "phazer_side_flap_cycle_frame_02",
+          "phazer_side_flap_cycle_frame_04"
+        ],
+        "control_groups": [
+          "all",
+          "phazer",
+          "flight",
+          "clip:phazer_side_flap_cycle",
+          "pack:wizard_joe_phazer_sprites"
+        ],
+        "primary_for_semantic_id": true,
+        "silhouette_iou_millionths": 1000000,
+        "foreground_color_fidelity_millionths": 1000000,
+        "foreground_color_match_ratio_millionths": 1000000,
+        "exact_rgba_equal": true,
+        "rgba_mismatch_pixel_count": 0,
+        "rgba_mismatch_channel_count": 0,
+        "source_pack": "wizard_joe_phazer_sprites",
+        "category": "phazer_animation",
+        "anchor_kind": "body_center",
+        "anchor_x": 626,
+        "anchor_y": 914,
+        "evidence_path": "evidence/WJPS-0027"
+      }
+    },
+    {
+      "sequence": 288,
+      "pose_id": "WJPS-0028",
+      "semantic_id": "phazer_side_flap_cycle_frame_04",
+      "sheet_member": "sheet-wizard-joe-w5.png",
+      "sheet_sha256": "88b6717333c57d6065d540936d8f2e7af16333ffae9fe16f7ff6ec6df9b97876",
+      "sheet_frame": 4,
+      "sheet_crop": [
+        1145,
+        184,
+        292,
+        371
+      ],
+      "isolated_bounds": [
+        8,
+        8,
+        276,
+        355
+      ],
+      "foreground_pixel_count": 47555,
+      "removed_matte_pixel_count": 60777,
+      "source_png_sha256": "a1d66794257df1b0c40fe6dc8fa0e70a37b16d2b534d9fd53d68df792c200596",
+      "graph_sha256": "26807ecfaf35e153fa6999143fc3ba3ec02af13524ad470031462c1a9054dfd4",
+      "exact_projection": true,
+      "foreground_source_match_millionths": 1000000,
+      "graph_path": "graphs/WJPS-0028.pixelgraph.json.gz",
+      "evidence_path": "evidence/WJPS-0028",
+      "runtime": {
+        "sequence": 288,
+        "source_record_id": "WJPS-0028",
+        "candidate_id": "WJPS-0028",
+        "pose_id": "WJPS-0028",
+        "semantic_id": "phazer_side_flap_cycle_frame_04",
+        "display_name": "Phazer Side Flap Cycle Frame 04",
+        "source_archive": "WizardJoePhazerSprites.zip",
+        "source_entry": "sheet-wizard-joe-w5.png#frame-04",
+        "source_sha256": "a1d66794257df1b0c40fe6dc8fa0e70a37b16d2b534d9fd53d68df792c200596",
+        "graph_path": "graphs/WJPS-0028.pixelgraph.json.gz",
+        "graph_sha256": "26807ecfaf35e153fa6999143fc3ba3ec02af13524ad470031462c1a9054dfd4",
+        "graph_id": "wjps-0028-pixelgraph-v1",
+        "frame": [
+          1254,
+          1254
+        ],
+        "source_size": [
+          292,
+          371
+        ],
+        "offset": [
+          481,
+          738
+        ],
+        "foreground_pixel_count": 47555,
+        "motion_family": "flight",
+        "contact_mode": "airborne",
+        "phase": {
+          "numerator": 4,
+          "denominator": 6
+        },
+        "direction": "east",
+        "authored_transition_neighbors": [
+          "phazer_side_flap_cycle_frame_03",
+          "phazer_side_flap_cycle_frame_05"
+        ],
+        "control_groups": [
+          "all",
+          "phazer",
+          "flight",
+          "clip:phazer_side_flap_cycle",
+          "pack:wizard_joe_phazer_sprites"
+        ],
+        "primary_for_semantic_id": true,
+        "silhouette_iou_millionths": 1000000,
+        "foreground_color_fidelity_millionths": 1000000,
+        "foreground_color_match_ratio_millionths": 1000000,
+        "exact_rgba_equal": true,
+        "rgba_mismatch_pixel_count": 0,
+        "rgba_mismatch_channel_count": 0,
+        "source_pack": "wizard_joe_phazer_sprites",
+        "category": "phazer_animation",
+        "anchor_kind": "body_center",
+        "anchor_x": 626,
+        "anchor_y": 923,
+        "evidence_path": "evidence/WJPS-0028"
+      }
+    },
+    {
+      "sequence": 289,
+      "pose_id": "WJPS-0029",
+      "semantic_id": "phazer_side_flap_cycle_frame_05",
+      "sheet_member": "sheet-wizard-joe-w5.png",
+      "sheet_sha256": "88b6717333c57d6065d540936d8f2e7af16333ffae9fe16f7ff6ec6df9b97876",
+      "sheet_frame": 5,
+      "sheet_crop": [
+        1441,
+        188,
+        347,
+        355
+      ],
+      "isolated_bounds": [
+        8,
+        8,
+        331,
+        339
+      ],
+      "foreground_pixel_count": 47911,
+      "removed_matte_pixel_count": 75274,
+      "source_png_sha256": "f910d90fe578698352e79397dcdce91cdece7cae84577167430b1a984149b017",
+      "graph_sha256": "6f4c00a15b319d98ba2e472187d6eaa3282217a202386dec90f62f8fa698cfe8",
+      "exact_projection": true,
+      "foreground_source_match_millionths": 1000000,
+      "graph_path": "graphs/WJPS-0029.pixelgraph.json.gz",
+      "evidence_path": "evidence/WJPS-0029",
+      "runtime": {
+        "sequence": 289,
+        "source_record_id": "WJPS-0029",
+        "candidate_id": "WJPS-0029",
+        "pose_id": "WJPS-0029",
+        "semantic_id": "phazer_side_flap_cycle_frame_05",
+        "display_name": "Phazer Side Flap Cycle Frame 05",
+        "source_archive": "WizardJoePhazerSprites.zip",
+        "source_entry": "sheet-wizard-joe-w5.png#frame-05",
+        "source_sha256": "f910d90fe578698352e79397dcdce91cdece7cae84577167430b1a984149b017",
+        "graph_path": "graphs/WJPS-0029.pixelgraph.json.gz",
+        "graph_sha256": "6f4c00a15b319d98ba2e472187d6eaa3282217a202386dec90f62f8fa698cfe8",
+        "graph_id": "wjps-0029-pixelgraph-v1",
+        "frame": [
+          1254,
+          1254
+        ],
+        "source_size": [
+          347,
+          355
+        ],
+        "offset": [
+          453,
+          742
+        ],
+        "foreground_pixel_count": 47911,
+        "motion_family": "flight",
+        "contact_mode": "airborne",
+        "phase": {
+          "numerator": 5,
+          "denominator": 6
+        },
+        "direction": "east",
+        "authored_transition_neighbors": [
+          "phazer_side_flap_cycle_frame_04",
+          "phazer_side_flap_cycle_frame_06"
+        ],
+        "control_groups": [
+          "all",
+          "phazer",
+          "flight",
+          "clip:phazer_side_flap_cycle",
+          "pack:wizard_joe_phazer_sprites"
+        ],
+        "primary_for_semantic_id": true,
+        "silhouette_iou_millionths": 1000000,
+        "foreground_color_fidelity_millionths": 1000000,
+        "foreground_color_match_ratio_millionths": 1000000,
+        "exact_rgba_equal": true,
+        "rgba_mismatch_pixel_count": 0,
+        "rgba_mismatch_channel_count": 0,
+        "source_pack": "wizard_joe_phazer_sprites",
+        "category": "phazer_animation",
+        "anchor_kind": "body_center",
+        "anchor_x": 626,
+        "anchor_y": 919,
+        "evidence_path": "evidence/WJPS-0029"
+      }
+    },
+    {
+      "sequence": 290,
+      "pose_id": "WJPS-0030",
+      "semantic_id": "phazer_side_flap_cycle_frame_06",
+      "sheet_member": "sheet-wizard-joe-w5.png",
+      "sheet_sha256": "88b6717333c57d6065d540936d8f2e7af16333ffae9fe16f7ff6ec6df9b97876",
+      "sheet_frame": 6,
+      "sheet_crop": [
+        1838,
+        126,
+        322,
+        415
+      ],
+      "isolated_bounds": [
+        8,
+        8,
+        306,
+        399
+      ],
+      "foreground_pixel_count": 57900,
+      "removed_matte_pixel_count": 75730,
+      "source_png_sha256": "384492c162289088973cde54dd454725050487053a17b4d17e2e81a563311676",
+      "graph_sha256": "ad362044a3c09ff3e76da88588f164467596b670ce1be03176b5d78b66cd4fdb",
+      "exact_projection": true,
+      "foreground_source_match_millionths": 1000000,
+      "graph_path": "graphs/WJPS-0030.pixelgraph.json.gz",
+      "evidence_path": "evidence/WJPS-0030",
+      "runtime": {
+        "sequence": 290,
+        "source_record_id": "WJPS-0030",
+        "candidate_id": "WJPS-0030",
+        "pose_id": "WJPS-0030",
+        "semantic_id": "phazer_side_flap_cycle_frame_06",
+        "display_name": "Phazer Side Flap Cycle Frame 06",
+        "source_archive": "WizardJoePhazerSprites.zip",
+        "source_entry": "sheet-wizard-joe-w5.png#frame-06",
+        "source_sha256": "384492c162289088973cde54dd454725050487053a17b4d17e2e81a563311676",
+        "graph_path": "graphs/WJPS-0030.pixelgraph.json.gz",
+        "graph_sha256": "ad362044a3c09ff3e76da88588f164467596b670ce1be03176b5d78b66cd4fdb",
+        "graph_id": "wjps-0030-pixelgraph-v1",
+        "frame": [
+          1254,
+          1254
+        ],
+        "source_size": [
+          322,
+          415
+        ],
+        "offset": [
+          466,
+          680
+        ],
+        "foreground_pixel_count": 57900,
+        "motion_family": "flight",
+        "contact_mode": "airborne",
+        "phase": {
+          "numerator": 6,
+          "denominator": 6
+        },
+        "direction": "east",
+        "authored_transition_neighbors": [
+          "phazer_side_flap_cycle_frame_05",
+          "phazer_side_flap_cycle_frame_01"
+        ],
+        "control_groups": [
+          "all",
+          "phazer",
+          "flight",
+          "clip:phazer_side_flap_cycle",
+          "pack:wizard_joe_phazer_sprites"
+        ],
+        "primary_for_semantic_id": true,
+        "silhouette_iou_millionths": 1000000,
+        "foreground_color_fidelity_millionths": 1000000,
+        "foreground_color_match_ratio_millionths": 1000000,
+        "exact_rgba_equal": true,
+        "rgba_mismatch_pixel_count": 0,
+        "rgba_mismatch_channel_count": 0,
+        "source_pack": "wizard_joe_phazer_sprites",
+        "category": "phazer_animation",
+        "anchor_kind": "body_center",
+        "anchor_x": 626,
+        "anchor_y": 887,
+        "evidence_path": "evidence/WJPS-0030"
+      }
+    },
+    {
+      "sequence": 291,
+      "pose_id": "WJPS-0031",
+      "semantic_id": "phazer_side_flight_transition_frame_01",
+      "sheet_member": "sheet-wizard-joe-w6.png",
+      "sheet_sha256": "270a2a23ef72fd33c3de9149c92340d2a5be464974c37c9533f3f391abb6e832",
+      "sheet_frame": 1,
+      "sheet_crop": [
+        15,
+        219,
+        500,
+        305
+      ],
+      "isolated_bounds": [
+        8,
+        8,
+        484,
+        289
+      ],
+      "foreground_pixel_count": 50047,
+      "removed_matte_pixel_count": 102453,
+      "source_png_sha256": "0df35452c457816747acc38c0a5cc451b711e732bbcd21ab44a98398bb733063",
+      "graph_sha256": "0fa10d6051be76f37035960b1d817d93dbc56ad399f60575e21444e6b8262837",
+      "exact_projection": true,
+      "foreground_source_match_millionths": 1000000,
+      "graph_path": "graphs/WJPS-0031.pixelgraph.json.gz",
+      "evidence_path": "evidence/WJPS-0031",
+      "runtime": {
+        "sequence": 291,
+        "source_record_id": "WJPS-0031",
+        "candidate_id": "WJPS-0031",
+        "pose_id": "WJPS-0031",
+        "semantic_id": "phazer_side_flight_transition_frame_01",
+        "display_name": "Phazer Side Flight Transition Frame 01",
+        "source_archive": "WizardJoePhazerSprites.zip",
+        "source_entry": "sheet-wizard-joe-w6.png#frame-01",
+        "source_sha256": "0df35452c457816747acc38c0a5cc451b711e732bbcd21ab44a98398bb733063",
+        "graph_path": "graphs/WJPS-0031.pixelgraph.json.gz",
+        "graph_sha256": "0fa10d6051be76f37035960b1d817d93dbc56ad399f60575e21444e6b8262837",
+        "graph_id": "wjps-0031-pixelgraph-v1",
+        "frame": [
+          1254,
+          1254
+        ],
+        "source_size": [
+          500,
+          305
+        ],
+        "offset": [
+          377,
+          874
+        ],
+        "foreground_pixel_count": 50047,
+        "motion_family": "air_to_ground",
+        "contact_mode": "airborne",
+        "phase": {
+          "numerator": 1,
+          "denominator": 6
+        },
+        "direction": "east",
+        "authored_transition_neighbors": [
+          "phazer_side_flight_transition_frame_06",
+          "phazer_side_flight_transition_frame_02"
+        ],
+        "control_groups": [
+          "all",
+          "phazer",
+          "air_to_ground",
+          "clip:phazer_side_flight_transition",
+          "pack:wizard_joe_phazer_sprites"
+        ],
+        "primary_for_semantic_id": true,
+        "silhouette_iou_millionths": 1000000,
+        "foreground_color_fidelity_millionths": 1000000,
+        "foreground_color_match_ratio_millionths": 1000000,
+        "exact_rgba_equal": true,
+        "rgba_mismatch_pixel_count": 0,
+        "rgba_mismatch_channel_count": 0,
+        "source_pack": "wizard_joe_phazer_sprites",
+        "category": "phazer_animation",
+        "anchor_kind": "body_center",
+        "anchor_x": 626,
+        "anchor_y": 1026,
+        "evidence_path": "evidence/WJPS-0031"
+      }
+    },
+    {
+      "sequence": 292,
+      "pose_id": "WJPS-0032",
+      "semantic_id": "phazer_side_flight_transition_frame_02",
+      "sheet_member": "sheet-wizard-joe-w6.png",
+      "sheet_sha256": "270a2a23ef72fd33c3de9149c92340d2a5be464974c37c9533f3f391abb6e832",
+      "sheet_frame": 2,
+      "sheet_crop": [
+        546,
+        135,
+        293,
+        393
+      ],
+      "isolated_bounds": [
+        8,
+        8,
+        277,
+        377
+      ],
+      "foreground_pixel_count": 50970,
+      "removed_matte_pixel_count": 64179,
+      "source_png_sha256": "ae4f55e29f9d3458d55191ca909e168c1a7eaf1641f2987318d4a0ab0f04caae",
+      "graph_sha256": "6392845e8d218f81484e9345744c335e5787b0d6f230cf2865ad4ac583ccc817",
+      "exact_projection": true,
+      "foreground_source_match_millionths": 1000000,
+      "graph_path": "graphs/WJPS-0032.pixelgraph.json.gz",
+      "evidence_path": "evidence/WJPS-0032",
+      "runtime": {
+        "sequence": 292,
+        "source_record_id": "WJPS-0032",
+        "candidate_id": "WJPS-0032",
+        "pose_id": "WJPS-0032",
+        "semantic_id": "phazer_side_flight_transition_frame_02",
+        "display_name": "Phazer Side Flight Transition Frame 02",
+        "source_archive": "WizardJoePhazerSprites.zip",
+        "source_entry": "sheet-wizard-joe-w6.png#frame-02",
+        "source_sha256": "ae4f55e29f9d3458d55191ca909e168c1a7eaf1641f2987318d4a0ab0f04caae",
+        "graph_path": "graphs/WJPS-0032.pixelgraph.json.gz",
+        "graph_sha256": "6392845e8d218f81484e9345744c335e5787b0d6f230cf2865ad4ac583ccc817",
+        "graph_id": "wjps-0032-pixelgraph-v1",
+        "frame": [
+          1254,
+          1254
+        ],
+        "source_size": [
+          293,
+          393
+        ],
+        "offset": [
+          480,
+          790
+        ],
+        "foreground_pixel_count": 50970,
+        "motion_family": "air_to_ground",
+        "contact_mode": "airborne",
+        "phase": {
+          "numerator": 2,
+          "denominator": 6
+        },
+        "direction": "east",
+        "authored_transition_neighbors": [
+          "phazer_side_flight_transition_frame_01",
+          "phazer_side_flight_transition_frame_03"
+        ],
+        "control_groups": [
+          "all",
+          "phazer",
+          "air_to_ground",
+          "clip:phazer_side_flight_transition",
+          "pack:wizard_joe_phazer_sprites"
+        ],
+        "primary_for_semantic_id": true,
+        "silhouette_iou_millionths": 1000000,
+        "foreground_color_fidelity_millionths": 1000000,
+        "foreground_color_match_ratio_millionths": 1000000,
+        "exact_rgba_equal": true,
+        "rgba_mismatch_pixel_count": 0,
+        "rgba_mismatch_channel_count": 0,
+        "source_pack": "wizard_joe_phazer_sprites",
+        "category": "phazer_animation",
+        "anchor_kind": "body_center",
+        "anchor_x": 626,
+        "anchor_y": 986,
+        "evidence_path": "evidence/WJPS-0032"
+      }
+    },
+    {
+      "sequence": 293,
+      "pose_id": "WJPS-0033",
+      "semantic_id": "phazer_side_flight_transition_frame_03",
+      "sheet_member": "sheet-wizard-joe-w6.png",
+      "sheet_sha256": "270a2a23ef72fd33c3de9149c92340d2a5be464974c37c9533f3f391abb6e832",
+      "sheet_frame": 3,
+      "sheet_crop": [
+        855,
+        196,
+        355,
+        327
+      ],
+      "isolated_bounds": [
+        8,
+        8,
+        339,
+        311
+      ],
+      "foreground_pixel_count": 40065,
+      "removed_matte_pixel_count": 76020,
+      "source_png_sha256": "20e1d4dd748c2aa7193d9578be761da98a5197580b9094df8c0b2fd318234b62",
+      "graph_sha256": "674594797b88fa5e51e849ad05f5e84389e9d9e0ed0bc6e862f0eeaa09f89f12",
+      "exact_projection": true,
+      "foreground_source_match_millionths": 1000000,
+      "graph_path": "graphs/WJPS-0033.pixelgraph.json.gz",
+      "evidence_path": "evidence/WJPS-0033",
+      "runtime": {
+        "sequence": 293,
+        "source_record_id": "WJPS-0033",
+        "candidate_id": "WJPS-0033",
+        "pose_id": "WJPS-0033",
+        "semantic_id": "phazer_side_flight_transition_frame_03",
+        "display_name": "Phazer Side Flight Transition Frame 03",
+        "source_archive": "WizardJoePhazerSprites.zip",
+        "source_entry": "sheet-wizard-joe-w6.png#frame-03",
+        "source_sha256": "20e1d4dd748c2aa7193d9578be761da98a5197580b9094df8c0b2fd318234b62",
+        "graph_path": "graphs/WJPS-0033.pixelgraph.json.gz",
+        "graph_sha256": "674594797b88fa5e51e849ad05f5e84389e9d9e0ed0bc6e862f0eeaa09f89f12",
+        "graph_id": "wjps-0033-pixelgraph-v1",
+        "frame": [
+          1254,
+          1254
+        ],
+        "source_size": [
+          355,
+          327
+        ],
+        "offset": [
+          449,
+          851
+        ],
+        "foreground_pixel_count": 40065,
+        "motion_family": "air_to_ground",
+        "contact_mode": "airborne",
+        "phase": {
+          "numerator": 3,
+          "denominator": 6
+        },
+        "direction": "east",
+        "authored_transition_neighbors": [
+          "phazer_side_flight_transition_frame_02",
+          "phazer_side_flight_transition_frame_04"
+        ],
+        "control_groups": [
+          "all",
+          "phazer",
+          "air_to_ground",
+          "clip:phazer_side_flight_transition",
+          "pack:wizard_joe_phazer_sprites"
+        ],
+        "primary_for_semantic_id": true,
+        "silhouette_iou_millionths": 1000000,
+        "foreground_color_fidelity_millionths": 1000000,
+        "foreground_color_match_ratio_millionths": 1000000,
+        "exact_rgba_equal": true,
+        "rgba_mismatch_pixel_count": 0,
+        "rgba_mismatch_channel_count": 0,
+        "source_pack": "wizard_joe_phazer_sprites",
+        "category": "phazer_animation",
+        "anchor_kind": "body_center",
+        "anchor_x": 626,
+        "anchor_y": 1014,
+        "evidence_path": "evidence/WJPS-0033"
+      }
+    },
+    {
+      "sequence": 294,
+      "pose_id": "WJPS-0034",
+      "semantic_id": "phazer_side_flight_transition_frame_04",
+      "sheet_member": "sheet-wizard-joe-w6.png",
+      "sheet_sha256": "270a2a23ef72fd33c3de9149c92340d2a5be464974c37c9533f3f391abb6e832",
+      "sheet_frame": 4,
+      "sheet_crop": [
+        1206,
+        165,
+        287,
+        365
+      ],
+      "isolated_bounds": [
+        8,
+        8,
+        271,
+        349
+      ],
+      "foreground_pixel_count": 50009,
+      "removed_matte_pixel_count": 54746,
+      "source_png_sha256": "df24a4a6c108f7b8e084b018e005834e2d3f0f038e112203bcf254a795376b2a",
+      "graph_sha256": "490759003db46d7f99b6b0e7d470ece034daf2348c743a521f259d81b20ab883",
+      "exact_projection": true,
+      "foreground_source_match_millionths": 1000000,
+      "graph_path": "graphs/WJPS-0034.pixelgraph.json.gz",
+      "evidence_path": "evidence/WJPS-0034",
+      "runtime": {
+        "sequence": 294,
+        "source_record_id": "WJPS-0034",
+        "candidate_id": "WJPS-0034",
+        "pose_id": "WJPS-0034",
+        "semantic_id": "phazer_side_flight_transition_frame_04",
+        "display_name": "Phazer Side Flight Transition Frame 04",
+        "source_archive": "WizardJoePhazerSprites.zip",
+        "source_entry": "sheet-wizard-joe-w6.png#frame-04",
+        "source_sha256": "df24a4a6c108f7b8e084b018e005834e2d3f0f038e112203bcf254a795376b2a",
+        "graph_path": "graphs/WJPS-0034.pixelgraph.json.gz",
+        "graph_sha256": "490759003db46d7f99b6b0e7d470ece034daf2348c743a521f259d81b20ab883",
+        "graph_id": "wjps-0034-pixelgraph-v1",
+        "frame": [
+          1254,
+          1254
+        ],
+        "source_size": [
+          287,
+          365
+        ],
+        "offset": [
+          483,
+          820
+        ],
+        "foreground_pixel_count": 50009,
+        "motion_family": "air_to_ground",
+        "contact_mode": "airborne",
+        "phase": {
+          "numerator": 4,
+          "denominator": 6
+        },
+        "direction": "east",
+        "authored_transition_neighbors": [
+          "phazer_side_flight_transition_frame_03",
+          "phazer_side_flight_transition_frame_05"
+        ],
+        "control_groups": [
+          "all",
+          "phazer",
+          "air_to_ground",
+          "clip:phazer_side_flight_transition",
+          "pack:wizard_joe_phazer_sprites"
+        ],
+        "primary_for_semantic_id": true,
+        "silhouette_iou_millionths": 1000000,
+        "foreground_color_fidelity_millionths": 1000000,
+        "foreground_color_match_ratio_millionths": 1000000,
+        "exact_rgba_equal": true,
+        "rgba_mismatch_pixel_count": 0,
+        "rgba_mismatch_channel_count": 0,
+        "source_pack": "wizard_joe_phazer_sprites",
+        "category": "phazer_animation",
+        "anchor_kind": "body_center",
+        "anchor_x": 626,
+        "anchor_y": 1002,
+        "evidence_path": "evidence/WJPS-0034"
+      }
+    },
+    {
+      "sequence": 295,
+      "pose_id": "WJPS-0035",
+      "semantic_id": "phazer_side_flight_transition_frame_05",
+      "sheet_member": "sheet-wizard-joe-w6.png",
+      "sheet_sha256": "270a2a23ef72fd33c3de9149c92340d2a5be464974c37c9533f3f391abb6e832",
+      "sheet_frame": 5,
+      "sheet_crop": [
+        1560,
+        233,
+        306,
+        305
+      ],
+      "isolated_bounds": [
+        8,
+        8,
+        290,
+        289
+      ],
+      "foreground_pixel_count": 43895,
+      "removed_matte_pixel_count": 49435,
+      "source_png_sha256": "877b27296b35204e9e6096d80ede057ed7c2efc610a061e7cade255bb8068936",
+      "graph_sha256": "2c5c58a2531b30dc12639ae475c60c280047a6b4ab6cbe07783e8aa9359a9d97",
+      "exact_projection": true,
+      "foreground_source_match_millionths": 1000000,
+      "graph_path": "graphs/WJPS-0035.pixelgraph.json.gz",
+      "evidence_path": "evidence/WJPS-0035",
+      "runtime": {
+        "sequence": 295,
+        "source_record_id": "WJPS-0035",
+        "candidate_id": "WJPS-0035",
+        "pose_id": "WJPS-0035",
+        "semantic_id": "phazer_side_flight_transition_frame_05",
+        "display_name": "Phazer Side Flight Transition Frame 05",
+        "source_archive": "WizardJoePhazerSprites.zip",
+        "source_entry": "sheet-wizard-joe-w6.png#frame-05",
+        "source_sha256": "877b27296b35204e9e6096d80ede057ed7c2efc610a061e7cade255bb8068936",
+        "graph_path": "graphs/WJPS-0035.pixelgraph.json.gz",
+        "graph_sha256": "2c5c58a2531b30dc12639ae475c60c280047a6b4ab6cbe07783e8aa9359a9d97",
+        "graph_id": "wjps-0035-pixelgraph-v1",
+        "frame": [
+          1254,
+          1254
+        ],
+        "source_size": [
+          306,
+          305
+        ],
+        "offset": [
+          474,
+          888
+        ],
+        "foreground_pixel_count": 43895,
+        "motion_family": "air_to_ground",
+        "contact_mode": "airborne",
+        "phase": {
+          "numerator": 5,
+          "denominator": 6
+        },
+        "direction": "east",
+        "authored_transition_neighbors": [
+          "phazer_side_flight_transition_frame_04",
+          "phazer_side_flight_transition_frame_06"
+        ],
+        "control_groups": [
+          "all",
+          "phazer",
+          "air_to_ground",
+          "clip:phazer_side_flight_transition",
+          "pack:wizard_joe_phazer_sprites"
+        ],
+        "primary_for_semantic_id": true,
+        "silhouette_iou_millionths": 1000000,
+        "foreground_color_fidelity_millionths": 1000000,
+        "foreground_color_match_ratio_millionths": 1000000,
+        "exact_rgba_equal": true,
+        "rgba_mismatch_pixel_count": 0,
+        "rgba_mismatch_channel_count": 0,
+        "source_pack": "wizard_joe_phazer_sprites",
+        "category": "phazer_animation",
+        "anchor_kind": "body_center",
+        "anchor_x": 626,
+        "anchor_y": 1040,
+        "evidence_path": "evidence/WJPS-0035"
+      }
+    },
+    {
+      "sequence": 296,
+      "pose_id": "WJPS-0036",
+      "semantic_id": "phazer_side_flight_transition_frame_06",
+      "sheet_member": "sheet-wizard-joe-w6.png",
+      "sheet_sha256": "270a2a23ef72fd33c3de9149c92340d2a5be464974c37c9533f3f391abb6e832",
+      "sheet_frame": 6,
+      "sheet_crop": [
+        1911,
+        197,
+        209,
+        341
+      ],
+      "isolated_bounds": [
+        8,
+        8,
+        193,
+        325
+      ],
+      "foreground_pixel_count": 40488,
+      "removed_matte_pixel_count": 30781,
+      "source_png_sha256": "1f083a3cda561a7c90c91ff1107289525a6c3769657c9ca8b028d31e6a6263a1",
+      "graph_sha256": "c1be903005c2c192e6c8620ff6110fbda31078db96ec615fa94c95bb1629570e",
+      "exact_projection": true,
+      "foreground_source_match_millionths": 1000000,
+      "graph_path": "graphs/WJPS-0036.pixelgraph.json.gz",
+      "evidence_path": "evidence/WJPS-0036",
+      "runtime": {
+        "sequence": 296,
+        "source_record_id": "WJPS-0036",
+        "candidate_id": "WJPS-0036",
+        "pose_id": "WJPS-0036",
+        "semantic_id": "phazer_side_flight_transition_frame_06",
+        "display_name": "Phazer Side Flight Transition Frame 06",
+        "source_archive": "WizardJoePhazerSprites.zip",
+        "source_entry": "sheet-wizard-joe-w6.png#frame-06",
+        "source_sha256": "1f083a3cda561a7c90c91ff1107289525a6c3769657c9ca8b028d31e6a6263a1",
+        "graph_path": "graphs/WJPS-0036.pixelgraph.json.gz",
+        "graph_sha256": "c1be903005c2c192e6c8620ff6110fbda31078db96ec615fa94c95bb1629570e",
+        "graph_id": "wjps-0036-pixelgraph-v1",
+        "frame": [
+          1254,
+          1254
+        ],
+        "source_size": [
+          209,
+          341
+        ],
+        "offset": [
+          522,
+          852
+        ],
+        "foreground_pixel_count": 40488,
+        "motion_family": "air_to_ground",
+        "contact_mode": "both_feet",
+        "phase": {
+          "numerator": 6,
+          "denominator": 6
+        },
+        "direction": "east",
+        "authored_transition_neighbors": [
+          "phazer_side_flight_transition_frame_05",
+          "phazer_side_flight_transition_frame_01"
+        ],
+        "control_groups": [
+          "all",
+          "phazer",
+          "air_to_ground",
+          "clip:phazer_side_flight_transition",
+          "pack:wizard_joe_phazer_sprites"
+        ],
+        "primary_for_semantic_id": true,
+        "silhouette_iou_millionths": 1000000,
+        "foreground_color_fidelity_millionths": 1000000,
+        "foreground_color_match_ratio_millionths": 1000000,
+        "exact_rgba_equal": true,
+        "rgba_mismatch_pixel_count": 0,
+        "rgba_mismatch_channel_count": 0,
+        "source_pack": "wizard_joe_phazer_sprites",
+        "category": "phazer_animation",
+        "anchor_kind": "ground_contact",
+        "anchor_x": 626,
+        "anchor_y": 1184,
+        "evidence_path": "evidence/WJPS-0036"
+      }
+    },
+    {
+      "sequence": 297,
+      "pose_id": "WJPS-0037",
+      "semantic_id": "phazer_front_walk_hover_frame_01",
+      "sheet_member": "sheet-wizard-joe-w7.png",
+      "sheet_sha256": "42ce044109fac51ab1ab504b696edad1a9fe1f4df27e8a1db646c3deb2a50acb",
+      "sheet_frame": 1,
+      "sheet_crop": [
+        29,
+        142,
+        293,
+        495
+      ],
+      "isolated_bounds": [
+        8,
+        8,
+        277,
+        479
+      ],
+      "foreground_pixel_count": 82698,
+      "removed_matte_pixel_count": 62337,
+      "source_png_sha256": "6753a784cbeceb326fef8369fad4f17810843262b9fa4e366054287ca38a4f01",
+      "graph_sha256": "9a9b3397d525aad3f0e16ee616427bff3de9abc75530114d9810f2a618eb6319",
+      "exact_projection": true,
+      "foreground_source_match_millionths": 1000000,
+      "graph_path": "graphs/WJPS-0037.pixelgraph.json.gz",
+      "evidence_path": "evidence/WJPS-0037",
+      "runtime": {
+        "sequence": 297,
+        "source_record_id": "WJPS-0037",
+        "candidate_id": "WJPS-0037",
+        "pose_id": "WJPS-0037",
+        "semantic_id": "phazer_front_walk_hover_frame_01",
+        "display_name": "Phazer Front Walk Hover Frame 01",
+        "source_archive": "WizardJoePhazerSprites.zip",
+        "source_entry": "sheet-wizard-joe-w7.png#frame-01",
+        "source_sha256": "6753a784cbeceb326fef8369fad4f17810843262b9fa4e366054287ca38a4f01",
+        "graph_path": "graphs/WJPS-0037.pixelgraph.json.gz",
+        "graph_sha256": "9a9b3397d525aad3f0e16ee616427bff3de9abc75530114d9810f2a618eb6319",
+        "graph_id": "wjps-0037-pixelgraph-v1",
+        "frame": [
+          1254,
+          1254
+        ],
+        "source_size": [
+          293,
+          495
+        ],
+        "offset": [
+          480,
+          696
+        ],
+        "foreground_pixel_count": 82698,
+        "motion_family": "ground_to_air",
+        "contact_mode": "both_feet",
+        "phase": {
+          "numerator": 1,
+          "denominator": 6
+        },
+        "direction": "south",
+        "authored_transition_neighbors": [
+          "phazer_front_walk_hover_frame_06",
+          "phazer_front_walk_hover_frame_02"
+        ],
+        "control_groups": [
+          "all",
+          "phazer",
+          "ground_to_air",
+          "clip:phazer_front_walk_hover",
+          "pack:wizard_joe_phazer_sprites"
+        ],
+        "primary_for_semantic_id": true,
+        "silhouette_iou_millionths": 1000000,
+        "foreground_color_fidelity_millionths": 1000000,
+        "foreground_color_match_ratio_millionths": 1000000,
+        "exact_rgba_equal": true,
+        "rgba_mismatch_pixel_count": 0,
+        "rgba_mismatch_channel_count": 0,
+        "source_pack": "wizard_joe_phazer_sprites",
+        "category": "phazer_animation",
+        "anchor_kind": "ground_contact",
+        "anchor_x": 626,
+        "anchor_y": 1182,
+        "evidence_path": "evidence/WJPS-0037"
+      }
+    },
+    {
+      "sequence": 298,
+      "pose_id": "WJPS-0038",
+      "semantic_id": "phazer_front_walk_hover_frame_02",
+      "sheet_member": "sheet-wizard-joe-w7.png",
+      "sheet_sha256": "42ce044109fac51ab1ab504b696edad1a9fe1f4df27e8a1db646c3deb2a50acb",
+      "sheet_frame": 2,
+      "sheet_crop": [
+        359,
+        155,
+        288,
+        484
+      ],
+      "isolated_bounds": [
+        8,
+        8,
+        272,
+        468
+      ],
+      "foreground_pixel_count": 76852,
+      "removed_matte_pixel_count": 62540,
+      "source_png_sha256": "0db6cbb64e58369786177fbcd16035c5354b5d9220fee7259fce2d69bc827a4b",
+      "graph_sha256": "e0e71a4daebffc3954d0feeb37ea10d366bc4024311ba0e8d7d95e19c093da99",
+      "exact_projection": true,
+      "foreground_source_match_millionths": 1000000,
+      "graph_path": "graphs/WJPS-0038.pixelgraph.json.gz",
+      "evidence_path": "evidence/WJPS-0038",
+      "runtime": {
+        "sequence": 298,
+        "source_record_id": "WJPS-0038",
+        "candidate_id": "WJPS-0038",
+        "pose_id": "WJPS-0038",
+        "semantic_id": "phazer_front_walk_hover_frame_02",
+        "display_name": "Phazer Front Walk Hover Frame 02",
+        "source_archive": "WizardJoePhazerSprites.zip",
+        "source_entry": "sheet-wizard-joe-w7.png#frame-02",
+        "source_sha256": "0db6cbb64e58369786177fbcd16035c5354b5d9220fee7259fce2d69bc827a4b",
+        "graph_path": "graphs/WJPS-0038.pixelgraph.json.gz",
+        "graph_sha256": "e0e71a4daebffc3954d0feeb37ea10d366bc4024311ba0e8d7d95e19c093da99",
+        "graph_id": "wjps-0038-pixelgraph-v1",
+        "frame": [
+          1254,
+          1254
+        ],
+        "source_size": [
+          288,
+          484
+        ],
+        "offset": [
+          483,
+          709
+        ],
+        "foreground_pixel_count": 76852,
+        "motion_family": "ground_to_air",
+        "contact_mode": "both_feet",
+        "phase": {
+          "numerator": 2,
+          "denominator": 6
+        },
+        "direction": "south",
+        "authored_transition_neighbors": [
+          "phazer_front_walk_hover_frame_01",
+          "phazer_front_walk_hover_frame_03"
+        ],
+        "control_groups": [
+          "all",
+          "phazer",
+          "ground_to_air",
+          "clip:phazer_front_walk_hover",
+          "pack:wizard_joe_phazer_sprites"
+        ],
+        "primary_for_semantic_id": true,
+        "silhouette_iou_millionths": 1000000,
+        "foreground_color_fidelity_millionths": 1000000,
+        "foreground_color_match_ratio_millionths": 1000000,
+        "exact_rgba_equal": true,
+        "rgba_mismatch_pixel_count": 0,
+        "rgba_mismatch_channel_count": 0,
+        "source_pack": "wizard_joe_phazer_sprites",
+        "category": "phazer_animation",
+        "anchor_kind": "ground_contact",
+        "anchor_x": 626,
+        "anchor_y": 1184,
+        "evidence_path": "evidence/WJPS-0038"
+      }
+    },
+    {
+      "sequence": 299,
+      "pose_id": "WJPS-0039",
+      "semantic_id": "phazer_front_walk_hover_frame_03",
+      "sheet_member": "sheet-wizard-joe-w7.png",
+      "sheet_sha256": "42ce044109fac51ab1ab504b696edad1a9fe1f4df27e8a1db646c3deb2a50acb",
+      "sheet_frame": 3,
+      "sheet_crop": [
+        676,
+        156,
+        289,
+        483
+      ],
+      "isolated_bounds": [
+        8,
+        8,
+        273,
+        467
+      ],
+      "foreground_pixel_count": 75724,
+      "removed_matte_pixel_count": 63863,
+      "source_png_sha256": "9ea6f3ad47187c652d2d84d478c251fe3f79b67367df706cb24e4cf68e549271",
+      "graph_sha256": "3dfa856f7a2f00e38b79d2341646053377edeb0dcfc2ff640c18c4890e2f617e",
+      "exact_projection": true,
+      "foreground_source_match_millionths": 1000000,
+      "graph_path": "graphs/WJPS-0039.pixelgraph.json.gz",
+      "evidence_path": "evidence/WJPS-0039",
+      "runtime": {
+        "sequence": 299,
+        "source_record_id": "WJPS-0039",
+        "candidate_id": "WJPS-0039",
+        "pose_id": "WJPS-0039",
+        "semantic_id": "phazer_front_walk_hover_frame_03",
+        "display_name": "Phazer Front Walk Hover Frame 03",
+        "source_archive": "WizardJoePhazerSprites.zip",
+        "source_entry": "sheet-wizard-joe-w7.png#frame-03",
+        "source_sha256": "9ea6f3ad47187c652d2d84d478c251fe3f79b67367df706cb24e4cf68e549271",
+        "graph_path": "graphs/WJPS-0039.pixelgraph.json.gz",
+        "graph_sha256": "3dfa856f7a2f00e38b79d2341646053377edeb0dcfc2ff640c18c4890e2f617e",
+        "graph_id": "wjps-0039-pixelgraph-v1",
+        "frame": [
+          1254,
+          1254
+        ],
+        "source_size": [
+          289,
+          483
+        ],
+        "offset": [
+          482,
+          710
+        ],
+        "foreground_pixel_count": 75724,
+        "motion_family": "ground_to_air",
+        "contact_mode": "both_feet",
+        "phase": {
+          "numerator": 3,
+          "denominator": 6
+        },
+        "direction": "south",
+        "authored_transition_neighbors": [
+          "phazer_front_walk_hover_frame_02",
+          "phazer_front_walk_hover_frame_04"
+        ],
+        "control_groups": [
+          "all",
+          "phazer",
+          "ground_to_air",
+          "clip:phazer_front_walk_hover",
+          "pack:wizard_joe_phazer_sprites"
+        ],
+        "primary_for_semantic_id": true,
+        "silhouette_iou_millionths": 1000000,
+        "foreground_color_fidelity_millionths": 1000000,
+        "foreground_color_match_ratio_millionths": 1000000,
+        "exact_rgba_equal": true,
+        "rgba_mismatch_pixel_count": 0,
+        "rgba_mismatch_channel_count": 0,
+        "source_pack": "wizard_joe_phazer_sprites",
+        "category": "phazer_animation",
+        "anchor_kind": "ground_contact",
+        "anchor_x": 626,
+        "anchor_y": 1184,
+        "evidence_path": "evidence/WJPS-0039"
+      }
+    },
+    {
+      "sequence": 300,
+      "pose_id": "WJPS-0040",
+      "semantic_id": "phazer_front_walk_hover_frame_04",
+      "sheet_member": "sheet-wizard-joe-w7.png",
+      "sheet_sha256": "42ce044109fac51ab1ab504b696edad1a9fe1f4df27e8a1db646c3deb2a50acb",
+      "sheet_frame": 4,
+      "sheet_crop": [
+        983,
+        155,
+        283,
+        484
+      ],
+      "isolated_bounds": [
+        8,
+        8,
+        267,
+        468
+      ],
+      "foreground_pixel_count": 76094,
+      "removed_matte_pixel_count": 60878,
+      "source_png_sha256": "bbe9b21ef3c5050aac11ddf6e0d10795ea70540d4dd64ec086e9cc86a8021f1f",
+      "graph_sha256": "03c6594baaebf9d0c8f38c908b091ab1ecef2050646c152a94a3abfeab658b1c",
+      "exact_projection": true,
+      "foreground_source_match_millionths": 1000000,
+      "graph_path": "graphs/WJPS-0040.pixelgraph.json.gz",
+      "evidence_path": "evidence/WJPS-0040",
+      "runtime": {
+        "sequence": 300,
+        "source_record_id": "WJPS-0040",
+        "candidate_id": "WJPS-0040",
+        "pose_id": "WJPS-0040",
+        "semantic_id": "phazer_front_walk_hover_frame_04",
+        "display_name": "Phazer Front Walk Hover Frame 04",
+        "source_archive": "WizardJoePhazerSprites.zip",
+        "source_entry": "sheet-wizard-joe-w7.png#frame-04",
+        "source_sha256": "bbe9b21ef3c5050aac11ddf6e0d10795ea70540d4dd64ec086e9cc86a8021f1f",
+        "graph_path": "graphs/WJPS-0040.pixelgraph.json.gz",
+        "graph_sha256": "03c6594baaebf9d0c8f38c908b091ab1ecef2050646c152a94a3abfeab658b1c",
+        "graph_id": "wjps-0040-pixelgraph-v1",
+        "frame": [
+          1254,
+          1254
+        ],
+        "source_size": [
+          283,
+          484
+        ],
+        "offset": [
+          485,
+          709
+        ],
+        "foreground_pixel_count": 76094,
+        "motion_family": "ground_to_air",
+        "contact_mode": "both_feet",
+        "phase": {
+          "numerator": 4,
+          "denominator": 6
+        },
+        "direction": "south",
+        "authored_transition_neighbors": [
+          "phazer_front_walk_hover_frame_03",
+          "phazer_front_walk_hover_frame_05"
+        ],
+        "control_groups": [
+          "all",
+          "phazer",
+          "ground_to_air",
+          "clip:phazer_front_walk_hover",
+          "pack:wizard_joe_phazer_sprites"
+        ],
+        "primary_for_semantic_id": true,
+        "silhouette_iou_millionths": 1000000,
+        "foreground_color_fidelity_millionths": 1000000,
+        "foreground_color_match_ratio_millionths": 1000000,
+        "exact_rgba_equal": true,
+        "rgba_mismatch_pixel_count": 0,
+        "rgba_mismatch_channel_count": 0,
+        "source_pack": "wizard_joe_phazer_sprites",
+        "category": "phazer_animation",
+        "anchor_kind": "ground_contact",
+        "anchor_x": 626,
+        "anchor_y": 1184,
+        "evidence_path": "evidence/WJPS-0040"
+      }
+    },
+    {
+      "sequence": 301,
+      "pose_id": "WJPS-0041",
+      "semantic_id": "phazer_front_walk_hover_frame_05",
+      "sheet_member": "sheet-wizard-joe-w7.png",
+      "sheet_sha256": "42ce044109fac51ab1ab504b696edad1a9fe1f4df27e8a1db646c3deb2a50acb",
+      "sheet_frame": 5,
+      "sheet_crop": [
+        1299,
+        142,
+        290,
+        479
+      ],
+      "isolated_bounds": [
+        8,
+        8,
+        274,
+        463
+      ],
+      "foreground_pixel_count": 76454,
+      "removed_matte_pixel_count": 62456,
+      "source_png_sha256": "1c5b44037f6053a461134c45a0ae34699b7a55eb82ff9ff03e39b5fd83603e88",
+      "graph_sha256": "d27422264c20b1d5d5b592b4140ebf01a99fe0d6b0104f63c22bd4a08d0b417e",
+      "exact_projection": true,
+      "foreground_source_match_millionths": 1000000,
+      "graph_path": "graphs/WJPS-0041.pixelgraph.json.gz",
+      "evidence_path": "evidence/WJPS-0041",
+      "runtime": {
+        "sequence": 301,
+        "source_record_id": "WJPS-0041",
+        "candidate_id": "WJPS-0041",
+        "pose_id": "WJPS-0041",
+        "semantic_id": "phazer_front_walk_hover_frame_05",
+        "display_name": "Phazer Front Walk Hover Frame 05",
+        "source_archive": "WizardJoePhazerSprites.zip",
+        "source_entry": "sheet-wizard-joe-w7.png#frame-05",
+        "source_sha256": "1c5b44037f6053a461134c45a0ae34699b7a55eb82ff9ff03e39b5fd83603e88",
+        "graph_path": "graphs/WJPS-0041.pixelgraph.json.gz",
+        "graph_sha256": "d27422264c20b1d5d5b592b4140ebf01a99fe0d6b0104f63c22bd4a08d0b417e",
+        "graph_id": "wjps-0041-pixelgraph-v1",
+        "frame": [
+          1254,
+          1254
+        ],
+        "source_size": [
+          290,
+          479
+        ],
+        "offset": [
+          482,
+          696
+        ],
+        "foreground_pixel_count": 76454,
+        "motion_family": "ground_to_air",
+        "contact_mode": "both_feet",
+        "phase": {
+          "numerator": 5,
+          "denominator": 6
+        },
+        "direction": "south",
+        "authored_transition_neighbors": [
+          "phazer_front_walk_hover_frame_04",
+          "phazer_front_walk_hover_frame_06"
+        ],
+        "control_groups": [
+          "all",
+          "phazer",
+          "ground_to_air",
+          "clip:phazer_front_walk_hover",
+          "pack:wizard_joe_phazer_sprites"
+        ],
+        "primary_for_semantic_id": true,
+        "silhouette_iou_millionths": 1000000,
+        "foreground_color_fidelity_millionths": 1000000,
+        "foreground_color_match_ratio_millionths": 1000000,
+        "exact_rgba_equal": true,
+        "rgba_mismatch_pixel_count": 0,
+        "rgba_mismatch_channel_count": 0,
+        "source_pack": "wizard_joe_phazer_sprites",
+        "category": "phazer_animation",
+        "anchor_kind": "ground_contact",
+        "anchor_x": 626,
+        "anchor_y": 1166,
+        "evidence_path": "evidence/WJPS-0041"
+      }
+    },
+    {
+      "sequence": 302,
+      "pose_id": "WJPS-0042",
+      "semantic_id": "phazer_front_walk_hover_frame_06",
+      "sheet_member": "sheet-wizard-joe-w7.png",
+      "sheet_sha256": "42ce044109fac51ab1ab504b696edad1a9fe1f4df27e8a1db646c3deb2a50acb",
+      "sheet_frame": 6,
+      "sheet_crop": [
+        1622,
+        101,
+        321,
+        428
+      ],
+      "isolated_bounds": [
+        8,
+        8,
+        305,
+        412
+      ],
+      "foreground_pixel_count": 71838,
+      "removed_matte_pixel_count": 65550,
+      "source_png_sha256": "6811f2778c27c3e62e176caa9b3488f686e239dbd340d27dff41231538cb6964",
+      "graph_sha256": "94c9431588e1a011173dc5fbf2faca968b64f52461a6ebd9a177944d59fbbddf",
+      "exact_projection": true,
+      "foreground_source_match_millionths": 1000000,
+      "graph_path": "graphs/WJPS-0042.pixelgraph.json.gz",
+      "evidence_path": "evidence/WJPS-0042",
+      "runtime": {
+        "sequence": 302,
+        "source_record_id": "WJPS-0042",
+        "candidate_id": "WJPS-0042",
+        "pose_id": "WJPS-0042",
+        "semantic_id": "phazer_front_walk_hover_frame_06",
+        "display_name": "Phazer Front Walk Hover Frame 06",
+        "source_archive": "WizardJoePhazerSprites.zip",
+        "source_entry": "sheet-wizard-joe-w7.png#frame-06",
+        "source_sha256": "6811f2778c27c3e62e176caa9b3488f686e239dbd340d27dff41231538cb6964",
+        "graph_path": "graphs/WJPS-0042.pixelgraph.json.gz",
+        "graph_sha256": "94c9431588e1a011173dc5fbf2faca968b64f52461a6ebd9a177944d59fbbddf",
+        "graph_id": "wjps-0042-pixelgraph-v1",
+        "frame": [
+          1254,
+          1254
+        ],
+        "source_size": [
+          321,
+          428
+        ],
+        "offset": [
+          466,
+          655
+        ],
+        "foreground_pixel_count": 71838,
+        "motion_family": "ground_to_air",
+        "contact_mode": "airborne",
+        "phase": {
+          "numerator": 6,
+          "denominator": 6
+        },
+        "direction": "south",
+        "authored_transition_neighbors": [
+          "phazer_front_walk_hover_frame_05",
+          "phazer_front_walk_hover_frame_01"
+        ],
+        "control_groups": [
+          "all",
+          "phazer",
+          "ground_to_air",
+          "clip:phazer_front_walk_hover",
+          "pack:wizard_joe_phazer_sprites"
+        ],
+        "primary_for_semantic_id": true,
+        "silhouette_iou_millionths": 1000000,
+        "foreground_color_fidelity_millionths": 1000000,
+        "foreground_color_match_ratio_millionths": 1000000,
+        "exact_rgba_equal": true,
+        "rgba_mismatch_pixel_count": 0,
+        "rgba_mismatch_channel_count": 0,
+        "source_pack": "wizard_joe_phazer_sprites",
+        "category": "phazer_animation",
+        "anchor_kind": "body_center",
+        "anchor_x": 626,
+        "anchor_y": 868,
+        "evidence_path": "evidence/WJPS-0042"
+      }
+    },
+    {
+      "sequence": 303,
+      "pose_id": "WJPS-0043",
+      "semantic_id": "phazer_rear_walk_hover_frame_01",
+      "sheet_member": "sheet-wizard-joe-w8.png",
+      "sheet_sha256": "4ae0f6a6b383904f4b2f8799609b87d5ad32008cf960f9fa10be728e29f37263",
+      "sheet_frame": 1,
+      "sheet_crop": [
+        47,
+        177,
+        275,
+        454
+      ],
+      "isolated_bounds": [
+        8,
+        8,
+        259,
+        438
+      ],
+      "foreground_pixel_count": 71688,
+      "removed_matte_pixel_count": 53162,
+      "source_png_sha256": "f6f199c8a67d1cffd91578495af294d399c90b0abb8283367a9f9c1eecaa8e37",
+      "graph_sha256": "0e58f71d91247ec50ab365403d61fa648164d286c69e7974bbec0700c19a5a94",
+      "exact_projection": true,
+      "foreground_source_match_millionths": 1000000,
+      "graph_path": "graphs/WJPS-0043.pixelgraph.json.gz",
+      "evidence_path": "evidence/WJPS-0043",
+      "runtime": {
+        "sequence": 303,
+        "source_record_id": "WJPS-0043",
+        "candidate_id": "WJPS-0043",
+        "pose_id": "WJPS-0043",
+        "semantic_id": "phazer_rear_walk_hover_frame_01",
+        "display_name": "Phazer Rear Walk Hover Frame 01",
+        "source_archive": "WizardJoePhazerSprites.zip",
+        "source_entry": "sheet-wizard-joe-w8.png#frame-01",
+        "source_sha256": "f6f199c8a67d1cffd91578495af294d399c90b0abb8283367a9f9c1eecaa8e37",
+        "graph_path": "graphs/WJPS-0043.pixelgraph.json.gz",
+        "graph_sha256": "0e58f71d91247ec50ab365403d61fa648164d286c69e7974bbec0700c19a5a94",
+        "graph_id": "wjps-0043-pixelgraph-v1",
+        "frame": [
+          1254,
+          1254
+        ],
+        "source_size": [
+          275,
+          454
+        ],
+        "offset": [
+          489,
+          733
+        ],
+        "foreground_pixel_count": 71688,
+        "motion_family": "ground_to_air",
+        "contact_mode": "both_feet",
+        "phase": {
+          "numerator": 1,
+          "denominator": 6
+        },
+        "direction": "north",
+        "authored_transition_neighbors": [
+          "phazer_rear_walk_hover_frame_06",
+          "phazer_rear_walk_hover_frame_02"
+        ],
+        "control_groups": [
+          "all",
+          "phazer",
+          "ground_to_air",
+          "clip:phazer_rear_walk_hover",
+          "pack:wizard_joe_phazer_sprites"
+        ],
+        "primary_for_semantic_id": true,
+        "silhouette_iou_millionths": 1000000,
+        "foreground_color_fidelity_millionths": 1000000,
+        "foreground_color_match_ratio_millionths": 1000000,
+        "exact_rgba_equal": true,
+        "rgba_mismatch_pixel_count": 0,
+        "rgba_mismatch_channel_count": 0,
+        "source_pack": "wizard_joe_phazer_sprites",
+        "category": "phazer_animation",
+        "anchor_kind": "ground_contact",
+        "anchor_x": 626,
+        "anchor_y": 1178,
+        "evidence_path": "evidence/WJPS-0043"
+      }
+    },
+    {
+      "sequence": 304,
+      "pose_id": "WJPS-0044",
+      "semantic_id": "phazer_rear_walk_hover_frame_02",
+      "sheet_member": "sheet-wizard-joe-w8.png",
+      "sheet_sha256": "4ae0f6a6b383904f4b2f8799609b87d5ad32008cf960f9fa10be728e29f37263",
+      "sheet_frame": 2,
+      "sheet_crop": [
+        362,
+        183,
+        296,
+        453
+      ],
+      "isolated_bounds": [
+        8,
+        8,
+        280,
+        437
+      ],
+      "foreground_pixel_count": 69361,
+      "removed_matte_pixel_count": 64727,
+      "source_png_sha256": "5b3ae22ba59068cc36aba6e6f2ebf16cee9fbd091a110c7eee08bbcb0e4d8b88",
+      "graph_sha256": "907a45a07f829c6713feda5569476180000e0ba070d8a07cb232fd44a7c6eb01",
+      "exact_projection": true,
+      "foreground_source_match_millionths": 1000000,
+      "graph_path": "graphs/WJPS-0044.pixelgraph.json.gz",
+      "evidence_path": "evidence/WJPS-0044",
+      "runtime": {
+        "sequence": 304,
+        "source_record_id": "WJPS-0044",
+        "candidate_id": "WJPS-0044",
+        "pose_id": "WJPS-0044",
+        "semantic_id": "phazer_rear_walk_hover_frame_02",
+        "display_name": "Phazer Rear Walk Hover Frame 02",
+        "source_archive": "WizardJoePhazerSprites.zip",
+        "source_entry": "sheet-wizard-joe-w8.png#frame-02",
+        "source_sha256": "5b3ae22ba59068cc36aba6e6f2ebf16cee9fbd091a110c7eee08bbcb0e4d8b88",
+        "graph_path": "graphs/WJPS-0044.pixelgraph.json.gz",
+        "graph_sha256": "907a45a07f829c6713feda5569476180000e0ba070d8a07cb232fd44a7c6eb01",
+        "graph_id": "wjps-0044-pixelgraph-v1",
+        "frame": [
+          1254,
+          1254
+        ],
+        "source_size": [
+          296,
+          453
+        ],
+        "offset": [
+          479,
+          739
+        ],
+        "foreground_pixel_count": 69361,
+        "motion_family": "ground_to_air",
+        "contact_mode": "both_feet",
+        "phase": {
+          "numerator": 2,
+          "denominator": 6
+        },
+        "direction": "north",
+        "authored_transition_neighbors": [
+          "phazer_rear_walk_hover_frame_01",
+          "phazer_rear_walk_hover_frame_03"
+        ],
+        "control_groups": [
+          "all",
+          "phazer",
+          "ground_to_air",
+          "clip:phazer_rear_walk_hover",
+          "pack:wizard_joe_phazer_sprites"
+        ],
+        "primary_for_semantic_id": true,
+        "silhouette_iou_millionths": 1000000,
+        "foreground_color_fidelity_millionths": 1000000,
+        "foreground_color_match_ratio_millionths": 1000000,
+        "exact_rgba_equal": true,
+        "rgba_mismatch_pixel_count": 0,
+        "rgba_mismatch_channel_count": 0,
+        "source_pack": "wizard_joe_phazer_sprites",
+        "category": "phazer_animation",
+        "anchor_kind": "ground_contact",
+        "anchor_x": 626,
+        "anchor_y": 1183,
+        "evidence_path": "evidence/WJPS-0044"
+      }
+    },
+    {
+      "sequence": 305,
+      "pose_id": "WJPS-0045",
+      "semantic_id": "phazer_rear_walk_hover_frame_03",
+      "sheet_member": "sheet-wizard-joe-w8.png",
+      "sheet_sha256": "4ae0f6a6b383904f4b2f8799609b87d5ad32008cf960f9fa10be728e29f37263",
+      "sheet_frame": 3,
+      "sheet_crop": [
+        690,
+        186,
+        297,
+        451
+      ],
+      "isolated_bounds": [
+        8,
+        8,
+        281,
+        435
+      ],
+      "foreground_pixel_count": 70119,
+      "removed_matte_pixel_count": 63828,
+      "source_png_sha256": "0bab4ad99d2adb8f56df0827bdeb9b50e064b819a8df8c54c44f40bff9227571",
+      "graph_sha256": "defacc0e42a180f600f6841f7c2e19042d40e5bcf29b741cd5b8e625d71f09fd",
+      "exact_projection": true,
+      "foreground_source_match_millionths": 1000000,
+      "graph_path": "graphs/WJPS-0045.pixelgraph.json.gz",
+      "evidence_path": "evidence/WJPS-0045",
+      "runtime": {
+        "sequence": 305,
+        "source_record_id": "WJPS-0045",
+        "candidate_id": "WJPS-0045",
+        "pose_id": "WJPS-0045",
+        "semantic_id": "phazer_rear_walk_hover_frame_03",
+        "display_name": "Phazer Rear Walk Hover Frame 03",
+        "source_archive": "WizardJoePhazerSprites.zip",
+        "source_entry": "sheet-wizard-joe-w8.png#frame-03",
+        "source_sha256": "0bab4ad99d2adb8f56df0827bdeb9b50e064b819a8df8c54c44f40bff9227571",
+        "graph_path": "graphs/WJPS-0045.pixelgraph.json.gz",
+        "graph_sha256": "defacc0e42a180f600f6841f7c2e19042d40e5bcf29b741cd5b8e625d71f09fd",
+        "graph_id": "wjps-0045-pixelgraph-v1",
+        "frame": [
+          1254,
+          1254
+        ],
+        "source_size": [
+          297,
+          451
+        ],
+        "offset": [
+          478,
+          742
+        ],
+        "foreground_pixel_count": 70119,
+        "motion_family": "ground_to_air",
+        "contact_mode": "both_feet",
+        "phase": {
+          "numerator": 3,
+          "denominator": 6
+        },
+        "direction": "north",
+        "authored_transition_neighbors": [
+          "phazer_rear_walk_hover_frame_02",
+          "phazer_rear_walk_hover_frame_04"
+        ],
+        "control_groups": [
+          "all",
+          "phazer",
+          "ground_to_air",
+          "clip:phazer_rear_walk_hover",
+          "pack:wizard_joe_phazer_sprites"
+        ],
+        "primary_for_semantic_id": true,
+        "silhouette_iou_millionths": 1000000,
+        "foreground_color_fidelity_millionths": 1000000,
+        "foreground_color_match_ratio_millionths": 1000000,
+        "exact_rgba_equal": true,
+        "rgba_mismatch_pixel_count": 0,
+        "rgba_mismatch_channel_count": 0,
+        "source_pack": "wizard_joe_phazer_sprites",
+        "category": "phazer_animation",
+        "anchor_kind": "ground_contact",
+        "anchor_x": 626,
+        "anchor_y": 1184,
+        "evidence_path": "evidence/WJPS-0045"
+      }
+    },
+    {
+      "sequence": 306,
+      "pose_id": "WJPS-0046",
+      "semantic_id": "phazer_rear_walk_hover_frame_04",
+      "sheet_member": "sheet-wizard-joe-w8.png",
+      "sheet_sha256": "4ae0f6a6b383904f4b2f8799609b87d5ad32008cf960f9fa10be728e29f37263",
+      "sheet_frame": 4,
+      "sheet_crop": [
+        1014,
+        187,
+        295,
+        450
+      ],
+      "isolated_bounds": [
+        8,
+        8,
+        279,
+        434
+      ],
+      "foreground_pixel_count": 68237,
+      "removed_matte_pixel_count": 64513,
+      "source_png_sha256": "754586e04a35efb4693c38468d37afaed75dd44c50f624d60798429132b9cff9",
+      "graph_sha256": "d55336ce54c232d3cde431ca79bddaf8cae23472db4e1b3482831ac070399706",
+      "exact_projection": true,
+      "foreground_source_match_millionths": 1000000,
+      "graph_path": "graphs/WJPS-0046.pixelgraph.json.gz",
+      "evidence_path": "evidence/WJPS-0046",
+      "runtime": {
+        "sequence": 306,
+        "source_record_id": "WJPS-0046",
+        "candidate_id": "WJPS-0046",
+        "pose_id": "WJPS-0046",
+        "semantic_id": "phazer_rear_walk_hover_frame_04",
+        "display_name": "Phazer Rear Walk Hover Frame 04",
+        "source_archive": "WizardJoePhazerSprites.zip",
+        "source_entry": "sheet-wizard-joe-w8.png#frame-04",
+        "source_sha256": "754586e04a35efb4693c38468d37afaed75dd44c50f624d60798429132b9cff9",
+        "graph_path": "graphs/WJPS-0046.pixelgraph.json.gz",
+        "graph_sha256": "d55336ce54c232d3cde431ca79bddaf8cae23472db4e1b3482831ac070399706",
+        "graph_id": "wjps-0046-pixelgraph-v1",
+        "frame": [
+          1254,
+          1254
+        ],
+        "source_size": [
+          295,
+          450
+        ],
+        "offset": [
+          479,
+          743
+        ],
+        "foreground_pixel_count": 68237,
+        "motion_family": "ground_to_air",
+        "contact_mode": "both_feet",
+        "phase": {
+          "numerator": 4,
+          "denominator": 6
+        },
+        "direction": "north",
+        "authored_transition_neighbors": [
+          "phazer_rear_walk_hover_frame_03",
+          "phazer_rear_walk_hover_frame_05"
+        ],
+        "control_groups": [
+          "all",
+          "phazer",
+          "ground_to_air",
+          "clip:phazer_rear_walk_hover",
+          "pack:wizard_joe_phazer_sprites"
+        ],
+        "primary_for_semantic_id": true,
+        "silhouette_iou_millionths": 1000000,
+        "foreground_color_fidelity_millionths": 1000000,
+        "foreground_color_match_ratio_millionths": 1000000,
+        "exact_rgba_equal": true,
+        "rgba_mismatch_pixel_count": 0,
+        "rgba_mismatch_channel_count": 0,
+        "source_pack": "wizard_joe_phazer_sprites",
+        "category": "phazer_animation",
+        "anchor_kind": "ground_contact",
+        "anchor_x": 626,
+        "anchor_y": 1184,
+        "evidence_path": "evidence/WJPS-0046"
+      }
+    },
+    {
+      "sequence": 307,
+      "pose_id": "WJPS-0047",
+      "semantic_id": "phazer_rear_walk_hover_frame_05",
+      "sheet_member": "sheet-wizard-joe-w8.png",
+      "sheet_sha256": "4ae0f6a6b383904f4b2f8799609b87d5ad32008cf960f9fa10be728e29f37263",
+      "sheet_frame": 5,
+      "sheet_crop": [
+        1315,
+        186,
+        288,
+        447
+      ],
+      "isolated_bounds": [
+        8,
+        8,
+        272,
+        431
+      ],
+      "foreground_pixel_count": 67074,
+      "removed_matte_pixel_count": 61662,
+      "source_png_sha256": "42e072282e9d35fa49d4f4ccb8ceaf597ff5f9123a4c3acb50ab9bfede154aa1",
+      "graph_sha256": "5db3e55cad853ff6ebffa584cb12cee7388787c0705915436aae00194b368965",
+      "exact_projection": true,
+      "foreground_source_match_millionths": 1000000,
+      "graph_path": "graphs/WJPS-0047.pixelgraph.json.gz",
+      "evidence_path": "evidence/WJPS-0047",
+      "runtime": {
+        "sequence": 307,
+        "source_record_id": "WJPS-0047",
+        "candidate_id": "WJPS-0047",
+        "pose_id": "WJPS-0047",
+        "semantic_id": "phazer_rear_walk_hover_frame_05",
+        "display_name": "Phazer Rear Walk Hover Frame 05",
+        "source_archive": "WizardJoePhazerSprites.zip",
+        "source_entry": "sheet-wizard-joe-w8.png#frame-05",
+        "source_sha256": "42e072282e9d35fa49d4f4ccb8ceaf597ff5f9123a4c3acb50ab9bfede154aa1",
+        "graph_path": "graphs/WJPS-0047.pixelgraph.json.gz",
+        "graph_sha256": "5db3e55cad853ff6ebffa584cb12cee7388787c0705915436aae00194b368965",
+        "graph_id": "wjps-0047-pixelgraph-v1",
+        "frame": [
+          1254,
+          1254
+        ],
+        "source_size": [
+          288,
+          447
+        ],
+        "offset": [
+          483,
+          742
+        ],
+        "foreground_pixel_count": 67074,
+        "motion_family": "ground_to_air",
+        "contact_mode": "both_feet",
+        "phase": {
+          "numerator": 5,
+          "denominator": 6
+        },
+        "direction": "north",
+        "authored_transition_neighbors": [
+          "phazer_rear_walk_hover_frame_04",
+          "phazer_rear_walk_hover_frame_06"
+        ],
+        "control_groups": [
+          "all",
+          "phazer",
+          "ground_to_air",
+          "clip:phazer_rear_walk_hover",
+          "pack:wizard_joe_phazer_sprites"
+        ],
+        "primary_for_semantic_id": true,
+        "silhouette_iou_millionths": 1000000,
+        "foreground_color_fidelity_millionths": 1000000,
+        "foreground_color_match_ratio_millionths": 1000000,
+        "exact_rgba_equal": true,
+        "rgba_mismatch_pixel_count": 0,
+        "rgba_mismatch_channel_count": 0,
+        "source_pack": "wizard_joe_phazer_sprites",
+        "category": "phazer_animation",
+        "anchor_kind": "ground_contact",
+        "anchor_x": 626,
+        "anchor_y": 1180,
+        "evidence_path": "evidence/WJPS-0047"
+      }
+    },
+    {
+      "sequence": 308,
+      "pose_id": "WJPS-0048",
+      "semantic_id": "phazer_rear_walk_hover_frame_06",
+      "sheet_member": "sheet-wizard-joe-w8.png",
+      "sheet_sha256": "4ae0f6a6b383904f4b2f8799609b87d5ad32008cf960f9fa10be728e29f37263",
+      "sheet_frame": 6,
+      "sheet_crop": [
+        1643,
+        154,
+        282,
+        433
+      ],
+      "isolated_bounds": [
+        8,
+        8,
+        266,
+        417
+      ],
+      "foreground_pixel_count": 67088,
+      "removed_matte_pixel_count": 55018,
+      "source_png_sha256": "fe0882908c1b67498be2ae0e901143f197f4e68807027bdae56893b861a3b7d2",
+      "graph_sha256": "63177ec6c231306f986ca6445463a0860bf6b56da6d65c045363d2bcd75b6fe4",
+      "exact_projection": true,
+      "foreground_source_match_millionths": 1000000,
+      "graph_path": "graphs/WJPS-0048.pixelgraph.json.gz",
+      "evidence_path": "evidence/WJPS-0048",
+      "runtime": {
+        "sequence": 308,
+        "source_record_id": "WJPS-0048",
+        "candidate_id": "WJPS-0048",
+        "pose_id": "WJPS-0048",
+        "semantic_id": "phazer_rear_walk_hover_frame_06",
+        "display_name": "Phazer Rear Walk Hover Frame 06",
+        "source_archive": "WizardJoePhazerSprites.zip",
+        "source_entry": "sheet-wizard-joe-w8.png#frame-06",
+        "source_sha256": "fe0882908c1b67498be2ae0e901143f197f4e68807027bdae56893b861a3b7d2",
+        "graph_path": "graphs/WJPS-0048.pixelgraph.json.gz",
+        "graph_sha256": "63177ec6c231306f986ca6445463a0860bf6b56da6d65c045363d2bcd75b6fe4",
+        "graph_id": "wjps-0048-pixelgraph-v1",
+        "frame": [
+          1254,
+          1254
+        ],
+        "source_size": [
+          282,
+          433
+        ],
+        "offset": [
+          486,
+          710
+        ],
+        "foreground_pixel_count": 67088,
+        "motion_family": "ground_to_air",
+        "contact_mode": "airborne",
+        "phase": {
+          "numerator": 6,
+          "denominator": 6
+        },
+        "direction": "north",
+        "authored_transition_neighbors": [
+          "phazer_rear_walk_hover_frame_05",
+          "phazer_rear_walk_hover_frame_01"
+        ],
+        "control_groups": [
+          "all",
+          "phazer",
+          "ground_to_air",
+          "clip:phazer_rear_walk_hover",
+          "pack:wizard_joe_phazer_sprites"
+        ],
+        "primary_for_semantic_id": true,
+        "silhouette_iou_millionths": 1000000,
+        "foreground_color_fidelity_millionths": 1000000,
+        "foreground_color_match_ratio_millionths": 1000000,
+        "exact_rgba_equal": true,
+        "rgba_mismatch_pixel_count": 0,
+        "rgba_mismatch_channel_count": 0,
+        "source_pack": "wizard_joe_phazer_sprites",
+        "category": "phazer_animation",
+        "anchor_kind": "body_center",
+        "anchor_x": 626,
+        "anchor_y": 926,
+        "evidence_path": "evidence/WJPS-0048"
+      }
+    }
+  ],
+  "clips": [
+    {
+      "clip_id": "phazer_side_walk_takeoff",
+      "display_name": "Phazer Side Walk Takeoff",
+      "family": "ground_to_air",
+      "direction": "east",
+      "playback_fps": 10,
+      "loopable": false,
+      "semantic_frames": [
+        "phazer_side_walk_takeoff_frame_01",
+        "phazer_side_walk_takeoff_frame_02",
+        "phazer_side_walk_takeoff_frame_03",
+        "phazer_side_walk_takeoff_frame_04",
+        "phazer_side_walk_takeoff_frame_05",
+        "phazer_side_walk_takeoff_frame_06"
+      ]
+    },
+    {
+      "clip_id": "phazer_side_run",
+      "display_name": "Phazer Side Run",
+      "family": "ground_run",
+      "direction": "east",
+      "playback_fps": 12,
+      "loopable": true,
+      "semantic_frames": [
+        "phazer_side_run_frame_01",
+        "phazer_side_run_frame_02",
+        "phazer_side_run_frame_03",
+        "phazer_side_run_frame_04",
+        "phazer_side_run_frame_05",
+        "phazer_side_run_frame_06"
+      ]
+    },
+    {
+      "clip_id": "phazer_side_leap",
+      "display_name": "Phazer Side Leap",
+      "family": "ground_to_air",
+      "direction": "east",
+      "playback_fps": 12,
+      "loopable": false,
+      "semantic_frames": [
+        "phazer_side_leap_frame_01",
+        "phazer_side_leap_frame_02",
+        "phazer_side_leap_frame_03",
+        "phazer_side_leap_frame_04",
+        "phazer_side_leap_frame_05",
+        "phazer_side_leap_frame_06"
+      ]
+    },
+    {
+      "clip_id": "phazer_side_wing_open",
+      "display_name": "Phazer Side Wing Open",
+      "family": "wing_deploy",
+      "direction": "east",
+      "playback_fps": 10,
+      "loopable": false,
+      "semantic_frames": [
+        "phazer_side_wing_open_frame_01",
+        "phazer_side_wing_open_frame_02",
+        "phazer_side_wing_open_frame_03",
+        "phazer_side_wing_open_frame_04",
+        "phazer_side_wing_open_frame_05",
+        "phazer_side_wing_open_frame_06"
+      ]
+    },
+    {
+      "clip_id": "phazer_side_flap_cycle",
+      "display_name": "Phazer Side Flap Cycle",
+      "family": "flight",
+      "direction": "east",
+      "playback_fps": 10,
+      "loopable": true,
+      "semantic_frames": [
+        "phazer_side_flap_cycle_frame_01",
+        "phazer_side_flap_cycle_frame_02",
+        "phazer_side_flap_cycle_frame_03",
+        "phazer_side_flap_cycle_frame_04",
+        "phazer_side_flap_cycle_frame_05",
+        "phazer_side_flap_cycle_frame_06"
+      ]
+    },
+    {
+      "clip_id": "phazer_side_flight_transition",
+      "display_name": "Phazer Side Flight Transition",
+      "family": "air_to_ground",
+      "direction": "east",
+      "playback_fps": 10,
+      "loopable": false,
+      "semantic_frames": [
+        "phazer_side_flight_transition_frame_01",
+        "phazer_side_flight_transition_frame_02",
+        "phazer_side_flight_transition_frame_03",
+        "phazer_side_flight_transition_frame_04",
+        "phazer_side_flight_transition_frame_05",
+        "phazer_side_flight_transition_frame_06"
+      ]
+    },
+    {
+      "clip_id": "phazer_front_walk_hover",
+      "display_name": "Phazer Front Walk Hover",
+      "family": "ground_to_air",
+      "direction": "south",
+      "playback_fps": 10,
+      "loopable": false,
+      "semantic_frames": [
+        "phazer_front_walk_hover_frame_01",
+        "phazer_front_walk_hover_frame_02",
+        "phazer_front_walk_hover_frame_03",
+        "phazer_front_walk_hover_frame_04",
+        "phazer_front_walk_hover_frame_05",
+        "phazer_front_walk_hover_frame_06"
+      ]
+    },
+    {
+      "clip_id": "phazer_rear_walk_hover",
+      "display_name": "Phazer Rear Walk Hover",
+      "family": "ground_to_air",
+      "direction": "north",
+      "playback_fps": 10,
+      "loopable": false,
+      "semantic_frames": [
+        "phazer_rear_walk_hover_frame_01",
+        "phazer_rear_walk_hover_frame_02",
+        "phazer_rear_walk_hover_frame_03",
+        "phazer_rear_walk_hover_frame_04",
+        "phazer_rear_walk_hover_frame_05",
+        "phazer_rear_walk_hover_frame_06"
+      ]
+    }
+  ]
+}

@@ -9,6 +9,7 @@ mod newsroom_admission;
 mod newsroom_layers;
 mod newsroom_promotion;
 mod overlay;
+mod phazer_sprites;
 mod pixel_graph;
 mod pixelgraph_promotion;
 mod production_alpha;
@@ -57,6 +58,11 @@ pub use newsroom_promotion::{
 pub use overlay::{
     build_transparent_overlay, composite_graph_over_source, OverlayCounts, OverlayPalette,
     TransparentOverlay,
+};
+pub use phazer_sprites::{
+    compile_phazer_sprite_archive, promote_phazer_sprite_archive, PhazerIntakeConfig,
+    PhazerIntakeError, PhazerIntakeReceipt, PhazerPromotionConfig, PhazerPromotionReceipt,
+    DEFAULT_PHAZER_ARCHIVE, PHAZER_ARCHIVE_SHA256, PHAZER_COMPILER_ID,
 };
 pub use pixel_graph::{
     build_exact_pixel_graph, normalize_to_frame, project_pixel_graph, read_pixel_graph,

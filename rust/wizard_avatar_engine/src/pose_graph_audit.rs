@@ -149,10 +149,16 @@ mod tests {
             catalog.manifest().verified_pose_count,
             crate::pose_graph_runtime::RUNTIME_POSE_GRAPH_COUNT
         );
-        assert_eq!(catalog.manifest().verified_pose_count, 260);
+        assert_eq!(
+            catalog.manifest().verified_pose_count,
+            crate::pose_graph_runtime::RUNTIME_POSE_GRAPH_COUNT
+        );
         assert_eq!(catalog.manifest().base_pose_count, 250);
         assert_eq!(catalog.manifest().forward_flight_count, 10);
-        assert_eq!(catalog.manifest().unique_semantic_pose_count, 260);
+        assert_eq!(
+            catalog.manifest().unique_semantic_pose_count,
+            crate::pose_graph_runtime::RUNTIME_UNIQUE_SEMANTIC_COUNT
+        );
         catalog
             .verify_runtime_files()
             .expect("all promoted graph hashes");

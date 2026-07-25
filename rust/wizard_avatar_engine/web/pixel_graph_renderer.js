@@ -4,7 +4,7 @@ const NEAR_DEPTH = 1.5;
 const FAR_DEPTH = 10.0;
 const CANONICAL_POSE_HEIGHT = 96;
 const CANONICAL_GRAPH_SIZE = 1254;
-const REPLACEMENT_POSE_COUNT = 260;
+const RUNTIME_POSE_COUNT = 308;
 
 function defaultCanvasFactory(width, height) {
   if (typeof OffscreenCanvas !== "undefined") return new OffscreenCanvas(width, height);
@@ -160,13 +160,13 @@ export class PixelGraphAvatarRenderer {
     const catalog = await response.json();
     if (
       catalog.schema_version !== 2 ||
-      catalog.verified_pose_count !== REPLACEMENT_POSE_COUNT ||
-      catalog.unique_semantic_pose_count !== REPLACEMENT_POSE_COUNT ||
+      catalog.verified_pose_count !== RUNTIME_POSE_COUNT ||
+      catalog.unique_semantic_pose_count !== RUNTIME_POSE_COUNT ||
       !Array.isArray(catalog.frame) ||
       catalog.frame[0] !== CANONICAL_GRAPH_SIZE ||
       catalog.frame[1] !== CANONICAL_GRAPH_SIZE ||
       !Array.isArray(catalog.entries) ||
-      catalog.entries.length !== REPLACEMENT_POSE_COUNT
+      catalog.entries.length !== RUNTIME_POSE_COUNT
     ) {
       throw new Error("Pose graph catalog is incomplete");
     }
@@ -177,7 +177,7 @@ export class PixelGraphAvatarRenderer {
       this.sourceEntries.set(entry.source_record_id, entry);
       if (entry.primary_for_semantic_id) this.primaryEntries.set(entry.semantic_id, entry);
     }
-    if (this.primaryEntries.size !== REPLACEMENT_POSE_COUNT) {
+    if (this.primaryEntries.size !== RUNTIME_POSE_COUNT) {
       throw new Error("Pose graph primary index is incomplete");
     }
     await this.loadPostCharacterCatalog();
