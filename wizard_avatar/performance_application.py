@@ -108,6 +108,21 @@ class PerformanceApplication:
         self.character_id = character_id
         self.package_digest = package_digest
         self.manifest_digest = manifest_digest
+        character_manifest = (
+            capability_manifest.get("character")
+            if isinstance(capability_manifest, Mapping)
+            else None
+        )
+        package_schema_version = (
+            character_manifest.get("package_schema_version")
+            if isinstance(character_manifest, Mapping)
+            else None
+        )
+        self.package_schema_version = (
+            package_schema_version
+            if type(package_schema_version) is int and package_schema_version > 0
+            else None
+        )
         self.score_repository = score_repository
         identity_bound = package_digest != _UNBOUND_DIGEST
         self.score_runtime = (
@@ -195,6 +210,18 @@ class PerformanceApplication:
                 identity_error,
             )
         ack = self.scheduler.accept_snapshot(snapshot, receipt_monotonic_us)
+        acceptance = self.scheduler.coordinator.last_acceptance
+        if (
+            acceptance is not None
+            and acceptance.snapshot is snapshot
+            and ack.disposition == "accepted"
+        ):
+            self.governed_speech.reconcile(
+                snapshot,
+                acceptance.reconciliation_generation,
+                hard_reconcile=acceptance.hard_reconcile,
+                clock_error_ms=acceptance.clock_error_ms,
+            )
         if self.score_runtime is None or ack.scheduler_state != "error":
             return ack
         runtime_code = self.score_runtime.result_for(snapshot).code
@@ -240,10 +267,12 @@ class PerformanceApplication:
         if snapshot.performance.character_id != self.character_id:
             return "character_mismatch"
         package_sha256 = snapshot.performance.character_package_sha256
-        if (
-            package_sha256 is None
-            and snapshot.performance.score_id is None
-        ):
+        legacy_wizard_scoreless = (
+            snapshot.performance.score_id is None
+            and self.character_id in {"wizard-joe", "wizard-joe-v1"}
+            and self.package_schema_version in {None, 1}
+        )
+        if package_sha256 is None and legacy_wizard_scoreless:
             return None
         if package_sha256 != self.package_digest:
             return "package_mismatch"
@@ -450,6 +479,16 @@ class PerformanceApplication:
         self.governed_speech.revoke(generation)
         self._release_owned_state(controller)
         self._orient_toward_viewer_after_interruption(controller)
+
+    def interrupt_governed_speech(
+        self,
+        expected_speech_id: Optional[str],
+        controller: WizardAvatarController,
+    ) -> bool:
+        interrupted = self.governed_speech.interrupt(expected_speech_id)
+        if interrupted:
+            self._release_owned_state(controller)
+        return interrupted
 
     def accept_permission_world(
         self,
@@ -690,6 +729,12 @@ class PerformanceApplication:
 
         self._release_scripted_locomotion(controller)
         body_allowed = speech_authorized and self._body_available(controller)
+        whole_pose_speech = bool(
+            governed is not None
+            and speaking
+            and self.runtime_profile is not None
+            and self.runtime_profile.speech_pose_map
+        )
         self._application_suppressions = self._apply_stage_and_gaze(
             controller,
             resolved,
@@ -699,7 +744,15 @@ class PerformanceApplication:
         action: Optional[str] = None
         if body_allowed:
             self._suspend_prism_channels(controller, ("action",))
-            if resolved.motion_profile is AccessibilityMotionProfile.FULL:
+            if whole_pose_speech:
+                self._release_body_projection(controller)
+                self._application_suppressions += (
+                    {
+                        "channel": "body",
+                        "reason_code": "whole_pose_speech_authority",
+                    },
+                )
+            elif resolved.motion_profile is AccessibilityMotionProfile.FULL:
                 action = self._resolve_action(
                     snapshot,
                     resolved,

@@ -25,6 +25,8 @@
     "approval_id": {"$ref": "#/$defs/id"},
     "turn_id": {"$ref": "#/$defs/id"},
     "reply_sha256": {"$ref": "#/$defs/hash"},
+    "persona_id": {"$ref": "#/$defs/id"},
+    "voice_id": {"$ref": "#/$defs/id"},
     "speech_media": {"$ref": "#/$defs/speech_media"},
     "performance_context_sha256": {"$ref": "#/$defs/hash"},
     "character_id": {"$ref": "#/$defs/id"},

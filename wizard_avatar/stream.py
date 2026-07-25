@@ -803,6 +803,16 @@ class WizardFrameHub:
                 envelope.command_id,
                 self._controller_command_type(envelope.kind),
             )
+            if command_type == "speech_stop":
+                expected_speech_id = envelope.payload.get("speech_id")
+                self.performance.interrupt_governed_speech(
+                    (
+                        None
+                        if expected_speech_id is None
+                        else str(expected_speech_id)
+                    ),
+                    controller,
+                )
             result = controller.apply_command(
                 WizardCommand(command_type, dict(envelope.payload))
             )

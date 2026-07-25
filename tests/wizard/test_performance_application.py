@@ -135,7 +135,7 @@ class PerformanceApplicationTests(unittest.TestCase):
         self.assertEqual(ack.disposition, "accepted")
         self.assertIs(application.scheduler.coordinator.accepted_snapshot, snapshot)
 
-    def test_package_bound_runtime_preserves_scoreless_v1_without_package_digest(self):
+    def test_non_wizard_package_bound_runtime_rejects_scoreless_snapshot_without_package_digest(self):
         package_digest = "sha256:" + "a" * 64
         application = PerformanceApplication(
             "serena-runtime-test",
@@ -149,10 +149,10 @@ class PerformanceApplicationTests(unittest.TestCase):
         prepared = application.prepare_snapshot(snapshot)
         ack = application.accept_snapshot(snapshot, 0)
 
-        self.assertEqual(prepared.code, "scoreless_v1")
-        self.assertEqual(ack.disposition, "accepted")
-        self.assertEqual(ack.scheduler_state, "scoreless")
-        self.assertIs(application.scheduler.coordinator.accepted_snapshot, snapshot)
+        self.assertEqual(prepared.code, "score_admission_mismatch")
+        self.assertEqual(ack.disposition, "rejected")
+        self.assertEqual(ack.error_code, "package_mismatch")
+        self.assertIsNone(application.scheduler.coordinator.accepted_snapshot)
 
     def test_package_bound_runtime_rejects_scored_snapshot_without_package_digest(self):
         package_digest = "sha256:" + "a" * 64

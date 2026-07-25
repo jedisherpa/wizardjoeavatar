@@ -45,6 +45,12 @@ _PENDING_ACTION_POSTURES = frozenset(
     {"none", "not_required", "pending", "approved", "denied", "stale", "failed"}
 )
 _REQUIRED_SINKS = ("animation", "speech", "text")
+_CANONICAL_PERSONA_CHARACTER_BINDINGS = {
+    "serena-quill": (
+        "serena-quill-v1",
+        "sha256:30b5540c8d13cf579776961ce1b31839513a4e184355ec7a35cd16b4a98bc4e5",
+    ),
+}
 
 
 class GovernedSpeechError(ValueError):
@@ -294,6 +300,7 @@ class _ActiveGovernedSpeech:
     alignment: VoiceAlignmentV1
     presentation: VoicePresentationTrackV1
     expires_at_monotonic_us: int
+    reconciliation_generation: int
 
 
 class GovernedSpeechRuntime:
@@ -356,6 +363,37 @@ class GovernedSpeechRuntime:
             raise _error("package_mismatch", "$.performance_context.character")
         if alignment.approved_content_sha256 != approval.reply_sha256:
             raise _error("content_mismatch", "$.alignment.approved_content_sha256")
+        if character_id != "wizard-joe" and approval.persona_id is None:
+            raise _error("missing_persona_identity", "$.approval.persona_id")
+        if character_id != "wizard-joe" and approval.voice_id is None:
+            raise _error("missing_voice_identity", "$.approval.voice_id")
+        if approval.voice_id is not None and approval.voice_id != alignment.voice_id:
+            raise _error("voice_mismatch", "$.approval.voice_id")
+        canonical_binding = (
+            None
+            if approval.persona_id is None
+            else _CANONICAL_PERSONA_CHARACTER_BINDINGS.get(approval.persona_id)
+        )
+        canonical_persona_for_character = next(
+            (
+                persona_id
+                for persona_id, (bound_character_id, _bound_package_digest)
+                in _CANONICAL_PERSONA_CHARACTER_BINDINGS.items()
+                if bound_character_id == character_id
+            ),
+            None,
+        )
+        if (
+            canonical_binding is not None
+            and canonical_binding != (character_id, package_digest)
+        ) or (
+            canonical_persona_for_character is not None
+            and approval.persona_id != canonical_persona_for_character
+        ):
+            raise _error(
+                "persona_character_binding_mismatch",
+                "$.approval.persona_id",
+            )
         if alignment.approved_text_length != len(registration.approved_text):
             raise _error("text_length_mismatch", "$.alignment.approved_text_length")
         if alignment.media_id != snapshot.media.media_id or alignment.media_sha256 != snapshot.media.media_sha256:
@@ -397,15 +435,65 @@ class GovernedSpeechRuntime:
             alignment,
             presentation,
             now_monotonic_us + remaining_ms * 1000,
+            reconciliation_generation,
         )
         self._last_code = "release_active"
+
+    def reconcile(
+        self,
+        snapshot: MediaSessionSnapshotV1,
+        reconciliation_generation: int,
+        *,
+        hard_reconcile: bool,
+        clock_error_ms: Optional[int],
+    ) -> None:
+        active = self._active
+        if active is None or reconciliation_generation == active.reconciliation_generation:
+            return
+        context = active.context
+        same_binding = (
+            snapshot.connector_session_id == context.source.connector_session_id
+            and snapshot.media_epoch == context.source.media_epoch
+            and snapshot.media.media_id == context.source.media_id
+            and snapshot.media.media_sha256 == context.source.media_sha256
+            and snapshot.media.source_slot == "speech"
+        )
+        bounded_clock_transition = (
+            snapshot.cause in {"play", "playing", "pause", "waiting", "stalled"}
+            and (clock_error_ms is None or abs(clock_error_ms) <= 100)
+        )
+        explicit_timeline_transition = snapshot.cause in {
+            "ratechange",
+            "seeked",
+            "seeking",
+        }
+        lifecycle_transition = same_binding and (
+            bounded_clock_transition or explicit_timeline_transition
+        )
+        if reconciliation_generation < active.reconciliation_generation or (
+            hard_reconcile and not lifecycle_transition
+        ):
+            self.clear("reconciliation_changed")
+            return
+        if not same_binding:
+            self.clear("binding_changed")
+            return
+        self._active = _ActiveGovernedSpeech(
+            active.approved_text,
+            active.approval,
+            active.context,
+            active.alignment,
+            active.presentation,
+            active.expires_at_monotonic_us,
+            reconciliation_generation,
+        )
 
     def evaluate(
         self,
         snapshot: MediaSessionSnapshotV1,
         media_time_ms: int,
         now_monotonic_us: int,
-        _reconciliation_generation: int,
+        reconciliation_generation: int,
     ) -> Optional[GovernedSpeechEvaluationV1]:
         active = self._active
         if active is None:
@@ -415,7 +503,8 @@ class GovernedSpeechRuntime:
             return None
         context = active.context
         if (
-            snapshot.connector_session_id != context.source.connector_session_id
+            reconciliation_generation != active.reconciliation_generation
+            or snapshot.connector_session_id != context.source.connector_session_id
             or snapshot.media_epoch != context.source.media_epoch
             or snapshot.media.media_id != context.source.media_id
             or snapshot.media.media_sha256 != context.source.media_sha256
@@ -442,6 +531,18 @@ class GovernedSpeechRuntime:
             speech_id=active.alignment.speech_id,
         )
 
+    def interrupt(self, expected_speech_id: Optional[str] = None) -> bool:
+        active = self._active
+        if active is None:
+            return False
+        if (
+            expected_speech_id is not None
+            and str(expected_speech_id) != active.alignment.speech_id
+        ):
+            return False
+        self.clear("speech_interrupted")
+        return True
+
     def revoke(self, generation: int) -> None:
         generation = _integer(generation, "$.revocation_generation")
         if generation <= self._revocation_generation:
@@ -458,8 +559,17 @@ class GovernedSpeechRuntime:
         return {
             "active": active is not None,
             "status": self._last_code,
+            "approval_id": (
+                None if active is None else active.approval.approval_id
+            ),
+            "approval_sha256": (
+                None if active is None else active.approval.approval_sha256
+            ),
             "approval_hash_prefix": (
                 None if active is None else active.approval.approval_sha256[7:19]
+            ),
+            "alignment_sha256": (
+                None if active is None else active.alignment.alignment_sha256
             ),
             "alignment_hash_prefix": (
                 None if active is None else active.alignment.alignment_sha256[7:19]
@@ -467,10 +577,38 @@ class GovernedSpeechRuntime:
             "mouth_presentation_policy": (
                 None if active is None else "presentation_stabilized_v1"
             ),
+            "turn_id": (
+                None if active is None else active.approval.turn_id
+            ),
+            "turn_sha256": (
+                None
+                if active is None
+                else sha256_ref(active.approval.turn_id.encode("utf-8"))
+            ),
             "turn_hash_prefix": (
                 None
                 if active is None
                 else sha256_ref(active.approval.turn_id.encode("utf-8"))[7:19]
+            ),
+            "speech_id": (
+                None if active is None else active.alignment.speech_id
+            ),
+            "character_id": (
+                None if active is None else active.context.character.character_id
+            ),
+            "package_digest": (
+                None if active is None else active.context.character.package_digest
+            ),
+            "media_id": (
+                None if active is None else active.alignment.media_id
+            ),
+            "media_sha256": (
+                None if active is None else active.alignment.media_sha256
+            ),
+            "reconciliation_generation": (
+                None
+                if active is None
+                else active.reconciliation_generation
             ),
             "revocation_generation": self._revocation_generation,
             "replay_approval_count": self.gate.replay_approval_count,

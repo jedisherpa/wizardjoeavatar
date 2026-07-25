@@ -199,7 +199,7 @@ class GovernedSpeechReleaseTests(unittest.TestCase):
         )
         self.assertIn(self.controller.state.action, {"speaking", "explaining"})
 
-    def test_pause_seek_and_replay_reproject_text_and_mouth_from_media_time(self):
+    def test_pause_resume_and_seek_reproject_from_one_authoritative_media_timeline(self):
         self.application.register_governed_speech(
             self.registration(),
             now_wall_ms=1_100,
@@ -223,13 +223,13 @@ class GovernedSpeechReleaseTests(unittest.TestCase):
         self.assertNotEqual(self.controller.state.mouth, "smile")
 
         self.application.accept_snapshot(
-            speech_snapshot(3, "playing", 2_000, cause="seeked"),
+            speech_snapshot(3, "playing", 400, cause="play"),
             2_100_000,
         )
-        seeked = self.application.apply(self.controller, 2_100_000)
+        resumed = self.application.apply(self.controller, 2_100_000)
         self.assertEqual(
-            (seeked.media_time_ms, self.controller.state.speech_text, self.controller.state.mouth),
-            (2_000, TEXT, "open_medium"),
+            (resumed.media_time_ms, self.controller.state.speech_text, self.controller.state.mouth),
+            (400, "Hello", "smile"),
         )
         self.assertEqual(
             self.application.governed_speech.diagnostics()["mouth_presentation_policy"],
@@ -237,18 +237,93 @@ class GovernedSpeechReleaseTests(unittest.TestCase):
         )
 
         self.application.accept_snapshot(
-            speech_snapshot(4, "playing", 400, cause="seeked"),
+            speech_snapshot(4, "playing", 2_000, cause="seeked"),
             2_600_000,
         )
-        replayed = self.application.apply(self.controller, 2_600_000)
+        seeked = self.application.apply(self.controller, 2_600_000)
         self.assertEqual(
             (
-                replayed.media_time_ms,
+                seeked.media_time_ms,
                 self.controller.state.speech_text,
                 self.controller.state.mouth,
             ),
-            (400, "Hello", "smile"),
+            (2_000, "Hello quiet world.", "open_medium"),
         )
+        self.assertEqual(
+            self.application.governed_speech.diagnostics()["status"],
+            "release_active",
+        )
+
+    def test_registration_receipt_exposes_exact_content_free_correlations(self):
+        registration = self.registration()
+        self.application.register_governed_speech(
+            registration,
+            now_wall_ms=1_100,
+            now_monotonic_us=1_020_000,
+        )
+
+        receipt = self.application.governed_speech.diagnostics()
+
+        self.assertEqual(receipt["status"], "release_active")
+        self.assertEqual(receipt["approval_id"], registration.approval.approval_id)
+        self.assertEqual(
+            receipt["approval_sha256"],
+            registration.approval.approval_sha256,
+        )
+        self.assertEqual(
+            receipt["alignment_sha256"],
+            registration.alignment.alignment_sha256,
+        )
+        self.assertEqual(receipt["turn_id"], registration.approval.turn_id)
+        self.assertEqual(receipt["speech_id"], registration.alignment.speech_id)
+        self.assertEqual(receipt["character_id"], "wizard-joe")
+        self.assertEqual(receipt["package_digest"], PACKAGE_DIGEST)
+        self.assertEqual(receipt["media_id"], MEDIA_ID)
+        self.assertEqual(receipt["media_sha256"], MEDIA_DIGEST)
+        self.assertEqual(
+            receipt["reconciliation_generation"],
+            self.context.runtime.reconciliation_generation,
+        )
+        self.assertEqual(
+            receipt["mouth_presentation_policy"],
+            "presentation_stabilized_v1",
+        )
+        self.assertNotIn(TEXT, json.dumps(receipt))
+
+    def test_expected_speech_id_guards_governed_interruption(self):
+        self.application.register_governed_speech(
+            self.registration(),
+            now_wall_ms=1_100,
+            now_monotonic_us=1_020_000,
+        )
+        self.application.accept_snapshot(
+            speech_snapshot(1, "playing", 0),
+            1_100_000,
+        )
+        self.application.apply(self.controller, 1_500_000)
+
+        self.assertFalse(
+            self.application.interrupt_governed_speech(
+                "speech:stale",
+                self.controller,
+            )
+        )
+        self.assertTrue(self.application.governed_speech.diagnostics()["active"])
+        self.assertEqual(self.controller.state.speech_id, "speech:turn-0042")
+
+        self.assertTrue(
+            self.application.interrupt_governed_speech(
+                "speech:turn-0042",
+                self.controller,
+            )
+        )
+        self.assertFalse(self.application.governed_speech.diagnostics()["active"])
+        self.assertEqual(
+            self.application.governed_speech.diagnostics()["status"],
+            "speech_interrupted",
+        )
+        self.assertIsNone(self.controller.state.speech_id)
+        self.assertIsNone(self.controller.state.speech_text)
 
     def test_unapproved_speech_is_audible_clock_only_and_cannot_animate(self):
         self.application.accept_snapshot(speech_snapshot(1, "playing", 0), 1_100_000)
@@ -385,6 +460,15 @@ class GovernedSpeechReleaseTests(unittest.TestCase):
                 ),
             ),
             (
+                "voice_mismatch",
+                self.registration(
+                    approval_overrides={
+                        "persona_id": "persona:wizard-joe",
+                        "voice_id": "voice:other",
+                    }
+                ),
+            ),
+            (
                 "speech_media_mismatch",
                 self.registration(
                     approval_overrides={
@@ -449,7 +533,7 @@ class GovernedSpeechReleaseTests(unittest.TestCase):
         self.assertEqual(self.controller.state.mouth, "closed")
         self.assertEqual(
             self.application.governed_speech.diagnostics()["status"],
-            "binding_changed",
+            "reconciliation_changed",
         )
 
     def test_revocation_and_exact_expiry_release_owned_state(self):
@@ -462,10 +546,21 @@ class GovernedSpeechReleaseTests(unittest.TestCase):
         self.application.apply(self.controller, 1_500_000)
         self.assertEqual(self.controller.state.speech_text, "Hello")
 
-        self.application.accept_snapshot(
-            speech_snapshot(2, "playing", 3_700, cause="heartbeat"),
-            4_800_000,
-        )
+        for sequence, position_ms, receipt_us in (
+            (2, 900, 2_000_000),
+            (3, 1_900, 3_000_000),
+            (4, 2_900, 4_000_000),
+            (5, 3_700, 4_800_000),
+        ):
+            self.application.accept_snapshot(
+                speech_snapshot(
+                    sequence,
+                    "playing",
+                    position_ms,
+                    cause="heartbeat",
+                ),
+                receipt_us,
+            )
         before_expiry = self.application.apply(self.controller, 4_919_999)
         self.assertTrue(before_expiry.active)
         self.assertTrue(self.application.governed_speech.diagnostics()["active"])

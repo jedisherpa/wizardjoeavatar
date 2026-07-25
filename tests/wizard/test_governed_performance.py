@@ -83,6 +83,30 @@ class GovernedPerformanceApprovalTests(unittest.TestCase):
         tampered["turn_id"] = "turn:0043"
         self.assert_code("hash_mismatch", tampered)
 
+    def test_persona_and_voice_are_optional_for_legacy_wizard_but_hash_sealed_when_present(self):
+        legacy = approval()
+        identified = approval(
+            persona_id="persona:wizard-joe",
+            voice_id="voice:wizard-joe-v1",
+        )
+
+        self.assertIsNone(legacy.persona_id)
+        self.assertIsNone(legacy.voice_id)
+        self.assertNotIn("persona_id", legacy.to_dict())
+        self.assertNotIn("voice_id", legacy.to_dict())
+        self.assertEqual(identified.persona_id, "persona:wizard-joe")
+        self.assertEqual(identified.voice_id, "voice:wizard-joe-v1")
+        self.assertNotEqual(identified.approval_sha256, legacy.approval_sha256)
+
+        for field, value in (
+            ("persona_id", "persona:other"),
+            ("voice_id", "voice:other"),
+        ):
+            with self.subTest(field=field):
+                tampered = identified.to_dict()
+                tampered[field] = value
+                self.assert_code("hash_mismatch", tampered)
+
     def test_unknown_missing_float_duplicate_and_bad_version_fail_closed(self):
         value = approval().to_dict()
         value["unexpected"] = True
@@ -172,6 +196,10 @@ class GovernedPerformanceApprovalTests(unittest.TestCase):
         schema = json.loads(SCHEMA_PATH.read_text(encoding="utf-8"))
         self.assertEqual(schema["$schema"], "https://json-schema.org/draft/2020-12/schema")
         self.assertEqual(schema["properties"]["schema_version"]["const"], 1)
+        self.assertIn("persona_id", schema["properties"])
+        self.assertIn("voice_id", schema["properties"])
+        self.assertNotIn("persona_id", schema["required"])
+        self.assertNotIn("voice_id", schema["required"])
 
         def inspect(node):
             if isinstance(node, dict):

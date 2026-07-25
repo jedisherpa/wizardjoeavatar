@@ -45,6 +45,7 @@ _KNOWN_FIELDS = frozenset(
         "issued_at_ms",
         "kind",
         "package_digest",
+        "persona_id",
         "performance_context_sha256",
         "reconciliation_generation",
         "reply_sha256",
@@ -53,6 +54,7 @@ _KNOWN_FIELDS = frozenset(
         "sha256",
         "speech_media",
         "turn_id",
+        "voice_id",
     }
 )
 
@@ -82,6 +84,20 @@ def _exact(value: Mapping[str, object], fields: Sequence[str], path: str) -> Non
     if expected - set(value):
         raise _error("missing_field", "object is missing required fields", path)
     if set(value) - expected:
+        raise _error("unknown_field", "object contains unknown fields", path)
+
+
+def _required_and_optional(
+    value: Mapping[str, object],
+    required: Sequence[str],
+    optional: Sequence[str],
+    path: str,
+) -> None:
+    required_fields = set(required)
+    allowed_fields = required_fields | set(optional)
+    if required_fields - set(value):
+        raise _error("missing_field", "object is missing required fields", path)
+    if set(value) - allowed_fields:
         raise _error("unknown_field", "object contains unknown fields", path)
 
 
@@ -257,6 +273,8 @@ class GovernedPerformanceApprovalV1:
     approval_id: str
     turn_id: str
     reply_sha256: str
+    persona_id: Optional[str]
+    voice_id: Optional[str]
     speech_media: SpeechMediaBindingV1
     performance_context_sha256: str
     character_id: str
@@ -268,7 +286,7 @@ class GovernedPerformanceApprovalV1:
     reconciliation_generation: int
     approval_sha256: str
 
-    _CONTENT_FIELDS = (
+    _REQUIRED_CONTENT_FIELDS = (
         "schema_version",
         "approval_id",
         "turn_id",
@@ -283,14 +301,24 @@ class GovernedPerformanceApprovalV1:
         "revocation_generation",
         "reconciliation_generation",
     )
+    _OPTIONAL_CONTENT_FIELDS = ("persona_id", "voice_id")
 
     @classmethod
     def build(cls, raw: Mapping[str, object]) -> "GovernedPerformanceApprovalV1":
         value = _mapping(raw, "$")
         _reject_private_content(value)
         _check_json_value(value)
-        _exact(value, cls._CONTENT_FIELDS, "$")
-        payload = {field: value[field] for field in cls._CONTENT_FIELDS}
+        _required_and_optional(
+            value,
+            cls._REQUIRED_CONTENT_FIELDS,
+            cls._OPTIONAL_CONTENT_FIELDS,
+            "$",
+        )
+        payload = {
+            field: value[field]
+            for field in cls._REQUIRED_CONTENT_FIELDS + cls._OPTIONAL_CONTENT_FIELDS
+            if field in value
+        }
         payload["approval_sha256"] = sha256_ref(canonical_json_v1(payload))
         return cls.from_mapping(payload)
 
@@ -303,7 +331,12 @@ class GovernedPerformanceApprovalV1:
         value = _mapping(raw, "$")
         _reject_private_content(value)
         _check_json_value(value)
-        _exact(value, cls._CONTENT_FIELDS + ("approval_sha256",), "$")
+        _required_and_optional(
+            value,
+            cls._REQUIRED_CONTENT_FIELDS + ("approval_sha256",),
+            cls._OPTIONAL_CONTENT_FIELDS,
+            "$",
+        )
 
         version = value["schema_version"]
         if type(version) is not int:
@@ -331,6 +364,8 @@ class GovernedPerformanceApprovalV1:
             _identifier(value["approval_id"], "$.approval_id"),
             _identifier(value["turn_id"], "$.turn_id"),
             _hash(value["reply_sha256"], "$.reply_sha256"),
+            _optional_identifier(value.get("persona_id"), "$.persona_id"),
+            _optional_identifier(value.get("voice_id"), "$.voice_id"),
             SpeechMediaBindingV1.from_mapping(value["speech_media"]),
             _hash(value["performance_context_sha256"], "$.performance_context_sha256"),
             _identifier(value["character_id"], "$.character_id"),
@@ -375,7 +410,7 @@ class GovernedPerformanceApprovalV1:
         return canonical_json_v1(self.to_dict())
 
     def to_dict(self) -> Dict[str, object]:
-        return {
+        value = {
             "schema_version": self.schema_version,
             "approval_id": self.approval_id,
             "turn_id": self.turn_id,
@@ -391,6 +426,11 @@ class GovernedPerformanceApprovalV1:
             "reconciliation_generation": self.reconciliation_generation,
             "approval_sha256": self.approval_sha256,
         }
+        if self.persona_id is not None:
+            value["persona_id"] = self.persona_id
+        if self.voice_id is not None:
+            value["voice_id"] = self.voice_id
+        return value
 
 
 @dataclass(frozen=True)

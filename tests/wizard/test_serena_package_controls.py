@@ -2,8 +2,25 @@ import unittest
 from pathlib import Path
 
 from wizard_avatar.frame_source import ProceduralWizardFrameSource
+from wizard_avatar.governed_performance import GovernedPerformanceApprovalV1
+from wizard_avatar.media_session import MediaSessionSnapshotV1
 from wizard_avatar.models import STAFF_STATES, WizardCommand
+from wizard_avatar.performance_release import (
+    GovernedSpeechError,
+    GovernedSpeechRegistrationV1,
+    PerformanceContextRequestV1,
+)
 from wizard_avatar.stream import WizardFrameHub
+
+from tests.wizard.test_media_session import snapshot_mapping
+from tests.wizard.test_performance_release import (
+    MEDIA_DIGEST,
+    MEDIA_ID,
+    TEXT,
+    alignment_mapping,
+    context_request_mapping,
+    text_digest,
+)
 
 
 SERENA_PACKAGE_PATH = (
@@ -236,6 +253,167 @@ class SerenaPackageControlTests(unittest.IsolatedAsyncioTestCase):
 
         self.assertEqual(source.controller.state.action, "idle")
         self.assertIsNone(hub.performance._last_applied_action)
+        await hub.stop()
+
+    async def test_governed_speech_viseme_owns_serenas_whole_pose(self):
+        source = self.create_source()
+        hub = WizardFrameHub(source)
+        performance = hub.performance
+        package_digest = performance.package_digest
+        character_id = performance.character_id
+        pending = snapshot_mapping(
+            sequence=0,
+            media_epoch=4,
+            state="paused",
+            position_ms=0,
+            source_slot="speech",
+            kind="tts",
+            media_id=MEDIA_ID,
+            mode="speech",
+            with_hashes=True,
+        )
+        pending["performance"].update(
+            {
+                "score_id": None,
+                "score_revision": None,
+                "score_sha256": None,
+                "character_id": character_id,
+                "character_package_sha256": package_digest,
+            }
+        )
+        pending_snapshot = MediaSessionSnapshotV1.from_mapping(pending)
+        self.assertEqual(
+            performance.accept_snapshot(pending_snapshot, 1_000_000).disposition,
+            "accepted",
+        )
+        context = performance.capture_performance_context(
+            PerformanceContextRequestV1.from_mapping(context_request_mapping()),
+            source.controller,
+            1_010_000,
+        )
+        alignment = alignment_mapping()
+        approval_content = {
+            "schema_version": 1,
+            "approval_id": "approval:serena-turn-0042",
+            "turn_id": "turn:0042",
+            "reply_sha256": text_digest(),
+            "speech_media": {
+                "kind": "speech",
+                "identity": alignment["speech_id"],
+                "sha256": MEDIA_DIGEST,
+            },
+            "performance_context_sha256": context.context_sha256,
+            "character_id": character_id,
+            "package_digest": package_digest,
+            "allowed_sinks": ["animation", "speech", "text"],
+            "issued_at_ms": 1_000,
+            "expires_at_ms": 5_000,
+            "revocation_generation": 0,
+            "reconciliation_generation": (
+                context.runtime.reconciliation_generation
+            ),
+        }
+        legacy_approval = GovernedPerformanceApprovalV1.build(approval_content)
+        legacy_registration = GovernedSpeechRegistrationV1.from_mapping(
+            {
+                "schema_version": 1,
+                "approved_text": TEXT,
+                "approval": legacy_approval.to_dict(),
+                "performance_context": context.to_dict(),
+                "alignment": alignment,
+            }
+        )
+        with self.assertRaises(GovernedSpeechError) as missing_persona:
+            performance.register_governed_speech(
+                legacy_registration,
+                now_wall_ms=1_100,
+                now_monotonic_us=1_020_000,
+            )
+        self.assertEqual(
+            missing_persona.exception.code,
+            "missing_persona_identity",
+        )
+
+        mismatched_approval = GovernedPerformanceApprovalV1.build(
+            {
+                **approval_content,
+                "persona_id": "persona:other",
+                "voice_id": alignment["voice_id"],
+            }
+        )
+        mismatched_registration = GovernedSpeechRegistrationV1.from_mapping(
+            {
+                "schema_version": 1,
+                "approved_text": TEXT,
+                "approval": mismatched_approval.to_dict(),
+                "performance_context": context.to_dict(),
+                "alignment": alignment,
+            }
+        )
+        with self.assertRaises(GovernedSpeechError) as identity_mismatch:
+            performance.register_governed_speech(
+                mismatched_registration,
+                now_wall_ms=1_100,
+                now_monotonic_us=1_020_000,
+            )
+        self.assertEqual(
+            identity_mismatch.exception.code,
+            "persona_character_binding_mismatch",
+        )
+
+        approval = GovernedPerformanceApprovalV1.build(
+            {
+                **approval_content,
+                "persona_id": "serena-quill",
+                "voice_id": alignment["voice_id"],
+            }
+        )
+        registration = GovernedSpeechRegistrationV1.from_mapping(
+            {
+                "schema_version": 1,
+                "approved_text": TEXT,
+                "approval": approval.to_dict(),
+                "performance_context": context.to_dict(),
+                "alignment": alignment,
+            }
+        )
+        performance.register_governed_speech(
+            registration,
+            now_wall_ms=1_100,
+            now_monotonic_us=1_020_000,
+        )
+        playing = dict(pending)
+        playing["sequence"] = 1
+        playing["cause"] = "playing"
+        playing["playback"] = dict(playing["playback"])
+        playing["playback"]["state"] = "playing"
+        playing_snapshot = MediaSessionSnapshotV1.from_mapping(playing)
+        performance.accept_snapshot(playing_snapshot, 1_100_000)
+
+        source.controller.state.pose_override_id = "mentoring_invitation"
+        performance._last_applied_pose = "mentoring_invitation"
+        result = performance.apply(source.controller, 1_500_000)
+        source.resolve_authoritative_animation_state()
+        source.controller.advance_tick()
+        performance.apply(source.controller, 1_516_667)
+        source.resolve_authoritative_animation_state()
+
+        self.assertTrue(result.active)
+        self.assertEqual(source.controller.state.speech_id, "speech:turn-0042")
+        self.assertEqual(source.controller.state.mouth, "smile")
+        self.assertIsNone(source.controller.state.pose_override_id)
+        self.assertEqual(
+            source.controller.state.pose_id,
+            "viseme_smile_speaking",
+        )
+        self.assertEqual(
+            source.controller.state.animation_node_id,
+            "node_viseme_smile_speaking",
+        )
+        self.assertIn(
+            "whole_pose_speech_authority",
+            source.controller.state.performance_suppression_codes,
+        )
         await hub.stop()
 
 

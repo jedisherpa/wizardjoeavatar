@@ -8,6 +8,7 @@ from wizard_avatar.governed_performance import GovernedPerformanceApprovalV1
 from wizard_avatar.media_session import MEDIA_SESSION_MAX_BODY_BYTES
 from wizard_avatar.performance_release import GOVERNED_SPEECH_MAX_BODY_BYTES
 from wizard_avatar.server import create_app
+from wizard_avatar.voice_alignment import VoiceAlignmentV1
 
 from tests.wizard.test_media_session import snapshot_mapping
 from tests.wizard.test_media_session_server import asgi_request
@@ -266,6 +267,8 @@ class GovernedSpeechServerTests(unittest.IsolatedAsyncioTestCase):
                     "approval_id": "approval:server-turn-0042",
                     "turn_id": "turn:0042",
                     "reply_sha256": alignment_mapping()["approved_content_sha256"],
+                    "persona_id": "persona:wizard-joe",
+                    "voice_id": alignment_mapping()["voice_id"],
                     "speech_media": {
                         "kind": "speech",
                         "identity": "speech:turn-0042",
@@ -329,6 +332,39 @@ class GovernedSpeechServerTests(unittest.IsolatedAsyncioTestCase):
             )
             self.assertEqual(register_status, 200)
             self.assertTrue(registered["active"])
+            self.assertEqual(registered["status"], "release_active")
+            self.assertEqual(registered["approval_id"], approval.approval_id)
+            self.assertEqual(
+                registered["approval_sha256"],
+                approval.approval_sha256,
+            )
+            self.assertEqual(
+                registered["alignment_sha256"],
+                VoiceAlignmentV1.from_mapping(
+                    registration["alignment"]
+                ).alignment_sha256,
+            )
+            self.assertEqual(registered["turn_id"], approval.turn_id)
+            self.assertEqual(registered["speech_id"], "speech:turn-0042")
+            self.assertEqual(registered["character_id"], character_id)
+            self.assertEqual(registered["package_digest"], package_digest)
+            self.assertEqual(registered["media_id"], MEDIA_ID)
+            self.assertEqual(
+                registered["media_sha256"],
+                registration["alignment"]["media_sha256"],
+            )
+            self.assertEqual(
+                registered["reconciliation_generation"],
+                context["runtime"]["reconciliation_generation"],
+            )
+            self.assertEqual(
+                registered["revocation_generation"],
+                approval.revocation_generation,
+            )
+            self.assertEqual(
+                registered["mouth_presentation_policy"],
+                "presentation_stabilized_v1",
+            )
             self.assertNotIn(TEXT, json.dumps(registered))
 
             replay_status, replay = await asgi_request(
@@ -340,6 +376,18 @@ class GovernedSpeechServerTests(unittest.IsolatedAsyncioTestCase):
             )
             self.assertEqual(replay_status, 400)
             self.assertEqual(replay["detail"]["code"], "replay_detected")
+
+            stop_status, stopped = await asgi_request(
+                app,
+                "POST",
+                "/api/avatar/wizard/speech-stop",
+                json.dumps({"speech_id": "speech:turn-0042"}).encode("utf-8"),
+                (("content-type", "application/json"),),
+            )
+            self.assertEqual(stop_status, 200, stopped)
+            governed = app.state.frame_hub.performance.governed_speech.diagnostics()
+            self.assertFalse(governed["active"])
+            self.assertEqual(governed["status"], "speech_interrupted")
 
             revoke_status, revoked = await asgi_request(
                 app,
