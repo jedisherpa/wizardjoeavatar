@@ -89,6 +89,8 @@ and terminates both child runtimes when it stops.
   admission findings plus the bounded Serena G1 plan.
 - `reviews/SERENA_G1_SCORE_IDENTITY_TECHNICAL_REVIEW_2026-07-24.md`: independent
   acceptance of mutation-free identity checks and canonical score admission.
+- `SERENA_G1_CROSS_REPOSITORY_RECEIPT_2026-07-24.md`: paired Python and Prism
+  commit, review, verification, and protected-runtime publication receipt.
 - `GAZE_SETTLE_CONTINUITY.md`: eye-lead, target-arrival re-centering, stable
   fixation, focused tests, and clean runtime evidence.
 - `SPEECH_MOUTH_AUTHORITY.md`: aligned-versus-local mouth ownership,
