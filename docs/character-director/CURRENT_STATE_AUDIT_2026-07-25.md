@@ -117,28 +117,26 @@ implemented-but-not-visually-verified rows, and eight partial rows; its summary
 reports 26, seven, and eight. It must be regenerated from the current pair
 rather than edited as though it were current evidence.
 
-## Highest-Impact Runtime Gap
+## Highest-Impact Runtime Gap: Remediated
 
-The normal governed-speech path can still accept a media snapshot with no
-`score_id`. `PerformanceApplication.prepare_snapshot()` then explicitly returns
-`scoreless_v1`, and the scheduler applies a restrained generic fallback. The
-character-bound compiler already exists, but ordinary live speech does not yet
-compile, publish, and attach a score automatically.
+The normal governed-speech path now uses an explicit two-pass score handshake:
 
-The runtime successor must:
+1. Python captures a scoreless preliminary context (`C0`) for the accepted
+   speech cursor.
+2. The character-bound compiler creates and atomically publishes a
+   deterministic, content-free score against the active capability manifest.
+3. Prism republishes the exact score ID, revision, and digest in a newer loading
+   media epoch.
+4. Python captures the final score-bound context (`C1`).
+5. Approval, registration, and playback proceed only when `C1`, the accepted
+   cursor, and the content-free registration receipt carry the same score
+   identity.
 
-1. compile the approved turn's frozen `PerformanceContextV1` against the
-   active detailed capability manifest;
-2. publish the immutable compiled score through the existing score repository;
-3. bind score ID, revision, and digest into the authoritative speech snapshot
-   before governed release;
-4. fail closed when compilation, capability validation, publication, or
-   snapshot correlation fails;
-5. preserve `scoreless_v1` only as an explicit compatibility policy, never as
-   the silent normal path for an admitted production character.
-
-Until that gate lands, speech can have synchronized text and mouth motion
-without consistently receiving purposeful character-specific body direction.
+Compilation, publication, media drift, epoch drift, context mismatch, and
+receipt mismatch fail closed. A `404` or `501` response from the additive
+preparation endpoint is the only legacy scoreless compatibility path during a
+staggered local upgrade. The LaunchAgent installer now provisions a persistent
+app-owned `WIZARD_SCORE_ROOT`.
 
 ## Highest-Impact Roster Architecture Gap
 

@@ -21,6 +21,8 @@
     <string>1</string>
     <key>WIZARD_MEDIA_CONNECTOR_TOKEN</key>
     <string>__CONNECTOR_TOKEN__</string>
+    <key>WIZARD_SCORE_ROOT</key>
+    <string>__HOME__/Library/Application Support/WizardJoeAvatar/scores</string>
   </dict>
   <key>RunAtLoad</key>
   <true/>

@@ -7,6 +7,11 @@ from .animation_graph import AnimationGraph, load_reference_animation_graph_v2
 from .character_runtime_profile import CharacterRuntimeProfile
 from .controller import WizardAvatarController
 from .expressions import expression_mouth
+from .live_speech_score import (
+    LiveSpeechScoreError,
+    PreparedLiveSpeechScoreV1,
+    compile_live_speech_score,
+)
 from .media_session import MediaSessionAckV1, MediaSessionCoordinator, MediaSessionSnapshotV1
 from .models import ACTIONS, DIRECTIONS, EXPRESSIONS, MOUTH_SHAPES
 from .performance_context import PerformanceContextV1
@@ -124,6 +129,7 @@ class PerformanceApplication:
             else None
         )
         self.score_repository = score_repository
+        self.capability_manifest = capability_manifest
         identity_bound = package_digest != _UNBOUND_DIGEST
         self.score_runtime = (
             ScoreRuntime(
@@ -449,6 +455,28 @@ class PerformanceApplication:
             },
         }
         return PerformanceContextV1.build(payload)
+
+    def prepare_live_speech_score(
+        self,
+        context: PerformanceContextV1,
+        *,
+        duration_ms: int,
+    ) -> PreparedLiveSpeechScoreV1:
+        """Compile and publish a preliminary-context score off the event loop."""
+
+        if self.score_repository is None or self.score_runtime is None:
+            raise GovernedSpeechError("score_repository_not_ready")
+        if self.capability_manifest is None:
+            raise GovernedSpeechError("capability_manifest_not_ready")
+        try:
+            return compile_live_speech_score(
+                context,
+                duration_ms=duration_ms,
+                capability_manifest=self.capability_manifest,
+                repository=self.score_repository,
+            )
+        except LiveSpeechScoreError as exc:
+            raise GovernedSpeechError(exc.code, exc.path) from exc
 
     def register_governed_speech(
         self,

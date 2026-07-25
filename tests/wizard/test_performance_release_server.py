@@ -1,5 +1,6 @@
 import json
 import os
+import tempfile
 import time
 import unittest
 from unittest import mock
@@ -28,12 +29,21 @@ TOKEN_HEADERS = (
 
 
 def connector_app():
+    score_root = tempfile.TemporaryDirectory()
     env = {
         "WIZARD_MEDIA_CONNECTOR_ENABLED": "1",
         "WIZARD_MEDIA_CONNECTOR_TOKEN": "governed-test-token",
+        "WIZARD_SCORE_ROOT": score_root.name,
     }
     with mock.patch.dict(os.environ, env, clear=True):
-        return create_app()
+        app = create_app()
+    app.state.test_score_root = score_root
+    return app
+
+
+async def stop_connector_app(app):
+    await app.state.frame_hub.stop()
+    app.state.test_score_root.cleanup()
 
 
 class GovernedSpeechServerTests(unittest.IsolatedAsyncioTestCase):
@@ -76,7 +86,7 @@ class GovernedSpeechServerTests(unittest.IsolatedAsyncioTestCase):
             for private_value in (TEXT, "approved_text", "prompt", "transcript"):
                 self.assertNotIn(private_value, serialized)
         finally:
-            await app.state.frame_hub.stop()
+            await stop_connector_app(app)
 
     async def test_connector_ingress_requires_exact_auth_and_server_to_server_origin(self):
         app = connector_app()
@@ -141,7 +151,7 @@ class GovernedSpeechServerTests(unittest.IsolatedAsyncioTestCase):
                     )
                     self.assertEqual(status, 403)
         finally:
-            await app.state.frame_hub.stop()
+            await stop_connector_app(app)
 
         with mock.patch.dict(os.environ, {}, clear=True):
             disabled = create_app()
@@ -207,7 +217,7 @@ class GovernedSpeechServerTests(unittest.IsolatedAsyncioTestCase):
                         )
                         self.assertEqual(status, 400)
         finally:
-            await app.state.frame_hub.stop()
+            await stop_connector_app(app)
 
     async def test_connector_context_register_and_revoke_contract(self):
         app = connector_app()
@@ -365,6 +375,9 @@ class GovernedSpeechServerTests(unittest.IsolatedAsyncioTestCase):
                 registered["mouth_presentation_policy"],
                 "presentation_stabilized_v1",
             )
+            self.assertIsNone(registered["score_id"])
+            self.assertIsNone(registered["score_revision"])
+            self.assertIsNone(registered["score_sha256"])
             self.assertNotIn(TEXT, json.dumps(registered))
 
             replay_status, replay = await asgi_request(
@@ -424,7 +437,179 @@ class GovernedSpeechServerTests(unittest.IsolatedAsyncioTestCase):
                 stale["detail"]["code"], "revocation_generation_stale"
             )
         finally:
-            await app.state.frame_hub.stop()
+            await stop_connector_app(app)
+
+    async def test_live_score_two_pass_context_binds_final_approval_and_receipt(self):
+        app = connector_app()
+        performance = app.state.frame_hub.performance
+        character_id = performance.character_id
+        package_digest = performance.package_digest
+        scoreless = snapshot_mapping(
+            sequence=0,
+            media_epoch=4,
+            cause="trackchange",
+            state="loading",
+            position_ms=0,
+            source_slot="speech",
+            kind="tts",
+            media_id=MEDIA_ID,
+            mode="speech",
+            with_hashes=True,
+        )
+        scoreless["performance"].update(
+            {
+                "score_id": None,
+                "score_revision": None,
+                "score_sha256": None,
+                "character_id": character_id,
+                "character_package_sha256": package_digest,
+            }
+        )
+        context_request = context_request_mapping()
+        context_request["intent"] = "speak"
+        try:
+            status, loading_ack = await asgi_request(
+                app,
+                "POST",
+                "/api/avatar/wizard/media-session",
+                json.dumps(scoreless).encode("utf-8"),
+                TOKEN_HEADERS,
+            )
+            self.assertEqual(status, 200, loading_ack)
+            self.assertEqual(loading_ack["disposition"], "accepted")
+
+            prepare_status, prepared = await asgi_request(
+                app,
+                "POST",
+                "/api/avatar/wizard/performance-context/prepare-score",
+                json.dumps(context_request).encode("utf-8"),
+                TOKEN_HEADERS,
+            )
+            self.assertEqual(prepare_status, 200, prepared)
+            self.assertEqual(
+                set(prepared),
+                {"schema_version", "preliminary_context", "score_binding"},
+            )
+            preliminary = prepared["preliminary_context"]
+            binding = prepared["score_binding"]
+            self.assertEqual(
+                binding["compiled_from_context_sha256"],
+                preliminary["context_sha256"],
+            )
+            self.assertEqual(binding["media_id"], MEDIA_ID)
+            self.assertEqual(binding["character_id"], character_id)
+            self.assertEqual(binding["package_digest"], package_digest)
+            self.assertIsNone(
+                preliminary["evidence"]["score_binding"]["score_id"]
+            )
+
+            bound = snapshot_mapping(
+                sequence=1,
+                media_epoch=5,
+                cause="trackchange",
+                state="loading",
+                position_ms=0,
+                source_slot="speech",
+                kind="tts",
+                media_id=MEDIA_ID,
+                score_id=binding["score_id"],
+                mode="speech",
+                with_hashes=True,
+            )
+            bound["performance"].update(
+                {
+                    "score_id": binding["score_id"],
+                    "score_revision": binding["score_revision"],
+                    "score_sha256": binding["score_sha256"],
+                    "character_id": character_id,
+                    "character_package_sha256": package_digest,
+                }
+            )
+            status, bound_ack = await asgi_request(
+                app,
+                "POST",
+                "/api/avatar/wizard/media-session",
+                json.dumps(bound).encode("utf-8"),
+                TOKEN_HEADERS,
+            )
+            self.assertEqual(status, 200, bound_ack)
+            self.assertEqual(bound_ack["disposition"], "accepted")
+
+            context_status, final_context = await asgi_request(
+                app,
+                "POST",
+                "/api/avatar/wizard/performance-context",
+                json.dumps(context_request).encode("utf-8"),
+                TOKEN_HEADERS,
+            )
+            self.assertEqual(context_status, 200, final_context)
+            self.assertNotEqual(
+                final_context["context_sha256"],
+                preliminary["context_sha256"],
+            )
+            self.assertEqual(
+                final_context["evidence"]["score_binding"],
+                {
+                    "score_id": binding["score_id"],
+                    "score_revision": binding["score_revision"],
+                    "score_sha256": binding["score_sha256"],
+                },
+            )
+
+            now_ms = time.time_ns() // 1_000_000
+            approval = GovernedPerformanceApprovalV1.build(
+                {
+                    "schema_version": 1,
+                    "approval_id": "approval:server-score-turn-0042",
+                    "turn_id": "turn:0042",
+                    "reply_sha256": alignment_mapping()[
+                        "approved_content_sha256"
+                    ],
+                    "persona_id": "persona:wizard-joe",
+                    "voice_id": alignment_mapping()["voice_id"],
+                    "speech_media": {
+                        "kind": "speech",
+                        "identity": "speech:turn-0042",
+                        "sha256": alignment_mapping()["media_sha256"],
+                    },
+                    "performance_context_sha256": final_context[
+                        "context_sha256"
+                    ],
+                    "character_id": character_id,
+                    "package_digest": package_digest,
+                    "allowed_sinks": ["animation", "speech", "text"],
+                    "issued_at_ms": now_ms - 100,
+                    "expires_at_ms": now_ms + 60_000,
+                    "revocation_generation": 0,
+                    "reconciliation_generation": final_context["runtime"][
+                        "reconciliation_generation"
+                    ],
+                }
+            )
+            registration = {
+                "schema_version": 1,
+                "approved_text": TEXT,
+                "approval": approval.to_dict(),
+                "performance_context": final_context,
+                "alignment": alignment_mapping(),
+            }
+            register_status, receipt = await asgi_request(
+                app,
+                "POST",
+                "/api/avatar/wizard/governed-speech",
+                json.dumps(registration).encode("utf-8"),
+                TOKEN_HEADERS,
+            )
+            self.assertEqual(register_status, 200, receipt)
+            self.assertTrue(receipt["active"])
+            self.assertEqual(receipt["score_id"], binding["score_id"])
+            self.assertEqual(
+                receipt["score_revision"], binding["score_revision"]
+            )
+            self.assertEqual(receipt["score_sha256"], binding["score_sha256"])
+            self.assertNotIn(TEXT, json.dumps(receipt))
+        finally:
+            await stop_connector_app(app)
 
 
 if __name__ == "__main__":

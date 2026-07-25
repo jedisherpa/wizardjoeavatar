@@ -6,10 +6,11 @@ SOURCE="$ROOT/deploy/macos/com.jedisherpa.wizardjoeavatar.plist"
 TARGET="$HOME/Library/LaunchAgents/com.jedisherpa.wizardjoeavatar.plist"
 CONFIG_DIR="$HOME/Library/Application Support/WizardJoeAvatar"
 CONNECTOR_CONFIG="$CONFIG_DIR/prism-connector.env"
+SCORE_DIR="$CONFIG_DIR/scores"
 DOMAIN="gui/$(id -u)"
 
 umask 077
-mkdir -p "$HOME/Library/LaunchAgents" "$HOME/Library/Logs" "$CONFIG_DIR"
+mkdir -p "$HOME/Library/LaunchAgents" "$HOME/Library/Logs" "$CONFIG_DIR" "$SCORE_DIR"
 
 CONNECTOR_TOKEN=""
 if [ -f "$CONNECTOR_CONFIG" ]; then

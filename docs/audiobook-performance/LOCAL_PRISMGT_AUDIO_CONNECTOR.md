@@ -19,12 +19,14 @@ ends, pauses, or becomes inaudible, the latest main-media snapshot is restored.
 - Wizard status: `GET /api/avatar/wizard/media-session/status`
 - Wizard runtime binding: `GET /api/avatar/wizard/performance-binding`
 - Wizard performance context: `POST /api/avatar/wizard/performance-context`
+- Wizard live-score preparation: `POST /api/avatar/wizard/performance-context/prepare-score`
 - Wizard governed speech registration: `POST /api/avatar/wizard/governed-speech`
 - Wizard governed speech revocation: `POST /api/avatar/wizard/governed-speech/revoke`
 - Wizard permission-world authority: `POST /api/avatar/wizard/permission-world`
 - Prism same-origin ingress: `POST /api/connectors/wizard/media-session`
 - Prism runtime-binding bridge: `GET /api/connectors/wizard/performance-binding`
 - Prism performance-context bridge: `POST /api/connectors/wizard/performance-context`
+- Prism live-score bridge: `POST /api/connectors/wizard/performance-context/prepare-score`
 - Prism governed-speech bridge: `POST /api/connectors/wizard/governed-speech`
 - Prism governed-speech revocation bridge: `POST /api/connectors/wizard/governed-speech/revoke`
 - Prism connector status: `GET /api/connectors/wizard/status`
@@ -72,6 +74,7 @@ environment requires:
 ```text
 WIZARD_MEDIA_CONNECTOR_ENABLED=1
 WIZARD_MEDIA_CONNECTOR_TOKEN=<shared random secret>
+WIZARD_SCORE_ROOT=~/Library/Application Support/WizardJoeAvatar/scores
 ```
 
 The PrismGT sidecar requires:
@@ -107,6 +110,15 @@ starts the audio element. Progressive text and character performance then
 project from that same audio element clock. Missing or invalid alignment uses a
 deterministic local timing projection; it does not authorize different text.
 
+Normal governed speech uses a two-pass, content-free score handshake. Wizard
+first captures a scoreless preliminary context (`C0`), compiles and atomically
+publishes a deterministic score, and returns only its typed identity. Prism
+publishes that score identity in a newer loading media epoch, then requests the
+final context (`C1`). Approval, registration, and playback proceed only when
+`C1`, the accepted cursor, and the registration receipt carry the exact same
+score ID, revision, and digest. The response and receipt never contain the
+approved text.
+
 Permission-world updates use the same connector instance, discovery identity,
 and bearer token. Production character facts come only from Prism's canonical
 `AgreementStore` within internal scope `local_character_runtime`; browser state
@@ -124,8 +136,11 @@ simulations are separately labeled and cannot control production projection.
 - Music without a compiled score uses a deterministic media-time groove.
 - Podcasts and audiobooks without a compiled score use restrained speaking
   gestures and duration-driven mouth shapes.
-- TTS uses the same speech fallback and preempts main-media performance only
-  while its element is audible.
+- Governed TTS compiles and binds a deterministic character score before play,
+  then preempts main-media performance only while its element is audible.
+- A `404` or `501` score-preparation response retains the documented legacy
+  scoreless compatibility path during staggered local upgrades. Any other
+  preparation, publication, epoch, context, or receipt mismatch fails closed.
 - Paused, ended, stopped, errored, or stale sessions release performance-owned
   state.
 - Keyboard, gamepad, and remote control leases retain body authority.

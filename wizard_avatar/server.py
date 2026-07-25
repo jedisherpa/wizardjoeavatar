@@ -622,6 +622,21 @@ def create_app(
             ) from exc
         return context.to_dict()
 
+    @app.post("/api/avatar/wizard/performance-context/prepare-score")
+    async def prepare_performance_context_score(request: FastAPIRequest):
+        require_connector(request)
+        body = await bounded_json_body(request)
+        try:
+            context_request = PerformanceContextRequestV1.from_json(body)
+            return await frame_hub.prepare_live_speech_score(context_request)
+        except GovernedSpeechError as exc:
+            raise HTTPException(
+                status_code=409 if exc.code.endswith(
+                    ("changed", "mismatch", "not_ready")
+                ) else 400,
+                detail={"code": exc.code, "path": exc.path},
+            ) from exc
+
     @app.post("/api/avatar/wizard/governed-speech")
     async def governed_speech(request: FastAPIRequest):
         require_connector(request)

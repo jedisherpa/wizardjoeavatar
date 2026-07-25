@@ -471,6 +471,45 @@ class WizardFrameHub:
                 time.perf_counter_ns() // 1000,
             )
 
+    async def prepare_live_speech_score(
+        self,
+        request: PerformanceContextRequestV1,
+    ) -> dict:
+        """Prepare a score from C0, then prove C0 is still the accepted slot."""
+
+        await self.start()
+        async with self._current_lock():
+            context = self.performance.capture_performance_context(
+                request,
+                self.frame_source.controller,
+                time.perf_counter_ns() // 1000,
+            )
+            snapshot = self.performance.scheduler.coordinator.snapshot_for_slot(
+                "speech"
+            )
+            if snapshot is None or snapshot.media.duration_ms is None:
+                raise GovernedSpeechError("media_duration_not_ready")
+            snapshot_fingerprint = snapshot.fingerprint()
+            duration_ms = snapshot.media.duration_ms
+
+        prepared = await asyncio.to_thread(
+            self.performance.prepare_live_speech_score,
+            context,
+            duration_ms=duration_ms,
+        )
+
+        async with self._current_lock():
+            current = self.performance.scheduler.coordinator.snapshot_for_slot(
+                "speech"
+            )
+            if (
+                current is None
+                or current.fingerprint() != snapshot_fingerprint
+                or current.media.duration_ms != duration_ms
+            ):
+                raise GovernedSpeechError("media_session_changed")
+            return dict(prepared.to_dict())
+
     async def register_governed_speech(
         self,
         registration: GovernedSpeechRegistrationV1,
@@ -482,7 +521,9 @@ class WizardFrameHub:
                 now_wall_ms=time.time_ns() // 1_000_000,
                 now_monotonic_us=time.perf_counter_ns() // 1000,
             )
-            return dict(self.performance.governed_speech.diagnostics())
+            receipt = dict(self.performance.governed_speech.diagnostics())
+            receipt.update(registration.performance_context.evidence.score_binding.to_dict())
+            return receipt
 
     async def revoke_governed_speech(self, generation: int) -> dict:
         await self.start()
