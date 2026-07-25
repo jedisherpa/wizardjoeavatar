@@ -83,6 +83,12 @@ and terminates both child runtimes when it stops.
 - `SERENA_PACKAGE_CONTROLS_2026-07-24.md`: package-owned facing, actions,
   whole-pose blink and speech mappings, truthful locomotion denial, and
   focused regression evidence.
+- `SERENA_LOCOMOTION_EVIDENCE_AUDIT_2026-07-24.md`: full Serena motion-art
+  inventory, rejected inference shortcuts, and the deferred SQ-L0 gate.
+- `SERENA_GOVERNED_PERFORMANCE_AUDIT_2026-07-24.md`: active identity and score
+  admission findings plus the bounded Serena G1 plan.
+- `reviews/SERENA_G1_SCORE_IDENTITY_TECHNICAL_REVIEW_2026-07-24.md`: independent
+  acceptance of mutation-free identity checks and canonical score admission.
 - `GAZE_SETTLE_CONTINUITY.md`: eye-lead, target-arrival re-centering, stable
   fixation, focused tests, and clean runtime evidence.
 - `SPEECH_MOUTH_AUTHORITY.md`: aligned-versus-local mouth ownership,

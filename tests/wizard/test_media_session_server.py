@@ -51,11 +51,10 @@ async def asgi_request(app, method, path, body=b"", headers=()):
 
 
 class MediaSessionServerTests(unittest.IsolatedAsyncioTestCase):
-    def live_body(self):
-        return json.dumps(
-            snapshot_mapping(kind="music", mode="music", with_hashes=False),
-            separators=(",", ":"),
-        ).encode("utf-8")
+    def live_body(self, character_id="wizard-joe"):
+        value = snapshot_mapping(kind="music", mode="music", with_hashes=False)
+        value["performance"]["character_id"] = character_id
+        return json.dumps(value, separators=(",", ":")).encode("utf-8")
 
     async def test_connector_is_disabled_without_explicit_configuration(self):
         with mock.patch.dict(os.environ, {}, clear=True):
@@ -82,7 +81,7 @@ class MediaSessionServerTests(unittest.IsolatedAsyncioTestCase):
         }
         with mock.patch.dict(os.environ, env, clear=True):
             app = create_app()
-        body = self.live_body()
+        body = self.live_body(app.state.frame_hub.performance.character_id)
         common = (("content-type", "application/json"),)
 
         unauthorized, _ = await asgi_request(

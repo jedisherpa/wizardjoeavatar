@@ -1,5 +1,6 @@
 import copy
 import json
+import tempfile
 import unittest
 from pathlib import Path
 
@@ -12,8 +13,10 @@ from wizard_avatar.performance_compiler import (
 )
 from wizard_avatar.performance_context import PerformanceContextV1
 from wizard_avatar.performance_scheduler import PerformanceScheduler
-from wizard_avatar.performance_score import CompiledScoreLoader
+from wizard_avatar.performance_score import CompiledScoreLoader, CompiledScoreRepository
+from wizard_avatar.score_runtime import SCORE_ADMISSION_MISMATCH, ScoreRuntime
 from tests.wizard.test_performance_context import context_mapping
+from tests.wizard.test_performance_scheduler import bound_snapshot
 
 
 FIXTURES = Path(__file__).resolve().parent / "fixtures"
@@ -133,6 +136,96 @@ class CharacterBoundPerformanceCompilerTests(unittest.TestCase):
         moved = compile_character_bound_performance(moved_context, score, self.manifest)
         self.assertNotEqual(first["mapping_policy_sha256"], moved["mapping_policy_sha256"])
         self.assertNotEqual(first["compiled_score_id"], moved["compiled_score_id"])
+
+    def test_compiled_score_is_admitted_by_real_character_asset_contract(self):
+        portable = _score_with_requirement("clip:explain_front")
+        context = _bound_context(portable, self.manifest)
+        compiled = compile_character_bound_performance(
+            context,
+            portable,
+            self.manifest,
+        )
+        score = CompiledScoreLoader().from_mapping(compiled)
+        snapshot = bound_snapshot(score)
+        pose_ids = {
+            str(pose["pose_id"])
+            for pose in self.manifest["poses"]
+        }
+        clip_ids = {
+            str(clip_id)
+            for capability in self.manifest["capabilities"]
+            for clip_id in capability["mapping"]["clip_ids"]
+        }
+        node_ids = {
+            str(node_id)
+            for capability in self.manifest["capabilities"]
+            for node_id in capability["mapping"]["node_ids"]
+        }
+        with tempfile.TemporaryDirectory() as directory:
+            repository = CompiledScoreRepository(directory)
+            repository.publish(score)
+            runtime = ScoreRuntime(
+                repository,
+                character_id=score.character_id,
+                package_digest=score.package_digest,
+                pose_library_digest=compiled["character"]["pose_library_digest"],
+                graph_digest=compiled["character"]["graph_digest"],
+                admitted_pose_ids=pose_ids,
+                admitted_clip_ids=clip_ids,
+                admitted_node_ids=node_ids,
+            )
+
+            prepared = runtime.prepare_snapshot(snapshot)
+
+            self.assertTrue(prepared.ready)
+            self.assertIs(runtime.resolve(snapshot), prepared.score)
+
+    def test_schema_valid_unknown_preload_fails_runtime_admission(self):
+        portable = _score_with_requirement("clip:explain_front")
+        context = _bound_context(portable, self.manifest)
+        compiled = compile_character_bound_performance(
+            context,
+            portable,
+            self.manifest,
+        )
+        compiled["tracks"][0]["cues"][0]["preload_asset_ids"].append(
+            "unknown:pose"
+        )
+        score = CompiledScoreLoader().from_mapping(compiled)
+        snapshot = bound_snapshot(score)
+        pose_ids = {
+            str(pose["pose_id"])
+            for pose in self.manifest["poses"]
+        }
+        clip_ids = {
+            str(clip_id)
+            for capability in self.manifest["capabilities"]
+            for clip_id in capability["mapping"]["clip_ids"]
+        }
+        node_ids = {
+            str(node_id)
+            for capability in self.manifest["capabilities"]
+            for node_id in capability["mapping"]["node_ids"]
+        }
+        with tempfile.TemporaryDirectory() as directory:
+            repository = CompiledScoreRepository(directory)
+            repository.publish(score)
+            runtime = ScoreRuntime(
+                repository,
+                character_id=score.character_id,
+                package_digest=score.package_digest,
+                pose_library_digest=compiled["character"]["pose_library_digest"],
+                graph_digest=compiled["character"]["graph_digest"],
+                admitted_pose_ids=pose_ids,
+                admitted_clip_ids=clip_ids,
+                admitted_node_ids=node_ids,
+            )
+
+            prepared = runtime.prepare_snapshot(snapshot)
+
+            self.assertFalse(prepared.ready)
+            self.assertEqual(prepared.code, SCORE_ADMISSION_MISMATCH)
+            self.assertIsNone(runtime.resolve(snapshot))
 
     def test_unsupported_capability_uses_only_its_declared_admitted_fallback(self):
         score = _score_with_requirement("unsupported:dance", track_kind="dance")

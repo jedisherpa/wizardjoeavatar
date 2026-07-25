@@ -829,6 +829,15 @@ class MediaSessionCoordinator:
     def accept(self, snapshot: MediaSessionSnapshotV1, receipt_monotonic_us: int) -> MediaSessionAckV1:
         return self.accept_with_result(snapshot, receipt_monotonic_us).ack
 
+    def reject_without_mutation(
+        self,
+        snapshot: MediaSessionSnapshotV1,
+        error_code: str,
+    ) -> MediaSessionAckV1:
+        """Return a protocol rejection without admitting coordinator state."""
+
+        return self._ack(snapshot, "rejected", error_code)
+
     def accept_with_result(
         self, snapshot: MediaSessionSnapshotV1, receipt_monotonic_us: int
     ) -> MediaSessionAcceptance:

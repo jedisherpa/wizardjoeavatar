@@ -13,6 +13,7 @@ from wizard_avatar.character_package import (
 )
 from wizard_avatar.frame_source import ProceduralWizardFrameSource
 from wizard_avatar.frame_hash import frame_hash
+from wizard_avatar.performance_score import CompiledScoreRepository
 from wizard_avatar.server import create_app
 from wizard_avatar.stream import WizardFrameHub, character_runtime_epoch_prefix
 
@@ -207,6 +208,43 @@ class SerenaRuntimeBootTests(unittest.IsolatedAsyncioTestCase):
             (),
         )
         await hub.stop()
+
+    async def test_score_runtime_binds_serena_verified_assets_and_graph(self):
+        source = self.create_source()
+        package = source.character_package
+        with tempfile.TemporaryDirectory() as directory:
+            hub = WizardFrameHub(
+                source,
+                score_repository=CompiledScoreRepository(directory),
+            )
+
+            runtime = hub.performance.score_runtime
+            self.assertIsNotNone(runtime)
+            assert runtime is not None
+            self.assertEqual(runtime.character_id, package.character_id)
+            self.assertEqual(runtime.package_digest, package.package_sha256)
+            self.assertIsNone(runtime.manifest_digest)
+            self.assertEqual(
+                runtime.pose_library_digest,
+                package.assets["pose_library"].sha256,
+            )
+            self.assertEqual(
+                runtime.graph_digest,
+                package.assets["animation_graph"].sha256,
+            )
+            self.assertEqual(
+                runtime.admitted_pose_ids,
+                frozenset(source.animation_graph.pose_classification),
+            )
+            self.assertEqual(
+                runtime.admitted_clip_ids,
+                frozenset(source.animation_graph.clips),
+            )
+            self.assertEqual(
+                runtime.admitted_node_ids,
+                frozenset(source.animation_graph.nodes),
+            )
+            await hub.stop()
 
     async def test_existing_server_reports_serena_without_wizard_hd_claims(self):
         app = create_app(self.create_source(), companion_mode=False)

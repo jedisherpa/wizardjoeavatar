@@ -11,6 +11,7 @@ from wizard_avatar.media_session import MediaSessionSnapshotV1
 from wizard_avatar.performance_application import PerformanceApplication
 from wizard_avatar.performance_scheduler import AccessibilityMotionProfile
 from wizard_avatar.performance_score import CompiledScoreLoader, CompiledScoreRepository
+from wizard_avatar.score_runtime import SCORE_ADMISSION_MISMATCH
 
 from tests.wizard.test_performance_scheduler import bound_snapshot, runtime_score
 
@@ -73,6 +74,104 @@ class PerformanceApplicationTests(unittest.TestCase):
         return self.application.accept_snapshot(
             MediaSessionSnapshotV1.from_mapping(copy.deepcopy(value)), receipt_us
         )
+
+    def test_foreign_character_and_package_reject_before_runtime_mutation(self):
+        package_digest = "sha256:" + "a" * 64
+        application = PerformanceApplication(
+            "serena-runtime-test",
+            character_id="serena-quill-v1",
+            package_digest=package_digest,
+        )
+        baseline = application.diagnostics(0)
+
+        foreign_character = snapshot_mapping()
+        foreign_character["performance"]["character_id"] = "wizard-joe-v1"
+        foreign_character["performance"]["character_package_sha256"] = package_digest
+        character_snapshot = MediaSessionSnapshotV1.from_mapping(foreign_character)
+        character_ack = application.accept_snapshot(character_snapshot, 0)
+
+        self.assertEqual(character_ack.disposition, "rejected")
+        self.assertEqual(character_ack.error_code, "character_mismatch")
+        self.assertIsNone(application.scheduler.coordinator.accepted_snapshot)
+        self.assertIsNone(application.scheduler.coordinator.last_acceptance)
+        self.assertEqual(
+            application.scheduler.coordinator.reconciliation_generation,
+            0,
+        )
+        self.assertEqual(application.diagnostics(0), baseline)
+
+        foreign_package = snapshot_mapping()
+        foreign_package["performance"]["character_id"] = "serena-quill-v1"
+        foreign_package["performance"]["character_package_sha256"] = (
+            "sha256:" + "b" * 64
+        )
+        package_snapshot = MediaSessionSnapshotV1.from_mapping(foreign_package)
+        package_ack = application.accept_snapshot(package_snapshot, 1)
+
+        self.assertEqual(package_ack.disposition, "rejected")
+        self.assertEqual(package_ack.error_code, "package_mismatch")
+        self.assertIsNone(application.scheduler.coordinator.accepted_snapshot)
+        self.assertIsNone(application.scheduler.coordinator.last_acceptance)
+        self.assertEqual(
+            application.prepare_snapshot(package_snapshot).code,
+            SCORE_ADMISSION_MISMATCH,
+        )
+        self.assertEqual(application.diagnostics(1), baseline)
+
+    def test_matching_character_and_package_are_admitted_normally(self):
+        package_digest = "sha256:" + "a" * 64
+        application = PerformanceApplication(
+            "serena-runtime-test",
+            character_id="serena-quill-v1",
+            package_digest=package_digest,
+        )
+        value = snapshot_mapping()
+        value["performance"]["character_id"] = "serena-quill-v1"
+        value["performance"]["character_package_sha256"] = package_digest
+        snapshot = MediaSessionSnapshotV1.from_mapping(value)
+
+        ack = application.accept_snapshot(snapshot, 0)
+
+        self.assertEqual(ack.disposition, "accepted")
+        self.assertIs(application.scheduler.coordinator.accepted_snapshot, snapshot)
+
+    def test_package_bound_runtime_preserves_scoreless_v1_without_package_digest(self):
+        package_digest = "sha256:" + "a" * 64
+        application = PerformanceApplication(
+            "serena-runtime-test",
+            character_id="serena-quill-v1",
+            package_digest=package_digest,
+        )
+        value = snapshot_mapping()
+        value["performance"]["character_id"] = "serena-quill-v1"
+        snapshot = MediaSessionSnapshotV1.from_mapping(value)
+
+        prepared = application.prepare_snapshot(snapshot)
+        ack = application.accept_snapshot(snapshot, 0)
+
+        self.assertEqual(prepared.code, "scoreless_v1")
+        self.assertEqual(ack.disposition, "accepted")
+        self.assertEqual(ack.scheduler_state, "scoreless")
+        self.assertIs(application.scheduler.coordinator.accepted_snapshot, snapshot)
+
+    def test_package_bound_runtime_rejects_scored_snapshot_without_package_digest(self):
+        package_digest = "sha256:" + "a" * 64
+        application = PerformanceApplication(
+            "serena-runtime-test",
+            character_id="serena-quill-v1",
+            package_digest=package_digest,
+        )
+        score = runtime_score()
+        value = bound_snapshot(score).to_dict()
+        value["performance"]["character_id"] = "serena-quill-v1"
+        value["performance"]["character_package_sha256"] = None
+        snapshot = MediaSessionSnapshotV1.from_mapping(value)
+
+        ack = application.accept_snapshot(snapshot, 0)
+
+        self.assertEqual(ack.disposition, "rejected")
+        self.assertEqual(ack.error_code, "package_mismatch")
+        self.assertIsNone(application.scheduler.coordinator.accepted_snapshot)
 
     def test_music_drives_native_action_and_releases_when_paused(self):
         ack = self.accept(snapshot_mapping(), 0)

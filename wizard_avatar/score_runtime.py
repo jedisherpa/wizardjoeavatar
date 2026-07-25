@@ -110,6 +110,7 @@ class ScoreRuntime:
         repository: CompiledScoreRepository,
         capacity: int = DEFAULT_SCORE_RUNTIME_CAPACITY,
         *,
+        character_id: Optional[str] = None,
         package_digest: Optional[str] = None,
         manifest_digest: Optional[str] = None,
         pose_library_digest: Optional[str] = None,
@@ -124,6 +125,7 @@ class ScoreRuntime:
             raise ValueError("capacity must be a positive integer")
         self.repository = repository
         self.capacity = capacity
+        self.character_id = _optional_id(character_id, "character_id")
         self.package_digest = _optional_digest(package_digest, "package_digest")
         self.manifest_digest = _optional_digest(manifest_digest, "manifest_digest")
         self.pose_library_digest = _optional_digest(
@@ -298,6 +300,11 @@ class ScoreRuntime:
         ):
             return False
         if (
+            self.character_id is not None
+            and score.character_id != self.character_id
+        ):
+            return False
+        if (
             self.package_digest is not None
             and score.package_digest != self.package_digest
         ):
@@ -320,8 +327,10 @@ class ScoreRuntime:
             if document_manifest != self.manifest_digest:
                 return False
         return (
-            self._references_admitted(
-                score, "pose_id", self.admitted_pose_ids
+            self._preloads_are_admitted(
+                score,
+                self.admitted_pose_ids,
+                self.admitted_clip_ids,
             )
             and self._references_admitted(
                 score, "clip_id", self.admitted_clip_ids
@@ -330,6 +339,30 @@ class ScoreRuntime:
                 score, "node_id", self.admitted_node_ids
             )
         )
+
+    @staticmethod
+    def _preloads_are_admitted(
+        score: CompiledPerformanceScore,
+        admitted_pose_ids: Optional[frozenset[str]],
+        admitted_clip_ids: Optional[frozenset[str]],
+    ) -> bool:
+        if admitted_pose_ids is None and admitted_clip_ids is None:
+            return True
+        admitted_assets = frozenset().union(
+            admitted_pose_ids or (),
+            admitted_clip_ids or (),
+        )
+        for track in score.tracks:
+            for cue in track.index.cues:
+                values = cue.get("preload_asset_ids", ())
+                if not isinstance(values, (list, tuple)):
+                    return False
+                if any(
+                    not isinstance(value, str) or value not in admitted_assets
+                    for value in values
+                ):
+                    return False
+        return True
 
     @staticmethod
     def _references_admitted(
@@ -372,6 +405,14 @@ def _optional_digest(value: Optional[str], name: str) -> Optional[str]:
         or any(character not in "0123456789abcdef" for character in value[7:])
     ):
         raise ValueError(f"{name} must be a sha256 reference")
+    return value
+
+
+def _optional_id(value: Optional[str], name: str) -> Optional[str]:
+    if value is None:
+        return None
+    if not isinstance(value, str) or not value:
+        raise ValueError(f"{name} must be a non-empty string")
     return value
 
 

@@ -194,30 +194,22 @@ class ScoreRuntimeTests(unittest.TestCase):
         self.assertEqual(diagnostics["evictions"], 1000 - capacity)
         self.assertEqual(diagnostics["capacity"], capacity)
 
-    def test_active_package_pose_graph_and_manifest_identities_fail_closed(self):
-        document = copy.deepcopy(self.score.to_dict())
-        document["character"]["manifest_digest"] = digest("e")
-        score = CompiledScoreLoader(
-            contract_validator=lambda _name, _value: None
-        ).from_mapping(document)
-        snapshot = bound_snapshot(score)
-        self.repository.publish(score)
-        character = score.document["character"]
+    def test_active_package_pose_and_graph_identities_fail_closed(self):
+        self.repository.publish(self.score)
+        character = self.score.document["character"]
         matching = {
             "package_digest": character["package_digest"],
-            "manifest_digest": character["manifest_digest"],
             "pose_library_digest": character["pose_library_digest"],
             "graph_digest": character["graph_digest"],
         }
         self.assertTrue(
             ScoreRuntime(self.repository, **matching)
-            .prepare_snapshot(snapshot)
+            .prepare_snapshot(self.snapshot)
             .ready
         )
 
         mutations = {
             "package_digest": digest("0"),
-            "manifest_digest": digest("1"),
             "pose_library_digest": digest("2"),
             "graph_digest": digest("3"),
         }
@@ -226,16 +218,16 @@ class ScoreRuntimeTests(unittest.TestCase):
                 active = dict(matching)
                 active[field] = stale_digest
                 runtime = ScoreRuntime(self.repository, **active)
-                prepared = runtime.prepare_snapshot(snapshot)
+                prepared = runtime.prepare_snapshot(self.snapshot)
                 self.assertFalse(prepared.ready)
                 self.assertEqual(prepared.code, SCORE_ADMISSION_MISMATCH)
-                self.assertIsNone(runtime.resolve(snapshot))
+                self.assertIsNone(runtime.resolve(self.snapshot))
 
-    def test_configured_manifest_identity_is_required_in_score_document(self):
+    def test_active_character_identity_fails_closed(self):
         self.repository.publish(self.score)
         runtime = ScoreRuntime(
             self.repository,
-            manifest_digest=digest("e"),
+            character_id="serena-quill-v1",
         )
 
         prepared = runtime.prepare_snapshot(self.snapshot)
@@ -244,24 +236,29 @@ class ScoreRuntimeTests(unittest.TestCase):
         self.assertEqual(prepared.code, SCORE_ADMISSION_MISMATCH)
         self.assertIsNone(runtime.resolve(self.snapshot))
 
-    def test_unknown_pose_clip_and_node_ids_fail_closed(self):
+    def test_unknown_preload_clip_and_node_ids_fail_closed(self):
         admitted = {
             "admitted_pose_ids": {"pose:known"},
             "admitted_clip_ids": {"clip:known"},
             "admitted_node_ids": {"node:known"},
         }
         known = {
-            "pose_id": "pose:known",
+            "preload_asset_ids": ["clip:known", "pose:known"],
             "clip_id": "clip:known",
             "node_id": "node:known",
         }
-        for field in ("pose_id", "clip_id", "node_id"):
+        mutations = {
+            "preload_asset_ids": ["clip:known", "pose:unknown"],
+            "clip_id": "clip:unknown",
+            "node_id": "node:unknown",
+        }
+        for field, unknown_value in mutations.items():
             with self.subTest(field=field):
                 temporary = tempfile.TemporaryDirectory()
                 self.addCleanup(temporary.cleanup)
                 repository = make_repository(temporary.name)
                 references = dict(known)
-                references[field] = field + ":unknown"
+                references[field] = unknown_value
                 score = score_with_references(self.score, **references)
                 snapshot = bound_snapshot(score)
                 repository.publish(score)
@@ -276,7 +273,7 @@ class ScoreRuntimeTests(unittest.TestCase):
     def test_admitted_pose_clip_and_node_ids_prepare_normally(self):
         score = score_with_references(
             self.score,
-            pose_id="pose:known",
+            preload_asset_ids=["clip:known", "pose:known"],
             clip_id="clip:known",
             node_id="node:known",
         )

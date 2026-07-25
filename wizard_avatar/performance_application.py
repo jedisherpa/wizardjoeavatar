@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, replace
-from typing import Mapping, Optional
+from typing import Iterable, Mapping, Optional
 
 from .animation_graph import AnimationGraph, load_reference_animation_graph_v2
 from .character_runtime_profile import CharacterRuntimeProfile
@@ -32,6 +32,7 @@ from .permission_world import (
 )
 from .projection import WORLD_X_MAX, WORLD_X_MIN, WORLD_Z_FAR, WORLD_Z_NEAR
 from .score_runtime import (
+    SCORE_ADMISSION_MISMATCH,
     SCORE_CORRUPT,
     SCORE_MISMATCH,
     SCORE_NOT_READY,
@@ -39,6 +40,9 @@ from .score_runtime import (
     ScorePreparationResult,
     ScoreRuntime,
 )
+
+
+_UNBOUND_DIGEST = "sha256:" + "0" * 64
 
 
 _MOUTH_MAP = {
@@ -94,14 +98,33 @@ class PerformanceApplication:
         capability_manifest: Optional[Mapping[str, object]] = None,
         animation_graph: Optional[AnimationGraph] = None,
         runtime_profile: Optional[CharacterRuntimeProfile] = None,
+        pose_library_digest: Optional[str] = None,
+        graph_digest: Optional[str] = None,
+        admitted_pose_ids: Optional[Iterable[str]] = None,
+        admitted_clip_ids: Optional[Iterable[str]] = None,
+        admitted_node_ids: Optional[Iterable[str]] = None,
     ) -> None:
         self.runtime_epoch = runtime_epoch
         self.character_id = character_id
         self.package_digest = package_digest
         self.manifest_digest = manifest_digest
         self.score_repository = score_repository
+        identity_bound = package_digest != _UNBOUND_DIGEST
         self.score_runtime = (
-            ScoreRuntime(score_repository) if score_repository is not None else None
+            ScoreRuntime(
+                score_repository,
+                character_id=character_id if identity_bound else None,
+                package_digest=(
+                    package_digest if identity_bound else None
+                ),
+                pose_library_digest=pose_library_digest,
+                graph_digest=graph_digest,
+                admitted_pose_ids=admitted_pose_ids,
+                admitted_clip_ids=admitted_clip_ids,
+                admitted_node_ids=admitted_node_ids,
+            )
+            if score_repository is not None
+            else None
         )
         self.scheduler = PerformanceScheduler(
             coordinator=MediaSessionCoordinator(runtime_epoch),
@@ -165,6 +188,12 @@ class PerformanceApplication:
         snapshot: MediaSessionSnapshotV1,
         receipt_monotonic_us: int,
     ) -> MediaSessionAckV1:
+        identity_error = self._snapshot_identity_error(snapshot)
+        if identity_error is not None:
+            return self.scheduler.coordinator.reject_without_mutation(
+                snapshot,
+                identity_error,
+            )
         ack = self.scheduler.accept_snapshot(snapshot, receipt_monotonic_us)
         if self.score_runtime is None or ack.scheduler_state != "error":
             return ack
@@ -179,6 +208,13 @@ class PerformanceApplication:
     ) -> ScorePreparationResult:
         """Prepare a bound score; call this through ``asyncio.to_thread``."""
 
+        if self._snapshot_identity_error(snapshot) is not None:
+            return ScorePreparationResult(
+                ready=False,
+                code=SCORE_ADMISSION_MISMATCH,
+                binding_id=None,
+                score=None,
+            )
         if snapshot.performance.score_id is None:
             return ScorePreparationResult(
                 ready=False,
@@ -194,6 +230,24 @@ class PerformanceApplication:
                 score=None,
             )
         return self.score_runtime.prepare_snapshot(snapshot)
+
+    def _snapshot_identity_error(
+        self,
+        snapshot: MediaSessionSnapshotV1,
+    ) -> Optional[str]:
+        if self.package_digest == _UNBOUND_DIGEST:
+            return None
+        if snapshot.performance.character_id != self.character_id:
+            return "character_mismatch"
+        package_sha256 = snapshot.performance.character_package_sha256
+        if (
+            package_sha256 is None
+            and snapshot.performance.score_id is None
+        ):
+            return None
+        if package_sha256 != self.package_digest:
+            return "package_mismatch"
+        return None
 
     def capture_performance_context(
         self,

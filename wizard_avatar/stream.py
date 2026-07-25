@@ -94,6 +94,47 @@ def _package_capability_manifest(
     return parsed, package.package_sha256, asset.sha256
 
 
+def _score_admission_bindings(
+    frame_source: ProceduralWizardFrameSource,
+    capability_manifest: Mapping[str, object] | None,
+) -> tuple[
+    str | None,
+    str | None,
+    tuple[str, ...] | None,
+    tuple[str, ...] | None,
+    tuple[str, ...] | None,
+]:
+    package = frame_source.character_package
+    if not hasattr(package, "schema_version"):
+        return None, None, None, None, None
+    pose_library_digest: str | None = None
+    graph_digest: str | None = None
+    if package.schema_version >= 2:
+        pose_library_digest = package.assets["pose_library"].sha256
+        graph_digest = package.assets["animation_graph"].sha256
+    elif capability_manifest is not None:
+        sources = capability_manifest.get("sources")
+        if isinstance(sources, Mapping):
+            pose_value = sources.get("pose_library_sha256")
+            graph_value = sources.get("animation_graph_sha256")
+            pose_library_digest = (
+                str(pose_value) if isinstance(pose_value, str) else None
+            )
+            graph_digest = (
+                str(graph_value) if isinstance(graph_value, str) else None
+            )
+    graph = getattr(frame_source, "animation_graph", None)
+    if graph is None:
+        return pose_library_digest, graph_digest, None, None, None
+    return (
+        pose_library_digest,
+        graph_digest,
+        tuple(sorted(graph.pose_classification)),
+        tuple(sorted(graph.clips)),
+        tuple(sorted(graph.nodes)),
+    )
+
+
 def _permission_render_signature(policy):
     if policy is None:
         return None
@@ -145,6 +186,16 @@ class WizardFrameHub:
             package_digest,
             manifest_digest,
         ) = _package_capability_manifest(self.frame_source)
+        (
+            pose_library_digest,
+            graph_digest,
+            admitted_pose_ids,
+            admitted_clip_ids,
+            admitted_node_ids,
+        ) = _score_admission_bindings(
+            self.frame_source,
+            capability_manifest,
+        )
         self.performance = PerformanceApplication(
             self.runtime_epoch,
             score_repository=score_repository,
@@ -160,6 +211,11 @@ class WizardFrameHub:
                     None,
                 )
             ),
+            pose_library_digest=pose_library_digest,
+            graph_digest=graph_digest,
+            admitted_pose_ids=admitted_pose_ids,
+            admitted_clip_ids=admitted_clip_ids,
+            admitted_node_ids=admitted_node_ids,
         )
         self.command_inbox = OrderedCommandInbox(self.runtime_epoch)
         self.replay_log = ReplayLog(
