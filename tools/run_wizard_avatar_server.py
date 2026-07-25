@@ -40,6 +40,14 @@ def main() -> None:
         ),
     )
     parser.add_argument(
+        "--review-library-index",
+        type=Path,
+        help=(
+            "Load an isolated package-local HD library for loopback review. "
+            "The index must be review-only and runtime-admitted false."
+        ),
+    )
+    parser.add_argument(
         "--quiet",
         action="store_true",
         help="Suppress routine access logs for long-running local or evidence sessions.",
@@ -81,6 +89,7 @@ def main() -> None:
             "companion_mode": companion_mode,
             "quiet": args.quiet,
         },
+        hd_review_index_path=args.review_library_index,
     )
     server = uvicorn.Server(
         uvicorn.Config(

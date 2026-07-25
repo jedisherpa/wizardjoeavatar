@@ -1,0 +1,252 @@
+{
+  "approved_pose_count": 0,
+  "asset_set_id": "serena-quill-source-motion-v001",
+  "candidate_pose_count": 48,
+  "character_id": "serena-quill",
+  "display_name": "Serena Quill",
+  "pose_count": 48,
+  "profile": {
+    "alpha_mode": "straight",
+    "baseline_y": 1185,
+    "canvas_height": 1254,
+    "canvas_width": 1254,
+    "color_space": "sRGB",
+    "minimum_margin": 69,
+    "profile_id": "wizardjoe_hd_alpha_1254_v001"
+  },
+  "review_projection": true,
+  "runtime_admitted": false,
+  "schema_version": 1,
+  "sequences": {
+    "serena-quill-source-all": {
+      "approval_state": "candidate_visual_parity",
+      "fps": 8,
+      "loop": true,
+      "pose_ids": [
+        "serena_quill_motion_001",
+        "serena_quill_motion_002",
+        "serena_quill_motion_003",
+        "serena_quill_motion_004",
+        "serena_quill_motion_005",
+        "serena_quill_motion_006",
+        "serena_quill_motion_007",
+        "serena_quill_motion_008",
+        "serena_quill_motion_009",
+        "serena_quill_motion_010",
+        "serena_quill_motion_011",
+        "serena_quill_motion_012",
+        "serena_quill_motion_013",
+        "serena_quill_motion_014",
+        "serena_quill_motion_015",
+        "serena_quill_motion_016",
+        "serena_quill_motion_017",
+        "serena_quill_motion_018",
+        "serena_quill_motion_019",
+        "serena_quill_motion_020",
+        "serena_quill_motion_021",
+        "serena_quill_motion_022",
+        "serena_quill_motion_023",
+        "serena_quill_motion_024",
+        "serena_quill_motion_025",
+        "serena_quill_motion_026",
+        "serena_quill_motion_027",
+        "serena_quill_motion_028",
+        "serena_quill_motion_029",
+        "serena_quill_motion_030",
+        "serena_quill_motion_031",
+        "serena_quill_motion_032",
+        "serena_quill_motion_033",
+        "serena_quill_motion_034",
+        "serena_quill_motion_035",
+        "serena_quill_motion_036",
+        "serena_quill_motion_037",
+        "serena_quill_motion_038",
+        "serena_quill_motion_039",
+        "serena_quill_motion_040",
+        "serena_quill_motion_041",
+        "serena_quill_motion_042",
+        "serena_quill_motion_043",
+        "serena_quill_motion_044",
+        "serena_quill_motion_045",
+        "serena_quill_motion_046",
+        "serena_quill_motion_047",
+        "serena_quill_motion_048"
+      ],
+      "runtime_admitted": false
+    },
+    "w1": {
+      "approval_state": "candidate_visual_parity",
+      "fps": 8,
+      "loop": true,
+      "pose_ids": [
+        "serena_quill_motion_001",
+        "serena_quill_motion_002",
+        "serena_quill_motion_003",
+        "serena_quill_motion_004",
+        "serena_quill_motion_005",
+        "serena_quill_motion_006"
+      ],
+      "runtime_admitted": false
+    },
+    "w2": {
+      "approval_state": "candidate_visual_parity",
+      "fps": 8,
+      "loop": true,
+      "pose_ids": [
+        "serena_quill_motion_007",
+        "serena_quill_motion_008",
+        "serena_quill_motion_009",
+        "serena_quill_motion_010",
+        "serena_quill_motion_011",
+        "serena_quill_motion_012"
+      ],
+      "runtime_admitted": false
+    },
+    "w3": {
+      "approval_state": "candidate_visual_parity",
+      "fps": 8,
+      "loop": true,
+      "pose_ids": [
+        "serena_quill_motion_013",
+        "serena_quill_motion_014",
+        "serena_quill_motion_015",
+        "serena_quill_motion_016",
+        "serena_quill_motion_017",
+        "serena_quill_motion_018"
+      ],
+      "runtime_admitted": false
+    },
+    "w4": {
+      "approval_state": "candidate_visual_parity",
+      "fps": 8,
+      "loop": true,
+      "pose_ids": [
+        "serena_quill_motion_019",
+        "serena_quill_motion_020",
+        "serena_quill_motion_021",
+        "serena_quill_motion_022",
+        "serena_quill_motion_023",
+        "serena_quill_motion_024"
+      ],
+      "runtime_admitted": false
+    },
+    "w5": {
+      "approval_state": "candidate_visual_parity",
+      "fps": 8,
+      "loop": true,
+      "pose_ids": [
+        "serena_quill_motion_025",
+        "serena_quill_motion_026",
+        "serena_quill_motion_027",
+        "serena_quill_motion_028",
+        "serena_quill_motion_029",
+        "serena_quill_motion_030"
+      ],
+      "runtime_admitted": false
+    },
+    "w6": {
+      "approval_state": "candidate_visual_parity",
+      "fps": 8,
+      "loop": true,
+      "pose_ids": [
+        "serena_quill_motion_031",
+        "serena_quill_motion_032",
+        "serena_quill_motion_033",
+        "serena_quill_motion_034",
+        "serena_quill_motion_035",
+        "serena_quill_motion_036"
+      ],
+      "runtime_admitted": false
+    },
+    "w7": {
+      "approval_state": "candidate_visual_parity",
+      "fps": 8,
+      "loop": true,
+      "pose_ids": [
+        "serena_quill_motion_037",
+        "serena_quill_motion_038",
+        "serena_quill_motion_039",
+        "serena_quill_motion_040",
+        "serena_quill_motion_041",
+        "serena_quill_motion_042"
+      ],
+      "runtime_admitted": false
+    },
+    "w8": {
+      "approval_state": "candidate_visual_parity",
+      "fps": 8,
+      "loop": true,
+      "pose_ids": [
+        "serena_quill_motion_043",
+        "serena_quill_motion_044",
+        "serena_quill_motion_045",
+        "serena_quill_motion_046",
+        "serena_quill_motion_047",
+        "serena_quill_motion_048"
+      ],
+      "runtime_admitted": false
+    }
+  },
+  "shards": [
+    {
+      "approval_state": "candidate_visual_parity",
+      "bytes": 42926939,
+      "path": "serena-quill-candidate-source-motion-v001.wjpose",
+      "pose_count": 48,
+      "pose_ids": [
+        "serena_quill_motion_001",
+        "serena_quill_motion_002",
+        "serena_quill_motion_003",
+        "serena_quill_motion_004",
+        "serena_quill_motion_005",
+        "serena_quill_motion_006",
+        "serena_quill_motion_007",
+        "serena_quill_motion_008",
+        "serena_quill_motion_009",
+        "serena_quill_motion_010",
+        "serena_quill_motion_011",
+        "serena_quill_motion_012",
+        "serena_quill_motion_013",
+        "serena_quill_motion_014",
+        "serena_quill_motion_015",
+        "serena_quill_motion_016",
+        "serena_quill_motion_017",
+        "serena_quill_motion_018",
+        "serena_quill_motion_019",
+        "serena_quill_motion_020",
+        "serena_quill_motion_021",
+        "serena_quill_motion_022",
+        "serena_quill_motion_023",
+        "serena_quill_motion_024",
+        "serena_quill_motion_025",
+        "serena_quill_motion_026",
+        "serena_quill_motion_027",
+        "serena_quill_motion_028",
+        "serena_quill_motion_029",
+        "serena_quill_motion_030",
+        "serena_quill_motion_031",
+        "serena_quill_motion_032",
+        "serena_quill_motion_033",
+        "serena_quill_motion_034",
+        "serena_quill_motion_035",
+        "serena_quill_motion_036",
+        "serena_quill_motion_037",
+        "serena_quill_motion_038",
+        "serena_quill_motion_039",
+        "serena_quill_motion_040",
+        "serena_quill_motion_041",
+        "serena_quill_motion_042",
+        "serena_quill_motion_043",
+        "serena_quill_motion_044",
+        "serena_quill_motion_045",
+        "serena_quill_motion_046",
+        "serena_quill_motion_047",
+        "serena_quill_motion_048"
+      ],
+      "runtime_admitted": false,
+      "sha256": "e9059d646a778a1684f090c14bf32bfe737f2bc093d1526a07c1f4d43b6fdc51",
+      "shard_id": "serena-quill-source-motion-v001",
+      "source": "joeville_contact_sheet_reconstruction"
+    }
+  ]
+}

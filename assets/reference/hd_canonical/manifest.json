@@ -37,18 +37,81 @@
       "status": "candidate_review",
       "frame_count": 10,
       "approval_scope": "source available; animation admission remains gated"
+    },
+    "phazer_motion": {
+      "archive_filename": "WizardJoePhazerSprites.zip",
+      "archive_sha256": "636b9ddf8a5edff9db9de8f2eaa9ecf930b73bfe2b1d428b5111195ff4aec450",
+      "manifest_path": "source-metadata/phazer/phazer_sprite_manifest_v001.json",
+      "pack_id": "wizard_joe_phazer_motion_v001",
+      "status": "candidate_visual_parity",
+      "frame_count": 48,
+      "approval_scope": "reconstructed transparent alpha candidates"
     }
   },
   "categories": [
-    {"id": "canonical_001_020", "range": [1, 20]},
-    {"id": "listen_think_021_040", "range": [21, 40]},
-    {"id": "speech_041_075", "range": [41, 75]},
-    {"id": "emotion_076_110", "range": [76, 110]},
-    {"id": "hands_staff_props_111_135", "range": [111, 135]},
-    {"id": "ground_136_170", "range": [136, 170]},
-    {"id": "flight_171_195", "range": [171, 195]},
-    {"id": "magic_196_220", "range": [196, 220]},
-    {"id": "dance_comedy_hero_221_250", "range": [221, 250]}
+    {
+      "id": "canonical_001_020",
+      "range": [
+        1,
+        20
+      ]
+    },
+    {
+      "id": "listen_think_021_040",
+      "range": [
+        21,
+        40
+      ]
+    },
+    {
+      "id": "speech_041_075",
+      "range": [
+        41,
+        75
+      ]
+    },
+    {
+      "id": "emotion_076_110",
+      "range": [
+        76,
+        110
+      ]
+    },
+    {
+      "id": "hands_staff_props_111_135",
+      "range": [
+        111,
+        135
+      ]
+    },
+    {
+      "id": "ground_136_170",
+      "range": [
+        136,
+        170
+      ]
+    },
+    {
+      "id": "flight_171_195",
+      "range": [
+        171,
+        195
+      ]
+    },
+    {
+      "id": "magic_196_220",
+      "range": [
+        196,
+        220
+      ]
+    },
+    {
+      "id": "dance_comedy_hero_221_250",
+      "range": [
+        221,
+        250
+      ]
+    }
   ],
   "runtime_policy": {
     "render_assets": "compressed colored RGBA pixel nodes in .wjpose shards",
@@ -65,10 +128,10 @@
   },
   "compiled_library_index": {
     "path": "compiled/library-index.json",
-    "sha256": "ebb62aa0266b40dbcb1f85469235ebf8b882c669fb9387d5b5664e9bc2358a95",
-    "pose_count": 260,
+    "sha256": "1a3735f8ade0082f89b21786a3a02059609d5f13aac2f8944d2d94a873bc9a05",
+    "pose_count": 308,
     "approved_pose_count": 250,
-    "candidate_pose_count": 10,
+    "candidate_pose_count": 58,
     "runtime_admitted": false
   }
 }

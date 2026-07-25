@@ -4,11 +4,11 @@ Date: 2026-07-22
 
 ## Decision
 
-Wizard Joe's HD actor is built from the two user-supplied transparent-alpha
-archives. Work that attempted to redesign or regenerate the staff is
-disregarded. The supplied pixels, including their authored staff, identity,
-costume, wings, proportions, expressions, and pose composition, are immutable
-source art.
+Wizard Joe's approved HD actor is built from the two user-supplied
+transparent-alpha archives. Work that attempted to redesign or regenerate the
+staff is disregarded. The supplied pixels, including their authored staff,
+identity, costume, wings, proportions, expressions, and pose composition, are
+immutable source art.
 
 ## Source Status
 
@@ -18,6 +18,11 @@ source art.
 - `wizard_joe_forward_camera_flight_cycle` v001: ten full-resolution 1254x1254
   RGBA frames. The source is available to the library, but its manifest status
   is `candidate_review`, so animation/runtime admission remains closed.
+- `wizard_joe_phazer_motion_v001`: 48 poses reconstructed from eight
+  user-supplied checkerboard contact sheets. They are normalized to the
+  canonical 1254x1254 RGBA canvas and compiled as transparent pixel graphs.
+  The source actors are materially smaller than the approved masters, so these
+  frames remain `candidate_visual_parity` and runtime admission is closed.
 
 Archive and per-frame hashes are enforced by the build. The authoritative
 release manifests and QA reports are preserved under
@@ -33,4 +38,6 @@ files are not served as runtime render assets.
 The source-art approval and runtime-animation approval are intentionally
 separate. The 250 frames may be reviewed through the projector immediately;
 motion clips, transitions, root motion, contact continuity, and the new flight
-cycle remain subject to the existing character-director gates.
+cycle remain subject to the existing character-director gates. The Phazer
+frames add a third gate: transparent reconstruction and silhouette integrity
+must pass before visual parity is judged.

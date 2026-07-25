@@ -6,9 +6,11 @@ are superseded and must not be used to alter these frames.
 
 The 250-frame production package is approved as transparent source art. The
 ten-frame forward-camera flight package remains a review candidate until its
-animation gate is accepted. Runtime rendering uses the compiled `.wjpose`
-colored-pixel artifacts under `compiled/`; PNG files are never runtime render
-assets.
+animation gate is accepted. The 48-frame Phazer motion package was supplied as
+eight checkerboard contact sheets. Its isolated transparent reconstructions
+are visual-parity candidates, not approved production art. Runtime rendering
+uses the compiled `.wjpose` colored-pixel artifacts under `compiled/`; PNG
+files are never runtime render assets.
 
 Rebuild with:
 
@@ -16,8 +18,12 @@ Rebuild with:
 python3 tools/build_hd_pose_masters.py \
   --production-archive "/path/to/Wizard_Joe_Production_Alpha_Set_001_250_v001.zip" \
   --flight-archive "/path/to/Wizard_Joe_Forward_Camera_Flight_Alpha_Cycle_v001 (1).zip"
+
+python3 tools/build_hd_phazer_pose_masters.py \
+  --archive "/path/to/WizardJoePhazerSprites.zip"
 ```
 
-The compiler verifies both archive hashes, every per-frame source hash, the
-RGBA canvas contract, transparent corners, frame counts, category coverage,
-and approval state before writing artifacts.
+The compilers verify archive hashes, source dimensions, the RGBA canvas
+contract, transparent corners, frame counts, category coverage, and approval
+state before writing artifacts. The Phazer build also records every recovered
+source and output bounding box so cropping damage can be audited.

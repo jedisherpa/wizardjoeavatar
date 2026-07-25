@@ -1,0 +1,252 @@
+{
+  "approved_pose_count": 0,
+  "asset_set_id": "mira-solen-source-motion-v001",
+  "candidate_pose_count": 48,
+  "character_id": "mira-solen",
+  "display_name": "Mira Solen",
+  "pose_count": 48,
+  "profile": {
+    "alpha_mode": "straight",
+    "baseline_y": 1185,
+    "canvas_height": 1254,
+    "canvas_width": 1254,
+    "color_space": "sRGB",
+    "minimum_margin": 69,
+    "profile_id": "wizardjoe_hd_alpha_1254_v001"
+  },
+  "review_projection": true,
+  "runtime_admitted": false,
+  "schema_version": 1,
+  "sequences": {
+    "g1": {
+      "approval_state": "candidate_visual_parity",
+      "fps": 8,
+      "loop": true,
+      "pose_ids": [
+        "mira_solen_motion_001",
+        "mira_solen_motion_002",
+        "mira_solen_motion_003",
+        "mira_solen_motion_004",
+        "mira_solen_motion_005",
+        "mira_solen_motion_006"
+      ],
+      "runtime_admitted": false
+    },
+    "g2": {
+      "approval_state": "candidate_visual_parity",
+      "fps": 8,
+      "loop": true,
+      "pose_ids": [
+        "mira_solen_motion_007",
+        "mira_solen_motion_008",
+        "mira_solen_motion_009",
+        "mira_solen_motion_010",
+        "mira_solen_motion_011",
+        "mira_solen_motion_012"
+      ],
+      "runtime_admitted": false
+    },
+    "g3": {
+      "approval_state": "candidate_visual_parity",
+      "fps": 8,
+      "loop": true,
+      "pose_ids": [
+        "mira_solen_motion_013",
+        "mira_solen_motion_014",
+        "mira_solen_motion_015",
+        "mira_solen_motion_016",
+        "mira_solen_motion_017",
+        "mira_solen_motion_018"
+      ],
+      "runtime_admitted": false
+    },
+    "g4": {
+      "approval_state": "candidate_visual_parity",
+      "fps": 8,
+      "loop": true,
+      "pose_ids": [
+        "mira_solen_motion_019",
+        "mira_solen_motion_020",
+        "mira_solen_motion_021",
+        "mira_solen_motion_022",
+        "mira_solen_motion_023",
+        "mira_solen_motion_024"
+      ],
+      "runtime_admitted": false
+    },
+    "g5": {
+      "approval_state": "candidate_visual_parity",
+      "fps": 8,
+      "loop": true,
+      "pose_ids": [
+        "mira_solen_motion_025",
+        "mira_solen_motion_026",
+        "mira_solen_motion_027",
+        "mira_solen_motion_028",
+        "mira_solen_motion_029",
+        "mira_solen_motion_030"
+      ],
+      "runtime_admitted": false
+    },
+    "g6": {
+      "approval_state": "candidate_visual_parity",
+      "fps": 8,
+      "loop": true,
+      "pose_ids": [
+        "mira_solen_motion_031",
+        "mira_solen_motion_032",
+        "mira_solen_motion_033",
+        "mira_solen_motion_034",
+        "mira_solen_motion_035",
+        "mira_solen_motion_036"
+      ],
+      "runtime_admitted": false
+    },
+    "mira-solen-source-all": {
+      "approval_state": "candidate_visual_parity",
+      "fps": 8,
+      "loop": true,
+      "pose_ids": [
+        "mira_solen_motion_001",
+        "mira_solen_motion_002",
+        "mira_solen_motion_003",
+        "mira_solen_motion_004",
+        "mira_solen_motion_005",
+        "mira_solen_motion_006",
+        "mira_solen_motion_007",
+        "mira_solen_motion_008",
+        "mira_solen_motion_009",
+        "mira_solen_motion_010",
+        "mira_solen_motion_011",
+        "mira_solen_motion_012",
+        "mira_solen_motion_013",
+        "mira_solen_motion_014",
+        "mira_solen_motion_015",
+        "mira_solen_motion_016",
+        "mira_solen_motion_017",
+        "mira_solen_motion_018",
+        "mira_solen_motion_019",
+        "mira_solen_motion_020",
+        "mira_solen_motion_021",
+        "mira_solen_motion_022",
+        "mira_solen_motion_023",
+        "mira_solen_motion_024",
+        "mira_solen_motion_025",
+        "mira_solen_motion_026",
+        "mira_solen_motion_027",
+        "mira_solen_motion_028",
+        "mira_solen_motion_029",
+        "mira_solen_motion_030",
+        "mira_solen_motion_031",
+        "mira_solen_motion_032",
+        "mira_solen_motion_033",
+        "mira_solen_motion_034",
+        "mira_solen_motion_035",
+        "mira_solen_motion_036",
+        "mira_solen_motion_037",
+        "mira_solen_motion_038",
+        "mira_solen_motion_039",
+        "mira_solen_motion_040",
+        "mira_solen_motion_041",
+        "mira_solen_motion_042",
+        "mira_solen_motion_043",
+        "mira_solen_motion_044",
+        "mira_solen_motion_045",
+        "mira_solen_motion_046",
+        "mira_solen_motion_047",
+        "mira_solen_motion_048"
+      ],
+      "runtime_admitted": false
+    },
+    "p1": {
+      "approval_state": "candidate_visual_parity",
+      "fps": 8,
+      "loop": true,
+      "pose_ids": [
+        "mira_solen_motion_037",
+        "mira_solen_motion_038",
+        "mira_solen_motion_039",
+        "mira_solen_motion_040",
+        "mira_solen_motion_041",
+        "mira_solen_motion_042"
+      ],
+      "runtime_admitted": false
+    },
+    "p2": {
+      "approval_state": "candidate_visual_parity",
+      "fps": 8,
+      "loop": true,
+      "pose_ids": [
+        "mira_solen_motion_043",
+        "mira_solen_motion_044",
+        "mira_solen_motion_045",
+        "mira_solen_motion_046",
+        "mira_solen_motion_047",
+        "mira_solen_motion_048"
+      ],
+      "runtime_admitted": false
+    }
+  },
+  "shards": [
+    {
+      "approval_state": "candidate_visual_parity",
+      "bytes": 31713888,
+      "path": "mira-solen-candidate-source-motion-v001.wjpose",
+      "pose_count": 48,
+      "pose_ids": [
+        "mira_solen_motion_001",
+        "mira_solen_motion_002",
+        "mira_solen_motion_003",
+        "mira_solen_motion_004",
+        "mira_solen_motion_005",
+        "mira_solen_motion_006",
+        "mira_solen_motion_007",
+        "mira_solen_motion_008",
+        "mira_solen_motion_009",
+        "mira_solen_motion_010",
+        "mira_solen_motion_011",
+        "mira_solen_motion_012",
+        "mira_solen_motion_013",
+        "mira_solen_motion_014",
+        "mira_solen_motion_015",
+        "mira_solen_motion_016",
+        "mira_solen_motion_017",
+        "mira_solen_motion_018",
+        "mira_solen_motion_019",
+        "mira_solen_motion_020",
+        "mira_solen_motion_021",
+        "mira_solen_motion_022",
+        "mira_solen_motion_023",
+        "mira_solen_motion_024",
+        "mira_solen_motion_025",
+        "mira_solen_motion_026",
+        "mira_solen_motion_027",
+        "mira_solen_motion_028",
+        "mira_solen_motion_029",
+        "mira_solen_motion_030",
+        "mira_solen_motion_031",
+        "mira_solen_motion_032",
+        "mira_solen_motion_033",
+        "mira_solen_motion_034",
+        "mira_solen_motion_035",
+        "mira_solen_motion_036",
+        "mira_solen_motion_037",
+        "mira_solen_motion_038",
+        "mira_solen_motion_039",
+        "mira_solen_motion_040",
+        "mira_solen_motion_041",
+        "mira_solen_motion_042",
+        "mira_solen_motion_043",
+        "mira_solen_motion_044",
+        "mira_solen_motion_045",
+        "mira_solen_motion_046",
+        "mira_solen_motion_047",
+        "mira_solen_motion_048"
+      ],
+      "runtime_admitted": false,
+      "sha256": "34b19008f97fa081da6a138432b397e69529e5b7ed9a13c33eeeceaa192bac0f",
+      "shard_id": "mira-solen-source-motion-v001",
+      "source": "joeville_contact_sheet_reconstruction"
+    }
+  ]
+}

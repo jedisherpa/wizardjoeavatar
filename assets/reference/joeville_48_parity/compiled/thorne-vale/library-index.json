@@ -1,0 +1,200 @@
+{
+  "approved_pose_count": 0,
+  "asset_set_id": "thorne-vale-source-motion-v001",
+  "candidate_pose_count": 36,
+  "character_id": "thorne-vale",
+  "display_name": "Thorne Vale",
+  "pose_count": 36,
+  "profile": {
+    "alpha_mode": "straight",
+    "baseline_y": 1185,
+    "canvas_height": 1254,
+    "canvas_width": 1254,
+    "color_space": "sRGB",
+    "minimum_margin": 69,
+    "profile_id": "wizardjoe_hd_alpha_1254_v001"
+  },
+  "review_projection": true,
+  "runtime_admitted": false,
+  "schema_version": 1,
+  "sequences": {
+    "g1": {
+      "approval_state": "candidate_source_partial",
+      "fps": 8,
+      "loop": true,
+      "pose_ids": [
+        "thorne_vale_motion_001",
+        "thorne_vale_motion_002",
+        "thorne_vale_motion_003",
+        "thorne_vale_motion_004",
+        "thorne_vale_motion_005",
+        "thorne_vale_motion_006"
+      ],
+      "runtime_admitted": false
+    },
+    "g2": {
+      "approval_state": "candidate_source_partial",
+      "fps": 8,
+      "loop": true,
+      "pose_ids": [
+        "thorne_vale_motion_007",
+        "thorne_vale_motion_008",
+        "thorne_vale_motion_009",
+        "thorne_vale_motion_010",
+        "thorne_vale_motion_011",
+        "thorne_vale_motion_012"
+      ],
+      "runtime_admitted": false
+    },
+    "g3": {
+      "approval_state": "candidate_source_partial",
+      "fps": 8,
+      "loop": true,
+      "pose_ids": [
+        "thorne_vale_motion_013",
+        "thorne_vale_motion_014",
+        "thorne_vale_motion_015",
+        "thorne_vale_motion_016",
+        "thorne_vale_motion_017",
+        "thorne_vale_motion_018"
+      ],
+      "runtime_admitted": false
+    },
+    "g4": {
+      "approval_state": "candidate_source_partial",
+      "fps": 8,
+      "loop": true,
+      "pose_ids": [
+        "thorne_vale_motion_019",
+        "thorne_vale_motion_020",
+        "thorne_vale_motion_021",
+        "thorne_vale_motion_022",
+        "thorne_vale_motion_023",
+        "thorne_vale_motion_024"
+      ],
+      "runtime_admitted": false
+    },
+    "g5": {
+      "approval_state": "candidate_source_partial",
+      "fps": 8,
+      "loop": true,
+      "pose_ids": [
+        "thorne_vale_motion_025",
+        "thorne_vale_motion_026",
+        "thorne_vale_motion_027",
+        "thorne_vale_motion_028",
+        "thorne_vale_motion_029",
+        "thorne_vale_motion_030"
+      ],
+      "runtime_admitted": false
+    },
+    "g6": {
+      "approval_state": "candidate_source_partial",
+      "fps": 8,
+      "loop": true,
+      "pose_ids": [
+        "thorne_vale_motion_031",
+        "thorne_vale_motion_032",
+        "thorne_vale_motion_033",
+        "thorne_vale_motion_034",
+        "thorne_vale_motion_035",
+        "thorne_vale_motion_036"
+      ],
+      "runtime_admitted": false
+    },
+    "thorne-vale-source-all": {
+      "approval_state": "candidate_source_partial",
+      "fps": 8,
+      "loop": true,
+      "pose_ids": [
+        "thorne_vale_motion_001",
+        "thorne_vale_motion_002",
+        "thorne_vale_motion_003",
+        "thorne_vale_motion_004",
+        "thorne_vale_motion_005",
+        "thorne_vale_motion_006",
+        "thorne_vale_motion_007",
+        "thorne_vale_motion_008",
+        "thorne_vale_motion_009",
+        "thorne_vale_motion_010",
+        "thorne_vale_motion_011",
+        "thorne_vale_motion_012",
+        "thorne_vale_motion_013",
+        "thorne_vale_motion_014",
+        "thorne_vale_motion_015",
+        "thorne_vale_motion_016",
+        "thorne_vale_motion_017",
+        "thorne_vale_motion_018",
+        "thorne_vale_motion_019",
+        "thorne_vale_motion_020",
+        "thorne_vale_motion_021",
+        "thorne_vale_motion_022",
+        "thorne_vale_motion_023",
+        "thorne_vale_motion_024",
+        "thorne_vale_motion_025",
+        "thorne_vale_motion_026",
+        "thorne_vale_motion_027",
+        "thorne_vale_motion_028",
+        "thorne_vale_motion_029",
+        "thorne_vale_motion_030",
+        "thorne_vale_motion_031",
+        "thorne_vale_motion_032",
+        "thorne_vale_motion_033",
+        "thorne_vale_motion_034",
+        "thorne_vale_motion_035",
+        "thorne_vale_motion_036"
+      ],
+      "runtime_admitted": false
+    }
+  },
+  "shards": [
+    {
+      "approval_state": "candidate_source_partial",
+      "bytes": 25551720,
+      "path": "thorne-vale-candidate-source-motion-v001.wjpose",
+      "pose_count": 36,
+      "pose_ids": [
+        "thorne_vale_motion_001",
+        "thorne_vale_motion_002",
+        "thorne_vale_motion_003",
+        "thorne_vale_motion_004",
+        "thorne_vale_motion_005",
+        "thorne_vale_motion_006",
+        "thorne_vale_motion_007",
+        "thorne_vale_motion_008",
+        "thorne_vale_motion_009",
+        "thorne_vale_motion_010",
+        "thorne_vale_motion_011",
+        "thorne_vale_motion_012",
+        "thorne_vale_motion_013",
+        "thorne_vale_motion_014",
+        "thorne_vale_motion_015",
+        "thorne_vale_motion_016",
+        "thorne_vale_motion_017",
+        "thorne_vale_motion_018",
+        "thorne_vale_motion_019",
+        "thorne_vale_motion_020",
+        "thorne_vale_motion_021",
+        "thorne_vale_motion_022",
+        "thorne_vale_motion_023",
+        "thorne_vale_motion_024",
+        "thorne_vale_motion_025",
+        "thorne_vale_motion_026",
+        "thorne_vale_motion_027",
+        "thorne_vale_motion_028",
+        "thorne_vale_motion_029",
+        "thorne_vale_motion_030",
+        "thorne_vale_motion_031",
+        "thorne_vale_motion_032",
+        "thorne_vale_motion_033",
+        "thorne_vale_motion_034",
+        "thorne_vale_motion_035",
+        "thorne_vale_motion_036"
+      ],
+      "runtime_admitted": false,
+      "sha256": "c48f3ccaea95580c41ca70dd6a9a3fd43fe232278875db3ccd02e9406f84cb82",
+      "shard_id": "thorne-vale-source-motion-v001",
+      "source": "joeville_contact_sheet_reconstruction"
+    }
+  ]
+}

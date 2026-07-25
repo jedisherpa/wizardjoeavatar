@@ -1,0 +1,1062 @@
+{
+  "artifact": {
+    "bytes": 23444101,
+    "path": "compiled/selene-hart/selene-hart-candidate-source-motion-v001.wjpose",
+    "pose_count": 36,
+    "pose_ids": [
+      "selene_hart_motion_001",
+      "selene_hart_motion_002",
+      "selene_hart_motion_003",
+      "selene_hart_motion_004",
+      "selene_hart_motion_005",
+      "selene_hart_motion_006",
+      "selene_hart_motion_007",
+      "selene_hart_motion_008",
+      "selene_hart_motion_009",
+      "selene_hart_motion_010",
+      "selene_hart_motion_011",
+      "selene_hart_motion_012",
+      "selene_hart_motion_013",
+      "selene_hart_motion_014",
+      "selene_hart_motion_015",
+      "selene_hart_motion_016",
+      "selene_hart_motion_017",
+      "selene_hart_motion_018",
+      "selene_hart_motion_019",
+      "selene_hart_motion_020",
+      "selene_hart_motion_021",
+      "selene_hart_motion_022",
+      "selene_hart_motion_023",
+      "selene_hart_motion_024",
+      "selene_hart_motion_025",
+      "selene_hart_motion_026",
+      "selene_hart_motion_027",
+      "selene_hart_motion_028",
+      "selene_hart_motion_029",
+      "selene_hart_motion_030",
+      "selene_hart_motion_031",
+      "selene_hart_motion_032",
+      "selene_hart_motion_033",
+      "selene_hart_motion_034",
+      "selene_hart_motion_035",
+      "selene_hart_motion_036"
+    ],
+    "sha256": "15679165338fd94a38188172d7532c23514918edf8a99e7656994f77c51ae8ad"
+  },
+  "character_id": "selene-hart",
+  "compiled_pose_count": 36,
+  "display_name": "Selene Hart",
+  "extraction_profile": {
+    "background_max_channel_spread": 64,
+    "background_min_channel": 210,
+    "frame_grouping": "nearest_expected_center_by_component_centroid",
+    "maximum_source_scale": 2.1,
+    "minimum_component_area": 24
+  },
+  "library_index": {
+    "path": "compiled/selene-hart/library-index.json",
+    "sha256": "6569fd4b703d350c33738237fa01c1b4db016c6475633b9d9977e5f85a55767c"
+  },
+  "missing_sequences": [
+    "g7",
+    "g8"
+  ],
+  "parity_tracker_sha256": "81787dc6cb83594b3e3c80b99f499c9d91cfa2584b9ec97473bc48ac49bd35a0",
+  "poses": [
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-001",
+      "normalization_scale": 1.73561431,
+      "output_bbox": [
+        432,
+        71,
+        821,
+        1185
+      ],
+      "pose_id": "selene_hart_motion_001",
+      "rgba_sha256": "977b575844349597cda59a68b66fddbf9801c7d17ff1f5020c72798b6d05fc2c",
+      "runtime_admitted": false,
+      "sequence_id": "g1",
+      "source_archive_id": "sprites-2",
+      "source_archive_sha256": "570d20086ad833b018188eee9c7d3368e5a156139e67c62b474f86cb50bfa749",
+      "source_bbox": [
+        66,
+        116,
+        290,
+        758
+      ],
+      "source_frame_index": 1,
+      "source_member": "sheet-selene-hart-g1.png",
+      "source_member_sha256": "f8f8b418d81201dcdd665e6bbed6f2792deaf41ed8be495634275709bc9470f8"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-002",
+      "normalization_scale": 1.73561431,
+      "output_bbox": [
+        434,
+        69,
+        821,
+        1183
+      ],
+      "pose_id": "selene_hart_motion_002",
+      "rgba_sha256": "016391715e2e749856327c8ef87f416856058afded0d0e4b72926971c26ddc3c",
+      "runtime_admitted": false,
+      "sequence_id": "g1",
+      "source_archive_id": "sprites-2",
+      "source_archive_sha256": "570d20086ad833b018188eee9c7d3368e5a156139e67c62b474f86cb50bfa749",
+      "source_bbox": [
+        345,
+        115,
+        568,
+        757
+      ],
+      "source_frame_index": 2,
+      "source_member": "sheet-selene-hart-g1.png",
+      "source_member_sha256": "f8f8b418d81201dcdd665e6bbed6f2792deaf41ed8be495634275709bc9470f8"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-003",
+      "normalization_scale": 1.73561431,
+      "output_bbox": [
+        446,
+        72,
+        807,
+        1183
+      ],
+      "pose_id": "selene_hart_motion_003",
+      "rgba_sha256": "df054fe9fabd998abc7c97987ac1eee7a2deda2a7a085abd79affe0293ca8e3c",
+      "runtime_admitted": false,
+      "sequence_id": "g1",
+      "source_archive_id": "sprites-2",
+      "source_archive_sha256": "570d20086ad833b018188eee9c7d3368e5a156139e67c62b474f86cb50bfa749",
+      "source_bbox": [
+        617,
+        117,
+        825,
+        757
+      ],
+      "source_frame_index": 3,
+      "source_member": "sheet-selene-hart-g1.png",
+      "source_member_sha256": "f8f8b418d81201dcdd665e6bbed6f2792deaf41ed8be495634275709bc9470f8"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-004",
+      "normalization_scale": 1.73561431,
+      "output_bbox": [
+        370,
+        74,
+        884,
+        1178
+      ],
+      "pose_id": "selene_hart_motion_004",
+      "rgba_sha256": "6e9a3595638c15f6b04cc03ddbf6c9f00992a98a98bad00fa0fe4f36d623664a",
+      "runtime_admitted": false,
+      "sequence_id": "g1",
+      "source_archive_id": "sprites-2",
+      "source_archive_sha256": "570d20086ad833b018188eee9c7d3368e5a156139e67c62b474f86cb50bfa749",
+      "source_bbox": [
+        844,
+        118,
+        1140,
+        754
+      ],
+      "source_frame_index": 4,
+      "source_member": "sheet-selene-hart-g1.png",
+      "source_member_sha256": "f8f8b418d81201dcdd665e6bbed6f2792deaf41ed8be495634275709bc9470f8"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-005",
+      "normalization_scale": 1.73561431,
+      "output_bbox": [
+        366,
+        118,
+        887,
+        1180
+      ],
+      "pose_id": "selene_hart_motion_005",
+      "rgba_sha256": "f85e4300b545b2c69b95b4cdded47167fc32265cc5bdf732773d4d460f24abbb",
+      "runtime_admitted": false,
+      "sequence_id": "g1",
+      "source_archive_id": "sprites-2",
+      "source_archive_sha256": "570d20086ad833b018188eee9c7d3368e5a156139e67c62b474f86cb50bfa749",
+      "source_bbox": [
+        1154,
+        143,
+        1454,
+        755
+      ],
+      "source_frame_index": 5,
+      "source_member": "sheet-selene-hart-g1.png",
+      "source_member_sha256": "f8f8b418d81201dcdd665e6bbed6f2792deaf41ed8be495634275709bc9470f8"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-006",
+      "normalization_scale": 1.73561431,
+      "output_bbox": [
+        379,
+        119,
+        875,
+        1178
+      ],
+      "pose_id": "selene_hart_motion_006",
+      "rgba_sha256": "674263bddf4e992668f2e8b47ad5655415c77a3f87975170cec268fa801d7e9c",
+      "runtime_admitted": false,
+      "sequence_id": "g1",
+      "source_archive_id": "sprites-2",
+      "source_archive_sha256": "570d20086ad833b018188eee9c7d3368e5a156139e67c62b474f86cb50bfa749",
+      "source_bbox": [
+        1454,
+        144,
+        1740,
+        754
+      ],
+      "source_frame_index": 6,
+      "source_member": "sheet-selene-hart-g1.png",
+      "source_member_sha256": "f8f8b418d81201dcdd665e6bbed6f2792deaf41ed8be495634275709bc9470f8"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-007",
+      "normalization_scale": 1.92746114,
+      "output_bbox": [
+        365,
+        71,
+        889,
+        1179
+      ],
+      "pose_id": "selene_hart_motion_007",
+      "rgba_sha256": "463d7686ff4ee03cea41b9f9b4a01c57bd93b02cd3209d37106f85e6c0409150",
+      "runtime_admitted": false,
+      "sequence_id": "g2",
+      "source_archive_id": "sprites-2",
+      "source_archive_sha256": "570d20086ad833b018188eee9c7d3368e5a156139e67c62b474f86cb50bfa749",
+      "source_bbox": [
+        9,
+        126,
+        281,
+        701
+      ],
+      "source_frame_index": 1,
+      "source_member": "sheet-selene-hart-g2.png",
+      "source_member_sha256": "a4056ec2c5d47dc45cf2c1814cebdddda5744f9fe5c36a753f20c902e8c62c00"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-008",
+      "normalization_scale": 1.92746114,
+      "output_bbox": [
+        391,
+        69,
+        863,
+        1185
+      ],
+      "pose_id": "selene_hart_motion_008",
+      "rgba_sha256": "b08f34d17f349347df426647cb3329075dcc298405bb5fe20f07a42491689d4e",
+      "runtime_admitted": false,
+      "sequence_id": "g2",
+      "source_archive_id": "sprites-2",
+      "source_archive_sha256": "570d20086ad833b018188eee9c7d3368e5a156139e67c62b474f86cb50bfa749",
+      "source_bbox": [
+        305,
+        125,
+        550,
+        704
+      ],
+      "source_frame_index": 2,
+      "source_member": "sheet-selene-hart-g2.png",
+      "source_member_sha256": "a4056ec2c5d47dc45cf2c1814cebdddda5744f9fe5c36a753f20c902e8c62c00"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-009",
+      "normalization_scale": 1.92746114,
+      "output_bbox": [
+        385,
+        71,
+        869,
+        1183
+      ],
+      "pose_id": "selene_hart_motion_009",
+      "rgba_sha256": "435907dfad4a3b9da9808f22f832a0451b0993729c60f9a39eacd0d1a0a496bb",
+      "runtime_admitted": false,
+      "sequence_id": "g2",
+      "source_archive_id": "sprites-2",
+      "source_archive_sha256": "570d20086ad833b018188eee9c7d3368e5a156139e67c62b474f86cb50bfa749",
+      "source_bbox": [
+        613,
+        126,
+        864,
+        703
+      ],
+      "source_frame_index": 3,
+      "source_member": "sheet-selene-hart-g2.png",
+      "source_member_sha256": "a4056ec2c5d47dc45cf2c1814cebdddda5744f9fe5c36a753f20c902e8c62c00"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-010",
+      "normalization_scale": 1.92746114,
+      "output_bbox": [
+        356,
+        71,
+        898,
+        1181
+      ],
+      "pose_id": "selene_hart_motion_010",
+      "rgba_sha256": "2d02e1bf8a4cc8a46eeb02ca72f60764ceadfd63ca33aaacae7607525611b5fa",
+      "runtime_admitted": false,
+      "sequence_id": "g2",
+      "source_archive_id": "sprites-2",
+      "source_archive_sha256": "570d20086ad833b018188eee9c7d3368e5a156139e67c62b474f86cb50bfa749",
+      "source_bbox": [
+        868,
+        126,
+        1149,
+        702
+      ],
+      "source_frame_index": 4,
+      "source_member": "sheet-selene-hart-g2.png",
+      "source_member_sha256": "a4056ec2c5d47dc45cf2c1814cebdddda5744f9fe5c36a753f20c902e8c62c00"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-011",
+      "normalization_scale": 1.92746114,
+      "output_bbox": [
+        292,
+        106,
+        963,
+        1118
+      ],
+      "pose_id": "selene_hart_motion_011",
+      "rgba_sha256": "45f54fe7a4d5732000b4986ad4cbcd06c8faf46ca30bc28d638cadf2226cbe2f",
+      "runtime_admitted": false,
+      "sequence_id": "g2",
+      "source_archive_id": "sprites-2",
+      "source_archive_sha256": "570d20086ad833b018188eee9c7d3368e5a156139e67c62b474f86cb50bfa749",
+      "source_bbox": [
+        1189,
+        144,
+        1537,
+        669
+      ],
+      "source_frame_index": 5,
+      "source_member": "sheet-selene-hart-g2.png",
+      "source_member_sha256": "a4056ec2c5d47dc45cf2c1814cebdddda5744f9fe5c36a753f20c902e8c62c00"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-012",
+      "normalization_scale": 1.92746114,
+      "output_bbox": [
+        332,
+        142,
+        922,
+        1175
+      ],
+      "pose_id": "selene_hart_motion_012",
+      "rgba_sha256": "fc6c5181dec6a73d25c3d738cf03641604d888e3fa63337554ce456ed2af3c69",
+      "runtime_admitted": false,
+      "sequence_id": "g2",
+      "source_archive_id": "sprites-2",
+      "source_archive_sha256": "570d20086ad833b018188eee9c7d3368e5a156139e67c62b474f86cb50bfa749",
+      "source_bbox": [
+        1541,
+        163,
+        1847,
+        699
+      ],
+      "source_frame_index": 6,
+      "source_member": "sheet-selene-hart-g2.png",
+      "source_member_sha256": "a4056ec2c5d47dc45cf2c1814cebdddda5744f9fe5c36a753f20c902e8c62c00"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-013",
+      "normalization_scale": 1.9011925,
+      "output_bbox": [
+        304,
+        295,
+        949,
+        1177
+      ],
+      "pose_id": "selene_hart_motion_013",
+      "rgba_sha256": "7a598d696de71d3bc699064f991799459300fccf4237e334f82a489c992ea386",
+      "runtime_admitted": false,
+      "sequence_id": "g3",
+      "source_archive_id": "sprites-2",
+      "source_archive_sha256": "570d20086ad833b018188eee9c7d3368e5a156139e67c62b474f86cb50bfa749",
+      "source_bbox": [
+        25,
+        217,
+        364,
+        681
+      ],
+      "source_frame_index": 1,
+      "source_member": "sheet-selene-hart-g3.png",
+      "source_member_sha256": "1b8299be375c2444d6b53187313c8a4bf46dcfd7df50213e2b70208e446b0f7c"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-014",
+      "normalization_scale": 1.9011925,
+      "output_bbox": [
+        426,
+        299,
+        827,
+        1185
+      ],
+      "pose_id": "selene_hart_motion_014",
+      "rgba_sha256": "e3476e2065329a5dc601988109d910bc23f767760a4396d37c4a5e4a2ec4ef40",
+      "runtime_admitted": false,
+      "sequence_id": "g3",
+      "source_archive_id": "sprites-2",
+      "source_archive_sha256": "570d20086ad833b018188eee9c7d3368e5a156139e67c62b474f86cb50bfa749",
+      "source_bbox": [
+        371,
+        219,
+        582,
+        685
+      ],
+      "source_frame_index": 2,
+      "source_member": "sheet-selene-hart-g3.png",
+      "source_member_sha256": "1b8299be375c2444d6b53187313c8a4bf46dcfd7df50213e2b70208e446b0f7c"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-015",
+      "normalization_scale": 1.9011925,
+      "output_bbox": [
+        300,
+        299,
+        954,
+        1179
+      ],
+      "pose_id": "selene_hart_motion_015",
+      "rgba_sha256": "dc2834cf3de417ece6eca988178c236f25c54e4e951846859cd23a049d07c692",
+      "runtime_admitted": false,
+      "sequence_id": "g3",
+      "source_archive_id": "sprites-2",
+      "source_archive_sha256": "570d20086ad833b018188eee9c7d3368e5a156139e67c62b474f86cb50bfa749",
+      "source_bbox": [
+        629,
+        219,
+        973,
+        682
+      ],
+      "source_frame_index": 3,
+      "source_member": "sheet-selene-hart-g3.png",
+      "source_member_sha256": "1b8299be375c2444d6b53187313c8a4bf46dcfd7df50213e2b70208e446b0f7c"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-016",
+      "normalization_scale": 1.9011925,
+      "output_bbox": [
+        417,
+        419,
+        837,
+        1185
+      ],
+      "pose_id": "selene_hart_motion_016",
+      "rgba_sha256": "74f490b3773b42b39380d2e2013d788dd237baa5c739095162cc3c635e9e6e39",
+      "runtime_admitted": false,
+      "sequence_id": "g3",
+      "source_archive_id": "sprites-2",
+      "source_archive_sha256": "570d20086ad833b018188eee9c7d3368e5a156139e67c62b474f86cb50bfa749",
+      "source_bbox": [
+        1003,
+        282,
+        1224,
+        685
+      ],
+      "source_frame_index": 4,
+      "source_member": "sheet-selene-hart-g3.png",
+      "source_member_sha256": "1b8299be375c2444d6b53187313c8a4bf46dcfd7df50213e2b70208e446b0f7c"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-017",
+      "normalization_scale": 1.9011925,
+      "output_bbox": [
+        450,
+        179,
+        804,
+        1101
+      ],
+      "pose_id": "selene_hart_motion_017",
+      "rgba_sha256": "e043f5a98144da1b4f82611c580cefb0a43f878d0f8f560627a6ef91db88e901",
+      "runtime_admitted": false,
+      "sequence_id": "g3",
+      "source_archive_id": "sprites-2",
+      "source_archive_sha256": "570d20086ad833b018188eee9c7d3368e5a156139e67c62b474f86cb50bfa749",
+      "source_bbox": [
+        1304,
+        156,
+        1490,
+        641
+      ],
+      "source_frame_index": 5,
+      "source_member": "sheet-selene-hart-g3.png",
+      "source_member_sha256": "1b8299be375c2444d6b53187313c8a4bf46dcfd7df50213e2b70208e446b0f7c"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-018",
+      "normalization_scale": 1.9011925,
+      "output_bbox": [
+        410,
+        69,
+        843,
+        989
+      ],
+      "pose_id": "selene_hart_motion_018",
+      "rgba_sha256": "cd47afb11cd456cac600cd8456027881f122a0e7eb58d108fec77839889611ec",
+      "runtime_admitted": false,
+      "sequence_id": "g3",
+      "source_archive_id": "sprites-2",
+      "source_archive_sha256": "570d20086ad833b018188eee9c7d3368e5a156139e67c62b474f86cb50bfa749",
+      "source_bbox": [
+        1561,
+        98,
+        1789,
+        582
+      ],
+      "source_frame_index": 6,
+      "source_member": "sheet-selene-hart-g3.png",
+      "source_member_sha256": "1b8299be375c2444d6b53187313c8a4bf46dcfd7df50213e2b70208e446b0f7c"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-019",
+      "normalization_scale": 1.63396779,
+      "output_bbox": [
+        450,
+        136,
+        805,
+        1053
+      ],
+      "pose_id": "selene_hart_motion_019",
+      "rgba_sha256": "64b7ee934eb57f2429b9ed9165fed0fc05f128952fa9b1fcb546afe49ab0ba08",
+      "runtime_admitted": false,
+      "sequence_id": "g4",
+      "source_archive_id": "sprites-2",
+      "source_archive_sha256": "570d20086ad833b018188eee9c7d3368e5a156139e67c62b474f86cb50bfa749",
+      "source_bbox": [
+        82,
+        108,
+        299,
+        669
+      ],
+      "source_frame_index": 1,
+      "source_member": "sheet-selene-hart-g4.png",
+      "source_member_sha256": "d2b176ac4b425c5513e87476a75c62b5196dab0396a4bfb7c95f4e2fc1c7dc83"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-020",
+      "normalization_scale": 1.63396779,
+      "output_bbox": [
+        418,
+        425,
+        835,
+        1173
+      ],
+      "pose_id": "selene_hart_motion_020",
+      "rgba_sha256": "612010c6bd6774370ad236e34cb8ddd3e703f7a97cb3cce0e6f1e810cf077d34",
+      "runtime_admitted": false,
+      "sequence_id": "g4",
+      "source_archive_id": "sprites-2",
+      "source_archive_sha256": "570d20086ad833b018188eee9c7d3368e5a156139e67c62b474f86cb50bfa749",
+      "source_bbox": [
+        338,
+        285,
+        593,
+        743
+      ],
+      "source_frame_index": 2,
+      "source_member": "sheet-selene-hart-g4.png",
+      "source_member_sha256": "d2b176ac4b425c5513e87476a75c62b5196dab0396a4bfb7c95f4e2fc1c7dc83"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-021",
+      "normalization_scale": 1.63396779,
+      "output_bbox": [
+        424,
+        324,
+        829,
+        1172
+      ],
+      "pose_id": "selene_hart_motion_021",
+      "rgba_sha256": "78bdc598388a3aa615699f1e39c94c3f340d7307ed1a352b1984fb06653c0f10",
+      "runtime_admitted": false,
+      "sequence_id": "g4",
+      "source_archive_id": "sprites-2",
+      "source_archive_sha256": "570d20086ad833b018188eee9c7d3368e5a156139e67c62b474f86cb50bfa749",
+      "source_bbox": [
+        599,
+        223,
+        847,
+        742
+      ],
+      "source_frame_index": 3,
+      "source_member": "sheet-selene-hart-g4.png",
+      "source_member_sha256": "d2b176ac4b425c5513e87476a75c62b5196dab0396a4bfb7c95f4e2fc1c7dc83"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-022",
+      "normalization_scale": 1.63396779,
+      "output_bbox": [
+        438,
+        312,
+        815,
+        1181
+      ],
+      "pose_id": "selene_hart_motion_022",
+      "rgba_sha256": "a8fdb06da44759106b84e318e1a85298a5971e85c9320a13bc7346b555565121",
+      "runtime_admitted": false,
+      "sequence_id": "g4",
+      "source_archive_id": "sprites-2",
+      "source_archive_sha256": "570d20086ad833b018188eee9c7d3368e5a156139e67c62b474f86cb50bfa749",
+      "source_bbox": [
+        926,
+        216,
+        1157,
+        748
+      ],
+      "source_frame_index": 4,
+      "source_member": "sheet-selene-hart-g4.png",
+      "source_member_sha256": "d2b176ac4b425c5513e87476a75c62b5196dab0396a4bfb7c95f4e2fc1c7dc83"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-023",
+      "normalization_scale": 1.63396779,
+      "output_bbox": [
+        400,
+        237,
+        854,
+        1185
+      ],
+      "pose_id": "selene_hart_motion_023",
+      "rgba_sha256": "cf8276c197dbbddc9c113f5c3a041935d3d23cf4103ffcb3a5fc39498c64de0e",
+      "runtime_admitted": false,
+      "sequence_id": "g4",
+      "source_archive_id": "sprites-2",
+      "source_archive_sha256": "570d20086ad833b018188eee9c7d3368e5a156139e67c62b474f86cb50bfa749",
+      "source_bbox": [
+        1170,
+        170,
+        1448,
+        750
+      ],
+      "source_frame_index": 5,
+      "source_member": "sheet-selene-hart-g4.png",
+      "source_member_sha256": "d2b176ac4b425c5513e87476a75c62b5196dab0396a4bfb7c95f4e2fc1c7dc83"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-024",
+      "normalization_scale": 1.63396779,
+      "output_bbox": [
+        424,
+        69,
+        829,
+        1183
+      ],
+      "pose_id": "selene_hart_motion_024",
+      "rgba_sha256": "b79f362c4a6e875a5a359a562f352ca6aadd79b1a1dfc425e129780a8ee5cd71",
+      "runtime_admitted": false,
+      "sequence_id": "g4",
+      "source_archive_id": "sprites-2",
+      "source_archive_sha256": "570d20086ad833b018188eee9c7d3368e5a156139e67c62b474f86cb50bfa749",
+      "source_bbox": [
+        1466,
+        67,
+        1714,
+        749
+      ],
+      "source_frame_index": 6,
+      "source_member": "sheet-selene-hart-g4.png",
+      "source_member_sha256": "d2b176ac4b425c5513e87476a75c62b5196dab0396a4bfb7c95f4e2fc1c7dc83"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-025",
+      "normalization_scale": 1.74102964,
+      "output_bbox": [
+        437,
+        95,
+        817,
+        1183
+      ],
+      "pose_id": "selene_hart_motion_025",
+      "rgba_sha256": "f121d489f79429ce56d29527e51afacc0fce899b2813d93545529f63f30fab7a",
+      "runtime_admitted": false,
+      "sequence_id": "g5",
+      "source_archive_id": "sprites-2",
+      "source_archive_sha256": "570d20086ad833b018188eee9c7d3368e5a156139e67c62b474f86cb50bfa749",
+      "source_bbox": [
+        98,
+        85,
+        316,
+        710
+      ],
+      "source_frame_index": 1,
+      "source_member": "sheet-selene-hart-g5.png",
+      "source_member_sha256": "c6a8f4ffc3197b13e7d316c6e33353fa7923be7db8a4c7d3f1f39a76725cb8e1"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-026",
+      "normalization_scale": 1.74102964,
+      "output_bbox": [
+        434,
+        95,
+        821,
+        1185
+      ],
+      "pose_id": "selene_hart_motion_026",
+      "rgba_sha256": "5fffe9e029334ee2f33aa38bb964cdf921c1c60a7af9197155c65f74ef854628",
+      "runtime_admitted": false,
+      "sequence_id": "g5",
+      "source_archive_id": "sprites-2",
+      "source_archive_sha256": "570d20086ad833b018188eee9c7d3368e5a156139e67c62b474f86cb50bfa749",
+      "source_bbox": [
+        401,
+        85,
+        623,
+        711
+      ],
+      "source_frame_index": 2,
+      "source_member": "sheet-selene-hart-g5.png",
+      "source_member_sha256": "c6a8f4ffc3197b13e7d316c6e33353fa7923be7db8a4c7d3f1f39a76725cb8e1"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-027",
+      "normalization_scale": 1.74102964,
+      "output_bbox": [
+        432,
+        95,
+        822,
+        1185
+      ],
+      "pose_id": "selene_hart_motion_027",
+      "rgba_sha256": "e3686808c825b3546e37140780b80e0798a9f55d61f92c4e37bd05443e4db217",
+      "runtime_admitted": false,
+      "sequence_id": "g5",
+      "source_archive_id": "sprites-2",
+      "source_archive_sha256": "570d20086ad833b018188eee9c7d3368e5a156139e67c62b474f86cb50bfa749",
+      "source_bbox": [
+        716,
+        85,
+        940,
+        711
+      ],
+      "source_frame_index": 3,
+      "source_member": "sheet-selene-hart-g5.png",
+      "source_member_sha256": "c6a8f4ffc3197b13e7d316c6e33353fa7923be7db8a4c7d3f1f39a76725cb8e1"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-028",
+      "normalization_scale": 1.74102964,
+      "output_bbox": [
+        436,
+        95,
+        819,
+        1185
+      ],
+      "pose_id": "selene_hart_motion_028",
+      "rgba_sha256": "d9763f1a544d56a86c253ee96700dc20fcabb9a53f06dfad986cb2608c42a21a",
+      "runtime_admitted": false,
+      "sequence_id": "g5",
+      "source_archive_id": "sprites-2",
+      "source_archive_sha256": "570d20086ad833b018188eee9c7d3368e5a156139e67c62b474f86cb50bfa749",
+      "source_bbox": [
+        1033,
+        85,
+        1253,
+        711
+      ],
+      "source_frame_index": 4,
+      "source_member": "sheet-selene-hart-g5.png",
+      "source_member_sha256": "c6a8f4ffc3197b13e7d316c6e33353fa7923be7db8a4c7d3f1f39a76725cb8e1"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-029",
+      "normalization_scale": 1.74102964,
+      "output_bbox": [
+        433,
+        95,
+        821,
+        1180
+      ],
+      "pose_id": "selene_hart_motion_029",
+      "rgba_sha256": "1d37a2fe513bd62ffac7733c3b184ac764a72ba39fe43d611ee3cc1c4a56625f",
+      "runtime_admitted": false,
+      "sequence_id": "g5",
+      "source_archive_id": "sprites-2",
+      "source_archive_sha256": "570d20086ad833b018188eee9c7d3368e5a156139e67c62b474f86cb50bfa749",
+      "source_bbox": [
+        1345,
+        85,
+        1568,
+        708
+      ],
+      "source_frame_index": 5,
+      "source_member": "sheet-selene-hart-g5.png",
+      "source_member_sha256": "c6a8f4ffc3197b13e7d316c6e33353fa7923be7db8a4c7d3f1f39a76725cb8e1"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-030",
+      "normalization_scale": 1.74102964,
+      "output_bbox": [
+        408,
+        69,
+        845,
+        1067
+      ],
+      "pose_id": "selene_hart_motion_030",
+      "rgba_sha256": "89649bbf91b7ddc0db84764c794671b81266ddfebf0d8da46ce2506ca6d1db64",
+      "runtime_admitted": false,
+      "sequence_id": "g5",
+      "source_archive_id": "sprites-2",
+      "source_archive_sha256": "570d20086ad833b018188eee9c7d3368e5a156139e67c62b474f86cb50bfa749",
+      "source_bbox": [
+        1654,
+        70,
+        1905,
+        643
+      ],
+      "source_frame_index": 6,
+      "source_member": "sheet-selene-hart-g5.png",
+      "source_member_sha256": "c6a8f4ffc3197b13e7d316c6e33353fa7923be7db8a4c7d3f1f39a76725cb8e1"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-031",
+      "normalization_scale": 1.84158416,
+      "output_bbox": [
+        431,
+        98,
+        823,
+        1170
+      ],
+      "pose_id": "selene_hart_motion_031",
+      "rgba_sha256": "69520954b9e310724948dc9d76afc249d6f33cc876c02830bc97d301287b7992",
+      "runtime_admitted": false,
+      "sequence_id": "g6",
+      "source_archive_id": "sprites-2",
+      "source_archive_sha256": "570d20086ad833b018188eee9c7d3368e5a156139e67c62b474f86cb50bfa749",
+      "source_bbox": [
+        97,
+        150,
+        310,
+        732
+      ],
+      "source_frame_index": 1,
+      "source_member": "sheet-selene-hart-g6.png",
+      "source_member_sha256": "16f791344e08f2bf80c1893b9e81f539abbec0dce5e5093360aa7d7ca8fdde84"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-032",
+      "normalization_scale": 1.84158416,
+      "output_bbox": [
+        432,
+        110,
+        822,
+        1178
+      ],
+      "pose_id": "selene_hart_motion_032",
+      "rgba_sha256": "22d5e0f76b85ad5c1d2f27255cfde3920710ee3c1267df02431d776b367a4fbc",
+      "runtime_admitted": false,
+      "sequence_id": "g6",
+      "source_archive_id": "sprites-2",
+      "source_archive_sha256": "570d20086ad833b018188eee9c7d3368e5a156139e67c62b474f86cb50bfa749",
+      "source_bbox": [
+        364,
+        156,
+        576,
+        736
+      ],
+      "source_frame_index": 2,
+      "source_member": "sheet-selene-hart-g6.png",
+      "source_member_sha256": "16f791344e08f2bf80c1893b9e81f539abbec0dce5e5093360aa7d7ca8fdde84"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-033",
+      "normalization_scale": 1.84158416,
+      "output_bbox": [
+        454,
+        108,
+        800,
+        1180
+      ],
+      "pose_id": "selene_hart_motion_033",
+      "rgba_sha256": "c8f7ec1e9537a2608094233cc09a0fb48d591a4ac4d5c6cf0fc86132e0587e2b",
+      "runtime_admitted": false,
+      "sequence_id": "g6",
+      "source_archive_id": "sprites-2",
+      "source_archive_sha256": "570d20086ad833b018188eee9c7d3368e5a156139e67c62b474f86cb50bfa749",
+      "source_bbox": [
+        665,
+        155,
+        853,
+        737
+      ],
+      "source_frame_index": 3,
+      "source_member": "sheet-selene-hart-g6.png",
+      "source_member_sha256": "16f791344e08f2bf80c1893b9e81f539abbec0dce5e5093360aa7d7ca8fdde84"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-034",
+      "normalization_scale": 1.84158416,
+      "output_bbox": [
+        450,
+        104,
+        804,
+        1185
+      ],
+      "pose_id": "selene_hart_motion_034",
+      "rgba_sha256": "3c6d80d41d4628ffa8e9cb9e1864bc3f21815064b8ee3fd0c44fe4983066a63f",
+      "runtime_admitted": false,
+      "sequence_id": "g6",
+      "source_archive_id": "sprites-2",
+      "source_archive_sha256": "570d20086ad833b018188eee9c7d3368e5a156139e67c62b474f86cb50bfa749",
+      "source_bbox": [
+        935,
+        153,
+        1127,
+        740
+      ],
+      "source_frame_index": 4,
+      "source_member": "sheet-selene-hart-g6.png",
+      "source_member_sha256": "16f791344e08f2bf80c1893b9e81f539abbec0dce5e5093360aa7d7ca8fdde84"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-035",
+      "normalization_scale": 1.84158416,
+      "output_bbox": [
+        438,
+        108,
+        816,
+        1180
+      ],
+      "pose_id": "selene_hart_motion_035",
+      "rgba_sha256": "0518e6eddcf5c1a47cafcfb26a19aebfeb719894d66bf2c2fd996f42de4141c5",
+      "runtime_admitted": false,
+      "sequence_id": "g6",
+      "source_archive_id": "sprites-2",
+      "source_archive_sha256": "570d20086ad833b018188eee9c7d3368e5a156139e67c62b474f86cb50bfa749",
+      "source_bbox": [
+        1193,
+        155,
+        1398,
+        737
+      ],
+      "source_frame_index": 5,
+      "source_member": "sheet-selene-hart-g6.png",
+      "source_member_sha256": "16f791344e08f2bf80c1893b9e81f539abbec0dce5e5093360aa7d7ca8fdde84"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-036",
+      "normalization_scale": 1.84158416,
+      "output_bbox": [
+        434,
+        69,
+        819,
+        1056
+      ],
+      "pose_id": "selene_hart_motion_036",
+      "rgba_sha256": "d634b5de86f96c1a882629e2c12b72de0ee313ef56663d4fb7ec7531324a4f60",
+      "runtime_admitted": false,
+      "sequence_id": "g6",
+      "source_archive_id": "sprites-2",
+      "source_archive_sha256": "570d20086ad833b018188eee9c7d3368e5a156139e67c62b474f86cb50bfa749",
+      "source_bbox": [
+        1454,
+        134,
+        1663,
+        670
+      ],
+      "source_frame_index": 6,
+      "source_member": "sheet-selene-hart-g6.png",
+      "source_member_sha256": "16f791344e08f2bf80c1893b9e81f539abbec0dce5e5093360aa7d7ca8fdde84"
+    }
+  ],
+  "review_contact_sheet": {
+    "path": "source-metadata/selene-hart/source-motion-contact-sheet-v001.png",
+    "sha256": "b659bca70b403ebb62ce741ba0a50affbba993485417811805acca32144ad9e9"
+  },
+  "runtime_admitted": false,
+  "schema_version": 1,
+  "sequences": {
+    "g1": [
+      "selene_hart_motion_001",
+      "selene_hart_motion_002",
+      "selene_hart_motion_003",
+      "selene_hart_motion_004",
+      "selene_hart_motion_005",
+      "selene_hart_motion_006"
+    ],
+    "g2": [
+      "selene_hart_motion_007",
+      "selene_hart_motion_008",
+      "selene_hart_motion_009",
+      "selene_hart_motion_010",
+      "selene_hart_motion_011",
+      "selene_hart_motion_012"
+    ],
+    "g3": [
+      "selene_hart_motion_013",
+      "selene_hart_motion_014",
+      "selene_hart_motion_015",
+      "selene_hart_motion_016",
+      "selene_hart_motion_017",
+      "selene_hart_motion_018"
+    ],
+    "g4": [
+      "selene_hart_motion_019",
+      "selene_hart_motion_020",
+      "selene_hart_motion_021",
+      "selene_hart_motion_022",
+      "selene_hart_motion_023",
+      "selene_hart_motion_024"
+    ],
+    "g5": [
+      "selene_hart_motion_025",
+      "selene_hart_motion_026",
+      "selene_hart_motion_027",
+      "selene_hart_motion_028",
+      "selene_hart_motion_029",
+      "selene_hart_motion_030"
+    ],
+    "g6": [
+      "selene_hart_motion_031",
+      "selene_hart_motion_032",
+      "selene_hart_motion_033",
+      "selene_hart_motion_034",
+      "selene_hart_motion_035",
+      "selene_hart_motion_036"
+    ]
+  },
+  "source_census_sha256": "97e597e7dee837b20d9050529c2ddb15244c0d01b717b539280a87d447ad46fe",
+  "status": "candidate_source_partial",
+  "target_pose_count": 48
+}
