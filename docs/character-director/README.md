@@ -91,6 +91,11 @@ and terminates both child runtimes when it stops.
   acceptance of mutation-free identity checks and canonical score admission.
 - `SERENA_G1_CROSS_REPOSITORY_RECEIPT_2026-07-24.md`: paired Python and Prism
   commit, review, verification, and protected-runtime publication receipt.
+- `SERENA_G1_GOVERNED_STATIC_PERFORMANCE_2026-07-24.md`: Serena-owned
+  capability derivation, deterministic governed-score compilation, production
+  hub execution, reduced-motion suppression, replay, and visual evidence.
+- `reviews/SERENA_G1_GOVERNED_STATIC_PERFORMANCE_TECHNICAL_REVIEW_2026-07-24.md`:
+  independent review of the Serena static-performance checkpoint.
 - `GAZE_SETTLE_CONTINUITY.md`: eye-lead, target-arrival re-centering, stable
   fixation, focused tests, and clean runtime evidence.
 - `SPEECH_MOUTH_AUTHORITY.md`: aligned-versus-local mouth ownership,

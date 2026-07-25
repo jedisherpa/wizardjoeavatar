@@ -34,6 +34,7 @@
         "display_name": {"$ref": "#/$defs/text"},
         "renderer": {"$ref": "#/$defs/text"},
         "default_pose_id": {"$ref": "#/$defs/text"},
+        "package_schema_version": {"type": "integer", "minimum": 1},
         "package_capabilities": {"$ref": "#/$defs/texts"}
       }
     },

@@ -769,7 +769,12 @@ def compile_character_bound_performance(
         "media": copy.deepcopy(media),
         "character": {
             "character_id": manifest_character["character_id"],
-            "package_version": "{}.0.0".format(capability_manifest["schema_version"]),
+            "package_version": "{}.0.0".format(
+                manifest_character.get(
+                    "package_schema_version",
+                    capability_manifest["schema_version"],
+                )
+            ),
             "package_digest": sources["package_sha256"],
             "pose_library_digest": sources["pose_library_sha256"],
             "graph_digest": sources["animation_graph_sha256"],
@@ -1060,6 +1065,10 @@ def _apply_accessibility_fallback(
     accessibility = _mapping_value(resolution.capability.get("accessibility"), "capability accessibility")
     behavior = accessibility.get(motion_profile)
     if behavior in {"admitted", "admitted_by_scheduler_projection"}:
+        return resolution
+    if behavior == "suppressed":
+        # Preserve the resolved capability long enough for the normal channel
+        # projector to emit deterministic suppression records and omit the cue.
         return resolution
     if behavior in {"fallback_characterful_neutral", "unsupported"}:
         fallback = _mapping_value(resolution.capability.get("fallback"), "capability fallback")

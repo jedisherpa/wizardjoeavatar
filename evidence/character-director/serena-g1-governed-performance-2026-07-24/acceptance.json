@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "candidate": "serena-g1-governed-static-performance",
+  "date": "2026-07-24",
+  "character_id": "serena-quill-v1",
+  "package_sha256": "sha256:30b5540c8d13cf579776961ce1b31839513a4e184355ec7a35cd16b4a98bc4e5",
+  "package_schema_version": 2,
+  "package_version": "2.0.0",
+  "capability_manifest_sha256": "sha256:de5fa711d8cec6cd4050bee9793cc14958f030ccd086eba24e529c3af3a1466e",
+  "performance_score_sha256": "sha256:fd6e925b0755a799d69c3561f5326e8c6f6ea88436cc6f2b389107a651a80f94",
+  "compiled_score_id": "compiled:091f31a8b0382e516f289fe7",
+  "compiled_artifact_sha256": "sha256:4e75bc5e6d77ebbdb6e742fe800d7ae4467b0d77df0e1fc51ecd0f6090a054c5",
+  "mapping_policy_sha256": "sha256:060043dff4ba5a1cf2b3bf7c3c4347a35de4ee5c7654e58cd634c2ba61b1c9c2",
+  "resolution_sha256": "sha256:52e77746c765ef252a3ceea15e25f884d699d3b6dc9eee399a92dc46ced25bb0",
+  "mapping": {
+    "capability_id": "clip:pose_mentoring_invitation",
+    "action_id": "mentoring_invitation",
+    "clip_id": "pose_mentoring_invitation",
+    "node_id": "node_mentoring_invitation",
+    "pose_id": "mentoring_invitation",
+    "owned_channels": [
+      "body"
+    ]
+  },
+  "accessibility": {
+    "full": "admitted",
+    "reduced": "suppressed",
+    "reduced_reason_codes": [
+      "motion_profile_projection",
+      "motion_profile_suppressed"
+    ]
+  },
+  "screenshots": [
+    {
+      "path": "observer-desktop-serena-mentoring.png",
+      "sha256": "sha256:eaa3249fdcd38d624fc7a0f778a9988e4f0e653a11db766c2047262afe260ca7"
+    },
+    {
+      "path": "observer-serena-mentoring.png",
+      "sha256": "sha256:e6e7d9ca4a6a55cfca236d8f5aef4f30071128d96fd33eb44d1eb94c27b617f7"
+    }
+  ],
+  "claims": {
+    "governed_static_score": "verified",
+    "production_hub_application": "verified",
+    "pause_release": "verified",
+    "pixel_deterministic_replay": "verified",
+    "live_prism_av": "not_claimed",
+    "locomotion": "not_claimed",
+    "registry_admission": "not_claimed"
+  }
+}

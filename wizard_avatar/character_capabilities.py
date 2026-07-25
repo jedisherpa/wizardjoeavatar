@@ -64,6 +64,7 @@ _CHARACTER_FIELDS = {
     "display_name",
     "renderer",
     "default_pose_id",
+    "package_schema_version",
     "package_capabilities",
 }
 _SOURCE_FIELDS = {
@@ -302,6 +303,74 @@ def _runtime_mapping() -> Dict[str, Any]:
         "still_allowed_channels": sorted(STILL_ALLOWED_CHANNELS),
         "track_default_channels": {
             track: TRACK_DEFAULT_CHANNEL[track] for track in sorted(TRACK_DEFAULT_CHANNEL)
+        },
+    }
+
+
+def _package_runtime_vocabulary(
+    package: CharacterPackage,
+    legacy_wizard: bool,
+) -> Dict[str, Any]:
+    if legacy_wizard:
+        return _runtime_vocabulary()
+    profile = package.runtime_profile_contract
+    if profile is None:
+        raise _error(
+            "runtime_profile_missing",
+            "$.character",
+            "verified V2 package has no runtime profile contract",
+        )
+    return {
+        "actions": sorted({"idle", "speaking", *profile.action_poses}),
+        "directions": sorted(profile.facing_poses),
+        "expressions": sorted(profile.expression_aliases),
+        "mouth_shapes": sorted(profile.speech_pose_map),
+        "locomotion_cycles": sorted(
+            cycle
+            for cycle, poses in profile.locomotion_cycles.items()
+            if poses
+        ),
+        "blink_states": sorted(profile.blink_poses),
+        "prop_ids": sorted(profile.props),
+    }
+
+
+def _package_runtime_mapping(
+    package: CharacterPackage,
+    legacy_wizard: bool,
+) -> Dict[str, Any]:
+    if legacy_wizard:
+        return _runtime_mapping()
+    profile = package.runtime_profile_contract
+    if profile is None:
+        raise _error(
+            "runtime_profile_missing",
+            "$.character",
+            "verified V2 package has no runtime profile contract",
+        )
+    return {
+        "action_poses": dict(sorted(profile.action_poses.items())),
+        "expression_aliases": dict(sorted(profile.expression_aliases.items())),
+        "facing_poses": dict(sorted(profile.facing_poses.items())),
+        "locomotion_cycles": {
+            cycle: list(poses)
+            for cycle, poses in sorted(profile.locomotion_cycles.items())
+        },
+        "speech_pose_map": dict(sorted(profile.speech_pose_map.items())),
+        "blink_poses": dict(sorted(profile.blink_poses.items())),
+        "props": {
+            prop_id: {
+                "composition": binding.composition,
+                "anchor": binding.anchor,
+                "permission_capability": binding.permission_capability,
+            }
+            for prop_id, binding in sorted(profile.props.items())
+        },
+        "reduced_prohibited_channels": sorted(REDUCED_PROHIBITED_CHANNELS),
+        "still_allowed_channels": sorted(STILL_ALLOWED_CHANNELS),
+        "track_default_channels": {
+            track: TRACK_DEFAULT_CHANNEL[track]
+            for track in sorted(TRACK_DEFAULT_CHANNEL)
         },
     }
 
@@ -687,6 +756,7 @@ def _unsupported_capability(
     package: CharacterPackage,
     surface: str,
     evidence_hashes: Sequence[str],
+    fallback_clip_id: str = "idle_front",
 ) -> Dict[str, Any]:
     result = _base_capability(
         "unsupported:" + surface,
@@ -697,7 +767,7 @@ def _unsupported_capability(
     )
     result["fallback"] = {
         "intent": "characterful_neutral",
-        "capability_id": "clip:idle_front",
+        "capability_id": "clip:" + fallback_clip_id,
         "reason_code": "no_runtime_mapping",
     }
     result["provenance"] = {
@@ -767,7 +837,10 @@ def _pose_records(
     return records
 
 
-def _diagnostics(graph: AnimationGraph) -> Tuple[CapabilityDiagnostic, ...]:
+def _diagnostics(
+    graph: AnimationGraph,
+    runtime_actions: Iterable[str] = ACTIONS,
+) -> Tuple[CapabilityDiagnostic, ...]:
     mapped_actions = {action for node in graph.nodes.values() for action in node.actions}
     mobility_modes = {mode for node in graph.nodes.values() for mode in node.mobility_modes}
     if "grounded_idle" in mobility_modes:
@@ -781,7 +854,7 @@ def _diagnostics(graph: AnimationGraph) -> Tuple[CapabilityDiagnostic, ...]:
             action,
             "Runtime action has no graph node or clip-family mapping.",
         )
-        for action in sorted(set(ACTIONS) - mapped_actions)
+        for action in sorted(set(runtime_actions) - mapped_actions)
     ]
     diagnostics.extend(
         (
@@ -805,17 +878,42 @@ def _diagnostics(graph: AnimationGraph) -> Tuple[CapabilityDiagnostic, ...]:
 def _build_manifest(package_path: Path) -> Dict[str, Any]:
     package_path = Path(package_path).resolve()
     package = load_character_package(package_path)
-    if package.schema_version != 1 or package.character_id != "wizard-joe-v1":
+    legacy_wizard = (
+        package.schema_version == 1
+        and package.character_id == "wizard-joe-v1"
+    )
+    if not legacy_wizard and package.schema_version != 2:
         raise _error(
             "unsupported_package",
             "$.character",
-            "derived capability manifests currently support only the Wizard Joe V1 compatibility package",
+            "derived capability manifests require Wizard Joe V1 or a verified V2 character package",
         )
-    graph = load_animation_graph(package.animation_graph)
+    graph = (
+        load_animation_graph(package.animation_graph)
+        if legacy_wizard
+        else load_animation_graph(
+            package.animation_graph,
+            pose_manifest_path=package.pose_manifest,
+            pose_library_path=package.pose_library,
+            required_anchors=package.runtime_profile_contract.required_anchors,
+        )
+    )
     pose_library_raw = _read_json(package.pose_library)
-    expression_raw = _read_json(EXPRESSIONS_PATH)
-    semantic_raw = _read_json(SEMANTIC_ANIMATION_MAP_PATH)
-    evidence = _evidence_sources()
+    expression_raw = _read_json(EXPRESSIONS_PATH) if legacy_wizard else {}
+    semantic_raw = (
+        _read_json(SEMANTIC_ANIMATION_MAP_PATH) if legacy_wizard else {}
+    )
+    evidence = (
+        _evidence_sources()
+        if legacy_wizard
+        else [
+            {
+                "evidence_id": "character_asset:" + role,
+                "sha256": asset.sha256,
+            }
+            for role, asset in sorted(package.assets.items())
+        ]
+    )
     evidence_hashes = [item["sha256"] for item in evidence]
 
     poses = _pose_records(graph, pose_library_raw, evidence_hashes)
@@ -823,57 +921,136 @@ def _build_manifest(package_path: Path) -> Dict[str, Any]:
         _clip_capability(package, graph, graph.clips[clip_id], evidence_hashes)
         for clip_id in sorted(graph.clips)
     ]
-    capabilities.extend(
-        _overlay_capability(package, "expression", expression_id, expression_raw[expression_id], evidence_hashes)
-        for expression_id in sorted(EXPRESSIONS)
+    if legacy_wizard:
+        capabilities.extend(
+            _overlay_capability(
+                package,
+                "expression",
+                expression_id,
+                expression_raw[expression_id],
+                evidence_hashes,
+            )
+            for expression_id in sorted(EXPRESSIONS)
+        )
+        capabilities.extend(
+            _overlay_capability(
+                package,
+                "mouth",
+                mouth_id,
+                MOUTH_CELLS[mouth_id],
+                evidence_hashes,
+            )
+            for mouth_id in sorted(MOUTH_SHAPES)
+        )
+        capabilities.extend(
+            _ownership_capability(package, channel, evidence_hashes)
+            for channel in ("staff", "wings")
+        )
+        capabilities.append(_permission_prop_overlay_capability(package))
+    capabilities.append(
+        _unsupported_capability(
+            package,
+            "dance",
+            evidence_hashes,
+            str(graph.fallbacks["grounded_clip_id"]),
+        )
     )
-    capabilities.extend(
-        _overlay_capability(package, "mouth", mouth_id, MOUTH_CELLS[mouth_id], evidence_hashes)
-        for mouth_id in sorted(MOUTH_SHAPES)
-    )
-    capabilities.extend(
-        _ownership_capability(package, channel, evidence_hashes)
-        for channel in ("staff", "wings")
-    )
-    capabilities.append(_permission_prop_overlay_capability(package))
-    capabilities.append(_unsupported_capability(package, "dance", evidence_hashes))
     capabilities.sort(key=lambda item: item["capability_id"])
-    diagnostics = _diagnostics(graph)
+    runtime_actions = (
+        ACTIONS
+        if legacy_wizard
+        else {
+            "idle",
+            "speaking",
+            *package.runtime_profile_contract.action_poses,
+        }
+    )
+    diagnostics = _diagnostics(graph, runtime_actions)
+    permission_props = (
+        ["memory_notebook"]
+        if legacy_wizard
+        else sorted(
+            prop_id
+            for prop_id, binding in package.runtime_profile_contract.props.items()
+            if binding.permission_capability is not None
+        )
+    )
+    permission_requirements = (
+        [
+            {
+                "capability_kind": "prop:memory_notebook",
+                "required_scope_class": "current_character",
+                "purpose_code": "conversation_continuity",
+            }
+        ]
+        if legacy_wizard
+        else [
+            {
+                "capability_kind": "prop:" + prop_id,
+                "required_scope_class": "current_character",
+                "purpose_code": binding.permission_capability,
+            }
+            for prop_id, binding in sorted(
+                package.runtime_profile_contract.props.items()
+            )
+            if binding.permission_capability is not None
+        ]
+    )
+    not_applicable_source = _hash_value(
+        {
+            "character_id": package.character_id,
+            "status": "not_applicable_whole_pose_character",
+        }
+    )
+
+    character_record: Dict[str, Any] = {
+        "character_id": package.character_id,
+        "display_name": package.display_name,
+        "renderer": package.renderer,
+        "default_pose_id": package.default_pose_id,
+        "package_capabilities": sorted(package.capabilities),
+    }
+    if not legacy_wizard:
+        character_record["package_schema_version"] = package.schema_version
 
     manifest: Dict[str, Any] = {
         "schema_version": 1,
         "manifest_id": MANIFEST_ID_PREFIX + package.character_id + ":v1",
-        "character": {
-            "character_id": package.character_id,
-            "display_name": package.display_name,
-            "renderer": package.renderer,
-            "default_pose_id": package.default_pose_id,
-            "package_capabilities": sorted(package.capabilities),
-        },
+        "character": character_record,
         "permission_world": {
             "bindings": {
                 "world_state_ids": [],
                 "effect_ids": [],
-                "prop_ids": ["memory_notebook"],
-                "requirements": [
-                    {
-                        "capability_kind": "prop:memory_notebook",
-                        "required_scope_class": "current_character",
-                        "purpose_code": "conversation_continuity",
-                    }
-                ],
+                "prop_ids": permission_props,
+                "requirements": permission_requirements,
             }
         },
         "sources": {
-            "package_sha256": _file_sha256(package_path),
-            "pose_library_sha256": _file_sha256(package.pose_library),
-            "animation_graph_sha256": _file_sha256(package.animation_graph),
+            "package_sha256": package.package_sha256,
+            "pose_library_sha256": package.assets["pose_library"].sha256,
+            "animation_graph_sha256": package.assets["animation_graph"].sha256,
             "animation_graph_content_sha256": "sha256:" + graph.source_sha256,
-            "pose_source_manifest_sha256": _file_sha256(REFERENCE_POSE_MANIFEST_PATH),
-            "expressions_sha256": _file_sha256(EXPRESSIONS_PATH),
-            "semantic_mapping_sha256": _file_sha256(SEMANTIC_ANIMATION_MAP_PATH),
-            "runtime_vocabulary_sha256": _hash_value(_runtime_vocabulary()),
-            "runtime_mapping_sha256": _hash_value(_runtime_mapping()),
+            "pose_source_manifest_sha256": (
+                _file_sha256(REFERENCE_POSE_MANIFEST_PATH)
+                if legacy_wizard
+                else package.assets["pose_manifest"].sha256
+            ),
+            "expressions_sha256": (
+                _file_sha256(EXPRESSIONS_PATH)
+                if legacy_wizard
+                else not_applicable_source
+            ),
+            "semantic_mapping_sha256": (
+                _file_sha256(SEMANTIC_ANIMATION_MAP_PATH)
+                if legacy_wizard
+                else not_applicable_source
+            ),
+            "runtime_vocabulary_sha256": _hash_value(
+                _package_runtime_vocabulary(package, legacy_wizard)
+            ),
+            "runtime_mapping_sha256": _hash_value(
+                _package_runtime_mapping(package, legacy_wizard)
+            ),
             "evidence": evidence,
         },
         "counts": {
@@ -884,8 +1061,12 @@ def _build_manifest(package_path: Path) -> Dict[str, Any]:
             "pose_count": len(poses),
             "graph_admitted_pose_count": sum(pose["admission"] == "graph_admitted" for pose in poses),
             "diagnostic_only_pose_count": sum(pose["admission"] == "diagnostic_only" for pose in poses),
-            "expression_count": len(EXPRESSIONS),
-            "mouth_shape_count": len(MOUTH_SHAPES),
+            "expression_count": (
+                len(EXPRESSIONS) if legacy_wizard else 0
+            ),
+            "mouth_shape_count": (
+                len(MOUTH_SHAPES) if legacy_wizard else 0
+            ),
             "capability_count": len(capabilities),
             "diagnostic_count": len(diagnostics),
         },
@@ -1051,12 +1232,37 @@ def validate_character_capability_manifest(value: Mapping[str, Any]) -> None:
         raise _error("schema_version_unsupported", "$.schema_version", "must be 1")
     manifest_id = _text(root["manifest_id"], "$.manifest_id")
     character = _mapping(root["character"], "$.character")
-    _closed(character, _CHARACTER_FIELDS, "$.character")
+    character_required_fields = _CHARACTER_FIELDS - {"package_schema_version"}
+    character_extra = sorted(set(character) - _CHARACTER_FIELDS)
+    character_missing = sorted(character_required_fields - set(character))
+    if character_missing:
+        raise _error(
+            "missing_field",
+            "$.character",
+            "missing fields: {}".format(", ".join(character_missing)),
+        )
+    if character_extra:
+        raise _error(
+            "unknown_field",
+            "$.character",
+            "unknown fields: {}".format(", ".join(character_extra)),
+        )
     character_id = _text(character["character_id"], "$.character.character_id")
     if manifest_id != MANIFEST_ID_PREFIX + character_id + ":v1":
         raise _error("identity_mismatch", "$.manifest_id", "manifest ID does not bind character ID")
     for field in ("display_name", "renderer", "default_pose_id"):
         _text(character[field], "$.character." + field)
+    if "package_schema_version" in character:
+        package_schema_version = _integer(
+            character["package_schema_version"],
+            "$.character.package_schema_version",
+        )
+        if package_schema_version == 0:
+            raise _error(
+                "invalid_value",
+                "$.character.package_schema_version",
+                "must be positive",
+            )
     _texts(character["package_capabilities"], "$.character.package_capabilities")
     if character["package_capabilities"] != sorted(character["package_capabilities"]):
         raise _error("invalid_order", "$.character.package_capabilities", "values must be sorted")
