@@ -168,11 +168,17 @@ class ScoreRuntime:
                 self._touch(binding)
                 return self._results[binding]
 
-        if binding.media_sha256 is None:
+        if binding.media_sha256 is None or binding.package_sha256 is None:
             return self._record(binding, SCORE_NOT_READY)
 
         try:
-            score = self.repository.load_current(binding.media_sha256)
+            score = self.repository.load_binding(
+                media_sha256=binding.media_sha256,
+                compiled_score_id=binding.score_id,
+                revision=binding.score_revision,
+                score_sha256=binding.score_sha256,
+                package_digest=binding.package_sha256,
+            )
         except ScoreValidationError as exc:
             code = SCORE_NOT_READY if exc.code == SCORE_NOT_READY else SCORE_CORRUPT
             return self._record(binding, code)

@@ -157,7 +157,15 @@ def create_app(
         score_root = os.environ.get("WIZARD_SCORE_ROOT", "").strip()
         if score_root:
             score_repository = CompiledScoreRepository(Path(score_root).expanduser())
-    frame_hub = WizardFrameHub(frame_source, score_repository=score_repository)
+    allow_scoreless_governed_speech = os.environ.get(
+        "WIZARD_ALLOW_SCORELESS_GOVERNED_SPEECH",
+        "",
+    ).lower() in {"1", "true", "yes", "on"}
+    frame_hub = WizardFrameHub(
+        frame_source,
+        score_repository=score_repository,
+        allow_scoreless_governed_speech=allow_scoreless_governed_speech,
+    )
     started_at_monotonic_ms = time.monotonic_ns() // 1_000_000
     runtime_identity = build_runtime_identity(
         ROOT,
@@ -646,7 +654,12 @@ def create_app(
             return await frame_hub.register_governed_speech(registration)
         except GovernedSpeechError as exc:
             raise HTTPException(
-                status_code=409 if exc.code.endswith(("mismatch", "not_ready")) else 400,
+                status_code=409
+                if (
+                    exc.code.endswith(("mismatch", "not_ready"))
+                    or exc.code == "score_preparation_required"
+                )
+                else 400,
                 detail={"code": exc.code, "path": exc.path},
             ) from exc
 

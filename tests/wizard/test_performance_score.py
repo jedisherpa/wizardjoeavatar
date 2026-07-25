@@ -207,6 +207,31 @@ class PerformanceScoreTests(unittest.TestCase):
                 repository.publish(self.loader.from_mapping(changed))
             self.assertEqual(conflict.exception.code, "immutable_revision_conflict")
 
+    def test_exact_binding_load_survives_current_pointer_replacement(self):
+        first = self.loader.from_mapping(score_document(1))
+        second_document = score_document(2)
+        second_document["compiled_score_id"] = "compiled:book:second"
+        second = self.loader.from_mapping(second_document)
+        with tempfile.TemporaryDirectory() as temporary:
+            repository = CompiledScoreRepository(temporary, self.loader)
+            first_publication = repository.publish(first)
+            repository.publish(second)
+
+            loaded = repository.load_binding(
+                media_sha256=first_publication.media_sha256,
+                compiled_score_id=first_publication.compiled_score_id,
+                revision=first_publication.revision,
+                score_sha256=first_publication.score_sha256,
+                package_digest=first_publication.package_digest,
+            )
+
+            self.assertEqual(loaded.compiled_score_id, first.compiled_score_id)
+            self.assertEqual(loaded.artifact_sha256, first.artifact_sha256)
+            self.assertEqual(
+                repository.load_current(digest("f")).compiled_score_id,
+                second.compiled_score_id,
+            )
+
     def test_corrupt_pointer_is_not_silently_ignored(self):
         score = self.loader.from_mapping(score_document())
         with tempfile.TemporaryDirectory() as temporary:

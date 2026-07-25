@@ -165,6 +165,7 @@ class WizardFrameHub:
         codec: str = "adaptive",
         score_repository: Optional[CompiledScoreRepository] = None,
         max_subscribers: int = DEFAULT_MAX_SUBSCRIBERS,
+        allow_scoreless_governed_speech: bool = False,
     ) -> None:
         if (
             isinstance(max_subscribers, bool)
@@ -216,6 +217,7 @@ class WizardFrameHub:
             admitted_pose_ids=admitted_pose_ids,
             admitted_clip_ids=admitted_clip_ids,
             admitted_node_ids=admitted_node_ids,
+            allow_scoreless_governed_speech=allow_scoreless_governed_speech,
         )
         self.command_inbox = OrderedCommandInbox(self.runtime_epoch)
         self.replay_log = ReplayLog(
@@ -492,8 +494,8 @@ class WizardFrameHub:
             snapshot_fingerprint = snapshot.fingerprint()
             duration_ms = snapshot.media.duration_ms
 
-        prepared = await asyncio.to_thread(
-            self.performance.prepare_live_speech_score,
+        compiled = await asyncio.to_thread(
+            self.performance.compile_live_speech_score,
             context,
             duration_ms=duration_ms,
         )
@@ -506,8 +508,20 @@ class WizardFrameHub:
                 current is None
                 or current.fingerprint() != snapshot_fingerprint
                 or current.media.duration_ms != duration_ms
+                or (
+                    self.performance.scheduler.coordinator.reconciliation_generation
+                    != context.runtime.reconciliation_generation
+                )
+                or (
+                    self.frame_source.controller.state.control_lease_generation
+                    != context.control.cancellation_generation
+                )
             ):
                 raise GovernedSpeechError("media_session_changed")
+            prepared = await asyncio.to_thread(
+                self.performance.publish_live_speech_score,
+                compiled,
+            )
             return dict(prepared.to_dict())
 
     async def register_governed_speech(
@@ -516,13 +530,13 @@ class WizardFrameHub:
     ) -> dict:
         await self.start()
         async with self._current_lock():
-            self.performance.register_governed_speech(
+            authoritative_score = self.performance.register_governed_speech(
                 registration,
                 now_wall_ms=time.time_ns() // 1_000_000,
                 now_monotonic_us=time.perf_counter_ns() // 1000,
             )
             receipt = dict(self.performance.governed_speech.diagnostics())
-            receipt.update(registration.performance_context.evidence.score_binding.to_dict())
+            receipt.update(authoritative_score)
             return receipt
 
     async def revoke_governed_speech(self, generation: int) -> dict:

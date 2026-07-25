@@ -52,10 +52,10 @@ class ScoreRuntimeTests(unittest.TestCase):
         self.assertEqual(prepared.code, "score_ready")
         self.assertIs(self.runtime.resolve(self.snapshot), prepared.score)
 
-        def disk_access_is_forbidden(_media_sha256):
+        def disk_access_is_forbidden(**_binding):
             raise AssertionError("runtime resolution touched disk")
 
-        self.repository.load_current = disk_access_is_forbidden
+        self.repository.load_binding = disk_access_is_forbidden
         self.assertIs(self.runtime.resolve(self.snapshot), prepared.score)
         self.assertEqual(self.runtime.diagnostics_for(self.snapshot).code, "score_ready")
 
@@ -70,19 +70,38 @@ class ScoreRuntimeTests(unittest.TestCase):
         with self.assertRaises(TypeError):
             loaded.tracks[0].index.cues[0].data["intent"] = "changed"
 
+    def test_prepare_uses_exact_generation_after_same_media_pointer_moves(self):
+        self.repository.publish(self.score)
+        replacement = runtime_score(
+            compiled_id="compiled:replacement",
+            media_id=self.score.media_id,
+            media_hash=self.score.media_sha256,
+            cue_prefix="replacement.",
+        )
+        self.repository.publish(replacement)
+
+        prepared = self.runtime.prepare_snapshot(self.snapshot)
+
+        self.assertTrue(prepared.ready)
+        self.assertEqual(prepared.score.compiled_score_id, self.score.compiled_score_id)
+        self.assertEqual(prepared.score.artifact_sha256, self.score.artifact_sha256)
+
     def test_missing_corrupt_and_mismatched_scores_have_stable_diagnostics(self):
         missing = self.runtime.prepare_snapshot(self.snapshot)
         self.assertEqual(missing.code, "score_not_ready")
         self.assertIsNone(self.runtime.resolve(self.snapshot))
 
         self.repository.publish(self.score)
-        pointer = (
+        score_path = (
             Path(self.temporary.name)
             / "media"
             / self.score.media_sha256.split(":", 1)[1]
-            / "current.json"
+            / "scores"
+            / self.score.compiled_score_id
+            / str(self.score.revision)
+            / "score.json"
         )
-        pointer.write_text(json.dumps({"schema_version": 1}), encoding="utf-8")
+        score_path.write_text(json.dumps({"schema_version": 1}), encoding="utf-8")
         corrupt_runtime = ScoreRuntime(self.repository)
         corrupt = corrupt_runtime.prepare_snapshot(self.snapshot)
         self.assertEqual(corrupt.code, "score_corrupt")
@@ -95,7 +114,7 @@ class ScoreRuntimeTests(unittest.TestCase):
         other_repository.publish(other)
         mismatched_runtime = ScoreRuntime(other_repository)
         mismatch = mismatched_runtime.prepare_snapshot(self.snapshot)
-        self.assertEqual(mismatch.code, "score_mismatch")
+        self.assertEqual(mismatch.code, "score_not_ready")
         self.assertIsNone(mismatched_runtime.resolve(self.snapshot))
 
     def test_cache_key_binds_all_runtime_identities(self):
@@ -132,10 +151,10 @@ class ScoreRuntimeTests(unittest.TestCase):
     def test_scoreless_snapshot_needs_no_repository_access(self):
         scoreless = bound_snapshot(self.score, with_score=False, mode="narrative")
 
-        def disk_access_is_forbidden(_media_sha256):
+        def disk_access_is_forbidden(**_binding):
             raise AssertionError("scoreless preparation touched disk")
 
-        self.repository.load_current = disk_access_is_forbidden
+        self.repository.load_binding = disk_access_is_forbidden
         prepared = self.runtime.prepare_snapshot(scoreless)
         self.assertEqual(prepared.code, "scoreless_v1")
         self.assertIsNone(prepared.score)

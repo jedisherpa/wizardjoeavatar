@@ -690,6 +690,39 @@ class CompiledScoreRepository:
                 raise ScoreValidationError("cache_corrupt", "current pointer media binding is invalid")
             return self.load_revision(publication)
 
+    def load_binding(
+        self,
+        *,
+        media_sha256: str,
+        compiled_score_id: str,
+        revision: int,
+        score_sha256: str,
+        package_digest: str,
+    ) -> CompiledPerformanceScore:
+        """Load one immutable generation without consulting the mutable pointer."""
+
+        publication = ScorePublication(
+            media_sha256=_require_sha256(media_sha256, "media_sha256"),
+            score_id=_require_id(compiled_score_id, "compiled_score_id"),
+            revision=_require_int(revision, "revision", minimum=1),
+            score_sha256=_require_sha256(score_sha256, "score_sha256"),
+            compiled_score_id=_require_id(
+                compiled_score_id,
+                "compiled_score_id",
+            ),
+            package_digest=_require_sha256(
+                package_digest,
+                "package_digest",
+            ),
+        )
+        with self._publication_lock():
+            if not (self._generation_path(publication) / "score.json").is_file():
+                raise ScoreValidationError(
+                    "score_not_ready",
+                    "requested score generation is not published",
+                )
+            return self.load_revision(publication)
+
     def select_revision(self, publication: ScorePublication) -> None:
         """Atomically repoint current to an existing validated revision for rollback."""
 

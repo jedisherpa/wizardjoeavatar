@@ -257,7 +257,10 @@ class SerenaPackageControlTests(unittest.IsolatedAsyncioTestCase):
 
     async def test_governed_speech_viseme_owns_serenas_whole_pose(self):
         source = self.create_source()
-        hub = WizardFrameHub(source)
+        hub = WizardFrameHub(
+            source,
+            allow_scoreless_governed_speech=True,
+        )
         performance = hub.performance
         package_digest = performance.package_digest
         character_id = performance.character_id

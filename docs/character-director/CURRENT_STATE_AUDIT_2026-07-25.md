@@ -123,8 +123,9 @@ The normal governed-speech path now uses an explicit two-pass score handshake:
 
 1. Python captures a scoreless preliminary context (`C0`) for the accepted
    speech cursor.
-2. The character-bound compiler creates and atomically publishes a
-   deterministic, content-free score against the active capability manifest.
+2. The character-bound compiler creates a deterministic, content-free score
+   against the active capability manifest; Python reacquires the session lock,
+   revalidates the accepted snapshot, and only then atomically publishes it.
 3. Prism republishes the exact score ID, revision, and digest in a newer loading
    media epoch.
 4. Python captures the final score-bound context (`C1`).
@@ -133,10 +134,20 @@ The normal governed-speech path now uses an explicit two-pass score handshake:
    identity.
 
 Compilation, publication, media drift, epoch drift, context mismatch, and
-receipt mismatch fail closed. A `404` or `501` response from the additive
-preparation endpoint is the only legacy scoreless compatibility path during a
-staggered local upgrade. The LaunchAgent installer now provisions a persistent
-app-owned `WIZARD_SCORE_ROOT`.
+receipt mismatch fail closed. Runtime resolution loads the exact immutable score
+generation named by the accepted ID, revision, digest, package, and media
+binding rather than consulting the mutable current-score pointer. Publication
+also creates a bounded, one-use server-side grant. Registration must advance
+the accepted sequence and media epoch while retaining the exact connector
+session, media, turn, utterance, approval artifact, character, and package from
+`C0`; successful registration consumes the grant. Historical and cross-turn
+score replay therefore fails closed. Scoreless governed speech is disabled by
+default.
+During a staggered local upgrade it is available only when Python explicitly
+sets `WIZARD_ALLOW_SCORELESS_GOVERNED_SPEECH=1` and the Prism controller
+explicitly sets `allowScorelessCompatibility: true`; a `404` or `501` response
+without both opt-ins fails closed. The LaunchAgent installer now provisions a
+persistent app-owned `WIZARD_SCORE_ROOT`.
 
 ## Highest-Impact Roster Architecture Gap
 

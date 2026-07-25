@@ -111,13 +111,24 @@ project from that same audio element clock. Missing or invalid alignment uses a
 deterministic local timing projection; it does not authorize different text.
 
 Normal governed speech uses a two-pass, content-free score handshake. Wizard
-first captures a scoreless preliminary context (`C0`), compiles and atomically
-publishes a deterministic score, and returns only its typed identity. Prism
+first captures a scoreless preliminary context (`C0`), compiles a deterministic
+score, revalidates the accepted media snapshot, atomically publishes the
+candidate, and returns only its typed identity. The binding records both the
+preparation context hash and the compiler's internally score-bound context hash.
+Prism
 publishes that score identity in a newer loading media epoch, then requests the
 final context (`C1`). Approval, registration, and playback proceed only when
 `C1`, the accepted cursor, and the registration receipt carry the exact same
 score ID, revision, and digest. The response and receipt never contain the
-approved text.
+approved text. Runtime loading addresses the immutable score generation by that
+complete identity tuple; it does not trust the mutable per-media convenience
+pointer, so identical audio bytes in concurrent turns cannot substitute scores.
+Python also records a bounded, one-use preparation grant when publication
+succeeds. Registration must present the same connector session, media identity,
+turn, utterance, presentation artifact, character, and package from `C0`, with
+strictly newer accepted sequence and media epoch values. A rejected
+registration does not consume the grant; a successful registration does.
+Missing, expired, replayed, or cross-turn grants fail closed.
 
 Permission-world updates use the same connector instance, discovery identity,
 and bearer token. Production character facts come only from Prism's canonical
@@ -138,9 +149,14 @@ simulations are separately labeled and cannot control production projection.
   gestures and duration-driven mouth shapes.
 - Governed TTS compiles and binds a deterministic character score before play,
   then preempts main-media performance only while its element is audible.
-- A `404` or `501` score-preparation response retains the documented legacy
-  scoreless compatibility path during staggered local upgrades. Any other
-  preparation, publication, epoch, context, or receipt mismatch fails closed.
+- Scoreless governed speech is disabled by default. A staggered-upgrade
+  deployment may opt in only by setting
+  `WIZARD_ALLOW_SCORELESS_GOVERNED_SPEECH=1` on Python and
+  `allowScorelessCompatibility: true` on the Prism controller. Without both
+  explicit settings, a missing score-preparation endpoint and every other
+  preparation, publication, epoch, context, or receipt mismatch fail closed.
+  The Prism relay preserves an upstream `404` or `501` as a local unsupported
+  response only for this explicit compatibility decision.
 - Paused, ended, stopped, errored, or stale sessions release performance-owned
   state.
 - Keyboard, gamepad, and remote control leases retain body authority.

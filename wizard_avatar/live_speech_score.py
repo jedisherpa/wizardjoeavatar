@@ -13,6 +13,7 @@ from .direction_compiler import (
 )
 from .performance_context import PerformanceContextV1
 from .performance_score import (
+    CompiledPerformanceScore,
     CompiledScoreLoader,
     CompiledScoreRepository,
     ScoreValidationError,
@@ -34,6 +35,7 @@ class LiveSpeechScoreBindingV1:
     score_id: str
     score_revision: int
     score_sha256: str
+    prepared_from_context_sha256: str
     compiled_from_context_sha256: str
     character_id: str
     package_digest: str
@@ -46,6 +48,7 @@ class LiveSpeechScoreBindingV1:
             "score_id": self.score_id,
             "score_revision": self.score_revision,
             "score_sha256": self.score_sha256,
+            "prepared_from_context_sha256": self.prepared_from_context_sha256,
             "compiled_from_context_sha256": self.compiled_from_context_sha256,
             "character_id": self.character_id,
             "package_digest": self.package_digest,
@@ -68,14 +71,22 @@ class PreparedLiveSpeechScoreV1:
         }
 
 
+@dataclass(frozen=True)
+class CompiledLiveSpeechScoreV1:
+    """Unpublished deterministic score candidate and its two context bindings."""
+
+    preliminary_context: PerformanceContextV1
+    compiler_context_sha256: str
+    score: CompiledPerformanceScore
+
+
 def compile_live_speech_score(
     context: PerformanceContextV1,
     *,
     duration_ms: int,
     capability_manifest: Mapping[str, object],
-    repository: CompiledScoreRepository,
-) -> PreparedLiveSpeechScoreV1:
-    """Compile and atomically publish a content-free speech performance score."""
+) -> CompiledLiveSpeechScoreV1:
+    """Compile a content-free speech score without mutating the repository."""
 
     if context.conversation.intent != "speak":
         raise LiveSpeechScoreError(
@@ -123,18 +134,40 @@ def compile_live_speech_score(
             capability_manifest,
         )
         score = CompiledScoreLoader().from_mapping(compilation.compiled_score)
-        publication = repository.publish(score)
     except DirectionCompileError as exc:
         raise LiveSpeechScoreError(exc.code, "$.performance_context") from exc
     except ScoreValidationError as exc:
         raise LiveSpeechScoreError(exc.code, exc.path) from exc
 
+    return CompiledLiveSpeechScoreV1(
+        preliminary_context=context,
+        compiler_context_sha256=compilation.bound_context.context_sha256,
+        score=score,
+    )
+
+
+def publish_live_speech_score(
+    compiled: CompiledLiveSpeechScoreV1,
+    *,
+    repository: CompiledScoreRepository,
+) -> PreparedLiveSpeechScoreV1:
+    """Atomically publish a previously compiled and revalidated candidate."""
+
+    if not isinstance(compiled, CompiledLiveSpeechScoreV1):
+        raise TypeError("compiled must be a CompiledLiveSpeechScoreV1")
+    try:
+        publication = repository.publish(compiled.score)
+    except ScoreValidationError as exc:
+        raise LiveSpeechScoreError(exc.code, exc.path) from exc
+
+    context = compiled.preliminary_context
     binding = LiveSpeechScoreBindingV1(
         schema_version=1,
         score_id=publication.compiled_score_id,
         score_revision=publication.revision,
         score_sha256=publication.score_sha256,
-        compiled_from_context_sha256=context.context_sha256,
+        prepared_from_context_sha256=context.context_sha256,
+        compiled_from_context_sha256=compiled.compiler_context_sha256,
         character_id=context.character.character_id,
         package_digest=context.character.package_digest,
         media_id=context.source.media_id,
@@ -144,8 +177,10 @@ def compile_live_speech_score(
 
 
 __all__ = [
+    "CompiledLiveSpeechScoreV1",
     "LiveSpeechScoreBindingV1",
     "LiveSpeechScoreError",
     "PreparedLiveSpeechScoreV1",
     "compile_live_speech_score",
+    "publish_live_speech_score",
 ]

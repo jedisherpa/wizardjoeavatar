@@ -33,6 +33,7 @@ does not replace, restart, or share the Rust process.
 | Internal listener | `127.0.0.1:18788` |
 | Public endpoint | `https://wizardjoe-python.5.78.137.112.sslip.io/` |
 | Runtime proof | `/api/avatar/wizard/runtime-identity` |
+| Persistent score root | `/var/lib/wizardjoe-avatar-python/scores` |
 
 The bridge accepts an exact Wizard Joe commit SHA, verifies the Python runtime
 checkpoint before upload, installs an immutable release, and requires the
@@ -40,3 +41,13 @@ public runtime identity to report that SHA with a clean worktree. The Python
 listener remains loopback-only behind its dedicated Nginx host. The bridge
 also verifies that `wizardjoe-avatar.service` and the Rust public state API
 remain healthy before it reports success.
+
+The Python systemd unit must create the persistent score root with ownership
+restricted to its unprivileged service account and export
+`WIZARD_SCORE_ROOT=/var/lib/wizardjoe-avatar-python/scores`. Governed speech is
+fail closed when that repository is unavailable; a deploy is not complete
+until live score preparation, exact-generation reload, and a score-bound
+registration receipt have been exercised through the private connector. The
+same smoke test must prove that an altered turn or utterance cannot redeem a
+published score and that a successful registration consumes its one-use
+preparation grant.

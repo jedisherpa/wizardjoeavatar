@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from collections import OrderedDict
 from dataclasses import dataclass, replace
 from typing import Iterable, Mapping, Optional
 
@@ -8,9 +9,11 @@ from .character_runtime_profile import CharacterRuntimeProfile
 from .controller import WizardAvatarController
 from .expressions import expression_mouth
 from .live_speech_score import (
+    CompiledLiveSpeechScoreV1,
     LiveSpeechScoreError,
     PreparedLiveSpeechScoreV1,
     compile_live_speech_score,
+    publish_live_speech_score,
 )
 from .media_session import MediaSessionAckV1, MediaSessionCoordinator, MediaSessionSnapshotV1
 from .models import ACTIONS, DIRECTIONS, EXPRESSIONS, MOUTH_SHAPES
@@ -48,6 +51,7 @@ from .score_runtime import (
 
 
 _UNBOUND_DIGEST = "sha256:" + "0" * 64
+_LIVE_SCORE_PREPARATION_CAPACITY = 256
 
 
 _MOUTH_MAP = {
@@ -108,6 +112,7 @@ class PerformanceApplication:
         admitted_pose_ids: Optional[Iterable[str]] = None,
         admitted_clip_ids: Optional[Iterable[str]] = None,
         admitted_node_ids: Optional[Iterable[str]] = None,
+        allow_scoreless_governed_speech: bool = False,
     ) -> None:
         self.runtime_epoch = runtime_epoch
         self.character_id = character_id
@@ -130,6 +135,9 @@ class PerformanceApplication:
         )
         self.score_repository = score_repository
         self.capability_manifest = capability_manifest
+        self.allow_scoreless_governed_speech = bool(
+            allow_scoreless_governed_speech
+        )
         identity_bound = package_digest != _UNBOUND_DIGEST
         self.score_runtime = (
             ScoreRuntime(
@@ -183,6 +191,9 @@ class PerformanceApplication:
         self._permission_visual_source_sha256: Optional[str] = None
         self._permission_visual_origin_monotonic_us: Optional[int] = None
         self._permission_visual_receipt_wall_ms: Optional[int] = None
+        self._live_score_preparations: OrderedDict[
+            tuple[str, int, str], PreparedLiveSpeechScoreV1
+        ] = OrderedDict()
 
     def supports_action(self, action: str) -> bool:
         if self.runtime_profile is None:
@@ -456,15 +467,15 @@ class PerformanceApplication:
         }
         return PerformanceContextV1.build(payload)
 
-    def prepare_live_speech_score(
+    def compile_live_speech_score(
         self,
         context: PerformanceContextV1,
         *,
         duration_ms: int,
-    ) -> PreparedLiveSpeechScoreV1:
-        """Compile and publish a preliminary-context score off the event loop."""
+    ) -> CompiledLiveSpeechScoreV1:
+        """Compile an unpublished preliminary-context score off the event loop."""
 
-        if self.score_repository is None or self.score_runtime is None:
+        if self.score_runtime is None:
             raise GovernedSpeechError("score_repository_not_ready")
         if self.capability_manifest is None:
             raise GovernedSpeechError("capability_manifest_not_ready")
@@ -473,10 +484,80 @@ class PerformanceApplication:
                 context,
                 duration_ms=duration_ms,
                 capability_manifest=self.capability_manifest,
+            )
+        except LiveSpeechScoreError as exc:
+            raise GovernedSpeechError(exc.code, exc.path) from exc
+
+    def publish_live_speech_score(
+        self,
+        compiled: CompiledLiveSpeechScoreV1,
+    ) -> PreparedLiveSpeechScoreV1:
+        if self.score_repository is None:
+            raise GovernedSpeechError("score_repository_not_ready")
+        try:
+            prepared = publish_live_speech_score(
+                compiled,
                 repository=self.score_repository,
             )
         except LiveSpeechScoreError as exc:
             raise GovernedSpeechError(exc.code, exc.path) from exc
+        binding = prepared.score_binding
+        key = (binding.score_id, binding.score_revision, binding.score_sha256)
+        self._live_score_preparations[key] = prepared
+        self._live_score_preparations.move_to_end(key)
+        while len(self._live_score_preparations) > _LIVE_SCORE_PREPARATION_CAPACITY:
+            self._live_score_preparations.popitem(last=False)
+        return prepared
+
+    @staticmethod
+    def _validate_live_score_preparation(
+        prepared: PreparedLiveSpeechScoreV1,
+        registration: GovernedSpeechRegistrationV1,
+        snapshot: MediaSessionSnapshotV1,
+    ) -> None:
+        preliminary = prepared.preliminary_context
+        final = registration.performance_context
+        approval = registration.approval
+        binding = prepared.score_binding
+        source_matches = (
+            preliminary.source.connector_session_id
+            == final.source.connector_session_id
+            == snapshot.connector_session_id
+            and preliminary.source.media_id
+            == final.source.media_id
+            == snapshot.media.media_id
+            and preliminary.source.media_sha256
+            == final.source.media_sha256
+            == snapshot.media.media_sha256
+            and preliminary.source.source_slot
+            == final.source.source_slot
+            == snapshot.media.source_slot
+            and preliminary.source.turn_id == final.source.turn_id
+            and preliminary.source.utterance_id == final.source.utterance_id
+            and final.source.accepted_sequence
+            > preliminary.source.accepted_sequence
+            and final.source.media_epoch > preliminary.source.media_epoch
+        )
+        identity_matches = (
+            preliminary.runtime.wizard_runtime_epoch
+            == final.runtime.wizard_runtime_epoch
+            and preliminary.character.character_id
+            == final.character.character_id
+            == binding.character_id
+            and preliminary.character.package_digest
+            == final.character.package_digest
+            == binding.package_digest
+            and preliminary.approval.presentation_artifact_sha256
+            == final.approval.presentation_artifact_sha256
+            == approval.reply_sha256
+            and binding.prepared_from_context_sha256
+            == preliminary.context_sha256
+        )
+        if not source_matches or not identity_matches:
+            raise GovernedSpeechError(
+                "score_preparation_mismatch",
+                "$.performance_context.evidence.score_binding",
+            )
 
     def register_governed_speech(
         self,
@@ -484,10 +565,56 @@ class PerformanceApplication:
         *,
         now_wall_ms: int,
         now_monotonic_us: int,
-    ) -> None:
+    ) -> Mapping[str, object]:
         snapshot = self.scheduler.coordinator.snapshot_for_slot("speech")
         if snapshot is None:
             raise GovernedSpeechError("media_session_not_ready")
+        score_binding = {
+            "score_id": snapshot.performance.score_id,
+            "score_revision": snapshot.performance.score_revision,
+            "score_sha256": snapshot.performance.score_sha256,
+        }
+        if all(value is None for value in score_binding.values()):
+            if not self.allow_scoreless_governed_speech:
+                raise GovernedSpeechError(
+                    "score_binding_required",
+                    "$.performance_context.evidence.score_binding",
+                )
+        else:
+            if self.score_runtime is None:
+                raise GovernedSpeechError("score_repository_not_ready")
+            prepared = self.score_runtime.result_for(snapshot)
+            score = prepared.score
+            if not prepared.ready or score is None:
+                raise GovernedSpeechError(
+                    "score_not_ready",
+                    "$.performance_context.evidence.score_binding",
+                )
+            if (
+                score.compiled_score_id != score_binding["score_id"]
+                or score.revision != score_binding["score_revision"]
+                or score.artifact_sha256 != score_binding["score_sha256"]
+            ):
+                raise GovernedSpeechError(
+                    "score_binding_mismatch",
+                    "$.performance_context.evidence.score_binding",
+                )
+            key = (
+                score.compiled_score_id,
+                score.revision,
+                score.artifact_sha256,
+            )
+            live_preparation = self._live_score_preparations.get(key)
+            if live_preparation is None:
+                raise GovernedSpeechError(
+                    "score_preparation_required",
+                    "$.performance_context.evidence.score_binding",
+                )
+            self._validate_live_score_preparation(
+                live_preparation,
+                registration,
+                snapshot,
+            )
         self.governed_speech.register(
             registration,
             snapshot,
@@ -497,7 +624,11 @@ class PerformanceApplication:
             reconciliation_generation=self.scheduler.coordinator.reconciliation_generation,
             now_wall_ms=now_wall_ms,
             now_monotonic_us=now_monotonic_us,
+            allow_scoreless=self.allow_scoreless_governed_speech,
         )
+        if not all(value is None for value in score_binding.values()):
+            self._live_score_preparations.pop(key, None)
+        return score_binding
 
     def revoke_governed_speech(
         self,

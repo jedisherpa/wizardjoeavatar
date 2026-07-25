@@ -107,6 +107,7 @@ class GovernedSpeechReleaseTests(unittest.TestCase):
             character_id="wizard-joe",
             package_digest=PACKAGE_DIGEST,
             manifest_digest=MANIFEST_DIGEST,
+            allow_scoreless_governed_speech=True,
         )
         self.controller = WizardAvatarController(("front_idle",), "wizard-joe")
         self.application.accept_snapshot(speech_snapshot(), 1_000_000)
@@ -336,6 +337,24 @@ class GovernedSpeechReleaseTests(unittest.TestCase):
         self.assertIsNone(self.controller.state.speech_text)
         self.assertIsNone(self.controller.state.speech_id)
         self.assertNotIn(self.controller.state.action, {"speaking", "explaining"})
+
+    def test_scoreless_registration_requires_explicit_compatibility_opt_in(self):
+        strict = PerformanceApplication(
+            "runtime:test:0001",
+            character_id="wizard-joe",
+            package_digest=PACKAGE_DIGEST,
+            manifest_digest=MANIFEST_DIGEST,
+        )
+        strict.accept_snapshot(speech_snapshot(), 1_000_000)
+
+        with self.assertRaises(GovernedSpeechError) as caught:
+            strict.register_governed_speech(
+                self.registration(),
+                now_wall_ms=1_100,
+                now_monotonic_us=1_020_000,
+            )
+
+        self.assertEqual(caught.exception.code, "score_binding_required")
 
     def test_content_tampering_and_replay_fail_closed(self):
         registration = self.registration()
@@ -578,6 +597,7 @@ class GovernedSpeechReleaseTests(unittest.TestCase):
             character_id="wizard-joe",
             package_digest=PACKAGE_DIGEST,
             manifest_digest=MANIFEST_DIGEST,
+            allow_scoreless_governed_speech=True,
         )
         fresh.accept_snapshot(speech_snapshot(), 1_000_000)
         fresh.register_governed_speech(

@@ -3,10 +3,12 @@ import os
 import tempfile
 import time
 import unittest
+from copy import deepcopy
 from unittest import mock
 
 from wizard_avatar.governed_performance import GovernedPerformanceApprovalV1
 from wizard_avatar.media_session import MEDIA_SESSION_MAX_BODY_BYTES
+from wizard_avatar.performance_context import PerformanceContextV1
 from wizard_avatar.performance_release import GOVERNED_SPEECH_MAX_BODY_BYTES
 from wizard_avatar.server import create_app
 from wizard_avatar.voice_alignment import VoiceAlignmentV1
@@ -28,13 +30,15 @@ TOKEN_HEADERS = (
 )
 
 
-def connector_app():
+def connector_app(*, allow_scoreless=True):
     score_root = tempfile.TemporaryDirectory()
     env = {
         "WIZARD_MEDIA_CONNECTOR_ENABLED": "1",
         "WIZARD_MEDIA_CONNECTOR_TOKEN": "governed-test-token",
         "WIZARD_SCORE_ROOT": score_root.name,
     }
+    if allow_scoreless:
+        env["WIZARD_ALLOW_SCORELESS_GOVERNED_SPEECH"] = "1"
     with mock.patch.dict(os.environ, env, clear=True):
         app = create_app()
     app.state.test_score_root = score_root
@@ -440,7 +444,7 @@ class GovernedSpeechServerTests(unittest.IsolatedAsyncioTestCase):
             await stop_connector_app(app)
 
     async def test_live_score_two_pass_context_binds_final_approval_and_receipt(self):
-        app = connector_app()
+        app = connector_app(allow_scoreless=False)
         performance = app.state.frame_hub.performance
         character_id = performance.character_id
         package_digest = performance.package_digest
@@ -493,6 +497,10 @@ class GovernedSpeechServerTests(unittest.IsolatedAsyncioTestCase):
             preliminary = prepared["preliminary_context"]
             binding = prepared["score_binding"]
             self.assertEqual(
+                binding["prepared_from_context_sha256"],
+                preliminary["context_sha256"],
+            )
+            self.assertNotEqual(
                 binding["compiled_from_context_sha256"],
                 preliminary["context_sha256"],
             )
@@ -557,11 +565,11 @@ class GovernedSpeechServerTests(unittest.IsolatedAsyncioTestCase):
             )
 
             now_ms = time.time_ns() // 1_000_000
-            approval = GovernedPerformanceApprovalV1.build(
-                {
+            def approval_for(context, approval_id, turn_id="turn:0042"):
+                return GovernedPerformanceApprovalV1.build({
                     "schema_version": 1,
-                    "approval_id": "approval:server-score-turn-0042",
-                    "turn_id": "turn:0042",
+                    "approval_id": approval_id,
+                    "turn_id": turn_id,
                     "reply_sha256": alignment_mapping()[
                         "approved_content_sha256"
                     ],
@@ -572,19 +580,87 @@ class GovernedSpeechServerTests(unittest.IsolatedAsyncioTestCase):
                         "identity": "speech:turn-0042",
                         "sha256": alignment_mapping()["media_sha256"],
                     },
-                    "performance_context_sha256": final_context[
-                        "context_sha256"
-                    ],
+                    "performance_context_sha256": context["context_sha256"],
                     "character_id": character_id,
                     "package_digest": package_digest,
                     "allowed_sinks": ["animation", "speech", "text"],
                     "issued_at_ms": now_ms - 100,
                     "expires_at_ms": now_ms + 60_000,
                     "revocation_generation": 0,
-                    "reconciliation_generation": final_context["runtime"][
+                    "reconciliation_generation": context["runtime"][
                         "reconciliation_generation"
                     ],
-                }
+                })
+
+            mismatched_context_value = deepcopy(final_context)
+            mismatched_context_value.pop("context_sha256")
+            mismatched_context_value["evidence"]["score_binding"] = {
+                "score_id": "compiled:speech:substituted",
+                "score_revision": binding["score_revision"],
+                "score_sha256": binding["score_sha256"],
+            }
+            mismatched_context = PerformanceContextV1.build(
+                mismatched_context_value
+            ).to_dict()
+            mismatched_approval = approval_for(
+                mismatched_context,
+                "approval:server-score-mismatch-turn-0042",
+            )
+            mismatched_registration = {
+                "schema_version": 1,
+                "approved_text": TEXT,
+                "approval": mismatched_approval.to_dict(),
+                "performance_context": mismatched_context,
+                "alignment": alignment_mapping(),
+            }
+            mismatch_status, mismatch_response = await asgi_request(
+                app,
+                "POST",
+                "/api/avatar/wizard/governed-speech",
+                json.dumps(mismatched_registration).encode("utf-8"),
+                TOKEN_HEADERS,
+            )
+            self.assertEqual(mismatch_status, 409, mismatch_response)
+            self.assertEqual(
+                mismatch_response["detail"]["code"],
+                "score_binding_mismatch",
+            )
+
+            replay_context_value = deepcopy(final_context)
+            replay_context_value.pop("context_sha256")
+            replay_context_value["source"]["turn_id"] = "turn:replayed"
+            replay_context_value["source"]["utterance_id"] = "utterance:replayed"
+            replay_context = PerformanceContextV1.build(
+                replay_context_value
+            ).to_dict()
+            replay_approval = approval_for(
+                replay_context,
+                "approval:server-score-replayed",
+                turn_id="turn:replayed",
+            )
+            replay_registration = {
+                "schema_version": 1,
+                "approved_text": TEXT,
+                "approval": replay_approval.to_dict(),
+                "performance_context": replay_context,
+                "alignment": alignment_mapping(),
+            }
+            replay_status, replay_response = await asgi_request(
+                app,
+                "POST",
+                "/api/avatar/wizard/governed-speech",
+                json.dumps(replay_registration).encode("utf-8"),
+                TOKEN_HEADERS,
+            )
+            self.assertEqual(replay_status, 409, replay_response)
+            self.assertEqual(
+                replay_response["detail"]["code"],
+                "score_preparation_mismatch",
+            )
+
+            approval = approval_for(
+                final_context,
+                "approval:server-score-turn-0042",
             )
             registration = {
                 "schema_version": 1,
@@ -608,6 +684,19 @@ class GovernedSpeechServerTests(unittest.IsolatedAsyncioTestCase):
             )
             self.assertEqual(receipt["score_sha256"], binding["score_sha256"])
             self.assertNotIn(TEXT, json.dumps(receipt))
+
+            replay_status, replay_response = await asgi_request(
+                app,
+                "POST",
+                "/api/avatar/wizard/governed-speech",
+                json.dumps(registration).encode("utf-8"),
+                TOKEN_HEADERS,
+            )
+            self.assertEqual(replay_status, 409, replay_response)
+            self.assertEqual(
+                replay_response["detail"]["code"],
+                "score_preparation_required",
+            )
         finally:
             await stop_connector_app(app)
 

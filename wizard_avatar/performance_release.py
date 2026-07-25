@@ -327,6 +327,7 @@ class GovernedSpeechRuntime:
         reconciliation_generation: int,
         now_wall_ms: int,
         now_monotonic_us: int,
+        allow_scoreless: bool = False,
     ) -> None:
         if sha256_ref(registration.approved_text.encode("utf-8")) != registration.approval.reply_sha256:
             raise _error("content_mismatch", "$.approved_text")
@@ -353,6 +354,29 @@ class GovernedSpeechRuntime:
             raise _error("media_mismatch", "$.performance_context.source")
         if context.source.media_sha256 != snapshot.media.media_sha256:
             raise _error("media_mismatch", "$.performance_context.source")
+        context_score = context.evidence.score_binding
+        snapshot_score = snapshot.performance
+        context_scoreless = context_score.score_id is None
+        snapshot_scoreless = snapshot_score.score_id is None
+        if context_scoreless or snapshot_scoreless:
+            if (
+                not allow_scoreless
+                or not context_scoreless
+                or not snapshot_scoreless
+            ):
+                raise _error(
+                    "score_binding_required",
+                    "$.performance_context.evidence.score_binding",
+                )
+        elif (
+            context_score.score_id != snapshot_score.score_id
+            or context_score.score_revision != snapshot_score.score_revision
+            or context_score.score_sha256 != snapshot_score.score_sha256
+        ):
+            raise _error(
+                "score_binding_mismatch",
+                "$.performance_context.evidence.score_binding",
+            )
         if context.source.source_slot != "speech" or snapshot.media.source_slot != "speech":
             raise _error("source_slot_mismatch", "$.performance_context.source")
         if context.source.turn_id != approval.turn_id:
