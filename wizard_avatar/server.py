@@ -144,6 +144,7 @@ def create_app(
     shutdown_signal: Optional[Callable[[], Any]] = None,
     score_repository: Optional[CompiledScoreRepository] = None,
     runtime_server_config: Optional[Mapping[str, Any]] = None,
+    hd_review_index_path: Optional[Path] = None,
 ):
     try:
         from fastapi import FastAPI, HTTPException, WebSocketDisconnect
@@ -197,6 +198,27 @@ def create_app(
         hd_index_path = HD_CANONICAL_DIR / hd_index_record["path"]
         hd_library = _load_hd_pose_library(
             str(hd_index_path), str(hd_index_record["sha256"])
+        )
+    if hd_review_index_path is not None:
+        review_index_path = hd_review_index_path.expanduser().resolve()
+        review_index = json.loads(
+            review_index_path.read_text(encoding="utf-8")
+        )
+        if not bool(review_index.get("review_projection")):
+            raise ValueError(
+                "alternate HD library must declare review_projection"
+            )
+        if bool(review_index.get("runtime_admitted")):
+            raise ValueError(
+                "alternate HD review library cannot be runtime-admitted"
+            )
+        review_index_sha256 = sha256_path(review_index_path)
+        hd_index_record = {
+            "path": str(review_index_path),
+            "sha256": review_index_sha256,
+        }
+        hd_library = _load_hd_pose_library(
+            str(review_index_path), review_index_sha256
         )
     if companion_mode is None:
         companion_mode = os.environ.get("WIZARD_COMPANION_MODE", "").lower() in {

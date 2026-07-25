@@ -1,0 +1,1062 @@
+{
+  "artifact": {
+    "bytes": 28989856,
+    "path": "compiled/finn-calder/finn-calder-candidate-source-motion-v001.wjpose",
+    "pose_count": 36,
+    "pose_ids": [
+      "finn_calder_motion_001",
+      "finn_calder_motion_002",
+      "finn_calder_motion_003",
+      "finn_calder_motion_004",
+      "finn_calder_motion_005",
+      "finn_calder_motion_006",
+      "finn_calder_motion_007",
+      "finn_calder_motion_008",
+      "finn_calder_motion_009",
+      "finn_calder_motion_010",
+      "finn_calder_motion_011",
+      "finn_calder_motion_012",
+      "finn_calder_motion_013",
+      "finn_calder_motion_014",
+      "finn_calder_motion_015",
+      "finn_calder_motion_016",
+      "finn_calder_motion_017",
+      "finn_calder_motion_018",
+      "finn_calder_motion_019",
+      "finn_calder_motion_020",
+      "finn_calder_motion_021",
+      "finn_calder_motion_022",
+      "finn_calder_motion_023",
+      "finn_calder_motion_024",
+      "finn_calder_motion_025",
+      "finn_calder_motion_026",
+      "finn_calder_motion_027",
+      "finn_calder_motion_028",
+      "finn_calder_motion_029",
+      "finn_calder_motion_030",
+      "finn_calder_motion_031",
+      "finn_calder_motion_032",
+      "finn_calder_motion_033",
+      "finn_calder_motion_034",
+      "finn_calder_motion_035",
+      "finn_calder_motion_036"
+    ],
+    "sha256": "6172d80b6003c57317a4139fef8180a631752e91ff4d21e0f958cde0165a86f1"
+  },
+  "character_id": "finn-calder",
+  "compiled_pose_count": 36,
+  "display_name": "Finn Calder",
+  "extraction_profile": {
+    "background_max_channel_spread": 64,
+    "background_min_channel": 210,
+    "frame_grouping": "nearest_expected_center_by_component_centroid",
+    "maximum_source_scale": 2.1,
+    "minimum_component_area": 24
+  },
+  "library_index": {
+    "path": "compiled/finn-calder/library-index.json",
+    "sha256": "ed99bff17eed17027f8b1eda8fe662f4f0ce1e2f1ed2e6577835f9fd05bd4249"
+  },
+  "missing_sequences": [
+    "g7",
+    "g8"
+  ],
+  "parity_tracker_sha256": "81787dc6cb83594b3e3c80b99f499c9d91cfa2584b9ec97473bc48ac49bd35a0",
+  "poses": [
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-001",
+      "normalization_scale": 1.97173145,
+      "output_bbox": [
+        444,
+        69,
+        811,
+        1183
+      ],
+      "pose_id": "finn_calder_motion_001",
+      "rgba_sha256": "60f059f9498297bd64fa6bc18e0131c396a1dce880782b67c0f97ea722063c44",
+      "runtime_admitted": false,
+      "sequence_id": "g1",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        92,
+        129,
+        278,
+        694
+      ],
+      "source_frame_index": 1,
+      "source_member": "sheet-finn-calder-g1.png",
+      "source_member_sha256": "274d197421ebe3a64d532ac5df7f8c8d1fc23ba2694ea5551e4639a9446e3c72"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-002",
+      "normalization_scale": 1.97173145,
+      "output_bbox": [
+        444,
+        71,
+        811,
+        1179
+      ],
+      "pose_id": "finn_calder_motion_002",
+      "rgba_sha256": "1b29a5b97c1c1e6757a40e6490dd087d57b4da6e68690e7a7d62a65d83c28cb3",
+      "runtime_admitted": false,
+      "sequence_id": "g1",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        379,
+        130,
+        565,
+        692
+      ],
+      "source_frame_index": 2,
+      "source_member": "sheet-finn-calder-g1.png",
+      "source_member_sha256": "274d197421ebe3a64d532ac5df7f8c8d1fc23ba2694ea5551e4639a9446e3c72"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-003",
+      "normalization_scale": 1.97173145,
+      "output_bbox": [
+        448,
+        75,
+        805,
+        1179
+      ],
+      "pose_id": "finn_calder_motion_003",
+      "rgba_sha256": "5608cc73b506c37b4939d69bcfbab411c6d4cbf8c25c124d891f92346f641ae6",
+      "runtime_admitted": false,
+      "sequence_id": "g1",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        694,
+        132,
+        875,
+        692
+      ],
+      "source_frame_index": 3,
+      "source_member": "sheet-finn-calder-g1.png",
+      "source_member_sha256": "274d197421ebe3a64d532ac5df7f8c8d1fc23ba2694ea5551e4639a9446e3c72"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-004",
+      "normalization_scale": 1.97173145,
+      "output_bbox": [
+        365,
+        85,
+        889,
+        1185
+      ],
+      "pose_id": "finn_calder_motion_004",
+      "rgba_sha256": "21e866e8988c4ffc451272141d91270c47f8e8b428c00e36101c91bbd9bacb7a",
+      "runtime_admitted": false,
+      "sequence_id": "g1",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        967,
+        137,
+        1233,
+        695
+      ],
+      "source_frame_index": 4,
+      "source_member": "sheet-finn-calder-g1.png",
+      "source_member_sha256": "274d197421ebe3a64d532ac5df7f8c8d1fc23ba2694ea5551e4639a9446e3c72"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-005",
+      "normalization_scale": 1.97173145,
+      "output_bbox": [
+        362,
+        110,
+        892,
+        1179
+      ],
+      "pose_id": "finn_calder_motion_005",
+      "rgba_sha256": "aeee8a50f4aae417f8e05bb863b1b17d19aff1d038d241168bcc18c5da7fe2e0",
+      "runtime_admitted": false,
+      "sequence_id": "g1",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        1305,
+        150,
+        1574,
+        692
+      ],
+      "source_frame_index": 5,
+      "source_member": "sheet-finn-calder-g1.png",
+      "source_member_sha256": "274d197421ebe3a64d532ac5df7f8c8d1fc23ba2694ea5551e4639a9446e3c72"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-006",
+      "normalization_scale": 1.97173145,
+      "output_bbox": [
+        384,
+        120,
+        871,
+        1169
+      ],
+      "pose_id": "finn_calder_motion_006",
+      "rgba_sha256": "a12a55d4d0992ae6ac76a891338aa71fb401aee3397ba8f07b9fff60d477b738",
+      "runtime_admitted": false,
+      "sequence_id": "g1",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        1625,
+        155,
+        1872,
+        687
+      ],
+      "source_frame_index": 6,
+      "source_member": "sheet-finn-calder-g1.png",
+      "source_member_sha256": "274d197421ebe3a64d532ac5df7f8c8d1fc23ba2694ea5551e4639a9446e3c72"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-007",
+      "normalization_scale": 2.1,
+      "output_bbox": [
+        379,
+        162,
+        875,
+        1160
+      ],
+      "pose_id": "finn_calder_motion_007",
+      "rgba_sha256": "12bb04986ff437e721f2fb6bc108de16c149607588d599daad3ba0e3fb417cdc",
+      "runtime_admitted": false,
+      "sequence_id": "g2",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        76,
+        127,
+        312,
+        602
+      ],
+      "source_frame_index": 1,
+      "source_member": "sheet-finn-calder-g2.png",
+      "source_member_sha256": "621a6c5945160e7a3eae0c3bf030a09046e92dac441a2ffbe34c2d71616823ed"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-008",
+      "normalization_scale": 2.1,
+      "output_bbox": [
+        388,
+        166,
+        865,
+        1178
+      ],
+      "pose_id": "finn_calder_motion_008",
+      "rgba_sha256": "40077f29f0e39b46f7ec2498cae9f10b34ccdedddf24c2d4e281ae255696c57b",
+      "runtime_admitted": false,
+      "sequence_id": "g2",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        416,
+        129,
+        643,
+        611
+      ],
+      "source_frame_index": 2,
+      "source_member": "sheet-finn-calder-g2.png",
+      "source_member_sha256": "621a6c5945160e7a3eae0c3bf030a09046e92dac441a2ffbe34c2d71616823ed"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-009",
+      "normalization_scale": 2.1,
+      "output_bbox": [
+        404,
+        164,
+        849,
+        1178
+      ],
+      "pose_id": "finn_calder_motion_009",
+      "rgba_sha256": "a918e359b6a19bceeb577c70ab9aa5b38988b17f308f501749d3a8de8dfa2e29",
+      "runtime_admitted": false,
+      "sequence_id": "g2",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        777,
+        128,
+        989,
+        611
+      ],
+      "source_frame_index": 3,
+      "source_member": "sheet-finn-calder-g2.png",
+      "source_member_sha256": "621a6c5945160e7a3eae0c3bf030a09046e92dac441a2ffbe34c2d71616823ed"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-010",
+      "normalization_scale": 2.1,
+      "output_bbox": [
+        415,
+        160,
+        839,
+        1172
+      ],
+      "pose_id": "finn_calder_motion_010",
+      "rgba_sha256": "91180b33c4d679b9d3607f3c428d046b096dfc35aa0d05440eea2b01c6ad0246",
+      "runtime_admitted": false,
+      "sequence_id": "g2",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        1128,
+        126,
+        1330,
+        608
+      ],
+      "source_frame_index": 4,
+      "source_member": "sheet-finn-calder-g2.png",
+      "source_member_sha256": "621a6c5945160e7a3eae0c3bf030a09046e92dac441a2ffbe34c2d71616823ed"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-011",
+      "normalization_scale": 2.1,
+      "output_bbox": [
+        275,
+        219,
+        979,
+        1185
+      ],
+      "pose_id": "finn_calder_motion_011",
+      "rgba_sha256": "a8082bc44ab715582af99648b70c2ae36868a57c0830a6446b3c18d754ba16d4",
+      "runtime_admitted": false,
+      "sequence_id": "g2",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        1433,
+        154,
+        1768,
+        614
+      ],
+      "source_frame_index": 5,
+      "source_member": "sheet-finn-calder-g2.png",
+      "source_member_sha256": "621a6c5945160e7a3eae0c3bf030a09046e92dac441a2ffbe34c2d71616823ed"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-012",
+      "normalization_scale": 2.1,
+      "output_bbox": [
+        351,
+        263,
+        903,
+        1166
+      ],
+      "pose_id": "finn_calder_motion_012",
+      "rgba_sha256": "bb188d045f133e0d5cbff3f70a767864e07406ea8cc8e8020a7520f4b6046c41",
+      "runtime_admitted": false,
+      "sequence_id": "g2",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        1830,
+        175,
+        2093,
+        605
+      ],
+      "source_frame_index": 6,
+      "source_member": "sheet-finn-calder-g2.png",
+      "source_member_sha256": "621a6c5945160e7a3eae0c3bf030a09046e92dac441a2ffbe34c2d71616823ed"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-013",
+      "normalization_scale": 2.08598131,
+      "output_bbox": [
+        304,
+        338,
+        951,
+        1181
+      ],
+      "pose_id": "finn_calder_motion_013",
+      "rgba_sha256": "ed6b4f8ce629c32414d73ff7490872c7c2151d9a68a8ba2facaf860f61440d1a",
+      "runtime_admitted": false,
+      "sequence_id": "g3",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        88,
+        211,
+        398,
+        615
+      ],
+      "source_frame_index": 1,
+      "source_member": "sheet-finn-calder-g3.png",
+      "source_member_sha256": "d2a09b500ef289c82bf801d182b029f696f8c8d97affe62e016e3863dfe6d373"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-014",
+      "normalization_scale": 2.08598131,
+      "output_bbox": [
+        337,
+        336,
+        917,
+        1185
+      ],
+      "pose_id": "finn_calder_motion_014",
+      "rgba_sha256": "e701caa2d52efef02879baee95cd93e99ab8fb432ea14d8a43d957d7c1d74c8d",
+      "runtime_admitted": false,
+      "sequence_id": "g3",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        485,
+        210,
+        763,
+        617
+      ],
+      "source_frame_index": 2,
+      "source_member": "sheet-finn-calder-g3.png",
+      "source_member_sha256": "d2a09b500ef289c82bf801d182b029f696f8c8d97affe62e016e3863dfe6d373"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-015",
+      "normalization_scale": 2.08598131,
+      "output_bbox": [
+        372,
+        422,
+        881,
+        1181
+      ],
+      "pose_id": "finn_calder_motion_015",
+      "rgba_sha256": "6e081b4b4a6d077ca383ac733678b182862a9a8444afd14d39a591ef22e28b75",
+      "runtime_admitted": false,
+      "sequence_id": "g3",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        850,
+        251,
+        1094,
+        615
+      ],
+      "source_frame_index": 3,
+      "source_member": "sheet-finn-calder-g3.png",
+      "source_member_sha256": "d2a09b500ef289c82bf801d182b029f696f8c8d97affe62e016e3863dfe6d373"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-016",
+      "normalization_scale": 2.08598131,
+      "output_bbox": [
+        356,
+        524,
+        898,
+        1179
+      ],
+      "pose_id": "finn_calder_motion_016",
+      "rgba_sha256": "721bc5e9f0c29f3f0d4ddeb805a2931962f588d2ced2149c094712cb833dc15b",
+      "runtime_admitted": false,
+      "sequence_id": "g3",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        1185,
+        300,
+        1445,
+        614
+      ],
+      "source_frame_index": 4,
+      "source_member": "sheet-finn-calder-g3.png",
+      "source_member_sha256": "d2a09b500ef289c82bf801d182b029f696f8c8d97affe62e016e3863dfe6d373"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-017",
+      "normalization_scale": 2.08598131,
+      "output_bbox": [
+        333,
+        182,
+        921,
+        1048
+      ],
+      "pose_id": "finn_calder_motion_017",
+      "rgba_sha256": "518aba3912bbbd8bc2d22e62349ad01fe72487ebf122b0890b825b4ac5984a23",
+      "runtime_admitted": false,
+      "sequence_id": "g3",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        1520,
+        136,
+        1802,
+        551
+      ],
+      "source_frame_index": 5,
+      "source_member": "sheet-finn-calder-g3.png",
+      "source_member_sha256": "d2a09b500ef289c82bf801d182b029f696f8c8d97affe62e016e3863dfe6d373"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-018",
+      "normalization_scale": 2.08598131,
+      "output_bbox": [
+        409,
+        69,
+        845,
+        931
+      ],
+      "pose_id": "finn_calder_motion_018",
+      "rgba_sha256": "829b0e8c413eeb0c266bccd49fe63dc9577b7cfc457e8e785be0dd50da537a39",
+      "runtime_admitted": false,
+      "sequence_id": "g3",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        1900,
+        82,
+        2109,
+        495
+      ],
+      "source_frame_index": 6,
+      "source_member": "sheet-finn-calder-g3.png",
+      "source_member_sha256": "d2a09b500ef289c82bf801d182b029f696f8c8d97affe62e016e3863dfe6d373"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-019",
+      "normalization_scale": 1.88513514,
+      "output_bbox": [
+        426,
+        69,
+        828,
+        1021
+      ],
+      "pose_id": "finn_calder_motion_019",
+      "rgba_sha256": "f7d33240716d96bcc7f9f94c1536cf5da1ec5f5b6ae17a331fc380cbbf4cefd6",
+      "runtime_admitted": false,
+      "sequence_id": "g4",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        114,
+        64,
+        327,
+        569
+      ],
+      "source_frame_index": 1,
+      "source_member": "sheet-finn-calder-g4.png",
+      "source_member_sha256": "199727d06a7afb3696238f9aa43d5bf737a04a8f3c9ca6c5f7a1a4e9cc35c7a3"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-020",
+      "normalization_scale": 1.88513514,
+      "output_bbox": [
+        381,
+        542,
+        873,
+        1172
+      ],
+      "pose_id": "finn_calder_motion_020",
+      "rgba_sha256": "45d2435ac8634709f4a8c25926386367fd40c88ed870fce27be57e0632cb641f",
+      "runtime_admitted": false,
+      "sequence_id": "g4",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        417,
+        315,
+        678,
+        649
+      ],
+      "source_frame_index": 2,
+      "source_member": "sheet-finn-calder-g4.png",
+      "source_member_sha256": "199727d06a7afb3696238f9aa43d5bf737a04a8f3c9ca6c5f7a1a4e9cc35c7a3"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-021",
+      "normalization_scale": 1.88513514,
+      "output_bbox": [
+        324,
+        348,
+        931,
+        1179
+      ],
+      "pose_id": "finn_calder_motion_021",
+      "rgba_sha256": "8682ab9b590c1ce7c8ebb38acd27a9bb988ac8a01442af342371b6ad90b68403",
+      "runtime_admitted": false,
+      "sequence_id": "g4",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        728,
+        212,
+        1050,
+        653
+      ],
+      "source_frame_index": 3,
+      "source_member": "sheet-finn-calder-g4.png",
+      "source_member_sha256": "199727d06a7afb3696238f9aa43d5bf737a04a8f3c9ca6c5f7a1a4e9cc35c7a3"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-022",
+      "normalization_scale": 1.88513514,
+      "output_bbox": [
+        402,
+        310,
+        851,
+        1185
+      ],
+      "pose_id": "finn_calder_motion_022",
+      "rgba_sha256": "8191a688226498833ee7d52633e11a269946ec7bc488b6f3d35049dbe743a6f1",
+      "runtime_admitted": false,
+      "sequence_id": "g4",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        1113,
+        192,
+        1351,
+        656
+      ],
+      "source_frame_index": 4,
+      "source_member": "sheet-finn-calder-g4.png",
+      "source_member_sha256": "199727d06a7afb3696238f9aa43d5bf737a04a8f3c9ca6c5f7a1a4e9cc35c7a3"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-023",
+      "normalization_scale": 1.88513514,
+      "output_bbox": [
+        484,
+        310,
+        771,
+        1177
+      ],
+      "pose_id": "finn_calder_motion_023",
+      "rgba_sha256": "f7ea0a68f5688184d19608ababbd5f528bf62c23db3e0e334019d94c7e6834e6",
+      "runtime_admitted": false,
+      "sequence_id": "g4",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        1458,
+        192,
+        1610,
+        652
+      ],
+      "source_frame_index": 5,
+      "source_member": "sheet-finn-calder-g4.png",
+      "source_member_sha256": "199727d06a7afb3696238f9aa43d5bf737a04a8f3c9ca6c5f7a1a4e9cc35c7a3"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-024",
+      "normalization_scale": 1.88513514,
+      "output_bbox": [
+        410,
+        314,
+        845,
+        1176
+      ],
+      "pose_id": "finn_calder_motion_024",
+      "rgba_sha256": "d2f7a8a9f399c51c81504ff470070fb1eaeef383430ee73d166f0f4e26e828bc",
+      "runtime_admitted": false,
+      "sequence_id": "g4",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        1749,
+        194,
+        1980,
+        651
+      ],
+      "source_frame_index": 6,
+      "source_member": "sheet-finn-calder-g4.png",
+      "source_member_sha256": "199727d06a7afb3696238f9aa43d5bf737a04a8f3c9ca6c5f7a1a4e9cc35c7a3"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-025",
+      "normalization_scale": 1.9109589,
+      "output_bbox": [
+        414,
+        96,
+        840,
+        1183
+      ],
+      "pose_id": "finn_calder_motion_025",
+      "rgba_sha256": "5861eecebfb9c2c41518a3f0ec088248edc208549fa2e7fa42ea5b3a1374d4bd",
+      "runtime_admitted": false,
+      "sequence_id": "g5",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        90,
+        80,
+        313,
+        649
+      ],
+      "source_frame_index": 1,
+      "source_member": "sheet-finn-calder-g5.png",
+      "source_member_sha256": "72cc16da5ddead3a30f37cac39f9699a0c8db667804f4af14b456554ed3266b8"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-026",
+      "normalization_scale": 1.9109589,
+      "output_bbox": [
+        402,
+        96,
+        853,
+        1185
+      ],
+      "pose_id": "finn_calder_motion_026",
+      "rgba_sha256": "9fd20aa77fdbcc5e1ef6bb86ed0049ff80689577d3d388d008012b374e150257",
+      "runtime_admitted": false,
+      "sequence_id": "g5",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        428,
+        80,
+        664,
+        650
+      ],
+      "source_frame_index": 2,
+      "source_member": "sheet-finn-calder-g5.png",
+      "source_member_sha256": "72cc16da5ddead3a30f37cac39f9699a0c8db667804f4af14b456554ed3266b8"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-027",
+      "normalization_scale": 1.9109589,
+      "output_bbox": [
+        402,
+        94,
+        853,
+        1181
+      ],
+      "pose_id": "finn_calder_motion_027",
+      "rgba_sha256": "7c976cecc02ded0ff472cedc7a026b7b08e093d53c3415ee1c7ea0166246f024",
+      "runtime_admitted": false,
+      "sequence_id": "g5",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        780,
+        79,
+        1016,
+        648
+      ],
+      "source_frame_index": 3,
+      "source_member": "sheet-finn-calder-g5.png",
+      "source_member_sha256": "72cc16da5ddead3a30f37cac39f9699a0c8db667804f4af14b456554ed3266b8"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-028",
+      "normalization_scale": 1.9109589,
+      "output_bbox": [
+        404,
+        92,
+        851,
+        1185
+      ],
+      "pose_id": "finn_calder_motion_028",
+      "rgba_sha256": "45df8f61241cea4316aee5a7e04be4d25b4ab12477eb1dfbbdbce736ab5c1d25",
+      "runtime_admitted": false,
+      "sequence_id": "g5",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        1150,
+        78,
+        1384,
+        650
+      ],
+      "source_frame_index": 4,
+      "source_member": "sheet-finn-calder-g5.png",
+      "source_member_sha256": "72cc16da5ddead3a30f37cac39f9699a0c8db667804f4af14b456554ed3266b8"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-029",
+      "normalization_scale": 1.9109589,
+      "output_bbox": [
+        406,
+        96,
+        847,
+        1180
+      ],
+      "pose_id": "finn_calder_motion_029",
+      "rgba_sha256": "6407fad15d6b6ccdd800853304619cf9db6bfc88d8d69d88575c647cde89338e",
+      "runtime_admitted": false,
+      "sequence_id": "g5",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        1508,
+        80,
+        1739,
+        647
+      ],
+      "source_frame_index": 5,
+      "source_member": "sheet-finn-calder-g5.png",
+      "source_member_sha256": "72cc16da5ddead3a30f37cac39f9699a0c8db667804f4af14b456554ed3266b8"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-030",
+      "normalization_scale": 1.9109589,
+      "output_bbox": [
+        374,
+        69,
+        880,
+        960
+      ],
+      "pose_id": "finn_calder_motion_030",
+      "rgba_sha256": "723adc88d6304a023d4ee7d5da4ebb9d8199508ccf47d4ab806c63d176bdf76e",
+      "runtime_admitted": false,
+      "sequence_id": "g5",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        1832,
+        66,
+        2097,
+        532
+      ],
+      "source_frame_index": 6,
+      "source_member": "sheet-finn-calder-g5.png",
+      "source_member_sha256": "72cc16da5ddead3a30f37cac39f9699a0c8db667804f4af14b456554ed3266b8"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-031",
+      "normalization_scale": 2.02173913,
+      "output_bbox": [
+        396,
+        89,
+        859,
+        1173
+      ],
+      "pose_id": "finn_calder_motion_031",
+      "rgba_sha256": "64391867d830b654b13f466de2250336cf281b2f2cb45eba3da080394beb8130",
+      "runtime_admitted": false,
+      "sequence_id": "g6",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        66,
+        95,
+        295,
+        631
+      ],
+      "source_frame_index": 1,
+      "source_member": "sheet-finn-calder-g6.png",
+      "source_member_sha256": "166ec4bd6569e02887b237eb9037d4351e875478e3f000c54f5c23112bf0c62e"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-032",
+      "normalization_scale": 2.02173913,
+      "output_bbox": [
+        376,
+        87,
+        877,
+        1181
+      ],
+      "pose_id": "finn_calder_motion_032",
+      "rgba_sha256": "358fc1ef40874a3f5b5fa47e9028386d540f96c4254a7be0a01ca0ceb9816845",
+      "runtime_admitted": false,
+      "sequence_id": "g6",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        413,
+        94,
+        661,
+        635
+      ],
+      "source_frame_index": 2,
+      "source_member": "sheet-finn-calder-g6.png",
+      "source_member_sha256": "166ec4bd6569e02887b237eb9037d4351e875478e3f000c54f5c23112bf0c62e"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-033",
+      "normalization_scale": 2.02173913,
+      "output_bbox": [
+        394,
+        87,
+        861,
+        1177
+      ],
+      "pose_id": "finn_calder_motion_033",
+      "rgba_sha256": "f74207790712a3a86e3ca4e07f2434f37782d86008605c599d6aa06ad84673f1",
+      "runtime_admitted": false,
+      "sequence_id": "g6",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        793,
+        94,
+        1024,
+        633
+      ],
+      "source_frame_index": 3,
+      "source_member": "sheet-finn-calder-g6.png",
+      "source_member_sha256": "166ec4bd6569e02887b237eb9037d4351e875478e3f000c54f5c23112bf0c62e"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-034",
+      "normalization_scale": 2.02173913,
+      "output_bbox": [
+        380,
+        95,
+        875,
+        1183
+      ],
+      "pose_id": "finn_calder_motion_034",
+      "rgba_sha256": "1d49619c1818bd89439eaf55b3abb16282019d3d11cb5e633b514bb2275db503",
+      "runtime_admitted": false,
+      "sequence_id": "g6",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        1143,
+        98,
+        1388,
+        636
+      ],
+      "source_frame_index": 4,
+      "source_member": "sheet-finn-calder-g6.png",
+      "source_member_sha256": "166ec4bd6569e02887b237eb9037d4351e875478e3f000c54f5c23112bf0c62e"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-035",
+      "normalization_scale": 2.02173913,
+      "output_bbox": [
+        396,
+        89,
+        857,
+        1185
+      ],
+      "pose_id": "finn_calder_motion_035",
+      "rgba_sha256": "06980ad2884789cdf1d8ddd9bde09da8d9c3bbefe6b3d40596a1d7d4919f5cde",
+      "runtime_admitted": false,
+      "sequence_id": "g6",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        1513,
+        95,
+        1741,
+        637
+      ],
+      "source_frame_index": 5,
+      "source_member": "sheet-finn-calder-g6.png",
+      "source_member_sha256": "166ec4bd6569e02887b237eb9037d4351e875478e3f000c54f5c23112bf0c62e"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-036",
+      "normalization_scale": 2.02173913,
+      "output_bbox": [
+        352,
+        69,
+        902,
+        1025
+      ],
+      "pose_id": "finn_calder_motion_036",
+      "rgba_sha256": "981080065b6b8150cfa464fde5d885dd7cbb462172ed253d77e3c6c626aafa13",
+      "runtime_admitted": false,
+      "sequence_id": "g6",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        1839,
+        85,
+        2111,
+        558
+      ],
+      "source_frame_index": 6,
+      "source_member": "sheet-finn-calder-g6.png",
+      "source_member_sha256": "166ec4bd6569e02887b237eb9037d4351e875478e3f000c54f5c23112bf0c62e"
+    }
+  ],
+  "review_contact_sheet": {
+    "path": "source-metadata/finn-calder/source-motion-contact-sheet-v001.png",
+    "sha256": "423e174b9ff64b3d5b5a9b6b96013b1faca4c51b32b314dedb53ef8e4533c3cc"
+  },
+  "runtime_admitted": false,
+  "schema_version": 1,
+  "sequences": {
+    "g1": [
+      "finn_calder_motion_001",
+      "finn_calder_motion_002",
+      "finn_calder_motion_003",
+      "finn_calder_motion_004",
+      "finn_calder_motion_005",
+      "finn_calder_motion_006"
+    ],
+    "g2": [
+      "finn_calder_motion_007",
+      "finn_calder_motion_008",
+      "finn_calder_motion_009",
+      "finn_calder_motion_010",
+      "finn_calder_motion_011",
+      "finn_calder_motion_012"
+    ],
+    "g3": [
+      "finn_calder_motion_013",
+      "finn_calder_motion_014",
+      "finn_calder_motion_015",
+      "finn_calder_motion_016",
+      "finn_calder_motion_017",
+      "finn_calder_motion_018"
+    ],
+    "g4": [
+      "finn_calder_motion_019",
+      "finn_calder_motion_020",
+      "finn_calder_motion_021",
+      "finn_calder_motion_022",
+      "finn_calder_motion_023",
+      "finn_calder_motion_024"
+    ],
+    "g5": [
+      "finn_calder_motion_025",
+      "finn_calder_motion_026",
+      "finn_calder_motion_027",
+      "finn_calder_motion_028",
+      "finn_calder_motion_029",
+      "finn_calder_motion_030"
+    ],
+    "g6": [
+      "finn_calder_motion_031",
+      "finn_calder_motion_032",
+      "finn_calder_motion_033",
+      "finn_calder_motion_034",
+      "finn_calder_motion_035",
+      "finn_calder_motion_036"
+    ]
+  },
+  "source_census_sha256": "97e597e7dee837b20d9050529c2ddb15244c0d01b717b539280a87d447ad46fe",
+  "status": "candidate_source_partial",
+  "target_pose_count": 48
+}

@@ -241,7 +241,10 @@ def _extract_sheet_frames(
 
 
 def _premultiplied_resize(
-    image: Image.Image, size: tuple[int, int]
+    image: Image.Image,
+    size: tuple[int, int],
+    *,
+    sharpen: bool = True,
 ) -> Image.Image:
     rgba = image.convert("RGBA")
     red, green, blue, alpha = rgba.split()
@@ -279,12 +282,13 @@ def _premultiplied_resize(
                 )
             )
     resized.putdata(unpremultiplied)
-    alpha = resized.getchannel("A")
-    sharpened = resized.convert("RGB").filter(
-        ImageFilter.UnsharpMask(radius=1.4, percent=170, threshold=2)
-    )
-    sharpened.putalpha(alpha)
-    resized = sharpened
+    if sharpen:
+        alpha = resized.getchannel("A")
+        sharpened = resized.convert("RGB").filter(
+            ImageFilter.UnsharpMask(radius=1.4, percent=170, threshold=2)
+        )
+        sharpened.putalpha(alpha)
+        resized = sharpened
     return resized
 
 
@@ -293,6 +297,7 @@ def _normalize_sheet_frames(
     *,
     profile: dict[str, Any],
     maximum_scale: float,
+    sharpen: bool = True,
 ) -> list[dict[str, Any]]:
     canvas_width = int(profile["canvas_width"])
     canvas_height = int(profile["canvas_height"])
@@ -316,7 +321,9 @@ def _normalize_sheet_frames(
         x0, y0, x1, y1 = frame["source_bbox"]
         width = max(1, round((x1 - x0) * scale))
         height = max(1, round((y1 - y0) * scale))
-        resized = _premultiplied_resize(frame["image"], (width, height))
+        resized = _premultiplied_resize(
+            frame["image"], (width, height), sharpen=sharpen
+        )
         paste_x = round((canvas_width - width) / 2)
         paste_y = round(baseline_y + (y0 - source_baseline) * scale)
         if (

@@ -1,0 +1,1062 @@
+{
+  "artifact": {
+    "bytes": 28404666,
+    "path": "compiled/kai-renner/kai-renner-candidate-source-motion-v001.wjpose",
+    "pose_count": 36,
+    "pose_ids": [
+      "kai_renner_motion_001",
+      "kai_renner_motion_002",
+      "kai_renner_motion_003",
+      "kai_renner_motion_004",
+      "kai_renner_motion_005",
+      "kai_renner_motion_006",
+      "kai_renner_motion_007",
+      "kai_renner_motion_008",
+      "kai_renner_motion_009",
+      "kai_renner_motion_010",
+      "kai_renner_motion_011",
+      "kai_renner_motion_012",
+      "kai_renner_motion_013",
+      "kai_renner_motion_014",
+      "kai_renner_motion_015",
+      "kai_renner_motion_016",
+      "kai_renner_motion_017",
+      "kai_renner_motion_018",
+      "kai_renner_motion_019",
+      "kai_renner_motion_020",
+      "kai_renner_motion_021",
+      "kai_renner_motion_022",
+      "kai_renner_motion_023",
+      "kai_renner_motion_024",
+      "kai_renner_motion_025",
+      "kai_renner_motion_026",
+      "kai_renner_motion_027",
+      "kai_renner_motion_028",
+      "kai_renner_motion_029",
+      "kai_renner_motion_030",
+      "kai_renner_motion_031",
+      "kai_renner_motion_032",
+      "kai_renner_motion_033",
+      "kai_renner_motion_034",
+      "kai_renner_motion_035",
+      "kai_renner_motion_036"
+    ],
+    "sha256": "7b73ec39dc91c0b1ac50e444bd786c893687880645b59ca6cc26b6f27b9d69e1"
+  },
+  "character_id": "kai-renner",
+  "compiled_pose_count": 36,
+  "display_name": "Kai Renner",
+  "extraction_profile": {
+    "background_max_channel_spread": 64,
+    "background_min_channel": 210,
+    "frame_grouping": "nearest_expected_center_by_component_centroid",
+    "maximum_source_scale": 2.1,
+    "minimum_component_area": 24
+  },
+  "library_index": {
+    "path": "compiled/kai-renner/library-index.json",
+    "sha256": "1c7fd5da986d30ba334a3a612008946839bb3649bcb4ccd228dbcf80c0e87b80"
+  },
+  "missing_sequences": [
+    "g7",
+    "g8"
+  ],
+  "parity_tracker_sha256": "81787dc6cb83594b3e3c80b99f499c9d91cfa2584b9ec97473bc48ac49bd35a0",
+  "poses": [
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-001",
+      "normalization_scale": 1.93414211,
+      "output_bbox": [
+        429,
+        69,
+        825,
+        1185
+      ],
+      "pose_id": "kai_renner_motion_001",
+      "rgba_sha256": "d298591d2ed70dd66e9f9e5eb00243011341a82e63dc684ef29dd150c1cf7969",
+      "runtime_admitted": false,
+      "sequence_id": "g1",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        62,
+        160,
+        267,
+        737
+      ],
+      "source_frame_index": 1,
+      "source_member": "sheet-kai-renner-g1.png",
+      "source_member_sha256": "e3035afaa2106344ee7dbcd09640711892604690fcbb9d11eac7868d85e6289d"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-002",
+      "normalization_scale": 1.93414211,
+      "output_bbox": [
+        436,
+        69,
+        819,
+        1181
+      ],
+      "pose_id": "kai_renner_motion_002",
+      "rgba_sha256": "bd2c4eb3b19c5779b0a1179335ff39cd993cda119a19c5d22d1991f7ca74a7d4",
+      "runtime_admitted": false,
+      "sequence_id": "g1",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        341,
+        160,
+        539,
+        735
+      ],
+      "source_frame_index": 2,
+      "source_member": "sheet-kai-renner-g1.png",
+      "source_member_sha256": "e3035afaa2106344ee7dbcd09640711892604690fcbb9d11eac7868d85e6289d"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-003",
+      "normalization_scale": 1.93414211,
+      "output_bbox": [
+        432,
+        79,
+        823,
+        1180
+      ],
+      "pose_id": "kai_renner_motion_003",
+      "rgba_sha256": "921bbbdeb3295f9625f6e7cbb903261347132656e176107db08494cde500a062",
+      "runtime_admitted": false,
+      "sequence_id": "g1",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        617,
+        165,
+        819,
+        734
+      ],
+      "source_frame_index": 3,
+      "source_member": "sheet-kai-renner-g1.png",
+      "source_member_sha256": "e3035afaa2106344ee7dbcd09640711892604690fcbb9d11eac7868d85e6289d"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-004",
+      "normalization_scale": 1.93414211,
+      "output_bbox": [
+        384,
+        77,
+        869,
+        1170
+      ],
+      "pose_id": "kai_renner_motion_004",
+      "rgba_sha256": "1366eac0c2d7cec7941a2c68a3532a3794a39572c957ab1995205c1874714d8a",
+      "runtime_admitted": false,
+      "sequence_id": "g1",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        862,
+        164,
+        1113,
+        729
+      ],
+      "source_frame_index": 4,
+      "source_member": "sheet-kai-renner-g1.png",
+      "source_member_sha256": "e3035afaa2106344ee7dbcd09640711892604690fcbb9d11eac7868d85e6289d"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-005",
+      "normalization_scale": 1.93414211,
+      "output_bbox": [
+        382,
+        148,
+        873,
+        1169
+      ],
+      "pose_id": "kai_renner_motion_005",
+      "rgba_sha256": "8358384ef0576a7ec14a89b8a8a5aa95ac9ac608eaac0a5376d8b7369a0c8396",
+      "runtime_admitted": false,
+      "sequence_id": "g1",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        1169,
+        201,
+        1423,
+        729
+      ],
+      "source_frame_index": 5,
+      "source_member": "sheet-kai-renner-g1.png",
+      "source_member_sha256": "e3035afaa2106344ee7dbcd09640711892604690fcbb9d11eac7868d85e6289d"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-006",
+      "normalization_scale": 1.93414211,
+      "output_bbox": [
+        376,
+        110,
+        877,
+        1170
+      ],
+      "pose_id": "kai_renner_motion_006",
+      "rgba_sha256": "82e66d72c760dc6f9e91a8a1602b7712e541e0a520f0c4bb71265a7881af01ae",
+      "runtime_admitted": false,
+      "sequence_id": "g1",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        1466,
+        181,
+        1725,
+        729
+      ],
+      "source_frame_index": 6,
+      "source_member": "sheet-kai-renner-g1.png",
+      "source_member_sha256": "e3035afaa2106344ee7dbcd09640711892604690fcbb9d11eac7868d85e6289d"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-007",
+      "normalization_scale": 2.1,
+      "output_bbox": [
+        344,
+        89,
+        909,
+        1185
+      ],
+      "pose_id": "kai_renner_motion_007",
+      "rgba_sha256": "134e336ee0cda9200e77b54c9ab1fba0ab375204d8c4df5bc56004d0933888d1",
+      "runtime_admitted": false,
+      "sequence_id": "g2",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        73,
+        103,
+        342,
+        625
+      ],
+      "source_frame_index": 1,
+      "source_member": "sheet-kai-renner-g2.png",
+      "source_member_sha256": "8e87897dfc08be21838ff0a5c81055034f1d2d7f8ebb43383684f848bd452bb6"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-008",
+      "normalization_scale": 2.1,
+      "output_bbox": [
+        384,
+        95,
+        871,
+        1172
+      ],
+      "pose_id": "kai_renner_motion_008",
+      "rgba_sha256": "a37c4f5422f2a11dbc9d39e8276ade0287aac251be3f0066d6315adeb3e3fbdb",
+      "runtime_admitted": false,
+      "sequence_id": "g2",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        419,
+        106,
+        651,
+        619
+      ],
+      "source_frame_index": 2,
+      "source_member": "sheet-kai-renner-g2.png",
+      "source_member_sha256": "8e87897dfc08be21838ff0a5c81055034f1d2d7f8ebb43383684f848bd452bb6"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-009",
+      "normalization_scale": 2.1,
+      "output_bbox": [
+        404,
+        95,
+        851,
+        1174
+      ],
+      "pose_id": "kai_renner_motion_009",
+      "rgba_sha256": "aebeee5bd125e2f29d55beb6de5163a01ff7c4d011b4b5454ff71f4999a4c5ea",
+      "runtime_admitted": false,
+      "sequence_id": "g2",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        768,
+        106,
+        981,
+        620
+      ],
+      "source_frame_index": 3,
+      "source_member": "sheet-kai-renner-g2.png",
+      "source_member_sha256": "8e87897dfc08be21838ff0a5c81055034f1d2d7f8ebb43383684f848bd452bb6"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-010",
+      "normalization_scale": 2.1,
+      "output_bbox": [
+        362,
+        78,
+        891,
+        1172
+      ],
+      "pose_id": "kai_renner_motion_010",
+      "rgba_sha256": "0098e076cc4e82b7071092ea9d47ae4e55fea48503312e8cbc1cd7025d76cab9",
+      "runtime_admitted": false,
+      "sequence_id": "g2",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        1096,
+        98,
+        1348,
+        619
+      ],
+      "source_frame_index": 4,
+      "source_member": "sheet-kai-renner-g2.png",
+      "source_member_sha256": "8e87897dfc08be21838ff0a5c81055034f1d2d7f8ebb43383684f848bd452bb6"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-011",
+      "normalization_scale": 2.1,
+      "output_bbox": [
+        298,
+        181,
+        955,
+        1145
+      ],
+      "pose_id": "kai_renner_motion_011",
+      "rgba_sha256": "43d623f1228dc6e47838b86416c96b1127f318fa6a00e2e8fd50563866f3090a",
+      "runtime_admitted": false,
+      "sequence_id": "g2",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        1396,
+        147,
+        1709,
+        606
+      ],
+      "source_frame_index": 5,
+      "source_member": "sheet-kai-renner-g2.png",
+      "source_member_sha256": "8e87897dfc08be21838ff0a5c81055034f1d2d7f8ebb43383684f848bd452bb6"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-012",
+      "normalization_scale": 2.1,
+      "output_bbox": [
+        337,
+        234,
+        917,
+        1173
+      ],
+      "pose_id": "kai_renner_motion_012",
+      "rgba_sha256": "2b09b5cec9351e31a14f6734701bf924fc711d936e196ad547a2e324e94ac4f0",
+      "runtime_admitted": false,
+      "sequence_id": "g2",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        1825,
+        172,
+        2101,
+        619
+      ],
+      "source_frame_index": 6,
+      "source_member": "sheet-kai-renner-g2.png",
+      "source_member_sha256": "8e87897dfc08be21838ff0a5c81055034f1d2d7f8ebb43383684f848bd452bb6"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-013",
+      "normalization_scale": 2.1,
+      "output_bbox": [
+        315,
+        303,
+        939,
+        1185
+      ],
+      "pose_id": "kai_renner_motion_013",
+      "rgba_sha256": "1a52704aeec95b34d6414a18324097ee2f06fdcc3bb09df25d59432b28dfa125",
+      "runtime_admitted": false,
+      "sequence_id": "g3",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        52,
+        202,
+        349,
+        622
+      ],
+      "source_frame_index": 1,
+      "source_member": "sheet-kai-renner-g3.png",
+      "source_member_sha256": "874a28a518734e0a68ff8f520d8a8e31fa733ab777536fd3254b391ce152e64a"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-014",
+      "normalization_scale": 2.1,
+      "output_bbox": [
+        379,
+        316,
+        875,
+        1185
+      ],
+      "pose_id": "kai_renner_motion_014",
+      "rgba_sha256": "4778786001a4688e44f9ef973b9285149b9a6cf8b0ef229a0a6dfc47f8764806",
+      "runtime_admitted": false,
+      "sequence_id": "g3",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        458,
+        208,
+        694,
+        622
+      ],
+      "source_frame_index": 2,
+      "source_member": "sheet-kai-renner-g3.png",
+      "source_member_sha256": "874a28a518734e0a68ff8f520d8a8e31fa733ab777536fd3254b391ce152e64a"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-015",
+      "normalization_scale": 2.1,
+      "output_bbox": [
+        314,
+        330,
+        940,
+        1180
+      ],
+      "pose_id": "kai_renner_motion_015",
+      "rgba_sha256": "ec63fcd039493671cec9074f6c0b4be00cf17f8017bde23cbeb1399ebf0b41eb",
+      "runtime_admitted": false,
+      "sequence_id": "g3",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        810,
+        215,
+        1108,
+        620
+      ],
+      "source_frame_index": 3,
+      "source_member": "sheet-kai-renner-g3.png",
+      "source_member_sha256": "874a28a518734e0a68ff8f520d8a8e31fa733ab777536fd3254b391ce152e64a"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-016",
+      "normalization_scale": 2.1,
+      "output_bbox": [
+        396,
+        509,
+        858,
+        1185
+      ],
+      "pose_id": "kai_renner_motion_016",
+      "rgba_sha256": "70ab1836848981bfbe9e26f4e0ec4f093f58dcf087511a58179c57dc6c9de851",
+      "runtime_admitted": false,
+      "sequence_id": "g3",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        1204,
+        300,
+        1424,
+        622
+      ],
+      "source_frame_index": 4,
+      "source_member": "sheet-kai-renner-g3.png",
+      "source_member_sha256": "874a28a518734e0a68ff8f520d8a8e31fa733ab777536fd3254b391ce152e64a"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-017",
+      "normalization_scale": 2.1,
+      "output_bbox": [
+        377,
+        200,
+        877,
+        1069
+      ],
+      "pose_id": "kai_renner_motion_017",
+      "rgba_sha256": "2fd3568ed95c0cbe05c2ed7384e3e9e667977cc5c2d5c6479e173e1dc4711aec",
+      "runtime_admitted": false,
+      "sequence_id": "g3",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        1509,
+        153,
+        1747,
+        567
+      ],
+      "source_frame_index": 5,
+      "source_member": "sheet-kai-renner-g3.png",
+      "source_member_sha256": "874a28a518734e0a68ff8f520d8a8e31fa733ab777536fd3254b391ce152e64a"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-018",
+      "normalization_scale": 2.1,
+      "output_bbox": [
+        399,
+        101,
+        855,
+        956
+      ],
+      "pose_id": "kai_renner_motion_018",
+      "rgba_sha256": "9300785f15810bf6796b1de51d991df001df0a3b26da2a53a50b14703d28d217",
+      "runtime_admitted": false,
+      "sequence_id": "g3",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        1842,
+        106,
+        2059,
+        513
+      ],
+      "source_frame_index": 6,
+      "source_member": "sheet-kai-renner-g3.png",
+      "source_member_sha256": "874a28a518734e0a68ff8f520d8a8e31fa733ab777536fd3254b391ce152e64a"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-019",
+      "normalization_scale": 1.99285714,
+      "output_bbox": [
+        391,
+        69,
+        863,
+        1016
+      ],
+      "pose_id": "kai_renner_motion_019",
+      "rgba_sha256": "678bd38297f84c327ab6cd3de5527b2bbc59d73cd7886acd512eefd656997ce2",
+      "runtime_admitted": false,
+      "sequence_id": "g4",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        56,
+        114,
+        293,
+        589
+      ],
+      "source_frame_index": 1,
+      "source_member": "sheet-kai-renner-g4.png",
+      "source_member_sha256": "460c51fb60a4fcb0abc2c0ef12b54b99f6b1a7dd097cf01363fd4268ca142f24"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-020",
+      "normalization_scale": 1.99285714,
+      "output_bbox": [
+        399,
+        374,
+        855,
+        1181
+      ],
+      "pose_id": "kai_renner_motion_020",
+      "rgba_sha256": "7bbf9727d7d6e2d3b12d924de83888436a1fdeb14ab64065a2413c5569c4c4d8",
+      "runtime_admitted": false,
+      "sequence_id": "g4",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        340,
+        267,
+        569,
+        672
+      ],
+      "source_frame_index": 2,
+      "source_member": "sheet-kai-renner-g4.png",
+      "source_member_sha256": "460c51fb60a4fcb0abc2c0ef12b54b99f6b1a7dd097cf01363fd4268ca142f24"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-021",
+      "normalization_scale": 1.99285714,
+      "output_bbox": [
+        301,
+        254,
+        953,
+        1183
+      ],
+      "pose_id": "kai_renner_motion_021",
+      "rgba_sha256": "b8c6eb79f4fd98436e42941d06d67660116fbd6254283c2c7ea2f418b0c6e99f",
+      "runtime_admitted": false,
+      "sequence_id": "g4",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        624,
+        207,
+        951,
+        673
+      ],
+      "source_frame_index": 3,
+      "source_member": "sheet-kai-renner-g4.png",
+      "source_member_sha256": "460c51fb60a4fcb0abc2c0ef12b54b99f6b1a7dd097cf01363fd4268ca142f24"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-022",
+      "normalization_scale": 1.99285714,
+      "output_bbox": [
+        414,
+        214,
+        840,
+        1175
+      ],
+      "pose_id": "kai_renner_motion_022",
+      "rgba_sha256": "1b01d4b1c0172ce5f884f65a9ca9fba34c6c400a8b70e4d86719417bd191498f",
+      "runtime_admitted": false,
+      "sequence_id": "g4",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        1007,
+        187,
+        1221,
+        669
+      ],
+      "source_frame_index": 4,
+      "source_member": "sheet-kai-renner-g4.png",
+      "source_member_sha256": "460c51fb60a4fcb0abc2c0ef12b54b99f6b1a7dd097cf01363fd4268ca142f24"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-023",
+      "normalization_scale": 1.99285714,
+      "output_bbox": [
+        458,
+        218,
+        795,
+        1185
+      ],
+      "pose_id": "kai_renner_motion_023",
+      "rgba_sha256": "24d0abf4a4fa5c81b148f63ed7ecd4e3e012ab87ae9f767f9aa14ce4f0d011ea",
+      "runtime_admitted": false,
+      "sequence_id": "g4",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        1322,
+        189,
+        1491,
+        674
+      ],
+      "source_frame_index": 5,
+      "source_member": "sheet-kai-renner-g4.png",
+      "source_member_sha256": "460c51fb60a4fcb0abc2c0ef12b54b99f6b1a7dd097cf01363fd4268ca142f24"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-024",
+      "normalization_scale": 1.99285714,
+      "output_bbox": [
+        398,
+        218,
+        856,
+        1185
+      ],
+      "pose_id": "kai_renner_motion_024",
+      "rgba_sha256": "cd9dd735ebd9bf6df3bf56aacac20d77e05fb8c3ba7da322a49e36a4d39b03e8",
+      "runtime_admitted": false,
+      "sequence_id": "g4",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        1597,
+        189,
+        1827,
+        674
+      ],
+      "source_frame_index": 6,
+      "source_member": "sheet-kai-renner-g4.png",
+      "source_member_sha256": "460c51fb60a4fcb0abc2c0ef12b54b99f6b1a7dd097cf01363fd4268ca142f24"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-025",
+      "normalization_scale": 1.88195616,
+      "output_bbox": [
+        416,
+        69,
+        838,
+        1181
+      ],
+      "pose_id": "kai_renner_motion_025",
+      "rgba_sha256": "972b128c0d5c0dcefd6097b4a1cb03349cb80d97f577d1ac31ab32059b2515e6",
+      "runtime_admitted": false,
+      "sequence_id": "g5",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        82,
+        66,
+        306,
+        657
+      ],
+      "source_frame_index": 1,
+      "source_member": "sheet-kai-renner-g5.png",
+      "source_member_sha256": "3e7dacd8b254b7b93f24937963a8d8286be94644a7337d4257acd55c47ff6604"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-026",
+      "normalization_scale": 1.88195616,
+      "output_bbox": [
+        416,
+        69,
+        838,
+        1185
+      ],
+      "pose_id": "kai_renner_motion_026",
+      "rgba_sha256": "6c85fde84649e72ba5dd800099ca9c54352feab02e6fb9a3d7d51c701f76957b",
+      "runtime_admitted": false,
+      "sequence_id": "g5",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        419,
+        66,
+        643,
+        659
+      ],
+      "source_frame_index": 2,
+      "source_member": "sheet-kai-renner-g5.png",
+      "source_member_sha256": "3e7dacd8b254b7b93f24937963a8d8286be94644a7337d4257acd55c47ff6604"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-027",
+      "normalization_scale": 1.88195616,
+      "output_bbox": [
+        407,
+        69,
+        847,
+        1181
+      ],
+      "pose_id": "kai_renner_motion_027",
+      "rgba_sha256": "b56273fa5e3526febdc8a02d219ff507be03fedaacb8e325974015eebbddd359",
+      "runtime_admitted": false,
+      "sequence_id": "g5",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        750,
+        66,
+        984,
+        657
+      ],
+      "source_frame_index": 3,
+      "source_member": "sheet-kai-renner-g5.png",
+      "source_member_sha256": "3e7dacd8b254b7b93f24937963a8d8286be94644a7337d4257acd55c47ff6604"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-028",
+      "normalization_scale": 1.88195616,
+      "output_bbox": [
+        416,
+        69,
+        838,
+        1183
+      ],
+      "pose_id": "kai_renner_motion_028",
+      "rgba_sha256": "5fa11adf3ec4885ae53b3e1b96579c3c9990c0f34244ad65d4e04adff306d584",
+      "runtime_admitted": false,
+      "sequence_id": "g5",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        1089,
+        66,
+        1313,
+        658
+      ],
+      "source_frame_index": 4,
+      "source_member": "sheet-kai-renner-g5.png",
+      "source_member_sha256": "3e7dacd8b254b7b93f24937963a8d8286be94644a7337d4257acd55c47ff6604"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-029",
+      "normalization_scale": 1.88195616,
+      "output_bbox": [
+        405,
+        69,
+        849,
+        1183
+      ],
+      "pose_id": "kai_renner_motion_029",
+      "rgba_sha256": "d7bdf9621e9e8e1c07987a0ac3b264d1d5219e01329d7459cfd6505c1db02b2e",
+      "runtime_admitted": false,
+      "sequence_id": "g5",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        1424,
+        66,
+        1660,
+        658
+      ],
+      "source_frame_index": 5,
+      "source_member": "sheet-kai-renner-g5.png",
+      "source_member_sha256": "3e7dacd8b254b7b93f24937963a8d8286be94644a7337d4257acd55c47ff6604"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-030",
+      "normalization_scale": 1.88195616,
+      "output_bbox": [
+        376,
+        69,
+        878,
+        923
+      ],
+      "pose_id": "kai_renner_motion_030",
+      "rgba_sha256": "d83a9848f523d7720ad6f5b886871aba5b7d7e362691811dc52d200920419391",
+      "runtime_admitted": false,
+      "sequence_id": "g5",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        1787,
+        66,
+        2054,
+        520
+      ],
+      "source_frame_index": 6,
+      "source_member": "sheet-kai-renner-g5.png",
+      "source_member_sha256": "3e7dacd8b254b7b93f24937963a8d8286be94644a7337d4257acd55c47ff6604"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-031",
+      "normalization_scale": 1.95104895,
+      "output_bbox": [
+        427,
+        139,
+        827,
+        1167
+      ],
+      "pose_id": "kai_renner_motion_031",
+      "rgba_sha256": "12c012afb3b8a7ea5fefe31ca116b4b705a36b4dc83bc5aa845c2108b0719da6",
+      "runtime_admitted": false,
+      "sequence_id": "g6",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        91,
+        151,
+        296,
+        678
+      ],
+      "source_frame_index": 1,
+      "source_member": "sheet-kai-renner-g6.png",
+      "source_member_sha256": "20c8d38b1bab608fe13a2a93276525e400645f37260dbd1303f62a9e62ef7725"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-032",
+      "normalization_scale": 1.95104895,
+      "output_bbox": [
+        404,
+        124,
+        851,
+        1185
+      ],
+      "pose_id": "kai_renner_motion_032",
+      "rgba_sha256": "fe44fa2d7ac0a3f40e0e9b11abd2266fdb96e2002c0286820b25339474a2248c",
+      "runtime_admitted": false,
+      "sequence_id": "g6",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        383,
+        143,
+        612,
+        687
+      ],
+      "source_frame_index": 2,
+      "source_member": "sheet-kai-renner-g6.png",
+      "source_member_sha256": "20c8d38b1bab608fe13a2a93276525e400645f37260dbd1303f62a9e62ef7725"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-033",
+      "normalization_scale": 1.95104895,
+      "output_bbox": [
+        410,
+        122,
+        843,
+        1176
+      ],
+      "pose_id": "kai_renner_motion_033",
+      "rgba_sha256": "7c6e839e9dc02c0b68b5e001b92883426d85824cf52d4ad392c93257d79b58cb",
+      "runtime_admitted": false,
+      "sequence_id": "g6",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        698,
+        142,
+        920,
+        682
+      ],
+      "source_frame_index": 3,
+      "source_member": "sheet-kai-renner-g6.png",
+      "source_member_sha256": "20c8d38b1bab608fe13a2a93276525e400645f37260dbd1303f62a9e62ef7725"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-034",
+      "normalization_scale": 1.95104895,
+      "output_bbox": [
+        406,
+        122,
+        849,
+        1185
+      ],
+      "pose_id": "kai_renner_motion_034",
+      "rgba_sha256": "da3e8976cb5b84f15561dbc094ee0622f38a9ea632b7513fc9de0bafd974c61d",
+      "runtime_admitted": false,
+      "sequence_id": "g6",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        1014,
+        142,
+        1241,
+        687
+      ],
+      "source_frame_index": 4,
+      "source_member": "sheet-kai-renner-g6.png",
+      "source_member_sha256": "20c8d38b1bab608fe13a2a93276525e400645f37260dbd1303f62a9e62ef7725"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-035",
+      "normalization_scale": 1.95104895,
+      "output_bbox": [
+        410,
+        122,
+        843,
+        1178
+      ],
+      "pose_id": "kai_renner_motion_035",
+      "rgba_sha256": "7207034d9cf23aa743c376a76322d1bf096e0e996ed018f4717aa37918034f6a",
+      "runtime_admitted": false,
+      "sequence_id": "g6",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        1327,
+        142,
+        1549,
+        683
+      ],
+      "source_frame_index": 5,
+      "source_member": "sheet-kai-renner-g6.png",
+      "source_member_sha256": "20c8d38b1bab608fe13a2a93276525e400645f37260dbd1303f62a9e62ef7725"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-036",
+      "normalization_scale": 1.95104895,
+      "output_bbox": [
+        394,
+        69,
+        860,
+        974
+      ],
+      "pose_id": "kai_renner_motion_036",
+      "rgba_sha256": "2adbaa2f1a5150ba29b064167b6daf151711c64038eaf8d0c54c2efbe03f3320",
+      "runtime_admitted": false,
+      "sequence_id": "g6",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        1588,
+        115,
+        1827,
+        579
+      ],
+      "source_frame_index": 6,
+      "source_member": "sheet-kai-renner-g6.png",
+      "source_member_sha256": "20c8d38b1bab608fe13a2a93276525e400645f37260dbd1303f62a9e62ef7725"
+    }
+  ],
+  "review_contact_sheet": {
+    "path": "source-metadata/kai-renner/source-motion-contact-sheet-v001.png",
+    "sha256": "c94f6cf1c4a328ea19b4d7af5336b2fd00e033b51ec1079a2b33905a99851a2e"
+  },
+  "runtime_admitted": false,
+  "schema_version": 1,
+  "sequences": {
+    "g1": [
+      "kai_renner_motion_001",
+      "kai_renner_motion_002",
+      "kai_renner_motion_003",
+      "kai_renner_motion_004",
+      "kai_renner_motion_005",
+      "kai_renner_motion_006"
+    ],
+    "g2": [
+      "kai_renner_motion_007",
+      "kai_renner_motion_008",
+      "kai_renner_motion_009",
+      "kai_renner_motion_010",
+      "kai_renner_motion_011",
+      "kai_renner_motion_012"
+    ],
+    "g3": [
+      "kai_renner_motion_013",
+      "kai_renner_motion_014",
+      "kai_renner_motion_015",
+      "kai_renner_motion_016",
+      "kai_renner_motion_017",
+      "kai_renner_motion_018"
+    ],
+    "g4": [
+      "kai_renner_motion_019",
+      "kai_renner_motion_020",
+      "kai_renner_motion_021",
+      "kai_renner_motion_022",
+      "kai_renner_motion_023",
+      "kai_renner_motion_024"
+    ],
+    "g5": [
+      "kai_renner_motion_025",
+      "kai_renner_motion_026",
+      "kai_renner_motion_027",
+      "kai_renner_motion_028",
+      "kai_renner_motion_029",
+      "kai_renner_motion_030"
+    ],
+    "g6": [
+      "kai_renner_motion_031",
+      "kai_renner_motion_032",
+      "kai_renner_motion_033",
+      "kai_renner_motion_034",
+      "kai_renner_motion_035",
+      "kai_renner_motion_036"
+    ]
+  },
+  "source_census_sha256": "97e597e7dee837b20d9050529c2ddb15244c0d01b717b539280a87d447ad46fe",
+  "status": "candidate_source_partial",
+  "target_pose_count": 48
+}

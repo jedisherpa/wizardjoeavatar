@@ -50,6 +50,9 @@ python3 tools/run_character_observer.py \
 - `HD_ALPHA_SOURCE_ADOPTION.md`: HD source authority and projector boundary.
 - `WIZARD_JOE_PHAZER_INTAKE_2026-07-24.md`: 48-frame Phazer archive census,
   reconstruction, gate status, and review procedure.
+- `JOEVILLE_12X48_PARITY_TRACKER_2026-07-25.md`: deterministic census,
+  source-conflict decisions, 12-character coverage ledger, and per-slot
+  admission gates for the JoeVille sprite archives.
 - `reports/README.md`: specialist reports and ownership map.
 - `PHASE0_TRACKER.md`: accountable design and implementation gates.
 - `PHASE0_SYNTHESIS.md`: binding cross-repository architecture.

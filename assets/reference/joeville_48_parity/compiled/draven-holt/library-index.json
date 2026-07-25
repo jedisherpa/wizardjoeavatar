@@ -1,0 +1,200 @@
+{
+  "approved_pose_count": 0,
+  "asset_set_id": "draven-holt-source-motion-v001",
+  "candidate_pose_count": 36,
+  "character_id": "draven-holt",
+  "display_name": "Draven Holt",
+  "pose_count": 36,
+  "profile": {
+    "alpha_mode": "straight",
+    "baseline_y": 1185,
+    "canvas_height": 1254,
+    "canvas_width": 1254,
+    "color_space": "sRGB",
+    "minimum_margin": 69,
+    "profile_id": "wizardjoe_hd_alpha_1254_v001"
+  },
+  "review_projection": true,
+  "runtime_admitted": false,
+  "schema_version": 1,
+  "sequences": {
+    "draven-holt-source-all": {
+      "approval_state": "candidate_source_partial",
+      "fps": 8,
+      "loop": true,
+      "pose_ids": [
+        "draven_holt_motion_001",
+        "draven_holt_motion_002",
+        "draven_holt_motion_003",
+        "draven_holt_motion_004",
+        "draven_holt_motion_005",
+        "draven_holt_motion_006",
+        "draven_holt_motion_007",
+        "draven_holt_motion_008",
+        "draven_holt_motion_009",
+        "draven_holt_motion_010",
+        "draven_holt_motion_011",
+        "draven_holt_motion_012",
+        "draven_holt_motion_013",
+        "draven_holt_motion_014",
+        "draven_holt_motion_015",
+        "draven_holt_motion_016",
+        "draven_holt_motion_017",
+        "draven_holt_motion_018",
+        "draven_holt_motion_019",
+        "draven_holt_motion_020",
+        "draven_holt_motion_021",
+        "draven_holt_motion_022",
+        "draven_holt_motion_023",
+        "draven_holt_motion_024",
+        "draven_holt_motion_025",
+        "draven_holt_motion_026",
+        "draven_holt_motion_027",
+        "draven_holt_motion_028",
+        "draven_holt_motion_029",
+        "draven_holt_motion_030",
+        "draven_holt_motion_031",
+        "draven_holt_motion_032",
+        "draven_holt_motion_033",
+        "draven_holt_motion_034",
+        "draven_holt_motion_035",
+        "draven_holt_motion_036"
+      ],
+      "runtime_admitted": false
+    },
+    "g1": {
+      "approval_state": "candidate_source_partial",
+      "fps": 8,
+      "loop": true,
+      "pose_ids": [
+        "draven_holt_motion_001",
+        "draven_holt_motion_002",
+        "draven_holt_motion_003",
+        "draven_holt_motion_004",
+        "draven_holt_motion_005",
+        "draven_holt_motion_006"
+      ],
+      "runtime_admitted": false
+    },
+    "g2": {
+      "approval_state": "candidate_source_partial",
+      "fps": 8,
+      "loop": true,
+      "pose_ids": [
+        "draven_holt_motion_007",
+        "draven_holt_motion_008",
+        "draven_holt_motion_009",
+        "draven_holt_motion_010",
+        "draven_holt_motion_011",
+        "draven_holt_motion_012"
+      ],
+      "runtime_admitted": false
+    },
+    "g3": {
+      "approval_state": "candidate_source_partial",
+      "fps": 8,
+      "loop": true,
+      "pose_ids": [
+        "draven_holt_motion_013",
+        "draven_holt_motion_014",
+        "draven_holt_motion_015",
+        "draven_holt_motion_016",
+        "draven_holt_motion_017",
+        "draven_holt_motion_018"
+      ],
+      "runtime_admitted": false
+    },
+    "g4": {
+      "approval_state": "candidate_source_partial",
+      "fps": 8,
+      "loop": true,
+      "pose_ids": [
+        "draven_holt_motion_019",
+        "draven_holt_motion_020",
+        "draven_holt_motion_021",
+        "draven_holt_motion_022",
+        "draven_holt_motion_023",
+        "draven_holt_motion_024"
+      ],
+      "runtime_admitted": false
+    },
+    "g5": {
+      "approval_state": "candidate_source_partial",
+      "fps": 8,
+      "loop": true,
+      "pose_ids": [
+        "draven_holt_motion_025",
+        "draven_holt_motion_026",
+        "draven_holt_motion_027",
+        "draven_holt_motion_028",
+        "draven_holt_motion_029",
+        "draven_holt_motion_030"
+      ],
+      "runtime_admitted": false
+    },
+    "g6": {
+      "approval_state": "candidate_source_partial",
+      "fps": 8,
+      "loop": true,
+      "pose_ids": [
+        "draven_holt_motion_031",
+        "draven_holt_motion_032",
+        "draven_holt_motion_033",
+        "draven_holt_motion_034",
+        "draven_holt_motion_035",
+        "draven_holt_motion_036"
+      ],
+      "runtime_admitted": false
+    }
+  },
+  "shards": [
+    {
+      "approval_state": "candidate_source_partial",
+      "bytes": 20555399,
+      "path": "draven-holt-candidate-source-motion-v001.wjpose",
+      "pose_count": 36,
+      "pose_ids": [
+        "draven_holt_motion_001",
+        "draven_holt_motion_002",
+        "draven_holt_motion_003",
+        "draven_holt_motion_004",
+        "draven_holt_motion_005",
+        "draven_holt_motion_006",
+        "draven_holt_motion_007",
+        "draven_holt_motion_008",
+        "draven_holt_motion_009",
+        "draven_holt_motion_010",
+        "draven_holt_motion_011",
+        "draven_holt_motion_012",
+        "draven_holt_motion_013",
+        "draven_holt_motion_014",
+        "draven_holt_motion_015",
+        "draven_holt_motion_016",
+        "draven_holt_motion_017",
+        "draven_holt_motion_018",
+        "draven_holt_motion_019",
+        "draven_holt_motion_020",
+        "draven_holt_motion_021",
+        "draven_holt_motion_022",
+        "draven_holt_motion_023",
+        "draven_holt_motion_024",
+        "draven_holt_motion_025",
+        "draven_holt_motion_026",
+        "draven_holt_motion_027",
+        "draven_holt_motion_028",
+        "draven_holt_motion_029",
+        "draven_holt_motion_030",
+        "draven_holt_motion_031",
+        "draven_holt_motion_032",
+        "draven_holt_motion_033",
+        "draven_holt_motion_034",
+        "draven_holt_motion_035",
+        "draven_holt_motion_036"
+      ],
+      "runtime_admitted": false,
+      "sha256": "244627668d46ad2c552d2ec2d7f5d24ce4ef4750c3a423d097bee1929c01e724",
+      "shard_id": "draven-holt-source-motion-v001",
+      "source": "joeville_contact_sheet_reconstruction"
+    }
+  ]
+}

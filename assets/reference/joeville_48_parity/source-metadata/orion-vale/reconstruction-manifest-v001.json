@@ -1,0 +1,1062 @@
+{
+  "artifact": {
+    "bytes": 24429806,
+    "path": "compiled/orion-vale/orion-vale-candidate-source-motion-v001.wjpose",
+    "pose_count": 36,
+    "pose_ids": [
+      "orion_vale_motion_001",
+      "orion_vale_motion_002",
+      "orion_vale_motion_003",
+      "orion_vale_motion_004",
+      "orion_vale_motion_005",
+      "orion_vale_motion_006",
+      "orion_vale_motion_007",
+      "orion_vale_motion_008",
+      "orion_vale_motion_009",
+      "orion_vale_motion_010",
+      "orion_vale_motion_011",
+      "orion_vale_motion_012",
+      "orion_vale_motion_013",
+      "orion_vale_motion_014",
+      "orion_vale_motion_015",
+      "orion_vale_motion_016",
+      "orion_vale_motion_017",
+      "orion_vale_motion_018",
+      "orion_vale_motion_019",
+      "orion_vale_motion_020",
+      "orion_vale_motion_021",
+      "orion_vale_motion_022",
+      "orion_vale_motion_023",
+      "orion_vale_motion_024",
+      "orion_vale_motion_025",
+      "orion_vale_motion_026",
+      "orion_vale_motion_027",
+      "orion_vale_motion_028",
+      "orion_vale_motion_029",
+      "orion_vale_motion_030",
+      "orion_vale_motion_031",
+      "orion_vale_motion_032",
+      "orion_vale_motion_033",
+      "orion_vale_motion_034",
+      "orion_vale_motion_035",
+      "orion_vale_motion_036"
+    ],
+    "sha256": "e621945a608fd599f7a277fe4dd54e05886667795addb853485f06cc7fb804c9"
+  },
+  "character_id": "orion-vale",
+  "compiled_pose_count": 36,
+  "display_name": "Orion Vale",
+  "extraction_profile": {
+    "background_max_channel_spread": 64,
+    "background_min_channel": 210,
+    "frame_grouping": "nearest_expected_center_by_component_centroid",
+    "maximum_source_scale": 2.1,
+    "minimum_component_area": 24
+  },
+  "library_index": {
+    "path": "compiled/orion-vale/library-index.json",
+    "sha256": "a9878e3cbed934de6626d93c90b89e02a99974c6668b76e0c131208c763dce05"
+  },
+  "missing_sequences": [
+    "g7",
+    "g8"
+  ],
+  "parity_tracker_sha256": "81787dc6cb83594b3e3c80b99f499c9d91cfa2584b9ec97473bc48ac49bd35a0",
+  "poses": [
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-001",
+      "normalization_scale": 1.65333333,
+      "output_bbox": [
+        464,
+        76,
+        790,
+        1184
+      ],
+      "pose_id": "orion_vale_motion_001",
+      "rgba_sha256": "823e65f0fc1da463497e4016754a92fc5f383874b91754bd555c3cc2cac66e55",
+      "runtime_admitted": false,
+      "sequence_id": "g1",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        50,
+        102,
+        247,
+        772
+      ],
+      "source_frame_index": 1,
+      "source_member": "sheet-orion-vale-g1.png",
+      "source_member_sha256": "44203944f242ddf3652631cf3aac7a498a7bc1c9395a63c2a7684943613f2705"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-002",
+      "normalization_scale": 1.65333333,
+      "output_bbox": [
+        471,
+        77,
+        783,
+        1185
+      ],
+      "pose_id": "orion_vale_motion_002",
+      "rgba_sha256": "dd52050b4280dcfb471350e1625518c7ba28dc122054fe944b490ece4168f4a4",
+      "runtime_admitted": false,
+      "sequence_id": "g1",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        321,
+        103,
+        510,
+        773
+      ],
+      "source_frame_index": 2,
+      "source_member": "sheet-orion-vale-g1.png",
+      "source_member_sha256": "44203944f242ddf3652631cf3aac7a498a7bc1c9395a63c2a7684943613f2705"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-003",
+      "normalization_scale": 1.65333333,
+      "output_bbox": [
+        484,
+        69,
+        770,
+        1172
+      ],
+      "pose_id": "orion_vale_motion_003",
+      "rgba_sha256": "d8575a0b984fdad2c3363abd5c858d88c28a6e17ea09214c50e297dea9edb026",
+      "runtime_admitted": false,
+      "sequence_id": "g1",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        591,
+        98,
+        764,
+        765
+      ],
+      "source_frame_index": 3,
+      "source_member": "sheet-orion-vale-g1.png",
+      "source_member_sha256": "44203944f242ddf3652631cf3aac7a498a7bc1c9395a63c2a7684943613f2705"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-004",
+      "normalization_scale": 1.65333333,
+      "output_bbox": [
+        376,
+        102,
+        879,
+        1155
+      ],
+      "pose_id": "orion_vale_motion_004",
+      "rgba_sha256": "c4748f73276c505c78fc44bfabb84d17a405c5d3fc0645845ad3027d68fe5adc",
+      "runtime_admitted": false,
+      "sequence_id": "g1",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        853,
+        118,
+        1157,
+        755
+      ],
+      "source_frame_index": 4,
+      "source_member": "sheet-orion-vale-g1.png",
+      "source_member_sha256": "44203944f242ddf3652631cf3aac7a498a7bc1c9395a63c2a7684943613f2705"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-005",
+      "normalization_scale": 1.65333333,
+      "output_bbox": [
+        390,
+        129,
+        863,
+        1156
+      ],
+      "pose_id": "orion_vale_motion_005",
+      "rgba_sha256": "84f8691523aa5a492f5c9610cb7d8781971401335d7e3979e67f736fb6024463",
+      "runtime_admitted": false,
+      "sequence_id": "g1",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        1180,
+        134,
+        1466,
+        755
+      ],
+      "source_frame_index": 5,
+      "source_member": "sheet-orion-vale-g1.png",
+      "source_member_sha256": "44203944f242ddf3652631cf3aac7a498a7bc1c9395a63c2a7684943613f2705"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-006",
+      "normalization_scale": 1.65333333,
+      "output_bbox": [
+        392,
+        120,
+        862,
+        1155
+      ],
+      "pose_id": "orion_vale_motion_006",
+      "rgba_sha256": "b2d61f5a0a3a1cd8d55a4667c6201b643faa8268d7bae940cfdf96b2d5fe11c2",
+      "runtime_admitted": false,
+      "sequence_id": "g1",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        1463,
+        129,
+        1747,
+        755
+      ],
+      "source_frame_index": 6,
+      "source_member": "sheet-orion-vale-g1.png",
+      "source_member_sha256": "44203944f242ddf3652631cf3aac7a498a7bc1c9395a63c2a7684943613f2705"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-007",
+      "normalization_scale": 2.1,
+      "output_bbox": [
+        333,
+        114,
+        921,
+        1185
+      ],
+      "pose_id": "orion_vale_motion_007",
+      "rgba_sha256": "536af980f7a2fe2a5d08301797b6160728ac832f23569d11cbd908416d36764e",
+      "runtime_admitted": false,
+      "sequence_id": "g2",
+      "source_archive_id": "sprites-2",
+      "source_archive_sha256": "570d20086ad833b018188eee9c7d3368e5a156139e67c62b474f86cb50bfa749",
+      "source_bbox": [
+        78,
+        125,
+        358,
+        635
+      ],
+      "source_frame_index": 1,
+      "source_member": "sheet-orion-vale-g2.png",
+      "source_member_sha256": "1f9f35130d902d369d0cbb7d86db82d815b5bfe7f50a57181a6859f5dbf7ff3d"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-008",
+      "normalization_scale": 2.1,
+      "output_bbox": [
+        416,
+        114,
+        838,
+        1183
+      ],
+      "pose_id": "orion_vale_motion_008",
+      "rgba_sha256": "6987bd41b91fa9c3d24c82c892f2ba61d9e2d3268686261274a2fbecfc48e99d",
+      "runtime_admitted": false,
+      "sequence_id": "g2",
+      "source_archive_id": "sprites-2",
+      "source_archive_sha256": "570d20086ad833b018188eee9c7d3368e5a156139e67c62b474f86cb50bfa749",
+      "source_bbox": [
+        463,
+        125,
+        664,
+        634
+      ],
+      "source_frame_index": 2,
+      "source_member": "sheet-orion-vale-g2.png",
+      "source_member_sha256": "1f9f35130d902d369d0cbb7d86db82d815b5bfe7f50a57181a6859f5dbf7ff3d"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-009",
+      "normalization_scale": 2.1,
+      "output_bbox": [
+        375,
+        112,
+        879,
+        1183
+      ],
+      "pose_id": "orion_vale_motion_009",
+      "rgba_sha256": "fd0d91c66edee5f41b21349841b8de9df547f7aa1f9c8562d9159385992765dd",
+      "runtime_admitted": false,
+      "sequence_id": "g2",
+      "source_archive_id": "sprites-2",
+      "source_archive_sha256": "570d20086ad833b018188eee9c7d3368e5a156139e67c62b474f86cb50bfa749",
+      "source_bbox": [
+        765,
+        124,
+        1005,
+        634
+      ],
+      "source_frame_index": 3,
+      "source_member": "sheet-orion-vale-g2.png",
+      "source_member_sha256": "1f9f35130d902d369d0cbb7d86db82d815b5bfe7f50a57181a6859f5dbf7ff3d"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-010",
+      "normalization_scale": 2.1,
+      "output_bbox": [
+        346,
+        116,
+        909,
+        1183
+      ],
+      "pose_id": "orion_vale_motion_010",
+      "rgba_sha256": "824f2a11baa15c138197179e798789b7f5739f344f4e2b47bd40550e730aa080",
+      "runtime_admitted": false,
+      "sequence_id": "g2",
+      "source_archive_id": "sprites-2",
+      "source_archive_sha256": "570d20086ad833b018188eee9c7d3368e5a156139e67c62b474f86cb50bfa749",
+      "source_bbox": [
+        1114,
+        126,
+        1382,
+        634
+      ],
+      "source_frame_index": 4,
+      "source_member": "sheet-orion-vale-g2.png",
+      "source_member_sha256": "1f9f35130d902d369d0cbb7d86db82d815b5bfe7f50a57181a6859f5dbf7ff3d"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-011",
+      "normalization_scale": 2.1,
+      "output_bbox": [
+        264,
+        202,
+        991,
+        1181
+      ],
+      "pose_id": "orion_vale_motion_011",
+      "rgba_sha256": "c9d649b491e6bd1baccbeb043a26dc82cfc0bd46e6f4f04a8c5f02eb95f7bdf3",
+      "runtime_admitted": false,
+      "sequence_id": "g2",
+      "source_archive_id": "sprites-2",
+      "source_archive_sha256": "570d20086ad833b018188eee9c7d3368e5a156139e67c62b474f86cb50bfa749",
+      "source_bbox": [
+        1417,
+        167,
+        1763,
+        633
+      ],
+      "source_frame_index": 5,
+      "source_member": "sheet-orion-vale-g2.png",
+      "source_member_sha256": "1f9f35130d902d369d0cbb7d86db82d815b5bfe7f50a57181a6859f5dbf7ff3d"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-012",
+      "normalization_scale": 2.1,
+      "output_bbox": [
+        319,
+        261,
+        935,
+        1168
+      ],
+      "pose_id": "orion_vale_motion_012",
+      "rgba_sha256": "802565dc390f6e83fadc1a4413a2b2f2c335f87986d0913494f4d78de685086f",
+      "runtime_admitted": false,
+      "sequence_id": "g2",
+      "source_archive_id": "sprites-2",
+      "source_archive_sha256": "570d20086ad833b018188eee9c7d3368e5a156139e67c62b474f86cb50bfa749",
+      "source_bbox": [
+        1813,
+        195,
+        2107,
+        627
+      ],
+      "source_frame_index": 6,
+      "source_member": "sheet-orion-vale-g2.png",
+      "source_member_sha256": "1f9f35130d902d369d0cbb7d86db82d815b5bfe7f50a57181a6859f5dbf7ff3d"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-013",
+      "normalization_scale": 2.1,
+      "output_bbox": [
+        291,
+        324,
+        963,
+        1185
+      ],
+      "pose_id": "orion_vale_motion_013",
+      "rgba_sha256": "99198dcb44bab9db919826388ff323dd760af1f998772eb85e0830a35c398685",
+      "runtime_admitted": false,
+      "sequence_id": "g3",
+      "source_archive_id": "sprites-2",
+      "source_archive_sha256": "570d20086ad833b018188eee9c7d3368e5a156139e67c62b474f86cb50bfa749",
+      "source_bbox": [
+        51,
+        201,
+        371,
+        611
+      ],
+      "source_frame_index": 1,
+      "source_member": "sheet-orion-vale-g3.png",
+      "source_member_sha256": "0fafbe6cc45ad9af46254e300e1200e481dcfe987ccf7b7cf10244c22fd9c394"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-014",
+      "normalization_scale": 2.1,
+      "output_bbox": [
+        338,
+        339,
+        916,
+        1185
+      ],
+      "pose_id": "orion_vale_motion_014",
+      "rgba_sha256": "fc0481cdb29cbee1b15185f72af6482053911019c9520631a4f3c363e652a3a5",
+      "runtime_admitted": false,
+      "sequence_id": "g3",
+      "source_archive_id": "sprites-2",
+      "source_archive_sha256": "570d20086ad833b018188eee9c7d3368e5a156139e67c62b474f86cb50bfa749",
+      "source_bbox": [
+        439,
+        208,
+        714,
+        611
+      ],
+      "source_frame_index": 2,
+      "source_member": "sheet-orion-vale-g3.png",
+      "source_member_sha256": "0fafbe6cc45ad9af46254e300e1200e481dcfe987ccf7b7cf10244c22fd9c394"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-015",
+      "normalization_scale": 2.1,
+      "output_bbox": [
+        379,
+        427,
+        875,
+        1164
+      ],
+      "pose_id": "orion_vale_motion_015",
+      "rgba_sha256": "759b4d886f33806b9848cf4b7ad957e6efc2a070e070d06cfc08604a13bbefa1",
+      "runtime_admitted": false,
+      "sequence_id": "g3",
+      "source_archive_id": "sprites-2",
+      "source_archive_sha256": "570d20086ad833b018188eee9c7d3368e5a156139e67c62b474f86cb50bfa749",
+      "source_bbox": [
+        775,
+        250,
+        1011,
+        601
+      ],
+      "source_frame_index": 3,
+      "source_member": "sheet-orion-vale-g3.png",
+      "source_member_sha256": "0fafbe6cc45ad9af46254e300e1200e481dcfe987ccf7b7cf10244c22fd9c394"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-016",
+      "normalization_scale": 2.1,
+      "output_bbox": [
+        370,
+        475,
+        884,
+        1155
+      ],
+      "pose_id": "orion_vale_motion_016",
+      "rgba_sha256": "a9e19a2bb19f2cd9511c87d2dbcf5afa1609732bea23b79a3a0df6bccc0fbfc5",
+      "runtime_admitted": false,
+      "sequence_id": "g3",
+      "source_archive_id": "sprites-2",
+      "source_archive_sha256": "570d20086ad833b018188eee9c7d3368e5a156139e67c62b474f86cb50bfa749",
+      "source_bbox": [
+        1123,
+        273,
+        1368,
+        597
+      ],
+      "source_frame_index": 4,
+      "source_member": "sheet-orion-vale-g3.png",
+      "source_member_sha256": "0fafbe6cc45ad9af46254e300e1200e481dcfe987ccf7b7cf10244c22fd9c394"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-017",
+      "normalization_scale": 2.1,
+      "output_bbox": [
+        351,
+        267,
+        903,
+        1057
+      ],
+      "pose_id": "orion_vale_motion_017",
+      "rgba_sha256": "a09aa0db0b4f12157f1bacacfdf4c751873802a18ec5f879664cb860349b9ca4",
+      "runtime_admitted": false,
+      "sequence_id": "g3",
+      "source_archive_id": "sprites-2",
+      "source_archive_sha256": "570d20086ad833b018188eee9c7d3368e5a156139e67c62b474f86cb50bfa749",
+      "source_bbox": [
+        1466,
+        174,
+        1729,
+        550
+      ],
+      "source_frame_index": 5,
+      "source_member": "sheet-orion-vale-g3.png",
+      "source_member_sha256": "0fafbe6cc45ad9af46254e300e1200e481dcfe987ccf7b7cf10244c22fd9c394"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-018",
+      "normalization_scale": 2.1,
+      "output_bbox": [
+        374,
+        108,
+        880,
+        1005
+      ],
+      "pose_id": "orion_vale_motion_018",
+      "rgba_sha256": "1dc5a5a540fd8abe0530b58fe2b0ff5222f5d03923006a6334b2142aa7f59aab",
+      "runtime_admitted": false,
+      "sequence_id": "g3",
+      "source_archive_id": "sprites-2",
+      "source_archive_sha256": "570d20086ad833b018188eee9c7d3368e5a156139e67c62b474f86cb50bfa749",
+      "source_bbox": [
+        1841,
+        98,
+        2082,
+        525
+      ],
+      "source_frame_index": 6,
+      "source_member": "sheet-orion-vale-g3.png",
+      "source_member_sha256": "0fafbe6cc45ad9af46254e300e1200e481dcfe987ccf7b7cf10244c22fd9c394"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-019",
+      "normalization_scale": 1.74375,
+      "output_bbox": [
+        430,
+        69,
+        824,
+        946
+      ],
+      "pose_id": "orion_vale_motion_019",
+      "rgba_sha256": "fdd9903aeb4d0a61477ba3dc45967f8aab77bcdd764f0df9d277ea93ce751236",
+      "runtime_admitted": false,
+      "sequence_id": "g4",
+      "source_archive_id": "sprites-2",
+      "source_archive_sha256": "570d20086ad833b018188eee9c7d3368e5a156139e67c62b474f86cb50bfa749",
+      "source_bbox": [
+        36,
+        92,
+        262,
+        595
+      ],
+      "source_frame_index": 1,
+      "source_member": "sheet-orion-vale-g4.png",
+      "source_member_sha256": "00c7cec068dd8bd31f33b3483cbea23370bfdf6a212dab9b3a70ee34c17b7d1b"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-020",
+      "normalization_scale": 1.74375,
+      "output_bbox": [
+        387,
+        336,
+        867,
+        1150
+      ],
+      "pose_id": "orion_vale_motion_020",
+      "rgba_sha256": "90f9f5e05886dc6bfb644d566b8113828809a10ab8c2df4fa7c747de4524ba5f",
+      "runtime_admitted": false,
+      "sequence_id": "g4",
+      "source_archive_id": "sprites-2",
+      "source_archive_sha256": "570d20086ad833b018188eee9c7d3368e5a156139e67c62b474f86cb50bfa749",
+      "source_bbox": [
+        330,
+        245,
+        605,
+        712
+      ],
+      "source_frame_index": 2,
+      "source_member": "sheet-orion-vale-g4.png",
+      "source_member_sha256": "00c7cec068dd8bd31f33b3483cbea23370bfdf6a212dab9b3a70ee34c17b7d1b"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-021",
+      "normalization_scale": 1.74375,
+      "output_bbox": [
+        348,
+        259,
+        906,
+        1147
+      ],
+      "pose_id": "orion_vale_motion_021",
+      "rgba_sha256": "f362fa1ff43add314a7df646bac3ad35b266fe0095e50c62cfbc2ddf6625d993",
+      "runtime_admitted": false,
+      "sequence_id": "g4",
+      "source_archive_id": "sprites-2",
+      "source_archive_sha256": "570d20086ad833b018188eee9c7d3368e5a156139e67c62b474f86cb50bfa749",
+      "source_bbox": [
+        636,
+        201,
+        956,
+        710
+      ],
+      "source_frame_index": 3,
+      "source_member": "sheet-orion-vale-g4.png",
+      "source_member_sha256": "00c7cec068dd8bd31f33b3483cbea23370bfdf6a212dab9b3a70ee34c17b7d1b"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-022",
+      "normalization_scale": 1.74375,
+      "output_bbox": [
+        476,
+        243,
+        779,
+        1160
+      ],
+      "pose_id": "orion_vale_motion_022",
+      "rgba_sha256": "c66c57d9317c9de0c2b3983267c7668ce9512c6a2c61855a20a2089e015ede06",
+      "runtime_admitted": false,
+      "sequence_id": "g4",
+      "source_archive_id": "sprites-2",
+      "source_archive_sha256": "570d20086ad833b018188eee9c7d3368e5a156139e67c62b474f86cb50bfa749",
+      "source_bbox": [
+        991,
+        192,
+        1165,
+        718
+      ],
+      "source_frame_index": 4,
+      "source_member": "sheet-orion-vale-g4.png",
+      "source_member_sha256": "00c7cec068dd8bd31f33b3483cbea23370bfdf6a212dab9b3a70ee34c17b7d1b"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-023",
+      "normalization_scale": 1.74375,
+      "output_bbox": [
+        478,
+        202,
+        776,
+        1185
+      ],
+      "pose_id": "orion_vale_motion_023",
+      "rgba_sha256": "5b5252645c2ebb733e6e6749fd8b538c1148763fb7d5794671d9f2f742a67efc",
+      "runtime_admitted": false,
+      "sequence_id": "g4",
+      "source_archive_id": "sprites-2",
+      "source_archive_sha256": "570d20086ad833b018188eee9c7d3368e5a156139e67c62b474f86cb50bfa749",
+      "source_bbox": [
+        1261,
+        168,
+        1432,
+        732
+      ],
+      "source_frame_index": 5,
+      "source_member": "sheet-orion-vale-g4.png",
+      "source_member_sha256": "00c7cec068dd8bd31f33b3483cbea23370bfdf6a212dab9b3a70ee34c17b7d1b"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-024",
+      "normalization_scale": 1.74375,
+      "output_bbox": [
+        426,
+        189,
+        827,
+        1185
+      ],
+      "pose_id": "orion_vale_motion_024",
+      "rgba_sha256": "eb2796ef6d39e14c800eb83badf82ba45fd4baa60a3498937aad40d26d4caf3a",
+      "runtime_admitted": false,
+      "sequence_id": "g4",
+      "source_archive_id": "sprites-2",
+      "source_archive_sha256": "570d20086ad833b018188eee9c7d3368e5a156139e67c62b474f86cb50bfa749",
+      "source_bbox": [
+        1509,
+        161,
+        1739,
+        732
+      ],
+      "source_frame_index": 6,
+      "source_member": "sheet-orion-vale-g4.png",
+      "source_member_sha256": "00c7cec068dd8bd31f33b3483cbea23370bfdf6a212dab9b3a70ee34c17b7d1b"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-025",
+      "normalization_scale": 1.88832487,
+      "output_bbox": [
+        422,
+        139,
+        832,
+        1185
+      ],
+      "pose_id": "orion_vale_motion_025",
+      "rgba_sha256": "9ec094df8b7f669e4ae5513ac18dbfc05d120151ade2d6b7ba924d613e4d1bb0",
+      "runtime_admitted": false,
+      "sequence_id": "g5",
+      "source_archive_id": "sprites-2",
+      "source_archive_sha256": "570d20086ad833b018188eee9c7d3368e5a156139e67c62b474f86cb50bfa749",
+      "source_bbox": [
+        102,
+        99,
+        319,
+        653
+      ],
+      "source_frame_index": 1,
+      "source_member": "sheet-orion-vale-g5.png",
+      "source_member_sha256": "4a563085f68e23f271cb7972553f6b92239052f06b7a407aaafee0f6d6d522df"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-026",
+      "normalization_scale": 1.88832487,
+      "output_bbox": [
+        409,
+        141,
+        845,
+        1185
+      ],
+      "pose_id": "orion_vale_motion_026",
+      "rgba_sha256": "bc8cb9db92ccf4d4c3fbedbcea2496c2e643ccf8b51417a612a65398cc3aa7f6",
+      "runtime_admitted": false,
+      "sequence_id": "g5",
+      "source_archive_id": "sprites-2",
+      "source_archive_sha256": "570d20086ad833b018188eee9c7d3368e5a156139e67c62b474f86cb50bfa749",
+      "source_bbox": [
+        441,
+        100,
+        672,
+        653
+      ],
+      "source_frame_index": 2,
+      "source_member": "sheet-orion-vale-g5.png",
+      "source_member_sha256": "4a563085f68e23f271cb7972553f6b92239052f06b7a407aaafee0f6d6d522df"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-027",
+      "normalization_scale": 1.88832487,
+      "output_bbox": [
+        412,
+        135,
+        843,
+        1185
+      ],
+      "pose_id": "orion_vale_motion_027",
+      "rgba_sha256": "280bd66a1ea390283eea4eee49649e7ffcc518567279007141c87b1f4f36b8cc",
+      "runtime_admitted": false,
+      "sequence_id": "g5",
+      "source_archive_id": "sprites-2",
+      "source_archive_sha256": "570d20086ad833b018188eee9c7d3368e5a156139e67c62b474f86cb50bfa749",
+      "source_bbox": [
+        793,
+        97,
+        1021,
+        653
+      ],
+      "source_frame_index": 3,
+      "source_member": "sheet-orion-vale-g5.png",
+      "source_member_sha256": "4a563085f68e23f271cb7972553f6b92239052f06b7a407aaafee0f6d6d522df"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-028",
+      "normalization_scale": 1.88832487,
+      "output_bbox": [
+        414,
+        141,
+        839,
+        1185
+      ],
+      "pose_id": "orion_vale_motion_028",
+      "rgba_sha256": "5d65927cc86a2f51fd8683743c6e1c0c9c195000000f78a103497f9ae8ca40aa",
+      "runtime_admitted": false,
+      "sequence_id": "g5",
+      "source_archive_id": "sprites-2",
+      "source_archive_sha256": "570d20086ad833b018188eee9c7d3368e5a156139e67c62b474f86cb50bfa749",
+      "source_bbox": [
+        1141,
+        100,
+        1366,
+        653
+      ],
+      "source_frame_index": 4,
+      "source_member": "sheet-orion-vale-g5.png",
+      "source_member_sha256": "4a563085f68e23f271cb7972553f6b92239052f06b7a407aaafee0f6d6d522df"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-029",
+      "normalization_scale": 1.88832487,
+      "output_bbox": [
+        414,
+        139,
+        841,
+        1183
+      ],
+      "pose_id": "orion_vale_motion_029",
+      "rgba_sha256": "130c6df0b48996b30c6c8254fc51c82bf08e21ee7619ee69208b13e8149ffafb",
+      "runtime_admitted": false,
+      "sequence_id": "g5",
+      "source_archive_id": "sprites-2",
+      "source_archive_sha256": "570d20086ad833b018188eee9c7d3368e5a156139e67c62b474f86cb50bfa749",
+      "source_bbox": [
+        1491,
+        99,
+        1717,
+        652
+      ],
+      "source_frame_index": 5,
+      "source_member": "sheet-orion-vale-g5.png",
+      "source_member_sha256": "4a563085f68e23f271cb7972553f6b92239052f06b7a407aaafee0f6d6d522df"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-030",
+      "normalization_scale": 1.88832487,
+      "output_bbox": [
+        362,
+        69,
+        891,
+        889
+      ],
+      "pose_id": "orion_vale_motion_030",
+      "rgba_sha256": "06ee6a55ca597441a19d973e6edf9f067affe444e51a0667a65832f4e36fbecb",
+      "runtime_admitted": false,
+      "sequence_id": "g5",
+      "source_archive_id": "sprites-2",
+      "source_archive_sha256": "570d20086ad833b018188eee9c7d3368e5a156139e67c62b474f86cb50bfa749",
+      "source_bbox": [
+        1800,
+        62,
+        2080,
+        496
+      ],
+      "source_frame_index": 6,
+      "source_member": "sheet-orion-vale-g5.png",
+      "source_member_sha256": "4a563085f68e23f271cb7972553f6b92239052f06b7a407aaafee0f6d6d522df"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-031",
+      "normalization_scale": 1.85074627,
+      "output_bbox": [
+        436,
+        163,
+        817,
+        1168
+      ],
+      "pose_id": "orion_vale_motion_031",
+      "rgba_sha256": "d4a210e36e479d6b8df6a721f6b6fff09de79624b656f8d1db20d21b63d6ec76",
+      "runtime_admitted": false,
+      "sequence_id": "g6",
+      "source_archive_id": "sprites-2",
+      "source_archive_sha256": "570d20086ad833b018188eee9c7d3368e5a156139e67c62b474f86cb50bfa749",
+      "source_bbox": [
+        103,
+        132,
+        309,
+        675
+      ],
+      "source_frame_index": 1,
+      "source_member": "sheet-orion-vale-g6.png",
+      "source_member_sha256": "f51a48c90832bcc7fbdd76cc38c271957a803f43e914ab2031aa9758859bb679"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-032",
+      "normalization_scale": 1.85074627,
+      "output_bbox": [
+        428,
+        162,
+        826,
+        1185
+      ],
+      "pose_id": "orion_vale_motion_032",
+      "rgba_sha256": "99a42501e21d10e6626c13bd54f5db2357edfbc20b3e4a77eb6a9cea5c2f2381",
+      "runtime_admitted": false,
+      "sequence_id": "g6",
+      "source_archive_id": "sprites-2",
+      "source_archive_sha256": "570d20086ad833b018188eee9c7d3368e5a156139e67c62b474f86cb50bfa749",
+      "source_bbox": [
+        398,
+        131,
+        613,
+        684
+      ],
+      "source_frame_index": 2,
+      "source_member": "sheet-orion-vale-g6.png",
+      "source_member_sha256": "f51a48c90832bcc7fbdd76cc38c271957a803f43e914ab2031aa9758859bb679"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-033",
+      "normalization_scale": 1.85074627,
+      "output_bbox": [
+        424,
+        160,
+        829,
+        1185
+      ],
+      "pose_id": "orion_vale_motion_033",
+      "rgba_sha256": "7881916e63366ded8daeb649a6bff95c85189a071b61eea446d57b9f1a0924e4",
+      "runtime_admitted": false,
+      "sequence_id": "g6",
+      "source_archive_id": "sprites-2",
+      "source_archive_sha256": "570d20086ad833b018188eee9c7d3368e5a156139e67c62b474f86cb50bfa749",
+      "source_bbox": [
+        721,
+        130,
+        940,
+        684
+      ],
+      "source_frame_index": 3,
+      "source_member": "sheet-orion-vale-g6.png",
+      "source_member_sha256": "f51a48c90832bcc7fbdd76cc38c271957a803f43e914ab2031aa9758859bb679"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-034",
+      "normalization_scale": 1.85074627,
+      "output_bbox": [
+        424,
+        160,
+        829,
+        1185
+      ],
+      "pose_id": "orion_vale_motion_034",
+      "rgba_sha256": "36aa573b655a098e0b5111f61d4c35839415a2c7bfbb244f28a4f498e80f349e",
+      "runtime_admitted": false,
+      "sequence_id": "g6",
+      "source_archive_id": "sprites-2",
+      "source_archive_sha256": "570d20086ad833b018188eee9c7d3368e5a156139e67c62b474f86cb50bfa749",
+      "source_bbox": [
+        1029,
+        130,
+        1248,
+        684
+      ],
+      "source_frame_index": 4,
+      "source_member": "sheet-orion-vale-g6.png",
+      "source_member_sha256": "f51a48c90832bcc7fbdd76cc38c271957a803f43e914ab2031aa9758859bb679"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-035",
+      "normalization_scale": 1.85074627,
+      "output_bbox": [
+        420,
+        163,
+        835,
+        1177
+      ],
+      "pose_id": "orion_vale_motion_035",
+      "rgba_sha256": "5c13c1cbe29bae610eaf9f9cf4a5857e536ad31d2d625b5a7b7cac622770c788",
+      "runtime_admitted": false,
+      "sequence_id": "g6",
+      "source_archive_id": "sprites-2",
+      "source_archive_sha256": "570d20086ad833b018188eee9c7d3368e5a156139e67c62b474f86cb50bfa749",
+      "source_bbox": [
+        1360,
+        132,
+        1584,
+        680
+      ],
+      "source_frame_index": 5,
+      "source_member": "sheet-orion-vale-g6.png",
+      "source_member_sha256": "f51a48c90832bcc7fbdd76cc38c271957a803f43e914ab2031aa9758859bb679"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-036",
+      "normalization_scale": 1.85074627,
+      "output_bbox": [
+        416,
+        69,
+        838,
+        946
+      ],
+      "pose_id": "orion_vale_motion_036",
+      "rgba_sha256": "d1d109fba467b83ff9853ddde03481ba718d228c82de0f247345b8e16072a392",
+      "runtime_admitted": false,
+      "sequence_id": "g6",
+      "source_archive_id": "sprites-2",
+      "source_archive_sha256": "570d20086ad833b018188eee9c7d3368e5a156139e67c62b474f86cb50bfa749",
+      "source_bbox": [
+        1644,
+        81,
+        1872,
+        555
+      ],
+      "source_frame_index": 6,
+      "source_member": "sheet-orion-vale-g6.png",
+      "source_member_sha256": "f51a48c90832bcc7fbdd76cc38c271957a803f43e914ab2031aa9758859bb679"
+    }
+  ],
+  "review_contact_sheet": {
+    "path": "source-metadata/orion-vale/source-motion-contact-sheet-v001.png",
+    "sha256": "4d708877630b6b01158adf1dd925c473c5f8e7542b0979785d4573ef63879210"
+  },
+  "runtime_admitted": false,
+  "schema_version": 1,
+  "sequences": {
+    "g1": [
+      "orion_vale_motion_001",
+      "orion_vale_motion_002",
+      "orion_vale_motion_003",
+      "orion_vale_motion_004",
+      "orion_vale_motion_005",
+      "orion_vale_motion_006"
+    ],
+    "g2": [
+      "orion_vale_motion_007",
+      "orion_vale_motion_008",
+      "orion_vale_motion_009",
+      "orion_vale_motion_010",
+      "orion_vale_motion_011",
+      "orion_vale_motion_012"
+    ],
+    "g3": [
+      "orion_vale_motion_013",
+      "orion_vale_motion_014",
+      "orion_vale_motion_015",
+      "orion_vale_motion_016",
+      "orion_vale_motion_017",
+      "orion_vale_motion_018"
+    ],
+    "g4": [
+      "orion_vale_motion_019",
+      "orion_vale_motion_020",
+      "orion_vale_motion_021",
+      "orion_vale_motion_022",
+      "orion_vale_motion_023",
+      "orion_vale_motion_024"
+    ],
+    "g5": [
+      "orion_vale_motion_025",
+      "orion_vale_motion_026",
+      "orion_vale_motion_027",
+      "orion_vale_motion_028",
+      "orion_vale_motion_029",
+      "orion_vale_motion_030"
+    ],
+    "g6": [
+      "orion_vale_motion_031",
+      "orion_vale_motion_032",
+      "orion_vale_motion_033",
+      "orion_vale_motion_034",
+      "orion_vale_motion_035",
+      "orion_vale_motion_036"
+    ]
+  },
+  "source_census_sha256": "97e597e7dee837b20d9050529c2ddb15244c0d01b717b539280a87d447ad46fe",
+  "status": "candidate_source_partial",
+  "target_pose_count": 48
+}

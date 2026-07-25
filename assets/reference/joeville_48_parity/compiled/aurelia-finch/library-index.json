@@ -1,0 +1,226 @@
+{
+  "approved_pose_count": 0,
+  "asset_set_id": "aurelia-finch-source-motion-v001",
+  "candidate_pose_count": 42,
+  "character_id": "aurelia-finch",
+  "display_name": "Aurelia Finch",
+  "pose_count": 42,
+  "profile": {
+    "alpha_mode": "straight",
+    "baseline_y": 1185,
+    "canvas_height": 1254,
+    "canvas_width": 1254,
+    "color_space": "sRGB",
+    "minimum_margin": 69,
+    "profile_id": "wizardjoe_hd_alpha_1254_v001"
+  },
+  "review_projection": true,
+  "runtime_admitted": false,
+  "schema_version": 1,
+  "sequences": {
+    "aurelia-finch-source-all": {
+      "approval_state": "candidate_source_partial",
+      "fps": 8,
+      "loop": true,
+      "pose_ids": [
+        "aurelia_finch_motion_001",
+        "aurelia_finch_motion_002",
+        "aurelia_finch_motion_003",
+        "aurelia_finch_motion_004",
+        "aurelia_finch_motion_005",
+        "aurelia_finch_motion_006",
+        "aurelia_finch_motion_007",
+        "aurelia_finch_motion_008",
+        "aurelia_finch_motion_009",
+        "aurelia_finch_motion_010",
+        "aurelia_finch_motion_011",
+        "aurelia_finch_motion_012",
+        "aurelia_finch_motion_013",
+        "aurelia_finch_motion_014",
+        "aurelia_finch_motion_015",
+        "aurelia_finch_motion_016",
+        "aurelia_finch_motion_017",
+        "aurelia_finch_motion_018",
+        "aurelia_finch_motion_019",
+        "aurelia_finch_motion_020",
+        "aurelia_finch_motion_021",
+        "aurelia_finch_motion_022",
+        "aurelia_finch_motion_023",
+        "aurelia_finch_motion_024",
+        "aurelia_finch_motion_025",
+        "aurelia_finch_motion_026",
+        "aurelia_finch_motion_027",
+        "aurelia_finch_motion_028",
+        "aurelia_finch_motion_029",
+        "aurelia_finch_motion_030",
+        "aurelia_finch_motion_031",
+        "aurelia_finch_motion_032",
+        "aurelia_finch_motion_033",
+        "aurelia_finch_motion_034",
+        "aurelia_finch_motion_035",
+        "aurelia_finch_motion_036",
+        "aurelia_finch_motion_037",
+        "aurelia_finch_motion_038",
+        "aurelia_finch_motion_039",
+        "aurelia_finch_motion_040",
+        "aurelia_finch_motion_041",
+        "aurelia_finch_motion_042"
+      ],
+      "runtime_admitted": false
+    },
+    "base": {
+      "approval_state": "candidate_source_partial",
+      "fps": 8,
+      "loop": true,
+      "pose_ids": [
+        "aurelia_finch_motion_037",
+        "aurelia_finch_motion_038",
+        "aurelia_finch_motion_039",
+        "aurelia_finch_motion_040",
+        "aurelia_finch_motion_041",
+        "aurelia_finch_motion_042"
+      ],
+      "runtime_admitted": false
+    },
+    "g1": {
+      "approval_state": "candidate_source_partial",
+      "fps": 8,
+      "loop": true,
+      "pose_ids": [
+        "aurelia_finch_motion_001",
+        "aurelia_finch_motion_002",
+        "aurelia_finch_motion_003",
+        "aurelia_finch_motion_004",
+        "aurelia_finch_motion_005",
+        "aurelia_finch_motion_006"
+      ],
+      "runtime_admitted": false
+    },
+    "g2": {
+      "approval_state": "candidate_source_partial",
+      "fps": 8,
+      "loop": true,
+      "pose_ids": [
+        "aurelia_finch_motion_007",
+        "aurelia_finch_motion_008",
+        "aurelia_finch_motion_009",
+        "aurelia_finch_motion_010",
+        "aurelia_finch_motion_011",
+        "aurelia_finch_motion_012"
+      ],
+      "runtime_admitted": false
+    },
+    "g3": {
+      "approval_state": "candidate_source_partial",
+      "fps": 8,
+      "loop": true,
+      "pose_ids": [
+        "aurelia_finch_motion_013",
+        "aurelia_finch_motion_014",
+        "aurelia_finch_motion_015",
+        "aurelia_finch_motion_016",
+        "aurelia_finch_motion_017",
+        "aurelia_finch_motion_018"
+      ],
+      "runtime_admitted": false
+    },
+    "g4": {
+      "approval_state": "candidate_source_partial",
+      "fps": 8,
+      "loop": true,
+      "pose_ids": [
+        "aurelia_finch_motion_019",
+        "aurelia_finch_motion_020",
+        "aurelia_finch_motion_021",
+        "aurelia_finch_motion_022",
+        "aurelia_finch_motion_023",
+        "aurelia_finch_motion_024"
+      ],
+      "runtime_admitted": false
+    },
+    "g5": {
+      "approval_state": "candidate_source_partial",
+      "fps": 8,
+      "loop": true,
+      "pose_ids": [
+        "aurelia_finch_motion_025",
+        "aurelia_finch_motion_026",
+        "aurelia_finch_motion_027",
+        "aurelia_finch_motion_028",
+        "aurelia_finch_motion_029",
+        "aurelia_finch_motion_030"
+      ],
+      "runtime_admitted": false
+    },
+    "g6": {
+      "approval_state": "candidate_source_partial",
+      "fps": 8,
+      "loop": true,
+      "pose_ids": [
+        "aurelia_finch_motion_031",
+        "aurelia_finch_motion_032",
+        "aurelia_finch_motion_033",
+        "aurelia_finch_motion_034",
+        "aurelia_finch_motion_035",
+        "aurelia_finch_motion_036"
+      ],
+      "runtime_admitted": false
+    }
+  },
+  "shards": [
+    {
+      "approval_state": "candidate_source_partial",
+      "bytes": 29752135,
+      "path": "aurelia-finch-candidate-source-motion-v001.wjpose",
+      "pose_count": 42,
+      "pose_ids": [
+        "aurelia_finch_motion_001",
+        "aurelia_finch_motion_002",
+        "aurelia_finch_motion_003",
+        "aurelia_finch_motion_004",
+        "aurelia_finch_motion_005",
+        "aurelia_finch_motion_006",
+        "aurelia_finch_motion_007",
+        "aurelia_finch_motion_008",
+        "aurelia_finch_motion_009",
+        "aurelia_finch_motion_010",
+        "aurelia_finch_motion_011",
+        "aurelia_finch_motion_012",
+        "aurelia_finch_motion_013",
+        "aurelia_finch_motion_014",
+        "aurelia_finch_motion_015",
+        "aurelia_finch_motion_016",
+        "aurelia_finch_motion_017",
+        "aurelia_finch_motion_018",
+        "aurelia_finch_motion_019",
+        "aurelia_finch_motion_020",
+        "aurelia_finch_motion_021",
+        "aurelia_finch_motion_022",
+        "aurelia_finch_motion_023",
+        "aurelia_finch_motion_024",
+        "aurelia_finch_motion_025",
+        "aurelia_finch_motion_026",
+        "aurelia_finch_motion_027",
+        "aurelia_finch_motion_028",
+        "aurelia_finch_motion_029",
+        "aurelia_finch_motion_030",
+        "aurelia_finch_motion_031",
+        "aurelia_finch_motion_032",
+        "aurelia_finch_motion_033",
+        "aurelia_finch_motion_034",
+        "aurelia_finch_motion_035",
+        "aurelia_finch_motion_036",
+        "aurelia_finch_motion_037",
+        "aurelia_finch_motion_038",
+        "aurelia_finch_motion_039",
+        "aurelia_finch_motion_040",
+        "aurelia_finch_motion_041",
+        "aurelia_finch_motion_042"
+      ],
+      "runtime_admitted": false,
+      "sha256": "66efd7f3450e768ef3ec5426ff590aaddfc83d26838ad42c29689faf8eeb5f8d",
+      "shard_id": "aurelia-finch-source-motion-v001",
+      "source": "joeville_contact_sheet_reconstruction"
+    }
+  ]
+}

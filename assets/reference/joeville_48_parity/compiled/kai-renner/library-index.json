@@ -1,0 +1,200 @@
+{
+  "approved_pose_count": 0,
+  "asset_set_id": "kai-renner-source-motion-v001",
+  "candidate_pose_count": 36,
+  "character_id": "kai-renner",
+  "display_name": "Kai Renner",
+  "pose_count": 36,
+  "profile": {
+    "alpha_mode": "straight",
+    "baseline_y": 1185,
+    "canvas_height": 1254,
+    "canvas_width": 1254,
+    "color_space": "sRGB",
+    "minimum_margin": 69,
+    "profile_id": "wizardjoe_hd_alpha_1254_v001"
+  },
+  "review_projection": true,
+  "runtime_admitted": false,
+  "schema_version": 1,
+  "sequences": {
+    "g1": {
+      "approval_state": "candidate_source_partial",
+      "fps": 8,
+      "loop": true,
+      "pose_ids": [
+        "kai_renner_motion_001",
+        "kai_renner_motion_002",
+        "kai_renner_motion_003",
+        "kai_renner_motion_004",
+        "kai_renner_motion_005",
+        "kai_renner_motion_006"
+      ],
+      "runtime_admitted": false
+    },
+    "g2": {
+      "approval_state": "candidate_source_partial",
+      "fps": 8,
+      "loop": true,
+      "pose_ids": [
+        "kai_renner_motion_007",
+        "kai_renner_motion_008",
+        "kai_renner_motion_009",
+        "kai_renner_motion_010",
+        "kai_renner_motion_011",
+        "kai_renner_motion_012"
+      ],
+      "runtime_admitted": false
+    },
+    "g3": {
+      "approval_state": "candidate_source_partial",
+      "fps": 8,
+      "loop": true,
+      "pose_ids": [
+        "kai_renner_motion_013",
+        "kai_renner_motion_014",
+        "kai_renner_motion_015",
+        "kai_renner_motion_016",
+        "kai_renner_motion_017",
+        "kai_renner_motion_018"
+      ],
+      "runtime_admitted": false
+    },
+    "g4": {
+      "approval_state": "candidate_source_partial",
+      "fps": 8,
+      "loop": true,
+      "pose_ids": [
+        "kai_renner_motion_019",
+        "kai_renner_motion_020",
+        "kai_renner_motion_021",
+        "kai_renner_motion_022",
+        "kai_renner_motion_023",
+        "kai_renner_motion_024"
+      ],
+      "runtime_admitted": false
+    },
+    "g5": {
+      "approval_state": "candidate_source_partial",
+      "fps": 8,
+      "loop": true,
+      "pose_ids": [
+        "kai_renner_motion_025",
+        "kai_renner_motion_026",
+        "kai_renner_motion_027",
+        "kai_renner_motion_028",
+        "kai_renner_motion_029",
+        "kai_renner_motion_030"
+      ],
+      "runtime_admitted": false
+    },
+    "g6": {
+      "approval_state": "candidate_source_partial",
+      "fps": 8,
+      "loop": true,
+      "pose_ids": [
+        "kai_renner_motion_031",
+        "kai_renner_motion_032",
+        "kai_renner_motion_033",
+        "kai_renner_motion_034",
+        "kai_renner_motion_035",
+        "kai_renner_motion_036"
+      ],
+      "runtime_admitted": false
+    },
+    "kai-renner-source-all": {
+      "approval_state": "candidate_source_partial",
+      "fps": 8,
+      "loop": true,
+      "pose_ids": [
+        "kai_renner_motion_001",
+        "kai_renner_motion_002",
+        "kai_renner_motion_003",
+        "kai_renner_motion_004",
+        "kai_renner_motion_005",
+        "kai_renner_motion_006",
+        "kai_renner_motion_007",
+        "kai_renner_motion_008",
+        "kai_renner_motion_009",
+        "kai_renner_motion_010",
+        "kai_renner_motion_011",
+        "kai_renner_motion_012",
+        "kai_renner_motion_013",
+        "kai_renner_motion_014",
+        "kai_renner_motion_015",
+        "kai_renner_motion_016",
+        "kai_renner_motion_017",
+        "kai_renner_motion_018",
+        "kai_renner_motion_019",
+        "kai_renner_motion_020",
+        "kai_renner_motion_021",
+        "kai_renner_motion_022",
+        "kai_renner_motion_023",
+        "kai_renner_motion_024",
+        "kai_renner_motion_025",
+        "kai_renner_motion_026",
+        "kai_renner_motion_027",
+        "kai_renner_motion_028",
+        "kai_renner_motion_029",
+        "kai_renner_motion_030",
+        "kai_renner_motion_031",
+        "kai_renner_motion_032",
+        "kai_renner_motion_033",
+        "kai_renner_motion_034",
+        "kai_renner_motion_035",
+        "kai_renner_motion_036"
+      ],
+      "runtime_admitted": false
+    }
+  },
+  "shards": [
+    {
+      "approval_state": "candidate_source_partial",
+      "bytes": 28404666,
+      "path": "kai-renner-candidate-source-motion-v001.wjpose",
+      "pose_count": 36,
+      "pose_ids": [
+        "kai_renner_motion_001",
+        "kai_renner_motion_002",
+        "kai_renner_motion_003",
+        "kai_renner_motion_004",
+        "kai_renner_motion_005",
+        "kai_renner_motion_006",
+        "kai_renner_motion_007",
+        "kai_renner_motion_008",
+        "kai_renner_motion_009",
+        "kai_renner_motion_010",
+        "kai_renner_motion_011",
+        "kai_renner_motion_012",
+        "kai_renner_motion_013",
+        "kai_renner_motion_014",
+        "kai_renner_motion_015",
+        "kai_renner_motion_016",
+        "kai_renner_motion_017",
+        "kai_renner_motion_018",
+        "kai_renner_motion_019",
+        "kai_renner_motion_020",
+        "kai_renner_motion_021",
+        "kai_renner_motion_022",
+        "kai_renner_motion_023",
+        "kai_renner_motion_024",
+        "kai_renner_motion_025",
+        "kai_renner_motion_026",
+        "kai_renner_motion_027",
+        "kai_renner_motion_028",
+        "kai_renner_motion_029",
+        "kai_renner_motion_030",
+        "kai_renner_motion_031",
+        "kai_renner_motion_032",
+        "kai_renner_motion_033",
+        "kai_renner_motion_034",
+        "kai_renner_motion_035",
+        "kai_renner_motion_036"
+      ],
+      "runtime_admitted": false,
+      "sha256": "7b73ec39dc91c0b1ac50e444bd786c893687880645b59ca6cc26b6f27b9d69e1",
+      "shard_id": "kai-renner-source-motion-v001",
+      "source": "joeville_contact_sheet_reconstruction"
+    }
+  ]
+}

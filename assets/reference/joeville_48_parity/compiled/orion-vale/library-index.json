@@ -1,0 +1,200 @@
+{
+  "approved_pose_count": 0,
+  "asset_set_id": "orion-vale-source-motion-v001",
+  "candidate_pose_count": 36,
+  "character_id": "orion-vale",
+  "display_name": "Orion Vale",
+  "pose_count": 36,
+  "profile": {
+    "alpha_mode": "straight",
+    "baseline_y": 1185,
+    "canvas_height": 1254,
+    "canvas_width": 1254,
+    "color_space": "sRGB",
+    "minimum_margin": 69,
+    "profile_id": "wizardjoe_hd_alpha_1254_v001"
+  },
+  "review_projection": true,
+  "runtime_admitted": false,
+  "schema_version": 1,
+  "sequences": {
+    "g1": {
+      "approval_state": "candidate_source_partial",
+      "fps": 8,
+      "loop": true,
+      "pose_ids": [
+        "orion_vale_motion_001",
+        "orion_vale_motion_002",
+        "orion_vale_motion_003",
+        "orion_vale_motion_004",
+        "orion_vale_motion_005",
+        "orion_vale_motion_006"
+      ],
+      "runtime_admitted": false
+    },
+    "g2": {
+      "approval_state": "candidate_source_partial",
+      "fps": 8,
+      "loop": true,
+      "pose_ids": [
+        "orion_vale_motion_007",
+        "orion_vale_motion_008",
+        "orion_vale_motion_009",
+        "orion_vale_motion_010",
+        "orion_vale_motion_011",
+        "orion_vale_motion_012"
+      ],
+      "runtime_admitted": false
+    },
+    "g3": {
+      "approval_state": "candidate_source_partial",
+      "fps": 8,
+      "loop": true,
+      "pose_ids": [
+        "orion_vale_motion_013",
+        "orion_vale_motion_014",
+        "orion_vale_motion_015",
+        "orion_vale_motion_016",
+        "orion_vale_motion_017",
+        "orion_vale_motion_018"
+      ],
+      "runtime_admitted": false
+    },
+    "g4": {
+      "approval_state": "candidate_source_partial",
+      "fps": 8,
+      "loop": true,
+      "pose_ids": [
+        "orion_vale_motion_019",
+        "orion_vale_motion_020",
+        "orion_vale_motion_021",
+        "orion_vale_motion_022",
+        "orion_vale_motion_023",
+        "orion_vale_motion_024"
+      ],
+      "runtime_admitted": false
+    },
+    "g5": {
+      "approval_state": "candidate_source_partial",
+      "fps": 8,
+      "loop": true,
+      "pose_ids": [
+        "orion_vale_motion_025",
+        "orion_vale_motion_026",
+        "orion_vale_motion_027",
+        "orion_vale_motion_028",
+        "orion_vale_motion_029",
+        "orion_vale_motion_030"
+      ],
+      "runtime_admitted": false
+    },
+    "g6": {
+      "approval_state": "candidate_source_partial",
+      "fps": 8,
+      "loop": true,
+      "pose_ids": [
+        "orion_vale_motion_031",
+        "orion_vale_motion_032",
+        "orion_vale_motion_033",
+        "orion_vale_motion_034",
+        "orion_vale_motion_035",
+        "orion_vale_motion_036"
+      ],
+      "runtime_admitted": false
+    },
+    "orion-vale-source-all": {
+      "approval_state": "candidate_source_partial",
+      "fps": 8,
+      "loop": true,
+      "pose_ids": [
+        "orion_vale_motion_001",
+        "orion_vale_motion_002",
+        "orion_vale_motion_003",
+        "orion_vale_motion_004",
+        "orion_vale_motion_005",
+        "orion_vale_motion_006",
+        "orion_vale_motion_007",
+        "orion_vale_motion_008",
+        "orion_vale_motion_009",
+        "orion_vale_motion_010",
+        "orion_vale_motion_011",
+        "orion_vale_motion_012",
+        "orion_vale_motion_013",
+        "orion_vale_motion_014",
+        "orion_vale_motion_015",
+        "orion_vale_motion_016",
+        "orion_vale_motion_017",
+        "orion_vale_motion_018",
+        "orion_vale_motion_019",
+        "orion_vale_motion_020",
+        "orion_vale_motion_021",
+        "orion_vale_motion_022",
+        "orion_vale_motion_023",
+        "orion_vale_motion_024",
+        "orion_vale_motion_025",
+        "orion_vale_motion_026",
+        "orion_vale_motion_027",
+        "orion_vale_motion_028",
+        "orion_vale_motion_029",
+        "orion_vale_motion_030",
+        "orion_vale_motion_031",
+        "orion_vale_motion_032",
+        "orion_vale_motion_033",
+        "orion_vale_motion_034",
+        "orion_vale_motion_035",
+        "orion_vale_motion_036"
+      ],
+      "runtime_admitted": false
+    }
+  },
+  "shards": [
+    {
+      "approval_state": "candidate_source_partial",
+      "bytes": 24429806,
+      "path": "orion-vale-candidate-source-motion-v001.wjpose",
+      "pose_count": 36,
+      "pose_ids": [
+        "orion_vale_motion_001",
+        "orion_vale_motion_002",
+        "orion_vale_motion_003",
+        "orion_vale_motion_004",
+        "orion_vale_motion_005",
+        "orion_vale_motion_006",
+        "orion_vale_motion_007",
+        "orion_vale_motion_008",
+        "orion_vale_motion_009",
+        "orion_vale_motion_010",
+        "orion_vale_motion_011",
+        "orion_vale_motion_012",
+        "orion_vale_motion_013",
+        "orion_vale_motion_014",
+        "orion_vale_motion_015",
+        "orion_vale_motion_016",
+        "orion_vale_motion_017",
+        "orion_vale_motion_018",
+        "orion_vale_motion_019",
+        "orion_vale_motion_020",
+        "orion_vale_motion_021",
+        "orion_vale_motion_022",
+        "orion_vale_motion_023",
+        "orion_vale_motion_024",
+        "orion_vale_motion_025",
+        "orion_vale_motion_026",
+        "orion_vale_motion_027",
+        "orion_vale_motion_028",
+        "orion_vale_motion_029",
+        "orion_vale_motion_030",
+        "orion_vale_motion_031",
+        "orion_vale_motion_032",
+        "orion_vale_motion_033",
+        "orion_vale_motion_034",
+        "orion_vale_motion_035",
+        "orion_vale_motion_036"
+      ],
+      "runtime_admitted": false,
+      "sha256": "e621945a608fd599f7a277fe4dd54e05886667795addb853485f06cc7fb804c9",
+      "shard_id": "orion-vale-source-motion-v001",
+      "source": "joeville_contact_sheet_reconstruction"
+    }
+  ]
+}

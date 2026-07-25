@@ -1,0 +1,200 @@
+{
+  "approved_pose_count": 0,
+  "asset_set_id": "selene-hart-source-motion-v001",
+  "candidate_pose_count": 36,
+  "character_id": "selene-hart",
+  "display_name": "Selene Hart",
+  "pose_count": 36,
+  "profile": {
+    "alpha_mode": "straight",
+    "baseline_y": 1185,
+    "canvas_height": 1254,
+    "canvas_width": 1254,
+    "color_space": "sRGB",
+    "minimum_margin": 69,
+    "profile_id": "wizardjoe_hd_alpha_1254_v001"
+  },
+  "review_projection": true,
+  "runtime_admitted": false,
+  "schema_version": 1,
+  "sequences": {
+    "g1": {
+      "approval_state": "candidate_source_partial",
+      "fps": 8,
+      "loop": true,
+      "pose_ids": [
+        "selene_hart_motion_001",
+        "selene_hart_motion_002",
+        "selene_hart_motion_003",
+        "selene_hart_motion_004",
+        "selene_hart_motion_005",
+        "selene_hart_motion_006"
+      ],
+      "runtime_admitted": false
+    },
+    "g2": {
+      "approval_state": "candidate_source_partial",
+      "fps": 8,
+      "loop": true,
+      "pose_ids": [
+        "selene_hart_motion_007",
+        "selene_hart_motion_008",
+        "selene_hart_motion_009",
+        "selene_hart_motion_010",
+        "selene_hart_motion_011",
+        "selene_hart_motion_012"
+      ],
+      "runtime_admitted": false
+    },
+    "g3": {
+      "approval_state": "candidate_source_partial",
+      "fps": 8,
+      "loop": true,
+      "pose_ids": [
+        "selene_hart_motion_013",
+        "selene_hart_motion_014",
+        "selene_hart_motion_015",
+        "selene_hart_motion_016",
+        "selene_hart_motion_017",
+        "selene_hart_motion_018"
+      ],
+      "runtime_admitted": false
+    },
+    "g4": {
+      "approval_state": "candidate_source_partial",
+      "fps": 8,
+      "loop": true,
+      "pose_ids": [
+        "selene_hart_motion_019",
+        "selene_hart_motion_020",
+        "selene_hart_motion_021",
+        "selene_hart_motion_022",
+        "selene_hart_motion_023",
+        "selene_hart_motion_024"
+      ],
+      "runtime_admitted": false
+    },
+    "g5": {
+      "approval_state": "candidate_source_partial",
+      "fps": 8,
+      "loop": true,
+      "pose_ids": [
+        "selene_hart_motion_025",
+        "selene_hart_motion_026",
+        "selene_hart_motion_027",
+        "selene_hart_motion_028",
+        "selene_hart_motion_029",
+        "selene_hart_motion_030"
+      ],
+      "runtime_admitted": false
+    },
+    "g6": {
+      "approval_state": "candidate_source_partial",
+      "fps": 8,
+      "loop": true,
+      "pose_ids": [
+        "selene_hart_motion_031",
+        "selene_hart_motion_032",
+        "selene_hart_motion_033",
+        "selene_hart_motion_034",
+        "selene_hart_motion_035",
+        "selene_hart_motion_036"
+      ],
+      "runtime_admitted": false
+    },
+    "selene-hart-source-all": {
+      "approval_state": "candidate_source_partial",
+      "fps": 8,
+      "loop": true,
+      "pose_ids": [
+        "selene_hart_motion_001",
+        "selene_hart_motion_002",
+        "selene_hart_motion_003",
+        "selene_hart_motion_004",
+        "selene_hart_motion_005",
+        "selene_hart_motion_006",
+        "selene_hart_motion_007",
+        "selene_hart_motion_008",
+        "selene_hart_motion_009",
+        "selene_hart_motion_010",
+        "selene_hart_motion_011",
+        "selene_hart_motion_012",
+        "selene_hart_motion_013",
+        "selene_hart_motion_014",
+        "selene_hart_motion_015",
+        "selene_hart_motion_016",
+        "selene_hart_motion_017",
+        "selene_hart_motion_018",
+        "selene_hart_motion_019",
+        "selene_hart_motion_020",
+        "selene_hart_motion_021",
+        "selene_hart_motion_022",
+        "selene_hart_motion_023",
+        "selene_hart_motion_024",
+        "selene_hart_motion_025",
+        "selene_hart_motion_026",
+        "selene_hart_motion_027",
+        "selene_hart_motion_028",
+        "selene_hart_motion_029",
+        "selene_hart_motion_030",
+        "selene_hart_motion_031",
+        "selene_hart_motion_032",
+        "selene_hart_motion_033",
+        "selene_hart_motion_034",
+        "selene_hart_motion_035",
+        "selene_hart_motion_036"
+      ],
+      "runtime_admitted": false
+    }
+  },
+  "shards": [
+    {
+      "approval_state": "candidate_source_partial",
+      "bytes": 23444101,
+      "path": "selene-hart-candidate-source-motion-v001.wjpose",
+      "pose_count": 36,
+      "pose_ids": [
+        "selene_hart_motion_001",
+        "selene_hart_motion_002",
+        "selene_hart_motion_003",
+        "selene_hart_motion_004",
+        "selene_hart_motion_005",
+        "selene_hart_motion_006",
+        "selene_hart_motion_007",
+        "selene_hart_motion_008",
+        "selene_hart_motion_009",
+        "selene_hart_motion_010",
+        "selene_hart_motion_011",
+        "selene_hart_motion_012",
+        "selene_hart_motion_013",
+        "selene_hart_motion_014",
+        "selene_hart_motion_015",
+        "selene_hart_motion_016",
+        "selene_hart_motion_017",
+        "selene_hart_motion_018",
+        "selene_hart_motion_019",
+        "selene_hart_motion_020",
+        "selene_hart_motion_021",
+        "selene_hart_motion_022",
+        "selene_hart_motion_023",
+        "selene_hart_motion_024",
+        "selene_hart_motion_025",
+        "selene_hart_motion_026",
+        "selene_hart_motion_027",
+        "selene_hart_motion_028",
+        "selene_hart_motion_029",
+        "selene_hart_motion_030",
+        "selene_hart_motion_031",
+        "selene_hart_motion_032",
+        "selene_hart_motion_033",
+        "selene_hart_motion_034",
+        "selene_hart_motion_035",
+        "selene_hart_motion_036"
+      ],
+      "runtime_admitted": false,
+      "sha256": "15679165338fd94a38188172d7532c23514918edf8a99e7656994f77c51ae8ad",
+      "shard_id": "selene-hart-source-motion-v001",
+      "source": "joeville_contact_sheet_reconstruction"
+    }
+  ]
+}

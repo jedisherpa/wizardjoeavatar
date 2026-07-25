@@ -183,7 +183,7 @@ def _observer_html(
           const ready = health.status === "ready";
           status.classList.toggle("ready", ready);
           statusText.textContent = ready
-            ? `Live · ${{health.joe.character_id}} + ${{health.current.character_id}}`
+            ? "Live · HD Wizard Joe + {safe_label}"
             : "Waiting for character runtimes";
         }} catch (_error) {{
           status.classList.remove("ready");
@@ -288,6 +288,14 @@ def main() -> None:
         help="Compare a second Wizard Joe HD sequence instead of starting another character.",
     )
     parser.add_argument(
+        "--review-library-index",
+        type=Path,
+        help=(
+            "Project --review-sequence from an isolated review-only HD "
+            "library on the current-character runtime."
+        ),
+    )
+    parser.add_argument(
         "--current-package",
         type=Path,
         default=DEFAULT_CURRENT_PACKAGE,
@@ -299,12 +307,17 @@ def main() -> None:
 
     if args.host != "127.0.0.1":
         parser.error("the observer binds only to 127.0.0.1")
+    if args.review_library_index and not args.review_sequence:
+        parser.error("--review-library-index requires --review-sequence")
+    review_runtime = bool(args.review_library_index)
     active_ports = (
         {args.port, args.joe_port}
-        if args.review_sequence
+        if args.review_sequence and not review_runtime
         else {args.port, args.joe_port, args.current_port}
     )
-    expected_port_count = 2 if args.review_sequence else 3
+    expected_port_count = (
+        2 if args.review_sequence and not review_runtime else 3
+    )
     if len(active_ports) != expected_port_count or any(
         port < 1 or port > 65535 for port in active_ports
     ):
@@ -312,10 +325,23 @@ def main() -> None:
     current_package = args.current_package.expanduser().resolve()
     if not args.review_sequence and not current_package.is_file():
         parser.error(f"current character package not found: {current_package}")
+    review_library_index = (
+        args.review_library_index.expanduser().resolve()
+        if args.review_library_index
+        else None
+    )
+    if review_library_index is not None and not review_library_index.is_file():
+        parser.error(
+            f"review library index not found: {review_library_index}"
+        )
 
     ObserverHandler.joe_port = args.joe_port
     ObserverHandler.current_port = (
-        args.joe_port if args.review_sequence else args.current_port
+        args.current_port
+        if review_runtime
+        else args.joe_port
+        if args.review_sequence
+        else args.current_port
     )
     ObserverHandler.joe_path = f"/?hd-sequence={args.joe_sequence}"
     ObserverHandler.current_path = (
@@ -343,7 +369,20 @@ def main() -> None:
         joe = subprocess.Popen(common + ["--port", str(args.joe_port)], cwd=ROOT)
         processes.append(joe)
         _wait_ready(joe, args.joe_port, args.startup_timeout)
-        if not args.review_sequence:
+        if review_runtime:
+            current = subprocess.Popen(
+                common
+                + [
+                    "--port",
+                    str(args.current_port),
+                    "--review-library-index",
+                    str(review_library_index),
+                ],
+                cwd=ROOT,
+            )
+            processes.append(current)
+            _wait_ready(current, args.current_port, args.startup_timeout)
+        elif not args.review_sequence:
             current = subprocess.Popen(
                 common
                 + [

@@ -9,7 +9,13 @@ import unittest
 from pathlib import Path
 from unittest import mock
 
-from wizard_avatar.hd_pose_artifact import HDPoseLibrary
+from PIL import Image
+
+from wizard_avatar.hd_pose_artifact import (
+    HDPoseLibrary,
+    sha256_path,
+    write_pose_artifact,
+)
 from wizard_avatar.server import create_app
 
 
@@ -150,6 +156,61 @@ class CompanionServerTests(unittest.IsolatedAsyncioTestCase):
     def create_companion_app(self, **kwargs):
         with mock.patch.dict(os.environ, {}, clear=True):
             return create_app(companion_mode=True, app_token=APP_TOKEN, **kwargs)
+
+    @staticmethod
+    def write_review_library(root: Path, *, runtime_admitted: bool = False) -> Path:
+        artifact_path = root / "candidate.wjpose"
+        profile = {
+            "profile_id": "test-review-profile",
+            "canvas_width": 2,
+            "canvas_height": 2,
+            "baseline_y": 1,
+            "minimum_margin": 0,
+            "alpha_mode": "straight",
+            "color_space": "sRGB",
+        }
+        receipt = write_pose_artifact(
+            artifact_path,
+            {"candidate_pose": Image.new("RGBA", (2, 2), (12, 34, 56, 255))},
+            profile=profile,
+            provenance={"source": "focused-test"},
+        )
+        index = {
+            "schema_version": 1,
+            "asset_set_id": "focused-review-library",
+            "profile": profile,
+            "pose_count": 1,
+            "review_projection": True,
+            "runtime_admitted": runtime_admitted,
+            "sequences": {
+                "candidate-all": {
+                    "pose_ids": ["candidate_pose"],
+                    "fps": 8,
+                    "loop": True,
+                    "approval_state": "candidate_visual_parity",
+                    "runtime_admitted": False,
+                }
+            },
+            "shards": [
+                {
+                    "shard_id": "focused-review-shard",
+                    "path": artifact_path.name,
+                    "sha256": receipt["sha256"],
+                    "bytes": receipt["bytes"],
+                    "pose_count": 1,
+                    "pose_ids": ["candidate_pose"],
+                    "approval_state": "candidate_visual_parity",
+                    "runtime_admitted": False,
+                    "source": "focused_test",
+                }
+            ],
+        }
+        index_path = root / "library-index.json"
+        index_path.write_text(
+            json.dumps(index, sort_keys=True, separators=(",", ":")),
+            encoding="utf-8",
+        )
+        return index_path
 
     def test_companion_configuration_fails_closed(self):
         with mock.patch.dict(os.environ, {}, clear=True):
@@ -544,6 +605,55 @@ class CompanionServerTests(unittest.IsolatedAsyncioTestCase):
         )
         self.assertEqual(missing_status, 404)
         await app.state.frame_hub.stop()
+
+    async def test_alternate_hd_review_library_is_isolated_and_served(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            index_path = self.write_review_library(Path(temporary))
+            with mock.patch.dict(os.environ, {}, clear=True):
+                app = create_app(
+                    companion_mode=False,
+                    hd_review_index_path=index_path,
+                )
+
+            status, profile = await asgi_request(
+                app,
+                "GET",
+                "/api/avatar/wizard/hd-profile",
+                headers=LOOPBACK_HEADERS,
+            )
+            self.assertEqual(status, 200)
+            self.assertEqual(profile["asset_set_id"], "focused-review-library")
+            self.assertEqual(profile["pose_ids"], ["candidate_pose"])
+            self.assertEqual(
+                profile["library_index_sha256"],
+                sha256_path(index_path),
+            )
+            self.assertTrue(profile["review_projection"])
+            self.assertFalse(profile["runtime_admitted"])
+
+            status, headers, body = await asgi_raw_request(
+                app,
+                "GET",
+                "/api/avatar/wizard/hd-pose/candidate_pose",
+                headers=LOOPBACK_HEADERS,
+            )
+            self.assertEqual(status, 200)
+            self.assertEqual(headers["x-runtime-admitted"], "false")
+            self.assertEqual(body, bytes((12, 34, 56, 255)) * 4)
+            await app.state.frame_hub.stop()
+
+    def test_alternate_hd_review_library_rejects_runtime_admission(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            index_path = self.write_review_library(
+                Path(temporary),
+                runtime_admitted=True,
+            )
+            with mock.patch.dict(os.environ, {}, clear=True):
+                with self.assertRaisesRegex(ValueError, "cannot be runtime-admitted"):
+                    create_app(
+                        companion_mode=False,
+                        hd_review_index_path=index_path,
+                    )
 
     async def test_hd_review_projection_decodes_off_the_event_loop(self):
         app = self.create_companion_app()
