@@ -188,13 +188,28 @@ library-index hashes. Port 8665 presents the corrected candidate beside
 approved HD Wizard Joe. Product visual approval is still pending and runtime
 admission remains false.
 
+Thorne Vale is now the fourth incomplete roster character to reach a complete
+48-pose review candidate. His immutable supplied poses `001`-`036` were merged
+with twelve new full-size RGBA poses for:
+
+- `g7`: receive, invite, listen, weigh, acknowledge, and reopen.
+- `g8`: retrieve, open, inspect, verify, close, and commission with one scroll.
+
+The prop-continuity gate rejected a duplicated-scroll intermediate. Canonical
+placement rejected two oversize silhouettes, and dark-background review found
+a thin chroma fringe. All affected frames were corrected before the final
+deterministic rebuild. Port 8665 presents the corrected candidate beside
+approved HD Wizard Joe. Product visual approval is still pending and runtime
+admission remains false.
+
 | Character | Candidate poses | Missing poses | State |
 | --- | ---: | ---: | --- |
 | Orion Vale | 48 | 0 | Full-size technical review passed; product visual approval pending |
 | Aurelia Finch | 48 | 0 | Full-size technical review passed; product visual approval pending |
 | Selene Hart | 48 | 0 | Full-size technical review passed; product visual approval pending |
-| Remaining roster | 348 | 84 | Authoring/review required |
-| **Total** | **492** | **84** | **576 target slots** |
+| Thorne Vale | 48 | 0 | Full-size technical review passed; product visual approval pending |
+| Remaining roster | 312 | 72 | Authoring/review required |
+| **Total** | **504** | **72** | **576 target slots** |
 
 Orion candidate receipts:
 
@@ -219,6 +234,14 @@ Selene candidate receipts:
 - Reconstruction: `22ede6b8587d329a30d80fcf40f8d99bfa48e04ffc72428b4aa2562b9e077f39`
 - Review motion contract: `8ca2f01db315099fd2c469a750c54a421201b29521440c0304a73bc7d3869075`
 - Contact sheet: `fe3cffec7b288b0d24b0b7b708e169bdaa6d2c7cf0dbab375997f15740a4c730`
+
+Thorne candidate receipts:
+
+- Artifact: `787f6745558e2d33683c42ea84a7b81b5883ea8192862d921b917de1b26a67cc`
+- Library index: `937abf76db2da70cb85d36237b9124a2e5dd59b3bfc19f240563e20a71abcde2`
+- Reconstruction: `a57b7886f20b0a2fd18af8fc7fe4df95bccb127075bf84e902ffb158d1ace54c`
+- Review motion contract: `1c403584f625f1e533538c516c7e00fc803b8dfbc8623e7b3379afd6149bb037`
+- Contact sheet: `e46389068cf2f9faa0374b2dbe84799b293a100214a64748c6d952e9866c8646`
 
 ## Roster Boundary
 

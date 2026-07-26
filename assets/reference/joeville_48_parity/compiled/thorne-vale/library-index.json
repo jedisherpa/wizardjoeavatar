@@ -1,10 +1,10 @@
 {
   "approved_pose_count": 0,
-  "asset_set_id": "thorne-vale-source-motion-v001",
-  "candidate_pose_count": 36,
+  "asset_set_id": "thorne-vale-authored-parity-v001",
+  "candidate_pose_count": 48,
   "character_id": "thorne-vale",
   "display_name": "Thorne Vale",
-  "pose_count": 36,
+  "pose_count": 48,
   "profile": {
     "alpha_mode": "straight",
     "baseline_y": 1185,
@@ -19,7 +19,7 @@
   "schema_version": 1,
   "sequences": {
     "g1": {
-      "approval_state": "candidate_source_partial",
+      "approval_state": "pending_visual_parity",
       "fps": 8,
       "loop": true,
       "pose_ids": [
@@ -33,7 +33,7 @@
       "runtime_admitted": false
     },
     "g2": {
-      "approval_state": "candidate_source_partial",
+      "approval_state": "pending_visual_parity",
       "fps": 8,
       "loop": true,
       "pose_ids": [
@@ -47,7 +47,7 @@
       "runtime_admitted": false
     },
     "g3": {
-      "approval_state": "candidate_source_partial",
+      "approval_state": "pending_visual_parity",
       "fps": 8,
       "loop": true,
       "pose_ids": [
@@ -61,7 +61,7 @@
       "runtime_admitted": false
     },
     "g4": {
-      "approval_state": "candidate_source_partial",
+      "approval_state": "pending_visual_parity",
       "fps": 8,
       "loop": true,
       "pose_ids": [
@@ -75,7 +75,7 @@
       "runtime_admitted": false
     },
     "g5": {
-      "approval_state": "candidate_source_partial",
+      "approval_state": "pending_visual_parity",
       "fps": 8,
       "loop": true,
       "pose_ids": [
@@ -89,7 +89,7 @@
       "runtime_admitted": false
     },
     "g6": {
-      "approval_state": "candidate_source_partial",
+      "approval_state": "pending_visual_parity",
       "fps": 8,
       "loop": true,
       "pose_ids": [
@@ -102,8 +102,40 @@
       ],
       "runtime_admitted": false
     },
-    "thorne-vale-source-all": {
-      "approval_state": "candidate_source_partial",
+    "g7": {
+      "approval_state": "pending_visual_parity",
+      "fps": 8,
+      "intent": "receive_invite_listen_weigh_acknowledge_reopen",
+      "loop": true,
+      "loop_mode": "loop",
+      "pose_ids": [
+        "thorne_vale_motion_037",
+        "thorne_vale_motion_038",
+        "thorne_vale_motion_039",
+        "thorne_vale_motion_040",
+        "thorne_vale_motion_041",
+        "thorne_vale_motion_042"
+      ],
+      "runtime_admitted": false
+    },
+    "g8": {
+      "approval_state": "pending_visual_parity",
+      "fps": 8,
+      "intent": "retrieve_open_inspect_verify_close_commission",
+      "loop": false,
+      "loop_mode": "hold_last",
+      "pose_ids": [
+        "thorne_vale_motion_043",
+        "thorne_vale_motion_044",
+        "thorne_vale_motion_045",
+        "thorne_vale_motion_046",
+        "thorne_vale_motion_047",
+        "thorne_vale_motion_048"
+      ],
+      "runtime_admitted": false
+    },
+    "thorne-vale-parity-all": {
+      "approval_state": "pending_visual_parity",
       "fps": 8,
       "loop": true,
       "pose_ids": [
@@ -142,17 +174,29 @@
         "thorne_vale_motion_033",
         "thorne_vale_motion_034",
         "thorne_vale_motion_035",
-        "thorne_vale_motion_036"
+        "thorne_vale_motion_036",
+        "thorne_vale_motion_037",
+        "thorne_vale_motion_038",
+        "thorne_vale_motion_039",
+        "thorne_vale_motion_040",
+        "thorne_vale_motion_041",
+        "thorne_vale_motion_042",
+        "thorne_vale_motion_043",
+        "thorne_vale_motion_044",
+        "thorne_vale_motion_045",
+        "thorne_vale_motion_046",
+        "thorne_vale_motion_047",
+        "thorne_vale_motion_048"
       ],
       "runtime_admitted": false
     }
   },
   "shards": [
     {
-      "approval_state": "candidate_source_partial",
-      "bytes": 25551720,
-      "path": "thorne-vale-candidate-source-motion-v001.wjpose",
-      "pose_count": 36,
+      "approval_state": "pending_visual_parity",
+      "bytes": 34498064,
+      "path": "thorne-vale-candidate-authored-parity-v001.wjpose",
+      "pose_count": 48,
       "pose_ids": [
         "thorne_vale_motion_001",
         "thorne_vale_motion_002",
@@ -189,12 +233,24 @@
         "thorne_vale_motion_033",
         "thorne_vale_motion_034",
         "thorne_vale_motion_035",
-        "thorne_vale_motion_036"
+        "thorne_vale_motion_036",
+        "thorne_vale_motion_037",
+        "thorne_vale_motion_038",
+        "thorne_vale_motion_039",
+        "thorne_vale_motion_040",
+        "thorne_vale_motion_041",
+        "thorne_vale_motion_042",
+        "thorne_vale_motion_043",
+        "thorne_vale_motion_044",
+        "thorne_vale_motion_045",
+        "thorne_vale_motion_046",
+        "thorne_vale_motion_047",
+        "thorne_vale_motion_048"
       ],
       "runtime_admitted": false,
-      "sha256": "c48f3ccaea95580c41ca70dd6a9a3fd43fe232278875db3ccd02e9406f84cb82",
-      "shard_id": "thorne-vale-source-motion-v001",
-      "source": "joeville_contact_sheet_reconstruction"
+      "sha256": "787f6745558e2d33683c42ea84a7b81b5883ea8192862d921b917de1b26a67cc",
+      "shard_id": "thorne-vale-authored-parity-v001",
+      "source": "joeville_supplied_plus_authored_full_size"
     }
   ]
 }

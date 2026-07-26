@@ -1,0 +1,216 @@
+{
+  "artifact_sha256": "787f6745558e2d33683c42ea84a7b81b5883ea8192862d921b917de1b26a67cc",
+  "character_id": "thorne-vale",
+  "contract_id": "thorne-vale-review-motion-v001",
+  "library_index_sha256": "937abf76db2da70cb85d36237b9124a2e5dd59b3bfc19f240563e20a71abcde2",
+  "profile_id": "wizardjoe_hd_alpha_1254_v001",
+  "review_projection": true,
+  "runtime_admitted": false,
+  "schema_version": 1,
+  "sequences": {
+    "g7": {
+      "entry_handoffs": [
+        "front_idle"
+      ],
+      "exit_handoffs": [
+        "front_idle",
+        "g8"
+      ],
+      "family": "royal_counsel",
+      "fps": 8,
+      "frames": [
+        {
+          "baseline_y": 1185,
+          "duration_ms": 125,
+          "frame_index": 1,
+          "hold_marker": false,
+          "interruptible": true,
+          "phase": "Audience-ready planted receipt with restrained royal attention.",
+          "pose_id": "thorne_vale_motion_037",
+          "root_policy": "fixed",
+          "support_contact": "dual_foot_grounded"
+        },
+        {
+          "baseline_y": 1185,
+          "duration_ms": 125,
+          "frame_index": 2,
+          "hold_marker": false,
+          "interruptible": false,
+          "phase": "Low open-palm invitation for the speaker to continue.",
+          "pose_id": "thorne_vale_motion_038",
+          "root_policy": "fixed",
+          "support_contact": "dual_foot_grounded"
+        },
+        {
+          "baseline_y": 1185,
+          "duration_ms": 125,
+          "frame_index": 3,
+          "hold_marker": true,
+          "interruptible": true,
+          "phase": "Restrained active-listening incline with steady eye contact.",
+          "pose_id": "thorne_vale_motion_039",
+          "root_policy": "fixed",
+          "support_contact": "dual_foot_grounded"
+        },
+        {
+          "baseline_y": 1185,
+          "duration_ms": 125,
+          "frame_index": 4,
+          "hold_marker": false,
+          "interruptible": false,
+          "phase": "Quiet chin-level deliberation while weighing the petition.",
+          "pose_id": "thorne_vale_motion_040",
+          "root_policy": "fixed",
+          "support_contact": "dual_foot_grounded"
+        },
+        {
+          "baseline_y": 1185,
+          "duration_ms": 125,
+          "frame_index": 5,
+          "hold_marker": true,
+          "interruptible": false,
+          "phase": "Measured hand-to-sternum acknowledgment.",
+          "pose_id": "thorne_vale_motion_041",
+          "root_policy": "fixed",
+          "support_contact": "dual_foot_grounded"
+        },
+        {
+          "baseline_y": 1185,
+          "duration_ms": 125,
+          "frame_index": 6,
+          "hold_marker": false,
+          "interruptible": true,
+          "phase": "Low open-palm recovery that reopens the floor.",
+          "pose_id": "thorne_vale_motion_042",
+          "root_policy": "fixed",
+          "support_contact": "dual_foot_grounded"
+        }
+      ],
+      "intent": "receive_invite_listen_weigh_acknowledge_reopen",
+      "interrupt_policy": "marker_safe",
+      "loop_mode": "loop",
+      "pose_ids": [
+        "thorne_vale_motion_037",
+        "thorne_vale_motion_038",
+        "thorne_vale_motion_039",
+        "thorne_vale_motion_040",
+        "thorne_vale_motion_041",
+        "thorne_vale_motion_042"
+      ]
+    },
+    "g8": {
+      "entry_handoffs": [
+        "front_idle",
+        "g7"
+      ],
+      "exit_handoffs": [
+        "front_idle",
+        "profile_walk"
+      ],
+      "family": "evidence_briefing",
+      "fps": 8,
+      "frames": [
+        {
+          "baseline_y": 1185,
+          "duration_ms": 125,
+          "frame_index": 1,
+          "hold_marker": false,
+          "interruptible": true,
+          "phase": "Calm frontal readiness with one hand moving to the carried scroll.",
+          "pose_id": "thorne_vale_motion_043",
+          "root_policy": "fixed",
+          "support_contact": "dual_foot_grounded"
+        },
+        {
+          "baseline_y": 1185,
+          "duration_ms": 125,
+          "frame_index": 2,
+          "hold_marker": false,
+          "interruptible": false,
+          "phase": "Single rolled scroll retrieved and raised to sternum height.",
+          "pose_id": "thorne_vale_motion_044",
+          "root_policy": "fixed",
+          "support_contact": "dual_foot_grounded"
+        },
+        {
+          "baseline_y": 1185,
+          "duration_ms": 125,
+          "frame_index": 3,
+          "hold_marker": true,
+          "interruptible": false,
+          "phase": "Open horizontal charter inspection held with both hands.",
+          "pose_id": "thorne_vale_motion_045",
+          "root_policy": "fixed",
+          "support_contact": "dual_foot_grounded"
+        },
+        {
+          "baseline_y": 1185,
+          "duration_ms": 125,
+          "frame_index": 4,
+          "hold_marker": true,
+          "interruptible": false,
+          "phase": "Precise location verification on the supported open charter.",
+          "pose_id": "thorne_vale_motion_046",
+          "root_policy": "fixed",
+          "support_contact": "dual_foot_grounded"
+        },
+        {
+          "baseline_y": 1185,
+          "duration_ms": 125,
+          "frame_index": 5,
+          "hold_marker": false,
+          "interruptible": true,
+          "phase": "Closed single scroll held at sternum height after verification.",
+          "pose_id": "thorne_vale_motion_047",
+          "root_policy": "fixed",
+          "support_contact": "dual_foot_grounded"
+        },
+        {
+          "baseline_y": 1185,
+          "duration_ms": 125,
+          "frame_index": 6,
+          "hold_marker": true,
+          "interruptible": true,
+          "phase": "Grounded quarter-right commission after the scroll is restored.",
+          "pose_id": "thorne_vale_motion_048",
+          "root_policy": "fixed",
+          "support_contact": "dual_foot_grounded"
+        }
+      ],
+      "intent": "retrieve_open_inspect_verify_close_commission",
+      "interrupt_policy": "marker_safe",
+      "loop_mode": "hold_last",
+      "pose_ids": [
+        "thorne_vale_motion_043",
+        "thorne_vale_motion_044",
+        "thorne_vale_motion_045",
+        "thorne_vale_motion_046",
+        "thorne_vale_motion_047",
+        "thorne_vale_motion_048"
+      ]
+    }
+  },
+  "status": "pending_visual_parity",
+  "transitions": [
+    {
+      "from": "g7",
+      "status": "deferred_until_character_package",
+      "to": "front_idle"
+    },
+    {
+      "from": "g7",
+      "status": "resolved",
+      "to": "g8"
+    },
+    {
+      "from": "g8",
+      "status": "deferred_until_character_package",
+      "to": "front_idle"
+    },
+    {
+      "from": "g8",
+      "status": "deferred_until_character_package",
+      "to": "profile_walk"
+    }
+  ]
+}

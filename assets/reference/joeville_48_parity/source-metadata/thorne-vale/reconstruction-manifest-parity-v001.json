@@ -1,0 +1,1443 @@
+{
+  "artifact": {
+    "bytes": 34498064,
+    "path": "compiled/thorne-vale/thorne-vale-candidate-authored-parity-v001.wjpose",
+    "pose_count": 48,
+    "pose_ids": [
+      "thorne_vale_motion_001",
+      "thorne_vale_motion_002",
+      "thorne_vale_motion_003",
+      "thorne_vale_motion_004",
+      "thorne_vale_motion_005",
+      "thorne_vale_motion_006",
+      "thorne_vale_motion_007",
+      "thorne_vale_motion_008",
+      "thorne_vale_motion_009",
+      "thorne_vale_motion_010",
+      "thorne_vale_motion_011",
+      "thorne_vale_motion_012",
+      "thorne_vale_motion_013",
+      "thorne_vale_motion_014",
+      "thorne_vale_motion_015",
+      "thorne_vale_motion_016",
+      "thorne_vale_motion_017",
+      "thorne_vale_motion_018",
+      "thorne_vale_motion_019",
+      "thorne_vale_motion_020",
+      "thorne_vale_motion_021",
+      "thorne_vale_motion_022",
+      "thorne_vale_motion_023",
+      "thorne_vale_motion_024",
+      "thorne_vale_motion_025",
+      "thorne_vale_motion_026",
+      "thorne_vale_motion_027",
+      "thorne_vale_motion_028",
+      "thorne_vale_motion_029",
+      "thorne_vale_motion_030",
+      "thorne_vale_motion_031",
+      "thorne_vale_motion_032",
+      "thorne_vale_motion_033",
+      "thorne_vale_motion_034",
+      "thorne_vale_motion_035",
+      "thorne_vale_motion_036",
+      "thorne_vale_motion_037",
+      "thorne_vale_motion_038",
+      "thorne_vale_motion_039",
+      "thorne_vale_motion_040",
+      "thorne_vale_motion_041",
+      "thorne_vale_motion_042",
+      "thorne_vale_motion_043",
+      "thorne_vale_motion_044",
+      "thorne_vale_motion_045",
+      "thorne_vale_motion_046",
+      "thorne_vale_motion_047",
+      "thorne_vale_motion_048"
+    ],
+    "sha256": "787f6745558e2d33683c42ea84a7b81b5883ea8192862d921b917de1b26a67cc"
+  },
+  "authored_manifest": {
+    "path": "authored-source/thorne-vale/authored-g7-g8-v001.json",
+    "sha256": "fe2bf2282573bb4186bc9f39b822ac0d46d80a82349e370e2cad343e3ba99321"
+  },
+  "authority_manifest_sha256": "740f35730f4aa1e6c6ef96be80115c5b0e117397f792d57fdf5360452bbe78c8",
+  "character_id": "thorne-vale",
+  "compiled_pose_count": 48,
+  "display_name": "Thorne Vale",
+  "existing_reconstruction_manifest": {
+    "path": "source-metadata/thorne-vale/reconstruction-manifest-v001.json",
+    "sha256": "7e4161b926bc140a6cb9ad9a3204739ba6696607b55033fa9e6c7e08336a87fe"
+  },
+  "existing_source_artifact": {
+    "path": "compiled/thorne-vale/thorne-vale-candidate-source-motion-v001.wjpose",
+    "sha256": "c48f3ccaea95580c41ca70dd6a9a3fd43fe232278875db3ccd02e9406f84cb82"
+  },
+  "library_index": {
+    "path": "compiled/thorne-vale/library-index.json",
+    "sha256": "937abf76db2da70cb85d36237b9124a2e5dd59b3bfc19f240563e20a71abcde2"
+  },
+  "missing_sequences": [],
+  "poses": [
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-001",
+      "normalization_scale": 1.81463415,
+      "output_bbox": [
+        434,
+        73,
+        819,
+        1185
+      ],
+      "pose_id": "thorne_vale_motion_001",
+      "rgba_sha256": "bea5274fc96802a6cc78b9f5f5aea59f4c7630d6344cb29cf24cb3aaa6c09a41",
+      "runtime_admitted": false,
+      "sequence_id": "g1",
+      "source_archive_id": "sprites-2",
+      "source_archive_sha256": "570d20086ad833b018188eee9c7d3368e5a156139e67c62b474f86cb50bfa749",
+      "source_bbox": [
+        84,
+        52,
+        296,
+        665
+      ],
+      "source_frame_index": 1,
+      "source_member": "sheet-thorne-vale-g1.png",
+      "source_member_sha256": "f3b9eb4075897b0eac86180414f596b5bf1c21e1f229c0bb6a121a0572c01e11"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-002",
+      "normalization_scale": 1.81463415,
+      "output_bbox": [
+        442,
+        69,
+        812,
+        1185
+      ],
+      "pose_id": "thorne_vale_motion_002",
+      "rgba_sha256": "5ca6efe91774997346a53ba822bc4bfe4c1a9f9967c3d38507ffd57ef8a73fba",
+      "runtime_admitted": false,
+      "sequence_id": "g1",
+      "source_archive_id": "sprites-2",
+      "source_archive_sha256": "570d20086ad833b018188eee9c7d3368e5a156139e67c62b474f86cb50bfa749",
+      "source_bbox": [
+        450,
+        50,
+        654,
+        665
+      ],
+      "source_frame_index": 2,
+      "source_member": "sheet-thorne-vale-g1.png",
+      "source_member_sha256": "f3b9eb4075897b0eac86180414f596b5bf1c21e1f229c0bb6a121a0572c01e11"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-003",
+      "normalization_scale": 1.81463415,
+      "output_bbox": [
+        436,
+        73,
+        817,
+        1184
+      ],
+      "pose_id": "thorne_vale_motion_003",
+      "rgba_sha256": "aa16cf2ab8b3cb0499ea82d8d34c701d6a74409caa765694d082b748e206dcce",
+      "runtime_admitted": false,
+      "sequence_id": "g1",
+      "source_archive_id": "sprites-2",
+      "source_archive_sha256": "570d20086ad833b018188eee9c7d3368e5a156139e67c62b474f86cb50bfa749",
+      "source_bbox": [
+        806,
+        52,
+        1016,
+        664
+      ],
+      "source_frame_index": 3,
+      "source_member": "sheet-thorne-vale-g1.png",
+      "source_member_sha256": "f3b9eb4075897b0eac86180414f596b5bf1c21e1f229c0bb6a121a0572c01e11"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-004",
+      "normalization_scale": 1.81463415,
+      "output_bbox": [
+        390,
+        84,
+        864,
+        1178
+      ],
+      "pose_id": "thorne_vale_motion_004",
+      "rgba_sha256": "6501bf10adf7549f11327fca1603cf9d3d067a8733670b254949612a0497ab4b",
+      "runtime_admitted": false,
+      "sequence_id": "g1",
+      "source_archive_id": "sprites-2",
+      "source_archive_sha256": "570d20086ad833b018188eee9c7d3368e5a156139e67c62b474f86cb50bfa749",
+      "source_bbox": [
+        1141,
+        58,
+        1402,
+        661
+      ],
+      "source_frame_index": 4,
+      "source_member": "sheet-thorne-vale-g1.png",
+      "source_member_sha256": "f3b9eb4075897b0eac86180414f596b5bf1c21e1f229c0bb6a121a0572c01e11"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-005",
+      "normalization_scale": 1.81463415,
+      "output_bbox": [
+        380,
+        91,
+        874,
+        1176
+      ],
+      "pose_id": "thorne_vale_motion_005",
+      "rgba_sha256": "b7bc9fe1823eb5dea40ddb7afcdae338b67dbfadb7fce0a6a26bbd096281e4ba",
+      "runtime_admitted": false,
+      "sequence_id": "g1",
+      "source_archive_id": "sprites-2",
+      "source_archive_sha256": "570d20086ad833b018188eee9c7d3368e5a156139e67c62b474f86cb50bfa749",
+      "source_bbox": [
+        1509,
+        62,
+        1781,
+        660
+      ],
+      "source_frame_index": 5,
+      "source_member": "sheet-thorne-vale-g1.png",
+      "source_member_sha256": "f3b9eb4075897b0eac86180414f596b5bf1c21e1f229c0bb6a121a0572c01e11"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-006",
+      "normalization_scale": 1.81463415,
+      "output_bbox": [
+        402,
+        98,
+        852,
+        1183
+      ],
+      "pose_id": "thorne_vale_motion_006",
+      "rgba_sha256": "8a3e19df171f0558190596a42f6942ad4ecc384031513b8884d1aa3b2eebb507",
+      "runtime_admitted": false,
+      "sequence_id": "g1",
+      "source_archive_id": "sprites-2",
+      "source_archive_sha256": "570d20086ad833b018188eee9c7d3368e5a156139e67c62b474f86cb50bfa749",
+      "source_bbox": [
+        1884,
+        66,
+        2132,
+        664
+      ],
+      "source_frame_index": 6,
+      "source_member": "sheet-thorne-vale-g1.png",
+      "source_member_sha256": "f3b9eb4075897b0eac86180414f596b5bf1c21e1f229c0bb6a121a0572c01e11"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-007",
+      "normalization_scale": 2.05147059,
+      "output_bbox": [
+        391,
+        71,
+        863,
+        1179
+      ],
+      "pose_id": "thorne_vale_motion_007",
+      "rgba_sha256": "e6a96934e1ecd63cb1078d6d5e552f0e8c8cdd52b5000b03e985246a2a539180",
+      "runtime_admitted": false,
+      "sequence_id": "g2",
+      "source_archive_id": "sprites-2",
+      "source_archive_sha256": "570d20086ad833b018188eee9c7d3368e5a156139e67c62b474f86cb50bfa749",
+      "source_bbox": [
+        97,
+        81,
+        327,
+        621
+      ],
+      "source_frame_index": 1,
+      "source_member": "sheet-thorne-vale-g2.png",
+      "source_member_sha256": "82872ee8b05a60a9a2b62d01efc0f6bc7e88d46ddefb8cab1bf3c4017fffa033"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-008",
+      "normalization_scale": 2.05147059,
+      "output_bbox": [
+        402,
+        73,
+        853,
+        1173
+      ],
+      "pose_id": "thorne_vale_motion_008",
+      "rgba_sha256": "de3766d8c8feb3ec41235c2cefbe892fb6bcb432a739e83fbad83cc2d5cba35d",
+      "runtime_admitted": false,
+      "sequence_id": "g2",
+      "source_archive_id": "sprites-2",
+      "source_archive_sha256": "570d20086ad833b018188eee9c7d3368e5a156139e67c62b474f86cb50bfa749",
+      "source_bbox": [
+        442,
+        82,
+        662,
+        618
+      ],
+      "source_frame_index": 2,
+      "source_member": "sheet-thorne-vale-g2.png",
+      "source_member_sha256": "82872ee8b05a60a9a2b62d01efc0f6bc7e88d46ddefb8cab1bf3c4017fffa033"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-009",
+      "normalization_scale": 2.05147059,
+      "output_bbox": [
+        390,
+        73,
+        864,
+        1185
+      ],
+      "pose_id": "thorne_vale_motion_009",
+      "rgba_sha256": "f92c9a07ea8d4ec9106add2ec09447c2163408976323beaf4e5843fc746c38f1",
+      "runtime_admitted": false,
+      "sequence_id": "g2",
+      "source_archive_id": "sprites-2",
+      "source_archive_sha256": "570d20086ad833b018188eee9c7d3368e5a156139e67c62b474f86cb50bfa749",
+      "source_bbox": [
+        791,
+        82,
+        1022,
+        624
+      ],
+      "source_frame_index": 3,
+      "source_member": "sheet-thorne-vale-g2.png",
+      "source_member_sha256": "82872ee8b05a60a9a2b62d01efc0f6bc7e88d46ddefb8cab1bf3c4017fffa033"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-010",
+      "normalization_scale": 2.05147059,
+      "output_bbox": [
+        404,
+        69,
+        851,
+        1179
+      ],
+      "pose_id": "thorne_vale_motion_010",
+      "rgba_sha256": "72e09182d43766073b6be3d978a5f64e0b9458a06c08d80cc8c16700cc13b67f",
+      "runtime_admitted": false,
+      "sequence_id": "g2",
+      "source_archive_id": "sprites-2",
+      "source_archive_sha256": "570d20086ad833b018188eee9c7d3368e5a156139e67c62b474f86cb50bfa749",
+      "source_bbox": [
+        1137,
+        80,
+        1355,
+        621
+      ],
+      "source_frame_index": 4,
+      "source_member": "sheet-thorne-vale-g2.png",
+      "source_member_sha256": "82872ee8b05a60a9a2b62d01efc0f6bc7e88d46ddefb8cab1bf3c4017fffa033"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-011",
+      "normalization_scale": 2.05147059,
+      "output_bbox": [
+        284,
+        237,
+        969,
+        1160
+      ],
+      "pose_id": "thorne_vale_motion_011",
+      "rgba_sha256": "fff47ce91415dd09cf939f976786a830974ed6facde342e2fa017d77a3dce289",
+      "runtime_admitted": false,
+      "sequence_id": "g2",
+      "source_archive_id": "sprites-2",
+      "source_archive_sha256": "570d20086ad833b018188eee9c7d3368e5a156139e67c62b474f86cb50bfa749",
+      "source_bbox": [
+        1439,
+        162,
+        1773,
+        612
+      ],
+      "source_frame_index": 5,
+      "source_member": "sheet-thorne-vale-g2.png",
+      "source_member_sha256": "82872ee8b05a60a9a2b62d01efc0f6bc7e88d46ddefb8cab1bf3c4017fffa033"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-012",
+      "normalization_scale": 2.05147059,
+      "output_bbox": [
+        388,
+        342,
+        866,
+        1179
+      ],
+      "pose_id": "thorne_vale_motion_012",
+      "rgba_sha256": "c99c3fb8e0014b53cd98fc1fbe45da0ef455048163d8820ecec43c4acf0eb7ab",
+      "runtime_admitted": false,
+      "sequence_id": "g2",
+      "source_archive_id": "sprites-2",
+      "source_archive_sha256": "570d20086ad833b018188eee9c7d3368e5a156139e67c62b474f86cb50bfa749",
+      "source_bbox": [
+        1876,
+        213,
+        2109,
+        621
+      ],
+      "source_frame_index": 6,
+      "source_member": "sheet-thorne-vale-g2.png",
+      "source_member_sha256": "82872ee8b05a60a9a2b62d01efc0f6bc7e88d46ddefb8cab1bf3c4017fffa033"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-013",
+      "normalization_scale": 1.80290792,
+      "output_bbox": [
+        335,
+        330,
+        919,
+        1185
+      ],
+      "pose_id": "thorne_vale_motion_013",
+      "rgba_sha256": "645085b3895ffb3fee187fefe8d9e0eb7a9eb58e9bf9be42a978251d31f04d69",
+      "runtime_admitted": false,
+      "sequence_id": "g3",
+      "source_archive_id": "sprites-2",
+      "source_archive_sha256": "570d20086ad833b018188eee9c7d3368e5a156139e67c62b474f86cb50bfa749",
+      "source_bbox": [
+        51,
+        162,
+        375,
+        636
+      ],
+      "source_frame_index": 1,
+      "source_member": "sheet-thorne-vale-g3.png",
+      "source_member_sha256": "7b5375dacafcef8697406392f8ff2750c58f422d02f58a1d1e9b0729773d7023"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-014",
+      "normalization_scale": 1.80290792,
+      "output_bbox": [
+        400,
+        336,
+        853,
+        1185
+      ],
+      "pose_id": "thorne_vale_motion_014",
+      "rgba_sha256": "593c464f31572018ca1743c5c04b252c50e7faf88c6b017774687305c232c909",
+      "runtime_admitted": false,
+      "sequence_id": "g3",
+      "source_archive_id": "sprites-2",
+      "source_archive_sha256": "570d20086ad833b018188eee9c7d3368e5a156139e67c62b474f86cb50bfa749",
+      "source_bbox": [
+        451,
+        165,
+        702,
+        636
+      ],
+      "source_frame_index": 2,
+      "source_member": "sheet-thorne-vale-g3.png",
+      "source_member_sha256": "7b5375dacafcef8697406392f8ff2750c58f422d02f58a1d1e9b0729773d7023"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-015",
+      "normalization_scale": 1.80290792,
+      "output_bbox": [
+        350,
+        365,
+        905,
+        1182
+      ],
+      "pose_id": "thorne_vale_motion_015",
+      "rgba_sha256": "62b50e5bc5f10bebf0aebdf3d67e444c33c49acf8850da6261a9246adb28d870",
+      "runtime_admitted": false,
+      "sequence_id": "g3",
+      "source_archive_id": "sprites-2",
+      "source_archive_sha256": "570d20086ad833b018188eee9c7d3368e5a156139e67c62b474f86cb50bfa749",
+      "source_bbox": [
+        770,
+        181,
+        1078,
+        634
+      ],
+      "source_frame_index": 3,
+      "source_member": "sheet-thorne-vale-g3.png",
+      "source_member_sha256": "7b5375dacafcef8697406392f8ff2750c58f422d02f58a1d1e9b0729773d7023"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-016",
+      "normalization_scale": 1.80290792,
+      "output_bbox": [
+        416,
+        509,
+        838,
+        1183
+      ],
+      "pose_id": "thorne_vale_motion_016",
+      "rgba_sha256": "d1de4fc509218a46004d365cf82e382ff509dcb9184e27b86ee963f2f0863104",
+      "runtime_admitted": false,
+      "sequence_id": "g3",
+      "source_archive_id": "sprites-2",
+      "source_archive_sha256": "570d20086ad833b018188eee9c7d3368e5a156139e67c62b474f86cb50bfa749",
+      "source_bbox": [
+        1154,
+        261,
+        1388,
+        635
+      ],
+      "source_frame_index": 4,
+      "source_member": "sheet-thorne-vale-g3.png",
+      "source_member_sha256": "7b5375dacafcef8697406392f8ff2750c58f422d02f58a1d1e9b0729773d7023"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-017",
+      "normalization_scale": 1.80290792,
+      "output_bbox": [
+        404,
+        285,
+        849,
+        1084
+      ],
+      "pose_id": "thorne_vale_motion_017",
+      "rgba_sha256": "ae33b40fe1add6bda083ead722d607a1bceb08dce33617bff878aa333fbebd4c",
+      "runtime_admitted": false,
+      "sequence_id": "g3",
+      "source_archive_id": "sprites-2",
+      "source_archive_sha256": "570d20086ad833b018188eee9c7d3368e5a156139e67c62b474f86cb50bfa749",
+      "source_bbox": [
+        1476,
+        137,
+        1723,
+        580
+      ],
+      "source_frame_index": 5,
+      "source_member": "sheet-thorne-vale-g3.png",
+      "source_member_sha256": "7b5375dacafcef8697406392f8ff2750c58f422d02f58a1d1e9b0729773d7023"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-018",
+      "normalization_scale": 1.80290792,
+      "output_bbox": [
+        386,
+        69,
+        869,
+        886
+      ],
+      "pose_id": "thorne_vale_motion_018",
+      "rgba_sha256": "98525bd05e9351ed26a3b9c0649a5ca19442bf888fbe706aef4475a1acc1a756",
+      "runtime_admitted": false,
+      "sequence_id": "g3",
+      "source_archive_id": "sprites-2",
+      "source_archive_sha256": "570d20086ad833b018188eee9c7d3368e5a156139e67c62b474f86cb50bfa749",
+      "source_bbox": [
+        1815,
+        17,
+        2083,
+        470
+      ],
+      "source_frame_index": 6,
+      "source_member": "sheet-thorne-vale-g3.png",
+      "source_member_sha256": "7b5375dacafcef8697406392f8ff2750c58f422d02f58a1d1e9b0729773d7023"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-019",
+      "normalization_scale": 1.8446281,
+      "output_bbox": [
+        394,
+        69,
+        859,
+        965
+      ],
+      "pose_id": "thorne_vale_motion_019",
+      "rgba_sha256": "e577f6d9bf0d8fd73e9ababfce05b585a09ae8066dffd053fe5b0362309f3a92",
+      "runtime_admitted": false,
+      "sequence_id": "g4",
+      "source_archive_id": "sprites-2",
+      "source_archive_sha256": "570d20086ad833b018188eee9c7d3368e5a156139e67c62b474f86cb50bfa749",
+      "source_bbox": [
+        81,
+        58,
+        333,
+        544
+      ],
+      "source_frame_index": 1,
+      "source_member": "sheet-thorne-vale-g4.png",
+      "source_member_sha256": "9680f7eabf85967d1d164e1fe4cd8e61828b90a77ca0c7afe2e06bfcbe4b776d"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-020",
+      "normalization_scale": 1.8446281,
+      "output_bbox": [
+        389,
+        410,
+        865,
+        1170
+      ],
+      "pose_id": "thorne_vale_motion_020",
+      "rgba_sha256": "115418e1ac4ade9d4a9844aceca5a54f3790d400f3d285522de381013b367b63",
+      "runtime_admitted": false,
+      "sequence_id": "g4",
+      "source_archive_id": "sprites-2",
+      "source_archive_sha256": "570d20086ad833b018188eee9c7d3368e5a156139e67c62b474f86cb50bfa749",
+      "source_bbox": [
+        422,
+        243,
+        680,
+        655
+      ],
+      "source_frame_index": 2,
+      "source_member": "sheet-thorne-vale-g4.png",
+      "source_member_sha256": "9680f7eabf85967d1d164e1fe4cd8e61828b90a77ca0c7afe2e06bfcbe4b776d"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-021",
+      "normalization_scale": 1.8446281,
+      "output_bbox": [
+        316,
+        399,
+        938,
+        1170
+      ],
+      "pose_id": "thorne_vale_motion_021",
+      "rgba_sha256": "3c7f5d967b9e90f509f48705dc09131832f634b8eae568044a2901b39076baf3",
+      "runtime_admitted": false,
+      "sequence_id": "g4",
+      "source_archive_id": "sprites-2",
+      "source_archive_sha256": "570d20086ad833b018188eee9c7d3368e5a156139e67c62b474f86cb50bfa749",
+      "source_bbox": [
+        736,
+        237,
+        1073,
+        655
+      ],
+      "source_frame_index": 3,
+      "source_member": "sheet-thorne-vale-g4.png",
+      "source_member_sha256": "9680f7eabf85967d1d164e1fe4cd8e61828b90a77ca0c7afe2e06bfcbe4b776d"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-022",
+      "normalization_scale": 1.8446281,
+      "output_bbox": [
+        418,
+        252,
+        837,
+        1167
+      ],
+      "pose_id": "thorne_vale_motion_022",
+      "rgba_sha256": "2e0d2fef9db60d606aabe69f2fa18d5788fdb0f362d9c0c29ca6f551c14a4927",
+      "runtime_admitted": false,
+      "sequence_id": "g4",
+      "source_archive_id": "sprites-2",
+      "source_archive_sha256": "570d20086ad833b018188eee9c7d3368e5a156139e67c62b474f86cb50bfa749",
+      "source_bbox": [
+        1126,
+        157,
+        1353,
+        653
+      ],
+      "source_frame_index": 4,
+      "source_member": "sheet-thorne-vale-g4.png",
+      "source_member_sha256": "9680f7eabf85967d1d164e1fe4cd8e61828b90a77ca0c7afe2e06bfcbe4b776d"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-023",
+      "normalization_scale": 1.8446281,
+      "output_bbox": [
+        462,
+        218,
+        792,
+        1181
+      ],
+      "pose_id": "thorne_vale_motion_023",
+      "rgba_sha256": "7dacc91ab323e708d4a5fef124b9e153a919f57a00d1b0831dd632c8217ccd20",
+      "runtime_admitted": false,
+      "sequence_id": "g4",
+      "source_archive_id": "sprites-2",
+      "source_archive_sha256": "570d20086ad833b018188eee9c7d3368e5a156139e67c62b474f86cb50bfa749",
+      "source_bbox": [
+        1465,
+        139,
+        1644,
+        661
+      ],
+      "source_frame_index": 5,
+      "source_member": "sheet-thorne-vale-g4.png",
+      "source_member_sha256": "9680f7eabf85967d1d164e1fe4cd8e61828b90a77ca0c7afe2e06bfcbe4b776d"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-024",
+      "normalization_scale": 1.8446281,
+      "output_bbox": [
+        369,
+        191,
+        885,
+        1185
+      ],
+      "pose_id": "thorne_vale_motion_024",
+      "rgba_sha256": "442a8d830a61d41f278bc2064040df78f39d5fd097f078658d4b2364498b07f4",
+      "runtime_admitted": false,
+      "sequence_id": "g4",
+      "source_archive_id": "sprites-2",
+      "source_archive_sha256": "570d20086ad833b018188eee9c7d3368e5a156139e67c62b474f86cb50bfa749",
+      "source_bbox": [
+        1734,
+        124,
+        2014,
+        663
+      ],
+      "source_frame_index": 6,
+      "source_member": "sheet-thorne-vale-g4.png",
+      "source_member_sha256": "9680f7eabf85967d1d164e1fe4cd8e61828b90a77ca0c7afe2e06bfcbe4b776d"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-025",
+      "normalization_scale": 1.86934673,
+      "output_bbox": [
+        412,
+        69,
+        842,
+        1179
+      ],
+      "pose_id": "thorne_vale_motion_025",
+      "rgba_sha256": "9ed8ac3ef6d73d7bd5b6b590f52abd9f3ac16818868f597d9c8b734f8560a5ca",
+      "runtime_admitted": false,
+      "sequence_id": "g5",
+      "source_archive_id": "sprites-3",
+      "source_archive_sha256": "f9f7dfe99c1043e2008f58b25999e36888515f48fa64e337bde97a8af0bb9a52",
+      "source_bbox": [
+        37,
+        157,
+        267,
+        751
+      ],
+      "source_frame_index": 1,
+      "source_member": "sheet-thorne-vale-g5.png",
+      "source_member_sha256": "cdfa1751f26e6212c737aa7b16352f224242211594f4b3e89806afe4013e5ccc"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-026",
+      "normalization_scale": 1.86934673,
+      "output_bbox": [
+        408,
+        78,
+        847,
+        1185
+      ],
+      "pose_id": "thorne_vale_motion_026",
+      "rgba_sha256": "afdc583ffc2234a558610ff76f3fa850b06bb3ce3ed92962f6178eb677a8943f",
+      "runtime_admitted": false,
+      "sequence_id": "g5",
+      "source_archive_id": "sprites-3",
+      "source_archive_sha256": "f9f7dfe99c1043e2008f58b25999e36888515f48fa64e337bde97a8af0bb9a52",
+      "source_bbox": [
+        320,
+        162,
+        555,
+        754
+      ],
+      "source_frame_index": 2,
+      "source_member": "sheet-thorne-vale-g5.png",
+      "source_member_sha256": "cdfa1751f26e6212c737aa7b16352f224242211594f4b3e89806afe4013e5ccc"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-027",
+      "normalization_scale": 1.86934673,
+      "output_bbox": [
+        411,
+        80,
+        843,
+        1183
+      ],
+      "pose_id": "thorne_vale_motion_027",
+      "rgba_sha256": "92c4b8d56a6cddc5e15d54b6785262cbe0b3a80b082da1129e8a7e3890d84df0",
+      "runtime_admitted": false,
+      "sequence_id": "g5",
+      "source_archive_id": "sprites-3",
+      "source_archive_sha256": "f9f7dfe99c1043e2008f58b25999e36888515f48fa64e337bde97a8af0bb9a52",
+      "source_bbox": [
+        628,
+        163,
+        859,
+        753
+      ],
+      "source_frame_index": 3,
+      "source_member": "sheet-thorne-vale-g5.png",
+      "source_member_sha256": "cdfa1751f26e6212c737aa7b16352f224242211594f4b3e89806afe4013e5ccc"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-028",
+      "normalization_scale": 1.86934673,
+      "output_bbox": [
+        409,
+        78,
+        845,
+        1181
+      ],
+      "pose_id": "thorne_vale_motion_028",
+      "rgba_sha256": "ebfe24c993c9553a91fb0d07b026b433d5b5c984ecbff4dc9322fedc3091f0f7",
+      "runtime_admitted": false,
+      "sequence_id": "g5",
+      "source_archive_id": "sprites-3",
+      "source_archive_sha256": "f9f7dfe99c1043e2008f58b25999e36888515f48fa64e337bde97a8af0bb9a52",
+      "source_bbox": [
+        905,
+        162,
+        1138,
+        752
+      ],
+      "source_frame_index": 4,
+      "source_member": "sheet-thorne-vale-g5.png",
+      "source_member_sha256": "cdfa1751f26e6212c737aa7b16352f224242211594f4b3e89806afe4013e5ccc"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-029",
+      "normalization_scale": 1.86934673,
+      "output_bbox": [
+        416,
+        82,
+        837,
+        1181
+      ],
+      "pose_id": "thorne_vale_motion_029",
+      "rgba_sha256": "d60e9d49540cf03a7b1c8c40702575a0331aa4c0d17112672f807111beaae642",
+      "runtime_admitted": false,
+      "sequence_id": "g5",
+      "source_archive_id": "sprites-3",
+      "source_archive_sha256": "f9f7dfe99c1043e2008f58b25999e36888515f48fa64e337bde97a8af0bb9a52",
+      "source_bbox": [
+        1209,
+        164,
+        1434,
+        752
+      ],
+      "source_frame_index": 5,
+      "source_member": "sheet-thorne-vale-g5.png",
+      "source_member_sha256": "cdfa1751f26e6212c737aa7b16352f224242211594f4b3e89806afe4013e5ccc"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-030",
+      "normalization_scale": 1.86934673,
+      "output_bbox": [
+        392,
+        69,
+        863,
+        938
+      ],
+      "pose_id": "thorne_vale_motion_030",
+      "rgba_sha256": "6db5c21f6d3d70b47efae7948c7e02749176e06da88fb364fa81ebc3487e14c5",
+      "runtime_admitted": false,
+      "sequence_id": "g5",
+      "source_archive_id": "sprites-3",
+      "source_archive_sha256": "f9f7dfe99c1043e2008f58b25999e36888515f48fa64e337bde97a8af0bb9a52",
+      "source_bbox": [
+        1488,
+        157,
+        1740,
+        622
+      ],
+      "source_frame_index": 6,
+      "source_member": "sheet-thorne-vale-g5.png",
+      "source_member_sha256": "cdfa1751f26e6212c737aa7b16352f224242211594f4b3e89806afe4013e5ccc"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-031",
+      "normalization_scale": 1.86310518,
+      "output_bbox": [
+        425,
+        101,
+        829,
+        1178
+      ],
+      "pose_id": "thorne_vale_motion_031",
+      "rgba_sha256": "82e574db8b70fb8c2f24b62bab20b1214b180ff5c0aa0c90e8e6fb0186c15cac",
+      "runtime_admitted": false,
+      "sequence_id": "g6",
+      "source_archive_id": "sprites-3",
+      "source_archive_sha256": "f9f7dfe99c1043e2008f58b25999e36888515f48fa64e337bde97a8af0bb9a52",
+      "source_bbox": [
+        76,
+        116,
+        293,
+        694
+      ],
+      "source_frame_index": 1,
+      "source_member": "sheet-thorne-vale-g6.png",
+      "source_member_sha256": "a8acb551641c84c61eaf24d73506cc8fca47d2c0700e4fbf5428f91eb5682e91"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-032",
+      "normalization_scale": 1.86310518,
+      "output_bbox": [
+        406,
+        97,
+        848,
+        1185
+      ],
+      "pose_id": "thorne_vale_motion_032",
+      "rgba_sha256": "a2892aab6639c10c83ed4294d5889a890d55cfbe644a89e7a79cadcfb99997c6",
+      "runtime_admitted": false,
+      "sequence_id": "g6",
+      "source_archive_id": "sprites-3",
+      "source_archive_sha256": "f9f7dfe99c1043e2008f58b25999e36888515f48fa64e337bde97a8af0bb9a52",
+      "source_bbox": [
+        379,
+        114,
+        616,
+        698
+      ],
+      "source_frame_index": 2,
+      "source_member": "sheet-thorne-vale-g6.png",
+      "source_member_sha256": "a8acb551641c84c61eaf24d73506cc8fca47d2c0700e4fbf5428f91eb5682e91"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-033",
+      "normalization_scale": 1.86310518,
+      "output_bbox": [
+        418,
+        101,
+        837,
+        1182
+      ],
+      "pose_id": "thorne_vale_motion_033",
+      "rgba_sha256": "78f511a409829346499e30d77a632fb06938975df5ede818031e72aa1f7f793f",
+      "runtime_admitted": false,
+      "sequence_id": "g6",
+      "source_archive_id": "sprites-3",
+      "source_archive_sha256": "f9f7dfe99c1043e2008f58b25999e36888515f48fa64e337bde97a8af0bb9a52",
+      "source_bbox": [
+        704,
+        116,
+        929,
+        696
+      ],
+      "source_frame_index": 3,
+      "source_member": "sheet-thorne-vale-g6.png",
+      "source_member_sha256": "a8acb551641c84c61eaf24d73506cc8fca47d2c0700e4fbf5428f91eb5682e91"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-034",
+      "normalization_scale": 1.86310518,
+      "output_bbox": [
+        412,
+        101,
+        841,
+        1185
+      ],
+      "pose_id": "thorne_vale_motion_034",
+      "rgba_sha256": "f898dbbeff2616ab4a7326118db11d19931a3154ac4c6cefaf1974216b10ed9b",
+      "runtime_admitted": false,
+      "sequence_id": "g6",
+      "source_archive_id": "sprites-3",
+      "source_archive_sha256": "f9f7dfe99c1043e2008f58b25999e36888515f48fa64e337bde97a8af0bb9a52",
+      "source_bbox": [
+        1016,
+        116,
+        1246,
+        698
+      ],
+      "source_frame_index": 4,
+      "source_member": "sheet-thorne-vale-g6.png",
+      "source_member_sha256": "a8acb551641c84c61eaf24d73506cc8fca47d2c0700e4fbf5428f91eb5682e91"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-035",
+      "normalization_scale": 1.86310518,
+      "output_bbox": [
+        423,
+        101,
+        831,
+        1182
+      ],
+      "pose_id": "thorne_vale_motion_035",
+      "rgba_sha256": "41fcc75ad5e8754ebb000e78d896cf73674a88e5f06c7260853212e63727ff95",
+      "runtime_admitted": false,
+      "sequence_id": "g6",
+      "source_archive_id": "sprites-3",
+      "source_archive_sha256": "f9f7dfe99c1043e2008f58b25999e36888515f48fa64e337bde97a8af0bb9a52",
+      "source_bbox": [
+        1322,
+        116,
+        1541,
+        696
+      ],
+      "source_frame_index": 5,
+      "source_member": "sheet-thorne-vale-g6.png",
+      "source_member_sha256": "a8acb551641c84c61eaf24d73506cc8fca47d2c0700e4fbf5428f91eb5682e91"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-036",
+      "normalization_scale": 1.86310518,
+      "output_bbox": [
+        376,
+        69,
+        877,
+        937
+      ],
+      "pose_id": "thorne_vale_motion_036",
+      "rgba_sha256": "c2596f30c8ecbf1383ac82a70a2b89d4979b73227b2476810c4e3456d4a95d71",
+      "runtime_admitted": false,
+      "sequence_id": "g6",
+      "source_archive_id": "sprites-3",
+      "source_archive_sha256": "f9f7dfe99c1043e2008f58b25999e36888515f48fa64e337bde97a8af0bb9a52",
+      "source_bbox": [
+        1592,
+        99,
+        1861,
+        565
+      ],
+      "source_frame_index": 6,
+      "source_member": "sheet-thorne-vale-g6.png",
+      "source_member_sha256": "a8acb551641c84c61eaf24d73506cc8fca47d2c0700e4fbf5428f91eb5682e91"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "authorship": "authored_full_size_imagegen_v1",
+      "brief_id": "thorne-g7-receive",
+      "motion_slot_id": "motion-037",
+      "normalization_scale": 1.0,
+      "output_bbox": [
+        431,
+        100,
+        824,
+        1185
+      ],
+      "pose_id": "thorne_vale_motion_037",
+      "rgba_sha256": "b22be18aa78adf973a7e42831d4ca375cb8f3d222bedde43da686f70fa967ac1",
+      "runtime_admitted": false,
+      "sequence_id": "g7",
+      "source_bbox": [
+        431,
+        100,
+        824,
+        1185
+      ],
+      "source_frame_index": 1,
+      "source_height": 1254,
+      "source_path": "frames/thorne_vale_motion_037.png",
+      "source_rgba_sha256": "b22be18aa78adf973a7e42831d4ca375cb8f3d222bedde43da686f70fa967ac1",
+      "source_sha256": "2bbcaf9b1a93f84ce0d7b9b159a318c827c4ca3d36e91e10f26b9af2d434351c",
+      "source_width": 1254
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "authorship": "authored_full_size_imagegen_v1",
+      "brief_id": "thorne-g7-invite",
+      "motion_slot_id": "motion-038",
+      "normalization_scale": 1.0,
+      "output_bbox": [
+        407,
+        100,
+        847,
+        1185
+      ],
+      "pose_id": "thorne_vale_motion_038",
+      "rgba_sha256": "767626c9291b8cbf3799a12cdb84df4d60dbe22c058ee1b47fea489c6f4ae37f",
+      "runtime_admitted": false,
+      "sequence_id": "g7",
+      "source_bbox": [
+        407,
+        100,
+        847,
+        1185
+      ],
+      "source_frame_index": 2,
+      "source_height": 1254,
+      "source_path": "frames/thorne_vale_motion_038.png",
+      "source_rgba_sha256": "767626c9291b8cbf3799a12cdb84df4d60dbe22c058ee1b47fea489c6f4ae37f",
+      "source_sha256": "5bd1576fb98f2024686b38f0f2023f674d5ec472c80b69da5764c55e411682d6",
+      "source_width": 1254
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "authorship": "authored_full_size_imagegen_v1",
+      "brief_id": "thorne-g7-listen",
+      "motion_slot_id": "motion-039",
+      "normalization_scale": 1.0,
+      "output_bbox": [
+        432,
+        127,
+        822,
+        1185
+      ],
+      "pose_id": "thorne_vale_motion_039",
+      "rgba_sha256": "34963cfa8a9b9832b30290abc69a344f97d7879911da351a673478b2692f139e",
+      "runtime_admitted": false,
+      "sequence_id": "g7",
+      "source_bbox": [
+        432,
+        127,
+        822,
+        1185
+      ],
+      "source_frame_index": 3,
+      "source_height": 1254,
+      "source_path": "frames/thorne_vale_motion_039.png",
+      "source_rgba_sha256": "34963cfa8a9b9832b30290abc69a344f97d7879911da351a673478b2692f139e",
+      "source_sha256": "92276ef57c9f2e255b28471ec22c4bd36d2380ea86235db5c1af1f65a96087d9",
+      "source_width": 1254
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "authorship": "authored_full_size_imagegen_v1",
+      "brief_id": "thorne-g7-weigh",
+      "motion_slot_id": "motion-040",
+      "normalization_scale": 1.0,
+      "output_bbox": [
+        435,
+        100,
+        818,
+        1185
+      ],
+      "pose_id": "thorne_vale_motion_040",
+      "rgba_sha256": "d6dffed695de09470313d747e7773596f09a75ac200d441548a62a31468aee94",
+      "runtime_admitted": false,
+      "sequence_id": "g7",
+      "source_bbox": [
+        435,
+        100,
+        818,
+        1185
+      ],
+      "source_frame_index": 4,
+      "source_height": 1254,
+      "source_path": "frames/thorne_vale_motion_040.png",
+      "source_rgba_sha256": "d6dffed695de09470313d747e7773596f09a75ac200d441548a62a31468aee94",
+      "source_sha256": "6159bc4bbda24cf6cf37eedf6088f46ae1debe27fc609917e086a35885d978a3",
+      "source_width": 1254
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "authorship": "authored_full_size_imagegen_v1",
+      "brief_id": "thorne-g7-acknowledge",
+      "motion_slot_id": "motion-041",
+      "normalization_scale": 1.0,
+      "output_bbox": [
+        431,
+        100,
+        823,
+        1185
+      ],
+      "pose_id": "thorne_vale_motion_041",
+      "rgba_sha256": "15dc5d0b5b78fee76b03824ff5827ca74fdcf47af529d05c3586261194902f30",
+      "runtime_admitted": false,
+      "sequence_id": "g7",
+      "source_bbox": [
+        431,
+        100,
+        823,
+        1185
+      ],
+      "source_frame_index": 5,
+      "source_height": 1254,
+      "source_path": "frames/thorne_vale_motion_041.png",
+      "source_rgba_sha256": "15dc5d0b5b78fee76b03824ff5827ca74fdcf47af529d05c3586261194902f30",
+      "source_sha256": "ec5f38000f26f793b0d4c6a29618c4484126129baade7b94ca738c8d94e65bea",
+      "source_width": 1254
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "authorship": "authored_full_size_imagegen_v1",
+      "brief_id": "thorne-g7-reopen",
+      "motion_slot_id": "motion-042",
+      "normalization_scale": 1.0,
+      "output_bbox": [
+        391,
+        101,
+        862,
+        1185
+      ],
+      "pose_id": "thorne_vale_motion_042",
+      "rgba_sha256": "05a45276427dd43aa2f836d841b12eb1e8e693c9b2f693cce116f8aa197f6f08",
+      "runtime_admitted": false,
+      "sequence_id": "g7",
+      "source_bbox": [
+        391,
+        101,
+        862,
+        1185
+      ],
+      "source_frame_index": 6,
+      "source_height": 1254,
+      "source_path": "frames/thorne_vale_motion_042.png",
+      "source_rgba_sha256": "05a45276427dd43aa2f836d841b12eb1e8e693c9b2f693cce116f8aa197f6f08",
+      "source_sha256": "e725e79036b1e4a9fb6eca732bd5caaf5179ad6834a7d46c21e5c680479ae0b2",
+      "source_width": 1254
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "authorship": "authored_full_size_imagegen_v1",
+      "brief_id": "thorne-g8-ready-scroll",
+      "motion_slot_id": "motion-043",
+      "normalization_scale": 1.0,
+      "output_bbox": [
+        403,
+        101,
+        850,
+        1185
+      ],
+      "pose_id": "thorne_vale_motion_043",
+      "rgba_sha256": "33ed9216a519042e79337395cc7e5b263a94c7d99b01f7b3f81e19a58ac35346",
+      "runtime_admitted": false,
+      "sequence_id": "g8",
+      "source_bbox": [
+        403,
+        101,
+        850,
+        1185
+      ],
+      "source_frame_index": 1,
+      "source_height": 1254,
+      "source_path": "frames/thorne_vale_motion_043.png",
+      "source_rgba_sha256": "33ed9216a519042e79337395cc7e5b263a94c7d99b01f7b3f81e19a58ac35346",
+      "source_sha256": "984f54f43a12026c383651cc27c392d1d2d67e8247c0008857e7c69591278990",
+      "source_width": 1254
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "authorship": "authored_full_size_imagegen_v1",
+      "brief_id": "thorne-g8-retrieve-scroll",
+      "motion_slot_id": "motion-044",
+      "normalization_scale": 1.0,
+      "output_bbox": [
+        411,
+        99,
+        843,
+        1185
+      ],
+      "pose_id": "thorne_vale_motion_044",
+      "rgba_sha256": "8129d2dd323bd489a74a3b35bf938d7cdcd965e939c59ece9e3b6f85c5a92c1a",
+      "runtime_admitted": false,
+      "sequence_id": "g8",
+      "source_bbox": [
+        411,
+        99,
+        843,
+        1185
+      ],
+      "source_frame_index": 2,
+      "source_height": 1254,
+      "source_path": "frames/thorne_vale_motion_044.png",
+      "source_rgba_sha256": "8129d2dd323bd489a74a3b35bf938d7cdcd965e939c59ece9e3b6f85c5a92c1a",
+      "source_sha256": "e53b67e505f01b05702027ab9b19faae61a1a4882db0b8ad16dae234f4f539de",
+      "source_width": 1254
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "authorship": "authored_full_size_imagegen_v1",
+      "brief_id": "thorne-g8-open-charter",
+      "motion_slot_id": "motion-045",
+      "normalization_scale": 1.0,
+      "output_bbox": [
+        394,
+        86,
+        859,
+        1185
+      ],
+      "pose_id": "thorne_vale_motion_045",
+      "rgba_sha256": "a928a3dc6cf52749ed932c4cec6803ba4558a50ce16d66d078913bf8dd236b14",
+      "runtime_admitted": false,
+      "sequence_id": "g8",
+      "source_bbox": [
+        394,
+        86,
+        859,
+        1185
+      ],
+      "source_frame_index": 3,
+      "source_height": 1254,
+      "source_path": "frames/thorne_vale_motion_045.png",
+      "source_rgba_sha256": "a928a3dc6cf52749ed932c4cec6803ba4558a50ce16d66d078913bf8dd236b14",
+      "source_sha256": "831e8d7b9a44005093840b1b110b231de777171fe31c6a500af4f34deeb71a04",
+      "source_width": 1254
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "authorship": "authored_full_size_imagegen_v1",
+      "brief_id": "thorne-g8-verify-charter",
+      "motion_slot_id": "motion-046",
+      "normalization_scale": 1.0,
+      "output_bbox": [
+        358,
+        86,
+        896,
+        1185
+      ],
+      "pose_id": "thorne_vale_motion_046",
+      "rgba_sha256": "13b02dc0427f948d633fab2c38c35412980ac00c0b4087f1987d9780959234ba",
+      "runtime_admitted": false,
+      "sequence_id": "g8",
+      "source_bbox": [
+        358,
+        86,
+        896,
+        1185
+      ],
+      "source_frame_index": 4,
+      "source_height": 1254,
+      "source_path": "frames/thorne_vale_motion_046.png",
+      "source_rgba_sha256": "13b02dc0427f948d633fab2c38c35412980ac00c0b4087f1987d9780959234ba",
+      "source_sha256": "e3b1c8a73b8da6aafc7d1b67bb06a11e9c57fdb51aabc5e9419ae36ded12beb2",
+      "source_width": 1254
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "authorship": "authored_full_size_imagegen_v1",
+      "brief_id": "thorne-g8-close-charter",
+      "motion_slot_id": "motion-047",
+      "normalization_scale": 1.0,
+      "output_bbox": [
+        437,
+        124,
+        817,
+        1185
+      ],
+      "pose_id": "thorne_vale_motion_047",
+      "rgba_sha256": "1c1261f1ba0af23ba1db93a68ef6070846c343d73bc98f0b25769a90953a0d30",
+      "runtime_admitted": false,
+      "sequence_id": "g8",
+      "source_bbox": [
+        437,
+        124,
+        817,
+        1185
+      ],
+      "source_frame_index": 5,
+      "source_height": 1254,
+      "source_path": "frames/thorne_vale_motion_047.png",
+      "source_rgba_sha256": "1c1261f1ba0af23ba1db93a68ef6070846c343d73bc98f0b25769a90953a0d30",
+      "source_sha256": "3168952d1639024fbd0b086abe830e058b2c8fb22d7da0031152d24bf942a6b2",
+      "source_width": 1254
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "authorship": "authored_full_size_imagegen_v1",
+      "brief_id": "thorne-g8-commission",
+      "motion_slot_id": "motion-048",
+      "normalization_scale": 1.0,
+      "output_bbox": [
+        367,
+        136,
+        887,
+        1185
+      ],
+      "pose_id": "thorne_vale_motion_048",
+      "rgba_sha256": "800f38808ac73440d70ef80c8c0491ad5d5149694b67c6e120cf01c069aad971",
+      "runtime_admitted": false,
+      "sequence_id": "g8",
+      "source_bbox": [
+        367,
+        136,
+        887,
+        1185
+      ],
+      "source_frame_index": 6,
+      "source_height": 1254,
+      "source_path": "frames/thorne_vale_motion_048.png",
+      "source_rgba_sha256": "800f38808ac73440d70ef80c8c0491ad5d5149694b67c6e120cf01c069aad971",
+      "source_sha256": "cdb2f321cb08a1f7b828b471c198e483a1440f178286932dc4f35b9ec1577711",
+      "source_width": 1254
+    }
+  ],
+  "review_contact_sheet": {
+    "path": "source-metadata/thorne-vale/parity-motion-contact-sheet-v001.png",
+    "sha256": "e46389068cf2f9faa0374b2dbe84799b293a100214a64748c6d952e9866c8646"
+  },
+  "review_motion_contract": {
+    "path": "source-metadata/thorne-vale/review-motion-contract-v001.json",
+    "sha256": "1c403584f625f1e533538c516c7e00fc803b8dfbc8623e7b3379afd6149bb037"
+  },
+  "runtime_admitted": false,
+  "schema_version": 1,
+  "sequences": {
+    "g1": [
+      "thorne_vale_motion_001",
+      "thorne_vale_motion_002",
+      "thorne_vale_motion_003",
+      "thorne_vale_motion_004",
+      "thorne_vale_motion_005",
+      "thorne_vale_motion_006"
+    ],
+    "g2": [
+      "thorne_vale_motion_007",
+      "thorne_vale_motion_008",
+      "thorne_vale_motion_009",
+      "thorne_vale_motion_010",
+      "thorne_vale_motion_011",
+      "thorne_vale_motion_012"
+    ],
+    "g3": [
+      "thorne_vale_motion_013",
+      "thorne_vale_motion_014",
+      "thorne_vale_motion_015",
+      "thorne_vale_motion_016",
+      "thorne_vale_motion_017",
+      "thorne_vale_motion_018"
+    ],
+    "g4": [
+      "thorne_vale_motion_019",
+      "thorne_vale_motion_020",
+      "thorne_vale_motion_021",
+      "thorne_vale_motion_022",
+      "thorne_vale_motion_023",
+      "thorne_vale_motion_024"
+    ],
+    "g5": [
+      "thorne_vale_motion_025",
+      "thorne_vale_motion_026",
+      "thorne_vale_motion_027",
+      "thorne_vale_motion_028",
+      "thorne_vale_motion_029",
+      "thorne_vale_motion_030"
+    ],
+    "g6": [
+      "thorne_vale_motion_031",
+      "thorne_vale_motion_032",
+      "thorne_vale_motion_033",
+      "thorne_vale_motion_034",
+      "thorne_vale_motion_035",
+      "thorne_vale_motion_036"
+    ],
+    "g7": [
+      "thorne_vale_motion_037",
+      "thorne_vale_motion_038",
+      "thorne_vale_motion_039",
+      "thorne_vale_motion_040",
+      "thorne_vale_motion_041",
+      "thorne_vale_motion_042"
+    ],
+    "g8": [
+      "thorne_vale_motion_043",
+      "thorne_vale_motion_044",
+      "thorne_vale_motion_045",
+      "thorne_vale_motion_046",
+      "thorne_vale_motion_047",
+      "thorne_vale_motion_048"
+    ]
+  },
+  "status": "pending_visual_parity",
+  "target_pose_count": 48
+}

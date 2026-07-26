@@ -1,0 +1,108 @@
+{
+  "artifact_sha256": "787f6745558e2d33683c42ea84a7b81b5883ea8192862d921b917de1b26a67cc",
+  "candidate_pose_count": 48,
+  "character_id": "thorne-vale",
+  "checks": {
+    "all_authored_poses_projected_full_size": true,
+    "dual_foot_contacts_stable": true,
+    "g7_royal_counsel_verified": true,
+    "g8_evidence_briefing_verified": true,
+    "single_scroll_continuity_verified": true,
+    "transparent_backgrounds": true,
+    "uncropped_silhouettes": true
+  },
+  "library_index_sha256": "937abf76db2da70cb85d36237b9124a2e5dd59b3bfc19f240563e20a71abcde2",
+  "product_visual_approval": "pending",
+  "rejected_intermediates": [
+    {
+      "pose_id": "thorne_vale_motion_045",
+      "reason": "duplicate parchment remained in carrier"
+    },
+    {
+      "pose_ids": [
+        "thorne_vale_motion_047",
+        "thorne_vale_motion_048"
+      ],
+      "reason": "silhouettes exceeded canonical margin"
+    },
+    {
+      "pose_ids": [
+        "thorne_vale_motion_037",
+        "thorne_vale_motion_038",
+        "thorne_vale_motion_039",
+        "thorne_vale_motion_040",
+        "thorne_vale_motion_041",
+        "thorne_vale_motion_042",
+        "thorne_vale_motion_043",
+        "thorne_vale_motion_044",
+        "thorne_vale_motion_045",
+        "thorne_vale_motion_046",
+        "thorne_vale_motion_047",
+        "thorne_vale_motion_048"
+      ],
+      "reason": "thin hard-key magenta fringe visible against dark background"
+    }
+  ],
+  "review_projection": true,
+  "review_url": "http://127.0.0.1:8665/",
+  "runtime_admitted": false,
+  "schema_version": 1,
+  "screenshots": [
+    {
+      "path": "8665-side-by-side.png",
+      "sha256": "c98cb43b4d90fddccd455d211ab3822ab2dff15db62590358156506ad643a176"
+    },
+    {
+      "path": "browser-review/thorne_vale_motion_037.png",
+      "sha256": "d5017cf223e21036616984dd9ef73729b339b0cab071e0802f4b23dc50e58f3f"
+    },
+    {
+      "path": "browser-review/thorne_vale_motion_038.png",
+      "sha256": "0ce8509cd4f09a00d9684fcdf33bb14fdcb64d218b5cbd4f26a81b00391d4ca5"
+    },
+    {
+      "path": "browser-review/thorne_vale_motion_039.png",
+      "sha256": "ae60d9636e71fd08ea628861f3c77b4d51f39b52d7143d86b3687f56428075e3"
+    },
+    {
+      "path": "browser-review/thorne_vale_motion_040.png",
+      "sha256": "919b731ecc36a7594ff26bb4fa1008e701294b5ea38313c1c74937a567387a7e"
+    },
+    {
+      "path": "browser-review/thorne_vale_motion_041.png",
+      "sha256": "f574bb952bdf15f9c0e3f8c9db3ddd39261a15f211603f34b593155b8917242e"
+    },
+    {
+      "path": "browser-review/thorne_vale_motion_042.png",
+      "sha256": "48b77c67e4df1df5f7e618ad01728f12c5f39ff9b0c02b7178b3f2ee02c83aba"
+    },
+    {
+      "path": "browser-review/thorne_vale_motion_043.png",
+      "sha256": "204aa6e446136e2b660f8e6f64eb3bb11d57e65c6573601e4f9226eac99a4199"
+    },
+    {
+      "path": "browser-review/thorne_vale_motion_044.png",
+      "sha256": "62f7eb68046349e32a99d59bc4e213ec3c1c3575f4bdf0d18cb49b9cf2a5b554"
+    },
+    {
+      "path": "browser-review/thorne_vale_motion_045.png",
+      "sha256": "a7e491c27117ad0122bc2e69a2a4c921f64cef659f31b507c0a3bcd506ae3ae4"
+    },
+    {
+      "path": "browser-review/thorne_vale_motion_046.png",
+      "sha256": "23090ab98d35e13f3140ea09fb689987d335d4a2509b020763fe32396551c405"
+    },
+    {
+      "path": "browser-review/thorne_vale_motion_047.png",
+      "sha256": "9bf88af79074be40aec22b93dbc14717e60041d2f93d26d07a29625d94ef93d6"
+    },
+    {
+      "path": "browser-review/thorne_vale_motion_048.png",
+      "sha256": "078b94cfdb9f08d5b62d31616c08d207f22f285b11a81e1df81389f481f0887c"
+    },
+    {
+      "path": "browser-review/thorne-vale-g7-g8-browser-contact-sheet.png",
+      "sha256": "a8b8ff74eab8848c7b246b1d3d7cb4776f11ea96472ce87dbee17f7c61c237fc"
+    }
+  ]
+}

@@ -1,0 +1,353 @@
+{
+  "approval_state": "pending_visual_parity",
+  "authoring_brief_sha256": "b39fd0112ced1ab3ff57d0bebfcff2363209813678fbeaf6697406154235df5d",
+  "authority_manifest_sha256": "740f35730f4aa1e6c6ef96be80115c5b0e117397f792d57fdf5360452bbe78c8",
+  "canonicalization": "integer_translation_only_no_resampling",
+  "character_id": "thorne-vale",
+  "existing_artifact_sha256": "c48f3ccaea95580c41ca70dd6a9a3fd43fe232278875db3ccd02e9406f84cb82",
+  "existing_reconstruction_sha256": "7e4161b926bc140a6cb9ad9a3204739ba6696607b55033fa9e6c7e08336a87fe",
+  "generation_method": "built_in_imagegen_flat_chroma_then_local_alpha_extraction",
+  "profile_id": "wizardjoe_hd_alpha_1254_v001",
+  "runtime_admitted": false,
+  "schema_version": 1,
+  "sequences": {
+    "g7": {
+      "fps": 8,
+      "frames": [
+        {
+          "alpha_extracted_path": "alpha-extracted/thorne_vale_motion_037.png",
+          "alpha_extracted_sha256": "5bdb8d5ffa345a44216adfe8ec63d2b64abf59fe17985f30fde6340c865917b3",
+          "authorship": "authored_full_size_imagegen_v1",
+          "brief_id": "thorne-g7-receive",
+          "canonical_bbox": [
+            431,
+            100,
+            824,
+            1185
+          ],
+          "chroma_source_path": "chroma-source/thorne_vale_motion_037.png",
+          "chroma_source_sha256": "079b8ba2880680877d61dec5a2425b84697e07ff48141b91adeead0c244a6541",
+          "continuity": "Clean front-facing entry from planted idle with a soft asymmetrical stance, direct neutral attention, and both carried props fixed in place.",
+          "forbidden": "Exact duplicate of motion 025, walking stride, raised finger, crown drift, missing scroll carrier, or identity drift.",
+          "frame_index": 1,
+          "pose_id": "thorne_vale_motion_037",
+          "pose_summary": "Audience-ready planted receipt with restrained royal attention.",
+          "rgba_sha256": "b22be18aa78adf973a7e42831d4ca375cb8f3d222bedde43da686f70fa967ac1",
+          "slot_id": "motion-037",
+          "source_path": "frames/thorne_vale_motion_037.png",
+          "source_sha256": "2bbcaf9b1a93f84ce0d7b9b159a318c827c4ca3d36e91e10f26b9af2d434351c"
+        },
+        {
+          "alpha_extracted_path": "alpha-extracted/thorne_vale_motion_038.png",
+          "alpha_extracted_sha256": "efd32e92481fd75eea5f1b1e0ac7e79711520c8963d891188881393774db8837",
+          "authorship": "authored_full_size_imagegen_v1",
+          "brief_id": "thorne-g7-invite",
+          "canonical_bbox": [
+            407,
+            100,
+            847,
+            1185
+          ],
+          "chroma_source_path": "chroma-source/thorne_vale_motion_038.png",
+          "chroma_source_sha256": "15309106131d89150b622303015d6515da1f6cc783ca6b19b5cb028e9b373c61",
+          "continuity": "His left hand opens low toward the speaker while the elbow stays near his torso, both boots stay planted, and the scroll and right-hip sheath remain untouched.",
+          "forbidden": "Wave, broad sales-pitch arm, pointing finger, foot slide, crown tilt, or detached hand.",
+          "frame_index": 2,
+          "pose_id": "thorne_vale_motion_038",
+          "pose_summary": "Low open-palm invitation for the speaker to continue.",
+          "rgba_sha256": "767626c9291b8cbf3799a12cdb84df4d60dbe22c058ee1b47fea489c6f4ae37f",
+          "slot_id": "motion-038",
+          "source_path": "frames/thorne_vale_motion_038.png",
+          "source_sha256": "5bd1576fb98f2024686b38f0f2023f674d5ec472c80b69da5764c55e411682d6"
+        },
+        {
+          "alpha_extracted_path": "alpha-extracted/thorne_vale_motion_039.png",
+          "alpha_extracted_sha256": "27f0a82d045f30728e5786d91d04899f84d6a62314f2c4507fbd8851dcbcd03d",
+          "authorship": "authored_full_size_imagegen_v1",
+          "brief_id": "thorne-g7-listen",
+          "canonical_bbox": [
+            432,
+            127,
+            822,
+            1185
+          ],
+          "chroma_source_path": "chroma-source/thorne_vale_motion_039.png",
+          "chroma_source_sha256": "4cca6e62786246d9f52f2ef153ffda8916fd7d0e6b4b4098e80c255f5d8dcb5a",
+          "continuity": "The invitation hand retracts as his head, shoulders, and upper chest incline slightly into active listening without moving the root.",
+          "forbidden": "Bow, crouch, crossed feet, hand on scroll, crown wobble, or exaggerated lean.",
+          "frame_index": 3,
+          "pose_id": "thorne_vale_motion_039",
+          "pose_summary": "Restrained active-listening incline with steady eye contact.",
+          "rgba_sha256": "34963cfa8a9b9832b30290abc69a344f97d7879911da351a673478b2692f139e",
+          "slot_id": "motion-039",
+          "source_path": "frames/thorne_vale_motion_039.png",
+          "source_sha256": "92276ef57c9f2e255b28471ec22c4bd36d2380ea86235db5c1af1f65a96087d9"
+        },
+        {
+          "alpha_extracted_path": "alpha-extracted/thorne_vale_motion_040.png",
+          "alpha_extracted_sha256": "6dcffd3ff932d752b0f5257817becfe85cf7427cb140f6d9e32ea26bc11fdffe",
+          "authorship": "authored_full_size_imagegen_v1",
+          "brief_id": "thorne-g7-weigh",
+          "canonical_bbox": [
+            435,
+            100,
+            818,
+            1185
+          ],
+          "chroma_source_path": "chroma-source/thorne_vale_motion_040.png",
+          "chroma_source_sha256": "57015120eb4ac7445ae225a11632705afdfd36e974c519ac5fa3dc823cb1cf2f",
+          "continuity": "His left knuckles rise near the mustache and chin as his gaze lowers briefly, while the crown remains level and all carried gear stays attached.",
+          "forbidden": "Hand covering the eyes, crown contact, hostile fist, scroll removal, foot movement, or face distortion.",
+          "frame_index": 4,
+          "pose_id": "thorne_vale_motion_040",
+          "pose_summary": "Quiet chin-level deliberation while weighing the petition.",
+          "rgba_sha256": "d6dffed695de09470313d747e7773596f09a75ac200d441548a62a31468aee94",
+          "slot_id": "motion-040",
+          "source_path": "frames/thorne_vale_motion_040.png",
+          "source_sha256": "6159bc4bbda24cf6cf37eedf6088f46ae1debe27fc609917e086a35885d978a3"
+        },
+        {
+          "alpha_extracted_path": "alpha-extracted/thorne_vale_motion_041.png",
+          "alpha_extracted_sha256": "f01f1f43e5ec6149c2a5c2cfda09f361411bec492895555b7789709eba3a7ad6",
+          "authorship": "authored_full_size_imagegen_v1",
+          "brief_id": "thorne-g7-acknowledge",
+          "canonical_bbox": [
+            431,
+            100,
+            823,
+            1185
+          ],
+          "chroma_source_path": "chroma-source/thorne_vale_motion_041.png",
+          "chroma_source_sha256": "40a767bbb82159ad558140f7d1c015f8a29cb6861b4b55a8dd133eb357ca6e1a",
+          "continuity": "The same hand settles over his sternum as eye contact returns, communicating acknowledgment rather than an oath.",
+          "forbidden": "Raised arm, pledge pose, salute, broad smile, crown drift, or prop movement.",
+          "frame_index": 5,
+          "pose_id": "thorne_vale_motion_041",
+          "pose_summary": "Measured hand-to-sternum acknowledgment.",
+          "rgba_sha256": "15dc5d0b5b78fee76b03824ff5827ca74fdcf47af529d05c3586261194902f30",
+          "slot_id": "motion-041",
+          "source_path": "frames/thorne_vale_motion_041.png",
+          "source_sha256": "ec5f38000f26f793b0d4c6a29618c4484126129baade7b94ca738c8d94e65bea"
+        },
+        {
+          "alpha_extracted_path": "alpha-extracted/thorne_vale_motion_042.png",
+          "alpha_extracted_sha256": "61c32095009f1a13a996d27c0f8db639de2714981553b801ca3d98c5f1e22234",
+          "authorship": "authored_full_size_imagegen_v1",
+          "brief_id": "thorne-g7-reopen",
+          "canonical_bbox": [
+            391,
+            101,
+            862,
+            1185
+          ],
+          "chroma_source_path": "chroma-source/thorne_vale_motion_042.png",
+          "chroma_source_sha256": "27a4e92cb33e1fbb51702bb198f2fb20d26bc5df38862911abb6fc2c3a932dd5",
+          "continuity": "His hand releases into a low quiet open palm and his posture settles back toward the audience-ready stance with both boots on the original baseline.",
+          "forbidden": "Exact idle duplicate, wave, high proclamation, root displacement, missing prop, or closed hostile posture.",
+          "frame_index": 6,
+          "pose_id": "thorne_vale_motion_042",
+          "pose_summary": "Low open-palm recovery that reopens the floor.",
+          "rgba_sha256": "05a45276427dd43aa2f836d841b12eb1e8e693c9b2f693cce116f8aa197f6f08",
+          "slot_id": "motion-042",
+          "source_path": "frames/thorne_vale_motion_042.png",
+          "source_sha256": "e725e79036b1e4a9fb6eca732bd5caaf5179ad6834a7d46c21e5c680479ae0b2"
+        }
+      ],
+      "intent": "receive_invite_listen_weigh_acknowledge_reopen",
+      "loop": true,
+      "motion_contract": {
+        "entry_handoffs": [
+          "front_idle"
+        ],
+        "exit_handoffs": [
+          "front_idle",
+          "g8"
+        ],
+        "family": "royal_counsel",
+        "hold_frame_indices": [
+          3,
+          5
+        ],
+        "interrupt_policy": "marker_safe",
+        "interruptible_frame_indices": [
+          1,
+          3,
+          6
+        ],
+        "loop_mode": "loop",
+        "root_policy": "fixed",
+        "support_policy": "dual_foot_grounded"
+      }
+    },
+    "g8": {
+      "fps": 8,
+      "frames": [
+        {
+          "alpha_extracted_path": "alpha-extracted/thorne_vale_motion_043.png",
+          "alpha_extracted_sha256": "8575d16e4855e8a7d3069ebe2a0b614ffe7a50bff74dc888160d7ff09abca76a",
+          "authorship": "authored_full_size_imagegen_v1",
+          "brief_id": "thorne-g8-ready-scroll",
+          "canonical_bbox": [
+            403,
+            101,
+            850,
+            1185
+          ],
+          "chroma_source_path": "chroma-source/thorne_vale_motion_043.png",
+          "chroma_source_sha256": "7eee0f1765b81cb7de3dc4ee0d0aa8293c2b37c57afd24c1f3bb58684bd3a531",
+          "continuity": "Enters from front idle or frame 042 as his left hand moves toward the single rolled scroll at his left hip while both feet remain planted.",
+          "forbidden": "Exact idle duplicate, extra scroll, hand on right-hip sheath, airborne foot, crown drift, or missing carrier.",
+          "frame_index": 1,
+          "pose_id": "thorne_vale_motion_043",
+          "pose_summary": "Calm frontal readiness with one hand moving to the carried scroll.",
+          "rgba_sha256": "33ed9216a519042e79337395cc7e5b263a94c7d99b01f7b3f81e19a58ac35346",
+          "slot_id": "motion-043",
+          "source_path": "frames/thorne_vale_motion_043.png",
+          "source_sha256": "984f54f43a12026c383651cc27c392d1d2d67e8247c0008857e7c69591278990"
+        },
+        {
+          "alpha_extracted_path": "alpha-extracted/thorne_vale_motion_044.png",
+          "alpha_extracted_sha256": "256cc22dcca7687ab23060e162d214e200c00dfaa77dc3a31cadb32e82189eba",
+          "authorship": "authored_full_size_imagegen_v1",
+          "brief_id": "thorne-g8-retrieve-scroll",
+          "canonical_bbox": [
+            411,
+            99,
+            843,
+            1185
+          ],
+          "chroma_source_path": "chroma-source/thorne_vale_motion_044.png",
+          "chroma_source_sha256": "b3e65d62976c59b2f01cbe0010d42627e71b5cf75cec8ab13443dce9169e01b2",
+          "continuity": "The single rolled scroll is removed from its left-hip carrier and raised to sternum height, leaving that carrier visibly empty.",
+          "forbidden": "Duplicated scroll, open document, changed right-hip sheath, foot slide, crown tilt, or teleporting hand.",
+          "frame_index": 2,
+          "pose_id": "thorne_vale_motion_044",
+          "pose_summary": "Single rolled scroll retrieved and raised to sternum height.",
+          "rgba_sha256": "8129d2dd323bd489a74a3b35bf938d7cdcd965e939c59ece9e3b6f85c5a92c1a",
+          "slot_id": "motion-044",
+          "source_path": "frames/thorne_vale_motion_044.png",
+          "source_sha256": "e53b67e505f01b05702027ab9b19faae61a1a4882db0b8ad16dae234f4f539de"
+        },
+        {
+          "alpha_extracted_path": "alpha-extracted/thorne_vale_motion_045.png",
+          "alpha_extracted_sha256": "24fbd5559f5265c022c5a09853f994b4b6c8f523136dd62f9dd923de475fb6ef",
+          "authorship": "authored_full_size_imagegen_v1",
+          "brief_id": "thorne-g8-open-charter",
+          "canonical_bbox": [
+            394,
+            86,
+            859,
+            1185
+          ],
+          "chroma_source_path": "chroma-source/thorne_vale_motion_045.png",
+          "chroma_source_sha256": "a70f6a0d557728c4468ee937dc867d61d53224fa0cba72dd936bc1ac87549694",
+          "continuity": "The scroll unfurls horizontally between both hands at lower-chest height as his gaze drops to inspect it and both boots remain planted.",
+          "forbidden": "Book, map board, duplicated roll, text, floating document, face occlusion, or prop color drift.",
+          "frame_index": 3,
+          "pose_id": "thorne_vale_motion_045",
+          "pose_summary": "Open horizontal charter inspection held with both hands.",
+          "rgba_sha256": "a928a3dc6cf52749ed932c4cec6803ba4558a50ce16d66d078913bf8dd236b14",
+          "slot_id": "motion-045",
+          "source_path": "frames/thorne_vale_motion_045.png",
+          "source_sha256": "831e8d7b9a44005093840b1b110b231de777171fe31c6a500af4f34deeb71a04"
+        },
+        {
+          "alpha_extracted_path": "alpha-extracted/thorne_vale_motion_046.png",
+          "alpha_extracted_sha256": "605a5cfd08638ae3cd8b7df9bc9607fad5b96e858c3b2548fead3728876f3b4d",
+          "authorship": "authored_full_size_imagegen_v1",
+          "brief_id": "thorne-g8-verify-charter",
+          "canonical_bbox": [
+            358,
+            86,
+            896,
+            1185
+          ],
+          "chroma_source_path": "chroma-source/thorne_vale_motion_046.png",
+          "chroma_source_sha256": "ab1f2fb30292fc01dc126069e0f76bc30861ac445f0680abcb3cc922672cbb28",
+          "continuity": "His left hand supports the open charter while his right index marks one precise location on the document and his gaze follows.",
+          "forbidden": "Pointing at the viewer, floating paper, second document, moved sheath, root movement, or face occlusion.",
+          "frame_index": 4,
+          "pose_id": "thorne_vale_motion_046",
+          "pose_summary": "Precise location verification on the supported open charter.",
+          "rgba_sha256": "13b02dc0427f948d633fab2c38c35412980ac00c0b4087f1987d9780959234ba",
+          "slot_id": "motion-046",
+          "source_path": "frames/thorne_vale_motion_046.png",
+          "source_sha256": "e3b1c8a73b8da6aafc7d1b67bb06a11e9c57fdb51aabc5e9419ae36ded12beb2"
+        },
+        {
+          "alpha_extracted_path": "alpha-extracted/thorne_vale_motion_047.png",
+          "alpha_extracted_sha256": "cdca4a12eb553bfe31f89716a39eea3258288803d949dfe41fb693336d61b020",
+          "authorship": "authored_full_size_imagegen_v1",
+          "brief_id": "thorne-g8-close-charter",
+          "canonical_bbox": [
+            437,
+            124,
+            817,
+            1185
+          ],
+          "chroma_source_path": "chroma-source/thorne_vale_motion_047.png",
+          "chroma_source_sha256": "0557cb586a6b3a14b73506da03ec6607a3a5ce87ec3262abf085bb9064a24425",
+          "continuity": "The charter closes back into one roll at sternum height as he restores eye contact, with the left-hip carrier still empty.",
+          "forbidden": "Instantly stowed scroll, duplicated roll, broad arm spread, walking stride, crown drift, or hand discontinuity.",
+          "frame_index": 5,
+          "pose_id": "thorne_vale_motion_047",
+          "pose_summary": "Closed single scroll held at sternum height after verification.",
+          "rgba_sha256": "1c1261f1ba0af23ba1db93a68ef6070846c343d73bc98f0b25769a90953a0d30",
+          "slot_id": "motion-047",
+          "source_path": "frames/thorne_vale_motion_047.png",
+          "source_sha256": "3168952d1639024fbd0b086abe830e058b2c8fb22d7da0031152d24bf942a6b2"
+        },
+        {
+          "alpha_extracted_path": "alpha-extracted/thorne_vale_motion_048.png",
+          "alpha_extracted_sha256": "4e69cf24db813b19787fc3209b9e2621467de498d472e0add630103acb327e3f",
+          "authorship": "authored_full_size_imagegen_v1",
+          "brief_id": "thorne-g8-commission",
+          "canonical_bbox": [
+            367,
+            136,
+            887,
+            1185
+          ],
+          "chroma_source_path": "chroma-source/thorne_vale_motion_048.png",
+          "chroma_source_sha256": "016bc7be49a0b9b3d652437cd4a450a3e7e91cde5669ea44f820c36152557a9e",
+          "continuity": "The scroll is restored to its left-hip carrier and one low open hand commissions the next step during a restrained grounded quarter-right handoff.",
+          "forbidden": "Visible second scroll, wave, exact idle duplicate, airborne foot, sword draw, or abrupt profile snap.",
+          "frame_index": 6,
+          "pose_id": "thorne_vale_motion_048",
+          "pose_summary": "Grounded quarter-right commission after the scroll is restored.",
+          "rgba_sha256": "800f38808ac73440d70ef80c8c0491ad5d5149694b67c6e120cf01c069aad971",
+          "slot_id": "motion-048",
+          "source_path": "frames/thorne_vale_motion_048.png",
+          "source_sha256": "cdb2f321cb08a1f7b828b471c198e483a1440f178286932dc4f35b9ec1577711"
+        }
+      ],
+      "intent": "retrieve_open_inspect_verify_close_commission",
+      "loop": false,
+      "motion_contract": {
+        "entry_handoffs": [
+          "front_idle",
+          "g7"
+        ],
+        "exit_handoffs": [
+          "front_idle",
+          "profile_walk"
+        ],
+        "family": "evidence_briefing",
+        "hold_frame_indices": [
+          3,
+          4,
+          6
+        ],
+        "interrupt_policy": "marker_safe",
+        "interruptible_frame_indices": [
+          1,
+          5,
+          6
+        ],
+        "loop_mode": "hold_last",
+        "root_policy": "fixed",
+        "support_policy": "dual_foot_grounded"
+      }
+    }
+  }
+}
