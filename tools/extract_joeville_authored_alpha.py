@@ -19,6 +19,16 @@ def _sha256(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
+def _receipt_path(path: Path, path_root: Path | None) -> str:
+    resolved = path.resolve()
+    if path_root is None:
+        return str(resolved)
+    try:
+        return str(resolved.relative_to(path_root.resolve()))
+    except ValueError as exc:
+        raise ValueError("receipt path escapes path_root") from exc
+
+
 def _sample_border_key(image: Image.Image) -> tuple[int, int, int]:
     width, height = image.size
     band = max(1, min(width, height, 6))
@@ -47,6 +57,7 @@ def extract_alpha(
     edge_contract: int = 1,
     canvas_size: tuple[int, int] | None = None,
     force: bool = False,
+    receipt_path_root: Path | None = None,
 ) -> dict[str, Any]:
     if not 0 <= tolerance <= 255:
         raise ValueError("tolerance must be between 0 and 255")
@@ -119,9 +130,11 @@ def extract_alpha(
     temporary.replace(destination_path)
     return {
         "schema_version": 1,
-        "source_path": str(source_path.resolve()),
+        "source_path": _receipt_path(source_path, receipt_path_root),
         "source_sha256": _sha256(source_path),
-        "destination_path": str(destination_path.resolve()),
+        "destination_path": _receipt_path(
+            destination_path, receipt_path_root
+        ),
         "destination_sha256": _sha256(destination_path),
         "destination_rgba_sha256": hashlib.sha256(
             image.tobytes()
@@ -148,6 +161,11 @@ def _parse_args() -> argparse.Namespace:
     parser.add_argument("--canvas-size", type=int, default=1254)
     parser.add_argument("--force", action="store_true")
     parser.add_argument("--receipt", type=Path)
+    parser.add_argument(
+        "--receipt-path-root",
+        type=Path,
+        help="Store receipt paths relative to this root.",
+    )
     return parser.parse_args()
 
 
@@ -160,6 +178,11 @@ def main() -> int:
         edge_contract=args.edge_contract,
         canvas_size=(args.canvas_size, args.canvas_size),
         force=args.force,
+        receipt_path_root=(
+            args.receipt_path_root.resolve()
+            if args.receipt_path_root is not None
+            else None
+        ),
     )
     payload = json.dumps(receipt, indent=2, sort_keys=True) + "\n"
     if args.receipt is not None:

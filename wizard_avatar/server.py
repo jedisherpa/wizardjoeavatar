@@ -220,6 +220,20 @@ def create_app(
             raise ValueError(
                 "alternate HD review library cannot be runtime-admitted"
             )
+        if any(
+            bool(shard.get("runtime_admitted"))
+            for shard in review_index.get("shards", ())
+        ):
+            raise ValueError(
+                "alternate HD review shard cannot be runtime-admitted"
+            )
+        if any(
+            bool(sequence.get("runtime_admitted"))
+            for sequence in review_index.get("sequences", {}).values()
+        ):
+            raise ValueError(
+                "alternate HD review sequence cannot be runtime-admitted"
+            )
         review_index_sha256 = sha256_path(review_index_path)
         hd_index_record = {
             "path": str(review_index_path),
@@ -228,6 +242,13 @@ def create_app(
         hd_library = _load_hd_pose_library(
             str(review_index_path), review_index_sha256
         )
+        if any(
+            bool(artifact.header.get("provenance", {}).get("runtime_admitted"))
+            for artifact in hd_library.artifacts.values()
+        ):
+            raise ValueError(
+                "alternate HD review artifact cannot be runtime-admitted"
+            )
     if companion_mode is None:
         companion_mode = os.environ.get("WIZARD_COMPANION_MODE", "").lower() in {
             "1", "true", "yes", "on"

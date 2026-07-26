@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "character_id": "liana",
+  "gate": "supplemental_identity_intake",
+  "observer_url": "http://127.0.0.1:8665/",
+  "observer_health": {
+    "review_character_id": "liana",
+    "review_projection": true,
+    "runtime_admitted": false
+  },
+  "identity_pose_id": "liana_identity_front_v001",
+  "identity_rgba_sha256": "69feb97676636b20ba11dfe022002947532eec6d8d29edf4af423215e9651437",
+  "artifact_sha256": "9b186dd922e7388ff4f98fda74647d9b699221765e278ad6dafda65ce26e27b3",
+  "library_index_sha256": "2a23b5907a11c107d7c5f38b139b7d731808bf7b0a074438dcbc73b7d06962cf",
+  "build_receipt_sha256": "157dc8bd203d4221e8c7711278dffef33ad3f3af6e4208aa76a394461cf2b7c3",
+  "liora_source_artifact_sha256": "7b98b6ce927ab24457920b7e3d15a0b87e3e3d456a3af11ab339ada160ca03a7",
+  "observer_capture": {
+    "path": "observer-review.jpg",
+    "sha256": "4c4f0e6f90add7c028224c96148058c92fab1a1362e72b0777a75f3a5e9aa8b1"
+  },
+  "findings": [
+    "Liana is visually distinct from Liora through athletic wardrobe and silhouette.",
+    "Liora's hoodie, plaid trousers, and blue book do not appear.",
+    "No bicycle, helmet, mat, bottle, herbs, jewelry, text, logos, or other props appear.",
+    "The complete hair and body silhouette fits the canonical frame without crop damage.",
+    "The projector paints the compiled RGBA pixel graph; the PNG is provenance input only."
+  ],
+  "approval_state": "pending_user_identity_approval",
+  "runtime_admitted": false
+}

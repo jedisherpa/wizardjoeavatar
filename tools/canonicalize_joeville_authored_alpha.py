@@ -24,12 +24,23 @@ def _sha256(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
+def _receipt_path(path: Path, path_root: Path | None) -> str:
+    resolved = path.resolve()
+    if path_root is None:
+        return str(resolved)
+    try:
+        return str(resolved.relative_to(path_root.resolve()))
+    except ValueError as exc:
+        raise ValueError("receipt path escapes path_root") from exc
+
+
 def canonicalize(
     *,
     source_path: Path,
     destination_path: Path,
     authority_path: Path = DEFAULT_AUTHORITY,
     fit_oversize: bool = False,
+    receipt_path_root: Path | None = None,
 ) -> dict[str, Any]:
     authority = json.loads(authority_path.read_text(encoding="utf-8"))
     profile = authority["master_profile"]
@@ -110,9 +121,11 @@ def canonicalize(
         "schema_version": 1,
         "profile_id": profile["profile_id"],
         "authority_manifest_sha256": _sha256(authority_path),
-        "source_path": str(source_path),
+        "source_path": _receipt_path(source_path, receipt_path_root),
         "source_sha256": _sha256(source_path),
-        "destination_path": str(destination_path),
+        "destination_path": _receipt_path(
+            destination_path, receipt_path_root
+        ),
         "destination_sha256": _sha256(destination_path),
         "destination_rgba_sha256": hashlib.sha256(
             canvas.tobytes()
@@ -150,6 +163,11 @@ def _parse_args() -> argparse.Namespace:
         type=Path,
         help="Optional JSON path for the canonicalization receipt.",
     )
+    parser.add_argument(
+        "--receipt-path-root",
+        type=Path,
+        help="Store receipt paths relative to this root.",
+    )
     return parser.parse_args()
 
 
@@ -160,6 +178,11 @@ def main() -> int:
         destination_path=args.destination.resolve(),
         authority_path=args.authority.resolve(),
         fit_oversize=args.fit_oversize,
+        receipt_path_root=(
+            args.receipt_path_root.resolve()
+            if args.receipt_path_root is not None
+            else None
+        ),
     )
     if args.receipt is not None:
         receipt_path = args.receipt.resolve()

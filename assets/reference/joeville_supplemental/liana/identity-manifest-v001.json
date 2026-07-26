@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "character_id": "liana",
+  "display_name": "Liana",
+  "roster_state": "supplemental_authored_character",
+  "derived_identity": {
+    "relationship": "close counterpart; Liora remains a separate unchanged character",
+    "reference_character_id": "liora-kane",
+    "reference_path": "../../joeville_48_parity/compiled/liora-kane/liora-kane-candidate-source-motion-v001.wjpose",
+    "reference_pose_id": "liora_kane_motion_025",
+    "reference_export_sha256": "652a65fdeb457938376c2bbb7cc6df2e3f88d39e43510d89197d6ed1bd920f4b"
+  },
+  "identity_invariants": {
+    "preserve": [
+      "warm face and skin tone",
+      "long voluminous brown curls",
+      "adult voxel proportions",
+      "friendly grounded presence"
+    ],
+    "distinguish": [
+      "deep teal broad-strap sports bra",
+      "high-waisted charcoal yoga leggings with alpine-blue side detail",
+      "gray-blue trail-training shoes",
+      "athletic mountain and yoga movement vocabulary"
+    ],
+    "forbidden": [
+      "blue book",
+      "gray hoodie",
+      "plaid trousers",
+      "bicycle",
+      "helmet",
+      "yoga mat",
+      "bottle",
+      "herbs",
+      "jewelry",
+      "text",
+      "logos",
+      "any other prop"
+    ]
+  },
+  "profile": {
+    "profile_id": "wizardjoe_hd_alpha_1254_v001",
+    "canvas_width": 1254,
+    "canvas_height": 1254,
+    "baseline_y": 1185,
+    "minimum_margin": 69,
+    "color_space": "sRGB",
+    "alpha_mode": "straight"
+  },
+  "identity_pose": {
+    "pose_id": "liana_identity_front_v001",
+    "path": "authored-source/frames/liana_identity_front_v001.png",
+    "sha256": "1579f0adb7f4c69184c8d45011a201c7fb3369d09af183a1d2f384acc07ea886",
+    "rgba_sha256": "69feb97676636b20ba11dfe022002947532eec6d8d29edf4af423215e9651437",
+    "canonical_bbox": [428, 69, 827, 1185],
+    "approval_state": "pending_identity_review"
+  },
+  "receipt_chain": {
+    "alpha_extraction": {
+      "path": "authored-source/alpha-extraction-receipts/liana_identity_front_v001.json",
+      "sha256": "a04ffccb93666891b56a232075e7c25fc10d91091038519b92998c655f57ee9d"
+    },
+    "canonicalization": {
+      "path": "authored-source/canonicalization-receipts/liana_identity_front_v001.json",
+      "sha256": "ce9ed4e487347c6914b9a8066a568ef2f3e63a44f53f0ea0475725c23122857c"
+    }
+  },
+  "generation": {
+    "method": "built_in_imagegen_identity_preserve_flat_chroma_then_local_alpha_extraction",
+    "chroma_source_path": "authored-source/chroma-source/liana_identity_front_v001.png",
+    "chroma_source_sha256": "7f908a8d786107de4d1193f67e1ab18e2e0e541d6bdc0915a331746f3e021a48"
+  },
+  "review_projection": true,
+  "runtime_admitted": false,
+  "approval_state": "pending_identity_review"
+}

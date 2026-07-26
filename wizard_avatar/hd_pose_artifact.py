@@ -165,8 +165,16 @@ class HDPoseLibrary:
         self.artifacts: dict[str, HDPoseArtifact] = {}
         self.pose_shards: dict[str, str] = {}
         self.pose_metadata: dict[str, dict[str, object]] = {}
+        index_root = self.index_path.parent.resolve()
         for shard in self.index["shards"]:
-            path = self.index_path.parent / shard["path"]
+            relative_path = Path(str(shard["path"]))
+            if relative_path.is_absolute():
+                raise ValueError("HD pose shard path must be relative")
+            path = (index_root / relative_path).resolve()
+            try:
+                path.relative_to(index_root)
+            except ValueError as exc:
+                raise ValueError("HD pose shard path escapes library root") from exc
             digest = sha256_path(path)
             if digest != shard["sha256"]:
                 raise ValueError(f"HD pose shard checksum mismatch: {shard['shard_id']}")

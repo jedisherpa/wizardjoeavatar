@@ -1,0 +1,20 @@
+{
+  "artifact": {
+    "bytes": 789162,
+    "path": "liana-identity-review-v001.wjpose",
+    "pose_count": 1,
+    "sha256": "9b186dd922e7388ff4f98fda74647d9b699221765e278ad6dafda65ce26e27b3"
+  },
+  "character_id": "liana",
+  "identity_manifest": {
+    "path": "assets/reference/joeville_supplemental/liana/identity-manifest-v001.json",
+    "sha256": "6eab1d307ce4af07871bf84732b1856454533b65b36848cfa1bf5a4bcb718e7c"
+  },
+  "library_index": {
+    "path": "library-index.json",
+    "sha256": "2a23b5907a11c107d7c5f38b139b7d731808bf7b0a074438dcbc73b7d06962cf"
+  },
+  "review_projection": true,
+  "runtime_admitted": false,
+  "schema_version": 1
+}

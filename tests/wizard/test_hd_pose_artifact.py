@@ -88,6 +88,35 @@ class HDPoseArtifactTests(unittest.TestCase):
                 hashlib.sha256(artifact_path.read_bytes()).hexdigest(),
             )
 
+    def test_sharded_library_rejects_path_escape(self):
+        profile = {"profile_id": "test", "canvas_width": 8, "canvas_height": 8}
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            index_path = root / "library-index.json"
+            index_path.write_text(
+                json.dumps(
+                    {
+                        "profile": profile,
+                        "pose_count": 1,
+                        "shards": [
+                            {
+                                "shard_id": "escaped",
+                                "path": "../escaped.wjpose",
+                                "sha256": "0" * 64,
+                                "pose_ids": ["escaped"],
+                                "source": "test",
+                                "approval_state": "candidate",
+                                "runtime_admitted": False,
+                            }
+                        ],
+                    }
+                ),
+                encoding="utf-8",
+            )
+
+            with self.assertRaisesRegex(ValueError, "escapes library root"):
+                HDPoseLibrary(index_path)
+
 
 if __name__ == "__main__":
     unittest.main()

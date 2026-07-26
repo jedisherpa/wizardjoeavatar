@@ -655,6 +655,47 @@ class CompanionServerTests(unittest.IsolatedAsyncioTestCase):
                         hd_review_index_path=index_path,
                     )
 
+    def test_alternate_hd_review_library_rejects_nested_runtime_admission(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            index_path = self.write_review_library(root)
+            index = json.loads(index_path.read_text(encoding="utf-8"))
+            index["shards"][0]["runtime_admitted"] = True
+            index_path.write_text(json.dumps(index), encoding="utf-8")
+            with mock.patch.dict(os.environ, {}, clear=True):
+                with self.assertRaisesRegex(
+                    ValueError, "review shard cannot be runtime-admitted"
+                ):
+                    create_app(
+                        companion_mode=False,
+                        hd_review_index_path=index_path,
+                    )
+
+    def test_alternate_hd_review_library_rejects_admitted_artifact(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            index_path = self.write_review_library(root)
+            index = json.loads(index_path.read_text(encoding="utf-8"))
+            shard = index["shards"][0]
+            image = Image.new("RGBA", (2, 2), (12, 34, 56, 255))
+            artifact_path = root / shard["path"]
+            receipt = write_pose_artifact(
+                artifact_path,
+                {"candidate_pose": image},
+                profile=index["profile"],
+                provenance={"runtime_admitted": True},
+            )
+            shard["sha256"] = receipt["sha256"]
+            index_path.write_text(json.dumps(index), encoding="utf-8")
+            with mock.patch.dict(os.environ, {}, clear=True):
+                with self.assertRaisesRegex(
+                    ValueError, "review artifact cannot be runtime-admitted"
+                ):
+                    create_app(
+                        companion_mode=False,
+                        hd_review_index_path=index_path,
+                    )
+
     async def test_hd_review_projection_decodes_off_the_event_loop(self):
         app = self.create_companion_app()
         authenticated = LOOPBACK_HEADERS + (

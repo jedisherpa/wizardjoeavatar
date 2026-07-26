@@ -1,0 +1,49 @@
+{
+  "approved_pose_count": 0,
+  "asset_set_id": "liana-supplemental-identity-v001",
+  "candidate_pose_count": 1,
+  "character_id": "liana",
+  "display_name": "Liana",
+  "payload_encoding": "rgba8-zlib",
+  "pose_count": 1,
+  "profile": {
+    "alpha_mode": "straight",
+    "baseline_y": 1185,
+    "canvas_height": 1254,
+    "canvas_width": 1254,
+    "color_space": "sRGB",
+    "minimum_margin": 69,
+    "profile_id": "wizardjoe_hd_alpha_1254_v001"
+  },
+  "review_projection": true,
+  "roster_state": "supplemental_authored_character",
+  "runtime_admitted": false,
+  "schema_version": 1,
+  "sequences": {
+    "liana-identity-review": {
+      "approval_state": "pending_identity_review",
+      "fps": 1,
+      "loop": true,
+      "pose_ids": [
+        "liana_identity_front_v001"
+      ],
+      "runtime_admitted": false,
+      "runtime_note": "Identity-gate projection only; no animation or production runtime admission is implied."
+    }
+  },
+  "shards": [
+    {
+      "approval_state": "pending_identity_review",
+      "bytes": 789162,
+      "path": "liana-identity-review-v001.wjpose",
+      "pose_count": 1,
+      "pose_ids": [
+        "liana_identity_front_v001"
+      ],
+      "runtime_admitted": false,
+      "sha256": "9b186dd922e7388ff4f98fda74647d9b699221765e278ad6dafda65ce26e27b3",
+      "shard_id": "identity_review",
+      "source": "authored_supplemental_identity"
+    }
+  ]
+}

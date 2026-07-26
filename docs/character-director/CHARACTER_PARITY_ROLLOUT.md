@@ -43,9 +43,15 @@ runtime API range.
 | 14 | Speech | To be frozen during intake | Not started |
 | 15 | Dragon | To be frozen during intake | Not started |
 | 16 | Kingfisher | To be frozen during intake | Not started |
+| 17 | Liana | Supplemental authored intake | Identity candidate; not registered |
 
 Crystail and Falcor remain separate library discoveries. They do not silently
 expand or replace the explicit parity roster above.
+
+Liana is additive supplemental work derived from Liora's identity proportions.
+She does not expand the fixed 12 x 48 authority matrix, and she does not alter
+Liora's assets or pose IDs. Her separate 48-pose approval program is defined in
+`reports/LIANA_ANIMATION_DIRECTION_2026-07-25.md`.
 
 ## Per-Character Gates
 
