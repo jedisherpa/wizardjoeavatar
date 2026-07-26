@@ -94,7 +94,7 @@
           "forbidden": "Front or three-quarter facing, contrapposto that lifts a foot, yoga pose, prop, closed or hidden hands, hair crop, or outfit drift.",
           "support_contact": "dual_foot_grounded",
           "root_rule": "fixed_on_baseline",
-          "state": "pending_art"
+          "state": "technical_candidate_complete"
         },
         {
           "slot_id": "motion-002",
@@ -106,7 +106,7 @@
           "forbidden": "Deep squat, heel teleport, visible root travel, arm symmetry, hair snap, changed garment coverage, or exaggerated athletic pose.",
           "support_contact": "dual_foot_grounded_rear_weighted",
           "root_rule": "fixed_with_weight_shift_only",
-          "state": "pending_art"
+          "state": "technical_candidate_complete"
         },
         {
           "slot_id": "motion-003",
@@ -118,7 +118,7 @@
           "forbidden": "Both feet flat, floating feet, same-side arm and leg swing, stretched anatomy, root jump, hair leading the body, or shoe redesign.",
           "support_contact": "leading_heel_and_trailing_toe",
           "root_rule": "advance_screen_right_one_contact_increment",
-          "state": "pending_art"
+          "state": "technical_candidate_complete"
         },
         {
           "slot_id": "motion-004",
@@ -130,7 +130,7 @@
           "forbidden": "Two-foot contact, airborne support foot, wide split, knee inversion, arm pop, root reversal, or silhouette collision between hand and torso.",
           "support_contact": "single_support_flat",
           "root_rule": "advance_screen_right_continuously",
-          "state": "pending_art"
+          "state": "technical_candidate_complete"
         },
         {
           "slot_id": "motion-005",
@@ -142,7 +142,7 @@
           "forbidden": "Run flight, locked knees, toe penetration, oversized stride, arm duplication, hair detachment, or midriff/waistband drift.",
           "support_contact": "trailing_forefoot_support",
           "root_rule": "advance_screen_right_continuously",
-          "state": "pending_art"
+          "state": "technical_candidate_complete"
         },
         {
           "slot_id": "motion-006",
@@ -154,7 +154,7 @@
           "forbidden": "Duplicate of frame 003, frozen arms, mismatched root height, foot skate, abrupt hair reset, or ungrounded handoff.",
           "support_contact": "opposite_leading_heel_and_trailing_toe",
           "root_rule": "advance_screen_right_then_contact_lock",
-          "state": "pending_art"
+          "state": "technical_candidate_complete"
         }
       ]
     },
@@ -188,7 +188,7 @@
           "forbidden": "Sprint crouch, both feet flat, vertical bounce, same-side limb swing, hair crop, or scale change.",
           "support_contact": "leading_heel_and_trailing_toe",
           "root_rule": "advance_screen_right_accelerating",
-          "state": "pending_art"
+          "state": "technical_candidate_complete"
         },
         {
           "slot_id": "motion-008",
@@ -200,7 +200,7 @@
           "forbidden": "Deep jump squat, rear-foot ghost contact, pelvis pop, elbow discontinuity, or garment deformation.",
           "support_contact": "single_support_flat",
           "root_rule": "advance_screen_right_low_arc",
-          "state": "pending_art"
+          "state": "technical_candidate_complete"
         },
         {
           "slot_id": "motion-009",
@@ -212,7 +212,7 @@
           "forbidden": "Foot clipping, airborne support, excessive knee lift, twisted torso, hair separation, or hand-to-body merge.",
           "support_contact": "single_support_forefoot",
           "root_rule": "advance_screen_right_rising_arc",
-          "state": "pending_art"
+          "state": "technical_candidate_complete"
         },
         {
           "slot_id": "motion-010",
@@ -224,7 +224,7 @@
           "forbidden": "Two-foot contact, knee hyperextension, superhero pose, clenched oversized fists, hair leading, or root reversal.",
           "support_contact": "single_forefoot_push",
           "root_rule": "advance_screen_right_and_rise",
-          "state": "pending_art"
+          "state": "technical_candidate_complete"
         },
         {
           "slot_id": "motion-011",
@@ -236,7 +236,7 @@
           "forbidden": "Large leap, split legs, baseline contact, floating hair fragments, body stretch, or changed shoe size.",
           "support_contact": "airborne",
           "root_rule": "advance_screen_right_ballistic",
-          "state": "pending_art"
+          "state": "technical_candidate_complete"
         },
         {
           "slot_id": "motion-012",
@@ -248,7 +248,7 @@
           "forbidden": "Heel-first stiff landing, dual contact, root snap, frozen hair, identical silhouette to frame 007, or foot skate.",
           "support_contact": "leading_forefoot_contact",
           "root_rule": "advance_screen_right_then_contact_lock",
-          "state": "pending_art"
+          "state": "technical_candidate_complete"
         }
       ]
     },
@@ -282,7 +282,7 @@
           "forbidden": "Visible obstacle, bicycle cue, heel strike, prayer hands, hair crop, or off-baseline plant.",
           "support_contact": "single_forefoot_plant",
           "root_rule": "advance_screen_right_then_brake",
-          "state": "pending_art"
+          "state": "technical_candidate_complete"
         },
         {
           "slot_id": "motion-014",
@@ -294,7 +294,7 @@
           "forbidden": "Yoga squat, knees collapsing inward, heels floating, hands touching floor, mystical expression, or costume compression.",
           "support_contact": "dual_foot_grounded_compressed",
           "root_rule": "fixed_low_point",
-          "state": "pending_art"
+          "state": "technical_candidate_complete"
         },
         {
           "slot_id": "motion-015",
@@ -306,7 +306,7 @@
           "forbidden": "One-foot launch, bent collapsing ankles, giant vertical leap, arm teleport, detached curls, or backward travel.",
           "support_contact": "dual_forefoot_final_contact",
           "root_rule": "launch_screen_right_and_up",
-          "state": "pending_art"
+          "state": "technical_candidate_complete"
         },
         {
           "slot_id": "motion-016",
@@ -318,7 +318,7 @@
           "forbidden": "Flying pose, split leap, wings, visible obstacle, extreme back arch, or baseline contact.",
           "support_contact": "airborne",
           "root_rule": "ballistic_screen_right_ascending",
-          "state": "pending_art"
+          "state": "technical_candidate_complete"
         },
         {
           "slot_id": "motion-017",
@@ -330,7 +330,7 @@
           "forbidden": "Cannonball, lotus legs, touching knees to chest, crossed ankles, levitation expression, or hair volume mutation.",
           "support_contact": "airborne",
           "root_rule": "ballistic_screen_right_apex",
-          "state": "pending_art"
+          "state": "technical_candidate_complete"
         },
         {
           "slot_id": "motion-018",
@@ -342,7 +342,7 @@
           "forbidden": "Baseline contact, locked knees, heel-first reach, body rotation to front, root reversal, or hair snap to rest.",
           "support_contact": "airborne_descent",
           "root_rule": "ballistic_screen_right_descending_to_g4",
-          "state": "pending_art"
+          "state": "technical_candidate_complete"
         }
       ]
     },
@@ -376,7 +376,7 @@
           "forbidden": "Flat stiff landing, one missing foot, rearward root jump, front-facing cut, collapsed knees, or settled hair.",
           "support_contact": "dual_forefoot_contact",
           "root_rule": "contact_lock_at_g3_landing_root",
-          "state": "pending_art"
+          "state": "technical_candidate_complete"
         },
         {
           "slot_id": "motion-020",
@@ -388,7 +388,7 @@
           "forbidden": "Yoga squat, hands on floor, foot slide, knees inward, torso collapse, or hair clipping through shoulders.",
           "support_contact": "dual_foot_grounded_compressed",
           "root_rule": "fixed_contact_low_point",
-          "state": "pending_art"
+          "state": "technical_candidate_complete"
         },
         {
           "slot_id": "motion-021",
@@ -400,7 +400,7 @@
           "forbidden": "Large stumble, crossed feet, fear expression, arms flailing overhead, root teleport, or duplicate landing pose.",
           "support_contact": "primary_foot_grounded_correction_foot_touch",
           "root_rule": "one_bounded_lateral_correction",
-          "state": "pending_art"
+          "state": "technical_candidate_complete"
         },
         {
           "slot_id": "motion-022",
@@ -412,7 +412,7 @@
           "forbidden": "T-pose, mirrored arms, lifted foot, sudden front cut, prayer gesture, or outfit/hair drift.",
           "support_contact": "dual_foot_grounded_asymmetric_weight",
           "root_rule": "fixed_recenter",
-          "state": "pending_art"
+          "state": "technical_candidate_complete"
         },
         {
           "slot_id": "motion-023",
@@ -424,7 +424,7 @@
           "forbidden": "Named yoga pose, chest thrust, closed eyes in trance, foot movement, idle duplicate, or sudden hair symmetry.",
           "support_contact": "dual_foot_grounded",
           "root_rule": "fixed",
-          "state": "pending_art"
+          "state": "technical_candidate_complete"
         },
         {
           "slot_id": "motion-024",
@@ -436,7 +436,7 @@
           "forbidden": "Big wave, prayer hands, bow, peace sign, finger point, lifted heel, or prop.",
           "support_contact": "dual_foot_grounded",
           "root_rule": "fixed",
-          "state": "pending_art"
+          "state": "technical_candidate_complete"
         }
       ]
     },
@@ -470,7 +470,7 @@
           "forbidden": "Copying the identity file byte-for-byte, prop, model pose, hip exaggeration, crossed legs, cropped curls, or changed neckline.",
           "support_contact": "dual_foot_grounded",
           "root_rule": "fixed",
-          "state": "pending_art"
+          "state": "technical_candidate_complete"
         },
         {
           "slot_id": "motion-026",
@@ -482,7 +482,7 @@
           "forbidden": "Profile rotation, giant perspective foot, same-side arm swing, floating rear foot, root lateral jump, or garment distortion.",
           "support_contact": "left_leading_contact_right_trailing_toe",
           "root_rule": "advance_toward_camera_one_increment",
-          "state": "pending_art"
+          "state": "technical_candidate_complete"
         },
         {
           "slot_id": "motion-027",
@@ -494,7 +494,7 @@
           "forbidden": "Feet merged into one shape, side lean, airborne support, excessive scale growth, arm overlap, or face drift.",
           "support_contact": "left_single_support",
           "root_rule": "advance_toward_camera_continuously",
-          "state": "pending_art"
+          "state": "technical_candidate_complete"
         },
         {
           "slot_id": "motion-028",
@@ -506,7 +506,7 @@
           "forbidden": "Duplicate of frame 026, mirrored pixels, profile drift, foot skate, root shrink, or hair snap.",
           "support_contact": "right_leading_contact_left_trailing_toe",
           "root_rule": "advance_toward_camera_one_increment",
-          "state": "pending_art"
+          "state": "technical_candidate_complete"
         },
         {
           "slot_id": "motion-029",
@@ -518,7 +518,7 @@
           "forbidden": "Yoga squat, wide sumo stance, knees inward, hands clasped, heels floating, sexualized pose, or prop.",
           "support_contact": "dual_foot_grounded_compressed",
           "root_rule": "fixed_low_point",
-          "state": "pending_art"
+          "state": "technical_candidate_complete"
         },
         {
           "slot_id": "motion-030",
@@ -530,7 +530,7 @@
           "forbidden": "Airborne endpoint, giant jump, one-foot landing, stiff knees, root lateral offset, hair reset, or changed body proportions.",
           "support_contact": "dual_forefoot_landing",
           "root_rule": "advance_toward_camera_then_contact_lock",
-          "state": "pending_art"
+          "state": "technical_candidate_complete"
         }
       ]
     },
@@ -564,7 +564,7 @@
           "forbidden": "Missing back garment construction, hair curtain that erases torso, front face fragments, prop, heel lift, or silhouette crop.",
           "support_contact": "dual_foot_grounded",
           "root_rule": "fixed",
-          "state": "pending_art"
+          "state": "technical_candidate_complete"
         },
         {
           "slot_id": "motion-032",
@@ -576,7 +576,7 @@
           "forbidden": "Profile turn, reversed arm swing, disappearing foot, abrupt scale shrink, hair clipping, or waistband change.",
           "support_contact": "left_leading_contact_right_trailing_toe",
           "root_rule": "advance_away_from_camera_one_increment",
-          "state": "pending_art"
+          "state": "technical_candidate_complete"
         },
         {
           "slot_id": "motion-033",
@@ -588,7 +588,7 @@
           "forbidden": "Merged legs, airborne support, front-facing head, scale jump, arm disappearance, or hair-length mutation.",
           "support_contact": "left_single_support",
           "root_rule": "advance_away_from_camera_continuously",
-          "state": "pending_art"
+          "state": "technical_candidate_complete"
         },
         {
           "slot_id": "motion-034",
@@ -600,7 +600,7 @@
           "forbidden": "Sprint start blocks, same-side swing, giant lean, foot skate, root lateral drift, or hair snap.",
           "support_contact": "right_leading_contact_left_trailing_toe",
           "root_rule": "advance_away_from_camera_accelerating",
-          "state": "pending_art"
+          "state": "technical_candidate_complete"
         },
         {
           "slot_id": "motion-035",
@@ -612,7 +612,7 @@
           "forbidden": "Large leap, split legs, profile rotation, baseline contact, wings, yoga shape, or root enlargement.",
           "support_contact": "airborne",
           "root_rule": "advance_away_from_camera_ballistic",
-          "state": "pending_art"
+          "state": "technical_candidate_complete"
         },
         {
           "slot_id": "motion-036",
@@ -624,7 +624,7 @@
           "forbidden": "One-foot landing, stiff legs, instant full-size reset, hair at rest, unapproved turn, or missing back garment details.",
           "support_contact": "dual_forefoot_landing",
           "root_rule": "advance_away_from_camera_then_contact_lock",
-          "state": "pending_art"
+          "state": "technical_candidate_complete"
         }
       ]
     },
@@ -658,7 +658,7 @@
           "forbidden": "Wave, point, startle, foot movement, pity expression, mystical gaze, prop, or crossed arms.",
           "support_contact": "dual_foot_grounded",
           "root_rule": "fixed",
-          "state": "pending_art"
+          "state": "technical_candidate_complete"
         },
         {
           "slot_id": "motion-038",
@@ -670,7 +670,7 @@
           "forbidden": "Wave, command, finger point, prayer hands, raised elbow, duplicated fingers, root drift, or broad smile.",
           "support_contact": "dual_foot_grounded",
           "root_rule": "fixed",
-          "state": "pending_art"
+          "state": "technical_candidate_complete"
         },
         {
           "slot_id": "motion-039",
@@ -682,7 +682,7 @@
           "forbidden": "Caricature nod, closed eyes, crossed arms, hands on hips, foot slide, smile performance, or meditation cue.",
           "support_contact": "dual_foot_grounded",
           "root_rule": "fixed",
-          "state": "pending_art"
+          "state": "technical_candidate_complete"
         },
         {
           "slot_id": "motion-040",
@@ -694,7 +694,7 @@
           "forbidden": "Finger wag, lecture pose, shrug, hands above shoulders, judgmental face, foot movement, or prop metaphor.",
           "support_contact": "dual_foot_grounded",
           "root_rule": "fixed",
-          "state": "pending_art"
+          "state": "technical_candidate_complete"
         },
         {
           "slot_id": "motion-041",
@@ -706,7 +706,7 @@
           "forbidden": "Cheerleader pose, fist pump, thumbs-up caricature, touch toward camera, oversized hands, heel lift, or romantic framing.",
           "support_contact": "dual_foot_grounded",
           "root_rule": "fixed",
-          "state": "pending_art"
+          "state": "technical_candidate_complete"
         },
         {
           "slot_id": "motion-042",
@@ -718,7 +718,7 @@
           "forbidden": "Command gesture, point, dismissal, hands on hips, root displacement, idle duplicate, or performative bow.",
           "support_contact": "dual_foot_grounded",
           "root_rule": "fixed",
-          "state": "pending_art"
+          "state": "technical_candidate_complete"
         }
       ]
     },
@@ -752,7 +752,7 @@
           "forbidden": "Hands on knees, collapse, panting caricature, sweat symbols, prop, closed eyes, or yoga stance.",
           "support_contact": "dual_foot_grounded",
           "root_rule": "fixed",
-          "state": "pending_art"
+          "state": "technical_candidate_complete"
         },
         {
           "slot_id": "motion-044",
@@ -764,7 +764,7 @@
           "forbidden": "Mountain-pose imitation, prayer hands, ritual gesture, mystical face, feet touching, or rigid military posture.",
           "support_contact": "dual_foot_grounded_even",
           "root_rule": "fixed",
-          "state": "pending_art"
+          "state": "technical_candidate_complete"
         },
         {
           "slot_id": "motion-045",
@@ -776,7 +776,7 @@
           "forbidden": "Closed-eye meditation, dramatic sigh, bent collapse, hand mudra, mouth exaggeration, foot shift, or garment deformation.",
           "support_contact": "dual_foot_grounded_even",
           "root_rule": "fixed",
-          "state": "pending_art"
+          "state": "technical_candidate_complete"
         },
         {
           "slot_id": "motion-046",
@@ -788,7 +788,7 @@
           "forbidden": "Yoga bind, arm overhead, neck wrench, gym stretch display, prayer gesture, foot movement, or hair collision.",
           "support_contact": "dual_foot_grounded",
           "root_rule": "fixed_rotation_only",
-          "state": "pending_art"
+          "state": "technical_candidate_complete"
         },
         {
           "slot_id": "motion-047",
@@ -800,7 +800,7 @@
           "forbidden": "Perfect mirrored symmetry, attention pose, closed fists, lifted heel, instant hair reset, or identity-frame duplicate.",
           "support_contact": "dual_foot_grounded_even",
           "root_rule": "fixed",
-          "state": "pending_art"
+          "state": "technical_candidate_complete"
         },
         {
           "slot_id": "motion-048",
@@ -812,7 +812,7 @@
           "forbidden": "Hero pose, hands on hips, starting-block crouch, mystical smile, lifted foot, prop, or frozen symmetry.",
           "support_contact": "dual_foot_grounded_ready_bias",
           "root_rule": "fixed",
-          "state": "pending_art"
+          "state": "technical_candidate_complete"
         }
       ]
     }

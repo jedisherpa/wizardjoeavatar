@@ -1,0 +1,1874 @@
+{
+  "approved_pose_count": 0,
+  "asset_set_id": "liana-supplemental-motion-48-v001",
+  "candidate_pose_count": 48,
+  "character_id": "liana",
+  "display_name": "Liana",
+  "payload_encoding": "rgba8-zlib",
+  "pose_count": 48,
+  "poses": [
+    {
+      "alpha_extracted_path": "assets/reference/joeville_supplemental/liana/authored-source/alpha-extracted/liana_motion_001.png",
+      "alpha_extracted_sha256": "1d36f44c2abc2daceb4b6997084e6640f79c136a796c10bcb3d0ba3b2fc896a3",
+      "alpha_extraction_receipt": {
+        "path": "assets/reference/joeville_supplemental/liana/authored-source/alpha-extraction-receipts/liana_motion_001.json",
+        "sha256": "6e7451acd17ff13e4c1e7f1cc811bad1a535f6ecbecc6c0eff8c4a991743ca84"
+      },
+      "approval_state": "pending_visual_parity",
+      "authorship": "authored_full_size_imagegen_v1",
+      "brief_id": null,
+      "canonical_bbox": [
+        493,
+        131,
+        761,
+        1185
+      ],
+      "canonicalization_receipt": {
+        "path": "assets/reference/joeville_supplemental/liana/authored-source/canonicalization-receipts/liana_motion_001.json",
+        "sha256": "aea15145aea1e4cff5cfba7edc9277f7734a5885ceee5d55bb05106b30e5b68f"
+      },
+      "chroma_source_path": "assets/reference/joeville_supplemental/liana/authored-source/chroma-source/liana_motion_001.png",
+      "chroma_source_sha256": "0bc6da036d31064aecfb22b2558ffb5e1ce93edc8ba441f4177561feb1e970ce",
+      "motion_slot_id": "motion-001",
+      "pose_id": "liana_motion_001",
+      "pose_summary": "Grounded screen-right profile idle with quiet route awareness.",
+      "review_projection": true,
+      "rgba_sha256": "6b50c8c7de142b18f9b9272281cba800e139fc407bd084597d587567bcd8442a",
+      "runtime_admitted": false,
+      "sequence_id": "g1",
+      "source_frame_index": 1,
+      "source_path": "assets/reference/joeville_supplemental/liana/authored-source/frames/liana_motion_001.png",
+      "source_sha256": "cda5db1a775db804ecad1893b98c0697ac09e7f104f2d67b1356c4982de27550"
+    },
+    {
+      "alpha_extracted_path": "assets/reference/joeville_supplemental/liana/authored-source/alpha-extracted/liana_motion_002.png",
+      "alpha_extracted_sha256": "7e03876d77556afe0b85b001945b85b7cd40cac15ac487810810183176d3ad6c",
+      "alpha_extraction_receipt": {
+        "path": "assets/reference/joeville_supplemental/liana/authored-source/alpha-extraction-receipts/liana_motion_002.json",
+        "sha256": "dd49c9884d4cc8dc26f4575f9c4a80755ae7c3d2d8ccd42b597a351b8d76e56e"
+      },
+      "approval_state": "pending_visual_parity",
+      "authorship": "authored_full_size_imagegen_v1",
+      "brief_id": null,
+      "canonical_bbox": [
+        470,
+        72,
+        784,
+        1185
+      ],
+      "canonicalization_receipt": {
+        "path": "assets/reference/joeville_supplemental/liana/authored-source/canonicalization-receipts/liana_motion_002.json",
+        "sha256": "28c80da18c0508e16ac6eca6b3074729ebdd2214a955c5a61ba777465d2b48d3"
+      },
+      "chroma_source_path": "assets/reference/joeville_supplemental/liana/authored-source/chroma-source/liana_motion_002.png",
+      "chroma_source_sha256": "ab893719fde46ab4f4454668e25563388d63845e7b0c83a764b78e3b63bbe78e",
+      "motion_slot_id": "motion-002",
+      "pose_id": "liana_motion_002",
+      "pose_summary": "Small pre-step load into the rear leg.",
+      "review_projection": true,
+      "rgba_sha256": "4007d2b789abe9fa1ffa16cd509cabbac0e9118ee57ac4a6d1ef82922c338ba3",
+      "runtime_admitted": false,
+      "sequence_id": "g1",
+      "source_frame_index": 2,
+      "source_path": "assets/reference/joeville_supplemental/liana/authored-source/frames/liana_motion_002.png",
+      "source_sha256": "0dc1f188b4b6752002728aa9aff679d3ac0e68756b262cbf0ab0a903032cd51e"
+    },
+    {
+      "alpha_extracted_path": "assets/reference/joeville_supplemental/liana/authored-source/alpha-extracted/liana_motion_003.png",
+      "alpha_extracted_sha256": "60a5c400af9a8c5477beb830ebfdff48292f80ae1ab983e3451f77fdf60d2dc3",
+      "alpha_extraction_receipt": {
+        "path": "assets/reference/joeville_supplemental/liana/authored-source/alpha-extraction-receipts/liana_motion_003.json",
+        "sha256": "929f939e64860ac7c1b788a24a68772ca5a88da8c59891d6913550d8a394c4f5"
+      },
+      "approval_state": "pending_visual_parity",
+      "authorship": "authored_full_size_imagegen_v1",
+      "brief_id": null,
+      "canonical_bbox": [
+        336,
+        161,
+        919,
+        1185
+      ],
+      "canonicalization_receipt": {
+        "path": "assets/reference/joeville_supplemental/liana/authored-source/canonicalization-receipts/liana_motion_003.json",
+        "sha256": "29ca7626a93218ce4717d839c7e0449d97ca938642899993e336b0ed96e5b5fd"
+      },
+      "chroma_source_path": "assets/reference/joeville_supplemental/liana/authored-source/chroma-source/liana_motion_003.png",
+      "chroma_source_sha256": "de6dec1a1a0fb2e29e93f48e17eacea66883db010d3d7ad1e233f7504f956b56",
+      "motion_slot_id": "motion-003",
+      "pose_id": "liana_motion_003",
+      "pose_summary": "Screen-right leading heel contact with trailing toe retained.",
+      "review_projection": true,
+      "rgba_sha256": "403b7e370121884c97510f1361ceafffdbb95e0941d020083e46fd1f0f1133d2",
+      "runtime_admitted": false,
+      "sequence_id": "g1",
+      "source_frame_index": 3,
+      "source_path": "assets/reference/joeville_supplemental/liana/authored-source/frames/liana_motion_003.png",
+      "source_sha256": "e36f4d37668343e219ff0220fac1873a1615d57ffc381911fe7e8691a010c5c5"
+    },
+    {
+      "alpha_extracted_path": "assets/reference/joeville_supplemental/liana/authored-source/alpha-extracted/liana_motion_004.png",
+      "alpha_extracted_sha256": "ad409e0d420483b5a49da14471c50443f671c29a15cfb5b83711590bd240f850",
+      "alpha_extraction_receipt": {
+        "path": "assets/reference/joeville_supplemental/liana/authored-source/alpha-extraction-receipts/liana_motion_004.json",
+        "sha256": "bf0fee3001c1a5c42dfcaca4b0f387c6342c36b29c6cb4dc79af227b4d6e5d01"
+      },
+      "approval_state": "pending_visual_parity",
+      "authorship": "authored_full_size_imagegen_v1",
+      "brief_id": null,
+      "canonical_bbox": [
+        392,
+        177,
+        862,
+        1185
+      ],
+      "canonicalization_receipt": {
+        "path": "assets/reference/joeville_supplemental/liana/authored-source/canonicalization-receipts/liana_motion_004.json",
+        "sha256": "c64f75dd1afd6fbed525b1698e5885d198ba8632c54429aab434c00ce6f8c1cb"
+      },
+      "chroma_source_path": "assets/reference/joeville_supplemental/liana/authored-source/chroma-source/liana_motion_004.png",
+      "chroma_source_sha256": "100397b50e2994f655c2d021b9fc02b69a0de0658ff8cd62ba2ec05b2bea0814",
+      "motion_slot_id": "motion-004",
+      "pose_id": "liana_motion_004",
+      "pose_summary": "Single-support passing pose with the free foot beneath the pelvis.",
+      "review_projection": true,
+      "rgba_sha256": "3ce26abe2e8e44728ccd886b30d3b94fac0bf1f7097400cbf784bb61560d5a9f",
+      "runtime_admitted": false,
+      "sequence_id": "g1",
+      "source_frame_index": 4,
+      "source_path": "assets/reference/joeville_supplemental/liana/authored-source/frames/liana_motion_004.png",
+      "source_sha256": "a23be9c3adc27bd7e9b4624c8aadc1fc510fa08c3237c5581f748938b9c5a22e"
+    },
+    {
+      "alpha_extracted_path": "assets/reference/joeville_supplemental/liana/authored-source/alpha-extracted/liana_motion_005.png",
+      "alpha_extracted_sha256": "eb6e3a5fcdb96050e02ec556a316feb14d59e70463643a2325d9b9d6b880d1eb",
+      "alpha_extraction_receipt": {
+        "path": "assets/reference/joeville_supplemental/liana/authored-source/alpha-extraction-receipts/liana_motion_005.json",
+        "sha256": "1cc0028b5e1b48723c0da0ee187d42f53cf05c64d8f138e16330e0791fc0a1b5"
+      },
+      "approval_state": "pending_visual_parity",
+      "authorship": "authored_full_size_imagegen_v1",
+      "brief_id": null,
+      "canonical_bbox": [
+        355,
+        217,
+        900,
+        1185
+      ],
+      "canonicalization_receipt": {
+        "path": "assets/reference/joeville_supplemental/liana/authored-source/canonicalization-receipts/liana_motion_005.json",
+        "sha256": "683a09254b659360512b36897bc9e272e05979b0d78f006b688111607983f328"
+      },
+      "chroma_source_path": "assets/reference/joeville_supplemental/liana/authored-source/chroma-source/liana_motion_005.png",
+      "chroma_source_sha256": "960a638accac1cac7c13daf8ee3fac92a543e8830adfc40eecc1c80fc9ab31ff",
+      "motion_slot_id": "motion-005",
+      "pose_id": "liana_motion_005",
+      "pose_summary": "Opposite stride extension with practical forward intent.",
+      "review_projection": true,
+      "rgba_sha256": "a8b0e53635f95fe17ec431761ad9e7948ac7b78e0558c44b81aa70d792e8a4fd",
+      "runtime_admitted": false,
+      "sequence_id": "g1",
+      "source_frame_index": 5,
+      "source_path": "assets/reference/joeville_supplemental/liana/authored-source/frames/liana_motion_005.png",
+      "source_sha256": "ca7a77c5fab86c46aef3046b9cc9c02eb663e0bce1aa7c904c4fce83f0c3b75e"
+    },
+    {
+      "alpha_extracted_path": "assets/reference/joeville_supplemental/liana/authored-source/alpha-extracted/liana_motion_006.png",
+      "alpha_extracted_sha256": "d88b19c3abf0ed028526f8c53ac7d13f26663ba5b0094be31731f13c06474fba",
+      "alpha_extraction_receipt": {
+        "path": "assets/reference/joeville_supplemental/liana/authored-source/alpha-extraction-receipts/liana_motion_006.json",
+        "sha256": "8f21482be418c56620410f750d314762218e3e15e2e607e73a59c43a625e8e00"
+      },
+      "approval_state": "pending_visual_parity",
+      "authorship": "authored_full_size_imagegen_v1",
+      "brief_id": null,
+      "canonical_bbox": [
+        377,
+        187,
+        877,
+        1185
+      ],
+      "canonicalization_receipt": {
+        "path": "assets/reference/joeville_supplemental/liana/authored-source/canonicalization-receipts/liana_motion_006.json",
+        "sha256": "13a3bad067bbc30a55e48669cea1cfa596f4ee4bda6c92a08e1f01e91c07d82c"
+      },
+      "chroma_source_path": "assets/reference/joeville_supplemental/liana/authored-source/chroma-source/liana_motion_006.png",
+      "chroma_source_sha256": "1b33121a2984b2eb5830f31082187cc8ddc0a78b87cea354f1359c6456e72d18",
+      "motion_slot_id": "motion-006",
+      "pose_id": "liana_motion_006",
+      "pose_summary": "Opposite contact and stable recovery marker.",
+      "review_projection": true,
+      "rgba_sha256": "b981608fdc7ef848d99e37950eaf7a49ace0ec8d6f61cb43659e031f59ee9b09",
+      "runtime_admitted": false,
+      "sequence_id": "g1",
+      "source_frame_index": 6,
+      "source_path": "assets/reference/joeville_supplemental/liana/authored-source/frames/liana_motion_006.png",
+      "source_sha256": "35a9cd3d0e838e6c99a12d60654d81e4306930187d2fb110b722d2bc32e5b5d8"
+    },
+    {
+      "alpha_extracted_path": "assets/reference/joeville_supplemental/liana/authored-source/alpha-extracted/liana_motion_007.png",
+      "alpha_extracted_sha256": "b8dd60f3c0c7d443767e2025cebcded27643571df6be72b7049f038d5c1861e7",
+      "alpha_extraction_receipt": {
+        "path": "assets/reference/joeville_supplemental/liana/authored-source/alpha-extraction-receipts/liana_motion_007.json",
+        "sha256": "c304ad76ae208f77501201d6db923bc0ed6d6824ca4ef2101ca5b3b25b69e16b"
+      },
+      "approval_state": "pending_visual_parity",
+      "authorship": "authored_full_size_imagegen_v1",
+      "brief_id": null,
+      "canonical_bbox": [
+        295,
+        212,
+        958,
+        1185
+      ],
+      "canonicalization_receipt": {
+        "path": "assets/reference/joeville_supplemental/liana/authored-source/canonicalization-receipts/liana_motion_007.json",
+        "sha256": "669974f2beabdbc60c71fd4afc7a2e6f0295101803509456b400dcb6b452ff10"
+      },
+      "chroma_source_path": "assets/reference/joeville_supplemental/liana/authored-source/chroma-source/liana_motion_007.png",
+      "chroma_source_sha256": "30b1bf9ea1422a75f39583aa2b56640a3d2c759cea2e376cad3285ff1e1e5455",
+      "motion_slot_id": "motion-007",
+      "pose_id": "liana_motion_007",
+      "pose_summary": "Longer, lower profile contact initiating acceleration.",
+      "review_projection": true,
+      "rgba_sha256": "1ae98f06233902f206fa35e2bbe2ed275f29a150c1442e62b84aa7330d96da79",
+      "runtime_admitted": false,
+      "sequence_id": "g2",
+      "source_frame_index": 1,
+      "source_path": "assets/reference/joeville_supplemental/liana/authored-source/frames/liana_motion_007.png",
+      "source_sha256": "16bdcda41e84ede63c9cbb51b67f4d72f99079e8c75e5f7b37d1647ee7df8564"
+    },
+    {
+      "alpha_extracted_path": "assets/reference/joeville_supplemental/liana/authored-source/alpha-extracted/liana_motion_008.png",
+      "alpha_extracted_sha256": "bb7f2e66d259b176128708ab26af51f069aba6147a18569871d6316941a30c51",
+      "alpha_extraction_receipt": {
+        "path": "assets/reference/joeville_supplemental/liana/authored-source/alpha-extraction-receipts/liana_motion_008.json",
+        "sha256": "d3505bb24d3752540297acb95bd835a23f13ac87c5f5d050f2e60516fb15cc56"
+      },
+      "approval_state": "pending_visual_parity",
+      "authorship": "authored_full_size_imagegen_v1",
+      "brief_id": null,
+      "canonical_bbox": [
+        334,
+        201,
+        919,
+        1185
+      ],
+      "canonicalization_receipt": {
+        "path": "assets/reference/joeville_supplemental/liana/authored-source/canonicalization-receipts/liana_motion_008.json",
+        "sha256": "f315d783ca8c7d7c9d70807e1e42925a610b7b45885c141ea1b656bc83dc217a"
+      },
+      "chroma_source_path": "assets/reference/joeville_supplemental/liana/authored-source/chroma-source/liana_motion_008.png",
+      "chroma_source_sha256": "ae8458a0c911d95224f01a97958ea277ad19d3added9834ed362f8c3840bebf3",
+      "motion_slot_id": "motion-008",
+      "pose_id": "liana_motion_008",
+      "pose_summary": "Loaded down phase accepting the faster contact.",
+      "review_projection": true,
+      "rgba_sha256": "1c007de078ec6ef4ad260e64140ef8439a4ec494d949133f67c38b662a313d07",
+      "runtime_admitted": false,
+      "sequence_id": "g2",
+      "source_frame_index": 2,
+      "source_path": "assets/reference/joeville_supplemental/liana/authored-source/frames/liana_motion_008.png",
+      "source_sha256": "7e56784e817e74707b6551a7b8e793764ab5b4f32257e7028b010dff38faf0c5"
+    },
+    {
+      "alpha_extracted_path": "assets/reference/joeville_supplemental/liana/authored-source/alpha-extracted/liana_motion_009.png",
+      "alpha_extracted_sha256": "532101eb70a318196bb1293fe3013969b78577b51b78bfc80ce0916e60a62247",
+      "alpha_extraction_receipt": {
+        "path": "assets/reference/joeville_supplemental/liana/authored-source/alpha-extraction-receipts/liana_motion_009.json",
+        "sha256": "dccf93a55f49b77f979b8658ff5f78c0ef5615dc7216542551503a7ebb255b56"
+      },
+      "approval_state": "pending_visual_parity",
+      "authorship": "authored_full_size_imagegen_v1",
+      "brief_id": null,
+      "canonical_bbox": [
+        396,
+        214,
+        857,
+        1185
+      ],
+      "canonicalization_receipt": {
+        "path": "assets/reference/joeville_supplemental/liana/authored-source/canonicalization-receipts/liana_motion_009.json",
+        "sha256": "6dcf9d9444e6eea046f41c56382a71c70846d1cfffa27654a5cb1dc07345f64a"
+      },
+      "chroma_source_path": "assets/reference/joeville_supplemental/liana/authored-source/chroma-source/liana_motion_009.png",
+      "chroma_source_sha256": "4666a63c6e8f769e83531096ddf192c375fb5dfa9b5e8b49606dc094cb92d8c1",
+      "motion_slot_id": "motion-009",
+      "pose_id": "liana_motion_009",
+      "pose_summary": "Compact fast passing pose under the hips.",
+      "review_projection": true,
+      "rgba_sha256": "ed0821b4bc44a15836c32e1460da571ab1b94b10762bb5414f9cd4bbc09d147e",
+      "runtime_admitted": false,
+      "sequence_id": "g2",
+      "source_frame_index": 3,
+      "source_path": "assets/reference/joeville_supplemental/liana/authored-source/frames/liana_motion_009.png",
+      "source_sha256": "867bd7b53b6e9797b89ee4d9499aa16d6e4dbf7ca9375b4ed6aaab8819fecfbb"
+    },
+    {
+      "alpha_extracted_path": "assets/reference/joeville_supplemental/liana/authored-source/alpha-extracted/liana_motion_010.png",
+      "alpha_extracted_sha256": "3ef4699611d99d16034b37e48b6fecd3e003191c8011bca006ff6a5f6d118d58",
+      "alpha_extraction_receipt": {
+        "path": "assets/reference/joeville_supplemental/liana/authored-source/alpha-extraction-receipts/liana_motion_010.json",
+        "sha256": "f19c15705142f334ca8f277f85ccc32403ca1979b31e89d215400f440516d08d"
+      },
+      "approval_state": "pending_visual_parity",
+      "authorship": "authored_full_size_imagegen_v1",
+      "brief_id": null,
+      "canonical_bbox": [
+        334,
+        268,
+        921,
+        1185
+      ],
+      "canonicalization_receipt": {
+        "path": "assets/reference/joeville_supplemental/liana/authored-source/canonicalization-receipts/liana_motion_010.json",
+        "sha256": "cf5dc597c73146e07d90c2d9ac84779651f5d049ea884cce37375855a22bc127"
+      },
+      "chroma_source_path": "assets/reference/joeville_supplemental/liana/authored-source/chroma-source/liana_motion_010.png",
+      "chroma_source_sha256": "541eef8a9eca92af7150a3a0e3b0c32380a55bdf611d21ce0ec1b9bbc1618e78",
+      "motion_slot_id": "motion-010",
+      "pose_id": "liana_motion_010",
+      "pose_summary": "Forefoot push transitioning from fast walk into run.",
+      "review_projection": true,
+      "rgba_sha256": "180250ae4b4a9af0ce735ab62b837a1dc7279008069668f4d1975bca7ab3e74e",
+      "runtime_admitted": false,
+      "sequence_id": "g2",
+      "source_frame_index": 4,
+      "source_path": "assets/reference/joeville_supplemental/liana/authored-source/frames/liana_motion_010.png",
+      "source_sha256": "8613c5db519fd7c450be583b75b965d4978b8c8419cb33aa9cf5f446d7d2c701"
+    },
+    {
+      "alpha_extracted_path": "assets/reference/joeville_supplemental/liana/authored-source/alpha-extracted/liana_motion_011.png",
+      "alpha_extracted_sha256": "963c602b5f86dd2958de66ffdfb7bb28d8bbac048a2f04ecdaf4328c5a53b99f",
+      "alpha_extraction_receipt": {
+        "path": "assets/reference/joeville_supplemental/liana/authored-source/alpha-extraction-receipts/liana_motion_011.json",
+        "sha256": "203865fa936652d6bc06504ce183bb352d334b394bd43d2a1643f450fbc657aa"
+      },
+      "approval_state": "pending_visual_parity",
+      "authorship": "authored_full_size_imagegen_v1",
+      "brief_id": null,
+      "canonical_bbox": [
+        372,
+        265,
+        883,
+        1185
+      ],
+      "canonicalization_receipt": {
+        "path": "assets/reference/joeville_supplemental/liana/authored-source/canonicalization-receipts/liana_motion_011.json",
+        "sha256": "899838e83f15712c72328625cbb49e399703410dc83929cca7477d9adaa4675c"
+      },
+      "chroma_source_path": "assets/reference/joeville_supplemental/liana/authored-source/chroma-source/liana_motion_011.png",
+      "chroma_source_sha256": "1e5aae4ef5f0e38a4290b5291168d4e03871f4e291b3c02253ff2c34e60571d7",
+      "motion_slot_id": "motion-011",
+      "pose_id": "liana_motion_011",
+      "pose_summary": "Brief readable run flight with compact legs.",
+      "review_projection": true,
+      "rgba_sha256": "34baa03c31ab25df28f8a597d96850b90bbb6af72caacc5cb3500d9c9f99ad8f",
+      "runtime_admitted": false,
+      "sequence_id": "g2",
+      "source_frame_index": 5,
+      "source_path": "assets/reference/joeville_supplemental/liana/authored-source/frames/liana_motion_011.png",
+      "source_sha256": "b09dd0d4e0b290143b9fa958407614fafc0c176ccc0d17fe95e4ce89baffdda5"
+    },
+    {
+      "alpha_extracted_path": "assets/reference/joeville_supplemental/liana/authored-source/alpha-extracted/liana_motion_012.png",
+      "alpha_extracted_sha256": "49307304b33b17181b42f41810a2b2865e010dba8bc0e6788e041701b5c368b3",
+      "alpha_extraction_receipt": {
+        "path": "assets/reference/joeville_supplemental/liana/authored-source/alpha-extraction-receipts/liana_motion_012.json",
+        "sha256": "260ae0b6e49d1860ecea76da5149e183e55708872caae1ec3052f6fc19005cec"
+      },
+      "approval_state": "pending_visual_parity",
+      "authorship": "authored_full_size_imagegen_v1",
+      "brief_id": null,
+      "canonical_bbox": [
+        329,
+        140,
+        924,
+        1185
+      ],
+      "canonicalization_receipt": {
+        "path": "assets/reference/joeville_supplemental/liana/authored-source/canonicalization-receipts/liana_motion_012.json",
+        "sha256": "fb669511775adbab6711527143ceb1ee784ce41402b73957eaac0371b3769c56"
+      },
+      "chroma_source_path": "assets/reference/joeville_supplemental/liana/authored-source/chroma-source/liana_motion_012.png",
+      "chroma_source_sha256": "a28ca6cf3ff6615f5ee34be04e755057cb5aec63101bad95c2c03d92278a1edc",
+      "motion_slot_id": "motion-012",
+      "pose_id": "liana_motion_012",
+      "pose_summary": "Opposite forefoot landing prepared for the next run cycle.",
+      "review_projection": true,
+      "rgba_sha256": "25b5599b6280865a22246a7fa03c9b985e48374ed95bac7e2344fdd6a1e8f842",
+      "runtime_admitted": false,
+      "sequence_id": "g2",
+      "source_frame_index": 6,
+      "source_path": "assets/reference/joeville_supplemental/liana/authored-source/frames/liana_motion_012.png",
+      "source_sha256": "3dea369c50b75715ce356e8f7bb2e9503c868e1e6c76893e5c0b04b889047684"
+    },
+    {
+      "alpha_extracted_path": "assets/reference/joeville_supplemental/liana/authored-source/alpha-extracted/liana_motion_013.png",
+      "alpha_extracted_sha256": "3d342060b7ab6d77eb5904916d911b41c50d0cdbc9106be0345496fd539f3bbd",
+      "alpha_extraction_receipt": {
+        "path": "assets/reference/joeville_supplemental/liana/authored-source/alpha-extraction-receipts/liana_motion_013.json",
+        "sha256": "13aadae551d9eedc73bcb19f7e2fad89f8822825fdec8c4e94a50eb2d5263b26"
+      },
+      "approval_state": "pending_visual_parity",
+      "authorship": "authored_full_size_imagegen_v1",
+      "brief_id": null,
+      "canonical_bbox": [
+        130,
+        208,
+        1125,
+        1185
+      ],
+      "canonicalization_receipt": {
+        "path": "assets/reference/joeville_supplemental/liana/authored-source/canonicalization-receipts/liana_motion_013.json",
+        "sha256": "daeccb19f14bc97de12f3870aa0d4b633801411a9d419e2d65ebc07f8f25087b"
+      },
+      "chroma_source_path": "assets/reference/joeville_supplemental/liana/authored-source/chroma-source/liana_motion_013.png",
+      "chroma_source_sha256": "8e2cf2579df5fa286fa8f1c07e63bbc0485064f94de021f1a5feae82afb9b470",
+      "motion_slot_id": "motion-013",
+      "pose_id": "liana_motion_013",
+      "pose_summary": "Decisive trail plant that prepares obstacle clearance.",
+      "review_projection": true,
+      "rgba_sha256": "357b72e8ce0d0e64d145f18b2718f59fb32390af63dccbe326f4dd9454c4845d",
+      "runtime_admitted": false,
+      "sequence_id": "g3",
+      "source_frame_index": 1,
+      "source_path": "assets/reference/joeville_supplemental/liana/authored-source/frames/liana_motion_013.png",
+      "source_sha256": "54aab998a3cb8265178aa03987b0ca58f3433eb5b076c70784e6e861363c27ee"
+    },
+    {
+      "alpha_extracted_path": "assets/reference/joeville_supplemental/liana/authored-source/alpha-extracted/liana_motion_014.png",
+      "alpha_extracted_sha256": "e83dcdba760b8808803d9fea70292208d2b7b05f8f457e8294fc4ba722ae3e2d",
+      "alpha_extraction_receipt": {
+        "path": "assets/reference/joeville_supplemental/liana/authored-source/alpha-extraction-receipts/liana_motion_014.json",
+        "sha256": "13bd2b569cadc2938e6c31ce02da5a614f18178d7844cddaba6db0ca695c74c8"
+      },
+      "approval_state": "pending_visual_parity",
+      "authorship": "authored_full_size_imagegen_v1",
+      "brief_id": null,
+      "canonical_bbox": [
+        345,
+        231,
+        908,
+        1185
+      ],
+      "canonicalization_receipt": {
+        "path": "assets/reference/joeville_supplemental/liana/authored-source/canonicalization-receipts/liana_motion_014.json",
+        "sha256": "0e4f478c2b87502b732cf8dd1646558c51331389225424358a37ce900a6cb80d"
+      },
+      "chroma_source_path": "assets/reference/joeville_supplemental/liana/authored-source/chroma-source/liana_motion_014.png",
+      "chroma_source_sha256": "e50055a483291ad351da59b3741d8ed4a1280b9241245a0c89fe407ecf8db0ed",
+      "motion_slot_id": "motion-014",
+      "pose_id": "liana_motion_014",
+      "pose_summary": "Deep but athletic two-foot compression.",
+      "review_projection": true,
+      "rgba_sha256": "538e0ff336b00d4dece55f1d1a69e3cd980b22421f3e6a19a9eb77417cdc225a",
+      "runtime_admitted": false,
+      "sequence_id": "g3",
+      "source_frame_index": 2,
+      "source_path": "assets/reference/joeville_supplemental/liana/authored-source/frames/liana_motion_014.png",
+      "source_sha256": "26e89ac71b263f9dc64c8c47261bdb473c2083527a051b13ba1b8d25e688b5aa"
+    },
+    {
+      "alpha_extracted_path": "assets/reference/joeville_supplemental/liana/authored-source/alpha-extracted/liana_motion_015.png",
+      "alpha_extracted_sha256": "52b13b41d504ea11a47eac471d033f5c7665031053e2f1f7e44f1efdd98e83c6",
+      "alpha_extraction_receipt": {
+        "path": "assets/reference/joeville_supplemental/liana/authored-source/alpha-extraction-receipts/liana_motion_015.json",
+        "sha256": "7bf3438a25ad7f3036acb9479f9a0c2d4cba33b812ffd9a36498a46a7eed4d25"
+      },
+      "approval_state": "pending_visual_parity",
+      "authorship": "authored_full_size_imagegen_v1",
+      "brief_id": null,
+      "canonical_bbox": [
+        326,
+        175,
+        928,
+        1185
+      ],
+      "canonicalization_receipt": {
+        "path": "assets/reference/joeville_supplemental/liana/authored-source/canonicalization-receipts/liana_motion_015.json",
+        "sha256": "9cd49a005fbf7e76380b0e93818194ee8bb836214b16eedf7cb28c4c4476c659"
+      },
+      "chroma_source_path": "assets/reference/joeville_supplemental/liana/authored-source/chroma-source/liana_motion_015.png",
+      "chroma_source_sha256": "e73a23e0c271d7cf1e64d89d5334f48507f1cee697d363c246cb9dd3e6330090",
+      "motion_slot_id": "motion-015",
+      "pose_id": "liana_motion_015",
+      "pose_summary": "Committed two-foot toe launch.",
+      "review_projection": true,
+      "rgba_sha256": "7e3e317d224bb100f1c64d3620719b7b99d9191fd327461366edf24face8979c",
+      "runtime_admitted": false,
+      "sequence_id": "g3",
+      "source_frame_index": 3,
+      "source_path": "assets/reference/joeville_supplemental/liana/authored-source/frames/liana_motion_015.png",
+      "source_sha256": "6543484383983b4b1e36fc4c6357e172e51149afbbb8b3d8cce45e93fd744462"
+    },
+    {
+      "alpha_extracted_path": "assets/reference/joeville_supplemental/liana/authored-source/alpha-extracted/liana_motion_016.png",
+      "alpha_extracted_sha256": "96f8493e42e0a9ce157e3636f3acb5fed7bc2e6cc50713c5f4f6ba73bc7dc9bc",
+      "alpha_extraction_receipt": {
+        "path": "assets/reference/joeville_supplemental/liana/authored-source/alpha-extraction-receipts/liana_motion_016.json",
+        "sha256": "95e69be349bd8df1730595561967732644161a28ae1ad140bc813e4a867ce305"
+      },
+      "approval_state": "pending_visual_parity",
+      "authorship": "authored_full_size_imagegen_v1",
+      "brief_id": null,
+      "canonical_bbox": [
+        280,
+        390,
+        973,
+        1185
+      ],
+      "canonicalization_receipt": {
+        "path": "assets/reference/joeville_supplemental/liana/authored-source/canonicalization-receipts/liana_motion_016.json",
+        "sha256": "f2a3951dbafe32829fe709f26f4aca6b92d195194b22a5613b02882455d542e7"
+      },
+      "chroma_source_path": "assets/reference/joeville_supplemental/liana/authored-source/chroma-source/liana_motion_016.png",
+      "chroma_source_sha256": "4b5917a5f9e112ed41934dbc24421985a5c225808d2a56c12d58f6c720d8b487",
+      "motion_slot_id": "motion-016",
+      "pose_id": "liana_motion_016",
+      "pose_summary": "Compact airborne ascent with route-focused posture.",
+      "review_projection": true,
+      "rgba_sha256": "f4420820698ca986ce15ac333fb73648cd3056c90b69dc1c90d420ed25aa26e0",
+      "runtime_admitted": false,
+      "sequence_id": "g3",
+      "source_frame_index": 4,
+      "source_path": "assets/reference/joeville_supplemental/liana/authored-source/frames/liana_motion_016.png",
+      "source_sha256": "4550fb996947eecb2c8d43ccb132c2218622d761dc2893d0190244cafd38abd6"
+    },
+    {
+      "alpha_extracted_path": "assets/reference/joeville_supplemental/liana/authored-source/alpha-extracted/liana_motion_017.png",
+      "alpha_extracted_sha256": "25aacbc9666fcfeeb7a82e13c2e84ddd224db82994178a874a83495969753577",
+      "alpha_extraction_receipt": {
+        "path": "assets/reference/joeville_supplemental/liana/authored-source/alpha-extraction-receipts/liana_motion_017.json",
+        "sha256": "db10c10ba3e8f668ca26540db9ed8af503281b3f242eef8008f8e87c73db6c19"
+      },
+      "approval_state": "pending_visual_parity",
+      "authorship": "authored_full_size_imagegen_v1",
+      "brief_id": null,
+      "canonical_bbox": [
+        352,
+        340,
+        902,
+        1185
+      ],
+      "canonicalization_receipt": {
+        "path": "assets/reference/joeville_supplemental/liana/authored-source/canonicalization-receipts/liana_motion_017.json",
+        "sha256": "e471176ec5250e4b79ef504e66df3686a4a552cbfa8171b20c6534099347be1a"
+      },
+      "chroma_source_path": "assets/reference/joeville_supplemental/liana/authored-source/chroma-source/liana_motion_017.png",
+      "chroma_source_sha256": "80b112a21ccee8d778e23d6de6db6a6e811313b513466ba771f60d812c117357",
+      "motion_slot_id": "motion-017",
+      "pose_id": "liana_motion_017",
+      "pose_summary": "Apex clearance with knees compact and lateral balance readable.",
+      "review_projection": true,
+      "rgba_sha256": "35bba31789930f4afd769e7e2e74b5162b792d907404a0fd33c5c5b1a5cadf1b",
+      "runtime_admitted": false,
+      "sequence_id": "g3",
+      "source_frame_index": 5,
+      "source_path": "assets/reference/joeville_supplemental/liana/authored-source/frames/liana_motion_017.png",
+      "source_sha256": "3d64ab94b07340a4979316426e11abccfc4da10520539b38b011a08a2b8fb065"
+    },
+    {
+      "alpha_extracted_path": "assets/reference/joeville_supplemental/liana/authored-source/alpha-extracted/liana_motion_018.png",
+      "alpha_extracted_sha256": "bf9877a3e9681d74236f36cf58680e90d8f0729425a3db273e9f84c5a4a5aaa9",
+      "alpha_extraction_receipt": {
+        "path": "assets/reference/joeville_supplemental/liana/authored-source/alpha-extraction-receipts/liana_motion_018.json",
+        "sha256": "d56370f966608b18b6110990f9b5253a75901153f6486b7ae2d9a3d1c343e1b2"
+      },
+      "approval_state": "pending_visual_parity",
+      "authorship": "authored_full_size_imagegen_v1",
+      "brief_id": null,
+      "canonical_bbox": [
+        288,
+        272,
+        966,
+        1185
+      ],
+      "canonicalization_receipt": {
+        "path": "assets/reference/joeville_supplemental/liana/authored-source/canonicalization-receipts/liana_motion_018.json",
+        "sha256": "71e799b99c2fe8da9e5012363e4b121ac05dc19e39cb996d135824a2e5730672"
+      },
+      "chroma_source_path": "assets/reference/joeville_supplemental/liana/authored-source/chroma-source/liana_motion_018.png",
+      "chroma_source_sha256": "9e006b6ca48cb56423a45c73ac1ab54fbf225d3f7ac6513db8e60b9242d5900c",
+      "motion_slot_id": "motion-018",
+      "pose_id": "liana_motion_018",
+      "pose_summary": "Prepared descent with feet reaching for landing.",
+      "review_projection": true,
+      "rgba_sha256": "d8559b363ddf2c1ffb3c698f35e72cf11c74ad44c30e90478db7fc5567b26da6",
+      "runtime_admitted": false,
+      "sequence_id": "g3",
+      "source_frame_index": 6,
+      "source_path": "assets/reference/joeville_supplemental/liana/authored-source/frames/liana_motion_018.png",
+      "source_sha256": "b50b05dfe5f0cd2a7724ec7bcb4a246bdb8ce1784aef3f2b8085dfb2b5e04a4f"
+    },
+    {
+      "alpha_extracted_path": "assets/reference/joeville_supplemental/liana/authored-source/alpha-extracted/liana_motion_019.png",
+      "alpha_extracted_sha256": "2ba2ea5a738ef81aef20b431128cab86408fe9c4253412797a4378b7dcfb6103",
+      "alpha_extraction_receipt": {
+        "path": "assets/reference/joeville_supplemental/liana/authored-source/alpha-extraction-receipts/liana_motion_019.json",
+        "sha256": "ac9bcabdd978ad463dd3a895267b472a03bd4298d05822a6d9135180b6a00a35"
+      },
+      "approval_state": "pending_visual_parity",
+      "authorship": "authored_full_size_imagegen_v1",
+      "brief_id": null,
+      "canonical_bbox": [
+        400,
+        188,
+        855,
+        1185
+      ],
+      "canonicalization_receipt": {
+        "path": "assets/reference/joeville_supplemental/liana/authored-source/canonicalization-receipts/liana_motion_019.json",
+        "sha256": "5445e9b77097847cc2da13933e388cd35eef07dc6d1540bd854b622a34407cc7"
+      },
+      "chroma_source_path": "assets/reference/joeville_supplemental/liana/authored-source/chroma-source/liana_motion_019.png",
+      "chroma_source_sha256": "6b8c5eae50b62c68af9266cebf8399d679caa924182249256aca81470eaf007a",
+      "motion_slot_id": "motion-019",
+      "pose_id": "liana_motion_019",
+      "pose_summary": "Two-foot forefoot landing contact from G3.",
+      "review_projection": true,
+      "rgba_sha256": "2a1efd496c19e97d4c74b63fd4de41f9d27f7fdc3f0653e90ecf5b0c6ac1ce9a",
+      "runtime_admitted": false,
+      "sequence_id": "g4",
+      "source_frame_index": 1,
+      "source_path": "assets/reference/joeville_supplemental/liana/authored-source/frames/liana_motion_019.png",
+      "source_sha256": "1cf836dd772c57cab418996005fde4676aeb8998993154c35491e189fc81b852"
+    },
+    {
+      "alpha_extracted_path": "assets/reference/joeville_supplemental/liana/authored-source/alpha-extracted/liana_motion_020.png",
+      "alpha_extracted_sha256": "3b33eeab9691ace439cc6e5e94a07b6599e8893ea9396d12425220c1450efc18",
+      "alpha_extraction_receipt": {
+        "path": "assets/reference/joeville_supplemental/liana/authored-source/alpha-extraction-receipts/liana_motion_020.json",
+        "sha256": "ecd01c886b881fc256b5d437dd1b55c67ec45527baa689a458363f048a6031aa"
+      },
+      "approval_state": "pending_visual_parity",
+      "authorship": "authored_full_size_imagegen_v1",
+      "brief_id": null,
+      "canonical_bbox": [
+        348,
+        294,
+        906,
+        1185
+      ],
+      "canonicalization_receipt": {
+        "path": "assets/reference/joeville_supplemental/liana/authored-source/canonicalization-receipts/liana_motion_020.json",
+        "sha256": "900cc517ebbd371eb1cad3893f07d8bd19f8f86d52c634e7e322d79083af2b62"
+      },
+      "chroma_source_path": "assets/reference/joeville_supplemental/liana/authored-source/chroma-source/liana_motion_020.png",
+      "chroma_source_sha256": "ece60c3b21de840bbc4e8788d02a338ab96dadd49530dafe88c8a3565265e6ec",
+      "motion_slot_id": "motion-020",
+      "pose_id": "liana_motion_020",
+      "pose_summary": "Deep aligned absorption of landing force.",
+      "review_projection": true,
+      "rgba_sha256": "3ba1194a68210b892c8805b9dd77198c75f3e760a8eff4ccbe55a17dcb29dde9",
+      "runtime_admitted": false,
+      "sequence_id": "g4",
+      "source_frame_index": 2,
+      "source_path": "assets/reference/joeville_supplemental/liana/authored-source/frames/liana_motion_020.png",
+      "source_sha256": "0109c4d91387315461039c5ef5fc01bec71298dd6b3529514c614e70b4b4d26e"
+    },
+    {
+      "alpha_extracted_path": "assets/reference/joeville_supplemental/liana/authored-source/alpha-extracted/liana_motion_021.png",
+      "alpha_extracted_sha256": "2eda2de3ccc7c74e19b88ab3435cfeb8cf0c8f69a37f2a7218e67574e47f409a",
+      "alpha_extraction_receipt": {
+        "path": "assets/reference/joeville_supplemental/liana/authored-source/alpha-extraction-receipts/liana_motion_021.json",
+        "sha256": "3d8bb62640e98632c1f6fe620df1cb0026b4b479f7bc59b112861007ac057dcf"
+      },
+      "approval_state": "pending_visual_parity",
+      "authorship": "authored_full_size_imagegen_v1",
+      "brief_id": null,
+      "canonical_bbox": [
+        374,
+        136,
+        880,
+        1185
+      ],
+      "canonicalization_receipt": {
+        "path": "assets/reference/joeville_supplemental/liana/authored-source/canonicalization-receipts/liana_motion_021.json",
+        "sha256": "b41af1c732a5cf9f7ed676235070259c325e4beeee1423798f49de342ff51b5a"
+      },
+      "chroma_source_path": "assets/reference/joeville_supplemental/liana/authored-source/chroma-source/liana_motion_021.png",
+      "chroma_source_sha256": "720a30d1b2c131540f9053e70a857a1097f7819a19bd9ea04bf01b9c9418268e",
+      "motion_slot_id": "motion-021",
+      "pose_id": "liana_motion_021",
+      "pose_summary": "Small lateral recovery step showing trail balance.",
+      "review_projection": true,
+      "rgba_sha256": "b1c0d56c38554078ef56180435cc745f9ef3bbfb0767be68a75fcbfbdcb3fd48",
+      "runtime_admitted": false,
+      "sequence_id": "g4",
+      "source_frame_index": 3,
+      "source_path": "assets/reference/joeville_supplemental/liana/authored-source/frames/liana_motion_021.png",
+      "source_sha256": "8c363c2e3a1f0204a9d2f77d4f3a1c63213b10ef0fa854e814c56cfb79faf8dd"
+    },
+    {
+      "alpha_extracted_path": "assets/reference/joeville_supplemental/liana/authored-source/alpha-extracted/liana_motion_022.png",
+      "alpha_extracted_sha256": "c5cf9d2f93bd9d752bfbcaf8d9b79aadbfb224d36b4d73ad9ce294172c2286a4",
+      "alpha_extraction_receipt": {
+        "path": "assets/reference/joeville_supplemental/liana/authored-source/alpha-extraction-receipts/liana_motion_022.json",
+        "sha256": "df881ad427fc195cae3ea776bd74e1dbc3a6129cb7dcfc8fe248fb2dddbcadbb"
+      },
+      "approval_state": "pending_visual_parity",
+      "authorship": "authored_full_size_imagegen_v1",
+      "brief_id": null,
+      "canonical_bbox": [
+        382,
+        99,
+        873,
+        1185
+      ],
+      "canonicalization_receipt": {
+        "path": "assets/reference/joeville_supplemental/liana/authored-source/canonicalization-receipts/liana_motion_022.json",
+        "sha256": "4276a0eba86bb6c96f59a00b412686558cb137cb797a2edaf9b75985685b6353"
+      },
+      "chroma_source_path": "assets/reference/joeville_supplemental/liana/authored-source/chroma-source/liana_motion_022.png",
+      "chroma_source_sha256": "f85c403351d3e4a03018d7964150b33e1df009ce9a4f9c8eceb4b76cf230348a",
+      "motion_slot_id": "motion-022",
+      "pose_id": "liana_motion_022",
+      "pose_summary": "Controlled counterbalance returning weight to center.",
+      "review_projection": true,
+      "rgba_sha256": "97f0127d8410f40f6bdf9f8c37f2d7ab09cde9eb7330dc35278efb4aa46638dd",
+      "runtime_admitted": false,
+      "sequence_id": "g4",
+      "source_frame_index": 4,
+      "source_path": "assets/reference/joeville_supplemental/liana/authored-source/frames/liana_motion_022.png",
+      "source_sha256": "b5c4929d8ff658304dfc1a88fd775b3bc700a637f52f825214a83909e734be8a"
+    },
+    {
+      "alpha_extracted_path": "assets/reference/joeville_supplemental/liana/authored-source/alpha-extracted/liana_motion_023.png",
+      "alpha_extracted_sha256": "c410d0c37828965375319cc3758143b48dffdc72a9af3b2a92384780cf520fce",
+      "alpha_extraction_receipt": {
+        "path": "assets/reference/joeville_supplemental/liana/authored-source/alpha-extraction-receipts/liana_motion_023.json",
+        "sha256": "6698f0d93b131c09d56b91175e656b7f1065902a8022c86bacf3de3f2df46642"
+      },
+      "approval_state": "pending_visual_parity",
+      "authorship": "authored_full_size_imagegen_v1",
+      "brief_id": null,
+      "canonical_bbox": [
+        461,
+        102,
+        793,
+        1185
+      ],
+      "canonicalization_receipt": {
+        "path": "assets/reference/joeville_supplemental/liana/authored-source/canonicalization-receipts/liana_motion_023.json",
+        "sha256": "e2908b282d167159355ff32e6d0286cdfdb89777a8d95591d5d7742ed5a1e5f2"
+      },
+      "chroma_source_path": "assets/reference/joeville_supplemental/liana/authored-source/chroma-source/liana_motion_023.png",
+      "chroma_source_sha256": "ca118ecff920ea1e7691adca6bb4ce2d69da90ad6554c1a1db449046ab1b1212",
+      "motion_slot_id": "motion-023",
+      "pose_id": "liana_motion_023",
+      "pose_summary": "Breath-led three-quarter settle after the landing.",
+      "review_projection": true,
+      "rgba_sha256": "98b1120cdc449d5f545774713ffc4e7d7b851d80a71d9befea3321fffaa7d0f8",
+      "runtime_admitted": false,
+      "sequence_id": "g4",
+      "source_frame_index": 5,
+      "source_path": "assets/reference/joeville_supplemental/liana/authored-source/frames/liana_motion_023.png",
+      "source_sha256": "74f27ccfbd816d56f0f2a7200fdc59700b80f5473c57b380d6446aa43da896b0"
+    },
+    {
+      "alpha_extracted_path": "assets/reference/joeville_supplemental/liana/authored-source/alpha-extracted/liana_motion_024.png",
+      "alpha_extracted_sha256": "d89accaf3a9a89f5883473cd9de47d0b3428fa7917a47ceb1844bd4115442084",
+      "alpha_extraction_receipt": {
+        "path": "assets/reference/joeville_supplemental/liana/authored-source/alpha-extraction-receipts/liana_motion_024.json",
+        "sha256": "ab586caec703cb56c81359c3bff2a2e7fd38d7e2d41bf163d26b5606705fd150"
+      },
+      "approval_state": "pending_visual_parity",
+      "authorship": "authored_full_size_imagegen_v1",
+      "brief_id": null,
+      "canonical_bbox": [
+        443,
+        69,
+        811,
+        1185
+      ],
+      "canonicalization_receipt": {
+        "path": "assets/reference/joeville_supplemental/liana/authored-source/canonicalization-receipts/liana_motion_024.json",
+        "sha256": "806de48154cd964c8d326e3b2a1ac7ae89f0ab2f2273131112e34f4873eecb56"
+      },
+      "chroma_source_path": "assets/reference/joeville_supplemental/liana/authored-source/chroma-source/liana_motion_024.png",
+      "chroma_source_sha256": "6bd53691136b6229bc4bf646485bbd174e1f488c4ea69e1967623167d57c8f4d",
+      "motion_slot_id": "motion-024",
+      "pose_id": "liana_motion_024",
+      "pose_summary": "Warm compact greeting after a successful recovery.",
+      "review_projection": true,
+      "rgba_sha256": "30dde2c97517a26931d1e02506af8917459d3b9aa28ef48c1f3ee696e8300e63",
+      "runtime_admitted": false,
+      "sequence_id": "g4",
+      "source_frame_index": 6,
+      "source_path": "assets/reference/joeville_supplemental/liana/authored-source/frames/liana_motion_024.png",
+      "source_sha256": "2f48e358ed66a49360ece8a7ba9aae7590a4acb98fd5d508f2248d56cbad8c64"
+    },
+    {
+      "alpha_extracted_path": "assets/reference/joeville_supplemental/liana/authored-source/alpha-extracted/liana_motion_025.png",
+      "alpha_extracted_sha256": "d2911ca47718505de6c842c46e4a6ad432fdbae8d007239a2ef67149682c2db4",
+      "alpha_extraction_receipt": {
+        "path": "assets/reference/joeville_supplemental/liana/authored-source/alpha-extraction-receipts/liana_motion_025.json",
+        "sha256": "4909a41c7f0df4ff403f3408c25d81cb54134814b49c435e624180f6ee6d543d"
+      },
+      "approval_state": "pending_visual_parity",
+      "authorship": "authored_full_size_imagegen_v1",
+      "brief_id": null,
+      "canonical_bbox": [
+        455,
+        188,
+        798,
+        1185
+      ],
+      "canonicalization_receipt": {
+        "path": "assets/reference/joeville_supplemental/liana/authored-source/canonicalization-receipts/liana_motion_025.json",
+        "sha256": "788cfb17c816ee80c40fed3aed4b0c660d38c9b1dbbe28aadf71563a62652b68"
+      },
+      "chroma_source_path": "assets/reference/joeville_supplemental/liana/authored-source/chroma-source/liana_motion_025.png",
+      "chroma_source_sha256": "e35f96c2d5d3e7823bdf2aaef7a1c32a0496184bdf2d1c3126563bd5e39d6c9c",
+      "motion_slot_id": "motion-025",
+      "pose_id": "liana_motion_025",
+      "pose_summary": "Canonical front idle for motion handoffs.",
+      "review_projection": true,
+      "rgba_sha256": "40449ad323ca4d3584c25b818a71cdd2913a464d5f9d0a451da8b24b972e9390",
+      "runtime_admitted": false,
+      "sequence_id": "g5",
+      "source_frame_index": 1,
+      "source_path": "assets/reference/joeville_supplemental/liana/authored-source/frames/liana_motion_025.png",
+      "source_sha256": "55fc17a7f04a00a0eb26aab198af6b8c89dd0cd225067294a1fab708392ada10"
+    },
+    {
+      "alpha_extracted_path": "assets/reference/joeville_supplemental/liana/authored-source/alpha-extracted/liana_motion_026.png",
+      "alpha_extracted_sha256": "ae6f29e0dd92a66191fb5a2f386869d45fa1a6c512592f977b48752496efcd7c",
+      "alpha_extraction_receipt": {
+        "path": "assets/reference/joeville_supplemental/liana/authored-source/alpha-extraction-receipts/liana_motion_026.json",
+        "sha256": "ae3ac3b047543cd21a3f8b901ef5fd2045c7670b23b93a38b7c29babab814e20"
+      },
+      "approval_state": "pending_visual_parity",
+      "authorship": "authored_full_size_imagegen_v1",
+      "brief_id": null,
+      "canonical_bbox": [
+        441,
+        74,
+        813,
+        1185
+      ],
+      "canonicalization_receipt": {
+        "path": "assets/reference/joeville_supplemental/liana/authored-source/canonicalization-receipts/liana_motion_026.json",
+        "sha256": "5ef345d3319c8d5a710f103f130145526e41547558e86d41031f79dd23b314d2"
+      },
+      "chroma_source_path": "assets/reference/joeville_supplemental/liana/authored-source/chroma-source/liana_motion_026.png",
+      "chroma_source_sha256": "0a3f0ba97155dc2568c432e6f54c4a4b97654e06d30224b2e5857c12272aef9e",
+      "motion_slot_id": "motion-026",
+      "pose_id": "liana_motion_026",
+      "pose_summary": "Anatomical left foot approaches camera in contact.",
+      "review_projection": true,
+      "rgba_sha256": "425d21e822568849836e0b8c5c9e29c27195838f330d16a08b7f810ad72e117b",
+      "runtime_admitted": false,
+      "sequence_id": "g5",
+      "source_frame_index": 2,
+      "source_path": "assets/reference/joeville_supplemental/liana/authored-source/frames/liana_motion_026.png",
+      "source_sha256": "ee29e6f2d3bf6d2a62cef8b9ae3ea5951d97e8d8bf6cb566dfa70542fb1f1b31"
+    },
+    {
+      "alpha_extracted_path": "assets/reference/joeville_supplemental/liana/authored-source/alpha-extracted/liana_motion_027.png",
+      "alpha_extracted_sha256": "ee3a1e83de03f427f1ececd17de4009e843cb5726c531b133b2028e921e41e4b",
+      "alpha_extraction_receipt": {
+        "path": "assets/reference/joeville_supplemental/liana/authored-source/alpha-extraction-receipts/liana_motion_027.json",
+        "sha256": "08baccee36852e1bd8acf8975222406965543723c7654575ba8d3db44434ce7e"
+      },
+      "approval_state": "pending_visual_parity",
+      "authorship": "authored_full_size_imagegen_v1",
+      "brief_id": null,
+      "canonical_bbox": [
+        445,
+        109,
+        810,
+        1185
+      ],
+      "canonicalization_receipt": {
+        "path": "assets/reference/joeville_supplemental/liana/authored-source/canonicalization-receipts/liana_motion_027.json",
+        "sha256": "c9dd49aa17487773b66adb68781c5582038f5e33d66011b9b2653197874ea413"
+      },
+      "chroma_source_path": "assets/reference/joeville_supplemental/liana/authored-source/chroma-source/liana_motion_027.png",
+      "chroma_source_sha256": "44ac5ed1bfd9e4363ddbb117044879d20bd05a55030f8c99f2a80957a085aa27",
+      "motion_slot_id": "motion-027",
+      "pose_id": "liana_motion_027",
+      "pose_summary": "Centered front passing pose with one support leg.",
+      "review_projection": true,
+      "rgba_sha256": "065c9d52c317300b861c8ac24b4b53ea817172920146e6fc54d467182ed2a4d9",
+      "runtime_admitted": false,
+      "sequence_id": "g5",
+      "source_frame_index": 3,
+      "source_path": "assets/reference/joeville_supplemental/liana/authored-source/frames/liana_motion_027.png",
+      "source_sha256": "560ed003c86ceedac2539b8cbcb0bdb963e582b2f40eef1d493536e9a013433a"
+    },
+    {
+      "alpha_extracted_path": "assets/reference/joeville_supplemental/liana/authored-source/alpha-extracted/liana_motion_028.png",
+      "alpha_extracted_sha256": "e9c746878c164fc41c862c6654a4fcd29806245c7dfb11c10b609702885e6d18",
+      "alpha_extraction_receipt": {
+        "path": "assets/reference/joeville_supplemental/liana/authored-source/alpha-extraction-receipts/liana_motion_028.json",
+        "sha256": "e68cb282e0e9445fff13c431292b372f00c2ed35cd18ff706a349c7092273202"
+      },
+      "approval_state": "pending_visual_parity",
+      "authorship": "authored_full_size_imagegen_v1",
+      "brief_id": null,
+      "canonical_bbox": [
+        473,
+        202,
+        782,
+        1185
+      ],
+      "canonicalization_receipt": {
+        "path": "assets/reference/joeville_supplemental/liana/authored-source/canonicalization-receipts/liana_motion_028.json",
+        "sha256": "42a4b5d673715a4d61a40d9567eec51d72a9f04a0c50762e9f83428f2c4c1b1f"
+      },
+      "chroma_source_path": "assets/reference/joeville_supplemental/liana/authored-source/chroma-source/liana_motion_028.png",
+      "chroma_source_sha256": "446c022c9f4fa18f0e6f7482c8b502249f97a5d231dc6aecfd948126409ee14e",
+      "motion_slot_id": "motion-028",
+      "pose_id": "liana_motion_028",
+      "pose_summary": "Anatomical right foot takes the next approach contact.",
+      "review_projection": true,
+      "rgba_sha256": "2fd9d8418a6798a7f035ef4d02e875527395984bb6b746c4bfd0284b489cd8d9",
+      "runtime_admitted": false,
+      "sequence_id": "g5",
+      "source_frame_index": 4,
+      "source_path": "assets/reference/joeville_supplemental/liana/authored-source/frames/liana_motion_028.png",
+      "source_sha256": "802154c1867d54953874fcea41d7b74072cd05920b3c8bedaed4dcfcecaa0ce8"
+    },
+    {
+      "alpha_extracted_path": "assets/reference/joeville_supplemental/liana/authored-source/alpha-extracted/liana_motion_029.png",
+      "alpha_extracted_sha256": "50ec7d51e664e49858dc4fb50b3e30b62f7a224e5cd1070066542e25aaacccb0",
+      "alpha_extraction_receipt": {
+        "path": "assets/reference/joeville_supplemental/liana/authored-source/alpha-extraction-receipts/liana_motion_029.json",
+        "sha256": "3c1b8c8927f17a5b0216d8a094e32998b2f4bfd6da1b99c3266bd1b80af42f17"
+      },
+      "approval_state": "pending_visual_parity",
+      "authorship": "authored_full_size_imagegen_v1",
+      "brief_id": null,
+      "canonical_bbox": [
+        450,
+        169,
+        805,
+        1185
+      ],
+      "canonicalization_receipt": {
+        "path": "assets/reference/joeville_supplemental/liana/authored-source/canonicalization-receipts/liana_motion_029.json",
+        "sha256": "0355fb189fb8e0a9f1df67018cb7c7f61cabe5c294713584fc39386af3c9bfc3"
+      },
+      "chroma_source_path": "assets/reference/joeville_supplemental/liana/authored-source/chroma-source/liana_motion_029.png",
+      "chroma_source_sha256": "29ad62e82c447bfb73ba2a858272b4cec309bd93f6bd6cbbc20c73651bc054f4",
+      "motion_slot_id": "motion-029",
+      "pose_id": "liana_motion_029",
+      "pose_summary": "Centered two-foot compression for a compact forward hop.",
+      "review_projection": true,
+      "rgba_sha256": "c77553f429944ae61c96840aed36cf97bf9027de97b0e203573f3d1c7a902ed7",
+      "runtime_admitted": false,
+      "sequence_id": "g5",
+      "source_frame_index": 5,
+      "source_path": "assets/reference/joeville_supplemental/liana/authored-source/frames/liana_motion_029.png",
+      "source_sha256": "7328ab0cc164c895c26a62585151e716182216da1fbcff37c8c75e85d88bef5a"
+    },
+    {
+      "alpha_extracted_path": "assets/reference/joeville_supplemental/liana/authored-source/alpha-extracted/liana_motion_030.png",
+      "alpha_extracted_sha256": "52b0c1b80c278cc0d217ca270d508e8c4b40a84ecc29f77b5bac97b04cc68e3e",
+      "alpha_extraction_receipt": {
+        "path": "assets/reference/joeville_supplemental/liana/authored-source/alpha-extraction-receipts/liana_motion_030.json",
+        "sha256": "4a199020f8bfb665a3d8668cdf6ceba63369e2a68d1bd53fc6480616828d0b45"
+      },
+      "approval_state": "pending_visual_parity",
+      "authorship": "authored_full_size_imagegen_v1",
+      "brief_id": null,
+      "canonical_bbox": [
+        346,
+        115,
+        908,
+        1185
+      ],
+      "canonicalization_receipt": {
+        "path": "assets/reference/joeville_supplemental/liana/authored-source/canonicalization-receipts/liana_motion_030.json",
+        "sha256": "ff26eb8024f175c59395090d1a26aae990d3079a835d103ed41b4035690a0654"
+      },
+      "chroma_source_path": "assets/reference/joeville_supplemental/liana/authored-source/chroma-source/liana_motion_030.png",
+      "chroma_source_sha256": "21cb3eed37fbb9b2b1698e647f5aaae9ac9e9df560bde6b8a4104e5546ab897a",
+      "motion_slot_id": "motion-030",
+      "pose_id": "liana_motion_030",
+      "pose_summary": "Compact forward-hop landing with quiet athletic control.",
+      "review_projection": true,
+      "rgba_sha256": "96a03f1c581fe0715e61e89a4468165991af8a25f6b3a2436bb212c8705599f9",
+      "runtime_admitted": false,
+      "sequence_id": "g5",
+      "source_frame_index": 6,
+      "source_path": "assets/reference/joeville_supplemental/liana/authored-source/frames/liana_motion_030.png",
+      "source_sha256": "f216e93c5af87fb880d2c2b4b8be6960531db635db79c23fab4dd00cbfffe18f"
+    },
+    {
+      "alpha_extracted_path": "assets/reference/joeville_supplemental/liana/authored-source/alpha-extracted/liana_motion_031.png",
+      "alpha_extracted_sha256": "fc4d761b262b3a3c20878ff62a58cf653d888918762927584660bc16dd09fdee",
+      "alpha_extraction_receipt": {
+        "path": "assets/reference/joeville_supplemental/liana/authored-source/alpha-extraction-receipts/liana_motion_031.json",
+        "sha256": "77c04c99b9b36b7385c1156ecaa0fe05948455b1c783b1a4dbe515df7ededb5c"
+      },
+      "approval_state": "pending_visual_parity",
+      "authorship": "authored_full_size_imagegen_v1",
+      "brief_id": null,
+      "canonical_bbox": [
+        450,
+        72,
+        804,
+        1185
+      ],
+      "canonicalization_receipt": {
+        "path": "assets/reference/joeville_supplemental/liana/authored-source/canonicalization-receipts/liana_motion_031.json",
+        "sha256": "fc10411952662973a5a8a072ebb1c51ed9789a3d6968f0f6436daa1392a05200"
+      },
+      "chroma_source_path": "assets/reference/joeville_supplemental/liana/authored-source/chroma-source/liana_motion_031.png",
+      "chroma_source_sha256": "2e9027356fa90cfcdd29ab534b7ba7a528df883d84fa8549211f361dcfd0b201",
+      "motion_slot_id": "motion-031",
+      "pose_id": "liana_motion_031",
+      "pose_summary": "Canonical rear idle proving hair, straps, waistband, and shoes.",
+      "review_projection": true,
+      "rgba_sha256": "5a89f048d4cc00592df0be689abb04dbc54dc22d5f95fc4a093ed185cbe8e390",
+      "runtime_admitted": false,
+      "sequence_id": "g6",
+      "source_frame_index": 1,
+      "source_path": "assets/reference/joeville_supplemental/liana/authored-source/frames/liana_motion_031.png",
+      "source_sha256": "ef618fe35d051675d104c7bc359da0ee975192acb8270f519fc5f01d71e72bed"
+    },
+    {
+      "alpha_extracted_path": "assets/reference/joeville_supplemental/liana/authored-source/alpha-extracted/liana_motion_032.png",
+      "alpha_extracted_sha256": "671b5f2a331e343dd3313807dc4fee14079551c3ea6d8c8018a92f9e1ca314c5",
+      "alpha_extraction_receipt": {
+        "path": "assets/reference/joeville_supplemental/liana/authored-source/alpha-extraction-receipts/liana_motion_032.json",
+        "sha256": "9ecf71cbcbaa1ec59365825e416b6a75b3cc40089bfffff736fefeb2edc00210"
+      },
+      "approval_state": "pending_visual_parity",
+      "authorship": "authored_full_size_imagegen_v1",
+      "brief_id": null,
+      "canonical_bbox": [
+        468,
+        161,
+        787,
+        1185
+      ],
+      "canonicalization_receipt": {
+        "path": "assets/reference/joeville_supplemental/liana/authored-source/canonicalization-receipts/liana_motion_032.json",
+        "sha256": "62ccaf871dc560e09a3d9252d019fef6e9f6f6a87e452edff43a459b19323e92"
+      },
+      "chroma_source_path": "assets/reference/joeville_supplemental/liana/authored-source/chroma-source/liana_motion_032.png",
+      "chroma_source_sha256": "75198e4737399c3aab5e5c73cb57408635526864e767f20d57a446ccaaa0a17f",
+      "motion_slot_id": "motion-032",
+      "pose_id": "liana_motion_032",
+      "pose_summary": "Anatomical left step departing away from camera.",
+      "review_projection": true,
+      "rgba_sha256": "6e9e4881906b6946158c0e2a1b699a4bde420d094a0b6c3d6835c4ab4caa5c0d",
+      "runtime_admitted": false,
+      "sequence_id": "g6",
+      "source_frame_index": 2,
+      "source_path": "assets/reference/joeville_supplemental/liana/authored-source/frames/liana_motion_032.png",
+      "source_sha256": "0ddecbf5fcff9407fac871610fe494e416d850f75f954f4322df47ba46515952"
+    },
+    {
+      "alpha_extracted_path": "assets/reference/joeville_supplemental/liana/authored-source/alpha-extracted/liana_motion_033.png",
+      "alpha_extracted_sha256": "67625d1c6e913a12ee0d7359d2f392e5eecc0bce4e043eeb9f91d9d4ffbf82fc",
+      "alpha_extraction_receipt": {
+        "path": "assets/reference/joeville_supplemental/liana/authored-source/alpha-extraction-receipts/liana_motion_033.json",
+        "sha256": "746ea46d216cf374e5ce68b936115f40b771c77599d0381c276abe6473e9310d"
+      },
+      "approval_state": "pending_visual_parity",
+      "authorship": "authored_full_size_imagegen_v1",
+      "brief_id": null,
+      "canonical_bbox": [
+        473,
+        231,
+        781,
+        1185
+      ],
+      "canonicalization_receipt": {
+        "path": "assets/reference/joeville_supplemental/liana/authored-source/canonicalization-receipts/liana_motion_033.json",
+        "sha256": "0257a68f0be1910aa68515aee1ef442e97cd951ecb74020a32d691c8648c64e1"
+      },
+      "chroma_source_path": "assets/reference/joeville_supplemental/liana/authored-source/chroma-source/liana_motion_033.png",
+      "chroma_source_sha256": "68214aa979ebd561d9ce94f0b28570800c2dbeca906d2cf60b01969279dde93e",
+      "motion_slot_id": "motion-033",
+      "pose_id": "liana_motion_033",
+      "pose_summary": "Rear-view passing phase beneath the pelvis.",
+      "review_projection": true,
+      "rgba_sha256": "1b968af2f768593f007b897040f0236ae4bc3f0148302c95c32ef5d8788f84f5",
+      "runtime_admitted": false,
+      "sequence_id": "g6",
+      "source_frame_index": 3,
+      "source_path": "assets/reference/joeville_supplemental/liana/authored-source/frames/liana_motion_033.png",
+      "source_sha256": "1ba178fa7768518bf5a16bee6b503923d9859d18006f640d6b68df4ac7892c18"
+    },
+    {
+      "alpha_extracted_path": "assets/reference/joeville_supplemental/liana/authored-source/alpha-extracted/liana_motion_034.png",
+      "alpha_extracted_sha256": "9f321206ac5a947caacd5edddec1f773077e3747a8300bd05ce111a778249c3a",
+      "alpha_extraction_receipt": {
+        "path": "assets/reference/joeville_supplemental/liana/authored-source/alpha-extraction-receipts/liana_motion_034.json",
+        "sha256": "1afb017e7b1a82b6239021e2dd63c86d02f8fd3732a6d5ea9c43e04277884c6a"
+      },
+      "approval_state": "pending_visual_parity",
+      "authorship": "authored_full_size_imagegen_v1",
+      "brief_id": null,
+      "canonical_bbox": [
+        458,
+        99,
+        796,
+        1185
+      ],
+      "canonicalization_receipt": {
+        "path": "assets/reference/joeville_supplemental/liana/authored-source/canonicalization-receipts/liana_motion_034.json",
+        "sha256": "5a7cfd26c582341fe20785fbcef3b46d7fbd72aa056cd12326ff5bf614471686"
+      },
+      "chroma_source_path": "assets/reference/joeville_supplemental/liana/authored-source/chroma-source/liana_motion_034.png",
+      "chroma_source_sha256": "2edcbb9f9d464ecca5e2bcfcd43564ac7002746870da99d6f68326509f4e78f4",
+      "motion_slot_id": "motion-034",
+      "pose_id": "liana_motion_034",
+      "pose_summary": "Right-foot departure contact with stronger forward drive.",
+      "review_projection": true,
+      "rgba_sha256": "cdf692f5c2d1deca54614f4feb2159b86daccee695a565817992eaa0579f9017",
+      "runtime_admitted": false,
+      "sequence_id": "g6",
+      "source_frame_index": 4,
+      "source_path": "assets/reference/joeville_supplemental/liana/authored-source/frames/liana_motion_034.png",
+      "source_sha256": "d41b88b8df0781e5f464aa34d089c1750a4388c6bc6b68261d9a264c1ee86197"
+    },
+    {
+      "alpha_extracted_path": "assets/reference/joeville_supplemental/liana/authored-source/alpha-extracted/liana_motion_035.png",
+      "alpha_extracted_sha256": "2ed14854e6fd2f4ecbedda13e62b14b896ea04404605e448cbfe83bb4f1c9784",
+      "alpha_extraction_receipt": {
+        "path": "assets/reference/joeville_supplemental/liana/authored-source/alpha-extraction-receipts/liana_motion_035.json",
+        "sha256": "b2718fbf7ba720ce26a8f628ff79338209c892cfa891c02ff343cf2a8815918f"
+      },
+      "approval_state": "pending_visual_parity",
+      "authorship": "authored_full_size_imagegen_v1",
+      "brief_id": null,
+      "canonical_bbox": [
+        346,
+        205,
+        907,
+        1185
+      ],
+      "canonicalization_receipt": {
+        "path": "assets/reference/joeville_supplemental/liana/authored-source/canonicalization-receipts/liana_motion_035.json",
+        "sha256": "cc5b3a5234a55d3fd3efa8f3d44ce1e481c6d8ce7389d71e78f89465b2ec907e"
+      },
+      "chroma_source_path": "assets/reference/joeville_supplemental/liana/authored-source/chroma-source/liana_motion_035.png",
+      "chroma_source_sha256": "9ab9eddbba328836eadf51199e177059b249939bcc5f9ba452d3475bf7d738ee",
+      "motion_slot_id": "motion-035",
+      "pose_id": "liana_motion_035",
+      "pose_summary": "Small rear-view two-foot hop in flight.",
+      "review_projection": true,
+      "rgba_sha256": "1385218cdf7bc63d083de4d2e323f9b578931dfd2d168b47e0cdd586e8841a8e",
+      "runtime_admitted": false,
+      "sequence_id": "g6",
+      "source_frame_index": 5,
+      "source_path": "assets/reference/joeville_supplemental/liana/authored-source/frames/liana_motion_035.png",
+      "source_sha256": "f2e0b2647cbffe02ca635eead08ba2d0e2c0f383c205b7a77c173eec6efcc631"
+    },
+    {
+      "alpha_extracted_path": "assets/reference/joeville_supplemental/liana/authored-source/alpha-extracted/liana_motion_036.png",
+      "alpha_extracted_sha256": "b93fae418b09bfcd2eb68889c2899c9d349a44c0afdc1821f45758796f24f49d",
+      "alpha_extraction_receipt": {
+        "path": "assets/reference/joeville_supplemental/liana/authored-source/alpha-extraction-receipts/liana_motion_036.json",
+        "sha256": "5f60a758987ce965922e39a326f1868e6a17c9798fca59f440bfa3c47e160cbd"
+      },
+      "approval_state": "pending_visual_parity",
+      "authorship": "authored_full_size_imagegen_v1",
+      "brief_id": null,
+      "canonical_bbox": [
+        444,
+        82,
+        809,
+        1185
+      ],
+      "canonicalization_receipt": {
+        "path": "assets/reference/joeville_supplemental/liana/authored-source/canonicalization-receipts/liana_motion_036.json",
+        "sha256": "5ce2a9d5340d2fe83d295e97800e0fa30b069f647377737b6803058cce8f7fd8"
+      },
+      "chroma_source_path": "assets/reference/joeville_supplemental/liana/authored-source/chroma-source/liana_motion_036.png",
+      "chroma_source_sha256": "7d9e74f035bd8b251e25b5b96cd6132da6ea7d40a0ed39065f948d588a1d0d31",
+      "motion_slot_id": "motion-036",
+      "pose_id": "liana_motion_036",
+      "pose_summary": "Rear-view dual-foot landing and travel recovery.",
+      "review_projection": true,
+      "rgba_sha256": "f04b01014a36bd7a5461fbe39e4830091c4826df4af55b9fcc19acaa2be2bac4",
+      "runtime_admitted": false,
+      "sequence_id": "g6",
+      "source_frame_index": 6,
+      "source_path": "assets/reference/joeville_supplemental/liana/authored-source/frames/liana_motion_036.png",
+      "source_sha256": "5fec6631536265eaf9b7bb85e1ede530f960268d34bf3f9afecc9f718aeca168"
+    },
+    {
+      "alpha_extracted_path": "assets/reference/joeville_supplemental/liana/authored-source/alpha-extracted/liana_motion_037.png",
+      "alpha_extracted_sha256": "bca0ca0dc04d29d2b55e702f3f9624ff1d9ce29c0217058c0df218b4a7073844",
+      "alpha_extraction_receipt": {
+        "path": "assets/reference/joeville_supplemental/liana/authored-source/alpha-extraction-receipts/liana_motion_037.json",
+        "sha256": "f6a28e4c72bb786e32ec285afd76d274a824cbeca52083d9e8b7ff2e8d0b19e2"
+      },
+      "approval_state": "pending_visual_parity",
+      "authorship": "authored_full_size_imagegen_v1",
+      "brief_id": null,
+      "canonical_bbox": [
+        465,
+        180,
+        790,
+        1185
+      ],
+      "canonicalization_receipt": {
+        "path": "assets/reference/joeville_supplemental/liana/authored-source/canonicalization-receipts/liana_motion_037.json",
+        "sha256": "75f3ef5a8507e6c771a2d702317a903aac8fe0daabe8998d7bd85e0c69034a5c"
+      },
+      "chroma_source_path": "assets/reference/joeville_supplemental/liana/authored-source/chroma-source/liana_motion_037.png",
+      "chroma_source_sha256": "abfbe06e660d9a4a18dfd854ca24a712d3a47d57826157da341f60b60658c46e",
+      "motion_slot_id": "motion-037",
+      "pose_id": "liana_motion_037",
+      "pose_summary": "Grounded recognition that a peer needs support.",
+      "review_projection": true,
+      "rgba_sha256": "921e135b3018509d0401d2a136bcc2475487dd36bf5c278c02901fd954050080",
+      "runtime_admitted": false,
+      "sequence_id": "g7",
+      "source_frame_index": 1,
+      "source_path": "assets/reference/joeville_supplemental/liana/authored-source/frames/liana_motion_037.png",
+      "source_sha256": "72021734eb78f84f2b60a1a3cf88ff40c20b170ea150335b4016cda753312241"
+    },
+    {
+      "alpha_extracted_path": "assets/reference/joeville_supplemental/liana/authored-source/alpha-extracted/liana_motion_038.png",
+      "alpha_extracted_sha256": "91777efa715054054a2895ee1c14acc8c1aae471971c43be72e2a4f4197b5c95",
+      "alpha_extraction_receipt": {
+        "path": "assets/reference/joeville_supplemental/liana/authored-source/alpha-extraction-receipts/liana_motion_038.json",
+        "sha256": "1155705a8092aa5adbb094a4f5a1003e20466a37d10ef5c3b317a53cd392c1d8"
+      },
+      "approval_state": "pending_visual_parity",
+      "authorship": "authored_full_size_imagegen_v1",
+      "brief_id": null,
+      "canonical_bbox": [
+        396,
+        164,
+        859,
+        1185
+      ],
+      "canonicalization_receipt": {
+        "path": "assets/reference/joeville_supplemental/liana/authored-source/canonicalization-receipts/liana_motion_038.json",
+        "sha256": "8bf7307e66d9e7f899d54f237eb81aa6677f4ff675ef98d990e8f7906e9b1871"
+      },
+      "chroma_source_path": "assets/reference/joeville_supplemental/liana/authored-source/chroma-source/liana_motion_038.png",
+      "chroma_source_sha256": "da582f35086a4b59a3b1ec6adb201169c91be390e3d18e42f1264b0f8c5810b5",
+      "motion_slot_id": "motion-038",
+      "pose_id": "liana_motion_038",
+      "pose_summary": "Low open-palm invitation to speak.",
+      "review_projection": true,
+      "rgba_sha256": "bb83192b95c83197ffa6e67fb50e801e5b65f11cf0014da105e989c4c45b6b9b",
+      "runtime_admitted": false,
+      "sequence_id": "g7",
+      "source_frame_index": 2,
+      "source_path": "assets/reference/joeville_supplemental/liana/authored-source/frames/liana_motion_038.png",
+      "source_sha256": "79ad630a5369a80147bce93fe283b60ded133aa7f6d2b4f678aeddfc039dddc6"
+    },
+    {
+      "alpha_extracted_path": "assets/reference/joeville_supplemental/liana/authored-source/alpha-extracted/liana_motion_039.png",
+      "alpha_extracted_sha256": "483bbdbe3e81053dce712af41bff82b4ae03c61fbc2258d87da45f44a8fe6769",
+      "alpha_extraction_receipt": {
+        "path": "assets/reference/joeville_supplemental/liana/authored-source/alpha-extraction-receipts/liana_motion_039.json",
+        "sha256": "5b68170488aa0d7351e6abddeea37c1e151021a8f883500595db6f57af36742a"
+      },
+      "approval_state": "pending_visual_parity",
+      "authorship": "authored_full_size_imagegen_v1",
+      "brief_id": null,
+      "canonical_bbox": [
+        461,
+        109,
+        794,
+        1185
+      ],
+      "canonicalization_receipt": {
+        "path": "assets/reference/joeville_supplemental/liana/authored-source/canonicalization-receipts/liana_motion_039.json",
+        "sha256": "47d41932d5b5a0972efd992434b65c5d9b5780f0b92b5bb2d9774ef9cd7b863a"
+      },
+      "chroma_source_path": "assets/reference/joeville_supplemental/liana/authored-source/chroma-source/liana_motion_039.png",
+      "chroma_source_sha256": "2915e454275ee8bf216bbdd07d81939b4dee9b5a82b22c40cc6983af7f72ade2",
+      "motion_slot_id": "motion-039",
+      "pose_id": "liana_motion_039",
+      "pose_summary": "Patient active listening with contained breath.",
+      "review_projection": true,
+      "rgba_sha256": "76f16b93744df76baaedd99ca8dfc0678f28b1d1f5d3389c7794c6daf4d503ae",
+      "runtime_admitted": false,
+      "sequence_id": "g7",
+      "source_frame_index": 3,
+      "source_path": "assets/reference/joeville_supplemental/liana/authored-source/frames/liana_motion_039.png",
+      "source_sha256": "bb7320dc2f0e09b2f414ee1a450bbe8c1ea21e89af90ebc68d1d753277e720a0"
+    },
+    {
+      "alpha_extracted_path": "assets/reference/joeville_supplemental/liana/authored-source/alpha-extracted/liana_motion_040.png",
+      "alpha_extracted_sha256": "096e1331557827da1132ce2594b93e7fd1de38b3371e1a181e4b4411fc9a39c0",
+      "alpha_extraction_receipt": {
+        "path": "assets/reference/joeville_supplemental/liana/authored-source/alpha-extraction-receipts/liana_motion_040.json",
+        "sha256": "f2de9d94fe4748ed45691cad5f7fa8570f8ffbe31d64e616bc8126778d5a7278"
+      },
+      "approval_state": "pending_visual_parity",
+      "authorship": "authored_full_size_imagegen_v1",
+      "brief_id": null,
+      "canonical_bbox": [
+        416,
+        251,
+        839,
+        1185
+      ],
+      "canonicalization_receipt": {
+        "path": "assets/reference/joeville_supplemental/liana/authored-source/canonicalization-receipts/liana_motion_040.json",
+        "sha256": "2e6bc3ab8aa9331fe329d0603664ea9012b1657c4ea0e2ca804103a802d3ba93"
+      },
+      "chroma_source_path": "assets/reference/joeville_supplemental/liana/authored-source/chroma-source/liana_motion_040.png",
+      "chroma_source_sha256": "de3a798873e9a31f83e967cee3095ba61da64a25e6609cffb9d4c494907abd38",
+      "motion_slot_id": "motion-040",
+      "pose_id": "liana_motion_040",
+      "pose_summary": "Small two-part gesture that offers another way to see the problem.",
+      "review_projection": true,
+      "rgba_sha256": "87d0a081230d24db5f7790db5ed37846d018841f16caf639d4381a272efd4c70",
+      "runtime_admitted": false,
+      "sequence_id": "g7",
+      "source_frame_index": 4,
+      "source_path": "assets/reference/joeville_supplemental/liana/authored-source/frames/liana_motion_040.png",
+      "source_sha256": "265e95f4da6fdd426489a3a9d731e8ea19e834899bdcd26876c082d0ba9fab35"
+    },
+    {
+      "alpha_extracted_path": "assets/reference/joeville_supplemental/liana/authored-source/alpha-extracted/liana_motion_041.png",
+      "alpha_extracted_sha256": "f0d722138b7f0c4dc0bd45d2baa307624cc074b2569c831658e0e8329c62eecd",
+      "alpha_extraction_receipt": {
+        "path": "assets/reference/joeville_supplemental/liana/authored-source/alpha-extraction-receipts/liana_motion_041.json",
+        "sha256": "9bab744790138aafa11bec200d604861ce7a45b57d3f32f1566173a6ceff4ee2"
+      },
+      "approval_state": "pending_visual_parity",
+      "authorship": "authored_full_size_imagegen_v1",
+      "brief_id": null,
+      "canonical_bbox": [
+        437,
+        168,
+        818,
+        1185
+      ],
+      "canonicalization_receipt": {
+        "path": "assets/reference/joeville_supplemental/liana/authored-source/canonicalization-receipts/liana_motion_041.json",
+        "sha256": "998ff02f096c2a23eee21f3927e2c5cde114345ad3f92281c530d59594ac310b"
+      },
+      "chroma_source_path": "assets/reference/joeville_supplemental/liana/authored-source/chroma-source/liana_motion_041.png",
+      "chroma_source_sha256": "d680c0b1b761f475c9775531ca5b5cc1e4a94bd66242047d504070f3b6db8666",
+      "motion_slot_id": "motion-041",
+      "pose_id": "liana_motion_041",
+      "pose_summary": "Warm practical encouragement with one forward open hand.",
+      "review_projection": true,
+      "rgba_sha256": "75fcbcb276c8be214e9c41ce9911d32a7f330f551829ae87a7c597eae393c647",
+      "runtime_admitted": false,
+      "sequence_id": "g7",
+      "source_frame_index": 5,
+      "source_path": "assets/reference/joeville_supplemental/liana/authored-source/frames/liana_motion_041.png",
+      "source_sha256": "72f0c7df191710287dd4e5e5710d575261f0681f9701394f626ccf717a2498f6"
+    },
+    {
+      "alpha_extracted_path": "assets/reference/joeville_supplemental/liana/authored-source/alpha-extracted/liana_motion_042.png",
+      "alpha_extracted_sha256": "16168479f22ffd94c809ac5d3e3e1efa569149b8790e8998189c7907581d0abd",
+      "alpha_extraction_receipt": {
+        "path": "assets/reference/joeville_supplemental/liana/authored-source/alpha-extraction-receipts/liana_motion_042.json",
+        "sha256": "41dcefbc1c790e7cd4bc8d9d9db5527012a1ad06d8b945d9f7f9a69fda3ca402"
+      },
+      "approval_state": "pending_visual_parity",
+      "authorship": "authored_full_size_imagegen_v1",
+      "brief_id": null,
+      "canonical_bbox": [
+        465,
+        211,
+        789,
+        1185
+      ],
+      "canonicalization_receipt": {
+        "path": "assets/reference/joeville_supplemental/liana/authored-source/canonicalization-receipts/liana_motion_042.json",
+        "sha256": "97ef2ab1f1fc3fea6975856de29e874670282d1812b97960671044fc4ef38bc3"
+      },
+      "chroma_source_path": "assets/reference/joeville_supplemental/liana/authored-source/chroma-source/liana_motion_042.png",
+      "chroma_source_sha256": "907006b4c7171335a087285bd97bf0aef988c8d828f3b88c4216464f6349e235",
+      "motion_slot_id": "motion-042",
+      "pose_id": "liana_motion_042",
+      "pose_summary": "Open choice returned to the peer.",
+      "review_projection": true,
+      "rgba_sha256": "cdd316154d067be88eb2b98526f1ec96d28ebc66ee0462970478848c422330d5",
+      "runtime_admitted": false,
+      "sequence_id": "g7",
+      "source_frame_index": 6,
+      "source_path": "assets/reference/joeville_supplemental/liana/authored-source/frames/liana_motion_042.png",
+      "source_sha256": "dd22734e46fb82417dc123672f35a7c67405adbdfcca9eaa344f72b3b221f529"
+    },
+    {
+      "alpha_extracted_path": "assets/reference/joeville_supplemental/liana/authored-source/alpha-extracted/liana_motion_043.png",
+      "alpha_extracted_sha256": "167d75b469f30d3fd4a6c92cd79e30bd8a7768fce4e1bb68fa23ef36b50afd13",
+      "alpha_extraction_receipt": {
+        "path": "assets/reference/joeville_supplemental/liana/authored-source/alpha-extraction-receipts/liana_motion_043.json",
+        "sha256": "9f1a365050e841d3aaf1ca0df2dc7a1cccc1611ff71c92363a83c735a4752fd8"
+      },
+      "approval_state": "pending_visual_parity",
+      "authorship": "authored_full_size_imagegen_v1",
+      "brief_id": null,
+      "canonical_bbox": [
+        450,
+        146,
+        804,
+        1185
+      ],
+      "canonicalization_receipt": {
+        "path": "assets/reference/joeville_supplemental/liana/authored-source/canonicalization-receipts/liana_motion_043.json",
+        "sha256": "1ecac92721564a5ac876eb6b5e0c855db7661ccc30b7066afcd52f32055ce5ff"
+      },
+      "chroma_source_path": "assets/reference/joeville_supplemental/liana/authored-source/chroma-source/liana_motion_043.png",
+      "chroma_source_sha256": "c6816b66a9fdc090e53e7c27f93f020ac5cbb82d2868b32139b4a598639732de",
+      "motion_slot_id": "motion-043",
+      "pose_id": "liana_motion_043",
+      "pose_summary": "Post-effort arrival with believable elevated breath.",
+      "review_projection": true,
+      "rgba_sha256": "16f07d29ea7b68c687954d2936dc9aed075212da0a92265e6ca402bd97d957a8",
+      "runtime_admitted": false,
+      "sequence_id": "g8",
+      "source_frame_index": 1,
+      "source_path": "assets/reference/joeville_supplemental/liana/authored-source/frames/liana_motion_043.png",
+      "source_sha256": "10279e51fb412b657d599367004f9a35aedcfe22494bb9d018eea7ae89f7b434"
+    },
+    {
+      "alpha_extracted_path": "assets/reference/joeville_supplemental/liana/authored-source/alpha-extracted/liana_motion_044.png",
+      "alpha_extracted_sha256": "305232164743483a5a56d3187f54cbc1e9a74460fef9ac04485830fa68bf0beb",
+      "alpha_extraction_receipt": {
+        "path": "assets/reference/joeville_supplemental/liana/authored-source/alpha-extraction-receipts/liana_motion_044.json",
+        "sha256": "4e5689ad2cbb0927f7a4ceb1ff4086d4d11adfadd82b3aa9583128ffa1a1fc10"
+      },
+      "approval_state": "pending_visual_parity",
+      "authorship": "authored_full_size_imagegen_v1",
+      "brief_id": null,
+      "canonical_bbox": [
+        468,
+        241,
+        785,
+        1185
+      ],
+      "canonicalization_receipt": {
+        "path": "assets/reference/joeville_supplemental/liana/authored-source/canonicalization-receipts/liana_motion_044.json",
+        "sha256": "01e65899d2e101e435f034a6c1b76682034597489aeb063cea2db6ddf720ab7d"
+      },
+      "chroma_source_path": "assets/reference/joeville_supplemental/liana/authored-source/chroma-source/liana_motion_044.png",
+      "chroma_source_sha256": "0ee145563156c1312e1ec6bc5c8d7c2c5113590d66524993f99c6c144969b017",
+      "motion_slot_id": "motion-044",
+      "pose_id": "liana_motion_044",
+      "pose_summary": "Deliberate even-footed grounding without a named posture.",
+      "review_projection": true,
+      "rgba_sha256": "74c5eef7c97fc5ea6bf763e9f550d1639b62a7dfb377d7a06b6ce79142297513",
+      "runtime_admitted": false,
+      "sequence_id": "g8",
+      "source_frame_index": 2,
+      "source_path": "assets/reference/joeville_supplemental/liana/authored-source/frames/liana_motion_044.png",
+      "source_sha256": "d8dd5b43c6eb1a947cebd9c3e6002a1066a13a104d30b2d909e7a0bca808f909"
+    },
+    {
+      "alpha_extracted_path": "assets/reference/joeville_supplemental/liana/authored-source/alpha-extracted/liana_motion_045.png",
+      "alpha_extracted_sha256": "0267e6d0db9054528c153ad650a435e62849e2e4a399186df9e6758fabd017d7",
+      "alpha_extraction_receipt": {
+        "path": "assets/reference/joeville_supplemental/liana/authored-source/alpha-extraction-receipts/liana_motion_045.json",
+        "sha256": "c60d6d87ba499a953ea49dbd519be2f4b9d6c97ffdeac4ce989032d81cfb23b8"
+      },
+      "approval_state": "pending_visual_parity",
+      "authorship": "authored_full_size_imagegen_v1",
+      "brief_id": null,
+      "canonical_bbox": [
+        467,
+        155,
+        787,
+        1185
+      ],
+      "canonicalization_receipt": {
+        "path": "assets/reference/joeville_supplemental/liana/authored-source/canonicalization-receipts/liana_motion_045.json",
+        "sha256": "b1ce62dcab04a913cc5bfa69ff7f4e699d2cb4b71293276f8059be5fe6d3bd32"
+      },
+      "chroma_source_path": "assets/reference/joeville_supplemental/liana/authored-source/chroma-source/liana_motion_045.png",
+      "chroma_source_sha256": "e555f0b94921f5a0bf53311190d8821d00f518e2ab22dd1258cba7e4aa467615",
+      "motion_slot_id": "motion-045",
+      "pose_id": "liana_motion_045",
+      "pose_summary": "Visible controlled exhale through shoulders and ribcage.",
+      "review_projection": true,
+      "rgba_sha256": "198063cd3f18b9a5021dc592f15f91251542f248a635f372de7c321c53fc68d4",
+      "runtime_admitted": false,
+      "sequence_id": "g8",
+      "source_frame_index": 3,
+      "source_path": "assets/reference/joeville_supplemental/liana/authored-source/frames/liana_motion_045.png",
+      "source_sha256": "a10edf6c0c4fe7f17ceea024e2de375674dccaf30e6057ce3f544a156cef949f"
+    },
+    {
+      "alpha_extracted_path": "assets/reference/joeville_supplemental/liana/authored-source/alpha-extracted/liana_motion_046.png",
+      "alpha_extracted_sha256": "9e603368833963ffb6fb94ea17f225d751df4cf9f77b244208f7e6bb22a5aa8a",
+      "alpha_extraction_receipt": {
+        "path": "assets/reference/joeville_supplemental/liana/authored-source/alpha-extraction-receipts/liana_motion_046.json",
+        "sha256": "dccf39f362f491dff712a54e8d2cb0267b219da14c30d0e05fc1aab3d3e75abd"
+      },
+      "approval_state": "pending_visual_parity",
+      "authorship": "authored_full_size_imagegen_v1",
+      "brief_id": null,
+      "canonical_bbox": [
+        466,
+        180,
+        788,
+        1185
+      ],
+      "canonicalization_receipt": {
+        "path": "assets/reference/joeville_supplemental/liana/authored-source/canonicalization-receipts/liana_motion_046.json",
+        "sha256": "c0aa3c97f2ce881d7c914b31cb4fbdd5d8a3bd60c032912d44d75bea2a29cd4c"
+      },
+      "chroma_source_path": "assets/reference/joeville_supplemental/liana/authored-source/chroma-source/liana_motion_046.png",
+      "chroma_source_sha256": "cb7a9b1373cf02e5a73721f421bb6eb9e4d8ab4bd22ffdfe3ee9c84b71239909",
+      "motion_slot_id": "motion-046",
+      "pose_id": "liana_motion_046",
+      "pose_summary": "Practical shoulder and upper-back release.",
+      "review_projection": true,
+      "rgba_sha256": "337cd1333690f0cc415572d205210c58421536ecc393bc44c912d61e3c950f3f",
+      "runtime_admitted": false,
+      "sequence_id": "g8",
+      "source_frame_index": 4,
+      "source_path": "assets/reference/joeville_supplemental/liana/authored-source/frames/liana_motion_046.png",
+      "source_sha256": "51669f33315e34e2707d603452698f04c00c421192c9204a1ac2c4cc3a8ac9d6"
+    },
+    {
+      "alpha_extracted_path": "assets/reference/joeville_supplemental/liana/authored-source/alpha-extracted/liana_motion_047.png",
+      "alpha_extracted_sha256": "34fa3ebacad8ef721523e669346bea04e31c11a9ed5ff45961cacea1e02418d6",
+      "alpha_extraction_receipt": {
+        "path": "assets/reference/joeville_supplemental/liana/authored-source/alpha-extraction-receipts/liana_motion_047.json",
+        "sha256": "257ebeb198bfd2f708756a285309a7a7687a6622e6f4da83119a1dfd03d933b3"
+      },
+      "approval_state": "pending_visual_parity",
+      "authorship": "authored_full_size_imagegen_v1",
+      "brief_id": null,
+      "canonical_bbox": [
+        454,
+        168,
+        800,
+        1185
+      ],
+      "canonicalization_receipt": {
+        "path": "assets/reference/joeville_supplemental/liana/authored-source/canonicalization-receipts/liana_motion_047.json",
+        "sha256": "b1406e057c2addaeae80a905460b0ca4f18acf2d8a7f452a128ea0d626d74ef5"
+      },
+      "chroma_source_path": "assets/reference/joeville_supplemental/liana/authored-source/chroma-source/liana_motion_047.png",
+      "chroma_source_sha256": "384e522d56bde72586b509d2b7ecc3ebbfe096913037dfd5d8ff2a542b7b2476",
+      "motion_slot_id": "motion-047",
+      "pose_id": "liana_motion_047",
+      "pose_summary": "Balanced recenter after the mobility release.",
+      "review_projection": true,
+      "rgba_sha256": "e465817ec6f4ff247cd4d6ec759e8a27a42c093534780e67911b7f7b2a0e7e7b",
+      "runtime_admitted": false,
+      "sequence_id": "g8",
+      "source_frame_index": 5,
+      "source_path": "assets/reference/joeville_supplemental/liana/authored-source/frames/liana_motion_047.png",
+      "source_sha256": "dc944a35c2ae6644fd66fc7b3f33284cb003fc1a08b7f1efbfc2478c9687b4ef"
+    },
+    {
+      "alpha_extracted_path": "assets/reference/joeville_supplemental/liana/authored-source/alpha-extracted/liana_motion_048.png",
+      "alpha_extracted_sha256": "708e6110752d906ed0af5cfaddfeedc3a03059ef704886ce1e48c7129c8915b1",
+      "alpha_extraction_receipt": {
+        "path": "assets/reference/joeville_supplemental/liana/authored-source/alpha-extraction-receipts/liana_motion_048.json",
+        "sha256": "28ad9e8e2c56a1bb40f7938537c559996a2212d29076e21e872c44d1009c73b6"
+      },
+      "approval_state": "pending_visual_parity",
+      "authorship": "authored_full_size_imagegen_v1",
+      "brief_id": null,
+      "canonical_bbox": [
+        462,
+        191,
+        792,
+        1185
+      ],
+      "canonicalization_receipt": {
+        "path": "assets/reference/joeville_supplemental/liana/authored-source/canonicalization-receipts/liana_motion_048.json",
+        "sha256": "ce02575ec4f20e15480272a782444f6e14b4c2701be4aa4a5df36d985edf46f6"
+      },
+      "chroma_source_path": "assets/reference/joeville_supplemental/liana/authored-source/chroma-source/liana_motion_048.png",
+      "chroma_source_sha256": "01efe25f267cfd709dba9e19497296baae73be21e4dff8ed18a50c954faab4fc",
+      "motion_slot_id": "motion-048",
+      "pose_id": "liana_motion_048",
+      "pose_summary": "Restored practical readiness with calm route awareness.",
+      "review_projection": true,
+      "rgba_sha256": "f5a6c51f59add05d45e09d241a4eacfd6749c2aa25aeccaed5c1e21f3ca15410",
+      "runtime_admitted": false,
+      "sequence_id": "g8",
+      "source_frame_index": 6,
+      "source_path": "assets/reference/joeville_supplemental/liana/authored-source/frames/liana_motion_048.png",
+      "source_sha256": "2e8ff7273fc0b6126818c99ff02d2282425e7d063620fd11759c4dbe258a6a04"
+    }
+  ],
+  "profile": {
+    "alpha_mode": "straight",
+    "baseline_y": 1185,
+    "canvas_height": 1254,
+    "canvas_width": 1254,
+    "color_space": "sRGB",
+    "minimum_margin": 69,
+    "profile_id": "wizardjoe_hd_alpha_1254_v001"
+  },
+  "review_projection": true,
+  "roster_state": "supplemental_authored_character",
+  "runtime_admitted": false,
+  "schema_version": 1,
+  "sequences": {
+    "g1": {
+      "approval_state": "pending_visual_parity",
+      "family": "profile_walk_foundation",
+      "fps": 10,
+      "intent": "profile_idle_anticipate_contact_pass_stride_recover",
+      "loop": false,
+      "loop_mode": "hold_last",
+      "pose_ids": [
+        "liana_motion_001",
+        "liana_motion_002",
+        "liana_motion_003",
+        "liana_motion_004",
+        "liana_motion_005",
+        "liana_motion_006"
+      ],
+      "review_projection": true,
+      "runtime_admitted": false
+    },
+    "g2": {
+      "approval_state": "pending_visual_parity",
+      "family": "profile_walk_to_run",
+      "fps": 12,
+      "intent": "fast_contact_down_pass_launch_flight_land",
+      "loop": true,
+      "loop_mode": "loop",
+      "pose_ids": [
+        "liana_motion_007",
+        "liana_motion_008",
+        "liana_motion_009",
+        "liana_motion_010",
+        "liana_motion_011",
+        "liana_motion_012"
+      ],
+      "review_projection": true,
+      "runtime_admitted": false
+    },
+    "g3": {
+      "approval_state": "pending_visual_parity",
+      "family": "trail_sprint_and_jump",
+      "fps": 12,
+      "intent": "sprint_plant_compress_launch_clear_descend",
+      "loop": false,
+      "loop_mode": "hold_last",
+      "pose_ids": [
+        "liana_motion_013",
+        "liana_motion_014",
+        "liana_motion_015",
+        "liana_motion_016",
+        "liana_motion_017",
+        "liana_motion_018"
+      ],
+      "review_projection": true,
+      "runtime_admitted": false
+    },
+    "g4": {
+      "approval_state": "pending_visual_parity",
+      "family": "landing_balance_and_greeting",
+      "fps": 10,
+      "intent": "land_absorb_correct_counterbalance_settle_greet",
+      "loop": false,
+      "loop_mode": "hold_last",
+      "pose_ids": [
+        "liana_motion_019",
+        "liana_motion_020",
+        "liana_motion_021",
+        "liana_motion_022",
+        "liana_motion_023",
+        "liana_motion_024"
+      ],
+      "review_projection": true,
+      "runtime_admitted": false
+    },
+    "g5": {
+      "approval_state": "pending_visual_parity",
+      "family": "front_approach_and_hop",
+      "fps": 10,
+      "intent": "front_idle_left_step_pass_right_step_compress_hop_land",
+      "loop": false,
+      "loop_mode": "hold_last",
+      "pose_ids": [
+        "liana_motion_025",
+        "liana_motion_026",
+        "liana_motion_027",
+        "liana_motion_028",
+        "liana_motion_029",
+        "liana_motion_030"
+      ],
+      "review_projection": true,
+      "runtime_admitted": false
+    },
+    "g6": {
+      "approval_state": "pending_visual_parity",
+      "family": "rear_departure_and_hop",
+      "fps": 10,
+      "intent": "rear_idle_left_depart_pass_accelerate_hop_recover",
+      "loop": false,
+      "loop_mode": "hold_last",
+      "pose_ids": [
+        "liana_motion_031",
+        "liana_motion_032",
+        "liana_motion_033",
+        "liana_motion_034",
+        "liana_motion_035",
+        "liana_motion_036"
+      ],
+      "review_projection": true,
+      "runtime_admitted": false
+    },
+    "g7": {
+      "approval_state": "pending_visual_parity",
+      "family": "peer_coaching_exchange",
+      "fps": 10,
+      "intent": "notice_invite_listen_reframe_encourage_return_agency",
+      "loop": false,
+      "loop_mode": "hold_last",
+      "pose_ids": [
+        "liana_motion_037",
+        "liana_motion_038",
+        "liana_motion_039",
+        "liana_motion_040",
+        "liana_motion_041",
+        "liana_motion_042"
+      ],
+      "review_projection": true,
+      "runtime_admitted": false
+    },
+    "g8": {
+      "approval_state": "pending_visual_parity",
+      "family": "post_effort_recovery_reset",
+      "fps": 8,
+      "intent": "arrive_ground_exhale_mobilize_recenter_ready",
+      "loop": false,
+      "loop_mode": "hold_last",
+      "pose_ids": [
+        "liana_motion_043",
+        "liana_motion_044",
+        "liana_motion_045",
+        "liana_motion_046",
+        "liana_motion_047",
+        "liana_motion_048"
+      ],
+      "review_projection": true,
+      "runtime_admitted": false
+    },
+    "liana-supplemental-all": {
+      "approval_state": "pending_visual_parity",
+      "fps": 8,
+      "loop": true,
+      "pose_ids": [
+        "liana_motion_001",
+        "liana_motion_002",
+        "liana_motion_003",
+        "liana_motion_004",
+        "liana_motion_005",
+        "liana_motion_006",
+        "liana_motion_007",
+        "liana_motion_008",
+        "liana_motion_009",
+        "liana_motion_010",
+        "liana_motion_011",
+        "liana_motion_012",
+        "liana_motion_013",
+        "liana_motion_014",
+        "liana_motion_015",
+        "liana_motion_016",
+        "liana_motion_017",
+        "liana_motion_018",
+        "liana_motion_019",
+        "liana_motion_020",
+        "liana_motion_021",
+        "liana_motion_022",
+        "liana_motion_023",
+        "liana_motion_024",
+        "liana_motion_025",
+        "liana_motion_026",
+        "liana_motion_027",
+        "liana_motion_028",
+        "liana_motion_029",
+        "liana_motion_030",
+        "liana_motion_031",
+        "liana_motion_032",
+        "liana_motion_033",
+        "liana_motion_034",
+        "liana_motion_035",
+        "liana_motion_036",
+        "liana_motion_037",
+        "liana_motion_038",
+        "liana_motion_039",
+        "liana_motion_040",
+        "liana_motion_041",
+        "liana_motion_042",
+        "liana_motion_043",
+        "liana_motion_044",
+        "liana_motion_045",
+        "liana_motion_046",
+        "liana_motion_047",
+        "liana_motion_048"
+      ],
+      "review_projection": true,
+      "runtime_admitted": false
+    }
+  },
+  "shards": [
+    {
+      "approval_state": "pending_visual_parity",
+      "bytes": 28725043,
+      "path": "liana-candidate-supplemental-48-v001.wjpose",
+      "pose_count": 48,
+      "pose_ids": [
+        "liana_motion_001",
+        "liana_motion_002",
+        "liana_motion_003",
+        "liana_motion_004",
+        "liana_motion_005",
+        "liana_motion_006",
+        "liana_motion_007",
+        "liana_motion_008",
+        "liana_motion_009",
+        "liana_motion_010",
+        "liana_motion_011",
+        "liana_motion_012",
+        "liana_motion_013",
+        "liana_motion_014",
+        "liana_motion_015",
+        "liana_motion_016",
+        "liana_motion_017",
+        "liana_motion_018",
+        "liana_motion_019",
+        "liana_motion_020",
+        "liana_motion_021",
+        "liana_motion_022",
+        "liana_motion_023",
+        "liana_motion_024",
+        "liana_motion_025",
+        "liana_motion_026",
+        "liana_motion_027",
+        "liana_motion_028",
+        "liana_motion_029",
+        "liana_motion_030",
+        "liana_motion_031",
+        "liana_motion_032",
+        "liana_motion_033",
+        "liana_motion_034",
+        "liana_motion_035",
+        "liana_motion_036",
+        "liana_motion_037",
+        "liana_motion_038",
+        "liana_motion_039",
+        "liana_motion_040",
+        "liana_motion_041",
+        "liana_motion_042",
+        "liana_motion_043",
+        "liana_motion_044",
+        "liana_motion_045",
+        "liana_motion_046",
+        "liana_motion_047",
+        "liana_motion_048"
+      ],
+      "review_projection": true,
+      "runtime_admitted": false,
+      "sha256": "79535e1b310848bf23d3c8f5db170fdfc6657865a6fa8e0f03040d80630bafee",
+      "shard_id": "liana-supplemental-motion-48-v001",
+      "source": "authored_supplemental_full_size"
+    }
+  ]
+}

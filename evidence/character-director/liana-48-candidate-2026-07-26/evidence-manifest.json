@@ -1,0 +1,114 @@
+{
+  "schema_version": 1,
+  "evidence_id": "liana-48-pose-candidate-2026-07-26",
+  "character_id": "liana",
+  "display_name": "Liana",
+  "decision": "technical_review_passed_pending_product_approval",
+  "review_projection": true,
+  "runtime_admitted": false,
+  "observer_url": "http://127.0.0.1:8665/",
+  "profile": {
+    "profile_id": "wizardjoe_hd_alpha_1254_v001",
+    "canvas_width": 1254,
+    "canvas_height": 1254,
+    "baseline_y": 1185,
+    "minimum_margin": 69,
+    "alpha_mode": "straight",
+    "transparent_rgb_policy": "zero_rgb_beneath_zero_alpha"
+  },
+  "qa_summary": {
+    "pose_count": 48,
+    "unique_png_hash_count": 48,
+    "unique_rgba_hash_count": 48,
+    "poses_pending_art": 0,
+    "poses_technical_candidate_complete": 48,
+    "poses_product_approved": 0,
+    "minimum_observed_left_margin": 130,
+    "minimum_observed_top_margin": 69,
+    "minimum_observed_right_margin": 129,
+    "observed_baseline_values": [
+      1185
+    ],
+    "zero_rgb_beneath_zero_alpha": true,
+    "two_clean_builds_artifact_identical": true,
+    "two_clean_builds_index_identical": true
+  },
+  "governed_assets": [
+    {
+      "role": "authoring_brief",
+      "path": "assets/reference/joeville_supplemental/liana/authoring-brief-v001.json",
+      "sha256": "9d4198ae6cc2fc5acdd16386d9dab544e499fed58cd06c9932b71b1d38c05346"
+    },
+    {
+      "role": "supplemental_tracker",
+      "path": "assets/reference/joeville_supplemental/liana/supplemental-tracker-v001.json",
+      "sha256": "5c1776cf7c438e869ea618e6f65374deb9a38d28cd5e4c7f1ad9c61e511ddbcf"
+    },
+    {
+      "role": "motion_manifest",
+      "path": "assets/reference/joeville_supplemental/liana/motion-manifest-v001.json",
+      "sha256": "9d2306c87009fb5971c5c5811ba0d2d245c64079952c516aad56bc1153cf59bf"
+    },
+    {
+      "role": "compiled_pixel_graph_artifact",
+      "path": "assets/reference/joeville_supplemental/liana/compiled-motion/liana-candidate-supplemental-48-v001.wjpose",
+      "sha256": "79535e1b310848bf23d3c8f5db170fdfc6657865a6fa8e0f03040d80630bafee"
+    },
+    {
+      "role": "library_index",
+      "path": "assets/reference/joeville_supplemental/liana/compiled-motion/library-index.json",
+      "sha256": "ff6972de47681a8e3a710b880fff53ca8da205e51f01f314073db409ff4a9d19"
+    },
+    {
+      "role": "build_receipt",
+      "path": "assets/reference/joeville_supplemental/liana/compiled-motion/build-receipt.json",
+      "sha256": "ae18bbe68a6945a45aaabbc66ca4634afc0fbc32af68725997d890ff5b5042e5"
+    }
+  ],
+  "visual_evidence": [
+    {
+      "path": "evidence/character-director/liana-48-candidate-2026-07-26/liana-48-contact-sheet.png",
+      "sha256": "dbd77e60149c3fa2eca80671ced02a3ec46541db632340820b78947b9699f02e"
+    },
+    {
+      "path": "evidence/character-director/liana-48-candidate-2026-07-26/observer-motion-01.jpg",
+      "sha256": "82f56569a6633c1b0c5c5812fb132ae832a669d6ee381c75b6624e2861503ed3"
+    },
+    {
+      "path": "evidence/character-director/liana-48-candidate-2026-07-26/observer-motion-02.jpg",
+      "sha256": "abfb1eff857b2c85d89b8af01ec0c90e0e819107cd4f26d4a2454efee90d76d2"
+    },
+    {
+      "path": "evidence/character-director/liana-48-candidate-2026-07-26/observer-motion-03.jpg",
+      "sha256": "f270ebf9d2faabf1b598dae495c251684dc8db161ac47224910e331c47b24bcb"
+    },
+    {
+      "path": "evidence/character-director/liana-48-candidate-2026-07-26/observer-motion-04.jpg",
+      "sha256": "e456c90f040a722efa8ff2d91051ceda16c6286a13244e77d6f0812aa5ba4270"
+    },
+    {
+      "path": "evidence/character-director/liana-48-candidate-2026-07-26/observer-motion-05.jpg",
+      "sha256": "97fdaab7080b93a881c40f10a5de6c4d694787d04583548fdd498cc71ce78a56"
+    },
+    {
+      "path": "evidence/character-director/liana-48-candidate-2026-07-26/observer-motion-06.jpg",
+      "sha256": "50bd757f859a99df472e4e90f54e82efb203501f7ed272a17057bf0facb7b59d"
+    },
+    {
+      "path": "evidence/character-director/liana-48-candidate-2026-07-26/observer-motion-07.jpg",
+      "sha256": "bc145881990534c364c71ca931b4e8290e1fe6214d424826d8fd8e936441abe8"
+    },
+    {
+      "path": "evidence/character-director/liana-48-candidate-2026-07-26/observer-motion-08.jpg",
+      "sha256": "06675724ffe99226cb3b176e6df47e52929e55a2559c7c109fbc9852d5087ffb"
+    },
+    {
+      "path": "evidence/character-director/liana-48-candidate-2026-07-26/observer-motion-09.jpg",
+      "sha256": "9e0b3c8129c7dd663245f8ea6f617f7a59206dd3baf31b318023f0e43481c347"
+    }
+  ],
+  "product_gate": {
+    "state": "awaiting_explicit_product_approval",
+    "effect": "production_registry_unchanged_and_runtime_admission_false"
+  }
+}

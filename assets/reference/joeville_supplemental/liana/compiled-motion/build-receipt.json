@@ -1,0 +1,26 @@
+{
+  "artifact": {
+    "bytes": 28725043,
+    "path": "assets/reference/joeville_supplemental/liana/compiled-motion/liana-candidate-supplemental-48-v001.wjpose",
+    "pose_count": 48,
+    "sha256": "79535e1b310848bf23d3c8f5db170fdfc6657865a6fa8e0f03040d80630bafee"
+  },
+  "asset_set_id": "liana-supplemental-motion-48-v001",
+  "authority_manifest": {
+    "path": "assets/reference/hd_canonical/manifest.json",
+    "sha256": "740f35730f4aa1e6c6ef96be80115c5b0e117397f792d57fdf5360452bbe78c8"
+  },
+  "character_id": "liana",
+  "library_index": {
+    "path": "assets/reference/joeville_supplemental/liana/compiled-motion/library-index.json",
+    "sha256": "ff6972de47681a8e3a710b880fff53ca8da205e51f01f314073db409ff4a9d19"
+  },
+  "pose_count": 48,
+  "review_projection": true,
+  "runtime_admitted": false,
+  "schema_version": 1,
+  "supplemental_manifest": {
+    "path": "assets/reference/joeville_supplemental/liana/motion-manifest-v001.json",
+    "sha256": "9d2306c87009fb5971c5c5811ba0d2d245c64079952c516aad56bc1153cf59bf"
+  }
+}

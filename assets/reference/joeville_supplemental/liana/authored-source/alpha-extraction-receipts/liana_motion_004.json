@@ -1,0 +1,36 @@
+{
+  "canvas_normalized": true,
+  "canvas_size": [
+    1254,
+    1254
+  ],
+  "destination_path": "assets/reference/joeville_supplemental/liana/authored-source/alpha-extracted/liana_motion_004.png",
+  "destination_rgba_sha256": "dafaf7c414c6abcead9aa0d98612b91d65ccb0b0d13191bd9d3996e74b4a4e22",
+  "destination_sha256": "ad409e0d420483b5a49da14471c50443f671c29a15cfb5b83711590bd240f850",
+  "edge_contract": 1,
+  "key_color": [
+    251,
+    2,
+    249
+  ],
+  "normalization_offset": [
+    209,
+    0
+  ],
+  "normalization_scale": 0.81640625,
+  "schema_version": 1,
+  "silhouette_bbox": [
+    418,
+    89,
+    888,
+    1097
+  ],
+  "source_canvas_size": [
+    1024,
+    1536
+  ],
+  "source_path": "assets/reference/joeville_supplemental/liana/authored-source/chroma-source/liana_motion_004.png",
+  "source_sha256": "100397b50e2994f655c2d021b9fc02b69a0de0658ff8cd62ba2ec05b2bea0814",
+  "tolerance": 110,
+  "transparent_pixels_before_contract": 1385469
+}

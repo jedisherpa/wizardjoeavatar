@@ -1,0 +1,35 @@
+{
+  "authority_manifest_sha256": "740f35730f4aa1e6c6ef96be80115c5b0e117397f792d57fdf5360452bbe78c8",
+  "destination_bbox": [
+    280,
+    390,
+    973,
+    1185
+  ],
+  "destination_path": "assets/reference/joeville_supplemental/liana/authored-source/frames/liana_motion_016.png",
+  "destination_rgba_sha256": "f4420820698ca986ce15ac333fb73648cd3056c90b69dc1c90d420ed25aa26e0",
+  "destination_sha256": "4550fb996947eecb2c8d43ccb132c2218622d761dc2893d0190244cafd38abd6",
+  "fitted_bbox": [
+    300,
+    79,
+    993,
+    874
+  ],
+  "profile_id": "wizardjoe_hd_alpha_1254_v001",
+  "resample_filter": null,
+  "resampled": false,
+  "scale": 1.0,
+  "schema_version": 1,
+  "source_bbox": [
+    300,
+    79,
+    993,
+    874
+  ],
+  "source_path": "assets/reference/joeville_supplemental/liana/authored-source/alpha-extracted/liana_motion_016.png",
+  "source_sha256": "96f8493e42e0a9ce157e3636f3acb5fed7bc2e6cc50713c5f4f6ba73bc7dc9bc",
+  "translation": {
+    "x": -20,
+    "y": 311
+  }
+}

@@ -81,18 +81,20 @@ Gates are sequential and fail closed:
 
 ## 48-Slot Ledger
 
-All slots begin at `pending_art`.
+All 48 slots now have independently authored full-size source art, transparent
+canonical frames, portable provenance receipts, and unique pixel graphs. Their
+state is `technical_candidate_complete`; no pose has product approval.
 
 | Group | Pose IDs | Performance phrase | Root / contact contract | Loop / interrupt contract | State |
 | --- | --- | --- | --- | --- | --- |
-| G1 | `liana_motion_001`-`006` | Profile idle, anticipation, contact, passing, stride, recovery | Screen-right progressive; authored heel/toe and single-support contacts | Cycle `003`-`006` only after contact match; marker-safe | `6 pending_art` |
-| G2 | `liana_motion_007`-`012` | Fast contact, down, passing, launch, flight, landing | Screen-right acceleration; contact/down/pass/launch/flight/land | `012`-`007` contact-matched run loop; contact-marker-safe | `6 pending_art` |
-| G3 | `liana_motion_013`-`018` | Trail sprint plant, compression, launch, ascent, clearance, descent | Screen-right ballistic arc; plant through airborne descent | Non-looping; safe before launch commit, then complete through G4 recovery | `6 pending_art` |
-| G4 | `liana_motion_019`-`024` | Landing, absorption, correction, counterbalance, settle, greeting | Landing translation then fixed; dual-grounded recovery | Hold `024` or exit; bounded marker-safe recovery | `6 pending_art` |
-| G5 | `liana_motion_025`-`030` | Front idle, left approach, passing, right approach, compression, hop landing | Toward-camera progression then contact lock | Non-looping grounded phrase; contact-marker-safe | `6 pending_art` |
-| G6 | `liana_motion_031`-`036` | Rear idle, departure, passing, acceleration, hop flight, recovery | Away-camera progression then contact lock | Non-looping grounded phrase; contact-marker-safe | `6 pending_art` |
-| G7 | `liana_motion_037`-`042` | Notice, invite, listen, reframe, encourage, return agency | Fixed root; dual-foot grounded throughout | Hold `039` or `042`; never auto-loop; marker-safe | `6 pending_art` |
-| G8 | `liana_motion_043`-`048` | Arrive, ground, exhale, mobilize, recenter, ready | Fixed root; dual-foot grounded throughout | Hold `048`; restart only after exact root match; marker-safe | `6 pending_art` |
+| G1 | `liana_motion_001`-`006` | Profile idle, anticipation, contact, passing, stride, recovery | Screen-right progressive; authored heel/toe and single-support contacts | Cycle `003`-`006` only after contact match; marker-safe | `6 technical_candidate_complete` |
+| G2 | `liana_motion_007`-`012` | Fast contact, down, passing, launch, flight, landing | Screen-right acceleration; contact/down/pass/launch/flight/land | `012`-`007` contact-matched run loop; contact-marker-safe | `6 technical_candidate_complete` |
+| G3 | `liana_motion_013`-`018` | Trail sprint plant, compression, launch, ascent, clearance, descent | Screen-right ballistic arc; plant through airborne descent | Non-looping; safe before launch commit, then complete through G4 recovery | `6 technical_candidate_complete` |
+| G4 | `liana_motion_019`-`024` | Landing, absorption, correction, counterbalance, settle, greeting | Landing translation then fixed; dual-grounded recovery | Hold `024` or exit; bounded marker-safe recovery | `6 technical_candidate_complete` |
+| G5 | `liana_motion_025`-`030` | Front idle, left approach, passing, right approach, compression, hop landing | Toward-camera progression then contact lock | Non-looping grounded phrase; contact-marker-safe | `6 technical_candidate_complete` |
+| G6 | `liana_motion_031`-`036` | Rear idle, departure, passing, acceleration, hop flight, recovery | Away-camera progression then contact lock | Non-looping grounded phrase; contact-marker-safe | `6 technical_candidate_complete` |
+| G7 | `liana_motion_037`-`042` | Notice, invite, listen, reframe, encourage, return agency | Fixed root; dual-foot grounded throughout | Hold `039` or `042`; never auto-loop; marker-safe | `6 technical_candidate_complete` |
+| G8 | `liana_motion_043`-`048` | Arrive, ground, exhale, mobilize, recenter, ready | Fixed root; dual-foot grounded throughout | Hold `048`; restart only after exact root match; marker-safe | `6 technical_candidate_complete` |
 
 The authoring brief carries each slot's exact phase, continuity direction,
 forbidden conditions, support contact, root rule, handoffs, loop policy, and
@@ -119,11 +121,14 @@ interrupt policy.
 | --- | ---: |
 | Groups planned | 8 / 8 |
 | Slots planned | 48 / 48 |
-| Slots pending art | 48 |
+| Slots pending art | 0 |
+| Slots with complete technical candidates | 48 / 48 |
 | Identity anchors passed technical review | 3 / 3 |
-| Motion groups approved | 0 / 8 |
+| Motion groups passed technical review | 8 / 8 |
+| Motion groups product approved | 0 / 8 |
 | Runtime admitted | No |
 
-Gate 2 passed technical review on 2026-07-26. Product approval of the review
-projection remains pending and runtime admission remains false. Gate 3
-candidate motion authoring is now in progress.
+Gates 2-7 passed technical review on 2026-07-26. Two clean builds are
+bit-identical, and the complete package is live beside HD Wizard Joe in the
+local observer. Gate 8 remains fail-closed pending explicit product approval
+of the exact review hashes; runtime admission remains false.
