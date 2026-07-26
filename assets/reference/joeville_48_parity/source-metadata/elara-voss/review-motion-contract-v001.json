@@ -1,0 +1,230 @@
+{
+  "artifact_sha256": "8fd74202c038028af63e6fff9a9e8b8c2d82261bc3e30b5d2447a93af632f53c",
+  "character_id": "elara-voss",
+  "contract_id": "elara-voss-review-motion-v001",
+  "library_index_sha256": "7fd020cb347ec6726e1dd60939166d9659775fe626ce8511108f38441708bde2",
+  "profile_id": "wizardjoe_hd_alpha_1254_v001",
+  "review_projection": true,
+  "runtime_admitted": false,
+  "schema_version": 1,
+  "sequences": {
+    "g7": {
+      "entry_handoffs": [
+        "three_quarter_idle",
+        "front_idle"
+      ],
+      "exit_handoffs": [
+        "three_quarter_idle",
+        "front_idle",
+        "g8"
+      ],
+      "family": "live_interview_exchange",
+      "fps": 8,
+      "frames": [
+        {
+          "baseline_y": 1185,
+          "duration_ms": 125,
+          "frame_index": 1,
+          "hold_marker": false,
+          "interruptible": true,
+          "phase": "Broadcast-ready three-quarter receipt of an interview cue.",
+          "pose_id": "elara_voss_motion_037",
+          "root_policy": "fixed",
+          "support_contact": "dual_foot_grounded"
+        },
+        {
+          "baseline_y": 1185,
+          "duration_ms": 125,
+          "frame_index": 2,
+          "hold_marker": false,
+          "interruptible": false,
+          "phase": "Measured microphone offer that gives the guest the floor.",
+          "pose_id": "elara_voss_motion_038",
+          "root_policy": "fixed",
+          "support_contact": "dual_foot_grounded"
+        },
+        {
+          "baseline_y": 1185,
+          "duration_ms": 125,
+          "frame_index": 3,
+          "hold_marker": true,
+          "interruptible": true,
+          "phase": "Grounded active listening with the microphone still offered.",
+          "pose_id": "elara_voss_motion_039",
+          "root_policy": "fixed",
+          "support_contact": "dual_foot_grounded"
+        },
+        {
+          "baseline_y": 1185,
+          "duration_ms": 125,
+          "frame_index": 4,
+          "hold_marker": false,
+          "interruptible": false,
+          "phase": "Smooth recovery of the microphone for a follow-up question.",
+          "pose_id": "elara_voss_motion_040",
+          "root_policy": "fixed",
+          "support_contact": "dual_foot_grounded"
+        },
+        {
+          "baseline_y": 1185,
+          "duration_ms": 125,
+          "frame_index": 5,
+          "hold_marker": true,
+          "interruptible": false,
+          "phase": "Compact free-hand clarification of one interview point.",
+          "pose_id": "elara_voss_motion_041",
+          "root_policy": "fixed",
+          "support_contact": "dual_foot_grounded"
+        },
+        {
+          "baseline_y": 1185,
+          "duration_ms": 125,
+          "frame_index": 6,
+          "hold_marker": false,
+          "interruptible": true,
+          "phase": "Open-palm invitation that resolves the interview loop.",
+          "pose_id": "elara_voss_motion_042",
+          "root_policy": "fixed",
+          "support_contact": "dual_foot_grounded"
+        }
+      ],
+      "intent": "receive_offer_listen_reclaim_clarify_invite",
+      "interrupt_policy": "marker_safe",
+      "loop_mode": "loop",
+      "pose_ids": [
+        "elara_voss_motion_037",
+        "elara_voss_motion_038",
+        "elara_voss_motion_039",
+        "elara_voss_motion_040",
+        "elara_voss_motion_041",
+        "elara_voss_motion_042"
+      ]
+    },
+    "g8": {
+      "entry_handoffs": [
+        "three_quarter_idle",
+        "front_idle",
+        "g7"
+      ],
+      "exit_handoffs": [
+        "three_quarter_idle",
+        "front_idle",
+        "front_walk"
+      ],
+      "family": "on_camera_briefing",
+      "fps": 8,
+      "frames": [
+        {
+          "baseline_y": 1185,
+          "duration_ms": 125,
+          "frame_index": 1,
+          "hold_marker": false,
+          "interruptible": true,
+          "phase": "Composed editorial intake before an on-camera briefing.",
+          "pose_id": "elara_voss_motion_043",
+          "root_policy": "fixed",
+          "support_contact": "dual_foot_grounded"
+        },
+        {
+          "baseline_y": 1185,
+          "duration_ms": 125,
+          "frame_index": 2,
+          "hold_marker": true,
+          "interruptible": false,
+          "phase": "Concise headline delivery with a compact open emphasis.",
+          "pose_id": "elara_voss_motion_044",
+          "root_policy": "fixed",
+          "support_contact": "dual_foot_grounded"
+        },
+        {
+          "baseline_y": 1185,
+          "duration_ms": 125,
+          "frame_index": 3,
+          "hold_marker": true,
+          "interruptible": false,
+          "phase": "Audience-facing statement of the first fact.",
+          "pose_id": "elara_voss_motion_045",
+          "root_policy": "fixed",
+          "support_contact": "dual_foot_grounded"
+        },
+        {
+          "baseline_y": 1185,
+          "duration_ms": 125,
+          "frame_index": 4,
+          "hold_marker": true,
+          "interruptible": false,
+          "phase": "Short lateral comparison of two alternatives.",
+          "pose_id": "elara_voss_motion_046",
+          "root_policy": "fixed",
+          "support_contact": "dual_foot_grounded"
+        },
+        {
+          "baseline_y": 1185,
+          "duration_ms": 125,
+          "frame_index": 5,
+          "hold_marker": true,
+          "interruptible": true,
+          "phase": "Contained, upright delivery of the briefing conclusion.",
+          "pose_id": "elara_voss_motion_047",
+          "root_policy": "fixed",
+          "support_contact": "dual_foot_grounded"
+        },
+        {
+          "baseline_y": 1185,
+          "duration_ms": 125,
+          "frame_index": 6,
+          "hold_marker": true,
+          "interruptible": true,
+          "phase": "Warm sign-off and grounded release to the audience.",
+          "pose_id": "elara_voss_motion_048",
+          "root_policy": "fixed",
+          "support_contact": "dual_foot_grounded"
+        }
+      ],
+      "intent": "intake_headline_fact_compare_conclude_signoff",
+      "interrupt_policy": "marker_safe",
+      "loop_mode": "hold_last",
+      "pose_ids": [
+        "elara_voss_motion_043",
+        "elara_voss_motion_044",
+        "elara_voss_motion_045",
+        "elara_voss_motion_046",
+        "elara_voss_motion_047",
+        "elara_voss_motion_048"
+      ]
+    }
+  },
+  "status": "pending_visual_parity",
+  "transitions": [
+    {
+      "from": "g7",
+      "status": "deferred_until_character_package",
+      "to": "three_quarter_idle"
+    },
+    {
+      "from": "g7",
+      "status": "deferred_until_character_package",
+      "to": "front_idle"
+    },
+    {
+      "from": "g7",
+      "status": "resolved",
+      "to": "g8"
+    },
+    {
+      "from": "g8",
+      "status": "deferred_until_character_package",
+      "to": "three_quarter_idle"
+    },
+    {
+      "from": "g8",
+      "status": "deferred_until_character_package",
+      "to": "front_idle"
+    },
+    {
+      "from": "g8",
+      "status": "deferred_until_character_package",
+      "to": "front_walk"
+    }
+  ]
+}

@@ -1,0 +1,101 @@
+{
+  "artifact_sha256": "8fd74202c038028af63e6fff9a9e8b8c2d82261bc3e30b5d2447a93af632f53c",
+  "candidate_pose_count": 48,
+  "character_id": "elara-voss",
+  "checks": {
+    "all_authored_poses_projected_full_size": true,
+    "dark_background_fringe_absent": true,
+    "dual_foot_contacts_stable": true,
+    "g7_live_interview_exchange_verified": true,
+    "g8_on_camera_briefing_verified": true,
+    "microphone_hand_ownership_continuous": true,
+    "transparent_backgrounds": true,
+    "uncropped_silhouettes": true
+  },
+  "library_index_sha256": "7fd020cb347ec6726e1dd60939166d9659775fe626ce8511108f38441708bde2",
+  "product_visual_approval": "pending",
+  "rejected_intermediates": [
+    {
+      "pose_ids": [
+        "elara_voss_motion_042",
+        "elara_voss_motion_043",
+        "elara_voss_motion_044",
+        "elara_voss_motion_045",
+        "elara_voss_motion_046",
+        "elara_voss_motion_047",
+        "elara_voss_motion_048"
+      ],
+      "reason": "thin magenta key fringe remained after oversize fit"
+    },
+    {
+      "pose_ids": [
+        "elara_voss_motion_042",
+        "elara_voss_motion_043",
+        "elara_voss_motion_044",
+        "elara_voss_motion_045",
+        "elara_voss_motion_046",
+        "elara_voss_motion_047",
+        "elara_voss_motion_048"
+      ],
+      "reason": "high chroma tolerance removed cream blouse detail"
+    }
+  ],
+  "review_projection": true,
+  "review_url": "http://127.0.0.1:8665/",
+  "runtime_admitted": false,
+  "schema_version": 1,
+  "screenshots": [
+    {
+      "path": "observer-side-by-side.png",
+      "sha256": "4d7e605520fcec7b9b160109b83560377ec2f88822901f28e2e08368c147131e"
+    },
+    {
+      "path": "elara_voss_motion_037.png",
+      "sha256": "4a9e730e4614199610ceeca8c18fa9ec000c4066a1817db7bb79e0eff7d88ccf"
+    },
+    {
+      "path": "elara_voss_motion_038.png",
+      "sha256": "94129bd836484a203ac5c662ad9e8ad0a982673ebcca41c9d9338ce0d50c74b5"
+    },
+    {
+      "path": "elara_voss_motion_039.png",
+      "sha256": "1c8465df1b6ca466887912f4ca4b76380e9c8e2b56bf5c3a4e92e7cbec762aff"
+    },
+    {
+      "path": "elara_voss_motion_040.png",
+      "sha256": "b3d56e6cab266a9b576a2ee29d757724942120d045c787b740811a410c37ac61"
+    },
+    {
+      "path": "elara_voss_motion_041.png",
+      "sha256": "712a6c04d176028288c2f076f0a053d3dfcde4358c33286e44b886fce725ea20"
+    },
+    {
+      "path": "elara_voss_motion_042.png",
+      "sha256": "b996fe956700c404d7b727d6da9595fc95716f0868a2afa1dc0f4b092fb2482c"
+    },
+    {
+      "path": "elara_voss_motion_043.png",
+      "sha256": "b499645c0a5261e4210d8c2d0a32cb0451a98d1cff26a849c4db6a0268956a76"
+    },
+    {
+      "path": "elara_voss_motion_044.png",
+      "sha256": "42dbbb0572f80df9564e8721d083819ce4e2a3f051ae8df2c7bb556ef371866d"
+    },
+    {
+      "path": "elara_voss_motion_045.png",
+      "sha256": "09fc1b00c1f3b70d05cf66b69ab9ae10a84648a25ffd74ac4fe886e7ae492afe"
+    },
+    {
+      "path": "elara_voss_motion_046.png",
+      "sha256": "60c7b57d523d3437f1bbe874c029f409751005648601b7737f1596f5e6fdc877"
+    },
+    {
+      "path": "elara_voss_motion_047.png",
+      "sha256": "6cee9dab7e43c1e5a8d1d7ea62b1a0e7a265a2d3d3ec952f447bcd7a028de913"
+    },
+    {
+      "path": "elara_voss_motion_048.png",
+      "sha256": "93496b3f328fbe48b25ebda3417cee79d7f824af72009255ff9ccbba12ffb1e3"
+    }
+  ]
+}

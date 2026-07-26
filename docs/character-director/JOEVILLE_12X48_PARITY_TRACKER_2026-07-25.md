@@ -202,14 +202,30 @@ deterministic rebuild. Port 8665 presents the corrected candidate beside
 approved HD Wizard Joe. Product visual approval is still pending and runtime
 admission remains false.
 
+Elara Voss is now the fifth incomplete roster character to reach a complete
+48-pose review candidate. Her immutable supplied poses `001`-`036` were merged
+with twelve new full-size RGBA poses for:
+
+- `g7`: receive, offer, listen, reclaim, clarify, and invite.
+- `g8`: intake, headline, first fact, compare, conclude, and sign off.
+
+Microphone ownership remains continuous in one dedicated hand and both heels
+remain grounded. Dark-background review rejected a chroma-fringe intermediate.
+Seven slightly oversize silhouettes were then edge-contracted and reduced by
+3.1-3.9 percent through the explicit receipted path; the canonicalizer's strict
+default was not weakened. Port 8665 presents the corrected candidate beside
+approved HD Wizard Joe. Product visual approval is still pending and runtime
+admission remains false.
+
 | Character | Candidate poses | Missing poses | State |
 | --- | ---: | ---: | --- |
 | Orion Vale | 48 | 0 | Full-size technical review passed; product visual approval pending |
 | Aurelia Finch | 48 | 0 | Full-size technical review passed; product visual approval pending |
 | Selene Hart | 48 | 0 | Full-size technical review passed; product visual approval pending |
 | Thorne Vale | 48 | 0 | Full-size technical review passed; product visual approval pending |
-| Remaining roster | 312 | 72 | Authoring/review required |
-| **Total** | **504** | **72** | **576 target slots** |
+| Elara Voss | 48 | 0 | Full-size technical review passed; product visual approval pending |
+| Remaining roster | 300 | 60 | Authoring/review required |
+| **Total** | **516** | **60** | **576 target slots** |
 
 Orion candidate receipts:
 
@@ -243,6 +259,15 @@ Thorne candidate receipts:
 - Review motion contract: `1c403584f625f1e533538c516c7e00fc803b8dfbc8623e7b3379afd6149bb037`
 - Contact sheet: `e46389068cf2f9faa0374b2dbe84799b293a100214a64748c6d952e9866c8646`
 
+Elara candidate receipts:
+
+- Artifact: `8fd74202c038028af63e6fff9a9e8b8c2d82261bc3e30b5d2447a93af632f53c`
+- Library index: `7fd020cb347ec6726e1dd60939166d9659775fe626ce8511108f38441708bde2`
+- Reconstruction: `7405ceedb3936dcb7571b1e4b8ea56bcbf1a8a9470f2760c52155cdf58ec796e`
+- Review motion contract: `a24a1597aad39c522b3f77356ca141e427fa3b8b8f8b022fcffc19072a697b0b`
+- Contact sheet: `fcef489937907925a0db255fcfedce3480f87a87367ee20638f0fe642f361b7a`
+- Canonicalization receipts: `ec5b6f4ed2410c0f0afc56a79c3c0811ab1554f372221488f3e70da5306c5dfb`
+
 ## Roster Boundary
 
 The archives also contain Crystail. Crystail remains
@@ -256,7 +281,7 @@ and count parity rather than an automatic quality waiver.
 
 ## Next Build Order
 
-1. Author the 84 remaining frames as explicitly new art, one character at a
+1. Author the 60 remaining frames as explicitly new art, one character at a
    time, using the character's compiled supplied set as visual authority.
 2. Rebuild each completed 48-pose artifact twice and require identical hashes.
 3. Review every full-size frame and motion sequence beside approved HD Wizard

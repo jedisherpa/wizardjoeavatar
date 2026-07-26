@@ -6,6 +6,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import math
 import os
 from pathlib import Path
 from typing import Any
@@ -28,6 +29,7 @@ def canonicalize(
     source_path: Path,
     destination_path: Path,
     authority_path: Path = DEFAULT_AUTHORITY,
+    fit_oversize: bool = False,
 ) -> dict[str, Any]:
     authority = json.loads(authority_path.read_text(encoding="utf-8"))
     profile = authority["master_profile"]
@@ -45,9 +47,38 @@ def canonicalize(
     if image.size != expected_size:
         raise ValueError("authored alpha source must match canonical canvas")
     alpha = image.getchannel("A")
-    bbox = alpha.getbbox()
-    if bbox is None:
+    source_bbox = alpha.getbbox()
+    if source_bbox is None:
         raise ValueError("authored alpha source has no visible silhouette")
+    bbox = source_bbox
+    resampled = False
+    scale = 1.0
+    if fit_oversize:
+        available_width = expected_size[0] - (minimum_margin * 2)
+        available_height = baseline_y - minimum_margin
+        source_width = bbox[2] - bbox[0]
+        source_height = bbox[3] - bbox[1]
+        scale = min(
+            1.0,
+            available_width / source_width,
+            available_height / source_height,
+        )
+        if scale < 1.0:
+            target_size = (
+                max(1, math.floor(source_width * scale)),
+                max(1, math.floor(source_height * scale)),
+            )
+            subject = image.crop(bbox).convert("RGBa")
+            subject = subject.resize(
+                target_size,
+                resample=Image.Resampling.LANCZOS,
+            ).convert("RGBA")
+            image = Image.new("RGBA", expected_size, (0, 0, 0, 0))
+            image.alpha_composite(subject, (0, 0))
+            bbox = image.getchannel("A").getbbox()
+            if bbox is None:
+                raise ValueError("oversize fitting removed the silhouette")
+            resampled = True
     target_center_x = expected_size[0] / 2
     source_center_x = (bbox[0] + bbox[2]) / 2
     offset_x = round(target_center_x - source_center_x)
@@ -86,10 +117,13 @@ def canonicalize(
         "destination_rgba_sha256": hashlib.sha256(
             canvas.tobytes()
         ).hexdigest(),
-        "source_bbox": list(bbox),
+        "source_bbox": list(source_bbox),
+        "fitted_bbox": list(bbox),
         "destination_bbox": list(destination_bbox),
         "translation": {"x": offset_x, "y": offset_y},
-        "resampled": False,
+        "resampled": resampled,
+        "scale": scale,
+        "resample_filter": "lanczos" if resampled else None,
     }
 
 
@@ -97,12 +131,20 @@ def _parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         description=(
             "Center and baseline-align an RGBA JoeVille authoring source "
-            "without resampling it."
+            "without resampling it by default."
         )
     )
     parser.add_argument("source", type=Path)
     parser.add_argument("destination", type=Path)
     parser.add_argument("--authority", type=Path, default=DEFAULT_AUTHORITY)
+    parser.add_argument(
+        "--fit-oversize",
+        action="store_true",
+        help=(
+            "Deterministically downscale only silhouettes that cannot fit the "
+            "canonical safety margins, recording the transform in the receipt."
+        ),
+    )
     return parser.parse_args()
 
 
@@ -112,6 +154,7 @@ def main() -> int:
         source_path=args.source.resolve(),
         destination_path=args.destination.resolve(),
         authority_path=args.authority.resolve(),
+        fit_oversize=args.fit_oversize,
     )
     print(json.dumps(result, sort_keys=True))
     return 0

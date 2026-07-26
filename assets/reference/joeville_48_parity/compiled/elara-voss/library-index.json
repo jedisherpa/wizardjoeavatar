@@ -1,10 +1,10 @@
 {
   "approved_pose_count": 0,
-  "asset_set_id": "elara-voss-source-motion-v001",
-  "candidate_pose_count": 36,
+  "asset_set_id": "elara-voss-authored-parity-v001",
+  "candidate_pose_count": 48,
   "character_id": "elara-voss",
   "display_name": "Elara Voss",
-  "pose_count": 36,
+  "pose_count": 48,
   "profile": {
     "alpha_mode": "straight",
     "baseline_y": 1185,
@@ -18,8 +18,8 @@
   "runtime_admitted": false,
   "schema_version": 1,
   "sequences": {
-    "elara-voss-source-all": {
-      "approval_state": "candidate_source_partial",
+    "elara-voss-parity-all": {
+      "approval_state": "pending_visual_parity",
       "fps": 8,
       "loop": true,
       "pose_ids": [
@@ -58,12 +58,24 @@
         "elara_voss_motion_033",
         "elara_voss_motion_034",
         "elara_voss_motion_035",
-        "elara_voss_motion_036"
+        "elara_voss_motion_036",
+        "elara_voss_motion_037",
+        "elara_voss_motion_038",
+        "elara_voss_motion_039",
+        "elara_voss_motion_040",
+        "elara_voss_motion_041",
+        "elara_voss_motion_042",
+        "elara_voss_motion_043",
+        "elara_voss_motion_044",
+        "elara_voss_motion_045",
+        "elara_voss_motion_046",
+        "elara_voss_motion_047",
+        "elara_voss_motion_048"
       ],
       "runtime_admitted": false
     },
     "g1": {
-      "approval_state": "candidate_source_partial",
+      "approval_state": "pending_visual_parity",
       "fps": 8,
       "loop": true,
       "pose_ids": [
@@ -77,7 +89,7 @@
       "runtime_admitted": false
     },
     "g2": {
-      "approval_state": "candidate_source_partial",
+      "approval_state": "pending_visual_parity",
       "fps": 8,
       "loop": true,
       "pose_ids": [
@@ -91,7 +103,7 @@
       "runtime_admitted": false
     },
     "g3": {
-      "approval_state": "candidate_source_partial",
+      "approval_state": "pending_visual_parity",
       "fps": 8,
       "loop": true,
       "pose_ids": [
@@ -105,7 +117,7 @@
       "runtime_admitted": false
     },
     "g4": {
-      "approval_state": "candidate_source_partial",
+      "approval_state": "pending_visual_parity",
       "fps": 8,
       "loop": true,
       "pose_ids": [
@@ -119,7 +131,7 @@
       "runtime_admitted": false
     },
     "g5": {
-      "approval_state": "candidate_source_partial",
+      "approval_state": "pending_visual_parity",
       "fps": 8,
       "loop": true,
       "pose_ids": [
@@ -133,7 +145,7 @@
       "runtime_admitted": false
     },
     "g6": {
-      "approval_state": "candidate_source_partial",
+      "approval_state": "pending_visual_parity",
       "fps": 8,
       "loop": true,
       "pose_ids": [
@@ -145,14 +157,46 @@
         "elara_voss_motion_036"
       ],
       "runtime_admitted": false
+    },
+    "g7": {
+      "approval_state": "pending_visual_parity",
+      "fps": 8,
+      "intent": "receive_offer_listen_reclaim_clarify_invite",
+      "loop": true,
+      "loop_mode": "loop",
+      "pose_ids": [
+        "elara_voss_motion_037",
+        "elara_voss_motion_038",
+        "elara_voss_motion_039",
+        "elara_voss_motion_040",
+        "elara_voss_motion_041",
+        "elara_voss_motion_042"
+      ],
+      "runtime_admitted": false
+    },
+    "g8": {
+      "approval_state": "pending_visual_parity",
+      "fps": 8,
+      "intent": "intake_headline_fact_compare_conclude_signoff",
+      "loop": false,
+      "loop_mode": "hold_last",
+      "pose_ids": [
+        "elara_voss_motion_043",
+        "elara_voss_motion_044",
+        "elara_voss_motion_045",
+        "elara_voss_motion_046",
+        "elara_voss_motion_047",
+        "elara_voss_motion_048"
+      ],
+      "runtime_admitted": false
     }
   },
   "shards": [
     {
-      "approval_state": "candidate_source_partial",
-      "bytes": 25408065,
-      "path": "elara-voss-candidate-source-motion-v001.wjpose",
-      "pose_count": 36,
+      "approval_state": "pending_visual_parity",
+      "bytes": 33803228,
+      "path": "elara-voss-candidate-authored-parity-v001.wjpose",
+      "pose_count": 48,
       "pose_ids": [
         "elara_voss_motion_001",
         "elara_voss_motion_002",
@@ -189,12 +233,24 @@
         "elara_voss_motion_033",
         "elara_voss_motion_034",
         "elara_voss_motion_035",
-        "elara_voss_motion_036"
+        "elara_voss_motion_036",
+        "elara_voss_motion_037",
+        "elara_voss_motion_038",
+        "elara_voss_motion_039",
+        "elara_voss_motion_040",
+        "elara_voss_motion_041",
+        "elara_voss_motion_042",
+        "elara_voss_motion_043",
+        "elara_voss_motion_044",
+        "elara_voss_motion_045",
+        "elara_voss_motion_046",
+        "elara_voss_motion_047",
+        "elara_voss_motion_048"
       ],
       "runtime_admitted": false,
-      "sha256": "d68194459adb3dd095bcec159a005cbb5276adf82bfc312af2c2ce3f5cfed858",
-      "shard_id": "elara-voss-source-motion-v001",
-      "source": "joeville_contact_sheet_reconstruction"
+      "sha256": "8fd74202c038028af63e6fff9a9e8b8c2d82261bc3e30b5d2447a93af632f53c",
+      "shard_id": "elara-voss-authored-parity-v001",
+      "source": "joeville_supplied_plus_authored_full_size"
     }
   ]
 }

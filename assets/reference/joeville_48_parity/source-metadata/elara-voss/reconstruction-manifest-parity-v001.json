@@ -1,0 +1,1443 @@
+{
+  "artifact": {
+    "bytes": 33803228,
+    "path": "compiled/elara-voss/elara-voss-candidate-authored-parity-v001.wjpose",
+    "pose_count": 48,
+    "pose_ids": [
+      "elara_voss_motion_001",
+      "elara_voss_motion_002",
+      "elara_voss_motion_003",
+      "elara_voss_motion_004",
+      "elara_voss_motion_005",
+      "elara_voss_motion_006",
+      "elara_voss_motion_007",
+      "elara_voss_motion_008",
+      "elara_voss_motion_009",
+      "elara_voss_motion_010",
+      "elara_voss_motion_011",
+      "elara_voss_motion_012",
+      "elara_voss_motion_013",
+      "elara_voss_motion_014",
+      "elara_voss_motion_015",
+      "elara_voss_motion_016",
+      "elara_voss_motion_017",
+      "elara_voss_motion_018",
+      "elara_voss_motion_019",
+      "elara_voss_motion_020",
+      "elara_voss_motion_021",
+      "elara_voss_motion_022",
+      "elara_voss_motion_023",
+      "elara_voss_motion_024",
+      "elara_voss_motion_025",
+      "elara_voss_motion_026",
+      "elara_voss_motion_027",
+      "elara_voss_motion_028",
+      "elara_voss_motion_029",
+      "elara_voss_motion_030",
+      "elara_voss_motion_031",
+      "elara_voss_motion_032",
+      "elara_voss_motion_033",
+      "elara_voss_motion_034",
+      "elara_voss_motion_035",
+      "elara_voss_motion_036",
+      "elara_voss_motion_037",
+      "elara_voss_motion_038",
+      "elara_voss_motion_039",
+      "elara_voss_motion_040",
+      "elara_voss_motion_041",
+      "elara_voss_motion_042",
+      "elara_voss_motion_043",
+      "elara_voss_motion_044",
+      "elara_voss_motion_045",
+      "elara_voss_motion_046",
+      "elara_voss_motion_047",
+      "elara_voss_motion_048"
+    ],
+    "sha256": "8fd74202c038028af63e6fff9a9e8b8c2d82261bc3e30b5d2447a93af632f53c"
+  },
+  "authored_manifest": {
+    "path": "authored-source/elara-voss/authored-g7-g8-v001.json",
+    "sha256": "e773d36a6e33a2abfc36ea3066a363ff93471a0a50eb7bff2b876e8e97698392"
+  },
+  "authority_manifest_sha256": "740f35730f4aa1e6c6ef96be80115c5b0e117397f792d57fdf5360452bbe78c8",
+  "character_id": "elara-voss",
+  "compiled_pose_count": 48,
+  "display_name": "Elara Voss",
+  "existing_reconstruction_manifest": {
+    "path": "source-metadata/elara-voss/reconstruction-manifest-v001.json",
+    "sha256": "cb404d877f919b93a34d2d2099427b0ee289b8b767fae5c9aec5290a00b66412"
+  },
+  "existing_source_artifact": {
+    "path": "compiled/elara-voss/elara-voss-candidate-source-motion-v001.wjpose",
+    "sha256": "d68194459adb3dd095bcec159a005cbb5276adf82bfc312af2c2ce3f5cfed858"
+  },
+  "library_index": {
+    "path": "compiled/elara-voss/library-index.json",
+    "sha256": "7fd020cb347ec6726e1dd60939166d9659775fe626ce8511108f38441708bde2"
+  },
+  "missing_sequences": [],
+  "poses": [
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-001",
+      "normalization_scale": 1.90769231,
+      "output_bbox": [
+        428,
+        71,
+        825,
+        1185
+      ],
+      "pose_id": "elara_voss_motion_001",
+      "rgba_sha256": "f6195c0151e67db032be549a0e9cae601ff1f83035676dbc87a6d9caa5bedb29",
+      "runtime_admitted": false,
+      "sequence_id": "g1",
+      "source_archive_id": "sprites-3",
+      "source_archive_sha256": "f9f7dfe99c1043e2008f58b25999e36888515f48fa64e337bde97a8af0bb9a52",
+      "source_bbox": [
+        132,
+        82,
+        340,
+        666
+      ],
+      "source_frame_index": 1,
+      "source_member": "sheet-elara-voss-g1.png",
+      "source_member_sha256": "0474e7871d31fc8497f4e35bb0c00e4a7a3de9521833046229a5e3ce009c0367"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-002",
+      "normalization_scale": 1.90769231,
+      "output_bbox": [
+        424,
+        69,
+        830,
+        1185
+      ],
+      "pose_id": "elara_voss_motion_002",
+      "rgba_sha256": "e7e2c56abc7574c23c58df3092180ab85e3172760ae153b3c1c8d396f2ee4d4f",
+      "runtime_admitted": false,
+      "sequence_id": "g1",
+      "source_archive_id": "sprites-3",
+      "source_archive_sha256": "f9f7dfe99c1043e2008f58b25999e36888515f48fa64e337bde97a8af0bb9a52",
+      "source_bbox": [
+        462,
+        81,
+        675,
+        666
+      ],
+      "source_frame_index": 2,
+      "source_member": "sheet-elara-voss-g1.png",
+      "source_member_sha256": "0474e7871d31fc8497f4e35bb0c00e4a7a3de9521833046229a5e3ce009c0367"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-003",
+      "normalization_scale": 1.90769231,
+      "output_bbox": [
+        426,
+        71,
+        829,
+        1174
+      ],
+      "pose_id": "elara_voss_motion_003",
+      "rgba_sha256": "28043f3a79bb8cd23f5a9a8288b3bf0b601b5195a40ced4c41c00682a15cedb5",
+      "runtime_admitted": false,
+      "sequence_id": "g1",
+      "source_archive_id": "sprites-3",
+      "source_archive_sha256": "f9f7dfe99c1043e2008f58b25999e36888515f48fa64e337bde97a8af0bb9a52",
+      "source_bbox": [
+        808,
+        82,
+        1019,
+        660
+      ],
+      "source_frame_index": 3,
+      "source_member": "sheet-elara-voss-g1.png",
+      "source_member_sha256": "0474e7871d31fc8497f4e35bb0c00e4a7a3de9521833046229a5e3ce009c0367"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-004",
+      "normalization_scale": 1.90769231,
+      "output_bbox": [
+        425,
+        73,
+        829,
+        1178
+      ],
+      "pose_id": "elara_voss_motion_004",
+      "rgba_sha256": "c04c31294a22017c9e84a084754cb2aa54a3b91f4d26a10c6a4d031b456632e9",
+      "runtime_admitted": false,
+      "sequence_id": "g1",
+      "source_archive_id": "sprites-3",
+      "source_archive_sha256": "f9f7dfe99c1043e2008f58b25999e36888515f48fa64e337bde97a8af0bb9a52",
+      "source_bbox": [
+        1160,
+        83,
+        1372,
+        662
+      ],
+      "source_frame_index": 4,
+      "source_member": "sheet-elara-voss-g1.png",
+      "source_member_sha256": "0474e7871d31fc8497f4e35bb0c00e4a7a3de9521833046229a5e3ce009c0367"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-005",
+      "normalization_scale": 1.90769231,
+      "output_bbox": [
+        394,
+        100,
+        861,
+        1185
+      ],
+      "pose_id": "elara_voss_motion_005",
+      "rgba_sha256": "9638d0fcf43ec9516ceddfafc7df0cec747d417770bbb85f68c01c016a9ef779",
+      "runtime_admitted": false,
+      "sequence_id": "g1",
+      "source_archive_id": "sprites-3",
+      "source_archive_sha256": "f9f7dfe99c1043e2008f58b25999e36888515f48fa64e337bde97a8af0bb9a52",
+      "source_bbox": [
+        1480,
+        97,
+        1725,
+        666
+      ],
+      "source_frame_index": 5,
+      "source_member": "sheet-elara-voss-g1.png",
+      "source_member_sha256": "0474e7871d31fc8497f4e35bb0c00e4a7a3de9521833046229a5e3ce009c0367"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-006",
+      "normalization_scale": 1.90769231,
+      "output_bbox": [
+        395,
+        98,
+        859,
+        1185
+      ],
+      "pose_id": "elara_voss_motion_006",
+      "rgba_sha256": "a2b3c68cf25d2b7b6587e051b91e7b8289b16555656cab8f1f91ccad0b123696",
+      "runtime_admitted": false,
+      "sequence_id": "g1",
+      "source_archive_id": "sprites-3",
+      "source_archive_sha256": "f9f7dfe99c1043e2008f58b25999e36888515f48fa64e337bde97a8af0bb9a52",
+      "source_bbox": [
+        1833,
+        96,
+        2076,
+        666
+      ],
+      "source_frame_index": 6,
+      "source_member": "sheet-elara-voss-g1.png",
+      "source_member_sha256": "0474e7871d31fc8497f4e35bb0c00e4a7a3de9521833046229a5e3ce009c0367"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-007",
+      "normalization_scale": 2.1,
+      "output_bbox": [
+        384,
+        129,
+        871,
+        1177
+      ],
+      "pose_id": "elara_voss_motion_007",
+      "rgba_sha256": "01095be56e8dd3d26b257becb03ef7265ba1e4ae1e3e133f1032fa0cc2d39e7c",
+      "runtime_admitted": false,
+      "sequence_id": "g2",
+      "source_archive_id": "sprites-3",
+      "source_archive_sha256": "f9f7dfe99c1043e2008f58b25999e36888515f48fa64e337bde97a8af0bb9a52",
+      "source_bbox": [
+        74,
+        122,
+        306,
+        621
+      ],
+      "source_frame_index": 1,
+      "source_member": "sheet-elara-voss-g2.png",
+      "source_member_sha256": "2567d339e6d0ee6f57d973db10c00739f7ac295eba37ae5af89eb8e8428a6ec3"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-008",
+      "normalization_scale": 2.1,
+      "output_bbox": [
+        399,
+        124,
+        855,
+        1172
+      ],
+      "pose_id": "elara_voss_motion_008",
+      "rgba_sha256": "92eda84bc3071eb4e61eae6ac46909973e1234cfe93b3b05a55a400adc3f9f48",
+      "runtime_admitted": false,
+      "sequence_id": "g2",
+      "source_archive_id": "sprites-3",
+      "source_archive_sha256": "f9f7dfe99c1043e2008f58b25999e36888515f48fa64e337bde97a8af0bb9a52",
+      "source_bbox": [
+        441,
+        120,
+        658,
+        619
+      ],
+      "source_frame_index": 2,
+      "source_member": "sheet-elara-voss-g2.png",
+      "source_member_sha256": "2567d339e6d0ee6f57d973db10c00739f7ac295eba37ae5af89eb8e8428a6ec3"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-009",
+      "normalization_scale": 2.1,
+      "output_bbox": [
+        422,
+        120,
+        832,
+        1172
+      ],
+      "pose_id": "elara_voss_motion_009",
+      "rgba_sha256": "42975d397253ddb2ebd9c7c3c35d639890dd20c2b66d278e9a9ab5d057d019b8",
+      "runtime_admitted": false,
+      "sequence_id": "g2",
+      "source_archive_id": "sprites-3",
+      "source_archive_sha256": "f9f7dfe99c1043e2008f58b25999e36888515f48fa64e337bde97a8af0bb9a52",
+      "source_bbox": [
+        775,
+        118,
+        970,
+        619
+      ],
+      "source_frame_index": 3,
+      "source_member": "sheet-elara-voss-g2.png",
+      "source_member_sha256": "2567d339e6d0ee6f57d973db10c00739f7ac295eba37ae5af89eb8e8428a6ec3"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-010",
+      "normalization_scale": 2.1,
+      "output_bbox": [
+        368,
+        124,
+        885,
+        1176
+      ],
+      "pose_id": "elara_voss_motion_010",
+      "rgba_sha256": "2a5fe6e347c9e3a50ea5c760167a8548445b306d55e8072bff361cbbea8c15b7",
+      "runtime_admitted": false,
+      "sequence_id": "g2",
+      "source_archive_id": "sprites-3",
+      "source_archive_sha256": "f9f7dfe99c1043e2008f58b25999e36888515f48fa64e337bde97a8af0bb9a52",
+      "source_bbox": [
+        1084,
+        120,
+        1330,
+        621
+      ],
+      "source_frame_index": 4,
+      "source_member": "sheet-elara-voss-g2.png",
+      "source_member_sha256": "2567d339e6d0ee6f57d973db10c00739f7ac295eba37ae5af89eb8e8428a6ec3"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-011",
+      "normalization_scale": 2.1,
+      "output_bbox": [
+        296,
+        202,
+        958,
+        1185
+      ],
+      "pose_id": "elara_voss_motion_011",
+      "rgba_sha256": "5bbd5b8dcd9f26ee44f765c990670ad90c769f9d7488a8fc984cb8ef58fe5177",
+      "runtime_admitted": false,
+      "sequence_id": "g2",
+      "source_archive_id": "sprites-3",
+      "source_archive_sha256": "f9f7dfe99c1043e2008f58b25999e36888515f48fa64e337bde97a8af0bb9a52",
+      "source_bbox": [
+        1386,
+        157,
+        1701,
+        625
+      ],
+      "source_frame_index": 5,
+      "source_member": "sheet-elara-voss-g2.png",
+      "source_member_sha256": "2567d339e6d0ee6f57d973db10c00739f7ac295eba37ae5af89eb8e8428a6ec3"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-012",
+      "normalization_scale": 2.1,
+      "output_bbox": [
+        406,
+        282,
+        847,
+        1181
+      ],
+      "pose_id": "elara_voss_motion_012",
+      "rgba_sha256": "027c4162f2576e79265c56c7adf7ae7ffe06419fc2e972821e6b0e4c44edbe27",
+      "runtime_admitted": false,
+      "sequence_id": "g2",
+      "source_archive_id": "sprites-3",
+      "source_archive_sha256": "f9f7dfe99c1043e2008f58b25999e36888515f48fa64e337bde97a8af0bb9a52",
+      "source_bbox": [
+        1789,
+        195,
+        1999,
+        623
+      ],
+      "source_frame_index": 6,
+      "source_member": "sheet-elara-voss-g2.png",
+      "source_member_sha256": "2567d339e6d0ee6f57d973db10c00739f7ac295eba37ae5af89eb8e8428a6ec3"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-013",
+      "normalization_scale": 1.89152542,
+      "output_bbox": [
+        294,
+        268,
+        960,
+        1172
+      ],
+      "pose_id": "elara_voss_motion_013",
+      "rgba_sha256": "ccbd1993fd8ac5ba3eacc3db08d5f67f7a694a15165e030147375e5ce6e94abe",
+      "runtime_admitted": false,
+      "sequence_id": "g3",
+      "source_archive_id": "sprites-3",
+      "source_archive_sha256": "f9f7dfe99c1043e2008f58b25999e36888515f48fa64e337bde97a8af0bb9a52",
+      "source_bbox": [
+        44,
+        161,
+        396,
+        639
+      ],
+      "source_frame_index": 1,
+      "source_member": "sheet-elara-voss-g3.png",
+      "source_member_sha256": "e80460703d5d63a528a1f2ed39be1c8f244197ba46d9130c6ea6b8936d819957"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-014",
+      "normalization_scale": 1.89152542,
+      "output_bbox": [
+        385,
+        290,
+        869,
+        1183
+      ],
+      "pose_id": "elara_voss_motion_014",
+      "rgba_sha256": "1cc9c754b40a301f02883029eb7e5fcf071baa62e17caaeb66bd4471d7cbd261",
+      "runtime_admitted": false,
+      "sequence_id": "g3",
+      "source_archive_id": "sprites-3",
+      "source_archive_sha256": "f9f7dfe99c1043e2008f58b25999e36888515f48fa64e337bde97a8af0bb9a52",
+      "source_bbox": [
+        474,
+        173,
+        730,
+        645
+      ],
+      "source_frame_index": 2,
+      "source_member": "sheet-elara-voss-g3.png",
+      "source_member_sha256": "e80460703d5d63a528a1f2ed39be1c8f244197ba46d9130c6ea6b8936d819957"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-015",
+      "normalization_scale": 1.89152542,
+      "output_bbox": [
+        316,
+        277,
+        938,
+        1179
+      ],
+      "pose_id": "elara_voss_motion_015",
+      "rgba_sha256": "94d9b92caf3fac08cae8b3eb3e479ea153ebee82c9637409bfe5eb87fc346227",
+      "runtime_admitted": false,
+      "sequence_id": "g3",
+      "source_archive_id": "sprites-3",
+      "source_archive_sha256": "f9f7dfe99c1043e2008f58b25999e36888515f48fa64e337bde97a8af0bb9a52",
+      "source_bbox": [
+        765,
+        166,
+        1094,
+        643
+      ],
+      "source_frame_index": 3,
+      "source_member": "sheet-elara-voss-g3.png",
+      "source_member_sha256": "e80460703d5d63a528a1f2ed39be1c8f244197ba46d9130c6ea6b8936d819957"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-016",
+      "normalization_scale": 1.89152542,
+      "output_bbox": [
+        428,
+        425,
+        825,
+        1185
+      ],
+      "pose_id": "elara_voss_motion_016",
+      "rgba_sha256": "1e705b5c4d4d27cc9728cb72ea22a04cc3ec89afbb85c7e4598e445f08853c25",
+      "runtime_admitted": false,
+      "sequence_id": "g3",
+      "source_archive_id": "sprites-3",
+      "source_archive_sha256": "f9f7dfe99c1043e2008f58b25999e36888515f48fa64e337bde97a8af0bb9a52",
+      "source_bbox": [
+        1198,
+        244,
+        1408,
+        646
+      ],
+      "source_frame_index": 4,
+      "source_member": "sheet-elara-voss-g3.png",
+      "source_member_sha256": "e80460703d5d63a528a1f2ed39be1c8f244197ba46d9130c6ea6b8936d819957"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-017",
+      "normalization_scale": 1.89152542,
+      "output_bbox": [
+        415,
+        160,
+        839,
+        1068
+      ],
+      "pose_id": "elara_voss_motion_017",
+      "rgba_sha256": "f4233ae3f3d24545016b111bfad22c0ae57913a93a0ff21a29cb1ae067e52752",
+      "runtime_admitted": false,
+      "sequence_id": "g3",
+      "source_archive_id": "sprites-3",
+      "source_archive_sha256": "f9f7dfe99c1043e2008f58b25999e36888515f48fa64e337bde97a8af0bb9a52",
+      "source_bbox": [
+        1490,
+        104,
+        1714,
+        584
+      ],
+      "source_frame_index": 5,
+      "source_member": "sheet-elara-voss-g3.png",
+      "source_member_sha256": "e80460703d5d63a528a1f2ed39be1c8f244197ba46d9130c6ea6b8936d819957"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-018",
+      "normalization_scale": 1.89152542,
+      "output_bbox": [
+        442,
+        69,
+        813,
+        901
+      ],
+      "pose_id": "elara_voss_motion_018",
+      "rgba_sha256": "56424236349936cce938b2a5080494021bdbb33d2864b88ddce9f6a8207e5c9e",
+      "runtime_admitted": false,
+      "sequence_id": "g3",
+      "source_archive_id": "sprites-3",
+      "source_archive_sha256": "f9f7dfe99c1043e2008f58b25999e36888515f48fa64e337bde97a8af0bb9a52",
+      "source_bbox": [
+        1829,
+        56,
+        2025,
+        496
+      ],
+      "source_frame_index": 6,
+      "source_member": "sheet-elara-voss-g3.png",
+      "source_member_sha256": "e80460703d5d63a528a1f2ed39be1c8f244197ba46d9130c6ea6b8936d819957"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-019",
+      "normalization_scale": 1.96478873,
+      "output_bbox": [
+        388,
+        69,
+        867,
+        1006
+      ],
+      "pose_id": "elara_voss_motion_019",
+      "rgba_sha256": "74c37082a5ede6f7e30a782d689092f67711852bea87f1f9a9dd5cda1cca08f3",
+      "runtime_admitted": false,
+      "sequence_id": "g4",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        134,
+        78,
+        378,
+        555
+      ],
+      "source_frame_index": 1,
+      "source_member": "sheet-elara-voss-g4.png",
+      "source_member_sha256": "1fd064f2998ed182bb29a15e5676434f06506ecdef9a6bad54e8f44d4bd00403"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-020",
+      "normalization_scale": 1.96478873,
+      "output_bbox": [
+        426,
+        328,
+        829,
+        1169
+      ],
+      "pose_id": "elara_voss_motion_020",
+      "rgba_sha256": "e6c29703c48908c7b72de2595e0c1f250434be1603b15cdacf575711f7f67f73",
+      "runtime_admitted": false,
+      "sequence_id": "g4",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        496,
+        210,
+        701,
+        638
+      ],
+      "source_frame_index": 2,
+      "source_member": "sheet-elara-voss-g4.png",
+      "source_member_sha256": "1fd064f2998ed182bb29a15e5676434f06506ecdef9a6bad54e8f44d4bd00403"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-021",
+      "normalization_scale": 1.96478873,
+      "output_bbox": [
+        343,
+        297,
+        911,
+        1175
+      ],
+      "pose_id": "elara_voss_motion_021",
+      "rgba_sha256": "30e2243e07b5f47a7ca4559de03082a548f69542d97a4baf7274bab8e6570b8c",
+      "runtime_admitted": false,
+      "sequence_id": "g4",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        797,
+        194,
+        1086,
+        641
+      ],
+      "source_frame_index": 3,
+      "source_member": "sheet-elara-voss-g4.png",
+      "source_member_sha256": "1fd064f2998ed182bb29a15e5676434f06506ecdef9a6bad54e8f44d4bd00403"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-022",
+      "normalization_scale": 1.96478873,
+      "output_bbox": [
+        442,
+        277,
+        811,
+        1183
+      ],
+      "pose_id": "elara_voss_motion_022",
+      "rgba_sha256": "f03a0f3f249eb86686f3c7070401534926c3f3f4a0a6e51f7e82cdc774ea04f9",
+      "runtime_admitted": false,
+      "sequence_id": "g4",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        1209,
+        184,
+        1397,
+        645
+      ],
+      "source_frame_index": 4,
+      "source_member": "sheet-elara-voss-g4.png",
+      "source_member_sha256": "1fd064f2998ed182bb29a15e5676434f06506ecdef9a6bad54e8f44d4bd00403"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-023",
+      "normalization_scale": 1.96478873,
+      "output_bbox": [
+        457,
+        159,
+        797,
+        1185
+      ],
+      "pose_id": "elara_voss_motion_023",
+      "rgba_sha256": "54802149dedbd55a3ab345bc112f4f0684ef2300b42b284a58a92868054d553a",
+      "runtime_admitted": false,
+      "sequence_id": "g4",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        1532,
+        124,
+        1705,
+        646
+      ],
+      "source_frame_index": 5,
+      "source_member": "sheet-elara-voss-g4.png",
+      "source_member_sha256": "1fd064f2998ed182bb29a15e5676434f06506ecdef9a6bad54e8f44d4bd00403"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-024",
+      "normalization_scale": 1.96478873,
+      "output_bbox": [
+        378,
+        163,
+        877,
+        1185
+      ],
+      "pose_id": "elara_voss_motion_024",
+      "rgba_sha256": "46867b3c3c14c1c57d5c102518057c2cbba346944dc0b10f800c72fd58f649e1",
+      "runtime_admitted": false,
+      "sequence_id": "g4",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        1846,
+        126,
+        2100,
+        646
+      ],
+      "source_frame_index": 6,
+      "source_member": "sheet-elara-voss-g4.png",
+      "source_member_sha256": "1fd064f2998ed182bb29a15e5676434f06506ecdef9a6bad54e8f44d4bd00403"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-025",
+      "normalization_scale": 1.71428571,
+      "output_bbox": [
+        436,
+        119,
+        817,
+        1177
+      ],
+      "pose_id": "elara_voss_motion_025",
+      "rgba_sha256": "e4930e3ab3b2379d22bf0b7b7b42c76ca56fd69332d8ebf59a7088edef55d7a1",
+      "runtime_admitted": false,
+      "sequence_id": "g5",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        95,
+        115,
+        317,
+        732
+      ],
+      "source_frame_index": 1,
+      "source_member": "sheet-elara-voss-g5.png",
+      "source_member_sha256": "583b61e22316ce9c6d4e9aaaf1b145c769e28d5bbc7c49aed4fd22fe9fc813b8"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-026",
+      "normalization_scale": 1.71428571,
+      "output_bbox": [
+        434,
+        119,
+        821,
+        1180
+      ],
+      "pose_id": "elara_voss_motion_026",
+      "rgba_sha256": "3561ae22525d5e3ad9b8bf4f344be8d110ec7e7b58dfb5a9069a7ebc44225bc9",
+      "runtime_admitted": false,
+      "sequence_id": "g5",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        390,
+        115,
+        616,
+        734
+      ],
+      "source_frame_index": 2,
+      "source_member": "sheet-elara-voss-g5.png",
+      "source_member_sha256": "583b61e22316ce9c6d4e9aaaf1b145c769e28d5bbc7c49aed4fd22fe9fc813b8"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-027",
+      "normalization_scale": 1.71428571,
+      "output_bbox": [
+        429,
+        117,
+        825,
+        1176
+      ],
+      "pose_id": "elara_voss_motion_027",
+      "rgba_sha256": "616f3016ae1d9e42cd4c8888fc1f53bd671f3bbf71fd1dd250b100eb0956a083",
+      "runtime_admitted": false,
+      "sequence_id": "g5",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        707,
+        114,
+        938,
+        732
+      ],
+      "source_frame_index": 3,
+      "source_member": "sheet-elara-voss-g5.png",
+      "source_member_sha256": "583b61e22316ce9c6d4e9aaaf1b145c769e28d5bbc7c49aed4fd22fe9fc813b8"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-028",
+      "normalization_scale": 1.71428571,
+      "output_bbox": [
+        434,
+        108,
+        821,
+        1185
+      ],
+      "pose_id": "elara_voss_motion_028",
+      "rgba_sha256": "195372cdc877d0e1f797f05bc1ef6475e2cc8d3dc5bb6981dac1ceacfe2c0789",
+      "runtime_admitted": false,
+      "sequence_id": "g5",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        1018,
+        109,
+        1244,
+        737
+      ],
+      "source_frame_index": 4,
+      "source_member": "sheet-elara-voss-g5.png",
+      "source_member_sha256": "583b61e22316ce9c6d4e9aaaf1b145c769e28d5bbc7c49aed4fd22fe9fc813b8"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-029",
+      "normalization_scale": 1.71428571,
+      "output_bbox": [
+        434,
+        112,
+        821,
+        1170
+      ],
+      "pose_id": "elara_voss_motion_029",
+      "rgba_sha256": "c3d5e1e702efdbababb2ffd99fcd9dc7ce0f0df4fcba5b848ba5904feaa1bdf4",
+      "runtime_admitted": false,
+      "sequence_id": "g5",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        1323,
+        111,
+        1549,
+        728
+      ],
+      "source_frame_index": 5,
+      "source_member": "sheet-elara-voss-g5.png",
+      "source_member_sha256": "583b61e22316ce9c6d4e9aaaf1b145c769e28d5bbc7c49aed4fd22fe9fc813b8"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-030",
+      "normalization_scale": 1.71428571,
+      "output_bbox": [
+        418,
+        69,
+        836,
+        907
+      ],
+      "pose_id": "elara_voss_motion_030",
+      "rgba_sha256": "e3c1ee5e54e9632d56c403745a716595da5c3914ab36fb3b7c48ab49433685a8",
+      "runtime_admitted": false,
+      "sequence_id": "g5",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        1615,
+        86,
+        1859,
+        575
+      ],
+      "source_frame_index": 6,
+      "source_member": "sheet-elara-voss-g5.png",
+      "source_member_sha256": "583b61e22316ce9c6d4e9aaaf1b145c769e28d5bbc7c49aed4fd22fe9fc813b8"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-031",
+      "normalization_scale": 1.84158416,
+      "output_bbox": [
+        426,
+        69,
+        829,
+        1185
+      ],
+      "pose_id": "elara_voss_motion_031",
+      "rgba_sha256": "fd49cceb506d317a98582374f734bd2de35272a49c221bfa01161a31acd7982f",
+      "runtime_admitted": false,
+      "sequence_id": "g6",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        100,
+        101,
+        319,
+        707
+      ],
+      "source_frame_index": 1,
+      "source_member": "sheet-elara-voss-g6.png",
+      "source_member_sha256": "5082c127f4ecef1186f6581536a61b2736fe96a6612beba911c6e975a1f0315b"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-032",
+      "normalization_scale": 1.84158416,
+      "output_bbox": [
+        419,
+        71,
+        835,
+        1185
+      ],
+      "pose_id": "elara_voss_motion_032",
+      "rgba_sha256": "e789d1f1fee728dc9fe1a80a07b05a78b82e9046fbfd0d09c73653b510f8cf6e",
+      "runtime_admitted": false,
+      "sequence_id": "g6",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        410,
+        102,
+        636,
+        707
+      ],
+      "source_frame_index": 2,
+      "source_member": "sheet-elara-voss-g6.png",
+      "source_member_sha256": "5082c127f4ecef1186f6581536a61b2736fe96a6612beba911c6e975a1f0315b"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-033",
+      "normalization_scale": 1.84158416,
+      "output_bbox": [
+        422,
+        69,
+        833,
+        1181
+      ],
+      "pose_id": "elara_voss_motion_033",
+      "rgba_sha256": "49250ec111dd09e50c710a299b69db893dfef265878416cdd04571d4f55492a4",
+      "runtime_admitted": false,
+      "sequence_id": "g6",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        707,
+        101,
+        930,
+        705
+      ],
+      "source_frame_index": 3,
+      "source_member": "sheet-elara-voss-g6.png",
+      "source_member_sha256": "5082c127f4ecef1186f6581536a61b2736fe96a6612beba911c6e975a1f0315b"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-034",
+      "normalization_scale": 1.84158416,
+      "output_bbox": [
+        418,
+        69,
+        836,
+        1183
+      ],
+      "pose_id": "elara_voss_motion_034",
+      "rgba_sha256": "03f8cc080bc57015d89282f97837a92d1092c1f6181938dc629dd6834a56e90f",
+      "runtime_admitted": false,
+      "sequence_id": "g6",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        1024,
+        101,
+        1251,
+        706
+      ],
+      "source_frame_index": 4,
+      "source_member": "sheet-elara-voss-g6.png",
+      "source_member_sha256": "5082c127f4ecef1186f6581536a61b2736fe96a6612beba911c6e975a1f0315b"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-035",
+      "normalization_scale": 1.84158416,
+      "output_bbox": [
+        426,
+        73,
+        827,
+        1180
+      ],
+      "pose_id": "elara_voss_motion_035",
+      "rgba_sha256": "39a948e61f64f02882c3e144c09a28fbe9eb70189655b71a806d2e821c25028c",
+      "runtime_admitted": false,
+      "sequence_id": "g6",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        1322,
+        103,
+        1540,
+        704
+      ],
+      "source_frame_index": 5,
+      "source_member": "sheet-elara-voss-g6.png",
+      "source_member_sha256": "5082c127f4ecef1186f6581536a61b2736fe96a6612beba911c6e975a1f0315b"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-036",
+      "normalization_scale": 1.84158416,
+      "output_bbox": [
+        410,
+        71,
+        845,
+        964
+      ],
+      "pose_id": "elara_voss_motion_036",
+      "rgba_sha256": "6ade3693096710806cfd034efd1dfcbe3c7c044953bccea798655798ff11c75d",
+      "runtime_admitted": false,
+      "sequence_id": "g6",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        1599,
+        102,
+        1835,
+        587
+      ],
+      "source_frame_index": 6,
+      "source_member": "sheet-elara-voss-g6.png",
+      "source_member_sha256": "5082c127f4ecef1186f6581536a61b2736fe96a6612beba911c6e975a1f0315b"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "authorship": "authored_full_size_imagegen_v1",
+      "brief_id": "elara-g7-receive-cue",
+      "motion_slot_id": "motion-037",
+      "normalization_scale": 1.0,
+      "output_bbox": [
+        454,
+        82,
+        799,
+        1185
+      ],
+      "pose_id": "elara_voss_motion_037",
+      "rgba_sha256": "2f1892feb27c90d07358fb29f8041ee24e820a406b46cfa26305a6a303e8fd40",
+      "runtime_admitted": false,
+      "sequence_id": "g7",
+      "source_bbox": [
+        454,
+        82,
+        799,
+        1185
+      ],
+      "source_frame_index": 1,
+      "source_height": 1254,
+      "source_path": "frames/elara_voss_motion_037.png",
+      "source_rgba_sha256": "2f1892feb27c90d07358fb29f8041ee24e820a406b46cfa26305a6a303e8fd40",
+      "source_sha256": "2b985e2bb6fad584bf35feb880ceeaddf486c93df6d66010c6d1ad7ba0767535",
+      "source_width": 1254
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "authorship": "authored_full_size_imagegen_v1",
+      "brief_id": "elara-g7-offer-floor",
+      "motion_slot_id": "motion-038",
+      "normalization_scale": 1.0,
+      "output_bbox": [
+        357,
+        74,
+        898,
+        1185
+      ],
+      "pose_id": "elara_voss_motion_038",
+      "rgba_sha256": "7cb6fffc8bd5de65590d32c1609f1c950bb9d97eb32e0e8f61ebcee7539376e7",
+      "runtime_admitted": false,
+      "sequence_id": "g7",
+      "source_bbox": [
+        357,
+        74,
+        898,
+        1185
+      ],
+      "source_frame_index": 2,
+      "source_height": 1254,
+      "source_path": "frames/elara_voss_motion_038.png",
+      "source_rgba_sha256": "7cb6fffc8bd5de65590d32c1609f1c950bb9d97eb32e0e8f61ebcee7539376e7",
+      "source_sha256": "73728917897cc8bc82ebc621d24dea8f468b060fdb8547d0bd8076c1fbe3ee99",
+      "source_width": 1254
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "authorship": "authored_full_size_imagegen_v1",
+      "brief_id": "elara-g7-listen",
+      "motion_slot_id": "motion-039",
+      "normalization_scale": 1.0,
+      "output_bbox": [
+        333,
+        149,
+        921,
+        1185
+      ],
+      "pose_id": "elara_voss_motion_039",
+      "rgba_sha256": "6cca3c3ef94de24750507041a8a4c427285fed50b27ca0fee93404618b01a44d",
+      "runtime_admitted": false,
+      "sequence_id": "g7",
+      "source_bbox": [
+        333,
+        149,
+        921,
+        1185
+      ],
+      "source_frame_index": 3,
+      "source_height": 1254,
+      "source_path": "frames/elara_voss_motion_039.png",
+      "source_rgba_sha256": "6cca3c3ef94de24750507041a8a4c427285fed50b27ca0fee93404618b01a44d",
+      "source_sha256": "1b10698c16d06f969a2727bee6a30c0921969a782a7f808749f10d1dd40e78b4",
+      "source_width": 1254
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "authorship": "authored_full_size_imagegen_v1",
+      "brief_id": "elara-g7-reclaim-question",
+      "motion_slot_id": "motion-040",
+      "normalization_scale": 1.0,
+      "output_bbox": [
+        436,
+        100,
+        818,
+        1185
+      ],
+      "pose_id": "elara_voss_motion_040",
+      "rgba_sha256": "3c04acc096acccba69557e268e2190055c9ca262451252798fac5162d7e54fc4",
+      "runtime_admitted": false,
+      "sequence_id": "g7",
+      "source_bbox": [
+        436,
+        100,
+        818,
+        1185
+      ],
+      "source_frame_index": 4,
+      "source_height": 1254,
+      "source_path": "frames/elara_voss_motion_040.png",
+      "source_rgba_sha256": "3c04acc096acccba69557e268e2190055c9ca262451252798fac5162d7e54fc4",
+      "source_sha256": "067c1b4a5d05288850ce0d199f06ac82bde0b6dbf9f23a31833c4486acd0a168",
+      "source_width": 1254
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "authorship": "authored_full_size_imagegen_v1",
+      "brief_id": "elara-g7-clarify",
+      "motion_slot_id": "motion-041",
+      "normalization_scale": 1.0,
+      "output_bbox": [
+        461,
+        108,
+        794,
+        1185
+      ],
+      "pose_id": "elara_voss_motion_041",
+      "rgba_sha256": "fc0d74e9e0d173d8eff7d2469d1e629c2d1acd3426638306e714dcacce29a900",
+      "runtime_admitted": false,
+      "sequence_id": "g7",
+      "source_bbox": [
+        461,
+        108,
+        794,
+        1185
+      ],
+      "source_frame_index": 5,
+      "source_height": 1254,
+      "source_path": "frames/elara_voss_motion_041.png",
+      "source_rgba_sha256": "fc0d74e9e0d173d8eff7d2469d1e629c2d1acd3426638306e714dcacce29a900",
+      "source_sha256": "34c02bfd43adef1ef8f84175eac4bc0c0c184257cfd355efa1c39d3248965f74",
+      "source_width": 1254
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "authorship": "authored_full_size_imagegen_v1",
+      "brief_id": "elara-g7-invite-response",
+      "motion_slot_id": "motion-042",
+      "normalization_scale": 1.0,
+      "output_bbox": [
+        373,
+        69,
+        881,
+        1185
+      ],
+      "pose_id": "elara_voss_motion_042",
+      "rgba_sha256": "32e4d76885dd97cb3fc21f425f1a00ac091f2b59eb3308999d1670c97bf28fa8",
+      "runtime_admitted": false,
+      "sequence_id": "g7",
+      "source_bbox": [
+        373,
+        69,
+        881,
+        1185
+      ],
+      "source_frame_index": 6,
+      "source_height": 1254,
+      "source_path": "frames/elara_voss_motion_042.png",
+      "source_rgba_sha256": "32e4d76885dd97cb3fc21f425f1a00ac091f2b59eb3308999d1670c97bf28fa8",
+      "source_sha256": "790e8b3eafe17239d7e8cbce43f847a5d8126d909e8dcf22be03465b1029acdb",
+      "source_width": 1254
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "authorship": "authored_full_size_imagegen_v1",
+      "brief_id": "elara-g8-editorial-intake",
+      "motion_slot_id": "motion-043",
+      "normalization_scale": 1.0,
+      "output_bbox": [
+        443,
+        69,
+        811,
+        1185
+      ],
+      "pose_id": "elara_voss_motion_043",
+      "rgba_sha256": "3a1af35d975e1be2ebebac7b6c0494eebe87cb6f02f0d4f0c408c346360a3993",
+      "runtime_admitted": false,
+      "sequence_id": "g8",
+      "source_bbox": [
+        443,
+        69,
+        811,
+        1185
+      ],
+      "source_frame_index": 1,
+      "source_height": 1254,
+      "source_path": "frames/elara_voss_motion_043.png",
+      "source_rgba_sha256": "3a1af35d975e1be2ebebac7b6c0494eebe87cb6f02f0d4f0c408c346360a3993",
+      "source_sha256": "7a47ec6094464e47c7bf4646de7df2619824c9707d8ac2380bf4907e97c18756",
+      "source_width": 1254
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "authorship": "authored_full_size_imagegen_v1",
+      "brief_id": "elara-g8-headline",
+      "motion_slot_id": "motion-044",
+      "normalization_scale": 1.0,
+      "output_bbox": [
+        430,
+        69,
+        825,
+        1185
+      ],
+      "pose_id": "elara_voss_motion_044",
+      "rgba_sha256": "b549676346158d5d5d44366d350ad7134effae0ee16406b49c46aeb17b2f6576",
+      "runtime_admitted": false,
+      "sequence_id": "g8",
+      "source_bbox": [
+        430,
+        69,
+        825,
+        1185
+      ],
+      "source_frame_index": 2,
+      "source_height": 1254,
+      "source_path": "frames/elara_voss_motion_044.png",
+      "source_rgba_sha256": "b549676346158d5d5d44366d350ad7134effae0ee16406b49c46aeb17b2f6576",
+      "source_sha256": "919c0c537f43a970416b39a2205ac0c772bee2aa6becf907497cdeaaed3ec155",
+      "source_width": 1254
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "authorship": "authored_full_size_imagegen_v1",
+      "brief_id": "elara-g8-first-fact",
+      "motion_slot_id": "motion-045",
+      "normalization_scale": 1.0,
+      "output_bbox": [
+        443,
+        69,
+        811,
+        1185
+      ],
+      "pose_id": "elara_voss_motion_045",
+      "rgba_sha256": "328b4ce63573570797d8a02c1dea19fd53b1a989ed509742d0a98c85b5a66f6e",
+      "runtime_admitted": false,
+      "sequence_id": "g8",
+      "source_bbox": [
+        443,
+        69,
+        811,
+        1185
+      ],
+      "source_frame_index": 3,
+      "source_height": 1254,
+      "source_path": "frames/elara_voss_motion_045.png",
+      "source_rgba_sha256": "328b4ce63573570797d8a02c1dea19fd53b1a989ed509742d0a98c85b5a66f6e",
+      "source_sha256": "387cd479f91a6f9e48a9873a2ed3d6d0d950241e419e10a12b9b223b58a41894",
+      "source_width": 1254
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "authorship": "authored_full_size_imagegen_v1",
+      "brief_id": "elara-g8-compare",
+      "motion_slot_id": "motion-046",
+      "normalization_scale": 1.0,
+      "output_bbox": [
+        450,
+        69,
+        805,
+        1185
+      ],
+      "pose_id": "elara_voss_motion_046",
+      "rgba_sha256": "183a8e38a4c302ddcaf94ffabd54423d86b6ee4807f6f099dbf73bce605dbd9a",
+      "runtime_admitted": false,
+      "sequence_id": "g8",
+      "source_bbox": [
+        450,
+        69,
+        805,
+        1185
+      ],
+      "source_frame_index": 4,
+      "source_height": 1254,
+      "source_path": "frames/elara_voss_motion_046.png",
+      "source_rgba_sha256": "183a8e38a4c302ddcaf94ffabd54423d86b6ee4807f6f099dbf73bce605dbd9a",
+      "source_sha256": "8add360294228c2461abf91e750abcf4e381351df7c55e7c2f85047b750aed60",
+      "source_width": 1254
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "authorship": "authored_full_size_imagegen_v1",
+      "brief_id": "elara-g8-conclusion",
+      "motion_slot_id": "motion-047",
+      "normalization_scale": 1.0,
+      "output_bbox": [
+        452,
+        69,
+        803,
+        1185
+      ],
+      "pose_id": "elara_voss_motion_047",
+      "rgba_sha256": "527c4e1752a5cf188dd06a56e7869408ca3493f5690ce1991a8940ca68718dca",
+      "runtime_admitted": false,
+      "sequence_id": "g8",
+      "source_bbox": [
+        452,
+        69,
+        803,
+        1185
+      ],
+      "source_frame_index": 5,
+      "source_height": 1254,
+      "source_path": "frames/elara_voss_motion_047.png",
+      "source_rgba_sha256": "527c4e1752a5cf188dd06a56e7869408ca3493f5690ce1991a8940ca68718dca",
+      "source_sha256": "0c912963785202bbc9ea2b83688b053c5c10bde3569002d5a08b6b9591c2b5d4",
+      "source_width": 1254
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "authorship": "authored_full_size_imagegen_v1",
+      "brief_id": "elara-g8-signoff",
+      "motion_slot_id": "motion-048",
+      "normalization_scale": 1.0,
+      "output_bbox": [
+        393,
+        69,
+        861,
+        1185
+      ],
+      "pose_id": "elara_voss_motion_048",
+      "rgba_sha256": "9cb02e0bfcc02094076049664fc6213e25db350def3ad5b584d59154d06239c6",
+      "runtime_admitted": false,
+      "sequence_id": "g8",
+      "source_bbox": [
+        393,
+        69,
+        861,
+        1185
+      ],
+      "source_frame_index": 6,
+      "source_height": 1254,
+      "source_path": "frames/elara_voss_motion_048.png",
+      "source_rgba_sha256": "9cb02e0bfcc02094076049664fc6213e25db350def3ad5b584d59154d06239c6",
+      "source_sha256": "b92eecc545e18a8b8b9fee70ce65ff8100768919283c4882c172b42d86d4f439",
+      "source_width": 1254
+    }
+  ],
+  "review_contact_sheet": {
+    "path": "source-metadata/elara-voss/parity-motion-contact-sheet-v001.png",
+    "sha256": "fcef489937907925a0db255fcfedce3480f87a87367ee20638f0fe642f361b7a"
+  },
+  "review_motion_contract": {
+    "path": "source-metadata/elara-voss/review-motion-contract-v001.json",
+    "sha256": "a24a1597aad39c522b3f77356ca141e427fa3b8b8f8b022fcffc19072a697b0b"
+  },
+  "runtime_admitted": false,
+  "schema_version": 1,
+  "sequences": {
+    "g1": [
+      "elara_voss_motion_001",
+      "elara_voss_motion_002",
+      "elara_voss_motion_003",
+      "elara_voss_motion_004",
+      "elara_voss_motion_005",
+      "elara_voss_motion_006"
+    ],
+    "g2": [
+      "elara_voss_motion_007",
+      "elara_voss_motion_008",
+      "elara_voss_motion_009",
+      "elara_voss_motion_010",
+      "elara_voss_motion_011",
+      "elara_voss_motion_012"
+    ],
+    "g3": [
+      "elara_voss_motion_013",
+      "elara_voss_motion_014",
+      "elara_voss_motion_015",
+      "elara_voss_motion_016",
+      "elara_voss_motion_017",
+      "elara_voss_motion_018"
+    ],
+    "g4": [
+      "elara_voss_motion_019",
+      "elara_voss_motion_020",
+      "elara_voss_motion_021",
+      "elara_voss_motion_022",
+      "elara_voss_motion_023",
+      "elara_voss_motion_024"
+    ],
+    "g5": [
+      "elara_voss_motion_025",
+      "elara_voss_motion_026",
+      "elara_voss_motion_027",
+      "elara_voss_motion_028",
+      "elara_voss_motion_029",
+      "elara_voss_motion_030"
+    ],
+    "g6": [
+      "elara_voss_motion_031",
+      "elara_voss_motion_032",
+      "elara_voss_motion_033",
+      "elara_voss_motion_034",
+      "elara_voss_motion_035",
+      "elara_voss_motion_036"
+    ],
+    "g7": [
+      "elara_voss_motion_037",
+      "elara_voss_motion_038",
+      "elara_voss_motion_039",
+      "elara_voss_motion_040",
+      "elara_voss_motion_041",
+      "elara_voss_motion_042"
+    ],
+    "g8": [
+      "elara_voss_motion_043",
+      "elara_voss_motion_044",
+      "elara_voss_motion_045",
+      "elara_voss_motion_046",
+      "elara_voss_motion_047",
+      "elara_voss_motion_048"
+    ]
+  },
+  "status": "pending_visual_parity",
+  "target_pose_count": 48
+}

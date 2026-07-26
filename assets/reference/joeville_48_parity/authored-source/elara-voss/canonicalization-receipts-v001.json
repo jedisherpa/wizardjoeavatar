@@ -1,0 +1,422 @@
+[
+  {
+    "authority_manifest_sha256": "740f35730f4aa1e6c6ef96be80115c5b0e117397f792d57fdf5360452bbe78c8",
+    "destination_bbox": [
+      454,
+      82,
+      799,
+      1185
+    ],
+    "destination_path": "/Users/paul/Documents/WizardJoeAsci/worktrees/wizardjoe-character-director/assets/reference/joeville_48_parity/authored-source/elara-voss/frames/elara_voss_motion_037.png",
+    "destination_rgba_sha256": "2f1892feb27c90d07358fb29f8041ee24e820a406b46cfa26305a6a303e8fd40",
+    "destination_sha256": "2b985e2bb6fad584bf35feb880ceeaddf486c93df6d66010c6d1ad7ba0767535",
+    "fitted_bbox": [
+      460,
+      66,
+      805,
+      1169
+    ],
+    "profile_id": "wizardjoe_hd_alpha_1254_v001",
+    "resample_filter": null,
+    "resampled": false,
+    "scale": 1.0,
+    "schema_version": 1,
+    "source_bbox": [
+      460,
+      66,
+      805,
+      1169
+    ],
+    "source_path": "/Users/paul/Documents/WizardJoeAsci/worktrees/wizardjoe-character-director/assets/reference/joeville_48_parity/authored-source/elara-voss/alpha-extracted/elara_voss_motion_037.png",
+    "source_sha256": "ccde0c66b66b7aed050f7b5c90ff4faf5bb8913a2bf4859776b34966454046ee",
+    "translation": {
+      "x": -6,
+      "y": 16
+    }
+  },
+  {
+    "authority_manifest_sha256": "740f35730f4aa1e6c6ef96be80115c5b0e117397f792d57fdf5360452bbe78c8",
+    "destination_bbox": [
+      357,
+      74,
+      898,
+      1185
+    ],
+    "destination_path": "/Users/paul/Documents/WizardJoeAsci/worktrees/wizardjoe-character-director/assets/reference/joeville_48_parity/authored-source/elara-voss/frames/elara_voss_motion_038.png",
+    "destination_rgba_sha256": "7cb6fffc8bd5de65590d32c1609f1c950bb9d97eb32e0e8f61ebcee7539376e7",
+    "destination_sha256": "73728917897cc8bc82ebc621d24dea8f468b060fdb8547d0bd8076c1fbe3ee99",
+    "fitted_bbox": [
+      451,
+      58,
+      992,
+      1169
+    ],
+    "profile_id": "wizardjoe_hd_alpha_1254_v001",
+    "resample_filter": null,
+    "resampled": false,
+    "scale": 1.0,
+    "schema_version": 1,
+    "source_bbox": [
+      451,
+      58,
+      992,
+      1169
+    ],
+    "source_path": "/Users/paul/Documents/WizardJoeAsci/worktrees/wizardjoe-character-director/assets/reference/joeville_48_parity/authored-source/elara-voss/alpha-extracted/elara_voss_motion_038.png",
+    "source_sha256": "b01ca05925208448468beaaf89e220df31606038ed3e35ea9cf927506d89a7ee",
+    "translation": {
+      "x": -94,
+      "y": 16
+    }
+  },
+  {
+    "authority_manifest_sha256": "740f35730f4aa1e6c6ef96be80115c5b0e117397f792d57fdf5360452bbe78c8",
+    "destination_bbox": [
+      333,
+      149,
+      921,
+      1185
+    ],
+    "destination_path": "/Users/paul/Documents/WizardJoeAsci/worktrees/wizardjoe-character-director/assets/reference/joeville_48_parity/authored-source/elara-voss/frames/elara_voss_motion_039.png",
+    "destination_rgba_sha256": "6cca3c3ef94de24750507041a8a4c427285fed50b27ca0fee93404618b01a44d",
+    "destination_sha256": "1b10698c16d06f969a2727bee6a30c0921969a782a7f808749f10d1dd40e78b4",
+    "fitted_bbox": [
+      373,
+      98,
+      961,
+      1134
+    ],
+    "profile_id": "wizardjoe_hd_alpha_1254_v001",
+    "resample_filter": null,
+    "resampled": false,
+    "scale": 1.0,
+    "schema_version": 1,
+    "source_bbox": [
+      373,
+      98,
+      961,
+      1134
+    ],
+    "source_path": "/Users/paul/Documents/WizardJoeAsci/worktrees/wizardjoe-character-director/assets/reference/joeville_48_parity/authored-source/elara-voss/alpha-extracted/elara_voss_motion_039.png",
+    "source_sha256": "1e6ab6542641a9a6d1de00ab3e906a503e2b590a000db78c323db9024296efa7",
+    "translation": {
+      "x": -40,
+      "y": 51
+    }
+  },
+  {
+    "authority_manifest_sha256": "740f35730f4aa1e6c6ef96be80115c5b0e117397f792d57fdf5360452bbe78c8",
+    "destination_bbox": [
+      436,
+      100,
+      818,
+      1185
+    ],
+    "destination_path": "/Users/paul/Documents/WizardJoeAsci/worktrees/wizardjoe-character-director/assets/reference/joeville_48_parity/authored-source/elara-voss/frames/elara_voss_motion_040.png",
+    "destination_rgba_sha256": "3c04acc096acccba69557e268e2190055c9ca262451252798fac5162d7e54fc4",
+    "destination_sha256": "067c1b4a5d05288850ce0d199f06ac82bde0b6dbf9f23a31833c4486acd0a168",
+    "fitted_bbox": [
+      416,
+      75,
+      798,
+      1160
+    ],
+    "profile_id": "wizardjoe_hd_alpha_1254_v001",
+    "resample_filter": null,
+    "resampled": false,
+    "scale": 1.0,
+    "schema_version": 1,
+    "source_bbox": [
+      416,
+      75,
+      798,
+      1160
+    ],
+    "source_path": "/Users/paul/Documents/WizardJoeAsci/worktrees/wizardjoe-character-director/assets/reference/joeville_48_parity/authored-source/elara-voss/alpha-extracted/elara_voss_motion_040.png",
+    "source_sha256": "bc76625029398425f09cbd377a71a419c023112ef3a6c96f9bc1c5f2f89f9187",
+    "translation": {
+      "x": 20,
+      "y": 25
+    }
+  },
+  {
+    "authority_manifest_sha256": "740f35730f4aa1e6c6ef96be80115c5b0e117397f792d57fdf5360452bbe78c8",
+    "destination_bbox": [
+      461,
+      108,
+      794,
+      1185
+    ],
+    "destination_path": "/Users/paul/Documents/WizardJoeAsci/worktrees/wizardjoe-character-director/assets/reference/joeville_48_parity/authored-source/elara-voss/frames/elara_voss_motion_041.png",
+    "destination_rgba_sha256": "fc0d74e9e0d173d8eff7d2469d1e629c2d1acd3426638306e714dcacce29a900",
+    "destination_sha256": "34c02bfd43adef1ef8f84175eac4bc0c0c184257cfd355efa1c39d3248965f74",
+    "fitted_bbox": [
+      461,
+      60,
+      794,
+      1137
+    ],
+    "profile_id": "wizardjoe_hd_alpha_1254_v001",
+    "resample_filter": null,
+    "resampled": false,
+    "scale": 1.0,
+    "schema_version": 1,
+    "source_bbox": [
+      461,
+      60,
+      794,
+      1137
+    ],
+    "source_path": "/Users/paul/Documents/WizardJoeAsci/worktrees/wizardjoe-character-director/assets/reference/joeville_48_parity/authored-source/elara-voss/alpha-extracted/elara_voss_motion_041.png",
+    "source_sha256": "9336563490a9ad6ae2def94f3e71d7c8a6edd6f9307d352322aa0a2856e8565f",
+    "translation": {
+      "x": 0,
+      "y": 48
+    }
+  },
+  {
+    "authority_manifest_sha256": "740f35730f4aa1e6c6ef96be80115c5b0e117397f792d57fdf5360452bbe78c8",
+    "destination_bbox": [
+      373,
+      69,
+      881,
+      1185
+    ],
+    "destination_path": "/Users/paul/Documents/WizardJoeAsci/worktrees/wizardjoe-character-director/assets/reference/joeville_48_parity/authored-source/elara-voss/frames/elara_voss_motion_042.png",
+    "destination_rgba_sha256": "32e4d76885dd97cb3fc21f425f1a00ac091f2b59eb3308999d1670c97bf28fa8",
+    "destination_sha256": "790e8b3eafe17239d7e8cbce43f847a5d8126d909e8dcf22be03465b1029acdb",
+    "fitted_bbox": [
+      0,
+      0,
+      508,
+      1116
+    ],
+    "profile_id": "wizardjoe_hd_alpha_1254_v001",
+    "resample_filter": "lanczos",
+    "resampled": true,
+    "scale": 0.9637305699481865,
+    "schema_version": 1,
+    "source_bbox": [
+      337,
+      46,
+      865,
+      1204
+    ],
+    "source_path": "/Users/paul/Documents/WizardJoeAsci/worktrees/wizardjoe-character-director/assets/reference/joeville_48_parity/authored-source/elara-voss/alpha-extracted/elara_voss_motion_042.png",
+    "source_sha256": "d1abb8dae41c70f5c53339af8eaabd3aef886b4254dd3b183c1f128b83ce2a7d",
+    "translation": {
+      "x": 373,
+      "y": 69
+    }
+  },
+  {
+    "authority_manifest_sha256": "740f35730f4aa1e6c6ef96be80115c5b0e117397f792d57fdf5360452bbe78c8",
+    "destination_bbox": [
+      443,
+      69,
+      811,
+      1185
+    ],
+    "destination_path": "/Users/paul/Documents/WizardJoeAsci/worktrees/wizardjoe-character-director/assets/reference/joeville_48_parity/authored-source/elara-voss/frames/elara_voss_motion_043.png",
+    "destination_rgba_sha256": "3a1af35d975e1be2ebebac7b6c0494eebe87cb6f02f0d4f0c408c346360a3993",
+    "destination_sha256": "7a47ec6094464e47c7bf4646de7df2619824c9707d8ac2380bf4907e97c18756",
+    "fitted_bbox": [
+      0,
+      0,
+      368,
+      1116
+    ],
+    "profile_id": "wizardjoe_hd_alpha_1254_v001",
+    "resample_filter": "lanczos",
+    "resampled": true,
+    "scale": 0.9612403100775194,
+    "schema_version": 1,
+    "source_bbox": [
+      430,
+      45,
+      813,
+      1206
+    ],
+    "source_path": "/Users/paul/Documents/WizardJoeAsci/worktrees/wizardjoe-character-director/assets/reference/joeville_48_parity/authored-source/elara-voss/alpha-extracted/elara_voss_motion_043.png",
+    "source_sha256": "a26c3148246d6b3d51c300471d150188f472b7681eca2242e018e8e200ea8c12",
+    "translation": {
+      "x": 443,
+      "y": 69
+    }
+  },
+  {
+    "authority_manifest_sha256": "740f35730f4aa1e6c6ef96be80115c5b0e117397f792d57fdf5360452bbe78c8",
+    "destination_bbox": [
+      430,
+      69,
+      825,
+      1185
+    ],
+    "destination_path": "/Users/paul/Documents/WizardJoeAsci/worktrees/wizardjoe-character-director/assets/reference/joeville_48_parity/authored-source/elara-voss/frames/elara_voss_motion_044.png",
+    "destination_rgba_sha256": "b549676346158d5d5d44366d350ad7134effae0ee16406b49c46aeb17b2f6576",
+    "destination_sha256": "919c0c537f43a970416b39a2205ac0c772bee2aa6becf907497cdeaaed3ec155",
+    "fitted_bbox": [
+      0,
+      0,
+      395,
+      1116
+    ],
+    "profile_id": "wizardjoe_hd_alpha_1254_v001",
+    "resample_filter": "lanczos",
+    "resampled": true,
+    "scale": 0.9645635263612792,
+    "schema_version": 1,
+    "source_bbox": [
+      414,
+      49,
+      824,
+      1206
+    ],
+    "source_path": "/Users/paul/Documents/WizardJoeAsci/worktrees/wizardjoe-character-director/assets/reference/joeville_48_parity/authored-source/elara-voss/alpha-extracted/elara_voss_motion_044.png",
+    "source_sha256": "ba94a7519216f575e02c94f47861590eed0847a8179e44010ce96ef649574389",
+    "translation": {
+      "x": 430,
+      "y": 69
+    }
+  },
+  {
+    "authority_manifest_sha256": "740f35730f4aa1e6c6ef96be80115c5b0e117397f792d57fdf5360452bbe78c8",
+    "destination_bbox": [
+      443,
+      69,
+      811,
+      1185
+    ],
+    "destination_path": "/Users/paul/Documents/WizardJoeAsci/worktrees/wizardjoe-character-director/assets/reference/joeville_48_parity/authored-source/elara-voss/frames/elara_voss_motion_045.png",
+    "destination_rgba_sha256": "328b4ce63573570797d8a02c1dea19fd53b1a989ed509742d0a98c85b5a66f6e",
+    "destination_sha256": "387cd479f91a6f9e48a9873a2ed3d6d0d950241e419e10a12b9b223b58a41894",
+    "fitted_bbox": [
+      0,
+      0,
+      368,
+      1116
+    ],
+    "profile_id": "wizardjoe_hd_alpha_1254_v001",
+    "resample_filter": "lanczos",
+    "resampled": true,
+    "scale": 0.9662337662337662,
+    "schema_version": 1,
+    "source_bbox": [
+      439,
+      51,
+      820,
+      1206
+    ],
+    "source_path": "/Users/paul/Documents/WizardJoeAsci/worktrees/wizardjoe-character-director/assets/reference/joeville_48_parity/authored-source/elara-voss/alpha-extracted/elara_voss_motion_045.png",
+    "source_sha256": "b55b8700b9462724b1fc1ab68324572e5b90b4ae28527852474150303bd9d322",
+    "translation": {
+      "x": 443,
+      "y": 69
+    }
+  },
+  {
+    "authority_manifest_sha256": "740f35730f4aa1e6c6ef96be80115c5b0e117397f792d57fdf5360452bbe78c8",
+    "destination_bbox": [
+      450,
+      69,
+      805,
+      1185
+    ],
+    "destination_path": "/Users/paul/Documents/WizardJoeAsci/worktrees/wizardjoe-character-director/assets/reference/joeville_48_parity/authored-source/elara-voss/frames/elara_voss_motion_046.png",
+    "destination_rgba_sha256": "183a8e38a4c302ddcaf94ffabd54423d86b6ee4807f6f099dbf73bce605dbd9a",
+    "destination_sha256": "8add360294228c2461abf91e750abcf4e381351df7c55e7c2f85047b750aed60",
+    "fitted_bbox": [
+      0,
+      0,
+      355,
+      1116
+    ],
+    "profile_id": "wizardjoe_hd_alpha_1254_v001",
+    "resample_filter": "lanczos",
+    "resampled": true,
+    "scale": 0.9670710571923743,
+    "schema_version": 1,
+    "source_bbox": [
+      431,
+      48,
+      799,
+      1202
+    ],
+    "source_path": "/Users/paul/Documents/WizardJoeAsci/worktrees/wizardjoe-character-director/assets/reference/joeville_48_parity/authored-source/elara-voss/alpha-extracted/elara_voss_motion_046.png",
+    "source_sha256": "6b3adea844b9dbbf17d9e0dd407431665172d3c409bbfb34b2517b5955261edd",
+    "translation": {
+      "x": 450,
+      "y": 69
+    }
+  },
+  {
+    "authority_manifest_sha256": "740f35730f4aa1e6c6ef96be80115c5b0e117397f792d57fdf5360452bbe78c8",
+    "destination_bbox": [
+      452,
+      69,
+      803,
+      1185
+    ],
+    "destination_path": "/Users/paul/Documents/WizardJoeAsci/worktrees/wizardjoe-character-director/assets/reference/joeville_48_parity/authored-source/elara-voss/frames/elara_voss_motion_047.png",
+    "destination_rgba_sha256": "527c4e1752a5cf188dd06a56e7869408ca3493f5690ce1991a8940ca68718dca",
+    "destination_sha256": "0c912963785202bbc9ea2b83688b053c5c10bde3569002d5a08b6b9591c2b5d4",
+    "fitted_bbox": [
+      0,
+      0,
+      351,
+      1116
+    ],
+    "profile_id": "wizardjoe_hd_alpha_1254_v001",
+    "resample_filter": "lanczos",
+    "resampled": true,
+    "scale": 0.96875,
+    "schema_version": 1,
+    "source_bbox": [
+      429,
+      50,
+      792,
+      1202
+    ],
+    "source_path": "/Users/paul/Documents/WizardJoeAsci/worktrees/wizardjoe-character-director/assets/reference/joeville_48_parity/authored-source/elara-voss/alpha-extracted/elara_voss_motion_047.png",
+    "source_sha256": "55f65d54a706c9a9086583442f08c9d80d704bed4a1cc4dad723d5a20816bc3c",
+    "translation": {
+      "x": 452,
+      "y": 69
+    }
+  },
+  {
+    "authority_manifest_sha256": "740f35730f4aa1e6c6ef96be80115c5b0e117397f792d57fdf5360452bbe78c8",
+    "destination_bbox": [
+      393,
+      69,
+      861,
+      1185
+    ],
+    "destination_path": "/Users/paul/Documents/WizardJoeAsci/worktrees/wizardjoe-character-director/assets/reference/joeville_48_parity/authored-source/elara-voss/frames/elara_voss_motion_048.png",
+    "destination_rgba_sha256": "9cb02e0bfcc02094076049664fc6213e25db350def3ad5b584d59154d06239c6",
+    "destination_sha256": "b92eecc545e18a8b8b9fee70ce65ff8100768919283c4882c172b42d86d4f439",
+    "fitted_bbox": [
+      0,
+      0,
+      468,
+      1116
+    ],
+    "profile_id": "wizardjoe_hd_alpha_1254_v001",
+    "resample_filter": "lanczos",
+    "resampled": true,
+    "scale": 0.9662337662337662,
+    "schema_version": 1,
+    "source_bbox": [
+      328,
+      49,
+      813,
+      1204
+    ],
+    "source_path": "/Users/paul/Documents/WizardJoeAsci/worktrees/wizardjoe-character-director/assets/reference/joeville_48_parity/authored-source/elara-voss/alpha-extracted/elara_voss_motion_048.png",
+    "source_sha256": "65ad4fa4e980cd3d3b95ab02e45de29fa1244c390b3d7088bf6f212426bd1c3c",
+    "translation": {
+      "x": 393,
+      "y": 69
+    }
+  }
+]

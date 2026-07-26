@@ -26,6 +26,22 @@ def _read_json(path: Path) -> dict[str, Any]:
     return value
 
 
+def _canonicalization_mode(output_root: Path) -> str:
+    receipts_path = output_root / "canonicalization-receipts-v001.json"
+    if not receipts_path.is_file():
+        return "integer_translation_only_no_resampling"
+    receipts = json.loads(receipts_path.read_text(encoding="utf-8"))
+    if not isinstance(receipts, list) or not receipts:
+        raise ValueError(
+            f"{receipts_path} must contain a non-empty JSON array"
+        )
+    if any(not isinstance(receipt, dict) for receipt in receipts):
+        raise ValueError(f"{receipts_path} contains an invalid receipt")
+    if any(bool(receipt.get("resampled")) for receipt in receipts):
+        return "integer_translation_with_opt_in_oversize_fit"
+    return "integer_translation_only_no_resampling"
+
+
 def _sha256(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
@@ -117,7 +133,7 @@ def prepare_manifest(
         "generation_method": (
             "built_in_imagegen_flat_chroma_then_local_alpha_extraction"
         ),
-        "canonicalization": "integer_translation_only_no_resampling",
+        "canonicalization": _canonicalization_mode(output_root),
         "runtime_admitted": False,
         "approval_state": "pending_visual_parity",
         "sequences": sequences,
