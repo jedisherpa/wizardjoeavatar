@@ -1,0 +1,434 @@
+[
+  {
+    "canvas_normalized": false,
+    "canvas_size": [
+      1254,
+      1254
+    ],
+    "destination_path": "assets/reference/joeville_48_parity/authored-source/rohan-slate/alpha-extracted/rohan_slate_motion_037.png",
+    "destination_rgba_sha256": "1185c8b82594ea71c5400a82429c28e58491553ccdaf0c84fb8e34cdb22028ed",
+    "destination_sha256": "bcb575c1b844f7fc6552002f757961b7bf35512b7d128a6aea2fa2dc1d281fe8",
+    "edge_contract": 1,
+    "key_color": [
+      251,
+      3,
+      249
+    ],
+    "normalization_offset": [
+      0,
+      0
+    ],
+    "normalization_scale": 1.0,
+    "schema_version": 1,
+    "silhouette_bbox": [
+      417,
+      98,
+      784,
+      1114
+    ],
+    "source_canvas_size": [
+      1254,
+      1254
+    ],
+    "source_path": "assets/reference/joeville_48_parity/authored-source/rohan-slate/chroma-source/rohan_slate_motion_037.png",
+    "source_sha256": "edf82698eff1c29e10ff5466faa6a5a68a6b5545196d073fe8780faed5a00ed7",
+    "tolerance": 110,
+    "transparent_pixels_before_contract": 1300018
+  },
+  {
+    "canvas_normalized": false,
+    "canvas_size": [
+      1254,
+      1254
+    ],
+    "destination_path": "assets/reference/joeville_48_parity/authored-source/rohan-slate/alpha-extracted/rohan_slate_motion_038.png",
+    "destination_rgba_sha256": "3b549c6e69a7f6ba1a3ad2aeeb1ee2d2a83c9902afa3e726a497451cf5eb346a",
+    "destination_sha256": "5bd5c58124463f399fd9c46e9c6d7c2b7ead99cde9e3ee180b6fecc9b7288680",
+    "edge_contract": 1,
+    "key_color": [
+      252,
+      3,
+      250
+    ],
+    "normalization_offset": [
+      0,
+      0
+    ],
+    "normalization_scale": 1.0,
+    "schema_version": 1,
+    "silhouette_bbox": [
+      417,
+      110,
+      819,
+      1130
+    ],
+    "source_canvas_size": [
+      1254,
+      1254
+    ],
+    "source_path": "assets/reference/joeville_48_parity/authored-source/rohan-slate/chroma-source/rohan_slate_motion_038.png",
+    "source_sha256": "a86c383d8ecdc0d37e029f2cd02c59d05131420d0e5dc2f29ecbfdacec070232",
+    "tolerance": 110,
+    "transparent_pixels_before_contract": 1294406
+  },
+  {
+    "canvas_normalized": false,
+    "canvas_size": [
+      1254,
+      1254
+    ],
+    "destination_path": "assets/reference/joeville_48_parity/authored-source/rohan-slate/alpha-extracted/rohan_slate_motion_039.png",
+    "destination_rgba_sha256": "3666f203c7da7d9456cf522bbc43814f52cdaa2ad2bdd327d57256cd62d452ec",
+    "destination_sha256": "8ab41f285513c24e2df7ce355260237ce1ea5891371023610017af14ba8f701f",
+    "edge_contract": 1,
+    "key_color": [
+      251,
+      3,
+      248
+    ],
+    "normalization_offset": [
+      0,
+      0
+    ],
+    "normalization_scale": 1.0,
+    "schema_version": 1,
+    "silhouette_bbox": [
+      431,
+      111,
+      833,
+      1113
+    ],
+    "source_canvas_size": [
+      1254,
+      1254
+    ],
+    "source_path": "assets/reference/joeville_48_parity/authored-source/rohan-slate/chroma-source/rohan_slate_motion_039.png",
+    "source_sha256": "43a680344fc98a84dff371850b600862c01d4cccb61f0a6cd026382d9e7a90e4",
+    "tolerance": 110,
+    "transparent_pixels_before_contract": 1303170
+  },
+  {
+    "canvas_normalized": false,
+    "canvas_size": [
+      1254,
+      1254
+    ],
+    "destination_path": "assets/reference/joeville_48_parity/authored-source/rohan-slate/alpha-extracted/rohan_slate_motion_040.png",
+    "destination_rgba_sha256": "062a0eec2cc418048e316c1689c042f5bedf724957c7562e3de452892f0ab5ac",
+    "destination_sha256": "8686f7b3163472f2accdb4bfe6f9f6d00e773a0887afd96e2abebd851616a326",
+    "edge_contract": 1,
+    "key_color": [
+      252,
+      3,
+      250
+    ],
+    "normalization_offset": [
+      0,
+      0
+    ],
+    "normalization_scale": 1.0,
+    "schema_version": 1,
+    "silhouette_bbox": [
+      299,
+      109,
+      848,
+      1134
+    ],
+    "source_canvas_size": [
+      1254,
+      1254
+    ],
+    "source_path": "assets/reference/joeville_48_parity/authored-source/rohan-slate/chroma-source/rohan_slate_motion_040.png",
+    "source_sha256": "a3940223ed4a3a6cedd32e5ed7fb2388719b40346837b9787934c8dff143f33b",
+    "tolerance": 110,
+    "transparent_pixels_before_contract": 1280919
+  },
+  {
+    "canvas_normalized": false,
+    "canvas_size": [
+      1254,
+      1254
+    ],
+    "destination_path": "assets/reference/joeville_48_parity/authored-source/rohan-slate/alpha-extracted/rohan_slate_motion_041.png",
+    "destination_rgba_sha256": "28aa227fe747865167c27f064c80382597015575d671fb462ad0d09b719de500",
+    "destination_sha256": "d2783ce08840566d9b702d1c5a8cacda45169f70aa2dbcece67a16d860563e56",
+    "edge_contract": 1,
+    "key_color": [
+      252,
+      3,
+      249
+    ],
+    "normalization_offset": [
+      0,
+      0
+    ],
+    "normalization_scale": 1.0,
+    "schema_version": 1,
+    "silhouette_bbox": [
+      391,
+      129,
+      910,
+      1096
+    ],
+    "source_canvas_size": [
+      1254,
+      1254
+    ],
+    "source_path": "assets/reference/joeville_48_parity/authored-source/rohan-slate/chroma-source/rohan_slate_motion_041.png",
+    "source_sha256": "d09c2d9da396cbea56c6c18ba93c878406be77df4c30a3d2041775ef07257ef7",
+    "tolerance": 110,
+    "transparent_pixels_before_contract": 1336464
+  },
+  {
+    "canvas_normalized": false,
+    "canvas_size": [
+      1254,
+      1254
+    ],
+    "destination_path": "assets/reference/joeville_48_parity/authored-source/rohan-slate/alpha-extracted/rohan_slate_motion_042.png",
+    "destination_rgba_sha256": "e40b82997cb78bfceba19d3155b70928657c8549d0cfe6294360b4a3ad42fe9f",
+    "destination_sha256": "9973811a5f407e04756f713e8b8c88ce639be019d3222f7f9aa3bddc82cc4ede",
+    "edge_contract": 1,
+    "key_color": [
+      251,
+      3,
+      247
+    ],
+    "normalization_offset": [
+      0,
+      0
+    ],
+    "normalization_scale": 1.0,
+    "schema_version": 1,
+    "silhouette_bbox": [
+      415,
+      87,
+      884,
+      1106
+    ],
+    "source_canvas_size": [
+      1254,
+      1254
+    ],
+    "source_path": "assets/reference/joeville_48_parity/authored-source/rohan-slate/chroma-source/rohan_slate_motion_042.png",
+    "source_sha256": "6d0f6d16db9bf27654db53ebeeb915205fcc65a61aa7762231a8820b70dac19d",
+    "tolerance": 110,
+    "transparent_pixels_before_contract": 1310885
+  },
+  {
+    "canvas_normalized": false,
+    "canvas_size": [
+      1254,
+      1254
+    ],
+    "destination_path": "assets/reference/joeville_48_parity/authored-source/rohan-slate/alpha-extracted/rohan_slate_motion_043.png",
+    "destination_rgba_sha256": "c5caa884171baae8c191b4e5e1bddc7f56d0b2ede60cc2ecca9ab4d1bf16b0d9",
+    "destination_sha256": "2c58f80c3b3f22d6635defeb6a92b4e5d3b3ca3e91d129f9aa9ddc64024b21ed",
+    "edge_contract": 1,
+    "key_color": [
+      251,
+      3,
+      240
+    ],
+    "normalization_offset": [
+      0,
+      0
+    ],
+    "normalization_scale": 1.0,
+    "schema_version": 1,
+    "silhouette_bbox": [
+      431,
+      103,
+      820,
+      1127
+    ],
+    "source_canvas_size": [
+      1254,
+      1254
+    ],
+    "source_path": "assets/reference/joeville_48_parity/authored-source/rohan-slate/chroma-source/rohan_slate_motion_043.png",
+    "source_sha256": "b353501106e09e03cbf0e297d71c8ea7bd89ffac62430e2b7f634dd5501feafb",
+    "tolerance": 110,
+    "transparent_pixels_before_contract": 1321720
+  },
+  {
+    "canvas_normalized": false,
+    "canvas_size": [
+      1254,
+      1254
+    ],
+    "destination_path": "assets/reference/joeville_48_parity/authored-source/rohan-slate/alpha-extracted/rohan_slate_motion_044.png",
+    "destination_rgba_sha256": "df6614bdc67ddc0333434909cc40197e9f5c29c69d3a7325ccf2b215ec558daa",
+    "destination_sha256": "db4bf6680b825c479a52dbdf21c425b63d55cf10b312729f8d100fbab8af9d7d",
+    "edge_contract": 1,
+    "key_color": [
+      251,
+      3,
+      248
+    ],
+    "normalization_offset": [
+      0,
+      0
+    ],
+    "normalization_scale": 1.0,
+    "schema_version": 1,
+    "silhouette_bbox": [
+      351,
+      148,
+      1003,
+      1068
+    ],
+    "source_canvas_size": [
+      1254,
+      1254
+    ],
+    "source_path": "assets/reference/joeville_48_parity/authored-source/rohan-slate/chroma-source/rohan_slate_motion_044.png",
+    "source_sha256": "b043d7aa708a07678b4a8c6360669936c00a6a8a0de13fc433af4aa89bb526ac",
+    "tolerance": 110,
+    "transparent_pixels_before_contract": 1345806
+  },
+  {
+    "canvas_normalized": false,
+    "canvas_size": [
+      1254,
+      1254
+    ],
+    "destination_path": "assets/reference/joeville_48_parity/authored-source/rohan-slate/alpha-extracted/rohan_slate_motion_045.png",
+    "destination_rgba_sha256": "2904c7128748b1ccb4c93d0c6f797a2e48b84136062e4489e9c7a8efd3b299fc",
+    "destination_sha256": "3e46657bba9df0ff4ef52d6f5686af53a74a743a5be3bd3312359bd2069f1af1",
+    "edge_contract": 1,
+    "key_color": [
+      251,
+      3,
+      249
+    ],
+    "normalization_offset": [
+      0,
+      0
+    ],
+    "normalization_scale": 1.0,
+    "schema_version": 1,
+    "silhouette_bbox": [
+      403,
+      104,
+      884,
+      1122
+    ],
+    "source_canvas_size": [
+      1254,
+      1254
+    ],
+    "source_path": "assets/reference/joeville_48_parity/authored-source/rohan-slate/chroma-source/rohan_slate_motion_045.png",
+    "source_sha256": "292539a496a2cb13732aa52f547ee75d323407e58187d21d68bc4bcaca5b34dd",
+    "tolerance": 110,
+    "transparent_pixels_before_contract": 1322496
+  },
+  {
+    "canvas_normalized": false,
+    "canvas_size": [
+      1254,
+      1254
+    ],
+    "destination_path": "assets/reference/joeville_48_parity/authored-source/rohan-slate/alpha-extracted/rohan_slate_motion_046.png",
+    "destination_rgba_sha256": "3e049a14634dff41d52e57fde5ebd82515c951fe764f7d66eac7ebde624563dc",
+    "destination_sha256": "091b037932c1880b6a75aa9807244add183681da279671f0eb2e8e29a6ddcabf",
+    "edge_contract": 1,
+    "key_color": [
+      252,
+      3,
+      249
+    ],
+    "normalization_offset": [
+      0,
+      0
+    ],
+    "normalization_scale": 1.0,
+    "schema_version": 1,
+    "silhouette_bbox": [
+      473,
+      171,
+      894,
+      1069
+    ],
+    "source_canvas_size": [
+      1254,
+      1254
+    ],
+    "source_path": "assets/reference/joeville_48_parity/authored-source/rohan-slate/chroma-source/rohan_slate_motion_046.png",
+    "source_sha256": "0dcb1365d044c2c3ed055f976e0036005c4529a1e59894df4628a3fc182ff334",
+    "tolerance": 110,
+    "transparent_pixels_before_contract": 1362324
+  },
+  {
+    "canvas_normalized": false,
+    "canvas_size": [
+      1254,
+      1254
+    ],
+    "destination_path": "assets/reference/joeville_48_parity/authored-source/rohan-slate/alpha-extracted/rohan_slate_motion_047.png",
+    "destination_rgba_sha256": "dee1d7342296a0dc656bdfc6a54c3b9a22d5f01c536a016e509a7dbbb37db6e3",
+    "destination_sha256": "e9445ea677e0e527590d282436657a48a1c1205e7085647c9bf3bd671321d1f8",
+    "edge_contract": 1,
+    "key_color": [
+      251,
+      3,
+      249
+    ],
+    "normalization_offset": [
+      0,
+      0
+    ],
+    "normalization_scale": 1.0,
+    "schema_version": 1,
+    "silhouette_bbox": [
+      407,
+      144,
+      890,
+      1128
+    ],
+    "source_canvas_size": [
+      1254,
+      1254
+    ],
+    "source_path": "assets/reference/joeville_48_parity/authored-source/rohan-slate/chroma-source/rohan_slate_motion_047.png",
+    "source_sha256": "34c7d4bbe95c71f0d4636ee2a66bcdcdc474b2786c95e1f51d3b02a2ab22d8c5",
+    "tolerance": 110,
+    "transparent_pixels_before_contract": 1336503
+  },
+  {
+    "canvas_normalized": false,
+    "canvas_size": [
+      1254,
+      1254
+    ],
+    "destination_path": "assets/reference/joeville_48_parity/authored-source/rohan-slate/alpha-extracted/rohan_slate_motion_048.png",
+    "destination_rgba_sha256": "0c1d4533168fe7d9021409b4a578f15cb1242ba5d5c5d31ab8ecdad332819c7d",
+    "destination_sha256": "c45c2cce17e912eb5cc4efd53960c1b39d1c536c05e652c85a5c2e96420420e8",
+    "edge_contract": 1,
+    "key_color": [
+      252,
+      3,
+      250
+    ],
+    "normalization_offset": [
+      0,
+      0
+    ],
+    "normalization_scale": 1.0,
+    "schema_version": 1,
+    "silhouette_bbox": [
+      406,
+      104,
+      871,
+      1117
+    ],
+    "source_canvas_size": [
+      1254,
+      1254
+    ],
+    "source_path": "assets/reference/joeville_48_parity/authored-source/rohan-slate/chroma-source/rohan_slate_motion_048.png",
+    "source_sha256": "3d95dc98bdb9b276bc7c80b335150ff8c8eafd1464e509439498143394e7e9ae",
+    "tolerance": 110,
+    "transparent_pixels_before_contract": 1302085
+  }
+]

@@ -86,6 +86,65 @@ class JoeVilleAuthoredAlphaCanonicalizerTests(unittest.TestCase):
                     authority_path=authority,
                 )
 
+    def test_ground_support_alignment_keeps_lopsided_actor_root_centered(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            authority = self._write_authority(root)
+            source = root / "source.png"
+            source_image = Image.new("RGBA", (64, 64), (0, 0, 0, 0))
+            draw = ImageDraw.Draw(source_image)
+            draw.rectangle((26, 10, 37, 44), fill=(150, 70, 30, 255))
+            draw.rectangle((38, 18, 54, 25), fill=(150, 70, 30, 255))
+            draw.rectangle((27, 45, 36, 50), fill=(90, 40, 20, 255))
+            source_image.save(source)
+            destination = root / "destination.png"
+
+            receipt = canonicalize(
+                source_path=source,
+                destination_path=destination,
+                authority_path=authority,
+                ground_support_band_height=6,
+            )
+
+            result = Image.open(destination).convert("RGBA")
+            self.assertEqual(receipt["alignment_mode"], "ground_support_center")
+            self.assertEqual(receipt["alignment_source_center_x"], 32.0)
+            self.assertEqual(receipt["alignment_target_center_x"], 32.0)
+            self.assertEqual(receipt["ground_support_band_height"], 6)
+            self.assertEqual(
+                receipt["source_ground_support_bbox"],
+                [27, 45, 37, 51],
+            )
+            self.assertEqual(
+                receipt["destination_ground_support_bbox"],
+                [27, 52, 37, 58],
+            )
+            self.assertEqual(result.getchannel("A").getbbox(), (26, 17, 55, 58))
+            self.assertEqual(receipt["translation"], {"x": 0, "y": 7})
+            self.assertFalse(receipt["resampled"])
+
+    def test_rejects_nonpositive_ground_support_band(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            authority = self._write_authority(root)
+            source = root / "source.png"
+            image = Image.new("RGBA", (64, 64), (0, 0, 0, 0))
+            ImageDraw.Draw(image).rectangle(
+                (20, 10, 40, 50), fill=(150, 70, 30, 255)
+            )
+            image.save(source)
+
+            with self.assertRaisesRegex(
+                ValueError,
+                "ground support band height must be positive",
+            ):
+                canonicalize(
+                    source_path=source,
+                    destination_path=root / "destination.png",
+                    authority_path=authority,
+                    ground_support_band_height=0,
+                )
+
     def test_opt_in_fit_records_resampling_and_preserves_margins(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)

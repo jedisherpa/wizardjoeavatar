@@ -92,8 +92,10 @@ def _observer_html(
     current_path: str,
     current_label: str,
     current_meta: str,
+    joe_meta: str = "250 approved source frames",
 ) -> bytes:
     safe_label = html.escape(current_label)
+    safe_joe_meta = html.escape(joe_meta)
     safe_current_meta = html.escape(current_meta)
     safe_joe_path = html.escape(joe_path, quote=True)
     safe_current_path = html.escape(current_path, quote=True)
@@ -182,7 +184,7 @@ def _observer_html(
       <section>
         <div class="panel-title">
           <h1>HD Wizard Joe</h1>
-          <span>250 approved source frames</span>
+          <span>{safe_joe_meta}</span>
         </div>
         <iframe
           id="joe"
@@ -237,6 +239,7 @@ class ObserverHandler(BaseHTTPRequestHandler):
     joe_port = 0
     current_port = 0
     joe_path = "/?hd-sequence=approved_hd_frames"
+    joe_meta = "250 approved source frames"
     current_path = "/?embedded=1"
     current_label = ""
     current_meta = ""
@@ -250,6 +253,7 @@ class ObserverHandler(BaseHTTPRequestHandler):
                 joe_port=self.joe_port,
                 current_port=self.current_port,
                 joe_path=self.joe_path,
+                joe_meta=self.joe_meta,
                 current_path=self.current_path,
                 current_label=self.current_label,
                 current_meta=self.current_meta,
@@ -315,6 +319,15 @@ def main() -> None:
     parser.add_argument("--current-port", type=int, default=8667)
     parser.add_argument("--joe-sequence", default="approved_hd_frames")
     parser.add_argument(
+        "--joe-review-library-index",
+        type=Path,
+        help=(
+            "Project the baseline from an isolated review-only HD library "
+            "instead of loading the default canonical library."
+        ),
+    )
+    parser.add_argument("--joe-meta", default="250 approved source frames")
+    parser.add_argument(
         "--review-sequence",
         help="Compare a second Wizard Joe HD sequence instead of starting another character.",
     )
@@ -361,6 +374,19 @@ def main() -> None:
         if args.review_library_index
         else None
     )
+    joe_review_library_index = (
+        args.joe_review_library_index.expanduser().resolve()
+        if args.joe_review_library_index
+        else None
+    )
+    if (
+        joe_review_library_index is not None
+        and not joe_review_library_index.is_file()
+    ):
+        parser.error(
+            "Joe review library index not found: "
+            f"{joe_review_library_index}"
+        )
     if review_library_index is not None and not review_library_index.is_file():
         parser.error(
             f"review library index not found: {review_library_index}"
@@ -385,6 +411,7 @@ def main() -> None:
         else args.current_port
     )
     ObserverHandler.joe_path = f"/?hd-sequence={args.joe_sequence}"
+    ObserverHandler.joe_meta = args.joe_meta
     ObserverHandler.current_path = (
         f"/?hd-sequence={args.review_sequence}"
         if args.review_sequence
@@ -418,7 +445,15 @@ def main() -> None:
 
     common = [sys.executable, str(RUNNER), "--host", args.host, "--quiet"]
     try:
-        joe = subprocess.Popen(common + ["--port", str(args.joe_port)], cwd=ROOT)
+        joe_command = common + ["--port", str(args.joe_port)]
+        if joe_review_library_index is not None:
+            joe_command.extend(
+                [
+                    "--review-library-index",
+                    str(joe_review_library_index),
+                ]
+            )
+        joe = subprocess.Popen(joe_command, cwd=ROOT)
         processes.append(joe)
         _wait_ready(joe, args.joe_port, args.startup_timeout)
         if review_runtime:

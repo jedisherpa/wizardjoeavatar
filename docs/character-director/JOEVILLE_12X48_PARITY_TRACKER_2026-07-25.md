@@ -272,6 +272,26 @@ full-size projection and port 8665 presents the candidate beside approved HD
 Wizard Joe. Product visual approval is still pending and runtime admission
 remains false.
 
+Rohan Slate is now the ninth incomplete roster character to reach a complete
+48-pose review candidate. His immutable supplied poses `001`-`036` were merged
+with twelve new full-size RGBA poses for:
+
+- `g7`: register, check, state, define, allow, and resolve a measured boundary.
+- `g8`: frame, compare, locate, propose, confirm, and commit to a practical
+  collaborative decision.
+
+The authored silhouettes preserve Rohan's warm dark-brown skin, charcoal
+ribbed beanie, dark rectangular glasses with teal eye accents, short beard and
+mustache, white open-collar shirt, forest-green trousers, and brown boots. A
+first-principles canonicalization correction aligns asymmetrical gestures by
+their bottom support band rather than their full silhouette. All twelve frames
+remain at scale `1.0`, use no resampling, land on baseline `1185`, and hold
+their support center within one pixel of canvas center. Two consecutive builds
+produced identical artifact and library-index hashes. All twelve authored IDs
+passed direct full-size projection and port 8665 presents the candidate beside
+approved HD Wizard Joe. Product visual approval is still pending and runtime
+admission remains false.
+
 | Character | Candidate poses | Missing poses | State |
 | --- | ---: | ---: | --- |
 | Orion Vale | 48 | 0 | Full-size technical review passed; product visual approval pending |
@@ -282,8 +302,9 @@ remains false.
 | Kai Renner | 48 | 0 | Full-size technical review passed; product visual approval pending |
 | Draven Holt | 48 | 0 | Full-size technical review passed; product visual approval pending |
 | Liora Kane | 48 | 0 | Full-size technical review passed; product visual approval pending |
-| Remaining roster | 168 | 24 | Authoring/review required |
-| **Total** | **552** | **24** | **576 target slots** |
+| Rohan Slate | 48 | 0 | Full-size technical review passed; product visual approval pending |
+| Remaining roster | 132 | 12 | Finn Calder authoring/review required; Serena Quill and Mira Solen are source-complete |
+| **Total** | **564** | **12** | **576 target slots** |
 
 Orion candidate receipts:
 
@@ -356,6 +377,16 @@ Liora candidate receipts:
 - Alpha-extraction receipts: `f8894a0e6b6ba378b42688e9bd575cc8c8c850e933191a8c307b7325472cc77b`
 - Canonicalization receipts: `f2f4fe3e644ff8747576e62f0b2e61e28fedd68db69f99bc04633cb09c49a7e6`
 
+Rohan candidate receipts:
+
+- Artifact: `005e1776a74acf7f63fccb1a8d93c2451ecc661ce58fac25d7c14f87741e8ce5`
+- Library index: `442a03c4fa5c82f592dc0f0426fd13df3e2b9e99be252a4c57a3b12ce0e3d424`
+- Reconstruction: `ef45a8a517a7fcd7c74b1fbac0fdeefc06b70aee4d0fce236970a688d956f5c2`
+- Review motion contract: `b1ffb566a9ce99302f8611be60d1af11bbb000b78efbc6be31833b90cd827af4`
+- Contact sheet: `7dbf7ea22b6d6b83164af29d17d623b9b9ef26bd41f197f00f1eee0aac78ee47`
+- Alpha-extraction receipts: `bbcdc72afa5ccdd9d359b5802e8a7f65c991c2b89746bf9689c4cd4f33f1b705`
+- Canonicalization receipts: `818307146bcf9140fb0e4e39ba1f9ced9e31112de23331d6c230bbfc9c08a081`
+
 ## Roster Boundary
 
 The archives also contain Crystail. Crystail remains
@@ -369,7 +400,7 @@ and count parity rather than an automatic quality waiver.
 
 ## Next Build Order
 
-1. Author the 24 remaining frames as explicitly new art, one character at a
+1. Author the 12 remaining frames as explicitly new art, one character at a
    time, using the character's compiled supplied set as visual authority.
 2. Rebuild each completed 48-pose artifact twice and require identical hashes.
 3. Review every full-size frame and motion sequence beside approved HD Wizard

@@ -1,0 +1,36 @@
+{
+  "canvas_normalized": false,
+  "canvas_size": [
+    1254,
+    1254
+  ],
+  "destination_path": "assets/reference/joeville_48_parity/authored-source/rohan-slate/alpha-extracted/rohan_slate_motion_041.png",
+  "destination_rgba_sha256": "28aa227fe747865167c27f064c80382597015575d671fb462ad0d09b719de500",
+  "destination_sha256": "d2783ce08840566d9b702d1c5a8cacda45169f70aa2dbcece67a16d860563e56",
+  "edge_contract": 1,
+  "key_color": [
+    252,
+    3,
+    249
+  ],
+  "normalization_offset": [
+    0,
+    0
+  ],
+  "normalization_scale": 1.0,
+  "schema_version": 1,
+  "silhouette_bbox": [
+    391,
+    129,
+    910,
+    1096
+  ],
+  "source_canvas_size": [
+    1254,
+    1254
+  ],
+  "source_path": "assets/reference/joeville_48_parity/authored-source/rohan-slate/chroma-source/rohan_slate_motion_041.png",
+  "source_sha256": "d09c2d9da396cbea56c6c18ba93c878406be77df4c30a3d2041775ef07257ef7",
+  "tolerance": 110,
+  "transparent_pixels_before_contract": 1336464
+}

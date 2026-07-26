@@ -1,0 +1,187 @@
+{
+  "character_id": "rohan-slate",
+  "schema_version": 1,
+  "sequences": {
+    "g7": {
+      "fps": 8,
+      "frames": [
+        {
+          "brief_id": "rohan-g7-register",
+          "continuity": "Front three-quarter grounded attention toward the speaker with a slight chin turn, quiet low hands, level green glasses, unchanged beanie, and both brown shoes planted.",
+          "forbidden": "Idle duplicate, wave, stride, prop, hostile face, crooked glasses, foot movement, or identity drift.",
+          "frame_index": 1,
+          "pose_id": "rohan_slate_motion_037",
+          "pose_summary": "Register a concerning statement before reacting.",
+          "slot_id": "motion-037"
+        },
+        {
+          "brief_id": "rohan-g7-check",
+          "continuity": "One compact palm-up question rises near the lower chest with the elbow close while the other arm remains relaxed and the gaze stays on the partner.",
+          "forbidden": "Permission-seeking pose, broad shrug, wave, finger point, invisible object, heel lift, or cropped fingers.",
+          "frame_index": 2,
+          "pose_id": "rohan_slate_motion_038",
+          "pose_summary": "Ask for one calm clarification.",
+          "slot_id": "motion-038"
+        },
+        {
+          "brief_id": "rohan-g7-state",
+          "continuity": "The questioning hand gathers toward the sternum as the shoulders square gently, expressing ownership of his position without changing the root or foot spacing.",
+          "forbidden": "Pledge, dramatic chest clutch, fist, crossed arms, broad grin, prop, shoe drift, or glasses distortion.",
+          "frame_index": 3,
+          "pose_id": "rohan_slate_motion_039",
+          "pose_summary": "State his own position with contained conviction.",
+          "slot_id": "motion-039"
+        },
+        {
+          "brief_id": "rohan-g7-define",
+          "continuity": "One calm vertical palm establishes a boundary at lower shoulder height with a soft elbow while the free hand stays low and the expression remains composed.",
+          "forbidden": "Angry block, wave, salute, threat, face obstruction, lifted shoe, root translation, or hostile expression.",
+          "frame_index": 4,
+          "pose_id": "rohan_slate_motion_040",
+          "pose_summary": "Define a clear measured boundary.",
+          "slot_id": "motion-040"
+        },
+        {
+          "brief_id": "rohan-g7-allow",
+          "continuity": "The boundary palm rotates sideways into an open conversational offer as the shoulders ease and negative space remains clear around the white shirt.",
+          "forbidden": "Wave, surrender, shrug, second raised hand, invisible object, foot slide, detached arm, or broad smile.",
+          "frame_index": 5,
+          "pose_id": "rohan_slate_motion_041",
+          "pose_summary": "Leave visible room for another option.",
+          "slot_id": "motion-041"
+        },
+        {
+          "brief_id": "rohan-g7-resolve",
+          "continuity": "Both hands settle low with one palm faintly open as the chin returns level in a restrained nod, preserving a distinct non-idle silhouette and planted shoes.",
+          "forbidden": "Exact idle copy, thumbs-up, wave, turn, stride, prop, root displacement, or unresolved weight.",
+          "frame_index": 6,
+          "pose_id": "rohan_slate_motion_042",
+          "pose_summary": "Resolve the boundary exchange with retained connection.",
+          "slot_id": "motion-042"
+        }
+      ],
+      "intent": "register_check_state_define_allow_resolve",
+      "loop": false,
+      "motion_contract": {
+        "entry_handoffs": [
+          "front_idle",
+          "front_walk_settle",
+          "three_quarter_idle"
+        ],
+        "exit_handoffs": [
+          "front_idle",
+          "profile_walk",
+          "g8"
+        ],
+        "family": "measured_boundary",
+        "hold_frame_indices": [
+          2,
+          4,
+          6
+        ],
+        "interrupt_policy": "marker_safe",
+        "interruptible_frame_indices": [
+          1,
+          2,
+          4,
+          5,
+          6
+        ],
+        "loop_mode": "hold_last",
+        "root_policy": "fixed",
+        "support_policy": "dual_foot_grounded"
+      }
+    },
+    "g8": {
+      "fps": 9,
+      "frames": [
+        {
+          "brief_id": "rohan-g8-frame",
+          "continuity": "Both hands rise low before the torso with palms angled inward to define one compact shared issue while remaining clearly empty and anatomically separated.",
+          "forbidden": "Invisible box or device, shrug, mirrored presentation, prop, raised heel, fused hands, or cropped elbows.",
+          "frame_index": 1,
+          "pose_id": "rohan_slate_motion_043",
+          "pose_summary": "Frame one practical shared problem.",
+          "slot_id": "motion-043"
+        },
+        {
+          "brief_id": "rohan-g8-compare",
+          "continuity": "The empty hands separate to two modest unequal positions as gaze favors one side, preserving asymmetry, fixed feet, and clear white-shirt negative space.",
+          "forbidden": "Shrug, scales mime, prize presentation, invisible objects, identical hands, foot slide, or exaggerated head turn.",
+          "frame_index": 2,
+          "pose_id": "rohan_slate_motion_044",
+          "pose_summary": "Compare two practical options without caricature.",
+          "slot_id": "motion-044"
+        },
+        {
+          "brief_id": "rohan-g8-locate",
+          "continuity": "One whole open hand lowers toward a near-ground work area while the other retracts to center; knees and root remain at standing height.",
+          "forbidden": "Index-finger point, crouch, kneel, tool, floor prop, bent glasses, lifted shoe, or hand touching the canvas edge.",
+          "frame_index": 3,
+          "pose_id": "rohan_slate_motion_045",
+          "pose_summary": "Locate where the practical problem lives.",
+          "slot_id": "motion-045"
+        },
+        {
+          "brief_id": "rohan-g8-propose",
+          "continuity": "The locating hand rises into a forward open-palm offer as the torso inclines slightly from the ankles and hips while both feet and the root remain fixed.",
+          "forbidden": "Wave, command point, stride, begging, invisible object, overreach, heel lift, or arm penetrating the torso.",
+          "frame_index": 4,
+          "pose_id": "rohan_slate_motion_046",
+          "pose_summary": "Offer a workable next step.",
+          "slot_id": "motion-046"
+        },
+        {
+          "brief_id": "rohan-g8-confirm",
+          "continuity": "The offered hand holds while the free hand makes one small contained approval beat near the torso and the gaze checks the partner for agreement.",
+          "forbidden": "Thumbs-up, fist pump, clap, celebration, second offer palm, prop, foot movement, or broad grin.",
+          "frame_index": 5,
+          "pose_id": "rohan_slate_motion_047",
+          "pose_summary": "Confirm agreement on the proposal.",
+          "slot_id": "motion-047"
+        },
+        {
+          "brief_id": "rohan-g8-commit",
+          "continuity": "Both hands settle low with one palm angled toward the shared work area as the head gives a restrained nod and the silhouette becomes exit-ready without duplicating idle.",
+          "forbidden": "Idle duplicate, walking stride already begun, salute, wave, prop, crossed feet, root drift, or changed facing.",
+          "frame_index": 6,
+          "pose_id": "rohan_slate_motion_048",
+          "pose_summary": "Commit to the shared practical next step.",
+          "slot_id": "motion-048"
+        }
+      ],
+      "intent": "frame_compare_locate_propose_confirm_commit",
+      "loop": false,
+      "motion_contract": {
+        "entry_handoffs": [
+          "front_idle",
+          "front_walk_settle",
+          "g7"
+        ],
+        "exit_handoffs": [
+          "front_idle",
+          "profile_walk",
+          "g7"
+        ],
+        "family": "practical_collaboration",
+        "hold_frame_indices": [
+          1,
+          2,
+          4,
+          6
+        ],
+        "interrupt_policy": "marker_safe",
+        "interruptible_frame_indices": [
+          1,
+          2,
+          4,
+          5,
+          6
+        ],
+        "loop_mode": "hold_last",
+        "root_policy": "fixed",
+        "support_policy": "dual_foot_grounded"
+      }
+    }
+  }
+}

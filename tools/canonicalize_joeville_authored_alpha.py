@@ -40,6 +40,7 @@ def canonicalize(
     destination_path: Path,
     authority_path: Path = DEFAULT_AUTHORITY,
     fit_oversize: bool = False,
+    ground_support_band_height: int | None = None,
     receipt_path_root: Path | None = None,
 ) -> dict[str, Any]:
     authority = json.loads(authority_path.read_text(encoding="utf-8"))
@@ -90,8 +91,33 @@ def canonicalize(
             if bbox is None:
                 raise ValueError("oversize fitting removed the silhouette")
             resampled = True
+    if (
+        ground_support_band_height is not None
+        and ground_support_band_height <= 0
+    ):
+        raise ValueError("ground support band height must be positive")
     target_center_x = expected_size[0] / 2
-    source_center_x = (bbox[0] + bbox[2]) / 2
+    source_ground_support_bbox: tuple[int, int, int, int] | None = None
+    if ground_support_band_height is None:
+        alignment_mode = "silhouette_center"
+        source_center_x = (bbox[0] + bbox[2]) / 2
+    else:
+        band_top = max(bbox[1], bbox[3] - ground_support_band_height)
+        support_crop_bbox = image.getchannel("A").crop(
+            (0, band_top, expected_size[0], bbox[3])
+        ).getbbox()
+        if support_crop_bbox is None:
+            raise ValueError("ground support band contains no visible pixels")
+        source_ground_support_bbox = (
+            support_crop_bbox[0],
+            band_top + support_crop_bbox[1],
+            support_crop_bbox[2],
+            band_top + support_crop_bbox[3],
+        )
+        alignment_mode = "ground_support_center"
+        source_center_x = (
+            source_ground_support_bbox[0] + source_ground_support_bbox[2]
+        ) / 2
     offset_x = round(target_center_x - source_center_x)
     offset_y = baseline_y - bbox[3]
     destination_bbox = (
@@ -111,6 +137,16 @@ def canonicalize(
     canvas.alpha_composite(image, (offset_x, offset_y))
     if canvas.getchannel("A").getbbox() != destination_bbox:
         raise ValueError("authored alpha translation changed its silhouette")
+    destination_ground_support_bbox = (
+        [
+            source_ground_support_bbox[0] + offset_x,
+            source_ground_support_bbox[1] + offset_y,
+            source_ground_support_bbox[2] + offset_x,
+            source_ground_support_bbox[3] + offset_y,
+        ]
+        if source_ground_support_bbox is not None
+        else None
+    )
     destination_path.parent.mkdir(parents=True, exist_ok=True)
     temporary = destination_path.with_name(
         f".{destination_path.name}.{os.getpid()}.tmp"
@@ -134,6 +170,16 @@ def canonicalize(
         "fitted_bbox": list(bbox),
         "destination_bbox": list(destination_bbox),
         "translation": {"x": offset_x, "y": offset_y},
+        "alignment_mode": alignment_mode,
+        "alignment_source_center_x": source_center_x,
+        "alignment_target_center_x": target_center_x,
+        "ground_support_band_height": ground_support_band_height,
+        "source_ground_support_bbox": (
+            list(source_ground_support_bbox)
+            if source_ground_support_bbox is not None
+            else None
+        ),
+        "destination_ground_support_bbox": destination_ground_support_bbox,
         "resampled": resampled,
         "scale": scale,
         "resample_filter": "lanczos" if resampled else None,
@@ -159,6 +205,15 @@ def _parse_args() -> argparse.Namespace:
         ),
     )
     parser.add_argument(
+        "--ground-support-band-height",
+        type=int,
+        help=(
+            "Align the visible support pixels in the bottom N rows of the "
+            "silhouette to stage center instead of centering the full "
+            "silhouette bounding box."
+        ),
+    )
+    parser.add_argument(
         "--receipt",
         type=Path,
         help="Optional JSON path for the canonicalization receipt.",
@@ -178,6 +233,7 @@ def main() -> int:
         destination_path=args.destination.resolve(),
         authority_path=args.authority.resolve(),
         fit_oversize=args.fit_oversize,
+        ground_support_band_height=args.ground_support_band_height,
         receipt_path_root=(
             args.receipt_path_root.resolve()
             if args.receipt_path_root is not None

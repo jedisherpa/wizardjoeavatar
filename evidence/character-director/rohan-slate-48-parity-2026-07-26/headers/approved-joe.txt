@@ -1,0 +1,14 @@
+HTTP/1.1 200 OK
+date: Sun, 26 Jul 2026 22:49:03 GMT
+server: uvicorn
+x-pixel-format: rgba8
+x-canvas-width: 1254
+x-canvas-height: 1254
+x-pose-sha256: 92c89f5bae0d42ed191765867a7c7deda29d194122a43acd6819524a311e3b22
+x-artifact-sha256: ef7f8abd9394799661310aba68969a966c9d82c07c0b46ff0dbe57a1ddaab78e
+x-approval-state: approved_production_alpha
+x-runtime-admitted: false
+cache-control: no-store
+content-length: 6290064
+content-type: application/octet-stream
+

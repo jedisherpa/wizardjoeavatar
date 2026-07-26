@@ -194,7 +194,8 @@ def create_app(
     hd_index_record = None
     hd_library = None
     if (
-        package.character_id == hd_compatibility["character_id"]
+        hd_review_index_path is None
+        and package.character_id == hd_compatibility["character_id"]
         and package.package_sha256
         == hd_compatibility["character_package_sha256"]
         and package.assets["pose_library"].sha256

@@ -1,0 +1,51 @@
+{
+  "alignment_mode": "ground_support_center",
+  "alignment_source_center_x": 579.5,
+  "alignment_target_center_x": 627.0,
+  "authority_manifest_sha256": "740f35730f4aa1e6c6ef96be80115c5b0e117397f792d57fdf5360452bbe78c8",
+  "destination_bbox": [
+    439,
+    218,
+    958,
+    1185
+  ],
+  "destination_ground_support_bbox": [
+    503,
+    1167,
+    752,
+    1185
+  ],
+  "destination_path": "assets/reference/joeville_48_parity/authored-source/rohan-slate/frames/rohan_slate_motion_041.png",
+  "destination_rgba_sha256": "c409ab06056890289eb7e0fa5e244c3dcc48f9d5006248005a9f9ef10d3886b1",
+  "destination_sha256": "ff5644ac275156889b66d2101d54d085fd1bee6705fddce3da175f4aa47e3dae",
+  "fitted_bbox": [
+    391,
+    129,
+    910,
+    1096
+  ],
+  "ground_support_band_height": 18,
+  "profile_id": "wizardjoe_hd_alpha_1254_v001",
+  "resample_filter": null,
+  "resampled": false,
+  "scale": 1.0,
+  "schema_version": 1,
+  "source_bbox": [
+    391,
+    129,
+    910,
+    1096
+  ],
+  "source_ground_support_bbox": [
+    455,
+    1078,
+    704,
+    1096
+  ],
+  "source_path": "assets/reference/joeville_48_parity/authored-source/rohan-slate/alpha-extracted/rohan_slate_motion_041.png",
+  "source_sha256": "d2783ce08840566d9b702d1c5a8cacda45169f70aa2dbcece67a16d860563e56",
+  "translation": {
+    "x": 48,
+    "y": 89
+  }
+}
