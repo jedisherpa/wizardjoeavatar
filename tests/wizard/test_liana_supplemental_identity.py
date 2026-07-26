@@ -45,6 +45,17 @@ class LianaSupplementalIdentityTests(unittest.TestCase):
         )
         self.assertTrue(manifest["review_projection"])
         self.assertFalse(manifest["runtime_admitted"])
+        self.assertEqual(
+            manifest["front_identity_gate"]["state"],
+            "user_authorized_to_proceed",
+        )
+        self.assertEqual(
+            manifest["front_identity_gate"]["bound_pose_sha256"],
+            manifest["identity_pose"]["sha256"],
+        )
+        self.assertEqual(
+            manifest["approval_state"], "pending_multiview_review"
+        )
         self.assertNotIn("liana", LIORA_SOURCE.name)
         self.assertTrue(LIORA_SOURCE.is_file())
         self.assertNotIn(
@@ -89,6 +100,33 @@ class LianaSupplementalIdentityTests(unittest.TestCase):
                 Path(receipt_value["destination_path"]).is_absolute()
             )
             self.assertNotIn("/Users/", json.dumps(receipt_value))
+        self.assertEqual(
+            [anchor["view_id"] for anchor in manifest["identity_anchors"]],
+            ["profile_left", "three_quarter_left", "rear"],
+        )
+        for anchor in manifest["identity_anchors"]:
+            anchor_path = LIANA_ROOT / anchor["path"]
+            with Image.open(anchor_path) as image:
+                image.load()
+                rgba = image.convert("RGBA")
+            self.assertEqual(rgba.size, (1254, 1254))
+            self.assertEqual(
+                list(rgba.getchannel("A").getbbox()),
+                anchor["canonical_bbox"],
+            )
+            self.assertEqual(
+                hashlib.sha256(rgba.tobytes()).hexdigest(),
+                anchor["rgba_sha256"],
+            )
+            self.assertEqual(sha256_path(anchor_path), anchor["sha256"])
+            self.assertEqual(
+                anchor["approval_state"], "pending_multiview_review"
+            )
+            for receipt in anchor["receipt_chain"].values():
+                receipt_value = json.loads(
+                    (LIANA_ROOT / receipt["path"]).read_text(encoding="utf-8")
+                )
+                self.assertNotIn("/Users/", json.dumps(receipt_value))
 
     def test_repeatable_builder_emits_review_only_pixel_graph(self):
         with tempfile.TemporaryDirectory() as first_dir, tempfile.TemporaryDirectory() as second_dir:
@@ -109,9 +147,23 @@ class LianaSupplementalIdentityTests(unittest.TestCase):
                 Path(first_dir) / "liana-identity-review-v001.wjpose"
             )
 
-        self.assertEqual(library.pose_ids, ("liana_identity_front_v001",))
         self.assertEqual(
-            artifact.header["pose_ids"], ["liana_identity_front_v001"]
+            library.pose_ids,
+            (
+                "liana_identity_front_v001",
+                "liana_identity_profile_left_v001",
+                "liana_identity_three_quarter_left_v001",
+                "liana_identity_rear_v001",
+            ),
+        )
+        self.assertEqual(
+            artifact.header["pose_ids"],
+            [
+                "liana_identity_front_v001",
+                "liana_identity_profile_left_v001",
+                "liana_identity_rear_v001",
+                "liana_identity_three_quarter_left_v001",
+            ],
         )
         self.assertTrue(library.index["review_projection"])
         self.assertFalse(library.index["runtime_admitted"])

@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "character_id": "liana",
+  "evidence_id": "liana-multiview-identity-2026-07-26",
+  "observer_url": "http://127.0.0.1:8665/",
+  "review_projection": true,
+  "runtime_admitted": false,
+  "identity_manifest": {
+    "path": "assets/reference/joeville_supplemental/liana/identity-manifest-v001.json",
+    "sha256": "c81767d883ea377b5f6f68fef55efd8c0cd25db81f0aac3eed25922ce23b112c"
+  },
+  "artifact": {
+    "path": "assets/reference/joeville_supplemental/liana/compiled/liana-identity-review-v001.wjpose",
+    "sha256": "dcef84ac393baf73d6c3a1de4799043602ce65dc8d7d3290d70e53b089d2f531",
+    "pose_count": 4
+  },
+  "library_index": {
+    "path": "assets/reference/joeville_supplemental/liana/compiled/library-index.json",
+    "sha256": "8c21b9c776203ff10ca8589c61241d245f77c5409c00b4405c8ef505b451eeec"
+  },
+  "captures": [
+    {
+      "path": "observer-profile.jpg",
+      "sha256": "818600ca6cee43e2d96ea4e4687fa711f352538cd950309c7723ab385c2e95bd"
+    },
+    {
+      "path": "observer-cycle-1.jpg",
+      "sha256": "886b437d5305cabba6ca57c9fdb581d489fc3ac95a3f047e0b03db19055650e2"
+    },
+    {
+      "path": "observer-cycle-2.jpg",
+      "sha256": "6b1fd232ad9f0e89334678180e8f057999e8c08e84482c5dd830d400374d77c8"
+    },
+    {
+      "path": "observer-cycle-3.jpg",
+      "sha256": "8b7ccd76fa42534f1cd8301d2543c24106948ab4a98dc7033f88d8c325518315"
+    },
+    {
+      "path": "observer-cycle-4.jpg",
+      "sha256": "33de26f171eaaeb91d0f3528cd7b643ae33b53e201b5ce3f76b46f4152d376d3"
+    }
+  ]
+}

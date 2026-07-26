@@ -64,49 +64,63 @@ def build_identity(manifest_path: Path, output_dir: Path) -> dict[str, Any]:
 
     character_id = str(manifest["character_id"])
     display_name = str(manifest["display_name"])
-    pose = manifest["identity_pose"]
-    pose_id = str(pose["pose_id"])
-    frame_path = (manifest_path.parent / str(pose["path"])).resolve()
-    if _sha256(frame_path) != pose["sha256"]:
-        raise ValueError("supplemental identity frame checksum mismatch")
-
     profile = manifest["profile"]
     expected_size = (
         int(profile["canvas_width"]),
         int(profile["canvas_height"]),
     )
-    with Image.open(frame_path) as source:
-        source.load()
-        if source.format != "PNG" or source.mode != "RGBA":
-            raise ValueError("supplemental identity must be an RGBA PNG")
-        if source.size != expected_size:
-            raise ValueError("supplemental identity profile mismatch")
-        image = source.copy()
-    bbox = image.getchannel("A").getbbox()
-    if bbox is None:
-        raise ValueError("supplemental identity has no visible silhouette")
-    if bbox[3] != int(profile["baseline_y"]):
-        raise ValueError("supplemental identity baseline mismatch")
-
-    receipt_paths = manifest["receipt_chain"]
-    for role in ("alpha_extraction", "canonicalization"):
-        receipt = receipt_paths[role]
-        receipt_path = (manifest_path.parent / str(receipt["path"])).resolve()
-        if _sha256(receipt_path) != receipt["sha256"]:
-            raise ValueError(f"{role} receipt checksum mismatch")
+    pose_values = [manifest["identity_pose"], *manifest.get("identity_anchors", [])]
+    images: dict[str, Image.Image] = {}
+    pose_ids: list[str] = []
+    for pose_index, pose in enumerate(pose_values):
+        pose_id = str(pose["pose_id"])
+        if pose_id in images:
+            raise ValueError("supplemental identity pose ids must be unique")
+        frame_path = (manifest_path.parent / str(pose["path"])).resolve()
+        if _sha256(frame_path) != pose["sha256"]:
+            raise ValueError("supplemental identity frame checksum mismatch")
+        with Image.open(frame_path) as source:
+            source.load()
+            if source.format != "PNG" or source.mode != "RGBA":
+                raise ValueError("supplemental identity must be an RGBA PNG")
+            if source.size != expected_size:
+                raise ValueError("supplemental identity profile mismatch")
+            image = source.copy()
+        bbox = image.getchannel("A").getbbox()
+        if bbox is None:
+            raise ValueError("supplemental identity has no visible silhouette")
+        if bbox[3] != int(profile["baseline_y"]):
+            raise ValueError("supplemental identity baseline mismatch")
+        if list(bbox) != list(pose["canonical_bbox"]):
+            raise ValueError("supplemental identity canonical bbox mismatch")
+        rgba_sha256 = hashlib.sha256(image.tobytes()).hexdigest()
+        if rgba_sha256 != pose["rgba_sha256"]:
+            raise ValueError("supplemental identity RGBA checksum mismatch")
+        receipt_paths = (
+            manifest["receipt_chain"] if pose_index == 0 else pose["receipt_chain"]
+        )
+        for role in ("alpha_extraction", "canonicalization"):
+            receipt = receipt_paths[role]
+            receipt_path = (
+                manifest_path.parent / str(receipt["path"])
+            ).resolve()
+            if _sha256(receipt_path) != receipt["sha256"]:
+                raise ValueError(f"{role} receipt checksum mismatch")
+        images[pose_id] = image
+        pose_ids.append(pose_id)
 
     output_dir = output_dir.resolve()
     output_dir.mkdir(parents=True, exist_ok=True)
     artifact_path = output_dir / f"{character_id}-identity-review-v001.wjpose"
     artifact = write_pose_artifact(
         artifact_path,
-        {pose_id: image},
+        images,
         profile=profile,
         provenance={
             "asset_set_id": f"{character_id}-supplemental-identity-v001",
             "character_id": character_id,
             "identity_manifest_sha256": _sha256(manifest_path),
-            "approval_state": "pending_identity_review",
+            "approval_state": manifest["approval_state"],
             "review_projection": True,
             "runtime_admitted": False,
         },
@@ -121,9 +135,9 @@ def build_identity(manifest_path: Path, output_dir: Path) -> dict[str, Any]:
         "payload_encoding": "rgba8-zlib",
         "review_projection": True,
         "runtime_admitted": False,
-        "pose_count": 1,
+        "pose_count": len(pose_ids),
         "approved_pose_count": 0,
-        "candidate_pose_count": 1,
+        "candidate_pose_count": len(pose_ids),
         "shards": [
             {
                 "shard_id": "identity_review",
@@ -131,9 +145,9 @@ def build_identity(manifest_path: Path, output_dir: Path) -> dict[str, Any]:
                 "path": artifact_path.name,
                 "sha256": artifact["sha256"],
                 "bytes": artifact["bytes"],
-                "pose_count": 1,
-                "pose_ids": [pose_id],
-                "approval_state": "pending_identity_review",
+                "pose_count": len(pose_ids),
+                "pose_ids": pose_ids,
+                "approval_state": manifest["approval_state"],
                 "runtime_admitted": False,
             }
         ],
@@ -141,8 +155,8 @@ def build_identity(manifest_path: Path, output_dir: Path) -> dict[str, Any]:
             f"{character_id}-identity-review": {
                 "fps": 1,
                 "loop": True,
-                "pose_ids": [pose_id],
-                "approval_state": "pending_identity_review",
+                "pose_ids": pose_ids,
+                "approval_state": manifest["approval_state"],
                 "runtime_admitted": False,
                 "runtime_note": (
                     "Identity-gate projection only; no animation or production "
@@ -164,7 +178,7 @@ def build_identity(manifest_path: Path, output_dir: Path) -> dict[str, Any]:
             "path": artifact_path.name,
             "sha256": artifact["sha256"],
             "bytes": artifact["bytes"],
-            "pose_count": 1,
+            "pose_count": len(pose_ids),
         },
         "library_index": {
             "path": index_path.name,

@@ -53,7 +53,89 @@
     "sha256": "1579f0adb7f4c69184c8d45011a201c7fb3369d09af183a1d2f384acc07ea886",
     "rgba_sha256": "69feb97676636b20ba11dfe022002947532eec6d8d29edf4af423215e9651437",
     "canonical_bbox": [428, 69, 827, 1185],
-    "approval_state": "pending_identity_review"
+    "approval_state": "user_authorized_to_proceed"
+  },
+  "identity_anchors": [
+    {
+      "view_id": "profile_left",
+      "pose_id": "liana_identity_profile_left_v001",
+      "path": "authored-source/frames/liana_identity_profile_left_v001.png",
+      "sha256": "c8ca3128bebb1d1d0afefc9a1a673cc80fed8fdffbdc2c19c53ecfd4a859a850",
+      "rgba_sha256": "e1fa478e9d25ecf81d413b81ed91b65938fc93a1131682e51d2fd7b55694e252",
+      "canonical_bbox": [484, 69, 769, 1185],
+      "approval_state": "pending_multiview_review",
+      "receipt_chain": {
+        "alpha_extraction": {
+          "path": "authored-source/alpha-extraction-receipts/liana_identity_profile_left_v001.json",
+          "sha256": "9438dbc4ac138776072dcb85b5e83ca669550d0dcc2e3616e4ffece6362f96d0"
+        },
+        "canonicalization": {
+          "path": "authored-source/canonicalization-receipts/liana_identity_profile_left_v001.json",
+          "sha256": "324535078e77abb3ff6eeb60a97a922b6531f51253c9844db5d744377714e8a6"
+        }
+      },
+      "generation": {
+        "method": "built_in_imagegen_identity_preserve_flat_chroma_then_local_alpha_extraction",
+        "chroma_source_path": "authored-source/chroma-source/liana_identity_profile_left_v001.png",
+        "chroma_source_sha256": "e575a2c2d9410168462628f90f7997ad9547248cd4dcace0d7466f6c5f66d3d9"
+      }
+    },
+    {
+      "view_id": "three_quarter_left",
+      "pose_id": "liana_identity_three_quarter_left_v001",
+      "path": "authored-source/frames/liana_identity_three_quarter_left_v001.png",
+      "sha256": "1981b28c64a5a08ef29ee30772906e29e2379996e48fe84424723b688de765c7",
+      "rgba_sha256": "d32f7b872d8fc2d7402da88044b35f796200dd048c26efa5d9b52e2bbcd31207",
+      "canonical_bbox": [452, 83, 801, 1185],
+      "approval_state": "pending_multiview_review",
+      "receipt_chain": {
+        "alpha_extraction": {
+          "path": "authored-source/alpha-extraction-receipts/liana_identity_three_quarter_left_v001.json",
+          "sha256": "f68183eebefaefea20ebb224d40b9dac6c6dc41c856b19930ae76c48ab8ca34c"
+        },
+        "canonicalization": {
+          "path": "authored-source/canonicalization-receipts/liana_identity_three_quarter_left_v001.json",
+          "sha256": "89360694cf2b0d84fe9465eab67e382512bddcf7a38d1984b1e6d3cb5d4072c5"
+        }
+      },
+      "generation": {
+        "method": "built_in_imagegen_identity_preserve_flat_chroma_then_local_alpha_extraction",
+        "chroma_source_path": "authored-source/chroma-source/liana_identity_three_quarter_left_v001.png",
+        "chroma_source_sha256": "243bd12368d51a4b6420f000897234ef74ac1f1bcd67e92c1b0572a118986051"
+      }
+    },
+    {
+      "view_id": "rear",
+      "pose_id": "liana_identity_rear_v001",
+      "path": "authored-source/frames/liana_identity_rear_v001.png",
+      "sha256": "afa451de0e418c322e84ce2a110f16cc961d33d407c64a425ab1045916ae1dc6",
+      "rgba_sha256": "6691ccd9f4ec4f9d763b99edde4449087380e93e5065f347020d162882a07289",
+      "canonical_bbox": [448, 69, 806, 1185],
+      "approval_state": "pending_multiview_review",
+      "receipt_chain": {
+        "alpha_extraction": {
+          "path": "authored-source/alpha-extraction-receipts/liana_identity_rear_v001.json",
+          "sha256": "cfdcf6121b7b2521d01047ceeab4e49f209b96183d6f4112376e019de824c95f"
+        },
+        "canonicalization": {
+          "path": "authored-source/canonicalization-receipts/liana_identity_rear_v001.json",
+          "sha256": "3b52ed8237f1ae7a21a530eec12cb366181b78807d5307a802c550eb4b2e7f96"
+        }
+      },
+      "generation": {
+        "method": "built_in_imagegen_identity_preserve_flat_chroma_then_local_alpha_extraction",
+        "chroma_source_path": "authored-source/chroma-source/liana_identity_rear_v001.png",
+        "chroma_source_sha256": "268a4482477f11e0df12b9e8c30aab5c537b1c0068f711f54ef318e6823606e4"
+      }
+    }
+  ],
+  "front_identity_gate": {
+    "state": "user_authorized_to_proceed",
+    "decision_date": "2026-07-26",
+    "bound_pose_id": "liana_identity_front_v001",
+    "bound_pose_sha256": "1579f0adb7f4c69184c8d45011a201c7fb3369d09af183a1d2f384acc07ea886",
+    "bound_rgba_sha256": "69feb97676636b20ba11dfe022002947532eec6d8d29edf4af423215e9651437",
+    "scope": "Authorizes multiview identity and motion production; does not approve runtime admission."
   },
   "receipt_chain": {
     "alpha_extraction": {
@@ -72,5 +154,5 @@
   },
   "review_projection": true,
   "runtime_admitted": false,
-  "approval_state": "pending_identity_review"
+  "approval_state": "pending_multiview_review"
 }
