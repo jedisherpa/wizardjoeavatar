@@ -1,0 +1,40 @@
+{
+  "artifact_sha256": "811b8c9f954dbd72f901f464ce7e9fba53cbf6183a4ab4f33afb7aec45f62cb4",
+  "character_id": "liora-kane",
+  "decision": "static_visual_identity_gate_passed_for_product_review",
+  "evidence": {
+    "direct_projection_captures": [
+      "pose-037.jpg",
+      "pose-038.jpg",
+      "pose-039.jpg",
+      "pose-040.jpg",
+      "pose-041.jpg",
+      "pose-042.jpg",
+      "pose-043.jpg",
+      "pose-044.jpg",
+      "pose-045.jpg",
+      "pose-046.jpg",
+      "pose-047.jpg",
+      "pose-048.jpg"
+    ],
+    "side_by_side_capture": "side-by-side-candidate.jpg"
+  },
+  "identity_checks": {
+    "blue_book_single_prop_continuity": "passed",
+    "gray_hoodie_drawstrings_and_pockets": "passed",
+    "grounded_white_shoes": "passed",
+    "long_brown_curls": "passed",
+    "teal_plaid_trousers": "passed",
+    "voxel_proportions_and_warm_face": "passed"
+  },
+  "library_index_sha256": "b4f3bf1416e9c1f49f732b5731b227bb5e71d75191d5774f85262c2f2167597d",
+  "product_approval": "pending",
+  "review_projection": true,
+  "runtime_admitted": false,
+  "schema_version": 1,
+  "technical_tests": {
+    "command_scope": "focused parity, provenance, receipt-chain, manifest, and observer suites",
+    "passed": 12,
+    "status": "passed"
+  }
+}

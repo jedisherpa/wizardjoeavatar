@@ -1,0 +1,35 @@
+{
+  "authority_manifest_sha256": "740f35730f4aa1e6c6ef96be80115c5b0e117397f792d57fdf5360452bbe78c8",
+  "destination_bbox": [
+    399,
+    92,
+    854,
+    1185
+  ],
+  "destination_path": "assets/reference/joeville_48_parity/authored-source/liora-kane/frames/liora_kane_motion_043.png",
+  "destination_rgba_sha256": "2d22df28344761f27b571aadd3f0e4c9d5ecb50e94d840959c2c5239b4b0c557",
+  "destination_sha256": "a0951cb15793e06f22e3485b9a6088af91109999ce51e9d772ab3084c7f1c2f1",
+  "fitted_bbox": [
+    429,
+    84,
+    884,
+    1177
+  ],
+  "profile_id": "wizardjoe_hd_alpha_1254_v001",
+  "resample_filter": null,
+  "resampled": false,
+  "scale": 1.0,
+  "schema_version": 1,
+  "source_bbox": [
+    429,
+    84,
+    884,
+    1177
+  ],
+  "source_path": "assets/reference/joeville_48_parity/authored-source/liora-kane/alpha-extracted/liora_kane_motion_043.png",
+  "source_sha256": "42ec8f5125020a85675007e4fde9e876be3f3c2819a9797f68d82302d39bfbf2",
+  "translation": {
+    "x": -30,
+    "y": 8
+  }
+}

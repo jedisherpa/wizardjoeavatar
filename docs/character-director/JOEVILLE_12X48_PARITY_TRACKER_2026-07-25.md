@@ -253,6 +253,25 @@ All twelve authored IDs passed direct full-size projection and port 8665
 presents the candidate beside approved HD Wizard Joe. Product visual approval
 is still pending and runtime admission remains false.
 
+Liora Kane is now the eighth incomplete roster character to reach a complete
+48-pose review candidate. Her immutable supplied poses `001`-`036` were merged
+with twelve new full-size RGBA poses for:
+
+- `g7`: notice, invite, receive, empathize, offer support, and return agency.
+- `g8`: frame a question, open the source, locate a passage, realize, share an
+  insight, and close while retaining one blue book.
+
+The authored silhouettes preserve Liora's long brown curls, gray hoodie,
+drawstrings and pockets, teal plaid trousers, grounded white shoes, and warm
+voxel proportions. Exactly one blue book remains continuously owned throughout
+G8. Poses `042`, `043`, and `045` use integer translation only; the remaining
+authored silhouettes use the explicit receipted oversize-fit path with a
+minimum scale of 97.13 percent. Two consecutive builds produced identical
+artifact and library-index hashes. All twelve authored IDs passed direct
+full-size projection and port 8665 presents the candidate beside approved HD
+Wizard Joe. Product visual approval is still pending and runtime admission
+remains false.
+
 | Character | Candidate poses | Missing poses | State |
 | --- | ---: | ---: | --- |
 | Orion Vale | 48 | 0 | Full-size technical review passed; product visual approval pending |
@@ -262,8 +281,9 @@ is still pending and runtime admission remains false.
 | Elara Voss | 48 | 0 | Full-size technical review passed; product visual approval pending |
 | Kai Renner | 48 | 0 | Full-size technical review passed; product visual approval pending |
 | Draven Holt | 48 | 0 | Full-size technical review passed; product visual approval pending |
-| Remaining roster | 204 | 36 | Authoring/review required |
-| **Total** | **540** | **36** | **576 target slots** |
+| Liora Kane | 48 | 0 | Full-size technical review passed; product visual approval pending |
+| Remaining roster | 168 | 24 | Authoring/review required |
+| **Total** | **552** | **24** | **576 target slots** |
 
 Orion candidate receipts:
 
@@ -326,6 +346,16 @@ Draven candidate receipts:
 - Alpha-extraction receipts: `23cb83653f8a9de2bc4c71f96c6d303d732c481c868e883a136022c29789de26`
 - Canonicalization receipts: `b6ed2386bb2a372581b5ca680e23e1529a71dbf57db2443b35a918b39bf45273`
 
+Liora candidate receipts:
+
+- Artifact: `811b8c9f954dbd72f901f464ce7e9fba53cbf6183a4ab4f33afb7aec45f62cb4`
+- Library index: `b4f3bf1416e9c1f49f732b5731b227bb5e71d75191d5774f85262c2f2167597d`
+- Reconstruction: `9bab86d931edc37e3a6a63616b15897309ca777313dbf875f7e492b7b58c4df3`
+- Review motion contract: `e3a270f2e78e18ac029417a53feb4d86de9832b33e598fe9a72ab46b79000d2b`
+- Contact sheet: `f0af7a18e1e72291f82ef04033e7017ca0fec9fb6e965e02f945fb40ab7d2c54`
+- Alpha-extraction receipts: `f8894a0e6b6ba378b42688e9bd575cc8c8c850e933191a8c307b7325472cc77b`
+- Canonicalization receipts: `f2f4fe3e644ff8747576e62f0b2e61e28fedd68db69f99bc04633cb09c49a7e6`
+
 ## Roster Boundary
 
 The archives also contain Crystail. Crystail remains
@@ -339,7 +369,7 @@ and count parity rather than an automatic quality waiver.
 
 ## Next Build Order
 
-1. Author the 36 remaining frames as explicitly new art, one character at a
+1. Author the 24 remaining frames as explicitly new art, one character at a
    time, using the character's compiled supplied set as visual authority.
 2. Rebuild each completed 48-pose artifact twice and require identical hashes.
 3. Review every full-size frame and motion sequence beside approved HD Wizard

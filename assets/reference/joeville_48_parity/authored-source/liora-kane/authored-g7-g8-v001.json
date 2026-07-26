@@ -1,0 +1,361 @@
+{
+  "approval_state": "pending_visual_parity",
+  "authoring_brief_sha256": "d43d0c299592fb5fc2ae87e326cad08cfa881a72ce8530021b95734e98fc1291",
+  "authority_manifest_sha256": "740f35730f4aa1e6c6ef96be80115c5b0e117397f792d57fdf5360452bbe78c8",
+  "canonicalization": "integer_translation_with_opt_in_oversize_fit",
+  "character_id": "liora-kane",
+  "existing_artifact_sha256": "7b98b6ce927ab24457920b7e3d15a0b87e3e3d456a3af11ab339ada160ca03a7",
+  "existing_reconstruction_sha256": "68f09bc88e9dcbb5a7ee0335f1d5824f4f1d61784ce50416090ee95112c7c919",
+  "generation_method": "built_in_imagegen_flat_chroma_then_local_alpha_extraction",
+  "profile_id": "wizardjoe_hd_alpha_1254_v001",
+  "runtime_admitted": false,
+  "schema_version": 1,
+  "sequences": {
+    "g7": {
+      "fps": 10,
+      "frames": [
+        {
+          "alpha_extracted_path": "alpha-extracted/liora_kane_motion_037.png",
+          "alpha_extracted_sha256": "8f3ae03440f6f54f1adb903526e825edcd5788345720b50403b3a7b5fff8fc84",
+          "authorship": "authored_full_size_imagegen_v1",
+          "brief_id": "liora-g7-notice",
+          "canonical_bbox": [
+            401,
+            69,
+            853,
+            1185
+          ],
+          "chroma_source_path": "chroma-source/liora_kane_motion_037.png",
+          "chroma_source_sha256": "b1e373abb85ff450604119dcfcd496167aa2086287b58e6f1a628804ddc27e08",
+          "continuity": "She inclines slightly toward an off-camera partner with both open hands low and separated from the hoodie, long curls complete, and both shoes planted shoulder-width.",
+          "forbidden": "Idle symmetry, wave, book, foot movement, alarmed expression, cropped curls, missing drawstrings, or plaid drift.",
+          "frame_index": 1,
+          "pose_id": "liora_kane_motion_037",
+          "pose_summary": "Grounded notice of a partner who needs support.",
+          "rgba_sha256": "cee01d748474a8347fe6bc01780cfc0f24d9476376cfd2a03217c979ac054c92",
+          "slot_id": "motion-037",
+          "source_path": "frames/liora_kane_motion_037.png",
+          "source_sha256": "f2830a69e0f974cea2def5e4d2f68cbdc40410f965f6443b2909c37a2f4aeba2"
+        },
+        {
+          "alpha_extracted_path": "alpha-extracted/liora_kane_motion_038.png",
+          "alpha_extracted_sha256": "ebbf7b77e233ef408efc282c7a28c3a88aaa1fd78c5b2055dd7c3edf31919218",
+          "authorship": "authored_full_size_imagegen_v1",
+          "brief_id": "liora-g7-invite",
+          "canonical_bbox": [
+            387,
+            69,
+            867,
+            1185
+          ],
+          "chroma_source_path": "chroma-source/liora_kane_motion_038.png",
+          "chroma_source_sha256": "51d367acbdbec9ca180e4102fdff45e3cbe9cfedb5020bb6ae6c2691ff91718b",
+          "continuity": "Her anatomical left palm rises to waist height to invite the partner to speak while the right arm remains relaxed and the torso opens gently.",
+          "forbidden": "Wave, point, raised elbow, duplicated fingers, root drift, book appearance, or exaggerated smile.",
+          "frame_index": 2,
+          "pose_id": "liora_kane_motion_038",
+          "pose_summary": "Gentle invitation to take the conversational floor.",
+          "rgba_sha256": "fc03e5de1aeaf72997b54b3002eef207847c432445a7861de74370cc65631df2",
+          "slot_id": "motion-038",
+          "source_path": "frames/liora_kane_motion_038.png",
+          "source_sha256": "572a19a8d017d3275c4a1bd454e4c65fd834c6d4b52b957bf4043c3ab41aec36"
+        },
+        {
+          "alpha_extracted_path": "alpha-extracted/liora_kane_motion_039.png",
+          "alpha_extracted_sha256": "69d44cb7bb5b4711599f4488fb3f16a4f9958e8f09147209a8b400153f47f3eb",
+          "authorship": "authored_full_size_imagegen_v1",
+          "brief_id": "liora-g7-receive",
+          "canonical_bbox": [
+            432,
+            69,
+            821,
+            1185
+          ],
+          "chroma_source_path": "chroma-source/liora_kane_motion_039.png",
+          "chroma_source_sha256": "838069e4ba95e754f8fe45042e5608b280e135fe7682ac1a8f690ed39b12ee4f",
+          "continuity": "Her head tilts slightly and shoulders soften as both hands draw inward without closing, maintaining attentive eye contact and unchanged planted shoes.",
+          "forbidden": "Caricature nod, crossed arms, laughter, closed fists, moving shoes, clipped hair, or book appearance.",
+          "frame_index": 3,
+          "pose_id": "liora_kane_motion_039",
+          "pose_summary": "Contained active listening and receipt.",
+          "rgba_sha256": "73b218f59c6d41ff63e5a719a97ae246f02db7250003e5add1b271f635595225",
+          "slot_id": "motion-039",
+          "source_path": "frames/liora_kane_motion_039.png",
+          "source_sha256": "cae9bd0a8ebdb0e59e0fd2f5f133d3cb9ef2b10c34ef547fd32ca93ffbea9a33"
+        },
+        {
+          "alpha_extracted_path": "alpha-extracted/liora_kane_motion_040.png",
+          "alpha_extracted_sha256": "3cad3f061114d778002d2944d887074f9345c9d13d0d7c4233e4965844a8bab7",
+          "authorship": "authored_full_size_imagegen_v1",
+          "brief_id": "liora-g7-empathize",
+          "canonical_bbox": [
+            434,
+            69,
+            821,
+            1185
+          ],
+          "chroma_source_path": "chroma-source/liora_kane_motion_040.png",
+          "chroma_source_sha256": "0b57a1609d3395f83c0d882b854d6dde8acba0960bfc7bba535eab3da1c5b43f",
+          "continuity": "Her anatomical right hand rests lightly over the upper chest while the left remains open beside the torso and her gaze stays warm and steady.",
+          "forbidden": "Pledge pose, clenched fist, self-hug, hand penetrating hoodie or drawstrings, book, heel lift, or root translation.",
+          "frame_index": 4,
+          "pose_id": "liora_kane_motion_040",
+          "pose_summary": "Quiet embodied empathy without melodrama.",
+          "rgba_sha256": "499176a9dbdf27fafbc2dfa76176ea1614bfe572567b9dd7e9bd5b69e26460ee",
+          "slot_id": "motion-040",
+          "source_path": "frames/liora_kane_motion_040.png",
+          "source_sha256": "b3dca23a40a014a2119023dd7c925bc40b177af74ddfaa52ca472acbea71b358"
+        },
+        {
+          "alpha_extracted_path": "alpha-extracted/liora_kane_motion_041.png",
+          "alpha_extracted_sha256": "d810c706985238a7011cffb44f50e087ba1e0d46aa2a10ab4f81993ba8d7bbfc",
+          "authorship": "authored_full_size_imagegen_v1",
+          "brief_id": "liora-g7-offer-support",
+          "canonical_bbox": [
+            402,
+            69,
+            853,
+            1185
+          ],
+          "chroma_source_path": "chroma-source/liora_kane_motion_041.png",
+          "chroma_source_sha256": "6d709d7398eede02f797f6141d41968f1ad593f1b8303e2781e87c62c16748ca",
+          "continuity": "Both forearms extend slightly with open palms at different heights as she offers support with soft knees and a small encouraging expression.",
+          "forbidden": "Shrug, begging, wave, mirrored arms, oversized hands, foot slide, book appearance, or identity drift.",
+          "frame_index": 5,
+          "pose_id": "liora_kane_motion_041",
+          "pose_summary": "Balanced two-handed offer of support.",
+          "rgba_sha256": "be29382196140f748e437e15333ed481fc586937096b70216e445d9fb802d537",
+          "slot_id": "motion-041",
+          "source_path": "frames/liora_kane_motion_041.png",
+          "source_sha256": "c29bd1ccb6fd94a787583f787c601b90a09e8a54e9e7b4e106793e0e88e7c01b"
+        },
+        {
+          "alpha_extracted_path": "alpha-extracted/liora_kane_motion_042.png",
+          "alpha_extracted_sha256": "ac1f9b9c0d9d302037f90beba9cd61dd6a9bb91d776f2f304f72296baaa5dc16",
+          "authorship": "authored_full_size_imagegen_v1",
+          "brief_id": "liora-g7-return-agency",
+          "canonical_bbox": [
+            372,
+            74,
+            881,
+            1185
+          ],
+          "chroma_source_path": "chroma-source/liora_kane_motion_042.png",
+          "chroma_source_sha256": "7c877a533e25cd77e6fadbc58f8400cd02b5ade50d7feba694b989bbf0008b97",
+          "continuity": "Her left palm remains gently offered while the right relaxes near the hoodie pocket and her patient gaze returns agency to the partner.",
+          "forbidden": "Command gesture, point, book, hard pose snap, root displacement, hand inside pocket, or idle duplicate.",
+          "frame_index": 6,
+          "pose_id": "liora_kane_motion_042",
+          "pose_summary": "Patient return of choice to the partner.",
+          "rgba_sha256": "2053c502af3d01402859cf78a2e4c832e6de98cbbeab7f3dfa02da2ad9f76b55",
+          "slot_id": "motion-042",
+          "source_path": "frames/liora_kane_motion_042.png",
+          "source_sha256": "feb922278d53ea47812ef8a3aa597a34ad68d910dc066e781c22cb8996683493"
+        }
+      ],
+      "intent": "notice_invite_receive_empathize_offer_return_agency",
+      "loop": false,
+      "motion_contract": {
+        "entry_handoffs": [
+          "front_idle",
+          "three_quarter_idle"
+        ],
+        "exit_handoffs": [
+          "front_idle",
+          "three_quarter_idle",
+          "g8"
+        ],
+        "family": "empathetic_dialogue",
+        "hold_frame_indices": [
+          2,
+          4,
+          6
+        ],
+        "interrupt_policy": "marker_safe",
+        "interruptible_frame_indices": [
+          1,
+          2,
+          4,
+          6
+        ],
+        "loop_mode": "hold_last",
+        "root_policy": "fixed",
+        "support_policy": "dual_foot_grounded"
+      }
+    },
+    "g8": {
+      "fps": 10,
+      "frames": [
+        {
+          "alpha_extracted_path": "alpha-extracted/liora_kane_motion_043.png",
+          "alpha_extracted_sha256": "42ec8f5125020a85675007e4fde9e876be3f3c2819a9797f68d82302d39bfbf2",
+          "authorship": "authored_full_size_imagegen_v1",
+          "brief_id": "liora-g8-frame-question",
+          "canonical_bbox": [
+            399,
+            92,
+            854,
+            1185
+          ],
+          "chroma_source_path": "chroma-source/liora_kane_motion_043.png",
+          "chroma_source_sha256": "703d64b4855275f0059d3222efd83c518df5b077809c479fba75797630414da5",
+          "continuity": "Exactly one closed blue book stays tucked vertically against her anatomical right side while the free left hand makes a small open question gesture.",
+          "forbidden": "Wave, second book, changed book size or color, finger point, hand swap, foot movement, or cropped prop.",
+          "frame_index": 1,
+          "pose_id": "liora_kane_motion_043",
+          "pose_summary": "Frame a question while retaining the closed source.",
+          "rgba_sha256": "2d22df28344761f27b571aadd3f0e4c9d5ecb50e94d840959c2c5239b4b0c557",
+          "slot_id": "motion-043",
+          "source_path": "frames/liora_kane_motion_043.png",
+          "source_sha256": "a0951cb15793e06f22e3485b9a6088af91109999ce51e9d772ab3084c7f1c2f1"
+        },
+        {
+          "alpha_extracted_path": "alpha-extracted/liora_kane_motion_044.png",
+          "alpha_extracted_sha256": "de05dd15f4d8b07b0a97c0c3a0e45432b918fd706ceb811baddf0157f04509b5",
+          "authorship": "authored_full_size_imagegen_v1",
+          "brief_id": "liora-g8-open-source",
+          "canonical_bbox": [
+            425,
+            69,
+            829,
+            1185
+          ],
+          "chroma_source_path": "chroma-source/liora_kane_motion_044.png",
+          "chroma_source_sha256": "2d6dd5e8f9c43f9e553a5bb36e6f4fb6deca164df820bf6fa9bc404e17e77e16",
+          "continuity": "The book moves to center chest as her right hand supports its spine and the left hand opens the cover while her gaze follows the source.",
+          "forbidden": "Floating book, swapped weight-bearing grip, unreadable hand overlap, walking stance, duplicate book, or missing pages.",
+          "frame_index": 2,
+          "pose_id": "liora_kane_motion_044",
+          "pose_summary": "Open the blue book at center chest.",
+          "rgba_sha256": "49ceb949abd2267653b8f52b71685b4ed9613edccec2174c0199930e512ec6e9",
+          "slot_id": "motion-044",
+          "source_path": "frames/liora_kane_motion_044.png",
+          "source_sha256": "9c7a7a0ed80442c245aa78e5c257dd6da317a39d003666c9860aae3474ad701f"
+        },
+        {
+          "alpha_extracted_path": "alpha-extracted/liora_kane_motion_045.png",
+          "alpha_extracted_sha256": "1af6ea59f10efa7437cb03fc090cdc18900ef71aa6dfb45c72b038c65bf19303",
+          "authorship": "authored_full_size_imagegen_v1",
+          "brief_id": "liora-g8-locate-passage",
+          "canonical_bbox": [
+            429,
+            74,
+            825,
+            1185
+          ],
+          "chroma_source_path": "chroma-source/liora_kane_motion_045.png",
+          "chroma_source_sha256": "e94a758de7c7c4caa42177670c8e407855c46843de0afe1b79306fe6bac975c1",
+          "continuity": "One open blue book remains below the chest as the right hand supports its spine and the left index marks one location on simple pale pages.",
+          "forbidden": "Writing, multiple pointing fingers, detailed text, closed eyes, clipped curls, extra pages, book duplication, or foot slide.",
+          "frame_index": 3,
+          "pose_id": "liora_kane_motion_045",
+          "pose_summary": "Locate one useful passage in the open book.",
+          "rgba_sha256": "345c5caf456aef21185a8ce31b194abf7bc44f2fe7e242d0c74ae6ceca761840",
+          "slot_id": "motion-045",
+          "source_path": "frames/liora_kane_motion_045.png",
+          "source_sha256": "a6275d8be8ef03a2dac509b0672ce8239dee4b5e8604712d2f2995e943ea0efe"
+        },
+        {
+          "alpha_extracted_path": "alpha-extracted/liora_kane_motion_046.png",
+          "alpha_extracted_sha256": "85142f2e6386d5a7be5b8dc067cdff22caaab11e80084855b411964d0e9ab39f",
+          "authorship": "authored_full_size_imagegen_v1",
+          "brief_id": "liora-g8-realization",
+          "canonical_bbox": [
+            426,
+            69,
+            827,
+            1185
+          ],
+          "chroma_source_path": "chroma-source/liora_kane_motion_046.png",
+          "chroma_source_sha256": "2ea440d3c4a559a185feefaec534427ecfe940a176e755a30a159a9639a49bd1",
+          "continuity": "Her head and sternum lift toward the audience while the right hand maintains the same open book and the left leaves the page in a small contained insight gesture.",
+          "forbidden": "Jump, exaggerated surprise, book teleport, page-count mutation, hand swap, heel lift, or broad wave.",
+          "frame_index": 4,
+          "pose_id": "liora_kane_motion_046",
+          "pose_summary": "Contained realization while preserving the open source.",
+          "rgba_sha256": "fc8f79a67e54cf0f04c9f555b545d74e121530caf161a5727b97793004885519",
+          "slot_id": "motion-046",
+          "source_path": "frames/liora_kane_motion_046.png",
+          "source_sha256": "d588d491b171ca929017464c8bd0900ce8b45cb832e8b59e1196a714d2d14b88"
+        },
+        {
+          "alpha_extracted_path": "alpha-extracted/liora_kane_motion_047.png",
+          "alpha_extracted_sha256": "965e2728a52dcd30343ee7a24d0e5b55897ca3886867d0132669b60d74a49ae9",
+          "authorship": "authored_full_size_imagegen_v1",
+          "brief_id": "liora-g8-share-insight",
+          "canonical_bbox": [
+            357,
+            69,
+            897,
+            1185
+          ],
+          "chroma_source_path": "chroma-source/liora_kane_motion_047.png",
+          "chroma_source_sha256": "2f92a2942fe176ced85edc98f0b262ae1def51afecdc2bd962ec862057c8eca9",
+          "continuity": "The right hand angles the same open book slightly toward the audience while the left palm presents beside it without covering the pages.",
+          "forbidden": "Book as sign, pointing at viewer, wave, duplicated arm, unstable shoes, missing page block, or changed book ownership.",
+          "frame_index": 5,
+          "pose_id": "liora_kane_motion_047",
+          "pose_summary": "Share the useful idea with an open-book presentation.",
+          "rgba_sha256": "bfe091b10bf2c9fe0dba9751483181cf44a13c0363ca75b05262841dc6c82704",
+          "slot_id": "motion-047",
+          "source_path": "frames/liora_kane_motion_047.png",
+          "source_sha256": "fb3f79ee30e621a3e4f0fee408f68d7712ef050b3dbcf19739ef4c925b19ab60"
+        },
+        {
+          "alpha_extracted_path": "alpha-extracted/liora_kane_motion_048.png",
+          "alpha_extracted_sha256": "d933101818744bf9bc1ae7240ce142f7fb2cc879dc097ed6ee36bd966f8939a4",
+          "authorship": "authored_full_size_imagegen_v1",
+          "brief_id": "liora-g8-close-retain",
+          "canonical_bbox": [
+            419,
+            69,
+            835,
+            1185
+          ],
+          "chroma_source_path": "chroma-source/liora_kane_motion_048.png",
+          "chroma_source_sha256": "852c75ee4e8698c5510bc8dd1211a834f9b5b45a68fd0755be6913f204e92c4b",
+          "continuity": "The book returns closed and vertical against her anatomical right side while the left hand rests open near midline and her expression settles warmly.",
+          "forbidden": "Dropped or disappearing book, pocket penetration, locomotion, idle-copy silhouette, hand swap, extra book, or lifted heel.",
+          "frame_index": 6,
+          "pose_id": "liora_kane_motion_048",
+          "pose_summary": "Close and securely retain the blue book.",
+          "rgba_sha256": "fcc936940034096d4e91174586c52ffaee5b34888e4c44cdc947e53a08e79a7d",
+          "slot_id": "motion-048",
+          "source_path": "frames/liora_kane_motion_048.png",
+          "source_sha256": "8be2a78899069adbb6e54015971aaec4b4b5761c1b882a15d91e0a01568f365a"
+        }
+      ],
+      "intent": "frame_open_locate_realize_share_close_retain",
+      "loop": false,
+      "motion_contract": {
+        "entry_handoffs": [
+          "front_idle",
+          "front_book_carry",
+          "g7"
+        ],
+        "exit_handoffs": [
+          "front_idle",
+          "front_book_carry"
+        ],
+        "family": "book_explanation",
+        "hold_frame_indices": [
+          2,
+          3,
+          5,
+          6
+        ],
+        "interrupt_policy": "marker_safe",
+        "interruptible_frame_indices": [
+          1,
+          2,
+          3,
+          5,
+          6
+        ],
+        "loop_mode": "hold_last",
+        "root_policy": "fixed",
+        "support_policy": "dual_foot_grounded"
+      }
+    }
+  }
+}

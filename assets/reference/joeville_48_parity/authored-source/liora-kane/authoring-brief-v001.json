@@ -1,0 +1,184 @@
+{
+  "character_id": "liora-kane",
+  "schema_version": 1,
+  "sequences": {
+    "g7": {
+      "fps": 10,
+      "frames": [
+        {
+          "brief_id": "liora-g7-notice",
+          "continuity": "She inclines slightly toward an off-camera partner with both open hands low and separated from the hoodie, long curls complete, and both shoes planted shoulder-width.",
+          "forbidden": "Idle symmetry, wave, book, foot movement, alarmed expression, cropped curls, missing drawstrings, or plaid drift.",
+          "frame_index": 1,
+          "pose_id": "liora_kane_motion_037",
+          "pose_summary": "Grounded notice of a partner who needs support.",
+          "slot_id": "motion-037"
+        },
+        {
+          "brief_id": "liora-g7-invite",
+          "continuity": "Her anatomical left palm rises to waist height to invite the partner to speak while the right arm remains relaxed and the torso opens gently.",
+          "forbidden": "Wave, point, raised elbow, duplicated fingers, root drift, book appearance, or exaggerated smile.",
+          "frame_index": 2,
+          "pose_id": "liora_kane_motion_038",
+          "pose_summary": "Gentle invitation to take the conversational floor.",
+          "slot_id": "motion-038"
+        },
+        {
+          "brief_id": "liora-g7-receive",
+          "continuity": "Her head tilts slightly and shoulders soften as both hands draw inward without closing, maintaining attentive eye contact and unchanged planted shoes.",
+          "forbidden": "Caricature nod, crossed arms, laughter, closed fists, moving shoes, clipped hair, or book appearance.",
+          "frame_index": 3,
+          "pose_id": "liora_kane_motion_039",
+          "pose_summary": "Contained active listening and receipt.",
+          "slot_id": "motion-039"
+        },
+        {
+          "brief_id": "liora-g7-empathize",
+          "continuity": "Her anatomical right hand rests lightly over the upper chest while the left remains open beside the torso and her gaze stays warm and steady.",
+          "forbidden": "Pledge pose, clenched fist, self-hug, hand penetrating hoodie or drawstrings, book, heel lift, or root translation.",
+          "frame_index": 4,
+          "pose_id": "liora_kane_motion_040",
+          "pose_summary": "Quiet embodied empathy without melodrama.",
+          "slot_id": "motion-040"
+        },
+        {
+          "brief_id": "liora-g7-offer-support",
+          "continuity": "Both forearms extend slightly with open palms at different heights as she offers support with soft knees and a small encouraging expression.",
+          "forbidden": "Shrug, begging, wave, mirrored arms, oversized hands, foot slide, book appearance, or identity drift.",
+          "frame_index": 5,
+          "pose_id": "liora_kane_motion_041",
+          "pose_summary": "Balanced two-handed offer of support.",
+          "slot_id": "motion-041"
+        },
+        {
+          "brief_id": "liora-g7-return-agency",
+          "continuity": "Her left palm remains gently offered while the right relaxes near the hoodie pocket and her patient gaze returns agency to the partner.",
+          "forbidden": "Command gesture, point, book, hard pose snap, root displacement, hand inside pocket, or idle duplicate.",
+          "frame_index": 6,
+          "pose_id": "liora_kane_motion_042",
+          "pose_summary": "Patient return of choice to the partner.",
+          "slot_id": "motion-042"
+        }
+      ],
+      "intent": "notice_invite_receive_empathize_offer_return_agency",
+      "loop": false,
+      "motion_contract": {
+        "entry_handoffs": [
+          "front_idle",
+          "three_quarter_idle"
+        ],
+        "exit_handoffs": [
+          "front_idle",
+          "three_quarter_idle",
+          "g8"
+        ],
+        "family": "empathetic_dialogue",
+        "hold_frame_indices": [
+          2,
+          4,
+          6
+        ],
+        "interrupt_policy": "marker_safe",
+        "interruptible_frame_indices": [
+          1,
+          2,
+          4,
+          6
+        ],
+        "loop_mode": "hold_last",
+        "root_policy": "fixed",
+        "support_policy": "dual_foot_grounded"
+      }
+    },
+    "g8": {
+      "fps": 10,
+      "frames": [
+        {
+          "brief_id": "liora-g8-frame-question",
+          "continuity": "Exactly one closed blue book stays tucked vertically against her anatomical right side while the free left hand makes a small open question gesture.",
+          "forbidden": "Wave, second book, changed book size or color, finger point, hand swap, foot movement, or cropped prop.",
+          "frame_index": 1,
+          "pose_id": "liora_kane_motion_043",
+          "pose_summary": "Frame a question while retaining the closed source.",
+          "slot_id": "motion-043"
+        },
+        {
+          "brief_id": "liora-g8-open-source",
+          "continuity": "The book moves to center chest as her right hand supports its spine and the left hand opens the cover while her gaze follows the source.",
+          "forbidden": "Floating book, swapped weight-bearing grip, unreadable hand overlap, walking stance, duplicate book, or missing pages.",
+          "frame_index": 2,
+          "pose_id": "liora_kane_motion_044",
+          "pose_summary": "Open the blue book at center chest.",
+          "slot_id": "motion-044"
+        },
+        {
+          "brief_id": "liora-g8-locate-passage",
+          "continuity": "One open blue book remains below the chest as the right hand supports its spine and the left index marks one location on simple pale pages.",
+          "forbidden": "Writing, multiple pointing fingers, detailed text, closed eyes, clipped curls, extra pages, book duplication, or foot slide.",
+          "frame_index": 3,
+          "pose_id": "liora_kane_motion_045",
+          "pose_summary": "Locate one useful passage in the open book.",
+          "slot_id": "motion-045"
+        },
+        {
+          "brief_id": "liora-g8-realization",
+          "continuity": "Her head and sternum lift toward the audience while the right hand maintains the same open book and the left leaves the page in a small contained insight gesture.",
+          "forbidden": "Jump, exaggerated surprise, book teleport, page-count mutation, hand swap, heel lift, or broad wave.",
+          "frame_index": 4,
+          "pose_id": "liora_kane_motion_046",
+          "pose_summary": "Contained realization while preserving the open source.",
+          "slot_id": "motion-046"
+        },
+        {
+          "brief_id": "liora-g8-share-insight",
+          "continuity": "The right hand angles the same open book slightly toward the audience while the left palm presents beside it without covering the pages.",
+          "forbidden": "Book as sign, pointing at viewer, wave, duplicated arm, unstable shoes, missing page block, or changed book ownership.",
+          "frame_index": 5,
+          "pose_id": "liora_kane_motion_047",
+          "pose_summary": "Share the useful idea with an open-book presentation.",
+          "slot_id": "motion-047"
+        },
+        {
+          "brief_id": "liora-g8-close-retain",
+          "continuity": "The book returns closed and vertical against her anatomical right side while the left hand rests open near midline and her expression settles warmly.",
+          "forbidden": "Dropped or disappearing book, pocket penetration, locomotion, idle-copy silhouette, hand swap, extra book, or lifted heel.",
+          "frame_index": 6,
+          "pose_id": "liora_kane_motion_048",
+          "pose_summary": "Close and securely retain the blue book.",
+          "slot_id": "motion-048"
+        }
+      ],
+      "intent": "frame_open_locate_realize_share_close_retain",
+      "loop": false,
+      "motion_contract": {
+        "entry_handoffs": [
+          "front_idle",
+          "front_book_carry",
+          "g7"
+        ],
+        "exit_handoffs": [
+          "front_idle",
+          "front_book_carry"
+        ],
+        "family": "book_explanation",
+        "hold_frame_indices": [
+          2,
+          3,
+          5,
+          6
+        ],
+        "interrupt_policy": "marker_safe",
+        "interruptible_frame_indices": [
+          1,
+          2,
+          3,
+          5,
+          6
+        ],
+        "loop_mode": "hold_last",
+        "root_policy": "fixed",
+        "support_policy": "dual_foot_grounded"
+      }
+    }
+  }
+}

@@ -1,10 +1,10 @@
 {
   "approved_pose_count": 0,
-  "asset_set_id": "liora-kane-source-motion-v001",
-  "candidate_pose_count": 36,
+  "asset_set_id": "liora-kane-authored-parity-v001",
+  "candidate_pose_count": 48,
   "character_id": "liora-kane",
   "display_name": "Liora Kane",
-  "pose_count": 36,
+  "pose_count": 48,
   "profile": {
     "alpha_mode": "straight",
     "baseline_y": 1185,
@@ -19,7 +19,7 @@
   "schema_version": 1,
   "sequences": {
     "g1": {
-      "approval_state": "candidate_source_partial",
+      "approval_state": "pending_visual_parity",
       "fps": 8,
       "loop": true,
       "pose_ids": [
@@ -33,7 +33,7 @@
       "runtime_admitted": false
     },
     "g2": {
-      "approval_state": "candidate_source_partial",
+      "approval_state": "pending_visual_parity",
       "fps": 8,
       "loop": true,
       "pose_ids": [
@@ -47,7 +47,7 @@
       "runtime_admitted": false
     },
     "g3": {
-      "approval_state": "candidate_source_partial",
+      "approval_state": "pending_visual_parity",
       "fps": 8,
       "loop": true,
       "pose_ids": [
@@ -61,7 +61,7 @@
       "runtime_admitted": false
     },
     "g4": {
-      "approval_state": "candidate_source_partial",
+      "approval_state": "pending_visual_parity",
       "fps": 8,
       "loop": true,
       "pose_ids": [
@@ -75,7 +75,7 @@
       "runtime_admitted": false
     },
     "g5": {
-      "approval_state": "candidate_source_partial",
+      "approval_state": "pending_visual_parity",
       "fps": 8,
       "loop": true,
       "pose_ids": [
@@ -89,7 +89,7 @@
       "runtime_admitted": false
     },
     "g6": {
-      "approval_state": "candidate_source_partial",
+      "approval_state": "pending_visual_parity",
       "fps": 8,
       "loop": true,
       "pose_ids": [
@@ -102,8 +102,40 @@
       ],
       "runtime_admitted": false
     },
-    "liora-kane-source-all": {
-      "approval_state": "candidate_source_partial",
+    "g7": {
+      "approval_state": "pending_visual_parity",
+      "fps": 10,
+      "intent": "notice_invite_receive_empathize_offer_return_agency",
+      "loop": false,
+      "loop_mode": "hold_last",
+      "pose_ids": [
+        "liora_kane_motion_037",
+        "liora_kane_motion_038",
+        "liora_kane_motion_039",
+        "liora_kane_motion_040",
+        "liora_kane_motion_041",
+        "liora_kane_motion_042"
+      ],
+      "runtime_admitted": false
+    },
+    "g8": {
+      "approval_state": "pending_visual_parity",
+      "fps": 10,
+      "intent": "frame_open_locate_realize_share_close_retain",
+      "loop": false,
+      "loop_mode": "hold_last",
+      "pose_ids": [
+        "liora_kane_motion_043",
+        "liora_kane_motion_044",
+        "liora_kane_motion_045",
+        "liora_kane_motion_046",
+        "liora_kane_motion_047",
+        "liora_kane_motion_048"
+      ],
+      "runtime_admitted": false
+    },
+    "liora-kane-parity-all": {
+      "approval_state": "pending_visual_parity",
       "fps": 8,
       "loop": true,
       "pose_ids": [
@@ -142,17 +174,29 @@
         "liora_kane_motion_033",
         "liora_kane_motion_034",
         "liora_kane_motion_035",
-        "liora_kane_motion_036"
+        "liora_kane_motion_036",
+        "liora_kane_motion_037",
+        "liora_kane_motion_038",
+        "liora_kane_motion_039",
+        "liora_kane_motion_040",
+        "liora_kane_motion_041",
+        "liora_kane_motion_042",
+        "liora_kane_motion_043",
+        "liora_kane_motion_044",
+        "liora_kane_motion_045",
+        "liora_kane_motion_046",
+        "liora_kane_motion_047",
+        "liora_kane_motion_048"
       ],
       "runtime_admitted": false
     }
   },
   "shards": [
     {
-      "approval_state": "candidate_source_partial",
-      "bytes": 27747683,
-      "path": "liora-kane-candidate-source-motion-v001.wjpose",
-      "pose_count": 36,
+      "approval_state": "pending_visual_parity",
+      "bytes": 38925777,
+      "path": "liora-kane-candidate-authored-parity-v001.wjpose",
+      "pose_count": 48,
       "pose_ids": [
         "liora_kane_motion_001",
         "liora_kane_motion_002",
@@ -189,12 +233,24 @@
         "liora_kane_motion_033",
         "liora_kane_motion_034",
         "liora_kane_motion_035",
-        "liora_kane_motion_036"
+        "liora_kane_motion_036",
+        "liora_kane_motion_037",
+        "liora_kane_motion_038",
+        "liora_kane_motion_039",
+        "liora_kane_motion_040",
+        "liora_kane_motion_041",
+        "liora_kane_motion_042",
+        "liora_kane_motion_043",
+        "liora_kane_motion_044",
+        "liora_kane_motion_045",
+        "liora_kane_motion_046",
+        "liora_kane_motion_047",
+        "liora_kane_motion_048"
       ],
       "runtime_admitted": false,
-      "sha256": "7b98b6ce927ab24457920b7e3d15a0b87e3e3d456a3af11ab339ada160ca03a7",
-      "shard_id": "liora-kane-source-motion-v001",
-      "source": "joeville_contact_sheet_reconstruction"
+      "sha256": "811b8c9f954dbd72f901f464ce7e9fba53cbf6183a4ab4f33afb7aec45f62cb4",
+      "shard_id": "liora-kane-authored-parity-v001",
+      "source": "joeville_supplied_plus_authored_full_size"
     }
   ]
 }

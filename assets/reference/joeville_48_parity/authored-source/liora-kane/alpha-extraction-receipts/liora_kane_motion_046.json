@@ -1,0 +1,36 @@
+{
+  "canvas_normalized": false,
+  "canvas_size": [
+    1254,
+    1254
+  ],
+  "destination_path": "assets/reference/joeville_48_parity/authored-source/liora-kane/alpha-extracted/liora_kane_motion_046.png",
+  "destination_rgba_sha256": "6f5d542fe35d96140bf7c54621be8b3efeeff0f96f1c1b64f78cd14721c145ce",
+  "destination_sha256": "85142f2e6386d5a7be5b8dc067cdff22caaab11e80084855b411964d0e9ab39f",
+  "edge_contract": 1,
+  "key_color": [
+    244,
+    3,
+    232
+  ],
+  "normalization_offset": [
+    0,
+    0
+  ],
+  "normalization_scale": 1.0,
+  "schema_version": 1,
+  "silhouette_bbox": [
+    434,
+    57,
+    837,
+    1177
+  ],
+  "source_canvas_size": [
+    1254,
+    1254
+  ],
+  "source_path": "assets/reference/joeville_48_parity/authored-source/liora-kane/chroma-source/liora_kane_motion_046.png",
+  "source_sha256": "2ea440d3c4a559a185feefaec534427ecfe940a176e755a30a159a9639a49bd1",
+  "tolerance": 110,
+  "transparent_pixels_before_contract": 1282218
+}
