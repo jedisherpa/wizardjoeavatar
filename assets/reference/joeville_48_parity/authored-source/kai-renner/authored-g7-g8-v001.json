@@ -1,0 +1,356 @@
+{
+  "approval_state": "pending_visual_parity",
+  "authoring_brief_sha256": "e50fb9aace346b169c736f4728aead77f5bfb5b87fd05051b06d903688db2208",
+  "authority_manifest_sha256": "740f35730f4aa1e6c6ef96be80115c5b0e117397f792d57fdf5360452bbe78c8",
+  "canonicalization": "source_canvas_normalization_then_integer_translation_with_opt_in_oversize_fit",
+  "character_id": "kai-renner",
+  "existing_artifact_sha256": "7b73ec39dc91c0b1ac50e444bd786c893687880645b59ca6cc26b6f27b9d69e1",
+  "existing_reconstruction_sha256": "c7e404bc87f4e5000c113bf5ab3d111a0d5bc0e4e215f6c55e0b1a6343a049ef",
+  "generation_method": "built_in_imagegen_flat_chroma_then_local_alpha_extraction",
+  "profile_id": "wizardjoe_hd_alpha_1254_v001",
+  "runtime_admitted": false,
+  "schema_version": 1,
+  "sequences": {
+    "g7": {
+      "fps": 8,
+      "frames": [
+        {
+          "alpha_extracted_path": "alpha-extracted/kai_renner_motion_037.png",
+          "alpha_extracted_sha256": "4bbc87eb946fc03c757c062bab7ab6145cea7900fcbb1a0d2599d950d4d05fa4",
+          "authorship": "authored_full_size_imagegen_v1",
+          "brief_id": "kai-g7-receive",
+          "canonical_bbox": [
+            434,
+            99,
+            820,
+            1185
+          ],
+          "chroma_source_path": "chroma-source/kai_renner_motion_037.png",
+          "chroma_source_sha256": "3fd8c01a7d31bce009c54765d11ba72e01ba55682fdc4564fd1a82b16fd639f7",
+          "continuity": "Front-biased grounded receipt with direct attention, soft shoulder asymmetry, both shoes planted, and both hands relaxed below the waist.",
+          "forbidden": "Exact duplicate of motion 023 or 025, thumbs-up, walking stride, raised heel, mirrored BAKE lettering, or identity drift.",
+          "frame_index": 1,
+          "pose_id": "kai_renner_motion_037",
+          "pose_summary": "Grounded receipt of another person's request.",
+          "rgba_sha256": "03ae4d35f048a01a5524a506569df6df4adc7d2d4582ffd0ae5abbd0aa9d8a5e",
+          "slot_id": "motion-037",
+          "source_path": "frames/kai_renner_motion_037.png",
+          "source_sha256": "eb6bf4f94d8b92e5c3a106117e625effc6c1ed7d876dcce8f70c48098bd3c2d2"
+        },
+        {
+          "alpha_extracted_path": "alpha-extracted/kai_renner_motion_038.png",
+          "alpha_extracted_sha256": "b4b202f9bab5bdceb6149bf17a7106c2ee04aa3af4747312e93f18d6a881e080",
+          "authorship": "authored_full_size_imagegen_v1",
+          "brief_id": "kai-g7-welcome",
+          "canonical_bbox": [
+            385,
+            85,
+            870,
+            1185
+          ],
+          "chroma_source_path": "chroma-source/kai_renner_motion_038.png",
+          "chroma_source_sha256": "09d94bbed4e5fc56a6392e11f898079e76445c16cb38aa0619f8ed40688d2a29",
+          "continuity": "His screen-right hand opens low toward the other person while his shoulders rotate no more than ten degrees and both shoes remain locked.",
+          "forbidden": "Wave, thumbs-up, sales-pitch spread, pointing, foot slide, mirrored hand ownership, or cropped fingers.",
+          "frame_index": 2,
+          "pose_id": "kai_renner_motion_038",
+          "pose_summary": "Low open-palm welcome into the exchange.",
+          "rgba_sha256": "5e63e1123f672e7e2232c801523e797b0a6977f0960b957cfdcfc38e48cf321b",
+          "slot_id": "motion-038",
+          "source_path": "frames/kai_renner_motion_038.png",
+          "source_sha256": "c36a970de630d7687e00c993b9b726b8809f685b00235cb6b3f7960a62414a1c"
+        },
+        {
+          "alpha_extracted_path": "alpha-extracted/kai_renner_motion_039.png",
+          "alpha_extracted_sha256": "03ef7a57db1524589b610f93a7f32eaf7a8415b727422d88d8e0b4a09cfb5b6d",
+          "authorship": "authored_full_size_imagegen_v1",
+          "brief_id": "kai-g7-listen",
+          "canonical_bbox": [
+            366,
+            156,
+            889,
+            1185
+          ],
+          "chroma_source_path": "chroma-source/kai_renner_motion_039.png",
+          "chroma_source_sha256": "711e1411670bfbd37920d42bdeb96bbf263d2d1863c9c649985e4503d2c9a54e",
+          "continuity": "The open hand partially retracts as his head and upper chest incline six to eight degrees in active listening with hips and shoes fixed.",
+          "forbidden": "Bow, crouch, root translation, hand covering the face, exaggerated head turn, heel lift, or closed eyes.",
+          "frame_index": 3,
+          "pose_id": "kai_renner_motion_039",
+          "pose_summary": "Quiet active listening with the invitation still readable.",
+          "rgba_sha256": "17224f9a07461077fc03f7872312f29e451bedea40c96b55f3094829dc3eebe5",
+          "slot_id": "motion-039",
+          "source_path": "frames/kai_renner_motion_039.png",
+          "source_sha256": "674e7a9843ce5b18b1b0bf0feb6fec8180e3632c9273ba0bd9e412fd05c30fac"
+        },
+        {
+          "alpha_extracted_path": "alpha-extracted/kai_renner_motion_040.png",
+          "alpha_extracted_sha256": "63014b28b1e8a902f860024f3d088b41624779342f41622da5a57f3a8759bd57",
+          "authorship": "authored_full_size_imagegen_v1",
+          "brief_id": "kai-g7-confirm",
+          "canonical_bbox": [
+            458,
+            113,
+            797,
+            1185
+          ],
+          "chroma_source_path": "chroma-source/kai_renner_motion_040.png",
+          "chroma_source_sha256": "d954d28cbe44992892868a979d0d7d719f520529ef7d8bb73602b77cbbfa98cd",
+          "continuity": "One compact hand shape rises near the sternum to confirm a single choice while the other hand stays quiet and eye contact holds.",
+          "forbidden": "Finger aimed at the viewer, two-count gesture, thumbs-up, broad sweep, foot movement, or face obstruction.",
+          "frame_index": 4,
+          "pose_id": "kai_renner_motion_040",
+          "pose_summary": "Compact confirmation of one choice.",
+          "rgba_sha256": "65e27c368c6a46d827ed98cfb994840441e00347ee14a5b35e86117c3f04a78a",
+          "slot_id": "motion-040",
+          "source_path": "frames/kai_renner_motion_040.png",
+          "source_sha256": "b81a792eaa185cd8f9dd86c9c2bd1f6ab40a4a1241509ad4e0aa2b3b302bf050"
+        },
+        {
+          "alpha_extracted_path": "alpha-extracted/kai_renner_motion_041.png",
+          "alpha_extracted_sha256": "4874abb74a4b9821cfdb8a6c025b878e12de9c29ad2c19a9d6916ed9b7c412ac",
+          "authorship": "authored_full_size_imagegen_v1",
+          "brief_id": "kai-g7-acknowledge",
+          "canonical_bbox": [
+            458,
+            108,
+            796,
+            1185
+          ],
+          "chroma_source_path": "chroma-source/kai_renner_motion_041.png",
+          "chroma_source_sha256": "089c01542ff876a648ef959a3ba331bcd1ff7abebf5c134e6f21e09f2379623a",
+          "continuity": "The same hand settles lightly toward his chest as his spine recovers upright and his expression warms without changing costume or scale.",
+          "forbidden": "Pledge pose, hand swap, broad grin distortion, raised shoulder, walking stance, or exact motion 024 duplicate.",
+          "frame_index": 5,
+          "pose_id": "kai_renner_motion_041",
+          "pose_summary": "Warm contained acknowledgement of what was heard.",
+          "rgba_sha256": "b0164a5a06141b8aa1e9936b023771f2e3f79ce470633777adfd55830cba14b9",
+          "slot_id": "motion-041",
+          "source_path": "frames/kai_renner_motion_041.png",
+          "source_sha256": "3de3be4e2d7ce63fc0dfb2ad4b1285723cd29493f747ee83f4bd91a2702559ad"
+        },
+        {
+          "alpha_extracted_path": "alpha-extracted/kai_renner_motion_042.png",
+          "alpha_extracted_sha256": "2634cca0328074971865534cafa7b45c2b61227662b1361ab336a2ce71c10e7c",
+          "authorship": "authored_full_size_imagegen_v1",
+          "brief_id": "kai-g7-reopen",
+          "canonical_bbox": [
+            403,
+            155,
+            851,
+            1185
+          ],
+          "chroma_source_path": "chroma-source/kai_renner_motion_042.png",
+          "chroma_source_sha256": "387e1e128fd6b17309e7dbc62edc4d2380f24a524a611eb1ba7825a82fee58d5",
+          "continuity": "A low open palm releases the floor back to the other person as shoulders soften and the grounded pose resolves cleanly toward frame 037.",
+          "forbidden": "Wave, thumbs-up, pointing, root displacement, crossed feet, broad choreography, or unresolved weight.",
+          "frame_index": 6,
+          "pose_id": "kai_renner_motion_042",
+          "pose_summary": "Open-palm release that reopens and closes the exchange loop.",
+          "rgba_sha256": "102e6d21f2a98e3bd20e92144e79db839e25228b1661ccd484d1f647a90a1fd6",
+          "slot_id": "motion-042",
+          "source_path": "frames/kai_renner_motion_042.png",
+          "source_sha256": "5b29861926322f65d0e0cad3febc6b95fdfa78591cb74c9bdb149d49d0674260"
+        }
+      ],
+      "intent": "receive_welcome_listen_confirm_acknowledge_reopen",
+      "loop": true,
+      "motion_contract": {
+        "entry_handoffs": [
+          "three_quarter_idle",
+          "front_idle"
+        ],
+        "exit_handoffs": [
+          "three_quarter_idle",
+          "front_idle",
+          "g8"
+        ],
+        "family": "counter_service_exchange",
+        "hold_frame_indices": [
+          3,
+          5
+        ],
+        "interrupt_policy": "marker_safe",
+        "interruptible_frame_indices": [
+          1,
+          3,
+          6
+        ],
+        "loop_mode": "loop",
+        "root_policy": "fixed",
+        "support_policy": "dual_foot_grounded"
+      }
+    },
+    "g8": {
+      "fps": 8,
+      "frames": [
+        {
+          "alpha_extracted_path": "alpha-extracted/kai_renner_motion_043.png",
+          "alpha_extracted_sha256": "9e4d4ed70321b1116ad3b1282371a50a65819628ef58a8587cbfa9412338dfe6",
+          "authorship": "authored_full_size_imagegen_v1",
+          "brief_id": "kai-g8-collect",
+          "canonical_bbox": [
+            446,
+            99,
+            807,
+            1185
+          ],
+          "chroma_source_path": "chroma-source/kai_renner_motion_043.png",
+          "chroma_source_sha256": "81699fde588317e00da87b104d64085314aed79b7af65fca5ac13352ee2ef30a",
+          "continuity": "Audience-facing grounded intake with hands gathered low, shoulders relaxed, and a small pre-speech breath while both shoes remain planted.",
+          "forbidden": "Exact motion 025 duplicate, walking stride, raised heel, added prop, mirrored lettering, or head-scale drift.",
+          "frame_index": 1,
+          "pose_id": "kai_renner_motion_043",
+          "pose_summary": "Composed collection of a craft explanation.",
+          "rgba_sha256": "f9f8b912bdcfea96afc8908461b9c68f118b06fd2571a36641bfbfbba5671112",
+          "slot_id": "motion-043",
+          "source_path": "frames/kai_renner_motion_043.png",
+          "source_sha256": "e073e260344e5aa7c6f004172172d71a4a2d501412033ff748b1f888dbb32c6b"
+        },
+        {
+          "alpha_extracted_path": "alpha-extracted/kai_renner_motion_044.png",
+          "alpha_extracted_sha256": "93bbf8e2edb2fc2a6f672799810adf0a5cb893a724aa87d91ab0baedab2ca794",
+          "authorship": "authored_full_size_imagegen_v1",
+          "brief_id": "kai-g8-frame-subject",
+          "canonical_bbox": [
+            420,
+            69,
+            834,
+            1185
+          ],
+          "chroma_source_path": "chroma-source/kai_renner_motion_044.png",
+          "chroma_source_sha256": "62e0977b086fc2b116e33a004d375562d1bc7db8b3efbe7f292939cb745c3916",
+          "continuity": "Both hands establish a compact width at lower-chest level as if framing the subject, with elbows clear of his torso and gaze audience-facing.",
+          "forbidden": "Mimed tray or object, broad arm spread, hands touching, face obstruction, foot slide, or applause pose.",
+          "frame_index": 2,
+          "pose_id": "kai_renner_motion_044",
+          "pose_summary": "Compact two-hand framing of the subject under discussion.",
+          "rgba_sha256": "781379947994f62a42835349741eba5c2fa577e64d081a22a2982deddc5a6ddf",
+          "slot_id": "motion-044",
+          "source_path": "frames/kai_renner_motion_044.png",
+          "source_sha256": "e8afccd8fbbf41fb774e1e17472890c5f081ff317185eb2918bd3be44161187a"
+        },
+        {
+          "alpha_extracted_path": "alpha-extracted/kai_renner_motion_045.png",
+          "alpha_extracted_sha256": "c5f6ddfe16d9c3c14290239d37bfb180aa24a8d3f840a0f3acf37089156f2f1b",
+          "authorship": "authored_full_size_imagegen_v1",
+          "brief_id": "kai-g8-first-criterion",
+          "canonical_bbox": [
+            384,
+            81,
+            870,
+            1185
+          ],
+          "chroma_source_path": "chroma-source/kai_renner_motion_045.png",
+          "chroma_source_sha256": "16757beba1eb70bd95098c6718bb06efc0a1817e09a6aa0e568897d89dbcdcf3",
+          "continuity": "One readable single-count gesture states the first criterion while the other hand rests low and his chin stays audience-facing.",
+          "forbidden": "Two raised fingers, finger aimed at viewer, thumbs-up, hand covering glasses, root movement, or heel lift.",
+          "frame_index": 3,
+          "pose_id": "kai_renner_motion_045",
+          "pose_summary": "Clear statement of the first quality criterion.",
+          "rgba_sha256": "0230aae55009c6cce7030eb89cd8d2c7000a3f4917a69040dbcfb998d57acb28",
+          "slot_id": "motion-045",
+          "source_path": "frames/kai_renner_motion_045.png",
+          "source_sha256": "410121af1d048ebd99b43eb2d05c2a1cf89640275629bf85ab5ec004695db21e"
+        },
+        {
+          "alpha_extracted_path": "alpha-extracted/kai_renner_motion_046.png",
+          "alpha_extracted_sha256": "e04277d9172fe78b6b56c835b52fbf022ee65083af4505ac863dbec7343b7b22",
+          "authorship": "authored_full_size_imagegen_v1",
+          "brief_id": "kai-g8-compare",
+          "canonical_bbox": [
+            372,
+            69,
+            883,
+            1185
+          ],
+          "chroma_source_path": "chroma-source/kai_renner_motion_046.png",
+          "chroma_source_sha256": "1a0f17fe5a3b3a0f6b012eb1260c862846046434fe9c76c23b9ac4f44c85807a",
+          "continuity": "His hands trace a short lateral relationship between two alternatives while the torso follows no more than twelve degrees and hips stay centered.",
+          "forbidden": "Wide sweep, dancing, imaginary prop, crossed arms, foot movement, cropped hand, or head turn beyond the gesture.",
+          "frame_index": 4,
+          "pose_id": "kai_renner_motion_046",
+          "pose_summary": "Short two-hand comparison of alternatives.",
+          "rgba_sha256": "a903e096ba73595690825372028b6dca458ba05ad2d5231bb084a805d4b8999f",
+          "slot_id": "motion-046",
+          "source_path": "frames/kai_renner_motion_046.png",
+          "source_sha256": "de330bd1dfbac0a2970cd9eda7acf11d72c2c7024c11d5cb5de9e873ca8a2ebb"
+        },
+        {
+          "alpha_extracted_path": "alpha-extracted/kai_renner_motion_047.png",
+          "alpha_extracted_sha256": "41c673174b69949b8462984232b0aaadf58efcbb063e252b1958975e87812aa2",
+          "authorship": "authored_full_size_imagegen_v1",
+          "brief_id": "kai-g8-precision",
+          "canonical_bbox": [
+            416,
+            69,
+            837,
+            1185
+          ],
+          "chroma_source_path": "chroma-source/kai_renner_motion_047.png",
+          "chroma_source_sha256": "a261e2de679084dae5364e670385342e96409f04fb0d6c6f8b06f2caa4dfca86",
+          "continuity": "A compact pinch-like emphasis near the sternum marks a precision check while the other hand remains calm and both shoes stay planted.",
+          "forbidden": "OK sign, tiny imaginary object, pointing, exaggerated squint, hand covering mouth, scale drift, or toe pivot.",
+          "frame_index": 5,
+          "pose_id": "kai_renner_motion_047",
+          "pose_summary": "Contained precision check before approval.",
+          "rgba_sha256": "6d901f8eb3fe8ca6485a924b36460b997bd4031e486b3764351e0b5d41eeec71",
+          "slot_id": "motion-047",
+          "source_path": "frames/kai_renner_motion_047.png",
+          "source_sha256": "06be2c79a9838fdac6b95f0c59405270e0873e6017c46e2da8c5c6251fc34c5e"
+        },
+        {
+          "alpha_extracted_path": "alpha-extracted/kai_renner_motion_048.png",
+          "alpha_extracted_sha256": "1a6aabee8356070593d30becfd4a95bccc9c4b4ebc3835d1b03d4e326a784973",
+          "authorship": "authored_full_size_imagegen_v1",
+          "brief_id": "kai-g8-approve-offer",
+          "canonical_bbox": [
+            346,
+            74,
+            909,
+            1185
+          ],
+          "chroma_source_path": "chroma-source/kai_renner_motion_048.png",
+          "chroma_source_sha256": "8ce2eafb6b1ae399f929dd0fc3c328e4882415043e4f066f9047ce52b525f7fb",
+          "continuity": "One low open palm offers the finished conclusion as his shoulders soften into an exit-ready front neutral with stable cap, glasses, and feet.",
+          "forbidden": "Thumbs-up duplicate, wave, mimed food or tray, walking step, raised heel, broad choreography, or second prop.",
+          "frame_index": 6,
+          "pose_id": "kai_renner_motion_048",
+          "pose_summary": "Grounded approval and open offer of the conclusion.",
+          "rgba_sha256": "00fda3a4b8da0f692d2921e8410b0867c2ba65a6261cd90f6c265a8a8f7db610",
+          "slot_id": "motion-048",
+          "source_path": "frames/kai_renner_motion_048.png",
+          "source_sha256": "647f9e665d90cc25a199308b83420d38a41f85ec242df4fdaa435e687e8ad16e"
+        }
+      ],
+      "intent": "collect_frame_criterion_compare_precision_approve",
+      "loop": false,
+      "motion_contract": {
+        "entry_handoffs": [
+          "front_idle",
+          "g7"
+        ],
+        "exit_handoffs": [
+          "front_idle",
+          "front_walk"
+        ],
+        "family": "craft_quality_explanation",
+        "hold_frame_indices": [
+          2,
+          3,
+          5,
+          6
+        ],
+        "interrupt_policy": "marker_safe",
+        "interruptible_frame_indices": [
+          1,
+          5,
+          6
+        ],
+        "loop_mode": "hold_last",
+        "root_policy": "fixed",
+        "support_policy": "dual_foot_grounded"
+      }
+    }
+  }
+}

@@ -217,6 +217,24 @@ default was not weakened. Port 8665 presents the corrected candidate beside
 approved HD Wizard Joe. Product visual approval is still pending and runtime
 admission remains false.
 
+Kai Renner is now the sixth incomplete roster character to reach a complete
+48-pose review candidate. His immutable supplied poses `001`-`036` were merged
+with twelve new full-size RGBA poses for:
+
+- `g7`: receive, welcome, listen, confirm, acknowledge, and reopen a
+  counter-service exchange.
+- `g8`: collect, frame, identify, compare, show precision, and offer a
+  craft-quality explanation.
+
+The authored silhouettes preserve the `BAKE` cap, rectangular glasses, beard,
+mustard sweater, cobalt jeans, and grounded black shoes without introducing
+props. Three oversize frames were reduced by 1.4-1.9 percent through the
+explicit receipted path; the strict canonicalizer remains unchanged. Two
+consecutive builds produced identical artifact and library-index hashes. All
+twelve authored IDs passed direct full-size projection and port 8665 presents
+the candidate beside approved HD Wizard Joe. Product visual approval is still
+pending and runtime admission remains false.
+
 | Character | Candidate poses | Missing poses | State |
 | --- | ---: | ---: | --- |
 | Orion Vale | 48 | 0 | Full-size technical review passed; product visual approval pending |
@@ -224,8 +242,9 @@ admission remains false.
 | Selene Hart | 48 | 0 | Full-size technical review passed; product visual approval pending |
 | Thorne Vale | 48 | 0 | Full-size technical review passed; product visual approval pending |
 | Elara Voss | 48 | 0 | Full-size technical review passed; product visual approval pending |
-| Remaining roster | 300 | 60 | Authoring/review required |
-| **Total** | **516** | **60** | **576 target slots** |
+| Kai Renner | 48 | 0 | Full-size technical review passed; product visual approval pending |
+| Remaining roster | 240 | 48 | Authoring/review required |
+| **Total** | **528** | **48** | **576 target slots** |
 
 Orion candidate receipts:
 
@@ -267,6 +286,16 @@ Elara candidate receipts:
 - Review motion contract: `a24a1597aad39c522b3f77356ca141e427fa3b8b8f8b022fcffc19072a697b0b`
 - Contact sheet: `fcef489937907925a0db255fcfedce3480f87a87367ee20638f0fe642f361b7a`
 - Canonicalization receipts: `ec5b6f4ed2410c0f0afc56a79c3c0811ab1554f372221488f3e70da5306c5dfb`
+
+Kai candidate receipts:
+
+- Artifact: `2e15a54fda170005919711a0d9177253880cd169cd5d300349845d6b48569873`
+- Library index: `768854f8c57528f51768198bc126d75dd61199cd372b6abca41e2aa8a35ab980`
+- Reconstruction: `f300216c7c571cf29bc488bf939e9ca0d4d0bc4483964e56f44671e5413a32b8`
+- Review motion contract: `0e4c99b1c398f7666362e26992b9e8be2d2206d66dcab697207eead2796580be`
+- Contact sheet: `2ec923cf6b3bc0ea45eee4d6bf065feb0f39fdfa5e35e6bc74f885da0e95bfe2`
+- Alpha-extraction receipts: `46c6c458f911423bb244df328b1780fd4a54b1b0a506d80d38f4e150f88f1828`
+- Canonicalization receipts: `3249ece047e6c14330aae17d162de8de24383be5e18591ab222c07cd78c7ce31`
 
 ## Roster Boundary
 

@@ -1,0 +1,36 @@
+{
+  "canvas_normalized": true,
+  "canvas_size": [
+    1254,
+    1254
+  ],
+  "destination_path": "/Users/paul/Documents/WizardJoeAsci/worktrees/wizardjoe-character-director/assets/reference/joeville_48_parity/authored-source/kai-renner/alpha-extracted/kai_renner_motion_040.png",
+  "destination_rgba_sha256": "4a482052019285df9309e824291ac425a5da32940a9c0ca67ef31ef7bc4a1cc3",
+  "destination_sha256": "63014b28b1e8a902f860024f3d088b41624779342f41622da5a57f3a8759bd57",
+  "edge_contract": 1,
+  "key_color": [
+    250,
+    2,
+    247
+  ],
+  "normalization_offset": [
+    209,
+    0
+  ],
+  "normalization_scale": 0.81640625,
+  "schema_version": 1,
+  "silhouette_bbox": [
+    468,
+    88,
+    807,
+    1160
+  ],
+  "source_canvas_size": [
+    1024,
+    1536
+  ],
+  "source_path": "/Users/paul/Documents/WizardJoeAsci/worktrees/wizardjoe-character-director/assets/reference/joeville_48_parity/authored-source/kai-renner/chroma-source/kai_renner_motion_040.png",
+  "source_sha256": "d954d28cbe44992892868a979d0d7d719f520529ef7d8bb73602b77cbbfa98cd",
+  "tolerance": 110,
+  "transparent_pixels_before_contract": 1339277
+}

@@ -145,6 +145,11 @@ def _parse_args() -> argparse.Namespace:
             "canonical safety margins, recording the transform in the receipt."
         ),
     )
+    parser.add_argument(
+        "--receipt",
+        type=Path,
+        help="Optional JSON path for the canonicalization receipt.",
+    )
     return parser.parse_args()
 
 
@@ -156,6 +161,13 @@ def main() -> int:
         authority_path=args.authority.resolve(),
         fit_oversize=args.fit_oversize,
     )
+    if args.receipt is not None:
+        receipt_path = args.receipt.resolve()
+        receipt_path.parent.mkdir(parents=True, exist_ok=True)
+        receipt_path.write_text(
+            json.dumps(result, indent=2, sort_keys=True) + "\n",
+            encoding="utf-8",
+        )
     print(json.dumps(result, sort_keys=True))
     return 0
 

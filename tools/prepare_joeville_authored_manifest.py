@@ -28,8 +28,31 @@ def _read_json(path: Path) -> dict[str, Any]:
 
 def _canonicalization_mode(output_root: Path) -> str:
     receipts_path = output_root / "canonicalization-receipts-v001.json"
+    extraction_path = output_root / "alpha-extraction-receipts-v001.json"
+    source_canvas_normalized = False
+    if extraction_path.is_file():
+        extraction_receipts = json.loads(
+            extraction_path.read_text(encoding="utf-8")
+        )
+        if not isinstance(extraction_receipts, list) or not extraction_receipts:
+            raise ValueError(
+                f"{extraction_path} must contain a non-empty JSON array"
+            )
+        if any(
+            not isinstance(receipt, dict)
+            for receipt in extraction_receipts
+        ):
+            raise ValueError(f"{extraction_path} contains an invalid receipt")
+        source_canvas_normalized = any(
+            bool(receipt.get("canvas_normalized"))
+            for receipt in extraction_receipts
+        )
     if not receipts_path.is_file():
-        return "integer_translation_only_no_resampling"
+        return (
+            "source_canvas_normalization_then_integer_translation"
+            if source_canvas_normalized
+            else "integer_translation_only_no_resampling"
+        )
     receipts = json.loads(receipts_path.read_text(encoding="utf-8"))
     if not isinstance(receipts, list) or not receipts:
         raise ValueError(
@@ -37,7 +60,15 @@ def _canonicalization_mode(output_root: Path) -> str:
         )
     if any(not isinstance(receipt, dict) for receipt in receipts):
         raise ValueError(f"{receipts_path} contains an invalid receipt")
-    if any(bool(receipt.get("resampled")) for receipt in receipts):
+    oversize_fit = any(bool(receipt.get("resampled")) for receipt in receipts)
+    if source_canvas_normalized and oversize_fit:
+        return (
+            "source_canvas_normalization_then_integer_translation_with_"
+            "opt_in_oversize_fit"
+        )
+    if source_canvas_normalized:
+        return "source_canvas_normalization_then_integer_translation"
+    if oversize_fit:
         return "integer_translation_with_opt_in_oversize_fit"
     return "integer_translation_only_no_resampling"
 

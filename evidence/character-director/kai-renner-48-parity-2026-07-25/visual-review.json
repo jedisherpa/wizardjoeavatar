@@ -1,0 +1,97 @@
+{
+  "artifact_sha256": "2e15a54fda170005919711a0d9177253880cd169cd5d300349845d6b48569873",
+  "candidate_pose_count": 48,
+  "character_id": "kai-renner",
+  "checks": {
+    "all_authored_poses_projected_full_size": true,
+    "bake_cap_identity_stable": true,
+    "dark_background_fringe_absent": true,
+    "dual_foot_contacts_stable": true,
+    "g7_counter_service_exchange_verified": true,
+    "g8_craft_quality_explanation_verified": true,
+    "glasses_beard_and_costume_stable": true,
+    "prop_free_silhouettes": true,
+    "transparent_backgrounds": true,
+    "uncropped_silhouettes": true
+  },
+  "library_index_sha256": "768854f8c57528f51768198bc126d75dd61199cd372b6abca41e2aa8a35ab980",
+  "product_visual_approval": "pending",
+  "rejected_intermediates": [
+    {
+      "pose_ids": [
+        "kai_renner_motion_037"
+      ],
+      "reason": "first source was oversize and the next correction was visibly undersized; the accepted replacement fills the canonical frame without resampling"
+    },
+    {
+      "pose_ids": [
+        "kai_renner_motion_041"
+      ],
+      "reason": "first acknowledgement read as a pledge; regenerated with a lower hand placement"
+    },
+    {
+      "pose_ids": [
+        "kai_renner_motion_044"
+      ],
+      "reason": "first framing gesture read as duplicate thumbs-up; regenerated with compact inward-facing hands"
+    }
+  ],
+  "review_projection": true,
+  "review_url": "http://127.0.0.1:8665/",
+  "runtime_admitted": false,
+  "schema_version": 1,
+  "screenshots": [
+    {
+      "path": "side-by-side-candidate.png",
+      "sha256": "e1b9d0d24368a9fb1e18530a379da053e5c14052df3f9b44cfeca48b9677dd89"
+    },
+    {
+      "path": "pose-037.png",
+      "sha256": "37db78d90ed711aa3b6a69f22a5ebc69b8cb1900262e70a9a9c998214db26ade"
+    },
+    {
+      "path": "pose-038.png",
+      "sha256": "509f122f09e3768bd6f58dde9a5591234369a7888f8f9c613256e1041b810e79"
+    },
+    {
+      "path": "pose-039.png",
+      "sha256": "599d008989f61915e3028947245b682d3cc5cc71858a9108703474a3ada8afde"
+    },
+    {
+      "path": "pose-040.png",
+      "sha256": "acf8aa5cba00ef3426fa3e60e2fe74350eda76fec8cc21ddb9b71b63257e94af"
+    },
+    {
+      "path": "pose-041.png",
+      "sha256": "8d3f3f82c498f7246028b1bb708cd3e1f2a9b74a48883a5398410e1c0d63301e"
+    },
+    {
+      "path": "pose-042.png",
+      "sha256": "63ffc7908adb99ff599113c064867938d8708f23594f6b6a72c8a7e3794f57f0"
+    },
+    {
+      "path": "pose-043.png",
+      "sha256": "970c53f4474805aeafb270579fefe1386b23e1a4ed071dbdb516a1e56e0d8502"
+    },
+    {
+      "path": "pose-044.png",
+      "sha256": "8ab677f8fdabc8d65b7b28b80ce6d7afdec960ab25d7fe328bbb6eb1f58560cb"
+    },
+    {
+      "path": "pose-045.png",
+      "sha256": "cc9d36357156eab0c9e41b90d4a03f1ca77703c2e8799748401f388f425e223a"
+    },
+    {
+      "path": "pose-046.png",
+      "sha256": "7baca003c59a5e48e561f0d73a76a1637adaf0b50c8e975572c422b7912f3a20"
+    },
+    {
+      "path": "pose-047.png",
+      "sha256": "41bc78fc17517c14e6415e09ba14915c8b8f833b0e8179f79ccd9c871c9553e1"
+    },
+    {
+      "path": "pose-048.png",
+      "sha256": "2932f79b82fa5233825ee0667885327fe774bf3626363d71f5e074c4c441e54f"
+    }
+  ]
+}

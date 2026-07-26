@@ -1,0 +1,179 @@
+{
+  "character_id": "kai-renner",
+  "schema_version": 1,
+  "sequences": {
+    "g7": {
+      "fps": 8,
+      "frames": [
+        {
+          "brief_id": "kai-g7-receive",
+          "continuity": "Front-biased grounded receipt with direct attention, soft shoulder asymmetry, both shoes planted, and both hands relaxed below the waist.",
+          "forbidden": "Exact duplicate of motion 023 or 025, thumbs-up, walking stride, raised heel, mirrored BAKE lettering, or identity drift.",
+          "frame_index": 1,
+          "pose_id": "kai_renner_motion_037",
+          "pose_summary": "Grounded receipt of another person's request.",
+          "slot_id": "motion-037"
+        },
+        {
+          "brief_id": "kai-g7-welcome",
+          "continuity": "His screen-right hand opens low toward the other person while his shoulders rotate no more than ten degrees and both shoes remain locked.",
+          "forbidden": "Wave, thumbs-up, sales-pitch spread, pointing, foot slide, mirrored hand ownership, or cropped fingers.",
+          "frame_index": 2,
+          "pose_id": "kai_renner_motion_038",
+          "pose_summary": "Low open-palm welcome into the exchange.",
+          "slot_id": "motion-038"
+        },
+        {
+          "brief_id": "kai-g7-listen",
+          "continuity": "The open hand partially retracts as his head and upper chest incline six to eight degrees in active listening with hips and shoes fixed.",
+          "forbidden": "Bow, crouch, root translation, hand covering the face, exaggerated head turn, heel lift, or closed eyes.",
+          "frame_index": 3,
+          "pose_id": "kai_renner_motion_039",
+          "pose_summary": "Quiet active listening with the invitation still readable.",
+          "slot_id": "motion-039"
+        },
+        {
+          "brief_id": "kai-g7-confirm",
+          "continuity": "One compact hand shape rises near the sternum to confirm a single choice while the other hand stays quiet and eye contact holds.",
+          "forbidden": "Finger aimed at the viewer, two-count gesture, thumbs-up, broad sweep, foot movement, or face obstruction.",
+          "frame_index": 4,
+          "pose_id": "kai_renner_motion_040",
+          "pose_summary": "Compact confirmation of one choice.",
+          "slot_id": "motion-040"
+        },
+        {
+          "brief_id": "kai-g7-acknowledge",
+          "continuity": "The same hand settles lightly toward his chest as his spine recovers upright and his expression warms without changing costume or scale.",
+          "forbidden": "Pledge pose, hand swap, broad grin distortion, raised shoulder, walking stance, or exact motion 024 duplicate.",
+          "frame_index": 5,
+          "pose_id": "kai_renner_motion_041",
+          "pose_summary": "Warm contained acknowledgement of what was heard.",
+          "slot_id": "motion-041"
+        },
+        {
+          "brief_id": "kai-g7-reopen",
+          "continuity": "A low open palm releases the floor back to the other person as shoulders soften and the grounded pose resolves cleanly toward frame 037.",
+          "forbidden": "Wave, thumbs-up, pointing, root displacement, crossed feet, broad choreography, or unresolved weight.",
+          "frame_index": 6,
+          "pose_id": "kai_renner_motion_042",
+          "pose_summary": "Open-palm release that reopens and closes the exchange loop.",
+          "slot_id": "motion-042"
+        }
+      ],
+      "intent": "receive_welcome_listen_confirm_acknowledge_reopen",
+      "loop": true,
+      "motion_contract": {
+        "entry_handoffs": [
+          "three_quarter_idle",
+          "front_idle"
+        ],
+        "exit_handoffs": [
+          "three_quarter_idle",
+          "front_idle",
+          "g8"
+        ],
+        "family": "counter_service_exchange",
+        "hold_frame_indices": [
+          3,
+          5
+        ],
+        "interrupt_policy": "marker_safe",
+        "interruptible_frame_indices": [
+          1,
+          3,
+          6
+        ],
+        "loop_mode": "loop",
+        "root_policy": "fixed",
+        "support_policy": "dual_foot_grounded"
+      }
+    },
+    "g8": {
+      "fps": 8,
+      "frames": [
+        {
+          "brief_id": "kai-g8-collect",
+          "continuity": "Audience-facing grounded intake with hands gathered low, shoulders relaxed, and a small pre-speech breath while both shoes remain planted.",
+          "forbidden": "Exact motion 025 duplicate, walking stride, raised heel, added prop, mirrored lettering, or head-scale drift.",
+          "frame_index": 1,
+          "pose_id": "kai_renner_motion_043",
+          "pose_summary": "Composed collection of a craft explanation.",
+          "slot_id": "motion-043"
+        },
+        {
+          "brief_id": "kai-g8-frame-subject",
+          "continuity": "Both hands establish a compact width at lower-chest level as if framing the subject, with elbows clear of his torso and gaze audience-facing.",
+          "forbidden": "Mimed tray or object, broad arm spread, hands touching, face obstruction, foot slide, or applause pose.",
+          "frame_index": 2,
+          "pose_id": "kai_renner_motion_044",
+          "pose_summary": "Compact two-hand framing of the subject under discussion.",
+          "slot_id": "motion-044"
+        },
+        {
+          "brief_id": "kai-g8-first-criterion",
+          "continuity": "One readable single-count gesture states the first criterion while the other hand rests low and his chin stays audience-facing.",
+          "forbidden": "Two raised fingers, finger aimed at viewer, thumbs-up, hand covering glasses, root movement, or heel lift.",
+          "frame_index": 3,
+          "pose_id": "kai_renner_motion_045",
+          "pose_summary": "Clear statement of the first quality criterion.",
+          "slot_id": "motion-045"
+        },
+        {
+          "brief_id": "kai-g8-compare",
+          "continuity": "His hands trace a short lateral relationship between two alternatives while the torso follows no more than twelve degrees and hips stay centered.",
+          "forbidden": "Wide sweep, dancing, imaginary prop, crossed arms, foot movement, cropped hand, or head turn beyond the gesture.",
+          "frame_index": 4,
+          "pose_id": "kai_renner_motion_046",
+          "pose_summary": "Short two-hand comparison of alternatives.",
+          "slot_id": "motion-046"
+        },
+        {
+          "brief_id": "kai-g8-precision",
+          "continuity": "A compact pinch-like emphasis near the sternum marks a precision check while the other hand remains calm and both shoes stay planted.",
+          "forbidden": "OK sign, tiny imaginary object, pointing, exaggerated squint, hand covering mouth, scale drift, or toe pivot.",
+          "frame_index": 5,
+          "pose_id": "kai_renner_motion_047",
+          "pose_summary": "Contained precision check before approval.",
+          "slot_id": "motion-047"
+        },
+        {
+          "brief_id": "kai-g8-approve-offer",
+          "continuity": "One low open palm offers the finished conclusion as his shoulders soften into an exit-ready front neutral with stable cap, glasses, and feet.",
+          "forbidden": "Thumbs-up duplicate, wave, mimed food or tray, walking step, raised heel, broad choreography, or second prop.",
+          "frame_index": 6,
+          "pose_id": "kai_renner_motion_048",
+          "pose_summary": "Grounded approval and open offer of the conclusion.",
+          "slot_id": "motion-048"
+        }
+      ],
+      "intent": "collect_frame_criterion_compare_precision_approve",
+      "loop": false,
+      "motion_contract": {
+        "entry_handoffs": [
+          "front_idle",
+          "g7"
+        ],
+        "exit_handoffs": [
+          "front_idle",
+          "front_walk"
+        ],
+        "family": "craft_quality_explanation",
+        "hold_frame_indices": [
+          2,
+          3,
+          5,
+          6
+        ],
+        "interrupt_policy": "marker_safe",
+        "interruptible_frame_indices": [
+          1,
+          5,
+          6
+        ],
+        "loop_mode": "hold_last",
+        "root_policy": "fixed",
+        "support_policy": "dual_foot_grounded"
+      }
+    }
+  }
+}
