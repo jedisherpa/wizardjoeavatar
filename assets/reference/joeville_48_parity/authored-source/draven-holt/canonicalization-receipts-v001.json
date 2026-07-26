@@ -1,0 +1,422 @@
+[
+  {
+    "authority_manifest_sha256": "740f35730f4aa1e6c6ef96be80115c5b0e117397f792d57fdf5360452bbe78c8",
+    "destination_bbox": [
+      350,
+      69,
+      903,
+      1185
+    ],
+    "destination_path": "/Users/paul/Documents/WizardJoeAsci/worktrees/wizardjoe-character-director/assets/reference/joeville_48_parity/authored-source/draven-holt/frames/draven_holt_motion_037.png",
+    "destination_rgba_sha256": "7372ad3dbcc071f902709bbf6a4e6f2fe188f1c43b878c01437fe2b9cb50a5cf",
+    "destination_sha256": "8d6d0ebfea597aa52e13732270838a2a1f2f2c2931ed52cc534d66974cc3061f",
+    "fitted_bbox": [
+      0,
+      0,
+      553,
+      1116
+    ],
+    "profile_id": "wizardjoe_hd_alpha_1254_v001",
+    "resample_filter": "lanczos",
+    "resampled": true,
+    "scale": 0.998211091234347,
+    "schema_version": 1,
+    "source_bbox": [
+      349,
+      52,
+      903,
+      1170
+    ],
+    "source_path": "/Users/paul/Documents/WizardJoeAsci/worktrees/wizardjoe-character-director/assets/reference/joeville_48_parity/authored-source/draven-holt/alpha-extracted/draven_holt_motion_037.png",
+    "source_sha256": "85752d6816cb6482cbb384213115dd73fdd25d5552582b25a2622fabcd08ac85",
+    "translation": {
+      "x": 350,
+      "y": 69
+    }
+  },
+  {
+    "authority_manifest_sha256": "740f35730f4aa1e6c6ef96be80115c5b0e117397f792d57fdf5360452bbe78c8",
+    "destination_bbox": [
+      296,
+      69,
+      958,
+      1185
+    ],
+    "destination_path": "/Users/paul/Documents/WizardJoeAsci/worktrees/wizardjoe-character-director/assets/reference/joeville_48_parity/authored-source/draven-holt/frames/draven_holt_motion_038.png",
+    "destination_rgba_sha256": "61a567621afc7d99d69f82da49e3ec12e3978f251388dd2d23ec720f6d825f75",
+    "destination_sha256": "38038105a363480ccc8bf7fd58dcebbe1ac7aa7e2c2f6825056007214e73f3ad",
+    "fitted_bbox": [
+      0,
+      0,
+      662,
+      1116
+    ],
+    "profile_id": "wizardjoe_hd_alpha_1254_v001",
+    "resample_filter": "lanczos",
+    "resampled": true,
+    "scale": 0.9637305699481865,
+    "schema_version": 1,
+    "source_bbox": [
+      236,
+      34,
+      923,
+      1192
+    ],
+    "source_path": "/Users/paul/Documents/WizardJoeAsci/worktrees/wizardjoe-character-director/assets/reference/joeville_48_parity/authored-source/draven-holt/alpha-extracted/draven_holt_motion_038.png",
+    "source_sha256": "2339c9606197e1e4e33a9efb991b1a4df4639b9e80ce060ffc32fcaa64833d29",
+    "translation": {
+      "x": 296,
+      "y": 69
+    }
+  },
+  {
+    "authority_manifest_sha256": "740f35730f4aa1e6c6ef96be80115c5b0e117397f792d57fdf5360452bbe78c8",
+    "destination_bbox": [
+      370,
+      69,
+      885,
+      1185
+    ],
+    "destination_path": "/Users/paul/Documents/WizardJoeAsci/worktrees/wizardjoe-character-director/assets/reference/joeville_48_parity/authored-source/draven-holt/frames/draven_holt_motion_039.png",
+    "destination_rgba_sha256": "2994540d202ad8378af003a8244a0c31a104f4456bee858d4f3229fa48d51274",
+    "destination_sha256": "c961590d59fa9f0096b35391543034d8c64c776e1426ca863067f6231fd8ec2d",
+    "fitted_bbox": [
+      0,
+      0,
+      515,
+      1116
+    ],
+    "profile_id": "wizardjoe_hd_alpha_1254_v001",
+    "resample_filter": "lanczos",
+    "resampled": true,
+    "scale": 0.9911190053285968,
+    "schema_version": 1,
+    "source_bbox": [
+      383,
+      63,
+      903,
+      1189
+    ],
+    "source_path": "/Users/paul/Documents/WizardJoeAsci/worktrees/wizardjoe-character-director/assets/reference/joeville_48_parity/authored-source/draven-holt/alpha-extracted/draven_holt_motion_039.png",
+    "source_sha256": "a206288f60cb67e72b2517a6eabbcc2c0bd9be2beedd43db2ff29444f5809c2d",
+    "translation": {
+      "x": 370,
+      "y": 69
+    }
+  },
+  {
+    "authority_manifest_sha256": "740f35730f4aa1e6c6ef96be80115c5b0e117397f792d57fdf5360452bbe78c8",
+    "destination_bbox": [
+      352,
+      69,
+      903,
+      1185
+    ],
+    "destination_path": "/Users/paul/Documents/WizardJoeAsci/worktrees/wizardjoe-character-director/assets/reference/joeville_48_parity/authored-source/draven-holt/frames/draven_holt_motion_040.png",
+    "destination_rgba_sha256": "ce0b4df4155b357e7fa328fa7241f3b496bc9f37192184b8c85a616ad24f90ac",
+    "destination_sha256": "bb755f5ba920dae357e910ad9850ac97355b9dfc7e77ce26c177d3fc5d5ea57c",
+    "fitted_bbox": [
+      0,
+      0,
+      551,
+      1116
+    ],
+    "profile_id": "wizardjoe_hd_alpha_1254_v001",
+    "resample_filter": "lanczos",
+    "resampled": true,
+    "scale": 0.9604130808950087,
+    "schema_version": 1,
+    "source_bbox": [
+      341,
+      44,
+      915,
+      1206
+    ],
+    "source_path": "/Users/paul/Documents/WizardJoeAsci/worktrees/wizardjoe-character-director/assets/reference/joeville_48_parity/authored-source/draven-holt/alpha-extracted/draven_holt_motion_040.png",
+    "source_sha256": "ec460db9683b9c0d264c27804a60987d0fce88f055e991921d7f49c5b1e07cfc",
+    "translation": {
+      "x": 352,
+      "y": 69
+    }
+  },
+  {
+    "authority_manifest_sha256": "740f35730f4aa1e6c6ef96be80115c5b0e117397f792d57fdf5360452bbe78c8",
+    "destination_bbox": [
+      308,
+      69,
+      946,
+      1185
+    ],
+    "destination_path": "/Users/paul/Documents/WizardJoeAsci/worktrees/wizardjoe-character-director/assets/reference/joeville_48_parity/authored-source/draven-holt/frames/draven_holt_motion_041.png",
+    "destination_rgba_sha256": "e9f996797d0e402c154e2e2bf37f1c0d2e68f5a4e14ffaf69f0be0d60157117e",
+    "destination_sha256": "a5eb1e2223855e631cbde3d6ef2b5cedbdf5ff64a9d9e4926dca941c98c2e1c3",
+    "fitted_bbox": [
+      0,
+      0,
+      638,
+      1116
+    ],
+    "profile_id": "wizardjoe_hd_alpha_1254_v001",
+    "resample_filter": "lanczos",
+    "resampled": true,
+    "scale": 0.9653979238754326,
+    "schema_version": 1,
+    "source_bbox": [
+      244,
+      46,
+      905,
+      1202
+    ],
+    "source_path": "/Users/paul/Documents/WizardJoeAsci/worktrees/wizardjoe-character-director/assets/reference/joeville_48_parity/authored-source/draven-holt/alpha-extracted/draven_holt_motion_041.png",
+    "source_sha256": "7eb07b32722d7129cbb5b6223a4bed11283fa3773878cf9d1dd1e50b8b8fbb23",
+    "translation": {
+      "x": 308,
+      "y": 69
+    }
+  },
+  {
+    "authority_manifest_sha256": "740f35730f4aa1e6c6ef96be80115c5b0e117397f792d57fdf5360452bbe78c8",
+    "destination_bbox": [
+      311,
+      69,
+      943,
+      1185
+    ],
+    "destination_path": "/Users/paul/Documents/WizardJoeAsci/worktrees/wizardjoe-character-director/assets/reference/joeville_48_parity/authored-source/draven-holt/frames/draven_holt_motion_042.png",
+    "destination_rgba_sha256": "fa3ca91f9988d689c64b9cb234dd9c5c93e7e7515e3720e9209055788deee108",
+    "destination_sha256": "291cd1d3e60223d199e2b86616e1df67037cdc14a6fe080efbb900d8fdcd1a7f",
+    "fitted_bbox": [
+      0,
+      0,
+      632,
+      1116
+    ],
+    "profile_id": "wizardjoe_hd_alpha_1254_v001",
+    "resample_filter": "lanczos",
+    "resampled": true,
+    "scale": 0.9653979238754326,
+    "schema_version": 1,
+    "source_bbox": [
+      261,
+      46,
+      916,
+      1202
+    ],
+    "source_path": "/Users/paul/Documents/WizardJoeAsci/worktrees/wizardjoe-character-director/assets/reference/joeville_48_parity/authored-source/draven-holt/alpha-extracted/draven_holt_motion_042.png",
+    "source_sha256": "4f85d25b1210c7ec91113127213941f2ba261bdb1d51490517f739a5cbffdb62",
+    "translation": {
+      "x": 311,
+      "y": 69
+    }
+  },
+  {
+    "authority_manifest_sha256": "740f35730f4aa1e6c6ef96be80115c5b0e117397f792d57fdf5360452bbe78c8",
+    "destination_bbox": [
+      302,
+      69,
+      951,
+      1185
+    ],
+    "destination_path": "/Users/paul/Documents/WizardJoeAsci/worktrees/wizardjoe-character-director/assets/reference/joeville_48_parity/authored-source/draven-holt/frames/draven_holt_motion_043.png",
+    "destination_rgba_sha256": "1f77d41eee077a3ed8767c351426603308250a20eb058aec00cb5c9940805800",
+    "destination_sha256": "aa76d65ac488612f2b39661e71ec83a215e9f3bc023bd43b8c885c3c5f0949ba",
+    "fitted_bbox": [
+      0,
+      0,
+      649,
+      1116
+    ],
+    "profile_id": "wizardjoe_hd_alpha_1254_v001",
+    "resample_filter": "lanczos",
+    "resampled": true,
+    "scale": 0.9955396966993756,
+    "schema_version": 1,
+    "source_bbox": [
+      244,
+      45,
+      896,
+      1166
+    ],
+    "source_path": "/Users/paul/Documents/WizardJoeAsci/worktrees/wizardjoe-character-director/assets/reference/joeville_48_parity/authored-source/draven-holt/alpha-extracted/draven_holt_motion_043.png",
+    "source_sha256": "9b752cc59b21d104fd680d2e1853da4ff6a41a986719358c1a40f4abb9a58d65",
+    "translation": {
+      "x": 302,
+      "y": 69
+    }
+  },
+  {
+    "authority_manifest_sha256": "740f35730f4aa1e6c6ef96be80115c5b0e117397f792d57fdf5360452bbe78c8",
+    "destination_bbox": [
+      344,
+      69,
+      911,
+      1185
+    ],
+    "destination_path": "/Users/paul/Documents/WizardJoeAsci/worktrees/wizardjoe-character-director/assets/reference/joeville_48_parity/authored-source/draven-holt/frames/draven_holt_motion_044.png",
+    "destination_rgba_sha256": "45c69a6cff3b214136fbdec2b37cc4e50f74fee2098d5df931dc85be02487ea8",
+    "destination_sha256": "798ba4d25e576292740b04e76d5d8c0925b269768705bd196e8dd57bff63189f",
+    "fitted_bbox": [
+      0,
+      0,
+      567,
+      1116
+    ],
+    "profile_id": "wizardjoe_hd_alpha_1254_v001",
+    "resample_filter": "lanczos",
+    "resampled": true,
+    "scale": 0.9662337662337662,
+    "schema_version": 1,
+    "source_bbox": [
+      329,
+      47,
+      916,
+      1202
+    ],
+    "source_path": "/Users/paul/Documents/WizardJoeAsci/worktrees/wizardjoe-character-director/assets/reference/joeville_48_parity/authored-source/draven-holt/alpha-extracted/draven_holt_motion_044.png",
+    "source_sha256": "76d767e363d8e5b8d39957a37f982409f9c18fdcdd19df09be05c9cd76de3d06",
+    "translation": {
+      "x": 344,
+      "y": 69
+    }
+  },
+  {
+    "authority_manifest_sha256": "740f35730f4aa1e6c6ef96be80115c5b0e117397f792d57fdf5360452bbe78c8",
+    "destination_bbox": [
+      237,
+      69,
+      1017,
+      1185
+    ],
+    "destination_path": "/Users/paul/Documents/WizardJoeAsci/worktrees/wizardjoe-character-director/assets/reference/joeville_48_parity/authored-source/draven-holt/frames/draven_holt_motion_045.png",
+    "destination_rgba_sha256": "94c291c60aa0c4ff42894eb5b7b311cf7b4d00b37470b7b51f93962ed090b41b",
+    "destination_sha256": "65932572335df6973020806602c4d47d454e6afe33ee348f5462a7e9935a04c8",
+    "fitted_bbox": [
+      0,
+      0,
+      780,
+      1116
+    ],
+    "profile_id": "wizardjoe_hd_alpha_1254_v001",
+    "resample_filter": "lanczos",
+    "resampled": true,
+    "scale": 0.9653979238754326,
+    "schema_version": 1,
+    "source_bbox": [
+      141,
+      38,
+      949,
+      1194
+    ],
+    "source_path": "/Users/paul/Documents/WizardJoeAsci/worktrees/wizardjoe-character-director/assets/reference/joeville_48_parity/authored-source/draven-holt/alpha-extracted/draven_holt_motion_045.png",
+    "source_sha256": "889e6f47f2b2bab1896bf375c2cd2d397cf781011ca4879321bf97ae32f863f1",
+    "translation": {
+      "x": 237,
+      "y": 69
+    }
+  },
+  {
+    "authority_manifest_sha256": "740f35730f4aa1e6c6ef96be80115c5b0e117397f792d57fdf5360452bbe78c8",
+    "destination_bbox": [
+      258,
+      69,
+      995,
+      1185
+    ],
+    "destination_path": "/Users/paul/Documents/WizardJoeAsci/worktrees/wizardjoe-character-director/assets/reference/joeville_48_parity/authored-source/draven-holt/frames/draven_holt_motion_046.png",
+    "destination_rgba_sha256": "ea9c387677ff88703d4814a9e4f8e5422a31d7332118c24fc6aa71a6f19e621a",
+    "destination_sha256": "07c8def54aa6c4c2000a64e6d090c689b3e62f708fa8a1399a4ee16fb1d515ae",
+    "fitted_bbox": [
+      0,
+      0,
+      737,
+      1116
+    ],
+    "profile_id": "wizardjoe_hd_alpha_1254_v001",
+    "resample_filter": "lanczos",
+    "resampled": true,
+    "scale": 0.9738219895287958,
+    "schema_version": 1,
+    "source_bbox": [
+      160,
+      48,
+      917,
+      1194
+    ],
+    "source_path": "/Users/paul/Documents/WizardJoeAsci/worktrees/wizardjoe-character-director/assets/reference/joeville_48_parity/authored-source/draven-holt/alpha-extracted/draven_holt_motion_046.png",
+    "source_sha256": "a84fa5aae0defdaada025416e6c573048ad6f856a7b015f05734be03ae0a7b52",
+    "translation": {
+      "x": 258,
+      "y": 69
+    }
+  },
+  {
+    "authority_manifest_sha256": "740f35730f4aa1e6c6ef96be80115c5b0e117397f792d57fdf5360452bbe78c8",
+    "destination_bbox": [
+      316,
+      69,
+      939,
+      1185
+    ],
+    "destination_path": "/Users/paul/Documents/WizardJoeAsci/worktrees/wizardjoe-character-director/assets/reference/joeville_48_parity/authored-source/draven-holt/frames/draven_holt_motion_047.png",
+    "destination_rgba_sha256": "6c338cf381058b702fa9cda06d68aec6c14ca859a72df0f2191a612d66a2997f",
+    "destination_sha256": "4fb5557136aa736b6ec1fbeeea0322ec0696956541643dad364dfed14466e23f",
+    "fitted_bbox": [
+      0,
+      0,
+      623,
+      1116
+    ],
+    "profile_id": "wizardjoe_hd_alpha_1254_v001",
+    "resample_filter": "lanczos",
+    "resampled": true,
+    "scale": 0.9620689655172414,
+    "schema_version": 1,
+    "source_bbox": [
+      269,
+      38,
+      917,
+      1198
+    ],
+    "source_path": "/Users/paul/Documents/WizardJoeAsci/worktrees/wizardjoe-character-director/assets/reference/joeville_48_parity/authored-source/draven-holt/alpha-extracted/draven_holt_motion_047.png",
+    "source_sha256": "b537d734b15f0cec62038e48dbe1feaad31d297de18f9775b1bd152ec1624708",
+    "translation": {
+      "x": 316,
+      "y": 69
+    }
+  },
+  {
+    "authority_manifest_sha256": "740f35730f4aa1e6c6ef96be80115c5b0e117397f792d57fdf5360452bbe78c8",
+    "destination_bbox": [
+      312,
+      69,
+      941,
+      1185
+    ],
+    "destination_path": "/Users/paul/Documents/WizardJoeAsci/worktrees/wizardjoe-character-director/assets/reference/joeville_48_parity/authored-source/draven-holt/frames/draven_holt_motion_048.png",
+    "destination_rgba_sha256": "452e3918b8e406b7b90f00eb092968d83404e5c857c6861f49ed7a348125b6c5",
+    "destination_sha256": "10527dd03f44612c86c0978595dfe31bb44b6150bfb8fe11c342e6ecf2c4849d",
+    "fitted_bbox": [
+      0,
+      0,
+      629,
+      1116
+    ],
+    "profile_id": "wizardjoe_hd_alpha_1254_v001",
+    "resample_filter": "lanczos",
+    "resampled": true,
+    "scale": 0.993766696349065,
+    "schema_version": 1,
+    "source_bbox": [
+      265,
+      56,
+      898,
+      1179
+    ],
+    "source_path": "/Users/paul/Documents/WizardJoeAsci/worktrees/wizardjoe-character-director/assets/reference/joeville_48_parity/authored-source/draven-holt/alpha-extracted/draven_holt_motion_048.png",
+    "source_sha256": "940dbd4d5f5e0ee0807b51cac56f171965b5c09645861daf1e99d8291936d353",
+    "translation": {
+      "x": 312,
+      "y": 69
+    }
+  }
+]

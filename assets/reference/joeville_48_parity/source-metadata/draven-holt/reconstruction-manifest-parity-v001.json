@@ -1,0 +1,1443 @@
+{
+  "artifact": {
+    "bytes": 31371666,
+    "path": "compiled/draven-holt/draven-holt-candidate-authored-parity-v001.wjpose",
+    "pose_count": 48,
+    "pose_ids": [
+      "draven_holt_motion_001",
+      "draven_holt_motion_002",
+      "draven_holt_motion_003",
+      "draven_holt_motion_004",
+      "draven_holt_motion_005",
+      "draven_holt_motion_006",
+      "draven_holt_motion_007",
+      "draven_holt_motion_008",
+      "draven_holt_motion_009",
+      "draven_holt_motion_010",
+      "draven_holt_motion_011",
+      "draven_holt_motion_012",
+      "draven_holt_motion_013",
+      "draven_holt_motion_014",
+      "draven_holt_motion_015",
+      "draven_holt_motion_016",
+      "draven_holt_motion_017",
+      "draven_holt_motion_018",
+      "draven_holt_motion_019",
+      "draven_holt_motion_020",
+      "draven_holt_motion_021",
+      "draven_holt_motion_022",
+      "draven_holt_motion_023",
+      "draven_holt_motion_024",
+      "draven_holt_motion_025",
+      "draven_holt_motion_026",
+      "draven_holt_motion_027",
+      "draven_holt_motion_028",
+      "draven_holt_motion_029",
+      "draven_holt_motion_030",
+      "draven_holt_motion_031",
+      "draven_holt_motion_032",
+      "draven_holt_motion_033",
+      "draven_holt_motion_034",
+      "draven_holt_motion_035",
+      "draven_holt_motion_036",
+      "draven_holt_motion_037",
+      "draven_holt_motion_038",
+      "draven_holt_motion_039",
+      "draven_holt_motion_040",
+      "draven_holt_motion_041",
+      "draven_holt_motion_042",
+      "draven_holt_motion_043",
+      "draven_holt_motion_044",
+      "draven_holt_motion_045",
+      "draven_holt_motion_046",
+      "draven_holt_motion_047",
+      "draven_holt_motion_048"
+    ],
+    "sha256": "ac51bba7f40bd42b374857b3070d62716f878894b99190d76cd434f08a843e82"
+  },
+  "authored_manifest": {
+    "path": "authored-source/draven-holt/authored-g7-g8-v001.json",
+    "sha256": "9fed5b1dc78ffab132885742589ba5021a8602a33c5ca804ede562870897271c"
+  },
+  "authority_manifest_sha256": "740f35730f4aa1e6c6ef96be80115c5b0e117397f792d57fdf5360452bbe78c8",
+  "character_id": "draven-holt",
+  "compiled_pose_count": 48,
+  "display_name": "Draven Holt",
+  "existing_reconstruction_manifest": {
+    "path": "source-metadata/draven-holt/reconstruction-manifest-v001.json",
+    "sha256": "55fd78882e1b8226a543e285591932cd73b354a71ea9550e5c7cfb4fdba6ad5f"
+  },
+  "existing_source_artifact": {
+    "path": "compiled/draven-holt/draven-holt-candidate-source-motion-v001.wjpose",
+    "sha256": "244627668d46ad2c552d2ec2d7f5d24ce4ef4750c3a423d097bee1929c01e724"
+  },
+  "library_index": {
+    "path": "compiled/draven-holt/library-index.json",
+    "sha256": "6fc822bf34011fa0d3e110a1c261851c04ceadab35184e9e95db378b11ce0069"
+  },
+  "missing_sequences": [],
+  "poses": [
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-001",
+      "normalization_scale": 1.89795918,
+      "output_bbox": [
+        396,
+        69,
+        857,
+        1185
+      ],
+      "pose_id": "draven_holt_motion_001",
+      "rgba_sha256": "80867361ad9e6b3004021f634ba04db228222b7e8a452ee9ba8a3536f75d1cbe",
+      "runtime_admitted": false,
+      "sequence_id": "g1",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        103,
+        64,
+        346,
+        652
+      ],
+      "source_frame_index": 1,
+      "source_member": "sheet-draven-holt-g1.png",
+      "source_member_sha256": "f83b0b8de06b797c837042e30bb14ca1acad215f62e7b441ceac46b1317d2558"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-002",
+      "normalization_scale": 1.89795918,
+      "output_bbox": [
+        400,
+        73,
+        854,
+        1181
+      ],
+      "pose_id": "draven_holt_motion_002",
+      "rgba_sha256": "922b8ae2d85150ca4a5a6aa83ed8e67a12416ac657308a514756fb7b101196a3",
+      "runtime_admitted": false,
+      "sequence_id": "g1",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        447,
+        66,
+        686,
+        650
+      ],
+      "source_frame_index": 2,
+      "source_member": "sheet-draven-holt-g1.png",
+      "source_member_sha256": "f83b0b8de06b797c837042e30bb14ca1acad215f62e7b441ceac46b1317d2558"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-003",
+      "normalization_scale": 1.89795918,
+      "output_bbox": [
+        408,
+        84,
+        845,
+        1158
+      ],
+      "pose_id": "draven_holt_motion_003",
+      "rgba_sha256": "a96cd2d71ccfbc8af316a2213f49124f579df374627e1ca12a73d73dc4779341",
+      "runtime_admitted": false,
+      "sequence_id": "g1",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        776,
+        72,
+        1006,
+        638
+      ],
+      "source_frame_index": 3,
+      "source_member": "sheet-draven-holt-g1.png",
+      "source_member_sha256": "f83b0b8de06b797c837042e30bb14ca1acad215f62e7b441ceac46b1317d2558"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-004",
+      "normalization_scale": 1.89795918,
+      "output_bbox": [
+        358,
+        134,
+        895,
+        1174
+      ],
+      "pose_id": "draven_holt_motion_004",
+      "rgba_sha256": "22f9d1f156c598f4234d72bc3a03b04e42af300f17b89fdb82febc0652796cdc",
+      "runtime_admitted": false,
+      "sequence_id": "g1",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        1090,
+        98,
+        1373,
+        646
+      ],
+      "source_frame_index": 4,
+      "source_member": "sheet-draven-holt-g1.png",
+      "source_member_sha256": "f83b0b8de06b797c837042e30bb14ca1acad215f62e7b441ceac46b1317d2558"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-005",
+      "normalization_scale": 1.89795918,
+      "output_bbox": [
+        352,
+        154,
+        901,
+        1175
+      ],
+      "pose_id": "draven_holt_motion_005",
+      "rgba_sha256": "03fbdfe51f738e792a080ed1ed75dc82cbaaac193bb77d1773274dae5e1f2bf4",
+      "runtime_admitted": false,
+      "sequence_id": "g1",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        1460,
+        109,
+        1749,
+        647
+      ],
+      "source_frame_index": 5,
+      "source_member": "sheet-draven-holt-g1.png",
+      "source_member_sha256": "f83b0b8de06b797c837042e30bb14ca1acad215f62e7b441ceac46b1317d2558"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-006",
+      "normalization_scale": 1.89795918,
+      "output_bbox": [
+        333,
+        179,
+        921,
+        1175
+      ],
+      "pose_id": "draven_holt_motion_006",
+      "rgba_sha256": "c4839908a1f9978bd081555983396db6fc4ad203099fc7063e597a11e661536c",
+      "runtime_admitted": false,
+      "sequence_id": "g1",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        1818,
+        122,
+        2128,
+        647
+      ],
+      "source_frame_index": 6,
+      "source_member": "sheet-draven-holt-g1.png",
+      "source_member_sha256": "f83b0b8de06b797c837042e30bb14ca1acad215f62e7b441ceac46b1317d2558"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-007",
+      "normalization_scale": 2.07434944,
+      "output_bbox": [
+        326,
+        69,
+        928,
+        1181
+      ],
+      "pose_id": "draven_holt_motion_007",
+      "rgba_sha256": "98890f8c956b97c2adaef120dffe9a8d5fdaf084de7a9d2f348ea71d5d738e91",
+      "runtime_admitted": false,
+      "sequence_id": "g2",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        85,
+        82,
+        375,
+        618
+      ],
+      "source_frame_index": 1,
+      "source_member": "sheet-draven-holt-g2.png",
+      "source_member_sha256": "4389f5238cc0e40d9d3c47c1b08a85cdb6a8f506bf5550b7b3637ef108bdca84"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-008",
+      "normalization_scale": 2.07434944,
+      "output_bbox": [
+        343,
+        75,
+        911,
+        1185
+      ],
+      "pose_id": "draven_holt_motion_008",
+      "rgba_sha256": "0e2dedac68e86834949915c0f92a1430f59d37004e92a416a2134fa78778af9c",
+      "runtime_admitted": false,
+      "sequence_id": "g2",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        442,
+        85,
+        716,
+        620
+      ],
+      "source_frame_index": 2,
+      "source_member": "sheet-draven-holt-g2.png",
+      "source_member_sha256": "4389f5238cc0e40d9d3c47c1b08a85cdb6a8f506bf5550b7b3637ef108bdca84"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-009",
+      "normalization_scale": 2.07434944,
+      "output_bbox": [
+        381,
+        71,
+        873,
+        1177
+      ],
+      "pose_id": "draven_holt_motion_009",
+      "rgba_sha256": "d4aebad87cf7c3a5de9b24c697036e05ca7e7a165e3087e242fbadf9eca1a3b7",
+      "runtime_admitted": false,
+      "sequence_id": "g2",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        800,
+        83,
+        1037,
+        616
+      ],
+      "source_frame_index": 3,
+      "source_member": "sheet-draven-holt-g2.png",
+      "source_member_sha256": "4389f5238cc0e40d9d3c47c1b08a85cdb6a8f506bf5550b7b3637ef108bdca84"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-010",
+      "normalization_scale": 2.07434944,
+      "output_bbox": [
+        362,
+        75,
+        891,
+        1181
+      ],
+      "pose_id": "draven_holt_motion_010",
+      "rgba_sha256": "21dea251a9469804fba4de45935d5cc7ccb46794dd3656979e856de2b37f3807",
+      "runtime_admitted": false,
+      "sequence_id": "g2",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        1133,
+        85,
+        1388,
+        618
+      ],
+      "source_frame_index": 4,
+      "source_member": "sheet-draven-holt-g2.png",
+      "source_member_sha256": "4389f5238cc0e40d9d3c47c1b08a85cdb6a8f506bf5550b7b3637ef108bdca84"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-011",
+      "normalization_scale": 2.07434944,
+      "output_bbox": [
+        287,
+        181,
+        967,
+        1179
+      ],
+      "pose_id": "draven_holt_motion_011",
+      "rgba_sha256": "cebdb1cb78e280284545ded16cd04e35165efa8447219f5948999bec5f99bd27",
+      "runtime_admitted": false,
+      "sequence_id": "g2",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        1429,
+        136,
+        1757,
+        617
+      ],
+      "source_frame_index": 5,
+      "source_member": "sheet-draven-holt-g2.png",
+      "source_member_sha256": "4389f5238cc0e40d9d3c47c1b08a85cdb6a8f506bf5550b7b3637ef108bdca84"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-012",
+      "normalization_scale": 2.07434944,
+      "output_bbox": [
+        289,
+        330,
+        965,
+        1176
+      ],
+      "pose_id": "draven_holt_motion_012",
+      "rgba_sha256": "5560a4fbaeb3f00605eabe15db30bdd32dab6cd47ac04d1ba930ec4d2acbe897",
+      "runtime_admitted": false,
+      "sequence_id": "g2",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        1812,
+        208,
+        2138,
+        616
+      ],
+      "source_frame_index": 6,
+      "source_member": "sheet-draven-holt-g2.png",
+      "source_member_sha256": "4389f5238cc0e40d9d3c47c1b08a85cdb6a8f506bf5550b7b3637ef108bdca84"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-013",
+      "normalization_scale": 2.1,
+      "output_bbox": [
+        264,
+        282,
+        991,
+        1168
+      ],
+      "pose_id": "draven_holt_motion_013",
+      "rgba_sha256": "a4825fd1afb364cca4e10f6c3d3924e3090e842fe70414b9ee0bd49377d08f31",
+      "runtime_admitted": false,
+      "sequence_id": "g3",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        44,
+        173,
+        390,
+        595
+      ],
+      "source_frame_index": 1,
+      "source_member": "sheet-draven-holt-g3.png",
+      "source_member_sha256": "ff15f3a85d6e2545816b0cebcae523937f05e6cd24f635a78c32597caecb25e6"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-014",
+      "normalization_scale": 2.1,
+      "output_bbox": [
+        379,
+        295,
+        875,
+        1185
+      ],
+      "pose_id": "draven_holt_motion_014",
+      "rgba_sha256": "3fe4e7e285c2c87bdda8c00773348947373aca0d287921be7046f6150d11d7f7",
+      "runtime_admitted": false,
+      "sequence_id": "g3",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        469,
+        179,
+        705,
+        603
+      ],
+      "source_frame_index": 2,
+      "source_member": "sheet-draven-holt-g3.png",
+      "source_member_sha256": "ff15f3a85d6e2545816b0cebcae523937f05e6cd24f635a78c32597caecb25e6"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-015",
+      "normalization_scale": 2.1,
+      "output_bbox": [
+        282,
+        309,
+        973,
+        1164
+      ],
+      "pose_id": "draven_holt_motion_015",
+      "rgba_sha256": "e975aa5c278eb21b731a9564f1d594e59e41229475575f215dbacf0579aaea1f",
+      "runtime_admitted": false,
+      "sequence_id": "g3",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        776,
+        186,
+        1105,
+        593
+      ],
+      "source_frame_index": 3,
+      "source_member": "sheet-draven-holt-g3.png",
+      "source_member_sha256": "ff15f3a85d6e2545816b0cebcae523937f05e6cd24f635a78c32597caecb25e6"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-016",
+      "normalization_scale": 2.1,
+      "output_bbox": [
+        413,
+        452,
+        841,
+        1176
+      ],
+      "pose_id": "draven_holt_motion_016",
+      "rgba_sha256": "68be4306e5ca6a8222b5c0c78cbe76f08a2f8235903081eb38db7fe68167cfef",
+      "runtime_admitted": false,
+      "sequence_id": "g3",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        1190,
+        254,
+        1394,
+        599
+      ],
+      "source_frame_index": 4,
+      "source_member": "sheet-draven-holt-g3.png",
+      "source_member_sha256": "ff15f3a85d6e2545816b0cebcae523937f05e6cd24f635a78c32597caecb25e6"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-017",
+      "normalization_scale": 2.1,
+      "output_bbox": [
+        379,
+        221,
+        875,
+        1120
+      ],
+      "pose_id": "draven_holt_motion_017",
+      "rgba_sha256": "a61c56a1846ee425745400020ce2cde8f32b5c1c5a179742c76299bccc3f872d",
+      "runtime_admitted": false,
+      "sequence_id": "g3",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        1481,
+        144,
+        1717,
+        572
+      ],
+      "source_frame_index": 5,
+      "source_member": "sheet-draven-holt-g3.png",
+      "source_member_sha256": "ff15f3a85d6e2545816b0cebcae523937f05e6cd24f635a78c32597caecb25e6"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-018",
+      "normalization_scale": 2.1,
+      "output_bbox": [
+        382,
+        101,
+        871,
+        907
+      ],
+      "pose_id": "draven_holt_motion_018",
+      "rgba_sha256": "8e5e75f08f6cf34fe1a9c8b3c01404d71517f5810b87384ffa24d781bd5fdc48",
+      "runtime_admitted": false,
+      "sequence_id": "g3",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        1837,
+        87,
+        2070,
+        471
+      ],
+      "source_frame_index": 6,
+      "source_member": "sheet-draven-holt-g3.png",
+      "source_member_sha256": "ff15f3a85d6e2545816b0cebcae523937f05e6cd24f635a78c32597caecb25e6"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-019",
+      "normalization_scale": 2.01444043,
+      "output_bbox": [
+        322,
+        69,
+        932,
+        967
+      ],
+      "pose_id": "draven_holt_motion_019",
+      "rgba_sha256": "d47879b42a26f3f4b9f97541e18fdd8e11903024f4d54d28589e25934e36cbb4",
+      "runtime_admitted": false,
+      "sequence_id": "g4",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        47,
+        66,
+        350,
+        512
+      ],
+      "source_frame_index": 1,
+      "source_member": "sheet-draven-holt-g4.png",
+      "source_member_sha256": "1ded33a1e2373f665bbedc284737e5a6aa6265aa8f8857b7efbe7f04daaaf462"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-020",
+      "normalization_scale": 2.01444043,
+      "output_bbox": [
+        392,
+        399,
+        863,
+        1171
+      ],
+      "pose_id": "draven_holt_motion_020",
+      "rgba_sha256": "aae5014eaaf5769ccc931894628b37cf819e978ed537519a25f8103a6ef391d9",
+      "runtime_admitted": false,
+      "sequence_id": "g4",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        420,
+        230,
+        654,
+        613
+      ],
+      "source_frame_index": 2,
+      "source_member": "sheet-draven-holt-g4.png",
+      "source_member_sha256": "1ded33a1e2373f665bbedc284737e5a6aa6265aa8f8857b7efbe7f04daaaf462"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-021",
+      "normalization_scale": 2.01444043,
+      "output_bbox": [
+        235,
+        250,
+        1019,
+        1169
+      ],
+      "pose_id": "draven_holt_motion_021",
+      "rgba_sha256": "1cf158a75466b99a49f58ac748024a77ec136dbf8602fcbde95f9b2b7c11c1f5",
+      "runtime_admitted": false,
+      "sequence_id": "g4",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        733,
+        156,
+        1122,
+        612
+      ],
+      "source_frame_index": 3,
+      "source_member": "sheet-draven-holt-g4.png",
+      "source_member_sha256": "1ded33a1e2373f665bbedc284737e5a6aa6265aa8f8857b7efbe7f04daaaf462"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-022",
+      "normalization_scale": 2.01444043,
+      "output_bbox": [
+        422,
+        299,
+        831,
+        1171
+      ],
+      "pose_id": "draven_holt_motion_022",
+      "rgba_sha256": "6bf087a5e326a797e051b8d0891c08f9c9e1cc5e45b054af5a028f0556ff788e",
+      "runtime_admitted": false,
+      "sequence_id": "g4",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        1210,
+        180,
+        1413,
+        613
+      ],
+      "source_frame_index": 4,
+      "source_member": "sheet-draven-holt-g4.png",
+      "source_member_sha256": "1ded33a1e2373f665bbedc284737e5a6aa6265aa8f8857b7efbe7f04daaaf462"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-023",
+      "normalization_scale": 2.01444043,
+      "output_bbox": [
+        414,
+        214,
+        841,
+        1185
+      ],
+      "pose_id": "draven_holt_motion_023",
+      "rgba_sha256": "e811dfe5bcdae81e4d7094b921460e5ae31d361883259e0696378ce1b785ef53",
+      "runtime_admitted": false,
+      "sequence_id": "g4",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        1564,
+        138,
+        1776,
+        620
+      ],
+      "source_frame_index": 5,
+      "source_member": "sheet-draven-holt-g4.png",
+      "source_member_sha256": "1ded33a1e2373f665bbedc284737e5a6aa6265aa8f8857b7efbe7f04daaaf462"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-024",
+      "normalization_scale": 2.01444043,
+      "output_bbox": [
+        418,
+        262,
+        835,
+        1183
+      ],
+      "pose_id": "draven_holt_motion_024",
+      "rgba_sha256": "37bac01c2ec01730553eea60dcec58c3ec6a209a668204f616c17917b7f79495",
+      "runtime_admitted": false,
+      "sequence_id": "g4",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        1924,
+        162,
+        2131,
+        619
+      ],
+      "source_frame_index": 6,
+      "source_member": "sheet-draven-holt-g4.png",
+      "source_member_sha256": "1ded33a1e2373f665bbedc284737e5a6aa6265aa8f8857b7efbe7f04daaaf462"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-025",
+      "normalization_scale": 1.88195616,
+      "output_bbox": [
+        388,
+        78,
+        866,
+        1179
+      ],
+      "pose_id": "draven_holt_motion_025",
+      "rgba_sha256": "9150359a5f9b4fca005c867721f61a6427762d8c97d8793e5c4f222d7b5bfce5",
+      "runtime_admitted": false,
+      "sequence_id": "g5",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        96,
+        59,
+        350,
+        644
+      ],
+      "source_frame_index": 1,
+      "source_member": "sheet-draven-holt-g5.png",
+      "source_member_sha256": "f517468d0d406c0c2bc7dc4f81cf88a18c21c622fb5c6deb3ebe1b53fb1b2215"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-026",
+      "normalization_scale": 1.88195616,
+      "output_bbox": [
+        380,
+        78,
+        875,
+        1185
+      ],
+      "pose_id": "draven_holt_motion_026",
+      "rgba_sha256": "1ef5e6efff743beaeb1403ef24abd0434a502d79f4b7248f43d1f996097f64f1",
+      "runtime_admitted": false,
+      "sequence_id": "g5",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        431,
+        59,
+        694,
+        647
+      ],
+      "source_frame_index": 2,
+      "source_member": "sheet-draven-holt-g5.png",
+      "source_member_sha256": "f517468d0d406c0c2bc7dc4f81cf88a18c21c622fb5c6deb3ebe1b53fb1b2215"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-027",
+      "normalization_scale": 1.88195616,
+      "output_bbox": [
+        382,
+        78,
+        873,
+        1179
+      ],
+      "pose_id": "draven_holt_motion_027",
+      "rgba_sha256": "9452cdd65772dd3c103bfd022f600aaa498b0c120f5e3a86d58ed39da1ee0299",
+      "runtime_admitted": false,
+      "sequence_id": "g5",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        771,
+        59,
+        1032,
+        644
+      ],
+      "source_frame_index": 3,
+      "source_member": "sheet-draven-holt-g5.png",
+      "source_member_sha256": "f517468d0d406c0c2bc7dc4f81cf88a18c21c622fb5c6deb3ebe1b53fb1b2215"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-028",
+      "normalization_scale": 1.88195616,
+      "output_bbox": [
+        380,
+        78,
+        875,
+        1179
+      ],
+      "pose_id": "draven_holt_motion_028",
+      "rgba_sha256": "dd88c28f981819c3af4b28048e8bb5c331d83866215c6d6ef603e00a2480a6fe",
+      "runtime_admitted": false,
+      "sequence_id": "g5",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        1111,
+        59,
+        1374,
+        644
+      ],
+      "source_frame_index": 4,
+      "source_member": "sheet-draven-holt-g5.png",
+      "source_member_sha256": "f517468d0d406c0c2bc7dc4f81cf88a18c21c622fb5c6deb3ebe1b53fb1b2215"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-029",
+      "normalization_scale": 1.88195616,
+      "output_bbox": [
+        378,
+        78,
+        877,
+        1179
+      ],
+      "pose_id": "draven_holt_motion_029",
+      "rgba_sha256": "28bf53a6dc0d6aa0085f69cecbedeb9d1cc08c8e9f2e2406a8ead490135eaeec",
+      "runtime_admitted": false,
+      "sequence_id": "g5",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        1450,
+        59,
+        1715,
+        644
+      ],
+      "source_frame_index": 5,
+      "source_member": "sheet-draven-holt-g5.png",
+      "source_member_sha256": "f517468d0d406c0c2bc7dc4f81cf88a18c21c622fb5c6deb3ebe1b53fb1b2215"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-030",
+      "normalization_scale": 1.88195616,
+      "output_bbox": [
+        345,
+        69,
+        910,
+        950
+      ],
+      "pose_id": "draven_holt_motion_030",
+      "rgba_sha256": "49c7420829b54c0c0399667122de208b19b0c237e92a8033c07d147680645c53",
+      "runtime_admitted": false,
+      "sequence_id": "g5",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        1800,
+        54,
+        2101,
+        522
+      ],
+      "source_frame_index": 6,
+      "source_member": "sheet-draven-holt-g5.png",
+      "source_member_sha256": "f517468d0d406c0c2bc7dc4f81cf88a18c21c622fb5c6deb3ebe1b53fb1b2215"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-031",
+      "normalization_scale": 2.02909091,
+      "output_bbox": [
+        394,
+        85,
+        859,
+        1164
+      ],
+      "pose_id": "draven_holt_motion_031",
+      "rgba_sha256": "26e85a2aa0c5911aa889feae9c68dfff7d49781bd9995fdb789ed5b956067da8",
+      "runtime_admitted": false,
+      "sequence_id": "g6",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        96,
+        103,
+        325,
+        635
+      ],
+      "source_frame_index": 1,
+      "source_member": "sheet-draven-holt-g6.png",
+      "source_member_sha256": "061cfc6d510541fcb9fdff57dd0969fbd2a37260da82e549ee642e830602b4fc"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-032",
+      "normalization_scale": 2.02909091,
+      "output_bbox": [
+        394,
+        87,
+        861,
+        1185
+      ],
+      "pose_id": "draven_holt_motion_032",
+      "rgba_sha256": "3bd2ce3b660782af52642f2ae4c6782045eb0cc06fe8a9bf6f84a73d7396525d",
+      "runtime_admitted": false,
+      "sequence_id": "g6",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        434,
+        104,
+        664,
+        645
+      ],
+      "source_frame_index": 2,
+      "source_member": "sheet-draven-holt-g6.png",
+      "source_member_sha256": "061cfc6d510541fcb9fdff57dd0969fbd2a37260da82e549ee642e830602b4fc"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-033",
+      "normalization_scale": 2.02909091,
+      "output_bbox": [
+        392,
+        87,
+        863,
+        1179
+      ],
+      "pose_id": "draven_holt_motion_033",
+      "rgba_sha256": "fb0601cc21ad549cbf8583dd1669de899a5bfa7434499135ce0537d4869d9cb3",
+      "runtime_admitted": false,
+      "sequence_id": "g6",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        786,
+        104,
+        1018,
+        642
+      ],
+      "source_frame_index": 3,
+      "source_member": "sheet-draven-holt-g6.png",
+      "source_member_sha256": "061cfc6d510541fcb9fdff57dd0969fbd2a37260da82e549ee642e830602b4fc"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-034",
+      "normalization_scale": 2.02909091,
+      "output_bbox": [
+        390,
+        89,
+        865,
+        1185
+      ],
+      "pose_id": "draven_holt_motion_034",
+      "rgba_sha256": "68380d5a262f0fa7dadc200d4165707ea502bff695076d7de29e978889be0a6e",
+      "runtime_admitted": false,
+      "sequence_id": "g6",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        1135,
+        105,
+        1369,
+        645
+      ],
+      "source_frame_index": 4,
+      "source_member": "sheet-draven-holt-g6.png",
+      "source_member_sha256": "061cfc6d510541fcb9fdff57dd0969fbd2a37260da82e549ee642e830602b4fc"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-035",
+      "normalization_scale": 2.02909091,
+      "output_bbox": [
+        392,
+        89,
+        861,
+        1181
+      ],
+      "pose_id": "draven_holt_motion_035",
+      "rgba_sha256": "36b30b7868c95449c9e77995806ad205d9d0318e3f83adfbd070752834a47ee5",
+      "runtime_admitted": false,
+      "sequence_id": "g6",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        1493,
+        105,
+        1724,
+        643
+      ],
+      "source_frame_index": 5,
+      "source_member": "sheet-draven-holt-g6.png",
+      "source_member_sha256": "061cfc6d510541fcb9fdff57dd0969fbd2a37260da82e549ee642e830602b4fc"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "motion_slot_id": "motion-036",
+      "normalization_scale": 2.02909091,
+      "output_bbox": [
+        378,
+        69,
+        875,
+        996
+      ],
+      "pose_id": "draven_holt_motion_036",
+      "rgba_sha256": "db14efea3a360eada3f760705f6c32c54d00b7f0cd6569d67cc20db27ceb323c",
+      "runtime_admitted": false,
+      "sequence_id": "g6",
+      "source_archive_id": "sprites-1",
+      "source_archive_sha256": "a26b2fb59fba19b494c97c278dc5da4cd0df5a2d58e989759da521804a1206a8",
+      "source_bbox": [
+        1823,
+        95,
+        2068,
+        552
+      ],
+      "source_frame_index": 6,
+      "source_member": "sheet-draven-holt-g6.png",
+      "source_member_sha256": "061cfc6d510541fcb9fdff57dd0969fbd2a37260da82e549ee642e830602b4fc"
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "authorship": "authored_full_size_imagegen_v1",
+      "brief_id": "draven-g7-receive",
+      "motion_slot_id": "motion-037",
+      "normalization_scale": 1.0,
+      "output_bbox": [
+        350,
+        69,
+        903,
+        1185
+      ],
+      "pose_id": "draven_holt_motion_037",
+      "rgba_sha256": "7372ad3dbcc071f902709bbf6a4e6f2fe188f1c43b878c01437fe2b9cb50a5cf",
+      "runtime_admitted": false,
+      "sequence_id": "g7",
+      "source_bbox": [
+        350,
+        69,
+        903,
+        1185
+      ],
+      "source_frame_index": 1,
+      "source_height": 1254,
+      "source_path": "frames/draven_holt_motion_037.png",
+      "source_rgba_sha256": "7372ad3dbcc071f902709bbf6a4e6f2fe188f1c43b878c01437fe2b9cb50a5cf",
+      "source_sha256": "8d6d0ebfea597aa52e13732270838a2a1f2f2c2931ed52cc534d66974cc3061f",
+      "source_width": 1254
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "authorship": "authored_full_size_imagegen_v1",
+      "brief_id": "draven-g7-grant-floor",
+      "motion_slot_id": "motion-038",
+      "normalization_scale": 1.0,
+      "output_bbox": [
+        296,
+        69,
+        958,
+        1185
+      ],
+      "pose_id": "draven_holt_motion_038",
+      "rgba_sha256": "61a567621afc7d99d69f82da49e3ec12e3978f251388dd2d23ec720f6d825f75",
+      "runtime_admitted": false,
+      "sequence_id": "g7",
+      "source_bbox": [
+        296,
+        69,
+        958,
+        1185
+      ],
+      "source_frame_index": 2,
+      "source_height": 1254,
+      "source_path": "frames/draven_holt_motion_038.png",
+      "source_rgba_sha256": "61a567621afc7d99d69f82da49e3ec12e3978f251388dd2d23ec720f6d825f75",
+      "source_sha256": "38038105a363480ccc8bf7fd58dcebbe1ac7aa7e2c2f6825056007214e73f3ad",
+      "source_width": 1254
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "authorship": "authored_full_size_imagegen_v1",
+      "brief_id": "draven-g7-listen",
+      "motion_slot_id": "motion-039",
+      "normalization_scale": 1.0,
+      "output_bbox": [
+        370,
+        69,
+        885,
+        1185
+      ],
+      "pose_id": "draven_holt_motion_039",
+      "rgba_sha256": "2994540d202ad8378af003a8244a0c31a104f4456bee858d4f3229fa48d51274",
+      "runtime_admitted": false,
+      "sequence_id": "g7",
+      "source_bbox": [
+        370,
+        69,
+        885,
+        1185
+      ],
+      "source_frame_index": 3,
+      "source_height": 1254,
+      "source_path": "frames/draven_holt_motion_039.png",
+      "source_rgba_sha256": "2994540d202ad8378af003a8244a0c31a104f4456bee858d4f3229fa48d51274",
+      "source_sha256": "c961590d59fa9f0096b35391543034d8c64c776e1426ca863067f6231fd8ec2d",
+      "source_width": 1254
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "authorship": "authored_full_size_imagegen_v1",
+      "brief_id": "draven-g7-probe",
+      "motion_slot_id": "motion-040",
+      "normalization_scale": 1.0,
+      "output_bbox": [
+        352,
+        69,
+        903,
+        1185
+      ],
+      "pose_id": "draven_holt_motion_040",
+      "rgba_sha256": "ce0b4df4155b357e7fa328fa7241f3b496bc9f37192184b8c85a616ad24f90ac",
+      "runtime_admitted": false,
+      "sequence_id": "g7",
+      "source_bbox": [
+        352,
+        69,
+        903,
+        1185
+      ],
+      "source_frame_index": 4,
+      "source_height": 1254,
+      "source_path": "frames/draven_holt_motion_040.png",
+      "source_rgba_sha256": "ce0b4df4155b357e7fa328fa7241f3b496bc9f37192184b8c85a616ad24f90ac",
+      "source_sha256": "bb755f5ba920dae357e910ad9850ac97355b9dfc7e77ce26c177d3fc5d5ea57c",
+      "source_width": 1254
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "authorship": "authored_full_size_imagegen_v1",
+      "brief_id": "draven-g7-assign",
+      "motion_slot_id": "motion-041",
+      "normalization_scale": 1.0,
+      "output_bbox": [
+        308,
+        69,
+        946,
+        1185
+      ],
+      "pose_id": "draven_holt_motion_041",
+      "rgba_sha256": "e9f996797d0e402c154e2e2bf37f1c0d2e68f5a4e14ffaf69f0be0d60157117e",
+      "runtime_admitted": false,
+      "sequence_id": "g7",
+      "source_bbox": [
+        308,
+        69,
+        946,
+        1185
+      ],
+      "source_frame_index": 5,
+      "source_height": 1254,
+      "source_path": "frames/draven_holt_motion_041.png",
+      "source_rgba_sha256": "e9f996797d0e402c154e2e2bf37f1c0d2e68f5a4e14ffaf69f0be0d60157117e",
+      "source_sha256": "a5eb1e2223855e631cbde3d6ef2b5cedbdf5ff64a9d9e4926dca941c98c2e1c3",
+      "source_width": 1254
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "authorship": "authored_full_size_imagegen_v1",
+      "brief_id": "draven-g7-confirm",
+      "motion_slot_id": "motion-042",
+      "normalization_scale": 1.0,
+      "output_bbox": [
+        311,
+        69,
+        943,
+        1185
+      ],
+      "pose_id": "draven_holt_motion_042",
+      "rgba_sha256": "fa3ca91f9988d689c64b9cb234dd9c5c93e7e7515e3720e9209055788deee108",
+      "runtime_admitted": false,
+      "sequence_id": "g7",
+      "source_bbox": [
+        311,
+        69,
+        943,
+        1185
+      ],
+      "source_frame_index": 6,
+      "source_height": 1254,
+      "source_path": "frames/draven_holt_motion_042.png",
+      "source_rgba_sha256": "fa3ca91f9988d689c64b9cb234dd9c5c93e7e7515e3720e9209055788deee108",
+      "source_sha256": "291cd1d3e60223d199e2b86616e1df67037cdc14a6fe080efbb900d8fdcd1a7f",
+      "source_width": 1254
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "authorship": "authored_full_size_imagegen_v1",
+      "brief_id": "draven-g8-detect",
+      "motion_slot_id": "motion-043",
+      "normalization_scale": 1.0,
+      "output_bbox": [
+        302,
+        69,
+        951,
+        1185
+      ],
+      "pose_id": "draven_holt_motion_043",
+      "rgba_sha256": "1f77d41eee077a3ed8767c351426603308250a20eb058aec00cb5c9940805800",
+      "runtime_admitted": false,
+      "sequence_id": "g8",
+      "source_bbox": [
+        302,
+        69,
+        951,
+        1185
+      ],
+      "source_frame_index": 1,
+      "source_height": 1254,
+      "source_path": "frames/draven_holt_motion_043.png",
+      "source_rgba_sha256": "1f77d41eee077a3ed8767c351426603308250a20eb058aec00cb5c9940805800",
+      "source_sha256": "aa76d65ac488612f2b39661e71ec83a215e9f3bc023bd43b8c885c3c5f0949ba",
+      "source_width": 1254
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "authorship": "authored_full_size_imagegen_v1",
+      "brief_id": "draven-g8-stop",
+      "motion_slot_id": "motion-044",
+      "normalization_scale": 1.0,
+      "output_bbox": [
+        344,
+        69,
+        911,
+        1185
+      ],
+      "pose_id": "draven_holt_motion_044",
+      "rgba_sha256": "45c69a6cff3b214136fbdec2b37cc4e50f74fee2098d5df931dc85be02487ea8",
+      "runtime_admitted": false,
+      "sequence_id": "g8",
+      "source_bbox": [
+        344,
+        69,
+        911,
+        1185
+      ],
+      "source_frame_index": 2,
+      "source_height": 1254,
+      "source_path": "frames/draven_holt_motion_044.png",
+      "source_rgba_sha256": "45c69a6cff3b214136fbdec2b37cc4e50f74fee2098d5df931dc85be02487ea8",
+      "source_sha256": "798ba4d25e576292740b04e76d5d8c0925b269768705bd196e8dd57bff63189f",
+      "source_width": 1254
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "authorship": "authored_full_size_imagegen_v1",
+      "brief_id": "draven-g8-contain",
+      "motion_slot_id": "motion-045",
+      "normalization_scale": 1.0,
+      "output_bbox": [
+        237,
+        69,
+        1017,
+        1185
+      ],
+      "pose_id": "draven_holt_motion_045",
+      "rgba_sha256": "94c291c60aa0c4ff42894eb5b7b311cf7b4d00b37470b7b51f93962ed090b41b",
+      "runtime_admitted": false,
+      "sequence_id": "g8",
+      "source_bbox": [
+        237,
+        69,
+        1017,
+        1185
+      ],
+      "source_frame_index": 3,
+      "source_height": 1254,
+      "source_path": "frames/draven_holt_motion_045.png",
+      "source_rgba_sha256": "94c291c60aa0c4ff42894eb5b7b311cf7b4d00b37470b7b51f93962ed090b41b",
+      "source_sha256": "65932572335df6973020806602c4d47d454e6afe33ee348f5462a7e9935a04c8",
+      "source_width": 1254
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "authorship": "authored_full_size_imagegen_v1",
+      "brief_id": "draven-g8-reroute",
+      "motion_slot_id": "motion-046",
+      "normalization_scale": 1.0,
+      "output_bbox": [
+        258,
+        69,
+        995,
+        1185
+      ],
+      "pose_id": "draven_holt_motion_046",
+      "rgba_sha256": "ea9c387677ff88703d4814a9e4f8e5422a31d7332118c24fc6aa71a6f19e621a",
+      "runtime_admitted": false,
+      "sequence_id": "g8",
+      "source_bbox": [
+        258,
+        69,
+        995,
+        1185
+      ],
+      "source_frame_index": 4,
+      "source_height": 1254,
+      "source_path": "frames/draven_holt_motion_046.png",
+      "source_rgba_sha256": "ea9c387677ff88703d4814a9e4f8e5422a31d7332118c24fc6aa71a6f19e621a",
+      "source_sha256": "07c8def54aa6c4c2000a64e6d090c689b3e62f708fa8a1399a4ee16fb1d515ae",
+      "source_width": 1254
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "authorship": "authored_full_size_imagegen_v1",
+      "brief_id": "draven-g8-verify",
+      "motion_slot_id": "motion-047",
+      "normalization_scale": 1.0,
+      "output_bbox": [
+        316,
+        69,
+        939,
+        1185
+      ],
+      "pose_id": "draven_holt_motion_047",
+      "rgba_sha256": "6c338cf381058b702fa9cda06d68aec6c14ca859a72df0f2191a612d66a2997f",
+      "runtime_admitted": false,
+      "sequence_id": "g8",
+      "source_bbox": [
+        316,
+        69,
+        939,
+        1185
+      ],
+      "source_frame_index": 5,
+      "source_height": 1254,
+      "source_path": "frames/draven_holt_motion_047.png",
+      "source_rgba_sha256": "6c338cf381058b702fa9cda06d68aec6c14ca859a72df0f2191a612d66a2997f",
+      "source_sha256": "4fb5557136aa736b6ec1fbeeea0322ec0696956541643dad364dfed14466e23f",
+      "source_width": 1254
+    },
+    {
+      "approval_state": "pending_visual_parity",
+      "authorship": "authored_full_size_imagegen_v1",
+      "brief_id": "draven-g8-release",
+      "motion_slot_id": "motion-048",
+      "normalization_scale": 1.0,
+      "output_bbox": [
+        312,
+        69,
+        941,
+        1185
+      ],
+      "pose_id": "draven_holt_motion_048",
+      "rgba_sha256": "452e3918b8e406b7b90f00eb092968d83404e5c857c6861f49ed7a348125b6c5",
+      "runtime_admitted": false,
+      "sequence_id": "g8",
+      "source_bbox": [
+        312,
+        69,
+        941,
+        1185
+      ],
+      "source_frame_index": 6,
+      "source_height": 1254,
+      "source_path": "frames/draven_holt_motion_048.png",
+      "source_rgba_sha256": "452e3918b8e406b7b90f00eb092968d83404e5c857c6861f49ed7a348125b6c5",
+      "source_sha256": "10527dd03f44612c86c0978595dfe31bb44b6150bfb8fe11c342e6ecf2c4849d",
+      "source_width": 1254
+    }
+  ],
+  "review_contact_sheet": {
+    "path": "source-metadata/draven-holt/parity-motion-contact-sheet-v001.png",
+    "sha256": "b40ffd132a58e8e69bf5d7a93e1fdbce6a72d482c88966282399e6396451d797"
+  },
+  "review_motion_contract": {
+    "path": "source-metadata/draven-holt/review-motion-contract-v001.json",
+    "sha256": "10a9678fdcc13a902f7ad32c000e1ac3bfd8d5904c14b3e15903510c746b98b4"
+  },
+  "runtime_admitted": false,
+  "schema_version": 1,
+  "sequences": {
+    "g1": [
+      "draven_holt_motion_001",
+      "draven_holt_motion_002",
+      "draven_holt_motion_003",
+      "draven_holt_motion_004",
+      "draven_holt_motion_005",
+      "draven_holt_motion_006"
+    ],
+    "g2": [
+      "draven_holt_motion_007",
+      "draven_holt_motion_008",
+      "draven_holt_motion_009",
+      "draven_holt_motion_010",
+      "draven_holt_motion_011",
+      "draven_holt_motion_012"
+    ],
+    "g3": [
+      "draven_holt_motion_013",
+      "draven_holt_motion_014",
+      "draven_holt_motion_015",
+      "draven_holt_motion_016",
+      "draven_holt_motion_017",
+      "draven_holt_motion_018"
+    ],
+    "g4": [
+      "draven_holt_motion_019",
+      "draven_holt_motion_020",
+      "draven_holt_motion_021",
+      "draven_holt_motion_022",
+      "draven_holt_motion_023",
+      "draven_holt_motion_024"
+    ],
+    "g5": [
+      "draven_holt_motion_025",
+      "draven_holt_motion_026",
+      "draven_holt_motion_027",
+      "draven_holt_motion_028",
+      "draven_holt_motion_029",
+      "draven_holt_motion_030"
+    ],
+    "g6": [
+      "draven_holt_motion_031",
+      "draven_holt_motion_032",
+      "draven_holt_motion_033",
+      "draven_holt_motion_034",
+      "draven_holt_motion_035",
+      "draven_holt_motion_036"
+    ],
+    "g7": [
+      "draven_holt_motion_037",
+      "draven_holt_motion_038",
+      "draven_holt_motion_039",
+      "draven_holt_motion_040",
+      "draven_holt_motion_041",
+      "draven_holt_motion_042"
+    ],
+    "g8": [
+      "draven_holt_motion_043",
+      "draven_holt_motion_044",
+      "draven_holt_motion_045",
+      "draven_holt_motion_046",
+      "draven_holt_motion_047",
+      "draven_holt_motion_048"
+    ]
+  },
+  "status": "pending_visual_parity",
+  "target_pose_count": 48
+}

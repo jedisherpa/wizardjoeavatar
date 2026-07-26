@@ -235,6 +235,24 @@ twelve authored IDs passed direct full-size projection and port 8665 presents
 the candidate beside approved HD Wizard Joe. Product visual approval is still
 pending and runtime admission remains false.
 
+Draven Holt is now the seventh incomplete roster character to reach a complete
+48-pose review candidate. His immutable supplied poses `001`-`036` were merged
+with twelve new full-size RGBA poses for:
+
+- `g7`: receive, grant the floor, listen, probe, assign, and confirm a
+  foreman status exchange.
+- `g8`: detect, stop, contain, reroute, verify, and release a site-safety
+  intervention.
+
+Exactly one checklist clipboard and pencil remain continuously owned by
+Draven's left hand while the free right hand performs every gesture. All
+twelve oversize silhouettes were reduced by 0.18-3.96 percent through the
+explicit receipted path; the canonicalizer's strict default remains unchanged.
+Two consecutive builds produced identical artifact and library-index hashes.
+All twelve authored IDs passed direct full-size projection and port 8665
+presents the candidate beside approved HD Wizard Joe. Product visual approval
+is still pending and runtime admission remains false.
+
 | Character | Candidate poses | Missing poses | State |
 | --- | ---: | ---: | --- |
 | Orion Vale | 48 | 0 | Full-size technical review passed; product visual approval pending |
@@ -243,8 +261,9 @@ pending and runtime admission remains false.
 | Thorne Vale | 48 | 0 | Full-size technical review passed; product visual approval pending |
 | Elara Voss | 48 | 0 | Full-size technical review passed; product visual approval pending |
 | Kai Renner | 48 | 0 | Full-size technical review passed; product visual approval pending |
-| Remaining roster | 240 | 48 | Authoring/review required |
-| **Total** | **528** | **48** | **576 target slots** |
+| Draven Holt | 48 | 0 | Full-size technical review passed; product visual approval pending |
+| Remaining roster | 204 | 36 | Authoring/review required |
+| **Total** | **540** | **36** | **576 target slots** |
 
 Orion candidate receipts:
 
@@ -297,6 +316,16 @@ Kai candidate receipts:
 - Alpha-extraction receipts: `46c6c458f911423bb244df328b1780fd4a54b1b0a506d80d38f4e150f88f1828`
 - Canonicalization receipts: `3249ece047e6c14330aae17d162de8de24383be5e18591ab222c07cd78c7ce31`
 
+Draven candidate receipts:
+
+- Artifact: `ac51bba7f40bd42b374857b3070d62716f878894b99190d76cd434f08a843e82`
+- Library index: `6fc822bf34011fa0d3e110a1c261851c04ceadab35184e9e95db378b11ce0069`
+- Reconstruction: `0aecf781a48b5bc4862cc6ce50a29fb2a91406a7ebe2f6941e9bfe604f08eebe`
+- Review motion contract: `10a9678fdcc13a902f7ad32c000e1ac3bfd8d5904c14b3e15903510c746b98b4`
+- Contact sheet: `b40ffd132a58e8e69bf5d7a93e1fdbce6a72d482c88966282399e6396451d797`
+- Alpha-extraction receipts: `23cb83653f8a9de2bc4c71f96c6d303d732c481c868e883a136022c29789de26`
+- Canonicalization receipts: `b6ed2386bb2a372581b5ca680e23e1529a71dbf57db2443b35a918b39bf45273`
+
 ## Roster Boundary
 
 The archives also contain Crystail. Crystail remains
@@ -310,7 +339,7 @@ and count parity rather than an automatic quality waiver.
 
 ## Next Build Order
 
-1. Author the 60 remaining frames as explicitly new art, one character at a
+1. Author the 36 remaining frames as explicitly new art, one character at a
    time, using the character's compiled supplied set as visual authority.
 2. Rebuild each completed 48-pose artifact twice and require identical hashes.
 3. Review every full-size frame and motion sequence beside approved HD Wizard

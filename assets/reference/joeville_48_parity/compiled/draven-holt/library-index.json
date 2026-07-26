@@ -1,10 +1,10 @@
 {
   "approved_pose_count": 0,
-  "asset_set_id": "draven-holt-source-motion-v001",
-  "candidate_pose_count": 36,
+  "asset_set_id": "draven-holt-authored-parity-v001",
+  "candidate_pose_count": 48,
   "character_id": "draven-holt",
   "display_name": "Draven Holt",
-  "pose_count": 36,
+  "pose_count": 48,
   "profile": {
     "alpha_mode": "straight",
     "baseline_y": 1185,
@@ -18,8 +18,8 @@
   "runtime_admitted": false,
   "schema_version": 1,
   "sequences": {
-    "draven-holt-source-all": {
-      "approval_state": "candidate_source_partial",
+    "draven-holt-parity-all": {
+      "approval_state": "pending_visual_parity",
       "fps": 8,
       "loop": true,
       "pose_ids": [
@@ -58,12 +58,24 @@
         "draven_holt_motion_033",
         "draven_holt_motion_034",
         "draven_holt_motion_035",
-        "draven_holt_motion_036"
+        "draven_holt_motion_036",
+        "draven_holt_motion_037",
+        "draven_holt_motion_038",
+        "draven_holt_motion_039",
+        "draven_holt_motion_040",
+        "draven_holt_motion_041",
+        "draven_holt_motion_042",
+        "draven_holt_motion_043",
+        "draven_holt_motion_044",
+        "draven_holt_motion_045",
+        "draven_holt_motion_046",
+        "draven_holt_motion_047",
+        "draven_holt_motion_048"
       ],
       "runtime_admitted": false
     },
     "g1": {
-      "approval_state": "candidate_source_partial",
+      "approval_state": "pending_visual_parity",
       "fps": 8,
       "loop": true,
       "pose_ids": [
@@ -77,7 +89,7 @@
       "runtime_admitted": false
     },
     "g2": {
-      "approval_state": "candidate_source_partial",
+      "approval_state": "pending_visual_parity",
       "fps": 8,
       "loop": true,
       "pose_ids": [
@@ -91,7 +103,7 @@
       "runtime_admitted": false
     },
     "g3": {
-      "approval_state": "candidate_source_partial",
+      "approval_state": "pending_visual_parity",
       "fps": 8,
       "loop": true,
       "pose_ids": [
@@ -105,7 +117,7 @@
       "runtime_admitted": false
     },
     "g4": {
-      "approval_state": "candidate_source_partial",
+      "approval_state": "pending_visual_parity",
       "fps": 8,
       "loop": true,
       "pose_ids": [
@@ -119,7 +131,7 @@
       "runtime_admitted": false
     },
     "g5": {
-      "approval_state": "candidate_source_partial",
+      "approval_state": "pending_visual_parity",
       "fps": 8,
       "loop": true,
       "pose_ids": [
@@ -133,7 +145,7 @@
       "runtime_admitted": false
     },
     "g6": {
-      "approval_state": "candidate_source_partial",
+      "approval_state": "pending_visual_parity",
       "fps": 8,
       "loop": true,
       "pose_ids": [
@@ -145,14 +157,46 @@
         "draven_holt_motion_036"
       ],
       "runtime_admitted": false
+    },
+    "g7": {
+      "approval_state": "pending_visual_parity",
+      "fps": 8,
+      "intent": "receive_grant_floor_listen_probe_assign_confirm",
+      "loop": true,
+      "loop_mode": "loop",
+      "pose_ids": [
+        "draven_holt_motion_037",
+        "draven_holt_motion_038",
+        "draven_holt_motion_039",
+        "draven_holt_motion_040",
+        "draven_holt_motion_041",
+        "draven_holt_motion_042"
+      ],
+      "runtime_admitted": false
+    },
+    "g8": {
+      "approval_state": "pending_visual_parity",
+      "fps": 8,
+      "intent": "detect_stop_contain_reroute_verify_release",
+      "loop": false,
+      "loop_mode": "hold_last",
+      "pose_ids": [
+        "draven_holt_motion_043",
+        "draven_holt_motion_044",
+        "draven_holt_motion_045",
+        "draven_holt_motion_046",
+        "draven_holt_motion_047",
+        "draven_holt_motion_048"
+      ],
+      "runtime_admitted": false
     }
   },
   "shards": [
     {
-      "approval_state": "candidate_source_partial",
-      "bytes": 20555399,
-      "path": "draven-holt-candidate-source-motion-v001.wjpose",
-      "pose_count": 36,
+      "approval_state": "pending_visual_parity",
+      "bytes": 31371666,
+      "path": "draven-holt-candidate-authored-parity-v001.wjpose",
+      "pose_count": 48,
       "pose_ids": [
         "draven_holt_motion_001",
         "draven_holt_motion_002",
@@ -189,12 +233,24 @@
         "draven_holt_motion_033",
         "draven_holt_motion_034",
         "draven_holt_motion_035",
-        "draven_holt_motion_036"
+        "draven_holt_motion_036",
+        "draven_holt_motion_037",
+        "draven_holt_motion_038",
+        "draven_holt_motion_039",
+        "draven_holt_motion_040",
+        "draven_holt_motion_041",
+        "draven_holt_motion_042",
+        "draven_holt_motion_043",
+        "draven_holt_motion_044",
+        "draven_holt_motion_045",
+        "draven_holt_motion_046",
+        "draven_holt_motion_047",
+        "draven_holt_motion_048"
       ],
       "runtime_admitted": false,
-      "sha256": "244627668d46ad2c552d2ec2d7f5d24ce4ef4750c3a423d097bee1929c01e724",
-      "shard_id": "draven-holt-source-motion-v001",
-      "source": "joeville_contact_sheet_reconstruction"
+      "sha256": "ac51bba7f40bd42b374857b3070d62716f878894b99190d76cd434f08a843e82",
+      "shard_id": "draven-holt-authored-parity-v001",
+      "source": "joeville_supplied_plus_authored_full_size"
     }
   ]
 }

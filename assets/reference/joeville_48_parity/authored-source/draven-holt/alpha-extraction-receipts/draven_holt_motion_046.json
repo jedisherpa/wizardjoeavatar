@@ -1,0 +1,36 @@
+{
+  "canvas_normalized": false,
+  "canvas_size": [
+    1254,
+    1254
+  ],
+  "destination_path": "/Users/paul/Documents/WizardJoeAsci/worktrees/wizardjoe-character-director/assets/reference/joeville_48_parity/authored-source/draven-holt/alpha-extracted/draven_holt_motion_046.png",
+  "destination_rgba_sha256": "69a9c65e85822afddf88da9b75214b669adb52c99b13fe402d019da0a2b6f76f",
+  "destination_sha256": "a84fa5aae0defdaada025416e6c573048ad6f856a7b015f05734be03ae0a7b52",
+  "edge_contract": 1,
+  "key_color": [
+    246,
+    5,
+    238
+  ],
+  "normalization_offset": [
+    0,
+    0
+  ],
+  "normalization_scale": 1.0,
+  "schema_version": 1,
+  "silhouette_bbox": [
+    160,
+    48,
+    917,
+    1194
+  ],
+  "source_canvas_size": [
+    1254,
+    1254
+  ],
+  "source_path": "/Users/paul/Documents/WizardJoeAsci/worktrees/wizardjoe-character-director/assets/reference/joeville_48_parity/authored-source/draven-holt/chroma-source/draven_holt_motion_046.png",
+  "source_sha256": "08175af75ab90ae00cf5b279b1a5032fa1f2d251dd9a0d89040b6c6fb99b5e50",
+  "tolerance": 110,
+  "transparent_pixels_before_contract": 1205207
+}

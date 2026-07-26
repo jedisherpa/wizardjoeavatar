@@ -1,0 +1,42 @@
+{
+  "artifact_sha256": "ac51bba7f40bd42b374857b3070d62716f878894b99190d76cd434f08a843e82",
+  "character_id": "draven-holt",
+  "decision": "static_visual_identity_gate_passed_for_product_review",
+  "evidence": {
+    "direct_projection_captures": [
+      "pose-037.jpg",
+      "pose-038.jpg",
+      "pose-039.jpg",
+      "pose-040.jpg",
+      "pose-041.jpg",
+      "pose-042.jpg",
+      "pose-043.jpg",
+      "pose-044.jpg",
+      "pose-045.jpg",
+      "pose-046.jpg",
+      "pose-047.jpg",
+      "pose-048.jpg"
+    ],
+    "side_by_side_capture": "side-by-side-candidate.jpg"
+  },
+  "identity_checks": {
+    "black_flat_cap": "passed",
+    "black_shoes_and_grounded_contact": "passed",
+    "black_suit": "passed",
+    "bright_green_rectangular_glasses": "passed",
+    "clipboard_and_pencil_left_hand_ownership": "passed",
+    "four_item_checklist_continuity": "passed",
+    "orange_shirt_and_tie_line": "passed",
+    "voxel_proportions_and_beard": "passed"
+  },
+  "library_index_sha256": "6fc822bf34011fa0d3e110a1c261851c04ceadab35184e9e95db378b11ce0069",
+  "product_approval": "pending",
+  "review_projection": true,
+  "runtime_admitted": false,
+  "schema_version": 1,
+  "technical_tests": {
+    "command_scope": "focused parity, provenance, receipt-chain, and observer suites",
+    "passed": 32,
+    "status": "passed"
+  }
+}

@@ -1,0 +1,357 @@
+{
+  "approval_state": "pending_visual_parity",
+  "authoring_brief_sha256": "af2fd2a038d0317e7a7d8b86c9339baa3af740fea35e748cd229759226dc6342",
+  "authority_manifest_sha256": "740f35730f4aa1e6c6ef96be80115c5b0e117397f792d57fdf5360452bbe78c8",
+  "canonicalization": "integer_translation_with_opt_in_oversize_fit",
+  "character_id": "draven-holt",
+  "existing_artifact_sha256": "244627668d46ad2c552d2ec2d7f5d24ce4ef4750c3a423d097bee1929c01e724",
+  "existing_reconstruction_sha256": "55fd78882e1b8226a543e285591932cd73b354a71ea9550e5c7cfb4fdba6ad5f",
+  "generation_method": "built_in_imagegen_flat_chroma_then_local_alpha_extraction",
+  "profile_id": "wizardjoe_hd_alpha_1254_v001",
+  "runtime_admitted": false,
+  "schema_version": 1,
+  "sequences": {
+    "g7": {
+      "fps": 8,
+      "frames": [
+        {
+          "alpha_extracted_path": "alpha-extracted/draven_holt_motion_037.png",
+          "alpha_extracted_sha256": "85752d6816cb6482cbb384213115dd73fdd25d5552582b25a2622fabcd08ac85",
+          "authorship": "authored_full_size_imagegen_v1",
+          "brief_id": "draven-g7-receive",
+          "canonical_bbox": [
+            350,
+            69,
+            903,
+            1185
+          ],
+          "chroma_source_path": "chroma-source/draven_holt_motion_037.png",
+          "chroma_source_sha256": "ca0d107d25a351847dffb08976b5d7c9b32c868763e2d4b3f3da3a9499d95d16",
+          "continuity": "Three-quarter grounded attention toward the reporter with chin level, shoulders composed, the clipboard fixed in his left hand, and the free right hand slightly active.",
+          "forbidden": "Exact duplicate of motion 023 or 025, clipboard inspection, walking stride, raised heel, hand swap, missing pencil, or identity drift.",
+          "frame_index": 1,
+          "pose_id": "draven_holt_motion_037",
+          "pose_summary": "Grounded receipt of a status report.",
+          "rgba_sha256": "7372ad3dbcc071f902709bbf6a4e6f2fe188f1c43b878c01437fe2b9cb50a5cf",
+          "slot_id": "motion-037",
+          "source_path": "frames/draven_holt_motion_037.png",
+          "source_sha256": "8d6d0ebfea597aa52e13732270838a2a1f2f2c2931ed52cc534d66974cc3061f"
+        },
+        {
+          "alpha_extracted_path": "alpha-extracted/draven_holt_motion_038.png",
+          "alpha_extracted_sha256": "2339c9606197e1e4e33a9efb991b1a4df4639b9e80ce060ffc32fcaa64833d29",
+          "authorship": "authored_full_size_imagegen_v1",
+          "brief_id": "draven-g7-grant-floor",
+          "canonical_bbox": [
+            296,
+            69,
+            958,
+            1185
+          ],
+          "chroma_source_path": "chroma-source/draven_holt_motion_038.png",
+          "chroma_source_sha256": "7559be85b28cade062e0e7213573ec6edd386d688072cdddde3d4ff5f97ddb83",
+          "continuity": "His free right palm opens low toward the reporter while the elbow stays close, the torso rotates no more than ten degrees, and the left hand keeps the clipboard below the sternum.",
+          "forbidden": "Wave, salute, pointing, clipboard transfer, duplicate clipboard, changed checklist marks, foot slide, or cropped fingers.",
+          "frame_index": 2,
+          "pose_id": "draven_holt_motion_038",
+          "pose_summary": "Low open-palm grant of the conversational floor.",
+          "rgba_sha256": "61a567621afc7d99d69f82da49e3ec12e3978f251388dd2d23ec720f6d825f75",
+          "slot_id": "motion-038",
+          "source_path": "frames/draven_holt_motion_038.png",
+          "source_sha256": "38038105a363480ccc8bf7fd58dcebbe1ac7aa7e2c2f6825056007214e73f3ad"
+        },
+        {
+          "alpha_extracted_path": "alpha-extracted/draven_holt_motion_039.png",
+          "alpha_extracted_sha256": "a206288f60cb67e72b2517a6eabbcc2c0bd9be2beedd43db2ff29444f5809c2d",
+          "authorship": "authored_full_size_imagegen_v1",
+          "brief_id": "draven-g7-listen",
+          "canonical_bbox": [
+            370,
+            69,
+            885,
+            1185
+          ],
+          "chroma_source_path": "chroma-source/draven_holt_motion_039.png",
+          "chroma_source_sha256": "0b509748f42aeccb2a287e21f088a56ee58a4d9c8c6c6eb57c1fc4b0b6d7d7a2",
+          "continuity": "The free hand retracts quietly near the belt as his head and upper chest incline six to eight degrees in active listening; the clipboard remains still and both shoes stay locked.",
+          "forbidden": "Looking at the clipboard, bow, crouch, root translation, hand covering the face, heel lift, closed eyes, or prop drift.",
+          "frame_index": 3,
+          "pose_id": "draven_holt_motion_039",
+          "pose_summary": "Contained active listening to the report.",
+          "rgba_sha256": "2994540d202ad8378af003a8244a0c31a104f4456bee858d4f3229fa48d51274",
+          "slot_id": "motion-039",
+          "source_path": "frames/draven_holt_motion_039.png",
+          "source_sha256": "c961590d59fa9f0096b35391543034d8c64c776e1426ca863067f6231fd8ec2d"
+        },
+        {
+          "alpha_extracted_path": "alpha-extracted/draven_holt_motion_040.png",
+          "alpha_extracted_sha256": "ec460db9683b9c0d264c27804a60987d0fce88f055e991921d7f49c5b1e07cfc",
+          "authorship": "authored_full_size_imagegen_v1",
+          "brief_id": "draven-g7-probe",
+          "canonical_bbox": [
+            352,
+            69,
+            903,
+            1185
+          ],
+          "chroma_source_path": "chroma-source/draven_holt_motion_040.png",
+          "chroma_source_sha256": "fc56a3117a7576e17f3331452ec1ffc25a65c0f7d0318b28af076f50ec179e4a",
+          "continuity": "His head lifts with restrained skepticism as the free right palm turns upward near the sternum to ask for one missing fact; the clipboard remains quiet in the left hand.",
+          "forbidden": "Clipboard inspection, finger aimed at viewer, accusatory point, broad shrug, foot movement, face obstruction, or changed prop hand.",
+          "frame_index": 4,
+          "pose_id": "draven_holt_motion_040",
+          "pose_summary": "Compact request for the missing fact.",
+          "rgba_sha256": "ce0b4df4155b357e7fa328fa7241f3b496bc9f37192184b8c85a616ad24f90ac",
+          "slot_id": "motion-040",
+          "source_path": "frames/draven_holt_motion_040.png",
+          "source_sha256": "bb755f5ba920dae357e910ad9850ac97355b9dfc7e77ce26c177d3fc5d5ea57c"
+        },
+        {
+          "alpha_extracted_path": "alpha-extracted/draven_holt_motion_041.png",
+          "alpha_extracted_sha256": "7eb07b32722d7129cbb5b6223a4bed11283fa3773878cf9d1dd1e50b8b8fbb23",
+          "authorship": "authored_full_size_imagegen_v1",
+          "brief_id": "draven-g7-assign",
+          "canonical_bbox": [
+            308,
+            69,
+            946,
+            1185
+          ],
+          "chroma_source_path": "chroma-source/draven_holt_motion_041.png",
+          "chroma_source_sha256": "259554f4949e7bc38a27ecb898e2ae5a5e2725241c0cc73754edd76d976367fd",
+          "continuity": "The free right hand makes one compact edge-led placement toward the work area while the torso follows no more than twelve degrees and the clipboard stays below the sternum.",
+          "forbidden": "Finger point, broad sweep, writing, checking the list, clipboard duplication, raised heel, root shift, or crossed feet.",
+          "frame_index": 5,
+          "pose_id": "draven_holt_motion_041",
+          "pose_summary": "Clear contained assignment toward the work area.",
+          "rgba_sha256": "e9f996797d0e402c154e2e2bf37f1c0d2e68f5a4e14ffaf69f0be0d60157117e",
+          "slot_id": "motion-041",
+          "source_path": "frames/draven_holt_motion_041.png",
+          "source_sha256": "a5eb1e2223855e631cbde3d6ef2b5cedbdf5ff64a9d9e4926dca941c98c2e1c3"
+        },
+        {
+          "alpha_extracted_path": "alpha-extracted/draven_holt_motion_042.png",
+          "alpha_extracted_sha256": "4f85d25b1210c7ec91113127213941f2ba261bdb1d51490517f739a5cbffdb62",
+          "authorship": "authored_full_size_imagegen_v1",
+          "brief_id": "draven-g7-confirm",
+          "canonical_bbox": [
+            311,
+            69,
+            943,
+            1185
+          ],
+          "chroma_source_path": "chroma-source/draven_holt_motion_042.png",
+          "chroma_source_sha256": "0230f4338c0a98f2c073be3eb6d43dbf6513ef6a8564843f736513b8e337c6af",
+          "continuity": "A small downward nod and low open right palm request acknowledgement as the shoulders soften and the grounded pose resolves cleanly toward frame 037.",
+          "forbidden": "Thumbs-up, wave, salute, clipboard movement, missing pencil, root displacement, heel lift, or unresolved weight.",
+          "frame_index": 6,
+          "pose_id": "draven_holt_motion_042",
+          "pose_summary": "Grounded confirmation that closes the status-exchange loop.",
+          "rgba_sha256": "fa3ca91f9988d689c64b9cb234dd9c5c93e7e7515e3720e9209055788deee108",
+          "slot_id": "motion-042",
+          "source_path": "frames/draven_holt_motion_042.png",
+          "source_sha256": "291cd1d3e60223d199e2b86616e1df67037cdc14a6fe080efbb900d8fdcd1a7f"
+        }
+      ],
+      "intent": "receive_grant_floor_listen_probe_assign_confirm",
+      "loop": true,
+      "motion_contract": {
+        "entry_handoffs": [
+          "front_idle",
+          "three_quarter_idle"
+        ],
+        "exit_handoffs": [
+          "front_idle",
+          "three_quarter_idle",
+          "g8"
+        ],
+        "family": "foreman_status_exchange",
+        "hold_frame_indices": [
+          3,
+          5
+        ],
+        "interrupt_policy": "marker_safe",
+        "interruptible_frame_indices": [
+          1,
+          3,
+          6
+        ],
+        "loop_mode": "loop",
+        "root_policy": "fixed",
+        "support_policy": "dual_foot_grounded"
+      }
+    },
+    "g8": {
+      "fps": 8,
+      "frames": [
+        {
+          "alpha_extracted_path": "alpha-extracted/draven_holt_motion_043.png",
+          "alpha_extracted_sha256": "9b752cc59b21d104fd680d2e1853da4ff6a41a986719358c1a40f4abb9a58d65",
+          "authorship": "authored_full_size_imagegen_v1",
+          "brief_id": "draven-g8-detect",
+          "canonical_bbox": [
+            302,
+            69,
+            951,
+            1185
+          ],
+          "chroma_source_path": "chroma-source/draven_holt_motion_043.png",
+          "chroma_source_sha256": "ee500d64106617970e307f5689ca8d63a7fd9c641841f7ae566441a2ecd796ca",
+          "continuity": "His eyes and chin snap toward an off-screen hazard as the shoulders brace and knees soften without lowering the root; the clipboard remains fixed in his left hand.",
+          "forbidden": "Airborne action, running pose, clipboard inspection, hand swap, changed checklist marks, heel lift, or exaggerated crouch.",
+          "frame_index": 1,
+          "pose_id": "draven_holt_motion_043",
+          "pose_summary": "Immediate grounded detection of an off-screen hazard.",
+          "rgba_sha256": "1f77d41eee077a3ed8767c351426603308250a20eb058aec00cb5c9940805800",
+          "slot_id": "motion-043",
+          "source_path": "frames/draven_holt_motion_043.png",
+          "source_sha256": "aa76d65ac488612f2b39661e71ec83a215e9f3bc023bd43b8c885c3c5f0949ba"
+        },
+        {
+          "alpha_extracted_path": "alpha-extracted/draven_holt_motion_044.png",
+          "alpha_extracted_sha256": "76d767e363d8e5b8d39957a37f982409f9c18fdcdd19df09be05c9cd76de3d06",
+          "authorship": "authored_full_size_imagegen_v1",
+          "brief_id": "draven-g8-stop",
+          "canonical_bbox": [
+            344,
+            69,
+            911,
+            1185
+          ],
+          "chroma_source_path": "chroma-source/draven_holt_motion_044.png",
+          "chroma_source_sha256": "54f23fb7fece834e4036cf79e4f99bdbfa3f08580794ca5df8d197e881947be9",
+          "continuity": "The free right arm presents a clear vertical stop palm at upper-chest height with a soft elbow while his gaze pins the hazard and both shoes remain planted.",
+          "forbidden": "Wave, salute, fist, finger point, face obstruction, clipboard lift, duplicate prop, root shift, or cropped hand.",
+          "frame_index": 2,
+          "pose_id": "draven_holt_motion_044",
+          "pose_summary": "Readable stop signal held toward the unsafe lane.",
+          "rgba_sha256": "45c69a6cff3b214136fbdec2b37cc4e50f74fee2098d5df931dc85be02487ea8",
+          "slot_id": "motion-044",
+          "source_path": "frames/draven_holt_motion_044.png",
+          "source_sha256": "798ba4d25e576292740b04e76d5d8c0925b269768705bd196e8dd57bff63189f"
+        },
+        {
+          "alpha_extracted_path": "alpha-extracted/draven_holt_motion_045.png",
+          "alpha_extracted_sha256": "889e6f47f2b2bab1896bf375c2cd2d397cf781011ca4879321bf97ae32f863f1",
+          "authorship": "authored_full_size_imagegen_v1",
+          "brief_id": "draven-g8-contain",
+          "canonical_bbox": [
+            237,
+            69,
+            1017,
+            1185
+          ],
+          "chroma_source_path": "chroma-source/draven_holt_motion_045.png",
+          "chroma_source_sha256": "bbbc1123d9a3a27c784bb8aed00cc4930ed0015cd2597f9ef02c381b8663df92",
+          "continuity": "The torso turns ten to fifteen degrees toward danger as the stop arm angles across the unsafe lane and the clipboard stays close to the opposite hip.",
+          "forbidden": "Broad dance shape, crossed arms, clipboard used as shield, prop transfer, lifted foot, root translation, or silhouette overlap.",
+          "frame_index": 3,
+          "pose_id": "draven_holt_motion_045",
+          "pose_summary": "Contained blocking of the unsafe lane.",
+          "rgba_sha256": "94c291c60aa0c4ff42894eb5b7b311cf7b4d00b37470b7b51f93962ed090b41b",
+          "slot_id": "motion-045",
+          "source_path": "frames/draven_holt_motion_045.png",
+          "source_sha256": "65932572335df6973020806602c4d47d454e6afe33ee348f5462a7e9935a04c8"
+        },
+        {
+          "alpha_extracted_path": "alpha-extracted/draven_holt_motion_046.png",
+          "alpha_extracted_sha256": "a84fa5aae0defdaada025416e6c573048ad6f856a7b015f05734be03ae0a7b52",
+          "authorship": "authored_full_size_imagegen_v1",
+          "brief_id": "draven-g8-reroute",
+          "canonical_bbox": [
+            258,
+            69,
+            995,
+            1185
+          ],
+          "chroma_source_path": "chroma-source/draven_holt_motion_046.png",
+          "chroma_source_sha256": "08175af75ab90ae00cf5b279b1a5032fa1f2d251dd9a0d89040b6c6fb99b5e50",
+          "continuity": "The free right hand changes to a low open whole-hand direction toward the safe route while head and eyes lead the destination and the clipboard remains stable.",
+          "forbidden": "Accusatory finger point, broad sweep, clipboard pointing, pencil pointing, foot slide, cropped fingers, or head turn beyond the gesture.",
+          "frame_index": 4,
+          "pose_id": "draven_holt_motion_046",
+          "pose_summary": "Low whole-hand reroute toward the safe path.",
+          "rgba_sha256": "ea9c387677ff88703d4814a9e4f8e5422a31d7332118c24fc6aa71a6f19e621a",
+          "slot_id": "motion-046",
+          "source_path": "frames/draven_holt_motion_046.png",
+          "source_sha256": "07c8def54aa6c4c2000a64e6d090c689b3e62f708fa8a1399a4ee16fb1d515ae"
+        },
+        {
+          "alpha_extracted_path": "alpha-extracted/draven_holt_motion_047.png",
+          "alpha_extracted_sha256": "b537d734b15f0cec62038e48dbe1feaad31d297de18f9775b1bd152ec1624708",
+          "authorship": "authored_full_size_imagegen_v1",
+          "brief_id": "draven-g8-verify",
+          "canonical_bbox": [
+            316,
+            69,
+            939,
+            1185
+          ],
+          "chroma_source_path": "chroma-source/draven_holt_motion_047.png",
+          "chroma_source_sha256": "934f0a066178b1c744a455d86b5feee75eb2458428876d49c662fc5569bc7fd9",
+          "continuity": "The free hand retracts halfway as his gaze checks both hazard and crew and the posture rises from braced to controlled without moving the clipboard or feet.",
+          "forbidden": "Looking down at checklist, writing, thumbs-up, crossed feet, heel lift, root drift, prop disappearance, or expression distortion.",
+          "frame_index": 5,
+          "pose_id": "draven_holt_motion_047",
+          "pose_summary": "Controlled verification that the unsafe lane is clear.",
+          "rgba_sha256": "6c338cf381058b702fa9cda06d68aec6c14ca859a72df0f2191a612d66a2997f",
+          "slot_id": "motion-047",
+          "source_path": "frames/draven_holt_motion_047.png",
+          "source_sha256": "4fb5557136aa736b6ec1fbeeea0322ec0696956541643dad364dfed14466e23f"
+        },
+        {
+          "alpha_extracted_path": "alpha-extracted/draven_holt_motion_048.png",
+          "alpha_extracted_sha256": "940dbd4d5f5e0ee0807b51cac56f171965b5c09645861daf1e99d8291936d353",
+          "authorship": "authored_full_size_imagegen_v1",
+          "brief_id": "draven-g8-release",
+          "canonical_bbox": [
+            312,
+            69,
+            941,
+            1185
+          ],
+          "chroma_source_path": "chroma-source/draven_holt_motion_048.png",
+          "chroma_source_sha256": "47d3591d0cfe64a13b3e5dd30822cae27174345391ac3d959c1aa9c9823c1c0b",
+          "continuity": "A restrained nod and low palm-down proceed release settle into an exit-ready three-quarter stance with the clipboard below the sternum and both shoes planted.",
+          "forbidden": "Wave, salute, thumbs-up, profile walk already begun, hand swap, second clipboard, missing pencil, or raised heel.",
+          "frame_index": 6,
+          "pose_id": "draven_holt_motion_048",
+          "pose_summary": "Grounded proceed release after the safety reroute.",
+          "rgba_sha256": "452e3918b8e406b7b90f00eb092968d83404e5c857c6861f49ed7a348125b6c5",
+          "slot_id": "motion-048",
+          "source_path": "frames/draven_holt_motion_048.png",
+          "source_sha256": "10527dd03f44612c86c0978595dfe31bb44b6150bfb8fe11c342e6ecf2c4849d"
+        }
+      ],
+      "intent": "detect_stop_contain_reroute_verify_release",
+      "loop": false,
+      "motion_contract": {
+        "entry_handoffs": [
+          "front_idle",
+          "three_quarter_idle",
+          "g7"
+        ],
+        "exit_handoffs": [
+          "front_idle",
+          "profile_walk"
+        ],
+        "family": "site_safety_intervention",
+        "hold_frame_indices": [
+          2,
+          4,
+          6
+        ],
+        "interrupt_policy": "marker_safe",
+        "interruptible_frame_indices": [
+          1,
+          2,
+          4,
+          6
+        ],
+        "loop_mode": "hold_last",
+        "root_policy": "fixed",
+        "support_policy": "dual_foot_grounded"
+      }
+    }
+  }
+}
