@@ -1,0 +1,1507 @@
+{
+  "approval_state": "candidate_inventory_complete",
+  "assets": [
+    {
+      "asset_id": "ACT007",
+      "canonical_equivalence_review": "pending",
+      "filename": "007_ACT007_front_three_quarter_right_alpha.png",
+      "identity_review": "derived_from_validated_source",
+      "image_audit": {
+        "alpha_mode": "binary_straight",
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 285279,
+        "transparent_rgb_zero": true,
+        "visible_bbox": [
+          463,
+          52,
+          1180,
+          972
+        ]
+      },
+      "method": "deterministic_horizontal_mirror",
+      "motion_review": "pending",
+      "path": "assets/reference/characters/dragon/interim-v001/alphas/007_ACT007_front_three_quarter_right_alpha.png",
+      "runtime_admitted": false,
+      "sha256": "78fab739806171424e7cd372a3c8a86f24a4029ab43c94292ee74a87e8fca39e",
+      "source_asset_id": "ACT002",
+      "source_path": "assets/reference/characters/dragon/source/alphas/002_ACT002_front_three_quarter_left_alpha.png",
+      "source_sha256": "858b0b8a474cc97de16534d78d49e43e5b6e437948d355dd25bc23704fc048ce"
+    },
+    {
+      "asset_id": "ACT032",
+      "canonical_equivalence_review": "pending",
+      "chroma_source_path": "assets/reference/characters/dragon/interim-v001/generated-source/032_ACT032_cause_and_effect_chroma.png",
+      "chroma_source_sha256": "53592088df04f6f972501ee7afd9d6013477ff63a3eead41d296da4520c57702",
+      "filename": "032_ACT032_cause_and_effect_alpha.png",
+      "generation_intent": "cause and effect",
+      "identity_review": "pending",
+      "image_audit": {
+        "alpha_mode": "binary_straight",
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 227051,
+        "transparent_rgb_zero": true,
+        "visible_bbox": [
+          520,
+          97,
+          1339,
+          935
+        ]
+      },
+      "method": "identity_locked_image_generation_then_chroma_extraction",
+      "motion_review": "pending",
+      "path": "assets/reference/characters/dragon/interim-v001/alphas/032_ACT032_cause_and_effect_alpha.png",
+      "prompt_contract_id": "dragon-drg001-identity-locked-chroma-v001",
+      "runtime_admitted": false,
+      "sha256": "1026dbbed6a62bc1486cf72443e1a7fb86ff1d594dc64f9efe438dc01f7adab5"
+    },
+    {
+      "asset_id": "ACT044",
+      "canonical_equivalence_review": "pending",
+      "chroma_source_path": "assets/reference/characters/dragon/interim-v001/generated-source/044_ACT044_excitement_chroma.png",
+      "chroma_source_sha256": "8259a2e531cedb0e67c85a84077c872cfe18546212c9ca81f38ccebd84072058",
+      "filename": "044_ACT044_excitement_alpha.png",
+      "generation_intent": "excitement",
+      "identity_review": "pending",
+      "image_audit": {
+        "alpha_mode": "binary_straight",
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 228960,
+        "transparent_rgb_zero": true,
+        "visible_bbox": [
+          613,
+          103,
+          1278,
+          932
+        ]
+      },
+      "method": "identity_locked_image_generation_then_chroma_extraction",
+      "motion_review": "pending",
+      "path": "assets/reference/characters/dragon/interim-v001/alphas/044_ACT044_excitement_alpha.png",
+      "prompt_contract_id": "dragon-drg001-identity-locked-chroma-v001",
+      "runtime_admitted": false,
+      "sha256": "63ccc4e564827ddf626b9cb7176a78ac5804ac1343b76fb9549b9fb8e45134f6"
+    },
+    {
+      "asset_id": "ACT060",
+      "canonical_equivalence_review": "pending",
+      "chroma_source_path": "assets/reference/characters/dragon/interim-v001/generated-source/060_ACT060_fatigue_chroma.png",
+      "chroma_source_sha256": "8eb4ba6b92dae53085210d3dd1f0e085b618a78fd19d1afb98c45d48122a4058",
+      "filename": "060_ACT060_fatigue_alpha.png",
+      "generation_intent": "fatigue",
+      "identity_review": "pending",
+      "image_audit": {
+        "alpha_mode": "binary_straight",
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 209755,
+        "transparent_rgb_zero": true,
+        "visible_bbox": [
+          715,
+          108,
+          1277,
+          931
+        ]
+      },
+      "method": "identity_locked_image_generation_then_chroma_extraction",
+      "motion_review": "pending",
+      "path": "assets/reference/characters/dragon/interim-v001/alphas/060_ACT060_fatigue_alpha.png",
+      "prompt_contract_id": "dragon-drg001-identity-locked-chroma-v001",
+      "runtime_admitted": false,
+      "sha256": "5daf2c0c57c7f4c879b828b5922879a2baa0714d60ac6655c49fea908451534a"
+    },
+    {
+      "asset_id": "ACT081",
+      "canonical_equivalence_review": "pending",
+      "chroma_source_path": "assets/reference/characters/dragon/interim-v001/generated-source/081_ACT081_run_passing_chroma.png",
+      "chroma_source_sha256": "9318f13f331f3b4d38cb209fd91cf0cb6b2ce63dda21fbf2962b5bf19db6beb5",
+      "filename": "081_ACT081_run_passing_alpha.png",
+      "generation_intent": "run passing",
+      "identity_review": "pending",
+      "image_audit": {
+        "alpha_mode": "binary_straight",
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 162503,
+        "transparent_rgb_zero": true,
+        "visible_bbox": [
+          304,
+          239,
+          1379,
+          841
+        ]
+      },
+      "method": "identity_locked_image_generation_then_chroma_extraction",
+      "motion_review": "pending",
+      "path": "assets/reference/characters/dragon/interim-v001/alphas/081_ACT081_run_passing_alpha.png",
+      "prompt_contract_id": "dragon-drg001-identity-locked-chroma-v001",
+      "runtime_admitted": false,
+      "sha256": "7554922661f63303e3eee628f4c4d437d4f6491ba677f630a3dd3b6dce25f482"
+    },
+    {
+      "asset_id": "ACT082",
+      "canonical_equivalence_review": "pending",
+      "chroma_source_path": "assets/reference/characters/dragon/interim-v001/generated-source/082_ACT082_flight_downstroke_chroma.png",
+      "chroma_source_sha256": "7ca8b7c5b8b2f2de4b128d53d2b24bd521ed57dac5ebf121280b79140e6a6983",
+      "filename": "082_ACT082_flight_downstroke_alpha.png",
+      "generation_intent": "flight downstroke",
+      "identity_review": "pending",
+      "image_audit": {
+        "alpha_mode": "binary_straight",
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 270306,
+        "transparent_rgb_zero": true,
+        "visible_bbox": [
+          313,
+          190,
+          1628,
+          866
+        ]
+      },
+      "method": "identity_locked_image_generation_then_chroma_extraction",
+      "motion_review": "pending",
+      "path": "assets/reference/characters/dragon/interim-v001/alphas/082_ACT082_flight_downstroke_alpha.png",
+      "prompt_contract_id": "dragon-drg001-identity-locked-chroma-v001",
+      "runtime_admitted": false,
+      "sha256": "cac3ba18fbfbc6ea9fca933970f98c1adb7db5e61543483556be8829fb18c01a"
+    },
+    {
+      "asset_id": "ACT083",
+      "canonical_equivalence_review": "pending",
+      "chroma_source_path": "assets/reference/characters/dragon/interim-v001/generated-source/083_ACT083_flight_upstroke_chroma.png",
+      "chroma_source_sha256": "d9c2dfdddca5f40268b95f4b71d3e561af43695ef827361d1a997b4b0d75d3cc",
+      "filename": "083_ACT083_flight_upstroke_alpha.png",
+      "generation_intent": "flight upstroke",
+      "identity_review": "pending",
+      "image_audit": {
+        "alpha_mode": "binary_straight",
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 234573,
+        "transparent_rgb_zero": true,
+        "visible_bbox": [
+          409,
+          97,
+          1508,
+          909
+        ]
+      },
+      "method": "identity_locked_image_generation_then_chroma_extraction",
+      "motion_review": "pending",
+      "path": "assets/reference/characters/dragon/interim-v001/alphas/083_ACT083_flight_upstroke_alpha.png",
+      "prompt_contract_id": "dragon-drg001-identity-locked-chroma-v001",
+      "runtime_admitted": false,
+      "sha256": "954a0da74fa79dd549bb135d802de7c259d2aced66ba714bf619c6b5a29d8216"
+    },
+    {
+      "asset_id": "ACT084",
+      "canonical_equivalence_review": "pending",
+      "chroma_source_path": "assets/reference/characters/dragon/interim-v001/generated-source/084_ACT084_glide_hover_chroma.png",
+      "chroma_source_sha256": "81803033be4f691a8c70e71052008a47918c5fa8d4d2030258b49a28342ce59a",
+      "filename": "084_ACT084_glide_hover_alpha.png",
+      "generation_intent": "glide hover",
+      "identity_review": "pending",
+      "image_audit": {
+        "alpha_mode": "binary_straight",
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 274314,
+        "transparent_rgb_zero": true,
+        "visible_bbox": [
+          223,
+          228,
+          1687,
+          827
+        ]
+      },
+      "method": "identity_locked_image_generation_then_chroma_extraction",
+      "motion_review": "pending",
+      "path": "assets/reference/characters/dragon/interim-v001/alphas/084_ACT084_glide_hover_alpha.png",
+      "prompt_contract_id": "dragon-drg001-identity-locked-chroma-v001",
+      "runtime_admitted": false,
+      "sha256": "87b02532baf55be37e2eeb4696015547ff8a037f1064b97157cca229ceac771e"
+    },
+    {
+      "asset_id": "ACT085",
+      "canonical_equivalence_review": "pending",
+      "chroma_source_path": "assets/reference/characters/dragon/interim-v001/generated-source/085_ACT085_speech_small_open_chroma.png",
+      "chroma_source_sha256": "e364ab95d0a4717253c1c4413b8e929ddf8c7a5fc4065712332a258e8c1b50e7",
+      "filename": "085_ACT085_speech_small_open_alpha.png",
+      "generation_intent": "speech small open",
+      "identity_review": "pending",
+      "image_audit": {
+        "alpha_mode": "binary_straight",
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 214870,
+        "transparent_rgb_zero": true,
+        "visible_bbox": [
+          717,
+          116,
+          1252,
+          915
+        ]
+      },
+      "method": "identity_locked_image_generation_then_chroma_extraction",
+      "motion_review": "pending",
+      "path": "assets/reference/characters/dragon/interim-v001/alphas/085_ACT085_speech_small_open_alpha.png",
+      "prompt_contract_id": "dragon-drg001-identity-locked-chroma-v001",
+      "runtime_admitted": false,
+      "sha256": "f038cffa4946a6300bc5195e71bb5fd1eb4ace5745c1f15ade0e43ed8917f427"
+    },
+    {
+      "asset_id": "ACT086",
+      "canonical_equivalence_review": "pending",
+      "chroma_source_path": "assets/reference/characters/dragon/interim-v001/generated-source/086_ACT086_speech_wide_open_chroma.png",
+      "chroma_source_sha256": "94680e8d3fbad9c50977db7f84b1ab9f5be3837146efa57ea80c2ecf70db2600",
+      "filename": "086_ACT086_speech_wide_open_alpha.png",
+      "generation_intent": "speech wide open",
+      "identity_review": "pending",
+      "image_audit": {
+        "alpha_mode": "binary_straight",
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 216538,
+        "transparent_rgb_zero": true,
+        "visible_bbox": [
+          731,
+          116,
+          1262,
+          930
+        ]
+      },
+      "method": "identity_locked_image_generation_then_chroma_extraction",
+      "motion_review": "pending",
+      "path": "assets/reference/characters/dragon/interim-v001/alphas/086_ACT086_speech_wide_open_alpha.png",
+      "prompt_contract_id": "dragon-drg001-identity-locked-chroma-v001",
+      "runtime_admitted": false,
+      "sha256": "d878e4f0fe2e5d7d5894352edaa19c4f6480c60501255e7e94aebe126f27a4c7"
+    },
+    {
+      "asset_id": "ACT087",
+      "canonical_equivalence_review": "pending",
+      "chroma_source_path": "assets/reference/characters/dragon/interim-v001/generated-source/087_ACT087_speech_rounded_chroma.png",
+      "chroma_source_sha256": "124c085498498aca95d54d6c2eb11197477dd5632e4a05c6ccc21c8e718b7ee2",
+      "filename": "087_ACT087_speech_rounded_alpha.png",
+      "generation_intent": "speech rounded",
+      "identity_review": "pending",
+      "image_audit": {
+        "alpha_mode": "binary_straight",
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 217424,
+        "transparent_rgb_zero": true,
+        "visible_bbox": [
+          724,
+          114,
+          1261,
+          916
+        ]
+      },
+      "method": "identity_locked_image_generation_then_chroma_extraction",
+      "motion_review": "pending",
+      "path": "assets/reference/characters/dragon/interim-v001/alphas/087_ACT087_speech_rounded_alpha.png",
+      "prompt_contract_id": "dragon-drg001-identity-locked-chroma-v001",
+      "runtime_admitted": false,
+      "sha256": "91c6469f79c35a7fdca4c327b3a87d6621a4cce05340f15a2b59425e2fed382d"
+    },
+    {
+      "asset_id": "ACT088",
+      "canonical_equivalence_review": "pending",
+      "chroma_source_path": "assets/reference/characters/dragon/interim-v001/generated-source/088_ACT088_flight_bank_left_chroma.png",
+      "chroma_source_sha256": "b72760e656b5f1cd4281a24f017aabef021d741cc57f7b1c68b07c69968d336b",
+      "filename": "088_ACT088_flight_bank_left_alpha.png",
+      "generation_intent": "flight bank left",
+      "identity_review": "pending",
+      "image_audit": {
+        "alpha_mode": "binary_straight",
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 209929,
+        "transparent_rgb_zero": true,
+        "visible_bbox": [
+          441,
+          129,
+          1405,
+          907
+        ]
+      },
+      "method": "identity_locked_image_generation_then_chroma_extraction",
+      "motion_review": "pending",
+      "path": "assets/reference/characters/dragon/interim-v001/alphas/088_ACT088_flight_bank_left_alpha.png",
+      "prompt_contract_id": "dragon-drg001-identity-locked-chroma-v001",
+      "runtime_admitted": false,
+      "sha256": "6612144d5f1bef8ff32f958efcab06e8ef5778e2e5e4c562454dbf47d5eba92e"
+    },
+    {
+      "asset_id": "ACT089",
+      "canonical_equivalence_review": "pending",
+      "chroma_source_path": "assets/reference/characters/dragon/interim-v001/generated-source/089_ACT089_flight_bank_right_chroma.png",
+      "chroma_source_sha256": "b5c2d963e7ff91d62144ddb00d360078b02f06a273013926b7d8d6117774622c",
+      "filename": "089_ACT089_flight_bank_right_alpha.png",
+      "generation_intent": "flight bank right",
+      "identity_review": "pending",
+      "image_audit": {
+        "alpha_mode": "binary_straight",
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 208573,
+        "transparent_rgb_zero": true,
+        "visible_bbox": [
+          392,
+          135,
+          1533,
+          849
+        ]
+      },
+      "method": "identity_locked_image_generation_then_chroma_extraction",
+      "motion_review": "pending",
+      "path": "assets/reference/characters/dragon/interim-v001/alphas/089_ACT089_flight_bank_right_alpha.png",
+      "prompt_contract_id": "dragon-drg001-identity-locked-chroma-v001",
+      "runtime_admitted": false,
+      "sha256": "876c03f606ed1f4fa64bf96b8020eb2d40e64407749c009d394ee67fd5a70bc1"
+    },
+    {
+      "asset_id": "ACT090",
+      "canonical_equivalence_review": "pending",
+      "chroma_source_path": "assets/reference/characters/dragon/interim-v001/generated-source/090_ACT090_flight_ascend_chroma.png",
+      "chroma_source_sha256": "215233bc1c5bb4ab78422c2081b3a9caf93773b979ddc105209b27d9b50e53bf",
+      "filename": "090_ACT090_flight_ascend_alpha.png",
+      "generation_intent": "flight ascend",
+      "identity_review": "pending",
+      "image_audit": {
+        "alpha_mode": "binary_straight",
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 227049,
+        "transparent_rgb_zero": true,
+        "visible_bbox": [
+          413,
+          190,
+          1384,
+          908
+        ]
+      },
+      "method": "identity_locked_image_generation_then_chroma_extraction",
+      "motion_review": "pending",
+      "path": "assets/reference/characters/dragon/interim-v001/alphas/090_ACT090_flight_ascend_alpha.png",
+      "prompt_contract_id": "dragon-drg001-identity-locked-chroma-v001",
+      "runtime_admitted": false,
+      "sha256": "6f9fb4ef0cac786ff41f4ff2c6031cb8815d8497a350fcb9ae5fa4fb56b593d3"
+    },
+    {
+      "asset_id": "ACT091",
+      "canonical_equivalence_review": "pending",
+      "chroma_source_path": "assets/reference/characters/dragon/interim-v001/generated-source/091_ACT091_flight_descend_chroma.png",
+      "chroma_source_sha256": "5bff34e796510ff083271cf24a3af67891ef5619ba3479b56ca986b806ba8752",
+      "filename": "091_ACT091_flight_descend_alpha.png",
+      "generation_intent": "flight descend",
+      "identity_review": "pending",
+      "image_audit": {
+        "alpha_mode": "binary_straight",
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 204580,
+        "transparent_rgb_zero": true,
+        "visible_bbox": [
+          381,
+          101,
+          1400,
+          879
+        ]
+      },
+      "method": "identity_locked_image_generation_then_chroma_extraction",
+      "motion_review": "pending",
+      "path": "assets/reference/characters/dragon/interim-v001/alphas/091_ACT091_flight_descend_alpha.png",
+      "prompt_contract_id": "dragon-drg001-identity-locked-chroma-v001",
+      "runtime_admitted": false,
+      "sha256": "810b2a3d271bb86a882c270cf16e3185d7f8b58625de0f08ee242e1d15e2806e"
+    },
+    {
+      "asset_id": "ACT092",
+      "canonical_equivalence_review": "pending",
+      "chroma_source_path": "assets/reference/characters/dragon/interim-v001/generated-source/092_ACT092_flight_brake_chroma.png",
+      "chroma_source_sha256": "44273ac14ab50c8e97f2ba7ef452479c9ebfa3fad38766c2dca50eace0c7bff6",
+      "filename": "092_ACT092_flight_brake_alpha.png",
+      "generation_intent": "flight brake",
+      "identity_review": "pending",
+      "image_audit": {
+        "alpha_mode": "binary_straight",
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 429740,
+        "transparent_rgb_zero": true,
+        "visible_bbox": [
+          190,
+          127,
+          1701,
+          907
+        ]
+      },
+      "method": "identity_locked_image_generation_then_chroma_extraction",
+      "motion_review": "pending",
+      "path": "assets/reference/characters/dragon/interim-v001/alphas/092_ACT092_flight_brake_alpha.png",
+      "prompt_contract_id": "dragon-drg001-identity-locked-chroma-v001",
+      "runtime_admitted": false,
+      "sha256": "70867ab4e83ab156112369b5d44fbb95a84175c581307ea1ada3c9759fe2a42e"
+    },
+    {
+      "asset_id": "ACT093",
+      "canonical_equivalence_review": "pending",
+      "chroma_source_path": "assets/reference/characters/dragon/interim-v001/generated-source/093_ACT093_flight_takeoff_chroma.png",
+      "chroma_source_sha256": "f09960d9834865cc1a0131cc21f32dd9674face2b74ead5a047d21d136fd248e",
+      "filename": "093_ACT093_flight_takeoff_alpha.png",
+      "generation_intent": "flight takeoff",
+      "identity_review": "pending",
+      "image_audit": {
+        "alpha_mode": "binary_straight",
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 320381,
+        "transparent_rgb_zero": true,
+        "visible_bbox": [
+          194,
+          156,
+          1666,
+          901
+        ]
+      },
+      "method": "identity_locked_image_generation_then_chroma_extraction",
+      "motion_review": "pending",
+      "path": "assets/reference/characters/dragon/interim-v001/alphas/093_ACT093_flight_takeoff_alpha.png",
+      "prompt_contract_id": "dragon-drg001-identity-locked-chroma-v001",
+      "runtime_admitted": false,
+      "sha256": "840ce9f10c3252ef8ec9478906161720ecade07f1f4d2687132e16452cc01653"
+    },
+    {
+      "asset_id": "ACT094",
+      "canonical_equivalence_review": "pending",
+      "chroma_source_path": "assets/reference/characters/dragon/interim-v001/generated-source/094_ACT094_flight_landing_chroma.png",
+      "chroma_source_sha256": "f27018e6fffa769360bde35b49ff802d84df02108bf0509d1b6517b1873e1b11",
+      "filename": "094_ACT094_flight_landing_alpha.png",
+      "generation_intent": "flight landing",
+      "identity_review": "pending",
+      "image_audit": {
+        "alpha_mode": "binary_straight",
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 381253,
+        "transparent_rgb_zero": true,
+        "visible_bbox": [
+          252,
+          114,
+          1646,
+          925
+        ]
+      },
+      "method": "identity_locked_image_generation_then_chroma_extraction",
+      "motion_review": "pending",
+      "path": "assets/reference/characters/dragon/interim-v001/alphas/094_ACT094_flight_landing_alpha.png",
+      "prompt_contract_id": "dragon-drg001-identity-locked-chroma-v001",
+      "runtime_admitted": false,
+      "sha256": "eb19a11f3d7fccfacfc734f236ed03a788972e6fbf81dd644a5e7fee87647a1c"
+    },
+    {
+      "asset_id": "ACT095",
+      "canonical_equivalence_review": "pending",
+      "chroma_source_path": "assets/reference/characters/dragon/interim-v001/generated-source/095_ACT095_hover_listening_chroma.png",
+      "chroma_source_sha256": "72ee97395cc4466dbf2d3f5d2b6db7daed7966aa6f189e6a62bda168968fc97f",
+      "filename": "095_ACT095_hover_listening_alpha.png",
+      "generation_intent": "hover listening",
+      "identity_review": "pending",
+      "image_audit": {
+        "alpha_mode": "binary_straight",
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 205988,
+        "transparent_rgb_zero": true,
+        "visible_bbox": [
+          514,
+          163,
+          1402,
+          862
+        ]
+      },
+      "method": "identity_locked_image_generation_then_chroma_extraction",
+      "motion_review": "pending",
+      "path": "assets/reference/characters/dragon/interim-v001/alphas/095_ACT095_hover_listening_alpha.png",
+      "prompt_contract_id": "dragon-drg001-identity-locked-chroma-v001",
+      "runtime_admitted": false,
+      "sha256": "cf648896a1b72335a514d9e582763f6a65f992e8f9445360090d50b9d0c381fd"
+    },
+    {
+      "asset_id": "ACT096",
+      "canonical_equivalence_review": "pending",
+      "chroma_source_path": "assets/reference/characters/dragon/interim-v001/generated-source/096_ACT096_hover_speech_small_open_chroma.png",
+      "chroma_source_sha256": "53eb4e7aed1aa0738e835bd4f0e7ad671766eff0866312979a6140e16b20ac90",
+      "filename": "096_ACT096_hover_speech_small_open_alpha.png",
+      "generation_intent": "hover speech small open",
+      "identity_review": "pending",
+      "image_audit": {
+        "alpha_mode": "binary_straight",
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 205934,
+        "transparent_rgb_zero": true,
+        "visible_bbox": [
+          514,
+          163,
+          1402,
+          862
+        ]
+      },
+      "method": "identity_locked_image_generation_then_chroma_extraction",
+      "motion_review": "pending",
+      "path": "assets/reference/characters/dragon/interim-v001/alphas/096_ACT096_hover_speech_small_open_alpha.png",
+      "prompt_contract_id": "dragon-drg001-identity-locked-chroma-v001",
+      "runtime_admitted": false,
+      "sha256": "562e36a41d48b72ab2d3eb782056165f9abd1e7155eddf863654e1a9c6a5f326"
+    },
+    {
+      "asset_id": "ACT097",
+      "canonical_equivalence_review": "pending",
+      "chroma_source_path": "assets/reference/characters/dragon/interim-v001/generated-source/097_ACT097_hover_speech_wide_open_chroma.png",
+      "chroma_source_sha256": "d889006f8ad49b625295872bb5c018e0bf082b4b02cea99cd769390888cd1135",
+      "filename": "097_ACT097_hover_speech_wide_open_alpha.png",
+      "generation_intent": "hover speech wide open",
+      "identity_review": "pending",
+      "image_audit": {
+        "alpha_mode": "binary_straight",
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 206237,
+        "transparent_rgb_zero": true,
+        "visible_bbox": [
+          514,
+          163,
+          1402,
+          862
+        ]
+      },
+      "method": "identity_locked_image_generation_then_chroma_extraction",
+      "motion_review": "pending",
+      "path": "assets/reference/characters/dragon/interim-v001/alphas/097_ACT097_hover_speech_wide_open_alpha.png",
+      "prompt_contract_id": "dragon-drg001-identity-locked-chroma-v001",
+      "runtime_admitted": false,
+      "sha256": "384e25601387d9d62e7af7ff2b7f4fde8ba9b2723c493ca44184d6030e22d911"
+    },
+    {
+      "asset_id": "ACT098",
+      "canonical_equivalence_review": "pending",
+      "chroma_source_path": "assets/reference/characters/dragon/interim-v001/generated-source/098_ACT098_hover_speech_rounded_chroma.png",
+      "chroma_source_sha256": "2270142604fad430bf2227dc82583ea2994cdfe0915e09104f9c6978bab99006",
+      "filename": "098_ACT098_hover_speech_rounded_alpha.png",
+      "generation_intent": "hover speech rounded",
+      "identity_review": "pending",
+      "image_audit": {
+        "alpha_mode": "binary_straight",
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 205960,
+        "transparent_rgb_zero": true,
+        "visible_bbox": [
+          514,
+          163,
+          1402,
+          862
+        ]
+      },
+      "method": "identity_locked_image_generation_then_chroma_extraction",
+      "motion_review": "pending",
+      "path": "assets/reference/characters/dragon/interim-v001/alphas/098_ACT098_hover_speech_rounded_alpha.png",
+      "prompt_contract_id": "dragon-drg001-identity-locked-chroma-v001",
+      "runtime_admitted": false,
+      "sha256": "d67003ec93a59e09e7b6a6063b0e221270509f6eb72b79b42e3e03954d175a2f"
+    },
+    {
+      "asset_id": "ACT099",
+      "canonical_equivalence_review": "pending",
+      "chroma_source_path": "assets/reference/characters/dragon/interim-v001/generated-source/099_ACT099_hover_emphatic_speaking_chroma.png",
+      "chroma_source_sha256": "3f32d4be5c22e5c25a2ef1d976615b7b74dfd8a21af4a6611764b364d16cd71c",
+      "filename": "099_ACT099_hover_emphatic_speaking_alpha.png",
+      "generation_intent": "hover emphatic speaking",
+      "identity_review": "pending",
+      "image_audit": {
+        "alpha_mode": "binary_straight",
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 215719,
+        "transparent_rgb_zero": true,
+        "visible_bbox": [
+          505,
+          156,
+          1407,
+          865
+        ]
+      },
+      "method": "identity_locked_image_generation_then_chroma_extraction",
+      "motion_review": "pending",
+      "path": "assets/reference/characters/dragon/interim-v001/alphas/099_ACT099_hover_emphatic_speaking_alpha.png",
+      "prompt_contract_id": "dragon-drg001-identity-locked-chroma-v001",
+      "runtime_admitted": false,
+      "sha256": "97308660703c69f6e87f2b744efaf0364d86e4a3c3f82d33000ddda5f1945703"
+    },
+    {
+      "asset_id": "ACT100",
+      "canonical_equivalence_review": "pending",
+      "chroma_source_path": "assets/reference/characters/dragon/interim-v001/generated-source/100_ACT100_explain_small_open_chroma.png",
+      "chroma_source_sha256": "1203a2bdce94b682b952353f7744d11e4ebd3af1652bdedcc77f6e91adb874a6",
+      "filename": "100_ACT100_explain_small_open_alpha.png",
+      "generation_intent": "explain small open",
+      "identity_review": "pending",
+      "image_audit": {
+        "alpha_mode": "binary_straight",
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 225004,
+        "transparent_rgb_zero": true,
+        "visible_bbox": [
+          730,
+          121,
+          1364,
+          916
+        ]
+      },
+      "method": "identity_locked_image_generation_then_chroma_extraction",
+      "motion_review": "pending",
+      "path": "assets/reference/characters/dragon/interim-v001/alphas/100_ACT100_explain_small_open_alpha.png",
+      "prompt_contract_id": "dragon-drg001-identity-locked-chroma-v001",
+      "runtime_admitted": false,
+      "sha256": "47e0d9611f24be48d9aafb380e8dc6bd78cdf817a99295fdf1a019a9e60ae5cb"
+    },
+    {
+      "asset_id": "ACT101",
+      "canonical_equivalence_review": "pending",
+      "chroma_source_path": "assets/reference/characters/dragon/interim-v001/generated-source/101_ACT101_explain_wide_open_chroma.png",
+      "chroma_source_sha256": "b61d545766e7a2e1ba9ca56a64486e65c8fcacdada799a3a2d05a2a886b89f14",
+      "filename": "101_ACT101_explain_wide_open_alpha.png",
+      "generation_intent": "explain wide open",
+      "identity_review": "pending",
+      "image_audit": {
+        "alpha_mode": "binary_straight",
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 228891,
+        "transparent_rgb_zero": true,
+        "visible_bbox": [
+          639,
+          95,
+          1351,
+          928
+        ]
+      },
+      "method": "identity_locked_image_generation_then_chroma_extraction",
+      "motion_review": "pending",
+      "path": "assets/reference/characters/dragon/interim-v001/alphas/101_ACT101_explain_wide_open_alpha.png",
+      "prompt_contract_id": "dragon-drg001-identity-locked-chroma-v001",
+      "runtime_admitted": false,
+      "sha256": "b9511c9b56bac6221003c84501f791e469de305b1b1710e2b5a5fbf8ff8d488d"
+    },
+    {
+      "asset_id": "ACT102",
+      "canonical_equivalence_review": "pending",
+      "chroma_source_path": "assets/reference/characters/dragon/interim-v001/generated-source/102_ACT102_point_left_rounded_chroma.png",
+      "chroma_source_sha256": "40ade1d59655622bda306a9109a92d0d441179605e9150e08316371b321ca618",
+      "filename": "102_ACT102_point_left_rounded_alpha.png",
+      "generation_intent": "point left rounded",
+      "identity_review": "pending",
+      "image_audit": {
+        "alpha_mode": "binary_straight",
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 254817,
+        "transparent_rgb_zero": true,
+        "visible_bbox": [
+          572,
+          96,
+          1442,
+          947
+        ]
+      },
+      "method": "identity_locked_image_generation_then_chroma_extraction",
+      "motion_review": "pending",
+      "path": "assets/reference/characters/dragon/interim-v001/alphas/102_ACT102_point_left_rounded_alpha.png",
+      "prompt_contract_id": "dragon-drg001-identity-locked-chroma-v001",
+      "runtime_admitted": false,
+      "sha256": "a99dfd33eaea05c0c51ae30a30fd163be2d3be3b2557bc05e1dc447f69428eac"
+    },
+    {
+      "asset_id": "ACT103",
+      "canonical_equivalence_review": "pending",
+      "chroma_source_path": "assets/reference/characters/dragon/interim-v001/generated-source/103_ACT103_point_right_small_open_chroma.png",
+      "chroma_source_sha256": "7309d7cb9ea11fe9b6a1a2521dd7b91a42e7add9de85373127b55dbec9d41a74",
+      "filename": "103_ACT103_point_right_small_open_alpha.png",
+      "generation_intent": "point right small open",
+      "identity_review": "pending",
+      "image_audit": {
+        "alpha_mode": "binary_straight",
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 261604,
+        "transparent_rgb_zero": true,
+        "visible_bbox": [
+          543,
+          115,
+          1367,
+          915
+        ]
+      },
+      "method": "identity_locked_image_generation_then_chroma_extraction",
+      "motion_review": "pending",
+      "path": "assets/reference/characters/dragon/interim-v001/alphas/103_ACT103_point_right_small_open_alpha.png",
+      "prompt_contract_id": "dragon-drg001-identity-locked-chroma-v001",
+      "runtime_admitted": false,
+      "sha256": "b82cead551c6ccb6c7fffb8df09db82dfde3ef6a0e66219a413bd032ac855635"
+    },
+    {
+      "asset_id": "ACT104",
+      "canonical_equivalence_review": "pending",
+      "chroma_source_path": "assets/reference/characters/dragon/interim-v001/generated-source/104_ACT104_compare_wide_open_chroma.png",
+      "chroma_source_sha256": "4dcfff5e8f7c441356c1a464e2862c6b9b9a3a467de00fa3a344b60ea5c1a63a",
+      "filename": "104_ACT104_compare_wide_open_alpha.png",
+      "generation_intent": "compare wide open",
+      "identity_review": "pending",
+      "image_audit": {
+        "alpha_mode": "binary_straight",
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 222311,
+        "transparent_rgb_zero": true,
+        "visible_bbox": [
+          548,
+          117,
+          1325,
+          913
+        ]
+      },
+      "method": "identity_locked_image_generation_then_chroma_extraction",
+      "motion_review": "pending",
+      "path": "assets/reference/characters/dragon/interim-v001/alphas/104_ACT104_compare_wide_open_alpha.png",
+      "prompt_contract_id": "dragon-drg001-identity-locked-chroma-v001",
+      "runtime_admitted": false,
+      "sha256": "bbde256527db0d173c62a928f8fb71ee877af1fbc3876a886f2b2e1396ce996e"
+    },
+    {
+      "asset_id": "ACT105",
+      "canonical_equivalence_review": "pending",
+      "chroma_source_path": "assets/reference/characters/dragon/interim-v001/generated-source/105_ACT105_count_one_rounded_chroma.png",
+      "chroma_source_sha256": "e9728de92cbec7be131cfbf1a745e0f7e53dfad701e8a697852b9f06e6968a98",
+      "filename": "105_ACT105_count_one_rounded_alpha.png",
+      "generation_intent": "count one rounded",
+      "identity_review": "pending",
+      "image_audit": {
+        "alpha_mode": "binary_straight",
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 202773,
+        "transparent_rgb_zero": true,
+        "visible_bbox": [
+          568,
+          113,
+          1189,
+          926
+        ]
+      },
+      "method": "identity_locked_image_generation_then_chroma_extraction",
+      "motion_review": "pending",
+      "path": "assets/reference/characters/dragon/interim-v001/alphas/105_ACT105_count_one_rounded_alpha.png",
+      "prompt_contract_id": "dragon-drg001-identity-locked-chroma-v001",
+      "runtime_admitted": false,
+      "sha256": "430b74921f795530e3a7d38af30303e0fac1e4f5f5b07e5aeafe4b258f79f7c6"
+    },
+    {
+      "asset_id": "ACT106",
+      "canonical_equivalence_review": "pending",
+      "chroma_source_path": "assets/reference/characters/dragon/interim-v001/generated-source/106_ACT106_count_two_small_open_chroma.png",
+      "chroma_source_sha256": "7581bff50723a756dcef54129a334f1d7533b3c6b2b716d909b04abc0aa662f6",
+      "filename": "106_ACT106_count_two_small_open_alpha.png",
+      "generation_intent": "count two small open",
+      "identity_review": "pending",
+      "image_audit": {
+        "alpha_mode": "binary_straight",
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 179357,
+        "transparent_rgb_zero": true,
+        "visible_bbox": [
+          756,
+          151,
+          1313,
+          902
+        ]
+      },
+      "method": "identity_locked_image_generation_then_chroma_extraction",
+      "motion_review": "pending",
+      "path": "assets/reference/characters/dragon/interim-v001/alphas/106_ACT106_count_two_small_open_alpha.png",
+      "prompt_contract_id": "dragon-drg001-identity-locked-chroma-v001",
+      "runtime_admitted": false,
+      "sha256": "49ff27951c74aabfb28d06d1841adb1d576b1459ced253c69c97300a323c35b5"
+    },
+    {
+      "asset_id": "ACT107",
+      "canonical_equivalence_review": "pending",
+      "chroma_source_path": "assets/reference/characters/dragon/interim-v001/generated-source/107_ACT107_count_three_wide_open_chroma.png",
+      "chroma_source_sha256": "09ed7370537b6af759eaa678134f51c671c75bb112b808e2b7db84a6773025a1",
+      "filename": "107_ACT107_count_three_wide_open_alpha.png",
+      "generation_intent": "count three wide open",
+      "identity_review": "pending",
+      "image_audit": {
+        "alpha_mode": "binary_straight",
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 209179,
+        "transparent_rgb_zero": true,
+        "visible_bbox": [
+          753,
+          135,
+          1348,
+          923
+        ]
+      },
+      "method": "identity_locked_image_generation_then_chroma_extraction",
+      "motion_review": "pending",
+      "path": "assets/reference/characters/dragon/interim-v001/alphas/107_ACT107_count_three_wide_open_alpha.png",
+      "prompt_contract_id": "dragon-drg001-identity-locked-chroma-v001",
+      "runtime_admitted": false,
+      "sha256": "bb29dbc61e4d98ad624ee37f5786e12f6b2ad86d9e1b4da77d97becc73bde1a3"
+    },
+    {
+      "asset_id": "ACT108",
+      "canonical_equivalence_review": "pending",
+      "chroma_source_path": "assets/reference/characters/dragon/interim-v001/generated-source/108_ACT108_present_left_small_open_chroma.png",
+      "chroma_source_sha256": "706cefa5ee653659b534e91b474abe09ffae56758698f2e8c7128b54bd27eda4",
+      "filename": "108_ACT108_present_left_small_open_alpha.png",
+      "generation_intent": "present left small open",
+      "identity_review": "pending",
+      "image_audit": {
+        "alpha_mode": "binary_straight",
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 242848,
+        "transparent_rgb_zero": true,
+        "visible_bbox": [
+          584,
+          115,
+          1508,
+          916
+        ]
+      },
+      "method": "identity_locked_image_generation_then_chroma_extraction",
+      "motion_review": "pending",
+      "path": "assets/reference/characters/dragon/interim-v001/alphas/108_ACT108_present_left_small_open_alpha.png",
+      "prompt_contract_id": "dragon-drg001-identity-locked-chroma-v001",
+      "runtime_admitted": false,
+      "sha256": "68883f63a3ccac93735b3eb64c28819dac82048b1bb3bb79ab74c0afd4fb9aa8"
+    },
+    {
+      "asset_id": "ACT109",
+      "canonical_equivalence_review": "pending",
+      "chroma_source_path": "assets/reference/characters/dragon/interim-v001/generated-source/109_ACT109_present_right_rounded_chroma.png",
+      "chroma_source_sha256": "e250d378adaccdd0871c49373a8dc1fce00e8f7fd72fe4a1da8df30eb65989e1",
+      "filename": "109_ACT109_present_right_rounded_alpha.png",
+      "generation_intent": "present right rounded",
+      "identity_review": "pending",
+      "image_audit": {
+        "alpha_mode": "binary_straight",
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 261594,
+        "transparent_rgb_zero": true,
+        "visible_bbox": [
+          544,
+          115,
+          1377,
+          916
+        ]
+      },
+      "method": "identity_locked_image_generation_then_chroma_extraction",
+      "motion_review": "pending",
+      "path": "assets/reference/characters/dragon/interim-v001/alphas/109_ACT109_present_right_rounded_alpha.png",
+      "prompt_contract_id": "dragon-drg001-identity-locked-chroma-v001",
+      "runtime_admitted": false,
+      "sha256": "6eba9f1938195c05dedfc9efee54a3d3b5298682abe490da1ddf380cf5f4a546"
+    },
+    {
+      "asset_id": "ACT110",
+      "canonical_equivalence_review": "pending",
+      "chroma_source_path": "assets/reference/characters/dragon/interim-v001/generated-source/110_ACT110_describe_vast_wide_open_chroma.png",
+      "chroma_source_sha256": "4190c1f90234a9895dcd1836039251284bc0282a6f755857f043943cdb5fb05f",
+      "filename": "110_ACT110_describe_vast_wide_open_alpha.png",
+      "generation_intent": "describe vast wide open",
+      "identity_review": "pending",
+      "image_audit": {
+        "alpha_mode": "binary_straight",
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 223369,
+        "transparent_rgb_zero": true,
+        "visible_bbox": [
+          519,
+          127,
+          1391,
+          920
+        ]
+      },
+      "method": "identity_locked_image_generation_then_chroma_extraction",
+      "motion_review": "pending",
+      "path": "assets/reference/characters/dragon/interim-v001/alphas/110_ACT110_describe_vast_wide_open_alpha.png",
+      "prompt_contract_id": "dragon-drg001-identity-locked-chroma-v001",
+      "runtime_admitted": false,
+      "sha256": "3214a0538a973f4c612f296fdb2e4a4960c0752a7c85e61944a257328ef3200a"
+    },
+    {
+      "asset_id": "ACT111",
+      "canonical_equivalence_review": "pending",
+      "chroma_source_path": "assets/reference/characters/dragon/interim-v001/generated-source/111_ACT111_tiny_detail_rounded_chroma.png",
+      "chroma_source_sha256": "fa025d46c27bc6c8d44511600735cd0abdf1f419ed3a61682afefb1c8bea6477",
+      "filename": "111_ACT111_tiny_detail_rounded_alpha.png",
+      "generation_intent": "tiny detail rounded",
+      "identity_review": "pending",
+      "image_audit": {
+        "alpha_mode": "binary_straight",
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 219827,
+        "transparent_rgb_zero": true,
+        "visible_bbox": [
+          745,
+          119,
+          1324,
+          921
+        ]
+      },
+      "method": "identity_locked_image_generation_then_chroma_extraction",
+      "motion_review": "pending",
+      "path": "assets/reference/characters/dragon/interim-v001/alphas/111_ACT111_tiny_detail_rounded_alpha.png",
+      "prompt_contract_id": "dragon-drg001-identity-locked-chroma-v001",
+      "runtime_admitted": false,
+      "sha256": "e04b262eeb94ae4995ac87da49943e77e92b83240a59a26b7e4e1e8d4191907d"
+    },
+    {
+      "asset_id": "ACT112",
+      "canonical_equivalence_review": "pending",
+      "chroma_source_path": "assets/reference/characters/dragon/interim-v001/generated-source/112_ACT112_reassure_small_open_chroma.png",
+      "chroma_source_sha256": "74087791843979f7627451153dec74db19c7f3e762788b952d84c74edc6f85bf",
+      "filename": "112_ACT112_reassure_small_open_alpha.png",
+      "generation_intent": "reassure small open",
+      "identity_review": "pending",
+      "image_audit": {
+        "alpha_mode": "binary_straight",
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 234571,
+        "transparent_rgb_zero": true,
+        "visible_bbox": [
+          689,
+          111,
+          1359,
+          933
+        ]
+      },
+      "method": "identity_locked_image_generation_then_chroma_extraction",
+      "motion_review": "pending",
+      "path": "assets/reference/characters/dragon/interim-v001/alphas/112_ACT112_reassure_small_open_alpha.png",
+      "prompt_contract_id": "dragon-drg001-identity-locked-chroma-v001",
+      "runtime_admitted": false,
+      "sha256": "d8fbf5c1d59f055c7c5e58dcd19c2f369411c920582ca12519d98af647aa5e35"
+    },
+    {
+      "asset_id": "ACT113",
+      "canonical_equivalence_review": "pending",
+      "chroma_source_path": "assets/reference/characters/dragon/interim-v001/generated-source/113_ACT113_confidence_rounded_chroma.png",
+      "chroma_source_sha256": "d9c912772ec5dec9067993e58ddea5a6cb4f7dae9dd9686efceee28926c24eed",
+      "filename": "113_ACT113_confidence_rounded_alpha.png",
+      "generation_intent": "confidence rounded",
+      "identity_review": "pending",
+      "image_audit": {
+        "alpha_mode": "binary_straight",
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 276296,
+        "transparent_rgb_zero": true,
+        "visible_bbox": [
+          678,
+          103,
+          1435,
+          930
+        ]
+      },
+      "method": "identity_locked_image_generation_then_chroma_extraction",
+      "motion_review": "pending",
+      "path": "assets/reference/characters/dragon/interim-v001/alphas/113_ACT113_confidence_rounded_alpha.png",
+      "prompt_contract_id": "dragon-drg001-identity-locked-chroma-v001",
+      "runtime_admitted": false,
+      "sha256": "b6a824d3d0144491b0d34b20a52df66826b71d49cdb90a1c120be742458dff2d"
+    },
+    {
+      "asset_id": "ACT114",
+      "canonical_equivalence_review": "pending",
+      "chroma_source_path": "assets/reference/characters/dragon/interim-v001/generated-source/114_ACT114_declaration_wide_open_chroma.png",
+      "chroma_source_sha256": "e2bc7d148ae4ee7a9aec55e3083462d848a58265022ca66ff95c7410dc3c12bc",
+      "filename": "114_ACT114_declaration_wide_open_alpha.png",
+      "generation_intent": "declaration wide open",
+      "identity_review": "pending",
+      "image_audit": {
+        "alpha_mode": "binary_straight",
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 245691,
+        "transparent_rgb_zero": true,
+        "visible_bbox": [
+          680,
+          113,
+          1407,
+          932
+        ]
+      },
+      "method": "identity_locked_image_generation_then_chroma_extraction",
+      "motion_review": "pending",
+      "path": "assets/reference/characters/dragon/interim-v001/alphas/114_ACT114_declaration_wide_open_alpha.png",
+      "prompt_contract_id": "dragon-drg001-identity-locked-chroma-v001",
+      "runtime_admitted": false,
+      "sha256": "a922e20a4291e101f39c80fa6495ccb2621a4905783a849881efec52409d2e7c"
+    },
+    {
+      "asset_id": "ACT115",
+      "canonical_equivalence_review": "pending",
+      "chroma_source_path": "assets/reference/characters/dragon/interim-v001/generated-source/115_ACT115_question_rounded_chroma.png",
+      "chroma_source_sha256": "de27955227f391a23dc845f690b81530d19c90374cc0ccc4a8669b9e377f6f78",
+      "filename": "115_ACT115_question_rounded_alpha.png",
+      "generation_intent": "question rounded",
+      "identity_review": "pending",
+      "image_audit": {
+        "alpha_mode": "binary_straight",
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 217992,
+        "transparent_rgb_zero": true,
+        "visible_bbox": [
+          680,
+          115,
+          1383,
+          916
+        ]
+      },
+      "method": "identity_locked_image_generation_then_chroma_extraction",
+      "motion_review": "pending",
+      "path": "assets/reference/characters/dragon/interim-v001/alphas/115_ACT115_question_rounded_alpha.png",
+      "prompt_contract_id": "dragon-drg001-identity-locked-chroma-v001",
+      "runtime_admitted": false,
+      "sha256": "7bbc13830cc91de7756fd8fa2c7a0bfcd00d64106a395c500a858c8a79bbd6f0"
+    },
+    {
+      "asset_id": "ACT116",
+      "canonical_equivalence_review": "pending",
+      "chroma_source_path": "assets/reference/characters/dragon/interim-v001/generated-source/116_ACT116_whisper_small_open_chroma.png",
+      "chroma_source_sha256": "24f936d3035c85cc0c77aae431ef5cb5af9ebf492468bef56625e793206934ae",
+      "filename": "116_ACT116_whisper_small_open_alpha.png",
+      "generation_intent": "whisper small open",
+      "identity_review": "pending",
+      "image_audit": {
+        "alpha_mode": "binary_straight",
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 232191,
+        "transparent_rgb_zero": true,
+        "visible_bbox": [
+          625,
+          116,
+          1411,
+          915
+        ]
+      },
+      "method": "identity_locked_image_generation_then_chroma_extraction",
+      "motion_review": "pending",
+      "path": "assets/reference/characters/dragon/interim-v001/alphas/116_ACT116_whisper_small_open_alpha.png",
+      "prompt_contract_id": "dragon-drg001-identity-locked-chroma-v001",
+      "runtime_admitted": false,
+      "sha256": "695821fc8aae9d7b36f04e6136b4f1d278cfe256d090c0c046aa581f14953493"
+    },
+    {
+      "asset_id": "ACT117",
+      "canonical_equivalence_review": "pending",
+      "chroma_source_path": "assets/reference/characters/dragon/interim-v001/generated-source/117_ACT117_cause_effect_wide_open_chroma.png",
+      "chroma_source_sha256": "b4626a5bc208d87d0e1e255485d35e225dc6b6ff0df503951f6ef3a2cd3c59c8",
+      "filename": "117_ACT117_cause_effect_wide_open_alpha.png",
+      "generation_intent": "cause effect wide open",
+      "identity_review": "pending",
+      "image_audit": {
+        "alpha_mode": "binary_straight",
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 197331,
+        "transparent_rgb_zero": true,
+        "visible_bbox": [
+          567,
+          144,
+          1335,
+          911
+        ]
+      },
+      "method": "identity_locked_image_generation_then_chroma_extraction",
+      "motion_review": "pending",
+      "path": "assets/reference/characters/dragon/interim-v001/alphas/117_ACT117_cause_effect_wide_open_alpha.png",
+      "prompt_contract_id": "dragon-drg001-identity-locked-chroma-v001",
+      "runtime_admitted": false,
+      "sha256": "a7d6d0e72fae4e803e3779e76268a44732a7d9d62d871cfd58efb3d1baab1c95"
+    },
+    {
+      "asset_id": "ACT118",
+      "canonical_equivalence_review": "pending",
+      "chroma_source_path": "assets/reference/characters/dragon/interim-v001/generated-source/118_ACT118_invitation_small_open_chroma.png",
+      "chroma_source_sha256": "0f7175abf63df8b92f2975db2ed8eb144184ae137a666606ca8fa9e1120d98fe",
+      "filename": "118_ACT118_invitation_small_open_alpha.png",
+      "generation_intent": "invitation small open",
+      "identity_review": "pending",
+      "image_audit": {
+        "alpha_mode": "binary_straight",
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 209798,
+        "transparent_rgb_zero": true,
+        "visible_bbox": [
+          406,
+          124,
+          1148,
+          926
+        ]
+      },
+      "method": "identity_locked_image_generation_then_chroma_extraction",
+      "motion_review": "pending",
+      "path": "assets/reference/characters/dragon/interim-v001/alphas/118_ACT118_invitation_small_open_alpha.png",
+      "prompt_contract_id": "dragon-drg001-identity-locked-chroma-v001",
+      "runtime_admitted": false,
+      "sha256": "79ed32ee81b8741f72ee73f93e38aba02bc5c3efe8a06380f1a19c663b2ada4f"
+    },
+    {
+      "asset_id": "ACT119",
+      "canonical_equivalence_review": "pending",
+      "chroma_source_path": "assets/reference/characters/dragon/interim-v001/generated-source/119_ACT119_insight_wide_open_chroma.png",
+      "chroma_source_sha256": "36de8e9ad212b96593be45ff21d4ea7c8522024567555a70b5763bb5bdbbc6cf",
+      "filename": "119_ACT119_insight_wide_open_alpha.png",
+      "generation_intent": "insight wide open",
+      "identity_review": "pending",
+      "image_audit": {
+        "alpha_mode": "binary_straight",
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 229886,
+        "transparent_rgb_zero": true,
+        "visible_bbox": [
+          736,
+          105,
+          1357,
+          910
+        ]
+      },
+      "method": "identity_locked_image_generation_then_chroma_extraction",
+      "motion_review": "pending",
+      "path": "assets/reference/characters/dragon/interim-v001/alphas/119_ACT119_insight_wide_open_alpha.png",
+      "prompt_contract_id": "dragon-drg001-identity-locked-chroma-v001",
+      "runtime_admitted": false,
+      "sha256": "8444ce4f9e86e2a6c129d043dc6498bc5002588ed42519b9b183ea4a24160d13"
+    },
+    {
+      "asset_id": "ACT120",
+      "canonical_equivalence_review": "pending",
+      "chroma_source_path": "assets/reference/characters/dragon/interim-v001/generated-source/120_ACT120_detail_down_rounded_chroma.png",
+      "chroma_source_sha256": "9d1528031764b9c6529e3cfc17204dad22751910e296958d11dca9839df817f9",
+      "filename": "120_ACT120_detail_down_rounded_alpha.png",
+      "generation_intent": "detail down rounded",
+      "identity_review": "pending",
+      "image_audit": {
+        "alpha_mode": "binary_straight",
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 244467,
+        "transparent_rgb_zero": true,
+        "visible_bbox": [
+          649,
+          100,
+          1486,
+          920
+        ]
+      },
+      "method": "identity_locked_image_generation_then_chroma_extraction",
+      "motion_review": "pending",
+      "path": "assets/reference/characters/dragon/interim-v001/alphas/120_ACT120_detail_down_rounded_alpha.png",
+      "prompt_contract_id": "dragon-drg001-identity-locked-chroma-v001",
+      "runtime_admitted": false,
+      "sha256": "9a89bfa792354b68cb61faa2ca1cb95e74d70d02619c4a7d72c42886ea730a7d"
+    },
+    {
+      "asset_id": "ACT121",
+      "canonical_equivalence_review": "pending",
+      "chroma_source_path": "assets/reference/characters/dragon/interim-v001/generated-source/121_ACT121_warm_welcome_small_open_chroma.png",
+      "chroma_source_sha256": "9cd4c179dcb269b28d289b724d708256da74c8f65df7c2abb10e395d034694bc",
+      "filename": "121_ACT121_warm_welcome_small_open_alpha.png",
+      "generation_intent": "warm welcome small open",
+      "identity_review": "pending",
+      "image_audit": {
+        "alpha_mode": "binary_straight",
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 245005,
+        "transparent_rgb_zero": true,
+        "visible_bbox": [
+          617,
+          105,
+          1407,
+          926
+        ]
+      },
+      "method": "identity_locked_image_generation_then_chroma_extraction",
+      "motion_review": "pending",
+      "path": "assets/reference/characters/dragon/interim-v001/alphas/121_ACT121_warm_welcome_small_open_alpha.png",
+      "prompt_contract_id": "dragon-drg001-identity-locked-chroma-v001",
+      "runtime_admitted": false,
+      "sha256": "7e05051fbcdeadba9d61d5e08d6ad008eb890f614b84265e4bb1ab26e195d662"
+    },
+    {
+      "asset_id": "ACT122",
+      "canonical_equivalence_review": "pending",
+      "chroma_source_path": "assets/reference/characters/dragon/interim-v001/generated-source/122_ACT122_skeptical_explain_rounded_chroma.png",
+      "chroma_source_sha256": "ce7906661a2c442aa0fbae8cf0602bfa1b23737f1a7858c8f966ee02d47d0000",
+      "filename": "122_ACT122_skeptical_explain_rounded_alpha.png",
+      "generation_intent": "skeptical explain rounded",
+      "identity_review": "pending",
+      "image_audit": {
+        "alpha_mode": "binary_straight",
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 226747,
+        "transparent_rgb_zero": true,
+        "visible_bbox": [
+          560,
+          135,
+          1349,
+          919
+        ]
+      },
+      "method": "identity_locked_image_generation_then_chroma_extraction",
+      "motion_review": "pending",
+      "path": "assets/reference/characters/dragon/interim-v001/alphas/122_ACT122_skeptical_explain_rounded_alpha.png",
+      "prompt_contract_id": "dragon-drg001-identity-locked-chroma-v001",
+      "runtime_admitted": false,
+      "sha256": "7f41073dc2b667732b80306bb4919aa4fb9478c932b494953c1ae7fbc3d8eae1"
+    },
+    {
+      "asset_id": "ACT123",
+      "canonical_equivalence_review": "pending",
+      "chroma_source_path": "assets/reference/characters/dragon/interim-v001/generated-source/123_ACT123_conclusion_wide_open_chroma.png",
+      "chroma_source_sha256": "7afdd1031232e75b1bd18ddcc71ea62d2bc9a0e1fadbfd903b2ad17576ddb6fe",
+      "filename": "123_ACT123_conclusion_wide_open_alpha.png",
+      "generation_intent": "conclusion wide open",
+      "identity_review": "pending",
+      "image_audit": {
+        "alpha_mode": "binary_straight",
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 227274,
+        "transparent_rgb_zero": true,
+        "visible_bbox": [
+          678,
+          116,
+          1398,
+          920
+        ]
+      },
+      "method": "identity_locked_image_generation_then_chroma_extraction",
+      "motion_review": "pending",
+      "path": "assets/reference/characters/dragon/interim-v001/alphas/123_ACT123_conclusion_wide_open_alpha.png",
+      "prompt_contract_id": "dragon-drg001-identity-locked-chroma-v001",
+      "runtime_admitted": false,
+      "sha256": "d01c8ae6ab9d06af054c4203624029893ea91f46c01baafd8ee01e35fef1087c"
+    },
+    {
+      "asset_id": "CAN007",
+      "canonical_equivalence_review": "pending",
+      "filename": "CAN007_DRG001_front_three_quarter_right_v001_alpha.png",
+      "identity_review": "derived_from_validated_source",
+      "image_audit": {
+        "alpha_mode": "binary_straight",
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 273419,
+        "transparent_rgb_zero": true,
+        "visible_bbox": [
+          478,
+          52,
+          1140,
+          972
+        ]
+      },
+      "method": "deterministic_horizontal_mirror",
+      "motion_review": "pending",
+      "path": "assets/reference/characters/dragon/interim-v001/alphas/CAN007_DRG001_front_three_quarter_right_v001_alpha.png",
+      "runtime_admitted": false,
+      "sha256": "4057ccbaede6f060eb1d6d07bffa921928506e14894127f8f7714a5052c4f310",
+      "source_asset_id": "CAN002",
+      "source_path": "assets/reference/characters/dragon/source/alphas/CAN002_DRG001_front_three_quarter_left_v001_alpha.png",
+      "source_sha256": "81919d9ffd0b6a533a2dca633f595a99057a48a15417b9f9d52c6c5debe5667d"
+    }
+  ],
+  "candidate_count": 48,
+  "candidate_set_id": "dragon-drg001-interim-48-v001",
+  "expected_candidate_count": 48,
+  "manifest_type": "dragon_interim_candidate_set",
+  "missing_asset_ids": [],
+  "prompt_contract": {
+    "background_contract": "Perfectly flat solid #00ff00 chroma background with no floor, shadow, gradient, texture, reflection, text, prop, or watermark.",
+    "composition_contract": "Exactly one complete centered Dragon on a 16:9 canvas with generous padding and no cropped anatomy.",
+    "performance_contract": "Render the asset-specific body, hand, flight, or speech intent while keeping the character readable as a single animation frame.",
+    "subject_contract": "Preserve DRG001 identity, orange-and-cobalt scale pattern, cream belly, amber eyes, horns, fins, wings, proportions, materials, and render style.",
+    "use_case": "stylized-concept"
+  },
+  "prompt_contract_id": "dragon-drg001-identity-locked-chroma-v001",
+  "review_projection": false,
+  "runtime_admitted": false,
+  "schema_version": "1.0.0"
+}

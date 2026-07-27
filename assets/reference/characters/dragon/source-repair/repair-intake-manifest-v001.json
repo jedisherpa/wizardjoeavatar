@@ -1,0 +1,228 @@
+{
+  "admission_rule": "Every blocked asset requires an intact, visually approved replacement; metric deltas require explicit canonical-equivalence approval.",
+  "approval_state": "source_repair_incomplete",
+  "assets": [
+    {
+      "asset_id": "CAN007",
+      "canonical_filename": "CAN007_DRG001_front_three_quarter_right_v001_alpha.png",
+      "damaged_source_sha256": "9854168332a296a653cac25a6b5ccb3398a27e2d5b0c15c4bc82f5af72d6b950",
+      "expected_opaque_pixel_count": 298752,
+      "replacement_approval": "not_approved",
+      "review_projection": false,
+      "runtime_admitted": false,
+      "status": "replacement_missing"
+    },
+    {
+      "asset_id": "ACT007",
+      "canonical_filename": "007_ACT007_front_three_quarter_right_alpha.png",
+      "damaged_source_sha256": "fdccfdffe514fc2a2e72bd6f0485917322ea2f15250756cae1bdd7853b2a9580",
+      "expected_opaque_pixel_count": 280696,
+      "rejected_same_name_alternative": {
+        "identity_order": [
+          "robin",
+          "speech"
+        ],
+        "opaque_pixel_count": 700574,
+        "path": "assets/reference/characters/robin_speech/source/alphas/007_ACT007_front_three_quarter_right_alpha.png",
+        "rejection_reason": "paired Robin/Speech artwork is not Dragon source art",
+        "sha256": "269863afd39bc7c6c44fe02c45114ffb81731151f09c8a28b6b871ccd1582a37"
+      },
+      "replacement_approval": "not_approved",
+      "review_projection": false,
+      "runtime_admitted": false,
+      "status": "replacement_missing"
+    },
+    {
+      "asset_id": "ACT011",
+      "candidate": {
+        "canonical_equivalence_review": "pending",
+        "exact_filename_match": true,
+        "image_audit": {
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "canvas_size": [
+            1920,
+            1080
+          ],
+          "mode": "RGBA",
+          "opaque_pixel_count": 308940,
+          "transparent_rgb_zero": true,
+          "visible_bbox": [
+            575,
+            52,
+            1431,
+            972
+          ]
+        },
+        "observed_identity": "dragon",
+        "opaque_pixel_delta": 26,
+        "opaque_pixel_delta_ratio": 8.417e-05,
+        "path": "assets/reference/characters/dragon/source-evidence/contaminated-robin-archive-011-030/alphas/011_ACT011_neutral_speaking_gesture_alpha.png",
+        "sha256": "132ec3f313284487d749cbe5644ec09e104bf0d59a55c9b13b16333e293fe7cb",
+        "source_evidence_set_id": "dragon-mislabeled-robin-archive-011-030-v001",
+        "source_label_status": "mislabeled_as_robin",
+        "visual_identity_review": "confirmed_dragon_identity"
+      },
+      "canonical_filename": "011_ACT011_neutral_speaking_gesture_alpha.png",
+      "damaged_source_sha256": "e1bb30ac0b72fe7d0b48ca4c528c250732f951709b26ed663064bc725cbb4d2c",
+      "expected_opaque_pixel_count": 308914,
+      "rejected_same_name_alternative": {
+        "identity_order": [
+          "robin",
+          "speech"
+        ],
+        "opaque_pixel_count": 713727,
+        "path": "assets/reference/characters/robin_speech/source/alphas/011_ACT011_neutral_speaking_gesture_alpha.png",
+        "rejection_reason": "paired Robin/Speech artwork is not Dragon source art",
+        "sha256": "28e6b90f592af82696f25b828efd20b3b5fb0488af0d68f246cd0f1ec5ee7fb5"
+      },
+      "replacement_approval": "not_approved",
+      "review_projection": false,
+      "runtime_admitted": false,
+      "status": "candidate_metric_delta_requires_approval"
+    },
+    {
+      "asset_id": "ACT025",
+      "candidate": {
+        "canonical_equivalence_review": "pending",
+        "exact_filename_match": true,
+        "image_audit": {
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "canvas_size": [
+            1920,
+            1080
+          ],
+          "mode": "RGBA",
+          "opaque_pixel_count": 327543,
+          "transparent_rgb_zero": true,
+          "visible_bbox": [
+            517,
+            68,
+            1454,
+            972
+          ]
+        },
+        "observed_identity": "dragon",
+        "opaque_pixel_delta": -11307,
+        "opaque_pixel_delta_ratio": -0.03336875,
+        "path": "assets/reference/characters/dragon/source-evidence/contaminated-robin-archive-011-030/alphas/025_ACT025_hand_over_the_floor_alpha.png",
+        "sha256": "de07114a9d0d4fc677d654072afc23d4f2544db44df509d1faf64c61b79b6387",
+        "source_evidence_set_id": "dragon-mislabeled-robin-archive-011-030-v001",
+        "source_label_status": "mislabeled_as_robin",
+        "visual_identity_review": "confirmed_dragon_identity"
+      },
+      "canonical_filename": "025_ACT025_hand_over_the_floor_alpha.png",
+      "damaged_source_sha256": "891506a22223183d946b149ebe860bef61a8620696e80e03fb871fad04b158cc",
+      "expected_opaque_pixel_count": 338850,
+      "rejected_same_name_alternative": {
+        "identity_order": [
+          "robin",
+          "speech"
+        ],
+        "opaque_pixel_count": 729386,
+        "path": "assets/reference/characters/robin_speech/source/alphas/025_ACT025_hand_over_the_floor_alpha.png",
+        "rejection_reason": "paired Robin/Speech artwork is not Dragon source art",
+        "sha256": "84b479098b805e447c6b3933bd54ede182829101fe1dbc7b0b685d1132cafa95"
+      },
+      "replacement_approval": "not_approved",
+      "review_projection": false,
+      "runtime_admitted": false,
+      "status": "candidate_metric_delta_requires_approval"
+    },
+    {
+      "asset_id": "ACT032",
+      "canonical_filename": "032_ACT032_cause_and_effect_alpha.png",
+      "damaged_source_sha256": "b96fc6bf961814505763bdba9dee48520424908406518728f1650e7ff08741e2",
+      "expected_opaque_pixel_count": 279680,
+      "rejected_same_name_alternative": {
+        "identity_order": [
+          "robin",
+          "speech"
+        ],
+        "opaque_pixel_count": 758397,
+        "path": "assets/reference/characters/robin_speech/source/alphas/032_ACT032_cause_and_effect_alpha.png",
+        "rejection_reason": "paired Robin/Speech artwork is not Dragon source art",
+        "sha256": "311807cd17f679c65b073193668751d1e4544e92078a305253c48430f130dbb1"
+      },
+      "replacement_approval": "not_approved",
+      "review_projection": false,
+      "runtime_admitted": false,
+      "status": "replacement_missing"
+    },
+    {
+      "asset_id": "ACT044",
+      "canonical_filename": "044_ACT044_excitement_alpha.png",
+      "damaged_source_sha256": "d430c588c38085fc6a6c69a884e5d8c1b265e96a3dae99e4966d428302908acd",
+      "expected_opaque_pixel_count": 226220,
+      "rejected_same_name_alternative": {
+        "identity_order": [
+          "robin",
+          "speech"
+        ],
+        "opaque_pixel_count": 686641,
+        "path": "assets/reference/characters/robin_speech/source/alphas/044_ACT044_excitement_alpha.png",
+        "rejection_reason": "paired Robin/Speech artwork is not Dragon source art",
+        "sha256": "c03681e5dd3effbb383c4268b0ee7ab8747a7afda271c4e00d62d9f5ddd2a408"
+      },
+      "replacement_approval": "not_approved",
+      "review_projection": false,
+      "runtime_admitted": false,
+      "status": "replacement_missing"
+    },
+    {
+      "asset_id": "ACT060",
+      "canonical_filename": "060_ACT060_fatigue_alpha.png",
+      "damaged_source_sha256": "99402e0c2ae336d3c9259c548e94f3c368f7c48ae3d95cca8b00ef9654540dcd",
+      "expected_opaque_pixel_count": 343791,
+      "rejected_same_name_alternative": {
+        "identity_order": [
+          "robin",
+          "speech"
+        ],
+        "opaque_pixel_count": 827087,
+        "path": "assets/reference/characters/robin_speech/source/alphas/060_ACT060_fatigue_alpha.png",
+        "rejection_reason": "paired Robin/Speech artwork is not Dragon source art",
+        "sha256": "ba52464ce1318f13533116958b8f5ad2698a60b4187d8c6f5e0dfa09f9f2a088"
+      },
+      "replacement_approval": "not_approved",
+      "review_projection": false,
+      "runtime_admitted": false,
+      "status": "replacement_missing"
+    }
+  ],
+  "blocked_asset_count": 7,
+  "candidate_asset_count": 2,
+  "candidate_asset_ids": [
+    "ACT011",
+    "ACT025"
+  ],
+  "complete_replacement_inventory": false,
+  "evidence_manifest": {
+    "evidence_set_id": "dragon-mislabeled-robin-archive-011-030-v001",
+    "path": "assets/reference/characters/dragon/source-evidence/contaminated-robin-archive-011-030/source-evidence-manifest.json",
+    "sha256": "f35bfd5734096bd6f4367e821a4c01b41cf39fef3b87869812303f32ab918f78"
+  },
+  "manifest_type": "dragon_source_repair_intake",
+  "missing_asset_count": 5,
+  "missing_asset_ids": [
+    "CAN007",
+    "ACT007",
+    "ACT032",
+    "ACT044",
+    "ACT060"
+  ],
+  "repair_set_id": "dragon-drg001-source-repair-v001",
+  "review_projection": false,
+  "runtime_admitted": false,
+  "schema_version": "1.0.0",
+  "source_manifest": {
+    "asset_set_id": "dragon-drg001-approved-alpha-001-080-v001",
+    "path": "assets/reference/characters/dragon/source/source-manifest-v001.json",
+    "sha256": "024a5643d3e8442fdb3de0c2abf4198ff5c004e4ae35f6a5f42e75bc6d67d93f"
+  }
+}
