@@ -45,7 +45,10 @@
       }
     },
     "renderer": {
-      "const": "asciline_square_cells"
+      "enum": [
+        "asciline_hd_rgba",
+        "asciline_square_cells"
+      ]
     },
     "renderer_adapter_id": {
       "type": "string",

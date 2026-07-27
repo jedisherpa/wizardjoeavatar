@@ -63,7 +63,9 @@ def main() -> None:
     sys.path.insert(0, str(root))
 
     import uvicorn
+    from wizard_avatar.character_package import load_character_package
     from wizard_avatar.frame_source import ProceduralWizardFrameSource
+    from wizard_avatar.hd_rgba_frame_source import HDPoseFrameSource
     from wizard_avatar.server import create_app, is_literal_loopback_host
 
     environment_companion_mode = os.environ.get("WIZARD_COMPANION_MODE", "").lower() in {
@@ -74,13 +76,27 @@ def main() -> None:
         parser.error("Wizard Joe only supports a literal loopback --host")
 
     shutdown_signal = ServerShutdownSignal()
-    app = create_app(
-        ProceduralWizardFrameSource(
+    package = (
+        load_character_package(args.character_package)
+        if args.character_package is not None
+        else None
+    )
+    frame_source = (
+        HDPoseFrameSource(
+            fps=args.fps,
+            character_package_path=args.character_package,
+        )
+        if package is not None
+        and package.renderer_adapter_id == "asciline.hd_rgba_pose.v1"
+        else ProceduralWizardFrameSource(
             args.cols,
             args.rows,
             args.fps,
             character_package_path=args.character_package,
-        ),
+        )
+    )
+    app = create_app(
+        frame_source,
         companion_mode=companion_mode,
         shutdown_signal=shutdown_signal.request,
         runtime_server_config={
@@ -88,6 +104,7 @@ def main() -> None:
             "port": args.port,
             "companion_mode": companion_mode,
             "quiet": args.quiet,
+            "render_mode": frame_source.render_mode,
         },
         hd_review_index_path=args.review_library_index,
     )

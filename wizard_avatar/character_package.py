@@ -23,8 +23,15 @@ _ASSET_ROLE = re.compile(r"^[a-z][a-z0-9_]{0,63}$")
 SUPPORTED_CHARACTER_RUNTIME_API_VERSIONS = frozenset({1})
 SUPPORTED_RENDERER_ADAPTER_IDS = frozenset(
     {
+        "asciline.hd_rgba_pose.v1",
         "asciline.legacy_square_cells.v1",
         "asciline.pixel_graph.v1",
+    }
+)
+SUPPORTED_RENDERERS = frozenset(
+    {
+        "asciline_hd_rgba",
+        "asciline_square_cells",
     }
 )
 _V2_REQUIRED_ASSET_ROLES = {
@@ -67,6 +74,8 @@ class CharacterPackage:
     capability_manifest: Path | None
     default_pose_id: str
     capabilities: Tuple[str, ...]
+    render_mode: str
+    runtime_admitted: bool
 
 
 def load_character_package(path: Path = WIZARD_JOE_PACKAGE_PATH) -> CharacterPackage:
@@ -156,6 +165,8 @@ def _load_v1_package(
         capability_manifest=None,
         default_pose_id=str(raw["default_pose_id"]),
         capabilities=capabilities,
+        render_mode="cells",
+        runtime_admitted=True,
     )
 
 
@@ -190,7 +201,7 @@ def _load_v2_package(
     ):
         if not isinstance(raw[name], str) or not raw[name]:
             raise CharacterPackageValidationError("{} must be non-empty text".format(name))
-    if raw["renderer"] != "asciline_square_cells":
+    if raw["renderer"] not in SUPPORTED_RENDERERS:
         raise CharacterPackageValidationError("unsupported renderer")
     if raw["renderer_adapter_id"] not in SUPPORTED_RENDERER_ADAPTER_IDS:
         raise CharacterPackageValidationError(
@@ -263,6 +274,20 @@ def _load_v2_package(
         )
         asset_contents[role] = content
 
+    is_hd_rgba = raw["renderer_adapter_id"] == "asciline.hd_rgba_pose.v1"
+    if is_hd_rgba and "hd_pose_library_index" not in assets:
+        raise CharacterPackageValidationError(
+            "HD RGBA packages require an hd_pose_library_index asset"
+        )
+    if not is_hd_rgba and raw["renderer"] != "asciline_square_cells":
+        raise CharacterPackageValidationError(
+            "non-HD packages must use the square-cell renderer"
+        )
+    if is_hd_rgba and raw["renderer"] != "asciline_hd_rgba":
+        raise CharacterPackageValidationError(
+            "HD RGBA packages must use the asciline_hd_rgba renderer"
+        )
+
     pose_library = assets["pose_library"].path
     animation_graph = assets["animation_graph"].path
     _validate_pose_and_graph(
@@ -289,6 +314,15 @@ def _load_v2_package(
     pose_ids = _pose_ids(
         json.loads(asset_contents["pose_library"].decode("utf-8"))
     )
+    runtime_admitted = True
+    if is_hd_rgba:
+        runtime_admitted = _validate_hd_rgba_assets(
+            package_path=package_path,
+            assets=assets,
+            index_content=asset_contents["hd_pose_library_index"],
+            character_id=str(raw["character_id"]),
+            pose_ids=pose_ids,
+        )
     missing_profile_poses = sorted(
         set(runtime_profile_contract.referenced_pose_ids()) - pose_ids
     )
@@ -377,7 +411,86 @@ def _load_v2_package(
         capability_manifest=assets["capability_manifest"].path,
         default_pose_id=str(raw["default_pose_id"]),
         capabilities=capabilities,
+        render_mode="rgba" if is_hd_rgba else "cells",
+        runtime_admitted=runtime_admitted,
     )
+
+
+def _validate_hd_rgba_assets(
+    *,
+    package_path: Path,
+    assets: Mapping[str, CharacterAsset],
+    index_content: bytes,
+    character_id: str,
+    pose_ids: set[str],
+) -> bool:
+    try:
+        index = json.loads(index_content.decode("utf-8"))
+    except (UnicodeError, json.JSONDecodeError) as exc:
+        raise CharacterPackageValidationError(
+            "hd_pose_library_index is invalid JSON"
+        ) from exc
+    if not isinstance(index, Mapping):
+        raise CharacterPackageValidationError(
+            "hd_pose_library_index must be an object"
+        )
+    if index.get("character_id") != character_id:
+        raise CharacterPackageValidationError(
+            "HD pose library character_id does not match package"
+        )
+    indexed_pose_ids = index.get("poses")
+    if not isinstance(indexed_pose_ids, list):
+        raise CharacterPackageValidationError(
+            "HD pose library must expose pose metadata"
+        )
+    indexed_ids = {
+        str(item.get("pose_id"))
+        for item in indexed_pose_ids
+        if isinstance(item, Mapping) and isinstance(item.get("pose_id"), str)
+    }
+    if indexed_ids != pose_ids:
+        raise CharacterPackageValidationError(
+            "HD pose library and package pose catalog differ"
+        )
+    shards = index.get("shards")
+    if not isinstance(shards, list) or not shards:
+        raise CharacterPackageValidationError(
+            "HD pose library must contain at least one shard"
+        )
+    indexed_asset = assets["hd_pose_library_index"]
+    index_root = indexed_asset.path.parent.resolve()
+    package_root = package_path.parent.resolve()
+    for shard_number, shard in enumerate(shards, start=1):
+        if not isinstance(shard, Mapping):
+            raise CharacterPackageValidationError(
+                "HD pose shard descriptors must be objects"
+            )
+        path_value = shard.get("path")
+        digest = shard.get("sha256")
+        if not isinstance(path_value, str) or not isinstance(digest, str):
+            raise CharacterPackageValidationError(
+                "HD pose shard path and sha256 are required"
+            )
+        shard_path = (index_root / Path(path_value)).resolve()
+        try:
+            shard_path.relative_to(package_root)
+        except ValueError as exc:
+            raise CharacterPackageValidationError(
+                "HD pose shard escapes the character package"
+            ) from exc
+        role = "hd_pose_shard_{:03d}".format(shard_number)
+        asset = assets.get(role)
+        if asset is None:
+            raise CharacterPackageValidationError(
+                "HD pose library shard is not package-bound: {}".format(
+                    path_value
+                )
+            )
+        if asset.path != shard_path or asset.sha256 != "sha256:" + digest:
+            raise CharacterPackageValidationError(
+                "HD pose shard asset does not match library index"
+            )
+    return bool(index.get("runtime_admitted"))
 
 
 def _validate_pose_and_graph(

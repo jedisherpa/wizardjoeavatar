@@ -17,6 +17,7 @@ export class WizardClient {
     this.nextPresentationAt = 0;
     this.presentationStarted = false;
     this.lastPresentedFrame = null;
+    this.renderMode = "cells";
     this.hashHistory = [];
     this.ignoreDeltasUntilKeyframe = false;
     this.maxBufferedFrames = 8;
@@ -110,6 +111,7 @@ export class WizardClient {
     const cols = parseInt(parts[3], 10);
     const rows = parseInt(parts[4], 10);
     const renderMode = parts[8] === "rgba" ? "rgba" : "cells";
+    this.renderMode = renderMode;
     this.targetFps = Number.isFinite(fps) && fps > 0 ? fps : DEFAULT_TARGET_FPS;
     this.frameIntervalMs = 1000 / this.targetFps;
     this.maxBufferedFrames = Math.max(6, Math.ceil(this.targetFps / 3));
@@ -164,7 +166,13 @@ export class WizardClient {
 
     try {
       const decoded = await this.decoder.decode(message);
-      decoded.hash = frameHash(decoded.frame);
+      decoded.hash = (
+        decoded.unchanged
+          ? this.metrics.lastDecodedHash
+          : this.renderMode === "rgba"
+          ? null
+          : frameHash(decoded.frame)
+      );
       this.enqueueDecodedFrame(decoded);
     } catch (error) {
       this.handleDecodeError(header, error);
@@ -220,11 +228,19 @@ export class WizardClient {
     this.dropBacklog();
     const decoded = this.frameBuffer.shift();
     if (decoded) {
-      this.canvasRenderer.draw(decoded.frame);
+      if (!decoded.unchanged || !this.lastPresentedFrame) {
+        this.canvasRenderer.draw(decoded.frame);
+      } else {
+        this.metrics.heldFrames++;
+      }
       this.lastPresentedFrame = decoded;
       this.metrics.presentedFrames++;
       this.metrics.lastPresentedFrameIndex = decoded.frameIndex;
-      const presentedHash = this.canvasRenderer.getMetrics().lastPresentedLogicalHash || decoded.hash;
+      const presentedHash = (
+        decoded.unchanged
+          ? decoded.hash
+          : this.canvasRenderer.getMetrics().lastPresentedLogicalHash || decoded.hash
+      );
       this.metrics.lastPresentedHash = presentedHash;
       this.recordHash(decoded.frameIndex, { presentedHash });
       this.frameCount++;

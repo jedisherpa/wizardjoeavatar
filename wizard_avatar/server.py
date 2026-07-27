@@ -174,6 +174,7 @@ def create_app(
             "rows": frame_source.rows,
             "fps": frame_source.fps,
             "cell_bytes": 4,
+            "render_mode": frame_source.render_mode,
         },
         server_config=runtime_server_config,
         runtime_epoch_prefix=character_runtime_epoch_prefix(
@@ -518,7 +519,12 @@ def create_app(
     @app.get("/api/avatar/wizard/frame-hashes")
     async def frame_hashes():
         return {
-            "algorithm": "fnv1a32",
+            "algorithm": (
+                "sha256"
+                if frame_source.render_mode == "rgba"
+                else "fnv1a32"
+            ),
+            "source": "authoritative_python_frame_hub",
             "history": frame_hub.source_hash_history(),
         }
 
@@ -872,7 +878,7 @@ def create_app(
         await websocket.accept()
         _codec = websocket.query_params.get("codec", "adaptive")
         await websocket.send_text(
-            f"INIT:{frame_source.fps}:5:{frame_source.cols}:{frame_source.rows}:0:0:0.000"
+            f"INIT:{frame_source.fps}:5:{frame_source.cols}:{frame_source.rows}:0:0:0.000:{frame_source.render_mode}"
         )
         try:
             subscriber = await frame_hub.subscribe()

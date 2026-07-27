@@ -25,7 +25,7 @@ from .commanding import CommandAckV1, CommandEnvelopeV1, OrderedCommandInbox, Qu
 from .frame_hash import frame_hash
 from .frame_source import ProceduralWizardFrameSource
 from .models import CommandResult, WizardCellFrame, WizardCommand, WizardState
-from .protocol import encode_keyframe
+from .protocol import encode_keyframe, encode_rgba_frame
 from .performance_application import PerformanceApplication
 from .performance_context import PerformanceContextV1
 from .performance_release import (
@@ -747,7 +747,15 @@ class WizardFrameHub:
                 if message is None or frame is None:
                     raise RuntimeError("render candidate committed without a transport frame")
                 if self._force_keyframe:
-                    forced = encode_keyframe(frame.cells, frame.frame_index)
+                    forced = (
+                        encode_rgba_frame(
+                            frame.cells,
+                            None,
+                            frame.frame_index,
+                        )
+                        if self.frame_source.render_mode == "rgba"
+                        else encode_keyframe(frame.cells, frame.frame_index)
+                    )
                     message = forced.message
                     self._force_keyframe = False
                     self._forced_keyframe_count += 1
@@ -773,7 +781,13 @@ class WizardFrameHub:
                     {
                         "frame_index": frame.frame_index,
                         "hash": (
-                            render_candidate.animation_truth.frame_fnv1a32
+                            (
+                                "sha256:"
+                                + render_candidate.animation_truth.frame_sha256
+                                if render_candidate.animation_truth.frame_fnv1a32
+                                == "unavailable:hd-rgba"
+                                else render_candidate.animation_truth.frame_fnv1a32
+                            )
                             if render_candidate is not None
                             else frame_hash(frame.cells)
                         ),

@@ -62,6 +62,57 @@ def encode_keyframe(frame: bytes, frame_index: int, cell_bytes: int = CELL_BYTES
     return _full_frame(frame, frame_index, cell_bytes)
 
 
+def encode_rgba_frame(
+    frame: bytes,
+    prev: Optional[bytes],
+    frame_index: int,
+) -> EncodedFrame:
+    """Encode a dense RGBA frame without a per-pixel Python delta scan.
+
+    Authored HD poses commonly hold for several simulation ticks. Equality of
+    the immutable byte strings is implemented in C and makes those holds a
+    tiny empty delta. A changed pose is sent as a compressed keyframe. This
+    preserves the existing protocol and authoritative frame clock while
+    avoiding a Python loop across more than two million pixels every tick.
+    """
+
+    if len(frame) % CELL_BYTES:
+        raise ValueError("RGBA frame length must be divisible by four")
+    periodic_keyframe = frame_index % KEYFRAME_INTERVAL == 0
+    if (
+        not periodic_keyframe
+        and prev is not None
+        and len(prev) == len(frame)
+        and frame == prev
+    ):
+        payload = zlib.compress(b"", 3)
+        message = struct.pack(">IB", frame_index, TAG_DELTA) + payload
+        return EncodedFrame(
+            message=message,
+            shown_frame=prev,
+            tag=TAG_DELTA,
+            changed_cells=0,
+            encoded_size=len(message),
+            raw_size=len(frame),
+            is_keyframe=False,
+        )
+    compressed = zlib.compress(frame, 3)
+    if len(compressed) < len(frame):
+        tag, payload = TAG_ZLIB, compressed
+    else:
+        tag, payload = TAG_RAW, frame
+    message = struct.pack(">IB", frame_index, tag) + payload
+    return EncodedFrame(
+        message=message,
+        shown_frame=frame,
+        tag=tag,
+        changed_cells=len(frame) // CELL_BYTES,
+        encoded_size=len(message),
+        raw_size=len(frame),
+        is_keyframe=True,
+    )
+
+
 def encode_frame(
     frame: bytes,
     prev: Optional[bytes],

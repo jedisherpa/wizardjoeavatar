@@ -272,6 +272,12 @@ def load_character_registry(
             index,
         )
         package = load_character_package(package_path)
+        if not package.runtime_admitted:
+            raise CharacterRegistryValidationError(
+                "characters[{}] package is review-only and cannot be admitted".format(
+                    index
+                )
+            )
         if package.character_id != character_id:
             raise CharacterRegistryValidationError(
                 "characters[{}].character_id does not match package".format(index)

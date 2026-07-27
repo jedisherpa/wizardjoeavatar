@@ -61,7 +61,7 @@ from .pose_selection import (
 )
 from .projection import project_quantized
 from .permission_world import PermissionWorldRenderPolicyV1
-from .protocol import EncodedFrame, encode_frame
+from .protocol import EncodedFrame, encode_frame, encode_rgba_frame
 from .reference_avatar import (
     REFERENCE_SCALE_MULTIPLIER,
     reference_pose_anchor,
@@ -269,6 +269,7 @@ class ProceduralWizardFrameSource:
         self.cols = int(cols)
         self.rows = int(rows)
         self.fps = float(fps)
+        self.render_mode = "cells"
         self.character_package_path = Path(
             WIZARD_JOE_PACKAGE_PATH if character_package_path is None else character_package_path
         ).resolve()
@@ -2245,10 +2246,18 @@ class ProceduralWizardFrameSource:
         )
         frame, presentation, animation_truth = self._render_snapshot(worker_snapshot)
         if codec == "adaptive":
-            encoded = encode_frame(
-                frame.cells,
-                state.previous_encoded_frame,
-                state.frame_index,
+            encoded = (
+                encode_rgba_frame(
+                    frame.cells,
+                    state.previous_encoded_frame,
+                    state.frame_index,
+                )
+                if self.render_mode == "rgba"
+                else encode_frame(
+                    frame.cells,
+                    state.previous_encoded_frame,
+                    state.frame_index,
+                )
             )
             frame.codec_tag = encoded.tag
             frame.changed_cells = encoded.changed_cells

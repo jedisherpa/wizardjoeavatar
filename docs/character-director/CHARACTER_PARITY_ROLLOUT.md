@@ -39,7 +39,7 @@ runtime API range.
 | 10 | Rohan Slate | `375a3f9a` | Source discovered |
 | 11 | Finn Calder | `40b9a346` | Source discovered |
 | 12 | Orion Vale | `50eab748` | Source discovered |
-| 13 | Robin | Source manifest `2c33d3e0` | Corrected 200-pose review library published locally; runtime blocked |
+| 13 | Robin | Source manifest `2c33d3e0` | Package-bound 200-pose HD RGBA runtime candidate verified locally; review-only and not registered |
 | 14 | Speech | Source manifest `2c33d3e0` | Corrected 200-pose review library built; runtime blocked |
 | 15 | Dragon | Source manifest `024a5643` | 84 of 91 assets valid; seven damaged replacements required; review and runtime blocked |
 | 16 | Kingfisher | To be frozen during intake | Not started |
@@ -58,6 +58,15 @@ deterministic component/geodesic partition preserves each identity while
 requiring exact source reconstruction and zero overlap. Both compiled libraries
 remain review-only and fail closed at production admission. See
 `ROBIN_SPEECH_ALPHA_INTEGRATION_2026-07-27.md`.
+
+Robin additionally has a package-bound HD RGBA runtime candidate that runs
+through the existing Python frame hub, controller, graph, score application,
+remote commands, and connector surfaces. Its fixed `+480` presentation
+translation centers the left-side identity without resampling or altering the
+source. The package remains fail-closed because authored blink, governed
+viseme/speech performance, sustained HD locomotion throughput, independent
+review, product approval, and registry admission are still outstanding. See
+`ROBIN_HD_RGBA_RUNTIME_CANDIDATE_2026-07-27.md`.
 
 Dragon has a frozen 91-entry source inventory, but seven supplied PNG streams
 are truncated. The 84 valid files are preserved byte-for-byte; failed payloads

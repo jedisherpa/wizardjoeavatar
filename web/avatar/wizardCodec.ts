@@ -51,6 +51,7 @@ export function makeDecoder(cellBytes = 4) {
   async function decode(message) {
     const { frameIndex, tag, payload } = parseFrameHeader(message);
     let frame;
+    let unchanged = false;
 
     if (tag === TAG_RAW) {
       frame = payload.slice();
@@ -62,14 +63,19 @@ export function makeDecoder(cellBytes = 4) {
       const recordSize = 4 + cellBytes;
       if (body.length % recordSize !== 0) throw new Error("Malformed delta frame payload");
       const count = body.length / recordSize;
-      const bodyView = new DataView(body.buffer, body.byteOffset, body.byteLength);
-      frame = previous.slice();
-      const valuesOffset = count * 4;
-      for (let i = 0; i < count; i++) {
-        const cellIndex = bodyView.getUint32(i * 4, true);
-        const dst = cellIndex * cellBytes;
-        const src = valuesOffset + i * cellBytes;
-        for (let c = 0; c < cellBytes; c++) frame[dst + c] = body[src + c];
+      if (count === 0) {
+        frame = previous;
+        unchanged = true;
+      } else {
+        const bodyView = new DataView(body.buffer, body.byteOffset, body.byteLength);
+        frame = previous.slice();
+        const valuesOffset = count * 4;
+        for (let i = 0; i < count; i++) {
+          const cellIndex = bodyView.getUint32(i * 4, true);
+          const dst = cellIndex * cellBytes;
+          const src = valuesOffset + i * cellBytes;
+          for (let c = 0; c < cellBytes; c++) frame[dst + c] = body[src + c];
+        }
       }
     } else if (tag === TAG_RLE_FULL) {
       const body = await inflate(payload);
@@ -92,7 +98,7 @@ export function makeDecoder(cellBytes = 4) {
     }
 
     previous = frame;
-    return { frameIndex, frame, tag };
+    return { frameIndex, frame, tag, unchanged };
   }
 
   return {
