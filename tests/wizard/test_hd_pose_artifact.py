@@ -6,7 +6,12 @@ from pathlib import Path
 
 from PIL import Image, ImageDraw
 
-from wizard_avatar.hd_pose_artifact import HDPoseArtifact, HDPoseLibrary, write_pose_artifact
+from wizard_avatar.hd_pose_artifact import (
+    HDPoseArtifact,
+    HDPoseLibrary,
+    write_pose_artifact,
+    write_pose_artifact_from_loader,
+)
 
 
 class HDPoseArtifactTests(unittest.TestCase):
@@ -42,6 +47,57 @@ class HDPoseArtifactTests(unittest.TestCase):
                     Path(directory) / "poses.wjpose",
                     {"bad": Image.new("RGBA", (2, 2))},
                     profile={"profile_id": "test", "canvas_width": 4, "canvas_height": 4},
+                    provenance={},
+                )
+
+    def test_streaming_writer_loads_one_sorted_pose_at_a_time(self):
+        active = 0
+        maximum_active = 0
+        load_order = []
+
+        def load_pose(pose_id):
+            nonlocal active, maximum_active
+            active += 1
+            maximum_active = max(maximum_active, active)
+            load_order.append(pose_id)
+            image = Image.new("RGBA", (8, 8), (len(pose_id), 20, 30, 255))
+            active -= 1
+            return image
+
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "streamed.wjpose"
+            receipt = write_pose_artifact_from_loader(
+                path,
+                ["third", "first", "second"],
+                load_pose=load_pose,
+                profile={
+                    "profile_id": "streamed-test",
+                    "canvas_width": 8,
+                    "canvas_height": 8,
+                },
+                provenance={"source": "test"},
+            )
+
+            self.assertEqual(load_order, ["first", "second", "third"])
+            self.assertEqual(maximum_active, 1)
+            self.assertEqual(receipt["pose_ids"], load_order)
+            self.assertEqual(
+                set(HDPoseArtifact(path).records),
+                {"first", "second", "third"},
+            )
+
+    def test_streaming_writer_rejects_duplicate_pose_ids(self):
+        with tempfile.TemporaryDirectory() as directory:
+            with self.assertRaisesRegex(ValueError, "must be unique"):
+                write_pose_artifact_from_loader(
+                    Path(directory) / "duplicate.wjpose",
+                    ["same", "same"],
+                    load_pose=lambda _: Image.new("RGBA", (8, 8)),
+                    profile={
+                        "profile_id": "streamed-test",
+                        "canvas_width": 8,
+                        "canvas_height": 8,
+                    },
                     provenance={},
                 )
 

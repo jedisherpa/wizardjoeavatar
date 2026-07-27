@@ -1,6 +1,6 @@
 # Character Parity Rollout
 
-Updated: 2026-07-24
+Updated: 2026-07-27
 
 ## Rule
 
@@ -39,9 +39,9 @@ runtime API range.
 | 10 | Rohan Slate | `375a3f9a` | Source discovered |
 | 11 | Finn Calder | `40b9a346` | Source discovered |
 | 12 | Orion Vale | `50eab748` | Source discovered |
-| 13 | Robin | To be frozen during intake | Not started |
-| 14 | Speech | To be frozen during intake | Not started |
-| 15 | Dragon | To be frozen during intake | Not started |
+| 13 | Robin | Source manifest `2c33d3e0` | Corrected 200-pose review library published locally; runtime blocked |
+| 14 | Speech | Source manifest `2c33d3e0` | Corrected 200-pose review library built; runtime blocked |
+| 15 | Dragon | Source manifest `024a5643` | 84 of 91 assets valid; seven damaged replacements required; review and runtime blocked |
 | 16 | Kingfisher | To be frozen during intake | Not started |
 | 17 | Liana | Supplemental authored intake | Identity candidate; not registered |
 
@@ -52,6 +52,17 @@ Liana is additive supplemental work derived from Liora's identity proportions.
 She does not expand the fixed 12 x 48 authority matrix, and she does not alter
 Liora's assets or pose IDs. Her separate 48-pose approval program is defined in
 `reports/LIANA_ANIMATION_DIRECTION_2026-07-25.md`.
+
+Robin and Speech now use the corrected 200-frame shared-canvas source. A
+deterministic component/geodesic partition preserves each identity while
+requiring exact source reconstruction and zero overlap. Both compiled libraries
+remain review-only and fail closed at production admission. See
+`ROBIN_SPEECH_ALPHA_INTEGRATION_2026-07-27.md`.
+
+Dragon has a frozen 91-entry source inventory, but seven supplied PNG streams
+are truncated. The 84 valid files are preserved byte-for-byte; failed payloads
+are manifest records only and cannot enter review or runtime. See
+`DRAGON_ALPHA_SOURCE_AUDIT_2026-07-27.md`.
 
 ## Per-Character Gates
 

@@ -248,6 +248,7 @@ class CompanionServerTests(unittest.IsolatedAsyncioTestCase):
             not in {
                 "/api/avatar/wizard/media-session",
                 "/api/avatar/wizard/performance-context",
+                "/api/avatar/wizard/performance-context/prepare-score",
                 "/api/avatar/wizard/governed-speech",
                 "/api/avatar/wizard/governed-speech/revoke",
                 "/api/avatar/wizard/permission-world",
@@ -623,6 +624,9 @@ class CompanionServerTests(unittest.IsolatedAsyncioTestCase):
             )
             self.assertEqual(status, 200)
             self.assertEqual(profile["asset_set_id"], "focused-review-library")
+            self.assertIsNone(profile["character_id"])
+            self.assertIsNone(profile["display_name"])
+            self.assertIsNone(profile["identity_side"])
             self.assertEqual(profile["pose_ids"], ["candidate_pose"])
             self.assertEqual(
                 profile["library_index_sha256"],

@@ -1,0 +1,2790 @@
+{
+  "approval_state": "source_incomplete",
+  "archives": {
+    "main_through_act065": {
+      "declared_asset_count": 76,
+      "filename": "DRG001_All_Approved_Alphas_CAN001-CAN011_ACT001-ACT065_2026-07-19.zip",
+      "sha256": "35277f5dc01505343921bfcb6ac22b5c733e2e871ee4c3103fea3178eb941689"
+    },
+    "supplement_act066_act080": {
+      "declared_asset_count": 15,
+      "filename": "DRG001_Approved_Alphas_ACT066-ACT080_2026-07-19.zip",
+      "sha256": "1b0d5f59cea9940b30ca6aa4fb3f4f20b43d7870bab02ef2c08aab3121a86a3c"
+    }
+  },
+  "asset_set_id": "dragon-drg001-approved-alpha-001-080-v001",
+  "assets": [
+    {
+      "archive_role": "main_through_act065",
+      "asset_id": "CAN001",
+      "bytes": 806745,
+      "expected_opaque_pixel_count": 294074,
+      "filename": "CAN001_DRG001_neutral_front_v001_alpha.png",
+      "image_audit": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 294074,
+        "transparent_rgb_zero": true,
+        "visible_bbox": [
+          680,
+          52,
+          1298,
+          972
+        ]
+      },
+      "path": "alphas/CAN001_DRG001_neutral_front_v001_alpha.png",
+      "runtime_admitted": false,
+      "sha256": "5c882904176c1d0f78017fcb819e2cf6ac2ffa38375d314a0e93187779c96d80",
+      "status": "validated_source"
+    },
+    {
+      "archive_role": "main_through_act065",
+      "asset_id": "CAN002",
+      "bytes": 731527,
+      "expected_opaque_pixel_count": 273419,
+      "filename": "CAN002_DRG001_front_three_quarter_left_v001_alpha.png",
+      "image_audit": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 273419,
+        "transparent_rgb_zero": true,
+        "visible_bbox": [
+          780,
+          52,
+          1442,
+          972
+        ]
+      },
+      "path": "alphas/CAN002_DRG001_front_three_quarter_left_v001_alpha.png",
+      "runtime_admitted": false,
+      "sha256": "81919d9ffd0b6a533a2dca633f595a99057a48a15417b9f9d52c6c5debe5667d",
+      "status": "validated_source"
+    },
+    {
+      "archive_role": "main_through_act065",
+      "asset_id": "CAN003",
+      "bytes": 768504,
+      "expected_opaque_pixel_count": 291478,
+      "filename": "CAN003_DRG001_left_profile_v001_alpha.png",
+      "image_audit": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 291478,
+        "transparent_rgb_zero": true,
+        "visible_bbox": [
+          491,
+          52,
+          1382,
+          972
+        ]
+      },
+      "path": "alphas/CAN003_DRG001_left_profile_v001_alpha.png",
+      "runtime_admitted": false,
+      "sha256": "43b9777106b69cb904800af9981ef0939de7d5ae014a743d62c3db0eb328f6fb",
+      "status": "validated_source"
+    },
+    {
+      "archive_role": "main_through_act065",
+      "asset_id": "CAN004",
+      "bytes": 745906,
+      "expected_opaque_pixel_count": 284427,
+      "filename": "CAN004_DRG001_back_three_quarter_left_v001_alpha.png",
+      "image_audit": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 284427,
+        "transparent_rgb_zero": true,
+        "visible_bbox": [
+          649,
+          52,
+          1332,
+          972
+        ]
+      },
+      "path": "alphas/CAN004_DRG001_back_three_quarter_left_v001_alpha.png",
+      "runtime_admitted": false,
+      "sha256": "9996c2b75370687661a733201a29141394d2c1bf65a0ea7f48b77d1315d526e7",
+      "status": "validated_source"
+    },
+    {
+      "archive_role": "main_through_act065",
+      "asset_id": "CAN005",
+      "bytes": 733370,
+      "expected_opaque_pixel_count": 286118,
+      "filename": "CAN005_DRG001_neutral_back_v001_alpha.png",
+      "image_audit": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 286118,
+        "transparent_rgb_zero": true,
+        "visible_bbox": [
+          681,
+          52,
+          1388,
+          972
+        ]
+      },
+      "path": "alphas/CAN005_DRG001_neutral_back_v001_alpha.png",
+      "runtime_admitted": false,
+      "sha256": "62162f4ee14e4156b9d7c07416309aa8d04f896b449b9490c6d54f20a7a0f381",
+      "status": "validated_source"
+    },
+    {
+      "archive_role": "main_through_act065",
+      "asset_id": "CAN006",
+      "bytes": 679018,
+      "expected_opaque_pixel_count": 262304,
+      "filename": "CAN006_DRG001_right_profile_v001_alpha.png",
+      "image_audit": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 262304,
+        "transparent_rgb_zero": true,
+        "visible_bbox": [
+          645,
+          52,
+          1388,
+          972
+        ]
+      },
+      "path": "alphas/CAN006_DRG001_right_profile_v001_alpha.png",
+      "runtime_admitted": false,
+      "sha256": "4e5b57e0a05d8377c8427010137ae42b5660831b3a1714b33ea2dadd1c512ee5",
+      "status": "validated_source"
+    },
+    {
+      "archive_role": "main_through_act065",
+      "asset_id": "CAN007",
+      "bytes": 721057,
+      "expected_opaque_pixel_count": 298752,
+      "filename": "CAN007_DRG001_front_three_quarter_right_v001_alpha.png",
+      "runtime_admitted": false,
+      "sha256": "9854168332a296a653cac25a6b5ccb3398a27e2d5b0c15c4bc82f5af72d6b950",
+      "status": "blocked_damaged_source",
+      "truncated_decode_diagnostic": {
+        "diagnostic_only": true,
+        "opaque_pixel_count": 275329,
+        "visible_bbox": [
+          716,
+          52,
+          1388,
+          893
+        ]
+      },
+      "validation_error": "OSError: image file is truncated"
+    },
+    {
+      "archive_role": "main_through_act065",
+      "asset_id": "CAN008",
+      "bytes": 811698,
+      "expected_opaque_pixel_count": 310045,
+      "filename": "CAN008_DRG001_relaxed_neutral_v001_alpha.png",
+      "image_audit": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 310045,
+        "transparent_rgb_zero": true,
+        "visible_bbox": [
+          632,
+          112,
+          1289,
+          972
+        ]
+      },
+      "path": "alphas/CAN008_DRG001_relaxed_neutral_v001_alpha.png",
+      "runtime_admitted": false,
+      "sha256": "598f8f26ad211c411dcc21b114f57d90f8e1b6c43c20c06454eeac2dbc37c5bc",
+      "status": "validated_source"
+    },
+    {
+      "archive_role": "main_through_act065",
+      "asset_id": "CAN009",
+      "bytes": 710292,
+      "expected_opaque_pixel_count": 268939,
+      "filename": "CAN009_DRG001_attentive_neutral_v001_alpha.png",
+      "image_audit": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 268939,
+        "transparent_rgb_zero": true,
+        "visible_bbox": [
+          774,
+          52,
+          1368,
+          972
+        ]
+      },
+      "path": "alphas/CAN009_DRG001_attentive_neutral_v001_alpha.png",
+      "runtime_admitted": false,
+      "sha256": "8e3d1c0f46c0b82675306d9fbf63d206ef2d1f3c4d3c93a123828fb5fb2ffa75",
+      "status": "validated_source"
+    },
+    {
+      "archive_role": "main_through_act065",
+      "asset_id": "CAN010",
+      "bytes": 1234030,
+      "expected_opaque_pixel_count": 488883,
+      "filename": "CAN010_DRG001_maximum_spread_v001_alpha.png",
+      "image_audit": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 488883,
+        "transparent_rgb_zero": true,
+        "visible_bbox": [
+          82,
+          167,
+          1802,
+          972
+        ]
+      },
+      "path": "alphas/CAN010_DRG001_maximum_spread_v001_alpha.png",
+      "runtime_admitted": false,
+      "sha256": "3e0be23327889f0af13f136f9fa4fb02f6de46bd6db78e24527a8e92c795673e",
+      "status": "validated_source"
+    },
+    {
+      "archive_role": "main_through_act065",
+      "asset_id": "CAN011",
+      "bytes": 652523,
+      "expected_opaque_pixel_count": 239556,
+      "filename": "CAN011_DRG001_maximum_compression_v001_alpha.png",
+      "image_audit": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 239556,
+        "transparent_rgb_zero": true,
+        "visible_bbox": [
+          687,
+          272,
+          1233,
+          972
+        ]
+      },
+      "path": "alphas/CAN011_DRG001_maximum_compression_v001_alpha.png",
+      "runtime_admitted": false,
+      "sha256": "1d0915385b9a821764516cdee825accb38f50fb83237a41a5e29c03cf5454ce0",
+      "status": "validated_source"
+    },
+    {
+      "archive_role": "main_through_act065",
+      "asset_id": "ACT001",
+      "bytes": 764028,
+      "expected_opaque_pixel_count": 287747,
+      "filename": "001_ACT001_neutral_front_alpha.png",
+      "image_audit": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 287747,
+        "transparent_rgb_zero": true,
+        "visible_bbox": [
+          697,
+          52,
+          1289,
+          972
+        ]
+      },
+      "path": "alphas/001_ACT001_neutral_front_alpha.png",
+      "runtime_admitted": false,
+      "sha256": "75804d97040e3c52a05fa3c42b17ead8bae545072640a780e842b68a18646cad",
+      "status": "validated_source"
+    },
+    {
+      "archive_role": "main_through_act065",
+      "asset_id": "ACT002",
+      "bytes": 788987,
+      "expected_opaque_pixel_count": 285279,
+      "filename": "002_ACT002_front_three_quarter_left_alpha.png",
+      "image_audit": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 285279,
+        "transparent_rgb_zero": true,
+        "visible_bbox": [
+          740,
+          52,
+          1457,
+          972
+        ]
+      },
+      "path": "alphas/002_ACT002_front_three_quarter_left_alpha.png",
+      "runtime_admitted": false,
+      "sha256": "858b0b8a474cc97de16534d78d49e43e5b6e437948d355dd25bc23704fc048ce",
+      "status": "validated_source"
+    },
+    {
+      "archive_role": "main_through_act065",
+      "asset_id": "ACT003",
+      "bytes": 793525,
+      "expected_opaque_pixel_count": 293412,
+      "filename": "003_ACT003_left_profile_alpha.png",
+      "image_audit": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 293412,
+        "transparent_rgb_zero": true,
+        "visible_bbox": [
+          466,
+          52,
+          1386,
+          972
+        ]
+      },
+      "path": "alphas/003_ACT003_left_profile_alpha.png",
+      "runtime_admitted": false,
+      "sha256": "d68f810693a04cb45c12fe1602350f0221d76ff23e2cf24fa36b786f21210f20",
+      "status": "validated_source"
+    },
+    {
+      "archive_role": "main_through_act065",
+      "asset_id": "ACT004",
+      "bytes": 756582,
+      "expected_opaque_pixel_count": 277661,
+      "filename": "004_ACT004_back_three_quarter_left_alpha.png",
+      "image_audit": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 277661,
+        "transparent_rgb_zero": true,
+        "visible_bbox": [
+          538,
+          52,
+          1503,
+          972
+        ]
+      },
+      "path": "alphas/004_ACT004_back_three_quarter_left_alpha.png",
+      "runtime_admitted": false,
+      "sha256": "ea5a424581b2f92773c5640fe3f856ed5f24dedd87a908bf52e47a88eeafdb46",
+      "status": "validated_source"
+    },
+    {
+      "archive_role": "main_through_act065",
+      "asset_id": "ACT005",
+      "bytes": 695384,
+      "expected_opaque_pixel_count": 257984,
+      "filename": "005_ACT005_neutral_back_alpha.png",
+      "image_audit": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 257984,
+        "transparent_rgb_zero": true,
+        "visible_bbox": [
+          664,
+          52,
+          1256,
+          972
+        ]
+      },
+      "path": "alphas/005_ACT005_neutral_back_alpha.png",
+      "runtime_admitted": false,
+      "sha256": "2ece55427f0b11167de8b40f472675e284a1a9249b9369e0a3701652a27a66d8",
+      "status": "validated_source"
+    },
+    {
+      "archive_role": "main_through_act065",
+      "asset_id": "ACT006",
+      "bytes": 705907,
+      "expected_opaque_pixel_count": 258712,
+      "filename": "006_ACT006_right_profile_alpha.png",
+      "image_audit": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 258712,
+        "transparent_rgb_zero": true,
+        "visible_bbox": [
+          603,
+          52,
+          1420,
+          972
+        ]
+      },
+      "path": "alphas/006_ACT006_right_profile_alpha.png",
+      "runtime_admitted": false,
+      "sha256": "662e096157ce7f6139a6cdc31b704cfffee39b0d74ede99bdd3de9c80d42e34a",
+      "status": "validated_source"
+    },
+    {
+      "archive_role": "main_through_act065",
+      "asset_id": "ACT007",
+      "bytes": 721057,
+      "expected_opaque_pixel_count": 280696,
+      "filename": "007_ACT007_front_three_quarter_right_alpha.png",
+      "runtime_admitted": false,
+      "sha256": "fdccfdffe514fc2a2e72bd6f0485917322ea2f15250756cae1bdd7853b2a9580",
+      "status": "blocked_damaged_source",
+      "truncated_decode_diagnostic": {
+        "diagnostic_only": true,
+        "opaque_pixel_count": 265803,
+        "visible_bbox": [
+          750,
+          52,
+          1462,
+          921
+        ]
+      },
+      "validation_error": "OSError: image file is truncated"
+    },
+    {
+      "archive_role": "main_through_act065",
+      "asset_id": "ACT008",
+      "bytes": 695399,
+      "expected_opaque_pixel_count": 253879,
+      "filename": "008_ACT008_relaxed_idle_alpha.png",
+      "image_audit": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 253879,
+        "transparent_rgb_zero": true,
+        "visible_bbox": [
+          732,
+          52,
+          1369,
+          972
+        ]
+      },
+      "path": "alphas/008_ACT008_relaxed_idle_alpha.png",
+      "runtime_admitted": false,
+      "sha256": "30c257c97530bd4d75df0ab28b93b6377e577a64440eae650b2eebf5845b0681",
+      "status": "validated_source"
+    },
+    {
+      "archive_role": "main_through_act065",
+      "asset_id": "ACT009",
+      "bytes": 695025,
+      "expected_opaque_pixel_count": 256197,
+      "filename": "009_ACT009_attentive_idle_alpha.png",
+      "image_audit": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 256197,
+        "transparent_rgb_zero": true,
+        "visible_bbox": [
+          766,
+          52,
+          1311,
+          972
+        ]
+      },
+      "path": "alphas/009_ACT009_attentive_idle_alpha.png",
+      "runtime_admitted": false,
+      "sha256": "9ac7f373c64afa4767821ab9ff01052e2213e4af18bd33d50b3ab4b62541ee8f",
+      "status": "validated_source"
+    },
+    {
+      "archive_role": "main_through_act065",
+      "asset_id": "ACT010",
+      "bytes": 876706,
+      "expected_opaque_pixel_count": 347514,
+      "filename": "010_ACT010_ready_stance_alpha.png",
+      "image_audit": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 347514,
+        "transparent_rgb_zero": true,
+        "visible_bbox": [
+          638,
+          52,
+          1464,
+          972
+        ]
+      },
+      "path": "alphas/010_ACT010_ready_stance_alpha.png",
+      "runtime_admitted": false,
+      "sha256": "82789ead8fa6b31e538bff7c73c50eb0642771c9c8b84d4405bb4bbc56f70155",
+      "status": "validated_source"
+    },
+    {
+      "archive_role": "main_through_act065",
+      "asset_id": "ACT011",
+      "bytes": 655509,
+      "expected_opaque_pixel_count": 308914,
+      "filename": "011_ACT011_neutral_speaking_gesture_alpha.png",
+      "runtime_admitted": false,
+      "sha256": "e1bb30ac0b72fe7d0b48ca4c528c250732f951709b26ed663064bc725cbb4d2c",
+      "status": "blocked_damaged_source",
+      "truncated_decode_diagnostic": {
+        "diagnostic_only": true,
+        "opaque_pixel_count": 239683,
+        "visible_bbox": [
+          575,
+          52,
+          1424,
+          764
+        ]
+      },
+      "validation_error": "OSError: image file is truncated"
+    },
+    {
+      "archive_role": "main_through_act065",
+      "asset_id": "ACT012",
+      "bytes": 829002,
+      "expected_opaque_pixel_count": 306720,
+      "filename": "012_ACT012_explain_one_point_alpha.png",
+      "image_audit": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 306720,
+        "transparent_rgb_zero": true,
+        "visible_bbox": [
+          695,
+          52,
+          1424,
+          972
+        ]
+      },
+      "path": "alphas/012_ACT012_explain_one_point_alpha.png",
+      "runtime_admitted": false,
+      "sha256": "5fdad7c4bbad8d348c1e93650d84157abd63b4a41aacf246658e7e84be85504f",
+      "status": "validated_source"
+    },
+    {
+      "archive_role": "main_through_act065",
+      "asset_id": "ACT013",
+      "bytes": 859597,
+      "expected_opaque_pixel_count": 320047,
+      "filename": "013_ACT013_balance_two_ideas_alpha.png",
+      "image_audit": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 320047,
+        "transparent_rgb_zero": true,
+        "visible_bbox": [
+          585,
+          52,
+          1413,
+          972
+        ]
+      },
+      "path": "alphas/013_ACT013_balance_two_ideas_alpha.png",
+      "runtime_admitted": false,
+      "sha256": "a13cb4c6626d6392673e241a6334a0f20f582f7eeff92d498ea0e53e6d67e31a",
+      "status": "validated_source"
+    },
+    {
+      "archive_role": "main_through_act065",
+      "asset_id": "ACT014",
+      "bytes": 878542,
+      "expected_opaque_pixel_count": 328244,
+      "filename": "014_ACT014_present_screen_left_alpha.png",
+      "image_audit": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 328244,
+        "transparent_rgb_zero": true,
+        "visible_bbox": [
+          527,
+          52,
+          1590,
+          972
+        ]
+      },
+      "path": "alphas/014_ACT014_present_screen_left_alpha.png",
+      "runtime_admitted": false,
+      "sha256": "8e7ec34e46bae6e50337670f42fa8ea3ff22c645008183707c972383bb87ca6a",
+      "status": "validated_source"
+    },
+    {
+      "archive_role": "main_through_act065",
+      "asset_id": "ACT015",
+      "bytes": 914780,
+      "expected_opaque_pixel_count": 353315,
+      "filename": "015_ACT015_present_screen_right_alpha.png",
+      "image_audit": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 353315,
+        "transparent_rgb_zero": true,
+        "visible_bbox": [
+          480,
+          52,
+          1428,
+          972
+        ]
+      },
+      "path": "alphas/015_ACT015_present_screen_right_alpha.png",
+      "runtime_admitted": false,
+      "sha256": "4c59c282dfceec541d8c53fefe75592fa4b5cd1c42ba289788408287790bde6f",
+      "status": "validated_source"
+    },
+    {
+      "archive_role": "main_through_act065",
+      "asset_id": "ACT016",
+      "bytes": 784543,
+      "expected_opaque_pixel_count": 296428,
+      "filename": "016_ACT016_point_to_viewer_alpha.png",
+      "image_audit": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 296428,
+        "transparent_rgb_zero": true,
+        "visible_bbox": [
+          721,
+          52,
+          1400,
+          972
+        ]
+      },
+      "path": "alphas/016_ACT016_point_to_viewer_alpha.png",
+      "runtime_admitted": false,
+      "sha256": "ae927b85f7a5edce7633305ff6e6c649ee2a7a56eb68ad0c728d691bbb748272",
+      "status": "validated_source"
+    },
+    {
+      "archive_role": "main_through_act065",
+      "asset_id": "ACT017",
+      "bytes": 833013,
+      "expected_opaque_pixel_count": 310332,
+      "filename": "017_ACT017_insight_upward_point_alpha.png",
+      "image_audit": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 310332,
+        "transparent_rgb_zero": true,
+        "visible_bbox": [
+          703,
+          52,
+          1418,
+          972
+        ]
+      },
+      "path": "alphas/017_ACT017_insight_upward_point_alpha.png",
+      "runtime_admitted": false,
+      "sha256": "11c76e7ad3d99216f6f721ac1f1deb41d9296b6f78a4fc27807306e3f4a26bc8",
+      "status": "validated_source"
+    },
+    {
+      "archive_role": "main_through_act065",
+      "asset_id": "ACT018",
+      "bytes": 855361,
+      "expected_opaque_pixel_count": 321968,
+      "filename": "018_ACT018_detail_downward_point_alpha.png",
+      "image_audit": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 321968,
+        "transparent_rgb_zero": true,
+        "visible_bbox": [
+          602,
+          52,
+          1560,
+          972
+        ]
+      },
+      "path": "alphas/018_ACT018_detail_downward_point_alpha.png",
+      "runtime_admitted": false,
+      "sha256": "855651e87ebb9f5b379b4d8a395018775fadbf651552355f875a1145833cf0c8",
+      "status": "validated_source"
+    },
+    {
+      "archive_role": "main_through_act065",
+      "asset_id": "ACT019",
+      "bytes": 795667,
+      "expected_opaque_pixel_count": 297658,
+      "filename": "019_ACT019_neutral_listening_alpha.png",
+      "image_audit": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 297658,
+        "transparent_rgb_zero": true,
+        "visible_bbox": [
+          702,
+          52,
+          1392,
+          972
+        ]
+      },
+      "path": "alphas/019_ACT019_neutral_listening_alpha.png",
+      "runtime_admitted": false,
+      "sha256": "615fa4060f95862ec359f901eb28339577f3c2a3094adcfe5b5abe5f928b4244",
+      "status": "validated_source"
+    },
+    {
+      "archive_role": "main_through_act065",
+      "asset_id": "ACT020",
+      "bytes": 1057135,
+      "expected_opaque_pixel_count": 415967,
+      "filename": "020_ACT020_lean_in_listening_alpha.png",
+      "image_audit": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 415967,
+        "transparent_rgb_zero": true,
+        "visible_bbox": [
+          403,
+          52,
+          1789,
+          972
+        ]
+      },
+      "path": "alphas/020_ACT020_lean_in_listening_alpha.png",
+      "runtime_admitted": false,
+      "sha256": "b396153eff5ce2f492a09164ff6fe82459730d01be790365636d985a6ebda81e",
+      "status": "validated_source"
+    },
+    {
+      "archive_role": "main_through_act065",
+      "asset_id": "ACT021",
+      "bytes": 791904,
+      "expected_opaque_pixel_count": 294761,
+      "filename": "021_ACT021_skeptical_listening_alpha.png",
+      "image_audit": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 294761,
+        "transparent_rgb_zero": true,
+        "visible_bbox": [
+          677,
+          52,
+          1507,
+          972
+        ]
+      },
+      "path": "alphas/021_ACT021_skeptical_listening_alpha.png",
+      "runtime_admitted": false,
+      "sha256": "e43844ca3f269189861f3d6ce5ba554451c2b6dc81c37dfd81c18941893e3535",
+      "status": "validated_source"
+    },
+    {
+      "archive_role": "main_through_act065",
+      "asset_id": "ACT022",
+      "bytes": 802928,
+      "expected_opaque_pixel_count": 307110,
+      "filename": "022_ACT022_small_acknowledgment_alpha.png",
+      "image_audit": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 307110,
+        "transparent_rgb_zero": true,
+        "visible_bbox": [
+          642,
+          52,
+          1493,
+          972
+        ]
+      },
+      "path": "alphas/022_ACT022_small_acknowledgment_alpha.png",
+      "runtime_admitted": false,
+      "sha256": "e11c804ea3ff749973479502228fc9b67d09ae17a26c6fa774f1f5cd8f53ea08",
+      "status": "validated_source"
+    },
+    {
+      "archive_role": "main_through_act065",
+      "asset_id": "ACT023",
+      "bytes": 827750,
+      "expected_opaque_pixel_count": 305476,
+      "filename": "023_ACT023_emphatic_agreement_alpha.png",
+      "image_audit": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 305476,
+        "transparent_rgb_zero": true,
+        "visible_bbox": [
+          616,
+          52,
+          1517,
+          972
+        ]
+      },
+      "path": "alphas/023_ACT023_emphatic_agreement_alpha.png",
+      "runtime_admitted": false,
+      "sha256": "57254744f42b6cbd56307003c2a53009791969ebfe6f331199e200b20e53c715",
+      "status": "validated_source"
+    },
+    {
+      "archive_role": "main_through_act065",
+      "asset_id": "ACT024",
+      "bytes": 859025,
+      "expected_opaque_pixel_count": 321296,
+      "filename": "024_ACT024_polite_interruption_alpha.png",
+      "image_audit": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 321296,
+        "transparent_rgb_zero": true,
+        "visible_bbox": [
+          622,
+          52,
+          1458,
+          972
+        ]
+      },
+      "path": "alphas/024_ACT024_polite_interruption_alpha.png",
+      "runtime_admitted": false,
+      "sha256": "ff6f9a8eb6f34b4d907f4754fcdd5777edd33a1203752b54c2b2ea9f78566b76",
+      "status": "validated_source"
+    },
+    {
+      "archive_role": "main_through_act065",
+      "asset_id": "ACT025",
+      "bytes": 393317,
+      "expected_opaque_pixel_count": 338850,
+      "filename": "025_ACT025_hand_over_the_floor_alpha.png",
+      "runtime_admitted": false,
+      "sha256": "891506a22223183d946b149ebe860bef61a8620696e80e03fb871fad04b158cc",
+      "status": "blocked_damaged_source",
+      "truncated_decode_diagnostic": {
+        "diagnostic_only": true,
+        "opaque_pixel_count": 146401,
+        "visible_bbox": [
+          708,
+          52,
+          1462,
+          510
+        ]
+      },
+      "validation_error": "OSError: image file is truncated"
+    },
+    {
+      "archive_role": "main_through_act065",
+      "asset_id": "ACT026",
+      "bytes": 834753,
+      "expected_opaque_pixel_count": 304010,
+      "filename": "026_ACT026_warm_welcome_alpha.png",
+      "image_audit": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 304010,
+        "transparent_rgb_zero": true,
+        "visible_bbox": [
+          587,
+          52,
+          1468,
+          972
+        ]
+      },
+      "path": "alphas/026_ACT026_warm_welcome_alpha.png",
+      "runtime_admitted": false,
+      "sha256": "110417d0361fa768bf8cf7cdb9ed23a4800e6727491316f8d98264f5cec8e2c6",
+      "status": "validated_source"
+    },
+    {
+      "archive_role": "main_through_act065",
+      "asset_id": "ACT027",
+      "bytes": 776416,
+      "expected_opaque_pixel_count": 292610,
+      "filename": "027_ACT027_intimate_confidence_alpha.png",
+      "image_audit": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 292610,
+        "transparent_rgb_zero": true,
+        "visible_bbox": [
+          657,
+          52,
+          1489,
+          972
+        ]
+      },
+      "path": "alphas/027_ACT027_intimate_confidence_alpha.png",
+      "runtime_admitted": false,
+      "sha256": "022e4810815860eb94ce9f73a5523ac58b53409e5bed847402545d35baf905ad",
+      "status": "validated_source"
+    },
+    {
+      "archive_role": "main_through_act065",
+      "asset_id": "ACT028",
+      "bytes": 836656,
+      "expected_opaque_pixel_count": 308306,
+      "filename": "028_ACT028_strong_declaration_alpha.png",
+      "image_audit": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 308306,
+        "transparent_rgb_zero": true,
+        "visible_bbox": [
+          559,
+          52,
+          1485,
+          972
+        ]
+      },
+      "path": "alphas/028_ACT028_strong_declaration_alpha.png",
+      "runtime_admitted": false,
+      "sha256": "1ddd991069baec4a753b778f8c8507f73f4729e58fdfa565afdbcab6e4cd731e",
+      "status": "validated_source"
+    },
+    {
+      "archive_role": "main_through_act065",
+      "asset_id": "ACT029",
+      "bytes": 823013,
+      "expected_opaque_pixel_count": 303803,
+      "filename": "029_ACT029_confidential_whisper_alpha.png",
+      "image_audit": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 303803,
+        "transparent_rgb_zero": true,
+        "visible_bbox": [
+          573,
+          52,
+          1476,
+          972
+        ]
+      },
+      "path": "alphas/029_ACT029_confidential_whisper_alpha.png",
+      "runtime_admitted": false,
+      "sha256": "fa0b49930b115337e878a5e21e88145db2f203923f01442584e3839b6a4315ca",
+      "status": "validated_source"
+    },
+    {
+      "archive_role": "main_through_act065",
+      "asset_id": "ACT030",
+      "bytes": 797500,
+      "expected_opaque_pixel_count": 293913,
+      "filename": "030_ACT030_rhetorical_question_alpha.png",
+      "image_audit": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 293913,
+        "transparent_rgb_zero": true,
+        "visible_bbox": [
+          638,
+          52,
+          1446,
+          972
+        ]
+      },
+      "path": "alphas/030_ACT030_rhetorical_question_alpha.png",
+      "runtime_admitted": false,
+      "sha256": "db936efafb45cf363b91be2d31dec5230e9217ec246fb86090ffac33ebea46af",
+      "status": "validated_source"
+    },
+    {
+      "archive_role": "main_through_act065",
+      "asset_id": "ACT031",
+      "bytes": 784890,
+      "expected_opaque_pixel_count": 287816,
+      "filename": "031_ACT031_compare_two_options_alpha.png",
+      "image_audit": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 287816,
+        "transparent_rgb_zero": true,
+        "visible_bbox": [
+          484,
+          52,
+          1318,
+          972
+        ]
+      },
+      "path": "alphas/031_ACT031_compare_two_options_alpha.png",
+      "runtime_admitted": false,
+      "sha256": "8645d52f0235c114fe68e09d760c0021c9b65b71bd32fa4508fe44b6d3fb8c7a",
+      "status": "validated_source"
+    },
+    {
+      "archive_role": "main_through_act065",
+      "asset_id": "ACT032",
+      "bytes": 655509,
+      "expected_opaque_pixel_count": 279680,
+      "filename": "032_ACT032_cause_and_effect_alpha.png",
+      "runtime_admitted": false,
+      "sha256": "b96fc6bf961814505763bdba9dee48520424908406518728f1650e7ff08741e2",
+      "status": "blocked_damaged_source",
+      "truncated_decode_diagnostic": {
+        "diagnostic_only": true,
+        "opaque_pixel_count": 240592,
+        "visible_bbox": [
+          475,
+          52,
+          1388,
+          811
+        ]
+      },
+      "validation_error": "OSError: image file is truncated"
+    },
+    {
+      "archive_role": "main_through_act065",
+      "asset_id": "ACT033",
+      "bytes": 737639,
+      "expected_opaque_pixel_count": 266942,
+      "filename": "033_ACT033_count_one_alpha.png",
+      "image_audit": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 266942,
+        "transparent_rgb_zero": true,
+        "visible_bbox": [
+          517,
+          52,
+          1251,
+          972
+        ]
+      },
+      "path": "alphas/033_ACT033_count_one_alpha.png",
+      "runtime_admitted": false,
+      "sha256": "c499c1d47e8a09ac9683718062158b4384922203ebe9c08091cd31536beb7c3f",
+      "status": "validated_source"
+    },
+    {
+      "archive_role": "main_through_act065",
+      "asset_id": "ACT034",
+      "bytes": 740821,
+      "expected_opaque_pixel_count": 269355,
+      "filename": "034_ACT034_count_two_alpha.png",
+      "image_audit": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 269355,
+        "transparent_rgb_zero": true,
+        "visible_bbox": [
+          749,
+          52,
+          1422,
+          972
+        ]
+      },
+      "path": "alphas/034_ACT034_count_two_alpha.png",
+      "runtime_admitted": false,
+      "sha256": "cc18e33377c34ef70c387edd6bef431cd4084643becddb3c339a9f7f05d5e328",
+      "status": "validated_source"
+    },
+    {
+      "archive_role": "main_through_act065",
+      "asset_id": "ACT035",
+      "bytes": 762105,
+      "expected_opaque_pixel_count": 279313,
+      "filename": "035_ACT035_count_three_alpha.png",
+      "image_audit": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 279313,
+        "transparent_rgb_zero": true,
+        "visible_bbox": [
+          717,
+          52,
+          1418,
+          972
+        ]
+      },
+      "path": "alphas/035_ACT035_count_three_alpha.png",
+      "runtime_admitted": false,
+      "sha256": "53302b035b08db841cb9c2759292d42352c819ebcb2602c68bdfc249c7f666cb",
+      "status": "validated_source"
+    },
+    {
+      "archive_role": "main_through_act065",
+      "asset_id": "ACT036",
+      "bytes": 842225,
+      "expected_opaque_pixel_count": 319957,
+      "filename": "036_ACT036_protective_boundary_alpha.png",
+      "image_audit": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 319957,
+        "transparent_rgb_zero": true,
+        "visible_bbox": [
+          668,
+          52,
+          1390,
+          972
+        ]
+      },
+      "path": "alphas/036_ACT036_protective_boundary_alpha.png",
+      "runtime_admitted": false,
+      "sha256": "bedc8924ea540a4a09e328cdcf8782972c7e518ebe24c6f34883b4511da4231c",
+      "status": "validated_source"
+    },
+    {
+      "archive_role": "main_through_act065",
+      "asset_id": "ACT037",
+      "bytes": 796359,
+      "expected_opaque_pixel_count": 298312,
+      "filename": "037_ACT037_gentle_reassurance_alpha.png",
+      "image_audit": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 298312,
+        "transparent_rgb_zero": true,
+        "visible_bbox": [
+          686,
+          52,
+          1433,
+          972
+        ]
+      },
+      "path": "alphas/037_ACT037_gentle_reassurance_alpha.png",
+      "runtime_admitted": false,
+      "sha256": "08f467697f670c95f9c0b13add1b1db0bdaf733d860e60d81cbec4e2c1d9fbe8",
+      "status": "validated_source"
+    },
+    {
+      "archive_role": "main_through_act065",
+      "asset_id": "ACT038",
+      "bytes": 776092,
+      "expected_opaque_pixel_count": 286861,
+      "filename": "038_ACT038_invitation_to_follow_alpha.png",
+      "image_audit": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 286861,
+        "transparent_rgb_zero": true,
+        "visible_bbox": [
+          228,
+          52,
+          1287,
+          972
+        ]
+      },
+      "path": "alphas/038_ACT038_invitation_to_follow_alpha.png",
+      "runtime_admitted": false,
+      "sha256": "bb82e2458902e4061250f17d430a9e0eb94dcafa04bb4c0421c044e1bae89fef",
+      "status": "validated_source"
+    },
+    {
+      "archive_role": "main_through_act065",
+      "asset_id": "ACT039",
+      "bytes": 803754,
+      "expected_opaque_pixel_count": 298783,
+      "filename": "039_ACT039_describe_a_vast_scene_alpha.png",
+      "image_audit": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 298783,
+        "transparent_rgb_zero": true,
+        "visible_bbox": [
+          420,
+          52,
+          1429,
+          972
+        ]
+      },
+      "path": "alphas/039_ACT039_describe_a_vast_scene_alpha.png",
+      "runtime_admitted": false,
+      "sha256": "2666e287f4095e076d81cf351ced82efe1c672908f223e231d72dd5e1603a61c",
+      "status": "validated_source"
+    },
+    {
+      "archive_role": "main_through_act065",
+      "asset_id": "ACT040",
+      "bytes": 828770,
+      "expected_opaque_pixel_count": 300944,
+      "filename": "040_ACT040_describe_a_tiny_detail_alpha.png",
+      "image_audit": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 300944,
+        "transparent_rgb_zero": true,
+        "visible_bbox": [
+          713,
+          52,
+          1396,
+          972
+        ]
+      },
+      "path": "alphas/040_ACT040_describe_a_tiny_detail_alpha.png",
+      "runtime_admitted": false,
+      "sha256": "84c2770993812cea771fb68429fa063443f4f4a06dc93752fce102417861ef91",
+      "status": "validated_source"
+    },
+    {
+      "archive_role": "main_through_act065",
+      "asset_id": "ACT041",
+      "bytes": 640309,
+      "expected_opaque_pixel_count": 216700,
+      "filename": "041_ACT041_centered_calm_alpha.png",
+      "image_audit": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 216700,
+        "transparent_rgb_zero": true,
+        "visible_bbox": [
+          763,
+          52,
+          1206,
+          972
+        ]
+      },
+      "path": "alphas/041_ACT041_centered_calm_alpha.png",
+      "runtime_admitted": false,
+      "sha256": "803e8360ed69b199b795270d765fe721a5263777c7c9ec308e71d088b1c675ae",
+      "status": "validated_source"
+    },
+    {
+      "archive_role": "main_through_act065",
+      "asset_id": "ACT042",
+      "bytes": 828460,
+      "expected_opaque_pixel_count": 309947,
+      "filename": "042_ACT042_joy_alpha.png",
+      "image_audit": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 309947,
+        "transparent_rgb_zero": true,
+        "visible_bbox": [
+          600,
+          52,
+          1487,
+          972
+        ]
+      },
+      "path": "alphas/042_ACT042_joy_alpha.png",
+      "runtime_admitted": false,
+      "sha256": "842bb4734a86021deda1485dc98eba12c799418da5e23e34d11132c072ceb70d",
+      "status": "validated_source"
+    },
+    {
+      "archive_role": "main_through_act065",
+      "asset_id": "ACT043",
+      "bytes": 856697,
+      "expected_opaque_pixel_count": 321558,
+      "filename": "043_ACT043_full_laughter_alpha.png",
+      "image_audit": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 321558,
+        "transparent_rgb_zero": true,
+        "visible_bbox": [
+          712,
+          52,
+          1562,
+          972
+        ]
+      },
+      "path": "alphas/043_ACT043_full_laughter_alpha.png",
+      "runtime_admitted": false,
+      "sha256": "5f1fff5068f72554af49c6d9b0efe481a30151ed712a0adf9314c1e852c31dd8",
+      "status": "validated_source"
+    },
+    {
+      "archive_role": "main_through_act065",
+      "asset_id": "ACT044",
+      "bytes": 589961,
+      "expected_opaque_pixel_count": 226220,
+      "filename": "044_ACT044_excitement_alpha.png",
+      "runtime_admitted": false,
+      "sha256": "d430c588c38085fc6a6c69a884e5d8c1b265e96a3dae99e4966d428302908acd",
+      "status": "blocked_damaged_source",
+      "truncated_decode_diagnostic": {
+        "diagnostic_only": true,
+        "opaque_pixel_count": 205820,
+        "visible_bbox": [
+          798,
+          52,
+          1312,
+          823
+        ]
+      },
+      "validation_error": "OSError: image file is truncated"
+    },
+    {
+      "archive_role": "main_through_act065",
+      "asset_id": "ACT045",
+      "bytes": 811558,
+      "expected_opaque_pixel_count": 293008,
+      "filename": "045_ACT045_curiosity_alpha.png",
+      "image_audit": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 293008,
+        "transparent_rgb_zero": true,
+        "visible_bbox": [
+          580,
+          52,
+          1466,
+          972
+        ]
+      },
+      "path": "alphas/045_ACT045_curiosity_alpha.png",
+      "runtime_admitted": false,
+      "sha256": "e7a3e52ea0aa845ca024c802523157873e95a57f1e002b7ab96beecf71a57842",
+      "status": "validated_source"
+    },
+    {
+      "archive_role": "main_through_act065",
+      "asset_id": "ACT046",
+      "bytes": 725422,
+      "expected_opaque_pixel_count": 249235,
+      "filename": "046_ACT046_confident_hero_alpha.png",
+      "image_audit": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 249235,
+        "transparent_rgb_zero": true,
+        "visible_bbox": [
+          699,
+          52,
+          1253,
+          972
+        ]
+      },
+      "path": "alphas/046_ACT046_confident_hero_alpha.png",
+      "runtime_admitted": false,
+      "sha256": "28df1a44d7c84d44a567df617bb3e27da1e20653002c2a916eb0250f22b059aa",
+      "status": "validated_source"
+    },
+    {
+      "archive_role": "main_through_act065",
+      "asset_id": "ACT047",
+      "bytes": 926512,
+      "expected_opaque_pixel_count": 329753,
+      "filename": "047_ACT047_compassion_alpha.png",
+      "image_audit": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 329753,
+        "transparent_rgb_zero": true,
+        "visible_bbox": [
+          588,
+          52,
+          1333,
+          972
+        ]
+      },
+      "path": "alphas/047_ACT047_compassion_alpha.png",
+      "runtime_admitted": false,
+      "sha256": "b6dec3199a371584c59d6af8d1fc9b786446d81eae140712bc2041ef22a19379",
+      "status": "validated_source"
+    },
+    {
+      "archive_role": "main_through_act065",
+      "asset_id": "ACT048",
+      "bytes": 769878,
+      "expected_opaque_pixel_count": 275223,
+      "filename": "048_ACT048_surprise_alpha.png",
+      "image_audit": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 275223,
+        "transparent_rgb_zero": true,
+        "visible_bbox": [
+          701,
+          52,
+          1571,
+          972
+        ]
+      },
+      "path": "alphas/048_ACT048_surprise_alpha.png",
+      "runtime_admitted": false,
+      "sha256": "38dfcf9c81475edeaf505efc0ef336806a95b0e4f3ab02afa2cd1547a44cdeb7",
+      "status": "validated_source"
+    },
+    {
+      "archive_role": "main_through_act065",
+      "asset_id": "ACT049",
+      "bytes": 786667,
+      "expected_opaque_pixel_count": 283743,
+      "filename": "049_ACT049_confusion_alpha.png",
+      "image_audit": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 283743,
+        "transparent_rgb_zero": true,
+        "visible_bbox": [
+          644,
+          52,
+          1413,
+          972
+        ]
+      },
+      "path": "alphas/049_ACT049_confusion_alpha.png",
+      "runtime_admitted": false,
+      "sha256": "0c8c3f6b08e9a9234e649f2000f550c2314042ab33253e3da51b1f30faf13b31",
+      "status": "validated_source"
+    },
+    {
+      "archive_role": "main_through_act065",
+      "asset_id": "ACT050",
+      "bytes": 617990,
+      "expected_opaque_pixel_count": 209830,
+      "filename": "050_ACT050_skepticism_alpha.png",
+      "image_audit": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 209830,
+        "transparent_rgb_zero": true,
+        "visible_bbox": [
+          734,
+          52,
+          1266,
+          972
+        ]
+      },
+      "path": "alphas/050_ACT050_skepticism_alpha.png",
+      "runtime_admitted": false,
+      "sha256": "8191481b49fb247ff6bfb6b28c5bfb2eb218d89356a1b3eed6a448588ab10eae",
+      "status": "validated_source"
+    },
+    {
+      "archive_role": "main_through_act065",
+      "asset_id": "ACT051",
+      "bytes": 688862,
+      "expected_opaque_pixel_count": 233968,
+      "filename": "051_ACT051_concern_alpha.png",
+      "image_audit": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 233968,
+        "transparent_rgb_zero": true,
+        "visible_bbox": [
+          671,
+          52,
+          1249,
+          972
+        ]
+      },
+      "path": "alphas/051_ACT051_concern_alpha.png",
+      "runtime_admitted": false,
+      "sha256": "7010b8e665e4af14caed85b822cf511876c4a99e1c6e9d9f6f7d4dfc5064ca78",
+      "status": "validated_source"
+    },
+    {
+      "archive_role": "main_through_act065",
+      "asset_id": "ACT052",
+      "bytes": 674464,
+      "expected_opaque_pixel_count": 241125,
+      "filename": "052_ACT052_sadness_alpha.png",
+      "image_audit": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 241125,
+        "transparent_rgb_zero": true,
+        "visible_bbox": [
+          710,
+          52,
+          1235,
+          972
+        ]
+      },
+      "path": "alphas/052_ACT052_sadness_alpha.png",
+      "runtime_admitted": false,
+      "sha256": "1508a12d1744668f014f09fea9e9ce31faa20f84fbe59b9bae04b4413bf0694d",
+      "status": "validated_source"
+    },
+    {
+      "archive_role": "main_through_act065",
+      "asset_id": "ACT053",
+      "bytes": 660408,
+      "expected_opaque_pixel_count": 235555,
+      "filename": "053_ACT053_embarrassment_alpha.png",
+      "image_audit": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 235555,
+        "transparent_rgb_zero": true,
+        "visible_bbox": [
+          726,
+          52,
+          1193,
+          972
+        ]
+      },
+      "path": "alphas/053_ACT053_embarrassment_alpha.png",
+      "runtime_admitted": false,
+      "sha256": "0a7e94add08ac406e352b79d3fe4749966a95c7bc591079a38bf5118b5998e00",
+      "status": "validated_source"
+    },
+    {
+      "archive_role": "main_through_act065",
+      "asset_id": "ACT054",
+      "bytes": 669611,
+      "expected_opaque_pixel_count": 235763,
+      "filename": "054_ACT054_shame_alpha.png",
+      "image_audit": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 235763,
+        "transparent_rgb_zero": true,
+        "visible_bbox": [
+          661,
+          52,
+          1133,
+          972
+        ]
+      },
+      "path": "alphas/054_ACT054_shame_alpha.png",
+      "runtime_admitted": false,
+      "sha256": "9b8a0a00eb82e333b77f246ce2649110a52c42b51c8143fe9ec913f057ea6a70",
+      "status": "validated_source"
+    },
+    {
+      "archive_role": "main_through_act065",
+      "asset_id": "ACT055",
+      "bytes": 773928,
+      "expected_opaque_pixel_count": 269822,
+      "filename": "055_ACT055_fear_alpha.png",
+      "image_audit": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 269822,
+        "transparent_rgb_zero": true,
+        "visible_bbox": [
+          605,
+          52,
+          1316,
+          972
+        ]
+      },
+      "path": "alphas/055_ACT055_fear_alpha.png",
+      "runtime_admitted": false,
+      "sha256": "d9f66a34f21c0d2a3a83791be96e00f7a06f595de6d6cb88b61be7a4049e6428",
+      "status": "validated_source"
+    },
+    {
+      "archive_role": "main_through_act065",
+      "asset_id": "ACT056",
+      "bytes": 754260,
+      "expected_opaque_pixel_count": 275057,
+      "filename": "056_ACT056_anxiety_alpha.png",
+      "image_audit": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 275057,
+        "transparent_rgb_zero": true,
+        "visible_bbox": [
+          707,
+          52,
+          1214,
+          972
+        ]
+      },
+      "path": "alphas/056_ACT056_anxiety_alpha.png",
+      "runtime_admitted": false,
+      "sha256": "9c7ad21bc99f4009ec6e27543acdd40c0321345f198136334b67135e4e70008d",
+      "status": "validated_source"
+    },
+    {
+      "archive_role": "main_through_act065",
+      "asset_id": "ACT057",
+      "bytes": 1108551,
+      "expected_opaque_pixel_count": 411177,
+      "filename": "057_ACT057_anger_alpha.png",
+      "image_audit": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 411177,
+        "transparent_rgb_zero": true,
+        "visible_bbox": [
+          609,
+          52,
+          1562,
+          972
+        ]
+      },
+      "path": "alphas/057_ACT057_anger_alpha.png",
+      "runtime_admitted": false,
+      "sha256": "618a0b18119a12a1b9355f3aa75415df6d886b8b24fcf52608248da34e87550a",
+      "status": "validated_source"
+    },
+    {
+      "archive_role": "main_through_act065",
+      "asset_id": "ACT058",
+      "bytes": 770524,
+      "expected_opaque_pixel_count": 272669,
+      "filename": "058_ACT058_frustration_alpha.png",
+      "image_audit": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 272669,
+        "transparent_rgb_zero": true,
+        "visible_bbox": [
+          702,
+          52,
+          1218,
+          972
+        ]
+      },
+      "path": "alphas/058_ACT058_frustration_alpha.png",
+      "runtime_admitted": false,
+      "sha256": "929a74280c34f4add7582cabff8d232bab2b939b650bb273e134f0d63269b9f3",
+      "status": "validated_source"
+    },
+    {
+      "archive_role": "main_through_act065",
+      "asset_id": "ACT059",
+      "bytes": 1126238,
+      "expected_opaque_pixel_count": 431466,
+      "filename": "059_ACT059_determination_alpha.png",
+      "image_audit": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 431466,
+        "transparent_rgb_zero": true,
+        "visible_bbox": [
+          23,
+          52,
+          1358,
+          972
+        ]
+      },
+      "path": "alphas/059_ACT059_determination_alpha.png",
+      "runtime_admitted": false,
+      "sha256": "f85076d9900eca43ab3cdf5b7fc7e865a75b7cc473de4765b9678f18ff5ecbe8",
+      "status": "validated_source"
+    },
+    {
+      "archive_role": "main_through_act065",
+      "asset_id": "ACT060",
+      "bytes": 589961,
+      "expected_opaque_pixel_count": 343791,
+      "filename": "060_ACT060_fatigue_alpha.png",
+      "runtime_admitted": false,
+      "sha256": "99402e0c2ae336d3c9259c548e94f3c368f7c48ae3d95cca8b00ef9654540dcd",
+      "status": "blocked_damaged_source",
+      "truncated_decode_diagnostic": {
+        "diagnostic_only": true,
+        "opaque_pixel_count": 215869,
+        "visible_bbox": [
+          657,
+          52,
+          1233,
+          639
+        ]
+      },
+      "validation_error": "OSError: image file is truncated"
+    },
+    {
+      "archive_role": "main_through_act065",
+      "asset_id": "ACT061",
+      "bytes": 651034,
+      "expected_opaque_pixel_count": 223256,
+      "filename": "061_ACT061_deep_contemplation_alpha.png",
+      "image_audit": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 223256,
+        "transparent_rgb_zero": true,
+        "visible_bbox": [
+          620,
+          52,
+          1160,
+          972
+        ]
+      },
+      "path": "alphas/061_ACT061_deep_contemplation_alpha.png",
+      "runtime_admitted": false,
+      "sha256": "9d04a857979f79049423359404405fcae627fa7a42e08e8365c813f0341af552",
+      "status": "validated_source"
+    },
+    {
+      "archive_role": "main_through_act065",
+      "asset_id": "ACT062",
+      "bytes": 662400,
+      "expected_opaque_pixel_count": 231104,
+      "filename": "062_ACT062_sudden_idea_alpha.png",
+      "image_audit": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 231104,
+        "transparent_rgb_zero": true,
+        "visible_bbox": [
+          813,
+          52,
+          1276,
+          972
+        ]
+      },
+      "path": "alphas/062_ACT062_sudden_idea_alpha.png",
+      "runtime_admitted": false,
+      "sha256": "afad2bd077b1b72d17caabec3cd23e059b29262f3db037fa2f31e305669d084c",
+      "status": "validated_source"
+    },
+    {
+      "archive_role": "main_through_act065",
+      "asset_id": "ACT063",
+      "bytes": 610533,
+      "expected_opaque_pixel_count": 210827,
+      "filename": "063_ACT063_read_a_panel_alpha.png",
+      "image_audit": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 210827,
+        "transparent_rgb_zero": true,
+        "visible_bbox": [
+          673,
+          52,
+          1118,
+          972
+        ]
+      },
+      "path": "alphas/063_ACT063_read_a_panel_alpha.png",
+      "runtime_admitted": false,
+      "sha256": "0bdd6cebb8206cc0e87f9157c46cf9ff3b393e5d880e948902b796d31626c853",
+      "status": "validated_source"
+    },
+    {
+      "archive_role": "main_through_act065",
+      "asset_id": "ACT064",
+      "bytes": 674935,
+      "expected_opaque_pixel_count": 238419,
+      "filename": "064_ACT064_study_a_diagram_alpha.png",
+      "image_audit": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 238419,
+        "transparent_rgb_zero": true,
+        "visible_bbox": [
+          500,
+          52,
+          1129,
+          972
+        ]
+      },
+      "path": "alphas/064_ACT064_study_a_diagram_alpha.png",
+      "runtime_admitted": false,
+      "sha256": "97ff007dc5d9d8f137222bdfc94abaf9836f6cc57dfa31d0f24cca3755c1922a",
+      "status": "validated_source"
+    },
+    {
+      "archive_role": "main_through_act065",
+      "asset_id": "ACT065",
+      "bytes": 619793,
+      "expected_opaque_pixel_count": 215626,
+      "filename": "065_ACT065_write_or_tap_alpha.png",
+      "image_audit": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 215626,
+        "transparent_rgb_zero": true,
+        "visible_bbox": [
+          521,
+          52,
+          1117,
+          972
+        ]
+      },
+      "path": "alphas/065_ACT065_write_or_tap_alpha.png",
+      "runtime_admitted": false,
+      "sha256": "0fd5551a30092605f947eeb7f5f3f7a66636c972e8fce449192b64cee9065faa",
+      "status": "validated_source"
+    },
+    {
+      "archive_role": "supplement_act066_act080",
+      "asset_id": "ACT066",
+      "bytes": 687150,
+      "declared_sha256": "8a7f48af69a3821d0936d43c9c335b1c20872e2ee1883778bb200a07df697c34",
+      "expected_opaque_pixel_count": 240812,
+      "filename": "066_ACT066_select_a_control_alpha.png",
+      "image_audit": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 240812,
+        "transparent_rgb_zero": true,
+        "visible_bbox": [
+          641,
+          52,
+          1279,
+          972
+        ]
+      },
+      "path": "alphas/066_ACT066_select_a_control_alpha.png",
+      "runtime_admitted": false,
+      "sha256": "8a7f48af69a3821d0936d43c9c335b1c20872e2ee1883778bb200a07df697c34",
+      "status": "validated_source"
+    },
+    {
+      "archive_role": "supplement_act066_act080",
+      "asset_id": "ACT067",
+      "bytes": 638160,
+      "declared_sha256": "956239ed9cac4262f88a3735a977109a08ebed6ca19391266127480ced4e0fd3",
+      "expected_opaque_pixel_count": 225283,
+      "filename": "067_ACT067_drag_an_interface_item_alpha.png",
+      "image_audit": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 225283,
+        "transparent_rgb_zero": true,
+        "visible_bbox": [
+          659,
+          52,
+          1312,
+          972
+        ]
+      },
+      "path": "alphas/067_ACT067_drag_an_interface_item_alpha.png",
+      "runtime_admitted": false,
+      "sha256": "956239ed9cac4262f88a3735a977109a08ebed6ca19391266127480ced4e0fd3",
+      "status": "validated_source"
+    },
+    {
+      "archive_role": "supplement_act066_act080",
+      "asset_id": "ACT068",
+      "bytes": 706041,
+      "declared_sha256": "f852a8bbd826005f9a4120fa890e8b18d82d936efdba3968f7a7b82f7aed5b61",
+      "expected_opaque_pixel_count": 247341,
+      "filename": "068_ACT068_push_an_object_alpha.png",
+      "image_audit": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 247341,
+        "transparent_rgb_zero": true,
+        "visible_bbox": [
+          266,
+          212,
+          1359,
+          972
+        ]
+      },
+      "path": "alphas/068_ACT068_push_an_object_alpha.png",
+      "runtime_admitted": false,
+      "sha256": "f852a8bbd826005f9a4120fa890e8b18d82d936efdba3968f7a7b82f7aed5b61",
+      "status": "validated_source"
+    },
+    {
+      "archive_role": "supplement_act066_act080",
+      "asset_id": "ACT069",
+      "bytes": 661461,
+      "declared_sha256": "8932810ee0fd5f4e6abfc3ba7b18dbc535ebc0ce486603328c66e366e7dab490",
+      "expected_opaque_pixel_count": 234638,
+      "filename": "069_ACT069_pull_an_object_alpha.png",
+      "image_audit": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 234638,
+        "transparent_rgb_zero": true,
+        "visible_bbox": [
+          239,
+          212,
+          1355,
+          972
+        ]
+      },
+      "path": "alphas/069_ACT069_pull_an_object_alpha.png",
+      "runtime_admitted": false,
+      "sha256": "8932810ee0fd5f4e6abfc3ba7b18dbc535ebc0ce486603328c66e366e7dab490",
+      "status": "validated_source"
+    },
+    {
+      "archive_role": "supplement_act066_act080",
+      "asset_id": "ACT070",
+      "bytes": 636368,
+      "declared_sha256": "9fc7b50cda818974353e1363352bad5e820436d545a6a5689ab47b6aaa06c21e",
+      "expected_opaque_pixel_count": 221393,
+      "filename": "070_ACT070_lift_from_floor_alpha.png",
+      "image_audit": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 221393,
+        "transparent_rgb_zero": true,
+        "visible_bbox": [
+          656,
+          272,
+          1471,
+          972
+        ]
+      },
+      "path": "alphas/070_ACT070_lift_from_floor_alpha.png",
+      "runtime_admitted": false,
+      "sha256": "9fc7b50cda818974353e1363352bad5e820436d545a6a5689ab47b6aaa06c21e",
+      "status": "validated_source"
+    },
+    {
+      "archive_role": "supplement_act066_act080",
+      "asset_id": "ACT071",
+      "bytes": 683488,
+      "declared_sha256": "adf79ad757cafbb15c3bf5d1de8b9af0b1750324540e9c188ac29b0653c9707f",
+      "expected_opaque_pixel_count": 246801,
+      "filename": "071_ACT071_carry_light_object_alpha.png",
+      "image_audit": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 246801,
+        "transparent_rgb_zero": true,
+        "visible_bbox": [
+          570,
+          72,
+          1187,
+          972
+        ]
+      },
+      "path": "alphas/071_ACT071_carry_light_object_alpha.png",
+      "runtime_admitted": false,
+      "sha256": "adf79ad757cafbb15c3bf5d1de8b9af0b1750324540e9c188ac29b0653c9707f",
+      "status": "validated_source"
+    },
+    {
+      "archive_role": "supplement_act066_act080",
+      "asset_id": "ACT072",
+      "bytes": 751025,
+      "declared_sha256": "95d9dc904fe41b44d33f88799ac04cd9539c3bd2a4be3bf393bc46b320ee276b",
+      "expected_opaque_pixel_count": 266061,
+      "filename": "072_ACT072_carry_heavy_object_alpha.png",
+      "image_audit": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 266061,
+        "transparent_rgb_zero": true,
+        "visible_bbox": [
+          625,
+          212,
+          1494,
+          972
+        ]
+      },
+      "path": "alphas/072_ACT072_carry_heavy_object_alpha.png",
+      "runtime_admitted": false,
+      "sha256": "95d9dc904fe41b44d33f88799ac04cd9539c3bd2a4be3bf393bc46b320ee276b",
+      "status": "validated_source"
+    },
+    {
+      "archive_role": "supplement_act066_act080",
+      "asset_id": "ACT073",
+      "bytes": 696606,
+      "declared_sha256": "00177b4dff2f8cd78e87dbe3a51fb336973a2ef934411758d46d420b10a58348",
+      "expected_opaque_pixel_count": 251257,
+      "filename": "073_ACT073_offer_an_object_alpha.png",
+      "image_audit": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 251257,
+        "transparent_rgb_zero": true,
+        "visible_bbox": [
+          741,
+          72,
+          1306,
+          972
+        ]
+      },
+      "path": "alphas/073_ACT073_offer_an_object_alpha.png",
+      "runtime_admitted": false,
+      "sha256": "00177b4dff2f8cd78e87dbe3a51fb336973a2ef934411758d46d420b10a58348",
+      "status": "validated_source"
+    },
+    {
+      "archive_role": "supplement_act066_act080",
+      "asset_id": "ACT074",
+      "bytes": 714105,
+      "declared_sha256": "1c55fa0fc3a36e79e623d9bbe5883e7052c6e0125689826e2fc0592246cf0514",
+      "expected_opaque_pixel_count": 253531,
+      "filename": "074_ACT074_receive_an_object_alpha.png",
+      "image_audit": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 253531,
+        "transparent_rgb_zero": true,
+        "visible_bbox": [
+          495,
+          112,
+          1278,
+          972
+        ]
+      },
+      "path": "alphas/074_ACT074_receive_an_object_alpha.png",
+      "runtime_admitted": false,
+      "sha256": "1c55fa0fc3a36e79e623d9bbe5883e7052c6e0125689826e2fc0592246cf0514",
+      "status": "validated_source"
+    },
+    {
+      "archive_role": "supplement_act066_act080",
+      "asset_id": "ACT075",
+      "bytes": 654934,
+      "declared_sha256": "74ade4bfd3e585fd3731fd15b76e2dbd6575221cf7676063a393d9866a29965e",
+      "expected_opaque_pixel_count": 228040,
+      "filename": "075_ACT075_brace_against_surface_alpha.png",
+      "image_audit": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 228040,
+        "transparent_rgb_zero": true,
+        "visible_bbox": [
+          250,
+          212,
+          1383,
+          972
+        ]
+      },
+      "path": "alphas/075_ACT075_brace_against_surface_alpha.png",
+      "runtime_admitted": false,
+      "sha256": "74ade4bfd3e585fd3731fd15b76e2dbd6575221cf7676063a393d9866a29965e",
+      "status": "validated_source"
+    },
+    {
+      "archive_role": "supplement_act066_act080",
+      "asset_id": "ACT076",
+      "bytes": 617491,
+      "declared_sha256": "2e6d797bbf484f8663656dfa10e8e8457a3e89ebfbcae22552472f89a66d3e2a",
+      "expected_opaque_pixel_count": 215942,
+      "filename": "076_ACT076_walk_left_contact_alpha.png",
+      "image_audit": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 215942,
+        "transparent_rgb_zero": true,
+        "visible_bbox": [
+          744,
+          212,
+          1727,
+          972
+        ]
+      },
+      "path": "alphas/076_ACT076_walk_left_contact_alpha.png",
+      "runtime_admitted": false,
+      "sha256": "2e6d797bbf484f8663656dfa10e8e8457a3e89ebfbcae22552472f89a66d3e2a",
+      "status": "validated_source"
+    },
+    {
+      "archive_role": "supplement_act066_act080",
+      "asset_id": "ACT077",
+      "bytes": 637758,
+      "declared_sha256": "e463d0b05dcd3a8a95c10684c5aec9d520097bd8ff1074b83961a81891034516",
+      "expected_opaque_pixel_count": 228883,
+      "filename": "077_ACT077_walk_left_passing_alpha.png",
+      "image_audit": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 228883,
+        "transparent_rgb_zero": true,
+        "visible_bbox": [
+          729,
+          212,
+          1766,
+          972
+        ]
+      },
+      "path": "alphas/077_ACT077_walk_left_passing_alpha.png",
+      "runtime_admitted": false,
+      "sha256": "e463d0b05dcd3a8a95c10684c5aec9d520097bd8ff1074b83961a81891034516",
+      "status": "validated_source"
+    },
+    {
+      "archive_role": "supplement_act066_act080",
+      "asset_id": "ACT078",
+      "bytes": 619796,
+      "declared_sha256": "c7a791ba6a56bf9776abc227e31f9a33f087d2e7abfca41fe60135db66af9467",
+      "expected_opaque_pixel_count": 214488,
+      "filename": "078_ACT078_walk_right_contact_alpha.png",
+      "image_audit": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 214488,
+        "transparent_rgb_zero": true,
+        "visible_bbox": [
+          240,
+          212,
+          1223,
+          972
+        ]
+      },
+      "path": "alphas/078_ACT078_walk_right_contact_alpha.png",
+      "runtime_admitted": false,
+      "sha256": "c7a791ba6a56bf9776abc227e31f9a33f087d2e7abfca41fe60135db66af9467",
+      "status": "validated_source"
+    },
+    {
+      "archive_role": "supplement_act066_act080",
+      "asset_id": "ACT079",
+      "bytes": 589699,
+      "declared_sha256": "5d82adc3ae6a6d54797ad898769414a73d5d005a5854621bd1969531f6d5e5b0",
+      "expected_opaque_pixel_count": 207369,
+      "filename": "079_ACT079_walk_right_passing_alpha.png",
+      "image_audit": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 207369,
+        "transparent_rgb_zero": true,
+        "visible_bbox": [
+          552,
+          212,
+          1596,
+          972
+        ]
+      },
+      "path": "alphas/079_ACT079_walk_right_passing_alpha.png",
+      "runtime_admitted": false,
+      "sha256": "5d82adc3ae6a6d54797ad898769414a73d5d005a5854621bd1969531f6d5e5b0",
+      "status": "validated_source"
+    },
+    {
+      "archive_role": "supplement_act066_act080",
+      "asset_id": "ACT080",
+      "bytes": 586184,
+      "declared_sha256": "70b68db265d6ae3ff41c6ba850d928d0d8643f2c508ac6984aac14687893d9a9",
+      "expected_opaque_pixel_count": 214281,
+      "filename": "080_ACT080_run_contact_alpha.png",
+      "image_audit": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 214281,
+        "transparent_rgb_zero": true,
+        "visible_bbox": [
+          235,
+          322,
+          1455,
+          972
+        ]
+      },
+      "path": "alphas/080_ACT080_run_contact_alpha.png",
+      "runtime_admitted": false,
+      "sha256": "70b68db265d6ae3ff41c6ba850d928d0d8643f2c508ac6984aac14687893d9a9",
+      "status": "validated_source"
+    }
+  ],
+  "blocked_asset_count": 7,
+  "blocked_asset_ids": [
+    "CAN007",
+    "ACT007",
+    "ACT011",
+    "ACT025",
+    "ACT032",
+    "ACT044",
+    "ACT060"
+  ],
+  "character_id": "dragon",
+  "expected_asset_count": 91,
+  "manifest_type": "dragon_approved_alpha_source",
+  "notes": [
+    "Validated PNGs are preserved byte-for-byte.",
+    "Damaged or manifest-mismatched payloads are recorded but not copied.",
+    "No Dragon review library or runtime package may be built from this incomplete set."
+  ],
+  "review_projection": false,
+  "runtime_admitted": false,
+  "schema_version": 1,
+  "standalone_canonical_confirmations": [
+    {
+      "asset_id": "CAN001",
+      "filename": "CAN001_DRG001_neutral_front_v001_alpha.png",
+      "matches_main_archive_payload": true,
+      "sha256": "5c882904176c1d0f78017fcb819e2cf6ac2ffa38375d314a0e93187779c96d80"
+    },
+    {
+      "asset_id": "CAN002",
+      "filename": "CAN002_DRG001_front_three_quarter_left_v001_alpha.png",
+      "matches_main_archive_payload": true,
+      "sha256": "81919d9ffd0b6a533a2dca633f595a99057a48a15417b9f9d52c6c5debe5667d"
+    },
+    {
+      "asset_id": "CAN003",
+      "filename": "CAN003_DRG001_left_profile_v001_alpha.png",
+      "matches_main_archive_payload": true,
+      "sha256": "43b9777106b69cb904800af9981ef0939de7d5ae014a743d62c3db0eb328f6fb"
+    },
+    {
+      "asset_id": "CAN004",
+      "filename": "CAN004_DRG001_back_three_quarter_left_v001_alpha.png",
+      "matches_main_archive_payload": true,
+      "sha256": "9996c2b75370687661a733201a29141394d2c1bf65a0ea7f48b77d1315d526e7"
+    },
+    {
+      "asset_id": "CAN005",
+      "filename": "CAN005_DRG001_neutral_back_v001_alpha.png",
+      "matches_main_archive_payload": true,
+      "sha256": "62162f4ee14e4156b9d7c07416309aa8d04f896b449b9490c6d54f20a7a0f381"
+    },
+    {
+      "asset_id": "CAN006",
+      "filename": "CAN006_DRG001_right_profile_v001_alpha.png",
+      "matches_main_archive_payload": true,
+      "sha256": "4e5b57e0a05d8377c8427010137ae42b5660831b3a1714b33ea2dadd1c512ee5"
+    },
+    {
+      "asset_id": "CAN007",
+      "filename": "CAN007_DRG001_front_three_quarter_right_v001_alpha.png",
+      "matches_main_archive_payload": true,
+      "sha256": "9854168332a296a653cac25a6b5ccb3398a27e2d5b0c15c4bc82f5af72d6b950"
+    },
+    {
+      "asset_id": "CAN008",
+      "filename": "CAN008_DRG001_relaxed_neutral_v001_alpha.png",
+      "matches_main_archive_payload": true,
+      "sha256": "598f8f26ad211c411dcc21b114f57d90f8e1b6c43c20c06454eeac2dbc37c5bc"
+    },
+    {
+      "asset_id": "CAN009",
+      "filename": "CAN009_DRG001_attentive_neutral_v001_alpha.png",
+      "matches_main_archive_payload": true,
+      "sha256": "8e3d1c0f46c0b82675306d9fbf63d206ef2d1f3c4d3c93a123828fb5fb2ffa75"
+    },
+    {
+      "asset_id": "CAN010",
+      "filename": "CAN010_DRG001_maximum_spread_v001_alpha.png",
+      "matches_main_archive_payload": true,
+      "sha256": "3e0be23327889f0af13f136f9fa4fb02f6de46bd6db78e24527a8e92c795673e"
+    },
+    {
+      "asset_id": "CAN011",
+      "filename": "CAN011_DRG001_maximum_compression_v001_alpha.png",
+      "matches_main_archive_payload": true,
+      "sha256": "1d0915385b9a821764516cdee825accb38f50fb83237a41a5e29c03cf5454ce0"
+    }
+  ],
+  "validated_asset_count": 84
+}

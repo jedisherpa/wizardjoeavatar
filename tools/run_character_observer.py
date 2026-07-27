@@ -413,7 +413,11 @@ def main() -> None:
     ObserverHandler.joe_path = f"/?hd-sequence={args.joe_sequence}"
     ObserverHandler.joe_meta = args.joe_meta
     ObserverHandler.current_path = (
-        f"/?hd-sequence={args.review_sequence}"
+        (
+            f"/?hd-sequence={args.review_sequence}&hd-center-isolated=1"
+            if review_identity.get("identity_side") in {"left", "right"}
+            else f"/?hd-sequence={args.review_sequence}"
+        )
         if args.review_sequence
         else "/?embedded=1"
     )

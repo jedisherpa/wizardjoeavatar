@@ -544,6 +544,9 @@ def create_app(
         return {
             "schema_version": 1,
             "asset_set_id": hd_library.index["asset_set_id"],
+            "character_id": hd_library.index.get("character_id"),
+            "display_name": hd_library.index.get("display_name"),
+            "identity_side": hd_library.index.get("identity_side"),
             "profile": hd_library.index["profile"],
             "pose_ids": list(hd_library.pose_ids),
             "pose_metadata": hd_library.pose_metadata,

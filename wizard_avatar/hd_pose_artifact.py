@@ -8,7 +8,7 @@ import zlib
 from collections import OrderedDict
 from dataclasses import dataclass
 from pathlib import Path
-from typing import BinaryIO, Mapping
+from typing import BinaryIO, Callable, Iterable, Mapping
 
 from PIL import Image
 
@@ -40,9 +40,28 @@ def write_pose_artifact(
     profile: Mapping[str, object],
     provenance: Mapping[str, object],
 ) -> dict[str, object]:
-    if not poses:
+    return write_pose_artifact_from_loader(
+        destination,
+        poses,
+        load_pose=poses.__getitem__,
+        profile=profile,
+        provenance=provenance,
+    )
+
+
+def write_pose_artifact_from_loader(
+    destination: Path,
+    pose_ids: Iterable[str],
+    *,
+    load_pose: Callable[[str], Image.Image],
+    profile: Mapping[str, object],
+    provenance: Mapping[str, object],
+) -> dict[str, object]:
+    ordered = sorted(pose_ids)
+    if not ordered:
         raise ValueError("HD pose artifact requires at least one pose")
-    ordered = sorted(poses.items())
+    if len(set(ordered)) != len(ordered):
+        raise ValueError("HD pose artifact pose ids must be unique")
     width = int(profile["canvas_width"])
     height = int(profile["canvas_height"])
     header = {
@@ -50,7 +69,7 @@ def write_pose_artifact(
         "payload_encoding": "rgba8-zlib",
         "profile": dict(profile),
         "provenance": dict(provenance),
-        "pose_ids": [pose_id for pose_id, _ in ordered],
+        "pose_ids": ordered,
     }
     header_bytes = json.dumps(
         header, sort_keys=True, separators=(",", ":")
@@ -62,7 +81,8 @@ def write_pose_artifact(
         output.write(U32.pack(len(header_bytes)))
         output.write(header_bytes)
         output.write(U32.pack(len(ordered)))
-        for pose_id, image in ordered:
+        for pose_id in ordered:
+            image = load_pose(pose_id)
             rgba = image.convert("RGBA")
             if rgba.size != (width, height):
                 raise ValueError(f"{pose_id} does not match the artifact profile")
@@ -76,7 +96,7 @@ def write_pose_artifact(
             output.write(compressed)
     return {
         "path": str(destination),
-        "sha256": hashlib.sha256(destination.read_bytes()).hexdigest(),
+        "sha256": sha256_path(destination),
         "bytes": destination.stat().st_size,
         "pose_count": len(ordered),
         "pose_ids": header["pose_ids"],
@@ -224,4 +244,5 @@ __all__ = [
     "PoseRecord",
     "sha256_path",
     "write_pose_artifact",
+    "write_pose_artifact_from_loader",
 ]

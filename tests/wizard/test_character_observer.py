@@ -58,6 +58,21 @@ class CharacterObserverTests(unittest.TestCase):
             "wizard-joe-v1",
         )
 
+    def test_isolated_review_path_can_request_centered_projection(self):
+        body = _observer_html(
+            joe_port=8666,
+            current_port=8667,
+            joe_path="/?hd-sequence=approved_local_frames",
+            current_path="/?hd-sequence=robin-all&hd-center-isolated=1",
+            current_label="Robin",
+            current_meta="200 corrected HD poses",
+        )
+
+        self.assertIn(
+            b"hd-sequence=robin-all&amp;hd-center-isolated=1",
+            body,
+        )
+
 
 if __name__ == "__main__":
     unittest.main()

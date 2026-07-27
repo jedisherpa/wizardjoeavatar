@@ -1,0 +1,522 @@
+{
+  "approval_state": "quarantined_source_evidence",
+  "evidence_set_id": "dragon-mislabeled-robin-archive-011-030-v001",
+  "frame_count": 20,
+  "frames": [
+    {
+      "bytes": 842980,
+      "image_audit": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 308940,
+        "visible_bbox": [
+          575,
+          52,
+          1431,
+          972
+        ]
+      },
+      "ordinal": 11,
+      "path": "alphas/011_ACT011_neutral_speaking_gesture_alpha.png",
+      "sha256": "132ec3f313284487d749cbe5644ec09e104bf0d59a55c9b13b16333e293fe7cb",
+      "source_declared_filename": "011_ACT011_neutral_speaking_gesture_alpha.png"
+    },
+    {
+      "bytes": 827909,
+      "image_audit": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 306745,
+        "visible_bbox": [
+          695,
+          52,
+          1424,
+          972
+        ]
+      },
+      "ordinal": 12,
+      "path": "alphas/012_ACT012_explain_one_point_alpha.png",
+      "sha256": "6878e3418bf697a2b797c7dcb52863c323ed30e6b8bcceb6afbf2a54503a9353",
+      "source_declared_filename": "012_ACT012_explain_one_point_alpha.png"
+    },
+    {
+      "bytes": 858580,
+      "image_audit": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 320040,
+        "visible_bbox": [
+          585,
+          52,
+          1413,
+          972
+        ]
+      },
+      "ordinal": 13,
+      "path": "alphas/013_ACT013_balance_two_ideas_alpha.png",
+      "sha256": "d2b37dbeeaa768f738df6a566771a2a1b523e2bab7c9cd132216418c199288a0",
+      "source_declared_filename": "013_ACT013_balance_two_ideas_alpha.png"
+    },
+    {
+      "bytes": 877883,
+      "image_audit": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 328268,
+        "visible_bbox": [
+          527,
+          52,
+          1590,
+          972
+        ]
+      },
+      "ordinal": 14,
+      "path": "alphas/014_ACT014_present_screen_left_alpha.png",
+      "sha256": "41dbaef1de497a7af59a2cbab10c59f19bbf6c0a06b3ade7ecc3f50dc66976ee",
+      "source_declared_filename": "014_ACT014_present_screen_left_alpha.png"
+    },
+    {
+      "bytes": 913657,
+      "image_audit": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 353324,
+        "visible_bbox": [
+          480,
+          52,
+          1428,
+          972
+        ]
+      },
+      "ordinal": 15,
+      "path": "alphas/015_ACT015_present_screen_right_alpha.png",
+      "sha256": "008fcf3fda42eda869f9915ccd75ce6a344bfce238b1786ce0cf43b5b5df03c0",
+      "source_declared_filename": "015_ACT015_present_screen_right_alpha.png"
+    },
+    {
+      "bytes": 781561,
+      "image_audit": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 295749,
+        "visible_bbox": [
+          721,
+          53,
+          1399,
+          972
+        ]
+      },
+      "ordinal": 16,
+      "path": "alphas/016_ACT016_point_to_viewer_alpha.png",
+      "sha256": "05bb6b6efa9dca65c7b190cb2d619dc348ef02ef45144d8626bac24224ae62a9",
+      "source_declared_filename": "016_ACT016_point_to_viewer_alpha.png"
+    },
+    {
+      "bytes": 830331,
+      "image_audit": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 309616,
+        "visible_bbox": [
+          704,
+          53,
+          1418,
+          972
+        ]
+      },
+      "ordinal": 17,
+      "path": "alphas/017_ACT017_insight_upward_point_alpha.png",
+      "sha256": "3b2c2f459ed9f39a86e0933b820638abedbb9053882cb6f631845f0a9e11fa27",
+      "source_declared_filename": "017_ACT017_insight_upward_point_alpha.png"
+    },
+    {
+      "bytes": 853064,
+      "image_audit": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 321307,
+        "visible_bbox": [
+          602,
+          53,
+          1559,
+          972
+        ]
+      },
+      "ordinal": 18,
+      "path": "alphas/018_ACT018_detail_downward_point_alpha.png",
+      "sha256": "522c0f26c9f0ee4813d371b0d6d68029d40dc0c7a73191012d0f950632fca4a1",
+      "source_declared_filename": "018_ACT018_detail_downward_point_alpha.png"
+    },
+    {
+      "bytes": 794572,
+      "image_audit": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 297662,
+        "visible_bbox": [
+          702,
+          52,
+          1392,
+          972
+        ]
+      },
+      "ordinal": 19,
+      "path": "alphas/019_ACT019_neutral_listening_alpha.png",
+      "sha256": "36c3ab35f296fa02b1407f979642f4b119553765433781efc4c4ac97c818b1f9",
+      "source_declared_filename": "019_ACT019_neutral_listening_alpha.png"
+    },
+    {
+      "bytes": 931077,
+      "image_audit": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 357739,
+        "visible_bbox": [
+          443,
+          119,
+          1729,
+          972
+        ]
+      },
+      "ordinal": 20,
+      "path": "alphas/020_ACT020_lean_in_listening_alpha.png",
+      "sha256": "6721279502251fbd31b5f559d5d3a854a24adf0556b529d083159a2c658cf3ae",
+      "source_declared_filename": "020_ACT020_lean_in_listening_alpha.png"
+    },
+    {
+      "bytes": 791154,
+      "image_audit": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 294775,
+        "visible_bbox": [
+          677,
+          52,
+          1507,
+          972
+        ]
+      },
+      "ordinal": 21,
+      "path": "alphas/021_ACT021_skeptical_listening_alpha.png",
+      "sha256": "bbf55a2316fb1e39ec61cf8a43fe5767aa9a26fef6f518e99f1e772a49d825f2",
+      "source_declared_filename": "021_ACT021_skeptical_listening_alpha.png"
+    },
+    {
+      "bytes": 690884,
+      "image_audit": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 256968,
+        "visible_bbox": [
+          669,
+          130,
+          1447,
+          972
+        ]
+      },
+      "ordinal": 22,
+      "path": "alphas/022_ACT022_small_acknowledgment_alpha.png",
+      "sha256": "9476a42ef16aa88f205d0b7c165a27cb2b65ed12e3af7561393e4fd77bb01e22",
+      "source_declared_filename": "022_ACT022_small_acknowledgment_alpha.png"
+    },
+    {
+      "bytes": 826558,
+      "image_audit": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 305478,
+        "visible_bbox": [
+          616,
+          52,
+          1517,
+          972
+        ]
+      },
+      "ordinal": 23,
+      "path": "alphas/023_ACT023_emphatic_agreement_alpha.png",
+      "sha256": "0b008c67a61f10bc669b0a503ccd265aa5f765f90d8a1e36bacd0df39a689947",
+      "source_declared_filename": "023_ACT023_emphatic_agreement_alpha.png"
+    },
+    {
+      "bytes": 857837,
+      "image_audit": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 321311,
+        "visible_bbox": [
+          622,
+          52,
+          1458,
+          972
+        ]
+      },
+      "ordinal": 24,
+      "path": "alphas/024_ACT024_polite_interruption_alpha.png",
+      "sha256": "066640d3b69f11c22c03d391e827e9c526aaa99961b380196642e03aa0764c84",
+      "source_declared_filename": "024_ACT024_polite_interruption_alpha.png"
+    },
+    {
+      "bytes": 865066,
+      "image_audit": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 327543,
+        "visible_bbox": [
+          517,
+          68,
+          1454,
+          972
+        ]
+      },
+      "ordinal": 25,
+      "path": "alphas/025_ACT025_hand_over_the_floor_alpha.png",
+      "sha256": "de07114a9d0d4fc677d654072afc23d4f2544db44df509d1faf64c61b79b6387",
+      "source_declared_filename": "025_ACT025_hand_over_the_floor_alpha.png"
+    },
+    {
+      "bytes": 833650,
+      "image_audit": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 304035,
+        "visible_bbox": [
+          587,
+          52,
+          1468,
+          972
+        ]
+      },
+      "ordinal": 26,
+      "path": "alphas/026_ACT026_warm_welcome_alpha.png",
+      "sha256": "b1509eb1d18c5d14dc8354ee102f5d46234360b41fc9d18cfc73b04d77ce0899",
+      "source_declared_filename": "026_ACT026_warm_welcome_alpha.png"
+    },
+    {
+      "bytes": 736385,
+      "image_audit": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 275262,
+        "visible_bbox": [
+          667,
+          80,
+          1474,
+          972
+        ]
+      },
+      "ordinal": 27,
+      "path": "alphas/027_ACT027_intimate_confidence_alpha.png",
+      "sha256": "48d2c3d86a4ef0c623eac88a87abc3e638708b7549d8e4117035071b8f33544c",
+      "source_declared_filename": "027_ACT027_intimate_confidence_alpha.png"
+    },
+    {
+      "bytes": 836193,
+      "image_audit": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 308324,
+        "visible_bbox": [
+          559,
+          52,
+          1485,
+          972
+        ]
+      },
+      "ordinal": 28,
+      "path": "alphas/028_ACT028_strong_declaration_alpha.png",
+      "sha256": "05eba178129cb47c530d5f8e11b5af7afd313eae9401517d4d953a528d3cd94d",
+      "source_declared_filename": "028_ACT028_strong_declaration_alpha.png"
+    },
+    {
+      "bytes": 821724,
+      "image_audit": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 303820,
+        "visible_bbox": [
+          573,
+          52,
+          1476,
+          972
+        ]
+      },
+      "ordinal": 29,
+      "path": "alphas/029_ACT029_confidential_whisper_alpha.png",
+      "sha256": "94f4e800f162bc3ce625bf36ec4debc14ad87ad1d72e91e284975bd8d5a9eb3e",
+      "source_declared_filename": "029_ACT029_confidential_whisper_alpha.png"
+    },
+    {
+      "bytes": 775105,
+      "image_audit": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "canvas_size": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "opaque_pixel_count": 284770,
+        "visible_bbox": [
+          643,
+          66,
+          1438,
+          972
+        ]
+      },
+      "ordinal": 30,
+      "path": "alphas/030_ACT030_rhetorical_question_alpha.png",
+      "sha256": "90864728453b5312924c3a8b7baa26612db8a06e86518ecfafc9c1133766a934",
+      "source_declared_filename": "030_ACT030_rhetorical_question_alpha.png"
+    }
+  ],
+  "manifest_type": "dragon_alpha_source_evidence",
+  "notes": [
+    "Preserved byte-for-byte from the user-provided archive.",
+    "Not compiled, registered, approved, or exposed by the runtime.",
+    "Requires a separate Dragon identity audit before use."
+  ],
+  "observed_identity": "dragon",
+  "review_projection": false,
+  "runtime_admitted": false,
+  "schema_version": 1,
+  "source_archive": {
+    "filename": "Robin_Alpha_PNGs_Complete_001-155.zip",
+    "sha256": "c7378b144453a9af98518f72025ac5237f17d44906d33c5a5683f1d45a1e1805"
+  },
+  "source_label_status": "mislabeled_as_robin"
+}

@@ -11,6 +11,47 @@ const diagnostics = new WizardDiagnostics(document.getElementById("diagnostics")
 const client = new WizardClient(canvas, diagnostics);
 window.__wizardJoeCanvas = () => canvas;
 
+function isolatedPresentationOffset(manifest, enabled) {
+  if (!enabled) return 0;
+  const width = Number(manifest.profile.canvas_width);
+  const splitX = Number(manifest.profile.identity_split_x);
+  if (
+    manifest.profile.coordinate_policy !== "preserve_shared_source_canvas"
+    || !Number.isInteger(width)
+    || !Number.isInteger(splitX)
+    || splitX <= 0
+    || splitX >= width
+  ) {
+    return 0;
+  }
+  if (manifest.identity_side === "left") {
+    return Math.round(width / 2 - splitX / 2);
+  }
+  if (manifest.identity_side === "right") {
+    return Math.round(width / 2 - (splitX + width) / 2);
+  }
+  return 0;
+}
+
+function translateRgbaHorizontally(frame, width, height, offsetX) {
+  if (!offsetX) return frame;
+  const translated = new Uint8Array(frame.length);
+  const sourceStartX = Math.max(0, -offsetX);
+  const sourceEndX = Math.min(width, width - offsetX);
+  const copyWidth = sourceEndX - sourceStartX;
+  if (copyWidth <= 0) return translated;
+  const destinationStartX = sourceStartX + offsetX;
+  for (let y = 0; y < height; y++) {
+    const sourceOffset = (y * width + sourceStartX) * 4;
+    const destinationOffset = (y * width + destinationStartX) * 4;
+    translated.set(
+      frame.subarray(sourceOffset, sourceOffset + copyWidth * 4),
+      destinationOffset,
+    );
+  }
+  return translated;
+}
+
 async function start() {
   const params = new URLSearchParams(location.search);
   const reviewPose = params.get("hd-review");
@@ -25,7 +66,18 @@ async function start() {
     }
     const width = Number(manifest.profile.canvas_width);
     const height = Number(manifest.profile.canvas_height);
+    const presentationOffsetX = isolatedPresentationOffset(
+      manifest,
+      params.get("hd-center-isolated") === "1",
+    );
+    const presentPose = (pixels) => translateRgbaHorizontally(
+      pixels,
+      width,
+      height,
+      presentationOffsetX,
+    );
     document.body.classList.add("hd-review");
+    document.body.dataset.hdPresentationOffsetX = String(presentationOffsetX);
     canvas.configure(width, height, "rgba");
 
     const loadPose = async (poseId) => {
@@ -53,7 +105,7 @@ async function start() {
         if (playing && !completed) {
           const pixels = await loadPose(sequence.pose_ids[frameIndex]);
           if (stopped) return;
-          canvas.draw(pixels);
+          canvas.draw(presentPose(pixels));
           framesDrawn++;
           const finalFrame = frameIndex === sequence.pose_ids.length - 1;
           if (finalFrame && !sequence.loop) {
@@ -86,6 +138,7 @@ async function start() {
         playing,
         completed,
         libraryIndexSha256: manifest.library_index_sha256,
+        presentationOffsetX,
         canvas: canvas.getMetrics(),
       });
       addEventListener("pagehide", () => { stopped = true; }, { once: true });
@@ -97,7 +150,7 @@ async function start() {
       }
       document.body.dataset.hdOpaqueSamples = String(opaqueSamples);
       document.body.dataset.hdReviewStep = "project";
-      canvas.draw(pixels);
+      canvas.draw(presentPose(pixels));
       document.body.dataset.hdReviewStep = "ready";
       window.__wizardJoeMetrics = () => ({
         hdReview: true,
@@ -105,6 +158,7 @@ async function start() {
         approvalState: manifest.pose_metadata[reviewPose].approval_state,
         runtimeAdmitted: manifest.pose_metadata[reviewPose].runtime_admitted,
         libraryIndexSha256: manifest.library_index_sha256,
+        presentationOffsetX,
         canvas: canvas.getMetrics(),
       });
     }
