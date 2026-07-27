@@ -321,6 +321,44 @@ class JoeVilleSupplementalCharacterTests(unittest.TestCase):
                     project_root=project_root,
                 )
 
+    def test_prepare_rejects_unsafe_projection_normalization(self):
+        with tempfile.TemporaryDirectory() as directory:
+            project_root = Path(directory)
+            authority, brief, manifest, _ = self._fixture(project_root)
+            plan = json.loads(brief.read_text(encoding="utf-8"))
+            plan["projection_normalization"] = {
+                "schema_version": 1,
+                "method": "per_pose_uniform_scale_v1",
+                "anchor": "visible_bbox_center_baseline",
+                "resampling": "bilinear",
+                "scale_basis_points": {
+                    "liana_motion_014": 9400,
+                },
+            }
+            brief.write_text(json.dumps(plan), encoding="utf-8")
+            with self.assertRaisesRegex(ValueError, "nearest resampling"):
+                prepare_manifest(
+                    character_id="liana",
+                    brief_plan_path=brief,
+                    authority_path=authority,
+                    output_path=manifest,
+                    project_root=project_root,
+                )
+
+            plan["projection_normalization"]["resampling"] = "nearest"
+            plan["projection_normalization"]["scale_basis_points"] = {
+                "liana_motion_049": 9400,
+            }
+            brief.write_text(json.dumps(plan), encoding="utf-8")
+            with self.assertRaisesRegex(ValueError, "unknown pose_id"):
+                prepare_manifest(
+                    character_id="liana",
+                    brief_plan_path=brief,
+                    authority_path=authority,
+                    output_path=manifest,
+                    project_root=project_root,
+                )
+
     def test_builder_fails_closed_and_rejects_path_escape(self):
         with tempfile.TemporaryDirectory() as directory:
             project_root = Path(directory)

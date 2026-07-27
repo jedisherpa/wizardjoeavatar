@@ -42,6 +42,13 @@ MOTION_CONTRACT_FIELDS = {
     "root_policy",
     "support_policy",
 }
+PROJECTION_NORMALIZATION_FIELDS = {
+    "anchor",
+    "method",
+    "resampling",
+    "scale_basis_points",
+    "schema_version",
+}
 
 
 def _read_json(path: Path) -> dict[str, Any]:
@@ -153,6 +160,56 @@ def _validate_motion_contract(
         raise ValueError(f"{sequence_id} loop mode contradicts loop flag")
 
 
+def _validate_projection_normalization(
+    value: object,
+    *,
+    character_id: str,
+) -> dict[str, Any] | None:
+    if value is None:
+        return None
+    if not isinstance(value, dict) or set(value) != (
+        PROJECTION_NORMALIZATION_FIELDS
+    ):
+        raise ValueError("projection normalization fields mismatch")
+    if value["schema_version"] != 1:
+        raise ValueError("projection normalization schema_version must be 1")
+    if value["method"] != "per_pose_uniform_scale_v1":
+        raise ValueError("unsupported projection normalization method")
+    if value["anchor"] != "visible_bbox_center_baseline":
+        raise ValueError("unsupported projection normalization anchor")
+    if value["resampling"] != "nearest":
+        raise ValueError("projection normalization must use nearest resampling")
+    overrides = value["scale_basis_points"]
+    if not isinstance(overrides, dict) or not overrides:
+        raise ValueError("projection normalization needs pose scale overrides")
+    expected_pose_ids = {
+        f"{character_id.replace('-', '_')}_motion_{number:03d}"
+        for number in range(1, TARGET_POSE_COUNT + 1)
+    }
+    for pose_id, basis_points in overrides.items():
+        if pose_id not in expected_pose_ids:
+            raise ValueError(
+                "projection normalization references an unknown pose_id"
+            )
+        if (
+            isinstance(basis_points, bool)
+            or not isinstance(basis_points, int)
+            or not 7500 <= basis_points <= 13500
+            or basis_points == 10000
+        ):
+            raise ValueError(
+                "projection scale basis points must be an integer "
+                "between 7500 and 13500 and must change the pose"
+            )
+    return {
+        "schema_version": 1,
+        "method": value["method"],
+        "anchor": value["anchor"],
+        "resampling": value["resampling"],
+        "scale_basis_points": dict(sorted(overrides.items())),
+    }
+
+
 def prepare_manifest(
     *,
     character_id: str,
@@ -189,6 +246,10 @@ def prepare_manifest(
         raise ValueError("supplemental authoring must deny runtime admission")
     if plan.get("profile_id") != profile["profile_id"]:
         raise ValueError("supplemental authoring profile_id mismatch")
+    projection_normalization = _validate_projection_normalization(
+        plan.get("projection_normalization"),
+        character_id=character_id,
+    )
 
     plan_sequences = plan.get("sequences")
     if not isinstance(plan_sequences, dict):
@@ -378,6 +439,8 @@ def prepare_manifest(
         "review_projection": True,
         "runtime_admitted": False,
     }
+    if projection_normalization is not None:
+        manifest["projection_normalization"] = projection_normalization
     payload = _json_bytes(manifest)
     _write_bytes_atomic(output_path, payload)
     return {

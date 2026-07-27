@@ -2,7 +2,7 @@
   "approval_state": "pending_visual_parity",
   "authoring_brief": {
     "path": "assets/reference/joeville_supplemental/liana/authoring-brief-v001.json",
-    "sha256": "9d4198ae6cc2fc5acdd16386d9dab544e499fed58cd06c9932b71b1d38c05346"
+    "sha256": "a4469ff6d3beccd621faa78e26e4eb08182fe8636c3c7a6ef69b3ba7701f510f"
   },
   "authority_manifest": {
     "path": "assets/reference/hd_canonical/manifest.json",
@@ -20,6 +20,17 @@
     "color_space": "sRGB",
     "minimum_margin": 69,
     "profile_id": "wizardjoe_hd_alpha_1254_v001"
+  },
+  "projection_normalization": {
+    "anchor": "visible_bbox_center_baseline",
+    "method": "per_pose_uniform_scale_v1",
+    "resampling": "nearest",
+    "scale_basis_points": {
+      "liana_motion_014": 9400,
+      "liana_motion_017": 11000,
+      "liana_motion_020": 9000
+    },
+    "schema_version": 1
   },
   "review_projection": true,
   "roster_state": "supplemental_authored_character",

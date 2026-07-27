@@ -1,9 +1,9 @@
 {
   "artifact": {
-    "bytes": 28725043,
+    "bytes": 28544482,
     "path": "assets/reference/joeville_supplemental/liana/compiled-motion/liana-candidate-supplemental-48-v001.wjpose",
     "pose_count": 48,
-    "sha256": "79535e1b310848bf23d3c8f5db170fdfc6657865a6fa8e0f03040d80630bafee"
+    "sha256": "c282f3845cfea4225d265fbff62eb95a9dc7e97db1aaa65068cfba3be7aa0339"
   },
   "asset_set_id": "liana-supplemental-motion-48-v001",
   "authority_manifest": {
@@ -13,14 +13,25 @@
   "character_id": "liana",
   "library_index": {
     "path": "assets/reference/joeville_supplemental/liana/compiled-motion/library-index.json",
-    "sha256": "ff6972de47681a8e3a710b880fff53ca8da205e51f01f314073db409ff4a9d19"
+    "sha256": "0473c369ecf1867f4209c98259a1a86af2d093e33123ddfcec339113178d0eaa"
   },
   "pose_count": 48,
+  "projection_normalization": {
+    "anchor": "visible_bbox_center_baseline",
+    "method": "per_pose_uniform_scale_v1",
+    "resampling": "nearest",
+    "scale_basis_points": {
+      "liana_motion_014": 9400,
+      "liana_motion_017": 11000,
+      "liana_motion_020": 9000
+    },
+    "schema_version": 1
+  },
   "review_projection": true,
   "runtime_admitted": false,
   "schema_version": 1,
   "supplemental_manifest": {
     "path": "assets/reference/joeville_supplemental/liana/motion-manifest-v001.json",
-    "sha256": "9d2306c87009fb5971c5c5811ba0d2d245c64079952c516aad56bc1153cf59bf"
+    "sha256": "aa45a59d75f22c68d23ea74169605ad3fa1ad20b2ce367f8724d78008edbacf3"
   }
 }

@@ -28,15 +28,15 @@ class LianaSupplementalMotionTests(unittest.TestCase):
     def test_real_candidate_is_complete_unique_and_fail_closed(self):
         self.assertEqual(
             sha256_path(MANIFEST_PATH),
-            "9d2306c87009fb5971c5c5811ba0d2d245c64079952c516aad56bc1153cf59bf",
+            "aa45a59d75f22c68d23ea74169605ad3fa1ad20b2ce367f8724d78008edbacf3",
         )
         self.assertEqual(
             sha256_path(ARTIFACT_PATH),
-            "79535e1b310848bf23d3c8f5db170fdfc6657865a6fa8e0f03040d80630bafee",
+            "c282f3845cfea4225d265fbff62eb95a9dc7e97db1aaa65068cfba3be7aa0339",
         )
         self.assertEqual(
             sha256_path(INDEX_PATH),
-            "ff6972de47681a8e3a710b880fff53ca8da205e51f01f314073db409ff4a9d19",
+            "0473c369ecf1867f4209c98259a1a86af2d093e33123ddfcec339113178d0eaa",
         )
 
         manifest = json.loads(MANIFEST_PATH.read_text(encoding="utf-8"))
@@ -56,6 +56,11 @@ class LianaSupplementalMotionTests(unittest.TestCase):
 
         source_hashes = set()
         rgba_hashes = set()
+        expected_scale_basis_points = {
+            "liana_motion_014": 9400,
+            "liana_motion_017": 11000,
+            "liana_motion_020": 9000,
+        }
         for pose_number in range(1, 49):
             pose_id = f"liana_motion_{pose_number:03d}"
             metadata = library.pose_metadata[pose_id]
@@ -64,6 +69,14 @@ class LianaSupplementalMotionTests(unittest.TestCase):
             with Image.open(source_path) as image:
                 rgba = image.convert("RGBA")
             bbox = rgba.getchannel("A").getbbox()
+            projected_bytes = library.load_rgba(pose_id)
+            projected = Image.frombytes(
+                "RGBA",
+                (1254, 1254),
+                projected_bytes,
+            )
+            projected_bbox = projected.getchannel("A").getbbox()
+            projected_sha256 = hashlib.sha256(projected_bytes).hexdigest()
 
             with self.subTest(pose_id=pose_id):
                 self.assertEqual(rgba.size, (1254, 1254))
@@ -74,19 +87,40 @@ class LianaSupplementalMotionTests(unittest.TestCase):
                 self.assertEqual(bbox[3], 1185)
                 self.assertFalse(metadata["runtime_admitted"])
                 self.assertEqual(
-                    hashlib.sha256(rgba.tobytes()).hexdigest(),
+                    projected_sha256,
                     index_pose["rgba_sha256"],
                 )
-                self.assertEqual(library.load_rgba(pose_id), rgba.tobytes())
+                self.assertEqual(
+                    list(projected_bbox),
+                    index_pose["canonical_bbox"],
+                )
+                if pose_id in expected_scale_basis_points:
+                    self.assertEqual(
+                        index_pose["source_rgba_sha256"],
+                        hashlib.sha256(rgba.tobytes()).hexdigest(),
+                    )
+                    self.assertEqual(
+                        index_pose["source_canonical_bbox"],
+                        list(bbox),
+                    )
+                    self.assertEqual(
+                        index_pose["projection_normalization"][
+                            "scale_basis_points"
+                        ],
+                        expected_scale_basis_points[pose_id],
+                    )
+                    self.assertNotEqual(projected_bytes, rgba.tobytes())
+                else:
+                    self.assertEqual(projected_bytes, rgba.tobytes())
                 self.assertTrue(
                     all(
                         r == g == b == 0
-                        for r, g, b, a in rgba.getdata()
+                        for r, g, b, a in projected.getdata()
                         if a == 0
                     )
                 )
             source_hashes.add(sha256_path(source_path))
-            rgba_hashes.add(hashlib.sha256(rgba.tobytes()).hexdigest())
+            rgba_hashes.add(projected_sha256)
 
         self.assertEqual(len(source_hashes), 48)
         self.assertEqual(len(rgba_hashes), 48)
@@ -114,11 +148,11 @@ class LianaSupplementalMotionTests(unittest.TestCase):
         )
         self.assertEqual(
             first["artifact_sha256"],
-            "79535e1b310848bf23d3c8f5db170fdfc6657865a6fa8e0f03040d80630bafee",
+            "c282f3845cfea4225d265fbff62eb95a9dc7e97db1aaa65068cfba3be7aa0339",
         )
         self.assertEqual(
             first["library_index_sha256"],
-            "ff6972de47681a8e3a710b880fff53ca8da205e51f01f314073db409ff4a9d19",
+            "0473c369ecf1867f4209c98259a1a86af2d093e33123ddfcec339113178d0eaa",
         )
 
     def test_production_registry_is_not_promoted_by_review_candidate(self):

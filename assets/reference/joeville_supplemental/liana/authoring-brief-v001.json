@@ -10,6 +10,17 @@
   "tracker_path": "supplemental-tracker-v001.json",
   "source_direction": "docs/character-director/reports/LIANA_ANIMATION_DIRECTION_2026-07-25.md",
   "production_rule": "Every listed pose is an independently authored full-size image and an independently reviewed RGBA pixel graph. No pose may be duplicated, mirrored, warped, or padded from another slot.",
+  "projection_normalization": {
+    "schema_version": 1,
+    "method": "per_pose_uniform_scale_v1",
+    "anchor": "visible_bbox_center_baseline",
+    "resampling": "nearest",
+    "scale_basis_points": {
+      "liana_motion_014": 9400,
+      "liana_motion_017": 11000,
+      "liana_motion_020": 9000
+    }
+  },
   "front_identity_authorization": {
     "state": "user_authorized_to_proceed",
     "runtime_approval": false,

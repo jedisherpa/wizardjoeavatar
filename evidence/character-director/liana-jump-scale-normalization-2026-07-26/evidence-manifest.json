@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "character_id": "liana",
+  "evidence_id": "liana-jump-scale-normalization-2026-07-26",
+  "observer_url": "http://127.0.0.1:8665/",
+  "review_projection": true,
+  "runtime_admitted": false,
+  "approval_state": "pending_visual_parity",
+  "normalization": {
+    "schema_version": 1,
+    "method": "per_pose_uniform_scale_v1",
+    "anchor": "visible_bbox_center_baseline",
+    "resampling": "nearest",
+    "scale_basis_points": {
+      "liana_motion_014": 9400,
+      "liana_motion_017": 11000,
+      "liana_motion_020": 9000
+    }
+  },
+  "artifact": {
+    "path": "assets/reference/joeville_supplemental/liana/compiled-motion/liana-candidate-supplemental-48-v001.wjpose",
+    "sha256": "c282f3845cfea4225d265fbff62eb95a9dc7e97db1aaa65068cfba3be7aa0339"
+  },
+  "library_index": {
+    "path": "assets/reference/joeville_supplemental/liana/compiled-motion/library-index.json",
+    "sha256": "0473c369ecf1867f4209c98259a1a86af2d093e33123ddfcec339113178d0eaa"
+  },
+  "live_pose_receipts": [
+    {
+      "pose_id": "liana_motion_014",
+      "bbox": [362, 288, 891, 1185],
+      "rgba_sha256": "21420f8ea84400623c365e9612ab3513b4be430372fd7ee39cefc57ea92d3605"
+    },
+    {
+      "pose_id": "liana_motion_017",
+      "bbox": [324, 255, 929, 1185],
+      "rgba_sha256": "d0623d3dfb53aac2ac1ed935ecb3543cf3544d3b30656e8d4ede56b54e5622a3"
+    },
+    {
+      "pose_id": "liana_motion_020",
+      "bbox": [376, 383, 878, 1185],
+      "rgba_sha256": "6a03dfa780a8109c9dc9acee0868605773ff233adcb6679a4ec2548be22b74ae"
+    }
+  ],
+  "visual_evidence": {
+    "path": "evidence/character-director/liana-jump-scale-normalization-2026-07-26/live-corrected-jump-poses.jpg",
+    "sha256": "ccd5b5c57ab3baf08e022604aa01d3006759e3eb31a52a95c5e9958b309c4b9a"
+  }
+}

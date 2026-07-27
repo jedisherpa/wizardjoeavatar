@@ -53,6 +53,13 @@ MOTION_CONTRACT_FIELDS = {
     "root_policy",
     "support_policy",
 }
+PROJECTION_NORMALIZATION_FIELDS = {
+    "anchor",
+    "method",
+    "resampling",
+    "scale_basis_points",
+    "schema_version",
+}
 
 
 def _read_json(path: Path) -> dict[str, Any]:
@@ -133,6 +140,111 @@ def _validate_profile(profile: object) -> dict[str, Any]:
     if not isinstance(profile, dict) or profile != CANONICAL_PROFILE:
         raise ValueError("supplemental poses require the canonical 1254 profile")
     return dict(profile)
+
+
+def _validate_projection_normalization(
+    value: object,
+    *,
+    pose_ids: set[str],
+) -> dict[str, Any] | None:
+    if value is None:
+        return None
+    if not isinstance(value, dict) or set(value) != (
+        PROJECTION_NORMALIZATION_FIELDS
+    ):
+        raise ValueError("projection normalization fields mismatch")
+    if value["schema_version"] != 1:
+        raise ValueError("projection normalization schema_version must be 1")
+    if value["method"] != "per_pose_uniform_scale_v1":
+        raise ValueError("unsupported projection normalization method")
+    if value["anchor"] != "visible_bbox_center_baseline":
+        raise ValueError("unsupported projection normalization anchor")
+    if value["resampling"] != "nearest":
+        raise ValueError("projection normalization must use nearest resampling")
+    overrides = value["scale_basis_points"]
+    if not isinstance(overrides, dict) or not overrides:
+        raise ValueError("projection normalization needs pose scale overrides")
+    for pose_id, basis_points in overrides.items():
+        if pose_id not in pose_ids:
+            raise ValueError(
+                "projection normalization references an unknown pose_id"
+            )
+        if (
+            isinstance(basis_points, bool)
+            or not isinstance(basis_points, int)
+            or not 7500 <= basis_points <= 13500
+            or basis_points == 10000
+        ):
+            raise ValueError(
+                "projection scale basis points must be an integer "
+                "between 7500 and 13500 and must change the pose"
+            )
+    return {
+        "schema_version": 1,
+        "method": value["method"],
+        "anchor": value["anchor"],
+        "resampling": value["resampling"],
+        "scale_basis_points": dict(sorted(overrides.items())),
+    }
+
+
+def _apply_projection_normalization(
+    *,
+    image: Image.Image,
+    pose_id: str,
+    profile: dict[str, Any],
+    normalization: dict[str, Any] | None,
+) -> tuple[Image.Image, dict[str, Any] | None]:
+    if normalization is None:
+        return image, None
+    basis_points = normalization["scale_basis_points"].get(pose_id)
+    if basis_points is None:
+        return image, None
+    source_bbox = image.getchannel("A").getbbox()
+    if source_bbox is None:
+        raise ValueError(f"{pose_id} has no visible silhouette")
+    source_crop = image.crop(source_bbox)
+    width = (source_crop.width * basis_points + 5000) // 10000
+    height = (source_crop.height * basis_points + 5000) // 10000
+    resized = source_crop.resize(
+        (width, height),
+        resample=Image.Resampling.NEAREST,
+    )
+    canvas_width = profile["canvas_width"]
+    canvas_height = profile["canvas_height"]
+    baseline_y = profile["baseline_y"]
+    left = (canvas_width - width) // 2
+    top = baseline_y - height
+    if left < 0 or top < 0 or left + width > canvas_width:
+        raise ValueError(f"{pose_id} projection normalization exceeds canvas")
+    normalized = Image.new(
+        "RGBA",
+        (canvas_width, canvas_height),
+        (0, 0, 0, 0),
+    )
+    normalized.alpha_composite(resized, (left, top))
+    compiled_bbox = normalized.getchannel("A").getbbox()
+    if compiled_bbox is None:
+        raise ValueError(f"{pose_id} normalization erased the silhouette")
+    margin = profile["minimum_margin"]
+    if (
+        compiled_bbox[0] < margin
+        or compiled_bbox[1] < margin
+        or canvas_width - compiled_bbox[2] < margin
+        or compiled_bbox[3] != baseline_y
+    ):
+        raise ValueError(
+            f"{pose_id} projection normalization violates canonical bounds"
+        )
+    return normalized, {
+        "schema_version": 1,
+        "method": normalization["method"],
+        "anchor": normalization["anchor"],
+        "resampling": normalization["resampling"],
+        "scale_basis_points": basis_points,
+        "source_bbox": list(source_bbox),
+        "compiled_bbox": list(compiled_bbox),
+    }
 
 
 def _validate_portable_receipt(
@@ -404,6 +516,10 @@ def build_supplemental_character(
     ordered = _validate_manifest(
         character_id=character_id, manifest=manifest
     )
+    projection_normalization = _validate_projection_normalization(
+        manifest.get("projection_normalization"),
+        pose_ids={frame["pose_id"] for _, _, frame in ordered},
+    )
 
     poses: dict[str, Image.Image] = {}
     pose_records: list[dict[str, Any]] = []
@@ -417,6 +533,23 @@ def build_supplemental_character(
             profile=profile,
             project_root=project_root,
         )
+        image, normalization_receipt = _apply_projection_normalization(
+            image=image,
+            pose_id=frame["pose_id"],
+            profile=profile,
+            normalization=projection_normalization,
+        )
+        if normalization_receipt is not None:
+            source_rgba_sha256 = provenance["rgba_sha256"]
+            source_bbox = provenance["canonical_bbox"]
+            provenance = {
+                **provenance,
+                "source_rgba_sha256": source_rgba_sha256,
+                "source_canonical_bbox": source_bbox,
+                "rgba_sha256": hashlib.sha256(image.tobytes()).hexdigest(),
+                "canonical_bbox": normalization_receipt["compiled_bbox"],
+                "projection_normalization": normalization_receipt,
+            }
         if provenance["rgba_sha256"] in actual_rgba_hashes:
             raise ValueError("supplemental decoded RGBA poses must be unique")
         actual_rgba_hashes.add(provenance["rgba_sha256"])
@@ -452,22 +585,27 @@ def build_supplemental_character(
     temporary_artifact = artifact_path.with_name(
         f".{artifact_name}.{os.getpid()}.tmp"
     )
+    artifact_provenance = {
+        "asset_set_id": (
+            f"{character_id}-supplemental-motion-48-v001"
+        ),
+        "character_id": character_id,
+        "supplemental_manifest_sha256": sha256_path(manifest_path),
+        "authority_manifest_sha256": sha256_path(authority_path),
+        "approval_state": APPROVAL_STATE,
+        "review_projection": True,
+        "runtime_admitted": False,
+        "reconstruction": "authored_full_size_rgba_v1",
+    }
+    if projection_normalization is not None:
+        artifact_provenance["projection_normalization"] = (
+            projection_normalization
+        )
     artifact_receipt = write_pose_artifact(
         temporary_artifact,
         poses,
         profile=profile,
-        provenance={
-            "asset_set_id": (
-                f"{character_id}-supplemental-motion-48-v001"
-            ),
-            "character_id": character_id,
-            "supplemental_manifest_sha256": sha256_path(manifest_path),
-            "authority_manifest_sha256": sha256_path(authority_path),
-            "approval_state": APPROVAL_STATE,
-            "review_projection": True,
-            "runtime_admitted": False,
-            "reconstruction": "authored_full_size_rgba_v1",
-        },
+        provenance=artifact_provenance,
     )
     temporary_artifact.replace(artifact_path)
     artifact_receipt = {
@@ -539,6 +677,8 @@ def build_supplemental_character(
         ],
         "poses": sorted(pose_records, key=lambda record: record["pose_id"]),
     }
+    if projection_normalization is not None:
+        index["projection_normalization"] = projection_normalization
     index_bytes = _json_bytes(index)
     _write_bytes_atomic(index_path, index_bytes)
     index_sha256 = hashlib.sha256(index_bytes).hexdigest()
@@ -577,6 +717,8 @@ def build_supplemental_character(
         "review_projection": True,
         "runtime_admitted": False,
     }
+    if projection_normalization is not None:
+        build_receipt["projection_normalization"] = projection_normalization
     receipt_path = output_dir / "build-receipt.json"
     receipt_bytes = _json_bytes(build_receipt)
     _write_bytes_atomic(receipt_path, receipt_bytes)

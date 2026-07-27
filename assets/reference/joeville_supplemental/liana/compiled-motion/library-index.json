@@ -447,9 +447,9 @@
       "authorship": "authored_full_size_imagegen_v1",
       "brief_id": null,
       "canonical_bbox": [
-        345,
-        231,
-        908,
+        362,
+        288,
+        891,
         1185
       ],
       "canonicalization_receipt": {
@@ -461,12 +461,38 @@
       "motion_slot_id": "motion-014",
       "pose_id": "liana_motion_014",
       "pose_summary": "Deep but athletic two-foot compression.",
+      "projection_normalization": {
+        "anchor": "visible_bbox_center_baseline",
+        "compiled_bbox": [
+          362,
+          288,
+          891,
+          1185
+        ],
+        "method": "per_pose_uniform_scale_v1",
+        "resampling": "nearest",
+        "scale_basis_points": 9400,
+        "schema_version": 1,
+        "source_bbox": [
+          345,
+          231,
+          908,
+          1185
+        ]
+      },
       "review_projection": true,
-      "rgba_sha256": "538e0ff336b00d4dece55f1d1a69e3cd980b22421f3e6a19a9eb77417cdc225a",
+      "rgba_sha256": "21420f8ea84400623c365e9612ab3513b4be430372fd7ee39cefc57ea92d3605",
       "runtime_admitted": false,
       "sequence_id": "g3",
+      "source_canonical_bbox": [
+        345,
+        231,
+        908,
+        1185
+      ],
       "source_frame_index": 2,
       "source_path": "assets/reference/joeville_supplemental/liana/authored-source/frames/liana_motion_014.png",
+      "source_rgba_sha256": "538e0ff336b00d4dece55f1d1a69e3cd980b22421f3e6a19a9eb77417cdc225a",
       "source_sha256": "26e89ac71b263f9dc64c8c47261bdb473c2083527a051b13ba1b8d25e688b5aa"
     },
     {
@@ -546,9 +572,9 @@
       "authorship": "authored_full_size_imagegen_v1",
       "brief_id": null,
       "canonical_bbox": [
-        352,
-        340,
-        902,
+        324,
+        255,
+        929,
         1185
       ],
       "canonicalization_receipt": {
@@ -560,12 +586,38 @@
       "motion_slot_id": "motion-017",
       "pose_id": "liana_motion_017",
       "pose_summary": "Apex clearance with knees compact and lateral balance readable.",
+      "projection_normalization": {
+        "anchor": "visible_bbox_center_baseline",
+        "compiled_bbox": [
+          324,
+          255,
+          929,
+          1185
+        ],
+        "method": "per_pose_uniform_scale_v1",
+        "resampling": "nearest",
+        "scale_basis_points": 11000,
+        "schema_version": 1,
+        "source_bbox": [
+          352,
+          340,
+          902,
+          1185
+        ]
+      },
       "review_projection": true,
-      "rgba_sha256": "35bba31789930f4afd769e7e2e74b5162b792d907404a0fd33c5c5b1a5cadf1b",
+      "rgba_sha256": "d0623d3dfb53aac2ac1ed935ecb3543cf3544d3b30656e8d4ede56b54e5622a3",
       "runtime_admitted": false,
       "sequence_id": "g3",
+      "source_canonical_bbox": [
+        352,
+        340,
+        902,
+        1185
+      ],
       "source_frame_index": 5,
       "source_path": "assets/reference/joeville_supplemental/liana/authored-source/frames/liana_motion_017.png",
+      "source_rgba_sha256": "35bba31789930f4afd769e7e2e74b5162b792d907404a0fd33c5c5b1a5cadf1b",
       "source_sha256": "3d64ab94b07340a4979316426e11abccfc4da10520539b38b011a08a2b8fb065"
     },
     {
@@ -645,9 +697,9 @@
       "authorship": "authored_full_size_imagegen_v1",
       "brief_id": null,
       "canonical_bbox": [
-        348,
-        294,
-        906,
+        376,
+        383,
+        878,
         1185
       ],
       "canonicalization_receipt": {
@@ -659,12 +711,38 @@
       "motion_slot_id": "motion-020",
       "pose_id": "liana_motion_020",
       "pose_summary": "Deep aligned absorption of landing force.",
+      "projection_normalization": {
+        "anchor": "visible_bbox_center_baseline",
+        "compiled_bbox": [
+          376,
+          383,
+          878,
+          1185
+        ],
+        "method": "per_pose_uniform_scale_v1",
+        "resampling": "nearest",
+        "scale_basis_points": 9000,
+        "schema_version": 1,
+        "source_bbox": [
+          348,
+          294,
+          906,
+          1185
+        ]
+      },
       "review_projection": true,
-      "rgba_sha256": "3ba1194a68210b892c8805b9dd77198c75f3e760a8eff4ccbe55a17dcb29dde9",
+      "rgba_sha256": "6a03dfa780a8109c9dc9acee0868605773ff233adcb6679a4ec2548be22b74ae",
       "runtime_admitted": false,
       "sequence_id": "g4",
+      "source_canonical_bbox": [
+        348,
+        294,
+        906,
+        1185
+      ],
       "source_frame_index": 2,
       "source_path": "assets/reference/joeville_supplemental/liana/authored-source/frames/liana_motion_020.png",
+      "source_rgba_sha256": "3ba1194a68210b892c8805b9dd77198c75f3e760a8eff4ccbe55a17dcb29dde9",
       "source_sha256": "0109c4d91387315461039c5ef5fc01bec71298dd6b3529514c614e70b4b4d26e"
     },
     {
@@ -1601,6 +1679,17 @@
     "minimum_margin": 69,
     "profile_id": "wizardjoe_hd_alpha_1254_v001"
   },
+  "projection_normalization": {
+    "anchor": "visible_bbox_center_baseline",
+    "method": "per_pose_uniform_scale_v1",
+    "resampling": "nearest",
+    "scale_basis_points": {
+      "liana_motion_014": 9400,
+      "liana_motion_017": 11000,
+      "liana_motion_020": 9000
+    },
+    "schema_version": 1
+  },
   "review_projection": true,
   "roster_state": "supplemental_authored_character",
   "runtime_admitted": false,
@@ -1811,7 +1900,7 @@
   "shards": [
     {
       "approval_state": "pending_visual_parity",
-      "bytes": 28725043,
+      "bytes": 28544482,
       "path": "liana-candidate-supplemental-48-v001.wjpose",
       "pose_count": 48,
       "pose_ids": [
@@ -1866,7 +1955,7 @@
       ],
       "review_projection": true,
       "runtime_admitted": false,
-      "sha256": "79535e1b310848bf23d3c8f5db170fdfc6657865a6fa8e0f03040d80630bafee",
+      "sha256": "c282f3845cfea4225d265fbff62eb95a9dc7e97db1aaa65068cfba3be7aa0339",
       "shard_id": "liana-supplemental-motion-48-v001",
       "source": "authored_supplemental_full_size"
     }
