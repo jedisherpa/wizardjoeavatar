@@ -1,0 +1,166 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://wizardjoe.local/schemas/character_choreography_dictionary_v1.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "dictionary_id",
+    "character_id",
+    "library_class",
+    "instructions",
+    "intent_bindings"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "dictionary_id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{0,127}$"
+    },
+    "character_id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{0,127}$"
+    },
+    "library_class": {
+      "enum": [
+        "comprehensive_performance",
+        "focused_performance",
+        "game_motion"
+      ]
+    },
+    "instructions": {
+      "$ref": "#/$defs/instructions"
+    },
+    "intent_bindings": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": false,
+      "patternProperties": {
+        "^[a-z][a-z0-9_]{0,63}$": {
+          "$ref": "#/$defs/intent_binding"
+        }
+      }
+    }
+  },
+  "$defs": {
+    "instructions": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "selection_unit",
+        "transition_policy",
+        "speech_motion_policy",
+        "locomotion_speech_policy",
+        "unsupported_intent_policy",
+        "repetition_window_ms",
+        "minimum_stillness_ms",
+        "maximum_gestures_per_phrase"
+      ],
+      "properties": {
+        "selection_unit": {
+          "enum": ["phrase", "beat", "command"]
+        },
+        "transition_policy": {
+          "enum": ["authored_graph", "neutral_bridge"]
+        },
+        "speech_motion_policy": {
+          "enum": ["layered", "whole_pose", "mouth_only", "unsupported"]
+        },
+        "locomotion_speech_policy": {
+          "enum": ["allowed", "restricted", "unsupported"]
+        },
+        "unsupported_intent_policy": {
+          "enum": ["characterful_neutral", "default_pose", "reject"]
+        },
+        "repetition_window_ms": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 600000
+        },
+        "minimum_stillness_ms": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 60000
+        },
+        "maximum_gestures_per_phrase": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 16
+        }
+      }
+    },
+    "intent_binding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "roles",
+        "pose_ids",
+        "action_ids",
+        "clip_ids",
+        "speech_compatible",
+        "interrupt_policy",
+        "minimum_hold_ms",
+        "recovery_intent"
+      ],
+      "properties": {
+        "roles": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "neutral",
+              "listening",
+              "speaking",
+              "gesture",
+              "reaction",
+              "locomotion",
+              "flight",
+              "game_action",
+              "transition",
+              "recovery"
+            ]
+          }
+        },
+        "pose_ids": {
+          "$ref": "#/$defs/identifier_array"
+        },
+        "action_ids": {
+          "$ref": "#/$defs/identifier_array"
+        },
+        "clip_ids": {
+          "$ref": "#/$defs/identifier_array"
+        },
+        "speech_compatible": {
+          "type": "boolean"
+        },
+        "interrupt_policy": {
+          "enum": [
+            "immediate",
+            "phrase_boundary",
+            "commit_then_recover"
+          ]
+        },
+        "minimum_hold_ms": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 60000
+        },
+        "recovery_intent": {
+          "type": ["string", "null"],
+          "pattern": "^[a-z][a-z0-9_]{0,63}$"
+        }
+      }
+    },
+    "identifier_array": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    }
+  }
+}

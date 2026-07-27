@@ -35,7 +35,7 @@ from .performance_release import (
 )
 from .performance_score import CompiledScoreRepository
 from .permission_world import CapabilityPermissionV1, PermissionWorldStateV1
-from .media_session import MediaSessionAckV1, MediaSessionSnapshotV1
+from .media_session import MediaSessionAck, MediaSessionSnapshot
 from .runtime import AvatarRuntime, ReplayLog, canonical_sha256
 
 
@@ -218,6 +218,13 @@ class WizardFrameHub:
                 getattr(
                     self.frame_source.character_package,
                     "runtime_profile_contract",
+                    None,
+                )
+            ),
+            choreography_dictionary=(
+                getattr(
+                    self.frame_source.character_package,
+                    "choreography_dictionary_contract",
                     None,
                 )
             ),
@@ -437,9 +444,9 @@ class WizardFrameHub:
 
     async def accept_media_session(
         self,
-        snapshot: MediaSessionSnapshotV1,
+        snapshot: MediaSessionSnapshot,
         receipt_monotonic_us: Optional[int] = None,
-    ) -> MediaSessionAckV1:
+    ) -> MediaSessionAck:
         await self.start()
         # Score loading and validation may touch disk. Complete that work before
         # entering the single-writer hub lock; scheduler ticks only resolve the

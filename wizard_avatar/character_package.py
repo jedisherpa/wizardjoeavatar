@@ -8,15 +8,30 @@ from types import MappingProxyType
 from typing import Any, Mapping, Tuple
 
 from .artifact_hashing import sha256_ref
+from .character_choreography import (
+    CharacterChoreographyDictionaryV1,
+    CharacterChoreographyValidationError,
+    load_character_choreography_dictionary_bytes,
+)
 from .character_runtime_profile import (
     CharacterRuntimeProfile,
     CharacterRuntimeProfileValidationError,
     load_character_runtime_profile_bytes,
 )
+from .models import ACTIONS
 
 
 DEFINITIONS_DIR = Path(__file__).with_name("definitions")
 WIZARD_JOE_PACKAGE_PATH = DEFINITIONS_DIR / "wizard_joe_character_package.json"
+WIZARD_JOE_CHOREOGRAPHY_DICTIONARY_PATH = (
+    DEFINITIONS_DIR / "wizard_joe_choreography_dictionary_v1.json"
+)
+_FROZEN_WIZARD_JOE_PACKAGE_SHA256 = (
+    "sha256:e35d9fee572e8f984a25a3776e2be51e1920b2a09f568170f12ccd3f0851b387"
+)
+_FROZEN_WIZARD_JOE_CHOREOGRAPHY_SHA256 = (
+    "sha256:53067d3ef426bbfcc3c3498dbde702c64dc85ba00e39cc3b6c7c62b24960f672"
+)
 _ANIMATION_GRAPHS_BY_CHARACTER_ID: Mapping[str, Path] = MappingProxyType({})
 _SHA256_REF = re.compile(r"^sha256:[0-9a-f]{64}$")
 _ASSET_ROLE = re.compile(r"^[a-z][a-z0-9_]{0,63}$")
@@ -37,6 +52,7 @@ SUPPORTED_RENDERERS = frozenset(
 _V2_REQUIRED_ASSET_ROLES = {
     "animation_graph",
     "capability_manifest",
+    "choreography_dictionary",
     "pose_library",
     "pose_manifest",
     "runtime_profile",
@@ -72,6 +88,9 @@ class CharacterPackage:
     runtime_profile: Path | None
     runtime_profile_contract: CharacterRuntimeProfile | None
     capability_manifest: Path | None
+    choreography_dictionary: Path | None
+    choreography_dictionary_sha256: str | None
+    choreography_dictionary_contract: CharacterChoreographyDictionaryV1 | None
     default_pose_id: str
     capabilities: Tuple[str, ...]
     render_mode: str
@@ -146,10 +165,54 @@ def _load_v1_package(
         pose_library.read_bytes(),
         animation_graph.read_bytes(),
     )
+    package_sha256 = sha256_ref(package_bytes)
+    choreography_dictionary = None
+    choreography_dictionary_sha256 = None
+    choreography_dictionary_contract = None
+    if (
+        raw["character_id"] == "wizard-joe-v1"
+        and package_sha256 == _FROZEN_WIZARD_JOE_PACKAGE_SHA256
+    ):
+        choreography_dictionary = WIZARD_JOE_CHOREOGRAPHY_DICTIONARY_PATH
+        try:
+            choreography_dictionary_bytes = choreography_dictionary.read_bytes()
+            choreography_dictionary_sha256 = sha256_ref(
+                choreography_dictionary_bytes
+            )
+            if (
+                choreography_dictionary_sha256
+                != _FROZEN_WIZARD_JOE_CHOREOGRAPHY_SHA256
+            ):
+                raise CharacterChoreographyValidationError(
+                    "frozen migration dictionary hash does not match"
+                )
+            choreography_dictionary_contract = (
+                load_character_choreography_dictionary_bytes(
+                    choreography_dictionary_bytes,
+                    character_id=str(raw["character_id"]),
+                    pose_ids=_pose_ids(
+                        json.loads(pose_library.read_text(encoding="utf-8"))
+                    ),
+                    action_ids=set(ACTIONS),
+                    clip_ids=_graph_clip_ids(
+                        json.loads(animation_graph.read_text(encoding="utf-8"))
+                    ),
+                )
+            )
+        except (
+            CharacterChoreographyValidationError,
+            OSError,
+            json.JSONDecodeError,
+        ) as exc:
+            raise CharacterPackageValidationError(
+                "legacy wizard choreography dictionary is invalid: {}".format(
+                    exc
+                )
+            ) from exc
     return CharacterPackage(
         schema_version=1,
         package_path=package_path,
-        package_sha256=sha256_ref(package_bytes),
+        package_sha256=package_sha256,
         character_id=str(raw["character_id"]),
         display_name=str(raw["display_name"]),
         renderer=str(raw["renderer"]),
@@ -163,6 +226,9 @@ def _load_v1_package(
         runtime_profile=None,
         runtime_profile_contract=None,
         capability_manifest=None,
+        choreography_dictionary=choreography_dictionary,
+        choreography_dictionary_sha256=choreography_dictionary_sha256,
+        choreography_dictionary_contract=choreography_dictionary_contract,
         default_pose_id=str(raw["default_pose_id"]),
         capabilities=capabilities,
         render_mode="cells",
@@ -295,6 +361,7 @@ def _load_v2_package(
         asset_contents["pose_library"],
         asset_contents["animation_graph"],
     )
+    choreography_dictionary_contract = None
     try:
         runtime_profile_contract = load_character_runtime_profile_bytes(
             asset_contents["runtime_profile"]
@@ -361,6 +428,27 @@ def _load_v2_package(
                 "runtime_profile references poses absent from graph clips: "
                 + ", ".join(missing_runtime_poses)
             )
+        choreography_action_ids = set(
+            runtime_profile_contract.action_poses
+        ) | {"idle", "speaking"}
+        if runtime_profile_contract.locomotion_cycles["walk"]:
+            choreography_action_ids.add("walking")
+        if runtime_profile_contract.locomotion_cycles["run"]:
+            choreography_action_ids.add("dash")
+        try:
+            choreography_dictionary_contract = (
+                load_character_choreography_dictionary_bytes(
+                    asset_contents["choreography_dictionary"],
+                    character_id=str(raw["character_id"]),
+                    pose_ids=pose_ids,
+                    action_ids=choreography_action_ids,
+                    clip_ids=set(animation_graph_contract.clips),
+                )
+            )
+        except CharacterChoreographyValidationError as exc:
+            raise CharacterPackageValidationError(
+                "choreography_dictionary is invalid: {}".format(exc)
+            ) from exc
         _validate_v2_capability_profile(
             asset_contents["capability_manifest"],
             character_id=str(raw["character_id"]),
@@ -409,6 +497,11 @@ def _load_v2_package(
         runtime_profile=assets["runtime_profile"].path,
         runtime_profile_contract=runtime_profile_contract,
         capability_manifest=assets["capability_manifest"].path,
+        choreography_dictionary=assets["choreography_dictionary"].path,
+        choreography_dictionary_sha256=assets[
+            "choreography_dictionary"
+        ].sha256,
+        choreography_dictionary_contract=choreography_dictionary_contract,
         default_pose_id=str(raw["default_pose_id"]),
         capabilities=capabilities,
         render_mode="rgba" if is_hd_rgba else "cells",
@@ -596,6 +689,26 @@ def _graph_pose_ids(raw: Any) -> set[str]:
             if isinstance(sample, Mapping) and isinstance(sample.get("pose_id"), str):
                 result.add(sample["pose_id"])
     return result
+
+
+def _graph_clip_ids(raw: Any) -> set[str]:
+    if not isinstance(raw, Mapping):
+        raise CharacterPackageValidationError(
+            "animation graph does not expose clips"
+        )
+    clips = raw.get("clips")
+    if isinstance(clips, Mapping):
+        return {str(clip_id) for clip_id in clips}
+    if isinstance(clips, list):
+        return {
+            str(clip.get("clip_id"))
+            for clip in clips
+            if isinstance(clip, Mapping)
+            and isinstance(clip.get("clip_id"), str)
+        }
+    raise CharacterPackageValidationError(
+        "animation graph does not expose clips"
+    )
 
 
 def _validate_v2_capability_profile(

@@ -118,7 +118,11 @@ class SerenaQuillMigrationTests(unittest.TestCase):
 
         self.assertEqual(package.character_id, "serena-quill-v1")
         self.assertEqual(package.schema_version, 2)
-        self.assertEqual(len(package.assets), 10)
+        self.assertEqual(len(package.assets), 11)
+        self.assertEqual(
+            package.choreography_dictionary_contract.library_class,
+            "focused_performance",
+        )
         self.assertEqual(
             self.capabilities["status"],
             "migration_candidate_not_registered",

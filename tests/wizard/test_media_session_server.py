@@ -1,11 +1,17 @@
 import json
 import os
 import unittest
+from pathlib import Path
 from unittest import mock
 
 from wizard_avatar.server import create_app
 
-from tests.wizard.test_media_session import snapshot_mapping
+FIXTURE = (
+    Path(__file__).parent
+    / "fixtures"
+    / "audiobook_contracts"
+    / "media_session_snapshot_v2.json"
+)
 
 
 async def asgi_request(app, method, path, body=b"", headers=()):
@@ -51,9 +57,41 @@ async def asgi_request(app, method, path, body=b"", headers=()):
 
 
 class MediaSessionServerTests(unittest.IsolatedAsyncioTestCase):
-    def live_body(self, character_id="wizard-joe"):
-        value = snapshot_mapping(kind="music", mode="music", with_hashes=False)
-        value["performance"]["character_id"] = character_id
+    def live_body(self):
+        value = json.loads(FIXTURE.read_text(encoding="utf-8"))
+        value["sequence"] = 0
+        value["media_epoch"] = 0
+        value["cause"] = "initial"
+        value["media"].update(
+            {
+                "media_id": "live-main",
+                "media_sha256": None,
+                "kind": "music",
+                "source_slot": "main",
+                "source_kind": "library",
+                "book_id": None,
+                "chapter_id": None,
+                "duration_ms": 60_000,
+            }
+        )
+        value["playback"].update(
+            {
+                "state": "playing",
+                "position_ms": 0,
+                "rate_milli": 1000,
+                "seeking": False,
+            }
+        )
+        value["performance"].update(
+            {
+                "mode": "music",
+                "score_id": None,
+                "score_revision": None,
+                "score_sha256": None,
+                "motion_profile": "full",
+                "disabled_channels": [],
+            }
+        )
         return json.dumps(value, separators=(",", ":")).encode("utf-8")
 
     async def test_connector_is_disabled_without_explicit_configuration(self):
@@ -81,7 +119,7 @@ class MediaSessionServerTests(unittest.IsolatedAsyncioTestCase):
         }
         with mock.patch.dict(os.environ, env, clear=True):
             app = create_app()
-        body = self.live_body(app.state.frame_hub.performance.character_id)
+        body = self.live_body()
         common = (("content-type", "application/json"),)
 
         unauthorized, _ = await asgi_request(
@@ -122,6 +160,11 @@ class MediaSessionServerTests(unittest.IsolatedAsyncioTestCase):
         self.assertEqual(accepted, 200)
         self.assertEqual(payload["disposition"], "accepted")
         self.assertEqual(payload["scheduler_state"], "scoreless")
+        self.assertEqual(payload["schema_version"], 2)
+        self.assertEqual(
+            payload["runtime_admission"]["character_id"],
+            "wizard-joe-v1",
+        )
 
         state_status, state_payload = await asgi_request(
             app, "GET", "/api/avatar/wizard/state"

@@ -7,6 +7,10 @@ from typing import Iterable, Mapping, Optional
 
 from .animation_graph import AnimationGraph, load_reference_animation_graph_v2
 from .artifact_hashing import canonical_json_v1, sha256_ref
+from .character_choreography import (
+    CharacterChoreographyDictionaryV1,
+    ChoreographyIntentBindingV1,
+)
 from .character_registry import CharacterRegistry
 from .character_runtime_profile import CharacterRuntimeProfile
 from .controller import WizardAvatarController
@@ -18,7 +22,14 @@ from .live_speech_score import (
     compile_live_speech_score,
     publish_live_speech_score,
 )
-from .media_session import MediaSessionAckV1, MediaSessionCoordinator, MediaSessionSnapshotV1
+from .media_session import (
+    MediaSessionAck,
+    MediaSessionAdmissionV1,
+    MediaSessionCoordinator,
+    MediaSessionSnapshot,
+    MediaSessionSnapshotV1,
+    MediaSessionSnapshotV2,
+)
 from .models import ACTIONS, DIRECTIONS, EXPRESSIONS, MOUTH_SHAPES
 from .performance_context import PerformanceContextV1
 from .performance_release import (
@@ -76,6 +87,10 @@ _MOUTH_MAP = {
 _PERFORMANCE_ACTIONS = frozenset(
     {"speaking", "explaining", "flourish", "staff_spin", "celebrate", "reaction"}
 )
+_LEGACY_MEDIA_V1_CHARACTER_ID = "wizard-joe-v1"
+_LEGACY_MEDIA_V1_PACKAGE_DIGEST = (
+    "sha256:e35d9fee572e8f984a25a3776e2be51e1920b2a09f568170f12ccd3f0851b387"
+)
 
 
 @dataclass(frozen=True)
@@ -118,6 +133,9 @@ class PerformanceApplication:
         capability_manifest: Optional[Mapping[str, object]] = None,
         animation_graph: Optional[AnimationGraph] = None,
         runtime_profile: Optional[CharacterRuntimeProfile] = None,
+        choreography_dictionary: Optional[
+            CharacterChoreographyDictionaryV1
+        ] = None,
         pose_library_digest: Optional[str] = None,
         graph_digest: Optional[str] = None,
         admitted_pose_ids: Optional[Iterable[str]] = None,
@@ -185,8 +203,22 @@ class PerformanceApplication:
             if score_repository is not None
             else None
         )
+        media_runtime_admission = (
+            None
+            if character_admission is None
+            else MediaSessionAdmissionV1(
+                schema_version=character_admission.schema_version,
+                persona_id=character_admission.persona_id,
+                character_id=character_admission.character_id,
+                package_digest=character_admission.package_sha256,
+                admission_sha256=character_admission.admission_sha256,
+            )
+        )
         self.scheduler = PerformanceScheduler(
-            coordinator=MediaSessionCoordinator(runtime_epoch),
+            coordinator=MediaSessionCoordinator(
+                runtime_epoch,
+                runtime_admission=media_runtime_admission,
+            ),
             score_resolver=(
                 self.score_runtime.resolve if self.score_runtime is not None else None
             ),
@@ -197,6 +229,7 @@ class PerformanceApplication:
             else load_reference_animation_graph_v2()
         )
         self.runtime_profile = runtime_profile
+        self.choreography_dictionary = choreography_dictionary
         self._last_applied_action: Optional[str] = None
         self._last_applied_pose: Optional[str] = None
         self._last_applied_mouth: Optional[str] = None
@@ -264,6 +297,18 @@ class PerformanceApplication:
             return bool(self.runtime_profile.locomotion_cycles.get("walk", ()))
         return action in {"idle", "speaking"} or action in self.runtime_profile.action_poses
 
+    def choreography_binding(
+        self,
+        intent_id: str,
+        *,
+        allow_fallback: bool = True,
+    ) -> Optional[ChoreographyIntentBindingV1]:
+        if self.choreography_dictionary is None:
+            return None
+        if not allow_fallback:
+            return self.choreography_dictionary.intent_bindings.get(intent_id)
+        return self.choreography_dictionary.binding_for_intent(intent_id)
+
     @property
     def paused(self) -> bool:
         return self._paused
@@ -279,9 +324,9 @@ class PerformanceApplication:
 
     def accept_snapshot(
         self,
-        snapshot: MediaSessionSnapshotV1,
+        snapshot: MediaSessionSnapshot,
         receipt_monotonic_us: int,
-    ) -> MediaSessionAckV1:
+    ) -> MediaSessionAck:
         identity_error = self._snapshot_identity_error(snapshot)
         if identity_error is not None:
             return self.scheduler.coordinator.reject_without_mutation(
@@ -314,7 +359,7 @@ class PerformanceApplication:
 
     def prepare_snapshot(
         self,
-        snapshot: MediaSessionSnapshotV1,
+        snapshot: MediaSessionSnapshot,
     ) -> ScorePreparationResult:
         """Prepare a bound score; call this through ``asyncio.to_thread``."""
 
@@ -343,22 +388,33 @@ class PerformanceApplication:
 
     def _snapshot_identity_error(
         self,
-        snapshot: MediaSessionSnapshotV1,
+        snapshot: MediaSessionSnapshot,
     ) -> Optional[str]:
         if self.package_digest == _UNBOUND_DIGEST:
             return None
+        if not self.runtime_admitted or self.character_admission is None:
+            return "character_not_runtime_admitted"
+        if isinstance(snapshot, MediaSessionSnapshotV1):
+            if (
+                snapshot.performance.character_id
+                != _LEGACY_MEDIA_V1_CHARACTER_ID
+                or snapshot.performance.character_package_sha256
+                != _LEGACY_MEDIA_V1_PACKAGE_DIGEST
+                or self.character_id != _LEGACY_MEDIA_V1_CHARACTER_ID
+                or self.package_digest != _LEGACY_MEDIA_V1_PACKAGE_DIGEST
+            ):
+                return "legacy_schema_not_allowed"
+            return None
+        if not isinstance(snapshot, MediaSessionSnapshotV2):
+            return "schema_version_unsupported"
+        if snapshot.performance.persona_id != self.persona_id:
+            return "persona_mismatch"
         if snapshot.performance.character_id != self.character_id:
             return "character_mismatch"
-        package_sha256 = snapshot.performance.character_package_sha256
-        legacy_wizard_scoreless = (
-            snapshot.performance.score_id is None
-            and self.character_id in {"wizard-joe", "wizard-joe-v1"}
-            and self.package_schema_version in {None, 1}
-        )
-        if package_sha256 is None and legacy_wizard_scoreless:
-            return None
-        if package_sha256 != self.package_digest:
+        if snapshot.performance.character_package_sha256 != self.package_digest:
             return "package_mismatch"
+        if snapshot.performance.admission_sha256 != self.admission_sha256:
+            return "admission_mismatch"
         return None
 
     def capture_performance_context(
@@ -614,7 +670,7 @@ class PerformanceApplication:
 
     def _reconcile_live_score_preparations(
         self,
-        snapshot: MediaSessionSnapshotV1,
+        snapshot: MediaSessionSnapshot,
         now_monotonic_us: int,
     ) -> None:
         for key, grant in tuple(self._live_score_preparations.items()):
@@ -645,7 +701,7 @@ class PerformanceApplication:
     def _validate_live_score_preparation(
         grant: _LiveScorePreparationGrant,
         registration: GovernedSpeechRegistrationV1,
-        snapshot: MediaSessionSnapshotV1,
+        snapshot: MediaSessionSnapshot,
     ) -> None:
         prepared = grant.prepared
         preliminary = prepared.preliminary_context
@@ -1126,7 +1182,7 @@ class PerformanceApplication:
             diagnostics["score_runtime"] = self.score_runtime.diagnostics_mapping(snapshot)
         return diagnostics
 
-    def _is_live(self, snapshot: MediaSessionSnapshotV1, now_monotonic_us: int) -> bool:
+    def _is_live(self, snapshot: MediaSessionSnapshot, now_monotonic_us: int) -> bool:
         if snapshot.playback.state != "playing":
             return False
         age = self.scheduler.coordinator.clock.age_us(now_monotonic_us)
@@ -1168,7 +1224,7 @@ class PerformanceApplication:
 
     def _resolve_action(
         self,
-        snapshot: MediaSessionSnapshotV1,
+        snapshot: MediaSessionSnapshot,
         resolved: ResolvedPerformanceState,
         speaking: bool,
         controller: Optional[WizardAvatarController] = None,
@@ -1194,8 +1250,38 @@ class PerformanceApplication:
         if speaking:
             # Scoreless speech owns the face, not a repeating whole-body pose.
             # Authored gesture tracks above may still request a motivated accent.
+            if (
+                self.choreography_dictionary is not None
+                and self.choreography_dictionary.instructions.speech_motion_policy
+                == "unsupported"
+            ):
+                return None
+            binding = self.choreography_binding(
+                "speak",
+                allow_fallback=False,
+            )
+            if binding is not None:
+                for action in binding.action_ids:
+                    if supports_action(action):
+                        return action
+                return None
             return "speaking"
         if snapshot.performance.mode == "music":
+            binding = self.choreography_binding(
+                "music",
+                allow_fallback=False,
+            )
+            if binding is not None:
+                candidates = tuple(
+                    action
+                    for action in binding.action_ids
+                    if supports_action(action)
+                )
+                if candidates:
+                    return candidates[
+                        (resolved.media_time_ms // 500) % len(candidates)
+                    ]
+                return None
             candidates = tuple(
                 action
                 for action in ("flourish", "staff_spin", "celebrate", "reaction")

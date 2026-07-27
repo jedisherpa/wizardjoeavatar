@@ -42,12 +42,12 @@ class CharacterCapabilityPortabilityTests(unittest.TestCase):
         self.assertEqual(first["character"]["package_schema_version"], 2)
         self.assertEqual(
             first["manifest_sha256"],
-            "sha256:de5fa711d8cec6cd4050bee9793cc14958f030ccd086eba24e529c3af3a1466e",
+            "sha256:1091df47baf476ea34051fc124e484291c3919212704dc4eb34536249eae42f1",
         )
         self.assertEqual(first["character"]["character_id"], "serena-quill-v1")
         self.assertEqual(
             first["sources"]["package_sha256"],
-            "sha256:30b5540c8d13cf579776961ce1b31839513a4e184355ec7a35cd16b4a98bc4e5",
+            "sha256:33b37cfb14f95664992f9bd01d7a8b8474500f092a72d74d3cba53f96404e4d0",
         )
         self.assertEqual(
             first["sources"]["runtime_vocabulary_sha256"],

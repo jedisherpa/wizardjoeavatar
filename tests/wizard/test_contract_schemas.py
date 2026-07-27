@@ -64,7 +64,11 @@ class ContractSchemaTests(unittest.TestCase):
             with self.subTest(contract=contract_name):
                 schema = json.loads((SCHEMA_DIR / filename).read_text(encoding="utf-8"))
                 self.assertEqual(schema["$schema"], DRAFT_2020_12)
-                self.assertEqual(schema["properties"]["schema_version"]["const"], 1)
+                expected_version = 2 if contract_name.endswith("V2") else 1
+                self.assertEqual(
+                    schema["properties"]["schema_version"]["const"],
+                    expected_version,
+                )
                 inspect(schema, "$schema")
 
     def test_unknown_fields_and_versions_fail_at_root_and_nested_boundaries(self):

@@ -8,6 +8,10 @@
       "path": "serena_quill_capability_profile_v1.json",
       "sha256": "sha256:9519827d02aaa1cd2535074b3eb1d3c21cdd5f3a71c788d5126fc6e84294853d"
     },
+    "choreography_dictionary": {
+      "path": "serena_quill_choreography_dictionary_v1.json",
+      "sha256": "sha256:df4425f85560489bb02290007b2e4fd1b7234403bc1a29e564435d34a40499b0"
+    },
     "extraction_audit": {
       "path": "intake/serena_quill_extraction_audit.json",
       "sha256": "sha256:577eb6f58dd03ce95a08243cbd40dc5f1f1309cc532e1ae5c433f5adc3bd790f"

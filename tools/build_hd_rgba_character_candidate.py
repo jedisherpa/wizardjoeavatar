@@ -776,6 +776,156 @@ def _runtime_profile(index: Mapping[str, Any]) -> dict[str, Any]:
     }
 
 
+def _choreography_dictionary(
+    index: Mapping[str, Any],
+) -> dict[str, Any]:
+    character_id = str(index["character_id"])
+
+    def pose(family: str, family_index: int) -> str:
+        return _pose_id(index, family, family_index)
+
+    def binding(
+        *,
+        roles: list[str],
+        pose_ids: list[str],
+        action_ids: list[str],
+        clip_ids: list[str],
+        speech_compatible: bool,
+        interrupt_policy: str,
+        minimum_hold_ms: int,
+        recovery_intent: str | None,
+    ) -> dict[str, Any]:
+        return {
+            "roles": roles,
+            "pose_ids": pose_ids,
+            "action_ids": action_ids,
+            "clip_ids": clip_ids,
+            "speech_compatible": speech_compatible,
+            "interrupt_policy": interrupt_policy,
+            "minimum_hold_ms": minimum_hold_ms,
+            "recovery_intent": recovery_intent,
+        }
+
+    return {
+        "schema_version": 1,
+        "dictionary_id": "choreography:{}-v1".format(character_id),
+        "character_id": character_id,
+        "library_class": "comprehensive_performance",
+        "instructions": {
+            "selection_unit": "phrase",
+            "transition_policy": "authored_graph",
+            "speech_motion_policy": "whole_pose",
+            "locomotion_speech_policy": "allowed",
+            "unsupported_intent_policy": "characterful_neutral",
+            "repetition_window_ms": 12000,
+            "minimum_stillness_ms": 650,
+            "maximum_gestures_per_phrase": 2,
+        },
+        "intent_bindings": {
+            "neutral": binding(
+                roles=["neutral", "recovery"],
+                pose_ids=[pose("ACT", 1)],
+                action_ids=[],
+                clip_ids=["idle_front"],
+                speech_compatible=True,
+                interrupt_policy="immediate",
+                minimum_hold_ms=650,
+                recovery_intent=None,
+            ),
+            "listen": binding(
+                roles=["listening"],
+                pose_ids=[pose("ACT", 1)],
+                action_ids=[],
+                clip_ids=["idle_front"],
+                speech_compatible=False,
+                interrupt_policy="immediate",
+                minimum_hold_ms=850,
+                recovery_intent="neutral",
+            ),
+            "speak": binding(
+                roles=["speaking"],
+                pose_ids=[pose("ACT", 12)],
+                action_ids=["explaining"],
+                clip_ids=["action_explaining"],
+                speech_compatible=True,
+                interrupt_policy="phrase_boundary",
+                minimum_hold_ms=400,
+                recovery_intent="neutral",
+            ),
+            "explain": binding(
+                roles=["gesture", "speaking"],
+                pose_ids=[pose("ACT", 12), pose("ACT", 39)],
+                action_ids=["explaining", "flourish"],
+                clip_ids=["action_explaining", "action_flourish"],
+                speech_compatible=True,
+                interrupt_policy="phrase_boundary",
+                minimum_hold_ms=650,
+                recovery_intent="speak",
+            ),
+            "pointing": binding(
+                roles=["gesture"],
+                pose_ids=[pose("ACT", 16)],
+                action_ids=["pointing"],
+                clip_ids=["action_pointing"],
+                speech_compatible=True,
+                interrupt_policy="commit_then_recover",
+                minimum_hold_ms=500,
+                recovery_intent="speak",
+            ),
+            "think": binding(
+                roles=["reaction"],
+                pose_ids=[pose("ACT", 61)],
+                action_ids=["thinking"],
+                clip_ids=["action_thinking"],
+                speech_compatible=False,
+                interrupt_policy="immediate",
+                minimum_hold_ms=850,
+                recovery_intent="neutral",
+            ),
+            "celebrate": binding(
+                roles=["gesture", "reaction"],
+                pose_ids=[pose("ACT", 42)],
+                action_ids=["celebrate"],
+                clip_ids=["action_celebrate"],
+                speech_compatible=True,
+                interrupt_policy="commit_then_recover",
+                minimum_hold_ms=750,
+                recovery_intent="neutral",
+            ),
+            "walking": binding(
+                roles=["locomotion"],
+                pose_ids=[pose("ACT", index) for index in range(76, 80)],
+                action_ids=[],
+                clip_ids=["walk_front"],
+                speech_compatible=True,
+                interrupt_policy="commit_then_recover",
+                minimum_hold_ms=800,
+                recovery_intent="neutral",
+            ),
+            "flying": binding(
+                roles=["flight", "locomotion"],
+                pose_ids=[pose("FLY", index) for index in range(14, 18)],
+                action_ids=[],
+                clip_ids=["glide_cycle"],
+                speech_compatible=True,
+                interrupt_policy="commit_then_recover",
+                minimum_hold_ms=900,
+                recovery_intent="neutral",
+            ),
+            "hover": binding(
+                roles=["flight", "speaking"],
+                pose_ids=[pose("FLY", 40), pose("FLY", 43), pose("FLY", 44)],
+                action_ids=[],
+                clip_ids=["hover_cycle"],
+                speech_compatible=True,
+                interrupt_policy="phrase_boundary",
+                minimum_hold_ms=700,
+                recovery_intent="flying",
+            ),
+        },
+    }
+
+
 def build_candidate(index_path: Path, destination: Path) -> dict[str, Any]:
     index_path = Path(index_path).resolve()
     source_root = index_path.parent
@@ -811,6 +961,7 @@ def build_candidate(index_path: Path, destination: Path) -> dict[str, Any]:
     pose_ids = [str(pose["pose_id"]) for pose in candidate_index["poses"]]
     graph = _graph(candidate_index, pose_ids)
     profile = _runtime_profile(candidate_index)
+    choreography = _choreography_dictionary(candidate_index)
     package_capabilities = [
         "seven_view_static_facing_with_declared_northeast_fallback",
         "source_backed_whole_pose_actions",
@@ -834,6 +985,10 @@ def build_candidate(index_path: Path, destination: Path) -> dict[str, Any]:
         "runtime_profile": (
             "{}-runtime-profile-v2.json".format(character_id),
             profile,
+        ),
+        "choreography_dictionary": (
+            "{}-choreography-dictionary-v1.json".format(character_id),
+            choreography,
         ),
     }
     asset_records: dict[str, dict[str, str]] = {}

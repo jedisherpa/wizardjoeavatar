@@ -71,6 +71,14 @@ class CharacterRegistryTests(unittest.TestCase):
                     "runtime_admitted": True,
                     "default_pose_id": package.default_pose_id,
                     "capabilities": package.capabilities,
+                    "choreography": {
+                        "dictionary_id": "choreography:wizard-joe-v1",
+                        "dictionary_sha256": (
+                            "sha256:53067d3ef426bbfcc3c3498dbde702c64"
+                            "dc85ba00e39cc3b6c7c62b24960f672"
+                        ),
+                        "library_class": "comprehensive_performance",
+                    },
                 },
             ),
         )

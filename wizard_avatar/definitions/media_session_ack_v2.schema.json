@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://wizardjoe.local/schemas/media_session_ack_v2.schema.json",
+  "title": "MediaSessionAckV2",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "connector_session_id", "accepted_sequence", "accepted_media_epoch", "disposition", "wizard_runtime_epoch", "runtime_admission", "resync_required", "scheduler_state", "error", "capabilities"],
+  "properties": {
+    "schema_version": {"const": 2},
+    "connector_session_id": {"$ref": "#/$defs/uuid_v4"},
+    "accepted_sequence": {"$ref": "#/$defs/count"},
+    "accepted_media_epoch": {"$ref": "#/$defs/count"},
+    "disposition": {"enum": ["accepted", "duplicate", "stale", "rejected", "resync_required", "controller_conflict", "unavailable"]},
+    "wizard_runtime_epoch": {"$ref": "#/$defs/id"},
+    "runtime_admission": {"oneOf": [{"type": "null"}, {"$ref": "#/$defs/admission"}]},
+    "resync_required": {"type": "boolean"},
+    "scheduler_state": {"enum": ["no_session", "loading_score", "ready", "playing", "paused", "buffering", "seeking", "clock_uncertain", "stopped", "ended", "scoreless", "error"]},
+    "error": {
+      "oneOf": [
+        {"type": "null"},
+        {"type": "object", "additionalProperties": false, "required": ["code"], "properties": {"code": {"type": "string", "pattern": "^[a-z][a-z0-9_]{0,63}$"}}}
+      ]
+    },
+    "capabilities": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["media_session_schema", "supported_media_session_schemas", "max_snapshot_hz", "supported_rate_milli", "motion_profiles"],
+      "properties": {
+        "media_session_schema": {"const": 2},
+        "supported_media_session_schemas": {"const": [1, 2]},
+        "max_snapshot_hz": {"type": "integer", "minimum": 1, "maximum": 60},
+        "supported_rate_milli": {"const": [500, 750, 1000, 1250, 1500, 2000]},
+        "motion_profiles": {"const": ["full", "reduced", "still"]}
+      }
+    }
+  },
+  "$defs": {
+    "uuid_v4": {"type": "string", "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"},
+    "id": {"type": "string", "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._:-]{0,127}$"},
+    "hash": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+    "count": {"type": "integer", "minimum": 0, "maximum": 9007199254740991},
+    "admission": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schema_version", "persona_id", "character_id", "package_digest", "admission_sha256"],
+      "properties": {
+        "schema_version": {"const": 1},
+        "persona_id": {"$ref": "#/$defs/id"},
+        "character_id": {"$ref": "#/$defs/id"},
+        "package_digest": {"$ref": "#/$defs/hash"},
+        "admission_sha256": {"$ref": "#/$defs/hash"}
+      }
+    }
+  }
+}

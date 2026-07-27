@@ -15,7 +15,7 @@ from .governed_performance import (
     GovernedPerformanceError,
     GovernedPerformanceGate,
 )
-from .media_session import MediaSessionSnapshotV1
+from .media_session import MediaSessionSnapshot
 from .performance_context import (
     PERFORMANCE_CONTEXT_MAX_BODY_BYTES,
     RELATIONAL_STANCES,
@@ -313,7 +313,7 @@ class GovernedSpeechRuntime:
     def register(
         self,
         registration: GovernedSpeechRegistrationV1,
-        snapshot: MediaSessionSnapshotV1,
+        snapshot: MediaSessionSnapshot,
         *,
         runtime_epoch: str,
         character_id: str,
@@ -457,7 +457,7 @@ class GovernedSpeechRuntime:
 
     def reconcile(
         self,
-        snapshot: MediaSessionSnapshotV1,
+        snapshot: MediaSessionSnapshot,
         reconciliation_generation: int,
         *,
         hard_reconcile: bool,
@@ -508,7 +508,7 @@ class GovernedSpeechRuntime:
 
     def evaluate(
         self,
-        snapshot: MediaSessionSnapshotV1,
+        snapshot: MediaSessionSnapshot,
         media_time_ms: int,
         now_monotonic_us: int,
         reconciliation_generation: int,

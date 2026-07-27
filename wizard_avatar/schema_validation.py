@@ -8,7 +8,7 @@ from collections.abc import Mapping
 from pathlib import Path
 from typing import Dict, Iterable, List, Optional, Sequence, Tuple, Union
 
-from .artifact_hashing import MAX_SAFE_INTEGER, canonical_json_v1
+from .artifact_hashing import MAX_SAFE_INTEGER, canonical_json_v1, sha256_ref
 
 
 DRAFT_2020_12 = "https://json-schema.org/draft/2020-12/schema"
@@ -26,6 +26,8 @@ SCHEMA_FILES = {
     "CompiledPerformanceScoreV1": "compiled_performance_score_v1.schema.json",
     "MediaSessionSnapshotV1": "media_session_snapshot_v1.schema.json",
     "MediaSessionAckV1": "media_session_ack_v1.schema.json",
+    "MediaSessionSnapshotV2": "media_session_snapshot_v2.schema.json",
+    "MediaSessionAckV2": "media_session_ack_v2.schema.json",
 }
 
 
@@ -491,19 +493,56 @@ def _validate_snapshot(value: Mapping[str, object]) -> None:
         value["media"]["media_sha256"],
         "$.media.media_id",
     )
-    if value["playback"]["position_ms"] > value["media"]["duration_ms"]:
+    duration_ms = value["media"]["duration_ms"]
+    if duration_ms is not None and value["playback"]["position_ms"] > duration_ms:
         raise _error("position_out_of_bounds", "$.playback.position_ms", "position exceeds duration")
     channels = value["performance"]["disabled_channels"]
     if channels != sorted(channels) or len(channels) != len(set(channels)):
         raise _error("invalid_enum", "$.performance.disabled_channels", "channels must be sorted and unique")
 
 
+def _validate_media_session_admission(
+    admission: Mapping[str, object],
+    path: str,
+) -> None:
+    content = {
+        "schema_version": admission["schema_version"],
+        "persona_id": admission["persona_id"],
+        "character_id": admission["character_id"],
+        "package_digest": admission["package_digest"],
+    }
+    if admission["admission_sha256"] != sha256_ref(canonical_json_v1(content)):
+        raise _error(
+            "hash_mismatch",
+            path + ".admission_sha256",
+            "admission hash does not match canonical identity content",
+        )
+
+
+def _validate_snapshot_v2(value: Mapping[str, object]) -> None:
+    _validate_snapshot(value)
+    _validate_media_session_admission(
+        value["performance"]["admission"],
+        "$.performance.admission",
+    )
+
+
 def _validate_ack(value: Mapping[str, object]) -> None:
     rates = value["capabilities"]["supported_rate_milli"]
     if rates != sorted(rates) or len(rates) != len(set(rates)):
         raise _error("invalid_enum", "$.capabilities.supported_rate_milli", "rates must be sorted and unique")
-    if value["disposition"] in {"rejected", "resync_required"} and value["error_code"] is None:
-        raise _error("missing_field", "$.error_code", "error_code is required for this disposition")
+    if value["disposition"] in {"rejected", "resync_required"} and value["error"] is None:
+        raise _error("missing_field", "$.error", "error is required for this disposition")
+
+
+def _validate_ack_v2(value: Mapping[str, object]) -> None:
+    _validate_ack(value)
+    runtime_admission = value["runtime_admission"]
+    if runtime_admission is not None:
+        _validate_media_session_admission(
+            runtime_admission,
+            "$.runtime_admission",
+        )
 
 
 SEMANTIC_VALIDATORS = {
@@ -518,6 +557,8 @@ SEMANTIC_VALIDATORS = {
     "CompiledPerformanceScoreV1": _validate_compiled,
     "MediaSessionSnapshotV1": _validate_snapshot,
     "MediaSessionAckV1": _validate_ack,
+    "MediaSessionSnapshotV2": _validate_snapshot_v2,
+    "MediaSessionAckV2": _validate_ack_v2,
 }
 
 

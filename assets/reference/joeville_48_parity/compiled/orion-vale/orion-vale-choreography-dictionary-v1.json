@@ -1,0 +1,94 @@
+{
+  "character_id": "orion-vale",
+  "dictionary_id": "choreography:orion-vale-game-v1",
+  "instructions": {
+    "locomotion_speech_policy": "unsupported",
+    "maximum_gestures_per_phrase": 0,
+    "minimum_stillness_ms": 500,
+    "repetition_window_ms": 4000,
+    "selection_unit": "command",
+    "speech_motion_policy": "unsupported",
+    "transition_policy": "neutral_bridge",
+    "unsupported_intent_policy": "default_pose"
+  },
+  "intent_bindings": {
+    "game_cycle": {
+      "action_ids": [],
+      "clip_ids": [],
+      "interrupt_policy": "commit_then_recover",
+      "minimum_hold_ms": 750,
+      "pose_ids": [
+        "orion_vale_motion_001",
+        "orion_vale_motion_002",
+        "orion_vale_motion_003",
+        "orion_vale_motion_004",
+        "orion_vale_motion_005",
+        "orion_vale_motion_006",
+        "orion_vale_motion_007",
+        "orion_vale_motion_008",
+        "orion_vale_motion_009",
+        "orion_vale_motion_010",
+        "orion_vale_motion_011",
+        "orion_vale_motion_012",
+        "orion_vale_motion_013",
+        "orion_vale_motion_014",
+        "orion_vale_motion_015",
+        "orion_vale_motion_016",
+        "orion_vale_motion_017",
+        "orion_vale_motion_018",
+        "orion_vale_motion_019",
+        "orion_vale_motion_020",
+        "orion_vale_motion_021",
+        "orion_vale_motion_022",
+        "orion_vale_motion_023",
+        "orion_vale_motion_024",
+        "orion_vale_motion_025",
+        "orion_vale_motion_026",
+        "orion_vale_motion_027",
+        "orion_vale_motion_028",
+        "orion_vale_motion_029",
+        "orion_vale_motion_030",
+        "orion_vale_motion_031",
+        "orion_vale_motion_032",
+        "orion_vale_motion_033",
+        "orion_vale_motion_034",
+        "orion_vale_motion_035",
+        "orion_vale_motion_036",
+        "orion_vale_motion_037",
+        "orion_vale_motion_038",
+        "orion_vale_motion_039",
+        "orion_vale_motion_040",
+        "orion_vale_motion_041",
+        "orion_vale_motion_042",
+        "orion_vale_motion_043",
+        "orion_vale_motion_044",
+        "orion_vale_motion_045",
+        "orion_vale_motion_046",
+        "orion_vale_motion_047",
+        "orion_vale_motion_048"
+      ],
+      "recovery_intent": "neutral",
+      "roles": [
+        "game_action"
+      ],
+      "speech_compatible": false
+    },
+    "neutral": {
+      "action_ids": [],
+      "clip_ids": [],
+      "interrupt_policy": "immediate",
+      "minimum_hold_ms": 500,
+      "pose_ids": [
+        "orion_vale_motion_001"
+      ],
+      "recovery_intent": null,
+      "roles": [
+        "neutral",
+        "recovery"
+      ],
+      "speech_compatible": false
+    }
+  },
+  "library_class": "game_motion",
+  "schema_version": 1
+}

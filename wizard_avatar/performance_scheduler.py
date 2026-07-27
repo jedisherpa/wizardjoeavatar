@@ -8,10 +8,10 @@ from types import MappingProxyType
 from typing import Callable, Dict, Iterable, Mapping, Optional, Sequence, Tuple
 
 from .media_session import (
-    MediaSessionAckV1,
+    MediaSessionAck,
     MediaSessionAcceptance,
     MediaSessionCoordinator,
-    MediaSessionSnapshotV1,
+    MediaSessionSnapshot,
 )
 from .performance_score import CompiledPerformanceScore, PerformanceTrack, ScoreCue
 
@@ -239,7 +239,7 @@ class SchedulerDiagnostics:
         }
 
 
-ScoreResolver = Callable[[MediaSessionSnapshotV1], Optional[CompiledPerformanceScore]]
+ScoreResolver = Callable[[MediaSessionSnapshot], Optional[CompiledPerformanceScore]]
 
 
 def _normalize_profile(
@@ -337,7 +337,7 @@ class PerformanceScheduler:
         self._system_profile = system_profile
         self._scheduler_state = SchedulerState.READY if score is not None else SchedulerState.NO_SESSION
         self._last_resolved: Optional[ResolvedPerformanceState] = None
-        self._last_ack: Optional[MediaSessionAckV1] = None
+        self._last_ack: Optional[MediaSessionAck] = None
         self._last_error_code: Optional[str] = None
         self._hard_reconcile_count = 0
         self._score_binding_valid = score is not None
@@ -359,7 +359,7 @@ class PerformanceScheduler:
         self._scheduler_state = SchedulerState.READY if score is not None else SchedulerState.LOADING_SCORE
 
     @staticmethod
-    def _score_matches(score: CompiledPerformanceScore, snapshot: MediaSessionSnapshotV1) -> bool:
+    def _score_matches(score: CompiledPerformanceScore, snapshot: MediaSessionSnapshot) -> bool:
         selection = snapshot.performance
         return (
             selection.score_id is not None
@@ -379,7 +379,7 @@ class PerformanceScheduler:
             )
         )
 
-    def accept_snapshot(self, snapshot: MediaSessionSnapshotV1, receipt_monotonic_us: int) -> MediaSessionAckV1:
+    def accept_snapshot(self, snapshot: MediaSessionSnapshot, receipt_monotonic_us: int) -> MediaSessionAck:
         acceptance = self.coordinator.accept_with_result(snapshot, receipt_monotonic_us)
         ack = acceptance.ack
         if ack.disposition != "accepted":
@@ -443,7 +443,7 @@ class PerformanceScheduler:
         return ack
 
     @staticmethod
-    def _state_for_snapshot(snapshot: MediaSessionSnapshotV1) -> SchedulerState:
+    def _state_for_snapshot(snapshot: MediaSessionSnapshot) -> SchedulerState:
         return {
             "empty": SchedulerState.NO_SESSION,
             "loading": SchedulerState.LOADING_SCORE,
@@ -519,7 +519,7 @@ class PerformanceScheduler:
     def _scoreless_state(
         self,
         media_time_ms: int,
-        snapshot: MediaSessionSnapshotV1,
+        snapshot: MediaSessionSnapshot,
     ) -> ResolvedPerformanceState:
         profile = _normalize_profile(snapshot.performance.motion_profile, self._system_profile)
         intensity_milli = snapshot.performance.intensity_milli

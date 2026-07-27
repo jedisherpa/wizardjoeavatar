@@ -123,7 +123,15 @@ class SharedCanvasHDRuntimeCandidateTests(unittest.TestCase):
                 )
                 self.assertEqual(package.render_mode, "rgba")
                 self.assertFalse(package.runtime_admitted)
-                self.assertEqual(len(package.assets), 14)
+                self.assertEqual(len(package.assets), 15)
+                self.assertEqual(
+                    package.choreography_dictionary_contract.library_class,
+                    "comprehensive_performance",
+                )
+                self.assertTrue(
+                    package.choreography_dictionary_contract
+                    .supports_phrase_level_acting
+                )
 
     def test_review_only_candidate_cannot_enter_character_registry(self):
         for character_id, (candidate_path, _) in CANDIDATES.items():

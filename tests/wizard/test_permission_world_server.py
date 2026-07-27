@@ -5,6 +5,7 @@ from unittest import mock
 
 from tests.wizard.test_media_session import snapshot_mapping
 from tests.wizard.test_media_session_server import asgi_request
+from wizard_avatar.character_package import load_character_package
 from wizard_avatar.permission_world import (
     PERMISSION_WORLD_MAX_BODY_BYTES,
     CapabilityPermissionV1,
@@ -234,6 +235,11 @@ class PermissionWorldServerTests(unittest.IsolatedAsyncioTestCase):
             ("content-type", "application/json"),
         )
         media = snapshot_mapping(with_hashes=False)
+        package = load_character_package()
+        media["performance"]["character_id"] = package.character_id
+        media["performance"]["character_package_sha256"] = (
+            package.package_sha256
+        )
         media["performance"]["motion_profile"] = "reduced"
         status, _ = await asgi_request(
             app,

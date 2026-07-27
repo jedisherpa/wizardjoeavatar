@@ -117,6 +117,7 @@ class CharacterPackageTests(unittest.TestCase):
                 {
                     "animation_graph",
                     "capability_manifest",
+                    "choreography_dictionary",
                     "pose_library",
                     "pose_manifest",
                     "runtime_profile",
@@ -615,6 +616,34 @@ class CharacterPackageTests(unittest.TestCase):
                 "diagnostic_only_pose_ids": [],
                 "denied_or_pending": [],
             },
+            "choreography.json": {
+                "schema_version": 1,
+                "dictionary_id": "choreography:portable-character-v1",
+                "character_id": "portable-character-v1",
+                "library_class": "game_motion",
+                "instructions": {
+                    "selection_unit": "command",
+                    "transition_policy": "neutral_bridge",
+                    "speech_motion_policy": "unsupported",
+                    "locomotion_speech_policy": "unsupported",
+                    "unsupported_intent_policy": "default_pose",
+                    "repetition_window_ms": 3000,
+                    "minimum_stillness_ms": 250,
+                    "maximum_gestures_per_phrase": 0,
+                },
+                "intent_bindings": {
+                    "neutral": {
+                        "roles": ["game_action", "neutral"],
+                        "pose_ids": ["idle"],
+                        "action_ids": ["idle"],
+                        "clip_ids": ["idle"],
+                        "speech_compatible": False,
+                        "interrupt_policy": "immediate",
+                        "minimum_hold_ms": 250,
+                        "recovery_intent": None,
+                    }
+                },
+            },
         }
         for name, payload in files.items():
             (root / name).write_text(
@@ -627,6 +656,7 @@ class CharacterPackageTests(unittest.TestCase):
             "animation_graph": "graph.json",
             "runtime_profile": "runtime-profile.json",
             "capability_manifest": "capabilities.json",
+            "choreography_dictionary": "choreography.json",
         }
         package_path = root / "package.json"
         package_path.write_text(

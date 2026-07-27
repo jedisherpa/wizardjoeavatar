@@ -92,10 +92,20 @@ command line.
 
 ## Contract and privacy
 
-Media Session V1 is a strict, full-state snapshot protocol shared by Python,
-JavaScript, and Rust. It carries opaque IDs, playback time, source slot, media
-kind, score binding, and motion preferences. It does not carry titles, URLs,
-paths, transcripts, prompts, captions, or provider credentials.
+Media Session V1 and V2 are strict, full-state snapshot protocols shared by
+Python, JavaScript, and Rust. Both carry opaque IDs, playback time, source slot,
+media kind, score binding, and motion preferences. V2 additionally carries the
+verified character admission tuple: persona, character, package digest, and
+admission digest. Neither version carries titles, URLs, paths, transcripts,
+prompts, captions, or provider credentials.
+
+The browser emits V2 only from a verified performance-binding V2. Python returns
+a same-version V2 acknowledgement containing its runtime admission. The browser
+accepts that acknowledgement only when connector cursor and all four admission
+fields match the sent snapshot. Mismatch fails closed and triggers binding
+reconciliation. Media Session V1 remains a frozen migration path for the exact
+legacy Wizard Joe persona, character, and package tuple; it is not generic
+character compatibility.
 
 Both ingress layers enforce exact JSON, a 16 KiB request limit, strict unknown
 field rejection, and authentication. The Python boundary rejects requests with

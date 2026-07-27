@@ -58,6 +58,7 @@ OUTPUTS = {
     "animation_graph": CHARACTER_DIR / "serena_quill_animation_graph_v2.json",
     "runtime_profile": CHARACTER_DIR / "serena_quill_runtime_profile_v2.json",
     "capability_manifest": CHARACTER_DIR / "serena_quill_capability_profile_v1.json",
+    "choreography_dictionary": CHARACTER_DIR / "serena_quill_choreography_dictionary_v1.json",
     "intake_manifest": CHARACTER_DIR / "serena_quill_intake_manifest.json",
     "package": CHARACTER_DIR / "serena_quill_character_package_v2.json",
 }
@@ -645,6 +646,7 @@ def _package(generated: Mapping[Path, bytes]) -> Mapping[str, Any]:
         "animation_graph": OUTPUTS["animation_graph"],
         "runtime_profile": OUTPUTS["runtime_profile"],
         "capability_manifest": OUTPUTS["capability_manifest"],
+        "choreography_dictionary": OUTPUTS["choreography_dictionary"],
         "extraction_audit": INTAKE_DIR / "serena_quill_extraction_audit.json",
         "pixel_graph_library": INTAKE_DIR / "serena_quill_pixel_graphs.json",
         "source_character_manifest": INTAKE_DIR / "serena_quill_character_manifest.json",
@@ -685,17 +687,142 @@ def generated_outputs() -> Mapping[Path, bytes]:
     manifest = _pose_manifest(pose_library, profile)
     graph = _animation_graph(pose_library, manifest, profile)
     capability = _capability_manifest(manifest, graph)
+    choreography = _choreography_dictionary()
     intake = _intake_manifest()
     values = {
         OUTPUTS["runtime_profile"]: profile,
         OUTPUTS["pose_manifest"]: manifest,
         OUTPUTS["animation_graph"]: graph,
         OUTPUTS["capability_manifest"]: capability,
+        OUTPUTS["choreography_dictionary"]: choreography,
         OUTPUTS["intake_manifest"]: intake,
     }
     encoded = {path: _encoded(value) for path, value in values.items()}
     encoded[OUTPUTS["package"]] = _encoded(_package(encoded))
     return encoded
+
+
+def _choreography_dictionary() -> Mapping[str, Any]:
+    def binding(
+        roles: list[str],
+        pose_id: str,
+        action_id: str,
+        clip_id: str,
+        *,
+        speech_compatible: bool,
+        interrupt_policy: str,
+        minimum_hold_ms: int,
+        recovery_intent: str | None,
+    ) -> Mapping[str, Any]:
+        return {
+            "roles": sorted(roles),
+            "pose_ids": [pose_id],
+            "action_ids": [action_id],
+            "clip_ids": [clip_id],
+            "speech_compatible": speech_compatible,
+            "interrupt_policy": interrupt_policy,
+            "minimum_hold_ms": minimum_hold_ms,
+            "recovery_intent": recovery_intent,
+        }
+
+    return {
+        "schema_version": 1,
+        "dictionary_id": "choreography:serena-quill-v1",
+        "character_id": CHARACTER_ID,
+        "library_class": "focused_performance",
+        "instructions": {
+            "selection_unit": "beat",
+            "transition_policy": "neutral_bridge",
+            "speech_motion_policy": "whole_pose",
+            "locomotion_speech_policy": "unsupported",
+            "unsupported_intent_policy": "characterful_neutral",
+            "repetition_window_ms": 16000,
+            "minimum_stillness_ms": 1000,
+            "maximum_gestures_per_phrase": 1,
+        },
+        "intent_bindings": {
+            "neutral": binding(
+                ["neutral", "recovery"],
+                "neutral_front",
+                "idle",
+                "pose_neutral_front",
+                speech_compatible=True,
+                interrupt_policy="immediate",
+                minimum_hold_ms=1000,
+                recovery_intent=None,
+            ),
+            "listen": binding(
+                ["listening"],
+                "active_listening",
+                "listening",
+                "pose_active_listening",
+                speech_compatible=False,
+                interrupt_policy="immediate",
+                minimum_hold_ms=1200,
+                recovery_intent="neutral",
+            ),
+            "speak": binding(
+                ["speaking"],
+                "idle_speaking",
+                "speaking",
+                "pose_idle_speaking",
+                speech_compatible=True,
+                interrupt_policy="phrase_boundary",
+                minimum_hold_ms=450,
+                recovery_intent="neutral",
+            ),
+            "explain": binding(
+                ["gesture", "speaking"],
+                "facilitation",
+                "explaining",
+                "pose_facilitation",
+                speech_compatible=True,
+                interrupt_policy="commit_then_recover",
+                minimum_hold_ms=900,
+                recovery_intent="speak",
+            ),
+            "think": binding(
+                ["reaction"],
+                "reflective_question",
+                "thinking",
+                "pose_reflective_question",
+                speech_compatible=False,
+                interrupt_policy="immediate",
+                minimum_hold_ms=1100,
+                recovery_intent="neutral",
+            ),
+            "reassure": binding(
+                ["gesture", "speaking"],
+                "orb_reassurance",
+                "orb_reassurance",
+                "pose_orb_reassurance",
+                speech_compatible=True,
+                interrupt_policy="commit_then_recover",
+                minimum_hold_ms=1000,
+                recovery_intent="speak",
+            ),
+            "consent_pause": binding(
+                ["listening", "reaction"],
+                "consent_pause",
+                "consent_pause",
+                "pose_consent_pause",
+                speech_compatible=False,
+                interrupt_policy="immediate",
+                minimum_hold_ms=1400,
+                recovery_intent="listen",
+            ),
+            "music": binding(
+                ["game_action", "gesture"],
+                "careful_celebration",
+                "celebrating",
+                "pose_careful_celebration",
+                speech_compatible=False,
+                interrupt_policy="commit_then_recover",
+                minimum_hold_ms=900,
+                recovery_intent="neutral",
+            ),
+        },
+    }
 
 
 def main() -> int:

@@ -1,0 +1,94 @@
+{
+  "character_id": "liora-kane",
+  "dictionary_id": "choreography:liora-kane-game-v1",
+  "instructions": {
+    "locomotion_speech_policy": "unsupported",
+    "maximum_gestures_per_phrase": 0,
+    "minimum_stillness_ms": 500,
+    "repetition_window_ms": 4000,
+    "selection_unit": "command",
+    "speech_motion_policy": "unsupported",
+    "transition_policy": "neutral_bridge",
+    "unsupported_intent_policy": "default_pose"
+  },
+  "intent_bindings": {
+    "game_cycle": {
+      "action_ids": [],
+      "clip_ids": [],
+      "interrupt_policy": "commit_then_recover",
+      "minimum_hold_ms": 750,
+      "pose_ids": [
+        "liora_kane_motion_001",
+        "liora_kane_motion_002",
+        "liora_kane_motion_003",
+        "liora_kane_motion_004",
+        "liora_kane_motion_005",
+        "liora_kane_motion_006",
+        "liora_kane_motion_007",
+        "liora_kane_motion_008",
+        "liora_kane_motion_009",
+        "liora_kane_motion_010",
+        "liora_kane_motion_011",
+        "liora_kane_motion_012",
+        "liora_kane_motion_013",
+        "liora_kane_motion_014",
+        "liora_kane_motion_015",
+        "liora_kane_motion_016",
+        "liora_kane_motion_017",
+        "liora_kane_motion_018",
+        "liora_kane_motion_019",
+        "liora_kane_motion_020",
+        "liora_kane_motion_021",
+        "liora_kane_motion_022",
+        "liora_kane_motion_023",
+        "liora_kane_motion_024",
+        "liora_kane_motion_025",
+        "liora_kane_motion_026",
+        "liora_kane_motion_027",
+        "liora_kane_motion_028",
+        "liora_kane_motion_029",
+        "liora_kane_motion_030",
+        "liora_kane_motion_031",
+        "liora_kane_motion_032",
+        "liora_kane_motion_033",
+        "liora_kane_motion_034",
+        "liora_kane_motion_035",
+        "liora_kane_motion_036",
+        "liora_kane_motion_037",
+        "liora_kane_motion_038",
+        "liora_kane_motion_039",
+        "liora_kane_motion_040",
+        "liora_kane_motion_041",
+        "liora_kane_motion_042",
+        "liora_kane_motion_043",
+        "liora_kane_motion_044",
+        "liora_kane_motion_045",
+        "liora_kane_motion_046",
+        "liora_kane_motion_047",
+        "liora_kane_motion_048"
+      ],
+      "recovery_intent": "neutral",
+      "roles": [
+        "game_action"
+      ],
+      "speech_compatible": false
+    },
+    "neutral": {
+      "action_ids": [],
+      "clip_ids": [],
+      "interrupt_policy": "immediate",
+      "minimum_hold_ms": 500,
+      "pose_ids": [
+        "liora_kane_motion_001"
+      ],
+      "recovery_intent": null,
+      "roles": [
+        "neutral",
+        "recovery"
+      ],
+      "speech_compatible": false
+    }
+  },
+  "library_class": "game_motion",
+  "schema_version": 1
+}

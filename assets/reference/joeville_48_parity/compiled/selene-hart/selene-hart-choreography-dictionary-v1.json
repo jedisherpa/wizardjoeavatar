@@ -1,0 +1,94 @@
+{
+  "character_id": "selene-hart",
+  "dictionary_id": "choreography:selene-hart-game-v1",
+  "instructions": {
+    "locomotion_speech_policy": "unsupported",
+    "maximum_gestures_per_phrase": 0,
+    "minimum_stillness_ms": 500,
+    "repetition_window_ms": 4000,
+    "selection_unit": "command",
+    "speech_motion_policy": "unsupported",
+    "transition_policy": "neutral_bridge",
+    "unsupported_intent_policy": "default_pose"
+  },
+  "intent_bindings": {
+    "game_cycle": {
+      "action_ids": [],
+      "clip_ids": [],
+      "interrupt_policy": "commit_then_recover",
+      "minimum_hold_ms": 750,
+      "pose_ids": [
+        "selene_hart_motion_001",
+        "selene_hart_motion_002",
+        "selene_hart_motion_003",
+        "selene_hart_motion_004",
+        "selene_hart_motion_005",
+        "selene_hart_motion_006",
+        "selene_hart_motion_007",
+        "selene_hart_motion_008",
+        "selene_hart_motion_009",
+        "selene_hart_motion_010",
+        "selene_hart_motion_011",
+        "selene_hart_motion_012",
+        "selene_hart_motion_013",
+        "selene_hart_motion_014",
+        "selene_hart_motion_015",
+        "selene_hart_motion_016",
+        "selene_hart_motion_017",
+        "selene_hart_motion_018",
+        "selene_hart_motion_019",
+        "selene_hart_motion_020",
+        "selene_hart_motion_021",
+        "selene_hart_motion_022",
+        "selene_hart_motion_023",
+        "selene_hart_motion_024",
+        "selene_hart_motion_025",
+        "selene_hart_motion_026",
+        "selene_hart_motion_027",
+        "selene_hart_motion_028",
+        "selene_hart_motion_029",
+        "selene_hart_motion_030",
+        "selene_hart_motion_031",
+        "selene_hart_motion_032",
+        "selene_hart_motion_033",
+        "selene_hart_motion_034",
+        "selene_hart_motion_035",
+        "selene_hart_motion_036",
+        "selene_hart_motion_037",
+        "selene_hart_motion_038",
+        "selene_hart_motion_039",
+        "selene_hart_motion_040",
+        "selene_hart_motion_041",
+        "selene_hart_motion_042",
+        "selene_hart_motion_043",
+        "selene_hart_motion_044",
+        "selene_hart_motion_045",
+        "selene_hart_motion_046",
+        "selene_hart_motion_047",
+        "selene_hart_motion_048"
+      ],
+      "recovery_intent": "neutral",
+      "roles": [
+        "game_action"
+      ],
+      "speech_compatible": false
+    },
+    "neutral": {
+      "action_ids": [],
+      "clip_ids": [],
+      "interrupt_policy": "immediate",
+      "minimum_hold_ms": 500,
+      "pose_ids": [
+        "selene_hart_motion_001"
+      ],
+      "recovery_intent": null,
+      "roles": [
+        "neutral",
+        "recovery"
+      ],
+      "speech_compatible": false
+    }
+  },
+  "library_class": "game_motion",
+  "schema_version": 1
+}

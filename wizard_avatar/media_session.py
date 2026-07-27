@@ -6,10 +6,12 @@ import re
 from collections import OrderedDict
 from dataclasses import dataclass, field
 from types import MappingProxyType
-from typing import Dict, Mapping, Optional, Sequence, Tuple
+from typing import Dict, Mapping, Optional, Sequence, Tuple, Union
 
 
-MEDIA_SESSION_SCHEMA_VERSION = 1
+MEDIA_SESSION_SCHEMA_V1 = 1
+MEDIA_SESSION_SCHEMA_VERSION = 2
+SUPPORTED_MEDIA_SESSION_SCHEMAS = (MEDIA_SESSION_SCHEMA_V1, MEDIA_SESSION_SCHEMA_VERSION)
 MEDIA_SESSION_MAX_BODY_BYTES = 16 * 1024
 DEFAULT_CLOCK_FRESHNESS_US = 1_500_000
 DEFAULT_SESSION_LEASE_US = 5_000_000
@@ -168,6 +170,143 @@ def _freeze_mapping(value: Mapping[str, object]) -> Mapping[str, object]:
         else:
             frozen[key] = item
     return MappingProxyType(frozen)
+
+
+def _decode_json_object(data: bytes, artifact: str) -> Mapping[str, object]:
+    if len(data) > MEDIA_SESSION_MAX_BODY_BYTES:
+        raise MediaSessionError(
+            "body_too_large",
+            "{} exceeds the 16 KiB limit".format(artifact),
+        )
+
+    def reject_duplicates(
+        pairs: Sequence[Tuple[str, object]],
+    ) -> Mapping[str, object]:
+        result: Dict[str, object] = {}
+        for key, item in pairs:
+            if key in result:
+                raise MediaSessionError(
+                    "duplicate_json_key",
+                    "duplicate JSON object key",
+                )
+            result[key] = item
+        return result
+
+    try:
+        value = json.loads(
+            data.decode("utf-8"),
+            object_pairs_hook=reject_duplicates,
+        )
+    except MediaSessionError:
+        raise
+    except (UnicodeDecodeError, json.JSONDecodeError) as exc:
+        raise MediaSessionError(
+            "schema_invalid",
+            "{} is not valid UTF-8 JSON".format(artifact),
+        ) from exc
+    return _require_mapping(value, "$")
+
+
+@dataclass(frozen=True)
+class MediaSessionAdmissionV1:
+    schema_version: int
+    persona_id: str
+    character_id: str
+    package_digest: str
+    admission_sha256: str
+
+    def __post_init__(self) -> None:
+        if self.schema_version != 1 or isinstance(self.schema_version, bool):
+            raise MediaSessionError(
+                "schema_version_unsupported",
+                "character admission schema must be version 1",
+                "admission.schema_version",
+            )
+        _require_id(self.persona_id, "admission.persona_id")
+        _require_id(self.character_id, "admission.character_id")
+        _require_sha256(self.package_digest, "admission.package_digest")
+        _require_sha256(self.admission_sha256, "admission.admission_sha256")
+        if self.admission_sha256 != self.computed_sha256():
+            raise MediaSessionError(
+                "hash_mismatch",
+                "character admission hash does not match canonical content",
+                "admission.admission_sha256",
+            )
+
+    @classmethod
+    def from_mapping(
+        cls,
+        value: Mapping[str, object],
+        path: str = "$.performance.admission",
+    ) -> "MediaSessionAdmissionV1":
+        _require_exact_fields(
+            value,
+            (
+                "schema_version",
+                "persona_id",
+                "character_id",
+                "package_digest",
+                "admission_sha256",
+            ),
+            path,
+        )
+        if (
+            value.get("schema_version") != 1
+            or isinstance(value.get("schema_version"), bool)
+        ):
+            raise MediaSessionError(
+                "schema_version_unsupported",
+                "character admission schema must be version 1",
+                path + ".schema_version",
+            )
+        admission = cls(
+            schema_version=1,
+            persona_id=_require_id(value.get("persona_id"), path + ".persona_id"),
+            character_id=_require_id(
+                value.get("character_id"),
+                path + ".character_id",
+            ),
+            package_digest=_require_sha256(
+                value.get("package_digest"),
+                path + ".package_digest",
+            ),
+            admission_sha256=_require_sha256(
+                value.get("admission_sha256"),
+                path + ".admission_sha256",
+            ),
+        )
+        return admission
+
+    def content_dict(self) -> Mapping[str, object]:
+        return {
+            "schema_version": self.schema_version,
+            "persona_id": self.persona_id,
+            "character_id": self.character_id,
+            "package_digest": self.package_digest,
+        }
+
+    def computed_sha256(self) -> str:
+        payload = json.dumps(
+            self.content_dict(),
+            sort_keys=True,
+            separators=(",", ":"),
+            ensure_ascii=True,
+        ).encode("ascii")
+        return "sha256:" + hashlib.sha256(payload).hexdigest()
+
+    def to_dict(self) -> Mapping[str, object]:
+        return {
+            **self.content_dict(),
+            "admission_sha256": self.admission_sha256,
+        }
+
+    def identity_key(self) -> Tuple[object, ...]:
+        return (
+            self.persona_id,
+            self.character_id,
+            self.package_digest,
+            self.admission_sha256,
+        )
 
 
 @dataclass(frozen=True)
@@ -355,6 +494,176 @@ class PerformanceSelectionV1:
             "disabled_channels": list(self.disabled_channels),
         }
 
+    @property
+    def persona_id(self) -> None:
+        return None
+
+    @property
+    def admission_sha256(self) -> None:
+        return None
+
+    def identity_key(self) -> Tuple[object, ...]:
+        return (
+            None,
+            self.character_id,
+            self.character_package_sha256,
+            None,
+        )
+
+
+@dataclass(frozen=True)
+class PerformanceSelectionV2:
+    mode: str
+    score_id: Optional[str]
+    score_revision: Optional[int]
+    score_sha256: Optional[str]
+    admission: MediaSessionAdmissionV1
+    intensity_milli: int
+    motion_profile: str
+    disabled_channels: Tuple[str, ...]
+
+    @classmethod
+    def from_mapping(cls, value: Mapping[str, object]) -> "PerformanceSelectionV2":
+        _require_exact_fields(
+            value,
+            (
+                "mode",
+                "score_id",
+                "score_revision",
+                "score_sha256",
+                "admission",
+                "intensity_milli",
+                "motion_profile",
+                "disabled_channels",
+            ),
+            "$.performance",
+        )
+        motion_profile = value.get("motion_profile")
+        if motion_profile not in MOTION_PROFILES:
+            raise MediaSessionError(
+                "invalid_enum",
+                "unsupported motion profile",
+                "$.performance.motion_profile",
+            )
+        disabled_value = value.get("disabled_channels")
+        if not isinstance(disabled_value, (list, tuple)):
+            raise MediaSessionError(
+                "invalid_type",
+                "disabled_channels must be an array",
+                "$.performance.disabled_channels",
+            )
+        disabled: list[str] = []
+        for channel in disabled_value:
+            if not isinstance(channel, str) or channel not in KNOWN_CHANNELS:
+                raise MediaSessionError(
+                    "invalid_enum",
+                    "unsupported disabled channel",
+                    "$.performance.disabled_channels",
+                )
+            if channel in disabled:
+                raise MediaSessionError(
+                    "invalid_type",
+                    "disabled channels must be unique",
+                    "$.performance.disabled_channels",
+                )
+            disabled.append(channel)
+        if disabled != sorted(disabled):
+            raise MediaSessionError(
+                "invalid_type",
+                "disabled channels must be sorted",
+                "$.performance.disabled_channels",
+            )
+        mode = value.get("mode")
+        if mode not in PERFORMANCE_MODES:
+            raise MediaSessionError(
+                "invalid_enum",
+                "unsupported performance mode",
+                "$.performance.mode",
+            )
+        score_id = _require_optional_id(
+            value.get("score_id"),
+            "$.performance.score_id",
+        )
+        revision_value = value.get("score_revision")
+        score_revision = (
+            None
+            if revision_value is None
+            else _require_int(
+                revision_value,
+                "$.performance.score_revision",
+                minimum=1,
+            )
+        )
+        score_sha256 = _require_optional_sha256(
+            value.get("score_sha256"),
+            "$.performance.score_sha256",
+        )
+        score_values = (score_id, score_revision, score_sha256)
+        if any(item is None for item in score_values) and any(
+            item is not None for item in score_values
+        ):
+            raise MediaSessionError(
+                "invalid_binding",
+                "score binding must be complete or absent",
+                "$.performance",
+            )
+        if mode == "none" and any(item is not None for item in score_values):
+            raise MediaSessionError(
+                "invalid_binding",
+                "none mode cannot bind a score",
+                "$.performance",
+            )
+        return cls(
+            mode=str(mode),
+            score_id=score_id,
+            score_revision=score_revision,
+            score_sha256=score_sha256,
+            admission=MediaSessionAdmissionV1.from_mapping(
+                _require_mapping(
+                    value.get("admission"),
+                    "$.performance.admission",
+                )
+            ),
+            intensity_milli=_require_int(
+                value.get("intensity_milli"),
+                "$.performance.intensity_milli",
+                maximum=1000,
+            ),
+            motion_profile=str(motion_profile),
+            disabled_channels=tuple(disabled),
+        )
+
+    @property
+    def persona_id(self) -> str:
+        return self.admission.persona_id
+
+    @property
+    def character_id(self) -> str:
+        return self.admission.character_id
+
+    @property
+    def character_package_sha256(self) -> str:
+        return self.admission.package_digest
+
+    @property
+    def admission_sha256(self) -> str:
+        return self.admission.admission_sha256
+
+    def identity_key(self) -> Tuple[object, ...]:
+        return self.admission.identity_key()
+
+    def to_dict(self) -> Mapping[str, object]:
+        return {
+            "mode": self.mode,
+            "score_id": self.score_id,
+            "score_revision": self.score_revision,
+            "score_sha256": self.score_sha256,
+            "admission": self.admission.to_dict(),
+            "intensity_milli": self.intensity_milli,
+            "motion_profile": self.motion_profile,
+            "disabled_channels": list(self.disabled_channels),
+        }
+
 
 @dataclass(frozen=True)
 class MediaSessionSnapshotV1:
@@ -387,7 +696,7 @@ class MediaSessionSnapshotV1:
             ),
             "$",
         )
-        if value.get("schema_version") != MEDIA_SESSION_SCHEMA_VERSION or isinstance(value.get("schema_version"), bool):
+        if value.get("schema_version") != MEDIA_SESSION_SCHEMA_V1 or isinstance(value.get("schema_version"), bool):
             raise MediaSessionError("schema_version_unsupported", "media session schema must be version 1")
         cause = value.get("cause")
         if cause not in SNAPSHOT_CAUSES:
@@ -403,7 +712,7 @@ class MediaSessionSnapshotV1:
                 "$.performance.mode",
             )
         return cls(
-            schema_version=MEDIA_SESSION_SCHEMA_VERSION,
+            schema_version=MEDIA_SESSION_SCHEMA_V1,
             message_id=_require_pattern(value.get("message_id"), UUID_V4_PATTERN, "$.message_id"),
             connector_session_id=_require_pattern(
                 value.get("connector_session_id"), UUID_V4_PATTERN, "$.connector_session_id"
@@ -423,23 +732,7 @@ class MediaSessionSnapshotV1:
 
     @classmethod
     def from_json(cls, data: bytes) -> "MediaSessionSnapshotV1":
-        if len(data) > MEDIA_SESSION_MAX_BODY_BYTES:
-            raise MediaSessionError("body_too_large", "snapshot exceeds the 16 KiB limit")
-        def reject_duplicates(pairs: Sequence[Tuple[str, object]]) -> Mapping[str, object]:
-            result: Dict[str, object] = {}
-            for key, item in pairs:
-                if key in result:
-                    raise MediaSessionError("duplicate_json_key", "duplicate JSON object key")
-                result[key] = item
-            return result
-
-        try:
-            value = json.loads(data.decode("utf-8"), object_pairs_hook=reject_duplicates)
-        except MediaSessionError:
-            raise
-        except (UnicodeDecodeError, json.JSONDecodeError) as exc:
-            raise MediaSessionError("schema_invalid", "snapshot is not valid UTF-8 JSON") from exc
-        return cls.from_mapping(_require_mapping(value, "$"))
+        return cls.from_mapping(_decode_json_object(data, "snapshot"))
 
     def to_dict(self) -> Mapping[str, object]:
         return {
@@ -458,6 +751,136 @@ class MediaSessionSnapshotV1:
     def fingerprint(self) -> str:
         payload = json.dumps(self.to_dict(), sort_keys=True, separators=(",", ":"), ensure_ascii=True).encode("ascii")
         return hashlib.sha256(payload).hexdigest()
+
+
+@dataclass(frozen=True)
+class MediaSessionSnapshotV2:
+    schema_version: int
+    message_id: str
+    connector_session_id: str
+    sequence: int
+    cause: str
+    sampled_at_monotonic_ms: int
+    media_epoch: int
+    media: MediaIdentityV1
+    playback: PlaybackSnapshotV1
+    performance: PerformanceSelectionV2
+
+    @classmethod
+    def from_mapping(cls, value: Mapping[str, object]) -> "MediaSessionSnapshotV2":
+        _require_exact_fields(
+            value,
+            (
+                "schema_version",
+                "message_id",
+                "connector_session_id",
+                "sequence",
+                "cause",
+                "sampled_at_monotonic_ms",
+                "media_epoch",
+                "media",
+                "playback",
+                "performance",
+            ),
+            "$",
+        )
+        if (
+            value.get("schema_version") != MEDIA_SESSION_SCHEMA_VERSION
+            or isinstance(value.get("schema_version"), bool)
+        ):
+            raise MediaSessionError(
+                "schema_version_unsupported",
+                "media session schema must be version 2",
+            )
+        cause = value.get("cause")
+        if cause not in SNAPSHOT_CAUSES:
+            raise MediaSessionError(
+                "invalid_enum",
+                "unsupported snapshot cause",
+                "$.cause",
+            )
+        media = MediaIdentityV1.from_mapping(
+            _require_mapping(value.get("media"), "$.media")
+        )
+        performance = PerformanceSelectionV2.from_mapping(
+            _require_mapping(value.get("performance"), "$.performance")
+        )
+        if media.source_slot == "speech" and performance.mode != "speech":
+            raise MediaSessionError(
+                "invalid_enum",
+                "speech slot requires speech performance mode",
+                "$.performance.mode",
+            )
+        return cls(
+            schema_version=MEDIA_SESSION_SCHEMA_VERSION,
+            message_id=_require_pattern(
+                value.get("message_id"),
+                UUID_V4_PATTERN,
+                "$.message_id",
+            ),
+            connector_session_id=_require_pattern(
+                value.get("connector_session_id"),
+                UUID_V4_PATTERN,
+                "$.connector_session_id",
+            ),
+            sequence=_require_int(value.get("sequence"), "$.sequence"),
+            cause=str(cause),
+            sampled_at_monotonic_ms=_require_int(
+                value.get("sampled_at_monotonic_ms"),
+                "$.sampled_at_monotonic_ms",
+            ),
+            media_epoch=_require_int(value.get("media_epoch"), "$.media_epoch"),
+            media=media,
+            playback=PlaybackSnapshotV1.from_mapping(
+                _require_mapping(value.get("playback"), "$.playback"),
+                media.duration_ms,
+            ),
+            performance=performance,
+        )
+
+    @classmethod
+    def from_json(cls, data: bytes) -> "MediaSessionSnapshotV2":
+        return cls.from_mapping(_decode_json_object(data, "snapshot"))
+
+    def to_dict(self) -> Mapping[str, object]:
+        return {
+            "schema_version": self.schema_version,
+            "message_id": self.message_id,
+            "connector_session_id": self.connector_session_id,
+            "sequence": self.sequence,
+            "cause": self.cause,
+            "sampled_at_monotonic_ms": self.sampled_at_monotonic_ms,
+            "media_epoch": self.media_epoch,
+            "media": self.media.to_dict(),
+            "playback": self.playback.to_dict(),
+            "performance": self.performance.to_dict(),
+        }
+
+    def fingerprint(self) -> str:
+        payload = json.dumps(
+            self.to_dict(),
+            sort_keys=True,
+            separators=(",", ":"),
+            ensure_ascii=True,
+        ).encode("ascii")
+        return hashlib.sha256(payload).hexdigest()
+
+
+MediaSessionSnapshot = Union[MediaSessionSnapshotV1, MediaSessionSnapshotV2]
+
+
+def parse_media_session_snapshot(data: bytes) -> MediaSessionSnapshot:
+    value = _decode_json_object(data, "snapshot")
+    version = value.get("schema_version")
+    if version == MEDIA_SESSION_SCHEMA_V1 and not isinstance(version, bool):
+        return MediaSessionSnapshotV1.from_mapping(value)
+    if version == MEDIA_SESSION_SCHEMA_VERSION and not isinstance(version, bool):
+        return MediaSessionSnapshotV2.from_mapping(value)
+    raise MediaSessionError(
+        "schema_version_unsupported",
+        "media session schema must be version 1 or 2",
+        "$.schema_version",
+    )
 
 
 @dataclass(frozen=True)
@@ -540,13 +963,7 @@ class MediaSessionAckV1:
 
     @classmethod
     def from_json(cls, data: bytes) -> "MediaSessionAckV1":
-        if len(data) > MEDIA_SESSION_MAX_BODY_BYTES:
-            raise MediaSessionError("body_too_large", "ack exceeds the 16 KiB limit")
-        try:
-            value = json.loads(data.decode("utf-8"))
-        except (UnicodeDecodeError, json.JSONDecodeError) as exc:
-            raise MediaSessionError("schema_invalid", "ack is not valid UTF-8 JSON") from exc
-        return cls.from_mapping(_require_mapping(value, "$"))
+        return cls.from_mapping(_decode_json_object(data, "ack"))
 
     def __post_init__(self) -> None:
         if self.disposition not in ACK_DISPOSITIONS:
@@ -591,23 +1008,274 @@ class MediaSessionAckV1:
         }
 
 
+@dataclass(frozen=True)
+class MediaSessionAckV2:
+    schema_version: int
+    connector_session_id: str
+    accepted_sequence: int
+    accepted_media_epoch: int
+    disposition: str
+    wizard_runtime_epoch: str
+    runtime_admission: Optional[MediaSessionAdmissionV1]
+    resync_required: bool
+    scheduler_state: str
+    error: Optional[Mapping[str, str]]
+    capabilities: Mapping[str, object]
+
+    @classmethod
+    def from_mapping(cls, value: Mapping[str, object]) -> "MediaSessionAckV2":
+        _require_exact_fields(
+            value,
+            (
+                "schema_version",
+                "connector_session_id",
+                "accepted_sequence",
+                "accepted_media_epoch",
+                "disposition",
+                "wizard_runtime_epoch",
+                "runtime_admission",
+                "resync_required",
+                "scheduler_state",
+                "error",
+                "capabilities",
+            ),
+            "$",
+        )
+        if (
+            value.get("schema_version") != MEDIA_SESSION_SCHEMA_VERSION
+            or isinstance(value.get("schema_version"), bool)
+        ):
+            raise MediaSessionError(
+                "schema_version_unsupported",
+                "media session ack schema must be version 2",
+            )
+        resync_required = value.get("resync_required")
+        if not isinstance(resync_required, bool):
+            raise MediaSessionError(
+                "invalid_type",
+                "resync_required must be a boolean",
+                "$.resync_required",
+            )
+        error_value = value.get("error")
+        error = (
+            None
+            if error_value is None
+            else _require_mapping(error_value, "$.error")
+        )
+        runtime_admission_value = value.get("runtime_admission")
+        runtime_admission = (
+            None
+            if runtime_admission_value is None
+            else MediaSessionAdmissionV1.from_mapping(
+                _require_mapping(
+                    runtime_admission_value,
+                    "$.runtime_admission",
+                ),
+                "$.runtime_admission",
+            )
+        )
+        capabilities = _require_mapping(
+            value.get("capabilities"),
+            "$.capabilities",
+        )
+        _require_exact_fields(
+            capabilities,
+            (
+                "media_session_schema",
+                "supported_media_session_schemas",
+                "max_snapshot_hz",
+                "supported_rate_milli",
+                "motion_profiles",
+            ),
+            "$.capabilities",
+        )
+        if capabilities.get("media_session_schema") != MEDIA_SESSION_SCHEMA_VERSION:
+            raise MediaSessionError(
+                "schema_version_unsupported",
+                "current capability schema must be version 2",
+                "$.capabilities.media_session_schema",
+            )
+        schemas = capabilities.get("supported_media_session_schemas")
+        if schemas != [1, 2] and schemas != (1, 2):
+            raise MediaSessionError(
+                "invalid_enum",
+                "supported media session schemas must match V2",
+                "$.capabilities.supported_media_session_schemas",
+            )
+        rates = capabilities.get("supported_rate_milli")
+        if not isinstance(rates, (list, tuple)) or tuple(rates) != SUPPORTED_RATE_MILLI:
+            raise MediaSessionError(
+                "invalid_enum",
+                "supported rates must match V2",
+                "$.capabilities.supported_rate_milli",
+            )
+        profiles = capabilities.get("motion_profiles")
+        if profiles != ["full", "reduced", "still"] and profiles != (
+            "full",
+            "reduced",
+            "still",
+        ):
+            raise MediaSessionError(
+                "invalid_enum",
+                "motion profiles must match V2",
+                "$.capabilities.motion_profiles",
+            )
+        disposition = value.get("disposition")
+        scheduler_state = value.get("scheduler_state")
+        return cls(
+            schema_version=MEDIA_SESSION_SCHEMA_VERSION,
+            connector_session_id=_require_pattern(
+                value.get("connector_session_id"),
+                UUID_V4_PATTERN,
+                "$.connector_session_id",
+            ),
+            accepted_sequence=_require_int(
+                value.get("accepted_sequence"),
+                "$.accepted_sequence",
+            ),
+            accepted_media_epoch=_require_int(
+                value.get("accepted_media_epoch"),
+                "$.accepted_media_epoch",
+            ),
+            disposition=str(disposition),
+            wizard_runtime_epoch=_require_id(
+                value.get("wizard_runtime_epoch"),
+                "$.wizard_runtime_epoch",
+            ),
+            runtime_admission=runtime_admission,
+            resync_required=resync_required,
+            scheduler_state=str(scheduler_state),
+            error=error,  # type: ignore[arg-type]
+            capabilities={
+                "media_session_schema": MEDIA_SESSION_SCHEMA_VERSION,
+                "supported_media_session_schemas": tuple(schemas),
+                "max_snapshot_hz": _require_int(
+                    capabilities.get("max_snapshot_hz"),
+                    "$.capabilities.max_snapshot_hz",
+                    minimum=1,
+                    maximum=60,
+                ),
+                "supported_rate_milli": tuple(rates),
+                "motion_profiles": tuple(profiles),
+            },
+        )
+
+    @classmethod
+    def from_json(cls, data: bytes) -> "MediaSessionAckV2":
+        return cls.from_mapping(_decode_json_object(data, "ack"))
+
+    def __post_init__(self) -> None:
+        if self.disposition not in ACK_DISPOSITIONS:
+            raise MediaSessionError(
+                "invalid_enum",
+                "unsupported acknowledgement disposition",
+            )
+        if self.scheduler_state not in SCHEDULER_STATES:
+            raise MediaSessionError(
+                "invalid_enum",
+                "unsupported scheduler state",
+            )
+        _require_pattern(
+            self.connector_session_id,
+            UUID_V4_PATTERN,
+            "connector_session_id",
+        )
+        _require_id(self.wizard_runtime_epoch, "wizard_runtime_epoch")
+        if self.error is not None:
+            _require_exact_fields(self.error, ("code",), "error")
+            code = self.error.get("code")
+            if (
+                not isinstance(code, str)
+                or re.fullmatch(r"[a-z][a-z0-9_]{0,63}", code) is None
+            ):
+                raise MediaSessionError(
+                    "invalid_id",
+                    "invalid acknowledgement error code",
+                    "error.code",
+                )
+            object.__setattr__(self, "error", _freeze_mapping(self.error))
+        object.__setattr__(self, "capabilities", _freeze_mapping(self.capabilities))
+
+    @property
+    def error_code(self) -> Optional[str]:
+        return None if self.error is None else str(self.error["code"])
+
+    @property
+    def media_epoch(self) -> int:
+        return self.accepted_media_epoch
+
+    def to_dict(self) -> Mapping[str, object]:
+        return {
+            "schema_version": self.schema_version,
+            "connector_session_id": self.connector_session_id,
+            "accepted_sequence": self.accepted_sequence,
+            "accepted_media_epoch": self.accepted_media_epoch,
+            "disposition": self.disposition,
+            "wizard_runtime_epoch": self.wizard_runtime_epoch,
+            "runtime_admission": (
+                None
+                if self.runtime_admission is None
+                else self.runtime_admission.to_dict()
+            ),
+            "resync_required": self.resync_required,
+            "scheduler_state": self.scheduler_state,
+            "error": (
+                None
+                if self.error is None
+                else {"code": self.error["code"]}
+            ),
+            "capabilities": {
+                "media_session_schema": self.capabilities[
+                    "media_session_schema"
+                ],
+                "supported_media_session_schemas": list(
+                    self.capabilities["supported_media_session_schemas"]
+                ),
+                "max_snapshot_hz": self.capabilities["max_snapshot_hz"],
+                "supported_rate_milli": list(
+                    self.capabilities["supported_rate_milli"]
+                ),
+                "motion_profiles": list(
+                    self.capabilities["motion_profiles"]
+                ),
+            },
+        }
+
+
+MediaSessionAck = Union[MediaSessionAckV1, MediaSessionAckV2]
+
+
+def parse_media_session_ack(data: bytes) -> MediaSessionAck:
+    value = _decode_json_object(data, "ack")
+    version = value.get("schema_version")
+    if version == MEDIA_SESSION_SCHEMA_V1 and not isinstance(version, bool):
+        return MediaSessionAckV1.from_mapping(value)
+    if version == MEDIA_SESSION_SCHEMA_VERSION and not isinstance(version, bool):
+        return MediaSessionAckV2.from_mapping(value)
+    raise MediaSessionError(
+        "schema_version_unsupported",
+        "media session ack schema must be version 1 or 2",
+        "$.schema_version",
+    )
+
+
 class MediaClockEstimator:
     """Interpolates only from the newest accepted authoritative snapshot."""
 
     def __init__(self, freshness_limit_us: int = DEFAULT_CLOCK_FRESHNESS_US) -> None:
         self.freshness_limit_us = _require_int(freshness_limit_us, "freshness_limit_us", minimum=1)
-        self._snapshot: Optional[MediaSessionSnapshotV1] = None
+        self._snapshot: Optional[MediaSessionSnapshot] = None
         self._receipt_monotonic_us: Optional[int] = None
 
     @property
-    def snapshot(self) -> Optional[MediaSessionSnapshotV1]:
+    def snapshot(self) -> Optional[MediaSessionSnapshot]:
         return self._snapshot
 
     @property
     def receipt_monotonic_us(self) -> Optional[int]:
         return self._receipt_monotonic_us
 
-    def observe(self, snapshot: MediaSessionSnapshotV1, receipt_monotonic_us: int) -> None:
+    def observe(self, snapshot: MediaSessionSnapshot, receipt_monotonic_us: int) -> None:
         receipt = _require_int(receipt_monotonic_us, "receipt_monotonic_us")
         self._snapshot = snapshot
         self._receipt_monotonic_us = receipt
@@ -639,8 +1307,8 @@ class MediaClockEstimator:
 
 @dataclass(frozen=True)
 class MediaSessionAcceptance:
-    ack: MediaSessionAckV1
-    snapshot: Optional[MediaSessionSnapshotV1]
+    ack: MediaSessionAck
+    snapshot: Optional[MediaSessionSnapshot]
     hard_reconcile: bool
     reconciliation_generation: int
     clock_error_ms: Optional[int]
@@ -686,17 +1354,19 @@ class MediaSessionCoordinator:
         wizard_runtime_epoch: str,
         dedup_capacity: int = DEFAULT_DEDUP_CAPACITY,
         session_lease_us: int = DEFAULT_SESSION_LEASE_US,
+        runtime_admission: Optional[MediaSessionAdmissionV1] = None,
     ) -> None:
         self.wizard_runtime_epoch = _require_id(wizard_runtime_epoch, "wizard_runtime_epoch")
+        self.runtime_admission = runtime_admission
         self.dedup_capacity = _require_int(dedup_capacity, "dedup_capacity", minimum=1)
         self.session_lease_us = _require_int(session_lease_us, "session_lease_us", minimum=1)
         self.clock = MediaClockEstimator()
         self._active_session_id: Optional[str] = None
-        self._last_snapshot: Optional[MediaSessionSnapshotV1] = None
+        self._last_snapshot: Optional[MediaSessionSnapshot] = None
         self._last_receipt_us: Optional[int] = None
         self._last_accepted_sequence: Optional[int] = None
         self._last_accepted_media_epoch: Optional[int] = None
-        self._slot_snapshots: Dict[str, MediaSessionSnapshotV1] = {}
+        self._slot_snapshots: Dict[str, MediaSessionSnapshot] = {}
         self._slot_receipts: Dict[str, int] = {}
         self._slot_clocks: Dict[str, MediaClockEstimator] = {}
         self._seen: "OrderedDict[Tuple[str, int], str]" = OrderedDict()
@@ -705,7 +1375,7 @@ class MediaSessionCoordinator:
         self._last_acceptance: Optional[MediaSessionAcceptance] = None
 
     @property
-    def accepted_snapshot(self) -> Optional[MediaSessionSnapshotV1]:
+    def accepted_snapshot(self) -> Optional[MediaSessionSnapshot]:
         return self._last_snapshot
 
     @property
@@ -716,7 +1386,7 @@ class MediaSessionCoordinator:
     def last_acceptance(self) -> Optional[MediaSessionAcceptance]:
         return self._last_acceptance
 
-    def snapshot_for_slot(self, source_slot: str) -> Optional[MediaSessionSnapshotV1]:
+    def snapshot_for_slot(self, source_slot: str) -> Optional[MediaSessionSnapshot]:
         """Return the newest accepted full-state snapshot for a source slot."""
 
         if source_slot not in SOURCE_SLOTS:
@@ -730,7 +1400,7 @@ class MediaSessionCoordinator:
             raise MediaSessionError("invalid_enum", "unsupported media source slot", "source_slot")
         return self._slot_receipts.get(source_slot)
 
-    def _scheduler_state(self, snapshot: Optional[MediaSessionSnapshotV1]) -> str:
+    def _scheduler_state(self, snapshot: Optional[MediaSessionSnapshot]) -> str:
         if snapshot is None:
             return "no_session"
         return {
@@ -747,51 +1417,70 @@ class MediaSessionCoordinator:
 
     def _ack(
         self,
-        snapshot: MediaSessionSnapshotV1,
+        snapshot: MediaSessionSnapshot,
         disposition: str,
         error_code: Optional[str] = None,
         resync_required: bool = False,
-    ) -> MediaSessionAckV1:
+    ) -> MediaSessionAck:
         accepted_sequence = self._last_accepted_sequence if self._last_accepted_sequence is not None else snapshot.sequence
         media_epoch = (
             self._last_accepted_media_epoch
             if self._last_accepted_media_epoch is not None
             else snapshot.media_epoch
         )
-        return MediaSessionAckV1(
-            schema_version=1,
-            connector_session_id=snapshot.connector_session_id,
-            accepted_sequence=accepted_sequence,
-            accepted_media_epoch=media_epoch,
-            disposition=disposition,
-            wizard_runtime_epoch=self.wizard_runtime_epoch,
-            resync_required=resync_required,
-            scheduler_state=self._scheduler_state(self._last_snapshot),
-            error=None if error_code is None else {"code": error_code},
+        common = {
+            "connector_session_id": snapshot.connector_session_id,
+            "accepted_sequence": accepted_sequence,
+            "accepted_media_epoch": media_epoch,
+            "disposition": disposition,
+            "wizard_runtime_epoch": self.wizard_runtime_epoch,
+            "resync_required": resync_required,
+            "scheduler_state": self._scheduler_state(self._last_snapshot),
+            "error": None if error_code is None else {"code": error_code},
+        }
+        if isinstance(snapshot, MediaSessionSnapshotV1):
+            return MediaSessionAckV1(
+                schema_version=MEDIA_SESSION_SCHEMA_V1,
+                capabilities={
+                    "media_session_schema": MEDIA_SESSION_SCHEMA_V1,
+                    "max_snapshot_hz": 8,
+                    "supported_rate_milli": SUPPORTED_RATE_MILLI,
+                    "motion_profiles": ("full", "reduced", "still"),
+                },
+                **common,
+            )
+        return MediaSessionAckV2(
+            schema_version=MEDIA_SESSION_SCHEMA_VERSION,
+            runtime_admission=self.runtime_admission,
             capabilities={
-                "media_session_schema": 1,
+                "media_session_schema": MEDIA_SESSION_SCHEMA_VERSION,
+                "supported_media_session_schemas": (
+                    MEDIA_SESSION_SCHEMA_V1,
+                    MEDIA_SESSION_SCHEMA_VERSION,
+                ),
                 "max_snapshot_hz": 8,
                 "supported_rate_milli": SUPPORTED_RATE_MILLI,
                 "motion_profiles": ("full", "reduced", "still"),
             },
+            **common,
         )
 
-    def _remember(self, snapshot: MediaSessionSnapshotV1) -> None:
+    def _remember(self, snapshot: MediaSessionSnapshot) -> None:
         self._seen[(snapshot.connector_session_id, snapshot.sequence)] = snapshot.fingerprint()
         self._seen.move_to_end((snapshot.connector_session_id, snapshot.sequence))
         while len(self._seen) > self.dedup_capacity:
             self._seen.popitem(last=False)
 
     @staticmethod
-    def _speech_owns_performance(snapshot: MediaSessionSnapshotV1) -> bool:
+    def _speech_owns_performance(snapshot: MediaSessionSnapshot) -> bool:
         # Speech owns the performance only while it is audible or actively
         # continuing an already-audible utterance. Startup/loading and paused
         # elements must not strand the runtime on a silent speech clock.
         return snapshot.playback.state in {"playing", "buffering", "seeking"}
 
     def _select_active_snapshot(
-        self, incoming: MediaSessionSnapshotV1
-    ) -> Optional[MediaSessionSnapshotV1]:
+        self, incoming: MediaSessionSnapshot
+    ) -> Optional[MediaSessionSnapshot]:
         # The connector contract carries full-state snapshots, not independent
         # per-element telemetry. A main snapshot received after speech therefore
         # means the connector has already restored main as its active source.
@@ -801,7 +1490,7 @@ class MediaSessionCoordinator:
             return incoming
         return self._slot_snapshots.get("main")
 
-    def _activate(self, snapshot: Optional[MediaSessionSnapshotV1]) -> None:
+    def _activate(self, snapshot: Optional[MediaSessionSnapshot]) -> None:
         self._last_snapshot = snapshot
         if snapshot is None:
             self.clock = MediaClockEstimator()
@@ -811,8 +1500,8 @@ class MediaSessionCoordinator:
 
     def _finish(
         self,
-        ack: MediaSessionAckV1,
-        snapshot: Optional[MediaSessionSnapshotV1],
+        ack: MediaSessionAck,
+        snapshot: Optional[MediaSessionSnapshot],
         hard_reconcile: bool,
         clock_error_ms: Optional[int],
     ) -> MediaSessionAcceptance:
@@ -826,20 +1515,20 @@ class MediaSessionCoordinator:
         self._last_acceptance = acceptance
         return acceptance
 
-    def accept(self, snapshot: MediaSessionSnapshotV1, receipt_monotonic_us: int) -> MediaSessionAckV1:
+    def accept(self, snapshot: MediaSessionSnapshot, receipt_monotonic_us: int) -> MediaSessionAck:
         return self.accept_with_result(snapshot, receipt_monotonic_us).ack
 
     def reject_without_mutation(
         self,
-        snapshot: MediaSessionSnapshotV1,
+        snapshot: MediaSessionSnapshot,
         error_code: str,
-    ) -> MediaSessionAckV1:
+    ) -> MediaSessionAck:
         """Return a protocol rejection without admitting coordinator state."""
 
         return self._ack(snapshot, "rejected", error_code)
 
     def accept_with_result(
-        self, snapshot: MediaSessionSnapshotV1, receipt_monotonic_us: int
+        self, snapshot: MediaSessionSnapshot, receipt_monotonic_us: int
     ) -> MediaSessionAcceptance:
         receipt = _require_int(receipt_monotonic_us, "receipt_monotonic_us")
         key = (snapshot.connector_session_id, snapshot.sequence)
@@ -891,7 +1580,8 @@ class MediaSessionCoordinator:
                 or snapshot.media.media_sha256 != previous_slot.media.media_sha256
                 or snapshot.performance.score_id != previous_slot.performance.score_id
                 or snapshot.performance.score_sha256 != previous_slot.performance.score_sha256
-                or snapshot.performance.character_package_sha256 != previous_slot.performance.character_package_sha256
+                or snapshot.performance.identity_key()
+                != previous_slot.performance.identity_key()
             )
             if identity_changed and snapshot.media_epoch == previous_slot.media_epoch:
                 return self._finish(

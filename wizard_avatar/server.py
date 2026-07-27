@@ -21,7 +21,7 @@ from .models import WizardCommand
 from .media_session import (
     MEDIA_SESSION_MAX_BODY_BYTES,
     MediaSessionError,
-    MediaSessionSnapshotV1,
+    parse_media_session_snapshot,
 )
 from .prism_signals import PrismSignalValidationError, parse_prism_signal_json
 from .performance_release import (
@@ -628,7 +628,7 @@ def create_app(
         require_connector(request)
         body = await bounded_json_body(request)
         try:
-            snapshot = MediaSessionSnapshotV1.from_json(body)
+            snapshot = parse_media_session_snapshot(body)
         except MediaSessionError as exc:
             raise HTTPException(
                 status_code=400,

@@ -56,13 +56,14 @@
     },
     "assets": {
       "type": "object",
-      "minProperties": 5,
+      "minProperties": 6,
       "required": [
         "pose_library",
         "pose_manifest",
         "animation_graph",
         "runtime_profile",
-        "capability_manifest"
+        "capability_manifest",
+        "choreography_dictionary"
       ],
       "additionalProperties": false,
       "patternProperties": {

@@ -1,0 +1,128 @@
+{
+  "schema_version": 1,
+  "dictionary_id": "choreography:wizard-joe-v1",
+  "character_id": "wizard-joe-v1",
+  "library_class": "comprehensive_performance",
+  "instructions": {
+    "selection_unit": "phrase",
+    "transition_policy": "authored_graph",
+    "speech_motion_policy": "layered",
+    "locomotion_speech_policy": "allowed",
+    "unsupported_intent_policy": "characterful_neutral",
+    "repetition_window_ms": 12000,
+    "minimum_stillness_ms": 700,
+    "maximum_gestures_per_phrase": 2
+  },
+  "intent_bindings": {
+    "neutral": {
+      "roles": ["neutral", "recovery"],
+      "pose_ids": ["front_idle"],
+      "action_ids": ["idle"],
+      "clip_ids": ["idle_front"],
+      "speech_compatible": true,
+      "interrupt_policy": "immediate",
+      "minimum_hold_ms": 700,
+      "recovery_intent": null
+    },
+    "listen": {
+      "roles": ["listening"],
+      "pose_ids": ["front_idle"],
+      "action_ids": ["idle"],
+      "clip_ids": ["idle_front"],
+      "speech_compatible": false,
+      "interrupt_policy": "immediate",
+      "minimum_hold_ms": 900,
+      "recovery_intent": "neutral"
+    },
+    "speak": {
+      "roles": ["speaking"],
+      "pose_ids": ["front_idle"],
+      "action_ids": ["speaking"],
+      "clip_ids": ["idle_front"],
+      "speech_compatible": true,
+      "interrupt_policy": "phrase_boundary",
+      "minimum_hold_ms": 300,
+      "recovery_intent": "neutral"
+    },
+    "explain": {
+      "roles": ["gesture", "speaking"],
+      "pose_ids": ["explaining"],
+      "action_ids": ["explaining"],
+      "clip_ids": ["explain_front"],
+      "speech_compatible": true,
+      "interrupt_policy": "phrase_boundary",
+      "minimum_hold_ms": 650,
+      "recovery_intent": "speak"
+    },
+    "pointing": {
+      "roles": ["gesture"],
+      "pose_ids": ["point_front_contact_locked"],
+      "action_ids": ["pointing"],
+      "clip_ids": ["point_front"],
+      "speech_compatible": true,
+      "interrupt_policy": "commit_then_recover",
+      "minimum_hold_ms": 500,
+      "recovery_intent": "speak"
+    },
+    "think": {
+      "roles": ["reaction"],
+      "pose_ids": ["front_thinking_hand_chin_wings"],
+      "action_ids": ["thinking"],
+      "clip_ids": ["idle_front"],
+      "speech_compatible": false,
+      "interrupt_policy": "immediate",
+      "minimum_hold_ms": 850,
+      "recovery_intent": "neutral"
+    },
+    "celebrate": {
+      "roles": ["gesture", "reaction"],
+      "pose_ids": ["front_celebrate_staff_up_wings"],
+      "action_ids": ["celebrate"],
+      "clip_ids": ["celebrate_front"],
+      "speech_compatible": true,
+      "interrupt_policy": "commit_then_recover",
+      "minimum_hold_ms": 800,
+      "recovery_intent": "neutral"
+    },
+    "casting": {
+      "roles": ["game_action", "gesture"],
+      "pose_ids": ["magic_cast"],
+      "action_ids": ["magic_cast"],
+      "clip_ids": ["cast_front"],
+      "speech_compatible": false,
+      "interrupt_policy": "commit_then_recover",
+      "minimum_hold_ms": 900,
+      "recovery_intent": "neutral"
+    },
+    "music": {
+      "roles": ["game_action", "gesture"],
+      "pose_ids": ["front_staff_spin_flourish"],
+      "action_ids": ["celebrate", "flourish", "reaction", "staff_spin"],
+      "clip_ids": ["flourish_front"],
+      "speech_compatible": false,
+      "interrupt_policy": "commit_then_recover",
+      "minimum_hold_ms": 700,
+      "recovery_intent": "neutral"
+    },
+    "walking": {
+      "roles": ["locomotion"],
+      "pose_ids": ["walk_front_left", "walk_front_right"],
+      "action_ids": ["walking"],
+      "clip_ids": ["walk_front"],
+      "speech_compatible": true,
+      "interrupt_policy": "commit_then_recover",
+      "minimum_hold_ms": 800,
+      "recovery_intent": "neutral"
+    },
+    "flying": {
+      "roles": ["flight", "locomotion"],
+      "pose_ids": ["fly_front_hover_neutral", "fly_front_wings_down", "fly_front_wings_up"],
+      "action_ids": [],
+      "clip_ids": ["hover_front"],
+      "speech_compatible": true,
+      "interrupt_policy": "commit_then_recover",
+      "minimum_hold_ms": 1000,
+      "recovery_intent": "neutral"
+    }
+  }
+}

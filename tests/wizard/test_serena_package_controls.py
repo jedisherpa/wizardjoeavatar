@@ -1,3 +1,4 @@
+import copy
 import json
 import shutil
 import tempfile
@@ -7,7 +8,7 @@ from pathlib import Path
 from wizard_avatar.character_registry import CharacterAdmissionV1
 from wizard_avatar.frame_source import ProceduralWizardFrameSource
 from wizard_avatar.governed_performance import GovernedPerformanceApprovalV1
-from wizard_avatar.media_session import MediaSessionSnapshotV1
+from wizard_avatar.media_session import MediaSessionSnapshotV1, MediaSessionSnapshotV2
 from wizard_avatar.models import STAFF_STATES, WizardCommand
 from wizard_avatar.performance_release import (
     GovernedSpeechError,
@@ -80,6 +81,17 @@ class SerenaPackageControlTests(unittest.IsolatedAsyncioTestCase):
             encoding="utf-8",
         )
         return source, registry_path
+
+    @staticmethod
+    def admitted_v2_snapshot(value, performance):
+        mapping = copy.deepcopy(value)
+        mapping["schema_version"] = 2
+        mapping["performance"].pop("character_id")
+        mapping["performance"].pop("character_package_sha256")
+        mapping["performance"]["admission"] = (
+            performance.character_admission.to_dict()
+        )
+        return MediaSessionSnapshotV2.from_mapping(mapping)
 
     def test_staffless_package_state_is_in_public_runtime_vocabulary(self):
         source = self.create_source()
@@ -278,6 +290,14 @@ class SerenaPackageControlTests(unittest.IsolatedAsyncioTestCase):
             hub.performance.runtime_profile,
             source.character_package.runtime_profile_contract,
         )
+        self.assertIs(
+            hub.performance.choreography_dictionary,
+            source.character_package.choreography_dictionary_contract,
+        )
+        self.assertEqual(
+            hub.performance.choreography_dictionary.library_class,
+            "focused_performance",
+        )
         self.assertTrue(hub.performance.supports_action("mentoring_invitation"))
         self.assertFalse(hub.performance.supports_action("staff_spin"))
         await hub.stop()
@@ -324,7 +344,7 @@ class SerenaPackageControlTests(unittest.IsolatedAsyncioTestCase):
                 "character_package_sha256": package_digest,
             }
         )
-        pending_snapshot = MediaSessionSnapshotV1.from_mapping(pending)
+        pending_snapshot = self.admitted_v2_snapshot(pending, performance)
         self.assertEqual(
             performance.accept_snapshot(pending_snapshot, 1_000_000).disposition,
             "accepted",
@@ -430,7 +450,7 @@ class SerenaPackageControlTests(unittest.IsolatedAsyncioTestCase):
         playing["cause"] = "playing"
         playing["playback"] = dict(playing["playback"])
         playing["playback"]["state"] = "playing"
-        playing_snapshot = MediaSessionSnapshotV1.from_mapping(playing)
+        playing_snapshot = self.admitted_v2_snapshot(playing, performance)
         performance.accept_snapshot(playing_snapshot, 1_100_000)
 
         source.controller.state.pose_override_id = "mentoring_invitation"

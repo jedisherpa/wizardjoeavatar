@@ -7,6 +7,7 @@ from pathlib import Path
 from unittest import mock
 
 from wizard_avatar.controller import WizardAvatarController
+from wizard_avatar.character_registry import load_character_registry
 from wizard_avatar.media_session import MediaSessionSnapshotV1
 from wizard_avatar.performance_application import PerformanceApplication
 from wizard_avatar.performance_scheduler import AccessibilityMotionProfile
@@ -75,7 +76,7 @@ class PerformanceApplicationTests(unittest.TestCase):
             MediaSessionSnapshotV1.from_mapping(copy.deepcopy(value)), receipt_us
         )
 
-    def test_foreign_character_and_package_reject_before_runtime_mutation(self):
+    def test_unadmitted_character_and_package_reject_before_runtime_mutation(self):
         package_digest = "sha256:" + "a" * 64
         application = PerformanceApplication(
             "serena-runtime-test",
@@ -91,7 +92,10 @@ class PerformanceApplicationTests(unittest.TestCase):
         character_ack = application.accept_snapshot(character_snapshot, 0)
 
         self.assertEqual(character_ack.disposition, "rejected")
-        self.assertEqual(character_ack.error_code, "character_mismatch")
+        self.assertEqual(
+            character_ack.error_code,
+            "character_not_runtime_admitted",
+        )
         self.assertIsNone(application.scheduler.coordinator.accepted_snapshot)
         self.assertIsNone(application.scheduler.coordinator.last_acceptance)
         self.assertEqual(
@@ -109,7 +113,10 @@ class PerformanceApplicationTests(unittest.TestCase):
         package_ack = application.accept_snapshot(package_snapshot, 1)
 
         self.assertEqual(package_ack.disposition, "rejected")
-        self.assertEqual(package_ack.error_code, "package_mismatch")
+        self.assertEqual(
+            package_ack.error_code,
+            "character_not_runtime_admitted",
+        )
         self.assertIsNone(application.scheduler.coordinator.accepted_snapshot)
         self.assertIsNone(application.scheduler.coordinator.last_acceptance)
         self.assertEqual(
@@ -119,15 +126,17 @@ class PerformanceApplicationTests(unittest.TestCase):
         self.assertEqual(application.diagnostics(1), baseline)
 
     def test_matching_character_and_package_are_admitted_normally(self):
-        package_digest = "sha256:" + "a" * 64
+        registry = load_character_registry()
+        package = registry.get("wizard-joe-v1")
         application = PerformanceApplication(
-            "serena-runtime-test",
-            character_id="serena-quill-v1",
-            package_digest=package_digest,
+            "wizard-runtime-test",
+            character_id=package.character_id,
+            package_digest=package.package_sha256,
+            character_registry=registry,
         )
         value = snapshot_mapping()
-        value["performance"]["character_id"] = "serena-quill-v1"
-        value["performance"]["character_package_sha256"] = package_digest
+        value["performance"]["character_id"] = package.character_id
+        value["performance"]["character_package_sha256"] = package.package_sha256
         snapshot = MediaSessionSnapshotV1.from_mapping(value)
 
         ack = application.accept_snapshot(snapshot, 0)
@@ -151,7 +160,10 @@ class PerformanceApplicationTests(unittest.TestCase):
 
         self.assertEqual(prepared.code, "score_admission_mismatch")
         self.assertEqual(ack.disposition, "rejected")
-        self.assertEqual(ack.error_code, "package_mismatch")
+        self.assertEqual(
+            ack.error_code,
+            "character_not_runtime_admitted",
+        )
         self.assertIsNone(application.scheduler.coordinator.accepted_snapshot)
 
     def test_package_bound_runtime_rejects_scored_snapshot_without_package_digest(self):
@@ -170,7 +182,10 @@ class PerformanceApplicationTests(unittest.TestCase):
         ack = application.accept_snapshot(snapshot, 0)
 
         self.assertEqual(ack.disposition, "rejected")
-        self.assertEqual(ack.error_code, "package_mismatch")
+        self.assertEqual(
+            ack.error_code,
+            "character_not_runtime_admitted",
+        )
         self.assertIsNone(application.scheduler.coordinator.accepted_snapshot)
 
     def test_music_drives_native_action_and_releases_when_paused(self):
@@ -402,7 +417,7 @@ class PerformanceApplicationTests(unittest.TestCase):
         self.assertEqual(unconfigured_ack.error_code, "score_not_ready")
         self.assertFalse(unconfigured_result.active)
 
-    def test_prepare_failure_codes_are_returned_by_accept_snapshot(self):
+    def test_absent_score_generation_is_reported_not_ready(self):
         score = runtime_score()
         snapshot = bound_snapshot(score)
         other = runtime_score(compiled_id="compiled:other")
@@ -417,8 +432,8 @@ class PerformanceApplicationTests(unittest.TestCase):
             prepared = application.prepare_snapshot(snapshot)
             ack = application.accept_snapshot(snapshot, 0)
 
-            self.assertEqual(prepared.code, "score_mismatch")
-            self.assertEqual(ack.error_code, "score_mismatch")
+            self.assertEqual(prepared.code, "score_not_ready")
+            self.assertEqual(ack.error_code, "score_not_ready")
 
     def test_repository_configuration_preserves_scoreless_migration_fallback(self):
         score = runtime_score()

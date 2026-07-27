@@ -1,0 +1,94 @@
+{
+  "character_id": "elara-voss",
+  "dictionary_id": "choreography:elara-voss-game-v1",
+  "instructions": {
+    "locomotion_speech_policy": "unsupported",
+    "maximum_gestures_per_phrase": 0,
+    "minimum_stillness_ms": 500,
+    "repetition_window_ms": 4000,
+    "selection_unit": "command",
+    "speech_motion_policy": "unsupported",
+    "transition_policy": "neutral_bridge",
+    "unsupported_intent_policy": "default_pose"
+  },
+  "intent_bindings": {
+    "game_cycle": {
+      "action_ids": [],
+      "clip_ids": [],
+      "interrupt_policy": "commit_then_recover",
+      "minimum_hold_ms": 750,
+      "pose_ids": [
+        "elara_voss_motion_001",
+        "elara_voss_motion_002",
+        "elara_voss_motion_003",
+        "elara_voss_motion_004",
+        "elara_voss_motion_005",
+        "elara_voss_motion_006",
+        "elara_voss_motion_007",
+        "elara_voss_motion_008",
+        "elara_voss_motion_009",
+        "elara_voss_motion_010",
+        "elara_voss_motion_011",
+        "elara_voss_motion_012",
+        "elara_voss_motion_013",
+        "elara_voss_motion_014",
+        "elara_voss_motion_015",
+        "elara_voss_motion_016",
+        "elara_voss_motion_017",
+        "elara_voss_motion_018",
+        "elara_voss_motion_019",
+        "elara_voss_motion_020",
+        "elara_voss_motion_021",
+        "elara_voss_motion_022",
+        "elara_voss_motion_023",
+        "elara_voss_motion_024",
+        "elara_voss_motion_025",
+        "elara_voss_motion_026",
+        "elara_voss_motion_027",
+        "elara_voss_motion_028",
+        "elara_voss_motion_029",
+        "elara_voss_motion_030",
+        "elara_voss_motion_031",
+        "elara_voss_motion_032",
+        "elara_voss_motion_033",
+        "elara_voss_motion_034",
+        "elara_voss_motion_035",
+        "elara_voss_motion_036",
+        "elara_voss_motion_037",
+        "elara_voss_motion_038",
+        "elara_voss_motion_039",
+        "elara_voss_motion_040",
+        "elara_voss_motion_041",
+        "elara_voss_motion_042",
+        "elara_voss_motion_043",
+        "elara_voss_motion_044",
+        "elara_voss_motion_045",
+        "elara_voss_motion_046",
+        "elara_voss_motion_047",
+        "elara_voss_motion_048"
+      ],
+      "recovery_intent": "neutral",
+      "roles": [
+        "game_action"
+      ],
+      "speech_compatible": false
+    },
+    "neutral": {
+      "action_ids": [],
+      "clip_ids": [],
+      "interrupt_policy": "immediate",
+      "minimum_hold_ms": 500,
+      "pose_ids": [
+        "elara_voss_motion_001"
+      ],
+      "recovery_intent": null,
+      "roles": [
+        "neutral",
+        "recovery"
+      ],
+      "speech_compatible": false
+    }
+  },
+  "library_class": "game_motion",
+  "schema_version": 1
+}

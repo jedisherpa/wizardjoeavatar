@@ -191,6 +191,21 @@ class CharacterRegistry:
                 "runtime_admitted": True,
                 "default_pose_id": package.default_pose_id,
                 "capabilities": package.capabilities,
+                "choreography": (
+                    None
+                    if package.choreography_dictionary_contract is None
+                    else {
+                        "dictionary_id": (
+                            package.choreography_dictionary_contract.dictionary_id
+                        ),
+                        "dictionary_sha256": (
+                            package.choreography_dictionary_sha256
+                        ),
+                        "library_class": (
+                            package.choreography_dictionary_contract.library_class
+                        ),
+                    }
+                ),
             }
             for package in self.packages.values()
         )

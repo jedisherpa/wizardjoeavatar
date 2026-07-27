@@ -1,0 +1,39 @@
+{
+  "schema_version": 2,
+  "connector_session_id": "00000000-0000-4000-8000-000000000102",
+  "accepted_sequence": 42,
+  "accepted_media_epoch": 3,
+  "disposition": "accepted",
+  "wizard_runtime_epoch": "wizard-runtime-fixture-002",
+  "runtime_admission": {
+    "schema_version": 1,
+    "persona_id": "persona:wizard-joe",
+    "character_id": "wizard-joe-v1",
+    "package_digest": "sha256:e35d9fee572e8f984a25a3776e2be51e1920b2a09f568170f12ccd3f0851b387",
+    "admission_sha256": "sha256:d7b23f23ea0c7bda0fafeeb1dfb92d48d60a6ab5ed95e61bc48d232d09cc1199"
+  },
+  "resync_required": false,
+  "scheduler_state": "playing",
+  "error": null,
+  "capabilities": {
+    "media_session_schema": 2,
+    "supported_media_session_schemas": [
+      1,
+      2
+    ],
+    "max_snapshot_hz": 8,
+    "supported_rate_milli": [
+      500,
+      750,
+      1000,
+      1250,
+      1500,
+      2000
+    ],
+    "motion_profiles": [
+      "full",
+      "reduced",
+      "still"
+    ]
+  }
+}

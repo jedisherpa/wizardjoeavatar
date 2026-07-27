@@ -1,0 +1,94 @@
+{
+  "character_id": "thorne-vale",
+  "dictionary_id": "choreography:thorne-vale-game-v1",
+  "instructions": {
+    "locomotion_speech_policy": "unsupported",
+    "maximum_gestures_per_phrase": 0,
+    "minimum_stillness_ms": 500,
+    "repetition_window_ms": 4000,
+    "selection_unit": "command",
+    "speech_motion_policy": "unsupported",
+    "transition_policy": "neutral_bridge",
+    "unsupported_intent_policy": "default_pose"
+  },
+  "intent_bindings": {
+    "game_cycle": {
+      "action_ids": [],
+      "clip_ids": [],
+      "interrupt_policy": "commit_then_recover",
+      "minimum_hold_ms": 750,
+      "pose_ids": [
+        "thorne_vale_motion_001",
+        "thorne_vale_motion_002",
+        "thorne_vale_motion_003",
+        "thorne_vale_motion_004",
+        "thorne_vale_motion_005",
+        "thorne_vale_motion_006",
+        "thorne_vale_motion_007",
+        "thorne_vale_motion_008",
+        "thorne_vale_motion_009",
+        "thorne_vale_motion_010",
+        "thorne_vale_motion_011",
+        "thorne_vale_motion_012",
+        "thorne_vale_motion_013",
+        "thorne_vale_motion_014",
+        "thorne_vale_motion_015",
+        "thorne_vale_motion_016",
+        "thorne_vale_motion_017",
+        "thorne_vale_motion_018",
+        "thorne_vale_motion_019",
+        "thorne_vale_motion_020",
+        "thorne_vale_motion_021",
+        "thorne_vale_motion_022",
+        "thorne_vale_motion_023",
+        "thorne_vale_motion_024",
+        "thorne_vale_motion_025",
+        "thorne_vale_motion_026",
+        "thorne_vale_motion_027",
+        "thorne_vale_motion_028",
+        "thorne_vale_motion_029",
+        "thorne_vale_motion_030",
+        "thorne_vale_motion_031",
+        "thorne_vale_motion_032",
+        "thorne_vale_motion_033",
+        "thorne_vale_motion_034",
+        "thorne_vale_motion_035",
+        "thorne_vale_motion_036",
+        "thorne_vale_motion_037",
+        "thorne_vale_motion_038",
+        "thorne_vale_motion_039",
+        "thorne_vale_motion_040",
+        "thorne_vale_motion_041",
+        "thorne_vale_motion_042",
+        "thorne_vale_motion_043",
+        "thorne_vale_motion_044",
+        "thorne_vale_motion_045",
+        "thorne_vale_motion_046",
+        "thorne_vale_motion_047",
+        "thorne_vale_motion_048"
+      ],
+      "recovery_intent": "neutral",
+      "roles": [
+        "game_action"
+      ],
+      "speech_compatible": false
+    },
+    "neutral": {
+      "action_ids": [],
+      "clip_ids": [],
+      "interrupt_policy": "immediate",
+      "minimum_hold_ms": 500,
+      "pose_ids": [
+        "thorne_vale_motion_001"
+      ],
+      "recovery_intent": null,
+      "roles": [
+        "neutral",
+        "recovery"
+      ],
+      "speech_compatible": false
+    }
+  },
+  "library_class": "game_motion",
+  "schema_version": 1
+}

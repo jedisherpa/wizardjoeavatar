@@ -1,6 +1,7 @@
 import copy
 import hashlib
 import json
+import shutil
 import tempfile
 import unittest
 from pathlib import Path
@@ -9,6 +10,7 @@ from wizard_avatar.artifact_hashing import canonical_json_v1
 from wizard_avatar.character_capabilities import (
     derive_character_capability_manifest,
 )
+from wizard_avatar.character_registry import CharacterAdmissionV1
 from wizard_avatar.frame_source import ProceduralWizardFrameSource
 from wizard_avatar.performance_compiler import (
     PerformanceCompileError,
@@ -20,6 +22,7 @@ from wizard_avatar.performance_score import (
     CompiledScoreLoader,
     CompiledScoreRepository,
 )
+from wizard_avatar.media_session import MediaSessionSnapshotV2
 from wizard_avatar.stream import WizardFrameHub
 
 from tests.wizard.test_performance_context import context_mapping
@@ -93,6 +96,54 @@ class SerenaGovernedScoreTests(unittest.TestCase):
     def setUpClass(cls):
         cls.manifest = derive_character_capability_manifest(SERENA_PACKAGE_PATH)
         cls.portable_score = _portable_score()
+
+    def admitted_source(self, root):
+        package_root = root / "serena_quill"
+        shutil.copytree(SERENA_PACKAGE_PATH.parent, package_root)
+        package_path = package_root / SERENA_PACKAGE_PATH.name
+        source = ProceduralWizardFrameSource(
+            cols=96,
+            rows=54,
+            fps=24,
+            character_package_path=package_path,
+        )
+        package = source.character_package
+        admission = CharacterAdmissionV1.build(
+            persona_id="serena-quill",
+            character_id=package.character_id,
+            package_sha256=package.package_sha256,
+        )
+        registry_path = root / "character_registry.json"
+        registry_path.write_text(
+            json.dumps(
+                {
+                    "schema_version": 2,
+                    "default_character_id": package.character_id,
+                    "characters": [
+                        {
+                            "character_id": package.character_id,
+                            "persona_id": admission.persona_id,
+                            "package": str(package_path.relative_to(root)),
+                            "package_sha256": package.package_sha256,
+                            "admission_sha256": admission.admission_sha256,
+                        }
+                    ],
+                }
+            ),
+            encoding="utf-8",
+        )
+        return source, registry_path
+
+    @staticmethod
+    def admitted_v2_snapshot(snapshot, performance):
+        mapping = copy.deepcopy(snapshot.to_dict())
+        mapping["schema_version"] = 2
+        mapping["performance"].pop("character_id")
+        mapping["performance"].pop("character_package_sha256")
+        mapping["performance"]["admission"] = (
+            performance.character_admission.to_dict()
+        )
+        return MediaSessionSnapshotV2.from_mapping(mapping)
 
     def test_full_motion_score_compiles_to_exact_serena_graph_identity(self):
         context = _bound_context(self.manifest, self.portable_score)
@@ -179,20 +230,23 @@ class SerenaGovernedScoreTests(unittest.TestCase):
         loaded = CompiledScoreLoader().from_mapping(compiled)
 
         with tempfile.TemporaryDirectory() as temporary:
-            repository = CompiledScoreRepository(temporary)
+            root = Path(temporary)
+            repository = CompiledScoreRepository(root / "scores")
             repository.publish(loaded)
-            source = ProceduralWizardFrameSource(
-                cols=96,
-                rows=54,
-                fps=24,
-                character_package_path=SERENA_PACKAGE_PATH,
+            source, registry_path = self.admitted_source(root)
+            hub = WizardFrameHub(
+                source,
+                score_repository=repository,
+                character_registry_path=registry_path,
             )
-            hub = WizardFrameHub(source, score_repository=repository)
-            snapshot = bound_snapshot(
-                loaded,
-                position=1500,
-                kind="audiobook",
-                mode="narrative",
+            snapshot = self.admitted_v2_snapshot(
+                bound_snapshot(
+                    loaded,
+                    position=1500,
+                    kind="audiobook",
+                    mode="narrative",
+                ),
+                hub.performance,
             )
 
             prepared = hub.performance.prepare_snapshot(snapshot)
@@ -235,21 +289,26 @@ class SerenaGovernedScoreTests(unittest.TestCase):
         hubs = []
 
         with tempfile.TemporaryDirectory() as temporary:
-            repository = CompiledScoreRepository(temporary)
+            root = Path(temporary)
+            repository = CompiledScoreRepository(root / "scores")
             repository.publish(loaded)
-            for _ in range(2):
-                source = ProceduralWizardFrameSource(
-                    cols=96,
-                    rows=54,
-                    fps=24,
-                    character_package_path=SERENA_PACKAGE_PATH,
+            for index in range(2):
+                instance_root = root / "instance-{}".format(index)
+                instance_root.mkdir()
+                source, registry_path = self.admitted_source(instance_root)
+                hub = WizardFrameHub(
+                    source,
+                    score_repository=repository,
+                    character_registry_path=registry_path,
                 )
-                hub = WizardFrameHub(source, score_repository=repository)
-                snapshot = bound_snapshot(
-                    loaded,
-                    position=1500,
-                    kind="audiobook",
-                    mode="narrative",
+                snapshot = self.admitted_v2_snapshot(
+                    bound_snapshot(
+                        loaded,
+                        position=1500,
+                        kind="audiobook",
+                        mode="narrative",
+                    ),
+                    hub.performance,
                 )
                 self.assertTrue(
                     hub.performance.prepare_snapshot(snapshot).ready
@@ -267,13 +326,16 @@ class SerenaGovernedScoreTests(unittest.TestCase):
                 sources.append(source)
                 hubs.append(hub)
 
-            paused = bound_snapshot(
-                loaded,
-                sequence=1,
-                state="paused",
-                position=1500,
-                kind="audiobook",
-                mode="narrative",
+            paused = self.admitted_v2_snapshot(
+                bound_snapshot(
+                    loaded,
+                    sequence=1,
+                    state="paused",
+                    position=1500,
+                    kind="audiobook",
+                    mode="narrative",
+                ),
+                hubs[0].performance,
             )
             pause_ack = hubs[0].performance.accept_snapshot(paused, 1_000)
             inactive = hubs[0].performance.apply(

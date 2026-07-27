@@ -1,0 +1,94 @@
+{
+  "character_id": "liana",
+  "dictionary_id": "choreography:liana-game-v1",
+  "instructions": {
+    "locomotion_speech_policy": "unsupported",
+    "maximum_gestures_per_phrase": 0,
+    "minimum_stillness_ms": 500,
+    "repetition_window_ms": 4000,
+    "selection_unit": "command",
+    "speech_motion_policy": "unsupported",
+    "transition_policy": "neutral_bridge",
+    "unsupported_intent_policy": "default_pose"
+  },
+  "intent_bindings": {
+    "game_cycle": {
+      "action_ids": [],
+      "clip_ids": [],
+      "interrupt_policy": "commit_then_recover",
+      "minimum_hold_ms": 750,
+      "pose_ids": [
+        "liana_motion_001",
+        "liana_motion_002",
+        "liana_motion_003",
+        "liana_motion_004",
+        "liana_motion_005",
+        "liana_motion_006",
+        "liana_motion_007",
+        "liana_motion_008",
+        "liana_motion_009",
+        "liana_motion_010",
+        "liana_motion_011",
+        "liana_motion_012",
+        "liana_motion_013",
+        "liana_motion_014",
+        "liana_motion_015",
+        "liana_motion_016",
+        "liana_motion_017",
+        "liana_motion_018",
+        "liana_motion_019",
+        "liana_motion_020",
+        "liana_motion_021",
+        "liana_motion_022",
+        "liana_motion_023",
+        "liana_motion_024",
+        "liana_motion_025",
+        "liana_motion_026",
+        "liana_motion_027",
+        "liana_motion_028",
+        "liana_motion_029",
+        "liana_motion_030",
+        "liana_motion_031",
+        "liana_motion_032",
+        "liana_motion_033",
+        "liana_motion_034",
+        "liana_motion_035",
+        "liana_motion_036",
+        "liana_motion_037",
+        "liana_motion_038",
+        "liana_motion_039",
+        "liana_motion_040",
+        "liana_motion_041",
+        "liana_motion_042",
+        "liana_motion_043",
+        "liana_motion_044",
+        "liana_motion_045",
+        "liana_motion_046",
+        "liana_motion_047",
+        "liana_motion_048"
+      ],
+      "recovery_intent": "neutral",
+      "roles": [
+        "game_action"
+      ],
+      "speech_compatible": false
+    },
+    "neutral": {
+      "action_ids": [],
+      "clip_ids": [],
+      "interrupt_policy": "immediate",
+      "minimum_hold_ms": 500,
+      "pose_ids": [
+        "liana_motion_001"
+      ],
+      "recovery_intent": null,
+      "roles": [
+        "neutral",
+        "recovery"
+      ],
+      "speech_compatible": false
+    }
+  },
+  "library_class": "game_motion",
+  "schema_version": 1
+}

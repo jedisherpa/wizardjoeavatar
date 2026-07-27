@@ -122,7 +122,12 @@ Only Wizard Joe is production-admitted. Serena Quill and all JoeVille parity
 libraries remain review-only. The observer at `http://127.0.0.1:8665/` is a
 visual comparison surface and confers no runtime authority.
 
-The governed-speech path now carries the admission tuple end to end. The older
-media-session snapshot schema still carries character and package identity
-without persona and admission identity. A versioned media-session V2 is the next
-protocol-continuity gate; V1 must not be silently widened.
+The governed-speech and media-session V2 paths carry the admission tuple end to
+end. Media-session V2 embeds the admission content plus its digest in every
+snapshot. A V2 acknowledgement is trusted only when its runtime admission is
+identical to the snapshot admission. V1 remains frozen to the exact Wizard Joe
+migration tuple above and is never inferred for another character.
+
+Admission does not imply that every character has the same movement vocabulary.
+Each admitted package also carries a hash-bound choreography dictionary. See
+`CHARACTER_CHOREOGRAPHY_DICTIONARY_V1.md`.

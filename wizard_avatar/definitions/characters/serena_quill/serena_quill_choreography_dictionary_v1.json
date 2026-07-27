@@ -1,0 +1,167 @@
+{
+  "character_id": "serena-quill-v1",
+  "dictionary_id": "choreography:serena-quill-v1",
+  "instructions": {
+    "locomotion_speech_policy": "unsupported",
+    "maximum_gestures_per_phrase": 1,
+    "minimum_stillness_ms": 1000,
+    "repetition_window_ms": 16000,
+    "selection_unit": "beat",
+    "speech_motion_policy": "whole_pose",
+    "transition_policy": "neutral_bridge",
+    "unsupported_intent_policy": "characterful_neutral"
+  },
+  "intent_bindings": {
+    "consent_pause": {
+      "action_ids": [
+        "consent_pause"
+      ],
+      "clip_ids": [
+        "pose_consent_pause"
+      ],
+      "interrupt_policy": "immediate",
+      "minimum_hold_ms": 1400,
+      "pose_ids": [
+        "consent_pause"
+      ],
+      "recovery_intent": "listen",
+      "roles": [
+        "listening",
+        "reaction"
+      ],
+      "speech_compatible": false
+    },
+    "explain": {
+      "action_ids": [
+        "explaining"
+      ],
+      "clip_ids": [
+        "pose_facilitation"
+      ],
+      "interrupt_policy": "commit_then_recover",
+      "minimum_hold_ms": 900,
+      "pose_ids": [
+        "facilitation"
+      ],
+      "recovery_intent": "speak",
+      "roles": [
+        "gesture",
+        "speaking"
+      ],
+      "speech_compatible": true
+    },
+    "listen": {
+      "action_ids": [
+        "listening"
+      ],
+      "clip_ids": [
+        "pose_active_listening"
+      ],
+      "interrupt_policy": "immediate",
+      "minimum_hold_ms": 1200,
+      "pose_ids": [
+        "active_listening"
+      ],
+      "recovery_intent": "neutral",
+      "roles": [
+        "listening"
+      ],
+      "speech_compatible": false
+    },
+    "music": {
+      "action_ids": [
+        "celebrating"
+      ],
+      "clip_ids": [
+        "pose_careful_celebration"
+      ],
+      "interrupt_policy": "commit_then_recover",
+      "minimum_hold_ms": 900,
+      "pose_ids": [
+        "careful_celebration"
+      ],
+      "recovery_intent": "neutral",
+      "roles": [
+        "game_action",
+        "gesture"
+      ],
+      "speech_compatible": false
+    },
+    "neutral": {
+      "action_ids": [
+        "idle"
+      ],
+      "clip_ids": [
+        "pose_neutral_front"
+      ],
+      "interrupt_policy": "immediate",
+      "minimum_hold_ms": 1000,
+      "pose_ids": [
+        "neutral_front"
+      ],
+      "recovery_intent": null,
+      "roles": [
+        "neutral",
+        "recovery"
+      ],
+      "speech_compatible": true
+    },
+    "reassure": {
+      "action_ids": [
+        "orb_reassurance"
+      ],
+      "clip_ids": [
+        "pose_orb_reassurance"
+      ],
+      "interrupt_policy": "commit_then_recover",
+      "minimum_hold_ms": 1000,
+      "pose_ids": [
+        "orb_reassurance"
+      ],
+      "recovery_intent": "speak",
+      "roles": [
+        "gesture",
+        "speaking"
+      ],
+      "speech_compatible": true
+    },
+    "speak": {
+      "action_ids": [
+        "speaking"
+      ],
+      "clip_ids": [
+        "pose_idle_speaking"
+      ],
+      "interrupt_policy": "phrase_boundary",
+      "minimum_hold_ms": 450,
+      "pose_ids": [
+        "idle_speaking"
+      ],
+      "recovery_intent": "neutral",
+      "roles": [
+        "speaking"
+      ],
+      "speech_compatible": true
+    },
+    "think": {
+      "action_ids": [
+        "thinking"
+      ],
+      "clip_ids": [
+        "pose_reflective_question"
+      ],
+      "interrupt_policy": "immediate",
+      "minimum_hold_ms": 1100,
+      "pose_ids": [
+        "reflective_question"
+      ],
+      "recovery_intent": "neutral",
+      "roles": [
+        "reaction"
+      ],
+      "speech_compatible": false
+    }
+  },
+  "library_class": "focused_performance",
+  "schema_version": 1
+}

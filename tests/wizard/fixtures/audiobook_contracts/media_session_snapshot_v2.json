@@ -1,0 +1,46 @@
+{
+  "schema_version": 2,
+  "message_id": "00000000-0000-4000-8000-000000000101",
+  "connector_session_id": "00000000-0000-4000-8000-000000000102",
+  "sequence": 42,
+  "media_epoch": 3,
+  "cause": "seeked",
+  "sampled_at_monotonic_ms": 937510,
+  "media": {
+    "media_id": "media:sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "media_sha256": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "kind": "audiobook",
+    "source_slot": "main",
+    "source_kind": "studio_chapter",
+    "book_id": "book-7",
+    "chapter_id": "chapter-12",
+    "duration_ms": 1638204
+  },
+  "playback": {
+    "state": "playing",
+    "position_ms": 81735,
+    "rate_milli": 1250,
+    "ready_state": 4,
+    "seeking": false
+  },
+  "performance": {
+    "mode": "narrative",
+    "score_id": "score-4fc4b75b-v3",
+    "score_revision": 3,
+    "score_sha256": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+    "admission": {
+      "schema_version": 1,
+      "persona_id": "persona:wizard-joe",
+      "character_id": "wizard-joe-v1",
+      "package_digest": "sha256:e35d9fee572e8f984a25a3776e2be51e1920b2a09f568170f12ccd3f0851b387",
+      "admission_sha256": "sha256:d7b23f23ea0c7bda0fafeeb1dfb92d48d60a6ab5ed95e61bc48d232d09cc1199"
+    },
+    "intensity_milli": 650,
+    "motion_profile": "reduced",
+    "disabled_channels": [
+      "camera_motion",
+      "flight",
+      "whole_body_pulse"
+    ]
+  }
+}

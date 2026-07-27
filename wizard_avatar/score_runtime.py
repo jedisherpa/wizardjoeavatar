@@ -7,7 +7,7 @@ from collections import OrderedDict
 from dataclasses import dataclass
 from typing import Iterable, Mapping, Optional
 
-from .media_session import MediaSessionSnapshotV1
+from .media_session import MediaSessionSnapshot
 from .performance_score import (
     CompiledPerformanceScore,
     CompiledScoreRepository,
@@ -38,7 +38,7 @@ class ScoreRuntimeBinding:
     @classmethod
     def from_snapshot(
         cls,
-        snapshot: MediaSessionSnapshotV1,
+        snapshot: MediaSessionSnapshot,
     ) -> Optional["ScoreRuntimeBinding"]:
         selection = snapshot.performance
         if selection.score_id is None:
@@ -150,7 +150,7 @@ class ScoreRuntime:
         ] = OrderedDict()
         self._evictions = 0
 
-    def prepare_snapshot(self, snapshot: MediaSessionSnapshotV1) -> ScorePreparationResult:
+    def prepare_snapshot(self, snapshot: MediaSessionSnapshot) -> ScorePreparationResult:
         """Load and validate one score binding; callers must run this off the event loop."""
 
         binding = ScoreRuntimeBinding.from_snapshot(snapshot)
@@ -202,7 +202,7 @@ class ScoreRuntime:
 
     def resolve(
         self,
-        snapshot: MediaSessionSnapshotV1,
+        snapshot: MediaSessionSnapshot,
     ) -> Optional[CompiledPerformanceScore]:
         """Resolve an exact score binding from memory without repository access."""
 
@@ -215,7 +215,7 @@ class ScoreRuntime:
                 self._touch(binding)
             return score
 
-    def result_for(self, snapshot: MediaSessionSnapshotV1) -> ScorePreparationResult:
+    def result_for(self, snapshot: MediaSessionSnapshot) -> ScorePreparationResult:
         binding = ScoreRuntimeBinding.from_snapshot(snapshot)
         if binding is None:
             return ScorePreparationResult(False, SCORELESS_V1, None, None)
@@ -231,10 +231,10 @@ class ScoreRuntime:
             score=None,
         )
 
-    def diagnostics_for(self, snapshot: MediaSessionSnapshotV1) -> ScorePreparationResult:
+    def diagnostics_for(self, snapshot: MediaSessionSnapshot) -> ScorePreparationResult:
         return self.result_for(snapshot)
 
-    def diagnostics_mapping(self, snapshot: MediaSessionSnapshotV1) -> Mapping[str, object]:
+    def diagnostics_mapping(self, snapshot: MediaSessionSnapshot) -> Mapping[str, object]:
         with self._lock:
             result = self._result_for_locked(snapshot)
             cache_entries = len(self._scores)
@@ -280,7 +280,7 @@ class ScoreRuntime:
 
     def _result_for_locked(
         self,
-        snapshot: MediaSessionSnapshotV1,
+        snapshot: MediaSessionSnapshot,
     ) -> ScorePreparationResult:
         binding = ScoreRuntimeBinding.from_snapshot(snapshot)
         if binding is None:
