@@ -25,17 +25,29 @@ FACINGS = (
     "west",
     "northwest",
 )
-CORE_ACTION_POSES = {
-    "explaining": "robin.act.012.explain-one-point",
-    "thinking": "robin.act.061.deep-contemplation",
-    "pointing": "robin.act.016.point-to-viewer",
-    "magic_cast": "robin.act.062.sudden-idea",
-    "reaction": "robin.act.048.surprise",
-    "celebrate": "robin.act.042.joy",
-    "guard": "robin.act.036.protective-boundary",
-    "block": "robin.act.075.brace-against-surface",
-    "flourish": "robin.act.039.describe-a-vast-scene",
-    "shush": "robin.act.029.confidential-whisper",
+SUPPORTED_SHARED_CANVAS_CHARACTERS = frozenset({"robin", "speech"})
+CORE_ACTION_POSE_INDEXES = {
+    "explaining": 12,
+    "thinking": 61,
+    "pointing": 16,
+    "magic_cast": 62,
+    "reaction": 48,
+    "celebrate": 42,
+    "guard": 36,
+    "block": 75,
+    "flourish": 39,
+    "shush": 29,
+}
+EXPRESSION_POSE_INDEXES = {
+    "happy": 42,
+    "amused": 43,
+    "thinking": 61,
+    "surprised": 48,
+    "worried": 51,
+    "confident": 46,
+    "focused": 59,
+    "skeptical": 50,
+    "explaining": 12,
 }
 
 
@@ -69,6 +81,35 @@ def _portable_source_path(path: Path) -> str:
         return path.relative_to(ROOT).as_posix()
     except ValueError:
         return path.name
+
+
+def _pose_id(
+    index: Mapping[str, Any],
+    family: str,
+    family_index: int,
+) -> str:
+    matches = [
+        str(pose["pose_id"])
+        for pose in index["poses"]
+        if str(pose["family"]) == family
+        and int(pose["family_index"]) == family_index
+    ]
+    if len(matches) != 1:
+        raise ValueError(
+            "expected one {} pose at index {}, found {}".format(
+                family,
+                family_index,
+                len(matches),
+            )
+        )
+    return matches[0]
+
+
+def _core_action_poses(index: Mapping[str, Any]) -> dict[str, str]:
+    return {
+        action: _pose_id(index, "ACT", family_index)
+        for action, family_index in CORE_ACTION_POSE_INDEXES.items()
+    }
 
 
 def _pose_facing(pose: Mapping[str, Any]) -> str:
@@ -258,6 +299,8 @@ def _clip(
 
 def _graph(index: Mapping[str, Any], pose_ids: list[str]) -> dict[str, Any]:
     by_id = {str(pose["pose_id"]): pose for pose in index["poses"]}
+    character_id = str(index["character_id"])
+    action_poses = _core_action_poses(index)
 
     def family_ids(family: str, start: int, end: int) -> list[str]:
         return [
@@ -273,25 +316,25 @@ def _graph(index: Mapping[str, Any], pose_ids: list[str]) -> dict[str, Any]:
         ),
         "idle_front": _clip(
             "idle_front",
-            ["robin.act.001.neutral-front"],
+            [_pose_id(index, "ACT", 1)],
             family="idle",
             loop_mode="loop",
         ),
         "idle_left": _clip(
             "idle_left",
-            ["robin.act.003.left-profile"],
+            [_pose_id(index, "ACT", 3)],
             family="idle",
             loop_mode="loop",
         ),
         "idle_right": _clip(
             "idle_right",
-            ["robin.act.006.right-profile"],
+            [_pose_id(index, "ACT", 6)],
             family="idle",
             loop_mode="loop",
         ),
         "idle_back": _clip(
             "idle_back",
-            ["robin.act.005.neutral-back"],
+            [_pose_id(index, "ACT", 5)],
             family="idle",
             loop_mode="loop",
         ),
@@ -368,9 +411,9 @@ def _graph(index: Mapping[str, Any], pose_ids: list[str]) -> dict[str, Any]:
         "turn_front_to_east": _clip(
             "turn_front_to_east",
             [
-                "robin.act.001.neutral-front",
-                "robin.act.007.front-three-quarter-right",
-                "robin.act.006.right-profile",
+                _pose_id(index, "ACT", 1),
+                _pose_id(index, "ACT", 7),
+                _pose_id(index, "ACT", 6),
             ],
             family="transition",
             loop_mode="hold_last",
@@ -378,29 +421,29 @@ def _graph(index: Mapping[str, Any], pose_ids: list[str]) -> dict[str, Any]:
         "turn_front_to_west": _clip(
             "turn_front_to_west",
             [
-                "robin.act.001.neutral-front",
-                "robin.act.002.front-three-quarter-left",
-                "robin.act.003.left-profile",
+                _pose_id(index, "ACT", 1),
+                _pose_id(index, "ACT", 2),
+                _pose_id(index, "ACT", 3),
             ],
             family="transition",
             loop_mode="hold_last",
         ),
         "idle_recovery": _clip(
             "idle_recovery",
-            ["robin.act.001.neutral-front"],
+            [_pose_id(index, "ACT", 1)],
             family="locomotion",
             loop_mode="hold_last",
         ),
         "back_walk_fallback": _clip(
             "back_walk_fallback",
-            ["robin.act.005.neutral-back"],
+            [_pose_id(index, "ACT", 5)],
             family="locomotion",
             loop_mode="loop",
             phase_source="ground_distance",
             root_policy="ground_distance",
         ),
     }
-    for action, pose_id in CORE_ACTION_POSES.items():
+    for action, pose_id in action_poses.items():
         if pose_id in by_id:
             clips["action_{}".format(action)] = _clip(
                 "action_{}".format(action),
@@ -616,7 +659,7 @@ def _graph(index: Mapping[str, Any], pose_ids: list[str]) -> dict[str, Any]:
 
     classification = {}
     for pose_id in pose_ids:
-        airborne = pose_id.startswith("robin.fly.")
+        airborne = pose_id.startswith(character_id + ".fly.")
         classification[pose_id] = {
             "roles": ["clip_sample"],
             "altitude_class": "airborne" if airborne else "grounded",
@@ -628,7 +671,9 @@ def _graph(index: Mapping[str, Any], pose_ids: list[str]) -> dict[str, Any]:
         }
     return {
         "$schema": SCHEMA_URI,
-        "$id": "https://wizardjoe.local/graphs/robin-hd-rgba-candidate-v1",
+        "$id": "https://wizardjoe.local/graphs/{}-hd-rgba-candidate-v1".format(
+            character_id
+        ),
         "schema_version": 2,
         "asset_set_id": "{}-runtime-candidate-v1".format(index["asset_set_id"]),
         "authored_fps": 24,
@@ -667,7 +712,7 @@ def _graph(index: Mapping[str, Any], pose_ids: list[str]) -> dict[str, Any]:
             },
             "by_action": {
                 action: "action_{}".format(action)
-                for action in CORE_ACTION_POSES
+                for action in action_poses
                 if "action_{}".format(action) in clips
             },
         },
@@ -675,10 +720,10 @@ def _graph(index: Mapping[str, Any], pose_ids: list[str]) -> dict[str, Any]:
 
 
 def _runtime_profile(index: Mapping[str, Any]) -> dict[str, Any]:
-    default_pose = "robin.act.001.neutral-front"
+    default_pose = _pose_id(index, "ACT", 1)
     action_poses = {
         action: pose_id
-        for action, pose_id in CORE_ACTION_POSES.items()
+        for action, pose_id in _core_action_poses(index).items()
         if any(
             str(pose["pose_id"]) == pose_id for pose in index["poses"]
         )
@@ -691,37 +736,28 @@ def _runtime_profile(index: Mapping[str, Any]) -> dict[str, Any]:
         "required_anchors": ["root"],
         "optional_anchors": [],
         "facing_poses": {
-            "north": "robin.act.005.neutral-back",
-            "northeast": "robin.act.004.back-three-quarter-left",
-            "east": "robin.act.006.right-profile",
-            "southeast": "robin.act.007.front-three-quarter-right",
+            "north": _pose_id(index, "ACT", 5),
+            "northeast": _pose_id(index, "ACT", 4),
+            "east": _pose_id(index, "ACT", 6),
+            "southeast": _pose_id(index, "ACT", 7),
             "south": default_pose,
-            "southwest": "robin.act.002.front-three-quarter-left",
-            "west": "robin.act.003.left-profile",
-            "northwest": "robin.act.004.back-three-quarter-left",
+            "southwest": _pose_id(index, "ACT", 2),
+            "west": _pose_id(index, "ACT", 3),
+            "northwest": _pose_id(index, "ACT", 4),
         },
         "action_poses": action_poses,
         "expression_aliases": {
-            "happy": "robin.act.042.joy",
-            "amused": "robin.act.043.full-laughter",
-            "thinking": "robin.act.061.deep-contemplation",
-            "surprised": "robin.act.048.surprise",
-            "worried": "robin.act.051.concern",
-            "confident": "robin.act.046.confident-hero",
-            "focused": "robin.act.059.determination",
-            "skeptical": "robin.act.050.skepticism",
-            "explaining": "robin.act.012.explain-one-point",
+            expression: _pose_id(index, "ACT", family_index)
+            for expression, family_index in EXPRESSION_POSE_INDEXES.items()
         },
         "locomotion_cycles": {
             "walk": [
-                "robin.act.076.walk-left-contact",
-                "robin.act.077.walk-left-passing",
-                "robin.act.078.walk-right-contact",
-                "robin.act.079.walk-right-passing",
+                _pose_id(index, "ACT", family_index)
+                for family_index in range(76, 80)
             ],
             "run": [
-                "robin.act.080.run-contact",
-                "robin.act.081.run-airborne-phase",
+                _pose_id(index, "ACT", family_index)
+                for family_index in range(80, 82)
             ],
             "flight": [
                 str(pose["pose_id"])
@@ -744,8 +780,14 @@ def build_candidate(index_path: Path, destination: Path) -> dict[str, Any]:
     index_path = Path(index_path).resolve()
     source_root = index_path.parent
     index = json.loads(index_path.read_text(encoding="utf-8"))
-    if index.get("character_id") != "robin":
-        raise ValueError("this candidate builder currently accepts Robin only")
+    character_id = str(index.get("character_id", ""))
+    if character_id not in SUPPORTED_SHARED_CANVAS_CHARACTERS:
+        raise ValueError(
+            "candidate builder accepts only the audited shared-canvas "
+            "characters: {}".format(
+                ", ".join(sorted(SUPPORTED_SHARED_CANVAS_CHARACTERS))
+            )
+        )
     if index.get("review_projection") is not True:
         raise ValueError("source library must be a review projection")
     if index.get("runtime_admitted") is not False:
@@ -778,19 +820,19 @@ def build_candidate(index_path: Path, destination: Path) -> dict[str, Any]:
     ]
     files = {
         "animation_graph": (
-            "robin-animation-graph-v2.json",
+            "{}-animation-graph-v2.json".format(character_id),
             graph,
         ),
         "pose_library": (
-            "robin-pose-catalog-v1.json",
+            "{}-pose-catalog-v1.json".format(character_id),
             library,
         ),
         "pose_manifest": (
-            "robin-pose-manifest-v1.json",
+            "{}-pose-manifest-v1.json".format(character_id),
             manifest,
         ),
         "runtime_profile": (
-            "robin-runtime-profile-v2.json",
+            "{}-runtime-profile-v2.json".format(character_id),
             profile,
         ),
     }
@@ -828,7 +870,7 @@ def build_candidate(index_path: Path, destination: Path) -> dict[str, Any]:
             "runtime_registry_admission",
         ],
     }
-    capability_name = "robin-capability-manifest-v1.json"
+    capability_name = "{}-capability-manifest-v1.json".format(character_id)
     capability_digest = _write_json(
         destination / capability_name,
         capability,
@@ -855,10 +897,10 @@ def build_candidate(index_path: Path, destination: Path) -> dict[str, Any]:
         "renderer": "asciline_hd_rgba",
         "renderer_adapter_id": "asciline.hd_rgba_pose.v1",
         "assets": asset_records,
-        "default_pose_id": "robin.act.001.neutral-front",
+        "default_pose_id": _pose_id(candidate_index, "ACT", 1),
         "capabilities": package_capabilities,
     }
-    package_name = "robin-character-package-v2.json"
+    package_name = "{}-character-package-v2.json".format(character_id)
     package_digest = _write_json(destination / package_name, package)
     receipt = {
         "schema_version": 1,

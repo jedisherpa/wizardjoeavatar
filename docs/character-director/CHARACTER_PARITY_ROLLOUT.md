@@ -40,7 +40,7 @@ runtime API range.
 | 11 | Finn Calder | `40b9a346` | Source discovered |
 | 12 | Orion Vale | `50eab748` | Source discovered |
 | 13 | Robin | Source manifest `2c33d3e0` | Package-bound 200-pose HD RGBA runtime candidate verified locally; review-only and not registered |
-| 14 | Speech | Source manifest `2c33d3e0` | Corrected 200-pose review library built; runtime blocked |
+| 14 | Speech | Source manifest `2c33d3e0` | Package-bound 200-pose HD RGBA runtime candidate verified locally; review-only and not registered |
 | 15 | Dragon | Source manifest `024a5643` | 84 of 91 assets valid; seven damaged replacements required; review and runtime blocked |
 | 16 | Kingfisher | To be frozen during intake | Not started |
 | 17 | Liana | Supplemental authored intake | Identity candidate; not registered |
@@ -59,14 +59,17 @@ requiring exact source reconstruction and zero overlap. Both compiled libraries
 remain review-only and fail closed at production admission. See
 `ROBIN_SPEECH_ALPHA_INTEGRATION_2026-07-27.md`.
 
-Robin additionally has a package-bound HD RGBA runtime candidate that runs
-through the existing Python frame hub, controller, graph, score application,
-remote commands, and connector surfaces. Its fixed `+480` presentation
-translation centers the left-side identity without resampling or altering the
-source. The package remains fail-closed because authored blink, governed
-viseme/speech performance, sustained HD locomotion throughput, independent
-review, product approval, and registry admission are still outstanding. See
-`ROBIN_HD_RGBA_RUNTIME_CANDIDATE_2026-07-27.md`.
+Robin and Speech additionally have package-bound HD RGBA runtime candidates
+that run through the existing Python frame hub, controller, graph, score
+application, remote commands, and connector surfaces. Fixed `+480` Robin and
+`-480` Speech presentation translations center their respective shared-canvas
+halves without resampling or altering source bytes. Both packages remain
+fail-closed because authored blink, governed viseme/speech performance,
+sustained HD locomotion throughput, independent review, product approval, and
+registry admission are still outstanding. Speech also lacks accepted contact
+anchors and closed rights/governance gates. See
+`ROBIN_HD_RGBA_RUNTIME_CANDIDATE_2026-07-27.md` and
+`SPEECH_HD_RGBA_RUNTIME_CANDIDATE_2026-07-27.md`.
 
 Dragon has a frozen 91-entry source inventory, but seven supplied PNG streams
 are truncated. The 84 valid files are preserved byte-for-byte; failed payloads
