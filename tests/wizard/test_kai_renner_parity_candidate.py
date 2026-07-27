@@ -1,5 +1,6 @@
 import hashlib
 import json
+import shutil
 import tempfile
 import unittest
 from pathlib import Path
@@ -248,10 +249,27 @@ class KaiRennerParityCandidateTests(unittest.TestCase):
 
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
+            absolute_index = json.loads(
+                INDEX_PATH.read_text(encoding="utf-8")
+            )
+            absolute_index["shards"][0]["path"] = str(
+                CANDIDATE_ARTIFACT_PATH
+            )
+            absolute_index_path = root / "absolute-library-index.json"
+            absolute_index_path.write_text(
+                json.dumps(absolute_index), encoding="utf-8"
+            )
+            with self.assertRaisesRegex(
+                ValueError, "HD pose shard path must be relative"
+            ):
+                HDPoseLibrary(absolute_index_path)
+
+            candidate_copy = root / CANDIDATE_ARTIFACT_PATH.name
+            shutil.copyfile(CANDIDATE_ARTIFACT_PATH, candidate_copy)
             checksum_index = json.loads(
                 INDEX_PATH.read_text(encoding="utf-8")
             )
-            checksum_index["shards"][0]["path"] = str(CANDIDATE_ARTIFACT_PATH)
+            checksum_index["shards"][0]["path"] = candidate_copy.name
             checksum_index["shards"][0]["sha256"] = "0" * 64
             checksum_index_path = root / "checksum-library-index.json"
             checksum_index_path.write_text(

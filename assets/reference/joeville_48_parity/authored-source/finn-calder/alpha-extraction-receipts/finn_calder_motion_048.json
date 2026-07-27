@@ -1,0 +1,36 @@
+{
+  "canvas_normalized": false,
+  "canvas_size": [
+    1254,
+    1254
+  ],
+  "destination_path": "assets/reference/joeville_48_parity/authored-source/finn-calder/alpha-extracted/finn_calder_motion_048.png",
+  "destination_rgba_sha256": "f504d5041514762d13293312ca7c4ef8cea675737344f023eedf6e5294e77ce9",
+  "destination_sha256": "97f820ad6a0854e5fa5ac7d3ede1cbe7d422ababfe222b4080ecb33d2d26cd0f",
+  "edge_contract": 1,
+  "key_color": [
+    242,
+    5,
+    203
+  ],
+  "normalization_offset": [
+    0,
+    0
+  ],
+  "normalization_scale": 1.0,
+  "schema_version": 1,
+  "silhouette_bbox": [
+    445,
+    140,
+    778,
+    1092
+  ],
+  "source_canvas_size": [
+    1254,
+    1254
+  ],
+  "source_path": "assets/reference/joeville_48_parity/authored-source/finn-calder/chroma-source/finn_calder_motion_048.png",
+  "source_sha256": "abc9aaac810331780178146a575169a0c258b3bfe23a3d6ea3c54e7b98d6d375",
+  "tolerance": 110,
+  "transparent_pixels_before_contract": 1339679
+}

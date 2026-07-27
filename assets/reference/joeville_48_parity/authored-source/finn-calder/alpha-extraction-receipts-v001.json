@@ -1,0 +1,434 @@
+[
+  {
+    "canvas_normalized": false,
+    "canvas_size": [
+      1254,
+      1254
+    ],
+    "destination_path": "assets/reference/joeville_48_parity/authored-source/finn-calder/alpha-extracted/finn_calder_motion_037.png",
+    "destination_rgba_sha256": "6dde8bb7e1c26435cc4cfb75fc62e09f5126c027057d2287bd4d194e7173e527",
+    "destination_sha256": "e265c3891c6bdbdb7b90517e95007af8dd62d4c61cad28a41b77438a50a22e04",
+    "edge_contract": 1,
+    "key_color": [
+      249,
+      3,
+      233
+    ],
+    "normalization_offset": [
+      0,
+      0
+    ],
+    "normalization_scale": 1.0,
+    "schema_version": 1,
+    "silhouette_bbox": [
+      459,
+      126,
+      770,
+      1112
+    ],
+    "source_canvas_size": [
+      1254,
+      1254
+    ],
+    "source_path": "assets/reference/joeville_48_parity/authored-source/finn-calder/chroma-source/finn_calder_motion_037.png",
+    "source_sha256": "551958ffd9b6b21118b33878c6c12df26862ba3fbb8698aa53ae5d3d53f99bcd",
+    "tolerance": 110,
+    "transparent_pixels_before_contract": 1331937
+  },
+  {
+    "canvas_normalized": false,
+    "canvas_size": [
+      1254,
+      1254
+    ],
+    "destination_path": "assets/reference/joeville_48_parity/authored-source/finn-calder/alpha-extracted/finn_calder_motion_038.png",
+    "destination_rgba_sha256": "5cbc01f3f05b7be85f068e0a1ee7196d7aeb29954fff283fd685693342b4d0f4",
+    "destination_sha256": "61564f6fd598addaefbc2bbaa36f273897ec3a768130d1f25c95f3ed29086645",
+    "edge_contract": 1,
+    "key_color": [
+      245,
+      7,
+      221
+    ],
+    "normalization_offset": [
+      0,
+      0
+    ],
+    "normalization_scale": 1.0,
+    "schema_version": 1,
+    "silhouette_bbox": [
+      459,
+      126,
+      925,
+      1112
+    ],
+    "source_canvas_size": [
+      1254,
+      1254
+    ],
+    "source_path": "assets/reference/joeville_48_parity/authored-source/finn-calder/chroma-source/finn_calder_motion_038.png",
+    "source_sha256": "e00aaeb9d45bc8222aaf911d313fa6494a4379ffea961859e5134b5e8de994d4",
+    "tolerance": 110,
+    "transparent_pixels_before_contract": 1323862
+  },
+  {
+    "canvas_normalized": false,
+    "canvas_size": [
+      1254,
+      1254
+    ],
+    "destination_path": "assets/reference/joeville_48_parity/authored-source/finn-calder/alpha-extracted/finn_calder_motion_039.png",
+    "destination_rgba_sha256": "05b6a4ba05d2270731d2a4566444a69f52a8d5d807473ea51924fcdea965a2b1",
+    "destination_sha256": "963ef9b37e9ec68fcdc5f347fa2035f03a2d55d7ef84237d346e5cce5032dbec",
+    "edge_contract": 1,
+    "key_color": [
+      245,
+      5,
+      218
+    ],
+    "normalization_offset": [
+      0,
+      0
+    ],
+    "normalization_scale": 1.0,
+    "schema_version": 1,
+    "silhouette_bbox": [
+      444,
+      129,
+      925,
+      1112
+    ],
+    "source_canvas_size": [
+      1254,
+      1254
+    ],
+    "source_path": "assets/reference/joeville_48_parity/authored-source/finn-calder/chroma-source/finn_calder_motion_039.png",
+    "source_sha256": "1177b34c149e1ba5e160ce260d95737ad82ec3aac0d7dfe4aea057b1a8083fea",
+    "tolerance": 110,
+    "transparent_pixels_before_contract": 1329359
+  },
+  {
+    "canvas_normalized": false,
+    "canvas_size": [
+      1254,
+      1254
+    ],
+    "destination_path": "assets/reference/joeville_48_parity/authored-source/finn-calder/alpha-extracted/finn_calder_motion_040.png",
+    "destination_rgba_sha256": "6fe10f264423dc752cdd8482c2d61c66a496d18ed3e1de88f676f200946c1dcc",
+    "destination_sha256": "b5ac38b30324317f69b86464c5ba8017b7120b7c8339cba0efc0c9c71f3bd16b",
+    "edge_contract": 1,
+    "key_color": [
+      241,
+      4,
+      216
+    ],
+    "normalization_offset": [
+      0,
+      0
+    ],
+    "normalization_scale": 1.0,
+    "schema_version": 1,
+    "silhouette_bbox": [
+      448,
+      128,
+      946,
+      1112
+    ],
+    "source_canvas_size": [
+      1254,
+      1254
+    ],
+    "source_path": "assets/reference/joeville_48_parity/authored-source/finn-calder/chroma-source/finn_calder_motion_040.png",
+    "source_sha256": "be3864041339a0721e2b63ba95e506aefd9f1bc017185515edbe353424a7227f",
+    "tolerance": 110,
+    "transparent_pixels_before_contract": 1329662
+  },
+  {
+    "canvas_normalized": false,
+    "canvas_size": [
+      1254,
+      1254
+    ],
+    "destination_path": "assets/reference/joeville_48_parity/authored-source/finn-calder/alpha-extracted/finn_calder_motion_041.png",
+    "destination_rgba_sha256": "34229fc5d730906f5856aa228254db40d2876a8404af2c7044a378b7d7e4f6a3",
+    "destination_sha256": "69ef803451b6b5f211c01a1446e61068ed2e76bc49bcd64984bdd7de6e82b8cf",
+    "edge_contract": 1,
+    "key_color": [
+      242,
+      3,
+      213
+    ],
+    "normalization_offset": [
+      0,
+      0
+    ],
+    "normalization_scale": 1.0,
+    "schema_version": 1,
+    "silhouette_bbox": [
+      459,
+      128,
+      946,
+      1112
+    ],
+    "source_canvas_size": [
+      1254,
+      1254
+    ],
+    "source_path": "assets/reference/joeville_48_parity/authored-source/finn-calder/chroma-source/finn_calder_motion_041.png",
+    "source_sha256": "50837ab98417472768f775d2f1b54b8b3697f52e8e3d8649bfae1bb1f68de55d",
+    "tolerance": 110,
+    "transparent_pixels_before_contract": 1324373
+  },
+  {
+    "canvas_normalized": false,
+    "canvas_size": [
+      1254,
+      1254
+    ],
+    "destination_path": "assets/reference/joeville_48_parity/authored-source/finn-calder/alpha-extracted/finn_calder_motion_042.png",
+    "destination_rgba_sha256": "2e2d48b0ce7bf80f97cf20f5ab0d4957009dc2b689dfcb35efb49e9622d8ecd3",
+    "destination_sha256": "77a55978ac382336df329c9ca8d829268c94c52f8f2681d7ad0c985da950ed87",
+    "edge_contract": 1,
+    "key_color": [
+      244,
+      5,
+      210
+    ],
+    "normalization_offset": [
+      0,
+      0
+    ],
+    "normalization_scale": 1.0,
+    "schema_version": 1,
+    "silhouette_bbox": [
+      459,
+      127,
+      801,
+      1112
+    ],
+    "source_canvas_size": [
+      1254,
+      1254
+    ],
+    "source_path": "assets/reference/joeville_48_parity/authored-source/finn-calder/chroma-source/finn_calder_motion_042.png",
+    "source_sha256": "9ad791d0b1a1148f81bf1b49d930f7640c6f68dee89c93ba1a1f172a6c725cd1",
+    "tolerance": 110,
+    "transparent_pixels_before_contract": 1328382
+  },
+  {
+    "canvas_normalized": false,
+    "canvas_size": [
+      1254,
+      1254
+    ],
+    "destination_path": "assets/reference/joeville_48_parity/authored-source/finn-calder/alpha-extracted/finn_calder_motion_043.png",
+    "destination_rgba_sha256": "22ea8a5b8a0d1ca015cd98adfec9318a035d74916186f31b2734b31aa928ab33",
+    "destination_sha256": "c594db506d84ac672d7cb3c041e1e21ac95279e95bd86b5b0d6f05a064d7ed84",
+    "edge_contract": 1,
+    "key_color": [
+      240,
+      5,
+      212
+    ],
+    "normalization_offset": [
+      0,
+      0
+    ],
+    "normalization_scale": 1.0,
+    "schema_version": 1,
+    "silhouette_bbox": [
+      443,
+      137,
+      949,
+      1112
+    ],
+    "source_canvas_size": [
+      1254,
+      1254
+    ],
+    "source_path": "assets/reference/joeville_48_parity/authored-source/finn-calder/chroma-source/finn_calder_motion_043.png",
+    "source_sha256": "dc185d68c903aab078b2b064a0ad805a6c20e9b3de4eb34a9ed3cff713097587",
+    "tolerance": 110,
+    "transparent_pixels_before_contract": 1325849
+  },
+  {
+    "canvas_normalized": false,
+    "canvas_size": [
+      1254,
+      1254
+    ],
+    "destination_path": "assets/reference/joeville_48_parity/authored-source/finn-calder/alpha-extracted/finn_calder_motion_044.png",
+    "destination_rgba_sha256": "5c860da8301eba168f3f7933b84dc91da9212c61a9f3db6749f76ef77b42ecdb",
+    "destination_sha256": "7083ca2b445ee5af8becf3f1c0a4173e5642e968dd6dbb0ef894d57505841ce2",
+    "edge_contract": 1,
+    "key_color": [
+      241,
+      4,
+      214
+    ],
+    "normalization_offset": [
+      0,
+      0
+    ],
+    "normalization_scale": 1.0,
+    "schema_version": 1,
+    "silhouette_bbox": [
+      445,
+      144,
+      961,
+      1107
+    ],
+    "source_canvas_size": [
+      1254,
+      1254
+    ],
+    "source_path": "assets/reference/joeville_48_parity/authored-source/finn-calder/chroma-source/finn_calder_motion_044.png",
+    "source_sha256": "444906ff93edcbd958e65c905f8cbdbb8ad1f9b0cb1fa6d4af490014b7c9e902",
+    "tolerance": 110,
+    "transparent_pixels_before_contract": 1333546
+  },
+  {
+    "canvas_normalized": false,
+    "canvas_size": [
+      1254,
+      1254
+    ],
+    "destination_path": "assets/reference/joeville_48_parity/authored-source/finn-calder/alpha-extracted/finn_calder_motion_045.png",
+    "destination_rgba_sha256": "c3564ac9a74bedae51382cdfbf382ea9681c25329bb21fe2b7a0b985b483ea35",
+    "destination_sha256": "c2f8d071ceb4c49312fe2a280212e1634322a00ee1746107685bf12a342b607d",
+    "edge_contract": 1,
+    "key_color": [
+      237,
+      6,
+      213
+    ],
+    "normalization_offset": [
+      0,
+      0
+    ],
+    "normalization_scale": 1.0,
+    "schema_version": 1,
+    "silhouette_bbox": [
+      437,
+      147,
+      1022,
+      1107
+    ],
+    "source_canvas_size": [
+      1254,
+      1254
+    ],
+    "source_path": "assets/reference/joeville_48_parity/authored-source/finn-calder/chroma-source/finn_calder_motion_045.png",
+    "source_sha256": "76c729bcb7dae5aeac65138bc5d1520693101d8bc0e6aa081bae87880ad4fa43",
+    "tolerance": 110,
+    "transparent_pixels_before_contract": 1327557
+  },
+  {
+    "canvas_normalized": false,
+    "canvas_size": [
+      1254,
+      1254
+    ],
+    "destination_path": "assets/reference/joeville_48_parity/authored-source/finn-calder/alpha-extracted/finn_calder_motion_046.png",
+    "destination_rgba_sha256": "d0347cb6f13b4bd287f99bc5cb71a3850aaf5a2415f72bb9139a3c72589082e9",
+    "destination_sha256": "d1922bd8f8bb612be9742380de64280cd204d3b63ebc2d4775546ad04bf80509",
+    "edge_contract": 1,
+    "key_color": [
+      245,
+      3,
+      215
+    ],
+    "normalization_offset": [
+      0,
+      0
+    ],
+    "normalization_scale": 1.0,
+    "schema_version": 1,
+    "silhouette_bbox": [
+      411,
+      143,
+      1023,
+      1102
+    ],
+    "source_canvas_size": [
+      1254,
+      1254
+    ],
+    "source_path": "assets/reference/joeville_48_parity/authored-source/finn-calder/chroma-source/finn_calder_motion_046.png",
+    "source_sha256": "3de44f17189fc2300e9b6958f8dcd1edca2fb08767b45e3e8e2e8a040ae96e6c",
+    "tolerance": 110,
+    "transparent_pixels_before_contract": 1327525
+  },
+  {
+    "canvas_normalized": false,
+    "canvas_size": [
+      1254,
+      1254
+    ],
+    "destination_path": "assets/reference/joeville_48_parity/authored-source/finn-calder/alpha-extracted/finn_calder_motion_047.png",
+    "destination_rgba_sha256": "c905013aae2c224405be00fd23abca1a0018d8bbc91b93ef0769941b83f5dc4c",
+    "destination_sha256": "e4626f8b58e6483a98636a5e1260ee16e10c906f760e85675026462dde0e64f2",
+    "edge_contract": 1,
+    "key_color": [
+      243,
+      4,
+      206
+    ],
+    "normalization_offset": [
+      0,
+      0
+    ],
+    "normalization_scale": 1.0,
+    "schema_version": 1,
+    "silhouette_bbox": [
+      413,
+      143,
+      985,
+      1102
+    ],
+    "source_canvas_size": [
+      1254,
+      1254
+    ],
+    "source_path": "assets/reference/joeville_48_parity/authored-source/finn-calder/chroma-source/finn_calder_motion_047.png",
+    "source_sha256": "8e572cf9a8f3dcd947b5d16df264374ce16ae910dd0fabe0606e64a1346a80e1",
+    "tolerance": 110,
+    "transparent_pixels_before_contract": 1332406
+  },
+  {
+    "canvas_normalized": false,
+    "canvas_size": [
+      1254,
+      1254
+    ],
+    "destination_path": "assets/reference/joeville_48_parity/authored-source/finn-calder/alpha-extracted/finn_calder_motion_048.png",
+    "destination_rgba_sha256": "f504d5041514762d13293312ca7c4ef8cea675737344f023eedf6e5294e77ce9",
+    "destination_sha256": "97f820ad6a0854e5fa5ac7d3ede1cbe7d422ababfe222b4080ecb33d2d26cd0f",
+    "edge_contract": 1,
+    "key_color": [
+      242,
+      5,
+      203
+    ],
+    "normalization_offset": [
+      0,
+      0
+    ],
+    "normalization_scale": 1.0,
+    "schema_version": 1,
+    "silhouette_bbox": [
+      445,
+      140,
+      778,
+      1092
+    ],
+    "source_canvas_size": [
+      1254,
+      1254
+    ],
+    "source_path": "assets/reference/joeville_48_parity/authored-source/finn-calder/chroma-source/finn_calder_motion_048.png",
+    "source_sha256": "abc9aaac810331780178146a575169a0c258b3bfe23a3d6ea3c54e7b98d6d375",
+    "tolerance": 110,
+    "transparent_pixels_before_contract": 1339679
+  }
+]

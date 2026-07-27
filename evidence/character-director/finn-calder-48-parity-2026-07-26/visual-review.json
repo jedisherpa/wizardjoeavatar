@@ -1,0 +1,48 @@
+{
+  "artifact_sha256": "240c931919db952dc6ed7179d3b5b2836adffea37a1ee5e47daec2e62b3e4a88",
+  "character_id": "finn-calder",
+  "decision": "static_visual_identity_gate_passed_for_product_review",
+  "evidence": {
+    "direct_projection_captures": [
+      "pose-037.jpg",
+      "pose-038.jpg",
+      "pose-039.jpg",
+      "pose-040.jpg",
+      "pose-041.jpg",
+      "pose-042.jpg",
+      "pose-043.jpg",
+      "pose-044.jpg",
+      "pose-045.jpg",
+      "pose-046.jpg",
+      "pose-047.jpg",
+      "pose-048.jpg"
+    ],
+    "direct_projection_headers": "headers/",
+    "side_by_side_capture": "side-by-side-candidate.jpg"
+  },
+  "identity_checks": {
+    "black_center_and_pocket_details": "passed",
+    "black_ridged_shoes": "passed",
+    "bright_green_rounded_head_and_hands": "passed",
+    "orange_two_piece_suit": "passed",
+    "prop_free_g7_g8": "passed",
+    "silver_belt_buckle": "passed",
+    "solid_black_pupilless_eyes": "passed"
+  },
+  "library_index_sha256": "7975ac7d5b879893cc3d44940cee8962b641ad7475d1f5bd286d3277bd7b54d0",
+  "product_approval": "pending",
+  "projection_checks": {
+    "artifact_header_match": "passed",
+    "canvas_1254_square": "passed",
+    "pose_hash_header_match": "passed",
+    "runtime_admission_denied": "passed"
+  },
+  "review_projection": true,
+  "runtime_admitted": false,
+  "schema_version": 1,
+  "technical_tests": {
+    "command_scope": "canonicalization, parity, provenance, receipt-chain, manifest, and observer suites",
+    "passed": 11,
+    "status": "passed"
+  }
+}

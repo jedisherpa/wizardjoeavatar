@@ -1,0 +1,51 @@
+{
+  "alignment_mode": "ground_support_center",
+  "alignment_source_center_x": 599.0,
+  "alignment_target_center_x": 627.0,
+  "authority_manifest_sha256": "740f35730f4aa1e6c6ef96be80115c5b0e117397f792d57fdf5360452bbe78c8",
+  "destination_bbox": [
+    465,
+    225,
+    1050,
+    1185
+  ],
+  "destination_ground_support_bbox": [
+    516,
+    1167,
+    738,
+    1185
+  ],
+  "destination_path": "assets/reference/joeville_48_parity/authored-source/finn-calder/frames/finn_calder_motion_045.png",
+  "destination_rgba_sha256": "8a32ba94a19a423a280fcef97add7a47713418b67a9f8afd6fbe876cdfa7f982",
+  "destination_sha256": "84105d5808bca5f78cf05ba49142e5695fb42312afbed261a73463fc426e345f",
+  "fitted_bbox": [
+    437,
+    147,
+    1022,
+    1107
+  ],
+  "ground_support_band_height": 18,
+  "profile_id": "wizardjoe_hd_alpha_1254_v001",
+  "resample_filter": null,
+  "resampled": false,
+  "scale": 1.0,
+  "schema_version": 1,
+  "source_bbox": [
+    437,
+    147,
+    1022,
+    1107
+  ],
+  "source_ground_support_bbox": [
+    488,
+    1089,
+    710,
+    1107
+  ],
+  "source_path": "assets/reference/joeville_48_parity/authored-source/finn-calder/alpha-extracted/finn_calder_motion_045.png",
+  "source_sha256": "c2f8d071ceb4c49312fe2a280212e1634322a00ee1746107685bf12a342b607d",
+  "translation": {
+    "x": 28,
+    "y": 78
+  }
+}

@@ -1,0 +1,363 @@
+{
+  "approval_state": "pending_visual_parity",
+  "authoring_brief_sha256": "8912476f468093852ff1df470b0e7346932efa9aadf3ac92b4998c003e06bea2",
+  "authority_manifest_sha256": "740f35730f4aa1e6c6ef96be80115c5b0e117397f792d57fdf5360452bbe78c8",
+  "canonicalization": "integer_translation_only_no_resampling",
+  "character_id": "finn-calder",
+  "existing_artifact_sha256": "6172d80b6003c57317a4139fef8180a631752e91ff4d21e0f958cde0165a86f1",
+  "existing_reconstruction_sha256": "b399a12b8b65dd5999ad0769f9250c139aef48b22f6734f3034112b530ebf30e",
+  "generation_method": "built_in_imagegen_flat_chroma_then_local_alpha_extraction",
+  "profile_id": "wizardjoe_hd_alpha_1254_v001",
+  "runtime_admitted": false,
+  "schema_version": 1,
+  "sequences": {
+    "g7": {
+      "fps": 8,
+      "frames": [
+        {
+          "alpha_extracted_path": "alpha-extracted/finn_calder_motion_037.png",
+          "alpha_extracted_sha256": "e265c3891c6bdbdb7b90517e95007af8dd62d4c61cad28a41b77438a50a22e04",
+          "authorship": "authored_full_size_imagegen_v1",
+          "brief_id": "finn-g7-acquire",
+          "canonical_bbox": [
+            459,
+            199,
+            770,
+            1185
+          ],
+          "chroma_source_path": "chroma-source/finn_calder_motion_037.png",
+          "chroma_source_sha256": "551958ffd9b6b21118b33878c6c12df26862ba3fbb8698aa53ae5d3d53f99bcd",
+          "continuity": "Front three-quarter conversational receipt with the head acquiring the partner before the chest, both arms low, and the lead hand slightly released from the thigh.",
+          "forbidden": "Idle duplicate, walk, wave, shrug, alarm, prop, facial-anatomy change, foot movement, or identity drift.",
+          "frame_index": 1,
+          "pose_id": "finn_calder_motion_037",
+          "pose_summary": "Acquire the speaker with precise active attention.",
+          "rgba_sha256": "d516deb2e7db1b0450cf60855aa16f4df297dda143aa2dbbfebb21e6da76eadb",
+          "slot_id": "motion-037",
+          "source_path": "frames/finn_calder_motion_037.png",
+          "source_sha256": "9c901c6240a562884efa9fc38a806d93508574e66cdbc59b309735c38c8fab0d"
+        },
+        {
+          "alpha_extracted_path": "alpha-extracted/finn_calder_motion_038.png",
+          "alpha_extracted_sha256": "61564f6fd598addaefbc2bbaa36f273897ec3a768130d1f25c95f3ed29086645",
+          "authorship": "authored_full_size_imagegen_v1",
+          "brief_id": "finn-g7-invite",
+          "canonical_bbox": [
+            459,
+            199,
+            925,
+            1185
+          ],
+          "chroma_source_path": "chroma-source/finn_calder_motion_038.png",
+          "chroma_source_sha256": "e00aaeb9d45bc8222aaf911d313fa6494a4379ffea961859e5134b5e8de994d4",
+          "continuity": "The lead forearm arcs forward into a compact palm-up invitation at lower-rib height while the support hand remains low and partner orientation stays coherent.",
+          "forbidden": "Wave, begging, surrender, shrug, invisible object, point, heel lift, crop, or detached anatomy.",
+          "frame_index": 2,
+          "pose_id": "finn_calder_motion_038",
+          "pose_summary": "Invite the partner to continue or clarify.",
+          "rgba_sha256": "90296cc66a34826354bf02221e14fb0bd0fd198c3345f07b5df8e35441603e4d",
+          "slot_id": "motion-038",
+          "source_path": "frames/finn_calder_motion_038.png",
+          "source_sha256": "38ca8fbe9b35c7c1f8f9cd7bf0549d2ce6d0bc3c94738a7da5646ee9ba3686da"
+        },
+        {
+          "alpha_extracted_path": "alpha-extracted/finn_calder_motion_039.png",
+          "alpha_extracted_sha256": "963ef9b37e9ec68fcdc5f347fa2035f03a2d55d7ef84237d346e5cce5032dbec",
+          "authorship": "authored_full_size_imagegen_v1",
+          "brief_id": "finn-g7-distinguish",
+          "canonical_bbox": [
+            446,
+            202,
+            927,
+            1185
+          ],
+          "chroma_source_path": "chroma-source/finn_calder_motion_039.png",
+          "chroma_source_sha256": "1177b34c149e1ba5e160ce260d95737ad82ec3aac0d7dfe4aea057b1a8083fea",
+          "continuity": "The lead palm holds while the support hand rises nearer the torso at a clearly different height to establish two unequal idea positions without moving the root.",
+          "forbidden": "Symmetrical shrug, scales mime, invisible box, prop, foot slide, mirrored hands, broad confusion, or facial drift.",
+          "frame_index": 3,
+          "pose_id": "finn_calder_motion_039",
+          "pose_summary": "Distinguish understood information from the open question.",
+          "rgba_sha256": "549e8d71fc68f487d4f711734b0721ec15bc8aa354f733318765e63b532105ef",
+          "slot_id": "motion-039",
+          "source_path": "frames/finn_calder_motion_039.png",
+          "source_sha256": "e702c3e522b8d599027736f2efbfaee275f7c3408fcfd04dbff1f33bbb9f6f99"
+        },
+        {
+          "alpha_extracted_path": "alpha-extracted/finn_calder_motion_040.png",
+          "alpha_extracted_sha256": "b5ac38b30324317f69b86464c5ba8017b7120b7c8339cba0efc0c9c71f3bd16b",
+          "authorship": "authored_full_size_imagegen_v1",
+          "brief_id": "finn-g7-test",
+          "canonical_bbox": [
+            450,
+            201,
+            948,
+            1185
+          ],
+          "chroma_source_path": "chroma-source/finn_calder_motion_040.png",
+          "chroma_source_sha256": "be3864041339a0721e2b63ba95e506aefd9f1bc017185515edbe353424a7227f",
+          "continuity": "The lead hand retracts toward center while the support palm rotates outward into one compact question and the face reacquires the partner.",
+          "forbidden": "Deep head tilt, chin touch, stop sign, wave, pointing, pleading, invisible object, root translation, or lifted shoe.",
+          "frame_index": 4,
+          "pose_id": "finn_calder_motion_040",
+          "pose_summary": "Test one interpretation with a contained question.",
+          "rgba_sha256": "98fb5acaefddd3d1eb074a1b5cdffd0210139c19f068af078b1fc0b0cc3c4cce",
+          "slot_id": "motion-040",
+          "source_path": "frames/finn_calder_motion_040.png",
+          "source_sha256": "b6d032264ca27a4edd9af6b37ae4a2e52312b8854cc76875067f4984078ecd15"
+        },
+        {
+          "alpha_extracted_path": "alpha-extracted/finn_calder_motion_041.png",
+          "alpha_extracted_sha256": "69ef803451b6b5f211c01a1446e61068ed2e76bc49bcd64984bdd7de6e82b8cf",
+          "authorship": "authored_full_size_imagegen_v1",
+          "brief_id": "finn-g7-acknowledge",
+          "canonical_bbox": [
+            460,
+            201,
+            947,
+            1185
+          ],
+          "chroma_source_path": "chroma-source/finn_calder_motion_041.png",
+          "chroma_source_sha256": "50837ab98417472768f775d2f1b54b8b3697f52e8e3d8649bfae1bb1f68de55d",
+          "continuity": "The lead hand opens toward the partner lower and calmer than the invitation while the support hand settles beside the jacket and the chest releases slightly.",
+          "forbidden": "Wave, celebration, approval sign, surrender, stop signal, second raised hand, prop, foot movement, or smile drift.",
+          "frame_index": 5,
+          "pose_id": "finn_calder_motion_041",
+          "pose_summary": "Acknowledge that the interpretation is understood.",
+          "rgba_sha256": "054748670c4e3ff6520ab7d3790a72e5939f3debf2eb1f55d4da1fa6643548c1",
+          "slot_id": "motion-041",
+          "source_path": "frames/finn_calder_motion_041.png",
+          "source_sha256": "147ef4570390c21d270d37a30ab59308f54591a8c52ffcc0b1e413c22ff359a4"
+        },
+        {
+          "alpha_extracted_path": "alpha-extracted/finn_calder_motion_042.png",
+          "alpha_extracted_sha256": "77a55978ac382336df329c9ca8d829268c94c52f8f2681d7ad0c985da950ed87",
+          "authorship": "authored_full_size_imagegen_v1",
+          "brief_id": "finn-g7-settle",
+          "canonical_bbox": [
+            461,
+            200,
+            803,
+            1185
+          ],
+          "chroma_source_path": "chroma-source/finn_calder_motion_042.png",
+          "chroma_source_sha256": "9ad791d0b1a1148f81bf1b49d930f7640c6f68dee89c93ba1a1f172a6c725cd1",
+          "continuity": "Both hands descend to a quiet asymmetric rest with a trace of openness in the lead palm while head and chest return toward front on a restrained nod.",
+          "forbidden": "Idle duplicate, wave, salute, stride, shrug, prop, root drift, changed facing, or unresolved weight.",
+          "frame_index": 6,
+          "pose_id": "finn_calder_motion_042",
+          "pose_summary": "Settle and return the conversational floor.",
+          "rgba_sha256": "770a966d3deb2034d28e9a155c9f110c8d7a55cb4142a2e3c6f56c5ab4dd81d9",
+          "slot_id": "motion-042",
+          "source_path": "frames/finn_calder_motion_042.png",
+          "source_sha256": "a17069ffdfa818cf6435a0a6276f19527ff7a0b9198b9864713cb9051d31900a"
+        }
+      ],
+      "intent": "acquire_invite_distinguish_test_acknowledge_settle",
+      "loop": false,
+      "motion_contract": {
+        "entry_handoffs": [
+          "front_idle",
+          "front_walk_settle",
+          "three_quarter_idle"
+        ],
+        "exit_handoffs": [
+          "front_idle",
+          "profile_walk",
+          "g8"
+        ],
+        "family": "careful_comprehension",
+        "hold_frame_indices": [
+          3,
+          5,
+          6
+        ],
+        "interrupt_policy": "marker_safe",
+        "interruptible_frame_indices": [
+          1,
+          3,
+          5,
+          6
+        ],
+        "loop_mode": "hold_last",
+        "root_policy": "fixed",
+        "support_policy": "dual_foot_grounded"
+      }
+    },
+    "g8": {
+      "fps": 9,
+      "frames": [
+        {
+          "alpha_extracted_path": "alpha-extracted/finn_calder_motion_043.png",
+          "alpha_extracted_sha256": "c594db506d84ac672d7cb3c041e1e21ac95279e95bd86b5b0d6f05a064d7ed84",
+          "authorship": "authored_full_size_imagegen_v1",
+          "brief_id": "finn-g8-establish",
+          "canonical_bbox": [
+            451,
+            210,
+            957,
+            1185
+          ],
+          "chroma_source_path": "chroma-source/finn_calder_motion_043.png",
+          "chroma_source_sha256": "dc185d68c903aab078b2b064a0ad805a6c20e9b3de4eb34a9ed3cff713097587",
+          "continuity": "Both forearms release from rest at unequal heights, with the lead hand reaching toward a low shared field and the support hand beginning to lift near the jacket.",
+          "forbidden": "Acknowledgment duplicate, crouch, wave, scanner, invisible object, shrug, prop, lifted shoe, or facial drift.",
+          "frame_index": 1,
+          "pose_id": "finn_calder_motion_043",
+          "pose_summary": "Establish a shared spatial field.",
+          "rgba_sha256": "726389dbe44f66f11dca686580c7189e9f3f862790f77bab3abb6f59a006bf2b",
+          "slot_id": "motion-043",
+          "source_path": "frames/finn_calder_motion_043.png",
+          "source_sha256": "fd71f6a6f31e340f3337421fd3871fd6d7fea7fb1e815b0a8d41acbc420e5ab5"
+        },
+        {
+          "alpha_extracted_path": "alpha-extracted/finn_calder_motion_044.png",
+          "alpha_extracted_sha256": "7083ca2b445ee5af8becf3f1c0a4173e5642e968dd6dbb0ef894d57505841ce2",
+          "authorship": "authored_full_size_imagegen_v1",
+          "brief_id": "finn-g8-bracket",
+          "canonical_bbox": [
+            471,
+            222,
+            987,
+            1185
+          ],
+          "chroma_source_path": "chroma-source/finn_calder_motion_044.png",
+          "chroma_source_sha256": "444906ff93edcbd958e65c905f8cbdbb8ad1f9b0cb1fa6d4af490014b7c9e902",
+          "continuity": "The hands separate into an asymmetric open bracket, with the lead hand higher and farther out while the face orients through the empty central relationship.",
+          "forbidden": "Invisible container, tablet, grip, symmetrical presentation, shrug, pleading, prop, foot slide, or head pop.",
+          "frame_index": 2,
+          "pose_id": "finn_calder_motion_044",
+          "pose_summary": "Bracket the relationship to be explained.",
+          "rgba_sha256": "d3bf6bafd2d094c242bd15bd90c40b8c5aaf48212b933c9cb44091eaf8224df0",
+          "slot_id": "motion-044",
+          "source_path": "frames/finn_calder_motion_044.png",
+          "source_sha256": "2e37aa7b7894ccd7f7dd60e30e3cb1d9d86e027afddcb8dee8c34ee2fbce7fe3"
+        },
+        {
+          "alpha_extracted_path": "alpha-extracted/finn_calder_motion_045.png",
+          "alpha_extracted_sha256": "c2f8d071ceb4c49312fe2a280212e1634322a00ee1746107685bf12a342b607d",
+          "authorship": "authored_full_size_imagegen_v1",
+          "brief_id": "finn-g8-trace",
+          "canonical_bbox": [
+            465,
+            225,
+            1050,
+            1185
+          ],
+          "chroma_source_path": "chroma-source/finn_calder_motion_045.png",
+          "chroma_source_sha256": "76c729bcb7dae5aeac65138bc5d1520693101d8bc0e6aa081bae87880ad4fa43",
+          "continuity": "The lead hand travels through a shallow diagonal toward one side while the support hand retains the starting area and the head follows the path without tipping.",
+          "forbidden": "Index point, beam, trail, map, scanner, magic, prop, root movement, lifted shoe, or disconnected arm.",
+          "frame_index": 3,
+          "pose_id": "finn_calder_motion_045",
+          "pose_summary": "Trace a clear spatial or sequential path.",
+          "rgba_sha256": "8a32ba94a19a423a280fcef97add7a47713418b67a9f8afd6fbe876cdfa7f982",
+          "slot_id": "motion-045",
+          "source_path": "frames/finn_calder_motion_045.png",
+          "source_sha256": "84105d5808bca5f78cf05ba49142e5695fb42312afbed261a73463fc426e345f"
+        },
+        {
+          "alpha_extracted_path": "alpha-extracted/finn_calder_motion_046.png",
+          "alpha_extracted_sha256": "d1922bd8f8bb612be9742380de64280cd204d3b63ebc2d4775546ad04bf80509",
+          "authorship": "authored_full_size_imagegen_v1",
+          "brief_id": "finn-g8-reveal",
+          "canonical_bbox": [
+            447,
+            226,
+            1059,
+            1185
+          ],
+          "chroma_source_path": "chroma-source/finn_calder_motion_046.png",
+          "chroma_source_sha256": "3de44f17189fc2300e9b6958f8dcd1edca2fb08767b45e3e8e2e8a040ae96e6c",
+          "continuity": "At the route destination the lead palm rotates outward into the clearest disclosure pose while the support hand retracts and the face returns toward the partner.",
+          "forbidden": "Stop command, wave, magic, scan, point, prize presentation, prop, heel lift, overreach, or arm penetration.",
+          "frame_index": 4,
+          "pose_id": "finn_calder_motion_046",
+          "pose_summary": "Reveal the destination or relationship.",
+          "rgba_sha256": "4ca6224ba8a28dd2983744cae0d988ce051db1b471699edd45b4de72f2481fb8",
+          "slot_id": "motion-046",
+          "source_path": "frames/finn_calder_motion_046.png",
+          "source_sha256": "cf2e9a63cc43aa8cbb24410d9f81f7ba607866a16b7a7edcee419f2a15e2d66d"
+        },
+        {
+          "alpha_extracted_path": "alpha-extracted/finn_calder_motion_047.png",
+          "alpha_extracted_sha256": "e4626f8b58e6483a98636a5e1260ee16e10c906f760e85675026462dde0e64f2",
+          "authorship": "authored_full_size_imagegen_v1",
+          "brief_id": "finn-g8-verify",
+          "canonical_bbox": [
+            451,
+            226,
+            1023,
+            1185
+          ],
+          "chroma_source_path": "chroma-source/finn_calder_motion_047.png",
+          "chroma_source_sha256": "8e572cf9a8f3dcd947b5d16df264374ce16ae910dd0fabe0606e64a1346a80e1",
+          "continuity": "The lead hand stays offered but lowers while the support palm opens in a compact check near the lower chest and partner-facing gaze becomes primary.",
+          "forbidden": "Shrug, two-handed plea, applause, approval sign, celebration, wave, prop, foot movement, or mirrored hands.",
+          "frame_index": 5,
+          "pose_id": "finn_calder_motion_047",
+          "pose_summary": "Verify that the shared orientation is understood.",
+          "rgba_sha256": "e5705be38973d8317e911476c585754ff36f3f3792aa711925a9d32b0668604b",
+          "slot_id": "motion-047",
+          "source_path": "frames/finn_calder_motion_047.png",
+          "source_sha256": "3417c4599a661d1be1b410d3c1d11cb6d5291e31af4d720e0493d29a6b6105bd"
+        },
+        {
+          "alpha_extracted_path": "alpha-extracted/finn_calder_motion_048.png",
+          "alpha_extracted_sha256": "97f820ad6a0854e5fa5ac7d3ede1cbe7d422ababfe222b4080ecb33d2d26cd0f",
+          "authorship": "authored_full_size_imagegen_v1",
+          "brief_id": "finn-g8-handoff",
+          "canonical_bbox": [
+            449,
+            233,
+            782,
+            1185
+          ],
+          "chroma_source_path": "chroma-source/finn_calder_motion_048.png",
+          "chroma_source_sha256": "abc9aaac810331780178146a575169a0c258b3bfe23a3d6ea3c54e7b98d6d375",
+          "continuity": "The support hand settles first and the lead hand follows to a low open finish angled toward the shared field while the head returns level on a restrained nod.",
+          "forbidden": "Idle duplicate, G7 settle duplicate, walk already begun, wave, salute, shrug, prop, root drift, or changed facing.",
+          "frame_index": 6,
+          "pose_id": "finn_calder_motion_048",
+          "pose_summary": "Hand the shared understanding back to the partner.",
+          "rgba_sha256": "ffe16f0ef5acc58a8b3eff281f514350f4bbb95440e423c90c280f671d411750",
+          "slot_id": "motion-048",
+          "source_path": "frames/finn_calder_motion_048.png",
+          "source_sha256": "03338d61237ffd88db8647989d090e42fd5cd6b41a9c75309f4f17009f8adaa1"
+        }
+      ],
+      "intent": "establish_bracket_trace_reveal_verify_handoff",
+      "loop": false,
+      "motion_contract": {
+        "entry_handoffs": [
+          "front_idle",
+          "front_walk_settle",
+          "g7"
+        ],
+        "exit_handoffs": [
+          "front_idle",
+          "profile_walk",
+          "g7"
+        ],
+        "family": "shared_orientation",
+        "hold_frame_indices": [
+          2,
+          4,
+          5,
+          6
+        ],
+        "interrupt_policy": "marker_safe",
+        "interruptible_frame_indices": [
+          1,
+          2,
+          4,
+          5,
+          6
+        ],
+        "loop_mode": "hold_last",
+        "root_policy": "fixed",
+        "support_policy": "dual_foot_grounded"
+      }
+    }
+  }
+}

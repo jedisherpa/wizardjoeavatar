@@ -292,19 +292,42 @@ passed direct full-size projection and port 8665 presents the candidate beside
 approved HD Wizard Joe. Product visual approval is still pending and runtime
 admission remains false.
 
+Finn Calder is now the tenth and final incomplete roster character to reach a
+complete 48-pose review candidate. His immutable supplied poses `001`-`036`
+were merged with twelve new full-size RGBA poses for:
+
+- `g7`: acquire, invite, distinguish, test, acknowledge, and settle after
+  careful comprehension.
+- `g8`: establish, bracket, trace, reveal, verify, and hand off a shared
+  orientation.
+
+The authored silhouettes preserve Finn's bright green rounded head and hands,
+solid black pupil-free eyes, orange two-piece suit, black shirt/tie and pocket
+details, silver buckle, and black ridged shoes. Both sequences remain
+prop-free, fixed-root, and grounded on two feet. All twelve frames use an
+18-pixel support band, land on baseline `1185`, keep their support center
+within one half pixel of canvas center, remain at scale `1.0`, and use no
+resampling. Two consecutive builds produced identical artifact and
+library-index hashes. All twelve authored IDs passed direct full-size
+projection, and the repaired persistent port-8665 observer presents the exact
+candidate beside approved HD Wizard Joe. Product visual approval is still
+pending and runtime admission remains false.
+
 | Character | Candidate poses | Missing poses | State |
 | --- | ---: | ---: | --- |
+| Serena Quill | 48 | 0 | Supplied source-complete review candidate; product visual approval pending |
 | Orion Vale | 48 | 0 | Full-size technical review passed; product visual approval pending |
 | Aurelia Finch | 48 | 0 | Full-size technical review passed; product visual approval pending |
 | Selene Hart | 48 | 0 | Full-size technical review passed; product visual approval pending |
 | Thorne Vale | 48 | 0 | Full-size technical review passed; product visual approval pending |
 | Elara Voss | 48 | 0 | Full-size technical review passed; product visual approval pending |
 | Kai Renner | 48 | 0 | Full-size technical review passed; product visual approval pending |
+| Mira Solen | 48 | 0 | Supplied source-complete review candidate; product visual approval pending |
 | Draven Holt | 48 | 0 | Full-size technical review passed; product visual approval pending |
 | Liora Kane | 48 | 0 | Full-size technical review passed; product visual approval pending |
 | Rohan Slate | 48 | 0 | Full-size technical review passed; product visual approval pending |
-| Remaining roster | 132 | 12 | Finn Calder authoring/review required; Serena Quill and Mira Solen are source-complete |
-| **Total** | **564** | **12** | **576 target slots** |
+| Finn Calder | 48 | 0 | Full-size technical review passed; product visual approval pending |
+| **Total** | **576** | **0** | **All 576 target slots filled; no runtime admission implied** |
 
 Orion candidate receipts:
 
@@ -387,6 +410,16 @@ Rohan candidate receipts:
 - Alpha-extraction receipts: `bbcdc72afa5ccdd9d359b5802e8a7f65c991c2b89746bf9689c4cd4f33f1b705`
 - Canonicalization receipts: `818307146bcf9140fb0e4e39ba1f9ced9e31112de23331d6c230bbfc9c08a081`
 
+Finn candidate receipts:
+
+- Artifact: `240c931919db952dc6ed7179d3b5b2836adffea37a1ee5e47daec2e62b3e4a88`
+- Library index: `7975ac7d5b879893cc3d44940cee8962b641ad7475d1f5bd286d3277bd7b54d0`
+- Reconstruction: `38cdf2af9977fb1cadd3fea383711593d3b47af41706a7f88fee28a340a7354d`
+- Review motion contract: `0ba976285ffef9db71b0a099cbea957aaa10091ccc9323e7579ca781538cfc58`
+- Contact sheet: `21ff968f6f148515dd336542002ee77c1350a7e4cd98b86bc94cca6335221a40`
+- Alpha-extraction receipts: `b7569bf6a3f3c33ae4e6aec770fc4470a559f854dce2e7f805ddd2120731e73d`
+- Canonicalization receipts: `a668d3b640652a1c11a52e7618b9b376b13c0e02ade909aa8522cd40bfcde020`
+
 ## Roster Boundary
 
 The archives also contain Crystail. Crystail remains
@@ -400,16 +433,15 @@ and count parity rather than an automatic quality waiver.
 
 ## Next Build Order
 
-1. Author the 12 remaining frames as explicitly new art, one character at a
-   time, using the character's compiled supplied set as visual authority.
-2. Rebuild each completed 48-pose artifact twice and require identical hashes.
-3. Review every full-size frame and motion sequence beside approved HD Wizard
-   Joe on port 8665.
-4. Record product approval against the exact artifact and library-index hashes.
-5. Preserve review motion contracts during authoring; compile admitted
-   character packages and production semantic graphs only after visual
-   approval.
-6. Create the character's exact persona/character/package admission only after
+1. Complete product visual review for each exact candidate artifact/index pair
+   in the persistent port-8665 observer.
+2. Record product approval only against exact artifact and library-index
+   hashes; a count-complete candidate is not automatically approved.
+3. Preserve review motion contracts while compiling approved character
+   packages and production semantic graphs.
+4. Create each exact persona/character/package admission only after its
    package-level acceptance passes.
-7. Keep runtime admission denied until the admission digest, governed
+5. Keep runtime admission denied until the admission digest, governed
    audiovisual acceptance bundle, and rollback deployment are approved.
+6. Proceed to Robin, Speech, Dragon, and Kingfisher parity without treating
+   JoeVille candidate completion as their visual or behavioral authority.
