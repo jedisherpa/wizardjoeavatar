@@ -86,7 +86,7 @@ test("renderer falls back cleanly when workers are unavailable", () => {
   assert.equal(canvas.dataset.graphWorker, "fallback");
 });
 
-test("renderer admits the complete 308-pose v7 catalog", async () => {
+test("renderer admits the complete 308-pose v9 catalog", async () => {
   const context = {
     clearRect() {},
     drawImage() {},
@@ -115,7 +115,7 @@ test("renderer admits the complete 308-pose v7 catalog", async () => {
         url.endsWith("/pose-graphs/catalog")
           ? {
               schema_version: 2,
-              frame: [1254, 1254],
+              frame: [1536, 1536],
               verified_pose_count: 308,
               unique_semantic_pose_count: 308,
               entries,
@@ -161,9 +161,9 @@ test("all semantic post-character newsroom graphs paint after the complete actor
   });
   renderer.cache.set("dance_ready", {
     canvas: { id: "actor" },
-    width: 1254,
-    height: 1254,
-    bounds: { minX: 69, minY: 69, maxX: 1184, maxY: 1184 },
+    width: 1536,
+    height: 1536,
+    bounds: { minX: 210, minY: 210, maxX: 1325, maxY: 1325 },
     painted: 1,
     entry: { source_record_id: "WJPA-221", foreground_pixel_count: 1 },
   });
@@ -216,16 +216,16 @@ test("canonical transparent frame placement is stable across radically different
   });
   renderer.cache.set("high-padding", {
     canvas: { id: "high-padding" },
-    width: 1254,
-    height: 1254,
-    bounds: { minX: 400, minY: 69, maxX: 900, maxY: 900 },
+    width: 1536,
+    height: 1536,
+    bounds: { minX: 541, minY: 210, maxX: 1041, maxY: 1041 },
     entry: { source_record_id: "WJPA-A", foreground_pixel_count: 1 },
   });
   renderer.cache.set("low-padding", {
     canvas: { id: "low-padding" },
-    width: 1254,
-    height: 1254,
-    bounds: { minX: 69, minY: 500, maxX: 1184, maxY: 1184 },
+    width: 1536,
+    height: 1536,
+    bounds: { minX: 210, minY: 641, maxX: 1325, maxY: 1325 },
     entry: { source_record_id: "WJPA-B", foreground_pixel_count: 1 },
   });
   renderer.state = {
@@ -272,9 +272,9 @@ test("authored speech and expression presentation poses replace only the visual 
   for (const id of ["idle_warm_camera_ready", "emotion_surprise"]) {
     renderer.cache.set(id, {
       canvas: { id },
-      width: 1254,
-      height: 1254,
-      bounds: { minX: 69, minY: 69, maxX: 1184, maxY: 1184 },
+      width: 1536,
+      height: 1536,
+      bounds: { minX: 210, minY: 210, maxX: 1325, maxY: 1325 },
       entry: { source_record_id: id, foreground_pixel_count: 1 },
     });
   }

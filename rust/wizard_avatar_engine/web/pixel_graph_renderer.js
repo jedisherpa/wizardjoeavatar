@@ -2,8 +2,8 @@ const HORIZON_RATIO = 0.48;
 const NEAR_ROOT_RATIO = 0.88;
 const NEAR_DEPTH = 1.5;
 const FAR_DEPTH = 10.0;
-const CANONICAL_POSE_HEIGHT = 96;
-const CANONICAL_GRAPH_SIZE = 1254;
+const CANONICAL_POSE_HEIGHT = 96 * (1536 / 1254);
+const CANONICAL_GRAPH_SIZE = 1536;
 const RUNTIME_POSE_COUNT = 308;
 
 function defaultCanvasFactory(width, height) {

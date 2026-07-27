@@ -25,7 +25,7 @@ pub const SIMULATION_DT: f32 = 1.0 / SIMULATION_HZ;
 pub const STRIDE_LENGTH: f32 = 0.85;
 
 // These values mirror the graph projector. The opaque envelope is the union of
-// the complete replacement alpha and Phazer masters on their authored 1254-square canvas; the
+// the complete replacement alpha and Phazer masters on their normalized 1536-square canvas; the
 // motion allowances cover the maximum walk lean, weight-transfer scale, and
 // lateral/vertical offsets.
 const PROJECTION_FAR_Z: f32 = 10.0;
@@ -39,6 +39,8 @@ const STAGE_CENTER_X: f32 = STAGE_COLS * 0.5;
 const STAGE_HORIZON_Y: f32 = STAGE_ROWS * 0.48;
 const STAGE_NEAR_ROOT_Y: f32 = STAGE_ROWS * 0.88;
 const WORLD_TO_STAGE_X: f32 = STAGE_COLS * 0.075;
+// Viewport safety remains in source-equivalent coordinates because the 1536
+// projector scale exactly compensates for the symmetric frame padding.
 const GRAPH_FRAME_SIZE: f32 = 1254.0;
 const PROJECTED_GRAPH_SIZE: f32 = 96.0;
 const GRAPH_OPAQUE_MIN_X: f32 = 69.0;

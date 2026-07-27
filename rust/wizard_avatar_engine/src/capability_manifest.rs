@@ -2113,10 +2113,21 @@ fn pose_family_narrative_uses(family: PoseMotionFamily) -> Vec<NarrativeUseV1> {
 
 fn legacy_clip_category(id: &str) -> Result<LegacyClipCategoryV1, String> {
     let category = match id {
-        "ground_walk" | "ground_run" | "wjfl_run" => LegacyClipCategoryV1::GroundLocomotion,
-        "hover_flap" | "forward_camera_flight" | "bank_glide" => {
-            LegacyClipCategoryV1::FlightPoseSequence
-        }
+        "ground_walk"
+        | "ground_run"
+        | "wjfl_run"
+        | "phazer_side_walk_takeoff"
+        | "phazer_side_run" => LegacyClipCategoryV1::GroundLocomotion,
+        "hover_flap"
+        | "forward_camera_flight"
+        | "bank_glide"
+        | "phazer_side_leap"
+        | "phazer_side_wing_open"
+        | "phazer_side_flap_cycle"
+        | "phazer_side_flight_transition"
+        | "phazer_front_walk_hover"
+        | "phazer_rear_walk_hover"
+        | "phazer_repertoire_loop" => LegacyClipCategoryV1::FlightPoseSequence,
         "staff_combo" | "reaction_recover" | "wjfl_guard" | "wjfl_reaction" => {
             LegacyClipCategoryV1::Action
         }

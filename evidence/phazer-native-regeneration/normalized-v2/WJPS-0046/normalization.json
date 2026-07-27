@@ -1,0 +1,16 @@
+{
+  "pose_id": "WJPS-0046",
+  "direction": "north",
+  "anchor_kind": "ground_contact",
+  "anchor_x": 767,
+  "anchor_y": 1325,
+  "measured_hat_brim_width": 234,
+  "target_hat_brim_width": 259,
+  "applied_scale": 1.106837606837607,
+  "frame_fit_translation_x": 0,
+  "frame_fit_translation_y": 0,
+  "normalized_hat_brim_width": 259,
+  "normalized_source_sha256": "bb8ac48acc02f53f13c077598f6044de8775d4f84b89d13327339665d729a763",
+  "graph_sha256": "c502d74b2832e8113a04a0f9be502d392655ea6b5f5152f33487510d3280ac54",
+  "exact_graph_projection": true
+}

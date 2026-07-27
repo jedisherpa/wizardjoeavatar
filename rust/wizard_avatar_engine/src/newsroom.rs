@@ -1446,7 +1446,7 @@ pub fn build_actor_render_sample(
     );
     diagnostics.insert(
         "coordinate_space".to_string(),
-        "production_alpha_1254_pixelgraph".into(),
+        "normalized_1536_pixelgraph".into(),
     );
     diagnostics.insert("origin".to_string(), "top_left".into());
 

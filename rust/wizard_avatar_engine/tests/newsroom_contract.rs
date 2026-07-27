@@ -329,9 +329,9 @@ fn actor_samples_are_cell_aligned_hashed_and_tamper_evident() {
     assert!(!metadata.contact_points.is_empty());
     assert_eq!(
         metadata.diagnostics.get("coordinate_space"),
-        Some(&json!("production_alpha_1254_pixelgraph"))
+        Some(&json!("normalized_1536_pixelgraph"))
     );
-    assert_eq!([metadata.width, metadata.height], [1254, 1254]);
+    assert_eq!([metadata.width, metadata.height], [1536, 1536]);
     assert!(metadata.diagnostics.contains_key("graph_sha256"));
     metadata.validate_with_buffers(&buffers).unwrap();
     let envelope = ActorRenderSampleEnvelopeV1::new(metadata.clone(), &buffers);

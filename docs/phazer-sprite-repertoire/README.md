@@ -11,7 +11,7 @@ Approved and integrated into the Rust PixelGraph runtime.
 - Source sheets: 8
 - Authored frames per sheet: 6
 - Added poses: 48 (`WJPS-0001` through `WJPS-0048`)
-- Runtime catalog: v7, 308 total poses
+- Runtime catalog: v9, 308 total poses
 
 The files use `.png` names but contain lossy WebP data with a baked checkerboard. The Rust intake
 compiler detects the actual format, verifies the archive and every member hash, removes only the
@@ -37,11 +37,14 @@ component pass is necessary because adjacent figures overlap in horizontal exten
 Every pose is:
 
 1. Isolated from its source sheet without a PNG or WebP runtime dependency.
-2. Normalized by transparent padding onto the existing 1254 by 1254 frame.
-3. Stored as native colored PixelGraph runs.
-4. Serialized, reopened, projected, and compared byte-for-byte with its admitted transparent source.
-5. Compared against retained source pixels at 1,000,000 millionths.
-6. Visually reviewed in projected and transparent-overlay contact sheets.
+2. Regenerated as a native-detail transparent source and verified against the authored mask.
+3. Measured from Joe's central hat brim and normalized by camera facing around the runtime body
+   anchor.
+4. Padded onto the shared 1536 by 1536 runtime frame without clipping wings or staff.
+5. Stored as native colored PixelGraph runs.
+6. Serialized, reopened, projected, and compared byte-for-byte with its admitted transparent source.
+7. Compared against retained source pixels at 1,000,000 millionths.
+8. Visually reviewed in fixed-canvas source and live-runtime contact sheets.
 
 Evidence lives in:
 
@@ -49,6 +52,10 @@ Evidence lives in:
 - `evidence/phazer-sprite-admission/transparent-overlay-contact-sheet.png`
 - `evidence/phazer-sprite-admission/visual-review.json`
 - `evidence/phazer-sprite-admission/WJPS-####/`
+- `evidence/phazer-native-regeneration/normalized-v2/normalization-manifest.json`
+- `evidence/phazer-native-regeneration/normalized-v2/review/fixed-canvas-before.png`
+- `evidence/phazer-native-regeneration/normalized-v2/review/fixed-canvas-after.png`
+- `evidence/phazer-native-regeneration/normalized-v2/review/live-runtime-contact-sheet.png`
 
-The approved 260-pose v6 catalog remains intact. Runtime v7 is an additive promotion containing
-the original 260 graphs plus the 48 new Phazer graphs.
+The approved v7 catalog remains intact as the rollback baseline. Runtime v9 losslessly pads its
+260 established graphs and installs the 48 normalized native-detail Phazer graphs.

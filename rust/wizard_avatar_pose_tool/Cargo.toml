@@ -5,7 +5,7 @@ edition = "2021"
 description = "Deterministic offline compiler for WizardJoe reference pose archives"
 
 [dependencies]
-image = { version = "0.25", default-features = false, features = ["png", "webp"] }
+image = { version = "0.25", default-features = false, features = ["jpeg", "png", "webp"] }
 flate2 = "1"
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
@@ -100,3 +100,23 @@ path = "src/phazer_intake_main.rs"
 [[bin]]
 name = "wizard-avatar-phazer-promote"
 path = "src/phazer_promote_main.rs"
+
+[[bin]]
+name = "wizard-avatar-phazer-regenerate-one"
+path = "src/phazer_regenerate_one_main.rs"
+
+[[bin]]
+name = "wizard-avatar-phazer-regeneration-finalize"
+path = "src/phazer_regeneration_finalize_main.rs"
+
+[[bin]]
+name = "wizard-avatar-phazer-size-normalize"
+path = "src/phazer_size_normalize_main.rs"
+
+[[bin]]
+name = "wizard-avatar-phazer-normalized-runtime"
+path = "src/phazer_normalized_runtime_main.rs"
+
+[[bin]]
+name = "wizard-avatar-phazer-live-capture-finalize"
+path = "src/phazer_live_capture_finalize_main.rs"

@@ -32,7 +32,7 @@ use wizard_avatar_engine::state::{
 };
 
 const EXPECTED_MANIFEST_SHA256: &str =
-    "c23ac67eb8c493df980165a3776b081a6bbe2074c5b0731fcdd8db587ffbc36a";
+    "970513f40fa2ff7c5dadae33f94d38d73c0416b6b9646cf04f29613028548a6f";
 
 fn ids_for(
     manifest: &wizard_avatar_engine::capability_manifest::CapabilityManifestV1,
@@ -70,7 +70,7 @@ fn manifest_is_an_exact_census_of_runtime_and_contract_registries() {
         .graph;
 
     assert_eq!(manifest.schema_version, CAPABILITY_MANIFEST_SCHEMA_VERSION);
-    assert_eq!(manifest.capabilities.len(), 212);
+    assert_eq!(manifest.capabilities.len(), 221);
     assert_eq!(manifest.character_id, WizardState::default().character_id);
     assert_eq!(manifest.pose_geometry_count, library.pose_ids().count());
     assert_eq!(manifest.pose_alias_count, library.alias_count());

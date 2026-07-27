@@ -1,0 +1,448 @@
+{
+  "schema_version": 1,
+  "compiler_id": "wizard-avatar-phazer-live-capture-v1",
+  "captured_pose_count": 48,
+  "expected_pose_count": 48,
+  "missing_pose_ids": [],
+  "duplicate_pose_ids": [],
+  "common_dimensions": [
+    640,
+    888
+  ],
+  "contact_sheet_path": "../../evidence/phazer-native-regeneration/normalized-v2/review/live-runtime-contact-sheet.png",
+  "contact_sheet_sha256": "ac43c646a6ea47e97c0e6dd895fb41314cf46691f552cf88d6dfb9737293ff7f",
+  "entries": [
+    {
+      "pose_id": "WJPS-0001",
+      "path": "../../evidence/phazer-native-regeneration/normalized-v2/live-loop/WJPS-0001.png",
+      "sha256": "ac74135e28c7819ee5b4e4a431ca35cbc8b41f4fd5f3c765ced25a494bc136f8",
+      "dimensions": [
+        640,
+        888
+      ]
+    },
+    {
+      "pose_id": "WJPS-0002",
+      "path": "../../evidence/phazer-native-regeneration/normalized-v2/live-loop/WJPS-0002.png",
+      "sha256": "4135a22dc7651f1fbdadd4ae48822600ebbd10b2614206050da5620c600cd1d0",
+      "dimensions": [
+        640,
+        888
+      ]
+    },
+    {
+      "pose_id": "WJPS-0003",
+      "path": "../../evidence/phazer-native-regeneration/normalized-v2/live-loop/WJPS-0003.png",
+      "sha256": "4c9224a9560be431b4f8e98a8edae7d7cca90ee8a819da047d322e611b59effd",
+      "dimensions": [
+        640,
+        888
+      ]
+    },
+    {
+      "pose_id": "WJPS-0004",
+      "path": "../../evidence/phazer-native-regeneration/normalized-v2/live-loop/WJPS-0004.png",
+      "sha256": "3995381f61d6f6763bfdd698a53a55b233c1f6bfe7f7eefe94d0a14bc8531048",
+      "dimensions": [
+        640,
+        888
+      ]
+    },
+    {
+      "pose_id": "WJPS-0005",
+      "path": "../../evidence/phazer-native-regeneration/normalized-v2/live-loop/WJPS-0005.png",
+      "sha256": "22a42a4c3c09c2a7e60ea8c432504a2678ed89e231e0facb69618522cca4cc2a",
+      "dimensions": [
+        640,
+        888
+      ]
+    },
+    {
+      "pose_id": "WJPS-0006",
+      "path": "../../evidence/phazer-native-regeneration/normalized-v2/live-loop/WJPS-0006.png",
+      "sha256": "6714a911aff712c023d0f10966ac8e9f432e8c8347a8b822e561ed1a3faf0501",
+      "dimensions": [
+        640,
+        888
+      ]
+    },
+    {
+      "pose_id": "WJPS-0007",
+      "path": "../../evidence/phazer-native-regeneration/normalized-v2/live-loop/WJPS-0007.png",
+      "sha256": "5c0f3e51cc4eb5247534f0453c629dd9d8396710854a47a6b3ae3fbc46421527",
+      "dimensions": [
+        640,
+        888
+      ]
+    },
+    {
+      "pose_id": "WJPS-0008",
+      "path": "../../evidence/phazer-native-regeneration/normalized-v2/live-loop/WJPS-0008.png",
+      "sha256": "a656e91313680f74bf6761f489f0983c9a233f29a92d522c15c6af13ef236baa",
+      "dimensions": [
+        640,
+        888
+      ]
+    },
+    {
+      "pose_id": "WJPS-0009",
+      "path": "../../evidence/phazer-native-regeneration/normalized-v2/live-loop/WJPS-0009.png",
+      "sha256": "e99c28df726f119c9f100fee7753210eff8967b5be8be22d7addaaf8bfbb7304",
+      "dimensions": [
+        640,
+        888
+      ]
+    },
+    {
+      "pose_id": "WJPS-0010",
+      "path": "../../evidence/phazer-native-regeneration/normalized-v2/live-loop/WJPS-0010.png",
+      "sha256": "94dd28e8dd693ce62480c40ba4bd0ac2aab909d765362ed29296b0d97eb9fd8b",
+      "dimensions": [
+        640,
+        888
+      ]
+    },
+    {
+      "pose_id": "WJPS-0011",
+      "path": "../../evidence/phazer-native-regeneration/normalized-v2/live-loop/WJPS-0011.png",
+      "sha256": "192562d6bce6a3b8b01eb04c0f66e343de4f98b01ea6430cb5bac189d28c505c",
+      "dimensions": [
+        640,
+        888
+      ]
+    },
+    {
+      "pose_id": "WJPS-0012",
+      "path": "../../evidence/phazer-native-regeneration/normalized-v2/live-loop/WJPS-0012.png",
+      "sha256": "c528de5761be6d68b5823c89f1a923264a8839b14cc54b8831c575835f322ee0",
+      "dimensions": [
+        640,
+        888
+      ]
+    },
+    {
+      "pose_id": "WJPS-0013",
+      "path": "../../evidence/phazer-native-regeneration/normalized-v2/live-loop/WJPS-0013.png",
+      "sha256": "eb212d174aed5e50fce52829cedaeaaa7098a7e6d740eb63386ad1eda2a80efc",
+      "dimensions": [
+        640,
+        888
+      ]
+    },
+    {
+      "pose_id": "WJPS-0014",
+      "path": "../../evidence/phazer-native-regeneration/normalized-v2/live-loop/WJPS-0014.png",
+      "sha256": "d107f369cea35f11829494a886b95a27dd035b726678e279fb4aac9a0d150da5",
+      "dimensions": [
+        640,
+        888
+      ]
+    },
+    {
+      "pose_id": "WJPS-0015",
+      "path": "../../evidence/phazer-native-regeneration/normalized-v2/live-loop/WJPS-0015.png",
+      "sha256": "76f1971b3eba67de230a3f772cf41a8d389ebacb3566bcc1ceae4dd535d44737",
+      "dimensions": [
+        640,
+        888
+      ]
+    },
+    {
+      "pose_id": "WJPS-0016",
+      "path": "../../evidence/phazer-native-regeneration/normalized-v2/live-loop/WJPS-0016.png",
+      "sha256": "b9949d9c49c7d821ae36f77a159362b577295be9c31f4ab59d00463cbf4acd9d",
+      "dimensions": [
+        640,
+        888
+      ]
+    },
+    {
+      "pose_id": "WJPS-0017",
+      "path": "../../evidence/phazer-native-regeneration/normalized-v2/live-loop/WJPS-0017.png",
+      "sha256": "230622d0bbeb491290b0a905c4afd50c71ea1de4358460588c295aa81f62bfaa",
+      "dimensions": [
+        640,
+        888
+      ]
+    },
+    {
+      "pose_id": "WJPS-0018",
+      "path": "../../evidence/phazer-native-regeneration/normalized-v2/live-loop/WJPS-0018.png",
+      "sha256": "007bc475a40155ba902fc093b391903a25ca2c4752df54a7a9cd3f34aa2c0e67",
+      "dimensions": [
+        640,
+        888
+      ]
+    },
+    {
+      "pose_id": "WJPS-0019",
+      "path": "../../evidence/phazer-native-regeneration/normalized-v2/live-loop/WJPS-0019.png",
+      "sha256": "4367ab7f9b8a63f7068cea3166efa57711c9d2afec223c3865d180acb9cc62ce",
+      "dimensions": [
+        640,
+        888
+      ]
+    },
+    {
+      "pose_id": "WJPS-0020",
+      "path": "../../evidence/phazer-native-regeneration/normalized-v2/live-loop/WJPS-0020.png",
+      "sha256": "48cdf21fd58399d341cd1f949bb80b7fb595525bd0d2b0c948e7bcb81ef4afdf",
+      "dimensions": [
+        640,
+        888
+      ]
+    },
+    {
+      "pose_id": "WJPS-0021",
+      "path": "../../evidence/phazer-native-regeneration/normalized-v2/live-loop/WJPS-0021.png",
+      "sha256": "8aa03a69f991edc50c657a1d981e14b3d59d3d28bdadb191824c08bc9a597ad0",
+      "dimensions": [
+        640,
+        888
+      ]
+    },
+    {
+      "pose_id": "WJPS-0022",
+      "path": "../../evidence/phazer-native-regeneration/normalized-v2/live-loop/WJPS-0022.png",
+      "sha256": "fe2670bd89b34fba7922ceb0b87cadf30c0b0facb2e39d093352e69ce8f625f1",
+      "dimensions": [
+        640,
+        888
+      ]
+    },
+    {
+      "pose_id": "WJPS-0023",
+      "path": "../../evidence/phazer-native-regeneration/normalized-v2/live-loop/WJPS-0023.png",
+      "sha256": "3ca8d4f575ba83d1c88e6f64d2c0927011bcca30d5623016a1ecaa957fe269db",
+      "dimensions": [
+        640,
+        888
+      ]
+    },
+    {
+      "pose_id": "WJPS-0024",
+      "path": "../../evidence/phazer-native-regeneration/normalized-v2/live-loop/WJPS-0024.png",
+      "sha256": "255c5d2768aff26a51260baee8867336ce1cb0a512b5d6a0406d3501d3d18ab7",
+      "dimensions": [
+        640,
+        888
+      ]
+    },
+    {
+      "pose_id": "WJPS-0025",
+      "path": "../../evidence/phazer-native-regeneration/normalized-v2/live-loop/WJPS-0025.png",
+      "sha256": "676489b60ea1cc5558fa2e21c352519ab95407d74c2a56d1ceedaaea0eb8f3b6",
+      "dimensions": [
+        640,
+        888
+      ]
+    },
+    {
+      "pose_id": "WJPS-0026",
+      "path": "../../evidence/phazer-native-regeneration/normalized-v2/live-loop/WJPS-0026.png",
+      "sha256": "38bbd116f1f0cc391dc330ba1e29c8a1e32376d2215e033b784a42ec8bc13e9e",
+      "dimensions": [
+        640,
+        888
+      ]
+    },
+    {
+      "pose_id": "WJPS-0027",
+      "path": "../../evidence/phazer-native-regeneration/normalized-v2/live-loop/WJPS-0027.png",
+      "sha256": "46be51e7f41f515e4c575f9413d404585fb23d9919a45255e90202821ce94f46",
+      "dimensions": [
+        640,
+        888
+      ]
+    },
+    {
+      "pose_id": "WJPS-0028",
+      "path": "../../evidence/phazer-native-regeneration/normalized-v2/live-loop/WJPS-0028.png",
+      "sha256": "c52a7c3624d0340c9d38888166a56c14792132c4544de4a259a6ff7d649a2c83",
+      "dimensions": [
+        640,
+        888
+      ]
+    },
+    {
+      "pose_id": "WJPS-0029",
+      "path": "../../evidence/phazer-native-regeneration/normalized-v2/live-loop/WJPS-0029.png",
+      "sha256": "7dc90d0ffa0c9eaf8e535820822992584d31ab5484a81f13a66f7fcaa7a66a7e",
+      "dimensions": [
+        640,
+        888
+      ]
+    },
+    {
+      "pose_id": "WJPS-0030",
+      "path": "../../evidence/phazer-native-regeneration/normalized-v2/live-loop/WJPS-0030.png",
+      "sha256": "1973846a1e1a25207ae4098ccf26f3663d65c332ed7ed6ac10b85009e5f22fdb",
+      "dimensions": [
+        640,
+        888
+      ]
+    },
+    {
+      "pose_id": "WJPS-0031",
+      "path": "../../evidence/phazer-native-regeneration/normalized-v2/live-loop/WJPS-0031.png",
+      "sha256": "80f45b2b480d7b3b0d3f3f965584d4d82c71731a3bf276d521663011729e9b23",
+      "dimensions": [
+        640,
+        888
+      ]
+    },
+    {
+      "pose_id": "WJPS-0032",
+      "path": "../../evidence/phazer-native-regeneration/normalized-v2/live-loop/WJPS-0032.png",
+      "sha256": "da2a9c6c2b808b29cce40ebb81d75f7e8becf0736096c7c0e4258bfaccd5ba7c",
+      "dimensions": [
+        640,
+        888
+      ]
+    },
+    {
+      "pose_id": "WJPS-0033",
+      "path": "../../evidence/phazer-native-regeneration/normalized-v2/live-loop/WJPS-0033.png",
+      "sha256": "6932ba5c5e5ea31048011c46f4857c106294dcf5d53f1fbcbe631b0df1b7fb8f",
+      "dimensions": [
+        640,
+        888
+      ]
+    },
+    {
+      "pose_id": "WJPS-0034",
+      "path": "../../evidence/phazer-native-regeneration/normalized-v2/live-loop/WJPS-0034.png",
+      "sha256": "9c908a842690b7ffa8736014c8f5d0379845f5c2cb5c774e10d125d1091327fd",
+      "dimensions": [
+        640,
+        888
+      ]
+    },
+    {
+      "pose_id": "WJPS-0035",
+      "path": "../../evidence/phazer-native-regeneration/normalized-v2/live-loop/WJPS-0035.png",
+      "sha256": "4ac9e4c8d157371a684d99d88c781859d70ba15942f26742fc719901e05538eb",
+      "dimensions": [
+        640,
+        888
+      ]
+    },
+    {
+      "pose_id": "WJPS-0036",
+      "path": "../../evidence/phazer-native-regeneration/normalized-v2/live-loop/WJPS-0036.png",
+      "sha256": "bb682662588ff05ec5597ba0df4261241908e2f7e15eb32511f839aa45f46477",
+      "dimensions": [
+        640,
+        888
+      ]
+    },
+    {
+      "pose_id": "WJPS-0037",
+      "path": "../../evidence/phazer-native-regeneration/normalized-v2/live-loop/WJPS-0037.png",
+      "sha256": "9b2655ddca02babe88c5579d21f05b79bb46189db0ed2389f85b861b29a0fed6",
+      "dimensions": [
+        640,
+        888
+      ]
+    },
+    {
+      "pose_id": "WJPS-0038",
+      "path": "../../evidence/phazer-native-regeneration/normalized-v2/live-loop/WJPS-0038.png",
+      "sha256": "5717b9c4886fa89120104f09723d0ff0c517be3d354075837445ddd9fdfda19f",
+      "dimensions": [
+        640,
+        888
+      ]
+    },
+    {
+      "pose_id": "WJPS-0039",
+      "path": "../../evidence/phazer-native-regeneration/normalized-v2/live-loop/WJPS-0039.png",
+      "sha256": "f136678a20f03506d2f6cc2d6faeadff634436ecb46c381fe61a3f26bb941199",
+      "dimensions": [
+        640,
+        888
+      ]
+    },
+    {
+      "pose_id": "WJPS-0040",
+      "path": "../../evidence/phazer-native-regeneration/normalized-v2/live-loop/WJPS-0040.png",
+      "sha256": "978a429ab19e202b0b4a50c2448ce024c4fbdb178d674d55c160c341fc9d1f6a",
+      "dimensions": [
+        640,
+        888
+      ]
+    },
+    {
+      "pose_id": "WJPS-0041",
+      "path": "../../evidence/phazer-native-regeneration/normalized-v2/live-loop/WJPS-0041.png",
+      "sha256": "5b5dfacb3bce3bfddd9960c589b1db530ca4e991502ae89bd0d4867aba383b00",
+      "dimensions": [
+        640,
+        888
+      ]
+    },
+    {
+      "pose_id": "WJPS-0042",
+      "path": "../../evidence/phazer-native-regeneration/normalized-v2/live-loop/WJPS-0042.png",
+      "sha256": "ea5b184d5a495d9ca8176d44722d8a9b4a1a770e1c588f08b53af860a7360c3b",
+      "dimensions": [
+        640,
+        888
+      ]
+    },
+    {
+      "pose_id": "WJPS-0043",
+      "path": "../../evidence/phazer-native-regeneration/normalized-v2/live-loop/WJPS-0043.png",
+      "sha256": "f4df55d34bd873033f7472e50fae91e8cccc6c2ecc8e3613a835e18f747d226b",
+      "dimensions": [
+        640,
+        888
+      ]
+    },
+    {
+      "pose_id": "WJPS-0044",
+      "path": "../../evidence/phazer-native-regeneration/normalized-v2/live-loop/WJPS-0044.png",
+      "sha256": "d950a77c973198cf04dc58e8b87546a35fad1beea31db68d02fba427e415f5ce",
+      "dimensions": [
+        640,
+        888
+      ]
+    },
+    {
+      "pose_id": "WJPS-0045",
+      "path": "../../evidence/phazer-native-regeneration/normalized-v2/live-loop/WJPS-0045.png",
+      "sha256": "cfb071fd3628edd06e6cd3b1b0118f290b67779cfe550941773e7692de5337fb",
+      "dimensions": [
+        640,
+        888
+      ]
+    },
+    {
+      "pose_id": "WJPS-0046",
+      "path": "../../evidence/phazer-native-regeneration/normalized-v2/live-loop/WJPS-0046.png",
+      "sha256": "243e7f43c70388705613a743de93065f80bf762f874655e470c03966026f02ea",
+      "dimensions": [
+        640,
+        888
+      ]
+    },
+    {
+      "pose_id": "WJPS-0047",
+      "path": "../../evidence/phazer-native-regeneration/normalized-v2/live-loop/WJPS-0047.png",
+      "sha256": "f5d4a76870ea6f5402b5c5c60b679a6fd4b512086ee79b7bda66233e3daf7bf2",
+      "dimensions": [
+        640,
+        888
+      ]
+    },
+    {
+      "pose_id": "WJPS-0048",
+      "path": "../../evidence/phazer-native-regeneration/normalized-v2/live-loop/WJPS-0048.png",
+      "sha256": "36ba4d374a2dc2f319ee6a475ee3accc9b7e7b607a71a3ea5db5507c66159015",
+      "dimensions": [
+        640,
+        888
+      ]
+    }
+  ]
+}

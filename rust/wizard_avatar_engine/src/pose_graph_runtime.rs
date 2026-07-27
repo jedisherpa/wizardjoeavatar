@@ -8,7 +8,8 @@ use std::path::{Path, PathBuf};
 use std::sync::{Arc, Mutex, OnceLock};
 
 pub const RUNTIME_POSE_GRAPH_SCHEMA_VERSION: u32 = 2;
-pub const RUNTIME_POSE_GRAPH_COMPILER_ID: &str = "wizard-avatar-production-alpha-plus-phazer-v2";
+pub const RUNTIME_POSE_GRAPH_COMPILER_ID: &str =
+    "wizard-avatar-production-alpha-plus-normalized-phazer-v4";
 pub const RUNTIME_POSE_GRAPH_COUNT: usize = 308;
 pub const RUNTIME_UNIQUE_SEMANTIC_COUNT: usize = 308;
 pub const RUNTIME_SOURCE_RECORD_COUNT: usize = 308;
@@ -19,7 +20,7 @@ const RUNTIME_RASTER_CACHE_LIMIT: usize = 16;
 
 const EMBEDDED_RUNTIME_MANIFEST: &str = include_str!(concat!(
     env!("CARGO_MANIFEST_DIR"),
-    "/assets/pose_graphs/v7/runtime-manifest.json"
+    "/assets/pose_graphs/v9/runtime-manifest.json"
 ));
 
 #[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
@@ -541,13 +542,13 @@ pub fn runtime_graph_directory() -> Result<PathBuf, String> {
     }
     if let Ok(executable) = std::env::current_exe() {
         if let Some(parent) = executable.parent() {
-            let packaged = parent.join("assets/pose_graphs/v7");
+            let packaged = parent.join("assets/pose_graphs/v9");
             if packaged.is_dir() {
                 return Ok(packaged);
             }
         }
     }
-    let development = Path::new(env!("CARGO_MANIFEST_DIR")).join("assets/pose_graphs/v7");
+    let development = Path::new(env!("CARGO_MANIFEST_DIR")).join("assets/pose_graphs/v9");
     if development.is_dir() {
         return Ok(development);
     }
@@ -571,7 +572,7 @@ fn validate_manifest(manifest: &RuntimePoseGraphManifest) -> Result<(), String> 
         || manifest.primary_pose_count != RUNTIME_POSE_GRAPH_COUNT
         || manifest.unique_semantic_pose_count != RUNTIME_UNIQUE_SEMANTIC_COUNT
         || manifest.entries.len() != RUNTIME_POSE_GRAPH_COUNT
-        || manifest.frame != [1254, 1254]
+        || manifest.frame != [1536, 1536]
     {
         return Err("runtime pose graph manifest counts/frame are not authoritative".to_string());
     }
@@ -682,9 +683,9 @@ mod tests {
             "phazer_rear_walk_hover_frame_06",
         ] {
             let raster = project_runtime_pose_graph(pose_id).expect("project runtime graph");
-            assert_eq!([raster.width, raster.height], [1254, 1254]);
-            assert_eq!(raster.rgba.len(), 1254 * 1254 * 4);
-            assert_eq!(raster.coverage_mask.len(), 1254 * 1254);
+            assert_eq!([raster.width, raster.height], [1536, 1536]);
+            assert_eq!(raster.rgba.len(), 1536 * 1536 * 4);
+            assert_eq!(raster.coverage_mask.len(), 1536 * 1536);
             assert_eq!(
                 raster
                     .coverage_mask
