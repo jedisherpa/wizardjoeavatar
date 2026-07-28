@@ -28,6 +28,10 @@ from .models import CommandResult, WizardCellFrame, WizardCommand, WizardState
 from .protocol import encode_keyframe, encode_rgba_frame
 from .performance_application import PerformanceApplication
 from .performance_context import PerformanceContextV1
+from .directed_performance import (
+    DirectedPerformanceError,
+    DirectedPerformancePreparationV1,
+)
 from .performance_release import (
     GovernedSpeechError,
     GovernedSpeechRegistrationV1,
@@ -528,6 +532,91 @@ class WizardFrameHub:
                 self.performance.publish_live_speech_score,
                 compiled,
             )
+            return dict(prepared.to_dict())
+
+    async def prepare_directed_performance(
+        self,
+        preparation: DirectedPerformancePreparationV1,
+    ) -> dict:
+        """Compile, fence, and publish one arbitrary governed direction."""
+
+        await self.start()
+
+        def current_matches(
+            snapshot_fingerprint: str,
+            context: PerformanceContextV1,
+        ) -> bool:
+            current = self.performance.scheduler.coordinator.snapshot_for_slot(
+                preparation.source_slot
+            )
+            return bool(
+                current is not None
+                and current.fingerprint() == snapshot_fingerprint
+                and current.media.duration_ms == preparation.duration_ms
+                and current.media.media_id == preparation.media_id
+                and current.media.media_sha256 == preparation.media_sha256
+                and (
+                    self.performance.scheduler.coordinator.reconciliation_generation
+                    == context.runtime.reconciliation_generation
+                )
+                and (
+                    self.frame_source.controller.state.control_lease_generation
+                    == context.control.cancellation_generation
+                )
+                and self.performance.runtime_epoch
+                == context.runtime.wizard_runtime_epoch
+                and self.performance.character_id
+                == context.character.character_id
+                and self.performance.package_digest
+                == context.character.package_digest
+                and self.performance.manifest_digest
+                == context.character.manifest_digest
+            )
+
+        async with self._current_lock():
+            try:
+                context = self.performance.capture_performance_context(
+                    preparation.context_request,
+                    self.frame_source.controller,
+                    time.perf_counter_ns() // 1000,
+                    source_slot=preparation.source_slot,
+                )
+            except GovernedSpeechError as exc:
+                raise DirectedPerformanceError(exc.code, exc.path) from exc
+            snapshot = self.performance.scheduler.coordinator.snapshot_for_slot(
+                preparation.source_slot
+            )
+            if (
+                snapshot is None
+                or snapshot.media.duration_ms is None
+                or snapshot.media.duration_ms != preparation.duration_ms
+                or snapshot.media.media_id != preparation.media_id
+                or snapshot.media.media_sha256 != preparation.media_sha256
+            ):
+                raise DirectedPerformanceError(
+                    "media_session_mismatch",
+                    "$.direction",
+                )
+            snapshot_fingerprint = snapshot.fingerprint()
+
+        compiled = await asyncio.to_thread(
+            self.performance.compile_directed_performance,
+            preparation,
+            context,
+        )
+
+        async with self._current_lock():
+            if not current_matches(snapshot_fingerprint, context):
+                raise DirectedPerformanceError("media_session_changed")
+
+        prepared = await asyncio.to_thread(
+            self.performance.publish_directed_performance,
+            compiled,
+        )
+
+        async with self._current_lock():
+            if not current_matches(snapshot_fingerprint, context):
+                raise DirectedPerformanceError("media_session_changed")
             return dict(prepared.to_dict())
 
     async def register_governed_speech(

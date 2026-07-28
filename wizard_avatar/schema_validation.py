@@ -22,6 +22,7 @@ SCHEMA_FILES = {
     "MusicScoreV1": "music_score_v1.schema.json",
     "PerformanceScoreV1": "performance_score_v1.schema.json",
     "HighLevelDirectionRequestV1": "high_level_direction_request_v1.schema.json",
+    "DirectedPerformancePreparationV1": "directed_performance_preparation_v1.schema.json",
     "ScoreEditsV1": "score_edits_v1.schema.json",
     "CompiledPerformanceScoreV1": "compiled_performance_score_v1.schema.json",
     "MediaSessionSnapshotV1": "media_session_snapshot_v1.schema.json",
@@ -449,6 +450,30 @@ def _validate_high_level_direction(value: Mapping[str, object]) -> None:
     )
 
 
+def _validate_directed_performance_preparation(
+    value: Mapping[str, object],
+) -> None:
+    direction = value["direction"]
+    context = value["context_request"]
+    _validate_media_hash_binding(
+        direction["media_id"],
+        direction["media_sha256"],
+        "$.direction.media_id",
+    )
+    if context["media_id"] != direction["media_id"]:
+        raise _error(
+            "media_mismatch",
+            "$.context_request.media_id",
+            "context and direction media identities must match",
+        )
+    if context["intent"] != direction["intent"]:
+        raise _error(
+            "direction_intent_mismatch",
+            "$.context_request.intent",
+            "context and direction intents must match",
+        )
+
+
 def _validate_score_edits(value: Mapping[str, object]) -> None:
     _require_unique(value["operations"], "operation_id", "$.operations")
     for index, operation in enumerate(value["operations"]):
@@ -553,6 +578,7 @@ SEMANTIC_VALIDATORS = {
     "MusicScoreV1": _validate_music,
     "PerformanceScoreV1": _validate_performance,
     "HighLevelDirectionRequestV1": _validate_high_level_direction,
+    "DirectedPerformancePreparationV1": _validate_directed_performance_preparation,
     "ScoreEditsV1": _validate_score_edits,
     "CompiledPerformanceScoreV1": _validate_compiled,
     "MediaSessionSnapshotV1": _validate_snapshot,

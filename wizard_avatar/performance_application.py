@@ -32,6 +32,14 @@ from .media_session import (
 )
 from .models import ACTIONS, DIRECTIONS, EXPRESSIONS, MOUTH_SHAPES
 from .performance_context import PerformanceContextV1
+from .directed_performance import (
+    CompiledDirectedPerformanceV1,
+    DirectedPerformanceError,
+    DirectedPerformancePreparationV1,
+    PreparedDirectedPerformanceV1,
+    compile_directed_performance,
+    publish_directed_performance,
+)
 from .performance_release import (
     GovernedSpeechError,
     GovernedSpeechRegistrationV1,
@@ -422,12 +430,16 @@ class PerformanceApplication:
         request: PerformanceContextRequestV1,
         controller: WizardAvatarController,
         now_monotonic_us: int,
+        *,
+        source_slot: str = "speech",
     ) -> PerformanceContextV1:
-        """Freeze a content-free context against the pending speech source."""
+        """Freeze a content-free context against one authoritative media source."""
 
         self._require_runtime_admission()
-        snapshot = self.scheduler.coordinator.snapshot_for_slot("speech")
-        receipt_us = self.scheduler.coordinator.receipt_for_slot("speech")
+        if source_slot not in {"main", "speech"}:
+            raise GovernedSpeechError("source_slot_mismatch", "$.source_slot")
+        snapshot = self.scheduler.coordinator.snapshot_for_slot(source_slot)
+        receipt_us = self.scheduler.coordinator.receipt_for_slot(source_slot)
         if snapshot is None or receipt_us is None:
             raise GovernedSpeechError("media_session_not_ready")
         if snapshot.media.media_id != request.media_id:
@@ -513,11 +525,19 @@ class PerformanceApplication:
                 "observed_stage": "ready",
                 "mapped_status": "completed",
                 "stage_started_at_monotonic_ms": now_monotonic_us // 1000,
-                "expected_next_event": "speech_started",
+                "expected_next_event": (
+                    "speech_started"
+                    if source_slot == "speech"
+                    else "terminal_posture"
+                ),
                 "cancellation_posture": "not_requested",
                 "error_posture": "none",
-                "tts_readiness": "ready",
-                "alignment_readiness": "ready",
+                "tts_readiness": (
+                    "ready" if source_slot == "speech" else "not_requested"
+                ),
+                "alignment_readiness": (
+                    "ready" if source_slot == "speech" else "not_requested"
+                ),
             },
             "approval": {
                 "presentation_state": "approved_for_presentation",
@@ -589,6 +609,38 @@ class PerformanceApplication:
             },
         }
         return PerformanceContextV1.build(payload)
+
+    def compile_directed_performance(
+        self,
+        preparation: DirectedPerformancePreparationV1,
+        context: PerformanceContextV1,
+    ) -> CompiledDirectedPerformanceV1:
+        """Compile a governed direction off the event loop."""
+
+        self._require_runtime_admission()
+        if self.score_repository is None:
+            raise DirectedPerformanceError("score_repository_not_ready")
+        if self.capability_manifest is None:
+            raise DirectedPerformanceError("capability_manifest_not_ready")
+        return compile_directed_performance(
+            preparation,
+            context,
+            capability_manifest=self.capability_manifest,
+        )
+
+    def publish_directed_performance(
+        self,
+        compiled: CompiledDirectedPerformanceV1,
+    ) -> PreparedDirectedPerformanceV1:
+        """Publish a revalidated direction through the existing score repository."""
+
+        self._require_runtime_admission()
+        if self.score_repository is None:
+            raise DirectedPerformanceError("score_repository_not_ready")
+        return publish_directed_performance(
+            compiled,
+            repository=self.score_repository,
+        )
 
     def compile_live_speech_score(
         self,

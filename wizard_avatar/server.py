@@ -15,6 +15,11 @@ from typing import Any, Callable, Dict, Mapping, Optional
 from urllib.parse import urlsplit
 
 from .commanding import CommandEnvelopeV1, CommandValidationError
+from .directed_performance import (
+    DIRECTED_PERFORMANCE_MAX_BODY_BYTES,
+    DirectedPerformanceError,
+    DirectedPerformancePreparationV1,
+)
 from .frame_source import ProceduralWizardFrameSource
 from .hd_pose_artifact import HDPoseLibrary, sha256_path
 from .models import WizardCommand
@@ -679,6 +684,26 @@ def create_app(
                 status_code=409 if exc.code.endswith(
                     ("changed", "mismatch", "not_ready")
                 ) else 400,
+                detail={"code": exc.code, "path": exc.path},
+            ) from exc
+
+    @app.post("/api/avatar/wizard/director/v1/performances/prepare")
+    async def prepare_directed_performance(request: FastAPIRequest):
+        require_connector(request)
+        body = await bounded_json_body(
+            request,
+            DIRECTED_PERFORMANCE_MAX_BODY_BYTES,
+        )
+        try:
+            preparation = DirectedPerformancePreparationV1.from_json(body)
+            return await frame_hub.prepare_directed_performance(preparation)
+        except DirectedPerformanceError as exc:
+            raise HTTPException(
+                status_code=409
+                if exc.code.endswith(
+                    ("changed", "mismatch", "not_ready", "stale")
+                )
+                else 400,
                 detail={"code": exc.code, "path": exc.path},
             ) from exc
 

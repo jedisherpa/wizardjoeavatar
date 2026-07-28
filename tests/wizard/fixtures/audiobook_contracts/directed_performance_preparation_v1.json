@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "source_slot": "main",
+  "context_request": {
+    "schema_version": 1,
+    "turn_id": "turn:directed:0001",
+    "utterance_id": "utterance:directed:0001",
+    "media_id": "media:sha256:1111111111111111111111111111111111111111111111111111111111111111",
+    "reply_sha256": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+    "intent": "explain",
+    "tone": "warm",
+    "sensitivity": "ordinary",
+    "urgency": "normal",
+    "relational_stance": "collaborative",
+    "pending_action_posture": "none",
+    "display_profile": "desktop"
+  },
+  "direction": {
+    "schema_version": 1,
+    "direction_id": "direction:directed:0001",
+    "direction_text": "Wizard Joe enters toward center stage, transitions to warm seriousness, raises the right hand, then speaks.",
+    "intent": "explain",
+    "duration_ms": 9000,
+    "media_id": "media:sha256:1111111111111111111111111111111111111111111111111111111111111111",
+    "media_sha256": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+    "seed": 27
+  }
+}
