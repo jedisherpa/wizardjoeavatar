@@ -52,11 +52,25 @@ function translateRgbaHorizontally(frame, width, height, offsetX) {
   return translated;
 }
 
+function blendRgbaFrames(first, second, blendMilli) {
+  if (!second || blendMilli <= 0) return first;
+  if (blendMilli >= 1000) return second;
+  const result = new Uint8Array(first.length);
+  const inverse = 1000 - blendMilli;
+  for (let index = 0; index < first.length; index++) {
+    result[index] = Math.round(
+      (first[index] * inverse + second[index] * blendMilli) / 1000,
+    );
+  }
+  return result;
+}
+
 async function start() {
   const params = new URLSearchParams(location.search);
   const reviewPose = params.get("hd-review");
   const reviewSequence = params.get("hd-sequence");
-  if (reviewPose || reviewSequence) {
+  const reviewPerformance = params.get("hd-performance") === "1";
+  if (reviewPose || reviewSequence || reviewPerformance) {
     document.body.dataset.hdReviewStep = "profile";
     const profileResponse = await fetch("/api/avatar/wizard/hd-profile", { cache: "no-store" });
     if (!profileResponse.ok) throw new Error(await profileResponse.text());
@@ -79,9 +93,12 @@ async function start() {
     document.body.classList.add("hd-review");
     document.body.dataset.hdPresentationOffsetX = String(presentationOffsetX);
     canvas.configure(width, height, "rgba");
+    const poseCache = new Map();
 
     const loadPose = async (poseId) => {
       if (!manifest.pose_ids.includes(poseId)) throw new Error("Unknown HD review pose");
+      if (poseCache.has(poseId)) return poseCache.get(poseId);
+      const loading = (async () => {
       let lastError = null;
       for (let attempt = 1; attempt <= 4; attempt++) {
         try {
@@ -105,9 +122,93 @@ async function start() {
         }
       }
       throw lastError;
+      })();
+      poseCache.set(poseId, loading);
+      try {
+        return await loading;
+      } catch (error) {
+        poseCache.delete(poseId);
+        throw error;
+      }
     };
 
-    if (reviewSequence) {
+    if (reviewPerformance) {
+      const canvasElement = document.getElementById("wizard-canvas");
+      const requestedOrigin = params.get("controller-origin");
+      const controllerOrigin = requestedOrigin
+        ? new URL(requestedOrigin).origin
+        : location.origin;
+      let poseId = "013_idle_warm_camera_ready";
+      let nextPoseId = null;
+      let blendMilli = 0;
+      let scaleMilli = 1000;
+      let offsetXPx = 0;
+      let offsetYPx = 0;
+      let mediaPositionMs = 0;
+      let framesDrawn = 0;
+      let frameFailures = 0;
+      let requestGeneration = 0;
+
+      const presentFrame = async (message) => {
+        const generation = ++requestGeneration;
+        poseId = String(message.poseId || poseId);
+        nextPoseId = message.nextPoseId ? String(message.nextPoseId) : null;
+        blendMilli = Math.max(0, Math.min(1000, Number(message.blendMilli) || 0));
+        scaleMilli = Math.max(500, Math.min(1200, Number(message.scaleMilli) || 1000));
+        offsetXPx = Math.max(-80, Math.min(80, Number(message.offsetXPx) || 0));
+        offsetYPx = Math.max(-80, Math.min(80, Number(message.offsetYPx) || 0));
+        mediaPositionMs = Math.max(0, Number(message.mediaPositionMs) || 0);
+        try {
+          const first = await loadPose(poseId);
+          const second = nextPoseId ? await loadPose(nextPoseId) : null;
+          if (generation !== requestGeneration) return;
+          canvas.draw(
+            presentPose(blendRgbaFrames(first, second, blendMilli)),
+          );
+          canvasElement.style.transformOrigin = "50% 82%";
+          canvasElement.style.transform = (
+            `translate(${offsetXPx}px, ${offsetYPx}px) scale(${scaleMilli / 1000})`
+          );
+          framesDrawn++;
+          delete document.body.dataset.hdFrameError;
+        } catch (error) {
+          frameFailures++;
+          document.body.dataset.hdFrameError = (
+            error instanceof Error ? error.message : String(error)
+          );
+        }
+      };
+
+      addEventListener("message", (event) => {
+        if (
+          event.source !== parent
+          || event.origin !== controllerOrigin
+          || event.data?.type !== "wizard-hd-performance-frame"
+        ) return;
+        void presentFrame(event.data);
+      });
+      await presentFrame({ poseId });
+      document.body.dataset.hdReviewStep = "ready";
+      window.__wizardJoeMetrics = () => ({
+        hdReview: true,
+        performanceReview: true,
+        poseId,
+        nextPoseId,
+        blendMilli,
+        scaleMilli,
+        offsetXPx,
+        offsetYPx,
+        mediaPositionMs,
+        framesDrawn,
+        frameFailures,
+        libraryIndexSha256: manifest.library_index_sha256,
+        canvas: canvas.getMetrics(),
+      });
+      parent.postMessage(
+        { type: "wizard-hd-performance-ready" },
+        controllerOrigin,
+      );
+    } else if (reviewSequence) {
       const sequence = manifest.sequences[reviewSequence];
       if (!sequence) throw new Error("Unknown HD review sequence");
       document.body.dataset.hdReviewStep = "load-sequence";

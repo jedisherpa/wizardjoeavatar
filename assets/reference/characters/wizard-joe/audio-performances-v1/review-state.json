@@ -1,0 +1,386 @@
+{
+  "schema_version": 1,
+  "program_id": "wizard-joe-joeville-audio-performance-review-v1",
+  "decisions": {
+    "WJ_INTRO_001": {
+      "status": "unreviewed",
+      "notes": ""
+    },
+    "WJ_INTRO_002": {
+      "status": "unreviewed",
+      "notes": ""
+    },
+    "WJ_INTRO_003": {
+      "status": "unreviewed",
+      "notes": ""
+    },
+    "WJ_INTRO_004": {
+      "status": "unreviewed",
+      "notes": ""
+    },
+    "WJ_INTRO_005": {
+      "status": "unreviewed",
+      "notes": ""
+    },
+    "WJ_WORLD_001": {
+      "status": "unreviewed",
+      "notes": ""
+    },
+    "WJ_WORLD_JOEVILLE": {
+      "status": "unreviewed",
+      "notes": ""
+    },
+    "WJ_WORLD_BOULDER": {
+      "status": "unreviewed",
+      "notes": ""
+    },
+    "WJ_WORLD_GITHUB": {
+      "status": "unreviewed",
+      "notes": ""
+    },
+    "WJ_WORLD_002": {
+      "status": "unreviewed",
+      "notes": ""
+    },
+    "WJ_WORLD_003": {
+      "status": "unreviewed",
+      "notes": ""
+    },
+    "WJ_PURPOSE_001": {
+      "status": "unreviewed",
+      "notes": ""
+    },
+    "WJ_PURPOSE_002": {
+      "status": "unreviewed",
+      "notes": ""
+    },
+    "WJ_PURPOSE_003": {
+      "status": "unreviewed",
+      "notes": ""
+    },
+    "WJ_ENTER_001": {
+      "status": "unreviewed",
+      "notes": ""
+    },
+    "WJ_ENTER_002": {
+      "status": "unreviewed",
+      "notes": ""
+    },
+    "WJ_ENTER_003": {
+      "status": "unreviewed",
+      "notes": ""
+    },
+    "WJ_QUEST_001": {
+      "status": "unreviewed",
+      "notes": ""
+    },
+    "WJ_QUEST_002": {
+      "status": "unreviewed",
+      "notes": ""
+    },
+    "WJ_QUEST_003": {
+      "status": "unreviewed",
+      "notes": ""
+    },
+    "WJ_QUEST_004": {
+      "status": "unreviewed",
+      "notes": ""
+    },
+    "WJ_QUEST_005": {
+      "status": "unreviewed",
+      "notes": ""
+    },
+    "WJ_QUEST_006": {
+      "status": "unreviewed",
+      "notes": ""
+    },
+    "WJ_STAGE_LEGIBLE_START": {
+      "status": "unreviewed",
+      "notes": ""
+    },
+    "WJ_STAGE_LEGIBLE_COMPLETE": {
+      "status": "unreviewed",
+      "notes": ""
+    },
+    "WJ_STAGE_BOUNDED_START": {
+      "status": "unreviewed",
+      "notes": ""
+    },
+    "WJ_STAGE_BOUNDED_COMPLETE": {
+      "status": "unreviewed",
+      "notes": ""
+    },
+    "WJ_STAGE_COLLAB_START": {
+      "status": "unreviewed",
+      "notes": ""
+    },
+    "WJ_STAGE_COLLAB_COMPLETE": {
+      "status": "unreviewed",
+      "notes": ""
+    },
+    "WJ_STAGE_GENERATIVE_START": {
+      "status": "unreviewed",
+      "notes": ""
+    },
+    "WJ_STAGE_GENERATIVE_COMPLETE": {
+      "status": "unreviewed",
+      "notes": ""
+    },
+    "WJ_STAGE_ENLIGHTENED_START": {
+      "status": "unreviewed",
+      "notes": ""
+    },
+    "WJ_STAGE_ENLIGHTENED_COMPLETE": {
+      "status": "unreviewed",
+      "notes": ""
+    },
+    "WJ_PROJECT_001": {
+      "status": "unreviewed",
+      "notes": ""
+    },
+    "WJ_PROJECT_002": {
+      "status": "unreviewed",
+      "notes": ""
+    },
+    "WJ_PROJECT_003": {
+      "status": "unreviewed",
+      "notes": ""
+    },
+    "WJ_PROJECT_004": {
+      "status": "unreviewed",
+      "notes": ""
+    },
+    "WJ_PROJECT_005": {
+      "status": "unreviewed",
+      "notes": ""
+    },
+    "WJ_PROJECT_006": {
+      "status": "unreviewed",
+      "notes": ""
+    },
+    "WJ_PROJECT_007": {
+      "status": "unreviewed",
+      "notes": ""
+    },
+    "WJ_PROJECT_008": {
+      "status": "unreviewed",
+      "notes": ""
+    },
+    "WJ_PROJECT_009": {
+      "status": "unreviewed",
+      "notes": ""
+    },
+    "WJ_AI_001": {
+      "status": "unreviewed",
+      "notes": ""
+    },
+    "WJ_AI_002": {
+      "status": "unreviewed",
+      "notes": ""
+    },
+    "WJ_AI_003": {
+      "status": "unreviewed",
+      "notes": ""
+    },
+    "WJ_AI_004": {
+      "status": "unreviewed",
+      "notes": ""
+    },
+    "WJ_LEDGER_001": {
+      "status": "unreviewed",
+      "notes": ""
+    },
+    "WJ_LEDGER_002": {
+      "status": "unreviewed",
+      "notes": ""
+    },
+    "WJ_LEDGER_003": {
+      "status": "unreviewed",
+      "notes": ""
+    },
+    "WJ_LEDGER_004": {
+      "status": "unreviewed",
+      "notes": ""
+    },
+    "WJ_LEDGER_005": {
+      "status": "unreviewed",
+      "notes": ""
+    },
+    "WJ_QUEST_MAP_001": {
+      "status": "unreviewed",
+      "notes": ""
+    },
+    "WJ_QUEST_MAP_002": {
+      "status": "unreviewed",
+      "notes": ""
+    },
+    "WJ_QUEST_PROMISE_001": {
+      "status": "unreviewed",
+      "notes": ""
+    },
+    "WJ_QUEST_PROMISE_002": {
+      "status": "unreviewed",
+      "notes": ""
+    },
+    "WJ_QUEST_ASSET_001": {
+      "status": "unreviewed",
+      "notes": ""
+    },
+    "WJ_QUEST_ASSET_002": {
+      "status": "unreviewed",
+      "notes": ""
+    },
+    "WJ_QUEST_COMMONS_001": {
+      "status": "unreviewed",
+      "notes": ""
+    },
+    "WJ_QUEST_COMMONS_002": {
+      "status": "unreviewed",
+      "notes": ""
+    },
+    "WJ_MENTOR_001": {
+      "status": "unreviewed",
+      "notes": ""
+    },
+    "WJ_RETURN_001": {
+      "status": "unreviewed",
+      "notes": ""
+    },
+    "WJ_FIRST_QUESTION_REAL": {
+      "status": "unreviewed",
+      "notes": ""
+    },
+    "WJ_FIRST_QUESTION_BOUNDARY": {
+      "status": "needs_changes",
+      "notes": "forward walk has incoherent foot rythm."
+    },
+    "WJ_FIRST_QUESTION_ENOUGH": {
+      "status": "unreviewed",
+      "notes": ""
+    },
+    "WJ_FIRST_QUESTION_JOE": {
+      "status": "unreviewed",
+      "notes": ""
+    },
+    "WJ_FIRST_QUESTION_WHY": {
+      "status": "unreviewed",
+      "notes": ""
+    },
+    "WJ_FIRST_QUESTION_NOT_READY": {
+      "status": "unreviewed",
+      "notes": ""
+    },
+    "WJ_COMPASS_001": {
+      "status": "unreviewed",
+      "notes": ""
+    },
+    "WJ_NOTEBOOK_001": {
+      "status": "unreviewed",
+      "notes": ""
+    },
+    "WJ_NOTEBOOK_QUESTION": {
+      "status": "unreviewed",
+      "notes": ""
+    },
+    "WJ_NOTEBOOK_SOURCE": {
+      "status": "unreviewed",
+      "notes": ""
+    },
+    "WJ_NOTEBOOK_REVISE": {
+      "status": "unreviewed",
+      "notes": ""
+    },
+    "WJ_CLARITY_MILESTONE": {
+      "status": "unreviewed",
+      "notes": ""
+    },
+    "WJ_BOUNDARY_001": {
+      "status": "unreviewed",
+      "notes": ""
+    },
+    "WJ_BOUNDARY_QUIET": {
+      "status": "unreviewed",
+      "notes": ""
+    },
+    "WJ_BOUNDARY_ASK": {
+      "status": "unreviewed",
+      "notes": ""
+    },
+    "WJ_BOUNDARY_OPEN": {
+      "status": "unreviewed",
+      "notes": ""
+    },
+    "WJ_BOUNDARY_NONE": {
+      "status": "unreviewed",
+      "notes": ""
+    },
+    "WJ_BOUNDARY_DECLINE": {
+      "status": "unreviewed",
+      "notes": ""
+    },
+    "WJ_BOUNDARY_QUEUE": {
+      "status": "unreviewed",
+      "notes": ""
+    },
+    "WJ_BOUNDARY_RESPECT": {
+      "status": "unreviewed",
+      "notes": ""
+    },
+    "WJ_BOUNDARY_EXIT": {
+      "status": "unreviewed",
+      "notes": ""
+    },
+    "WJ_FOCUS_LOW": {
+      "status": "unreviewed",
+      "notes": ""
+    },
+    "WJ_FOCUS_REST": {
+      "status": "unreviewed",
+      "notes": ""
+    },
+    "WJ_BOULDER_BRIDGE": {
+      "status": "unreviewed",
+      "notes": ""
+    },
+    "WJ_BOULDER_TRAIL": {
+      "status": "unreviewed",
+      "notes": ""
+    },
+    "WJ_BOULDER_CIVIC": {
+      "status": "unreviewed",
+      "notes": ""
+    },
+    "WJ_BOULDER_PUBLIC": {
+      "status": "unreviewed",
+      "notes": ""
+    },
+    "WJ_BOULDER_LORE": {
+      "status": "unreviewed",
+      "notes": ""
+    },
+    "WJ_GITHUB_REPO": {
+      "status": "unreviewed",
+      "notes": ""
+    },
+    "WJ_GITHUB_ISSUE": {
+      "status": "unreviewed",
+      "notes": ""
+    },
+    "WJ_GITHUB_PR": {
+      "status": "unreviewed",
+      "notes": ""
+    },
+    "WJ_GITHUB_CONFLICT": {
+      "status": "unreviewed",
+      "notes": ""
+    },
+    "WJ_GITHUB_DOCS": {
+      "status": "unreviewed",
+      "notes": ""
+    },
+    "WJ_GITHUB_MAINTAINER": {
+      "status": "unreviewed",
+      "notes": ""
+    }
+  }
+}
