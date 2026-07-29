@@ -1,0 +1,48 @@
+{
+  "approval_state": "candidate_visual_review",
+  "character_id": "kingfisher",
+  "ordinal": 94,
+  "output": {
+    "foreground_pixels": 86359,
+    "path": "assets/reference/characters/kingfisher/stage-expansion-v1/generated/alphas/094_ACT094_frame_big_idea_speaking_beak_candidate.png",
+    "sha256": "81ad450bdbaecc17aa039d56bc513381dd0b1dc22e0f43004164d97774b759e6"
+  },
+  "pose_id": "kingfisher.act.094.frame-big-idea-speaking-beak",
+  "registration": {
+    "alpha_mode": "binary_straight",
+    "canvas_size": [
+      960,
+      540
+    ],
+    "interpolation": "nearest_neighbor",
+    "maximum_visible_width": 900,
+    "policy": "kingfisher_stage_bottom_center_v1",
+    "target_baseline_y": 529,
+    "target_center_x": 480,
+    "target_visible_height": 432,
+    "visible_bbox": [
+      266,
+      98,
+      694,
+      529
+    ]
+  },
+  "review_projection": true,
+  "runtime_admitted": false,
+  "schema_version": 1,
+  "slug": "frame-big-idea-speaking-beak",
+  "source": {
+    "canvas_size": [
+      1672,
+      941
+    ],
+    "path": "assets/reference/characters/kingfisher/stage-expansion-v1/generated/alphas/094_ACT094_frame_big_idea_speaking_beak_alpha_raw.png",
+    "sha256": "dc4d41d613a8da8e277d6120ced5f62bbf089a78f5b7940a159f4a5ebafdceca",
+    "visible_bbox": [
+      475,
+      181,
+      1194,
+      904
+    ]
+  }
+}

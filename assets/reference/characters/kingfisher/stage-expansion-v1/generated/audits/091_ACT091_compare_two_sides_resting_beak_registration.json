@@ -1,0 +1,48 @@
+{
+  "approval_state": "candidate_visual_review",
+  "character_id": "kingfisher",
+  "ordinal": 91,
+  "output": {
+    "foreground_pixels": 85934,
+    "path": "assets/reference/characters/kingfisher/stage-expansion-v1/generated/alphas/091_ACT091_compare_two_sides_resting_beak_alpha.png",
+    "sha256": "f1cdaab5836dae61e4f5231f70ebecd75cc859b16998772601c38e822193e96d"
+  },
+  "pose_id": "kingfisher.act.091.compare-two-sides-resting-beak",
+  "registration": {
+    "alpha_mode": "binary_straight",
+    "canvas_size": [
+      960,
+      540
+    ],
+    "interpolation": "nearest_neighbor",
+    "maximum_visible_width": 900,
+    "policy": "kingfisher_stage_bottom_center_v1",
+    "target_baseline_y": 529,
+    "target_center_x": 480,
+    "target_visible_height": 432,
+    "visible_bbox": [
+      213,
+      99,
+      748,
+      529
+    ]
+  },
+  "review_projection": true,
+  "runtime_admitted": false,
+  "schema_version": 1,
+  "slug": "compare-two-sides-resting-beak",
+  "source": {
+    "canvas_size": [
+      1684,
+      934
+    ],
+    "path": "assets/reference/characters/kingfisher/stage-expansion-v1/generated/alphas/091_ACT091_compare_two_sides_resting_beak_alpha_raw.png",
+    "sha256": "07216b79209d858dea820f196e03499bfb9e8efa1b5bdbbd3ac8f7a516d92340",
+    "visible_bbox": [
+      382,
+      71,
+      1326,
+      831
+    ]
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "approval_state": "candidate_visual_review",
+  "character_id": "kingfisher",
+  "ordinal": 77,
+  "output": {
+    "foreground_pixels": 73848,
+    "path": "assets/reference/characters/kingfisher/stage-expansion-v1/generated/alphas/077_ACT077_right_step_anticipation_resting_beak_alpha.png",
+    "sha256": "f6db91e8a9d9dcfaa1bb337cd556744a384ef4f573c1b1c11720980a03845b91"
+  },
+  "pose_id": "kingfisher.act.077.right-step-anticipation-resting-beak",
+  "registration": {
+    "alpha_mode": "binary_straight",
+    "canvas_size": [
+      960,
+      540
+    ],
+    "interpolation": "nearest_neighbor",
+    "maximum_visible_width": 900,
+    "policy": "kingfisher_stage_bottom_center_v1",
+    "target_baseline_y": 529,
+    "target_center_x": 480,
+    "target_visible_height": 432,
+    "visible_bbox": [
+      317,
+      99,
+      643,
+      529
+    ]
+  },
+  "review_projection": true,
+  "runtime_admitted": false,
+  "schema_version": 1,
+  "slug": "right-step-anticipation-resting-beak",
+  "source": {
+    "canvas_size": [
+      1672,
+      941
+    ],
+    "path": "assets/reference/characters/kingfisher/stage-expansion-v1/generated/alphas/077_ACT077_right_step_anticipation_resting_beak_alpha_raw.png",
+    "sha256": "30350086acf401aeaed89b26fea6984202c55ebc304a5044b2f67d9003c74c2d",
+    "visible_bbox": [
+      529,
+      117,
+      1076,
+      837
+    ]
+  }
+}

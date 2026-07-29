@@ -1,0 +1,48 @@
+{
+  "approval_state": "candidate_visual_review",
+  "character_id": "kingfisher",
+  "ordinal": 95,
+  "output": {
+    "foreground_pixels": 71973,
+    "path": "assets/reference/characters/kingfisher/stage-expansion-v1/generated/alphas/095_ACT095_shape_small_detail_resting_beak_alpha.png",
+    "sha256": "dc12cbaa3a0994ebe35f62a5f5ca44f62fee3b26be4d7dd73c5a6bb8d5aa167f"
+  },
+  "pose_id": "kingfisher.act.095.shape-small-detail-resting-beak",
+  "registration": {
+    "alpha_mode": "binary_straight",
+    "canvas_size": [
+      960,
+      540
+    ],
+    "interpolation": "nearest_neighbor",
+    "maximum_visible_width": 900,
+    "policy": "kingfisher_stage_bottom_center_v1",
+    "target_baseline_y": 529,
+    "target_center_x": 480,
+    "target_visible_height": 432,
+    "visible_bbox": [
+      345,
+      99,
+      616,
+      529
+    ]
+  },
+  "review_projection": true,
+  "runtime_admitted": false,
+  "schema_version": 1,
+  "slug": "shape-small-detail-resting-beak",
+  "source": {
+    "canvas_size": [
+      1682,
+      935
+    ],
+    "path": "assets/reference/characters/kingfisher/stage-expansion-v1/generated/alphas/095_ACT095_shape_small_detail_resting_beak_alpha_raw.png",
+    "sha256": "351034ee5b710c77d0a9080bdc23273b441776bcd85b99906c46a18b7a8e3468",
+    "visible_bbox": [
+      575,
+      77,
+      1063,
+      852
+    ]
+  }
+}

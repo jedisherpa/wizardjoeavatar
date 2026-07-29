@@ -1,0 +1,48 @@
+{
+  "approval_state": "candidate_visual_review",
+  "character_id": "kingfisher",
+  "ordinal": 78,
+  "output": {
+    "foreground_pixels": 73581,
+    "path": "assets/reference/characters/kingfisher/stage-expansion-v1/generated/alphas/078_ACT078_right_step_anticipation_speaking_beak_candidate.png",
+    "sha256": "23153423ec0265108f9622571c2f3552ff7d7f036d3d7b3a19d656f685472bbf"
+  },
+  "pose_id": "kingfisher.act.078.right-step-anticipation-speaking-beak",
+  "registration": {
+    "alpha_mode": "binary_straight",
+    "canvas_size": [
+      960,
+      540
+    ],
+    "interpolation": "nearest_neighbor",
+    "maximum_visible_width": 900,
+    "policy": "kingfisher_stage_bottom_center_v1",
+    "target_baseline_y": 529,
+    "target_center_x": 480,
+    "target_visible_height": 432,
+    "visible_bbox": [
+      317,
+      99,
+      643,
+      529
+    ]
+  },
+  "review_projection": true,
+  "runtime_admitted": false,
+  "schema_version": 1,
+  "slug": "right-step-anticipation-speaking-beak",
+  "source": {
+    "canvas_size": [
+      1672,
+      941
+    ],
+    "path": "assets/reference/characters/kingfisher/stage-expansion-v1/generated/alphas/078_ACT078_right_step_anticipation_speaking_beak_alpha_raw.png",
+    "sha256": "b8a49e6c5b345f47961192c0655d2377e4a7ddca9b19c95734c7855f82d8c95f",
+    "visible_bbox": [
+      529,
+      117,
+      1076,
+      837
+    ]
+  }
+}

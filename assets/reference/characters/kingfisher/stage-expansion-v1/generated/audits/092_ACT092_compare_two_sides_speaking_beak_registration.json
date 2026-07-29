@@ -1,0 +1,48 @@
+{
+  "approval_state": "candidate_visual_review",
+  "character_id": "kingfisher",
+  "ordinal": 92,
+  "output": {
+    "foreground_pixels": 85849,
+    "path": "assets/reference/characters/kingfisher/stage-expansion-v1/generated/alphas/092_ACT092_compare_two_sides_speaking_beak_candidate.png",
+    "sha256": "8bc05fcaac5d60df1a9f34dc8d91775c7fc0c27b15c9ea9212ddca445b957db7"
+  },
+  "pose_id": "kingfisher.act.092.compare-two-sides-speaking-beak",
+  "registration": {
+    "alpha_mode": "binary_straight",
+    "canvas_size": [
+      960,
+      540
+    ],
+    "interpolation": "nearest_neighbor",
+    "maximum_visible_width": 900,
+    "policy": "kingfisher_stage_bottom_center_v1",
+    "target_baseline_y": 529,
+    "target_center_x": 480,
+    "target_visible_height": 432,
+    "visible_bbox": [
+      212,
+      99,
+      748,
+      529
+    ]
+  },
+  "review_projection": true,
+  "runtime_admitted": false,
+  "schema_version": 1,
+  "slug": "compare-two-sides-speaking-beak",
+  "source": {
+    "canvas_size": [
+      1684,
+      934
+    ],
+    "path": "assets/reference/characters/kingfisher/stage-expansion-v1/generated/alphas/092_ACT092_compare_two_sides_speaking_beak_alpha_raw.png",
+    "sha256": "3d4ffd68c19fa95c4dee324a54c445724e886ea82b4146beaf82b9a2ac48ab95",
+    "visible_bbox": [
+      382,
+      72,
+      1325,
+      830
+    ]
+  }
+}

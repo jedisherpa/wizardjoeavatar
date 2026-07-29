@@ -1,0 +1,295 @@
+{
+  "schema_version": 1,
+  "character_id": "kingfisher",
+  "expansion_id": "kingfisher-stage-performance-44-v1",
+  "approval_state": "planned_for_generation",
+  "review_projection": true,
+  "runtime_admitted": false,
+  "canvas": {
+    "width": 960,
+    "height": 540,
+    "color_space": "sRGB",
+    "alpha_mode": "binary_straight"
+  },
+  "canonical_identity": {
+    "reference_pose_id": "kingfisher.act.001.neutral-front",
+    "wardrobe": "black pullover hoodie with centered white fishbone emblem",
+    "body": "compact anthropomorphic kingfisher with dark blue-gray feathers, orange cheek and chest markings, white throat, black eyes, brown bird feet",
+    "acting_anatomy": "wings function as expressive hands while remaining feathered wings"
+  },
+  "pairing_policy": {
+    "body_key_count": 22,
+    "pose_count": 44,
+    "speech_states": [
+      "resting_beak",
+      "speaking_beak"
+    ],
+    "invariant": "Each adjacent pair must preserve body, feet, wings, facing, framing, scale, and costume exactly; only the beak and minimal throat articulation may change."
+  },
+  "performance_keys": [
+    {
+      "key": "center_mark",
+      "family": "mark",
+      "purpose": "Centered planted speaker neutral with open, available posture.",
+      "facing": "front",
+      "foot_contact": "both",
+      "articulation_region": [430, 215, 525, 310],
+      "poses": [
+        {"ordinal": 67, "slug": "center-mark-resting-beak"},
+        {"ordinal": 68, "slug": "center-mark-speaking-beak"}
+      ]
+    },
+    {
+      "key": "left_step_anticipation",
+      "family": "pace",
+      "purpose": "Weight shift that visibly prepares a step toward screen left.",
+      "facing": "front-three-quarter-left",
+      "foot_contact": "right",
+      "articulation_region": [360, 215, 460, 305],
+      "poses": [
+        {"ordinal": 69, "slug": "left-step-anticipation-resting-beak"},
+        {"ordinal": 70, "slug": "left-step-anticipation-speaking-beak"}
+      ]
+    },
+    {
+      "key": "left_stride_passing",
+      "family": "pace",
+      "purpose": "Readable mid-stride passing position toward screen left.",
+      "facing": "left-three-quarter",
+      "foot_contact": "left",
+      "articulation_region": [350, 215, 450, 305],
+      "poses": [
+        {"ordinal": 71, "slug": "left-stride-passing-resting-beak"},
+        {"ordinal": 72, "slug": "left-stride-passing-speaking-beak"}
+      ]
+    },
+    {
+      "key": "left_mark_arrival",
+      "family": "mark",
+      "purpose": "Settled arrival at the left stage mark while addressing the audience.",
+      "facing": "front-three-quarter-right",
+      "foot_contact": "both",
+      "articulation_region": [450, 210, 560, 295],
+      "poses": [
+        {"ordinal": 73, "slug": "left-mark-arrival-resting-beak"},
+        {"ordinal": 74, "slug": "left-mark-arrival-speaking-beak"}
+      ]
+    },
+    {
+      "key": "left_audience_turn",
+      "family": "turn",
+      "purpose": "Planted quarter turn that addresses the audience on screen left.",
+      "facing": "front-three-quarter-left",
+      "foot_contact": "both",
+      "articulation_region": [440, 210, 550, 300],
+      "poses": [
+        {"ordinal": 75, "slug": "left-audience-turn-resting-beak"},
+        {"ordinal": 76, "slug": "left-audience-turn-speaking-beak"}
+      ]
+    },
+    {
+      "key": "right_step_anticipation",
+      "family": "pace",
+      "purpose": "Weight shift that visibly prepares a step toward screen right.",
+      "facing": "front-three-quarter-right",
+      "foot_contact": "left",
+      "articulation_region": [490, 215, 590, 315],
+      "poses": [
+        {"ordinal": 77, "slug": "right-step-anticipation-resting-beak"},
+        {"ordinal": 78, "slug": "right-step-anticipation-speaking-beak"}
+      ]
+    },
+    {
+      "key": "right_stride_passing",
+      "family": "pace",
+      "purpose": "Readable mid-stride passing position toward screen right.",
+      "facing": "right-three-quarter",
+      "foot_contact": "right",
+      "articulation_region": [520, 210, 600, 310],
+      "poses": [
+        {"ordinal": 79, "slug": "right-stride-passing-resting-beak"},
+        {"ordinal": 80, "slug": "right-stride-passing-speaking-beak"}
+      ]
+    },
+    {
+      "key": "right_mark_arrival",
+      "family": "mark",
+      "purpose": "Settled arrival at the right stage mark while addressing the audience.",
+      "facing": "front-three-quarter-left",
+      "foot_contact": "both",
+      "articulation_region": [470, 215, 580, 310],
+      "poses": [
+        {"ordinal": 81, "slug": "right-mark-arrival-resting-beak"},
+        {"ordinal": 82, "slug": "right-mark-arrival-speaking-beak"}
+      ]
+    },
+    {
+      "key": "right_audience_turn",
+      "family": "turn",
+      "purpose": "Planted quarter turn that addresses the audience on screen right.",
+      "facing": "front-three-quarter-right",
+      "foot_contact": "both",
+      "articulation_region": [420, 210, 520, 300],
+      "poses": [
+        {"ordinal": 83, "slug": "right-audience-turn-resting-beak"},
+        {"ordinal": 84, "slug": "right-audience-turn-speaking-beak"}
+      ]
+    },
+    {
+      "key": "downstage_lean",
+      "family": "mark",
+      "purpose": "Intimate forward lean for a direct, important line.",
+      "facing": "front",
+      "foot_contact": "both",
+      "articulation_region": [440, 215, 550, 320],
+      "poses": [
+        {"ordinal": 85, "slug": "downstage-lean-resting-beak"},
+        {"ordinal": 86, "slug": "downstage-lean-speaking-beak"}
+      ]
+    },
+    {
+      "key": "open_wing_welcome",
+      "family": "gesture",
+      "purpose": "Broad open-wing welcome that invites the whole audience in.",
+      "facing": "front",
+      "foot_contact": "both",
+      "articulation_region": [435, 210, 535, 305],
+      "poses": [
+        {"ordinal": 87, "slug": "open-wing-welcome-resting-beak"},
+        {"ordinal": 88, "slug": "open-wing-welcome-speaking-beak"}
+      ]
+    },
+    {
+      "key": "single_point_emphasis",
+      "family": "gesture",
+      "purpose": "One clear wing-finger emphasis timed to a single claim.",
+      "facing": "front",
+      "foot_contact": "both",
+      "articulation_region": [415, 210, 510, 300],
+      "poses": [
+        {"ordinal": 89, "slug": "single-point-emphasis-resting-beak"},
+        {"ordinal": 90, "slug": "single-point-emphasis-speaking-beak"}
+      ]
+    },
+    {
+      "key": "compare_two_sides",
+      "family": "gesture",
+      "purpose": "Balanced two-wing comparison with a readable left and right idea.",
+      "facing": "front",
+      "foot_contact": "both",
+      "articulation_region": [435, 210, 525, 310],
+      "poses": [
+        {"ordinal": 91, "slug": "compare-two-sides-resting-beak"},
+        {"ordinal": 92, "slug": "compare-two-sides-speaking-beak"}
+      ]
+    },
+    {
+      "key": "frame_big_idea",
+      "family": "gesture",
+      "purpose": "Both wings frame a large conceptual space above and ahead.",
+      "facing": "front",
+      "foot_contact": "both",
+      "articulation_region": [440, 220, 520, 300],
+      "poses": [
+        {"ordinal": 93, "slug": "frame-big-idea-resting-beak"},
+        {"ordinal": 94, "slug": "frame-big-idea-speaking-beak"}
+      ]
+    },
+    {
+      "key": "shape_small_detail",
+      "family": "gesture",
+      "purpose": "Tight precise wing gesture describing a small detail.",
+      "facing": "front-three-quarter-left",
+      "foot_contact": "both",
+      "articulation_region": [440, 215, 530, 310],
+      "poses": [
+        {"ordinal": 95, "slug": "shape-small-detail-resting-beak"},
+        {"ordinal": 96, "slug": "shape-small-detail-speaking-beak"}
+      ]
+    },
+    {
+      "key": "rhetorical_question",
+      "family": "story",
+      "purpose": "Open questioning posture with one wing lifted and head tilted.",
+      "facing": "front",
+      "foot_contact": "both",
+      "articulation_region": [460, 225, 540, 300],
+      "poses": [
+        {"ordinal": 97, "slug": "rhetorical-question-stage-resting-beak"},
+        {"ordinal": 98, "slug": "rhetorical-question-stage-speaking-beak"}
+      ]
+    },
+    {
+      "key": "suspense_hold",
+      "family": "story",
+      "purpose": "Compressed stillness and focused gaze before a reveal.",
+      "facing": "front",
+      "foot_contact": "both",
+      "articulation_region": [440, 215, 520, 300],
+      "poses": [
+        {"ordinal": 99, "slug": "suspense-hold-resting-beak"},
+        {"ordinal": 100, "slug": "suspense-hold-speaking-beak"}
+      ]
+    },
+    {
+      "key": "reveal",
+      "family": "story",
+      "purpose": "Energetic outward reveal with the presenting wing opening from center.",
+      "facing": "front-three-quarter-right",
+      "foot_contact": "both",
+      "articulation_region": [420, 210, 520, 305],
+      "poses": [
+        {"ordinal": 101, "slug": "stage-reveal-resting-beak"},
+        {"ordinal": 102, "slug": "stage-reveal-speaking-beak"}
+      ]
+    },
+    {
+      "key": "heartfelt_confession",
+      "family": "story",
+      "purpose": "One wing to chest and softened posture for personal truth.",
+      "facing": "front",
+      "foot_contact": "both",
+      "articulation_region": [430, 215, 520, 300],
+      "poses": [
+        {"ordinal": 103, "slug": "heartfelt-confession-resting-beak"},
+        {"ordinal": 104, "slug": "heartfelt-confession-speaking-beak"}
+      ]
+    },
+    {
+      "key": "comic_aside",
+      "family": "story",
+      "purpose": "Side glance and compact conspiratorial wing gesture to the audience.",
+      "facing": "front-three-quarter-left",
+      "foot_contact": "both",
+      "articulation_region": [430, 215, 510, 300],
+      "poses": [
+        {"ordinal": 105, "slug": "comic-aside-resting-beak"},
+        {"ordinal": 106, "slug": "comic-aside-speaking-beak"}
+      ]
+    },
+    {
+      "key": "call_to_action",
+      "family": "story",
+      "purpose": "Strong forward address with grounded feet and decisive wing reach.",
+      "facing": "front",
+      "foot_contact": "both",
+      "articulation_region": [460, 205, 540, 300],
+      "poses": [
+        {"ordinal": 107, "slug": "call-to-action-resting-beak"},
+        {"ordinal": 108, "slug": "call-to-action-speaking-beak"}
+      ]
+    },
+    {
+      "key": "warm_resolution",
+      "family": "recovery",
+      "purpose": "Relaxed warm finish that can resolve any story and recover to neutral.",
+      "facing": "front",
+      "foot_contact": "both",
+      "articulation_region": [420, 210, 510, 300],
+      "poses": [
+        {"ordinal": 109, "slug": "warm-resolution-resting-beak"},
+        {"ordinal": 110, "slug": "warm-resolution-speaking-beak"}
+      ]
+    }
+  ]
+}

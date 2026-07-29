@@ -1,0 +1,48 @@
+{
+  "approval_state": "candidate_visual_review",
+  "character_id": "kingfisher",
+  "ordinal": 87,
+  "output": {
+    "foreground_pixels": 113658,
+    "path": "assets/reference/characters/kingfisher/stage-expansion-v1/generated/alphas/087_ACT087_open_wing_welcome_resting_beak_alpha.png",
+    "sha256": "af236e1ca934c3af1634eb2dd6c453f939139ad6f34d36097c85e7767bae706f"
+  },
+  "pose_id": "kingfisher.act.087.open-wing-welcome-resting-beak",
+  "registration": {
+    "alpha_mode": "binary_straight",
+    "canvas_size": [
+      960,
+      540
+    ],
+    "interpolation": "nearest_neighbor",
+    "maximum_visible_width": 900,
+    "policy": "kingfisher_stage_bottom_center_v1",
+    "target_baseline_y": 529,
+    "target_center_x": 480,
+    "target_visible_height": 432,
+    "visible_bbox": [
+      162,
+      99,
+      798,
+      529
+    ]
+  },
+  "review_projection": true,
+  "runtime_admitted": false,
+  "schema_version": 1,
+  "slug": "open-wing-welcome-resting-beak",
+  "source": {
+    "canvas_size": [
+      1672,
+      941
+    ],
+    "path": "assets/reference/characters/kingfisher/stage-expansion-v1/generated/alphas/087_ACT087_open_wing_welcome_resting_beak_alpha_raw.png",
+    "sha256": "e4c30469a65df42607dab9ca86f5163db164e0d708b904db9964e5083f207223",
+    "visible_bbox": [
+      274,
+      108,
+      1398,
+      872
+    ]
+  }
+}

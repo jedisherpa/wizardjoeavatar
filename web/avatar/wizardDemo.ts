@@ -82,13 +82,29 @@ async function start() {
 
     const loadPose = async (poseId) => {
       if (!manifest.pose_ids.includes(poseId)) throw new Error("Unknown HD review pose");
-      const response = await fetch(`/api/avatar/wizard/hd-pose/${encodeURIComponent(poseId)}`, {
-        cache: "no-store",
-      });
-      if (!response.ok) throw new Error(await response.text());
-      const pixels = new Uint8Array(await response.arrayBuffer());
-      if (pixels.length !== width * height * 4) throw new Error("HD review pose size mismatch");
-      return pixels;
+      let lastError = null;
+      for (let attempt = 1; attempt <= 4; attempt++) {
+        try {
+          const response = await fetch(
+            `/api/avatar/wizard/hd-pose/${encodeURIComponent(poseId)}`,
+            { cache: "no-store" },
+          );
+          if (!response.ok) throw new Error(await response.text());
+          const pixels = new Uint8Array(await response.arrayBuffer());
+          if (pixels.length !== width * height * 4) {
+            throw new Error("HD review pose size mismatch");
+          }
+          delete document.body.dataset.hdFrameRetry;
+          return pixels;
+        } catch (error) {
+          lastError = error;
+          document.body.dataset.hdFrameRetry = `${poseId}:${attempt}`;
+          if (attempt < 4) {
+            await new Promise((resolve) => setTimeout(resolve, attempt * 180));
+          }
+        }
+      }
+      throw lastError;
     };
 
     if (reviewSequence) {
@@ -98,21 +114,33 @@ async function start() {
       let playing = true;
       let frameIndex = 0;
       let framesDrawn = 0;
+      let frameFailures = 0;
       let completed = false;
       const frameInterval = 1000 / Number(sequence.fps);
       let stopped = false;
       const drawLoop = async () => {
+        if (stopped) return;
         if (playing && !completed) {
-          const pixels = await loadPose(sequence.pose_ids[frameIndex]);
-          if (stopped) return;
-          canvas.draw(presentPose(pixels));
-          framesDrawn++;
-          const finalFrame = frameIndex === sequence.pose_ids.length - 1;
-          if (finalFrame && !sequence.loop) {
-            completed = true;
-            playing = false;
-          } else {
-            frameIndex = (frameIndex + 1) % sequence.pose_ids.length;
+          try {
+            const pixels = await loadPose(sequence.pose_ids[frameIndex]);
+            if (stopped) return;
+            canvas.draw(presentPose(pixels));
+            framesDrawn++;
+            delete document.body.dataset.hdFrameError;
+            const finalFrame = frameIndex === sequence.pose_ids.length - 1;
+            if (finalFrame && !sequence.loop) {
+              completed = true;
+              playing = false;
+            } else {
+              frameIndex = (frameIndex + 1) % sequence.pose_ids.length;
+            }
+          } catch (error) {
+            frameFailures++;
+            document.body.dataset.hdFrameError = (
+              error instanceof Error ? error.message : String(error)
+            );
+            setTimeout(drawLoop, Math.max(frameInterval, 500));
+            return;
           }
         }
         setTimeout(drawLoop, playing ? frameInterval : 80);
@@ -135,6 +163,7 @@ async function start() {
         frameIndex,
         poseId: sequence.pose_ids[(frameIndex + sequence.pose_ids.length - 1) % sequence.pose_ids.length],
         framesDrawn,
+        frameFailures,
         playing,
         completed,
         libraryIndexSha256: manifest.library_index_sha256,

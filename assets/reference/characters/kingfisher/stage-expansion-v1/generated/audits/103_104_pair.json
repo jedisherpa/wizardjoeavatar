@@ -1,0 +1,38 @@
+{
+  "changed_rendered_pixels": 6839,
+  "checks": {
+    "bounded_articulation_change": true,
+    "outside_mouth_stability": true,
+    "silhouette_overlap": true,
+    "stable_registration_bounds": true,
+    "visible_mouth_change": true
+  },
+  "mouth_mean_abs": 18.273246,
+  "mouth_region": [
+    430,
+    215,
+    520,
+    300
+  ],
+  "outside_mouth_mean_abs": 0.0,
+  "passed": true,
+  "registration_bound_delta": 0,
+  "resting_path": "assets/reference/characters/kingfisher/stage-expansion-v1/generated/alphas/103_ACT103_heartfelt_confession_resting_beak_alpha.png",
+  "resting_registration_bbox": [
+    349,
+    99,
+    611,
+    529
+  ],
+  "resting_sha256": "8acf7da65347f0e06d7145b0893629a08badc04121d67eb323385e9f7ab5bf5e",
+  "schema_version": 2,
+  "silhouette_iou": 1.0,
+  "speaking_path": "assets/reference/characters/kingfisher/stage-expansion-v1/generated/alphas/104_ACT104_heartfelt_confession_speaking_beak_alpha.png",
+  "speaking_registration_bbox": [
+    349,
+    99,
+    611,
+    529
+  ],
+  "speaking_sha256": "a5a7c4e3d1a3e18c29238d659d487921ba713c80e19fe403f864398b895dc195"
+}

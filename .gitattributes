@@ -1,3 +1,5 @@
 assets/reference/characters/robin_speech/source/alphas/*.png filter=lfs diff=lfs merge=lfs -text
 assets/reference/characters/dragon/source/alphas/*.png filter=lfs diff=lfs merge=lfs -text
 assets/reference/characters/dragon/source-evidence/**/*.png filter=lfs diff=lfs merge=lfs -text
+assets/reference/characters/kingfisher/**/*.png filter=lfs diff=lfs merge=lfs -text
+assets/reference/characters/kingfisher/**/*.zip filter=lfs diff=lfs merge=lfs -text

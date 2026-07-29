@@ -1,0 +1,48 @@
+{
+  "approval_state": "candidate_visual_review",
+  "character_id": "kingfisher",
+  "ordinal": 106,
+  "output": {
+    "foreground_pixels": 66933,
+    "path": "assets/reference/characters/kingfisher/stage-expansion-v1/generated/alphas/106_ACT106_comic_aside_speaking_beak_candidate.png",
+    "sha256": "8f16fccfe0b5acba1abaf54b8b723fbb553a831e4ffbe40743d572c649413210"
+  },
+  "pose_id": "kingfisher.act.106.comic-aside-speaking-beak",
+  "registration": {
+    "alpha_mode": "binary_straight",
+    "canvas_size": [
+      960,
+      540
+    ],
+    "interpolation": "nearest_neighbor",
+    "maximum_visible_width": 900,
+    "policy": "kingfisher_stage_bottom_center_v1",
+    "target_baseline_y": 529,
+    "target_center_x": 480,
+    "target_visible_height": 432,
+    "visible_bbox": [
+      359,
+      99,
+      602,
+      529
+    ]
+  },
+  "review_projection": true,
+  "runtime_admitted": false,
+  "schema_version": 1,
+  "slug": "comic-aside-speaking-beak",
+  "source": {
+    "canvas_size": [
+      1672,
+      941
+    ],
+    "path": "assets/reference/characters/kingfisher/stage-expansion-v1/generated/alphas/106_ACT106_comic_aside_speaking_beak_alpha_raw.png",
+    "sha256": "1fdc0479b5433d3faefdc19356218c1819bffbcb7c09006f3d045b87d114b844",
+    "visible_bbox": [
+      601,
+      83,
+      1041,
+      860
+    ]
+  }
+}

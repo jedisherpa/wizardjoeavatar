@@ -1,0 +1,48 @@
+{
+  "approval_state": "candidate_visual_review",
+  "character_id": "kingfisher",
+  "ordinal": 90,
+  "output": {
+    "foreground_pixels": 76140,
+    "path": "assets/reference/characters/kingfisher/stage-expansion-v1/generated/alphas/090_ACT090_single_point_emphasis_speaking_beak_candidate.png",
+    "sha256": "c1ca193516ea559d210eb6ea6671d7c27aed7e9984e7c55b28599dd49eec932c"
+  },
+  "pose_id": "kingfisher.act.090.single-point-emphasis-speaking-beak",
+  "registration": {
+    "alpha_mode": "binary_straight",
+    "canvas_size": [
+      960,
+      540
+    ],
+    "interpolation": "nearest_neighbor",
+    "maximum_visible_width": 900,
+    "policy": "kingfisher_stage_bottom_center_v1",
+    "target_baseline_y": 529,
+    "target_center_x": 480,
+    "target_visible_height": 432,
+    "visible_bbox": [
+      328,
+      99,
+      633,
+      529
+    ]
+  },
+  "review_projection": true,
+  "runtime_admitted": false,
+  "schema_version": 1,
+  "slug": "single-point-emphasis-speaking-beak",
+  "source": {
+    "canvas_size": [
+      1682,
+      935
+    ],
+    "path": "assets/reference/characters/kingfisher/stage-expansion-v1/generated/alphas/090_ACT090_single_point_emphasis_speaking_beak_alpha_raw.png",
+    "sha256": "3a3945db3757f1c49e2a6221c99758050335d44b3efcff97abe3d1a5f9e811d4",
+    "visible_bbox": [
+      620,
+      119,
+      1157,
+      874
+    ]
+  }
+}

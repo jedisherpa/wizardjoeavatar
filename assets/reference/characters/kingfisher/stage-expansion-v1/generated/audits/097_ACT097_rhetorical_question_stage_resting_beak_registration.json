@@ -1,0 +1,48 @@
+{
+  "approval_state": "candidate_visual_review",
+  "character_id": "kingfisher",
+  "ordinal": 97,
+  "output": {
+    "foreground_pixels": 71425,
+    "path": "assets/reference/characters/kingfisher/stage-expansion-v1/generated/alphas/097_ACT097_rhetorical_question_stage_resting_beak_alpha.png",
+    "sha256": "bb1d454a499e5985d6bc02ebf50b48c0e9197ebbf0fd876e368f976188bfbf5c"
+  },
+  "pose_id": "kingfisher.act.097.rhetorical-question-stage-resting-beak",
+  "registration": {
+    "alpha_mode": "binary_straight",
+    "canvas_size": [
+      960,
+      540
+    ],
+    "interpolation": "nearest_neighbor",
+    "maximum_visible_width": 900,
+    "policy": "kingfisher_stage_bottom_center_v1",
+    "target_baseline_y": 529,
+    "target_center_x": 480,
+    "target_visible_height": 432,
+    "visible_bbox": [
+      310,
+      99,
+      650,
+      529
+    ]
+  },
+  "review_projection": true,
+  "runtime_admitted": false,
+  "schema_version": 1,
+  "slug": "rhetorical-question-stage-resting-beak",
+  "source": {
+    "canvas_size": [
+      1672,
+      941
+    ],
+    "path": "assets/reference/characters/kingfisher/stage-expansion-v1/generated/alphas/097_ACT097_rhetorical_question_stage_resting_beak_alpha_raw.png",
+    "sha256": "eac3051373be5f20b9a64c1dadf36023bb69817d1657e63d14e6053ee90e8575",
+    "visible_bbox": [
+      444,
+      86,
+      1058,
+      862
+    ]
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "approval_state": "candidate_visual_review",
+  "character_id": "kingfisher",
+  "ordinal": 108,
+  "output": {
+    "foreground_pixels": 77373,
+    "path": "assets/reference/characters/kingfisher/stage-expansion-v1/generated/alphas/108_ACT108_call_to_action_speaking_beak_candidate.png",
+    "sha256": "64a9d53ea76ec05c8666ee5bbd27fcf9f8329a03aa90c9a0e6dfd70548d585ac"
+  },
+  "pose_id": "kingfisher.act.108.call-to-action-speaking-beak",
+  "registration": {
+    "alpha_mode": "binary_straight",
+    "canvas_size": [
+      960,
+      540
+    ],
+    "interpolation": "nearest_neighbor",
+    "maximum_visible_width": 900,
+    "policy": "kingfisher_stage_bottom_center_v1",
+    "target_baseline_y": 529,
+    "target_center_x": 480,
+    "target_visible_height": 432,
+    "visible_bbox": [
+      306,
+      99,
+      654,
+      529
+    ]
+  },
+  "review_projection": true,
+  "runtime_admitted": false,
+  "schema_version": 1,
+  "slug": "call-to-action-speaking-beak",
+  "source": {
+    "canvas_size": [
+      1672,
+      941
+    ],
+    "path": "assets/reference/characters/kingfisher/stage-expansion-v1/generated/alphas/108_ACT108_call_to_action_speaking_beak_alpha_raw.png",
+    "sha256": "d853402e861cbab0e5215fe46c843cc2b4d6236b4a4c345f64b88b5c69bcb2f1",
+    "visible_bbox": [
+      479,
+      91,
+      1102,
+      860
+    ]
+  }
+}

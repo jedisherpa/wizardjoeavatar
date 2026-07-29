@@ -1,0 +1,48 @@
+{
+  "approval_state": "candidate_visual_review",
+  "character_id": "kingfisher",
+  "ordinal": 76,
+  "output": {
+    "foreground_pixels": 80133,
+    "path": "assets/reference/characters/kingfisher/stage-expansion-v1/generated/alphas/076_ACT076_left_audience_turn_speaking_beak_candidate.png",
+    "sha256": "183d5a4f2b54519ada4742e073cc828b3a3718c42eb8b9272ef1b08990cedfe0"
+  },
+  "pose_id": "kingfisher.act.076.left-audience-turn-speaking-beak",
+  "registration": {
+    "alpha_mode": "binary_straight",
+    "canvas_size": [
+      960,
+      540
+    ],
+    "interpolation": "nearest_neighbor",
+    "maximum_visible_width": 900,
+    "policy": "kingfisher_stage_bottom_center_v1",
+    "target_baseline_y": 529,
+    "target_center_x": 480,
+    "target_visible_height": 432,
+    "visible_bbox": [
+      297,
+      99,
+      664,
+      529
+    ]
+  },
+  "review_projection": true,
+  "runtime_admitted": false,
+  "schema_version": 1,
+  "slug": "left-audience-turn-speaking-beak",
+  "source": {
+    "canvas_size": [
+      1672,
+      941
+    ],
+    "path": "assets/reference/characters/kingfisher/stage-expansion-v1/generated/alphas/076_ACT076_left_audience_turn_speaking_beak_alpha_raw.png",
+    "sha256": "463d8f6781ba0a43cef8bfe50c55e02027815810dd96364f53ff6b3d372d342d",
+    "visible_bbox": [
+      447,
+      117,
+      1091,
+      870
+    ]
+  }
+}

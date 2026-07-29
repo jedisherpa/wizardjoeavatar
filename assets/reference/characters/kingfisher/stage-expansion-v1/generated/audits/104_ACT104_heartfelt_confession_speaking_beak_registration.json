@@ -1,0 +1,48 @@
+{
+  "approval_state": "candidate_visual_review",
+  "character_id": "kingfisher",
+  "ordinal": 104,
+  "output": {
+    "foreground_pixels": 69695,
+    "path": "assets/reference/characters/kingfisher/stage-expansion-v1/generated/alphas/104_ACT104_heartfelt_confession_speaking_beak_candidate.png",
+    "sha256": "6d076f617bcf7ea2ef149072584288e1e4f44c6e00267de5fb973eb837b9395c"
+  },
+  "pose_id": "kingfisher.act.104.heartfelt-confession-speaking-beak",
+  "registration": {
+    "alpha_mode": "binary_straight",
+    "canvas_size": [
+      960,
+      540
+    ],
+    "interpolation": "nearest_neighbor",
+    "maximum_visible_width": 900,
+    "policy": "kingfisher_stage_bottom_center_v1",
+    "target_baseline_y": 529,
+    "target_center_x": 480,
+    "target_visible_height": 432,
+    "visible_bbox": [
+      349,
+      99,
+      612,
+      529
+    ]
+  },
+  "review_projection": true,
+  "runtime_admitted": false,
+  "schema_version": 1,
+  "slug": "heartfelt-confession-speaking-beak",
+  "source": {
+    "canvas_size": [
+      1672,
+      940
+    ],
+    "path": "assets/reference/characters/kingfisher/stage-expansion-v1/generated/alphas/104_ACT104_heartfelt_confession_speaking_beak_alpha_raw.png",
+    "sha256": "94cf3d485a8a28cfa7df08d80e8a84e293bfa88c653b5735ac94c8820690a3a1",
+    "visible_bbox": [
+      592,
+      105,
+      1053,
+      860
+    ]
+  }
+}

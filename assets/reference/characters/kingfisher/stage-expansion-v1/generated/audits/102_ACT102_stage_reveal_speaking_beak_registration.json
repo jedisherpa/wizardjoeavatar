@@ -1,0 +1,48 @@
+{
+  "approval_state": "candidate_visual_review",
+  "character_id": "kingfisher",
+  "ordinal": 102,
+  "output": {
+    "foreground_pixels": 75704,
+    "path": "assets/reference/characters/kingfisher/stage-expansion-v1/generated/alphas/102_ACT102_stage_reveal_speaking_beak_candidate.png",
+    "sha256": "f49970e337c96759e1c6ab7a218fb721df9c199ca6f1d5ebca54306518c549a7"
+  },
+  "pose_id": "kingfisher.act.102.stage-reveal-speaking-beak",
+  "registration": {
+    "alpha_mode": "binary_straight",
+    "canvas_size": [
+      960,
+      540
+    ],
+    "interpolation": "nearest_neighbor",
+    "maximum_visible_width": 900,
+    "policy": "kingfisher_stage_bottom_center_v1",
+    "target_baseline_y": 529,
+    "target_center_x": 480,
+    "target_visible_height": 432,
+    "visible_bbox": [
+      280,
+      99,
+      680,
+      529
+    ]
+  },
+  "review_projection": true,
+  "runtime_admitted": false,
+  "schema_version": 1,
+  "slug": "stage-reveal-speaking-beak",
+  "source": {
+    "canvas_size": [
+      1672,
+      941
+    ],
+    "path": "assets/reference/characters/kingfisher/stage-expansion-v1/generated/alphas/102_ACT102_stage_reveal_speaking_beak_alpha_raw.png",
+    "sha256": "42a5c49d61450f0b99a48be8bc27c51b9d50f811cf0b6e5cdeecf28e6c4b94fc",
+    "visible_bbox": [
+      533,
+      39,
+      1324,
+      894
+    ]
+  }
+}

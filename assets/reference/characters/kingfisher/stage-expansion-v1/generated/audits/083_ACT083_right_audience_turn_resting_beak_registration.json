@@ -1,0 +1,48 @@
+{
+  "approval_state": "candidate_visual_review",
+  "character_id": "kingfisher",
+  "ordinal": 83,
+  "output": {
+    "foreground_pixels": 77855,
+    "path": "assets/reference/characters/kingfisher/stage-expansion-v1/generated/alphas/083_ACT083_right_audience_turn_resting_beak_alpha.png",
+    "sha256": "ddcac6bb34c43c394706a7a7df1a78b3c0155d9e6a488e4fb8a8b5179d5fb1da"
+  },
+  "pose_id": "kingfisher.act.083.right-audience-turn-resting-beak",
+  "registration": {
+    "alpha_mode": "binary_straight",
+    "canvas_size": [
+      960,
+      540
+    ],
+    "interpolation": "nearest_neighbor",
+    "maximum_visible_width": 900,
+    "policy": "kingfisher_stage_bottom_center_v1",
+    "target_baseline_y": 529,
+    "target_center_x": 480,
+    "target_visible_height": 432,
+    "visible_bbox": [
+      303,
+      98,
+      657,
+      529
+    ]
+  },
+  "review_projection": true,
+  "runtime_admitted": false,
+  "schema_version": 1,
+  "slug": "right-audience-turn-resting-beak",
+  "source": {
+    "canvas_size": [
+      1672,
+      941
+    ],
+    "path": "assets/reference/characters/kingfisher/stage-expansion-v1/generated/alphas/083_ACT083_right_audience_turn_resting_beak_alpha_raw.png",
+    "sha256": "2a079e92726f993b32e8777f154b8c25ae9cf7e3e0ad757316b72583c905abdb",
+    "visible_bbox": [
+      591,
+      101,
+      1219,
+      863
+    ]
+  }
+}

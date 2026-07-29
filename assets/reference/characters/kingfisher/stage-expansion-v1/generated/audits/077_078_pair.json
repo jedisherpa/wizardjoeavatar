@@ -1,0 +1,38 @@
+{
+  "changed_rendered_pixels": 8606,
+  "checks": {
+    "bounded_articulation_change": true,
+    "outside_mouth_stability": true,
+    "silhouette_overlap": true,
+    "stable_registration_bounds": true,
+    "visible_mouth_change": true
+  },
+  "mouth_mean_abs": 25.347867,
+  "mouth_region": [
+    490,
+    215,
+    590,
+    315
+  ],
+  "outside_mouth_mean_abs": 0.0,
+  "passed": true,
+  "registration_bound_delta": 0,
+  "resting_path": "assets/reference/characters/kingfisher/stage-expansion-v1/generated/alphas/077_ACT077_right_step_anticipation_resting_beak_alpha.png",
+  "resting_registration_bbox": [
+    317,
+    99,
+    643,
+    529
+  ],
+  "resting_sha256": "f6db91e8a9d9dcfaa1bb337cd556744a384ef4f573c1b1c11720980a03845b91",
+  "schema_version": 2,
+  "silhouette_iou": 0.997307,
+  "speaking_path": "assets/reference/characters/kingfisher/stage-expansion-v1/generated/alphas/078_ACT078_right_step_anticipation_speaking_beak_alpha.png",
+  "speaking_registration_bbox": [
+    317,
+    99,
+    643,
+    529
+  ],
+  "speaking_sha256": "116531e8b3ee812a8f7dfe5604b2e2081e95d7b1064a390b1f69ada0dcf1c6a5"
+}

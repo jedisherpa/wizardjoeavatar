@@ -1,0 +1,48 @@
+{
+  "approval_state": "candidate_visual_review",
+  "character_id": "kingfisher",
+  "ordinal": 88,
+  "output": {
+    "foreground_pixels": 113474,
+    "path": "assets/reference/characters/kingfisher/stage-expansion-v1/generated/alphas/088_ACT088_open_wing_welcome_speaking_beak_candidate.png",
+    "sha256": "c1ad35aa659383cabb5937c7f9d6e92535e2f79f3cee846abdc0b835ab727cba"
+  },
+  "pose_id": "kingfisher.act.088.open-wing-welcome-speaking-beak",
+  "registration": {
+    "alpha_mode": "binary_straight",
+    "canvas_size": [
+      960,
+      540
+    ],
+    "interpolation": "nearest_neighbor",
+    "maximum_visible_width": 900,
+    "policy": "kingfisher_stage_bottom_center_v1",
+    "target_baseline_y": 529,
+    "target_center_x": 480,
+    "target_visible_height": 432,
+    "visible_bbox": [
+      163,
+      99,
+      798,
+      529
+    ]
+  },
+  "review_projection": true,
+  "runtime_admitted": false,
+  "schema_version": 1,
+  "slug": "open-wing-welcome-speaking-beak",
+  "source": {
+    "canvas_size": [
+      1672,
+      941
+    ],
+    "path": "assets/reference/characters/kingfisher/stage-expansion-v1/generated/alphas/088_ACT088_open_wing_welcome_speaking_beak_alpha_raw.png",
+    "sha256": "81d2bbd50b25aaed52676cb3babaa4cd926712a920fd94aea5577dcb85975bb0",
+    "visible_bbox": [
+      271,
+      108,
+      1398,
+      872
+    ]
+  }
+}

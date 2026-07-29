@@ -1,0 +1,48 @@
+{
+  "approval_state": "candidate_visual_review",
+  "character_id": "kingfisher",
+  "ordinal": 71,
+  "output": {
+    "foreground_pixels": 76714,
+    "path": "assets/reference/characters/kingfisher/stage-expansion-v1/generated/alphas/071_ACT071_left_stride_passing_resting_beak_alpha.png",
+    "sha256": "9b614d82f4f4512d747cd7ddc53641366ea73db0b71426488296d6848e405cdc"
+  },
+  "pose_id": "kingfisher.act.071.left-stride-passing-resting-beak",
+  "registration": {
+    "alpha_mode": "binary_straight",
+    "canvas_size": [
+      960,
+      540
+    ],
+    "interpolation": "nearest_neighbor",
+    "maximum_visible_width": 900,
+    "policy": "kingfisher_stage_bottom_center_v1",
+    "target_baseline_y": 529,
+    "target_center_x": 480,
+    "target_visible_height": 432,
+    "visible_bbox": [
+      302,
+      99,
+      658,
+      529
+    ]
+  },
+  "review_projection": true,
+  "runtime_admitted": false,
+  "schema_version": 1,
+  "slug": "left-stride-passing-resting-beak",
+  "source": {
+    "canvas_size": [
+      1672,
+      941
+    ],
+    "path": "assets/reference/characters/kingfisher/stage-expansion-v1/generated/alphas/071_ACT071_left_stride_passing_resting_beak_alpha_raw.png",
+    "sha256": "4e878668236f657ab8220d553562712533dd638fe9db6269b457d927a82b62ae",
+    "visible_bbox": [
+      551,
+      95,
+      1179,
+      852
+    ]
+  }
+}

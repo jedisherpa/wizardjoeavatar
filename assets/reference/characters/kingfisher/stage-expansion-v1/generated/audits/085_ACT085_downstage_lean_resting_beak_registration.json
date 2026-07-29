@@ -1,0 +1,48 @@
+{
+  "approval_state": "candidate_visual_review",
+  "character_id": "kingfisher",
+  "ordinal": 85,
+  "output": {
+    "foreground_pixels": 77291,
+    "path": "assets/reference/characters/kingfisher/stage-expansion-v1/generated/alphas/085_ACT085_downstage_lean_resting_beak_alpha.png",
+    "sha256": "37408791bc0af9a4bad34d33614d9e7b422d85b10fd90c37f778f79d20446c7c"
+  },
+  "pose_id": "kingfisher.act.085.downstage-lean-resting-beak",
+  "registration": {
+    "alpha_mode": "binary_straight",
+    "canvas_size": [
+      960,
+      540
+    ],
+    "interpolation": "nearest_neighbor",
+    "maximum_visible_width": 900,
+    "policy": "kingfisher_stage_bottom_center_v1",
+    "target_baseline_y": 529,
+    "target_center_x": 480,
+    "target_visible_height": 432,
+    "visible_bbox": [
+      328,
+      99,
+      633,
+      529
+    ]
+  },
+  "review_projection": true,
+  "runtime_admitted": false,
+  "schema_version": 1,
+  "slug": "downstage-lean-resting-beak",
+  "source": {
+    "canvas_size": [
+      1672,
+      941
+    ],
+    "path": "assets/reference/characters/kingfisher/stage-expansion-v1/generated/alphas/085_ACT085_downstage_lean_resting_beak_alpha_raw.png",
+    "sha256": "0051a130dbfddb39585f94db311dc8d6a28f5f97d2cd34573355df55d721ae30",
+    "visible_bbox": [
+      541,
+      126,
+      1074,
+      876
+    ]
+  }
+}

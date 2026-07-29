@@ -1,0 +1,48 @@
+{
+  "approval_state": "candidate_visual_review",
+  "character_id": "kingfisher",
+  "ordinal": 101,
+  "output": {
+    "foreground_pixels": 75744,
+    "path": "assets/reference/characters/kingfisher/stage-expansion-v1/generated/alphas/101_ACT101_stage_reveal_resting_beak_alpha.png",
+    "sha256": "ccc25379b23fc3f9eb90ef86addb6f763e762805e1597e81b6f902b6695b423f"
+  },
+  "pose_id": "kingfisher.act.101.stage-reveal-resting-beak",
+  "registration": {
+    "alpha_mode": "binary_straight",
+    "canvas_size": [
+      960,
+      540
+    ],
+    "interpolation": "nearest_neighbor",
+    "maximum_visible_width": 900,
+    "policy": "kingfisher_stage_bottom_center_v1",
+    "target_baseline_y": 529,
+    "target_center_x": 480,
+    "target_visible_height": 432,
+    "visible_bbox": [
+      281,
+      99,
+      680,
+      529
+    ]
+  },
+  "review_projection": true,
+  "runtime_admitted": false,
+  "schema_version": 1,
+  "slug": "stage-reveal-resting-beak",
+  "source": {
+    "canvas_size": [
+      1672,
+      941
+    ],
+    "path": "assets/reference/characters/kingfisher/stage-expansion-v1/generated/alphas/101_ACT101_stage_reveal_resting_beak_alpha_raw.png",
+    "sha256": "b8dfbfba4fd5cc8671879aa101a786886a7e84b5e2b6b1f18fb4830e3c18524b",
+    "visible_bbox": [
+      532,
+      39,
+      1325,
+      894
+    ]
+  }
+}

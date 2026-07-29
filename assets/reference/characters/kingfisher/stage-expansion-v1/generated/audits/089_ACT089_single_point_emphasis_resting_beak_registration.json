@@ -1,0 +1,48 @@
+{
+  "approval_state": "candidate_visual_review",
+  "character_id": "kingfisher",
+  "ordinal": 89,
+  "output": {
+    "foreground_pixels": 76355,
+    "path": "assets/reference/characters/kingfisher/stage-expansion-v1/generated/alphas/089_ACT089_single_point_emphasis_resting_beak_alpha.png",
+    "sha256": "368edfa9c8c00258ececbeffb87bd1435fc82af95a345a96b667615de1dfecb5"
+  },
+  "pose_id": "kingfisher.act.089.single-point-emphasis-resting-beak",
+  "registration": {
+    "alpha_mode": "binary_straight",
+    "canvas_size": [
+      960,
+      540
+    ],
+    "interpolation": "nearest_neighbor",
+    "maximum_visible_width": 900,
+    "policy": "kingfisher_stage_bottom_center_v1",
+    "target_baseline_y": 529,
+    "target_center_x": 480,
+    "target_visible_height": 432,
+    "visible_bbox": [
+      327,
+      99,
+      633,
+      529
+    ]
+  },
+  "review_projection": true,
+  "runtime_admitted": false,
+  "schema_version": 1,
+  "slug": "single-point-emphasis-resting-beak",
+  "source": {
+    "canvas_size": [
+      1682,
+      935
+    ],
+    "path": "assets/reference/characters/kingfisher/stage-expansion-v1/generated/alphas/089_ACT089_single_point_emphasis_resting_beak_alpha_raw.png",
+    "sha256": "74f1d69833dfe4431eec0a1eb375edb5f74533c7cd17d0ef98da62f2795e7fe1",
+    "visible_bbox": [
+      620,
+      119,
+      1157,
+      874
+    ]
+  }
+}

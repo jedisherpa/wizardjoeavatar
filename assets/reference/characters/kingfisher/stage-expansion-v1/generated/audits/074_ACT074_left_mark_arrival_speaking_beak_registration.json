@@ -1,0 +1,48 @@
+{
+  "approval_state": "candidate_visual_review",
+  "character_id": "kingfisher",
+  "ordinal": 74,
+  "output": {
+    "foreground_pixels": 79955,
+    "path": "assets/reference/characters/kingfisher/stage-expansion-v1/generated/alphas/074_ACT074_left_mark_arrival_speaking_beak_candidate.png",
+    "sha256": "8a6fad5e40826f207ca44cf30e581b2adcdbee6b66504b27fd745537b5e71d72"
+  },
+  "pose_id": "kingfisher.act.074.left-mark-arrival-speaking-beak",
+  "registration": {
+    "alpha_mode": "binary_straight",
+    "canvas_size": [
+      960,
+      540
+    ],
+    "interpolation": "nearest_neighbor",
+    "maximum_visible_width": 900,
+    "policy": "kingfisher_stage_bottom_center_v1",
+    "target_baseline_y": 529,
+    "target_center_x": 480,
+    "target_visible_height": 432,
+    "visible_bbox": [
+      287,
+      98,
+      673,
+      529
+    ]
+  },
+  "review_projection": true,
+  "runtime_admitted": false,
+  "schema_version": 1,
+  "slug": "left-mark-arrival-speaking-beak",
+  "source": {
+    "canvas_size": [
+      1672,
+      941
+    ],
+    "path": "assets/reference/characters/kingfisher/stage-expansion-v1/generated/alphas/074_ACT074_left_mark_arrival_speaking_beak_alpha_raw.png",
+    "sha256": "c21cb18573a9bb7708a33b9f8cebed636bed458fad1aecbfc1dd2acbf589eba3",
+    "visible_bbox": [
+      474,
+      103,
+      1156,
+      863
+    ]
+  }
+}

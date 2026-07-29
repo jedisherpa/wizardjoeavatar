@@ -1,0 +1,48 @@
+{
+  "approval_state": "candidate_visual_review",
+  "character_id": "kingfisher",
+  "ordinal": 98,
+  "output": {
+    "foreground_pixels": 71545,
+    "path": "assets/reference/characters/kingfisher/stage-expansion-v1/generated/alphas/098_ACT098_rhetorical_question_stage_speaking_beak_candidate.png",
+    "sha256": "a8c5a602f4e55f75b1d26f28da79eb2fabd89de88a2c0a1cb9e9abf475b6f017"
+  },
+  "pose_id": "kingfisher.act.098.rhetorical-question-stage-speaking-beak",
+  "registration": {
+    "alpha_mode": "binary_straight",
+    "canvas_size": [
+      960,
+      540
+    ],
+    "interpolation": "nearest_neighbor",
+    "maximum_visible_width": 900,
+    "policy": "kingfisher_stage_bottom_center_v1",
+    "target_baseline_y": 529,
+    "target_center_x": 480,
+    "target_visible_height": 432,
+    "visible_bbox": [
+      310,
+      99,
+      650,
+      529
+    ]
+  },
+  "review_projection": true,
+  "runtime_admitted": false,
+  "schema_version": 1,
+  "slug": "rhetorical-question-stage-speaking-beak",
+  "source": {
+    "canvas_size": [
+      1672,
+      941
+    ],
+    "path": "assets/reference/characters/kingfisher/stage-expansion-v1/generated/alphas/098_ACT098_rhetorical_question_stage_speaking_beak_alpha_raw.png",
+    "sha256": "b9a505b9aca865efc46e0b3f7771d2e7082e8b6554a89e26e27b2fd6cad6ed43",
+    "visible_bbox": [
+      444,
+      87,
+      1058,
+      862
+    ]
+  }
+}

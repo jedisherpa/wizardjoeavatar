@@ -1,0 +1,48 @@
+{
+  "approval_state": "candidate_visual_review",
+  "character_id": "kingfisher",
+  "ordinal": 72,
+  "output": {
+    "foreground_pixels": 77335,
+    "path": "assets/reference/characters/kingfisher/stage-expansion-v1/generated/alphas/072_ACT072_left_stride_passing_speaking_beak_candidate.png",
+    "sha256": "8bc5837e1822b6be12d03b7065e69790771ea4cf805128a9826d109e56c441a6"
+  },
+  "pose_id": "kingfisher.act.072.left-stride-passing-speaking-beak",
+  "registration": {
+    "alpha_mode": "binary_straight",
+    "canvas_size": [
+      960,
+      540
+    ],
+    "interpolation": "nearest_neighbor",
+    "maximum_visible_width": 900,
+    "policy": "kingfisher_stage_bottom_center_v1",
+    "target_baseline_y": 529,
+    "target_center_x": 480,
+    "target_visible_height": 432,
+    "visible_bbox": [
+      302,
+      98,
+      659,
+      529
+    ]
+  },
+  "review_projection": true,
+  "runtime_admitted": false,
+  "schema_version": 1,
+  "slug": "left-stride-passing-speaking-beak",
+  "source": {
+    "canvas_size": [
+      1672,
+      941
+    ],
+    "path": "assets/reference/characters/kingfisher/stage-expansion-v1/generated/alphas/072_ACT072_left_stride_passing_speaking_beak_alpha_raw.png",
+    "sha256": "0e9bbc0a7ff066f3659f93b25e19be6f2cd71fa9ca532c6ce620354c177f1d8d",
+    "visible_bbox": [
+      551,
+      95,
+      1178,
+      850
+    ]
+  }
+}

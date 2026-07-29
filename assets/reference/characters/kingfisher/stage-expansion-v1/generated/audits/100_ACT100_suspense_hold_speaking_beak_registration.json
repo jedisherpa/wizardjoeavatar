@@ -1,0 +1,48 @@
+{
+  "approval_state": "candidate_visual_review",
+  "character_id": "kingfisher",
+  "ordinal": 100,
+  "output": {
+    "foreground_pixels": 63453,
+    "path": "assets/reference/characters/kingfisher/stage-expansion-v1/generated/alphas/100_ACT100_suspense_hold_speaking_beak_candidate.png",
+    "sha256": "6c3adca40dd7c8a661d3892a17f2e99def869774169ac6523d596ae2a2f5ba77"
+  },
+  "pose_id": "kingfisher.act.100.suspense-hold-speaking-beak",
+  "registration": {
+    "alpha_mode": "binary_straight",
+    "canvas_size": [
+      960,
+      540
+    ],
+    "interpolation": "nearest_neighbor",
+    "maximum_visible_width": 900,
+    "policy": "kingfisher_stage_bottom_center_v1",
+    "target_baseline_y": 529,
+    "target_center_x": 480,
+    "target_visible_height": 432,
+    "visible_bbox": [
+      370,
+      99,
+      591,
+      529
+    ]
+  },
+  "review_projection": true,
+  "runtime_admitted": false,
+  "schema_version": 1,
+  "slug": "suspense-hold-speaking-beak",
+  "source": {
+    "canvas_size": [
+      1672,
+      941
+    ],
+    "path": "assets/reference/characters/kingfisher/stage-expansion-v1/generated/alphas/100_ACT100_suspense_hold_speaking_beak_alpha_raw.png",
+    "sha256": "59f4033dae93655e9bf482428da3d788cbedbffa1e8b8f311aa1a6185f3e87d1",
+    "visible_bbox": [
+      637,
+      93,
+      1031,
+      855
+    ]
+  }
+}

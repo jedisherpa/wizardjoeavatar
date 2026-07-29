@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import math
+import re
 import sys
 from pathlib import Path
 
@@ -22,6 +23,35 @@ DEFAULT_INDEX = (
     ROOT / "assets" / "reference" / "hd_canonical" / "compiled" / "library-index.json"
 )
 
+POSE_NUMBER = re.compile(r"(?:^|[._-])(?:act[._-])?(\d{3})(?:[._-]|$)", re.IGNORECASE)
+
+
+def pose_number(pose_id: str) -> int | None:
+    """Return the first three-digit pose number from supported pose ID styles."""
+    match = POSE_NUMBER.search(pose_id)
+    return int(match.group(1)) if match else None
+
+
+def select_pose_ids(
+    pose_ids: list[str],
+    *,
+    prefixes: list[str],
+    start: int | None,
+    end: int | None,
+) -> list[str]:
+    selected = []
+    for pose_id in pose_ids:
+        number = pose_number(pose_id)
+        in_range = (
+            start is not None
+            and end is not None
+            and number is not None
+            and start <= number <= end
+        )
+        if in_range or any(pose_id.startswith(prefix) for prefix in prefixes):
+            selected.append(pose_id)
+    return selected
+
 
 def main() -> None:
     parser = argparse.ArgumentParser()
@@ -35,20 +65,12 @@ def main() -> None:
     args = parser.parse_args()
 
     library = HDPoseLibrary(args.index)
-    selected = []
-    for pose_id in library.pose_ids:
-        number = int(pose_id.split("_", 1)[0]) if pose_id[:3].isdigit() else None
-        in_range = (
-            args.start is not None
-            and args.end is not None
-            and number is not None
-            and args.start <= number <= args.end
-        )
-        matches_prefix = any(
-            pose_id.startswith(prefix) for prefix in args.pose_prefix
-        )
-        if in_range or matches_prefix:
-            selected.append(pose_id)
+    selected = select_pose_ids(
+        library.pose_ids,
+        prefixes=args.pose_prefix,
+        start=args.start,
+        end=args.end,
+    )
     if not selected:
         raise SystemExit("No HD poses matched the requested selection")
 

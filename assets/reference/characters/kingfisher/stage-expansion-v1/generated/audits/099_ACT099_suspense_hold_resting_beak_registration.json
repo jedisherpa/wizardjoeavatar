@@ -1,0 +1,48 @@
+{
+  "approval_state": "candidate_visual_review",
+  "character_id": "kingfisher",
+  "ordinal": 99,
+  "output": {
+    "foreground_pixels": 63370,
+    "path": "assets/reference/characters/kingfisher/stage-expansion-v1/generated/alphas/099_ACT099_suspense_hold_resting_beak_alpha.png",
+    "sha256": "233a3d4bbe7fdb9c39dafc75f8b9a677a0be4ebb09b1e4a5b49f994b21caf210"
+  },
+  "pose_id": "kingfisher.act.099.suspense-hold-resting-beak",
+  "registration": {
+    "alpha_mode": "binary_straight",
+    "canvas_size": [
+      960,
+      540
+    ],
+    "interpolation": "nearest_neighbor",
+    "maximum_visible_width": 900,
+    "policy": "kingfisher_stage_bottom_center_v1",
+    "target_baseline_y": 529,
+    "target_center_x": 480,
+    "target_visible_height": 432,
+    "visible_bbox": [
+      370,
+      99,
+      591,
+      529
+    ]
+  },
+  "review_projection": true,
+  "runtime_admitted": false,
+  "schema_version": 1,
+  "slug": "suspense-hold-resting-beak",
+  "source": {
+    "canvas_size": [
+      1672,
+      941
+    ],
+    "path": "assets/reference/characters/kingfisher/stage-expansion-v1/generated/alphas/099_ACT099_suspense_hold_resting_beak_alpha_raw.png",
+    "sha256": "35f0ac27206d20bd98fcfd0f33bf8313d0bb12ccc089ebd2b147414a49d30906",
+    "visible_bbox": [
+      638,
+      93,
+      1032,
+      855
+    ]
+  }
+}

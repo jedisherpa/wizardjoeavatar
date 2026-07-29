@@ -1,0 +1,48 @@
+{
+  "approval_state": "candidate_visual_review",
+  "character_id": "kingfisher",
+  "ordinal": 105,
+  "output": {
+    "foreground_pixels": 66922,
+    "path": "assets/reference/characters/kingfisher/stage-expansion-v1/generated/alphas/105_ACT105_comic_aside_resting_beak_alpha.png",
+    "sha256": "45e466e163f6934b01f4df3414d6b370215e498230fb17c0adeba2f4bf247ea7"
+  },
+  "pose_id": "kingfisher.act.105.comic-aside-resting-beak",
+  "registration": {
+    "alpha_mode": "binary_straight",
+    "canvas_size": [
+      960,
+      540
+    ],
+    "interpolation": "nearest_neighbor",
+    "maximum_visible_width": 900,
+    "policy": "kingfisher_stage_bottom_center_v1",
+    "target_baseline_y": 529,
+    "target_center_x": 480,
+    "target_visible_height": 432,
+    "visible_bbox": [
+      359,
+      99,
+      602,
+      529
+    ]
+  },
+  "review_projection": true,
+  "runtime_admitted": false,
+  "schema_version": 1,
+  "slug": "comic-aside-resting-beak",
+  "source": {
+    "canvas_size": [
+      1672,
+      941
+    ],
+    "path": "assets/reference/characters/kingfisher/stage-expansion-v1/generated/alphas/105_ACT105_comic_aside_resting_beak_alpha_raw.png",
+    "sha256": "035e407f06adb68e18be73e6c99377fcffa8ece0b03f6e2d2f5c33e2fbc8256d",
+    "visible_bbox": [
+      601,
+      84,
+      1041,
+      860
+    ]
+  }
+}

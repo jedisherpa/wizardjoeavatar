@@ -1,0 +1,48 @@
+{
+  "approval_state": "candidate_visual_review",
+  "character_id": "kingfisher",
+  "ordinal": 107,
+  "output": {
+    "foreground_pixels": 77539,
+    "path": "assets/reference/characters/kingfisher/stage-expansion-v1/generated/alphas/107_ACT107_call_to_action_resting_beak_alpha.png",
+    "sha256": "26a92d177d75de1c622a3e440c6a6dbaa237f02d573eb7906056366992c77263"
+  },
+  "pose_id": "kingfisher.act.107.call-to-action-resting-beak",
+  "registration": {
+    "alpha_mode": "binary_straight",
+    "canvas_size": [
+      960,
+      540
+    ],
+    "interpolation": "nearest_neighbor",
+    "maximum_visible_width": 900,
+    "policy": "kingfisher_stage_bottom_center_v1",
+    "target_baseline_y": 529,
+    "target_center_x": 480,
+    "target_visible_height": 432,
+    "visible_bbox": [
+      306,
+      99,
+      655,
+      529
+    ]
+  },
+  "review_projection": true,
+  "runtime_admitted": false,
+  "schema_version": 1,
+  "slug": "call-to-action-resting-beak",
+  "source": {
+    "canvas_size": [
+      1672,
+      941
+    ],
+    "path": "assets/reference/characters/kingfisher/stage-expansion-v1/generated/alphas/107_ACT107_call_to_action_resting_beak_alpha_raw.png",
+    "sha256": "ca0c08a87aeef1494eb07cc35851618e0bd3e39f7580810333475dbdba860b31",
+    "visible_bbox": [
+      479,
+      91,
+      1103,
+      860
+    ]
+  }
+}

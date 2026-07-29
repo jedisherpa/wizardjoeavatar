@@ -1,0 +1,48 @@
+{
+  "approval_state": "candidate_visual_review",
+  "character_id": "kingfisher",
+  "ordinal": 103,
+  "output": {
+    "foreground_pixels": 69620,
+    "path": "assets/reference/characters/kingfisher/stage-expansion-v1/generated/alphas/103_ACT103_heartfelt_confession_resting_beak_alpha.png",
+    "sha256": "8acf7da65347f0e06d7145b0893629a08badc04121d67eb323385e9f7ab5bf5e"
+  },
+  "pose_id": "kingfisher.act.103.heartfelt-confession-resting-beak",
+  "registration": {
+    "alpha_mode": "binary_straight",
+    "canvas_size": [
+      960,
+      540
+    ],
+    "interpolation": "nearest_neighbor",
+    "maximum_visible_width": 900,
+    "policy": "kingfisher_stage_bottom_center_v1",
+    "target_baseline_y": 529,
+    "target_center_x": 480,
+    "target_visible_height": 432,
+    "visible_bbox": [
+      349,
+      99,
+      611,
+      529
+    ]
+  },
+  "review_projection": true,
+  "runtime_admitted": false,
+  "schema_version": 1,
+  "slug": "heartfelt-confession-resting-beak",
+  "source": {
+    "canvas_size": [
+      1672,
+      940
+    ],
+    "path": "assets/reference/characters/kingfisher/stage-expansion-v1/generated/alphas/103_ACT103_heartfelt_confession_resting_beak_alpha_raw.png",
+    "sha256": "423d4bd6427ba7ef36e9a9e3266958bd77ebc1f45696fa4aa27e3f2f96ff95a9",
+    "visible_bbox": [
+      592,
+      105,
+      1054,
+      860
+    ]
+  }
+}

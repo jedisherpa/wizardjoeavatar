@@ -1,0 +1,48 @@
+{
+  "approval_state": "candidate_visual_review",
+  "character_id": "kingfisher",
+  "ordinal": 86,
+  "output": {
+    "foreground_pixels": 77381,
+    "path": "assets/reference/characters/kingfisher/stage-expansion-v1/generated/alphas/086_ACT086_downstage_lean_speaking_beak_candidate.png",
+    "sha256": "9b89919b39e6437a1e8594a1878ca40279f694328c8022d1e96e41d9155766ea"
+  },
+  "pose_id": "kingfisher.act.086.downstage-lean-speaking-beak",
+  "registration": {
+    "alpha_mode": "binary_straight",
+    "canvas_size": [
+      960,
+      540
+    ],
+    "interpolation": "nearest_neighbor",
+    "maximum_visible_width": 900,
+    "policy": "kingfisher_stage_bottom_center_v1",
+    "target_baseline_y": 529,
+    "target_center_x": 480,
+    "target_visible_height": 432,
+    "visible_bbox": [
+      328,
+      98,
+      633,
+      529
+    ]
+  },
+  "review_projection": true,
+  "runtime_admitted": false,
+  "schema_version": 1,
+  "slug": "downstage-lean-speaking-beak",
+  "source": {
+    "canvas_size": [
+      1672,
+      941
+    ],
+    "path": "assets/reference/characters/kingfisher/stage-expansion-v1/generated/alphas/086_ACT086_downstage_lean_speaking_beak_alpha_raw.png",
+    "sha256": "1e1350100d0ffaaef4d77104aac6c1462f9351aa1e0162b6d32f35c5dd3f75fb",
+    "visible_bbox": [
+      541,
+      126,
+      1074,
+      875
+    ]
+  }
+}
