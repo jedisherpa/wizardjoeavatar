@@ -6,9 +6,12 @@ from unittest import mock
 
 from tools.import_wizard_joe_audio_performances import (
     APPROACH_POSES,
+    FLIGHT_APPROACH_POSES,
     HERO_CHOREOGRAPHY,
+    HOVER_POSE,
     INTENT_POSES,
     SETTLE_POSE,
+    _approach_for_clip,
     _authored_templates,
     _motion_beats,
     _partition_groups,
@@ -55,7 +58,7 @@ class WizardJoeAudioPerformanceImportTests(unittest.TestCase):
         self.assertEqual(" ".join(partitioned), " ".join(groups))
 
     def test_pose_validation_requires_approach_settle_and_body_cues(self):
-        required = {SETTLE_POSE, *APPROACH_POSES}
+        required = {SETTLE_POSE, HOVER_POSE, *APPROACH_POSES, *FLIGHT_APPROACH_POSES}
         for templates in HERO_CHOREOGRAPHY.values():
             for _, pose_ids in templates:
                 required.update(pose_ids)
@@ -73,6 +76,30 @@ class WizardJoeAudioPerformanceImportTests(unittest.TestCase):
         index["shards"][0]["pose_ids"].remove(SETTLE_POSE)
         with self.assertRaisesRegex(ValueError, SETTLE_POSE):
             _validate_pose_references(index)
+
+    def test_intro_one_flies_from_distance_until_hovering_on_final_word(self):
+        approach = _approach_for_clip("WJ_INTRO_001", 26_471)
+
+        self.assertEqual(approach["mode"], "fly_toward_camera")
+        self.assertEqual(approach["start_ms"], 0)
+        self.assertEqual(approach["end_ms"], 26_471)
+        self.assertLess(approach["start_scale_milli"], 400)
+        self.assertEqual(approach["end_scale_milli"], 1080)
+        self.assertEqual(approach["arrival_pose_ids"][-1], HOVER_POSE)
+
+    def test_intro_two_is_authored_as_hovering_airborne_speech(self):
+        approach = _approach_for_clip("WJ_INTRO_002", 40_960)
+        poses = {
+            pose
+            for _, sequence in HERO_CHOREOGRAPHY["WJ_INTRO_002"]
+            for pose in sequence
+        }
+
+        self.assertEqual(approach["mode"], "hover")
+        self.assertEqual(approach["end_ms"], 0)
+        self.assertIn("187_flight_stationary_speak", poses)
+        self.assertIn("190_flight_reach", poses)
+        self.assertIn("188_flight_staff_forward", poses)
 
     def test_motion_beats_follow_audio_accents_without_rapid_repetition(self):
         cues = [

@@ -46,75 +46,84 @@
       },
       "transcript": "Hey, hey, hey\u2014whoa! You\u2019re there! You\u2019re actually there! ... Excellent. I mean, I suspected someone would eventually arrive. But it is always more exciting when the someone becomes a you. ... Hold still. Not because you are in danger. You are already mostly still. I am just trying to arrive with dignity, and dignity is currently doing several cartwheels behind me.",
       "performance": {
-        "performance_id": "wizard-joe:wj_intro_001:walk-and-talk:v1",
+        "performance_id": "wizard-joe:wj_intro_001:fly_toward_camera:v2",
         "approval_state": "candidate_visual_review",
         "runtime_admitted": false,
         "clock": "html_audio_element_current_time",
+        "motion_style": "hover",
         "approach": {
+          "mode": "fly_toward_camera",
           "start_ms": 0,
-          "end_ms": 4200,
+          "end_ms": 26471,
           "pose_ids": [
-            "246_camera_approach",
-            "250_final_recovery_home",
-            "248_camera_retreat",
-            "250_final_recovery_home"
+            "177_flight_glide_forward",
+            "174_flight_powerstroke_down",
+            "175_flight_recoverystroke_up",
+            "184_flight_accelerate"
           ],
-          "fps": 10,
-          "start_scale_milli": 720,
+          "fps": 2.4,
+          "start_scale_milli": 260,
           "end_scale_milli": 1080,
-          "easing_id": "sine_out",
-          "ground_anchor": "center_bottom",
-          "source_contract": "joeville:introTimeline:WALK_PUSH_MS"
+          "start_offset_y_px": -42,
+          "end_offset_y_px": 0,
+          "arrival_transition_ms": 1200,
+          "arrival_pose_ids": [
+            "185_flight_brake",
+            "176_flight_hover_neutral"
+          ],
+          "easing_id": "cubic_in_out",
+          "ground_anchor": "center",
+          "source_contract": "authored:wizard-joe:intro-001:camera-flight"
         },
         "body_cues": [
           {
             "cue_id": "wj_intro_001:body:01",
-            "label": "delighted_arrival",
+            "label": "distant_greeting",
             "start_ms": 0,
             "end_ms": 2797,
             "text": "Hey, hey, hey\u2014whoa! You\u2019re there! You\u2019re actually there!",
             "pose_ids": [
-              "087_emotion_surprise",
-              "079_emotion_excited"
+              "177_flight_glide_forward",
+              "174_flight_powerstroke_down"
             ],
             "pose_hold_ms": 1333,
             "crossfade_ms": 0
           },
           {
             "cue_id": "wj_intro_001:body:02",
-            "label": "welcome",
+            "label": "approach",
             "start_ms": 2797,
             "end_ms": 9090,
             "text": "Excellent. I mean, I suspected someone would eventually arrive. But it is always more exciting when the someone becomes a you.",
             "pose_ids": [
-              "041_speak_explain_open",
-              "119_hand_invite"
+              "175_flight_recoverystroke_up",
+              "184_flight_accelerate"
             ],
             "pose_hold_ms": 986,
             "crossfade_ms": 0
           },
           {
             "cue_id": "wj_intro_001:body:03",
-            "label": "hold",
+            "label": "brake",
             "start_ms": 9090,
             "end_ms": 17781,
             "text": "Hold still. Not because you are in danger. You are already mostly still. I am just trying to arrive with dignity, and dignity is currently doing several cartwheels behind me.",
             "pose_ids": [
-              "052_speak_warn",
-              "042_speak_explain_precise"
+              "185_flight_brake",
+              "187_flight_stationary_speak"
             ],
             "pose_hold_ms": 1021,
             "crossfade_ms": 0
           },
           {
             "cue_id": "wj_intro_001:body:04",
-            "label": "comic_recovery",
+            "label": "hover_arrival",
             "start_ms": 17781,
             "end_ms": 26471,
             "text": "Hold still. Not because you are in danger. You are already mostly still. I am just trying to arrive with dignity, and dignity is currently doing several cartwheels behind me.",
             "pose_ids": [
-              "078_emotion_amused",
-              "243_comedy_recover_dignity"
+              "176_flight_hover_neutral",
+              "187_flight_stationary_speak"
             ],
             "pose_hold_ms": 1000,
             "crossfade_ms": 0
@@ -123,97 +132,97 @@
         "motion_beats": [
           {
             "time_ms": 0,
-            "pose_id": "079_emotion_excited",
+            "pose_id": "174_flight_powerstroke_down",
             "cue_id": "wj_intro_001:body:01",
             "accent_milli": 317
           },
           {
             "time_ms": 950,
-            "pose_id": "087_emotion_surprise",
+            "pose_id": "177_flight_glide_forward",
             "cue_id": "wj_intro_001:body:01",
             "accent_milli": 1000
           },
           {
             "time_ms": 2797,
-            "pose_id": "119_hand_invite",
+            "pose_id": "184_flight_accelerate",
             "cue_id": "wj_intro_001:body:02",
             "accent_milli": 673
           },
           {
             "time_ms": 4550,
-            "pose_id": "041_speak_explain_open",
+            "pose_id": "175_flight_recoverystroke_up",
             "cue_id": "wj_intro_001:body:02",
             "accent_milli": 1000
           },
           {
             "time_ms": 6150,
-            "pose_id": "119_hand_invite",
+            "pose_id": "184_flight_accelerate",
             "cue_id": "wj_intro_001:body:02",
             "accent_milli": 850
           },
           {
             "time_ms": 8100,
-            "pose_id": "041_speak_explain_open",
+            "pose_id": "175_flight_recoverystroke_up",
             "cue_id": "wj_intro_001:body:02",
             "accent_milli": 872
           },
           {
             "time_ms": 9090,
-            "pose_id": "052_speak_warn",
+            "pose_id": "185_flight_brake",
             "cue_id": "wj_intro_001:body:03",
             "accent_milli": 526
           },
           {
             "time_ms": 10800,
-            "pose_id": "042_speak_explain_precise",
+            "pose_id": "187_flight_stationary_speak",
             "cue_id": "wj_intro_001:body:03",
             "accent_milli": 942
           },
           {
             "time_ms": 13450,
-            "pose_id": "052_speak_warn",
+            "pose_id": "185_flight_brake",
             "cue_id": "wj_intro_001:body:03",
             "accent_milli": 693
           },
           {
             "time_ms": 16100,
-            "pose_id": "042_speak_explain_precise",
+            "pose_id": "187_flight_stationary_speak",
             "cue_id": "wj_intro_001:body:03",
             "accent_milli": 1000
           },
           {
             "time_ms": 17150,
-            "pose_id": "052_speak_warn",
+            "pose_id": "185_flight_brake",
             "cue_id": "wj_intro_001:body:03",
             "accent_milli": 948
           },
           {
             "time_ms": 19100,
-            "pose_id": "078_emotion_amused",
+            "pose_id": "176_flight_hover_neutral",
             "cue_id": "wj_intro_001:body:04",
             "accent_milli": 1000
           },
           {
             "time_ms": 20200,
-            "pose_id": "243_comedy_recover_dignity",
+            "pose_id": "187_flight_stationary_speak",
             "cue_id": "wj_intro_001:body:04",
             "accent_milli": 835
           },
           {
             "time_ms": 21600,
-            "pose_id": "078_emotion_amused",
+            "pose_id": "176_flight_hover_neutral",
             "cue_id": "wj_intro_001:body:04",
             "accent_milli": 959
           },
           {
             "time_ms": 23200,
-            "pose_id": "243_comedy_recover_dignity",
+            "pose_id": "187_flight_stationary_speak",
             "cue_id": "wj_intro_001:body:04",
             "accent_milli": 986
           },
           {
             "time_ms": 24900,
-            "pose_id": "078_emotion_amused",
+            "pose_id": "176_flight_hover_neutral",
             "cue_id": "wj_intro_001:body:04",
             "accent_milli": 943
           }
@@ -754,7 +763,7 @@
           ],
           "source": "canonical_pcm_rms"
         },
-        "settle_pose_id": "013_idle_warm_camera_ready"
+        "settle_pose_id": "176_flight_hover_neutral"
       }
     },
     {
@@ -775,76 +784,78 @@
       },
       "transcript": "Well, look at you. You must be a self that is just starting to realize that it is a self. ... That is a very important moment. Also a very inconvenient one. Before you notice you are a self, you do not know you need to notice. It is a paradox wrapped in a mystery, wearing a tiny little cardigan. ... But you noticed. So: congratulations. You are now officially here enough for me to talk to. ... You do not need to have a brand, a plan, a five-year operating model, or a little laminated name tag yet. You only need to be here.",
       "performance": {
-        "performance_id": "wizard-joe:wj_intro_002:walk-and-talk:v1",
+        "performance_id": "wizard-joe:wj_intro_002:hover:v2",
         "approval_state": "candidate_visual_review",
         "runtime_admitted": false,
         "clock": "html_audio_element_current_time",
+        "motion_style": "hover",
         "approach": {
+          "mode": "hover",
           "start_ms": 0,
-          "end_ms": 4200,
+          "end_ms": 0,
           "pose_ids": [
-            "246_camera_approach",
-            "250_final_recovery_home",
-            "248_camera_retreat",
-            "250_final_recovery_home"
+            "176_flight_hover_neutral"
           ],
-          "fps": 10,
-          "start_scale_milli": 720,
+          "fps": 2,
+          "start_scale_milli": 1080,
           "end_scale_milli": 1080,
-          "easing_id": "sine_out",
-          "ground_anchor": "center_bottom",
-          "source_contract": "joeville:introTimeline:WALK_PUSH_MS"
+          "start_offset_y_px": 0,
+          "end_offset_y_px": 0,
+          "easing_id": "none",
+          "ground_anchor": "center",
+          "source_contract": "authored:wizard-joe:intro-002:hover-talk"
         },
         "body_cues": [
           {
             "cue_id": "wj_intro_002:body:01",
-            "label": "notice",
+            "label": "hover_notice",
             "start_ms": 0,
             "end_ms": 7106,
             "text": "Well, look at you. You must be a self that is just starting to realize that it is a self.",
             "pose_ids": [
-              "080_emotion_curious",
-              "042_speak_explain_precise"
+              "176_flight_hover_neutral",
+              "187_flight_stationary_speak"
             ],
             "pose_hold_ms": 1078,
             "crossfade_ms": 0
           },
           {
             "cue_id": "wj_intro_002:body:02",
-            "label": "paradox",
+            "label": "hover_explain",
             "start_ms": 7106,
             "end_ms": 23235,
             "text": "That is a very important moment. Also a very inconvenient one. Before you notice you are a self, you do not know you need to notice. It is a paradox wrapped in a mystery, wearing a tiny little cardigan.",
             "pose_ids": [
-              "055_speak_question",
-              "067_story_begin",
-              "068_story_build"
+              "187_flight_stationary_speak",
+              "190_flight_reach",
+              "188_flight_staff_forward"
             ],
             "pose_hold_ms": 1194,
             "crossfade_ms": 0
           },
           {
             "cue_id": "wj_intro_002:body:03",
-            "label": "congratulate",
+            "label": "hover_congratulate",
             "start_ms": 23235,
             "end_ms": 30500,
             "text": "But you noticed. So: congratulations. You are now officially here enough for me to talk to.",
             "pose_ids": [
-              "077_emotion_joy",
-              "041_speak_explain_open"
+              "190_flight_reach",
+              "187_flight_stationary_speak"
             ],
             "pose_hold_ms": 1073,
             "crossfade_ms": 0
           },
           {
             "cue_id": "wj_intro_002:body:04",
-            "label": "reassure",
+            "label": "hover_reassure",
             "start_ms": 30500,
             "end_ms": 40960,
             "text": "You do not need to have a brand, a plan, a five-year operating model, or a little laminated name tag yet. You only need to be here.",
             "pose_ids": [
-              "051_speak_reassure",
-              "050_speak_confide"
+              "188_flight_staff_forward",
+              "187_flight_stationary_speak",
+              "176_flight_hover_neutral"
             ],
             "pose_hold_ms": 1320,
             "crossfade_ms": 0
@@ -853,115 +864,115 @@
         "motion_beats": [
           {
             "time_ms": 0,
-            "pose_id": "042_speak_explain_precise",
+            "pose_id": "187_flight_stationary_speak",
             "cue_id": "wj_intro_002:body:01",
             "accent_milli": 346
           },
           {
             "time_ms": 1750,
-            "pose_id": "080_emotion_curious",
+            "pose_id": "176_flight_hover_neutral",
             "cue_id": "wj_intro_002:body:01",
             "accent_milli": 1000
           },
           {
             "time_ms": 3250,
-            "pose_id": "042_speak_explain_precise",
+            "pose_id": "187_flight_stationary_speak",
             "cue_id": "wj_intro_002:body:01",
             "accent_milli": 1000
           },
           {
             "time_ms": 5050,
-            "pose_id": "080_emotion_curious",
+            "pose_id": "176_flight_hover_neutral",
             "cue_id": "wj_intro_002:body:01",
             "accent_milli": 1000
           },
           {
             "time_ms": 7106,
-            "pose_id": "068_story_build",
+            "pose_id": "188_flight_staff_forward",
             "cue_id": "wj_intro_002:body:02",
             "accent_milli": 443
           },
           {
             "time_ms": 9150,
-            "pose_id": "055_speak_question",
+            "pose_id": "187_flight_stationary_speak",
             "cue_id": "wj_intro_002:body:02",
             "accent_milli": 1000
           },
           {
             "time_ms": 13300,
-            "pose_id": "067_story_begin",
+            "pose_id": "190_flight_reach",
             "cue_id": "wj_intro_002:body:02",
             "accent_milli": 1000
           },
           {
             "time_ms": 16450,
-            "pose_id": "068_story_build",
+            "pose_id": "188_flight_staff_forward",
             "cue_id": "wj_intro_002:body:02",
             "accent_milli": 999
           },
           {
             "time_ms": 17950,
-            "pose_id": "055_speak_question",
+            "pose_id": "187_flight_stationary_speak",
             "cue_id": "wj_intro_002:body:02",
             "accent_milli": 1000
           },
           {
             "time_ms": 23235,
-            "pose_id": "077_emotion_joy",
+            "pose_id": "190_flight_reach",
             "cue_id": "wj_intro_002:body:03",
             "accent_milli": 0
           },
           {
             "time_ms": 24250,
-            "pose_id": "041_speak_explain_open",
+            "pose_id": "187_flight_stationary_speak",
             "cue_id": "wj_intro_002:body:03",
             "accent_milli": 1000
           },
           {
             "time_ms": 25550,
-            "pose_id": "077_emotion_joy",
+            "pose_id": "190_flight_reach",
             "cue_id": "wj_intro_002:body:03",
             "accent_milli": 1000
           },
           {
             "time_ms": 27250,
-            "pose_id": "041_speak_explain_open",
+            "pose_id": "187_flight_stationary_speak",
             "cue_id": "wj_intro_002:body:03",
             "accent_milli": 1000
           },
           {
             "time_ms": 29200,
-            "pose_id": "077_emotion_joy",
+            "pose_id": "190_flight_reach",
             "cue_id": "wj_intro_002:body:03",
             "accent_milli": 1000
           },
           {
             "time_ms": 30500,
-            "pose_id": "050_speak_confide",
+            "pose_id": "188_flight_staff_forward",
             "cue_id": "wj_intro_002:body:04",
             "accent_milli": 174
           },
           {
             "time_ms": 32900,
-            "pose_id": "051_speak_reassure",
+            "pose_id": "187_flight_stationary_speak",
             "cue_id": "wj_intro_002:body:04",
             "accent_milli": 1000
           },
           {
             "time_ms": 36500,
-            "pose_id": "050_speak_confide",
+            "pose_id": "176_flight_hover_neutral",
             "cue_id": "wj_intro_002:body:04",
             "accent_milli": 1000
           },
           {
             "time_ms": 37500,
-            "pose_id": "051_speak_reassure",
+            "pose_id": "188_flight_staff_forward",
             "cue_id": "wj_intro_002:body:04",
             "accent_milli": 1000
           },
           {
             "time_ms": 39450,
-            "pose_id": "050_speak_confide",
+            "pose_id": "187_flight_stationary_speak",
             "cue_id": "wj_intro_002:body:04",
             "accent_milli": 1000
           }
@@ -1792,7 +1803,7 @@
           ],
           "source": "canonical_pcm_rms"
         },
-        "settle_pose_id": "013_idle_warm_camera_ready"
+        "settle_pose_id": "176_flight_hover_neutral"
       }
     },
     {
@@ -1813,11 +1824,13 @@
       },
       "transcript": "I\u2019m Wizard Joe. Welcome, welcome, welcome. ... And before you ask: yes, I have a staff. Yes, it has a question mark on it. No, it does not know everything. It merely has excellent posture. ... It has tried knowing everything. Very hard on the wood grain.",
       "performance": {
-        "performance_id": "wizard-joe:wj_intro_003:walk-and-talk:v1",
+        "performance_id": "wizard-joe:wj_intro_003:walk_toward_camera:v2",
         "approval_state": "candidate_visual_review",
         "runtime_admitted": false,
         "clock": "html_audio_element_current_time",
+        "motion_style": "grounded",
         "approach": {
+          "mode": "walk_toward_camera",
           "start_ms": 0,
           "end_ms": 4200,
           "pose_ids": [
@@ -1829,6 +1842,8 @@
           "fps": 10,
           "start_scale_milli": 720,
           "end_scale_milli": 1080,
+          "start_offset_y_px": 0,
+          "end_offset_y_px": 0,
           "easing_id": "sine_out",
           "ground_anchor": "center_bottom",
           "source_contract": "joeville:introTimeline:WALK_PUSH_MS"
@@ -2394,11 +2409,13 @@
       },
       "transcript": "Now, small administrative note: I am not actually a self. ... I am a projection. Specifically, a projection projected through a hypercube by the intent of an author. ... Which means I am a friendly digital wizard-shaped message from the part of reality that wanted you to have a decent tutorial. ... Do I have feelings? I have animation states. Do I have a soul? That depends on your settings. Do I have a job? Absolutely. My job is to help you orient to this place. ... And to occasionally make a spectacular entrance. Mixed results so far.",
       "performance": {
-        "performance_id": "wizard-joe:wj_intro_004:walk-and-talk:v1",
+        "performance_id": "wizard-joe:wj_intro_004:walk_toward_camera:v2",
         "approval_state": "candidate_visual_review",
         "runtime_admitted": false,
         "clock": "html_audio_element_current_time",
+        "motion_style": "grounded",
         "approach": {
+          "mode": "walk_toward_camera",
           "start_ms": 0,
           "end_ms": 4200,
           "pose_ids": [
@@ -2410,6 +2427,8 @@
           "fps": 10,
           "start_scale_milli": 720,
           "end_scale_milli": 1080,
+          "start_offset_y_px": 0,
+          "end_offset_y_px": 0,
           "easing_id": "sine_out",
           "ground_anchor": "center_bottom",
           "source_contract": "joeville:introTimeline:WALK_PUSH_MS"
@@ -3548,11 +3567,13 @@
       },
       "transcript": "One more thing before the world gets ambitious: you are not late. ... You are not behind. You have not failed the tutorial by arriving at the tutorial. ... You are a self coming into form. Form takes a minute. Even pixels have to load.",
       "performance": {
-        "performance_id": "wizard-joe:wj_intro_005:walk-and-talk:v1",
+        "performance_id": "wizard-joe:wj_intro_005:walk_toward_camera:v2",
         "approval_state": "candidate_visual_review",
         "runtime_admitted": false,
         "clock": "html_audio_element_current_time",
+        "motion_style": "grounded",
         "approach": {
+          "mode": "walk_toward_camera",
           "start_ms": 0,
           "end_ms": 4200,
           "pose_ids": [
@@ -3564,6 +3585,8 @@
           "fps": 10,
           "start_scale_milli": 720,
           "end_scale_milli": 1080,
+          "start_offset_y_px": 0,
+          "end_offset_y_px": 0,
           "easing_id": "sine_out",
           "ground_anchor": "center_bottom",
           "source_contract": "joeville:introTimeline:WALK_PUSH_MS"
@@ -4047,11 +4070,13 @@
       },
       "transcript": "All right, Self. Let us open the map without opening seventeen browser tabs. ... Welcome to a world made of places, people, signals, stories, systems, and at least three things someone labeled \u2018final_final_v8.\u2019",
       "performance": {
-        "performance_id": "wizard-joe:wj_world_001:walk-and-talk:v1",
+        "performance_id": "wizard-joe:wj_world_001:walk_toward_camera:v2",
         "approval_state": "candidate_visual_review",
         "runtime_admitted": false,
         "clock": "html_audio_element_current_time",
+        "motion_style": "grounded",
         "approach": {
+          "mode": "walk_toward_camera",
           "start_ms": 0,
           "end_ms": 4200,
           "pose_ids": [
@@ -4063,6 +4088,8 @@
           "fps": 10,
           "start_scale_milli": 720,
           "end_scale_milli": 1080,
+          "start_offset_y_px": 0,
+          "end_offset_y_px": 0,
           "easing_id": "sine_out",
           "ground_anchor": "center_bottom",
           "source_contract": "joeville:introTimeline:WALK_PUSH_MS"
@@ -4580,11 +4607,13 @@
       },
       "transcript": "Welcome to **Joeville**: a whole little world where ideas put on shoes and go for walks. ... There are paths, projects, workshops, hidden doors, public questions, private rooms, tiny quests, and enough room to become useful without becoming a tiny exhausted productivity hamster.",
       "performance": {
-        "performance_id": "wizard-joe:wj_world_joeville:walk-and-talk:v1",
+        "performance_id": "wizard-joe:wj_world_joeville:walk_toward_camera:v2",
         "approval_state": "candidate_visual_review",
         "runtime_admitted": false,
         "clock": "html_audio_element_current_time",
+        "motion_style": "grounded",
         "approach": {
+          "mode": "walk_toward_camera",
           "start_ms": 0,
           "end_ms": 4200,
           "pose_ids": [
@@ -4596,6 +4625,8 @@
           "fps": 10,
           "start_scale_milli": 720,
           "end_scale_milli": 1080,
+          "start_offset_y_px": 0,
+          "end_offset_y_px": 0,
           "easing_id": "sine_out",
           "ground_anchor": "center_bottom",
           "source_contract": "joeville:introTimeline:WALK_PUSH_MS"
@@ -5193,11 +5224,13 @@
       },
       "transcript": "Welcome to **Boulder Shadow**: a walkable, story-shaped shadow of a real place, where the labels matter and the trails have opinions. ... Some things here point to real-world sources. Some things are imaginative play. Some things are still becoming clear. We label the difference because confusion is hard enough without the interface gaslighting you.",
       "performance": {
-        "performance_id": "wizard-joe:wj_world_boulder:walk-and-talk:v1",
+        "performance_id": "wizard-joe:wj_world_boulder:walk_toward_camera:v2",
         "approval_state": "candidate_visual_review",
         "runtime_admitted": false,
         "clock": "html_audio_element_current_time",
+        "motion_style": "grounded",
         "approach": {
+          "mode": "walk_toward_camera",
           "start_ms": 0,
           "end_ms": 4200,
           "pose_ids": [
@@ -5209,6 +5242,8 @@
           "fps": 10,
           "start_scale_milli": 720,
           "end_scale_milli": 1080,
+          "start_offset_y_px": 0,
+          "end_offset_y_px": 0,
           "easing_id": "sine_out",
           "ground_anchor": "center_bottom",
           "source_contract": "joeville:introTimeline:WALK_PUSH_MS"
@@ -5850,11 +5885,13 @@
       },
       "transcript": "Welcome to **GitHub Gameworld Joe**: where issues become caves, pull requests become bridges, and documentation is suddenly a heroic act. ... You will encounter strange beasts such as Merge Conflict, Unclear Scope, and the Ancient README That Has Not Been Touched Since the Moon Was Young.",
       "performance": {
-        "performance_id": "wizard-joe:wj_world_github:walk-and-talk:v1",
+        "performance_id": "wizard-joe:wj_world_github:walk_toward_camera:v2",
         "approval_state": "candidate_visual_review",
         "runtime_admitted": false,
         "clock": "html_audio_element_current_time",
+        "motion_style": "grounded",
         "approach": {
+          "mode": "walk_toward_camera",
           "start_ms": 0,
           "end_ms": 4200,
           "pose_ids": [
@@ -5866,6 +5903,8 @@
           "fps": 10,
           "start_scale_milli": 720,
           "end_scale_milli": 1080,
+          "start_offset_y_px": 0,
+          "end_offset_y_px": 0,
           "easing_id": "sine_out",
           "ground_anchor": "center_bottom",
           "source_contract": "joeville:introTimeline:WALK_PUSH_MS"
@@ -6463,11 +6502,13 @@
       },
       "transcript": "Wherever you landed, the first thing to know is this: this place is full of experts. ... Experts on trails. Experts on code. Experts on public things. Experts on making meetings take forty-five minutes longer than they need to. Experts on why the creek smells a little weird on Tuesdays. ... You do not have to become every kind of expert. You only have to learn how to find the right door.",
       "performance": {
-        "performance_id": "wizard-joe:wj_world_002:walk-and-talk:v1",
+        "performance_id": "wizard-joe:wj_world_002:walk_toward_camera:v2",
         "approval_state": "candidate_visual_review",
         "runtime_admitted": false,
         "clock": "html_audio_element_current_time",
+        "motion_style": "grounded",
         "approach": {
+          "mode": "walk_toward_camera",
           "start_ms": 0,
           "end_ms": 4200,
           "pose_ids": [
@@ -6479,6 +6520,8 @@
           "fps": 10,
           "start_scale_milli": 720,
           "end_scale_milli": 1080,
+          "start_offset_y_px": 0,
+          "end_offset_y_px": 0,
           "easing_id": "sine_out",
           "ground_anchor": "center_bottom",
           "source_contract": "joeville:introTimeline:WALK_PUSH_MS"
@@ -7301,11 +7344,13 @@
       },
       "transcript": "Now, lucky for you, it is not all rainbows and unicorns. ... Okay. I am a rainbow. And I have seen a unicorn near the Civic Citadel. But metaphorically? Things can be confusing. People can be busy. Systems can be foggy. And sometimes the treasure chest is actually a PDF. ... The game is not to become confused in a more colorful outfit. The game is to learn the map.",
       "performance": {
-        "performance_id": "wizard-joe:wj_world_003:walk-and-talk:v1",
+        "performance_id": "wizard-joe:wj_world_003:walk_toward_camera:v2",
         "approval_state": "candidate_visual_review",
         "runtime_admitted": false,
         "clock": "html_audio_element_current_time",
+        "motion_style": "grounded",
         "approach": {
+          "mode": "walk_toward_camera",
           "start_ms": 0,
           "end_ms": 4200,
           "pose_ids": [
@@ -7317,6 +7362,8 @@
           "fps": 10,
           "start_scale_milli": 720,
           "end_scale_milli": 1080,
+          "start_offset_y_px": 0,
+          "end_offset_y_px": 0,
           "easing_id": "sine_out",
           "ground_anchor": "center_bottom",
           "source_contract": "joeville:introTimeline:WALK_PUSH_MS"
@@ -8029,11 +8076,13 @@
       },
       "transcript": "Here is how Joeville works. ... First, you look around. You learn to tell what is real, what is story, what is uncertain, and what needs another look. That is called **Clarity**. ... Then you protect your time and attention. You choose who can talk to you, what you are available for, and when you would rather quietly inspect a tree. That is called **Boundaries**, which is just a grown-up word for \u2018my door, my handle.\u2019 ... Then you find your people. Not everybody. Your people. The ones who care about the same small useful thing long enough to make it better. ... Then you coordinate. You make a promise that fits. You do a piece of the work. You leave behind something useful: a guide, a tool, a map, a plan, a patch, a path, or a very good question.",
       "performance": {
-        "performance_id": "wizard-joe:wj_purpose_001:walk-and-talk:v1",
+        "performance_id": "wizard-joe:wj_purpose_001:walk_toward_camera:v2",
         "approval_state": "candidate_visual_review",
         "runtime_admitted": false,
         "clock": "html_audio_element_current_time",
+        "motion_style": "grounded",
         "approach": {
+          "mode": "walk_toward_camera",
           "start_ms": 0,
           "end_ms": 4200,
           "pose_ids": [
@@ -8045,6 +8094,8 @@
           "fps": 10,
           "start_scale_milli": 720,
           "end_scale_milli": 1080,
+          "start_offset_y_px": 0,
+          "end_offset_y_px": 0,
           "easing_id": "sine_out",
           "ground_anchor": "center_bottom",
           "source_contract": "joeville:introTimeline:WALK_PUSH_MS"
@@ -9514,11 +9565,13 @@
       },
       "transcript": "If you keep doing that\u2014without turning yourself into an exhausted little productivity hamster\u2014you build systems that help you. You build friends who can work with you. You build enough freedom that your time starts being yours again. ... That is the big goal. To become an **Enlightened Self**. ... Which is a dramatic way of saying: you have enough. Enough clarity to know what you are doing. Enough agency to make a difference. Enough support that you do not have to grind every minute just to stay afloat. ... Not \u2018I own the moon.\u2019 Not \u2018I have defeated all other humans.\u2019 Just\u2026 enough. And then you get to choose what you do next. ... You can explore. You can build. You can help somebody find a door. You can become gloriously, responsibly, wildly useful. Or you can spend twenty minutes arranging hats. We support many forms of enlightenment.",
       "performance": {
-        "performance_id": "wizard-joe:wj_purpose_002:walk-and-talk:v1",
+        "performance_id": "wizard-joe:wj_purpose_002:walk_toward_camera:v2",
         "approval_state": "candidate_visual_review",
         "runtime_admitted": false,
         "clock": "html_audio_element_current_time",
+        "motion_style": "grounded",
         "approach": {
+          "mode": "walk_toward_camera",
           "start_ms": 0,
           "end_ms": 4200,
           "pose_ids": [
@@ -9530,6 +9583,8 @@
           "fps": 10,
           "start_scale_milli": 720,
           "end_scale_milli": 1080,
+          "start_offset_y_px": 0,
+          "end_offset_y_px": 0,
           "easing_id": "sine_out",
           "ground_anchor": "center_bottom",
           "source_contract": "joeville:introTimeline:WALK_PUSH_MS"
@@ -11059,11 +11114,13 @@
       },
       "transcript": "For the record: Enlightened Self does not mean better than other selves. ... It does not mean perfectly calm, permanently productive, spiritually scented, or legally allowed to wear a cape indoors. ... It means the good things you built help cover the routine stuff, so you can choose your work instead of being chased around by it.",
       "performance": {
-        "performance_id": "wizard-joe:wj_purpose_003:walk-and-talk:v1",
+        "performance_id": "wizard-joe:wj_purpose_003:walk_toward_camera:v2",
         "approval_state": "candidate_visual_review",
         "runtime_admitted": false,
         "clock": "html_audio_element_current_time",
+        "motion_style": "grounded",
         "approach": {
+          "mode": "walk_toward_camera",
           "start_ms": 0,
           "end_ms": 4200,
           "pose_ids": [
@@ -11075,6 +11132,8 @@
           "fps": 10,
           "start_scale_milli": 720,
           "end_scale_milli": 1080,
+          "start_offset_y_px": 0,
+          "end_offset_y_px": 0,
           "easing_id": "sine_out",
           "ground_anchor": "center_bottom",
           "source_contract": "joeville:introTimeline:WALK_PUSH_MS"
@@ -11756,11 +11815,13 @@
       },
       "transcript": "There. You have now asked an excellent question. That is technically progress. ... Ready for a tiny first adventure?",
       "performance": {
-        "performance_id": "wizard-joe:wj_enter_001:walk-and-talk:v1",
+        "performance_id": "wizard-joe:wj_enter_001:walk_toward_camera:v2",
         "approval_state": "candidate_visual_review",
         "runtime_admitted": false,
         "clock": "html_audio_element_current_time",
+        "motion_style": "grounded",
         "approach": {
+          "mode": "walk_toward_camera",
           "start_ms": 0,
           "end_ms": 4200,
           "pose_ids": [
@@ -11772,6 +11833,8 @@
           "fps": 10,
           "start_scale_milli": 720,
           "end_scale_milli": 1080,
+          "start_offset_y_px": 0,
+          "end_offset_y_px": 0,
           "easing_id": "sine_out",
           "ground_anchor": "center_bottom",
           "source_contract": "joeville:introTimeline:WALK_PUSH_MS"
@@ -12087,11 +12150,13 @@
       },
       "transcript": "Absolutely. Take your time. The void is very spacious, the acoustics are incredible, and there are no unread messages here. ... When you are ready, the door will still be a door. It is very committed to the job.",
       "performance": {
-        "performance_id": "wizard-joe:wj_enter_002:walk-and-talk:v1",
+        "performance_id": "wizard-joe:wj_enter_002:walk_toward_camera:v2",
         "approval_state": "candidate_visual_review",
         "runtime_admitted": false,
         "clock": "html_audio_element_current_time",
+        "motion_style": "grounded",
         "approach": {
+          "mode": "walk_toward_camera",
           "start_ms": 0,
           "end_ms": 4200,
           "pose_ids": [
@@ -12103,6 +12168,8 @@
           "fps": 10,
           "start_scale_milli": 720,
           "end_scale_milli": 1080,
+          "start_offset_y_px": 0,
+          "end_offset_y_px": 0,
           "easing_id": "sine_out",
           "ground_anchor": "center_bottom",
           "source_contract": "joeville:introTimeline:WALK_PUSH_MS"
@@ -12491,11 +12558,13 @@
       },
       "transcript": "Here we go! First quest: **Three Things and a Door.** ... Find one thing that is **Real**. Find one thing that is **Story**. Find one thing that needs a friend. ... Do not fix the whole world yet. Do not accidentally start a committee. Just look. Notice. Learn the labels. ... I will be around if you need me. Not hovering over you. I mean, obviously, physically hovering. But emotionally? Respectful distance. ... Welcome to Joeville, Self. Let\u2019s make the next thing a little more clear.",
       "performance": {
-        "performance_id": "wizard-joe:wj_enter_003:walk-and-talk:v1",
+        "performance_id": "wizard-joe:wj_enter_003:walk_toward_camera:v2",
         "approval_state": "candidate_visual_review",
         "runtime_admitted": false,
         "clock": "html_audio_element_current_time",
+        "motion_style": "grounded",
         "approach": {
+          "mode": "walk_toward_camera",
           "start_ms": 0,
           "end_ms": 4200,
           "pose_ids": [
@@ -12507,6 +12576,8 @@
           "fps": 10,
           "start_scale_milli": 720,
           "end_scale_milli": 1080,
+          "start_offset_y_px": 0,
+          "end_offset_y_px": 0,
           "easing_id": "sine_out",
           "ground_anchor": "center_bottom",
           "source_contract": "joeville:introTimeline:WALK_PUSH_MS"
@@ -13593,11 +13664,13 @@
       },
       "transcript": "The map is awake. You are awake. I am questionably awake. That is plenty of awake for one tutorial. ... Your Compass will show the three nearby things you need to notice. It will not make you rush. It is a compass, not a tiny motivational manager.",
       "performance": {
-        "performance_id": "wizard-joe:wj_quest_001:walk-and-talk:v1",
+        "performance_id": "wizard-joe:wj_quest_001:walk_toward_camera:v2",
         "approval_state": "candidate_visual_review",
         "runtime_admitted": false,
         "clock": "html_audio_element_current_time",
+        "motion_style": "grounded",
         "approach": {
+          "mode": "walk_toward_camera",
           "start_ms": 0,
           "end_ms": 4200,
           "pose_ids": [
@@ -13609,6 +13682,8 @@
           "fps": 10,
           "start_scale_milli": 720,
           "end_scale_milli": 1080,
+          "start_offset_y_px": 0,
+          "end_offset_y_px": 0,
           "easing_id": "sine_out",
           "ground_anchor": "center_bottom",
           "source_contract": "joeville:introTimeline:WALK_PUSH_MS"
@@ -14206,11 +14281,13 @@
       },
       "transcript": "A **Real** thing. Wonderful. ... See the source trail? That is the route back to where this information came from. You do not have to memorize it, worship it, or frame it on your wall. You only need to know it exists, and you can follow it when you need the fuller picture. ... Clarity is not knowing everything. Clarity is knowing where to look next.",
       "performance": {
-        "performance_id": "wizard-joe:wj_quest_002:walk-and-talk:v1",
+        "performance_id": "wizard-joe:wj_quest_002:walk_toward_camera:v2",
         "approval_state": "candidate_visual_review",
         "runtime_admitted": false,
         "clock": "html_audio_element_current_time",
+        "motion_style": "grounded",
         "approach": {
+          "mode": "walk_toward_camera",
           "start_ms": 0,
           "end_ms": 4200,
           "pose_ids": [
@@ -14222,6 +14299,8 @@
           "fps": 10,
           "start_scale_milli": 720,
           "end_scale_milli": 1080,
+          "start_offset_y_px": 0,
+          "end_offset_y_px": 0,
           "easing_id": "sine_out",
           "ground_anchor": "center_bottom",
           "source_contract": "joeville:introTimeline:WALK_PUSH_MS"
@@ -14959,11 +15038,13 @@
       },
       "transcript": "A **Story** thing. Excellent lore detection. ... This is play. It is allowed to be strange, funny, symbolic, and full of unnecessary hats. It does not pretend to be a factual claim about the world. ... Stories help us imagine. Sources help us verify. Both are useful. They are just not the same tool, unless somebody has done something very ambitious with a book report.",
       "performance": {
-        "performance_id": "wizard-joe:wj_quest_003:walk-and-talk:v1",
+        "performance_id": "wizard-joe:wj_quest_003:walk_toward_camera:v2",
         "approval_state": "candidate_visual_review",
         "runtime_admitted": false,
         "clock": "html_audio_element_current_time",
+        "motion_style": "grounded",
         "approach": {
+          "mode": "walk_toward_camera",
           "start_ms": 0,
           "end_ms": 4200,
           "pose_ids": [
@@ -14975,6 +15056,8 @@
           "fps": 10,
           "start_scale_milli": 720,
           "end_scale_milli": 1080,
+          "start_offset_y_px": 0,
+          "end_offset_y_px": 0,
           "easing_id": "sine_out",
           "ground_anchor": "center_bottom",
           "source_contract": "joeville:introTimeline:WALK_PUSH_MS"
@@ -15670,11 +15753,13 @@
       },
       "transcript": "Ah, **Provisional**. This is unfinished, changing, uncertain, or still trying to decide what it thinks. ... Provisional does not mean bad. It means \u2018please do not build a cathedral on this sentence yet.\u2019 ... A good question is often the right tool for a provisional thing.",
       "performance": {
-        "performance_id": "wizard-joe:wj_quest_004:walk-and-talk:v1",
+        "performance_id": "wizard-joe:wj_quest_004:walk_toward_camera:v2",
         "approval_state": "candidate_visual_review",
         "runtime_admitted": false,
         "clock": "html_audio_element_current_time",
+        "motion_style": "grounded",
         "approach": {
+          "mode": "walk_toward_camera",
           "start_ms": 0,
           "end_ms": 4200,
           "pose_ids": [
@@ -15686,6 +15771,8 @@
           "fps": 10,
           "start_scale_milli": 720,
           "end_scale_milli": 1080,
+          "start_offset_y_px": 0,
+          "end_offset_y_px": 0,
           "easing_id": "sine_out",
           "ground_anchor": "center_bottom",
           "source_contract": "joeville:introTimeline:WALK_PUSH_MS"
@@ -16321,11 +16408,13 @@
       },
       "transcript": "There it is: a signal that needs a friend. ... Not every signal needs your entire life force. Some signals need a source check. Some need a map. Some need three people with fifteen minutes and a shared calendar. ... This one cannot be resolved by one self alone. That is not a flaw. That is why collaboration exists.",
       "performance": {
-        "performance_id": "wizard-joe:wj_quest_005:walk-and-talk:v1",
+        "performance_id": "wizard-joe:wj_quest_005:walk_toward_camera:v2",
         "approval_state": "candidate_visual_review",
         "runtime_admitted": false,
         "clock": "html_audio_element_current_time",
+        "motion_style": "grounded",
         "approach": {
+          "mode": "walk_toward_camera",
           "start_ms": 0,
           "end_ms": 4200,
           "pose_ids": [
@@ -16337,6 +16426,8 @@
           "fps": 10,
           "start_scale_milli": 720,
           "end_scale_milli": 1080,
+          "start_offset_y_px": 0,
+          "end_offset_y_px": 0,
           "easing_id": "sine_out",
           "ground_anchor": "center_bottom",
           "source_contract": "joeville:introTimeline:WALK_PUSH_MS"
@@ -17009,11 +17100,13 @@
       },
       "transcript": "Boom. Three things and a door. ... You found something real, something story-shaped, and something that needs a friend. You also did not accidentally fix the whole world before lunch. That is exceptional restraint. ... You are now a **Materializing Self** with a functioning Compass and the beginning of a Clarity Notebook. Quite a strong first chapter.",
       "performance": {
-        "performance_id": "wizard-joe:wj_quest_006:walk-and-talk:v1",
+        "performance_id": "wizard-joe:wj_quest_006:walk_toward_camera:v2",
         "approval_state": "candidate_visual_review",
         "runtime_admitted": false,
         "clock": "html_audio_element_current_time",
+        "motion_style": "grounded",
         "approach": {
+          "mode": "walk_toward_camera",
           "start_ms": 0,
           "end_ms": 4200,
           "pose_ids": [
@@ -17025,6 +17118,8 @@
           "fps": 10,
           "start_scale_milli": 720,
           "end_scale_milli": 1080,
+          "start_offset_y_px": 0,
+          "end_offset_y_px": 0,
           "easing_id": "sine_out",
           "ground_anchor": "center_bottom",
           "source_contract": "joeville:introTimeline:WALK_PUSH_MS"
@@ -17737,11 +17832,13 @@
       },
       "transcript": "You have learned that the world has labels. Now we level up: you are going to learn to use them. ... A Legible Self does not see everything perfectly. A Legible Self can tell the difference between a fact, a story, a hunch, a source, a question, and a person who has used seven exclamation marks where one would have been heroic.",
       "performance": {
-        "performance_id": "wizard-joe:wj_stage_legible_start:walk-and-talk:v1",
+        "performance_id": "wizard-joe:wj_stage_legible_start:walk_toward_camera:v2",
         "approval_state": "candidate_visual_review",
         "runtime_admitted": false,
         "clock": "html_audio_element_current_time",
+        "motion_style": "grounded",
         "approach": {
+          "mode": "walk_toward_camera",
           "start_ms": 0,
           "end_ms": 4200,
           "pose_ids": [
@@ -17753,6 +17850,8 @@
           "fps": 10,
           "start_scale_milli": 720,
           "end_scale_milli": 1080,
+          "start_offset_y_px": 0,
+          "end_offset_y_px": 0,
           "easing_id": "sine_out",
           "ground_anchor": "center_bottom",
           "source_contract": "joeville:introTimeline:WALK_PUSH_MS"
@@ -18352,11 +18451,13 @@
       },
       "transcript": "You made three foggy signals more legible. That is real game magic. ... The world did not become smaller. It became easier to navigate. You have unlocked the **Clarity Board** and the **Reality Bridge**. ... Now you can cross from the story-shaped world to the source-shaped world without getting your shoelaces tangled in the metaphor.",
       "performance": {
-        "performance_id": "wizard-joe:wj_stage_legible_complete:walk-and-talk:v1",
+        "performance_id": "wizard-joe:wj_stage_legible_complete:walk_toward_camera:v2",
         "approval_state": "candidate_visual_review",
         "runtime_admitted": false,
         "clock": "html_audio_element_current_time",
+        "motion_style": "grounded",
         "approach": {
+          "mode": "walk_toward_camera",
           "start_ms": 0,
           "end_ms": 4200,
           "pose_ids": [
@@ -18368,6 +18469,8 @@
           "fps": 10,
           "start_scale_milli": 720,
           "end_scale_milli": 1080,
+          "start_offset_y_px": 0,
+          "end_offset_y_px": 0,
           "easing_id": "sine_out",
           "ground_anchor": "center_bottom",
           "source_contract": "joeville:introTimeline:WALK_PUSH_MS"
@@ -19029,11 +19132,13 @@
       },
       "transcript": "Next lesson: a self is not an open browser tab. ... You have time, attention, energy, context, and a very limited number of places you can be at once without becoming a decorative smear of pixels. ... The Boundary Dial does not make you less collaborative. It makes your collaboration honest.",
       "performance": {
-        "performance_id": "wizard-joe:wj_stage_bounded_start:walk-and-talk:v1",
+        "performance_id": "wizard-joe:wj_stage_bounded_start:walk_toward_camera:v2",
         "approval_state": "candidate_visual_review",
         "runtime_admitted": false,
         "clock": "html_audio_element_current_time",
+        "motion_style": "grounded",
         "approach": {
+          "mode": "walk_toward_camera",
           "start_ms": 0,
           "end_ms": 4200,
           "pose_ids": [
@@ -19045,6 +19150,8 @@
           "fps": 10,
           "start_scale_milli": 720,
           "end_scale_milli": 1080,
+          "start_offset_y_px": 0,
+          "end_offset_y_px": 0,
           "easing_id": "sine_out",
           "ground_anchor": "center_bottom",
           "source_contract": "joeville:introTimeline:WALK_PUSH_MS"
@@ -19652,11 +19759,13 @@
       },
       "transcript": "You set a boundary, accepted one invitation on purpose, and left another opportunity cleanly. That is elite self-keeping. ... You are now a **Bounded Self**. You have unlocked room invitations, capacity settings, and the ancient power known as \u2018not right now.\u2019",
       "performance": {
-        "performance_id": "wizard-joe:wj_stage_bounded_complete:walk-and-talk:v1",
+        "performance_id": "wizard-joe:wj_stage_bounded_complete:walk_toward_camera:v2",
         "approval_state": "candidate_visual_review",
         "runtime_admitted": false,
         "clock": "html_audio_element_current_time",
+        "motion_style": "grounded",
         "approach": {
+          "mode": "walk_toward_camera",
           "start_ms": 0,
           "end_ms": 4200,
           "pose_ids": [
@@ -19668,6 +19777,8 @@
           "fps": 10,
           "start_scale_milli": 720,
           "end_scale_milli": 1080,
+          "start_offset_y_px": 0,
+          "end_offset_y_px": 0,
           "easing_id": "sine_out",
           "ground_anchor": "center_bottom",
           "source_contract": "joeville:introTimeline:WALK_PUSH_MS"
@@ -20242,11 +20353,13 @@
       },
       "transcript": "Time for a small collaboration. Please remain calm. We are not building an empire. We are making a promise that fits. ... Good collaboration has a purpose, a scope, a role for each person, a next action, and an exit. Without those things, you do not have a project. You have a group chat wearing a hat.",
       "performance": {
-        "performance_id": "wizard-joe:wj_stage_collab_start:walk-and-talk:v1",
+        "performance_id": "wizard-joe:wj_stage_collab_start:walk_toward_camera:v2",
         "approval_state": "candidate_visual_review",
         "runtime_admitted": false,
         "clock": "html_audio_element_current_time",
+        "motion_style": "grounded",
         "approach": {
+          "mode": "walk_toward_camera",
           "start_ms": 0,
           "end_ms": 4200,
           "pose_ids": [
@@ -20258,6 +20371,8 @@
           "fps": 10,
           "start_scale_milli": 720,
           "end_scale_milli": 1080,
+          "start_offset_y_px": 0,
+          "end_offset_y_px": 0,
           "easing_id": "sine_out",
           "ground_anchor": "center_bottom",
           "source_contract": "joeville:introTimeline:WALK_PUSH_MS"
@@ -20855,11 +20970,13 @@
       },
       "transcript": "A micro-project completed! You had a purpose, clear roles, consent, a next action, and a receipt in the ledger. ... That is not just teamwork. That is coordination with handrails. ... You are now a **Collaborative Self**. You have unlocked project charters, role paths, and the ability to make fewer meetings necessary. A rare and noble power.",
       "performance": {
-        "performance_id": "wizard-joe:wj_stage_collab_complete:walk-and-talk:v1",
+        "performance_id": "wizard-joe:wj_stage_collab_complete:walk_toward_camera:v2",
         "approval_state": "candidate_visual_review",
         "runtime_admitted": false,
         "clock": "html_audio_element_current_time",
+        "motion_style": "grounded",
         "approach": {
+          "mode": "walk_toward_camera",
           "start_ms": 0,
           "end_ms": 4200,
           "pose_ids": [
@@ -20871,6 +20988,8 @@
           "fps": 10,
           "start_scale_milli": 720,
           "end_scale_milli": 1080,
+          "start_offset_y_px": 0,
+          "end_offset_y_px": 0,
           "easing_id": "sine_out",
           "ground_anchor": "center_bottom",
           "source_contract": "joeville:introTimeline:WALK_PUSH_MS"
@@ -21583,11 +21702,13 @@
       },
       "transcript": "You know how to complete a task. Now let us make something that keeps helping after the task is over. ... A Generative Self does not merely finish work. A Generative Self leaves behind a guide, a tool, a template, a maintained route, a tested module, a better question, or a small system that makes the next person\u2019s life less annoying.",
       "performance": {
-        "performance_id": "wizard-joe:wj_stage_generative_start:walk-and-talk:v1",
+        "performance_id": "wizard-joe:wj_stage_generative_start:walk_toward_camera:v2",
         "approval_state": "candidate_visual_review",
         "runtime_admitted": false,
         "clock": "html_audio_element_current_time",
+        "motion_style": "grounded",
         "approach": {
+          "mode": "walk_toward_camera",
           "start_ms": 0,
           "end_ms": 4200,
           "pose_ids": [
@@ -21599,6 +21720,8 @@
           "fps": 10,
           "start_scale_milli": 720,
           "end_scale_milli": 1080,
+          "start_offset_y_px": 0,
+          "end_offset_y_px": 0,
           "easing_id": "sine_out",
           "ground_anchor": "center_bottom",
           "source_contract": "joeville:introTimeline:WALK_PUSH_MS"
@@ -22219,11 +22342,13 @@
       },
       "transcript": "Your project became an asset. Look at it go, helping people while you are not even currently touching it. ... That is how freedom begins: not by working forever, but by building things that are useful after you leave. ... You are now a **Generative Self**. You have unlocked stewardship, automation, cross-world travel, and tasteful forms of delegation.",
       "performance": {
-        "performance_id": "wizard-joe:wj_stage_generative_complete:walk-and-talk:v1",
+        "performance_id": "wizard-joe:wj_stage_generative_complete:walk_toward_camera:v2",
         "approval_state": "candidate_visual_review",
         "runtime_admitted": false,
         "clock": "html_audio_element_current_time",
+        "motion_style": "grounded",
         "approach": {
+          "mode": "walk_toward_camera",
           "start_ms": 0,
           "end_ms": 4200,
           "pose_ids": [
@@ -22235,6 +22360,8 @@
           "fps": 10,
           "start_scale_milli": 720,
           "end_scale_milli": 1080,
+          "start_offset_y_px": 0,
+          "end_offset_y_px": 0,
           "easing_id": "sine_out",
           "ground_anchor": "center_bottom",
           "source_contract": "joeville:introTimeline:WALK_PUSH_MS"
@@ -22942,11 +23069,13 @@
       },
       "transcript": "Your Freedom Ledger is approaching Enoughness. This is a very big moment, so naturally I have prepared a medium-sized speech. ... The point is not that you have won more than anyone else. The point is that your useful assets, healthy systems, and trustworthy collaborations now cover your fictional upkeep without asking you to overwork, over-contact, or exploit anybody.",
       "performance": {
-        "performance_id": "wizard-joe:wj_stage_enlightened_start:walk-and-talk:v1",
+        "performance_id": "wizard-joe:wj_stage_enlightened_start:walk_toward_camera:v2",
         "approval_state": "candidate_visual_review",
         "runtime_admitted": false,
         "clock": "html_audio_element_current_time",
+        "motion_style": "grounded",
         "approach": {
+          "mode": "walk_toward_camera",
           "start_ms": 0,
           "end_ms": 4200,
           "pose_ids": [
@@ -22958,6 +23087,8 @@
           "fps": 10,
           "start_scale_milli": 720,
           "end_scale_milli": 1080,
+          "start_offset_y_px": 0,
+          "end_offset_y_px": 0,
           "easing_id": "sine_out",
           "ground_anchor": "center_bottom",
           "source_contract": "joeville:introTimeline:WALK_PUSH_MS"
@@ -23690,11 +23821,13 @@
       },
       "transcript": "Well, look at you. ... You have enough. Enough clarity. Enough craft. Enough trustworthy systems. Enough protected time. Enough room to choose. ... Your upkeep is covered by the good things you built. You are an **Enlightened Self**. ... You do not have to grind anymore. ... So\u2026 what do you want to do now? ... You can mentor a new self. Improve a commons. Explore a strange place. Make a small beautiful thing. Rest. Begin another project only if it is actually yours to begin. ... No fireworks are required. Although I have fireworks. They are extremely optional and moderately unionized.",
       "performance": {
-        "performance_id": "wizard-joe:wj_stage_enlightened_complete:walk-and-talk:v1",
+        "performance_id": "wizard-joe:wj_stage_enlightened_complete:walk_toward_camera:v2",
         "approval_state": "candidate_visual_review",
         "runtime_admitted": false,
         "clock": "html_audio_element_current_time",
+        "motion_style": "grounded",
         "approach": {
+          "mode": "walk_toward_camera",
           "start_ms": 0,
           "end_ms": 4200,
           "pose_ids": [
@@ -23706,6 +23839,8 @@
           "fps": 10,
           "start_scale_milli": 720,
           "end_scale_milli": 1080,
+          "start_offset_y_px": 0,
+          "end_offset_y_px": 0,
           "easing_id": "sine_out",
           "ground_anchor": "center_bottom",
           "source_contract": "joeville:introTimeline:WALK_PUSH_MS"
@@ -24903,11 +25038,13 @@
       },
       "transcript": "A project! A group of selves deciding to care about the same thing at the same time. ... The charter tells you what they are doing, why it matters, who owns which part, what the next action is, and\u2014most importantly\u2014when the project plans to stop. ... A project without an ending is not a project. It is a haunted hallway.",
       "performance": {
-        "performance_id": "wizard-joe:wj_project_001:walk-and-talk:v1",
+        "performance_id": "wizard-joe:wj_project_001:walk_toward_camera:v2",
         "approval_state": "candidate_visual_review",
         "runtime_admitted": false,
         "clock": "html_audio_element_current_time",
+        "motion_style": "grounded",
         "approach": {
+          "mode": "walk_toward_camera",
           "start_ms": 0,
           "end_ms": 4200,
           "pose_ids": [
@@ -24919,6 +25056,8 @@
           "fps": 10,
           "start_scale_milli": 720,
           "end_scale_milli": 1080,
+          "start_offset_y_px": 0,
+          "end_offset_y_px": 0,
           "easing_id": "sine_out",
           "ground_anchor": "center_bottom",
           "source_contract": "joeville:introTimeline:WALK_PUSH_MS"
@@ -25577,11 +25716,13 @@
       },
       "transcript": "Before you join, choose a scope that fits. ... A tiny promise you can keep is more useful than a heroic promise that causes you to evaporate halfway through.",
       "performance": {
-        "performance_id": "wizard-joe:wj_project_002:walk-and-talk:v1",
+        "performance_id": "wizard-joe:wj_project_002:walk_toward_camera:v2",
         "approval_state": "candidate_visual_review",
         "runtime_admitted": false,
         "clock": "html_audio_element_current_time",
+        "motion_style": "grounded",
         "approach": {
+          "mode": "walk_toward_camera",
           "start_ms": 0,
           "end_ms": 4200,
           "pose_ids": [
@@ -25593,6 +25734,8 @@
           "fps": 10,
           "start_scale_milli": 720,
           "end_scale_milli": 1080,
+          "start_offset_y_px": 0,
+          "end_offset_y_px": 0,
           "easing_id": "sine_out",
           "ground_anchor": "center_bottom",
           "source_contract": "joeville:introTimeline:WALK_PUSH_MS"
@@ -25889,11 +26032,13 @@
       },
       "transcript": "You took a role. That is a promise with a shape. ... It is much better than a vague intention with a panic attack attached to it.",
       "performance": {
-        "performance_id": "wizard-joe:wj_project_003:walk-and-talk:v1",
+        "performance_id": "wizard-joe:wj_project_003:walk_toward_camera:v2",
         "approval_state": "candidate_visual_review",
         "runtime_admitted": false,
         "clock": "html_audio_element_current_time",
+        "motion_style": "grounded",
         "approach": {
+          "mode": "walk_toward_camera",
           "start_ms": 0,
           "end_ms": 4200,
           "pose_ids": [
@@ -25905,6 +26050,8 @@
           "fps": 10,
           "start_scale_milli": 720,
           "end_scale_milli": 1080,
+          "start_offset_y_px": 0,
+          "end_offset_y_px": 0,
           "easing_id": "sine_out",
           "ground_anchor": "center_bottom",
           "source_contract": "joeville:introTimeline:WALK_PUSH_MS"
@@ -26238,11 +26385,13 @@
       },
       "transcript": "See these lines? That is the task graph. ... It shows what has to happen first, what can happen in parallel, and which tiny knot needs someone to make a decision. Unlike a meeting, it does not keep talking after you understand it.",
       "performance": {
-        "performance_id": "wizard-joe:wj_project_004:walk-and-talk:v1",
+        "performance_id": "wizard-joe:wj_project_004:walk_toward_camera:v2",
         "approval_state": "candidate_visual_review",
         "runtime_admitted": false,
         "clock": "html_audio_element_current_time",
+        "motion_style": "grounded",
         "approach": {
+          "mode": "walk_toward_camera",
           "start_ms": 0,
           "end_ms": 4200,
           "pose_ids": [
@@ -26254,6 +26403,8 @@
           "fps": 10,
           "start_scale_milli": 720,
           "end_scale_milli": 1080,
+          "start_offset_y_px": 0,
+          "end_offset_y_px": 0,
           "easing_id": "sine_out",
           "ground_anchor": "center_bottom",
           "source_contract": "joeville:introTimeline:WALK_PUSH_MS"
@@ -26745,11 +26896,13 @@
       },
       "transcript": "Consent receipt recorded. Everyone knows the purpose, role, scope, and boundaries of this collaboration. ... Nothing mystical. Just clear. Clarity is a form of care with a clipboard.",
       "performance": {
-        "performance_id": "wizard-joe:wj_project_005:walk-and-talk:v1",
+        "performance_id": "wizard-joe:wj_project_005:walk_toward_camera:v2",
         "approval_state": "candidate_visual_review",
         "runtime_admitted": false,
         "clock": "html_audio_element_current_time",
+        "motion_style": "grounded",
         "approach": {
+          "mode": "walk_toward_camera",
           "start_ms": 0,
           "end_ms": 4200,
           "pose_ids": [
@@ -26761,6 +26914,8 @@
           "fps": 10,
           "start_scale_milli": 720,
           "end_scale_milli": 1080,
+          "start_offset_y_px": 0,
+          "end_offset_y_px": 0,
           "easing_id": "sine_out",
           "ground_anchor": "center_bottom",
           "source_contract": "joeville:introTimeline:WALK_PUSH_MS"
@@ -27149,11 +27304,13 @@
       },
       "transcript": "Okay, that got a little messy. It happens. Coordination is hard. ... Nobody failed at being a person. Let us check the charter, shrink the scope, clarify the next action, and try again.",
       "performance": {
-        "performance_id": "wizard-joe:wj_project_006:walk-and-talk:v1",
+        "performance_id": "wizard-joe:wj_project_006:walk_toward_camera:v2",
         "approval_state": "candidate_visual_review",
         "runtime_admitted": false,
         "clock": "html_audio_element_current_time",
+        "motion_style": "grounded",
         "approach": {
+          "mode": "walk_toward_camera",
           "start_ms": 0,
           "end_ms": 4200,
           "pose_ids": [
@@ -27165,6 +27322,8 @@
           "fps": 10,
           "start_scale_milli": 720,
           "end_scale_milli": 1080,
+          "start_offset_y_px": 0,
+          "end_offset_y_px": 0,
           "easing_id": "sine_out",
           "ground_anchor": "center_bottom",
           "source_contract": "joeville:introTimeline:WALK_PUSH_MS"
@@ -27632,11 +27791,13 @@
       },
       "transcript": "Contribution complete. You did the thing you said you would do, and now the next person can see what happened. ... This is how trust becomes a useful signal instead of a mood.",
       "performance": {
-        "performance_id": "wizard-joe:wj_project_007:walk-and-talk:v1",
+        "performance_id": "wizard-joe:wj_project_007:walk_toward_camera:v2",
         "approval_state": "candidate_visual_review",
         "runtime_admitted": false,
         "clock": "html_audio_element_current_time",
+        "motion_style": "grounded",
         "approach": {
+          "mode": "walk_toward_camera",
           "start_ms": 0,
           "end_ms": 4200,
           "pose_ids": [
@@ -27648,6 +27809,8 @@
           "fps": 10,
           "start_scale_milli": 720,
           "end_scale_milli": 1080,
+          "start_offset_y_px": 0,
+          "end_offset_y_px": 0,
           "easing_id": "sine_out",
           "ground_anchor": "center_bottom",
           "source_contract": "joeville:introTimeline:WALK_PUSH_MS"
@@ -27972,11 +28135,13 @@
       },
       "transcript": "Scope changed. Good call. ... Renegotiating before a promise breaks is not failure. It is maintenance. Even bridges have maintenance. Especially bridges made of pull requests.",
       "performance": {
-        "performance_id": "wizard-joe:wj_project_008:walk-and-talk:v1",
+        "performance_id": "wizard-joe:wj_project_008:walk_toward_camera:v2",
         "approval_state": "candidate_visual_review",
         "runtime_admitted": false,
         "clock": "html_audio_element_current_time",
+        "motion_style": "grounded",
         "approach": {
+          "mode": "walk_toward_camera",
           "start_ms": 0,
           "end_ms": 4200,
           "pose_ids": [
@@ -27988,6 +28153,8 @@
           "fps": 10,
           "start_scale_milli": 720,
           "end_scale_milli": 1080,
+          "start_offset_y_px": 0,
+          "end_offset_y_px": 0,
           "easing_id": "sine_out",
           "ground_anchor": "center_bottom",
           "source_contract": "joeville:introTimeline:WALK_PUSH_MS"
@@ -28473,11 +28640,13 @@
       },
       "transcript": "A clean exit! You updated the ledger, passed along what matters, and walked out the front door instead of ghosting. ... That is high-level wizardry right there.",
       "performance": {
-        "performance_id": "wizard-joe:wj_project_009:walk-and-talk:v1",
+        "performance_id": "wizard-joe:wj_project_009:walk_toward_camera:v2",
         "approval_state": "candidate_visual_review",
         "runtime_admitted": false,
         "clock": "html_audio_element_current_time",
+        "motion_style": "grounded",
         "approach": {
+          "mode": "walk_toward_camera",
           "start_ms": 0,
           "end_ms": 4200,
           "pose_ids": [
@@ -28489,6 +28658,8 @@
           "fps": 10,
           "start_scale_milli": 720,
           "end_scale_milli": 1080,
+          "start_offset_y_px": 0,
+          "end_offset_y_px": 0,
           "easing_id": "sine_out",
           "ground_anchor": "center_bottom",
           "source_contract": "joeville:introTimeline:WALK_PUSH_MS"
@@ -28819,11 +28990,13 @@
       },
       "transcript": "Ah, you are summoning one of the little pixel-wizards. My digital cousins! ... They are excellent at summarizing, sorting, drafting, comparing, and making a list so neat it makes you want to sit up straighter. ... They are terrible at deciding what matters. You do the deciding. Let them do the typing.",
       "performance": {
-        "performance_id": "wizard-joe:wj_ai_001:walk-and-talk:v1",
+        "performance_id": "wizard-joe:wj_ai_001:walk_toward_camera:v2",
         "approval_state": "candidate_visual_review",
         "runtime_admitted": false,
         "clock": "html_audio_element_current_time",
+        "motion_style": "grounded",
         "approach": {
+          "mode": "walk_toward_camera",
           "start_ms": 0,
           "end_ms": 4200,
           "pose_ids": [
@@ -28835,6 +29008,8 @@
           "fps": 10,
           "start_scale_milli": 720,
           "end_scale_milli": 1080,
+          "start_offset_y_px": 0,
+          "end_offset_y_px": 0,
           "easing_id": "sine_out",
           "ground_anchor": "center_bottom",
           "source_contract": "joeville:introTimeline:WALK_PUSH_MS"
@@ -29464,11 +29639,13 @@
       },
       "transcript": "The little wizard can compare these sources, show you where they agree, and wave politely at the parts that disagree. ... It cannot declare reality finished. That is your job, with evidence, humility, and perhaps a snack.",
       "performance": {
-        "performance_id": "wizard-joe:wj_ai_002:walk-and-talk:v1",
+        "performance_id": "wizard-joe:wj_ai_002:walk_toward_camera:v2",
         "approval_state": "candidate_visual_review",
         "runtime_admitted": false,
         "clock": "html_audio_element_current_time",
+        "motion_style": "grounded",
         "approach": {
+          "mode": "walk_toward_camera",
           "start_ms": 0,
           "end_ms": 4200,
           "pose_ids": [
@@ -29480,6 +29657,8 @@
           "fps": 10,
           "start_scale_milli": 720,
           "end_scale_milli": 1080,
+          "start_offset_y_px": 0,
+          "end_offset_y_px": 0,
           "easing_id": "sine_out",
           "ground_anchor": "center_bottom",
           "source_contract": "joeville:introTimeline:WALK_PUSH_MS"
@@ -29886,11 +30065,13 @@
       },
       "transcript": "Draft generated. Remember: a draft is a pile of possible words wearing a temporary hat. ... Read it. Change it. Keep only what you endorse. The little wizard does not get to put thoughts in your mouth.",
       "performance": {
-        "performance_id": "wizard-joe:wj_ai_003:walk-and-talk:v1",
+        "performance_id": "wizard-joe:wj_ai_003:walk_toward_camera:v2",
         "approval_state": "candidate_visual_review",
         "runtime_admitted": false,
         "clock": "html_audio_element_current_time",
+        "motion_style": "grounded",
         "approach": {
+          "mode": "walk_toward_camera",
           "start_ms": 0,
           "end_ms": 4200,
           "pose_ids": [
@@ -29902,6 +30083,8 @@
           "fps": 10,
           "start_scale_milli": 720,
           "end_scale_milli": 1080,
+          "start_offset_y_px": 0,
+          "end_offset_y_px": 0,
           "easing_id": "sine_out",
           "ground_anchor": "center_bottom",
           "source_contract": "joeville:introTimeline:WALK_PUSH_MS"
@@ -30384,11 +30567,13 @@
       },
       "transcript": "Small governance note: helpers can assist. Helpers cannot consent for you, vote for you, admit people, ban people, or decide what is true. ... If it is a human decision, keep a human hand on the staff.",
       "performance": {
-        "performance_id": "wizard-joe:wj_ai_004:walk-and-talk:v1",
+        "performance_id": "wizard-joe:wj_ai_004:walk_toward_camera:v2",
         "approval_state": "candidate_visual_review",
         "runtime_admitted": false,
         "clock": "html_audio_element_current_time",
+        "motion_style": "grounded",
         "approach": {
+          "mode": "walk_toward_camera",
           "start_ms": 0,
           "end_ms": 4200,
           "pose_ids": [
@@ -30400,6 +30585,8 @@
           "fps": 10,
           "start_scale_milli": 720,
           "end_scale_milli": 1080,
+          "start_offset_y_px": 0,
+          "end_offset_y_px": 0,
           "easing_id": "sine_out",
           "ground_anchor": "center_bottom",
           "source_contract": "joeville:introTimeline:WALK_PUSH_MS"
@@ -30843,11 +31030,13 @@
       },
       "transcript": "The **Freedom Ledger**. This is where we track Enoughness. ... It measures the useful things you have built, the systems that run without you, the support you can rely on, and the time that is genuinely yours. ... It does not measure how many gold coins you have hoarded in a digital mattress. The mattress knows what it did.",
       "performance": {
-        "performance_id": "wizard-joe:wj_ledger_001:walk-and-talk:v1",
+        "performance_id": "wizard-joe:wj_ledger_001:walk_toward_camera:v2",
         "approval_state": "candidate_visual_review",
         "runtime_admitted": false,
         "clock": "html_audio_element_current_time",
+        "motion_style": "grounded",
         "approach": {
+          "mode": "walk_toward_camera",
           "start_ms": 0,
           "end_ms": 4200,
           "pose_ids": [
@@ -30859,6 +31048,8 @@
           "fps": 10,
           "start_scale_milli": 720,
           "end_scale_milli": 1080,
+          "start_offset_y_px": 0,
+          "end_offset_y_px": 0,
           "easing_id": "sine_out",
           "ground_anchor": "center_bottom",
           "source_contract": "joeville:introTimeline:WALK_PUSH_MS"
@@ -31556,11 +31747,13 @@
       },
       "transcript": "You built an asset: a guide, a template, a tool, a route, a module, or a small machine for making the next good action easier. ... It keeps helping after you are done touching it. That is how you buy back your time in here.",
       "performance": {
-        "performance_id": "wizard-joe:wj_ledger_002:walk-and-talk:v1",
+        "performance_id": "wizard-joe:wj_ledger_002:walk_toward_camera:v2",
         "approval_state": "candidate_visual_review",
         "runtime_admitted": false,
         "clock": "html_audio_element_current_time",
+        "motion_style": "grounded",
         "approach": {
+          "mode": "walk_toward_camera",
           "start_ms": 0,
           "end_ms": 4200,
           "pose_ids": [
@@ -31572,6 +31765,8 @@
           "fps": 10,
           "start_scale_milli": 720,
           "end_scale_milli": 1080,
+          "start_offset_y_px": 0,
+          "end_offset_y_px": 0,
           "easing_id": "sine_out",
           "ground_anchor": "center_bottom",
           "source_contract": "joeville:introTimeline:WALK_PUSH_MS"
@@ -32038,11 +32233,13 @@
       },
       "transcript": "System improved. Fewer people will have to remember the same thing individually. The future has received a tiny gift basket.",
       "performance": {
-        "performance_id": "wizard-joe:wj_ledger_003:walk-and-talk:v1",
+        "performance_id": "wizard-joe:wj_ledger_003:walk_toward_camera:v2",
         "approval_state": "candidate_visual_review",
         "runtime_admitted": false,
         "clock": "html_audio_element_current_time",
+        "motion_style": "grounded",
         "approach": {
+          "mode": "walk_toward_camera",
           "start_ms": 0,
           "end_ms": 4200,
           "pose_ids": [
@@ -32054,6 +32251,8 @@
           "fps": 10,
           "start_scale_milli": 720,
           "end_scale_milli": 1080,
+          "start_offset_y_px": 0,
+          "end_offset_y_px": 0,
           "easing_id": "sine_out",
           "ground_anchor": "center_bottom",
           "source_contract": "joeville:introTimeline:WALK_PUSH_MS"
@@ -32332,11 +32531,13 @@
       },
       "transcript": "Commons dividend received. This project became more useful because people maintained it together. ... No one got magically replaced. No one got squeezed. The value stayed shared. That is the good stuff.",
       "performance": {
-        "performance_id": "wizard-joe:wj_ledger_004:walk-and-talk:v1",
+        "performance_id": "wizard-joe:wj_ledger_004:walk_toward_camera:v2",
         "approval_state": "candidate_visual_review",
         "runtime_admitted": false,
         "clock": "html_audio_element_current_time",
+        "motion_style": "grounded",
         "approach": {
+          "mode": "walk_toward_camera",
           "start_ms": 0,
           "end_ms": 4200,
           "pose_ids": [
@@ -32348,6 +32549,8 @@
           "fps": 10,
           "start_scale_milli": 720,
           "end_scale_milli": 1080,
+          "start_offset_y_px": 0,
+          "end_offset_y_px": 0,
           "easing_id": "sine_out",
           "ground_anchor": "center_bottom",
           "source_contract": "joeville:introTimeline:WALK_PUSH_MS"
@@ -32728,11 +32931,13 @@
       },
       "transcript": "Personal runway increased. Your routine upkeep asks less of you now. ... You have made a little more room to choose. Please resist the urge to immediately fill it with twelve new obligations.",
       "performance": {
-        "performance_id": "wizard-joe:wj_ledger_005:walk-and-talk:v1",
+        "performance_id": "wizard-joe:wj_ledger_005:walk_toward_camera:v2",
         "approval_state": "candidate_visual_review",
         "runtime_admitted": false,
         "clock": "html_audio_element_current_time",
+        "motion_style": "grounded",
         "approach": {
+          "mode": "walk_toward_camera",
           "start_ms": 0,
           "end_ms": 4200,
           "pose_ids": [
@@ -32744,6 +32949,8 @@
           "fps": 10,
           "start_scale_milli": 720,
           "end_scale_milli": 1080,
+          "start_offset_y_px": 0,
+          "end_offset_y_px": 0,
           "easing_id": "sine_out",
           "ground_anchor": "center_bottom",
           "source_contract": "joeville:introTimeline:WALK_PUSH_MS"
@@ -33201,11 +33408,13 @@
       },
       "transcript": "A section of the map is arguing with itself. Very relatable. ... Find the three claims, follow their source trails, and decide which one is Real, which one is Story, and which one is still Provisional. ... You are not being asked to solve the universe. You are being asked to label the uncertainty honestly. That is much more powerful than it sounds.",
       "performance": {
-        "performance_id": "wizard-joe:wj_quest_map_001:walk-and-talk:v1",
+        "performance_id": "wizard-joe:wj_quest_map_001:walk_toward_camera:v2",
         "approval_state": "candidate_visual_review",
         "runtime_admitted": false,
         "clock": "html_audio_element_current_time",
+        "motion_style": "grounded",
         "approach": {
+          "mode": "walk_toward_camera",
           "start_ms": 0,
           "end_ms": 4200,
           "pose_ids": [
@@ -33217,6 +33426,8 @@
           "fps": 10,
           "start_scale_milli": 720,
           "end_scale_milli": 1080,
+          "start_offset_y_px": 0,
+          "end_offset_y_px": 0,
           "easing_id": "sine_out",
           "ground_anchor": "center_bottom",
           "source_contract": "joeville:introTimeline:WALK_PUSH_MS"
@@ -33840,11 +34051,13 @@
       },
       "transcript": "You made the map more honest. That is an underrated kind of treasure. ... A good map does not pretend there is no fog. It marks the fog, gives you a lantern, and leaves room for someone to come back with better information.",
       "performance": {
-        "performance_id": "wizard-joe:wj_quest_map_002:walk-and-talk:v1",
+        "performance_id": "wizard-joe:wj_quest_map_002:walk_toward_camera:v2",
         "approval_state": "candidate_visual_review",
         "runtime_admitted": false,
         "clock": "html_audio_element_current_time",
+        "motion_style": "grounded",
         "approach": {
+          "mode": "walk_toward_camera",
           "start_ms": 0,
           "end_ms": 4200,
           "pose_ids": [
@@ -33856,6 +34069,8 @@
           "fps": 10,
           "start_scale_milli": 720,
           "end_scale_milli": 1080,
+          "start_offset_y_px": 0,
+          "end_offset_y_px": 0,
           "easing_id": "sine_out",
           "ground_anchor": "center_bottom",
           "source_contract": "joeville:introTimeline:WALK_PUSH_MS"
@@ -34411,11 +34626,13 @@
       },
       "transcript": "A small project needs one more person. Not a savior. Not a visionary who refuses to check the calendar. Just one person willing to make a promise that fits. ... Read the charter. Pick a role. Choose your capacity. You may leave at any time, provided you say so clearly. The door works both ways.",
       "performance": {
-        "performance_id": "wizard-joe:wj_quest_promise_001:walk-and-talk:v1",
+        "performance_id": "wizard-joe:wj_quest_promise_001:walk_toward_camera:v2",
         "approval_state": "candidate_visual_review",
         "runtime_admitted": false,
         "clock": "html_audio_element_current_time",
+        "motion_style": "grounded",
         "approach": {
+          "mode": "walk_toward_camera",
           "start_ms": 0,
           "end_ms": 4200,
           "pose_ids": [
@@ -34427,6 +34644,8 @@
           "fps": 10,
           "start_scale_milli": 720,
           "end_scale_milli": 1080,
+          "start_offset_y_px": 0,
+          "end_offset_y_px": 0,
           "easing_id": "sine_out",
           "ground_anchor": "center_bottom",
           "source_contract": "joeville:introTimeline:WALK_PUSH_MS"
@@ -35024,11 +35243,13 @@
       },
       "transcript": "You made a promise, kept it, and left a clear record. Congratulations. You have done something rarer than dragons: you have reduced ambiguity.",
       "performance": {
-        "performance_id": "wizard-joe:wj_quest_promise_002:walk-and-talk:v1",
+        "performance_id": "wizard-joe:wj_quest_promise_002:walk_toward_camera:v2",
         "approval_state": "candidate_visual_review",
         "runtime_admitted": false,
         "clock": "html_audio_element_current_time",
+        "motion_style": "grounded",
         "approach": {
+          "mode": "walk_toward_camera",
           "start_ms": 0,
           "end_ms": 4200,
           "pose_ids": [
@@ -35040,6 +35261,8 @@
           "fps": 10,
           "start_scale_milli": 720,
           "end_scale_milli": 1080,
+          "start_offset_y_px": 0,
+          "end_offset_y_px": 0,
           "easing_id": "sine_out",
           "ground_anchor": "center_bottom",
           "source_contract": "joeville:introTimeline:WALK_PUSH_MS"
@@ -35424,11 +35647,13 @@
       },
       "transcript": "You solved the problem once. Now let us prevent the next person from having to solve it from scratch while squinting at an old spreadsheet. ... Turn the work into something reusable: a template, guide, checklist, map, tool, ritual, or remarkably clear explanation.",
       "performance": {
-        "performance_id": "wizard-joe:wj_quest_asset_001:walk-and-talk:v1",
+        "performance_id": "wizard-joe:wj_quest_asset_001:walk_toward_camera:v2",
         "approval_state": "candidate_visual_review",
         "runtime_admitted": false,
         "clock": "html_audio_element_current_time",
+        "motion_style": "grounded",
         "approach": {
+          "mode": "walk_toward_camera",
           "start_ms": 0,
           "end_ms": 4200,
           "pose_ids": [
@@ -35440,6 +35665,8 @@
           "fps": 10,
           "start_scale_milli": 720,
           "end_scale_milli": 1080,
+          "start_offset_y_px": 0,
+          "end_offset_y_px": 0,
           "easing_id": "sine_out",
           "ground_anchor": "center_bottom",
           "source_contract": "joeville:introTimeline:WALK_PUSH_MS"
@@ -35939,11 +36166,13 @@
       },
       "transcript": "There it is. An asset. ... It will keep helping even when you are elsewhere, eating snacks, staring at clouds, or pursuing whatever strange calling brought you into the hypercube in the first place.",
       "performance": {
-        "performance_id": "wizard-joe:wj_quest_asset_002:walk-and-talk:v1",
+        "performance_id": "wizard-joe:wj_quest_asset_002:walk_toward_camera:v2",
         "approval_state": "candidate_visual_review",
         "runtime_admitted": false,
         "clock": "html_audio_element_current_time",
+        "motion_style": "grounded",
         "approach": {
+          "mode": "walk_toward_camera",
           "start_ms": 0,
           "end_ms": 4200,
           "pose_ids": [
@@ -35955,6 +36184,8 @@
           "fps": 10,
           "start_scale_milli": 720,
           "end_scale_milli": 1080,
+          "start_offset_y_px": 0,
+          "end_offset_y_px": 0,
           "easing_id": "sine_out",
           "ground_anchor": "center_bottom",
           "source_contract": "joeville:introTimeline:WALK_PUSH_MS"
@@ -36367,11 +36598,13 @@
       },
       "transcript": "A commons is something useful that belongs to the people who keep it useful. ... Your group is not here to own everything. You are here to make one shared thing easier to care for. Decide the stewardship rhythm, the maintenance roles, and the rule for asking for help.",
       "performance": {
-        "performance_id": "wizard-joe:wj_quest_commons_001:walk-and-talk:v1",
+        "performance_id": "wizard-joe:wj_quest_commons_001:walk_toward_camera:v2",
         "approval_state": "candidate_visual_review",
         "runtime_admitted": false,
         "clock": "html_audio_element_current_time",
+        "motion_style": "grounded",
         "approach": {
+          "mode": "walk_toward_camera",
           "start_ms": 0,
           "end_ms": 4200,
           "pose_ids": [
@@ -36383,6 +36616,8 @@
           "fps": 10,
           "start_scale_milli": 720,
           "end_scale_milli": 1080,
+          "start_offset_y_px": 0,
+          "end_offset_y_px": 0,
           "easing_id": "sine_out",
           "ground_anchor": "center_bottom",
           "source_contract": "joeville:introTimeline:WALK_PUSH_MS"
@@ -36974,11 +37209,13 @@
       },
       "transcript": "The commons is alive. Not literally. Do not feed it after midnight. ... It has a stewarding rhythm, a clear purpose, and a way for new people to understand how to help. That is durable value without the villain monologue.",
       "performance": {
-        "performance_id": "wizard-joe:wj_quest_commons_002:walk-and-talk:v1",
+        "performance_id": "wizard-joe:wj_quest_commons_002:walk_toward_camera:v2",
         "approval_state": "candidate_visual_review",
         "runtime_admitted": false,
         "clock": "html_audio_element_current_time",
+        "motion_style": "grounded",
         "approach": {
+          "mode": "walk_toward_camera",
           "start_ms": 0,
           "end_ms": 4200,
           "pose_ids": [
@@ -36990,6 +37227,8 @@
           "fps": 10,
           "start_scale_milli": 720,
           "end_scale_milli": 1080,
+          "start_offset_y_px": 0,
+          "end_offset_y_px": 0,
           "easing_id": "sine_out",
           "ground_anchor": "center_bottom",
           "source_contract": "joeville:introTimeline:WALK_PUSH_MS"
@@ -37546,11 +37785,13 @@
       },
       "transcript": "You have become an Enlightened Self, which means you now have a new optional quest: be the kind of guide you needed when you arrived. ... You do not need to lecture anybody. You do not need to become a glowing authority figure with a complicated chair. ... You can point to a door. You can share a tool. You can make a small thing legible. You can help another self choose a promise that fits. ... That is enough. More than enough, actually. It is very good.",
       "performance": {
-        "performance_id": "wizard-joe:wj_mentor_001:walk-and-talk:v1",
+        "performance_id": "wizard-joe:wj_mentor_001:walk_toward_camera:v2",
         "approval_state": "candidate_visual_review",
         "runtime_admitted": false,
         "clock": "html_audio_element_current_time",
+        "motion_style": "grounded",
         "approach": {
+          "mode": "walk_toward_camera",
           "start_ms": 0,
           "end_ms": 4200,
           "pose_ids": [
@@ -37562,6 +37803,8 @@
           "fps": 10,
           "start_scale_milli": 720,
           "end_scale_milli": 1080,
+          "start_offset_y_px": 0,
+          "end_offset_y_px": 0,
           "easing_id": "sine_out",
           "ground_anchor": "center_bottom",
           "source_contract": "joeville:introTimeline:WALK_PUSH_MS"
@@ -38459,11 +38702,13 @@
       },
       "transcript": "Welcome back, Self. ... The world is still here. The questions are still questions. Your boundaries still count. The things you made are still helping. ... What would you like to make a little more clear today?",
       "performance": {
-        "performance_id": "wizard-joe:wj_return_001:walk-and-talk:v1",
+        "performance_id": "wizard-joe:wj_return_001:walk_toward_camera:v2",
         "approval_state": "candidate_visual_review",
         "runtime_admitted": false,
         "clock": "html_audio_element_current_time",
+        "motion_style": "grounded",
         "approach": {
+          "mode": "walk_toward_camera",
           "start_ms": 0,
           "end_ms": 4200,
           "pose_ids": [
@@ -38475,6 +38720,8 @@
           "fps": 10,
           "start_scale_milli": 720,
           "end_scale_milli": 1080,
+          "start_offset_y_px": 0,
+          "end_offset_y_px": 0,
           "easing_id": "sine_out",
           "ground_anchor": "center_bottom",
           "source_contract": "joeville:introTimeline:WALK_PUSH_MS"
@@ -39091,11 +39338,13 @@
       },
       "transcript": "Great question. In here, every place tells you what kind of thing it is. Real things point you to sources. Story things are honest about being story. Uncertain things wear a little question mark and do not pretend to be finished. We label the world because being confused is hard enough without the interface gaslighting you.",
       "performance": {
-        "performance_id": "wizard-joe:wj_first_question_real:walk-and-talk:v1",
+        "performance_id": "wizard-joe:wj_first_question_real:walk_toward_camera:v2",
         "approval_state": "candidate_visual_review",
         "runtime_admitted": false,
         "clock": "html_audio_element_current_time",
+        "motion_style": "grounded",
         "approach": {
+          "mode": "walk_toward_camera",
           "start_ms": 0,
           "end_ms": 4200,
           "pose_ids": [
@@ -39107,6 +39356,8 @@
           "fps": 10,
           "start_scale_milli": 720,
           "end_scale_milli": 1080,
+          "start_offset_y_px": 0,
+          "end_offset_y_px": 0,
           "easing_id": "sine_out",
           "ground_anchor": "center_bottom",
           "source_contract": "joeville:introTimeline:WALK_PUSH_MS"
@@ -39739,11 +39990,13 @@
       },
       "transcript": "Then you do not have to! This is not an ambush network. You can set yourself to Quiet Explore, Ask First, Open, or No Contact. Your boundary is not a rude button. It is part of how you play well. Nobody gets a bonus for interrupting you while you are having an important tree moment.",
       "performance": {
-        "performance_id": "wizard-joe:wj_first_question_boundary:walk-and-talk:v1",
+        "performance_id": "wizard-joe:wj_first_question_boundary:walk_toward_camera:v2",
         "approval_state": "candidate_visual_review",
         "runtime_admitted": false,
         "clock": "html_audio_element_current_time",
+        "motion_style": "grounded",
         "approach": {
+          "mode": "walk_toward_camera",
           "start_ms": 0,
           "end_ms": 4200,
           "pose_ids": [
@@ -39755,6 +40008,8 @@
           "fps": 10,
           "start_scale_milli": 720,
           "end_scale_milli": 1080,
+          "start_offset_y_px": 0,
+          "end_offset_y_px": 0,
           "easing_id": "sine_out",
           "ground_anchor": "center_bottom",
           "source_contract": "joeville:introTimeline:WALK_PUSH_MS"
@@ -40401,11 +40656,13 @@
       },
       "transcript": "One small useful thing at a time. Learn the map. Protect your attention. Make a promise you can keep. Build something that helps after you leave. Repeat until your life has more freedom in it than scramble. There is no secret shortcut, except perhaps reading the instructions. Horrifying, I know.",
       "performance": {
-        "performance_id": "wizard-joe:wj_first_question_enough:walk-and-talk:v1",
+        "performance_id": "wizard-joe:wj_first_question_enough:walk_toward_camera:v2",
         "approval_state": "candidate_visual_review",
         "runtime_admitted": false,
         "clock": "html_audio_element_current_time",
+        "motion_style": "grounded",
         "approach": {
+          "mode": "walk_toward_camera",
           "start_ms": 0,
           "end_ms": 4200,
           "pose_ids": [
@@ -40417,6 +40674,8 @@
           "fps": 10,
           "start_scale_milli": 720,
           "end_scale_milli": 1080,
+          "start_offset_y_px": 0,
+          "end_offset_y_px": 0,
           "easing_id": "sine_out",
           "ground_anchor": "center_bottom",
           "source_contract": "joeville:introTimeline:WALK_PUSH_MS"
@@ -41026,11 +41285,13 @@
       },
       "transcript": "Define real! I have a hat, wings, a staff, a job description, and a recurring concern about whether this is technically a hallway. I am functionally real enough to deliver a tutorial. The hypercube does the rest.",
       "performance": {
-        "performance_id": "wizard-joe:wj_first_question_joe:walk-and-talk:v1",
+        "performance_id": "wizard-joe:wj_first_question_joe:walk_toward_camera:v2",
         "approval_state": "candidate_visual_review",
         "runtime_admitted": false,
         "clock": "html_audio_element_current_time",
+        "motion_style": "grounded",
         "approach": {
+          "mode": "walk_toward_camera",
           "start_ms": 0,
           "end_ms": 4200,
           "pose_ids": [
@@ -41042,6 +41303,8 @@
           "fps": 10,
           "start_scale_milli": 720,
           "end_scale_milli": 1080,
+          "start_offset_y_px": 0,
+          "end_offset_y_px": 0,
           "easing_id": "sine_out",
           "ground_anchor": "center_bottom",
           "source_contract": "joeville:introTimeline:WALK_PUSH_MS"
@@ -41481,11 +41744,13 @@
       },
       "transcript": "Because something in you noticed that life is more interesting when you can see the systems you are inside of. And because the author needed somebody to test the door. Congratulations: you are now both a person and a quality-assurance event.",
       "performance": {
-        "performance_id": "wizard-joe:wj_first_question_why:walk-and-talk:v1",
+        "performance_id": "wizard-joe:wj_first_question_why:walk_toward_camera:v2",
         "approval_state": "candidate_visual_review",
         "runtime_admitted": false,
         "clock": "html_audio_element_current_time",
+        "motion_style": "grounded",
         "approach": {
+          "mode": "walk_toward_camera",
           "start_ms": 0,
           "end_ms": 4200,
           "pose_ids": [
@@ -41497,6 +41762,8 @@
           "fps": 10,
           "start_scale_milli": 720,
           "end_scale_milli": 1080,
+          "start_offset_y_px": 0,
+          "end_offset_y_px": 0,
           "easing_id": "sine_out",
           "ground_anchor": "center_bottom",
           "source_contract": "joeville:introTimeline:WALK_PUSH_MS"
@@ -42009,11 +42276,13 @@
       },
       "transcript": "Perfectly valid. Readiness is not a toll booth. You can stay in the white room, inspect the controls, or simply be a small glowing question for a while. The door will remain dramatically door-shaped until you are ready.",
       "performance": {
-        "performance_id": "wizard-joe:wj_first_question_not_ready:walk-and-talk:v1",
+        "performance_id": "wizard-joe:wj_first_question_not_ready:walk_toward_camera:v2",
         "approval_state": "candidate_visual_review",
         "runtime_admitted": false,
         "clock": "html_audio_element_current_time",
+        "motion_style": "grounded",
         "approach": {
+          "mode": "walk_toward_camera",
           "start_ms": 0,
           "end_ms": 4200,
           "pose_ids": [
@@ -42025,6 +42294,8 @@
           "fps": 10,
           "start_scale_milli": 720,
           "end_scale_milli": 1080,
+          "start_offset_y_px": 0,
+          "end_offset_y_px": 0,
           "easing_id": "sine_out",
           "ground_anchor": "center_bottom",
           "source_contract": "joeville:introTimeline:WALK_PUSH_MS"
@@ -42498,11 +42769,13 @@
       },
       "transcript": "This is your Compass. It does not point north. North has enough attention. It points toward what you are currently trying to understand, make, or choose.",
       "performance": {
-        "performance_id": "wizard-joe:wj_compass_001:walk-and-talk:v1",
+        "performance_id": "wizard-joe:wj_compass_001:walk_toward_camera:v2",
         "approval_state": "candidate_visual_review",
         "runtime_admitted": false,
         "clock": "html_audio_element_current_time",
+        "motion_style": "grounded",
         "approach": {
+          "mode": "walk_toward_camera",
           "start_ms": 0,
           "end_ms": 4200,
           "pose_ids": [
@@ -42514,6 +42787,8 @@
           "fps": 10,
           "start_scale_milli": 720,
           "end_scale_milli": 1080,
+          "start_offset_y_px": 0,
+          "end_offset_y_px": 0,
           "easing_id": "sine_out",
           "ground_anchor": "center_bottom",
           "source_contract": "joeville:introTimeline:WALK_PUSH_MS"
@@ -42948,11 +43223,13 @@
       },
       "transcript": "Your Clarity Notebook tracks what you know, what you suspect, what you have sourced, and what is still foggy. A foggy map is fine. Pretending a foggy map is clear is how you walk into a swamp wearing confidence.",
       "performance": {
-        "performance_id": "wizard-joe:wj_notebook_001:walk-and-talk:v1",
+        "performance_id": "wizard-joe:wj_notebook_001:walk_toward_camera:v2",
         "approval_state": "candidate_visual_review",
         "runtime_admitted": false,
         "clock": "html_audio_element_current_time",
+        "motion_style": "grounded",
         "approach": {
+          "mode": "walk_toward_camera",
           "start_ms": 0,
           "end_ms": 4200,
           "pose_ids": [
@@ -42964,6 +43241,8 @@
           "fps": 10,
           "start_scale_milli": 720,
           "end_scale_milli": 1080,
+          "start_offset_y_px": 0,
+          "end_offset_y_px": 0,
           "easing_id": "sine_out",
           "ground_anchor": "center_bottom",
           "source_contract": "joeville:introTimeline:WALK_PUSH_MS"
@@ -43425,11 +43704,13 @@
       },
       "transcript": "Beautiful. You marked a question instead of forcing an answer. That is not indecision. That is disciplined curiosity in a tiny digital trench coat.",
       "performance": {
-        "performance_id": "wizard-joe:wj_notebook_question:walk-and-talk:v1",
+        "performance_id": "wizard-joe:wj_notebook_question:walk_toward_camera:v2",
         "approval_state": "candidate_visual_review",
         "runtime_admitted": false,
         "clock": "html_audio_element_current_time",
+        "motion_style": "grounded",
         "approach": {
+          "mode": "walk_toward_camera",
           "start_ms": 0,
           "end_ms": 4200,
           "pose_ids": [
@@ -43441,6 +43722,8 @@
           "fps": 10,
           "start_scale_milli": 720,
           "end_scale_milli": 1080,
+          "start_offset_y_px": 0,
+          "end_offset_y_px": 0,
           "easing_id": "sine_out",
           "ground_anchor": "center_bottom",
           "source_contract": "joeville:introTimeline:WALK_PUSH_MS"
@@ -43793,11 +44076,13 @@
       },
       "transcript": "Source connected. Very nice. You have given this thought a little spine.",
       "performance": {
-        "performance_id": "wizard-joe:wj_notebook_source:walk-and-talk:v1",
+        "performance_id": "wizard-joe:wj_notebook_source:walk_toward_camera:v2",
         "approval_state": "candidate_visual_review",
         "runtime_admitted": false,
         "clock": "html_audio_element_current_time",
+        "motion_style": "grounded",
         "approach": {
+          "mode": "walk_toward_camera",
           "start_ms": 0,
           "end_ms": 4200,
           "pose_ids": [
@@ -43809,6 +44094,8 @@
           "fps": 10,
           "start_scale_milli": 720,
           "end_scale_milli": 1080,
+          "start_offset_y_px": 0,
+          "end_offset_y_px": 0,
           "easing_id": "sine_out",
           "ground_anchor": "center_bottom",
           "source_contract": "joeville:introTimeline:WALK_PUSH_MS"
@@ -44042,11 +44329,13 @@
       },
       "transcript": "Revision! One of the most advanced forms of intelligence. The old conclusion served its time. Now it can go rest in the Museum of What We Thought on Tuesday.",
       "performance": {
-        "performance_id": "wizard-joe:wj_notebook_revise:walk-and-talk:v1",
+        "performance_id": "wizard-joe:wj_notebook_revise:walk_toward_camera:v2",
         "approval_state": "candidate_visual_review",
         "runtime_admitted": false,
         "clock": "html_audio_element_current_time",
+        "motion_style": "grounded",
         "approach": {
+          "mode": "walk_toward_camera",
           "start_ms": 0,
           "end_ms": 4200,
           "pose_ids": [
@@ -44058,6 +44347,8 @@
           "fps": 10,
           "start_scale_milli": 720,
           "end_scale_milli": 1080,
+          "start_offset_y_px": 0,
+          "end_offset_y_px": 0,
           "easing_id": "sine_out",
           "ground_anchor": "center_bottom",
           "source_contract": "joeville:introTimeline:WALK_PUSH_MS"
@@ -44515,11 +44806,13 @@
       },
       "transcript": "Your Clarity just increased. Not because you became certain about everything. Because you became better at telling certainty from a very persuasive shrug.",
       "performance": {
-        "performance_id": "wizard-joe:wj_clarity_milestone:walk-and-talk:v1",
+        "performance_id": "wizard-joe:wj_clarity_milestone:walk_toward_camera:v2",
         "approval_state": "candidate_visual_review",
         "runtime_admitted": false,
         "clock": "html_audio_element_current_time",
+        "motion_style": "grounded",
         "approach": {
+          "mode": "walk_toward_camera",
           "start_ms": 0,
           "end_ms": 4200,
           "pose_ids": [
@@ -44531,6 +44824,8 @@
           "fps": 10,
           "start_scale_milli": 720,
           "end_scale_milli": 1080,
+          "start_offset_y_px": 0,
+          "end_offset_y_px": 0,
           "easing_id": "sine_out",
           "ground_anchor": "center_bottom",
           "source_contract": "joeville:introTimeline:WALK_PUSH_MS"
@@ -44854,11 +45149,13 @@
       },
       "transcript": "Ah, the Boundary Dial. The most powerful magic in the game. It tells the world whether you are currently accepting visitors. You are in charge of the knob. The universe just has to deal with it.",
       "performance": {
-        "performance_id": "wizard-joe:wj_boundary_001:walk-and-talk:v1",
+        "performance_id": "wizard-joe:wj_boundary_001:walk_toward_camera:v2",
         "approval_state": "candidate_visual_review",
         "runtime_admitted": false,
         "clock": "html_audio_element_current_time",
+        "motion_style": "grounded",
         "approach": {
+          "mode": "walk_toward_camera",
           "start_ms": 0,
           "end_ms": 4200,
           "pose_ids": [
@@ -44870,6 +45167,8 @@
           "fps": 10,
           "start_scale_milli": 720,
           "end_scale_milli": 1080,
+          "start_offset_y_px": 0,
+          "end_offset_y_px": 0,
           "easing_id": "sine_out",
           "ground_anchor": "center_bottom",
           "source_contract": "joeville:introTimeline:WALK_PUSH_MS"
@@ -45401,11 +45700,13 @@
       },
       "transcript": "Quiet Explore. Excellent choice. The trees are very good listeners today.",
       "performance": {
-        "performance_id": "wizard-joe:wj_boundary_quiet:walk-and-talk:v1",
+        "performance_id": "wizard-joe:wj_boundary_quiet:walk_toward_camera:v2",
         "approval_state": "candidate_visual_review",
         "runtime_admitted": false,
         "clock": "html_audio_element_current_time",
+        "motion_style": "grounded",
         "approach": {
+          "mode": "walk_toward_camera",
           "start_ms": 0,
           "end_ms": 4200,
           "pose_ids": [
@@ -45417,6 +45718,8 @@
           "fps": 10,
           "start_scale_milli": 720,
           "end_scale_milli": 1080,
+          "start_offset_y_px": 0,
+          "end_offset_y_px": 0,
           "easing_id": "sine_out",
           "ground_anchor": "center_bottom",
           "source_contract": "joeville:introTimeline:WALK_PUSH_MS"
@@ -45697,11 +46000,13 @@
       },
       "transcript": "Ask First. A classic. The social equivalent of knocking instead of teleporting through someone\u2019s wall.",
       "performance": {
-        "performance_id": "wizard-joe:wj_boundary_ask:walk-and-talk:v1",
+        "performance_id": "wizard-joe:wj_boundary_ask:walk_toward_camera:v2",
         "approval_state": "candidate_visual_review",
         "runtime_admitted": false,
         "clock": "html_audio_element_current_time",
+        "motion_style": "grounded",
         "approach": {
+          "mode": "walk_toward_camera",
           "start_ms": 0,
           "end_ms": 4200,
           "pose_ids": [
@@ -45713,6 +46018,8 @@
           "fps": 10,
           "start_scale_milli": 720,
           "end_scale_milli": 1080,
+          "start_offset_y_px": 0,
+          "end_offset_y_px": 0,
           "easing_id": "sine_out",
           "ground_anchor": "center_bottom",
           "source_contract": "joeville:introTimeline:WALK_PUSH_MS"
@@ -45979,11 +46286,13 @@
       },
       "transcript": "Open. You are available for invitations. This is a choice, not a permanent identity, and you can change it whenever you like.",
       "performance": {
-        "performance_id": "wizard-joe:wj_boundary_open:walk-and-talk:v1",
+        "performance_id": "wizard-joe:wj_boundary_open:walk_toward_camera:v2",
         "approval_state": "candidate_visual_review",
         "runtime_admitted": false,
         "clock": "html_audio_element_current_time",
+        "motion_style": "grounded",
         "approach": {
+          "mode": "walk_toward_camera",
           "start_ms": 0,
           "end_ms": 4200,
           "pose_ids": [
@@ -45995,6 +46304,8 @@
           "fps": 10,
           "start_scale_milli": 720,
           "end_scale_milli": 1080,
+          "start_offset_y_px": 0,
+          "end_offset_y_px": 0,
           "easing_id": "sine_out",
           "ground_anchor": "center_bottom",
           "source_contract": "joeville:introTimeline:WALK_PUSH_MS"
@@ -46251,11 +46562,13 @@
       },
       "transcript": "Shields up. You are now unreachable by design. If someone needs you, they can tell it to a rock\u2014or wait until you choose otherwise.",
       "performance": {
-        "performance_id": "wizard-joe:wj_boundary_none:walk-and-talk:v1",
+        "performance_id": "wizard-joe:wj_boundary_none:walk_toward_camera:v2",
         "approval_state": "candidate_visual_review",
         "runtime_admitted": false,
         "clock": "html_audio_element_current_time",
+        "motion_style": "grounded",
         "approach": {
+          "mode": "walk_toward_camera",
           "start_ms": 0,
           "end_ms": 4200,
           "pose_ids": [
@@ -46267,6 +46580,8 @@
           "fps": 10,
           "start_scale_milli": 720,
           "end_scale_milli": 1080,
+          "start_offset_y_px": 0,
+          "end_offset_y_px": 0,
           "easing_id": "sine_out",
           "ground_anchor": "center_bottom",
           "source_contract": "joeville:introTimeline:WALK_PUSH_MS"
@@ -46544,11 +46859,13 @@
       },
       "transcript": "A clean \u2018no\u2019 is a beautiful thing. It saves everyone a messy \u2018maybe.\u2019",
       "performance": {
-        "performance_id": "wizard-joe:wj_boundary_decline:walk-and-talk:v1",
+        "performance_id": "wizard-joe:wj_boundary_decline:walk_toward_camera:v2",
         "approval_state": "candidate_visual_review",
         "runtime_admitted": false,
         "clock": "html_audio_element_current_time",
+        "motion_style": "grounded",
         "approach": {
+          "mode": "walk_toward_camera",
           "start_ms": 0,
           "end_ms": 4200,
           "pose_ids": [
@@ -46560,6 +46877,8 @@
           "fps": 10,
           "start_scale_milli": 720,
           "end_scale_milli": 1080,
+          "start_offset_y_px": 0,
+          "end_offset_y_px": 0,
           "easing_id": "sine_out",
           "ground_anchor": "center_bottom",
           "source_contract": "joeville:introTimeline:WALK_PUSH_MS"
@@ -46749,11 +47068,13 @@
       },
       "transcript": "That invitation has been politely queued. Nothing is urgent merely because it made a little sound.",
       "performance": {
-        "performance_id": "wizard-joe:wj_boundary_queue:walk-and-talk:v1",
+        "performance_id": "wizard-joe:wj_boundary_queue:walk_toward_camera:v2",
         "approval_state": "candidate_visual_review",
         "runtime_admitted": false,
         "clock": "html_audio_element_current_time",
+        "motion_style": "grounded",
         "approach": {
+          "mode": "walk_toward_camera",
           "start_ms": 0,
           "end_ms": 4200,
           "pose_ids": [
@@ -46765,6 +47086,8 @@
           "fps": 10,
           "start_scale_milli": 720,
           "end_scale_milli": 1080,
+          "start_offset_y_px": 0,
+          "end_offset_y_px": 0,
           "easing_id": "sine_out",
           "ground_anchor": "center_bottom",
           "source_contract": "joeville:introTimeline:WALK_PUSH_MS"
@@ -46952,11 +47275,13 @@
       },
       "transcript": "Boundary check. They are not accepting visitors right now. Let us respect the dial and try another door.",
       "performance": {
-        "performance_id": "wizard-joe:wj_boundary_respect:walk-and-talk:v1",
+        "performance_id": "wizard-joe:wj_boundary_respect:walk_toward_camera:v2",
         "approval_state": "candidate_visual_review",
         "runtime_admitted": false,
         "clock": "html_audio_element_current_time",
+        "motion_style": "grounded",
         "approach": {
+          "mode": "walk_toward_camera",
           "start_ms": 0,
           "end_ms": 4200,
           "pose_ids": [
@@ -46968,6 +47293,8 @@
           "fps": 10,
           "start_scale_milli": 720,
           "end_scale_milli": 1080,
+          "start_offset_y_px": 0,
+          "end_offset_y_px": 0,
           "easing_id": "sine_out",
           "ground_anchor": "center_bottom",
           "source_contract": "joeville:introTimeline:WALK_PUSH_MS"
@@ -47251,11 +47578,13 @@
       },
       "transcript": "You left cleanly. No smoke bomb, no mysterious disappearance, no awkward lingering in the doorway. Flawless.",
       "performance": {
-        "performance_id": "wizard-joe:wj_boundary_exit:walk-and-talk:v1",
+        "performance_id": "wizard-joe:wj_boundary_exit:walk_toward_camera:v2",
         "approval_state": "candidate_visual_review",
         "runtime_admitted": false,
         "clock": "html_audio_element_current_time",
+        "motion_style": "grounded",
         "approach": {
+          "mode": "walk_toward_camera",
           "start_ms": 0,
           "end_ms": 4200,
           "pose_ids": [
@@ -47267,6 +47596,8 @@
           "fps": 10,
           "start_scale_milli": 720,
           "end_scale_milli": 1080,
+          "start_offset_y_px": 0,
+          "end_offset_y_px": 0,
           "easing_id": "sine_out",
           "ground_anchor": "center_bottom",
           "source_contract": "joeville:introTimeline:WALK_PUSH_MS"
@@ -47586,11 +47917,13 @@
       },
       "transcript": "Your Focus is getting low. Not broken. Not bad. Just ready for a smaller task, a quiet path, or a deliberate stop.",
       "performance": {
-        "performance_id": "wizard-joe:wj_focus_low:walk-and-talk:v1",
+        "performance_id": "wizard-joe:wj_focus_low:walk_toward_camera:v2",
         "approval_state": "candidate_visual_review",
         "runtime_admitted": false,
         "clock": "html_audio_element_current_time",
+        "motion_style": "grounded",
         "approach": {
+          "mode": "walk_toward_camera",
           "start_ms": 0,
           "end_ms": 4200,
           "pose_ids": [
@@ -47602,6 +47935,8 @@
           "fps": 10,
           "start_scale_milli": 720,
           "end_scale_milli": 1080,
+          "start_offset_y_px": 0,
+          "end_offset_y_px": 0,
           "easing_id": "sine_out",
           "ground_anchor": "center_bottom",
           "source_contract": "joeville:introTimeline:WALK_PUSH_MS"
@@ -47916,11 +48251,13 @@
       },
       "transcript": "Rest selected. Very advanced play. We do not use the word \u2018rest\u2019 enough in games with dragons and spreadsheets.",
       "performance": {
-        "performance_id": "wizard-joe:wj_focus_rest:walk-and-talk:v1",
+        "performance_id": "wizard-joe:wj_focus_rest:walk_toward_camera:v2",
         "approval_state": "candidate_visual_review",
         "runtime_admitted": false,
         "clock": "html_audio_element_current_time",
+        "motion_style": "grounded",
         "approach": {
+          "mode": "walk_toward_camera",
           "start_ms": 0,
           "end_ms": 4200,
           "pose_ids": [
@@ -47932,6 +48269,8 @@
           "fps": 10,
           "start_scale_milli": 720,
           "end_scale_milli": 1080,
+          "start_offset_y_px": 0,
+          "end_offset_y_px": 0,
           "easing_id": "sine_out",
           "ground_anchor": "center_bottom",
           "source_contract": "joeville:introTimeline:WALK_PUSH_MS"
@@ -48189,11 +48528,13 @@
       },
       "transcript": "This is a Reality Bridge. The Shadow is the walkable story-shaped layer. The source trail leads toward real-world information. Enjoy the magic; check the labels; do not confuse the mural for the municipality.",
       "performance": {
-        "performance_id": "wizard-joe:wj_boulder_bridge:walk-and-talk:v1",
+        "performance_id": "wizard-joe:wj_boulder_bridge:walk_toward_camera:v2",
         "approval_state": "candidate_visual_review",
         "runtime_admitted": false,
         "clock": "html_audio_element_current_time",
+        "motion_style": "grounded",
         "approach": {
+          "mode": "walk_toward_camera",
           "start_ms": 0,
           "end_ms": 4200,
           "pose_ids": [
@@ -48205,6 +48546,8 @@
           "fps": 10,
           "start_scale_milli": 720,
           "end_scale_milli": 1080,
+          "start_offset_y_px": 0,
+          "end_offset_y_px": 0,
           "easing_id": "sine_out",
           "ground_anchor": "center_bottom",
           "source_contract": "joeville:introTimeline:WALK_PUSH_MS"
@@ -48752,11 +49095,13 @@
       },
       "transcript": "A trail! Trails are like arguments you can walk through. Stay curious, check the details, and do not assume the scenic route is the only route.",
       "performance": {
-        "performance_id": "wizard-joe:wj_boulder_trail:walk-and-talk:v1",
+        "performance_id": "wizard-joe:wj_boulder_trail:walk_toward_camera:v2",
         "approval_state": "candidate_visual_review",
         "runtime_admitted": false,
         "clock": "html_audio_element_current_time",
+        "motion_style": "grounded",
         "approach": {
+          "mode": "walk_toward_camera",
           "start_ms": 0,
           "end_ms": 4200,
           "pose_ids": [
@@ -48768,6 +49113,8 @@
           "fps": 10,
           "start_scale_milli": 720,
           "end_scale_milli": 1080,
+          "start_offset_y_px": 0,
+          "end_offset_y_px": 0,
           "easing_id": "sine_out",
           "ground_anchor": "center_bottom",
           "source_contract": "joeville:introTimeline:WALK_PUSH_MS"
@@ -49142,11 +49489,13 @@
       },
       "transcript": "This place affects real people, so the source trail matters extra. We can play with the representation while remaining honest about what is actually known.",
       "performance": {
-        "performance_id": "wizard-joe:wj_boulder_civic:walk-and-talk:v1",
+        "performance_id": "wizard-joe:wj_boulder_civic:walk_toward_camera:v2",
         "approval_state": "candidate_visual_review",
         "runtime_admitted": false,
         "clock": "html_audio_element_current_time",
+        "motion_style": "grounded",
         "approach": {
+          "mode": "walk_toward_camera",
           "start_ms": 0,
           "end_ms": 4200,
           "pose_ids": [
@@ -49158,6 +49507,8 @@
           "fps": 10,
           "start_scale_milli": 720,
           "end_scale_milli": 1080,
+          "start_offset_y_px": 0,
+          "end_offset_y_px": 0,
           "easing_id": "sine_out",
           "ground_anchor": "center_bottom",
           "source_contract": "joeville:introTimeline:WALK_PUSH_MS"
@@ -49458,11 +49809,13 @@
       },
       "transcript": "A public thing! Lots of people may care about it for different reasons. Good. That means we need a clear charter, not louder opinions.",
       "performance": {
-        "performance_id": "wizard-joe:wj_boulder_public:walk-and-talk:v1",
+        "performance_id": "wizard-joe:wj_boulder_public:walk_toward_camera:v2",
         "approval_state": "candidate_visual_review",
         "runtime_admitted": false,
         "clock": "html_audio_element_current_time",
+        "motion_style": "grounded",
         "approach": {
+          "mode": "walk_toward_camera",
           "start_ms": 0,
           "end_ms": 4200,
           "pose_ids": [
@@ -49474,6 +49827,8 @@
           "fps": 10,
           "start_scale_milli": 720,
           "end_scale_milli": 1080,
+          "start_offset_y_px": 0,
+          "end_offset_y_px": 0,
           "easing_id": "sine_out",
           "ground_anchor": "center_bottom",
           "source_contract": "joeville:introTimeline:WALK_PUSH_MS"
@@ -49804,11 +50159,13 @@
       },
       "transcript": "This is lore. It may contain wisdom, whimsy, old stories, and one suspiciously confident squirrel. It is marked as story so you can enjoy it without mistaking it for a meeting agenda.",
       "performance": {
-        "performance_id": "wizard-joe:wj_boulder_lore:walk-and-talk:v1",
+        "performance_id": "wizard-joe:wj_boulder_lore:walk_toward_camera:v2",
         "approval_state": "candidate_visual_review",
         "runtime_admitted": false,
         "clock": "html_audio_element_current_time",
+        "motion_style": "grounded",
         "approach": {
+          "mode": "walk_toward_camera",
           "start_ms": 0,
           "end_ms": 4200,
           "pose_ids": [
@@ -49820,6 +50177,8 @@
           "fps": 10,
           "start_scale_milli": 720,
           "end_scale_milli": 1080,
+          "start_offset_y_px": 0,
+          "end_offset_y_px": 0,
           "easing_id": "sine_out",
           "ground_anchor": "center_bottom",
           "source_contract": "joeville:introTimeline:WALK_PUSH_MS"
@@ -50316,11 +50675,13 @@
       },
       "transcript": "A repository! Think of it as a shared workshop where the tools, plans, and half-finished inventions live. Read the README before opening a drawer. The drawers have feelings.",
       "performance": {
-        "performance_id": "wizard-joe:wj_github_repo:walk-and-talk:v1",
+        "performance_id": "wizard-joe:wj_github_repo:walk_toward_camera:v2",
         "approval_state": "candidate_visual_review",
         "runtime_admitted": false,
         "clock": "html_audio_element_current_time",
+        "motion_style": "grounded",
         "approach": {
+          "mode": "walk_toward_camera",
           "start_ms": 0,
           "end_ms": 4200,
           "pose_ids": [
@@ -50332,6 +50693,8 @@
           "fps": 10,
           "start_scale_milli": 720,
           "end_scale_milli": 1080,
+          "start_offset_y_px": 0,
+          "end_offset_y_px": 0,
           "easing_id": "sine_out",
           "ground_anchor": "center_bottom",
           "source_contract": "joeville:introTimeline:WALK_PUSH_MS"
@@ -50692,11 +51055,13 @@
       },
       "transcript": "An issue. Not a personal failure. Not a curse. Just a named piece of work asking to be understood.",
       "performance": {
-        "performance_id": "wizard-joe:wj_github_issue:walk-and-talk:v1",
+        "performance_id": "wizard-joe:wj_github_issue:walk_toward_camera:v2",
         "approval_state": "candidate_visual_review",
         "runtime_admitted": false,
         "clock": "html_audio_element_current_time",
+        "motion_style": "grounded",
         "approach": {
+          "mode": "walk_toward_camera",
           "start_ms": 0,
           "end_ms": 4200,
           "pose_ids": [
@@ -50708,6 +51073,8 @@
           "fps": 10,
           "start_scale_milli": 720,
           "end_scale_milli": 1080,
+          "start_offset_y_px": 0,
+          "end_offset_y_px": 0,
           "easing_id": "sine_out",
           "ground_anchor": "center_bottom",
           "source_contract": "joeville:introTimeline:WALK_PUSH_MS"
@@ -50957,11 +51324,13 @@
       },
       "transcript": "A pull request bridge! You are proposing a change and inviting review before it becomes part of the shared world. Very civilized. Very bridge-shaped.",
       "performance": {
-        "performance_id": "wizard-joe:wj_github_pr:walk-and-talk:v1",
+        "performance_id": "wizard-joe:wj_github_pr:walk_toward_camera:v2",
         "approval_state": "candidate_visual_review",
         "runtime_admitted": false,
         "clock": "html_audio_element_current_time",
+        "motion_style": "grounded",
         "approach": {
+          "mode": "walk_toward_camera",
           "start_ms": 0,
           "end_ms": 4200,
           "pose_ids": [
@@ -50973,6 +51342,8 @@
           "fps": 10,
           "start_scale_milli": 720,
           "end_scale_milli": 1080,
+          "start_offset_y_px": 0,
+          "end_offset_y_px": 0,
           "easing_id": "sine_out",
           "ground_anchor": "center_bottom",
           "source_contract": "joeville:introTimeline:WALK_PUSH_MS"
@@ -51295,11 +51666,13 @@
       },
       "transcript": "A merge conflict! Two helpful things tried to occupy the same sentence. Nobody is evil. We just need to look at the overlap and choose deliberately.",
       "performance": {
-        "performance_id": "wizard-joe:wj_github_conflict:walk-and-talk:v1",
+        "performance_id": "wizard-joe:wj_github_conflict:walk_toward_camera:v2",
         "approval_state": "candidate_visual_review",
         "runtime_admitted": false,
         "clock": "html_audio_element_current_time",
+        "motion_style": "grounded",
         "approach": {
+          "mode": "walk_toward_camera",
           "start_ms": 0,
           "end_ms": 4200,
           "pose_ids": [
@@ -51311,6 +51684,8 @@
           "fps": 10,
           "start_scale_milli": 720,
           "end_scale_milli": 1080,
+          "start_offset_y_px": 0,
+          "end_offset_y_px": 0,
           "easing_id": "sine_out",
           "ground_anchor": "center_bottom",
           "source_contract": "joeville:introTimeline:WALK_PUSH_MS"
@@ -51657,11 +52032,13 @@
       },
       "transcript": "Documentation found. This is the part where future-you becomes grateful and present-you becomes slightly heroic.",
       "performance": {
-        "performance_id": "wizard-joe:wj_github_docs:walk-and-talk:v1",
+        "performance_id": "wizard-joe:wj_github_docs:walk_toward_camera:v2",
         "approval_state": "candidate_visual_review",
         "runtime_admitted": false,
         "clock": "html_audio_element_current_time",
+        "motion_style": "grounded",
         "approach": {
+          "mode": "walk_toward_camera",
           "start_ms": 0,
           "end_ms": 4200,
           "pose_ids": [
@@ -51673,6 +52050,8 @@
           "fps": 10,
           "start_scale_milli": 720,
           "end_scale_milli": 1080,
+          "start_offset_y_px": 0,
+          "end_offset_y_px": 0,
           "easing_id": "sine_out",
           "ground_anchor": "center_bottom",
           "source_contract": "joeville:introTimeline:WALK_PUSH_MS"
@@ -51924,11 +52303,13 @@
       },
       "transcript": "Maintainers have boundaries too. A contribution is a gift, not a demand for immediate attention. Leave a clear note, respect the process, and let the bridge be inspected before it opens.",
       "performance": {
-        "performance_id": "wizard-joe:wj_github_maintainer:walk-and-talk:v1",
+        "performance_id": "wizard-joe:wj_github_maintainer:walk_toward_camera:v2",
         "approval_state": "candidate_visual_review",
         "runtime_admitted": false,
         "clock": "html_audio_element_current_time",
+        "motion_style": "grounded",
         "approach": {
+          "mode": "walk_toward_camera",
           "start_ms": 0,
           "end_ms": 4200,
           "pose_ids": [
@@ -51940,6 +52321,8 @@
           "fps": 10,
           "start_scale_milli": 720,
           "end_scale_milli": 1080,
+          "start_offset_y_px": 0,
+          "end_offset_y_px": 0,
           "easing_id": "sine_out",
           "ground_anchor": "center_bottom",
           "source_contract": "joeville:introTimeline:WALK_PUSH_MS"

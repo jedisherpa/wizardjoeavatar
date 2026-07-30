@@ -127,8 +127,9 @@ class CharacterObserverTests(unittest.TestCase):
         self.assertIn(b"hd-performance=1", body)
         self.assertIn(b"controller-origin=http://127.0.0.1:8665", body)
         self.assertIn(b"audio.currentTime", body)
-        self.assertIn(b"mouthStateAt", body)
-        self.assertIn(b"poseForMouthState", body)
+        self.assertIn(b"mouthFrameAt", body)
+        self.assertIn(b"nextPoseId: mouthFrame.nextPoseId", body)
+        self.assertIn(b"blendMilli: mouthFrame.blendMilli", body)
 
     def test_review_decision_is_persisted_without_runtime_admission(self):
         manifest = {

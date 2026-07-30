@@ -40,6 +40,13 @@ APPROACH_POSES = (
     "248_camera_retreat",
     "250_final_recovery_home",
 )
+FLIGHT_APPROACH_POSES = (
+    "177_flight_glide_forward",
+    "174_flight_powerstroke_down",
+    "175_flight_recoverystroke_up",
+    "184_flight_accelerate",
+)
+HOVER_POSE = "176_flight_hover_neutral"
 SETTLE_POSE = "013_idle_warm_camera_ready"
 
 
@@ -51,16 +58,16 @@ HERO_CHOREOGRAPHY: dict[str, tuple[tuple[str, tuple[str, ...]], ...]] = {
         ("comic_release", ("078_emotion_amused", "243_comedy_recover_dignity")),
     ),
     "WJ_INTRO_001": (
-        ("delighted_arrival", ("087_emotion_surprise", "079_emotion_excited")),
-        ("welcome", ("041_speak_explain_open", "119_hand_invite")),
-        ("hold", ("052_speak_warn", "042_speak_explain_precise")),
-        ("comic_recovery", ("078_emotion_amused", "243_comedy_recover_dignity")),
+        ("distant_greeting", ("177_flight_glide_forward", "174_flight_powerstroke_down")),
+        ("approach", ("175_flight_recoverystroke_up", "184_flight_accelerate")),
+        ("brake", ("185_flight_brake", "187_flight_stationary_speak")),
+        ("hover_arrival", ("176_flight_hover_neutral", "187_flight_stationary_speak")),
     ),
     "WJ_INTRO_002": (
-        ("notice", ("080_emotion_curious", "042_speak_explain_precise")),
-        ("paradox", ("055_speak_question", "067_story_begin", "068_story_build")),
-        ("congratulate", ("077_emotion_joy", "041_speak_explain_open")),
-        ("reassure", ("051_speak_reassure", "050_speak_confide")),
+        ("hover_notice", ("176_flight_hover_neutral", "187_flight_stationary_speak")),
+        ("hover_explain", ("187_flight_stationary_speak", "190_flight_reach", "188_flight_staff_forward")),
+        ("hover_congratulate", ("190_flight_reach", "187_flight_stationary_speak")),
+        ("hover_reassure", ("188_flight_staff_forward", "187_flight_stationary_speak", "176_flight_hover_neutral")),
     ),
     "WJ_INTRO_003": (
         ("introduce", ("041_speak_explain_open", "077_emotion_joy")),
@@ -116,6 +123,61 @@ HERO_CHOREOGRAPHY: dict[str, tuple[tuple[str, tuple[str, ...]], ...]] = {
         ("qa_joke", ("078_emotion_amused", "243_comedy_recover_dignity")),
     ),
 }
+
+
+def _approach_for_clip(clip_id: str, duration_ms: int) -> dict[str, Any]:
+    if clip_id == "WJ_INTRO_001":
+        return {
+            "mode": "fly_toward_camera",
+            "start_ms": 0,
+            "end_ms": duration_ms,
+            "pose_ids": list(FLIGHT_APPROACH_POSES),
+            "fps": 2.4,
+            "start_scale_milli": 260,
+            "end_scale_milli": 1080,
+            "start_offset_y_px": -42,
+            "end_offset_y_px": 0,
+            "arrival_transition_ms": 1200,
+            "arrival_pose_ids": ["185_flight_brake", HOVER_POSE],
+            "easing_id": "cubic_in_out",
+            "ground_anchor": "center",
+            "source_contract": "authored:wizard-joe:intro-001:camera-flight",
+        }
+    if clip_id == "WJ_INTRO_002":
+        return {
+            "mode": "hover",
+            "start_ms": 0,
+            "end_ms": 0,
+            "pose_ids": [HOVER_POSE],
+            "fps": 2,
+            "start_scale_milli": 1080,
+            "end_scale_milli": 1080,
+            "start_offset_y_px": 0,
+            "end_offset_y_px": 0,
+            "easing_id": "none",
+            "ground_anchor": "center",
+            "source_contract": "authored:wizard-joe:intro-002:hover-talk",
+        }
+    return {
+        "mode": "walk_toward_camera",
+        "start_ms": 0,
+        "end_ms": min(4200, duration_ms),
+        "pose_ids": list(APPROACH_POSES),
+        "fps": 10,
+        "start_scale_milli": 720,
+        "end_scale_milli": 1080,
+        "start_offset_y_px": 0,
+        "end_offset_y_px": 0,
+        "easing_id": "sine_out",
+        "ground_anchor": "center_bottom",
+        "source_contract": "joeville:introTimeline:WALK_PUSH_MS",
+    }
+
+
+def _settle_pose_for_clip(clip_id: str) -> str:
+    if clip_id in {"WJ_INTRO_001", "WJ_INTRO_002"}:
+        return HOVER_POSE
+    return SETTLE_POSE
 
 INTENT_POSES: dict[str, tuple[str, ...]] = {
     "open": (
@@ -448,7 +510,17 @@ def _pose_ids(index: dict[str, Any]) -> set[str]:
 
 def _validate_pose_references(index: dict[str, Any]) -> None:
     available = _pose_ids(index)
-    required = {SETTLE_POSE, *APPROACH_POSES}
+    required = {
+        SETTLE_POSE,
+        HOVER_POSE,
+        *APPROACH_POSES,
+        *FLIGHT_APPROACH_POSES,
+    }
+    for clip_id in HERO_CHOREOGRAPHY:
+        approach = _approach_for_clip(clip_id, 10_000)
+        required.update(approach["pose_ids"])
+        required.update(approach.get("arrival_pose_ids", ()))
+        required.add(_settle_pose_for_clip(clip_id))
     for templates in HERO_CHOREOGRAPHY.values():
         for _, pose_ids in templates:
             required.update(pose_ids)
@@ -513,21 +585,22 @@ def import_performances(
                     },
                     "transcript": transcript,
                     "performance": {
-                        "performance_id": f"wizard-joe:{clip_id.lower()}:walk-and-talk:v1",
+                        "performance_id": (
+                            f"wizard-joe:{clip_id.lower()}:"
+                            f"{_approach_for_clip(clip_id, probe.duration_ms)['mode']}:v2"
+                        ),
                         "approval_state": "candidate_visual_review",
                         "runtime_admitted": False,
                         "clock": "html_audio_element_current_time",
-                        "approach": {
-                            "start_ms": 0,
-                            "end_ms": min(4200, probe.duration_ms),
-                            "pose_ids": list(APPROACH_POSES),
-                            "fps": 10,
-                            "start_scale_milli": 720,
-                            "end_scale_milli": 1080,
-                            "easing_id": "sine_out",
-                            "ground_anchor": "center_bottom",
-                            "source_contract": "joeville:introTimeline:WALK_PUSH_MS",
-                        },
+                        "motion_style": (
+                            "hover"
+                            if clip_id in {"WJ_INTRO_001", "WJ_INTRO_002"}
+                            else "grounded"
+                        ),
+                        "approach": _approach_for_clip(
+                            clip_id,
+                            probe.duration_ms,
+                        ),
                         "body_cues": body_cues,
                         "motion_beats": _motion_beats(
                             clip_id,
@@ -539,7 +612,7 @@ def import_performances(
                             "values_milli": envelope,
                             "source": "canonical_pcm_rms",
                         },
-                        "settle_pose_id": SETTLE_POSE,
+                        "settle_pose_id": _settle_pose_for_clip(clip_id),
                     },
                 }
             )

@@ -5,3 +5,5 @@ assets/reference/characters/kingfisher/**/*.png filter=lfs diff=lfs merge=lfs -t
 assets/reference/characters/kingfisher/**/*.zip filter=lfs diff=lfs merge=lfs -text
 assets/reference/characters/wizard-joe/audio-performances-v1/audio/*.mp3 filter=lfs diff=lfs merge=lfs -text
 assets/reference/characters/wizard-joe/mouth-pairs-v1/*.wjpose filter=lfs diff=lfs merge=lfs -text
+assets/reference/characters/wizard-joe/mouth-pairs-full-frame-v2/**/*.png filter=lfs diff=lfs merge=lfs -text
+assets/reference/characters/wizard-joe/mouth-pairs-full-frame-v2/*.wjpose filter=lfs diff=lfs merge=lfs -text

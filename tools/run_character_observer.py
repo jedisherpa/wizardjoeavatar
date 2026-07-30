@@ -44,14 +44,14 @@ DEFAULT_MOUTH_PAIR_MANIFEST = (
     / "reference"
     / "characters"
     / "wizard-joe"
-    / "mouth-pairs-v1"
+    / "mouth-pairs-full-frame-v2"
     / "mouth-pair-manifest.json"
 )
 DEFAULT_MOUTH_REVIEW_INDEX = (
     ROOT
     / "assets"
     / "reference"
-    / "wizard-joe-mouth-review-library-index.json"
+    / "wizard-joe-mouth-full-frame-review-library-index.json"
 )
 
 
@@ -438,7 +438,7 @@ def _performance_review_html(
       </section>
       <section>
         <div class="panel-title">
-          <h1>Audio-Directed Walk and Talk</h1>
+          <h1>Audio-Directed Performance</h1>
           <span id="performance-state">Candidate review</span>
         </div>
         <iframe
@@ -476,6 +476,12 @@ def _performance_review_html(
         return `${{Math.floor(whole / 60)}}:${{String(whole % 60).padStart(2, "0")}}`;
       }};
       const easeSineOut = (value) => Math.sin(clamp(value, 0, 1) * Math.PI / 2);
+      const easeCubicInOut = (value) => {{
+        const t = clamp(value, 0, 1);
+        return t < 0.5
+          ? 4 * t * t * t
+          : 1 - Math.pow(-2 * t + 2, 3) / 2;
+      }};
       const decisionFor = (clipId) => (
         reviewState?.decisions?.[clipId] || {{ status: "unreviewed", notes: "" }}
       );
@@ -493,14 +499,56 @@ def _performance_review_html(
         );
         return Number(envelope.values_milli[index] || 0);
       }};
-      const mouthStateAt = (positionMs, amplitude) => {{
-        if (amplitude < 85) return "closed";
-        const phase = Math.floor(positionMs / 170) % 4;
-        return phase === 3 ? "closed" : "open";
+      const mouthFrameAt = (basePoseId, positionMs, amplitude) => {{
+        const states = manifest.mouth_pair_states?.[basePoseId];
+        if (!states) {{
+          return {{
+            poseId: basePoseId,
+            nextPoseId: null,
+            blendMilli: 0,
+            mouthState: "unpaired",
+          }};
+        }}
+        if (amplitude < 85) {{
+          return {{
+            poseId: states.closed,
+            nextPoseId: null,
+            blendMilli: 0,
+            mouthState: "closed",
+          }};
+        }}
+        const phaseMs = positionMs % 680;
+        if (phaseMs < 90) {{
+          return {{
+            poseId: states.closed,
+            nextPoseId: states.open,
+            blendMilli: Math.round(phaseMs * 1000 / 90),
+            mouthState: "opening",
+          }};
+        }}
+        if (phaseMs < 510) {{
+          return {{
+            poseId: states.open,
+            nextPoseId: null,
+            blendMilli: 0,
+            mouthState: "open",
+          }};
+        }}
+        if (phaseMs < 600) {{
+          return {{
+            poseId: states.open,
+            nextPoseId: states.closed,
+            blendMilli: Math.round((phaseMs - 510) * 1000 / 90),
+            mouthState: "closing",
+          }};
+        }}
+        return {{
+          poseId: states.closed,
+          nextPoseId: null,
+          blendMilli: 0,
+          mouthState: "closed",
+        }};
       }};
-      const poseForMouthState = (basePoseId, mouthState) => (
-        manifest.mouth_pair_states?.[basePoseId]?.[mouthState] || basePoseId
-      );
       const frameAt = (positionMs) => {{
         const approach = activeClip.performance.approach;
         if (positionMs < approach.end_ms) {{
@@ -508,24 +556,52 @@ def _performance_review_html(
           const frameMs = 1000 / approach.fps;
           const step = Math.floor(elapsed / frameMs);
           const poseIds = approach.pose_ids;
-          const basePoseId = poseIds[step % poseIds.length];
+          const mode = approach.mode || "walk_toward_camera";
+          const remaining = Math.max(0, approach.end_ms - positionMs);
+          const arrivalPoseIds = approach.arrival_pose_ids || [];
+          const arrivalTransitionMs = Number(approach.arrival_transition_ms || 0);
+          let basePoseId = poseIds[step % poseIds.length];
+          if (arrivalPoseIds.length && remaining <= arrivalTransitionMs) {{
+            const arrivalProgress = 1 - remaining / Math.max(1, arrivalTransitionMs);
+            const arrivalIndex = Math.min(
+              arrivalPoseIds.length - 1,
+              Math.floor(arrivalProgress * arrivalPoseIds.length),
+            );
+            basePoseId = arrivalPoseIds[arrivalIndex];
+          }}
           const amplitude = envelopeAt(positionMs);
-          const mouthState = mouthStateAt(positionMs, amplitude);
-          const progress = easeSineOut(elapsed / Math.max(1, approach.end_ms - approach.start_ms));
-          const stride = Math.sin((elapsed / 1000) * Math.PI * 2.2);
+          const mouthFrame = mouthFrameAt(basePoseId, positionMs, amplitude);
+          const rawProgress = elapsed / Math.max(1, approach.end_ms - approach.start_ms);
+          const progress = approach.easing_id === "cubic_in_out"
+            ? easeCubicInOut(rawProgress)
+            : easeSineOut(rawProgress);
+          const movementPhase = Math.sin(
+            (elapsed / 1000) * Math.PI * (mode === "fly_toward_camera" ? 1.35 : 2.2)
+          );
+          const startOffsetY = Number(approach.start_offset_y_px || 0);
+          const endOffsetY = Number(approach.end_offset_y_px || 0);
+          const authoredOffsetY = startOffsetY + (endOffsetY - startOffsetY) * progress;
+          const offsetX = mode === "fly_toward_camera"
+            ? movementPhase * 3 * (1 - progress)
+            : movementPhase * 4;
+          const offsetY = mode === "fly_toward_camera"
+            ? authoredOffsetY + movementPhase * 3 * (1 - progress * 0.65)
+            : authoredOffsetY - Math.abs(movementPhase) * 5;
           return {{
-            poseId: poseForMouthState(basePoseId, mouthState),
+            poseId: mouthFrame.poseId,
             basePoseId,
-            mouthState,
-            nextPoseId: null,
-            blendMilli: 0,
+            mouthState: mouthFrame.mouthState,
+            nextPoseId: mouthFrame.nextPoseId,
+            blendMilli: mouthFrame.blendMilli,
             scaleMilli: Math.round(
               approach.start_scale_milli
               + (approach.end_scale_milli - approach.start_scale_milli) * progress
             ),
-            offsetXPx: Math.round(stride * 4),
-            offsetYPx: Math.round(-Math.abs(stride) * 5),
-            cue: "Walk toward camera",
+            offsetXPx: Math.round(offsetX),
+            offsetYPx: Math.round(offsetY),
+            cue: mode === "fly_toward_camera"
+              ? (remaining <= arrivalTransitionMs ? "Brake into hover" : "Fly toward camera")
+              : "Walk toward camera",
           }};
         }}
         const cue = activeCue(positionMs);
@@ -536,16 +612,19 @@ def _performance_review_html(
           null,
         );
         const basePoseId = beat?.pose_id || cue.pose_ids[0];
-        const mouthState = mouthStateAt(positionMs, amplitude);
+        const mouthFrame = mouthFrameAt(basePoseId, positionMs, amplitude);
+        const hovering = activeClip.performance.motion_style === "hover";
         return {{
-          poseId: poseForMouthState(basePoseId, mouthState),
+          poseId: mouthFrame.poseId,
           basePoseId,
-          mouthState,
-          nextPoseId: null,
-          blendMilli: 0,
+          mouthState: mouthFrame.mouthState,
+          nextPoseId: mouthFrame.nextPoseId,
+          blendMilli: mouthFrame.blendMilli,
           scaleMilli: approach.end_scale_milli,
-          offsetXPx: Math.round(Math.sin(positionMs / 920) * 2),
-          offsetYPx: Math.round(-amplitude / 500),
+          offsetXPx: Math.round(Math.sin(positionMs / (hovering ? 1450 : 920)) * (hovering ? 3 : 2)),
+          offsetYPx: hovering
+            ? Math.round(-8 + Math.sin(positionMs / 620) * 5 - amplitude / 650)
+            : Math.round(-amplitude / 500),
           cue: cue.label.replaceAll("_", " "),
         }};
       }};

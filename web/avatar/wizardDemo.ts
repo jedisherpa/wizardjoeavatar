@@ -154,7 +154,7 @@ async function start() {
         poseId = String(message.poseId || poseId);
         nextPoseId = message.nextPoseId ? String(message.nextPoseId) : null;
         blendMilli = Math.max(0, Math.min(1000, Number(message.blendMilli) || 0));
-        scaleMilli = Math.max(500, Math.min(1200, Number(message.scaleMilli) || 1000));
+        scaleMilli = Math.max(200, Math.min(1200, Number(message.scaleMilli) || 1000));
         offsetXPx = Math.max(-80, Math.min(80, Number(message.offsetXPx) || 0));
         offsetYPx = Math.max(-80, Math.min(80, Number(message.offsetYPx) || 0));
         mediaPositionMs = Math.max(0, Number(message.mediaPositionMs) || 0);
