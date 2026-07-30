@@ -1,0 +1,684 @@
+{
+  "schema_version": 1,
+  "audit_id": "wizard-joe-audio-performance-visual-audit-final",
+  "audited_clip_count": 95,
+  "manifest_sha256": "28897c927b8cb6ca0c83a332457518f419d70df437a906a0a4b49eb11cc01079",
+  "method": {
+    "review_surface": "Large per-clip contact sheets rendered from projector-visible full-resolution frames",
+    "reviewers": 4,
+    "coverage": "All 95 prerecorded Wizard Joe clips, with targeted v8 re-review of every clip changed by final book-source exclusion",
+    "status": "current"
+  },
+  "summary": {
+    "pass_count": 95,
+    "review_count": 0,
+    "purpose": "Final full-corpus visual acceptance after choreography, registration, staff-continuity, semantic-restraint, and mouth-pair corrections"
+  },
+  "clips": [
+    {
+      "manifest_index": 0,
+      "clip_id": "WJ_INTRO_001",
+      "verdict": "pass",
+      "rationale": "The distant approach grows smoothly through glide, power, recovery, acceleration, and braking into a stable hover; staff side, full-body registration, and terminal settle remain coherent.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 1,
+      "clip_id": "WJ_INTRO_002",
+      "verdict": "pass",
+      "rationale": "The new power/recovery wing beats integrate cleanly with hover speaking: body scale stays stable, the staff remains attached on the canonical side, acting is varied without looping, and the ending settles neutrally.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 2,
+      "clip_id": "WJ_INTRO_003",
+      "verdict": "pass",
+      "rationale": "The intimate approach resolves into restrained yielding, explaining, and invitation poses with continuous scale, silhouette, staff ownership, and a readable terminal hold.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 3,
+      "clip_id": "WJ_INTRO_004",
+      "verdict": "pass",
+      "rationale": "The long explanatory and magic sequence remains semantically legible and visually continuous, with intentional gesture changes, stable registration, canonical staff placement, and no repetitive loop.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 4,
+      "clip_id": "WJ_INTRO_005",
+      "verdict": "pass",
+      "rationale": "Suspense, reveal, relief, explanation, and story setup form a restrained acting arc with stable scale and staff continuity and a suitable story-begin terminal pose.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 5,
+      "clip_id": "WJ_WORLD_001",
+      "verdict": "pass",
+      "rationale": "UI interaction, counting, definition, summary, and presentation poses match the world-mapping transcript while preserving full-body registration, staff side, and a clean final presentation.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 6,
+      "clip_id": "WJ_WORLD_JOEVILLE",
+      "verdict": "pass",
+      "rationale": "Reveal, character voice, moral, report, and story poses support the Joeville description without scale jumps, staff detachment, excessive repetition, or a poor terminal hold.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 7,
+      "clip_id": "WJ_WORLD_BOULDER",
+      "verdict": "pass",
+      "rationale": "The suspense-to-reveal storytelling progression is semantically appropriate and maintains stable body scale, wing silhouette, canonical staff ownership, and a readable quoted ending.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 8,
+      "clip_id": "WJ_WORLD_GITHUB",
+      "verdict": "pass",
+      "rationale": "Directional and precise-explanation gestures align with repository and source concepts while preserving registration, full-body continuity, staff side, and a coherent story-build finish.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 9,
+      "clip_id": "WJ_WORLD_002",
+      "verdict": "pass",
+      "rationale": "The varied explanation, counting, reporting, storytelling, and presentation vocabulary tracks the transcript without looping and remains consistent in scale, silhouette, and staff placement.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 10,
+      "clip_id": "WJ_WORLD_003",
+      "verdict": "pass",
+      "rationale": "Questioning, uncertainty, realization, and directional explanation are restrained and semantically clear, with stable scale, attached staff, and a purposeful terminal pose.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 11,
+      "clip_id": "WJ_PURPOSE_001",
+      "verdict": "pass",
+      "rationale": "The extended stages-and-tools presentation uses varied counting, pointing, confidence, and emphasis poses without a visible loop; scale, staff side, and full-body continuity remain sound.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 12,
+      "clip_id": "WJ_PURPOSE_002",
+      "verdict": "pass",
+      "rationale": "The long speaking sequence modulates emphasis, explanation, resolve, and invitation coherently while maintaining stable registration, staff ownership, restrained semantics, and a settled ending.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 13,
+      "clip_id": "WJ_PURPOSE_003",
+      "verdict": "pass",
+      "rationale": "Yielding, presentation, explanation, counting, and resolve poses form a clear purpose arc with consistent body scale, canonical staff side, and no jarring repetition.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 14,
+      "clip_id": "WJ_ENTER_001",
+      "verdict": "pass",
+      "rationale": "The short invitation progresses naturally from approach through emphasis and relaxed delivery to an appropriate upward point, with stable scale and staff continuity.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 15,
+      "clip_id": "WJ_ENTER_002",
+      "verdict": "pass",
+      "rationale": "Invitation, reassurance, compassion, and relief remain visually gentle and continuous, with consistent registration, attached staff, and a calm terminal hold.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 16,
+      "clip_id": "WJ_ENTER_003",
+      "verdict": "pass",
+      "rationale": "The first-quest storytelling and realization sequence is semantically coherent and varied, with stable scale, staff-side continuity, full-body integrity, and a relaxed finish.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 17,
+      "clip_id": "WJ_QUEST_001",
+      "verdict": "pass",
+      "rationale": "Touch, drag, graphic-point, definition, summary, and presentation poses clearly support the map-and-compass language while preserving registration and canonical staff ownership.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 18,
+      "clip_id": "WJ_QUEST_002",
+      "verdict": "pass",
+      "rationale": "Question, curiosity, thought, realization, pointing, pride, and low emphasis appropriately develop the source-trail idea with stable scale, staff continuity, and no bad terminal hold.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 19,
+      "clip_id": "WJ_QUEST_003",
+      "verdict": "pass",
+      "rationale": "The former open-book interruption is replaced by resolve, emphasis, confidence, and pride poses that preserve the story-versus-source meaning; the detached-staff defect is gone and no new continuity or terminal-hold issue appears.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 20,
+      "clip_id": "WJ_QUEST_004",
+      "verdict": "pass",
+      "rationale": "Defiance, resolve, definition, summary, explanation, confidence, and pride match the provisional-knowledge theme with stable scale, attached staff, and a confident settled ending.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 21,
+      "clip_id": "WJ_QUEST_005",
+      "verdict": "pass",
+      "rationale": "Yielding, one-two-three counting, definition, summary, emphasis, defiance, and high emphasis clearly support collaboration while maintaining registration, staff side, and full-body continuity.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 22,
+      "clip_id": "WJ_QUEST_006",
+      "verdict": "pass",
+      "rationale": "The recap now proceeds through presentation, explanation, and counting without the open-book pose; the staff remains continuously attached on the canonical side and the replacement acting is semantically appropriate and visually stable.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 23,
+      "clip_id": "WJ_STAGE_LEGIBLE_START",
+      "verdict": "pass",
+      "rationale": "The stage introduction uses restrained story, moral, quote, report, and reveal gestures with stable scale and staff continuity, no repetitive loop, and a clear terminal reveal.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 24,
+      "clip_id": "WJ_STAGE_LEGIBLE_COMPLETE",
+      "verdict": "pass",
+      "rationale": "The camera arrival resolves into a varied, semantically legible storytelling sequence with stable scale, full-body registration, and screen-right staff continuity.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 25,
+      "clip_id": "WJ_STAGE_BOUNDED_START",
+      "verdict": "pass",
+      "rationale": "Inviting, suspense, reveal, and boundary gestures follow the cue progression cleanly without scale pops, staff detachment, repetition, or a weak terminal hold.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 26,
+      "clip_id": "WJ_STAGE_BOUNDED_COMPLETE",
+      "verdict": "pass",
+      "rationale": "Clarification and presentation beats remain restrained and coherent while body scale, ground registration, wings, and staff stay continuous.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 27,
+      "clip_id": "WJ_STAGE_COLLAB_START",
+      "verdict": "pass",
+      "rationale": "The collaborative opening develops through determined, playful, amused, and recovery beats with stable framing and no repetitive or jarring pose loop.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 28,
+      "clip_id": "WJ_STAGE_COLLAB_COMPLETE",
+      "verdict": "pass",
+      "rationale": "Defiant-to-explanatory-to-resolute acting reads clearly, with consistent full-body scale, canonical staff side, and a purposeful final resolve.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 29,
+      "clip_id": "WJ_STAGE_GENERATIVE_START",
+      "verdict": "pass",
+      "rationale": "Surprise and joy settle into an orderly explanatory sequence with stable registration, attached staff, useful silhouette variation, and no excessive repetition.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 30,
+      "clip_id": "WJ_STAGE_GENERATIVE_COMPLETE",
+      "verdict": "pass",
+      "rationale": "The ready, summary, moral, quote, and field-report beats match the generative-completion message while preserving scale and prop continuity through the final story opening.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 31,
+      "clip_id": "WJ_STAGE_ENLIGHTENED_START",
+      "verdict": "pass",
+      "rationale": "The open-hand introduction moves through explanation and presentation with restrained semantic emphasis, stable full-body placement, and an appropriate open terminal pose.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 32,
+      "clip_id": "WJ_STAGE_ENLIGHTENED_COMPLETE",
+      "verdict": "pass",
+      "rationale": "The long-form enlightened sequence remains varied but controlled, with continuous staff side, consistent character scale, coherent emotional escalation, and a clean camera retreat.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 33,
+      "clip_id": "WJ_PROJECT_001",
+      "verdict": "pass",
+      "rationale": "Invitation, counting, definition, presentation, amusement, and playfulness form a coherent project introduction with stable geometry and no bad terminal hold.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 34,
+      "clip_id": "WJ_PROJECT_002",
+      "verdict": "pass",
+      "rationale": "The compact defiant-to-resolved-to-proud progression is semantically clear and maintains consistent scale, body registration, wings, and screen-right staff.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 35,
+      "clip_id": "WJ_PROJECT_003",
+      "verdict": "pass",
+      "rationale": "Medium emphasis, sequencing, and one-two counting read as a concise explanation without scale discontinuity, prop drift, or repetitive staging.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 36,
+      "clip_id": "WJ_PROJECT_004",
+      "verdict": "pass",
+      "rationale": "Recall, counting, summarizing, and bilateral presentation align with the project cues while the full silhouette and staff remain consistently registered.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 37,
+      "clip_id": "WJ_PROJECT_005",
+      "verdict": "pass",
+      "rationale": "The invitation-to-definition sequence is restrained and readable, with stable character size, uninterrupted staff ownership, and no duplicate-pose churn.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 38,
+      "clip_id": "WJ_PROJECT_006",
+      "verdict": "pass",
+      "rationale": "Speaking readiness, compassion, relief, serenity, and warm listening form a smooth emotional arc with consistent scale and a calm terminal hold.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 39,
+      "clip_id": "WJ_PROJECT_007",
+      "verdict": "pass",
+      "rationale": "Joy and pride resolve into a clean one-two count with stable full-body framing, canonical staff placement, and no unnecessary pose cycling.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 40,
+      "clip_id": "WJ_PROJECT_008",
+      "verdict": "pass",
+      "rationale": "The emphasis-to-resolve-to-pride progression is visually continuous and semantically appropriate, ending on a distinct high-emphasis silhouette without a scale pop.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 41,
+      "clip_id": "WJ_PROJECT_009",
+      "verdict": "pass",
+      "rationale": "Low and high emphasis, relaxed openness, and a final count-three pose provide clear variation while preserving registration and staff-side continuity.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 42,
+      "clip_id": "WJ_AI_001",
+      "verdict": "pass",
+      "rationale": "Definition, counting, bilateral presentation, solemn boundary, and stop beats track the AI guidance transcript with stable scale and no prop or terminal-hold defect.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 43,
+      "clip_id": "WJ_AI_002",
+      "verdict": "pass",
+      "rationale": "The explanatory sequence turns naturally into amused, playful, and embarrassed comedy without the prior scale shrink or any staff detachment.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 44,
+      "clip_id": "WJ_AI_003",
+      "verdict": "pass",
+      "rationale": "The book-free sequence cleanly moves from comic recovery into composure, amusement, serious clarification, stop, and invitation; the staff remains attached on the canonical side and scale, registration, semantics, and terminal continuity remain sound.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 45,
+      "clip_id": "WJ_AI_004",
+      "verdict": "pass",
+      "rationale": "Invitation, defiance, solemnity, persuasion, clarification, and resolve match the cautionary AI message with continuous scale, staff side, and full-body framing.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 46,
+      "clip_id": "WJ_LEDGER_001",
+      "verdict": "pass",
+      "rationale": "The ledger explanation progresses through presentation, counting, and comic recovery with stable registration, attached staff, varied silhouettes, and a composed finish.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 47,
+      "clip_id": "WJ_LEDGER_002",
+      "verdict": "pass",
+      "rationale": "The asset-building explanation uses open, ready, summary, presentation, and sequence poses coherently with stable full-body scale and no jarring terminal transition.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 48,
+      "clip_id": "WJ_LEDGER_003",
+      "verdict": "pass",
+      "rationale": "The count gestures land clearly on the ledger language and now settle into contained pride without the former excited spike; scale, staff side, wings, and full-body registration remain stable.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 49,
+      "clip_id": "WJ_LEDGER_004",
+      "verdict": "pass",
+      "rationale": "The high emphasis relaxes into summary, sequence, and count-one gestures that support the commons-dividend explanation without repetition or a disruptive terminal hold.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 50,
+      "clip_id": "WJ_LEDGER_005",
+      "verdict": "pass",
+      "rationale": "Yielding and escalating emphasis appropriately become determined and defiant for the warning against filling new runway with obligations; silhouette and staff continuity are clean.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 51,
+      "clip_id": "WJ_QUEST_MAP_001",
+      "verdict": "pass",
+      "rationale": "UI interaction, counting, and measured resolve coherently stage the three-claim map task, with steady scale and no jarring pose repetition.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 52,
+      "clip_id": "WJ_QUEST_MAP_002",
+      "verdict": "pass",
+      "rationale": "Directional pointing and precise UI touch/drag actions clearly illustrate the fog-and-lantern map result while preserving staff-side and full-body continuity.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 53,
+      "clip_id": "WJ_QUEST_PROMISE_001",
+      "verdict": "pass",
+      "rationale": "Low and high emphasis, determination, defiance, resolve, and confidence form a coherent promise-and-boundaries progression with stable scale and registration, continuous staff ownership, and no new semantic or terminal defect.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 54,
+      "clip_id": "WJ_QUEST_PROMISE_002",
+      "verdict": "pass",
+      "rationale": "Defiance softens through joy and resolve into measured emphasis, matching the fulfilled-promise acknowledgment while maintaining consistent scale, staff side, and a clean finish.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 55,
+      "clip_id": "WJ_QUEST_ASSET_001",
+      "verdict": "pass",
+      "rationale": "Story, moral, pointing, and UI gestures form a coherent progression from solved problem to reusable asset with stable registration and no excessive repetition.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 56,
+      "clip_id": "WJ_QUEST_ASSET_002",
+      "verdict": "pass",
+      "rationale": "The approach resolves into counting, definition, sequence, and summary gestures that support the asset explanation; all projected frames retain canonical staff side and full-body integrity.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 57,
+      "clip_id": "WJ_QUEST_COMMONS_001",
+      "verdict": "pass",
+      "rationale": "Determination, stewardship resolve, confidence, and restrained pride suit the commons-care assignment, with varied silhouettes and no looping or registration discontinuity.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 58,
+      "clip_id": "WJ_QUEST_COMMONS_002",
+      "verdict": "pass",
+      "rationale": "The open presentation moves naturally through embarrassment, comic recovery, amusement, and playfulness for the midnight-villain joke; scale and staff attachment stay coherent.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 59,
+      "clip_id": "WJ_MENTOR_001",
+      "verdict": "pass",
+      "rationale": "Warm listening, invitation, directional presentation, resolve, confidence, and gratitude track the long mentor speech without a repetitive loop, staff flip, or bad terminal hold.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 60,
+      "clip_id": "WJ_RETURN_001",
+      "verdict": "pass",
+      "rationale": "Character voice, moral, reporting, story-building, and reflective recall create a restrained welcome-back progression with consistent silhouette scale and canonical staff side.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 61,
+      "clip_id": "WJ_FIRST_QUESTION_REAL",
+      "verdict": "pass",
+      "rationale": "Yield, suspense, reveal, character voice, moral, and quotation gestures clearly distinguish Real, Story, and uncertainty while preserving registration and full-body continuity.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 62,
+      "clip_id": "WJ_FIRST_QUESTION_BOUNDARY",
+      "verdict": "pass",
+      "rationale": "Solemn clarification and measured emphasis appropriately frame the boundary settings before a small amused lift for the tree joke; the prior tonal concern is resolved without continuity defects.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 63,
+      "clip_id": "WJ_FIRST_QUESTION_ENOUGH",
+      "verdict": "pass",
+      "rationale": "Counting, low-to-medium emphasis, open presentation, pause, and resumption make the list legible and settle naturally; staff, wings, scale, and feet remain continuous.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 64,
+      "clip_id": "WJ_FIRST_QUESTION_JOE",
+      "verdict": "pass",
+      "rationale": "Embarrassment and comic recovery suit the self-definition joke before returning to open explanation and reassurance, with no scale pop, detachment, or repetitive pose loop.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 65,
+      "clip_id": "WJ_FIRST_QUESTION_WHY",
+      "verdict": "pass",
+      "rationale": "Invitation, reveal, brief joy, explanation, surprise, and confidence support the systems-and-QA answer in a readable arc while maintaining full-body and staff continuity.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 66,
+      "clip_id": "WJ_FIRST_QUESTION_NOT_READY",
+      "verdict": "pass",
+      "rationale": "Speaking-ready and patient holds transition into confidential reassurance, explanation, and a yielded floor, matching the permission to wait with stable registration and a calm ending.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 67,
+      "clip_id": "WJ_COMPASS_001",
+      "verdict": "pass",
+      "rationale": "Clarification and resumed speech briefly firm into defiance before low and medium emphasis, making the non-north compass distinction clear without repetition or continuity loss.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 68,
+      "clip_id": "WJ_NOTEBOOK_001",
+      "verdict": "pass",
+      "rationale": "Directional points, UI touch, downward warning, and precise explanation clearly track the notebook and foggy-map language while preserving canonical staff ownership, stable full-body registration, and coherent scale.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 69,
+      "clip_id": "WJ_NOTEBOOK_QUESTION",
+      "verdict": "pass",
+      "rationale": "Open and serious presentation moves through gratitude, mild embarrassment, and dignified recovery for the disciplined-curiosity joke, with a coherent comic terminal pose.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 70,
+      "clip_id": "WJ_NOTEBOOK_SOURCE",
+      "verdict": "pass",
+      "rationale": "The former generic triumphant spike is gone; precise and open explanation now rise only to a brief discovery surprise before confident settlement, preserving restrained semantics and stable staff/body registration.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 71,
+      "clip_id": "WJ_NOTEBOOK_REVISE",
+      "verdict": "pass",
+      "rationale": "Summary and low emphasis rise briefly through resolve and joy on 'Revision!' before settling through reassurance into serenity, with consistent scale, staff side, and a calm terminal hold.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 72,
+      "clip_id": "WJ_CLARITY_MILESTONE",
+      "verdict": "pass",
+      "rationale": "The approach settles into measured summary and emphasis with stable full-body scale, canonical viewer-right staff placement, varied silhouettes, and a relaxed finish.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 73,
+      "clip_id": "WJ_BOUNDARY_001",
+      "verdict": "pass",
+      "rationale": "The revised presenter arc explains the Boundary Dial clearly without the prior cast detour; registration, staff attachment, staff side, and terminal emphasis remain continuous.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 74,
+      "clip_id": "WJ_BOUNDARY_QUIET",
+      "verdict": "pass",
+      "rationale": "Open presentation narrows naturally into reassurance and confide, matching the quiet-explore wording with smooth scale and a gentle terminal posture.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 75,
+      "clip_id": "WJ_BOUNDARY_ASK",
+      "verdict": "pass",
+      "rationale": "Warm listening and a relaxed open hand communicate courteous permission-seeking with stable framing, intact staff contact, and no repetitive loop.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 76,
+      "clip_id": "WJ_BOUNDARY_OPEN",
+      "verdict": "pass",
+      "rationale": "Open explanation progresses through relaxed availability into invitation while preserving full-body scale, viewer-right staff continuity, and an appropriate final hold.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 77,
+      "clip_id": "WJ_BOUNDARY_NONE",
+      "verdict": "pass",
+      "rationale": "Definition followed by low and medium emphasis supports the firm shields-up message without overacting, registration drift, staff flips, or repetition.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 78,
+      "clip_id": "WJ_BOUNDARY_DECLINE",
+      "verdict": "pass",
+      "rationale": "The palm-out stop gives the clean no a decisive silhouette before a precise explanation at matching scale; staff side and body registration remain consistent.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 79,
+      "clip_id": "WJ_BOUNDARY_QUEUE",
+      "verdict": "pass",
+      "rationale": "Invitation into open explanation reads as a polite queue response, with coherent posture change, stable scale, attached staff, and no bad terminal hold.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 80,
+      "clip_id": "WJ_BOUNDARY_RESPECT",
+      "verdict": "pass",
+      "rationale": "Serious and open presenter beats lead into precise explanation and a UI touch, maintaining semantic restraint and continuous body/staff registration throughout.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 81,
+      "clip_id": "WJ_BOUNDARY_EXIT",
+      "verdict": "pass",
+      "rationale": "Summary, measured emphasis, open explanation, and serene closure support the clean-exit joke with stable full-body scale and a calm terminal hold.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 82,
+      "clip_id": "WJ_FOCUS_LOW",
+      "verdict": "pass",
+      "rationale": "Reassurance, a brief interruption, gentle stop, and clarification match the supportive focus warning without aggression, scale drift, or staff discontinuity.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 83,
+      "clip_id": "WJ_FOCUS_REST",
+      "verdict": "pass",
+      "rationale": "Relaxed openness settles through speaking-ready neutrality into invitation and confide, with consistent wing span, full-body scale, staff side, and finish.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 84,
+      "clip_id": "WJ_BOULDER_BRIDGE",
+      "verdict": "pass",
+      "rationale": "The v7 explanatory sequence removes the former magic/staff-side break; quote, report, directional points, invitation, yield, and open presentation now remain registered and canonically staged.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 85,
+      "clip_id": "WJ_BOULDER_TRAIL",
+      "verdict": "pass",
+      "rationale": "Presenter, precise explanation, UI interaction, and directional point poses form a coherent trail-reading progression with stable scale and viewer-right staff continuity.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 86,
+      "clip_id": "WJ_BOULDER_CIVIC",
+      "verdict": "pass",
+      "rationale": "Precise explanation moves through a grounded UI interaction into restrained low and medium emphasis, with continuous registration and no repeated acting loop.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 87,
+      "clip_id": "WJ_BOULDER_PUBLIC",
+      "verdict": "pass",
+      "rationale": "Reveal and alternating presentation gestures suit the public-charter message before a clean speaking-ready pause and resume, all at consistent scale and staff side.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 88,
+      "clip_id": "WJ_BOULDER_LORE",
+      "verdict": "pass",
+      "rationale": "Quoted lore, comic recovery, composure, amusement, reporting, reveal, and character voice provide controlled variety without registration loss, staff detachment, or excess repetition.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 89,
+      "clip_id": "WJ_GITHUB_REPO",
+      "verdict": "pass",
+      "rationale": "Open and serious presenter poses support the shared-workshop explanation without any detached prop, staff flip, scale jump, semantic mismatch, or jarring transition, and the resume pose provides a clean finish.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 90,
+      "clip_id": "WJ_GITHUB_ISSUE",
+      "verdict": "pass",
+      "rationale": "Precise explanation, presentation, resumed speech, and open explanation make the issue feel understandable rather than alarming, with continuous scale and staff placement.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 91,
+      "clip_id": "WJ_GITHUB_PR",
+      "verdict": "pass",
+      "rationale": "Character voice, moral emphasis, reassurance, and relaxed openness create a clear review-invitation arc with smooth full-body registration and no terminal-hold defect.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 92,
+      "clip_id": "WJ_GITHUB_CONFLICT",
+      "verdict": "pass",
+      "rationale": "UI overlap inspection leads through measured emphasis and composure into confident resolution, preserving scale, wing/body continuity, and canonical staff side without looping.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 93,
+      "clip_id": "WJ_GITHUB_DOCS",
+      "verdict": "pass",
+      "rationale": "Directional reference, clarification, summary, and low emphasis support the documentation joke with stable registration, attached staff, restrained acting, and a clean finish.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 94,
+      "clip_id": "WJ_GITHUB_MAINTAINER",
+      "verdict": "pass",
+      "rationale": "UI interaction transitions into serious explanation, resume, reassurance, and a neutral settle, preserving full-body continuity and ending on the strongest terminal hold in the set.",
+      "offending_transitions": []
+    }
+  ]
+}

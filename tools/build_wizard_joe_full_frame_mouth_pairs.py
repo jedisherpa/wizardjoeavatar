@@ -61,8 +61,6 @@ def normalize_to_canonical_canvas(
     candidate: Image.Image,
     canonical: Image.Image,
 ) -> Image.Image:
-    if candidate.size == canonical.size:
-        return candidate.copy()
     candidate_bbox = candidate.getchannel("A").getbbox()
     canonical_bbox = canonical.getchannel("A").getbbox()
     if candidate_bbox is None or canonical_bbox is None:
@@ -70,21 +68,54 @@ def normalize_to_canonical_canvas(
     subject = candidate.crop(candidate_bbox)
     canonical_width = canonical_bbox[2] - canonical_bbox[0]
     canonical_height = canonical_bbox[3] - canonical_bbox[1]
-    scale = min(canonical_width / subject.width, canonical_height / subject.height)
-    size = (
-        max(1, round(subject.width * scale)),
-        max(1, round(subject.height * scale)),
-    )
-    subject = subject.resize(size, Image.Resampling.LANCZOS)
-    center_x = (canonical_bbox[0] + canonical_bbox[2]) / 2
-    center_y = (canonical_bbox[1] + canonical_bbox[3]) / 2
-    position = (
-        round(center_x - subject.width / 2),
-        round(center_y - subject.height / 2),
+    subject = subject.resize(
+        (canonical_width, canonical_height),
+        Image.Resampling.LANCZOS,
     )
     canvas = Image.new("RGBA", canonical.size, (0, 0, 0, 0))
-    canvas.alpha_composite(subject, position)
+    canvas.alpha_composite(subject, (canonical_bbox[0], canonical_bbox[1]))
     return canvas
+
+
+def composite_registered_mouth(
+    canonical: Image.Image,
+    registered_candidate: Image.Image,
+    mouth_region: list[int],
+) -> Image.Image:
+    target = canonical.convert("RGBA")
+    source = registered_candidate.convert("RGBA")
+    left, top, right, bottom = mouth_region
+    width = right - left
+    height = bottom - top
+    if width <= 0 or height <= 0:
+        raise ValueError("mouth region must have positive dimensions")
+    donor = source.crop((left, top, right, bottom))
+    mask = Image.new("L", (width, height), 0)
+    inset_x = max(1, round(width * 0.025))
+    inset_y = max(1, round(height * 0.04))
+    mask.paste(255, (inset_x, inset_y, width - inset_x, height - inset_y))
+    mask = mask.filter(
+        ImageFilter.GaussianBlur(radius=max(1, round(min(width, height) * 0.035)))
+    )
+    result = target.copy()
+    result.paste(donor, (left, top), mask)
+    return result
+
+
+def outside_region_is_identical(
+    first: Image.Image,
+    second: Image.Image,
+    region: list[int],
+) -> bool:
+    width, height = first.size
+    left, top, right, bottom = region
+    boxes = (
+        (0, 0, width, top),
+        (0, bottom, width, height),
+        (0, top, left, bottom),
+        (right, top, width, bottom),
+    )
+    return all(first.crop(box).tobytes() == second.crop(box).tobytes() for box in boxes)
 
 
 def build() -> dict[str, Any]:
@@ -99,15 +130,34 @@ def build() -> dict[str, Any]:
     ALPHA_DIR.mkdir(parents=True, exist_ok=True)
     poses: dict[str, Image.Image] = {}
     source_records: dict[str, dict[str, Any]] = {}
+    pair_by_id = {pair["base_pose_id"]: pair for pair in manifest["pairs"]}
     for source_path in source_paths:
         base_pose_id = source_path.stem.removesuffix("__mouth_closed")
         if base_pose_id not in library.pose_ids:
             raise ValueError(f"unknown canonical pose: {base_pose_id}")
         variant_id = f"{base_pose_id}__mouth_closed_full_frame_v2"
-        normalized = normalize_to_canonical_canvas(
+        canonical = library.load_pose(base_pose_id)
+        registered_candidate = normalize_to_canonical_canvas(
             remove_chroma(Image.open(source_path)),
-            library.load_pose(base_pose_id),
+            canonical,
         )
+        mouth_region = pair_by_id[base_pose_id]["mouth_region"]
+        normalized = composite_registered_mouth(
+            canonical,
+            registered_candidate,
+            mouth_region,
+        )
+        if not outside_region_is_identical(canonical, normalized, mouth_region):
+            raise ValueError(
+                f"{variant_id} changed pixels outside its articulation region"
+            )
+        canonical_bbox = canonical.getchannel("A").getbbox()
+        registered_bbox = normalized.getchannel("A").getbbox()
+        if registered_bbox != canonical_bbox:
+            raise ValueError(
+                f"{variant_id} registration mismatch: "
+                f"{registered_bbox} != {canonical_bbox}"
+            )
         alpha_path = ALPHA_DIR / f"{variant_id}.png"
         normalized.save(alpha_path, "PNG", optimize=True)
         poses[variant_id] = normalized
@@ -118,6 +168,18 @@ def build() -> dict[str, Any]:
             "source_sha256": _sha256(source_path),
             "alpha_path": alpha_path.relative_to(ROOT).as_posix(),
             "alpha_sha256": _sha256(alpha_path),
+            "registration": {
+                "method": "canonical_frame_with_registered_generated_mouth",
+                "canonical_bbox": list(canonical_bbox),
+                "registered_bbox": list(registered_bbox),
+                "mouth_region": list(mouth_region),
+                "outside_mouth_region": "byte_identical",
+                "status": "pass",
+            },
+            "frame_construction": (
+                "complete canonical frame with build-time registered generated "
+                "mouth transfer"
+            ),
             "approval_state": "candidate_visual_review",
         }
 
@@ -132,7 +194,6 @@ def build() -> dict[str, Any]:
             "runtime_admitted": False,
         },
     )
-    pair_by_id = {pair["base_pose_id"]: pair for pair in manifest["pairs"]}
     for base_pose_id, state in source_records.items():
         pair = pair_by_id[base_pose_id]
         pair["states"]["closed"] = state
@@ -146,6 +207,12 @@ def build() -> dict[str, Any]:
         "pose_count": receipt["pose_count"],
         "approval_state": "candidate_visual_review",
         "runtime_admitted": False,
+        "registration_gate": {
+            "method": "canonical_frame_with_registered_generated_mouth",
+            "passed_pose_count": len(poses),
+            "failed_pose_count": 0,
+            "outside_mouth_region": "byte_identical",
+        },
     }
     MANIFEST_PATH.write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
 

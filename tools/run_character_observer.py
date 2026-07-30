@@ -549,6 +549,24 @@ def _performance_review_html(
           mouthState: "closed",
         }};
       }};
+      const mouthPoseForState = (basePoseId, mouthState) => (
+        manifest.mouth_pair_states?.[basePoseId]?.[mouthState] || basePoseId
+      );
+      const bodyBlendFrame = (
+        sourceBasePoseId,
+        targetBasePoseId,
+        progress,
+        amplitude,
+      ) => {{
+        const mouthState = amplitude < 85 ? "closed" : "open";
+        const eased = easeCubicInOut(progress);
+        return {{
+          poseId: mouthPoseForState(sourceBasePoseId, mouthState),
+          nextPoseId: mouthPoseForState(targetBasePoseId, mouthState),
+          blendMilli: Math.round(eased * 1000),
+          mouthState: `body_transition_${{mouthState}}`,
+        }};
+      }};
       const frameAt = (positionMs) => {{
         const approach = activeClip.performance.approach;
         if (positionMs < approach.end_ms) {{
@@ -560,17 +578,42 @@ def _performance_review_html(
           const remaining = Math.max(0, approach.end_ms - positionMs);
           const arrivalPoseIds = approach.arrival_pose_ids || [];
           const arrivalTransitionMs = Number(approach.arrival_transition_ms || 0);
+          const frameBlendMs = Number(approach.frame_blend_ms || 0);
           let basePoseId = poseIds[step % poseIds.length];
+          let bodyFrame = null;
+          if (frameBlendMs > 0 && step > 0) {{
+            const frameProgressMs = elapsed % frameMs;
+            if (frameProgressMs < frameBlendMs) {{
+              const previousBasePoseId = poseIds[(step - 1) % poseIds.length];
+              bodyFrame = bodyBlendFrame(
+                previousBasePoseId,
+                basePoseId,
+                frameProgressMs / frameBlendMs,
+                envelopeAt(positionMs),
+              );
+            }}
+          }}
           if (arrivalPoseIds.length && remaining <= arrivalTransitionMs) {{
             const arrivalProgress = 1 - remaining / Math.max(1, arrivalTransitionMs);
+            const arrivalPosition = arrivalProgress * arrivalPoseIds.length;
             const arrivalIndex = Math.min(
               arrivalPoseIds.length - 1,
-              Math.floor(arrivalProgress * arrivalPoseIds.length),
+              Math.floor(arrivalPosition),
             );
-            basePoseId = arrivalPoseIds[arrivalIndex];
+            const sourceBasePoseId = arrivalIndex === 0
+              ? poseIds[poseIds.length - 1]
+              : arrivalPoseIds[arrivalIndex - 1];
+            const targetBasePoseId = arrivalPoseIds[arrivalIndex];
+            basePoseId = targetBasePoseId;
+            bodyFrame = bodyBlendFrame(
+              sourceBasePoseId,
+              targetBasePoseId,
+              arrivalPosition - arrivalIndex,
+              envelopeAt(positionMs),
+            );
           }}
           const amplitude = envelopeAt(positionMs);
-          const mouthFrame = mouthFrameAt(basePoseId, positionMs, amplitude);
+          const mouthFrame = bodyFrame || mouthFrameAt(basePoseId, positionMs, amplitude);
           const rawProgress = elapsed / Math.max(1, approach.end_ms - approach.start_ms);
           const progress = approach.easing_id === "cubic_in_out"
             ? easeCubicInOut(rawProgress)
@@ -607,12 +650,42 @@ def _performance_review_html(
         const cue = activeCue(positionMs);
         const amplitude = envelopeAt(positionMs);
         const beats = activeClip.performance.motion_beats || [];
-        const beat = beats.reduce(
-          (selected, item) => item.time_ms <= positionMs ? item : selected,
-          null,
-        );
+        let beatIndex = -1;
+        for (let index = 0; index < beats.length; index += 1) {{
+          if (beats[index].time_ms <= positionMs) beatIndex = index;
+          else break;
+        }}
+        const beat = beatIndex >= 0 ? beats[beatIndex] : null;
         const basePoseId = beat?.pose_id || cue.pose_ids[0];
-        const mouthFrame = mouthFrameAt(basePoseId, positionMs, amplitude);
+        const transitionMs = Number(activeClip.performance.body_transition_ms || 0);
+        let mouthFrame = mouthFrameAt(basePoseId, positionMs, amplitude);
+        if (
+          transitionMs > 0
+          && positionMs >= approach.end_ms
+          && positionMs - approach.end_ms < transitionMs
+        ) {{
+          const arrivalPoseIds = approach.arrival_pose_ids || [];
+          const sourceBasePoseId = arrivalPoseIds.length
+            ? arrivalPoseIds[arrivalPoseIds.length - 1]
+            : approach.pose_ids[approach.pose_ids.length - 1];
+          mouthFrame = bodyBlendFrame(
+            sourceBasePoseId,
+            basePoseId,
+            (positionMs - approach.end_ms) / transitionMs,
+            amplitude,
+          );
+        }} else if (
+          transitionMs > 0
+          && beatIndex > 0
+          && positionMs - beat.time_ms < transitionMs
+        ) {{
+          mouthFrame = bodyBlendFrame(
+            beats[beatIndex - 1].pose_id,
+            basePoseId,
+            (positionMs - beat.time_ms) / transitionMs,
+            amplitude,
+          );
+        }}
         const hovering = activeClip.performance.motion_style === "hover";
         return {{
           poseId: mouthFrame.poseId,

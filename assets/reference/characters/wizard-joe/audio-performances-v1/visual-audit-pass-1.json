@@ -1,0 +1,796 @@
+{
+  "schema_version": 1,
+  "audit_id": "wizard-joe-audio-performance-visual-audit-pass-1",
+  "audited_clip_count": 95,
+  "summary": {
+    "pass_count": 55,
+    "review_count": 40,
+    "purpose": "Baseline full-corpus visual audit before systemic choreography corrections"
+  },
+  "method": {
+    "review_surface": "Large per-clip contact sheets rendered from projector-visible frames",
+    "reviewers": 4,
+    "coverage": "All 95 prerecorded Wizard Joe clips",
+    "status": "superseded_by_corrective_pass"
+  },
+  "clips": [
+    {
+      "manifest_index": 0,
+      "clip_id": "WJ_INTRO_001",
+      "verdict": "pass",
+      "rationale": "Flight cycle clearly approaches, brakes, and settles into hover with coherent scale progression.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 1,
+      "clip_id": "WJ_INTRO_002",
+      "verdict": "review",
+      "rationale": "Hover acting is expressive, but apparent size drops sharply during the magic gesture and rebounds during banking.",
+      "offending_transitions": [
+        "176_flight_hover_neutral -> 189_flight_magic_cast -> 178_flight_bank_left"
+      ]
+    },
+    {
+      "manifest_index": 2,
+      "clip_id": "WJ_INTRO_003",
+      "verdict": "review",
+      "rationale": "The staff introduction abruptly expands into an oversized heroic silhouette, then collapses into a restrained stance.",
+      "offending_transitions": [
+        "247_camera_intimate_hold -> 245_hero_declaration -> 123_staff_plant"
+      ]
+    },
+    {
+      "manifest_index": 3,
+      "clip_id": "WJ_INTRO_004",
+      "verdict": "pass",
+      "rationale": "Casting choreography supports the hypercube/projection material, followed by readable question-and-answer acting.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 4,
+      "clip_id": "WJ_INTRO_005",
+      "verdict": "pass",
+      "rationale": "Gentle confide, relief, and open-hand poses appropriately reinforce reassurance without visual disruption.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 5,
+      "clip_id": "WJ_WORLD_001",
+      "verdict": "pass",
+      "rationale": "Pointing, counting, defining, and summarizing gestures match the map/list structure cleanly.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 6,
+      "clip_id": "WJ_WORLD_JOEVILLE",
+      "verdict": "pass",
+      "rationale": "Book/story poses establish the world, while playful reactions support the productivity-hamster punchline.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 7,
+      "clip_id": "WJ_WORLD_BOULDER",
+      "verdict": "pass",
+      "rationale": "Field-report and storytelling progression is semantically appropriate and visually stable.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 8,
+      "clip_id": "WJ_WORLD_GITHUB",
+      "verdict": "pass",
+      "rationale": "Screen-pointing establishes the interface metaphor; the connected hat-save/stumble/recovery sequence supports the comic beasts.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 9,
+      "clip_id": "WJ_WORLD_002",
+      "verdict": "pass",
+      "rationale": "Counting, source/book, and presentation gestures support the expert-list and right-door explanation.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 10,
+      "clip_id": "WJ_WORLD_003",
+      "verdict": "pass",
+      "rationale": "Curious realization develops into interface pointing, matching confusion, labels, and learning the map.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 11,
+      "clip_id": "WJ_PURPOSE_001",
+      "verdict": "pass",
+      "rationale": "Long sequence remains varied and tracks clarity, boundaries, coordination, seriousness, and delivery.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 12,
+      "clip_id": "WJ_PURPOSE_002",
+      "verdict": "review",
+      "rationale": "Comedy dominates nearly the entire serious Enlightened Self explanation, then book-reading replaces the final exploration and hat joke.",
+      "offending_transitions": [
+        "247_camera_intimate_hold -> 238_comedy_double_take_one -> 239_comedy_double_take_two -> 240_comedy_staff_tangle -> 241_comedy_hat_save",
+        "071_story_character_voice -> 215_magic_book_open -> 129_hold_book_open -> 216_magic_read_incantation"
+      ]
+    },
+    {
+      "manifest_index": 13,
+      "clip_id": "WJ_PURPOSE_003",
+      "verdict": "pass",
+      "rationale": "Yield, explanation, resolve, confidence, and triumph form a restrained, coherent progression.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 14,
+      "clip_id": "WJ_ENTER_001",
+      "verdict": "pass",
+      "rationale": "Excitement, pride, and upward invitation cleanly sell the first-adventure question.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 15,
+      "clip_id": "WJ_ENTER_002",
+      "verdict": "review",
+      "rationale": "Reassurance escalates into a disproportionately heroic finish for the understated door joke.",
+      "offending_transitions": [
+        "106_emotion_serene -> 109_emotion_triumphant -> 245_hero_declaration"
+      ]
+    },
+    {
+      "manifest_index": 16,
+      "clip_id": "WJ_ENTER_003",
+      "verdict": "pass",
+      "rationale": "Presentation, story, quotation, thought, and playful recovery support the quest instructions and hovering joke.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 17,
+      "clip_id": "WJ_QUEST_001",
+      "verdict": "pass",
+      "rationale": "Directional pointing and concise explanatory gestures clearly introduce the Compass.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 18,
+      "clip_id": "WJ_QUEST_002",
+      "verdict": "review",
+      "rationale": "The clarity conclusion suddenly expands into the widest hero pose and immediately contracts.",
+      "offending_transitions": [
+        "032_realization_clear -> 245_hero_declaration -> 048_speak_emphasize_medium"
+      ]
+    },
+    {
+      "manifest_index": 19,
+      "clip_id": "WJ_QUEST_003",
+      "verdict": "review",
+      "rationale": "Story acting is strong, but the final resolve redundantly escalates from triumph into an oversized declaration.",
+      "offending_transitions": [
+        "081_emotion_confident -> 109_emotion_triumphant -> 245_hero_declaration"
+      ]
+    },
+    {
+      "manifest_index": 20,
+      "clip_id": "WJ_QUEST_004",
+      "verdict": "review",
+      "rationale": "Opening physical comedy fits Provisional, but the modest good-question conclusion becomes excessively heroic.",
+      "offending_transitions": [
+        "043_speak_explain_sequence -> 109_emotion_triumphant -> 245_hero_declaration"
+      ]
+    },
+    {
+      "manifest_index": 21,
+      "clip_id": "WJ_QUEST_005",
+      "verdict": "review",
+      "rationale": "The collaboration conclusion switches from useful enumeration into an extended slapstick chain that contradicts its supportive meaning.",
+      "offending_transitions": [
+        "046_speak_summarize -> 238_comedy_double_take_one -> 240_comedy_staff_tangle -> 239_comedy_double_take_two"
+      ]
+    },
+    {
+      "manifest_index": 22,
+      "clip_id": "WJ_QUEST_006",
+      "verdict": "pass",
+      "rationale": "Warm reassurance transitions naturally into invitation, presentation, and counting for the milestone recap.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 23,
+      "clip_id": "WJ_STAGE_LEGIBLE_START",
+      "verdict": "pass",
+      "rationale": "Quotation, field-report, and progressive story gestures clearly support the labels-and-legibility lesson.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 24,
+      "clip_id": "WJ_STAGE_LEGIBLE_COMPLETE",
+      "verdict": "review",
+      "rationale": "Celebration reads well, but the staff teleports across Joe during the hopeful, mastery, and quote sequence.",
+      "offending_transitions": [
+        "108_emotion_hopeful -> 220_magic_mastery_hero",
+        "220_magic_mastery_hero -> 057_speak_quote"
+      ]
+    },
+    {
+      "manifest_index": 25,
+      "clip_id": "WJ_STAGE_BOUNDED_START",
+      "verdict": "review",
+      "rationale": "The book suddenly appears during the browser-tab line and immediately vanishes, creating a semantically conflicting prop pop.",
+      "offending_transitions": [
+        "247_camera_intimate_hold -> 216_magic_read_incantation",
+        "216_magic_read_incantation -> 070_story_reveal"
+      ]
+    },
+    {
+      "manifest_index": 26,
+      "clip_id": "WJ_STAGE_BOUNDED_COMPLETE",
+      "verdict": "pass",
+      "rationale": "Boundary, stop, triumph, gratitude, surprise, and hope form a coherent escalation with stable scale.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 27,
+      "clip_id": "WJ_STAGE_COLLAB_START",
+      "verdict": "pass",
+      "rationale": "Slapstick acting matches both comic cues; silhouettes remain readable and varied without duplication.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 28,
+      "clip_id": "WJ_STAGE_COLLAB_COMPLETE",
+      "verdict": "pass",
+      "rationale": "Persuasion flows through the handrail joke into an appropriately restrained celebratory finish.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 29,
+      "clip_id": "WJ_STAGE_GENERATIVE_START",
+      "verdict": "review",
+      "rationale": "The sequence ends in a highly dynamic hat-save pose held for roughly 11.7 seconds through the explanatory list.",
+      "offending_transitions": [
+        "240_comedy_staff_tangle -> 241_comedy_hat_save"
+      ]
+    },
+    {
+      "manifest_index": 30,
+      "clip_id": "WJ_STAGE_GENERATIVE_COMPLETE",
+      "verdict": "review",
+      "rationale": "The final celebration repeats essentially the same raised-fist silhouette in adjacent beats.",
+      "offending_transitions": [
+        "109_emotion_triumphant -> 077_emotion_joy"
+      ]
+    },
+    {
+      "manifest_index": 31,
+      "clip_id": "WJ_STAGE_ENLIGHTENED_START",
+      "verdict": "review",
+      "rationale": "The embarrassed pose remains frozen for roughly 12.3 seconds through the central Enoughness explanation.",
+      "offending_transitions": [
+        "084_emotion_playful -> 095_emotion_embarrassed"
+      ]
+    },
+    {
+      "manifest_index": 32,
+      "clip_id": "WJ_STAGE_ENLIGHTENED_COMPLETE",
+      "verdict": "review",
+      "rationale": "The emotional arc is strong, but the staff visibly changes sides around the hero declaration.",
+      "offending_transitions": [
+        "047_speak_emphasize_low -> 245_hero_declaration",
+        "245_hero_declaration -> 048_speak_emphasize_medium"
+      ]
+    },
+    {
+      "manifest_index": 33,
+      "clip_id": "WJ_PROJECT_001",
+      "verdict": "pass",
+      "rationale": "The explanatory opening and escalating haunted-hallway comedy remain semantically and spatially coherent.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 34,
+      "clip_id": "WJ_PROJECT_002",
+      "verdict": "pass",
+      "rationale": "Compact comic progression supports the evaporation joke with consistent character scale.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 35,
+      "clip_id": "WJ_PROJECT_003",
+      "verdict": "pass",
+      "rationale": "Staff-tangle reaction transitions cleanly into ordered counting gestures for the shaped promise.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 36,
+      "clip_id": "WJ_PROJECT_004",
+      "verdict": "pass",
+      "rationale": "Thought, counting, summary, and left/right presentation poses clearly describe the task graph.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 37,
+      "clip_id": "WJ_PROJECT_005",
+      "verdict": "pass",
+      "rationale": "Solemn boundary acting transitions naturally into precise definition and summary gestures.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 38,
+      "clip_id": "WJ_PROJECT_006",
+      "verdict": "pass",
+      "rationale": "Messy staff comedy resolves convincingly into hopeful, listening, open-hand, and invitation poses.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 39,
+      "clip_id": "WJ_PROJECT_007",
+      "verdict": "pass",
+      "rationale": "Triumph followed by two counting beats cleanly communicates completion and visible trust.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 40,
+      "clip_id": "WJ_PROJECT_008",
+      "verdict": "review",
+      "rationale": "The staff teleports sides around the hero declaration, followed by an approximately 7.9-second final resolve hold.",
+      "offending_transitions": [
+        "109_emotion_triumphant -> 245_hero_declaration",
+        "245_hero_declaration -> 101_emotion_defiant",
+        "101_emotion_defiant -> 120_hand_fist_resolve"
+      ]
+    },
+    {
+      "manifest_index": 41,
+      "clip_id": "WJ_PROJECT_009",
+      "verdict": "pass",
+      "rationale": "Playful exit acting resolves into a distinct magic-cast punctuation without repetition.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 42,
+      "clip_id": "WJ_AI_001",
+      "verdict": "review",
+      "rationale": "The celebration repeatedly teleports the staff between sides of Joe across consecutive magic and victory poses.",
+      "offending_transitions": [
+        "203_magic_cast_begin -> 220_magic_mastery_hero",
+        "220_magic_mastery_hero -> 237_dance_finale",
+        "237_dance_finale -> 245_hero_declaration",
+        "245_hero_declaration -> 077_emotion_joy"
+      ]
+    },
+    {
+      "manifest_index": 43,
+      "clip_id": "WJ_AI_002",
+      "verdict": "pass",
+      "rationale": "Portal open/close action supports source comparison, then transitions cleanly into restrained comic disagreement.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 44,
+      "clip_id": "WJ_AI_003",
+      "verdict": "pass",
+      "rationale": "Temporary-hat comedy gives way to serious stop, clarify, and warning gestures at the correct cue boundary.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 45,
+      "clip_id": "WJ_AI_004",
+      "verdict": "pass",
+      "rationale": "Governance warning builds coherently from solemn persuasion through stop, determination, and defiance.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 46,
+      "clip_id": "WJ_LEDGER_001",
+      "verdict": "review",
+      "rationale": "Comedy begins during the literal ledger-measurement explanation and escalates well before the mattress joke lands.",
+      "offending_transitions": [
+        "075_speech_yield_floor -> 078_emotion_amused",
+        "095_emotion_embarrassed -> 239_comedy_double_take_two",
+        "239_comedy_double_take_two -> 240_comedy_staff_tangle",
+        "240_comedy_staff_tangle -> 241_comedy_hat_save"
+      ]
+    },
+    {
+      "manifest_index": 47,
+      "clip_id": "WJ_LEDGER_002",
+      "verdict": "pass",
+      "rationale": "Open explanatory poses remain stable, with comedy arriving only when the done-touching-it payoff begins.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 48,
+      "clip_id": "WJ_LEDGER_003",
+      "verdict": "review",
+      "rationale": "Counting works, but the tiny gift basket line triggers an oversized hero pose.",
+      "offending_transitions": [
+        "061_speak_count_three -> 245_hero_declaration"
+      ]
+    },
+    {
+      "manifest_index": 49,
+      "clip_id": "WJ_LEDGER_004",
+      "verdict": "review",
+      "rationale": "The literal magic-casting sequence overwhelms a grounded statement about shared value and introduces major silhouette changes.",
+      "offending_transitions": [
+        "111_hand_open_relaxed -> 204_magic_cast_release",
+        "205_magic_cast_hold -> 206_magic_cast_recoil"
+      ]
+    },
+    {
+      "manifest_index": 50,
+      "clip_id": "WJ_LEDGER_005",
+      "verdict": "review",
+      "rationale": "The restrained advice escalates into repeated victory poses, then abruptly contracts into defiance.",
+      "offending_transitions": [
+        "100_emotion_determined -> 109_emotion_triumphant",
+        "109_emotion_triumphant -> 245_hero_declaration",
+        "245_hero_declaration -> 101_emotion_defiant"
+      ]
+    },
+    {
+      "manifest_index": 51,
+      "clip_id": "WJ_QUEST_MAP_001",
+      "verdict": "review",
+      "rationale": "Clear instructional acting becomes extended slapstick during the earnest uncertainty message.",
+      "offending_transitions": [
+        "059_speak_count_one -> 242_comedy_stumble",
+        "239_comedy_double_take_two -> 240_comedy_staff_tangle"
+      ]
+    },
+    {
+      "manifest_index": 52,
+      "clip_id": "WJ_QUEST_MAP_002",
+      "verdict": "pass",
+      "rationale": "Pointing, panel interaction, and precise explanation form a coherent map and interface progression with stable scale.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 53,
+      "clip_id": "WJ_QUEST_PROMISE_001",
+      "verdict": "review",
+      "rationale": "The calendar joke supports mild comedy, but the sudden hat-save and stumble sequence is too physically broad before the serious promise instructions.",
+      "offending_transitions": [
+        "078_emotion_amused -> 241_comedy_hat_save",
+        "241_comedy_hat_save -> 242_comedy_stumble"
+      ]
+    },
+    {
+      "manifest_index": 54,
+      "clip_id": "WJ_QUEST_PROMISE_002",
+      "verdict": "pass",
+      "rationale": "Resolve, celebration, confidence, and final emphasis support the accomplishment; broad poses remain narratively motivated.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 55,
+      "clip_id": "WJ_QUEST_ASSET_001",
+      "verdict": "pass",
+      "rationale": "Storytelling naturally resolves into summary and alternating presentation gestures; silhouettes remain consistent.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 56,
+      "clip_id": "WJ_QUEST_ASSET_002",
+      "verdict": "pass",
+      "rationale": "Definition, explanation, and counting gestures give the long list useful structure without visual noise.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 57,
+      "clip_id": "WJ_QUEST_COMMONS_001",
+      "verdict": "review",
+      "rationale": "A definition of the commons begins with an unmotivated full-body stumble, then snaps into resolve.",
+      "offending_transitions": [
+        "247_camera_intimate_hold -> 242_comedy_stumble",
+        "242_comedy_stumble -> 120_hand_fist_resolve"
+      ]
+    },
+    {
+      "manifest_index": 58,
+      "clip_id": "WJ_QUEST_COMMONS_002",
+      "verdict": "pass",
+      "rationale": "Open explanation gradually becomes playful and embarrassed, matching the midnight and villain jokes without excessive action.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 59,
+      "clip_id": "WJ_MENTOR_001",
+      "verdict": "review",
+      "rationale": "The warm mentoring opening is strong, but the latter half becomes a long chain of unrelated slapstick that undercuts the line that is enough.",
+      "offending_transitions": [
+        "112_hand_present_screen_right -> 238_comedy_double_take_one",
+        "240_comedy_staff_tangle -> 241_comedy_hat_save",
+        "078_emotion_amused -> 242_comedy_stumble"
+      ]
+    },
+    {
+      "manifest_index": 60,
+      "clip_id": "WJ_RETURN_001",
+      "verdict": "pass",
+      "rationale": "Warm welcome, story gestures, book interaction, and reflective thinking create a coherent return sequence.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 61,
+      "clip_id": "WJ_FIRST_QUESTION_REAL",
+      "verdict": "pass",
+      "rationale": "Questioning, source and book reference, amusement, and quotation gestures track the explanation and interface joke well.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 62,
+      "clip_id": "WJ_FIRST_QUESTION_BOUNDARY",
+      "verdict": "review",
+      "rationale": "The stop gesture fits, but the aggressive staff-braced challenge contradicts the reassuring boundary message and causes a large silhouette jump.",
+      "offending_transitions": [
+        "052_speak_warn -> 053_speak_challenge",
+        "053_speak_challenge -> 054_speak_persuade"
+      ]
+    },
+    {
+      "manifest_index": 63,
+      "clip_id": "WJ_FIRST_QUESTION_ENOUGH",
+      "verdict": "review",
+      "rationale": "Resolve works initially, but slapstick starts during the serious freedom and building guidance rather than at the final instructions joke.",
+      "offending_transitions": [
+        "120_hand_fist_resolve -> 240_comedy_staff_tangle",
+        "241_comedy_hat_save -> 242_comedy_stumble"
+      ]
+    },
+    {
+      "manifest_index": 64,
+      "clip_id": "WJ_FIRST_QUESTION_JOE",
+      "verdict": "pass",
+      "rationale": "Character voice, self-reference, tutorial explanation, and compassionate finish are restrained and semantically clear.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 65,
+      "clip_id": "WJ_FIRST_QUESTION_WHY",
+      "verdict": "review",
+      "rationale": "The final quality-assurance joke receives four near-consecutive celebration poses, creating repetitive fist-raise acting.",
+      "offending_transitions": [
+        "083_emotion_proud -> 109_emotion_triumphant",
+        "109_emotion_triumphant -> 077_emotion_joy",
+        "077_emotion_joy -> 079_emotion_excited"
+      ]
+    },
+    {
+      "manifest_index": 66,
+      "clip_id": "WJ_FIRST_QUESTION_NOT_READY",
+      "verdict": "pass",
+      "rationale": "Patient stillness, confidential reassurance, and gentle explanation consistently support permission and readiness.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 67,
+      "clip_id": "WJ_COMPASS_001",
+      "verdict": "pass",
+      "rationale": "Clarification, mild comic recovery, amusement, playfulness, and embarrassment track the north joke cleanly.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 68,
+      "clip_id": "WJ_NOTEBOOK_001",
+      "verdict": "review",
+      "rationale": "The factual notebook explanation is acted as broad comedy before the useful interface sequence begins.",
+      "offending_transitions": [
+        "247_camera_intimate_hold -> 241_comedy_hat_save",
+        "241_comedy_hat_save -> 242_comedy_stumble"
+      ]
+    },
+    {
+      "manifest_index": 69,
+      "clip_id": "WJ_NOTEBOOK_QUESTION",
+      "verdict": "review",
+      "rationale": "Serious explanation jumps abruptly into a staff-tangle pose; later playfulness fits the trench-coat joke better.",
+      "offending_transitions": [
+        "063_news_presenter_serious -> 240_comedy_staff_tangle"
+      ]
+    },
+    {
+      "manifest_index": 70,
+      "clip_id": "WJ_NOTEBOOK_SOURCE",
+      "verdict": "pass",
+      "rationale": "The visible triumphant-to-grateful finish clearly communicates successful connection and appreciation.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 71,
+      "clip_id": "WJ_NOTEBOOK_REVISE",
+      "verdict": "pass",
+      "rationale": "Explanation, pride, celebration, reassurance, and serenity create a readable emotional arc for revision and release.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 72,
+      "clip_id": "WJ_CLARITY_MILESTONE",
+      "verdict": "review",
+      "rationale": "Clear explanation abruptly becomes two unrelated slapstick actions; the persuasive shrug is not represented.",
+      "offending_transitions": [
+        "046_speak_summarize -> 240_comedy_staff_tangle",
+        "240_comedy_staff_tangle -> 241_comedy_hat_save"
+      ]
+    },
+    {
+      "manifest_index": 73,
+      "clip_id": "WJ_BOUNDARY_001",
+      "verdict": "review",
+      "rationale": "Semantics are strong, but the crouched magic charge snaps abruptly into upright storytelling with major staff and silhouette displacement.",
+      "offending_transitions": [
+        "202_magic_charge -> 071_story_character_voice"
+      ]
+    },
+    {
+      "manifest_index": 74,
+      "clip_id": "WJ_BOUNDARY_QUIET",
+      "verdict": "review",
+      "rationale": "The trees-are-good-listeners line becomes a counting gesture, providing neither quiet nor listening behavior.",
+      "offending_transitions": [
+        "247_camera_intimate_hold -> 061_speak_count_three",
+        "061_speak_count_three -> 044_speak_define_term"
+      ]
+    },
+    {
+      "manifest_index": 75,
+      "clip_id": "WJ_BOUNDARY_ASK",
+      "verdict": "pass",
+      "rationale": "The compassionate final posture supports the social-boundary comparison; scale and silhouette remain controlled.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 76,
+      "clip_id": "WJ_BOUNDARY_OPEN",
+      "verdict": "pass",
+      "rationale": "The confiding posture opens naturally into a hopeful invitation; the sequence is coherent and visually continuous.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 77,
+      "clip_id": "WJ_BOUNDARY_NONE",
+      "verdict": "pass",
+      "rationale": "The low-to-medium emphasis progression communicates a firm boundary without excessive motion or visible scale changes.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 78,
+      "clip_id": "WJ_BOUNDARY_DECLINE",
+      "verdict": "review",
+      "rationale": "The decisive clean-no acting is hidden by the approach; the only exposed gesture is generic precision.",
+      "offending_transitions": [
+        "247_camera_intimate_hold -> 042_speak_explain_precise"
+      ]
+    },
+    {
+      "manifest_index": 79,
+      "clip_id": "WJ_BOUNDARY_QUEUE",
+      "verdict": "pass",
+      "rationale": "The visible open explanation is restrained, readable, and appropriate for reassuring the listener that nothing is urgent.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 80,
+      "clip_id": "WJ_BOUNDARY_RESPECT",
+      "verdict": "pass",
+      "rationale": "Open presentation followed by directional pointing clearly supports respecting the dial and trying another door.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 81,
+      "clip_id": "WJ_BOUNDARY_EXIT",
+      "verdict": "pass",
+      "rationale": "Summarizing, open explanation, and compassionate resolution remain smooth and suit the dry praise.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 82,
+      "clip_id": "WJ_FOCUS_LOW",
+      "verdict": "review",
+      "rationale": "A forceful staff-braced challenge contradicts the gentle low-focus message and then snaps back to a neutral persuasive stance.",
+      "offending_transitions": [
+        "247_camera_intimate_hold -> 053_speak_challenge",
+        "053_speak_challenge -> 054_speak_persuade"
+      ]
+    },
+    {
+      "manifest_index": 83,
+      "clip_id": "WJ_FOCUS_REST",
+      "verdict": "review",
+      "rationale": "Rest is portrayed as a large triumphant wing spread followed by a visibly smaller listening pose; tone and scale both pop.",
+      "offending_transitions": [
+        "247_camera_intimate_hold -> 108_emotion_hopeful",
+        "108_emotion_hopeful -> 022_listen_user_warm"
+      ]
+    },
+    {
+      "manifest_index": 84,
+      "clip_id": "WJ_BOULDER_BRIDGE",
+      "verdict": "pass",
+      "rationale": "Storytelling progresses logically through directional labels into a complete portal-casting sequence; it is energetic but coherent.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 85,
+      "clip_id": "WJ_BOULDER_TRAIL",
+      "verdict": "pass",
+      "rationale": "Serious explanation and left, right, and downward pointing create a clear stage-readable walkthrough with stable scale.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 86,
+      "clip_id": "WJ_BOULDER_CIVIC",
+      "verdict": "review",
+      "rationale": "The visible performance is entirely playful and embarrassed despite the cue stressing real people and factual honesty.",
+      "offending_transitions": [
+        "247_camera_intimate_hold -> 084_emotion_playful",
+        "084_emotion_playful -> 095_emotion_embarrassed"
+      ]
+    },
+    {
+      "manifest_index": 87,
+      "clip_id": "WJ_BOULDER_PUBLIC",
+      "verdict": "review",
+      "rationale": "Presentation starts coherently, but the clear-charter line ends in exaggerated comedy and a large body tilt.",
+      "offending_transitions": [
+        "112_hand_present_screen_right -> 243_comedy_recover_dignity",
+        "243_comedy_recover_dignity -> 239_comedy_double_take_two"
+      ]
+    },
+    {
+      "manifest_index": 88,
+      "clip_id": "WJ_BOULDER_LORE",
+      "verdict": "pass",
+      "rationale": "Book, amusement, playful storytelling, quotation, and report poses form a varied but intelligible lore-performance arc.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 89,
+      "clip_id": "WJ_GITHUB_REPO",
+      "verdict": "pass",
+      "rationale": "The presenter progression is restrained, with a well-timed double take supporting the drawers-have-feelings joke.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 90,
+      "clip_id": "WJ_GITHUB_ISSUE",
+      "verdict": "review",
+      "rationale": "A large staff-tangle action overwhelms the calm reassurance that an issue is merely understandable work.",
+      "offending_transitions": [
+        "247_camera_intimate_hold -> 240_comedy_staff_tangle",
+        "240_comedy_staff_tangle -> 078_emotion_amused"
+      ]
+    },
+    {
+      "manifest_index": 91,
+      "clip_id": "WJ_GITHUB_PR",
+      "verdict": "review",
+      "rationale": "Quote and reassurance poses work, but the final hat-saving action causes a major silhouette jump for the mild bridge-shaped joke.",
+      "offending_transitions": [
+        "051_speak_reassure -> 241_comedy_hat_save"
+      ]
+    },
+    {
+      "manifest_index": 92,
+      "clip_id": "WJ_GITHUB_CONFLICT",
+      "verdict": "review",
+      "rationale": "Calm recovery jumps into an oversized hero declaration; the following defiant pose also teleports the staff across the body.",
+      "offending_transitions": [
+        "110_emotion_recover_composure -> 245_hero_declaration",
+        "245_hero_declaration -> 101_emotion_defiant"
+      ]
+    },
+    {
+      "manifest_index": 93,
+      "clip_id": "WJ_GITHUB_DOCS",
+      "verdict": "pass",
+      "rationale": "Clarify, summarize, and low emphasis form a smooth explanatory sequence with only mild, acceptable hand repetition.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 94,
+      "clip_id": "WJ_GITHUB_MAINTAINER",
+      "verdict": "pass",
+      "rationale": "Serious explanation settles through resume and reassurance into neutral with stable scale and appropriate boundary-focused acting.",
+      "offending_transitions": []
+    }
+  ]
+}

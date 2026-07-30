@@ -1,0 +1,712 @@
+{
+  "schema_version": 1,
+  "audit_id": "wizard-joe-audio-performance-visual-audit-pass-2",
+  "audited_clip_count": 95,
+  "summary": {
+    "pass_count": 85,
+    "review_count": 10,
+    "purpose": "Full-corpus visual verification after first systemic choreography correction"
+  },
+  "method": {
+    "review_surface": "Large per-clip contact sheets rendered from projector-visible frames",
+    "reviewers": 4,
+    "coverage": "All 95 prerecorded Wizard Joe clips",
+    "status": "superseded_by_targeted_corrections_and_final_pass"
+  },
+  "clips": [
+    {
+      "manifest_index": 0,
+      "clip_id": "WJ_INTRO_001",
+      "verdict": "pass",
+      "rationale": "The forward flight, braking beat, and final hover form a clear comedic arrival with coherent scale growth, stable staff ownership, and a readable terminal hold.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 1,
+      "clip_id": "WJ_INTRO_002",
+      "verdict": "review",
+      "rationale": "The prior magic-cast tangent is gone, but both inserted glide frames shrink and narrow Joe during stationary hover dialogue, and the clip ends banking instead of returning to a settled hover.",
+      "offending_transitions": [
+        "176_flight_hover_neutral -> 177_flight_glide_forward -> 188_flight_staff_forward",
+        "187_flight_stationary_speak -> 177_flight_glide_forward -> 178_flight_bank_left",
+        "178_flight_bank_left -> 179_flight_bank_right [terminal]"
+      ]
+    },
+    {
+      "manifest_index": 2,
+      "clip_id": "WJ_INTRO_003",
+      "verdict": "pass",
+      "rationale": "The pass-1 hero-declaration scale collapse is resolved; welcome, staff explanation, joke, and invitation now progress through consistently registered conversational silhouettes.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 3,
+      "clip_id": "WJ_INTRO_004",
+      "verdict": "pass",
+      "rationale": "The projection explanation is supported by a coherent sensing-to-casting chain, followed by restrained question-and-answer acting with continuous staff, wings, and body scale.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 4,
+      "clip_id": "WJ_INTRO_005",
+      "verdict": "pass",
+      "rationale": "The reassuring transcript tracks cleanly from intimate framing through suspense, reveal, relief, and open explanation without registration pops or excessive repetition.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 5,
+      "clip_id": "WJ_WORLD_001",
+      "verdict": "pass",
+      "rationale": "Map-opening exposition uses precise pointing, counting, defining, and presenting gestures with stable scale and a clean screen-right terminal presentation.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 6,
+      "clip_id": "WJ_WORLD_JOEVILLE",
+      "verdict": "pass",
+      "rationale": "Reveal, character voice, moral, field-report, and story-building poses match the playful Joeville description while maintaining consistent body, wing, and staff registration.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 7,
+      "clip_id": "WJ_WORLD_BOULDER",
+      "verdict": "pass",
+      "rationale": "The suspense-to-reveal storytelling arc supports the real-versus-imaginative labeling message with varied but continuous silhouettes and a stable quoted terminal beat.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 8,
+      "clip_id": "WJ_WORLD_GITHUB",
+      "verdict": "pass",
+      "rationale": "Directional pointing, downward emphasis, precise explanation, and lore-building gestures clearly support the GitHub metaphors without scale, staff, or wing discontinuities.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 9,
+      "clip_id": "WJ_WORLD_002",
+      "verdict": "pass",
+      "rationale": "Counting and story gestures organize the expert examples and resolve into balanced left/right presentation poses with coherent scale and no distracting repeats.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 10,
+      "clip_id": "WJ_WORLD_003",
+      "verdict": "pass",
+      "rationale": "Questioning, realization, directional pointing, and the two UI-panel actions match the map-and-interface explanation with stable registration and continuous prop ownership.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 11,
+      "clip_id": "WJ_PURPOSE_001",
+      "verdict": "pass",
+      "rationale": "The long clarity-boundaries-community sequence uses counts, presentations, resolve, and a contextually earned hopeful expansion while returning to stable explanatory poses and a clear downward terminal cue.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 12,
+      "clip_id": "WJ_PURPOSE_002",
+      "verdict": "pass",
+      "rationale": "Both pass-1 defects are resolved: the comedy detour and unrelated book-incantation chain are replaced by coherent explanation, determination, hope, invitation, and presenter holds.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 13,
+      "clip_id": "WJ_PURPOSE_003",
+      "verdict": "pass",
+      "rationale": "Yield, presentation, counting, defiance, resolve, confidence, and pride support the corrective definition without scale pops, staff discontinuity, or needless repetition.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 14,
+      "clip_id": "WJ_ENTER_001",
+      "verdict": "pass",
+      "rationale": "The short invitation rises naturally from camera arrival through high emphasis and an open hand to a legible upward quest cue, with a stable terminal pose.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 15,
+      "clip_id": "WJ_ENTER_002",
+      "verdict": "review",
+      "rationale": "The pass-1 triumphant hero pose is removed, but the gentle reassurance still ends on an oversized full-wing hopeful silhouette with no return to a quiet listening hold.",
+      "offending_transitions": [
+        "106_emotion_serene -> 083_emotion_proud -> 108_emotion_hopeful [terminal]"
+      ]
+    },
+    {
+      "manifest_index": 16,
+      "clip_id": "WJ_ENTER_003",
+      "verdict": "pass",
+      "rationale": "Presentation, reporting, story, thought, question, realization, and yield poses follow the first-quest instructions coherently with consistent scale and a calm open terminal hold.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 17,
+      "clip_id": "WJ_QUEST_001",
+      "verdict": "pass",
+      "rationale": "Left/right map pointing, definition, summary, and balanced presentation clearly explain the Compass while preserving staff, wing, body, and scale continuity.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 18,
+      "clip_id": "WJ_QUEST_002",
+      "verdict": "pass",
+      "rationale": "The pass-1 ceremonial hero interruption is resolved by a semantically appropriate hopeful clarity beat between realization and measured emphasis, with stable body and staff registration.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 19,
+      "clip_id": "WJ_QUEST_003",
+      "verdict": "pass",
+      "rationale": "The pass-1 triumph-and-hero detour is replaced by a coherent quote, moral, suspense, reveal, confidence, determination, defiance, and resolve arc with a firm terminal hold.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 20,
+      "clip_id": "WJ_QUEST_004",
+      "verdict": "pass",
+      "rationale": "The prior grand hero declaration is gone; confidence, definition, explanation, hope, and determination now support the provisional-to-good-question idea with readable continuity.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 21,
+      "clip_id": "WJ_QUEST_005",
+      "verdict": "pass",
+      "rationale": "The pass-1 comedy sequence is fully removed, and the count-to-definition-to-determination progression now explains collaborative scope with stable registration and resolve.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 22,
+      "clip_id": "WJ_QUEST_006",
+      "verdict": "pass",
+      "rationale": "Field report, story, counting, definition, and closed-to-open notebook poses match the quest recap and first-chapter reward with coherent prop and body continuity.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 23,
+      "clip_id": "WJ_STAGE_LEGIBLE_START",
+      "verdict": "pass",
+      "rationale": "Story-build, moral, suspense, character voice, quote, reporting, and reveal gestures create a varied but stable stage introduction with a clear terminal reveal.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 24,
+      "clip_id": "WJ_STAGE_LEGIBLE_COMPLETE",
+      "verdict": "pass",
+      "rationale": "The story and quotation gestures now progress coherently with stable scale and a consistently screen-right staff; the pass-1 teleport is resolved.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 25,
+      "clip_id": "WJ_STAGE_BOUNDED_START",
+      "verdict": "pass",
+      "rationale": "The boundary-to-story arc is semantically clear, visually varied, and free of the pass-1 book appearance and disappearance.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 26,
+      "clip_id": "WJ_STAGE_BOUNDED_COMPLETE",
+      "verdict": "pass",
+      "rationale": "Stop, presentation, and ordered explanation gestures follow the cues cleanly with stable registration, wings, and staff.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 27,
+      "clip_id": "WJ_STAGE_COLLAB_START",
+      "verdict": "pass",
+      "rationale": "Resolve gives way to well-timed physical comedy and recovery, with readable silhouettes and an appropriate terminal dignity hold.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 28,
+      "clip_id": "WJ_STAGE_COLLAB_COMPLETE",
+      "verdict": "pass",
+      "rationale": "Invitation and explanation build naturally into confidence and emphasis without prop discontinuity or excessive pose reuse.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 29,
+      "clip_id": "WJ_STAGE_GENERATIVE_START",
+      "verdict": "pass",
+      "rationale": "Celebration now settles into sustained explanatory gestures, eliminating the pass-1 long terminal hold on the dynamic hat-save pose.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 30,
+      "clip_id": "WJ_STAGE_GENERATIVE_COMPLETE",
+      "verdict": "pass",
+      "rationale": "The revised sequence moves from reset through reporting and story setup without the pass-1 adjacent duplicate victory silhouettes.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 31,
+      "clip_id": "WJ_STAGE_ENLIGHTENED_START",
+      "verdict": "pass",
+      "rationale": "A varied chain of definition, clarification, summary, and presentation poses now carries the explanation instead of freezing on embarrassment.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 32,
+      "clip_id": "WJ_STAGE_ENLIGHTENED_COMPLETE",
+      "verdict": "pass",
+      "rationale": "The emotional arc remains strong while the staff stays screen-right throughout; the pass-1 hero-declaration side swap is resolved.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 33,
+      "clip_id": "WJ_PROJECT_001",
+      "verdict": "pass",
+      "rationale": "Invitation, counting, definition, spatial presentation, and late comic release track the cue progression with stable scale and props.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 34,
+      "clip_id": "WJ_PROJECT_002",
+      "verdict": "pass",
+      "rationale": "The compact determination-to-confidence progression is semantically direct, well registered, and free of redundant silhouettes.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 35,
+      "clip_id": "WJ_PROJECT_003",
+      "verdict": "pass",
+      "rationale": "High emphasis transitions cleanly into sequence explanation and counting with consistent body, wing, and staff placement.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 36,
+      "clip_id": "WJ_PROJECT_004",
+      "verdict": "pass",
+      "rationale": "Recall, enumeration, summary, and left-right presentation form a clear explanatory progression with no jarring continuity break.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 37,
+      "clip_id": "WJ_PROJECT_005",
+      "verdict": "pass",
+      "rationale": "Defiance softens into solemn definition and summary at the right semantic beats while scale and staff continuity remain stable.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 38,
+      "clip_id": "WJ_PROJECT_006",
+      "verdict": "pass",
+      "rationale": "Ready speech, hope, warm listening, openness, and invitation create a coherent supportive arc with acceptable wing expansion.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 39,
+      "clip_id": "WJ_PROJECT_007",
+      "verdict": "pass",
+      "rationale": "Triumph settles into gratitude and ordered counting, preserving clear silhouettes and consistent character registration.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 40,
+      "clip_id": "WJ_PROJECT_008",
+      "verdict": "pass",
+      "rationale": "Pride, hope, defiance, resolve, and confidence now retain a screen-right staff and avoid the pass-1 hero teleport and overlong resolve hold.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 41,
+      "clip_id": "WJ_PROJECT_009",
+      "verdict": "pass",
+      "rationale": "Low-to-high emphasis, open-hand explanation, and the final count gesture are varied, cue-appropriate, and spatially continuous.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 42,
+      "clip_id": "WJ_AI_001",
+      "verdict": "pass",
+      "rationale": "Definition, counting, presentation, persuasion, seriousness, and stop now form a stable explanatory sequence with all pass-1 staff teleports removed.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 43,
+      "clip_id": "WJ_AI_002",
+      "verdict": "review",
+      "rationale": "The raised-staff action is semantically apt, but Joe visibly shrinks and then grows because the tall prop pose is fit to a different apparent body scale.",
+      "offending_transitions": [
+        "197_magic_prepare_small -> 201_magic_raise_staff",
+        "201_magic_raise_staff -> 078_emotion_amused"
+      ]
+    },
+    {
+      "manifest_index": 44,
+      "clip_id": "WJ_AI_003",
+      "verdict": "pass",
+      "rationale": "Comedy recovery transitions into clarification, warning, challenge, and persuasion at sensible cue boundaries with stable scale and intentional staff action.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 45,
+      "clip_id": "WJ_AI_004",
+      "verdict": "pass",
+      "rationale": "The governance warning builds coherently through solemn persuasion, stop, determination, and defiance with consistent staff and wing continuity.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 46,
+      "clip_id": "WJ_LEDGER_001",
+      "verdict": "pass",
+      "rationale": "Literal explanation and counting now occupy the early ledger material, with embarrassment and comedy delayed until the payoff; the pass-1 timing defect is resolved.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 47,
+      "clip_id": "WJ_LEDGER_002",
+      "verdict": "pass",
+      "rationale": "Open presentation, reset, summary, and sequence explanation remain semantically coherent and visually stable through the terminal beat.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 48,
+      "clip_id": "WJ_LEDGER_003",
+      "verdict": "pass",
+      "rationale": "The prior hero-declaration spike is resolved; the count-two/count-three sequence now settles into quiet confidence with stable scale, staff, wings, and a clean terminal hold.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 49,
+      "clip_id": "WJ_LEDGER_004",
+      "verdict": "pass",
+      "rationale": "The prior casting interruption is gone, and the restrained emphasis, relaxed hand, summary, sequence, and count gestures form a coherent explanatory progression without registration jumps.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 50,
+      "clip_id": "WJ_LEDGER_005",
+      "verdict": "pass",
+      "rationale": "The repeated triumph cycle is resolved; the revised floor-yield, explanation, pride, hope, emphasis, and determination beats support the freedom message while preserving readable continuity.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 51,
+      "clip_id": "WJ_QUEST_MAP_001",
+      "verdict": "pass",
+      "rationale": "The former slapstick break is removed, and the directional pointing evolves naturally into explanation and firm encouragement with consistent body, staff, wing, and screen registration.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 52,
+      "clip_id": "WJ_QUEST_MAP_002",
+      "verdict": "pass",
+      "rationale": "Directional points, panel interaction, and precise explanation remain semantically aligned with the map instructions, with controlled scale and an intelligible final pointing hold.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 53,
+      "clip_id": "WJ_QUEST_PROMISE_001",
+      "verdict": "pass",
+      "rationale": "The hat-and-stumble defect is resolved; confident resolve leads into an appropriate open-book reading passage and finishes on measured emphasis without a disruptive continuity break.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 54,
+      "clip_id": "WJ_QUEST_PROMISE_002",
+      "verdict": "pass",
+      "rationale": "Resolve, hope, confidence, pride, and low emphasis create a concise accomplishment arc with stable silhouette and a suitable terminal hold.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 55,
+      "clip_id": "WJ_QUEST_ASSET_001",
+      "verdict": "pass",
+      "rationale": "The story-opening and character-voice beats transition cleanly into left, right, and downward enumeration, matching the reusable-assets transcript with strong silhouette readability.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 56,
+      "clip_id": "WJ_QUEST_ASSET_002",
+      "verdict": "pass",
+      "rationale": "Count-three, definition, sequencing, count-one, and summary gestures provide clear instructional structure with no excessive repetition or visible staff/body discontinuity.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 57,
+      "clip_id": "WJ_QUEST_COMMONS_001",
+      "verdict": "pass",
+      "rationale": "The stumble is removed; determination, pride, resolve, emphasis, hope, and confidence now deliver a grounded commons message with consistent registration and a composed finish.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 58,
+      "clip_id": "WJ_QUEST_COMMONS_002",
+      "verdict": "pass",
+      "rationale": "Open explanation, embarrassment, recovery, amusement, and playfulness support the comic language without tipping into excessive physical comedy, and continuity remains controlled.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 59,
+      "clip_id": "WJ_MENTOR_001",
+      "verdict": "pass",
+      "rationale": "The extended slapstick passage is fully removed; warm listening and explanatory gestures build toward measured confidence and affirmation, with only purposeful, well-spaced pose reuse.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 60,
+      "clip_id": "WJ_RETURN_001",
+      "verdict": "pass",
+      "rationale": "Character voice, moral, field-report, story-build, and reflective thinking poses sustain a warm narrative arc with stable scale and an appropriate contemplative terminal hold.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 61,
+      "clip_id": "WJ_FIRST_QUESTION_REAL",
+      "verdict": "pass",
+      "rationale": "The yield, explanation, suspense, reveal, character-voice, moral, and quotation beats track the transcript cleanly without materialization, repetition, or registration defects.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 62,
+      "clip_id": "WJ_FIRST_QUESTION_BOUNDARY",
+      "verdict": "review",
+      "rationale": "The prior defect is not resolved: a calm boundary explanation still escalates abruptly from warning into an aggressive staff-braced challenge before immediately returning to persuasion.",
+      "offending_transitions": [
+        "052_speak_warn -> 053_speak_challenge",
+        "053_speak_challenge -> 054_speak_persuade"
+      ]
+    },
+    {
+      "manifest_index": 63,
+      "clip_id": "WJ_FIRST_QUESTION_ENOUGH",
+      "verdict": "pass",
+      "rationale": "The slapstick transition is removed; panel interaction, resolve, open presentation, speaking readiness, yield, amusement, and explanation now form a coherent and visually stable response.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 64,
+      "clip_id": "WJ_FIRST_QUESTION_JOE",
+      "verdict": "pass",
+      "rationale": "Embarrassment, dignified recovery, composure, open presentation, speaking readiness, and compassion create a readable self-effacing-to-warm arc with steady staff and wing continuity.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 65,
+      "clip_id": "WJ_FIRST_QUESTION_WHY",
+      "verdict": "pass",
+      "rationale": "The former repetitive triumph cluster is resolved; invitation and reveal lead through joy, explanation, amusement, and excitement with sufficient variation and an energetic final hold.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 66,
+      "clip_id": "WJ_FIRST_QUESTION_NOT_READY",
+      "verdict": "pass",
+      "rationale": "Speaking readiness, patient waiting, confiding, open explanation, pride, and hope support a reassuring response, with intentional wing expansion and no jarring registration change.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 67,
+      "clip_id": "WJ_COMPASS_001",
+      "verdict": "pass",
+      "rationale": "Clarification and resumed speech build into determined choice and resolve, matching the compass's action-oriented conclusion while maintaining scale, staff, wing, and terminal-hold continuity.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 68,
+      "clip_id": "WJ_NOTEBOOK_001",
+      "verdict": "review",
+      "rationale": "The prior comedy defect is removed and the notebook acting is apt, but the book changes size, color, and hand while the staff jumps sides, then both props abruptly reconfigure for the UI panel.",
+      "offending_transitions": [
+        "129_hold_book_open -> 215_magic_book_open",
+        "215_magic_book_open -> 133_touch_ui_panel"
+      ]
+    },
+    {
+      "manifest_index": 69,
+      "clip_id": "WJ_NOTEBOOK_QUESTION",
+      "verdict": "pass",
+      "rationale": "The staff-tangle defect is resolved; open and serious presentation moves through surprise, embarrassment, and dignified recovery in a compact comic arc with stable prop continuity.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 70,
+      "clip_id": "WJ_NOTEBOOK_SOURCE",
+      "verdict": "pass",
+      "rationale": "Panel interaction, explanation, gratitude, and a restrained resolve gesture clearly support the source-connected acknowledgement with consistent scale and a firm terminal hold.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 71,
+      "clip_id": "WJ_NOTEBOOK_REVISE",
+      "verdict": "pass",
+      "rationale": "Summary and low emphasis transition through surprise and hope into reassurance and serenity, matching the revision joke while ending on a calm, stable hold.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 72,
+      "clip_id": "WJ_CLARITY_MILESTONE",
+      "verdict": "pass",
+      "rationale": "The prior slapstick detour is resolved; serious explanation now rises into measured emphasis and an open relaxed terminal pose with stable scale, staff, and wings.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 73,
+      "clip_id": "WJ_BOUNDARY_001",
+      "verdict": "review",
+      "rationale": "The original charge-to-story snap was replaced, but the new magic sequence still jumps from a diagonal full-body levitation stance to an upright field-report pose with a large staff and body registration change.",
+      "offending_transitions": [
+        "207_magic_cast_recover -> 211_magic_levitate_object",
+        "211_magic_levitate_object -> 066_news_field_report"
+      ]
+    },
+    {
+      "manifest_index": 74,
+      "clip_id": "WJ_BOUNDARY_QUIET",
+      "verdict": "pass",
+      "rationale": "The unrelated counting poses are gone; presentation, invitation, and compassion now support quiet exploration and listening with controlled silhouette changes.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 75,
+      "clip_id": "WJ_BOUNDARY_ASK",
+      "verdict": "pass",
+      "rationale": "Confiding speech resolves into compassion with consistent registration, stable staff placement, and no excessive repetition.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 76,
+      "clip_id": "WJ_BOUNDARY_OPEN",
+      "verdict": "pass",
+      "rationale": "Open explanation, confiding reassurance, and a hopeful terminal hold form a semantically clear invitation sequence without a disruptive scale or staff pop.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 77,
+      "clip_id": "WJ_BOUNDARY_NONE",
+      "verdict": "pass",
+      "rationale": "Define, low-emphasis, and medium-emphasis poses communicate a firm boundary while maintaining stable body, staff, wing, and terminal continuity.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 78,
+      "clip_id": "WJ_BOUNDARY_DECLINE",
+      "verdict": "review",
+      "rationale": "The previously hidden first beat is now visible, but the friendly persuasive open palm still does not read as a decisive clean no, so the semantic defect is only partially resolved.",
+      "offending_transitions": [
+        "247_camera_intimate_hold -> 054_speak_persuade"
+      ]
+    },
+    {
+      "manifest_index": 79,
+      "clip_id": "WJ_BOUNDARY_QUEUE",
+      "verdict": "pass",
+      "rationale": "A firm queued-boundary posture opens into calm explanation with stable scale and staff placement and an appropriate terminal hold.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 80,
+      "clip_id": "WJ_BOUNDARY_RESPECT",
+      "verdict": "pass",
+      "rationale": "Warning, restrained emphasis, open presentation, and directional pointing create a coherent respect-the-boundary sequence with readable stage geography.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 81,
+      "clip_id": "WJ_BOUNDARY_EXIT",
+      "verdict": "pass",
+      "rationale": "Summarizing and explanatory gestures settle into compassion smoothly, with consistent character size and no staff or wing discontinuity.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 82,
+      "clip_id": "WJ_FOCUS_LOW",
+      "verdict": "review",
+      "rationale": "The prior defect remains: gentle low-focus reassurance abruptly becomes an aggressive staff-braced challenge and then snaps back to a neutral persuasive pose.",
+      "offending_transitions": [
+        "073_speech_interrupted -> 053_speak_challenge",
+        "053_speak_challenge -> 054_speak_persuade"
+      ]
+    },
+    {
+      "manifest_index": 83,
+      "clip_id": "WJ_FOCUS_REST",
+      "verdict": "review",
+      "rationale": "The prior defect remains: a quiet idle pose expands into a triumphant full-wing hopeful pose and then contracts into a smaller listening terminal hold, producing both tonal and scale pops.",
+      "offending_transitions": [
+        "013_idle_warm_camera_ready -> 108_emotion_hopeful",
+        "108_emotion_hopeful -> 022_listen_user_warm"
+      ]
+    },
+    {
+      "manifest_index": 84,
+      "clip_id": "WJ_BOULDER_BRIDGE",
+      "verdict": "pass",
+      "rationale": "Quote and field-report storytelling lead through directional labels into a coherent close, release, and hold magic sequence with a stable terminal action.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 85,
+      "clip_id": "WJ_BOULDER_TRAIL",
+      "verdict": "pass",
+      "rationale": "Open and serious presentation progresses through left, right, and downward pointing without repetition, scale drift, or staff discontinuity.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 86,
+      "clip_id": "WJ_BOULDER_CIVIC",
+      "verdict": "pass",
+      "rationale": "The playful and embarrassed mismatch is resolved; precise explanation, a brief interface touch, and controlled emphasis now fit the civic-honesty message.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 87,
+      "clip_id": "WJ_BOULDER_PUBLIC",
+      "verdict": "pass",
+      "rationale": "The exaggerated comedy ending is gone; reveal and balanced presentation now settle through speaking-ready and resume poses with stable registration.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 88,
+      "clip_id": "WJ_BOULDER_LORE",
+      "verdict": "pass",
+      "rationale": "Quote, comic recovery, amusement, field report, reveal, and character voice create a varied but coherent lore arc without a jarring prop, scale, or terminal transition.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 89,
+      "clip_id": "WJ_GITHUB_REPO",
+      "verdict": "pass",
+      "rationale": "The restrained presenter sequence now settles through composure into speech resume; it remains readable and continuous without relying on a large comedy action.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 90,
+      "clip_id": "WJ_GITHUB_ISSUE",
+      "verdict": "pass",
+      "rationale": "The staff-tangle defect is resolved; downward reference, open presentation, speech resume, and open explanation now support calm normalization of the issue.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 91,
+      "clip_id": "WJ_GITHUB_PR",
+      "verdict": "pass",
+      "rationale": "The hat-save silhouette jump is resolved; story voice and moral progress into reassurance and a relaxed open terminal pose with stable staff and wings.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 92,
+      "clip_id": "WJ_GITHUB_CONFLICT",
+      "verdict": "review",
+      "rationale": "The staff teleport is resolved, but calm recovery still expands abruptly into a maximum-wing hopeful pose and contracts immediately into defiance, leaving a conspicuous silhouette and scale pulse.",
+      "offending_transitions": [
+        "110_emotion_recover_composure -> 108_emotion_hopeful",
+        "108_emotion_hopeful -> 101_emotion_defiant"
+      ]
+    },
+    {
+      "manifest_index": 93,
+      "clip_id": "WJ_GITHUB_DOCS",
+      "verdict": "pass",
+      "rationale": "Pointing, clarification, summary, and low emphasis remain semantically appropriate and visually registered with acceptable gesture variation.",
+      "offending_transitions": []
+    },
+    {
+      "manifest_index": 94,
+      "clip_id": "WJ_GITHUB_MAINTAINER",
+      "verdict": "pass",
+      "rationale": "Directional reference, serious explanation, open speech, resume, reassurance, and neutral settle form a controlled boundary-focused performance with a clean terminal hold.",
+      "offending_transitions": []
+    }
+  ]
+}

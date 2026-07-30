@@ -13,8 +13,16 @@
   "automated_gate": {
     "audio_checksum": true,
     "continuous_cues": true,
-    "minimum_motion_beat_spacing_ms": 950,
+    "minimum_motion_beat_spacing_ms": 1400,
+    "maximum_motion_beat_gap_ms": 6000,
     "adjacent_pose_repetition_forbidden": true,
+    "rolling_pose_repetition_window": 4,
+    "repeated_pose_transitions_forbidden": true,
+    "body_transition_range_ms": [
+      120,
+      240
+    ],
+    "stable_camera_approach_required": true,
     "all_pose_references_valid": true,
     "all_used_poses_require_open_closed_pair": true
   },
@@ -25,11 +33,24 @@
       "display_name": "Intro 001",
       "duration_ms": 26471,
       "cue_count": 4,
-      "motion_beat_count": 16,
-      "unique_pose_count": 7,
+      "motion_beat_count": 10,
+      "unique_pose_count": 11,
       "mouth_pair_coverage": true,
       "unknown_pose_ids": [],
       "unpaired_pose_ids": [],
+      "motion_quality": {
+        "issues": [],
+        "minimum_beat_gap_ms": 1569,
+        "maximum_beat_gap_ms": 4540,
+        "maximum_projected_pose_hold_ms": null,
+        "gesture_rate_hz": 0.3778,
+        "short_window_repetitions": [],
+        "repeated_transitions": [],
+        "body_transition_ms": 160,
+        "cue_crossfade_ms": [
+          160
+        ]
+      },
       "issues": [],
       "status": "pass"
     },
@@ -38,11 +59,24 @@
       "display_name": "Intro 002",
       "duration_ms": 40960,
       "cue_count": 4,
-      "motion_beat_count": 19,
-      "unique_pose_count": 4,
+      "motion_beat_count": 15,
+      "unique_pose_count": 9,
       "mouth_pair_coverage": true,
       "unknown_pose_ids": [],
       "unpaired_pose_ids": [],
+      "motion_quality": {
+        "issues": [],
+        "minimum_beat_gap_ms": 1500,
+        "maximum_beat_gap_ms": 4650,
+        "maximum_projected_pose_hold_ms": 4650,
+        "gesture_rate_hz": 0.3662,
+        "short_window_repetitions": [],
+        "repeated_transitions": [],
+        "body_transition_ms": 160,
+        "cue_crossfade_ms": [
+          160
+        ]
+      },
       "issues": [],
       "status": "pass"
     },
@@ -51,11 +85,24 @@
       "display_name": "Intro 003",
       "duration_ms": 21223,
       "cue_count": 3,
-      "motion_beat_count": 11,
-      "unique_pose_count": 10,
+      "motion_beat_count": 8,
+      "unique_pose_count": 13,
       "mouth_pair_coverage": true,
       "unknown_pose_ids": [],
       "unpaired_pose_ids": [],
+      "motion_quality": {
+        "issues": [],
+        "minimum_beat_gap_ms": 1583,
+        "maximum_beat_gap_ms": 3600,
+        "maximum_projected_pose_hold_ms": 3723,
+        "gesture_rate_hz": 0.3769,
+        "short_window_repetitions": [],
+        "repeated_transitions": [],
+        "body_transition_ms": 160,
+        "cue_crossfade_ms": [
+          160
+        ]
+      },
       "issues": [],
       "status": "pass"
     },
@@ -64,11 +111,24 @@
       "display_name": "Intro 004",
       "duration_ms": 45279,
       "cue_count": 5,
-      "motion_beat_count": 22,
-      "unique_pose_count": 14,
+      "motion_beat_count": 18,
+      "unique_pose_count": 23,
       "mouth_pair_coverage": true,
       "unknown_pose_ids": [],
       "unpaired_pose_ids": [],
+      "motion_quality": {
+        "issues": [],
+        "minimum_beat_gap_ms": 1455,
+        "maximum_beat_gap_ms": 3750,
+        "maximum_projected_pose_hold_ms": 4629,
+        "gesture_rate_hz": 0.3975,
+        "short_window_repetitions": [],
+        "repeated_transitions": [],
+        "body_transition_ms": 160,
+        "cue_crossfade_ms": [
+          160
+        ]
+      },
       "issues": [],
       "status": "pass"
     },
@@ -77,11 +137,24 @@
       "display_name": "Intro 005",
       "duration_ms": 17090,
       "cue_count": 3,
-      "motion_beat_count": 11,
+      "motion_beat_count": 6,
       "unique_pose_count": 11,
       "mouth_pair_coverage": true,
       "unknown_pose_ids": [],
       "unpaired_pose_ids": [],
+      "motion_quality": {
+        "issues": [],
+        "minimum_beat_gap_ms": 1563,
+        "maximum_beat_gap_ms": 4590,
+        "maximum_projected_pose_hold_ms": 4590,
+        "gesture_rate_hz": 0.3511,
+        "short_window_repetitions": [],
+        "repeated_transitions": [],
+        "body_transition_ms": 160,
+        "cue_crossfade_ms": [
+          160
+        ]
+      },
       "issues": [],
       "status": "pass"
     },
@@ -90,11 +163,24 @@
       "display_name": "World 001",
       "duration_ms": 19691,
       "cue_count": 2,
-      "motion_beat_count": 10,
-      "unique_pose_count": 10,
+      "motion_beat_count": 8,
+      "unique_pose_count": 13,
       "mouth_pair_coverage": true,
       "unknown_pose_ids": [],
       "unpaired_pose_ids": [],
+      "motion_quality": {
+        "issues": [],
+        "minimum_beat_gap_ms": 1800,
+        "maximum_beat_gap_ms": 3700,
+        "maximum_projected_pose_hold_ms": 3700,
+        "gesture_rate_hz": 0.4063,
+        "short_window_repetitions": [],
+        "repeated_transitions": [],
+        "body_transition_ms": 160,
+        "cue_crossfade_ms": [
+          160
+        ]
+      },
       "issues": [],
       "status": "pass"
     },
@@ -103,11 +189,24 @@
       "display_name": "World Joeville",
       "duration_ms": 23684,
       "cue_count": 2,
-      "motion_beat_count": 10,
+      "motion_beat_count": 8,
       "unique_pose_count": 10,
       "mouth_pair_coverage": true,
       "unknown_pose_ids": [],
       "unpaired_pose_ids": [],
+      "motion_quality": {
+        "issues": [],
+        "minimum_beat_gap_ms": 2450,
+        "maximum_beat_gap_ms": 4143,
+        "maximum_projected_pose_hold_ms": 4143,
+        "gesture_rate_hz": 0.3378,
+        "short_window_repetitions": [],
+        "repeated_transitions": [],
+        "body_transition_ms": 160,
+        "cue_crossfade_ms": [
+          160
+        ]
+      },
       "issues": [],
       "status": "pass"
     },
@@ -116,11 +215,24 @@
       "display_name": "World Boulder",
       "duration_ms": 25867,
       "cue_count": 2,
-      "motion_beat_count": 10,
-      "unique_pose_count": 9,
+      "motion_beat_count": 9,
+      "unique_pose_count": 10,
       "mouth_pair_coverage": true,
       "unknown_pose_ids": [],
       "unpaired_pose_ids": [],
+      "motion_quality": {
+        "issues": [],
+        "minimum_beat_gap_ms": 1700,
+        "maximum_beat_gap_ms": 4508,
+        "maximum_projected_pose_hold_ms": 4509,
+        "gesture_rate_hz": 0.3479,
+        "short_window_repetitions": [],
+        "repeated_transitions": [],
+        "body_transition_ms": 160,
+        "cue_crossfade_ms": [
+          160
+        ]
+      },
       "issues": [],
       "status": "pass"
     },
@@ -129,11 +241,24 @@
       "display_name": "World Github",
       "duration_ms": 23684,
       "cue_count": 2,
-      "motion_beat_count": 10,
-      "unique_pose_count": 10,
+      "motion_beat_count": 9,
+      "unique_pose_count": 13,
       "mouth_pair_coverage": true,
       "unknown_pose_ids": [],
       "unpaired_pose_ids": [],
+      "motion_quality": {
+        "issues": [],
+        "minimum_beat_gap_ms": 1600,
+        "maximum_beat_gap_ms": 3425,
+        "maximum_projected_pose_hold_ms": 3425,
+        "gesture_rate_hz": 0.38,
+        "short_window_repetitions": [],
+        "repeated_transitions": [],
+        "body_transition_ms": 160,
+        "cue_crossfade_ms": [
+          160
+        ]
+      },
       "issues": [],
       "status": "pass"
     },
@@ -142,11 +267,24 @@
       "display_name": "World 002",
       "duration_ms": 32740,
       "cue_count": 3,
-      "motion_beat_count": 15,
-      "unique_pose_count": 13,
+      "motion_beat_count": 12,
+      "unique_pose_count": 18,
       "mouth_pair_coverage": true,
       "unknown_pose_ids": [],
       "unpaired_pose_ids": [],
+      "motion_quality": {
+        "issues": [],
+        "minimum_beat_gap_ms": 1453,
+        "maximum_beat_gap_ms": 3450,
+        "maximum_projected_pose_hold_ms": 4390,
+        "gesture_rate_hz": 0.3665,
+        "short_window_repetitions": [],
+        "repeated_transitions": [],
+        "body_transition_ms": 160,
+        "cue_crossfade_ms": [
+          160
+        ]
+      },
       "issues": [],
       "status": "pass"
     },
@@ -155,11 +293,24 @@
       "display_name": "World 003",
       "duration_ms": 28143,
       "cue_count": 3,
-      "motion_beat_count": 12,
-      "unique_pose_count": 13,
+      "motion_beat_count": 10,
+      "unique_pose_count": 21,
       "mouth_pair_coverage": true,
       "unknown_pose_ids": [],
       "unpaired_pose_ids": [],
+      "motion_quality": {
+        "issues": [],
+        "minimum_beat_gap_ms": 1450,
+        "maximum_beat_gap_ms": 4585,
+        "maximum_projected_pose_hold_ms": 4585,
+        "gesture_rate_hz": 0.3553,
+        "short_window_repetitions": [],
+        "repeated_transitions": [],
+        "body_transition_ms": 160,
+        "cue_crossfade_ms": [
+          160
+        ]
+      },
       "issues": [],
       "status": "pass"
     },
@@ -168,11 +319,24 @@
       "display_name": "Purpose 001",
       "duration_ms": 61579,
       "cue_count": 5,
-      "motion_beat_count": 22,
-      "unique_pose_count": 19,
+      "motion_beat_count": 21,
+      "unique_pose_count": 27,
       "mouth_pair_coverage": true,
       "unknown_pose_ids": [],
       "unpaired_pose_ids": [],
+      "motion_quality": {
+        "issues": [],
+        "minimum_beat_gap_ms": 1650,
+        "maximum_beat_gap_ms": 4690,
+        "maximum_projected_pose_hold_ms": 4690,
+        "gesture_rate_hz": 0.341,
+        "short_window_repetitions": [],
+        "repeated_transitions": [],
+        "body_transition_ms": 160,
+        "cue_crossfade_ms": [
+          160
+        ]
+      },
       "issues": [],
       "status": "pass"
     },
@@ -181,11 +345,24 @@
       "display_name": "Purpose 002",
       "duration_ms": 63251,
       "cue_count": 6,
-      "motion_beat_count": 24,
-      "unique_pose_count": 11,
+      "motion_beat_count": 23,
+      "unique_pose_count": 20,
       "mouth_pair_coverage": true,
       "unknown_pose_ids": [],
       "unpaired_pose_ids": [],
+      "motion_quality": {
+        "issues": [],
+        "minimum_beat_gap_ms": 1500,
+        "maximum_beat_gap_ms": 4466,
+        "maximum_projected_pose_hold_ms": 4466,
+        "gesture_rate_hz": 0.3636,
+        "short_window_repetitions": [],
+        "repeated_transitions": [],
+        "body_transition_ms": 160,
+        "cue_crossfade_ms": [
+          160
+        ]
+      },
       "issues": [],
       "status": "pass"
     },
@@ -194,11 +371,24 @@
       "display_name": "Purpose 003",
       "duration_ms": 25960,
       "cue_count": 3,
-      "motion_beat_count": 14,
-      "unique_pose_count": 13,
+      "motion_beat_count": 10,
+      "unique_pose_count": 17,
       "mouth_pair_coverage": true,
       "unknown_pose_ids": [],
       "unpaired_pose_ids": [],
+      "motion_quality": {
+        "issues": [],
+        "minimum_beat_gap_ms": 1450,
+        "maximum_beat_gap_ms": 4105,
+        "maximum_projected_pose_hold_ms": 3610,
+        "gesture_rate_hz": 0.3852,
+        "short_window_repetitions": [],
+        "repeated_transitions": [],
+        "body_transition_ms": 160,
+        "cue_crossfade_ms": [
+          160
+        ]
+      },
       "issues": [],
       "status": "pass"
     },
@@ -207,11 +397,24 @@
       "display_name": "Enter 001",
       "duration_ms": 10495,
       "cue_count": 2,
-      "motion_beat_count": 7,
-      "unique_pose_count": 10,
+      "motion_beat_count": 4,
+      "unique_pose_count": 11,
       "mouth_pair_coverage": true,
       "unknown_pose_ids": [],
       "unpaired_pose_ids": [],
+      "motion_quality": {
+        "issues": [],
+        "minimum_beat_gap_ms": 1950,
+        "maximum_beat_gap_ms": 4300,
+        "maximum_projected_pose_hold_ms": 4151,
+        "gesture_rate_hz": 0.3811,
+        "short_window_repetitions": [],
+        "repeated_transitions": [],
+        "body_transition_ms": 160,
+        "cue_crossfade_ms": [
+          160
+        ]
+      },
       "issues": [],
       "status": "pass"
     },
@@ -220,11 +423,24 @@
       "display_name": "Enter 002",
       "duration_ms": 13514,
       "cue_count": 2,
-      "motion_beat_count": 9,
-      "unique_pose_count": 10,
+      "motion_beat_count": 5,
+      "unique_pose_count": 9,
       "mouth_pair_coverage": true,
       "unknown_pose_ids": [],
       "unpaired_pose_ids": [],
+      "motion_quality": {
+        "issues": [],
+        "minimum_beat_gap_ms": 1850,
+        "maximum_beat_gap_ms": 3369,
+        "maximum_projected_pose_hold_ms": 3514,
+        "gesture_rate_hz": 0.37,
+        "short_window_repetitions": [],
+        "repeated_transitions": [],
+        "body_transition_ms": 160,
+        "cue_crossfade_ms": [
+          160
+        ]
+      },
       "issues": [],
       "status": "pass"
     },
@@ -233,11 +449,24 @@
       "display_name": "Enter 003",
       "duration_ms": 42400,
       "cue_count": 5,
-      "motion_beat_count": 22,
-      "unique_pose_count": 16,
+      "motion_beat_count": 17,
+      "unique_pose_count": 24,
       "mouth_pair_coverage": true,
       "unknown_pose_ids": [],
       "unpaired_pose_ids": [],
+      "motion_quality": {
+        "issues": [],
+        "minimum_beat_gap_ms": 1536,
+        "maximum_beat_gap_ms": 4143,
+        "maximum_projected_pose_hold_ms": 4143,
+        "gesture_rate_hz": 0.4009,
+        "short_window_repetitions": [],
+        "repeated_transitions": [],
+        "body_transition_ms": 160,
+        "cue_crossfade_ms": [
+          160
+        ]
+      },
       "issues": [],
       "status": "pass"
     },
@@ -246,11 +475,24 @@
       "display_name": "Quest 001",
       "duration_ms": 23684,
       "cue_count": 2,
-      "motion_beat_count": 10,
-      "unique_pose_count": 10,
+      "motion_beat_count": 8,
+      "unique_pose_count": 14,
       "mouth_pair_coverage": true,
       "unknown_pose_ids": [],
       "unpaired_pose_ids": [],
+      "motion_quality": {
+        "issues": [],
+        "minimum_beat_gap_ms": 1739,
+        "maximum_beat_gap_ms": 4800,
+        "maximum_projected_pose_hold_ms": 4800,
+        "gesture_rate_hz": 0.3378,
+        "short_window_repetitions": [],
+        "repeated_transitions": [],
+        "body_transition_ms": 160,
+        "cue_crossfade_ms": [
+          160
+        ]
+      },
       "issues": [],
       "status": "pass"
     },
@@ -259,11 +501,24 @@
       "display_name": "Quest 002",
       "duration_ms": 29675,
       "cue_count": 3,
-      "motion_beat_count": 11,
-      "unique_pose_count": 13,
+      "motion_beat_count": 10,
+      "unique_pose_count": 16,
       "mouth_pair_coverage": true,
       "unknown_pose_ids": [],
       "unpaired_pose_ids": [],
+      "motion_quality": {
+        "issues": [],
+        "minimum_beat_gap_ms": 1750,
+        "maximum_beat_gap_ms": 3650,
+        "maximum_projected_pose_hold_ms": 3650,
+        "gesture_rate_hz": 0.337,
+        "short_window_repetitions": [],
+        "repeated_transitions": [],
+        "body_transition_ms": 160,
+        "cue_crossfade_ms": [
+          160
+        ]
+      },
       "issues": [],
       "status": "pass"
     },
@@ -272,11 +527,24 @@
       "display_name": "Quest 003",
       "duration_ms": 27260,
       "cue_count": 3,
-      "motion_beat_count": 12,
-      "unique_pose_count": 13,
+      "motion_beat_count": 11,
+      "unique_pose_count": 15,
       "mouth_pair_coverage": true,
       "unknown_pose_ids": [],
       "unpaired_pose_ids": [],
+      "motion_quality": {
+        "issues": [],
+        "minimum_beat_gap_ms": 1850,
+        "maximum_beat_gap_ms": 3550,
+        "maximum_projected_pose_hold_ms": 3550,
+        "gesture_rate_hz": 0.4035,
+        "short_window_repetitions": [],
+        "repeated_transitions": [],
+        "body_transition_ms": 160,
+        "cue_crossfade_ms": [
+          160
+        ]
+      },
       "issues": [],
       "status": "pass"
     },
@@ -285,11 +553,24 @@
       "display_name": "Quest 004",
       "duration_ms": 23684,
       "cue_count": 3,
-      "motion_beat_count": 14,
-      "unique_pose_count": 13,
+      "motion_beat_count": 8,
+      "unique_pose_count": 14,
       "mouth_pair_coverage": true,
       "unknown_pose_ids": [],
       "unpaired_pose_ids": [],
+      "motion_quality": {
+        "issues": [],
+        "minimum_beat_gap_ms": 1551,
+        "maximum_beat_gap_ms": 3861,
+        "maximum_projected_pose_hold_ms": 4234,
+        "gesture_rate_hz": 0.3378,
+        "short_window_repetitions": [],
+        "repeated_transitions": [],
+        "body_transition_ms": 160,
+        "cue_crossfade_ms": [
+          160
+        ]
+      },
       "issues": [],
       "status": "pass"
     },
@@ -298,11 +579,24 @@
       "display_name": "Quest 005",
       "duration_ms": 26146,
       "cue_count": 3,
-      "motion_beat_count": 12,
-      "unique_pose_count": 11,
+      "motion_beat_count": 11,
+      "unique_pose_count": 16,
       "mouth_pair_coverage": true,
       "unknown_pose_ids": [],
       "unpaired_pose_ids": [],
+      "motion_quality": {
+        "issues": [],
+        "minimum_beat_gap_ms": 1461,
+        "maximum_beat_gap_ms": 4026,
+        "maximum_projected_pose_hold_ms": 4026,
+        "gesture_rate_hz": 0.4207,
+        "short_window_repetitions": [],
+        "repeated_transitions": [],
+        "body_transition_ms": 160,
+        "cue_crossfade_ms": [
+          160
+        ]
+      },
       "issues": [],
       "status": "pass"
     },
@@ -311,11 +605,24 @@
       "display_name": "Quest 006",
       "duration_ms": 28143,
       "cue_count": 3,
-      "motion_beat_count": 12,
-      "unique_pose_count": 11,
+      "motion_beat_count": 10,
+      "unique_pose_count": 13,
       "mouth_pair_coverage": true,
       "unknown_pose_ids": [],
       "unpaired_pose_ids": [],
+      "motion_quality": {
+        "issues": [],
+        "minimum_beat_gap_ms": 1450,
+        "maximum_beat_gap_ms": 4400,
+        "maximum_projected_pose_hold_ms": 4400,
+        "gesture_rate_hz": 0.3553,
+        "short_window_repetitions": [],
+        "repeated_transitions": [],
+        "body_transition_ms": 160,
+        "cue_crossfade_ms": [
+          160
+        ]
+      },
       "issues": [],
       "status": "pass"
     },
@@ -324,11 +631,24 @@
       "display_name": "Stage Legible Start",
       "duration_ms": 24056,
       "cue_count": 2,
-      "motion_beat_count": 9,
+      "motion_beat_count": 8,
       "unique_pose_count": 10,
       "mouth_pair_coverage": true,
       "unknown_pose_ids": [],
       "unpaired_pose_ids": [],
+      "motion_quality": {
+        "issues": [],
+        "minimum_beat_gap_ms": 1650,
+        "maximum_beat_gap_ms": 4200,
+        "maximum_projected_pose_hold_ms": 4200,
+        "gesture_rate_hz": 0.3326,
+        "short_window_repetitions": [],
+        "repeated_transitions": [],
+        "body_transition_ms": 160,
+        "cue_crossfade_ms": [
+          160
+        ]
+      },
       "issues": [],
       "status": "pass"
     },
@@ -337,11 +657,24 @@
       "display_name": "Stage Legible Complete",
       "duration_ms": 25263,
       "cue_count": 3,
-      "motion_beat_count": 13,
+      "motion_beat_count": 11,
       "unique_pose_count": 13,
       "mouth_pair_coverage": true,
       "unknown_pose_ids": [],
       "unpaired_pose_ids": [],
+      "motion_quality": {
+        "issues": [],
+        "minimum_beat_gap_ms": 1500,
+        "maximum_beat_gap_ms": 2742,
+        "maximum_projected_pose_hold_ms": 3363,
+        "gesture_rate_hz": 0.4354,
+        "short_window_repetitions": [],
+        "repeated_transitions": [],
+        "body_transition_ms": 160,
+        "cue_crossfade_ms": [
+          160
+        ]
+      },
       "issues": [],
       "status": "pass"
     },
@@ -350,11 +683,24 @@
       "display_name": "Stage Bounded Start",
       "duration_ms": 22570,
       "cue_count": 3,
-      "motion_beat_count": 13,
-      "unique_pose_count": 13,
+      "motion_beat_count": 9,
+      "unique_pose_count": 16,
       "mouth_pair_coverage": true,
       "unknown_pose_ids": [],
       "unpaired_pose_ids": [],
+      "motion_quality": {
+        "issues": [],
+        "minimum_beat_gap_ms": 1462,
+        "maximum_beat_gap_ms": 4700,
+        "maximum_projected_pose_hold_ms": 4700,
+        "gesture_rate_hz": 0.3988,
+        "short_window_repetitions": [],
+        "repeated_transitions": [],
+        "body_transition_ms": 160,
+        "cue_crossfade_ms": [
+          160
+        ]
+      },
       "issues": [],
       "status": "pass"
     },
@@ -363,11 +709,24 @@
       "display_name": "Stage Bounded Complete",
       "duration_ms": 22523,
       "cue_count": 2,
-      "motion_beat_count": 10,
-      "unique_pose_count": 10,
+      "motion_beat_count": 9,
+      "unique_pose_count": 13,
       "mouth_pair_coverage": true,
       "unknown_pose_ids": [],
       "unpaired_pose_ids": [],
+      "motion_quality": {
+        "issues": [],
+        "minimum_beat_gap_ms": 1463,
+        "maximum_beat_gap_ms": 3537,
+        "maximum_projected_pose_hold_ms": 3537,
+        "gesture_rate_hz": 0.3996,
+        "short_window_repetitions": [],
+        "repeated_transitions": [],
+        "body_transition_ms": 160,
+        "cue_crossfade_ms": [
+          160
+        ]
+      },
       "issues": [],
       "status": "pass"
     },
@@ -376,11 +735,24 @@
       "display_name": "Stage Collab Start",
       "duration_ms": 23684,
       "cue_count": 2,
-      "motion_beat_count": 10,
-      "unique_pose_count": 8,
+      "motion_beat_count": 9,
+      "unique_pose_count": 12,
       "mouth_pair_coverage": true,
       "unknown_pose_ids": [],
       "unpaired_pose_ids": [],
+      "motion_quality": {
+        "issues": [],
+        "minimum_beat_gap_ms": 1700,
+        "maximum_beat_gap_ms": 4120,
+        "maximum_projected_pose_hold_ms": 4120,
+        "gesture_rate_hz": 0.38,
+        "short_window_repetitions": [],
+        "repeated_transitions": [],
+        "body_transition_ms": 160,
+        "cue_crossfade_ms": [
+          160
+        ]
+      },
       "issues": [],
       "status": "pass"
     },
@@ -389,11 +761,24 @@
       "display_name": "Stage Collab Complete",
       "duration_ms": 27818,
       "cue_count": 3,
-      "motion_beat_count": 13,
+      "motion_beat_count": 11,
       "unique_pose_count": 13,
       "mouth_pair_coverage": true,
       "unknown_pose_ids": [],
       "unpaired_pose_ids": [],
+      "motion_quality": {
+        "issues": [],
+        "minimum_beat_gap_ms": 1450,
+        "maximum_beat_gap_ms": 4264,
+        "maximum_projected_pose_hold_ms": 4264,
+        "gesture_rate_hz": 0.3954,
+        "short_window_repetitions": [],
+        "repeated_transitions": [],
+        "body_transition_ms": 160,
+        "cue_crossfade_ms": [
+          160
+        ]
+      },
       "issues": [],
       "status": "pass"
     },
@@ -403,10 +788,23 @@
       "duration_ms": 24845,
       "cue_count": 2,
       "motion_beat_count": 10,
-      "unique_pose_count": 10,
+      "unique_pose_count": 14,
       "mouth_pair_coverage": true,
       "unknown_pose_ids": [],
       "unpaired_pose_ids": [],
+      "motion_quality": {
+        "issues": [],
+        "minimum_beat_gap_ms": 1550,
+        "maximum_beat_gap_ms": 3531,
+        "maximum_projected_pose_hold_ms": 3531,
+        "gesture_rate_hz": 0.4025,
+        "short_window_repetitions": [],
+        "repeated_transitions": [],
+        "body_transition_ms": 160,
+        "cue_crossfade_ms": [
+          160
+        ]
+      },
       "issues": [],
       "status": "pass"
     },
@@ -415,11 +813,24 @@
       "display_name": "Stage Generative Complete",
       "duration_ms": 26982,
       "cue_count": 3,
-      "motion_beat_count": 15,
-      "unique_pose_count": 13,
+      "motion_beat_count": 10,
+      "unique_pose_count": 16,
       "mouth_pair_coverage": true,
       "unknown_pose_ids": [],
       "unpaired_pose_ids": [],
+      "motion_quality": {
+        "issues": [],
+        "minimum_beat_gap_ms": 1550,
+        "maximum_beat_gap_ms": 3960,
+        "maximum_projected_pose_hold_ms": 3960,
+        "gesture_rate_hz": 0.3706,
+        "short_window_repetitions": [],
+        "repeated_transitions": [],
+        "body_transition_ms": 160,
+        "cue_crossfade_ms": [
+          160
+        ]
+      },
       "issues": [],
       "status": "pass"
     },
@@ -428,11 +839,24 @@
       "display_name": "Stage Enlightened Start",
       "duration_ms": 30418,
       "cue_count": 2,
-      "motion_beat_count": 10,
-      "unique_pose_count": 10,
+      "motion_beat_count": 12,
+      "unique_pose_count": 17,
       "mouth_pair_coverage": true,
       "unknown_pose_ids": [],
       "unpaired_pose_ids": [],
+      "motion_quality": {
+        "issues": [],
+        "minimum_beat_gap_ms": 1561,
+        "maximum_beat_gap_ms": 3750,
+        "maximum_projected_pose_hold_ms": 3750,
+        "gesture_rate_hz": 0.3945,
+        "short_window_repetitions": [],
+        "repeated_transitions": [],
+        "body_transition_ms": 160,
+        "cue_crossfade_ms": [
+          160
+        ]
+      },
       "issues": [],
       "status": "pass"
     },
@@ -441,11 +865,24 @@
       "display_name": "Stage Enlightened Complete",
       "duration_ms": 46254,
       "cue_count": 7,
-      "motion_beat_count": 23,
-      "unique_pose_count": 21,
+      "motion_beat_count": 18,
+      "unique_pose_count": 25,
       "mouth_pair_coverage": true,
       "unknown_pose_ids": [],
       "unpaired_pose_ids": [],
+      "motion_quality": {
+        "issues": [],
+        "minimum_beat_gap_ms": 1487,
+        "maximum_beat_gap_ms": 4500,
+        "maximum_projected_pose_hold_ms": 4500,
+        "gesture_rate_hz": 0.3892,
+        "short_window_repetitions": [],
+        "repeated_transitions": [],
+        "body_transition_ms": 160,
+        "cue_crossfade_ms": [
+          160
+        ]
+      },
       "issues": [],
       "status": "pass"
     },
@@ -454,11 +891,24 @@
       "display_name": "Project 001",
       "duration_ms": 25403,
       "cue_count": 3,
-      "motion_beat_count": 12,
-      "unique_pose_count": 10,
+      "motion_beat_count": 10,
+      "unique_pose_count": 18,
       "mouth_pair_coverage": true,
       "unknown_pose_ids": [],
       "unpaired_pose_ids": [],
+      "motion_quality": {
+        "issues": [],
+        "minimum_beat_gap_ms": 1550,
+        "maximum_beat_gap_ms": 4365,
+        "maximum_projected_pose_hold_ms": 4365,
+        "gesture_rate_hz": 0.3937,
+        "short_window_repetitions": [],
+        "repeated_transitions": [],
+        "body_transition_ms": 160,
+        "cue_crossfade_ms": [
+          160
+        ]
+      },
       "issues": [],
       "status": "pass"
     },
@@ -467,11 +917,24 @@
       "display_name": "Project 002",
       "duration_ms": 9845,
       "cue_count": 2,
-      "motion_beat_count": 6,
-      "unique_pose_count": 8,
+      "motion_beat_count": 4,
+      "unique_pose_count": 9,
       "mouth_pair_coverage": true,
       "unknown_pose_ids": [],
       "unpaired_pose_ids": [],
+      "motion_quality": {
+        "issues": [],
+        "minimum_beat_gap_ms": 1750,
+        "maximum_beat_gap_ms": 3430,
+        "maximum_projected_pose_hold_ms": 3430,
+        "gesture_rate_hz": 0.4063,
+        "short_window_repetitions": [],
+        "repeated_transitions": [],
+        "body_transition_ms": 160,
+        "cue_crossfade_ms": [
+          160
+        ]
+      },
       "issues": [],
       "status": "pass"
     },
@@ -480,11 +943,24 @@
       "display_name": "Project 003",
       "duration_ms": 11378,
       "cue_count": 2,
-      "motion_beat_count": 7,
-      "unique_pose_count": 10,
+      "motion_beat_count": 5,
+      "unique_pose_count": 11,
       "mouth_pair_coverage": true,
       "unknown_pose_ids": [],
       "unpaired_pose_ids": [],
+      "motion_quality": {
+        "issues": [],
+        "minimum_beat_gap_ms": 1546,
+        "maximum_beat_gap_ms": 2754,
+        "maximum_projected_pose_hold_ms": 2750,
+        "gesture_rate_hz": 0.4394,
+        "short_window_repetitions": [],
+        "repeated_transitions": [],
+        "body_transition_ms": 160,
+        "cue_crossfade_ms": [
+          160
+        ]
+      },
       "issues": [],
       "status": "pass"
     },
@@ -493,11 +969,24 @@
       "display_name": "Project 004",
       "duration_ms": 19273,
       "cue_count": 2,
-      "motion_beat_count": 7,
-      "unique_pose_count": 10,
+      "motion_beat_count": 6,
+      "unique_pose_count": 12,
       "mouth_pair_coverage": true,
       "unknown_pose_ids": [],
       "unpaired_pose_ids": [],
+      "motion_quality": {
+        "issues": [],
+        "minimum_beat_gap_ms": 2300,
+        "maximum_beat_gap_ms": 4350,
+        "maximum_projected_pose_hold_ms": 4350,
+        "gesture_rate_hz": 0.3113,
+        "short_window_repetitions": [],
+        "repeated_transitions": [],
+        "body_transition_ms": 160,
+        "cue_crossfade_ms": [
+          160
+        ]
+      },
       "issues": [],
       "status": "pass"
     },
@@ -506,11 +995,24 @@
       "display_name": "Project 005",
       "duration_ms": 13514,
       "cue_count": 2,
-      "motion_beat_count": 9,
+      "motion_beat_count": 5,
       "unique_pose_count": 10,
       "mouth_pair_coverage": true,
       "unknown_pose_ids": [],
       "unpaired_pose_ids": [],
+      "motion_quality": {
+        "issues": [],
+        "minimum_beat_gap_ms": 1450,
+        "maximum_beat_gap_ms": 4390,
+        "maximum_projected_pose_hold_ms": 4390,
+        "gesture_rate_hz": 0.37,
+        "short_window_repetitions": [],
+        "repeated_transitions": [],
+        "body_transition_ms": 160,
+        "cue_crossfade_ms": [
+          160
+        ]
+      },
       "issues": [],
       "status": "pass"
     },
@@ -519,11 +1021,24 @@
       "display_name": "Project 006",
       "duration_ms": 17461,
       "cue_count": 2,
-      "motion_beat_count": 9,
-      "unique_pose_count": 10,
+      "motion_beat_count": 6,
+      "unique_pose_count": 13,
       "mouth_pair_coverage": true,
       "unknown_pose_ids": [],
       "unpaired_pose_ids": [],
+      "motion_quality": {
+        "issues": [],
+        "minimum_beat_gap_ms": 1492,
+        "maximum_beat_gap_ms": 4000,
+        "maximum_projected_pose_hold_ms": 4000,
+        "gesture_rate_hz": 0.3436,
+        "short_window_repetitions": [],
+        "repeated_transitions": [],
+        "body_transition_ms": 160,
+        "cue_crossfade_ms": [
+          160
+        ]
+      },
       "issues": [],
       "status": "pass"
     },
@@ -532,11 +1047,24 @@
       "display_name": "Project 007",
       "duration_ms": 11238,
       "cue_count": 2,
-      "motion_beat_count": 6,
+      "motion_beat_count": 5,
       "unique_pose_count": 10,
       "mouth_pair_coverage": true,
       "unknown_pose_ids": [],
       "unpaired_pose_ids": [],
+      "motion_quality": {
+        "issues": [],
+        "minimum_beat_gap_ms": 1700,
+        "maximum_beat_gap_ms": 3872,
+        "maximum_projected_pose_hold_ms": 3872,
+        "gesture_rate_hz": 0.4449,
+        "short_window_repetitions": [],
+        "repeated_transitions": [],
+        "body_transition_ms": 160,
+        "cue_crossfade_ms": [
+          160
+        ]
+      },
       "issues": [],
       "status": "pass"
     },
@@ -545,11 +1073,24 @@
       "display_name": "Project 008",
       "duration_ms": 18994,
       "cue_count": 2,
-      "motion_beat_count": 7,
-      "unique_pose_count": 10,
+      "motion_beat_count": 6,
+      "unique_pose_count": 12,
       "mouth_pair_coverage": true,
       "unknown_pose_ids": [],
       "unpaired_pose_ids": [],
+      "motion_quality": {
+        "issues": [],
+        "minimum_beat_gap_ms": 1500,
+        "maximum_beat_gap_ms": 4307,
+        "maximum_projected_pose_hold_ms": 4300,
+        "gesture_rate_hz": 0.3159,
+        "short_window_repetitions": [],
+        "repeated_transitions": [],
+        "body_transition_ms": 160,
+        "cue_crossfade_ms": [
+          160
+        ]
+      },
       "issues": [],
       "status": "pass"
     },
@@ -558,11 +1099,24 @@
       "display_name": "Project 009",
       "duration_ms": 11238,
       "cue_count": 2,
-      "motion_beat_count": 7,
-      "unique_pose_count": 10,
+      "motion_beat_count": 4,
+      "unique_pose_count": 9,
       "mouth_pair_coverage": true,
       "unknown_pose_ids": [],
       "unpaired_pose_ids": [],
+      "motion_quality": {
+        "issues": [],
+        "minimum_beat_gap_ms": 2250,
+        "maximum_beat_gap_ms": 3388,
+        "maximum_projected_pose_hold_ms": 3388,
+        "gesture_rate_hz": 0.3559,
+        "short_window_repetitions": [],
+        "repeated_transitions": [],
+        "body_transition_ms": 160,
+        "cue_crossfade_ms": [
+          160
+        ]
+      },
       "issues": [],
       "status": "pass"
     },
@@ -571,11 +1125,24 @@
       "display_name": "Ai 001",
       "duration_ms": 23684,
       "cue_count": 3,
-      "motion_beat_count": 13,
-      "unique_pose_count": 13,
+      "motion_beat_count": 9,
+      "unique_pose_count": 15,
       "mouth_pair_coverage": true,
       "unknown_pose_ids": [],
       "unpaired_pose_ids": [],
+      "motion_quality": {
+        "issues": [],
+        "minimum_beat_gap_ms": 1700,
+        "maximum_beat_gap_ms": 4600,
+        "maximum_projected_pose_hold_ms": 3596,
+        "gesture_rate_hz": 0.38,
+        "short_window_repetitions": [],
+        "repeated_transitions": [],
+        "body_transition_ms": 160,
+        "cue_crossfade_ms": [
+          160
+        ]
+      },
       "issues": [],
       "status": "pass"
     },
@@ -584,11 +1151,24 @@
       "display_name": "Ai 002",
       "duration_ms": 14443,
       "cue_count": 2,
-      "motion_beat_count": 9,
-      "unique_pose_count": 10,
+      "motion_beat_count": 6,
+      "unique_pose_count": 11,
       "mouth_pair_coverage": true,
       "unknown_pose_ids": [],
       "unpaired_pose_ids": [],
+      "motion_quality": {
+        "issues": [],
+        "minimum_beat_gap_ms": 1950,
+        "maximum_beat_gap_ms": 3323,
+        "maximum_projected_pose_hold_ms": 3323,
+        "gesture_rate_hz": 0.4154,
+        "short_window_repetitions": [],
+        "repeated_transitions": [],
+        "body_transition_ms": 160,
+        "cue_crossfade_ms": [
+          160
+        ]
+      },
       "issues": [],
       "status": "pass"
     },
@@ -597,11 +1177,24 @@
       "display_name": "Ai 003",
       "duration_ms": 17926,
       "cue_count": 2,
-      "motion_beat_count": 10,
-      "unique_pose_count": 10,
+      "motion_beat_count": 8,
+      "unique_pose_count": 12,
       "mouth_pair_coverage": true,
       "unknown_pose_ids": [],
       "unpaired_pose_ids": [],
+      "motion_quality": {
+        "issues": [],
+        "minimum_beat_gap_ms": 1450,
+        "maximum_beat_gap_ms": 3300,
+        "maximum_projected_pose_hold_ms": 3300,
+        "gesture_rate_hz": 0.4463,
+        "short_window_repetitions": [],
+        "repeated_transitions": [],
+        "body_transition_ms": 160,
+        "cue_crossfade_ms": [
+          160
+        ]
+      },
       "issues": [],
       "status": "pass"
     },
@@ -610,11 +1203,24 @@
       "display_name": "Ai 004",
       "duration_ms": 16579,
       "cue_count": 2,
-      "motion_beat_count": 8,
-      "unique_pose_count": 10,
+      "motion_beat_count": 7,
+      "unique_pose_count": 12,
       "mouth_pair_coverage": true,
       "unknown_pose_ids": [],
       "unpaired_pose_ids": [],
+      "motion_quality": {
+        "issues": [],
+        "minimum_beat_gap_ms": 1500,
+        "maximum_beat_gap_ms": 3150,
+        "maximum_projected_pose_hold_ms": 2677,
+        "gesture_rate_hz": 0.4222,
+        "short_window_repetitions": [],
+        "repeated_transitions": [],
+        "body_transition_ms": 160,
+        "cue_crossfade_ms": [
+          160
+        ]
+      },
       "issues": [],
       "status": "pass"
     },
@@ -623,11 +1229,24 @@
       "display_name": "Ledger 001",
       "duration_ms": 25960,
       "cue_count": 4,
-      "motion_beat_count": 15,
-      "unique_pose_count": 12,
+      "motion_beat_count": 11,
+      "unique_pose_count": 17,
       "mouth_pair_coverage": true,
       "unknown_pose_ids": [],
       "unpaired_pose_ids": [],
+      "motion_quality": {
+        "issues": [],
+        "minimum_beat_gap_ms": 1600,
+        "maximum_beat_gap_ms": 3350,
+        "maximum_projected_pose_hold_ms": 3350,
+        "gesture_rate_hz": 0.4237,
+        "short_window_repetitions": [],
+        "repeated_transitions": [],
+        "body_transition_ms": 160,
+        "cue_crossfade_ms": [
+          160
+        ]
+      },
       "issues": [],
       "status": "pass"
     },
@@ -636,11 +1255,24 @@
       "display_name": "Ledger 002",
       "duration_ms": 17415,
       "cue_count": 2,
-      "motion_beat_count": 9,
-      "unique_pose_count": 10,
+      "motion_beat_count": 7,
+      "unique_pose_count": 13,
       "mouth_pair_coverage": true,
       "unknown_pose_ids": [],
       "unpaired_pose_ids": [],
+      "motion_quality": {
+        "issues": [],
+        "minimum_beat_gap_ms": 1700,
+        "maximum_beat_gap_ms": 4050,
+        "maximum_projected_pose_hold_ms": 3250,
+        "gesture_rate_hz": 0.402,
+        "short_window_repetitions": [],
+        "repeated_transitions": [],
+        "body_transition_ms": 160,
+        "cue_crossfade_ms": [
+          160
+        ]
+      },
       "issues": [],
       "status": "pass"
     },
@@ -649,11 +1281,24 @@
       "display_name": "Ledger 003",
       "duration_ms": 8220,
       "cue_count": 3,
-      "motion_beat_count": 6,
-      "unique_pose_count": 13,
+      "motion_beat_count": 4,
+      "unique_pose_count": 14,
       "mouth_pair_coverage": true,
       "unknown_pose_ids": [],
       "unpaired_pose_ids": [],
+      "motion_quality": {
+        "issues": [],
+        "minimum_beat_gap_ms": 1600,
+        "maximum_beat_gap_ms": 3200,
+        "maximum_projected_pose_hold_ms": 3156,
+        "gesture_rate_hz": 0.4866,
+        "short_window_repetitions": [],
+        "repeated_transitions": [],
+        "body_transition_ms": 160,
+        "cue_crossfade_ms": [
+          160
+        ]
+      },
       "issues": [],
       "status": "pass"
     },
@@ -662,11 +1307,24 @@
       "display_name": "Ledger 004",
       "duration_ms": 13421,
       "cue_count": 2,
-      "motion_beat_count": 8,
+      "motion_beat_count": 6,
       "unique_pose_count": 10,
       "mouth_pair_coverage": true,
       "unknown_pose_ids": [],
       "unpaired_pose_ids": [],
+      "motion_quality": {
+        "issues": [],
+        "minimum_beat_gap_ms": 1508,
+        "maximum_beat_gap_ms": 2800,
+        "maximum_projected_pose_hold_ms": 2750,
+        "gesture_rate_hz": 0.4471,
+        "short_window_repetitions": [],
+        "repeated_transitions": [],
+        "body_transition_ms": 160,
+        "cue_crossfade_ms": [
+          160
+        ]
+      },
       "issues": [],
       "status": "pass"
     },
@@ -675,11 +1333,24 @@
       "display_name": "Ledger 005",
       "duration_ms": 17276,
       "cue_count": 2,
-      "motion_beat_count": 8,
-      "unique_pose_count": 8,
+      "motion_beat_count": 6,
+      "unique_pose_count": 12,
       "mouth_pair_coverage": true,
       "unknown_pose_ids": [],
       "unpaired_pose_ids": [],
+      "motion_quality": {
+        "issues": [],
+        "minimum_beat_gap_ms": 1450,
+        "maximum_beat_gap_ms": 3800,
+        "maximum_projected_pose_hold_ms": 4126,
+        "gesture_rate_hz": 0.3473,
+        "short_window_repetitions": [],
+        "repeated_transitions": [],
+        "body_transition_ms": 160,
+        "cue_crossfade_ms": [
+          160
+        ]
+      },
       "issues": [],
       "status": "pass"
     },
@@ -688,11 +1359,24 @@
       "display_name": "Quest Map 001",
       "duration_ms": 23684,
       "cue_count": 3,
-      "motion_beat_count": 12,
-      "unique_pose_count": 13,
+      "motion_beat_count": 9,
+      "unique_pose_count": 14,
       "mouth_pair_coverage": true,
       "unknown_pose_ids": [],
       "unpaired_pose_ids": [],
+      "motion_quality": {
+        "issues": [],
+        "minimum_beat_gap_ms": 1600,
+        "maximum_beat_gap_ms": 3653,
+        "maximum_projected_pose_hold_ms": 3653,
+        "gesture_rate_hz": 0.38,
+        "short_window_repetitions": [],
+        "repeated_transitions": [],
+        "body_transition_ms": 160,
+        "cue_crossfade_ms": [
+          160
+        ]
+      },
       "issues": [],
       "status": "pass"
     },
@@ -701,11 +1385,24 @@
       "display_name": "Quest Map 002",
       "duration_ms": 21873,
       "cue_count": 2,
-      "motion_beat_count": 9,
-      "unique_pose_count": 8,
+      "motion_beat_count": 8,
+      "unique_pose_count": 9,
       "mouth_pair_coverage": true,
       "unknown_pose_ids": [],
       "unpaired_pose_ids": [],
+      "motion_quality": {
+        "issues": [],
+        "minimum_beat_gap_ms": 1527,
+        "maximum_beat_gap_ms": 3662,
+        "maximum_projected_pose_hold_ms": 3662,
+        "gesture_rate_hz": 0.3657,
+        "short_window_repetitions": [],
+        "repeated_transitions": [],
+        "body_transition_ms": 160,
+        "cue_crossfade_ms": [
+          160
+        ]
+      },
       "issues": [],
       "status": "pass"
     },
@@ -714,11 +1411,24 @@
       "display_name": "Quest Promise 001",
       "duration_ms": 23684,
       "cue_count": 2,
-      "motion_beat_count": 10,
+      "motion_beat_count": 9,
       "unique_pose_count": 10,
       "mouth_pair_coverage": true,
       "unknown_pose_ids": [],
       "unpaired_pose_ids": [],
+      "motion_quality": {
+        "issues": [],
+        "minimum_beat_gap_ms": 1700,
+        "maximum_beat_gap_ms": 4750,
+        "maximum_projected_pose_hold_ms": 4750,
+        "gesture_rate_hz": 0.38,
+        "short_window_repetitions": [],
+        "repeated_transitions": [],
+        "body_transition_ms": 160,
+        "cue_crossfade_ms": [
+          160
+        ]
+      },
       "issues": [],
       "status": "pass"
     },
@@ -727,11 +1437,24 @@
       "display_name": "Quest Promise 002",
       "duration_ms": 12910,
       "cue_count": 3,
-      "motion_beat_count": 8,
-      "unique_pose_count": 10,
+      "motion_beat_count": 6,
+      "unique_pose_count": 9,
       "mouth_pair_coverage": true,
       "unknown_pose_ids": [],
       "unpaired_pose_ids": [],
+      "motion_quality": {
+        "issues": [],
+        "minimum_beat_gap_ms": 1476,
+        "maximum_beat_gap_ms": 3450,
+        "maximum_projected_pose_hold_ms": 3450,
+        "gesture_rate_hz": 0.4648,
+        "short_window_repetitions": [],
+        "repeated_transitions": [],
+        "body_transition_ms": 160,
+        "cue_crossfade_ms": [
+          160
+        ]
+      },
       "issues": [],
       "status": "pass"
     },
@@ -740,11 +1463,24 @@
       "display_name": "Quest Asset 001",
       "duration_ms": 18762,
       "cue_count": 2,
-      "motion_beat_count": 10,
-      "unique_pose_count": 10,
+      "motion_beat_count": 7,
+      "unique_pose_count": 14,
       "mouth_pair_coverage": true,
       "unknown_pose_ids": [],
       "unpaired_pose_ids": [],
+      "motion_quality": {
+        "issues": [],
+        "minimum_beat_gap_ms": 1550,
+        "maximum_beat_gap_ms": 4100,
+        "maximum_projected_pose_hold_ms": 4100,
+        "gesture_rate_hz": 0.3731,
+        "short_window_repetitions": [],
+        "repeated_transitions": [],
+        "body_transition_ms": 160,
+        "cue_crossfade_ms": [
+          160
+        ]
+      },
       "issues": [],
       "status": "pass"
     },
@@ -753,11 +1489,24 @@
       "display_name": "Quest Asset 002",
       "duration_ms": 15325,
       "cue_count": 2,
-      "motion_beat_count": 7,
-      "unique_pose_count": 10,
+      "motion_beat_count": 6,
+      "unique_pose_count": 12,
       "mouth_pair_coverage": true,
       "unknown_pose_ids": [],
       "unpaired_pose_ids": [],
+      "motion_quality": {
+        "issues": [],
+        "minimum_beat_gap_ms": 1500,
+        "maximum_beat_gap_ms": 3488,
+        "maximum_projected_pose_hold_ms": 3488,
+        "gesture_rate_hz": 0.3915,
+        "short_window_repetitions": [],
+        "repeated_transitions": [],
+        "body_transition_ms": 160,
+        "cue_crossfade_ms": [
+          160
+        ]
+      },
       "issues": [],
       "status": "pass"
     },
@@ -771,6 +1520,19 @@
       "mouth_pair_coverage": true,
       "unknown_pose_ids": [],
       "unpaired_pose_ids": [],
+      "motion_quality": {
+        "issues": [],
+        "minimum_beat_gap_ms": 1500,
+        "maximum_beat_gap_ms": 3844,
+        "maximum_projected_pose_hold_ms": 3844,
+        "gesture_rate_hz": 0.38,
+        "short_window_repetitions": [],
+        "repeated_transitions": [],
+        "body_transition_ms": 160,
+        "cue_crossfade_ms": [
+          160
+        ]
+      },
       "issues": [],
       "status": "pass"
     },
@@ -779,11 +1541,24 @@
       "display_name": "Quest Commons 002",
       "duration_ms": 21920,
       "cue_count": 2,
-      "motion_beat_count": 9,
-      "unique_pose_count": 10,
+      "motion_beat_count": 8,
+      "unique_pose_count": 13,
       "mouth_pair_coverage": true,
       "unknown_pose_ids": [],
       "unpaired_pose_ids": [],
+      "motion_quality": {
+        "issues": [],
+        "minimum_beat_gap_ms": 1499,
+        "maximum_beat_gap_ms": 4560,
+        "maximum_projected_pose_hold_ms": 4560,
+        "gesture_rate_hz": 0.365,
+        "short_window_repetitions": [],
+        "repeated_transitions": [],
+        "body_transition_ms": 160,
+        "cue_crossfade_ms": [
+          160
+        ]
+      },
       "issues": [],
       "status": "pass"
     },
@@ -792,11 +1567,24 @@
       "display_name": "Mentor 001",
       "duration_ms": 34876,
       "cue_count": 4,
-      "motion_beat_count": 18,
-      "unique_pose_count": 13,
+      "motion_beat_count": 14,
+      "unique_pose_count": 21,
       "mouth_pair_coverage": true,
       "unknown_pose_ids": [],
       "unpaired_pose_ids": [],
+      "motion_quality": {
+        "issues": [],
+        "minimum_beat_gap_ms": 1600,
+        "maximum_beat_gap_ms": 3750,
+        "maximum_projected_pose_hold_ms": 3748,
+        "gesture_rate_hz": 0.4014,
+        "short_window_repetitions": [],
+        "repeated_transitions": [],
+        "body_transition_ms": 160,
+        "cue_crossfade_ms": [
+          160
+        ]
+      },
       "issues": [],
       "status": "pass"
     },
@@ -805,11 +1593,24 @@
       "display_name": "Return 001",
       "duration_ms": 23638,
       "cue_count": 3,
-      "motion_beat_count": 11,
-      "unique_pose_count": 13,
+      "motion_beat_count": 8,
+      "unique_pose_count": 15,
       "mouth_pair_coverage": true,
       "unknown_pose_ids": [],
       "unpaired_pose_ids": [],
+      "motion_quality": {
+        "issues": [],
+        "minimum_beat_gap_ms": 1500,
+        "maximum_beat_gap_ms": 4150,
+        "maximum_projected_pose_hold_ms": 4150,
+        "gesture_rate_hz": 0.3384,
+        "short_window_repetitions": [],
+        "repeated_transitions": [],
+        "body_transition_ms": 160,
+        "cue_crossfade_ms": [
+          160
+        ]
+      },
       "issues": [],
       "status": "pass"
     },
@@ -818,11 +1619,24 @@
       "display_name": "First Question Real",
       "duration_ms": 23591,
       "cue_count": 4,
-      "motion_beat_count": 12,
-      "unique_pose_count": 13,
+      "motion_beat_count": 9,
+      "unique_pose_count": 20,
       "mouth_pair_coverage": true,
       "unknown_pose_ids": [],
       "unpaired_pose_ids": [],
+      "motion_quality": {
+        "issues": [],
+        "minimum_beat_gap_ms": 1500,
+        "maximum_beat_gap_ms": 4100,
+        "maximum_projected_pose_hold_ms": 4100,
+        "gesture_rate_hz": 0.3815,
+        "short_window_repetitions": [],
+        "repeated_transitions": [],
+        "body_transition_ms": 160,
+        "cue_crossfade_ms": [
+          160
+        ]
+      },
       "issues": [],
       "status": "pass"
     },
@@ -831,11 +1645,24 @@
       "display_name": "First Question Boundary",
       "duration_ms": 23684,
       "cue_count": 4,
-      "motion_beat_count": 14,
-      "unique_pose_count": 13,
+      "motion_beat_count": 10,
+      "unique_pose_count": 18,
       "mouth_pair_coverage": true,
       "unknown_pose_ids": [],
       "unpaired_pose_ids": [],
+      "motion_quality": {
+        "issues": [],
+        "minimum_beat_gap_ms": 1498,
+        "maximum_beat_gap_ms": 4423,
+        "maximum_projected_pose_hold_ms": 4423,
+        "gesture_rate_hz": 0.4222,
+        "short_window_repetitions": [],
+        "repeated_transitions": [],
+        "body_transition_ms": 160,
+        "cue_crossfade_ms": [
+          160
+        ]
+      },
       "issues": [],
       "status": "pass"
     },
@@ -844,11 +1671,24 @@
       "display_name": "First Question Enough",
       "duration_ms": 21827,
       "cue_count": 4,
-      "motion_beat_count": 14,
-      "unique_pose_count": 13,
+      "motion_beat_count": 10,
+      "unique_pose_count": 18,
       "mouth_pair_coverage": true,
       "unknown_pose_ids": [],
       "unpaired_pose_ids": [],
+      "motion_quality": {
+        "issues": [],
+        "minimum_beat_gap_ms": 1500,
+        "maximum_beat_gap_ms": 3300,
+        "maximum_projected_pose_hold_ms": 3300,
+        "gesture_rate_hz": 0.4581,
+        "short_window_repetitions": [],
+        "repeated_transitions": [],
+        "body_transition_ms": 160,
+        "cue_crossfade_ms": [
+          160
+        ]
+      },
       "issues": [],
       "status": "pass"
     },
@@ -857,11 +1697,24 @@
       "display_name": "First Question Joe",
       "duration_ms": 14536,
       "cue_count": 4,
-      "motion_beat_count": 10,
-      "unique_pose_count": 13,
+      "motion_beat_count": 7,
+      "unique_pose_count": 18,
       "mouth_pair_coverage": true,
       "unknown_pose_ids": [],
       "unpaired_pose_ids": [],
+      "motion_quality": {
+        "issues": [],
+        "minimum_beat_gap_ms": 1522,
+        "maximum_beat_gap_ms": 3700,
+        "maximum_projected_pose_hold_ms": 3700,
+        "gesture_rate_hz": 0.4816,
+        "short_window_repetitions": [],
+        "repeated_transitions": [],
+        "body_transition_ms": 160,
+        "cue_crossfade_ms": [
+          160
+        ]
+      },
       "issues": [],
       "status": "pass"
     },
@@ -870,11 +1723,24 @@
       "display_name": "First Question Why",
       "duration_ms": 17601,
       "cue_count": 4,
-      "motion_beat_count": 12,
-      "unique_pose_count": 12,
+      "motion_beat_count": 7,
+      "unique_pose_count": 14,
       "mouth_pair_coverage": true,
       "unknown_pose_ids": [],
       "unpaired_pose_ids": [],
+      "motion_quality": {
+        "issues": [],
+        "minimum_beat_gap_ms": 1467,
+        "maximum_beat_gap_ms": 4505,
+        "maximum_projected_pose_hold_ms": 3405,
+        "gesture_rate_hz": 0.3977,
+        "short_window_repetitions": [],
+        "repeated_transitions": [],
+        "body_transition_ms": 160,
+        "cue_crossfade_ms": [
+          160
+        ]
+      },
       "issues": [],
       "status": "pass"
     },
@@ -883,11 +1749,24 @@
       "display_name": "First Question Not Ready",
       "duration_ms": 15975,
       "cue_count": 4,
-      "motion_beat_count": 11,
-      "unique_pose_count": 12,
+      "motion_beat_count": 7,
+      "unique_pose_count": 14,
       "mouth_pair_coverage": true,
       "unknown_pose_ids": [],
       "unpaired_pose_ids": [],
+      "motion_quality": {
+        "issues": [],
+        "minimum_beat_gap_ms": 1502,
+        "maximum_beat_gap_ms": 3400,
+        "maximum_projected_pose_hold_ms": 3400,
+        "gesture_rate_hz": 0.4382,
+        "short_window_repetitions": [],
+        "repeated_transitions": [],
+        "body_transition_ms": 160,
+        "cue_crossfade_ms": [
+          160
+        ]
+      },
       "issues": [],
       "status": "pass"
     },
@@ -896,11 +1775,24 @@
       "display_name": "Compass 001",
       "duration_ms": 14118,
       "cue_count": 4,
-      "motion_beat_count": 10,
-      "unique_pose_count": 13,
+      "motion_beat_count": 6,
+      "unique_pose_count": 16,
       "mouth_pair_coverage": true,
       "unknown_pose_ids": [],
       "unpaired_pose_ids": [],
+      "motion_quality": {
+        "issues": [],
+        "minimum_beat_gap_ms": 1600,
+        "maximum_beat_gap_ms": 2542,
+        "maximum_projected_pose_hold_ms": 3868,
+        "gesture_rate_hz": 0.425,
+        "short_window_repetitions": [],
+        "repeated_transitions": [],
+        "body_transition_ms": 160,
+        "cue_crossfade_ms": [
+          160
+        ]
+      },
       "issues": [],
       "status": "pass"
     },
@@ -909,11 +1801,24 @@
       "display_name": "Notebook 001",
       "duration_ms": 16161,
       "cue_count": 3,
-      "motion_beat_count": 10,
-      "unique_pose_count": 11,
+      "motion_beat_count": 6,
+      "unique_pose_count": 9,
       "mouth_pair_coverage": true,
       "unknown_pose_ids": [],
       "unpaired_pose_ids": [],
+      "motion_quality": {
+        "issues": [],
+        "minimum_beat_gap_ms": 1547,
+        "maximum_beat_gap_ms": 3500,
+        "maximum_projected_pose_hold_ms": 3211,
+        "gesture_rate_hz": 0.3713,
+        "short_window_repetitions": [],
+        "repeated_transitions": [],
+        "body_transition_ms": 160,
+        "cue_crossfade_ms": [
+          160
+        ]
+      },
       "issues": [],
       "status": "pass"
     },
@@ -922,11 +1827,24 @@
       "display_name": "Notebook Question",
       "duration_ms": 10635,
       "cue_count": 4,
-      "motion_beat_count": 8,
-      "unique_pose_count": 13,
+      "motion_beat_count": 6,
+      "unique_pose_count": 18,
       "mouth_pair_coverage": true,
       "unknown_pose_ids": [],
       "unpaired_pose_ids": [],
+      "motion_quality": {
+        "issues": [],
+        "minimum_beat_gap_ms": 1450,
+        "maximum_beat_gap_ms": 2500,
+        "maximum_projected_pose_hold_ms": 2500,
+        "gesture_rate_hz": 0.5642,
+        "short_window_repetitions": [],
+        "repeated_transitions": [],
+        "body_transition_ms": 160,
+        "cue_crossfade_ms": [
+          160
+        ]
+      },
       "issues": [],
       "status": "pass"
     },
@@ -936,10 +1854,23 @@
       "duration_ms": 6594,
       "cue_count": 3,
       "motion_beat_count": 4,
-      "unique_pose_count": 12,
+      "unique_pose_count": 15,
       "mouth_pair_coverage": true,
       "unknown_pose_ids": [],
       "unpaired_pose_ids": [],
+      "motion_quality": {
+        "issues": [],
+        "minimum_beat_gap_ms": 1601,
+        "maximum_beat_gap_ms": 2200,
+        "maximum_projected_pose_hold_ms": 2200,
+        "gesture_rate_hz": 0.6066,
+        "short_window_repetitions": [],
+        "repeated_transitions": [],
+        "body_transition_ms": 160,
+        "cue_crossfade_ms": [
+          160
+        ]
+      },
       "issues": [],
       "status": "pass"
     },
@@ -948,11 +1879,24 @@
       "display_name": "Notebook Revise",
       "duration_ms": 15279,
       "cue_count": 4,
-      "motion_beat_count": 10,
-      "unique_pose_count": 16,
+      "motion_beat_count": 7,
+      "unique_pose_count": 19,
       "mouth_pair_coverage": true,
       "unknown_pose_ids": [],
       "unpaired_pose_ids": [],
+      "motion_quality": {
+        "issues": [],
+        "minimum_beat_gap_ms": 1694,
+        "maximum_beat_gap_ms": 4022,
+        "maximum_projected_pose_hold_ms": 4022,
+        "gesture_rate_hz": 0.4581,
+        "short_window_repetitions": [],
+        "repeated_transitions": [],
+        "body_transition_ms": 160,
+        "cue_crossfade_ms": [
+          160
+        ]
+      },
       "issues": [],
       "status": "pass"
     },
@@ -961,11 +1905,24 @@
       "display_name": "Clarity Milestone",
       "duration_ms": 10170,
       "cue_count": 3,
-      "motion_beat_count": 7,
-      "unique_pose_count": 13,
+      "motion_beat_count": 5,
+      "unique_pose_count": 14,
       "mouth_pair_coverage": true,
       "unknown_pose_ids": [],
       "unpaired_pose_ids": [],
+      "motion_quality": {
+        "issues": [],
+        "minimum_beat_gap_ms": 1577,
+        "maximum_beat_gap_ms": 2865,
+        "maximum_projected_pose_hold_ms": 2865,
+        "gesture_rate_hz": 0.4916,
+        "short_window_repetitions": [],
+        "repeated_transitions": [],
+        "body_transition_ms": 160,
+        "cue_crossfade_ms": [
+          160
+        ]
+      },
       "issues": [],
       "status": "pass"
     },
@@ -974,11 +1931,24 @@
       "display_name": "Boundary 001",
       "duration_ms": 17694,
       "cue_count": 5,
-      "motion_beat_count": 12,
-      "unique_pose_count": 16,
+      "motion_beat_count": 8,
+      "unique_pose_count": 20,
       "mouth_pair_coverage": true,
       "unknown_pose_ids": [],
       "unpaired_pose_ids": [],
+      "motion_quality": {
+        "issues": [],
+        "minimum_beat_gap_ms": 1551,
+        "maximum_beat_gap_ms": 4261,
+        "maximum_projected_pose_hold_ms": 4261,
+        "gesture_rate_hz": 0.4521,
+        "short_window_repetitions": [],
+        "repeated_transitions": [],
+        "body_transition_ms": 160,
+        "cue_crossfade_ms": [
+          160
+        ]
+      },
       "issues": [],
       "status": "pass"
     },
@@ -987,11 +1957,24 @@
       "display_name": "Boundary Quiet",
       "duration_ms": 8313,
       "cue_count": 3,
-      "motion_beat_count": 6,
-      "unique_pose_count": 13,
+      "motion_beat_count": 4,
+      "unique_pose_count": 15,
       "mouth_pair_coverage": true,
       "unknown_pose_ids": [],
       "unpaired_pose_ids": [],
+      "motion_quality": {
+        "issues": [],
+        "minimum_beat_gap_ms": 1639,
+        "maximum_beat_gap_ms": 2620,
+        "maximum_projected_pose_hold_ms": 2620,
+        "gesture_rate_hz": 0.4812,
+        "short_window_repetitions": [],
+        "repeated_transitions": [],
+        "body_transition_ms": 160,
+        "cue_crossfade_ms": [
+          160
+        ]
+      },
       "issues": [],
       "status": "pass"
     },
@@ -1000,11 +1983,24 @@
       "display_name": "Boundary Ask",
       "duration_ms": 7941,
       "cue_count": 3,
-      "motion_beat_count": 5,
-      "unique_pose_count": 13,
+      "motion_beat_count": 3,
+      "unique_pose_count": 12,
       "mouth_pair_coverage": true,
       "unknown_pose_ids": [],
       "unpaired_pose_ids": [],
+      "motion_quality": {
+        "issues": [],
+        "minimum_beat_gap_ms": 1588,
+        "maximum_beat_gap_ms": 1912,
+        "maximum_projected_pose_hold_ms": 4441,
+        "gesture_rate_hz": 0.3778,
+        "short_window_repetitions": [],
+        "repeated_transitions": [],
+        "body_transition_ms": 160,
+        "cue_crossfade_ms": [
+          160
+        ]
+      },
       "issues": [],
       "status": "pass"
     },
@@ -1013,11 +2009,24 @@
       "display_name": "Boundary Open",
       "duration_ms": 7430,
       "cue_count": 3,
-      "motion_beat_count": 5,
+      "motion_beat_count": 4,
       "unique_pose_count": 13,
       "mouth_pair_coverage": true,
       "unknown_pose_ids": [],
       "unpaired_pose_ids": [],
+      "motion_quality": {
+        "issues": [],
+        "minimum_beat_gap_ms": 1450,
+        "maximum_beat_gap_ms": 1950,
+        "maximum_projected_pose_hold_ms": 2580,
+        "gesture_rate_hz": 0.5384,
+        "short_window_repetitions": [],
+        "repeated_transitions": [],
+        "body_transition_ms": 160,
+        "cue_crossfade_ms": [
+          160
+        ]
+      },
       "issues": [],
       "status": "pass"
     },
@@ -1026,11 +2035,24 @@
       "display_name": "Boundary None",
       "duration_ms": 8173,
       "cue_count": 3,
-      "motion_beat_count": 6,
-      "unique_pose_count": 13,
+      "motion_beat_count": 4,
+      "unique_pose_count": 15,
       "mouth_pair_coverage": true,
       "unknown_pose_ids": [],
       "unpaired_pose_ids": [],
+      "motion_quality": {
+        "issues": [],
+        "minimum_beat_gap_ms": 1500,
+        "maximum_beat_gap_ms": 2400,
+        "maximum_projected_pose_hold_ms": 2523,
+        "gesture_rate_hz": 0.4894,
+        "short_window_repetitions": [],
+        "repeated_transitions": [],
+        "body_transition_ms": 160,
+        "cue_crossfade_ms": [
+          160
+        ]
+      },
       "issues": [],
       "status": "pass"
     },
@@ -1039,11 +2061,24 @@
       "display_name": "Boundary Decline",
       "duration_ms": 5062,
       "cue_count": 2,
-      "motion_beat_count": 4,
-      "unique_pose_count": 10,
+      "motion_beat_count": 2,
+      "unique_pose_count": 6,
       "mouth_pair_coverage": true,
       "unknown_pose_ids": [],
       "unpaired_pose_ids": [],
+      "motion_quality": {
+        "issues": [],
+        "minimum_beat_gap_ms": 2531,
+        "maximum_beat_gap_ms": 2531,
+        "maximum_projected_pose_hold_ms": 2531,
+        "gesture_rate_hz": 0.3951,
+        "short_window_repetitions": [],
+        "repeated_transitions": [],
+        "body_transition_ms": 160,
+        "cue_crossfade_ms": [
+          160
+        ]
+      },
       "issues": [],
       "status": "pass"
     },
@@ -1052,11 +2087,24 @@
       "display_name": "Boundary Queue",
       "duration_ms": 4969,
       "cue_count": 2,
-      "motion_beat_count": 4,
-      "unique_pose_count": 10,
+      "motion_beat_count": 2,
+      "unique_pose_count": 8,
       "mouth_pair_coverage": true,
       "unknown_pose_ids": [],
       "unpaired_pose_ids": [],
+      "motion_quality": {
+        "issues": [],
+        "minimum_beat_gap_ms": 2100,
+        "maximum_beat_gap_ms": 2100,
+        "maximum_projected_pose_hold_ms": 2869,
+        "gesture_rate_hz": 0.4025,
+        "short_window_repetitions": [],
+        "repeated_transitions": [],
+        "body_transition_ms": 160,
+        "cue_crossfade_ms": [
+          160
+        ]
+      },
       "issues": [],
       "status": "pass"
     },
@@ -1065,11 +2113,24 @@
       "display_name": "Boundary Respect",
       "duration_ms": 8499,
       "cue_count": 3,
-      "motion_beat_count": 6,
+      "motion_beat_count": 5,
       "unique_pose_count": 13,
       "mouth_pair_coverage": true,
       "unknown_pose_ids": [],
       "unpaired_pose_ids": [],
+      "motion_quality": {
+        "issues": [],
+        "minimum_beat_gap_ms": 1450,
+        "maximum_beat_gap_ms": 2100,
+        "maximum_projected_pose_hold_ms": 2100,
+        "gesture_rate_hz": 0.5883,
+        "short_window_repetitions": [],
+        "repeated_transitions": [],
+        "body_transition_ms": 160,
+        "cue_crossfade_ms": [
+          160
+        ]
+      },
       "issues": [],
       "status": "pass"
     },
@@ -1078,11 +2139,24 @@
       "display_name": "Boundary Exit",
       "duration_ms": 9985,
       "cue_count": 3,
-      "motion_beat_count": 7,
-      "unique_pose_count": 12,
+      "motion_beat_count": 5,
+      "unique_pose_count": 13,
       "mouth_pair_coverage": true,
       "unknown_pose_ids": [],
       "unpaired_pose_ids": [],
+      "motion_quality": {
+        "issues": [],
+        "minimum_beat_gap_ms": 1601,
+        "maximum_beat_gap_ms": 3137,
+        "maximum_projected_pose_hold_ms": 3137,
+        "gesture_rate_hz": 0.5008,
+        "short_window_repetitions": [],
+        "repeated_transitions": [],
+        "body_transition_ms": 160,
+        "cue_crossfade_ms": [
+          160
+        ]
+      },
       "issues": [],
       "status": "pass"
     },
@@ -1091,11 +2165,24 @@
       "display_name": "Focus Low",
       "duration_ms": 9334,
       "cue_count": 4,
-      "motion_beat_count": 6,
-      "unique_pose_count": 16,
+      "motion_beat_count": 4,
+      "unique_pose_count": 17,
       "mouth_pair_coverage": true,
       "unknown_pose_ids": [],
       "unpaired_pose_ids": [],
+      "motion_quality": {
+        "issues": [],
+        "minimum_beat_gap_ms": 1598,
+        "maximum_beat_gap_ms": 2516,
+        "maximum_projected_pose_hold_ms": 3034,
+        "gesture_rate_hz": 0.4285,
+        "short_window_repetitions": [],
+        "repeated_transitions": [],
+        "body_transition_ms": 160,
+        "cue_crossfade_ms": [
+          160
+        ]
+      },
       "issues": [],
       "status": "pass"
     },
@@ -1104,11 +2191,24 @@
       "display_name": "Focus Rest",
       "duration_ms": 7477,
       "cue_count": 3,
-      "motion_beat_count": 5,
-      "unique_pose_count": 10,
+      "motion_beat_count": 4,
+      "unique_pose_count": 12,
       "mouth_pair_coverage": true,
       "unknown_pose_ids": [],
       "unpaired_pose_ids": [],
+      "motion_quality": {
+        "issues": [],
+        "minimum_beat_gap_ms": 1500,
+        "maximum_beat_gap_ms": 3500,
+        "maximum_projected_pose_hold_ms": 3500,
+        "gesture_rate_hz": 0.535,
+        "short_window_repetitions": [],
+        "repeated_transitions": [],
+        "body_transition_ms": 160,
+        "cue_crossfade_ms": [
+          160
+        ]
+      },
       "issues": [],
       "status": "pass"
     },
@@ -1117,11 +2217,24 @@
       "display_name": "Boulder Bridge",
       "duration_ms": 18855,
       "cue_count": 4,
-      "motion_beat_count": 13,
-      "unique_pose_count": 14,
+      "motion_beat_count": 8,
+      "unique_pose_count": 18,
       "mouth_pair_coverage": true,
       "unknown_pose_ids": [],
       "unpaired_pose_ids": [],
+      "motion_quality": {
+        "issues": [],
+        "minimum_beat_gap_ms": 1620,
+        "maximum_beat_gap_ms": 3255,
+        "maximum_projected_pose_hold_ms": 3255,
+        "gesture_rate_hz": 0.4243,
+        "short_window_repetitions": [],
+        "repeated_transitions": [],
+        "body_transition_ms": 160,
+        "cue_crossfade_ms": [
+          160
+        ]
+      },
       "issues": [],
       "status": "pass"
     },
@@ -1130,11 +2243,24 @@
       "display_name": "Boulder Trail",
       "duration_ms": 12446,
       "cue_count": 3,
-      "motion_beat_count": 8,
-      "unique_pose_count": 12,
+      "motion_beat_count": 6,
+      "unique_pose_count": 15,
       "mouth_pair_coverage": true,
       "unknown_pose_ids": [],
       "unpaired_pose_ids": [],
+      "motion_quality": {
+        "issues": [],
+        "minimum_beat_gap_ms": 1650,
+        "maximum_beat_gap_ms": 4400,
+        "maximum_projected_pose_hold_ms": 4400,
+        "gesture_rate_hz": 0.4821,
+        "short_window_repetitions": [],
+        "repeated_transitions": [],
+        "body_transition_ms": 160,
+        "cue_crossfade_ms": [
+          160
+        ]
+      },
       "issues": [],
       "status": "pass"
     },
@@ -1143,11 +2269,24 @@
       "display_name": "Boulder Civic",
       "duration_ms": 9706,
       "cue_count": 2,
-      "motion_beat_count": 7,
-      "unique_pose_count": 10,
+      "motion_beat_count": 4,
+      "unique_pose_count": 9,
       "mouth_pair_coverage": true,
       "unknown_pose_ids": [],
       "unpaired_pose_ids": [],
+      "motion_quality": {
+        "issues": [],
+        "minimum_beat_gap_ms": 1810,
+        "maximum_beat_gap_ms": 2350,
+        "maximum_projected_pose_hold_ms": 3656,
+        "gesture_rate_hz": 0.4121,
+        "short_window_repetitions": [],
+        "repeated_transitions": [],
+        "body_transition_ms": 160,
+        "cue_crossfade_ms": [
+          160
+        ]
+      },
       "issues": [],
       "status": "pass"
     },
@@ -1156,11 +2295,24 @@
       "display_name": "Boulder Public",
       "duration_ms": 9845,
       "cue_count": 4,
-      "motion_beat_count": 7,
-      "unique_pose_count": 15,
+      "motion_beat_count": 5,
+      "unique_pose_count": 17,
       "mouth_pair_coverage": true,
       "unknown_pose_ids": [],
       "unpaired_pose_ids": [],
+      "motion_quality": {
+        "issues": [],
+        "minimum_beat_gap_ms": 1800,
+        "maximum_beat_gap_ms": 2500,
+        "maximum_projected_pose_hold_ms": 2500,
+        "gesture_rate_hz": 0.5079,
+        "short_window_repetitions": [],
+        "repeated_transitions": [],
+        "body_transition_ms": 160,
+        "cue_crossfade_ms": [
+          160
+        ]
+      },
       "issues": [],
       "status": "pass"
     },
@@ -1169,11 +2321,24 @@
       "display_name": "Boulder Lore",
       "duration_ms": 17647,
       "cue_count": 3,
-      "motion_beat_count": 11,
-      "unique_pose_count": 12,
+      "motion_beat_count": 7,
+      "unique_pose_count": 13,
       "mouth_pair_coverage": true,
       "unknown_pose_ids": [],
       "unpaired_pose_ids": [],
+      "motion_quality": {
+        "issues": [],
+        "minimum_beat_gap_ms": 1450,
+        "maximum_beat_gap_ms": 4700,
+        "maximum_projected_pose_hold_ms": 3447,
+        "gesture_rate_hz": 0.3967,
+        "short_window_repetitions": [],
+        "repeated_transitions": [],
+        "body_transition_ms": 160,
+        "cue_crossfade_ms": [
+          160
+        ]
+      },
       "issues": [],
       "status": "pass"
     },
@@ -1182,11 +2347,24 @@
       "display_name": "Github Repo",
       "duration_ms": 11006,
       "cue_count": 4,
-      "motion_beat_count": 8,
-      "unique_pose_count": 16,
+      "motion_beat_count": 5,
+      "unique_pose_count": 15,
       "mouth_pair_coverage": true,
       "unknown_pose_ids": [],
       "unpaired_pose_ids": [],
+      "motion_quality": {
+        "issues": [],
+        "minimum_beat_gap_ms": 1600,
+        "maximum_beat_gap_ms": 4350,
+        "maximum_projected_pose_hold_ms": 3749,
+        "gesture_rate_hz": 0.4543,
+        "short_window_repetitions": [],
+        "repeated_transitions": [],
+        "body_transition_ms": 160,
+        "cue_crossfade_ms": [
+          160
+        ]
+      },
       "issues": [],
       "status": "pass"
     },
@@ -1195,11 +2373,24 @@
       "display_name": "Github Issue",
       "duration_ms": 6362,
       "cue_count": 4,
-      "motion_beat_count": 5,
-      "unique_pose_count": 16,
+      "motion_beat_count": 4,
+      "unique_pose_count": 15,
       "mouth_pair_coverage": true,
       "unknown_pose_ids": [],
       "unpaired_pose_ids": [],
+      "motion_quality": {
+        "issues": [],
+        "minimum_beat_gap_ms": 1450,
+        "maximum_beat_gap_ms": 1603,
+        "maximum_projected_pose_hold_ms": 1812,
+        "gesture_rate_hz": 0.6287,
+        "short_window_repetitions": [],
+        "repeated_transitions": [],
+        "body_transition_ms": 160,
+        "cue_crossfade_ms": [
+          160
+        ]
+      },
       "issues": [],
       "status": "pass"
     },
@@ -1208,11 +2399,24 @@
       "display_name": "Github Pr",
       "duration_ms": 9706,
       "cue_count": 4,
-      "motion_beat_count": 6,
-      "unique_pose_count": 16,
+      "motion_beat_count": 5,
+      "unique_pose_count": 19,
       "mouth_pair_coverage": true,
       "unknown_pose_ids": [],
       "unpaired_pose_ids": [],
+      "motion_quality": {
+        "issues": [],
+        "minimum_beat_gap_ms": 1463,
+        "maximum_beat_gap_ms": 3246,
+        "maximum_projected_pose_hold_ms": 3246,
+        "gesture_rate_hz": 0.5151,
+        "short_window_repetitions": [],
+        "repeated_transitions": [],
+        "body_transition_ms": 160,
+        "cue_crossfade_ms": [
+          160
+        ]
+      },
       "issues": [],
       "status": "pass"
     },
@@ -1221,11 +2425,24 @@
       "display_name": "Github Conflict",
       "duration_ms": 10310,
       "cue_count": 4,
-      "motion_beat_count": 8,
-      "unique_pose_count": 15,
+      "motion_beat_count": 6,
+      "unique_pose_count": 19,
       "mouth_pair_coverage": true,
       "unknown_pose_ids": [],
       "unpaired_pose_ids": [],
+      "motion_quality": {
+        "issues": [],
+        "minimum_beat_gap_ms": 1500,
+        "maximum_beat_gap_ms": 2650,
+        "maximum_projected_pose_hold_ms": 2300,
+        "gesture_rate_hz": 0.582,
+        "short_window_repetitions": [],
+        "repeated_transitions": [],
+        "body_transition_ms": 160,
+        "cue_crossfade_ms": [
+          160
+        ]
+      },
       "issues": [],
       "status": "pass"
     },
@@ -1234,11 +2451,24 @@
       "display_name": "Github Docs",
       "duration_ms": 7895,
       "cue_count": 2,
-      "motion_beat_count": 5,
-      "unique_pose_count": 10,
+      "motion_beat_count": 4,
+      "unique_pose_count": 11,
       "mouth_pair_coverage": true,
       "unknown_pose_ids": [],
       "unpaired_pose_ids": [],
+      "motion_quality": {
+        "issues": [],
+        "minimum_beat_gap_ms": 1450,
+        "maximum_beat_gap_ms": 3350,
+        "maximum_projected_pose_hold_ms": 3350,
+        "gesture_rate_hz": 0.5066,
+        "short_window_repetitions": [],
+        "repeated_transitions": [],
+        "body_transition_ms": 160,
+        "cue_crossfade_ms": [
+          160
+        ]
+      },
       "issues": [],
       "status": "pass"
     },
@@ -1247,11 +2477,24 @@
       "display_name": "Github Maintainer",
       "duration_ms": 18669,
       "cue_count": 3,
-      "motion_beat_count": 11,
-      "unique_pose_count": 12,
+      "motion_beat_count": 7,
+      "unique_pose_count": 13,
       "mouth_pair_coverage": true,
       "unknown_pose_ids": [],
       "unpaired_pose_ids": [],
+      "motion_quality": {
+        "issues": [],
+        "minimum_beat_gap_ms": 1623,
+        "maximum_beat_gap_ms": 3353,
+        "maximum_projected_pose_hold_ms": 3353,
+        "gesture_rate_hz": 0.375,
+        "short_window_repetitions": [],
+        "repeated_transitions": [],
+        "body_transition_ms": 160,
+        "cue_crossfade_ms": [
+          160
+        ]
+      },
       "issues": [],
       "status": "pass"
     }

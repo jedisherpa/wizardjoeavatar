@@ -27,10 +27,15 @@ DEFAULT_MOUTH_PAIRS = (
     / "reference"
     / "characters"
     / "wizard-joe"
-    / "mouth-pairs-v1"
+    / "mouth-pairs-full-frame-v2"
     / "mouth-pair-manifest.json"
 )
 DEFAULT_OUTPUT = DEFAULT_MANIFEST.parent / "performance-audit.json"
+MIN_MOTION_BEAT_SPACING_MS = 1400
+MAX_MOTION_BEAT_GAP_MS = 6000
+MOTION_REPETITION_WINDOW = 4
+MIN_BODY_TRANSITION_MS = 120
+MAX_BODY_TRANSITION_MS = 240
 
 
 def _read_json(path: Path) -> dict[str, Any]:
@@ -77,6 +82,119 @@ def _clip_pose_ids(clip: dict[str, Any]) -> set[str]:
     return result
 
 
+def _motion_quality(performance: dict[str, Any], duration_ms: int) -> dict[str, Any]:
+    beats = performance.get("motion_beats", [])
+    pose_ids = [str(beat["pose_id"]) for beat in beats]
+    gaps = [
+        int(second["time_ms"]) - int(first["time_ms"])
+        for first, second in zip(beats, beats[1:])
+    ]
+    short_window_repetitions = [
+        {
+            "beat_index": index,
+            "pose_id": pose_id,
+            "previous_window": pose_ids[
+                max(0, index - MOTION_REPETITION_WINDOW) : index
+            ],
+        }
+        for index, pose_id in enumerate(pose_ids)
+        if pose_id
+        in pose_ids[max(0, index - MOTION_REPETITION_WINDOW) : index]
+    ]
+    transition_pairs = [
+        (first, second) for first, second in zip(pose_ids, pose_ids[1:])
+    ]
+    transition_counts: dict[tuple[str, str], int] = {}
+    for transition in transition_pairs:
+        transition_counts[transition] = transition_counts.get(transition, 0) + 1
+    repeated_transitions = [
+        {
+            "source_pose_id": source,
+            "target_pose_id": target,
+            "count": count,
+        }
+        for (source, target), count in sorted(transition_counts.items())
+        if count > 1
+    ]
+    approach = performance["approach"]
+    approach_end_ms = int(approach.get("end_ms", 0))
+    projected_beats: list[dict[str, Any]] = []
+    if approach_end_ms < duration_ms and beats:
+        active_index = 0
+        for index, beat in enumerate(beats):
+            if int(beat["time_ms"]) <= approach_end_ms:
+                active_index = index
+            else:
+                break
+        projected_beats.append(
+            {
+                "time_ms": approach_end_ms,
+                "pose_id": beats[active_index]["pose_id"],
+            }
+        )
+        projected_beats.extend(
+            beat
+            for beat in beats[active_index + 1 :]
+            if int(beat["time_ms"]) > approach_end_ms
+        )
+    projected_hold_gaps = [
+        int(second["time_ms"]) - int(first["time_ms"])
+        for first, second in zip(projected_beats, projected_beats[1:])
+    ]
+    if projected_beats:
+        projected_hold_gaps.append(
+            duration_ms - int(projected_beats[-1]["time_ms"])
+        )
+    transition_ms = int(performance.get("body_transition_ms", 0))
+    cue_crossfades = {
+        int(cue.get("crossfade_ms", 0))
+        for cue in performance.get("body_cues", [])
+    }
+    issues: list[str] = []
+    if any(gap < MIN_MOTION_BEAT_SPACING_MS for gap in gaps):
+        issues.append("motion_beats_too_close")
+    if gaps and max(gaps) > MAX_MOTION_BEAT_GAP_MS:
+        issues.append("motion_beat_gap_too_long")
+    if (
+        projected_hold_gaps
+        and max(projected_hold_gaps) > MAX_MOTION_BEAT_GAP_MS
+    ):
+        issues.append("projected_pose_hold_too_long")
+    if short_window_repetitions:
+        issues.append("short_window_pose_repetition")
+    if repeated_transitions:
+        issues.append("repeated_pose_transition")
+    if not MIN_BODY_TRANSITION_MS <= transition_ms <= MAX_BODY_TRANSITION_MS:
+        issues.append("body_transition_out_of_range")
+    if cue_crossfades != {transition_ms}:
+        issues.append("cue_transition_mismatch")
+    if (
+        approach.get("mode") == "walk_toward_camera"
+        and (
+            len(set(approach.get("pose_ids", []))) != 1
+            or "248_camera_retreat" in approach.get("pose_ids", [])
+            or approach.get("arrival_pose_ids") != ["247_camera_intimate_hold"]
+        )
+    ):
+        issues.append("incoherent_camera_approach")
+    gesture_rate = len(beats) / max(0.001, duration_ms / 1000)
+    if gesture_rate > 0.7:
+        issues.append("gesture_density_too_high")
+    return {
+        "issues": issues,
+        "minimum_beat_gap_ms": min(gaps) if gaps else None,
+        "maximum_beat_gap_ms": max(gaps) if gaps else None,
+        "maximum_projected_pose_hold_ms": (
+            max(projected_hold_gaps) if projected_hold_gaps else None
+        ),
+        "gesture_rate_hz": round(gesture_rate, 4),
+        "short_window_repetitions": short_window_repetitions,
+        "repeated_transitions": repeated_transitions,
+        "body_transition_ms": transition_ms,
+        "cue_crossfade_ms": sorted(cue_crossfades),
+    }
+
+
 def audit_performances(
     manifest_path: Path,
     library_index_path: Path,
@@ -96,6 +214,7 @@ def audit_performances(
         beats = performance.get("motion_beats", [])
         used_poses = _clip_pose_ids(clip)
         issues: list[str] = []
+        motion_quality = _motion_quality(performance, duration_ms)
         if not cues or cues[0]["start_ms"] != 0 or cues[-1]["end_ms"] != duration_ms:
             issues.append("cue_coverage")
         if any(
@@ -108,15 +227,11 @@ def audit_performances(
         if not beats or beats[0]["time_ms"] != 0:
             issues.append("missing_initial_motion_beat")
         if any(
-            second["time_ms"] - first["time_ms"] < 950
-            for first, second in zip(beats, beats[1:])
-        ):
-            issues.append("motion_beats_too_close")
-        if any(
             first["pose_id"] == second["pose_id"]
             for first, second in zip(beats, beats[1:])
         ):
             issues.append("adjacent_pose_repetition")
+        issues.extend(motion_quality["issues"])
         unknown = sorted(used_poses - valid_poses)
         if unknown:
             issues.append("unknown_pose")
@@ -144,6 +259,7 @@ def audit_performances(
                 == len(used_poses),
                 "unknown_pose_ids": unknown,
                 "unpaired_pose_ids": unpaired,
+                "motion_quality": motion_quality,
                 "issues": issues,
                 "status": "pass" if not issues else "fail",
             }
@@ -164,8 +280,16 @@ def audit_performances(
         "automated_gate": {
             "audio_checksum": True,
             "continuous_cues": True,
-            "minimum_motion_beat_spacing_ms": 950,
+            "minimum_motion_beat_spacing_ms": MIN_MOTION_BEAT_SPACING_MS,
+            "maximum_motion_beat_gap_ms": MAX_MOTION_BEAT_GAP_MS,
             "adjacent_pose_repetition_forbidden": True,
+            "rolling_pose_repetition_window": MOTION_REPETITION_WINDOW,
+            "repeated_pose_transitions_forbidden": True,
+            "body_transition_range_ms": [
+                MIN_BODY_TRANSITION_MS,
+                MAX_BODY_TRANSITION_MS,
+            ],
+            "stable_camera_approach_required": True,
             "all_pose_references_valid": True,
             "all_used_poses_require_open_closed_pair": True,
         },

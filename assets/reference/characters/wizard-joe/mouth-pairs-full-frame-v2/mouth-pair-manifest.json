@@ -3924,7 +3924,31 @@
           "source_chroma": "assets/reference/characters/wizard-joe/mouth-pairs-full-frame-v2/source-chroma/174_flight_powerstroke_down__mouth_closed.png",
           "source_sha256": "a509dafce05b5bd2ff8839550cffd048af61c649c1acebd6977a7b1201f0b654",
           "alpha_path": "assets/reference/characters/wizard-joe/mouth-pairs-full-frame-v2/processed-alpha/174_flight_powerstroke_down__mouth_closed_full_frame_v2.png",
-          "alpha_sha256": "4069b3ed32da31aede25b3273dad7ef1a17ca2f0f373570dd9b1d3a5387c4f18",
+          "alpha_sha256": "3f89c66a9c96d1750edec0989cf774fc2e526d56d363157b53b969599973043f",
+          "registration": {
+            "method": "canonical_frame_with_registered_generated_mouth",
+            "canonical_bbox": [
+              85,
+              94,
+              1185,
+              1081
+            ],
+            "registered_bbox": [
+              85,
+              94,
+              1185,
+              1081
+            ],
+            "mouth_region": [
+              651,
+              407,
+              684,
+              426
+            ],
+            "outside_mouth_region": "byte_identical",
+            "status": "pass"
+          },
+          "frame_construction": "complete canonical frame with build-time registered generated mouth transfer",
           "approval_state": "candidate_visual_review"
         }
       },
@@ -3951,7 +3975,31 @@
           "source_chroma": "assets/reference/characters/wizard-joe/mouth-pairs-full-frame-v2/source-chroma/175_flight_recoverystroke_up__mouth_closed.png",
           "source_sha256": "257c12219fb258d94920cd1621cbd6b2e7f5d29384ccde0b99f211a2a74739df",
           "alpha_path": "assets/reference/characters/wizard-joe/mouth-pairs-full-frame-v2/processed-alpha/175_flight_recoverystroke_up__mouth_closed_full_frame_v2.png",
-          "alpha_sha256": "caa589211f5b70b49e1d734712ffac201cf9f6273a79cc8c71877d5e95bbdd49",
+          "alpha_sha256": "f97b5bcd5c7a52baeaf0f5deb8d0e8bd7f8540de4dfa904d2001309c5f0f1b12",
+          "registration": {
+            "method": "canonical_frame_with_registered_generated_mouth",
+            "canonical_bbox": [
+              174,
+              115,
+              1185,
+              1126
+            ],
+            "registered_bbox": [
+              174,
+              115,
+              1185,
+              1126
+            ],
+            "mouth_region": [
+              701,
+              439,
+              772,
+              478
+            ],
+            "outside_mouth_region": "byte_identical",
+            "status": "pass"
+          },
+          "frame_construction": "complete canonical frame with build-time registered generated mouth transfer",
           "approval_state": "candidate_visual_review"
         }
       },
@@ -3978,7 +4026,31 @@
           "source_chroma": "assets/reference/characters/wizard-joe/mouth-pairs-full-frame-v2/source-chroma/176_flight_hover_neutral__mouth_closed.png",
           "source_sha256": "97ab9efa80c393a1687d849ab45298953b92a186b75980ce4d0d765a9edeac9f",
           "alpha_path": "assets/reference/characters/wizard-joe/mouth-pairs-full-frame-v2/processed-alpha/176_flight_hover_neutral__mouth_closed_full_frame_v2.png",
-          "alpha_sha256": "fc6622aab0459ccd8f854ba6fc30c638c5f398c8c9f13fa9eb6854f6fcb78fa6",
+          "alpha_sha256": "0f1b46085bf29ae9d2763e7a5661c03d6f4d72e0d3c6d6d0dfedaee2d8bc1052",
+          "registration": {
+            "method": "canonical_frame_with_registered_generated_mouth",
+            "canonical_bbox": [
+              122,
+              134,
+              1114,
+              1084
+            ],
+            "registered_bbox": [
+              122,
+              134,
+              1114,
+              1084
+            ],
+            "mouth_region": [
+              591,
+              404,
+              692,
+              468
+            ],
+            "outside_mouth_region": "byte_identical",
+            "status": "pass"
+          },
+          "frame_construction": "complete canonical frame with build-time registered generated mouth transfer",
           "approval_state": "candidate_visual_review"
         }
       },
@@ -4005,7 +4077,31 @@
           "source_chroma": "assets/reference/characters/wizard-joe/mouth-pairs-full-frame-v2/source-chroma/177_flight_glide_forward__mouth_closed.png",
           "source_sha256": "38fd07284136d05efc42490f9c53f4152fb18a9d16dd770720c9d3a7db7bcb24",
           "alpha_path": "assets/reference/characters/wizard-joe/mouth-pairs-full-frame-v2/processed-alpha/177_flight_glide_forward__mouth_closed_full_frame_v2.png",
-          "alpha_sha256": "a921ba08598c2b17936fa75e3011c5ad459c93fff3a5ca03127c5421e2832920",
+          "alpha_sha256": "df7990783b5358c50968e447a513cb963e7f7f380a38bfd238612edc5785df18",
+          "registration": {
+            "method": "canonical_frame_with_registered_generated_mouth",
+            "canonical_bbox": [
+              147,
+              271,
+              1118,
+              1017
+            ],
+            "registered_bbox": [
+              147,
+              271,
+              1118,
+              1017
+            ],
+            "mouth_region": [
+              631,
+              518,
+              725,
+              578
+            ],
+            "outside_mouth_region": "byte_identical",
+            "status": "pass"
+          },
+          "frame_construction": "complete canonical frame with build-time registered generated mouth transfer",
           "approval_state": "candidate_visual_review"
         }
       },
@@ -4147,7 +4243,31 @@
           "source_chroma": "assets/reference/characters/wizard-joe/mouth-pairs-full-frame-v2/source-chroma/184_flight_accelerate__mouth_closed.png",
           "source_sha256": "aeed342deb47fc7ac5245f84f09eec3656d836dce06f84bc19f3f3525515ce48",
           "alpha_path": "assets/reference/characters/wizard-joe/mouth-pairs-full-frame-v2/processed-alpha/184_flight_accelerate__mouth_closed_full_frame_v2.png",
-          "alpha_sha256": "0ad1c4d468d0d8770deafb81a01ab0ce4d311722b87ded9b8bc09902a160ce2d",
+          "alpha_sha256": "94598806a80ec2cdd9a13225f0ad9fa2ea07081b9be58f066ecf389ff5382fb4",
+          "registration": {
+            "method": "canonical_frame_with_registered_generated_mouth",
+            "canonical_bbox": [
+              105,
+              292,
+              1149,
+              927
+            ],
+            "registered_bbox": [
+              105,
+              292,
+              1149,
+              927
+            ],
+            "mouth_region": [
+              694,
+              614,
+              735,
+              638
+            ],
+            "outside_mouth_region": "byte_identical",
+            "status": "pass"
+          },
+          "frame_construction": "complete canonical frame with build-time registered generated mouth transfer",
           "approval_state": "candidate_visual_review"
         }
       },
@@ -4174,7 +4294,31 @@
           "source_chroma": "assets/reference/characters/wizard-joe/mouth-pairs-full-frame-v2/source-chroma/185_flight_brake__mouth_closed.png",
           "source_sha256": "89df5f138ef171f3848778866fae31e8c685fc70353138e29d76faadec8e56bc",
           "alpha_path": "assets/reference/characters/wizard-joe/mouth-pairs-full-frame-v2/processed-alpha/185_flight_brake__mouth_closed_full_frame_v2.png",
-          "alpha_sha256": "aff299d751e4285dde30b4af3efeae4e733bf4fae0502447eabfe9adbcfc07d8",
+          "alpha_sha256": "6a39ba6982eec11f42358cc2b77bd36877eb28c52c24301abd51d06638ceddb6",
+          "registration": {
+            "method": "canonical_frame_with_registered_generated_mouth",
+            "canonical_bbox": [
+              69,
+              148,
+              1185,
+              1138
+            ],
+            "registered_bbox": [
+              69,
+              148,
+              1185,
+              1138
+            ],
+            "mouth_region": [
+              630,
+              466,
+              719,
+              496
+            ],
+            "outside_mouth_region": "byte_identical",
+            "status": "pass"
+          },
+          "frame_construction": "complete canonical frame with build-time registered generated mouth transfer",
           "approval_state": "candidate_visual_review"
         }
       },
@@ -4224,7 +4368,31 @@
           "source_chroma": "assets/reference/characters/wizard-joe/mouth-pairs-full-frame-v2/source-chroma/187_flight_stationary_speak__mouth_closed.png",
           "source_sha256": "6c25b1b6a8c87385491a734fd5dcbcc0ce47f241353f6cca71ce8763e52f4407",
           "alpha_path": "assets/reference/characters/wizard-joe/mouth-pairs-full-frame-v2/processed-alpha/187_flight_stationary_speak__mouth_closed_full_frame_v2.png",
-          "alpha_sha256": "0fc1aa4da5789f10cdd15a98b124f097f72ee4219502aec578bb08b1e2cc220c",
+          "alpha_sha256": "121af84bbf948cfdcdafe79082f2d7f8a0ecc1101a80018d1b6d061e1b36331c",
+          "registration": {
+            "method": "canonical_frame_with_registered_generated_mouth",
+            "canonical_bbox": [
+              70,
+              102,
+              1114,
+              1168
+            ],
+            "registered_bbox": [
+              70,
+              102,
+              1114,
+              1168
+            ],
+            "mouth_region": [
+              592,
+              439,
+              684,
+              478
+            ],
+            "outside_mouth_region": "byte_identical",
+            "status": "pass"
+          },
+          "frame_construction": "complete canonical frame with build-time registered generated mouth transfer",
           "approval_state": "candidate_visual_review"
         }
       },
@@ -4251,7 +4419,31 @@
           "source_chroma": "assets/reference/characters/wizard-joe/mouth-pairs-full-frame-v2/source-chroma/188_flight_staff_forward__mouth_closed.png",
           "source_sha256": "51d8480bcbbcbcc396375b8e7ce6869f97419b5fcfc379af148d5a71cee5e894",
           "alpha_path": "assets/reference/characters/wizard-joe/mouth-pairs-full-frame-v2/processed-alpha/188_flight_staff_forward__mouth_closed_full_frame_v2.png",
-          "alpha_sha256": "704c7ca635d76ceb101e31e40b38d01ef6e1b13edf222d4ad7ce1c3b6b4ff94c",
+          "alpha_sha256": "569641b9d962600fa4fde2cd75f93aabefc4469678165a139b00632c9fbccfaa",
+          "registration": {
+            "method": "canonical_frame_with_registered_generated_mouth",
+            "canonical_bbox": [
+              69,
+              271,
+              1185,
+              1030
+            ],
+            "registered_bbox": [
+              69,
+              271,
+              1185,
+              1030
+            ],
+            "mouth_region": [
+              582,
+              619,
+              656,
+              676
+            ],
+            "outside_mouth_region": "byte_identical",
+            "status": "pass"
+          },
+          "frame_construction": "complete canonical frame with build-time registered generated mouth transfer",
           "approval_state": "candidate_visual_review"
         }
       },
@@ -4301,7 +4493,31 @@
           "source_chroma": "assets/reference/characters/wizard-joe/mouth-pairs-full-frame-v2/source-chroma/190_flight_reach__mouth_closed.png",
           "source_sha256": "038dd5d9025aa6a004c3c3c1cb4840be14156207677eee20d682f749cf64856f",
           "alpha_path": "assets/reference/characters/wizard-joe/mouth-pairs-full-frame-v2/processed-alpha/190_flight_reach__mouth_closed_full_frame_v2.png",
-          "alpha_sha256": "ec89f97014160fd065914cff2fa00a34706191d6d7affb1a4133552802b1f27e",
+          "alpha_sha256": "b6e8eaa7d2c67019e127f1452d4f71fe2cc88f0d3ce8a2730849c560c4965102",
+          "registration": {
+            "method": "canonical_frame_with_registered_generated_mouth",
+            "canonical_bbox": [
+              69,
+              257,
+              1185,
+              1025
+            ],
+            "registered_bbox": [
+              69,
+              257,
+              1185,
+              1025
+            ],
+            "mouth_region": [
+              662,
+              584,
+              756,
+              620
+            ],
+            "outside_mouth_region": "byte_identical",
+            "status": "pass"
+          },
+          "frame_construction": "complete canonical frame with build-time registered generated mouth transfer",
           "approval_state": "candidate_visual_review"
         }
       },
@@ -5776,10 +5992,16 @@
   "program_id": "wizard-joe-full-frame-mouth-pairs-v2",
   "full_frame_artifact": {
     "path": "full-frame-closed-mouth-candidates-v2.wjpose",
-    "sha256": "cb8453f56a8a95cadd82021690b07ad57b8948defc3292f7476deeb96f924ebd",
-    "bytes": 16914848,
+    "sha256": "8f5c013f2ac5c016a78762aaf8a243127ac9c854d82cc5274bd27e8a9214a021",
+    "bytes": 9132895,
     "pose_count": 9,
     "approval_state": "candidate_visual_review",
-    "runtime_admitted": false
+    "runtime_admitted": false,
+    "registration_gate": {
+      "method": "canonical_frame_with_registered_generated_mouth",
+      "passed_pose_count": 9,
+      "failed_pose_count": 0,
+      "outside_mouth_region": "byte_identical"
+    }
   }
 }
