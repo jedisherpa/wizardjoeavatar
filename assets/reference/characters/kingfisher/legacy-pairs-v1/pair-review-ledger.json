@@ -4,9 +4,9 @@
   "candidate_count": 66,
   "character_id": "kingfisher",
   "internal_visual_review_summary": {
-    "needs_rebuild_count": 0,
+    "needs_rebuild_count": 2,
     "not_observable_count": 2,
-    "pass_count": 64,
+    "pass_count": 62,
     "reviewed_count": 66,
     "runtime_admission_implied": false,
     "schema_version": 1,
@@ -1541,14 +1541,17 @@
       "automated_audit_passed": true,
       "body_pose_id": "kingfisher.act.059.determination",
       "internal_visual_review": {
-        "defect_codes": [],
-        "evidence_path": "review-evidence/detail-boards/pair-detail-page-10.png",
-        "note": "Rebuilt from the original lower mandible at -14 degrees; upper beak is immutable and the former parallel second-beak defect is removed.",
-        "reviewed_at": "2026-07-30T22:11:29.733412+00:00",
-        "reviewer": "codex-pair-closeup-review",
+        "defect_codes": [
+          "detached_lower_mandible",
+          "insufficient_mandible_thickness"
+        ],
+        "evidence_path": "review-evidence/full-size-failures/pair-059-determination-open-needs-rebuild.png",
+        "note": "Full-size pair review shows the lower mandible as a detached needle-thin line rather than a connected anatomical beak; the pair-specific hinge rebuild is rejected.",
+        "reviewed_at": "2026-07-31T02:37:18.904994+00:00",
+        "reviewer": "codex-full-size-pair-review",
         "runtime_admission_implied": false,
         "schema_version": 1,
-        "state": "pass",
+        "state": "needs_rebuild",
         "user_approval_implied": false
       },
       "ordinal": 59,
@@ -1619,14 +1622,17 @@
       "automated_audit_passed": true,
       "body_pose_id": "kingfisher.act.062.sudden-idea",
       "internal_visual_review": {
-        "defect_codes": [],
-        "evidence_path": "review-evidence/detail-boards/pair-detail-page-11.png",
-        "note": "Rebuilt from the original lower mandible at -14 degrees; upper beak is immutable and the oversized generated wedge is removed.",
-        "reviewed_at": "2026-07-30T22:11:29.773136+00:00",
-        "reviewer": "codex-pair-closeup-review",
+        "defect_codes": [
+          "duplicate_beak_edge",
+          "hinge_geometry_misaligned"
+        ],
+        "evidence_path": "review-evidence/full-size-failures/pair-062-sudden-idea-open-needs-rebuild.png",
+        "note": "Full-size pair review shows a stacked duplicate beak edge and an unclear single hinge; the pair-specific hinge rebuild is rejected pending a new closed/open render pair.",
+        "reviewed_at": "2026-07-31T02:37:52.964517+00:00",
+        "reviewer": "codex-full-size-pair-review",
         "runtime_admission_implied": false,
         "schema_version": 1,
-        "state": "pass",
+        "state": "needs_rebuild",
         "user_approval_implied": false
       },
       "ordinal": 62,

@@ -68,9 +68,9 @@ The machine-readable authority is:
 Current internal review totals:
 
 - pairs reviewed: 66;
-- anatomical passes: 64;
+- anatomical passes: 62;
 - not observable: 2;
-- currently awaiting rebuild: 0;
+- currently awaiting rebuild: 2;
 - user-approved pairs: 0; and
 - runtime-admitted pairs: 0.
 
@@ -79,10 +79,15 @@ The close-up evidence is under:
 `assets/reference/characters/kingfisher/legacy-pairs-v1/review-evidence/detail-boards/`
 
 Pair 59 (`determination`) and pair 62 (`sudden idea`) were rebuilt from their
-original lower-mandible pixels at a -14 degree hinge rotation. Pair 59's
-parallel second-beak edge and pair 62's oversized black wedge were removed.
-Their earlier candidates remain in the corresponding `pair-work` folders as
-rejected evidence.
+original lower-mandible pixels at a -14 degree hinge rotation. Full-size
+one-pair review then rejected both replacements: pair 59 still has a detached,
+underweight lower mandible, and pair 62 still has a duplicate edge with an
+unclear hinge. Their generated and hinge-rebuilt candidates remain in the
+corresponding `pair-work` folders as rejected evidence.
+
+Full-size failure evidence is under:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/review-evidence/full-size-failures/`
 
 ## Review Projection
 
@@ -98,7 +103,18 @@ The paired review sequence alternates each exact closed/open pair:
 
 Local observer:
 
-`http://127.0.0.1:8667/?hd-sequence=kingfisher-paired-beaks-review`
+`http://127.0.0.1:8667/?hd-pair-review=kingfisher-paired-beaks-review`
+
+Optional direct pair selection:
+
+`http://127.0.0.1:8667/?hd-pair-review=kingfisher-paired-beaks-review&pair=59`
+
+The reviewer loads one closed/open pair together, computes one shared opaque
+silhouette bound, and applies the same full-size presentation transform to
+both frames. The arrow buttons change pairs, the square and diamond buttons
+select closed or open, and the play button alternates only the current pair.
+This transform changes presentation only; source RGBA pixels, registration,
+checksums, approval state, and runtime admission remain unchanged.
 
 The current content-addressed pair artifact is:
 
@@ -118,11 +134,10 @@ written, avoiding partial-file reads during review updates.
 
 ## Reproduction
 
-Rebuild all candidate pairs:
+Inspect the complete legacy rebuild command:
 
 ```bash
-python3 tools/rebuild_kingfisher_legacy_pairs.py \
-  --plan assets/reference/characters/kingfisher/legacy-pairs-v1/rebuild-plan.json
+python3 tools/rebuild_kingfisher_legacy_pairs.py --help
 ```
 
 Reconstruct one failed lower mandible:
@@ -169,15 +184,21 @@ The focused suite passed 33 tests covering:
 - content-addressed artifact naming; and
 - internal visual-review accounting.
 
-The machine verifier loaded all 176 review poses and confirmed:
+Before the full-size rejection pass, the machine verifier loaded all 176
+review poses and confirmed:
 
 - 176 of 176 poses use 960 x 540 binary-alpha frames;
 - the paired sequence contains exactly 132 alternating closed/open frames;
 - minimum pair silhouette IoU is `0.978551`;
 - maximum registration-bound delta is `1` pixel;
-- 64 visible pairs have passing internal visual dispositions;
+- 64 visible pairs had passing internal visual dispositions;
 - two rear-facing pairs are explicitly not observable; and
 - user approval and runtime admission remain zero.
+
+That receipt is retained as historical evidence, but it is superseded for
+visual disposition by the current ledger. The ledger now blocks pairs 59 and
+62 from compilation or admission until each is remade and reviewed as its own
+closed/open unit.
 
 Verification receipt:
 

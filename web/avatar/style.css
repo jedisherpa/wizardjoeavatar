@@ -216,6 +216,41 @@ button[aria-pressed="true"] {
   display: none;
 }
 
+.hd-pair-review .stage-shell {
+  padding-top: 54px;
+}
+
+.hd-pair-review #wizard-canvas {
+  max-height: calc(100vh - 54px);
+}
+
+.hd-pair-review-controls {
+  position: absolute;
+  z-index: 2;
+  left: 50%;
+  top: 8px;
+  display: grid;
+  grid-template-columns: repeat(5, 34px) minmax(180px, auto);
+  align-items: center;
+  gap: 6px;
+  min-height: 38px;
+  transform: translateX(-50%);
+  padding: 2px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.96);
+}
+
+.hd-pair-review-controls output {
+  min-width: 0;
+  padding: 0 8px;
+  overflow: hidden;
+  color: #4d5653;
+  font: 12px/1.2 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 @media (max-width: 820px) {
   .diagnostics {
     display: none;
@@ -245,5 +280,13 @@ button[aria-pressed="true"] {
 
   .pose-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .hd-pair-review-controls {
+    left: 8px;
+    right: 8px;
+    grid-template-columns: repeat(5, 34px) minmax(0, 1fr);
+    justify-content: center;
+    transform: none;
   }
 }

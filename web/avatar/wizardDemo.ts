@@ -65,10 +65,78 @@ function blendRgbaFrames(first, second, blendMilli) {
   return result;
 }
 
+function opaqueBoundsRgba(frame, width, height) {
+  let minX = width;
+  let minY = height;
+  let maxX = -1;
+  let maxY = -1;
+  for (let y = 0; y < height; y++) {
+    const rowOffset = y * width * 4;
+    for (let x = 0; x < width; x++) {
+      if (frame[rowOffset + x * 4 + 3] === 0) continue;
+      minX = Math.min(minX, x);
+      minY = Math.min(minY, y);
+      maxX = Math.max(maxX, x);
+      maxY = Math.max(maxY, y);
+    }
+  }
+  return maxX >= minX && maxY >= minY
+    ? { minX, minY, maxX, maxY }
+    : null;
+}
+
+function unionBounds(first, second) {
+  if (!first) return second;
+  if (!second) return first;
+  return {
+    minX: Math.min(first.minX, second.minX),
+    minY: Math.min(first.minY, second.minY),
+    maxX: Math.max(first.maxX, second.maxX),
+    maxY: Math.max(first.maxY, second.maxY),
+  };
+}
+
+function fitPairReviewPresentation(canvasElement, bounds, sourceWidth, sourceHeight) {
+  if (!bounds) return null;
+  const topInset = 54;
+  const margin = 18;
+  const cssWidth = Number.parseFloat(canvasElement.style.width) || sourceWidth;
+  const cssHeight = Number.parseFloat(canvasElement.style.height) || sourceHeight;
+  const sourceScaleX = cssWidth / sourceWidth;
+  const sourceScaleY = cssHeight / sourceHeight;
+  const boundsWidth = (bounds.maxX - bounds.minX + 1) * sourceScaleX;
+  const boundsHeight = (bounds.maxY - bounds.minY + 1) * sourceScaleY;
+  const availableWidth = Math.max(1, window.innerWidth - margin * 2);
+  const availableHeight = Math.max(1, window.innerHeight - topInset - margin * 2);
+  const presentationScale = Math.max(
+    1,
+    Math.min(availableWidth / boundsWidth, availableHeight / boundsHeight),
+  );
+  const centerX = ((bounds.minX + bounds.maxX + 1) / 2) * sourceScaleX;
+  const centerY = ((bounds.minY + bounds.maxY + 1) / 2) * sourceScaleY;
+  const translateX = window.innerWidth / 2 - centerX * presentationScale;
+  const translateY = availableHeight / 2 + margin - centerY * presentationScale;
+
+  canvasElement.style.position = "fixed";
+  canvasElement.style.left = "0";
+  canvasElement.style.top = `${topInset}px`;
+  canvasElement.style.transformOrigin = "0 0";
+  canvasElement.style.transform = (
+    `matrix(${presentationScale}, 0, 0, ${presentationScale}, ${translateX}, ${translateY})`
+  );
+  return {
+    bounds,
+    presentationScale,
+    translateX,
+    translateY,
+  };
+}
+
 async function start() {
   const params = new URLSearchParams(location.search);
   const reviewPose = params.get("hd-review");
-  const reviewSequence = params.get("hd-sequence");
+  const pairReviewSequence = params.get("hd-pair-review");
+  const reviewSequence = pairReviewSequence || params.get("hd-sequence");
   const reviewPerformance = params.get("hd-performance") === "1";
   if (reviewPose || reviewSequence || reviewPerformance) {
     document.body.dataset.hdReviewStep = "profile";
@@ -207,6 +275,206 @@ async function start() {
       parent.postMessage(
         { type: "wizard-hd-performance-ready" },
         controllerOrigin,
+      );
+    } else if (pairReviewSequence) {
+      const sequence = manifest.sequences[pairReviewSequence];
+      if (!sequence) throw new Error("Unknown HD pair-review sequence");
+      if (
+        !Array.isArray(sequence.pose_ids)
+        || sequence.pose_ids.length < 2
+        || sequence.pose_ids.length % 2 !== 0
+      ) {
+        throw new Error("HD pair-review sequence must contain closed/open pairs");
+      }
+      document.body.classList.add("hd-pair-review");
+      document.body.dataset.hdReviewStep = "load-pair";
+      const canvasElement = document.getElementById("wizard-canvas");
+      const pairCount = sequence.pose_ids.length / 2;
+      const requestedPair = Number.parseInt(params.get("pair") || "1", 10);
+      let pairIndex = Number.isInteger(requestedPair)
+        ? Math.max(0, Math.min(pairCount - 1, requestedPair - 1))
+        : 0;
+      let stateIndex = 0;
+      let playing = false;
+      let framesDrawn = 0;
+      let frameFailures = 0;
+      let stopped = false;
+      let playbackTimer = null;
+      let pairFrames = null;
+      let pairPresentation = null;
+
+      const controls = document.createElement("section");
+      controls.className = "hd-pair-review-controls";
+      controls.setAttribute("aria-label", "Closed and open pose pair review");
+      controls.innerHTML = `
+        <button type="button" data-pair-previous title="Previous pair" aria-label="Previous pair">←</button>
+        <button type="button" data-pair-closed title="Show closed pose" aria-label="Show closed pose">■</button>
+        <button type="button" data-pair-play title="Play pair" aria-label="Play pair" aria-pressed="false">▶</button>
+        <button type="button" data-pair-open title="Show open pose" aria-label="Show open pose">◇</button>
+        <button type="button" data-pair-next title="Next pair" aria-label="Next pair">→</button>
+        <output data-pair-label aria-live="polite"></output>
+      `;
+      document.querySelector(".stage-shell").append(controls);
+      const label = controls.querySelector("[data-pair-label]");
+      const playButton = controls.querySelector("[data-pair-play]");
+
+      const pairPoseId = () => sequence.pose_ids[pairIndex * 2 + stateIndex];
+      const loadPairFrames = async () => {
+        const closedPoseId = sequence.pose_ids[pairIndex * 2];
+        const openPoseId = sequence.pose_ids[pairIndex * 2 + 1];
+        const [closedFrame, openFrame] = await Promise.all([
+          loadPose(closedPoseId),
+          loadPose(openPoseId),
+        ]);
+        const pairBounds = unionBounds(
+          opaqueBoundsRgba(closedFrame, width, height),
+          opaqueBoundsRgba(openFrame, width, height),
+        );
+        pairFrames = [closedFrame, openFrame];
+        pairPresentation = fitPairReviewPresentation(
+          canvasElement,
+          pairBounds,
+          width,
+          height,
+        );
+      };
+      const readablePairName = () => {
+        const closedPose = sequence.pose_ids[pairIndex * 2];
+        return closedPose
+          .replace(/^.*?act\.\d+\./, "")
+          .replace(/[._-]+/g, " ");
+      };
+      const updateControls = () => {
+        label.textContent = `${pairIndex + 1} / ${pairCount} · ${readablePairName()} · ${stateIndex ? "open" : "closed"}`;
+        document.body.dataset.hdPairReview = pairReviewSequence;
+        document.body.dataset.hdPairNumber = String(pairIndex + 1);
+        document.body.dataset.hdPairState = stateIndex ? "open" : "closed";
+        document.body.dataset.hdPairPlaying = String(playing);
+        playButton.textContent = playing ? "❚❚" : "▶";
+        playButton.title = playing ? "Pause pair" : "Play pair";
+        playButton.setAttribute("aria-label", playButton.title);
+        playButton.setAttribute("aria-pressed", String(playing));
+        controls.querySelector("[data-pair-closed]").setAttribute(
+          "aria-pressed",
+          String(stateIndex === 0),
+        );
+        controls.querySelector("[data-pair-open]").setAttribute(
+          "aria-pressed",
+          String(stateIndex === 1),
+        );
+      };
+      const drawPairState = async () => {
+        try {
+          if (!pairFrames) await loadPairFrames();
+          const pixels = pairFrames[stateIndex];
+          if (stopped) return;
+          canvas.draw(presentPose(pixels));
+          framesDrawn++;
+          delete document.body.dataset.hdFrameError;
+        } catch (error) {
+          frameFailures++;
+          document.body.dataset.hdFrameError = (
+            error instanceof Error ? error.message : String(error)
+          );
+        }
+        updateControls();
+      };
+      const schedulePlayback = () => {
+        clearTimeout(playbackTimer);
+        if (!playing || stopped) return;
+        playbackTimer = setTimeout(async () => {
+          stateIndex = stateIndex ? 0 : 1;
+          await drawPairState();
+          schedulePlayback();
+        }, 650);
+      };
+      const setPlaying = (nextPlaying) => {
+        playing = Boolean(nextPlaying);
+        updateControls();
+        schedulePlayback();
+      };
+      const selectPair = async (nextPairIndex) => {
+        setPlaying(false);
+        pairIndex = (nextPairIndex + pairCount) % pairCount;
+        stateIndex = 0;
+        pairFrames = null;
+        const url = new URL(location.href);
+        url.searchParams.set("pair", String(pairIndex + 1));
+        history.replaceState(null, "", url);
+        await drawPairState();
+      };
+
+      controls.querySelector("[data-pair-previous]").addEventListener(
+        "click",
+        () => void selectPair(pairIndex - 1),
+      );
+      controls.querySelector("[data-pair-next]").addEventListener(
+        "click",
+        () => void selectPair(pairIndex + 1),
+      );
+      controls.querySelector("[data-pair-closed]").addEventListener(
+        "click",
+        () => {
+          setPlaying(false);
+          stateIndex = 0;
+          void drawPairState();
+        },
+      );
+      controls.querySelector("[data-pair-open]").addEventListener(
+        "click",
+        () => {
+          setPlaying(false);
+          stateIndex = 1;
+          void drawPairState();
+        },
+      );
+      playButton.addEventListener("click", () => setPlaying(!playing));
+      addEventListener("keydown", (event) => {
+        if (event.key === "ArrowLeft") void selectPair(pairIndex - 1);
+        if (event.key === "ArrowRight") void selectPair(pairIndex + 1);
+        if (event.key === " ") {
+          event.preventDefault();
+          setPlaying(!playing);
+        }
+      });
+      await drawPairState();
+      window.__wizardJoeMetrics = () => ({
+        hdReview: true,
+        pairReview: true,
+        sequenceId: pairReviewSequence,
+        approvalState: sequence.approval_state,
+        runtimeAdmitted: sequence.runtime_admitted,
+        pairIndex,
+        pairNumber: pairIndex + 1,
+        pairCount,
+        state: stateIndex ? "open" : "closed",
+        poseId: pairPoseId(),
+        framesDrawn,
+        frameFailures,
+        playing,
+        libraryIndexSha256: manifest.library_index_sha256,
+        presentationOffsetX,
+        pairPresentation,
+        canvas: canvas.getMetrics(),
+      });
+      document.body.dataset.hdReviewStep = "ready";
+      addEventListener("resize", () => {
+        if (pairPresentation?.bounds) {
+          pairPresentation = fitPairReviewPresentation(
+            canvasElement,
+            pairPresentation.bounds,
+            width,
+            height,
+          );
+        }
+      });
+      addEventListener(
+        "pagehide",
+        () => {
+          stopped = true;
+          clearTimeout(playbackTimer);
+        },
+        { once: true },
       );
     } else if (reviewSequence) {
       const sequence = manifest.sequences[reviewSequence];
