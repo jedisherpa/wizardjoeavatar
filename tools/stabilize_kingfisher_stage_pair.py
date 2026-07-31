@@ -17,6 +17,9 @@ MAX_ARTICULATION_HEIGHT = 130
 
 def validate_articulation_region(
     region: tuple[int, int, int, int],
+    *,
+    maximum_width: int = MAX_ARTICULATION_WIDTH,
+    maximum_height: int = MAX_ARTICULATION_HEIGHT,
 ) -> tuple[int, int, int, int]:
     if len(region) != 4 or any(type(value) is not int for value in region):
         raise ValueError("articulation region must contain four integers")
@@ -25,9 +28,9 @@ def validate_articulation_region(
         raise ValueError("articulation region must remain inside the canvas")
     if x1 <= x0 or y1 <= y0:
         raise ValueError("articulation region must have positive area")
-    if x1 - x0 > MAX_ARTICULATION_WIDTH:
+    if x1 - x0 > maximum_width:
         raise ValueError("articulation region is too wide")
-    if y1 - y0 > MAX_ARTICULATION_HEIGHT:
+    if y1 - y0 > maximum_height:
         raise ValueError("articulation region is too tall")
     return region
 

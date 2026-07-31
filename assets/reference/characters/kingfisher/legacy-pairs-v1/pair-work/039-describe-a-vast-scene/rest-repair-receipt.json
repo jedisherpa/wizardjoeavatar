@@ -1,0 +1,62 @@
+{
+  "alignment": {
+    "interpolation": "lanczos_rgb_binary_alpha",
+    "scale": 0.57987,
+    "translate_x": -5,
+    "translate_y": -5
+  },
+  "approval_state": "candidate_visual_review",
+  "articulation_bbox": [
+    370,
+    95,
+    636,
+    306
+  ],
+  "articulation_polygon": [
+    [
+      380,
+      95
+    ],
+    [
+      620,
+      95
+    ],
+    [
+      635,
+      250
+    ],
+    [
+      600,
+      295
+    ],
+    [
+      405,
+      305
+    ],
+    [
+      370,
+      220
+    ]
+  ],
+  "canvas": [
+    960,
+    540
+  ],
+  "changed_bbox": [
+    378,
+    97,
+    636,
+    306
+  ],
+  "generated_render_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/039-describe-a-vast-scene/039_ACT039_describe_a_vast_scene_resting_repair_render_raw.png",
+  "generated_render_sha256": "07887f3340301c8fafe9f545801f6d33010c3b3fb7e0f4ed48958cebbd1ee50b",
+  "method": "pose_specific_render_local_articulation_composite_v1",
+  "output_role": "resting_repair",
+  "outside_articulation_change": false,
+  "repaired_resting_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/039-describe-a-vast-scene/039_ACT039_describe_a_vast_scene_resting_beak_alpha.png",
+  "repaired_resting_sha256": "a457760329419fb9c2b63da1bb1f1012a376cb95d4ede25b2d3930cb7a732d17",
+  "resting_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/039-describe-a-vast-scene/039_ACT039_describe_a_vast_scene_source_alpha.png",
+  "resting_sha256": "c6fcb4bd365467c8b2fb1706670cd40b47d09fbfa16d6448094da6f627c7b078",
+  "runtime_admitted": false,
+  "schema_version": 1
+}

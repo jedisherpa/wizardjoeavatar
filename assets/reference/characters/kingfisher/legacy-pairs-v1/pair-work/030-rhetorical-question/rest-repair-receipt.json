@@ -1,0 +1,90 @@
+{
+  "alignment": {
+    "interpolation": "lanczos_rgb_binary_alpha",
+    "scale": 0.5760266371,
+    "translate_x": -1,
+    "translate_y": -1
+  },
+  "approval_state": "candidate_visual_review",
+  "articulation_bbox": [
+    360,
+    49,
+    565,
+    265
+  ],
+  "articulation_polygon": [
+    [
+      398,
+      77
+    ],
+    [
+      447,
+      49
+    ],
+    [
+      500,
+      55
+    ],
+    [
+      541,
+      83
+    ],
+    [
+      561,
+      125
+    ],
+    [
+      564,
+      174
+    ],
+    [
+      548,
+      218
+    ],
+    [
+      512,
+      252
+    ],
+    [
+      456,
+      264
+    ],
+    [
+      407,
+      243
+    ],
+    [
+      375,
+      211
+    ],
+    [
+      360,
+      167
+    ],
+    [
+      368,
+      119
+    ]
+  ],
+  "canvas": [
+    960,
+    540
+  ],
+  "changed_bbox": [
+    367,
+    49,
+    565,
+    265
+  ],
+  "generated_render_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/030-rhetorical-question/030_ACT030_rhetorical_question_resting_repair_render_raw.png",
+  "generated_render_sha256": "64c73a6aee1387179df535e888a92bcb0cd736798d0f5488b534dd686b536eff",
+  "method": "pose_specific_render_local_articulation_composite_v1",
+  "output_role": "resting_repair",
+  "outside_articulation_change": false,
+  "repaired_resting_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/030-rhetorical-question/030_ACT030_rhetorical_question_resting_beak_alpha.png",
+  "repaired_resting_sha256": "256022e9a94e388e65206479e97184ca4aec36e7709d564be5eca2d04504c0e4",
+  "resting_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/030-rhetorical-question/030_ACT030_rhetorical_question_source_alpha.png",
+  "resting_sha256": "5e03a2150714513b7cc43f742e2795848f59bcb21079dddf183de36e216bddc6",
+  "runtime_admitted": false,
+  "schema_version": 1
+}

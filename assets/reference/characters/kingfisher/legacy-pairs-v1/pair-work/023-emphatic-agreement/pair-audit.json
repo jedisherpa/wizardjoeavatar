@@ -1,0 +1,38 @@
+{
+  "changed_rendered_pixels": 13168,
+  "checks": {
+    "bounded_articulation_change": true,
+    "outside_mouth_stability": true,
+    "silhouette_overlap": true,
+    "stable_registration_bounds": true,
+    "visible_mouth_change": true
+  },
+  "mouth_mean_abs": 17.679622,
+  "mouth_region": [
+    452,
+    238,
+    588,
+    357
+  ],
+  "outside_mouth_mean_abs": 0.0,
+  "passed": true,
+  "registration_bound_delta": 0,
+  "resting_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/023-emphatic-agreement/023_ACT023_emphatic_agreement_resting_beak_alpha.png",
+  "resting_registration_bbox": [
+    290,
+    97,
+    671,
+    529
+  ],
+  "resting_sha256": "774910d16ba4b0fb07e2ab4291966d2d359c5aad9a11b5e4df14eadd4b941d43",
+  "schema_version": 2,
+  "silhouette_iou": 1.0,
+  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/023-emphatic-agreement/133_ACT133_emphatic_agreement_speaking_beak_alpha.png",
+  "speaking_registration_bbox": [
+    290,
+    97,
+    671,
+    529
+  ],
+  "speaking_sha256": "250176430250f21c27f289880b31d8176d7d4e550c6db31ad155292d61175d91"
+}

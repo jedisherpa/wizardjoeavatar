@@ -1,0 +1,38 @@
+{
+  "changed_rendered_pixels": 13626,
+  "checks": {
+    "bounded_articulation_change": true,
+    "outside_mouth_stability": true,
+    "silhouette_overlap": true,
+    "stable_registration_bounds": true,
+    "visible_mouth_change": true
+  },
+  "mouth_mean_abs": 25.324695,
+  "mouth_region": [
+    492,
+    202,
+    629,
+    311
+  ],
+  "outside_mouth_mean_abs": 0.0,
+  "passed": true,
+  "registration_bound_delta": 0,
+  "resting_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/055-fear/055_ACT055_fear_resting_beak_alpha.png",
+  "resting_registration_bbox": [
+    276,
+    97,
+    685,
+    529
+  ],
+  "resting_sha256": "2e436fae3886746310fa37a57ca6408c126ec1b7bdf36bf04bd2916465025759",
+  "schema_version": 2,
+  "silhouette_iou": 0.989169,
+  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/055-fear/165_ACT165_fear_speaking_beak_alpha.png",
+  "speaking_registration_bbox": [
+    276,
+    97,
+    685,
+    529
+  ],
+  "speaking_sha256": "d1a4d01226b7d5799b1fd1760f196a92ef813f283b276d4631da403372bfa44d"
+}

@@ -1,0 +1,30 @@
+{
+  "input_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/014-present-screen-left/014_ACT014_present_screen_left_resting_beak_alpha.png",
+  "input_sha256": "c67931d0c04b12879a1c9e7920842122906bb4abfa5431ae0e988306b8383232",
+  "maximum_area": 80,
+  "method": "bounded_isolated_alpha_component_removal_v1",
+  "output_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/014-present-screen-left/014_ACT014_present_screen_left_resting_beak_alpha.png",
+  "output_sha256": "45d200b694a735c515bd710b7a6f27baecba6b0abad56e38d97ab54647187de5",
+  "removed_components": [
+    {
+      "area": 12,
+      "bbox": [
+        456,
+        216,
+        458,
+        222
+      ]
+    },
+    {
+      "area": 59,
+      "bbox": [
+        468,
+        234,
+        478,
+        242
+      ]
+    }
+  ],
+  "removed_pixel_count": 71,
+  "schema_version": 1
+}

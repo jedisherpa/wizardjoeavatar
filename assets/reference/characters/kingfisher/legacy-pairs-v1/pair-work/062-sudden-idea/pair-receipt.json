@@ -1,0 +1,89 @@
+{
+  "approval_state": "candidate_visual_review",
+  "canvas": [
+    960,
+    540
+  ],
+  "cavity_fill_rgba": [
+    12,
+    9,
+    12,
+    255
+  ],
+  "cavity_polygon": [
+    [
+      481,
+      238
+    ],
+    [
+      540,
+      220
+    ],
+    [
+      523,
+      255
+    ],
+    [
+      490,
+      259
+    ]
+  ],
+  "changed_bbox": [
+    481,
+    220,
+    541,
+    262
+  ],
+  "changed_pixels": 1347,
+  "hinge": [
+    483,
+    239
+  ],
+  "mandible_polygon": [
+    [
+      482,
+      240
+    ],
+    [
+      540,
+      220
+    ],
+    [
+      490,
+      259
+    ]
+  ],
+  "method": "rotate_original_lower_mandible_about_declared_hinge_v1",
+  "resting_path": "/Users/paul/Library/Caches/WizardJoe/git-repair-liana-normalization/assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/062-sudden-idea/062_ACT062_sudden_idea_resting_beak_alpha.png",
+  "resting_sha256": "b23cfeb22db0057cc9c82dd56bae46a0da860f7ebb020ee069ffa1466c5a9b2a",
+  "rotation_degrees": -14.0,
+  "runtime_admitted": false,
+  "schema_version": 1,
+  "speaking_path": "/Users/paul/Library/Caches/WizardJoe/git-repair-liana-normalization/assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/062-sudden-idea/172_ACT172_sudden_idea_speaking_beak_alpha.png",
+  "speaking_sha256": "2807967dd1dfcbf8919540092afd8f60abdb31b90b5bf6b145bf6eb1f6399363",
+  "tongue_fill_rgba": [
+    116,
+    42,
+    42,
+    255
+  ],
+  "tongue_polygon": [
+    [
+      488,
+      243
+    ],
+    [
+      529,
+      230
+    ],
+    [
+      515,
+      250
+    ],
+    [
+      495,
+      254
+    ]
+  ],
+  "upper_beak_policy": "immutable_source_pixels"
+}

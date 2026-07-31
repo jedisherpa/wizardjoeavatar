@@ -1,0 +1,12 @@
+{
+  "approval_state": "candidate_visual_review",
+  "method": "mouth_occluded_registered_identity_pair_v1",
+  "mouth_visibility": "occluded",
+  "outside_articulation_change": false,
+  "resting_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/005-neutral-back/005_ACT005_neutral_back_resting_beak_alpha.png",
+  "resting_sha256": "9cc6acff28f039961b86f95fdd1af0c6aadf4f5a6a9433b83c88ee2d2e1e2e85",
+  "runtime_admitted": false,
+  "schema_version": 1,
+  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/005-neutral-back/115_ACT115_neutral_back_speaking_beak_alpha.png",
+  "speaking_sha256": "9cc6acff28f039961b86f95fdd1af0c6aadf4f5a6a9433b83c88ee2d2e1e2e85"
+}

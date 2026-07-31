@@ -1,0 +1,38 @@
+{
+  "changed_rendered_pixels": 6512,
+  "checks": {
+    "bounded_articulation_change": true,
+    "outside_mouth_stability": true,
+    "silhouette_overlap": true,
+    "stable_registration_bounds": true,
+    "visible_mouth_change": true
+  },
+  "mouth_mean_abs": 15.732179,
+  "mouth_region": [
+    348,
+    230,
+    481,
+    316
+  ],
+  "outside_mouth_mean_abs": 0.0,
+  "passed": true,
+  "registration_bound_delta": 0,
+  "resting_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/008-relaxed-idle/008_ACT008_relaxed_idle_resting_beak_alpha.png",
+  "resting_registration_bbox": [
+    362,
+    97,
+    597,
+    529
+  ],
+  "resting_sha256": "aef5ed2f502da97ab3de58f25a36e92ba416536803fbc6dab792c14346e71518",
+  "schema_version": 2,
+  "silhouette_iou": 0.994808,
+  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/008-relaxed-idle/118_ACT118_relaxed_idle_speaking_beak_alpha.png",
+  "speaking_registration_bbox": [
+    362,
+    97,
+    597,
+    529
+  ],
+  "speaking_sha256": "d2143ff020cea717ed9137c174686eff356a83add722e64ab776f55c2a2e038a"
+}

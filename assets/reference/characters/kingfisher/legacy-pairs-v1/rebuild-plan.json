@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "character_id": "kingfisher",
+  "rebuild_id": "kingfisher-legacy-speech-pairs-v1",
+  "source_pose_ordinals": {
+    "first": 1,
+    "last": 66
+  },
+  "speaking_variant_ordinals": {
+    "first": 111,
+    "last": 176
+  },
+  "registration_policy": {
+    "policy": "normalize_body_core_bottom_center_v1",
+    "target_body_core_height": 432,
+    "target_baseline_y": 529,
+    "target_center_x": 480,
+    "maximum_visible_width": 900
+  },
+  "pairing_policy": {
+    "body_lock": "exact_outside_articulation_region",
+    "resting_alias": "preserve_original_pose_id",
+    "speaking_suffix": "speaking-beak",
+    "occluded_policy": "emit_a_registered_identity_pair_with_explicit_occlusion"
+  },
+  "authored_speaking_ordinals": [
+    11,
+    12,
+    14,
+    15,
+    16,
+    17,
+    28,
+    32,
+    33,
+    39,
+    43,
+    44,
+    48,
+    55,
+    62
+  ],
+  "mouth_occluded_ordinals": [
+    4,
+    5
+  ],
+  "source_body_core_height_overrides": {
+    "39": 366
+  },
+  "hard_reject_until_rebuilt": [
+    30,
+    34,
+    35,
+    39,
+    42,
+    43,
+    48
+  ],
+  "acceptance": {
+    "canvas": [960, 540],
+    "binary_alpha": true,
+    "no_crop": true,
+    "maximum_adjacent_body_core_scale_variance": 0.015,
+    "maximum_baseline_variance_px": 1,
+    "visible_pairs_require_mouth_change": true,
+    "outside_articulation_change_mean_abs": 0.0
+  }
+}

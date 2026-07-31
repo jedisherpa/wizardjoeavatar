@@ -1,0 +1,38 @@
+{
+  "changed_rendered_pixels": 6926,
+  "checks": {
+    "bounded_articulation_change": true,
+    "outside_mouth_stability": true,
+    "silhouette_overlap": true,
+    "stable_registration_bounds": true,
+    "visible_mouth_change": true
+  },
+  "mouth_mean_abs": 16.577268,
+  "mouth_region": [
+    435,
+    220,
+    526,
+    321
+  ],
+  "outside_mouth_mean_abs": 0.0,
+  "passed": true,
+  "registration_bound_delta": 0,
+  "resting_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/009-attentive-idle/009_ACT009_attentive_idle_resting_beak_alpha.png",
+  "resting_registration_bbox": [
+    350,
+    97,
+    610,
+    529
+  ],
+  "resting_sha256": "97feb8c305c58e46b484d4a89aac8995f9dd401576ebd2de8e8a1035ab13cafe",
+  "schema_version": 2,
+  "silhouette_iou": 1.0,
+  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/009-attentive-idle/119_ACT119_attentive_idle_speaking_beak_alpha.png",
+  "speaking_registration_bbox": [
+    350,
+    97,
+    610,
+    529
+  ],
+  "speaking_sha256": "97d0bd0767de8cd638ba7fcd74a78671972bedb3d476bc392908d9ae9498c3d1"
+}

@@ -1,0 +1,38 @@
+{
+  "changed_rendered_pixels": 9539,
+  "checks": {
+    "bounded_articulation_change": true,
+    "outside_mouth_stability": true,
+    "silhouette_overlap": true,
+    "stable_registration_bounds": true,
+    "visible_mouth_change": true
+  },
+  "mouth_mean_abs": 24.447641,
+  "mouth_region": [
+    330,
+    170,
+    461,
+    261
+  ],
+  "outside_mouth_mean_abs": 0.0,
+  "passed": true,
+  "registration_bound_delta": 0,
+  "resting_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/032-cause-and-effect/032_ACT032_cause_and_effect_resting_beak_alpha.png",
+  "resting_registration_bbox": [
+    254,
+    95,
+    706,
+    529
+  ],
+  "resting_sha256": "2a309a5c105e69fbdc3b29ccba09bd5e0f529626df755ebef116150c8e0795a0",
+  "schema_version": 2,
+  "silhouette_iou": 0.999542,
+  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/032-cause-and-effect/142_ACT142_cause_and_effect_speaking_beak_alpha.png",
+  "speaking_registration_bbox": [
+    254,
+    95,
+    706,
+    529
+  ],
+  "speaking_sha256": "7502a489c2ec8dd49c85038e9eefe601d3ff6997f5c35f2fa1a97c86ac14d24b"
+}

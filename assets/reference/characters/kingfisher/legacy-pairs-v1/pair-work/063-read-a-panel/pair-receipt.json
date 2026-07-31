@@ -1,0 +1,81 @@
+{
+  "alignment": {
+    "interpolation": "lanczos_rgb_binary_alpha",
+    "scale": 0.572,
+    "scale_x": 0.584,
+    "scale_y": 0.572,
+    "translate_x": -4,
+    "translate_y": 19
+  },
+  "approval_state": "candidate_visual_review",
+  "articulation_bbox": [
+    500,
+    205,
+    604,
+    254
+  ],
+  "articulation_polygon": [
+    [
+      500,
+      205
+    ],
+    [
+      603,
+      225
+    ],
+    [
+      603,
+      253
+    ],
+    [
+      500,
+      229
+    ]
+  ],
+  "canvas": [
+    960,
+    540
+  ],
+  "cavity_fill_mode": "opaque_polygon",
+  "cavity_fill_rgba": [
+    10,
+    13,
+    16,
+    255
+  ],
+  "cavity_polygon": [
+    [
+      505,
+      219
+    ],
+    [
+      594,
+      231
+    ],
+    [
+      594,
+      245
+    ],
+    [
+      507,
+      222
+    ]
+  ],
+  "changed_bbox": [
+    500,
+    205,
+    599,
+    251
+  ],
+  "generated_render_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/063-read-a-panel/173_ACT173_read_a_panel_speaking_beak_render_raw.png",
+  "generated_render_sha256": "e1787eac9b2e3246232d717fe0fa65d43d349e5126520934ee4da3caceaa705a",
+  "method": "pose_specific_render_local_articulation_composite_v1",
+  "output_role": "speaking",
+  "outside_articulation_change": false,
+  "resting_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/063-read-a-panel/063_ACT063_read_a_panel_resting_beak_alpha.png",
+  "resting_sha256": "47c9cce044979874c2cc314c6b6e89ddf98037f211a1c37ecd82ea13b9c6a71b",
+  "runtime_admitted": false,
+  "schema_version": 1,
+  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/063-read-a-panel/173_ACT173_read_a_panel_speaking_beak_alpha.png",
+  "speaking_sha256": "4fcc6a40264bba09da856c025c4af08daf3fe3b3a91b4d524a6887dcc820c64c"
+}

@@ -1,0 +1,54 @@
+{
+  "alignment": {
+    "interpolation": "lanczos_rgb_binary_alpha",
+    "scale": 0.579,
+    "translate_x": -4,
+    "translate_y": -4
+  },
+  "approval_state": "candidate_visual_review",
+  "articulation_bbox": [
+    429,
+    222,
+    542,
+    348
+  ],
+  "articulation_polygon": [
+    [
+      433,
+      222
+    ],
+    [
+      537,
+      222
+    ],
+    [
+      541,
+      343
+    ],
+    [
+      429,
+      347
+    ]
+  ],
+  "canvas": [
+    960,
+    540
+  ],
+  "changed_bbox": [
+    429,
+    222,
+    542,
+    348
+  ],
+  "generated_render_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/057-anger/167_ACT167_anger_speaking_beak_render_raw.png",
+  "generated_render_sha256": "08d1e634e65f89d49d2887afc1a017d5109192e45df63a65a63e0f5e0f8a8ee5",
+  "method": "pose_specific_render_local_articulation_composite_v1",
+  "output_role": "speaking",
+  "outside_articulation_change": false,
+  "resting_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/057-anger/057_ACT057_anger_resting_beak_alpha.png",
+  "resting_sha256": "202fc3ba8579a4a29443b5e92b56d739ae6ab1eb7f830404f35a6c5ff9c4259f",
+  "runtime_admitted": false,
+  "schema_version": 1,
+  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/057-anger/167_ACT167_anger_speaking_beak_alpha.png",
+  "speaking_sha256": "baad38edf7c6c8f75c27f86a4d3799e8b643e69a56dd9128500c9557c49e2436"
+}

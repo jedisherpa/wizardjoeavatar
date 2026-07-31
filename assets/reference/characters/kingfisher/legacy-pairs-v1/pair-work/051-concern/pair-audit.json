@@ -1,0 +1,38 @@
+{
+  "changed_rendered_pixels": 12052,
+  "checks": {
+    "bounded_articulation_change": true,
+    "outside_mouth_stability": true,
+    "silhouette_overlap": true,
+    "stable_registration_bounds": true,
+    "visible_mouth_change": true
+  },
+  "mouth_mean_abs": 19.357905,
+  "mouth_region": [
+    383,
+    195,
+    509,
+    313
+  ],
+  "outside_mouth_mean_abs": 0.0,
+  "passed": true,
+  "registration_bound_delta": 0,
+  "resting_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/051-concern/051_ACT051_concern_resting_beak_alpha.png",
+  "resting_registration_bbox": [
+    350,
+    97,
+    610,
+    529
+  ],
+  "resting_sha256": "35127b133c34f5180f4266b7f9f53e6d9326dfbd55a0c51ba4b0f182d5d8463d",
+  "schema_version": 2,
+  "silhouette_iou": 0.998904,
+  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/051-concern/161_ACT161_concern_speaking_beak_alpha.png",
+  "speaking_registration_bbox": [
+    350,
+    97,
+    610,
+    529
+  ],
+  "speaking_sha256": "0ab24004d6d049e310dcc2dd2246bd501de84836aa2295304dec5bd55087b03c"
+}

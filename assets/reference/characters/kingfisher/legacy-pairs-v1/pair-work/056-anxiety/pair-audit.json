@@ -1,0 +1,38 @@
+{
+  "changed_rendered_pixels": 12134,
+  "checks": {
+    "bounded_articulation_change": true,
+    "outside_mouth_stability": true,
+    "silhouette_overlap": true,
+    "stable_registration_bounds": true,
+    "visible_mouth_change": true
+  },
+  "mouth_mean_abs": 20.870947,
+  "mouth_region": [
+    435,
+    205,
+    554,
+    316
+  ],
+  "outside_mouth_mean_abs": 0.0,
+  "passed": true,
+  "registration_bound_delta": 0,
+  "resting_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/056-anxiety/056_ACT056_anxiety_resting_beak_alpha.png",
+  "resting_registration_bbox": [
+    338,
+    97,
+    621,
+    529
+  ],
+  "resting_sha256": "aabff4e4f2a4259f970092a33578810fe2655d7c22d71f3f266b20f6d72d6683",
+  "schema_version": 2,
+  "silhouette_iou": 0.999973,
+  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/056-anxiety/166_ACT166_anxiety_speaking_beak_alpha.png",
+  "speaking_registration_bbox": [
+    338,
+    97,
+    621,
+    529
+  ],
+  "speaking_sha256": "a67abe75f077b51684f91d0df11bdbdd9f684c4adc0181091153164906c1548d"
+}

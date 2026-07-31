@@ -1,0 +1,38 @@
+{
+  "changed_rendered_pixels": 11048,
+  "checks": {
+    "bounded_articulation_change": true,
+    "outside_mouth_stability": true,
+    "silhouette_overlap": true,
+    "stable_registration_bounds": true,
+    "visible_mouth_change": true
+  },
+  "mouth_mean_abs": 14.579777,
+  "mouth_region": [
+    400,
+    188,
+    531,
+    303
+  ],
+  "outside_mouth_mean_abs": 0.0,
+  "passed": true,
+  "registration_bound_delta": 0,
+  "resting_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/045-curiosity/045_ACT045_curiosity_resting_beak_alpha.png",
+  "resting_registration_bbox": [
+    346,
+    97,
+    614,
+    529
+  ],
+  "resting_sha256": "a72a30870c0b2d898462bf46d85298d5031b0512feb08e750a3564885c40de03",
+  "schema_version": 2,
+  "silhouette_iou": 1.0,
+  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/045-curiosity/155_ACT155_curiosity_speaking_beak_alpha.png",
+  "speaking_registration_bbox": [
+    346,
+    97,
+    614,
+    529
+  ],
+  "speaking_sha256": "584bd4c321ce881bc9ae2dd31445b16d9f4c938fbc1249f8adecbd36c3b4ad52"
+}

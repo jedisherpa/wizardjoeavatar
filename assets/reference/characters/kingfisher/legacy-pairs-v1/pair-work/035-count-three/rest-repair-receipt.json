@@ -1,0 +1,62 @@
+{
+  "alignment": {
+    "interpolation": "lanczos_rgb_binary_alpha",
+    "scale": 0.57552,
+    "translate_x": -4,
+    "translate_y": -6
+  },
+  "approval_state": "candidate_visual_review",
+  "articulation_bbox": [
+    350,
+    7,
+    611,
+    271
+  ],
+  "articulation_polygon": [
+    [
+      365,
+      7
+    ],
+    [
+      595,
+      7
+    ],
+    [
+      610,
+      200
+    ],
+    [
+      575,
+      270
+    ],
+    [
+      390,
+      270
+    ],
+    [
+      350,
+      200
+    ]
+  ],
+  "canvas": [
+    960,
+    540
+  ],
+  "changed_bbox": [
+    360,
+    7,
+    605,
+    271
+  ],
+  "generated_render_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/035-count-three/035_ACT035_count_three_resting_repair_render_raw.png",
+  "generated_render_sha256": "25dd983dec489e3bfa0170796b9df5054bf9277e8cf9c5706e2d34804a1e563c",
+  "method": "pose_specific_render_local_articulation_composite_v1",
+  "output_role": "resting_repair",
+  "outside_articulation_change": false,
+  "repaired_resting_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/035-count-three/035_ACT035_count_three_resting_beak_alpha.png",
+  "repaired_resting_sha256": "7582ea51fc2de540612041859ee485f8985775e0b09c0becfcad435c9e4ecc18",
+  "resting_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/035-count-three/035_ACT035_count_three_source_alpha.png",
+  "resting_sha256": "82bdcb62132811142873e837a691002029b75ea4b82dbf2b1e1c787fddaaa1f3",
+  "runtime_admitted": false,
+  "schema_version": 1
+}

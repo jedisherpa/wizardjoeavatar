@@ -1,0 +1,82 @@
+{
+  "alignment": {
+    "interpolation": "lanczos_rgb_binary_alpha",
+    "scale": 0.569,
+    "translate_x": -3,
+    "translate_y": -1
+  },
+  "approval_state": "candidate_visual_review",
+  "articulation_bbox": [
+    335,
+    30,
+    626,
+    211
+  ],
+  "articulation_polygon": [
+    [
+      350,
+      55
+    ],
+    [
+      400,
+      30
+    ],
+    [
+      505,
+      30
+    ],
+    [
+      590,
+      58
+    ],
+    [
+      625,
+      95
+    ],
+    [
+      620,
+      145
+    ],
+    [
+      570,
+      190
+    ],
+    [
+      500,
+      210
+    ],
+    [
+      410,
+      200
+    ],
+    [
+      355,
+      160
+    ],
+    [
+      335,
+      100
+    ]
+  ],
+  "canvas": [
+    960,
+    540
+  ],
+  "changed_bbox": [
+    342,
+    30,
+    597,
+    211
+  ],
+  "generated_render_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/043-full-laughter/043_ACT043_full_laughter_resting_beak_repair_render_raw.png",
+  "generated_render_sha256": "b6d48aac3381dc8b6f2b3702b6f27136b5667cd469072e6763a5ef2f95f989e8",
+  "method": "pose_specific_render_local_articulation_composite_v1",
+  "output_role": "resting_repair",
+  "outside_articulation_change": false,
+  "repaired_resting_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/043-full-laughter/043_ACT043_full_laughter_resting_beak_alpha.png",
+  "repaired_resting_sha256": "e3ee5a55e71ce8a57b65e75b07e652221d452a83c6155fda7eb31780e4ad07e6",
+  "resting_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/043-full-laughter/043_ACT043_full_laughter_resting_beak_original_alpha.png",
+  "resting_sha256": "48f96d57ec96a1f1c85efb8e5bd2cb46b57532bd48b361d6fff7f34208f8653d",
+  "runtime_admitted": false,
+  "schema_version": 1
+}

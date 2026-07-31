@@ -1,0 +1,38 @@
+{
+  "changed_rendered_pixels": 13440,
+  "checks": {
+    "bounded_articulation_change": true,
+    "outside_mouth_stability": true,
+    "silhouette_overlap": true,
+    "stable_registration_bounds": true,
+    "visible_mouth_change": true
+  },
+  "mouth_mean_abs": 24.654188,
+  "mouth_region": [
+    429,
+    222,
+    542,
+    348
+  ],
+  "outside_mouth_mean_abs": 0.0,
+  "passed": true,
+  "registration_bound_delta": 0,
+  "resting_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/057-anger/057_ACT057_anger_resting_beak_alpha.png",
+  "resting_registration_bbox": [
+    304,
+    97,
+    656,
+    529
+  ],
+  "resting_sha256": "202fc3ba8579a4a29443b5e92b56d739ae6ab1eb7f830404f35a6c5ff9c4259f",
+  "schema_version": 2,
+  "silhouette_iou": 1.0,
+  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/057-anger/167_ACT167_anger_speaking_beak_alpha.png",
+  "speaking_registration_bbox": [
+    304,
+    97,
+    656,
+    529
+  ],
+  "speaking_sha256": "baad38edf7c6c8f75c27f86a4d3799e8b643e69a56dd9128500c9557c49e2436"
+}

@@ -1,0 +1,38 @@
+{
+  "changed_rendered_pixels": 8272,
+  "checks": {
+    "bounded_articulation_change": true,
+    "outside_mouth_stability": true,
+    "silhouette_overlap": true,
+    "stable_registration_bounds": true,
+    "visible_mouth_change": true
+  },
+  "mouth_mean_abs": 23.762038,
+  "mouth_region": [
+    390,
+    178,
+    513,
+    277
+  ],
+  "outside_mouth_mean_abs": 0.0,
+  "passed": true,
+  "registration_bound_delta": 0,
+  "resting_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/050-skepticism/050_ACT050_skepticism_resting_beak_alpha.png",
+  "resting_registration_bbox": [
+    366,
+    97,
+    593,
+    529
+  ],
+  "resting_sha256": "8fc5de307de5b95a54fb5200dd8180484cd2110f713db0830ba76b033fb23828",
+  "schema_version": 2,
+  "silhouette_iou": 0.994638,
+  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/050-skepticism/160_ACT160_skepticism_speaking_beak_alpha.png",
+  "speaking_registration_bbox": [
+    366,
+    97,
+    593,
+    529
+  ],
+  "speaking_sha256": "be2186cf94729411a2438d7d3bcf9884f28b4ba4703eb6d686b20a0d81f7c083"
+}

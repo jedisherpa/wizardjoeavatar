@@ -1,0 +1,38 @@
+{
+  "changed_rendered_pixels": 11601,
+  "checks": {
+    "bounded_articulation_change": true,
+    "outside_mouth_stability": true,
+    "silhouette_overlap": true,
+    "stable_registration_bounds": true,
+    "visible_mouth_change": true
+  },
+  "mouth_mean_abs": 20.857483,
+  "mouth_region": [
+    415,
+    145,
+    546,
+    253
+  ],
+  "outside_mouth_mean_abs": 0.0,
+  "passed": true,
+  "registration_bound_delta": 0,
+  "resting_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/046-confident-hero/046_ACT046_confident_hero_resting_beak_alpha.png",
+  "resting_registration_bbox": [
+    246,
+    97,
+    713,
+    529
+  ],
+  "resting_sha256": "32c340541fb4bceb1f3f1f94e1bdd7151ff47bc4352f135e094a58c21870324a",
+  "schema_version": 2,
+  "silhouette_iou": 0.999971,
+  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/046-confident-hero/156_ACT156_confident_hero_speaking_beak_alpha.png",
+  "speaking_registration_bbox": [
+    246,
+    97,
+    713,
+    529
+  ],
+  "speaking_sha256": "e586c4633c387211adbea86a96c3fb6c604e51042aa47eb52de54d0c10965d24"
+}

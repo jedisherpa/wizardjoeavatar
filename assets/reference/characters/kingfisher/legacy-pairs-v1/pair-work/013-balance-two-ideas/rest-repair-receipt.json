@@ -1,0 +1,62 @@
+{
+  "alignment": {
+    "interpolation": "lanczos_rgb_binary_alpha",
+    "scale": 0.566579634464752,
+    "translate_x": 5,
+    "translate_y": 11
+  },
+  "approval_state": "candidate_visual_review",
+  "articulation_bbox": [
+    425,
+    175,
+    549,
+    291
+  ],
+  "articulation_polygon": [
+    [
+      435,
+      182
+    ],
+    [
+      485,
+      175
+    ],
+    [
+      540,
+      195
+    ],
+    [
+      548,
+      260
+    ],
+    [
+      485,
+      290
+    ],
+    [
+      425,
+      258
+    ]
+  ],
+  "canvas": [
+    960,
+    540
+  ],
+  "changed_bbox": [
+    425,
+    175,
+    549,
+    291
+  ],
+  "generated_render_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/013-balance-two-ideas/013_ACT013_balance_two_ideas_resting_repair_render_raw.png",
+  "generated_render_sha256": "1a78b4381feaa44ea5ee10490709ce77c5f359677cc90232ab32a735e2972774",
+  "method": "pose_specific_render_local_articulation_composite_v1",
+  "output_role": "resting_repair",
+  "outside_articulation_change": false,
+  "repaired_resting_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/013-balance-two-ideas/013_ACT013_balance_two_ideas_resting_beak_alpha.png",
+  "repaired_resting_sha256": "784a1a4ded015441ddd5d4cb3e2d3ea22ff7ad2c484b6ad5da840e5148121014",
+  "resting_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/013-balance-two-ideas/013_ACT013_balance_two_ideas_source_alpha.png",
+  "resting_sha256": "7150397c7d72e9a8dcb309e8188de1f2c06be17208c7ecc228a9525f1e49ad0f",
+  "runtime_admitted": false,
+  "schema_version": 1
+}

@@ -1,0 +1,70 @@
+{
+  "alignment": {
+    "interpolation": "lanczos_rgb_binary_alpha",
+    "scale": 0.5714285714,
+    "translate_x": 12,
+    "translate_y": 30
+  },
+  "approval_state": "candidate_visual_review",
+  "articulation_bbox": [
+    390,
+    95,
+    636,
+    355
+  ],
+  "articulation_polygon": [
+    [
+      390,
+      95
+    ],
+    [
+      630,
+      95
+    ],
+    [
+      635,
+      275
+    ],
+    [
+      615,
+      320
+    ],
+    [
+      570,
+      348
+    ],
+    [
+      480,
+      354
+    ],
+    [
+      420,
+      330
+    ],
+    [
+      390,
+      280
+    ]
+  ],
+  "canvas": [
+    960,
+    540
+  ],
+  "changed_bbox": [
+    390,
+    97,
+    629,
+    355
+  ],
+  "generated_render_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/020-lean-in-listening/020_ACT020_lean_in_listening_resting_repair_render_raw.png",
+  "generated_render_sha256": "0b3cbe30e6ef5f88cac2a433c7cd5df35298a28fba67dc8e9c7a6f684cad1cd8",
+  "method": "pose_specific_render_local_articulation_composite_v1",
+  "output_role": "resting_repair",
+  "outside_articulation_change": false,
+  "repaired_resting_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/020-lean-in-listening/020_ACT020_lean_in_listening_resting_beak_alpha.png",
+  "repaired_resting_sha256": "0aa2a8c649ac49ed53373405fd4cbdb64cde13a877b71e534ed0a9e7e84285a5",
+  "resting_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/020-lean-in-listening/020_ACT020_lean_in_listening_source_alpha.png",
+  "resting_sha256": "a4de12f30baa083f523dc4c729ff4dfe9df1a8564daa0ab3d0c2877863945943",
+  "runtime_admitted": false,
+  "schema_version": 1
+}

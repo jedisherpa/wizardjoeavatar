@@ -1,0 +1,12 @@
+{
+  "candidate": "bulk_donor_transfer_v1",
+  "evidence": [
+    "/tmp/kingfisher-recording-audit/legacy-pair-sheets",
+    "/tmp/kingfisher-recording-audit/authored-open-pairs-closeup.png"
+  ],
+  "reason": "Visual review found angle, scale, and beak-axis misalignment on multiple tilted and profile poses. Automated synthesis may be used only as diagnostic evidence.",
+  "replacement_workflow": "pair_specific_render_then_local_articulation_composite_v1",
+  "runtime_admitted": false,
+  "schema_version": 1,
+  "state": "rejected"
+}

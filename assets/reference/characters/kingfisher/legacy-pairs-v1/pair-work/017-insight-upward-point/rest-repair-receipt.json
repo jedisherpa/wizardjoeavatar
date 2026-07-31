@@ -1,0 +1,66 @@
+{
+  "alignment": {
+    "interpolation": "lanczos_rgb_binary_alpha",
+    "scale": 0.5510204082,
+    "translate_x": 13,
+    "translate_y": 51
+  },
+  "approval_state": "candidate_visual_review",
+  "articulation_bbox": [
+    442,
+    130,
+    623,
+    323
+  ],
+  "articulation_polygon": [
+    [
+      442,
+      130
+    ],
+    [
+      622,
+      130
+    ],
+    [
+      622,
+      290
+    ],
+    [
+      596,
+      315
+    ],
+    [
+      540,
+      322
+    ],
+    [
+      480,
+      312
+    ],
+    [
+      442,
+      270
+    ]
+  ],
+  "canvas": [
+    960,
+    540
+  ],
+  "changed_bbox": [
+    442,
+    140,
+    613,
+    323
+  ],
+  "generated_render_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/017-insight-upward-point/017_ACT017_insight_upward_point_resting_repair_render_raw.png",
+  "generated_render_sha256": "481171f12dc7c8b1f4d1394d15d02b15be4fa1cb8302dcca6dce444eb4e6bfef",
+  "method": "pose_specific_render_local_articulation_composite_v1",
+  "output_role": "resting_repair",
+  "outside_articulation_change": false,
+  "repaired_resting_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/017-insight-upward-point/017_ACT017_insight_upward_point_resting_beak_alpha.png",
+  "repaired_resting_sha256": "3b63fdbcd2d5bfc2ad932e98a5bb4769d315d9014fbaf9c0db11fb753d553355",
+  "resting_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/017-insight-upward-point/017_ACT017_insight_upward_point_source_alpha.png",
+  "resting_sha256": "8c1e8e8961684faf4a17d8ae8317539174585fb6c459c257e28d84eae903a57a",
+  "runtime_admitted": false,
+  "schema_version": 1
+}

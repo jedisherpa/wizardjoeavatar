@@ -1,0 +1,66 @@
+{
+  "alignment": {
+    "interpolation": "lanczos_rgb_binary_alpha",
+    "scale": 0.576,
+    "translate_x": -2,
+    "translate_y": 8
+  },
+  "approval_state": "candidate_visual_review",
+  "articulation_bbox": [
+    472,
+    184,
+    589,
+    278
+  ],
+  "articulation_polygon": [
+    [
+      474,
+      190
+    ],
+    [
+      529,
+      184
+    ],
+    [
+      580,
+      201
+    ],
+    [
+      588,
+      251
+    ],
+    [
+      556,
+      277
+    ],
+    [
+      495,
+      272
+    ],
+    [
+      472,
+      235
+    ]
+  ],
+  "canvas": [
+    960,
+    540
+  ],
+  "changed_bbox": [
+    472,
+    184,
+    589,
+    278
+  ],
+  "generated_render_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/024-polite-interruption/134_ACT134_polite_interruption_speaking_render_raw.png",
+  "generated_render_sha256": "956faef34c7077e4188197ab06dcc4a6028600aaf078dc383bf71d0429e59856",
+  "method": "pose_specific_render_local_articulation_composite_v1",
+  "output_role": "speaking",
+  "outside_articulation_change": false,
+  "resting_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/024-polite-interruption/024_ACT024_polite_interruption_resting_beak_alpha.png",
+  "resting_sha256": "85355f48e5ae353fc67446d57473b136b725106304d1c3ecc485f402bf2dc56a",
+  "runtime_admitted": false,
+  "schema_version": 1,
+  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/024-polite-interruption/134_ACT134_polite_interruption_speaking_beak_alpha.png",
+  "speaking_sha256": "8761a2f183f8c7060da18c19665ad9d7b824eccfa40ce7cd72cb1d5fbc9ff939"
+}

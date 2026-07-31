@@ -58,6 +58,9 @@ def main() -> None:
     parser.add_argument("--index", type=Path, default=DEFAULT_INDEX)
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--pose-prefix", action="append", default=[])
+    parser.add_argument("--sequence")
+    parser.add_argument("--sequence-start-index", type=int, default=0)
+    parser.add_argument("--sequence-end-index", type=int)
     parser.add_argument("--start", type=int)
     parser.add_argument("--end", type=int)
     parser.add_argument("--columns", type=int, default=5)
@@ -65,12 +68,20 @@ def main() -> None:
     args = parser.parse_args()
 
     library = HDPoseLibrary(args.index)
-    selected = select_pose_ids(
-        library.pose_ids,
-        prefixes=args.pose_prefix,
-        start=args.start,
-        end=args.end,
-    )
+    if args.sequence:
+        sequence = library.index.get("sequences", {}).get(args.sequence)
+        if sequence is None:
+            raise SystemExit(f"Unknown HD sequence: {args.sequence}")
+        selected = list(sequence["pose_ids"])[
+            max(0, args.sequence_start_index):args.sequence_end_index
+        ]
+    else:
+        selected = select_pose_ids(
+            library.pose_ids,
+            prefixes=args.pose_prefix,
+            start=args.start,
+            end=args.end,
+        )
     if not selected:
         raise SystemExit("No HD poses matched the requested selection")
 

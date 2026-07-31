@@ -1,0 +1,82 @@
+{
+  "alignment": {
+    "interpolation": "lanczos_rgb_binary_alpha",
+    "scale": 0.5617685306,
+    "translate_x": 13,
+    "translate_y": 14
+  },
+  "approval_state": "candidate_visual_review",
+  "articulation_bbox": [
+    469,
+    148,
+    627,
+    318
+  ],
+  "articulation_polygon": [
+    [
+      492,
+      177
+    ],
+    [
+      518,
+      151
+    ],
+    [
+      583,
+      148
+    ],
+    [
+      614,
+      174
+    ],
+    [
+      626,
+      220
+    ],
+    [
+      616,
+      279
+    ],
+    [
+      588,
+      315
+    ],
+    [
+      519,
+      317
+    ],
+    [
+      484,
+      287
+    ],
+    [
+      469,
+      239
+    ],
+    [
+      475,
+      202
+    ]
+  ],
+  "canvas": [
+    960,
+    540
+  ],
+  "changed_bbox": [
+    470,
+    148,
+    626,
+    318
+  ],
+  "generated_render_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/028-strong-declaration/028_ACT028_strong_declaration_resting_repair_render_raw.png",
+  "generated_render_sha256": "eb0564f1284acf74869fb72fc5303a81400ac32f61e2a340cbbba97b581d40a4",
+  "method": "pose_specific_render_local_articulation_composite_v1",
+  "output_role": "resting_repair",
+  "outside_articulation_change": false,
+  "repaired_resting_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/028-strong-declaration/028_ACT028_strong_declaration_resting_beak_alpha.png",
+  "repaired_resting_sha256": "acad34fc6b2a100b3bd90f77ffc76c5c13c2071df4920535ded4314d62231253",
+  "resting_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/028-strong-declaration/028_ACT028_strong_declaration_source_alpha.png",
+  "resting_sha256": "14d069190475d29af2e5e163b99e0894d9e926a8e35ae8e0fcf357c2104dc1f2",
+  "runtime_admitted": false,
+  "schema_version": 1
+}

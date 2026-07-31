@@ -1,0 +1,38 @@
+{
+  "changed_rendered_pixels": 10404,
+  "checks": {
+    "bounded_articulation_change": true,
+    "outside_mouth_stability": true,
+    "silhouette_overlap": true,
+    "stable_registration_bounds": true,
+    "visible_mouth_change": true
+  },
+  "mouth_mean_abs": 16.510681,
+  "mouth_region": [
+    420,
+    105,
+    541,
+    211
+  ],
+  "outside_mouth_mean_abs": 0.0,
+  "passed": true,
+  "registration_bound_delta": 0,
+  "resting_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/042-joy/042_ACT042_joy_resting_beak_alpha.png",
+  "resting_registration_bbox": [
+    165,
+    7,
+    795,
+    529
+  ],
+  "resting_sha256": "f273b409a1393429bf08787a456b63cbee2d29ffab39a73f34211a95cb9375a5",
+  "schema_version": 2,
+  "silhouette_iou": 1.0,
+  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/042-joy/152_ACT152_joy_speaking_beak_alpha.png",
+  "speaking_registration_bbox": [
+    165,
+    7,
+    795,
+    529
+  ],
+  "speaking_sha256": "5a14a623ac0cee95377f411b157463e5b63ff08ffec38810cdeec5d8bd6a196e"
+}

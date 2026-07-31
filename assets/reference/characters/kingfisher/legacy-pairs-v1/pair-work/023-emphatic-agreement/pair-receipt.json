@@ -1,0 +1,66 @@
+{
+  "alignment": {
+    "interpolation": "lanczos_rgb_binary_alpha",
+    "scale": 0.5744680851,
+    "translate_x": -1,
+    "translate_y": -1
+  },
+  "approval_state": "candidate_visual_review",
+  "articulation_bbox": [
+    452,
+    238,
+    588,
+    357
+  ],
+  "articulation_polygon": [
+    [
+      456,
+      242
+    ],
+    [
+      516,
+      238
+    ],
+    [
+      578,
+      253
+    ],
+    [
+      587,
+      318
+    ],
+    [
+      548,
+      356
+    ],
+    [
+      476,
+      348
+    ],
+    [
+      452,
+      307
+    ]
+  ],
+  "canvas": [
+    960,
+    540
+  ],
+  "changed_bbox": [
+    452,
+    238,
+    588,
+    357
+  ],
+  "generated_render_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/023-emphatic-agreement/133_ACT133_emphatic_agreement_speaking_render_raw.png",
+  "generated_render_sha256": "1d39d611ed8564ad154f4b8296d275256f36ca737c8d3b989fe87b69bd72a524",
+  "method": "pose_specific_render_local_articulation_composite_v1",
+  "output_role": "speaking",
+  "outside_articulation_change": false,
+  "resting_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/023-emphatic-agreement/023_ACT023_emphatic_agreement_resting_beak_alpha.png",
+  "resting_sha256": "774910d16ba4b0fb07e2ab4291966d2d359c5aad9a11b5e4df14eadd4b941d43",
+  "runtime_admitted": false,
+  "schema_version": 1,
+  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/023-emphatic-agreement/133_ACT133_emphatic_agreement_speaking_beak_alpha.png",
+  "speaking_sha256": "250176430250f21c27f289880b31d8176d7d4e550c6db31ad155292d61175d91"
+}

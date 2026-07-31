@@ -1,0 +1,74 @@
+{
+  "alignment": {
+    "interpolation": "lanczos_rgb_binary_alpha",
+    "scale": 0.5785953177,
+    "translate_x": -3,
+    "translate_y": -2
+  },
+  "approval_state": "candidate_visual_review",
+  "articulation_bbox": [
+    403,
+    120,
+    545,
+    251
+  ],
+  "articulation_polygon": [
+    [
+      424,
+      135
+    ],
+    [
+      470,
+      120
+    ],
+    [
+      520,
+      135
+    ],
+    [
+      544,
+      165
+    ],
+    [
+      536,
+      209
+    ],
+    [
+      508,
+      244
+    ],
+    [
+      457,
+      250
+    ],
+    [
+      419,
+      225
+    ],
+    [
+      403,
+      180
+    ]
+  ],
+  "canvas": [
+    960,
+    540
+  ],
+  "changed_bbox": [
+    403,
+    120,
+    545,
+    251
+  ],
+  "generated_render_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/030-rhetorical-question/140_ACT140_rhetorical_question_speaking_render_raw.png",
+  "generated_render_sha256": "5fe500e5234492cf849089342e5d61ef0444b3b8d4b716f3e2ebcfade3a4f51a",
+  "method": "pose_specific_render_local_articulation_composite_v1",
+  "output_role": "speaking",
+  "outside_articulation_change": false,
+  "resting_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/030-rhetorical-question/030_ACT030_rhetorical_question_resting_beak_alpha.png",
+  "resting_sha256": "256022e9a94e388e65206479e97184ca4aec36e7709d564be5eca2d04504c0e4",
+  "runtime_admitted": false,
+  "schema_version": 1,
+  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/030-rhetorical-question/140_ACT140_rhetorical_question_speaking_beak_alpha.png",
+  "speaking_sha256": "afbf1d11649e7c083609e8a363428f486e2b8139de4d288485d39d6a3556791b"
+}

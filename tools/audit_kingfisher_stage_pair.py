@@ -105,8 +105,22 @@ def audit_pair(
     articulation_region: tuple[int, int, int, int] = (
         DEFAULT_ARTICULATION_REGION
     ),
+    maximum_articulation_width: int | None = None,
+    maximum_articulation_height: int | None = None,
+    maximum_registration_bound_delta: int = (
+        MAXIMUM_REGISTRATION_BOUND_DELTA
+    ),
+    minimum_silhouette_iou: float = MINIMUM_SILHOUETTE_IOU,
 ) -> dict[str, object]:
-    articulation_region = validate_articulation_region(articulation_region)
+    validation_options: dict[str, int] = {}
+    if maximum_articulation_width is not None:
+        validation_options["maximum_width"] = maximum_articulation_width
+    if maximum_articulation_height is not None:
+        validation_options["maximum_height"] = maximum_articulation_height
+    articulation_region = validate_articulation_region(
+        articulation_region,
+        **validation_options,
+    )
     resting, resting_sha256 = _load_rgba_and_sha256(resting_path)
     speaking, speaking_sha256 = _load_rgba_and_sha256(speaking_path)
     if resting.size != CANVAS_SIZE or speaking.size != CANVAS_SIZE:
@@ -122,7 +136,7 @@ def audit_pair(
         abs(resting_value - speaking_value)
         for resting_value, speaking_value in zip(resting_bbox, speaking_bbox)
     )
-    if registration_bound_delta > MAXIMUM_REGISTRATION_BOUND_DELTA:
+    if registration_bound_delta > maximum_registration_bound_delta:
         raise ValueError("Kingfisher stage pair registration bounds differ")
 
     resting_pixels = resting_alpha.getdata()
@@ -172,9 +186,9 @@ def audit_pair(
 
     checks = {
         "stable_registration_bounds": (
-            registration_bound_delta <= MAXIMUM_REGISTRATION_BOUND_DELTA
+            registration_bound_delta <= maximum_registration_bound_delta
         ),
-        "silhouette_overlap": silhouette_iou >= MINIMUM_SILHOUETTE_IOU,
+        "silhouette_overlap": silhouette_iou >= minimum_silhouette_iou,
         "outside_mouth_stability": (
             outside_mean_abs <= MAXIMUM_OUTSIDE_MOUTH_MEAN_ABS
         ),
@@ -216,11 +230,29 @@ def main() -> None:
         metavar=("X0", "Y0", "X1", "Y1"),
         default=DEFAULT_ARTICULATION_REGION,
     )
+    parser.add_argument("--maximum-articulation-width", type=int)
+    parser.add_argument("--maximum-articulation-height", type=int)
+    parser.add_argument(
+        "--maximum-registration-bound-delta",
+        type=int,
+        default=MAXIMUM_REGISTRATION_BOUND_DELTA,
+    )
+    parser.add_argument(
+        "--minimum-silhouette-iou",
+        type=float,
+        default=MINIMUM_SILHOUETTE_IOU,
+    )
     args = parser.parse_args()
     report = audit_pair(
         args.resting,
         args.speaking,
         articulation_region=tuple(args.articulation_region),
+        maximum_articulation_width=args.maximum_articulation_width,
+        maximum_articulation_height=args.maximum_articulation_height,
+        maximum_registration_bound_delta=(
+            args.maximum_registration_bound_delta
+        ),
+        minimum_silhouette_iou=args.minimum_silhouette_iou,
     )
     if args.output:
         _write_json_atomic(args.output, report)

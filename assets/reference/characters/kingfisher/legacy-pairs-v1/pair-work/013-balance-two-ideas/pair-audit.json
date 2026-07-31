@@ -1,0 +1,38 @@
+{
+  "changed_rendered_pixels": 7145,
+  "checks": {
+    "bounded_articulation_change": true,
+    "outside_mouth_stability": true,
+    "silhouette_overlap": true,
+    "stable_registration_bounds": true,
+    "visible_mouth_change": true
+  },
+  "mouth_mean_abs": 53.993964,
+  "mouth_region": [
+    440,
+    198,
+    529,
+    301
+  ],
+  "outside_mouth_mean_abs": 0.0,
+  "passed": true,
+  "registration_bound_delta": 0,
+  "resting_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/013-balance-two-ideas/013_ACT013_balance_two_ideas_resting_beak_alpha.png",
+  "resting_registration_bbox": [
+    144,
+    95,
+    815,
+    529
+  ],
+  "resting_sha256": "784a1a4ded015441ddd5d4cb3e2d3ea22ff7ad2c484b6ad5da840e5148121014",
+  "schema_version": 2,
+  "silhouette_iou": 1.0,
+  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/013-balance-two-ideas/123_ACT123_balance_two_ideas_speaking_beak_alpha.png",
+  "speaking_registration_bbox": [
+    144,
+    95,
+    815,
+    529
+  ],
+  "speaking_sha256": "319e1369b5dde9566ddee9784aeec182d0df914bd9132c9b9f0f77e2fb7c9a62"
+}

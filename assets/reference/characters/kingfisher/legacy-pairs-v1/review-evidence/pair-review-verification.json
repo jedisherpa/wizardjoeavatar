@@ -1,0 +1,25 @@
+{
+  "binary_alpha_pose_count": 176,
+  "canvas": [
+    960,
+    540
+  ],
+  "character_id": "kingfisher",
+  "index_path": "assets/reference/characters/kingfisher/pair-review-compiled/library-index.json",
+  "index_sha256": "5e5c428d5561cba95b14bf49ea2a073b041ae13c63f44938c614bffe85dc0237",
+  "internal_visual_pass_count": 64,
+  "ledger_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-review-ledger.json",
+  "ledger_sha256": "2ef669394c6d1bce517620aac81b18e6fc03b59bb744d5423e37f66ffcdb335a",
+  "maximum_registration_bound_delta": 1,
+  "minimum_pair_silhouette_iou": 0.978551,
+  "not_observable_count": 2,
+  "pair_artifact_path": "kingfisher_act_001_066_111_176_pair_review-6ecc7f1356cecf46.wjpose",
+  "pair_artifact_sha256": "6ecc7f1356cecf46340e4b19eff4baf5dcd29c002cfc28a779c5d3cd42a505c4",
+  "pair_count": 66,
+  "paired_sequence_frame_count": 132,
+  "passed": true,
+  "pose_count": 176,
+  "runtime_admitted_count": 0,
+  "schema_version": 1,
+  "user_approved_count": 0
+}

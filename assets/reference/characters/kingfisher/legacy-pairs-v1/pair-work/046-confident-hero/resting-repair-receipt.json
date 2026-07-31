@@ -1,0 +1,78 @@
+{
+  "alignment": {
+    "interpolation": "lanczos_rgb_binary_alpha",
+    "scale": 0.566,
+    "translate_x": 2,
+    "translate_y": 39
+  },
+  "approval_state": "candidate_visual_review",
+  "articulation_bbox": [
+    415,
+    145,
+    546,
+    246
+  ],
+  "articulation_polygon": [
+    [
+      425,
+      160
+    ],
+    [
+      455,
+      145
+    ],
+    [
+      505,
+      145
+    ],
+    [
+      535,
+      160
+    ],
+    [
+      545,
+      195
+    ],
+    [
+      535,
+      225
+    ],
+    [
+      510,
+      245
+    ],
+    [
+      450,
+      245
+    ],
+    [
+      425,
+      225
+    ],
+    [
+      415,
+      195
+    ]
+  ],
+  "canvas": [
+    960,
+    540
+  ],
+  "changed_bbox": [
+    415,
+    145,
+    545,
+    246
+  ],
+  "generated_render_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/046-confident-hero/046_ACT046_confident_hero_resting_beak_repair_render_raw.png",
+  "generated_render_sha256": "99dae7ab51ee4de053e5d6b86e7a1885f984d6adb914257716473583274e510f",
+  "method": "pose_specific_render_local_articulation_composite_v1",
+  "output_role": "resting_repair",
+  "outside_articulation_change": false,
+  "repaired_resting_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/046-confident-hero/046_ACT046_confident_hero_resting_beak_alpha.png",
+  "repaired_resting_sha256": "32c340541fb4bceb1f3f1f94e1bdd7151ff47bc4352f135e094a58c21870324a",
+  "resting_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/046-confident-hero/046_ACT046_confident_hero_resting_beak_original_alpha.png",
+  "resting_sha256": "beab7295465f8d1fdeecaabc42d47e6f4201a35fca4302637e12d7c571fa0857",
+  "runtime_admitted": false,
+  "schema_version": 1
+}

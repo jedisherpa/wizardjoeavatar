@@ -1,0 +1,38 @@
+{
+  "changed_rendered_pixels": 848,
+  "checks": {
+    "bounded_articulation_change": true,
+    "outside_mouth_stability": true,
+    "silhouette_overlap": true,
+    "stable_registration_bounds": true,
+    "visible_mouth_change": true
+  },
+  "mouth_mean_abs": 7.784409,
+  "mouth_region": [
+    411,
+    209,
+    472,
+    273
+  ],
+  "outside_mouth_mean_abs": 0.0,
+  "passed": true,
+  "registration_bound_delta": 0,
+  "resting_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/061-deep-contemplation/061_ACT061_deep_contemplation_resting_beak_alpha.png",
+  "resting_registration_bbox": [
+    359,
+    97,
+    601,
+    529
+  ],
+  "resting_sha256": "d5542b24bc973a67cbba0b017fbc628aeaea4dde4ec3314e1dc6ea8d2db7b696",
+  "schema_version": 2,
+  "silhouette_iou": 1.0,
+  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/061-deep-contemplation/171_ACT171_deep_contemplation_speaking_beak_alpha.png",
+  "speaking_registration_bbox": [
+    359,
+    97,
+    601,
+    529
+  ],
+  "speaking_sha256": "be1fc119dac9e208099a4cccb4537c53b0a3fb83bf41ab3fce80dc9df328ade3"
+}

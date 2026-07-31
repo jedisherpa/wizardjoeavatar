@@ -1,0 +1,11 @@
+{
+  "checks": {
+    "body_locked": true,
+    "mouth_occlusion_declared": true
+  },
+  "mouth_visibility": "occluded",
+  "passed": true,
+  "resting_sha256": "a7727e169744247298c663a4e5dc0637b6859ac03d9ba074b3814646a9882a55",
+  "schema_version": 3,
+  "speaking_sha256": "a7727e169744247298c663a4e5dc0637b6859ac03d9ba074b3814646a9882a55"
+}

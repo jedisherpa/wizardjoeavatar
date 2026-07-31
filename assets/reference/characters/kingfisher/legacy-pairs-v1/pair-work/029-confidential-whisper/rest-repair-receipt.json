@@ -1,0 +1,82 @@
+{
+  "alignment": {
+    "interpolation": "lanczos_rgb_binary_alpha",
+    "scale": 0.578313253,
+    "translate_x": -2,
+    "translate_y": 23
+  },
+  "approval_state": "candidate_visual_review",
+  "articulation_bbox": [
+    388,
+    145,
+    564,
+    328
+  ],
+  "articulation_polygon": [
+    [
+      398,
+      166
+    ],
+    [
+      444,
+      145
+    ],
+    [
+      505,
+      153
+    ],
+    [
+      548,
+      182
+    ],
+    [
+      563,
+      229
+    ],
+    [
+      548,
+      281
+    ],
+    [
+      514,
+      319
+    ],
+    [
+      459,
+      327
+    ],
+    [
+      414,
+      302
+    ],
+    [
+      392,
+      260
+    ],
+    [
+      388,
+      213
+    ]
+  ],
+  "canvas": [
+    960,
+    540
+  ],
+  "changed_bbox": [
+    389,
+    145,
+    564,
+    328
+  ],
+  "generated_render_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/029-confidential-whisper/029_ACT029_confidential_whisper_resting_repair_render_raw.png",
+  "generated_render_sha256": "602d9c3e0a1e15236dc89d4242f19a036fef67a78ab14667ebc87af6d35481ae",
+  "method": "pose_specific_render_local_articulation_composite_v1",
+  "output_role": "resting_repair",
+  "outside_articulation_change": false,
+  "repaired_resting_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/029-confidential-whisper/029_ACT029_confidential_whisper_resting_beak_alpha.png",
+  "repaired_resting_sha256": "4b74b91629538c1ceaa6b23d3a755f8a5bf14e373dd33c6999de0b29fd7f2491",
+  "resting_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/029-confidential-whisper/029_ACT029_confidential_whisper_source_alpha.png",
+  "resting_sha256": "128557187c49daebf7197a82f823a5847659a6b9c37026b4aa66b1559a6730ba",
+  "runtime_admitted": false,
+  "schema_version": 1
+}

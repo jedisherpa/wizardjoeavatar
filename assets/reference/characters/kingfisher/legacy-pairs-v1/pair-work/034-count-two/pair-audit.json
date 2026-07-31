@@ -1,0 +1,38 @@
+{
+  "changed_rendered_pixels": 12526,
+  "checks": {
+    "bounded_articulation_change": true,
+    "outside_mouth_stability": true,
+    "silhouette_overlap": true,
+    "stable_registration_bounds": true,
+    "visible_mouth_change": true
+  },
+  "mouth_mean_abs": 21.960958,
+  "mouth_region": [
+    430,
+    135,
+    571,
+    236
+  ],
+  "outside_mouth_mean_abs": 0.0,
+  "passed": true,
+  "registration_bound_delta": 0,
+  "resting_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/034-count-two/034_ACT034_count_two_resting_beak_alpha.png",
+  "resting_registration_bbox": [
+    170,
+    10,
+    789,
+    529
+  ],
+  "resting_sha256": "9ddb2cd288dd945533f1b5b8badc446df48654cc4962b710355b35fbd819648c",
+  "schema_version": 2,
+  "silhouette_iou": 0.99986,
+  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/034-count-two/144_ACT144_count_two_speaking_beak_alpha.png",
+  "speaking_registration_bbox": [
+    170,
+    10,
+    789,
+    529
+  ],
+  "speaking_sha256": "b337bd3df4c6131e49086b77e3053fd2a121aeeb2d7d354495589e1675cd1ee7"
+}

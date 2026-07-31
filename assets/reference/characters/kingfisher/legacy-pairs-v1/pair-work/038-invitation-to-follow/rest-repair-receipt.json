@@ -1,0 +1,62 @@
+{
+  "alignment": {
+    "interpolation": "lanczos_rgb_binary_alpha",
+    "scale": 0.56364,
+    "translate_x": 7,
+    "translate_y": 21
+  },
+  "approval_state": "candidate_visual_review",
+  "articulation_bbox": [
+    320,
+    95,
+    541,
+    306
+  ],
+  "articulation_polygon": [
+    [
+      325,
+      95
+    ],
+    [
+      525,
+      95
+    ],
+    [
+      540,
+      255
+    ],
+    [
+      515,
+      295
+    ],
+    [
+      360,
+      305
+    ],
+    [
+      320,
+      230
+    ]
+  ],
+  "canvas": [
+    960,
+    540
+  ],
+  "changed_bbox": [
+    327,
+    95,
+    510,
+    306
+  ],
+  "generated_render_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/038-invitation-to-follow/038_ACT038_invitation_to_follow_resting_repair_render_raw.png",
+  "generated_render_sha256": "d4490329733da7d841b84a73a3e822c6a2e7da25a707c221c08de5d5093a55d0",
+  "method": "pose_specific_render_local_articulation_composite_v1",
+  "output_role": "resting_repair",
+  "outside_articulation_change": false,
+  "repaired_resting_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/038-invitation-to-follow/038_ACT038_invitation_to_follow_resting_beak_alpha.png",
+  "repaired_resting_sha256": "4c16dd193aabe37cc2d050b99fdd82746c1906fbd52f3790167597799e5e2ee9",
+  "resting_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/038-invitation-to-follow/038_ACT038_invitation_to_follow_source_alpha.png",
+  "resting_sha256": "7e7e46956d5f11661029ca02d18f867ea4baa3f761717fa4247b00aa005a43ce",
+  "runtime_admitted": false,
+  "schema_version": 1
+}

@@ -1,0 +1,78 @@
+{
+  "alignment": {
+    "interpolation": "lanczos_rgb_binary_alpha",
+    "scale": 0.568,
+    "translate_x": -1,
+    "translate_y": -2
+  },
+  "approval_state": "candidate_visual_review",
+  "articulation_bbox": [
+    375,
+    88,
+    586,
+    251
+  ],
+  "articulation_polygon": [
+    [
+      390,
+      105
+    ],
+    [
+      430,
+      88
+    ],
+    [
+      530,
+      88
+    ],
+    [
+      570,
+      105
+    ],
+    [
+      585,
+      165
+    ],
+    [
+      570,
+      220
+    ],
+    [
+      525,
+      250
+    ],
+    [
+      435,
+      250
+    ],
+    [
+      390,
+      220
+    ],
+    [
+      375,
+      165
+    ]
+  ],
+  "canvas": [
+    960,
+    540
+  ],
+  "changed_bbox": [
+    375,
+    88,
+    586,
+    251
+  ],
+  "generated_render_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/042-joy/042_ACT042_joy_resting_beak_repair_render_raw.png",
+  "generated_render_sha256": "c0e071a1bbf5decf601ded17ab470f0e46d6819dde295f0a41d520a03fdb9571",
+  "method": "pose_specific_render_local_articulation_composite_v1",
+  "output_role": "resting_repair",
+  "outside_articulation_change": false,
+  "repaired_resting_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/042-joy/042_ACT042_joy_resting_beak_alpha.png",
+  "repaired_resting_sha256": "f273b409a1393429bf08787a456b63cbee2d29ffab39a73f34211a95cb9375a5",
+  "resting_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/042-joy/042_ACT042_joy_resting_beak_original_alpha.png",
+  "resting_sha256": "c7bb6626d0d8cae4a28ae3bed262668d4061365df56c8e84f5e6e7e8693c3f58",
+  "runtime_admitted": false,
+  "schema_version": 1
+}

@@ -1,0 +1,62 @@
+{
+  "alignment": {
+    "interpolation": "lanczos_rgb_binary_alpha",
+    "scale": 0.5786,
+    "translate_x": -4,
+    "translate_y": -2
+  },
+  "approval_state": "candidate_visual_review",
+  "articulation_bbox": [
+    340,
+    10,
+    591,
+    276
+  ],
+  "articulation_polygon": [
+    [
+      345,
+      10
+    ],
+    [
+      575,
+      10
+    ],
+    [
+      590,
+      210
+    ],
+    [
+      555,
+      275
+    ],
+    [
+      390,
+      275
+    ],
+    [
+      340,
+      215
+    ]
+  ],
+  "canvas": [
+    960,
+    540
+  ],
+  "changed_bbox": [
+    343,
+    10,
+    590,
+    276
+  ],
+  "generated_render_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/034-count-two/034_ACT034_count_two_resting_repair_render_raw.png",
+  "generated_render_sha256": "f8f60a117be4f871da92682c288097412427a4088f32376f0454520beedc2cde",
+  "method": "pose_specific_render_local_articulation_composite_v1",
+  "output_role": "resting_repair",
+  "outside_articulation_change": false,
+  "repaired_resting_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/034-count-two/034_ACT034_count_two_resting_beak_alpha.png",
+  "repaired_resting_sha256": "9ddb2cd288dd945533f1b5b8badc446df48654cc4962b710355b35fbd819648c",
+  "resting_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/034-count-two/034_ACT034_count_two_source_alpha.png",
+  "resting_sha256": "b419fc64a295ca717250952b208a23ac95cef6c7e0adb29547309ad1f585f908",
+  "runtime_admitted": false,
+  "schema_version": 1
+}

@@ -1,0 +1,38 @@
+{
+  "changed_rendered_pixels": 2444,
+  "checks": {
+    "bounded_articulation_change": true,
+    "outside_mouth_stability": true,
+    "silhouette_overlap": true,
+    "stable_registration_bounds": true,
+    "visible_mouth_change": true
+  },
+  "mouth_mean_abs": 16.733984,
+  "mouth_region": [
+    378,
+    221,
+    459,
+    288
+  ],
+  "outside_mouth_mean_abs": 0.0,
+  "passed": true,
+  "registration_bound_delta": 0,
+  "resting_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/060-fatigue/060_ACT060_fatigue_resting_beak_alpha.png",
+  "resting_registration_bbox": [
+    352,
+    97,
+    608,
+    529
+  ],
+  "resting_sha256": "6a5c3e108fea49735b8fc3fe52971f6aa3bd6caef550ee98c03d90a64ab74151",
+  "schema_version": 2,
+  "silhouette_iou": 1.0,
+  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/060-fatigue/170_ACT170_fatigue_speaking_beak_alpha.png",
+  "speaking_registration_bbox": [
+    352,
+    97,
+    608,
+    529
+  ],
+  "speaking_sha256": "3419e8ed380c1e3481c67f6f3361c587cfb201a2ed8922e6bf1a22fd9091d8a2"
+}
