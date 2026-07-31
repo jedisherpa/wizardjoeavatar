@@ -1,62 +1,119 @@
 {
   "alignment": {
     "interpolation": "lanczos_rgb_binary_alpha",
-    "scale": 0.5733157199471598,
-    "translate_x": -18,
-    "translate_y": 0
+    "scale": 1.0,
+    "scale_x": 1.0,
+    "scale_y": 1.0,
+    "translate_x": 9,
+    "translate_y": 4
   },
   "approval_state": "candidate_visual_review",
-  "articulation_bbox": [
-    440,
-    198,
-    529,
-    301
-  ],
-  "articulation_polygon": [
-    [
-      445,
-      205
-    ],
-    [
-      485,
-      198
-    ],
-    [
-      525,
-      210
-    ],
-    [
-      528,
-      275
-    ],
-    [
-      485,
-      300
-    ],
-    [
-      440,
-      270
-    ]
-  ],
   "canvas": [
     960,
     540
   ],
-  "changed_bbox": [
-    440,
-    198,
-    529,
-    301
+  "cavity_polygon": [
+    [
+      450,
+      220
+    ],
+    [
+      525,
+      220
+    ],
+    [
+      523,
+      265
+    ],
+    [
+      509,
+      277
+    ],
+    [
+      474,
+      277
+    ],
+    [
+      452,
+      264
+    ]
   ],
-  "generated_render_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/013-balance-two-ideas/013_ACT013_balance_two_ideas_speaking_render_raw.png",
-  "generated_render_sha256": "e36d96ff3405496d77bc620298cd53bc2f0bf341cedb980a650ea64a48809c81",
-  "method": "pose_specific_render_local_articulation_composite_v1",
-  "output_role": "speaking",
+  "changed_bbox": [
+    449,
+    230,
+    528,
+    281
+  ],
+  "generated_render_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/013-balance-two-ideas/123_ACT123_balance_two_ideas_speaking_beak_source_pre_pairwise.png",
+  "generated_render_sha256": "319e1369b5dde9566ddee9784aeec182d0df914bd9132c9b9f0f77e2fb7c9a62",
+  "hinge": [
+    454,
+    229
+  ],
+  "hinge_radius": 18,
+  "mandible_bbox": [
+    448,
+    218,
+    528,
+    281
+  ],
+  "mandible_connected_ratio": 1.0,
+  "mandible_largest_component_pixels": 4608,
+  "mandible_opaque_pixels": 4608,
+  "mandible_polygon": [
+    [
+      448,
+      218
+    ],
+    [
+      527,
+      218
+    ],
+    [
+      525,
+      267
+    ],
+    [
+      510,
+      280
+    ],
+    [
+      473,
+      280
+    ],
+    [
+      450,
+      266
+    ]
+  ],
+  "method": "pair_specific_connected_mandible_patch_v1",
+  "minimum_connected_ratio": 0.85,
+  "minimum_mandible_height": 20,
   "outside_articulation_change": false,
+  "residual_clear_polygon": null,
   "resting_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/013-balance-two-ideas/013_ACT013_balance_two_ideas_resting_beak_alpha.png",
   "resting_sha256": "784a1a4ded015441ddd5d4cb3e2d3ea22ff7ad2c484b6ad5da840e5148121014",
   "runtime_admitted": false,
   "schema_version": 1,
   "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/013-balance-two-ideas/123_ACT123_balance_two_ideas_speaking_beak_alpha.png",
-  "speaking_sha256": "319e1369b5dde9566ddee9784aeec182d0df914bd9132c9b9f0f77e2fb7c9a62"
+  "speaking_sha256": "58100f296ab6de7054df57e2047f573832144c84523195d700f8fb1db65a6348",
+  "upper_beak_policy": "immutable_source_pixels",
+  "upper_beak_polygon": [
+    [
+      434,
+      188
+    ],
+    [
+      535,
+      188
+    ],
+    [
+      535,
+      229
+    ],
+    [
+      434,
+      229
+    ]
+  ]
 }

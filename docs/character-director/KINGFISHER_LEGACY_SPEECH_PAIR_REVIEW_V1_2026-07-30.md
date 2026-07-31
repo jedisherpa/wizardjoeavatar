@@ -86,8 +86,8 @@ The machine-readable authority is:
 
 Current authoritative pairwise totals:
 
-- full-size anatomical passes: 3;
-- pending full-size reviews: 60;
+- full-size anatomical passes: 14;
+- pending full-size reviews: 49;
 - not observable: 2;
 - currently awaiting rebuild: 1;
 - user-approved pairs: 0; and
@@ -136,6 +136,16 @@ then passed the pair. Its evidence is under:
 
 `assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-059/`
 
+Pair 13 (`balance two ideas`) was also rejected during the one-pair full-size
+pass because its speaking bill and mouth cavity drifted screen-left. Its
+original speaking source is preserved beside the pair. The accepted candidate
+keeps the closed body and upper bill immutable and moves only a connected,
+bounded lower-mouth patch 9 pixels right and 4 pixels down. The pair audit
+reports zero changed pixels outside the mouth region, stable registration
+bounds, and a visible articulation. Its evidence is under:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-013/`
+
 Pair 62 remains `needs_rebuild`. This remains internal anatomical review, not
 user approval.
 
@@ -168,15 +178,15 @@ checksums, approval state, and runtime admission remain unchanged.
 
 The current content-addressed pair artifact is:
 
-`kingfisher_act_001_066_111_176_pair_review-ef6b3beafb72ab0f.wjpose`
+`kingfisher_act_001_066_111_176_pair_review-cd5c5b4ba5020f15.wjpose`
 
 Artifact SHA-256:
 
-`ef6b3beafb72ab0f9e1440dae54b702af5c5b62171b32ea9e0e07b199a972d17`
+`cd5c5b4ba5020f15d1c923c1131017fe6e405c95e2da654f256fc10e0ee9b650`
 
 Library-index SHA-256:
 
-`366a3ac1a17ee62ad6bfbb8cdfca1e5003f5db41d013b8af04daa31a2602db69`
+`5e55c1958e18b7376f487ef2207164c951acf2490c25c69d01141afab73e4e50`
 
 Artifacts are published to content-addressed filenames. A running observer
 continues reading its prior complete file while a new artifact and index are

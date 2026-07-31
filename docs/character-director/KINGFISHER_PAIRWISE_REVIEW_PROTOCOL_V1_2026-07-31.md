@@ -56,8 +56,8 @@ passing does not substitute for visual review.
 ## Current Queue
 
 - pair count: 66;
-- pairwise passes: 3 (pairs 1, 2, and rebuilt 59);
-- pending: 60;
+- pairwise passes: 14 (pairs 1-3, 6-15, and rebuilt 59);
+- pending: 49;
 - needs rebuild: 1 (pair 62);
 - not observable: 2 (pairs 4 and 5);
 - user approved: 0;
@@ -68,6 +68,13 @@ for a doubled upper edge. A source-pixel rotation was rejected for insufficient
 mandible thickness. A one-pair speaking render was then reduced to a connected
 lower-mandible patch, horizontally registered to the canonical upper bill, and
 passed at full projector size.
+
+Pair 13 demonstrated why the full-size pairwise gate is required even after a
+batch close-up passed. Its speaking frame shifted the bill and mouth cavity
+screen-left. The pair was rejected, its pre-repair speaking source was
+preserved, and only a connected lower-mouth patch was moved 9 pixels right and
+4 pixels down beneath immutable closed-frame upper-bill pixels. The rebuilt
+pair passed with zero changes outside its declared articulation region.
 
 Evidence:
 
@@ -93,7 +100,7 @@ pairwise disposition. Direct pair selection uses `&pair=N`.
 
 ## Verification
 
-Focused queue/compiler/viewer tests: 15 passed.
+Focused queue/compiler/viewer/compositor tests: 19 passed.
 
 Complete Kingfisher-focused tests: 63 passed.
 
@@ -105,6 +112,6 @@ failure receipt even while blocked:
 
 Current blocker:
 
-`pair 3 lacks a passing full-size pairwise disposition`
+`pair 16 lacks a passing full-size pairwise disposition`
 
 This failure is expected and proves the queue is fail-closed.
