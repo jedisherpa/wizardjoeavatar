@@ -11,7 +11,10 @@ import tools.compile_kingfisher_pair_review_library as compiler
 from tools.compile_kingfisher_pair_review_library import (
     compile_pair_review_library,
 )
-from tools.verify_kingfisher_pair_review import verify_pair_review
+from tools.verify_kingfisher_pair_review import (
+    blocked_pair_review_report,
+    verify_pair_review,
+)
 from wizard_avatar.hd_pose_artifact import (
     HDPoseLibrary,
     sha256_path,
@@ -114,6 +117,13 @@ class CompileKingfisherPairReviewLibraryTests(unittest.TestCase):
                     "automated_audit_passed": True,
                     "user_approved": False,
                     "runtime_admitted": False,
+                    "pairwise_full_size_review": {
+                        "protocol_id": "kingfisher-full-size-pairwise-v1",
+                        "state": "pending",
+                        "evidence_path": "",
+                        "user_approval_implied": False,
+                        "runtime_admission_implied": False,
+                    },
                     "receipt_path": receipt_path.as_posix(),
                     "audit_path": audit_path.as_posix(),
                 }
@@ -145,6 +155,7 @@ class CompileKingfisherPairReviewLibraryTests(unittest.TestCase):
             self.assertEqual(result["pose_count"], 132)
             self.assertEqual(result["pair_count"], 66)
             self.assertEqual(len(sequence["pose_ids"]), 132)
+            self.assertEqual(sequence["pair_review_states"], ["pending"] * 66)
             self.assertEqual(
                 sequence["pose_ids"][:4],
                 [
@@ -178,6 +189,19 @@ class CompileKingfisherPairReviewLibraryTests(unittest.TestCase):
                     with self.assertRaisesRegex(ValueError, "cannot"):
                         compile_pair_review_library(base_index, ledger, root / field)
             ledger.write_text(json.dumps(original), encoding="utf-8")
+
+    def test_rejects_unknown_pairwise_review_protocol(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            base_index, ledger = self._fixture(root)
+            data = json.loads(ledger.read_text(encoding="utf-8"))
+            data["pairs"][0]["pairwise_full_size_review"]["protocol_id"] = (
+                "unknown-protocol"
+            )
+            ledger.write_text(json.dumps(data), encoding="utf-8")
+
+            with self.assertRaisesRegex(ValueError, "protocol"):
+                compile_pair_review_library(base_index, ledger, root / "review")
 
     def test_rejects_modified_speaking_candidate(self):
         with tempfile.TemporaryDirectory() as directory:
@@ -232,6 +256,7 @@ class CompileKingfisherPairReviewLibraryTests(unittest.TestCase):
                     "user_approval_implied": False,
                     "runtime_admission_implied": False,
                 }
+                pair["pairwise_full_size_review"]["state"] = "pass"
             ledger.write_text(json.dumps(ledger_data), encoding="utf-8")
             output = root / "review"
             compile_pair_review_library(base_index, ledger, output)
@@ -242,15 +267,38 @@ class CompileKingfisherPairReviewLibraryTests(unittest.TestCase):
             self.assertEqual(report["pair_count"], 66)
             self.assertEqual(report["paired_sequence_frame_count"], 132)
             self.assertEqual(report["binary_alpha_pose_count"], 132)
-            self.assertEqual(report["internal_visual_pass_count"], 66)
+            self.assertEqual(report["pairwise_full_size_pass_count"], 66)
             self.assertEqual(report["runtime_admitted_count"], 0)
 
-            ledger_data["pairs"][0]["internal_visual_review"]["state"] = (
+            ledger_data["pairs"][0]["pairwise_full_size_review"]["state"] = (
                 "needs_rebuild"
             )
             ledger.write_text(json.dumps(ledger_data), encoding="utf-8")
-            with self.assertRaisesRegex(ValueError, "visual disposition"):
+            with self.assertRaisesRegex(ValueError, "pairwise disposition"):
                 verify_pair_review(output / "library-index.json", ledger)
+
+            ledger_data["pairwise_full_size_review_summary"] = {
+                "pair_count": 66,
+                "pending_count": 0,
+                "pass_count": 65,
+                "needs_rebuild_count": 1,
+                "not_observable_count": 0,
+            }
+            ledger.write_text(json.dumps(ledger_data), encoding="utf-8")
+            report = blocked_pair_review_report(
+                output / "library-index.json",
+                ledger,
+                ValueError(
+                    "pair 1 lacks a passing full-size pairwise disposition"
+                ),
+            )
+            self.assertFalse(report["passed"])
+            self.assertEqual(report["pairwise_full_size_pass_count"], 65)
+            self.assertEqual(report["needs_rebuild_count"], 1)
+            self.assertEqual(
+                report["verification_state"],
+                "blocked_by_pairwise_full_size_review",
+            )
 
 
 if __name__ == "__main__":

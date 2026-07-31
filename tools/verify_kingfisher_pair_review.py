@@ -17,7 +17,7 @@ from wizard_avatar.hd_pose_artifact import HDPoseLibrary, sha256_path  # noqa: E
 
 PAIR_COUNT = 66
 PAIR_SEQUENCE = "kingfisher-paired-beaks-review"
-REVIEW_STATES = {"pass", "not_observable"}
+PASSING_REVIEW_STATES = {"pass", "not_observable"}
 
 
 def _write_json_atomic(path: Path, value: object) -> None:
@@ -51,6 +51,50 @@ def _report_path(path: Path) -> str:
     )
 
 
+def blocked_pair_review_report(
+    index_path: Path,
+    ledger_path: Path,
+    error: ValueError,
+) -> dict[str, object]:
+    index_path = index_path.resolve()
+    ledger_path = ledger_path.resolve()
+    index = json.loads(index_path.read_text(encoding="utf-8"))
+    ledger = json.loads(ledger_path.read_text(encoding="utf-8"))
+    summary = ledger.get("pairwise_full_size_review_summary", {})
+    pair_shard = next(
+        (
+            shard
+            for shard in index.get("shards", [])
+            if shard.get("shard_id")
+            == "kingfisher_act_001_066_111_176_pair_review"
+        ),
+        {},
+    )
+    return {
+        "schema_version": 1,
+        "character_id": "kingfisher",
+        "index_path": _report_path(index_path),
+        "index_sha256": sha256_path(index_path),
+        "ledger_path": _report_path(ledger_path),
+        "ledger_sha256": sha256_path(ledger_path),
+        "pose_count": int(index.get("pose_count", 0)),
+        "pair_count": int(summary.get("pair_count", 0)),
+        "pairwise_full_size_pass_count": int(summary.get("pass_count", 0)),
+        "pending_count": int(summary.get("pending_count", 0)),
+        "needs_rebuild_count": int(summary.get("needs_rebuild_count", 0)),
+        "not_observable_count": int(summary.get("not_observable_count", 0)),
+        "user_approved_count": int(
+            index.get("legacy_pair_review", {}).get("user_approved_count", 0)
+        ),
+        "runtime_admitted_count": 0,
+        "pair_artifact_path": str(pair_shard.get("path", "")),
+        "pair_artifact_sha256": str(pair_shard.get("sha256", "")),
+        "passed": False,
+        "verification_state": "blocked_by_pairwise_full_size_review",
+        "verification_error": str(error),
+    }
+
+
 def verify_pair_review(
     index_path: Path,
     ledger_path: Path,
@@ -73,6 +117,7 @@ def verify_pair_review(
     if sequence.get("runtime_admitted") is not False:
         raise ValueError("paired review sequence must remain review-only")
     expected_sequence: list[str] = []
+    expected_pair_review_states: list[str] = []
     ledger_root = ledger_path.parent
     observable_count = 0
     not_observable_count = 0
@@ -84,11 +129,12 @@ def verify_pair_review(
             raise ValueError("pair review cannot imply user approval")
         if pair.get("runtime_admitted") is not False:
             raise ValueError("pair review cannot imply runtime admission")
-        visual = pair.get("internal_visual_review", {})
+        visual = pair.get("pairwise_full_size_review", {})
         state = visual.get("state")
-        if state not in REVIEW_STATES:
+        if state not in PASSING_REVIEW_STATES:
             raise ValueError(
-                f"pair {pair.get('ordinal')} lacks a passing visual disposition"
+                f"pair {pair.get('ordinal')} lacks a passing full-size "
+                "pairwise disposition"
             )
         if visual.get("user_approval_implied") is not False:
             raise ValueError("internal review cannot imply user approval")
@@ -98,6 +144,7 @@ def verify_pair_review(
             observable_count += 1
         else:
             not_observable_count += 1
+        expected_pair_review_states.append(str(state))
 
         expected_sequence.extend(
             (str(pair["resting_pose_id"]), str(pair["speaking_pose_id"]))
@@ -127,6 +174,8 @@ def verify_pair_review(
 
     if sequence.get("pose_ids") != expected_sequence:
         raise ValueError("paired review sequence is not exact closed/open order")
+    if sequence.get("pair_review_states") != expected_pair_review_states:
+        raise ValueError("paired review sequence dispositions do not match ledger")
     if len(library.pose_ids) != len(set(library.pose_ids)):
         raise ValueError("review library pose ids must be unique")
 
@@ -167,7 +216,7 @@ def verify_pair_review(
         "paired_sequence_frame_count": len(expected_sequence),
         "canvas": list(library.canvas_size),
         "binary_alpha_pose_count": len(library.pose_ids),
-        "internal_visual_pass_count": observable_count,
+        "pairwise_full_size_pass_count": observable_count,
         "not_observable_count": not_observable_count,
         "user_approved_count": 0,
         "runtime_admitted_count": 0,
@@ -185,7 +234,14 @@ def main() -> None:
     parser.add_argument("--ledger", type=Path, required=True)
     parser.add_argument("--output", type=Path)
     args = parser.parse_args()
-    report = verify_pair_review(args.index, args.ledger)
+    try:
+        report = verify_pair_review(args.index, args.ledger)
+    except ValueError as error:
+        report = blocked_pair_review_report(args.index, args.ledger, error)
+        if args.output:
+            _write_json_atomic(args.output, report)
+        print(json.dumps(report, indent=2, sort_keys=True))
+        raise SystemExit(1) from None
     if args.output:
         _write_json_atomic(args.output, report)
     print(json.dumps(report, indent=2, sort_keys=True))

@@ -2,9 +2,9 @@
   "alignment": {
     "interpolation": "lanczos_rgb_binary_alpha",
     "scale": 0.56,
-    "scale_x": 0.66,
+    "scale_x": 0.56,
     "scale_y": 0.56,
-    "translate_x": -105,
+    "translate_x": -5,
     "translate_y": 39
   },
   "approval_state": "candidate_visual_review",
@@ -46,12 +46,12 @@
   "mandible_bbox": [
     552,
     240,
-    679,
+    660,
     281
   ],
   "mandible_connected_ratio": 1.0,
-  "mandible_largest_component_pixels": 3347,
-  "mandible_opaque_pixels": 3347,
+  "mandible_largest_component_pixels": 2826,
+  "mandible_opaque_pixels": 2826,
   "mandible_polygon": [
     [
       552,
@@ -79,8 +79,8 @@
   "resting_sha256": "bb5af96d8eda2b6a1066c7d3caab76d6667cae88d03abbeba7ee1d95fb327e02",
   "runtime_admitted": false,
   "schema_version": 1,
-  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/059-determination/169_ACT169_determination_speaking_beak_alpha.png",
-  "speaking_sha256": "d89144091dd99f9ad3daf78d2d6163aae05b974df76135345eb5947aac214dcb",
+  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/059-determination/169_ACT169_determination_speaking_beak_candidate_v6_pairwise.png",
+  "speaking_sha256": "d22b43fe31e7030c4d6661b926f7126ba4128125f16dc1ae96b77a9483acdb83",
   "upper_beak_policy": "immutable_source_pixels",
   "upper_beak_polygon": [
     [

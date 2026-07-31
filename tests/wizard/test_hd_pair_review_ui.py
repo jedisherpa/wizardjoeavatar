@@ -36,6 +36,12 @@ class HdPairReviewUiTests(unittest.TestCase):
         self.assertIn("data-pair-play", source)
         self.assertIn("document.body.dataset.hdPairNumber", source)
         self.assertIn("document.body.dataset.hdPairState", source)
+        self.assertIn("document.body.dataset.hdPairDisposition", source)
+        self.assertIn("sequence.pair_review_states", source)
+        self.assertIn(
+            "HD pair-review dispositions must match pair count",
+            source,
+        )
         self.assertIn('url.searchParams.set("pair"', source)
 
     def test_pair_review_controls_fit_desktop_and_mobile(self):
@@ -46,13 +52,29 @@ class HdPairReviewUiTests(unittest.TestCase):
         self.assertIn("right: 8px;", styles)
         self.assertIn("minmax(0, 1fr)", styles)
 
-    def test_failed_pairs_remain_review_only_and_blocked(self):
+    def test_pairwise_review_can_supersede_preserved_batch_dispositions(self):
         ledger = json.loads(LEDGER_PATH.read_text(encoding="utf-8"))
         by_ordinal = {
             int(pair["ordinal"]): pair
             for pair in ledger["pairs"]
         }
-        for ordinal in (59, 62):
+        repaired = by_ordinal[59]
+        self.assertEqual(
+            repaired["internal_visual_review"]["state"],
+            "needs_rebuild",
+        )
+        self.assertEqual(
+            repaired["pairwise_full_size_review"]["state"],
+            "pass",
+        )
+        self.assertIn(
+            "evidence/pairwise-full-size/pair-059",
+            repaired["pairwise_full_size_review"]["evidence_path"],
+        )
+        self.assertFalse(repaired["runtime_admitted"])
+        self.assertFalse(repaired["user_approved"])
+
+        for ordinal in (62,):
             pair = by_ordinal[ordinal]
             self.assertEqual(
                 pair["internal_visual_review"]["state"],
@@ -69,6 +91,10 @@ class HdPairReviewUiTests(unittest.TestCase):
             )
             self.assertFalse(
                 pair["internal_visual_review"]["user_approval_implied"]
+            )
+            self.assertEqual(
+                pair["pairwise_full_size_review"]["state"],
+                "needs_rebuild",
             )
 
 

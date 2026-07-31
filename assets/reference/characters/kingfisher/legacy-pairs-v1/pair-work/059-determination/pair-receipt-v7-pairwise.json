@@ -79,7 +79,7 @@
   "resting_sha256": "bb5af96d8eda2b6a1066c7d3caab76d6667cae88d03abbeba7ee1d95fb327e02",
   "runtime_admitted": false,
   "schema_version": 1,
-  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/059-determination/169_ACT169_determination_speaking_beak_alpha.png",
+  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/059-determination/169_ACT169_determination_speaking_beak_candidate_v7_pairwise.png",
   "speaking_sha256": "d89144091dd99f9ad3daf78d2d6163aae05b974df76135345eb5947aac214dcb",
   "upper_beak_policy": "immutable_source_pixels",
   "upper_beak_polygon": [

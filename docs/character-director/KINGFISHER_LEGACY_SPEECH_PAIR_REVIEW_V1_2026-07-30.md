@@ -59,18 +59,37 @@ ACT004 and ACT005 face away from the viewer. They are retained as body poses
 but are recorded as `not_observable`, not as successful visible lip-sync
 pairs.
 
+## Review Authority
+
+The original close-up batch dispositions remain preserved under each row's
+`internal_visual_review` field. They are historical evidence only. They no
+longer authorize a pair for animation because a contact sheet can hide
+mandible thickness, duplicate edges, and hinge drift.
+
+The current authority is `pairwise_full_size_review`, protocol
+`kingfisher-full-size-pairwise-v1`. Each pair must be projected by itself at
+full observer size, switched manually between closed and open, and assigned
+one of four fail-closed states:
+
+- `pending`: not yet inspected under the pairwise protocol;
+- `pass`: visible closed/open anatomy passed;
+- `needs_rebuild`: a named defect blocks the pair;
+- `not_observable`: the authored rear view has no visible mouth to judge.
+
+Changing a pair's state never implies user approval or runtime admission.
+
 ## Review State
 
 The machine-readable authority is:
 
 `assets/reference/characters/kingfisher/legacy-pairs-v1/pair-review-ledger.json`
 
-Current internal review totals:
+Current authoritative pairwise totals:
 
-- pairs reviewed: 66;
-- anatomical passes: 62;
+- full-size anatomical passes: 3;
+- pending full-size reviews: 60;
 - not observable: 2;
-- currently awaiting rebuild: 2;
+- currently awaiting rebuild: 1;
 - user-approved pairs: 0; and
 - runtime-admitted pairs: 0.
 
@@ -80,8 +99,8 @@ The close-up evidence is under:
 
 Pair 59 (`determination`) and pair 62 (`sudden idea`) exposed a limitation in
 the source-pixel hinge experiment. Pair 59's selected source mandible was too
-thin, while pair 62 retained a closed-beak edge behind the rotated layer.
-Both failures remain preserved as rejected evidence.
+thin, while pair 62 retained a closed-beak edge behind the rotated layer. The
+original failures remain preserved as rejected evidence.
 
 Full-size failure evidence is under:
 
@@ -102,15 +121,23 @@ and exact source-upper-beak restoration for pairs whose matched render can be
 reduced to a local jaw patch.
 
 Both candidates were inspected individually at full observer size. That review
-rejected pair 59 because its lower mandible still collapses to a needle-thin
-line, and rejected pair 62 because stacked edges leave its hinge ambiguous.
-Their current failure evidence is under:
+rejected pair 59 because its lower mandible collapsed to a needle-thin line,
+and rejected pair 62 because stacked edges leave its hinge ambiguous. Their
+failure evidence is under:
 
 `assets/reference/characters/kingfisher/legacy-pairs-v1/review-evidence/full-size-failures/`
 
-The generated candidates and deterministic receipts remain preserved, but both
-pairs must be rendered again as independent closed/open units. This remains
-internal anatomical review, not user approval.
+Pair 59 was subsequently rebuilt as one independent pair. A new matched
+speaking render supplied only the lower-mandible pixels. The deterministic
+compositor preserved the canonical head, upper beak, body, and registration;
+enforced a connected minimum-thickness mandible; and horizontally registered
+the mandible to the authored upper-beak tip. The full-size projector review
+then passed the pair. Its evidence is under:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-059/`
+
+Pair 62 remains `needs_rebuild`. This remains internal anatomical review, not
+user approval.
 
 ## Review Projection
 
@@ -141,15 +168,15 @@ checksums, approval state, and runtime admission remain unchanged.
 
 The current content-addressed pair artifact is:
 
-`kingfisher_act_001_066_111_176_pair_review-2e63f2c0b01650a8.wjpose`
+`kingfisher_act_001_066_111_176_pair_review-ef6b3beafb72ab0f.wjpose`
 
 Artifact SHA-256:
 
-`2e63f2c0b01650a88191c363cdb4d46745fdb5592aad55d79554dd0c9bb46f60`
+`ef6b3beafb72ab0f9e1440dae54b702af5c5b62171b32ea9e0e07b199a972d17`
 
 Library-index SHA-256:
 
-`456e22c136dbe03771fca9aa640ac4ee1abf742ec252ffef3c4d3a06ed83a0ea`
+`366a3ac1a17ee62ad6bfbb8cdfca1e5003f5db41d013b8af04daa31a2602db69`
 
 Artifacts are published to content-addressed filenames. A running observer
 continues reading its prior complete file while a new artifact and index are
@@ -181,6 +208,13 @@ Record one internal visual disposition:
 python3 tools/record_kingfisher_pair_visual_review.py --help
 ```
 
+Initialize or record the authoritative full-size pairwise queue:
+
+```bash
+python3 tools/manage_kingfisher_pairwise_review.py initialize --help
+python3 tools/manage_kingfisher_pairwise_review.py record --help
+```
+
 Compile the review-only library:
 
 ```bash
@@ -201,7 +235,7 @@ python3 tools/render_kingfisher_pair_detail_boards.py \
 
 ## Verification
 
-The pair-focused suite passed 34 tests covering:
+The Kingfisher-focused suite passed 63 tests covering:
 
 - deterministic lower-mandible articulation;
 - transparent matched-source loading;
@@ -215,7 +249,11 @@ The pair-focused suite passed 34 tests covering:
 - review-only compilation;
 - interrupted artifact publication;
 - content-addressed artifact naming; and
-- internal visual-review accounting.
+- preserved historical review accounting;
+- fail-closed full-size pairwise queue management;
+- protocol-ID enforcement;
+- viewer disposition presentation; and
+- structured blocked-verification receipts.
 
 The review projection still loads all 176 poses and retains the following
 machine measurements:
@@ -224,16 +262,19 @@ machine measurements:
 - the paired sequence contains exactly 132 alternating closed/open frames;
 - minimum pair silhouette IoU is `0.978551`;
 - maximum registration-bound delta is `1` pixel;
-- 62 visible pairs have passing internal visual dispositions;
+- three visible pairs have passing full-size pairwise dispositions;
+- 60 pairs remain pending full-size review;
+- pair 62 remains an explicit rebuild blocker;
 - two rear-facing pairs are explicitly not observable; and
 - user approval and runtime admission remain zero.
 
 The strict verifier now exits nonzero with
-`pair 59 lacks a passing visual disposition`. The tracked verification receipt
+`pair 3 lacks a passing full-size pairwise disposition`. The tracked
+verification receipt
 records `passed: false` and
-`verification_state: blocked_by_internal_visual_rebuild`. The current ledger
-points pairs 59 and 62 to their full-size failure screenshots and blocks both
-from approval or runtime admission.
+`verification_state: blocked_by_pairwise_full_size_review`. The current ledger
+points every pair to its independent pairwise state and blocks incomplete
+review from approval or runtime admission.
 
 Verification receipt:
 

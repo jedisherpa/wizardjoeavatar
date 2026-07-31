@@ -26,6 +26,13 @@ BASE_POSE_COUNT = 66
 SPEAKING_FIRST_ORDINAL = 111
 SPEAKING_LAST_ORDINAL = 176
 PAIR_REVIEW_SHARD_ID = "kingfisher_act_001_066_111_176_pair_review"
+PAIRWISE_REVIEW_PROTOCOL_ID = "kingfisher-full-size-pairwise-v1"
+PAIRWISE_REVIEW_STATES = {
+    "pending",
+    "pass",
+    "needs_rebuild",
+    "not_observable",
+}
 
 
 def _write_json_atomic(path: Path, value: object) -> None:
@@ -157,6 +164,18 @@ def _load_pair_candidates(
             raise ValueError("pair review compilation cannot imply user approval")
         if pair.get("runtime_admitted") is not False:
             raise ValueError("pair review compilation cannot admit runtime poses")
+        pairwise_review = pair.get("pairwise_full_size_review")
+        if not isinstance(pairwise_review, dict):
+            raise ValueError("pairwise full-size review must be initialized")
+        if pairwise_review.get("protocol_id") != PAIRWISE_REVIEW_PROTOCOL_ID:
+            raise ValueError("pairwise full-size review protocol is invalid")
+        pairwise_state = pairwise_review.get("state")
+        if pairwise_state not in PAIRWISE_REVIEW_STATES:
+            raise ValueError("pairwise full-size review state is invalid")
+        if pairwise_review.get("user_approval_implied") is not False:
+            raise ValueError("pairwise review cannot imply user approval")
+        if pairwise_review.get("runtime_admission_implied") is not False:
+            raise ValueError("pairwise review cannot imply runtime admission")
 
         speaking_ordinal = int(pair["speaking_ordinal"])
         if speaking_ordinal != expected_ordinal:
@@ -218,6 +237,11 @@ def _load_pair_candidates(
                 else audit_path.as_posix(),
                 "audit_sha256": sha256_path(audit_path),
                 "automated_audit_passed": True,
+                "pairwise_full_size_review": {
+                    "protocol_id": pairwise_review.get("protocol_id"),
+                    "state": pairwise_state,
+                    "evidence_path": pairwise_review.get("evidence_path", ""),
+                },
                 "user_approved": False,
                 "runtime_admitted": False,
             }
@@ -277,11 +301,16 @@ def compile_pair_review_library(
         if 67 <= int(pose_id.split(".")[2]) <= 110
     ]
     pose_ids = list(pair_poses) + stage_pose_ids
+    pair_review_states = [
+        str(item["pairwise_full_size_review"]["state"])
+        for item in pair_evidence
+    ]
     sequences = dict(base_library.index.get("sequences", {}))
     sequences["kingfisher-paired-beaks-review"] = {
         "approval_state": "candidate_visual_review",
         "fps": 2,
         "loop": True,
+        "pair_review_states": pair_review_states,
         "pose_ids": alternating_pose_ids,
         "review_projection": True,
         "runtime_admitted": False,
@@ -312,6 +341,20 @@ def compile_pair_review_library(
             if ledger_path.is_relative_to(ROOT)
             else ledger_path.as_posix(),
             "ledger_sha256": sha256_path(ledger_path),
+            "pairwise_full_size_review_summary": {
+                "pending_count": pair_review_states.count("pending"),
+                "pass_count": pair_review_states.count("pass"),
+                "needs_rebuild_count": pair_review_states.count(
+                    "needs_rebuild"
+                ),
+                "not_observable_count": pair_review_states.count(
+                    "not_observable"
+                ),
+                "complete": all(
+                    state in {"pass", "not_observable"}
+                    for state in pair_review_states
+                ),
+            },
             "pairs": pair_evidence,
         },
         "review_projection": True,

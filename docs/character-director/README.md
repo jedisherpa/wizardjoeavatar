@@ -53,6 +53,14 @@ python3 tools/run_character_observer.py \
 - `JOEVILLE_12X48_PARITY_TRACKER_2026-07-25.md`: deterministic census,
   source-conflict decisions, 12-character coverage ledger, and per-slot
   admission gates for the JoeVille sprite archives.
+- `KINGFISHER_STAGE_PERFORMANCE_EXPANSION_V1_2026-07-29.md`: Kingfisher's
+  review-only stage, pacing, speaking, storytelling, and resolution expansion.
+- `KINGFISHER_LEGACY_SPEECH_PAIR_REVIEW_V1_2026-07-30.md`: closed/open beak
+  pair construction, full-size pairwise review protocol, evidence, and
+  fail-closed admission state.
+- `KINGFISHER_PAIRWISE_REVIEW_PROTOCOL_V1_2026-07-31.md`: authoritative
+  one-pair-at-a-time queue, reviewer contract, failure receipts, and current
+  pair dispositions.
 - `reports/README.md`: specialist reports and ownership map.
 - `PHASE0_TRACKER.md`: accountable design and implementation gates.
 - `PHASE0_SYNTHESIS.md`: binding cross-repository architecture.

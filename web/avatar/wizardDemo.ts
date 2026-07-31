@@ -290,6 +290,13 @@ async function start() {
       document.body.dataset.hdReviewStep = "load-pair";
       const canvasElement = document.getElementById("wizard-canvas");
       const pairCount = sequence.pose_ids.length / 2;
+      const pairReviewStates = sequence.pair_review_states;
+      if (
+        !Array.isArray(pairReviewStates)
+        || pairReviewStates.length !== pairCount
+      ) {
+        throw new Error("HD pair-review dispositions must match pair count");
+      }
       const requestedPair = Number.parseInt(params.get("pair") || "1", 10);
       let pairIndex = Number.isInteger(requestedPair)
         ? Math.max(0, Math.min(pairCount - 1, requestedPair - 1))
@@ -345,10 +352,12 @@ async function start() {
           .replace(/[._-]+/g, " ");
       };
       const updateControls = () => {
-        label.textContent = `${pairIndex + 1} / ${pairCount} · ${readablePairName()} · ${stateIndex ? "open" : "closed"}`;
+        const disposition = pairReviewStates[pairIndex];
+        label.textContent = `${pairIndex + 1} / ${pairCount} · ${readablePairName()} · ${stateIndex ? "open" : "closed"} · ${disposition.replaceAll("_", " ")}`;
         document.body.dataset.hdPairReview = pairReviewSequence;
         document.body.dataset.hdPairNumber = String(pairIndex + 1);
         document.body.dataset.hdPairState = stateIndex ? "open" : "closed";
+        document.body.dataset.hdPairDisposition = disposition;
         document.body.dataset.hdPairPlaying = String(playing);
         playButton.textContent = playing ? "❚❚" : "▶";
         playButton.title = playing ? "Pause pair" : "Play pair";
@@ -448,6 +457,7 @@ async function start() {
         pairNumber: pairIndex + 1,
         pairCount,
         state: stateIndex ? "open" : "closed",
+        disposition: pairReviewStates[pairIndex],
         poseId: pairPoseId(),
         framesDrawn,
         frameFailures,
