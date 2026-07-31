@@ -1,5 +1,5 @@
 {
-  "changed_rendered_pixels": 1347,
+  "changed_rendered_pixels": 2783,
   "checks": {
     "bounded_articulation_change": true,
     "outside_mouth_stability": true,
@@ -7,12 +7,12 @@
     "stable_registration_bounds": true,
     "visible_mouth_change": true
   },
-  "mouth_mean_abs": 18.237831,
+  "mouth_mean_abs": 14.824,
   "mouth_region": [
-    481,
-    220,
-    541,
-    262
+    470,
+    195,
+    570,
+    270
   ],
   "outside_mouth_mean_abs": 0.0,
   "passed": true,
@@ -26,7 +26,7 @@
   ],
   "resting_sha256": "b23cfeb22db0057cc9c82dd56bae46a0da860f7ebb020ee069ffa1466c5a9b2a",
   "schema_version": 2,
-  "silhouette_iou": 0.997701,
+  "silhouette_iou": 0.99334,
   "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/062-sudden-idea/172_ACT172_sudden_idea_speaking_beak_alpha.png",
   "speaking_registration_bbox": [
     318,
@@ -34,5 +34,5 @@
     642,
     529
   ],
-  "speaking_sha256": "2807967dd1dfcbf8919540092afd8f60abdb31b90b5bf6b145bf6eb1f6399363"
+  "speaking_sha256": "716967772d3ba87f623f402dfe63aad82c15f9aaa2f49b9e1e7bae6ed6def4c7"
 }

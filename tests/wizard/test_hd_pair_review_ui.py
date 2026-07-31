@@ -46,7 +46,7 @@ class HdPairReviewUiTests(unittest.TestCase):
         self.assertIn("right: 8px;", styles)
         self.assertIn("minmax(0, 1fr)", styles)
 
-    def test_visible_failures_remain_review_only_and_blocked(self):
+    def test_failed_pairs_remain_review_only_and_blocked(self):
         ledger = json.loads(LEDGER_PATH.read_text(encoding="utf-8"))
         by_ordinal = {
             int(pair["ordinal"]): pair
@@ -57,6 +57,10 @@ class HdPairReviewUiTests(unittest.TestCase):
             self.assertEqual(
                 pair["internal_visual_review"]["state"],
                 "needs_rebuild",
+            )
+            self.assertIn(
+                "review-evidence/full-size-failures/",
+                pair["internal_visual_review"]["evidence_path"],
             )
             self.assertFalse(pair["runtime_admitted"])
             self.assertFalse(pair["user_approved"])

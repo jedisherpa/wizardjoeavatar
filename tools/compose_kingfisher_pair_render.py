@@ -131,6 +131,17 @@ def _binary_alpha(image: Image.Image) -> Image.Image:
     return output
 
 
+def load_render_alpha(path: Path) -> Image.Image:
+    """Load a transparent matched render or extract alpha from a matte."""
+    with Image.open(path) as loaded:
+        if "A" in loaded.getbands():
+            rgba = loaded.convert("RGBA")
+            alpha_minimum, alpha_maximum = rgba.getchannel("A").getextrema()
+            if alpha_minimum < alpha_maximum:
+                return _binary_alpha(rgba)
+        return extract_light_background_alpha(loaded.convert("RGB"))
+
+
 def compose_pair(
     resting_path: Path,
     generated_path: Path,
@@ -148,7 +159,6 @@ def compose_pair(
     output_role: str = "speaking",
 ) -> dict[str, object]:
     resting = Image.open(resting_path).convert("RGBA")
-    generated_source = Image.open(generated_path).convert("RGB")
     if resting.size != CANVAS_SIZE:
         raise ValueError("canonical Kingfisher frame must use 960 x 540")
     if scale <= 0:
@@ -179,7 +189,7 @@ def compose_pair(
         ):
             raise ValueError("cavity polygon must remain inside the canvas")
 
-    generated = extract_light_background_alpha(generated_source)
+    generated = load_render_alpha(generated_path)
     target_size = (
         max(1, round(generated.width * effective_scale_x)),
         max(1, round(generated.height * effective_scale_y)),

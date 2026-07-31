@@ -78,16 +78,39 @@ The close-up evidence is under:
 
 `assets/reference/characters/kingfisher/legacy-pairs-v1/review-evidence/detail-boards/`
 
-Pair 59 (`determination`) and pair 62 (`sudden idea`) were rebuilt from their
-original lower-mandible pixels at a -14 degree hinge rotation. Full-size
-one-pair review then rejected both replacements: pair 59 still has a detached,
-underweight lower mandible, and pair 62 still has a duplicate edge with an
-unclear hinge. Their generated and hinge-rebuilt candidates remain in the
-corresponding `pair-work` folders as rejected evidence.
+Pair 59 (`determination`) and pair 62 (`sudden idea`) exposed a limitation in
+the source-pixel hinge experiment. Pair 59's selected source mandible was too
+thin, while pair 62 retained a closed-beak edge behind the rotated layer.
+Both failures remain preserved as rejected evidence.
 
 Full-size failure evidence is under:
 
 `assets/reference/characters/kingfisher/legacy-pairs-v1/review-evidence/full-size-failures/`
+
+The replacement workflow then handled each pose as an independent pair:
+
+- pair 59 uses its own aligned matched render inside one bounded articulation
+  polygon, preserving every source pixel outside the mouth region; and
+- pair 62 promotes its previously rendered, body-locked matched alpha as an
+  explicit source artifact and deterministically re-composites only its
+  articulation region.
+
+The compositor now accepts transparent matched alpha sources directly. A
+separate lower-mandible patch tool also enforces minimum thickness,
+single-component connectivity, hinge contact, optional residual-edge clearing,
+and exact source-upper-beak restoration for pairs whose matched render can be
+reduced to a local jaw patch.
+
+Both candidates were inspected individually at full observer size. That review
+rejected pair 59 because its lower mandible still collapses to a needle-thin
+line, and rejected pair 62 because stacked edges leave its hinge ambiguous.
+Their current failure evidence is under:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/review-evidence/full-size-failures/`
+
+The generated candidates and deterministic receipts remain preserved, but both
+pairs must be rendered again as independent closed/open units. This remains
+internal anatomical review, not user approval.
 
 ## Review Projection
 
@@ -118,15 +141,15 @@ checksums, approval state, and runtime admission remain unchanged.
 
 The current content-addressed pair artifact is:
 
-`kingfisher_act_001_066_111_176_pair_review-6ecc7f1356cecf46.wjpose`
+`kingfisher_act_001_066_111_176_pair_review-2e63f2c0b01650a8.wjpose`
 
 Artifact SHA-256:
 
-`6ecc7f1356cecf46340e4b19eff4baf5dcd29c002cfc28a779c5d3cd42a505c4`
+`2e63f2c0b01650a88191c363cdb4d46745fdb5592aad55d79554dd0c9bb46f60`
 
 Library-index SHA-256:
 
-`5e5c428d5561cba95b14bf49ea2a073b041ae13c63f44938c614bffe85dc0237`
+`456e22c136dbe03771fca9aa640ac4ee1abf742ec252ffef3c4d3a06ed83a0ea`
 
 Artifacts are published to content-addressed filenames. A running observer
 continues reading its prior complete file while a new artifact and index are
@@ -144,6 +167,12 @@ Reconstruct one failed lower mandible:
 
 ```bash
 python3 tools/articulate_kingfisher_lower_mandible.py --help
+```
+
+Composite one connected, thickness-gated lower-mandible patch:
+
+```bash
+python3 tools/compose_kingfisher_pair_mandible_patch.py --help
 ```
 
 Record one internal visual disposition:
@@ -172,9 +201,13 @@ python3 tools/render_kingfisher_pair_detail_boards.py \
 
 ## Verification
 
-The focused suite passed 33 tests covering:
+The pair-focused suite passed 34 tests covering:
 
 - deterministic lower-mandible articulation;
+- transparent matched-source loading;
+- connected, minimum-thickness mandible extraction;
+- hinge-contact and detached-geometry rejection;
+- residual closed-edge clearing;
 - immutable upper-beak construction;
 - pair receipt and checksum enforcement;
 - pair reconstruction and stabilization;
@@ -184,21 +217,23 @@ The focused suite passed 33 tests covering:
 - content-addressed artifact naming; and
 - internal visual-review accounting.
 
-Before the full-size rejection pass, the machine verifier loaded all 176
-review poses and confirmed:
+The review projection still loads all 176 poses and retains the following
+machine measurements:
 
 - 176 of 176 poses use 960 x 540 binary-alpha frames;
 - the paired sequence contains exactly 132 alternating closed/open frames;
 - minimum pair silhouette IoU is `0.978551`;
 - maximum registration-bound delta is `1` pixel;
-- 64 visible pairs had passing internal visual dispositions;
+- 62 visible pairs have passing internal visual dispositions;
 - two rear-facing pairs are explicitly not observable; and
 - user approval and runtime admission remain zero.
 
-That receipt is retained as historical evidence, but it is superseded for
-visual disposition by the current ledger. The ledger now blocks pairs 59 and
-62 from compilation or admission until each is remade and reviewed as its own
-closed/open unit.
+The strict verifier now exits nonzero with
+`pair 59 lacks a passing visual disposition`. The tracked verification receipt
+records `passed: false` and
+`verification_state: blocked_by_internal_visual_rebuild`. The current ledger
+points pairs 59 and 62 to their full-size failure screenshots and blocks both
+from approval or runtime admission.
 
 Verification receipt:
 

@@ -1,89 +1,63 @@
 {
+  "alignment": {
+    "interpolation": "lanczos_rgb_binary_alpha",
+    "scale": 0.56,
+    "scale_x": 0.56,
+    "scale_y": 0.56,
+    "translate_x": -5,
+    "translate_y": 39
+  },
   "approval_state": "candidate_visual_review",
+  "articulation_bbox": [
+    530,
+    210,
+    693,
+    281
+  ],
+  "articulation_polygon": [
+    [
+      530,
+      210
+    ],
+    [
+      690,
+      214
+    ],
+    [
+      692,
+      280
+    ],
+    [
+      553,
+      269
+    ],
+    [
+      530,
+      253
+    ]
+  ],
   "canvas": [
     960,
     540
   ],
-  "cavity_fill_rgba": [
-    12,
-    9,
-    12,
-    255
-  ],
-  "cavity_polygon": [
-    [
-      558,
-      242
-    ],
-    [
-      682,
-      257
-    ],
-    [
-      675,
-      269
-    ],
-    [
-      568,
-      259
-    ]
-  ],
+  "cavity_fill_mode": null,
+  "cavity_fill_rgba": null,
+  "cavity_polygon": null,
   "changed_bbox": [
-    558,
-    242,
+    530,
+    210,
     683,
-    288
+    276
   ],
-  "changed_pixels": 2265,
-  "hinge": [
-    560,
-    245
-  ],
-  "mandible_polygon": [
-    [
-      558,
-      244
-    ],
-    [
-      682,
-      257
-    ],
-    [
-      568,
-      258
-    ]
-  ],
-  "method": "rotate_original_lower_mandible_about_declared_hinge_v1",
-  "resting_path": "/Users/paul/Library/Caches/WizardJoe/git-repair-liana-normalization/assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/059-determination/059_ACT059_determination_resting_beak_alpha.png",
+  "generated_render_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/059-determination/169_ACT169_determination_speaking_beak_render_raw.png",
+  "generated_render_sha256": "afa25041c0cef93a684f29dda8e6288de840191e706fd62d5ebd030dcc968296",
+  "method": "pose_specific_render_local_articulation_composite_v1",
+  "output_role": "speaking",
+  "outside_articulation_change": false,
+  "resting_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/059-determination/059_ACT059_determination_resting_beak_alpha.png",
   "resting_sha256": "bb5af96d8eda2b6a1066c7d3caab76d6667cae88d03abbeba7ee1d95fb327e02",
-  "rotation_degrees": -14.0,
   "runtime_admitted": false,
   "schema_version": 1,
-  "speaking_path": "/Users/paul/Library/Caches/WizardJoe/git-repair-liana-normalization/assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/059-determination/169_ACT169_determination_speaking_beak_alpha.png",
-  "speaking_sha256": "9694880f77f3387ec0184d647a332d7af26449657f817b57bede9776cc48894d",
-  "tongue_fill_rgba": [
-    116,
-    42,
-    42,
-    255
-  ],
-  "tongue_polygon": [
-    [
-      568,
-      250
-    ],
-    [
-      630,
-      256
-    ],
-    [
-      615,
-      264
-    ],
-    [
-      575,
-      258
-    ]
-  ],
-  "upper_beak_policy": "immutable_source_pixels"
+  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/059-determination/169_ACT169_determination_speaking_beak_alpha.png",
+  "speaking_sha256": "d2670b3eb5e5964f8af43a084ccae558fc111aebd204859f9aca5ea75f1139fe"
 }

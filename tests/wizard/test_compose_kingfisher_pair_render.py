@@ -9,6 +9,7 @@ from tools.compose_kingfisher_pair_render import (
     CANVAS_SIZE,
     compose_pair,
     extract_light_background_alpha,
+    load_render_alpha,
 )
 
 
@@ -49,6 +50,21 @@ class ComposeKingfisherPairRenderTests(unittest.TestCase):
         self.assertEqual(result.getpixel((10, 10))[3], 0)
         self.assertEqual(result.getpixel((11, 10))[3], 255)
         self.assertEqual(result.getpixel((5, 5))[3], 255)
+
+    def test_transparent_matched_render_preserves_its_alpha(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            source_path = Path(temporary) / "matched.png"
+            source = Image.new("RGBA", (20, 20), (0, 0, 0, 0))
+            ImageDraw.Draw(source).rectangle(
+                (5, 5, 14, 14),
+                fill=(20, 30, 40, 255),
+            )
+            source.save(source_path)
+
+            result = load_render_alpha(source_path)
+
+            self.assertEqual(result.getpixel((0, 0))[3], 0)
+            self.assertEqual(result.getpixel((10, 10)), (20, 30, 40, 255))
 
     def test_composite_changes_only_the_declared_polygon(self):
         with tempfile.TemporaryDirectory() as temporary:

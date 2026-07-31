@@ -1542,12 +1542,12 @@
       "body_pose_id": "kingfisher.act.059.determination",
       "internal_visual_review": {
         "defect_codes": [
-          "detached_lower_mandible",
-          "insufficient_mandible_thickness"
+          "insufficient_mandible_thickness",
+          "lower_mandible_silhouette_misaligned"
         ],
-        "evidence_path": "review-evidence/full-size-failures/pair-059-determination-open-needs-rebuild.png",
-        "note": "Full-size pair review shows the lower mandible as a detached needle-thin line rather than a connected anatomical beak; the pair-specific hinge rebuild is rejected.",
-        "reviewed_at": "2026-07-31T02:37:18.904994+00:00",
+        "evidence_path": "review-evidence/full-size-failures/pair-059-determination-open-needs-rebuild-v2.png",
+        "note": "Full-size one-pair review rejects this candidate: the lower mandible collapses to a needle-thin line and does not read as a coherent anatomical beak. Re-render this closed/open pair independently.",
+        "reviewed_at": "2026-07-31T05:04:27.848944+00:00",
         "reviewer": "codex-full-size-pair-review",
         "runtime_admission_implied": false,
         "schema_version": 1,
@@ -1626,9 +1626,9 @@
           "duplicate_beak_edge",
           "hinge_geometry_misaligned"
         ],
-        "evidence_path": "review-evidence/full-size-failures/pair-062-sudden-idea-open-needs-rebuild.png",
-        "note": "Full-size pair review shows a stacked duplicate beak edge and an unclear single hinge; the pair-specific hinge rebuild is rejected pending a new closed/open render pair.",
-        "reviewed_at": "2026-07-31T02:37:52.964517+00:00",
+        "evidence_path": "review-evidence/full-size-failures/pair-062-sudden-idea-open-needs-rebuild-v2.png",
+        "note": "Full-size one-pair review rejects this candidate: stacked beak edges make the hinge and lower mandible ambiguous. Re-render this closed/open pair independently.",
+        "reviewed_at": "2026-07-31T05:04:27.886494+00:00",
         "reviewer": "codex-full-size-pair-review",
         "runtime_admission_implied": false,
         "schema_version": 1,

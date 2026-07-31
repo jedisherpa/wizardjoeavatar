@@ -1,0 +1,189 @@
+import tempfile
+import unittest
+from pathlib import Path
+
+from PIL import Image, ImageDraw
+
+from tools.compose_kingfisher_pair_mandible_patch import (
+    compose_mandible_patch,
+)
+from tools.compose_kingfisher_pair_render import CANVAS_SIZE
+
+
+class ComposeKingfisherPairMandiblePatchTests(unittest.TestCase):
+    def _sources(self, root: Path, *, detached: bool = False) -> tuple[Path, Path]:
+        resting_path = root / "resting.png"
+        generated_path = root / "generated.png"
+        resting = Image.new("RGBA", CANVAS_SIZE, (0, 0, 0, 0))
+        draw = ImageDraw.Draw(resting)
+        draw.rectangle((400, 200, 560, 500), fill=(20, 30, 40, 255))
+        draw.polygon(
+            [(470, 240), (550, 230), (480, 250)],
+            fill=(40, 45, 50, 255),
+        )
+        resting.save(resting_path)
+
+        generated = Image.new("RGB", CANVAS_SIZE, (0, 255, 0))
+        draw = ImageDraw.Draw(generated)
+        draw.rectangle((400, 200, 560, 500), fill=(20, 30, 40))
+        draw.polygon(
+            [(470, 252), (548, 254), (480, 268)],
+            fill=(60, 65, 70),
+        )
+        if detached:
+            draw.rectangle((520, 264, 530, 270), fill=(60, 65, 70))
+        generated.save(generated_path)
+        return resting_path, generated_path
+
+    def test_composites_connected_mandible_and_preserves_upper_beak(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            resting_path, generated_path = self._sources(root)
+            output_path = root / "output.png"
+            receipt = compose_mandible_patch(
+                resting_path,
+                generated_path,
+                output_path,
+                root / "receipt.json",
+                scale=1,
+                translate_x=0,
+                translate_y=0,
+                mandible_polygon=[
+                    (468, 248),
+                    (552, 248),
+                    (552, 272),
+                    (468, 272),
+                ],
+                cavity_polygon=[
+                    (468, 238),
+                    (552, 230),
+                    (548, 258),
+                    (470, 258),
+                ],
+                upper_beak_polygon=[
+                    (468, 228),
+                    (552, 225),
+                    (552, 250),
+                    (468, 250),
+                ],
+                hinge=(473, 255),
+                minimum_mandible_height=10,
+            )
+
+            resting = Image.open(resting_path).convert("RGBA")
+            output = Image.open(output_path).convert("RGBA")
+            self.assertEqual(output.getpixel((500, 240)), resting.getpixel((500, 240)))
+            self.assertNotEqual(output.getpixel((500, 260)), resting.getpixel((500, 260)))
+            self.assertFalse(receipt["outside_articulation_change"])
+            self.assertEqual(receipt["upper_beak_policy"], "immutable_source_pixels")
+            self.assertGreaterEqual(receipt["mandible_connected_ratio"], 0.9)
+
+    def test_clears_declared_residual_edge_before_compositing(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            resting_path, generated_path = self._sources(root)
+            resting = Image.open(resting_path).convert("RGBA")
+            ImageDraw.Draw(resting).line(
+                (548, 260, 570, 270),
+                fill=(245, 245, 245, 255),
+                width=2,
+            )
+            resting.save(resting_path)
+            output_path = root / "output.png"
+            receipt = compose_mandible_patch(
+                resting_path,
+                generated_path,
+                output_path,
+                root / "receipt.json",
+                scale=1,
+                translate_x=0,
+                translate_y=0,
+                mandible_polygon=[
+                    (468, 248),
+                    (552, 248),
+                    (552, 272),
+                    (468, 272),
+                ],
+                cavity_polygon=[
+                    (468, 238),
+                    (552, 230),
+                    (548, 258),
+                    (470, 258),
+                ],
+                upper_beak_polygon=[
+                    (468, 228),
+                    (552, 225),
+                    (552, 250),
+                    (468, 250),
+                ],
+                residual_clear_polygon=[
+                    (548, 258),
+                    (574, 268),
+                    (572, 275),
+                    (548, 266),
+                ],
+                hinge=(473, 255),
+                minimum_mandible_height=10,
+            )
+
+            output = Image.open(output_path).convert("RGBA")
+            self.assertEqual(output.getpixel((565, 269))[3], 0)
+            self.assertEqual(
+                receipt["residual_clear_polygon"],
+                [[548, 258], [574, 268], [572, 275], [548, 266]],
+            )
+
+    def test_rejects_underweight_mandible(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            resting_path, generated_path = self._sources(root)
+            with self.assertRaisesRegex(ValueError, "too thin"):
+                compose_mandible_patch(
+                    resting_path,
+                    generated_path,
+                    root / "output.png",
+                    root / "receipt.json",
+                    scale=1,
+                    translate_x=0,
+                    translate_y=0,
+                    mandible_polygon=[
+                        (468, 252),
+                        (552, 252),
+                        (552, 257),
+                        (468, 257),
+                    ],
+                    cavity_polygon=[(468, 240), (552, 235), (480, 260)],
+                    upper_beak_polygon=[(468, 228), (552, 225), (480, 250)],
+                    hinge=(473, 254),
+                    minimum_mandible_height=10,
+                )
+
+    def test_rejects_mandible_that_misses_hinge(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            resting_path, generated_path = self._sources(root)
+            with self.assertRaisesRegex(ValueError, "connect to the hinge"):
+                compose_mandible_patch(
+                    resting_path,
+                    generated_path,
+                    root / "output.png",
+                    root / "receipt.json",
+                    scale=1,
+                    translate_x=0,
+                    translate_y=0,
+                    mandible_polygon=[
+                        (500, 248),
+                        (552, 248),
+                        (552, 272),
+                        (500, 272),
+                    ],
+                    cavity_polygon=[(468, 240), (552, 235), (480, 260)],
+                    upper_beak_polygon=[(468, 228), (552, 225), (480, 250)],
+                    hinge=(473, 254),
+                    hinge_radius=4,
+                    minimum_mandible_height=10,
+                )
+
+
+if __name__ == "__main__":
+    unittest.main()

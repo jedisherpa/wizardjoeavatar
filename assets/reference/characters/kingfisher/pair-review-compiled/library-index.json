@@ -14,7 +14,7 @@
   "legacy_pair_review": {
     "approval_state": "candidate_visual_review",
     "ledger_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-review-ledger.json",
-    "ledger_sha256": "2ef669394c6d1bce517620aac81b18e6fc03b59bb744d5423e37f66ffcdb335a",
+    "ledger_sha256": "5dd63a7d359df6141d73b4e4235f9a497429122341f0e307a5aeec12e751bb71",
     "pair_count": 66,
     "pairs": [
       {
@@ -889,17 +889,17 @@
       },
       {
         "audit_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/059-determination/pair-audit.json",
-        "audit_sha256": "70b604063e19a202950d30ccb1319fcaeaf29094f03db3af664171d10cbd99a3",
+        "audit_sha256": "887b60629c8d1b76332a66293960ea0580bacdb06c9085eb2c11e06353cfa914",
         "automated_audit_passed": true,
         "ordinal": 59,
         "receipt_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/059-determination/pair-receipt.json",
-        "receipt_sha256": "9e973bc61b97c263e69536f9a812010ffd66d711224b28b5173ecfc121619871",
+        "receipt_sha256": "f5f655432fee3c25d8a3e6d18d902eabc409127662e7e3d1efa9efb4732cf10f",
         "resting_pose_id": "kingfisher.act.059.determination",
         "resting_sha256": "bb5af96d8eda2b6a1066c7d3caab76d6667cae88d03abbeba7ee1d95fb327e02",
         "runtime_admitted": false,
         "speaking_ordinal": 169,
         "speaking_pose_id": "kingfisher.act.169.determination-speaking-beak",
-        "speaking_sha256": "9694880f77f3387ec0184d647a332d7af26449657f817b57bede9776cc48894d",
+        "speaking_sha256": "d2670b3eb5e5964f8af43a084ccae558fc111aebd204859f9aca5ea75f1139fe",
         "user_approved": false
       },
       {
@@ -934,17 +934,17 @@
       },
       {
         "audit_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/062-sudden-idea/pair-audit.json",
-        "audit_sha256": "f3648b92e9ba4770720c779a36c0fd2841751ea435e0197f77d550abc4e3c8ed",
+        "audit_sha256": "ff4ac7d4a23c0080e04ae80c4d79d1a82b8f9e797d465007727eaa631895077a",
         "automated_audit_passed": true,
         "ordinal": 62,
         "receipt_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/062-sudden-idea/pair-receipt.json",
-        "receipt_sha256": "b45d169d912b958514866b2b3bbb3740956968bcba77c442cbdec1bff7e8c43f",
+        "receipt_sha256": "5bc1a3f43dad4b4822a25e8ee88cc31a98bec212a2b3c1f6235adb25fa0ec1d5",
         "resting_pose_id": "kingfisher.act.062.sudden-idea",
         "resting_sha256": "b23cfeb22db0057cc9c82dd56bae46a0da860f7ebb020ee069ffa1466c5a9b2a",
         "runtime_admitted": false,
         "speaking_ordinal": 172,
         "speaking_pose_id": "kingfisher.act.172.sudden-idea-speaking-beak",
-        "speaking_sha256": "2807967dd1dfcbf8919540092afd8f60abdb31b90b5bf6b145bf6eb1f6399363",
+        "speaking_sha256": "716967772d3ba87f623f402dfe63aad82c15f9aaa2f49b9e1e7bae6ed6def4c7",
         "user_approved": false
       },
       {
@@ -1880,8 +1880,8 @@
     },
     {
       "approval_state": "candidate_visual_review",
-      "bytes": 28595329,
-      "path": "kingfisher_act_001_066_111_176_pair_review-6ecc7f1356cecf46.wjpose",
+      "bytes": 28597600,
+      "path": "kingfisher_act_001_066_111_176_pair_review-2e63f2c0b01650a8.wjpose",
       "pose_count": 132,
       "pose_ids": [
         "kingfisher.act.001.neutral-front",
@@ -2019,7 +2019,7 @@
       ],
       "review_projection": true,
       "runtime_admitted": false,
-      "sha256": "6ecc7f1356cecf46340e4b19eff4baf5dcd29c002cfc28a779c5d3cd42a505c4",
+      "sha256": "2e63f2c0b01650a88191c363cdb4d46745fdb5592aad55d79554dd0c9bb46f60",
       "shard_id": "kingfisher_act_001_066_111_176_pair_review",
       "source": "kingfisher_pair_specific_beak_review_v1"
     }
