@@ -33,6 +33,80 @@ PAIRWISE_REVIEW_STATES = {
     "needs_rebuild",
     "not_observable",
 }
+PAIR_SPECIFIC_PATCH_REQUIRED_FROM_ORDINAL = 31
+
+
+def require_pair_specific_pass_receipt(
+    pair: dict[str, object],
+    receipt: dict[str, object],
+) -> None:
+    """Require anatomical patch evidence before a new pair can pass review."""
+
+    review = pair.get("pairwise_full_size_review", {})
+    if (
+        not isinstance(review, dict)
+        or review.get("state") != "pass"
+        or int(pair.get("ordinal", 0)) < PAIR_SPECIFIC_PATCH_REQUIRED_FROM_ORDINAL
+    ):
+        return
+    if receipt.get("method") != "pair_specific_connected_mandible_patch_v1":
+        raise ValueError("passing pair requires a pair-specific mandible patch")
+    if receipt.get("upper_beak_policy") != "immutable_source_pixels":
+        raise ValueError("passing pair must preserve immutable upper-beak pixels")
+    if receipt.get("outside_articulation_change") is not False:
+        raise ValueError("passing pair changed pixels outside articulation masks")
+
+    hinge = receipt.get("hinge")
+    if (
+        not isinstance(hinge, list)
+        or len(hinge) != 2
+        or any(isinstance(value, bool) or not isinstance(value, int) for value in hinge)
+    ):
+        raise ValueError("passing pair requires one declared integer hinge")
+    for field in ("mandible_polygon", "cavity_polygon", "upper_beak_polygon"):
+        polygon = receipt.get(field)
+        if (
+            not isinstance(polygon, list)
+            or len(polygon) < 3
+            or any(
+                not isinstance(point, list)
+                or len(point) != 2
+                or any(
+                    isinstance(value, bool) or not isinstance(value, int)
+                    for value in point
+                )
+                for point in polygon
+            )
+        ):
+            raise ValueError(f"passing pair requires a valid {field}")
+
+    minimum_ratio = receipt.get("minimum_connected_ratio")
+    connected_ratio = receipt.get("mandible_connected_ratio")
+    if (
+        isinstance(minimum_ratio, bool)
+        or not isinstance(minimum_ratio, (int, float))
+        or minimum_ratio < 0.8
+        or isinstance(connected_ratio, bool)
+        or not isinstance(connected_ratio, (int, float))
+        or connected_ratio < minimum_ratio
+    ):
+        raise ValueError("passing pair requires one connected lower mandible")
+
+    minimum_height = receipt.get("minimum_mandible_height")
+    mandible_bbox = receipt.get("mandible_bbox")
+    if (
+        isinstance(minimum_height, bool)
+        or not isinstance(minimum_height, int)
+        or minimum_height < 8
+        or not isinstance(mandible_bbox, list)
+        or len(mandible_bbox) != 4
+        or any(
+            isinstance(value, bool) or not isinstance(value, int)
+            for value in mandible_bbox
+        )
+        or mandible_bbox[3] - mandible_bbox[1] < minimum_height
+    ):
+        raise ValueError("passing pair requires a substantial lower mandible")
 
 
 def _write_json_atomic(path: Path, value: object) -> None:
@@ -189,6 +263,7 @@ def _load_pair_candidates(
         audit_path = _evidence_path(pair["audit_path"], ledger_root)
         receipt = json.loads(receipt_path.read_text(encoding="utf-8"))
         audit = json.loads(audit_path.read_text(encoding="utf-8"))
+        require_pair_specific_pass_receipt(pair, receipt)
         if receipt.get("approval_state") != "candidate_visual_review":
             raise ValueError("pair receipt must remain candidate_visual_review")
         if receipt.get("runtime_admitted") is not False:

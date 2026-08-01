@@ -91,7 +91,7 @@
   "resting_sha256": "8f6b88528933c066e14a7b61ee786f60973de3194f23b3e4bb082cf9a769a8b3",
   "runtime_admitted": false,
   "schema_version": 1,
-  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/031-compare-two-options/141_ACT141_compare_two_options_speaking_beak_alpha.png",
+  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/031-compare-two-options/141_ACT141_compare_two_options_speaking_beak_candidate_v3.png",
   "speaking_sha256": "27d85e49f730357b82f5851684dcf801c8c25c6cd9ec5213ec2821937dccb54f",
   "upper_beak_policy": "immutable_source_pixels",
   "upper_beak_polygon": [

@@ -56,8 +56,8 @@ passing does not substitute for visual review.
 ## Current Queue
 
 - pair count: 66;
-- pairwise passes: 28 (pairs 1-3, 6-29, and rebuilt 59);
-- pending: 35;
+- pairwise passes: 29 (pairs 1-3, 6-30, and rebuilt 59);
+- pending: 34;
 - needs rebuild: 1 (pair 62);
 - not observable: 2 (pairs 4 and 5);
 - user approved: 0;
@@ -105,6 +105,21 @@ bill change from the body-registered source. All three final audits report
 outside-mouth mean difference 0.0, silhouette IoU 1.0, and registration delta
 0.
 
+Pair 30 was inspected as an isolated closed/open projector pair and passed with
+one stable rear hinge, body registration, upper-bill axis, eyes, and silhouette
+bounds. Pair 31's prior speaking candidate was rejected because its bill axis
+and tip did not register cleanly to the closed master. Its replacement was
+rendered as one isolated pair on a chroma field, then reduced to a connected
+lower-mandible patch. The compositor restored the closed frame's upper bill and
+all non-mouth pixels exactly. Pair 31 remains pending for full-size review.
+
+Beginning with pair 31, the compiler and final verifier reject a `pass` unless
+the pair receipt proves `pair_specific_connected_mandible_patch_v1`, an integer
+rear hinge, a substantial connected mandible, explicit mouth/upper-bill masks,
+no changes outside those masks, and `immutable_source_pixels` for the upper
+bill. This prevents a generous mouth rectangle from accepting a translated or
+duplicated beak.
+
 Evidence:
 
 `assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/`
@@ -131,7 +146,7 @@ pairwise disposition. Direct pair selection uses `&pair=N`.
 
 Focused queue/compiler/viewer/compositor tests: 19 passed.
 
-Complete Kingfisher-focused tests: 59 passed.
+Complete Kingfisher-focused tests: 64 passed.
 
 The strict verifier intentionally exits nonzero until all observable pairs
 pass and all rear views are explicitly `not_observable`. It writes a structured
@@ -141,18 +156,18 @@ failure receipt even while blocked:
 
 Current blocker:
 
-`pair 30 lacks a passing full-size pairwise disposition`
+`pair 31 lacks a passing full-size pairwise disposition`
 
 Current review artifact:
 
-`kingfisher_act_001_066_111_176_pair_review-3f4b67151d7751eb.wjpose`
+`kingfisher_act_001_066_111_176_pair_review-1a81780bf28a513c.wjpose`
 
 Artifact SHA-256:
 
-`3f4b67151d7751eb81ea51ba37332d42d463bd97a3a3b6503cb9583aced9ade1`
+`1a81780bf28a513c2fc68ebd88b48fffcbde7536c799cc1cbb879cb65d655632`
 
 Library-index SHA-256:
 
-`d0ea8e7e42b14bba0c3a4c5dd1a72014f840e3a5f9d021a30c9c62494e8d5180`
+`c5888df659b6765a3fbfa2d4fc61871428a5155ebcdf5ed622e722fc92d7e776`
 
 This failure is expected and proves the queue is fail-closed.

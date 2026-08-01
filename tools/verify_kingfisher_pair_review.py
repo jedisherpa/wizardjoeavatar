@@ -14,6 +14,9 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from wizard_avatar.hd_pose_artifact import HDPoseLibrary, sha256_path  # noqa: E402
+from tools.compile_kingfisher_pair_review_library import (  # noqa: E402
+    require_pair_specific_pass_receipt,
+)
 
 PAIR_COUNT = 66
 PAIR_SEQUENCE = "kingfisher-paired-beaks-review"
@@ -153,6 +156,7 @@ def verify_pair_review(
         audit_path = _evidence_path(pair["audit_path"], ledger_root)
         receipt = json.loads(receipt_path.read_text(encoding="utf-8"))
         audit = json.loads(audit_path.read_text(encoding="utf-8"))
+        require_pair_specific_pass_receipt(pair, receipt)
         if audit.get("passed") is not True:
             raise ValueError(f"pair audit failed: {pair['ordinal']}")
         for field in ("resting", "speaking"):

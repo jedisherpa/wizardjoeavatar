@@ -88,11 +88,23 @@ class CompileKingfisherPairReviewLibraryTests(unittest.TestCase):
             speaking_path = work / "speaking.png"
             poses[resting_pose_id].save(resting_path)
             speaking = poses[resting_pose_id].copy()
-            speaking.paste((5, 8, 12, 255), (13, 9, 19, 12))
+            speaking.paste((5, 8, 12, 255), (13, 9, 19, 17))
             speaking.save(speaking_path)
             pair_receipt = {
                 "approval_state": "candidate_visual_review",
                 "runtime_admitted": False,
+                "method": "pair_specific_connected_mandible_patch_v1",
+                "upper_beak_policy": "immutable_source_pixels",
+                "outside_articulation_change": False,
+                "hinge": [13, 9],
+                "hinge_radius": 2,
+                "mandible_polygon": [[13, 9], [19, 9], [19, 17], [13, 17]],
+                "cavity_polygon": [[13, 9], [19, 9], [16, 15]],
+                "upper_beak_polygon": [[13, 7], [20, 7], [19, 9], [13, 9]],
+                "minimum_connected_ratio": 0.9,
+                "mandible_connected_ratio": 1.0,
+                "minimum_mandible_height": 8,
+                "mandible_bbox": [13, 9, 19, 17],
                 "resting_path": resting_path.as_posix(),
                 "speaking_path": speaking_path.as_posix(),
                 "resting_sha256": sha256_path(resting_path),
@@ -217,6 +229,22 @@ class CompileKingfisherPairReviewLibraryTests(unittest.TestCase):
             changed.save(speaking_path)
 
             with self.assertRaisesRegex(ValueError, "checksum mismatch"):
+                compile_pair_review_library(base_index, ledger, root / "review")
+
+    def test_rejects_new_pass_without_pair_specific_hinge_evidence(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            base_index, ledger = self._fixture(root)
+            data = json.loads(ledger.read_text(encoding="utf-8"))
+            pair = data["pairs"][30]
+            pair["pairwise_full_size_review"]["state"] = "pass"
+            receipt_path = Path(pair["receipt_path"])
+            receipt = json.loads(receipt_path.read_text(encoding="utf-8"))
+            receipt["method"] = "pose_specific_render_local_articulation_composite_v1"
+            receipt_path.write_text(json.dumps(receipt), encoding="utf-8")
+            ledger.write_text(json.dumps(data), encoding="utf-8")
+
+            with self.assertRaisesRegex(ValueError, "pair-specific mandible patch"):
                 compile_pair_review_library(base_index, ledger, root / "review")
 
     def test_failed_artifact_write_preserves_previous_review_artifact(self):
