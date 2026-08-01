@@ -86,8 +86,8 @@ The machine-readable authority is:
 
 Current authoritative pairwise totals:
 
-- full-size anatomical passes: 25;
-- pending full-size reviews: 38;
+- full-size anatomical passes: 28;
+- pending full-size reviews: 35;
 - not observable: 2;
 - currently awaiting rebuild: 1;
 - user-approved pairs: 0; and
@@ -164,6 +164,16 @@ first mask was rejected after the white projector exposed rectangular cavity
 spill. Pair 26's first mask was rejected because it admitted regenerated white
 throat pixels. The corrected pair audits preserve the canonical upper bill and
 all pixels outside the mouth region; pair 26 also retains silhouette IoU 1.0.
+
+Pairs 27-29 were then completed as independent jobs. Pair 27 preserves its
+tilted canonical head and uses a generated render only as a registered lower-
+mandible donor. Pair 28 rejected a synthetic cavity overlay that projected as
+a white chevron; its accepted frame uses the donor's authored mouth beneath
+the immutable upper bill. Pair 29 rejected the visually plausible legacy mate
+after measurement found broad eye, crown, cheek, and upper-bill changes. Its
+replacement copies only the 80 x 45 whisper articulation from the body-
+registered source. Each accepted result has outside-mouth mean difference 0.0,
+silhouette IoU 1.0, and registration-bound delta 0.
 
 Pair 62 remains `needs_rebuild`. This remains internal anatomical review, not
 user approval.
@@ -291,14 +301,14 @@ machine measurements:
 - the paired sequence contains exactly 132 alternating closed/open frames;
 - minimum pair silhouette IoU is `0.978551`;
 - maximum registration-bound delta is `1` pixel;
-- 25 visible pairs have passing full-size pairwise dispositions;
-- 38 pairs remain pending full-size review;
+- 28 visible pairs have passing full-size pairwise dispositions;
+- 35 pairs remain pending full-size review;
 - pair 62 remains an explicit rebuild blocker;
 - two rear-facing pairs are explicitly not observable; and
 - user approval and runtime admission remain zero.
 
 The strict verifier now exits nonzero with
-`pair 27 lacks a passing full-size pairwise disposition`. The tracked
+`pair 30 lacks a passing full-size pairwise disposition`. The tracked
 verification receipt
 records `passed: false` and
 `verification_state: blocked_by_pairwise_full_size_review`. The current ledger

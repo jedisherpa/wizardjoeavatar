@@ -1,70 +1,127 @@
 {
   "alignment": {
     "interpolation": "lanczos_rgb_binary_alpha",
-    "scale": 0.576,
+    "scale": 0.5,
+    "scale_x": 0.576,
+    "scale_y": 0.5,
     "translate_x": -2,
-    "translate_y": -2
+    "translate_y": 58
   },
   "approval_state": "candidate_visual_review",
-  "articulation_bbox": [
-    412,
-    190,
-    537,
-    317
-  ],
-  "articulation_polygon": [
-    [
-      426,
-      198
-    ],
-    [
-      480,
-      190
-    ],
-    [
-      526,
-      207
-    ],
-    [
-      536,
-      258
-    ],
-    [
-      516,
-      304
-    ],
-    [
-      462,
-      316
-    ],
-    [
-      418,
-      279
-    ],
-    [
-      412,
-      231
-    ]
-  ],
   "canvas": [
     960,
     540
   ],
-  "changed_bbox": [
-    412,
-    190,
-    537,
-    317
+  "cavity_polygon": [
+    [
+      454,
+      254
+    ],
+    [
+      510,
+      254
+    ],
+    [
+      503,
+      269
+    ],
+    [
+      486,
+      283
+    ],
+    [
+      457,
+      271
+    ],
+    [
+      454,
+      262
+    ]
   ],
-  "generated_render_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/027-intimate-confidence/137_ACT137_intimate_confidence_speaking_render_raw.png",
-  "generated_render_sha256": "bf2fb6f7581106e6ae9d8e4f4b9ea698a62aafce5a48b2707e44bf7a4d777765",
-  "method": "pose_specific_render_local_articulation_composite_v1",
-  "output_role": "speaking",
+  "changed_bbox": [
+    448,
+    255,
+    514,
+    292
+  ],
+  "generated_render_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/027-intimate-confidence/137_ACT137_intimate_confidence_speaking_render_pairwise_v2.png",
+  "generated_render_sha256": "3645bd3230fc0495b94662688260a39923e944090ebec38fa7fc31b22fc9bcde",
+  "hinge": [
+    455,
+    263
+  ],
+  "hinge_radius": 18,
+  "mandible_bbox": [
+    448,
+    248,
+    517,
+    292
+  ],
+  "mandible_connected_ratio": 1.0,
+  "mandible_largest_component_pixels": 2246,
+  "mandible_opaque_pixels": 2246,
+  "mandible_polygon": [
+    [
+      448,
+      248
+    ],
+    [
+      516,
+      248
+    ],
+    [
+      508,
+      276
+    ],
+    [
+      486,
+      291
+    ],
+    [
+      456,
+      278
+    ],
+    [
+      448,
+      263
+    ]
+  ],
+  "method": "pair_specific_connected_mandible_patch_v1",
+  "minimum_connected_ratio": 0.8,
+  "minimum_mandible_height": 18,
   "outside_articulation_change": false,
+  "residual_clear_polygon": null,
   "resting_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/027-intimate-confidence/027_ACT027_intimate_confidence_resting_beak_alpha.png",
   "resting_sha256": "5b452215c716a16d05d217e0571829e29dc15897c4d0590496c81dfff838ee60",
   "runtime_admitted": false,
   "schema_version": 1,
   "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/027-intimate-confidence/137_ACT137_intimate_confidence_speaking_beak_alpha.png",
-  "speaking_sha256": "faac6b2f8ce011ed053d3218ef092b603c51289d29a3fa85429f4496e0e6834e"
+  "speaking_sha256": "4b0a2f675ceba31546e6faac4a9b14c5c80a6c85019ac91934812c0e58901311",
+  "upper_beak_policy": "immutable_source_pixels",
+  "upper_beak_polygon": [
+    [
+      430,
+      216
+    ],
+    [
+      528,
+      216
+    ],
+    [
+      520,
+      254
+    ],
+    [
+      492,
+      269
+    ],
+    [
+      460,
+      260
+    ],
+    [
+      430,
+      245
+    ]
+  ]
 }

@@ -1,5 +1,5 @@
 {
-  "changed_rendered_pixels": 12029,
+  "changed_rendered_pixels": 1566,
   "checks": {
     "bounded_articulation_change": true,
     "outside_mouth_stability": true,
@@ -7,12 +7,12 @@
     "stable_registration_bounds": true,
     "visible_mouth_change": true
   },
-  "mouth_mean_abs": 15.913672,
+  "mouth_mean_abs": 6.528796,
   "mouth_region": [
-    392,
-    190,
-    523,
-    313
+    418,
+    262,
+    498,
+    307
   ],
   "outside_mouth_mean_abs": 0.0,
   "passed": true,
@@ -26,7 +26,7 @@
   ],
   "resting_sha256": "4b74b91629538c1ceaa6b23d3a755f8a5bf14e373dd33c6999de0b29fd7f2491",
   "schema_version": 2,
-  "silhouette_iou": 0.999823,
+  "silhouette_iou": 1.0,
   "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/029-confidential-whisper/139_ACT139_confidential_whisper_speaking_beak_alpha.png",
   "speaking_registration_bbox": [
     344,
@@ -34,5 +34,5 @@
     616,
     529
   ],
-  "speaking_sha256": "0af6b2b582c0aea43b5b9619d8e70ef13d42ce67ee8c8b0e1cbc46c7090782ea"
+  "speaking_sha256": "730a64e2945bf15724122e6f75efd093ee599dfd1576afcea87ae425cf287575"
 }

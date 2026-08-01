@@ -56,8 +56,8 @@ passing does not substitute for visual review.
 ## Current Queue
 
 - pair count: 66;
-- pairwise passes: 25 (pairs 1-3, 6-26, and rebuilt 59);
-- pending: 38;
+- pairwise passes: 28 (pairs 1-3, 6-29, and rebuilt 59);
+- pending: 35;
 - needs rebuild: 1 (pair 62);
 - not observable: 2 (pairs 4 and 5);
 - user approved: 0;
@@ -94,6 +94,17 @@ a second cavity-mask pass after white projection exposed rectangular spill;
 pair 26 required a compact frontal V-shaped mask to prevent throat redraw.
 The accepted audits report zero change outside each declared mouth region.
 
+Pairs 27-29 continued the same one-pair gate. Pair 27 uses one dedicated
+lower-mandible donor beneath an immutable tilted head and upper bill. Pair 28's
+first synthetic cavity pass produced a white chevron at projector size and was
+rejected; the accepted frame retains the donor-authored mouth under the exact
+closed-frame upper bill. Pair 29's legacy candidate looked aligned at normal
+size but changed thousands of eye, crown, cheek, and upper-bill pixels. Its
+accepted confidential-whisper mate extracts only the measured 80 x 45 lower-
+bill change from the body-registered source. All three final audits report
+outside-mouth mean difference 0.0, silhouette IoU 1.0, and registration delta
+0.
+
 Evidence:
 
 `assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/`
@@ -120,7 +131,7 @@ pairwise disposition. Direct pair selection uses `&pair=N`.
 
 Focused queue/compiler/viewer/compositor tests: 19 passed.
 
-Complete Kingfisher-focused tests: 63 passed.
+Complete Kingfisher-focused tests: 59 passed.
 
 The strict verifier intentionally exits nonzero until all observable pairs
 pass and all rear views are explicitly `not_observable`. It writes a structured
@@ -130,6 +141,18 @@ failure receipt even while blocked:
 
 Current blocker:
 
-`pair 27 lacks a passing full-size pairwise disposition`
+`pair 30 lacks a passing full-size pairwise disposition`
+
+Current review artifact:
+
+`kingfisher_act_001_066_111_176_pair_review-3f4b67151d7751eb.wjpose`
+
+Artifact SHA-256:
+
+`3f4b67151d7751eb81ea51ba37332d42d463bd97a3a3b6503cb9583aced9ade1`
+
+Library-index SHA-256:
+
+`d0ea8e7e42b14bba0c3a4c5dd1a72014f840e3a5f9d021a30c9c62494e8d5180`
 
 This failure is expected and proves the queue is fail-closed.
