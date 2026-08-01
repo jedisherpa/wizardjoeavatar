@@ -70,6 +70,13 @@ from .score_runtime import (
     ScorePreparationResult,
     ScoreRuntime,
 )
+from .score_edit_application import (
+    AppliedScoreEditsV1,
+    PublishedScoreEditsV1,
+    apply_score_edits as apply_score_edits_v1,
+    publish_score_edits as publish_score_edits_v1,
+)
+from .score_edits import ScoreEditsV1
 
 
 _UNBOUND_DIGEST = "sha256:" + "0" * 64
@@ -639,6 +646,39 @@ class PerformanceApplication:
             raise DirectedPerformanceError("score_repository_not_ready")
         return publish_directed_performance(
             compiled,
+            repository=self.score_repository,
+        )
+
+    def apply_directed_score_edits(
+        self,
+        compiled: CompiledDirectedPerformanceV1,
+        edits: ScoreEditsV1,
+    ) -> AppliedScoreEditsV1:
+        """Apply director edits to the portable score and recompile it safely."""
+
+        self._require_runtime_admission()
+        if self.score_repository is None:
+            raise DirectedPerformanceError("score_repository_not_ready")
+        if self.capability_manifest is None:
+            raise DirectedPerformanceError("capability_manifest_not_ready")
+        return apply_score_edits_v1(
+            compiled.portable_score,
+            edits,
+            compiled.compiler_context,
+            capability_manifest=self.capability_manifest,
+        )
+
+    def publish_directed_score_edits(
+        self,
+        applied: AppliedScoreEditsV1,
+    ) -> PublishedScoreEditsV1:
+        """Atomically publish a recompiled director edit generation."""
+
+        self._require_runtime_admission()
+        if self.score_repository is None:
+            raise DirectedPerformanceError("score_repository_not_ready")
+        return publish_score_edits_v1(
+            applied,
             repository=self.score_repository,
         )
 

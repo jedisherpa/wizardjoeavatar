@@ -175,7 +175,7 @@ and only then exposes the resulting state. Rendering uses a deep-copied
 | `wizard_avatar/voice_alignment.py` | `VoiceAlignmentV1`, `TextTimingSpanV1`, `PhonemeTimingSpanV1`, `evaluate_voice_alignment` | Immutable timing tracks and deterministic reveal/mouth evaluation at any media time |
 | `wizard_avatar/character_capabilities.py` | `derive_character_capability_manifest`, `validate_character_capability_manifest`, `require_admitted_capability`, `require_graph_admitted_pose` | Deterministic capability truth derived from package, graph, pose library, runtime vocabulary and mappings |
 | `wizard_avatar/performance_compiler.py` | `compile_baseline_performance`, `compile_character_bound_performance`, `select_performance_source` | Portable narrative baseline plus deterministic context/capability-bound compiled score with explicit fallback records |
-| `wizard_avatar/score_edits.py` | `ScoreEditsV1`, `ScoreEditOperationV1` | Closed, immutable, hash-bound safe edit contract; no production application path found |
+| `wizard_avatar/score_edits.py`, `wizard_avatar/score_edit_application.py` | `ScoreEditsV1`, `ScoreEditOperationV1`, `apply_score_edits`, `publish_score_edits` | Closed, immutable, hash-bound edits now apply, recompile, and publish through the admitted application/repository path; HTTP and Companion authoring surfaces remain missing |
 | `wizard_avatar/prism_signals.py` | `PrismAnimationSignalV1/V2`, `PrismSignalParser`, `PrismAdvisoryStateMachine` | Strict content-free advisory parsing, sequence/epoch/TTL handling and terminal release |
 | `wizard_avatar/permission_world.py` | `PermissionWorldStateV1`, `PermissionWorldRuntime`, `PermissionWorldProjectionV1`, `PermissionWorldRenderPolicyV1` | Freshness/epoch validation, capability projection, redacted diagnostics and immutable render policy |
 | `wizard_avatar/controller.py` | `WizardAvatarController`, `suspend_prism_channels`, `resume_prism_channels` | Command handlers, user control lease integration and advisory channel ownership |
@@ -331,9 +331,9 @@ human acceptance evidence into production readiness.
 | Area | Current limitation |
 | --- | --- |
 | Independent reproduction | The paired implementation commits and clean package provenance exist, but an independent fresh-clone or clean-user reproduction has not been executed. |
-| Character-bound compilation in live turns | No non-test caller invokes `compile_character_bound_performance`. Governed speech registration captures context but does not compile/publish/select a character-bound score. |
-| Score authoring/publication | Repository loading is wired, but no runtime API or Prism path publishes Character Director compiled scores into the Companion score root. Existing baseline authoring uses `compile_baseline_performance`; the new character-bound function is not connected there. |
-| Score edits | `ScoreEditsV1` and `character_director_score_edits_v1.schema.json` exist, but no edit application, publication, API or UI caller was found. The older `score_edits_v1.schema.json` also remains in the general schema registry. |
+| Character-bound compilation in live turns | Authenticated directed preparation and the score-edit application invoke the character-bound compiler. Ordinary governed speech registration still does not automatically compile, publish, and select that output for each live turn. |
+| Score authoring/publication | The authenticated directed-preparation route and score-edit application publish through the repository. Prism has no automatic live-turn authoring path, and the Companion has no score authoring/editor surface. |
+| Score edits | Deterministic application, character-bound recompilation, and atomic publication are implemented and callable through `PerformanceApplication`. A versioned HTTP route and Companion editor are not yet implemented. The older `score_edits_v1.schema.json` also remains in the general schema registry. |
 | Conversational body direction | Approved speech uses the scheduler's explicit scoreless speaking fallback unless an external score is already bound. It is governed, but it is not the new context-to-character compiler output. |
 | Permission authority | Prism sends empty heartbeats only. No real permission store or grant/deny/revoke/app-link adapter feeds the producer, so production visuals remain correctly fail-closed. |
 | Alignment quality | ElevenLabs timestamped character timing is preserved when available. Other providers use decoded duration and deterministic proportional word/character fallback; phoneme spans are empty. |
@@ -346,10 +346,11 @@ human acceptance evidence into production readiness.
 
 - A committed paired Python/Prism candidate and release manifest binding both
   full commit hashes, schemas, capability manifest, sidecar, frontend and scores.
-- A live production caller that takes accepted context plus semantic direction,
-  runs `compile_character_bound_performance`, publishes the result and binds the
-  resulting score revision to the media session.
-- Safe application and publication of `ScoreEditsV1`.
+- Automatic governed-turn orchestration that takes accepted context plus
+  semantic direction, compiles and publishes it, and binds the resulting score
+  revision to the live media session.
+- A versioned authenticated API and Companion editor for the implemented
+  `ScoreEditsV1` application/publication path.
 - A real permission-fact producer connected to Prism's permission authority.
 - Server-confirmed cancellation of an in-flight governed conversation turn.
 - An admitted dance capability; the manifest explicitly marks dance unsupported.

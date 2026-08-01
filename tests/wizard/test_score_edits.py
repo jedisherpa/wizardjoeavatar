@@ -103,6 +103,7 @@ class ScoreEditsV1Tests(unittest.TestCase):
             ("timing_offset_ms", -250),
             ("duration_ms", 1250),
             ("intensity_milli", 725),
+            ("disabled", True),
             ("semantic_clip_id", "semantic:clip:welcoming_wave"),
             ("semantic_pose_id", "semantic:pose:attentive_front"),
             ("semantic_action_id", "semantic:action:explain_light"),
@@ -130,6 +131,7 @@ class ScoreEditsV1Tests(unittest.TestCase):
             ("timing_offset_ms", 3600001),
             ("duration_ms", 0),
             ("intensity_milli", 1001),
+            ("disabled", 1),
         ):
             with self.subTest(edit_type=edit_type):
                 invalid = content([operation(edit_type=edit_type, value=value)])

@@ -34,7 +34,7 @@ SEMANTIC_ID_PATTERNS = {
     "semantic_gaze_id": re.compile(r"^semantic:gaze:[a-z0-9][a-z0-9._-]{0,95}$"),
 }
 EDIT_TYPES = frozenset(
-    ("timing_offset_ms", "duration_ms", "intensity_milli")
+    ("timing_offset_ms", "duration_ms", "intensity_milli", "disabled")
     + tuple(SEMANTIC_ID_PATTERNS)
 )
 ACTOR_KINDS = frozenset(("human", "system", "migration"))
@@ -240,7 +240,7 @@ class ScoreEditOperationV1:
     cue_id: str
     edit_type: str
     expected_value_sha256: str
-    value: Union[int, str]
+    value: Union[bool, int, str]
     reason_code: str
 
     @classmethod
@@ -253,11 +253,15 @@ class ScoreEditOperationV1:
             raise _fail("unsafe_edit_type", "unsupported score edit type", path + ".edit_type")
         raw_value = operation["value"]
         if edit_type == "timing_offset_ms":
-            value: Union[int, str] = _integer(raw_value, -3600000, 3600000, path + ".value")
+            value: Union[bool, int, str] = _integer(raw_value, -3600000, 3600000, path + ".value")
         elif edit_type == "duration_ms":
             value = _integer(raw_value, 1, 86400000, path + ".value")
         elif edit_type == "intensity_milli":
             value = _integer(raw_value, 0, 1000, path + ".value")
+        elif edit_type == "disabled":
+            if type(raw_value) is not bool:
+                raise _fail("invalid_type", "disabled edits require a boolean", path + ".value")
+            value = raw_value
         else:
             value = _semantic_id(edit_type, raw_value, path + ".value")
         return cls(

@@ -366,7 +366,9 @@ class DirectedPerformanceServerTests(unittest.IsolatedAsyncioTestCase):
 
             def compile_after_cancellation(preparation_value, context):
                 compiled = original(preparation_value, context)
-                hub.frame_source.controller.state.control_lease_generation += 1
+                hub.performance.scheduler.coordinator.rotate_runtime_epoch(
+                    "wizard-runtime-directed-cancelled"
+                )
                 return compiled
 
             with mock.patch.object(

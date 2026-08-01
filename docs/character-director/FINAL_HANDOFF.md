@@ -119,9 +119,11 @@ decisions. Unrestricted natural-language choreography remains deferred.
 
 ## 14. Performance-Score Model
 
-The existing score/loader/scheduler remains authoritative. New score runtime
-binding and validated `ScoreEditsV1` components are additive. Score edits are
-not claimed as a complete production publication workflow.
+The existing score/loader/scheduler remains authoritative. Score runtime
+binding and `ScoreEditsV1` remain additive. Deterministic edit application,
+character-bound recompilation, and atomic repository publication are now
+implemented; the authenticated HTTP and Companion editing surfaces are not yet
+claimed complete.
 
 ## 15. Text, Voice, And Animation Synchronization
 

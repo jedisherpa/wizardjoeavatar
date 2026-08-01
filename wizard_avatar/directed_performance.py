@@ -133,8 +133,10 @@ class DirectedPerformancePreparationV1:
 class CompiledDirectedPerformanceV1:
     preparation: DirectedPerformancePreparationV1
     preliminary_context: PerformanceContextV1
+    compiler_context: PerformanceContextV1
     compiler_context_sha256: str
     plan: DirectionPerformancePlanV1
+    portable_score: Mapping[str, object]
     score: CompiledPerformanceScore
 
 
@@ -223,8 +225,10 @@ def compile_directed_performance(
     return CompiledDirectedPerformanceV1(
         preparation=preparation,
         preliminary_context=context,
+        compiler_context=compilation.bound_context,
         compiler_context_sha256=compilation.bound_context.context_sha256,
         plan=compilation.plan,
+        portable_score=compilation.portable_score,
         score=score,
     )
 

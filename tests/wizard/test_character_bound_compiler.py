@@ -137,6 +137,48 @@ class CharacterBoundPerformanceCompilerTests(unittest.TestCase):
         self.assertNotEqual(first["mapping_policy_sha256"], moved["mapping_policy_sha256"])
         self.assertNotEqual(first["compiled_score_id"], moved["compiled_score_id"])
 
+    def test_lowest_compiler_boundary_rejects_unapproved_and_denied_scores(self):
+        score = _score_with_requirement("clip:explain_front")
+        context = _bound_context(score, self.manifest)
+
+        unapproved_raw = context.content_dict()
+        unapproved_raw["approval"]["presentation_state"] = "unapproved"
+        unapproved_raw["approval"]["presentation_artifact_sha256"] = None
+        unapproved = PerformanceContextV1.build(unapproved_raw)
+        with self.assertRaises(PerformanceCompileError) as presentation:
+            compile_character_bound_performance(unapproved, score, self.manifest)
+        self.assertEqual(presentation.exception.code, "presentation_not_approved")
+
+        denied_score = copy.deepcopy(score)
+        denied_score["tracks"][0]["cues"][0]["capability_requirements"] = [
+            "semantic:action:external_action"
+        ]
+        denied_context = _bound_context(denied_score, self.manifest)
+        with self.assertRaises(PerformanceCompileError) as denied:
+            compile_character_bound_performance(
+                denied_context,
+                denied_score,
+                self.manifest,
+            )
+        self.assertEqual(denied.exception.code, "direction_not_authorized")
+
+        denied_score["tracks"][0]["cues"][0]["manual"]["disabled"] = True
+        denied_context = _bound_context(denied_score, self.manifest)
+        compiled = compile_character_bound_performance(
+            denied_context,
+            denied_score,
+            self.manifest,
+        )
+        compiled_cue_ids = {
+            cue["cue_id"]
+            for track in compiled["tracks"]
+            for cue in track["cues"]
+        }
+        self.assertNotIn(
+            denied_score["tracks"][0]["cues"][0]["cue_id"],
+            compiled_cue_ids,
+        )
+
     def test_compiled_score_is_admitted_by_real_character_asset_contract(self):
         portable = _score_with_requirement("clip:explain_front")
         context = _bound_context(portable, self.manifest)

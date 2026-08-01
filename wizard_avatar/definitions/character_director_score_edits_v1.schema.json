@@ -70,6 +70,7 @@
         {"$ref": "#/$defs/timingOffsetEdit"},
         {"$ref": "#/$defs/durationEdit"},
         {"$ref": "#/$defs/intensityEdit"},
+        {"$ref": "#/$defs/disabledEdit"},
         {"$ref": "#/$defs/semanticClipEdit"},
         {"$ref": "#/$defs/semanticPoseEdit"},
         {"$ref": "#/$defs/semanticActionEdit"},
@@ -113,6 +114,18 @@
         "edit_type": {"const": "intensity_milli"},
         "expected_value_sha256": {"$ref": "#/$defs/hash"},
         "value": {"type": "integer", "minimum": 0, "maximum": 1000},
+        "reason_code": {"$ref": "#/$defs/id"}
+      }
+    },
+    "disabledEdit": {
+      "type": "object", "additionalProperties": false,
+      "required": ["operation_id", "cue_id", "edit_type", "expected_value_sha256", "value", "reason_code"],
+      "properties": {
+        "operation_id": {"$ref": "#/$defs/id"},
+        "cue_id": {"$ref": "#/$defs/id"},
+        "edit_type": {"const": "disabled"},
+        "expected_value_sha256": {"$ref": "#/$defs/hash"},
+        "value": {"type": "boolean"},
         "reason_code": {"$ref": "#/$defs/id"}
       }
     },

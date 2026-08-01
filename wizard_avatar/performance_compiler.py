@@ -588,6 +588,7 @@ def compile_character_bound_performance(
 
     score_sha256 = _identity_hash(performance_score)
     _validate_character_binding(context, performance_score, capability_manifest, score_sha256)
+    _validate_compiler_authority(context, performance_score)
 
     media = _mapping_value(performance_score.get("media"), "score media")
     manifest_character = _mapping_value(capability_manifest.get("character"), "manifest character")
@@ -646,6 +647,9 @@ def compile_character_bound_performance(
         compiled_cues = []  # type: list[Dict[str, object]]
         for cue_value in _sequence_value(track.get("cues"), "score cues"):
             cue = _mapping_value(cue_value, "score cue")
+            manual = _mapping_value(cue.get("manual"), "cue manual state")
+            if manual.get("disabled") is True:
+                continue
             resolution = _resolve_capability(
                 cue,
                 capability_manifest,
@@ -813,6 +817,55 @@ def compile_character_bound_performance(
 
 
 compile_character_bound_score = compile_character_bound_performance
+
+
+def _validate_compiler_authority(
+    context: PerformanceContextV1,
+    score: Mapping[str, object],
+) -> None:
+    """Enforce presentation and semantic authority at the lowest compiler boundary."""
+
+    if context.approval.presentation_state != "approved_for_presentation":
+        raise PerformanceCompileError(
+            "presentation_not_approved",
+            "performance presentation is not approved",
+        )
+    governed_intent = context.conversation.intent
+    allowed = set(context.governance.allowed_semantic_actions)
+    denied = set(context.governance.denied_semantic_actions)
+    if governed_intent in denied or governed_intent not in allowed:
+        raise PerformanceCompileError(
+            "direction_not_authorized",
+            "performance intent is not authorized",
+        )
+    for track_value in _sequence_value(score.get("tracks"), "score tracks"):
+        track = _mapping_value(track_value, "score track")
+        for cue_value in _sequence_value(track.get("cues"), "score cues"):
+            cue = _mapping_value(cue_value, "score cue")
+            manual = _mapping_value(cue.get("manual"), "cue manual state")
+            if manual.get("disabled") is True:
+                continue
+            cue_intent = _string_value(cue.get("intent"), "cue intent")
+            if cue_intent in denied:
+                raise PerformanceCompileError(
+                    "direction_not_authorized",
+                    "score contains a denied cue intent",
+                )
+            for requirement_value in _sequence_value(
+                cue.get("capability_requirements"),
+                "capability requirements",
+            ):
+                requirement = _string_value(
+                    requirement_value,
+                    "capability requirement",
+                )
+                if requirement.startswith("semantic:action:"):
+                    action = requirement.rsplit(":", 1)[-1]
+                    if action in denied or action not in allowed:
+                        raise PerformanceCompileError(
+                            "direction_not_authorized",
+                            "score contains an unauthorized semantic action",
+                        )
 
 
 def _validate_character_binding(
