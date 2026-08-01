@@ -14,7 +14,7 @@
   "legacy_pair_review": {
     "approval_state": "candidate_visual_review",
     "ledger_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-review-ledger.json",
-    "ledger_sha256": "77a4587ae4a50973eec91e4578003b9a54e6d6f49663b3e72d9dea529e3d92ed",
+    "ledger_sha256": "d0eb3aeb8602a67296de8004959d533ef63cf49d26967408ba55d53374cd0a31",
     "pair_count": 66,
     "pairs": [
       {
@@ -459,82 +459,82 @@
       },
       {
         "audit_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/023-emphatic-agreement/pair-audit.json",
-        "audit_sha256": "caf7598f39f816b8a5800eca65dfed964045ca9f0733b512ba1fb82bc3e0eff8",
+        "audit_sha256": "3d33e1f843dc2e80e2cec4ee3b8b0da4754da2a91775583acc1700a82087c400",
         "automated_audit_passed": true,
         "ordinal": 23,
         "pairwise_full_size_review": {
-          "evidence_path": "",
+          "evidence_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-023",
           "protocol_id": "kingfisher-full-size-pairwise-v1",
-          "state": "pending"
+          "state": "pass"
         },
         "receipt_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/023-emphatic-agreement/pair-receipt.json",
-        "receipt_sha256": "ce09ee43d1e9dc7be98d6904c1597d5d2062e8ec2aa1c50f1b5b107dced4257b",
+        "receipt_sha256": "fc92644725de83f75881d254a6ebd06f8c24717cf4a8f03be5e5dcbfa3a781f8",
         "resting_pose_id": "kingfisher.act.023.emphatic-agreement",
         "resting_sha256": "774910d16ba4b0fb07e2ab4291966d2d359c5aad9a11b5e4df14eadd4b941d43",
         "runtime_admitted": false,
         "speaking_ordinal": 133,
         "speaking_pose_id": "kingfisher.act.133.emphatic-agreement-speaking-beak",
-        "speaking_sha256": "250176430250f21c27f289880b31d8176d7d4e550c6db31ad155292d61175d91",
+        "speaking_sha256": "1b58d592746b606311fcc4d3261bb5c7a16d1490700aa3c7cd198d97f1c3d190",
         "user_approved": false
       },
       {
         "audit_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/024-polite-interruption/pair-audit.json",
-        "audit_sha256": "0405fcb96ba6d81b75e956a024bb14fde08fae0028dd7299ee6d0447617da94b",
+        "audit_sha256": "8963fac183cb6a2f78164e6aaa2c8978f2965ecfcd7f653518d4d01f575136f8",
         "automated_audit_passed": true,
         "ordinal": 24,
         "pairwise_full_size_review": {
-          "evidence_path": "",
+          "evidence_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-024",
           "protocol_id": "kingfisher-full-size-pairwise-v1",
-          "state": "pending"
+          "state": "pass"
         },
         "receipt_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/024-polite-interruption/pair-receipt.json",
-        "receipt_sha256": "f85fc438bb65e2159de78ccc922b6773f329bbf92d960a2997d7937354681d6c",
+        "receipt_sha256": "52166f4d344cc55cc0b9bdaef60c7343854507b56a863e2c6ee3398b5a2b1dc5",
         "resting_pose_id": "kingfisher.act.024.polite-interruption",
         "resting_sha256": "85355f48e5ae353fc67446d57473b136b725106304d1c3ecc485f402bf2dc56a",
         "runtime_admitted": false,
         "speaking_ordinal": 134,
         "speaking_pose_id": "kingfisher.act.134.polite-interruption-speaking-beak",
-        "speaking_sha256": "8761a2f183f8c7060da18c19665ad9d7b824eccfa40ce7cd72cb1d5fbc9ff939",
+        "speaking_sha256": "5d73a066f126be5a237905fdf4543ab247c3748a5e64e9f34cc1fffd8d6774a0",
         "user_approved": false
       },
       {
         "audit_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/025-hand-over-the-floor/pair-audit.json",
-        "audit_sha256": "655bf2ed9adea5932eadccbb9b2f30b9f05907a609e5448a939f37cddb47cc8a",
+        "audit_sha256": "1f5646327fea50c772a016df00f6c67053400d0f2314379d52294e32105c87a7",
         "automated_audit_passed": true,
         "ordinal": 25,
         "pairwise_full_size_review": {
-          "evidence_path": "",
+          "evidence_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-025",
           "protocol_id": "kingfisher-full-size-pairwise-v1",
-          "state": "pending"
+          "state": "pass"
         },
         "receipt_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/025-hand-over-the-floor/pair-receipt.json",
-        "receipt_sha256": "cae481d009b670c9637b74244aeea96ad16591b28ac08d1e6fb76fc727791c84",
+        "receipt_sha256": "619d43520bc7b9888308a55fa2b00faa8e30d5ba33b5b2ee5f9e737aeb934c88",
         "resting_pose_id": "kingfisher.act.025.hand-over-the-floor",
         "resting_sha256": "a5bfa247137c3a78a9076620fe862c8bbf45bbc56ee63396dc0b86c07ddfd661",
         "runtime_admitted": false,
         "speaking_ordinal": 135,
         "speaking_pose_id": "kingfisher.act.135.hand-over-the-floor-speaking-beak",
-        "speaking_sha256": "09b159d3a28f5b554714e5497ac0e0f3c3a8442299c6115a019b9dedf5050e66",
+        "speaking_sha256": "679e51c8910f8dab8d1a0f5f68a88b71040e79442ac1ca21fba3b754a0ef6cd6",
         "user_approved": false
       },
       {
         "audit_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/026-warm-welcome/pair-audit.json",
-        "audit_sha256": "ab5e30b7d650a4b6abe229f9a18957e48a0ff4a3c1064506630bc8999a8bd3b9",
+        "audit_sha256": "7eae05e55ba8d1f3d5fe19d345345173125be02bfca1f24e11df9b54870550f4",
         "automated_audit_passed": true,
         "ordinal": 26,
         "pairwise_full_size_review": {
-          "evidence_path": "",
+          "evidence_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-026",
           "protocol_id": "kingfisher-full-size-pairwise-v1",
-          "state": "pending"
+          "state": "pass"
         },
         "receipt_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/026-warm-welcome/pair-receipt.json",
-        "receipt_sha256": "fca956c6ee431880743264eca815eb1334311665b4b8fc190cfbc9c8e19bcdba",
+        "receipt_sha256": "490834b800d3245a56ffed69cd7d492ed9fb6c523294e08082d72ee00b06da01",
         "resting_pose_id": "kingfisher.act.026.warm-welcome",
         "resting_sha256": "2abe46025252d7e7731ac3de3322c568d57afba28e136e86410297a9034777cb",
         "runtime_admitted": false,
         "speaking_ordinal": 136,
         "speaking_pose_id": "kingfisher.act.136.warm-welcome-speaking-beak",
-        "speaking_sha256": "7db3a31a2b61d540be7e77aeae7f457e16d4030e21c191c71ba775d906262237",
+        "speaking_sha256": "a287c438b7ae7918666fbd4b43d2e7af5d497958d34de60999e5e93529aca1eb",
         "user_approved": false
       },
       {
@@ -1342,8 +1342,8 @@
       "complete": false,
       "needs_rebuild_count": 1,
       "not_observable_count": 2,
-      "pass_count": 21,
-      "pending_count": 42
+      "pass_count": 25,
+      "pending_count": 38
     },
     "review_projection": true,
     "runtime_admitted": false,
@@ -1864,10 +1864,10 @@
         "pass",
         "pass",
         "pass",
-        "pending",
-        "pending",
-        "pending",
-        "pending",
+        "pass",
+        "pass",
+        "pass",
+        "pass",
         "pending",
         "pending",
         "pending",
@@ -2285,8 +2285,8 @@
     },
     {
       "approval_state": "candidate_visual_review",
-      "bytes": 28594575,
-      "path": "kingfisher_act_001_066_111_176_pair_review-b54aa7876119ff81.wjpose",
+      "bytes": 28581115,
+      "path": "kingfisher_act_001_066_111_176_pair_review-83158deb112ede71.wjpose",
       "pose_count": 132,
       "pose_ids": [
         "kingfisher.act.001.neutral-front",
@@ -2424,7 +2424,7 @@
       ],
       "review_projection": true,
       "runtime_admitted": false,
-      "sha256": "b54aa7876119ff81fe95c2c2ef9c4faadfd93b1630eed27685311af55174b87e",
+      "sha256": "83158deb112ede715d35732802daf9d1a50913da040817239cc28247cf112150",
       "shard_id": "kingfisher_act_001_066_111_176_pair_review",
       "source": "kingfisher_pair_specific_beak_review_v1"
     }

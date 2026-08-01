@@ -56,8 +56,8 @@ passing does not substitute for visual review.
 ## Current Queue
 
 - pair count: 66;
-- pairwise passes: 21 (pairs 1-3, 6-22, and rebuilt 59);
-- pending: 42;
+- pairwise passes: 25 (pairs 1-3, 6-26, and rebuilt 59);
+- pending: 38;
 - needs rebuild: 1 (pair 62);
 - not observable: 2 (pairs 4 and 5);
 - user approved: 0;
@@ -85,6 +85,14 @@ rectangle only when projected over white. The accepted replacement preserves
 the closed-frame eye, face, and upper bill exactly and bounds both the cavity
 and lower mandible inside the authored silhouette. Every remaining pair is now
 inspected on both transparent close-up and white projector backgrounds.
+
+Pairs 23-26 were processed as four independent closed/open jobs. In every
+case, a dedicated one-pair speaking render was retained only as a lower-
+mandible donor. The accepted frames keep the canonical eyes, head, upper bill,
+throat, body, clothing, gesture, and registration unchanged. Pair 25 required
+a second cavity-mask pass after white projection exposed rectangular spill;
+pair 26 required a compact frontal V-shaped mask to prevent throat redraw.
+The accepted audits report zero change outside each declared mouth region.
 
 Evidence:
 
@@ -122,6 +130,6 @@ failure receipt even while blocked:
 
 Current blocker:
 
-`pair 23 lacks a passing full-size pairwise disposition`
+`pair 27 lacks a passing full-size pairwise disposition`
 
 This failure is expected and proves the queue is fail-closed.

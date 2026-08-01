@@ -1,70 +1,123 @@
 {
   "alignment": {
     "interpolation": "lanczos_rgb_binary_alpha",
-    "scale": 0.5517241379,
-    "translate_x": -3,
-    "translate_y": 23
+    "scale": 0.502,
+    "scale_x": 0.534,
+    "scale_y": 0.502,
+    "translate_x": 28,
+    "translate_y": 87
   },
   "approval_state": "candidate_visual_review",
-  "articulation_bbox": [
-    355,
-    182,
-    521,
-    281
-  ],
-  "articulation_polygon": [
-    [
-      395,
-      185
-    ],
-    [
-      440,
-      182
-    ],
-    [
-      515,
-      190
-    ],
-    [
-      520,
-      250
-    ],
-    [
-      468,
-      280
-    ],
-    [
-      382,
-      270
-    ],
-    [
-      355,
-      230
-    ],
-    [
-      367,
-      207
-    ]
-  ],
   "canvas": [
     960,
     540
   ],
-  "changed_bbox": [
-    355,
-    182,
-    507,
-    281
+  "cavity_polygon": [
+    [
+      402,
+      250
+    ],
+    [
+      491,
+      250
+    ],
+    [
+      480,
+      264
+    ],
+    [
+      430,
+      267
+    ],
+    [
+      402,
+      258
+    ]
   ],
-  "generated_render_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/025-hand-over-the-floor/135_ACT135_hand_over_the_floor_speaking_render_raw.png",
-  "generated_render_sha256": "c9901edc0a72a2a2618a49b5ef32cf4da350c94bb8973afb80f1d9af9e0f2f6c",
-  "method": "pose_specific_render_local_articulation_composite_v1",
-  "output_role": "speaking",
+  "changed_bbox": [
+    398,
+    251,
+    490,
+    292
+  ],
+  "generated_render_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/025-hand-over-the-floor/135_ACT135_hand_over_the_floor_speaking_render_pairwise_v2.png",
+  "generated_render_sha256": "c0383bfd10f016d0bc1ff1d10b93b1ba29d1f549b7755dd78992b98899621992",
+  "hinge": [
+    404,
+    254
+  ],
+  "hinge_radius": 22,
+  "mandible_bbox": [
+    398,
+    245,
+    503,
+    292
+  ],
+  "mandible_connected_ratio": 1.0,
+  "mandible_largest_component_pixels": 2493,
+  "mandible_opaque_pixels": 2493,
+  "mandible_polygon": [
+    [
+      398,
+      245
+    ],
+    [
+      502,
+      245
+    ],
+    [
+      494,
+      286
+    ],
+    [
+      478,
+      293
+    ],
+    [
+      430,
+      281
+    ],
+    [
+      398,
+      260
+    ]
+  ],
+  "method": "pair_specific_connected_mandible_patch_v1",
+  "minimum_connected_ratio": 0.8,
+  "minimum_mandible_height": 18,
   "outside_articulation_change": false,
+  "residual_clear_polygon": null,
   "resting_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/025-hand-over-the-floor/025_ACT025_hand_over_the_floor_resting_beak_alpha.png",
   "resting_sha256": "a5bfa247137c3a78a9076620fe862c8bbf45bbc56ee63396dc0b86c07ddfd661",
   "runtime_admitted": false,
   "schema_version": 1,
   "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/025-hand-over-the-floor/135_ACT135_hand_over_the_floor_speaking_beak_alpha.png",
-  "speaking_sha256": "09b159d3a28f5b554714e5497ac0e0f3c3a8442299c6115a019b9dedf5050e66"
+  "speaking_sha256": "679e51c8910f8dab8d1a0f5f68a88b71040e79442ac1ca21fba3b754a0ef6cd6",
+  "upper_beak_policy": "immutable_source_pixels",
+  "upper_beak_polygon": [
+    [
+      375,
+      205
+    ],
+    [
+      515,
+      205
+    ],
+    [
+      515,
+      260
+    ],
+    [
+      470,
+      260
+    ],
+    [
+      420,
+      250
+    ],
+    [
+      375,
+      250
+    ]
+  ]
 }

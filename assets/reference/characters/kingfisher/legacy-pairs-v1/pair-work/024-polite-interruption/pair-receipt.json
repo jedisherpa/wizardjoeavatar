@@ -2,65 +2,126 @@
   "alignment": {
     "interpolation": "lanczos_rgb_binary_alpha",
     "scale": 0.576,
+    "scale_x": 0.576,
+    "scale_y": 0.576,
     "translate_x": -2,
     "translate_y": 8
   },
   "approval_state": "candidate_visual_review",
-  "articulation_bbox": [
-    472,
-    184,
-    589,
-    278
-  ],
-  "articulation_polygon": [
-    [
-      474,
-      190
-    ],
-    [
-      529,
-      184
-    ],
-    [
-      580,
-      201
-    ],
-    [
-      588,
-      251
-    ],
-    [
-      556,
-      277
-    ],
-    [
-      495,
-      272
-    ],
-    [
-      472,
-      235
-    ]
-  ],
   "canvas": [
     960,
     540
   ],
-  "changed_bbox": [
-    472,
-    184,
-    589,
-    278
+  "cavity_polygon": [
+    [
+      475,
+      212
+    ],
+    [
+      580,
+      212
+    ],
+    [
+      575,
+      270
+    ],
+    [
+      555,
+      283
+    ],
+    [
+      500,
+      270
+    ],
+    [
+      475,
+      238
+    ]
   ],
-  "generated_render_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/024-polite-interruption/134_ACT134_polite_interruption_speaking_render_raw.png",
-  "generated_render_sha256": "956faef34c7077e4188197ab06dcc4a6028600aaf078dc383bf71d0429e59856",
-  "method": "pose_specific_render_local_articulation_composite_v1",
-  "output_role": "speaking",
+  "changed_bbox": [
+    468,
+    216,
+    591,
+    296
+  ],
+  "generated_render_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/024-polite-interruption/134_ACT134_polite_interruption_speaking_render_pairwise_v2.png",
+  "generated_render_sha256": "71a483c9bd3be2b97d4f55a328eff2031d24dab800abecc8fe6ba58d5f44cba5",
+  "hinge": [
+    476,
+    225
+  ],
+  "hinge_radius": 22,
+  "mandible_bbox": [
+    468,
+    205,
+    591,
+    296
+  ],
+  "mandible_connected_ratio": 1.0,
+  "mandible_largest_component_pixels": 9542,
+  "mandible_opaque_pixels": 9542,
+  "mandible_polygon": [
+    [
+      468,
+      205
+    ],
+    [
+      590,
+      205
+    ],
+    [
+      590,
+      285
+    ],
+    [
+      560,
+      295
+    ],
+    [
+      495,
+      280
+    ],
+    [
+      468,
+      240
+    ]
+  ],
+  "method": "pair_specific_connected_mandible_patch_v1",
+  "minimum_connected_ratio": 0.8,
+  "minimum_mandible_height": 20,
   "outside_articulation_change": false,
+  "residual_clear_polygon": null,
   "resting_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/024-polite-interruption/024_ACT024_polite_interruption_resting_beak_alpha.png",
   "resting_sha256": "85355f48e5ae353fc67446d57473b136b725106304d1c3ecc485f402bf2dc56a",
   "runtime_admitted": false,
   "schema_version": 1,
   "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/024-polite-interruption/134_ACT134_polite_interruption_speaking_beak_alpha.png",
-  "speaking_sha256": "8761a2f183f8c7060da18c19665ad9d7b824eccfa40ce7cd72cb1d5fbc9ff939"
+  "speaking_sha256": "5d73a066f126be5a237905fdf4543ab247c3748a5e64e9f34cc1fffd8d6774a0",
+  "upper_beak_policy": "immutable_source_pixels",
+  "upper_beak_polygon": [
+    [
+      450,
+      160
+    ],
+    [
+      605,
+      160
+    ],
+    [
+      605,
+      230
+    ],
+    [
+      545,
+      230
+    ],
+    [
+      490,
+      215
+    ],
+    [
+      450,
+      215
+    ]
+  ]
 }

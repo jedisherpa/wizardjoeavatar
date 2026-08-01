@@ -1,74 +1,119 @@
 {
   "alignment": {
     "interpolation": "lanczos_rgb_binary_alpha",
-    "scale": 0.5763612218,
+    "scale": 0.574,
+    "scale_x": 0.574,
+    "scale_y": 0.574,
     "translate_x": -2,
-    "translate_y": 17
+    "translate_y": 50
   },
   "approval_state": "candidate_visual_review",
-  "articulation_bbox": [
-    436,
-    180,
-    537,
-    297
-  ],
-  "articulation_polygon": [
-    [
-      443,
-      187
-    ],
-    [
-      480,
-      180
-    ],
-    [
-      520,
-      190
-    ],
-    [
-      536,
-      235
-    ],
-    [
-      526,
-      275
-    ],
-    [
-      501,
-      296
-    ],
-    [
-      464,
-      289
-    ],
-    [
-      441,
-      255
-    ],
-    [
-      436,
-      218
-    ]
-  ],
   "canvas": [
     960,
     540
   ],
-  "changed_bbox": [
-    436,
-    180,
-    537,
-    297
+  "cavity_polygon": [
+    [
+      467,
+      254
+    ],
+    [
+      513,
+      254
+    ],
+    [
+      504,
+      270
+    ],
+    [
+      487,
+      294
+    ],
+    [
+      468,
+      270
+    ]
   ],
-  "generated_render_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/026-warm-welcome/136_ACT136_warm_welcome_speaking_render_raw.png",
-  "generated_render_sha256": "0de42130b33263f493ec92db7fced2afdfc9c2cd60f70206d113c0dd7f54b200",
-  "method": "pose_specific_render_local_articulation_composite_v1",
-  "output_role": "speaking",
+  "changed_bbox": [
+    464,
+    272,
+    508,
+    306
+  ],
+  "generated_render_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/026-warm-welcome/136_ACT136_warm_welcome_speaking_render_pairwise_v2.png",
+  "generated_render_sha256": "ed9ced77bf0dcfb5744a97c4f074fca77c4b86d59bf341cb90400214f9cfa7f4",
+  "hinge": [
+    466,
+    264
+  ],
+  "hinge_radius": 18,
+  "mandible_bbox": [
+    462,
+    250,
+    519,
+    306
+  ],
+  "mandible_connected_ratio": 1.0,
+  "mandible_largest_component_pixels": 1991,
+  "mandible_opaque_pixels": 1991,
+  "mandible_polygon": [
+    [
+      462,
+      250
+    ],
+    [
+      518,
+      250
+    ],
+    [
+      509,
+      274
+    ],
+    [
+      487,
+      305
+    ],
+    [
+      464,
+      274
+    ]
+  ],
+  "method": "pair_specific_connected_mandible_patch_v1",
+  "minimum_connected_ratio": 0.8,
+  "minimum_mandible_height": 20,
   "outside_articulation_change": false,
+  "residual_clear_polygon": null,
   "resting_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/026-warm-welcome/026_ACT026_warm_welcome_resting_beak_alpha.png",
   "resting_sha256": "2abe46025252d7e7731ac3de3322c568d57afba28e136e86410297a9034777cb",
   "runtime_admitted": false,
   "schema_version": 1,
   "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/026-warm-welcome/136_ACT136_warm_welcome_speaking_beak_alpha.png",
-  "speaking_sha256": "7db3a31a2b61d540be7e77aeae7f457e16d4030e21c191c71ba775d906262237"
+  "speaking_sha256": "a287c438b7ae7918666fbd4b43d2e7af5d497958d34de60999e5e93529aca1eb",
+  "upper_beak_policy": "immutable_source_pixels",
+  "upper_beak_polygon": [
+    [
+      438,
+      218
+    ],
+    [
+      526,
+      218
+    ],
+    [
+      526,
+      276
+    ],
+    [
+      490,
+      276
+    ],
+    [
+      454,
+      270
+    ],
+    [
+      438,
+      270
+    ]
+  ]
 }
