@@ -656,15 +656,29 @@ class PerformanceApplication:
     ) -> AppliedScoreEditsV1:
         """Apply director edits to the portable score and recompile it safely."""
 
+        return self.apply_score_edits(
+            compiled.portable_score,
+            compiled.compiler_context,
+            edits,
+        )
+
+    def apply_score_edits(
+        self,
+        portable_score: Mapping[str, object],
+        compiler_context: PerformanceContextV1,
+        edits: ScoreEditsV1,
+    ) -> AppliedScoreEditsV1:
+        """Apply edits to an exact server-custodied portable score revision."""
+
         self._require_runtime_admission()
         if self.score_repository is None:
             raise DirectedPerformanceError("score_repository_not_ready")
         if self.capability_manifest is None:
             raise DirectedPerformanceError("capability_manifest_not_ready")
         return apply_score_edits_v1(
-            compiled.portable_score,
+            portable_score,
             edits,
-            compiled.compiler_context,
+            compiler_context,
             capability_manifest=self.capability_manifest,
         )
 

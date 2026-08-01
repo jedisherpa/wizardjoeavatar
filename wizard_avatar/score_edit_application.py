@@ -178,6 +178,13 @@ def apply_score_edits(
             portable,
             capability_manifest,
         )
+        compiled_mapping = copy.deepcopy(compiled_mapping)
+        compiled_mapping["revision"] = portable["revision"]
+        compiled_identity = dict(compiled_mapping)
+        compiled_identity.pop("compiled_score_id", None)
+        compiled_mapping["compiled_score_id"] = "compiled:" + sha256_ref(
+            canonical_json_v1(compiled_identity)
+        ).split(":", 1)[1][:24]
         compiled = CompiledScoreLoader().from_mapping(compiled_mapping)
     except PerformanceCompileError as exc:
         raise ScoreEditApplicationError(exc.code) from exc

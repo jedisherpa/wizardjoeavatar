@@ -100,9 +100,8 @@ mutation path.
 
 ## Remaining Work
 
-- Add a versioned, authenticated director API that exposes safe cue inspection,
-  edit precondition hashes, apply/preview, and fenced publication without
-  returning approved language or unrestricted renderer identifiers.
+- The authenticated edit-session API is implemented in the next checkpoint;
+  see `DIRECTOR_EDIT_SESSION_API_CHECKPOINT_2026-08-01.md`.
 - Add Companion UI controls for those API operations.
 - Replace truth-bearing defaults in `capture_performance_context()` with an
   authoritative context request and observation path.

@@ -137,6 +137,7 @@ class ScoreEditApplicationTests(unittest.TestCase):
         )
         self.assertEqual(published.publication.score_sha256, loaded.artifact_sha256)
         self.assertEqual(first.portable_score["revision"], self.base_score["revision"] + 1)
+        self.assertEqual(first.compiled_score.revision, first.portable_score["revision"])
         self.assertEqual(
             first.portable_score["provenance"]["edit_set_sha256"],
             edits.edit_set_sha256,

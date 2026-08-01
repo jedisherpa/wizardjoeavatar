@@ -32,12 +32,19 @@ from .directed_performance import (
     DirectedPerformanceError,
     DirectedPerformancePreparationV1,
 )
+from .director_edit_sessions import (
+    DirectorEditSessionError,
+    DirectorEditSessionStore,
+    DirectorEditSessionV1,
+)
 from .performance_release import (
     GovernedSpeechError,
     GovernedSpeechRegistrationV1,
     PerformanceContextRequestV1,
 )
 from .performance_score import CompiledScoreRepository
+from .score_edit_application import ScoreEditApplicationError
+from .score_edits import ScoreEditsV1
 from .permission_world import CapabilityPermissionV1, PermissionWorldStateV1
 from .media_session import MediaSessionAck, MediaSessionSnapshot
 from .runtime import AvatarRuntime, ReplayLog, canonical_sha256
@@ -281,6 +288,7 @@ class WizardFrameHub:
         self._source_hash_history = deque(maxlen=240)
         self._animation_truth_trace = deque(maxlen=ANIMATION_TRUTH_TRACE_CAPACITY)
         self._published_at = deque(maxlen=240)
+        self._director_edit_sessions = DirectorEditSessionStore()
 
     @property
     def task_error_code(self) -> Optional[str]:
@@ -537,41 +545,12 @@ class WizardFrameHub:
     async def prepare_directed_performance(
         self,
         preparation: DirectedPerformancePreparationV1,
+        *,
+        editable: bool = False,
     ) -> dict:
         """Compile, fence, and publish one arbitrary governed direction."""
 
         await self.start()
-
-        def current_matches(
-            snapshot_fingerprint: str,
-            context: PerformanceContextV1,
-        ) -> bool:
-            current = self.performance.scheduler.coordinator.snapshot_for_slot(
-                preparation.source_slot
-            )
-            return bool(
-                current is not None
-                and current.fingerprint() == snapshot_fingerprint
-                and current.media.duration_ms == preparation.duration_ms
-                and current.media.media_id == preparation.media_id
-                and current.media.media_sha256 == preparation.media_sha256
-                and (
-                    self.performance.scheduler.coordinator.reconciliation_generation
-                    == context.runtime.reconciliation_generation
-                )
-                and (
-                    self.frame_source.controller.state.control_lease_generation
-                    == context.control.cancellation_generation
-                )
-                and self.performance.runtime_epoch
-                == context.runtime.wizard_runtime_epoch
-                and self.performance.character_id
-                == context.character.character_id
-                and self.performance.package_digest
-                == context.character.package_digest
-                and self.performance.manifest_digest
-                == context.character.manifest_digest
-            )
 
         async with self._current_lock():
             try:
@@ -606,18 +585,151 @@ class WizardFrameHub:
         )
 
         async with self._current_lock():
-            if not current_matches(snapshot_fingerprint, context):
+            if not self._directed_context_matches(
+                preparation,
+                snapshot_fingerprint,
+                context,
+            ):
                 raise DirectedPerformanceError("media_session_changed")
+            prepared = await asyncio.to_thread(
+                self.performance.publish_directed_performance,
+                compiled,
+            )
+            if not self._directed_context_matches(
+                preparation,
+                snapshot_fingerprint,
+                context,
+            ):
+                raise DirectedPerformanceError("media_session_changed")
+            response = dict(prepared.to_dict())
+            if editable:
+                now_us = time.perf_counter_ns() // 1000
+                session = self._director_edit_sessions.create(
+                    source_slot=preparation.source_slot,
+                    media_id=preparation.media_id,
+                    media_sha256=preparation.media_sha256,
+                    snapshot_fingerprint=snapshot_fingerprint,
+                    portable_score=compiled.portable_score,
+                    compiler_context=compiled.compiler_context,
+                    now_monotonic_us=now_us,
+                )
+                response["edit_session"] = dict(session.safe_inspection(now_us))
+            return response
 
-        prepared = await asyncio.to_thread(
-            self.performance.publish_directed_performance,
-            compiled,
-        )
+    async def apply_director_score_edits(
+        self,
+        edit_session_id: str,
+        edits: ScoreEditsV1,
+    ) -> dict:
+        """Apply, fence, and atomically publish one server-custodied edit set."""
+
+        await self.start()
+        now_us = time.perf_counter_ns() // 1000
+        async with self._current_lock():
+            session = self._director_edit_sessions.require(
+                edit_session_id,
+                now_us,
+            )
+            if not self._director_edit_session_matches(session):
+                self._director_edit_sessions.discard(edit_session_id)
+                raise DirectorEditSessionError("edit_session_stale")
+            base_score_sha256 = session.base_score_sha256
+
+        try:
+            applied = await asyncio.to_thread(
+                self.performance.apply_score_edits,
+                session.portable_score,
+                session.compiler_context,
+                edits,
+            )
+        except ScoreEditApplicationError:
+            raise
 
         async with self._current_lock():
-            if not current_matches(snapshot_fingerprint, context):
-                raise DirectedPerformanceError("media_session_changed")
-            return dict(prepared.to_dict())
+            now_us = time.perf_counter_ns() // 1000
+            current = self._director_edit_sessions.require(
+                edit_session_id,
+                now_us,
+            )
+            if current.base_score_sha256 != base_score_sha256:
+                raise DirectorEditSessionError("edit_session_revision_changed")
+            if not self._director_edit_session_matches(current):
+                self._director_edit_sessions.discard(edit_session_id)
+                raise DirectorEditSessionError("edit_session_stale")
+            published = await asyncio.to_thread(
+                self.performance.publish_directed_score_edits,
+                applied,
+            )
+            replacement = self._director_edit_sessions.replace_score(
+                edit_session_id,
+                portable_score=applied.portable_score,
+                compiler_context=applied.bound_context,
+                now_monotonic_us=now_us,
+            )
+            return {
+                "schema_version": 1,
+                "publication": dict(published.publication.to_dict()),
+                "applied": dict(published.applied.to_dict()),
+                "edit_session": dict(replacement.safe_inspection(now_us)),
+            }
+
+    def _directed_context_matches(
+        self,
+        preparation: DirectedPerformancePreparationV1,
+        snapshot_fingerprint: str,
+        context: PerformanceContextV1,
+    ) -> bool:
+        current = self.performance.scheduler.coordinator.snapshot_for_slot(
+            preparation.source_slot
+        )
+        return bool(
+            current is not None
+            and current.fingerprint() == snapshot_fingerprint
+            and current.media.duration_ms == preparation.duration_ms
+            and current.media.media_id == preparation.media_id
+            and current.media.media_sha256 == preparation.media_sha256
+            and (
+                self.performance.scheduler.coordinator.reconciliation_generation
+                == context.runtime.reconciliation_generation
+            )
+            and (
+                self.frame_source.controller.state.control_lease_generation
+                == context.control.cancellation_generation
+            )
+            and self.performance.runtime_epoch
+            == context.runtime.wizard_runtime_epoch
+            and self.performance.character_id == context.character.character_id
+            and self.performance.package_digest == context.character.package_digest
+            and self.performance.manifest_digest == context.character.manifest_digest
+        )
+
+    def _director_edit_session_matches(
+        self,
+        session: DirectorEditSessionV1,
+    ) -> bool:
+        current = self.performance.scheduler.coordinator.snapshot_for_slot(
+            session.source_slot
+        )
+        context = session.compiler_context
+        return bool(
+            current is not None
+            and current.fingerprint() == session.snapshot_fingerprint
+            and current.media.media_id == session.media_id
+            and current.media.media_sha256 == session.media_sha256
+            and (
+                self.performance.scheduler.coordinator.reconciliation_generation
+                == context.runtime.reconciliation_generation
+            )
+            and (
+                self.frame_source.controller.state.control_lease_generation
+                == context.control.cancellation_generation
+            )
+            and self.performance.runtime_epoch
+            == context.runtime.wizard_runtime_epoch
+            and self.performance.character_id == context.character.character_id
+            and self.performance.package_digest == context.character.package_digest
+            and self.performance.manifest_digest == context.character.manifest_digest
+        )
 
     async def register_governed_speech(
         self,

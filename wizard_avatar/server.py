@@ -20,6 +20,7 @@ from .directed_performance import (
     DirectedPerformanceError,
     DirectedPerformancePreparationV1,
 )
+from .director_edit_sessions import DirectorEditSessionError
 from .frame_source import ProceduralWizardFrameSource
 from .hd_pose_artifact import HDPoseLibrary, sha256_path
 from .models import WizardCommand
@@ -37,6 +38,8 @@ from .performance_release import (
     PerformanceContextRequestV1,
 )
 from .performance_score import CompiledScoreRepository
+from .score_edit_application import ScoreEditApplicationError
+from .score_edits import ScoreEditsV1, ScoreEditsValidationError
 from .permission_world import (
     CapabilityPermissionV1,
     PERMISSION_WORLD_MAX_BODY_BYTES,
@@ -351,6 +354,16 @@ def create_app(
             raise HTTPException(status_code=401, detail="Unauthorized")
         if not connector_enabled:
             raise HTTPException(status_code=503, detail="Media connector unavailable")
+
+    def require_director(request: FastAPIRequest) -> None:
+        if request.headers.get("origin"):
+            raise HTTPException(status_code=403, detail="Browser-origin requests are not allowed")
+        expected_token = app_token if companion_mode else connector_token
+        if not expected_token:
+            raise HTTPException(status_code=503, detail="Director API unavailable")
+        authorization = request.headers.get("authorization", "")
+        if not _bearer_matches(authorization, expected_token):
+            raise HTTPException(status_code=401, detail="Unauthorized")
 
     async def bounded_json_body(
         request: FastAPIRequest,
@@ -689,7 +702,7 @@ def create_app(
 
     @app.post("/api/avatar/wizard/director/v1/performances/prepare")
     async def prepare_directed_performance(request: FastAPIRequest):
-        require_connector(request)
+        require_director(request)
         body = await bounded_json_body(
             request,
             DIRECTED_PERFORMANCE_MAX_BODY_BYTES,
@@ -704,6 +717,65 @@ def create_app(
                     ("changed", "mismatch", "not_ready", "stale")
                 )
                 else 400,
+                detail={"code": exc.code, "path": exc.path},
+            ) from exc
+
+    @app.post("/api/avatar/wizard/director/v1/performances/prepare-editable")
+    async def prepare_editable_directed_performance(request: FastAPIRequest):
+        require_director(request)
+        body = await bounded_json_body(
+            request,
+            DIRECTED_PERFORMANCE_MAX_BODY_BYTES,
+        )
+        try:
+            preparation = DirectedPerformancePreparationV1.from_json(body)
+            return await frame_hub.prepare_directed_performance(
+                preparation,
+                editable=True,
+            )
+        except (DirectedPerformanceError, DirectorEditSessionError) as exc:
+            raise HTTPException(
+                status_code=409
+                if exc.code.endswith(
+                    ("changed", "mismatch", "not_ready", "stale")
+                )
+                else 400,
+                detail={"code": exc.code, "path": exc.path},
+            ) from exc
+
+    @app.post(
+        "/api/avatar/wizard/director/v1/edit-sessions/{edit_session_id}/apply"
+    )
+    async def apply_director_score_edits(
+        edit_session_id: str,
+        request: FastAPIRequest,
+    ):
+        require_director(request)
+        body = await bounded_json_body(
+            request,
+            DIRECTED_PERFORMANCE_MAX_BODY_BYTES,
+        )
+        try:
+            edits = ScoreEditsV1.from_json(body)
+            return await frame_hub.apply_director_score_edits(
+                edit_session_id,
+                edits,
+            )
+        except (
+            DirectorEditSessionError,
+            ScoreEditApplicationError,
+            ScoreEditsValidationError,
+        ) as exc:
+            conflict_codes = {
+                "edit_session_not_found",
+                "edit_session_revision_changed",
+                "edit_session_stale",
+                "expected_value_mismatch",
+                "stale_binding",
+                "stale_context_binding",
+            }
+            raise HTTPException(
+                status_code=409 if exc.code in conflict_codes else 400,
                 detail={"code": exc.code, "path": exc.path},
             ) from exc
 

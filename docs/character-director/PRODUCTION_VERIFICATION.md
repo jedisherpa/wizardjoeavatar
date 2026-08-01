@@ -236,8 +236,8 @@ that the isolated connector opened `http://127.0.0.1:8875/` while the legacy
    examples through the existing runtime; unrestricted natural language and
    arbitrary choreography remain unsupported.
 2. `ScoreEditsV1` now has a deterministic application, character-bound
-   recompilation, and atomic repository publication path. The authenticated
-   HTTP and Companion editing surfaces remain incomplete.
+   recompilation, atomic repository publication path, and bounded authenticated
+   HTTP edit-session API. The Companion editing surface remains incomplete.
 3. Normal governed speech can use restrained scoreless body behavior when no
    externally published character-bound score is attached.
 4. Server-confirmed cancellation of an in-flight model turn is separate from

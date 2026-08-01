@@ -17,6 +17,7 @@ from wizard_avatar.media_session import MediaSessionSnapshotV1
 from wizard_avatar.performance_application import PerformanceApplication
 from wizard_avatar.performance_score import CompiledScoreRepository
 from wizard_avatar.server import create_app
+from wizard_avatar.score_edits import ScoreEditsV1
 from wizard_avatar.stream import WizardFrameHub
 
 from tests.wizard.test_media_session import snapshot_mapping
@@ -250,6 +251,163 @@ class DirectedPerformanceContractTests(unittest.TestCase):
 
 
 class DirectedPerformanceServerTests(unittest.IsolatedAsyncioTestCase):
+    async def test_companion_director_uses_app_token_not_connector_token(self):
+        env = {
+            "WIZARD_COMPANION_MODE": "1",
+            "WIZARD_COMPANION_APP_TOKEN": "private-app-token",
+            "WIZARD_MEDIA_CONNECTOR_ENABLED": "1",
+            "WIZARD_MEDIA_CONNECTOR_TOKEN": "separate-connector-token",
+        }
+        with tempfile.TemporaryDirectory() as temporary:
+            with mock.patch.dict(os.environ, env, clear=True):
+                app = create_app(
+                    score_repository=CompiledScoreRepository(temporary)
+                )
+            path = "/api/avatar/wizard/director/v1/performances/prepare-editable"
+            connector_status, _ = await asgi_request(
+                app,
+                "POST",
+                path,
+                b"",
+                (("authorization", "Bearer separate-connector-token"),),
+            )
+            app_status, _ = await asgi_request(
+                app,
+                "POST",
+                path,
+                b"",
+                (("authorization", "Bearer private-app-token"),),
+            )
+            origin_status, _ = await asgi_request(
+                app,
+                "POST",
+                path,
+                b"",
+                (
+                    ("authorization", "Bearer private-app-token"),
+                    ("origin", "http://127.0.0.1:8765"),
+                ),
+            )
+            await app.state.frame_hub.stop()
+
+        self.assertEqual(connector_status, 401)
+        self.assertEqual(app_status, 415)
+        self.assertEqual(origin_status, 403)
+
+    async def test_authenticated_edit_session_applies_and_publishes_content_free_edit(self):
+        registry = load_character_registry()
+        direction = preparation_mapping()["direction"]["direction_text"]
+        media_body = json.dumps(
+            main_snapshot(registry).to_dict(),
+            separators=(",", ":"),
+        ).encode("utf-8")
+        preparation_body = json.dumps(
+            preparation_mapping(),
+            separators=(",", ":"),
+        ).encode("utf-8")
+        env = {
+            "WIZARD_MEDIA_CONNECTOR_ENABLED": "1",
+            "WIZARD_MEDIA_CONNECTOR_TOKEN": "director-test-token",
+        }
+        with tempfile.TemporaryDirectory() as temporary:
+            repository = CompiledScoreRepository(temporary)
+            with mock.patch.dict(os.environ, env, clear=True):
+                app = create_app(score_repository=repository)
+            headers = (
+                ("content-type", "application/json"),
+                ("authorization", "Bearer director-test-token"),
+            )
+            await asgi_request(
+                app,
+                "POST",
+                "/api/avatar/wizard/media-session",
+                media_body,
+                headers,
+            )
+            unauthorized, _ = await asgi_request(
+                app,
+                "POST",
+                "/api/avatar/wizard/director/v1/performances/prepare-editable",
+                preparation_body,
+                (("content-type", "application/json"),),
+            )
+            prepared_status, prepared = await asgi_request(
+                app,
+                "POST",
+                "/api/avatar/wizard/director/v1/performances/prepare-editable",
+                preparation_body,
+                headers,
+            )
+            inspection = prepared["edit_session"]
+            cue = inspection["cues"][0]
+            edits = ScoreEditsV1.build(
+                {
+                    "schema_version": 1,
+                    "edit_set_id": "edits:http-director-0001",
+                    "revision": 1,
+                    "character_id": inspection["character_id"],
+                    "package_digest": inspection["package_digest"],
+                    "base_score_sha256": inspection["base_score_sha256"],
+                    "parent_edit_set_sha256": None,
+                    "actor": {
+                        "kind": "human",
+                        "actor_id": "local:director-test",
+                    },
+                    "operations": [
+                        {
+                            "operation_id": "op:http-disable-0001",
+                            "cue_id": cue["cue_id"],
+                            "edit_type": "disabled",
+                            "expected_value_sha256": cue["edit_preconditions"][
+                                "disabled"
+                            ],
+                            "value": True,
+                            "reason_code": "director_choice",
+                        }
+                    ],
+                }
+            )
+            apply_status, applied = await asgi_request(
+                app,
+                "POST",
+                "/api/avatar/wizard/director/v1/edit-sessions/{}/apply".format(
+                    inspection["edit_session_id"]
+                ),
+                json.dumps(edits.to_dict(), separators=(",", ":")).encode(
+                    "utf-8"
+                ),
+                headers,
+            )
+            loaded = repository.load_current(MEDIA_DIGEST)
+            replay_status, replay = await asgi_request(
+                app,
+                "POST",
+                "/api/avatar/wizard/director/v1/edit-sessions/{}/apply".format(
+                    inspection["edit_session_id"]
+                ),
+                json.dumps(edits.to_dict(), separators=(",", ":")).encode(
+                    "utf-8"
+                ),
+                headers,
+            )
+            await app.state.frame_hub.stop()
+
+        self.assertEqual(unauthorized, 401)
+        self.assertEqual(prepared_status, 200)
+        self.assertEqual(apply_status, 200)
+        self.assertEqual(applied["publication"]["revision"], 2)
+        self.assertEqual(applied["edit_session"]["score_revision"], 2)
+        self.assertEqual(loaded.revision, 2)
+        self.assertEqual(replay_status, 409)
+        self.assertEqual(replay["detail"]["code"], "stale_binding")
+        self.assertTrue(applied["edit_session"]["cues"][0]["disabled"])
+        encoded = json.dumps(
+            {"prepared": prepared, "applied": applied},
+            separators=(",", ":"),
+        )
+        self.assertNotIn(direction, encoded)
+        self.assertNotIn("capability_requirements", encoded)
+
     async def test_authenticated_route_prepares_content_free_binding(self):
         registry = load_character_registry()
         body = json.dumps(

@@ -122,8 +122,8 @@ decisions. Unrestricted natural-language choreography remains deferred.
 The existing score/loader/scheduler remains authoritative. Score runtime
 binding and `ScoreEditsV1` remain additive. Deterministic edit application,
 character-bound recompilation, and atomic repository publication are now
-implemented; the authenticated HTTP and Companion editing surfaces are not yet
-claimed complete.
+implemented. The authenticated, bounded HTTP edit-session API is also
+implemented; Companion editor controls remain incomplete.
 
 ## 15. Text, Voice, And Animation Synchronization
 

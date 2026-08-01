@@ -8,6 +8,7 @@
   "properties": {
     "schema_version": {"const": 1},
     "compiled_score_id": {"type": "string", "pattern": "^compiled:[a-z0-9][a-z0-9._:-]{0,127}$"},
+    "revision": {"type": "integer", "minimum": 1, "maximum": 9007199254740991},
     "performance_score_sha256": {"$ref": "#/$defs/hash"},
     "media": {
       "type": "object", "additionalProperties": false,
