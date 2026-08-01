@@ -1,9 +1,9 @@
 {
   "alignment": {
     "interpolation": "lanczos_rgb_binary_alpha",
-    "scale": 0.57416,
-    "scale_x": 0.57416,
-    "scale_y": 0.57416,
+    "scale": 1.0,
+    "scale_x": 1.0,
+    "scale_y": 1.0,
     "translate_x": 0,
     "translate_y": 0
   },
@@ -12,89 +12,87 @@
     960,
     540
   ],
-  "cavity_fill_rgba": null,
   "cavity_polygon": [
     [
       347,
-      211
+      218
     ],
     [
-      437,
-      213
+      435,
+      218
     ],
     [
       428,
-      229
+      232
     ],
     [
-      390,
+      396,
       232
     ],
     [
       350,
-      223
+      224
     ]
   ],
-  "cavity_source": "generated",
   "changed_bbox": [
-    346,
+    347,
     220,
-    440,
-    253
+    434,
+    252
   ],
-  "generated_render_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/032-cause-and-effect/142_ACT142_cause_and_effect_speaking_full_pair_donor_v8.png",
-  "generated_render_sha256": "23eb2099bad224003d84f11e91f14ff5e2cea8ef4100743d7d5f634395f1f0f8",
+  "generated_render_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/032-cause-and-effect/142_ACT142_cause_and_effect_speaking_mandible_donor_rotate_neg14.png",
+  "generated_render_sha256": "e8c5efb0c10580882983a154c32d09f115a6a54617b43c1baa78dc7152d2a2eb",
   "hinge": [
     350,
-    219
+    220
   ],
-  "hinge_radius": 14,
+  "hinge_radius": 12,
   "mandible_bbox": [
-    345,
-    211,
-    441,
+    346,
+    218,
+    436,
     253
   ],
   "mandible_connected_ratio": 1.0,
-  "mandible_largest_component_pixels": 2849,
-  "mandible_opaque_pixels": 2849,
+  "mandible_largest_component_pixels": 2242,
+  "mandible_opaque_pixels": 2242,
   "mandible_polygon": [
     [
-      345,
-      211
+      346,
+      218
     ],
     [
-      440,
-      212
+      435,
+      218
     ],
     [
-      437,
-      245
-    ],
-    [
-      421,
+      434,
       252
     ],
     [
-      385,
-      243
+      420,
+      252
     ],
     [
-      347,
-      225
+      388,
+      244
+    ],
+    [
+      350,
+      228
     ]
   ],
   "method": "pair_specific_connected_mandible_patch_v1",
   "minimum_connected_ratio": 0.9,
-  "minimum_mandible_height": 18,
+  "minimum_mandible_height": 16,
   "outside_articulation_change": false,
   "residual_clear_polygon": null,
   "resting_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/032-cause-and-effect/032_ACT032_cause_and_effect_resting_beak_alpha.png",
   "resting_sha256": "2a309a5c105e69fbdc3b29ccba09bd5e0f529626df755ebef116150c8e0795a0",
   "runtime_admitted": false,
   "schema_version": 1,
-  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/032-cause-and-effect/142_ACT142_cause_and_effect_speaking_beak_alpha.png",
-  "speaking_sha256": "71b9ef6c47bd8d4716b4a874ab369b5d2d8e3d2300d0a4520eb1f1c133cb26b0",
+  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/032-cause-and-effect/142_ACT142_cause_and_effect_speaking_beak_candidate_v6.png",
+  "speaking_sha256": "b6261e926a91095fd34568c2cee7555960fb1fcbc2d9b67fdefe6d6335c073cc",
   "upper_beak_policy": "immutable_source_pixels",
   "upper_beak_polygon": [
     [

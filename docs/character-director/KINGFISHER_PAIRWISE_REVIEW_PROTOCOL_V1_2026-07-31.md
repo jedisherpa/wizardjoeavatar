@@ -164,12 +164,48 @@ python3 tools/manage_kingfisher_pairwise_review.py capture \
 The status line includes pair number, pose label, closed/open state, and
 pairwise disposition. Direct pair selection uses `&pair=N`.
 
+The reviewer now defaults to a locked side-by-side comparison. Closed and open
+frames use the same union registration, source-space crop, presentation scale,
+and canvas size. The beak-focus crop is derived from the closed/open pixel
+difference and is clipped before presentation, so unrelated body pixels cannot
+hide hinge drift. The magnifier control toggles back to full-character context.
+
+## One-pair rebuild loop
+
+User review on 2026-08-01 found that several beaks previously accepted in a
+rapid single-canvas toggle were visibly misaligned. Every earlier full-size
+pass was invalidated without deleting its evidence. Rebuilds now proceed one
+pair at a time:
+
+1. Treat the closed alpha as the immutable body and upper-bill source.
+2. Generate or author one matching open-mouth donor for that exact pose.
+3. Composite only a connected lower mandible and mouth cavity.
+4. Restore the canonical upper bill after all donor layers.
+5. Require zero outside-mouth change, stable registration, silhouette overlap,
+   and a connected rear hinge.
+6. Inspect closed and open simultaneously in the beak-focus reviewer.
+7. Capture native full-size evidence and record one explicit disposition.
+8. Do not proceed to the next pair until the current pair is `pass`,
+   `needs_rebuild`, or `not_observable`.
+
+Pair 32 (`cause-and-effect`) is the first candidate rebuilt under this stricter
+loop. Candidate v8 uses a pose-specific generated cavity instead of a flat
+solid fill, while the compositor preserves the canonical body and upper bill.
+Its audit reports outside-mouth mean difference `0.0`, silhouette IoU `1.0`,
+registration delta `0`, and connected-mandible ratio `1.0`. It has an internal
+full-size `pass`; user approval and runtime admission remain false.
+
+Evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-032-v8/`
+
 ## Verification
 
-Focused queue/compositor tests: 11 passed after adding review invalidation and
-cavity-layer regressions.
+Focused reviewer and compositor tests: 11 passed after adding review
+invalidation, cavity-source, and locked-comparison regressions.
 
-Complete Kingfisher-focused suite: 66 passed in 11.850 seconds.
+Complete Kingfisher-focused suite: 63 passed in 12.289 seconds. The five
+reviewer UI tests also pass.
 
 The strict verifier intentionally exits nonzero until all observable pairs
 pass and all rear views are explicitly `not_observable`. It writes a structured
@@ -183,14 +219,17 @@ Current blocker:
 
 Current review artifact:
 
-`kingfisher_act_001_066_111_176_pair_review-7f2473c542c17184.wjpose`
+`kingfisher_act_001_066_111_176_pair_review-96c4e1dd70de98a2.wjpose`
 
 Artifact SHA-256:
 
-`7f2473c542c1718450498e532511d27f01d090dca545a3521dce866f7112e7b8`
+`96c4e1dd70de98a2e13b1e3052ed1d7a686372b1ea312e07700512354297f572`
 
 Library-index SHA-256:
 
-`ea6efd38ba90645ea3360289b2e3b3d50d8ce4bf5b1783a0f9e817bfa649d246`
+`42212fab9dd3e40d26e67a15037b5a57a7099fe3ad4a29ec5dba28a5ad50a4ad`
+
+Queue state: 1 internal full-size pass, 62 pending, 1 needs rebuild, and
+2 not observable. Runtime-admitted and user-approved counts remain zero.
 
 This failure is expected and proves the queue is fail-closed.

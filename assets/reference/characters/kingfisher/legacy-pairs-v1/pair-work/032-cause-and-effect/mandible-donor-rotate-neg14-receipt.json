@@ -1,0 +1,79 @@
+{
+  "approval_state": "candidate_visual_review",
+  "canvas": [
+    960,
+    540
+  ],
+  "cavity_fill_rgba": [
+    12,
+    9,
+    12,
+    255
+  ],
+  "cavity_polygon": [
+    [
+      347,
+      218
+    ],
+    [
+      435,
+      218
+    ],
+    [
+      428,
+      231
+    ],
+    [
+      390,
+      230
+    ],
+    [
+      350,
+      224
+    ]
+  ],
+  "changed_bbox": [
+    346,
+    215,
+    436,
+    252
+  ],
+  "changed_pixels": 1846,
+  "hinge": [
+    350,
+    220
+  ],
+  "mandible_polygon": [
+    [
+      346,
+      216
+    ],
+    [
+      434,
+      216
+    ],
+    [
+      431,
+      231
+    ],
+    [
+      390,
+      230
+    ],
+    [
+      350,
+      225
+    ]
+  ],
+  "method": "rotate_original_lower_mandible_about_declared_hinge_v1",
+  "resting_path": "/Users/paul/Library/Caches/WizardJoe/git-repair-liana-normalization/assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/032-cause-and-effect/032_ACT032_cause_and_effect_resting_beak_alpha.png",
+  "resting_sha256": "2a309a5c105e69fbdc3b29ccba09bd5e0f529626df755ebef116150c8e0795a0",
+  "rotation_degrees": -14.0,
+  "runtime_admitted": false,
+  "schema_version": 1,
+  "speaking_path": "/Users/paul/Library/Caches/WizardJoe/git-repair-liana-normalization/assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/032-cause-and-effect/142_ACT142_cause_and_effect_speaking_mandible_donor_rotate_neg14.png",
+  "speaking_sha256": "e8c5efb0c10580882983a154c32d09f115a6a54617b43c1baa78dc7152d2a2eb",
+  "tongue_fill_rgba": null,
+  "tongue_polygon": null,
+  "upper_beak_policy": "immutable_source_pixels"
+}

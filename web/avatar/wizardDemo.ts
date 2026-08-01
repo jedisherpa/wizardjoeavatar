@@ -96,17 +96,66 @@ function unionBounds(first, second) {
   };
 }
 
-function fitPairReviewPresentation(canvasElement, bounds, sourceWidth, sourceHeight) {
+function differenceBoundsRgba(first, second, width, height) {
+  let minX = width;
+  let minY = height;
+  let maxX = -1;
+  let maxY = -1;
+  for (let y = 0; y < height; y++) {
+    const rowOffset = y * width * 4;
+    for (let x = 0; x < width; x++) {
+      const offset = rowOffset + x * 4;
+      if (
+        first[offset] === second[offset]
+        && first[offset + 1] === second[offset + 1]
+        && first[offset + 2] === second[offset + 2]
+        && first[offset + 3] === second[offset + 3]
+      ) continue;
+      minX = Math.min(minX, x);
+      minY = Math.min(minY, y);
+      maxX = Math.max(maxX, x);
+      maxY = Math.max(maxY, y);
+    }
+  }
+  return maxX >= minX && maxY >= minY
+    ? { minX, minY, maxX, maxY }
+    : null;
+}
+
+function expandPairFocusBounds(bounds, sourceWidth, sourceHeight) {
   if (!bounds) return null;
-  const topInset = 54;
+  const paddingX = Math.max(44, Math.round(sourceWidth * 0.055));
+  const paddingY = Math.max(42, Math.round(sourceHeight * 0.1));
+  return {
+    minX: Math.max(0, bounds.minX - paddingX),
+    minY: Math.max(0, bounds.minY - paddingY),
+    maxX: Math.min(sourceWidth - 1, bounds.maxX + paddingX),
+    maxY: Math.min(sourceHeight - 1, bounds.maxY + paddingY),
+  };
+}
+
+function fitPairReviewPresentation(
+  canvasElement,
+  bounds,
+  sourceWidth,
+  sourceHeight,
+  panelIndex = 0,
+  panelCount = 1,
+) {
+  if (!bounds) return null;
+  const topInset = panelCount > 1 ? 78 : 54;
   const margin = 18;
+  const gutter = panelCount > 1 ? 12 : 0;
   const cssWidth = Number.parseFloat(canvasElement.style.width) || sourceWidth;
   const cssHeight = Number.parseFloat(canvasElement.style.height) || sourceHeight;
   const sourceScaleX = cssWidth / sourceWidth;
   const sourceScaleY = cssHeight / sourceHeight;
   const boundsWidth = (bounds.maxX - bounds.minX + 1) * sourceScaleX;
   const boundsHeight = (bounds.maxY - bounds.minY + 1) * sourceScaleY;
-  const availableWidth = Math.max(1, window.innerWidth - margin * 2);
+  const availableWidth = Math.max(
+    1,
+    (window.innerWidth - margin * 2 - gutter * (panelCount - 1)) / panelCount,
+  );
   const availableHeight = Math.max(1, window.innerHeight - topInset - margin * 2);
   const presentationScale = Math.max(
     1,
@@ -114,13 +163,20 @@ function fitPairReviewPresentation(canvasElement, bounds, sourceWidth, sourceHei
   );
   const centerX = ((bounds.minX + bounds.maxX + 1) / 2) * sourceScaleX;
   const centerY = ((bounds.minY + bounds.maxY + 1) / 2) * sourceScaleY;
-  const translateX = window.innerWidth / 2 - centerX * presentationScale;
+  const panelLeft = margin + panelIndex * (availableWidth + gutter);
+  const translateX = panelLeft + availableWidth / 2 - centerX * presentationScale;
   const translateY = availableHeight / 2 + margin - centerY * presentationScale;
 
   canvasElement.style.position = "fixed";
   canvasElement.style.left = "0";
   canvasElement.style.top = `${topInset}px`;
   canvasElement.style.transformOrigin = "0 0";
+  canvasElement.style.clipPath = `inset(${[
+    bounds.minY / sourceHeight * 100,
+    (sourceWidth - bounds.maxX - 1) / sourceWidth * 100,
+    (sourceHeight - bounds.maxY - 1) / sourceHeight * 100,
+    bounds.minX / sourceWidth * 100,
+  ].map((value) => `${value}%`).join(" ")})`;
   canvasElement.style.transform = (
     `matrix(${presentationScale}, 0, 0, ${presentationScale}, ${translateX}, ${translateY})`
   );
@@ -129,6 +185,8 @@ function fitPairReviewPresentation(canvasElement, bounds, sourceWidth, sourceHei
     presentationScale,
     translateX,
     translateY,
+    panelIndex,
+    panelCount,
   };
 }
 
@@ -287,8 +345,17 @@ async function start() {
         throw new Error("HD pair-review sequence must contain closed/open pairs");
       }
       document.body.classList.add("hd-pair-review");
+      document.body.classList.add("hd-pair-compare");
       document.body.dataset.hdReviewStep = "load-pair";
       const canvasElement = document.getElementById("wizard-canvas");
+      canvasElement.classList.add("hd-pair-canvas", "hd-pair-canvas-closed");
+      canvasElement.setAttribute("aria-label", "Closed beak pose");
+      const openCanvasElement = document.createElement("canvas");
+      openCanvasElement.className = "hd-pair-canvas hd-pair-canvas-open";
+      openCanvasElement.setAttribute("aria-label", "Open beak pose");
+      document.querySelector(".stage-shell").append(openCanvasElement);
+      const openCanvas = new WizardCanvas(openCanvasElement, null);
+      openCanvas.configure(width, height, "rgba");
       const pairCount = sequence.pose_ids.length / 2;
       const pairReviewStates = sequence.pair_review_states;
       if (
@@ -309,6 +376,15 @@ async function start() {
       let playbackTimer = null;
       let pairFrames = null;
       let pairPresentation = null;
+      let pairFullBounds = null;
+      let pairFocusBounds = null;
+      let reviewFraming = "beak";
+
+      const comparisonLabels = document.createElement("div");
+      comparisonLabels.className = "hd-pair-comparison-labels";
+      comparisonLabels.setAttribute("aria-hidden", "true");
+      comparisonLabels.innerHTML = "<span>Closed</span><span>Open</span>";
+      document.querySelector(".stage-shell").append(comparisonLabels);
 
       const controls = document.createElement("section");
       controls.className = "hd-pair-review-controls";
@@ -319,11 +395,38 @@ async function start() {
         <button type="button" data-pair-play title="Play pair" aria-label="Play pair" aria-pressed="false">▶</button>
         <button type="button" data-pair-open title="Show open pose" aria-label="Show open pose">◇</button>
         <button type="button" data-pair-next title="Next pair" aria-label="Next pair">→</button>
+        <button type="button" data-pair-framing title="Show full character" aria-label="Show full character" aria-pressed="true">⌕</button>
         <output data-pair-label aria-live="polite"></output>
       `;
       document.querySelector(".stage-shell").append(controls);
       const label = controls.querySelector("[data-pair-label]");
       const playButton = controls.querySelector("[data-pair-play]");
+      const framingButton = controls.querySelector("[data-pair-framing]");
+
+      const selectedPairBounds = () => (
+        reviewFraming === "beak" && pairFocusBounds
+          ? pairFocusBounds
+          : pairFullBounds
+      );
+      const fitPairCanvases = (bounds) => ({
+        bounds,
+        closed: fitPairReviewPresentation(
+          canvasElement,
+          bounds,
+          width,
+          height,
+          0,
+          2,
+        ),
+        open: fitPairReviewPresentation(
+          openCanvasElement,
+          bounds,
+          width,
+          height,
+          1,
+          2,
+        ),
+      });
 
       const pairPoseId = () => sequence.pose_ids[pairIndex * 2 + stateIndex];
       const loadPairFrames = async () => {
@@ -333,17 +436,17 @@ async function start() {
           loadPose(closedPoseId),
           loadPose(openPoseId),
         ]);
-        const pairBounds = unionBounds(
+        pairFullBounds = unionBounds(
           opaqueBoundsRgba(closedFrame, width, height),
           opaqueBoundsRgba(openFrame, width, height),
         );
-        pairFrames = [closedFrame, openFrame];
-        pairPresentation = fitPairReviewPresentation(
-          canvasElement,
-          pairBounds,
+        pairFocusBounds = expandPairFocusBounds(
+          differenceBoundsRgba(closedFrame, openFrame, width, height),
           width,
           height,
         );
+        pairFrames = [closedFrame, openFrame];
+        pairPresentation = fitPairCanvases(selectedPairBounds());
       };
       const readablePairName = () => {
         const closedPose = sequence.pose_ids[pairIndex * 2];
@@ -359,6 +462,7 @@ async function start() {
         document.body.dataset.hdPairState = stateIndex ? "open" : "closed";
         document.body.dataset.hdPairDisposition = disposition;
         document.body.dataset.hdPairPlaying = String(playing);
+        document.body.dataset.hdPairFraming = reviewFraming;
         playButton.textContent = playing ? "❚❚" : "▶";
         playButton.title = playing ? "Pause pair" : "Play pair";
         playButton.setAttribute("aria-label", playButton.title);
@@ -371,14 +475,21 @@ async function start() {
           "aria-pressed",
           String(stateIndex === 1),
         );
+        framingButton.title = reviewFraming === "beak"
+          ? "Show full character"
+          : "Focus beak comparison";
+        framingButton.setAttribute("aria-label", framingButton.title);
+        framingButton.setAttribute("aria-pressed", String(reviewFraming === "beak"));
+        canvasElement.dataset.pairActive = String(!playing || stateIndex === 0);
+        openCanvasElement.dataset.pairActive = String(!playing || stateIndex === 1);
       };
       const drawPairState = async () => {
         try {
           if (!pairFrames) await loadPairFrames();
-          const pixels = pairFrames[stateIndex];
           if (stopped) return;
-          canvas.draw(presentPose(pixels));
-          framesDrawn++;
+          canvas.draw(presentPose(pairFrames[0]));
+          openCanvas.draw(presentPose(pairFrames[1]));
+          framesDrawn += 2;
           delete document.body.dataset.hdFrameError;
         } catch (error) {
           frameFailures++;
@@ -438,6 +549,11 @@ async function start() {
         },
       );
       playButton.addEventListener("click", () => setPlaying(!playing));
+      framingButton.addEventListener("click", () => {
+        reviewFraming = reviewFraming === "beak" ? "full" : "beak";
+        pairPresentation = fitPairCanvases(selectedPairBounds());
+        updateControls();
+      });
       addEventListener("keydown", (event) => {
         if (event.key === "ArrowLeft") void selectPair(pairIndex - 1);
         if (event.key === "ArrowRight") void selectPair(pairIndex + 1);
@@ -465,17 +581,17 @@ async function start() {
         libraryIndexSha256: manifest.library_index_sha256,
         presentationOffsetX,
         pairPresentation,
+        comparisonMode: "locked-side-by-side",
+        reviewFraming,
+        pairFullBounds,
+        pairFocusBounds,
         canvas: canvas.getMetrics(),
+        openCanvas: openCanvas.getMetrics(),
       });
       document.body.dataset.hdReviewStep = "ready";
       addEventListener("resize", () => {
         if (pairPresentation?.bounds) {
-          pairPresentation = fitPairReviewPresentation(
-            canvasElement,
-            pairPresentation.bounds,
-            width,
-            height,
-          );
+          pairPresentation = fitPairCanvases(selectedPairBounds());
         }
       });
       addEventListener(

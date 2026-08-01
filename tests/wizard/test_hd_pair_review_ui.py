@@ -6,6 +6,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 DEMO_PATH = ROOT / "web" / "avatar" / "wizardDemo.ts"
 STYLE_PATH = ROOT / "web" / "avatar" / "style.css"
+INDEX_PATH = ROOT / "web" / "avatar" / "index.html"
 LEDGER_PATH = (
     ROOT
     / "assets"
@@ -24,7 +25,14 @@ class HdPairReviewUiTests(unittest.TestCase):
         self.assertIn("HD pair-review sequence must contain closed/open pairs", source)
         self.assertIn("Promise.all([", source)
         self.assertIn("unionBounds(", source)
+        self.assertIn("differenceBoundsRgba(", source)
+        self.assertIn("expandPairFocusBounds(", source)
+        self.assertIn("canvasElement.style.clipPath", source)
         self.assertIn("fitPairReviewPresentation(", source)
+        self.assertIn('comparisonMode: "locked-side-by-side"', source)
+        self.assertIn('openCanvas.configure(width, height, "rgba")', source)
+        self.assertIn("canvas.draw(presentPose(pairFrames[0]))", source)
+        self.assertIn("openCanvas.draw(presentPose(pairFrames[1]))", source)
         self.assertIn("pairReview: true", source)
 
     def test_pair_review_exposes_stable_navigation_state(self):
@@ -34,6 +42,8 @@ class HdPairReviewUiTests(unittest.TestCase):
         self.assertIn("data-pair-closed", source)
         self.assertIn("data-pair-open", source)
         self.assertIn("data-pair-play", source)
+        self.assertIn("data-pair-framing", source)
+        self.assertIn("openCanvasElement.dataset.pairActive", source)
         self.assertIn("document.body.dataset.hdPairNumber", source)
         self.assertIn("document.body.dataset.hdPairState", source)
         self.assertIn("document.body.dataset.hdPairDisposition", source)
@@ -47,10 +57,17 @@ class HdPairReviewUiTests(unittest.TestCase):
     def test_pair_review_controls_fit_desktop_and_mobile(self):
         styles = STYLE_PATH.read_text(encoding="utf-8")
         self.assertIn(".hd-pair-review-controls", styles)
-        self.assertIn("grid-template-columns: repeat(5, 34px)", styles)
+        self.assertIn("grid-template-columns: repeat(6, 34px)", styles)
         self.assertIn("left: 8px;", styles)
         self.assertIn("right: 8px;", styles)
         self.assertIn("minmax(0, 1fr)", styles)
+        self.assertIn(".hd-pair-comparison-labels", styles)
+        self.assertIn('[data-pair-active="false"]', styles)
+        self.assertIn("grid-template-columns: repeat(2, minmax(0, 1fr))", styles)
+
+    def test_pair_comparison_assets_have_explicit_cache_version(self):
+        index = INDEX_PATH.read_text(encoding="utf-8")
+        self.assertEqual(index.count("hd-pair-compare-v5"), 2)
 
     def test_user_recheck_preserves_superseded_pairwise_dispositions(self):
         ledger = json.loads(LEDGER_PATH.read_text(encoding="utf-8"))

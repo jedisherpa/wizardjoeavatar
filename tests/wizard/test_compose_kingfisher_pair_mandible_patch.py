@@ -144,7 +144,7 @@ class ComposeKingfisherPairMandiblePatchTests(unittest.TestCase):
             )
             generated.save(generated_path)
             output_path = root / "output.png"
-            compose_mandible_patch(
+            receipt = compose_mandible_patch(
                 resting_path,
                 generated_path,
                 output_path,
@@ -172,10 +172,60 @@ class ComposeKingfisherPairMandiblePatchTests(unittest.TestCase):
                 ],
                 hinge=(473, 255),
                 minimum_mandible_height=10,
+                cavity_fill=(64, 24, 20, 255),
             )
 
             output = Image.open(output_path).convert("RGBA")
-            self.assertEqual(output.getpixel((500, 257)), (10, 13, 16, 255))
+            self.assertEqual(output.getpixel((500, 257)), (64, 24, 20, 255))
+            self.assertEqual(receipt["cavity_fill_rgba"], [64, 24, 20, 255])
+            self.assertEqual(receipt["cavity_source"], "solid")
+
+    def test_preserves_reviewed_generated_cavity_when_requested(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            resting_path, generated_path = self._sources(root)
+            generated = Image.open(generated_path).convert("RGB")
+            ImageDraw.Draw(generated).polygon(
+                [(478, 252), (540, 252), (520, 262), (485, 260)],
+                fill=(112, 31, 38),
+            )
+            generated.save(generated_path)
+            output_path = root / "output.png"
+            receipt = compose_mandible_patch(
+                resting_path,
+                generated_path,
+                output_path,
+                root / "receipt.json",
+                scale=1,
+                translate_x=0,
+                translate_y=0,
+                mandible_polygon=[
+                    (468, 248),
+                    (552, 248),
+                    (552, 272),
+                    (468, 272),
+                ],
+                cavity_polygon=[
+                    (478, 251),
+                    (542, 251),
+                    (520, 263),
+                    (484, 261),
+                ],
+                upper_beak_polygon=[
+                    (468, 228),
+                    (552, 225),
+                    (552, 250),
+                    (468, 250),
+                ],
+                hinge=(473, 255),
+                minimum_mandible_height=10,
+                cavity_source="generated",
+            )
+
+            output = Image.open(output_path).convert("RGBA")
+            self.assertEqual(output.getpixel((500, 257)), (112, 31, 38, 255))
+            self.assertEqual(receipt["cavity_source"], "generated")
+            self.assertIsNone(receipt["cavity_fill_rgba"])
 
     def test_rejects_underweight_mandible(self):
         with tempfile.TemporaryDirectory() as temporary:

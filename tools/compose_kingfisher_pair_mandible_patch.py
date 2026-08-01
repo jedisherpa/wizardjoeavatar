@@ -119,6 +119,7 @@ def compose_mandible_patch(
     minimum_mandible_height: int = 8,
     minimum_connected_ratio: float = 0.9,
     cavity_fill: tuple[int, int, int, int] = (10, 13, 16, 255),
+    cavity_source: str = "solid",
 ) -> dict[str, object]:
     """Composite only a matched lower mandible onto an immutable body."""
     with Image.open(resting_path) as loaded:
@@ -166,6 +167,8 @@ def compose_mandible_patch(
         raise ValueError("minimum mandible height must be positive")
     if not 0 < minimum_connected_ratio <= 1:
         raise ValueError("minimum connected ratio must be in (0, 1]")
+    if cavity_source not in {"solid", "generated"}:
+        raise ValueError("cavity source must be solid or generated")
 
     generated = load_render_alpha(generated_path)
     target_size = (
@@ -229,10 +232,11 @@ def compose_mandible_patch(
     # cavity after it so donor tongues, teeth, highlights, or throat pixels
     # cannot leak back into the admitted speaking frame.
     cavity_mask = _polygon_mask(CANVAS_SIZE, cavity_polygon)
-    output.paste(
-        Image.new("RGBA", CANVAS_SIZE, cavity_fill),
-        mask=cavity_mask,
-    )
+    if cavity_source == "solid":
+        output.paste(
+            Image.new("RGBA", CANVAS_SIZE, cavity_fill),
+            mask=cavity_mask,
+        )
 
     upper_beak_mask = _polygon_mask(CANVAS_SIZE, upper_beak_polygon)
     output = Image.composite(resting, output, upper_beak_mask)
@@ -292,6 +296,10 @@ def compose_mandible_patch(
         "hinge_radius": hinge_radius,
         "minimum_mandible_height": minimum_mandible_height,
         "minimum_connected_ratio": minimum_connected_ratio,
+        "cavity_source": cavity_source,
+        "cavity_fill_rgba": (
+            list(cavity_fill) if cavity_source == "solid" else None
+        ),
         "mandible_bbox": list(mandible_bbox),
         "mandible_opaque_pixels": total_pixels,
         "mandible_largest_component_pixels": largest_component,
@@ -328,6 +336,18 @@ def main() -> None:
     parser.add_argument("--hinge-radius", type=int, default=6)
     parser.add_argument("--minimum-mandible-height", type=int, default=8)
     parser.add_argument("--minimum-connected-ratio", type=float, default=0.9)
+    parser.add_argument(
+        "--cavity-fill",
+        nargs=4,
+        type=int,
+        metavar=("R", "G", "B", "A"),
+        default=(10, 13, 16, 255),
+    )
+    parser.add_argument(
+        "--cavity-source",
+        choices=("solid", "generated"),
+        default="solid",
+    )
     args = parser.parse_args()
     receipt = compose_mandible_patch(
         args.resting,
@@ -363,6 +383,8 @@ def main() -> None:
         hinge_radius=args.hinge_radius,
         minimum_mandible_height=args.minimum_mandible_height,
         minimum_connected_ratio=args.minimum_connected_ratio,
+        cavity_fill=tuple(args.cavity_fill),
+        cavity_source=args.cavity_source,
     )
     print(json.dumps(receipt, indent=2, sort_keys=True))
 
