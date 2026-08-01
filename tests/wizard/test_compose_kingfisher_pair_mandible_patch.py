@@ -133,6 +133,50 @@ class ComposeKingfisherPairMandiblePatchTests(unittest.TestCase):
                 [[548, 258], [574, 268], [572, 275], [548, 266]],
             )
 
+    def test_neutral_cavity_overwrites_generated_mouth_pixels(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            resting_path, generated_path = self._sources(root)
+            generated = Image.open(generated_path).convert("RGB")
+            ImageDraw.Draw(generated).polygon(
+                [(478, 252), (540, 252), (520, 262), (485, 260)],
+                fill=(220, 35, 55),
+            )
+            generated.save(generated_path)
+            output_path = root / "output.png"
+            compose_mandible_patch(
+                resting_path,
+                generated_path,
+                output_path,
+                root / "receipt.json",
+                scale=1,
+                translate_x=0,
+                translate_y=0,
+                mandible_polygon=[
+                    (468, 248),
+                    (552, 248),
+                    (552, 272),
+                    (468, 272),
+                ],
+                cavity_polygon=[
+                    (478, 251),
+                    (542, 251),
+                    (520, 263),
+                    (484, 261),
+                ],
+                upper_beak_polygon=[
+                    (468, 228),
+                    (552, 225),
+                    (552, 250),
+                    (468, 250),
+                ],
+                hinge=(473, 255),
+                minimum_mandible_height=10,
+            )
+
+            output = Image.open(output_path).convert("RGBA")
+            self.assertEqual(output.getpixel((500, 257)), (10, 13, 16, 255))
+
     def test_rejects_underweight_mandible(self):
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)

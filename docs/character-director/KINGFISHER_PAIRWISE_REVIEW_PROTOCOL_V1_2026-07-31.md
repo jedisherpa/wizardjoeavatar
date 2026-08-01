@@ -56,12 +56,20 @@ passing does not substitute for visual review.
 ## Current Queue
 
 - pair count: 66;
-- pairwise passes: 29 (pairs 1-3, 6-30, and rebuilt 59);
-- pending: 34;
+- pairwise passes: 0;
+- pending: 63;
 - needs rebuild: 1 (pair 62);
 - not observable: 2 (pairs 4 and 5);
 - user approved: 0;
 - runtime admitted: 0.
+
+On 2026-08-01 the user reported visible beak misalignment across the all-pairs
+observer. That report invalidated every prior visible internal pass, including
+pair 59, without deleting its review record or evidence. Each superseded pass
+is retained under `pairwise_full_size_review_history`; its current disposition
+is `pending` with `source_disposition` set to
+`user_reported_visual_recheck`. Geometry and registration checks may qualify a
+frame as a candidate, but they cannot restore a visual pass.
 
 Pair 59 demonstrates the complete workflow. The batch candidate was rejected
 for a doubled upper edge. A source-pixel rotation was rejected for insufficient
@@ -105,13 +113,27 @@ bill change from the body-registered source. All three final audits report
 outside-mouth mean difference 0.0, silhouette IoU 1.0, and registration delta
 0.
 
-Pair 30 was inspected as an isolated closed/open projector pair and passed with
+Pair 30 was inspected as an isolated closed/open projector pair and initially
+passed with
 one stable rear hinge, body registration, upper-bill axis, eyes, and silhouette
-bounds. Pair 31's prior speaking candidate was rejected because its bill axis
+bounds. That disposition is now preserved only as superseded history. Pair
+31's prior speaking candidate was rejected because its bill axis
 and tip did not register cleanly to the closed master. Its replacement was
 rendered as one isolated pair on a chroma field, then reduced to a connected
 lower-mandible patch. The compositor restored the closed frame's upper bill and
-all non-mouth pixels exactly. Pair 31 remains pending for full-size review.
+all non-mouth pixels exactly. Its subsequent internal pass is also superseded,
+and pair 31 remains pending for a fresh visual review.
+
+Pair 32 is the first candidate produced after the user-wide invalidation. It
+was generated as one isolated closed/open job. The generated render is retained
+only as a lower-mandible donor; the canonical body and upper bill are restored
+exactly. A compositor regression was found during its close-up review: donor
+mouth pixels were being painted after the neutral cavity, allowing tongue and
+throat colors to leak into the output. The compositor now paints the cavity
+after the donor patch, and a regression test enforces that order. The pair-32
+candidate reports outside-mouth mean difference 0.0, silhouette IoU 1.0,
+registration delta 0, and connected-mandible ratio 1.0. It remains `pending`
+until the isolated visual pair is accepted.
 
 Beginning with pair 31, the compiler and final verifier reject a `pass` unless
 the pair receipt proves `pair_specific_connected_mandible_patch_v1`, an integer
@@ -144,9 +166,10 @@ pairwise disposition. Direct pair selection uses `&pair=N`.
 
 ## Verification
 
-Focused queue/compiler/viewer/compositor tests: 19 passed.
+Focused queue/compositor tests: 11 passed after adding review invalidation and
+cavity-layer regressions.
 
-Complete Kingfisher-focused tests: 64 passed.
+Complete Kingfisher-focused suite: 66 passed in 11.850 seconds.
 
 The strict verifier intentionally exits nonzero until all observable pairs
 pass and all rear views are explicitly `not_observable`. It writes a structured
@@ -156,18 +179,18 @@ failure receipt even while blocked:
 
 Current blocker:
 
-`pair 31 lacks a passing full-size pairwise disposition`
+`pair 1 lacks a passing full-size pairwise disposition`
 
 Current review artifact:
 
-`kingfisher_act_001_066_111_176_pair_review-1a81780bf28a513c.wjpose`
+`kingfisher_act_001_066_111_176_pair_review-7f2473c542c17184.wjpose`
 
 Artifact SHA-256:
 
-`1a81780bf28a513c2fc68ebd88b48fffcbde7536c799cc1cbb879cb65d655632`
+`7f2473c542c1718450498e532511d27f01d090dca545a3521dce866f7112e7b8`
 
 Library-index SHA-256:
 
-`c5888df659b6765a3fbfa2d4fc61871428a5155ebcdf5ed622e722fc92d7e776`
+`ea6efd38ba90645ea3360289b2e3b3d50d8ce4bf5b1783a0f9e817bfa649d246`
 
 This failure is expected and proves the queue is fail-closed.

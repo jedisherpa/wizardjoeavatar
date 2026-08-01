@@ -10,6 +10,7 @@ from PIL import Image
 from tools.manage_kingfisher_pairwise_review import (
     PROTOCOL_ID,
     capture_pairwise_evidence,
+    invalidate_pairwise_reviews,
     initialize_pairwise_review,
     record_pairwise_review,
 )
@@ -146,6 +147,52 @@ class ManageKingfisherPairwiseReviewTests(unittest.TestCase):
                     evidence_path="full-size/pair-001.png",
                     reviewer="pair-reviewer",
                 )
+
+    def test_invalidation_preserves_prior_pass_and_returns_pair_to_pending(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            ledger = self._ledger(Path(temporary))
+            initialize_pairwise_review(
+                ledger,
+                queued_at="2026-07-31T00:00:00+00:00",
+            )
+            record_pairwise_review(
+                ledger,
+                ordinal=1,
+                state="pass",
+                defect_codes=[],
+                note="Prior full-size pass.",
+                evidence_path="full-size/pair-001.png",
+                reviewer="pair-reviewer",
+                reviewed_at="2026-07-31T01:00:00+00:00",
+            )
+
+            result = invalidate_pairwise_reviews(
+                ledger,
+                first_ordinal=1,
+                last_ordinal=3,
+                reason="User reported visible beak misalignment.",
+                reporter="user-visual-review",
+                invalidated_at="2026-08-01T18:00:00+00:00",
+            )
+
+            saved = json.loads(ledger.read_text(encoding="utf-8"))
+            pair = saved["pairs"][0]
+            self.assertEqual(result["invalidated_ordinals"], [1])
+            self.assertEqual(
+                pair["pairwise_full_size_review"]["state"],
+                "pending",
+            )
+            self.assertEqual(
+                pair["pairwise_full_size_review"]["source_disposition"],
+                "user_reported_visual_recheck",
+            )
+            history = pair["pairwise_full_size_review_history"]
+            self.assertEqual(len(history), 1)
+            self.assertEqual(history[0]["superseded_review"]["state"], "pass")
+            self.assertEqual(
+                history[0]["superseded_review"]["evidence_path"],
+                "full-size/pair-001.png",
+            )
 
     def test_capture_pairwise_evidence_uses_exact_pair_sources(self):
         with tempfile.TemporaryDirectory() as temporary:

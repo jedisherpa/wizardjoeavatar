@@ -224,12 +224,15 @@ def compose_mandible_patch(
             Image.new("RGBA", CANVAS_SIZE, (0, 0, 0, 0)),
             mask=residual_clear_mask,
         )
+    output.alpha_composite(mandible_patch)
+    # The generated render is only a lower-mandible donor. Paint the neutral
+    # cavity after it so donor tongues, teeth, highlights, or throat pixels
+    # cannot leak back into the admitted speaking frame.
     cavity_mask = _polygon_mask(CANVAS_SIZE, cavity_polygon)
     output.paste(
         Image.new("RGBA", CANVAS_SIZE, cavity_fill),
         mask=cavity_mask,
     )
-    output.alpha_composite(mandible_patch)
 
     upper_beak_mask = _polygon_mask(CANVAS_SIZE, upper_beak_polygon)
     output = Image.composite(resting, output, upper_beak_mask)

@@ -184,6 +184,79 @@ def record_pairwise_review(
     return pair
 
 
+def invalidate_pairwise_reviews(
+    ledger_path: Path,
+    *,
+    first_ordinal: int,
+    last_ordinal: int,
+    reason: str,
+    reporter: str,
+    invalidated_at: str | None = None,
+) -> dict[str, object]:
+    """Return prior passes to pending while preserving their review evidence."""
+    if first_ordinal < 1 or last_ordinal < first_ordinal:
+        raise ValueError("invalid ordinal range")
+    if not reason.strip():
+        raise ValueError("review invalidation requires a reason")
+    if not reporter.strip():
+        raise ValueError("review invalidation requires a reporter")
+
+    ledger = json.loads(ledger_path.read_text(encoding="utf-8"))
+    pairs = list(ledger.get("pairs", []))
+    timestamp = invalidated_at or datetime.now(timezone.utc).isoformat()
+    invalidated: list[int] = []
+    for pair in pairs:
+        ordinal = int(pair.get("ordinal", -1))
+        if not first_ordinal <= ordinal <= last_ordinal:
+            continue
+        _validate_pair_boundary(pair)
+        review = pair.get("pairwise_full_size_review")
+        if (
+            not isinstance(review, dict)
+            or review.get("protocol_id") != PROTOCOL_ID
+        ):
+            raise ValueError("pairwise protocol must be initialized first")
+        if review.get("state") != "pass":
+            continue
+        history = list(pair.get("pairwise_full_size_review_history", []))
+        history.append(
+            {
+                "schema_version": 1,
+                "invalidated_at": timestamp,
+                "reason": reason.strip(),
+                "reporter": reporter.strip(),
+                "superseded_review": review,
+            }
+        )
+        pair["pairwise_full_size_review_history"] = history
+        pair["pairwise_full_size_review"] = {
+            **review,
+            "state": "pending",
+            "defect_codes": [],
+            "note": reason.strip(),
+            "evidence_path": "",
+            "reviewed_at": None,
+            "reviewer": None,
+            "source_disposition": "user_reported_visual_recheck",
+            "user_approval_implied": False,
+            "runtime_admission_implied": False,
+        }
+        invalidated.append(ordinal)
+
+    ledger["pairwise_full_size_review_summary"] = _summary(pairs)
+    _write_json_atomic(ledger_path, ledger)
+    return {
+        "schema_version": 1,
+        "protocol_id": PROTOCOL_ID,
+        "invalidated_ordinals": invalidated,
+        "invalidated_count": len(invalidated),
+        "reason": reason.strip(),
+        "reporter": reporter.strip(),
+        "invalidated_at": timestamp,
+        "summary": ledger["pairwise_full_size_review_summary"],
+    }
+
+
 def _resolve_source_path(root: Path, raw_path: object) -> Path:
     if not isinstance(raw_path, str) or not raw_path:
         raise ValueError("pair receipt is missing a source image path")
@@ -307,6 +380,13 @@ def main() -> None:
     capture.add_argument("--ordinal", type=int, required=True)
     capture.add_argument("--output-dir", type=Path, required=True)
     capture.add_argument("--root", type=Path, default=ROOT)
+    invalidate = subparsers.add_parser("invalidate")
+    invalidate.add_argument("--ledger", type=Path, required=True)
+    invalidate.add_argument("--first-ordinal", type=int, required=True)
+    invalidate.add_argument("--last-ordinal", type=int, required=True)
+    invalidate.add_argument("--reason", required=True)
+    invalidate.add_argument("--reporter", default="user-visual-review")
+    invalidate.add_argument("--invalidated-at")
     args = parser.parse_args()
 
     if args.command == "initialize":
@@ -325,12 +405,21 @@ def main() -> None:
             reviewer=args.reviewer,
             reviewed_at=args.reviewed_at,
         )
-    else:
+    elif args.command == "capture":
         result = capture_pairwise_evidence(
             args.ledger,
             ordinal=args.ordinal,
             output_dir=args.output_dir,
             root=args.root,
+        )
+    else:
+        result = invalidate_pairwise_reviews(
+            args.ledger,
+            first_ordinal=args.first_ordinal,
+            last_ordinal=args.last_ordinal,
+            reason=args.reason,
+            reporter=args.reporter,
+            invalidated_at=args.invalidated_at,
         )
     print(json.dumps(result, indent=2, sort_keys=True))
 

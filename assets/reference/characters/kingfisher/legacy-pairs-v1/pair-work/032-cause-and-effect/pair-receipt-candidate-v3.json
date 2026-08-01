@@ -1,11 +1,11 @@
 {
   "alignment": {
     "interpolation": "lanczos_rgb_binary_alpha",
-    "scale": 0.57416,
-    "scale_x": 0.57416,
-    "scale_y": 0.57416,
+    "scale": 0.57256,
+    "scale_x": 0.57256,
+    "scale_y": 0.57256,
     "translate_x": 0,
-    "translate_y": 0
+    "translate_y": 14
   },
   "approval_state": "candidate_visual_review",
   "canvas": [
@@ -14,72 +14,72 @@
   ],
   "cavity_polygon": [
     [
-      347,
-      211
-    ],
-    [
-      437,
-      213
-    ],
-    [
-      428,
-      229
-    ],
-    [
-      390,
-      232
-    ],
-    [
-      350,
-      223
-    ]
-  ],
-  "changed_bbox": [
-    346,
-    220,
-    440,
-    253
-  ],
-  "generated_render_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/032-cause-and-effect/142_ACT142_cause_and_effect_speaking_render_pairwise_v4.png",
-  "generated_render_sha256": "705001f7a91b0578a5f1fab4bc6c9408831ea970a804eec4424ac2faed3d187f",
-  "hinge": [
-    350,
-    219
-  ],
-  "hinge_radius": 14,
-  "mandible_bbox": [
-    345,
-    211,
-    441,
-    253
-  ],
-  "mandible_connected_ratio": 1.0,
-  "mandible_largest_component_pixels": 2849,
-  "mandible_opaque_pixels": 2849,
-  "mandible_polygon": [
-    [
       345,
-      211
+      214
     ],
     [
-      440,
-      212
-    ],
-    [
-      437,
-      245
+      432,
+      216
     ],
     [
       421,
-      252
+      242
+    ],
+    [
+      386,
+      238
+    ],
+    [
+      350,
+      225
+    ]
+  ],
+  "changed_bbox": [
+    347,
+    221,
+    433,
+    263
+  ],
+  "generated_render_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/032-cause-and-effect/142_ACT142_cause_and_effect_speaking_render_pairwise_v3.png",
+  "generated_render_sha256": "6e408b528be5fcfbd8e360e22493adfeb947118d1221d2402fe5a3676aa1669d",
+  "hinge": [
+    350,
+    221
+  ],
+  "hinge_radius": 14,
+  "mandible_bbox": [
+    344,
+    215,
+    434,
+    263
+  ],
+  "mandible_connected_ratio": 1.0,
+  "mandible_largest_component_pixels": 2758,
+  "mandible_opaque_pixels": 2758,
+  "mandible_polygon": [
+    [
+      344,
+      215
+    ],
+    [
+      433,
+      217
+    ],
+    [
+      430,
+      250
+    ],
+    [
+      417,
+      262
     ],
     [
       385,
-      243
+      250
     ],
     [
-      347,
-      225
+      350,
+      229
     ]
   ],
   "method": "pair_specific_connected_mandible_patch_v1",
@@ -91,8 +91,8 @@
   "resting_sha256": "2a309a5c105e69fbdc3b29ccba09bd5e0f529626df755ebef116150c8e0795a0",
   "runtime_admitted": false,
   "schema_version": 1,
-  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/032-cause-and-effect/142_ACT142_cause_and_effect_speaking_beak_alpha.png",
-  "speaking_sha256": "771aa7744ce5a6fec90ef64856fa5bfe3cb602065cdb515938a02c0738a9501a",
+  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/032-cause-and-effect/142_ACT142_cause_and_effect_speaking_beak_candidate_v3.png",
+  "speaking_sha256": "0176a44d3d7e81a2cfd101ba604a11fcec5a95a207d9589d030effec94fb515b",
   "upper_beak_policy": "immutable_source_pixels",
   "upper_beak_polygon": [
     [
@@ -100,20 +100,20 @@
       180
     ],
     [
-      462,
+      460,
       180
     ],
     [
       462,
-      224
+      225
     ],
     [
       430,
-      224
+      225
     ],
     [
-      344,
-      219
+      345,
+      220
     ]
   ]
 }

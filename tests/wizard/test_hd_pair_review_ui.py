@@ -52,7 +52,7 @@ class HdPairReviewUiTests(unittest.TestCase):
         self.assertIn("right: 8px;", styles)
         self.assertIn("minmax(0, 1fr)", styles)
 
-    def test_pairwise_review_can_supersede_preserved_batch_dispositions(self):
+    def test_user_recheck_preserves_superseded_pairwise_dispositions(self):
         ledger = json.loads(LEDGER_PATH.read_text(encoding="utf-8"))
         by_ordinal = {
             int(pair["ordinal"]): pair
@@ -65,11 +65,17 @@ class HdPairReviewUiTests(unittest.TestCase):
         )
         self.assertEqual(
             repaired["pairwise_full_size_review"]["state"],
-            "pass",
+            "pending",
         )
+        self.assertEqual(
+            repaired["pairwise_full_size_review"]["source_disposition"],
+            "user_reported_visual_recheck",
+        )
+        history = repaired["pairwise_full_size_review_history"]
+        self.assertEqual(history[-1]["superseded_review"]["state"], "pass")
         self.assertIn(
             "evidence/pairwise-full-size/pair-059",
-            repaired["pairwise_full_size_review"]["evidence_path"],
+            history[-1]["superseded_review"]["evidence_path"],
         )
         self.assertFalse(repaired["runtime_admitted"])
         self.assertFalse(repaired["user_approved"])

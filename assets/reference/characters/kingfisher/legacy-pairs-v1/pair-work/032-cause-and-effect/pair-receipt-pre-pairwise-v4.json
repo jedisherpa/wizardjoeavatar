@@ -1,0 +1,62 @@
+{
+  "alignment": {
+    "interpolation": "lanczos_rgb_binary_alpha",
+    "scale": 0.57256,
+    "translate_x": 0,
+    "translate_y": 14
+  },
+  "approval_state": "candidate_visual_review",
+  "articulation_bbox": [
+    330,
+    170,
+    461,
+    261
+  ],
+  "articulation_polygon": [
+    [
+      335,
+      175
+    ],
+    [
+      445,
+      170
+    ],
+    [
+      460,
+      245
+    ],
+    [
+      435,
+      260
+    ],
+    [
+      345,
+      255
+    ],
+    [
+      330,
+      220
+    ]
+  ],
+  "canvas": [
+    960,
+    540
+  ],
+  "changed_bbox": [
+    330,
+    171,
+    461,
+    261
+  ],
+  "generated_render_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/032-cause-and-effect/142_ACT142_cause_and_effect_speaking_beak_render_raw.png",
+  "generated_render_sha256": "de4aa044340d4eef6292a12da2cacdd6876d5980827cae7f8e3c637cd6014f3b",
+  "method": "pose_specific_render_local_articulation_composite_v1",
+  "output_role": "speaking",
+  "outside_articulation_change": false,
+  "resting_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/032-cause-and-effect/032_ACT032_cause_and_effect_resting_beak_alpha.png",
+  "resting_sha256": "2a309a5c105e69fbdc3b29ccba09bd5e0f529626df755ebef116150c8e0795a0",
+  "runtime_admitted": false,
+  "schema_version": 1,
+  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/032-cause-and-effect/142_ACT142_cause_and_effect_speaking_beak_alpha.png",
+  "speaking_sha256": "7502a489c2ec8dd49c85038e9eefe601d3ff6997f5c35f2fa1a97c86ac14d24b"
+}
