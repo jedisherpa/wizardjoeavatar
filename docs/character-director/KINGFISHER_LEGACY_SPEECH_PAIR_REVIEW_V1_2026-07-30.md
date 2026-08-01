@@ -86,8 +86,8 @@ The machine-readable authority is:
 
 Current authoritative pairwise totals:
 
-- full-size anatomical passes: 14;
-- pending full-size reviews: 49;
+- full-size anatomical passes: 21;
+- pending full-size reviews: 42;
 - not observable: 2;
 - currently awaiting rebuild: 1;
 - user-approved pairs: 0; and
@@ -146,6 +146,16 @@ bounds, and a visible articulation. Its evidence is under:
 
 `assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-013/`
 
+Pairs 21 (`skeptical listening`) and 22 (`small acknowledgment`) were rejected
+during the same native-size pass even though their earlier broad-region audits
+had passed. Pair 21 had a detached lower-mandible edge. Pair 22 changed the eye,
+face, and upper bill, and a first repair leaked black cavity fill beyond the
+bill tip on a white background. Both were rebuilt independently from their
+canonical closed masters. Their accepted speaking frames preserve the head and
+upper bill, composite only connected lower-mandible geometry, and report zero
+change outside their tighter articulation masks. Pair 22 also establishes a
+required white-background projector check for every subsequent candidate.
+
 Pair 62 remains `needs_rebuild`. This remains internal anatomical review, not
 user approval.
 
@@ -178,15 +188,15 @@ checksums, approval state, and runtime admission remain unchanged.
 
 The current content-addressed pair artifact is:
 
-`kingfisher_act_001_066_111_176_pair_review-cd5c5b4ba5020f15.wjpose`
+`kingfisher_act_001_066_111_176_pair_review-b54aa7876119ff81.wjpose`
 
 Artifact SHA-256:
 
-`cd5c5b4ba5020f15d1c923c1131017fe6e405c95e2da654f256fc10e0ee9b650`
+`b54aa7876119ff81fe95c2c2ef9c4faadfd93b1630eed27685311af55174b87e`
 
 Library-index SHA-256:
 
-`5e55c1958e18b7376f487ef2207164c951acf2490c25c69d01141afab73e4e50`
+`e0cb0883c5f0d5a45ee6c74d34b4c74dfc0737a5d99e47d81989128d7ca94a61`
 
 Artifacts are published to content-addressed filenames. A running observer
 continues reading its prior complete file while a new artifact and index are
@@ -272,14 +282,14 @@ machine measurements:
 - the paired sequence contains exactly 132 alternating closed/open frames;
 - minimum pair silhouette IoU is `0.978551`;
 - maximum registration-bound delta is `1` pixel;
-- three visible pairs have passing full-size pairwise dispositions;
-- 60 pairs remain pending full-size review;
+- 21 visible pairs have passing full-size pairwise dispositions;
+- 42 pairs remain pending full-size review;
 - pair 62 remains an explicit rebuild blocker;
 - two rear-facing pairs are explicitly not observable; and
 - user approval and runtime admission remain zero.
 
 The strict verifier now exits nonzero with
-`pair 3 lacks a passing full-size pairwise disposition`. The tracked
+`pair 23 lacks a passing full-size pairwise disposition`. The tracked
 verification receipt
 records `passed: false` and
 `verification_state: blocked_by_pairwise_full_size_review`. The current ledger

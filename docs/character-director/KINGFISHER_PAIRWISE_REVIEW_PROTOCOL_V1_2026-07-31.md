@@ -56,8 +56,8 @@ passing does not substitute for visual review.
 ## Current Queue
 
 - pair count: 66;
-- pairwise passes: 14 (pairs 1-3, 6-15, and rebuilt 59);
-- pending: 49;
+- pairwise passes: 21 (pairs 1-3, 6-22, and rebuilt 59);
+- pending: 42;
 - needs rebuild: 1 (pair 62);
 - not observable: 2 (pairs 4 and 5);
 - user approved: 0;
@@ -75,6 +75,16 @@ screen-left. The pair was rejected, its pre-repair speaking source was
 preserved, and only a connected lower-mouth patch was moved 9 pixels right and
 4 pixels down beneath immutable closed-frame upper-bill pixels. The rebuilt
 pair passed with zero changes outside its declared articulation region.
+
+Pairs 21 and 22 demonstrated why the remaining corpus must be handled one pair
+at a time. Pair 21's batch mate contained a displaced lower mandible and a
+detached double edge. It was rebuilt from its exact closed master with an
+immutable upper bill and a connected local mandible patch. Pair 22 changed the
+eye, face, and upper bill, and its first repair also exposed a black cavity
+rectangle only when projected over white. The accepted replacement preserves
+the closed-frame eye, face, and upper bill exactly and bounds both the cavity
+and lower mandible inside the authored silhouette. Every remaining pair is now
+inspected on both transparent close-up and white projector backgrounds.
 
 Evidence:
 
@@ -112,6 +122,6 @@ failure receipt even while blocked:
 
 Current blocker:
 
-`pair 16 lacks a passing full-size pairwise disposition`
+`pair 23 lacks a passing full-size pairwise disposition`
 
 This failure is expected and proves the queue is fail-closed.
