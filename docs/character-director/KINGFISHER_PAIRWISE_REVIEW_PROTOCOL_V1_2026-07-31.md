@@ -603,14 +603,38 @@ Accepted internal pair 42 evidence:
 
 `assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-042-v3/`
 
+Pair 43 (`full-laughter`) already contained a visually useful open long beak,
+but its batch receipt delegated a `214 x 113` region covering the upper bill,
+closed-eye face, and surrounding head. The result was rejected as an admitted
+source because the broad composite could not prove that the laughter
+expression and long upper-bill registration remained canonical.
+
+The accepted v2 pairwise candidate starts from the exact canonical closed
+full-laughter frame. Its preserved matched open frame contributes only one
+connected lower mandible and bounded oral cavity; the complete long upper bill,
+closed eyes, crest, cheeks, throat, wings, hoodie, feet, canvas, and registration
+come from the closed frame. Locked beak-focus playback shows the lower bill
+rotating from a single rear hinge without a head jump, and full-character review
+shows an unchanged raised-wing silhouette. The tighter audit reports `2,542`
+changed rendered pixels, outside-mouth mean difference `0.0`, silhouette IoU
+`0.999505`, connected-mandible ratio `1.0`, and registration delta `0`.
+
+Rejected initial pair 43 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-043-v2/`
+
+Accepted internal pair 43 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-043-v3/`
+
 ## Verification
 
 Focused generated-overlay compositor tests: 7 passed. The added regression
 proves generated cavity texture is applied after canonical upper-bill
 restoration without changing legacy `solid` or `generated` behavior.
 
-Complete Kingfisher-focused suite after the pair 42 rebuild: 69 passed, six
-subtests passed, in 11.27 seconds. The reviewer UI tests are included in that
+Complete Kingfisher-focused suite after the pair 43 rebuild: 69 passed, six
+subtests passed, in 11.08 seconds. The reviewer UI tests are included in that
 run. Pillow emitted only known `getdata` deprecation warnings.
 
 The strict verifier intentionally exits nonzero until all observable pairs
@@ -621,21 +645,21 @@ failure receipt even while blocked:
 
 Current blocker:
 
-`pair 43 lacks a passing full-size pairwise disposition`
+`pair 44 lacks a passing full-size pairwise disposition`
 
 Current review artifact:
 
-`kingfisher_act_001_066_111_176_pair_review-4bf3e15ff45ce2a9.wjpose`
+`kingfisher_act_001_066_111_176_pair_review-3778efe7ea244983.wjpose`
 
 Artifact SHA-256:
 
-`4bf3e15ff45ce2a94a71332995ac4186c603929a0b6d4145a7390b1be5fbb6f3`
+`3778efe7ea244983838082acd954465936e165e2c0a9dae082693623aecfafc3`
 
 Library-index SHA-256:
 
-`d5ca7dc6985d04780b8dae838f0d276ea5763394b87b5c00881b29dd9f33832e`
+`fb5626b1f0ef5c39c3d9a278b706681264b7e3e99bc0bc6d2c8eb5ae44606efe`
 
-Queue state: 40 internal full-size passes, 23 pending, 1 needs rebuild, and
+Queue state: 41 internal full-size passes, 22 pending, 1 needs rebuild, and
 2 not observable. Runtime-admitted and user-approved counts remain zero.
 
 This failure is expected and proves the queue is fail-closed.

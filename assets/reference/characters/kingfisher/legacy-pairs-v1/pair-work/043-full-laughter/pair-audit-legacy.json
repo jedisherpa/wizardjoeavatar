@@ -1,5 +1,5 @@
 {
-  "changed_rendered_pixels": 2542,
+  "changed_rendered_pixels": 14852,
   "checks": {
     "bounded_articulation_change": true,
     "outside_mouth_stability": true,
@@ -7,12 +7,12 @@
     "stable_registration_bounds": true,
     "visible_mouth_change": true
   },
-  "mouth_mean_abs": 8.735291,
+  "mouth_mean_abs": 18.580321,
   "mouth_region": [
-    400,
-    60,
-    610,
-    180
+    402,
+    66,
+    616,
+    179
   ],
   "outside_mouth_mean_abs": 0.0,
   "passed": true,
@@ -26,7 +26,7 @@
   ],
   "resting_sha256": "e3ee5a55e71ce8a57b65e75b07e652221d452a83c6155fda7eb31780e4ad07e6",
   "schema_version": 2,
-  "silhouette_iou": 0.999505,
+  "silhouette_iou": 0.994957,
   "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/043-full-laughter/153_ACT153_full_laughter_speaking_beak_alpha.png",
   "speaking_registration_bbox": [
     121,
@@ -34,5 +34,5 @@
     839,
     529
   ],
-  "speaking_sha256": "1c4b618e3ea97d665e6bcf53bb8fdf24213d8fa977ab96527487f8545beaf0a2"
+  "speaking_sha256": "b78250e367bad597eac994d427b751bef7440c726259341367507e79d2ed78c1"
 }
