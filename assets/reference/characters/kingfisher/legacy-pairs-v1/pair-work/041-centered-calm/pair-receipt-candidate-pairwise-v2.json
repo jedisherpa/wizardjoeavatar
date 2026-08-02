@@ -12,45 +12,50 @@
     960,
     540
   ],
-  "cavity_fill_rgba": null,
+  "cavity_fill_rgba": [
+    10,
+    13,
+    16,
+    255
+  ],
   "cavity_polygon": [
     [
-      456,
-      231
+      454,
+      244
     ],
     [
       468,
-      242
+      248
     ],
     [
       480,
-      252
+      254
     ],
     [
       492,
-      242
+      248
     ],
     [
-      504,
-      231
+      506,
+      244
     ],
     [
-      499,
-      255
+      501,
+      264
     ],
     [
       480,
-      281
+      285
     ],
     [
-      461,
-      255
+      459,
+      264
     ]
   ],
-  "cavity_source": "generated_overlay",
+  "cavity_source": "solid",
   "changed_bbox": [
     443,
-    231,
+    236,
     518,
     293
   ],
@@ -129,8 +134,8 @@
   "resting_sha256": "66be45a1155c7bc1c8d76917af79457a2ea0453654eda602b69d589dbb057e7e",
   "runtime_admitted": false,
   "schema_version": 1,
-  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/041-centered-calm/151_ACT151_centered_calm_speaking_beak_alpha.png",
-  "speaking_sha256": "10ea12cc8108d9d5fe150c23cbd77d52f843caefd057cbf14aabf8214cc04ef6",
+  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/041-centered-calm/151_ACT151_centered_calm_speaking_beak_candidate_pairwise_v2.png",
+  "speaking_sha256": "87e65991e4a4a9350bfd1b6847bf53602498cc6792d2b525027aa9bff0f23cdc",
   "upper_beak_policy": "immutable_source_pixels",
   "upper_beak_polygon": [
     [

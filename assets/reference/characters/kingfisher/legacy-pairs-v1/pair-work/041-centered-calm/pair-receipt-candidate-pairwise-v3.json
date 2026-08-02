@@ -129,7 +129,7 @@
   "resting_sha256": "66be45a1155c7bc1c8d76917af79457a2ea0453654eda602b69d589dbb057e7e",
   "runtime_admitted": false,
   "schema_version": 1,
-  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/041-centered-calm/151_ACT151_centered_calm_speaking_beak_alpha.png",
+  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/041-centered-calm/151_ACT151_centered_calm_speaking_beak_candidate_pairwise_v3.png",
   "speaking_sha256": "10ea12cc8108d9d5fe150c23cbd77d52f843caefd057cbf14aabf8214cc04ef6",
   "upper_beak_policy": "immutable_source_pixels",
   "upper_beak_polygon": [

@@ -1,0 +1,74 @@
+{
+  "alignment": {
+    "interpolation": "lanczos_rgb_binary_alpha",
+    "scale": 0.569554,
+    "translate_x": 3,
+    "translate_y": 24
+  },
+  "approval_state": "candidate_visual_review",
+  "articulation_bbox": [
+    420,
+    196,
+    541,
+    293
+  ],
+  "articulation_polygon": [
+    [
+      432,
+      208
+    ],
+    [
+      462,
+      196
+    ],
+    [
+      499,
+      196
+    ],
+    [
+      529,
+      208
+    ],
+    [
+      540,
+      245
+    ],
+    [
+      523,
+      278
+    ],
+    [
+      480,
+      292
+    ],
+    [
+      437,
+      278
+    ],
+    [
+      420,
+      245
+    ]
+  ],
+  "canvas": [
+    960,
+    540
+  ],
+  "changed_bbox": [
+    420,
+    196,
+    541,
+    293
+  ],
+  "generated_render_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/041-centered-calm/151_ACT151_centered_calm_speaking_beak_render_raw.png",
+  "generated_render_sha256": "8454cfce7ba4e4cd3137a4aa727c4d10db9f4f6576f113e7b5d7acfa261ddda3",
+  "method": "pose_specific_render_local_articulation_composite_v1",
+  "output_role": "speaking",
+  "outside_articulation_change": false,
+  "resting_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/041-centered-calm/041_ACT041_centered_calm_resting_beak_alpha.png",
+  "resting_sha256": "66be45a1155c7bc1c8d76917af79457a2ea0453654eda602b69d589dbb057e7e",
+  "runtime_admitted": false,
+  "schema_version": 1,
+  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/041-centered-calm/151_ACT151_centered_calm_speaking_beak_alpha.png",
+  "speaking_sha256": "99dc6e3255202e3a04e67fb6fd983fecb885064a00e27dd482fdfc6e905eb951"
+}
