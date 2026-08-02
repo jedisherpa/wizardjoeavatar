@@ -1,78 +1,149 @@
 {
   "alignment": {
     "interpolation": "lanczos_rgb_binary_alpha",
-    "scale": 0.578,
-    "translate_x": -3,
-    "translate_y": -2
+    "scale": 1.0,
+    "scale_x": 1.0,
+    "scale_y": 1.0,
+    "translate_x": 0,
+    "translate_y": 0
   },
   "approval_state": "candidate_visual_review",
-  "articulation_bbox": [
-    422,
-    202,
-    539,
-    306
-  ],
-  "articulation_polygon": [
-    [
-      435,
-      215
-    ],
-    [
-      462,
-      202
-    ],
-    [
-      499,
-      202
-    ],
-    [
-      526,
-      215
-    ],
-    [
-      538,
-      250
-    ],
-    [
-      526,
-      286
-    ],
-    [
-      500,
-      305
-    ],
-    [
-      460,
-      305
-    ],
-    [
-      434,
-      286
-    ],
-    [
-      422,
-      250
-    ]
-  ],
   "canvas": [
     960,
     540
   ],
-  "changed_bbox": [
-    422,
-    202,
-    539,
-    306
+  "cavity_fill_rgba": null,
+  "cavity_polygon": [
+    [
+      458,
+      239
+    ],
+    [
+      535,
+      239
+    ],
+    [
+      506,
+      271
+    ],
+    [
+      493,
+      266
+    ],
+    [
+      478,
+      255
+    ],
+    [
+      463,
+      246
+    ]
   ],
-  "generated_render_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/044-excitement/154_ACT154_excitement_speaking_beak_render_raw.png",
-  "generated_render_sha256": "8488d91741bf76e2c236ab7fa34c49395593c137621df51d6a67a6f242465d05",
-  "method": "pose_specific_render_local_articulation_composite_v1",
-  "output_role": "speaking",
+  "cavity_source": "generated",
+  "changed_bbox": [
+    454,
+    236,
+    536,
+    279
+  ],
+  "generated_render_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/044-excitement/154_ACT154_excitement_speaking_beak_legacy_donor.png",
+  "generated_render_sha256": "eba2399d06aaaad38228e05b41e4d99049ee39bff6801fe9309a409c2481e33f",
+  "hinge": [
+    458,
+    239
+  ],
+  "hinge_radius": 15,
+  "mandible_bbox": [
+    454,
+    236,
+    540,
+    279
+  ],
+  "mandible_connected_ratio": 1.0,
+  "mandible_largest_component_pixels": 2252,
+  "mandible_opaque_pixels": 2252,
+  "mandible_polygon": [
+    [
+      454,
+      236
+    ],
+    [
+      539,
+      236
+    ],
+    [
+      508,
+      278
+    ],
+    [
+      495,
+      278
+    ],
+    [
+      477,
+      263
+    ],
+    [
+      461,
+      247
+    ]
+  ],
+  "method": "pair_specific_connected_mandible_patch_v1",
+  "minimum_connected_ratio": 0.9,
+  "minimum_mandible_height": 40,
   "outside_articulation_change": false,
+  "residual_clear_polygon": null,
   "resting_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/044-excitement/044_ACT044_excitement_resting_beak_alpha.png",
   "resting_sha256": "aa61c03802696a424f9f4b99b6bb54d069ab671735080b6e2f1f65157ddb902b",
   "runtime_admitted": false,
   "schema_version": 1,
   "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/044-excitement/154_ACT154_excitement_speaking_beak_alpha.png",
-  "speaking_sha256": "eba2399d06aaaad38228e05b41e4d99049ee39bff6801fe9309a409c2481e33f"
+  "speaking_sha256": "f89f4e688930d96a2bda186e7d5d0e6d33ae198a8c9c20cea5404f0fddb58c74",
+  "upper_beak_policy": "immutable_source_pixels",
+  "upper_beak_polygon": [
+    [
+      442,
+      205
+    ],
+    [
+      466,
+      195
+    ],
+    [
+      490,
+      194
+    ],
+    [
+      512,
+      204
+    ],
+    [
+      531,
+      224
+    ],
+    [
+      526,
+      239
+    ],
+    [
+      510,
+      252
+    ],
+    [
+      487,
+      263
+    ],
+    [
+      472,
+      253
+    ],
+    [
+      458,
+      239
+    ],
+    [
+      445,
+      225
+    ]
+  ]
 }

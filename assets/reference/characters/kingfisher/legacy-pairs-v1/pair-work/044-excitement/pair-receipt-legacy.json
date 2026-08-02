@@ -1,0 +1,78 @@
+{
+  "alignment": {
+    "interpolation": "lanczos_rgb_binary_alpha",
+    "scale": 0.578,
+    "translate_x": -3,
+    "translate_y": -2
+  },
+  "approval_state": "candidate_visual_review",
+  "articulation_bbox": [
+    422,
+    202,
+    539,
+    306
+  ],
+  "articulation_polygon": [
+    [
+      435,
+      215
+    ],
+    [
+      462,
+      202
+    ],
+    [
+      499,
+      202
+    ],
+    [
+      526,
+      215
+    ],
+    [
+      538,
+      250
+    ],
+    [
+      526,
+      286
+    ],
+    [
+      500,
+      305
+    ],
+    [
+      460,
+      305
+    ],
+    [
+      434,
+      286
+    ],
+    [
+      422,
+      250
+    ]
+  ],
+  "canvas": [
+    960,
+    540
+  ],
+  "changed_bbox": [
+    422,
+    202,
+    539,
+    306
+  ],
+  "generated_render_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/044-excitement/154_ACT154_excitement_speaking_beak_render_raw.png",
+  "generated_render_sha256": "8488d91741bf76e2c236ab7fa34c49395593c137621df51d6a67a6f242465d05",
+  "method": "pose_specific_render_local_articulation_composite_v1",
+  "output_role": "speaking",
+  "outside_articulation_change": false,
+  "resting_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/044-excitement/044_ACT044_excitement_resting_beak_alpha.png",
+  "resting_sha256": "aa61c03802696a424f9f4b99b6bb54d069ab671735080b6e2f1f65157ddb902b",
+  "runtime_admitted": false,
+  "schema_version": 1,
+  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/044-excitement/154_ACT154_excitement_speaking_beak_alpha.png",
+  "speaking_sha256": "eba2399d06aaaad38228e05b41e4d99049ee39bff6801fe9309a409c2481e33f"
+}
