@@ -54,7 +54,7 @@
     502,
     258
   ],
-  "generated_render_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/038-invitation-to-follow/148_ACT148_invitation_to_follow_speaking_beak_legacy_donor.png",
+  "generated_render_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/038-invitation-to-follow/148_ACT148_invitation_to_follow_speaking_beak_alpha.png",
   "generated_render_sha256": "eb1592e222b2b5b889625f932c0b5ee02963d3d43779faa07ca1042806f50b42",
   "hinge": [
     443,
@@ -121,7 +121,7 @@
   "resting_sha256": "4c16dd193aabe37cc2d050b99fdd82746c1906fbd52f3790167597799e5e2ee9",
   "runtime_admitted": false,
   "schema_version": 1,
-  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/038-invitation-to-follow/148_ACT148_invitation_to_follow_speaking_beak_alpha.png",
+  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/038-invitation-to-follow/148_ACT148_invitation_to_follow_speaking_beak_candidate_pairwise_v2.png",
   "speaking_sha256": "9edb881bcba212f75d4e465e317c5b4d5c25db8b81c5ad5f39f67d31b8f62ef7",
   "upper_beak_policy": "immutable_source_pixels",
   "upper_beak_polygon": [

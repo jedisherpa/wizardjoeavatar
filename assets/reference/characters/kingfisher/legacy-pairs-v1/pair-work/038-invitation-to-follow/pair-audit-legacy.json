@@ -1,5 +1,5 @@
 {
-  "changed_rendered_pixels": 1413,
+  "changed_rendered_pixels": 10936,
   "checks": {
     "bounded_articulation_change": true,
     "outside_mouth_stability": true,
@@ -7,12 +7,12 @@
     "stable_registration_bounds": true,
     "visible_mouth_change": true
   },
-  "mouth_mean_abs": 7.085037,
+  "mouth_mean_abs": 14.969363,
   "mouth_region": [
-    435,
-    215,
-    510,
-    260
+    400,
+    165,
+    536,
+    281
   ],
   "outside_mouth_mean_abs": 0.0,
   "passed": true,
@@ -26,7 +26,7 @@
   ],
   "resting_sha256": "4c16dd193aabe37cc2d050b99fdd82746c1906fbd52f3790167597799e5e2ee9",
   "schema_version": 2,
-  "silhouette_iou": 0.999873,
+  "silhouette_iou": 0.999,
   "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/038-invitation-to-follow/148_ACT148_invitation_to_follow_speaking_beak_alpha.png",
   "speaking_registration_bbox": [
     302,
@@ -34,5 +34,5 @@
     658,
     529
   ],
-  "speaking_sha256": "9edb881bcba212f75d4e465e317c5b4d5c25db8b81c5ad5f39f67d31b8f62ef7"
+  "speaking_sha256": "eb1592e222b2b5b889625f932c0b5ee02963d3d43779faa07ca1042806f50b42"
 }

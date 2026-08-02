@@ -27,7 +27,7 @@
   "resting_sha256": "4c16dd193aabe37cc2d050b99fdd82746c1906fbd52f3790167597799e5e2ee9",
   "schema_version": 2,
   "silhouette_iou": 0.999873,
-  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/038-invitation-to-follow/148_ACT148_invitation_to_follow_speaking_beak_alpha.png",
+  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/038-invitation-to-follow/148_ACT148_invitation_to_follow_speaking_beak_candidate_pairwise_v2.png",
   "speaking_registration_bbox": [
     302,
     95,
