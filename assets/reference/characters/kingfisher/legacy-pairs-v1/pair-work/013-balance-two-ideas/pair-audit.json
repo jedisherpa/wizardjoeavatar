@@ -1,5 +1,5 @@
 {
-  "changed_rendered_pixels": 3647,
+  "changed_rendered_pixels": 3643,
   "checks": {
     "bounded_articulation_change": true,
     "outside_mouth_stability": true,
@@ -7,32 +7,32 @@
     "stable_registration_bounds": true,
     "visible_mouth_change": true
   },
-  "mouth_mean_abs": 26.170867,
+  "mouth_mean_abs": 9.792269,
   "mouth_region": [
-    440,
-    198,
-    529,
-    301
+    425,
+    175,
+    549,
+    291
   ],
   "outside_mouth_mean_abs": 0.0,
   "passed": true,
   "registration_bound_delta": 0,
   "resting_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/013-balance-two-ideas/013_ACT013_balance_two_ideas_resting_beak_alpha.png",
   "resting_registration_bbox": [
-    144,
-    95,
-    815,
+    147,
+    97,
+    814,
     529
   ],
-  "resting_sha256": "784a1a4ded015441ddd5d4cb3e2d3ea22ff7ad2c484b6ad5da840e5148121014",
+  "resting_sha256": "1942f90e028e1204378f6d83db9117a1452160ef59594461cb6a9edee69535c9",
   "schema_version": 2,
   "silhouette_iou": 1.0,
   "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/013-balance-two-ideas/123_ACT123_balance_two_ideas_speaking_beak_alpha.png",
   "speaking_registration_bbox": [
-    144,
-    95,
-    815,
+    147,
+    97,
+    814,
     529
   ],
-  "speaking_sha256": "58100f296ab6de7054df57e2047f573832144c84523195d700f8fb1db65a6348"
+  "speaking_sha256": "c60b1be71ba024f0f9a13f3600ba4a875dc3fb8f4e9872b02e23079cbf99e372"
 }

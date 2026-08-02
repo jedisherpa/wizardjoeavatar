@@ -93,11 +93,11 @@
   "minimum_mandible_height": 20,
   "outside_articulation_change": false,
   "residual_clear_polygon": null,
-  "resting_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/013-balance-two-ideas/013_ACT013_balance_two_ideas_resting_beak_alpha.png",
+  "resting_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/013-balance-two-ideas/013_ACT013_balance_two_ideas_resting_full_registered_v2.png",
   "resting_sha256": "1942f90e028e1204378f6d83db9117a1452160ef59594461cb6a9edee69535c9",
   "runtime_admitted": false,
   "schema_version": 1,
-  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/013-balance-two-ideas/123_ACT123_balance_two_ideas_speaking_beak_alpha.png",
+  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/013-balance-two-ideas/123_ACT123_balance_two_ideas_speaking_full_composite_v2.png",
   "speaking_sha256": "c60b1be71ba024f0f9a13f3600ba4a875dc3fb8f4e9872b02e23079cbf99e372",
   "upper_beak_policy": "immutable_source_pixels",
   "upper_beak_polygon": [

@@ -29,6 +29,7 @@ class HdPairReviewUiTests(unittest.TestCase):
         self.assertIn("expandPairFocusBounds(", source)
         self.assertIn("canvasElement.style.clipPath", source)
         self.assertIn("fitPairReviewPresentation(", source)
+        self.assertIn('reviewFraming === "beak" ? 1 : 0.1', source)
         self.assertIn('comparisonMode: "locked-side-by-side"', source)
         self.assertIn('openCanvas.configure(width, height, "rgba")', source)
         self.assertIn("canvas.draw(presentPose(pairFrames[0]))", source)
@@ -67,7 +68,7 @@ class HdPairReviewUiTests(unittest.TestCase):
 
     def test_pair_comparison_assets_have_explicit_cache_version(self):
         index = INDEX_PATH.read_text(encoding="utf-8")
-        self.assertEqual(index.count("hd-pair-compare-v5"), 2)
+        self.assertEqual(index.count("hd-pair-compare-v6"), 2)
 
     def test_user_recheck_preserves_superseded_pairwise_dispositions(self):
         ledger = json.loads(LEDGER_PATH.read_text(encoding="utf-8"))

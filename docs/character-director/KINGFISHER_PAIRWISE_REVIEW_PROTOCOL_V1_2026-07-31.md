@@ -169,6 +169,9 @@ frames use the same union registration, source-space crop, presentation scale,
 and canvas size. The beak-focus crop is derived from the closed/open pixel
 difference and is clipped before presentation, so unrelated body pixels cannot
 hide hinge drift. The magnifier control toggles back to full-character context.
+Beak focus may enlarge the shared crop, while full-character mode is allowed to
+scale below 1:1 so wide poses remain completely visible inside each comparison
+panel.
 
 ## One-pair rebuild loop
 
@@ -199,6 +202,27 @@ Evidence:
 
 `assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-032-v8/`
 
+## 2026-08-01 isolated review checkpoint
+
+Pairs 1-3 and 6-12 passed a fresh locked beak-focus and full-character review.
+Pairs 4 and 5 remain intentionally `not_observable`: their rear-facing bodies
+hide the beak, their closed/open assets are pixel-identical, and the
+choreographer must exclude them from visible lip-sync selection.
+
+Pair 13 (`balance-two-ideas`) initially exposed clipped wing tips in
+full-character context even though its beak was aligned. The replacement was
+rebuilt from the retained complete closed/open full-render donors. Both donors
+were converted to binary-alpha subjects and normalized to the canonical
+960 x 540 canvas. The accepted open frame then used the registered closed frame
+as its immutable body and upper-bill source and transplanted only the connected
+mouth cavity and lower mandible. Its audit reports outside-mouth mean
+difference `0.0`, silhouette IoU `1.0`, registration delta `0`, and complete
+wing and foot silhouettes.
+
+Pair 13 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-013-v3/`
+
 ## Verification
 
 Focused reviewer and compositor tests: 11 passed after adding review
@@ -215,21 +239,21 @@ failure receipt even while blocked:
 
 Current blocker:
 
-`pair 1 lacks a passing full-size pairwise disposition`
+`pair 14 lacks a passing full-size pairwise disposition`
 
 Current review artifact:
 
-`kingfisher_act_001_066_111_176_pair_review-96c4e1dd70de98a2.wjpose`
+`kingfisher_act_001_066_111_176_pair_review-a1f10b3f6aa3eac5.wjpose`
 
 Artifact SHA-256:
 
-`96c4e1dd70de98a2e13b1e3052ed1d7a686372b1ea312e07700512354297f572`
+`a1f10b3f6aa3eac5be2237978855e40fc97bcfd2ea527d00fbc0a26b35a66105`
 
 Library-index SHA-256:
 
-`42212fab9dd3e40d26e67a15037b5a57a7099fe3ad4a29ec5dba28a5ad50a4ad`
+`eea19f037786088644fa8513fb121759b6a005f4088a480684948f30afc59ea4`
 
-Queue state: 1 internal full-size pass, 62 pending, 1 needs rebuild, and
+Queue state: 12 internal full-size passes, 51 pending, 1 needs rebuild, and
 2 not observable. Runtime-admitted and user-approved counts remain zero.
 
 This failure is expected and proves the queue is fail-closed.

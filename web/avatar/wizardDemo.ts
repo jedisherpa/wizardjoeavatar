@@ -141,6 +141,7 @@ function fitPairReviewPresentation(
   sourceHeight,
   panelIndex = 0,
   panelCount = 1,
+  minimumScale = 1,
 ) {
   if (!bounds) return null;
   const topInset = panelCount > 1 ? 78 : 54;
@@ -158,7 +159,7 @@ function fitPairReviewPresentation(
   );
   const availableHeight = Math.max(1, window.innerHeight - topInset - margin * 2);
   const presentationScale = Math.max(
-    1,
+    minimumScale,
     Math.min(availableWidth / boundsWidth, availableHeight / boundsHeight),
   );
   const centerX = ((bounds.minX + bounds.maxX + 1) / 2) * sourceScaleX;
@@ -417,6 +418,7 @@ async function start() {
           height,
           0,
           2,
+          reviewFraming === "beak" ? 1 : 0.1,
         ),
         open: fitPairReviewPresentation(
           openCanvasElement,
@@ -425,6 +427,7 @@ async function start() {
           height,
           1,
           2,
+          reviewFraming === "beak" ? 1 : 0.1,
         ),
       });
 

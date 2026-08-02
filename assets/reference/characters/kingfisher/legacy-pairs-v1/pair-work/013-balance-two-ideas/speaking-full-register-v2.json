@@ -1,0 +1,48 @@
+{
+  "approval_state": "candidate_visual_review",
+  "character_id": "kingfisher",
+  "ordinal": 123,
+  "output": {
+    "foreground_pixels": 116271,
+    "path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/013-balance-two-ideas/123_ACT123_balance_two_ideas_speaking_full_registered_v2.png",
+    "sha256": "93ad4672c8bdf40e7136e73544b71c27395824a74107c218b7a90fa88ea7aed2"
+  },
+  "pose_id": "kingfisher.act.123.balance-two-ideas-speaking-beak",
+  "registration": {
+    "alpha_mode": "binary_straight",
+    "canvas_size": [
+      960,
+      540
+    ],
+    "interpolation": "nearest_neighbor",
+    "maximum_visible_width": 900,
+    "policy": "kingfisher_stage_bottom_center_v1",
+    "target_baseline_y": 529,
+    "target_center_x": 480,
+    "target_visible_height": 432,
+    "visible_bbox": [
+      147,
+      97,
+      814,
+      529
+    ]
+  },
+  "review_projection": true,
+  "runtime_admitted": false,
+  "schema_version": 1,
+  "slug": "balance-two-ideas-speaking-beak",
+  "source": {
+    "canvas_size": [
+      1672,
+      941
+    ],
+    "path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/013-balance-two-ideas/123_ACT123_balance_two_ideas_speaking_full_donor_alpha_v2.png",
+    "sha256": "f16c038430826b4cc53087cac932947a5a2dce3c02659712bc169f443e67e5a3",
+    "visible_bbox": [
+      252,
+      166,
+      1420,
+      923
+    ]
+  }
+}
