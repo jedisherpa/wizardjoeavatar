@@ -323,13 +323,32 @@ Accepted internal pair 28 evidence:
 
 `assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-028-v3/`
 
+Pair 29 (`confidential-whisper`) initially failed because its nominal speaking
+mate left the visible beak effectively closed. A first donor transplant made
+the lower bill visible but opened it too widely and read as a separate blade
+in the locked close-up. The accepted v6 candidate compresses the matching
+donor vertically around the fixed rear hinge and uses a narrower pair-specific
+mask. The resulting gap is largest at the partially screened tip and closes at
+the canonical hinge, which preserves the quiet whisper intention while keeping
+the raised wing, head angle, body, scale, and registration fixed. Its audit
+reports outside-mouth mean difference `0.0`, silhouette IoU `1.0`, and
+registration delta `0`.
+
+Rejected pair 29 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-029-v2/`
+
+Accepted internal pair 29 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-029-v3/`
+
 ## Verification
 
 Focused reviewer and compositor tests: 11 passed after adding review
 invalidation, cavity-source, and locked-comparison regressions.
 
-Complete Kingfisher-focused suite after the pair 28 rebuild: 68 passed, six
-subtests passed, in 11.09 seconds. The reviewer UI tests are included in that
+Complete Kingfisher-focused suite after the pair 29 rebuild: 68 passed, six
+subtests passed, in 10.59 seconds. The reviewer UI tests are included in that
 run. Pillow emitted only known `getdata` deprecation warnings.
 
 The strict verifier intentionally exits nonzero until all observable pairs
@@ -340,21 +359,21 @@ failure receipt even while blocked:
 
 Current blocker:
 
-`pair 29 lacks a passing full-size pairwise disposition`
+`pair 30 lacks a passing full-size pairwise disposition`
 
 Current review artifact:
 
-`kingfisher_act_001_066_111_176_pair_review-8b846b31b7475932.wjpose`
+`kingfisher_act_001_066_111_176_pair_review-6a15258fd4312d31.wjpose`
 
 Artifact SHA-256:
 
-`8b846b31b7475932d2f7aee23273e2383e3d97593dfa8a6fd832a35a7a12b8ea`
+`6a15258fd4312d31d50a10f7ac03f6523138cd2160d50d213431f51161738975`
 
 Library-index SHA-256:
 
-`588ac41bbfecfc03b8e7dad570a39db9c6a81a3cb04b2551cf2fe1065b3457fd`
+`5742461bf1428cc0c0caf7c94d320012f0bdeec064ecdc34f173df82d92ddd0a`
 
-Queue state: 27 internal full-size passes, 36 pending, 1 needs rebuild, and
+Queue state: 28 internal full-size passes, 35 pending, 1 needs rebuild, and
 2 not observable. Runtime-admitted and user-approved counts remain zero.
 
 This failure is expected and proves the queue is fail-closed.

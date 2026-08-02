@@ -3,9 +3,9 @@
     "interpolation": "lanczos_rgb_binary_alpha",
     "scale": 0.578313253,
     "scale_x": 0.578313253,
-    "scale_y": 0.5,
+    "scale_y": 0.578313253,
     "translate_x": -2,
-    "translate_y": 56
+    "translate_y": 23
   },
   "approval_state": "candidate_visual_review",
   "canvas": [
@@ -20,27 +20,27 @@
     ],
     [
       480,
-      264
+      262
     ],
     [
       485,
-      270
+      269
     ],
     [
-      464,
+      465,
       279
     ],
     [
-      409,
-      309
+      408,
+      311
     ]
   ],
   "cavity_source": "generated",
   "changed_bbox": [
-    398,
+    397,
     264,
-    490,
-    314
+    491,
+    319
   ],
   "generated_render_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/029-confidential-whisper/139_ACT139_confidential_whisper_rejected_generated_donor.png",
   "generated_render_sha256": "bb2cf4a93b7f73c4cabf6a20236783c4cc5dbbc8a72724b1d447f2222f702198",
@@ -50,51 +50,51 @@
   ],
   "hinge_radius": 14,
   "mandible_bbox": [
-    398,
-    260,
-    490,
-    314
+    397,
+    258,
+    491,
+    319
   ],
   "mandible_connected_ratio": 1.0,
-  "mandible_largest_component_pixels": 1865,
-  "mandible_opaque_pixels": 1865,
+  "mandible_largest_component_pixels": 2222,
+  "mandible_opaque_pixels": 2222,
   "mandible_polygon": [
     [
       399,
-      288
+      289
     ],
     [
       482,
-      260
+      258
     ],
     [
-      489,
+      490,
       271
     ],
     [
-      468,
-      281
+      469,
+      283
     ],
     [
-      407,
-      313
+      406,
+      318
     ],
     [
-      398,
-      309
+      397,
+      311
     ]
   ],
   "method": "pair_specific_connected_mandible_patch_v1",
   "minimum_connected_ratio": 0.9,
-  "minimum_mandible_height": 22,
+  "minimum_mandible_height": 24,
   "outside_articulation_change": false,
   "residual_clear_polygon": null,
   "resting_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/029-confidential-whisper/029_ACT029_confidential_whisper_resting_beak_alpha.png",
   "resting_sha256": "4b74b91629538c1ceaa6b23d3a755f8a5bf14e373dd33c6999de0b29fd7f2491",
   "runtime_admitted": false,
   "schema_version": 1,
-  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/029-confidential-whisper/139_ACT139_confidential_whisper_speaking_candidate_pairwise_v6.png",
-  "speaking_sha256": "dad94730723bd87392c8b00c40437944235e8d6e082c910e9d33899378e832f1",
+  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/029-confidential-whisper/139_ACT139_confidential_whisper_speaking_candidate_pairwise_v5.png",
+  "speaking_sha256": "aaf012a50f5102ff467f0a391e6c55a9c69088c0d12c78422463164d62b148f2",
   "upper_beak_policy": "immutable_source_pixels",
   "upper_beak_polygon": [
     [

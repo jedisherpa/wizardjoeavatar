@@ -1,5 +1,5 @@
 {
-  "changed_rendered_pixels": 1566,
+  "changed_rendered_pixels": 1127,
   "checks": {
     "bounded_articulation_change": true,
     "outside_mouth_stability": true,
@@ -7,12 +7,12 @@
     "stable_registration_bounds": true,
     "visible_mouth_change": true
   },
-  "mouth_mean_abs": 6.528796,
+  "mouth_mean_abs": 6.770832,
   "mouth_region": [
-    418,
-    262,
-    498,
-    307
+    388,
+    215,
+    505,
+    320
   ],
   "outside_mouth_mean_abs": 0.0,
   "passed": true,
@@ -34,5 +34,5 @@
     616,
     529
   ],
-  "speaking_sha256": "730a64e2945bf15724122e6f75efd093ee599dfd1576afcea87ae425cf287575"
+  "speaking_sha256": "dad94730723bd87392c8b00c40437944235e8d6e082c910e9d33899378e832f1"
 }
