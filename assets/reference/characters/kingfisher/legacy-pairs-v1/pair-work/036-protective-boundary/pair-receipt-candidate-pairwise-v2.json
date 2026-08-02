@@ -38,8 +38,8 @@
   "cavity_source": "generated",
   "changed_bbox": [
     361,
-    217,
-    438,
+    219,
+    437,
     271
   ],
   "generated_render_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/036-protective-boundary/146_ACT146_protective_boundary_speaking_beak_legacy_donor.png",
@@ -56,20 +56,32 @@
     271
   ],
   "mandible_connected_ratio": 1.0,
-  "mandible_largest_component_pixels": 3194,
-  "mandible_opaque_pixels": 3194,
+  "mandible_largest_component_pixels": 2370,
+  "mandible_opaque_pixels": 2370,
   "mandible_polygon": [
     [
       360,
       213
     ],
     [
+      375,
+      214
+    ],
+    [
+      399,
+      244
+    ],
+    [
+      422,
+      214
+    ],
+    [
       438,
-      213
+      214
     ],
     [
       429,
-      244
+      243
     ],
     [
       404,
@@ -81,7 +93,7 @@
     ],
     [
       367,
-      244
+      242
     ]
   ],
   "method": "pair_specific_connected_mandible_patch_v1",
@@ -93,41 +105,41 @@
   "resting_sha256": "bae741279128a4c572c078d02aabcd5d7a905a3bfb85ed7038593cde82a0be4c",
   "runtime_admitted": false,
   "schema_version": 1,
-  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/036-protective-boundary/146_ACT146_protective_boundary_speaking_beak_candidate_pairwise_v3.png",
-  "speaking_sha256": "c5b4671378abd15207cc5b4d988e87a6b9485492e046bc627e3a3d1f6a45956b",
+  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/036-protective-boundary/146_ACT146_protective_boundary_speaking_beak_candidate_pairwise_v2.png",
+  "speaking_sha256": "f015c895eb4aff4a04d2b26b5ea1aaf0fc52f2a0b32cc8ad73419e50b0448166",
   "upper_beak_policy": "immutable_source_pixels",
   "upper_beak_polygon": [
     [
-      350,
+      348,
       180
     ],
     [
-      448,
+      450,
       180
     ],
     [
-      448,
-      218
+      450,
+      220
     ],
     [
       425,
-      216
+      218
     ],
     [
       404,
-      248
+      250
     ],
     [
       395,
-      248
+      250
     ],
     [
       372,
-      216
+      218
     ],
     [
-      350,
-      218
+      348,
+      220
     ]
   ]
 }
