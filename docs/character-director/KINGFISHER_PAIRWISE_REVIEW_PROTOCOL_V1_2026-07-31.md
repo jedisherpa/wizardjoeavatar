@@ -342,13 +342,24 @@ Accepted internal pair 29 evidence:
 
 `assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-029-v3/`
 
+Pair 30 (`rhetorical-question`) required no art change. Locked beak-focus
+review shows the speaking lower mandible opening from the same rear hinge while
+the canonical upper bill, eyes, and face remain fixed. Full-character review
+also preserves the raised-wing gesture, body silhouette, scale, and
+registration. It was therefore recorded as an unchanged internal pass rather
+than rebuilt.
+
+Accepted internal pair 30 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-030-v2/`
+
 ## Verification
 
 Focused reviewer and compositor tests: 11 passed after adding review
 invalidation, cavity-source, and locked-comparison regressions.
 
-Complete Kingfisher-focused suite after the pair 29 rebuild: 68 passed, six
-subtests passed, in 10.59 seconds. The reviewer UI tests are included in that
+Complete Kingfisher-focused suite after the pair 30 review: 68 passed, six
+subtests passed, in 10.82 seconds. The reviewer UI tests are included in that
 run. Pillow emitted only known `getdata` deprecation warnings.
 
 The strict verifier intentionally exits nonzero until all observable pairs
@@ -359,21 +370,21 @@ failure receipt even while blocked:
 
 Current blocker:
 
-`pair 30 lacks a passing full-size pairwise disposition`
+`pair 31 lacks a passing full-size pairwise disposition`
 
 Current review artifact:
 
-`kingfisher_act_001_066_111_176_pair_review-6a15258fd4312d31.wjpose`
+`kingfisher_act_001_066_111_176_pair_review-14c0387930484931.wjpose`
 
 Artifact SHA-256:
 
-`6a15258fd4312d31d50a10f7ac03f6523138cd2160d50d213431f51161738975`
+`14c0387930484931ba1859d4da09088c76ceb9ac1d72fa6e51bdb0d360833b3b`
 
 Library-index SHA-256:
 
-`5742461bf1428cc0c0caf7c94d320012f0bdeec064ecdc34f173df82d92ddd0a`
+`d57c4ba157201ca973c0890b1191013a686ce41a11d896ee1d00127f3504ffa0`
 
-Queue state: 28 internal full-size passes, 35 pending, 1 needs rebuild, and
+Queue state: 29 internal full-size passes, 34 pending, 1 needs rebuild, and
 2 not observable. Runtime-admitted and user-approved counts remain zero.
 
 This failure is expected and proves the queue is fail-closed.
