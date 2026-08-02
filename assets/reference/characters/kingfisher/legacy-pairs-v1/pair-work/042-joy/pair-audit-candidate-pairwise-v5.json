@@ -27,7 +27,7 @@
   "resting_sha256": "f273b409a1393429bf08787a456b63cbee2d29ffab39a73f34211a95cb9375a5",
   "schema_version": 2,
   "silhouette_iou": 1.0,
-  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/042-joy/152_ACT152_joy_speaking_beak_alpha.png",
+  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/042-joy/152_ACT152_joy_speaking_beak_candidate_pairwise_v5.png",
   "speaking_registration_bbox": [
     165,
     7,

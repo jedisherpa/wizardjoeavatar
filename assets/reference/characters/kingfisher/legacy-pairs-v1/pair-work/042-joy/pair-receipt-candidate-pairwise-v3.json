@@ -1,11 +1,11 @@
 {
   "alignment": {
     "interpolation": "lanczos_rgb_binary_alpha",
-    "scale": 0.57416268,
-    "scale_x": 0.57416268,
-    "scale_y": 0.57416268,
+    "scale": 1.0,
+    "scale_x": 1.0,
+    "scale_y": 1.0,
     "translate_x": 0,
-    "translate_y": 0
+    "translate_y": 6
   },
   "approval_state": "candidate_visual_review",
   "canvas": [
@@ -15,110 +15,130 @@
   "cavity_fill_rgba": null,
   "cavity_polygon": [
     [
-      442,
-      148
+      436,
+      154
     ],
     [
-      458,
-      147
+      455,
+      159
     ],
     [
       480,
-      150
+      172
     ],
     [
       505,
-      155
+      193
     ],
     [
-      534,
-      151
+      524,
+      175
     ],
     [
-      531,
-      161
+      532,
+      157
     ],
     [
-      518,
-      180
+      528,
+      183
     ],
     [
-      505,
-      174
+      508,
+      207
     ],
     [
-      482,
-      163
+      484,
+      194
     ],
     [
-      458,
-      153
+      459,
+      178
     ]
   ],
   "cavity_source": "generated_overlay",
   "changed_bbox": [
-    442,
-    145,
-    541,
-    186
+    429,
+    151,
+    537,
+    218
   ],
-  "generated_render_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/042-joy/152_ACT152_joy_speaking_beak_pairwise_render_v4_opaque_alpha.png",
-  "generated_render_sha256": "0e150657f0324e6c7b429c33caf9327d4bad58484c44104dfef604bf90055272",
+  "generated_render_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/042-joy/152_ACT152_joy_speaking_beak_legacy_donor.png",
+  "generated_render_sha256": "5a14a623ac0cee95377f411b157463e5b63ff08ffec38810cdeec5d8bd6a196e",
   "hinge": [
-    443,
-    150
+    431,
+    159
   ],
-  "hinge_radius": 14,
+  "hinge_radius": 20,
   "mandible_bbox": [
-    441,
-    145,
-    541,
-    186
+    429,
+    151,
+    537,
+    218
   ],
   "mandible_connected_ratio": 1.0,
-  "mandible_largest_component_pixels": 2217,
-  "mandible_opaque_pixels": 2217,
+  "mandible_largest_component_pixels": 2118,
+  "mandible_opaque_pixels": 2118,
   "mandible_polygon": [
     [
-      441,
-      145
+      429,
+      151
     ],
     [
-      540,
-      145
+      448,
+      160
     ],
     [
-      520,
+      470,
+      172
+    ],
+    [
+      505,
+      201
+    ],
+    [
+      523,
       185
     ],
     [
-      506,
-      181
+      536,
+      159
     ],
     [
-      485,
-      169
+      535,
+      184
     ],
     [
-      463,
-      158
+      521,
+      204
     ],
     [
-      447,
-      151
+      505,
+      217
+    ],
+    [
+      482,
+      205
+    ],
+    [
+      458,
+      187
+    ],
+    [
+      436,
+      170
     ]
   ],
   "method": "pair_specific_connected_mandible_patch_v1",
   "minimum_connected_ratio": 0.9,
-  "minimum_mandible_height": 35,
+  "minimum_mandible_height": 45,
   "outside_articulation_change": false,
   "residual_clear_polygon": null,
   "resting_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/042-joy/042_ACT042_joy_resting_beak_alpha.png",
   "resting_sha256": "f273b409a1393429bf08787a456b63cbee2d29ffab39a73f34211a95cb9375a5",
   "runtime_admitted": false,
   "schema_version": 1,
-  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/042-joy/152_ACT152_joy_speaking_beak_alpha.png",
-  "speaking_sha256": "5094d4d966aa20378e13405d3324677b2e2b7ce59923f7dc2c759135f5e00709",
+  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/042-joy/152_ACT152_joy_speaking_beak_candidate_pairwise_v3.png",
+  "speaking_sha256": "bb1d9c754fc9ebb842deed671abcce0d4afac49917098e0f64606cb4c409239c",
   "upper_beak_policy": "immutable_source_pixels",
   "upper_beak_polygon": [
     [
