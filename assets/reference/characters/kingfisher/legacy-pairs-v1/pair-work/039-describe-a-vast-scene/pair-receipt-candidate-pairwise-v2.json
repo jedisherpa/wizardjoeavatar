@@ -5,7 +5,7 @@
     "scale_x": 1.0,
     "scale_y": 1.0,
     "translate_x": 0,
-    "translate_y": 4
+    "translate_y": 0
   },
   "approval_state": "candidate_visual_review",
   "canvas": [
@@ -15,187 +15,183 @@
   "cavity_fill_rgba": null,
   "cavity_polygon": [
     [
-      482,
+      480,
+      176
+    ],
+    [
+      506,
       170
     ],
     [
-      500,
+      536,
       163
     ],
     [
-      530,
-      156
+      566,
+      154
     ],
     [
-      560,
-      148
+      600,
+      143
     ],
     [
-      603,
-      133
-    ],
-    [
-      603,
-      137
-    ],
-    [
-      562,
+      599,
       151
     ],
     [
-      532,
-      161
+      568,
+      163
     ],
     [
-      501,
-      172
+      538,
+      173
+    ],
+    [
+      508,
+      183
     ],
     [
       484,
-      179
+      190
     ]
   ],
   "cavity_source": "generated_overlay",
   "changed_bbox": [
-    477,
-    133,
-    597,
-    189
+    479,
+    159,
+    550,
+    198
   ],
-  "generated_render_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/039-describe-a-vast-scene/149_ACT149_describe_a_vast_scene_speaking_beak_legacy_donor.png",
+  "generated_render_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/039-describe-a-vast-scene/149_ACT149_describe_a_vast_scene_speaking_beak_alpha.png",
   "generated_render_sha256": "5f605256ca7c2b8a3ef1ffea2d0fcc6a372afe3470d5710071767b398b7d6fb1",
   "hinge": [
     484,
-    175
+    184
   ],
   "hinge_radius": 16,
   "mandible_bbox": [
     477,
-    133,
-    597,
-    189
+    156,
+    556,
+    198
   ],
-  "mandible_connected_ratio": 0.999537,
-  "mandible_largest_component_pixels": 2158,
-  "mandible_opaque_pixels": 2159,
+  "mandible_connected_ratio": 0.998062,
+  "mandible_largest_component_pixels": 1545,
+  "mandible_opaque_pixels": 1548,
   "mandible_polygon": [
     [
       477,
-      166
-    ],
-    [
-      490,
-      161
-    ],
-    [
-      520,
-      154
-    ],
-    [
-      550,
-      146
-    ],
-    [
-      580,
-      137
-    ],
-    [
-      604,
-      130
-    ],
-    [
-      605,
-      144
-    ],
-    [
-      585,
-      153
-    ],
-    [
-      558,
-      164
-    ],
-    [
-      529,
       174
     ],
     [
-      501,
-      184
+      495,
+      172
     ],
     [
-      480,
-      188
+      520,
+      166
+    ],
+    [
+      549,
+      158
+    ],
+    [
+      578,
+      149
+    ],
+    [
+      603,
+      140
+    ],
+    [
+      604,
+      156
+    ],
+    [
+      585,
+      168
+    ],
+    [
+      558,
+      179
+    ],
+    [
+      529,
+      189
+    ],
+    [
+      502,
+      197
+    ],
+    [
+      482,
+      194
     ]
   ],
   "method": "pair_specific_connected_mandible_patch_v1",
   "minimum_connected_ratio": 0.9,
-  "minimum_mandible_height": 25,
+  "minimum_mandible_height": 35,
   "outside_articulation_change": false,
   "residual_clear_polygon": null,
   "resting_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/039-describe-a-vast-scene/039_ACT039_describe_a_vast_scene_resting_beak_alpha.png",
   "resting_sha256": "a457760329419fb9c2b63da1bb1f1012a376cb95d4ede25b2d3930cb7a732d17",
   "runtime_admitted": false,
   "schema_version": 1,
-  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/039-describe-a-vast-scene/149_ACT149_describe_a_vast_scene_speaking_beak_alpha.png",
-  "speaking_sha256": "c7039fc872a201cec14a9eb2c0477e40ed6d8de38ae2a21719549fcbcd4283a6",
+  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/039-describe-a-vast-scene/149_ACT149_describe_a_vast_scene_speaking_beak_candidate_pairwise_v2.png",
+  "speaking_sha256": "336a2d9c8d7809156f3174382e79fdec066c551897723f5815b4049c11d8e019",
   "upper_beak_policy": "immutable_source_pixels",
   "upper_beak_polygon": [
     [
-      448,
-      148
+      469,
+      143
     ],
     [
-      480,
-      138
+      491,
+      135
     ],
     [
-      520,
-      130
-    ],
-    [
-      560,
-      120
-    ],
-    [
-      600,
-      111
-    ],
-    [
-      610,
-      109
-    ],
-    [
-      612,
-      126
-    ],
-    [
-      601,
+      521,
       128
     ],
     [
-      575,
-      136
+      553,
+      120
     ],
     [
-      545,
-      144
+      588,
+      112
     ],
     [
-      515,
+      609,
+      108
+    ],
+    [
+      612,
+      129
+    ],
+    [
+      595,
+      141
+    ],
+    [
+      569,
       152
     ],
     [
-      488,
-      161
+      539,
+      163
     ],
     [
-      470,
-      169
+      507,
+      175
     ],
     [
-      452,
-      168
+      482,
+      183
+    ],
+    [
+      469,
+      174
     ]
   ]
 }

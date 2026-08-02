@@ -62,7 +62,7 @@
     597,
     189
   ],
-  "generated_render_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/039-describe-a-vast-scene/149_ACT149_describe_a_vast_scene_speaking_beak_legacy_donor.png",
+  "generated_render_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/039-describe-a-vast-scene/149_ACT149_describe_a_vast_scene_speaking_beak_alpha.png",
   "generated_render_sha256": "5f605256ca7c2b8a3ef1ffea2d0fcc6a372afe3470d5710071767b398b7d6fb1",
   "hinge": [
     484,
@@ -137,7 +137,7 @@
   "resting_sha256": "a457760329419fb9c2b63da1bb1f1012a376cb95d4ede25b2d3930cb7a732d17",
   "runtime_admitted": false,
   "schema_version": 1,
-  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/039-describe-a-vast-scene/149_ACT149_describe_a_vast_scene_speaking_beak_alpha.png",
+  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/039-describe-a-vast-scene/149_ACT149_describe_a_vast_scene_speaking_beak_candidate_pairwise_v6.png",
   "speaking_sha256": "c7039fc872a201cec14a9eb2c0477e40ed6d8de38ae2a21719549fcbcd4283a6",
   "upper_beak_policy": "immutable_source_pixels",
   "upper_beak_polygon": [
