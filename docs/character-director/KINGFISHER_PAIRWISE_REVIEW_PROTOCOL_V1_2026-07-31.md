@@ -223,10 +223,11 @@ Pair 13 evidence:
 
 `assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-013-v3/`
 
-Pairs 14-20 then passed the same isolated gate. This set covers mirrored
+Pairs 14-21 then passed the same isolated gate. This set covers mirrored
 screen presentations, viewer and upward/downward pointing, neutral listening,
-and a close listening lean. Each pair was checked in beak focus and fitted
-full-character context before its native evidence was captured.
+a close listening lean, and skeptical listening. Each pair was checked in beak
+focus and fitted full-character context before its native evidence was
+captured.
 
 ## Verification
 
@@ -244,21 +245,21 @@ failure receipt even while blocked:
 
 Current blocker:
 
-`pair 21 lacks a passing full-size pairwise disposition`
+`pair 22 lacks a passing full-size pairwise disposition`
 
 Current review artifact:
 
-`kingfisher_act_001_066_111_176_pair_review-59e058be89e1031a.wjpose`
+`kingfisher_act_001_066_111_176_pair_review-7ec607b7a7ac5854.wjpose`
 
 Artifact SHA-256:
 
-`59e058be89e1031a6b7ba4ee4dd14ef6a7039036a45139bab2c57b75c6d80ddc`
+`7ec607b7a7ac5854dcf7af2e2d2e6684fe60b6b273a3a81587eb52e1fd1a4efc`
 
 Library-index SHA-256:
 
-`33020f8addb02ed81f97bb402dda43dd856048769eb580e86d8bb52e42043116`
+`467aa2ff3ca24b3e905b28be1ba9fd49bfc6fef7aa8c62ccb31dcff508302983`
 
-Queue state: 19 internal full-size passes, 44 pending, 1 needs rebuild, and
+Queue state: 20 internal full-size passes, 43 pending, 1 needs rebuild, and
 2 not observable. Runtime-admitted and user-approved counts remain zero.
 
 This failure is expected and proves the queue is fail-closed.
