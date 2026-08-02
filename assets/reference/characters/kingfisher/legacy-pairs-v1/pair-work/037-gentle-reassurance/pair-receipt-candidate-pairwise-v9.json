@@ -3,9 +3,9 @@
     "interpolation": "lanczos_rgb_binary_alpha",
     "scale": 0.574,
     "scale_x": 0.5741626794258373,
-    "scale_y": 0.7460148777895856,
+    "scale_y": 0.6599362374070133,
     "translate_x": 0,
-    "translate_y": -71
+    "translate_y": -35
   },
   "approval_state": "candidate_visual_review",
   "canvas": [
@@ -15,80 +15,36 @@
   "cavity_fill_rgba": null,
   "cavity_polygon": [
     [
-      559,
-      234
+      560,
+      231
     ],
     [
-      569,
-      240
+      573,
+      238
     ],
     [
-      557,
-      249
+      561,
+      263
     ],
     [
-      545,
-      258
+      510,
+      320
     ],
     [
-      535,
-      267
-    ],
-    [
-      525,
-      276
-    ],
-    [
-      515,
-      285
-    ],
-    [
-      505,
-      294
+      489,
+      309
     ],
     [
       495,
-      303
-    ],
-    [
-      488,
-      302
-    ],
-    [
-      495,
-      289
-    ],
-    [
-      505,
-      281
-    ],
-    [
-      515,
-      273
-    ],
-    [
-      525,
-      265
-    ],
-    [
-      535,
-      257
-    ],
-    [
-      545,
-      249
-    ],
-    [
-      555,
-      242
+      286
     ]
   ],
-  "cavity_source": "generated_overlay",
+  "cavity_source": "generated",
   "changed_bbox": [
-    484,
+    477,
     233,
-    584,
-    313
+    583,
+    338
   ],
   "generated_render_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/037-gentle-reassurance/147_ACT147_gentle_reassurance_speaking_beak_generated_pairwise_v8.png",
   "generated_render_sha256": "240394f6942ab87c65c517369912d557303bbee58d31919752162d5ffdf78c3b",
@@ -98,79 +54,55 @@
   ],
   "hinge_radius": 20,
   "mandible_bbox": [
-    484,
-    226,
-    584,
-    313
+    477,
+    228,
+    583,
+    338
   ],
   "mandible_connected_ratio": 1.0,
-  "mandible_largest_component_pixels": 2855,
-  "mandible_opaque_pixels": 2855,
+  "mandible_largest_component_pixels": 5675,
+  "mandible_opaque_pixels": 5675,
   "mandible_polygon": [
     [
       558,
-      226
+      228
     ],
     [
-      583,
-      233
+      582,
+      234
     ],
     [
       576,
-      243
+      266
     ],
     [
-      565,
-      251
+      522,
+      328
     ],
     [
-      555,
-      259
+      496,
+      337
     ],
     [
-      545,
-      267
-    ],
-    [
-      535,
-      276
-    ],
-    [
-      525,
-      285
-    ],
-    [
-      515,
-      294
-    ],
-    [
-      505,
-      304
-    ],
-    [
-      495,
+      477,
       312
     ],
     [
-      484,
-      310
-    ],
-    [
-      487,
-      283
+      488,
+      285
     ]
   ],
   "method": "pair_specific_connected_mandible_patch_v1",
   "minimum_connected_ratio": 0.9,
-  "minimum_mandible_height": 75,
+  "minimum_mandible_height": 65,
   "outside_articulation_change": false,
   "residual_clear_polygon": null,
   "resting_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/037-gentle-reassurance/037_ACT037_gentle_reassurance_resting_beak_alpha.png",
   "resting_sha256": "9dbeb9341f46286ae999fe6aebc81d847d71308e055ed8f333b872a7313c5a96",
   "runtime_admitted": false,
   "schema_version": 1,
-  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/037-gentle-reassurance/147_ACT147_gentle_reassurance_speaking_beak_candidate_pairwise_v15.png",
-  "speaking_sha256": "7a47f38d13a7dba02b4de1290095dcd01a511ba01de9a481c850167077a523f7",
+  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/037-gentle-reassurance/147_ACT147_gentle_reassurance_speaking_beak_candidate_pairwise_v9.png",
+  "speaking_sha256": "2983eeb0eb731bd9efd3685016c4c2f4b03ec4fd96465aa159a7bc8492ac4a66",
   "upper_beak_policy": "immutable_source_pixels",
   "upper_beak_polygon": [
     [

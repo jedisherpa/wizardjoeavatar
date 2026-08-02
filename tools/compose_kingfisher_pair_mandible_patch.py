@@ -167,8 +167,10 @@ def compose_mandible_patch(
         raise ValueError("minimum mandible height must be positive")
     if not 0 < minimum_connected_ratio <= 1:
         raise ValueError("minimum connected ratio must be in (0, 1]")
-    if cavity_source not in {"solid", "generated"}:
-        raise ValueError("cavity source must be solid or generated")
+    if cavity_source not in {"solid", "generated", "generated_overlay"}:
+        raise ValueError(
+            "cavity source must be solid, generated, or generated_overlay"
+        )
 
     generated = load_render_alpha(generated_path)
     target_size = (
@@ -240,6 +242,12 @@ def compose_mandible_patch(
 
     upper_beak_mask = _polygon_mask(CANVAS_SIZE, upper_beak_polygon)
     output = Image.composite(resting, output, upper_beak_mask)
+    if cavity_source == "generated_overlay":
+        cavity_alpha = ImageChops.multiply(
+            aligned.getchannel("A"),
+            cavity_mask,
+        )
+        output.paste(aligned, mask=cavity_alpha)
     output = _binary_alpha(output)
 
     allowed_mask = ImageChops.lighter(
@@ -345,7 +353,7 @@ def main() -> None:
     )
     parser.add_argument(
         "--cavity-source",
-        choices=("solid", "generated"),
+        choices=("solid", "generated", "generated_overlay"),
         default="solid",
     )
     args = parser.parse_args()

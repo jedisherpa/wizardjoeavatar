@@ -1,0 +1,62 @@
+{
+  "alignment": {
+    "interpolation": "lanczos_rgb_binary_alpha",
+    "scale": 0.56955,
+    "translate_x": 5,
+    "translate_y": 5
+  },
+  "approval_state": "candidate_visual_review",
+  "articulation_bbox": [
+    460,
+    180,
+    586,
+    296
+  ],
+  "articulation_polygon": [
+    [
+      465,
+      180
+    ],
+    [
+      580,
+      180
+    ],
+    [
+      585,
+      255
+    ],
+    [
+      565,
+      285
+    ],
+    [
+      485,
+      295
+    ],
+    [
+      460,
+      235
+    ]
+  ],
+  "canvas": [
+    960,
+    540
+  ],
+  "changed_bbox": [
+    460,
+    180,
+    586,
+    296
+  ],
+  "generated_render_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/037-gentle-reassurance/147_ACT147_gentle_reassurance_speaking_beak_render_raw.png",
+  "generated_render_sha256": "41b9c29417f16dc5eb2adb6f9ea240a4c1ae7d972a4d398ec6f70cec022585d4",
+  "method": "pose_specific_render_local_articulation_composite_v1",
+  "output_role": "speaking",
+  "outside_articulation_change": false,
+  "resting_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/037-gentle-reassurance/037_ACT037_gentle_reassurance_resting_beak_alpha.png",
+  "resting_sha256": "9dbeb9341f46286ae999fe6aebc81d847d71308e055ed8f333b872a7313c5a96",
+  "runtime_admitted": false,
+  "schema_version": 1,
+  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/037-gentle-reassurance/147_ACT147_gentle_reassurance_speaking_beak_alpha.png",
+  "speaking_sha256": "e3f66219b9a69a36d6dc322abbfcd10782c211fa4a5a7ed0ff83117533355b60"
+}

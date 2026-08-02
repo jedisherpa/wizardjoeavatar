@@ -1,0 +1,125 @@
+{
+  "alignment": {
+    "interpolation": "lanczos_rgb_binary_alpha",
+    "scale": 1.0,
+    "scale_x": 1.0,
+    "scale_y": 1.0,
+    "translate_x": 0,
+    "translate_y": 0
+  },
+  "approval_state": "candidate_visual_review",
+  "canvas": [
+    960,
+    540
+  ],
+  "cavity_fill_rgba": null,
+  "cavity_polygon": [
+    [
+      556,
+      228
+    ],
+    [
+      570,
+      232
+    ],
+    [
+      495,
+      296
+    ],
+    [
+      486,
+      291
+    ]
+  ],
+  "cavity_source": "generated",
+  "changed_bbox": [
+    485,
+    232,
+    581,
+    296
+  ],
+  "generated_render_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/037-gentle-reassurance/147_ACT147_gentle_reassurance_speaking_beak_legacy_donor.png",
+  "generated_render_sha256": "e3f66219b9a69a36d6dc322abbfcd10782c211fa4a5a7ed0ff83117533355b60",
+  "hinge": [
+    562,
+    235
+  ],
+  "hinge_radius": 16,
+  "mandible_bbox": [
+    482,
+    228,
+    581,
+    306
+  ],
+  "mandible_connected_ratio": 1.0,
+  "mandible_largest_component_pixels": 2155,
+  "mandible_opaque_pixels": 2155,
+  "mandible_polygon": [
+    [
+      558,
+      228
+    ],
+    [
+      580,
+      233
+    ],
+    [
+      568,
+      247
+    ],
+    [
+      501,
+      305
+    ],
+    [
+      482,
+      298
+    ],
+    [
+      494,
+      286
+    ]
+  ],
+  "method": "pair_specific_connected_mandible_patch_v1",
+  "minimum_connected_ratio": 0.9,
+  "minimum_mandible_height": 45,
+  "outside_articulation_change": false,
+  "residual_clear_polygon": null,
+  "resting_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/037-gentle-reassurance/037_ACT037_gentle_reassurance_resting_beak_alpha.png",
+  "resting_sha256": "9dbeb9341f46286ae999fe6aebc81d847d71308e055ed8f333b872a7313c5a96",
+  "runtime_admitted": false,
+  "schema_version": 1,
+  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/037-gentle-reassurance/147_ACT147_gentle_reassurance_speaking_beak_candidate_pairwise_v6.png",
+  "speaking_sha256": "1c327dca20c6da34b5d6df0e6e8830f1484129f9342815c77948c57018d8c038",
+  "upper_beak_policy": "immutable_source_pixels",
+  "upper_beak_polygon": [
+    [
+      500,
+      190
+    ],
+    [
+      585,
+      200
+    ],
+    [
+      585,
+      231
+    ],
+    [
+      560,
+      231
+    ],
+    [
+      489,
+      290
+    ],
+    [
+      477,
+      288
+    ],
+    [
+      500,
+      240
+    ]
+  ]
+}

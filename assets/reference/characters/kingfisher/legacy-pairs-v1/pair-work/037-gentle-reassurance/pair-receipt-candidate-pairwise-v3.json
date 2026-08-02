@@ -1,0 +1,138 @@
+{
+  "alignment": {
+    "interpolation": "lanczos_rgb_binary_alpha",
+    "scale": 1.0,
+    "scale_x": 1.0,
+    "scale_y": 1.0,
+    "translate_x": 0,
+    "translate_y": 0
+  },
+  "approval_state": "candidate_visual_review",
+  "canvas": [
+    960,
+    540
+  ],
+  "cavity_fill_rgba": [
+    20,
+    8,
+    6,
+    255
+  ],
+  "cavity_polygon": [
+    [
+      557,
+      231
+    ],
+    [
+      573,
+      235
+    ],
+    [
+      558,
+      247
+    ],
+    [
+      500,
+      296
+    ],
+    [
+      488,
+      292
+    ],
+    [
+      500,
+      280
+    ]
+  ],
+  "cavity_source": "solid",
+  "changed_bbox": [
+    484,
+    232,
+    578,
+    297
+  ],
+  "generated_render_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/037-gentle-reassurance/147_ACT147_gentle_reassurance_speaking_beak_legacy_donor.png",
+  "generated_render_sha256": "e3f66219b9a69a36d6dc322abbfcd10782c211fa4a5a7ed0ff83117533355b60",
+  "hinge": [
+    562,
+    235
+  ],
+  "hinge_radius": 16,
+  "mandible_bbox": [
+    482,
+    218,
+    581,
+    304
+  ],
+  "mandible_connected_ratio": 1.0,
+  "mandible_largest_component_pixels": 3570,
+  "mandible_opaque_pixels": 3570,
+  "mandible_polygon": [
+    [
+      548,
+      218
+    ],
+    [
+      580,
+      225
+    ],
+    [
+      568,
+      250
+    ],
+    [
+      506,
+      303
+    ],
+    [
+      482,
+      296
+    ],
+    [
+      500,
+      264
+    ]
+  ],
+  "method": "pair_specific_connected_mandible_patch_v1",
+  "minimum_connected_ratio": 0.9,
+  "minimum_mandible_height": 45,
+  "outside_articulation_change": false,
+  "residual_clear_polygon": null,
+  "resting_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/037-gentle-reassurance/037_ACT037_gentle_reassurance_resting_beak_alpha.png",
+  "resting_sha256": "9dbeb9341f46286ae999fe6aebc81d847d71308e055ed8f333b872a7313c5a96",
+  "runtime_admitted": false,
+  "schema_version": 1,
+  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/037-gentle-reassurance/147_ACT147_gentle_reassurance_speaking_beak_candidate_pairwise_v3.png",
+  "speaking_sha256": "15f76a86b9af8898ce21e7f716bbd529062b9b8b7218c7872f16d1410933022e",
+  "upper_beak_policy": "immutable_source_pixels",
+  "upper_beak_polygon": [
+    [
+      500,
+      190
+    ],
+    [
+      585,
+      200
+    ],
+    [
+      585,
+      231
+    ],
+    [
+      560,
+      231
+    ],
+    [
+      489,
+      290
+    ],
+    [
+      477,
+      288
+    ],
+    [
+      500,
+      240
+    ]
+  ]
+}

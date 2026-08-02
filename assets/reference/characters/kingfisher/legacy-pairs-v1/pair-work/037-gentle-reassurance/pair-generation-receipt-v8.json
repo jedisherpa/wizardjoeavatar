@@ -1,0 +1,28 @@
+{
+  "approval_state": "donor_only",
+  "generated_output": {
+    "canvas": [
+      1672,
+      941
+    ],
+    "path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/037-gentle-reassurance/147_ACT147_gentle_reassurance_speaking_beak_generated_pairwise_v8.png",
+    "sha256": "240394f6942ab87c65c517369912d557303bbee58d31919752162d5ffdf78c3b"
+  },
+  "method": "built_in_image_generation_pair_edit_v1",
+  "prompt": "Use case: precise-object-edit\nAsset type: one paired animation frame for a production character pose library\nPrimary request: Edit Image 1, the approved closed-beak Kingfisher pose, into a natural speaking-beak version. Image 2 is shape reference only for where the beak hinges and the direction of opening.\nImmutable invariants: Preserve Image 1 exactly everywhere outside the mouth articulation. Do not redraw, reposition, resize, relight, sharpen, soften, or restyle the head, eyes, crown feathers, cheeks, white throat feathers, hoodie, wing, body, feet, canvas, framing, or transparency. Keep the upper bill exactly aligned to Image 1.\nMouth edit: Open only the lower mandible from the rear hinge beside the cheek. The lower bill must follow the same diagonal axis as the closed upper bill. Make the opening modest and natural for gentle reassurance speech. Keep the lower bill shorter at its forward tip than Image 2, with a clean tapered bird-beak silhouette. Show a narrow but clearly three-dimensional dark oral cavity with subtle warm red inner-mouth texture. The cavity must follow the beak perspective and taper toward the tip.\nAvoid: no flat painted stripe, no triangular wedge, no detached beak, no duplicated edge, no tip overextension, no tongue protrusion, no teeth, no new highlights, no head or body changes.\nOutput: one 960x540 PNG on the same transparent canvas and at the exact same character registration as Image 1.",
+  "runtime_admitted": false,
+  "schema_version": 1,
+  "sources": [
+    {
+      "path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/037-gentle-reassurance/037_ACT037_gentle_reassurance_resting_beak_alpha.png",
+      "role": "immutable_closed_frame",
+      "sha256": "9dbeb9341f46286ae999fe6aebc81d847d71308e055ed8f333b872a7313c5a96"
+    },
+    {
+      "path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/037-gentle-reassurance/147_ACT147_gentle_reassurance_speaking_beak_legacy_donor.png",
+      "role": "hinge_and_opening_reference_only",
+      "sha256": "e3f66219b9a69a36d6dc322abbfcd10782c211fa4a5a7ed0ff83117533355b60"
+    }
+  ],
+  "user_approval_implied": false
+}

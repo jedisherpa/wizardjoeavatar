@@ -1,21 +1,21 @@
 {
-  "changed_rendered_pixels": 2064,
+  "changed_rendered_pixels": 1682,
   "checks": {
     "bounded_articulation_change": true,
     "outside_mouth_stability": true,
     "silhouette_overlap": true,
     "stable_registration_bounds": true,
-    "visible_mouth_change": true
+    "visible_mouth_change": false
   },
-  "mouth_mean_abs": 8.23127,
+  "mouth_mean_abs": 3.292825,
   "mouth_region": [
-    470,
-    220,
-    590,
-    325
+    480,
+    215,
+    582,
+    306
   ],
   "outside_mouth_mean_abs": 0.0,
-  "passed": true,
+  "passed": false,
   "registration_bound_delta": 0,
   "resting_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/037-gentle-reassurance/037_ACT037_gentle_reassurance_resting_beak_alpha.png",
   "resting_registration_bbox": [
@@ -27,12 +27,12 @@
   "resting_sha256": "9dbeb9341f46286ae999fe6aebc81d847d71308e055ed8f333b872a7313c5a96",
   "schema_version": 2,
   "silhouette_iou": 1.0,
-  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/037-gentle-reassurance/147_ACT147_gentle_reassurance_speaking_beak_candidate_pairwise_v15.png",
+  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/037-gentle-reassurance/147_ACT147_gentle_reassurance_speaking_beak_candidate_pairwise_v6.png",
   "speaking_registration_bbox": [
     266,
     95,
     694,
     529
   ],
-  "speaking_sha256": "7a47f38d13a7dba02b4de1290095dcd01a511ba01de9a481c850167077a523f7"
+  "speaking_sha256": "1c327dca20c6da34b5d6df0e6e8830f1484129f9342815c77948c57018d8c038"
 }

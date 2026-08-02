@@ -227,6 +227,53 @@ class ComposeKingfisherPairMandiblePatchTests(unittest.TestCase):
             self.assertEqual(receipt["cavity_source"], "generated")
             self.assertIsNone(receipt["cavity_fill_rgba"])
 
+    def test_overlays_generated_cavity_after_restoring_upper_beak(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            resting_path, generated_path = self._sources(root)
+            generated = Image.open(generated_path).convert("RGB")
+            ImageDraw.Draw(generated).rectangle(
+                (490, 246, 530, 260),
+                fill=(112, 31, 38),
+            )
+            generated.save(generated_path)
+            output_path = root / "output.png"
+            receipt = compose_mandible_patch(
+                resting_path,
+                generated_path,
+                output_path,
+                root / "receipt.json",
+                scale=1,
+                translate_x=0,
+                translate_y=0,
+                mandible_polygon=[
+                    (468, 248),
+                    (552, 248),
+                    (552, 272),
+                    (468, 272),
+                ],
+                cavity_polygon=[
+                    (490, 246),
+                    (530, 246),
+                    (530, 260),
+                    (490, 260),
+                ],
+                upper_beak_polygon=[
+                    (468, 228),
+                    (552, 225),
+                    (552, 250),
+                    (468, 250),
+                ],
+                hinge=(473, 255),
+                minimum_mandible_height=10,
+                cavity_source="generated_overlay",
+            )
+
+            output = Image.open(output_path).convert("RGBA")
+            self.assertEqual(output.getpixel((500, 248)), (112, 31, 38, 255))
+            self.assertEqual(receipt["cavity_source"], "generated_overlay")
+            self.assertIsNone(receipt["cavity_fill_rgba"])
+
     def test_rejects_underweight_mandible(self):
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)
