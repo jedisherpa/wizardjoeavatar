@@ -1,0 +1,105 @@
+{
+  "approval_state": "candidate_visual_review",
+  "canvas": [
+    960,
+    540
+  ],
+  "cavity_fill_rgba": [
+    12,
+    9,
+    12,
+    255
+  ],
+  "cavity_polygon": [
+    [
+      470,
+      218
+    ],
+    [
+      580,
+      218
+    ],
+    [
+      574,
+      246
+    ],
+    [
+      548,
+      254
+    ],
+    [
+      495,
+      245
+    ],
+    [
+      470,
+      230
+    ]
+  ],
+  "changed_bbox": [
+    467,
+    215,
+    585,
+    259
+  ],
+  "changed_pixels": 3684,
+  "hinge": [
+    470,
+    222
+  ],
+  "mandible_polygon": [
+    [
+      468,
+      216
+    ],
+    [
+      584,
+      216
+    ],
+    [
+      584,
+      236
+    ],
+    [
+      548,
+      246
+    ],
+    [
+      495,
+      239
+    ],
+    [
+      468,
+      228
+    ]
+  ],
+  "method": "rotate_original_lower_mandible_about_declared_hinge_v1",
+  "resting_path": "/Users/paul/Library/Caches/WizardJoe/git-repair-liana-normalization/assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/024-polite-interruption/024_ACT024_polite_interruption_resting_beak_alpha.png",
+  "resting_sha256": "85355f48e5ae353fc67446d57473b136b725106304d1c3ecc485f402bf2dc56a",
+  "rotation_degrees": -9.0,
+  "runtime_admitted": false,
+  "schema_version": 1,
+  "speaking_path": "/Users/paul/Library/Caches/WizardJoe/git-repair-liana-normalization/assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/024-polite-interruption/134_ACT134_polite_interruption_speaking_candidate_procedural_v4.png",
+  "speaking_sha256": "14477750211053b418a9efe98664e6ba4729a4abb8c42c7d25b8044aadc20bd2",
+  "tongue_fill_rgba": [
+    116,
+    42,
+    42,
+    255
+  ],
+  "tongue_polygon": [
+    [
+      490,
+      231
+    ],
+    [
+      552,
+      230
+    ],
+    [
+      540,
+      240
+    ]
+  ],
+  "upper_beak_policy": "immutable_source_pixels"
+}

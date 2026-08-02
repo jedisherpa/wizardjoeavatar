@@ -12,7 +12,12 @@
     960,
     540
   ],
-  "cavity_fill_rgba": null,
+  "cavity_fill_rgba": [
+    10,
+    13,
+    16,
+    255
+  ],
   "cavity_polygon": [
     [
       469,
@@ -79,7 +84,7 @@
       224
     ]
   ],
-  "cavity_source": "generated",
+  "cavity_source": "solid",
   "changed_bbox": [
     466,
     212,
@@ -177,8 +182,8 @@
   "resting_sha256": "85355f48e5ae353fc67446d57473b136b725106304d1c3ecc485f402bf2dc56a",
   "runtime_admitted": false,
   "schema_version": 1,
-  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/024-polite-interruption/134_ACT134_polite_interruption_speaking_beak_alpha.png",
-  "speaking_sha256": "0f8fffe0514825f3824656d9c57b2cd9b3da1cfafa073f0241e721e84dba23ca",
+  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/024-polite-interruption/134_ACT134_polite_interruption_speaking_candidate_donor_v5.png",
+  "speaking_sha256": "fd37274660f93b4d5e56e35fd4c3d03ceca4538d600f9c024d7ee40285d76cad",
   "upper_beak_policy": "immutable_source_pixels",
   "upper_beak_polygon": [
     [

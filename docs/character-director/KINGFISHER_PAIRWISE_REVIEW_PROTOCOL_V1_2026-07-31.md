@@ -251,13 +251,31 @@ Accepted internal pair 23 evidence:
 
 `assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-023-v3/`
 
+Pair 24 (`polite-interruption`) was rebuilt one pair at a time after the fresh
+full-size review found that its lower mandible curled upward and met the upper
+bill near the tip. Two early replacements passed the automated locality,
+silhouette, registration, and connected-component checks but failed the locked
+visual views: one imported white throat pixels and another produced an
+oversized horizontal cavity. Both remain rejected evidence. The accepted v6
+candidate uses the dedicated pair render only inside a tightly traced mouth
+region, restores the canonical closed frame's upper bill and body, retains the
+donor's mouth shading, and terminates the lower bill beneath the upper tip.
+
+Rejected pair 24 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-024-v2/`
+
+Accepted internal pair 24 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-024-v3/`
+
 ## Verification
 
 Focused reviewer and compositor tests: 11 passed after adding review
 invalidation, cavity-source, and locked-comparison regressions.
 
-Complete Kingfisher-focused suite after the pair 23 rebuild: 68 passed, six
-subtests passed, in 11.36 seconds. The reviewer UI tests are included in that
+Complete Kingfisher-focused suite after the pair 24 rebuild: 68 passed, six
+subtests passed, in 10.80 seconds. The reviewer UI tests are included in that
 run. Pillow emitted only known `getdata` deprecation warnings.
 
 The strict verifier intentionally exits nonzero until all observable pairs
@@ -268,21 +286,21 @@ failure receipt even while blocked:
 
 Current blocker:
 
-`pair 24 lacks a passing full-size pairwise disposition`
+`pair 25 lacks a passing full-size pairwise disposition`
 
 Current review artifact:
 
-`kingfisher_act_001_066_111_176_pair_review-0cf413043297b4c3.wjpose`
+`kingfisher_act_001_066_111_176_pair_review-484d6e8f969ea151.wjpose`
 
 Artifact SHA-256:
 
-`0cf413043297b4c3173826843e534cc3c3401b257a9eb986f1b32199ae045e7e`
+`484d6e8f969ea1515e3e00aac59b207f904bad4347a41b4048d4afbfdcf1b713`
 
 Library-index SHA-256:
 
-`50c357da2fb6c84352b30db96bbd6bd9d466930e04878b94af5af23f105a90e5`
+`fb67f38fc07c5f9099948d061f799b11f7f8241674d7790c79c41d770d0026ac`
 
-Queue state: 22 internal full-size passes, 41 pending, 1 needs rebuild, and
+Queue state: 23 internal full-size passes, 40 pending, 1 needs rebuild, and
 2 not observable. Runtime-admitted and user-approved counts remain zero.
 
 This failure is expected and proves the queue is fail-closed.
