@@ -15,11 +15,11 @@
   "cavity_fill_rgba": null,
   "cavity_polygon": [
     [
-      538,
+      532,
       220
     ],
     [
-      547,
+      543,
       222
     ],
     [
@@ -27,126 +27,126 @@
       238
     ],
     [
-      567,
+      571,
       222
     ],
     [
-      576,
+      583,
       220
     ],
     [
-      572,
-      235
+      579,
+      239
     ],
     [
-      565,
-      248
-    ],
-    [
-      560,
+      570,
       258
+    ],
+    [
+      563,
+      271
     ],
     [
       557,
-      263
+      278
     ],
     [
-      554,
+      551,
+      271
+    ],
+    [
+      542,
       258
     ],
     [
-      548,
-      248
-    ],
-    [
-      541,
-      235
+      534,
+      239
     ]
   ],
   "cavity_source": "generated",
   "changed_bbox": [
-    534,
-    218,
-    581,
-    269
+    528,
+    216,
+    588,
+    284
   ],
-  "generated_render_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/028-strong-declaration/138_ACT138_strong_declaration_speaking_render_pairwise_v2.png",
-  "generated_render_sha256": "e72308955f4ad8a0450da14fa77ed492a2302c68eaafb9da2433354f374b4d82",
+  "generated_render_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/028-strong-declaration/138_ACT138_strong_declaration_speaking_render_pairwise_v3.png",
+  "generated_render_sha256": "a41c89bf9e70ea4f7df9e90c11106a597f68fbd58bbefa46b513671ad929f8df",
   "hinge": [
-    539,
-    222
+    535,
+    221
   ],
-  "hinge_radius": 12,
+  "hinge_radius": 14,
   "mandible_bbox": [
-    534,
-    218,
-    581,
-    269
+    528,
+    216,
+    588,
+    284
   ],
   "mandible_connected_ratio": 1.0,
-  "mandible_largest_component_pixels": 1252,
-  "mandible_opaque_pixels": 1252,
+  "mandible_largest_component_pixels": 2487,
+  "mandible_opaque_pixels": 2487,
   "mandible_polygon": [
     [
-      534,
-      218
+      528,
+      216
     ],
     [
-      545,
-      219
+      542,
+      216
     ],
     [
       557,
       235
     ],
     [
-      569,
-      219
+      572,
+      217
     ],
     [
-      580,
-      218
+      587,
+      216
     ],
     [
-      577,
-      234
+      583,
+      239
     ],
     [
-      570,
-      248
+      574,
+      259
     ],
     [
-      563,
-      260
+      566,
+      274
     ],
     [
       557,
-      268
+      283
     ],
     [
-      551,
+      548,
+      276
+    ],
+    [
+      538,
       260
     ],
     [
-      544,
-      248
-    ],
-    [
-      537,
-      234
+      530,
+      240
     ]
   ],
   "method": "pair_specific_connected_mandible_patch_v1",
   "minimum_connected_ratio": 0.95,
-  "minimum_mandible_height": 34,
+  "minimum_mandible_height": 42,
   "outside_articulation_change": false,
   "residual_clear_polygon": null,
   "resting_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/028-strong-declaration/028_ACT028_strong_declaration_resting_beak_alpha.png",
   "resting_sha256": "acad34fc6b2a100b3bd90f77ffc76c5c13c2071df4920535ded4314d62231253",
   "runtime_admitted": false,
   "schema_version": 1,
-  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/028-strong-declaration/138_ACT138_strong_declaration_speaking_candidate_pairwise_v4.png",
-  "speaking_sha256": "a0972eee897e0a2a9811fe79c0352f827ca3ca3d659f11ae6739fa8d5c4d42ee",
+  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/028-strong-declaration/138_ACT138_strong_declaration_speaking_candidate_pairwise_v3.png",
+  "speaking_sha256": "10bcc675ecca4380608bbafa5a3d9868836feed4ba9e73d76ea33f48e38956bb",
   "upper_beak_policy": "immutable_source_pixels",
   "upper_beak_polygon": [
     [

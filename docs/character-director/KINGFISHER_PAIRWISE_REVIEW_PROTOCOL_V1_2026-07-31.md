@@ -286,13 +286,50 @@ Accepted internal pair 25 evidence:
 
 `assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-025-v3/`
 
+Pair 26 (`warm-welcome`) passed without reconstruction. Its locked close-up
+shows the frontal lower bill centered beneath the immutable upper bill in both
+states, while the full-character view confirms that the open-wing welcome
+silhouette, baseline, and scale do not change.
+
+Accepted internal pair 26 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-026-v2/`
+
+Pair 27 (`intimate-confidence`) also passed without reconstruction. The
+restrained lower-mandible opening remains attached at the same right-side
+hinge as the closed bill, terminates beneath the upper tip, and does not move
+the tilted head, held-in wings, body, feet, scale, or registration.
+
+Accepted internal pair 27 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-027-v2/`
+
+Pair 28 (`strong-declaration`) exposed another false automated pass. Its first
+fresh close-up kept the canonical beak shut while painting a disconnected
+V-shaped mouth in the white throat. That version was recorded as
+`needs_rebuild` before work continued. The accepted v4 replacement was built
+for pair 28 alone from a dedicated matching open-mouth donor. A compact mask
+transplants only the connected lower mandible and cavity, then restores the
+closed frame's central upper bill. The locked close-up now shows one centered
+beak articulation, and the full-character comparison preserves the raised
+wing, hoodie, body, feet, scale, and registration. Its audit reports outside-
+mouth mean difference `0.0`, silhouette IoU `1.0`, and registration delta `0`.
+
+Rejected pair 28 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-028-v2/`
+
+Accepted internal pair 28 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-028-v3/`
+
 ## Verification
 
 Focused reviewer and compositor tests: 11 passed after adding review
 invalidation, cavity-source, and locked-comparison regressions.
 
-Complete Kingfisher-focused suite after the pair 25 rebuild: 68 passed, six
-subtests passed, in 10.64 seconds. The reviewer UI tests are included in that
+Complete Kingfisher-focused suite after the pair 28 rebuild: 68 passed, six
+subtests passed, in 11.09 seconds. The reviewer UI tests are included in that
 run. Pillow emitted only known `getdata` deprecation warnings.
 
 The strict verifier intentionally exits nonzero until all observable pairs
@@ -303,21 +340,21 @@ failure receipt even while blocked:
 
 Current blocker:
 
-`pair 26 lacks a passing full-size pairwise disposition`
+`pair 29 lacks a passing full-size pairwise disposition`
 
 Current review artifact:
 
-`kingfisher_act_001_066_111_176_pair_review-aeea669040c266af.wjpose`
+`kingfisher_act_001_066_111_176_pair_review-8b846b31b7475932.wjpose`
 
 Artifact SHA-256:
 
-`aeea669040c266afd15cac5aa9c0bacde4c33440b05fc7ebc3ea99047004e052`
+`8b846b31b7475932d2f7aee23273e2383e3d97593dfa8a6fd832a35a7a12b8ea`
 
 Library-index SHA-256:
 
-`eca2f60539323afeece8762f5eb6e27c4ab8b7d127199e1412eedae33c1eba65`
+`588ac41bbfecfc03b8e7dad570a39db9c6a81a3cb04b2551cf2fe1065b3457fd`
 
-Queue state: 24 internal full-size passes, 39 pending, 1 needs rebuild, and
+Queue state: 27 internal full-size passes, 36 pending, 1 needs rebuild, and
 2 not observable. Runtime-admitted and user-approved counts remain zero.
 
 This failure is expected and proves the queue is fail-closed.
