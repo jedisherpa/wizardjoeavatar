@@ -229,13 +229,36 @@ a close listening lean, and skeptical listening. Each pair was checked in beak
 focus and fitted full-character context before its native evidence was
 captured.
 
+Pair 22 (`small-acknowledgment`) passed without reconstruction after its locked
+beak-focus and full-character comparisons confirmed a stable upper bill, rear
+hinge, head, body, feet, scale, and placement.
+
+Pair 23 (`emphatic-agreement`) demonstrates why automated registration is not
+the visual gate. Its first isolated candidate reported outside-mouth mean
+difference `0.0`, silhouette IoU `1.0`, registration delta `0`, and one
+connected mandible, but the native comparison still showed an overextended
+triangular lower bill. That candidate was recorded as `needs_rebuild` and its
+evidence was retained. Candidate v3 was then generated for pair 23 alone and
+used only as a lower-mandible and cavity donor. The compositor restored the
+closed frame's body and upper bill, and the replacement passed both locked
+views with the lower bill terminating beneath the upper tip.
+
+Rejected pair 23 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-023-v2/`
+
+Accepted internal pair 23 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-023-v3/`
+
 ## Verification
 
 Focused reviewer and compositor tests: 11 passed after adding review
 invalidation, cavity-source, and locked-comparison regressions.
 
-Complete Kingfisher-focused suite: 63 passed in 12.289 seconds. The five
-reviewer UI tests also pass.
+Complete Kingfisher-focused suite after the pair 23 rebuild: 68 passed, six
+subtests passed, in 11.36 seconds. The reviewer UI tests are included in that
+run. Pillow emitted only known `getdata` deprecation warnings.
 
 The strict verifier intentionally exits nonzero until all observable pairs
 pass and all rear views are explicitly `not_observable`. It writes a structured
@@ -245,21 +268,21 @@ failure receipt even while blocked:
 
 Current blocker:
 
-`pair 22 lacks a passing full-size pairwise disposition`
+`pair 24 lacks a passing full-size pairwise disposition`
 
 Current review artifact:
 
-`kingfisher_act_001_066_111_176_pair_review-7ec607b7a7ac5854.wjpose`
+`kingfisher_act_001_066_111_176_pair_review-0cf413043297b4c3.wjpose`
 
 Artifact SHA-256:
 
-`7ec607b7a7ac5854dcf7af2e2d2e6684fe60b6b273a3a81587eb52e1fd1a4efc`
+`0cf413043297b4c3173826843e534cc3c3401b257a9eb986f1b32199ae045e7e`
 
 Library-index SHA-256:
 
-`467aa2ff3ca24b3e905b28be1ba9fd49bfc6fef7aa8c62ccb31dcff508302983`
+`50c357da2fb6c84352b30db96bbd6bd9d466930e04878b94af5af23f105a90e5`
 
-Queue state: 20 internal full-size passes, 43 pending, 1 needs rebuild, and
+Queue state: 22 internal full-size passes, 41 pending, 1 needs rebuild, and
 2 not observable. Runtime-admitted and user-approved counts remain zero.
 
 This failure is expected and proves the queue is fail-closed.
