@@ -177,7 +177,7 @@
   "resting_sha256": "a5bfa247137c3a78a9076620fe862c8bbf45bbc56ee63396dc0b86c07ddfd661",
   "runtime_admitted": false,
   "schema_version": 1,
-  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/025-hand-over-the-floor/135_ACT135_hand_over_the_floor_speaking_beak_alpha.png",
+  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/025-hand-over-the-floor/135_ACT135_hand_over_the_floor_speaking_candidate_pairwise_v4.png",
   "speaking_sha256": "f1b2f389f2e6a7be103df54193d2c0a2c73d84da31cd77a1ca18cac8c6fc23bb",
   "upper_beak_policy": "immutable_source_pixels",
   "upper_beak_polygon": [

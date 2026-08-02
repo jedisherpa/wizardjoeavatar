@@ -269,13 +269,30 @@ Accepted internal pair 24 evidence:
 
 `assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-024-v3/`
 
+Pair 25 (`hand-over-the-floor`) failed its fresh review because the open lower
+bill was detached from the rear hinge and extended horizontally across the
+throat beyond the upper-bill tip. The retained one-pair render was suitable,
+but its previous transform registered the body instead of the mouth. Candidate
+v4 first aligns that donor around the authored beak hinge, then composites only
+the connected cavity and lower bill while restoring the canonical upper bill
+and entire body. The accepted locked views show a restrained opening beneath
+the upper bill with the presenting wing and registration unchanged.
+
+Rejected pair 25 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-025-v2/`
+
+Accepted internal pair 25 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-025-v3/`
+
 ## Verification
 
 Focused reviewer and compositor tests: 11 passed after adding review
 invalidation, cavity-source, and locked-comparison regressions.
 
-Complete Kingfisher-focused suite after the pair 24 rebuild: 68 passed, six
-subtests passed, in 10.80 seconds. The reviewer UI tests are included in that
+Complete Kingfisher-focused suite after the pair 25 rebuild: 68 passed, six
+subtests passed, in 10.64 seconds. The reviewer UI tests are included in that
 run. Pillow emitted only known `getdata` deprecation warnings.
 
 The strict verifier intentionally exits nonzero until all observable pairs
@@ -286,21 +303,21 @@ failure receipt even while blocked:
 
 Current blocker:
 
-`pair 25 lacks a passing full-size pairwise disposition`
+`pair 26 lacks a passing full-size pairwise disposition`
 
 Current review artifact:
 
-`kingfisher_act_001_066_111_176_pair_review-484d6e8f969ea151.wjpose`
+`kingfisher_act_001_066_111_176_pair_review-aeea669040c266af.wjpose`
 
 Artifact SHA-256:
 
-`484d6e8f969ea1515e3e00aac59b207f904bad4347a41b4048d4afbfdcf1b713`
+`aeea669040c266afd15cac5aa9c0bacde4c33440b05fc7ebc3ea99047004e052`
 
 Library-index SHA-256:
 
-`fb67f38fc07c5f9099948d061f799b11f7f8241674d7790c79c41d770d0026ac`
+`eca2f60539323afeece8762f5eb6e27c4ab8b7d127199e1412eedae33c1eba65`
 
-Queue state: 23 internal full-size passes, 40 pending, 1 needs rebuild, and
+Queue state: 24 internal full-size passes, 39 pending, 1 needs rebuild, and
 2 not observable. Runtime-admitted and user-approved counts remain zero.
 
 This failure is expected and proves the queue is fail-closed.
