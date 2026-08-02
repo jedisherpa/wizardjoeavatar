@@ -529,14 +529,38 @@ Accepted internal pair 39 evidence:
 
 `assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-039-v3/`
 
+Pair 40 (`describe-a-tiny-detail`) also passed its older bounded-change audit,
+but the batch receipt delegated a `141 x 96` face region to generated pixels.
+Native close-up comparison showed that the replacement covered the eye edge
+and upper bill as well as the speaking mouth. The batch result was therefore
+rejected even though its body registration remained stable.
+
+The accepted v3 pairwise candidate starts from the exact canonical closed
+frame and uses the preserved speaking frame only as a lower-mandible donor.
+The compositor moves that donor three pixels downward around one rear hinge,
+restores the complete canonical upper bill, and overlays only a narrow oral
+cavity. Locked close-up and full-character projector review show a restrained
+detail-telling opening with stable eye, head, raised wing, body, and feet. The
+audit reports `2,698` changed rendered pixels, outside-mouth mean difference
+`0.0`, silhouette IoU `1.0`, connected-mandible ratio `1.0`, and registration
+delta `0`.
+
+Rejected initial pair 40 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-040-v2/`
+
+Accepted internal pair 40 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-040-v3/`
+
 ## Verification
 
 Focused generated-overlay compositor tests: 7 passed. The added regression
 proves generated cavity texture is applied after canonical upper-bill
 restoration without changing legacy `solid` or `generated` behavior.
 
-Complete Kingfisher-focused suite after the pair 39 rebuild: 69 passed, six
-subtests passed, in 11.12 seconds. The reviewer UI tests are included in that
+Complete Kingfisher-focused suite after the pair 40 rebuild: 69 passed, six
+subtests passed, in 10.98 seconds. The reviewer UI tests are included in that
 run. Pillow emitted only known `getdata` deprecation warnings.
 
 The strict verifier intentionally exits nonzero until all observable pairs
@@ -547,21 +571,21 @@ failure receipt even while blocked:
 
 Current blocker:
 
-`pair 40 lacks a passing full-size pairwise disposition`
+`pair 41 lacks a passing full-size pairwise disposition`
 
 Current review artifact:
 
-`kingfisher_act_001_066_111_176_pair_review-1383e67d87488959.wjpose`
+`kingfisher_act_001_066_111_176_pair_review-053cd6619958e320.wjpose`
 
 Artifact SHA-256:
 
-`1383e67d87488959dac038fbaf41431095927070a1ed16189081ca80c1f7aa59`
+`053cd6619958e320a1a37a034eb37e34022b8c6a28817cd9e071dddbc28e4842`
 
 Library-index SHA-256:
 
-`d47b32437e56bfb02bf90120d7cd738ec68b89c6406e7e58c5597a74f179e112`
+`3f3b3593f0fbf52ecbe8e48a82a5113ea8da37fd03a1c8ca6b5b7c8066aac93f`
 
-Queue state: 37 internal full-size passes, 26 pending, 1 needs rebuild, and
+Queue state: 38 internal full-size passes, 25 pending, 1 needs rebuild, and
 2 not observable. Runtime-admitted and user-approved counts remain zero.
 
 This failure is expected and proves the queue is fail-closed.

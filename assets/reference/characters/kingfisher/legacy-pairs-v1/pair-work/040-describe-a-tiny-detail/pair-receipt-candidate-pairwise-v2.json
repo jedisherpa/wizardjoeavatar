@@ -5,7 +5,7 @@
     "scale_x": 1.0,
     "scale_y": 1.0,
     "translate_x": 0,
-    "translate_y": 3
+    "translate_y": 0
   },
   "approval_state": "candidate_visual_review",
   "canvas": [
@@ -24,64 +24,64 @@
     ],
     [
       495,
-      219
+      218
     ],
     [
       525,
-      222
+      221
     ],
     [
       555,
-      226
+      224
     ],
     [
       582,
+      227
+    ],
+    [
+      582,
+      232
+    ],
+    [
+      555,
       230
     ],
     [
-      582,
-      235
-    ],
-    [
-      555,
-      233
-    ],
-    [
       525,
-      231
+      228
     ],
     [
       495,
-      229
+      226
     ],
     [
       465,
-      227
+      224
     ],
     [
       443,
-      227
+      224
     ]
   ],
   "cavity_source": "generated_overlay",
   "changed_bbox": [
-    439,
+    443,
     216,
-    584,
-    245
+    581,
+    242
   ],
   "generated_render_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/040-describe-a-tiny-detail/150_ACT150_describe_a_tiny_detail_speaking_beak_legacy_donor.png",
   "generated_render_sha256": "4775b6d654bdf92eea6da2dba5603761eaf57b8f0c805bd39f98fde56d9eabfb",
   "hinge": [
     446,
-    231
+    230
   ],
-  "hinge_radius": 16,
+  "hinge_radius": 13,
   "mandible_bbox": [
     439,
-    224,
+    221,
     584,
-    245
+    242
   ],
   "mandible_connected_ratio": 1.0,
   "mandible_largest_component_pixels": 2036,
@@ -89,55 +89,55 @@
   "mandible_polygon": [
     [
       441,
-      226
+      223
     ],
     [
       462,
-      224
+      221
     ],
     [
       490,
-      225
+      222
     ],
     [
       520,
-      227
+      224
     ],
     [
       550,
-      229
+      226
     ],
     [
       582,
-      231
+      228
     ],
     [
       583,
-      244
-    ],
-    [
-      555,
-      245
-    ],
-    [
-      525,
-      244
-    ],
-    [
-      495,
-      243
-    ],
-    [
-      465,
       241
     ],
     [
+      555,
+      242
+    ],
+    [
+      525,
+      241
+    ],
+    [
+      495,
+      240
+    ],
+    [
+      465,
+      238
+    ],
+    [
       444,
-      239
+      236
     ],
     [
       439,
-      234
+      231
     ]
   ],
   "method": "pair_specific_connected_mandible_patch_v1",
@@ -149,8 +149,8 @@
   "resting_sha256": "b81e918b88e839b3d28074974de3a29d9bbae88075f2cd427df9a7f5f12eeaa9",
   "runtime_admitted": false,
   "schema_version": 1,
-  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/040-describe-a-tiny-detail/150_ACT150_describe_a_tiny_detail_speaking_beak_alpha.png",
-  "speaking_sha256": "4edd761deb03fdcc0adc87deed9b2dbc041474d733ba6ca189e7c4258e93973c",
+  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/040-describe-a-tiny-detail/150_ACT150_describe_a_tiny_detail_speaking_beak_candidate_pairwise_v2.png",
+  "speaking_sha256": "3e2e1146ad5653814f1f035811d28b6a008de14d6a411228a54ad42ec1c1a4f1",
   "upper_beak_policy": "immutable_source_pixels",
   "upper_beak_polygon": [
     [
