@@ -847,15 +847,50 @@ Accepted internal pair 52 evidence:
 
 `assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-052-v3/`
 
+Pair 53 (`embarrassment`) demonstrated a second failure mode in the batch
+workflow. The legacy `99 x 94` composite replaced the eye, forehead and crest
+texture, face, upper bill, cheek, and throat while reporting a numeric pass.
+Initial body-locked replacements also failed visual review: scale-only
+alignment produced a nearly closed mouth, anisotropic stretching attached an
+angular dark wedge to the hoodie, and an untapered cavity left a square cap at
+the bill tip. Those candidates remain recorded as rejected evidence and were
+never admitted.
+
+The accepted replacement was rendered and reviewed as one isolated pair. The
+exact closed frame remains the canonical body and upper bill. The pair-specific
+render contributes only a tapered lower mandible and oral detail; a recorded
+eight-degree hinge rotation aligns that donor with the authored mouth corner.
+The compositor now supports hinge rotation plus a solid cavity underlay with a
+generated-detail overlay, allowing the narrow mouth interior to remain opaque
+without flattening its red and charcoal texture. Locked beak-focus,
+full-character, and playback review preserve the embarrassed gaze, crest,
+face, upper bill, white throat feathers, hoodie, folded-wing posture, body,
+feet, canvas, and registration. The accepted audit reports `974` changed
+rendered pixels, outside-mouth mean difference `0.0`, silhouette IoU `0.999`,
+connected-mandible ratio `0.996951`, and registration delta `0`.
+
+Rejected legacy and intermediate pair 53 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-053-v2/`
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-053-v3/`
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-053-v4/`
+
+Accepted internal pair 53 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-053-v5/`
+
 ## Verification
 
-Focused generated-overlay compositor tests: 7 passed. The added regression
-proves generated cavity texture is applied after canonical upper-bill
-restoration without changing legacy `solid` or `generated` behavior.
+Focused mandible-compositor tests: 9 passed. The added regressions prove solid
+cavity underlays and generated oral detail can be layered after canonical
+upper-bill restoration without changing legacy `solid`, `generated`, or
+`generated_overlay` behavior.
 
-Complete Kingfisher-focused suite after the pair 52 rebuild: 69 passed, six
-subtests passed, in 11.03 seconds. The reviewer UI tests are included in that
-run. Pillow emitted only known `getdata` deprecation warnings.
+Complete Kingfisher-focused suite after the pair 53 rebuild: 71 passed, six
+subtests passed, in 11.80 seconds. The reviewer UI tests are included in that
+run. Pillow emitted only 889 known `getdata` deprecation warnings.
 
 The strict verifier intentionally exits nonzero until all observable pairs
 pass and all rear views are explicitly `not_observable`. It writes a structured
@@ -865,21 +900,21 @@ failure receipt even while blocked:
 
 Current blocker:
 
-`pair 53 lacks a passing full-size pairwise disposition`
+`pair 54 lacks a passing full-size pairwise disposition`
 
 Current review artifact:
 
-`kingfisher_act_001_066_111_176_pair_review-c21530be5095db29.wjpose`
+`kingfisher_act_001_066_111_176_pair_review-b1442a45a45091b3.wjpose`
 
 Artifact SHA-256:
 
-`c21530be5095db29e2bad945e845926a4cb339667abc1c453b0f1f4cbda2a7f7`
+`b1442a45a45091b3a7967c72394b6ee09b9f782d74666a0bb47aeeedbbaed035`
 
 Library-index SHA-256:
 
-`fe9d1d00d44684fd57ab9b8aa7bb86136f1f7fb6a3c85dcf863fe9cdd8015a23`
+`08bd0fcae1315f04dad58f76fdeb64c18b546598d7940029adfba72f7598f11e`
 
-Queue state: 50 internal full-size passes, 13 pending, 1 needs rebuild, and
+Queue state: 51 internal full-size passes, 12 pending, 1 needs rebuild, and
 2 not observable. Runtime-admitted and user-approved counts remain zero.
 
 This failure is expected and proves the queue is fail-closed.

@@ -110,6 +110,8 @@ def compose_mandible_patch(
     scale_y: float | None = None,
     translate_x: int,
     translate_y: int,
+    rotation_degrees: float = 0.0,
+    rotation_center: tuple[int, int] | None = None,
     mandible_polygon: list[tuple[int, int]],
     cavity_polygon: list[tuple[int, int]],
     upper_beak_polygon: list[tuple[int, int]],
@@ -167,9 +169,16 @@ def compose_mandible_patch(
         raise ValueError("minimum mandible height must be positive")
     if not 0 < minimum_connected_ratio <= 1:
         raise ValueError("minimum connected ratio must be in (0, 1]")
-    if cavity_source not in {"solid", "generated", "generated_overlay"}:
+    if cavity_source not in {
+        "solid",
+        "solid_overlay",
+        "solid_generated_overlay",
+        "generated",
+        "generated_overlay",
+    }:
         raise ValueError(
-            "cavity source must be solid, generated, or generated_overlay"
+            "cavity source must be solid, solid_overlay, "
+            "solid_generated_overlay, generated, or generated_overlay"
         )
 
     generated = load_render_alpha(generated_path)
@@ -182,6 +191,20 @@ def compose_mandible_patch(
     )
     aligned = Image.new("RGBA", CANVAS_SIZE, (0, 0, 0, 0))
     aligned.alpha_composite(generated, (translate_x, translate_y))
+    effective_rotation_center = rotation_center or hinge
+    if not (
+        0 <= effective_rotation_center[0] < CANVAS_SIZE[0]
+        and 0 <= effective_rotation_center[1] < CANVAS_SIZE[1]
+    ):
+        raise ValueError("rotation center must remain inside the canvas")
+    if rotation_degrees:
+        aligned = _binary_alpha(
+            aligned.rotate(
+                rotation_degrees,
+                resample=Image.Resampling.BICUBIC,
+                center=effective_rotation_center,
+            )
+        )
 
     mandible_mask = _polygon_mask(CANVAS_SIZE, mandible_polygon)
     source_alpha = ImageChops.multiply(
@@ -242,7 +265,12 @@ def compose_mandible_patch(
 
     upper_beak_mask = _polygon_mask(CANVAS_SIZE, upper_beak_polygon)
     output = Image.composite(resting, output, upper_beak_mask)
-    if cavity_source == "generated_overlay":
+    if cavity_source in {"solid_overlay", "solid_generated_overlay"}:
+        output.paste(
+            Image.new("RGBA", CANVAS_SIZE, cavity_fill),
+            mask=cavity_mask,
+        )
+    if cavity_source in {"generated_overlay", "solid_generated_overlay"}:
         cavity_alpha = ImageChops.multiply(
             aligned.getchannel("A"),
             cavity_mask,
@@ -288,6 +316,8 @@ def compose_mandible_patch(
             "scale_y": effective_scale_y,
             "translate_x": translate_x,
             "translate_y": translate_y,
+            "rotation_degrees": rotation_degrees,
+            "rotation_center": list(effective_rotation_center),
             "interpolation": "lanczos_rgb_binary_alpha",
         },
         "mandible_polygon": [list(point) for point in mandible_polygon],
@@ -306,7 +336,10 @@ def compose_mandible_patch(
         "minimum_connected_ratio": minimum_connected_ratio,
         "cavity_source": cavity_source,
         "cavity_fill_rgba": (
-            list(cavity_fill) if cavity_source == "solid" else None
+            list(cavity_fill)
+            if cavity_source
+            in {"solid", "solid_overlay", "solid_generated_overlay"}
+            else None
         ),
         "mandible_bbox": list(mandible_bbox),
         "mandible_opaque_pixels": total_pixels,
@@ -336,6 +369,8 @@ def main() -> None:
     parser.add_argument("--scale-y", type=float)
     parser.add_argument("--translate-x", type=int, required=True)
     parser.add_argument("--translate-y", type=int, required=True)
+    parser.add_argument("--rotation-degrees", type=float, default=0.0)
+    parser.add_argument("--rotation-center", nargs=2, type=int)
     parser.add_argument("--mandible-polygon", nargs="+", type=int, required=True)
     parser.add_argument("--cavity-polygon", nargs="+", type=int, required=True)
     parser.add_argument("--upper-beak-polygon", nargs="+", type=int, required=True)
@@ -353,7 +388,13 @@ def main() -> None:
     )
     parser.add_argument(
         "--cavity-source",
-        choices=("solid", "generated", "generated_overlay"),
+        choices=(
+            "solid",
+            "solid_overlay",
+            "solid_generated_overlay",
+            "generated",
+            "generated_overlay",
+        ),
         default="solid",
     )
     args = parser.parse_args()
@@ -367,6 +408,12 @@ def main() -> None:
         scale_y=args.scale_y,
         translate_x=args.translate_x,
         translate_y=args.translate_y,
+        rotation_degrees=args.rotation_degrees,
+        rotation_center=(
+            (args.rotation_center[0], args.rotation_center[1])
+            if args.rotation_center
+            else None
+        ),
         mandible_polygon=_points(
             args.mandible_polygon,
             name="mandible_polygon",

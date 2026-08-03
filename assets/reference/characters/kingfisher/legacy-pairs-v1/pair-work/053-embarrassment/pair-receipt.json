@@ -1,54 +1,171 @@
 {
   "alignment": {
     "interpolation": "lanczos_rgb_binary_alpha",
+    "rotation_center": [
+      445,
+      255
+    ],
+    "rotation_degrees": 8.0,
     "scale": 0.556,
+    "scale_x": 0.556,
+    "scale_y": 0.556,
     "translate_x": 11,
-    "translate_y": 27
+    "translate_y": 37
   },
   "approval_state": "candidate_visual_review",
-  "articulation_bbox": [
-    360,
-    210,
-    459,
-    304
-  ],
-  "articulation_polygon": [
-    [
-      360,
-      218
-    ],
-    [
-      453,
-      210
-    ],
-    [
-      458,
-      267
-    ],
-    [
-      362,
-      303
-    ]
-  ],
   "canvas": [
     960,
     540
   ],
-  "changed_bbox": [
-    364,
-    210,
-    459,
-    298
+  "cavity_fill_rgba": [
+    22,
+    15,
+    16,
+    255
   ],
-  "generated_render_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/053-embarrassment/163_ACT163_embarrassment_speaking_beak_render_raw.png",
-  "generated_render_sha256": "2fd970595918c6094ecaf48be7557dbecb20e215da986a3b67ac63d01a6ec946",
-  "method": "pose_specific_render_local_articulation_composite_v1",
-  "output_role": "speaking",
+  "cavity_polygon": [
+    [
+      373,
+      281
+    ],
+    [
+      443,
+      247
+    ],
+    [
+      448,
+      252
+    ],
+    [
+      431,
+      259
+    ],
+    [
+      408,
+      271
+    ],
+    [
+      386,
+      284
+    ],
+    [
+      378,
+      288
+    ],
+    [
+      374,
+      285
+    ]
+  ],
+  "cavity_source": "solid_generated_overlay",
+  "changed_bbox": [
+    373,
+    247,
+    449,
+    297
+  ],
+  "generated_render_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/053-embarrassment/163_ACT163_embarrassment_speaking_beak_render_pair_specific_keyed.png",
+  "generated_render_sha256": "12e46d15ebfefd316efa487d29662dbf1e080aab9982beee1b790eb3577f421d",
+  "hinge": [
+    441,
+    250
+  ],
+  "hinge_radius": 18,
+  "mandible_bbox": [
+    378,
+    242,
+    450,
+    297
+  ],
+  "mandible_connected_ratio": 0.996951,
+  "mandible_largest_component_pixels": 981,
+  "mandible_opaque_pixels": 984,
+  "mandible_polygon": [
+    [
+      378,
+      286
+    ],
+    [
+      435,
+      242
+    ],
+    [
+      449,
+      248
+    ],
+    [
+      438,
+      258
+    ],
+    [
+      419,
+      273
+    ],
+    [
+      399,
+      286
+    ],
+    [
+      382,
+      297
+    ],
+    [
+      376,
+      295
+    ]
+  ],
+  "method": "pair_specific_connected_mandible_patch_v1",
+  "minimum_connected_ratio": 0.9,
+  "minimum_mandible_height": 18,
   "outside_articulation_change": false,
+  "residual_clear_polygon": null,
   "resting_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/053-embarrassment/053_ACT053_embarrassment_resting_beak_alpha.png",
   "resting_sha256": "0ab26e20cdd347bd1b823babab8a5224dc39bd1555e3b9aef9f886536ae40240",
   "runtime_admitted": false,
   "schema_version": 1,
   "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/053-embarrassment/163_ACT163_embarrassment_speaking_beak_alpha.png",
-  "speaking_sha256": "9ddfd78da0b41070410572e38b54b83afc1674c1ba98913355d0aa2d4cf31c29"
+  "speaking_sha256": "a35d5f779834031bfacbb9a576ce595d41bcf2916a0bae93b8e8fcc468e4ab46",
+  "upper_beak_policy": "immutable_source_pixels",
+  "upper_beak_polygon": [
+    [
+      360,
+      205
+    ],
+    [
+      440,
+      200
+    ],
+    [
+      458,
+      246
+    ],
+    [
+      447,
+      249
+    ],
+    [
+      420,
+      258
+    ],
+    [
+      395,
+      271
+    ],
+    [
+      370,
+      282
+    ],
+    [
+      360,
+      282
+    ],
+    [
+      361,
+      267
+    ],
+    [
+      367,
+      247
+    ]
+  ]
 }

@@ -1,5 +1,5 @@
 {
-  "changed_rendered_pixels": 974,
+  "changed_rendered_pixels": 5687,
   "checks": {
     "bounded_articulation_change": true,
     "outside_mouth_stability": true,
@@ -7,12 +7,12 @@
     "stable_registration_bounds": true,
     "visible_mouth_change": true
   },
-  "mouth_mean_abs": 8.10624,
+  "mouth_mean_abs": 16.164804,
   "mouth_region": [
-    365,
-    240,
-    451,
-    301
+    360,
+    210,
+    459,
+    304
   ],
   "outside_mouth_mean_abs": 0.0,
   "passed": true,
@@ -26,7 +26,7 @@
   ],
   "resting_sha256": "0ab26e20cdd347bd1b823babab8a5224dc39bd1555e3b9aef9f886536ae40240",
   "schema_version": 2,
-  "silhouette_iou": 0.999,
+  "silhouette_iou": 0.992543,
   "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/053-embarrassment/163_ACT163_embarrassment_speaking_beak_alpha.png",
   "speaking_registration_bbox": [
     364,
@@ -34,5 +34,5 @@
     595,
     529
   ],
-  "speaking_sha256": "a35d5f779834031bfacbb9a576ce595d41bcf2916a0bae93b8e8fcc468e4ab46"
+  "speaking_sha256": "9ddfd78da0b41070410572e38b54b83afc1674c1ba98913355d0aa2d4cf31c29"
 }
