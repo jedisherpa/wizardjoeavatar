@@ -1,54 +1,143 @@
 {
   "alignment": {
     "interpolation": "lanczos_rgb_binary_alpha",
-    "scale": 0.579,
-    "translate_x": -4,
-    "translate_y": -4
+    "rotation_center": [
+      437,
+      249
+    ],
+    "rotation_degrees": 0.0,
+    "scale": 0.581,
+    "scale_x": 0.581,
+    "scale_y": 0.581,
+    "translate_x": -9,
+    "translate_y": 7
   },
   "approval_state": "candidate_visual_review",
-  "articulation_bbox": [
-    429,
-    222,
-    542,
-    348
-  ],
-  "articulation_polygon": [
-    [
-      433,
-      222
-    ],
-    [
-      537,
-      222
-    ],
-    [
-      541,
-      343
-    ],
-    [
-      429,
-      347
-    ]
-  ],
   "canvas": [
     960,
     540
   ],
-  "changed_bbox": [
-    429,
-    222,
-    542,
-    348
+  "cavity_fill_rgba": [
+    10,
+    10,
+    13,
+    255
   ],
-  "generated_render_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/057-anger/167_ACT167_anger_speaking_beak_render_raw.png",
-  "generated_render_sha256": "08d1e634e65f89d49d2887afc1a017d5109192e45df63a65a63e0f5e0f8a8ee5",
-  "method": "pose_specific_render_local_articulation_composite_v1",
-  "output_role": "speaking",
+  "cavity_polygon": [
+    [
+      444,
+      250
+    ],
+    [
+      480,
+      255
+    ],
+    [
+      516,
+      250
+    ],
+    [
+      507,
+      270
+    ],
+    [
+      480,
+      291
+    ],
+    [
+      454,
+      270
+    ]
+  ],
+  "cavity_source": "solid_generated_overlay",
+  "changed_bbox": [
+    436,
+    250,
+    525,
+    305
+  ],
+  "generated_render_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/057-anger/167_ACT167_anger_speaking_beak_render_pair_specific_keyed.png",
+  "generated_render_sha256": "eccb7ec41d9b54a6c7627f0be6612a3c39b83af6e26d691aedc7d610ee338036",
+  "hinge": [
+    437,
+    249
+  ],
+  "hinge_radius": 18,
+  "mandible_bbox": [
+    430,
+    241,
+    531,
+    305
+  ],
+  "mandible_connected_ratio": 1.0,
+  "mandible_largest_component_pixels": 3626,
+  "mandible_opaque_pixels": 3626,
+  "mandible_polygon": [
+    [
+      430,
+      241
+    ],
+    [
+      480,
+      247
+    ],
+    [
+      530,
+      241
+    ],
+    [
+      519,
+      269
+    ],
+    [
+      480,
+      304
+    ],
+    [
+      441,
+      269
+    ]
+  ],
+  "method": "pair_specific_connected_mandible_patch_v1",
+  "minimum_connected_ratio": 0.9,
+  "minimum_mandible_height": 50,
   "outside_articulation_change": false,
+  "residual_clear_polygon": null,
   "resting_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/057-anger/057_ACT057_anger_resting_beak_alpha.png",
   "resting_sha256": "202fc3ba8579a4a29443b5e92b56d739ae6ab1eb7f830404f35a6c5ff9c4259f",
   "runtime_admitted": false,
   "schema_version": 1,
   "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/057-anger/167_ACT167_anger_speaking_beak_alpha.png",
-  "speaking_sha256": "baad38edf7c6c8f75c27f86a4d3799e8b643e69a56dd9128500c9557c49e2436"
+  "speaking_sha256": "92d0e7db7b3a6edcabb813713348263740dbffbc3c333553d68f6f9dbf40d8b6",
+  "upper_beak_policy": "immutable_source_pixels",
+  "upper_beak_polygon": [
+    [
+      418,
+      204
+    ],
+    [
+      542,
+      204
+    ],
+    [
+      544,
+      248
+    ],
+    [
+      520,
+      258
+    ],
+    [
+      480,
+      263
+    ],
+    [
+      441,
+      258
+    ],
+    [
+      417,
+      248
+    ]
+  ]
 }
