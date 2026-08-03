@@ -1,5 +1,5 @@
 {
-  "changed_rendered_pixels": 3022,
+  "changed_rendered_pixels": 12330,
   "checks": {
     "bounded_articulation_change": true,
     "outside_mouth_stability": true,
@@ -7,12 +7,12 @@
     "stable_registration_bounds": true,
     "visible_mouth_change": true
   },
-  "mouth_mean_abs": 9.039161,
+  "mouth_mean_abs": 16.071029,
   "mouth_region": [
-    490,
-    190,
-    600,
-    255
+    450,
+    160,
+    599,
+    276
   ],
   "outside_mouth_mean_abs": 0.0,
   "passed": true,
@@ -26,7 +26,7 @@
   ],
   "resting_sha256": "629309ccfcf2194071f8ea517e7baa55f72237beac5d70734f58c4b38a39a3d0",
   "schema_version": 2,
-  "silhouette_iou": 0.99991,
+  "silhouette_iou": 0.99933,
   "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/049-confusion/159_ACT159_confusion_speaking_beak_alpha.png",
   "speaking_registration_bbox": [
     313,
@@ -34,5 +34,5 @@
     647,
     529
   ],
-  "speaking_sha256": "290a8b5664bc6cf6633b62042da7e0337c35fb69602a5bf6e504525c714d5336"
+  "speaking_sha256": "ea3a188dd9351151a90e5e2c7374fc00054027ad28e3ffd2e057eff784ab46f5"
 }

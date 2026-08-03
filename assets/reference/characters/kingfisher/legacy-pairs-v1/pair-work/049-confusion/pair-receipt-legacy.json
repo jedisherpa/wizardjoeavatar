@@ -1,0 +1,78 @@
+{
+  "alignment": {
+    "interpolation": "lanczos_rgb_binary_alpha",
+    "scale": 0.571,
+    "translate_x": 0,
+    "translate_y": -2
+  },
+  "approval_state": "candidate_visual_review",
+  "articulation_bbox": [
+    450,
+    160,
+    599,
+    276
+  ],
+  "articulation_polygon": [
+    [
+      465,
+      175
+    ],
+    [
+      510,
+      160
+    ],
+    [
+      565,
+      170
+    ],
+    [
+      595,
+      195
+    ],
+    [
+      598,
+      225
+    ],
+    [
+      580,
+      255
+    ],
+    [
+      540,
+      275
+    ],
+    [
+      490,
+      270
+    ],
+    [
+      460,
+      245
+    ],
+    [
+      450,
+      205
+    ]
+  ],
+  "canvas": [
+    960,
+    540
+  ],
+  "changed_bbox": [
+    450,
+    160,
+    599,
+    276
+  ],
+  "generated_render_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/049-confusion/159_ACT159_confusion_speaking_beak_render_raw.png",
+  "generated_render_sha256": "85de8fd956c674871a536ccc6634e4d8a111cdba18534662a0e5ad6989d54da0",
+  "method": "pose_specific_render_local_articulation_composite_v1",
+  "output_role": "speaking",
+  "outside_articulation_change": false,
+  "resting_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/049-confusion/049_ACT049_confusion_resting_beak_alpha.png",
+  "resting_sha256": "629309ccfcf2194071f8ea517e7baa55f72237beac5d70734f58c4b38a39a3d0",
+  "runtime_admitted": false,
+  "schema_version": 1,
+  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/049-confusion/159_ACT159_confusion_speaking_beak_alpha.png",
+  "speaking_sha256": "ea3a188dd9351151a90e5e2c7374fc00054027ad28e3ffd2e057eff784ab46f5"
+}
