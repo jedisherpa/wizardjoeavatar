@@ -1,0 +1,78 @@
+{
+  "alignment": {
+    "interpolation": "lanczos_rgb_binary_alpha",
+    "scale": 0.5735,
+    "translate_x": 0,
+    "translate_y": 3
+  },
+  "approval_state": "candidate_visual_review",
+  "articulation_bbox": [
+    400,
+    200,
+    529,
+    331
+  ],
+  "articulation_polygon": [
+    [
+      420,
+      215
+    ],
+    [
+      465,
+      200
+    ],
+    [
+      510,
+      215
+    ],
+    [
+      528,
+      245
+    ],
+    [
+      522,
+      285
+    ],
+    [
+      500,
+      320
+    ],
+    [
+      470,
+      330
+    ],
+    [
+      430,
+      315
+    ],
+    [
+      405,
+      285
+    ],
+    [
+      400,
+      245
+    ]
+  ],
+  "canvas": [
+    960,
+    540
+  ],
+  "changed_bbox": [
+    418,
+    200,
+    529,
+    331
+  ],
+  "generated_render_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/047-compassion/157_ACT157_compassion_speaking_beak_render_raw.png",
+  "generated_render_sha256": "1e9f3c6d496bdd545965c5d5ab7e89e2a38209871b9dca1251c0dab111d61004",
+  "method": "pose_specific_render_local_articulation_composite_v1",
+  "output_role": "speaking",
+  "outside_articulation_change": false,
+  "resting_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/047-compassion/047_ACT047_compassion_resting_beak_alpha.png",
+  "resting_sha256": "5b0f5c4660b9c4850e08a3501a4df69bc4814eb9ff39272d8196c1fc9ff06786",
+  "runtime_admitted": false,
+  "schema_version": 1,
+  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/047-compassion/157_ACT157_compassion_speaking_beak_alpha.png",
+  "speaking_sha256": "76a1078b055e93204577f1ab26bf530c18c11e43bf9c6b05a64b5bf3bb2eadb0"
+}

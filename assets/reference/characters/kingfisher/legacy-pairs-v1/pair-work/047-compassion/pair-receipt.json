@@ -2,77 +2,164 @@
   "alignment": {
     "interpolation": "lanczos_rgb_binary_alpha",
     "scale": 0.5735,
+    "scale_x": 0.5735,
+    "scale_y": 0.5735,
     "translate_x": 0,
     "translate_y": 3
   },
   "approval_state": "candidate_visual_review",
-  "articulation_bbox": [
-    400,
-    200,
-    529,
-    331
-  ],
-  "articulation_polygon": [
-    [
-      420,
-      215
-    ],
-    [
-      465,
-      200
-    ],
-    [
-      510,
-      215
-    ],
-    [
-      528,
-      245
-    ],
-    [
-      522,
-      285
-    ],
-    [
-      500,
-      320
-    ],
-    [
-      470,
-      330
-    ],
-    [
-      430,
-      315
-    ],
-    [
-      405,
-      285
-    ],
-    [
-      400,
-      245
-    ]
-  ],
   "canvas": [
     960,
     540
   ],
+  "cavity_fill_rgba": null,
+  "cavity_polygon": [
+    [
+      468,
+      258
+    ],
+    [
+      514,
+      228
+    ],
+    [
+      518,
+      251
+    ],
+    [
+      508,
+      280
+    ],
+    [
+      496,
+      305
+    ],
+    [
+      484,
+      296
+    ],
+    [
+      475,
+      278
+    ]
+  ],
+  "cavity_source": "generated",
   "changed_bbox": [
-    418,
-    200,
-    529,
+    462,
+    234,
+    528,
     331
   ],
   "generated_render_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/047-compassion/157_ACT157_compassion_speaking_beak_render_raw.png",
   "generated_render_sha256": "1e9f3c6d496bdd545965c5d5ab7e89e2a38209871b9dca1251c0dab111d61004",
-  "method": "pose_specific_render_local_articulation_composite_v1",
-  "output_role": "speaking",
+  "hinge": [
+    512,
+    238
+  ],
+  "hinge_radius": 18,
+  "mandible_bbox": [
+    462,
+    225,
+    528,
+    331
+  ],
+  "mandible_connected_ratio": 1.0,
+  "mandible_largest_component_pixels": 4287,
+  "mandible_opaque_pixels": 4287,
+  "mandible_polygon": [
+    [
+      462,
+      255
+    ],
+    [
+      515,
+      225
+    ],
+    [
+      527,
+      240
+    ],
+    [
+      523,
+      274
+    ],
+    [
+      510,
+      307
+    ],
+    [
+      497,
+      330
+    ],
+    [
+      482,
+      318
+    ],
+    [
+      470,
+      296
+    ]
+  ],
+  "method": "pair_specific_connected_mandible_patch_v1",
+  "minimum_connected_ratio": 0.9,
+  "minimum_mandible_height": 38,
   "outside_articulation_change": false,
+  "residual_clear_polygon": null,
   "resting_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/047-compassion/047_ACT047_compassion_resting_beak_alpha.png",
   "resting_sha256": "5b0f5c4660b9c4850e08a3501a4df69bc4814eb9ff39272d8196c1fc9ff06786",
   "runtime_admitted": false,
   "schema_version": 1,
   "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/047-compassion/157_ACT157_compassion_speaking_beak_alpha.png",
-  "speaking_sha256": "76a1078b055e93204577f1ab26bf530c18c11e43bf9c6b05a64b5bf3bb2eadb0"
+  "speaking_sha256": "e55e383be358770553564669c47914154b2e52a6fe417667de120edd9da0e2a0",
+  "upper_beak_policy": "immutable_source_pixels",
+  "upper_beak_polygon": [
+    [
+      425,
+      210
+    ],
+    [
+      480,
+      205
+    ],
+    [
+      510,
+      214
+    ],
+    [
+      525,
+      228
+    ],
+    [
+      514,
+      244
+    ],
+    [
+      500,
+      255
+    ],
+    [
+      486,
+      274
+    ],
+    [
+      473,
+      315
+    ],
+    [
+      459,
+      311
+    ],
+    [
+      460,
+      280
+    ],
+    [
+      466,
+      252
+    ],
+    [
+      490,
+      234
+    ]
+  ]
 }
