@@ -83,11 +83,15 @@ class HdPairReviewUiTests(unittest.TestCase):
         )
         self.assertEqual(
             repaired["pairwise_full_size_review"]["state"],
-            "pending",
+            "pass",
         )
         self.assertEqual(
             repaired["pairwise_full_size_review"]["source_disposition"],
-            "user_reported_visual_recheck",
+            "full_size_pairwise_review",
+        )
+        self.assertIn(
+            "evidence/pairwise-full-size/pair-059-v3",
+            repaired["pairwise_full_size_review"]["evidence_path"],
         )
         history = repaired["pairwise_full_size_review_history"]
         self.assertEqual(history[-1]["superseded_review"]["state"], "pass")
@@ -97,6 +101,16 @@ class HdPairReviewUiTests(unittest.TestCase):
         )
         self.assertFalse(repaired["runtime_admitted"])
         self.assertFalse(repaired["user_approved"])
+
+        next_pair = by_ordinal[60]
+        self.assertEqual(
+            next_pair["pairwise_full_size_review"]["state"],
+            "pending",
+        )
+        self.assertEqual(
+            next_pair["pairwise_full_size_review"]["source_disposition"],
+            "prior_batch_pass_invalidated",
+        )
 
         for ordinal in (62,):
             pair = by_ordinal[ordinal]
