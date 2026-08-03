@@ -2,77 +2,124 @@
   "alignment": {
     "interpolation": "lanczos_rgb_binary_alpha",
     "scale": 0.577,
+    "scale_x": 0.577,
+    "scale_y": 0.577,
     "translate_x": -3,
     "translate_y": 8
   },
   "approval_state": "candidate_visual_review",
-  "articulation_bbox": [
-    415,
-    145,
-    546,
-    253
-  ],
-  "articulation_polygon": [
-    [
-      425,
-      160
-    ],
-    [
-      455,
-      145
-    ],
-    [
-      505,
-      145
-    ],
-    [
-      535,
-      160
-    ],
-    [
-      545,
-      195
-    ],
-    [
-      535,
-      230
-    ],
-    [
-      510,
-      252
-    ],
-    [
-      450,
-      252
-    ],
-    [
-      425,
-      230
-    ],
-    [
-      415,
-      195
-    ]
-  ],
   "canvas": [
     960,
     540
   ],
-  "changed_bbox": [
-    415,
-    145,
-    545,
-    253
+  "cavity_fill_rgba": null,
+  "cavity_polygon": [
+    [
+      452,
+      184
+    ],
+    [
+      508,
+      184
+    ],
+    [
+      506,
+      203
+    ],
+    [
+      480,
+      211
+    ],
+    [
+      454,
+      203
+    ]
   ],
-  "generated_render_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/046-confident-hero/156_ACT156_confident_hero_speaking_beak_render_raw.png",
-  "generated_render_sha256": "5f33e719304694f2e3a1b59deefea9e1599e49aecb356a3ccbb50e0433719f4b",
-  "method": "pose_specific_render_local_articulation_composite_v1",
-  "output_role": "speaking",
+  "cavity_source": "generated",
+  "changed_bbox": [
+    447,
+    185,
+    514,
+    229
+  ],
+  "generated_render_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/046-confident-hero/156_ACT156_confident_hero_speaking_beak_pairwise_render_v1.png",
+  "generated_render_sha256": "e61b981076a12d39c8abaf48c55eaac8df7886a5faa7bebc7242e17c036a9525",
+  "hinge": [
+    450,
+    194
+  ],
+  "hinge_radius": 16,
+  "mandible_bbox": [
+    447,
+    181,
+    514,
+    229
+  ],
+  "mandible_connected_ratio": 1.0,
+  "mandible_largest_component_pixels": 2918,
+  "mandible_opaque_pixels": 2918,
+  "mandible_polygon": [
+    [
+      447,
+      181
+    ],
+    [
+      513,
+      181
+    ],
+    [
+      513,
+      220
+    ],
+    [
+      480,
+      228
+    ],
+    [
+      447,
+      220
+    ]
+  ],
+  "method": "pair_specific_connected_mandible_patch_v1",
+  "minimum_connected_ratio": 0.9,
+  "minimum_mandible_height": 18,
   "outside_articulation_change": false,
+  "residual_clear_polygon": null,
   "resting_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/046-confident-hero/046_ACT046_confident_hero_resting_beak_alpha.png",
   "resting_sha256": "32c340541fb4bceb1f3f1f94e1bdd7151ff47bc4352f135e094a58c21870324a",
   "runtime_admitted": false,
   "schema_version": 1,
   "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/046-confident-hero/156_ACT156_confident_hero_speaking_beak_alpha.png",
-  "speaking_sha256": "e586c4633c387211adbea86a96c3fb6c604e51042aa47eb52de54d0c10965d24"
+  "speaking_sha256": "889dab0f3f3845016cfd02a44cf2c6fa9079187b632a0c2c1db9fbd8ea6a59fc",
+  "upper_beak_policy": "immutable_source_pixels",
+  "upper_beak_polygon": [
+    [
+      438,
+      145
+    ],
+    [
+      522,
+      145
+    ],
+    [
+      522,
+      182
+    ],
+    [
+      506,
+      188
+    ],
+    [
+      480,
+      184
+    ],
+    [
+      454,
+      188
+    ],
+    [
+      438,
+      182
+    ]
+  ]
 }
