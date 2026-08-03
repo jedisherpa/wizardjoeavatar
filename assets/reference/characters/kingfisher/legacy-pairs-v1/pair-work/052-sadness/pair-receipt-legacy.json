@@ -1,0 +1,54 @@
+{
+  "alignment": {
+    "interpolation": "lanczos_rgb_binary_alpha",
+    "scale": 0.579,
+    "translate_x": -5,
+    "translate_y": -5
+  },
+  "approval_state": "candidate_visual_review",
+  "articulation_bbox": [
+    398,
+    205,
+    491,
+    332
+  ],
+  "articulation_polygon": [
+    [
+      398,
+      205
+    ],
+    [
+      480,
+      205
+    ],
+    [
+      490,
+      280
+    ],
+    [
+      398,
+      331
+    ]
+  ],
+  "canvas": [
+    960,
+    540
+  ],
+  "changed_bbox": [
+    398,
+    205,
+    491,
+    332
+  ],
+  "generated_render_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/052-sadness/162_ACT162_sadness_speaking_beak_render_raw.png",
+  "generated_render_sha256": "4cf00bf20256d00160269617873742889e7098c0bdb8d5614b834337485a986a",
+  "method": "pose_specific_render_local_articulation_composite_v1",
+  "output_role": "speaking",
+  "outside_articulation_change": false,
+  "resting_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/052-sadness/052_ACT052_sadness_resting_beak_alpha.png",
+  "resting_sha256": "6a96f56c2462ab3ee35819d1c6d86267fd5915c725ac0883a3839b6c4835590d",
+  "runtime_admitted": false,
+  "schema_version": 1,
+  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/052-sadness/162_ACT162_sadness_speaking_beak_alpha.png",
+  "speaking_sha256": "fab6aecb362746359ee1a5b7fcfa0a690590c5f774b2e99fdea24e526321c88c"
+}
