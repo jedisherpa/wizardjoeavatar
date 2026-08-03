@@ -2,53 +2,152 @@
   "alignment": {
     "interpolation": "lanczos_rgb_binary_alpha",
     "scale": 0.55,
+    "scale_x": 0.55,
+    "scale_y": 0.55,
     "translate_x": 20,
     "translate_y": 38
   },
   "approval_state": "candidate_visual_review",
-  "articulation_bbox": [
-    390,
-    178,
-    513,
-    277
-  ],
-  "articulation_polygon": [
-    [
-      390,
-      178
-    ],
-    [
-      500,
-      178
-    ],
-    [
-      512,
-      259
-    ],
-    [
-      394,
-      276
-    ]
-  ],
   "canvas": [
     960,
     540
   ],
+  "cavity_fill_rgba": null,
+  "cavity_polygon": [
+    [
+      405,
+      250
+    ],
+    [
+      496,
+      211
+    ],
+    [
+      500,
+      222
+    ],
+    [
+      480,
+      230
+    ],
+    [
+      447,
+      244
+    ],
+    [
+      416,
+      260
+    ],
+    [
+      408,
+      259
+    ]
+  ],
+  "cavity_source": "generated",
   "changed_bbox": [
-    401,
-    178,
-    513,
-    275
+    409,
+    215,
+    504,
+    272
   ],
   "generated_render_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/050-skepticism/160_ACT160_skepticism_speaking_beak_render_raw.png",
   "generated_render_sha256": "cda9b2f08643e9c3959d24e98f9e77d747fefccf0f48f76640f9a114fbae07ae",
-  "method": "pose_specific_render_local_articulation_composite_v1",
-  "output_role": "speaking",
+  "hinge": [
+    497,
+    222
+  ],
+  "hinge_radius": 16,
+  "mandible_bbox": [
+    409,
+    215,
+    504,
+    272
+  ],
+  "mandible_connected_ratio": 0.995865,
+  "mandible_largest_component_pixels": 1445,
+  "mandible_opaque_pixels": 1451,
+  "mandible_polygon": [
+    [
+      409,
+      255
+    ],
+    [
+      496,
+      215
+    ],
+    [
+      503,
+      229
+    ],
+    [
+      480,
+      239
+    ],
+    [
+      445,
+      254
+    ],
+    [
+      418,
+      271
+    ],
+    [
+      410,
+      269
+    ]
+  ],
+  "method": "pair_specific_connected_mandible_patch_v1",
+  "minimum_connected_ratio": 0.9,
+  "minimum_mandible_height": 20,
   "outside_articulation_change": false,
+  "residual_clear_polygon": null,
   "resting_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/050-skepticism/050_ACT050_skepticism_resting_beak_alpha.png",
   "resting_sha256": "8fc5de307de5b95a54fb5200dd8180484cd2110f713db0830ba76b033fb23828",
   "runtime_admitted": false,
   "schema_version": 1,
   "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/050-skepticism/160_ACT160_skepticism_speaking_beak_alpha.png",
-  "speaking_sha256": "be2186cf94729411a2438d7d3bcf9884f28b4ba4703eb6d686b20a0d81f7c083"
+  "speaking_sha256": "445a6763232d5c49b54b00f7f7bae0d6d55ace2373fb8d59223c9a65aca0ac72",
+  "upper_beak_policy": "immutable_source_pixels",
+  "upper_beak_polygon": [
+    [
+      386,
+      174
+    ],
+    [
+      500,
+      174
+    ],
+    [
+      513,
+      208
+    ],
+    [
+      500,
+      212
+    ],
+    [
+      470,
+      224
+    ],
+    [
+      430,
+      240
+    ],
+    [
+      399,
+      254
+    ],
+    [
+      390,
+      251
+    ],
+    [
+      400,
+      237
+    ],
+    [
+      420,
+      215
+    ]
+  ]
 }

@@ -1,0 +1,54 @@
+{
+  "alignment": {
+    "interpolation": "lanczos_rgb_binary_alpha",
+    "scale": 0.55,
+    "translate_x": 20,
+    "translate_y": 38
+  },
+  "approval_state": "candidate_visual_review",
+  "articulation_bbox": [
+    390,
+    178,
+    513,
+    277
+  ],
+  "articulation_polygon": [
+    [
+      390,
+      178
+    ],
+    [
+      500,
+      178
+    ],
+    [
+      512,
+      259
+    ],
+    [
+      394,
+      276
+    ]
+  ],
+  "canvas": [
+    960,
+    540
+  ],
+  "changed_bbox": [
+    401,
+    178,
+    513,
+    275
+  ],
+  "generated_render_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/050-skepticism/160_ACT160_skepticism_speaking_beak_render_raw.png",
+  "generated_render_sha256": "cda9b2f08643e9c3959d24e98f9e77d747fefccf0f48f76640f9a114fbae07ae",
+  "method": "pose_specific_render_local_articulation_composite_v1",
+  "output_role": "speaking",
+  "outside_articulation_change": false,
+  "resting_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/050-skepticism/050_ACT050_skepticism_resting_beak_alpha.png",
+  "resting_sha256": "8fc5de307de5b95a54fb5200dd8180484cd2110f713db0830ba76b033fb23828",
+  "runtime_admitted": false,
+  "schema_version": 1,
+  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/050-skepticism/160_ACT160_skepticism_speaking_beak_alpha.png",
+  "speaking_sha256": "be2186cf94729411a2438d7d3bcf9884f28b4ba4703eb6d686b20a0d81f7c083"
+}
