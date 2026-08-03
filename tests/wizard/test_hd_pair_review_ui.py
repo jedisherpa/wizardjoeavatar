@@ -118,15 +118,21 @@ class HdPairReviewUiTests(unittest.TestCase):
         self.assertFalse(fatigue["runtime_admitted"])
         self.assertFalse(fatigue["user_approved"])
 
-        next_pair = by_ordinal[61]
+        contemplation = by_ordinal[61]
         self.assertEqual(
-            next_pair["pairwise_full_size_review"]["state"],
-            "pending",
+            contemplation["pairwise_full_size_review"]["state"],
+            "pass",
         )
         self.assertEqual(
-            next_pair["pairwise_full_size_review"]["source_disposition"],
-            "prior_batch_pass_invalidated",
+            contemplation["pairwise_full_size_review"]["source_disposition"],
+            "full_size_pairwise_review",
         )
+        self.assertIn(
+            "evidence/pairwise-full-size/pair-061-v3",
+            contemplation["pairwise_full_size_review"]["evidence_path"],
+        )
+        self.assertFalse(contemplation["runtime_admitted"])
+        self.assertFalse(contemplation["user_approved"])
 
         for ordinal in (62,):
             pair = by_ordinal[ordinal]

@@ -1062,6 +1062,30 @@ Accepted internal pair 60 evidence:
 
 `assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-060-v3/`
 
+Pair 61 (`deep contemplation`) showed a different form of batch failure. The
+legacy speaking candidate placed a long rectangular dark strip diagonally
+across the face from the bill toward the eye. Its bounded-region audit could
+not establish that the strip was a plausible lower mandible, so the candidate
+was preserved as rejected evidence before replacement.
+
+The accepted replacement was handled as one isolated pair. A fresh matched
+render made specifically for the contemplative hand-on-chin pose supplies
+only lower-mandible and oral-cavity pixels. The exact closed frame remains
+authoritative for the crest, eye, cheek, throat, hand gesture, hoodie, body,
+stance, and upper beak. Native beak-focus and full-character review show one
+connected screen-right hinge and no facial strip, duplicate upper edge, head
+jump, or body movement. The accepted audit reports `1,700` changed rendered
+pixels, outside-mouth mean difference `0.0`, silhouette IoU `1.0`,
+connected-mandible ratio `1.0`, and registration delta `0`.
+
+Rejected legacy pair 61 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-061-v2/`
+
+Accepted internal pair 61 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-061-v3/`
+
 ## Verification
 
 Focused mandible-compositor tests: 9 passed. The added regressions prove solid
@@ -1069,8 +1093,8 @@ cavity underlays and generated oral detail can be layered after canonical
 upper-bill restoration without changing legacy `solid`, `generated`, or
 `generated_overlay` behavior.
 
-Complete Kingfisher-focused suite after the pair 60 rebuild: 71 passed in
-13.87 seconds. The reviewer UI tests are included in that run.
+Complete Kingfisher-focused suite after the pair 61 rebuild: 71 passed. The
+reviewer UI tests are included in that run.
 
 The strict verifier intentionally exits nonzero until all observable pairs
 pass and all rear views are explicitly `not_observable`. It writes a structured
@@ -1080,21 +1104,21 @@ failure receipt even while blocked:
 
 Current blocker:
 
-`pair 61 lacks a passing full-size pairwise disposition`
+`pair 62 lacks a passing full-size pairwise disposition`
 
 Current review artifact:
 
-`kingfisher_act_001_066_111_176_pair_review-637b500ef4efa437.wjpose`
+`kingfisher_act_001_066_111_176_pair_review-94b79fdfcdc90cf1.wjpose`
 
 Artifact SHA-256:
 
-`637b500ef4efa4376ab027b6d29b06648c4c4fe59e1d1ea507cc2b12db7c418e`
+`94b79fdfcdc90cf15810490a6baae8ec319565e7d6aadae6212aaa8f6ea2f7d9`
 
 Library-index SHA-256:
 
-`a8286b8a676eccf89f048020cbdc5b851b4d9d14aab6e617fb6ede03a59f3336`
+`9f448f1c11a583c50fc84a76f8a3cd35bea93d2b567f598920681c00738d6a64`
 
-Queue state: 58 internal full-size passes, 5 pending, 1 needs rebuild, and
+Queue state: 59 internal full-size passes, 4 pending, 1 needs rebuild, and
 2 not observable. Runtime-admitted and user-approved counts remain zero.
 
 This failure is expected and proves the queue is fail-closed.

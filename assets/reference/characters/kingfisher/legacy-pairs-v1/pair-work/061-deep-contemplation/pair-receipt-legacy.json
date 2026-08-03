@@ -1,0 +1,78 @@
+{
+  "alignment": {
+    "interpolation": "lanczos_rgb_binary_alpha",
+    "scale": 0.568,
+    "translate_x": 3,
+    "translate_y": 16
+  },
+  "approval_state": "candidate_visual_review",
+  "articulation_bbox": [
+    411,
+    209,
+    472,
+    273
+  ],
+  "articulation_polygon": [
+    [
+      411,
+      265
+    ],
+    [
+      463,
+      209
+    ],
+    [
+      471,
+      213
+    ],
+    [
+      421,
+      272
+    ]
+  ],
+  "canvas": [
+    960,
+    540
+  ],
+  "cavity_fill_rgba": [
+    10,
+    13,
+    16,
+    255
+  ],
+  "cavity_polygon": [
+    [
+      414,
+      263
+    ],
+    [
+      464,
+      212
+    ],
+    [
+      468,
+      214
+    ],
+    [
+      420,
+      268
+    ]
+  ],
+  "changed_bbox": [
+    411,
+    209,
+    470,
+    273
+  ],
+  "generated_render_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/061-deep-contemplation/171_ACT171_deep_contemplation_speaking_beak_render_raw.png",
+  "generated_render_sha256": "7fad55d51ca6016304b99c35695be3594613a8efec86491a1beac302cb26a2df",
+  "method": "pose_specific_render_local_articulation_composite_v1",
+  "output_role": "speaking",
+  "outside_articulation_change": false,
+  "resting_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/061-deep-contemplation/061_ACT061_deep_contemplation_resting_beak_alpha.png",
+  "resting_sha256": "d5542b24bc973a67cbba0b017fbc628aeaea4dde4ec3314e1dc6ea8d2db7b696",
+  "runtime_admitted": false,
+  "schema_version": 1,
+  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/061-deep-contemplation/171_ACT171_deep_contemplation_speaking_beak_alpha.png",
+  "speaking_sha256": "be1fc119dac9e208099a4cccb4537c53b0a3fb83bf41ab3fce80dc9df328ade3"
+}
