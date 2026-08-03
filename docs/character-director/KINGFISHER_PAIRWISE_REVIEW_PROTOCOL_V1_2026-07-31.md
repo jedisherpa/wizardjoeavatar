@@ -728,14 +728,36 @@ Accepted internal pair 47 evidence:
 
 `assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-047-v3/`
 
+Pair 48 (`surprise`) demonstrated why silhouette and registration checks alone
+cannot approve a speaking mate. The legacy batch frame scored silhouette IoU
+`1.0`, yet visibly redirected both eyes and replaced the central face and bill.
+That frame was rejected at the native-size pair gate.
+
+The accepted replacement uses the exact closed surprise frame for the wide-
+eyed gaze, crest, face, upper-bill root, throat, hoodie, spread-wing body,
+feet, canvas, and registration. A tightly bounded donor mask supplies the
+centered open lower bill and dark cavity required by the surprise expression.
+Locked beak-focus and full-character review show no eye, head, or body jump.
+The accepted audit reports `4,596` changed rendered pixels, outside-mouth mean
+difference `0.0`, silhouette IoU `1.0`, connected-mandible ratio `1.0`, and
+registration delta `0`.
+
+Rejected initial pair 48 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-048-v2/`
+
+Accepted internal pair 48 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-048-v3/`
+
 ## Verification
 
 Focused generated-overlay compositor tests: 7 passed. The added regression
 proves generated cavity texture is applied after canonical upper-bill
 restoration without changing legacy `solid` or `generated` behavior.
 
-Complete Kingfisher-focused suite after the pair 47 rebuild: 69 passed, six
-subtests passed, in 11.05 seconds. The reviewer UI tests are included in that
+Complete Kingfisher-focused suite after the pair 48 rebuild: 69 passed, six
+subtests passed, in 11.04 seconds. The reviewer UI tests are included in that
 run. Pillow emitted only known `getdata` deprecation warnings.
 
 The strict verifier intentionally exits nonzero until all observable pairs
@@ -746,21 +768,21 @@ failure receipt even while blocked:
 
 Current blocker:
 
-`pair 48 lacks a passing full-size pairwise disposition`
+`pair 49 lacks a passing full-size pairwise disposition`
 
 Current review artifact:
 
-`kingfisher_act_001_066_111_176_pair_review-5a655da29554f34b.wjpose`
+`kingfisher_act_001_066_111_176_pair_review-7b6aeb5d526bc8a7.wjpose`
 
 Artifact SHA-256:
 
-`5a655da29554f34bb81ae54fc0e8f12ec59174a5ec581406761cadb73439f715`
+`7b6aeb5d526bc8a797e51c5031cca5fff6f27841315c93617a1728ddde223b7c`
 
 Library-index SHA-256:
 
-`f3b742f058eea6342cb86a7ede0c97c0105b96dda4a61f6901a7b8f8d9049967`
+`1502638632d075b01aa7fb27b32fc3f68bc28a417b599cbc0cf76c26b8580fea`
 
-Queue state: 45 internal full-size passes, 18 pending, 1 needs rebuild, and
+Queue state: 46 internal full-size passes, 17 pending, 1 needs rebuild, and
 2 not observable. Runtime-admitted and user-approved counts remain zero.
 
 This failure is expected and proves the queue is fail-closed.
