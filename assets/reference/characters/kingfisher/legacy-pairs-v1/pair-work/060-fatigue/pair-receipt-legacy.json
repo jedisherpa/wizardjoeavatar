@@ -1,0 +1,86 @@
+{
+  "alignment": {
+    "interpolation": "lanczos_rgb_binary_alpha",
+    "scale": 0.58,
+    "translate_x": -6,
+    "translate_y": 6
+  },
+  "approval_state": "candidate_visual_review",
+  "articulation_bbox": [
+    378,
+    221,
+    459,
+    288
+  ],
+  "articulation_polygon": [
+    [
+      392,
+      241
+    ],
+    [
+      442,
+      221
+    ],
+    [
+      458,
+      236
+    ],
+    [
+      402,
+      279
+    ],
+    [
+      382,
+      287
+    ],
+    [
+      378,
+      275
+    ]
+  ],
+  "canvas": [
+    960,
+    540
+  ],
+  "cavity_fill_rgba": [
+    10,
+    13,
+    16,
+    255
+  ],
+  "cavity_polygon": [
+    [
+      395,
+      264
+    ],
+    [
+      441,
+      240
+    ],
+    [
+      446,
+      244
+    ],
+    [
+      400,
+      273
+    ]
+  ],
+  "changed_bbox": [
+    378,
+    221,
+    459,
+    288
+  ],
+  "generated_render_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/060-fatigue/170_ACT170_fatigue_speaking_beak_render_raw.png",
+  "generated_render_sha256": "bfd230a0be00b7532528aef87c45822b9fd3e5de165a125b76a7ec0d5fb2c931",
+  "method": "pose_specific_render_local_articulation_composite_v1",
+  "output_role": "speaking",
+  "outside_articulation_change": false,
+  "resting_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/060-fatigue/060_ACT060_fatigue_resting_beak_alpha.png",
+  "resting_sha256": "6a5c3e108fea49735b8fc3fe52971f6aa3bd6caef550ee98c03d90a64ab74151",
+  "runtime_admitted": false,
+  "schema_version": 1,
+  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/060-fatigue/170_ACT170_fatigue_speaking_beak_alpha.png",
+  "speaking_sha256": "3419e8ed380c1e3481c67f6f3361c587cfb201a2ed8922e6bf1a22fd9091d8a2"
+}

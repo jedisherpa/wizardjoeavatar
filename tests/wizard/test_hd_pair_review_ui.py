@@ -102,7 +102,23 @@ class HdPairReviewUiTests(unittest.TestCase):
         self.assertFalse(repaired["runtime_admitted"])
         self.assertFalse(repaired["user_approved"])
 
-        next_pair = by_ordinal[60]
+        fatigue = by_ordinal[60]
+        self.assertEqual(
+            fatigue["pairwise_full_size_review"]["state"],
+            "pass",
+        )
+        self.assertEqual(
+            fatigue["pairwise_full_size_review"]["source_disposition"],
+            "full_size_pairwise_review",
+        )
+        self.assertIn(
+            "evidence/pairwise-full-size/pair-060-v3",
+            fatigue["pairwise_full_size_review"]["evidence_path"],
+        )
+        self.assertFalse(fatigue["runtime_admitted"])
+        self.assertFalse(fatigue["user_approved"])
+
+        next_pair = by_ordinal[61]
         self.assertEqual(
             next_pair["pairwise_full_size_review"]["state"],
             "pending",

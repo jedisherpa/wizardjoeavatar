@@ -1,86 +1,131 @@
 {
   "alignment": {
     "interpolation": "lanczos_rgb_binary_alpha",
-    "scale": 0.58,
-    "translate_x": -6,
-    "translate_y": 6
+    "rotation_center": [
+      450,
+      258
+    ],
+    "rotation_degrees": 0.0,
+    "scale": 0.42,
+    "scale_x": 0.42,
+    "scale_y": 0.3,
+    "translate_x": 92,
+    "translate_y": 138
   },
   "approval_state": "candidate_visual_review",
-  "articulation_bbox": [
-    378,
-    221,
-    459,
-    288
-  ],
-  "articulation_polygon": [
-    [
-      392,
-      241
-    ],
-    [
-      442,
-      221
-    ],
-    [
-      458,
-      236
-    ],
-    [
-      402,
-      279
-    ],
-    [
-      382,
-      287
-    ],
-    [
-      378,
-      275
-    ]
-  ],
   "canvas": [
     960,
     540
   ],
   "cavity_fill_rgba": [
+    8,
     10,
     13,
-    16,
     255
   ],
   "cavity_polygon": [
     [
-      395,
+      381,
+      257
+    ],
+    [
+      449,
+      252
+    ],
+    [
+      454,
+      263
+    ],
+    [
+      391,
+      288
+    ],
+    [
+      380,
+      282
+    ]
+  ],
+  "cavity_source": "solid_generated_overlay",
+  "changed_bbox": [
+    375,
+    252,
+    455,
+    298
+  ],
+  "generated_render_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/060-fatigue/170_ACT170_fatigue_speaking_beak_render_pair_specific_keyed.png",
+  "generated_render_sha256": "5ffb0c8eb16b23ca105e1a92a393a007eda745c6d011abd1addc5cf44aca89db",
+  "hinge": [
+    450,
+    258
+  ],
+  "hinge_radius": 20,
+  "mandible_bbox": [
+    375,
+    247,
+    460,
+    298
+  ],
+  "mandible_connected_ratio": 1.0,
+  "mandible_largest_component_pixels": 2969,
+  "mandible_opaque_pixels": 2969,
+  "mandible_polygon": [
+    [
+      375,
+      248
+    ],
+    [
+      456,
+      247
+    ],
+    [
+      459,
       264
     ],
     [
-      441,
-      240
+      390,
+      297
     ],
     [
-      446,
-      244
-    ],
-    [
-      400,
-      273
+      375,
+      287
     ]
   ],
-  "changed_bbox": [
-    378,
-    221,
-    459,
-    288
-  ],
-  "generated_render_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/060-fatigue/170_ACT170_fatigue_speaking_beak_render_raw.png",
-  "generated_render_sha256": "bfd230a0be00b7532528aef87c45822b9fd3e5de165a125b76a7ec0d5fb2c931",
-  "method": "pose_specific_render_local_articulation_composite_v1",
-  "output_role": "speaking",
+  "method": "pair_specific_connected_mandible_patch_v1",
+  "minimum_connected_ratio": 0.99,
+  "minimum_mandible_height": 18,
   "outside_articulation_change": false,
+  "residual_clear_polygon": null,
   "resting_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/060-fatigue/060_ACT060_fatigue_resting_beak_alpha.png",
   "resting_sha256": "6a5c3e108fea49735b8fc3fe52971f6aa3bd6caef550ee98c03d90a64ab74151",
   "runtime_admitted": false,
   "schema_version": 1,
   "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/060-fatigue/170_ACT170_fatigue_speaking_beak_alpha.png",
-  "speaking_sha256": "3419e8ed380c1e3481c67f6f3361c587cfb201a2ed8922e6bf1a22fd9091d8a2"
+  "speaking_sha256": "ddb869ec3244ee0d9b65fc1a61d8190cf22dbee626cb89cdb4f8b70ae0332d2c",
+  "upper_beak_policy": "immutable_source_pixels",
+  "upper_beak_polygon": [
+    [
+      370,
+      205
+    ],
+    [
+      463,
+      203
+    ],
+    [
+      471,
+      263
+    ],
+    [
+      448,
+      274
+    ],
+    [
+      384,
+      281
+    ],
+    [
+      370,
+      268
+    ]
+  ]
 }
