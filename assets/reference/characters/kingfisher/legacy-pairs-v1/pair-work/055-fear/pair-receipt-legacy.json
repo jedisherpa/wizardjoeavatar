@@ -1,0 +1,54 @@
+{
+  "alignment": {
+    "interpolation": "lanczos_rgb_binary_alpha",
+    "scale": 0.577,
+    "translate_x": -3,
+    "translate_y": 0
+  },
+  "approval_state": "candidate_visual_review",
+  "articulation_bbox": [
+    492,
+    202,
+    629,
+    311
+  ],
+  "articulation_polygon": [
+    [
+      492,
+      202
+    ],
+    [
+      620,
+      202
+    ],
+    [
+      628,
+      300
+    ],
+    [
+      493,
+      310
+    ]
+  ],
+  "canvas": [
+    960,
+    540
+  ],
+  "changed_bbox": [
+    492,
+    202,
+    629,
+    311
+  ],
+  "generated_render_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/055-fear/165_ACT165_fear_speaking_beak_render_raw.png",
+  "generated_render_sha256": "5f06f0f48d57ee8c51c16c2d4d9a8743464714a13a65c4d12cf41c68b808e1c5",
+  "method": "pose_specific_render_local_articulation_composite_v1",
+  "output_role": "speaking",
+  "outside_articulation_change": false,
+  "resting_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/055-fear/055_ACT055_fear_resting_beak_alpha.png",
+  "resting_sha256": "2e436fae3886746310fa37a57ca6408c126ec1b7bdf36bf04bd2916465025759",
+  "runtime_admitted": false,
+  "schema_version": 1,
+  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/055-fear/165_ACT165_fear_speaking_beak_alpha.png",
+  "speaking_sha256": "d1a4d01226b7d5799b1fd1760f196a92ef813f283b276d4631da403372bfa44d"
+}

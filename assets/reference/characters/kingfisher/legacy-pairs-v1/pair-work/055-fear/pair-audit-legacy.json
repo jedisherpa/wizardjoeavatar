@@ -1,5 +1,5 @@
 {
-  "changed_rendered_pixels": 3015,
+  "changed_rendered_pixels": 13626,
   "checks": {
     "bounded_articulation_change": true,
     "outside_mouth_stability": true,
@@ -7,12 +7,12 @@
     "stable_registration_bounds": true,
     "visible_mouth_change": true
   },
-  "mouth_mean_abs": 14.353813,
+  "mouth_mean_abs": 25.324695,
   "mouth_region": [
-    500,
-    195,
-    625,
-    295
+    492,
+    202,
+    629,
+    311
   ],
   "outside_mouth_mean_abs": 0.0,
   "passed": true,
@@ -26,7 +26,7 @@
   ],
   "resting_sha256": "2e436fae3886746310fa37a57ca6408c126ec1b7bdf36bf04bd2916465025759",
   "schema_version": 2,
-  "silhouette_iou": 0.994902,
+  "silhouette_iou": 0.989169,
   "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/055-fear/165_ACT165_fear_speaking_beak_alpha.png",
   "speaking_registration_bbox": [
     276,
@@ -34,5 +34,5 @@
     685,
     529
   ],
-  "speaking_sha256": "e74b63698672fb913dd123677b529bbc9c02daeb3fc34e20100a86eb4cf47f0a"
+  "speaking_sha256": "d1a4d01226b7d5799b1fd1760f196a92ef813f283b276d4631da403372bfa44d"
 }

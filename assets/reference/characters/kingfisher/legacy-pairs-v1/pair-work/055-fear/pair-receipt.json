@@ -1,54 +1,155 @@
 {
   "alignment": {
     "interpolation": "lanczos_rgb_binary_alpha",
+    "rotation_center": [
+      603,
+      225
+    ],
+    "rotation_degrees": 0.0,
     "scale": 0.577,
+    "scale_x": 0.577,
+    "scale_y": 0.577,
     "translate_x": -3,
     "translate_y": 0
   },
   "approval_state": "candidate_visual_review",
-  "articulation_bbox": [
-    492,
-    202,
-    629,
-    311
-  ],
-  "articulation_polygon": [
-    [
-      492,
-      202
-    ],
-    [
-      620,
-      202
-    ],
-    [
-      628,
-      300
-    ],
-    [
-      493,
-      310
-    ]
-  ],
   "canvas": [
     960,
     540
   ],
-  "changed_bbox": [
-    492,
-    202,
-    629,
-    311
+  "cavity_fill_rgba": [
+    22,
+    14,
+    18,
+    255
   ],
-  "generated_render_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/055-fear/165_ACT165_fear_speaking_beak_render_raw.png",
-  "generated_render_sha256": "5f06f0f48d57ee8c51c16c2d4d9a8743464714a13a65c4d12cf41c68b808e1c5",
-  "method": "pose_specific_render_local_articulation_composite_v1",
-  "output_role": "speaking",
+  "cavity_polygon": [
+    [
+      602,
+      225
+    ],
+    [
+      590,
+      242
+    ],
+    [
+      550,
+      269
+    ],
+    [
+      518,
+      281
+    ],
+    [
+      524,
+      263
+    ],
+    [
+      535,
+      247
+    ],
+    [
+      570,
+      233
+    ]
+  ],
+  "cavity_source": "solid_generated_overlay",
+  "changed_bbox": [
+    506,
+    225,
+    603,
+    291
+  ],
+  "generated_render_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/055-fear/165_ACT165_fear_speaking_beak_render_pair_specific_sanitized_keyed.png",
+  "generated_render_sha256": "49ddc82ee80c4fd123f9c895fbaaef01235673d5b2ae1eef03ade51bc0952c03",
+  "hinge": [
+    603,
+    225
+  ],
+  "hinge_radius": 20,
+  "mandible_bbox": [
+    506,
+    220,
+    617,
+    291
+  ],
+  "mandible_connected_ratio": 1.0,
+  "mandible_largest_component_pixels": 3374,
+  "mandible_opaque_pixels": 3374,
+  "mandible_polygon": [
+    [
+      600,
+      220
+    ],
+    [
+      616,
+      232
+    ],
+    [
+      588,
+      252
+    ],
+    [
+      552,
+      280
+    ],
+    [
+      522,
+      290
+    ],
+    [
+      506,
+      276
+    ],
+    [
+      526,
+      248
+    ],
+    [
+      565,
+      232
+    ]
+  ],
+  "method": "pair_specific_connected_mandible_patch_v1",
+  "minimum_connected_ratio": 0.9,
+  "minimum_mandible_height": 50,
   "outside_articulation_change": false,
+  "residual_clear_polygon": null,
   "resting_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/055-fear/055_ACT055_fear_resting_beak_alpha.png",
   "resting_sha256": "2e436fae3886746310fa37a57ca6408c126ec1b7bdf36bf04bd2916465025759",
   "runtime_admitted": false,
   "schema_version": 1,
   "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/055-fear/165_ACT165_fear_speaking_beak_alpha.png",
-  "speaking_sha256": "d1a4d01226b7d5799b1fd1760f196a92ef813f283b276d4631da403372bfa44d"
+  "speaking_sha256": "e74b63698672fb913dd123677b529bbc9c02daeb3fc34e20100a86eb4cf47f0a",
+  "upper_beak_policy": "immutable_source_pixels",
+  "upper_beak_polygon": [
+    [
+      500,
+      195
+    ],
+    [
+      610,
+      195
+    ],
+    [
+      625,
+      230
+    ],
+    [
+      603,
+      241
+    ],
+    [
+      568,
+      231
+    ],
+    [
+      527,
+      246
+    ],
+    [
+      500,
+      238
+    ]
+  ]
 }

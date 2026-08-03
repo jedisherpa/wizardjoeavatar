@@ -909,6 +909,33 @@ Accepted internal pair 54 evidence:
 
 `assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-054-v3/`
 
+Pair 55 (`fear`) began with a visually useful open-mouth render, but its legacy
+batch composite replaced `13,626` pixels across a `137 x 109` face-and-bill
+rectangle. The first isolated donor also carried a bright lower-bill rim that
+became distracting in the native-size nearest-neighbor review. A new one-pair
+render repeated that bright-rim defect and was preserved as rejected evidence
+rather than admitted.
+
+The accepted replacement reuses the best matched fear mandible only after
+neutral matte highlights are removed from its keyed donor. The exact closed
+frame supplies the body, eyes, crest, cheek, throat, hoodie, wings, and upper
+bill. A connected lower-mandible mask converges at the authored screen-right
+hinge, while a dark cavity underlay and donor oral detail preserve the fearful
+speaking read. The transparent cutouts already present below the canonical
+closed bill remain identical in both states. Locked beak-focus,
+full-character, and playback review report no body or registration movement.
+The accepted audit reports `3,015` changed rendered pixels, outside-mouth mean
+difference `0.0`, silhouette IoU `0.994902`, connected-mandible ratio `1.0`,
+and registration delta `0`.
+
+Rejected legacy pair 55 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-055-v2/`
+
+Accepted internal pair 55 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-055-v3/`
+
 ## Verification
 
 Focused mandible-compositor tests: 9 passed. The added regressions prove solid
@@ -916,8 +943,8 @@ cavity underlays and generated oral detail can be layered after canonical
 upper-bill restoration without changing legacy `solid`, `generated`, or
 `generated_overlay` behavior.
 
-Complete Kingfisher-focused suite after the pair 54 rebuild: 71 passed, six
-subtests passed, in 11.69 seconds. The reviewer UI tests are included in that
+Complete Kingfisher-focused suite after the pair 55 rebuild: 71 passed, six
+subtests passed, in 11.75 seconds. The reviewer UI tests are included in that
 run. Pillow emitted only 889 known `getdata` deprecation warnings.
 
 The strict verifier intentionally exits nonzero until all observable pairs
@@ -928,21 +955,21 @@ failure receipt even while blocked:
 
 Current blocker:
 
-`pair 55 lacks a passing full-size pairwise disposition`
+`pair 56 lacks a passing full-size pairwise disposition`
 
 Current review artifact:
 
-`kingfisher_act_001_066_111_176_pair_review-bfc043c10c85836a.wjpose`
+`kingfisher_act_001_066_111_176_pair_review-4af78e621710cdcf.wjpose`
 
 Artifact SHA-256:
 
-`bfc043c10c85836a59d195d5ab7c9524efadc789a64b66c8009cf928b3c75228`
+`4af78e621710cdcff3d20352f652b366ab02d4e79bd29aceba8042821924c367`
 
 Library-index SHA-256:
 
-`ebf137f7e15f43ea020a05241f7fefe8e4f5d29f0c1d2569c37984248cacd517`
+`9e016c6963ff807c71b3bece2c98bea6f80a382800ca222b4011e5898e528ffe`
 
-Queue state: 52 internal full-size passes, 11 pending, 1 needs rebuild, and
+Queue state: 53 internal full-size passes, 10 pending, 1 needs rebuild, and
 2 not observable. Runtime-admitted and user-approved counts remain zero.
 
 This failure is expected and proves the queue is fail-closed.
