@@ -1,0 +1,63 @@
+{
+  "alignment": {
+    "interpolation": "lanczos_rgb_binary_alpha",
+    "scale": 1.0,
+    "scale_x": 1.0,
+    "scale_y": 1.0,
+    "translate_x": 0,
+    "translate_y": 0
+  },
+  "approval_state": "candidate_visual_review",
+  "articulation_bbox": [
+    476,
+    212,
+    549,
+    260
+  ],
+  "articulation_polygon": [
+    [
+      480,
+      212
+    ],
+    [
+      545,
+      212
+    ],
+    [
+      548,
+      252
+    ],
+    [
+      489,
+      259
+    ],
+    [
+      476,
+      250
+    ]
+  ],
+  "canvas": [
+    960,
+    540
+  ],
+  "cavity_fill_mode": null,
+  "cavity_fill_rgba": null,
+  "cavity_polygon": null,
+  "changed_bbox": [
+    476,
+    212,
+    545,
+    260
+  ],
+  "generated_render_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/062-sudden-idea/172_ACT172_sudden_idea_speaking_beak_matched_source.png",
+  "generated_render_sha256": "716967772d3ba87f623f402dfe63aad82c15f9aaa2f49b9e1e7bae6ed6def4c7",
+  "method": "pose_specific_render_local_articulation_composite_v1",
+  "output_role": "speaking",
+  "outside_articulation_change": false,
+  "resting_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/062-sudden-idea/062_ACT062_sudden_idea_resting_beak_alpha.png",
+  "resting_sha256": "b23cfeb22db0057cc9c82dd56bae46a0da860f7ebb020ee069ffa1466c5a9b2a",
+  "runtime_admitted": false,
+  "schema_version": 1,
+  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/062-sudden-idea/172_ACT172_sudden_idea_speaking_beak_alpha.png",
+  "speaking_sha256": "716967772d3ba87f623f402dfe63aad82c15f9aaa2f49b9e1e7bae6ed6def4c7"
+}

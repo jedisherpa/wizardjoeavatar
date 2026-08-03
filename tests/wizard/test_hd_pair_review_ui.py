@@ -134,28 +134,19 @@ class HdPairReviewUiTests(unittest.TestCase):
         self.assertFalse(contemplation["runtime_admitted"])
         self.assertFalse(contemplation["user_approved"])
 
-        for ordinal in (62,):
-            pair = by_ordinal[ordinal]
-            self.assertEqual(
-                pair["internal_visual_review"]["state"],
-                "needs_rebuild",
-            )
-            self.assertIn(
-                "review-evidence/full-size-failures/",
-                pair["internal_visual_review"]["evidence_path"],
-            )
-            self.assertFalse(pair["runtime_admitted"])
-            self.assertFalse(pair["user_approved"])
-            self.assertFalse(
-                pair["internal_visual_review"]["runtime_admission_implied"]
-            )
-            self.assertFalse(
-                pair["internal_visual_review"]["user_approval_implied"]
-            )
-            self.assertEqual(
-                pair["pairwise_full_size_review"]["state"],
-                "needs_rebuild",
-            )
+        sudden_idea = by_ordinal[62]
+        self.assertEqual(
+            sudden_idea["internal_visual_review"]["state"], "needs_rebuild"
+        )
+        self.assertEqual(
+            sudden_idea["pairwise_full_size_review"]["state"], "pass"
+        )
+        self.assertIn(
+            "evidence/pairwise-full-size/pair-062-v3",
+            sudden_idea["pairwise_full_size_review"]["evidence_path"],
+        )
+        self.assertFalse(sudden_idea["runtime_admitted"])
+        self.assertFalse(sudden_idea["user_approved"])
 
 
 if __name__ == "__main__":

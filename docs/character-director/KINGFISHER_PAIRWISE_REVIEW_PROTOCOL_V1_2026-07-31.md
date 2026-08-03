@@ -1086,6 +1086,23 @@ Accepted internal pair 61 evidence:
 
 `assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-061-v3/`
 
+Pair 62 (`sudden idea`) was the last explicit rebuild blocker. Its historical
+geometry experiments left stacked bill edges and an ambiguous hinge. A fresh
+matched render was therefore produced for this raised-wing pose alone. The
+closed master remains authoritative everywhere except the connected lower
+mandible and bounded cavity. Full-size review shows one screen-left hinge and
+no duplicate bill edge. The accepted audit reports `1,086` changed rendered
+pixels, outside-mouth mean difference `0.0`, silhouette IoU `1.0`,
+connected-mandible ratio `1.0`, and registration delta `0`.
+
+Rejected pair 62 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-062-v2/`
+
+Accepted internal pair 62 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-062-v3/`
+
 ## Verification
 
 Focused mandible-compositor tests: 9 passed. The added regressions prove solid
@@ -1093,7 +1110,7 @@ cavity underlays and generated oral detail can be layered after canonical
 upper-bill restoration without changing legacy `solid`, `generated`, or
 `generated_overlay` behavior.
 
-Complete Kingfisher-focused suite after the pair 61 rebuild: 71 passed. The
+Complete Kingfisher-focused suite after the pair 62 rebuild: 71 passed. The
 reviewer UI tests are included in that run.
 
 The strict verifier intentionally exits nonzero until all observable pairs
@@ -1104,21 +1121,21 @@ failure receipt even while blocked:
 
 Current blocker:
 
-`pair 62 lacks a passing full-size pairwise disposition`
+`pair 63 lacks a passing full-size pairwise disposition`
 
 Current review artifact:
 
-`kingfisher_act_001_066_111_176_pair_review-94b79fdfcdc90cf1.wjpose`
+`kingfisher_act_001_066_111_176_pair_review-796b352538f055a1.wjpose`
 
 Artifact SHA-256:
 
-`94b79fdfcdc90cf15810490a6baae8ec319565e7d6aadae6212aaa8f6ea2f7d9`
+`796b352538f055a1c93ad67ee8fe3bff4554a7a988930cc7d32fa16304aaac28`
 
 Library-index SHA-256:
 
-`9f448f1c11a583c50fc84a76f8a3cd35bea93d2b567f598920681c00738d6a64`
+`a2737a4dfb86310c4368e7a712322dad5ea69c11e6674d4f3c9c1106a0c9df0c`
 
-Queue state: 59 internal full-size passes, 4 pending, 1 needs rebuild, and
+Queue state: 60 internal full-size passes, 4 pending, 0 needs rebuild, and
 2 not observable. Runtime-admitted and user-approved counts remain zero.
 
 This failure is expected and proves the queue is fail-closed.

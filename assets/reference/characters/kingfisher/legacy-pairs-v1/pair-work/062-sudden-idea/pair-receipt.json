@@ -1,63 +1,131 @@
 {
   "alignment": {
     "interpolation": "lanczos_rgb_binary_alpha",
-    "scale": 1.0,
-    "scale_x": 1.0,
-    "scale_y": 1.0,
-    "translate_x": 0,
-    "translate_y": 0
+    "rotation_center": [
+      480,
+      250
+    ],
+    "rotation_degrees": 0.0,
+    "scale": 0.548,
+    "scale_x": 0.548,
+    "scale_y": 0.548,
+    "translate_x": 25,
+    "translate_y": 32
   },
   "approval_state": "candidate_visual_review",
-  "articulation_bbox": [
-    476,
-    212,
-    549,
-    260
-  ],
-  "articulation_polygon": [
-    [
-      480,
-      212
-    ],
-    [
-      545,
-      212
-    ],
-    [
-      548,
-      252
-    ],
-    [
-      489,
-      259
-    ],
-    [
-      476,
-      250
-    ]
-  ],
   "canvas": [
     960,
     540
   ],
-  "cavity_fill_mode": null,
-  "cavity_fill_rgba": null,
-  "cavity_polygon": null,
+  "cavity_fill_rgba": [
+    10,
+    13,
+    16,
+    255
+  ],
+  "cavity_polygon": [
+    [
+      482,
+      246
+    ],
+    [
+      528,
+      244
+    ],
+    [
+      527,
+      256
+    ],
+    [
+      486,
+      262
+    ]
+  ],
+  "cavity_source": "solid_generated_overlay",
   "changed_bbox": [
     476,
-    212,
-    545,
-    260
+    244,
+    531,
+    269
   ],
-  "generated_render_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/062-sudden-idea/172_ACT172_sudden_idea_speaking_beak_matched_source.png",
-  "generated_render_sha256": "716967772d3ba87f623f402dfe63aad82c15f9aaa2f49b9e1e7bae6ed6def4c7",
-  "method": "pose_specific_render_local_articulation_composite_v1",
-  "output_role": "speaking",
+  "generated_render_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/062-sudden-idea/172_ACT172_sudden_idea_speaking_beak_render_pair_specific_keyed.png",
+  "generated_render_sha256": "f7900202b8f384564e6dca60bf9e27539d81c28d7f9551f6a67697fe3b1775d5",
+  "hinge": [
+    480,
+    250
+  ],
+  "hinge_radius": 18,
+  "mandible_bbox": [
+    476,
+    245,
+    531,
+    269
+  ],
+  "mandible_connected_ratio": 1.0,
+  "mandible_largest_component_pixels": 1146,
+  "mandible_opaque_pixels": 1146,
+  "mandible_polygon": [
+    [
+      478,
+      245
+    ],
+    [
+      527,
+      245
+    ],
+    [
+      530,
+      256
+    ],
+    [
+      526,
+      268
+    ],
+    [
+      483,
+      266
+    ],
+    [
+      476,
+      256
+    ]
+  ],
+  "method": "pair_specific_connected_mandible_patch_v1",
+  "minimum_connected_ratio": 0.97,
+  "minimum_mandible_height": 20,
   "outside_articulation_change": false,
+  "residual_clear_polygon": null,
   "resting_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/062-sudden-idea/062_ACT062_sudden_idea_resting_beak_alpha.png",
   "resting_sha256": "b23cfeb22db0057cc9c82dd56bae46a0da860f7ebb020ee069ffa1466c5a9b2a",
   "runtime_admitted": false,
   "schema_version": 1,
   "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/062-sudden-idea/172_ACT172_sudden_idea_speaking_beak_alpha.png",
-  "speaking_sha256": "716967772d3ba87f623f402dfe63aad82c15f9aaa2f49b9e1e7bae6ed6def4c7"
+  "speaking_sha256": "cc7555b753a2f55fbbac0f4f893bae3812aebc10f89135e913f308ad1bdbfd95",
+  "upper_beak_policy": "immutable_source_pixels",
+  "upper_beak_polygon": [
+    [
+      474,
+      205
+    ],
+    [
+      546,
+      205
+    ],
+    [
+      550,
+      242
+    ],
+    [
+      540,
+      250
+    ],
+    [
+      488,
+      252
+    ],
+    [
+      474,
+      245
+    ]
+  ]
 }
