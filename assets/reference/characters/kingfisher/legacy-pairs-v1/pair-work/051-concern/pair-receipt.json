@@ -2,53 +2,152 @@
   "alignment": {
     "interpolation": "lanczos_rgb_binary_alpha",
     "scale": 0.58,
+    "scale_x": 0.58,
+    "scale_y": 0.55,
     "translate_x": -5,
-    "translate_y": -5
+    "translate_y": 8
   },
   "approval_state": "candidate_visual_review",
-  "articulation_bbox": [
-    383,
-    195,
-    509,
-    313
-  ],
-  "articulation_polygon": [
-    [
-      383,
-      195
-    ],
-    [
-      500,
-      198
-    ],
-    [
-      508,
-      286
-    ],
-    [
-      386,
-      312
-    ]
-  ],
   "canvas": [
     960,
     540
   ],
+  "cavity_fill_rgba": null,
+  "cavity_polygon": [
+    [
+      398,
+      273
+    ],
+    [
+      494,
+      239
+    ],
+    [
+      502,
+      247
+    ],
+    [
+      478,
+      259
+    ],
+    [
+      439,
+      275
+    ],
+    [
+      406,
+      292
+    ],
+    [
+      399,
+      289
+    ]
+  ],
+  "cavity_source": "generated_overlay",
   "changed_bbox": [
-    383,
-    195,
-    509,
-    313
+    398,
+    239,
+    507,
+    304
   ],
   "generated_render_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/051-concern/161_ACT161_concern_speaking_beak_render_raw.png",
   "generated_render_sha256": "a7ab747285bcd3deb9970e8370212e2e0271e1318f092f7b5e521898e296e264",
-  "method": "pose_specific_render_local_articulation_composite_v1",
-  "output_role": "speaking",
+  "hinge": [
+    497,
+    247
+  ],
+  "hinge_radius": 18,
+  "mandible_bbox": [
+    399,
+    240,
+    507,
+    304
+  ],
+  "mandible_connected_ratio": 1.0,
+  "mandible_largest_component_pixels": 2386,
+  "mandible_opaque_pixels": 2386,
+  "mandible_polygon": [
+    [
+      399,
+      280
+    ],
+    [
+      494,
+      240
+    ],
+    [
+      506,
+      252
+    ],
+    [
+      480,
+      268
+    ],
+    [
+      440,
+      286
+    ],
+    [
+      408,
+      303
+    ],
+    [
+      399,
+      300
+    ]
+  ],
+  "method": "pair_specific_connected_mandible_patch_v1",
+  "minimum_connected_ratio": 0.9,
+  "minimum_mandible_height": 18,
   "outside_articulation_change": false,
+  "residual_clear_polygon": null,
   "resting_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/051-concern/051_ACT051_concern_resting_beak_alpha.png",
   "resting_sha256": "35127b133c34f5180f4266b7f9f53e6d9326dfbd55a0c51ba4b0f182d5d8463d",
   "runtime_admitted": false,
   "schema_version": 1,
   "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/051-concern/161_ACT161_concern_speaking_beak_alpha.png",
-  "speaking_sha256": "0ab24004d6d049e310dcc2dd2246bd501de84836aa2295304dec5bd55087b03c"
+  "speaking_sha256": "6bcec86adbc554170785fe07a54e390187b891e504d01736cac6dda8b2b2795f",
+  "upper_beak_policy": "immutable_source_pixels",
+  "upper_beak_polygon": [
+    [
+      375,
+      190
+    ],
+    [
+      510,
+      190
+    ],
+    [
+      515,
+      245
+    ],
+    [
+      501,
+      249
+    ],
+    [
+      470,
+      260
+    ],
+    [
+      430,
+      275
+    ],
+    [
+      397,
+      289
+    ],
+    [
+      385,
+      286
+    ],
+    [
+      395,
+      273
+    ],
+    [
+      415,
+      245
+    ]
+  ]
 }
