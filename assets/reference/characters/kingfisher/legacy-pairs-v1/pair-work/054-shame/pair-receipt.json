@@ -1,54 +1,147 @@
 {
   "alignment": {
     "interpolation": "lanczos_rgb_binary_alpha",
+    "rotation_center": [
+      518,
+      248
+    ],
+    "rotation_degrees": 0.0,
     "scale": 0.583,
-    "translate_x": -8,
-    "translate_y": 8
+    "scale_x": 0.583,
+    "scale_y": 0.583,
+    "translate_x": -24,
+    "translate_y": 10
   },
   "approval_state": "candidate_visual_review",
-  "articulation_bbox": [
-    490,
-    218,
-    586,
-    366
-  ],
-  "articulation_polygon": [
-    [
-      490,
-      218
-    ],
-    [
-      574,
-      220
-    ],
-    [
-      585,
-      348
-    ],
-    [
-      500,
-      365
-    ]
-  ],
   "canvas": [
     960,
     540
   ],
-  "changed_bbox": [
-    490,
-    218,
-    583,
-    366
+  "cavity_fill_rgba": [
+    18,
+    12,
+    14,
+    255
   ],
-  "generated_render_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/054-shame/164_ACT164_shame_speaking_beak_render_raw.png",
-  "generated_render_sha256": "cc8b1d67ea49127bb60a99864b45d23855b8cf9b74f753a28c554f0e61ccf435",
-  "method": "pose_specific_render_local_articulation_composite_v1",
-  "output_role": "speaking",
+  "cavity_polygon": [
+    [
+      514,
+      252
+    ],
+    [
+      528,
+      260
+    ],
+    [
+      528,
+      321
+    ],
+    [
+      521,
+      340
+    ],
+    [
+      512,
+      331
+    ]
+  ],
+  "cavity_source": "solid_generated_overlay",
+  "changed_bbox": [
+    506,
+    240,
+    530,
+    348
+  ],
+  "generated_render_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/054-shame/164_ACT164_shame_speaking_beak_render_pair_specific_keyed.png",
+  "generated_render_sha256": "f37004aaca5125c543623ed42bb49eeaa3adbb83561dba5e9dfce6408a7f9a8d",
+  "hinge": [
+    518,
+    248
+  ],
+  "hinge_radius": 18,
+  "mandible_bbox": [
+    506,
+    240,
+    534,
+    348
+  ],
+  "mandible_connected_ratio": 1.0,
+  "mandible_largest_component_pixels": 2383,
+  "mandible_opaque_pixels": 2383,
+  "mandible_polygon": [
+    [
+      507,
+      240
+    ],
+    [
+      529,
+      245
+    ],
+    [
+      533,
+      275
+    ],
+    [
+      529,
+      315
+    ],
+    [
+      525,
+      341
+    ],
+    [
+      510,
+      347
+    ],
+    [
+      506,
+      330
+    ],
+    [
+      508,
+      285
+    ]
+  ],
+  "method": "pair_specific_connected_mandible_patch_v1",
+  "minimum_connected_ratio": 0.9,
+  "minimum_mandible_height": 80,
   "outside_articulation_change": false,
+  "residual_clear_polygon": null,
   "resting_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/054-shame/054_ACT054_shame_resting_beak_alpha.png",
   "resting_sha256": "a0219bab99ebb1648f1c93febc2e8491c594c6eb32089a59a25f62db9666cf47",
   "runtime_admitted": false,
   "schema_version": 1,
   "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/054-shame/164_ACT164_shame_speaking_beak_alpha.png",
-  "speaking_sha256": "67946b0d151aa3988ca03c92700210d3abfbbecd3bf067656e4f175b56086f5b"
+  "speaking_sha256": "6ffc64c8d5e3540f7f56a8a2a3e519a3273eca5522465c25a2657e0bc81f0e60",
+  "upper_beak_policy": "immutable_source_pixels",
+  "upper_beak_polygon": [
+    [
+      524,
+      230
+    ],
+    [
+      573,
+      228
+    ],
+    [
+      587,
+      345
+    ],
+    [
+      549,
+      370
+    ],
+    [
+      530,
+      344
+    ],
+    [
+      530,
+      280
+    ],
+    [
+      524,
+      255
+    ]
+  ]
 }

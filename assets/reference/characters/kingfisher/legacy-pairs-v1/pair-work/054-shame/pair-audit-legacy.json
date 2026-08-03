@@ -1,5 +1,5 @@
 {
-  "changed_rendered_pixels": 2138,
+  "changed_rendered_pixels": 11644,
   "checks": {
     "bounded_articulation_change": true,
     "outside_mouth_stability": true,
@@ -7,12 +7,12 @@
     "stable_registration_bounds": true,
     "visible_mouth_change": true
   },
-  "mouth_mean_abs": 12.386004,
+  "mouth_mean_abs": 16.697612,
   "mouth_region": [
-    500,
-    235,
-    535,
-    350
+    490,
+    218,
+    586,
+    366
   ],
   "outside_mouth_mean_abs": 0.0,
   "passed": true,
@@ -26,7 +26,7 @@
   ],
   "resting_sha256": "a0219bab99ebb1648f1c93febc2e8491c594c6eb32089a59a25f62db9666cf47",
   "schema_version": 2,
-  "silhouette_iou": 1.0,
+  "silhouette_iou": 0.998919,
   "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/054-shame/164_ACT164_shame_speaking_beak_alpha.png",
   "speaking_registration_bbox": [
     352,
@@ -34,5 +34,5 @@
     608,
     529
   ],
-  "speaking_sha256": "6ffc64c8d5e3540f7f56a8a2a3e519a3273eca5522465c25a2657e0bc81f0e60"
+  "speaking_sha256": "67946b0d151aa3988ca03c92700210d3abfbbecd3bf067656e4f175b56086f5b"
 }
