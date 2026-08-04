@@ -1862,3 +1862,32 @@ Fresh pair 28 evidence:
 The current queue contains 26 fresh internal passes, 38 pending pairs, and 2
 rear views marked not observable. User approval and runtime admission remain
 zero; Pair 29 is the next isolated review gate.
+
+Pair 29 (`confidential-whisper`) failed its fresh isolated full-size, 4x, and
+live locked-pair review. The previous lower bill read as a long detached bar
+crossing the white throat and ended in a sharp rear sliver instead of joining
+the face at one clean mouth hinge. Its green localization audit proved only
+that the defect was bounded to the declared mouth region.
+
+Accepted Candidate 17 uses a new pair-specific whisper donor generated from
+the immutable closed frame. The compositor extracts only the connected lower
+mandible and cavity, restores the approved upper bill pixel-for-pixel, and
+rotates the opening around the measured rear hinge `(493, 261)`. The small
+opening remains partially occluded by the already raised foreground wing, as
+required by the confidential gesture, while the crown, eye, cheek, white
+throat, hoodie, body, feet, scale, and registration remain fixed. The accepted
+audit reports 2,106 changed rendered pixels, outside-mouth mean difference
+`0.0`, registration delta `0`, silhouette IoU `1.0`, and connected-mandible
+ratio `0.991361`.
+
+Rejected pair 29 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-029-rejected-detached-throat-bar-2026-08-04/`
+
+Accepted pair 29 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-029-rebuilt-v17-pair-specific-donor/`
+
+The current queue contains 27 fresh internal passes, 37 pending pairs, and 2
+rear views marked not observable. User approval and runtime admission remain
+zero; Pair 30 is the next isolated review gate.
