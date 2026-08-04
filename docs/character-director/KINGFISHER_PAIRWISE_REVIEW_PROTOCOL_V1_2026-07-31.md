@@ -1139,7 +1139,33 @@ Accepted internal pair 63 evidence:
 
 `assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-063-v4/`
 
-Complete Kingfisher-focused suite after the pair 63 rebuild: 71 passed. The
+Pair 64 (`study a diagram`) showed why the prior broad rectangle audit was
+insufficient: its generated lower bill was a long, steep blade whose hinge
+began behind the authored mouth corner. That candidate remained numerically
+bounded and registered, but failed full-size visual review and is preserved as
+rejected evidence.
+
+The accepted replacement was rebuilt as one isolated closed/open pair. A new
+pair-specific render contributes only one compact lower mandible and its
+bounded oral cavity. The exact closed frame remains authoritative for the
+crest, eye, face, cheek, throat, hoodie, fishbone mark, pointing wing, body,
+feet, registration, and upper bill. The lower bill rotates from the authored
+screen-left hinge and ends behind the immutable upper-bill tip. Native beak
+focus, white-background full-character, and alternating playback review show
+no duplicate edge, donor throat pixels, head movement, or body drift. The
+accepted audit reports `1,942` changed rendered pixels, outside-mouth mean
+difference `0.0`, silhouette IoU `1.0`, connected-mandible ratio `1.0`, and
+registration delta `0`.
+
+Rejected legacy pair 64 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-064-v2/`
+
+Accepted internal pair 64 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-064-v3/`
+
+Complete Kingfisher-focused suite after the pair 64 rebuild: 71 passed. The
 reviewer UI tests are included in that run.
 
 The strict verifier intentionally exits nonzero until all observable pairs
@@ -1150,21 +1176,21 @@ failure receipt even while blocked:
 
 Current blocker:
 
-`pair 64 lacks a passing full-size pairwise disposition`
+`pair 65 lacks a passing full-size pairwise disposition`
 
 Current review artifact:
 
-`kingfisher_act_001_066_111_176_pair_review-9a0b19aaa0be7ed2.wjpose`
+`kingfisher_act_001_066_111_176_pair_review-f766990c0e8861b3.wjpose`
 
 Artifact SHA-256:
 
-`9a0b19aaa0be7ed22f4e239bbdefbfcea047190fa87099d2e9e5ecbc3e37b8c0`
+`f766990c0e8861b3fe5930df636cb56ee1b98eb270ef4a5a46a86171f2d0b3a1`
 
 Library-index SHA-256:
 
-`949deedc6ad0a5a9cb38f690ca926b5e51cf19a147c85e25658e3449673d1b32`
+`3465dd90cb6a3d2c49d1d7ef2f9097f68f330e13ac30ebaa555d644d98cf1ae2`
 
-Queue state: 61 internal full-size passes, 3 pending, 0 needs rebuild, and
+Queue state: 62 internal full-size passes, 2 pending, 0 needs rebuild, and
 2 not observable. Runtime-admitted and user-approved counts remain zero.
 
 This failure is expected and proves the queue is fail-closed.

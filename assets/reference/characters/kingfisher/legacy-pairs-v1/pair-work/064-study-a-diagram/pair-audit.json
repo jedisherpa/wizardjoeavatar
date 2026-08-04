@@ -1,5 +1,5 @@
 {
-  "changed_rendered_pixels": 3109,
+  "changed_rendered_pixels": 1942,
   "checks": {
     "bounded_articulation_change": true,
     "outside_mouth_stability": true,
@@ -7,12 +7,12 @@
     "stable_registration_bounds": true,
     "visible_mouth_change": true
   },
-  "mouth_mean_abs": 20.544306,
+  "mouth_mean_abs": 11.638979,
   "mouth_region": [
     394,
-    211,
-    506,
-    264
+    210,
+    489,
+    265
   ],
   "outside_mouth_mean_abs": 0.0,
   "passed": true,
@@ -26,7 +26,7 @@
   ],
   "resting_sha256": "f11973dc3274d6dd2dd8e9b86e09bd246a607a15b8ed5d8c931be4d6a828bff2",
   "schema_version": 2,
-  "silhouette_iou": 0.997668,
+  "silhouette_iou": 1.0,
   "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/064-study-a-diagram/174_ACT174_study_a_diagram_speaking_beak_alpha.png",
   "speaking_registration_bbox": [
     250,
@@ -34,5 +34,5 @@
     711,
     529
   ],
-  "speaking_sha256": "c90731dc94bdc57b643b5a1e2f9a7f419eafbf111a67da3515c7efa83c3cb5e6"
+  "speaking_sha256": "326eef3a6bbc2eafdc696c7407b72879824101a31eeac70e2333b30485eec747"
 }
