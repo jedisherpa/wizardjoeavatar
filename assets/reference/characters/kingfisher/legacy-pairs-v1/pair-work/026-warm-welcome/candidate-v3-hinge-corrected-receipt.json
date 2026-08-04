@@ -44,8 +44,8 @@
   "changed_bbox": [
     464,
     222,
-    506,
-    252
+    508,
+    256
   ],
   "generated_render_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/026-warm-welcome/136_ACT136_warm_welcome_speaking_render_pairwise_v2.png",
   "generated_render_sha256": "ed9ced77bf0dcfb5744a97c4f074fca77c4b86d59bf341cb90400214f9cfa7f4",
@@ -58,11 +58,11 @@
     462,
     200,
     519,
-    252
+    256
   ],
   "mandible_connected_ratio": 1.0,
-  "mandible_largest_component_pixels": 1940,
-  "mandible_opaque_pixels": 1940,
+  "mandible_largest_component_pixels": 1991,
+  "mandible_opaque_pixels": 1991,
   "mandible_polygon": [
     [
       462,
@@ -96,11 +96,11 @@
   "schema_version": 1,
   "source_mask": {
     "light_threshold": 180,
-    "mode": "exclude_light_neutral",
+    "mode": "opaque",
     "neutral_chroma_threshold": 36
   },
-  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/026-warm-welcome/136_ACT136_warm_welcome_speaking_candidate_pairwise_v4_hinge_neutral_exclusion.png",
-  "speaking_sha256": "a3f95639a5b376d2095c7cbaf28ee4547617821e6ff6faf974298bcf7ad9ab61",
+  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/026-warm-welcome/136_ACT136_warm_welcome_speaking_candidate_pairwise_v3_hinge_corrected.png",
+  "speaking_sha256": "a7e9f80be72aa145fe0f547ead88f0693333b73c970ac3616410b6768638bcc0",
   "upper_beak_policy": "immutable_source_pixels",
   "upper_beak_polygon": [
     [

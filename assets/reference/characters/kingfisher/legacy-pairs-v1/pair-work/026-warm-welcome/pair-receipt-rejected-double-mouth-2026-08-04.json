@@ -1,88 +1,81 @@
 {
   "alignment": {
     "interpolation": "lanczos_rgb_binary_alpha",
-    "rotation_center": [
-      466,
-      214
-    ],
-    "rotation_degrees": 0.0,
     "scale": 0.574,
     "scale_x": 0.574,
     "scale_y": 0.574,
     "translate_x": -2,
-    "translate_y": 0
+    "translate_y": 50
   },
   "approval_state": "candidate_visual_review",
   "canvas": [
     960,
     540
   ],
-  "cavity_fill_rgba": null,
   "cavity_polygon": [
     [
       467,
-      204
+      254
     ],
     [
       513,
-      204
+      254
     ],
     [
       504,
-      220
+      270
     ],
     [
       487,
-      244
+      294
     ],
     [
       468,
-      220
+      270
     ]
   ],
-  "cavity_source": "generated",
   "changed_bbox": [
     464,
-    222,
-    506,
-    252
+    272,
+    508,
+    306
   ],
   "generated_render_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/026-warm-welcome/136_ACT136_warm_welcome_speaking_render_pairwise_v2.png",
   "generated_render_sha256": "ed9ced77bf0dcfb5744a97c4f074fca77c4b86d59bf341cb90400214f9cfa7f4",
   "hinge": [
     466,
-    214
+    264
   ],
   "hinge_radius": 18,
   "mandible_bbox": [
     462,
-    200,
+    250,
     519,
-    252
+    306
   ],
   "mandible_connected_ratio": 1.0,
-  "mandible_largest_component_pixels": 1940,
-  "mandible_opaque_pixels": 1940,
+  "mandible_largest_component_pixels": 1991,
+  "mandible_opaque_pixels": 1991,
   "mandible_polygon": [
     [
       462,
-      200
+      250
     ],
     [
       518,
-      200
+      250
     ],
     [
       509,
-      224
+      274
     ],
     [
       487,
-      255
+      305
     ],
     [
       464,
-      224
+      274
     ]
   ],
   "method": "pair_specific_connected_mandible_patch_v1",
@@ -94,38 +87,33 @@
   "resting_sha256": "2abe46025252d7e7731ac3de3322c568d57afba28e136e86410297a9034777cb",
   "runtime_admitted": false,
   "schema_version": 1,
-  "source_mask": {
-    "light_threshold": 180,
-    "mode": "exclude_light_neutral",
-    "neutral_chroma_threshold": 36
-  },
-  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/026-warm-welcome/136_ACT136_warm_welcome_speaking_candidate_pairwise_v4_hinge_neutral_exclusion.png",
-  "speaking_sha256": "a3f95639a5b376d2095c7cbaf28ee4547617821e6ff6faf974298bcf7ad9ab61",
+  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/026-warm-welcome/136_ACT136_warm_welcome_speaking_beak_alpha.png",
+  "speaking_sha256": "a287c438b7ae7918666fbd4b43d2e7af5d497958d34de60999e5e93529aca1eb",
   "upper_beak_policy": "immutable_source_pixels",
   "upper_beak_polygon": [
     [
       438,
-      168
+      218
     ],
     [
       526,
-      168
+      218
     ],
     [
       526,
-      226
+      276
     ],
     [
       490,
-      226
+      276
     ],
     [
       454,
-      220
+      270
     ],
     [
       438,
-      220
+      270
     ]
   ]
 }

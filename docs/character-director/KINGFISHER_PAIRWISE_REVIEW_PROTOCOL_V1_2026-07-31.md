@@ -1783,3 +1783,34 @@ Accepted pair 25 evidence:
 The current queue contains 23 fresh internal passes, 41 pending pairs, and 2
 rear views marked not observable. User approval and runtime admission remain
 zero; Pair 26 is the next isolated review gate.
+
+Pair 26 (`warm-welcome`) failed its fresh locked-pair and 4x review despite a
+green localization audit. The previous compositor changed only rows `272-306`,
+well below the true front-facing bill. It therefore left the closed mouth in
+place and added a second orange/red mouth beneath the white throat. The old
+audit proved that the edit was bounded; it did not prove that the bounded edit
+was attached to the character's actual mouth.
+
+Accepted Candidate 4 starts from the approved closed frame and leaves the
+crown, eyes, cheeks, complete upper bill, throat, hoodie, body, symmetrical
+welcome wings, and feet pixel-for-pixel unchanged. The matched donor remains at
+scale `0.574` and horizontal translation `-2`, but its vertical translation is
+corrected from `50` to `0`, moving the articulation to the true frontal hinge
+`(466, 214)`. A neutral-light exclusion removes the donor's pale throat edge.
+The resulting connected lower mandible is centered beneath the upper bill,
+with a changed bounding box of `(464, 222)-(506, 252)` and connected-mandible
+ratio `1.0`. The tighter true-mouth audit reports 646 changed rendered pixels,
+outside-mouth mean difference `0.0`, registration delta `0`, and silhouette IoU
+`1.0`.
+
+Rejected pair 26 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-026-rejected-double-mouth-2026-08-04/`
+
+Accepted pair 26 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-026-rebuilt-v4-true-hinge/`
+
+The current queue contains 24 fresh internal passes, 40 pending pairs, and 2
+rear views marked not observable. User approval and runtime admission remain
+zero; Pair 27 is the next isolated review gate.
