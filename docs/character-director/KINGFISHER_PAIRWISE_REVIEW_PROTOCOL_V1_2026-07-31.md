@@ -1732,3 +1732,25 @@ Fresh pair 23 evidence:
 The current queue contains 21 fresh internal passes, 43 pending pairs, and 2
 rear views marked not observable. User approval and runtime admission remain
 zero; Pair 24 is the next isolated review gate.
+
+Pair 24 (`polite-interruption`) also required a fresh perspective-aware review
+but not another rebuild. Its current speaking mate already uses the
+pair-specific connected-mandible compositor and preserves the approved closed
+frame as the authority for the complete upper bill and body.
+
+Fresh full-size and 4x inspection confirms that the three-quarter lower bill
+correctly travels diagonally across the throat toward screen-right. It shares
+the authored rear hinge, ends beneath the stable upper tip, and does not move
+the eyes, crown, cheek, throat, raised wing, torso, feet, scale, or registration.
+There is no duplicate edge or detached sliver. Its existing audit reports
+3,576 changed rendered pixels, outside-mouth mean difference `0.0`,
+registration delta `0`, silhouette IoU `1.0`, and connected-mandible ratio
+`1.0`.
+
+Fresh pair 24 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-024-recheck-2026-08-04/`
+
+The current queue contains 22 fresh internal passes, 42 pending pairs, and 2
+rear views marked not observable. User approval and runtime admission remain
+zero; Pair 25 is the next isolated review gate.
