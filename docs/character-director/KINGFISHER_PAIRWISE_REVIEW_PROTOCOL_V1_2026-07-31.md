@@ -1891,3 +1891,32 @@ Accepted pair 29 evidence:
 The current queue contains 27 fresh internal passes, 37 pending pairs, and 2
 rear views marked not observable. User approval and runtime admission remain
 zero; Pair 30 is the next isolated review gate.
+
+Pair 30 (`rhetorical-question`) looked plausible at normal size, but failed the
+new one-pair-at-a-time immutable-source audit. The previous compositor declared
+the broad region `(403, 120)-(545, 251)` as mouth articulation and changed
+pixels above the true opening. A tighter audit exposed nonzero change outside
+the actual lower bill, so the old result was rejected even though its silhouette
+and registration were stable.
+
+Accepted Candidate 2 starts from the approved closed frame and uses the aligned
+speaking render only as a connected lower-mandible and cavity donor. The
+compositor restores the complete upper bill from the closed source and confines
+all 4,379 changed rendered pixels to `(400, 135)-(535, 220)`. Full-size and 4x
+inspection confirms that the opening follows the head tilt and joins the face
+without a detached edge; the crown, eyes, cheeks, throat, hoodie, raised wings,
+body, feet, scale, registration, and silhouette remain unchanged. The strict
+audit reports outside-mouth mean difference `0.0`, registration delta `0`,
+silhouette IoU `1.0`, and connected-mandible ratio `0.995027`.
+
+Rejected pair 30 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-030-rejected-broad-face-composite-2026-08-04/`
+
+Accepted pair 30 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-030-rebuilt-v2-connected-mandible/`
+
+The current queue contains 28 fresh internal passes, 36 pending pairs, and 2
+rear views marked not observable. User approval and runtime admission remain
+zero; Pair 31 is the next isolated review gate.
