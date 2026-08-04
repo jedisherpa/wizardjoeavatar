@@ -1682,3 +1682,31 @@ Fresh pair 21 evidence:
 The current queue contains 19 fresh internal passes, 45 pending pairs, and 2
 rear views marked not observable. User approval and runtime admission remain
 zero; Pair 22 is the next isolated review gate.
+
+Pair 22 (`small-acknowledgment`) failed the fresh full-size and magnified
+comparison even though its previous localization audit was green. The opaque
+donor mask treated pale throat feathers inside the broad lower-face polygon as
+mandible pixels, producing a false white triangular projection beneath the
+otherwise stable upper bill. The audit proved that the edit was localized; it
+did not prove that every localized pixel belonged to the beak.
+
+Accepted Candidate 3 starts from the approved closed frame and keeps its body,
+head, eye line, and upper bill pixel-for-pixel. Its donor mask excludes light
+neutral throat pixels and transfers only one connected dark lower mandible and
+the visible mouth cavity around the shared rear hinge. Full-size and magnified
+review show no pale projection, duplicate tip, detached sliver, upper-bill
+redraw, or body drift. Its tightened audit reports 4,283 changed rendered
+pixels, outside-mouth mean difference `0.0`, registration delta `0`,
+silhouette IoU `0.999766`, and connected-mandible ratio `0.979030`.
+
+Rejected pair 22 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-022-rejected-pre-pairwise-2026-08-04/`
+
+Accepted pair 22 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-022-rebuilt-v3-neutral-exclusion/`
+
+The current queue contains 20 fresh internal passes, 44 pending pairs, and 2
+rear views marked not observable. User approval and runtime admission remain
+zero; Pair 23 is the next isolated review gate.
