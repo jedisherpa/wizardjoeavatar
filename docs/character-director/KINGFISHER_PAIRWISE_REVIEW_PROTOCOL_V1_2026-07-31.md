@@ -1502,3 +1502,30 @@ Accepted pair 14 evidence:
 The current queue contains 12 fresh internal passes, 52 pending pairs, and 2
 rear views marked not observable. User approval and runtime admission remain
 zero; Pair 15 is the next isolated review gate.
+
+Pair 15 (`present-screen-right`) also failed the fresh profile comparison. Its
+legacy open frame looked plausible at fitted size, but the magnified difference
+view showed that the full upper bill had been regenerated inside an 8,142-pixel
+articulation rectangle. The old automated audit therefore proved only that the
+large edit was bounded; it did not prove that the upper bill stayed registered.
+
+Accepted Candidate 1 uses the rejected open render only as a lower-mandible
+donor. It restores the resting upper bill pixel-for-pixel as the final visual
+authority, keeps the authored rear hinge and right-facing perspective axis, and
+introduces no duplicate bill edge or body movement. Full-size and nearest-
+neighbor inspection show one attached lower bill and a continuous, restrained
+mouth cavity. Its audit reports 974 changed rendered pixels, outside-mouth mean
+difference `0.0`, registration delta `0`, silhouette IoU `0.994760`, and
+connected-mandible ratio `1.0`.
+
+Rejected pair 15 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-015-rejected-pre-pairwise-2026-08-04/`
+
+Accepted pair 15 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-015-rebuilt-v1/`
+
+The current queue contains 13 fresh internal passes, 51 pending pairs, and 2
+rear views marked not observable. User approval and runtime admission remain
+zero; Pair 16 is the next isolated review gate.
