@@ -1754,3 +1754,32 @@ Fresh pair 24 evidence:
 The current queue contains 22 fresh internal passes, 42 pending pairs, and 2
 rear views marked not observable. User approval and runtime admission remain
 zero; Pair 25 is the next isolated review gate.
+
+Pair 25 (`hand-over-the-floor`) failed its fresh full-size, 4x, and live
+locked-pair review even though its previous automated audit was green. The
+lower mandible remained connected to the authored hinge, but it stopped
+noticeably short of the approved upper-bill tip. During speech the profile bill
+therefore appeared to telescope instead of opening as one hinged structure.
+
+Accepted Candidate 5 starts from the approved closed frame and leaves the body,
+head, eye line, and complete upper bill pixel-for-pixel unchanged. The isolated
+lower-mandible donor uses scale `0.502`, horizontal scale `0.65`, translation
+`(-78, 52)`, and the authored hinge `(365, 220)`. Its connected lower mandible
+runs along the existing profile axis and terminates beneath the stable upper
+tip. The compositor reports a mandible bounding box of `(360, 214)-(511, 279)`,
+a changed bounding box of `(360, 217)-(511, 279)`, and connected-mandible ratio
+`0.999583`. The tightened audit reports 2,380 changed rendered pixels,
+outside-mouth mean difference `0.0`, registration delta `0`, and silhouette IoU
+`0.996829`.
+
+Rejected pair 25 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-025-rejected-short-mandible-2026-08-04/`
+
+Accepted pair 25 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-025-rebuilt-v5-tip-aligned/`
+
+The current queue contains 23 fresh internal passes, 41 pending pairs, and 2
+rear views marked not observable. User approval and runtime admission remain
+zero; Pair 26 is the next isolated review gate.
