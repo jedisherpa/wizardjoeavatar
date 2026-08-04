@@ -819,8 +819,30 @@ fn validate_runtime_request(method: &str, path: &str) -> Result<(), &'static str
             | ("POST", "/api/avatar/wizard/stop")
             | ("POST", "/api/avatar/wizard/reset")
             | ("POST", "/api/avatar/wizard/director/permission-world")
+            | ("GET", "/api/avatar/wizard/director/v1/source-slots/main")
+            | ("GET", "/api/avatar/wizard/director/v1/source-slots/speech")
+            | (
+                "POST",
+                "/api/avatar/wizard/director/v1/performances/prepare-editable"
+            )
     );
-    allowed.then_some(()).ok_or("runtime_route_not_allowed")
+    let edit_apply = method == "POST"
+        && path
+            .strip_prefix("/api/avatar/wizard/director/v1/edit-sessions/")
+            .and_then(|suffix| suffix.strip_suffix("/apply"))
+            .is_some_and(valid_edit_session_id);
+    (allowed || edit_apply)
+        .then_some(())
+        .ok_or("runtime_route_not_allowed")
+}
+
+fn valid_edit_session_id(value: &str) -> bool {
+    value.strip_prefix("edit-session:").is_some_and(|suffix| {
+        suffix.len() == 32
+            && suffix
+                .bytes()
+                .all(|byte| byte.is_ascii_digit() || (b'a'..=b'f').contains(&byte))
+    })
 }
 
 fn http_request(
@@ -1053,6 +1075,8 @@ mod tests {
             "/api/avatar/wizard/character",
             "/api/avatar/wizard/permission-world",
             "/api/avatar/wizard/replay",
+            "/api/avatar/wizard/director/v1/source-slots/main",
+            "/api/avatar/wizard/director/v1/source-slots/speech",
         ] {
             assert_eq!(validate_runtime_request("GET", path), Ok(()));
         }
@@ -1064,6 +1088,7 @@ mod tests {
             "/api/avatar/wizard/speak",
             "/api/avatar/wizard/speech-stop",
             "/api/avatar/wizard/director/permission-world",
+            "/api/avatar/wizard/director/v1/performances/prepare-editable",
         ] {
             assert_eq!(validate_runtime_request("POST", path), Ok(()));
             assert_eq!(
@@ -1079,6 +1104,26 @@ mod tests {
             validate_runtime_request("GET", "http://example.com"),
             Err("runtime_route_not_allowed")
         );
+        let apply_path = format!(
+            "/api/avatar/wizard/director/v1/edit-sessions/edit-session:{}/apply",
+            "a".repeat(32)
+        );
+        assert_eq!(validate_runtime_request("POST", &apply_path), Ok(()));
+        assert_eq!(
+            validate_runtime_request("GET", &apply_path),
+            Err("runtime_route_not_allowed")
+        );
+        for invalid in [
+            "/api/avatar/wizard/director/v1/edit-sessions/edit-session:abc/apply",
+            "/api/avatar/wizard/director/v1/edit-sessions/edit-session:AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/apply",
+            "/api/avatar/wizard/director/v1/edit-sessions/../../private/apply",
+            "/api/avatar/wizard/director/v1/edit-sessions/edit-session:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/apply/extra",
+        ] {
+            assert_eq!(
+                validate_runtime_request("POST", invalid),
+                Err("runtime_route_not_allowed")
+            );
+        }
     }
 
     #[test]

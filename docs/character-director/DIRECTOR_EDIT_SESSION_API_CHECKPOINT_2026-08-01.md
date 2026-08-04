@@ -102,9 +102,13 @@ The known broad-suite result remains 1070 tests with 112 failures and 7 errors,
 primarily unrelated pose-source/evidence drift. This checkpoint does not alter
 or remove that evidence.
 
+## Follow-Up
+
+- The native Companion score-editor controls are implemented and documented in
+  `DIRECTOR_SCORE_EDITOR_UI_CHECKPOINT_2026-08-03.md`.
+
 ## Remaining Product Work
 
-- Add the Companion score-editor controls that consume this API.
 - Replace truth-bearing context defaults with authoritative observations.
 - Connect governed live turns to automatic direction compilation and score
   binding.

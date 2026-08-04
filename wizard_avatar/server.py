@@ -743,6 +743,20 @@ def create_app(
                 detail={"code": exc.code, "path": exc.path},
             ) from exc
 
+    @app.get("/api/avatar/wizard/director/v1/source-slots/{source_slot}")
+    async def inspect_director_source_slot(
+        source_slot: str,
+        request: FastAPIRequest,
+    ):
+        require_director(request)
+        try:
+            return await frame_hub.director_source_slot_status(source_slot)
+        except DirectorEditSessionError as exc:
+            raise HTTPException(
+                status_code=400,
+                detail={"code": exc.code, "path": exc.path},
+            ) from exc
+
     @app.post(
         "/api/avatar/wizard/director/v1/edit-sessions/{edit_session_id}/apply"
     )

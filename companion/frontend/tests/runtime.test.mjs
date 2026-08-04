@@ -132,3 +132,47 @@ test("browser demo mocks progressive speech, permissions, and replay export", as
   assert.match(replay, /"route":"speak"/);
   assert.doesNotMatch(replay, /Preview/);
 });
+
+test("browser demo exercises the governed score editor without private content", async () => {
+  globalThis.window = {};
+  const client = new RuntimeClient({ browserDemo: true });
+  const source = await client.request("/api/avatar/wizard/director/v1/source-slots/speech");
+  assert.equal(source.status, "ready");
+  assert.equal(source.source_slot, "speech");
+  assert.equal(source.media.duration_ms, 9000);
+
+  const prepared = await client.request(
+    "/api/avatar/wizard/director/v1/performances/prepare-editable",
+    {
+      method: "POST",
+      body: {
+        source_slot: "speech",
+        direction: {
+          media_id: source.media.media_id,
+          media_sha256: source.media.media_sha256,
+        },
+      },
+    }
+  );
+  assert.equal(prepared.edit_session.score_revision, 1);
+  assert.equal(prepared.edit_session.cues.length, 2);
+
+  const session = prepared.edit_session;
+  const applied = await client.request(
+    `/api/avatar/wizard/director/v1/edit-sessions/${session.edit_session_id}/apply`,
+    {
+      method: "POST",
+      body: {
+        edit_set_sha256: `sha256:${"9".repeat(64)}`,
+        operations: [{
+          cue_id: session.cues[0].cue_id,
+          edit_type: "intensity_milli",
+          value: 800,
+        }],
+      },
+    }
+  );
+  assert.equal(applied.edit_session.score_revision, 2);
+  assert.equal(applied.edit_session.cues[0].intensity_milli, 800);
+  assert.equal(applied.applied.edit_set_sha256, `sha256:${"9".repeat(64)}`);
+});

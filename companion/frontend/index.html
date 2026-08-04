@@ -145,6 +145,88 @@
               </div>
             </details>
 
+            <details class="director-group director-score-editor">
+              <summary>Performance score</summary>
+              <div class="director-group-body">
+                <label class="director-field">Prism source
+                  <select id="director-score-source">
+                    <option value="speech">Speech</option>
+                    <option value="main">Media</option>
+                  </select>
+                </label>
+                <label class="director-field">Direction
+                  <textarea id="director-score-direction" rows="3" maxlength="2048">Present the idea warmly, emphasize the key point, then settle.</textarea>
+                </label>
+                <div class="director-field-grid director-score-context-grid">
+                  <label>Intent
+                    <select id="director-score-intent">
+                      <option value="explain">Explain</option>
+                      <option value="present">Present</option>
+                      <option value="reassure">Reassure</option>
+                      <option value="celebrate">Celebrate</option>
+                      <option value="clarify">Clarify</option>
+                      <option value="question">Question</option>
+                      <option value="listen">Listen</option>
+                      <option value="wait">Wait</option>
+                    </select>
+                  </label>
+                  <label>Tone
+                    <select id="director-score-tone">
+                      <option value="warm">Warm</option>
+                      <option value="focused">Focused</option>
+                      <option value="measured">Measured</option>
+                      <option value="playful">Playful</option>
+                      <option value="serious">Serious</option>
+                      <option value="direct">Direct</option>
+                    </select>
+                  </label>
+                  <label>Stakes
+                    <select id="director-score-sensitivity">
+                      <option value="ordinary">Ordinary</option>
+                      <option value="sensitive">Sensitive</option>
+                      <option value="high_stakes">High stakes</option>
+                      <option value="restricted">Restricted</option>
+                    </select>
+                  </label>
+                  <label>Urgency
+                    <select id="director-score-urgency">
+                      <option value="normal">Normal</option>
+                      <option value="low">Low</option>
+                      <option value="high">High</option>
+                      <option value="critical">Critical</option>
+                    </select>
+                  </label>
+                  <label>Stance
+                    <select id="director-score-stance">
+                      <option value="collaborative">Collaborative</option>
+                      <option value="supportive">Supportive</option>
+                      <option value="instructive">Instructive</option>
+                      <option value="firm">Firm</option>
+                      <option value="neutral">Neutral</option>
+                    </select>
+                  </label>
+                  <label>Action
+                    <select id="director-score-action-posture">
+                      <option value="none">None pending</option>
+                      <option value="approved">Approved</option>
+                      <option value="pending">Pending</option>
+                      <option value="denied">Denied</option>
+                      <option value="not_required">Not required</option>
+                    </select>
+                  </label>
+                </div>
+                <div class="director-actions director-actions-split">
+                  <span class="director-result" id="director-score-status">No edit session</span>
+                  <button id="director-score-prepare" type="button">Prepare score</button>
+                </div>
+                <div id="director-score-session" class="score-session" hidden>
+                  <div class="score-session-summary" id="director-score-session-summary"></div>
+                  <div class="score-cue-list" id="director-score-cues"></div>
+                  <button id="director-score-apply" type="button">Publish edits</button>
+                </div>
+              </div>
+            </details>
+
             <details class="director-group">
               <summary>Speech preview</summary>
               <div class="director-group-body">

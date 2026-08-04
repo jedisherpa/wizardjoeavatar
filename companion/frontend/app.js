@@ -3,6 +3,7 @@ import { resolveRuntimeDescriptor, RuntimeClient } from "./runtime.js";
 import {
   activityDescription,
   createActionPayload,
+  createDirectedPerformancePreparation,
   createExpressionPayload,
   createGazePayload,
   createMovePayload,
@@ -11,6 +12,7 @@ import {
   createRandomPoseCycle,
   createSafeDiagnostics,
   createSafeCueInspection,
+  createScoreEditSet,
   createSpeechPayload,
   deriveDirectorState,
   derivePresentation,
@@ -52,6 +54,12 @@ const elements = {
   replayRecords: document.getElementById("director-replay-records"),
   replayTick: document.getElementById("director-replay-tick"),
   replayHash: document.getElementById("director-replay-hash"),
+  directorScoreStatus: document.getElementById("director-score-status"),
+  directorScoreSession: document.getElementById("director-score-session"),
+  directorScoreSessionSummary: document.getElementById("director-score-session-summary"),
+  directorScoreCues: document.getElementById("director-score-cues"),
+  directorScorePrepare: document.getElementById("director-score-prepare"),
+  directorScoreApply: document.getElementById("director-score-apply"),
 };
 
 const directorControls = {
@@ -70,6 +78,14 @@ const directorControls = {
   permissionPurpose: document.getElementById("director-permission-purpose"),
   permissionSurface: document.getElementById("director-permission-surface"),
   permissionExpiry: document.getElementById("director-permission-expiry"),
+  scoreSource: document.getElementById("director-score-source"),
+  scoreDirection: document.getElementById("director-score-direction"),
+  scoreIntent: document.getElementById("director-score-intent"),
+  scoreTone: document.getElementById("director-score-tone"),
+  scoreSensitivity: document.getElementById("director-score-sensitivity"),
+  scoreUrgency: document.getElementById("director-score-urgency"),
+  scoreStance: document.getElementById("director-score-stance"),
+  scoreActionPosture: document.getElementById("director-score-action-posture"),
 };
 
 const directorOutputs = Object.fromEntries(
@@ -129,6 +145,11 @@ const state = {
   directorExpanded: localStorage.getItem("wizard.directorExpanded") === "true",
   viewportProfile: normalizeViewportProfile(localStorage.getItem("wizard.viewportProfile")),
   directorPositionSeeded: false,
+  directorEditSession: null,
+  directorEditParentHash: null,
+  directorEditStatus: "No edit session",
+  directorEditBusy: false,
+  renderedEditBaseSha: null,
   lastAnnouncedStatus: "",
   lastDescriptionAt: 0,
   demoTimers: [],
@@ -257,6 +278,221 @@ function updateDirector() {
   elements.replayTick.textContent = state.replaySummary?.last_tick ?? "Unavailable";
   elements.replayHash.textContent = state.replaySummary?.retained_sha256 || "Unavailable";
   elements.replayHash.title = elements.replayHash.textContent;
+  renderScoreSession();
+}
+
+function renderScoreSession() {
+  const session = state.directorEditSession;
+  elements.directorScoreStatus.textContent = state.directorEditStatus;
+  elements.directorScoreStatus.title = state.directorEditStatus;
+  elements.directorScorePrepare.disabled = state.directorEditBusy;
+  elements.directorScoreApply.disabled = state.directorEditBusy || !session;
+  elements.directorScoreSession.hidden = !session;
+  if (!session) {
+    elements.directorScoreSessionSummary.textContent = "";
+    elements.directorScoreCues.replaceChildren();
+    state.renderedEditBaseSha = null;
+    return;
+  }
+  const cueCount = Array.isArray(session.cues) ? session.cues.length : 0;
+  const expiryMinutes = Math.max(0, Math.ceil(Number(session.expires_in_ms || 0) / 60_000));
+  elements.directorScoreSessionSummary.textContent = [
+    `Revision ${session.score_revision}`,
+    `${cueCount} cue${cueCount === 1 ? "" : "s"}`,
+    `expires in ${expiryMinutes}m`,
+  ].join(" · ");
+  if (state.renderedEditBaseSha === session.base_score_sha256) return;
+  elements.directorScoreCues.replaceChildren();
+  for (const cue of session.cues || []) {
+    elements.directorScoreCues.append(createScoreCueRow(cue));
+  }
+  state.renderedEditBaseSha = session.base_score_sha256;
+}
+
+function createScoreCueRow(cue) {
+  const row = document.createElement("section");
+  row.className = "score-cue";
+  row.dataset.cueId = cue.cue_id;
+
+  const heading = document.createElement("div");
+  heading.className = "score-cue-heading";
+  heading.textContent = `${humanizePoseId(cue.track_kind || "cue")} · ${humanizePoseId(cue.intent || "neutral")}`;
+  heading.title = cue.cue_id;
+
+  const timing = document.createElement("div");
+  timing.className = "score-cue-time";
+  timing.textContent = `${cue.start_ms}-${cue.end_ms} ms`;
+
+  const controls = document.createElement("div");
+  controls.className = "score-cue-controls";
+  controls.append(
+    scoreNumberControl("Offset", "timing_offset_ms", 0, -600_000, 600_000),
+    scoreNumberControl(
+      "Duration",
+      "duration_ms",
+      Math.max(1, Number(cue.end_ms) - Number(cue.start_ms)),
+      1,
+      600_000
+    ),
+    scoreNumberControl("Intensity", "intensity_milli", cue.intensity_milli, 0, 1000),
+    scoreEnabledControl(!cue.disabled)
+  );
+
+  row.append(heading, timing, controls);
+  return row;
+}
+
+function scoreNumberControl(labelText, editType, value, min, max) {
+  const label = document.createElement("label");
+  label.textContent = labelText;
+  const input = document.createElement("input");
+  input.type = "number";
+  input.inputMode = "numeric";
+  input.min = String(min);
+  input.max = String(max);
+  input.step = "1";
+  input.value = String(value);
+  input.dataset.editType = editType;
+  input.dataset.originalValue = String(value);
+  label.append(input);
+  return label;
+}
+
+function scoreEnabledControl(enabled) {
+  const label = document.createElement("label");
+  label.className = "score-cue-enabled";
+  const input = document.createElement("input");
+  input.type = "checkbox";
+  input.checked = enabled;
+  input.dataset.editType = "disabled";
+  input.dataset.originalValue = String(enabled);
+  label.append(input, document.createTextNode("Enabled"));
+  return label;
+}
+
+function scoreEditorMessage(error) {
+  const code = error instanceof Error ? error.message : String(error);
+  if (code.includes("director_source_not_ready") || code.includes("source_unavailable")) {
+    return "Start speech or media in Prism GT first";
+  }
+  if (code.includes("director_duration_unsupported")) {
+    return "This source is too long for one editable score";
+  }
+  if (code.includes("director_direction_required")) return "Add a performance direction first";
+  if (code.includes("edit_session_stale")) return "The source changed. Prepare a fresh score";
+  if (code.includes("edit_precondition")) return "This score changed. Prepare a fresh score";
+  return "Score request rejected";
+}
+
+async function prepareEditableScore() {
+  if (state.directorEditBusy || !state.runtime) return;
+  state.directorEditBusy = true;
+  state.directorEditStatus = "Checking Prism source...";
+  render();
+  try {
+    const sourceSlot = directorControls.scoreSource.value === "main" ? "main" : "speech";
+    const source = await state.runtime.request(
+      `/api/avatar/wizard/director/v1/source-slots/${sourceSlot}`
+    );
+    const preparation = await createDirectedPerformancePreparation({
+      directionText: directorControls.scoreDirection.value,
+      intent: directorControls.scoreIntent.value,
+      tone: directorControls.scoreTone.value,
+      sensitivity: directorControls.scoreSensitivity.value,
+      urgency: directorControls.scoreUrgency.value,
+      relationalStance: directorControls.scoreStance.value,
+      pendingActionPosture: directorControls.scoreActionPosture.value,
+      displayProfile: state.viewportProfile,
+    }, source);
+    const result = await state.runtime.request(
+      "/api/avatar/wizard/director/v1/performances/prepare-editable",
+      { method: "POST", body: preparation }
+    );
+    state.directorEditSession = result.edit_session || null;
+    state.directorEditParentHash = null;
+    state.renderedEditBaseSha = null;
+    state.directorEditStatus = state.directorEditSession ? "Score ready to edit" : "No score returned";
+  } catch (error) {
+    state.directorEditSession = null;
+    state.directorEditParentHash = null;
+    state.renderedEditBaseSha = null;
+    state.directorEditStatus = scoreEditorMessage(error);
+  } finally {
+    state.directorEditBusy = false;
+    render();
+  }
+}
+
+function scoreEditOperations(session) {
+  const cueById = new Map((session.cues || []).map((cue) => [cue.cue_id, cue]));
+  const operations = [];
+  for (const row of elements.directorScoreCues.querySelectorAll(".score-cue")) {
+    const cue = cueById.get(row.dataset.cueId);
+    if (!cue) continue;
+    for (const input of row.querySelectorAll("input[data-edit-type]")) {
+      const editType = input.dataset.editType;
+      let changed = false;
+      let value;
+      if (editType === "disabled") {
+        changed = String(input.checked) !== input.dataset.originalValue;
+        value = !input.checked;
+      } else {
+        value = Math.round(Number(input.value));
+        if (!Number.isFinite(value)) throw new Error("director_edit_value_invalid");
+        changed = String(value) !== input.dataset.originalValue;
+      }
+      if (!changed) continue;
+      operations.push({
+        cue_id: cue.cue_id,
+        edit_type: editType,
+        expected_value_sha256: cue.edit_preconditions?.[editType],
+        value,
+      });
+    }
+  }
+  return operations;
+}
+
+async function applyScoreEdits() {
+  const session = state.directorEditSession;
+  if (!session || state.directorEditBusy || !state.runtime) return;
+  let operations;
+  try {
+    operations = scoreEditOperations(session);
+  } catch (error) {
+    state.directorEditStatus = scoreEditorMessage(error);
+    render();
+    return;
+  }
+  if (!operations.length) {
+    state.directorEditStatus = "No changes to publish";
+    render();
+    return;
+  }
+  state.directorEditBusy = true;
+  state.directorEditStatus = "Publishing governed edits...";
+  render();
+  try {
+    const editSet = await createScoreEditSet({
+      ...session,
+      parent_edit_set_sha256: state.directorEditParentHash,
+    }, operations);
+    const result = await state.runtime.request(
+      `/api/avatar/wizard/director/v1/edit-sessions/${session.edit_session_id}/apply`,
+      { method: "POST", body: editSet }
+    );
+    state.directorEditSession = result.edit_session || null;
+    state.directorEditParentHash = result.applied?.edit_set_sha256 || editSet.edit_set_sha256;
+    state.renderedEditBaseSha = null;
+    state.directorEditStatus = state.directorEditSession
+      ? `Published revision ${state.directorEditSession.score_revision}`
+      : "Edits published";
+  } catch (error) {
+    state.directorEditStatus = scoreEditorMessage(error);
+  } finally {
+    state.directorEditBusy = false;
+    render();
+  }
 }
 
 function updateActivityDescription(force = false) {
@@ -695,6 +931,8 @@ document.getElementById("director-speech-stop").addEventListener("click", () => 
 document.getElementById("director-apply-permission").addEventListener("click", applyPermissionSimulation);
 document.getElementById("director-inspect-replay").addEventListener("click", inspectReplay);
 document.getElementById("director-export-replay").addEventListener("click", exportReplay);
+elements.directorScorePrepare.addEventListener("click", prepareEditableScore);
+elements.directorScoreApply.addEventListener("click", applyScoreEdits);
 document.querySelectorAll('input[name="director-viewport"]').forEach((input) => {
   input.addEventListener("change", () => {
     state.viewportProfile = normalizeViewportProfile(input.value);

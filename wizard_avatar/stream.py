@@ -616,6 +616,57 @@ class WizardFrameHub:
                 response["edit_session"] = dict(session.safe_inspection(now_us))
             return response
 
+    async def director_source_slot_status(self, source_slot: str) -> dict:
+        """Return the content-free authority needed to prepare a local edit session."""
+
+        if source_slot not in {"main", "speech"}:
+            raise DirectorEditSessionError("source_slot_invalid", "$.source_slot")
+        await self.start()
+        async with self._current_lock():
+            snapshot = self.performance.scheduler.coordinator.snapshot_for_slot(
+                source_slot
+            )
+            if snapshot is None:
+                return {
+                    "schema_version": 1,
+                    "status": "unavailable",
+                    "source_slot": source_slot,
+                    "media": None,
+                    "performance": None,
+                }
+            media_ready = (
+                snapshot.media.media_sha256 is not None
+                and snapshot.media.duration_ms is not None
+                and snapshot.media.duration_ms > 0
+            )
+            package_digest = snapshot.performance.character_package_sha256
+            performance_ready = (
+                snapshot.performance.character_id == self.performance.character_id
+                and package_digest == self.performance.package_digest
+            )
+            return {
+                "schema_version": 1,
+                "status": (
+                    "ready"
+                    if media_ready and performance_ready
+                    else "identity_mismatch"
+                    if media_ready
+                    else "media_identity_incomplete"
+                ),
+                "source_slot": source_slot,
+                "media": {
+                    "media_id": snapshot.media.media_id,
+                    "media_sha256": snapshot.media.media_sha256,
+                    "duration_ms": snapshot.media.duration_ms,
+                    "kind": snapshot.media.kind,
+                    "playback_state": snapshot.playback.state,
+                },
+                "performance": {
+                    "character_id": snapshot.performance.character_id,
+                    "package_digest": package_digest,
+                },
+            }
+
     async def apply_director_score_edits(
         self,
         edit_session_id: str,

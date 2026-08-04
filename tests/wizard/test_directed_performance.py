@@ -251,6 +251,69 @@ class DirectedPerformanceContractTests(unittest.TestCase):
 
 
 class DirectedPerformanceServerTests(unittest.IsolatedAsyncioTestCase):
+    async def test_director_source_slot_inspection_is_authenticated_and_content_free(self):
+        registry = load_character_registry()
+        env = {
+            "WIZARD_MEDIA_CONNECTOR_ENABLED": "1",
+            "WIZARD_MEDIA_CONNECTOR_TOKEN": "director-test-token",
+        }
+        headers = (("authorization", "Bearer director-test-token"),)
+        media_headers = (
+            ("content-type", "application/json"),
+            ("authorization", "Bearer director-test-token"),
+        )
+        media_body = json.dumps(
+            main_snapshot(registry).to_dict(),
+            separators=(",", ":"),
+        ).encode("utf-8")
+        with tempfile.TemporaryDirectory() as temporary:
+            with mock.patch.dict(os.environ, env, clear=True):
+                app = create_app(
+                    score_repository=CompiledScoreRepository(temporary)
+                )
+            path = "/api/avatar/wizard/director/v1/source-slots/main"
+            unauthorized, _ = await asgi_request(app, "GET", path)
+            missing_status, missing = await asgi_request(
+                app, "GET", path, headers=headers
+            )
+            invalid_status, invalid = await asgi_request(
+                app,
+                "GET",
+                "/api/avatar/wizard/director/v1/source-slots/private",
+                headers=headers,
+            )
+            await asgi_request(
+                app,
+                "POST",
+                "/api/avatar/wizard/media-session",
+                media_body,
+                media_headers,
+            )
+            ready_status, ready = await asgi_request(
+                app, "GET", path, headers=headers
+            )
+            await app.state.frame_hub.stop()
+
+        self.assertEqual(unauthorized, 401)
+        self.assertEqual(missing_status, 200)
+        self.assertEqual(missing["status"], "unavailable")
+        self.assertEqual(invalid_status, 400)
+        self.assertEqual(invalid["detail"]["code"], "source_slot_invalid")
+        self.assertEqual(ready_status, 200)
+        self.assertEqual(ready["status"], "ready")
+        self.assertEqual(ready["source_slot"], "main")
+        self.assertEqual(ready["media"]["media_id"], MEDIA_ID)
+        self.assertEqual(ready["media"]["media_sha256"], MEDIA_DIGEST)
+        self.assertEqual(ready["media"]["duration_ms"], DURATION_MS)
+        self.assertEqual(
+            ready["performance"]["character_id"],
+            registry.default_character_id,
+        )
+        encoded = json.dumps(ready, separators=(",", ":"))
+        self.assertNotIn("connector", encoded)
+        self.assertNotIn("message", encoded)
+        self.assertNotIn("title", encoded)
+
     async def test_companion_director_uses_app_token_not_connector_token(self):
         env = {
             "WIZARD_COMPANION_MODE": "1",

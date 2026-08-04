@@ -411,6 +411,113 @@ async function sha256Hex(value) {
     .join("");
 }
 
+const DIRECTOR_INTENTS = new Set([
+  "acknowledge", "caution", "celebrate", "characterful_neutral", "clarify",
+  "direct", "empathize", "explain", "greet", "interrupt", "listen",
+  "present", "question", "reassure", "review", "settle", "speak",
+  "transition", "wait",
+]);
+const DIRECTOR_TONES = new Set([
+  "direct", "focused", "measured", "neutral", "playful", "reflective",
+  "serious", "warm",
+]);
+const DIRECTOR_SENSITIVITY = new Set([
+  "high_stakes", "ordinary", "restricted", "sensitive",
+]);
+const DIRECTOR_URGENCY = new Set(["critical", "high", "low", "normal"]);
+const DIRECTOR_STANCES = new Set([
+  "collaborative", "deferential", "firm", "instructive", "neutral", "supportive",
+]);
+const DIRECTOR_ACTION_POSTURES = new Set([
+  "approved", "denied", "failed", "none", "not_required", "pending", "stale",
+]);
+
+export async function createDirectedPerformancePreparation(
+  input = {},
+  source = {},
+  nowMs = Date.now()
+) {
+  const media = record(source.media);
+  if (source.status !== "ready") throw new Error("director_source_not_ready");
+  const mediaId = safeText(media.media_id);
+  const mediaSha256 = safeText(media.media_sha256);
+  const durationMs = Math.round(boundedNumber(media.duration_ms, 0, 0, 600_000));
+  if (!/^media:sha256:[0-9a-f]{64}$/.test(mediaId)) throw new Error("director_media_id_invalid");
+  if (!/^sha256:[0-9a-f]{64}$/.test(mediaSha256)) throw new Error("director_media_digest_invalid");
+  if (durationMs < 1 || durationMs !== media.duration_ms) throw new Error("director_duration_unsupported");
+  const directionText = safeText(input.directionText).slice(0, 2048);
+  if (!directionText) throw new Error("director_direction_required");
+  const intent = selectedValue(input.intent, DIRECTOR_INTENTS, "explain");
+  const identity = Math.max(0, Math.floor(boundedNumber(nowMs, 0, 0, Number.MAX_SAFE_INTEGER)));
+  const approvalSha256 = `sha256:${await sha256Hex(directionText)}`;
+  return {
+    schema_version: 1,
+    source_slot: source.source_slot === "speech" ? "speech" : "main",
+    context_request: {
+      schema_version: 1,
+      turn_id: `turn:director:${identity}`,
+      utterance_id: `utterance:director:${identity}`,
+      media_id: mediaId,
+      reply_sha256: approvalSha256,
+      intent,
+      tone: selectedValue(input.tone, DIRECTOR_TONES, "warm"),
+      sensitivity: selectedValue(input.sensitivity, DIRECTOR_SENSITIVITY, "ordinary"),
+      urgency: selectedValue(input.urgency, DIRECTOR_URGENCY, "normal"),
+      relational_stance: selectedValue(input.relationalStance, DIRECTOR_STANCES, "collaborative"),
+      pending_action_posture: selectedValue(
+        input.pendingActionPosture,
+        DIRECTOR_ACTION_POSTURES,
+        "none"
+      ),
+      display_profile: normalizeViewportProfile(input.displayProfile),
+    },
+    direction: {
+      schema_version: 1,
+      direction_id: `direction:director:${identity}`,
+      direction_text: directionText,
+      intent,
+      duration_ms: durationMs,
+      media_id: mediaId,
+      media_sha256: mediaSha256,
+      seed: identity,
+    },
+  };
+}
+
+export async function createScoreEditSet(session = {}, operations = [], nowMs = Date.now()) {
+  if (!Array.isArray(operations) || operations.length < 1 || operations.length > 256) {
+    throw new Error("director_edits_required");
+  }
+  const identity = Math.max(0, Math.floor(boundedNumber(nowMs, 0, 0, Number.MAX_SAFE_INTEGER)));
+  const content = {
+    schema_version: 1,
+    edit_set_id: `edits:director:${identity}`,
+    revision: Math.max(1, Math.floor(boundedNumber(session.score_revision, 1, 1, Number.MAX_SAFE_INTEGER))),
+    character_id: safeText(session.character_id),
+    package_digest: safeText(session.package_digest),
+    base_score_sha256: safeText(session.base_score_sha256),
+    parent_edit_set_sha256: inputHashOrNull(session.parent_edit_set_sha256),
+    actor: { kind: "human", actor_id: "local:companion-director" },
+    operations: operations.map((operation, index) => ({
+      operation_id: `operation:director:${identity}:${index + 1}`,
+      cue_id: safeText(operation.cue_id),
+      edit_type: safeText(operation.edit_type),
+      expected_value_sha256: safeText(operation.expected_value_sha256),
+      value: operation.value,
+      reason_code: "director_choice",
+    })),
+  };
+  return {
+    ...content,
+    edit_set_sha256: `sha256:${await sha256Hex(canonicalJson(content))}`,
+  };
+}
+
+function inputHashOrNull(value) {
+  const text = safeText(value);
+  return /^sha256:[0-9a-f]{64}$/.test(text) ? text : null;
+}
+
 export async function createPermissionSimulationPayload(input = {}, nowMs = Date.now()) {
   const observedAtMs = Math.max(0, Math.floor(boundedNumber(nowMs, 0, 0, Number.MAX_SAFE_INTEGER)));
   const posture = selectedValue(

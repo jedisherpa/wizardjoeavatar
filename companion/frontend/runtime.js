@@ -106,6 +106,7 @@ export class RuntimeClient {
     this.mockReplay = [
       { record_type: "header", record_sequence: 0, simulation_tick: 0, payload: { schema_version: 1, seed: 7 } },
     ];
+    this.mockDirectorSession = null;
   }
 
   async request(path, options = {}) {
@@ -258,6 +259,26 @@ export class RuntimeClient {
         capabilities: ["actions", "speech_overlay", "progressive_text_preview"],
       };
     }
+    if (path === "/api/avatar/wizard/director/v1/source-slots/main"
+      || path === "/api/avatar/wizard/director/v1/source-slots/speech") {
+      const sourceSlot = path.endsWith("/speech") ? "speech" : "main";
+      return {
+        schema_version: 1,
+        status: "ready",
+        source_slot: sourceSlot,
+        media: {
+          media_id: `media:sha256:${"1".repeat(64)}`,
+          media_sha256: `sha256:${"2".repeat(64)}`,
+          duration_ms: 9000,
+          kind: sourceSlot === "speech" ? "speech" : "music",
+          playback_state: "playing",
+        },
+        performance: {
+          character_id: "wizard-joe-v1",
+          package_digest: `sha256:${"3".repeat(64)}`,
+        },
+      };
+    }
     if (path === "/api/avatar/wizard/replay") {
       return `${this.mockReplay.map((record) => JSON.stringify(record)).join("\n")}\n`;
     }
@@ -265,6 +286,31 @@ export class RuntimeClient {
       return this.mockPermissionWorld;
     }
     if (options.method === "POST") {
+      if (path === "/api/avatar/wizard/director/v1/performances/prepare-editable") {
+        this.mockDirectorSession = this.createMockDirectorSession(options.body);
+        return {
+          schema_version: 1,
+          status: "prepared",
+          edit_session: this.mockDirectorSession,
+        };
+      }
+      if (/^\/api\/avatar\/wizard\/director\/v1\/edit-sessions\/edit-session:[0-9a-f]{32}\/apply$/.test(path)) {
+        if (!this.mockDirectorSession || path !== `/api/avatar/wizard/director/v1/edit-sessions/${this.mockDirectorSession.edit_session_id}/apply`) {
+          throw new Error("edit_session_not_found");
+        }
+        this.applyMockDirectorEdits(options.body);
+        return {
+          schema_version: 1,
+          status: "published",
+          publication: {
+            score_id: this.mockDirectorSession.score_id,
+            score_revision: this.mockDirectorSession.score_revision,
+            score_sha256: this.mockDirectorSession.base_score_sha256,
+          },
+          applied: { edit_set_sha256: options.body.edit_set_sha256 },
+          edit_session: this.mockDirectorSession,
+        };
+      }
       this.mockState.simulation_tick += 1;
       this.mockState.state_revision += 1;
       if (path.endsWith("/stop")) this.mockState.action = "idle";
@@ -328,6 +374,74 @@ export class RuntimeClient {
       return { ...this.mockState };
     }
     return {};
+  }
+
+  createMockDirectorSession(preparation = {}) {
+    const source = preparation.direction || {};
+    const preconditions = (digit) => ({
+      timing_offset_ms: `sha256:${digit.repeat(64)}`,
+      duration_ms: `sha256:${digit.repeat(64)}`,
+      intensity_milli: `sha256:${digit.repeat(64)}`,
+      disabled: `sha256:${digit.repeat(64)}`,
+    });
+    return {
+      schema_version: 1,
+      edit_session_id: `edit-session:${"a".repeat(32)}`,
+      expires_in_ms: 900_000,
+      base_score_sha256: `sha256:${"4".repeat(64)}`,
+      score_id: "score:browser-preview",
+      score_revision: 1,
+      character_id: "wizard-joe-v1",
+      package_digest: `sha256:${"3".repeat(64)}`,
+      media_id: source.media_id || `media:sha256:${"1".repeat(64)}`,
+      media_sha256: source.media_sha256 || `sha256:${"2".repeat(64)}`,
+      cues: [
+        {
+          cue_id: "cue:browser:opening",
+          track_kind: "gesture",
+          intent: "open",
+          start_ms: 0,
+          end_ms: 3600,
+          intensity_milli: 620,
+          locked: false,
+          disabled: false,
+          edit_preconditions: preconditions("5"),
+        },
+        {
+          cue_id: "cue:browser:emphasis",
+          track_kind: "expression",
+          intent: "emphasize",
+          start_ms: 4200,
+          end_ms: 7600,
+          intensity_milli: 740,
+          locked: false,
+          disabled: false,
+          edit_preconditions: preconditions("6"),
+        },
+      ],
+    };
+  }
+
+  applyMockDirectorEdits(editSet = {}) {
+    for (const operation of editSet.operations || []) {
+      const cue = this.mockDirectorSession.cues.find((item) => item.cue_id === operation.cue_id);
+      if (!cue) continue;
+      if (operation.edit_type === "timing_offset_ms") {
+        cue.start_ms += operation.value;
+        cue.end_ms += operation.value;
+      }
+      if (operation.edit_type === "duration_ms") cue.end_ms = cue.start_ms + operation.value;
+      if (operation.edit_type === "intensity_milli") cue.intensity_milli = operation.value;
+      if (operation.edit_type === "disabled") cue.disabled = operation.value;
+    }
+    this.mockDirectorSession.score_revision += 1;
+    const digit = String(Math.min(9, this.mockDirectorSession.score_revision + 3));
+    this.mockDirectorSession.base_score_sha256 = `sha256:${digit.repeat(64)}`;
+    for (const cue of this.mockDirectorSession.cues) {
+      for (const editType of Object.keys(cue.edit_preconditions)) {
+        cue.edit_preconditions[editType] = `sha256:${digit.repeat(64)}`;
+      }
+    }
   }
 }
 

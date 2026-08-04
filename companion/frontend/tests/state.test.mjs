@@ -5,6 +5,7 @@ import { createHash } from "node:crypto";
 import {
   activityDescription,
   createActionPayload,
+  createDirectedPerformancePreparation,
   createExpressionPayload,
   createGazePayload,
   createMovePayload,
@@ -13,6 +14,7 @@ import {
   createRandomPoseCycle,
   createSafeDiagnostics,
   createSafeCueInspection,
+  createScoreEditSet,
   createSpeechPayload,
   deriveDirectorState,
   derivePresentation,
@@ -223,6 +225,84 @@ test("permission simulation builder hashes an exact content-free backend payload
   assert.equal(payload.permissions[0].expires_at_ms, 910_000);
   assert.equal(payload.state_sha256, `sha256:${expectedHash}`);
   assert.doesNotMatch(JSON.stringify(payload), /conversation|transcript|speech_text/i);
+});
+
+test("directed preparation binds explicit direction to the exact ready Prism source", async () => {
+  const directionText = "Present the core idea warmly, then settle.";
+  const payload = await createDirectedPerformancePreparation({
+    directionText,
+    intent: "present",
+    tone: "focused",
+    sensitivity: "sensitive",
+    urgency: "high",
+    relationalStance: "instructive",
+    pendingActionPosture: "approved",
+    displayProfile: "mobile",
+  }, {
+    status: "ready",
+    source_slot: "speech",
+    media: {
+      media_id: `media:sha256:${"a".repeat(64)}`,
+      media_sha256: `sha256:${"b".repeat(64)}`,
+      duration_ms: 12_345,
+      private_text: "must not cross the bridge",
+    },
+    performance: { provider_payload: "must not cross the bridge" },
+  }, 50_000);
+  const approvalHash = createHash("sha256").update(directionText).digest("hex");
+
+  assert.equal(payload.source_slot, "speech");
+  assert.equal(payload.context_request.media_id, `media:sha256:${"a".repeat(64)}`);
+  assert.equal(payload.context_request.reply_sha256, `sha256:${approvalHash}`);
+  assert.equal(payload.context_request.display_profile, "mobile");
+  assert.equal(payload.context_request.relational_stance, "instructive");
+  assert.equal(payload.direction.duration_ms, 12_345);
+  assert.equal(payload.direction.media_sha256, `sha256:${"b".repeat(64)}`);
+  assert.equal(payload.direction.direction_text, directionText);
+  assert.doesNotMatch(JSON.stringify(payload), /private_text|provider_payload/);
+});
+
+test("directed preparation fails closed for unavailable or unsupported sources", async () => {
+  await assert.rejects(
+    createDirectedPerformancePreparation({ directionText: "Explain." }, { status: "unavailable" }),
+    /director_source_not_ready/
+  );
+  await assert.rejects(
+    createDirectedPerformancePreparation({ directionText: "Explain." }, {
+      status: "ready",
+      source_slot: "main",
+      media: {
+        media_id: `media:sha256:${"a".repeat(64)}`,
+        media_sha256: `sha256:${"b".repeat(64)}`,
+        duration_ms: 600_001,
+      },
+    }),
+    /director_duration_unsupported/
+  );
+});
+
+test("score edit builder hashes exact human edits and server preconditions", async () => {
+  const payload = await createScoreEditSet({
+    score_revision: 4,
+    character_id: "wizard-joe-v1",
+    package_digest: `sha256:${"c".repeat(64)}`,
+    base_score_sha256: `sha256:${"d".repeat(64)}`,
+    parent_edit_set_sha256: `sha256:${"e".repeat(64)}`,
+  }, [{
+    cue_id: "cue:opening",
+    edit_type: "intensity_milli",
+    expected_value_sha256: `sha256:${"f".repeat(64)}`,
+    value: 725,
+  }], 75_000);
+  const content = { ...payload };
+  delete content.edit_set_sha256;
+  const expectedHash = createHash("sha256").update(canonicalJson(content)).digest("hex");
+
+  assert.equal(payload.revision, 4);
+  assert.deepEqual(payload.actor, { kind: "human", actor_id: "local:companion-director" });
+  assert.equal(payload.operations[0].expected_value_sha256, `sha256:${"f".repeat(64)}`);
+  assert.equal(payload.operations[0].reason_code, "director_choice");
+  assert.equal(payload.edit_set_sha256, `sha256:${expectedHash}`);
 });
 
 test("cue and replay inspection remain content-free", async () => {
