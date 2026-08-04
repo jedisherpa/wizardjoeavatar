@@ -1608,3 +1608,30 @@ Accepted pair 18 evidence:
 The current queue contains 16 fresh internal passes, 48 pending pairs, and 2
 rear views marked not observable. User approval and runtime admission remain
 zero; Pair 19 is the next isolated review gate.
+
+Pair 19 (`neutral-listening`) looked plausible at fitted size but failed the
+magnified structural comparison. Its legacy 7,253-pixel articulation rectangle
+replaced the complete upper bill together with the lower mandible. The green
+audit therefore proved that the edit stayed inside a broad face box, not that
+the approved upper bill remained fixed.
+
+Accepted Candidate 1 starts from the approved resting character and restores
+the complete resting upper bill pixel-for-pixel after transferring one
+connected lower mandible and restrained cavity from the rejected donor.
+Full-size and magnified inspection show a shared rear hinge, readable but
+subtle speech motion, no upper-bill redraw, no duplicate edge, and no body
+movement. Its audit reports 4,146 changed rendered pixels, outside-mouth mean
+difference `0.0`, registration delta `0`, silhouette IoU `1.0`, and
+connected-mandible ratio `1.0`.
+
+Rejected pair 19 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-019-rejected-pre-pairwise-2026-08-04/`
+
+Accepted pair 19 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-019-rebuilt-v1/`
+
+The current queue contains 17 fresh internal passes, 47 pending pairs, and 2
+rear views marked not observable. User approval and runtime admission remain
+zero; Pair 20 is the next isolated review gate.
