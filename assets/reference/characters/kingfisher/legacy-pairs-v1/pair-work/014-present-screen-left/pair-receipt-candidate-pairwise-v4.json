@@ -40,14 +40,14 @@
       248
     ]
   ],
-  "cavity_source": "generated",
+  "cavity_source": "generated_overlay",
   "changed_bbox": [
-    463,
-    215,
+    450,
+    205,
     551,
     266
   ],
-  "generated_render_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/014-present-screen-left/124_ACT124_present_screen_left_speaking_beak_rejected_pre_pairwise_2026-08-04.png",
+  "generated_render_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/014-present-screen-left/124_ACT124_present_screen_left_speaking_beak_alpha.png",
   "generated_render_sha256": "e2797cd7aba4108554e62a36e3c45e564a9630ed817b9a8975286fbe5a2606f5",
   "hinge": [
     538,
@@ -89,28 +89,7 @@
   "minimum_connected_ratio": 0.65,
   "minimum_mandible_height": 20,
   "outside_articulation_change": false,
-  "residual_clear_polygon": [
-    [
-      435,
-      202
-    ],
-    [
-      552,
-      194
-    ],
-    [
-      552,
-      238
-    ],
-    [
-      468,
-      267
-    ],
-    [
-      435,
-      253
-    ]
-  ],
+  "residual_clear_polygon": null,
   "resting_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/014-present-screen-left/014_ACT014_present_screen_left_resting_beak_alpha.png",
   "resting_sha256": "45d200b694a735c515bd710b7a6f27baecba6b0abad56e38d97ab54647187de5",
   "runtime_admitted": false,
@@ -120,37 +99,29 @@
     "mode": "opaque",
     "neutral_chroma_threshold": 36
   },
-  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/014-present-screen-left/124_ACT124_present_screen_left_speaking_beak_alpha.png",
-  "speaking_sha256": "884f8e398c958ef61e1d9ace5145b4aad5f9911dfad8f9de7c86df5570ee1ac9",
+  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/014-present-screen-left/124_ACT124_present_screen_left_speaking_beak_candidate_pairwise_v4.png",
+  "speaking_sha256": "2bcf9c883aafd77c4b4e4fe8064e351445bca27df51b6d0134e7ca091a9e802b",
   "upper_beak_policy": "immutable_source_pixels",
   "upper_beak_polygon": [
     [
-      445,
-      178
+      435,
+      172
     ],
     [
-      558,
-      178
+      557,
+      172
     ],
     [
-      558,
-      210
+      557,
+      204
     ],
     [
-      540,
-      214
+      501,
+      207
     ],
     [
-      500,
-      221
-    ],
-    [
-      462,
-      230
-    ],
-    [
-      445,
-      228
+      435,
+      209
     ]
   ]
 }

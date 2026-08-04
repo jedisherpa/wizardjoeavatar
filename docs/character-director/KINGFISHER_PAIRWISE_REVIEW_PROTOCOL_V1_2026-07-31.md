@@ -1470,3 +1470,35 @@ Fresh pair 13 evidence:
 The current queue contains 11 fresh internal passes, 53 pending pairs, and 2
 rear views marked not observable. User approval and runtime admission remain
 zero; Pair 14 is the next isolated review gate.
+
+Pair 14 (`present-screen-left`) failed the fresh profile comparison. The legacy
+open frame lengthened and redrew the upper bill several pixels left of the
+closed silhouette, while its green audit treated a 6,250-pixel lower-face
+rectangle as one permissible mouth region.
+
+Five replacements were retained and rejected before acceptance. Candidate 1
+left the closed lower-edge fringe as a third bill line. Candidate 2 cleared
+that fringe but exposed a transparent rear-hinge notch. Candidate 3 filled the
+notch with an artificial dark slab. Candidate 4 restored the donor mouth but
+kept the closed fringe. Candidate 5 removed the fringe and then reintroduced
+the donor's overlong upper edge during its final cavity overlay.
+
+Accepted Candidate 6 replaces one compact lower-beak/cavity polygon, clears
+the closed lower-edge residual, and makes a tight closed-upper-bill restore the
+final operation. Full-size and magnified inspection show the exact closed
+upper-bill length, one continuous cavity, one lower bill, and unchanged
+throat/body geometry. Its audit reports 2,331 changed rendered pixels,
+outside-mouth mean difference `0.0`, registration delta `0`, silhouette IoU
+`0.993514`, and connected-mandible ratio `0.999499`.
+
+Rejected pair 14 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-014-rejected-pre-pairwise-2026-08-04/`
+
+Accepted pair 14 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-014-rebuilt-v1/`
+
+The current queue contains 12 fresh internal passes, 52 pending pairs, and 2
+rear views marked not observable. User approval and runtime admission remain
+zero; Pair 15 is the next isolated review gate.
