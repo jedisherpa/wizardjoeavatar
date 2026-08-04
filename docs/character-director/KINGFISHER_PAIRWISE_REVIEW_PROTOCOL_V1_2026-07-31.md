@@ -2094,3 +2094,25 @@ Fresh pair 38 evidence:
 The current queue contains 36 fresh internal passes, 28 pending pairs, and 2
 rear views marked not observable. User approval and runtime admission remain
 zero; Pair 39 is the next isolated review gate.
+
+Pair 39 (`describe-a-vast-scene`) required a fresh isolated rebuild after the
+4x face and 12x tip review exposed one detached donor pixel at `(550, 146)`.
+The accepted speaking frame removes that remnant and keeps the lower mandible
+as one connected component. It shares the canonical rear hinge, follows the
+long screen-right upper-bill axis, and leaves the eyes, crown, cheeks, throat,
+hoodie, both spread wings, body, feet, scale, registration, and silhouette
+unchanged.
+
+The rebuilt receipt records connected-mandible ratio `1.0`, changed bounding
+box `(477, 133)-(597, 189)`, mandible bounding box `(477, 133)-(597, 189)`, and
+hinge `(484, 175)`. The strict audit reports 2,147 changed rendered pixels,
+outside-mouth mean difference `0.0`, registration delta `0`, and silhouette
+IoU `0.997842`.
+
+Fresh pair 39 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-039-recheck-2026-08-04/`
+
+The current queue contains 37 fresh internal passes, 27 pending pairs, and 2
+rear views marked not observable. User approval and runtime admission remain
+zero; Pair 40 is the next isolated review gate.

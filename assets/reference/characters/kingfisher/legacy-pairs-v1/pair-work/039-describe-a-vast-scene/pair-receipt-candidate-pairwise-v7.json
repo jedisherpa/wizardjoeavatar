@@ -155,7 +155,7 @@
     "mode": "opaque",
     "neutral_chroma_threshold": 36
   },
-  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/039-describe-a-vast-scene/149_ACT149_describe_a_vast_scene_speaking_beak_alpha.png",
+  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/039-describe-a-vast-scene/149_ACT149_describe_a_vast_scene_speaking_beak_candidate_pairwise_v7.png",
   "speaking_sha256": "e18373160b61c0596ffbd881e59861a4131aedfd733ed4b33e4c2d4e3e50e5ab",
   "upper_beak_policy": "immutable_source_pixels",
   "upper_beak_polygon": [
