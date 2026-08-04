@@ -1920,3 +1920,24 @@ Accepted pair 30 evidence:
 The current queue contains 28 fresh internal passes, 36 pending pairs, and 2
 rear views marked not observable. User approval and runtime admission remain
 zero; Pair 31 is the next isolated review gate.
+
+Pair 31 (`compare-two-options`) passed a fresh isolated full-size, 4x, and live
+locked-pair review without another rebuild. The existing pair-specific
+connected-mandible composite opens from rear hinge `(484, 222)`, remains
+directly beneath the immutable upper bill, and ends without a detached edge,
+throat sliver, duplicate mouth, or tip offset. The eye, crown, cheek, throat,
+hoodie, presenting wings, body, feet, scale, registration, and silhouette remain
+fixed.
+
+The accepted receipt records changed bounding box `(481, 221)-(557, 252)` and
+connected-mandible bounding box `(478, 216)-(557, 252)`. Its strict audit
+reports 1,330 changed rendered pixels, outside-mouth mean difference `0.0`,
+registration delta `0`, and silhouette IoU `1.0`.
+
+Fresh pair 31 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-031-recheck-2026-08-04/`
+
+The current queue contains 29 fresh internal passes, 35 pending pairs, and 2
+rear views marked not observable. User approval and runtime admission remain
+zero; Pair 32 is the next isolated review gate.
