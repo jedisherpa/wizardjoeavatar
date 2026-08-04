@@ -1,5 +1,5 @@
 {
-  "changed_rendered_pixels": 4186,
+  "changed_rendered_pixels": 11928,
   "checks": {
     "bounded_articulation_change": true,
     "outside_mouth_stability": true,
@@ -7,12 +7,12 @@
     "stable_registration_bounds": true,
     "visible_mouth_change": true
   },
-  "mouth_mean_abs": 7.673665,
+  "mouth_mean_abs": 16.423488,
   "mouth_region": [
-    405,
-    250,
-    543,
-    328
+    397,
+    213,
+    541,
+    326
   ],
   "outside_mouth_mean_abs": 0.0,
   "passed": true,
@@ -26,13 +26,13 @@
   ],
   "resting_sha256": "682de4327a119aadaf88a06d0321eec690c1d0ab0e264f335190b707f8d47292",
   "schema_version": 2,
-  "silhouette_iou": 0.999987,
-  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/018-detail-downward-point/128_ACT128_detail_downward_point_speaking_beak_candidate_pairwise_v2.png",
+  "silhouette_iou": 0.995267,
+  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/018-detail-downward-point/128_ACT128_detail_downward_point_speaking_beak_alpha.png",
   "speaking_registration_bbox": [
     312,
     97,
     648,
     529
   ],
-  "speaking_sha256": "67514e471839b775bd5d2d02721f3cc342469107a208bd30b10530dc9632adee"
+  "speaking_sha256": "b20254dc2c6e446ae8d20fc829af1b77ac07bc0c8fc86ee94c4b8df6981d2a71"
 }

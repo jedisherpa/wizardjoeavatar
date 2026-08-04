@@ -1579,3 +1579,32 @@ Accepted pair 17 evidence:
 The current queue contains 15 fresh internal passes, 49 pending pairs, and 2
 rear views marked not observable. User approval and runtime admission remain
 zero; Pair 18 is the next isolated review gate.
+
+Pair 18 (`detail-downward-point`) failed the fresh downward-profile
+comparison. The legacy open frame regenerated the complete upper bill,
+nostril, cheek edge, and throat boundary inside an 11,928-pixel lower-face
+rectangle. The old green audit therefore bounded the redraw without proving
+that the closed-frame head structures remained fixed.
+
+Candidate 1 correctly restored the upper bill and head, but its protection
+polygon extended through the mouth and erased almost all of the donor lower
+mandible, leaving a detached sliver. Candidate 2 narrows the immutable restore
+to the approved resting upper bill and starts every other pixel from the
+resting frame. It transfers only one rear-hinge-connected lower mandible and a
+restrained cavity. Full-size and magnified review show the correct downward
+perspective, no detached sliver, no upper-bill redraw, no duplicate edge, and
+no body movement. Its audit reports 4,186 changed rendered pixels,
+outside-mouth mean difference `0.0`, registration delta `0`, silhouette IoU
+`0.999987`, and connected-mandible ratio `1.0`.
+
+Rejected pair 18 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-018-rejected-pre-pairwise-2026-08-04/`
+
+Accepted pair 18 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-018-rebuilt-v1/`
+
+The current queue contains 16 fresh internal passes, 48 pending pairs, and 2
+rear views marked not observable. User approval and runtime admission remain
+zero; Pair 19 is the next isolated review gate.

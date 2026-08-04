@@ -20,27 +20,27 @@
   "cavity_fill_rgba": null,
   "cavity_polygon": [
     [
-      408,
-      267
+      416,
+      270
     ],
     [
       522,
-      237
+      238
     ],
     [
-      532,
-      263
+      531,
+      261
     ],
     [
-      426,
-      321
+      430,
+      317
     ]
   ],
   "cavity_source": "generated",
   "changed_bbox": [
-    408,
-    254,
-    541,
+    417,
+    263,
+    540,
     326
   ],
   "generated_render_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/018-detail-downward-point/128_ACT128_detail_downward_point_speaking_beak_rejected_pre_pairwise_2026-08-04.png",
@@ -51,42 +51,42 @@
   ],
   "hinge_radius": 22,
   "mandible_bbox": [
-    400,
-    229,
-    543,
-    334
+    402,
+    231,
+    542,
+    333
   ],
   "mandible_connected_ratio": 1.0,
-  "mandible_largest_component_pixels": 8513,
-  "mandible_opaque_pixels": 8513,
+  "mandible_largest_component_pixels": 7680,
+  "mandible_opaque_pixels": 7680,
   "mandible_polygon": [
     [
-      397,
+      405,
+      270
+    ],
+    [
+      430,
       255
     ],
     [
-      421,
-      250
+      525,
+      231
     ],
     [
-      526,
-      229
+      541,
+      244
     ],
     [
-      542,
-      242
+      538,
+      279
     ],
     [
-      540,
-      283
+      425,
+      332
     ],
     [
-      423,
-      333
-    ],
-    [
-      399,
-      320
+      402,
+      319
     ]
   ],
   "method": "pair_specific_connected_mandible_patch_v1",
@@ -103,45 +103,45 @@
     "mode": "opaque",
     "neutral_chroma_threshold": 36
   },
-  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/018-detail-downward-point/128_ACT128_detail_downward_point_speaking_beak_candidate_pairwise_v2.png",
-  "speaking_sha256": "67514e471839b775bd5d2d02721f3cc342469107a208bd30b10530dc9632adee",
+  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/018-detail-downward-point/128_ACT128_detail_downward_point_speaking_beak_candidate_pairwise_v1.png",
+  "speaking_sha256": "794edaab2d9f0f34c1c7f477be87aedcb24a878a3cc26cc7e0891957e53b38fe",
   "upper_beak_policy": "immutable_source_pixels",
   "upper_beak_polygon": [
     [
-      393,
-      201
+      394,
+      204
     ],
     [
-      545,
-      201
+      543,
+      204
     ],
     [
-      545,
-      253
+      543,
+      260
     ],
     [
-      527,
-      255
+      526,
+      271
     ],
     [
-      490,
-      267
+      491,
+      278
     ],
     [
-      454,
-      281
+      456,
+      293
     ],
     [
-      423,
-      297
+      425,
+      311
     ],
     [
-      396,
-      312
+      401,
+      327
     ],
     [
-      393,
-      304
+      394,
+      320
     ]
   ]
 }
