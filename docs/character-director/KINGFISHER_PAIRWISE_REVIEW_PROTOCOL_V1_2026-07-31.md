@@ -1424,3 +1424,29 @@ Accepted pair 11 evidence:
 The current queue contains 9 fresh internal passes, 55 pending pairs, and 2
 rear views marked not observable. User approval and runtime admission remain
 zero; Pair 12 is the next isolated review gate.
+
+Pair 12 (`explain-one-point`) looked centered at presentation size, but its
+legacy green audit was another broad-mask false positive: 9,288 rendered
+pixels across a 93 by 126 region replaced the lower face and throat along with
+the mouth. The raised one-point gesture and every non-mouth body pixel were
+kept unchanged.
+
+The accepted reconstruction starts from the immutable closed frame and
+transfers only the color-filtered lower mandible and cavity. Full-size and
+magnified inspection show one centered V-shaped opening, a complete upper-beak
+rim, an unchanged feathered throat, and no duplicate or rectangular beak
+artifact. The replacement changes 2,768 rendered pixels, with outside-mouth
+mean difference `0.0`, registration delta `0`, silhouette IoU `1.0`, and
+connected-mandible ratio `0.812370`.
+
+Rejected pair 12 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-012-rejected-pre-pairwise-2026-08-04/`
+
+Accepted pair 12 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-012-rebuilt-v1/`
+
+The current queue contains 10 fresh internal passes, 54 pending pairs, and 2
+rear views marked not observable. User approval and runtime admission remain
+zero; Pair 13 is the next isolated review gate.
