@@ -2138,3 +2138,25 @@ Fresh pair 40 evidence:
 The current queue contains 38 fresh internal passes, 26 pending pairs, and 2
 rear views marked not observable. User approval and runtime admission remain
 zero; Pair 41 is the next isolated review gate.
+
+Pair 41 (`centered-calm`) passed a fresh isolated full-source, 6x frontal
+mouth, and live locked-beak review without another rebuild. Both mouth corners
+remain fixed while the connected V-shaped lower mandible opens symmetrically
+on the character centerline beneath the immutable frontal upper bill. No
+lateral drift, detached edge, duplicate mouth, imported throat texture, or
+movement in the eyes, crest, cheeks, throat, hoodie, body, feet, scale,
+registration, or silhouette is visible.
+
+The receipt records connected-mandible ratio `1.0`, changed bounding box
+`(443, 231)-(518, 293)`, mandible bounding box `(442, 224)-(519, 297)`, and
+recorded hinge `(447, 232)`. The strict audit reports 2,284 changed rendered
+pixels, outside-mouth mean difference `0.0`, registration delta `0`, and
+silhouette IoU `1.0`.
+
+Fresh pair 41 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-041-recheck-2026-08-04/`
+
+The current queue contains 39 fresh internal passes, 25 pending pairs, and 2
+rear views marked not observable. User approval and runtime admission remain
+zero; Pair 42 is the next isolated review gate.
