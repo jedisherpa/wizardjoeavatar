@@ -170,6 +170,17 @@ class HdPairReviewUiTests(unittest.TestCase):
         self.assertFalse(study_a_diagram["runtime_admitted"])
         self.assertFalse(study_a_diagram["user_approved"])
 
+        write_or_tap = by_ordinal[65]
+        self.assertEqual(
+            write_or_tap["pairwise_full_size_review"]["state"], "pass"
+        )
+        self.assertIn(
+            "evidence/pairwise-full-size/pair-065-v3",
+            write_or_tap["pairwise_full_size_review"]["evidence_path"],
+        )
+        self.assertFalse(write_or_tap["runtime_admitted"])
+        self.assertFalse(write_or_tap["user_approved"])
+
 
 if __name__ == "__main__":
     unittest.main()
