@@ -1,21 +1,25 @@
 {
+  "binary_alpha_pose_count": 176,
+  "canvas": [
+    960,
+    540
+  ],
   "character_id": "kingfisher",
   "index_path": "assets/reference/characters/kingfisher/pair-review-compiled/library-index.json",
-  "index_sha256": "39a5da02b7c10ea6c8b08d73714a6edade8f9a1d6b75cbdf0305dd961eeea0ea",
+  "index_sha256": "7b39c6b14594369347910c330dfda75968dd1039b62bd1a24bbca5567ca194c6",
   "ledger_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-review-ledger.json",
-  "ledger_sha256": "556e69fef48a13b3bb8b263cd0492d55600370b56641e9cbc387c02550da9752",
-  "needs_rebuild_count": 0,
+  "ledger_sha256": "dbd7e29eb710d119d52e3ed99cfbe3c11c942632b01fec160df391ac25b2a8c0",
+  "maximum_registration_bound_delta": 1,
+  "minimum_pair_silhouette_iou": 0.978551,
   "not_observable_count": 2,
-  "pair_artifact_path": "kingfisher_act_001_066_111_176_pair_review-693d1cb8c8d8d80d.wjpose",
-  "pair_artifact_sha256": "693d1cb8c8d8d80d4391fbbecab7b141272413dd41e056361fb423c07a6b851a",
+  "pair_artifact_path": "kingfisher_act_001_066_111_176_pair_review-7b5e3f2683708423.wjpose",
+  "pair_artifact_sha256": "7b5e3f26837084239f09a020fecde5d513ef8e45409fb7986a7e979efcd1f104",
   "pair_count": 66,
-  "pairwise_full_size_pass_count": 63,
-  "passed": false,
-  "pending_count": 1,
+  "paired_sequence_frame_count": 132,
+  "pairwise_full_size_pass_count": 64,
+  "passed": true,
   "pose_count": 176,
   "runtime_admitted_count": 0,
   "schema_version": 1,
-  "user_approved_count": 0,
-  "verification_error": "pair 66 lacks a passing full-size pairwise disposition",
-  "verification_state": "blocked_by_pairwise_full_size_review"
+  "user_approved_count": 0
 }

@@ -1189,32 +1189,52 @@ Accepted internal pair 65 evidence:
 
 `assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-065-v3/`
 
-Complete Kingfisher-focused suite after the pair 65 rebuild: 71 passed. The
+Pair 66 (`select a control`) failed its native close-up review with two long,
+competing bill edges, an oversized white opening, and a lower tip that nearly
+matched the upper tip. The legacy frame is preserved as rejected evidence.
+The replacement was rendered and admitted as one isolated pair.
+
+The original closed frame remains authoritative for the crest, eye, face,
+cheek, throat, hoodie, fishbone mark, extended wing, body, feet, registration,
+and upper bill. A matched render supplies only one shorter connected lower
+mandible and its bounded oral cavity. Native beak-focus, white-background
+full-character, and alternating playback review show one fixed hinge, no
+duplicate edge, no white gap, and no head or body movement. The accepted audit
+reports `1,370` changed rendered pixels, outside-mouth mean difference `0.0`,
+silhouette IoU `0.997451`, connected-mandible ratio `1.0`, and registration
+delta `0`.
+
+Rejected legacy pair 66 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-066-v2/`
+
+Accepted internal pair 66 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-066-v3/`
+
+Complete Kingfisher-focused suite after the pair 66 rebuild: 71 passed. The
 reviewer UI tests are included in that run.
 
-The strict verifier intentionally exits nonzero until all observable pairs
-pass and all rear views are explicitly `not_observable`. It writes a structured
-failure receipt even while blocked:
+The strict verifier now passes because all observable pairs have an internal
+full-size pass and both rear views are explicitly `not_observable`. It writes
+the structured verification receipt here:
 
 `assets/reference/characters/kingfisher/legacy-pairs-v1/review-evidence/pair-review-verification.json`
 
-Current blocker:
-
-`pair 66 lacks a passing full-size pairwise disposition`
-
 Current review artifact:
 
-`kingfisher_act_001_066_111_176_pair_review-693d1cb8c8d8d80d.wjpose`
+`kingfisher_act_001_066_111_176_pair_review-7b5e3f2683708423.wjpose`
 
 Artifact SHA-256:
 
-`693d1cb8c8d8d80d4391fbbecab7b141272413dd41e056361fb423c07a6b851a`
+`7b5e3f26837084239f09a020fecde5d513ef8e45409fb7986a7e979efcd1f104`
 
 Library-index SHA-256:
 
-`39a5da02b7c10ea6c8b08d73714a6edade8f9a1d6b75cbdf0305dd961eeea0ea`
+`7b39c6b14594369347910c330dfda75968dd1039b62bd1a24bbca5567ca194c6`
 
-Queue state: 63 internal full-size passes, 1 pending, 0 needs rebuild, and
+Queue state: 64 internal full-size passes, 0 pending, 0 needs rebuild, and
 2 not observable. Runtime-admitted and user-approved counts remain zero.
 
-This failure is expected and proves the queue is fail-closed.
+The verifier reports `passed: true`. This is an internal visual-review result;
+it does not imply user approval or runtime admission.
