@@ -191,6 +191,33 @@ pair at a time:
 8. Do not proceed to the next pair until the current pair is `pass`,
    `needs_rebuild`, or `not_observable`.
 
+## 2026-08-03 Pairwise Reset
+
+The user reported that many beaks in the current all-poses observer still read
+as misaligned. All 64 visible internal passes were invalidated again without
+deleting their evidence. Pairs 4 and 5 remain `not_observable`; all other
+visible pairs returned to `pending` and remain excluded from runtime admission.
+
+The isolated review server now redirects its legacy
+`?hd-sequence=kingfisher-all` view into the locked side-by-side pair reviewer.
+This prevents the bulk candidate loop from looking like an approved corpus.
+
+Pairs 1 and 2 are the first fresh dispositions under this reset:
+
+- Pair 1 passed a new isolated closed/open review without reconstruction.
+- Pair 2 failed because its lower bill was overextended and did not follow the
+  three-quarter upper-bill axis.
+- Pair 2 was rebuilt as one pair. A generated full-body frame supplied only a
+  compact connected lower-mandible and cavity donor. The canonical closed
+  frame supplied every other pixel, including the eyes, crown, upper bill,
+  chest, hoodie, and body.
+- Pair 2's accepted candidate has zero changes outside its declared mouth
+  masks, registration-bound delta `0`, silhouette IoU `1.0`, connected-
+  mandible ratio `1.0`, and a lower bill that ends behind the upper tip.
+
+Current fail-closed state after this checkpoint: 2 internal pairwise passes,
+62 pending, 2 not observable, 0 user approved, and 0 runtime admitted.
+
 Pair 32 (`cause-and-effect`) is the first candidate rebuilt under this stricter
 loop. Candidate v8 uses a pose-specific generated cavity instead of a flat
 solid fill, while the compositor preserves the canonical body and upper bill.
@@ -1238,3 +1265,63 @@ Queue state: 64 internal full-size passes, 0 pending, 0 needs rebuild, and
 
 The verifier reports `passed: true`. This is an internal visual-review result;
 it does not imply user approval or runtime admission.
+
+## 2026-08-03 Pairwise Reset Continuation
+
+The user-reported beak misalignment invalidated the earlier bulk completion
+state above. The ledger, compiled review sequence, and verifier receipt are the
+authoritative current state; historical passes remain documented only as
+superseded evidence.
+
+Pair 3 (`left-profile`) was recaptured and inspected as one locked full-size
+closed/open pair. The lower bill opens from the rear mouth corner along the
+authored left-facing bill axis, remains behind the upper tip, and leaves the
+eye, crown, throat, hoodie, feet, body, and registration unchanged. Its audit
+reports outside-mouth mean difference `0.0`, registration delta `0`, and
+silhouette IoU `0.979838`.
+
+Fresh pair 3 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-003-recheck-2026-08-03/`
+
+After this isolated review, the queue contains 3 fresh internal passes,
+61 pending pairs, and 2 rear-view pairs marked `not_observable`. User-approved
+and runtime-admitted counts remain zero. The verifier remains intentionally
+blocked by the next pending observable pair.
+
+Pair 6 (`right-profile`) was then recaptured and inspected independently. Its
+lower bill shares the closed frame's rear hinge and right-facing bill axis,
+ends behind the upper tip, and introduces no duplicate edge or non-mouth body
+change. The automated audit reports outside-mouth mean difference `0.0`,
+registration delta `0`, and silhouette IoU `0.978551`.
+
+Fresh pair 6 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-006-recheck-2026-08-03/`
+
+The current queue therefore contains 4 fresh internal passes, 60 pending
+pairs, and 2 not-observable rear views. User approval and runtime admission
+remain closed.
+
+Pair 7 (`front-three-quarter-right`) failed the fresh locked comparison even
+though its legacy broad-region audit was green. The speaking frame had redrawn
+the upper bill on a higher axis, producing a one-pixel registration expansion
+and a visible closed/open snap. That frame and its receipts are preserved as
+rejected evidence.
+
+The replacement uses the closed frame for all body pixels and the complete
+upper bill. The old speaking render contributes only a translated, connected
+lower-mandible patch and bounded cavity. The accepted audit reports
+outside-mouth mean difference `0.0`, registration delta `0`, silhouette IoU
+`0.999960`, and connected-mandible ratio `1.0`.
+
+Rejected pair 7 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-007-rejected-pre-pairwise-2026-08-03/`
+
+Accepted pair 7 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-007-rebuilt-v1/`
+
+The queue now contains 5 fresh internal passes, 59 pending pairs, and 2 rear
+views marked not observable. User approval and runtime admission remain zero.

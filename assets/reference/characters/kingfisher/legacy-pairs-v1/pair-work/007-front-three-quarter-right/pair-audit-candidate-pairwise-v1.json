@@ -27,7 +27,7 @@
   "resting_sha256": "7e87a272a4978b06fa718353c3a11bc4d790f38316275668743adcbc02d1fd23",
   "schema_version": 2,
   "silhouette_iou": 0.99996,
-  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/007-front-three-quarter-right/117_ACT117_front_three_quarter_right_speaking_beak_alpha.png",
+  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/007-front-three-quarter-right/117_ACT117_front_three_quarter_right_speaking_beak_candidate_pairwise_v1.png",
   "speaking_registration_bbox": [
     353,
     97,

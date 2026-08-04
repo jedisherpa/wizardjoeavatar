@@ -21,33 +21,33 @@
   "cavity_polygon": [
     [
       493,
-      235
+      239
     ],
     [
-      520,
-      235
+      518,
+      247
     ],
     [
-      574,
-      265
+      564,
+      273
     ],
     [
-      560,
-      283
+      551,
+      280
     ],
     [
-      530,
-      270
+      518,
+      261
     ],
     [
-      500,
-      252
+      495,
+      249
     ]
   ],
   "cavity_source": "generated_overlay",
   "changed_bbox": [
     490,
-    235,
+    239,
     574,
     293
   ],
@@ -106,8 +106,8 @@
   "resting_sha256": "62f811270aedb6d1fe79b4ddf4e2c81be3886994687014b3c09b30403abee258",
   "runtime_admitted": false,
   "schema_version": 1,
-  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/002-front-three-quarter-left/112_ACT112_front_three_quarter_left_speaking_beak_candidate_pairwise_v2.png",
-  "speaking_sha256": "36fbe2b4532d242eef9237e0fb0129fafe2fa59269eb2bebf5ac88d6faed83da",
+  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/002-front-three-quarter-left/112_ACT112_front_three_quarter_left_speaking_beak_candidate_pairwise_v1.png",
+  "speaking_sha256": "8c0a13a3d95ff1c9217857905440ec4f2b5d220225d1ed44621be78170dc9777",
   "upper_beak_policy": "immutable_source_pixels",
   "upper_beak_polygon": [
     [

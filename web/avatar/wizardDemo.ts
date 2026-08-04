@@ -194,7 +194,7 @@ function fitPairReviewPresentation(
 async function start() {
   const params = new URLSearchParams(location.search);
   const reviewPose = params.get("hd-review");
-  const pairReviewSequence = params.get("hd-pair-review");
+  let pairReviewSequence = params.get("hd-pair-review");
   const reviewSequence = pairReviewSequence || params.get("hd-sequence");
   const reviewPerformance = params.get("hd-performance") === "1";
   if (reviewPose || reviewSequence || reviewPerformance) {
@@ -204,6 +204,14 @@ async function start() {
     const manifest = await profileResponse.json();
     if (!manifest.review_projection || manifest.runtime_admitted) {
       throw new Error("Invalid HD review projection contract");
+    }
+    if (
+      !pairReviewSequence
+      && reviewSequence === "kingfisher-all"
+      && manifest.sequences["kingfisher-paired-beaks-review"]
+    ) {
+      pairReviewSequence = "kingfisher-paired-beaks-review";
+      document.body.dataset.hdPairReviewRedirect = "kingfisher-all";
     }
     const width = Number(manifest.profile.canvas_width);
     const height = Number(manifest.profile.canvas_height);

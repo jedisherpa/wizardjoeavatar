@@ -51,7 +51,7 @@
     456,
     308
   ],
-  "generated_render_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/007-front-three-quarter-right/117_ACT117_front_three_quarter_right_speaking_beak_rejected_pre_pairwise_2026-08-03.png",
+  "generated_render_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/007-front-three-quarter-right/117_ACT117_front_three_quarter_right_speaking_beak_alpha.png",
   "generated_render_sha256": "ab8c07a366b83c9e851784183c4bffebdae71e5aabffb9dcf33568cda9579697",
   "hinge": [
     445,
@@ -102,7 +102,7 @@
   "resting_sha256": "7e87a272a4978b06fa718353c3a11bc4d790f38316275668743adcbc02d1fd23",
   "runtime_admitted": false,
   "schema_version": 1,
-  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/007-front-three-quarter-right/117_ACT117_front_three_quarter_right_speaking_beak_alpha.png",
+  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/007-front-three-quarter-right/117_ACT117_front_three_quarter_right_speaking_beak_candidate_pairwise_v1.png",
   "speaking_sha256": "780c20a02a354f15c338b73c0d6032f3f146f32f3d1ff41ea3bc097b20458329",
   "upper_beak_policy": "immutable_source_pixels",
   "upper_beak_polygon": [
