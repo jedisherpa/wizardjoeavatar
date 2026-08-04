@@ -1,0 +1,62 @@
+{
+  "alignment": {
+    "interpolation": "lanczos_rgb_binary_alpha",
+    "scale": 0.576,
+    "translate_x": -6,
+    "translate_y": 38
+  },
+  "approval_state": "candidate_visual_review",
+  "articulation_bbox": [
+    470,
+    182,
+    572,
+    311
+  ],
+  "articulation_polygon": [
+    [
+      478,
+      188
+    ],
+    [
+      528,
+      182
+    ],
+    [
+      571,
+      200
+    ],
+    [
+      570,
+      278
+    ],
+    [
+      528,
+      310
+    ],
+    [
+      470,
+      270
+    ]
+  ],
+  "canvas": [
+    960,
+    540
+  ],
+  "changed_bbox": [
+    470,
+    182,
+    572,
+    311
+  ],
+  "generated_render_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/011-neutral-speaking-gesture/011_ACT011_neutral_speaking_gesture_speaking_render_raw.png",
+  "generated_render_sha256": "9bb4544b60f476f00c36d9dc529eff1f10822e3ec45cade9c96f98c6fc578a7d",
+  "method": "pose_specific_render_local_articulation_composite_v1",
+  "output_role": "speaking",
+  "outside_articulation_change": false,
+  "resting_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/011-neutral-speaking-gesture/011_ACT011_neutral_speaking_gesture_resting_beak_alpha.png",
+  "resting_sha256": "01a5150478433611e271f3dc9a0db8b0c71e88cafd5f10fdae46020738ddf255",
+  "runtime_admitted": false,
+  "schema_version": 1,
+  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/011-neutral-speaking-gesture/121_ACT121_neutral_speaking_gesture_speaking_beak_alpha.png",
+  "speaking_sha256": "08cf5cf6ab22ee0d476fc7d3387002b219e4e57ffb27cd875558b046c2fac121"
+}

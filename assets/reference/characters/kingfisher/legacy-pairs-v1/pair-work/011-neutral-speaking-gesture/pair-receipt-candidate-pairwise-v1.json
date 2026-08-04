@@ -2,8 +2,8 @@
   "alignment": {
     "interpolation": "lanczos_rgb_binary_alpha",
     "rotation_center": [
-      493,
-      237
+      489,
+      236
     ],
     "rotation_degrees": 0.0,
     "scale": 1.0,
@@ -20,69 +20,69 @@
   "cavity_fill_rgba": null,
   "cavity_polygon": [
     [
-      490,
-      217
+      485,
+      210
     ],
     [
-      567,
-      217
+      569,
+      210
     ],
     [
-      561,
-      256
-    ],
-    [
-      527,
-      292
-    ],
-    [
-      491,
-      256
-    ]
-  ],
-  "cavity_source": "generated_overlay",
-  "changed_bbox": [
-    486,
-    217,
-    568,
-    301
-  ],
-  "generated_render_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/011-neutral-speaking-gesture/121_ACT121_neutral_speaking_gesture_speaking_beak_rejected_pre_pairwise_2026-08-03.png",
-  "generated_render_sha256": "08cf5cf6ab22ee0d476fc7d3387002b219e4e57ffb27cd875558b046c2fac121",
-  "hinge": [
-    493,
-    237
-  ],
-  "hinge_radius": 18,
-  "mandible_bbox": [
-    486,
-    213,
-    571,
-    301
-  ],
-  "mandible_connected_ratio": 0.995627,
-  "mandible_largest_component_pixels": 4554,
-  "mandible_opaque_pixels": 4574,
-  "mandible_polygon": [
-    [
-      487,
-      213
-    ],
-    [
-      570,
-      213
-    ],
-    [
-      565,
-      260
+      564,
+      261
     ],
     [
       527,
-      300
+      297
     ],
     [
       486,
       260
+    ]
+  ],
+  "cavity_source": "generated_overlay",
+  "changed_bbox": [
+    480,
+    210,
+    571,
+    307
+  ],
+  "generated_render_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/011-neutral-speaking-gesture/121_ACT121_neutral_speaking_gesture_speaking_beak_alpha.png",
+  "generated_render_sha256": "08cf5cf6ab22ee0d476fc7d3387002b219e4e57ffb27cd875558b046c2fac121",
+  "hinge": [
+    489,
+    236
+  ],
+  "hinge_radius": 20,
+  "mandible_bbox": [
+    480,
+    204,
+    574,
+    307
+  ],
+  "mandible_connected_ratio": 0.997353,
+  "mandible_largest_component_pixels": 6406,
+  "mandible_opaque_pixels": 6423,
+  "mandible_polygon": [
+    [
+      480,
+      204
+    ],
+    [
+      573,
+      204
+    ],
+    [
+      570,
+      267
+    ],
+    [
+      527,
+      306
+    ],
+    [
+      480,
+      266
     ]
   ],
   "method": "pair_specific_connected_mandible_patch_v1",
@@ -99,33 +99,33 @@
     "mode": "exclude_light_neutral",
     "neutral_chroma_threshold": 55
   },
-  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/011-neutral-speaking-gesture/121_ACT121_neutral_speaking_gesture_speaking_beak_alpha.png",
-  "speaking_sha256": "d3606d8206d46c1b9489203a5e175884eb8ed1a29fce6b86740969ae75eb211c",
+  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/011-neutral-speaking-gesture/121_ACT121_neutral_speaking_gesture_speaking_beak_candidate_pairwise_v1.png",
+  "speaking_sha256": "a618a3d4171b5824c8a20e3d302783cfe035bf5360931b2dba34c09a619df00d",
   "upper_beak_policy": "immutable_source_pixels",
   "upper_beak_polygon": [
     [
-      470,
-      169
+      466,
+      164
     ],
     [
-      581,
-      169
+      584,
+      164
     ],
     [
-      577,
+      580,
       232
     ],
     [
-      554,
-      248
+      555,
+      250
     ],
     [
-      500,
-      248
+      499,
+      250
     ],
     [
-      474,
-      230
+      471,
+      231
     ]
   ]
 }

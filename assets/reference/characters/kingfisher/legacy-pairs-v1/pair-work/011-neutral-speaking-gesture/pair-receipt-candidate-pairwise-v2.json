@@ -47,7 +47,7 @@
     568,
     301
   ],
-  "generated_render_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/011-neutral-speaking-gesture/121_ACT121_neutral_speaking_gesture_speaking_beak_rejected_pre_pairwise_2026-08-03.png",
+  "generated_render_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/011-neutral-speaking-gesture/121_ACT121_neutral_speaking_gesture_speaking_beak_alpha.png",
   "generated_render_sha256": "08cf5cf6ab22ee0d476fc7d3387002b219e4e57ffb27cd875558b046c2fac121",
   "hinge": [
     493,
@@ -99,7 +99,7 @@
     "mode": "exclude_light_neutral",
     "neutral_chroma_threshold": 55
   },
-  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/011-neutral-speaking-gesture/121_ACT121_neutral_speaking_gesture_speaking_beak_alpha.png",
+  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/011-neutral-speaking-gesture/121_ACT121_neutral_speaking_gesture_speaking_beak_candidate_pairwise_v2.png",
   "speaking_sha256": "d3606d8206d46c1b9489203a5e175884eb8ed1a29fce6b86740969ae75eb211c",
   "upper_beak_policy": "immutable_source_pixels",
   "upper_beak_polygon": [

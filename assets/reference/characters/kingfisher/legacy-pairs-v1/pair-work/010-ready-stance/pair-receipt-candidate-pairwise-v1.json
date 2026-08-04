@@ -47,7 +47,7 @@
     514,
     289
   ],
-  "generated_render_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/010-ready-stance/120_ACT120_ready_stance_speaking_beak_rejected_pre_pairwise_2026-08-03.png",
+  "generated_render_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/010-ready-stance/120_ACT120_ready_stance_speaking_beak_alpha.png",
   "generated_render_sha256": "f94c550e26dd87e0da4d243012dbff2f0eb368a4a1f6f4b2888f4ae35311fe4e",
   "hinge": [
     449,
@@ -99,7 +99,7 @@
     "mode": "exclude_light_neutral",
     "neutral_chroma_threshold": 55
   },
-  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/010-ready-stance/120_ACT120_ready_stance_speaking_beak_alpha.png",
+  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/010-ready-stance/120_ACT120_ready_stance_speaking_beak_candidate_pairwise_v1.png",
   "speaking_sha256": "6e1abdf734654c6f316453cc41d7a38b6533c5bb437f565fc01ce24813695be2",
   "upper_beak_policy": "immutable_source_pixels",
   "upper_beak_polygon": [

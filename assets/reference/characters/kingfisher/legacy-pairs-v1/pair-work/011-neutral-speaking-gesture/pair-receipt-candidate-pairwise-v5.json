@@ -2,8 +2,8 @@
   "alignment": {
     "interpolation": "lanczos_rgb_binary_alpha",
     "rotation_center": [
-      493,
-      237
+      496,
+      238
     ],
     "rotation_degrees": 0.0,
     "scale": 1.0,
@@ -20,69 +20,69 @@
   "cavity_fill_rgba": null,
   "cavity_polygon": [
     [
-      490,
-      217
+      493,
+      220
     ],
     [
-      567,
-      217
+      555,
+      220
     ],
     [
-      561,
-      256
+      549,
+      248
     ],
     [
       527,
-      292
+      290
     ],
     [
-      491,
-      256
+      494,
+      254
     ]
   ],
   "cavity_source": "generated_overlay",
   "changed_bbox": [
-    486,
-    217,
-    568,
-    301
+    488,
+    220,
+    556,
+    299
   ],
-  "generated_render_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/011-neutral-speaking-gesture/121_ACT121_neutral_speaking_gesture_speaking_beak_rejected_pre_pairwise_2026-08-03.png",
+  "generated_render_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/011-neutral-speaking-gesture/121_ACT121_neutral_speaking_gesture_speaking_beak_alpha.png",
   "generated_render_sha256": "08cf5cf6ab22ee0d476fc7d3387002b219e4e57ffb27cd875558b046c2fac121",
   "hinge": [
-    493,
-    237
+    496,
+    238
   ],
   "hinge_radius": 18,
   "mandible_bbox": [
-    486,
-    213,
-    571,
-    301
+    488,
+    216,
+    559,
+    299
   ],
-  "mandible_connected_ratio": 0.995627,
-  "mandible_largest_component_pixels": 4554,
-  "mandible_opaque_pixels": 4574,
+  "mandible_connected_ratio": 1.0,
+  "mandible_largest_component_pixels": 3258,
+  "mandible_opaque_pixels": 3258,
   "mandible_polygon": [
     [
-      487,
-      213
+      490,
+      216
     ],
     [
-      570,
-      213
+      558,
+      216
     ],
     [
-      565,
-      260
+      552,
+      251
     ],
     [
       527,
-      300
+      298
     ],
     [
-      486,
-      260
+      488,
+      258
     ]
   ],
   "method": "pair_specific_connected_mandible_patch_v1",
@@ -97,10 +97,10 @@
   "source_mask": {
     "light_threshold": 145,
     "mode": "exclude_light_neutral",
-    "neutral_chroma_threshold": 55
+    "neutral_chroma_threshold": 90
   },
-  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/011-neutral-speaking-gesture/121_ACT121_neutral_speaking_gesture_speaking_beak_alpha.png",
-  "speaking_sha256": "d3606d8206d46c1b9489203a5e175884eb8ed1a29fce6b86740969ae75eb211c",
+  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/011-neutral-speaking-gesture/121_ACT121_neutral_speaking_gesture_speaking_beak_candidate_pairwise_v5.png",
+  "speaking_sha256": "8f4d52ad9c27f6e84b15dfc746ebc2a1bc80764bbd5b9a5f3b15a26ca626b876",
   "upper_beak_policy": "immutable_source_pixels",
   "upper_beak_polygon": [
     [

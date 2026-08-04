@@ -1,0 +1,61 @@
+{
+  "alignment": {
+    "interpolation": "lanczos_rgb_binary_alpha",
+    "scale": 0.5737051792828685,
+    "translate_x": 0,
+    "translate_y": 29
+  },
+  "approval_state": "candidate_visual_review",
+  "articulation_bbox": [
+    434,
+    228,
+    527,
+    311
+  ],
+  "articulation_polygon": [
+    [
+      440,
+      235
+    ],
+    [
+      480,
+      228
+    ],
+    [
+      520,
+      235
+    ],
+    [
+      526,
+      285
+    ],
+    [
+      480,
+      310
+    ],
+    [
+      434,
+      285
+    ]
+  ],
+  "canvas": [
+    960,
+    540
+  ],
+  "changed_bbox": [
+    434,
+    228,
+    527,
+    311
+  ],
+  "generated_render_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/010-ready-stance/010_ACT010_ready_stance_speaking_render_raw.png",
+  "generated_render_sha256": "9a376a3c5ab8cc62b23683785e259c1b4dcc95d90d7c575eee31d652b0071708",
+  "method": "pose_specific_render_local_articulation_composite_v1",
+  "outside_articulation_change": false,
+  "resting_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/010-ready-stance/010_ACT010_ready_stance_resting_beak_alpha.png",
+  "resting_sha256": "c93e40f3fab3fb65feb736c61789dfdaea48fdd7a1c15fab8896b61e11a3e187",
+  "runtime_admitted": false,
+  "schema_version": 1,
+  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/010-ready-stance/120_ACT120_ready_stance_speaking_beak_alpha.png",
+  "speaking_sha256": "f94c550e26dd87e0da4d243012dbff2f0eb368a4a1f6f4b2888f4ae35311fe4e"
+}

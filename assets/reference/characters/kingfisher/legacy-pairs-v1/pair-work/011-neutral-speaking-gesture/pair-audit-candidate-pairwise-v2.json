@@ -27,7 +27,7 @@
   "resting_sha256": "01a5150478433611e271f3dc9a0db8b0c71e88cafd5f10fdae46020738ddf255",
   "schema_version": 2,
   "silhouette_iou": 1.0,
-  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/011-neutral-speaking-gesture/121_ACT121_neutral_speaking_gesture_speaking_beak_alpha.png",
+  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/011-neutral-speaking-gesture/121_ACT121_neutral_speaking_gesture_speaking_beak_candidate_pairwise_v2.png",
   "speaking_registration_bbox": [
     288,
     97,

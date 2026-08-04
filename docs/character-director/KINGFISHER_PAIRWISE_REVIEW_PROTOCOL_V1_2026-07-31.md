@@ -1376,3 +1376,51 @@ Accepted pair 9 evidence:
 The current queue contains 7 fresh internal passes, 57 pending pairs, and 2
 rear views marked not observable. User approval and runtime admission remain
 zero; Pair 10 is the next isolated review gate.
+
+Pair 10 (`ready-stance`) had a visually centered legacy opening, but its green
+audit concealed another oversized articulation patch: 5,806 rendered pixels
+and most of the central throat were replaced inside a 93 by 83 rectangle. The
+legacy mate was therefore preserved as a false-positive rejection rather than
+passed on beak alignment alone.
+
+The accepted reconstruction transfers only the color-filtered mouth geometry
+onto the immutable closed frame. It retains the original upper beak, eyes,
+throat, hoodie, wings, feet, and canvas registration. The replacement changes
+1,537 pixels, with outside-mouth mean difference `0.0`, registration delta
+`0`, silhouette IoU `1.0`, and connected-mandible ratio `0.904784`.
+
+Rejected pair 10 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-010-rejected-pre-pairwise-2026-08-03/`
+
+Accepted pair 10 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-010-rebuilt-v1/`
+
+The current queue contains 8 fresh internal passes, 56 pending pairs, and 2
+rear views marked not observable. User approval and runtime admission remain
+zero; Pair 11 is the next isolated review gate.
+
+Pair 11 (`neutral-speaking-gesture`) failed with the largest false-positive
+region in this continuation: 10,209 rendered pixels across a 102 by 129 box,
+including a broad throat wedge. The acting pose itself was retained exactly.
+
+Five compact candidates were inspected. Candidate 1 remained too broad;
+candidates 3 through 5 cut across the diagonal right beak rim and produced a
+visible vertical edge. Candidate 2 is the accepted reconstruction because it
+keeps the complete centered V-shaped rim without restoring the legacy throat
+wedge. It changes 4,091 pixels, with outside-mouth mean difference `0.0`,
+registration delta `0`, silhouette IoU `1.0`, and connected-mandible ratio
+`0.995627`. Every candidate remains in pair work as rejection evidence.
+
+Rejected pair 11 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-011-rejected-pre-pairwise-2026-08-03/`
+
+Accepted pair 11 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-011-rebuilt-v1/`
+
+The current queue contains 9 fresh internal passes, 55 pending pairs, and 2
+rear views marked not observable. User approval and runtime admission remain
+zero; Pair 12 is the next isolated review gate.
