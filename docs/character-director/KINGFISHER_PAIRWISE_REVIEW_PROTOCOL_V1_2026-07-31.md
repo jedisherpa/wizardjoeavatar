@@ -1554,3 +1554,28 @@ Accepted pair 16 evidence:
 The current queue contains 14 fresh internal passes, 50 pending pairs, and 2
 rear views marked not observable. User approval and runtime admission remain
 zero; Pair 17 is the next isolated review gate.
+
+Pair 17 (`insight-upward-point`) failed the fresh upward-profile comparison.
+The legacy open frame regenerated the complete upper bill inside a 6,555-pixel
+articulation rectangle, allowing the upper silhouette and texture to slide
+during the mouth change.
+
+Accepted Candidate 1 restores the resting upward-left upper bill, eye-side
+hinge, face, and throat pixel-for-pixel. Only one connected lower mandible and
+its restrained cavity come from the rejected donor. Full-size and magnified
+review show a coherent downward jaw rotation, no upper-bill slide, no duplicate
+edge, and no body movement. Its audit reports 1,081 changed rendered pixels,
+outside-mouth mean difference `0.0`, registration delta `0`, silhouette IoU
+`0.995961`, and connected-mandible ratio `0.999438`.
+
+Rejected pair 17 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-017-rejected-pre-pairwise-2026-08-04/`
+
+Accepted pair 17 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-017-rebuilt-v1/`
+
+The current queue contains 15 fresh internal passes, 49 pending pairs, and 2
+rear views marked not observable. User approval and runtime admission remain
+zero; Pair 18 is the next isolated review gate.
