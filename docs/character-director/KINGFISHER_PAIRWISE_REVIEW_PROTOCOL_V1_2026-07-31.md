@@ -2072,3 +2072,25 @@ Fresh pair 37 evidence:
 The current queue contains 35 fresh internal passes, 29 pending pairs, and 2
 rear views marked not observable. User approval and runtime admission remain
 zero; Pair 38 is the next isolated review gate.
+
+Pair 38 (`invitation-to-follow`) passed a fresh isolated full-source, 6x face,
+full-character projector, and live locked-pair review without another rebuild.
+The intentionally restrained lower bill remains joined to the canonical
+screen-left hinge and follows the right-facing upper-bill axis. No detached
+edge, duplicate mouth, imported throat texture, or movement in the eyes,
+crown, cheeks, throat, hoodie, extended-wing gesture, body, feet, scale,
+registration, or silhouette is visible.
+
+The receipt records connected-mandible ratio `1.0`, changed bounding box
+`(439, 223)-(502, 258)`, mandible bounding box
+`(438, 219)-(502, 258)`, and hinge `(443, 229)`. The strict audit reports
+1,413 changed rendered pixels, outside-mouth mean difference `0.0`,
+registration delta `0`, and silhouette IoU `0.999873`.
+
+Fresh pair 38 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-038-recheck-2026-08-04/`
+
+The current queue contains 36 fresh internal passes, 28 pending pairs, and 2
+rear views marked not observable. User approval and runtime admission remain
+zero; Pair 39 is the next isolated review gate.
