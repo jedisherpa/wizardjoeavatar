@@ -1963,3 +1963,24 @@ Fresh pair 32 evidence:
 The current queue contains 30 fresh internal passes, 34 pending pairs, and 2
 rear views marked not observable. User approval and runtime admission remain
 zero; Pair 33 is the next isolated review gate.
+
+Pair 33 (`count-one`) passed a fresh isolated full-source, 4x, and live
+locked-pair review without another rebuild. Its long side-facing lower bill
+joins the canonical rear hinge `(437, 220)`, follows the fixed upper-bill axis,
+and terminates beneath the approved tip. No detached edge, duplicate mouth,
+throat sliver, imported face texture, or movement in the eye, crown, cheek,
+throat, hoodie, raised wing, body, feet, scale, registration, or silhouette is
+visible.
+
+The receipt records connected-mandible ratio `1.0`, changed and mandible
+bounding box `(430, 214)-(515, 254)`. The strict audit reports 944 changed
+rendered pixels, outside-mouth mean difference `0.0`, registration delta `0`,
+and silhouette IoU `1.0`.
+
+Fresh pair 33 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-033-recheck-2026-08-04/`
+
+The current queue contains 31 fresh internal passes, 33 pending pairs, and 2
+rear views marked not observable. User approval and runtime admission remain
+zero; Pair 34 is the next isolated review gate.
