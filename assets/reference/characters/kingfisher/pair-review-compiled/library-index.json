@@ -14,7 +14,7 @@
   "legacy_pair_review": {
     "approval_state": "candidate_visual_review",
     "ledger_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-review-ledger.json",
-    "ledger_sha256": "0e828613fa9c8ceb6109e0e6e41f31a591587fbbe1305fd01b09152940bb872b",
+    "ledger_sha256": "bb88d29e7023aefffd726750f687c2ec55f6cdfe58a7e786cd523af4a77617c0",
     "pair_count": 66,
     "pairs": [
       {
@@ -319,22 +319,22 @@
       },
       {
         "audit_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/016-point-to-viewer/pair-audit.json",
-        "audit_sha256": "d53c24ae2e831dd0c39f163e6df1a1900b93332a5d5fda4b03a93a1fb5aa4180",
+        "audit_sha256": "7f688759695871953617153f4c1f6295ed2599c9ab8e111f453a5805771039b2",
         "automated_audit_passed": true,
         "ordinal": 16,
         "pairwise_full_size_review": {
-          "evidence_path": "",
+          "evidence_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-016-rebuilt-v1",
           "protocol_id": "kingfisher-full-size-pairwise-v1",
-          "state": "pending"
+          "state": "pass"
         },
         "receipt_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/016-point-to-viewer/pair-receipt.json",
-        "receipt_sha256": "22f6613c01bf865dd85e78f6e9db32dee850cbddcbc111de839f03278bc63b29",
+        "receipt_sha256": "f11f43845b9474764d8f5e9d44598e4ffc2a487046b25191fa21c5a1435dfaf8",
         "resting_pose_id": "kingfisher.act.016.point-to-viewer",
         "resting_sha256": "dca18fa72b0f048aca524e217fa0d367d42c31606198430ddfcf6e6cd76c4672",
         "runtime_admitted": false,
         "speaking_ordinal": 126,
         "speaking_pose_id": "kingfisher.act.126.point-to-viewer-speaking-beak",
-        "speaking_sha256": "3083eff3d868e87ceccce6ea6305471031021cf856dc3cd3e0108ac96fc15f01",
+        "speaking_sha256": "8276eb7d2e5e5d5de90e5324c5efa39026070074dcd34bf4f5cba28fed9d836c",
         "user_approved": false
       },
       {
@@ -1342,8 +1342,8 @@
       "complete": false,
       "needs_rebuild_count": 0,
       "not_observable_count": 2,
-      "pass_count": 13,
-      "pending_count": 51
+      "pass_count": 14,
+      "pending_count": 50
     },
     "review_projection": true,
     "runtime_admitted": false,
@@ -1857,7 +1857,7 @@
         "pass",
         "pass",
         "pass",
-        "pending",
+        "pass",
         "pending",
         "pending",
         "pending",
@@ -2285,8 +2285,8 @@
     },
     {
       "approval_state": "candidate_visual_review",
-      "bytes": 28584451,
-      "path": "kingfisher_act_001_066_111_176_pair_review-7fe837082beb495c.wjpose",
+      "bytes": 28584244,
+      "path": "kingfisher_act_001_066_111_176_pair_review-d018a487f9846848.wjpose",
       "pose_count": 132,
       "pose_ids": [
         "kingfisher.act.001.neutral-front",
@@ -2424,7 +2424,7 @@
       ],
       "review_projection": true,
       "runtime_admitted": false,
-      "sha256": "7fe837082beb495c143a9746487b9ba71e960be7f111ddc645eb4c460eabfb69",
+      "sha256": "d018a487f9846848d31d084c1ece4c7ba6ed1bb41e7728021e876ac979a6b7ce",
       "shard_id": "kingfisher_act_001_066_111_176_pair_review",
       "source": "kingfisher_pair_specific_beak_review_v1"
     }

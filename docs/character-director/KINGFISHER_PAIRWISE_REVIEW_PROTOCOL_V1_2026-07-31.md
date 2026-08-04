@@ -1529,3 +1529,28 @@ Accepted pair 15 evidence:
 The current queue contains 13 fresh internal passes, 51 pending pairs, and 2
 rear views marked not observable. User approval and runtime admission remain
 zero; Pair 16 is the next isolated review gate.
+
+Pair 16 (`point-to-viewer`) failed the fresh frontal comparison. The legacy
+open frame regenerated both side plates and the central upper bill inside an
+8,693-pixel face rectangle. This made the whole beak assembly expand during
+speech even though the body-registration audit remained green.
+
+Accepted Candidate 1 uses the legacy open frame only for the lower V-shaped
+mandible and cavity. The closed frame supplies the immutable eyes, cheeks,
+side plates, and central upper bill. Full-size and magnified review show a
+centered lower opening with bilateral hinge alignment, no duplicate edge, no
+face expansion, and no body movement. Its audit reports 4,470 changed rendered
+pixels, outside-mouth mean difference `0.0`, registration delta `0`,
+silhouette IoU `1.0`, and connected-mandible ratio `1.0`.
+
+Rejected pair 16 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-016-rejected-pre-pairwise-2026-08-04/`
+
+Accepted pair 16 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-016-rebuilt-v1/`
+
+The current queue contains 14 fresh internal passes, 50 pending pairs, and 2
+rear views marked not observable. User approval and runtime admission remain
+zero; Pair 17 is the next isolated review gate.
