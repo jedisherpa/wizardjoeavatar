@@ -1450,3 +1450,23 @@ Accepted pair 12 evidence:
 The current queue contains 10 fresh internal passes, 54 pending pairs, and 2
 rear views marked not observable. User approval and runtime admission remain
 zero; Pair 13 is the next isolated review gate.
+
+Pair 13 (`balance-two-ideas`) did not require another reconstruction. Its
+existing frame is already a pair-specific connected-mandible composite rather
+than a broad legacy mask. Full-size and nearest-neighbor inspection confirm
+that the upper bill, eyes, crown, wings, hoodie, feet, canvas, and body
+registration remain locked. The lower mandible's diagonal perspective is
+authored anatomy: it stays hinge-connected and its tip remains centered, with
+no detached duplicate edge.
+
+The existing audit reports 3,643 changed rendered pixels, outside-mouth mean
+difference `0.0`, registration delta `0`, silhouette IoU `1.0`, and
+connected-mandible ratio `1.0`.
+
+Fresh pair 13 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-013-fresh-pass-2026-08-04/`
+
+The current queue contains 11 fresh internal passes, 53 pending pairs, and 2
+rear views marked not observable. User approval and runtime admission remain
+zero; Pair 14 is the next isolated review gate.
