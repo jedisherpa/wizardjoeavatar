@@ -148,6 +148,17 @@ class HdPairReviewUiTests(unittest.TestCase):
         self.assertFalse(sudden_idea["runtime_admitted"])
         self.assertFalse(sudden_idea["user_approved"])
 
+        read_a_panel = by_ordinal[63]
+        self.assertEqual(
+            read_a_panel["pairwise_full_size_review"]["state"], "pass"
+        )
+        self.assertIn(
+            "evidence/pairwise-full-size/pair-063-v4",
+            read_a_panel["pairwise_full_size_review"]["evidence_path"],
+        )
+        self.assertFalse(read_a_panel["runtime_admitted"])
+        self.assertFalse(read_a_panel["user_approved"])
+
 
 if __name__ == "__main__":
     unittest.main()

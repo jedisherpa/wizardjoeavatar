@@ -1110,7 +1110,36 @@ cavity underlays and generated oral detail can be layered after canonical
 upper-bill restoration without changing legacy `solid`, `generated`, or
 `generated_overlay` behavior.
 
-Complete Kingfisher-focused suite after the pair 62 rebuild: 71 passed. The
+Pair 63 (`read a panel`) confirmed the user's concern about the old batch
+process. Its legacy speaking frame extended the bill far past the closed tip
+and split the mouth into multiple competing edges. The first deterministic
+rotation replacement was also rejected after playback because its cavity read
+as a heavy black bar. Both failures remain preserved as evidence.
+
+The accepted replacement was rebuilt as one isolated pair. A fresh matched
+render supplies only a tightly masked lower mandible and its oral detail. The
+closed frame remains authoritative for the crest, eye, face, cheek, throat,
+hoodie, body, stance, registration, and upper beak. The admitted mask excludes
+all donor throat feathers; the lower tip remains behind the immutable upper
+tip. Native beak-focus, white-background full-character, and alternating
+playback review show one fixed hinge and no duplicate edge or head movement.
+The accepted audit reports `1,180` changed rendered pixels, outside-mouth mean
+difference `0.0`, silhouette IoU `0.997219`, connected-mandible ratio `1.0`,
+and registration delta `0`.
+
+Rejected legacy pair 63 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-063-v2/`
+
+Rejected heavy-cavity pair 63 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-063-v3/`
+
+Accepted internal pair 63 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-063-v4/`
+
+Complete Kingfisher-focused suite after the pair 63 rebuild: 71 passed. The
 reviewer UI tests are included in that run.
 
 The strict verifier intentionally exits nonzero until all observable pairs
@@ -1121,21 +1150,21 @@ failure receipt even while blocked:
 
 Current blocker:
 
-`pair 63 lacks a passing full-size pairwise disposition`
+`pair 64 lacks a passing full-size pairwise disposition`
 
 Current review artifact:
 
-`kingfisher_act_001_066_111_176_pair_review-796b352538f055a1.wjpose`
+`kingfisher_act_001_066_111_176_pair_review-9a0b19aaa0be7ed2.wjpose`
 
 Artifact SHA-256:
 
-`796b352538f055a1c93ad67ee8fe3bff4554a7a988930cc7d32fa16304aaac28`
+`9a0b19aaa0be7ed22f4e239bbdefbfcea047190fa87099d2e9e5ecbc3e37b8c0`
 
 Library-index SHA-256:
 
-`a2737a4dfb86310c4368e7a712322dad5ea69c11e6674d4f3c9c1106a0c9df0c`
+`949deedc6ad0a5a9cb38f690ca926b5e51cf19a147c85e25658e3449673d1b32`
 
-Queue state: 60 internal full-size passes, 4 pending, 0 needs rebuild, and
+Queue state: 61 internal full-size passes, 3 pending, 0 needs rebuild, and
 2 not observable. Runtime-admitted and user-approved counts remain zero.
 
 This failure is expected and proves the queue is fail-closed.
