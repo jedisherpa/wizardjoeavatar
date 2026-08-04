@@ -1842,3 +1842,23 @@ Accepted pair 27 evidence:
 The current queue contains 25 fresh internal passes, 39 pending pairs, and 2
 rear views marked not observable. User approval and runtime admission remain
 zero; Pair 28 is the next isolated review gate.
+
+Pair 28 (`strong-declaration`) passed a fresh isolated full-size, 4x, and live
+locked-pair review without another rebuild. The larger opening is appropriate
+to the emphatic pose, remains centered beneath the immutable upper bill, and
+meets the same face geometry at both rear corners. The crown, eyes, cheeks,
+throat feathers, raised wing, hoodie, body, feet, scale, and registration remain
+fixed, with no second mouth, detached edge, or imported texture.
+
+Its existing pair-specific receipt records hinge `(539, 222)`, mandible and
+changed bounding box `(534, 218)-(581, 269)`, and connected-mandible ratio
+`1.0`. The existing audit reports 887 changed rendered pixels, outside-mouth
+mean difference `0.0`, registration delta `0`, and silhouette IoU `1.0`.
+
+Fresh pair 28 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-028-recheck-2026-08-04/`
+
+The current queue contains 26 fresh internal passes, 38 pending pairs, and 2
+rear views marked not observable. User approval and runtime admission remain
+zero; Pair 29 is the next isolated review gate.
