@@ -39,7 +39,7 @@
   "cavity_source": "generated",
   "changed_bbox": [
     480,
-    266,
+    273,
     595,
     333
   ],
@@ -99,8 +99,8 @@
     "mode": "opaque",
     "neutral_chroma_threshold": 36
   },
-  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/020-lean-in-listening/130_ACT130_lean_in_listening_speaking_beak_candidate_pairwise_v3.png",
-  "speaking_sha256": "b4f0e658d52f4a109d0abe920cc0d944cc534b3b24f668f0a4ae172f05880298",
+  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/020-lean-in-listening/130_ACT130_lean_in_listening_speaking_beak_candidate_pairwise_v1.png",
+  "speaking_sha256": "b971d2eb5d913b873957efa3a503dd1ffc2c69ae45a59a62565b60bd0589e211",
   "upper_beak_policy": "immutable_source_pixels",
   "upper_beak_polygon": [
     [
@@ -113,23 +113,23 @@
     ],
     [
       600,
-      265
+      272
     ],
     [
       580,
-      266
+      273
     ],
     [
       548,
-      282
+      294
     ],
     [
       514,
-      266
+      272
     ],
     [
       476,
-      265
+      272
     ]
   ]
 }

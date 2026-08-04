@@ -1635,3 +1635,29 @@ Accepted pair 19 evidence:
 The current queue contains 17 fresh internal passes, 47 pending pairs, and 2
 rear views marked not observable. User approval and runtime admission remain
 zero; Pair 20 is the next isolated review gate.
+
+Pair 20 (`lean-in-listening`) retained a strong expression but failed the
+strict structural comparison. Its legacy 9,412-pixel face patch regenerated
+the central upper-bill triangle together with the lower V mouth. The edit was
+bounded, but the approved closed bill was not immutable.
+
+Candidates 1 and 2 restored too much of the central bill and compressed the
+speaking mouth into a thin line. Accepted Candidate 3 tightens the immutable
+restore to the actual resting upper-bill triangle and retains the donor's
+centered V-shaped lower mouth. Full-size and magnified review show bilateral
+hinge coherence, a readable opening, no upper-bill redraw, no duplicate line,
+and no body movement. Its audit reports 5,837 changed rendered pixels,
+outside-mouth mean difference `0.0`, registration delta `0`, silhouette IoU
+`1.0`, and connected-mandible ratio `1.0`.
+
+Rejected pair 20 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-020-rejected-pre-pairwise-2026-08-04/`
+
+Accepted pair 20 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-020-rebuilt-v1/`
+
+The current queue contains 18 fresh internal passes, 46 pending pairs, and 2
+rear views marked not observable. User approval and runtime admission remain
+zero; Pair 21 is the next isolated review gate.
