@@ -1814,3 +1814,31 @@ Accepted pair 26 evidence:
 The current queue contains 24 fresh internal passes, 40 pending pairs, and 2
 rear views marked not observable. User approval and runtime admission remain
 zero; Pair 27 is the next isolated review gate.
+
+Pair 27 (`intimate-confidence`) failed its fresh locked-pair and 4x review. Its
+main lower mandible was connected, but the donor mask extended past the
+screen-right rear hinge and left a thin dark hook in the white throat. The old
+receipt also labeled `(455, 263)`, near the bill tip, as the hinge even though
+the tilted pose's anatomical rear hinge is on screen-right.
+
+Accepted Candidate 4 starts from the approved closed frame and preserves the
+tilted crown, eyes, cheeks, complete upper bill, throat, hoodie, held-in wings,
+body, feet, scale, and registration. Its donor polygon is tightened from a
+screen-right extent of `516` to `503`, neutral-light throat pixels are excluded,
+and the receipt records the actual rear hinge at `(497, 263)` with radius `14`.
+The connected lower mandible terminates at that hinge without a dark sliver or
+duplicate edge. The tighter audit reports 998 changed rendered pixels,
+outside-mouth mean difference `0.0`, registration delta `0`, silhouette IoU
+`1.0`, and connected-mandible ratio `1.0`.
+
+Rejected pair 27 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-027-rejected-right-hinge-sliver-2026-08-04/`
+
+Accepted pair 27 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-027-rebuilt-v4-true-rear-hinge/`
+
+The current queue contains 25 fresh internal passes, 39 pending pairs, and 2
+rear views marked not observable. User approval and runtime admission remain
+zero; Pair 28 is the next isolated review gate.

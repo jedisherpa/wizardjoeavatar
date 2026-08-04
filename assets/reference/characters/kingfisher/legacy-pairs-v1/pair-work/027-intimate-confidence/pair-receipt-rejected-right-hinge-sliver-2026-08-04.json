@@ -1,11 +1,6 @@
 {
   "alignment": {
     "interpolation": "lanczos_rgb_binary_alpha",
-    "rotation_center": [
-      497,
-      263
-    ],
-    "rotation_degrees": 0.0,
     "scale": 0.5,
     "scale_x": 0.576,
     "scale_y": 0.5,
@@ -17,18 +12,17 @@
     960,
     540
   ],
-  "cavity_fill_rgba": null,
   "cavity_polygon": [
     [
       454,
       254
     ],
     [
-      500,
+      510,
       254
     ],
     [
-      497,
+      503,
       269
     ],
     [
@@ -44,41 +38,40 @@
       262
     ]
   ],
-  "cavity_source": "generated",
   "changed_bbox": [
     448,
     255,
-    502,
+    514,
     292
   ],
   "generated_render_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/027-intimate-confidence/137_ACT137_intimate_confidence_speaking_render_pairwise_v2.png",
   "generated_render_sha256": "3645bd3230fc0495b94662688260a39923e944090ebec38fa7fc31b22fc9bcde",
   "hinge": [
-    497,
+    455,
     263
   ],
-  "hinge_radius": 14,
+  "hinge_radius": 18,
   "mandible_bbox": [
     448,
     248,
-    504,
+    517,
     292
   ],
   "mandible_connected_ratio": 1.0,
-  "mandible_largest_component_pixels": 1868,
-  "mandible_opaque_pixels": 1868,
+  "mandible_largest_component_pixels": 2246,
+  "mandible_opaque_pixels": 2246,
   "mandible_polygon": [
     [
       448,
       248
     ],
     [
-      503,
+      516,
       248
     ],
     [
-      500,
-      274
+      508,
+      276
     ],
     [
       486,
@@ -102,13 +95,8 @@
   "resting_sha256": "5b452215c716a16d05d217e0571829e29dc15897c4d0590496c81dfff838ee60",
   "runtime_admitted": false,
   "schema_version": 1,
-  "source_mask": {
-    "light_threshold": 180,
-    "mode": "exclude_light_neutral",
-    "neutral_chroma_threshold": 36
-  },
-  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/027-intimate-confidence/137_ACT137_intimate_confidence_speaking_candidate_pairwise_v4_true_rear_hinge.png",
-  "speaking_sha256": "d0327018802fa843e84fff77fd3581726bcc5b085c4a8442bdd4f5b7d05bc969",
+  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/027-intimate-confidence/137_ACT137_intimate_confidence_speaking_beak_alpha.png",
+  "speaking_sha256": "4b0a2f675ceba31546e6faac4a9b14c5c80a6c85019ac91934812c0e58901311",
   "upper_beak_policy": "immutable_source_pixels",
   "upper_beak_polygon": [
     [
