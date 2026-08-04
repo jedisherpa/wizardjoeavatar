@@ -2027,3 +2027,26 @@ Fresh pair 35 evidence:
 The current queue contains 33 fresh internal passes, 31 pending pairs, and 2
 rear views marked not observable. User approval and runtime admission remain
 zero; Pair 36 is the next isolated review gate.
+
+Pair 36 (`protective-boundary`) passed a fresh isolated full-source, 4x face,
+16x rear-hinge, and live locked-pair review without another rebuild. The small
+brown mark at the screen-left mouth corner is present in the approved closed
+frame and is canonical beak-corner detail, not a detached donor remnant. The
+lower mandible stays connected through the dark rear hinge and drops beneath
+the immutable upper bill. No duplicate mouth, imported throat texture, or
+movement in the eyes, crown, cheeks, throat, hoodie, defensive wing gesture,
+body, feet, scale, registration, or silhouette is visible.
+
+The receipt records connected-mandible ratio `1.0`, changed bounding box
+`(361, 217)-(438, 271)`, mandible bounding box
+`(360, 213)-(439, 271)`, and hinge `(370, 225)`. The strict audit reports
+1,878 changed rendered pixels, outside-mouth mean difference `0.0`,
+registration delta `0`, and silhouette IoU `1.0`.
+
+Fresh pair 36 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-036-recheck-2026-08-04/`
+
+The current queue contains 34 fresh internal passes, 30 pending pairs, and 2
+rear views marked not observable. User approval and runtime admission remain
+zero; Pair 37 is the next isolated review gate.
