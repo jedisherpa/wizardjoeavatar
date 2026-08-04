@@ -1661,3 +1661,24 @@ Accepted pair 20 evidence:
 The current queue contains 18 fresh internal passes, 46 pending pairs, and 2
 rear views marked not observable. User approval and runtime admission remain
 zero; Pair 21 is the next isolated review gate.
+
+Pair 21 (`skeptical-listening`) required a fresh review but not another
+rebuild. Unlike the legacy broad-mask pairs, its current speaking mate already
+comes from the pair-specific connected-mandible compositor. The receipt records
+an immutable upper-beak source region, a connected-mandible ratio of `1.0`, and
+zero changes outside the articulation region.
+
+Fresh full-size and magnified inspection confirms that the skeptical eye line,
+crown, cheek, throat, folded wing, hoodie, body, scale, and registration remain
+fixed. One lower bill opens from the visible rear hinge beneath a stable upper
+silhouette, with no detached sliver, duplicate edge, or body drift. Its existing
+audit reports 5,621 changed rendered pixels, outside-mouth mean difference
+`0.0`, registration delta `0`, and silhouette IoU `0.999443`.
+
+Fresh pair 21 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-021-recheck-2026-08-04/`
+
+The current queue contains 19 fresh internal passes, 45 pending pairs, and 2
+rear views marked not observable. User approval and runtime admission remain
+zero; Pair 22 is the next isolated review gate.
