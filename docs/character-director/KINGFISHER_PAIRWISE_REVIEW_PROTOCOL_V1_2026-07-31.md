@@ -1710,3 +1710,25 @@ Accepted pair 22 evidence:
 The current queue contains 20 fresh internal passes, 44 pending pairs, and 2
 rear views marked not observable. User approval and runtime admission remain
 zero; Pair 23 is the next isolated review gate.
+
+Pair 23 (`emphatic-agreement`) required a fresh isolated review but not another
+rebuild. Its current speaking mate already comes from the pair-specific
+connected-mandible compositor rather than a broad generated face patch. The
+receipt records an immutable closed-frame upper bill, connected-mandible ratio
+`1.0`, and zero changes outside the articulation region.
+
+Fresh full-size and 4x beak inspection confirms that the crown, eyes, cheek
+plates, throat, torso, wings, feet, scale, and registration remain fixed. One
+centered lower mandible opens from the authored hinge beneath the unchanged
+upper bill, with no lateral tip jump, duplicate edge, detached sliver, or body
+drift. Its existing audit reports 8,881 changed rendered pixels,
+outside-mouth mean difference `0.0`, registration delta `0`, and silhouette
+IoU `1.0`.
+
+Fresh pair 23 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-023-recheck-2026-08-04/`
+
+The current queue contains 21 fresh internal passes, 43 pending pairs, and 2
+rear views marked not observable. User approval and runtime admission remain
+zero; Pair 24 is the next isolated review gate.
