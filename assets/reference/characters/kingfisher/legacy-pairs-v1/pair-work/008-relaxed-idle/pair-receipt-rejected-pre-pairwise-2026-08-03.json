@@ -1,0 +1,61 @@
+{
+  "alignment": {
+    "interpolation": "lanczos_rgb_binary_alpha",
+    "scale": 0.5783132530120482,
+    "translate_x": -27,
+    "translate_y": 18
+  },
+  "approval_state": "candidate_visual_review",
+  "articulation_bbox": [
+    348,
+    230,
+    481,
+    316
+  ],
+  "articulation_polygon": [
+    [
+      365,
+      247
+    ],
+    [
+      420,
+      230
+    ],
+    [
+      475,
+      244
+    ],
+    [
+      480,
+      280
+    ],
+    [
+      435,
+      315
+    ],
+    [
+      348,
+      310
+    ]
+  ],
+  "canvas": [
+    960,
+    540
+  ],
+  "changed_bbox": [
+    362,
+    230,
+    481,
+    316
+  ],
+  "generated_render_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/008-relaxed-idle/008_ACT008_relaxed_idle_speaking_render_raw.png",
+  "generated_render_sha256": "eb4a43b6ec49d3fd02364ce69b03827e03ac20b0668a5f4373e51646e77ca760",
+  "method": "pose_specific_render_local_articulation_composite_v1",
+  "outside_articulation_change": false,
+  "resting_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/008-relaxed-idle/008_ACT008_relaxed_idle_resting_beak_alpha.png",
+  "resting_sha256": "aef5ed2f502da97ab3de58f25a36e92ba416536803fbc6dab792c14346e71518",
+  "runtime_admitted": false,
+  "schema_version": 1,
+  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/008-relaxed-idle/118_ACT118_relaxed_idle_speaking_beak_alpha.png",
+  "speaking_sha256": "d2143ff020cea717ed9137c174686eff356a83add722e64ab776f55c2a2e038a"
+}

@@ -3,14 +3,14 @@
     "interpolation": "lanczos_rgb_binary_alpha",
     "rotation_center": [
       439,
-      250
+      245
     ],
     "rotation_degrees": 0.0,
     "scale": 1.0,
     "scale_x": 1.0,
     "scale_y": 1.0,
     "translate_x": 0,
-    "translate_y": 5
+    "translate_y": 0
   },
   "approval_state": "candidate_visual_review",
   "canvas": [
@@ -25,110 +25,85 @@
     ],
     [
       440,
-      238
+      236
     ],
     [
-      450,
-      247
+      449,
+      245
     ],
     [
       429,
-      263
+      257
     ],
     [
       368,
-      277
+      272
     ],
     [
-      376,
-      258
+      380,
+      257
     ]
   ],
   "cavity_source": "generated_overlay",
   "changed_bbox": [
-    375,
-    238,
-    454,
-    275
+    379,
+    236,
+    450,
+    270
   ],
-  "generated_render_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/008-relaxed-idle/118_ACT118_relaxed_idle_speaking_beak_rejected_pre_pairwise_2026-08-03.png",
+  "generated_render_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/008-relaxed-idle/118_ACT118_relaxed_idle_speaking_beak_alpha.png",
   "generated_render_sha256": "d2143ff020cea717ed9137c174686eff356a83add722e64ab776f55c2a2e038a",
   "hinge": [
     439,
-    250
+    245
   ],
   "hinge_radius": 10,
   "mandible_bbox": [
     376,
-    242,
+    238,
     454,
-    275
+    270
   ],
   "mandible_connected_ratio": 1.0,
-  "mandible_largest_component_pixels": 1108,
-  "mandible_opaque_pixels": 1108,
+  "mandible_largest_component_pixels": 1031,
+  "mandible_opaque_pixels": 1031,
   "mandible_polygon": [
     [
       434,
-      242
+      238
     ],
     [
       453,
-      248
+      244
     ],
     [
       433,
-      266
+      260
     ],
     [
       366,
-      282
+      277
     ],
     [
       359,
-      278
+      273
     ],
     [
       377,
-      260
+      255
     ]
   ],
   "method": "pair_specific_connected_mandible_patch_v1",
   "minimum_connected_ratio": 0.9,
   "minimum_mandible_height": 10,
   "outside_articulation_change": false,
-  "residual_clear_polygon": [
-    [
-      357,
-      243
-    ],
-    [
-      447,
-      239
-    ],
-    [
-      450,
-      253
-    ],
-    [
-      416,
-      266
-    ],
-    [
-      360,
-      274
-    ],
-    [
-      353,
-      263
-    ]
-  ],
+  "residual_clear_polygon": null,
   "resting_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/008-relaxed-idle/008_ACT008_relaxed_idle_resting_beak_alpha.png",
   "resting_sha256": "aef5ed2f502da97ab3de58f25a36e92ba416536803fbc6dab792c14346e71518",
   "runtime_admitted": false,
   "schema_version": 1,
-  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/008-relaxed-idle/118_ACT118_relaxed_idle_speaking_beak_alpha.png",
-  "speaking_sha256": "628efc0df78675867d03cd52a97ff4afa33e43511728ff1c767339ca3a1a4e95",
+  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/008-relaxed-idle/118_ACT118_relaxed_idle_speaking_beak_candidate_pairwise_v1.png",
+  "speaking_sha256": "d7f5e4ed8e1febc4372f6f4531aa19a763d3d7ba474b427d1f4200876ea44302",
   "upper_beak_policy": "immutable_source_pixels",
   "upper_beak_polygon": [
     [
@@ -141,15 +116,15 @@
     ],
     [
       457,
-      244
+      253
     ],
     [
-      414,
-      247
+      412,
+      263
     ],
     [
       357,
-      254
+      275
     ],
     [
       353,

@@ -27,7 +27,7 @@
   "resting_sha256": "aef5ed2f502da97ab3de58f25a36e92ba416536803fbc6dab792c14346e71518",
   "schema_version": 2,
   "silhouette_iou": 0.995701,
-  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/008-relaxed-idle/118_ACT118_relaxed_idle_speaking_beak_alpha.png",
+  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/008-relaxed-idle/118_ACT118_relaxed_idle_speaking_beak_candidate_pairwise_v3.png",
   "speaking_registration_bbox": [
     362,
     97,

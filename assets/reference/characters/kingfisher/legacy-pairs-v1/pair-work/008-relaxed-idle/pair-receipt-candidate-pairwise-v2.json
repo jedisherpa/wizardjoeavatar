@@ -21,37 +21,37 @@
   "cavity_polygon": [
     [
       379,
-      247
+      252
     ],
     [
       440,
-      238
+      241
     ],
     [
-      450,
-      247
+      449,
+      250
     ],
     [
       429,
-      263
+      262
     ],
     [
       368,
       277
     ],
     [
-      376,
-      258
+      380,
+      262
     ]
   ],
   "cavity_source": "generated_overlay",
   "changed_bbox": [
-    375,
-    238,
-    454,
+    379,
+    241,
+    450,
     275
   ],
-  "generated_render_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/008-relaxed-idle/118_ACT118_relaxed_idle_speaking_beak_rejected_pre_pairwise_2026-08-03.png",
+  "generated_render_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/008-relaxed-idle/118_ACT118_relaxed_idle_speaking_beak_alpha.png",
   "generated_render_sha256": "d2143ff020cea717ed9137c174686eff356a83add722e64ab776f55c2a2e038a",
   "hinge": [
     439,
@@ -97,38 +97,13 @@
   "minimum_connected_ratio": 0.9,
   "minimum_mandible_height": 10,
   "outside_articulation_change": false,
-  "residual_clear_polygon": [
-    [
-      357,
-      243
-    ],
-    [
-      447,
-      239
-    ],
-    [
-      450,
-      253
-    ],
-    [
-      416,
-      266
-    ],
-    [
-      360,
-      274
-    ],
-    [
-      353,
-      263
-    ]
-  ],
+  "residual_clear_polygon": null,
   "resting_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/008-relaxed-idle/008_ACT008_relaxed_idle_resting_beak_alpha.png",
   "resting_sha256": "aef5ed2f502da97ab3de58f25a36e92ba416536803fbc6dab792c14346e71518",
   "runtime_admitted": false,
   "schema_version": 1,
-  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/008-relaxed-idle/118_ACT118_relaxed_idle_speaking_beak_alpha.png",
-  "speaking_sha256": "628efc0df78675867d03cd52a97ff4afa33e43511728ff1c767339ca3a1a4e95",
+  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/008-relaxed-idle/118_ACT118_relaxed_idle_speaking_beak_candidate_pairwise_v2.png",
+  "speaking_sha256": "7fbc6daae36f522d5b56cfb7c147d6eadda5444a66ada38cb489bb574e3ae75d",
   "upper_beak_policy": "immutable_source_pixels",
   "upper_beak_polygon": [
     [
@@ -141,15 +116,15 @@
     ],
     [
       457,
-      244
+      253
     ],
     [
-      414,
-      247
+      412,
+      263
     ],
     [
       357,
-      254
+      275
     ],
     [
       353,

@@ -20,6 +20,77 @@
   "cavity_fill_rgba": null,
   "cavity_polygon": [
     [
+      458,
+      224
+    ],
+    [
+      503,
+      224
+    ],
+    [
+      501,
+      244
+    ],
+    [
+      482,
+      261
+    ],
+    [
+      462,
+      244
+    ]
+  ],
+  "cavity_source": "generated_overlay",
+  "changed_bbox": [
+    453,
+    224,
+    509,
+    271
+  ],
+  "generated_render_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/009-attentive-idle/119_ACT119_attentive_idle_speaking_beak_alpha.png",
+  "generated_render_sha256": "97d0bd0767de8cd638ba7fcd74a78671972bedb3d476bc392908d9ae9498c3d1",
+  "hinge": [
+    459,
+    230
+  ],
+  "hinge_radius": 10,
+  "mandible_bbox": [
+    454,
+    224,
+    508,
+    270
+  ],
+  "mandible_connected_ratio": 1.0,
+  "mandible_largest_component_pixels": 1839,
+  "mandible_opaque_pixels": 1839,
+  "mandible_polygon": [
+    [
+      454,
+      224
+    ],
+    [
+      507,
+      224
+    ],
+    [
+      507,
+      246
+    ],
+    [
+      482,
+      269
+    ],
+    [
+      455,
+      247
+    ]
+  ],
+  "method": "pair_specific_connected_mandible_patch_v1",
+  "minimum_connected_ratio": 0.9,
+  "minimum_mandible_height": 12,
+  "outside_articulation_change": false,
+  "residual_clear_polygon": [
+    [
       454,
       219
     ],
@@ -28,104 +99,49 @@
       219
     ],
     [
-      503,
-      245
-    ],
-    [
-      482,
-      262
-    ],
-    [
-      459,
-      245
-    ]
-  ],
-  "cavity_source": "generated_overlay",
-  "changed_bbox": [
-    458,
-    220,
-    502,
-    267
-  ],
-  "generated_render_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/009-attentive-idle/119_ACT119_attentive_idle_speaking_beak_rejected_pre_pairwise_2026-08-03.png",
-  "generated_render_sha256": "97d0bd0767de8cd638ba7fcd74a78671972bedb3d476bc392908d9ae9498c3d1",
-  "hinge": [
-    459,
-    230
-  ],
-  "hinge_radius": 12,
-  "mandible_bbox": [
-    452,
-    218,
-    512,
-    267
-  ],
-  "mandible_connected_ratio": 0.974833,
-  "mandible_largest_component_pixels": 1317,
-  "mandible_opaque_pixels": 1351,
-  "mandible_polygon": [
-    [
-      452,
-      218
-    ],
-    [
-      511,
-      218
-    ],
-    [
-      507,
+      508,
       247
     ],
     [
       482,
-      266
+      270
     ],
     [
-      456,
+      453,
       247
     ]
   ],
-  "method": "pair_specific_connected_mandible_patch_v1",
-  "minimum_connected_ratio": 0.65,
-  "minimum_mandible_height": 12,
-  "outside_articulation_change": false,
-  "residual_clear_polygon": null,
   "resting_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/009-attentive-idle/009_ACT009_attentive_idle_resting_beak_alpha.png",
   "resting_sha256": "97feb8c305c58e46b484d4a89aac8995f9dd401576ebd2de8e8a1035ab13cafe",
   "runtime_admitted": false,
   "schema_version": 1,
-  "source_mask": {
-    "light_threshold": 145,
-    "mode": "exclude_light_neutral",
-    "neutral_chroma_threshold": 55
-  },
-  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/009-attentive-idle/119_ACT119_attentive_idle_speaking_beak_alpha.png",
-  "speaking_sha256": "0e90e6e4b87c787c05cd95e6e9af0251b7399b5d1e72f602e159b6e883a5c7fa",
+  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/009-attentive-idle/119_ACT119_attentive_idle_speaking_beak_candidate_pairwise_v1.png",
+  "speaking_sha256": "f233b1c57324192c4cfd54a2d659c90ca097ae38277cf9db6137a1fc6c6b750c",
   "upper_beak_policy": "immutable_source_pixels",
   "upper_beak_polygon": [
     [
       447,
-      192
+      195
     ],
     [
-      515,
-      192
+      514,
+      195
     ],
     [
-      513,
-      224
+      510,
+      226
     ],
     [
-      497,
-      235
+      494,
+      238
     ],
     [
       466,
-      235
+      238
     ],
     [
-      449,
-      224
+      451,
+      226
     ]
   ]
 }

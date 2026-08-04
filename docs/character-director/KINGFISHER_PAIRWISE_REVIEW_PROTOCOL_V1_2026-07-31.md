@@ -1325,3 +1325,54 @@ Accepted pair 7 evidence:
 
 The queue now contains 5 fresh internal passes, 59 pending pairs, and 2 rear
 views marked not observable. User approval and runtime admission remain zero.
+
+Pair 8 (`relaxed-idle`) also failed its legacy candidate. The old broad mask
+changed the upper bill and a large white/orange throat region while still
+reporting zero change outside that oversized rectangle. Two bounded
+reconstruction attempts were retained but rejected: the first was too close
+to closed at presentation size, and the second restored the closed lower edge
+along with the upper bill, creating a three-line beak in the magnified crop.
+
+The accepted third candidate narrows the immutable upper-bill mask, explicitly
+clears the old closed lower edge, and composites one restrained connected
+mandible and cavity. Its audit reports outside-mouth mean difference `0.0`,
+registration delta `0`, silhouette IoU `0.995701`, and connected-mandible
+ratio `1.0`.
+
+Rejected pair 8 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-008-rejected-pre-pairwise-2026-08-03/`
+
+Accepted pair 8 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-008-rebuilt-v1/`
+
+The current queue contains 6 fresh internal passes, 58 pending pairs, and 2
+rear views marked not observable. User approval and runtime admission remain
+zero.
+
+Pair 9 (`attentive-idle`) exposed the same false-positive pattern in a frontal
+pose. The legacy speaking mate looked centered at presentation size, but the
+old articulation rectangle had replaced most of the white and orange throat.
+The first bounded reconstruction was also rejected because its opaque polygon
+copied pale throat pixels and left two dark vertical mask edges.
+
+The accepted reconstruction starts from the immutable closed frame and uses a
+compact donor mask that excludes light, low-chroma throat pixels while keeping
+the dark beak rim, orange lower mandible, and pink cavity. No clearing polygon
+is used. Full-size and magnified inspection show one centered opening with a
+clean hinge and unchanged surrounding throat. The audit reports outside-mouth
+mean difference `0.0`, registration delta `0`, silhouette IoU `1.0`, and a
+connected-mandible ratio of `0.974833`.
+
+Rejected pair 9 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-009-rejected-pre-pairwise-2026-08-03/`
+
+Accepted pair 9 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-009-rebuilt-v1/`
+
+The current queue contains 7 fresh internal passes, 57 pending pairs, and 2
+rear views marked not observable. User approval and runtime admission remain
+zero; Pair 10 is the next isolated review gate.

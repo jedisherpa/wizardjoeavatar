@@ -391,6 +391,65 @@ class ComposeKingfisherPairMandiblePatchTests(unittest.TestCase):
                     minimum_mandible_height=10,
                 )
 
+    def test_can_exclude_light_neutral_throat_pixels_from_donor(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            resting_path, generated_path = self._sources(root)
+            generated = Image.open(generated_path).convert("RGB")
+            draw = ImageDraw.Draw(generated)
+            draw.rectangle((468, 248, 552, 272), fill=(230, 222, 216))
+            draw.polygon(
+                [(478, 251), (542, 251), (520, 266), (484, 264)],
+                fill=(112, 31, 38),
+            )
+            generated.save(generated_path)
+            output_path = root / "output.png"
+            receipt = compose_mandible_patch(
+                resting_path,
+                generated_path,
+                output_path,
+                root / "receipt.json",
+                scale=1,
+                translate_x=0,
+                translate_y=0,
+                mandible_polygon=[
+                    (468, 248),
+                    (552, 248),
+                    (552, 272),
+                    (468, 272),
+                ],
+                cavity_polygon=[
+                    (478, 251),
+                    (542, 251),
+                    (520, 266),
+                    (484, 264),
+                ],
+                upper_beak_polygon=[
+                    (468, 228),
+                    (552, 225),
+                    (552, 248),
+                    (468, 248),
+                ],
+                hinge=(480, 255),
+                minimum_mandible_height=10,
+                cavity_source="generated_overlay",
+                source_mask_mode="exclude_light_neutral",
+                source_light_threshold=180,
+                source_neutral_chroma_threshold=36,
+            )
+
+            resting = Image.open(resting_path).convert("RGBA")
+            output = Image.open(output_path).convert("RGBA")
+            self.assertEqual(
+                output.getpixel((470, 260)),
+                resting.getpixel((470, 260)),
+            )
+            self.assertEqual(output.getpixel((500, 258)), (112, 31, 38, 255))
+            self.assertEqual(
+                receipt["source_mask"]["mode"],
+                "exclude_light_neutral",
+            )
+
     def test_rejects_mandible_that_misses_hinge(self):
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)

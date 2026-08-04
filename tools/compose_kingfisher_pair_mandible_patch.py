@@ -99,6 +99,36 @@ def _component_stats(mask: Image.Image) -> tuple[int, int, list[set[tuple[int, i
     return total, largest, components
 
 
+def _source_color_mask(
+    image: Image.Image,
+    *,
+    mode: str,
+    light_threshold: int,
+    neutral_chroma_threshold: int,
+) -> Image.Image:
+    """Return donor pixels eligible for a compact mouth-only transfer."""
+    alpha = image.getchannel("A")
+    if mode == "opaque":
+        return alpha
+    if mode != "exclude_light_neutral":
+        raise ValueError("unsupported source mask mode")
+
+    eligible = Image.new("L", image.size, 0)
+    eligible.putdata(
+        [
+            a
+            if not (
+                max(r, g, b) >= light_threshold
+                and max(r, g, b) - min(r, g, b)
+                <= neutral_chroma_threshold
+            )
+            else 0
+            for r, g, b, a in image.getdata()
+        ]
+    )
+    return eligible
+
+
 def compose_mandible_patch(
     resting_path: Path,
     generated_path: Path,
@@ -122,6 +152,9 @@ def compose_mandible_patch(
     minimum_connected_ratio: float = 0.9,
     cavity_fill: tuple[int, int, int, int] = (10, 13, 16, 255),
     cavity_source: str = "solid",
+    source_mask_mode: str = "opaque",
+    source_light_threshold: int = 180,
+    source_neutral_chroma_threshold: int = 36,
 ) -> dict[str, object]:
     """Composite only a matched lower mandible onto an immutable body."""
     with Image.open(resting_path) as loaded:
@@ -180,6 +213,16 @@ def compose_mandible_patch(
             "cavity source must be solid, solid_overlay, "
             "solid_generated_overlay, generated, or generated_overlay"
         )
+    if source_mask_mode not in {"opaque", "exclude_light_neutral"}:
+        raise ValueError(
+            "source mask mode must be opaque or exclude_light_neutral"
+        )
+    if not 0 <= source_light_threshold <= 255:
+        raise ValueError("source light threshold must be in [0, 255]")
+    if not 0 <= source_neutral_chroma_threshold <= 255:
+        raise ValueError(
+            "source neutral chroma threshold must be in [0, 255]"
+        )
 
     generated = load_render_alpha(generated_path)
     target_size = (
@@ -206,9 +249,15 @@ def compose_mandible_patch(
             )
         )
 
+    source_color_mask = _source_color_mask(
+        aligned,
+        mode=source_mask_mode,
+        light_threshold=source_light_threshold,
+        neutral_chroma_threshold=source_neutral_chroma_threshold,
+    )
     mandible_mask = _polygon_mask(CANVAS_SIZE, mandible_polygon)
     source_alpha = ImageChops.multiply(
-        aligned.getchannel("A"),
+        source_color_mask,
         mandible_mask,
     )
     mandible_bbox = source_alpha.getbbox()
@@ -272,7 +321,7 @@ def compose_mandible_patch(
         )
     if cavity_source in {"generated_overlay", "solid_generated_overlay"}:
         cavity_alpha = ImageChops.multiply(
-            aligned.getchannel("A"),
+            source_color_mask,
             cavity_mask,
         )
         output.paste(aligned, mask=cavity_alpha)
@@ -341,6 +390,11 @@ def compose_mandible_patch(
             in {"solid", "solid_overlay", "solid_generated_overlay"}
             else None
         ),
+        "source_mask": {
+            "mode": source_mask_mode,
+            "light_threshold": source_light_threshold,
+            "neutral_chroma_threshold": source_neutral_chroma_threshold,
+        },
         "mandible_bbox": list(mandible_bbox),
         "mandible_opaque_pixels": total_pixels,
         "mandible_largest_component_pixels": largest_component,
@@ -397,6 +451,17 @@ def main() -> None:
         ),
         default="solid",
     )
+    parser.add_argument(
+        "--source-mask-mode",
+        choices=("opaque", "exclude_light_neutral"),
+        default="opaque",
+    )
+    parser.add_argument("--source-light-threshold", type=int, default=180)
+    parser.add_argument(
+        "--source-neutral-chroma-threshold",
+        type=int,
+        default=36,
+    )
     args = parser.parse_args()
     receipt = compose_mandible_patch(
         args.resting,
@@ -440,6 +505,11 @@ def main() -> None:
         minimum_connected_ratio=args.minimum_connected_ratio,
         cavity_fill=tuple(args.cavity_fill),
         cavity_source=args.cavity_source,
+        source_mask_mode=args.source_mask_mode,
+        source_light_threshold=args.source_light_threshold,
+        source_neutral_chroma_threshold=(
+            args.source_neutral_chroma_threshold
+        ),
     )
     print(json.dumps(receipt, indent=2, sort_keys=True))
 

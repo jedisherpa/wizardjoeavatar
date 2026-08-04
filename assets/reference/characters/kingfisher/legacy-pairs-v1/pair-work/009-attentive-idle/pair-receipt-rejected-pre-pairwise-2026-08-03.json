@@ -1,0 +1,61 @@
+{
+  "alignment": {
+    "interpolation": "lanczos_rgb_binary_alpha",
+    "scale": 0.5654450261780105,
+    "translate_x": 7,
+    "translate_y": 22
+  },
+  "approval_state": "candidate_visual_review",
+  "articulation_bbox": [
+    435,
+    220,
+    526,
+    321
+  ],
+  "articulation_polygon": [
+    [
+      442,
+      235
+    ],
+    [
+      480,
+      220
+    ],
+    [
+      520,
+      235
+    ],
+    [
+      525,
+      300
+    ],
+    [
+      480,
+      320
+    ],
+    [
+      435,
+      295
+    ]
+  ],
+  "canvas": [
+    960,
+    540
+  ],
+  "changed_bbox": [
+    435,
+    220,
+    526,
+    321
+  ],
+  "generated_render_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/009-attentive-idle/009_ACT009_attentive_idle_speaking_render_raw.png",
+  "generated_render_sha256": "17fa54d1548a653d71e95c43841e7fe0c59e6f5542d7a9986d89fd4a0f2c6180",
+  "method": "pose_specific_render_local_articulation_composite_v1",
+  "outside_articulation_change": false,
+  "resting_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/009-attentive-idle/009_ACT009_attentive_idle_resting_beak_alpha.png",
+  "resting_sha256": "97feb8c305c58e46b484d4a89aac8995f9dd401576ebd2de8e8a1035ab13cafe",
+  "runtime_admitted": false,
+  "schema_version": 1,
+  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/009-attentive-idle/119_ACT119_attentive_idle_speaking_beak_alpha.png",
+  "speaking_sha256": "97d0bd0767de8cd638ba7fcd74a78671972bedb3d476bc392908d9ae9498c3d1"
+}

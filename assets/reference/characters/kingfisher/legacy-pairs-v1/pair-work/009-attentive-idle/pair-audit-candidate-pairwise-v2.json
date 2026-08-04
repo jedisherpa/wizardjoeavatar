@@ -27,7 +27,7 @@
   "resting_sha256": "97feb8c305c58e46b484d4a89aac8995f9dd401576ebd2de8e8a1035ab13cafe",
   "schema_version": 2,
   "silhouette_iou": 1.0,
-  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/009-attentive-idle/119_ACT119_attentive_idle_speaking_beak_alpha.png",
+  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/009-attentive-idle/119_ACT119_attentive_idle_speaking_beak_candidate_pairwise_v2.png",
   "speaking_registration_bbox": [
     350,
     97,
