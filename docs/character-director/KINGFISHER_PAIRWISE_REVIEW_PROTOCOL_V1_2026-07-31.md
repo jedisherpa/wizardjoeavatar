@@ -2160,3 +2160,26 @@ Fresh pair 41 evidence:
 The current queue contains 39 fresh internal passes, 25 pending pairs, and 2
 rear views marked not observable. User approval and runtime admission remain
 zero; Pair 42 is the next isolated review gate.
+
+Pair 42 (`joy`) passed a fresh isolated full-source, 6x mouth, prior-candidate,
+and live locked-beak review without another rebuild. The accepted joy opening
+is one connected lower mandible aligned beneath the repaired immutable upper
+bill; the tip and rear hinge remain coherent with the slight head turn. The
+small screen-left blue patch is unchanged canonical cheek and upper-bill
+detail, not transferred mandible residue. No duplicate mouth, imported throat
+texture, or movement in the eyes, crest, cheeks, throat, hoodie, raised wings,
+body, feet, scale, registration, or silhouette is visible.
+
+The receipt records connected-mandible ratio `1.0`, changed bounding box
+`(442, 145)-(541, 186)`, mandible bounding box `(441, 145)-(541, 186)`, and
+hinge `(443, 150)`. The strict audit reports 1,600 changed rendered pixels,
+outside-mouth mean difference `0.0`, registration delta `0`, and silhouette
+IoU `1.0`.
+
+Fresh pair 42 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-042-recheck-2026-08-04/`
+
+The current queue contains 40 fresh internal passes, 24 pending pairs, and 2
+rear views marked not observable. User approval and runtime admission remain
+zero; Pair 43 is the next isolated review gate.
