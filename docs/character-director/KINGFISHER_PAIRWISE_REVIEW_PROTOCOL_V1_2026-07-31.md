@@ -2554,3 +2554,25 @@ Fresh pair 57 evidence:
 The current queue contains 55 fresh internal passes, 9 pending pairs, and 2
 rear views marked not observable. User approval and runtime admission remain
 zero; Pair 58 is the next isolated review gate.
+
+Pair 58 (`frustration`) passed a fresh isolated native-size, full-character,
+and alternating-playback review without another rebuild. The diagonal lower
+bill opens from the authored screen-right rear hinge beneath the bowed upper
+bill and follows the original perspective toward the lower screen-left tip.
+The apparent offset in the magnified crop disappears at full-character scale;
+there is one connected lower edge, no duplicated tip, no throat replacement,
+no registration drift, and no body change.
+
+The receipt records connected-mandible ratio `1.0`, changed bounding box
+`(420, 255)-(480, 321)`, mandible bounding box `(420, 254)-(480, 321)`, and
+hinge `(471, 260)`. The strict audit reports 1,343 changed rendered pixels,
+outside-mouth mean difference `0.0`, registration delta `0`, and silhouette
+IoU `1.0`.
+
+Fresh pair 58 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-058-rechecked-2026-08-05/`
+
+The current queue contains 56 fresh internal passes, 8 pending pairs, and 2
+rear views marked not observable. User approval and runtime admission remain
+zero; Pair 59 is the next isolated review gate.
