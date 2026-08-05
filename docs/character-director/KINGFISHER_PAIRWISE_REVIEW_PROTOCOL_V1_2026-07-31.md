@@ -2705,3 +2705,34 @@ Accepted pair 63 evidence:
 The current queue contains 61 fresh internal passes, 3 pending pairs, and 2
 rear views marked not observable. User approval and runtime admission remain
 zero; Pair 64 is the next isolated review gate.
+
+Pair 64 (`study a diagram`) failed its fresh isolated review and was rebuilt
+as one closed/open pair. The rejected speaking frame kept its rear hinge but
+ended the lower bill well behind the canonical upper tip; it also exposed
+stacked light and dark edges that read as a detached second beak during
+alternating playback.
+
+Rejected pair 64 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-064-rejected-misaligned-2026-08-05/`
+
+The accepted successor was generated from Pair 64's own isolated head. The
+deterministic compositor transfers only one full-length lower mandible and its
+bounded oral cavity over the immutable resting frame. The lower bill now
+rotates from the authored hinge and meets the upper-beak tip without a floating
+edge, duplicated outline, throat replacement, registration drift, or body
+change.
+
+The accepted receipt records connected-mandible ratio `1.0`, changed bounding
+box `(392, 209)-(515, 268)`, mandible bounding box
+`(392, 207)-(515, 268)`, and hinge `(398, 216)`. The strict audit reports
+2,989 changed rendered pixels, outside-mouth mean difference `0.0`,
+registration delta `0`, and silhouette IoU `0.998027`.
+
+Accepted pair 64 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-064-rebuilt-2026-08-05/`
+
+The current queue contains 62 fresh internal passes, 2 pending pairs, and 2
+rear views marked not observable. User approval and runtime admission remain
+zero; Pair 65 is the next isolated review gate.
