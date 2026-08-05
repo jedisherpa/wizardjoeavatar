@@ -3854,16 +3854,16 @@
       "pair_work_path": "pair-work/053-embarrassment",
       "pairwise_full_size_review": {
         "defect_codes": [],
-        "evidence_path": "",
-        "note": "User visual review on 2026-08-03 found many beaks visibly misaligned in the current all-poses observer. Every visible closed/open pair must be rechecked and, where needed, rebuilt as one isolated pair before a new pass.",
+        "evidence_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-053-rebuilt-2026-08-05",
+        "note": "Rebuilt one isolated closed/open pair. The speaking mate now has exactly one connected lower mandible aligned beneath the canonical upper bill, one rear hinge, a narrow readable aperture, and no imported eye, head, throat, or hoodie pixels. Strict audit: 884 changed rendered pixels, outside-mouth mean 0.0, silhouette IoU 0.99886, registration delta 0. Internal pairwise gate only; no user approval or runtime admission implied.",
         "protocol_id": "kingfisher-full-size-pairwise-v1",
         "queued_at": "2026-07-31T05:30:00+00:00",
-        "reviewed_at": null,
-        "reviewer": null,
+        "reviewed_at": "2026-08-05T00:30:00Z",
+        "reviewer": "codex-internal-pairwise-gate",
         "runtime_admission_implied": false,
         "schema_version": 1,
-        "source_disposition": "user_reported_visual_recheck",
-        "state": "pending",
+        "source_disposition": "full_size_pairwise_review",
+        "state": "pass",
         "user_approval_implied": false
       },
       "pairwise_full_size_review_history": [
@@ -3884,6 +3884,30 @@
             "schema_version": 1,
             "source_disposition": "full_size_pairwise_review",
             "state": "pass",
+            "user_approval_implied": false
+          }
+        },
+        {
+          "reason": "Superseded by a later full-size pairwise review disposition.",
+          "reporter": "codex-internal-pairwise-gate",
+          "schema_version": 1,
+          "superseded_at": "2026-08-05T00:30:00Z",
+          "superseded_review": {
+            "defect_codes": [
+              "detached_beak_edge",
+              "duplicate_mandible",
+              "throat_overlay"
+            ],
+            "evidence_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-053-rejected-double-blade-2026-08-05",
+            "note": "Full-size one-pair inspection rejected the speaking mate: two thin lower-bill blades diverge from the hinge and a white/orange throat-shaped insert replaces hoodie texture. Rebuild only Pair 53 from the approved resting pose.",
+            "protocol_id": "kingfisher-full-size-pairwise-v1",
+            "queued_at": "2026-07-31T05:30:00+00:00",
+            "reviewed_at": "2026-08-05T00:00:00Z",
+            "reviewer": "codex",
+            "runtime_admission_implied": false,
+            "schema_version": 1,
+            "source_disposition": "full_size_pairwise_review",
+            "state": "needs_rebuild",
             "user_approval_implied": false
           }
         }
@@ -4736,11 +4760,11 @@
     "needs_rebuild_count": 0,
     "not_observable_count": 2,
     "pair_count": 66,
-    "pass_count": 50,
-    "passing_disposition_count": 52,
-    "pending_count": 14,
+    "pass_count": 51,
+    "passing_disposition_count": 53,
+    "pending_count": 13,
     "protocol_id": "kingfisher-full-size-pairwise-v1",
-    "reviewed_count": 52,
+    "reviewed_count": 53,
     "runtime_admission_implied": false,
     "schema_version": 1,
     "user_approval_implied": false

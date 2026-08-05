@@ -2420,3 +2420,33 @@ Accepted pair 52 evidence:
 The current queue contains 50 fresh internal passes, 14 pending pairs, and 2
 rear views marked not observable. User approval and runtime admission remain
 zero; Pair 53 is the next isolated review gate.
+
+Pair 53 (`embarrassment`) failed its fresh isolated review and was rebuilt as
+one closed/open pair. The rejected speaking mate contained two thin lower-bill
+blades diverging from the mouth hinge and a white/orange insert that replaced
+canonical throat and hoodie texture. The rejected full-character and 5x
+close-up evidence remains preserved at:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-053-rejected-double-blade-2026-08-05/`
+
+The accepted successor uses a dedicated head-only donor but transfers only one
+tightly bounded lower mandible and its narrow cavity. The canonical resting
+frame continues to own the upper bill, eye, brow patch, head feathers, white
+neck feathers, hoodie, body, canvas, registration, and silhouette. Full-size
+closed/open comparison and alternating playback show one lower tip aligned
+beneath the upper tip and one continuous connection to the screen-right rear
+hinge, with no second blade or imported throat pixels.
+
+The accepted receipt records connected-mandible ratio `1.0`, changed bounding
+box `(371, 232)-(437, 295)`, mandible bounding box
+`(371, 231)-(442, 296)`, and hinge `(432, 236)`. The strict audit reports 884
+changed rendered pixels, outside-mouth mean difference `0.0`, registration
+delta `0`, and silhouette IoU `0.99886`.
+
+Accepted pair 53 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-053-rebuilt-2026-08-05/`
+
+The current queue contains 51 fresh internal passes, 13 pending pairs, and 2
+rear views marked not observable. User approval and runtime admission remain
+zero; Pair 54 is the next isolated review gate.
