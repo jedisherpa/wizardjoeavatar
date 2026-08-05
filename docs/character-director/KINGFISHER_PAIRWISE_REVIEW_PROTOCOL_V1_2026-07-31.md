@@ -3142,3 +3142,25 @@ Fresh Pair 15 evidence:
 The queue now contains 13 strict internal passes, 51 pending observable pairs,
 and 2 not-observable rear views. Pair 16 is the next isolated gate; user
 approval and runtime admission remain zero.
+
+Pair 16 (`point-to-viewer`) passed its isolated native-size, enlarged-beak,
+and full-projector review. Candidate v2 deterministically reproduces the
+accepted compact v1 pixels exactly from the preserved pre-pairwise donor while
+adding current frontal anatomy evidence. The rejected prior gape remains
+excluded because it was oversized vertically for this direct-address gesture.
+
+The accepted opening remains centered beneath the immutable frontal upper bill
+without moving the eyes, crown, throat, pointing wing, hoodie, body, feet,
+scale, or canvas. The corrected receipt records hinge `(480, 228)`, normalized
+center offset `0.0`, a `0.8871` mandible-to-upper width ratio, and
+connected-mandible ratio `1.0`. Its strict audit reports 4,470 changed rendered
+pixels, outside-mouth mean difference `0.0`, registration delta `0`, and
+silhouette IoU `1.0`.
+
+Fresh Pair 16 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-016-one-pair-2026-08-05-v2/`
+
+The queue now contains 14 strict internal passes, 50 pending observable pairs,
+and 2 not-observable rear views. Pair 17 is the next isolated gate; user
+approval and runtime admission remain zero.
