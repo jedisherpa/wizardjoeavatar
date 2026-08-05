@@ -2942,3 +2942,26 @@ Fresh Pair 6 evidence:
 The queue now contains 4 strict internal passes, 60 pending observable pairs,
 and 2 not-observable rear views. Pair 7 is the next isolated review gate; user
 approval and runtime admission remain zero.
+
+Pair 7 (`front-three-quarter-right`) exposed a receipt defect rather than a
+pixel defect. Its prior accepted frame looked coherent, but the declared upper
+bill polygon missed the hinge by `14.364` pixels and therefore failed the new
+anatomy gate. The pair was recomposed from its own closed frame and accepted
+lower-bill donor with a corrected shared-hinge declaration. The output hash is
+identical to the prior accepted speaking image, proving that the visual pixels
+were preserved while the invalid geometry contract was replaced.
+
+The corrected receipt places hinge `(449, 253)` on the immutable upper bill and
+connected lower mandible. Recomputed anatomy reports a `0.6476`
+mandible-to-upper length ratio, `0.519` normalized tip offset, upper hinge
+distance `0.0`, lower hinge distance `2.121`, and cavity hinge distance `1.857`.
+The strict image audit remains outside-mouth mean difference `0.0`, registration
+delta `0`, and silhouette IoU `0.99996`.
+
+Fresh Pair 7 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-007-one-pair-2026-08-05-v2/`
+
+The queue now contains 5 strict internal passes, 59 pending observable pairs,
+and 2 not-observable rear views. Pair 8 is the next isolated gate; user approval
+and runtime admission remain zero.
