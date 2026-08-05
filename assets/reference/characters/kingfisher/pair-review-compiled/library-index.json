@@ -14,7 +14,7 @@
   "legacy_pair_review": {
     "approval_state": "candidate_visual_review",
     "ledger_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-review-ledger.json",
-    "ledger_sha256": "25d4cbedc3fdc518652f66bd5c2ec903b6f8b4122638e75a5e96d7018b2773a8",
+    "ledger_sha256": "81635a4b978dc8be97d375837b5674c4fb5d3eadd988b7463479b17d66d3474e",
     "pair_count": 66,
     "pairs": [
       {
@@ -1223,9 +1223,9 @@
         "automated_audit_passed": true,
         "ordinal": 61,
         "pairwise_full_size_review": {
-          "evidence_path": "",
+          "evidence_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-061-rechecked-2026-08-05",
           "protocol_id": "kingfisher-full-size-pairwise-v1",
-          "state": "pending"
+          "state": "pass"
         },
         "receipt_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/061-deep-contemplation/pair-receipt.json",
         "receipt_sha256": "65510d89ff004d6904f4f6485a3058f2d3e5b7070ed884818a8696e57ef3deca",
@@ -1342,8 +1342,8 @@
       "complete": false,
       "needs_rebuild_count": 0,
       "not_observable_count": 2,
-      "pass_count": 58,
-      "pending_count": 6
+      "pass_count": 59,
+      "pending_count": 5
     },
     "review_projection": true,
     "runtime_admitted": false,
@@ -1902,7 +1902,7 @@
         "pass",
         "pass",
         "pass",
-        "pending",
+        "pass",
         "pending",
         "pending",
         "pending",
@@ -2286,7 +2286,7 @@
     {
       "approval_state": "candidate_visual_review",
       "bytes": 28587419,
-      "path": "kingfisher_act_001_066_111_176_pair_review-532ecba3d7d6a271.wjpose",
+      "path": "kingfisher_act_001_066_111_176_pair_review-b0d220fc6c5419dc.wjpose",
       "pose_count": 132,
       "pose_ids": [
         "kingfisher.act.001.neutral-front",
@@ -2424,7 +2424,7 @@
       ],
       "review_projection": true,
       "runtime_admitted": false,
-      "sha256": "532ecba3d7d6a271c756b97983de06a3fc9cd039dfdac516ae4bb3ccec35ca86",
+      "sha256": "b0d220fc6c5419dca00435b67fb7fadd400c160c176884f9ef774d6b7a393d91",
       "shard_id": "kingfisher_act_001_066_111_176_pair_review",
       "source": "kingfisher_pair_specific_beak_review_v1"
     }

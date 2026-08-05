@@ -2627,3 +2627,24 @@ Fresh pair 60 evidence:
 The current queue contains 58 fresh internal passes, 6 pending pairs, and 2
 rear views marked not observable. User approval and runtime admission remain
 zero; Pair 61 is the next isolated review gate.
+
+Pair 61 (`deep contemplation`) passed a fresh isolated native-size,
+full-character, and alternating-playback review without another rebuild. The
+bill's steep downward angle belongs to the authored contemplative head pose.
+One lower mandible opens from the existing screen-right rear hinge, follows
+the upper-bill axis, and reaches the same screen-left tip. The transition adds
+no duplicate edge, throat replacement, registration drift, or body change.
+
+The receipt records connected-mandible ratio `1.0`, changed bounding box
+`(412, 213)-(473, 282)`, mandible bounding box `(409, 207)-(480, 282)`, and
+hinge `(468, 216)`. The strict audit reports 1,700 changed rendered pixels,
+outside-mouth mean difference `0.0`, registration delta `0`, and silhouette
+IoU `1.0`.
+
+Fresh pair 61 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-061-rechecked-2026-08-05/`
+
+The current queue contains 59 fresh internal passes, 5 pending pairs, and 2
+rear views marked not observable. User approval and runtime admission remain
+zero; Pair 62 is the next isolated review gate.
