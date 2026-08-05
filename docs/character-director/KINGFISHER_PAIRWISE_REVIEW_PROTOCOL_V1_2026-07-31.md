@@ -2270,3 +2270,25 @@ Fresh pair 46 evidence:
 The current queue contains 44 fresh internal passes, 20 pending pairs, and 2
 rear views marked not observable. User approval and runtime admission remain
 zero; Pair 47 is the next isolated review gate.
+
+Pair 47 (`compassion`) passed a fresh isolated full-source, 6x steep-angle
+mouth, and live locked-beak review without another rebuild. The long lower
+mandible rotates from the same screen-right rear hinge as the immutable upper
+bill and converges at the same screen-left tip. No lateral drift, detached
+edge, duplicate bill, imported throat texture, or movement in the eye, crest,
+cheeks, throat, hoodie, extended wing, body, feet, scale, registration, or
+silhouette is visible.
+
+The receipt records connected-mandible ratio `1.0`, changed bounding box
+`(462, 234)-(528, 331)`, mandible bounding box `(462, 225)-(528, 331)`, and
+hinge `(512, 238)`. The strict audit reports 2,537 changed rendered pixels,
+outside-mouth mean difference `0.0`, registration delta `0`, and silhouette
+IoU `1.0`.
+
+Fresh pair 47 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-047-recheck-2026-08-04/`
+
+The current queue contains 45 fresh internal passes, 19 pending pairs, and 2
+rear views marked not observable. User approval and runtime admission remain
+zero; Pair 48 is the next isolated review gate.
