@@ -2767,3 +2767,36 @@ Accepted pair 65 evidence:
 The current queue contains 63 fresh internal passes, 1 pending pair, and 2
 rear views marked not observable. User approval and runtime admission remain
 zero; Pair 66 is the final isolated review gate.
+
+Pair 66 (`select a control`) failed its fresh isolated review and was rebuilt
+as one closed/open pair. The rejected speaking mate kept a plausible hinge but
+ended its lower point behind the canonical upper point and retained a visible
+stacked edge in the native beak view.
+
+Rejected pair 66 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-066-rejected-short-mandible-2026-08-05/`
+
+The accepted successor was generated from Pair 66's own isolated closed head.
+The deterministic compositor transfers only one full-length lower mandible and
+its bounded oral cavity. The canonical resting frame remains the sole owner of
+the upper bill, eye, crest, cheek, throat, hoodie, raised control wing, body,
+feet, canvas, and registration. The new lower bill opens from the authored
+hinge and meets the upper-tip line without a detached edge or imported body
+pixels.
+
+The accepted receipt records connected-mandible ratio `1.0`, changed bounding
+box `(435, 224)-(552, 270)`, mandible bounding box
+`(435, 224)-(552, 270)`, and hinge `(441, 230)`. The strict audit reports
+1,824 changed rendered pixels, outside-mouth mean difference `0.0`,
+registration delta `0`, and silhouette IoU `0.995926`.
+
+Accepted pair 66 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-066-rebuilt-2026-08-05/`
+
+The fresh pairwise queue is complete: 64 observable pairs have internal visual
+passes, 2 exact rear views are marked not observable, and no pairs remain
+pending or marked for rebuild. The compiled review artifact contains all 176
+poses and a 132-frame closed/open review sequence. The review verifier passes;
+user approval and runtime admission remain explicitly zero.
