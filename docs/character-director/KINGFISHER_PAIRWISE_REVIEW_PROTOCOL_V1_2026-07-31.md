@@ -2881,3 +2881,22 @@ Focused verification after this change: 45 Kingfisher review tests pass. The
 compiled review library still contains 176 review-only poses, and the final
 verifier intentionally stops at Pair 2 with 1 pass, 63 pending pairs, and 2
 not-observable rear views.
+
+Pair 2 (`front-three-quarter-left`) then completed the tightened one-pair
+review. The current open mate was inspected independently on transparency and
+the deterministic white projector. The closed frame remains the authority for
+the upper bill, eye, crown, cheek, throat, hoodie, body, stance, registration,
+and canvas. The open mate contributes one connected lower mandible that shares
+the rear hinge, follows the authored right-facing axis, and reaches beneath
+the upper tip without a doubled edge or throat seam.
+
+Its recomputed anatomy measurements report a `0.7857` lower-to-upper bill
+length ratio, `0.2902` normalized tip offset, and upper, lower, and cavity hinge
+distances below 3 pixels. The body-lock audit remains exact outside the mouth
+region. The evidence is retained at:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-002-one-pair-2026-08-05-v1/`
+
+The queue now contains 2 strict internal passes, 62 pending observable pairs,
+and 2 not-observable rear views. The verifier intentionally stops at Pair 3;
+user approval and runtime admission remain zero.
