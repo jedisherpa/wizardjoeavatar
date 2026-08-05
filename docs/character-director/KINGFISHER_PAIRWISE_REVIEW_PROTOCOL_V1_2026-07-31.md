@@ -2900,3 +2900,24 @@ region. The evidence is retained at:
 The queue now contains 2 strict internal passes, 62 pending observable pairs,
 and 2 not-observable rear views. The verifier intentionally stops at Pair 3;
 user approval and runtime admission remain zero.
+
+Pair 3 (`left-profile`) was rebuilt and reviewed as its own closed/open unit
+rather than carried forward from the earlier batch. The closed ACT003 frame is
+the immutable source for the body, head, eye, throat, and complete upper bill.
+The prior speaking mate is used only as a lower-mandible donor inside declared
+pair-specific masks.
+
+The resulting lower bill joins rear hinge `(420, 234)`, follows the canonical
+left-facing bill axis, and ends behind the upper tip. Recomputed anatomy reports
+a `0.7658` mandible-to-upper length ratio, `0.3288` normalized tip offset, and
+zero-distance upper, lower, and cavity hinge attachment. The strict image audit
+reports 861 changed rendered pixels, outside-mouth mean difference `0.0`,
+registration delta `0`, and silhouette IoU `0.993`.
+
+Fresh Pair 3 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-003-one-pair-2026-08-05-v2/`
+
+The queue now contains 3 strict internal passes, 61 pending observable pairs,
+and 2 not-observable rear views. The verifier intentionally advances to Pair 6,
+the next observable pose; user approval and runtime admission remain zero.

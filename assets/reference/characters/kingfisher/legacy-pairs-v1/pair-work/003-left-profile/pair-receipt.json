@@ -1,61 +1,139 @@
 {
   "alignment": {
     "interpolation": "lanczos_rgb_binary_alpha",
-    "scale": 0.5822102425876011,
-    "translate_x": -14,
-    "translate_y": 15
+    "rotation_center": [
+      420,
+      234
+    ],
+    "rotation_degrees": 0.0,
+    "scale": 1.0,
+    "scale_x": 1.0,
+    "scale_y": 1.0,
+    "translate_x": 0,
+    "translate_y": 0
   },
   "approval_state": "candidate_visual_review",
-  "articulation_bbox": [
-    310,
-    230,
-    469,
-    321
+  "beak_anatomy": {
+    "cavity_anchor_distance": 0.0,
+    "checks": {
+      "bounded_tip_offset": true,
+      "cavity_anchored": true,
+      "mandible_anchored": true,
+      "plausible_mandible_length": true,
+      "same_longitudinal_direction": true,
+      "upper_beak_anchored": true
+    },
+    "direction": "left",
+    "mandible_anchor_distance": 0.0,
+    "mandible_forward_reach": 85,
+    "mandible_length_ratio": 0.7658,
+    "mandible_reverse_reach": 0,
+    "mode": "directional",
+    "passed": true,
+    "schema_version": 1,
+    "tip_offset_ratio": 0.3288,
+    "upper_anchor_distance": 0.0,
+    "upper_forward_reach": 111
+  },
+  "canvas": [
+    960,
+    540
   ],
-  "articulation_polygon": [
-    [
-      330,
-      246
-    ],
+  "cavity_fill_rgba": null,
+  "cavity_polygon": [
     [
       420,
       230
     ],
     [
-      468,
-      245
+      390,
+      240
     ],
     [
-      458,
-      318
+      362,
+      260
     ],
     [
-      333,
-      320
+      394,
+      250
     ],
     [
-      310,
-      285
+      420,
+      239
     ]
   ],
-  "canvas": [
-    960,
-    540
-  ],
+  "cavity_source": "generated_overlay",
   "changed_bbox": [
-    331,
+    335,
     230,
-    469,
-    319
+    421,
+    280
   ],
-  "generated_render_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/003-left-profile/003_ACT003_left_profile_speaking_render_raw.png",
-  "generated_render_sha256": "269a28e6acf8981974b3ce851ddd803471a6cc42697b60d34ee40fbbe53fdbb4",
-  "method": "pose_specific_render_local_articulation_composite_v1",
+  "generated_render_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/003-left-profile/113_ACT113_left_profile_speaking_beak_alpha.png",
+  "generated_render_sha256": "22fa2b80e3faefd6ff6dc01cc3a0f0179a3c5b8cd2056f96dfbd0f0635e0e3bd",
+  "hinge": [
+    420,
+    234
+  ],
+  "hinge_radius": 10,
+  "mandible_bbox": [
+    335,
+    229,
+    421,
+    280
+  ],
+  "mandible_connected_ratio": 0.997543,
+  "mandible_largest_component_pixels": 812,
+  "mandible_opaque_pixels": 814,
+  "mandible_polygon": [
+    [
+      420,
+      229
+    ],
+    [
+      335,
+      279
+    ],
+    [
+      420,
+      247
+    ]
+  ],
+  "method": "pair_specific_connected_mandible_patch_v1",
+  "minimum_connected_ratio": 0.9,
+  "minimum_mandible_height": 12,
+  "oral_warm_replacement_polygon": null,
+  "oral_warm_replacement_rgba": null,
   "outside_articulation_change": false,
+  "residual_clear_polygon": null,
   "resting_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/003-left-profile/003_ACT003_left_profile_resting_beak_alpha.png",
   "resting_sha256": "c4f05b6f567dd1cdd461f8964e928676e164a498904c81427f4bb81762d758db",
   "runtime_admitted": false,
   "schema_version": 1,
-  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/003-left-profile/113_ACT113_left_profile_speaking_beak_alpha.png",
-  "speaking_sha256": "22fa2b80e3faefd6ff6dc01cc3a0f0179a3c5b8cd2056f96dfbd0f0635e0e3bd"
+  "source_mask": {
+    "light_threshold": 180,
+    "mode": "opaque",
+    "neutral_chroma_threshold": 36
+  },
+  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/003-left-profile/113_ACT113_left_profile_speaking_beak_pairwise_v2.png",
+  "speaking_sha256": "ca91745dfd8b3fbac6de9825da25862801365e82c0c985914a4662eb4bc4059f",
+  "upper_beak_policy": "immutable_source_pixels",
+  "upper_beak_polygon": [
+    [
+      420,
+      224
+    ],
+    [
+      309,
+      238
+    ],
+    [
+      309,
+      247
+    ],
+    [
+      420,
+      248
+    ]
+  ]
 }
