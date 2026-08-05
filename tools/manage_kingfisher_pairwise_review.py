@@ -167,13 +167,28 @@ def record_pairwise_review(
     current = pair.get("pairwise_full_size_review")
     if not isinstance(current, dict) or current.get("protocol_id") != PROTOCOL_ID:
         raise ValueError("pairwise protocol must be initialized first")
+    timestamp = reviewed_at or datetime.now(timezone.utc).isoformat()
+    if current.get("state") in PAIRWISE_STATES - {"pending"}:
+        history = pair.setdefault("pairwise_full_size_review_history", [])
+        history.append(
+            {
+                "schema_version": 1,
+                "superseded_at": timestamp,
+                "reason": (
+                    "Superseded by a later full-size pairwise review "
+                    "disposition."
+                ),
+                "reporter": reviewer.strip(),
+                "superseded_review": current,
+            }
+        )
     pair["pairwise_full_size_review"] = {
         **current,
         "state": state,
         "defect_codes": sorted(set(defect_codes)),
         "note": note.strip(),
         "evidence_path": evidence_path.strip(),
-        "reviewed_at": reviewed_at or datetime.now(timezone.utc).isoformat(),
+        "reviewed_at": timestamp,
         "reviewer": reviewer.strip(),
         "source_disposition": "full_size_pairwise_review",
         "user_approval_implied": False,

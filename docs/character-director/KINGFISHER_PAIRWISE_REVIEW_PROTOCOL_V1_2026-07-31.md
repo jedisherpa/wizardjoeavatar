@@ -2292,3 +2292,36 @@ Fresh pair 47 evidence:
 The current queue contains 45 fresh internal passes, 19 pending pairs, and 2
 rear views marked not observable. User approval and runtime admission remain
 zero; Pair 48 is the next isolated review gate.
+
+Pair 48 (`surprise`) failed its fresh isolated review and was rebuilt alone.
+The rejected speaking mate was centered, but its oversized black cavity
+visually replaced most of the canonical upper bill and read as a pasted
+triangle rather than a hinged lower mandible. That failed disposition and its
+full-source and live locked evidence remain preserved at:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-048-rejected-giant-cavity-2026-08-04/`
+
+The accepted successor uses a new matched donor only for one connected lower
+mandible and its shaded cavity. The canonical frame restores the upper bill
+and owns the wide-eyed gaze, crest, cheeks, throat, hoodie, spread wings,
+body, feet, canvas, registration, and silhouette. Full-source, 5x mouth,
+full-character, and live locked review show the lower opening centered beneath
+the stable upper bill and attached at both rear corners.
+
+The accepted receipt records connected-mandible ratio `0.975081`, changed
+bounding box `(470, 161)-(591, 226)`, mandible bounding box
+`(470, 135)-(591, 226)`, and hinge `(574, 154)`. The strict audit reports
+2,059 changed rendered pixels, outside-mouth mean difference `0.0`,
+registration delta `0`, and silhouette IoU `1.0`.
+
+Accepted pair 48 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-048-rebuilt-2026-08-04/`
+
+The review recorder now archives any non-pending full-size disposition before
+a later review supersedes it. This makes a `needs_rebuild` rejection and its
+evidence durable when the repaired successor is subsequently marked `pass`.
+
+The current queue contains 46 fresh internal passes, 18 pending pairs, and 2
+rear views marked not observable. User approval and runtime admission remain
+zero; Pair 49 is the next isolated review gate.

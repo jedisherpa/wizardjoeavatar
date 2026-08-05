@@ -3497,16 +3497,16 @@
       "pair_work_path": "pair-work/048-surprise",
       "pairwise_full_size_review": {
         "defect_codes": [],
-        "evidence_path": "",
-        "note": "User visual review on 2026-08-03 found many beaks visibly misaligned in the current all-poses observer. Every visible closed/open pair must be rechecked and, where needed, rebuilt as one isolated pair before a new pass.",
+        "evidence_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-048-rebuilt-2026-08-04",
+        "note": "Rebuilt Pair 48 alone after rejecting the oversized cavity. A pair-specific matched donor supplies only one connected lower mandible and shaded cavity; the canonical surprise frame restores the upper bill and owns the eyes, crest, cheeks, throat, hoodie, spread wings, body, feet, canvas, registration, and silhouette. Full-source, 5x mouth, full-character, and live locked review show a centered lower opening attached at both rear corners beneath the stable upper bill. Audit: 2,059 changed rendered pixels, outside-mouth mean 0.0, silhouette IoU 1.0, registration delta 0, connected-mandible ratio 0.975081. Internal gate only; no user approval and no runtime admission.",
         "protocol_id": "kingfisher-full-size-pairwise-v1",
         "queued_at": "2026-07-31T05:30:00+00:00",
-        "reviewed_at": null,
-        "reviewer": null,
+        "reviewed_at": "2026-08-04",
+        "reviewer": "Codex",
         "runtime_admission_implied": false,
         "schema_version": 1,
-        "source_disposition": "user_reported_visual_recheck",
-        "state": "pending",
+        "source_disposition": "full_size_pairwise_review",
+        "state": "pass",
         "user_approval_implied": false
       },
       "pairwise_full_size_review_history": [
@@ -3527,6 +3527,29 @@
             "schema_version": 1,
             "source_disposition": "full_size_pairwise_review",
             "state": "pass",
+            "user_approval_implied": false
+          }
+        },
+        {
+          "reason": "Superseded by the rebuilt Pair 48 full-size review disposition.",
+          "reporter": "Codex",
+          "schema_version": 1,
+          "superseded_at": "2026-08-04",
+          "superseded_review": {
+            "defect_codes": [
+              "oversized_oral_cavity",
+              "upper_bill_replaced"
+            ],
+            "evidence_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-048-rejected-giant-cavity-2026-08-04",
+            "note": "Fresh one-pair inspection rejected the existing surprise speaking mate. Although centered, the black oral cavity starts inside and visually replaces most of the canonical upper bill, producing an oversized pasted triangle instead of a lower mandible rotating beneath a stable upper bill. Body registration remains stable, but the mouth construction must be rebuilt from the closed source.",
+            "protocol_id": "kingfisher-full-size-pairwise-v1",
+            "queued_at": "2026-07-31T05:30:00+00:00",
+            "reviewed_at": "2026-08-04",
+            "reviewer": "Codex",
+            "runtime_admission_implied": false,
+            "schema_version": 1,
+            "source_disposition": "full_size_pairwise_review",
+            "state": "needs_rebuild",
             "user_approval_implied": false
           }
         }
@@ -4689,11 +4712,11 @@
     "needs_rebuild_count": 0,
     "not_observable_count": 2,
     "pair_count": 66,
-    "pass_count": 45,
-    "passing_disposition_count": 47,
-    "pending_count": 19,
+    "pass_count": 46,
+    "passing_disposition_count": 48,
+    "pending_count": 18,
     "protocol_id": "kingfisher-full-size-pairwise-v1",
-    "reviewed_count": 47,
+    "reviewed_count": 48,
     "runtime_admission_implied": false,
     "schema_version": 1,
     "user_approval_implied": false

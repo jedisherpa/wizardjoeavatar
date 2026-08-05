@@ -3,14 +3,14 @@
     "interpolation": "lanczos_rgb_binary_alpha",
     "rotation_center": [
       574,
-      154
+      151
     ],
     "rotation_degrees": 0.0,
     "scale": 0.5755,
     "scale_x": 0.5755,
-    "scale_y": 0.5755,
+    "scale_y": 0.75,
     "translate_x": -2,
-    "translate_y": -2
+    "translate_y": -49
   },
   "approval_state": "candidate_visual_review",
   "canvas": [
@@ -21,77 +21,77 @@
   "cavity_polygon": [
     [
       480,
-      150
+      151
     ],
     [
       580,
-      150
+      151
     ],
     [
-      570,
+      572,
       180
     ],
     [
-      535,
-      216
+      532,
+      228
     ],
     [
-      500,
+      495,
       185
     ]
   ],
   "cavity_source": "generated",
   "changed_bbox": [
     470,
-    161,
+    167,
     591,
-    226
+    237
   ],
-  "generated_render_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/048-surprise/158_ACT158_surprise_speaking_beak_pairwise_render_v2.png",
-  "generated_render_sha256": "df03bcc95d6ca187c678664b95db5e3132801f1c4bfaf787001bdb8c8a26f531",
+  "generated_render_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/048-surprise/158_ACT158_surprise_speaking_beak_render_raw.png",
+  "generated_render_sha256": "84ab202bdaa512a29829971448d5fe5cb56c7ae30f31ca55dbe16c5d4f201b75",
   "hinge": [
     574,
-    154
+    151
   ],
-  "hinge_radius": 22,
+  "hinge_radius": 20,
   "mandible_bbox": [
     470,
-    135,
+    145,
     591,
-    226
+    237
   ],
-  "mandible_connected_ratio": 0.975081,
-  "mandible_largest_component_pixels": 7200,
-  "mandible_opaque_pixels": 7384,
+  "mandible_connected_ratio": 1.0,
+  "mandible_largest_component_pixels": 9234,
+  "mandible_opaque_pixels": 9234,
   "mandible_polygon": [
     [
       470,
-      135
+      145
     ],
     [
       590,
-      135
+      145
     ],
     [
       590,
-      190
+      185
     ],
     [
-      552,
-      225
+      553,
+      236
     ],
     [
-      505,
-      225
+      506,
+      236
     ],
     [
       470,
-      190
+      185
     ]
   ],
   "method": "pair_specific_connected_mandible_patch_v1",
   "minimum_connected_ratio": 0.9,
-  "minimum_mandible_height": 55,
+  "minimum_mandible_height": 70,
   "outside_articulation_change": false,
   "residual_clear_polygon": null,
   "resting_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/048-surprise/048_ACT048_surprise_resting_beak_alpha.png",
@@ -99,45 +99,41 @@
   "runtime_admitted": false,
   "schema_version": 1,
   "source_mask": {
-    "light_threshold": 175,
-    "mode": "exclude_light_neutral",
-    "neutral_chroma_threshold": 40
+    "light_threshold": 180,
+    "mode": "opaque",
+    "neutral_chroma_threshold": 36
   },
-  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/048-surprise/158_ACT158_surprise_speaking_beak_alpha.png",
-  "speaking_sha256": "2379d0fd414f2d020bbdb3ac6679d60ecf30c7ab0e5c23e9f2eb3f14ed7a7fae",
+  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/048-surprise/158_ACT158_surprise_speaking_beak_candidate_pairwise_v2_upper_locked.png",
+  "speaking_sha256": "f2977245c46565a8ccfd3ad1b55f287ca49533e9edef3bdd5bc8b705b5b954b1",
   "upper_beak_policy": "immutable_source_pixels",
   "upper_beak_polygon": [
     [
-      458,
-      108
+      462,
+      132
     ],
     [
-      598,
-      108
+      595,
+      132
     ],
     [
-      598,
-      154
+      595,
+      162
     ],
     [
-      578,
-      170
+      572,
+      180
     ],
     [
-      544,
-      187
+      530,
+      216
     ],
     [
-      510,
-      187
+      490,
+      182
     ],
     [
-      478,
-      170
-    ],
-    [
-      458,
-      154
+      462,
+      162
     ]
   ]
 }

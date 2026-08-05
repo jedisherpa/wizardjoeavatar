@@ -148,6 +148,55 @@ class ManageKingfisherPairwiseReviewTests(unittest.TestCase):
                     reviewer="pair-reviewer",
                 )
 
+    def test_later_review_preserves_superseded_rebuild_disposition(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            ledger = self._ledger(Path(temporary))
+            initialize_pairwise_review(
+                ledger,
+                queued_at="2026-07-31T00:00:00+00:00",
+            )
+            record_pairwise_review(
+                ledger,
+                ordinal=1,
+                state="needs_rebuild",
+                defect_codes=["upper_bill_replaced"],
+                note="Rejected giant cavity.",
+                evidence_path="full-size/pair-001-rejected.png",
+                reviewer="pair-reviewer",
+                reviewed_at="2026-07-31T01:00:00+00:00",
+            )
+            record_pairwise_review(
+                ledger,
+                ordinal=1,
+                state="pass",
+                defect_codes=[],
+                note="Rebuilt lower mandible passed.",
+                evidence_path="full-size/pair-001-rebuilt.png",
+                reviewer="pair-reviewer",
+                reviewed_at="2026-07-31T02:00:00+00:00",
+            )
+
+            saved = json.loads(ledger.read_text(encoding="utf-8"))
+            pair = saved["pairs"][0]
+            self.assertEqual(
+                pair["pairwise_full_size_review"]["state"],
+                "pass",
+            )
+            history = pair["pairwise_full_size_review_history"]
+            self.assertEqual(len(history), 1)
+            self.assertEqual(
+                history[0]["superseded_review"]["state"],
+                "needs_rebuild",
+            )
+            self.assertEqual(
+                history[0]["superseded_review"]["defect_codes"],
+                ["upper_bill_replaced"],
+            )
+            self.assertEqual(
+                history[0]["superseded_review"]["evidence_path"],
+                "full-size/pair-001-rejected.png",
+            )
+
     def test_invalidation_preserves_prior_pass_and_returns_pair_to_pending(self):
         with tempfile.TemporaryDirectory() as temporary:
             ledger = self._ledger(Path(temporary))
