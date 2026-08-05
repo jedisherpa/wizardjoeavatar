@@ -3029,3 +3029,26 @@ Fresh Pair 10 evidence:
 The queue now contains 8 strict internal passes, 56 pending observable pairs,
 and 2 not-observable rear views. Pair 11 is the next isolated gate; user
 approval and runtime admission remain zero.
+
+Pair 11 (`neutral-speaking-gesture`) passed its isolated native-size,
+enlarged-candidate, and full-projector review. The accepted v2 mate keeps the
+open V centered under the frontal upper bill and preserves both mouth corners.
+The broader v1 and right-drifting or clipped v3-v5 alternatives remain
+rejected. The repaired closed ACT011 frame remains authoritative for the upper
+bill, eyes, head, throat, raised presentation wing, clothing, body, feet,
+scale, and canvas.
+
+The exact accepted pixels were deterministically recomposed under the current
+`0.8` connectivity minimum and retained their prior SHA-256. The corrected
+receipt records hinge `(493, 237)`, right-facing direction, a `0.875`
+mandible-to-upper length ratio, and `0.5` normalized tip offset. Its strict
+audit reports 4,091 changed rendered pixels, outside-mouth mean difference
+`0.0`, registration delta `0`, and silhouette IoU `1.0`.
+
+Fresh Pair 11 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-011-one-pair-2026-08-05-v2/`
+
+The queue now contains 9 strict internal passes, 55 pending observable pairs,
+and 2 not-observable rear views. Pair 12 is the next isolated gate; user
+approval and runtime admission remain zero.
