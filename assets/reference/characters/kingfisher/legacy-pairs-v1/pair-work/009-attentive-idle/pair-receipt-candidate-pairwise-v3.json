@@ -123,7 +123,7 @@
     "mode": "exclude_light_neutral",
     "neutral_chroma_threshold": 55
   },
-  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/009-attentive-idle/119_ACT119_attentive_idle_speaking_beak_alpha.png",
+  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/009-attentive-idle/119_ACT119_attentive_idle_speaking_beak_candidate_pairwise_v3.png",
   "speaking_sha256": "0e90e6e4b87c787c05cd95e6e9af0251b7399b5d1e72f602e159b6e883a5c7fa",
   "upper_beak_policy": "immutable_source_pixels",
   "upper_beak_polygon": [

@@ -2984,3 +2984,26 @@ Fresh Pair 8 evidence:
 The queue now contains 6 strict internal passes, 58 pending observable pairs,
 and 2 not-observable rear views. Pair 9 is the next isolated gate; user approval
 and runtime admission remain zero.
+
+Pair 9 (`attentive-idle`) passed a fresh isolated native-size, enlarged-beak,
+and full-projector review without changing its existing pair-specific art. The
+open lower bill remains centered beneath the frontal upper bill, both mouth
+corners share the declared hinge region, and the head, eyes, throat, hoodie,
+body, stance, canvas, and registration remain sourced from the immutable
+closed frame.
+
+The original receipt used an obsolete `0.65` connectivity threshold. The same
+pixels were deterministically recomposed from the closed frame and existing
+lower-bill donor under the current `0.8` minimum; the candidate SHA-256 stayed
+identical. The corrected receipt records hinge `(459, 230)`, right-facing
+direction, a `0.9286` mandible-to-upper length ratio, and `0.1786` normalized
+tip offset. Its strict audit remains outside-mouth mean difference `0.0`,
+registration delta `0`, and silhouette IoU `1.0`.
+
+Fresh Pair 9 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-009-one-pair-2026-08-05-v2/`
+
+The queue now contains 7 strict internal passes, 57 pending observable pairs,
+and 2 not-observable rear views. Pair 10 is the next isolated gate; user
+approval and runtime admission remain zero.
