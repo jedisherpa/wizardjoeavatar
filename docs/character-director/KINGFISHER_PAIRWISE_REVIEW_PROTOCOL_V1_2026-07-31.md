@@ -2607,3 +2607,23 @@ Accepted pair 59 evidence:
 The current queue contains 57 fresh internal passes, 7 pending pairs, and 2
 rear views marked not observable. User approval and runtime admission remain
 zero; Pair 60 is the next isolated review gate.
+
+Pair 60 (`fatigue`) passed a fresh isolated native-size, full-character, and
+alternating-playback review without another rebuild. One lower bill opens from
+the authored screen-right hinge beneath the downward-facing upper bill. The
+tips remain aligned and the narrow warm cavity stays inside the beak, with no
+duplicate edge, throat replacement, registration drift, or body change.
+
+The receipt records connected-mandible ratio `1.0`, changed bounding box
+`(375, 252)-(455, 298)`, mandible bounding box `(375, 247)-(460, 298)`, and
+hinge `(450, 258)`. The strict audit reports 2,092 changed rendered pixels,
+outside-mouth mean difference `0.0`, registration delta `0`, and silhouette
+IoU `1.0`.
+
+Fresh pair 60 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-060-rechecked-2026-08-05/`
+
+The current queue contains 58 fresh internal passes, 6 pending pairs, and 2
+rear views marked not observable. User approval and runtime admission remain
+zero; Pair 61 is the next isolated review gate.
