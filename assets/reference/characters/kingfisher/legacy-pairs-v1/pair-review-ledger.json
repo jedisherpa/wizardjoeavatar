@@ -3755,10 +3755,10 @@
       "body_pose_id": "kingfisher.act.052.sadness",
       "internal_visual_review": {
         "defect_codes": [],
-        "evidence_path": "review-evidence/detail-boards/pair-detail-page-09.png",
-        "note": "Nearest-neighbor pair detail inspected: both mandibles converge at one authored mouth corner, with no detached duplicate edge or head-registration drift.",
-        "reviewed_at": "2026-07-30T22:28:34.533146+00:00",
-        "reviewer": "codex-pair-closeup-review",
+        "evidence_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-052-rebuilt-2026-08-04",
+        "note": "Fresh one-pair rebuild accepted at the internal gate. Pair 52 now derives a narrow connected lower mandible from a dedicated head-only donor aligned to the canonical hinge; the upper bill, eyes, head, white-and-orange throat patch, body, and registration remain unchanged. Full-size and close-up review show the lower tip directly beneath the upper tip with no diagonal oral wedge, throat replacement, duplicate bill, or body jump. Automated audit changes 541 rendered pixels only inside the measured mouth box, with outside-mouth mean 0.0, silhouette IoU 1.0, and registration delta 0. Internal gate only; no user approval or runtime admission implied.",
+        "reviewed_at": "2026-08-04",
+        "reviewer": "Codex",
         "runtime_admission_implied": false,
         "schema_version": 1,
         "state": "pass",
@@ -3768,16 +3768,16 @@
       "pair_work_path": "pair-work/052-sadness",
       "pairwise_full_size_review": {
         "defect_codes": [],
-        "evidence_path": "",
-        "note": "User visual review on 2026-08-03 found many beaks visibly misaligned in the current all-poses observer. Every visible closed/open pair must be rechecked and, where needed, rebuilt as one isolated pair before a new pass.",
+        "evidence_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-052-rebuilt-2026-08-04",
+        "note": "Fresh one-pair rebuild accepted at the internal gate. Pair 52 now derives a narrow connected lower mandible from a dedicated head-only donor aligned to the canonical hinge; the upper bill, eyes, head, white-and-orange throat patch, body, and registration remain unchanged. Full-size and close-up review show the lower tip directly beneath the upper tip with no diagonal oral wedge, throat replacement, duplicate bill, or body jump. Automated audit changes 541 rendered pixels only inside the measured mouth box, with outside-mouth mean 0.0, silhouette IoU 1.0, and registration delta 0. Internal gate only; no user approval or runtime admission implied.",
         "protocol_id": "kingfisher-full-size-pairwise-v1",
         "queued_at": "2026-07-31T05:30:00+00:00",
-        "reviewed_at": null,
-        "reviewer": null,
+        "reviewed_at": "2026-08-04",
+        "reviewer": "Codex",
         "runtime_admission_implied": false,
         "schema_version": 1,
-        "source_disposition": "user_reported_visual_recheck",
-        "state": "pending",
+        "source_disposition": "full_size_pairwise_review",
+        "state": "pass",
         "user_approval_implied": false
       },
       "pairwise_full_size_review_history": [
@@ -3798,6 +3798,30 @@
             "schema_version": 1,
             "source_disposition": "full_size_pairwise_review",
             "state": "pass",
+            "user_approval_implied": false
+          }
+        },
+        {
+          "reason": "Superseded by a later full-size pairwise review disposition.",
+          "reporter": "Codex",
+          "schema_version": 1,
+          "superseded_at": "2026-08-04",
+          "superseded_review": {
+            "defect_codes": [
+              "mandible_misaligned",
+              "oral_cavity_overrun",
+              "throat_texture_replaced"
+            ],
+            "evidence_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-052-rejected-throat-wedge-2026-08-04",
+            "note": "Fresh one-pair inspection rejected the existing sadness speaking mate. The open frame introduces a long dark diagonal wedge through the canonical white throat patch, replaces throat texture with donor beak pixels, and makes the lower bill read as a pasted blade instead of one mandible rotating beneath the stable downward upper bill. Eyes, head, and body registration remain stable, but the articulation region must be rebuilt from the closed source with a tighter lower-mandible mask.",
+            "protocol_id": "kingfisher-full-size-pairwise-v1",
+            "queued_at": "2026-07-31T05:30:00+00:00",
+            "reviewed_at": "2026-08-04",
+            "reviewer": "Codex",
+            "runtime_admission_implied": false,
+            "schema_version": 1,
+            "source_disposition": "full_size_pairwise_review",
+            "state": "needs_rebuild",
             "user_approval_implied": false
           }
         }
@@ -4712,11 +4736,11 @@
     "needs_rebuild_count": 0,
     "not_observable_count": 2,
     "pair_count": 66,
-    "pass_count": 49,
-    "passing_disposition_count": 51,
-    "pending_count": 15,
+    "pass_count": 50,
+    "passing_disposition_count": 52,
+    "pending_count": 14,
     "protocol_id": "kingfisher-full-size-pairwise-v1",
-    "reviewed_count": 51,
+    "reviewed_count": 52,
     "runtime_admission_implied": false,
     "schema_version": 1,
     "user_approval_implied": false
