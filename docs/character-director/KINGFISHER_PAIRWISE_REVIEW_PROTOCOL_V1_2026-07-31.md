@@ -3075,3 +3075,26 @@ Fresh Pair 12 evidence:
 The queue now contains 10 strict internal passes, 54 pending observable pairs,
 and 2 not-observable rear views. Pair 13 is the next isolated gate; user
 approval and runtime admission remain zero.
+
+Pair 13 (`balance-two-ideas`) passed its isolated native-size, enlarged-beak,
+and full-projector review. The apparent defect was in the inherited review
+model rather than the rendered pixels: the old receipt treated this frontal
+pose as right-facing and measured it from a false left-side hinge. Direct
+comparison showed the existing open mate is centered correctly; experimental
+offsets of -6, -10, -14, and -22 pixels all pulled the lower bill visibly left
+and were rejected.
+
+The accepted v3 receipt preserves the existing visible result while recording
+the true frontal centerline at hinge `(485, 229)`. It reports a `0.0312`
+normalized center offset, `0.9875` mandible-to-upper width ratio, both mouth
+corners anchored, and a connected-mandible ratio of `1.0`. Its strict audit
+reports 3,667 changed rendered pixels, outside-mouth mean difference `0.0`,
+registration delta `0`, and silhouette IoU `1.0`.
+
+Fresh Pair 13 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-013-one-pair-2026-08-05-v2/`
+
+The queue now contains 11 strict internal passes, 53 pending observable pairs,
+and 2 not-observable rear views. Pair 14 is the next isolated gate; user
+approval and runtime admission remain zero.
