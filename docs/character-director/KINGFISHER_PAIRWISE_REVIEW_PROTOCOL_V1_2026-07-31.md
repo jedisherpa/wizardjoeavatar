@@ -3187,3 +3187,27 @@ Fresh Pair 17 evidence:
 The queue now contains 15 strict internal passes, 49 pending observable pairs,
 and 2 not-observable rear views. Pair 18 is the next isolated gate; user
 approval and runtime admission remain zero.
+
+Pair 18 (`detail-downward-point`) passed its isolated native-size,
+enlarged-beak, and full-projector review. Candidate v3 deterministically
+reproduces the selected v2 pixels exactly from the preserved pre-pairwise donor
+under the current directional anatomy checker. Candidate v1 remains rejected
+because its short pink tip reads detached at enlarged scale, and the donor
+remains rejected because its gape is oversized.
+
+The accepted lower bill and cavity stay continuous to the rear hinge on the
+same downward-left axis as the immutable upper bill without moving the eye,
+crown, throat, downward-pointing wing, hoodie, body, feet, scale, or canvas.
+The corrected receipt records hinge `(525, 249)`, mandible anchor distance
+`16.153`, a `0.9697` mandible-to-upper reach ratio, `0.2652` normalized tip
+offset, and connected-mandible ratio `1.0`. Its strict audit reports 4,186
+changed rendered pixels, outside-mouth mean difference `0.0`, registration
+delta `0`, and silhouette IoU `0.999987`.
+
+Fresh Pair 18 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-018-one-pair-2026-08-05-v2/`
+
+The queue now contains 16 strict internal passes, 48 pending observable pairs,
+and 2 not-observable rear views. Pair 19 is the next isolated gate; user
+approval and runtime admission remain zero.
