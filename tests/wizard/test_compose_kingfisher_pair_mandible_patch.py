@@ -227,6 +227,66 @@ class ComposeKingfisherPairMandiblePatchTests(unittest.TestCase):
             self.assertEqual(receipt["cavity_source"], "generated")
             self.assertIsNone(receipt["cavity_fill_rgba"])
 
+    def test_neutralizes_warm_pixels_only_inside_explicit_oral_region(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            resting_path, generated_path = self._sources(root)
+            generated = Image.open(generated_path).convert("RGB")
+            draw = ImageDraw.Draw(generated)
+            draw.rectangle((490, 252, 515, 260), fill=(180, 85, 24))
+            draw.rectangle((530, 252, 542, 260), fill=(180, 85, 24))
+            generated.save(generated_path)
+            output_path = root / "output.png"
+            receipt = compose_mandible_patch(
+                resting_path,
+                generated_path,
+                output_path,
+                root / "receipt.json",
+                scale=1,
+                translate_x=0,
+                translate_y=0,
+                mandible_polygon=[
+                    (468, 248),
+                    (552, 248),
+                    (552, 272),
+                    (468, 272),
+                ],
+                cavity_polygon=[
+                    (478, 251),
+                    (542, 251),
+                    (542, 263),
+                    (478, 263),
+                ],
+                upper_beak_polygon=[
+                    (468, 228),
+                    (552, 225),
+                    (552, 250),
+                    (468, 250),
+                ],
+                hinge=(473, 255),
+                minimum_mandible_height=10,
+                cavity_source="generated_overlay",
+                oral_warm_replacement=(18, 23, 31, 255),
+                oral_warm_replacement_polygon=[
+                    (488, 250),
+                    (518, 250),
+                    (518, 264),
+                    (488, 264),
+                ],
+            )
+
+            output = Image.open(output_path).convert("RGBA")
+            self.assertEqual(output.getpixel((500, 257)), (18, 23, 31, 255))
+            self.assertEqual(output.getpixel((536, 257)), (180, 85, 24, 255))
+            self.assertEqual(
+                receipt["oral_warm_replacement_rgba"],
+                [18, 23, 31, 255],
+            )
+            self.assertEqual(
+                receipt["oral_warm_replacement_polygon"],
+                [[488, 250], [518, 250], [518, 264], [488, 264]],
+            )
+
     def test_overlays_generated_cavity_after_restoring_upper_beak(self):
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)

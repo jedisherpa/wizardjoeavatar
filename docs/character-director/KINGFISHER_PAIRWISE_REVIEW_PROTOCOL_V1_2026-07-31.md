@@ -2450,3 +2450,35 @@ Accepted pair 53 evidence:
 The current queue contains 51 fresh internal passes, 13 pending pairs, and 2
 rear views marked not observable. User approval and runtime admission remain
 zero; Pair 54 is the next isolated review gate.
+
+Pair 54 (`shame`) failed its fresh isolated review and was rebuilt as one
+closed/open pair. The rejected speaking mate opened as a long bright-red,
+tongue-like vertical slit beside a detached dark bill edge, so the mouth no
+longer read as one solid lower mandible rotating beneath the bowed upper bill.
+The rejected source, full-character, and close-up evidence remains preserved
+at:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-054-rejected-tongue-slit-2026-08-05/`
+
+The accepted successor keeps the canonical closed frame in complete ownership
+of the bowed upper bill, eye, crest, cheek, throat, hoodie, body, feet, canvas,
+registration, and silhouette. A dedicated donor contributes only one connected
+lower bill. A narrowly scoped oral-region neutralization removes warm donor
+pixels that caused the tongue-like slit while preserving the orange facial and
+plumage markings outside the mouth. Full-size comparison and live alternating
+playback show one dark lower bill opening from the authored hinge with no
+detached edge or bright oral stripe.
+
+The accepted receipt records connected-mandible ratio `1.0`, changed bounding
+box `(506, 240)-(530, 348)`, mandible bounding box
+`(506, 240)-(534, 348)`, and hinge `(518, 248)`. The strict audit reports 2,138
+changed rendered pixels, outside-mouth mean difference `0.0`, registration
+delta `0`, and silhouette IoU `1.0`.
+
+Accepted pair 54 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-054-rebuilt-2026-08-05/`
+
+The current queue contains 52 fresh internal passes, 12 pending pairs, and 2
+rear views marked not observable. User approval and runtime admission remain
+zero; Pair 55 is the next isolated review gate.

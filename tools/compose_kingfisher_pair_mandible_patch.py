@@ -129,6 +129,48 @@ def _source_color_mask(
     return eligible
 
 
+def _replace_warm_oral_pixels(
+    image: Image.Image,
+    replacement: tuple[int, int, int, int] | None,
+    region_mask: Image.Image | None = None,
+) -> Image.Image:
+    """Neutralize donor tongue/palate colors without touching orange plumage."""
+    if replacement is None:
+        return image
+    output = image.copy()
+    region = (
+        list(region_mask.getdata())
+        if region_mask is not None
+        else [0] * (image.width * image.height)
+    )
+    output.putdata(
+        [
+            replacement
+            if (
+                a
+                and (
+                    (
+                        inside
+                        and r >= 40
+                        and r >= g + 15
+                        and r >= b + 15
+                    )
+                    or (
+                        not inside
+                        and r >= 64
+                        and r >= g + 30
+                        and r >= b + 30
+                        and b >= round(g * 0.75)
+                    )
+                )
+            )
+            else (r, g, b, a)
+            for (r, g, b, a), inside in zip(image.getdata(), region)
+        ]
+    )
+    return output
+
+
 def compose_mandible_patch(
     resting_path: Path,
     generated_path: Path,
@@ -155,6 +197,8 @@ def compose_mandible_patch(
     source_mask_mode: str = "opaque",
     source_light_threshold: int = 180,
     source_neutral_chroma_threshold: int = 36,
+    oral_warm_replacement: tuple[int, int, int, int] | None = None,
+    oral_warm_replacement_polygon: list[tuple[int, int]] | None = None,
 ) -> dict[str, object]:
     """Composite only a matched lower mandible onto an immutable body."""
     with Image.open(resting_path) as loaded:
@@ -223,6 +267,22 @@ def compose_mandible_patch(
         raise ValueError(
             "source neutral chroma threshold must be in [0, 255]"
         )
+    if oral_warm_replacement is not None and any(
+        not 0 <= value <= 255 for value in oral_warm_replacement
+    ):
+        raise ValueError("oral warm replacement channels must be in [0, 255]")
+    if oral_warm_replacement_polygon is not None:
+        if len(oral_warm_replacement_polygon) < 3:
+            raise ValueError(
+                "oral_warm_replacement_polygon requires at least three points"
+            )
+        if any(
+            x < 0 or y < 0 or x >= CANVAS_SIZE[0] or y >= CANVAS_SIZE[1]
+            for x, y in oral_warm_replacement_polygon
+        ):
+            raise ValueError(
+                "oral_warm_replacement_polygon must remain inside the canvas"
+            )
 
     generated = load_render_alpha(generated_path)
     target_size = (
@@ -248,6 +308,16 @@ def compose_mandible_patch(
                 center=effective_rotation_center,
             )
         )
+    oral_replacement_mask = (
+        _polygon_mask(CANVAS_SIZE, oral_warm_replacement_polygon)
+        if oral_warm_replacement_polygon is not None
+        else None
+    )
+    aligned = _replace_warm_oral_pixels(
+        aligned,
+        oral_warm_replacement,
+        oral_replacement_mask,
+    )
 
     source_color_mask = _source_color_mask(
         aligned,
@@ -395,6 +465,16 @@ def compose_mandible_patch(
             "light_threshold": source_light_threshold,
             "neutral_chroma_threshold": source_neutral_chroma_threshold,
         },
+        "oral_warm_replacement_rgba": (
+            list(oral_warm_replacement)
+            if oral_warm_replacement is not None
+            else None
+        ),
+        "oral_warm_replacement_polygon": (
+            [list(point) for point in oral_warm_replacement_polygon]
+            if oral_warm_replacement_polygon is not None
+            else None
+        ),
         "mandible_bbox": list(mandible_bbox),
         "mandible_opaque_pixels": total_pixels,
         "mandible_largest_component_pixels": largest_component,
@@ -462,6 +542,17 @@ def main() -> None:
         type=int,
         default=36,
     )
+    parser.add_argument(
+        "--oral-warm-replacement",
+        nargs=4,
+        type=int,
+        metavar=("R", "G", "B", "A"),
+    )
+    parser.add_argument(
+        "--oral-warm-replacement-polygon",
+        nargs="+",
+        type=int,
+    )
     args = parser.parse_args()
     receipt = compose_mandible_patch(
         args.resting,
@@ -509,6 +600,19 @@ def main() -> None:
         source_light_threshold=args.source_light_threshold,
         source_neutral_chroma_threshold=(
             args.source_neutral_chroma_threshold
+        ),
+        oral_warm_replacement=(
+            tuple(args.oral_warm_replacement)
+            if args.oral_warm_replacement is not None
+            else None
+        ),
+        oral_warm_replacement_polygon=(
+            _points(
+                args.oral_warm_replacement_polygon,
+                name="oral_warm_replacement_polygon",
+            )
+            if args.oral_warm_replacement_polygon
+            else None
         ),
     )
     print(json.dumps(receipt, indent=2, sort_keys=True))

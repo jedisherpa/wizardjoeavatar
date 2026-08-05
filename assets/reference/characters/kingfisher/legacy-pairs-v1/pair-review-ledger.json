@@ -3940,16 +3940,16 @@
       "pair_work_path": "pair-work/054-shame",
       "pairwise_full_size_review": {
         "defect_codes": [],
-        "evidence_path": "",
-        "note": "User visual review on 2026-08-03 found many beaks visibly misaligned in the current all-poses observer. Every visible closed/open pair must be rechecked and, where needed, rebuilt as one isolated pair before a new pass.",
+        "evidence_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-054-rebuilt-2026-08-05",
+        "note": "Pairwise rebuild accepted at full source size and in the live viewer: the bowed upper beak remains immutable while a single dark lower bill opens on the authored hinge; the previous bright tongue-like slit and detached edge are absent. Deterministic audit passed with 2,138 changed rendered pixels, 0.0 mean change outside the mouth region, silhouette IoU 1.0, and zero registration delta. This is an engineering review only; user approval and runtime admission remain false.",
         "protocol_id": "kingfisher-full-size-pairwise-v1",
         "queued_at": "2026-07-31T05:30:00+00:00",
-        "reviewed_at": null,
-        "reviewer": null,
+        "reviewed_at": "2026-08-05T00:00:00Z",
+        "reviewer": "codex",
         "runtime_admission_implied": false,
         "schema_version": 1,
-        "source_disposition": "user_reported_visual_recheck",
-        "state": "pending",
+        "source_disposition": "full_size_pairwise_review",
+        "state": "pass",
         "user_approval_implied": false
       },
       "pairwise_full_size_review_history": [
@@ -3970,6 +3970,30 @@
             "schema_version": 1,
             "source_disposition": "full_size_pairwise_review",
             "state": "pass",
+            "user_approval_implied": false
+          }
+        },
+        {
+          "reason": "Superseded by a later full-size pairwise review disposition.",
+          "reporter": "codex",
+          "schema_version": 1,
+          "superseded_at": "2026-08-05T00:00:00Z",
+          "superseded_review": {
+            "defect_codes": [
+              "detached_beak_edge",
+              "hinge_misalignment",
+              "tongue_like_cavity"
+            ],
+            "evidence_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-054-rejected-tongue-slit-2026-08-05",
+            "note": "Full-size one-pair inspection rejected the speaking mate: the bowed-head pose opens as a long red tongue-like slit with a detached dark blade rather than one solid lower mandible rotating from the existing hinge. Rebuild only Pair 54.",
+            "protocol_id": "kingfisher-full-size-pairwise-v1",
+            "queued_at": "2026-07-31T05:30:00+00:00",
+            "reviewed_at": "2026-08-05T01:00:00Z",
+            "reviewer": "codex",
+            "runtime_admission_implied": false,
+            "schema_version": 1,
+            "source_disposition": "full_size_pairwise_review",
+            "state": "needs_rebuild",
             "user_approval_implied": false
           }
         }
@@ -4760,11 +4784,11 @@
     "needs_rebuild_count": 0,
     "not_observable_count": 2,
     "pair_count": 66,
-    "pass_count": 51,
-    "passing_disposition_count": 53,
-    "pending_count": 13,
+    "pass_count": 52,
+    "passing_disposition_count": 54,
+    "pending_count": 12,
     "protocol_id": "kingfisher-full-size-pairwise-v1",
-    "reviewed_count": 53,
+    "reviewed_count": 54,
     "runtime_admission_implied": false,
     "schema_version": 1,
     "user_approval_implied": false
