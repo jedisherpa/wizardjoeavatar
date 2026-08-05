@@ -2800,3 +2800,48 @@ passes, 2 exact rear views are marked not observable, and no pairs remain
 pending or marked for rebuild. The compiled review artifact contains all 176
 poses and a 132-frame closed/open review sequence. The review verifier passes;
 user approval and runtime admission remain explicitly zero.
+
+## 2026-08-05 user visual recheck and strict pair reset
+
+Sequence playback exposed additional visibly misaligned beaks after the prior
+internal pass had reached all 64 observable pairs. The failure mode is now
+explicit: registration, silhouette, and outside-mouth stability checks can all
+pass while the lower mandible is still anatomically misaligned inside the
+allowed articulation region. The prior numeric and visual dispositions are
+therefore evidence, not authority.
+
+All 64 observable pairs were returned to `pending` with their earlier reviews
+preserved in `pairwise_full_size_review_history`. The two exact rear views
+remain `not_observable`. Runtime admission and user approval remain false.
+
+The replacement workflow advances exactly one closed/open pair at a time:
+
+1. The closed frame is the immutable authority for the body, head, eyes,
+   throat, and complete upper bill.
+2. A speaking candidate may contribute only one connected lower mandible and
+   its bounded oral cavity.
+3. Closed and open frames are inspected at native size, locked side by side,
+   in alternating playback, and with the upper bill and hinge visually
+   overlaid.
+4. A candidate is rejected for any upper-bill shift, hinge slide, duplicate
+   edge, detached mandible, throat seam, head movement, scale change, or canvas
+   movement even when the numeric audit reports a pass.
+5. The next pair does not begin until the current pair has a preserved rejected
+   candidate when applicable, accepted evidence, and a new pairwise ledger
+   disposition.
+
+Pair 1 (`neutral-front`) is the first pair rechecked under this stricter loop.
+A fresh generated candidate was rejected because constraining its donor back
+onto the canonical frame left a gray seam and insufficient mouth aperture.
+The existing open mate remains the accepted internal candidate: its bilateral
+hinge is centered, the lower mandible is connected, and all pixels outside the
+bounded articulation remain stable. This disposition does not imply user
+approval or runtime admission.
+
+Accepted Pair 1 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-001-one-pair-2026-08-05-v1/`
+
+The corrected queue now contains 1 strict internal pass, 63 pending observable
+pairs, and 2 exact rear views marked not observable. Pair 2 is the next and
+only active art-generation and review unit.

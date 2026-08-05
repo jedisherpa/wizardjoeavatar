@@ -98,7 +98,7 @@ class HdPairReviewUiTests(unittest.TestCase):
         history = repaired["pairwise_full_size_review_history"]
         self.assertEqual(history[-1]["superseded_review"]["state"], "pass")
         self.assertIn(
-            "evidence/pairwise-full-size/pair-059-v3",
+            "evidence/pairwise-full-size/pair-059-",
             history[-1]["superseded_review"]["evidence_path"],
         )
         self.assertFalse(repaired["runtime_admitted"])
@@ -115,7 +115,7 @@ class HdPairReviewUiTests(unittest.TestCase):
         )
         self.assertEqual(fatigue["pairwise_full_size_review"]["evidence_path"], "")
         self.assertIn(
-            "evidence/pairwise-full-size/pair-060-v3",
+            "evidence/pairwise-full-size/pair-060-",
             fatigue["pairwise_full_size_review_history"][-1][
                 "superseded_review"
             ]["evidence_path"],
@@ -140,8 +140,11 @@ class HdPairReviewUiTests(unittest.TestCase):
                 ledger["pairs"][ordinal - 1]["pairwise_full_size_review"]["state"]
                 for ordinal in (1, 2, 3, 6)
             ],
-            ["pass", "pass", "pass", "pass"],
+            ["pass", "pending", "pending", "pending"],
         )
+        self.assertEqual(summary["pass_count"], 1)
+        self.assertEqual(summary["pending_count"], 63)
+        self.assertFalse(summary["complete"])
         pending_pairs = [
             pair for pair in visible_pairs
             if pair["pairwise_full_size_review"]["state"] == "pending"

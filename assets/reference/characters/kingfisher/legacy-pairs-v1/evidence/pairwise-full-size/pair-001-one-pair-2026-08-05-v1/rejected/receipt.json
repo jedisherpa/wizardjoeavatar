@@ -1,0 +1,181 @@
+{
+  "alignment": {
+    "interpolation": "lanczos_rgb_binary_alpha",
+    "rotation_center": [
+      480,
+      260
+    ],
+    "rotation_degrees": 0.0,
+    "scale": 0.576,
+    "scale_x": 0.576,
+    "scale_y": 0.576,
+    "translate_x": -2,
+    "translate_y": -2
+  },
+  "approval_state": "candidate_visual_review",
+  "canvas": [
+    960,
+    540
+  ],
+  "cavity_fill_rgba": null,
+  "cavity_polygon": [
+    [
+      447,
+      251
+    ],
+    [
+      461,
+      256
+    ],
+    [
+      480,
+      260
+    ],
+    [
+      499,
+      256
+    ],
+    [
+      513,
+      251
+    ],
+    [
+      507,
+      278
+    ],
+    [
+      494,
+      297
+    ],
+    [
+      480,
+      306
+    ],
+    [
+      466,
+      297
+    ],
+    [
+      453,
+      278
+    ]
+  ],
+  "cavity_source": "generated_overlay",
+  "changed_bbox": [
+    446,
+    252,
+    515,
+    320
+  ],
+  "generated_render_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/001-neutral-front/111_ACT111_neutral_front_speaking_pairwise_render_2026-08-05.png",
+  "generated_render_sha256": "9ad070b715a08e2eb65692e0aa0ad43c6edca9c5a06962588ff7f2dcd48e6b55",
+  "hinge": [
+    480,
+    260
+  ],
+  "hinge_radius": 9,
+  "mandible_bbox": [
+    444,
+    254,
+    516,
+    320
+  ],
+  "mandible_connected_ratio": 0.98809,
+  "mandible_largest_component_pixels": 2157,
+  "mandible_opaque_pixels": 2183,
+  "mandible_polygon": [
+    [
+      444,
+      254
+    ],
+    [
+      458,
+      260
+    ],
+    [
+      480,
+      264
+    ],
+    [
+      502,
+      260
+    ],
+    [
+      516,
+      254
+    ],
+    [
+      512,
+      285
+    ],
+    [
+      496,
+      307
+    ],
+    [
+      480,
+      319
+    ],
+    [
+      464,
+      307
+    ],
+    [
+      448,
+      285
+    ]
+  ],
+  "method": "pair_specific_connected_mandible_patch_v1",
+  "minimum_connected_ratio": 0.92,
+  "minimum_mandible_height": 12,
+  "oral_warm_replacement_polygon": null,
+  "oral_warm_replacement_rgba": null,
+  "outside_articulation_change": false,
+  "residual_clear_polygon": null,
+  "resting_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/001-neutral-front/001_ACT001_neutral_front_resting_beak_alpha.png",
+  "resting_sha256": "551941ad0704b16098b4374d2c3c8ce30b6ae8680c0fd398ce6abaef2519ade9",
+  "runtime_admitted": false,
+  "schema_version": 1,
+  "source_mask": {
+    "light_threshold": 210,
+    "mode": "exclude_light_neutral",
+    "neutral_chroma_threshold": 35
+  },
+  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/001-neutral-front/111_ACT111_neutral_front_speaking_beak_candidate_pairwise_2026-08-05_v1.png",
+  "speaking_sha256": "633d97bab3430945a7fad142ce5339ffa1f887344322e31d9d448898dec2a4b2",
+  "upper_beak_policy": "immutable_source_pixels",
+  "upper_beak_polygon": [
+    [
+      442,
+      223
+    ],
+    [
+      480,
+      217
+    ],
+    [
+      518,
+      223
+    ],
+    [
+      516,
+      266
+    ],
+    [
+      501,
+      275
+    ],
+    [
+      480,
+      269
+    ],
+    [
+      459,
+      275
+    ],
+    [
+      444,
+      266
+    ]
+  ]
+}
