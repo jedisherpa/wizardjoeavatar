@@ -2965,3 +2965,22 @@ Fresh Pair 7 evidence:
 The queue now contains 5 strict internal passes, 59 pending observable pairs,
 and 2 not-observable rear views. Pair 8 is the next isolated gate; user approval
 and runtime admission remain zero.
+
+Pair 8 (`relaxed-idle`) passed a fresh isolated native-size, enlarged, and
+full-projector review without requiring new art. Its existing pair-specific
+lower mandible remains restrained for the relaxed pose, joins hinge `(439,
+250)`, and follows the canonical left-facing upper-bill axis without a doubled
+edge, throat seam, head shift, or scale change.
+
+The compiler recomputes a `0.9302` mandible-to-upper length ratio, `0.3953`
+normalized tip offset, and passing upper, lower, and cavity hinge attachment.
+The strict image audit remains outside-mouth mean difference `0.0`, registration
+delta `0`, and silhouette IoU `0.995701`.
+
+Fresh Pair 8 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-008-one-pair-2026-08-05-v2/`
+
+The queue now contains 6 strict internal passes, 58 pending observable pairs,
+and 2 not-observable rear views. Pair 9 is the next isolated gate; user approval
+and runtime admission remain zero.

@@ -138,12 +138,12 @@ class HdPairReviewUiTests(unittest.TestCase):
         self.assertEqual(
             [
                 ledger["pairs"][ordinal - 1]["pairwise_full_size_review"]["state"]
-                for ordinal in (1, 2, 3, 6, 7)
+                for ordinal in (1, 2, 3, 6, 7, 8)
             ],
-            ["pass", "pass", "pass", "pass", "pass"],
+            ["pass", "pass", "pass", "pass", "pass", "pass"],
         )
-        self.assertEqual(summary["pass_count"], 5)
-        self.assertEqual(summary["pending_count"], 59)
+        self.assertEqual(summary["pass_count"], 6)
+        self.assertEqual(summary["pending_count"], 58)
         self.assertFalse(summary["complete"])
         pending_pairs = [
             pair for pair in visible_pairs
