@@ -2248,3 +2248,25 @@ Fresh pair 45 evidence:
 The current queue contains 43 fresh internal passes, 21 pending pairs, and 2
 rear views marked not observable. User approval and runtime admission remain
 zero; Pair 46 is the next isolated review gate.
+
+Pair 46 (`confident-hero`) passed a fresh isolated full-source, 6x frontal-
+mouth, and live locked-beak review without another rebuild. The opening stays
+centered beneath the immutable upper bill, both mouth corners remain fixed,
+and the lower mandible remains one connected component. No detached edge,
+duplicate bill, imported throat texture, or movement in the eyes, crest,
+cheeks, throat, hoodie, extended wings, body, feet, scale, registration, or
+silhouette is visible.
+
+The receipt records connected-mandible ratio `1.0`, changed bounding box
+`(447, 185)-(514, 229)`, mandible bounding box `(447, 181)-(514, 229)`, and
+hinge `(450, 194)`. The strict audit reports 2,532 changed rendered pixels,
+outside-mouth mean difference `0.0`, registration delta `0`, and silhouette
+IoU `1.0`.
+
+Fresh pair 46 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-046-recheck-2026-08-04/`
+
+The current queue contains 44 fresh internal passes, 20 pending pairs, and 2
+rear views marked not observable. User approval and runtime admission remain
+zero; Pair 47 is the next isolated review gate.
