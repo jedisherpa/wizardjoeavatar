@@ -2347,3 +2347,24 @@ Fresh pair 49 evidence:
 The current queue contains 47 fresh internal passes, 17 pending pairs, and 2
 rear views marked not observable. User approval and runtime admission remain
 zero; Pair 50 is the next isolated review gate.
+
+Pair 50 (`skepticism`) passed a fresh isolated locked-beak, full-character,
+and alternating-playback review without another rebuild. The pose's long
+diagonal upper bill remains pixel-identical to the canonical closed frame,
+while one connected lower mandible rotates beneath it from the same
+screen-right rear hinge. The narrow speaking aperture reads cleanly at full
+character scale without a doubled bill or detached edge.
+
+The receipt records connected-mandible ratio `0.995865`, changed bounding box
+`(409, 215)-(504, 272)`, mandible bounding box `(409, 215)-(504, 272)`, and
+hinge `(497, 222)`. The strict audit reports 1,451 changed rendered pixels,
+outside-mouth mean difference `0.0`, registration delta `0`, and silhouette
+IoU `0.999969`.
+
+Fresh pair 50 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-050-rechecked-2026-08-04/`
+
+The current queue contains 48 fresh internal passes, 16 pending pairs, and 2
+rear views marked not observable. User approval and runtime admission remain
+zero; Pair 51 is the next isolated review gate.
