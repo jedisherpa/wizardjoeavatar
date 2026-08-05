@@ -2921,3 +2921,24 @@ Fresh Pair 3 evidence:
 The queue now contains 3 strict internal passes, 61 pending observable pairs,
 and 2 not-observable rear views. The verifier intentionally advances to Pair 6,
 the next observable pose; user approval and runtime admission remain zero.
+
+Pair 6 (`right-profile`) was also rebuilt as one isolated pair. ACT006 remains
+the immutable source for the body, head, eye, throat, and complete upper bill;
+the earlier speaking mate contributes only the connected lower mandible and
+bounded cavity inside the pair-specific masks.
+
+The accepted lower bill joins rear hinge `(537, 246)`, follows the canonical
+right-facing axis, and ends behind the upper tip. Its geometry reports a
+`0.7611` lower-to-upper bill length ratio, `0.4513` normalized tip offset, and
+1-pixel upper, lower, and cavity hinge distances. The strict image audit
+reports 1,045 changed rendered pixels, outside-mouth mean difference `0.0`,
+registration delta `0`, and
+silhouette IoU `0.988776`.
+
+Fresh Pair 6 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-006-one-pair-2026-08-05-v2/`
+
+The queue now contains 4 strict internal passes, 60 pending observable pairs,
+and 2 not-observable rear views. Pair 7 is the next isolated review gate; user
+approval and runtime admission remain zero.

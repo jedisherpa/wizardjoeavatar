@@ -1,61 +1,143 @@
 {
   "alignment": {
     "interpolation": "lanczos_rgb_binary_alpha",
-    "scale": 0.5950413223140496,
-    "translate_x": -8,
-    "translate_y": 38
-  },
-  "approval_state": "candidate_visual_review",
-  "articulation_bbox": [
-    515,
-    230,
-    654,
-    321
-  ],
-  "articulation_polygon": [
-    [
-      530,
-      244
-    ],
-    [
-      590,
-      230
-    ],
-    [
-      653,
+    "rotation_center": [
+      537,
       246
     ],
-    [
-      650,
-      320
-    ],
-    [
-      540,
-      315
-    ],
-    [
-      515,
-      280
-    ]
-  ],
+    "rotation_degrees": 0.0,
+    "scale": 1.0,
+    "scale_x": 1.0,
+    "scale_y": 1.0,
+    "translate_x": 0,
+    "translate_y": 0
+  },
+  "approval_state": "candidate_visual_review",
+  "beak_anatomy": {
+    "cavity_anchor_distance": 1.0,
+    "checks": {
+      "bounded_tip_offset": true,
+      "cavity_anchored": true,
+      "mandible_anchored": true,
+      "plausible_mandible_length": true,
+      "same_longitudinal_direction": true,
+      "upper_beak_anchored": true
+    },
+    "direction": "right",
+    "mandible_anchor_distance": 1.0,
+    "mandible_forward_reach": 86,
+    "mandible_length_ratio": 0.7611,
+    "mandible_reverse_reach": 1,
+    "mode": "directional",
+    "passed": true,
+    "schema_version": 1,
+    "tip_offset_ratio": 0.4513,
+    "upper_anchor_distance": 1.0,
+    "upper_forward_reach": 113
+  },
   "canvas": [
     960,
     540
   ],
-  "changed_bbox": [
-    515,
-    230,
-    621,
-    316
+  "cavity_fill_rgba": null,
+  "cavity_polygon": [
+    [
+      536,
+      244
+    ],
+    [
+      568,
+      254
+    ],
+    [
+      612,
+      280
+    ],
+    [
+      600,
+      285
+    ],
+    [
+      565,
+      269
+    ],
+    [
+      536,
+      255
+    ]
   ],
-  "generated_render_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/006-right-profile/006_ACT006_right_profile_speaking_render_raw.png",
-  "generated_render_sha256": "52f39487b63fdefb0f679913502bef24544a5857566329b00a2d707fde14b296",
-  "method": "pose_specific_render_local_articulation_composite_v1",
+  "cavity_source": "generated_overlay",
+  "changed_bbox": [
+    536,
+    244,
+    620,
+    285
+  ],
+  "generated_render_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/006-right-profile/116_ACT116_right_profile_speaking_beak_alpha.png",
+  "generated_render_sha256": "21ca9942c49b2c326b1495060cbb3932bba42b798543fd735249e4e6ee580bb4",
+  "hinge": [
+    537,
+    246
+  ],
+  "hinge_radius": 10,
+  "mandible_bbox": [
+    536,
+    243,
+    620,
+    285
+  ],
+  "mandible_connected_ratio": 1.0,
+  "mandible_largest_component_pixels": 865,
+  "mandible_opaque_pixels": 865,
+  "mandible_polygon": [
+    [
+      536,
+      243
+    ],
+    [
+      623,
+      286
+    ],
+    [
+      536,
+      264
+    ]
+  ],
+  "method": "pair_specific_connected_mandible_patch_v1",
+  "minimum_connected_ratio": 0.9,
+  "minimum_mandible_height": 12,
+  "oral_warm_replacement_polygon": null,
+  "oral_warm_replacement_rgba": null,
   "outside_articulation_change": false,
+  "residual_clear_polygon": null,
   "resting_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/006-right-profile/006_ACT006_right_profile_resting_beak_alpha.png",
   "resting_sha256": "e3e68d7e3dcc46ae48a2bba0df0aa1695285c78b084c064ebed81ac51eff6833",
   "runtime_admitted": false,
   "schema_version": 1,
-  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/006-right-profile/116_ACT116_right_profile_speaking_beak_alpha.png",
-  "speaking_sha256": "21ca9942c49b2c326b1495060cbb3932bba42b798543fd735249e4e6ee580bb4"
+  "source_mask": {
+    "light_threshold": 180,
+    "mode": "opaque",
+    "neutral_chroma_threshold": 36
+  },
+  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/006-right-profile/116_ACT116_right_profile_speaking_beak_pairwise_v2.png",
+  "speaking_sha256": "e8fd5afca7e4ee5d72c4f15d296395dc8df4b5ab5460f304b5541a5b16a634d1",
+  "upper_beak_policy": "immutable_source_pixels",
+  "upper_beak_polygon": [
+    [
+      536,
+      220
+    ],
+    [
+      650,
+      228
+    ],
+    [
+      650,
+      242
+    ],
+    [
+      536,
+      250
+    ]
+  ]
 }
