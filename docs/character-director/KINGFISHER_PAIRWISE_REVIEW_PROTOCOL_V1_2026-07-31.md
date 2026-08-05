@@ -2227,3 +2227,24 @@ Fresh pair 44 evidence:
 The current queue contains 42 fresh internal passes, 22 pending pairs, and 2
 rear views marked not observable. User approval and runtime admission remain
 zero; Pair 45 is the next isolated review gate.
+
+Pair 45 (`curiosity`) passed a fresh isolated full-source, 7x tilted-mouth,
+and live locked-beak review without another rebuild. The compact lower
+mandible remains attached to the canonical screen-left hinge and follows the
+tilted upper-bill geometry without lateral drift. No detached edge, duplicate
+bill, imported throat texture, or movement in the eyes, crest, cheeks, throat,
+hoodie, wings, body, feet, scale, registration, or silhouette is visible.
+
+The receipt records connected-mandible ratio `1.0`, changed bounding box
+`(444, 233)-(489, 275)`, mandible bounding box `(442, 230)-(489, 277)`, and
+hinge `(446, 244)`. The strict audit reports 1,066 changed rendered pixels,
+outside-mouth mean difference `0.0`, registration delta `0`, and silhouette
+IoU `1.0`.
+
+Fresh pair 45 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-045-recheck-2026-08-04/`
+
+The current queue contains 43 fresh internal passes, 21 pending pairs, and 2
+rear views marked not observable. User approval and runtime admission remain
+zero; Pair 46 is the next isolated review gate.
