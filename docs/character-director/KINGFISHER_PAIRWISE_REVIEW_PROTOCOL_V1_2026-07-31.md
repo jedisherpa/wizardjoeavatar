@@ -2576,3 +2576,34 @@ Fresh pair 58 evidence:
 The current queue contains 56 fresh internal passes, 8 pending pairs, and 2
 rear views marked not observable. User approval and runtime admission remain
 zero; Pair 59 is the next isolated review gate.
+
+Pair 59 (`determination`) failed its fresh isolated review and was rebuilt as
+one closed/open pair. The rejected speaking mate used a lower bill that stopped
+roughly one quarter-beak behind the canonical upper tip, so alternating
+playback read as a short blade opening beneath a full-length kingfisher bill.
+The rejected full-character, close-up, and playback evidence remains preserved
+at:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-059-rejected-short-mandible-2026-08-05/`
+
+The accepted successor was generated from Pair 59's own isolated head and beak,
+then reduced to an alpha donor. The deterministic compositor transfers only one
+long lower mandible and its narrow cavity. The canonical resting frame remains
+the sole owner of the upper bill, eyes, crest, cheek, throat, hoodie, wings,
+body, feet, canvas, and registration. The lower tip now reaches the canonical
+upper-tip boundary from the existing rear hinge without a detached edge,
+duplicated bill, imported matte, or body change.
+
+The accepted receipt records connected-mandible ratio `0.9978`, changed
+bounding box `(535, 244)-(683, 292)`, mandible bounding box
+`(530, 238)-(683, 292)`, and hinge `(540, 247)`. The strict audit reports
+2,770 changed rendered pixels, outside-mouth mean difference `0.0`,
+registration delta `0`, and silhouette IoU `0.994619`.
+
+Accepted pair 59 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-059-rebuilt-2026-08-05/`
+
+The current queue contains 57 fresh internal passes, 7 pending pairs, and 2
+rear views marked not observable. User approval and runtime admission remain
+zero; Pair 60 is the next isolated review gate.
