@@ -2325,3 +2325,25 @@ evidence durable when the repaired successor is subsequently marked `pass`.
 The current queue contains 46 fresh internal passes, 18 pending pairs, and 2
 rear views marked not observable. User approval and runtime admission remain
 zero; Pair 49 is the next isolated review gate.
+
+Pair 49 (`confusion`) passed a fresh isolated locked-beak, full-character, and
+alternating-playback review without another rebuild. The upper bill remains
+pixel-identical to the canonical closed frame while one narrow connected lower
+mandible opens from the same screen-right hinge. No lateral beak drift,
+detached edge, duplicate bill, imported throat texture, or movement in the
+eyes, crest, cheeks, throat, hoodie, raised-wing gesture, body, feet, scale,
+registration, or silhouette is visible.
+
+The receipt records connected-mandible ratio `1.0`, changed bounding box
+`(492, 207)-(596, 250)`, mandible bounding box `(492, 194)-(596, 250)`, and
+hinge `(584, 207)`. The strict audit reports 3,022 changed rendered pixels,
+outside-mouth mean difference `0.0`, registration delta `0`, and silhouette
+IoU `0.99991`.
+
+Fresh pair 49 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-049-rechecked-2026-08-04/`
+
+The current queue contains 47 fresh internal passes, 17 pending pairs, and 2
+rear views marked not observable. User approval and runtime admission remain
+zero; Pair 50 is the next isolated review gate.
