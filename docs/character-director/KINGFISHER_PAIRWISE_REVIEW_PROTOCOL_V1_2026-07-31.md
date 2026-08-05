@@ -2482,3 +2482,33 @@ Accepted pair 54 evidence:
 The current queue contains 52 fresh internal passes, 12 pending pairs, and 2
 rear views marked not observable. User approval and runtime admission remain
 zero; Pair 55 is the next isolated review gate.
+
+Pair 55 (`fear`) failed its fresh isolated review and was rebuilt as one
+closed/open pair. The rejected speaking mate used an oversized triangular
+lower jaw that crossed the canonical white throat, overwhelmed the upper bill,
+and changed the fear expression's silhouette. The rejected full-character and
+native-size closed/open evidence remains preserved at:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-055-rejected-oversized-jaw-2026-08-05/`
+
+The accepted successor reuses the pair-specific donor only for one reduced,
+shallow lower bill and its textured cavity. The canonical resting frame remains
+the sole owner of the upper bill, eyes, head, throat, hoodie, raised-wing
+gesture, body, feet, canvas, registration, and silhouette. Native-size
+closed/open comparison and alternating playback show the lower bill opening
+from the existing screen-right hinge without covering the throat or introducing
+a second edge.
+
+The accepted receipt records connected-mandible ratio `1.0`, changed bounding
+box `(532, 228)-(601, 265)`, mandible bounding box
+`(532, 221)-(614, 265)`, and hinge `(603, 225)`. The strict audit reports 975
+changed rendered pixels, outside-mouth mean difference `0.0`, registration
+delta `0`, and silhouette IoU `0.999655`.
+
+Accepted pair 55 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-055-rebuilt-2026-08-05/`
+
+The current queue contains 53 fresh internal passes, 11 pending pairs, and 2
+rear views marked not observable. User approval and runtime admission remain
+zero; Pair 56 is the next isolated review gate.
