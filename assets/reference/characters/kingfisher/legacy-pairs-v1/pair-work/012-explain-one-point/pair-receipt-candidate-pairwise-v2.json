@@ -123,7 +123,7 @@
     "mode": "exclude_light_neutral",
     "neutral_chroma_threshold": 70
   },
-  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/012-explain-one-point/122_ACT122_explain_one_point_speaking_beak_alpha.png",
+  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/012-explain-one-point/122_ACT122_explain_one_point_speaking_beak_candidate_pairwise_v2.png",
   "speaking_sha256": "c9d833c024f4a4a7f76e85e4d4c06e2447b6d8318f6f3aa86b9e96b1ae903995",
   "upper_beak_policy": "immutable_source_pixels",
   "upper_beak_polygon": [

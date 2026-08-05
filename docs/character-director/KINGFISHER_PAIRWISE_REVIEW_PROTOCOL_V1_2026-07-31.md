@@ -3052,3 +3052,26 @@ Fresh Pair 11 evidence:
 The queue now contains 9 strict internal passes, 55 pending observable pairs,
 and 2 not-observable rear views. Pair 12 is the next isolated gate; user
 approval and runtime admission remain zero.
+
+Pair 12 (`explain-one-point`) passed its isolated native-size, enlarged-pair,
+and full-projector review. The accepted v1 mate retains a centered V-shaped
+opening beneath the frontal upper bill, keeps both hinge corners attached, and
+does not disturb the eyes, crown, throat, raised pointing wing, hoodie, body,
+feet, scale, or canvas inherited from the closed ACT012 frame.
+
+The exact accepted pixels were deterministically regenerated under the current
+`0.8` connectivity minimum and retained the existing SHA-256. The measured
+connected-mandible ratio is `0.81237`, so this pair passes narrowly but
+truthfully. The corrected receipt also records hinge `(486, 235)`, right-facing
+direction, a `0.828` mandible-to-upper length ratio, and `0.5699` normalized
+tip offset. Its strict audit reports 2,768 changed rendered pixels,
+outside-mouth mean difference `0.0`, registration delta `0`, and silhouette
+IoU `1.0`.
+
+Fresh Pair 12 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-012-one-pair-2026-08-05-v2/`
+
+The queue now contains 10 strict internal passes, 54 pending observable pairs,
+and 2 not-observable rear views. Pair 13 is the next isolated gate; user
+approval and runtime admission remain zero.
