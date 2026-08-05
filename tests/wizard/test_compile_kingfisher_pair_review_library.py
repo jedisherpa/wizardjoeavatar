@@ -98,9 +98,15 @@ class CompileKingfisherPairReviewLibraryTests(unittest.TestCase):
                 "outside_articulation_change": False,
                 "hinge": [13, 9],
                 "hinge_radius": 2,
-                "mandible_polygon": [[13, 9], [19, 9], [19, 17], [13, 17]],
-                "cavity_polygon": [[13, 9], [19, 9], [16, 15]],
-                "upper_beak_polygon": [[13, 7], [20, 7], [19, 9], [13, 9]],
+                "mandible_polygon": [
+                    [13, 9],
+                    [18, 10],
+                    [20, 13],
+                    [19, 17],
+                    [13, 11],
+                ],
+                "cavity_polygon": [[13, 9], [18, 10], [19, 12], [14, 11]],
+                "upper_beak_polygon": [[13, 7], [20, 8], [20, 10], [13, 9]],
                 "minimum_connected_ratio": 0.9,
                 "mandible_connected_ratio": 1.0,
                 "minimum_mandible_height": 8,
@@ -245,6 +251,28 @@ class CompileKingfisherPairReviewLibraryTests(unittest.TestCase):
             ledger.write_text(json.dumps(data), encoding="utf-8")
 
             with self.assertRaisesRegex(ValueError, "pair-specific mandible patch"):
+                compile_pair_review_library(base_index, ledger, root / "review")
+
+    def test_rejects_new_pass_with_misaligned_beak_axis(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            base_index, ledger = self._fixture(root)
+            data = json.loads(ledger.read_text(encoding="utf-8"))
+            pair = data["pairs"][1]
+            pair["pairwise_full_size_review"]["state"] = "pass"
+            receipt_path = Path(pair["receipt_path"])
+            receipt = json.loads(receipt_path.read_text(encoding="utf-8"))
+            receipt["mandible_polygon"] = [
+                [13, 9],
+                [8, 10],
+                [5, 13],
+                [7, 17],
+                [13, 11],
+            ]
+            receipt_path.write_text(json.dumps(receipt), encoding="utf-8")
+            ledger.write_text(json.dumps(data), encoding="utf-8")
+
+            with self.assertRaisesRegex(ValueError, "misaligned beak anatomy"):
                 compile_pair_review_library(base_index, ledger, root / "review")
 
     def test_failed_artifact_write_preserves_previous_review_artifact(self):

@@ -5,12 +5,41 @@ from pathlib import Path
 from PIL import Image, ImageDraw
 
 from tools.compose_kingfisher_pair_mandible_patch import (
+    beak_anatomy_metrics,
     compose_mandible_patch,
 )
 from tools.compose_kingfisher_pair_render import CANVAS_SIZE
 
 
 class ComposeKingfisherPairMandiblePatchTests(unittest.TestCase):
+    def test_beak_anatomy_rejects_reversed_profile_mandible(self):
+        report = beak_anatomy_metrics(
+            hinge=(100, 100),
+            hinge_radius=6,
+            upper_beak_polygon=[
+                (98, 96),
+                (160, 98),
+                (158, 106),
+                (100, 104),
+            ],
+            mandible_polygon=[
+                (100, 102),
+                (72, 112),
+                (68, 124),
+                (98, 110),
+            ],
+            cavity_polygon=[
+                (100, 101),
+                (82, 108),
+                (80, 114),
+                (99, 106),
+            ],
+        )
+
+        self.assertFalse(report["passed"])
+        self.assertEqual(report["mode"], "directional")
+        self.assertFalse(report["checks"]["same_longitudinal_direction"])
+
     def _sources(self, root: Path, *, detached: bool = False) -> tuple[Path, Path]:
         resting_path = root / "resting.png"
         generated_path = root / "generated.png"

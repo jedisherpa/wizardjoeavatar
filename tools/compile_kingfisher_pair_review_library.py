@@ -21,6 +21,9 @@ from wizard_avatar.hd_pose_artifact import (  # noqa: E402
     sha256_path,
     write_pose_artifact,
 )
+from tools.compose_kingfisher_pair_mandible_patch import (  # noqa: E402
+    beak_anatomy_metrics,
+)
 
 BASE_POSE_COUNT = 66
 SPEAKING_FIRST_ORDINAL = 111
@@ -33,7 +36,7 @@ PAIRWISE_REVIEW_STATES = {
     "needs_rebuild",
     "not_observable",
 }
-PAIR_SPECIFIC_PATCH_REQUIRED_FROM_ORDINAL = 31
+PAIR_SPECIFIC_PATCH_REQUIRED_FROM_ORDINAL = 2
 
 
 def require_pair_specific_pass_receipt(
@@ -63,6 +66,13 @@ def require_pair_specific_pass_receipt(
         or any(isinstance(value, bool) or not isinstance(value, int) for value in hinge)
     ):
         raise ValueError("passing pair requires one declared integer hinge")
+    hinge_radius = receipt.get("hinge_radius")
+    if (
+        isinstance(hinge_radius, bool)
+        or not isinstance(hinge_radius, int)
+        or hinge_radius < 1
+    ):
+        raise ValueError("passing pair requires a positive integer hinge radius")
     for field in ("mandible_polygon", "cavity_polygon", "upper_beak_polygon"):
         polygon = receipt.get(field)
         if (
@@ -107,6 +117,29 @@ def require_pair_specific_pass_receipt(
         or mandible_bbox[3] - mandible_bbox[1] < minimum_height
     ):
         raise ValueError("passing pair requires a substantial lower mandible")
+
+    anatomy = beak_anatomy_metrics(
+        hinge=(hinge[0], hinge[1]),
+        hinge_radius=hinge_radius,
+        upper_beak_polygon=[
+            tuple(point) for point in receipt["upper_beak_polygon"]
+        ],
+        mandible_polygon=[
+            tuple(point) for point in receipt["mandible_polygon"]
+        ],
+        cavity_polygon=[
+            tuple(point) for point in receipt["cavity_polygon"]
+        ],
+    )
+    if anatomy["passed"] is not True:
+        failed = [
+            name
+            for name, passed in anatomy["checks"].items()
+            if passed is not True
+        ]
+        raise ValueError(
+            "passing pair has misaligned beak anatomy: " + ", ".join(failed)
+        )
 
 
 def _write_json_atomic(path: Path, value: object) -> None:

@@ -2845,3 +2845,39 @@ Accepted Pair 1 evidence:
 The corrected queue now contains 1 strict internal pass, 63 pending observable
 pairs, and 2 exact rear views marked not observable. Pair 2 is the next and
 only active art-generation and review unit.
+
+## 2026-08-05 anatomy-specific admission gate
+
+The user recheck also established that exact body registration is necessary
+but insufficient. A speaking mate can preserve every pixel outside its mouth
+region and still present a lower bill on the wrong axis. The pair-specific
+compositor and compiler therefore now evaluate the declared upper-bill,
+mandible, cavity, and hinge geometry before a new full-size pass can compile.
+
+Beginning with Pair 2, every observable pass must prove:
+
+- upper bill, lower mandible, and cavity share the declared hinge region;
+- a profile or three-quarter mandible extends in the same longitudinal
+  direction as the canonical upper bill;
+- lower-bill length remains within a bounded ratio of the upper bill;
+- the lower tip remains within a bounded perpendicular offset of the upper
+  tip; or
+- a frontal lower bill remains centered, plausibly wide, and below the upper
+  bill.
+
+New compositor receipts retain these measurements as `beak_anatomy`. The
+compiler recomputes them from the primitive geometry instead of trusting a
+stored pass flag. Pair 1 is the explicit reviewed template and remains the
+only exception because its original local-articulation receipt predates the
+pair-specific polygon contract.
+
+Pair 2 remains pending. Its current candidate passes the new geometric screen
+with a shared right-facing axis, `0.7857` mandible-to-upper length ratio,
+`0.2902` normalized tip offset, and hinge distances below 3 pixels. Those
+measurements qualify it only for the locked full-size visual review; they do
+not create an internal pass, user approval, or runtime admission.
+
+Focused verification after this change: 45 Kingfisher review tests pass. The
+compiled review library still contains 176 review-only poses, and the final
+verifier intentionally stops at Pair 2 with 1 pass, 63 pending pairs, and 2
+not-observable rear views.

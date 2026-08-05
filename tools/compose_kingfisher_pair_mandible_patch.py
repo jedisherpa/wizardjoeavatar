@@ -6,6 +6,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import math
 import os
 import sys
 from collections import deque
@@ -22,6 +23,154 @@ from tools.compose_kingfisher_pair_render import (
     _binary_alpha,
     load_render_alpha,
 )
+
+
+def beak_anatomy_metrics(
+    *,
+    hinge: tuple[int, int],
+    hinge_radius: int,
+    upper_beak_polygon: list[tuple[int, int]],
+    mandible_polygon: list[tuple[int, int]],
+    cavity_polygon: list[tuple[int, int]],
+) -> dict[str, object]:
+    """Measure whether a lower beak is anchored to its canonical upper beak."""
+
+    def anchor_distance(polygon: list[tuple[int, int]]) -> float:
+        distances: list[float] = []
+        for start, end in zip(polygon, polygon[1:] + polygon[:1]):
+            dx = end[0] - start[0]
+            dy = end[1] - start[1]
+            if dx == 0 and dy == 0:
+                distances.append(
+                    math.hypot(hinge[0] - start[0], hinge[1] - start[1])
+                )
+                continue
+            projection = (
+                (hinge[0] - start[0]) * dx
+                + (hinge[1] - start[1]) * dy
+            ) / (dx * dx + dy * dy)
+            projection = min(1.0, max(0.0, projection))
+            closest_x = start[0] + projection * dx
+            closest_y = start[1] + projection * dy
+            distances.append(
+                math.hypot(hinge[0] - closest_x, hinge[1] - closest_y)
+            )
+        return min(distances)
+
+    def bounds(polygon: list[tuple[int, int]]) -> tuple[int, int, int, int]:
+        xs = [point[0] for point in polygon]
+        ys = [point[1] for point in polygon]
+        return min(xs), min(ys), max(xs), max(ys)
+
+    upper_bounds = bounds(upper_beak_polygon)
+    mandible_bounds = bounds(mandible_polygon)
+    upper_left_reach = hinge[0] - upper_bounds[0]
+    upper_right_reach = upper_bounds[2] - hinge[0]
+    dominant_reach = max(upper_left_reach, upper_right_reach)
+    opposite_reach = min(upper_left_reach, upper_right_reach)
+    directional = dominant_reach >= max(12, opposite_reach * 1.8)
+
+    checks = {
+        "upper_beak_anchored": (
+            anchor_distance(upper_beak_polygon) <= hinge_radius + 4
+        ),
+        "mandible_anchored": (
+            anchor_distance(mandible_polygon) <= hinge_radius + 4
+        ),
+        "cavity_anchored": (
+            anchor_distance(cavity_polygon) <= max(24, hinge_radius + 6)
+        ),
+    }
+    metrics: dict[str, object] = {
+        "schema_version": 1,
+        "mode": "directional" if directional else "frontal",
+        "upper_anchor_distance": round(
+            anchor_distance(upper_beak_polygon), 3
+        ),
+        "mandible_anchor_distance": round(
+            anchor_distance(mandible_polygon), 3
+        ),
+        "cavity_anchor_distance": round(
+            anchor_distance(cavity_polygon), 3
+        ),
+    }
+
+    if directional:
+        direction = 1 if upper_right_reach > upper_left_reach else -1
+
+        def reach(polygon: list[tuple[int, int]], sign: int) -> int:
+            return max(sign * (point[0] - hinge[0]) for point in polygon)
+
+        mandible_forward_reach = reach(mandible_polygon, direction)
+        mandible_reverse_reach = reach(mandible_polygon, -direction)
+        upper_forward_reach = reach(upper_beak_polygon, direction)
+        upper_tip_points = [
+            point
+            for point in upper_beak_polygon
+            if direction * (point[0] - hinge[0]) >= upper_forward_reach - 2
+        ]
+        mandible_tip_points = [
+            point
+            for point in mandible_polygon
+            if direction * (point[0] - hinge[0]) >= mandible_forward_reach - 2
+        ]
+        upper_tip_y = sum(point[1] for point in upper_tip_points) / len(
+            upper_tip_points
+        )
+        mandible_tip_y = sum(point[1] for point in mandible_tip_points) / len(
+            mandible_tip_points
+        )
+        length_ratio = mandible_forward_reach / max(1, upper_forward_reach)
+        tip_offset_ratio = abs(mandible_tip_y - upper_tip_y) / max(
+            1, upper_forward_reach
+        )
+        checks.update(
+            {
+                "same_longitudinal_direction": (
+                    mandible_forward_reach > mandible_reverse_reach
+                ),
+                "plausible_mandible_length": 0.5 <= length_ratio <= 1.25,
+                "bounded_tip_offset": tip_offset_ratio <= 0.6,
+            }
+        )
+        metrics.update(
+            {
+                "direction": "right" if direction == 1 else "left",
+                "upper_forward_reach": upper_forward_reach,
+                "mandible_forward_reach": mandible_forward_reach,
+                "mandible_reverse_reach": mandible_reverse_reach,
+                "mandible_length_ratio": round(length_ratio, 4),
+                "tip_offset_ratio": round(tip_offset_ratio, 4),
+            }
+        )
+    else:
+        upper_width = upper_bounds[2] - upper_bounds[0]
+        mandible_width = mandible_bounds[2] - mandible_bounds[0]
+        upper_center_x = (upper_bounds[0] + upper_bounds[2]) / 2
+        mandible_center_x = (mandible_bounds[0] + mandible_bounds[2]) / 2
+        center_offset_ratio = abs(mandible_center_x - upper_center_x) / max(
+            1, upper_width
+        )
+        width_ratio = mandible_width / max(1, upper_width)
+        checks.update(
+            {
+                "centered_frontal_mandible": center_offset_ratio <= 0.25,
+                "plausible_frontal_width": 0.5 <= width_ratio <= 1.5,
+                "mandible_below_upper_beak": (
+                    mandible_bounds[3] >= upper_bounds[3]
+                ),
+            }
+        )
+        metrics.update(
+            {
+                "center_offset_ratio": round(center_offset_ratio, 4),
+                "mandible_width_ratio": round(width_ratio, 4),
+            }
+        )
+
+    metrics["checks"] = checks
+    metrics["passed"] = all(checks.values())
+    return metrics
 
 
 def _sha256(path: Path) -> str:
@@ -358,6 +507,23 @@ def compose_mandible_patch(
     if not components or not components[0].intersection(hinge_pixels):
         raise ValueError("source mandible does not connect to the hinge")
 
+    anatomy = beak_anatomy_metrics(
+        hinge=hinge,
+        hinge_radius=hinge_radius,
+        upper_beak_polygon=upper_beak_polygon,
+        mandible_polygon=mandible_polygon,
+        cavity_polygon=cavity_polygon,
+    )
+    if anatomy["passed"] is not True:
+        failed = [
+            name
+            for name, passed in anatomy["checks"].items()
+            if passed is not True
+        ]
+        raise ValueError(
+            "beak anatomy is misaligned: " + ", ".join(failed)
+        )
+
     mandible_patch = Image.new("RGBA", CANVAS_SIZE, (0, 0, 0, 0))
     mandible_patch.paste(aligned, mask=source_alpha)
     output = resting.copy()
@@ -482,6 +648,7 @@ def compose_mandible_patch(
         "changed_bbox": list(changed_bbox),
         "outside_articulation_change": False,
         "upper_beak_policy": "immutable_source_pixels",
+        "beak_anatomy": anatomy,
     }
     _write_json_atomic(receipt_path, receipt)
     return receipt
