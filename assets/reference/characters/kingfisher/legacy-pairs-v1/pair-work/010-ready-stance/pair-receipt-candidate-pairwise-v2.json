@@ -123,7 +123,7 @@
     "mode": "exclude_light_neutral",
     "neutral_chroma_threshold": 55
   },
-  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/010-ready-stance/120_ACT120_ready_stance_speaking_beak_alpha.png",
+  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/010-ready-stance/120_ACT120_ready_stance_speaking_beak_candidate_pairwise_v2.png",
   "speaking_sha256": "6e1abdf734654c6f316453cc41d7a38b6533c5bb437f565fc01ce24813695be2",
   "upper_beak_policy": "immutable_source_pixels",
   "upper_beak_polygon": [

@@ -3007,3 +3007,25 @@ Fresh Pair 9 evidence:
 The queue now contains 7 strict internal passes, 57 pending observable pairs,
 and 2 not-observable rear views. Pair 10 is the next isolated gate; user
 approval and runtime admission remain zero.
+
+Pair 10 (`ready-stance`) passed its isolated native-size, enlarged-beak, and
+full-projector review. The accepted open mate is the compact centered version;
+the wider legacy alternative remains rejected because it pulls the lower bill
+away from the frontal axis. The closed ACT010 frame remains authoritative for
+the upper bill, head, eyes, throat, hoodie, wings, body, feet, scale, and canvas.
+
+The exact accepted pixels were deterministically recomposed under the current
+`0.8` connectivity minimum and retained the same SHA-256 as the prior compact
+candidate. The corrected receipt records hinge `(449, 244)`, right-facing
+direction, a `0.8395` mandible-to-upper length ratio, and `0.4938` normalized
+tip offset. Its strict audit reports 1,537 changed rendered pixels,
+outside-mouth mean difference `0.0`, registration delta `0`, and silhouette
+IoU `1.0`.
+
+Fresh Pair 10 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-010-one-pair-2026-08-05-v2/`
+
+The queue now contains 8 strict internal passes, 56 pending observable pairs,
+and 2 not-observable rear views. Pair 11 is the next isolated gate; user
+approval and runtime admission remain zero.
