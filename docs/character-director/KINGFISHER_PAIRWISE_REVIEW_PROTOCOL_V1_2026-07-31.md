@@ -2183,3 +2183,25 @@ Fresh pair 42 evidence:
 The current queue contains 40 fresh internal passes, 24 pending pairs, and 2
 rear views marked not observable. User approval and runtime admission remain
 zero; Pair 43 is the next isolated review gate.
+
+Pair 43 (`full-laughter`) passed a fresh isolated full-source, 5x mouth, and
+live locked-beak review without another rebuild. The intentionally extreme
+laughter opening rotates from the same screen-left rear hinge, keeps the
+connected lower mandible beneath the immutable upper bill, and ends slightly
+behind the upper tip. No floating jaw, duplicate bill, imported throat texture,
+or movement in the closed eyes, crest, cheeks, throat, hoodie, both extended
+wings, feet, scale, registration, or silhouette is visible.
+
+The receipt records connected-mandible ratio `1.0`, changed bounding box
+`(418, 113)-(568, 165)`, mandible bounding box `(414, 105)-(575, 165)`, and
+hinge `(418, 116)`. The strict audit reports 2,542 changed rendered pixels,
+outside-mouth mean difference `0.0`, registration delta `0`, and silhouette
+IoU `0.999505`.
+
+Fresh pair 43 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-043-recheck-2026-08-04/`
+
+The current queue contains 41 fresh internal passes, 23 pending pairs, and 2
+rear views marked not observable. User approval and runtime admission remain
+zero; Pair 44 is the next isolated review gate.
