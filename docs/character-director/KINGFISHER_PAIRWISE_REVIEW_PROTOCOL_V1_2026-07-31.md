@@ -2512,3 +2512,24 @@ Accepted pair 55 evidence:
 The current queue contains 53 fresh internal passes, 11 pending pairs, and 2
 rear views marked not observable. User approval and runtime admission remain
 zero; Pair 56 is the next isolated review gate.
+
+Pair 56 (`anxiety`) passed a fresh isolated native-size, full-character, and
+alternating-playback review without another rebuild. One compact lower bill
+opens from the screen-left rear hinge toward the existing upper tip. The two
+tips remain aligned, the anxious sideways glance and body pose remain intact,
+and no duplicate edge, throat replacement, registration drift, or body change
+is visible.
+
+The receipt records connected-mandible ratio `1.0`, changed bounding box
+`(442, 225)-(516, 274)`, mandible bounding box
+`(438, 220)-(516, 274)`, and hinge `(443, 227)`. The strict audit reports 1,352
+changed rendered pixels, outside-mouth mean difference `0.0`, registration
+delta `0`, and silhouette IoU `1.0`.
+
+Fresh pair 56 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-056-rechecked-2026-08-05/`
+
+The current queue contains 54 fresh internal passes, 10 pending pairs, and 2
+rear views marked not observable. User approval and runtime admission remain
+zero; Pair 57 is the next isolated review gate.
