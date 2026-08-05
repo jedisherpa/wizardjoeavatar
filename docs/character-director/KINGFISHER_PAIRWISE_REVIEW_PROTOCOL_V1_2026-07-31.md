@@ -3098,3 +3098,26 @@ Fresh Pair 13 evidence:
 The queue now contains 11 strict internal passes, 53 pending observable pairs,
 and 2 not-observable rear views. Pair 14 is the next isolated gate; user
 approval and runtime admission remain zero.
+
+Pair 14 (`present-screen-left`) passed its isolated native-size,
+enlarged-beak, and full-projector review. Candidate v8 deterministically
+reproduces the visually selected v6 pixels exactly from the preserved donor
+under the current `0.8` connectivity minimum. Earlier v1-v5 variants remain
+rejected because they clip the upper bill, leave a black residual wedge, or
+exaggerate the gape.
+
+The accepted left-facing lower bill opens from the rear hinge without moving
+the upper bill, eye, crown, throat, presenting wing, hoodie, body, feet, scale,
+or canvas. The corrected receipt records hinge `(538, 213)`, a `1.1075`
+mandible-to-upper reach ratio, `0.2634` normalized tip offset, and `0.999499`
+connected-mandible ratio. Its strict audit reports 2,331 changed rendered
+pixels, outside-mouth mean difference `0.0`, registration delta `0`, and
+silhouette IoU `0.993514`.
+
+Fresh Pair 14 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-014-one-pair-2026-08-05-v2/`
+
+The queue now contains 12 strict internal passes, 52 pending observable pairs,
+and 2 not-observable rear views. Pair 15 is the next isolated gate; user
+approval and runtime admission remain zero.

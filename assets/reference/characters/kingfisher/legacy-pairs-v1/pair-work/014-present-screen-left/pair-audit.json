@@ -27,7 +27,7 @@
   "resting_sha256": "45d200b694a735c515bd710b7a6f27baecba6b0abad56e38d97ab54647187de5",
   "schema_version": 2,
   "silhouette_iou": 0.993514,
-  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/014-present-screen-left/124_ACT124_present_screen_left_speaking_beak_alpha.png",
+  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/014-present-screen-left/124_ACT124_present_screen_left_speaking_beak_candidate_pairwise_v8_strict.png",
   "speaking_registration_bbox": [
     286,
     97,
