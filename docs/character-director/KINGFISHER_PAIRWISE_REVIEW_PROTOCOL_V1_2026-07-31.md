@@ -4343,3 +4343,29 @@ Fresh Pair 60 evidence:
 The queue now contains 58 strict internal passes, 6 pending observable pairs,
 and 2 not-observable rear views. Pair 61 is the next isolated gate; user
 approval and runtime admission remain zero.
+
+Pair 61 (`deep-contemplation`) passed its isolated native-size, enlarged
+down-left beak, and full-projector review without changing the selected
+speaking pixels. The receipt now separates a tight upper-bill outline from the
+larger immutable restoration mask and declares direction vector `[-1, 1]`.
+The lower mandible opens from the same screen-right rear hinge, follows the
+steep authored bill axis, and remains legible beside the hand-on-chin gesture.
+The contemplative eye, crest, face, throat, upper bill, hand, hoodie, body,
+feet, canvas, registration, and silhouette remain fixed.
+
+The selected frame retains SHA-256
+`45fc98159a2852cb4fc349a2c0e9a69d71f1815c00f9896f3b5deeedbaf366c5`.
+The upgraded receipt records hinge `(468, 216)`, upper reach `92.631`,
+mandible reach `79.9031`, a `0.8626` mandible-to-upper reach ratio, `0.0267`
+normalized tip offset, upper anchor distance `8.246`, mandible anchor distance
+`6.548`, cavity anchor distance `1.052`, and connected-mandible ratio `1.0`.
+Its strict audit retains 1,700 changed mouth pixels, outside-mouth mean
+difference `0.0`, registration delta `0`, and silhouette IoU `1.0`.
+
+Fresh Pair 61 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-061-one-pair-2026-08-06-v1/`
+
+The queue now contains 59 strict internal passes, 5 pending observable pairs,
+and 2 not-observable rear views. Pair 62 is the next isolated gate; user
+approval and runtime admission remain zero.

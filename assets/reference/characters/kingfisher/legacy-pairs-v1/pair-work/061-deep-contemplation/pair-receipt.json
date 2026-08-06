@@ -12,7 +12,66 @@
     "translate_x": -8,
     "translate_y": -14
   },
+  "anatomy_direction_vector": [
+    -1,
+    1
+  ],
+  "anatomy_upper_beak_polygon": [
+    [
+      458,
+      203
+    ],
+    [
+      478,
+      210
+    ],
+    [
+      474,
+      226
+    ],
+    [
+      421,
+      273
+    ],
+    [
+      403,
+      282
+    ],
+    [
+      401,
+      267
+    ],
+    [
+      443,
+      218
+    ]
+  ],
   "approval_state": "candidate_visual_review",
+  "beak_anatomy": {
+    "cavity_anchor_distance": 1.052,
+    "checks": {
+      "bounded_tip_offset": true,
+      "cavity_anchored": true,
+      "mandible_anchored": true,
+      "plausible_mandible_length": true,
+      "same_longitudinal_direction": true,
+      "upper_beak_anchored": true
+    },
+    "direction": [
+      -1,
+      1
+    ],
+    "mandible_anchor_distance": 6.548,
+    "mandible_forward_reach": 79.9031,
+    "mandible_length_ratio": 0.8626,
+    "mandible_reverse_reach": 10.6066,
+    "mode": "directional",
+    "passed": true,
+    "schema_version": 1,
+    "tip_offset_ratio": 0.0267,
+    "upper_anchor_distance": 8.246,
+    "upper_forward_reach": 92.631
+  },
   "canvas": [
     960,
     540
@@ -97,12 +156,19 @@
   "method": "pair_specific_connected_mandible_patch_v1",
   "minimum_connected_ratio": 0.97,
   "minimum_mandible_height": 35,
+  "oral_warm_replacement_polygon": null,
+  "oral_warm_replacement_rgba": null,
   "outside_articulation_change": false,
   "residual_clear_polygon": null,
   "resting_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/061-deep-contemplation/061_ACT061_deep_contemplation_resting_beak_alpha.png",
   "resting_sha256": "d5542b24bc973a67cbba0b017fbc628aeaea4dde4ec3314e1dc6ea8d2db7b696",
   "runtime_admitted": false,
   "schema_version": 1,
+  "source_mask": {
+    "light_threshold": 180,
+    "mode": "opaque",
+    "neutral_chroma_threshold": 36
+  },
   "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/061-deep-contemplation/171_ACT171_deep_contemplation_speaking_beak_alpha.png",
   "speaking_sha256": "45fc98159a2852cb4fc349a2c0e9a69d71f1815c00f9896f3b5deeedbaf366c5",
   "upper_beak_policy": "immutable_source_pixels",
