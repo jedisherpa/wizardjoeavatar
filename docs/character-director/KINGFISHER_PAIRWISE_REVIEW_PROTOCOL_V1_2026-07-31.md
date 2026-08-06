@@ -3285,3 +3285,31 @@ Fresh Pair 21 evidence:
 The queue now contains 19 strict internal passes, 45 pending observable pairs,
 and 2 not-observable rear views. Pair 22 is the next isolated gate; user
 approval and runtime admission remain zero.
+
+Pair 22 (`small-acknowledgment`) passed its isolated native-size,
+enlarged-beak, tight-tip, and full-projector review after removing a duplicate
+interior contour. The prior admitted-looking mate and exact candidate v4
+verification repainted donor cavity pixels after restoring the canonical upper
+bill, creating a dark third edge. Candidate v5 keeps the same connected donor
+mandible and immutable upper-bill geometry but omits that second cavity
+overlay. Candidate v6 proves a solid cavity suppresses all donor contours, but
+remains rejected because its broad black polygon reads as an artificial slab.
+
+The selected lower bill shares the visible left rear hinge, follows the upper
+bill on the same right-facing axis, and ends behind the upper tip. Its
+restrained opening suits a small acknowledgment without moving the eye line,
+crown, cheek, throat, folded wings, hoodie, body, feet, scale, or canvas. The
+corrected receipt records hinge `(462, 266)`, upper anchor distance `11.0`,
+mandible anchor distance `7.0`, cavity anchor distance `5.0`, a `0.9412`
+mandible-to-upper reach ratio, `0.3934` normalized tip offset, and
+connected-mandible ratio `0.97903`. Its strict audit reports 3,063 changed
+rendered pixels, outside-mouth mean difference `0.0`, registration delta `0`,
+and silhouette IoU `0.999766`.
+
+Fresh Pair 22 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-022-one-pair-2026-08-05-v2/`
+
+The queue now contains 20 strict internal passes, 44 pending observable pairs,
+and 2 not-observable rear views. Pair 23 is the next isolated gate; user
+approval and runtime admission remain zero.

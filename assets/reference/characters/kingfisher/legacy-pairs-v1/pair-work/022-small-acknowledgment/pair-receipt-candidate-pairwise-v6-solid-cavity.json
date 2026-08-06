@@ -39,7 +39,12 @@
     960,
     540
   ],
-  "cavity_fill_rgba": null,
+  "cavity_fill_rgba": [
+    10,
+    13,
+    16,
+    255
+  ],
   "cavity_polygon": [
     [
       457,
@@ -66,7 +71,7 @@
       270
     ]
   ],
-  "cavity_source": "generated",
+  "cavity_source": "solid",
   "changed_bbox": [
     455,
     256,
@@ -131,8 +136,8 @@
     "mode": "exclude_light_neutral",
     "neutral_chroma_threshold": 42
   },
-  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/022-small-acknowledgment/132_ACT132_small_acknowledgment_speaking_beak_candidate_pairwise_v5_generated-cavity.png",
-  "speaking_sha256": "c248c3d86da06de251c1207f17abc19ac2f3a7706dac247b50cb0edc30632c08",
+  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/022-small-acknowledgment/132_ACT132_small_acknowledgment_speaking_beak_candidate_pairwise_v6_solid-cavity.png",
+  "speaking_sha256": "a5a89e47d067a0ac6a043d6760fe2e5a82252555b980f81d42417ea2a3c67502",
   "upper_beak_policy": "immutable_source_pixels",
   "upper_beak_polygon": [
     [
