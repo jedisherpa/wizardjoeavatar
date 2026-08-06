@@ -1,0 +1,38 @@
+{
+  "changed_rendered_pixels": 2147,
+  "checks": {
+    "bounded_articulation_change": true,
+    "outside_mouth_stability": true,
+    "silhouette_overlap": true,
+    "stable_registration_bounds": true,
+    "visible_mouth_change": true
+  },
+  "mouth_mean_abs": 8.350308,
+  "mouth_region": [
+    470,
+    105,
+    610,
+    190
+  ],
+  "outside_mouth_mean_abs": 0.0,
+  "passed": true,
+  "registration_bound_delta": 0,
+  "resting_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/039-describe-a-vast-scene/039_ACT039_describe_a_vast_scene_resting_beak_alpha.png",
+  "resting_registration_bbox": [
+    41,
+    97,
+    919,
+    529
+  ],
+  "resting_sha256": "a457760329419fb9c2b63da1bb1f1012a376cb95d4ede25b2d3930cb7a732d17",
+  "schema_version": 2,
+  "silhouette_iou": 0.997842,
+  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/039-describe-a-vast-scene/149_ACT149_describe_a_vast_scene_speaking_beak_candidate_pairwise_v8_verified.png",
+  "speaking_registration_bbox": [
+    41,
+    97,
+    919,
+    529
+  ],
+  "speaking_sha256": "e18373160b61c0596ffbd881e59861a4131aedfd733ed4b33e4c2d4e3e50e5ab"
+}
