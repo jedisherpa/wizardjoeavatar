@@ -27,7 +27,7 @@
   "resting_sha256": "2e436fae3886746310fa37a57ca6408c126ec1b7bdf36bf04bd2916465025759",
   "schema_version": 2,
   "silhouette_iou": 0.999655,
-  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/055-fear/165_ACT165_fear_speaking_beak_alpha.png",
+  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/055-fear/165_ACT165_fear_speaking_beak_candidate_pairwise_v5_anatomy-verified.png",
   "speaking_registration_bbox": [
     276,
     97,
