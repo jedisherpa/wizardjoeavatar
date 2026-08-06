@@ -3340,3 +3340,29 @@ Fresh Pair 23 evidence:
 The queue now contains 21 strict internal passes, 43 pending observable pairs,
 and 2 not-observable rear views. Pair 24 is the next isolated gate; user
 approval and runtime admission remain zero.
+
+Pair 24 (`polite-interruption`) passed its isolated native-size,
+enlarged-beak, tight-tip, and full-projector review without changing the image
+pixels. Candidate v7 reproduces the selected donor-v6 speaking mate exactly
+from the preserved pair-specific v3 render under the current directional
+anatomy checker. Rejected v3 retains a rectangular donor patch, while rejected
+v4 and donor v5 read as broad artificial black slabs; all remain excluded.
+
+The selected modest diagonal lower bill shares the visible left rear hinge,
+follows the immutable upper bill on the same right-facing axis, and terminates
+beneath its tip. At projector scale it supports a polite interruption without
+reading as detached. Eyes, crown, cheek, throat, raised signaling wing, hoodie,
+body, feet, scale, and canvas remain unchanged. The upgraded receipt records
+hinge `(470, 220)`, upper anchor distance `9.0`, mandible anchor distance
+`4.0`, cavity anchor distance `1.0`, a `0.8102` mandible-to-upper reach ratio,
+`0.4927` normalized tip offset, and connected-mandible ratio `1.0`. Its strict
+audit reports 3,576 changed rendered pixels, outside-mouth mean difference
+`0.0`, registration delta `0`, and silhouette IoU `1.0`.
+
+Fresh Pair 24 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-024-one-pair-2026-08-05-v2/`
+
+The queue now contains 22 strict internal passes, 42 pending observable pairs,
+and 2 not-observable rear views. Pair 25 is the next isolated gate; user
+approval and runtime admission remain zero.
