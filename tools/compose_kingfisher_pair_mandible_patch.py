@@ -336,6 +336,7 @@ def compose_mandible_patch(
     mandible_polygon: list[tuple[int, int]],
     cavity_polygon: list[tuple[int, int]],
     upper_beak_polygon: list[tuple[int, int]],
+    anatomy_upper_beak_polygon: list[tuple[int, int]] | None = None,
     hinge: tuple[int, int],
     residual_clear_polygon: list[tuple[int, int]] | None = None,
     hinge_radius: int = 6,
@@ -364,6 +365,11 @@ def compose_mandible_patch(
         ("mandible_polygon", mandible_polygon),
         ("cavity_polygon", cavity_polygon),
         ("upper_beak_polygon", upper_beak_polygon),
+        *(
+            (("anatomy_upper_beak_polygon", anatomy_upper_beak_polygon),)
+            if anatomy_upper_beak_polygon is not None
+            else ()
+        ),
     ):
         if len(polygon) < 3:
             raise ValueError(f"{name} requires at least three points")
@@ -507,10 +513,13 @@ def compose_mandible_patch(
     if not components or not components[0].intersection(hinge_pixels):
         raise ValueError("source mandible does not connect to the hinge")
 
+    effective_anatomy_upper_beak_polygon = (
+        anatomy_upper_beak_polygon or upper_beak_polygon
+    )
     anatomy = beak_anatomy_metrics(
         hinge=hinge,
         hinge_radius=hinge_radius,
-        upper_beak_polygon=upper_beak_polygon,
+        upper_beak_polygon=effective_anatomy_upper_beak_polygon,
         mandible_polygon=mandible_polygon,
         cavity_polygon=cavity_polygon,
     )
@@ -610,6 +619,9 @@ def compose_mandible_patch(
         "upper_beak_polygon": [
             list(point) for point in upper_beak_polygon
         ],
+        "anatomy_upper_beak_polygon": [
+            list(point) for point in effective_anatomy_upper_beak_polygon
+        ],
         "residual_clear_polygon": (
             [list(point) for point in residual_clear_polygon]
             if residual_clear_polygon is not None
@@ -675,6 +687,11 @@ def main() -> None:
     parser.add_argument("--mandible-polygon", nargs="+", type=int, required=True)
     parser.add_argument("--cavity-polygon", nargs="+", type=int, required=True)
     parser.add_argument("--upper-beak-polygon", nargs="+", type=int, required=True)
+    parser.add_argument(
+        "--anatomy-upper-beak-polygon",
+        nargs="+",
+        type=int,
+    )
     parser.add_argument("--residual-clear-polygon", nargs="+", type=int)
     parser.add_argument("--hinge", nargs=2, type=int, required=True)
     parser.add_argument("--hinge-radius", type=int, default=6)
@@ -748,6 +765,14 @@ def main() -> None:
         upper_beak_polygon=_points(
             args.upper_beak_polygon,
             name="upper_beak_polygon",
+        ),
+        anatomy_upper_beak_polygon=(
+            _points(
+                args.anatomy_upper_beak_polygon,
+                name="anatomy_upper_beak_polygon",
+            )
+            if args.anatomy_upper_beak_polygon
+            else None
         ),
         residual_clear_polygon=(
             _points(

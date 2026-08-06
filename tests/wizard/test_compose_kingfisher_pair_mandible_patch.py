@@ -107,6 +107,54 @@ class ComposeKingfisherPairMandiblePatchTests(unittest.TestCase):
             self.assertEqual(receipt["upper_beak_policy"], "immutable_source_pixels")
             self.assertGreaterEqual(receipt["mandible_connected_ratio"], 0.9)
 
+    def test_uses_separate_upper_beak_outline_for_anatomy(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            resting_path, generated_path = self._sources(root)
+            output_path = root / "output.png"
+            anatomy_polygon = [
+                (468, 228),
+                (552, 225),
+                (552, 250),
+                (468, 250),
+            ]
+            receipt = compose_mandible_patch(
+                resting_path,
+                generated_path,
+                output_path,
+                root / "receipt.json",
+                scale=1,
+                translate_x=0,
+                translate_y=0,
+                mandible_polygon=[
+                    (468, 248),
+                    (552, 248),
+                    (552, 272),
+                    (468, 272),
+                ],
+                cavity_polygon=[
+                    (468, 238),
+                    (552, 230),
+                    (548, 258),
+                    (470, 258),
+                ],
+                upper_beak_polygon=[
+                    (400, 180),
+                    (552, 225),
+                    (552, 250),
+                    (468, 250),
+                ],
+                anatomy_upper_beak_polygon=anatomy_polygon,
+                hinge=(473, 255),
+                minimum_mandible_height=10,
+            )
+
+            self.assertEqual(
+                receipt["anatomy_upper_beak_polygon"],
+                [list(point) for point in anatomy_polygon],
+            )
+            self.assertTrue(receipt["beak_anatomy"]["passed"])
+
     def test_clears_declared_residual_edge_before_compositing(self):
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)

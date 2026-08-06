@@ -90,6 +90,27 @@ def require_pair_specific_pass_receipt(
         ):
             raise ValueError(f"passing pair requires a valid {field}")
 
+    anatomy_upper_beak_polygon = receipt.get(
+        "anatomy_upper_beak_polygon",
+        receipt["upper_beak_polygon"],
+    )
+    if (
+        not isinstance(anatomy_upper_beak_polygon, list)
+        or len(anatomy_upper_beak_polygon) < 3
+        or any(
+            not isinstance(point, list)
+            or len(point) != 2
+            or any(
+                isinstance(value, bool) or not isinstance(value, int)
+                for value in point
+            )
+            for point in anatomy_upper_beak_polygon
+        )
+    ):
+        raise ValueError(
+            "passing pair requires a valid anatomy_upper_beak_polygon"
+        )
+
     minimum_ratio = receipt.get("minimum_connected_ratio")
     connected_ratio = receipt.get("mandible_connected_ratio")
     if (
@@ -121,9 +142,7 @@ def require_pair_specific_pass_receipt(
     anatomy = beak_anatomy_metrics(
         hinge=(hinge[0], hinge[1]),
         hinge_radius=hinge_radius,
-        upper_beak_polygon=[
-            tuple(point) for point in receipt["upper_beak_polygon"]
-        ],
+        upper_beak_polygon=[tuple(point) for point in anatomy_upper_beak_polygon],
         mandible_polygon=[
             tuple(point) for point in receipt["mandible_polygon"]
         ],

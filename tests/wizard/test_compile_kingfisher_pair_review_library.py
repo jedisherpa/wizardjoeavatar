@@ -275,6 +275,38 @@ class CompileKingfisherPairReviewLibraryTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "misaligned beak anatomy"):
                 compile_pair_review_library(base_index, ledger, root / "review")
 
+    def test_pass_uses_separate_anatomy_upper_beak_polygon(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            base_index, ledger = self._fixture(root)
+            data = json.loads(ledger.read_text(encoding="utf-8"))
+            pair = data["pairs"][1]
+            pair["pairwise_full_size_review"]["state"] = "pass"
+            receipt_path = Path(pair["receipt_path"])
+            receipt = json.loads(receipt_path.read_text(encoding="utf-8"))
+            receipt["upper_beak_polygon"] = [
+                [2, 2],
+                [29, 2],
+                [29, 20],
+                [2, 20],
+            ]
+            receipt["anatomy_upper_beak_polygon"] = [
+                [13, 7],
+                [20, 8],
+                [20, 10],
+                [13, 9],
+            ]
+            receipt_path.write_text(json.dumps(receipt), encoding="utf-8")
+            ledger.write_text(json.dumps(data), encoding="utf-8")
+
+            result = compile_pair_review_library(
+                base_index,
+                ledger,
+                root / "review",
+            )
+
+            self.assertEqual(result["pair_count"], 66)
+
     def test_failed_artifact_write_preserves_previous_review_artifact(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
