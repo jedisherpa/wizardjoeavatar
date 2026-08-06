@@ -4396,3 +4396,29 @@ Fresh Pair 62 evidence:
 The queue now contains 60 strict internal passes, 4 pending observable pairs,
 and 2 not-observable rear views. Pair 63 is the next isolated gate; user
 approval and runtime admission remain zero.
+
+Pair 63 (`read-a-panel`) failed its first isolated native-size and enlarged
+beak review even though the previous geometry receipt passed. The old open
+frame read as a narrow black blade with an ambiguous hinge rather than as an
+articulated bill. The accepted v14 rebuild uses only Pair 63's own
+full-resolution head donor. It transfers one thicker connected lower mandible
+and its bounded mouth cavity onto the immutable canonical body. The reading
+pose, panel, crest, eye, cheek, throat, hoodie, feet, upper bill, canvas, and
+registration remain unchanged.
+
+The selected replacement has SHA-256
+`2cfcd0089ad63444348753fc76313b067a0396567816d9c3e659389e8295b562`.
+Its receipt records hinge `(509, 214)`, upper reach `99.6117`, mandible reach
+`110.3635`, a `1.1079` mandible-to-upper reach ratio, `0.4825` normalized tip
+offset, upper anchor distance `0.392`, mandible anchor distance `9.0`, cavity
+anchor distance `5.676`, and connected-mandible ratio `0.998986`. The strict
+audit reports 2,574 changed mouth pixels, outside-mouth mean difference `0.0`,
+registration delta `0`, and silhouette IoU `0.9929`.
+
+Fresh Pair 63 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-063-one-pair-2026-08-06-v1/`
+
+The queue now contains 61 strict internal passes, 3 pending observable pairs,
+and 2 not-observable rear views. Pair 64 is the next isolated gate; user
+approval and runtime admission remain zero.

@@ -8,11 +8,66 @@
     "rotation_degrees": 0.0,
     "scale": 0.18,
     "scale_x": 0.219,
-    "scale_y": 0.142,
+    "scale_y": 0.2,
     "translate_x": 371,
-    "translate_y": 117
+    "translate_y": 77
   },
+  "anatomy_direction_vector": [
+    3,
+    1
+  ],
+  "anatomy_upper_beak_polygon": [
+    [
+      496,
+      190
+    ],
+    [
+      606,
+      190
+    ],
+    [
+      608,
+      232
+    ],
+    [
+      600,
+      238
+    ],
+    [
+      516,
+      215
+    ],
+    [
+      496,
+      211
+    ]
+  ],
   "approval_state": "candidate_visual_review",
+  "beak_anatomy": {
+    "cavity_anchor_distance": 5.676,
+    "checks": {
+      "bounded_tip_offset": true,
+      "cavity_anchored": true,
+      "mandible_anchored": true,
+      "plausible_mandible_length": true,
+      "same_longitudinal_direction": true,
+      "upper_beak_anchored": true
+    },
+    "direction": [
+      3,
+      1
+    ],
+    "mandible_anchor_distance": 9.0,
+    "mandible_forward_reach": 110.3635,
+    "mandible_length_ratio": 1.1079,
+    "mandible_reverse_reach": 13.5978,
+    "mode": "directional",
+    "passed": true,
+    "schema_version": 1,
+    "tip_offset_ratio": 0.4825,
+    "upper_anchor_distance": 0.392,
+    "upper_forward_reach": 99.6117
+  },
   "canvas": [
     960,
     540
@@ -20,36 +75,36 @@
   "cavity_fill_rgba": null,
   "cavity_polygon": [
     [
-      506,
+      504,
+      205
+    ],
+    [
+      520,
       207
     ],
     [
-      518,
-      210
+      600,
+      236
     ],
     [
-      599,
-      238
-    ],
-    [
-      601,
-      247
+      604,
+      252
     ],
     [
       516,
-      224
+      232
     ],
     [
-      505,
-      217
+      503,
+      218
     ]
   ],
   "cavity_source": "generated_overlay",
   "changed_bbox": [
-    503,
-    207,
+    500,
+    205,
     598,
-    255
+    271
   ],
   "generated_render_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/063-read-a-panel/173_ACT173_read_a_panel_speaking_beak_pairwise_head_donor_v11_alpha.png",
   "generated_render_sha256": "5faaf7cca3c7160f3ba62b9d38a7a630b5d71735112ca699d6af73b10b8117f0",
@@ -57,49 +112,49 @@
     509,
     214
   ],
-  "hinge_radius": 15,
+  "hinge_radius": 18,
   "mandible_bbox": [
-    503,
-    205,
+    500,
+    198,
     598,
-    255
+    271
   ],
-  "mandible_connected_ratio": 1.0,
-  "mandible_largest_component_pixels": 1536,
-  "mandible_opaque_pixels": 1536,
+  "mandible_connected_ratio": 0.998986,
+  "mandible_largest_component_pixels": 2957,
+  "mandible_opaque_pixels": 2960,
   "mandible_polygon": [
     [
-      503,
-      205
+      500,
+      198
     ],
     [
-      517,
-      209
-    ],
-    [
-      602,
-      241
+      518,
+      202
     ],
     [
       604,
-      252
+      234
     ],
     [
-      598,
-      263
+      609,
+      253
     ],
     [
-      514,
-      229
+      603,
+      281
     ],
     [
-      503,
-      218
+      515,
+      243
+    ],
+    [
+      500,
+      220
     ]
   ],
   "method": "pair_specific_connected_mandible_patch_v1",
   "minimum_connected_ratio": 0.95,
-  "minimum_mandible_height": 24,
+  "minimum_mandible_height": 34,
   "oral_warm_replacement_polygon": null,
   "oral_warm_replacement_rgba": null,
   "outside_articulation_change": false,
@@ -113,8 +168,8 @@
     "mode": "opaque",
     "neutral_chroma_threshold": 36
   },
-  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/063-read-a-panel/173_ACT173_read_a_panel_speaking_beak_candidate_pairwise_v13_exact-tip.png",
-  "speaking_sha256": "3326cd8c832be29d4f7440d71eeb52152e0ec562754d85322f6fa03cd84f7990",
+  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/063-read-a-panel/173_ACT173_read_a_panel_speaking_beak_alpha.png",
+  "speaking_sha256": "2cfcd0089ad63444348753fc76313b067a0396567816d9c3e659389e8295b562",
   "upper_beak_policy": "immutable_source_pixels",
   "upper_beak_polygon": [
     [
