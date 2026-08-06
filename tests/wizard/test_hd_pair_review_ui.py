@@ -212,6 +212,22 @@ class HdPairReviewUiTests(unittest.TestCase):
         self.assertFalse(write_or_tap["runtime_admitted"])
         self.assertFalse(write_or_tap["user_approved"])
 
+        select_control = by_ordinal[66]
+        self.assertEqual(
+            select_control["pairwise_full_size_review"]["state"],
+            "pass",
+        )
+        self.assertEqual(
+            select_control["pairwise_full_size_review"]["source_disposition"],
+            "full_size_pairwise_review",
+        )
+        self.assertIn(
+            "evidence/pairwise-full-size/pair-066-one-pair-2026-08-06-v1",
+            select_control["pairwise_full_size_review"]["evidence_path"],
+        )
+        self.assertFalse(select_control["runtime_admitted"])
+        self.assertFalse(select_control["user_approved"])
+
         visible_pairs = [
             pair for pair in ledger["pairs"]
             if pair["pairwise_full_size_review"]["state"] != "not_observable"
@@ -232,7 +248,7 @@ class HdPairReviewUiTests(unittest.TestCase):
                     19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32,
                     33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46,
                     47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58,
-                    59, 60, 61, 62, 63, 64, 65,
+                    59, 60, 61, 62, 63, 64, 65, 66,
                 )
             ],
             [
@@ -284,11 +300,12 @@ class HdPairReviewUiTests(unittest.TestCase):
                 "pass",
                 "pass",
                 "pass",
+                "pass",
             ],
         )
-        self.assertEqual(summary["pass_count"], 63)
-        self.assertEqual(summary["pending_count"], 1)
-        self.assertFalse(summary["complete"])
+        self.assertEqual(summary["pass_count"], 64)
+        self.assertEqual(summary["pending_count"], 0)
+        self.assertTrue(summary["complete"])
         pending_pairs = [
             pair for pair in visible_pairs
             if pair["pairwise_full_size_review"]["state"] == "pending"

@@ -4475,3 +4475,39 @@ Fresh Pair 65 evidence:
 The queue now contains 63 strict internal passes, 1 pending observable pair,
 and 2 not-observable rear views. Pair 66 is the final isolated gate; user
 approval and runtime admission remain zero.
+
+Pair 66 (`select-a-control`) passed its isolated native-size, enlarged beak,
+and live-projector review without changing the selected speaking pixels. One
+connected lower mandible opens from the authored screen-left hinge, follows
+the shallow rightward bill axis, reaches the immutable upper-tip line, and
+contains one bounded warm oral cavity. The upgraded receipt independently
+measures the upper bill along direction vector `[5, 1]`. The crest, eye, face,
+cheek, throat, hoodie, fishbone mark, raised control wing, body, stance, feet,
+upper bill, canvas, registration, and silhouette remain fixed.
+
+The selected frame retains SHA-256
+`85b3f3028e9a1c28eb63af23eeb162f152989ec63a7c96713f6e2a4f29badc33`.
+The upgraded receipt records hinge `(441, 230)`, upper reach `110.8056`,
+mandible reach `114.3357`, a `1.0319` mandible-to-upper reach ratio, `0.1133`
+normalized tip offset, upper anchor distance `1.793`, mandible anchor distance
+`3.915`, cavity anchor distance `2.774`, and connected-mandible ratio `1.0`.
+Its strict audit retains 1,824 changed mouth pixels, outside-mouth mean
+difference `0.0`, registration delta `0`, and silhouette IoU `0.995926`.
+
+Fresh Pair 66 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-066-one-pair-2026-08-06-v1/`
+
+The reopened strict corpus audit now contains 64 observable internal passes,
+0 pending observable pairs, and 2 not-observable rear views. User approval and
+runtime admission remain zero; those are separate gates and are not implied by
+completion of this internal visual review.
+
+The production completion verifier passed against compiled artifact
+`kingfisher_act_001_066_111_176_pair_review-a535f9fe6f5b89d4.wjpose`
+with SHA-256
+`a535f9fe6f5b89d48ca91d8977656ae1b855991de579a14ea339d141e5815a9f`.
+It confirms 66 authored pairs, 176 poses, 132 closed/open sequence frames, 176
+binary-alpha poses on the canonical `960x540` canvas, registration-bound delta
+`0`, minimum pair silhouette IoU `0.988776`, 64 observable full-size passes,
+2 not-observable rear views, 0 user approvals, and 0 runtime admissions.
