@@ -3810,3 +3810,34 @@ Fresh Pair 40 evidence:
 The queue now contains 38 strict internal passes, 26 pending observable pairs,
 and 2 not-observable rear views. Pair 41 is the next isolated gate; user
 approval and runtime admission remain zero.
+
+Pair 41 (`centered-calm`) failed its first isolated visual inspection even
+though the previous automated audit was green. The old speaking mate replaced
+too much of the frontal upper bill with a tall black diamond, causing the open
+frame to read as a second beak suspended below the face. That v3 geometry was
+rejected rather than carried forward.
+
+Candidate v9 is a fresh pair-specific rebuild. It compresses only the lower-jaw
+donor and confines the oral cavity to a compact V-shaped band inside the
+canonical bill footprint. The two mouth corners remain balanced around the
+character centerline, the immutable upper bill stays visually intact, and the
+lower rim remains one connected component. The closed frame, eyes, crest,
+cheeks, throat, hoodie, body, feet, scale, canvas, and registration remain
+unchanged.
+
+The accepted internal candidate has SHA-256
+`0afb6f3aefb0ba9334156ab961345976415a9dbadbfce67659c6a73a88a70942`.
+Its anatomy receipt records hinge `(480, 250)`, zero normalized center offset,
+a `0.6098` mandible-to-upper width ratio, upper anchor distance `16.506`,
+mandible anchor distance `19.799`, cavity anchor distance `14.142`, and
+connected-mandible ratio `1.0`. The strict 60-by-45 articulation audit reports
+812 changed mouth pixels, outside-mouth mean difference `0.0`, registration
+delta `0`, and silhouette IoU `1.0`.
+
+Fresh Pair 41 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-041-one-pair-2026-08-06-v1/`
+
+The queue now contains 39 strict internal passes, 25 pending observable pairs,
+and 2 not-observable rear views. Pair 42 is the next isolated gate; user
+approval and runtime admission remain zero.
