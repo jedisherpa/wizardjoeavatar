@@ -3979,3 +3979,29 @@ Fresh Pair 46 evidence:
 The queue now contains 44 strict internal passes, 20 pending observable pairs,
 and 2 not-observable rear views. Pair 47 is the next isolated gate; user
 approval and runtime admission remain zero.
+
+Pair 47 (`compassion`) passed its isolated native-size, enlarged directional-
+beak, and full-projector review. Candidate v2 reproduces the selected speaking
+pixels byte-for-byte while upgrading the pair to the current anatomy receipt.
+The bowed head and long opening retain the canonical eye, crest, face,
+complete upper bill, throat, hoodie, extended wing, body, feet, canvas, and
+registration. Only the connected lower mandible and bounded oral cavity
+change.
+
+The lower bill follows the immutable upper bill toward screen left from the
+same screen-right rear hinge. The selected frame retains SHA-256
+`e55e383be358770553564669c47914154b2e52a6fe417667de120edd9da0e2a0`.
+The upgraded receipt records hinge `(512, 238)`, upper reach `87`, mandible
+reach `50`, a `0.5747` mandible-to-upper reach ratio, `0.5172` normalized tip
+offset, upper anchor distance `5.047`, mandible anchor distance `9.836`, cavity
+anchor distance `3.684`, and connected-mandible ratio `1.0`. Its strict audit
+reports 2,537 changed mouth pixels, outside-mouth mean difference `0.0`,
+registration delta `0`, and silhouette IoU `1.0`.
+
+Fresh Pair 47 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-047-one-pair-2026-08-06-v1/`
+
+The queue now contains 45 strict internal passes, 19 pending observable pairs,
+and 2 not-observable rear views. Pair 48 is the next isolated gate; user
+approval and runtime admission remain zero.
