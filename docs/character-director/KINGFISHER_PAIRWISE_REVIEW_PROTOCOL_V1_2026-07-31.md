@@ -3449,3 +3449,31 @@ Fresh Pair 27 evidence:
 The queue now contains 25 strict internal passes, 39 pending observable pairs,
 and 2 not-observable rear views. Pair 28 is the next isolated gate; user
 approval and runtime admission remain zero.
+
+Pair 28 (`strong-declaration`) passed its isolated native-size,
+enlarged-beak, tight-tip, and full-projector review. Candidate v5 reproduces
+the selected v4 speaking mate exactly from the preserved pair-specific v2
+donor under the current anatomy checker. Candidate v3 pastes white throat
+feathers into a second dark mouth region, while the earlier rejected frame
+leaves a detached smile below an otherwise closed bill; both remain excluded.
+
+The selected broad declaration aperture is centered beneath the immutable
+upper bill, with both rear corners attached to the same face geometry. One
+connected lower mandible and one contained oral cavity support the forceful
+raised-wing gesture without moving the eyes, crown, cheeks, throat, hoodie,
+body, feet, scale, or canvas. The frame retains SHA-256
+`a0972eee897e0a2a9811fe79c0352f827ca3ca3d659f11ae6739fa8d5c4d42ee`.
+The upgraded receipt records hinge `(539, 222)`, upper anchor distance
+`0.686`, mandible anchor distance `3.531`, cavity anchor distance `0.588`, a
+`1.0513` mandible-to-upper reach ratio, `0.1026` normalized tip offset, and
+connected-mandible ratio `1.0`. Its strict audit reports 887 changed rendered
+pixels, outside-mouth mean difference `0.0`, registration delta `0`, and
+silhouette IoU `1.0`.
+
+Fresh Pair 28 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-028-one-pair-2026-08-05-v2/`
+
+The queue now contains 26 strict internal passes, 38 pending observable pairs,
+and 2 not-observable rear views. Pair 29 is the next isolated gate; user
+approval and runtime admission remain zero.
