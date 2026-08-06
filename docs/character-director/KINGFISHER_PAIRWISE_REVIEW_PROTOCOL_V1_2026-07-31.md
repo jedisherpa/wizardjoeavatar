@@ -4289,3 +4289,30 @@ Fresh Pair 58 evidence:
 The queue now contains 56 strict internal passes, 8 pending observable pairs,
 and 2 not-observable rear views. Pair 59 is the next isolated gate; user
 approval and runtime admission remain zero.
+
+Pair 59 (`determination`) passed only after its first same-day successor was
+rejected during enlarged beak review. Candidate v14 reached the correct upper-
+bill tip but collapsed into a needle-thin lower line, demonstrating that the
+directional anatomy metrics are necessary but not sufficient. The accepted
+v17 rebuild uses a newly rendered one-pair mouth donor and transfers only the
+connected lower mandible and bounded cavity onto the immutable canonical body.
+The result preserves the determined gaze, crest, face, upper bill, throat,
+hoodie, wings, stance, feet, canvas, and registration while giving the lower
+bill a readable textured surface from the rear hinge to the tip.
+
+The selected frame has SHA-256
+`110c8295dced728b4639e7272807cd2fcf62f37b18e118fb35bff447833d9a14`.
+Its receipt records hinge `(540, 247)`, upper reach `154`, mandible reach
+`160`, a `1.039` mandible-to-upper reach ratio, `0.3636` normalized tip
+offset, upper anchor distance `7.424`, mandible anchor distance `9.61`, cavity
+anchor distance `2.046`, and connected-mandible ratio `1.0`. The strict audit
+reports 4,499 changed mouth pixels, outside-mouth mean difference `0.0`,
+registration delta `0`, and silhouette IoU `0.992247`.
+
+Fresh Pair 59 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-059-one-pair-2026-08-06-v2/`
+
+The queue now contains 57 strict internal passes, 7 pending observable pairs,
+and 2 not-observable rear views. Pair 60 is the next isolated gate; user
+approval and runtime admission remain zero.

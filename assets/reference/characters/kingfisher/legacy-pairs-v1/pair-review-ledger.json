@@ -5441,16 +5441,16 @@
       "pair_work_path": "pair-work/059-determination",
       "pairwise_full_size_review": {
         "defect_codes": [],
-        "evidence_path": "",
-        "note": "User reported multiple visibly misaligned beaks in sequence playback on 2026-08-05. Reopen every observable pair for a strict one-pair-at-a-time anatomy review; prior evidence is retained but no batch-derived visual pass remains authoritative.",
+        "evidence_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-059-one-pair-2026-08-06-v2",
+        "note": "One-pair rebuild v17: generated lower-mandible donor transferred onto immutable canonical body. Close-up review confirms a substantial connected lower bill, coherent rear hinge, bounded cavity, and aligned tip; prior v13/v14 needle-thin lower bill remains rejected in history.",
         "protocol_id": "kingfisher-full-size-pairwise-v1",
         "queued_at": "2026-07-31T05:30:00+00:00",
-        "reviewed_at": null,
-        "reviewer": null,
+        "reviewed_at": "2026-08-06T15:41:21.577115+00:00",
+        "reviewer": "codex-pairwise-review",
         "runtime_admission_implied": false,
         "schema_version": 1,
-        "source_disposition": "user_reported_visual_recheck",
-        "state": "pending",
+        "source_disposition": "full_size_pairwise_review",
+        "state": "pass",
         "user_approval_implied": false
       },
       "pairwise_full_size_review_history": [
@@ -5533,6 +5533,49 @@
             "schema_version": 1,
             "source_disposition": "full_size_pairwise_review",
             "state": "pass",
+            "user_approval_implied": false
+          }
+        },
+        {
+          "reason": "Superseded by a later full-size pairwise review disposition.",
+          "reporter": "codex-pairwise-full-size",
+          "schema_version": 1,
+          "superseded_at": "2026-08-06T15:12:45.394998+00:00",
+          "superseded_review": {
+            "defect_codes": [],
+            "evidence_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-059-one-pair-2026-08-06-v1",
+            "note": "Strict one-pair determination review rejected the legacy canonical mate because its lower bill overshot the immutable upper tip. Candidate v14 reproduces the strongest exact-bounds successor byte-for-byte, then adds a compiler-recomputable directional anatomy receipt. One connected lower bill opens to screen right from hinge (540,247), reaches the exact closed-frame beak bound, and preserves the upper bill, eyes, crest, face, throat, hoodie, wings, stance, registration, and body. Anatomy: upper reach 154, mandible reach 154, length ratio 1.0, tip offset 0.224, upper anchor 7.424, mandible anchor 6.86, cavity anchor 0.248, connected ratio 0.9978. Strict audit: 2,770 changed mouth pixels, outside-mouth mean 0.0, registration delta 0, silhouette IoU 0.994619. Internal visual pass only; no user approval and no runtime admission.",
+            "protocol_id": "kingfisher-full-size-pairwise-v1",
+            "queued_at": "2026-07-31T05:30:00+00:00",
+            "reviewed_at": "2026-08-06T15:11:19.845101+00:00",
+            "reviewer": "codex-pairwise-full-size",
+            "runtime_admission_implied": false,
+            "schema_version": 1,
+            "source_disposition": "full_size_pairwise_review",
+            "state": "pass",
+            "user_approval_implied": false
+          }
+        },
+        {
+          "reason": "Superseded by a later full-size pairwise review disposition.",
+          "reporter": "codex-pairwise-review",
+          "schema_version": 1,
+          "superseded_at": "2026-08-06T15:41:21.577115+00:00",
+          "superseded_review": {
+            "defect_codes": [
+              "insufficient_mandible_thickness",
+              "needle_thin_lower_bill"
+            ],
+            "evidence_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-059-one-pair-2026-08-06-v1",
+            "note": "Pair 59 remains rejected after isolated visual review. Although candidate v14 reaches the correct tip bound and passes directional metrics, the lower mandible is still too thin to read as one coherent Kingfisher bill at projector scale. Re-render this pair independently with a thicker connected lower mandible while preserving the closed body and immutable upper bill. No user approval and no runtime admission.",
+            "protocol_id": "kingfisher-full-size-pairwise-v1",
+            "queued_at": "2026-07-31T05:30:00+00:00",
+            "reviewed_at": "2026-08-06T15:12:45.394998+00:00",
+            "reviewer": "codex-pairwise-full-size",
+            "runtime_admission_implied": false,
+            "schema_version": 1,
+            "source_disposition": "full_size_pairwise_review",
+            "state": "needs_rebuild",
             "user_approval_implied": false
           }
         }
@@ -6130,11 +6173,11 @@
     "needs_rebuild_count": 0,
     "not_observable_count": 2,
     "pair_count": 66,
-    "pass_count": 56,
-    "passing_disposition_count": 58,
-    "pending_count": 8,
+    "pass_count": 57,
+    "passing_disposition_count": 59,
+    "pending_count": 7,
     "protocol_id": "kingfisher-full-size-pairwise-v1",
-    "reviewed_count": 58,
+    "reviewed_count": 59,
     "runtime_admission_implied": false,
     "schema_version": 1,
     "user_approval_implied": false

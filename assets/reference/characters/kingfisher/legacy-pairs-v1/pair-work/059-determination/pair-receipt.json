@@ -5,14 +5,77 @@
       540,
       247
     ],
-    "rotation_degrees": 0.0,
-    "scale": 0.28,
-    "scale_x": 0.382,
-    "scale_y": 0.279,
-    "translate_x": 147,
-    "translate_y": 102
+    "rotation_degrees": -5.0,
+    "scale": 1.0,
+    "scale_x": 1.0,
+    "scale_y": 1.0,
+    "translate_x": 0,
+    "translate_y": 0
   },
+  "anatomy_direction_vector": [
+    1,
+    0
+  ],
+  "anatomy_upper_beak_polygon": [
+    [
+      523,
+      224
+    ],
+    [
+      585,
+      220
+    ],
+    [
+      692,
+      248
+    ],
+    [
+      694,
+      260
+    ],
+    [
+      688,
+      270
+    ],
+    [
+      590,
+      259
+    ],
+    [
+      535,
+      254
+    ],
+    [
+      520,
+      243
+    ]
+  ],
   "approval_state": "candidate_visual_review",
+  "beak_anatomy": {
+    "cavity_anchor_distance": 2.046,
+    "checks": {
+      "bounded_tip_offset": true,
+      "cavity_anchored": true,
+      "mandible_anchored": true,
+      "plausible_mandible_length": true,
+      "same_longitudinal_direction": true,
+      "upper_beak_anchored": true
+    },
+    "direction": [
+      1,
+      0
+    ],
+    "mandible_anchor_distance": 9.61,
+    "mandible_forward_reach": 160.0,
+    "mandible_length_ratio": 1.039,
+    "mandible_reverse_reach": 12.0,
+    "mode": "directional",
+    "passed": true,
+    "schema_version": 1,
+    "tip_offset_ratio": 0.3636,
+    "upper_anchor_distance": 7.424,
+    "upper_forward_reach": 154.0
+  },
   "canvas": [
     960,
     540
@@ -20,78 +83,78 @@
   "cavity_fill_rgba": null,
   "cavity_polygon": [
     [
-      538,
-      244
+      535,
+      242
     ],
     [
       558,
-      248
+      245
     ],
     [
-      686,
-      278
+      696,
+      259
     ],
     [
-      682,
+      692,
       292
     ],
     [
       550,
-      265
+      270
     ]
   ],
   "cavity_source": "generated_overlay",
   "changed_bbox": [
-    535,
-    244,
-    683,
-    292
+    531,
+    242,
+    673,
+    300
   ],
-  "generated_render_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/059-determination/169_ACT169_determination_speaking_beak_pairwise_head_donor_v9_alpha.png",
-  "generated_render_sha256": "4ae38f21287ce8f079c8d3715742a02a9562ba61d0f6b5d827cdc880eea45f77",
+  "generated_render_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/059-determination/169_ACT169_determination_speaking_beak_pairwise_generated_v15_alpha.png",
+  "generated_render_sha256": "0ba0ea16626c0d48de130e388b6e21a60d01a88557c445e7833f031c835fa920",
   "hinge": [
     540,
     247
   ],
   "hinge_radius": 24,
   "mandible_bbox": [
-    530,
-    238,
-    683,
-    292
+    528,
+    236,
+    687,
+    300
   ],
-  "mandible_connected_ratio": 0.9978,
-  "mandible_largest_component_pixels": 3628,
-  "mandible_opaque_pixels": 3636,
+  "mandible_connected_ratio": 1.0,
+  "mandible_largest_component_pixels": 5504,
+  "mandible_opaque_pixels": 5504,
   "mandible_polygon": [
     [
-      530,
+      528,
+      236
+    ],
+    [
+      560,
       238
     ],
     [
-      558,
-      240
+      697,
+      251
     ],
     [
-      692,
-      272
+      700,
+      310
     ],
     [
-      694,
-      305
+      680,
+      311
     ],
     [
-      678,
-      306
-    ],
-    [
-      540,
-      270
+      536,
+      276
     ]
   ],
   "method": "pair_specific_connected_mandible_patch_v1",
   "minimum_connected_ratio": 0.95,
-  "minimum_mandible_height": 30,
+  "minimum_mandible_height": 40,
   "oral_warm_replacement_polygon": null,
   "oral_warm_replacement_rgba": null,
   "outside_articulation_change": false,
@@ -105,8 +168,8 @@
     "mode": "opaque",
     "neutral_chroma_threshold": 36
   },
-  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/059-determination/169_ACT169_determination_speaking_beak_candidate_pairwise_v13_exact-bounds.png",
-  "speaking_sha256": "315441f664132febbb8fab9d7e52f241efc06efb636e54e33761c2beaedf5514",
+  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/059-determination/169_ACT169_determination_speaking_beak_alpha.png",
+  "speaking_sha256": "110c8295dced728b4639e7272807cd2fcf62f37b18e118fb35bff447833d9a14",
   "upper_beak_policy": "immutable_source_pixels",
   "upper_beak_polygon": [
     [

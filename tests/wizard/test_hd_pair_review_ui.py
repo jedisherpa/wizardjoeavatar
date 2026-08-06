@@ -88,15 +88,21 @@ class HdPairReviewUiTests(unittest.TestCase):
         )
         self.assertEqual(
             repaired["pairwise_full_size_review"]["state"],
-            "pending",
+            "pass",
         )
         self.assertEqual(
             repaired["pairwise_full_size_review"]["source_disposition"],
-            "user_reported_visual_recheck",
+            "full_size_pairwise_review",
         )
-        self.assertEqual(repaired["pairwise_full_size_review"]["evidence_path"], "")
+        self.assertIn(
+            "evidence/pairwise-full-size/pair-059-one-pair-2026-08-06-v2",
+            repaired["pairwise_full_size_review"]["evidence_path"],
+        )
         history = repaired["pairwise_full_size_review_history"]
-        self.assertEqual(history[-1]["superseded_review"]["state"], "pass")
+        self.assertEqual(
+            history[-1]["superseded_review"]["state"],
+            "needs_rebuild",
+        )
         self.assertIn(
             "evidence/pairwise-full-size/pair-059-",
             history[-1]["superseded_review"]["evidence_path"],
@@ -143,6 +149,7 @@ class HdPairReviewUiTests(unittest.TestCase):
                     19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32,
                     33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46,
                     47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58,
+                    59,
                 )
             ],
             [
@@ -187,10 +194,11 @@ class HdPairReviewUiTests(unittest.TestCase):
                 "pass",
                 "pass",
                 "pass",
+                "pass",
             ],
         )
-        self.assertEqual(summary["pass_count"], 56)
-        self.assertEqual(summary["pending_count"], 8)
+        self.assertEqual(summary["pass_count"], 57)
+        self.assertEqual(summary["pending_count"], 7)
         self.assertFalse(summary["complete"])
         pending_pairs = [
             pair for pair in visible_pairs

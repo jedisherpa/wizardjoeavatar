@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-08-06T15:53:04Z",
+  "generator": "built_in_image_gen",
+  "use_case": "precise-object-edit",
+  "source_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/059-determination/059_ACT059_determination_resting_beak_alpha.png",
+  "source_sha256": "bb5af96d8eda2b6a1066c7d3caab76d6667cae88d03abbeba7ee1d95fb327e02",
+  "raw_output_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/059-determination/169_ACT169_determination_speaking_beak_pairwise_generated_v15_raw.png",
+  "raw_output_sha256": "a47649da4c1a0d5edf338733bae455005be811f894529477ac5abd817ad5ecec",
+  "alpha_output_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/059-determination/169_ACT169_determination_speaking_beak_pairwise_generated_v15_alpha.png",
+  "alpha_output_sha256": "0ba0ea16626c0d48de130e388b6e21a60d01a88557c445e7833f031c835fa920",
+  "post_processing": [
+    "remove_chroma_key auto-key border soft-matte despill",
+    "resample to canonical 960x540 canvas"
+  ],
+  "prompt": "Edit only the supplied Kingfisher's beak into a natural speaking-open pose. Preserve the exact identity, pixel-art texture, determined pose, gaze, crest, hoodie, body, canvas, scale, registration, and upper bill. Create one substantial connected lower mandible hinged at the rear cheek-side beak root, extending screen-right to approximately the upper-bill tip, with a bounded dark cavity. Avoid a needle-thin lower bill, detached geometry, duplicate edges, changed throat, crop, resize, blur, text, or watermark. Render on a flat #00ff00 chroma-key background.",
+  "role": "lower_mandible_donor_only",
+  "approval_state": "selected_donor",
+  "runtime_admitted": false,
+  "user_approved": false
+}
