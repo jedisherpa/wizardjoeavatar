@@ -3871,3 +3871,31 @@ Fresh Pair 42 evidence:
 The queue now contains 40 strict internal passes, 24 pending observable pairs,
 and 2 not-observable rear views. Pair 43 is the next isolated gate; user
 approval and runtime admission remain zero.
+
+Pair 43 (`full-laughter`) passed its isolated native-size, enlarged-beak, and
+full-projector review. Candidate v3 reproduces the selected v2 speaking pixels
+byte-for-byte while upgrading the pair to the current directional anatomy
+receipt. This pair intentionally uses a broad laughter opening, but the lower
+bill rotates from the same screen-left rear hinge and remains beneath the
+immutable upper bill. The closed eyes, crest, cheeks, throat, hoodie, extended
+wings, body, feet, scale, canvas, and registration remain unchanged.
+
+The lower mandible has the same longitudinal reach as the upper bill and ends
+beneath the same tip. It remains one connected component with a contained oral
+cavity; there is no detached strip, duplicate bill edge, throat import, or
+lateral drift. The selected frame retains SHA-256
+`1c4b618e3ea97d665e6bcf53bb8fdf24213d8fa977ab96527487f8545beaf0a2`.
+The upgraded receipt records hinge `(418, 116)`, upper anchor distance `0.503`,
+mandible anchor distance `2.258`, cavity anchor distance `1.998`, equal upper
+and mandible reach of `172`, a `1.0` mandible-to-upper reach ratio, `0.0087`
+normalized tip offset, and connected-mandible ratio `1.0`. Its strict audit
+reports 2,542 changed mouth pixels, outside-mouth mean difference `0.0`,
+registration delta `0`, and silhouette IoU `0.999505`.
+
+Fresh Pair 43 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-043-one-pair-2026-08-06-v1/`
+
+The queue now contains 41 strict internal passes, 23 pending observable pairs,
+and 2 not-observable rear views. Pair 44 is the next isolated gate; user
+approval and runtime admission remain zero.
