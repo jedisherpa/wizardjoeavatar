@@ -4005,3 +4005,27 @@ Fresh Pair 47 evidence:
 The queue now contains 45 strict internal passes, 19 pending observable pairs,
 and 2 not-observable rear views. Pair 48 is the next isolated gate; user
 approval and runtime admission remain zero.
+
+Pair 48 (`surprise`) passed its isolated native-size, enlarged frontal-mouth,
+and full-projector review. Candidate v7 preserves the selected speaking pixels
+byte-for-byte while correcting the old screen-right hinge declaration to the
+actual frontal centerline. The compact surprised opening sits beneath the
+immutable upper bill; the eyes, crest, face, throat, hoodie, spread wings,
+body, feet, canvas, registration, and silhouette remain unchanged.
+
+The selected frame retains SHA-256
+`2379d0fd414f2d020bbdb3ac6679d60ecf30c7ab0e5c23e9f2eb3f14ed7a7fae`.
+The upgraded receipt records centerline hinge `(528, 161)`, center offset ratio
+`0.0143`, mandible width ratio `0.8571`, upper anchor distance `26.0`,
+mandible anchor distance `26.0`, cavity anchor distance `11.0`, and connected-
+mandible ratio `0.975081`. Its strict audit reports 2,059 changed mouth pixels,
+outside-mouth mean difference `0.0`, registration delta `0`, and silhouette
+IoU `1.0`.
+
+Fresh Pair 48 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-048-one-pair-2026-08-06-v1/`
+
+The queue now contains 46 strict internal passes, 18 pending observable pairs,
+and 2 not-observable rear views. Pair 49 is the next isolated gate; user
+approval and runtime admission remain zero.
