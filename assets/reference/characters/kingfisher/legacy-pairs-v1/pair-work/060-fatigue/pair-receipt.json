@@ -12,7 +12,66 @@
     "translate_x": 92,
     "translate_y": 138
   },
+  "anatomy_direction_vector": [
+    -3,
+    2
+  ],
+  "anatomy_upper_beak_polygon": [
+    [
+      448,
+      244
+    ],
+    [
+      460,
+      253
+    ],
+    [
+      452,
+      269
+    ],
+    [
+      386,
+      307
+    ],
+    [
+      374,
+      307
+    ],
+    [
+      383,
+      282
+    ],
+    [
+      438,
+      249
+    ]
+  ],
   "approval_state": "candidate_visual_review",
+  "beak_anatomy": {
+    "cavity_anchor_distance": 1.572,
+    "checks": {
+      "bounded_tip_offset": true,
+      "cavity_anchored": true,
+      "mandible_anchored": true,
+      "plausible_mandible_length": true,
+      "same_longitudinal_direction": true,
+      "upper_beak_anchored": true
+    },
+    "direction": [
+      -3,
+      2
+    ],
+    "mandible_anchor_distance": 7.82,
+    "mandible_forward_reach": 78.4901,
+    "mandible_length_ratio": 0.8681,
+    "mandible_reverse_reach": 11.094,
+    "mode": "directional",
+    "passed": true,
+    "schema_version": 1,
+    "tip_offset_ratio": 0.1779,
+    "upper_anchor_distance": 6.708,
+    "upper_forward_reach": 90.4161
+  },
   "canvas": [
     960,
     540
@@ -93,12 +152,19 @@
   "method": "pair_specific_connected_mandible_patch_v1",
   "minimum_connected_ratio": 0.99,
   "minimum_mandible_height": 18,
+  "oral_warm_replacement_polygon": null,
+  "oral_warm_replacement_rgba": null,
   "outside_articulation_change": false,
   "residual_clear_polygon": null,
   "resting_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/060-fatigue/060_ACT060_fatigue_resting_beak_alpha.png",
   "resting_sha256": "6a5c3e108fea49735b8fc3fe52971f6aa3bd6caef550ee98c03d90a64ab74151",
   "runtime_admitted": false,
   "schema_version": 1,
+  "source_mask": {
+    "light_threshold": 180,
+    "mode": "opaque",
+    "neutral_chroma_threshold": 36
+  },
   "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/060-fatigue/170_ACT170_fatigue_speaking_beak_alpha.png",
   "speaking_sha256": "ddb869ec3244ee0d9b65fc1a61d8190cf22dbee626cb89cdb4f8b70ae0332d2c",
   "upper_beak_policy": "immutable_source_pixels",

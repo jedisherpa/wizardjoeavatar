@@ -4316,3 +4316,30 @@ Fresh Pair 59 evidence:
 The queue now contains 57 strict internal passes, 7 pending observable pairs,
 and 2 not-observable rear views. Pair 60 is the next isolated gate; user
 approval and runtime admission remain zero.
+
+Pair 60 (`fatigue`) passed its isolated native-size, enlarged down-left beak,
+and full-projector review without changing the selected speaking frame. The
+existing open pixels already form one coherent tired speaking aperture. The
+receipt was upgraded to measure the actual upper bill independently from its
+broader restoration mask and to declare the authored direction vector
+`[-3, 2]`. The lower bill remains connected to the screen-right rear hinge,
+tracks the steep perspective of the immutable upper bill, and keeps the warm
+oral surface inside the cavity. The fatigued eyes, crest, cheek, throat,
+hoodie, body, feet, canvas, registration, and silhouette remain fixed.
+
+The selected frame retains SHA-256
+`ddb869ec3244ee0d9b65fc1a61d8190cf22dbee626cb89cdb4f8b70ae0332d2c`.
+The upgraded receipt records hinge `(450, 258)`, upper reach `90.4161`,
+mandible reach `78.4901`, a `0.8681` mandible-to-upper reach ratio, `0.1779`
+normalized tip offset, upper anchor distance `6.708`, mandible anchor distance
+`7.82`, cavity anchor distance `1.572`, and connected-mandible ratio `1.0`.
+Its strict audit retains 2,092 changed mouth pixels, outside-mouth mean
+difference `0.0`, registration delta `0`, and silhouette IoU `1.0`.
+
+Fresh Pair 60 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-060-one-pair-2026-08-06-v1/`
+
+The queue now contains 58 strict internal passes, 6 pending observable pairs,
+and 2 not-observable rear views. Pair 61 is the next isolated gate; user
+approval and runtime admission remain zero.
