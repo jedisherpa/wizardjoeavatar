@@ -12,7 +12,62 @@
     "translate_x": 258,
     "translate_y": 98
   },
+  "anatomy_direction_vector": [
+    4,
+    1
+  ],
+  "anatomy_upper_beak_polygon": [
+    [
+      389,
+      193
+    ],
+    [
+      512,
+      193
+    ],
+    [
+      513,
+      238
+    ],
+    [
+      504,
+      242
+    ],
+    [
+      399,
+      217
+    ],
+    [
+      389,
+      211
+    ]
+  ],
   "approval_state": "candidate_visual_review",
+  "beak_anatomy": {
+    "cavity_anchor_distance": 3.682,
+    "checks": {
+      "bounded_tip_offset": true,
+      "cavity_anchored": true,
+      "mandible_anchored": true,
+      "plausible_mandible_length": true,
+      "same_longitudinal_direction": true,
+      "upper_beak_anchored": true
+    },
+    "direction": [
+      4,
+      1
+    ],
+    "mandible_anchor_distance": 6.0,
+    "mandible_forward_reach": 121.9954,
+    "mandible_length_ratio": 1.0436,
+    "mandible_reverse_reach": 8.0037,
+    "mode": "directional",
+    "passed": true,
+    "schema_version": 1,
+    "tip_offset_ratio": 0.139,
+    "upper_anchor_distance": 0.343,
+    "upper_forward_reach": 116.9022
+  },
   "canvas": [
     960,
     540
@@ -113,7 +168,7 @@
     "mode": "opaque",
     "neutral_chroma_threshold": 36
   },
-  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/064-study-a-diagram/174_ACT174_study_a_diagram_speaking_beak_candidate_pairwise_v12_generated-long.png",
+  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/064-study-a-diagram/174_ACT174_study_a_diagram_speaking_beak_alpha.png",
   "speaking_sha256": "4768451f594a04cadf90aa1f5c78709de65675544e3a37728d2dbf56bd9e3b81",
   "upper_beak_policy": "immutable_source_pixels",
   "upper_beak_polygon": [

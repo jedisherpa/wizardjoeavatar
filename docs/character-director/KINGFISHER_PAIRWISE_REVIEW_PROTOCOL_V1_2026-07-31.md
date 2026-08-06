@@ -4422,3 +4422,30 @@ Fresh Pair 63 evidence:
 The queue now contains 61 strict internal passes, 3 pending observable pairs,
 and 2 not-observable rear views. Pair 64 is the next isolated gate; user
 approval and runtime admission remain zero.
+
+Pair 64 (`study-a-diagram`) passed its isolated native-size, enlarged beak,
+and live-projector review without changing the selected speaking pixels. The
+existing open frame already forms one broad connected lower mandible with a
+bounded warm oral cavity at the authored screen-left hinge. The upgraded
+receipt measures the immutable upper bill independently along direction
+vector `[4, 1]`; this prevents the broad restoration mask from standing in for
+actual beak anatomy. The crest, eye, face, cheek, throat, hoodie, fishbone
+mark, pointing wing, body, stance, feet, upper bill, canvas, registration, and
+silhouette remain fixed.
+
+The selected frame retains SHA-256
+`4768451f594a04cadf90aa1f5c78709de65675544e3a37728d2dbf56bd9e3b81`.
+The upgraded receipt records hinge `(398, 216)`, upper reach `116.9022`,
+mandible reach `121.9954`, a `1.0436` mandible-to-upper reach ratio, `0.139`
+normalized tip offset, upper anchor distance `0.343`, mandible anchor distance
+`6.0`, cavity anchor distance `3.682`, and connected-mandible ratio `1.0`.
+Its strict audit retains 2,989 changed mouth pixels, outside-mouth mean
+difference `0.0`, registration delta `0`, and silhouette IoU `0.998027`.
+
+Fresh Pair 64 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-064-one-pair-2026-08-06-v1/`
+
+The queue now contains 62 strict internal passes, 2 pending observable pairs,
+and 2 not-observable rear views. Pair 65 is the next isolated gate; user
+approval and runtime admission remain zero.
