@@ -3616,3 +3616,31 @@ Fresh Pair 33 evidence:
 The queue now contains 31 strict internal passes, 33 pending observable pairs,
 and 2 not-observable rear views. Pair 34 is the next isolated gate; user
 approval and runtime admission remain zero.
+
+Pair 34 (`count-two`) passed its isolated native-size, enlarged-beak, and
+full-projector review. Candidate v3 reproduces the selected v2 speaking pixels
+exactly while upgrading the pair to the current directional anatomy receipt.
+The shallow three-quarter closed frame, eyes, crown, cheeks, throat, hoodie,
+bilateral raised-wing gesture, feet, scale, canvas, and registration remain
+unchanged.
+
+The lower mandible follows the authored bill toward screen right from the
+screen-left rear hinge. It stays beneath the immutable upper bill with one
+connected lower edge and one contained cavity; there is no detached strip,
+duplicate bill, throat residue, or sideways tip displacement. The selected
+frame retains SHA-256
+`24dc3d34ba1cd02e0d4daa0871c605cae57373f0424a57a5f0a57e3808b32ff9`.
+The upgraded receipt records hinge `(461, 174)`, upper anchor distance `2.324`,
+mandible anchor distance `3.615`, cavity anchor distance `2.01`, a `0.8214`
+mandible-to-upper reach ratio, `0.0952` normalized tip offset, and
+connected-mandible ratio `1.0`. Its strict audit reports 913 changed mouth
+pixels, outside-mouth mean difference `0.0`, registration delta `0`, and
+silhouette IoU `1.0`.
+
+Fresh Pair 34 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-034-one-pair-2026-08-05-v1/`
+
+The queue now contains 32 strict internal passes, 32 pending observable pairs,
+and 2 not-observable rear views. Pair 35 is the next isolated gate; user
+approval and runtime admission remain zero.
