@@ -3953,3 +3953,29 @@ Fresh Pair 45 evidence:
 The queue now contains 43 strict internal passes, 21 pending observable pairs,
 and 2 not-observable rear views. Pair 46 is the next isolated gate; user
 approval and runtime admission remain zero.
+
+Pair 46 (`confident-hero`) passed its isolated native-size, enlarged
+frontal-beak, and full-projector review. Candidate v3 corrects the older
+left-corner hinge description to the actual frontal centerline while
+reproducing the selected speaking pixels byte-for-byte. The compact lower bill
+is centered beneath the immutable upper bill with balanced mouth corners. The
+eyes, crest, cheeks, throat, hoodie, extended wings, body, feet, scale, canvas,
+and registration remain unchanged.
+
+The frontal lower mandible remains one connected component with a contained
+oral cavity. There is no detached strip, duplicate edge, throat import, or
+lateral drift. The selected frame retains SHA-256
+`889dab0f3f3845016cfd02a44cf2c6fa9079187b632a0c2c1db9fbd8ea6a59fc`.
+The upgraded receipt records centerline hinge `(480, 184)`, center offset ratio
+`0.0`, mandible width ratio `0.7857`, upper anchor distance `0.0`, mandible
+anchor distance `3.0`, cavity anchor distance `0.0`, and connected-mandible
+ratio `1.0`. Its strict audit reports 2,532 changed mouth pixels, outside-mouth
+mean difference `0.0`, registration delta `0`, and silhouette IoU `1.0`.
+
+Fresh Pair 46 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-046-one-pair-2026-08-06-v1/`
+
+The queue now contains 44 strict internal passes, 20 pending observable pairs,
+and 2 not-observable rear views. Pair 47 is the next isolated gate; user
+approval and runtime admission remain zero.
