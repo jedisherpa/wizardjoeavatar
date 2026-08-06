@@ -3725,3 +3725,31 @@ Fresh Pair 37 evidence:
 The queue now contains 35 strict internal passes, 29 pending observable pairs,
 and 2 not-observable rear views. Pair 38 is the next isolated gate; user
 approval and runtime admission remain zero.
+
+Pair 38 (`invitation-to-follow`) passed its isolated native-size,
+enlarged-beak, and full-projector review. Candidate v3 reproduces the selected
+v2 speaking pixels exactly while upgrading the pair to the current directional
+anatomy receipt. The right-facing closed frame, eyes, crown, cheeks, throat,
+hoodie, invitation wing, feet, scale, canvas, and registration remain
+unchanged.
+
+The restrained lower mandible follows the authored bill toward screen right
+from the screen-left rear hinge. It remains beneath the immutable upper bill
+with one connected edge and a contained cavity; there is no detached strip,
+duplicate mouth, throat import, or lateral tip jump. The selected frame retains
+SHA-256
+`9edb881bcba212f75d4e465e317c5b4d5c25db8b81c5ad5f39f67d31b8f62ef7`.
+The upgraded receipt records hinge `(443, 229)`, upper anchor distance `5.301`,
+mandible anchor distance `3.041`, cavity anchor distance `1.973`, a `0.9155`
+mandible-to-upper reach ratio, `0.1197` normalized tip offset, and
+connected-mandible ratio `1.0`. Its strict audit reports 1,413 changed mouth
+pixels, outside-mouth mean difference `0.0`, registration delta `0`, and
+silhouette IoU `0.999873`.
+
+Fresh Pair 38 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-038-one-pair-2026-08-05-v1/`
+
+The queue now contains 36 strict internal passes, 28 pending observable pairs,
+and 2 not-observable rear views. Pair 39 is the next isolated gate; user
+approval and runtime admission remain zero.
