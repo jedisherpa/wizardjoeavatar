@@ -161,7 +161,7 @@
     "mode": "opaque",
     "neutral_chroma_threshold": 36
   },
-  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/052-sadness/162_ACT162_sadness_speaking_beak_alpha.png",
+  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/052-sadness/162_ACT162_sadness_speaking_beak_candidate_pairwise_v14_anatomy-verified.png",
   "speaking_sha256": "586b845cfc3458416caa103de5cb7c1d4165999ec392cfcae1e2333481e0f226",
   "upper_beak_policy": "immutable_source_pixels",
   "upper_beak_polygon": [

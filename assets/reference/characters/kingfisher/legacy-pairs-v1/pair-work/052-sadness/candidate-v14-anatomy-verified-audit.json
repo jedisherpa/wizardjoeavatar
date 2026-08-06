@@ -1,0 +1,38 @@
+{
+  "changed_rendered_pixels": 541,
+  "checks": {
+    "bounded_articulation_change": true,
+    "outside_mouth_stability": true,
+    "silhouette_overlap": true,
+    "stable_registration_bounds": true,
+    "visible_mouth_change": true
+  },
+  "mouth_mean_abs": 6.989711,
+  "mouth_region": [
+    407,
+    261,
+    478,
+    308
+  ],
+  "outside_mouth_mean_abs": 0.0,
+  "passed": true,
+  "registration_bound_delta": 0,
+  "resting_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/052-sadness/052_ACT052_sadness_resting_beak_alpha.png",
+  "resting_registration_bbox": [
+    357,
+    97,
+    603,
+    529
+  ],
+  "resting_sha256": "6a96f56c2462ab3ee35819d1c6d86267fd5915c725ac0883a3839b6c4835590d",
+  "schema_version": 2,
+  "silhouette_iou": 1.0,
+  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/052-sadness/162_ACT162_sadness_speaking_beak_candidate_pairwise_v14_anatomy-verified.png",
+  "speaking_registration_bbox": [
+    357,
+    97,
+    603,
+    529
+  ],
+  "speaking_sha256": "586b845cfc3458416caa103de5cb7c1d4165999ec392cfcae1e2333481e0f226"
+}
