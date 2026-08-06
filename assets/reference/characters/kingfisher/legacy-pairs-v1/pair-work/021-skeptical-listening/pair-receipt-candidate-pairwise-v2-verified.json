@@ -70,7 +70,7 @@
   "changed_bbox": [
     450,
     243,
-    575,
+    572,
     299
   ],
   "generated_render_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/021-skeptical-listening/131_ACT131_skeptical_listening_speaking_beak_source_pre_pairwise.png",
@@ -86,9 +86,9 @@
     575,
     304
   ],
-  "mandible_connected_ratio": 0.995983,
-  "mandible_largest_component_pixels": 5950,
-  "mandible_opaque_pixels": 5974,
+  "mandible_connected_ratio": 1.0,
+  "mandible_largest_component_pixels": 7074,
+  "mandible_opaque_pixels": 7074,
   "mandible_polygon": [
     [
       447,
@@ -121,35 +121,18 @@
   "oral_warm_replacement_polygon": null,
   "oral_warm_replacement_rgba": null,
   "outside_articulation_change": false,
-  "residual_clear_polygon": [
-    [
-      554,
-      243
-    ],
-    [
-      576,
-      243
-    ],
-    [
-      576,
-      270
-    ],
-    [
-      554,
-      270
-    ]
-  ],
+  "residual_clear_polygon": null,
   "resting_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/021-skeptical-listening/021_ACT021_skeptical_listening_resting_beak_alpha.png",
   "resting_sha256": "3798a6b024a4cc215c3b53919760a513869b3bb5200dee952a53c457e2930175",
   "runtime_admitted": false,
   "schema_version": 1,
   "source_mask": {
     "light_threshold": 180,
-    "mode": "exclude_light_neutral",
+    "mode": "opaque",
     "neutral_chroma_threshold": 36
   },
-  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/021-skeptical-listening/131_ACT131_skeptical_listening_speaking_beak_candidate_pairwise_v5_clean-silhouette.png",
-  "speaking_sha256": "ceb5cd4a8dc29c7e3bd0406220d09970a8ea8b2f3306b1eaf5a8f3c1843617bb",
+  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/021-skeptical-listening/131_ACT131_skeptical_listening_speaking_beak_candidate_pairwise_v2_verified.png",
+  "speaking_sha256": "1ffbbe4c3254687aafb610d1670d37fb663229fac799c71d63c5edfd2d39c80f",
   "upper_beak_policy": "immutable_source_pixels",
   "upper_beak_polygon": [
     [

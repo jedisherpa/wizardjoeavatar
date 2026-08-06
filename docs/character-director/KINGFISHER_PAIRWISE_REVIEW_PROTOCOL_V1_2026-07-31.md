@@ -3260,3 +3260,28 @@ Fresh Pair 20 evidence:
 The queue now contains 18 strict internal passes, 46 pending observable pairs,
 and 2 not-observable rear views. Pair 21 is the next isolated gate; user
 approval and runtime admission remain zero.
+
+Pair 21 (`skeptical-listening`) passed its isolated native-size,
+enlarged-beak, tight-tip, and full-projector review after a new silhouette
+repair. The previous mate and candidate v2 retained a pale resting-edge
+fragment behind the opened tip. Candidate v3 removed light-neutral donor
+pixels but left that canonical silhouette residue, while candidate v4 left
+small residual flecks. Candidate v5 clears only the stale tip region before
+repainting the connected donor mandible.
+
+The repaired lower bill opens from the left rear hinge on the same right-facing
+axis and ends behind the upper tip without moving the eye line, crown, cheek,
+throat, folded wing, hoodie, body, feet, scale, or canvas. The corrected receipt
+records hinge `(452, 250)`, mandible anchor distance `5.0`, a `0.9612`
+mandible-to-upper reach ratio, `0.3178` normalized tip offset, and
+connected-mandible ratio `0.995983`. Its strict audit reports 4,640 changed
+rendered pixels, outside-mouth mean difference `0.0`, registration delta `0`,
+and silhouette IoU `0.998056`.
+
+Fresh Pair 21 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-021-one-pair-2026-08-05-v2/`
+
+The queue now contains 19 strict internal passes, 45 pending observable pairs,
+and 2 not-observable rear views. Pair 22 is the next isolated gate; user
+approval and runtime admission remain zero.

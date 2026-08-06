@@ -70,7 +70,7 @@
   "changed_bbox": [
     450,
     243,
-    575,
+    572,
     299
   ],
   "generated_render_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/021-skeptical-listening/131_ACT131_skeptical_listening_speaking_beak_source_pre_pairwise.png",
@@ -121,24 +121,7 @@
   "oral_warm_replacement_polygon": null,
   "oral_warm_replacement_rgba": null,
   "outside_articulation_change": false,
-  "residual_clear_polygon": [
-    [
-      554,
-      243
-    ],
-    [
-      576,
-      243
-    ],
-    [
-      576,
-      270
-    ],
-    [
-      554,
-      270
-    ]
-  ],
+  "residual_clear_polygon": null,
   "resting_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/021-skeptical-listening/021_ACT021_skeptical_listening_resting_beak_alpha.png",
   "resting_sha256": "3798a6b024a4cc215c3b53919760a513869b3bb5200dee952a53c457e2930175",
   "runtime_admitted": false,
@@ -148,8 +131,8 @@
     "mode": "exclude_light_neutral",
     "neutral_chroma_threshold": 36
   },
-  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/021-skeptical-listening/131_ACT131_skeptical_listening_speaking_beak_candidate_pairwise_v5_clean-silhouette.png",
-  "speaking_sha256": "ceb5cd4a8dc29c7e3bd0406220d09970a8ea8b2f3306b1eaf5a8f3c1843617bb",
+  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/021-skeptical-listening/131_ACT131_skeptical_listening_speaking_beak_candidate_pairwise_v3_clean-tip.png",
+  "speaking_sha256": "0973e8664fdc49467db229f2b3a5539b7b64918637a63a2a0fb598f47d45945f",
   "upper_beak_policy": "immutable_source_pixels",
   "upper_beak_polygon": [
     [
