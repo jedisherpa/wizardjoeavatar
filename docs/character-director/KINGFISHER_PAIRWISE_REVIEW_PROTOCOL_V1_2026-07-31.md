@@ -3366,3 +3366,29 @@ Fresh Pair 24 evidence:
 The queue now contains 22 strict internal passes, 42 pending observable pairs,
 and 2 not-observable rear views. Pair 25 is the next isolated gate; user
 approval and runtime admission remain zero.
+
+Pair 25 (`hand-over-the-floor`) passed its isolated native-size,
+enlarged-beak, tight-tip, and full-projector review. Candidate v6 reproduces
+the accepted tip-aligned v5 pixels exactly from the preserved pair-specific v2
+donor under the current directional anatomy checker. The rejected
+short-mandible frame stops mid-bill, rejected v2 contains displaced donor
+content, and candidates v3/v4 retain shorter tips; all remain excluded.
+
+The selected connected lower bill uses the authored left rear hinge, follows
+the immutable upper bill on the same right-facing profile axis, and reaches
+beneath its tip without a duplicate edge or detached sliver. Eye, crown,
+cheek, throat, hoodie, body, feet, scale, canvas, and extended
+hand-over-the-floor wing remain unchanged. The upgraded receipt records hinge
+`(365, 220)`, upper anchor distance `4.0`, mandible anchor distance `4.509`,
+cavity anchor distance `2.0`, a `0.9667` mandible-to-upper reach ratio,
+`0.5067` normalized tip offset, and connected-mandible ratio `0.999583`. Its
+strict audit reports 2,380 changed rendered pixels, outside-mouth mean
+difference `0.0`, registration delta `0`, and silhouette IoU `0.996829`.
+
+Fresh Pair 25 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-025-one-pair-2026-08-05-v2/`
+
+The queue now contains 23 strict internal passes, 41 pending observable pairs,
+and 2 not-observable rear views. Pair 26 is the next isolated gate; user
+approval and runtime admission remain zero.
