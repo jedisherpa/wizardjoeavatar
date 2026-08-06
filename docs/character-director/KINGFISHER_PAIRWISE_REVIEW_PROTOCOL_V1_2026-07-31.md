@@ -4029,3 +4029,28 @@ Fresh Pair 48 evidence:
 The queue now contains 46 strict internal passes, 18 pending observable pairs,
 and 2 not-observable rear views. Pair 49 is the next isolated gate; user
 approval and runtime admission remain zero.
+
+Pair 49 (`confusion`) passed its isolated native-size, enlarged directional-
+beak, and full-projector review. Candidate v2 preserves the selected speaking
+pixels byte-for-byte while correcting the old tip-side hinge to the actual
+screen-left beak root. The lower mandible now declares motion toward screen
+right, matching the bird's head and immutable upper bill. The eye, crest,
+face, throat, hoodie, raised wing, body, feet, canvas, registration, and
+silhouette remain unchanged.
+
+The selected frame retains SHA-256
+`290a8b5664bc6cf6633b62042da7e0337c35fb69602a5bf6e504525c714d5336`.
+The upgraded receipt records hinge `(500, 207)`, upper reach `96`, mandible
+reach `95`, a `0.9896` mandible-to-upper reach ratio, `0.2188` normalized tip
+offset, upper anchor distance `2.683`, mandible anchor distance `8.0`, cavity
+anchor distance `3.058`, and connected-mandible ratio `1.0`. Its strict audit
+reports 3,022 changed mouth pixels, outside-mouth mean difference `0.0`,
+registration delta `0`, and silhouette IoU `0.99991`.
+
+Fresh Pair 49 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-049-one-pair-2026-08-06-v1/`
+
+The queue now contains 47 strict internal passes, 17 pending observable pairs,
+and 2 not-observable rear views. Pair 50 is the next isolated gate; user
+approval and runtime admission remain zero.
