@@ -4080,3 +4080,28 @@ Fresh Pair 50 evidence:
 The queue now contains 48 strict internal passes, 16 pending observable pairs,
 and 2 not-observable rear views. Pair 51 is the next isolated gate; user
 approval and runtime admission remain zero.
+
+Pair 51 (`concern`) passed its isolated native-size, enlarged directional-
+beak, and full-projector review. Candidate v2 preserves the selected speaking
+pixels byte-for-byte while measuring the actual upper-bill anatomy separately
+from the broader immutable-source restoration mask. The lower bill follows the
+steep screen-left perspective from the same screen-right root. The concerned
+gaze, crest, face, throat, hoodie, hand-to-chest gesture, body, feet, canvas,
+registration, and silhouette remain unchanged.
+
+The selected frame retains SHA-256
+`6bcec86adbc554170785fe07a54e390187b891e504d01736cac6dda8b2b2795f`.
+The upgraded receipt records hinge `(497, 247)`, upper reach `100`, mandible
+reach `98`, a `0.98` mandible-to-upper reach ratio, `0.01` normalized tip
+offset, upper anchor distance `1.693`, mandible anchor distance `2.828`, cavity
+anchor distance `2.236`, and connected-mandible ratio `1.0`. Its strict audit
+reports 2,792 changed mouth pixels, outside-mouth mean difference `0.0`,
+registration delta `0`, and silhouette IoU `1.0`.
+
+Fresh Pair 51 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-051-one-pair-2026-08-06-v1/`
+
+The queue now contains 49 strict internal passes, 15 pending observable pairs,
+and 2 not-observable rear views. Pair 52 is the next isolated gate; user
+approval and runtime admission remain zero.

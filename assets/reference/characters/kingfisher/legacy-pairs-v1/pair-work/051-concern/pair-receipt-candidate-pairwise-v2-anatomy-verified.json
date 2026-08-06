@@ -169,7 +169,7 @@
     "mode": "opaque",
     "neutral_chroma_threshold": 36
   },
-  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/051-concern/161_ACT161_concern_speaking_beak_alpha.png",
+  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/051-concern/161_ACT161_concern_speaking_beak_candidate_pairwise_v2_anatomy-verified.png",
   "speaking_sha256": "6bcec86adbc554170785fe07a54e390187b891e504d01736cac6dda8b2b2795f",
   "upper_beak_policy": "immutable_source_pixels",
   "upper_beak_polygon": [
