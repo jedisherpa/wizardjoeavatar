@@ -40,6 +40,39 @@ class ComposeKingfisherPairMandiblePatchTests(unittest.TestCase):
         self.assertEqual(report["mode"], "directional")
         self.assertFalse(report["checks"]["same_longitudinal_direction"])
 
+    def test_beak_anatomy_supports_explicit_downward_axis(self):
+        report = beak_anatomy_metrics(
+            hinge=(518, 248),
+            hinge_radius=18,
+            upper_beak_polygon=[
+                (518, 248),
+                (547, 249),
+                (560, 280),
+                (552, 340),
+                (537, 348),
+                (529, 320),
+            ],
+            mandible_polygon=[
+                (507, 240),
+                (529, 245),
+                (533, 275),
+                (525, 341),
+                (510, 347),
+                (506, 330),
+            ],
+            cavity_polygon=[
+                (514, 252),
+                (528, 260),
+                (528, 321),
+                (521, 340),
+                (512, 331),
+            ],
+            direction_vector=(0, 1),
+        )
+
+        self.assertTrue(report["passed"])
+        self.assertEqual(report["direction"], [0, 1])
+
     def _sources(self, root: Path, *, detached: bool = False) -> tuple[Path, Path]:
         resting_path = root / "resting.png"
         generated_path = root / "generated.png"

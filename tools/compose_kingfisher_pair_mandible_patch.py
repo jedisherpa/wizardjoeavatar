@@ -32,6 +32,7 @@ def beak_anatomy_metrics(
     upper_beak_polygon: list[tuple[int, int]],
     mandible_polygon: list[tuple[int, int]],
     cavity_polygon: list[tuple[int, int]],
+    direction_vector: tuple[int, int] | None = None,
 ) -> dict[str, object]:
     """Measure whether a lower beak is anchored to its canonical upper beak."""
 
@@ -68,7 +69,19 @@ def beak_anatomy_metrics(
     upper_right_reach = upper_bounds[2] - hinge[0]
     dominant_reach = max(upper_left_reach, upper_right_reach)
     opposite_reach = min(upper_left_reach, upper_right_reach)
-    directional = dominant_reach >= max(12, opposite_reach * 1.8)
+    explicit_direction = direction_vector is not None
+    if direction_vector is not None:
+        vector_length = math.hypot(*direction_vector)
+        if vector_length == 0:
+            raise ValueError("beak anatomy direction vector cannot be zero")
+        axis_x = direction_vector[0] / vector_length
+        axis_y = direction_vector[1] / vector_length
+    else:
+        axis_x = 1.0 if upper_right_reach > upper_left_reach else -1.0
+        axis_y = 0.0
+    directional = explicit_direction or (
+        dominant_reach >= max(12, opposite_reach * 1.8)
+    )
 
     checks = {
         "upper_beak_anchored": (
@@ -96,32 +109,41 @@ def beak_anatomy_metrics(
     }
 
     if directional:
-        direction = 1 if upper_right_reach > upper_left_reach else -1
+        def projection(point: tuple[int, int]) -> float:
+            return (
+                (point[0] - hinge[0]) * axis_x
+                + (point[1] - hinge[1]) * axis_y
+            )
 
-        def reach(polygon: list[tuple[int, int]], sign: int) -> int:
-            return max(sign * (point[0] - hinge[0]) for point in polygon)
+        def perpendicular(point: tuple[int, int]) -> float:
+            return (
+                -(point[0] - hinge[0]) * axis_y
+                + (point[1] - hinge[1]) * axis_x
+            )
 
-        mandible_forward_reach = reach(mandible_polygon, direction)
-        mandible_reverse_reach = reach(mandible_polygon, -direction)
-        upper_forward_reach = reach(upper_beak_polygon, direction)
+        mandible_forward_reach = max(map(projection, mandible_polygon))
+        mandible_reverse_reach = max(
+            -projection(point) for point in mandible_polygon
+        )
+        upper_forward_reach = max(map(projection, upper_beak_polygon))
         upper_tip_points = [
             point
             for point in upper_beak_polygon
-            if direction * (point[0] - hinge[0]) >= upper_forward_reach - 2
+            if projection(point) >= upper_forward_reach - 2
         ]
         mandible_tip_points = [
             point
             for point in mandible_polygon
-            if direction * (point[0] - hinge[0]) >= mandible_forward_reach - 2
+            if projection(point) >= mandible_forward_reach - 2
         ]
-        upper_tip_y = sum(point[1] for point in upper_tip_points) / len(
+        upper_tip_offset = sum(map(perpendicular, upper_tip_points)) / len(
             upper_tip_points
         )
-        mandible_tip_y = sum(point[1] for point in mandible_tip_points) / len(
+        mandible_tip_offset = sum(map(perpendicular, mandible_tip_points)) / len(
             mandible_tip_points
         )
         length_ratio = mandible_forward_reach / max(1, upper_forward_reach)
-        tip_offset_ratio = abs(mandible_tip_y - upper_tip_y) / max(
+        tip_offset_ratio = abs(mandible_tip_offset - upper_tip_offset) / max(
             1, upper_forward_reach
         )
         checks.update(
@@ -135,10 +157,14 @@ def beak_anatomy_metrics(
         )
         metrics.update(
             {
-                "direction": "right" if direction == 1 else "left",
-                "upper_forward_reach": upper_forward_reach,
-                "mandible_forward_reach": mandible_forward_reach,
-                "mandible_reverse_reach": mandible_reverse_reach,
+                "direction": (
+                    [direction_vector[0], direction_vector[1]]
+                    if direction_vector is not None
+                    else ("right" if axis_x > 0 else "left")
+                ),
+                "upper_forward_reach": round(upper_forward_reach, 4),
+                "mandible_forward_reach": round(mandible_forward_reach, 4),
+                "mandible_reverse_reach": round(mandible_reverse_reach, 4),
                 "mandible_length_ratio": round(length_ratio, 4),
                 "tip_offset_ratio": round(tip_offset_ratio, 4),
             }
@@ -337,6 +363,7 @@ def compose_mandible_patch(
     cavity_polygon: list[tuple[int, int]],
     upper_beak_polygon: list[tuple[int, int]],
     anatomy_upper_beak_polygon: list[tuple[int, int]] | None = None,
+    anatomy_direction_vector: tuple[int, int] | None = None,
     hinge: tuple[int, int],
     residual_clear_polygon: list[tuple[int, int]] | None = None,
     hinge_radius: int = 6,
@@ -522,6 +549,7 @@ def compose_mandible_patch(
         upper_beak_polygon=effective_anatomy_upper_beak_polygon,
         mandible_polygon=mandible_polygon,
         cavity_polygon=cavity_polygon,
+        direction_vector=anatomy_direction_vector,
     )
     if anatomy["passed"] is not True:
         failed = [
@@ -622,6 +650,11 @@ def compose_mandible_patch(
         "anatomy_upper_beak_polygon": [
             list(point) for point in effective_anatomy_upper_beak_polygon
         ],
+        "anatomy_direction_vector": (
+            list(anatomy_direction_vector)
+            if anatomy_direction_vector is not None
+            else None
+        ),
         "residual_clear_polygon": (
             [list(point) for point in residual_clear_polygon]
             if residual_clear_polygon is not None
@@ -692,6 +725,7 @@ def main() -> None:
         nargs="+",
         type=int,
     )
+    parser.add_argument("--anatomy-direction-vector", nargs=2, type=int)
     parser.add_argument("--residual-clear-polygon", nargs="+", type=int)
     parser.add_argument("--hinge", nargs=2, type=int, required=True)
     parser.add_argument("--hinge-radius", type=int, default=6)
@@ -772,6 +806,14 @@ def main() -> None:
                 name="anatomy_upper_beak_polygon",
             )
             if args.anatomy_upper_beak_polygon
+            else None
+        ),
+        anatomy_direction_vector=(
+            (
+                args.anatomy_direction_vector[0],
+                args.anatomy_direction_vector[1],
+            )
+            if args.anatomy_direction_vector
             else None
         ),
         residual_clear_polygon=(

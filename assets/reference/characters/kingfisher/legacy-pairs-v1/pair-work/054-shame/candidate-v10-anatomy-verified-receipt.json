@@ -194,7 +194,7 @@
     "mode": "opaque",
     "neutral_chroma_threshold": 36
   },
-  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/054-shame/164_ACT164_shame_speaking_beak_alpha.png",
+  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/054-shame/164_ACT164_shame_speaking_beak_candidate_pairwise_v10_anatomy-verified.png",
   "speaking_sha256": "126ba30998876662cb34058b4b40ffddf4148fa450f205a22f1ad0ca923b88c7",
   "upper_beak_policy": "immutable_source_pixels",
   "upper_beak_polygon": [

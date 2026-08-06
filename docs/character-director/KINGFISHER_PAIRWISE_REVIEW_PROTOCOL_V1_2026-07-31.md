@@ -4159,3 +4159,30 @@ Fresh Pair 53 evidence:
 The queue now contains 51 strict internal passes, 13 pending observable pairs,
 and 2 not-observable rear views. Pair 54 is the next isolated gate; user
 approval and runtime admission remain zero.
+
+Pair 54 (`shame`) passed its isolated native-size, enlarged downward-beak,
+and full-projector review. Candidate v10 preserves the selected speaking
+pixels byte-for-byte while separating the tight anatomical upper-bill outline
+from the broader immutable-source restoration mask. This nearly vertical pose
+also exposed a limitation in the prior horizontal-only anatomy measurement.
+The receipt now declares an explicit downward anatomy vector `[0, 1]`, so the
+compiler measures both bills along their authored axis instead of treating the
+pose as a sideways profile. The eye, bowed head, hood, immutable upper bill,
+folded posture, body, feet, canvas, registration, and silhouette remain fixed.
+
+The selected frame retains SHA-256
+`126ba30998876662cb34058b4b40ffddf4148fa450f205a22f1ad0ca923b88c7`.
+The upgraded receipt records hinge `(518, 248)`, upper reach `100`, mandible
+reach `99`, a `0.99` mandible-to-upper reach ratio, `0.27` normalized tip
+offset, upper anchor distance `0.0`, mandible anchor distance `5.363`, cavity
+anchor distance `5.458`, and connected-mandible ratio `1.0`. Its strict audit
+reports 2,138 changed mouth pixels, outside-mouth mean difference `0.0`,
+registration delta `0`, and silhouette IoU `1.0`.
+
+Fresh Pair 54 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-054-one-pair-2026-08-06-v1/`
+
+The queue now contains 52 strict internal passes, 12 pending observable pairs,
+and 2 not-observable rear views. Pair 55 is the next isolated gate; user
+approval and runtime admission remain zero.

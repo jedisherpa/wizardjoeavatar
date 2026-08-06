@@ -307,6 +307,45 @@ class CompileKingfisherPairReviewLibraryTests(unittest.TestCase):
 
             self.assertEqual(result["pair_count"], 66)
 
+    def test_pass_accepts_explicit_downward_beak_axis(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            base_index, ledger = self._fixture(root)
+            data = json.loads(ledger.read_text(encoding="utf-8"))
+            pair = data["pairs"][1]
+            pair["pairwise_full_size_review"]["state"] = "pass"
+            receipt_path = Path(pair["receipt_path"])
+            receipt = json.loads(receipt_path.read_text(encoding="utf-8"))
+            receipt["anatomy_direction_vector"] = [0, 1]
+            receipt["anatomy_upper_beak_polygon"] = [
+                [13, 7],
+                [20, 8],
+                [20, 18],
+                [13, 18],
+            ]
+            receipt["mandible_polygon"] = [
+                [13, 9],
+                [20, 10],
+                [20, 18],
+                [13, 18],
+            ]
+            receipt["cavity_polygon"] = [
+                [13, 9],
+                [18, 10],
+                [18, 16],
+                [13, 16],
+            ]
+            receipt_path.write_text(json.dumps(receipt), encoding="utf-8")
+            ledger.write_text(json.dumps(data), encoding="utf-8")
+
+            result = compile_pair_review_library(
+                base_index,
+                ledger,
+                root / "review",
+            )
+
+            self.assertEqual(result["pair_count"], 66)
+
     def test_failed_artifact_write_preserves_previous_review_artifact(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)

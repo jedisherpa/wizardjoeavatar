@@ -111,6 +111,20 @@ def require_pair_specific_pass_receipt(
             "passing pair requires a valid anatomy_upper_beak_polygon"
         )
 
+    anatomy_direction_vector = receipt.get("anatomy_direction_vector")
+    if anatomy_direction_vector is not None and (
+        not isinstance(anatomy_direction_vector, list)
+        or len(anatomy_direction_vector) != 2
+        or any(
+            isinstance(value, bool) or not isinstance(value, int)
+            for value in anatomy_direction_vector
+        )
+        or anatomy_direction_vector == [0, 0]
+    ):
+        raise ValueError(
+            "passing pair requires a valid anatomy_direction_vector"
+        )
+
     minimum_ratio = receipt.get("minimum_connected_ratio")
     connected_ratio = receipt.get("mandible_connected_ratio")
     if (
@@ -149,6 +163,11 @@ def require_pair_specific_pass_receipt(
         cavity_polygon=[
             tuple(point) for point in receipt["cavity_polygon"]
         ],
+        direction_vector=(
+            tuple(anatomy_direction_vector)
+            if anatomy_direction_vector is not None
+            else None
+        ),
     )
     if anatomy["passed"] is not True:
         failed = [
