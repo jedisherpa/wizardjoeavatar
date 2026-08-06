@@ -4238,3 +4238,28 @@ Fresh Pair 56 evidence:
 The queue now contains 54 strict internal passes, 10 pending observable pairs,
 and 2 not-observable rear views. Pair 57 is the next isolated gate; user
 approval and runtime admission remain zero.
+
+Pair 57 (`anger`) passed its isolated native-size, enlarged frontal-beak, and
+full-projector review. Candidate v2 preserves the selected speaking pixels
+byte-for-byte while replacing the old left-corner proxy hinge with a frontal
+centerline pivot and tight upper-bill outline. The open lower bill stays
+centered beneath the immutable upper bill and remains connected across the
+frontal mouth. The angry eyes, crest, face, white throat, squared stance,
+hoodie, body, feet, canvas, registration, and silhouette remain fixed.
+
+The selected frame retains SHA-256
+`92d0e7db7b3a6edcabb813713348263740dbffbc3c333553d68f6f9dbf40d8b6`.
+The upgraded receipt records centerline hinge `(480, 238)`, frontal width
+ratio `1.0753`, center offset ratio `0.0376`, upper anchor distance `18.57`,
+mandible anchor distance `8.936`, cavity anchor distance `16.838`, and
+connected-mandible ratio `1.0`. Its strict audit reports 2,696 changed mouth
+pixels, outside-mouth mean difference `0.0`, registration delta `0`, and
+silhouette IoU `1.0`.
+
+Fresh Pair 57 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-057-one-pair-2026-08-06-v1/`
+
+The queue now contains 55 strict internal passes, 9 pending observable pairs,
+and 2 not-observable rear views. Pair 58 is the next isolated gate; user
+approval and runtime admission remain zero.

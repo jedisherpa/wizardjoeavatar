@@ -167,7 +167,7 @@
     "mode": "opaque",
     "neutral_chroma_threshold": 36
   },
-  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/057-anger/167_ACT167_anger_speaking_beak_alpha.png",
+  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/057-anger/167_ACT167_anger_speaking_beak_candidate_pairwise_v2_frontal-anatomy.png",
   "speaking_sha256": "92d0e7db7b3a6edcabb813713348263740dbffbc3c333553d68f6f9dbf40d8b6",
   "upper_beak_policy": "immutable_source_pixels",
   "upper_beak_polygon": [
