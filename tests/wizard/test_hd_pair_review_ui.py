@@ -141,7 +141,7 @@ class HdPairReviewUiTests(unittest.TestCase):
                 for ordinal in (
                     1, 2, 3, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
                     19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32,
-                    33, 34, 35, 36, 37, 38, 39, 40, 41,
+                    33, 34, 35, 36, 37, 38, 39, 40, 41, 42,
                 )
             ],
             [
@@ -169,10 +169,11 @@ class HdPairReviewUiTests(unittest.TestCase):
                 "pass",
                 "pass",
                 "pass",
+                "pass",
             ],
         )
-        self.assertEqual(summary["pass_count"], 39)
-        self.assertEqual(summary["pending_count"], 25)
+        self.assertEqual(summary["pass_count"], 40)
+        self.assertEqual(summary["pending_count"], 24)
         self.assertFalse(summary["complete"])
         pending_pairs = [
             pair for pair in visible_pairs

@@ -3841,3 +3841,33 @@ Fresh Pair 41 evidence:
 The queue now contains 39 strict internal passes, 25 pending observable pairs,
 and 2 not-observable rear views. Pair 42 is the next isolated gate; user
 approval and runtime admission remain zero.
+
+Pair 42 (`joy`) passed its isolated native-size, nearest-neighbor beak
+close-up, and full-projector review. Candidate v6 reproduces the selected v5
+speaking pixels byte-for-byte while upgrading the pair to the current
+directional anatomy receipt. The small screen-left blue patch is unchanged
+canonical cheek and upper-bill detail; it is not transferred lower-jaw
+residue. The actual lower jaw stays attached at the screen-left rear hinge and
+opens toward screen right. The closed frame, eyes, crown, cheeks, throat,
+hoodie, raised joy wings, feet, scale, canvas, and registration remain
+unchanged.
+
+The lower mandible follows the immutable upper bill, terminates beneath the
+same tip, and remains one connected component with a contained oral cavity.
+There is no detached strip, duplicate beak edge, throat import, or lateral tip
+jump. The selected frame retains SHA-256
+`5094d4d966aa20378e13405d3324677b2e2b7ce59923f7dc2c759135f5e00709`.
+The upgraded receipt records hinge `(443, 150)`, upper anchor distance `1.0`,
+mandible anchor distance `2.121`, cavity anchor distance `1.611`, upper reach
+`95`, mandible reach `97`, a `1.0211` mandible-to-upper reach ratio, `0.0105`
+normalized tip offset, and connected-mandible ratio `1.0`. Its strict audit
+reports 1,600 changed mouth pixels, outside-mouth mean difference `0.0`,
+registration delta `0`, and silhouette IoU `1.0`.
+
+Fresh Pair 42 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-042-one-pair-2026-08-06-v1/`
+
+The queue now contains 40 strict internal passes, 24 pending observable pairs,
+and 2 not-observable rear views. Pair 43 is the next isolated gate; user
+approval and runtime admission remain zero.
