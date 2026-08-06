@@ -12,7 +12,62 @@
     "translate_x": 368,
     "translate_y": 72
   },
+  "anatomy_direction_vector": [
+    2,
+    3
+  ],
+  "anatomy_upper_beak_polygon": [
+    [
+      571,
+      252
+    ],
+    [
+      589,
+      257
+    ],
+    [
+      624,
+      316
+    ],
+    [
+      617,
+      336
+    ],
+    [
+      600,
+      313
+    ],
+    [
+      580,
+      274
+    ]
+  ],
   "approval_state": "candidate_visual_review",
+  "beak_anatomy": {
+    "cavity_anchor_distance": 2.433,
+    "checks": {
+      "bounded_tip_offset": true,
+      "cavity_anchored": true,
+      "mandible_anchored": true,
+      "plausible_mandible_length": true,
+      "same_longitudinal_direction": true,
+      "upper_beak_anchored": true
+    },
+    "direction": [
+      2,
+      3
+    ],
+    "mandible_anchor_distance": 5.423,
+    "mandible_forward_reach": 113.1588,
+    "mandible_length_ratio": 1.1333,
+    "mandible_reverse_reach": 16.0863,
+    "mode": "directional",
+    "passed": true,
+    "schema_version": 1,
+    "tip_offset_ratio": 0.1194,
+    "upper_anchor_distance": 11.18,
+    "upper_forward_reach": 99.846
+  },
   "canvas": [
     960,
     540
@@ -121,7 +176,7 @@
     "mode": "opaque",
     "neutral_chroma_threshold": 36
   },
-  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/065-write-or-tap/175_ACT175_write_or_tap_speaking_beak_candidate_pairwise_v7_generated-open.png",
+  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/065-write-or-tap/175_ACT175_write_or_tap_speaking_beak_alpha.png",
   "speaking_sha256": "3fa1c854c576e8a9957ab5716f7d76726ac594bbf828947070d09d742d8959f9",
   "upper_beak_policy": "immutable_source_pixels",
   "upper_beak_polygon": [

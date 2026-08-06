@@ -4449,3 +4449,29 @@ Fresh Pair 64 evidence:
 The queue now contains 62 strict internal passes, 2 pending observable pairs,
 and 2 not-observable rear views. Pair 65 is the next isolated gate; user
 approval and runtime admission remain zero.
+
+Pair 65 (`write-or-tap`) passed its isolated native-size, enlarged beak, and
+live-projector review without changing the selected speaking pixels. The
+existing lower mandible already opens from the authored upper-left hinge,
+follows the steep down-right bill axis, reaches the immutable upper-tip line,
+and contains one bounded warm oral cavity. The upgraded receipt independently
+measures the upper bill along direction vector `[2, 3]`. The bowed crest, eye,
+face, cheek, throat, hoodie, fishbone mark, writing wing, body, stance, feet,
+upper bill, canvas, registration, and silhouette remain fixed.
+
+The selected frame retains SHA-256
+`3fa1c854c576e8a9957ab5716f7d76726ac594bbf828947070d09d742d8959f9`.
+The upgraded receipt records hinge `(560, 254)`, upper reach `99.846`,
+mandible reach `113.1588`, a `1.1333` mandible-to-upper reach ratio, `0.1194`
+normalized tip offset, upper anchor distance `11.18`, mandible anchor distance
+`5.423`, cavity anchor distance `2.433`, and connected-mandible ratio `1.0`.
+Its strict audit retains 2,761 changed mouth pixels, outside-mouth mean
+difference `0.0`, registration delta `0`, and silhouette IoU `0.994563`.
+
+Fresh Pair 65 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-065-one-pair-2026-08-06-v1/`
+
+The queue now contains 63 strict internal passes, 1 pending observable pair,
+and 2 not-observable rear views. Pair 66 is the final isolated gate; user
+approval and runtime admission remain zero.
