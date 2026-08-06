@@ -3477,3 +3477,33 @@ Fresh Pair 28 evidence:
 The queue now contains 26 strict internal passes, 38 pending observable pairs,
 and 2 not-observable rear views. Pair 29 is the next isolated gate; user
 approval and runtime admission remain zero.
+
+Pair 29 (`confidential-whisper`) passed its isolated native-size,
+enlarged-beak, tight-tip, and full-projector review after correcting stale
+receipt anatomy. Candidate v18 reproduces selected v17 pixels exactly from the
+pair-specific v11 donor. Candidate v15 leaves a detached black bar across the
+white throat, while v16 still reads as a misplaced lower strip; both remain
+excluded.
+
+The old receipt initially failed the current `bounded_tip_offset` gate because
+its upper-bill polygon labeled a high cheek corner as the left-facing bill tip.
+The corrected polygon follows the actual diagonal upper bill without changing
+the rendered image. The selected lower mandible remains behind the foreground
+wing, shares the true screen-right rear hinge, and creates a subtle whisper
+opening without a throat-crossing bar, duplicate edge, or body drift. The
+frame retains SHA-256
+`3492430e974c6c8430a8aa59d5a1146f5751e2f035dc5df745ca8535eb4e3567`.
+The upgraded receipt records hinge `(493, 261)`, upper anchor distance
+`8.544`, mandible anchor distance `7.805`, cavity anchor distance `4.31`, a
+`0.957` mandible-to-upper reach ratio, `0.1075` normalized tip offset, and
+connected-mandible ratio `0.991361`. Its strict audit reports 2,106 changed
+mouth pixels, outside-mouth mean difference `0.0`, registration delta `0`,
+and silhouette IoU `1.0`.
+
+Fresh Pair 29 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-029-one-pair-2026-08-05-v2/`
+
+The queue now contains 27 strict internal passes, 37 pending observable pairs,
+and 2 not-observable rear views. Pair 30 is the next isolated gate; user
+approval and runtime admission remain zero.
