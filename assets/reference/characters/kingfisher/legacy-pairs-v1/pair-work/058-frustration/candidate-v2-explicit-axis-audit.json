@@ -27,7 +27,7 @@
   "resting_sha256": "3ff47e3df745d5485b6ba545e251c078f4265aaa6250c3f991cd1f7c6d2b4f2b",
   "schema_version": 2,
   "silhouette_iou": 1.0,
-  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/058-frustration/168_ACT168_frustration_speaking_beak_alpha.png",
+  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/058-frustration/168_ACT168_frustration_speaking_beak_candidate_pairwise_v2_explicit-axis.png",
   "speaking_registration_bbox": [
     315,
     97,

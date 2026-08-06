@@ -181,7 +181,7 @@
     "mode": "opaque",
     "neutral_chroma_threshold": 36
   },
-  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/058-frustration/168_ACT168_frustration_speaking_beak_alpha.png",
+  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/058-frustration/168_ACT168_frustration_speaking_beak_candidate_pairwise_v2_explicit-axis.png",
   "speaking_sha256": "9fe19bc2b57b262af8679f7c5d93614b68c4f9d649c73acb81532297c4e7d455",
   "upper_beak_policy": "immutable_source_pixels",
   "upper_beak_polygon": [
