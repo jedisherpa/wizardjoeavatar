@@ -4212,3 +4212,29 @@ Fresh Pair 55 evidence:
 The queue now contains 53 strict internal passes, 11 pending observable pairs,
 and 2 not-observable rear views. Pair 56 is the next isolated gate; user
 approval and runtime admission remain zero.
+
+Pair 56 (`anxiety`) passed its isolated native-size, enlarged directional-
+beak, and full-projector review. Candidate v2 preserves the selected speaking
+pixels byte-for-byte while replacing the broad restoration region as the
+anatomy source with the actual upper-bill outline. Both bills extend toward
+screen right from one screen-left hinge and terminate together without a
+doubled edge. The anxious side glance, crest, face, immutable upper bill,
+white throat, hand-to-chest gesture, hoodie, body, feet, canvas, registration,
+and silhouette remain fixed.
+
+The selected frame retains SHA-256
+`4a93031d11233865c091fa5c81d98da2f54edbd009018f9dcf7317a2e28ff029`.
+The upgraded receipt records hinge `(443, 227)`, equal upper and mandible
+reach `72`, a `1.0` mandible-to-upper reach ratio, `0.0625` normalized tip
+offset, upper anchor distance `0.049`, mandible anchor distance `4.314`,
+cavity anchor distance `0.256`, and connected-mandible ratio `1.0`. Its strict
+audit reports 1,352 changed mouth pixels, outside-mouth mean difference `0.0`,
+registration delta `0`, and silhouette IoU `1.0`.
+
+Fresh Pair 56 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-056-one-pair-2026-08-06-v1/`
+
+The queue now contains 54 strict internal passes, 10 pending observable pairs,
+and 2 not-observable rear views. Pair 57 is the next isolated gate; user
+approval and runtime admission remain zero.
