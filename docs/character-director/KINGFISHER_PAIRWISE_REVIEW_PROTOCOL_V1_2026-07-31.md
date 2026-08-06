@@ -3421,3 +3421,31 @@ Fresh Pair 26 evidence:
 The queue now contains 24 strict internal passes, 40 pending observable pairs,
 and 2 not-observable rear views. Pair 27 is the next isolated gate; user
 approval and runtime admission remain zero.
+
+Pair 27 (`intimate-confidence`) passed its isolated native-size,
+enlarged-beak, tight-tip, and full-projector review. Candidate v5 reproduces
+the selected v4 speaking mate exactly from the preserved pair-specific v2
+donor under the current directional anatomy checker. The rejected earlier
+frame leaves a dark hook across the screen-right white throat; candidate v3
+and v4 remove that residue, and only the exact v4/v5 result is selected.
+
+The restrained lower bill opens along the tilted head's left-facing axis from
+the authored screen-right rear hinge. One connected mandible and one oral
+cavity remain attached to the immutable upper bill without a duplicate edge,
+detached sliver, lateral jump, or throat redraw. The selected frame retains
+SHA-256
+`d0327018802fa843e84fff77fd3581726bcc5b085c4a8442bdd4f5b7d05bc969`.
+The upgraded receipt records hinge `(497, 263)`, upper anchor distance
+`2.928`, mandible anchor distance `4.241`, cavity anchor distance `1.177`, a
+`0.7313` mandible-to-upper reach ratio, `0.3731` normalized tip offset, and
+connected-mandible ratio `1.0`. Its strict audit reports 998 changed rendered
+pixels, outside-mouth mean difference `0.0`, registration delta `0`, and
+silhouette IoU `1.0`.
+
+Fresh Pair 27 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-027-one-pair-2026-08-05-v2/`
+
+The queue now contains 25 strict internal passes, 39 pending observable pairs,
+and 2 not-observable rear views. Pair 28 is the next isolated gate; user
+approval and runtime admission remain zero.
