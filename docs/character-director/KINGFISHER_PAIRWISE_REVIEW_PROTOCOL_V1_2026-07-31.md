@@ -3313,3 +3313,30 @@ Fresh Pair 22 evidence:
 The queue now contains 20 strict internal passes, 44 pending observable pairs,
 and 2 not-observable rear views. Pair 23 is the next isolated gate; user
 approval and runtime admission remain zero.
+
+Pair 23 (`emphatic-agreement`) passed its isolated native-size,
+enlarged-beak, tight-tip, and full-projector review without changing the image
+pixels. Candidate v4 reproduces the existing speaking mate exactly from the
+preserved pair-specific v3 donor under the current directional anatomy
+checker. The larger aperture remains intentional for the emphatic performance,
+but is now supported by current pair-level evidence instead of an inherited
+batch disposition.
+
+One connected lower mandible opens from the visible left rear hinge, follows
+the immutable upper bill on the same right-facing axis, and ends beneath its
+tip without a lateral jump, duplicate edge, or detached sliver. Crown, eyes,
+cheek plates, throat, raised wings, hoodie, body, feet, scale, and canvas remain
+unchanged. The upgraded receipt records hinge `(462, 280)`, upper anchor
+distance `10.0`, mandible anchor distance `12.0`, cavity anchor distance `4.0`,
+a `0.9248` mandible-to-upper reach ratio, `0.0113` normalized tip offset, and
+connected-mandible ratio `1.0`. Its strict audit reports 8,881 changed rendered
+pixels, outside-mouth mean difference `0.0`, registration delta `0`, and
+silhouette IoU `1.0`.
+
+Fresh Pair 23 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-023-one-pair-2026-08-05-v2/`
+
+The queue now contains 21 strict internal passes, 43 pending observable pairs,
+and 2 not-observable rear views. Pair 24 is the next isolated gate; user
+approval and runtime admission remain zero.
