@@ -4369,3 +4369,30 @@ Fresh Pair 61 evidence:
 The queue now contains 59 strict internal passes, 5 pending observable pairs,
 and 2 not-observable rear views. Pair 62 is the next isolated gate; user
 approval and runtime admission remain zero.
+
+Pair 62 (`sudden-idea`) failed its isolated native-size and enlarged beak
+review even though the previous automated geometry checks had passed. The
+selected open frame reduced the lower mandible to a needle-thin line crossing
+the throat, so it did not read as a hinged bill in projector playback. The
+replacement was rebuilt only from Pair 62's own full-resolution head donor.
+The deterministic compositor transfers one thicker, textured lower mandible
+and its bounded cavity onto the immutable canonical resting body. The raised
+wing, crest, eye, cheek, throat, hoodie, body, feet, upper bill, canvas, and
+registration remain unchanged.
+
+The selected replacement has SHA-256
+`abcd9b2e4acbc3a8f3bbdda226eac05e4a0d96948017eeb95acffe0ace49640b`.
+Its receipt records hinge `(480, 250)`, upper reach `70`, mandible reach `65`,
+a `0.9286` mandible-to-upper reach ratio, `0.1643` normalized tip offset,
+upper anchor distance `1.789`, mandible anchor distance `6.0`, cavity anchor
+distance `2.737`, and connected-mandible ratio `1.0`. The strict audit reports
+1,304 changed mouth pixels, outside-mouth mean difference `0.0`, registration
+delta `0`, and silhouette IoU `1.0`.
+
+Fresh Pair 62 evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-062-one-pair-2026-08-06-v1/`
+
+The queue now contains 60 strict internal passes, 4 pending observable pairs,
+and 2 not-observable rear views. Pair 63 is the next isolated gate; user
+approval and runtime admission remain zero.
