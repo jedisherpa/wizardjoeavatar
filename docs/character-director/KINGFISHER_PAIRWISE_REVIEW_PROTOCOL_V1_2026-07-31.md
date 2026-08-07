@@ -4966,3 +4966,28 @@ Full-size evidence:
 This is an internal visual pass only. The reopened queue now contains 17
 internal passes, 47 pending observable pairs, and 2 not-observable rear views.
 User approval and runtime admission remain zero.
+
+### Pair 20 isolated lean-in-listening review
+
+Pair 20 (`lean-in-listening`) was reviewed independently at native size,
+nearest-neighbor enlarged beak scale, full-projector size, and in a six-second
+closed/open loop. The retained v4 pixels read as one centered V-shaped mouth:
+the upper bill is unchanged, both mouth corners converge coherently, the warm
+cavity remains contained, and no duplicate lower edge appears on the throat.
+
+The earlier receipt incorrectly evaluated this near-frontal pose from a
+one-sided directional hinge. The fresh review records the actual centerline at
+`(538, 268)` and validates the same pixels with frontal anatomy. The lower bill
+has center offset ratio `0.0081`, lower-to-upper width ratio `0.9516`, and
+connected ratio `1.0`. The strict image audit reports 5,469 changed rendered
+mouth pixels, outside-mouth mean difference `0.0`, registration delta `0`, and
+silhouette IoU `1.0`. The eyes, crown, head, upper bill, throat, hoodie, wings,
+body, legs, feet, canvas, and scale remain fixed.
+
+Full-size evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-020-one-pair-2026-08-07-v4/`
+
+This is an internal visual pass only. The reopened queue now contains 18
+internal passes, 46 pending observable pairs, and 2 not-observable rear views.
+User approval and runtime admission remain zero.
