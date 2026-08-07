@@ -63,6 +63,34 @@ class DragonRepairReviewTests(unittest.TestCase):
             )
             self.assertEqual(poses[asset_id]["replacement_approval"], "not_approved")
 
+    def test_review_sequences_isolate_flight_and_speech_families(self):
+        sequences = self.index["sequences"]
+
+        self.assertEqual(len(sequences["dragon-flight-review"]["pose_ids"]), 15)
+        self.assertEqual(
+            len(sequences["dragon-ground-speech-review"]["pose_ids"]), 3
+        )
+        self.assertEqual(
+            len(sequences["dragon-hover-speech-review"]["pose_ids"]), 5
+        )
+        self.assertEqual(
+            len(sequences["dragon-storytelling-review"]["pose_ids"]), 24
+        )
+        self.assertTrue(
+            all(
+                not sequence["runtime_admitted"]
+                for sequence in sequences.values()
+            )
+        )
+        self.assertEqual(
+            sequences["dragon-storytelling-review"]["pose_ids"][0],
+            "dragon.act.100.explain-small-open",
+        )
+        self.assertEqual(
+            sequences["dragon-storytelling-review"]["pose_ids"][-1],
+            "dragon.act.123.conclusion-wide-open",
+        )
+
     def test_artifacts_reconstruct_source_rgba_exactly(self):
         root = DEFAULT_OUTPUT.parents[5]
         for record in self.index["poses"]:

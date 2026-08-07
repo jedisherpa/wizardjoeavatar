@@ -330,6 +330,26 @@ def build_dragon_repair_review(
         )
 
     pose_ids = [record["pose_id"] for record in pose_catalog]
+
+    def pose_range(family: str, start: int, end: int) -> list[str]:
+        return [
+            record["pose_id"]
+            for record in pose_catalog
+            if record["family"] == family and start <= record["ordinal"] <= end
+        ]
+
+    def review_sequence(fps: int, sequence_pose_ids: list[str]) -> dict[str, Any]:
+        if not sequence_pose_ids:
+            raise ValueError("Dragon review sequence must contain at least one pose")
+        return {
+            "fps": fps,
+            "loop": True,
+            "pose_ids": sequence_pose_ids,
+            "approval_state": "incomplete_source_repair_review",
+            "review_projection": True,
+            "runtime_admitted": False,
+        }
+
     missing_ids: list[str] = []
     candidate_ids = repair["candidate_asset_ids"] + [
         record["asset_id"] for record in interim["assets"]
@@ -384,14 +404,19 @@ def build_dragon_repair_review(
         },
         "shards": shards,
         "sequences": {
-            "dragon-repair-review": {
-                "fps": 4,
-                "loop": True,
-                "pose_ids": pose_ids,
-                "approval_state": "incomplete_source_repair_review",
-                "review_projection": True,
-                "runtime_admitted": False,
-            }
+            "dragon-repair-review": review_sequence(4, pose_ids),
+            "dragon-flight-review": review_sequence(
+                6, pose_range("ACT", 82, 84) + pose_range("ACT", 88, 99)
+            ),
+            "dragon-ground-speech-review": review_sequence(
+                4, pose_range("ACT", 85, 87)
+            ),
+            "dragon-hover-speech-review": review_sequence(
+                5, pose_range("ACT", 95, 99)
+            ),
+            "dragon-storytelling-review": review_sequence(
+                4, pose_range("ACT", 100, 123)
+            ),
         },
         "poses": pose_catalog,
         "review_guidance": {

@@ -25,7 +25,7 @@ FACINGS = (
     "west",
     "northwest",
 )
-SUPPORTED_SHARED_CANVAS_CHARACTERS = frozenset({"robin", "speech"})
+SUPPORTED_HD_RGBA_CHARACTERS = frozenset({"dragon", "robin", "speech"})
 CORE_ACTION_POSE_INDEXES = {
     "explaining": 12,
     "thinking": 61,
@@ -35,6 +35,16 @@ CORE_ACTION_POSE_INDEXES = {
     "celebrate": 42,
     "guard": 36,
     "block": 75,
+    "flourish": 39,
+    "shush": 29,
+}
+DRAGON_ACTION_POSE_INDEXES = {
+    "explaining": 12,
+    "thinking": 61,
+    "pointing": 16,
+    "reaction": 48,
+    "celebrate": 42,
+    "guard": 36,
     "flourish": 39,
     "shush": 29,
 }
@@ -92,7 +102,7 @@ def _pose_id(
         str(pose["pose_id"])
         for pose in index["poses"]
         if str(pose["family"]) == family
-        and int(pose["family_index"]) == family_index
+        and _family_index(pose) == family_index
     ]
     if len(matches) != 1:
         raise ValueError(
@@ -105,10 +115,22 @@ def _pose_id(
     return matches[0]
 
 
+def _family_index(pose: Mapping[str, Any]) -> int:
+    value = pose.get("family_index", pose.get("ordinal"))
+    if isinstance(value, bool) or not isinstance(value, int):
+        raise ValueError("pose family index is missing or invalid")
+    return value
+
+
 def _core_action_poses(index: Mapping[str, Any]) -> dict[str, str]:
+    action_indexes = (
+        DRAGON_ACTION_POSE_INDEXES
+        if index.get("character_id") == "dragon"
+        else CORE_ACTION_POSE_INDEXES
+    )
     return {
         action: _pose_id(index, "ACT", family_index)
-        for action, family_index in CORE_ACTION_POSE_INDEXES.items()
+        for action, family_index in action_indexes.items()
     }
 
 
@@ -129,8 +151,13 @@ def _pose_facing(pose: Mapping[str, Any]) -> str:
 
 def _pose_locomotion(pose: Mapping[str, Any]) -> str:
     family = str(pose["family"])
-    ordinal = int(pose["family_index"])
+    ordinal = _family_index(pose)
     if family == "FLY":
+        return "flight"
+    slug = str(pose.get("slug", ""))
+    if family == "ACT" and 82 <= ordinal <= 99 and any(
+        token in slug for token in ("flight", "glide", "hover")
+    ):
         return "flight"
     if family == "ACT" and 76 <= ordinal <= 79:
         return "walk"
@@ -307,8 +334,37 @@ def _graph(index: Mapping[str, Any], pose_ids: list[str]) -> dict[str, Any]:
             str(pose["pose_id"])
             for pose in index["poses"]
             if str(pose["family"]) == family
-            and start <= int(pose["family_index"]) <= end
+            and start <= _family_index(pose) <= end
         ]
+
+    def dragon_action_ids(start: int, end: int) -> list[str]:
+        return family_ids("ACT", start, end)
+
+    is_dragon = character_id == "dragon"
+    takeoff_ids = (
+        dragon_action_ids(93, 93) if is_dragon else family_ids("FLY", 1, 8)
+    )
+    glide_ids = (
+        dragon_action_ids(82, 84) if is_dragon else family_ids("FLY", 9, 20)
+    )
+    hover_ids = (
+        dragon_action_ids(84, 84) + dragon_action_ids(95, 95)
+        if is_dragon
+        else family_ids("FLY", 40, 40)
+    )
+    bank_left_ids = (
+        dragon_action_ids(88, 88) if is_dragon else family_ids("FLY", 26, 27)
+    )
+    bank_right_ids = (
+        dragon_action_ids(89, 89) if is_dragon else family_ids("FLY", 28, 29)
+    )
+    landing_ids = (
+        dragon_action_ids(92, 92)
+        + dragon_action_ids(91, 91)
+        + dragon_action_ids(94, 94)
+        if is_dragon
+        else family_ids("FLY", 47, 50)
+    )
 
     clips = {
         "catalog_all": _clip(
@@ -356,7 +412,7 @@ def _graph(index: Mapping[str, Any], pose_ids: list[str]) -> dict[str, Any]:
         ),
         "takeoff_cycle": _clip(
             "takeoff_cycle",
-            family_ids("FLY", 1, 8),
+            takeoff_ids,
             family="flight",
             loop_mode="once",
             phase_source="air_distance",
@@ -364,7 +420,7 @@ def _graph(index: Mapping[str, Any], pose_ids: list[str]) -> dict[str, Any]:
         ),
         "glide_cycle": _clip(
             "glide_cycle",
-            family_ids("FLY", 9, 20),
+            glide_ids,
             family="flight",
             loop_mode="loop",
             phase_source="flap_phase",
@@ -372,7 +428,7 @@ def _graph(index: Mapping[str, Any], pose_ids: list[str]) -> dict[str, Any]:
         ),
         "hover_cycle": _clip(
             "hover_cycle",
-            family_ids("FLY", 40, 40),
+            hover_ids,
             family="flight",
             loop_mode="loop",
             phase_source="flap_phase",
@@ -380,7 +436,7 @@ def _graph(index: Mapping[str, Any], pose_ids: list[str]) -> dict[str, Any]:
         ),
         "bank_left_cycle": _clip(
             "bank_left_cycle",
-            family_ids("FLY", 26, 27),
+            bank_left_ids,
             family="flight",
             loop_mode="loop",
             phase_source="air_distance",
@@ -388,7 +444,7 @@ def _graph(index: Mapping[str, Any], pose_ids: list[str]) -> dict[str, Any]:
         ),
         "bank_right_cycle": _clip(
             "bank_right_cycle",
-            family_ids("FLY", 28, 29),
+            bank_right_ids,
             family="flight",
             loop_mode="loop",
             phase_source="air_distance",
@@ -396,7 +452,7 @@ def _graph(index: Mapping[str, Any], pose_ids: list[str]) -> dict[str, Any]:
         ),
         "landing_cycle": _clip(
             "landing_cycle",
-            family_ids("FLY", 47, 50),
+            landing_ids,
             family="flight",
             loop_mode="once",
             phase_source="air_distance",
@@ -443,6 +499,31 @@ def _graph(index: Mapping[str, Any], pose_ids: list[str]) -> dict[str, Any]:
             root_policy="ground_distance",
         ),
     }
+    if is_dragon:
+        clips.update(
+            {
+                "speech_cycle": _clip(
+                    "speech_cycle",
+                    dragon_action_ids(85, 87),
+                    family="speech",
+                    loop_mode="loop",
+                ),
+                "hover_speech_cycle": _clip(
+                    "hover_speech_cycle",
+                    dragon_action_ids(95, 99),
+                    family="speech",
+                    loop_mode="loop",
+                    phase_source="flap_phase",
+                    root_policy="air_trajectory",
+                ),
+                "storytelling_speech_cycle": _clip(
+                    "storytelling_speech_cycle",
+                    dragon_action_ids(100, 123),
+                    family="speech",
+                    loop_mode="hold_last",
+                ),
+            }
+        )
     for action, pose_id in action_poses.items():
         if pose_id in by_id:
             clips["action_{}".format(action)] = _clip(
@@ -626,6 +707,26 @@ def _graph(index: Mapping[str, Any], pose_ids: list[str]) -> dict[str, Any]:
             "actions": [],
         },
     }
+    if is_dragon:
+        nodes.update(
+            {
+                "speak": {
+                    "clip_id": "speech_cycle",
+                    "mobility_modes": ["grounded_idle"],
+                    "actions": ["speaking"],
+                },
+                "hover_speak": {
+                    "clip_id": "hover_speech_cycle",
+                    "mobility_modes": ["hover", "airborne"],
+                    "actions": ["speaking"],
+                },
+                "storytelling_speak": {
+                    "clip_id": "storytelling_speech_cycle",
+                    "mobility_modes": ["grounded_idle"],
+                    "actions": ["speaking", "explaining"],
+                },
+            }
+        )
     action_nodes = {
         "cast": ("magic_cast", ["magic_cast"]),
         "guard": ("guard", ["guard"]),
@@ -659,7 +760,8 @@ def _graph(index: Mapping[str, Any], pose_ids: list[str]) -> dict[str, Any]:
 
     classification = {}
     for pose_id in pose_ids:
-        airborne = pose_id.startswith(character_id + ".fly.")
+        source_pose = by_id[pose_id]
+        airborne = _pose_locomotion(source_pose) == "flight"
         classification[pose_id] = {
             "roles": ["clip_sample"],
             "altitude_class": "airborne" if airborne else "grounded",
@@ -728,8 +830,17 @@ def _runtime_profile(index: Mapping[str, Any]) -> dict[str, Any]:
             str(pose["pose_id"]) == pose_id for pose in index["poses"]
         )
     }
-    return {
-        "schema_version": 2,
+    is_dragon = index.get("character_id") == "dragon"
+    dragon_speech_poses = (
+        [
+            _pose_id(index, "ACT", family_index)
+            for family_index in list(range(85, 88)) + list(range(96, 124))
+        ]
+        if is_dragon
+        else []
+    )
+    profile = {
+        "schema_version": 3 if is_dragon else 2,
         "character_id": index["character_id"],
         "default_pose_id": default_pose,
         "presentation_scale": [1, 1],
@@ -762,10 +873,10 @@ def _runtime_profile(index: Mapping[str, Any]) -> dict[str, Any]:
             "flight": [
                 str(pose["pose_id"])
                 for pose in index["poses"]
-                if str(pose["family"]) == "FLY"
+                if _pose_locomotion(pose) == "flight"
             ],
         },
-        "speech_poses": [],
+        "speech_poses": dragon_speech_poses,
         "speech_pose_map": {},
         "blink_poses": {
             "open": default_pose,
@@ -774,6 +885,13 @@ def _runtime_profile(index: Mapping[str, Any]) -> dict[str, Any]:
         },
         "props": {},
     }
+    if is_dragon:
+        profile["speech_pose_pairs"] = {
+            _pose_id(index, "ACT", 1): _pose_id(index, "ACT", 85),
+            _pose_id(index, "ACT", 84): _pose_id(index, "ACT", 96),
+            _pose_id(index, "ACT", 95): _pose_id(index, "ACT", 99),
+        }
+    return profile
 
 
 def _choreography_dictionary(
@@ -806,6 +924,27 @@ def _choreography_dictionary(
             "recovery_intent": recovery_intent,
         }
 
+    is_dragon = character_id == "dragon"
+    speak_pose_ids = (
+        [pose("ACT", index) for index in range(85, 88)]
+        if is_dragon
+        else [pose("ACT", 12)]
+    )
+    explain_pose_ids = (
+        [pose("ACT", index) for index in range(100, 124)]
+        if is_dragon
+        else [pose("ACT", 12), pose("ACT", 39)]
+    )
+    flying_pose_ids = (
+        [pose("ACT", index) for index in range(82, 85)]
+        if is_dragon
+        else [pose("FLY", index) for index in range(14, 18)]
+    )
+    hover_pose_ids = (
+        [pose("ACT", index) for index in range(95, 100)]
+        if is_dragon
+        else [pose("FLY", 40), pose("FLY", 43), pose("FLY", 44)]
+    )
     return {
         "schema_version": 1,
         "dictionary_id": "choreography:{}-v1".format(character_id),
@@ -844,9 +983,9 @@ def _choreography_dictionary(
             ),
             "speak": binding(
                 roles=["speaking"],
-                pose_ids=[pose("ACT", 12)],
+                pose_ids=speak_pose_ids,
                 action_ids=["explaining"],
-                clip_ids=["action_explaining"],
+                clip_ids=["speech_cycle"] if is_dragon else ["action_explaining"],
                 speech_compatible=True,
                 interrupt_policy="phrase_boundary",
                 minimum_hold_ms=400,
@@ -854,9 +993,13 @@ def _choreography_dictionary(
             ),
             "explain": binding(
                 roles=["gesture", "speaking"],
-                pose_ids=[pose("ACT", 12), pose("ACT", 39)],
+                pose_ids=explain_pose_ids,
                 action_ids=["explaining", "flourish"],
-                clip_ids=["action_explaining", "action_flourish"],
+                clip_ids=(
+                    ["storytelling_speech_cycle"]
+                    if is_dragon
+                    else ["action_explaining", "action_flourish"]
+                ),
                 speech_compatible=True,
                 interrupt_policy="phrase_boundary",
                 minimum_hold_ms=650,
@@ -904,7 +1047,7 @@ def _choreography_dictionary(
             ),
             "flying": binding(
                 roles=["flight", "locomotion"],
-                pose_ids=[pose("FLY", index) for index in range(14, 18)],
+                pose_ids=flying_pose_ids,
                 action_ids=[],
                 clip_ids=["glide_cycle"],
                 speech_compatible=True,
@@ -914,9 +1057,9 @@ def _choreography_dictionary(
             ),
             "hover": binding(
                 roles=["flight", "speaking"],
-                pose_ids=[pose("FLY", 40), pose("FLY", 43), pose("FLY", 44)],
+                pose_ids=hover_pose_ids,
                 action_ids=[],
-                clip_ids=["hover_cycle"],
+                clip_ids=["hover_speech_cycle"] if is_dragon else ["hover_cycle"],
                 speech_compatible=True,
                 interrupt_policy="phrase_boundary",
                 minimum_hold_ms=700,
@@ -931,11 +1074,11 @@ def build_candidate(index_path: Path, destination: Path) -> dict[str, Any]:
     source_root = index_path.parent
     index = json.loads(index_path.read_text(encoding="utf-8"))
     character_id = str(index.get("character_id", ""))
-    if character_id not in SUPPORTED_SHARED_CANVAS_CHARACTERS:
+    if character_id not in SUPPORTED_HD_RGBA_CHARACTERS:
         raise ValueError(
-            "candidate builder accepts only the audited shared-canvas "
+            "candidate builder accepts only the audited HD RGBA "
             "characters: {}".format(
-                ", ".join(sorted(SUPPORTED_SHARED_CANVAS_CHARACTERS))
+                ", ".join(sorted(SUPPORTED_HD_RGBA_CHARACTERS))
             )
         )
     if index.get("review_projection") is not True:
@@ -969,6 +1112,14 @@ def build_candidate(index_path: Path, destination: Path) -> dict[str, Any]:
         "flight_cycle",
         "catalog_pose_override",
     ]
+    if character_id == "dragon":
+        package_capabilities.extend(
+            [
+                "ground_speech_cycle",
+                "hover_speech_cycle",
+                "storytelling_speech_cycle",
+            ]
+        )
     files = {
         "animation_graph": (
             "{}-animation-graph-v2.json".format(character_id),

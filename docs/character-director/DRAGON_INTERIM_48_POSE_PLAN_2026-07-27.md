@@ -107,3 +107,40 @@ The interim set is not a substitute for the later full Dragon corpus.
 Visual evidence:
 
 - `docs/character-director/reviews/dragon-storytelling-act100-123-contact-2026-07-27.png`
+
+## 2026-08-07 Runtime-Candidate Checkpoint
+
+The 134-pose review corpus now compiles through the shared HD RGBA character
+package builder. The generated package is deterministic, digest-bound, and
+loadable by the existing Python `HDPoseFrameSource`; it remains a review
+candidate and is not registered for production runtime use.
+
+The candidate defines:
+
+- 15 flight poses;
+- a three-pose grounded speech cycle;
+- a five-pose hover/listen/speech group;
+- a 24-pose storytelling speech group;
+- three explicit resting-to-speaking pose pairs;
+- a Dragon-owned comprehensive-performance choreography dictionary; and
+- named full-corpus, flight, grounded-speech, hover-speech, and storytelling
+  review sequences.
+
+The isolated desktop and mobile-landscape review showed complete silhouettes,
+working alpha projection, and no browser errors. Portrait projection remains
+legible but too small because the current review stage preserves a 16:9 source
+canvas inside a tall viewport. That is a presentation-adaptation limitation,
+not a source-art or package-admission success claim.
+
+Exact receipt and conservative gate:
+
+- package SHA-256:
+  `sha256:2a23fc9ae5379e6489a9b52e34297d9e78250f09b9968df43f9e7493caff5d02`;
+- source/candidate library-index SHA-256:
+  `301ce8dfda7547a48f8fe85960bd79cfb18453374f20e07bbb4faeba042f24ac`;
+- 22 Dragon-focused tests passed;
+- nine shared Robin/Speech HD RGBA regression tests passed; and
+- `runtime_admitted` remains `false` throughout the review index and package.
+
+See `DRAGON_RUNTIME_CANDIDATE_2026-08-07.md` for the exact package contract,
+verification commands, review URLs, and unresolved gates.
