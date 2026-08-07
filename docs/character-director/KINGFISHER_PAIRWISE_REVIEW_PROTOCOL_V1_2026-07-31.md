@@ -4859,3 +4859,28 @@ Full-size evidence:
 This is an internal visual pass only. The reopened queue now contains 13
 internal passes, 51 pending observable pairs, and 2 not-observable rear views.
 User approval and runtime admission remain zero.
+
+### Pair 16 isolated point-to-viewer review
+
+Pair 16 (`point-to-viewer`) was reviewed independently at native size,
+enlarged beak scale, full-projector size, and in a six-second closed/open loop.
+That review rejected the previously retained v2 frame: it preserved the closed
+upper bill while placing a detached second V-shaped mouth on the throat. This
+was visually wrong despite passing the earlier geometric checks.
+
+The replacement v3 mate was rebuilt from the anatomically connected donor.
+Only the mouth opening was compressed around the fixed frontal hinge
+`(480, 228)`, producing one continuous upper-bill-to-cavity-to-mandible
+articulation. Its frontal anatomy records center offset ratio `0.0`,
+lower-to-upper width ratio `0.8871`, and mandible connected ratio `1.0`. The
+strict audit reports 5,281 changed rendered mouth pixels, outside-mouth mean
+difference `0.0`, registration delta `0`, and silhouette IoU `1.0`. The crown,
+eyes, pointing wing, hoodie, body, legs, feet, canvas, and scale remain fixed.
+
+Full-size evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-016-one-pair-2026-08-07-v4/`
+
+This is an internal visual pass only. The reopened queue now contains 14
+internal passes, 50 pending observable pairs, and 2 not-observable rear views.
+User approval and runtime admission remain zero.
