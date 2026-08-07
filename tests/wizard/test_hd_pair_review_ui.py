@@ -240,6 +240,18 @@ class HdPairReviewUiTests(unittest.TestCase):
         self.assertFalse(rhetorical_question["runtime_admitted"])
         self.assertFalse(rhetorical_question["user_approved"])
 
+        compassion = by_ordinal[47]
+        self.assertEqual(
+            compassion["pairwise_full_size_review"]["state"],
+            "pass",
+        )
+        self.assertIn(
+            "evidence/pairwise-full-size/pair-047-bill-axis-review-2026-08-07-v1",
+            compassion["pairwise_full_size_review"]["evidence_path"],
+        )
+        self.assertFalse(compassion["runtime_admitted"])
+        self.assertFalse(compassion["user_approved"])
+
         visible_pairs = [
             pair for pair in ledger["pairs"]
             if pair["pairwise_full_size_review"]["state"] != "not_observable"
@@ -253,7 +265,7 @@ class HdPairReviewUiTests(unittest.TestCase):
         self.assertEqual(states.count("pass"), summary["pass_count"])
         self.assertEqual(states.count("pending"), summary["pending_count"])
         anatomy_v2_queue = {
-            1, 6, 47, 62,
+            1, 6, 62,
         }
         self.assertEqual(
             {
@@ -264,8 +276,8 @@ class HdPairReviewUiTests(unittest.TestCase):
             },
             anatomy_v2_queue,
         )
-        self.assertEqual(summary["pass_count"], 60)
-        self.assertEqual(summary["needs_rebuild_count"], 4)
+        self.assertEqual(summary["pass_count"], 61)
+        self.assertEqual(summary["needs_rebuild_count"], 3)
         self.assertEqual(summary["pending_count"], 0)
         self.assertFalse(summary["complete"])
         pending_pairs = [

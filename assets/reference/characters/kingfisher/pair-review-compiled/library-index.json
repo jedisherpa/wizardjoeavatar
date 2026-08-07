@@ -14,7 +14,7 @@
   "legacy_pair_review": {
     "approval_state": "candidate_visual_review",
     "ledger_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-review-ledger.json",
-    "ledger_sha256": "3e1c0210912b961ae1a125ac997e720eddb95e318653acfd302400c8681f8000",
+    "ledger_sha256": "9ea11e9c9df6d1550ebe2064ba7fc4297fb0f49ec6e000083e4e80fa69bce40e",
     "pair_count": 66,
     "pairs": [
       {
@@ -943,12 +943,12 @@
         "automated_audit_passed": true,
         "ordinal": 47,
         "pairwise_full_size_review": {
-          "evidence_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-047-one-pair-2026-08-06-v1",
+          "evidence_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-047-bill-axis-review-2026-08-07-v1",
           "protocol_id": "kingfisher-full-size-pairwise-v1",
-          "state": "needs_rebuild"
+          "state": "pass"
         },
         "receipt_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/047-compassion/pair-receipt.json",
-        "receipt_sha256": "18417ac671579d56b6c7d83bd884fee97ebacb632d1d515c04f7aa2a6e268e28",
+        "receipt_sha256": "1b8ef529791e9ba505085d12517441f38fcc3ef620cab37e455909110113f7e7",
         "resting_pose_id": "kingfisher.act.047.compassion",
         "resting_sha256": "5b0f5c4660b9c4850e08a3501a4df69bc4814eb9ff39272d8196c1fc9ff06786",
         "runtime_admitted": false,
@@ -1340,9 +1340,9 @@
     ],
     "pairwise_full_size_review_summary": {
       "complete": false,
-      "needs_rebuild_count": 4,
+      "needs_rebuild_count": 3,
       "not_observable_count": 2,
-      "pass_count": 60,
+      "pass_count": 61,
       "pending_count": 0
     },
     "review_projection": true,
@@ -2393,7 +2393,7 @@
       "approval_state": "candidate_visual_review",
       "fps": 2,
       "loop": true,
-      "pair_review_state": "needs_rebuild",
+      "pair_review_state": "pass",
       "pose_ids": [
         "kingfisher.act.047.compassion",
         "kingfisher.act.157.compassion-speaking-beak"
@@ -2680,7 +2680,7 @@
         "pass",
         "pass",
         "pass",
-        "needs_rebuild",
+        "pass",
         "pass",
         "pass",
         "pass",
@@ -3078,7 +3078,7 @@
     {
       "approval_state": "candidate_visual_review",
       "bytes": 28586641,
-      "path": "kingfisher_act_001_066_111_176_pair_review-4b3c13cc93ccc9d9.wjpose",
+      "path": "kingfisher_act_001_066_111_176_pair_review-0bc96f934a66e2f5.wjpose",
       "pose_count": 132,
       "pose_ids": [
         "kingfisher.act.001.neutral-front",
@@ -3216,7 +3216,7 @@
       ],
       "review_projection": true,
       "runtime_admitted": false,
-      "sha256": "4b3c13cc93ccc9d9f8ec2f52ff246cf6df4363826e305792abd39512ba77abb2",
+      "sha256": "0bc96f934a66e2f57abb5fe5a62a2a89ad3286b767ef2b5bdc08851292776f64",
       "shard_id": "kingfisher_act_001_066_111_176_pair_review",
       "source": "kingfisher_pair_specific_beak_review_v1"
     }

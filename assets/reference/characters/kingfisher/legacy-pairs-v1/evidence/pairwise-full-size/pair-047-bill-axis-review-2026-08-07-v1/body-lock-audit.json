@@ -1,0 +1,38 @@
+{
+  "changed_rendered_pixels": 2537,
+  "checks": {
+    "bounded_articulation_change": true,
+    "outside_mouth_stability": true,
+    "silhouette_overlap": true,
+    "stable_registration_bounds": true,
+    "visible_mouth_change": true
+  },
+  "mouth_mean_abs": 7.085697,
+  "mouth_region": [
+    455,
+    225,
+    530,
+    335
+  ],
+  "outside_mouth_mean_abs": 0.0,
+  "passed": true,
+  "registration_bound_delta": 0,
+  "resting_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/047-compassion/047_ACT047_compassion_resting_beak_alpha.png",
+  "resting_registration_bbox": [
+    242,
+    97,
+    719,
+    529
+  ],
+  "resting_sha256": "5b0f5c4660b9c4850e08a3501a4df69bc4814eb9ff39272d8196c1fc9ff06786",
+  "schema_version": 2,
+  "silhouette_iou": 1.0,
+  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/047-compassion/157_ACT157_compassion_speaking_beak_alpha.png",
+  "speaking_registration_bbox": [
+    242,
+    97,
+    719,
+    529
+  ],
+  "speaking_sha256": "e55e383be358770553564669c47914154b2e52a6fe417667de120edd9da0e2a0"
+}
