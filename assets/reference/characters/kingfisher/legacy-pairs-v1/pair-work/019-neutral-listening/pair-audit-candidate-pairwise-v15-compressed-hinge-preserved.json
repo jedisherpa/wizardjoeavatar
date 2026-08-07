@@ -15,17 +15,6 @@
     302
   ],
   "outside_mouth_mean_abs": 0.0,
-  "pairwise_promotion": {
-    "candidate_audit_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/019-neutral-listening/pair-audit-candidate-pairwise-v15-compressed-hinge-preserved.json",
-    "candidate_receipt_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/019-neutral-listening/pair-receipt-candidate-pairwise-v15-compressed-hinge-preserved.json",
-    "history_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/019-neutral-listening/pair-promotion-history.json",
-    "promoted_at": "2026-08-07T19:10:00-06:00",
-    "reason": "Supersede the prior forward-detached lower-beak patch. The promoted candidate compresses the approved donor around the rear hinge, preserves the closed frame and upper-beak registration exactly, keeps the lower bill connected, and presents a restrained neutral-listening speaking aperture on the white projector field.",
-    "reviewer": "codex-pairwise-visual-review-v4",
-    "runtime_admission_implied": false,
-    "schema_version": 1,
-    "user_approval_implied": false
-  },
   "passed": true,
   "registration_bound_delta": 0,
   "resting_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/019-neutral-listening/019_ACT019_neutral_listening_resting_beak_alpha.png",

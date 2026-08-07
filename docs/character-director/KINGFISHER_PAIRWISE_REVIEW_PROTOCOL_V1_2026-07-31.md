@@ -4938,3 +4938,31 @@ Full-size evidence:
 This is an internal visual pass only. The reopened queue now contains 16
 internal passes, 48 pending observable pairs, and 2 not-observable rear views.
 User approval and runtime admission remain zero.
+
+### Pair 19 isolated neutral-listening review
+
+Pair 19 (`neutral-listening`) was reviewed independently at native size,
+nearest-neighbor enlarged beak scale, full-projector size, and in a six-second
+closed/open loop. The previously retained v2 mate was rejected even though it
+passed the older geometry checks: its lower bill began too far forward and read
+as a detached blade. The preserved donor established the correct rear hinge but
+its original gape was too large for neutral listening.
+
+The replacement v15 mate vertically compresses the approved donor around the
+rear hinge while preserving the closed frame and upper-bill pixels exactly.
+On the white projector field it reads as one connected, restrained speaking
+articulation with a contained warm oral cavity. Its directional anatomy records
+a `15.1808` degree opening, `0.8906` lower-to-upper reach ratio, `0.2417`
+normalized tip offset, and mandible connected ratio `1.0`. The strict audit
+reports 3,719 changed rendered mouth pixels, outside-mouth mean difference
+`0.0`, registration delta `0`, and silhouette IoU `0.99993`. The crown, eye,
+head, upper bill, throat, hoodie, wings, body, legs, feet, canvas, and scale
+remain fixed.
+
+Full-size evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-019-one-pair-2026-08-07-v4/`
+
+This is an internal visual pass only. The reopened queue now contains 17
+internal passes, 47 pending observable pairs, and 2 not-observable rear views.
+User approval and runtime admission remain zero.

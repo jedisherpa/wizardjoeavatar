@@ -1,0 +1,214 @@
+{
+  "character_id": "kingfisher",
+  "entries": [
+    {
+      "audit": {
+        "changed_rendered_pixels": 4146,
+        "checks": {
+          "bounded_articulation_change": true,
+          "outside_mouth_stability": true,
+          "silhouette_overlap": true,
+          "stable_registration_bounds": true,
+          "visible_mouth_change": true
+        },
+        "mouth_mean_abs": 9.592399,
+        "mouth_region": [
+          448,
+          246,
+          578,
+          302
+        ],
+        "outside_mouth_mean_abs": 0.0,
+        "passed": true,
+        "registration_bound_delta": 0,
+        "resting_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/019-neutral-listening/019_ACT019_neutral_listening_resting_beak_alpha.png",
+        "resting_registration_bbox": [
+          362,
+          97,
+          599,
+          529
+        ],
+        "resting_sha256": "1ceca9ee2062fcd43190560cb0ec7df3df18db2ec982b7545170a882bbb1fac8",
+        "schema_version": 2,
+        "silhouette_iou": 1.0,
+        "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/019-neutral-listening/129_ACT129_neutral_listening_speaking_beak_candidate_pairwise_v2_verified.png",
+        "speaking_registration_bbox": [
+          362,
+          97,
+          599,
+          529
+        ],
+        "speaking_sha256": "875448129175a7ca792ceb459dc1c02999f4d98bcffeddbdd70f24d31aa6a33a"
+      },
+      "reason": "Supersede the prior forward-detached lower-beak patch. The promoted candidate compresses the approved donor around the rear hinge, preserves the closed frame and upper-beak registration exactly, keeps the lower bill connected, and presents a restrained neutral-listening speaking aperture on the white projector field.",
+      "receipt": {
+        "alignment": {
+          "interpolation": "lanczos_rgb_binary_alpha",
+          "rotation_center": [
+            466,
+            252
+          ],
+          "rotation_degrees": 0.0,
+          "scale": 1.0,
+          "scale_x": 1.0,
+          "scale_y": 1.0,
+          "translate_x": 0,
+          "translate_y": 0
+        },
+        "approval_state": "candidate_visual_review",
+        "beak_anatomy": {
+          "cavity_anchor_distance": 1.916,
+          "checks": {
+            "bounded_tip_offset": true,
+            "cavity_anchored": true,
+            "mandible_anchored": true,
+            "plausible_mandible_length": true,
+            "same_longitudinal_direction": true,
+            "upper_beak_anchored": true
+          },
+          "direction": "right",
+          "mandible_anchor_distance": 10.221,
+          "mandible_forward_reach": 115,
+          "mandible_length_ratio": 0.9746,
+          "mandible_reverse_reach": 16,
+          "mode": "directional",
+          "passed": true,
+          "schema_version": 1,
+          "tip_offset_ratio": 0.2966,
+          "upper_anchor_distance": 2.386,
+          "upper_forward_reach": 118
+        },
+        "canvas": [
+          960,
+          540
+        ],
+        "cavity_fill_rgba": null,
+        "cavity_polygon": [
+          [
+            462,
+            248
+          ],
+          [
+            571,
+            249
+          ],
+          [
+            551,
+            287
+          ],
+          [
+            478,
+            282
+          ]
+        ],
+        "cavity_source": "generated",
+        "changed_bbox": [
+          452,
+          250,
+          572,
+          297
+        ],
+        "generated_render_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/019-neutral-listening/129_ACT129_neutral_listening_speaking_beak_rejected_pre_pairwise_2026-08-04.png",
+        "generated_render_sha256": "f38ec7fb0bb9b75543abd849be770524e7f929ccb9d1dfbf13c9d1ed738b46d7",
+        "hinge": [
+          466,
+          252
+        ],
+        "hinge_radius": 22,
+        "mandible_bbox": [
+          450,
+          241,
+          577,
+          300
+        ],
+        "mandible_connected_ratio": 1.0,
+        "mandible_largest_component_pixels": 6027,
+        "mandible_opaque_pixels": 6027,
+        "mandible_polygon": [
+          [
+            452,
+            242
+          ],
+          [
+            578,
+            240
+          ],
+          [
+            581,
+            270
+          ],
+          [
+            552,
+            299
+          ],
+          [
+            476,
+            296
+          ],
+          [
+            450,
+            258
+          ]
+        ],
+        "method": "pair_specific_connected_mandible_patch_v1",
+        "minimum_connected_ratio": 0.9,
+        "minimum_mandible_height": 35,
+        "oral_warm_replacement_polygon": null,
+        "oral_warm_replacement_rgba": null,
+        "outside_articulation_change": false,
+        "residual_clear_polygon": null,
+        "resting_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/019-neutral-listening/019_ACT019_neutral_listening_resting_beak_alpha.png",
+        "resting_sha256": "1ceca9ee2062fcd43190560cb0ec7df3df18db2ec982b7545170a882bbb1fac8",
+        "runtime_admitted": false,
+        "schema_version": 1,
+        "source_mask": {
+          "light_threshold": 180,
+          "mode": "opaque",
+          "neutral_chroma_threshold": 36
+        },
+        "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/019-neutral-listening/129_ACT129_neutral_listening_speaking_beak_candidate_pairwise_v2_verified.png",
+        "speaking_sha256": "875448129175a7ca792ceb459dc1c02999f4d98bcffeddbdd70f24d31aa6a33a",
+        "upper_beak_policy": "immutable_source_pixels",
+        "upper_beak_polygon": [
+          [
+            447,
+            211
+          ],
+          [
+            584,
+            211
+          ],
+          [
+            584,
+            259
+          ],
+          [
+            566,
+            261
+          ],
+          [
+            533,
+            257
+          ],
+          [
+            500,
+            252
+          ],
+          [
+            469,
+            249
+          ],
+          [
+            448,
+            253
+          ]
+        ]
+      },
+      "reviewer": "codex-pairwise-visual-review-v4",
+      "schema_version": 1,
+      "superseded_at": "2026-08-07T19:10:00-06:00"
+    }
+  ],
+  "receipt_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/019-neutral-listening/pair-receipt.json",
+  "schema_version": 1
+}

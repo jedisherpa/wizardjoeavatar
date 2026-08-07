@@ -168,17 +168,6 @@
   "oral_warm_replacement_polygon": null,
   "oral_warm_replacement_rgba": null,
   "outside_articulation_change": false,
-  "pairwise_promotion": {
-    "candidate_audit_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/019-neutral-listening/pair-audit-candidate-pairwise-v15-compressed-hinge-preserved.json",
-    "candidate_receipt_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/019-neutral-listening/pair-receipt-candidate-pairwise-v15-compressed-hinge-preserved.json",
-    "history_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/019-neutral-listening/pair-promotion-history.json",
-    "promoted_at": "2026-08-07T19:10:00-06:00",
-    "reason": "Supersede the prior forward-detached lower-beak patch. The promoted candidate compresses the approved donor around the rear hinge, preserves the closed frame and upper-beak registration exactly, keeps the lower bill connected, and presents a restrained neutral-listening speaking aperture on the white projector field.",
-    "reviewer": "codex-pairwise-visual-review-v4",
-    "runtime_admission_implied": false,
-    "schema_version": 1,
-    "user_approval_implied": false
-  },
   "residual_clear_polygon": null,
   "resting_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/019-neutral-listening/019_ACT019_neutral_listening_resting_beak_alpha.png",
   "resting_sha256": "1ceca9ee2062fcd43190560cb0ec7df3df18db2ec982b7545170a882bbb1fac8",
@@ -189,9 +178,9 @@
     "mode": "opaque",
     "neutral_chroma_threshold": 36
   },
+  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/019-neutral-listening/129_ACT129_neutral_listening_speaking_beak_candidate_pairwise_v15-compressed-hinge-preserved.png",
   "speaking_donor_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/019-neutral-listening/129_ACT129_neutral_listening_speaking_beak_rejected_pre_pairwise_2026-08-04.png",
   "speaking_donor_sha256": "f38ec7fb0bb9b75543abd849be770524e7f929ccb9d1dfbf13c9d1ed738b46d7",
-  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/019-neutral-listening/129_ACT129_neutral_listening_speaking_beak_candidate_pairwise_v15-compressed-hinge-preserved.png",
   "speaking_sha256": "9df17af75f24b6eed0d9ccda1f24ac63c415b1068d143aadfa6c9f38a8caed76",
   "upper_beak_policy": "immutable_source_pixels",
   "upper_beak_polygon": [
