@@ -319,6 +319,56 @@ class ComposeKingfisherPairMandiblePatchTests(unittest.TestCase):
             )
             self.assertTrue(receipt["beak_anatomy"]["passed"])
 
+    def test_uses_separate_hinge_for_frontal_anatomy(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            resting_path, generated_path = self._sources(root)
+            output_path = root / "output.png"
+            anatomy_hinge = (510, 238)
+            receipt = compose_mandible_patch(
+                resting_path,
+                generated_path,
+                output_path,
+                root / "receipt.json",
+                scale=1,
+                translate_x=0,
+                translate_y=0,
+                mandible_polygon=[
+                    (468, 248),
+                    (552, 248),
+                    (552, 272),
+                    (468, 272),
+                ],
+                cavity_polygon=[
+                    (468, 238),
+                    (552, 230),
+                    (548, 258),
+                    (470, 258),
+                ],
+                upper_beak_polygon=[
+                    (468, 228),
+                    (552, 225),
+                    (552, 250),
+                    (468, 250),
+                ],
+                anatomy_upper_beak_polygon=[
+                    (480, 220),
+                    (510, 205),
+                    (540, 220),
+                    (528, 248),
+                    (492, 248),
+                ],
+                anatomy_hinge=anatomy_hinge,
+                hinge=(473, 255),
+                hinge_radius=16,
+                minimum_mandible_height=10,
+            )
+
+            self.assertEqual(receipt["hinge"], [473, 255])
+            self.assertEqual(receipt["anatomy_hinge"], list(anatomy_hinge))
+            self.assertEqual(receipt["beak_anatomy"]["mode"], "frontal")
+            self.assertTrue(receipt["beak_anatomy"]["passed"])
+
     def test_clears_declared_residual_edge_before_compositing(self):
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)

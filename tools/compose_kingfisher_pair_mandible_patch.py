@@ -424,6 +424,7 @@ def compose_mandible_patch(
     cavity_polygon: list[tuple[int, int]],
     upper_beak_polygon: list[tuple[int, int]],
     anatomy_upper_beak_polygon: list[tuple[int, int]] | None = None,
+    anatomy_hinge: tuple[int, int] | None = None,
     anatomy_direction_vector: tuple[int, int] | None = None,
     hinge: tuple[int, int],
     residual_clear_polygon: list[tuple[int, int]] | None = None,
@@ -483,6 +484,11 @@ def compose_mandible_patch(
         and 0 <= hinge[1] < CANVAS_SIZE[1]
     ):
         raise ValueError("hinge must remain inside the canvas")
+    if anatomy_hinge is not None and not (
+        0 <= anatomy_hinge[0] < CANVAS_SIZE[0]
+        and 0 <= anatomy_hinge[1] < CANVAS_SIZE[1]
+    ):
+        raise ValueError("anatomy_hinge must remain inside the canvas")
     if hinge_radius < 1:
         raise ValueError("hinge radius must be positive")
     if minimum_mandible_height < 1:
@@ -604,8 +610,9 @@ def compose_mandible_patch(
     effective_anatomy_upper_beak_polygon = (
         anatomy_upper_beak_polygon or upper_beak_polygon
     )
+    effective_anatomy_hinge = anatomy_hinge or hinge
     anatomy = beak_anatomy_metrics(
-        hinge=hinge,
+        hinge=effective_anatomy_hinge,
         hinge_radius=hinge_radius,
         upper_beak_polygon=effective_anatomy_upper_beak_polygon,
         mandible_polygon=mandible_polygon,
@@ -711,6 +718,7 @@ def compose_mandible_patch(
         "anatomy_upper_beak_polygon": [
             list(point) for point in effective_anatomy_upper_beak_polygon
         ],
+        "anatomy_hinge": list(effective_anatomy_hinge),
         "anatomy_direction_vector": (
             list(anatomy_direction_vector)
             if anatomy_direction_vector is not None
@@ -786,6 +794,7 @@ def main() -> None:
         nargs="+",
         type=int,
     )
+    parser.add_argument("--anatomy-hinge", nargs=2, type=int)
     parser.add_argument("--anatomy-direction-vector", nargs=2, type=int)
     parser.add_argument("--residual-clear-polygon", nargs="+", type=int)
     parser.add_argument("--hinge", nargs=2, type=int, required=True)
@@ -867,6 +876,11 @@ def main() -> None:
                 name="anatomy_upper_beak_polygon",
             )
             if args.anatomy_upper_beak_polygon
+            else None
+        ),
+        anatomy_hinge=(
+            (args.anatomy_hinge[0], args.anatomy_hinge[1])
+            if args.anatomy_hinge
             else None
         ),
         anatomy_direction_vector=(

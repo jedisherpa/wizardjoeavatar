@@ -316,6 +316,34 @@ class CompileKingfisherPairReviewLibraryTests(unittest.TestCase):
 
             self.assertEqual(result["pair_count"], 66)
 
+    def test_pass_uses_separate_frontal_anatomy_hinge(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            base_index, ledger = self._fixture(root)
+            data = json.loads(ledger.read_text(encoding="utf-8"))
+            pair = data["pairs"][1]
+            pair["pairwise_full_size_review"]["state"] = "pass"
+            receipt_path = Path(pair["receipt_path"])
+            receipt = json.loads(receipt_path.read_text(encoding="utf-8"))
+            receipt["anatomy_hinge"] = [16, 9]
+            receipt["anatomy_upper_beak_polygon"] = [
+                [12, 7],
+                [16, 5],
+                [20, 7],
+                [19, 10],
+                [13, 10],
+            ]
+            receipt_path.write_text(json.dumps(receipt), encoding="utf-8")
+            ledger.write_text(json.dumps(data), encoding="utf-8")
+
+            result = compile_pair_review_library(
+                base_index,
+                ledger,
+                root / "review",
+            )
+
+            self.assertEqual(result["pair_count"], 66)
+
     def test_pass_accepts_explicit_downward_beak_axis(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)

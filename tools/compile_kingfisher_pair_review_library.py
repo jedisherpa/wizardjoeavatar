@@ -125,6 +125,17 @@ def require_pair_specific_pass_receipt(
             "passing pair requires a valid anatomy_direction_vector"
         )
 
+    anatomy_hinge = receipt.get("anatomy_hinge", hinge)
+    if (
+        not isinstance(anatomy_hinge, list)
+        or len(anatomy_hinge) != 2
+        or any(
+            isinstance(value, bool) or not isinstance(value, int)
+            for value in anatomy_hinge
+        )
+    ):
+        raise ValueError("passing pair requires one declared anatomy hinge")
+
     minimum_ratio = receipt.get("minimum_connected_ratio")
     connected_ratio = receipt.get("mandible_connected_ratio")
     if (
@@ -154,7 +165,7 @@ def require_pair_specific_pass_receipt(
         raise ValueError("passing pair requires a substantial lower mandible")
 
     anatomy = beak_anatomy_metrics(
-        hinge=(hinge[0], hinge[1]),
+        hinge=(anatomy_hinge[0], anatomy_hinge[1]),
         hinge_radius=hinge_radius,
         upper_beak_polygon=[tuple(point) for point in anatomy_upper_beak_polygon],
         mandible_polygon=[
