@@ -4909,3 +4909,32 @@ Full-size evidence:
 This is an internal visual pass only. The reopened queue now contains 15
 internal passes, 49 pending observable pairs, and 2 not-observable rear views.
 User approval and runtime admission remain zero.
+
+### Pair 18 isolated detail-downward-point review
+
+Pair 18 (`detail-downward-point`) was reviewed independently at native size,
+nearest-neighbor enlarged beak scale, full-projector size, and in a six-second
+closed/open loop. Candidate v1 remains rejected because it leaves only a
+detached pink sliver. The pre-pairwise donor remains rejected because it
+changes the upper mouth and opens too far. The retained verified v3 frame is
+pixel-identical to the previously body-locked result.
+
+An inspection-background artifact initially made the selected frame look
+detached: its dark lower mandible disappears against black. On the actual
+white projector, the mandible is visibly continuous from the shared rear hinge
+`(525, 249)`, and the pink oral surface remains contained inside the bill. Its
+directional anatomy records a `5.2753` degree opening, `0.9778`
+lower-to-upper reach ratio, `0.0903` normalized tip offset, and mandible
+connected ratio `1.0`. The strict audit reports 4,186 changed rendered mouth
+pixels, outside-mouth mean difference `0.0`, registration delta `0`, and
+silhouette IoU `0.999987`. The closed eye, crown, head, upper bill, throat,
+downward-pointing wing, hoodie, body, legs, feet, canvas, and scale remain
+fixed.
+
+Full-size evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-018-one-pair-2026-08-07-v4/`
+
+This is an internal visual pass only. The reopened queue now contains 16
+internal passes, 48 pending observable pairs, and 2 not-observable rear views.
+User approval and runtime admission remain zero.
