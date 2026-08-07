@@ -70,11 +70,23 @@ def beak_anatomy_metrics(
     dominant_reach = max(upper_left_reach, upper_right_reach)
     opposite_reach = min(upper_left_reach, upper_right_reach)
     explicit_direction = direction_vector is not None
-    upper_tip = max(
-        upper_beak_polygon,
-        key=lambda point: math.hypot(
-            point[0] - hinge[0], point[1] - hinge[1]
-        ),
+    # A profile bill usually has two tip corners. Picking the single farthest
+    # corner tilts the inferred axis toward that corner and can misclassify a
+    # coherent wide-open mouth. Average the tip-side band instead.
+    radial_distances = [
+        math.hypot(point[0] - hinge[0], point[1] - hinge[1])
+        for point in upper_beak_polygon
+    ]
+    maximum_radial_distance = max(radial_distances)
+    tip_band = max(2.0, maximum_radial_distance * 0.03)
+    tip_points = [
+        point
+        for point, distance in zip(upper_beak_polygon, radial_distances)
+        if distance >= maximum_radial_distance - tip_band
+    ]
+    upper_tip = (
+        sum(point[0] for point in tip_points) / len(tip_points),
+        sum(point[1] for point in tip_points) / len(tip_points),
     )
     inferred_x = upper_tip[0] - hinge[0]
     inferred_y = upper_tip[1] - hinge[1]
@@ -102,8 +114,8 @@ def beak_anatomy_metrics(
         axis_x = inferred_axis_x
         axis_y = inferred_axis_y
     else:
-        axis_x = 1.0 if upper_right_reach > upper_left_reach else -1.0
-        axis_y = 0.0
+        axis_x = inferred_axis_x
+        axis_y = inferred_axis_y
     directional = explicit_direction or (
         dominant_reach >= max(12, opposite_reach * 1.8)
     )
@@ -177,8 +189,12 @@ def beak_anatomy_metrics(
             mandible_tip_points
         )
         length_ratio = mandible_forward_reach / max(1, upper_forward_reach)
-        tip_offset_ratio = abs(mandible_tip_offset - upper_tip_offset) / max(
+        tip_offset = abs(mandible_tip_offset - upper_tip_offset)
+        tip_offset_ratio = tip_offset / max(
             1, upper_forward_reach
+        )
+        opening_angle_degrees = math.degrees(
+            math.atan2(tip_offset, max(1, mandible_forward_reach))
         )
         checks.update(
             {
@@ -186,7 +202,8 @@ def beak_anatomy_metrics(
                     mandible_forward_reach > mandible_reverse_reach
                 ),
                 "plausible_mandible_length": 0.5 <= length_ratio <= 1.25,
-                "bounded_tip_offset": tip_offset_ratio <= 0.35,
+                "bounded_tip_offset": tip_offset_ratio <= 0.65,
+                "plausible_opening_angle": opening_angle_degrees <= 50.0,
             }
         )
         metrics.update(
@@ -210,6 +227,7 @@ def beak_anatomy_metrics(
                 "mandible_reverse_reach": round(mandible_reverse_reach, 4),
                 "mandible_length_ratio": round(length_ratio, 4),
                 "tip_offset_ratio": round(tip_offset_ratio, 4),
+                "opening_angle_degrees": round(opening_angle_degrees, 4),
             }
         )
     else:

@@ -79,11 +79,11 @@ no-op blink behavior.
 
 ## Admission Boundary
 
-The package is intentionally review-only. Internal pairwise review recorded
-64 observable passes and 2 rear-view pairs as not observable; it did not record
-user approval. The production registry is unchanged. Admission requires an
-explicit art review, user approval evidence, and a newly admitted package
-digest.
+The package is intentionally review-only. The current Anatomy V2.1 re-audit
+records 50 observable passes, 14 `needs_rebuild` dispositions, and 2 rear-view
+pairs as not observable; it does not record user approval. The production
+registry is unchanged. Admission requires completion of the isolated art
+review, user approval evidence, and a newly admitted package digest.
 
 ## Anatomy V2 Re-audit
 
@@ -91,22 +91,26 @@ Later live review showed that silhouette overlap and registration stability did
 not prove that a lower bill shared the closed pose's hinge, direction, or tip.
 The earlier internal disposition is therefore superseded for affected pairs.
 
-Anatomy V2 now derives the upper-bill axis from the closed pose itself. A
-declared axis more than 25 degrees from that observed direction fails, as does
-a lower-bill tip whose perpendicular offset exceeds 35 percent of upper-bill
-reach. The compiler recomputes these measurements from receipt geometry rather
-than trusting stored V1 scores.
+Anatomy V2.1 derives the upper-bill axis from the closed pose itself. Equally
+distant upper-tip corners are averaged so a one-pixel radial difference cannot
+choose the wrong bill edge. A declared axis more than 25 degrees from that
+observed direction fails. Lower-bill displacement and speech aperture are
+measured separately: normalized tip offset may not exceed 0.65, and the
+hinge-to-tip opening angle may not exceed 50 degrees. The compiler recomputes
+these measurements from receipt geometry rather than trusting stored V1
+scores.
 
 The first re-audit measured the 63 pairs with explicit hinge geometry and
 placed 14 into an explicit one-pair rebuild queue. Pair 001 is also queued
-because its legacy receipt predates the required geometry:
+because its legacy receipt predates the required geometry. Pair 007 has since
+passed the isolated V2.1 review, leaving this 14-pair queue:
 
 ```text
-001 006 007 008 010 011 012 017 022 024 025 027 030 047 062
+001 006 008 010 011 012 017 022 024 025 027 030 047 062
 ```
 
 Pairs 004 and 005 are excluded because the beak is not observable. The ledger
-currently records 49 internal passes, 15 `needs_rebuild` dispositions, 2
+currently records 50 internal passes, 14 `needs_rebuild` dispositions, 2
 `not_observable` dispositions, 0 user
 approvals, and 0 runtime admissions.
 
@@ -129,6 +133,16 @@ mean difference. It remains in `needs_rebuild` until the isolated loop is
 visually accepted; these measurements do not constitute user approval or
 runtime admission.
 
+Pair 007 (`front-three-quarter-right`) exposed the difference between a
+misaligned bill and a legitimate wide-open speech drawing. The accepted art
+already had a shared cheek hinge and stable upper bill, but V2 selected one
+upper-tip corner and interpreted the 38.79-degree opening as lateral
+misalignment. V2.1 averages the two tip corners and records both quantities.
+The isolated projector loop passes with a 3.58-degree declared-axis error,
+0.6209 lower-to-upper reach ratio, zero outside-mouth change, and zero
+registration drift. Its internal pass does not imply user approval or runtime
+admission.
+
 Every compiled pair now has a dedicated two-frame loop. Pair 062 can be
 reviewed locally at:
 
@@ -141,6 +155,12 @@ The same form applies to other ordinals, such as
 
 ```text
 http://127.0.0.1:8667/?hd-sequence=kingfisher-pair-006-review
+```
+
+The accepted Pair 007 review loop is available at:
+
+```text
+http://127.0.0.1:8667/?hd-sequence=kingfisher-pair-007-review
 ```
 
 A pair returns to `pass` only after isolated closed/open visual review; that

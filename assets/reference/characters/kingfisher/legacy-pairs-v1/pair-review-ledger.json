@@ -599,10 +599,10 @@
       "body_pose_id": "kingfisher.act.007.front-three-quarter-right",
       "internal_visual_review": {
         "defect_codes": [],
-        "evidence_path": "review-evidence/detail-boards/pair-detail-page-02.png",
-        "note": "Nearest-neighbor pair detail inspected: both mandibles converge at one authored mouth corner, with no detached duplicate edge or head-registration drift.",
-        "reviewed_at": "2026-07-30T22:28:32.852875+00:00",
-        "reviewer": "codex-pair-closeup-review",
+        "evidence_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-007-aperture-aware-review-2026-08-06-v1",
+        "note": "Isolated live-projector review confirms the authored three-quarter closed/open pair is coherent without redrawing: the lower mandible shares the cheek hinge, follows the leftward upper-bill axis, and opens 38.7939 degrees while crown, eye, upper bill, throat, hoodie, body, scale, and registration remain fixed. Anatomy V2.1 passes with 3.5763-degree declared-axis error, 0.6209 mandible-length ratio, zero outside-mouth pixel change, and zero registration-bound delta. This is an internal review pass only; no user approval or runtime admission is implied.",
+        "reviewed_at": "2026-08-07T03:37:28.374577+00:00",
+        "reviewer": "codex-one-pair-aperture-aware-review",
         "runtime_admission_implied": false,
         "schema_version": 1,
         "state": "pass",
@@ -611,20 +611,17 @@
       "ordinal": 7,
       "pair_work_path": "pair-work/007-front-three-quarter-right",
       "pairwise_full_size_review": {
-        "defect_codes": [
-          "anatomy_v2_review_required",
-          "tip_alignment_out_of_bounds"
-        ],
-        "evidence_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-007-one-pair-2026-08-05-v2",
-        "note": "Anatomy V2 invalidates the prior batch-derived pass. Review and rebuild this exact closed/open pair independently; no user approval or runtime admission is implied.",
+        "defect_codes": [],
+        "evidence_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-007-aperture-aware-review-2026-08-06-v1",
+        "note": "Isolated live-projector review confirms the authored three-quarter closed/open pair is coherent without redrawing: the lower mandible shares the cheek hinge, follows the leftward upper-bill axis, and opens 38.7939 degrees while crown, eye, upper bill, throat, hoodie, body, scale, and registration remain fixed. Anatomy V2.1 passes with 3.5763-degree declared-axis error, 0.6209 mandible-length ratio, zero outside-mouth pixel change, and zero registration-bound delta. This is an internal full-size pairwise pass only; no user approval or runtime admission is implied.",
         "protocol_id": "kingfisher-full-size-pairwise-v1",
         "queued_at": "2026-07-31T05:30:00+00:00",
-        "reviewed_at": "2026-08-07T01:13:17.529347+00:00",
-        "reviewer": "codex-kingfisher-anatomy-v2",
+        "reviewed_at": "2026-08-07T03:40:47.382266+00:00",
+        "reviewer": "codex-one-pair-aperture-aware-review",
         "runtime_admission_implied": false,
         "schema_version": 1,
         "source_disposition": "full_size_pairwise_review",
-        "state": "needs_rebuild",
+        "state": "pass",
         "user_approval_implied": false
       },
       "pairwise_full_size_review_history": [
@@ -705,6 +702,29 @@
             "schema_version": 1,
             "source_disposition": "full_size_pairwise_review",
             "state": "pass",
+            "user_approval_implied": false
+          }
+        },
+        {
+          "reason": "Superseded by a later full-size pairwise review disposition.",
+          "reporter": "codex-one-pair-aperture-aware-review",
+          "schema_version": 1,
+          "superseded_at": "2026-08-07T03:40:47.382266+00:00",
+          "superseded_review": {
+            "defect_codes": [
+              "anatomy_v2_review_required",
+              "tip_alignment_out_of_bounds"
+            ],
+            "evidence_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-007-one-pair-2026-08-05-v2",
+            "note": "Anatomy V2 invalidates the prior batch-derived pass. Review and rebuild this exact closed/open pair independently; no user approval or runtime admission is implied.",
+            "protocol_id": "kingfisher-full-size-pairwise-v1",
+            "queued_at": "2026-07-31T05:30:00+00:00",
+            "reviewed_at": "2026-08-07T01:13:17.529347+00:00",
+            "reviewer": "codex-kingfisher-anatomy-v2",
+            "runtime_admission_implied": false,
+            "schema_version": 1,
+            "source_disposition": "full_size_pairwise_review",
+            "state": "needs_rebuild",
             "user_approval_implied": false
           }
         }
@@ -6559,11 +6579,11 @@
   "pairwise_full_size_review_summary": {
     "complete": false,
     "missing_count": 0,
-    "needs_rebuild_count": 15,
+    "needs_rebuild_count": 14,
     "not_observable_count": 2,
     "pair_count": 66,
-    "pass_count": 49,
-    "passing_disposition_count": 51,
+    "pass_count": 50,
+    "passing_disposition_count": 52,
     "pending_count": 0,
     "protocol_id": "kingfisher-full-size-pairwise-v1",
     "reviewed_count": 66,

@@ -142,6 +142,68 @@ class ComposeKingfisherPairMandiblePatchTests(unittest.TestCase):
         self.assertTrue(report["checks"]["direction_matches_upper_beak"])
         self.assertLessEqual(report["tip_offset_ratio"], 0.35)
 
+    def test_beak_anatomy_accepts_coherent_wide_open_profile(self):
+        report = beak_anatomy_metrics(
+            hinge=(449, 253),
+            hinge_radius=10,
+            upper_beak_polygon=[
+                (449, 247),
+                (346, 226),
+                (344, 267),
+                (410, 275),
+                (449, 261),
+            ],
+            mandible_polygon=[
+                (449, 250),
+                (456, 257),
+                (448, 280),
+                (390, 307),
+                (381, 301),
+                (404, 272),
+            ],
+            cavity_polygon=[
+                (406, 258),
+                (449, 248),
+                (455, 263),
+                (438, 280),
+                (392, 300),
+                (402, 276),
+            ],
+            direction_vector=(-1, 0),
+        )
+
+        self.assertTrue(report["passed"])
+        self.assertEqual(report["inferred_upper_tip"], [345.0, 246.5])
+        self.assertGreater(report["tip_offset_ratio"], 0.35)
+        self.assertLess(report["opening_angle_degrees"], 50)
+
+    def test_beak_anatomy_rejects_implausibly_wide_opening(self):
+        report = beak_anatomy_metrics(
+            hinge=(100, 100),
+            hinge_radius=8,
+            upper_beak_polygon=[
+                (100, 94),
+                (170, 96),
+                (170, 104),
+                (100, 106),
+            ],
+            mandible_polygon=[
+                (100, 100),
+                (140, 180),
+                (100, 114),
+            ],
+            cavity_polygon=[
+                (100, 102),
+                (130, 150),
+                (100, 110),
+            ],
+            direction_vector=(1, 0),
+        )
+
+        self.assertFalse(report["passed"])
+        self.assertFalse(report["checks"]["plausible_opening_angle"])
+        self.assertGreater(report["opening_angle_degrees"], 50)
+
     def _sources(self, root: Path, *, detached: bool = False) -> tuple[Path, Path]:
         resting_path = root / "resting.png"
         generated_path = root / "generated.png"
