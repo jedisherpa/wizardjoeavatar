@@ -4667,3 +4667,27 @@ Full-size evidence:
 This is an internal visual pass only. The reopened queue now contains 5
 internal passes, 59 pending observable pairs, and 2 not-observable rear views.
 User approval and runtime admission remain zero.
+
+### Pair 8 isolated relaxed-idle review
+
+Pair 8 (`relaxed-idle`) was reviewed independently at enlarged beak scale,
+full-projector size, and in a six-second closed/open loop. The retained
+tight-anatomy mate uses one connected lower mandible opening from hinge
+`(439, 250)` on the same screen-left axis as the immutable upper bill. The
+lower tip remains behind the upper tip and the deliberately restrained opening
+fits the relaxed performance state.
+
+The speaking frame retains SHA-256
+`628efc0df78675867d03cd52a97ff4afa33e43511728ff1c767339ca3a1a4e95`.
+Its anatomy measures a `22.3205` degree opening, `0.9124`
+mandible-to-upper reach ratio, and `0.3746` normalized tip offset. The audit
+reports 1,645 changed rendered mouth pixels, outside-mouth mean difference
+`0.0`, registration delta `0`, and silhouette IoU `0.995701`.
+
+Full-size evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-008-one-pair-2026-08-07-v4/`
+
+This is an internal visual pass only. The reopened queue now contains 6
+internal passes, 58 pending observable pairs, and 2 not-observable rear views.
+User approval and runtime admission remain zero.
