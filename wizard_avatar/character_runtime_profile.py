@@ -35,6 +35,7 @@ SPEECH_MOUTH_SHAPES = frozenset(
 )
 PROP_COMPOSITIONS = frozenset({"whole_pose", "overlay"})
 _IDENTIFIER = re.compile(r"^[a-z][a-z0-9_]{0,63}$")
+_POSE_ID = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._:-]{0,127}$")
 
 
 class CharacterRuntimeProfileValidationError(ValueError):
@@ -63,6 +64,7 @@ class CharacterRuntimeProfile:
     locomotion_cycles: Mapping[str, Tuple[str, ...]]
     speech_poses: Tuple[str, ...]
     speech_pose_map: Mapping[str, str]
+    speech_pose_pairs: Mapping[str, str]
     blink_poses: Mapping[str, str]
     props: Mapping[str, PropBinding]
 
@@ -73,6 +75,8 @@ class CharacterRuntimeProfile:
             *self.action_poses.values(),
             *self.speech_poses,
             *self.speech_pose_map.values(),
+            *self.speech_pose_pairs.keys(),
+            *self.speech_pose_pairs.values(),
             *self.blink_poses.values(),
         }
         for cycle in self.locomotion_cycles.values():
@@ -125,16 +129,16 @@ def _parse_character_runtime_profile(
     if (
         isinstance(schema_version, bool)
         or not isinstance(schema_version, int)
-        or schema_version not in {1, 2}
+        or schema_version not in {1, 2, 3}
     ):
         raise CharacterRuntimeProfileValidationError(
-            "schema_version must be 1 or 2"
+            "schema_version must be 1, 2, or 3"
         )
-    fields = (
-        common_fields
-        if schema_version == 1
-        else common_fields | {"speech_pose_map"}
-    )
+    fields = common_fields
+    if schema_version >= 2:
+        fields |= {"speech_pose_map"}
+    if schema_version >= 3:
+        fields |= {"speech_pose_pairs"}
     _closed(raw, fields, "runtime profile")
     character_id = _text(raw["character_id"], "character_id")
     default_pose_id = _text(raw["default_pose_id"], "default_pose_id")
@@ -200,13 +204,9 @@ def _parse_character_runtime_profile(
             raw["speech_pose_map"],
             "speech_pose_map",
         )
-        if speech_poses and set(speech_pose_map) != SPEECH_MOUTH_SHAPES:
+        if speech_pose_map and set(speech_pose_map) != SPEECH_MOUTH_SHAPES:
             raise CharacterRuntimeProfileValidationError(
                 "speech_pose_map must define all runtime mouth shapes exactly"
-            )
-        if not speech_poses and speech_pose_map:
-            raise CharacterRuntimeProfileValidationError(
-                "speech_pose_map must be empty when speech_poses is empty"
             )
         unknown_speech_poses = sorted(
             set(speech_pose_map.values()) - set(speech_poses)
@@ -217,6 +217,51 @@ def _parse_character_runtime_profile(
                     ", ".join(unknown_speech_poses)
                 )
             )
+    speech_pose_pairs: Mapping[str, str] = MappingProxyType({})
+    if schema_version >= 3:
+        speech_pose_pairs = _pose_pair_mapping(
+            raw["speech_pose_pairs"],
+            "speech_pose_pairs",
+        )
+        if len(set(speech_pose_pairs.values())) != len(speech_pose_pairs):
+            raise CharacterRuntimeProfileValidationError(
+                "speech_pose_pairs speaking poses must be unique"
+            )
+        overlap = sorted(
+            set(speech_pose_pairs) & set(speech_pose_pairs.values())
+        )
+        if overlap:
+            raise CharacterRuntimeProfileValidationError(
+                "speech_pose_pairs resting and speaking poses overlap: {}".format(
+                    ", ".join(overlap)
+                )
+            )
+        unknown_pair_poses = sorted(
+            set(speech_pose_pairs.values()) - set(speech_poses)
+        )
+        if unknown_pair_poses:
+            raise CharacterRuntimeProfileValidationError(
+                "speech_pose_pairs references undeclared speech poses: {}".format(
+                    ", ".join(unknown_pair_poses)
+                )
+            )
+    if (
+        schema_version >= 2
+        and speech_poses
+        and not speech_pose_map
+        and not speech_pose_pairs
+    ):
+        raise CharacterRuntimeProfileValidationError(
+            "speech poses require a mouth map or body-locked pose pairs"
+        )
+    if (
+        schema_version >= 2
+        and not speech_poses
+        and (speech_pose_map or speech_pose_pairs)
+    ):
+        raise CharacterRuntimeProfileValidationError(
+            "speech mappings must be empty when speech_poses is empty"
+        )
     blink_poses = _string_mapping(raw["blink_poses"], "blink_poses")
     if set(blink_poses) != BLINK_STATES:
         raise CharacterRuntimeProfileValidationError(
@@ -239,6 +284,7 @@ def _parse_character_runtime_profile(
         locomotion_cycles=locomotion_cycles,
         speech_poses=speech_poses,
         speech_pose_map=speech_pose_map,
+        speech_pose_pairs=speech_pose_pairs,
         blink_poses=blink_poses,
         props=props,
     )
@@ -391,6 +437,27 @@ def _string_mapping(value: Any, path: str) -> Mapping[str, str]:
             item,
             "{}.{}".format(path, key),
         )
+    return MappingProxyType(result)
+
+
+def _pose_pair_mapping(value: Any, path: str) -> Mapping[str, str]:
+    if not isinstance(value, Mapping):
+        raise CharacterRuntimeProfileValidationError(
+            "{} must be an object".format(path)
+        )
+    result: dict[str, str] = {}
+    for key, item in value.items():
+        resting_pose = _text(key, "{} key".format(path))
+        speaking_pose = _text(item, "{}.{}".format(path, key))
+        if _POSE_ID.fullmatch(resting_pose) is None:
+            raise CharacterRuntimeProfileValidationError(
+                "{} key must be a stable pose ID".format(path)
+            )
+        if _POSE_ID.fullmatch(speaking_pose) is None:
+            raise CharacterRuntimeProfileValidationError(
+                "{}.{} must be a stable pose ID".format(path, key)
+            )
+        result[resting_pose] = speaking_pose
     return MappingProxyType(result)
 
 

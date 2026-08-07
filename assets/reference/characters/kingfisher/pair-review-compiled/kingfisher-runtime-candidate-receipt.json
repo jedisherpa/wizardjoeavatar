@@ -1,0 +1,14 @@
+{
+  "candidate_library_index_sha256": "65aab34f0e3cfd5c215c3de197244cf32de048ca71e94800970dedcfb67860ca",
+  "character_id": "kingfisher",
+  "package": "kingfisher-character-package-v2.json",
+  "package_sha256": "sha256:8629b8cdda4eb22523b9f13027e4418295f0857089f0579c8a37d4a3897f44d3",
+  "pose_count": 176,
+  "runtime_admitted": false,
+  "schema_version": 1,
+  "source_library_index": "assets/reference/characters/kingfisher/pair-review-compiled/library-index.json",
+  "source_library_index_sha256": "e2cfbb9b880df3416da9d7d4edacd4fae38300b193028f92585f5036dc617efc",
+  "speech_pair_count": 88,
+  "status": "candidate_review_only",
+  "user_approved_count": 0
+}

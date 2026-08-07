@@ -67,6 +67,7 @@ class CharacterRuntimeProfileTests(unittest.TestCase):
 
             self.assertEqual(profile.schema_version, 1)
             self.assertEqual(dict(profile.speech_pose_map), {})
+            self.assertEqual(dict(profile.speech_pose_pairs), {})
 
     def test_v2_profile_requires_complete_speech_map(self):
         with tempfile.TemporaryDirectory() as directory:
@@ -78,6 +79,62 @@ class CharacterRuntimeProfileTests(unittest.TestCase):
             with self.assertRaisesRegex(
                 CharacterRuntimeProfileValidationError,
                 "all runtime mouth shapes",
+            ):
+                load_character_runtime_profile(path)
+
+    def test_v3_accepts_body_locked_speech_pose_pairs(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "profile.json"
+            payload = self._profile()
+            payload["schema_version"] = 3
+            payload["speech_pose_pairs"] = {
+                "kingfisher.act.001.neutral-front": (
+                    "kingfisher.act.111.neutral-front-speaking-beak"
+                ),
+                "kingfisher.act.012.explain-one-point": (
+                    "kingfisher.act.122.explain-one-point-speaking-beak"
+                ),
+            }
+            payload["speech_poses"].extend(
+                payload["speech_pose_pairs"].values()
+            )
+            path.write_text(json.dumps(payload), encoding="utf-8")
+
+            profile = load_character_runtime_profile(path)
+
+            self.assertEqual(profile.schema_version, 3)
+            self.assertEqual(
+                profile.speech_pose_pairs[
+                    "kingfisher.act.012.explain-one-point"
+                ],
+                "kingfisher.act.122.explain-one-point-speaking-beak",
+            )
+            self.assertIn(
+                "kingfisher.act.111.neutral-front-speaking-beak",
+                profile.referenced_pose_ids(),
+            )
+
+    def test_v3_rejects_reused_or_overlapping_speech_mates(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "profile.json"
+            payload = self._profile()
+            payload["schema_version"] = 3
+            payload["speech_pose_pairs"] = {
+                "pose.one": "pose.open",
+                "pose.two": "pose.open",
+            }
+            path.write_text(json.dumps(payload), encoding="utf-8")
+            with self.assertRaisesRegex(
+                CharacterRuntimeProfileValidationError,
+                "speaking poses must be unique",
+            ):
+                load_character_runtime_profile(path)
+
+            payload["speech_pose_pairs"] = {"pose.one": "pose.one"}
+            path.write_text(json.dumps(payload), encoding="utf-8")
+            with self.assertRaisesRegex(
+                CharacterRuntimeProfileValidationError,
+                "resting and speaking poses overlap",
             ):
                 load_character_runtime_profile(path)
 

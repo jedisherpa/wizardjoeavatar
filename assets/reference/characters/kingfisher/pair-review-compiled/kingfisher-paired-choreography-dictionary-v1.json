@@ -1,0 +1,268 @@
+{
+  "character_id": "kingfisher",
+  "dictionary_id": "choreography:kingfisher-paired-performance-v1",
+  "instructions": {
+    "locomotion_speech_policy": "allowed",
+    "maximum_gestures_per_phrase": 2,
+    "minimum_stillness_ms": 700,
+    "repetition_window_ms": 14000,
+    "selection_unit": "phrase",
+    "speech_motion_policy": "whole_pose",
+    "transition_policy": "authored_graph",
+    "unsupported_intent_policy": "characterful_neutral"
+  },
+  "intent_bindings": {
+    "call_to_action": {
+      "action_ids": [],
+      "clip_ids": [],
+      "interrupt_policy": "commit_then_recover",
+      "minimum_hold_ms": 900,
+      "pose_ids": [
+        "kingfisher.act.107.call-to-action-resting-beak",
+        "kingfisher.act.108.call-to-action-speaking-beak"
+      ],
+      "recovery_intent": "resolve",
+      "roles": [
+        "gesture",
+        "speaking"
+      ],
+      "speech_compatible": true
+    },
+    "comic_aside": {
+      "action_ids": [],
+      "clip_ids": [],
+      "interrupt_policy": "phrase_boundary",
+      "minimum_hold_ms": 850,
+      "pose_ids": [
+        "kingfisher.act.105.comic-aside-resting-beak",
+        "kingfisher.act.106.comic-aside-speaking-beak"
+      ],
+      "recovery_intent": "speak",
+      "roles": [
+        "gesture",
+        "speaking"
+      ],
+      "speech_compatible": true
+    },
+    "confess": {
+      "action_ids": [],
+      "clip_ids": [],
+      "interrupt_policy": "phrase_boundary",
+      "minimum_hold_ms": 1200,
+      "pose_ids": [
+        "kingfisher.act.103.heartfelt-confession-resting-beak",
+        "kingfisher.act.104.heartfelt-confession-speaking-beak"
+      ],
+      "recovery_intent": "resolve",
+      "roles": [
+        "gesture",
+        "speaking"
+      ],
+      "speech_compatible": true
+    },
+    "explain": {
+      "action_ids": [],
+      "clip_ids": [],
+      "interrupt_policy": "phrase_boundary",
+      "minimum_hold_ms": 700,
+      "pose_ids": [
+        "kingfisher.act.012.explain-one-point",
+        "kingfisher.act.013.balance-two-ideas",
+        "kingfisher.act.089.single-point-emphasis-resting-beak",
+        "kingfisher.act.090.single-point-emphasis-speaking-beak",
+        "kingfisher.act.091.compare-two-sides-resting-beak",
+        "kingfisher.act.092.compare-two-sides-speaking-beak",
+        "kingfisher.act.093.frame-big-idea-resting-beak",
+        "kingfisher.act.094.frame-big-idea-speaking-beak",
+        "kingfisher.act.095.shape-small-detail-resting-beak",
+        "kingfisher.act.096.shape-small-detail-speaking-beak"
+      ],
+      "recovery_intent": "speak",
+      "roles": [
+        "gesture",
+        "speaking"
+      ],
+      "speech_compatible": true
+    },
+    "listen": {
+      "action_ids": [],
+      "clip_ids": [],
+      "interrupt_policy": "immediate",
+      "minimum_hold_ms": 800,
+      "pose_ids": [
+        "kingfisher.act.019.neutral-listening",
+        "kingfisher.act.020.lean-in-listening",
+        "kingfisher.act.021.skeptical-listening",
+        "kingfisher.act.022.small-acknowledgment",
+        "kingfisher.act.023.emphatic-agreement"
+      ],
+      "recovery_intent": "neutral",
+      "roles": [
+        "listening"
+      ],
+      "speech_compatible": false
+    },
+    "neutral": {
+      "action_ids": [],
+      "clip_ids": [],
+      "interrupt_policy": "immediate",
+      "minimum_hold_ms": 900,
+      "pose_ids": [
+        "kingfisher.act.008.relaxed-idle",
+        "kingfisher.act.009.attentive-idle",
+        "kingfisher.act.067.center-mark-resting-beak"
+      ],
+      "recovery_intent": null,
+      "roles": [
+        "neutral",
+        "recovery"
+      ],
+      "speech_compatible": true
+    },
+    "pace_left": {
+      "action_ids": [],
+      "clip_ids": [],
+      "interrupt_policy": "commit_then_recover",
+      "minimum_hold_ms": 300,
+      "pose_ids": [
+        "kingfisher.act.069.left-step-anticipation-resting-beak",
+        "kingfisher.act.070.left-step-anticipation-speaking-beak",
+        "kingfisher.act.071.left-stride-passing-resting-beak",
+        "kingfisher.act.072.left-stride-passing-speaking-beak",
+        "kingfisher.act.073.left-mark-arrival-resting-beak",
+        "kingfisher.act.074.left-mark-arrival-speaking-beak",
+        "kingfisher.act.075.left-audience-turn-resting-beak",
+        "kingfisher.act.076.left-audience-turn-speaking-beak"
+      ],
+      "recovery_intent": "neutral",
+      "roles": [
+        "locomotion",
+        "speaking"
+      ],
+      "speech_compatible": true
+    },
+    "pace_right": {
+      "action_ids": [],
+      "clip_ids": [],
+      "interrupt_policy": "commit_then_recover",
+      "minimum_hold_ms": 300,
+      "pose_ids": [
+        "kingfisher.act.077.right-step-anticipation-resting-beak",
+        "kingfisher.act.078.right-step-anticipation-speaking-beak",
+        "kingfisher.act.079.right-stride-passing-resting-beak",
+        "kingfisher.act.080.right-stride-passing-speaking-beak",
+        "kingfisher.act.081.right-mark-arrival-resting-beak",
+        "kingfisher.act.082.right-mark-arrival-speaking-beak",
+        "kingfisher.act.083.right-audience-turn-resting-beak",
+        "kingfisher.act.084.right-audience-turn-speaking-beak"
+      ],
+      "recovery_intent": "neutral",
+      "roles": [
+        "locomotion",
+        "speaking"
+      ],
+      "speech_compatible": true
+    },
+    "question": {
+      "action_ids": [],
+      "clip_ids": [],
+      "interrupt_policy": "phrase_boundary",
+      "minimum_hold_ms": 800,
+      "pose_ids": [
+        "kingfisher.act.030.rhetorical-question",
+        "kingfisher.act.097.rhetorical-question-stage-resting-beak",
+        "kingfisher.act.098.rhetorical-question-stage-speaking-beak"
+      ],
+      "recovery_intent": "speak",
+      "roles": [
+        "gesture",
+        "speaking"
+      ],
+      "speech_compatible": true
+    },
+    "resolve": {
+      "action_ids": [],
+      "clip_ids": [],
+      "interrupt_policy": "immediate",
+      "minimum_hold_ms": 1100,
+      "pose_ids": [
+        "kingfisher.act.109.warm-resolution-resting-beak",
+        "kingfisher.act.110.warm-resolution-speaking-beak"
+      ],
+      "recovery_intent": "neutral",
+      "roles": [
+        "recovery",
+        "speaking"
+      ],
+      "speech_compatible": true
+    },
+    "reveal": {
+      "action_ids": [],
+      "clip_ids": [],
+      "interrupt_policy": "commit_then_recover",
+      "minimum_hold_ms": 850,
+      "pose_ids": [
+        "kingfisher.act.101.stage-reveal-resting-beak",
+        "kingfisher.act.102.stage-reveal-speaking-beak"
+      ],
+      "recovery_intent": "speak",
+      "roles": [
+        "gesture",
+        "reaction",
+        "speaking"
+      ],
+      "speech_compatible": true
+    },
+    "speak": {
+      "action_ids": [],
+      "clip_ids": [],
+      "interrupt_policy": "phrase_boundary",
+      "minimum_hold_ms": 500,
+      "pose_ids": [
+        "kingfisher.act.011.neutral-speaking-gesture",
+        "kingfisher.act.068.center-mark-speaking-beak",
+        "kingfisher.act.086.downstage-lean-speaking-beak"
+      ],
+      "recovery_intent": "neutral",
+      "roles": [
+        "speaking"
+      ],
+      "speech_compatible": true
+    },
+    "suspense": {
+      "action_ids": [],
+      "clip_ids": [],
+      "interrupt_policy": "phrase_boundary",
+      "minimum_hold_ms": 1100,
+      "pose_ids": [
+        "kingfisher.act.099.suspense-hold-resting-beak",
+        "kingfisher.act.100.suspense-hold-speaking-beak"
+      ],
+      "recovery_intent": "reveal",
+      "roles": [
+        "gesture",
+        "speaking"
+      ],
+      "speech_compatible": true
+    },
+    "welcome": {
+      "action_ids": [],
+      "clip_ids": [],
+      "interrupt_policy": "phrase_boundary",
+      "minimum_hold_ms": 900,
+      "pose_ids": [
+        "kingfisher.act.026.warm-welcome",
+        "kingfisher.act.087.open-wing-welcome-resting-beak",
+        "kingfisher.act.088.open-wing-welcome-speaking-beak"
+      ],
+      "recovery_intent": "speak",
+      "roles": [
+        "gesture",
+        "speaking"
+      ],
+      "speech_compatible": true
+    }
+  },
+  "library_class": "comprehensive_performance",
+  "schema_version": 1
+}

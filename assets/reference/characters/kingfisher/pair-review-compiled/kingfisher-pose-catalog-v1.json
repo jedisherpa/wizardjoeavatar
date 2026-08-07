@@ -1,0 +1,7750 @@
+{
+  "asset_set_id": "kingfisher-registered-alpha-176-pair-review-v001-runtime-candidate-v1-runtime-candidate-v1",
+  "character_id": "kingfisher",
+  "poses": [
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "neutral front",
+      "facing": "south",
+      "id": "kingfisher.act.001.neutral-front",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#c7a0423047e6747a73c4e5702e3f73464c04588b957d20d354b1d3ad5267f379",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "resting"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "neutral front speaking beak",
+      "facing": "south",
+      "id": "kingfisher.act.111.neutral-front-speaking-beak",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#d440459dd231d5572d214475096a2ebb3d8ba65baa73ecc7b1d7355ee66b975e",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "speaking"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "front three quarter left",
+      "facing": "southwest",
+      "id": "kingfisher.act.002.front-three-quarter-left",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#5c2d02eddaca808406925366c8321c580e95b288854b51902c873758b514fba2",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "resting"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "front three quarter left speaking beak",
+      "facing": "south",
+      "id": "kingfisher.act.112.front-three-quarter-left-speaking-beak",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#4179b960947613a632ae19f35eb4cb4dbd5d5f153d20ff06494b987b6142e9ab",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "speaking"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "left profile",
+      "facing": "west",
+      "id": "kingfisher.act.003.left-profile",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#28409fb9db40c9adb9d06512295d89c3969e566f565714f00444f1c4fdc9325e",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "resting"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "left profile speaking beak",
+      "facing": "south",
+      "id": "kingfisher.act.113.left-profile-speaking-beak",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#51c3fbb30e99788a2cd54d6437a681216f148fa36efa13c0aed94dd9e674a059",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "speaking"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "back three quarter left",
+      "facing": "northwest",
+      "id": "kingfisher.act.004.back-three-quarter-left",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#c2e96fc77afca580deb16a640da5f175eb3a9135f548bb096a91b9b318ec5e4b",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "resting"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "back three quarter left speaking beak",
+      "facing": "south",
+      "id": "kingfisher.act.114.back-three-quarter-left-speaking-beak",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#c2e96fc77afca580deb16a640da5f175eb3a9135f548bb096a91b9b318ec5e4b",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "speaking"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "neutral back",
+      "facing": "north",
+      "id": "kingfisher.act.005.neutral-back",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#6caa32a67db5c981e323f04b8fc91555d13905c9d8c48cc4ea08431e8a1f17fa",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "resting"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "neutral back speaking beak",
+      "facing": "south",
+      "id": "kingfisher.act.115.neutral-back-speaking-beak",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#6caa32a67db5c981e323f04b8fc91555d13905c9d8c48cc4ea08431e8a1f17fa",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "speaking"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "right profile",
+      "facing": "east",
+      "id": "kingfisher.act.006.right-profile",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#a46f8659c27392b453d657eecd79ac00471f793241867b0302791b7ab80973c0",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "resting"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "right profile speaking beak",
+      "facing": "south",
+      "id": "kingfisher.act.116.right-profile-speaking-beak",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#ca350ca0ef4b41c36a050a43430d3d738f5e5722204d03c903bdec8eebe7115c",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "speaking"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "front three quarter right",
+      "facing": "southeast",
+      "id": "kingfisher.act.007.front-three-quarter-right",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#1082f653a04dff1fe39e9d9ebfadf8b9c8841f5a2baffa6bcfebd78d8389f3f0",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "resting"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "front three quarter right speaking beak",
+      "facing": "south",
+      "id": "kingfisher.act.117.front-three-quarter-right-speaking-beak",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#9ac396425c6913847780a72373fb4c3d3a9bd5b091c601399e296a16f51b8020",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "speaking"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          479,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 479,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "relaxed idle",
+      "facing": "south",
+      "id": "kingfisher.act.008.relaxed-idle",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        479,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#2bcb55489d95691706215e59c7dfe86af3c704f95f7267f9116bd5a80d2a9fa4",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "resting"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          479,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 479,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "relaxed idle speaking beak",
+      "facing": "south",
+      "id": "kingfisher.act.118.relaxed-idle-speaking-beak",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        479,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#648c1adfc2b16f555cac09931d2924cbbe746887acc5b7777e5347d30311df39",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "speaking"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "attentive idle",
+      "facing": "south",
+      "id": "kingfisher.act.009.attentive-idle",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#b1a9793203a9cd2ed648953a2f3da58c74c9b68fb0bff5cd9c63ee9453fde3e6",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "resting"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "attentive idle speaking beak",
+      "facing": "south",
+      "id": "kingfisher.act.119.attentive-idle-speaking-beak",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#dbf4edcf65ad6ac5d9d49e60a1bd6f187505ef8d95867d5a662f9456b85251fc",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "speaking"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          479,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 479,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "ready stance",
+      "facing": "south",
+      "id": "kingfisher.act.010.ready-stance",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        479,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#6cf94e55fa064c73ff0063bbaa2fa7925b8a5f326824f15aa6adbe26b8d23400",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "resting"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          479,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 479,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "ready stance speaking beak",
+      "facing": "south",
+      "id": "kingfisher.act.120.ready-stance-speaking-beak",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        479,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#c4e0ca9839d224117fe5900d295df9b331b0a6288ece072767b27376a4eb5cbd",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "speaking"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          479,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 479,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "neutral speaking gesture",
+      "facing": "south",
+      "id": "kingfisher.act.011.neutral-speaking-gesture",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        479,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#5f99e2ffa81846605c9ca42f210e6d158e2c4e2056bac3d40629d9b148247a98",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "resting"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          479,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 479,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "neutral speaking gesture speaking beak",
+      "facing": "south",
+      "id": "kingfisher.act.121.neutral-speaking-gesture-speaking-beak",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        479,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#501af08efaebc5cc420d2e082440776bff3e3174accaf24027aab2da48f41784",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "speaking"
+      ]
+    },
+    {
+      "actions": [
+        "explaining"
+      ],
+      "anchors": {
+        "root": [
+          479,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 479,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "explain one point",
+      "facing": "south",
+      "id": "kingfisher.act.012.explain-one-point",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        479,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#de6b12ad9891eeb90faa686f010a8dac7dd37439935932572f6b758f1e661e4a",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "resting"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          479,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 479,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "explain one point speaking beak",
+      "facing": "south",
+      "id": "kingfisher.act.122.explain-one-point-speaking-beak",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        479,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#6daece0a84b1c1128d527a37f2feae23335862eaf8e36ef2b7299ebdc6407a1c",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "speaking"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "balance two ideas",
+      "facing": "south",
+      "id": "kingfisher.act.013.balance-two-ideas",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#bd6aeeae98caf20dfb8affff874bf14ed6d91de067ff9851d353478c51f2cbb0",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "resting"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "balance two ideas speaking beak",
+      "facing": "south",
+      "id": "kingfisher.act.123.balance-two-ideas-speaking-beak",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#5d2012e4ce5b20d9ac49c5f6eb9a03825cbb85892bc9e5e645e8007001e9b2a9",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "speaking"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "present screen left",
+      "facing": "south",
+      "id": "kingfisher.act.014.present-screen-left",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#04da4eca164af19b887482c5abcaa1bf6272ac43dc6c258e001d4a50de322762",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "resting"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "present screen left speaking beak",
+      "facing": "south",
+      "id": "kingfisher.act.124.present-screen-left-speaking-beak",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#387900b56885b57863a88caf15d63c751ef36a198854bcda724f39c53018a5e5",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "speaking"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "present screen right",
+      "facing": "south",
+      "id": "kingfisher.act.015.present-screen-right",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#2811f1b2652456694413b4718d287f852a23e4c4bfc7b492cf153c09081eab4d",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "resting"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "present screen right speaking beak",
+      "facing": "south",
+      "id": "kingfisher.act.125.present-screen-right-speaking-beak",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#d54b5da6a73e3114f1bf008bd1888790b844fe462ba881add01a1ecf20859a71",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "speaking"
+      ]
+    },
+    {
+      "actions": [
+        "pointing"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "point to viewer",
+      "facing": "south",
+      "id": "kingfisher.act.016.point-to-viewer",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#c2be8faa6acd18dd9998f2146fd97b0708d31163b201cdba3f40eac431237885",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "resting"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "point to viewer speaking beak",
+      "facing": "south",
+      "id": "kingfisher.act.126.point-to-viewer-speaking-beak",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#0a09b540da349c5ab22aca68c1b4f7dfc58648b4cf897b6859acd12c949483c2",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "speaking"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "insight upward point",
+      "facing": "south",
+      "id": "kingfisher.act.017.insight-upward-point",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#fefa0d2e84a09a09f795bcb0bc5166c510a0d142d58acf37ba3dc4168e2dc7e9",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "resting"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "insight upward point speaking beak",
+      "facing": "south",
+      "id": "kingfisher.act.127.insight-upward-point-speaking-beak",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#0ff049f5fa0d0b876ecf963fc74b9ed398df8cae8057650337b636472ad77f4b",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "speaking"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "detail downward point",
+      "facing": "south",
+      "id": "kingfisher.act.018.detail-downward-point",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#c0f493f2979bc0c24e77329ddba079f49bf401518d82b22d7e8111618a3b3ac6",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "resting"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "detail downward point speaking beak",
+      "facing": "south",
+      "id": "kingfisher.act.128.detail-downward-point-speaking-beak",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#fd869e6b80d70c2ace588ef578e2f84425e09002c5db978e7941021fcd5f066a",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "speaking"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "neutral listening",
+      "facing": "south",
+      "id": "kingfisher.act.019.neutral-listening",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#f61b39765586037c5d614c771bad40e4bc55fab70647800e927f46bde882c4cc",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "resting"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "neutral listening speaking beak",
+      "facing": "south",
+      "id": "kingfisher.act.129.neutral-listening-speaking-beak",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#64cf6bc1ed86d6c92825d0c375f5f675d9d7f87247ea4258446eeae7d1b91ed2",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "speaking"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          479,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 479,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "lean in listening",
+      "facing": "south",
+      "id": "kingfisher.act.020.lean-in-listening",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        479,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#863803c2b962f1e106a150fd3e59f35ec2746d68216e54db7eb17db4ac5aafd8",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "resting"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          479,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 479,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "lean in listening speaking beak",
+      "facing": "south",
+      "id": "kingfisher.act.130.lean-in-listening-speaking-beak",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        479,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#a44e26ae8fe2bc98e2fcb2fb26741c459fc761f4a3259ea44f39bc84531f2189",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "speaking"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          479,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 479,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "skeptical listening",
+      "facing": "south",
+      "id": "kingfisher.act.021.skeptical-listening",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        479,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#14b50b328475450400eb45994a7079ba459b48e25a38d4cd9f0985af6fc30275",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "resting"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          479,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 479,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "skeptical listening speaking beak",
+      "facing": "south",
+      "id": "kingfisher.act.131.skeptical-listening-speaking-beak",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        479,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#0fa9111445d44b26f20fa25a637135d062578ac7306c62f0bd623999e0a2a2ab",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "speaking"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          479,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 479,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "small acknowledgment",
+      "facing": "south",
+      "id": "kingfisher.act.022.small-acknowledgment",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        479,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#542ef3983783acf3dea80dbf3f946b60f955b62c76d820266044001997215e60",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "resting"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          479,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 479,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "small acknowledgment speaking beak",
+      "facing": "south",
+      "id": "kingfisher.act.132.small-acknowledgment-speaking-beak",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        479,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#d4a4ff52ee9dbe6626fa5164a359ce7cde6b3d6636c4a7e3cd2c52233098cf24",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "speaking"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "emphatic agreement",
+      "facing": "south",
+      "id": "kingfisher.act.023.emphatic-agreement",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#8481e46fab9faf6928b7a0938870862f948b00bad8cc577a1e4d7cc99c58824b",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "resting"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "emphatic agreement speaking beak",
+      "facing": "south",
+      "id": "kingfisher.act.133.emphatic-agreement-speaking-beak",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#56fd47ee1c3869ce6f538ba16f0fcc230b3368f4e321024732595381f41b29da",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "speaking"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "polite interruption",
+      "facing": "south",
+      "id": "kingfisher.act.024.polite-interruption",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#f6701609e33164df851af37e175cd2eaa2020a561a02d44fcac025624f14822c",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "resting"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "polite interruption speaking beak",
+      "facing": "south",
+      "id": "kingfisher.act.134.polite-interruption-speaking-beak",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#437b8884da186e4c2c03a4ff912b1129ba1c2823e2ceebcd77b0de3068de3656",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "speaking"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "hand over the floor",
+      "facing": "south",
+      "id": "kingfisher.act.025.hand-over-the-floor",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#6ad4c3a24fde8bcd2aae90a3bc227aa367d09ca24de2d72502e9853f280b72fb",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "resting"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "hand over the floor speaking beak",
+      "facing": "south",
+      "id": "kingfisher.act.135.hand-over-the-floor-speaking-beak",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#7a5d8ed62f9d620601f91fb439b90a5e029a6e1e08c7881cfe6219ba21e1b7ef",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "speaking"
+      ]
+    },
+    {
+      "actions": [
+        "warm_welcome"
+      ],
+      "anchors": {
+        "root": [
+          479,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 479,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "warm welcome",
+      "facing": "south",
+      "id": "kingfisher.act.026.warm-welcome",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        479,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#382260f0d331681d1e3a496f8864fcec718eadb0c41ac3c4d89c51b2bf63a7ee",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "resting"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          479,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 479,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "warm welcome speaking beak",
+      "facing": "south",
+      "id": "kingfisher.act.136.warm-welcome-speaking-beak",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        479,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#a42779e60dd6a0e5afdaad6ee1d8e8352447afc0941ab20dcf071f727c765adc",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "speaking"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "intimate confidence",
+      "facing": "south",
+      "id": "kingfisher.act.027.intimate-confidence",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#7736ecc2b2e392501f3e5672ce782f4b2aaa3972350802e50fde32fd9cb9672c",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "resting"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "intimate confidence speaking beak",
+      "facing": "south",
+      "id": "kingfisher.act.137.intimate-confidence-speaking-beak",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#f3b6eebb1fc218acfa0382f132d76bf082a15a2624218c1ffad2b475f9992193",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "speaking"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "strong declaration",
+      "facing": "south",
+      "id": "kingfisher.act.028.strong-declaration",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#4970454164995adc175610fcc93c0fec54fee63d4f11dec6b0aa5852ce7669df",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "resting"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "strong declaration speaking beak",
+      "facing": "south",
+      "id": "kingfisher.act.138.strong-declaration-speaking-beak",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#27de4d2658e872b97c80da075b265868644f2c7eea057e892a82c6ee6a56e88c",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "speaking"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "confidential whisper",
+      "facing": "south",
+      "id": "kingfisher.act.029.confidential-whisper",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#8f42776c145b26fe0c10f52612b03cf713f6e0f17f42ab66d441fd74f2c05d6c",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "resting"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "confidential whisper speaking beak",
+      "facing": "south",
+      "id": "kingfisher.act.139.confidential-whisper-speaking-beak",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#9d1e35dba13260ea2a3ea590046443e2221ea5070e607ffe22a4b2264d11582f",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "speaking"
+      ]
+    },
+    {
+      "actions": [
+        "rhetorical_question"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "rhetorical question",
+      "facing": "south",
+      "id": "kingfisher.act.030.rhetorical-question",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#20b3eb33b45b16957a536ca02ff485e3e6c6affee38bb7ee4091b4eafc1c6e99",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "resting"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "rhetorical question speaking beak",
+      "facing": "south",
+      "id": "kingfisher.act.140.rhetorical-question-speaking-beak",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#e96d790766f3a576dc56a764d8ad61a28de71db3448239f46541997c409778a7",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "speaking"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "compare two options",
+      "facing": "south",
+      "id": "kingfisher.act.031.compare-two-options",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#5afb0e4adb668b07d15d64a26a96b24863a45d1d9637d29eaa1cb5dc0a63b950",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "resting"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "compare two options speaking beak",
+      "facing": "south",
+      "id": "kingfisher.act.141.compare-two-options-speaking-beak",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#8c88f5430cce6008e883c99c9b6bed4e4a6ff8fdac00480e2ee786ef9dbde701",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "speaking"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "cause and effect",
+      "facing": "south",
+      "id": "kingfisher.act.032.cause-and-effect",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#2f52fbc6a7dc55b0583389e96ec19ebf1f2ba7e2c5c0464cf2da5ed8f5032460",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "resting"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "cause and effect speaking beak",
+      "facing": "south",
+      "id": "kingfisher.act.142.cause-and-effect-speaking-beak",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#70f52293432632eb0c63ac92493f9136855a8f645da7c633d1dc4357c19412b4",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "speaking"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          479,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 479,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "count one",
+      "facing": "south",
+      "id": "kingfisher.act.033.count-one",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        479,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#a597f9020007e025f40d6d01f40467861ad6e4fa6d5f41a60555fcd50ba9d75f",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "resting"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          479,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 479,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "count one speaking beak",
+      "facing": "south",
+      "id": "kingfisher.act.143.count-one-speaking-beak",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        479,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#bdff511da79667f48748138df7293eff05496fedf2eea5d31a9f4fd85a40e377",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "speaking"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          479,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 479,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "count two",
+      "facing": "south",
+      "id": "kingfisher.act.034.count-two",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        479,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#818c3efb1b0b7b08ea5f0eca2c7702a5d22917111d6565d0474ec4bf9b2ebbb2",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "resting"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          479,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 479,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "count two speaking beak",
+      "facing": "south",
+      "id": "kingfisher.act.144.count-two-speaking-beak",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        479,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#24870cd5eec1c264d7a6d58e4e9c6162b37afebafb54ccaaf53f27ffbb16649f",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "speaking"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "count three",
+      "facing": "south",
+      "id": "kingfisher.act.035.count-three",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#702f5f50af9ed63dd63699fb9d1a0a25b02c0e3c3847a579675dee6704918b28",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "resting"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "count three speaking beak",
+      "facing": "south",
+      "id": "kingfisher.act.145.count-three-speaking-beak",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#f99846e4a9f9c7c0b4af8b025a69d580f38542cadef95c2834cc2cdbef7aa7e5",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "speaking"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          479,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 479,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "protective boundary",
+      "facing": "south",
+      "id": "kingfisher.act.036.protective-boundary",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        479,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#f1b55b14bdd672edf585d87855d6c9d0768221b72ebdc06de4cbb944576985ae",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "resting"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          479,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 479,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "protective boundary speaking beak",
+      "facing": "south",
+      "id": "kingfisher.act.146.protective-boundary-speaking-beak",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        479,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#ef6676bdcd4f71ef3eca99a97bd00f085af6ea31a5f611fb17730f4bf3cb4346",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "speaking"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "gentle reassurance",
+      "facing": "south",
+      "id": "kingfisher.act.037.gentle-reassurance",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#c5995215237723435fe1b6a041cf2f7f396770968865d113ccb2847733f093aa",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "resting"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "gentle reassurance speaking beak",
+      "facing": "south",
+      "id": "kingfisher.act.147.gentle-reassurance-speaking-beak",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#217830b5497c59e8c7c459dd201e3109e499eb874e3a8f1948866de055160310",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "speaking"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "invitation to follow",
+      "facing": "south",
+      "id": "kingfisher.act.038.invitation-to-follow",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#a166221a3effde0065c0674594aee233ea29d2aecaf7f09a14dd2e9022da96aa",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "resting"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "invitation to follow speaking beak",
+      "facing": "south",
+      "id": "kingfisher.act.148.invitation-to-follow-speaking-beak",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#d81581eeb816856754de5f5ab60c3586464afbbb2d5f1dbd7b35bcc141b4002a",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "speaking"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "describe a vast scene",
+      "facing": "south",
+      "id": "kingfisher.act.039.describe-a-vast-scene",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#f272331a0df2abc880b38a659ca00fedad7786c5da33d4e02b8bcebca49e2f7b",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "resting"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "describe a vast scene speaking beak",
+      "facing": "south",
+      "id": "kingfisher.act.149.describe-a-vast-scene-speaking-beak",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#bb7d861293ba71637bdbe67398073b3a1ca1e1c3c1bbeb6f1fb56346b8faf4b1",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "speaking"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "describe a tiny detail",
+      "facing": "south",
+      "id": "kingfisher.act.040.describe-a-tiny-detail",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#da19b5303ab1dc3cb35fc8043b6372cdc7962e5e6a91783da7898bef29a93f07",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "resting"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "describe a tiny detail speaking beak",
+      "facing": "south",
+      "id": "kingfisher.act.150.describe-a-tiny-detail-speaking-beak",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#4ded69bb376f53a4f6cc3d58d8ecc7776018b7867bfa514b5fd77c8d3ab6ab1c",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "speaking"
+      ]
+    },
+    {
+      "actions": [
+        "centered_calm"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "centered calm",
+      "facing": "south",
+      "id": "kingfisher.act.041.centered-calm",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#77289ac00a2cffa2d01f8d6a6a99b960c53192aa5580080251aa32639cef6aed",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "resting"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "centered calm speaking beak",
+      "facing": "south",
+      "id": "kingfisher.act.151.centered-calm-speaking-beak",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#b4b3cfdda6dbda436bbcd21efcfb29fd7f414d3452f71a6f88ca0b22d8f2a461",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "speaking"
+      ]
+    },
+    {
+      "actions": [
+        "joy"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "joy",
+      "facing": "south",
+      "id": "kingfisher.act.042.joy",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#e8496400a6d90c870aa32ade6ff31b93add67199b0ee3a917999821f7c1092ec",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "resting"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "joy speaking beak",
+      "facing": "south",
+      "id": "kingfisher.act.152.joy-speaking-beak",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#3bd32db06984b2b98feb997cecbfcdac5bb9afc68a07449eed0403e8f4115198",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "speaking"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "full laughter",
+      "facing": "south",
+      "id": "kingfisher.act.043.full-laughter",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#5508c8ed1a0eba255755fb88735ef3917878e5963d74e91fc17c41426f1978e0",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "resting"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "full laughter speaking beak",
+      "facing": "south",
+      "id": "kingfisher.act.153.full-laughter-speaking-beak",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#4c8dd107a97cedef7dacb5488a8e0465dd671c066aaf6e08712ca9815e32cb5a",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "speaking"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "excitement",
+      "facing": "south",
+      "id": "kingfisher.act.044.excitement",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#9f6a0a3c60661213e323c6a38f8b9a2dd4af2c0dd71b50f88025ed21b148626c",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "resting"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "excitement speaking beak",
+      "facing": "south",
+      "id": "kingfisher.act.154.excitement-speaking-beak",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#860224f4ac15b1a57dca4197dfd84d04861ba19efb1d976d839d1ef67fe77988",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "speaking"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "curiosity",
+      "facing": "south",
+      "id": "kingfisher.act.045.curiosity",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#a888a73cf7538f9a30b9cbdcc70a838c1cef9906d211255a12c812cac5823c2a",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "resting"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "curiosity speaking beak",
+      "facing": "south",
+      "id": "kingfisher.act.155.curiosity-speaking-beak",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#edaf6ff7f5908f4ad27e7d9df0fbb96a13cfbab94db036c0a18b6a5b3b2997ea",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "speaking"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          479,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 479,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "confident hero",
+      "facing": "south",
+      "id": "kingfisher.act.046.confident-hero",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        479,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#a38e3167483f131035aee172d32d39867655d2c54660c61d577ef33c2fe4542d",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "resting"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          479,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 479,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "confident hero speaking beak",
+      "facing": "south",
+      "id": "kingfisher.act.156.confident-hero-speaking-beak",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        479,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#b3f815aca74721578470d81aea871103439971a720efb3ac02b171ce5c58619c",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "speaking"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "compassion",
+      "facing": "south",
+      "id": "kingfisher.act.047.compassion",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#136e69b73daa79b124027c7564e8f81525a70c892bf4b25c8b44dc7079596d14",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "resting"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "compassion speaking beak",
+      "facing": "south",
+      "id": "kingfisher.act.157.compassion-speaking-beak",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#df0d63bd84c1db9a58931c0c994387ee181ea78b6a23563e41567ddd59cfa72f",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "speaking"
+      ]
+    },
+    {
+      "actions": [
+        "surprise"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "surprise",
+      "facing": "south",
+      "id": "kingfisher.act.048.surprise",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#950d117dd3bc171d6f391a453c5e261855995d1768b4c2da23c89b8379d85619",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "resting"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "surprise speaking beak",
+      "facing": "south",
+      "id": "kingfisher.act.158.surprise-speaking-beak",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#de0d90867832f821725bafe1ff6bca28ab448c9d1f0823bd8d965359cf48546c",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "speaking"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "confusion",
+      "facing": "south",
+      "id": "kingfisher.act.049.confusion",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#62be32fe737c6017cdc677fa35916b682023a515e731d82a4081b6c87ceeebfe",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "resting"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "confusion speaking beak",
+      "facing": "south",
+      "id": "kingfisher.act.159.confusion-speaking-beak",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#f391aaa9c3a9e7847cbdac458710845dad48b7a0f0f63d3037d8d060df79a806",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "speaking"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          479,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 479,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "skepticism",
+      "facing": "south",
+      "id": "kingfisher.act.050.skepticism",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        479,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#d3affdb0f1eddb2dddc9cc747ac2a8bd7798c79e015b37ebf241f9869de4c799",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "resting"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          479,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 479,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "skepticism speaking beak",
+      "facing": "south",
+      "id": "kingfisher.act.160.skepticism-speaking-beak",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        479,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#2642ad087b30232ec53d999cdae8d044ae96faa1c51d713a4ffcc6632200929d",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "speaking"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "concern",
+      "facing": "south",
+      "id": "kingfisher.act.051.concern",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#d3c80408a8e87931cc0c7219a773ed6f1ff0c7d9d25aa84d84f3826a93c52c58",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "resting"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "concern speaking beak",
+      "facing": "south",
+      "id": "kingfisher.act.161.concern-speaking-beak",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#0b6ef407ae19896d55c7b0d06d6c2ea05b7653c91164b331140d99537c0a985f",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "speaking"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "sadness",
+      "facing": "south",
+      "id": "kingfisher.act.052.sadness",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#8c472b88057fb64a3ce84a3b1b6a16e0aba856a23616eb5b92e84beef6d654ae",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "resting"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "sadness speaking beak",
+      "facing": "south",
+      "id": "kingfisher.act.162.sadness-speaking-beak",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#27443df88600e3586e514713af10fb6686dec92bed2e15d0109f77d9ab9752e7",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "speaking"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          479,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 479,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "embarrassment",
+      "facing": "south",
+      "id": "kingfisher.act.053.embarrassment",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        479,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#42f05b2a9c0c84d95f3687d0829b0a36cdd798264548e8c852b6098a529ba29a",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "resting"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          479,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 479,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "embarrassment speaking beak",
+      "facing": "south",
+      "id": "kingfisher.act.163.embarrassment-speaking-beak",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        479,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#725d0409b8305beb86f54fe8b2bd7c60d00aa5b23ef95627e9e5b85ce1b8964b",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "speaking"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "shame",
+      "facing": "south",
+      "id": "kingfisher.act.054.shame",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#0e222268b4fa2f3e20b46e33861f9abe0dd300f3422fec630b33aa6230ef1ab4",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "resting"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "shame speaking beak",
+      "facing": "south",
+      "id": "kingfisher.act.164.shame-speaking-beak",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#3713cbc383106d24c0e54d1327a4e82addff8216404d5b01fb09156dca8318b3",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "speaking"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "fear",
+      "facing": "south",
+      "id": "kingfisher.act.055.fear",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#66cfe3a0557f1dd37ef171e5e7b5172157fc410e72ea3f0121ed1089a7ef866d",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "resting"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "fear speaking beak",
+      "facing": "south",
+      "id": "kingfisher.act.165.fear-speaking-beak",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#2b052747b46c45aef0395869e8851aea41330f3e6154f3df9f8fcea2e0686f6c",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "speaking"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          479,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 479,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "anxiety",
+      "facing": "south",
+      "id": "kingfisher.act.056.anxiety",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        479,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#5701fbf100fc65fd8e777ca36cd8fe2829a894e17618775d847d550d5ada7218",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "resting"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          479,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 479,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "anxiety speaking beak",
+      "facing": "south",
+      "id": "kingfisher.act.166.anxiety-speaking-beak",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        479,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#920d91713b41caa2751f6c19979364713f9f10b113e5f45d38df939186291c4a",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "speaking"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "anger",
+      "facing": "south",
+      "id": "kingfisher.act.057.anger",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#cbba69b339eb51bc5d2193c47b83ca3b7b51f51625ddc2a090c1e04d4857563c",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "resting"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "anger speaking beak",
+      "facing": "south",
+      "id": "kingfisher.act.167.anger-speaking-beak",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#7304cd42f81119e1fde91d5e7006c0a2229b65ef97ce582cb907f89dd0065351",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "speaking"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "frustration",
+      "facing": "south",
+      "id": "kingfisher.act.058.frustration",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#a44bdce856db20a74d7de7fb85c3c2c3264fa0b0250113d3ca2559adea44b00e",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "resting"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "frustration speaking beak",
+      "facing": "south",
+      "id": "kingfisher.act.168.frustration-speaking-beak",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#8d63012ffcb0507f71a41cbc02068f9e1a7d0e2beeb5987020635ec220a60548",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "speaking"
+      ]
+    },
+    {
+      "actions": [
+        "determination"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "determination",
+      "facing": "south",
+      "id": "kingfisher.act.059.determination",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#59a124483460cc412c1de409fde33ec6521a363a935ef374360561b16a5013d1",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "resting"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "determination speaking beak",
+      "facing": "south",
+      "id": "kingfisher.act.169.determination-speaking-beak",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#75be13ed04d1a3ffac08bfdaa26669619dbcedfe5029674a20d4a09da87d9806",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "speaking"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "fatigue",
+      "facing": "south",
+      "id": "kingfisher.act.060.fatigue",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#78e8c31ca79793d2b3247ad7bb15925b07bbf24d73afc3f0ba2f283ab355ccc6",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "resting"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "fatigue speaking beak",
+      "facing": "south",
+      "id": "kingfisher.act.170.fatigue-speaking-beak",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#875ae504eed9afbd297bf3b148b61003d837b0edf5df76fdcf9b32106f42c9c5",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "speaking"
+      ]
+    },
+    {
+      "actions": [
+        "thinking"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "deep contemplation",
+      "facing": "south",
+      "id": "kingfisher.act.061.deep-contemplation",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#560d864730515ab98b83dc8e1e91b8257daebe29e38a1c65b21201ba8069c2e9",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "resting"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "deep contemplation speaking beak",
+      "facing": "south",
+      "id": "kingfisher.act.171.deep-contemplation-speaking-beak",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#b8e93f09e1e0eae4f6c0a03ef9b501e1bd71e7d6cd69bb719b9bde08c3d834b6",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "speaking"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "sudden idea",
+      "facing": "south",
+      "id": "kingfisher.act.062.sudden-idea",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#823f3f822a50ad80b6ccd9b7014e8ded819c56f1ffddd8772d212bc18dade92c",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "resting"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "sudden idea speaking beak",
+      "facing": "south",
+      "id": "kingfisher.act.172.sudden-idea-speaking-beak",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#cd911bcfdc1a6f44e7d59387c2dd0db9140fb9765da854d033425088ca02630f",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "speaking"
+      ]
+    },
+    {
+      "actions": [
+        "read_panel"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "read a panel",
+      "facing": "south",
+      "id": "kingfisher.act.063.read-a-panel",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#a12d1b0119c61bf056b4b54a776766dc667b3e310785eed793c828f11bcb0c69",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "resting"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "read a panel speaking beak",
+      "facing": "south",
+      "id": "kingfisher.act.173.read-a-panel-speaking-beak",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#98a88800c9fcb10ac657040309b3e03296367237714b954454e888951b7b6406",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "speaking"
+      ]
+    },
+    {
+      "actions": [
+        "study_diagram"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "study a diagram",
+      "facing": "south",
+      "id": "kingfisher.act.064.study-a-diagram",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#868096c62f274be7743aa5aa1980a7fa79ce9e10bc5e8a2ee7077435acc02645",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "resting"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "study a diagram speaking beak",
+      "facing": "south",
+      "id": "kingfisher.act.174.study-a-diagram-speaking-beak",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#e00a0142f9ecaa66e7c2298810e513f8564acb1ac96e7bcf06ab5a545d7640cb",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "speaking"
+      ]
+    },
+    {
+      "actions": [
+        "write_or_tap"
+      ],
+      "anchors": {
+        "root": [
+          479,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 479,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "write or tap",
+      "facing": "south",
+      "id": "kingfisher.act.065.write-or-tap",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        479,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#c6bdb1152fab76570bbe267e4964b97e5a3405ef0c5f9fb808a04454b9421f10",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "resting"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          479,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 479,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "write or tap speaking beak",
+      "facing": "south",
+      "id": "kingfisher.act.175.write-or-tap-speaking-beak",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        479,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#af32b0a0689e842228f16a6540ec52d9bb7eb5d5ccc1aa5ac2617c1fcb58d312",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "speaking"
+      ]
+    },
+    {
+      "actions": [
+        "select_control"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "select a control",
+      "facing": "south",
+      "id": "kingfisher.act.066.select-a-control",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#33b478946a39cc33afd0df5fca4f042ca492332c67abba712de1fe0d99adad53",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "resting"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "select a control speaking beak",
+      "facing": "south",
+      "id": "kingfisher.act.176.select-a-control-speaking-beak",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#9136dc2d41dfe0898e7d1a5a435fcfb063c4620f69185474ce3c3307c6269e3b",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "speaking"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "center mark resting beak",
+      "facing": "south",
+      "id": "kingfisher.act.067.center-mark-resting-beak",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#a5e596d5b2c3e7b0121c4588d9482420d974c73e3cd50d3bf62389036e0b6264",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "resting"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "center mark speaking beak",
+      "facing": "south",
+      "id": "kingfisher.act.068.center-mark-speaking-beak",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#9a6a595d64bab8b95e2a1b2a0137f062e52f7915f5d5d8fecf1d361b56bbd0e1",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "speaking"
+      ]
+    },
+    {
+      "actions": [
+        "pace_left"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "left step anticipation resting beak",
+      "facing": "south",
+      "id": "kingfisher.act.069.left-step-anticipation-resting-beak",
+      "locomotion": "walk",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#4228f1bab2866c3303602306675e11eb2a5b65ac608b0ed2c91fccada98fbc56",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "resting"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "left step anticipation speaking beak",
+      "facing": "south",
+      "id": "kingfisher.act.070.left-step-anticipation-speaking-beak",
+      "locomotion": "walk",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#ee4006fe33826bcc30a43ac47462e1042950793f9c019cc08a449e6a2a908665",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "speaking"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "left stride passing resting beak",
+      "facing": "south",
+      "id": "kingfisher.act.071.left-stride-passing-resting-beak",
+      "locomotion": "walk",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#b678add4dca91ac8a2e9694d6c7f4245908869941519ccb9d4f200e617ea7ee2",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "resting"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "left stride passing speaking beak",
+      "facing": "south",
+      "id": "kingfisher.act.072.left-stride-passing-speaking-beak",
+      "locomotion": "walk",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#98abed49bc19e09efbf63904acb40e5367f9eb5d431267d71462a1a66ff503b3",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "speaking"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "left mark arrival resting beak",
+      "facing": "south",
+      "id": "kingfisher.act.073.left-mark-arrival-resting-beak",
+      "locomotion": "walk",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#fb44ee2e9b7365002db9a5aad411c3b5245b440b9ccae7f6b316b4d135a59b85",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "resting"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "left mark arrival speaking beak",
+      "facing": "south",
+      "id": "kingfisher.act.074.left-mark-arrival-speaking-beak",
+      "locomotion": "walk",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#a3c621b91b5be9538962c6246c03d8dffadc5daaacf5682272d55fa33421dc78",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "speaking"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "left audience turn resting beak",
+      "facing": "south",
+      "id": "kingfisher.act.075.left-audience-turn-resting-beak",
+      "locomotion": "walk",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#7efdb7f9cb08353de382ffdf862869864ff53d6df2139f6b9956b1228b97832f",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "resting"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "left audience turn speaking beak",
+      "facing": "south",
+      "id": "kingfisher.act.076.left-audience-turn-speaking-beak",
+      "locomotion": "walk",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#18cbe358e8a62941ca4d3a00becbcfb28b9638872d239b128b18c0522cfff9ed",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "speaking"
+      ]
+    },
+    {
+      "actions": [
+        "pace_right"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "right step anticipation resting beak",
+      "facing": "south",
+      "id": "kingfisher.act.077.right-step-anticipation-resting-beak",
+      "locomotion": "walk",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#08a928d421e3f0211d08dcb20829851ca21e7a36b037cdbf97dcefee402a1b6f",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "resting"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "right step anticipation speaking beak",
+      "facing": "south",
+      "id": "kingfisher.act.078.right-step-anticipation-speaking-beak",
+      "locomotion": "walk",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#a4671b13a4852322256ea1c97660046313a6e00f87361d0e9795c0f32649bfc7",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "speaking"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "right stride passing resting beak",
+      "facing": "south",
+      "id": "kingfisher.act.079.right-stride-passing-resting-beak",
+      "locomotion": "walk",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#b69acf4d08b89fe34e7dc5ce4853a7eb5819a098a00c4fc9c1018cde721e0fcd",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "resting"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "right stride passing speaking beak",
+      "facing": "south",
+      "id": "kingfisher.act.080.right-stride-passing-speaking-beak",
+      "locomotion": "walk",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#0981bf558303c481be156c81b2b8819a953e016fdd65a75680e83a2269e9563b",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "speaking"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "right mark arrival resting beak",
+      "facing": "south",
+      "id": "kingfisher.act.081.right-mark-arrival-resting-beak",
+      "locomotion": "walk",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#a18b2ca79390e25ea68a7890b5f012e56172d55b4ff43b0520d6e55beb732397",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "resting"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "right mark arrival speaking beak",
+      "facing": "south",
+      "id": "kingfisher.act.082.right-mark-arrival-speaking-beak",
+      "locomotion": "walk",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#ab838f25a196c141afad031a12324d1f8829d491ff93de872e55da7079580089",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "speaking"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "right audience turn resting beak",
+      "facing": "south",
+      "id": "kingfisher.act.083.right-audience-turn-resting-beak",
+      "locomotion": "walk",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#b6444b8893b777524bcb0de98e72965227d332bf5dceb7568abb69e57f9431ac",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "resting"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "right audience turn speaking beak",
+      "facing": "south",
+      "id": "kingfisher.act.084.right-audience-turn-speaking-beak",
+      "locomotion": "walk",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#1dcda953cecd3e9daacfeb6b3ceb21d75d3fa7c36040196021ad99c4e38b9151",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "speaking"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "downstage lean resting beak",
+      "facing": "south",
+      "id": "kingfisher.act.085.downstage-lean-resting-beak",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#8b630077d163e844e582402726133ab021f2728f4efcff5ee6b3655f3cd47f3e",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "resting"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "downstage lean speaking beak",
+      "facing": "south",
+      "id": "kingfisher.act.086.downstage-lean-speaking-beak",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#b71321dc39e2ce1e00fcafabbbe6206b255c6c8eb6694f34f754fcbd4f06c44b",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "speaking"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "open wing welcome resting beak",
+      "facing": "south",
+      "id": "kingfisher.act.087.open-wing-welcome-resting-beak",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#c6f0962a83163dcfdd255f4014690c4b61b102b023ab189aca8ec5b12ab9331c",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "resting"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "open wing welcome speaking beak",
+      "facing": "south",
+      "id": "kingfisher.act.088.open-wing-welcome-speaking-beak",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#621b37f49d74fa1f061a9370c3759a5c2e66613b959a1cd1154377c9b8d3541a",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "speaking"
+      ]
+    },
+    {
+      "actions": [
+        "stage_explain"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "single point emphasis resting beak",
+      "facing": "south",
+      "id": "kingfisher.act.089.single-point-emphasis-resting-beak",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#90a38327e05a9ae05b9f3fd5ae7363c5b34230750e03190ce6299d7c1fd5ea61",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "resting"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "single point emphasis speaking beak",
+      "facing": "south",
+      "id": "kingfisher.act.090.single-point-emphasis-speaking-beak",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#746cc3b1a6c1c62c254acaf8a611e010db38138a3010dc45ef1e5a5528352f58",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "speaking"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "compare two sides resting beak",
+      "facing": "south",
+      "id": "kingfisher.act.091.compare-two-sides-resting-beak",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#076a0f07b92bd69079d9b18afa0f657013b8a0e6d74cd815894c3506e66dc631",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "resting"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "compare two sides speaking beak",
+      "facing": "south",
+      "id": "kingfisher.act.092.compare-two-sides-speaking-beak",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#af5c528db400dfb1b09a7ed6531bb8fd384cc323c4007796e0a0313a7d9a3763",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "speaking"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "frame big idea resting beak",
+      "facing": "south",
+      "id": "kingfisher.act.093.frame-big-idea-resting-beak",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#112fbd4a9b9fa6c48780ef62b993914efc3d588f7d43a934cdf675fb0690b5cf",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "resting"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "frame big idea speaking beak",
+      "facing": "south",
+      "id": "kingfisher.act.094.frame-big-idea-speaking-beak",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#ffd2140485e4a6968d8ef23c2c549caa9dbd7328212f326dea7a268f38d8755d",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "speaking"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "shape small detail resting beak",
+      "facing": "south",
+      "id": "kingfisher.act.095.shape-small-detail-resting-beak",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#38f933cd526d89ec9b6f0369efc1e5d57503eb7fad9e7a2402b2e27f48a2300d",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "resting"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "shape small detail speaking beak",
+      "facing": "south",
+      "id": "kingfisher.act.096.shape-small-detail-speaking-beak",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#223abda00d627cb8e7e20c72077381c6ffcbd81a8d5d2e121bebb85cbc063b8a",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "speaking"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "rhetorical question stage resting beak",
+      "facing": "south",
+      "id": "kingfisher.act.097.rhetorical-question-stage-resting-beak",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#545f03f9a80aa4ff05347ae6733fc9c72ec852963d6cc594aba9f6427db439c1",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "resting"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "rhetorical question stage speaking beak",
+      "facing": "south",
+      "id": "kingfisher.act.098.rhetorical-question-stage-speaking-beak",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#271da93ff041aa71a9e8e3fe118a1c7565a66ccdb1b79136a567d8539b427d2a",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "speaking"
+      ]
+    },
+    {
+      "actions": [
+        "stage_story"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "suspense hold resting beak",
+      "facing": "south",
+      "id": "kingfisher.act.099.suspense-hold-resting-beak",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#92f0ec86e38c5a137aa513aedf7f968c43f0a1876583e6a89aa06c47580631ca",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "resting"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "suspense hold speaking beak",
+      "facing": "south",
+      "id": "kingfisher.act.100.suspense-hold-speaking-beak",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#f5f79894398a619f39bef7831eed6c30579d2f3590d8bd4cded6865746290503",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "speaking"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "stage reveal resting beak",
+      "facing": "south",
+      "id": "kingfisher.act.101.stage-reveal-resting-beak",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#910c4199483bf4a95a20e1f00f75fbda0f3b40b0c194dc5b3a5141560ca87e99",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "resting"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "stage reveal speaking beak",
+      "facing": "south",
+      "id": "kingfisher.act.102.stage-reveal-speaking-beak",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#b9589aa10689a146d5de3d0eef2243ef7815bef07653d81b3ed626398e57bc05",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "speaking"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "heartfelt confession resting beak",
+      "facing": "south",
+      "id": "kingfisher.act.103.heartfelt-confession-resting-beak",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#af4650c4be20d47e6f87cbf82a7abde5250b22cf3f58de5cd98f9ef466dc753b",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "resting"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "heartfelt confession speaking beak",
+      "facing": "south",
+      "id": "kingfisher.act.104.heartfelt-confession-speaking-beak",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#d003f328558e5ad92433228a6918e711aad56f2de0ba7487d8c22809ca08595d",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "speaking"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "comic aside resting beak",
+      "facing": "south",
+      "id": "kingfisher.act.105.comic-aside-resting-beak",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#c7ef825324d409aa4960aef9083c551dd80c0e96f0870b607310d11515ec0009",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "resting"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "comic aside speaking beak",
+      "facing": "south",
+      "id": "kingfisher.act.106.comic-aside-speaking-beak",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#6543f5298ce50697c8435a15e4b4fb087ad97ae2efc0c034ee97d63832967388",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "speaking"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "call to action resting beak",
+      "facing": "south",
+      "id": "kingfisher.act.107.call-to-action-resting-beak",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#0eb016d7003841b28758714fa01e0f4915c35df33baeb3314acc01a95d6d7bf8",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "resting"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "call to action speaking beak",
+      "facing": "south",
+      "id": "kingfisher.act.108.call-to-action-speaking-beak",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#93cd480fbc26ed32dc8bf6c5cb6e670bda9bf49b014265937bd1e391a9c34c97",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "speaking"
+      ]
+    },
+    {
+      "actions": [
+        "stage_resolution"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "warm resolution resting beak",
+      "facing": "south",
+      "id": "kingfisher.act.109.warm-resolution-resting-beak",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#bcc824c7417d0475e87ccfe637b605d5c67fc90bb91879eb8bda51b11774d88b",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "resting"
+      ]
+    },
+    {
+      "actions": [
+        "idle"
+      ],
+      "anchors": {
+        "root": [
+          480,
+          528
+        ]
+      },
+      "cells": [
+        {
+          "region": "hd_runtime_metadata_sentinel",
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "x": 480,
+          "y": 528
+        }
+      ],
+      "cols": 960,
+      "description": "warm resolution speaking beak",
+      "facing": "south",
+      "id": "kingfisher.act.110.warm-resolution-speaking-beak",
+      "locomotion": "idle",
+      "phase": null,
+      "presentation_scale": [
+        1,
+        1
+      ],
+      "root_anchor": [
+        480,
+        528
+      ],
+      "rows": 540,
+      "source": "library-index.json#51c4c75abef815cbe7d39937cb74d1159ac31eddc8068fe64e52d9b4c89f598a",
+      "tags": [
+        "hd_rgba",
+        "candidate_review_only",
+        "speaking"
+      ]
+    }
+  ]
+}

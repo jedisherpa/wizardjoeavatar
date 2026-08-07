@@ -30,7 +30,7 @@ that dictionary. It must never borrow semantics from another character.
 | Robin | comprehensive performance | 200 graph-bound candidate poses, 15 actions, 28 clips | Reproducible V2 candidate builder emits its own package-bound dictionary; candidate output remains review-only. |
 | Speech | comprehensive performance | 200 graph-bound candidate poses, 15 actions, 28 clips | Reproducible V2 candidate builder emits its own package-bound dictionary; candidate output remains review-only. |
 | Dragon | comprehensive performance | 134 review poses, including flight and performance coverage | Classified comprehensive, but no production graph/package exists yet. Dictionary bindings must wait for stable package IDs. |
-| Kingfisher | comprehensive performance | Declared comprehensive corpus; no tracked package assets found in this worktree | Intake blocker. Do not fabricate a dictionary from another character's IDs. |
+| Kingfisher | comprehensive performance | 176-pose review candidate with 88 exact resting/speaking pairs | Reproducible V2 candidate package and digest-bound dictionary exist; runtime profile V3 preserves each authored body pose while switching beak mates. Candidate remains review-only with 0 user approvals and no registry admission. |
 | Serena Quill production candidate | focused performance | 108 poses, 79 graph-bound poses, 15 actions, 79 clips | V2 package contains its own focused-performance dictionary. |
 | Serena Quill 48-pose parity review library | game motion | 48 controller-oriented review poses | Own review-only game dictionary. This is a different library from Serena's focused V2 package. |
 | Aurelia Finch | game motion | 48 review poses | Own review-only game dictionary. |
@@ -95,4 +95,5 @@ do not turn review libraries into admitted runtime packages.
 
 Dragon and Kingfisher remain correctly classified as comprehensive libraries,
 but neither should be production-admitted from this tracking document alone.
-Their dictionaries become executable only after exact package identities exist.
+Kingfisher now has an exact review-candidate package identity; Dragon still
+requires one. Review-candidate execution does not confer production authority.

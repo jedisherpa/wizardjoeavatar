@@ -1,0 +1,57 @@
+{
+  "assets": {
+    "animation_graph": {
+      "path": "kingfisher-animation-graph-v2.json",
+      "sha256": "sha256:1d05df7bd1ad07637c027bee4f64a79e64ac33dda821b4a8f29183050a5000dc"
+    },
+    "capability_manifest": {
+      "path": "kingfisher-capability-manifest-v1.json",
+      "sha256": "sha256:b82b91664549bc0112155fd7fb84aefc6a11cbf7def882564541d6b7e63fbf9c"
+    },
+    "choreography_dictionary": {
+      "path": "kingfisher-paired-choreography-dictionary-v1.json",
+      "sha256": "sha256:2708e659061f56c79d1fdc8d1820c3eaa907da792f29c5e945be8f95fa5f6712"
+    },
+    "hd_pose_library_index": {
+      "path": "kingfisher-runtime-candidate-library-index.json",
+      "sha256": "sha256:65aab34f0e3cfd5c215c3de197244cf32de048ca71e94800970dedcfb67860ca"
+    },
+    "hd_pose_shard_001": {
+      "path": "kingfisher_act_067_110.wjpose",
+      "sha256": "sha256:973263f01f5f1a22839b125a69e1031d199833d0d3eecf062b7505273dad322d"
+    },
+    "hd_pose_shard_002": {
+      "path": "kingfisher_act_001_066_111_176_pair_review-a535f9fe6f5b89d4.wjpose",
+      "sha256": "sha256:a535f9fe6f5b89d48ca91d8977656ae1b855991de579a14ea339d141e5815a9f"
+    },
+    "pose_library": {
+      "path": "kingfisher-pose-catalog-v1.json",
+      "sha256": "sha256:916ef3aaceaf2e98ce97ac1f2aa8ceafd530012016a911814f0d4e89b1fd9c9e"
+    },
+    "pose_manifest": {
+      "path": "kingfisher-pose-manifest-v1.json",
+      "sha256": "sha256:9f0baea35256dce097403da2b40fc95b2832d7783d29b0f98ddd92ffc02a4e06"
+    },
+    "runtime_profile": {
+      "path": "kingfisher-runtime-profile-v3.json",
+      "sha256": "sha256:815d8978b0a0beb0621c10937cc27d15a12ec9382860b335fb546dfa6851d747"
+    }
+  },
+  "capabilities": [
+    "pair_reviewed_whole_pose_speech",
+    "body_locked_speech_during_gesture",
+    "stage_pacing_cycles",
+    "phrase_scale_performance_dictionary",
+    "catalog_pose_override"
+  ],
+  "character_id": "kingfisher",
+  "default_pose_id": "kingfisher.act.001.neutral-front",
+  "display_name": "Kingfisher",
+  "renderer": "asciline_hd_rgba",
+  "renderer_adapter_id": "asciline.hd_rgba_pose.v1",
+  "runtime_api": {
+    "max": 1,
+    "min": 1
+  },
+  "schema_version": 2
+}

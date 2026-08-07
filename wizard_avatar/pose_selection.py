@@ -136,9 +136,14 @@ def select_reference_pose_sample(
         raise ValueError("No reference poses are available")
     state.reconcile_compatibility_state()
     if state.pose_override_id is not None and not fail_closed:
-        pose_id = _first_available(
+        requested_pose_id = _runtime_profile_speech_pose_id(
+            state,
+            runtime_profile,
             state.pose_override_id,
-            (_idle_pose_id(state.facing), FRONT_IDLE_POSE),
+        )
+        pose_id = _first_available(
+            requested_pose_id,
+            (state.pose_override_id, _idle_pose_id(state.facing), FRONT_IDLE_POSE),
             available,
         )
         return PoseSample(pose_id=pose_id, contact="showcase", clip_id="pose_showcase")
@@ -168,13 +173,18 @@ def select_reference_pose_sample(
             ),
         )
         if state.pose_override_id is not None:
-            if state.pose_override_id not in graph.selectable_pose_ids():
+            requested_pose_id = _runtime_profile_speech_pose_id(
+                state,
+                runtime_profile,
+                state.pose_override_id,
+            )
+            if requested_pose_id not in graph.selectable_pose_ids():
                 raise AnimationGraphValidationError(
                     "Pose override is not selectable in the admitted graph: "
-                    + state.pose_override_id
+                    + requested_pose_id
                 )
             return PoseSample(
-                pose_id=state.pose_override_id,
+                pose_id=requested_pose_id,
                 contact="showcase",
                 clip_id="pose_showcase",
             )
@@ -774,8 +784,15 @@ def _runtime_profile_face_node_id(
         state.locomotion == "idle"
         and state.action in {"idle", "speaking"}
     )
-    if state.blink_phase >= 0.965 and stable_for_blink:
+    has_authored_blink = len(set(runtime_profile.blink_poses.values())) > 1
+    if state.blink_phase >= 0.965 and stable_for_blink and has_authored_blink:
         pose_id = runtime_profile.blink_poses["closed"]
+    elif state.speech_id is not None and runtime_profile.speech_pose_pairs:
+        pose_id = _runtime_profile_speech_pose_id(
+            state,
+            runtime_profile,
+            state.pose_override_id or state.pose_id,
+        )
     elif state.speech_id is not None and runtime_profile.speech_pose_map:
         pose_id = runtime_profile.speech_pose_map.get(
             state.mouth,
@@ -789,6 +806,33 @@ def _runtime_profile_face_node_id(
             return node.node_id
     raise AnimationGraphValidationError(
         "runtime profile pose is not reachable in graph: {}".format(pose_id)
+    )
+
+
+def _runtime_profile_speech_pose_id(
+    state: WizardState,
+    runtime_profile: Optional[CharacterRuntimeProfile],
+    presented_pose_id: str,
+) -> str:
+    if (
+        runtime_profile is None
+        or state.speech_id is None
+        or not runtime_profile.speech_pose_pairs
+    ):
+        return presented_pose_id
+    speaking_to_resting = {
+        speaking: resting
+        for resting, speaking in runtime_profile.speech_pose_pairs.items()
+    }
+    resting_pose_id = speaking_to_resting.get(
+        presented_pose_id,
+        presented_pose_id,
+    )
+    if state.mouth == "closed":
+        return resting_pose_id
+    return runtime_profile.speech_pose_pairs.get(
+        resting_pose_id,
+        presented_pose_id,
     )
 
 

@@ -17,6 +17,7 @@ from .animation_graph import (
 )
 from .artifact_hashing import canonical_json_v1, sha256_ref
 from .character_package import WIZARD_JOE_PACKAGE_PATH, CharacterPackage, load_character_package
+from .character_runtime_profile import SPEECH_MOUTH_SHAPES
 from .gestures import ACTION_TO_CHANNELS
 from .models import ACTIONS, DIRECTIONS, EXPRESSIONS, MOUTH_SHAPES, STAFF_STATES, UPPER_BODY_ACTIONS
 from .mouth import MOUTH_CELLS
@@ -324,7 +325,10 @@ def _package_runtime_vocabulary(
         "actions": sorted({"idle", "speaking", *profile.action_poses}),
         "directions": sorted(profile.facing_poses),
         "expressions": sorted(profile.expression_aliases),
-        "mouth_shapes": sorted(profile.speech_pose_map),
+        "mouth_shapes": sorted(
+            profile.speech_pose_map
+            or (SPEECH_MOUTH_SHAPES if profile.speech_pose_pairs else ())
+        ),
         "locomotion_cycles": sorted(
             cycle
             for cycle, poses in profile.locomotion_cycles.items()
@@ -348,7 +352,7 @@ def _package_runtime_mapping(
             "$.character",
             "verified V2 package has no runtime profile contract",
         )
-    return {
+    mapping = {
         "action_poses": dict(sorted(profile.action_poses.items())),
         "expression_aliases": dict(sorted(profile.expression_aliases.items())),
         "facing_poses": dict(sorted(profile.facing_poses.items())),
@@ -373,6 +377,11 @@ def _package_runtime_mapping(
             for track in sorted(TRACK_DEFAULT_CHANNEL)
         },
     }
+    if profile.speech_pose_pairs:
+        mapping["speech_pose_pairs"] = dict(
+            sorted(profile.speech_pose_pairs.items())
+        )
+    return mapping
 
 
 def _markers(clip: ClipDefinition) -> Tuple[str, ...]:
