@@ -4511,3 +4511,33 @@ It confirms 66 authored pairs, 176 poses, 132 closed/open sequence frames, 176
 binary-alpha poses on the canonical `960x540` canvas, registration-bound delta
 `0`, minimum pair silhouette IoU `0.988776`, 64 observable full-size passes,
 2 not-observable rear views, 0 user approvals, and 0 runtime admissions.
+
+## 2026-08-07 visual re-open and sequence quarantine
+
+The user reported that many beaks still looked visibly misaligned in
+`kingfisher-all`. That observation invalidates the prior internal completion
+claim. All 64 observable closed/open pairs were returned to `pending`; the two
+rear views remain `not_observable`. User approval and runtime admission remain
+zero.
+
+The correction changes both the art workflow and the projector contract:
+
+1. Rebuild and inspect one closed/open pair at a time.
+2. Use the pair's exact closed frame as the body, head, eye, upper-beak,
+   canvas, scale, and registration authority.
+3. Render or articulate only that pair's connected lower mandible and bounded
+   oral cavity.
+4. Inspect the two-frame loop at native size and enlarged beak framing.
+5. Restore an internal `pass` only for that single pair.
+6. Keep every pending or failed speaking mate out of `kingfisher-all`.
+
+The dedicated `kingfisher-paired-beaks-review` sequence continues to expose
+all candidate pairs for review. The normal `kingfisher-all` reel now includes
+every resting pose but admits a speaking mate only when that exact pair has a
+`pairwise_full_size_review.state` of `pass`. A pending candidate can therefore
+be inspected without being presented as integrated animation.
+
+Pair 7 (`front-three-quarter-right`) is the first visibly rejected drawing in
+the reopened queue. Its current lower bill descends on a substantially steeper
+axis than the fixed upper bill and reads as a pasted jaw in alternating
+playback. It remains quarantined pending a new pair-specific speaking mate.

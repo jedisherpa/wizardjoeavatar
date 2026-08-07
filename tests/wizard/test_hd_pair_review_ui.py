@@ -75,254 +75,40 @@ class HdPairReviewUiTests(unittest.TestCase):
         index = INDEX_PATH.read_text(encoding="utf-8")
         self.assertEqual(index.count("hd-pair-compare-v7"), 2)
 
-    def test_user_recheck_preserves_superseded_pairwise_dispositions(self):
+    def test_user_recheck_reopens_every_visible_pair_fail_closed(self):
         ledger = json.loads(LEDGER_PATH.read_text(encoding="utf-8"))
         by_ordinal = {
             int(pair["ordinal"]): pair
             for pair in ledger["pairs"]
         }
-        neutral_front = by_ordinal[1]
-        self.assertEqual(
-            neutral_front["pairwise_full_size_review"]["state"],
-            "pass",
-        )
-        self.assertIn(
-            "evidence/pairwise-full-size/"
-            "pair-001-frontal-anatomy-review-2026-08-07-v2",
-            neutral_front["pairwise_full_size_review"]["evidence_path"],
-        )
-        neutral_receipt_path = (
-            LEDGER_PATH.parent / neutral_front["receipt_path"]
-        )
-        neutral_receipt = json.loads(
-            neutral_receipt_path.read_text(encoding="utf-8")
-        )
-        self.assertEqual(neutral_receipt["beak_anatomy"]["mode"], "frontal")
-        self.assertTrue(neutral_receipt["beak_anatomy"]["passed"])
-        self.assertFalse(neutral_front["runtime_admitted"])
-        self.assertFalse(neutral_front["user_approved"])
-
-        right_profile = by_ordinal[6]
-        self.assertEqual(
-            right_profile["pairwise_full_size_review"]["state"],
-            "pass",
-        )
-        self.assertIn(
-            "evidence/pairwise-full-size/"
-            "pair-006-open-cavity-review-2026-08-07-v2",
-            right_profile["pairwise_full_size_review"]["evidence_path"],
-        )
-        self.assertFalse(right_profile["runtime_admitted"])
-        self.assertFalse(right_profile["user_approved"])
-
-        repaired = by_ordinal[59]
-        self.assertEqual(
-            repaired["internal_visual_review"]["state"],
-            "needs_rebuild",
-        )
-        self.assertEqual(
-            repaired["pairwise_full_size_review"]["state"],
-            "pass",
-        )
-        self.assertEqual(
-            repaired["pairwise_full_size_review"]["source_disposition"],
-            "full_size_pairwise_review",
-        )
-        self.assertIn(
-            "evidence/pairwise-full-size/pair-059-one-pair-2026-08-06-v2",
-            repaired["pairwise_full_size_review"]["evidence_path"],
-        )
-        history = repaired["pairwise_full_size_review_history"]
-        self.assertEqual(
-            history[-1]["superseded_review"]["state"],
-            "needs_rebuild",
-        )
-        self.assertIn(
-            "evidence/pairwise-full-size/pair-059-",
-            history[-1]["superseded_review"]["evidence_path"],
-        )
-        self.assertFalse(repaired["runtime_admitted"])
-        self.assertFalse(repaired["user_approved"])
-
-        fatigue = by_ordinal[60]
-        self.assertEqual(
-            fatigue["pairwise_full_size_review"]["state"],
-            "pass",
-        )
-        self.assertEqual(
-            fatigue["pairwise_full_size_review"]["source_disposition"],
-            "full_size_pairwise_review",
-        )
-        self.assertIn(
-            "evidence/pairwise-full-size/pair-060-one-pair-2026-08-06-v1",
-            fatigue["pairwise_full_size_review"]["evidence_path"],
-        )
-        self.assertIn(
-            "evidence/pairwise-full-size/pair-060-",
-            fatigue["pairwise_full_size_review_history"][-1][
-                "superseded_review"
-            ]["evidence_path"],
-        )
-        self.assertFalse(fatigue["runtime_admitted"])
-        self.assertFalse(fatigue["user_approved"])
-
-        contemplation = by_ordinal[61]
-        self.assertEqual(
-            contemplation["pairwise_full_size_review"]["state"],
-            "pass",
-        )
-        self.assertEqual(
-            contemplation["pairwise_full_size_review"]["source_disposition"],
-            "full_size_pairwise_review",
-        )
-        self.assertIn(
-            "evidence/pairwise-full-size/pair-061-one-pair-2026-08-06-v1",
-            contemplation["pairwise_full_size_review"]["evidence_path"],
-        )
-        self.assertFalse(contemplation["runtime_admitted"])
-        self.assertFalse(contemplation["user_approved"])
-
-        sudden_idea = by_ordinal[62]
-        self.assertEqual(
-            sudden_idea["pairwise_full_size_review"]["state"],
-            "pass",
-        )
-        self.assertEqual(
-            sudden_idea["pairwise_full_size_review"]["source_disposition"],
-            "full_size_pairwise_review",
-        )
-        self.assertIn(
-            "evidence/pairwise-full-size/pair-062-axis-locked-review-2026-08-07-v2",
-            sudden_idea["pairwise_full_size_review"]["evidence_path"],
-        )
-        self.assertFalse(sudden_idea["runtime_admitted"])
-        self.assertFalse(sudden_idea["user_approved"])
-
-        read_panel = by_ordinal[63]
-        self.assertEqual(
-            read_panel["pairwise_full_size_review"]["state"],
-            "pass",
-        )
-        self.assertEqual(
-            read_panel["pairwise_full_size_review"]["source_disposition"],
-            "full_size_pairwise_review",
-        )
-        self.assertIn(
-            "evidence/pairwise-full-size/pair-063-one-pair-2026-08-06-v1",
-            read_panel["pairwise_full_size_review"]["evidence_path"],
-        )
-        self.assertFalse(read_panel["runtime_admitted"])
-        self.assertFalse(read_panel["user_approved"])
-
-        study_diagram = by_ordinal[64]
-        self.assertEqual(
-            study_diagram["pairwise_full_size_review"]["state"],
-            "pass",
-        )
-        self.assertEqual(
-            study_diagram["pairwise_full_size_review"]["source_disposition"],
-            "full_size_pairwise_review",
-        )
-        self.assertIn(
-            "evidence/pairwise-full-size/pair-064-one-pair-2026-08-06-v1",
-            study_diagram["pairwise_full_size_review"]["evidence_path"],
-        )
-        self.assertFalse(study_diagram["runtime_admitted"])
-        self.assertFalse(study_diagram["user_approved"])
-
-        write_or_tap = by_ordinal[65]
-        self.assertEqual(
-            write_or_tap["pairwise_full_size_review"]["state"],
-            "pass",
-        )
-        self.assertEqual(
-            write_or_tap["pairwise_full_size_review"]["source_disposition"],
-            "full_size_pairwise_review",
-        )
-        self.assertIn(
-            "evidence/pairwise-full-size/pair-065-one-pair-2026-08-06-v1",
-            write_or_tap["pairwise_full_size_review"]["evidence_path"],
-        )
-        self.assertFalse(write_or_tap["runtime_admitted"])
-        self.assertFalse(write_or_tap["user_approved"])
-
-        select_control = by_ordinal[66]
-        self.assertEqual(
-            select_control["pairwise_full_size_review"]["state"],
-            "pass",
-        )
-        self.assertEqual(
-            select_control["pairwise_full_size_review"]["source_disposition"],
-            "full_size_pairwise_review",
-        )
-        self.assertIn(
-            "evidence/pairwise-full-size/pair-066-one-pair-2026-08-06-v1",
-            select_control["pairwise_full_size_review"]["evidence_path"],
-        )
-        self.assertFalse(select_control["runtime_admitted"])
-        self.assertFalse(select_control["user_approved"])
-
-        rhetorical_question = by_ordinal[30]
-        self.assertEqual(
-            rhetorical_question["pairwise_full_size_review"]["state"],
-            "pass",
-        )
-        self.assertIn(
-            "evidence/pairwise-full-size/pair-030-frontal-anatomy-review-2026-08-07-v1",
-            rhetorical_question["pairwise_full_size_review"]["evidence_path"],
-        )
-        self.assertFalse(rhetorical_question["runtime_admitted"])
-        self.assertFalse(rhetorical_question["user_approved"])
-
-        compassion = by_ordinal[47]
-        self.assertEqual(
-            compassion["pairwise_full_size_review"]["state"],
-            "pass",
-        )
-        self.assertIn(
-            "evidence/pairwise-full-size/pair-047-bill-axis-review-2026-08-07-v1",
-            compassion["pairwise_full_size_review"]["evidence_path"],
-        )
-        self.assertFalse(compassion["runtime_admitted"])
-        self.assertFalse(compassion["user_approved"])
-
-        visible_pairs = [
-            pair for pair in ledger["pairs"]
-            if pair["pairwise_full_size_review"]["state"] != "not_observable"
-        ]
-        self.assertEqual(len(visible_pairs), 64)
-        states = [
-            pair["pairwise_full_size_review"]["state"]
-            for pair in visible_pairs
-        ]
         summary = ledger["pairwise_full_size_review_summary"]
-        self.assertEqual(states.count("pass"), summary["pass_count"])
-        self.assertEqual(states.count("pending"), summary["pending_count"])
-        anatomy_v2_queue = set()
+
+        self.assertFalse(summary["complete"])
+        self.assertEqual(summary["pass_count"], 0)
+        self.assertEqual(summary["pending_count"], 63)
+        self.assertEqual(summary["needs_rebuild_count"], 1)
+        self.assertEqual(summary["not_observable_count"], 2)
         self.assertEqual(
-            {
-                int(pair["ordinal"])
-                for pair in visible_pairs
-                if pair["pairwise_full_size_review"]["state"]
-                == "needs_rebuild"
-            },
-            anatomy_v2_queue,
+            by_ordinal[7]["pairwise_full_size_review"]["state"],
+            "needs_rebuild",
         )
-        self.assertEqual(summary["pass_count"], 64)
-        self.assertEqual(summary["needs_rebuild_count"], 0)
-        self.assertEqual(summary["pending_count"], 0)
-        self.assertTrue(summary["complete"])
-        pending_pairs = [
-            pair for pair in visible_pairs
-            if pair["pairwise_full_size_review"]["state"] == "pending"
-        ]
-        self.assertTrue(all(
-            pair["pairwise_full_size_review"]["source_disposition"]
-            == "user_reported_visual_recheck"
-            for pair in pending_pairs
-        ))
-        self.assertTrue(all(not pair["runtime_admitted"] for pair in visible_pairs))
-        self.assertTrue(all(not pair["user_approved"] for pair in visible_pairs))
+        self.assertIn(
+            "lower_mandible_axis_misaligned",
+            by_ordinal[7]["pairwise_full_size_review"]["defect_codes"],
+        )
+        for ordinal, pair in by_ordinal.items():
+            self.assertFalse(pair["runtime_admitted"])
+            self.assertFalse(pair["user_approved"])
+            if ordinal not in {4, 5, 7}:
+                self.assertEqual(
+                    pair["pairwise_full_size_review"]["state"],
+                    "pending",
+                )
+                self.assertEqual(
+                    pair["pairwise_full_size_review"]["source_disposition"],
+                    "user_reported_visual_recheck",
+                )
+
 
 
 if __name__ == "__main__":

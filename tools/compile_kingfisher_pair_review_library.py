@@ -474,6 +474,14 @@ def compile_pair_review_library(
         str(item["pairwise_full_size_review"]["state"])
         for item in pair_evidence
     ]
+    integrated_all_pose_ids: list[str] = []
+    excluded_speaking_pose_ids: list[str] = []
+    for pair in pair_evidence:
+        integrated_all_pose_ids.append(str(pair["resting_pose_id"]))
+        if pair["pairwise_full_size_review"]["state"] == "pass":
+            integrated_all_pose_ids.append(str(pair["speaking_pose_id"]))
+        else:
+            excluded_speaking_pose_ids.append(str(pair["speaking_pose_id"]))
     sequences = dict(base_library.index.get("sequences", {}))
     sequences["kingfisher-paired-beaks-review"] = {
         "approval_state": "candidate_visual_review",
@@ -502,7 +510,10 @@ def compile_pair_review_library(
         "approval_state": "candidate_visual_review",
         "fps": 3,
         "loop": True,
-        "pose_ids": alternating_pose_ids + stage_pose_ids,
+        "pose_ids": integrated_all_pose_ids + stage_pose_ids,
+        "excluded_speaking_pose_count": len(excluded_speaking_pose_ids),
+        "excluded_speaking_pose_ids": excluded_speaking_pose_ids,
+        "speech_admission_policy": "pairwise_full_size_pass_only",
         "review_projection": True,
         "runtime_admitted": False,
     }
@@ -520,6 +531,8 @@ def compile_pair_review_library(
             "runtime_admitted": False,
             "user_approved_count": 0,
             "pair_count": len(pair_evidence),
+            "integrated_speech_pair_count": pair_review_states.count("pass"),
+            "excluded_speech_pair_count": len(excluded_speaking_pose_ids),
             "ledger_path": ledger_path.relative_to(ROOT).as_posix()
             if ledger_path.is_relative_to(ROOT)
             else ledger_path.as_posix(),

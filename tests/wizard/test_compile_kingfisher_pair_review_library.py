@@ -193,6 +193,19 @@ class CompileKingfisherPairReviewLibraryTests(unittest.TestCase):
                 ],
             )
             self.assertFalse(library.index["runtime_admitted"])
+            all_sequence = library.index["sequences"]["kingfisher-all"]
+            self.assertEqual(all_sequence["pose_ids"], sequence["pose_ids"][::2])
+            self.assertEqual(all_sequence["excluded_speaking_pose_count"], 66)
+            self.assertEqual(
+                all_sequence["speech_admission_policy"],
+                "pairwise_full_size_pass_only",
+            )
+            self.assertEqual(
+                library.index["legacy_pair_review"][
+                    "integrated_speech_pair_count"
+                ],
+                0,
+            )
             self.assertEqual(
                 library.index["legacy_pair_review"]["user_approved_count"],
                 0,
@@ -202,6 +215,39 @@ class CompileKingfisherPairReviewLibraryTests(unittest.TestCase):
                 if shard["shard_id"] == compiler.PAIR_REVIEW_SHARD_ID
             )
             self.assertIn(shard["sha256"][:16], shard["path"])
+
+    def test_all_sequence_admits_only_individually_passed_speaking_mates(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            base_index, ledger = self._fixture(root)
+            data = json.loads(ledger.read_text(encoding="utf-8"))
+            data["pairs"][0]["pairwise_full_size_review"]["state"] = "pass"
+            ledger.write_text(json.dumps(data), encoding="utf-8")
+
+            output = root / "review"
+            compile_pair_review_library(base_index, ledger, output)
+            library = HDPoseLibrary(output / "library-index.json")
+            sequence = library.index["sequences"]["kingfisher-all"]
+
+            self.assertEqual(
+                sequence["pose_ids"][:3],
+                [
+                    "kingfisher.act.001.pose-001",
+                    "kingfisher.act.111.pose-001-speaking-beak",
+                    "kingfisher.act.002.pose-002",
+                ],
+            )
+            self.assertEqual(sequence["excluded_speaking_pose_count"], 65)
+            self.assertNotIn(
+                "kingfisher.act.112.pose-002-speaking-beak",
+                sequence["pose_ids"],
+            )
+            self.assertEqual(
+                library.index["legacy_pair_review"][
+                    "integrated_speech_pair_count"
+                ],
+                1,
+            )
 
     def test_rejects_user_approved_or_runtime_admitted_rows(self):
         with tempfile.TemporaryDirectory() as directory:
