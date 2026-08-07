@@ -80,7 +80,7 @@ no-op blink behavior.
 ## Admission Boundary
 
 The package is intentionally review-only. The current Anatomy V2.1 re-audit
-records 59 observable passes, 5 `needs_rebuild` dispositions, and 2 rear-view
+records 60 observable passes, 4 `needs_rebuild` dispositions, and 2 rear-view
 pairs as not observable; it does not record user approval. The production
 registry is unchanged. Admission requires completion of the isolated art
 review, user approval evidence, and a newly admitted package digest.
@@ -103,15 +103,15 @@ scores.
 The first re-audit measured the 63 pairs with explicit hinge geometry and
 placed 14 into an explicit one-pair rebuild queue. Pair 001 is also queued
 because its legacy receipt predates the required geometry. Pairs 007, 008,
-010, 011, 012, 017, 022, 024, 025, and 027 have since passed isolated V2.1
-review, leaving this 5-pair queue:
+010, 011, 012, 017, 022, 024, 025, 027, and 030 have since passed isolated
+V2.1 review, leaving this 4-pair queue:
 
 ```text
-001 006 030 047 062
+001 006 047 062
 ```
 
 Pairs 004 and 005 are excluded because the beak is not observable. The ledger
-currently records 59 internal passes, 5 `needs_rebuild` dispositions, 2
+currently records 60 internal passes, 4 `needs_rebuild` dispositions, 2
 `not_observable` dispositions, 0 user
 approvals, and 0 runtime admissions.
 
@@ -239,6 +239,18 @@ opening while the crown, eyes, cheeks, throat, hoodie, held-in wings, body, and
 feet remain fixed. Its internal pass does not imply user approval or runtime
 admission.
 
+Pair 030 (`rhetorical-question`) retains the selected v3 speaking art
+byte-for-byte. Native, 4x nearest-neighbor head, and live projector review
+confirm a single centered opening with both rear corners attached while the
+upper bill, crown, eyes, throat, raised wings, hoodie, body, and feet remain
+fixed. Its legacy receipt incorrectly classified the tilted frontal bill as a
+left-facing profile. A tight upper-bill outline and separate centered anatomy
+hinge now classify the same pixels as frontal with 0.0170 center offset and a
+1.4205 lower-to-upper width ratio. The body-lock audit records zero
+outside-mouth change, zero registration drift, and 1.0 silhouette IoU. The
+isolated loop produced exactly two stable frame hashes. Its internal pass does
+not imply user approval or runtime admission.
+
 Every compiled pair now has a dedicated two-frame loop. Pair 062 can be
 reviewed locally at:
 
@@ -311,6 +323,12 @@ The accepted Pair 027 intimate-confidence review loop is available at:
 
 ```text
 http://127.0.0.1:8667/?hd-sequence=kingfisher-pair-027-review
+```
+
+The accepted Pair 030 rhetorical-question review loop is available at:
+
+```text
+http://127.0.0.1:8667/?hd-sequence=kingfisher-pair-030-review
 ```
 
 A pair returns to `pass` only after isolated closed/open visual review; that

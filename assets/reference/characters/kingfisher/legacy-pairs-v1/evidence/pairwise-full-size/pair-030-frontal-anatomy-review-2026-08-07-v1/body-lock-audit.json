@@ -1,0 +1,38 @@
+{
+  "changed_rendered_pixels": 4379,
+  "checks": {
+    "bounded_articulation_change": true,
+    "outside_mouth_stability": true,
+    "silhouette_overlap": true,
+    "stable_registration_bounds": true,
+    "visible_mouth_change": true
+  },
+  "mouth_mean_abs": 9.092593,
+  "mouth_region": [
+    405,
+    112,
+    531,
+    220
+  ],
+  "outside_mouth_mean_abs": 0.0,
+  "passed": true,
+  "registration_bound_delta": 0,
+  "resting_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/030-rhetorical-question/030_ACT030_rhetorical_question_resting_beak_alpha.png",
+  "resting_registration_bbox": [
+    165,
+    10,
+    795,
+    529
+  ],
+  "resting_sha256": "256022e9a94e388e65206479e97184ca4aec36e7709d564be5eca2d04504c0e4",
+  "schema_version": 2,
+  "silhouette_iou": 1.0,
+  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/030-rhetorical-question/140_ACT140_rhetorical_question_speaking_beak_alpha.png",
+  "speaking_registration_bbox": [
+    165,
+    10,
+    795,
+    529
+  ],
+  "speaking_sha256": "d203e24d38464fc5619fe3260ef7f92fb881bc00b2f7d900242ae12a032da39e"
+}

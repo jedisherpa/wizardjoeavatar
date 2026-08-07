@@ -3420,20 +3420,17 @@
       "ordinal": 30,
       "pair_work_path": "pair-work/030-rhetorical-question",
       "pairwise_full_size_review": {
-        "defect_codes": [
-          "anatomy_v2_review_required",
-          "tip_alignment_out_of_bounds"
-        ],
-        "evidence_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-030-one-pair-2026-08-05-v1",
-        "note": "Anatomy V2 invalidates the prior batch-derived pass. Review and rebuild this exact closed/open pair independently; no user approval or runtime admission is implied.",
+        "defect_codes": [],
+        "evidence_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-030-frontal-anatomy-review-2026-08-07-v1",
+        "note": "Retained the selected body-locked open mate byte-for-byte. Native and 4x head review confirmed one centered frontal opening with both rear corners attached and no upper-bill drift. Anatomy V2 now uses a tight frontal upper-bill polygon and centered anatomy hinge: center offset 0.0170, lower/upper width ratio 1.4205, zero outside-mouth change, zero registration drift, silhouette IoU 1.0. The isolated 8667 loop produced exactly two stable frame hashes with no transition artifact. Internal visual pass only; no user approval or runtime admission.",
         "protocol_id": "kingfisher-full-size-pairwise-v1",
         "queued_at": "2026-07-31T05:30:00+00:00",
-        "reviewed_at": "2026-08-07T01:13:17.585038+00:00",
-        "reviewer": "codex-kingfisher-anatomy-v2",
+        "reviewed_at": "2026-08-07T09:34:47Z",
+        "reviewer": "codex-pairwise-review",
         "runtime_admission_implied": false,
         "schema_version": 1,
         "source_disposition": "full_size_pairwise_review",
-        "state": "needs_rebuild",
+        "state": "pass",
         "user_approval_implied": false
       },
       "pairwise_full_size_review_history": [
@@ -3514,6 +3511,29 @@
             "schema_version": 1,
             "source_disposition": "full_size_pairwise_review",
             "state": "pass",
+            "user_approval_implied": false
+          }
+        },
+        {
+          "reason": "Superseded by a later full-size pairwise review disposition.",
+          "reporter": "codex-pairwise-review",
+          "schema_version": 1,
+          "superseded_at": "2026-08-07T09:34:47Z",
+          "superseded_review": {
+            "defect_codes": [
+              "anatomy_v2_review_required",
+              "tip_alignment_out_of_bounds"
+            ],
+            "evidence_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-030-one-pair-2026-08-05-v1",
+            "note": "Anatomy V2 invalidates the prior batch-derived pass. Review and rebuild this exact closed/open pair independently; no user approval or runtime admission is implied.",
+            "protocol_id": "kingfisher-full-size-pairwise-v1",
+            "queued_at": "2026-07-31T05:30:00+00:00",
+            "reviewed_at": "2026-08-07T01:13:17.585038+00:00",
+            "reviewer": "codex-kingfisher-anatomy-v2",
+            "runtime_admission_implied": false,
+            "schema_version": 1,
+            "source_disposition": "full_size_pairwise_review",
+            "state": "needs_rebuild",
             "user_approval_implied": false
           }
         }
@@ -6759,11 +6779,11 @@
   "pairwise_full_size_review_summary": {
     "complete": false,
     "missing_count": 0,
-    "needs_rebuild_count": 5,
+    "needs_rebuild_count": 4,
     "not_observable_count": 2,
     "pair_count": 66,
-    "pass_count": 59,
-    "passing_disposition_count": 61,
+    "pass_count": 60,
+    "passing_disposition_count": 62,
     "pending_count": 0,
     "protocol_id": "kingfisher-full-size-pairwise-v1",
     "reviewed_count": 66,

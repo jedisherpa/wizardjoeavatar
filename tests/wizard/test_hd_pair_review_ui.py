@@ -228,6 +228,18 @@ class HdPairReviewUiTests(unittest.TestCase):
         self.assertFalse(select_control["runtime_admitted"])
         self.assertFalse(select_control["user_approved"])
 
+        rhetorical_question = by_ordinal[30]
+        self.assertEqual(
+            rhetorical_question["pairwise_full_size_review"]["state"],
+            "pass",
+        )
+        self.assertIn(
+            "evidence/pairwise-full-size/pair-030-frontal-anatomy-review-2026-08-07-v1",
+            rhetorical_question["pairwise_full_size_review"]["evidence_path"],
+        )
+        self.assertFalse(rhetorical_question["runtime_admitted"])
+        self.assertFalse(rhetorical_question["user_approved"])
+
         visible_pairs = [
             pair for pair in ledger["pairs"]
             if pair["pairwise_full_size_review"]["state"] != "not_observable"
@@ -241,7 +253,7 @@ class HdPairReviewUiTests(unittest.TestCase):
         self.assertEqual(states.count("pass"), summary["pass_count"])
         self.assertEqual(states.count("pending"), summary["pending_count"])
         anatomy_v2_queue = {
-            1, 6, 30, 47, 62,
+            1, 6, 47, 62,
         }
         self.assertEqual(
             {
@@ -252,8 +264,8 @@ class HdPairReviewUiTests(unittest.TestCase):
             },
             anatomy_v2_queue,
         )
-        self.assertEqual(summary["pass_count"], 59)
-        self.assertEqual(summary["needs_rebuild_count"], 5)
+        self.assertEqual(summary["pass_count"], 60)
+        self.assertEqual(summary["needs_rebuild_count"], 4)
         self.assertEqual(summary["pending_count"], 0)
         self.assertFalse(summary["complete"])
         pending_pairs = [
