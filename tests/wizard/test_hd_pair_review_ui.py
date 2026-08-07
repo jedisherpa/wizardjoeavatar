@@ -81,6 +81,19 @@ class HdPairReviewUiTests(unittest.TestCase):
             int(pair["ordinal"]): pair
             for pair in ledger["pairs"]
         }
+        right_profile = by_ordinal[6]
+        self.assertEqual(
+            right_profile["pairwise_full_size_review"]["state"],
+            "pass",
+        )
+        self.assertIn(
+            "evidence/pairwise-full-size/"
+            "pair-006-open-cavity-review-2026-08-07-v2",
+            right_profile["pairwise_full_size_review"]["evidence_path"],
+        )
+        self.assertFalse(right_profile["runtime_admitted"])
+        self.assertFalse(right_profile["user_approved"])
+
         repaired = by_ordinal[59]
         self.assertEqual(
             repaired["internal_visual_review"]["state"],
@@ -265,7 +278,7 @@ class HdPairReviewUiTests(unittest.TestCase):
         self.assertEqual(states.count("pass"), summary["pass_count"])
         self.assertEqual(states.count("pending"), summary["pending_count"])
         anatomy_v2_queue = {
-            1, 6,
+            1,
         }
         self.assertEqual(
             {
@@ -276,8 +289,8 @@ class HdPairReviewUiTests(unittest.TestCase):
             },
             anatomy_v2_queue,
         )
-        self.assertEqual(summary["pass_count"], 62)
-        self.assertEqual(summary["needs_rebuild_count"], 2)
+        self.assertEqual(summary["pass_count"], 63)
+        self.assertEqual(summary["needs_rebuild_count"], 1)
         self.assertEqual(summary["pending_count"], 0)
         self.assertFalse(summary["complete"])
         pending_pairs = [

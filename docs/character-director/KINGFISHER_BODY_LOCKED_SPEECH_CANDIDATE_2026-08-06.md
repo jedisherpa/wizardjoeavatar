@@ -80,7 +80,7 @@ no-op blink behavior.
 ## Admission Boundary
 
 The package is intentionally review-only. The current Anatomy V2.1 re-audit
-records 62 observable passes, 2 `needs_rebuild` dispositions, and 2 rear-view
+records 63 observable passes, 1 `needs_rebuild` disposition, and 2 rear-view
 pairs as not observable; it does not record user approval. The production
 registry is unchanged. Admission requires completion of the isolated art
 review, user approval evidence, and a newly admitted package digest.
@@ -102,16 +102,16 @@ scores.
 
 The first re-audit measured the 63 pairs with explicit hinge geometry and
 placed 14 into an explicit one-pair rebuild queue. Pair 001 is also queued
-because its legacy receipt predates the required geometry. Pairs 007, 008,
-010, 011, 012, 017, 022, 024, 025, 027, 030, 047, and 062 have since passed
-isolated V2.1 review, leaving this 2-pair queue:
+because its legacy receipt predates the required geometry. Pairs 006, 007,
+008, 010, 011, 012, 017, 022, 024, 025, 027, 030, 047, and 062 have since
+passed isolated V2.1 review, leaving this 1-pair queue:
 
 ```text
-001 006
+001
 ```
 
 Pairs 004 and 005 are excluded because the beak is not observable. The ledger
-currently records 62 internal passes, 2 `needs_rebuild` dispositions, 2
+currently records 63 internal passes, 1 `needs_rebuild` disposition, 2
 `not_observable` dispositions, 0 user
 approvals, and 0 runtime admissions.
 
@@ -127,17 +127,19 @@ outside-mouth change, zero registration drift, and 0.999939 silhouette IoU.
 Its internal pass does not imply user approval or runtime admission.
 
 Pair 006 (`right-profile`) is the second isolated rebuild. The prior lower
-bill exceeded the Anatomy V2 tip-offset boundary. Candidate V5 rotates the
-matched lower-bill donor 10 degrees around the closed pose's rear hinge rather
-than translating it as a free patch. A live projector pass also rejected the
+bill exceeded the Anatomy V2 tip-offset boundary. The accepted V5 successor
+rotates the matched lower-bill donor 10 degrees around the closed pose's rear
+hinge rather than translating it as a free patch. A live projector pass also
+rejected the
 first mechanically valid candidate because its pale gap made the lower bill
 read as a detached spike. V5 restores a connected dark cavity and the donor's
 warm inner edge. The closed pose remains authoritative for the complete body
 and upper bill. The rebuilt pair has a 0.41-degree declared-axis error, a
 0.344 normalized tip offset, zero registration drift, and zero outside-mouth
-mean difference. It remains in `needs_rebuild` until the isolated loop is
-visually accepted; these measurements do not constitute user approval or
-runtime admission.
+mean difference. Native enlarged head review and the live two-frame projector
+loop show a shared rear hinge, matched profile axis, connected cavity, and no
+body drift. Its internal pass does not imply user approval or runtime
+admission.
 
 Pair 007 (`front-three-quarter-right`) exposed the difference between a
 misaligned bill and a legitimate wide-open speech drawing. The accepted art
