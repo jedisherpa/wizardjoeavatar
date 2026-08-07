@@ -14,7 +14,7 @@
   "legacy_pair_review": {
     "approval_state": "candidate_visual_review",
     "ledger_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-review-ledger.json",
-    "ledger_sha256": "0d508455c53ae1ef0055858cfa7fd055773aad928b4c3f4eb3979ce6eb38f3a9",
+    "ledger_sha256": "c37e3e64fcb945e1e8e2ec291a4ebec77cb1dbe34985629e30ce0a66f724c91b",
     "pair_count": 66,
     "pairs": [
       {
@@ -543,12 +543,12 @@
         "automated_audit_passed": true,
         "ordinal": 27,
         "pairwise_full_size_review": {
-          "evidence_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-027-one-pair-2026-08-05-v2",
+          "evidence_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-027-tight-anatomy-review-2026-08-07-v1",
           "protocol_id": "kingfisher-full-size-pairwise-v1",
-          "state": "needs_rebuild"
+          "state": "pass"
         },
         "receipt_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/027-intimate-confidence/pair-receipt.json",
-        "receipt_sha256": "e1de321c8d3e5e0acd4f55755a17d36f54de99c7cac3beaffb2e98df5aee2c92",
+        "receipt_sha256": "cfe1fa795c87dab58ac08716edf9ab6e6f1a3e471344aa2ed35c3fd2a0b240e1",
         "resting_pose_id": "kingfisher.act.027.intimate-confidence",
         "resting_sha256": "5b452215c716a16d05d217e0571829e29dc15897c4d0590496c81dfff838ee60",
         "runtime_admitted": false,
@@ -1340,9 +1340,9 @@
     ],
     "pairwise_full_size_review_summary": {
       "complete": false,
-      "needs_rebuild_count": 6,
+      "needs_rebuild_count": 5,
       "not_observable_count": 2,
-      "pass_count": 58,
+      "pass_count": 59,
       "pending_count": 0
     },
     "review_projection": true,
@@ -2153,7 +2153,7 @@
       "approval_state": "candidate_visual_review",
       "fps": 2,
       "loop": true,
-      "pair_review_state": "needs_rebuild",
+      "pair_review_state": "pass",
       "pose_ids": [
         "kingfisher.act.027.intimate-confidence",
         "kingfisher.act.137.intimate-confidence-speaking-beak"
@@ -2660,7 +2660,7 @@
         "pass",
         "pass",
         "pass",
-        "needs_rebuild",
+        "pass",
         "pass",
         "pass",
         "needs_rebuild",
@@ -3078,7 +3078,7 @@
     {
       "approval_state": "candidate_visual_review",
       "bytes": 28586641,
-      "path": "kingfisher_act_001_066_111_176_pair_review-3d4498de32bd886a.wjpose",
+      "path": "kingfisher_act_001_066_111_176_pair_review-d2441b69869c4121.wjpose",
       "pose_count": 132,
       "pose_ids": [
         "kingfisher.act.001.neutral-front",
@@ -3216,7 +3216,7 @@
       ],
       "review_projection": true,
       "runtime_admitted": false,
-      "sha256": "3d4498de32bd886aa8375dd11245c5389ab2e467b22f97e1239b75c28ea326ba",
+      "sha256": "d2441b69869c41218a9a2879aa3ac4a4a3d2931aef1fd8f0643f4aae5c4ba2b1",
       "shard_id": "kingfisher_act_001_066_111_176_pair_review",
       "source": "kingfisher_pair_specific_beak_review_v1"
     }
