@@ -15,17 +15,6 @@
     300
   ],
   "outside_mouth_mean_abs": 0.0,
-  "pairwise_promotion": {
-    "candidate_audit_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/006-right-profile/candidate-v9-authored-mouth-audit.json",
-    "candidate_receipt_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/006-right-profile/candidate-v9-authored-mouth-receipt.json",
-    "history_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/006-right-profile/pair-receipt-history.json",
-    "promoted_at": "2026-08-07T17:12:00-06:00",
-    "reason": "Complete the promoted authored-mouth candidate with the bounded-region, connected-mandible, and anatomy evidence required by the fail-closed compiler.",
-    "reviewer": "codex-one-pair-profile-review",
-    "runtime_admission_implied": false,
-    "schema_version": 1,
-    "user_approval_implied": false
-  },
   "passed": true,
   "registration_bound_delta": 0,
   "resting_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/006-right-profile/006_ACT006_right_profile_resting_beak_alpha.png",

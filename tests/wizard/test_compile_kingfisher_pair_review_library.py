@@ -305,8 +305,41 @@ class CompileKingfisherPairReviewLibraryTests(unittest.TestCase):
             receipt_path.write_text(json.dumps(receipt), encoding="utf-8")
             ledger.write_text(json.dumps(data), encoding="utf-8")
 
-            with self.assertRaisesRegex(ValueError, "pair-specific mandible patch"):
+            with self.assertRaisesRegex(ValueError, "pair-specific mouth repair"):
                 compile_pair_review_library(base_index, ledger, root / "review")
+
+    def test_accepts_authored_mouth_region_with_exact_body_lock(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            base_index, ledger = self._fixture(root)
+            data = json.loads(ledger.read_text(encoding="utf-8"))
+            pair = data["pairs"][1]
+            pair["pairwise_full_size_review"]["state"] = "pass"
+            receipt_path = Path(pair["receipt_path"])
+            receipt = json.loads(receipt_path.read_text(encoding="utf-8"))
+            receipt.update(
+                {
+                    "method": "pair_specific_authored_mouth_region_v1",
+                    "upper_beak_policy": "authored_open_mouth_region",
+                    "body_lock": "exact_outside_articulation_region",
+                    "mouth_region": [10, 6, 22, 19],
+                }
+            )
+            receipt_path.write_text(json.dumps(receipt), encoding="utf-8")
+            ledger.write_text(json.dumps(data), encoding="utf-8")
+
+            result = compile_pair_review_library(base_index, ledger, root / "review")
+
+            self.assertEqual(result["pose_count"], 132)
+            index = json.loads(
+                (root / "review" / "library-index.json").read_text(
+                    encoding="utf-8"
+                )
+            )
+            self.assertEqual(
+                index["legacy_pair_review"]["integrated_speech_pair_count"],
+                1,
+            )
 
     def test_rejects_new_pass_with_misaligned_beak_axis(self):
         with tempfile.TemporaryDirectory() as directory:

@@ -1,0 +1,343 @@
+{
+  "character_id": "kingfisher",
+  "entries": [
+    {
+      "audit": {
+        "changed_rendered_pixels": 1643,
+        "checks": {
+          "bounded_articulation_change": true,
+          "outside_mouth_stability": true,
+          "silhouette_overlap": true,
+          "stable_registration_bounds": true,
+          "visible_mouth_change": true
+        },
+        "mouth_mean_abs": 34.022222,
+        "mouth_region": [
+          520,
+          215,
+          655,
+          300
+        ],
+        "outside_mouth_mean_abs": 0.0,
+        "passed": true,
+        "registration_bound_delta": 0,
+        "resting_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/006-right-profile/006_ACT006_right_profile_resting_beak_alpha.png",
+        "resting_registration_bbox": [
+          309,
+          97,
+          651,
+          529
+        ],
+        "resting_sha256": "e3e68d7e3dcc46ae48a2bba0df0aa1695285c78b084c064ebed81ac51eff6833",
+        "schema_version": 2,
+        "silhouette_iou": 0.980371,
+        "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/006-right-profile/116_ACT116_right_profile_speaking_beak_pairwise_v2.png",
+        "speaking_registration_bbox": [
+          309,
+          97,
+          651,
+          529
+        ],
+        "speaking_sha256": "a29bb3c5361f44496c9087dc20de8b981849adb38c480be7ec9e66285d4f71d3"
+      },
+      "reason": "Reject the thin inserted-wedge mate and promote the exact authored right-profile open-mouth region onto the exact closed body after isolated full-size review.",
+      "receipt": {
+        "alignment": {
+          "interpolation": "lanczos_rgb_binary_alpha",
+          "rotation_center": [
+            537,
+            246
+          ],
+          "rotation_degrees": 10.0,
+          "scale": 1.0,
+          "scale_x": 1.0,
+          "scale_y": 1.0,
+          "translate_x": 0,
+          "translate_y": 0
+        },
+        "anatomy_direction_vector": [
+          6,
+          -1
+        ],
+        "anatomy_upper_beak_polygon": [
+          [
+            536,
+            220
+          ],
+          [
+            650,
+            228
+          ],
+          [
+            650,
+            242
+          ],
+          [
+            536,
+            250
+          ]
+        ],
+        "approval_state": "candidate_visual_review",
+        "beak_anatomy": {
+          "cavity_anchor_distance": 3.993,
+          "checks": {
+            "bounded_tip_offset": true,
+            "cavity_anchored": true,
+            "direction_matches_upper_beak": true,
+            "mandible_anchored": true,
+            "plausible_mandible_length": true,
+            "same_longitudinal_direction": true,
+            "upper_beak_anchored": true
+          },
+          "declared_direction_angle_degrees": 0.4116,
+          "direction": [
+            6,
+            -1
+          ],
+          "effective_direction": [
+            0.987549,
+            -0.157309
+          ],
+          "inferred_direction": [
+            0.987549,
+            -0.157309
+          ],
+          "inferred_upper_tip": [
+            650,
+            228
+          ],
+          "mandible_anchor_distance": 1.0,
+          "mandible_forward_reach": 81.8268,
+          "mandible_length_ratio": 0.7151,
+          "mandible_reverse_reach": 3.1899,
+          "mode": "directional",
+          "passed": true,
+          "schema_version": 2,
+          "tip_offset_ratio": 0.344,
+          "upper_anchor_distance": 1.0,
+          "upper_forward_reach": 114.4246
+        },
+        "canvas": [
+          960,
+          540
+        ],
+        "cavity_fill_rgba": [
+          10,
+          13,
+          16,
+          255
+        ],
+        "cavity_polygon": [
+          [
+            537,
+            250
+          ],
+          [
+            640,
+            244
+          ],
+          [
+            615,
+            268
+          ],
+          [
+            537,
+            258
+          ]
+        ],
+        "cavity_source": "solid_generated_overlay",
+        "changed_bbox": [
+          536,
+          244,
+          641,
+          271
+        ],
+        "generated_render_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/006-right-profile/116_ACT116_right_profile_speaking_beak_alpha.png",
+        "generated_render_sha256": "21ca9942c49b2c326b1495060cbb3932bba42b798543fd735249e4e6ee580bb4",
+        "hinge": [
+          537,
+          246
+        ],
+        "hinge_radius": 10,
+        "mandible_bbox": [
+          536,
+          242,
+          619,
+          271
+        ],
+        "mandible_connected_ratio": 0.997351,
+        "mandible_largest_component_pixels": 753,
+        "mandible_opaque_pixels": 755,
+        "mandible_polygon": [
+          [
+            536,
+            242
+          ],
+          [
+            624,
+            272
+          ],
+          [
+            536,
+            260
+          ]
+        ],
+        "method": "pair_specific_connected_mandible_patch_v1",
+        "minimum_connected_ratio": 0.9,
+        "minimum_mandible_height": 12,
+        "oral_warm_replacement_polygon": null,
+        "oral_warm_replacement_rgba": null,
+        "outside_articulation_change": false,
+        "residual_clear_polygon": null,
+        "resting_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/006-right-profile/006_ACT006_right_profile_resting_beak_alpha.png",
+        "resting_sha256": "e3e68d7e3dcc46ae48a2bba0df0aa1695285c78b084c064ebed81ac51eff6833",
+        "runtime_admitted": false,
+        "schema_version": 1,
+        "source_mask": {
+          "light_threshold": 180,
+          "mode": "opaque",
+          "neutral_chroma_threshold": 36
+        },
+        "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/006-right-profile/116_ACT116_right_profile_speaking_beak_pairwise_v2.png",
+        "speaking_sha256": "a29bb3c5361f44496c9087dc20de8b981849adb38c480be7ec9e66285d4f71d3",
+        "upper_beak_policy": "immutable_source_pixels",
+        "upper_beak_polygon": [
+          [
+            536,
+            220
+          ],
+          [
+            650,
+            228
+          ],
+          [
+            650,
+            242
+          ],
+          [
+            536,
+            250
+          ]
+        ]
+      },
+      "reviewer": "codex-one-pair-profile-review",
+      "schema_version": 1,
+      "superseded_at": "2026-08-07T17:00:00-06:00"
+    },
+    {
+      "audit": {
+        "changed_rendered_pixels": 2739,
+        "checks": {
+          "bounded_articulation_change": true,
+          "outside_mouth_stability": true,
+          "silhouette_overlap": true,
+          "stable_registration_bounds": true,
+          "visible_mouth_change": true
+        },
+        "mouth_mean_abs": 36.488889,
+        "mouth_region": [
+          520,
+          215,
+          655,
+          300
+        ],
+        "outside_mouth_mean_abs": 0.0,
+        "pairwise_promotion": {
+          "candidate_audit_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/006-right-profile/candidate-v9-authored-mouth-audit.json",
+          "candidate_receipt_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/006-right-profile/candidate-v9-authored-mouth-receipt.json",
+          "history_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/006-right-profile/pair-receipt-history.json",
+          "promoted_at": "2026-08-07T17:00:00-06:00",
+          "reason": "Reject the thin inserted-wedge mate and promote the exact authored right-profile open-mouth region onto the exact closed body after isolated full-size review.",
+          "reviewer": "codex-one-pair-profile-review",
+          "runtime_admission_implied": false,
+          "schema_version": 1,
+          "user_approval_implied": false
+        },
+        "passed": true,
+        "registration_bound_delta": 0,
+        "resting_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/006-right-profile/006_ACT006_right_profile_resting_beak_alpha.png",
+        "resting_registration_bbox": [
+          309,
+          97,
+          651,
+          529
+        ],
+        "resting_sha256": "e3e68d7e3dcc46ae48a2bba0df0aa1695285c78b084c064ebed81ac51eff6833",
+        "schema_version": 2,
+        "silhouette_iou": 0.978873,
+        "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/006-right-profile/116_ACT116_right_profile_speaking_beak_candidate_pairwise_v9-authored-mouth.png",
+        "speaking_registration_bbox": [
+          309,
+          97,
+          651,
+          529
+        ],
+        "speaking_sha256": "a9cb089f119136ce0478ded4b721adcff589eeea7a3d6baa1d8b7cd351537b7f"
+      },
+      "reason": "Complete the promoted authored-mouth candidate with the bounded-region, connected-mandible, and anatomy evidence required by the fail-closed compiler.",
+      "receipt": {
+        "approval_state": "candidate_visual_review",
+        "beak_anatomy": {
+          "checks": {
+            "bounded_tip_offset": true,
+            "cavity_anchored": true,
+            "mandible_anchored": true,
+            "plausible_mandible_length": true,
+            "plausible_opening_angle": true,
+            "same_longitudinal_direction": true,
+            "upper_beak_anchored": true
+          },
+          "direction": "right",
+          "mandible_length_ratio": 0.7888,
+          "mode": "directional",
+          "opening_angle_degrees": 30.6206,
+          "passed": true,
+          "schema_version": 2,
+          "tip_offset_ratio": 0.4669
+        },
+        "body_lock": "exact_outside_articulation_region",
+        "canvas": [
+          960,
+          540
+        ],
+        "hinge": [
+          533,
+          239
+        ],
+        "method": "pair_specific_authored_mouth_region_v1",
+        "mouth_region": [
+          520,
+          215,
+          655,
+          300
+        ],
+        "outside_articulation_change": false,
+        "pairwise_promotion": {
+          "candidate_audit_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/006-right-profile/candidate-v9-authored-mouth-audit.json",
+          "candidate_receipt_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/006-right-profile/candidate-v9-authored-mouth-receipt.json",
+          "history_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/006-right-profile/pair-receipt-history.json",
+          "promoted_at": "2026-08-07T17:00:00-06:00",
+          "reason": "Reject the thin inserted-wedge mate and promote the exact authored right-profile open-mouth region onto the exact closed body after isolated full-size review.",
+          "reviewer": "codex-one-pair-profile-review",
+          "runtime_admission_implied": false,
+          "schema_version": 1,
+          "user_approval_implied": false
+        },
+        "resting_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/006-right-profile/006_ACT006_right_profile_resting_beak_alpha.png",
+        "resting_sha256": "e3e68d7e3dcc46ae48a2bba0df0aa1695285c78b084c064ebed81ac51eff6833",
+        "runtime_admitted": false,
+        "schema_version": 1,
+        "speaking_donor_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/006-right-profile/116_ACT116_right_profile_speaking_beak_alpha.png",
+        "speaking_donor_sha256": "21ca9942c49b2c326b1495060cbb3932bba42b798543fd735249e4e6ee580bb4",
+        "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/006-right-profile/116_ACT116_right_profile_speaking_beak_candidate_pairwise_v9-authored-mouth.png",
+        "speaking_sha256": "a9cb089f119136ce0478ded4b721adcff589eeea7a3d6baa1d8b7cd351537b7f",
+        "upper_beak_policy": "authored_open_mouth_region"
+      },
+      "reviewer": "codex-one-pair-profile-review",
+      "schema_version": 1,
+      "superseded_at": "2026-08-07T17:12:00-06:00"
+    }
+  ],
+  "receipt_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/006-right-profile/pair-receipt.json",
+  "schema_version": 1
+}

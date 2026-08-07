@@ -52,10 +52,40 @@ def require_pair_specific_pass_receipt(
         or int(pair.get("ordinal", 0)) < PAIR_SPECIFIC_PATCH_REQUIRED_FROM_ORDINAL
     ):
         return
-    if receipt.get("method") != "pair_specific_connected_mandible_patch_v1":
-        raise ValueError("passing pair requires a pair-specific mandible patch")
-    if receipt.get("upper_beak_policy") != "immutable_source_pixels":
-        raise ValueError("passing pair must preserve immutable upper-beak pixels")
+    method = receipt.get("method")
+    if method not in {
+        "pair_specific_connected_mandible_patch_v1",
+        "pair_specific_authored_mouth_region_v1",
+    }:
+        raise ValueError("passing pair requires a pair-specific mouth repair")
+    if method == "pair_specific_connected_mandible_patch_v1":
+        if receipt.get("upper_beak_policy") != "immutable_source_pixels":
+            raise ValueError(
+                "passing mandible patch must preserve immutable upper-beak pixels"
+            )
+    else:
+        if receipt.get("upper_beak_policy") != "authored_open_mouth_region":
+            raise ValueError(
+                "passing authored-mouth repair requires its authored upper beak"
+            )
+        if receipt.get("body_lock") != "exact_outside_articulation_region":
+            raise ValueError(
+                "passing authored-mouth repair requires an exact closed-body lock"
+            )
+        mouth_region = receipt.get("mouth_region")
+        if (
+            not isinstance(mouth_region, list)
+            or len(mouth_region) != 4
+            or any(
+                isinstance(value, bool) or not isinstance(value, int)
+                for value in mouth_region
+            )
+            or mouth_region[0] >= mouth_region[2]
+            or mouth_region[1] >= mouth_region[3]
+        ):
+            raise ValueError(
+                "passing authored-mouth repair requires a bounded mouth region"
+            )
     if receipt.get("outside_articulation_change") is not False:
         raise ValueError("passing pair changed pixels outside articulation masks")
 

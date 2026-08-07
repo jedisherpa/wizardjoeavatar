@@ -4639,3 +4639,31 @@ Full-size evidence:
 This is an internal visual pass only. The reopened queue now contains 4
 internal passes, 60 pending observable pairs, and 2 not-observable rear views.
 User approval and runtime admission remain zero.
+
+### Pair 6 isolated right-profile rebuild
+
+Pair 6 (`right-profile`) exposed why the previous batch process was not
+trustworthy. Its nominally passing mate presented a thin dark wedge beneath the
+white throat instead of a complete lower bill. That mate and three derivative
+candidates were rejected during the isolated review.
+
+The replacement copies only the exact authored open-mouth region from the
+original right-profile donor onto the exact resting body. This preserves the
+natural upper bill, lower bill, oral cavity, and shared rear hinge near
+`(533, 239)`, while every pixel outside the bounded mouth region remains owned
+by the closed frame.
+
+The selected frame retains SHA-256
+`a9cb089f119136ce0478ded4b721adcff589eeea7a3d6baa1d8b7cd351537b7f`.
+Its anatomy records a `30.6206` degree opening, `0.7888`
+mandible-to-upper reach ratio, and `0.4669` normalized tip offset. The strict
+audit reports 2,739 changed rendered mouth pixels, outside-mouth mean
+difference `0.0`, registration delta `0`, and silhouette IoU `0.978873`.
+
+Full-size evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-006-one-pair-2026-08-07-v4/`
+
+This is an internal visual pass only. The reopened queue now contains 5
+internal passes, 59 pending observable pairs, and 2 not-observable rear views.
+User approval and runtime admission remain zero.
