@@ -80,7 +80,7 @@ no-op blink behavior.
 ## Admission Boundary
 
 The package is intentionally review-only. The current Anatomy V2.1 re-audit
-records 57 observable passes, 7 `needs_rebuild` dispositions, and 2 rear-view
+records 58 observable passes, 6 `needs_rebuild` dispositions, and 2 rear-view
 pairs as not observable; it does not record user approval. The production
 registry is unchanged. Admission requires completion of the isolated art
 review, user approval evidence, and a newly admitted package digest.
@@ -103,15 +103,15 @@ scores.
 The first re-audit measured the 63 pairs with explicit hinge geometry and
 placed 14 into an explicit one-pair rebuild queue. Pair 001 is also queued
 because its legacy receipt predates the required geometry. Pairs 007, 008,
-010, 011, 012, 017, 022, and 024 have since passed isolated V2.1 review,
-leaving this 7-pair queue:
+010, 011, 012, 017, 022, 024, and 025 have since passed isolated V2.1 review,
+leaving this 6-pair queue:
 
 ```text
-001 006 025 027 030 047 062
+001 006 027 030 047 062
 ```
 
 Pairs 004 and 005 are excluded because the beak is not observable. The ledger
-currently records 57 internal passes, 7 `needs_rebuild` dispositions, 2
+currently records 58 internal passes, 6 `needs_rebuild` dispositions, 2
 `not_observable` dispositions, 0 user
 approvals, and 0 runtime admissions.
 
@@ -214,6 +214,18 @@ Native, 3x nearest-neighbor head, and live two-frame projector reviews expose
 only the intended bill articulation. Its internal pass does not imply user
 approval or runtime admission.
 
+Pair 025 (`hand-over-the-floor`) replaces the overshooting v6 lower bill with
+the tip-locked v7 mate. Both are derived from the preserved pair-specific
+donor, but v7 keeps the same authored cheek hinge while shortening the lower
+bill so its tip lands beneath the immutable closed upper tip. Tight bill-only
+Anatomy V2.1 geometry records a 0.2196-degree declared-axis error, 1.0041
+lower-to-upper reach ratio, 0.4264 tip offset ratio, and 23.0098-degree opening
+angle. The body-lock audit records zero outside-mouth change, zero registration
+drift, and 0.998266 silhouette IoU. Native, 3x nearest-neighbor, and live
+two-frame review confirm that the eye, crown, cheek, throat, hoodie, feet, and
+extended presenting wing remain fixed. Its internal pass does not imply user
+approval or runtime admission.
+
 Every compiled pair now has a dedicated two-frame loop. Pair 062 can be
 reviewed locally at:
 
@@ -274,6 +286,12 @@ The accepted Pair 024 polite-interruption review loop is available at:
 
 ```text
 http://127.0.0.1:8667/?hd-sequence=kingfisher-pair-024-review
+```
+
+The accepted Pair 025 hand-over-the-floor review loop is available at:
+
+```text
+http://127.0.0.1:8667/?hd-sequence=kingfisher-pair-025-review
 ```
 
 A pair returns to `pass` only after isolated closed/open visual review; that
