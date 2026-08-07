@@ -4616,3 +4616,26 @@ Full-size evidence:
 This is an internal visual pass only. The reopened queue now contains 3
 internal passes, 61 pending observable pairs, and 2 not-observable rear views.
 User approval and runtime admission remain zero.
+
+### Pair 3 isolated left-profile review
+
+Pair 3 (`left-profile`) was reviewed independently at full-projector size and
+in a six-second closed/open loop. The selected speaking mate retains one
+connected lower mandible opening from hinge `(420, 234)` on the same
+screen-left axis as the immutable upper bill. The lower tip remains behind the
+upper tip, preserving the authored profile and avoiding the pasted-jaw reading
+seen in the rejected bulk pass.
+
+Its anatomy measures a `23.5183` degree opening, `0.7897`
+mandible-to-upper reach ratio, and `0.3437` normalized tip offset. The audit
+reports 861 changed rendered mouth pixels, outside-mouth mean difference
+`0.0`, registration delta `0`, and silhouette IoU `0.993`. The crown, eye,
+head, throat, hoodie, body, scale, and canvas remain fixed.
+
+Full-size evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-003-one-pair-2026-08-07-v3/`
+
+This is an internal visual pass only. The reopened queue now contains 4
+internal passes, 60 pending observable pairs, and 2 not-observable rear views.
+User approval and runtime admission remain zero.
