@@ -4541,3 +4541,30 @@ Pair 7 (`front-three-quarter-right`) is the first visibly rejected drawing in
 the reopened queue. Its current lower bill descends on a substantially steeper
 axis than the fixed upper bill and reads as a pasted jaw in alternating
 playback. It remains quarantined pending a new pair-specific speaking mate.
+
+### Pair 7 isolated hinge repair
+
+Pair 7 was rebuilt as an isolated closed/open pair. The exact resting frame is
+the body, head, eye, crest, upper-bill, canvas, scale, and registration
+authority. The repair reuses the textured lower mandible from the former open
+mate, removes light neutral throat contamination, and rotates that mandible
+`-18` degrees around the authored hinge `(449, 253)`. The bounded oral cavity
+is repainted behind the mandible and the resting upper-bill pixels are restored
+exactly after composition.
+
+The corrected speaking frame retains SHA-256
+`4b59e7f133af357c44a7557b1822f03722c88f3a0f33125959699b5463a4fd28`.
+Its receipt records one connected lower mandible with connected ratio `1.0`,
+opening angle `20.9304` degrees, mandible-to-upper reach ratio `0.7493`, and no
+change outside the mouth articulation region. The strict audit reports
+outside-mouth mean difference `0.0`, registration delta `0`, silhouette IoU
+`0.996078`, and 1,407 changed rendered pixels.
+
+Full-size evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-007-hinge-refined-2026-08-07-v1/`
+
+This is an internal visual pass for Pair 7 only. It does not imply user
+approval or runtime admission. The reopened queue now contains 1 internal
+pass, 63 pending observable pairs, and 2 not-observable rear views. Every
+unpassed speaking mate remains excluded from `kingfisher-all`.

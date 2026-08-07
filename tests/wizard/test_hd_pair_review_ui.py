@@ -84,17 +84,17 @@ class HdPairReviewUiTests(unittest.TestCase):
         summary = ledger["pairwise_full_size_review_summary"]
 
         self.assertFalse(summary["complete"])
-        self.assertEqual(summary["pass_count"], 0)
+        self.assertEqual(summary["pass_count"], 1)
         self.assertEqual(summary["pending_count"], 63)
-        self.assertEqual(summary["needs_rebuild_count"], 1)
+        self.assertEqual(summary["needs_rebuild_count"], 0)
         self.assertEqual(summary["not_observable_count"], 2)
         self.assertEqual(
             by_ordinal[7]["pairwise_full_size_review"]["state"],
-            "needs_rebuild",
+            "pass",
         )
         self.assertIn(
-            "lower_mandible_axis_misaligned",
-            by_ordinal[7]["pairwise_full_size_review"]["defect_codes"],
+            "pair-007-hinge-refined-2026-08-07-v1",
+            by_ordinal[7]["pairwise_full_size_review"]["evidence_path"],
         )
         for ordinal, pair in by_ordinal.items():
             self.assertFalse(pair["runtime_admitted"])

@@ -1,0 +1,461 @@
+{
+  "character_id": "kingfisher",
+  "entries": [
+    {
+      "audit": {
+        "changed_rendered_pixels": 2006,
+        "checks": {
+          "bounded_articulation_change": true,
+          "outside_mouth_stability": true,
+          "silhouette_overlap": true,
+          "stable_registration_bounds": true,
+          "visible_mouth_change": true
+        },
+        "mouth_mean_abs": 11.284463,
+        "mouth_region": [
+          340,
+          220,
+          465,
+          315
+        ],
+        "outside_mouth_mean_abs": 0.0,
+        "passed": true,
+        "registration_bound_delta": 0,
+        "resting_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/007-front-three-quarter-right/007_ACT007_front_three_quarter_right_resting_beak_alpha.png",
+        "resting_registration_bbox": [
+          353,
+          97,
+          607,
+          529
+        ],
+        "resting_sha256": "7e87a272a4978b06fa718353c3a11bc4d790f38316275668743adcbc02d1fd23",
+        "schema_version": 2,
+        "silhouette_iou": 0.99996,
+        "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/007-front-three-quarter-right/117_ACT117_front_three_quarter_right_speaking_beak_pairwise_v2.png",
+        "speaking_registration_bbox": [
+          353,
+          97,
+          607,
+          529
+        ],
+        "speaking_sha256": "780c20a02a354f15c338b73c0d6032f3f146f32f3d1ff41ea3bc097b20458329"
+      },
+      "reason": "Replace the visibly steep pasted-jaw mate with a body-locked lower mandible rotated around the authored hinge; preserve the exact closed frame and immutable upper bill.",
+      "receipt": {
+        "alignment": {
+          "interpolation": "lanczos_rgb_binary_alpha",
+          "rotation_center": [
+            449,
+            253
+          ],
+          "rotation_degrees": 0.0,
+          "scale": 1.0,
+          "scale_x": 1.0,
+          "scale_y": 1.0,
+          "translate_x": 0,
+          "translate_y": 0
+        },
+        "anatomy_direction_vector": [
+          -1,
+          0
+        ],
+        "anatomy_upper_beak_polygon": [
+          [
+            449,
+            247
+          ],
+          [
+            346,
+            226
+          ],
+          [
+            344,
+            267
+          ],
+          [
+            410,
+            275
+          ],
+          [
+            449,
+            261
+          ]
+        ],
+        "approval_state": "candidate_visual_review",
+        "beak_anatomy": {
+          "cavity_anchor_distance": 1.857,
+          "checks": {
+            "bounded_tip_offset": true,
+            "cavity_anchored": true,
+            "direction_matches_upper_beak": true,
+            "mandible_anchored": true,
+            "plausible_mandible_length": true,
+            "plausible_opening_angle": true,
+            "same_longitudinal_direction": true,
+            "upper_beak_anchored": true
+          },
+          "declared_direction_angle_degrees": 3.5763,
+          "direction": [
+            -1,
+            0
+          ],
+          "effective_direction": [
+            -0.998053,
+            -0.062378
+          ],
+          "inferred_direction": [
+            -0.998053,
+            -0.062378
+          ],
+          "inferred_upper_tip": [
+            345.0,
+            246.5
+          ],
+          "mandible_anchor_distance": 2.121,
+          "mandible_forward_reach": 64.8734,
+          "mandible_length_ratio": 0.6209,
+          "mandible_reverse_reach": 7.2359,
+          "mode": "directional",
+          "opening_angle_degrees": 38.7939,
+          "passed": true,
+          "schema_version": 2,
+          "tip_offset_ratio": 0.4991,
+          "upper_anchor_distance": 0.0,
+          "upper_forward_reach": 104.4836
+        },
+        "canvas": [
+          960,
+          540
+        ],
+        "cavity_fill_rgba": null,
+        "cavity_polygon": [
+          [
+            406,
+            258
+          ],
+          [
+            449,
+            248
+          ],
+          [
+            455,
+            263
+          ],
+          [
+            438,
+            280
+          ],
+          [
+            392,
+            300
+          ],
+          [
+            402,
+            276
+          ]
+        ],
+        "cavity_source": "generated_overlay",
+        "changed_bbox": [
+          386,
+          248,
+          456,
+          308
+        ],
+        "generated_render_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/007-front-three-quarter-right/117_ACT117_front_three_quarter_right_speaking_beak_alpha.png",
+        "generated_render_sha256": "780c20a02a354f15c338b73c0d6032f3f146f32f3d1ff41ea3bc097b20458329",
+        "hinge": [
+          449,
+          253
+        ],
+        "hinge_radius": 10,
+        "mandible_bbox": [
+          384,
+          250,
+          457,
+          308
+        ],
+        "mandible_connected_ratio": 1.0,
+        "mandible_largest_component_pixels": 1810,
+        "mandible_opaque_pixels": 1810,
+        "mandible_polygon": [
+          [
+            449,
+            250
+          ],
+          [
+            456,
+            257
+          ],
+          [
+            448,
+            280
+          ],
+          [
+            390,
+            307
+          ],
+          [
+            381,
+            301
+          ],
+          [
+            404,
+            272
+          ]
+        ],
+        "method": "pair_specific_connected_mandible_patch_v1",
+        "minimum_connected_ratio": 0.9,
+        "minimum_mandible_height": 12,
+        "oral_warm_replacement_polygon": null,
+        "oral_warm_replacement_rgba": null,
+        "outside_articulation_change": false,
+        "residual_clear_polygon": null,
+        "resting_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/007-front-three-quarter-right/007_ACT007_front_three_quarter_right_resting_beak_alpha.png",
+        "resting_sha256": "7e87a272a4978b06fa718353c3a11bc4d790f38316275668743adcbc02d1fd23",
+        "runtime_admitted": false,
+        "schema_version": 1,
+        "source_mask": {
+          "light_threshold": 180,
+          "mode": "opaque",
+          "neutral_chroma_threshold": 36
+        },
+        "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/007-front-three-quarter-right/117_ACT117_front_three_quarter_right_speaking_beak_pairwise_v2.png",
+        "speaking_sha256": "780c20a02a354f15c338b73c0d6032f3f146f32f3d1ff41ea3bc097b20458329",
+        "upper_beak_policy": "immutable_source_pixels",
+        "upper_beak_polygon": [
+          [
+            449,
+            247
+          ],
+          [
+            346,
+            226
+          ],
+          [
+            344,
+            267
+          ],
+          [
+            410,
+            275
+          ],
+          [
+            449,
+            261
+          ]
+        ]
+      },
+      "reviewer": "codex-one-pair-hinge-review",
+      "schema_version": 1,
+      "superseded_at": "2026-08-07T16:10:00-06:00"
+    },
+    {
+      "audit": {
+        "changed_rendered_pixels": 1407,
+        "checks": {
+          "bounded_articulation_change": true,
+          "outside_mouth_stability": true,
+          "silhouette_overlap": true,
+          "stable_registration_bounds": true,
+          "visible_mouth_change": true
+        },
+        "mouth_mean_abs": 10.145286,
+        "mouth_region": [
+          340,
+          220,
+          465,
+          305
+        ],
+        "outside_mouth_mean_abs": 0.0,
+        "pairwise_promotion": {
+          "candidate_audit_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/007-front-three-quarter-right/candidate-v10-hinge-refined-audit.json",
+          "candidate_receipt_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/007-front-three-quarter-right/candidate-v10-hinge-refined-receipt.json",
+          "history_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/007-front-three-quarter-right/pair-receipt-history.json",
+          "promoted_at": "2026-08-07T16:10:00-06:00",
+          "reason": "Replace the visibly steep pasted-jaw mate with a body-locked lower mandible rotated around the authored hinge; preserve the exact closed frame and immutable upper bill.",
+          "reviewer": "codex-one-pair-hinge-review",
+          "runtime_admission_implied": false,
+          "schema_version": 1,
+          "user_approval_implied": false
+        },
+        "passed": true,
+        "registration_bound_delta": 0,
+        "resting_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/007-front-three-quarter-right/007_ACT007_front_three_quarter_right_resting_beak_alpha.png",
+        "resting_registration_bbox": [
+          353,
+          97,
+          607,
+          529
+        ],
+        "resting_sha256": "7e87a272a4978b06fa718353c3a11bc4d790f38316275668743adcbc02d1fd23",
+        "schema_version": 2,
+        "silhouette_iou": 0.996078,
+        "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/007-front-three-quarter-right/117_ACT117_front_three_quarter_right_speaking_beak_candidate_pairwise_v10-hinge-refined.png",
+        "speaking_registration_bbox": [
+          353,
+          97,
+          607,
+          529
+        ],
+        "speaking_sha256": "4b59e7f133af357c44a7557b1822f03722c88f3a0f33125959699b5463a4fd28"
+      },
+      "reason": "Normalize the unchanged Pair 7 hinge repair to the existing compiler evidence contract; candidate pixel SHA remains identical.",
+      "receipt": {
+        "approval_state": "candidate_visual_review",
+        "canvas": [
+          960,
+          540
+        ],
+        "cavity_fill_rgba": [
+          28,
+          13,
+          16,
+          255
+        ],
+        "cavity_polygon": [
+          [
+            450,
+            251
+          ],
+          [
+            456,
+            263
+          ],
+          [
+            448,
+            270
+          ],
+          [
+            400,
+            283
+          ],
+          [
+            370,
+            280
+          ],
+          [
+            400,
+            266
+          ]
+        ],
+        "changed_bbox": [
+          370,
+          250,
+          457,
+          288
+        ],
+        "hinge": [
+          449,
+          253
+        ],
+        "mandible_polygon": [
+          [
+            449,
+            250
+          ],
+          [
+            456,
+            257
+          ],
+          [
+            448,
+            280
+          ],
+          [
+            390,
+            307
+          ],
+          [
+            381,
+            301
+          ],
+          [
+            404,
+            272
+          ]
+        ],
+        "method": "pairwise_existing_mandible_hinge_refinement_v1",
+        "outside_mouth_change": false,
+        "pairwise_promotion": {
+          "candidate_audit_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/007-front-three-quarter-right/candidate-v10-hinge-refined-audit.json",
+          "candidate_receipt_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/007-front-three-quarter-right/candidate-v10-hinge-refined-receipt.json",
+          "history_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/007-front-three-quarter-right/pair-receipt-history.json",
+          "promoted_at": "2026-08-07T16:10:00-06:00",
+          "reason": "Replace the visibly steep pasted-jaw mate with a body-locked lower mandible rotated around the authored hinge; preserve the exact closed frame and immutable upper bill.",
+          "reviewer": "codex-one-pair-hinge-review",
+          "runtime_admission_implied": false,
+          "schema_version": 1,
+          "user_approval_implied": false
+        },
+        "resting_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/007-front-three-quarter-right/007_ACT007_front_three_quarter_right_resting_beak_alpha.png",
+        "resting_sha256": "7e87a272a4978b06fa718353c3a11bc4d790f38316275668743adcbc02d1fd23",
+        "rotated_mandible_polygon": [
+          [
+            450,
+            250
+          ],
+          [
+            454,
+            259
+          ],
+          [
+            440,
+            278
+          ],
+          [
+            376,
+            286
+          ],
+          [
+            369,
+            278
+          ],
+          [
+            400,
+            257
+          ]
+        ],
+        "rotation_degrees": -18.0,
+        "runtime_admitted": false,
+        "schema_version": 1,
+        "source_mask": {
+          "light_threshold": 180,
+          "mode": "exclude_light_neutral",
+          "neutral_chroma_threshold": 36
+        },
+        "speaking_donor_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/007-front-three-quarter-right/117_ACT117_front_three_quarter_right_speaking_beak_pairwise_v2.png",
+        "speaking_donor_sha256": "780c20a02a354f15c338b73c0d6032f3f146f32f3d1ff41ea3bc097b20458329",
+        "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/007-front-three-quarter-right/117_ACT117_front_three_quarter_right_speaking_beak_candidate_pairwise_v10-hinge-refined.png",
+        "speaking_sha256": "4b59e7f133af357c44a7557b1822f03722c88f3a0f33125959699b5463a4fd28",
+        "upper_beak_policy": "immutable_resting_pixels",
+        "upper_beak_polygon": [
+          [
+            449,
+            247
+          ],
+          [
+            346,
+            226
+          ],
+          [
+            344,
+            267
+          ],
+          [
+            400,
+            265
+          ],
+          [
+            449,
+            258
+          ]
+        ]
+      },
+      "reviewer": "codex-pairwise-full-size-review",
+      "schema_version": 1,
+      "superseded_at": "2026-08-07T16:20:00-06:00"
+    }
+  ],
+  "receipt_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/007-front-three-quarter-right/pair-receipt.json",
+  "schema_version": 1
+}

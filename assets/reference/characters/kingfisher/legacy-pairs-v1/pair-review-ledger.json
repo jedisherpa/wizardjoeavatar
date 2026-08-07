@@ -731,20 +731,17 @@
       "ordinal": 7,
       "pair_work_path": "pair-work/007-front-three-quarter-right",
       "pairwise_full_size_review": {
-        "defect_codes": [
-          "lower_mandible_axis_misaligned",
-          "pasted_jaw_read"
-        ],
-        "evidence_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-007-user-reopen-2026-08-07-v1",
-        "note": "Fresh isolated closed/open review after the user's 2026-08-07 report. The lower mandible drops on a materially steeper axis than the fixed upper bill and reads as a pasted jaw in alternating playback. Rebuild this pair independently from its exact closed frame; do not reuse or approve the current speaking mate.",
+        "defect_codes": [],
+        "evidence_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-007-hinge-refined-2026-08-07-v1",
+        "note": "One-pair rebuild from the exact closed frame. The upper bill and every non-mouth pixel remain fixed; the existing textured lower mandible is rotated -18 degrees around hinge (449,253), the cavity terminates behind the lower tip, and alternating full-size review no longer reads as a steep pasted jaw. Candidate audit passes with zero outside-mouth change, zero registration-bound delta, and 0.996078 silhouette IoU. Internal visual pass only; no user approval or production runtime admission is implied.",
         "protocol_id": "kingfisher-full-size-pairwise-v1",
         "queued_at": "2026-07-31T05:30:00+00:00",
-        "reviewed_at": "2026-08-07T15:05:00-06:00",
-        "reviewer": "codex-one-pair-visual-recheck",
+        "reviewed_at": "2026-08-07T16:11:00-06:00",
+        "reviewer": "codex-one-pair-hinge-review",
         "runtime_admission_implied": false,
         "schema_version": 1,
         "source_disposition": "full_size_pairwise_review",
-        "state": "needs_rebuild",
+        "state": "pass",
         "user_approval_implied": false
       },
       "pairwise_full_size_review_history": [
@@ -868,6 +865,29 @@
             "schema_version": 1,
             "source_disposition": "full_size_pairwise_review",
             "state": "pass",
+            "user_approval_implied": false
+          }
+        },
+        {
+          "reason": "Superseded by a later full-size pairwise review disposition.",
+          "reporter": "codex-one-pair-hinge-review",
+          "schema_version": 1,
+          "superseded_at": "2026-08-07T16:11:00-06:00",
+          "superseded_review": {
+            "defect_codes": [
+              "lower_mandible_axis_misaligned",
+              "pasted_jaw_read"
+            ],
+            "evidence_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-007-user-reopen-2026-08-07-v1",
+            "note": "Fresh isolated closed/open review after the user's 2026-08-07 report. The lower mandible drops on a materially steeper axis than the fixed upper bill and reads as a pasted jaw in alternating playback. Rebuild this pair independently from its exact closed frame; do not reuse or approve the current speaking mate.",
+            "protocol_id": "kingfisher-full-size-pairwise-v1",
+            "queued_at": "2026-07-31T05:30:00+00:00",
+            "reviewed_at": "2026-08-07T15:05:00-06:00",
+            "reviewer": "codex-one-pair-visual-recheck",
+            "runtime_admission_implied": false,
+            "schema_version": 1,
+            "source_disposition": "full_size_pairwise_review",
+            "state": "needs_rebuild",
             "user_approval_implied": false
           }
         }
@@ -8142,11 +8162,11 @@
   "pairwise_full_size_review_summary": {
     "complete": false,
     "missing_count": 0,
-    "needs_rebuild_count": 1,
+    "needs_rebuild_count": 0,
     "not_observable_count": 2,
     "pair_count": 66,
-    "pass_count": 0,
-    "passing_disposition_count": 2,
+    "pass_count": 1,
+    "passing_disposition_count": 3,
     "pending_count": 63,
     "protocol_id": "kingfisher-full-size-pairwise-v1",
     "reviewed_count": 3,

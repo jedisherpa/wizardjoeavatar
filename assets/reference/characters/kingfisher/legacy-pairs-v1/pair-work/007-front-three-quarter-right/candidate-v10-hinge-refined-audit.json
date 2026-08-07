@@ -15,17 +15,6 @@
     305
   ],
   "outside_mouth_mean_abs": 0.0,
-  "pairwise_promotion": {
-    "candidate_audit_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/007-front-three-quarter-right/candidate-v10-hinge-refined-audit.json",
-    "candidate_receipt_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/007-front-three-quarter-right/candidate-v10-hinge-refined-receipt.json",
-    "history_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/007-front-three-quarter-right/pair-receipt-history.json",
-    "promoted_at": "2026-08-07T16:20:00-06:00",
-    "reason": "Normalize the unchanged Pair 7 hinge repair to the existing compiler evidence contract; candidate pixel SHA remains identical.",
-    "reviewer": "codex-pairwise-full-size-review",
-    "runtime_admission_implied": false,
-    "schema_version": 1,
-    "user_approval_implied": false
-  },
   "passed": true,
   "registration_bound_delta": 0,
   "resting_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/007-front-three-quarter-right/007_ACT007_front_three_quarter_right_resting_beak_alpha.png",
