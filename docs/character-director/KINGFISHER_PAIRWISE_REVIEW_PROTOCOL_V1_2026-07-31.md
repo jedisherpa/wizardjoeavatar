@@ -5186,3 +5186,34 @@ This is an internal visual pass only. The reopened queue now contains 25
 internal passes, 39 pending observable pairs, and 2 not-observable rear views.
 User approval and runtime admission remain zero; Pair 28 is the next isolated
 hard stop.
+
+### Pair 28 isolated strong-declaration review
+
+Pair 28 (`strong-declaration`) was reviewed as one independent closed/open
+job at native size, nearest-neighbor enlarged beak scale, on a white field,
+at full projector size, and in a six-second alternating loop. The current
+verified v5 speaking frame, candidates v3 and v4, and rejected v2 were
+compared against the immutable closed frame. No generated body pixels were
+introduced during this review.
+
+The selected opening remains centered beneath the frontal upper bill. Both
+mouth corners stay attached while one connected V-shaped lower mandible opens
+on the face centerline; the alternation shows no detached lower sliver,
+duplicate contour, lateral jump, cheek drift, throat spill, or body
+registration shift. The prior receipt incorrectly classified the symmetric
+frontal bill as right-facing because it reused an off-center construction
+hinge for anatomy. The anatomy hinge is now independently centered at
+`(557, 222)` without changing image pixels. Schema-v2 frontal measurements
+record a `0.0116` center-offset ratio, `1.0698` lower-to-upper width ratio,
+and all anatomy checks true. The strict audit remains 887 changed
+articulation pixels, outside-mouth mean difference `0.0`, registration delta
+`0`, silhouette IoU `1.0`, and connected-mandible ratio `1.0`.
+
+Full-size evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-028-one-pair-2026-08-07-v4/`
+
+This is an internal visual pass only. The reopened queue now contains 26
+internal passes, 38 pending observable pairs, and 2 not-observable rear views.
+User approval and runtime admission remain zero; Pair 29 is the next isolated
+hard stop.
