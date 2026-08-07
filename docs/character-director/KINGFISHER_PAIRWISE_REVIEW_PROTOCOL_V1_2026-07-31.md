@@ -4809,3 +4809,28 @@ Full-size evidence:
 This is an internal visual pass only. The reopened queue now contains 11
 internal passes, 53 pending observable pairs, and 2 not-observable rear views.
 User approval and runtime admission remain zero.
+
+### Pair 14 isolated present-screen-left review
+
+Pair 14 (`present-screen-left`) was reviewed independently at native size,
+enlarged beak scale, full-projector size, and in a six-second closed/open loop.
+The retained strict frame is pixel-identical to the verified v6 and v7 result.
+The rejected pre-pairwise donor replaces and lengthens the upper bill, while
+intermediate v2 and v3 frames expose a black throat void; none enter the
+compiled sequence.
+
+The selected lower bill opens from rear hinge `(538, 213)` along the authored
+screen-left axis while the upper bill remains fixed. Its directional anatomy
+records a `1.1075` lower-to-upper reach ratio and `0.2634` normalized tip
+offset. The strict audit reports 2,331 changed rendered mouth pixels,
+outside-mouth mean difference `0.0`, registration delta `0`, and silhouette
+IoU `0.993514`. The crown, eye, throat, presenting wing, hoodie, body, legs,
+feet, canvas, and scale remain fixed.
+
+Full-size evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-014-one-pair-2026-08-07-v4/`
+
+This is an internal visual pass only. The reopened queue now contains 12
+internal passes, 52 pending observable pairs, and 2 not-observable rear views.
+User approval and runtime admission remain zero.
