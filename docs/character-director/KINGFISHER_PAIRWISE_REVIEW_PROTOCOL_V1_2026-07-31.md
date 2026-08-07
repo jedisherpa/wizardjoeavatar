@@ -4991,3 +4991,29 @@ Full-size evidence:
 This is an internal visual pass only. The reopened queue now contains 18
 internal passes, 46 pending observable pairs, and 2 not-observable rear views.
 User approval and runtime admission remain zero.
+
+### Pair 21 isolated skeptical-listening review
+
+Pair 21 (`skeptical-listening`) was reviewed independently at native size,
+nearest-neighbor enlarged beak scale, tight-tip scale, full-projector size,
+and in a six-second closed/open loop. The review compared the original,
+candidates v2 through v5, the preserved source, and the raw render. Candidate
+v5 was retained because it removes the stale pale tip silhouette and leaves
+clean projector background through the gape instead of a duplicate bill edge.
+
+The selected lower bill remains connected at rear hinge `(452, 250)`, follows
+the authored screen-right upper-bill axis, and ends behind the upper tip. Its
+directional anatomy records a `0.9612` lower-to-upper reach ratio, `0.3178`
+normalized tip offset, and `0.995983` mandible connected ratio. The strict
+audit reports 4,640 changed rendered mouth pixels, outside-mouth mean
+difference `0.0`, registration delta `0`, and silhouette IoU `0.998056`. The
+eye line, crown, cheek, throat, folded wing, hoodie, body, feet, canvas, and
+scale remain fixed.
+
+Full-size evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-021-one-pair-2026-08-07-v4/`
+
+This is an internal visual pass only. The reopened queue now contains 19
+internal passes, 45 pending observable pairs, and 2 not-observable rear views.
+User approval and runtime admission remain zero.
