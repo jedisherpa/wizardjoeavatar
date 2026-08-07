@@ -5045,3 +5045,30 @@ Full-size evidence:
 This is an internal visual pass only. The reopened queue now contains 20
 internal passes, 44 pending observable pairs, and 2 not-observable rear views.
 User approval and runtime admission remain zero.
+
+### Pair 23 isolated emphatic-agreement review
+
+Pair 23 (`emphatic-agreement`) was reviewed independently at native size,
+nearest-neighbor enlarged beak scale, tight-tip scale, full-projector size,
+and in a six-second closed/open loop. The canonical mate, verified v4,
+preserved source, and pairwise v2/v3 renders were compared. Verified v4 and
+the current speaking mate are pixel-identical and remain the selected frame.
+
+The emphatic opening is one connected lower mandible from rear hinge
+`(462, 280)`. It follows the immutable upper bill on the same screen-right
+axis, and its tip remains directly beneath and behind the upper tip without a
+lateral jump, duplicate edge, detached sliver, or throat spill. Its
+directional anatomy records a `0.9248` lower-to-upper reach ratio, `0.0113`
+normalized tip offset, and mandible connected ratio `1.0`. The strict audit
+reports 8,881 changed rendered mouth pixels, outside-mouth mean difference
+`0.0`, registration delta `0`, and silhouette IoU `1.0`. The larger aperture
+matches the emphatic performance while the crown, eyes, cheek plates, throat,
+raised wings, hoodie, body, feet, scale, canvas, and upper bill remain fixed.
+
+Full-size evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-023-one-pair-2026-08-07-v4/`
+
+This is an internal visual pass only. The reopened queue now contains 21
+internal passes, 43 pending observable pairs, and 2 not-observable rear views.
+User approval and runtime admission remain zero.
