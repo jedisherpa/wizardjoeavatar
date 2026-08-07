@@ -2432,20 +2432,17 @@
       "ordinal": 22,
       "pair_work_path": "pair-work/022-small-acknowledgment",
       "pairwise_full_size_review": {
-        "defect_codes": [
-          "anatomy_v2_review_required",
-          "tip_alignment_out_of_bounds"
-        ],
-        "evidence_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-022-one-pair-2026-08-05-v2",
-        "note": "Anatomy V2 invalidates the prior batch-derived pass. Review and rebuild this exact closed/open pair independently; no user approval or runtime admission is implied.",
+        "defect_codes": [],
+        "evidence_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-022-tight-anatomy-review-2026-08-07-v1",
+        "note": "Strict one-pair-at-a-time review at native size, enlarged beak detail, and live two-frame projector playback. The retained v5 mate is the only candidate with one connected restrained lower bill and no duplicate interior contour; v4 remains rejected for a third beak edge and v6 for an artificial black slab. A tight bill-only anatomy polygon replaces the legacy face-sized preservation mask without changing rendered pixels. The visible lower bill shares the closed frame's rear hinge and follows the real down-right upper-bill axis while eye line, crown, cheeks, throat, folded wings, hoodie, body, feet, scale, and canvas remain fixed. Anatomy V2.1: declared-axis error 0.8772 degrees, hinge (462,266), upper anchor distance 8.114, mandible anchor distance 7.0, lower-to-upper reach ratio 0.9615, tip offset ratio 0.2778, opening angle 16.1141 degrees, connected-mandible ratio 0.97903. Audit: 3,063 changed rendered pixels, outside-mouth mean 0.0, registration delta 0, silhouette IoU 0.999766. Internal visual pass only; runtime admission and user approval remain false.",
         "protocol_id": "kingfisher-full-size-pairwise-v1",
         "queued_at": "2026-07-31T05:30:00+00:00",
-        "reviewed_at": "2026-08-07T01:13:17.562696+00:00",
-        "reviewer": "codex-kingfisher-anatomy-v2",
+        "reviewed_at": "2026-08-07T07:19:10.568281+00:00",
+        "reviewer": "codex-pairwise-rebuild",
         "runtime_admission_implied": false,
         "schema_version": 1,
         "source_disposition": "full_size_pairwise_review",
-        "state": "needs_rebuild",
+        "state": "pass",
         "user_approval_implied": false
       },
       "pairwise_full_size_review_history": [
@@ -2526,6 +2523,29 @@
             "schema_version": 1,
             "source_disposition": "full_size_pairwise_review",
             "state": "pass",
+            "user_approval_implied": false
+          }
+        },
+        {
+          "reason": "Superseded by a later full-size pairwise review disposition.",
+          "reporter": "codex-pairwise-rebuild",
+          "schema_version": 1,
+          "superseded_at": "2026-08-07T07:19:10.568281+00:00",
+          "superseded_review": {
+            "defect_codes": [
+              "anatomy_v2_review_required",
+              "tip_alignment_out_of_bounds"
+            ],
+            "evidence_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-022-one-pair-2026-08-05-v2",
+            "note": "Anatomy V2 invalidates the prior batch-derived pass. Review and rebuild this exact closed/open pair independently; no user approval or runtime admission is implied.",
+            "protocol_id": "kingfisher-full-size-pairwise-v1",
+            "queued_at": "2026-07-31T05:30:00+00:00",
+            "reviewed_at": "2026-08-07T01:13:17.562696+00:00",
+            "reviewer": "codex-kingfisher-anatomy-v2",
+            "runtime_admission_implied": false,
+            "schema_version": 1,
+            "source_disposition": "full_size_pairwise_review",
+            "state": "needs_rebuild",
             "user_approval_implied": false
           }
         }
@@ -6679,11 +6699,11 @@
   "pairwise_full_size_review_summary": {
     "complete": false,
     "missing_count": 0,
-    "needs_rebuild_count": 9,
+    "needs_rebuild_count": 8,
     "not_observable_count": 2,
     "pair_count": 66,
-    "pass_count": 55,
-    "passing_disposition_count": 57,
+    "pass_count": 56,
+    "passing_disposition_count": 58,
     "pending_count": 0,
     "protocol_id": "kingfisher-full-size-pairwise-v1",
     "reviewed_count": 66,

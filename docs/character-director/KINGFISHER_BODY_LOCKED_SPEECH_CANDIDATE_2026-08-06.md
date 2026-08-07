@@ -80,7 +80,7 @@ no-op blink behavior.
 ## Admission Boundary
 
 The package is intentionally review-only. The current Anatomy V2.1 re-audit
-records 55 observable passes, 9 `needs_rebuild` dispositions, and 2 rear-view
+records 56 observable passes, 8 `needs_rebuild` dispositions, and 2 rear-view
 pairs as not observable; it does not record user approval. The production
 registry is unchanged. Admission requires completion of the isolated art
 review, user approval evidence, and a newly admitted package digest.
@@ -103,15 +103,15 @@ scores.
 The first re-audit measured the 63 pairs with explicit hinge geometry and
 placed 14 into an explicit one-pair rebuild queue. Pair 001 is also queued
 because its legacy receipt predates the required geometry. Pairs 007, 008,
-010, 011, 012, and 017 have since passed isolated V2.1 review, leaving this
-9-pair queue:
+010, 011, 012, 017, and 022 have since passed isolated V2.1 review, leaving
+this 8-pair queue:
 
 ```text
-001 006 022 024 025 027 030 047 062
+001 006 024 025 027 030 047 062
 ```
 
 Pairs 004 and 005 are excluded because the beak is not observable. The ledger
-currently records 55 internal passes, 9 `needs_rebuild` dispositions, 2
+currently records 56 internal passes, 8 `needs_rebuild` dispositions, 2
 `not_observable` dispositions, 0 user
 approvals, and 0 runtime admissions.
 
@@ -190,6 +190,17 @@ offset ratio, and 27.7889-degree opening angle. The body-lock audit records
 zero outside-mouth change, zero registration drift, and 0.995961 silhouette
 IoU. Its internal pass does not imply user approval or runtime admission.
 
+Pair 022 (`small-acknowledgment`) retains the restrained v5 speaking mate.
+The v4 overlay remains rejected because it creates a third interior beak edge,
+and the v6 solid-cavity alternative remains rejected because it reads as a
+black slab. The legacy preservation polygon included face and crown pixels, so
+a separate tight bill-only anatomy polygon now measures the visible down-right
+upper bill without changing any rendered pixel. The accepted pair has a
+0.8772-degree declared-axis error, 0.9615 lower-to-upper reach ratio, 0.2778
+tip offset ratio, 16.1141-degree opening angle, zero outside-mouth change, zero
+registration drift, and 0.999766 silhouette IoU. Its internal pass does not
+imply user approval or runtime admission.
+
 Every compiled pair now has a dedicated two-frame loop. Pair 062 can be
 reviewed locally at:
 
@@ -238,6 +249,12 @@ The accepted Pair 017 upward-profile review loop is available at:
 
 ```text
 http://127.0.0.1:8667/?hd-sequence=kingfisher-pair-017-review
+```
+
+The accepted Pair 022 small-acknowledgment review loop is available at:
+
+```text
+http://127.0.0.1:8667/?hd-sequence=kingfisher-pair-022-review
 ```
 
 A pair returns to `pass` only after isolated closed/open visual review; that

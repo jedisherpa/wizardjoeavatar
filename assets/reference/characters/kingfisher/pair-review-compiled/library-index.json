@@ -14,7 +14,7 @@
   "legacy_pair_review": {
     "approval_state": "candidate_visual_review",
     "ledger_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-review-ledger.json",
-    "ledger_sha256": "2365328099c3f28e9c7f5045587dd94ab0878f34c4b713b704f94d80f6845b59",
+    "ledger_sha256": "31bf6a2d31209d26bfedd58b5332913b74c486407e133ed6419f398bf1739b86",
     "pair_count": 66,
     "pairs": [
       {
@@ -443,12 +443,12 @@
         "automated_audit_passed": true,
         "ordinal": 22,
         "pairwise_full_size_review": {
-          "evidence_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-022-one-pair-2026-08-05-v2",
+          "evidence_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-022-tight-anatomy-review-2026-08-07-v1",
           "protocol_id": "kingfisher-full-size-pairwise-v1",
-          "state": "needs_rebuild"
+          "state": "pass"
         },
         "receipt_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/022-small-acknowledgment/pair-receipt.json",
-        "receipt_sha256": "eeeb760009ec6b84ac2286b06aed6320637f7eaa7ea7b2671afe169bb91d7e88",
+        "receipt_sha256": "4ba0d56569114e4489b3e3c875ab97eb348a3b4d06a4ac822b9b88818c9a4b13",
         "resting_pose_id": "kingfisher.act.022.small-acknowledgment",
         "resting_sha256": "7edfa5e80b351a2b705cd66567ceb4f4191e2abf59a91a3ebcff317b6b15bb08",
         "runtime_admitted": false,
@@ -1340,9 +1340,9 @@
     ],
     "pairwise_full_size_review_summary": {
       "complete": false,
-      "needs_rebuild_count": 9,
+      "needs_rebuild_count": 8,
       "not_observable_count": 2,
-      "pass_count": 55,
+      "pass_count": 56,
       "pending_count": 0
     },
     "review_projection": true,
@@ -2093,7 +2093,7 @@
       "approval_state": "candidate_visual_review",
       "fps": 2,
       "loop": true,
-      "pair_review_state": "needs_rebuild",
+      "pair_review_state": "pass",
       "pose_ids": [
         "kingfisher.act.022.small-acknowledgment",
         "kingfisher.act.132.small-acknowledgment-speaking-beak"
@@ -2655,7 +2655,7 @@
         "pass",
         "pass",
         "pass",
-        "needs_rebuild",
+        "pass",
         "pass",
         "needs_rebuild",
         "needs_rebuild",
@@ -3078,7 +3078,7 @@
     {
       "approval_state": "candidate_visual_review",
       "bytes": 28586919,
-      "path": "kingfisher_act_001_066_111_176_pair_review-d4f01186a554a5cd.wjpose",
+      "path": "kingfisher_act_001_066_111_176_pair_review-499e7f9565a72087.wjpose",
       "pose_count": 132,
       "pose_ids": [
         "kingfisher.act.001.neutral-front",
@@ -3216,7 +3216,7 @@
       ],
       "review_projection": true,
       "runtime_admitted": false,
-      "sha256": "d4f01186a554a5cd68950836986edb1e674cd86966796e52a84efec506c5d0cd",
+      "sha256": "499e7f9565a72087b53248a431776b68b7db862ce1f426df2514a0813ed6fc55",
       "shard_id": "kingfisher_act_001_066_111_176_pair_review",
       "source": "kingfisher_pair_specific_beak_review_v1"
     }
