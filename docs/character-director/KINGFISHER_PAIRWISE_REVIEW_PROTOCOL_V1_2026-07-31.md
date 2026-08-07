@@ -4592,3 +4592,27 @@ Full-size evidence:
 This is an internal visual pass only. The reopened queue now contains 2
 internal passes, 62 pending observable pairs, and 2 not-observable rear views.
 User approval and runtime admission remain zero.
+
+### Pair 2 isolated three-quarter review
+
+Pair 2 (`front-three-quarter-left`) was reviewed independently at full-projector
+size and in a six-second closed/open loop. The selected speaking mate has one
+connected lower mandible opening from hinge `(493, 242)` on the same
+screen-right axis as the immutable upper bill. The earlier thin gray-seam
+candidate remains rejected and was not substituted.
+
+The selected speaking frame retains SHA-256
+`36fbe2b4532d242eef9237e0fb0129fafe2fa59269eb2bebf5ac88d6faed83da`.
+Its anatomy measures a `13.474` degree opening, `0.8013`
+mandible-to-upper reach ratio, `0.192` normalized tip offset, and connected
+mandible ratio `1.0`. The body-lock audit reports 2,452 changed rendered mouth
+pixels, outside-mouth mean difference `0.0`, registration delta `0`, and
+silhouette IoU `1.0`.
+
+Full-size evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-002-one-pair-2026-08-07-v3/`
+
+This is an internal visual pass only. The reopened queue now contains 3
+internal passes, 61 pending observable pairs, and 2 not-observable rear views.
+User approval and runtime admission remain zero.

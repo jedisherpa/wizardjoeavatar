@@ -13,10 +13,10 @@
   "identity_side": null,
   "legacy_pair_review": {
     "approval_state": "candidate_visual_review",
-    "excluded_speech_pair_count": 64,
-    "integrated_speech_pair_count": 2,
+    "excluded_speech_pair_count": 63,
+    "integrated_speech_pair_count": 3,
     "ledger_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-review-ledger.json",
-    "ledger_sha256": "9c35d13e4de35db837351a5f02079b09b8f7afb56c84cd13d7e00b74259d7044",
+    "ledger_sha256": "6dfde671011d8636258ce275d1f8e844f07e8a4b593c1c950c42e5f71eaa63ca",
     "pair_count": 66,
     "pairs": [
       {
@@ -45,9 +45,9 @@
         "automated_audit_passed": true,
         "ordinal": 2,
         "pairwise_full_size_review": {
-          "evidence_path": "",
+          "evidence_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-002-one-pair-2026-08-07-v3",
           "protocol_id": "kingfisher-full-size-pairwise-v1",
-          "state": "pending"
+          "state": "pass"
         },
         "receipt_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/002-front-three-quarter-left/pair-receipt.json",
         "receipt_sha256": "fdbea6e379535d53ae4ce0040e60aec21bb9348e9a352c7063f3bb038ffc037e",
@@ -1344,8 +1344,8 @@
       "complete": false,
       "needs_rebuild_count": 0,
       "not_observable_count": 2,
-      "pass_count": 2,
-      "pending_count": 62
+      "pass_count": 3,
+      "pending_count": 61
     },
     "review_projection": true,
     "runtime_admitted": false,
@@ -1557,9 +1557,8 @@
   "sequences": {
     "kingfisher-all": {
       "approval_state": "candidate_visual_review",
-      "excluded_speaking_pose_count": 64,
+      "excluded_speaking_pose_count": 63,
       "excluded_speaking_pose_ids": [
-        "kingfisher.act.112.front-three-quarter-left-speaking-beak",
         "kingfisher.act.113.left-profile-speaking-beak",
         "kingfisher.act.114.back-three-quarter-left-speaking-beak",
         "kingfisher.act.115.neutral-back-speaking-beak",
@@ -1630,6 +1629,7 @@
         "kingfisher.act.001.neutral-front",
         "kingfisher.act.111.neutral-front-speaking-beak",
         "kingfisher.act.002.front-three-quarter-left",
+        "kingfisher.act.112.front-three-quarter-left-speaking-beak",
         "kingfisher.act.003.left-profile",
         "kingfisher.act.004.back-three-quarter-left",
         "kingfisher.act.005.neutral-back",
@@ -1859,7 +1859,7 @@
       "approval_state": "candidate_visual_review",
       "fps": 2,
       "loop": true,
-      "pair_review_state": "pending",
+      "pair_review_state": "pass",
       "pose_ids": [
         "kingfisher.act.002.front-three-quarter-left",
         "kingfisher.act.112.front-three-quarter-left-speaking-beak"
@@ -2641,7 +2641,7 @@
       "loop": true,
       "pair_review_states": [
         "pass",
-        "pending",
+        "pass",
         "pending",
         "not_observable",
         "not_observable",
@@ -3084,7 +3084,7 @@
     {
       "approval_state": "candidate_visual_review",
       "bytes": 28587097,
-      "path": "kingfisher_act_001_066_111_176_pair_review-5de8a4acdeb0b929.wjpose",
+      "path": "kingfisher_act_001_066_111_176_pair_review-90f57b5d32657d77.wjpose",
       "pose_count": 132,
       "pose_ids": [
         "kingfisher.act.001.neutral-front",
@@ -3222,7 +3222,7 @@
       ],
       "review_projection": true,
       "runtime_admitted": false,
-      "sha256": "5de8a4acdeb0b929a91c3e014c20547ab1870f2a10d97e9f4c09b9c48843c586",
+      "sha256": "90f57b5d32657d77624f7ebab932d72e1fe120713be629ea0cce3e920ccec637",
       "shard_id": "kingfisher_act_001_066_111_176_pair_review",
       "source": "kingfisher_pair_specific_beak_review_v1"
     }
