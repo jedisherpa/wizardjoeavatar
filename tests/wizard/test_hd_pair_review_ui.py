@@ -75,7 +75,7 @@ class HdPairReviewUiTests(unittest.TestCase):
         index = INDEX_PATH.read_text(encoding="utf-8")
         self.assertEqual(index.count("hd-pair-compare-v7"), 2)
 
-    def test_user_recheck_reopens_every_visible_pair_fail_closed(self):
+    def test_user_recheck_keeps_unreviewed_pairs_fail_closed(self):
         ledger = json.loads(LEDGER_PATH.read_text(encoding="utf-8"))
         by_ordinal = {
             int(pair["ordinal"]): pair
@@ -84,8 +84,8 @@ class HdPairReviewUiTests(unittest.TestCase):
         summary = ledger["pairwise_full_size_review_summary"]
 
         self.assertFalse(summary["complete"])
-        self.assertEqual(summary["pass_count"], 1)
-        self.assertEqual(summary["pending_count"], 63)
+        self.assertEqual(summary["pass_count"], 2)
+        self.assertEqual(summary["pending_count"], 62)
         self.assertEqual(summary["needs_rebuild_count"], 0)
         self.assertEqual(summary["not_observable_count"], 2)
         self.assertEqual(
@@ -96,10 +96,18 @@ class HdPairReviewUiTests(unittest.TestCase):
             "pair-007-hinge-refined-2026-08-07-v1",
             by_ordinal[7]["pairwise_full_size_review"]["evidence_path"],
         )
+        self.assertEqual(
+            by_ordinal[1]["pairwise_full_size_review"]["state"],
+            "pass",
+        )
+        self.assertIn(
+            "pair-001-one-pair-2026-08-07-v3",
+            by_ordinal[1]["pairwise_full_size_review"]["evidence_path"],
+        )
         for ordinal, pair in by_ordinal.items():
             self.assertFalse(pair["runtime_admitted"])
             self.assertFalse(pair["user_approved"])
-            if ordinal not in {4, 5, 7}:
+            if ordinal not in {1, 4, 5, 7}:
                 self.assertEqual(
                     pair["pairwise_full_size_review"]["state"],
                     "pending",

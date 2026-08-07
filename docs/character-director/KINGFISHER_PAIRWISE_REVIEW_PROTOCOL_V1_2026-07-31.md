@@ -4568,3 +4568,27 @@ This is an internal visual pass for Pair 7 only. It does not imply user
 approval or runtime admission. The reopened queue now contains 1 internal
 pass, 63 pending observable pairs, and 2 not-observable rear views. Every
 unpassed speaking mate remains excluded from `kingfisher-all`.
+
+### Pair 1 isolated neutral-front review
+
+Pair 1 (`neutral-front`) was then reviewed independently at full-projector
+size and in a six-second closed/open loop. Its existing speaking mate was
+retained rather than redrawn: the lower bill opens symmetrically on the
+vertical facial centerline from the bilateral hinge `(480, 240)`, while the
+crown, eyes, upper bill, throat, hoodie, body, scale, canvas, and registration
+remain fixed.
+
+The speaking frame retains SHA-256
+`fce4d995abd80f2c964f7c83f9db741cfd3d498a4c26251cf632c5d72460475c`.
+Its frontal anatomy receipt records center offset ratio `0.0`, lower-to-upper
+width ratio `1.1875`, and a passing symmetric hinge check. The body-lock audit
+reports 5,806 changed rendered mouth pixels, outside-mouth mean difference
+`0.0`, registration delta `0`, and silhouette IoU `1.0`.
+
+Full-size evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-001-one-pair-2026-08-07-v3/`
+
+This is an internal visual pass only. The reopened queue now contains 2
+internal passes, 62 pending observable pairs, and 2 not-observable rear views.
+User approval and runtime admission remain zero.
