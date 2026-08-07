@@ -4738,3 +4738,28 @@ Full-size evidence:
 This is an internal visual pass only. The reopened queue now contains 8
 internal passes, 56 pending observable pairs, and 2 not-observable rear views.
 User approval and runtime admission remain zero.
+
+### Pair 11 isolated neutral-speaking-gesture review
+
+Pair 11 (`neutral-speaking-gesture`) was reviewed independently at enlarged
+beak scale, full-projector size, and in a six-second closed/open loop. Every
+local speaking candidate was compared against the repaired resting master.
+Candidate v3 and v4 introduce a hard rectangular white seam through the throat,
+while v5 deletes half of the mouth. Those derivatives remain rejected. The
+current v2/v6 speaking mate is retained as the only complete centered opening.
+
+The selected mate preserves the authored hand-to-beak overlap while opening
+one connected V beneath the immutable frontal upper bill. Its frontal anatomy
+gate records center offset ratio `0.0062`, lower-to-upper width ratio `1.0370`,
+and mandible connected ratio `0.995627`. The strict audit reports 4,091 changed
+rendered mouth pixels, outside-mouth mean difference `0.0`, registration delta
+`0`, and silhouette IoU `1.0`; the crown, eyes, gesture, hoodie, body, feet,
+canvas, and scale remain fixed.
+
+Full-size evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-011-one-pair-2026-08-07-v4/`
+
+This is an internal visual pass only. The reopened queue now contains 9
+internal passes, 55 pending observable pairs, and 2 not-observable rear views.
+User approval and runtime admission remain zero.
