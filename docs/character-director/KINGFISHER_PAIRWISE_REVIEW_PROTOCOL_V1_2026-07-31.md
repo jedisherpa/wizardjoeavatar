@@ -5099,3 +5099,33 @@ Full-size evidence:
 This is an internal visual pass only. The reopened queue now contains 22
 internal passes, 42 pending observable pairs, and 2 not-observable rear views.
 User approval and runtime admission remain zero.
+
+### Pair 25 isolated hand-over-the-floor rebuild
+
+Pair 25 (`hand-over-the-floor`) failed its fresh enlarged review. The active
+v7 mate visibly stopped short of the upper-bill tip even though the legacy
+numeric report classified it as tip-locked. Inspection showed that the old
+extent check had included throat and body pixels in the mandible measurement,
+creating a false pass. The closed frame, v5 through v7 candidates, prior
+rejected frames, pairwise renders, and raw render were compared before the
+mate was rebuilt.
+
+A new full-size open-bill render was produced for this pair only and treated
+strictly as a donor. Candidate v11 composites only its narrow lower bill and
+mouth cavity onto the immutable closed frame; none of the generated body is
+used. The upper bill remains fixed, the lower bill rotates from the authored
+rear hinge, and its tip ends naturally beneath and slightly behind the upper
+tip. Directional anatomy records a `0.9459` lower-to-upper reach ratio,
+`0.2231` normalized tip offset, `13.2703` degree opening, and `0.998396`
+connected-mandible ratio. The strict audit reports 1,540 changed rendered
+mouth pixels, outside-mouth mean difference `0.0`, registration delta `0`,
+and silhouette IoU `0.997888`. The eye, crown, cheek, throat, hoodie, body,
+feet, scale, canvas, and extended presenting wing remain fixed.
+
+Full-size evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-025-one-pair-2026-08-07-v4/`
+
+This is an internal visual pass only. The reopened queue now contains 23
+internal passes, 41 pending observable pairs, and 2 not-observable rear views.
+User approval and runtime admission remain zero.
