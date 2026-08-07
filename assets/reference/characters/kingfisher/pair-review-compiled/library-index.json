@@ -14,7 +14,7 @@
   "legacy_pair_review": {
     "approval_state": "candidate_visual_review",
     "ledger_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-review-ledger.json",
-    "ledger_sha256": "eb91aa66ac4cee39befb03ac9d98bf314051a98006811f657c720602462be456",
+    "ledger_sha256": "dfad6fc7341646173e260bf9acc2627b4b9855ec97b609084a48d24fb8dec8cd",
     "pair_count": 66,
     "pairs": [
       {
@@ -243,12 +243,12 @@
         "automated_audit_passed": true,
         "ordinal": 12,
         "pairwise_full_size_review": {
-          "evidence_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-012-one-pair-2026-08-05-v2",
+          "evidence_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-012-frontal-anatomy-review-2026-08-06-v1",
           "protocol_id": "kingfisher-full-size-pairwise-v1",
-          "state": "needs_rebuild"
+          "state": "pass"
         },
         "receipt_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/012-explain-one-point/pair-receipt.json",
-        "receipt_sha256": "9b9c1f5720879922ed59c108b0d4ab9c9ee4f2c3f69f7cb8fbfd2539fc816912",
+        "receipt_sha256": "be85a955c5de18941280f5c2ba67a038486d72fc79f4d171da1b05d9f02369c1",
         "resting_pose_id": "kingfisher.act.012.explain-one-point",
         "resting_sha256": "3fb2be8bea5c67af23b50c9aff46418db942f9d3d847e827ecb37777f06c97f9",
         "runtime_admitted": false,
@@ -1340,9 +1340,9 @@
     ],
     "pairwise_full_size_review_summary": {
       "complete": false,
-      "needs_rebuild_count": 11,
+      "needs_rebuild_count": 10,
       "not_observable_count": 2,
-      "pass_count": 53,
+      "pass_count": 54,
       "pending_count": 0
     },
     "review_projection": true,
@@ -1973,7 +1973,7 @@
       "approval_state": "candidate_visual_review",
       "fps": 2,
       "loop": true,
-      "pair_review_state": "needs_rebuild",
+      "pair_review_state": "pass",
       "pose_ids": [
         "kingfisher.act.012.explain-one-point",
         "kingfisher.act.122.explain-one-point-speaking-beak"
@@ -2645,7 +2645,7 @@
         "pass",
         "pass",
         "pass",
-        "needs_rebuild",
+        "pass",
         "pass",
         "pass",
         "pass",
@@ -3078,7 +3078,7 @@
     {
       "approval_state": "candidate_visual_review",
       "bytes": 28586919,
-      "path": "kingfisher_act_001_066_111_176_pair_review-d66cc5ea00a86ba6.wjpose",
+      "path": "kingfisher_act_001_066_111_176_pair_review-a3a3d5f0653c5294.wjpose",
       "pose_count": 132,
       "pose_ids": [
         "kingfisher.act.001.neutral-front",
@@ -3216,7 +3216,7 @@
       ],
       "review_projection": true,
       "runtime_admitted": false,
-      "sha256": "d66cc5ea00a86ba6d64255564a7e396fef639d845811d925a55ca1794cee2e32",
+      "sha256": "a3a3d5f0653c52942177ec3de9cd53819862d1c4ffb50eee8abeb9a051447152",
       "shard_id": "kingfisher_act_001_066_111_176_pair_review",
       "source": "kingfisher_pair_specific_beak_review_v1"
     }
