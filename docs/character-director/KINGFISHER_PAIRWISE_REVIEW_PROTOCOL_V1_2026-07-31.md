@@ -5072,3 +5072,30 @@ Full-size evidence:
 This is an internal visual pass only. The reopened queue now contains 21
 internal passes, 43 pending observable pairs, and 2 not-observable rear views.
 User approval and runtime admission remain zero.
+
+### Pair 24 isolated polite-interruption review
+
+Pair 24 (`polite-interruption`) was reviewed independently at native size,
+nearest-neighbor enlarged beak scale, full-projector size, and in a six-second
+closed/open loop. The canonical speaking mate, verified v7, rejected v3/v4,
+donor v5/v6, procedural v4, preserved sources, and pairwise renders were
+compared. Verified v7 and the current speaking mate are pixel-identical and
+remain the selected frame.
+
+The screen-right upper bill remains immutable while one lower mandible rotates
+from the rear hinge. The gape has one connected cavity and the lower tip stays
+beneath and behind the upper tip without a lateral jump, duplicate contour,
+detached sliver, throat spill, or facial registration shift. The directional
+anatomy records an `18.4149` degree opening and connected-mandible ratio `1.0`.
+The strict audit reports 3,576 changed rendered mouth pixels, outside-mouth
+mean difference `0.0`, registration delta `0`, and silhouette IoU `1.0`. The
+crown, eyes, cheek plates, throat, raised wing, hoodie, body, feet, scale,
+canvas, and upper bill remain fixed.
+
+Full-size evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-024-one-pair-2026-08-07-v4/`
+
+This is an internal visual pass only. The reopened queue now contains 22
+internal passes, 42 pending observable pairs, and 2 not-observable rear views.
+User approval and runtime admission remain zero.
