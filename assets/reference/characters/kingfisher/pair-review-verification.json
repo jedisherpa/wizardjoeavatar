@@ -1,0 +1,21 @@
+{
+  "character_id": "kingfisher",
+  "index_path": "assets/reference/characters/kingfisher/pair-review-compiled/library-index.json",
+  "index_sha256": "178143247c2d0465f1fde1686e362ff2fbaabdafd74b5dae7b101517d53da14f",
+  "ledger_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-review-ledger.json",
+  "ledger_sha256": "a439f55a063fedd73d8880602966f887200b530e09b0ef06d5d43358430a5cc1",
+  "needs_rebuild_count": 15,
+  "not_observable_count": 2,
+  "pair_artifact_path": "kingfisher_act_001_066_111_176_pair_review-e368e9c0ddc321a4.wjpose",
+  "pair_artifact_sha256": "e368e9c0ddc321a4274b992566b4e4bb65e1dd9fe3134b0f6b4ad43b5424f884",
+  "pair_count": 66,
+  "pairwise_full_size_pass_count": 49,
+  "passed": false,
+  "pending_count": 0,
+  "pose_count": 176,
+  "runtime_admitted_count": 0,
+  "schema_version": 1,
+  "user_approved_count": 0,
+  "verification_error": "pair 1 lacks a passing full-size pairwise disposition",
+  "verification_state": "blocked_by_pairwise_full_size_review"
+}

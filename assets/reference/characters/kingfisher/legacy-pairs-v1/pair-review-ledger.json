@@ -33,17 +33,20 @@
       "ordinal": 1,
       "pair_work_path": "pair-work/001-neutral-front",
       "pairwise_full_size_review": {
-        "defect_codes": [],
+        "defect_codes": [
+          "anatomy_v2_review_required",
+          "missing_anatomy_v2_geometry"
+        ],
         "evidence_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-001-one-pair-2026-08-05-v1",
-        "note": "Strict one-pair-at-a-time recheck. The canonical closed frame and accepted open mate remain registered pixel-for-pixel outside the bounded mouth region. The lower mandible opens symmetrically from the bilateral hinge without upper-bill, head, eye, throat, body, scale, or canvas movement. A fresh generated candidate was rejected for a gray seam and insufficient aperture and is preserved beside the accepted evidence.",
+        "note": "The legacy neutral-front receipt predates explicit hinge and beak polygons. Preserve its art, but re-review this exact closed/open pair and record Anatomy V2 geometry before restoring an internal pass. No user approval or runtime admission is implied.",
         "protocol_id": "kingfisher-full-size-pairwise-v1",
         "queued_at": "2026-07-31T05:30:00+00:00",
-        "reviewed_at": "2026-08-05T00:30:00-06:00",
-        "reviewer": "codex-one-pair-anatomy-review",
+        "reviewed_at": "2026-08-07T01:34:05.327304+00:00",
+        "reviewer": "codex-kingfisher-anatomy-v2",
         "runtime_admission_implied": false,
         "schema_version": 1,
         "source_disposition": "full_size_pairwise_review",
-        "state": "pass",
+        "state": "needs_rebuild",
         "user_approval_implied": false
       },
       "pairwise_full_size_review_history": [
@@ -100,6 +103,26 @@
             "queued_at": "2026-07-31T05:30:00+00:00",
             "reviewed_at": "2026-08-04T04:40:09.353256+00:00",
             "reviewer": "codex-one-pair-review",
+            "runtime_admission_implied": false,
+            "schema_version": 1,
+            "source_disposition": "full_size_pairwise_review",
+            "state": "pass",
+            "user_approval_implied": false
+          }
+        },
+        {
+          "reason": "Superseded by a later full-size pairwise review disposition.",
+          "reporter": "codex-kingfisher-anatomy-v2",
+          "schema_version": 1,
+          "superseded_at": "2026-08-07T01:34:05.327304+00:00",
+          "superseded_review": {
+            "defect_codes": [],
+            "evidence_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-001-one-pair-2026-08-05-v1",
+            "note": "Strict one-pair-at-a-time recheck. The canonical closed frame and accepted open mate remain registered pixel-for-pixel outside the bounded mouth region. The lower mandible opens symmetrically from the bilateral hinge without upper-bill, head, eye, throat, body, scale, or canvas movement. A fresh generated candidate was rejected for a gray seam and insufficient aperture and is preserved beside the accepted evidence.",
+            "protocol_id": "kingfisher-full-size-pairwise-v1",
+            "queued_at": "2026-07-31T05:30:00+00:00",
+            "reviewed_at": "2026-08-05T00:30:00-06:00",
+            "reviewer": "codex-one-pair-anatomy-review",
             "runtime_admission_implied": false,
             "schema_version": 1,
             "source_disposition": "full_size_pairwise_review",
@@ -419,17 +442,20 @@
       "ordinal": 6,
       "pair_work_path": "pair-work/006-right-profile",
       "pairwise_full_size_review": {
-        "defect_codes": [],
+        "defect_codes": [
+          "anatomy_v2_review_required",
+          "tip_alignment_out_of_bounds"
+        ],
         "evidence_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-006-one-pair-2026-08-05-v2",
-        "note": "Internal visual pass only; user approval and runtime admission remain false. Rebuilt as one isolated right-profile closed/open pair. ACT006 remains immutable outside the mouth and supplies the complete upper bill. One connected lower mandible opens from rear hinge (537,246), follows the authored right-facing axis, ends behind the upper tip, and passes anatomy, registration, silhouette, and outside-mouth stability gates.",
+        "note": "Anatomy V2 invalidates the prior batch-derived pass. Review and rebuild this exact closed/open pair independently; no user approval or runtime admission is implied.",
         "protocol_id": "kingfisher-full-size-pairwise-v1",
         "queued_at": "2026-07-31T05:30:00+00:00",
-        "reviewed_at": "2026-08-05T15:20:48.690233+00:00",
-        "reviewer": "codex-one-pair-anatomy-review",
+        "reviewed_at": "2026-08-07T01:13:17.522570+00:00",
+        "reviewer": "codex-kingfisher-anatomy-v2",
         "runtime_admission_implied": false,
         "schema_version": 1,
         "source_disposition": "full_size_pairwise_review",
-        "state": "pass",
+        "state": "needs_rebuild",
         "user_approval_implied": false
       },
       "pairwise_full_size_review_history": [
@@ -492,6 +518,26 @@
             "state": "pass",
             "user_approval_implied": false
           }
+        },
+        {
+          "reason": "Superseded by a later full-size pairwise review disposition.",
+          "reporter": "codex-kingfisher-anatomy-v2",
+          "schema_version": 1,
+          "superseded_at": "2026-08-07T01:13:17.522570+00:00",
+          "superseded_review": {
+            "defect_codes": [],
+            "evidence_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-006-one-pair-2026-08-05-v2",
+            "note": "Internal visual pass only; user approval and runtime admission remain false. Rebuilt as one isolated right-profile closed/open pair. ACT006 remains immutable outside the mouth and supplies the complete upper bill. One connected lower mandible opens from rear hinge (537,246), follows the authored right-facing axis, ends behind the upper tip, and passes anatomy, registration, silhouette, and outside-mouth stability gates.",
+            "protocol_id": "kingfisher-full-size-pairwise-v1",
+            "queued_at": "2026-07-31T05:30:00+00:00",
+            "reviewed_at": "2026-08-05T15:20:48.690233+00:00",
+            "reviewer": "codex-one-pair-anatomy-review",
+            "runtime_admission_implied": false,
+            "schema_version": 1,
+            "source_disposition": "full_size_pairwise_review",
+            "state": "pass",
+            "user_approval_implied": false
+          }
         }
       ],
       "receipt_path": "pair-work/006-right-profile/pair-receipt.json",
@@ -521,17 +567,20 @@
       "ordinal": 7,
       "pair_work_path": "pair-work/007-front-three-quarter-right",
       "pairwise_full_size_review": {
-        "defect_codes": [],
+        "defect_codes": [
+          "anatomy_v2_review_required",
+          "tip_alignment_out_of_bounds"
+        ],
         "evidence_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-007-one-pair-2026-08-05-v2",
-        "note": "Internal visual pass only; user approval and runtime admission remain false. Rebuilt as one isolated front-three-quarter-right pair and reproduced the accepted pixels exactly while correcting the anatomical receipt. ACT007 supplies the immutable body and upper bill; the connected lower mandible shares hinge (449,253), follows the authored left-facing bill axis, and passes geometry, registration, silhouette, and outside-mouth stability gates.",
+        "note": "Anatomy V2 invalidates the prior batch-derived pass. Review and rebuild this exact closed/open pair independently; no user approval or runtime admission is implied.",
         "protocol_id": "kingfisher-full-size-pairwise-v1",
         "queued_at": "2026-07-31T05:30:00+00:00",
-        "reviewed_at": "2026-08-05T15:36:09.765355+00:00",
-        "reviewer": "codex-one-pair-anatomy-review",
+        "reviewed_at": "2026-08-07T01:13:17.529347+00:00",
+        "reviewer": "codex-kingfisher-anatomy-v2",
         "runtime_admission_implied": false,
         "schema_version": 1,
         "source_disposition": "full_size_pairwise_review",
-        "state": "pass",
+        "state": "needs_rebuild",
         "user_approval_implied": false
       },
       "pairwise_full_size_review_history": [
@@ -594,6 +643,26 @@
             "state": "pass",
             "user_approval_implied": false
           }
+        },
+        {
+          "reason": "Superseded by a later full-size pairwise review disposition.",
+          "reporter": "codex-kingfisher-anatomy-v2",
+          "schema_version": 1,
+          "superseded_at": "2026-08-07T01:13:17.529347+00:00",
+          "superseded_review": {
+            "defect_codes": [],
+            "evidence_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-007-one-pair-2026-08-05-v2",
+            "note": "Internal visual pass only; user approval and runtime admission remain false. Rebuilt as one isolated front-three-quarter-right pair and reproduced the accepted pixels exactly while correcting the anatomical receipt. ACT007 supplies the immutable body and upper bill; the connected lower mandible shares hinge (449,253), follows the authored left-facing bill axis, and passes geometry, registration, silhouette, and outside-mouth stability gates.",
+            "protocol_id": "kingfisher-full-size-pairwise-v1",
+            "queued_at": "2026-07-31T05:30:00+00:00",
+            "reviewed_at": "2026-08-05T15:36:09.765355+00:00",
+            "reviewer": "codex-one-pair-anatomy-review",
+            "runtime_admission_implied": false,
+            "schema_version": 1,
+            "source_disposition": "full_size_pairwise_review",
+            "state": "pass",
+            "user_approval_implied": false
+          }
         }
       ],
       "receipt_path": "pair-work/007-front-three-quarter-right/pair-receipt.json",
@@ -623,17 +692,20 @@
       "ordinal": 8,
       "pair_work_path": "pair-work/008-relaxed-idle",
       "pairwise_full_size_review": {
-        "defect_codes": [],
+        "defect_codes": [
+          "anatomy_v2_review_required",
+          "tip_alignment_out_of_bounds"
+        ],
         "evidence_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-008-one-pair-2026-08-05-v2",
-        "note": "Internal visual pass only; user approval and runtime admission remain false. The existing pair-specific relaxed-idle candidate passed a fresh isolated native-size and enlarged review. Its connected lower mandible shares hinge (439,250), follows the canonical left-facing upper-bill axis, remains behind the upper tip, and preserves the eye, head, throat, body, scale, and registration.",
+        "note": "Anatomy V2 invalidates the prior batch-derived pass. Review and rebuild this exact closed/open pair independently; no user approval or runtime admission is implied.",
         "protocol_id": "kingfisher-full-size-pairwise-v1",
         "queued_at": "2026-07-31T05:30:00+00:00",
-        "reviewed_at": "2026-08-05T15:46:38.812293+00:00",
-        "reviewer": "codex-one-pair-anatomy-review",
+        "reviewed_at": "2026-08-07T01:13:17.534521+00:00",
+        "reviewer": "codex-kingfisher-anatomy-v2",
         "runtime_admission_implied": false,
         "schema_version": 1,
         "source_disposition": "full_size_pairwise_review",
-        "state": "pass",
+        "state": "needs_rebuild",
         "user_approval_implied": false
       },
       "pairwise_full_size_review_history": [
@@ -690,6 +762,26 @@
             "queued_at": "2026-07-31T05:30:00+00:00",
             "reviewed_at": "2026-08-04T05:57:06.475570+00:00",
             "reviewer": "codex-locked-pair-review",
+            "runtime_admission_implied": false,
+            "schema_version": 1,
+            "source_disposition": "full_size_pairwise_review",
+            "state": "pass",
+            "user_approval_implied": false
+          }
+        },
+        {
+          "reason": "Superseded by a later full-size pairwise review disposition.",
+          "reporter": "codex-kingfisher-anatomy-v2",
+          "schema_version": 1,
+          "superseded_at": "2026-08-07T01:13:17.534521+00:00",
+          "superseded_review": {
+            "defect_codes": [],
+            "evidence_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-008-one-pair-2026-08-05-v2",
+            "note": "Internal visual pass only; user approval and runtime admission remain false. The existing pair-specific relaxed-idle candidate passed a fresh isolated native-size and enlarged review. Its connected lower mandible shares hinge (439,250), follows the canonical left-facing upper-bill axis, remains behind the upper tip, and preserves the eye, head, throat, body, scale, and registration.",
+            "protocol_id": "kingfisher-full-size-pairwise-v1",
+            "queued_at": "2026-07-31T05:30:00+00:00",
+            "reviewed_at": "2026-08-05T15:46:38.812293+00:00",
+            "reviewer": "codex-one-pair-anatomy-review",
             "runtime_admission_implied": false,
             "schema_version": 1,
             "source_disposition": "full_size_pairwise_review",
@@ -827,17 +919,20 @@
       "ordinal": 10,
       "pair_work_path": "pair-work/010-ready-stance",
       "pairwise_full_size_review": {
-        "defect_codes": [],
+        "defect_codes": [
+          "anatomy_v2_review_required",
+          "tip_alignment_out_of_bounds"
+        ],
         "evidence_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-010-one-pair-2026-08-05-v2",
-        "note": "Strict one-pair review: native alpha, enlarged beak crop, full projector proof, registration audit, and directional anatomy metrics pass. Existing compact pair-specific pixels preserved; hinge (449,244), right-facing, mandible/upper length ratio 0.8395, tip offset ratio 0.4938. Exact pixels were regenerated under the current 0.8 connectivity minimum. This is internal corpus QA only; user approval remains false and runtime admission remains false.",
+        "note": "Anatomy V2 invalidates the prior batch-derived pass. Review and rebuild this exact closed/open pair independently; no user approval or runtime admission is implied.",
         "protocol_id": "kingfisher-full-size-pairwise-v1",
         "queued_at": "2026-07-31T05:30:00+00:00",
-        "reviewed_at": "2026-08-05T00:00:00Z",
-        "reviewer": "codex-pairwise-anatomy-review",
+        "reviewed_at": "2026-08-07T01:13:17.539750+00:00",
+        "reviewer": "codex-kingfisher-anatomy-v2",
         "runtime_admission_implied": false,
         "schema_version": 1,
         "source_disposition": "full_size_pairwise_review",
-        "state": "pass",
+        "state": "needs_rebuild",
         "user_approval_implied": false
       },
       "pairwise_full_size_review_history": [
@@ -900,6 +995,26 @@
             "state": "pass",
             "user_approval_implied": false
           }
+        },
+        {
+          "reason": "Superseded by a later full-size pairwise review disposition.",
+          "reporter": "codex-kingfisher-anatomy-v2",
+          "schema_version": 1,
+          "superseded_at": "2026-08-07T01:13:17.539750+00:00",
+          "superseded_review": {
+            "defect_codes": [],
+            "evidence_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-010-one-pair-2026-08-05-v2",
+            "note": "Strict one-pair review: native alpha, enlarged beak crop, full projector proof, registration audit, and directional anatomy metrics pass. Existing compact pair-specific pixels preserved; hinge (449,244), right-facing, mandible/upper length ratio 0.8395, tip offset ratio 0.4938. Exact pixels were regenerated under the current 0.8 connectivity minimum. This is internal corpus QA only; user approval remains false and runtime admission remains false.",
+            "protocol_id": "kingfisher-full-size-pairwise-v1",
+            "queued_at": "2026-07-31T05:30:00+00:00",
+            "reviewed_at": "2026-08-05T00:00:00Z",
+            "reviewer": "codex-pairwise-anatomy-review",
+            "runtime_admission_implied": false,
+            "schema_version": 1,
+            "source_disposition": "full_size_pairwise_review",
+            "state": "pass",
+            "user_approval_implied": false
+          }
         }
       ],
       "receipt_path": "pair-work/010-ready-stance/pair-receipt.json",
@@ -930,17 +1045,20 @@
       "ordinal": 11,
       "pair_work_path": "pair-work/011-neutral-speaking-gesture",
       "pairwise_full_size_review": {
-        "defect_codes": [],
+        "defect_codes": [
+          "anatomy_v2_review_required",
+          "tip_alignment_out_of_bounds"
+        ],
         "evidence_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-011-one-pair-2026-08-05-v2",
-        "note": "Strict one-pair review: native alpha, enlarged candidate comparison, full projector proof, registration audit, and directional anatomy metrics pass. The centered v2 mate is retained; right-drifting/clipped later alternatives remain rejected. Hinge (493,237), right-facing, mandible/upper length ratio 0.875, tip offset ratio 0.5. Exact accepted pixels were regenerated under the current 0.8 connectivity minimum. Internal corpus QA only; user approval remains false and runtime admission remains false.",
+        "note": "Anatomy V2 invalidates the prior batch-derived pass. Review and rebuild this exact closed/open pair independently; no user approval or runtime admission is implied.",
         "protocol_id": "kingfisher-full-size-pairwise-v1",
         "queued_at": "2026-07-31T05:30:00+00:00",
-        "reviewed_at": "2026-08-05T00:00:00Z",
-        "reviewer": "codex-pairwise-anatomy-review",
+        "reviewed_at": "2026-08-07T01:13:17.545391+00:00",
+        "reviewer": "codex-kingfisher-anatomy-v2",
         "runtime_admission_implied": false,
         "schema_version": 1,
         "source_disposition": "full_size_pairwise_review",
-        "state": "pass",
+        "state": "needs_rebuild",
         "user_approval_implied": false
       },
       "pairwise_full_size_review_history": [
@@ -1003,6 +1121,26 @@
             "state": "pass",
             "user_approval_implied": false
           }
+        },
+        {
+          "reason": "Superseded by a later full-size pairwise review disposition.",
+          "reporter": "codex-kingfisher-anatomy-v2",
+          "schema_version": 1,
+          "superseded_at": "2026-08-07T01:13:17.545391+00:00",
+          "superseded_review": {
+            "defect_codes": [],
+            "evidence_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-011-one-pair-2026-08-05-v2",
+            "note": "Strict one-pair review: native alpha, enlarged candidate comparison, full projector proof, registration audit, and directional anatomy metrics pass. The centered v2 mate is retained; right-drifting/clipped later alternatives remain rejected. Hinge (493,237), right-facing, mandible/upper length ratio 0.875, tip offset ratio 0.5. Exact accepted pixels were regenerated under the current 0.8 connectivity minimum. Internal corpus QA only; user approval remains false and runtime admission remains false.",
+            "protocol_id": "kingfisher-full-size-pairwise-v1",
+            "queued_at": "2026-07-31T05:30:00+00:00",
+            "reviewed_at": "2026-08-05T00:00:00Z",
+            "reviewer": "codex-pairwise-anatomy-review",
+            "runtime_admission_implied": false,
+            "schema_version": 1,
+            "source_disposition": "full_size_pairwise_review",
+            "state": "pass",
+            "user_approval_implied": false
+          }
         }
       ],
       "receipt_path": "pair-work/011-neutral-speaking-gesture/pair-receipt.json",
@@ -1033,17 +1171,20 @@
       "ordinal": 12,
       "pair_work_path": "pair-work/012-explain-one-point",
       "pairwise_full_size_review": {
-        "defect_codes": [],
+        "defect_codes": [
+          "anatomy_v2_review_required",
+          "tip_alignment_out_of_bounds"
+        ],
         "evidence_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-012-one-pair-2026-08-05-v2",
-        "note": "Strict one-pair review: native alpha, enlarged closed/accepted/rejected comparison, full projector proof, registration audit, and directional anatomy metrics pass. The accepted v1 mate remains centered and attached; hinge (486,235), right-facing, mandible/upper length ratio 0.828, tip offset ratio 0.5699. Exact pixels regenerated under the current 0.8 connectivity minimum with measured connected ratio 0.81237. Internal corpus QA only; user approval remains false and runtime admission remains false.",
+        "note": "Anatomy V2 invalidates the prior batch-derived pass. Review and rebuild this exact closed/open pair independently; no user approval or runtime admission is implied.",
         "protocol_id": "kingfisher-full-size-pairwise-v1",
         "queued_at": "2026-07-31T05:30:00+00:00",
-        "reviewed_at": "2026-08-05T00:00:00Z",
-        "reviewer": "codex-pairwise-anatomy-review",
+        "reviewed_at": "2026-08-07T01:13:17.551278+00:00",
+        "reviewer": "codex-kingfisher-anatomy-v2",
         "runtime_admission_implied": false,
         "schema_version": 1,
         "source_disposition": "full_size_pairwise_review",
-        "state": "pass",
+        "state": "needs_rebuild",
         "user_approval_implied": false
       },
       "pairwise_full_size_review_history": [
@@ -1100,6 +1241,26 @@
             "queued_at": "2026-07-31T05:30:00+00:00",
             "reviewed_at": "2026-08-04T08:28:05.716201+00:00",
             "reviewer": "codex-pairwise-rebuild",
+            "runtime_admission_implied": false,
+            "schema_version": 1,
+            "source_disposition": "full_size_pairwise_review",
+            "state": "pass",
+            "user_approval_implied": false
+          }
+        },
+        {
+          "reason": "Superseded by a later full-size pairwise review disposition.",
+          "reporter": "codex-kingfisher-anatomy-v2",
+          "schema_version": 1,
+          "superseded_at": "2026-08-07T01:13:17.551278+00:00",
+          "superseded_review": {
+            "defect_codes": [],
+            "evidence_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-012-one-pair-2026-08-05-v2",
+            "note": "Strict one-pair review: native alpha, enlarged closed/accepted/rejected comparison, full projector proof, registration audit, and directional anatomy metrics pass. The accepted v1 mate remains centered and attached; hinge (486,235), right-facing, mandible/upper length ratio 0.828, tip offset ratio 0.5699. Exact pixels regenerated under the current 0.8 connectivity minimum with measured connected ratio 0.81237. Internal corpus QA only; user approval remains false and runtime admission remains false.",
+            "protocol_id": "kingfisher-full-size-pairwise-v1",
+            "queued_at": "2026-07-31T05:30:00+00:00",
+            "reviewed_at": "2026-08-05T00:00:00Z",
+            "reviewer": "codex-pairwise-anatomy-review",
             "runtime_admission_implied": false,
             "schema_version": 1,
             "source_disposition": "full_size_pairwise_review",
@@ -1569,17 +1730,20 @@
       "ordinal": 17,
       "pair_work_path": "pair-work/017-insight-upward-point",
       "pairwise_full_size_review": {
-        "defect_codes": [],
+        "defect_codes": [
+          "anatomy_v2_review_required",
+          "tip_alignment_out_of_bounds"
+        ],
         "evidence_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-017-one-pair-2026-08-05-v2",
-        "note": "Strict one-pair-at-a-time native-size, enlarged-beak, and full-projector review. Candidate v2 deterministically reproduces the restrained accepted v1 pixels exactly from the preserved pre-pairwise donor under the current directional anatomy checker. The oversized donor wedge remains excluded. The lower bill opens from the rear hinge on the same left-facing axis as the immutable upper bill without moving the eye, crown, throat, raised insight wing, hoodie, body, feet, scale, or canvas. Directional anatomy: hinge (543,221), mandible anchor distance 4.438, mandible-to-upper reach ratio 0.9524, tip offset ratio 0.4286, connected-mandible ratio 0.999438. Audit: 1,081 changed rendered pixels, outside-mouth mean difference 0.0, registration delta 0, silhouette IoU 0.995961. Internal visual pass only; runtime admission and user approval remain false.",
+        "note": "Anatomy V2 invalidates the prior batch-derived pass. Review and rebuild this exact closed/open pair independently; no user approval or runtime admission is implied.",
         "protocol_id": "kingfisher-full-size-pairwise-v1",
         "queued_at": "2026-07-31T05:30:00+00:00",
-        "reviewed_at": "2026-08-05T17:30:00-06:00",
-        "reviewer": "codex-pairwise-rebuild",
+        "reviewed_at": "2026-08-07T01:13:17.557064+00:00",
+        "reviewer": "codex-kingfisher-anatomy-v2",
         "runtime_admission_implied": false,
         "schema_version": 1,
         "source_disposition": "full_size_pairwise_review",
-        "state": "pass",
+        "state": "needs_rebuild",
         "user_approval_implied": false
       },
       "pairwise_full_size_review_history": [
@@ -1635,6 +1799,26 @@
             "protocol_id": "kingfisher-full-size-pairwise-v1",
             "queued_at": "2026-07-31T05:30:00+00:00",
             "reviewed_at": "2026-08-04T10:09:32.543798+00:00",
+            "reviewer": "codex-pairwise-rebuild",
+            "runtime_admission_implied": false,
+            "schema_version": 1,
+            "source_disposition": "full_size_pairwise_review",
+            "state": "pass",
+            "user_approval_implied": false
+          }
+        },
+        {
+          "reason": "Superseded by a later full-size pairwise review disposition.",
+          "reporter": "codex-kingfisher-anatomy-v2",
+          "schema_version": 1,
+          "superseded_at": "2026-08-07T01:13:17.557064+00:00",
+          "superseded_review": {
+            "defect_codes": [],
+            "evidence_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-017-one-pair-2026-08-05-v2",
+            "note": "Strict one-pair-at-a-time native-size, enlarged-beak, and full-projector review. Candidate v2 deterministically reproduces the restrained accepted v1 pixels exactly from the preserved pre-pairwise donor under the current directional anatomy checker. The oversized donor wedge remains excluded. The lower bill opens from the rear hinge on the same left-facing axis as the immutable upper bill without moving the eye, crown, throat, raised insight wing, hoodie, body, feet, scale, or canvas. Directional anatomy: hinge (543,221), mandible anchor distance 4.438, mandible-to-upper reach ratio 0.9524, tip offset ratio 0.4286, connected-mandible ratio 0.999438. Audit: 1,081 changed rendered pixels, outside-mouth mean difference 0.0, registration delta 0, silhouette IoU 0.995961. Internal visual pass only; runtime admission and user approval remain false.",
+            "protocol_id": "kingfisher-full-size-pairwise-v1",
+            "queued_at": "2026-07-31T05:30:00+00:00",
+            "reviewed_at": "2026-08-05T17:30:00-06:00",
             "reviewer": "codex-pairwise-rebuild",
             "runtime_admission_implied": false,
             "schema_version": 1,
@@ -2084,17 +2268,20 @@
       "ordinal": 22,
       "pair_work_path": "pair-work/022-small-acknowledgment",
       "pairwise_full_size_review": {
-        "defect_codes": [],
+        "defect_codes": [
+          "anatomy_v2_review_required",
+          "tip_alignment_out_of_bounds"
+        ],
         "evidence_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-022-one-pair-2026-08-05-v2",
-        "note": "Strict one-pair-at-a-time native-size, enlarged-beak, tight-tip, and full-projector review. The prior admitted-looking mate and exact current v4 verification repaint donor cavity pixels after restoring the canonical upper bill, creating a duplicate dark interior contour that reads as a third beak edge. Candidate v5 uses the same connected donor mandible and immutable upper-bill geometry without the second cavity overlay, removing that duplicate while retaining the authored lower-bill highlight. Candidate v6 proves that a solid cavity can suppress every donor contour but is rejected because its broad polygon reads as an artificial black slab. The selected v5 opening shares the visible left rear hinge, follows the upper bill on the same right-facing axis, and terminates behind the upper tip; the restrained gap suits a small acknowledgment. Eye line, crown, cheek, throat, folded wings, hoodie, body, feet, scale, and canvas remain unchanged. Directional anatomy: hinge (462,266), upper anchor distance 11.0, mandible anchor distance 7.0, cavity anchor distance 5.0, mandible-to-upper reach ratio 0.9412, tip offset ratio 0.3934, connected-mandible ratio 0.97903. Audit: 3,063 changed rendered pixels, outside-mouth mean difference 0.0, registration delta 0, silhouette IoU 0.999766. Internal visual pass only; runtime admission and user approval remain false.",
+        "note": "Anatomy V2 invalidates the prior batch-derived pass. Review and rebuild this exact closed/open pair independently; no user approval or runtime admission is implied.",
         "protocol_id": "kingfisher-full-size-pairwise-v1",
         "queued_at": "2026-07-31T05:30:00+00:00",
-        "reviewed_at": "2026-08-05T19:05:00-06:00",
-        "reviewer": "codex-pairwise-rebuild",
+        "reviewed_at": "2026-08-07T01:13:17.562696+00:00",
+        "reviewer": "codex-kingfisher-anatomy-v2",
         "runtime_admission_implied": false,
         "schema_version": 1,
         "source_disposition": "full_size_pairwise_review",
-        "state": "pass",
+        "state": "needs_rebuild",
         "user_approval_implied": false
       },
       "pairwise_full_size_review_history": [
@@ -2151,6 +2338,26 @@
             "queued_at": "2026-07-31T05:30:00+00:00",
             "reviewed_at": "2026-08-04T11:41:55.559127+00:00",
             "reviewer": "codex-pairwise-review-2026-08-04",
+            "runtime_admission_implied": false,
+            "schema_version": 1,
+            "source_disposition": "full_size_pairwise_review",
+            "state": "pass",
+            "user_approval_implied": false
+          }
+        },
+        {
+          "reason": "Superseded by a later full-size pairwise review disposition.",
+          "reporter": "codex-kingfisher-anatomy-v2",
+          "schema_version": 1,
+          "superseded_at": "2026-08-07T01:13:17.562696+00:00",
+          "superseded_review": {
+            "defect_codes": [],
+            "evidence_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-022-one-pair-2026-08-05-v2",
+            "note": "Strict one-pair-at-a-time native-size, enlarged-beak, tight-tip, and full-projector review. The prior admitted-looking mate and exact current v4 verification repaint donor cavity pixels after restoring the canonical upper bill, creating a duplicate dark interior contour that reads as a third beak edge. Candidate v5 uses the same connected donor mandible and immutable upper-bill geometry without the second cavity overlay, removing that duplicate while retaining the authored lower-bill highlight. Candidate v6 proves that a solid cavity can suppress every donor contour but is rejected because its broad polygon reads as an artificial black slab. The selected v5 opening shares the visible left rear hinge, follows the upper bill on the same right-facing axis, and terminates behind the upper tip; the restrained gap suits a small acknowledgment. Eye line, crown, cheek, throat, folded wings, hoodie, body, feet, scale, and canvas remain unchanged. Directional anatomy: hinge (462,266), upper anchor distance 11.0, mandible anchor distance 7.0, cavity anchor distance 5.0, mandible-to-upper reach ratio 0.9412, tip offset ratio 0.3934, connected-mandible ratio 0.97903. Audit: 3,063 changed rendered pixels, outside-mouth mean difference 0.0, registration delta 0, silhouette IoU 0.999766. Internal visual pass only; runtime admission and user approval remain false.",
+            "protocol_id": "kingfisher-full-size-pairwise-v1",
+            "queued_at": "2026-07-31T05:30:00+00:00",
+            "reviewed_at": "2026-08-05T19:05:00-06:00",
+            "reviewer": "codex-pairwise-rebuild",
             "runtime_admission_implied": false,
             "schema_version": 1,
             "source_disposition": "full_size_pairwise_review",
@@ -2288,17 +2495,20 @@
       "ordinal": 24,
       "pair_work_path": "pair-work/024-polite-interruption",
       "pairwise_full_size_review": {
-        "defect_codes": [],
+        "defect_codes": [
+          "anatomy_v2_review_required",
+          "tip_alignment_out_of_bounds"
+        ],
         "evidence_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-024-one-pair-2026-08-05-v2",
-        "note": "Strict one-pair-at-a-time native-size, enlarged-beak, tight-tip, and full-projector review. Candidate v7 reproduces the selected donor-v6 speaking mate exactly from the preserved pair-specific v3 render under the current directional anatomy checker, so no image pixels are altered. Rejected v3 retains a rectangular donor patch, rejected v4 and donor v5 read as artificial black slabs, and those variants remain excluded. The selected modest diagonal lower bill shares the visible left rear hinge, follows the immutable upper bill on the same right-facing axis, and terminates beneath the upper tip; at projector scale it supports a polite interruption without reading as detached. Eyes, crown, cheek, throat, raised signaling wing, hoodie, body, feet, scale, and canvas remain unchanged. Directional anatomy: hinge (470,220), upper anchor distance 9.0, mandible anchor distance 4.0, cavity anchor distance 1.0, mandible-to-upper reach ratio 0.8102, tip offset ratio 0.4927, connected-mandible ratio 1.0. Audit: 3,576 changed rendered pixels, outside-mouth mean difference 0.0, registration delta 0, silhouette IoU 1.0. Internal visual pass only; runtime admission and user approval remain false.",
+        "note": "Anatomy V2 invalidates the prior batch-derived pass. Review and rebuild this exact closed/open pair independently; no user approval or runtime admission is implied.",
         "protocol_id": "kingfisher-full-size-pairwise-v1",
         "queued_at": "2026-07-31T05:30:00+00:00",
-        "reviewed_at": "2026-08-05T19:44:00-06:00",
-        "reviewer": "codex-pairwise-rebuild",
+        "reviewed_at": "2026-08-07T01:13:17.568135+00:00",
+        "reviewer": "codex-kingfisher-anatomy-v2",
         "runtime_admission_implied": false,
         "schema_version": 1,
         "source_disposition": "full_size_pairwise_review",
-        "state": "pass",
+        "state": "needs_rebuild",
         "user_approval_implied": false
       },
       "pairwise_full_size_review_history": [
@@ -2361,6 +2571,26 @@
             "state": "pass",
             "user_approval_implied": false
           }
+        },
+        {
+          "reason": "Superseded by a later full-size pairwise review disposition.",
+          "reporter": "codex-kingfisher-anatomy-v2",
+          "schema_version": 1,
+          "superseded_at": "2026-08-07T01:13:17.568135+00:00",
+          "superseded_review": {
+            "defect_codes": [],
+            "evidence_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-024-one-pair-2026-08-05-v2",
+            "note": "Strict one-pair-at-a-time native-size, enlarged-beak, tight-tip, and full-projector review. Candidate v7 reproduces the selected donor-v6 speaking mate exactly from the preserved pair-specific v3 render under the current directional anatomy checker, so no image pixels are altered. Rejected v3 retains a rectangular donor patch, rejected v4 and donor v5 read as artificial black slabs, and those variants remain excluded. The selected modest diagonal lower bill shares the visible left rear hinge, follows the immutable upper bill on the same right-facing axis, and terminates beneath the upper tip; at projector scale it supports a polite interruption without reading as detached. Eyes, crown, cheek, throat, raised signaling wing, hoodie, body, feet, scale, and canvas remain unchanged. Directional anatomy: hinge (470,220), upper anchor distance 9.0, mandible anchor distance 4.0, cavity anchor distance 1.0, mandible-to-upper reach ratio 0.8102, tip offset ratio 0.4927, connected-mandible ratio 1.0. Audit: 3,576 changed rendered pixels, outside-mouth mean difference 0.0, registration delta 0, silhouette IoU 1.0. Internal visual pass only; runtime admission and user approval remain false.",
+            "protocol_id": "kingfisher-full-size-pairwise-v1",
+            "queued_at": "2026-07-31T05:30:00+00:00",
+            "reviewed_at": "2026-08-05T19:44:00-06:00",
+            "reviewer": "codex-pairwise-rebuild",
+            "runtime_admission_implied": false,
+            "schema_version": 1,
+            "source_disposition": "full_size_pairwise_review",
+            "state": "pass",
+            "user_approval_implied": false
+          }
         }
       ],
       "receipt_path": "pair-work/024-polite-interruption/pair-receipt.json",
@@ -2390,17 +2620,20 @@
       "ordinal": 25,
       "pair_work_path": "pair-work/025-hand-over-the-floor",
       "pairwise_full_size_review": {
-        "defect_codes": [],
+        "defect_codes": [
+          "anatomy_v2_review_required",
+          "tip_alignment_out_of_bounds"
+        ],
         "evidence_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-025-one-pair-2026-08-05-v2",
-        "note": "Strict one-pair-at-a-time native-size, enlarged-beak, tight-tip, and full-projector review. Candidate v6 reproduces the accepted tip-aligned v5 pixels exactly from the preserved pair-specific v2 donor under the current directional anatomy checker. The rejected short-mandible frame stops mid-bill, rejected v2 contains displaced donor content, and candidates v3/v4 retain shorter tips; all remain excluded. The selected connected lower bill uses the authored left rear hinge, follows the immutable upper bill on the same right-facing profile axis, and reaches beneath its tip without a duplicate edge or detached sliver. Eye, crown, cheek, throat, hoodie, body, feet, scale, canvas, and extended hand-over-the-floor wing remain unchanged. Directional anatomy: hinge (365,220), upper anchor distance 4.0, mandible anchor distance 4.509, cavity anchor distance 2.0, mandible-to-upper reach ratio 0.9667, tip offset ratio 0.5067, connected-mandible ratio 0.999583. Audit: 2,380 changed rendered pixels, outside-mouth mean difference 0.0, registration delta 0, silhouette IoU 0.996829. Internal visual pass only; runtime admission and user approval remain false.",
+        "note": "Anatomy V2 invalidates the prior batch-derived pass. Review and rebuild this exact closed/open pair independently; no user approval or runtime admission is implied.",
         "protocol_id": "kingfisher-full-size-pairwise-v1",
         "queued_at": "2026-07-31T05:30:00+00:00",
-        "reviewed_at": "2026-08-05T20:02:00-06:00",
-        "reviewer": "codex-pairwise-rebuild",
+        "reviewed_at": "2026-08-07T01:13:17.573523+00:00",
+        "reviewer": "codex-kingfisher-anatomy-v2",
         "runtime_admission_implied": false,
         "schema_version": 1,
         "source_disposition": "full_size_pairwise_review",
-        "state": "pass",
+        "state": "needs_rebuild",
         "user_approval_implied": false
       },
       "pairwise_full_size_review_history": [
@@ -2457,6 +2690,26 @@
             "queued_at": "2026-07-31T05:30:00+00:00",
             "reviewed_at": "2026-08-04T12:36:54.862225+00:00",
             "reviewer": "codex-pairwise-review-2026-08-04",
+            "runtime_admission_implied": false,
+            "schema_version": 1,
+            "source_disposition": "full_size_pairwise_review",
+            "state": "pass",
+            "user_approval_implied": false
+          }
+        },
+        {
+          "reason": "Superseded by a later full-size pairwise review disposition.",
+          "reporter": "codex-kingfisher-anatomy-v2",
+          "schema_version": 1,
+          "superseded_at": "2026-08-07T01:13:17.573523+00:00",
+          "superseded_review": {
+            "defect_codes": [],
+            "evidence_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-025-one-pair-2026-08-05-v2",
+            "note": "Strict one-pair-at-a-time native-size, enlarged-beak, tight-tip, and full-projector review. Candidate v6 reproduces the accepted tip-aligned v5 pixels exactly from the preserved pair-specific v2 donor under the current directional anatomy checker. The rejected short-mandible frame stops mid-bill, rejected v2 contains displaced donor content, and candidates v3/v4 retain shorter tips; all remain excluded. The selected connected lower bill uses the authored left rear hinge, follows the immutable upper bill on the same right-facing profile axis, and reaches beneath its tip without a duplicate edge or detached sliver. Eye, crown, cheek, throat, hoodie, body, feet, scale, canvas, and extended hand-over-the-floor wing remain unchanged. Directional anatomy: hinge (365,220), upper anchor distance 4.0, mandible anchor distance 4.509, cavity anchor distance 2.0, mandible-to-upper reach ratio 0.9667, tip offset ratio 0.5067, connected-mandible ratio 0.999583. Audit: 2,380 changed rendered pixels, outside-mouth mean difference 0.0, registration delta 0, silhouette IoU 0.996829. Internal visual pass only; runtime admission and user approval remain false.",
+            "protocol_id": "kingfisher-full-size-pairwise-v1",
+            "queued_at": "2026-07-31T05:30:00+00:00",
+            "reviewed_at": "2026-08-05T20:02:00-06:00",
+            "reviewer": "codex-pairwise-rebuild",
             "runtime_admission_implied": false,
             "schema_version": 1,
             "source_disposition": "full_size_pairwise_review",
@@ -2594,17 +2847,20 @@
       "ordinal": 27,
       "pair_work_path": "pair-work/027-intimate-confidence",
       "pairwise_full_size_review": {
-        "defect_codes": [],
+        "defect_codes": [
+          "anatomy_v2_review_required",
+          "tip_alignment_out_of_bounds"
+        ],
         "evidence_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-027-one-pair-2026-08-05-v2",
-        "note": "Isolated one-pair review. Reproduced the selected v4 articulation exactly as v5 under the current directional anatomy gate (SHA-256 d0327018802fa843e84fff77fd3581726bcc5b085c4a8442bdd4f5b7d05bc969). Enlarged and full-projector inspection show one restrained left-facing lower mandible anchored at the actual screen-right rear hinge, with no dark throat hook, duplicate edge, detached sliver, lateral jump, or body drift. All six anatomy checks pass; connected ratio 1.0. Audit remains 998 changed rendered pixels, outside-mouth mean difference 0.0, registration delta 0, silhouette IoU 1.0. Internal review pass only; user approval and runtime admission remain false.",
+        "note": "Anatomy V2 invalidates the prior batch-derived pass. Review and rebuild this exact closed/open pair independently; no user approval or runtime admission is implied.",
         "protocol_id": "kingfisher-full-size-pairwise-v1",
         "queued_at": "2026-07-31T05:30:00+00:00",
-        "reviewed_at": "2026-08-05T00:30:00Z",
-        "reviewer": "codex-isolated-pair-review",
+        "reviewed_at": "2026-08-07T01:13:17.579122+00:00",
+        "reviewer": "codex-kingfisher-anatomy-v2",
         "runtime_admission_implied": false,
         "schema_version": 1,
         "source_disposition": "full_size_pairwise_review",
-        "state": "pass",
+        "state": "needs_rebuild",
         "user_approval_implied": false
       },
       "pairwise_full_size_review_history": [
@@ -2661,6 +2917,26 @@
             "queued_at": "2026-07-31T05:30:00+00:00",
             "reviewed_at": "2026-08-04T13:25:03.958377+00:00",
             "reviewer": "codex-pairwise-review-2026-08-04",
+            "runtime_admission_implied": false,
+            "schema_version": 1,
+            "source_disposition": "full_size_pairwise_review",
+            "state": "pass",
+            "user_approval_implied": false
+          }
+        },
+        {
+          "reason": "Superseded by a later full-size pairwise review disposition.",
+          "reporter": "codex-kingfisher-anatomy-v2",
+          "schema_version": 1,
+          "superseded_at": "2026-08-07T01:13:17.579122+00:00",
+          "superseded_review": {
+            "defect_codes": [],
+            "evidence_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-027-one-pair-2026-08-05-v2",
+            "note": "Isolated one-pair review. Reproduced the selected v4 articulation exactly as v5 under the current directional anatomy gate (SHA-256 d0327018802fa843e84fff77fd3581726bcc5b085c4a8442bdd4f5b7d05bc969). Enlarged and full-projector inspection show one restrained left-facing lower mandible anchored at the actual screen-right rear hinge, with no dark throat hook, duplicate edge, detached sliver, lateral jump, or body drift. All six anatomy checks pass; connected ratio 1.0. Audit remains 998 changed rendered pixels, outside-mouth mean difference 0.0, registration delta 0, silhouette IoU 1.0. Internal review pass only; user approval and runtime admission remain false.",
+            "protocol_id": "kingfisher-full-size-pairwise-v1",
+            "queued_at": "2026-07-31T05:30:00+00:00",
+            "reviewed_at": "2026-08-05T00:30:00Z",
+            "reviewer": "codex-isolated-pair-review",
             "runtime_admission_implied": false,
             "schema_version": 1,
             "source_disposition": "full_size_pairwise_review",
@@ -2900,17 +3176,20 @@
       "ordinal": 30,
       "pair_work_path": "pair-work/030-rhetorical-question",
       "pairwise_full_size_review": {
-        "defect_codes": [],
+        "defect_codes": [
+          "anatomy_v2_review_required",
+          "tip_alignment_out_of_bounds"
+        ],
         "evidence_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-030-one-pair-2026-08-05-v1",
-        "note": "Pair 30 was reviewed alone at native size, enlarged beak scale, and full projector scale. Candidate v3 reproduces selected v2 exactly while adding current directional anatomy proof: one centered lower mandible, one contained cavity, stable bilateral rear attachment, no duplicate upper edge, no throat patch, and no body or registration drift.",
+        "note": "Anatomy V2 invalidates the prior batch-derived pass. Review and rebuild this exact closed/open pair independently; no user approval or runtime admission is implied.",
         "protocol_id": "kingfisher-full-size-pairwise-v1",
         "queued_at": "2026-07-31T05:30:00+00:00",
-        "reviewed_at": "2026-08-05T02:15:00Z",
-        "reviewer": "codex-isolated-pair-review",
+        "reviewed_at": "2026-08-07T01:13:17.585038+00:00",
+        "reviewer": "codex-kingfisher-anatomy-v2",
         "runtime_admission_implied": false,
         "schema_version": 1,
         "source_disposition": "full_size_pairwise_review",
-        "state": "pass",
+        "state": "needs_rebuild",
         "user_approval_implied": false
       },
       "pairwise_full_size_review_history": [
@@ -2967,6 +3246,26 @@
             "queued_at": "2026-07-31T05:30:00+00:00",
             "reviewed_at": "2026-08-04T15:51:15.233505+00:00",
             "reviewer": "codex-pairwise-review-2026-08-04",
+            "runtime_admission_implied": false,
+            "schema_version": 1,
+            "source_disposition": "full_size_pairwise_review",
+            "state": "pass",
+            "user_approval_implied": false
+          }
+        },
+        {
+          "reason": "Superseded by a later full-size pairwise review disposition.",
+          "reporter": "codex-kingfisher-anatomy-v2",
+          "schema_version": 1,
+          "superseded_at": "2026-08-07T01:13:17.585038+00:00",
+          "superseded_review": {
+            "defect_codes": [],
+            "evidence_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-030-one-pair-2026-08-05-v1",
+            "note": "Pair 30 was reviewed alone at native size, enlarged beak scale, and full projector scale. Candidate v3 reproduces selected v2 exactly while adding current directional anatomy proof: one centered lower mandible, one contained cavity, stable bilateral rear attachment, no duplicate upper edge, no throat patch, and no body or registration drift.",
+            "protocol_id": "kingfisher-full-size-pairwise-v1",
+            "queued_at": "2026-07-31T05:30:00+00:00",
+            "reviewed_at": "2026-08-05T02:15:00Z",
+            "reviewer": "codex-isolated-pair-review",
             "runtime_admission_implied": false,
             "schema_version": 1,
             "source_disposition": "full_size_pairwise_review",
@@ -4334,17 +4633,20 @@
       "ordinal": 47,
       "pair_work_path": "pair-work/047-compassion",
       "pairwise_full_size_review": {
-        "defect_codes": [],
+        "defect_codes": [
+          "anatomy_v2_review_required",
+          "tip_alignment_out_of_bounds"
+        ],
         "evidence_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-047-one-pair-2026-08-06-v1",
-        "note": "Reviewed Pair 47 alone at native size, in an enlarged closed/open mouth crop, and in full-projector evidence. Candidate v2 reproduces the selected speaking pixels byte-for-byte while the current anatomy gate confirms a screen-left directional beak from the same screen-right rear hinge: upper reach 87, lower reach 50, length ratio 0.5747, normalized tip offset 0.5172, upper anchor 5.047, mandible anchor 9.836, cavity anchor 3.684, and connected ratio 1.0. Eye, crest, face, immutable upper bill, throat, hoodie, extended wing, body, feet, canvas, registration, and silhouette remain stable. Internal engineering pass only; no user approval and no runtime admission.",
+        "note": "Anatomy V2 invalidates the prior batch-derived pass. Review and rebuild this exact closed/open pair independently; no user approval or runtime admission is implied.",
         "protocol_id": "kingfisher-full-size-pairwise-v1",
         "queued_at": "2026-07-31T05:30:00+00:00",
-        "reviewed_at": "2026-08-06T10:40:00Z",
-        "reviewer": "codex-isolated-pair-review",
+        "reviewed_at": "2026-08-07T01:13:17.590556+00:00",
+        "reviewer": "codex-kingfisher-anatomy-v2",
         "runtime_admission_implied": false,
         "schema_version": 1,
         "source_disposition": "full_size_pairwise_review",
-        "state": "pass",
+        "state": "needs_rebuild",
         "user_approval_implied": false
       },
       "pairwise_full_size_review_history": [
@@ -4381,6 +4683,26 @@
             "queued_at": "2026-07-31T05:30:00+00:00",
             "reviewed_at": "2026-08-04",
             "reviewer": "Codex",
+            "runtime_admission_implied": false,
+            "schema_version": 1,
+            "source_disposition": "full_size_pairwise_review",
+            "state": "pass",
+            "user_approval_implied": false
+          }
+        },
+        {
+          "reason": "Superseded by a later full-size pairwise review disposition.",
+          "reporter": "codex-kingfisher-anatomy-v2",
+          "schema_version": 1,
+          "superseded_at": "2026-08-07T01:13:17.590556+00:00",
+          "superseded_review": {
+            "defect_codes": [],
+            "evidence_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-047-one-pair-2026-08-06-v1",
+            "note": "Reviewed Pair 47 alone at native size, in an enlarged closed/open mouth crop, and in full-projector evidence. Candidate v2 reproduces the selected speaking pixels byte-for-byte while the current anatomy gate confirms a screen-left directional beak from the same screen-right rear hinge: upper reach 87, lower reach 50, length ratio 0.5747, normalized tip offset 0.5172, upper anchor 5.047, mandible anchor 9.836, cavity anchor 3.684, and connected ratio 1.0. Eye, crest, face, immutable upper bill, throat, hoodie, extended wing, body, feet, canvas, registration, and silhouette remain stable. Internal engineering pass only; no user approval and no runtime admission.",
+            "protocol_id": "kingfisher-full-size-pairwise-v1",
+            "queued_at": "2026-07-31T05:30:00+00:00",
+            "reviewed_at": "2026-08-06T10:40:00Z",
+            "reviewer": "codex-isolated-pair-review",
             "runtime_admission_implied": false,
             "schema_version": 1,
             "source_disposition": "full_size_pairwise_review",
@@ -5774,17 +6096,20 @@
       "ordinal": 62,
       "pair_work_path": "pair-work/062-sudden-idea",
       "pairwise_full_size_review": {
-        "defect_codes": [],
-        "evidence_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-062-one-pair-2026-08-06-v1",
-        "note": "Fresh isolated review rejected the needle-thin inherited lower-bill line. Pair 62 was rebuilt independently from its own full-resolution head donor: only one thicker connected lower mandible and bounded cavity were transferred onto the immutable canonical body. Enlarged beak and full-character review confirm one rear hinge, matched closed/open tip direction, readable lower-bill surface, no duplicate edge, and no changes to the eye, crest, face, throat, raised wing, hoodie, body, feet, canvas, or registration. Internal visual pass only; no user approval and no runtime admission.",
+        "defect_codes": [
+          "anatomy_v2_review_required",
+          "declared_axis_disagrees_with_upper_beak"
+        ],
+        "evidence_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-062-axis-locked-candidate-2026-08-06-v1",
+        "note": "Anatomy V2 invalidates the prior pass because the declared horizontal axis disagreed with the diagonal upper bill. Axis-locked candidate V12 is staged for one-pair closed/open review; it remains unapproved and not runtime-admitted.",
         "protocol_id": "kingfisher-full-size-pairwise-v1",
         "queued_at": "2026-07-31T05:30:00+00:00",
-        "reviewed_at": "2026-08-06T18:22:24.179347+00:00",
-        "reviewer": "codex-pairwise-full-size",
+        "reviewed_at": "2026-08-07T01:13:17.596166+00:00",
+        "reviewer": "codex-kingfisher-anatomy-v2",
         "runtime_admission_implied": false,
         "schema_version": 1,
         "source_disposition": "full_size_pairwise_review",
-        "state": "pass",
+        "state": "needs_rebuild",
         "user_approval_implied": false
       },
       "pairwise_full_size_review_history": [
@@ -5821,6 +6146,26 @@
             "queued_at": "2026-07-31T05:30:00+00:00",
             "reviewed_at": "2026-08-05T11:33:38.387411+00:00",
             "reviewer": "codex-engineering",
+            "runtime_admission_implied": false,
+            "schema_version": 1,
+            "source_disposition": "full_size_pairwise_review",
+            "state": "pass",
+            "user_approval_implied": false
+          }
+        },
+        {
+          "reason": "Superseded by a later full-size pairwise review disposition.",
+          "reporter": "codex-kingfisher-anatomy-v2",
+          "schema_version": 1,
+          "superseded_at": "2026-08-07T01:13:17.596166+00:00",
+          "superseded_review": {
+            "defect_codes": [],
+            "evidence_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-062-one-pair-2026-08-06-v1",
+            "note": "Fresh isolated review rejected the needle-thin inherited lower-bill line. Pair 62 was rebuilt independently from its own full-resolution head donor: only one thicker connected lower mandible and bounded cavity were transferred onto the immutable canonical body. Enlarged beak and full-character review confirm one rear hinge, matched closed/open tip direction, readable lower-bill surface, no duplicate edge, and no changes to the eye, crest, face, throat, raised wing, hoodie, body, feet, canvas, or registration. Internal visual pass only; no user approval and no runtime admission.",
+            "protocol_id": "kingfisher-full-size-pairwise-v1",
+            "queued_at": "2026-07-31T05:30:00+00:00",
+            "reviewed_at": "2026-08-06T18:22:24.179347+00:00",
+            "reviewer": "codex-pairwise-full-size",
             "runtime_admission_implied": false,
             "schema_version": 1,
             "source_disposition": "full_size_pairwise_review",
@@ -6168,13 +6513,13 @@
     }
   ],
   "pairwise_full_size_review_summary": {
-    "complete": true,
+    "complete": false,
     "missing_count": 0,
-    "needs_rebuild_count": 0,
+    "needs_rebuild_count": 15,
     "not_observable_count": 2,
     "pair_count": 66,
-    "pass_count": 64,
-    "passing_disposition_count": 66,
+    "pass_count": 49,
+    "passing_disposition_count": 51,
     "pending_count": 0,
     "protocol_id": "kingfisher-full-size-pairwise-v1",
     "reviewed_count": 66,

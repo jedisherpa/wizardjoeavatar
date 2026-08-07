@@ -70,12 +70,37 @@ def beak_anatomy_metrics(
     dominant_reach = max(upper_left_reach, upper_right_reach)
     opposite_reach = min(upper_left_reach, upper_right_reach)
     explicit_direction = direction_vector is not None
+    upper_tip = max(
+        upper_beak_polygon,
+        key=lambda point: math.hypot(
+            point[0] - hinge[0], point[1] - hinge[1]
+        ),
+    )
+    inferred_x = upper_tip[0] - hinge[0]
+    inferred_y = upper_tip[1] - hinge[1]
+    inferred_length = math.hypot(inferred_x, inferred_y)
+    if inferred_length == 0:
+        raise ValueError("upper beak polygon cannot collapse onto the hinge")
+    inferred_axis_x = inferred_x / inferred_length
+    inferred_axis_y = inferred_y / inferred_length
+    direction_angle_degrees: float | None = None
     if direction_vector is not None:
         vector_length = math.hypot(*direction_vector)
         if vector_length == 0:
             raise ValueError("beak anatomy direction vector cannot be zero")
-        axis_x = direction_vector[0] / vector_length
-        axis_y = direction_vector[1] / vector_length
+        declared_axis_x = direction_vector[0] / vector_length
+        declared_axis_y = direction_vector[1] / vector_length
+        direction_dot = max(
+            -1.0,
+            min(
+                1.0,
+                declared_axis_x * inferred_axis_x
+                + declared_axis_y * inferred_axis_y,
+            ),
+        )
+        direction_angle_degrees = math.degrees(math.acos(direction_dot))
+        axis_x = inferred_axis_x
+        axis_y = inferred_axis_y
     else:
         axis_x = 1.0 if upper_right_reach > upper_left_reach else -1.0
         axis_y = 0.0
@@ -94,9 +119,18 @@ def beak_anatomy_metrics(
             anchor_distance(cavity_polygon) <= max(24, hinge_radius + 6)
         ),
     }
+    if direction_angle_degrees is not None:
+        checks["direction_matches_upper_beak"] = (
+            direction_angle_degrees <= 25.0
+        )
     metrics: dict[str, object] = {
-        "schema_version": 1,
+        "schema_version": 2,
         "mode": "directional" if directional else "frontal",
+        "inferred_direction": [
+            round(inferred_axis_x, 6),
+            round(inferred_axis_y, 6),
+        ],
+        "inferred_upper_tip": [upper_tip[0], upper_tip[1]],
         "upper_anchor_distance": round(
             anchor_distance(upper_beak_polygon), 3
         ),
@@ -152,7 +186,7 @@ def beak_anatomy_metrics(
                     mandible_forward_reach > mandible_reverse_reach
                 ),
                 "plausible_mandible_length": 0.5 <= length_ratio <= 1.25,
-                "bounded_tip_offset": tip_offset_ratio <= 0.6,
+                "bounded_tip_offset": tip_offset_ratio <= 0.35,
             }
         )
         metrics.update(
@@ -161,6 +195,15 @@ def beak_anatomy_metrics(
                     [direction_vector[0], direction_vector[1]]
                     if direction_vector is not None
                     else ("right" if axis_x > 0 else "left")
+                ),
+                "effective_direction": [
+                    round(axis_x, 6),
+                    round(axis_y, 6),
+                ],
+                "declared_direction_angle_degrees": (
+                    round(direction_angle_degrees, 4)
+                    if direction_angle_degrees is not None
+                    else None
                 ),
                 "upper_forward_reach": round(upper_forward_reach, 4),
                 "mandible_forward_reach": round(mandible_forward_reach, 4),

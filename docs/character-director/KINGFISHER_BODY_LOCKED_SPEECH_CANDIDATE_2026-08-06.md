@@ -84,3 +84,46 @@ The package is intentionally review-only. Internal pairwise review recorded
 user approval. The production registry is unchanged. Admission requires an
 explicit art review, user approval evidence, and a newly admitted package
 digest.
+
+## Anatomy V2 Re-audit
+
+Later live review showed that silhouette overlap and registration stability did
+not prove that a lower bill shared the closed pose's hinge, direction, or tip.
+The earlier internal disposition is therefore superseded for affected pairs.
+
+Anatomy V2 now derives the upper-bill axis from the closed pose itself. A
+declared axis more than 25 degrees from that observed direction fails, as does
+a lower-bill tip whose perpendicular offset exceeds 35 percent of upper-bill
+reach. The compiler recomputes these measurements from receipt geometry rather
+than trusting stored V1 scores.
+
+The first re-audit measured the 63 pairs with explicit hinge geometry and
+placed 14 into an explicit one-pair rebuild queue. Pair 001 is also queued
+because its legacy receipt predates the required geometry:
+
+```text
+001 006 007 008 010 011 012 017 022 024 025 027 030 047 062
+```
+
+Pairs 004 and 005 are excluded because the beak is not observable. The ledger
+currently records 49 internal passes, 15 `needs_rebuild` dispositions, 2
+`not_observable` dispositions, 0 user
+approvals, and 0 runtime admissions.
+
+Pair 062 (`sudden-idea`) was the first demonstrated false positive. Its stored
+horizontal direction differed from the closed upper bill by about 34 degrees.
+Candidate V12 rotates one connected lower mandible onto the observed diagonal
+axis. Its declared-axis error is under 1 degree and its normalized tip offset
+is about 0.045, but it remains an unapproved review candidate.
+
+Every compiled pair now has a dedicated two-frame loop. Pair 062 can be
+reviewed locally at:
+
+```text
+http://127.0.0.1:8667/?hd-sequence=kingfisher-pair-062-review
+```
+
+The same form applies to other ordinals, such as
+`kingfisher-pair-006-review`. A pair returns to `pass` only after isolated
+closed/open visual review; that internal pass still does not imply user
+approval or runtime admission.

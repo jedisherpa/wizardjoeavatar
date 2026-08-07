@@ -461,6 +461,20 @@ def compile_pair_review_library(
         "review_projection": True,
         "runtime_admitted": False,
     }
+    for pair in pair_evidence:
+        ordinal = int(pair["ordinal"])
+        sequences[f"kingfisher-pair-{ordinal:03d}-review"] = {
+            "approval_state": "candidate_visual_review",
+            "fps": 2,
+            "loop": True,
+            "pair_review_state": pair["pairwise_full_size_review"]["state"],
+            "pose_ids": [
+                str(pair["resting_pose_id"]),
+                str(pair["speaking_pose_id"]),
+            ],
+            "review_projection": True,
+            "runtime_admitted": False,
+        }
     sequences["kingfisher-all"] = {
         "approval_state": "candidate_visual_review",
         "fps": 3,

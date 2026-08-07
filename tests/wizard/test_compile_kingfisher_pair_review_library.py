@@ -173,6 +173,15 @@ class CompileKingfisherPairReviewLibraryTests(unittest.TestCase):
             self.assertEqual(result["pose_count"], 132)
             self.assertEqual(result["pair_count"], 66)
             self.assertEqual(len(sequence["pose_ids"]), 132)
+            self.assertEqual(
+                library.index["sequences"]["kingfisher-pair-062-review"][
+                    "pose_ids"
+                ],
+                [
+                    "kingfisher.act.062.pose-062",
+                    "kingfisher.act.172.pose-062-speaking-beak",
+                ],
+            )
             self.assertEqual(sequence["pair_review_states"], ["pending"] * 66)
             self.assertEqual(
                 sequence["pose_ids"][:4],
@@ -318,22 +327,22 @@ class CompileKingfisherPairReviewLibraryTests(unittest.TestCase):
             receipt = json.loads(receipt_path.read_text(encoding="utf-8"))
             receipt["anatomy_direction_vector"] = [0, 1]
             receipt["anatomy_upper_beak_polygon"] = [
-                [13, 7],
-                [20, 8],
-                [20, 18],
-                [13, 18],
+                [12, 7],
+                [15, 8],
+                [15, 20],
+                [12, 20],
             ]
             receipt["mandible_polygon"] = [
-                [13, 9],
-                [20, 10],
-                [20, 18],
-                [13, 18],
+                [12, 9],
+                [15, 10],
+                [15, 20],
+                [12, 20],
             ]
             receipt["cavity_polygon"] = [
-                [13, 9],
-                [18, 10],
-                [18, 16],
-                [13, 16],
+                [12, 9],
+                [14, 10],
+                [14, 18],
+                [12, 18],
             ]
             receipt_path.write_text(json.dumps(receipt), encoding="utf-8")
             ledger.write_text(json.dumps(data), encoding="utf-8")

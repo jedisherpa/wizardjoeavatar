@@ -73,6 +73,75 @@ class ComposeKingfisherPairMandiblePatchTests(unittest.TestCase):
         self.assertTrue(report["passed"])
         self.assertEqual(report["direction"], [0, 1])
 
+    def test_beak_anatomy_rejects_stale_axis_for_diagonal_upper_beak(self):
+        report = beak_anatomy_metrics(
+            hinge=(480, 250),
+            hinge_radius=18,
+            upper_beak_polygon=[
+                (474, 205),
+                (546, 205),
+                (550, 242),
+                (540, 250),
+                (488, 252),
+                (474, 245),
+            ],
+            mandible_polygon=[
+                (474, 235),
+                (488, 235),
+                (544, 244),
+                (545, 263),
+                (540, 280),
+                (486, 277),
+                (474, 260),
+            ],
+            cavity_polygon=[
+                (478, 245),
+                (530, 246),
+                (540, 258),
+                (486, 270),
+                (476, 258),
+            ],
+            direction_vector=(1, 0),
+        )
+
+        self.assertFalse(report["passed"])
+        self.assertFalse(report["checks"]["direction_matches_upper_beak"])
+        self.assertGreater(report["declared_direction_angle_degrees"], 25)
+
+    def test_beak_anatomy_accepts_diagonal_mandible_on_inferred_axis(self):
+        report = beak_anatomy_metrics(
+            hinge=(480, 250),
+            hinge_radius=18,
+            upper_beak_polygon=[
+                (474, 205),
+                (546, 205),
+                (550, 242),
+                (540, 250),
+                (488, 252),
+                (474, 245),
+            ],
+            mandible_polygon=[
+                (474, 246),
+                (488, 245),
+                (540, 207),
+                (550, 218),
+                (542, 234),
+                (490, 260),
+                (474, 260),
+            ],
+            cavity_polygon=[
+                (480, 244),
+                (536, 211),
+                (545, 219),
+                (490, 252),
+            ],
+            direction_vector=(3, -2),
+        )
+
+        self.assertTrue(report["passed"])
+        self.assertTrue(report["checks"]["direction_matches_upper_beak"])
+        self.assertLessEqual(report["tip_offset_ratio"], 0.35)
+
     def _sources(self, root: Path, *, detached: bool = False) -> tuple[Path, Path]:
         resting_path = root / "resting.png"
         generated_path = root / "generated.png"

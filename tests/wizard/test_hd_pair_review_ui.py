@@ -151,14 +151,14 @@ class HdPairReviewUiTests(unittest.TestCase):
         sudden_idea = by_ordinal[62]
         self.assertEqual(
             sudden_idea["pairwise_full_size_review"]["state"],
-            "pass",
+            "needs_rebuild",
         )
         self.assertEqual(
             sudden_idea["pairwise_full_size_review"]["source_disposition"],
             "full_size_pairwise_review",
         )
         self.assertIn(
-            "evidence/pairwise-full-size/pair-062-one-pair-2026-08-06-v1",
+            "evidence/pairwise-full-size/pair-062-axis-locked-candidate-2026-08-06-v1",
             sudden_idea["pairwise_full_size_review"]["evidence_path"],
         )
         self.assertFalse(sudden_idea["runtime_admitted"])
@@ -240,72 +240,22 @@ class HdPairReviewUiTests(unittest.TestCase):
         summary = ledger["pairwise_full_size_review_summary"]
         self.assertEqual(states.count("pass"), summary["pass_count"])
         self.assertEqual(states.count("pending"), summary["pending_count"])
+        anatomy_v2_queue = {
+            1, 6, 7, 8, 10, 11, 12, 17, 22, 24, 25, 27, 30, 47, 62,
+        }
         self.assertEqual(
-            [
-                ledger["pairs"][ordinal - 1]["pairwise_full_size_review"]["state"]
-                for ordinal in (
-                    1, 2, 3, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
-                    19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32,
-                    33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46,
-                    47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58,
-                    59, 60, 61, 62, 63, 64, 65, 66,
-                )
-            ],
-            [
-                "pass", "pass", "pass", "pass",
-                "pass", "pass", "pass", "pass", "pass", "pass", "pass",
-                "pass",
-                "pass", "pass", "pass", "pass", "pass", "pass", "pass",
-                "pass",
-                "pass",
-                "pass",
-                "pass",
-                "pass",
-                "pass",
-                "pass",
-                "pass",
-                "pass",
-                "pass",
-                "pass",
-                "pass",
-                "pass",
-                "pass",
-                "pass",
-                "pass",
-                "pass",
-                "pass",
-                "pass",
-                "pass",
-                "pass",
-                "pass",
-                "pass",
-                "pass",
-                "pass",
-                "pass",
-                "pass",
-                "pass",
-                "pass",
-                "pass",
-                "pass",
-                "pass",
-                "pass",
-                "pass",
-                "pass",
-                "pass",
-                "pass",
-                "pass",
-                "pass",
-                "pass",
-                "pass",
-                "pass",
-                "pass",
-                "pass",
-                "pass",
-            ],
+            {
+                int(pair["ordinal"])
+                for pair in visible_pairs
+                if pair["pairwise_full_size_review"]["state"]
+                == "needs_rebuild"
+            },
+            anatomy_v2_queue,
         )
-        self.assertEqual(summary["pass_count"], 64)
+        self.assertEqual(summary["pass_count"], 49)
+        self.assertEqual(summary["needs_rebuild_count"], 15)
         self.assertEqual(summary["pending_count"], 0)
-        self.assertTrue(summary["complete"])
+        self.assertFalse(summary["complete"])
         pending_pairs = [
             pair for pair in visible_pairs
             if pair["pairwise_full_size_review"]["state"] == "pending"
