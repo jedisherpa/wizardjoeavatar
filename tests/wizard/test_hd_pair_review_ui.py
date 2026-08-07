@@ -241,7 +241,7 @@ class HdPairReviewUiTests(unittest.TestCase):
         self.assertEqual(states.count("pass"), summary["pass_count"])
         self.assertEqual(states.count("pending"), summary["pending_count"])
         anatomy_v2_queue = {
-            1, 6, 24, 25, 27, 30, 47, 62,
+            1, 6, 25, 27, 30, 47, 62,
         }
         self.assertEqual(
             {
@@ -252,8 +252,8 @@ class HdPairReviewUiTests(unittest.TestCase):
             },
             anatomy_v2_queue,
         )
-        self.assertEqual(summary["pass_count"], 56)
-        self.assertEqual(summary["needs_rebuild_count"], 8)
+        self.assertEqual(summary["pass_count"], 57)
+        self.assertEqual(summary["needs_rebuild_count"], 7)
         self.assertEqual(summary["pending_count"], 0)
         self.assertFalse(summary["complete"])
         pending_pairs = [

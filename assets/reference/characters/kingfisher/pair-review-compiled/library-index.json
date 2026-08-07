@@ -14,7 +14,7 @@
   "legacy_pair_review": {
     "approval_state": "candidate_visual_review",
     "ledger_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-review-ledger.json",
-    "ledger_sha256": "31bf6a2d31209d26bfedd58b5332913b74c486407e133ed6419f398bf1739b86",
+    "ledger_sha256": "bfa20a4d79d0d2687fae7177c282cb9d50320fe40ee6ecd580d20bb4bd407a87",
     "pair_count": 66,
     "pairs": [
       {
@@ -483,12 +483,12 @@
         "automated_audit_passed": true,
         "ordinal": 24,
         "pairwise_full_size_review": {
-          "evidence_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-024-one-pair-2026-08-05-v2",
+          "evidence_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-024-tight-anatomy-review-2026-08-07-v1",
           "protocol_id": "kingfisher-full-size-pairwise-v1",
-          "state": "needs_rebuild"
+          "state": "pass"
         },
         "receipt_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/024-polite-interruption/pair-receipt.json",
-        "receipt_sha256": "e4706a52ddaddf929094a6454d568c452558787aaa3d47c091ba667686719552",
+        "receipt_sha256": "71f34230360180560b648ddab9f335a4a5053e7931b60478693cea2516577a60",
         "resting_pose_id": "kingfisher.act.024.polite-interruption",
         "resting_sha256": "85355f48e5ae353fc67446d57473b136b725106304d1c3ecc485f402bf2dc56a",
         "runtime_admitted": false,
@@ -1340,9 +1340,9 @@
     ],
     "pairwise_full_size_review_summary": {
       "complete": false,
-      "needs_rebuild_count": 8,
+      "needs_rebuild_count": 7,
       "not_observable_count": 2,
-      "pass_count": 56,
+      "pass_count": 57,
       "pending_count": 0
     },
     "review_projection": true,
@@ -2117,7 +2117,7 @@
       "approval_state": "candidate_visual_review",
       "fps": 2,
       "loop": true,
-      "pair_review_state": "needs_rebuild",
+      "pair_review_state": "pass",
       "pose_ids": [
         "kingfisher.act.024.polite-interruption",
         "kingfisher.act.134.polite-interruption-speaking-beak"
@@ -2657,7 +2657,7 @@
         "pass",
         "pass",
         "pass",
-        "needs_rebuild",
+        "pass",
         "needs_rebuild",
         "pass",
         "needs_rebuild",
@@ -3078,7 +3078,7 @@
     {
       "approval_state": "candidate_visual_review",
       "bytes": 28586919,
-      "path": "kingfisher_act_001_066_111_176_pair_review-499e7f9565a72087.wjpose",
+      "path": "kingfisher_act_001_066_111_176_pair_review-84242d77f1c3cfdb.wjpose",
       "pose_count": 132,
       "pose_ids": [
         "kingfisher.act.001.neutral-front",
@@ -3216,7 +3216,7 @@
       ],
       "review_projection": true,
       "runtime_admitted": false,
-      "sha256": "499e7f9565a72087b53248a431776b68b7db862ce1f426df2514a0813ed6fc55",
+      "sha256": "84242d77f1c3cfdbe2c567476745eb1181797b86432bd684ff5126e660caa802",
       "shard_id": "kingfisher_act_001_066_111_176_pair_review",
       "source": "kingfisher_pair_specific_beak_review_v1"
     }

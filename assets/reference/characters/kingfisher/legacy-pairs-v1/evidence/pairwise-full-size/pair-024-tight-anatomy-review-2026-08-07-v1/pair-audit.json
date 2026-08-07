@@ -1,0 +1,38 @@
+{
+  "changed_rendered_pixels": 3576,
+  "checks": {
+    "bounded_articulation_change": true,
+    "outside_mouth_stability": true,
+    "silhouette_overlap": true,
+    "stable_registration_bounds": true,
+    "visible_mouth_change": true
+  },
+  "mouth_mean_abs": 12.025589,
+  "mouth_region": [
+    450,
+    190,
+    590,
+    285
+  ],
+  "outside_mouth_mean_abs": 0.0,
+  "passed": true,
+  "registration_bound_delta": 0,
+  "resting_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/024-polite-interruption/024_ACT024_polite_interruption_resting_beak_alpha.png",
+  "resting_registration_bbox": [
+    332,
+    97,
+    629,
+    529
+  ],
+  "resting_sha256": "85355f48e5ae353fc67446d57473b136b725106304d1c3ecc485f402bf2dc56a",
+  "schema_version": 2,
+  "silhouette_iou": 1.0,
+  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/024-polite-interruption/134_ACT134_polite_interruption_speaking_beak_alpha.png",
+  "speaking_registration_bbox": [
+    332,
+    97,
+    629,
+    529
+  ],
+  "speaking_sha256": "0f8fffe0514825f3824656d9c57b2cd9b3da1cfafa073f0241e721e84dba23ca"
+}
