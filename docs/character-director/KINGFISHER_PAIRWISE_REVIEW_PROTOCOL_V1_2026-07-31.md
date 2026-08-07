@@ -5159,3 +5159,30 @@ This is an internal visual pass only. The reopened queue now contains 24
 internal passes, 40 pending observable pairs, and 2 not-observable rear views.
 User approval and runtime admission remain zero; Pair 27 is the next isolated
 hard stop.
+
+### Pair 27 isolated intimate-confidence review
+
+Pair 27 (`intimate-confidence`) was reviewed as its own closed/open job at
+native size, nearest-neighbor enlarged beak scale, on a white field, at full
+projector size, and in a six-second alternating loop. The accepted v5 mate is
+pixel-identical to v4. The immutable closed frame, preserved source, v3, v4,
+and the earlier rejected right-hinge-sliver frame were inspected together.
+
+This tilted pose faces screen-left, so its authored rear hinge is on screen
+right. The accepted lower mandible remains attached to that hinge and opens
+down-left beneath the fixed upper bill on the same diagonal. The rejected
+candidate's pale hinge sliver is absent, and the alternation shows no duplicate
+contour, lateral jump, cheek drift, throat spill, or body-registration shift.
+Directional anatomy records a `1.0408` lower-to-upper reach ratio, `0.0957`
+normalized tip offset, `5.2522` degree opening, and connected-mandible ratio
+`1.0`. The strict audit remains 998 changed articulation pixels, outside-mouth
+mean difference `0.0`, registration delta `0`, and silhouette IoU `1.0`.
+
+Full-size evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-027-one-pair-2026-08-07-v4/`
+
+This is an internal visual pass only. The reopened queue now contains 25
+internal passes, 39 pending observable pairs, and 2 not-observable rear views.
+User approval and runtime admission remain zero; Pair 28 is the next isolated
+hard stop.
