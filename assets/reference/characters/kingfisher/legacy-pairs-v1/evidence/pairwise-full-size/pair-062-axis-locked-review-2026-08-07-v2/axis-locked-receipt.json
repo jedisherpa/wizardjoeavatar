@@ -1,0 +1,210 @@
+{
+  "alignment": {
+    "interpolation": "lanczos_rgb_binary_alpha",
+    "rotation_center": [
+      480,
+      250
+    ],
+    "rotation_degrees": 34.0,
+    "scale": 0.1,
+    "scale_x": 0.068,
+    "scale_y": 0.23,
+    "translate_x": 458,
+    "translate_y": 98
+  },
+  "anatomy_direction_vector": [
+    3,
+    -2
+  ],
+  "anatomy_upper_beak_polygon": [
+    [
+      474,
+      205
+    ],
+    [
+      546,
+      205
+    ],
+    [
+      550,
+      242
+    ],
+    [
+      540,
+      250
+    ],
+    [
+      488,
+      252
+    ],
+    [
+      474,
+      245
+    ]
+  ],
+  "approval_state": "candidate_visual_review",
+  "beak_anatomy": {
+    "cavity_anchor_distance": 2.538,
+    "checks": {
+      "bounded_tip_offset": true,
+      "cavity_anchored": true,
+      "direction_matches_upper_beak": true,
+      "mandible_anchored": true,
+      "plausible_mandible_length": true,
+      "same_longitudinal_direction": true,
+      "upper_beak_anchored": true
+    },
+    "declared_direction_angle_degrees": 0.5968,
+    "direction": [
+      3,
+      -2
+    ],
+    "effective_direction": [
+      0.826227,
+      -0.563337
+    ],
+    "inferred_direction": [
+      0.826227,
+      -0.563337
+    ],
+    "inferred_upper_tip": [
+      546,
+      205
+    ],
+    "mandible_anchor_distance": 5.824,
+    "mandible_forward_reach": 65.0466,
+    "mandible_length_ratio": 0.8143,
+    "mandible_reverse_reach": 5.9338,
+    "mode": "directional",
+    "passed": true,
+    "schema_version": 2,
+    "tip_offset_ratio": 0.0449,
+    "upper_anchor_distance": 1.789,
+    "upper_forward_reach": 79.8812
+  },
+  "canvas": [
+    960,
+    540
+  ],
+  "cavity_fill_rgba": null,
+  "cavity_polygon": [
+    [
+      476,
+      247
+    ],
+    [
+      519,
+      219
+    ],
+    [
+      534,
+      223
+    ],
+    [
+      496,
+      263
+    ],
+    [
+      481,
+      259
+    ]
+  ],
+  "cavity_source": "generated_overlay",
+  "changed_bbox": [
+    470,
+    226,
+    532,
+    267
+  ],
+  "generated_render_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/062-sudden-idea/172_ACT172_sudden_idea_speaking_beak_pairwise_mandible_donor_v10_alpha.png",
+  "generated_render_sha256": "d08492b240196d224b9792b14dfe0ae8554f9305f324d9de316441de72d54017",
+  "hinge": [
+    480,
+    250
+  ],
+  "hinge_radius": 20,
+  "mandible_bbox": [
+    470,
+    225,
+    540,
+    267
+  ],
+  "mandible_connected_ratio": 1.0,
+  "mandible_largest_component_pixels": 1609,
+  "mandible_opaque_pixels": 1609,
+  "mandible_polygon": [
+    [
+      467,
+      241
+    ],
+    [
+      478,
+      233
+    ],
+    [
+      530,
+      209
+    ],
+    [
+      541,
+      224
+    ],
+    [
+      547,
+      241
+    ],
+    [
+      500,
+      269
+    ],
+    [
+      481,
+      262
+    ]
+  ],
+  "method": "pair_specific_connected_mandible_patch_v1",
+  "minimum_connected_ratio": 0.95,
+  "minimum_mandible_height": 24,
+  "oral_warm_replacement_polygon": null,
+  "oral_warm_replacement_rgba": null,
+  "outside_articulation_change": false,
+  "residual_clear_polygon": null,
+  "resting_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/062-sudden-idea/062_ACT062_sudden_idea_resting_beak_alpha.png",
+  "resting_sha256": "b23cfeb22db0057cc9c82dd56bae46a0da860f7ebb020ee069ffa1466c5a9b2a",
+  "runtime_admitted": false,
+  "schema_version": 1,
+  "source_mask": {
+    "light_threshold": 180,
+    "mode": "opaque",
+    "neutral_chroma_threshold": 36
+  },
+  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/062-sudden-idea/172_ACT172_sudden_idea_speaking_beak_alpha.png",
+  "speaking_sha256": "57cd970327c5bc932de78589ea6a9235ff2f45c0395f4e824f1e855ff3aea98f",
+  "upper_beak_policy": "immutable_source_pixels",
+  "upper_beak_polygon": [
+    [
+      474,
+      205
+    ],
+    [
+      546,
+      205
+    ],
+    [
+      550,
+      242
+    ],
+    [
+      540,
+      250
+    ],
+    [
+      488,
+      252
+    ],
+    [
+      474,
+      245
+    ]
+  ]
+}

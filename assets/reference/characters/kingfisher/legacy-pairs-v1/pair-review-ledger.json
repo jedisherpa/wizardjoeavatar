@@ -6380,20 +6380,17 @@
       "ordinal": 62,
       "pair_work_path": "pair-work/062-sudden-idea",
       "pairwise_full_size_review": {
-        "defect_codes": [
-          "anatomy_v2_review_required",
-          "declared_axis_disagrees_with_upper_beak"
-        ],
-        "evidence_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-062-axis-locked-candidate-2026-08-06-v1",
-        "note": "Anatomy V2 invalidates the prior pass because the declared horizontal axis disagreed with the diagonal upper bill. Axis-locked candidate V12 is staged for one-pair closed/open review; it remains unapproved and not runtime-admitted.",
+        "defect_codes": [],
+        "evidence_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-062-axis-locked-review-2026-08-07-v2",
+        "note": "Strict one-pair review confirms the axis-locked successor preserves the complete closed pose and immutable upper bill while opening one connected lower mandible from the rear hinge along the same diagonal axis. Full-size head crops and the live 8667 alternating loop show no duplicate bill edge or body drift. Anatomy V2 passes with 0.5968-degree axis error, 0.0449 normalized tip offset, 0.8143 mandible-length ratio, zero outside-mouth change, zero registration delta, and silhouette IoU 0.999939. Internal visual pass only; no user approval and no runtime admission.",
         "protocol_id": "kingfisher-full-size-pairwise-v1",
         "queued_at": "2026-07-31T05:30:00+00:00",
-        "reviewed_at": "2026-08-07T01:13:17.596166+00:00",
-        "reviewer": "codex-kingfisher-anatomy-v2",
+        "reviewed_at": "2026-08-07T12:00:00-06:00",
+        "reviewer": "codex-pairwise-full-size",
         "runtime_admission_implied": false,
         "schema_version": 1,
         "source_disposition": "full_size_pairwise_review",
-        "state": "needs_rebuild",
+        "state": "pass",
         "user_approval_implied": false
       },
       "pairwise_full_size_review_history": [
@@ -6454,6 +6451,29 @@
             "schema_version": 1,
             "source_disposition": "full_size_pairwise_review",
             "state": "pass",
+            "user_approval_implied": false
+          }
+        },
+        {
+          "reason": "Superseded by a later full-size pairwise review disposition.",
+          "reporter": "codex-pairwise-full-size",
+          "schema_version": 1,
+          "superseded_at": "2026-08-07T12:00:00-06:00",
+          "superseded_review": {
+            "defect_codes": [
+              "anatomy_v2_review_required",
+              "declared_axis_disagrees_with_upper_beak"
+            ],
+            "evidence_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-062-axis-locked-candidate-2026-08-06-v1",
+            "note": "Anatomy V2 invalidates the prior pass because the declared horizontal axis disagreed with the diagonal upper bill. Axis-locked candidate V12 is staged for one-pair closed/open review; it remains unapproved and not runtime-admitted.",
+            "protocol_id": "kingfisher-full-size-pairwise-v1",
+            "queued_at": "2026-07-31T05:30:00+00:00",
+            "reviewed_at": "2026-08-07T01:13:17.596166+00:00",
+            "reviewer": "codex-kingfisher-anatomy-v2",
+            "runtime_admission_implied": false,
+            "schema_version": 1,
+            "source_disposition": "full_size_pairwise_review",
+            "state": "needs_rebuild",
             "user_approval_implied": false
           }
         }
@@ -6799,11 +6819,11 @@
   "pairwise_full_size_review_summary": {
     "complete": false,
     "missing_count": 0,
-    "needs_rebuild_count": 3,
+    "needs_rebuild_count": 2,
     "not_observable_count": 2,
     "pair_count": 66,
-    "pass_count": 61,
-    "passing_disposition_count": 63,
+    "pass_count": 62,
+    "passing_disposition_count": 64,
     "pending_count": 0,
     "protocol_id": "kingfisher-full-size-pairwise-v1",
     "reviewed_count": 66,

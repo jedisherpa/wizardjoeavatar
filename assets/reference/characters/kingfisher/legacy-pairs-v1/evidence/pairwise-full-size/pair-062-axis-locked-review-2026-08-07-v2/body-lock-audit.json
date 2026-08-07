@@ -1,0 +1,38 @@
+{
+  "changed_rendered_pixels": 1111,
+  "checks": {
+    "bounded_articulation_change": true,
+    "outside_mouth_stability": true,
+    "silhouette_overlap": true,
+    "stable_registration_bounds": true,
+    "visible_mouth_change": true
+  },
+  "mouth_mean_abs": 6.187589,
+  "mouth_region": [
+    470,
+    200,
+    555,
+    285
+  ],
+  "outside_mouth_mean_abs": 0.0,
+  "passed": true,
+  "registration_bound_delta": 0,
+  "resting_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/062-sudden-idea/062_ACT062_sudden_idea_resting_beak_alpha.png",
+  "resting_registration_bbox": [
+    318,
+    97,
+    642,
+    529
+  ],
+  "resting_sha256": "b23cfeb22db0057cc9c82dd56bae46a0da860f7ebb020ee069ffa1466c5a9b2a",
+  "schema_version": 2,
+  "silhouette_iou": 0.999939,
+  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/062-sudden-idea/172_ACT172_sudden_idea_speaking_beak_alpha.png",
+  "speaking_registration_bbox": [
+    318,
+    97,
+    642,
+    529
+  ],
+  "speaking_sha256": "57cd970327c5bc932de78589ea6a9235ff2f45c0395f4e824f1e855ff3aea98f"
+}

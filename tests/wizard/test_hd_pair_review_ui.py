@@ -151,14 +151,14 @@ class HdPairReviewUiTests(unittest.TestCase):
         sudden_idea = by_ordinal[62]
         self.assertEqual(
             sudden_idea["pairwise_full_size_review"]["state"],
-            "needs_rebuild",
+            "pass",
         )
         self.assertEqual(
             sudden_idea["pairwise_full_size_review"]["source_disposition"],
             "full_size_pairwise_review",
         )
         self.assertIn(
-            "evidence/pairwise-full-size/pair-062-axis-locked-candidate-2026-08-06-v1",
+            "evidence/pairwise-full-size/pair-062-axis-locked-review-2026-08-07-v2",
             sudden_idea["pairwise_full_size_review"]["evidence_path"],
         )
         self.assertFalse(sudden_idea["runtime_admitted"])
@@ -265,7 +265,7 @@ class HdPairReviewUiTests(unittest.TestCase):
         self.assertEqual(states.count("pass"), summary["pass_count"])
         self.assertEqual(states.count("pending"), summary["pending_count"])
         anatomy_v2_queue = {
-            1, 6, 62,
+            1, 6,
         }
         self.assertEqual(
             {
@@ -276,8 +276,8 @@ class HdPairReviewUiTests(unittest.TestCase):
             },
             anatomy_v2_queue,
         )
-        self.assertEqual(summary["pass_count"], 61)
-        self.assertEqual(summary["needs_rebuild_count"], 3)
+        self.assertEqual(summary["pass_count"], 62)
+        self.assertEqual(summary["needs_rebuild_count"], 2)
         self.assertEqual(summary["pending_count"], 0)
         self.assertFalse(summary["complete"])
         pending_pairs = [

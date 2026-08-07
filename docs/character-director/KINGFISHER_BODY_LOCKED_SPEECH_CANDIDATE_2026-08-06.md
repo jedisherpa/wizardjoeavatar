@@ -80,7 +80,7 @@ no-op blink behavior.
 ## Admission Boundary
 
 The package is intentionally review-only. The current Anatomy V2.1 re-audit
-records 61 observable passes, 3 `needs_rebuild` dispositions, and 2 rear-view
+records 62 observable passes, 2 `needs_rebuild` dispositions, and 2 rear-view
 pairs as not observable; it does not record user approval. The production
 registry is unchanged. Admission requires completion of the isolated art
 review, user approval evidence, and a newly admitted package digest.
@@ -103,23 +103,28 @@ scores.
 The first re-audit measured the 63 pairs with explicit hinge geometry and
 placed 14 into an explicit one-pair rebuild queue. Pair 001 is also queued
 because its legacy receipt predates the required geometry. Pairs 007, 008,
-010, 011, 012, 017, 022, 024, 025, 027, 030, and 047 have since passed
-isolated V2.1 review, leaving this 3-pair queue:
+010, 011, 012, 017, 022, 024, 025, 027, 030, 047, and 062 have since passed
+isolated V2.1 review, leaving this 2-pair queue:
 
 ```text
-001 006 062
+001 006
 ```
 
 Pairs 004 and 005 are excluded because the beak is not observable. The ledger
-currently records 61 internal passes, 3 `needs_rebuild` dispositions, 2
+currently records 62 internal passes, 2 `needs_rebuild` dispositions, 2
 `not_observable` dispositions, 0 user
 approvals, and 0 runtime admissions.
 
 Pair 062 (`sudden-idea`) was the first demonstrated false positive. Its stored
 horizontal direction differed from the closed upper bill by about 34 degrees.
-Candidate V12 rotates one connected lower mandible onto the observed diagonal
-axis. Its declared-axis error is under 1 degree and its normalized tip offset
-is about 0.045, but it remains an unapproved review candidate.
+The accepted V12 successor rotates one connected lower mandible onto the
+observed diagonal axis while preserving the complete body and immutable upper
+bill. Anatomy V2.1 records a 0.5968-degree declared-axis error, 0.8143
+lower-to-upper reach ratio, and 0.0449 normalized tip offset. Native enlarged
+head review and the live two-frame projector loop show one rear hinge, no
+duplicate edge, and no body drift. The body-lock audit records zero
+outside-mouth change, zero registration drift, and 0.999939 silhouette IoU.
+Its internal pass does not imply user approval or runtime admission.
 
 Pair 006 (`right-profile`) is the second isolated rebuild. The prior lower
 bill exceeded the Anatomy V2 tip-offset boundary. Candidate V5 rotates the
