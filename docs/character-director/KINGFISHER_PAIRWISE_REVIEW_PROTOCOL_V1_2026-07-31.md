@@ -5129,3 +5129,33 @@ Full-size evidence:
 This is an internal visual pass only. The reopened queue now contains 23
 internal passes, 41 pending observable pairs, and 2 not-observable rear views.
 User approval and runtime admission remain zero.
+
+### Pair 26 isolated warm-welcome review
+
+Pair 26 (`warm-welcome`) was reviewed as one independent closed/open job at
+native size, nearest-neighbor enlarged beak scale, on a white field, at full
+projector size, and in a six-second alternating loop. The canonical speaking
+mate and verified v5 are pixel-identical. The earlier source and candidates
+v3 and v4 were retained for comparison, but no generated body pixels were
+introduced during this review.
+
+The accepted opening remains centered beneath the immutable frontal upper
+bill. Both mouth corners stay fixed, one connected lower mandible opens on the
+same centerline, and the alternation shows no lateral jump, duplicate contour,
+cheek drift, throat spill, or body-registration shift. The prior receipt had
+incorrectly classified this frontal pose as right-facing directional anatomy.
+That metadata was corrected to a separate centered frontal hinge `(482, 214)`
+without changing the accepted image pixels. The frontal gate records a
+`0.0909` center-offset ratio, `0.6364` lower-to-upper width ratio, and connected
+mandible ratio `1.0`. The strict audit remains 646 changed articulation pixels,
+outside-mouth mean difference `0.0`, registration delta `0`, and silhouette
+IoU `1.0`.
+
+Full-size evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-026-one-pair-2026-08-07-v4/`
+
+This is an internal visual pass only. The reopened queue now contains 24
+internal passes, 40 pending observable pairs, and 2 not-observable rear views.
+User approval and runtime admission remain zero; Pair 27 is the next isolated
+hard stop.

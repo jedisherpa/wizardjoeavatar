@@ -13,10 +13,10 @@
   "identity_side": null,
   "legacy_pair_review": {
     "approval_state": "candidate_visual_review",
-    "excluded_speech_pair_count": 43,
-    "integrated_speech_pair_count": 23,
+    "excluded_speech_pair_count": 42,
+    "integrated_speech_pair_count": 24,
     "ledger_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-review-ledger.json",
-    "ledger_sha256": "a5c0767245cb855ba0c3a9ed290d93fb5f885404684a7ac9c4cdca7ff851511c",
+    "ledger_sha256": "aa5accb7df7439f2c5e3b092a2286eff5d35d6d0690ff0f6db83d198460be265",
     "pair_count": 66,
     "pairs": [
       {
@@ -525,12 +525,12 @@
         "automated_audit_passed": true,
         "ordinal": 26,
         "pairwise_full_size_review": {
-          "evidence_path": "",
+          "evidence_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-026-one-pair-2026-08-07-v4",
           "protocol_id": "kingfisher-full-size-pairwise-v1",
-          "state": "pending"
+          "state": "pass"
         },
         "receipt_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/026-warm-welcome/pair-receipt.json",
-        "receipt_sha256": "0cbcecaccaceba23963cde3d6c044101c4d4892293dc76738ecfb1fdcdd31db7",
+        "receipt_sha256": "286ea022277906d838bec09b5ea6ff316bd0b34da0983b9d93b4cfc0f5289b70",
         "resting_pose_id": "kingfisher.act.026.warm-welcome",
         "resting_sha256": "2abe46025252d7e7731ac3de3322c568d57afba28e136e86410297a9034777cb",
         "runtime_admitted": false,
@@ -1344,8 +1344,8 @@
       "complete": false,
       "needs_rebuild_count": 0,
       "not_observable_count": 2,
-      "pass_count": 23,
-      "pending_count": 41
+      "pass_count": 24,
+      "pending_count": 40
     },
     "review_projection": true,
     "runtime_admitted": false,
@@ -1557,11 +1557,10 @@
   "sequences": {
     "kingfisher-all": {
       "approval_state": "candidate_visual_review",
-      "excluded_speaking_pose_count": 43,
+      "excluded_speaking_pose_count": 42,
       "excluded_speaking_pose_ids": [
         "kingfisher.act.114.back-three-quarter-left-speaking-beak",
         "kingfisher.act.115.neutral-back-speaking-beak",
-        "kingfisher.act.136.warm-welcome-speaking-beak",
         "kingfisher.act.137.intimate-confidence-speaking-beak",
         "kingfisher.act.138.strong-declaration-speaking-beak",
         "kingfisher.act.139.confidential-whisper-speaking-beak",
@@ -1655,6 +1654,7 @@
         "kingfisher.act.025.hand-over-the-floor",
         "kingfisher.act.135.hand-over-the-floor-speaking-beak",
         "kingfisher.act.026.warm-welcome",
+        "kingfisher.act.136.warm-welcome-speaking-beak",
         "kingfisher.act.027.intimate-confidence",
         "kingfisher.act.028.strong-declaration",
         "kingfisher.act.029.confidential-whisper",
@@ -2147,7 +2147,7 @@
       "approval_state": "candidate_visual_review",
       "fps": 2,
       "loop": true,
-      "pair_review_state": "pending",
+      "pair_review_state": "pass",
       "pose_ids": [
         "kingfisher.act.026.warm-welcome",
         "kingfisher.act.136.warm-welcome-speaking-beak"
@@ -2665,7 +2665,7 @@
         "pass",
         "pass",
         "pass",
-        "pending",
+        "pass",
         "pending",
         "pending",
         "pending",
@@ -3084,7 +3084,7 @@
     {
       "approval_state": "candidate_visual_review",
       "bytes": 28586454,
-      "path": "kingfisher_act_001_066_111_176_pair_review-07a6b43d0eb0c3e2.wjpose",
+      "path": "kingfisher_act_001_066_111_176_pair_review-c71121a376e2ba55.wjpose",
       "pose_count": 132,
       "pose_ids": [
         "kingfisher.act.001.neutral-front",
@@ -3222,7 +3222,7 @@
       ],
       "review_projection": true,
       "runtime_admitted": false,
-      "sha256": "07a6b43d0eb0c3e2aaf66ec1a2e3200dc2711ed01c789ccb7fd736ebd14ac5a5",
+      "sha256": "c71121a376e2ba5535b6f7738f022c8ca3e3ed3f4697d9a31b3a8f0263653488",
       "shard_id": "kingfisher_act_001_066_111_176_pair_review",
       "source": "kingfisher_pair_specific_beak_review_v1"
     }
