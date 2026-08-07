@@ -116,6 +116,19 @@ Candidate V12 rotates one connected lower mandible onto the observed diagonal
 axis. Its declared-axis error is under 1 degree and its normalized tip offset
 is about 0.045, but it remains an unapproved review candidate.
 
+Pair 006 (`right-profile`) is the second isolated rebuild. The prior lower
+bill exceeded the Anatomy V2 tip-offset boundary. Candidate V5 rotates the
+matched lower-bill donor 10 degrees around the closed pose's rear hinge rather
+than translating it as a free patch. A live projector pass also rejected the
+first mechanically valid candidate because its pale gap made the lower bill
+read as a detached spike. V5 restores a connected dark cavity and the donor's
+warm inner edge. The closed pose remains authoritative for the complete body
+and upper bill. The rebuilt pair has a 0.41-degree declared-axis error, a
+0.344 normalized tip offset, zero registration drift, and zero outside-mouth
+mean difference. It remains in `needs_rebuild` until the isolated loop is
+visually accepted; these measurements do not constitute user approval or
+runtime admission.
+
 Every compiled pair now has a dedicated two-frame loop. Pair 062 can be
 reviewed locally at:
 
@@ -124,6 +137,11 @@ http://127.0.0.1:8667/?hd-sequence=kingfisher-pair-062-review
 ```
 
 The same form applies to other ordinals, such as
-`kingfisher-pair-006-review`. A pair returns to `pass` only after isolated
-closed/open visual review; that internal pass still does not imply user
-approval or runtime admission.
+`kingfisher-pair-006-review`. The Pair 006 candidate is available at:
+
+```text
+http://127.0.0.1:8667/?hd-sequence=kingfisher-pair-006-review
+```
+
+A pair returns to `pass` only after isolated closed/open visual review; that
+internal pass still does not imply user approval or runtime admission.

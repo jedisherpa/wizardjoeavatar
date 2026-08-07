@@ -443,15 +443,14 @@
       "pair_work_path": "pair-work/006-right-profile",
       "pairwise_full_size_review": {
         "defect_codes": [
-          "anatomy_v2_review_required",
-          "tip_alignment_out_of_bounds"
+          "candidate_visual_review_required"
         ],
-        "evidence_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-006-one-pair-2026-08-05-v2",
-        "note": "Anatomy V2 invalidates the prior batch-derived pass. Review and rebuild this exact closed/open pair independently; no user approval or runtime admission is implied.",
+        "evidence_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-006-axis-open-candidate-2026-08-06-v1",
+        "note": "Pair-specific V5 review candidate rotates the generated lower mandible 10 degrees around the authored rear hinge and rebuilds the visible dark cavity plus warm inner edge while preserving the closed pose body and immutable upper bill. Anatomy V2 measures a 0.41-degree declared-axis error and 0.344 normalized tip offset; body registration delta and outside-mouth mean difference are both zero. Keep this pair in needs_rebuild until the isolated closed/open loop is visually accepted; no user approval or runtime admission is implied.",
         "protocol_id": "kingfisher-full-size-pairwise-v1",
         "queued_at": "2026-07-31T05:30:00+00:00",
-        "reviewed_at": "2026-08-07T01:13:17.522570+00:00",
-        "reviewer": "codex-kingfisher-anatomy-v2",
+        "reviewed_at": "2026-08-07T02:38:10.113349+00:00",
+        "reviewer": "codex-one-pair-anatomy-v2",
         "runtime_admission_implied": false,
         "schema_version": 1,
         "source_disposition": "full_size_pairwise_review",
@@ -536,6 +535,51 @@
             "schema_version": 1,
             "source_disposition": "full_size_pairwise_review",
             "state": "pass",
+            "user_approval_implied": false
+          }
+        },
+        {
+          "reason": "Superseded by a later full-size pairwise review disposition.",
+          "reporter": "codex-one-pair-anatomy-v2",
+          "schema_version": 1,
+          "superseded_at": "2026-08-07T02:16:41.557024+00:00",
+          "superseded_review": {
+            "defect_codes": [
+              "anatomy_v2_review_required",
+              "tip_alignment_out_of_bounds"
+            ],
+            "evidence_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-006-one-pair-2026-08-05-v2",
+            "note": "Anatomy V2 invalidates the prior batch-derived pass. Review and rebuild this exact closed/open pair independently; no user approval or runtime admission is implied.",
+            "protocol_id": "kingfisher-full-size-pairwise-v1",
+            "queued_at": "2026-07-31T05:30:00+00:00",
+            "reviewed_at": "2026-08-07T01:13:17.522570+00:00",
+            "reviewer": "codex-kingfisher-anatomy-v2",
+            "runtime_admission_implied": false,
+            "schema_version": 1,
+            "source_disposition": "full_size_pairwise_review",
+            "state": "needs_rebuild",
+            "user_approval_implied": false
+          }
+        },
+        {
+          "reason": "Superseded by a later full-size pairwise review disposition.",
+          "reporter": "codex-one-pair-anatomy-v2",
+          "schema_version": 1,
+          "superseded_at": "2026-08-07T02:38:10.113349+00:00",
+          "superseded_review": {
+            "defect_codes": [
+              "candidate_visual_review_required"
+            ],
+            "evidence_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-006-axis-open-candidate-2026-08-06-v1",
+            "note": "Pair-specific V3 candidate rotates the generated lower mandible 10 degrees around the authored rear hinge while preserving the closed pose body and immutable upper bill. Anatomy V2 now measures a 0.41-degree declared-axis error and 0.344 normalized tip offset; body registration delta is zero and outside-mouth mean difference is zero. Keep this pair in needs_rebuild until the isolated closed/open loop is visually accepted; no user approval or runtime admission is implied.",
+            "protocol_id": "kingfisher-full-size-pairwise-v1",
+            "queued_at": "2026-07-31T05:30:00+00:00",
+            "reviewed_at": "2026-08-07T02:16:41.557024+00:00",
+            "reviewer": "codex-one-pair-anatomy-v2",
+            "runtime_admission_implied": false,
+            "schema_version": 1,
+            "source_disposition": "full_size_pairwise_review",
+            "state": "needs_rebuild",
             "user_approval_implied": false
           }
         }
