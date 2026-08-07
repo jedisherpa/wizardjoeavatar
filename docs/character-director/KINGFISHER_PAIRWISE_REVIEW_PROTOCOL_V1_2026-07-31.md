@@ -4785,3 +4785,27 @@ Full-size evidence:
 This is an internal visual pass only. The reopened queue now contains 10
 internal passes, 54 pending observable pairs, and 2 not-observable rear views.
 User approval and runtime admission remain zero.
+
+### Pair 13 isolated balance-two-ideas review
+
+Pair 13 (`balance-two-ideas`) was reviewed independently at native size,
+enlarged beak scale, full-projector size, and in a six-second closed/open loop.
+The zero-offset frontal mate was retained. Four alternative placements shifted
+the lower mandible 6, 10, 14, or 22 pixels toward screen left; each displaced
+the mouth from the resting frame's beak hinge and remains excluded.
+
+The selected mate opens one connected frontal mouth beneath the immutable
+upper bill at hinge `(485, 229)`. Its frontal anatomy gate records center
+offset ratio `0.0312`, lower-to-upper width ratio `0.9875`, and mandible
+connected ratio `1.0`. The strict audit reports 3,667 changed rendered mouth
+pixels, outside-mouth mean difference `0.0`, registration delta `0`, and
+silhouette IoU `1.0`. The crown, eyes, throat, wings, hoodie, body, legs, feet,
+canvas, and scale remain fixed.
+
+Full-size evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-013-one-pair-2026-08-07-v4/`
+
+This is an internal visual pass only. The reopened queue now contains 11
+internal passes, 53 pending observable pairs, and 2 not-observable rear views.
+User approval and runtime admission remain zero.
