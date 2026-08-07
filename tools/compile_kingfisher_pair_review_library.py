@@ -135,6 +135,18 @@ def require_pair_specific_pass_receipt(
         )
     ):
         raise ValueError("passing pair requires one declared anatomy hinge")
+    anatomy_hinge_radius = receipt.get(
+        "anatomy_hinge_radius",
+        hinge_radius,
+    )
+    if (
+        isinstance(anatomy_hinge_radius, bool)
+        or not isinstance(anatomy_hinge_radius, int)
+        or anatomy_hinge_radius < 1
+    ):
+        raise ValueError(
+            "passing pair requires a positive anatomy hinge radius"
+        )
 
     minimum_ratio = receipt.get("minimum_connected_ratio")
     connected_ratio = receipt.get("mandible_connected_ratio")
@@ -166,7 +178,7 @@ def require_pair_specific_pass_receipt(
 
     anatomy = beak_anatomy_metrics(
         hinge=(anatomy_hinge[0], anatomy_hinge[1]),
-        hinge_radius=hinge_radius,
+        hinge_radius=anatomy_hinge_radius,
         upper_beak_polygon=[tuple(point) for point in anatomy_upper_beak_polygon],
         mandible_polygon=[
             tuple(point) for point in receipt["mandible_polygon"]

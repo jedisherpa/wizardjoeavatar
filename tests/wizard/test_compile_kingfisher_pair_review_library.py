@@ -326,6 +326,7 @@ class CompileKingfisherPairReviewLibraryTests(unittest.TestCase):
             receipt_path = Path(pair["receipt_path"])
             receipt = json.loads(receipt_path.read_text(encoding="utf-8"))
             receipt["anatomy_hinge"] = [16, 9]
+            receipt["anatomy_hinge_radius"] = 3
             receipt["anatomy_upper_beak_polygon"] = [
                 [12, 7],
                 [16, 5],

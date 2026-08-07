@@ -80,7 +80,7 @@ no-op blink behavior.
 ## Admission Boundary
 
 The package is intentionally review-only. The current Anatomy V2.1 re-audit
-records 52 observable passes, 12 `needs_rebuild` dispositions, and 2 rear-view
+records 53 observable passes, 11 `needs_rebuild` dispositions, and 2 rear-view
 pairs as not observable; it does not record user approval. The production
 registry is unchanged. Admission requires completion of the isolated art
 review, user approval evidence, and a newly admitted package digest.
@@ -103,14 +103,14 @@ scores.
 The first re-audit measured the 63 pairs with explicit hinge geometry and
 placed 14 into an explicit one-pair rebuild queue. Pair 001 is also queued
 because its legacy receipt predates the required geometry. Pairs 007 and 008
-have since passed isolated V2.1 review, leaving this 12-pair queue:
+have since passed isolated V2.1 review, leaving this 11-pair queue:
 
 ```text
-001 006 011 012 017 022 024 025 027 030 047 062
+001 006 012 017 022 024 025 027 030 047 062
 ```
 
 Pairs 004 and 005 are excluded because the beak is not observable. The ledger
-currently records 52 internal passes, 12 `needs_rebuild` dispositions, 2
+currently records 53 internal passes, 11 `needs_rebuild` dispositions, 2
 `not_observable` dispositions, 0 user
 approvals, and 0 runtime admissions.
 
@@ -162,6 +162,14 @@ the pair as frontal with 0.0094 center offset, 1.3962 lower-to-upper width
 ratio, zero outside-mouth change, and zero registration drift. Its internal
 pass does not imply user approval or runtime admission.
 
+Pair 011 (`neutral-speaking-gesture`) validates the same separation for a
+deeper frontal speech aperture. The retained v2 mouth pixels form one centered
+V while the raised presentation wing and cheek overlap stay immutable. Its
+centered anatomy hinge uses a 26-pixel shared-base radius without changing the
+original compositor hinge. The pair passes at 0.0062 center offset, 1.037
+lower-to-upper width ratio, zero outside-mouth change, and zero registration
+drift. Its internal pass does not imply user approval or runtime admission.
+
 Every compiled pair now has a dedicated two-frame loop. Pair 062 can be
 reviewed locally at:
 
@@ -192,6 +200,12 @@ The accepted Pair 010 frontal review loop is available at:
 
 ```text
 http://127.0.0.1:8667/?hd-sequence=kingfisher-pair-010-review
+```
+
+The accepted Pair 011 frontal review loop is available at:
+
+```text
+http://127.0.0.1:8667/?hd-sequence=kingfisher-pair-011-review
 ```
 
 A pair returns to `pass` only after isolated closed/open visual review; that

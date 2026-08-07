@@ -359,6 +359,7 @@ class ComposeKingfisherPairMandiblePatchTests(unittest.TestCase):
                     (492, 248),
                 ],
                 anatomy_hinge=anatomy_hinge,
+                anatomy_hinge_radius=20,
                 hinge=(473, 255),
                 hinge_radius=16,
                 minimum_mandible_height=10,
@@ -366,6 +367,7 @@ class ComposeKingfisherPairMandiblePatchTests(unittest.TestCase):
 
             self.assertEqual(receipt["hinge"], [473, 255])
             self.assertEqual(receipt["anatomy_hinge"], list(anatomy_hinge))
+            self.assertEqual(receipt["anatomy_hinge_radius"], 20)
             self.assertEqual(receipt["beak_anatomy"]["mode"], "frontal")
             self.assertTrue(receipt["beak_anatomy"]["passed"])
 
