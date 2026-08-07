@@ -4715,3 +4715,26 @@ Full-size evidence:
 This is an internal visual pass only. The reopened queue now contains 7
 internal passes, 57 pending observable pairs, and 2 not-observable rear views.
 User approval and runtime admission remain zero.
+
+### Pair 10 isolated ready-stance review
+
+Pair 10 (`ready-stance`) was reviewed independently at enlarged beak scale,
+full-projector size, and in a six-second closed/open loop. Its existing
+authored speaking mate was retained. Both lower-bill corners attach beneath
+the immutable frontal upper bill, and the slight texture asymmetry inside the
+mouth does not move the beak centerline.
+
+The frontal anatomy gate uses the centered hinge `(480, 238)` and records
+center offset ratio `0.0094`, lower-to-upper width ratio `1.3962`, and passing
+upper-bill, mandible, cavity, vertical-order, and symmetry checks. The strict
+audit reports 1,537 changed rendered mouth pixels, outside-mouth mean
+difference `0.0`, registration delta `0`, and silhouette IoU `1.0`. The crown,
+eyes, throat, hoodie, wings, stance, feet, canvas, and scale remain fixed.
+
+Full-size evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-010-one-pair-2026-08-07-v4/`
+
+This is an internal visual pass only. The reopened queue now contains 8
+internal passes, 56 pending observable pairs, and 2 not-observable rear views.
+User approval and runtime admission remain zero.
