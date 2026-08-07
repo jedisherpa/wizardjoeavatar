@@ -13,27 +13,63 @@
     "translate_y": 0
   },
   "approval_state": "candidate_visual_review",
+  "anatomy_direction_vector": null,
+  "anatomy_hinge": [
+    481,
+    224
+  ],
+  "anatomy_hinge_radius": 12,
+  "anatomy_upper_beak_polygon": [
+    [
+      447,
+      192
+    ],
+    [
+      515,
+      192
+    ],
+    [
+      513,
+      224
+    ],
+    [
+      497,
+      235
+    ],
+    [
+      466,
+      235
+    ],
+    [
+      449,
+      224
+    ]
+  ],
   "beak_anatomy": {
-    "cavity_anchor_distance": 2.833,
+    "cavity_anchor_distance": 5.0,
+    "center_offset_ratio": 0.0074,
     "checks": {
-      "bounded_tip_offset": true,
       "cavity_anchored": true,
+      "centered_frontal_mandible": true,
       "mandible_anchored": true,
-      "plausible_mandible_length": true,
-      "same_longitudinal_direction": true,
+      "mandible_below_upper_beak": true,
+      "plausible_frontal_width": true,
       "upper_beak_anchored": true
     },
-    "direction": "right",
-    "mandible_anchor_distance": 5.295,
-    "mandible_forward_reach": 52,
-    "mandible_length_ratio": 0.9286,
-    "mandible_reverse_reach": 7,
-    "mode": "directional",
+    "inferred_direction": [
+      0.0,
+      -1.0
+    ],
+    "inferred_upper_tip": [
+      481.0,
+      192.0
+    ],
+    "mandible_anchor_distance": 6.0,
+    "mandible_width_ratio": 0.8676,
+    "mode": "frontal",
     "passed": true,
-    "schema_version": 1,
-    "tip_offset_ratio": 0.1786,
-    "upper_anchor_distance": 0.395,
-    "upper_forward_reach": 56
+    "schema_version": 2,
+    "upper_anchor_distance": 11.0
   },
   "canvas": [
     960,
