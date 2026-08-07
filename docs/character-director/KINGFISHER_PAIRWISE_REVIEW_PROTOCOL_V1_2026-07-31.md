@@ -4763,3 +4763,25 @@ Full-size evidence:
 This is an internal visual pass only. The reopened queue now contains 9
 internal passes, 55 pending observable pairs, and 2 not-observable rear views.
 User approval and runtime admission remain zero.
+
+### Pair 12 isolated explain-one-point review
+
+Pair 12 (`explain-one-point`) was reviewed independently at enlarged beak
+scale, full-projector size, and in a six-second closed/open loop. The rejected
+pre-pairwise donor changes the eyes and broader facial rendering and remains
+excluded. The current body-locked speaking mate retains the exact closed-frame
+crown, eyes, upper bill, pointing wing, hoodie, body, legs, and feet.
+
+The selected mate opens one compact centered V beneath the immutable frontal
+upper bill. Its frontal gate records center offset ratio `0.0086`,
+lower-to-upper width ratio `0.7414`, and mandible connected ratio `0.81237`.
+The strict audit reports 2,768 changed rendered mouth pixels, outside-mouth
+mean difference `0.0`, registration delta `0`, and silhouette IoU `1.0`.
+
+Full-size evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-012-one-pair-2026-08-07-v4/`
+
+This is an internal visual pass only. The reopened queue now contains 10
+internal passes, 54 pending observable pairs, and 2 not-observable rear views.
+User approval and runtime admission remain zero.
