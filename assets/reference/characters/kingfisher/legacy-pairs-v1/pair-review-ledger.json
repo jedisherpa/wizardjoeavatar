@@ -33,20 +33,17 @@
       "ordinal": 1,
       "pair_work_path": "pair-work/001-neutral-front",
       "pairwise_full_size_review": {
-        "defect_codes": [
-          "anatomy_v2_review_required",
-          "missing_anatomy_v2_geometry"
-        ],
-        "evidence_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-001-one-pair-2026-08-05-v1",
-        "note": "The legacy neutral-front receipt predates explicit hinge and beak polygons. Preserve its art, but re-review this exact closed/open pair and record Anatomy V2 geometry before restoring an internal pass. No user approval or runtime admission is implied.",
+        "defect_codes": [],
+        "evidence_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-001-frontal-anatomy-review-2026-08-07-v2",
+        "note": "Strict one-pair review retains the canonical neutral-front open mate byte-for-byte and rejects the later gray-seam replacement. Tight Anatomy V2.1 geometry records a centered bilateral hinge at (480,240), symmetric upper-bill and lower-mandible outlines, 0.0 center offset, and 1.1875 lower-to-upper width ratio. Native enlarged head review and the live two-frame projector loop show one centered opening with no upper-bill, eye, head, throat, body, scale, canvas, or registration movement. The body-lock audit records zero outside-mouth change, zero registration delta, and silhouette IoU 1.0. Internal visual pass only; no user approval and no runtime admission.",
         "protocol_id": "kingfisher-full-size-pairwise-v1",
         "queued_at": "2026-07-31T05:30:00+00:00",
-        "reviewed_at": "2026-08-07T01:34:05.327304+00:00",
-        "reviewer": "codex-kingfisher-anatomy-v2",
+        "reviewed_at": "2026-08-07T13:00:00-06:00",
+        "reviewer": "codex-pairwise-full-size",
         "runtime_admission_implied": false,
         "schema_version": 1,
         "source_disposition": "full_size_pairwise_review",
-        "state": "needs_rebuild",
+        "state": "pass",
         "user_approval_implied": false
       },
       "pairwise_full_size_review_history": [
@@ -127,6 +124,29 @@
             "schema_version": 1,
             "source_disposition": "full_size_pairwise_review",
             "state": "pass",
+            "user_approval_implied": false
+          }
+        },
+        {
+          "reason": "Superseded by a later full-size pairwise review disposition.",
+          "reporter": "codex-pairwise-full-size",
+          "schema_version": 1,
+          "superseded_at": "2026-08-07T13:00:00-06:00",
+          "superseded_review": {
+            "defect_codes": [
+              "anatomy_v2_review_required",
+              "missing_anatomy_v2_geometry"
+            ],
+            "evidence_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-001-one-pair-2026-08-05-v1",
+            "note": "The legacy neutral-front receipt predates explicit hinge and beak polygons. Preserve its art, but re-review this exact closed/open pair and record Anatomy V2 geometry before restoring an internal pass. No user approval or runtime admission is implied.",
+            "protocol_id": "kingfisher-full-size-pairwise-v1",
+            "queued_at": "2026-07-31T05:30:00+00:00",
+            "reviewed_at": "2026-08-07T01:34:05.327304+00:00",
+            "reviewer": "codex-kingfisher-anatomy-v2",
+            "runtime_admission_implied": false,
+            "schema_version": 1,
+            "source_disposition": "full_size_pairwise_review",
+            "state": "needs_rebuild",
             "user_approval_implied": false
           }
         }
@@ -6837,13 +6857,13 @@
     }
   ],
   "pairwise_full_size_review_summary": {
-    "complete": false,
+    "complete": true,
     "missing_count": 0,
-    "needs_rebuild_count": 1,
+    "needs_rebuild_count": 0,
     "not_observable_count": 2,
     "pair_count": 66,
-    "pass_count": 63,
-    "passing_disposition_count": 65,
+    "pass_count": 64,
+    "passing_disposition_count": 66,
     "pending_count": 0,
     "protocol_id": "kingfisher-full-size-pairwise-v1",
     "reviewed_count": 66,

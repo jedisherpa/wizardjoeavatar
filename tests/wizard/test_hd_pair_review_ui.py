@@ -81,6 +81,27 @@ class HdPairReviewUiTests(unittest.TestCase):
             int(pair["ordinal"]): pair
             for pair in ledger["pairs"]
         }
+        neutral_front = by_ordinal[1]
+        self.assertEqual(
+            neutral_front["pairwise_full_size_review"]["state"],
+            "pass",
+        )
+        self.assertIn(
+            "evidence/pairwise-full-size/"
+            "pair-001-frontal-anatomy-review-2026-08-07-v2",
+            neutral_front["pairwise_full_size_review"]["evidence_path"],
+        )
+        neutral_receipt_path = (
+            LEDGER_PATH.parent / neutral_front["receipt_path"]
+        )
+        neutral_receipt = json.loads(
+            neutral_receipt_path.read_text(encoding="utf-8")
+        )
+        self.assertEqual(neutral_receipt["beak_anatomy"]["mode"], "frontal")
+        self.assertTrue(neutral_receipt["beak_anatomy"]["passed"])
+        self.assertFalse(neutral_front["runtime_admitted"])
+        self.assertFalse(neutral_front["user_approved"])
+
         right_profile = by_ordinal[6]
         self.assertEqual(
             right_profile["pairwise_full_size_review"]["state"],
@@ -277,9 +298,7 @@ class HdPairReviewUiTests(unittest.TestCase):
         summary = ledger["pairwise_full_size_review_summary"]
         self.assertEqual(states.count("pass"), summary["pass_count"])
         self.assertEqual(states.count("pending"), summary["pending_count"])
-        anatomy_v2_queue = {
-            1,
-        }
+        anatomy_v2_queue = set()
         self.assertEqual(
             {
                 int(pair["ordinal"])
@@ -289,10 +308,10 @@ class HdPairReviewUiTests(unittest.TestCase):
             },
             anatomy_v2_queue,
         )
-        self.assertEqual(summary["pass_count"], 63)
-        self.assertEqual(summary["needs_rebuild_count"], 1)
+        self.assertEqual(summary["pass_count"], 64)
+        self.assertEqual(summary["needs_rebuild_count"], 0)
         self.assertEqual(summary["pending_count"], 0)
-        self.assertFalse(summary["complete"])
+        self.assertTrue(summary["complete"])
         pending_pairs = [
             pair for pair in visible_pairs
             if pair["pairwise_full_size_review"]["state"] == "pending"

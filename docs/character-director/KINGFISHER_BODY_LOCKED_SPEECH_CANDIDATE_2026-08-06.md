@@ -80,7 +80,7 @@ no-op blink behavior.
 ## Admission Boundary
 
 The package is intentionally review-only. The current Anatomy V2.1 re-audit
-records 63 observable passes, 1 `needs_rebuild` disposition, and 2 rear-view
+records 64 observable passes, 0 `needs_rebuild` dispositions, and 2 rear-view
 pairs as not observable; it does not record user approval. The production
 registry is unchanged. Admission requires completion of the isolated art
 review, user approval evidence, and a newly admitted package digest.
@@ -101,19 +101,25 @@ these measurements from receipt geometry rather than trusting stored V1
 scores.
 
 The first re-audit measured the 63 pairs with explicit hinge geometry and
-placed 14 into an explicit one-pair rebuild queue. Pair 001 is also queued
-because its legacy receipt predates the required geometry. Pairs 006, 007,
-008, 010, 011, 012, 017, 022, 024, 025, 027, 030, 047, and 062 have since
-passed isolated V2.1 review, leaving this 1-pair queue:
-
-```text
-001
-```
+placed 14 into an explicit one-pair rebuild queue. Pair 001 was also queued
+because its legacy receipt predated the required geometry. Pairs 001, 006,
+007, 008, 010, 011, 012, 017, 022, 024, 025, 027, 030, 047, and 062 have since
+passed isolated V2.1 review, leaving no remaining Anatomy V2.1 rebuilds.
 
 Pairs 004 and 005 are excluded because the beak is not observable. The ledger
-currently records 63 internal passes, 1 `needs_rebuild` disposition, 2
+currently records 64 internal passes, 0 `needs_rebuild` dispositions, 2
 `not_observable` dispositions, 0 user
 approvals, and 0 runtime admissions.
+
+Pair 001 (`neutral-front`) retains its canonical open mate byte-for-byte. The
+later gray-seam replacement remains rejected. A tight frontal annotation now
+records the previously missing Anatomy V2.1 geometry: centered bilateral hinge
+`(480, 240)`, 0.0 center offset, and 1.1875 lower-to-upper width ratio. Native
+enlarged head review and the live two-frame projector loop show one symmetric
+opening while the upper bill, crown, eyes, throat, hoodie, body, scale, canvas,
+and registration remain fixed. The body-lock audit records zero outside-mouth
+change, zero registration drift, and 1.0 silhouette IoU. Its internal pass does
+not imply user approval or runtime admission.
 
 Pair 062 (`sudden-idea`) was the first demonstrated false positive. Its stored
 horizontal direction differed from the closed upper bill by about 34 degrees.
