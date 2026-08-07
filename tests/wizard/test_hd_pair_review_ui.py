@@ -84,8 +84,8 @@ class HdPairReviewUiTests(unittest.TestCase):
         summary = ledger["pairwise_full_size_review_summary"]
 
         self.assertFalse(summary["complete"])
-        self.assertEqual(summary["pass_count"], 14)
-        self.assertEqual(summary["pending_count"], 50)
+        self.assertEqual(summary["pass_count"], 15)
+        self.assertEqual(summary["pending_count"], 49)
         self.assertEqual(summary["needs_rebuild_count"], 0)
         self.assertEqual(summary["not_observable_count"], 2)
         self.assertEqual(
@@ -200,10 +200,18 @@ class HdPairReviewUiTests(unittest.TestCase):
             "pair-016-one-pair-2026-08-07-v4",
             by_ordinal[16]["pairwise_full_size_review"]["evidence_path"],
         )
+        self.assertEqual(
+            by_ordinal[17]["pairwise_full_size_review"]["state"],
+            "pass",
+        )
+        self.assertIn(
+            "pair-017-one-pair-2026-08-07-v4",
+            by_ordinal[17]["pairwise_full_size_review"]["evidence_path"],
+        )
         for ordinal, pair in by_ordinal.items():
             self.assertFalse(pair["runtime_admitted"])
             self.assertFalse(pair["user_approved"])
-            if ordinal not in {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16}:
+            if ordinal not in {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17}:
                 self.assertEqual(
                     pair["pairwise_full_size_review"]["state"],
                     "pending",

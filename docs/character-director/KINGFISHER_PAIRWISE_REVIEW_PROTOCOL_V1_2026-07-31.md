@@ -4884,3 +4884,28 @@ Full-size evidence:
 This is an internal visual pass only. The reopened queue now contains 14
 internal passes, 50 pending observable pairs, and 2 not-observable rear views.
 User approval and runtime admission remain zero.
+
+### Pair 17 isolated insight-upward-point review
+
+Pair 17 (`insight-upward-point`) was reviewed independently at native size,
+enlarged beak scale, full-projector size, and in a six-second closed/open loop.
+The previously retained v2 mate was rejected because its lower bill remained
+nearly horizontal beneath an upward-pitched head. It passed pixel connectivity
+checks but did not share the upper bill's visible axis.
+
+The replacement v3 mate retains the closed frame's head and upper bill and
+rotates one connected donor mandible by `-5` degrees around the shared rear
+hinge `(543, 221)`. Its directional anatomy records a `22.645` degree opening,
+`0.7354` lower-to-upper reach ratio, `0.3068` normalized tip offset, and
+`0.99533` mandible connected ratio. The strict audit reports 1,054 changed
+rendered mouth pixels, outside-mouth mean difference `0.0`, registration delta
+`0`, and silhouette IoU `0.993236`. The eye, crown, throat, raised insight
+wing, hoodie, body, legs, feet, canvas, and scale remain fixed.
+
+Full-size evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-017-one-pair-2026-08-07-v4/`
+
+This is an internal visual pass only. The reopened queue now contains 15
+internal passes, 49 pending observable pairs, and 2 not-observable rear views.
+User approval and runtime admission remain zero.
