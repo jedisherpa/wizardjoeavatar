@@ -5017,3 +5017,31 @@ Full-size evidence:
 This is an internal visual pass only. The reopened queue now contains 19
 internal passes, 45 pending observable pairs, and 2 not-observable rear views.
 User approval and runtime admission remain zero.
+
+### Pair 22 isolated small-acknowledgment review
+
+Pair 22 (`small-acknowledgment`) was reviewed independently at native size,
+nearest-neighbor enlarged beak scale, tight-tip scale, full-projector size,
+and in a six-second closed/open loop. The review compared the original,
+candidates v3 through v6, the preserved source, the raw render, and a fresh
+closed-frame rotation experiment. Candidate v4 was rejected for a duplicate
+dark interior contour, v6 for an artificial black slab, and the rotation
+experiment for extending a cavity stripe beyond the bill.
+
+Candidate v5 remains the only coherent mate. One restrained lower bill opens
+from rear hinge `(462, 266)`, follows the authored down-right upper-bill axis,
+and ends behind the upper tip. Its directional anatomy records a `0.9615`
+lower-to-upper reach ratio, `0.2778` normalized tip offset, `16.1141` degree
+opening, and `0.97903` mandible connected ratio. The strict audit reports
+3,063 changed rendered mouth pixels, outside-mouth mean difference `0.0`,
+registration delta `0`, and silhouette IoU `0.999766`. The eye line, crown,
+cheek, throat, folded wings, hoodie, body, feet, scale, canvas, and upper bill
+remain fixed.
+
+Full-size evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-022-one-pair-2026-08-07-v4/`
+
+This is an internal visual pass only. The reopened queue now contains 20
+internal passes, 44 pending observable pairs, and 2 not-observable rear views.
+User approval and runtime admission remain zero.
