@@ -5248,3 +5248,30 @@ This is an internal visual pass only. The reopened queue now contains 27
 internal passes, 37 pending observable pairs, and 2 not-observable rear views.
 User approval and runtime admission remain zero; Pair 30 is the next isolated
 hard stop.
+
+### Pair 30 isolated rhetorical-question review
+
+Pair 30 (`rhetorical-question`) was reviewed as one independent closed/open
+job at native size, nearest-neighbor enlarged beak scale, on a white field,
+at full projector size, and in a six-second alternating loop. The active
+speaking frame, candidate v2, and verified v3 are byte-identical. The raw
+render and canonical closed source were retained only as comparison evidence.
+
+The tilted frontal upper bill remains immutable while one connected lower
+mandible opens beneath it. Both rear corners remain attached, and the lower
+point follows the authored head tilt without lateral drift. The alternation
+shows no duplicate contour, cheek movement, throat spill, or head/body
+registration shift. Schema-v2 frontal anatomy records a `0.017` center-offset
+ratio, `1.4205` lower-to-upper width ratio, connected-mandible ratio
+`0.995298`, and all anatomy checks true. The strict audit remains 4,379
+changed articulation pixels, outside-mouth mean difference `0.0`, registration
+delta `0`, and silhouette IoU `1.0`.
+
+Full-size evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-030-one-pair-2026-08-07-v4/`
+
+This is an internal visual pass only. The reopened queue now contains 28
+internal passes, 36 pending observable pairs, and 2 not-observable rear views.
+User approval and runtime admission remain zero; Pair 31 is the next isolated
+hard stop.
