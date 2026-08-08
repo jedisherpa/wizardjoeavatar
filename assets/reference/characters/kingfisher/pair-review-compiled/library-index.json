@@ -13,10 +13,10 @@
   "identity_side": null,
   "legacy_pair_review": {
     "approval_state": "candidate_visual_review",
-    "excluded_speech_pair_count": 30,
-    "integrated_speech_pair_count": 36,
+    "excluded_speech_pair_count": 29,
+    "integrated_speech_pair_count": 37,
     "ledger_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-review-ledger.json",
-    "ledger_sha256": "1cfca43facb0bb7f56698a0e9666b7b5c68c20ed734caec62a21419a582b534a",
+    "ledger_sha256": "72de57c50f046236d5520a117b455808201f994b2ce7c8b44d6ae4c865687c91",
     "pair_count": 66,
     "pairs": [
       {
@@ -781,22 +781,22 @@
       },
       {
         "audit_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/039-describe-a-vast-scene/pair-audit.json",
-        "audit_sha256": "c095d885edcb78ff6f0508870c81dd376c0964640679babd7165dd096e1feb07",
+        "audit_sha256": "974ea4006ca08b7abb2cb9b5ae48679b17579ac1c693b3631042e0684fe8450e",
         "automated_audit_passed": true,
         "ordinal": 39,
         "pairwise_full_size_review": {
-          "evidence_path": "",
+          "evidence_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-039-one-pair-2026-08-07-v4",
           "protocol_id": "kingfisher-full-size-pairwise-v1",
-          "state": "pending"
+          "state": "pass"
         },
         "receipt_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/039-describe-a-vast-scene/pair-receipt.json",
-        "receipt_sha256": "676c85c8bc837076af4f2260617a89c8ae57b23cf8e840e52f8d43123b6c6825",
+        "receipt_sha256": "c1bb9fe3f3b0e35ea6d06c027679b4a21e96d067b3b4f03dbdf20f78badc1372",
         "resting_pose_id": "kingfisher.act.039.describe-a-vast-scene",
         "resting_sha256": "a457760329419fb9c2b63da1bb1f1012a376cb95d4ede25b2d3930cb7a732d17",
         "runtime_admitted": false,
         "speaking_ordinal": 149,
         "speaking_pose_id": "kingfisher.act.149.describe-a-vast-scene-speaking-beak",
-        "speaking_sha256": "e18373160b61c0596ffbd881e59861a4131aedfd733ed4b33e4c2d4e3e50e5ab",
+        "speaking_sha256": "f486334b5d9805f8a062d6250899b58fe97123624aad4d56c095bebc789424c4",
         "user_approved": false
       },
       {
@@ -1344,8 +1344,8 @@
       "complete": false,
       "needs_rebuild_count": 0,
       "not_observable_count": 2,
-      "pass_count": 36,
-      "pending_count": 28
+      "pass_count": 37,
+      "pending_count": 27
     },
     "review_projection": true,
     "runtime_admitted": false,
@@ -1557,11 +1557,10 @@
   "sequences": {
     "kingfisher-all": {
       "approval_state": "candidate_visual_review",
-      "excluded_speaking_pose_count": 30,
+      "excluded_speaking_pose_count": 29,
       "excluded_speaking_pose_ids": [
         "kingfisher.act.114.back-three-quarter-left-speaking-beak",
         "kingfisher.act.115.neutral-back-speaking-beak",
-        "kingfisher.act.149.describe-a-vast-scene-speaking-beak",
         "kingfisher.act.150.describe-a-tiny-detail-speaking-beak",
         "kingfisher.act.151.centered-calm-speaking-beak",
         "kingfisher.act.152.joy-speaking-beak",
@@ -1668,6 +1667,7 @@
         "kingfisher.act.038.invitation-to-follow",
         "kingfisher.act.148.invitation-to-follow-speaking-beak",
         "kingfisher.act.039.describe-a-vast-scene",
+        "kingfisher.act.149.describe-a-vast-scene-speaking-beak",
         "kingfisher.act.040.describe-a-tiny-detail",
         "kingfisher.act.041.centered-calm",
         "kingfisher.act.042.joy",
@@ -2303,7 +2303,7 @@
       "approval_state": "candidate_visual_review",
       "fps": 2,
       "loop": true,
-      "pair_review_state": "pending",
+      "pair_review_state": "pass",
       "pose_ids": [
         "kingfisher.act.039.describe-a-vast-scene",
         "kingfisher.act.149.describe-a-vast-scene-speaking-beak"
@@ -2678,7 +2678,7 @@
         "pass",
         "pass",
         "pass",
-        "pending",
+        "pass",
         "pending",
         "pending",
         "pending",
@@ -3083,8 +3083,8 @@
     },
     {
       "approval_state": "candidate_visual_review",
-      "bytes": 28585487,
-      "path": "kingfisher_act_001_066_111_176_pair_review-6e9cb6144c3b7e9c.wjpose",
+      "bytes": 28584988,
+      "path": "kingfisher_act_001_066_111_176_pair_review-2f8fb190ff219fc2.wjpose",
       "pose_count": 132,
       "pose_ids": [
         "kingfisher.act.001.neutral-front",
@@ -3222,7 +3222,7 @@
       ],
       "review_projection": true,
       "runtime_admitted": false,
-      "sha256": "6e9cb6144c3b7e9c38dd181854242bf759661a4028d8df223ba3a1a11475cd94",
+      "sha256": "2f8fb190ff219fc2f6e55ee7e5e496a9469c662854009bef66a6ecee646fcf69",
       "shard_id": "kingfisher_act_001_066_111_176_pair_review",
       "source": "kingfisher_pair_specific_beak_review_v1"
     }
