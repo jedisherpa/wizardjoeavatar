@@ -50,8 +50,9 @@ python3 tools/verify_character_director_release.py \
 Full mode first requires fast closure, then:
 
 1. Clones and detaches the exact candidate commit in a disposable checkout.
-2. Fetches and checks out the selected commit's Git LFS objects, then rejects
-   any path that remains a pointer.
+2. Initializes Git LFS in the disposable repository, fetches and checks out
+   the selected commit's LFS objects, then rejects any path that remains a
+   pointer.
 3. Materializes the declared historical remote ref from the real upstream.
 4. Runs `uv sync --frozen` and probes all verifier imports.
 5. Rebuilds Dragon and Robin/Speech review libraries from tracked sources.
@@ -76,7 +77,9 @@ was not declared. The dependency contract now includes SciPy; a passing full
 receipt is still required before a production-release claim can be made. The
 next run exposed unmaterialized Git LFS pointers in the Dragon source corpus;
 full mode now performs and verifies LFS materialization before invoking any
-asset builder.
+asset builder. A subsequent receipt showed that the disposable clone had no
+repository-local LFS filter configuration even though the host executable was
+available, so initialization is now an explicit gate step as well.
 
 Before a full receipt can pass, the scoped gate changes must be committed so
 they exist in the selected Git tree. The candidate must also close any input

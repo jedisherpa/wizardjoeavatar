@@ -786,6 +786,7 @@ def run_full_gate(
 
         lfs_specs = [
             ("git-lfs-version", ["git", "lfs", "version"], 30.0),
+            ("git-lfs-install-local", ["git", "lfs", "install", "--local"], 30.0),
             (
                 "lfs-fetch-selected-commit",
                 ["git", "lfs", "fetch", "origin", commit],
