@@ -221,7 +221,7 @@
     "mode": "opaque",
     "neutral_chroma_threshold": 36
   },
-  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/043-full-laughter/153_ACT153_full_laughter_speaking_beak_alpha.png",
+  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/043-full-laughter/153_ACT153_full_laughter_speaking_beak_candidate_pairwise_v4_schema2.png",
   "speaking_sha256": "1c4b618e3ea97d665e6bcf53bb8fdf24213d8fa977ab96527487f8545beaf0a2",
   "upper_beak_policy": "immutable_source_pixels",
   "upper_beak_polygon": [
