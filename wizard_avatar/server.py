@@ -40,6 +40,7 @@ from .performance_release import (
 from .performance_score import CompiledScoreRepository
 from .score_edit_application import ScoreEditApplicationError
 from .score_edits import ScoreEditsV1, ScoreEditsValidationError
+from .score_jobs import ScoreJobError
 from .permission_world import (
     CapabilityPermissionV1,
     PERMISSION_WORLD_MAX_BODY_BYTES,
@@ -692,6 +693,12 @@ def create_app(
         try:
             context_request = PerformanceContextRequestV1.from_json(body)
             return await frame_hub.prepare_live_speech_score(context_request)
+        except ScoreJobError as exc:
+            raise HTTPException(
+                status_code=503,
+                detail={"code": exc.code, "path": exc.path},
+                headers={"Retry-After": "1"},
+            ) from exc
         except GovernedSpeechError as exc:
             raise HTTPException(
                 status_code=409 if exc.code.endswith(
@@ -710,6 +717,12 @@ def create_app(
         try:
             preparation = DirectedPerformancePreparationV1.from_json(body)
             return await frame_hub.prepare_directed_performance(preparation)
+        except ScoreJobError as exc:
+            raise HTTPException(
+                status_code=503,
+                detail={"code": exc.code, "path": exc.path},
+                headers={"Retry-After": "1"},
+            ) from exc
         except DirectedPerformanceError as exc:
             raise HTTPException(
                 status_code=409
@@ -733,6 +746,12 @@ def create_app(
                 preparation,
                 editable=True,
             )
+        except ScoreJobError as exc:
+            raise HTTPException(
+                status_code=503,
+                detail={"code": exc.code, "path": exc.path},
+                headers={"Retry-After": "1"},
+            ) from exc
         except (DirectedPerformanceError, DirectorEditSessionError) as exc:
             raise HTTPException(
                 status_code=409
@@ -775,6 +794,12 @@ def create_app(
                 edit_session_id,
                 edits,
             )
+        except ScoreJobError as exc:
+            raise HTTPException(
+                status_code=503,
+                detail={"code": exc.code, "path": exc.path},
+                headers={"Retry-After": "1"},
+            ) from exc
         except (
             DirectorEditSessionError,
             ScoreEditApplicationError,

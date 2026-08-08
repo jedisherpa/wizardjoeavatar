@@ -15,6 +15,7 @@ from wizard_avatar.directed_performance import (
 from wizard_avatar.frame_source import ProceduralWizardFrameSource
 from wizard_avatar.media_session import MediaSessionSnapshotV1
 from wizard_avatar.performance_application import PerformanceApplication
+from wizard_avatar.performance_release import PerformanceContextRequestV1
 from wizard_avatar.performance_score import CompiledScoreRepository
 from wizard_avatar.server import create_app
 from wizard_avatar.score_edits import ScoreEditsV1
@@ -247,6 +248,99 @@ class DirectedPerformanceContractTests(unittest.TestCase):
         self.assertEqual(
             prepared.preliminary_context.pipeline.tts_readiness,
             "not_requested",
+        )
+        self.assertEqual(prepared.preliminary_context.pipeline.observed_stage, "none")
+        self.assertEqual(prepared.preliminary_context.pipeline.mapped_status, "none")
+        self.assertEqual(prepared.preliminary_context.character.gaze, "automatic")
+        self.assertEqual(prepared.preliminary_context.governance.memory_scope, "none")
+        self.assertEqual(prepared.preliminary_context.governance.notification_scope, "none")
+
+
+class PerformanceContextObservationTests(unittest.TestCase):
+    def setUp(self):
+        self.request = PerformanceContextRequestV1.from_mapping(
+            preparation_mapping()["context_request"]
+        )
+        self.clock = {"now": 1_700_000_000_000}
+        self.controller = WizardAvatarController(
+            ("front_idle",),
+            clock_ms=lambda: self.clock["now"],
+        )
+
+    def prism_stage(self, *, turn_id=None, utterance_id=None, stage="reviewing"):
+        return {
+            "schema_version": 2,
+            "event_id": "00000000-0000-4000-8000-000000000123",
+            "source_epoch": "prism-context-observation",
+            "source_sequence": 1,
+            "emitted_at_ms": self.clock["now"],
+            "ttl_ms": 5_000,
+            "kind": "stage",
+            "classification": "visual_advisory_only",
+            "provenance_class": "runtime_lifecycle",
+            "sanitization_version": 1,
+            "turn_id": turn_id or self.request.turn_id,
+            "utterance_id": utterance_id or self.request.utterance_id,
+            "payload": {"stage": stage, "status": "active"},
+        }
+
+    def test_pipeline_uses_only_turn_correlated_prism_stage(self):
+        self.controller.prism_advisories.accept(
+            self.prism_stage(),
+            now_ms=self.clock["now"],
+        )
+        observed = PerformanceApplication._observed_pipeline_context(
+            self.request,
+            self.controller,
+            source_slot="main",
+            playback_state="paused",
+            now_monotonic_ms=42,
+        )
+        self.assertEqual(observed["observed_stage"], "reviewing")
+        self.assertEqual(observed["mapped_status"], "active")
+        self.assertEqual(observed["expected_next_event"], "stage_changed")
+
+    def test_pipeline_ignores_a_different_turn(self):
+        self.controller.prism_advisories.accept(
+            self.prism_stage(turn_id="turn:other"),
+            now_ms=self.clock["now"],
+        )
+        observed = PerformanceApplication._observed_pipeline_context(
+            self.request,
+            self.controller,
+            source_slot="main",
+            playback_state="paused",
+            now_monotonic_ms=42,
+        )
+        self.assertEqual(observed["observed_stage"], "none")
+        self.assertEqual(observed["mapped_status"], "none")
+
+    def test_pipeline_ignores_an_expired_stage_before_the_next_tick(self):
+        self.controller.prism_advisories.accept(
+            self.prism_stage(),
+            now_ms=self.clock["now"],
+        )
+        self.clock["now"] += 5_000
+        observed = PerformanceApplication._observed_pipeline_context(
+            self.request,
+            self.controller,
+            source_slot="main",
+            playback_state="paused",
+            now_monotonic_ms=42,
+        )
+        self.assertEqual(observed["observed_stage"], "none")
+        self.assertEqual(observed["mapped_status"], "none")
+
+    def test_gaze_reports_actual_controller_authority(self):
+        self.assertEqual(
+            PerformanceApplication._observed_gaze(self.controller.state),
+            "automatic",
+        )
+        self.controller.state.gaze_authoritative = True
+        self.controller.state.gaze_aim = -1
+        self.assertEqual(
+            PerformanceApplication._observed_gaze(self.controller.state),
+            "left",
         )
 
 

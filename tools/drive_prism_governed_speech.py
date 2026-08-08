@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Start one real governed Prism speech turn and expose its capture edge."""
+"""Drive governed Prism speech and optionally prove its connector lifecycle."""
 
 from __future__ import annotations
 
@@ -19,6 +19,11 @@ from pathlib import Path
 from typing import Any, Dict, Mapping, Optional, Sequence
 from urllib.parse import urlsplit
 from urllib.request import Request, urlopen
+
+from prism_connector_lifecycle_receipt import (
+    LIFECYCLE_RECEIPT_SCHEMA,
+    evaluate_connector_lifecycle_receipt,
+)
 
 from record_character_director_browser import (
     BrowserCaptureFailure,
@@ -43,9 +48,13 @@ DEFAULT_PROMPT = (
 SCHEMA = "character_director_prism_governed_speech_v1"
 MEDIA_SESSION_ROUTE = "/api/connectors/wizard/media-session"
 GOVERNED_SPEECH_ROUTE = "/api/connectors/wizard/governed-speech"
+WIZARD_MEDIA_SESSION_ROUTE = "/api/avatar/wizard/media-session"
+WIZARD_MEDIA_STATUS_ROUTE = "/api/avatar/wizard/media-session/status"
+WIZARD_PERFORMANCE_BINDING_ROUTE = "/api/avatar/wizard/performance-binding"
 PROTECTED_LOCAL_PORTS = frozenset({8765, 8875})
 AV_TIMELINE_SCHEMA = "character_director_av_timeline_v1"
 REVIEW_BUNDLE_SCHEMA = "character_director_v2_review_bundle_v1"
+LIFECYCLE_MAXIMUM_CLOCK_OFFSET_MS = 100
 
 
 def validate_disposable_loopback_url(value: str, label: str) -> str:
@@ -74,6 +83,26 @@ def get_json(url: str, token: str = "") -> Mapping[str, Any]:
     return value
 
 
+def post_json(
+    url: str, payload: Mapping[str, Any], token: str = ""
+) -> Mapping[str, Any]:
+    headers = {"Accept": "application/json", "Content-Type": "application/json"}
+    if token:
+        headers["Authorization"] = "Bearer {}".format(token)
+    body = json.dumps(payload, separators=(",", ":")).encode("utf-8")
+    with urlopen(Request(url, data=body, headers=headers), timeout=2.0) as response:
+        value = json.loads(response.read().decode("utf-8"))
+    if not isinstance(value, Mapping):
+        raise BrowserCaptureFailure("expected a JSON object from {}".format(url))
+    return value
+
+
+def _identity_sha256(value: Any) -> Optional[str]:
+    if not isinstance(value, str) or not value:
+        return None
+    return "sha256:{}".format(hashlib.sha256(value.encode("utf-8")).hexdigest())
+
+
 def _request_json(event: Mapping[str, Any]) -> Mapping[str, Any]:
     post_data = event.get("request", {}).get("postData")
     if not isinstance(post_data, str):
@@ -92,6 +121,9 @@ def summarize_media_session_request(event: Mapping[str, Any]) -> Mapping[str, An
     performance = payload.get("performance", {})
     return {
         "request_id": event.get("requestId"),
+        "connector_session_sha256": _identity_sha256(
+            payload.get("connector_session_id")
+        ),
         "sequence": payload.get("sequence"),
         "media_epoch": payload.get("media_epoch"),
         "cause": payload.get("cause"),
@@ -236,6 +268,51 @@ async def establish_audio_user_gesture(cdp: CDPClient) -> None:
         raise BrowserCaptureFailure("Chrome did not accept the audio activation gesture")
 
 
+async def start_main_playback_with_user_gesture(cdp: CDPClient) -> Mapping[str, Any]:
+    """Press Prism's visible Play control without invoking the audio element API."""
+
+    target = await cdp.evaluate(
+        """
+        (() => {
+          const audio = document.querySelector('audio[data-source-slot="main"]');
+          if (audio && !audio.paused && !audio.ended) return {alreadyPlaying: true};
+          const controls = document.querySelector(
+            '[aria-label="Visualizer playback controls"]'
+          );
+          const button = [...(controls?.querySelectorAll('button') ?? [])]
+            .find(candidate => candidate.textContent?.trim() === 'Play');
+          if (!button || button.disabled) return null;
+          button.scrollIntoView({block: 'nearest', inline: 'nearest'});
+          const rect = button.getBoundingClientRect();
+          return {
+            alreadyPlaying: false,
+            x: Math.max(1, Math.min(window.innerWidth - 1, rect.left + rect.width / 2)),
+            y: Math.max(1, Math.min(window.innerHeight - 1, rect.top + rect.height / 2))
+          };
+        })()
+        """
+    )
+    if isinstance(target, Mapping) and target.get("alreadyPlaying") is True:
+        return {"already_playing": True, "pointer_dispatched": False}
+    if (
+        not isinstance(target, Mapping)
+        or not isinstance(target.get("x"), (int, float))
+        or not isinstance(target.get("y"), (int, float))
+    ):
+        raise BrowserCaptureFailure(
+            "lifecycle proof requires an enabled visible Prism Play control"
+        )
+    event = {
+        "x": float(target["x"]),
+        "y": float(target["y"]),
+        "button": "left",
+        "clickCount": 1,
+    }
+    await cdp.command("Input.dispatchMouseEvent", {**event, "type": "mousePressed"})
+    await cdp.command("Input.dispatchMouseEvent", {**event, "type": "mouseReleased"})
+    return {"already_playing": False, "pointer_dispatched": True}
+
+
 async def install_media_session_probe(cdp: CDPClient) -> None:
     installed = await cdp.evaluate(
         """
@@ -334,6 +411,7 @@ async def browser_speech_state(cdp: CDPClient) -> Mapping[str, Any]:
                 ? Math.round(candidate.duration * 1000)
                 : null,
               readyState: candidate.readyState,
+              playbackRateMilli: Math.round(candidate.playbackRate * 1000),
               muted: candidate.muted,
               volume: candidate.volume,
               networkState: candidate.networkState,
@@ -346,6 +424,7 @@ async def browser_speech_state(cdp: CDPClient) -> Mapping[str, Any]:
               ? Math.round(audio.duration * 1000)
               : null,
             readyState: audio?.readyState ?? 0,
+            playbackRateMilli: Math.round((audio?.playbackRate ?? 1) * 1000),
             muted: audio?.muted ?? false,
             volume: audio?.volume ?? 1,
             networkState: audio?.networkState ?? 0,
@@ -367,6 +446,237 @@ async def browser_speech_state(cdp: CDPClient) -> Mapping[str, Any]:
         """
     )
     return value if isinstance(value, Mapping) else {}
+
+
+def _browser_audio_state(
+    browser: Mapping[str, Any], source_slot: str
+) -> Mapping[str, Any]:
+    audios = browser.get("audios")
+    if not isinstance(audios, Sequence):
+        return {}
+    for candidate in audios:
+        if isinstance(candidate, Mapping) and candidate.get("sourceSlot") == source_slot:
+            return candidate
+    return {}
+
+
+def _latest_media_event(
+    cdp: CDPClient, source_slot: str
+) -> Optional[Mapping[str, Any]]:
+    for event in reversed(cdp.network_requests):
+        if MEDIA_SESSION_ROUTE not in str(event.get("request", {}).get("url", "")):
+            continue
+        payload = _request_json(event)
+        if payload.get("media", {}).get("source_slot") == source_slot:
+            return event
+    return None
+
+
+def _latest_agent_character_count(browser: Mapping[str, Any]) -> int:
+    messages = browser.get("messages")
+    if not isinstance(messages, Sequence):
+        return 0
+    for message in reversed(messages):
+        if isinstance(message, Mapping) and message.get("role") == "is-agent":
+            value = message.get("textLength")
+            return value if isinstance(value, int) and value >= 0 else 0
+    return 0
+
+
+def _content_free_phase_observation(
+    *,
+    browser: Mapping[str, Any],
+    status: Mapping[str, Any],
+    state: Mapping[str, Any],
+    media_event: Mapping[str, Any],
+    source_slot: str,
+    lifecycle_started: float,
+) -> Mapping[str, Any]:
+    audio = _browser_audio_state(browser, source_slot)
+    application = status.get("application", {})
+    wizard_state = state.get("state", {})
+    media = summarize_media_session_request(media_event)
+    browser_position = audio.get("currentTimeMs")
+    wizard_position = application.get("media_time_ms")
+    offset = (
+        abs(browser_position - wizard_position)
+        if isinstance(browser_position, int) and isinstance(wizard_position, int)
+        else None
+    )
+    return {
+        "observed_at_utc": utc_now(),
+        "observed_monotonic_ms": round((time.monotonic() - lifecycle_started) * 1000),
+        "source_slot": source_slot,
+        "browser": {
+            "playing": audio.get("paused") is False and audio.get("ended") is False,
+            "position_ms": browser_position,
+            "duration_ms": audio.get("durationMs"),
+            "playback_rate_milli": audio.get("playbackRateMilli"),
+        },
+        "wizard": {
+            "active": application.get("active") is True,
+            "source_slot": application.get("source_slot"),
+            "media_time_ms": wizard_position,
+            "mouth": wizard_state.get("mouth"),
+            "speech_mouth_authority": wizard_state.get("speech_mouth_authority"),
+        },
+        "media": {
+            "connector_session_sha256": media.get("connector_session_sha256"),
+            "sequence": media.get("sequence"),
+            "media_epoch": media.get("media_epoch"),
+            "cause": media.get("cause"),
+            "media_id": media.get("media_id"),
+            "media_sha256": media.get("media_sha256"),
+        },
+        "visible_character_count": _latest_agent_character_count(browser),
+        "absolute_clock_offset_ms": offset,
+    }
+
+
+async def wait_for_lifecycle_phase(
+    cdp: CDPClient,
+    wizard_url: str,
+    connector_token: str,
+    source_slot: str,
+    lifecycle_started: float,
+    timeout: float,
+    *,
+    minimum_position_ms: Optional[int] = None,
+    require_open_mouth: bool = False,
+    require_governed_inactive: bool = False,
+) -> Mapping[str, Any]:
+    deadline = time.monotonic() + timeout
+    last_observation: Mapping[str, Any] = {}
+    while time.monotonic() < deadline:
+        browser = await browser_speech_state(cdp)
+        status = await asyncio.to_thread(
+            get_json,
+            wizard_url + WIZARD_MEDIA_STATUS_ROUTE,
+            connector_token,
+        )
+        state = await asyncio.to_thread(
+            get_json, wizard_url + "/api/avatar/wizard/state"
+        )
+        media_event = _latest_media_event(cdp, source_slot)
+        if media_event is None:
+            await asyncio.sleep(0.05)
+            continue
+        observation = _content_free_phase_observation(
+            browser=browser,
+            status=status,
+            state=state,
+            media_event=media_event,
+            source_slot=source_slot,
+            lifecycle_started=lifecycle_started,
+        )
+        last_observation = observation
+        browser_state = observation.get("browser", {})
+        wizard_state = observation.get("wizard", {})
+        position = browser_state.get("position_ms")
+        clock_offset = observation.get("absolute_clock_offset_ms")
+        phase_ready = bool(
+            browser_state.get("playing") is True
+            and wizard_state.get("active") is True
+            and wizard_state.get("source_slot") == source_slot
+            and isinstance(position, int)
+            and position > 0
+            and isinstance(clock_offset, int)
+            and clock_offset <= LIFECYCLE_MAXIMUM_CLOCK_OFFSET_MS
+        )
+        if minimum_position_ms is not None:
+            phase_ready = phase_ready and position > minimum_position_ms
+        if require_open_mouth:
+            phase_ready = phase_ready and bool(
+                wizard_state.get("speech_mouth_authority") == "media_alignment"
+                and str(wizard_state.get("mouth") or "").lower()
+                not in {"", "closed", "idle", "neutral", "none"}
+                and status.get("governed_speech", {}).get("active") is True
+            )
+        if require_governed_inactive:
+            phase_ready = phase_ready and bool(
+                status.get("governed_speech", {}).get("active") is not True
+                and state.get("state", {}).get("speech_id") is None
+            )
+        if phase_ready:
+            return observation
+        await asyncio.sleep(0.05)
+    raise BrowserCaptureFailure(
+        "lifecycle {} phase did not become authoritative: {}".format(
+            source_slot, json.dumps(last_observation, sort_keys=True)
+        )
+    )
+
+
+async def wait_for_runtime_reconnect(
+    cdp: CDPClient,
+    wizard_url: str,
+    connector_token: str,
+    before_runtime_epoch: str,
+    request_start_index: int,
+    timeout: float,
+) -> Mapping[str, Any]:
+    started = time.monotonic()
+    deadline = started + timeout
+    last_observation: Mapping[str, Any] = {}
+    while time.monotonic() < deadline:
+        try:
+            binding = await asyncio.to_thread(
+                get_json,
+                wizard_url + WIZARD_PERFORMANCE_BINDING_ROUTE,
+                connector_token,
+            )
+            status = await asyncio.to_thread(
+                get_json,
+                wizard_url + WIZARD_MEDIA_STATUS_ROUTE,
+                connector_token,
+            )
+            state = await asyncio.to_thread(
+                get_json, wizard_url + "/api/avatar/wizard/state"
+            )
+        except OSError:
+            await asyncio.sleep(0.05)
+            continue
+        after_runtime_epoch = binding.get("wizard_runtime_epoch")
+        transition_summaries = [
+            summarize_media_session_request(event)
+            for event in cdp.network_requests[request_start_index:]
+            if MEDIA_SESSION_ROUTE in str(event.get("request", {}).get("url", ""))
+        ]
+        reconnect_seen = any(
+            transition.get("cause") == "reconnect"
+            for transition in transition_summaries
+        )
+        application = status.get("application", {})
+        governed = status.get("governed_speech", {})
+        obsolete_speech_inactive = bool(
+            governed.get("active") is not True
+            and state.get("state", {}).get("speech_id") is None
+        )
+        last_observation = {
+            "before_runtime_epoch": before_runtime_epoch,
+            "after_runtime_epoch": after_runtime_epoch,
+            "recovery_ms": round((time.monotonic() - started) * 1000),
+            "reconnect_cause_observed": reconnect_seen,
+            "main_restored": bool(
+                application.get("active") is True
+                and application.get("source_slot") == "main"
+            ),
+            "obsolete_speech_inactive": obsolete_speech_inactive,
+        }
+        if (
+            isinstance(after_runtime_epoch, str)
+            and after_runtime_epoch != before_runtime_epoch
+            and reconnect_seen
+            and last_observation["main_restored"] is True
+            and obsolete_speech_inactive
+        ):
+            return last_observation
+        await asyncio.sleep(0.05)
+    raise BrowserCaptureFailure(
+        "Wizard runtime did not reconnect within the lifecycle budget: {}".format(
+            json.dumps(last_observation, sort_keys=True)
+        )
+    )
 
 
 async def resume_speech_playback_with_user_gesture(
@@ -934,6 +1244,11 @@ async def run(args: argparse.Namespace) -> None:
             )
             cdp: Optional[CDPClient] = None
             started_at = utc_now()
+            lifecycle_started = time.monotonic()
+            lifecycle_main_before: Optional[Mapping[str, Any]] = None
+            lifecycle_speech: Optional[Mapping[str, Any]] = None
+            lifecycle_before_runtime_epoch: Optional[str] = None
+            lifecycle_stale_snapshot: Optional[Mapping[str, Any]] = None
             try:
                 cdp = CDPClient(await wait_for_page_target(port))
                 await cdp.connect()
@@ -949,6 +1264,27 @@ async def run(args: argparse.Namespace) -> None:
                 )
                 await install_media_session_probe(cdp)
                 await establish_audio_user_gesture(cdp)
+                if args.lifecycle_proof:
+                    await start_main_playback_with_user_gesture(cdp)
+                    lifecycle_main_before = await wait_for_lifecycle_phase(
+                        cdp,
+                        args.wizard_url,
+                        connector_token,
+                        "main",
+                        lifecycle_started,
+                        args.timeout,
+                    )
+                    binding = await asyncio.to_thread(
+                        get_json,
+                        args.wizard_url + WIZARD_PERFORMANCE_BINDING_ROUTE,
+                        connector_token,
+                    )
+                    runtime_epoch = binding.get("wizard_runtime_epoch")
+                    if not isinstance(runtime_epoch, str) or not runtime_epoch:
+                        raise BrowserCaptureFailure(
+                            "lifecycle proof could not resolve the Wizard runtime epoch"
+                        )
+                    lifecycle_before_runtime_epoch = runtime_epoch
                 if not args.capture_opening:
                     await submit_prompt(cdp, args.prompt)
                 edge = await wait_for_capture_edge(
@@ -969,6 +1305,26 @@ async def run(args: argparse.Namespace) -> None:
                             minimum_duration_ms,
                         )
                     )
+                if args.lifecycle_proof:
+                    lifecycle_speech = await wait_for_lifecycle_phase(
+                        cdp,
+                        args.wizard_url,
+                        connector_token,
+                        "speech",
+                        lifecycle_started,
+                        args.timeout,
+                        require_open_mouth=True,
+                    )
+                    speech_event = _latest_media_event(cdp, "speech")
+                    lifecycle_stale_snapshot = (
+                        dict(_request_json(speech_event))
+                        if speech_event is not None
+                        else None
+                    )
+                    if not lifecycle_stale_snapshot:
+                        raise BrowserCaptureFailure(
+                            "lifecycle proof did not retain a content-free speech snapshot"
+                        )
                 audio_artifact = (
                     await retain_governed_audio(cdp, args.capture_output)
                     if args.capture_output is not None
@@ -1118,6 +1474,148 @@ async def run(args: argparse.Namespace) -> None:
                             args.capture_output, args.receipt
                         )
                         print("REVIEW_BUNDLE {}".format(bundle_path), flush=True)
+                if args.lifecycle_proof:
+                    assert lifecycle_main_before is not None
+                    assert lifecycle_speech is not None
+                    assert lifecycle_before_runtime_epoch is not None
+                    assert lifecycle_stale_snapshot is not None
+                    before_position = lifecycle_main_before.get("browser", {}).get(
+                        "position_ms"
+                    )
+                    if not isinstance(before_position, int):
+                        raise BrowserCaptureFailure(
+                            "lifecycle main baseline did not include media time"
+                        )
+                    lifecycle_main_after = await wait_for_lifecycle_phase(
+                        cdp,
+                        args.wizard_url,
+                        connector_token,
+                        "main",
+                        lifecycle_started,
+                        args.timeout,
+                        minimum_position_ms=before_position,
+                        require_governed_inactive=True,
+                    )
+                    request_start_index = len(cdp.network_requests)
+                    restart_started = time.monotonic()
+                    restart_result = await asyncio.to_thread(
+                        subprocess.run,
+                        tuple(args.lifecycle_restart_command),
+                        cwd=str(ROOT),
+                        stdout=subprocess.PIPE,
+                        stderr=subprocess.PIPE,
+                        timeout=min(30.0, args.timeout),
+                        check=False,
+                    )
+                    if restart_result.returncode != 0:
+                        raise BrowserCaptureFailure(
+                            "lifecycle restart command failed with exit code {}".format(
+                                restart_result.returncode
+                            )
+                        )
+                    restart_command_duration_ms = round(
+                        (time.monotonic() - restart_started) * 1000
+                    )
+                    lifecycle_reconnect = await wait_for_runtime_reconnect(
+                        cdp,
+                        args.wizard_url,
+                        connector_token,
+                        lifecycle_before_runtime_epoch,
+                        request_start_index,
+                        args.lifecycle_reconnect_timeout,
+                    )
+                    lifecycle_reconnect = {
+                        **lifecycle_reconnect,
+                        "recovery_ms": (
+                            lifecycle_reconnect.get("recovery_ms", 0)
+                            + restart_command_duration_ms
+                        ),
+                        "restart_command_sha256": "sha256:{}".format(
+                            hashlib.sha256(
+                                json.dumps(
+                                    list(args.lifecycle_restart_command),
+                                    separators=(",", ":"),
+                                ).encode("utf-8")
+                            ).hexdigest()
+                        ),
+                        "restart_command_duration_ms": restart_command_duration_ms,
+                    }
+                    stale_ack = await asyncio.to_thread(
+                        post_json,
+                        args.wizard_url + WIZARD_MEDIA_SESSION_ROUTE,
+                        lifecycle_stale_snapshot,
+                        connector_token,
+                    )
+                    await asyncio.sleep(0.1)
+                    stale_status = await asyncio.to_thread(
+                        get_json,
+                        args.wizard_url + WIZARD_MEDIA_STATUS_ROUTE,
+                        connector_token,
+                    )
+                    stale_state = await asyncio.to_thread(
+                        get_json, args.wizard_url + "/api/avatar/wizard/state"
+                    )
+                    stale_application = stale_status.get("application", {})
+                    stale_governed = stale_status.get("governed_speech", {})
+                    stale_error = stale_ack.get("error")
+                    lifecycle_stale_replay = {
+                        "disposition": stale_ack.get("disposition"),
+                        "error_code": (
+                            stale_error.get("code")
+                            if isinstance(stale_error, Mapping)
+                            else None
+                        ),
+                        "main_remained_active": bool(
+                            stale_application.get("active") is True
+                            and stale_application.get("source_slot") == "main"
+                        ),
+                        "obsolete_speech_inactive": bool(
+                            stale_governed.get("active") is not True
+                            and stale_state.get("state", {}).get("speech_id") is None
+                        ),
+                    }
+                    lifecycle_receipt = {
+                        "schema": LIFECYCLE_RECEIPT_SCHEMA,
+                        "schema_version": 1,
+                        "content_free": True,
+                        "started_at_utc": started_at,
+                        "completed_at_utc": utc_now(),
+                        "thresholds": {
+                            "maximum_clock_offset_ms": LIFECYCLE_MAXIMUM_CLOCK_OFFSET_MS,
+                            "reconnect_recovery_limit_ms": round(
+                                args.lifecycle_reconnect_timeout * 1000
+                            ),
+                        },
+                        "phases": {
+                            "main_before": lifecycle_main_before,
+                            "speech": lifecycle_speech,
+                            "main_after": lifecycle_main_after,
+                        },
+                        "reconnect": lifecycle_reconnect,
+                        "stale_replay": lifecycle_stale_replay,
+                    }
+                    lifecycle_acceptance = evaluate_connector_lifecycle_receipt(
+                        lifecycle_receipt
+                    )
+                    receipt["connector_lifecycle"] = lifecycle_receipt
+                    receipt["connector_lifecycle_acceptance"] = lifecycle_acceptance
+                    receipt["completed_at_utc"] = utc_now()
+                    args.receipt.write_text(
+                        json.dumps(receipt, indent=2, sort_keys=True) + "\n",
+                        encoding="utf-8",
+                    )
+                    if lifecycle_acceptance.get("passed") is not True:
+                        failed_checks = [
+                            check.get("name")
+                            for check in lifecycle_acceptance.get("checks", ())
+                            if check.get("passed") is not True
+                        ]
+                        raise BrowserCaptureFailure(
+                            "connector lifecycle acceptance failed: {}".format(
+                                ", ".join(str(value) for value in failed_checks)
+                            )
+                        )
+                    print("LIFECYCLE_PROOF {}".format(args.receipt), flush=True)
                 hold_until = time.monotonic() + args.hold_seconds
                 while time.monotonic() < hold_until:
                     state = await browser_speech_state(cdp)
@@ -1147,6 +1645,20 @@ def parse_args(argv: Optional[Sequence[str]] = None) -> argparse.Namespace:
     parser.add_argument("--minimum-audio-seconds", type=float, default=45.0)
     parser.add_argument("--capture-output", type=Path)
     parser.add_argument(
+        "--lifecycle-proof",
+        action="store_true",
+        help=(
+            "Opt in to a content-free main-to-speech-to-main, runtime reconnect, "
+            "and stale-snapshot acceptance proof."
+        ),
+    )
+    parser.add_argument(
+        "--lifecycle-reconnect-timeout",
+        type=float,
+        default=3.0,
+        help="Maximum seconds from a disposable Wizard restart to accepted reconnect.",
+    )
+    parser.add_argument(
         "--defer-review-products",
         action="store_true",
         help=(
@@ -1162,13 +1674,29 @@ def parse_args(argv: Optional[Sequence[str]] = None) -> argparse.Namespace:
         / "character_director_scenarios"
         / "v2-governed-speech.json",
     )
+    parser.add_argument(
+        "--lifecycle-restart-command",
+        nargs=argparse.REMAINDER,
+        help=(
+            "Command argv that restarts only the disposable Wizard runtime. "
+            "This option must be last. Its arguments are hashed, never copied, "
+            "into lifecycle evidence."
+        ),
+    )
     args = parser.parse_args(argv)
     if (
         args.timeout <= 0
         or args.hold_seconds <= 0
         or args.minimum_audio_seconds <= 0
+        or args.lifecycle_reconnect_timeout <= 0
     ):
         parser.error("timeouts must be positive")
+    if args.lifecycle_proof and args.capture_opening:
+        parser.error("--lifecycle-proof cannot be combined with --capture-opening")
+    if args.lifecycle_proof and not args.lifecycle_restart_command:
+        parser.error("--lifecycle-proof requires --lifecycle-restart-command")
+    if args.lifecycle_restart_command and not args.lifecycle_proof:
+        parser.error("--lifecycle-restart-command requires --lifecycle-proof")
     try:
         args.prism_url = validate_disposable_loopback_url(args.prism_url, "--prism-url")
         args.wizard_url = validate_disposable_loopback_url(args.wizard_url, "--wizard-url")

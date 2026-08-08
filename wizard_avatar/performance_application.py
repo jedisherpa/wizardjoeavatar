@@ -61,6 +61,7 @@ from .permission_world import (
     PermissionWorldStateV1,
 )
 from .projection import WORLD_X_MAX, WORLD_X_MIN, WORLD_Z_FAR, WORLD_Z_NEAR
+from .prism_signals import PrismAnimationSignalV2
 from .score_runtime import (
     SCORE_ADMISSION_MISMATCH,
     SCORE_CORRUPT,
@@ -461,6 +462,21 @@ class PerformanceApplication:
         state = controller.state
         age_ms = max(0, (now_monotonic_us - receipt_us) // 1000)
         last_acceptance = self.scheduler.coordinator.last_acceptance
+        observed_pipeline = self._observed_pipeline_context(
+            request,
+            controller,
+            source_slot=source_slot,
+            playback_state=snapshot.playback.state,
+            now_monotonic_ms=now_monotonic_us // 1000,
+        )
+        observed_gaze = self._observed_gaze(state)
+        render_policy = controller.permission_world_render_policy
+        visible_world_states = (
+            () if render_policy is None else render_policy.visible_world_states
+        )
+        observed_world_state = (
+            visible_world_states[0] if visible_world_states else "default"
+        )
         if request.display_profile == "mobile":
             display = {
                 "width_px": 390,
@@ -528,24 +544,7 @@ class PerformanceApplication:
                 "relational_stance": request.relational_stance,
                 "response_artifact_id": None,
             },
-            "pipeline": {
-                "observed_stage": "ready",
-                "mapped_status": "completed",
-                "stage_started_at_monotonic_ms": now_monotonic_us // 1000,
-                "expected_next_event": (
-                    "speech_started"
-                    if source_slot == "speech"
-                    else "terminal_posture"
-                ),
-                "cancellation_posture": "not_requested",
-                "error_posture": "none",
-                "tts_readiness": (
-                    "ready" if source_slot == "speech" else "not_requested"
-                ),
-                "alignment_readiness": (
-                    "ready" if source_slot == "speech" else "not_requested"
-                ),
-            },
+            "pipeline": observed_pipeline,
             "approval": {
                 "presentation_state": "approved_for_presentation",
                 "presentation_artifact_sha256": request.reply_sha256,
@@ -564,9 +563,9 @@ class PerformanceApplication:
                     "z": round(state.world_position["z"] * 1000),
                 },
                 "facing": state.facing,
-                "gaze": "direct_viewer",
+                "gaze": observed_gaze,
                 "expression": state.expression,
-                "world_state": "default",
+                "world_state": observed_world_state,
                 "recent_performance": [],
             },
             "display": display,
@@ -574,9 +573,9 @@ class PerformanceApplication:
                 "allowed_semantic_actions": sorted(allowed_actions),
                 "denied_semantic_actions": ["external_action"],
                 "pending_approval_references": [],
-                "memory_scope": "session",
+                "memory_scope": "none",
                 "external_action_posture": "not_requested",
-                "notification_scope": "current_surface",
+                "notification_scope": "none",
                 "linked_surface_state": "unlinked",
             },
             "preferences": {
@@ -616,6 +615,91 @@ class PerformanceApplication:
             },
         }
         return PerformanceContextV1.build(payload)
+
+    @staticmethod
+    def _observed_gaze(state) -> str:
+        """Describe the controller's actual gaze without inventing viewer contact."""
+
+        if not state.gaze_authoritative:
+            return "automatic"
+        if state.gaze_vertical_aim < 0:
+            return "up"
+        if state.gaze_vertical_aim > 0:
+            return "down"
+        if state.gaze_aim < 0:
+            return "left"
+        if state.gaze_aim > 0:
+            return "right"
+        return "direct_viewer"
+
+    @staticmethod
+    def _observed_pipeline_context(
+        request: PerformanceContextRequestV1,
+        controller: WizardAvatarController,
+        *,
+        source_slot: str,
+        playback_state: str,
+        now_monotonic_ms: int,
+    ) -> Mapping[str, object]:
+        """Map only turn-correlated Prism lifecycle facts into the context."""
+
+        stage = "none"
+        status = "none"
+        expected_next_event = (
+            "speech_ended"
+            if source_slot == "speech" and playback_state == "playing"
+            else "speech_started"
+            if source_slot == "speech"
+            else "terminal_posture"
+        )
+        cancellation_posture = "not_requested"
+        error_posture = "none"
+
+        active = controller.current_prism_advisory()
+        correlated = (
+            isinstance(active, PrismAnimationSignalV2)
+            and active.kind == "stage"
+            and active.turn_id == request.turn_id
+            and (
+                active.utterance_id is None
+                or active.utterance_id == request.utterance_id
+            )
+        )
+        if correlated and active is not None:
+            observed_stage = active.payload.get("stage")
+            observed_status = active.payload.get("status")
+            if type(observed_stage) is str:
+                stage = observed_stage
+            if type(observed_status) is str:
+                status = observed_status
+            if status == "cancelled":
+                cancellation_posture = "confirmed"
+                expected_next_event = "cancellation_confirmed"
+            elif status == "failed":
+                error_posture = "recoverable"
+                expected_next_event = "terminal_posture"
+            elif stage == "speaking":
+                expected_next_event = "speech_ended"
+            elif stage == "ready":
+                expected_next_event = "response_released"
+            else:
+                expected_next_event = "stage_changed"
+        elif source_slot == "speech" and playback_state == "playing":
+            # Playback is an authoritative local observation even when Prism is silent.
+            stage = "speaking"
+            status = "active"
+
+        return {
+            "observed_stage": stage,
+            "mapped_status": status,
+            "stage_started_at_monotonic_ms": now_monotonic_ms,
+            "expected_next_event": expected_next_event,
+            "cancellation_posture": cancellation_posture,
+            "error_posture": error_posture,
+            "tts_readiness": "ready" if source_slot == "speech" else "not_requested",
+            # Alignment is supplied only by the later governed registration boundary.
+            "alignment_readiness": "pending" if source_slot == "speech" else "not_requested",
+        }
 
     def compile_directed_performance(
         self,
@@ -714,6 +798,7 @@ class PerformanceApplication:
                 context,
                 duration_ms=duration_ms,
                 capability_manifest=self.capability_manifest,
+                choreography_dictionary=self.choreography_dictionary,
             )
         except LiveSpeechScoreError as exc:
             raise GovernedSpeechError(exc.code, exc.path) from exc

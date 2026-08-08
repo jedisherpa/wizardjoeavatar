@@ -45,6 +45,7 @@ from .performance_release import (
 from .performance_score import CompiledScoreRepository
 from .score_edit_application import ScoreEditApplicationError
 from .score_edits import ScoreEditsV1
+from .score_jobs import DEFAULT_SCORE_JOB_CAPACITY, ScoreJobLane
 from .permission_world import CapabilityPermissionV1, PermissionWorldStateV1
 from .media_session import MediaSessionAck, MediaSessionSnapshot
 from .runtime import AvatarRuntime, ReplayLog, canonical_sha256
@@ -181,6 +182,7 @@ class WizardFrameHub:
         max_subscribers: int = DEFAULT_MAX_SUBSCRIBERS,
         allow_scoreless_governed_speech: bool = False,
         character_registry_path: Optional[Path] = None,
+        score_job_capacity: int = DEFAULT_SCORE_JOB_CAPACITY,
     ) -> None:
         if (
             isinstance(max_subscribers, bool)
@@ -289,12 +291,14 @@ class WizardFrameHub:
         self._animation_truth_trace = deque(maxlen=ANIMATION_TRUTH_TRACE_CAPACITY)
         self._published_at = deque(maxlen=240)
         self._director_edit_sessions = DirectorEditSessionStore()
+        self._score_jobs = ScoreJobLane(capacity=score_job_capacity)
 
     @property
     def task_error_code(self) -> Optional[str]:
         return self._task_error_code
 
     async def start(self) -> None:
+        await self._score_jobs.start()
         if self._task is None or self._task.done():
             self._started_at = time.perf_counter()
             now_ns = time.perf_counter_ns()
@@ -321,6 +325,7 @@ class WizardFrameHub:
             with contextlib.suppress(asyncio.CancelledError, Exception):
                 await task
         self._task = None
+        await self._score_jobs.stop()
         await self._settle_waiters_on_stop()
         executor = self._render_executor
         self._render_executor = None
@@ -448,6 +453,7 @@ class WizardFrameHub:
             "replay_evicted_record_count": self.replay_log.evicted_record_count,
             "replay_is_truncated": self.replay_log.is_truncated,
             "replay_sha256": self.replay_log.sha256(),
+            "score_jobs": dict(self._score_jobs.diagnostics()),
         }
         if include_replay_digest:
             diagnostics["replay_retained_sha256"] = self.replay_log.retained_sha256()
@@ -498,6 +504,14 @@ class WizardFrameHub:
         """Prepare a score from C0, then prove C0 is still the accepted slot."""
 
         await self.start()
+        return await self._score_jobs.submit(
+            lambda: self._prepare_live_speech_score(request)
+        )
+
+    async def _prepare_live_speech_score(
+        self,
+        request: PerformanceContextRequestV1,
+    ) -> dict:
         async with self._current_lock():
             context = self.performance.capture_performance_context(
                 request,
@@ -512,34 +526,32 @@ class WizardFrameHub:
             snapshot_fingerprint = snapshot.fingerprint()
             duration_ms = snapshot.media.duration_ms
 
-        compiled = await asyncio.to_thread(
+        compiled = await self._score_jobs.run_sync(
             self.performance.compile_live_speech_score,
             context,
             duration_ms=duration_ms,
         )
 
         async with self._current_lock():
-            current = self.performance.scheduler.coordinator.snapshot_for_slot(
-                "speech"
-            )
-            if (
-                current is None
-                or current.fingerprint() != snapshot_fingerprint
-                or current.media.duration_ms != duration_ms
-                or (
-                    self.performance.scheduler.coordinator.reconciliation_generation
-                    != context.runtime.reconciliation_generation
-                )
-                or (
-                    self.frame_source.controller.state.control_lease_generation
-                    != context.control.cancellation_generation
-                )
+            if not self._live_speech_context_matches(
+                snapshot_fingerprint,
+                duration_ms,
+                context,
             ):
                 raise GovernedSpeechError("media_session_changed")
-            prepared = await asyncio.to_thread(
-                self.performance.publish_live_speech_score,
-                compiled,
-            )
+
+        prepared = await self._score_jobs.run_sync(
+            self.performance.publish_live_speech_score,
+            compiled,
+        )
+
+        async with self._current_lock():
+            if not self._live_speech_context_matches(
+                snapshot_fingerprint,
+                duration_ms,
+                context,
+            ):
+                raise GovernedSpeechError("media_session_changed")
             return dict(prepared.to_dict())
 
     async def prepare_directed_performance(
@@ -551,6 +563,19 @@ class WizardFrameHub:
         """Compile, fence, and publish one arbitrary governed direction."""
 
         await self.start()
+        return await self._score_jobs.submit(
+            lambda: self._prepare_directed_performance(
+                preparation,
+                editable=editable,
+            )
+        )
+
+    async def _prepare_directed_performance(
+        self,
+        preparation: DirectedPerformancePreparationV1,
+        *,
+        editable: bool,
+    ) -> dict:
 
         async with self._current_lock():
             try:
@@ -578,7 +603,7 @@ class WizardFrameHub:
                 )
             snapshot_fingerprint = snapshot.fingerprint()
 
-        compiled = await asyncio.to_thread(
+        compiled = await self._score_jobs.run_sync(
             self.performance.compile_directed_performance,
             preparation,
             context,
@@ -591,10 +616,13 @@ class WizardFrameHub:
                 context,
             ):
                 raise DirectedPerformanceError("media_session_changed")
-            prepared = await asyncio.to_thread(
-                self.performance.publish_directed_performance,
-                compiled,
-            )
+
+        prepared = await self._score_jobs.run_sync(
+            self.performance.publish_directed_performance,
+            compiled,
+        )
+
+        async with self._current_lock():
             if not self._directed_context_matches(
                 preparation,
                 snapshot_fingerprint,
@@ -675,6 +703,18 @@ class WizardFrameHub:
         """Apply, fence, and atomically publish one server-custodied edit set."""
 
         await self.start()
+        return await self._score_jobs.submit(
+            lambda: self._apply_director_score_edits(
+                edit_session_id,
+                edits,
+            )
+        )
+
+    async def _apply_director_score_edits(
+        self,
+        edit_session_id: str,
+        edits: ScoreEditsV1,
+    ) -> dict:
         now_us = time.perf_counter_ns() // 1000
         async with self._current_lock():
             session = self._director_edit_sessions.require(
@@ -687,7 +727,7 @@ class WizardFrameHub:
             base_score_sha256 = session.base_score_sha256
 
         try:
-            applied = await asyncio.to_thread(
+            applied = await self._score_jobs.run_sync(
                 self.performance.apply_score_edits,
                 session.portable_score,
                 session.compiler_context,
@@ -707,10 +747,23 @@ class WizardFrameHub:
             if not self._director_edit_session_matches(current):
                 self._director_edit_sessions.discard(edit_session_id)
                 raise DirectorEditSessionError("edit_session_stale")
-            published = await asyncio.to_thread(
-                self.performance.publish_directed_score_edits,
-                applied,
+
+        published = await self._score_jobs.run_sync(
+            self.performance.publish_directed_score_edits,
+            applied,
+        )
+
+        async with self._current_lock():
+            now_us = time.perf_counter_ns() // 1000
+            current = self._director_edit_sessions.require(
+                edit_session_id,
+                now_us,
             )
+            if current.base_score_sha256 != base_score_sha256:
+                raise DirectorEditSessionError("edit_session_revision_changed")
+            if not self._director_edit_session_matches(current):
+                self._director_edit_sessions.discard(edit_session_id)
+                raise DirectorEditSessionError("edit_session_stale")
             replacement = self._director_edit_sessions.replace_score(
                 edit_session_id,
                 portable_score=applied.portable_score,
@@ -723,6 +776,34 @@ class WizardFrameHub:
                 "applied": dict(published.applied.to_dict()),
                 "edit_session": dict(replacement.safe_inspection(now_us)),
             }
+
+    def _live_speech_context_matches(
+        self,
+        snapshot_fingerprint: str,
+        duration_ms: int,
+        context: PerformanceContextV1,
+    ) -> bool:
+        current = self.performance.scheduler.coordinator.snapshot_for_slot(
+            "speech"
+        )
+        return bool(
+            current is not None
+            and current.fingerprint() == snapshot_fingerprint
+            and current.media.duration_ms == duration_ms
+            and (
+                self.performance.scheduler.coordinator.reconciliation_generation
+                == context.runtime.reconciliation_generation
+            )
+            and (
+                self.frame_source.controller.state.control_lease_generation
+                == context.control.cancellation_generation
+            )
+            and self.performance.runtime_epoch
+            == context.runtime.wizard_runtime_epoch
+            and self.performance.character_id == context.character.character_id
+            and self.performance.package_digest == context.character.package_digest
+            and self.performance.manifest_digest == context.character.manifest_digest
+        )
 
     def _directed_context_matches(
         self,

@@ -17,7 +17,11 @@ from .mouth import validate_mouth_shape
 from .pathing import circle_points, figure_eight_points, validate_path, validate_world_point
 from .permission_world import PermissionWorldRenderPolicyV1
 from .reference_avatar import reference_pose_ids
-from .prism_signals import PrismAdvisoryStateMachine, PrismAnimationSignalV2
+from .prism_signals import (
+    PrismAdvisoryStateMachine,
+    PrismAnimationSignal,
+    PrismAnimationSignalV2,
+)
 from .semantic_animation import map_prism_signal
 from .views import rotate_direction
 
@@ -113,6 +117,14 @@ class WizardAvatarController:
         self,
     ) -> Optional[PermissionWorldRenderPolicyV1]:
         return self._permission_world_render_policy
+
+    def current_prism_advisory(self) -> Optional[PrismAnimationSignal]:
+        """Return one fresh advisory without changing its projection lifetime."""
+
+        active = self.prism_advisories.active_signal
+        if active is None or active.is_expired(self._clock_ms()):
+            return None
+        return active
 
     def set_permission_world_render_policy(
         self,
