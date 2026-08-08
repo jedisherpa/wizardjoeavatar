@@ -424,6 +424,57 @@ class CompileKingfisherPairReviewLibraryTests(unittest.TestCase):
 
             self.assertEqual(result["pair_count"], 66)
 
+    def test_pass_rechecks_both_frontal_anatomy_hinges(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            base_index, ledger = self._fixture(root)
+            data = json.loads(ledger.read_text(encoding="utf-8"))
+            pair = data["pairs"][1]
+            pair["pairwise_full_size_review"]["state"] = "pass"
+            receipt_path = Path(pair["receipt_path"])
+            receipt = json.loads(receipt_path.read_text(encoding="utf-8"))
+            receipt["anatomy_hinge"] = [13, 9]
+            receipt["anatomy_hinge_radius"] = 2
+            receipt["anatomy_secondary_hinge"] = [19, 9]
+            receipt["anatomy_secondary_hinge_radius"] = 2
+            receipt["anatomy_upper_beak_polygon"] = [
+                [13, 9],
+                [14, 6],
+                [18, 6],
+                [19, 9],
+                [18, 10],
+                [14, 10],
+            ]
+            receipt["mandible_polygon"] = [
+                [13, 9],
+                [14, 12],
+                [16, 18],
+                [18, 12],
+                [19, 9],
+                [18, 14],
+                [16, 19],
+                [14, 14],
+            ]
+            receipt["cavity_polygon"] = [
+                [14, 10],
+                [16, 13],
+                [18, 10],
+                [17, 14],
+                [16, 16],
+                [15, 14],
+            ]
+            receipt["mandible_bbox"] = [13, 9, 19, 19]
+            receipt_path.write_text(json.dumps(receipt), encoding="utf-8")
+            ledger.write_text(json.dumps(data), encoding="utf-8")
+
+            result = compile_pair_review_library(
+                base_index,
+                ledger,
+                root / "review",
+            )
+
+            self.assertEqual(result["pair_count"], 66)
+
     def test_pass_accepts_explicit_downward_beak_axis(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)

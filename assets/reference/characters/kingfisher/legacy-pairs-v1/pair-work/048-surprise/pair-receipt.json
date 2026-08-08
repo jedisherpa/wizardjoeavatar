@@ -2,34 +2,99 @@
   "alignment": {
     "interpolation": "lanczos_rgb_binary_alpha",
     "rotation_center": [
-      528,
-      161
+      497,
+      182
     ],
     "rotation_degrees": 0.0,
-    "scale": 0.5755,
-    "scale_x": 0.5755,
-    "scale_y": 0.5755,
-    "translate_x": -2,
-    "translate_y": -2
+    "scale": 1.0,
+    "scale_x": 1.0,
+    "scale_y": 1.0,
+    "translate_x": 0,
+    "translate_y": 0
   },
+  "anatomy_direction_vector": null,
+  "anatomy_hinge": [
+    497,
+    182
+  ],
+  "anatomy_hinge_radius": 18,
+  "anatomy_secondary_hinge": [
+    559,
+    182
+  ],
+  "anatomy_secondary_hinge_radius": 18,
+  "anatomy_upper_beak_polygon": [
+    [
+      458,
+      108
+    ],
+    [
+      598,
+      108
+    ],
+    [
+      598,
+      154
+    ],
+    [
+      578,
+      170
+    ],
+    [
+      544,
+      187
+    ],
+    [
+      510,
+      187
+    ],
+    [
+      478,
+      170
+    ],
+    [
+      458,
+      154
+    ]
+  ],
   "approval_state": "candidate_visual_review",
+  "body_lock": "exact_outside_articulation_region",
   "beak_anatomy": {
-    "cavity_anchor_distance": 11.0,
-    "center_offset_ratio": 0.0143,
+    "cavity_anchor_distance": 2.828,
+    "cavity_secondary_anchor_distance": 2.828,
+    "center_offset_ratio": 0.0,
     "checks": {
       "cavity_anchored": true,
+      "cavity_secondary_anchored": true,
       "centered_frontal_mandible": true,
       "mandible_anchored": true,
       "mandible_below_upper_beak": true,
+      "mandible_secondary_anchored": true,
       "plausible_frontal_width": true,
-      "upper_beak_anchored": true
+      "upper_beak_anchored": true,
+      "upper_beak_secondary_anchored": true
     },
-    "mandible_anchor_distance": 26.0,
-    "mandible_width_ratio": 0.8571,
+    "inferred_direction": [
+      0.0,
+      -1.0
+    ],
+    "inferred_upper_tip": [
+      528.0,
+      108.0
+    ],
+    "mandible_anchor_distance": 3.309,
+    "mandible_secondary_anchor_distance": 3.21,
+    "mandible_width_ratio": 0.5143,
     "mode": "frontal",
     "passed": true,
-    "schema_version": 1,
-    "upper_anchor_distance": 26.0
+    "schema_version": 3,
+    "secondary_hinge": [
+      559,
+      182
+    ],
+    "secondary_hinge_radius": 18,
+    "upper_anchor_distance": 1.683,
+    "upper_secondary_anchor_distance": 2.236
   },
   "canvas": [
     960,
@@ -38,94 +103,110 @@
   "cavity_fill_rgba": null,
   "cavity_polygon": [
     [
-      480,
-      150
+      499,
+      184
     ],
     [
-      580,
-      150
+      557,
+      184
     ],
     [
-      570,
-      180
+      550,
+      194
     ],
     [
-      535,
-      216
+      528,
+      214
     ],
     [
-      500,
-      185
+      506,
+      194
     ]
   ],
-  "cavity_source": "generated",
+  "cavity_source": "generated_overlay",
   "changed_bbox": [
     470,
     161,
     591,
     226
   ],
-  "generated_render_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/048-surprise/158_ACT158_surprise_speaking_beak_pairwise_render_v2.png",
-  "generated_render_sha256": "df03bcc95d6ca187c678664b95db5e3132801f1c4bfaf787001bdb8c8a26f531",
+  "generated_render_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/048-surprise/158_ACT158_surprise_speaking_beak_alpha.png",
+  "generated_render_sha256": "2379d0fd414f2d020bbdb3ac6679d60ecf30c7ab0e5c23e9f2eb3f14ed7a7fae",
   "hinge": [
-    528,
-    161
+    497,
+    182
   ],
-  "hinge_radius": 22,
+  "hinge_radius": 18,
   "mandible_bbox": [
-    470,
-    135,
-    591,
-    226
+    492,
+    178,
+    565,
+    227
   ],
   "mandible_connected_ratio": 0.975081,
   "mandible_largest_component_pixels": 7200,
   "mandible_opaque_pixels": 7384,
   "mandible_polygon": [
     [
-      470,
-      135
+      492,
+      178
     ],
     [
-      590,
-      135
+      564,
+      178
     ],
     [
-      590,
-      190
+      557,
+      196
     ],
     [
-      552,
-      225
+      528,
+      226
     ],
     [
-      505,
-      225
-    ],
-    [
-      470,
-      190
+      499,
+      197
     ]
   ],
-  "method": "pair_specific_connected_mandible_patch_v1",
+  "method": "pair_specific_authored_mouth_region_v1",
   "minimum_connected_ratio": 0.9,
-  "minimum_mandible_height": 55,
+  "minimum_mandible_height": 38,
+  "mouth_region": [
+    470,
+    135,
+    591,
+    226
+  ],
   "oral_warm_replacement_polygon": null,
   "oral_warm_replacement_rgba": null,
   "outside_articulation_change": false,
+  "pairwise_promotion": {
+    "candidate_audit_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/048-surprise/pair-audit.json",
+    "promoted_at": "2026-08-08T02:28:45-06:00",
+    "reason": "Retain the visually clean full-size authored mouth while replacing the weak center-only metadata with bounded dual-hinge anatomy evidence.",
+    "reviewer": "codex-pairwise-visual-review-v4",
+    "runtime_admission_implied": false,
+    "schema_version": 1,
+    "user_approval_implied": false
+  },
   "residual_clear_polygon": null,
   "resting_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/048-surprise/048_ACT048_surprise_resting_beak_alpha.png",
   "resting_sha256": "da205999a980b5f6af055d54c238206a59f15d2c107e47b95a8a2d5f258f0c3c",
   "runtime_admitted": false,
   "schema_version": 1,
+  "secondary_hinge": [
+    559,
+    182
+  ],
+  "secondary_hinge_radius": 18,
   "source_mask": {
     "light_threshold": 175,
     "mode": "exclude_light_neutral",
     "neutral_chroma_threshold": 40
   },
-  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/048-surprise/158_ACT158_surprise_speaking_beak_candidate_pairwise_v7_frontal-verified.png",
+  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/048-surprise/158_ACT158_surprise_speaking_beak_alpha.png",
   "speaking_sha256": "2379d0fd414f2d020bbdb3ac6679d60ecf30c7ab0e5c23e9f2eb3f14ed7a7fae",
-  "upper_beak_policy": "immutable_source_pixels",
+  "upper_beak_policy": "authored_open_mouth_region",
   "upper_beak_polygon": [
     [
       458,

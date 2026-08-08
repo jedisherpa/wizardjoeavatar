@@ -178,6 +178,31 @@ def require_pair_specific_pass_receipt(
             "passing pair requires a positive anatomy hinge radius"
         )
 
+    anatomy_secondary_hinge = receipt.get("anatomy_secondary_hinge")
+    if anatomy_secondary_hinge is not None and (
+        not isinstance(anatomy_secondary_hinge, list)
+        or len(anatomy_secondary_hinge) != 2
+        or any(
+            isinstance(value, bool) or not isinstance(value, int)
+            for value in anatomy_secondary_hinge
+        )
+    ):
+        raise ValueError(
+            "passing pair requires a valid secondary anatomy hinge"
+        )
+    anatomy_secondary_hinge_radius = receipt.get(
+        "anatomy_secondary_hinge_radius",
+        anatomy_hinge_radius,
+    )
+    if anatomy_secondary_hinge is not None and (
+        isinstance(anatomy_secondary_hinge_radius, bool)
+        or not isinstance(anatomy_secondary_hinge_radius, int)
+        or anatomy_secondary_hinge_radius < 1
+    ):
+        raise ValueError(
+            "passing pair requires a positive secondary anatomy hinge radius"
+        )
+
     minimum_ratio = receipt.get("minimum_connected_ratio")
     connected_ratio = receipt.get("mandible_connected_ratio")
     if (
@@ -209,6 +234,19 @@ def require_pair_specific_pass_receipt(
     anatomy = beak_anatomy_metrics(
         hinge=(anatomy_hinge[0], anatomy_hinge[1]),
         hinge_radius=anatomy_hinge_radius,
+        secondary_hinge=(
+            (
+                anatomy_secondary_hinge[0],
+                anatomy_secondary_hinge[1],
+            )
+            if anatomy_secondary_hinge is not None
+            else None
+        ),
+        secondary_hinge_radius=(
+            anatomy_secondary_hinge_radius
+            if anatomy_secondary_hinge is not None
+            else None
+        ),
         upper_beak_polygon=[tuple(point) for point in anatomy_upper_beak_polygon],
         mandible_polygon=[
             tuple(point) for point in receipt["mandible_polygon"]

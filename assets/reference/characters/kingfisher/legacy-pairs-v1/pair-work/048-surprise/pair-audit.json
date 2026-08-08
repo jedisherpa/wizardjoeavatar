@@ -7,12 +7,12 @@
     "stable_registration_bounds": true,
     "visible_mouth_change": true
   },
-  "mouth_mean_abs": 8.029656,
+  "mouth_mean_abs": 9.188418,
   "mouth_region": [
-    460,
-    145,
-    600,
-    235
+    470,
+    135,
+    591,
+    226
   ],
   "outside_mouth_mean_abs": 0.0,
   "passed": true,
@@ -27,7 +27,7 @@
   "resting_sha256": "da205999a980b5f6af055d54c238206a59f15d2c107e47b95a8a2d5f258f0c3c",
   "schema_version": 2,
   "silhouette_iou": 1.0,
-  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/048-surprise/158_ACT158_surprise_speaking_beak_candidate_pairwise_v7_frontal-verified.png",
+  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/048-surprise/158_ACT158_surprise_speaking_beak_alpha.png",
   "speaking_registration_bbox": [
     115,
     10,
