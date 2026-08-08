@@ -27,7 +27,7 @@
   "resting_sha256": "9dbeb9341f46286ae999fe6aebc81d847d71308e055ed8f333b872a7313c5a96",
   "schema_version": 2,
   "silhouette_iou": 1.0,
-  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/037-gentle-reassurance/147_ACT147_gentle_reassurance_speaking_beak_alpha.png",
+  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/037-gentle-reassurance/147_ACT147_gentle_reassurance_speaking_beak_candidate_pairwise_v17_hinge-corrected.png",
   "speaking_registration_bbox": [
     266,
     95,

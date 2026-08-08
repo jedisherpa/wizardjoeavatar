@@ -253,7 +253,7 @@
     "mode": "opaque",
     "neutral_chroma_threshold": 36
   },
-  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/037-gentle-reassurance/147_ACT147_gentle_reassurance_speaking_beak_alpha.png",
+  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/037-gentle-reassurance/147_ACT147_gentle_reassurance_speaking_beak_candidate_pairwise_v17_hinge-corrected.png",
   "speaking_sha256": "0c2e6fe41679b77924ad8073773ba30c44674ffaf192e6849ffb848c01302a67",
   "upper_beak_policy": "immutable_source_pixels",
   "upper_beak_polygon": [
