@@ -237,7 +237,7 @@
     "mode": "exclude_light_neutral",
     "neutral_chroma_threshold": 36
   },
-  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/038-invitation-to-follow/148_ACT148_invitation_to_follow_speaking_beak_alpha.png",
+  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/038-invitation-to-follow/148_ACT148_invitation_to_follow_speaking_beak_candidate_pairwise_v6_hinge-open.png",
   "speaking_sha256": "a5ed74b4e382d75d4fe808ae0b71ee752c7814c2de9e749996240c2165a06600",
   "upper_beak_policy": "immutable_source_pixels",
   "upper_beak_polygon": [
