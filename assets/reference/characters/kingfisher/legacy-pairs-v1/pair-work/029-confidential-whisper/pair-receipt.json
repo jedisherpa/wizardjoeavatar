@@ -20,20 +20,35 @@
       "cavity_anchored": true,
       "mandible_anchored": true,
       "plausible_mandible_length": true,
+      "plausible_opening_angle": true,
       "same_longitudinal_direction": true,
       "upper_beak_anchored": true
     },
+    "declared_direction_angle_degrees": null,
     "direction": "left",
+    "effective_direction": [
+      -0.918633,
+      0.395111
+    ],
+    "inferred_direction": [
+      -0.918633,
+      0.395111
+    ],
+    "inferred_upper_tip": [
+      400.0,
+      301.0
+    ],
     "mandible_anchor_distance": 7.805,
-    "mandible_forward_reach": 89,
-    "mandible_length_ratio": 0.957,
-    "mandible_reverse_reach": 9,
+    "mandible_forward_reach": 99.1433,
+    "mandible_length_ratio": 0.9793,
+    "mandible_reverse_reach": 10.6384,
     "mode": "directional",
+    "opening_angle_degrees": 3.0341,
     "passed": true,
-    "schema_version": 1,
-    "tip_offset_ratio": 0.1075,
+    "schema_version": 2,
+    "tip_offset_ratio": 0.0519,
     "upper_anchor_distance": 8.544,
-    "upper_forward_reach": 93
+    "upper_forward_reach": 101.2373
   },
   "canvas": [
     960,

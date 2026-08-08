@@ -5217,3 +5217,34 @@ This is an internal visual pass only. The reopened queue now contains 26
 internal passes, 38 pending observable pairs, and 2 not-observable rear views.
 User approval and runtime admission remain zero; Pair 29 is the next isolated
 hard stop.
+
+### Pair 29 isolated confidential-whisper review
+
+Pair 29 (`confidential-whisper`) was reviewed as one independent closed/open
+job at native size, nearest-neighbor enlarged beak scale, on a white field,
+at full projector size, and in a six-second alternating loop. The current
+verified v18 mate is pixel-identical to accepted v17. The closed frame,
+preserved source, pair-specific donor, rejected v2, and candidates through
+v17 were compared before disposition.
+
+This profile bill points down-left from a rear hinge on screen right. The
+selected lower mandible remains connected to that hinge, follows the same
+axis beneath the immutable upper bill, and is correctly occluded near its tip
+by the foreground raised wing. The detached throat-crossing bar and duplicate
+contours visible in earlier candidates are absent. The alternation shows no
+lateral jump, cheek drift, throat spill, or head/body registration movement.
+The receipt was refreshed under the current schema-v2 directional gate without
+changing image pixels. It records a `0.9793` lower-to-upper reach ratio,
+`0.0519` normalized tip offset, `3.0341` degree opening, connected-mandible
+ratio `0.991361`, and all anatomy checks true. The strict audit remains 2,106
+changed articulation pixels, outside-mouth mean difference `0.0`, registration
+delta `0`, and silhouette IoU `1.0`.
+
+Full-size evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-029-one-pair-2026-08-07-v4/`
+
+This is an internal visual pass only. The reopened queue now contains 27
+internal passes, 37 pending observable pairs, and 2 not-observable rear views.
+User approval and runtime admission remain zero; Pair 30 is the next isolated
+hard stop.
