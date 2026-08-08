@@ -194,7 +194,7 @@
     "mode": "opaque",
     "neutral_chroma_threshold": 36
   },
-  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/055-fear/165_ACT165_fear_speaking_beak_alpha.png",
+  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/055-fear/165_ACT165_fear_speaking_beak_candidate_pairwise_v6_tip-aligned.png",
   "speaking_sha256": "5a1912d4df62e0ce3315a482b3861b7928af835f7e7d368cd81ea859ce54f10b",
   "upper_beak_policy": "immutable_source_pixels",
   "upper_beak_polygon": [
