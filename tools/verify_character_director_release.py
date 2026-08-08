@@ -701,6 +701,33 @@ def _prepare_remote_refs(
     return records
 
 
+def _unmaterialized_lfs_paths(checkout: Path) -> list[str]:
+    """Return current-commit LFS paths that still contain pointer payloads."""
+
+    result = _run(
+        ["git", "lfs", "ls-files", "-n"],
+        cwd=checkout,
+        timeout=180.0,
+    )
+    if result.returncode != 0:
+        raise RuntimeError(_tail(result.stderr) or _tail(result.stdout))
+    unresolved: list[str] = []
+    for raw_path in result.stdout.splitlines():
+        relative = raw_path.strip()
+        if not relative:
+            continue
+        path = checkout / relative
+        try:
+            with path.open("rb") as stream:
+                prefix = stream.read(64)
+        except OSError:
+            unresolved.append(relative)
+            continue
+        if prefix.startswith(b"version https://git-lfs.github.com/spec/v1\n"):
+            unresolved.append(relative)
+    return unresolved
+
+
 def run_full_gate(
     repo: Path,
     revision: str,
@@ -754,6 +781,48 @@ def run_full_gate(
         )
         receipt["commands"].append(checkout_record)
         if not checkout_record["passed"]:
+            receipt["passed"] = False
+            return receipt
+
+        lfs_specs = [
+            ("git-lfs-version", ["git", "lfs", "version"], 30.0),
+            (
+                "lfs-fetch-selected-commit",
+                ["git", "lfs", "fetch", "origin", commit],
+                1800.0,
+            ),
+            ("lfs-checkout-selected-commit", ["git", "lfs", "checkout"], 1800.0),
+        ]
+        for name, command, timeout in lfs_specs:
+            record = _command_receipt(name, command, cwd=checkout, timeout=timeout)
+            receipt["commands"].append(record)
+            if not record["passed"]:
+                receipt["issues"].append(
+                    GateIssue(
+                        "lfs.materialization_failed",
+                        f"{name} failed for the selected commit",
+                    ).as_dict()
+                )
+                receipt["passed"] = False
+                return receipt
+        try:
+            unresolved_lfs = _unmaterialized_lfs_paths(checkout)
+        except RuntimeError as error:
+            receipt["issues"].append(
+                GateIssue("lfs.inventory_failed", str(error)).as_dict()
+            )
+            receipt["passed"] = False
+            return receipt
+        if unresolved_lfs:
+            receipt["issues"].append(
+                GateIssue(
+                    "lfs.unmaterialized",
+                    (
+                        f"{len(unresolved_lfs)} Git LFS object(s) remain as pointers; "
+                        f"first paths: {', '.join(unresolved_lfs[:10])}"
+                    ),
+                ).as_dict()
+            )
             receipt["passed"] = False
             return receipt
         initial_status = _git(checkout, ["status", "--porcelain=v1", "--untracked-files=all"])
