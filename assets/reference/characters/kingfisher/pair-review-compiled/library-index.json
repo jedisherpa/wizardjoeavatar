@@ -13,10 +13,10 @@
   "identity_side": null,
   "legacy_pair_review": {
     "approval_state": "candidate_visual_review",
-    "excluded_speech_pair_count": 16,
-    "integrated_speech_pair_count": 50,
+    "excluded_speech_pair_count": 15,
+    "integrated_speech_pair_count": 51,
     "ledger_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-review-ledger.json",
-    "ledger_sha256": "b75914720c501820b396717ddd2961363e10a43337443902e283198cfb0134a4",
+    "ledger_sha256": "7fe7d13d732384cb237f6b06e2de0c630aa09498d9c6b0f9ebf12f3f1d7782d0",
     "pair_count": 66,
     "pairs": [
       {
@@ -1065,9 +1065,9 @@
         "automated_audit_passed": true,
         "ordinal": 53,
         "pairwise_full_size_review": {
-          "evidence_path": "",
+          "evidence_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-053-one-pair-2026-08-08-v4",
           "protocol_id": "kingfisher-full-size-pairwise-v1",
-          "state": "pending"
+          "state": "pass"
         },
         "receipt_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/053-embarrassment/pair-receipt.json",
         "receipt_sha256": "457a27b2bb0bc44eb6623d93bb789a5dae1d5f066fb9193566ca499634d0631f",
@@ -1344,8 +1344,8 @@
       "complete": false,
       "needs_rebuild_count": 0,
       "not_observable_count": 2,
-      "pass_count": 50,
-      "pending_count": 14
+      "pass_count": 51,
+      "pending_count": 13
     },
     "review_projection": true,
     "runtime_admitted": false,
@@ -1557,11 +1557,10 @@
   "sequences": {
     "kingfisher-all": {
       "approval_state": "candidate_visual_review",
-      "excluded_speaking_pose_count": 16,
+      "excluded_speaking_pose_count": 15,
       "excluded_speaking_pose_ids": [
         "kingfisher.act.114.back-three-quarter-left-speaking-beak",
         "kingfisher.act.115.neutral-back-speaking-beak",
-        "kingfisher.act.163.embarrassment-speaking-beak",
         "kingfisher.act.164.shame-speaking-beak",
         "kingfisher.act.165.fear-speaking-beak",
         "kingfisher.act.166.anxiety-speaking-beak",
@@ -1682,6 +1681,7 @@
         "kingfisher.act.052.sadness",
         "kingfisher.act.162.sadness-speaking-beak",
         "kingfisher.act.053.embarrassment",
+        "kingfisher.act.163.embarrassment-speaking-beak",
         "kingfisher.act.054.shame",
         "kingfisher.act.055.fear",
         "kingfisher.act.056.anxiety",
@@ -2471,7 +2471,7 @@
       "approval_state": "candidate_visual_review",
       "fps": 2,
       "loop": true,
-      "pair_review_state": "pending",
+      "pair_review_state": "pass",
       "pose_ids": [
         "kingfisher.act.053.embarrassment",
         "kingfisher.act.163.embarrassment-speaking-beak"
@@ -2692,7 +2692,7 @@
         "pass",
         "pass",
         "pass",
-        "pending",
+        "pass",
         "pending",
         "pending",
         "pending",
@@ -3084,7 +3084,7 @@
     {
       "approval_state": "candidate_visual_review",
       "bytes": 28586661,
-      "path": "kingfisher_act_001_066_111_176_pair_review-5c34c182ec98dc3c.wjpose",
+      "path": "kingfisher_act_001_066_111_176_pair_review-f64f09b75d5b0640.wjpose",
       "pose_count": 132,
       "pose_ids": [
         "kingfisher.act.001.neutral-front",
@@ -3222,7 +3222,7 @@
       ],
       "review_projection": true,
       "runtime_admitted": false,
-      "sha256": "5c34c182ec98dc3cf806b7d897c12295dbf29c3aa4b209f3888d9cb40e3b74e4",
+      "sha256": "f64f09b75d5b0640e4b44edfb6a504a97ee054e0085c33d26ed75ada7a3fdec3",
       "shard_id": "kingfisher_act_001_066_111_176_pair_review",
       "source": "kingfisher_pair_specific_beak_review_v1"
     }
