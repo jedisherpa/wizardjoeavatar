@@ -2,34 +2,94 @@
   "alignment": {
     "interpolation": "lanczos_rgb_binary_alpha",
     "rotation_center": [
-      480,
+      454,
       184
     ],
     "rotation_degrees": 0.0,
-    "scale": 0.577,
-    "scale_x": 0.577,
-    "scale_y": 0.577,
-    "translate_x": -3,
-    "translate_y": 8
+    "scale": 1.0,
+    "scale_x": 1.0,
+    "scale_y": 1.0,
+    "translate_x": 0,
+    "translate_y": 0
   },
+  "anatomy_direction_vector": null,
+  "anatomy_hinge": [
+    454,
+    184
+  ],
+  "anatomy_hinge_radius": 16,
+  "anatomy_secondary_hinge": [
+    506,
+    184
+  ],
+  "anatomy_secondary_hinge_radius": 16,
+  "anatomy_upper_beak_polygon": [
+    [
+      438,
+      145
+    ],
+    [
+      522,
+      145
+    ],
+    [
+      522,
+      182
+    ],
+    [
+      506,
+      188
+    ],
+    [
+      480,
+      184
+    ],
+    [
+      454,
+      188
+    ],
+    [
+      438,
+      182
+    ]
+  ],
   "approval_state": "candidate_visual_review",
   "beak_anatomy": {
     "cavity_anchor_distance": 0.0,
+    "cavity_secondary_anchor_distance": 0.0,
     "center_offset_ratio": 0.0,
     "checks": {
       "cavity_anchored": true,
+      "cavity_secondary_anchored": true,
       "centered_frontal_mandible": true,
       "mandible_anchored": true,
       "mandible_below_upper_beak": true,
+      "mandible_secondary_anchored": true,
       "plausible_frontal_width": true,
-      "upper_beak_anchored": true
+      "upper_beak_anchored": true,
+      "upper_beak_secondary_anchored": true
     },
+    "inferred_direction": [
+      0.0,
+      -1.0
+    ],
+    "inferred_upper_tip": [
+      480.0,
+      145.0
+    ],
     "mandible_anchor_distance": 3.0,
+    "mandible_secondary_anchor_distance": 3.0,
     "mandible_width_ratio": 0.7857,
     "mode": "frontal",
     "passed": true,
-    "schema_version": 1,
-    "upper_anchor_distance": 0.0
+    "schema_version": 3,
+    "secondary_hinge": [
+      506,
+      184
+    ],
+    "secondary_hinge_radius": 16,
+    "upper_anchor_distance": 3.745,
+    "upper_secondary_anchor_distance": 3.745
   },
   "canvas": [
     960,
@@ -65,10 +125,10 @@
     514,
     229
   ],
-  "generated_render_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/046-confident-hero/156_ACT156_confident_hero_speaking_beak_pairwise_render_v1.png",
-  "generated_render_sha256": "e61b981076a12d39c8abaf48c55eaac8df7886a5faa7bebc7242e17c036a9525",
+  "generated_render_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/046-confident-hero/156_ACT156_confident_hero_speaking_beak_alpha.png",
+  "generated_render_sha256": "889dab0f3f3845016cfd02a44cf2c6fa9079187b632a0c2c1db9fbd8ea6a59fc",
   "hinge": [
-    480,
+    454,
     184
   ],
   "hinge_radius": 16,
@@ -114,12 +174,17 @@
   "resting_sha256": "32c340541fb4bceb1f3f1f94e1bdd7151ff47bc4352f135e094a58c21870324a",
   "runtime_admitted": false,
   "schema_version": 1,
+  "secondary_hinge": [
+    506,
+    184
+  ],
+  "secondary_hinge_radius": 16,
   "source_mask": {
     "light_threshold": 180,
     "mode": "opaque",
     "neutral_chroma_threshold": 36
   },
-  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/046-confident-hero/156_ACT156_confident_hero_speaking_beak_candidate_pairwise_v3_frontal-verified.png",
+  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/046-confident-hero/156_ACT156_confident_hero_speaking_beak_alpha.png",
   "speaking_sha256": "889dab0f3f3845016cfd02a44cf2c6fa9079187b632a0c2c1db9fbd8ea6a59fc",
   "upper_beak_policy": "immutable_source_pixels",
   "upper_beak_polygon": [
