@@ -5275,3 +5275,34 @@ This is an internal visual pass only. The reopened queue now contains 28
 internal passes, 36 pending observable pairs, and 2 not-observable rear views.
 User approval and runtime admission remain zero; Pair 31 is the next isolated
 hard stop.
+
+### Pair 31 isolated compare-two-options review
+
+Pair 31 (`compare-two-options`) was reviewed as one independent closed/open
+job at native size, nearest-neighbor enlarged beak scale, on a white field,
+at full projector size, and in a six-second alternating loop. The canonical
+closed frame, matched full-resolution speaking donor, current v5 frame, and
+earlier v3 and v4 candidates were compared before disposition.
+
+The v5 lower bill passed the legacy numerical tolerance but reached only
+`0.581` of the upper bill and read as a short triangular flap during the
+alternation. Pair-specific v6 therefore replaces only the lower mandible from
+the matched donor while preserving the canonical upper bill and every pixel
+outside the mouth. The rebuilt lower bill remains connected to the authored
+screen-left rear hinge, follows the right-facing upper-bill axis, and reaches
+the canonical tip region without a detached edge, duplicate contour, throat
+residue, or head/body registration change. Schema-v2 directional anatomy
+records a `0.8927` lower-to-upper reach ratio, `0.4425` normalized tip offset,
+`26.3676` degree opening, connected-mandible ratio `0.999572`, and all anatomy
+checks true. The strict audit records 1,935 changed articulation pixels,
+outside-mouth mean difference `0.0`, registration delta `0`, and silhouette
+IoU `0.997388`.
+
+Full-size evidence:
+
+`assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-031-one-pair-2026-08-07-v4/`
+
+This is an internal visual pass only. The reopened queue now contains 29
+internal passes, 35 pending observable pairs, and 2 not-observable rear views.
+User approval and runtime admission remain zero; Pair 32 is the next isolated
+hard stop.

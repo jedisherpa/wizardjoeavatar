@@ -170,7 +170,7 @@
     "mode": "opaque",
     "neutral_chroma_threshold": 36
   },
-  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/031-compare-two-options/141_ACT141_compare_two_options_speaking_beak_alpha.png",
+  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/031-compare-two-options/141_ACT141_compare_two_options_speaking_beak_candidate_pairwise_v6.png",
   "speaking_sha256": "5094d326c5b9802531a7e388e082ecbb7d4afcaecb7b36c98ec7f8d269731fb6",
   "upper_beak_policy": "immutable_source_pixels",
   "upper_beak_polygon": [
