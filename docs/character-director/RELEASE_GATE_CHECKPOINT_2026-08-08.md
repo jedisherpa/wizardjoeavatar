@@ -29,8 +29,8 @@ python3 tools/verify_character_director_release.py \
 It resolves the selected revision to a commit, inventories that commit's Git
 tree, validates required files and trees, follows the declared character and
 review-library manifests, verifies committed checksums (including Git LFS
-object IDs), and confirms verifier imports are represented in
-`pyproject.toml`, `requirements.txt`, and `uv.lock`.
+object IDs), and confirms the NumPy and SciPy verifier dependencies are
+represented in `pyproject.toml`, `requirements.txt`, and `uv.lock`.
 
 A schema-v1 fixture contract may be supplied with `--contract`. This is the
 unit-test path used to prove that tracked-but-undeclared and local-only inputs
@@ -67,8 +67,11 @@ isolated checkout for diagnosis.
 
 ## Current checkpoint
 
-All eight focused fixture/unit tests pass. The full gate has **not** been run
-for this uncommitted checkpoint and no production-release claim is made.
+All eight focused fixture/unit tests pass. The first full-gate run against
+commit `4471483641d3606f70731123a7296fc4ccf02389` correctly failed in the
+disposable environment because SciPy, imported by a tracked visual verifier,
+was not declared. The dependency contract now includes SciPy; a passing full
+receipt is still required before a production-release claim can be made.
 
 Before a full receipt can pass, the scoped gate changes must be committed so
 they exist in the selected Git tree. The candidate must also close any input

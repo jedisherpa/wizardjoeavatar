@@ -79,7 +79,7 @@ DEFAULT_CONTRACT: dict[str, Any] = {
             "kind": "hd_review_library",
         },
     ],
-    "locked_distributions": ["numpy"],
+    "locked_distributions": ["numpy", "scipy"],
     "remote_refs": ["codex/python-asciline-avatar"],
 }
 
@@ -804,7 +804,7 @@ def run_full_gate(
                 str(python),
                 "-c",
                 (
-                    "import numpy; "
+                    "import numpy; import scipy; "
                     "import tools.analyze_user_capture_frames; "
                     "import tools.build_dragon_repair_review; "
                     "import tools.compose_kingfisher_pair_render; "
