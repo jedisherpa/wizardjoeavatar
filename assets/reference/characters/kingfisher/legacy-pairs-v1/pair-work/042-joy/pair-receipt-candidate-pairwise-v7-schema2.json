@@ -241,7 +241,7 @@
     "mode": "opaque",
     "neutral_chroma_threshold": 36
   },
-  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/042-joy/152_ACT152_joy_speaking_beak_alpha.png",
+  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/042-joy/152_ACT152_joy_speaking_beak_candidate_pairwise_v7_schema2.png",
   "speaking_sha256": "5094d4d966aa20378e13405d3324677b2e2b7ce59923f7dc2c759135f5e00709",
   "upper_beak_policy": "immutable_source_pixels",
   "upper_beak_polygon": [
