@@ -13,10 +13,10 @@
   "identity_side": null,
   "legacy_pair_review": {
     "approval_state": "candidate_visual_review",
-    "excluded_speech_pair_count": 12,
-    "integrated_speech_pair_count": 54,
+    "excluded_speech_pair_count": 11,
+    "integrated_speech_pair_count": 55,
     "ledger_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-review-ledger.json",
-    "ledger_sha256": "b96d6802a195faf24e524f360e6e813d883fd72e23ed96baff8501cadf146d7f",
+    "ledger_sha256": "0aa00a4128d05b3a8afe2b6ece9af6fa39f899313393354f1da72e29dbb4101a",
     "pair_count": 66,
     "pairs": [
       {
@@ -1145,9 +1145,9 @@
         "automated_audit_passed": true,
         "ordinal": 57,
         "pairwise_full_size_review": {
-          "evidence_path": "",
+          "evidence_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-057-one-pair-2026-08-08-v4",
           "protocol_id": "kingfisher-full-size-pairwise-v1",
-          "state": "pending"
+          "state": "pass"
         },
         "receipt_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/057-anger/pair-receipt.json",
         "receipt_sha256": "76572c4895bf198c2e2be4f6da415d29990745606ae44b81aa1d38bf8983c267",
@@ -1344,8 +1344,8 @@
       "complete": false,
       "needs_rebuild_count": 0,
       "not_observable_count": 2,
-      "pass_count": 54,
-      "pending_count": 10
+      "pass_count": 55,
+      "pending_count": 9
     },
     "review_projection": true,
     "runtime_admitted": false,
@@ -1557,11 +1557,10 @@
   "sequences": {
     "kingfisher-all": {
       "approval_state": "candidate_visual_review",
-      "excluded_speaking_pose_count": 12,
+      "excluded_speaking_pose_count": 11,
       "excluded_speaking_pose_ids": [
         "kingfisher.act.114.back-three-quarter-left-speaking-beak",
         "kingfisher.act.115.neutral-back-speaking-beak",
-        "kingfisher.act.167.anger-speaking-beak",
         "kingfisher.act.168.frustration-speaking-beak",
         "kingfisher.act.169.determination-speaking-beak",
         "kingfisher.act.170.fatigue-speaking-beak",
@@ -1686,6 +1685,7 @@
         "kingfisher.act.056.anxiety",
         "kingfisher.act.166.anxiety-speaking-beak",
         "kingfisher.act.057.anger",
+        "kingfisher.act.167.anger-speaking-beak",
         "kingfisher.act.058.frustration",
         "kingfisher.act.059.determination",
         "kingfisher.act.060.fatigue",
@@ -2519,7 +2519,7 @@
       "approval_state": "candidate_visual_review",
       "fps": 2,
       "loop": true,
-      "pair_review_state": "pending",
+      "pair_review_state": "pass",
       "pose_ids": [
         "kingfisher.act.057.anger",
         "kingfisher.act.167.anger-speaking-beak"
@@ -2696,7 +2696,7 @@
         "pass",
         "pass",
         "pass",
-        "pending",
+        "pass",
         "pending",
         "pending",
         "pending",
@@ -3084,7 +3084,7 @@
     {
       "approval_state": "candidate_visual_review",
       "bytes": 28587210,
-      "path": "kingfisher_act_001_066_111_176_pair_review-eff13680445ca3b4.wjpose",
+      "path": "kingfisher_act_001_066_111_176_pair_review-becc65c145e59299.wjpose",
       "pose_count": 132,
       "pose_ids": [
         "kingfisher.act.001.neutral-front",
@@ -3222,7 +3222,7 @@
       ],
       "review_projection": true,
       "runtime_admitted": false,
-      "sha256": "eff13680445ca3b49e6ebcddb9919c8eea28d5803499eb2060e67b4c7706834b",
+      "sha256": "becc65c145e59299e6546fabbd93fb206561007149e5931bef3fad18c4373090",
       "shard_id": "kingfisher_act_001_066_111_176_pair_review",
       "source": "kingfisher_pair_specific_beak_review_v1"
     }
