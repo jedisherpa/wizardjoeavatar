@@ -168,7 +168,7 @@
     "mode": "opaque",
     "neutral_chroma_threshold": 36
   },
-  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/059-determination/169_ACT169_determination_speaking_beak_alpha.png",
+  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/059-determination/169_ACT169_determination_speaking_beak_candidate_pairwise_v16_thick-mandible.png",
   "speaking_sha256": "cb3a7943359e39d248cb130c07d7887e40e5ff6b26ab4de433526a13b958325c",
   "upper_beak_policy": "immutable_source_pixels",
   "upper_beak_polygon": [
