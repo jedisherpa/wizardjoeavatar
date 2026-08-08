@@ -27,7 +27,7 @@
   "resting_sha256": "aa61c03802696a424f9f4b99b6bb54d069ab671735080b6e2f1f65157ddb902b",
   "schema_version": 2,
   "silhouette_iou": 1.0,
-  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/044-excitement/154_ACT154_excitement_speaking_beak_alpha.png",
+  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/044-excitement/154_ACT154_excitement_speaking_beak_candidate_pairwise_v5_recentered-wide-mask.png",
   "speaking_registration_bbox": [
     288,
     97,

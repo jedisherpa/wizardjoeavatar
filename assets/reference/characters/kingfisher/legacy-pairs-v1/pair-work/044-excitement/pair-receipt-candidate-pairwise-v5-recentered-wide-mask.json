@@ -208,7 +208,7 @@
     "mode": "opaque",
     "neutral_chroma_threshold": 36
   },
-  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/044-excitement/154_ACT154_excitement_speaking_beak_alpha.png",
+  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/044-excitement/154_ACT154_excitement_speaking_beak_candidate_pairwise_v5_recentered-wide-mask.png",
   "speaking_sha256": "fcfe4be9e2bd5f02221396686dd2bd1dc7c69a2793a8da050c34439692bd64bd",
   "upper_beak_policy": "immutable_source_pixels",
   "upper_beak_polygon": [
