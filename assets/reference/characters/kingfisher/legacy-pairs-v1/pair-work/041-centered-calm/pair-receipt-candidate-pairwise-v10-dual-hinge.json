@@ -248,7 +248,7 @@
     "mode": "opaque",
     "neutral_chroma_threshold": 36
   },
-  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/041-centered-calm/151_ACT151_centered_calm_speaking_beak_alpha.png",
+  "speaking_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/041-centered-calm/151_ACT151_centered_calm_speaking_beak_candidate_pairwise_v10_dual-hinge.png",
   "speaking_sha256": "398b4a4c5ccf02cbe0486504dd178c08a6d26396fc65bde09b1504b7b0ddc84f",
   "upper_beak_policy": "immutable_source_pixels",
   "upper_beak_polygon": [

@@ -8,6 +8,7 @@ from pathlib import Path
 
 from PIL import Image, ImageDraw
 
+from tools.compose_kingfisher_pair_mandible_patch import beak_anatomy_metrics
 from tools.promote_kingfisher_pair_candidate import promote_candidate
 from tools.refine_kingfisher_pair_mandible import refine_pair_mandible
 
@@ -17,6 +18,65 @@ def sha256_path(path: Path) -> str:
 
 
 class KingfisherPairCandidateWorkflowTests(unittest.TestCase):
+    def test_frontal_beak_requires_both_mouth_corner_hinges(self) -> None:
+        common = {
+            "hinge": (20, 20),
+            "hinge_radius": 2,
+            "secondary_hinge": (40, 20),
+            "secondary_hinge_radius": 2,
+            "upper_beak_polygon": [
+                (20, 20),
+                (24, 12),
+                (36, 12),
+                (40, 20),
+                (36, 22),
+                (24, 22),
+            ],
+            "cavity_polygon": [
+                (22, 21),
+                (30, 27),
+                (38, 21),
+                (35, 25),
+                (30, 30),
+                (25, 25),
+            ],
+        }
+        aligned = beak_anatomy_metrics(
+            **common,
+            mandible_polygon=[
+                (20, 20),
+                (24, 25),
+                (30, 34),
+                (36, 25),
+                (40, 20),
+                (37, 27),
+                (30, 36),
+                (23, 27),
+            ],
+        )
+        self.assertEqual(aligned["schema_version"], 3)
+        self.assertEqual(aligned["mode"], "frontal")
+        self.assertTrue(aligned["passed"])
+        self.assertTrue(aligned["checks"]["mandible_secondary_anchored"])
+
+        detached = beak_anatomy_metrics(
+            **common,
+            mandible_polygon=[
+                (20, 20),
+                (24, 25),
+                (30, 34),
+                (32, 25),
+                (32, 20),
+                (30, 27),
+                (24, 32),
+                (22, 27),
+            ],
+        )
+        self.assertFalse(detached["passed"])
+        self.assertFalse(
+            detached["checks"]["mandible_secondary_anchored"]
+        )
+
     def make_candidate(self, root: Path) -> tuple[Path, Path, Path, Path]:
         resting_path = root / "resting.png"
         donor_path = root / "donor.png"

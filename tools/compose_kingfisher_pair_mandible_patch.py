@@ -29,6 +29,8 @@ def beak_anatomy_metrics(
     *,
     hinge: tuple[int, int],
     hinge_radius: int,
+    secondary_hinge: tuple[int, int] | None = None,
+    secondary_hinge_radius: int | None = None,
     upper_beak_polygon: list[tuple[int, int]],
     mandible_polygon: list[tuple[int, int]],
     cavity_polygon: list[tuple[int, int]],
@@ -36,25 +38,28 @@ def beak_anatomy_metrics(
 ) -> dict[str, object]:
     """Measure whether a lower beak is anchored to its canonical upper beak."""
 
-    def anchor_distance(polygon: list[tuple[int, int]]) -> float:
+    def anchor_distance(
+        polygon: list[tuple[int, int]],
+        anchor: tuple[int, int],
+    ) -> float:
         distances: list[float] = []
         for start, end in zip(polygon, polygon[1:] + polygon[:1]):
             dx = end[0] - start[0]
             dy = end[1] - start[1]
             if dx == 0 and dy == 0:
                 distances.append(
-                    math.hypot(hinge[0] - start[0], hinge[1] - start[1])
+                    math.hypot(anchor[0] - start[0], anchor[1] - start[1])
                 )
                 continue
             projection = (
-                (hinge[0] - start[0]) * dx
-                + (hinge[1] - start[1]) * dy
+                (anchor[0] - start[0]) * dx
+                + (anchor[1] - start[1]) * dy
             ) / (dx * dx + dy * dy)
             projection = min(1.0, max(0.0, projection))
             closest_x = start[0] + projection * dx
             closest_y = start[1] + projection * dy
             distances.append(
-                math.hypot(hinge[0] - closest_x, hinge[1] - closest_y)
+                math.hypot(anchor[0] - closest_x, anchor[1] - closest_y)
             )
         return min(distances)
 
@@ -63,10 +68,19 @@ def beak_anatomy_metrics(
         ys = [point[1] for point in polygon]
         return min(xs), min(ys), max(xs), max(ys)
 
+    effective_secondary_radius = secondary_hinge_radius or hinge_radius
+    analysis_hinge = (
+        (
+            round((hinge[0] + secondary_hinge[0]) / 2),
+            round((hinge[1] + secondary_hinge[1]) / 2),
+        )
+        if secondary_hinge is not None
+        else hinge
+    )
     upper_bounds = bounds(upper_beak_polygon)
     mandible_bounds = bounds(mandible_polygon)
-    upper_left_reach = hinge[0] - upper_bounds[0]
-    upper_right_reach = upper_bounds[2] - hinge[0]
+    upper_left_reach = analysis_hinge[0] - upper_bounds[0]
+    upper_right_reach = upper_bounds[2] - analysis_hinge[0]
     dominant_reach = max(upper_left_reach, upper_right_reach)
     opposite_reach = min(upper_left_reach, upper_right_reach)
     explicit_direction = direction_vector is not None
@@ -74,7 +88,10 @@ def beak_anatomy_metrics(
     # corner tilts the inferred axis toward that corner and can misclassify a
     # coherent wide-open mouth. Average the tip-side band instead.
     radial_distances = [
-        math.hypot(point[0] - hinge[0], point[1] - hinge[1])
+        math.hypot(
+            point[0] - analysis_hinge[0],
+            point[1] - analysis_hinge[1],
+        )
         for point in upper_beak_polygon
     ]
     maximum_radial_distance = max(radial_distances)
@@ -88,8 +105,8 @@ def beak_anatomy_metrics(
         sum(point[0] for point in tip_points) / len(tip_points),
         sum(point[1] for point in tip_points) / len(tip_points),
     )
-    inferred_x = upper_tip[0] - hinge[0]
-    inferred_y = upper_tip[1] - hinge[1]
+    inferred_x = upper_tip[0] - analysis_hinge[0]
+    inferred_y = upper_tip[1] - analysis_hinge[1]
     inferred_length = math.hypot(inferred_x, inferred_y)
     if inferred_length == 0:
         raise ValueError("upper beak polygon cannot collapse onto the hinge")
@@ -116,27 +133,46 @@ def beak_anatomy_metrics(
     else:
         axis_x = inferred_axis_x
         axis_y = inferred_axis_y
-    directional = explicit_direction or (
-        dominant_reach >= max(12, opposite_reach * 1.8)
+    directional = secondary_hinge is None and (
+        explicit_direction
+        or dominant_reach >= max(12, opposite_reach * 1.8)
     )
 
     checks = {
         "upper_beak_anchored": (
-            anchor_distance(upper_beak_polygon) <= hinge_radius + 4
+            anchor_distance(upper_beak_polygon, hinge) <= hinge_radius + 4
         ),
         "mandible_anchored": (
-            anchor_distance(mandible_polygon) <= hinge_radius + 4
+            anchor_distance(mandible_polygon, hinge) <= hinge_radius + 4
         ),
         "cavity_anchored": (
-            anchor_distance(cavity_polygon) <= max(24, hinge_radius + 6)
+            anchor_distance(cavity_polygon, hinge)
+            <= max(24, hinge_radius + 6)
         ),
     }
+    if secondary_hinge is not None:
+        checks.update(
+            {
+                "upper_beak_secondary_anchored": (
+                    anchor_distance(upper_beak_polygon, secondary_hinge)
+                    <= effective_secondary_radius + 4
+                ),
+                "mandible_secondary_anchored": (
+                    anchor_distance(mandible_polygon, secondary_hinge)
+                    <= effective_secondary_radius + 4
+                ),
+                "cavity_secondary_anchored": (
+                    anchor_distance(cavity_polygon, secondary_hinge)
+                    <= max(24, effective_secondary_radius + 6)
+                ),
+            }
+        )
     if direction_angle_degrees is not None:
         checks["direction_matches_upper_beak"] = (
             direction_angle_degrees <= 25.0
         )
     metrics: dict[str, object] = {
-        "schema_version": 2,
+        "schema_version": 3 if secondary_hinge is not None else 2,
         "mode": "directional" if directional else "frontal",
         "inferred_direction": [
             round(inferred_axis_x, 6),
@@ -144,27 +180,43 @@ def beak_anatomy_metrics(
         ],
         "inferred_upper_tip": [upper_tip[0], upper_tip[1]],
         "upper_anchor_distance": round(
-            anchor_distance(upper_beak_polygon), 3
+            anchor_distance(upper_beak_polygon, hinge), 3
         ),
         "mandible_anchor_distance": round(
-            anchor_distance(mandible_polygon), 3
+            anchor_distance(mandible_polygon, hinge), 3
         ),
         "cavity_anchor_distance": round(
-            anchor_distance(cavity_polygon), 3
+            anchor_distance(cavity_polygon, hinge), 3
         ),
     }
+    if secondary_hinge is not None:
+        metrics.update(
+            {
+                "secondary_hinge": list(secondary_hinge),
+                "secondary_hinge_radius": effective_secondary_radius,
+                "upper_secondary_anchor_distance": round(
+                    anchor_distance(upper_beak_polygon, secondary_hinge), 3
+                ),
+                "mandible_secondary_anchor_distance": round(
+                    anchor_distance(mandible_polygon, secondary_hinge), 3
+                ),
+                "cavity_secondary_anchor_distance": round(
+                    anchor_distance(cavity_polygon, secondary_hinge), 3
+                ),
+            }
+        )
 
     if directional:
         def projection(point: tuple[int, int]) -> float:
             return (
-                (point[0] - hinge[0]) * axis_x
-                + (point[1] - hinge[1]) * axis_y
+                (point[0] - analysis_hinge[0]) * axis_x
+                + (point[1] - analysis_hinge[1]) * axis_y
             )
 
         def perpendicular(point: tuple[int, int]) -> float:
             return (
-                -(point[0] - hinge[0]) * axis_y
-                + (point[1] - hinge[1]) * axis_x
+                -(point[0] - analysis_hinge[0]) * axis_y
+                + (point[1] - analysis_hinge[1]) * axis_x
             )
 
         mandible_forward_reach = max(map(projection, mandible_polygon))
@@ -426,8 +478,12 @@ def compose_mandible_patch(
     anatomy_upper_beak_polygon: list[tuple[int, int]] | None = None,
     anatomy_hinge: tuple[int, int] | None = None,
     anatomy_hinge_radius: int | None = None,
+    anatomy_secondary_hinge: tuple[int, int] | None = None,
+    anatomy_secondary_hinge_radius: int | None = None,
     anatomy_direction_vector: tuple[int, int] | None = None,
     hinge: tuple[int, int],
+    secondary_hinge: tuple[int, int] | None = None,
+    secondary_hinge_radius: int | None = None,
     residual_clear_polygon: list[tuple[int, int]] | None = None,
     hinge_radius: int = 6,
     minimum_mandible_height: int = 8,
@@ -490,8 +546,29 @@ def compose_mandible_patch(
         and 0 <= anatomy_hinge[1] < CANVAS_SIZE[1]
     ):
         raise ValueError("anatomy_hinge must remain inside the canvas")
+    if secondary_hinge is not None and not (
+        0 <= secondary_hinge[0] < CANVAS_SIZE[0]
+        and 0 <= secondary_hinge[1] < CANVAS_SIZE[1]
+    ):
+        raise ValueError("secondary_hinge must remain inside the canvas")
+    if anatomy_secondary_hinge is not None and not (
+        0 <= anatomy_secondary_hinge[0] < CANVAS_SIZE[0]
+        and 0 <= anatomy_secondary_hinge[1] < CANVAS_SIZE[1]
+    ):
+        raise ValueError(
+            "anatomy_secondary_hinge must remain inside the canvas"
+        )
     if anatomy_hinge_radius is not None and anatomy_hinge_radius < 1:
         raise ValueError("anatomy_hinge_radius must be positive")
+    if secondary_hinge_radius is not None and secondary_hinge_radius < 1:
+        raise ValueError("secondary_hinge_radius must be positive")
+    if (
+        anatomy_secondary_hinge_radius is not None
+        and anatomy_secondary_hinge_radius < 1
+    ):
+        raise ValueError(
+            "anatomy_secondary_hinge_radius must be positive"
+        )
     if hinge_radius < 1:
         raise ValueError("hinge radius must be positive")
     if minimum_mandible_height < 1:
@@ -609,15 +686,55 @@ def compose_mandible_patch(
     }
     if not components or not components[0].intersection(hinge_pixels):
         raise ValueError("source mandible does not connect to the hinge")
+    effective_secondary_hinge_radius = secondary_hinge_radius or hinge_radius
+    if secondary_hinge is not None:
+        secondary_hinge_pixels = {
+            (x, y)
+            for x in range(
+                max(0, secondary_hinge[0] - effective_secondary_hinge_radius),
+                min(
+                    CANVAS_SIZE[0],
+                    secondary_hinge[0] + effective_secondary_hinge_radius + 1,
+                ),
+            )
+            for y in range(
+                max(0, secondary_hinge[1] - effective_secondary_hinge_radius),
+                min(
+                    CANVAS_SIZE[1],
+                    secondary_hinge[1] + effective_secondary_hinge_radius + 1,
+                ),
+            )
+            if (x - secondary_hinge[0]) ** 2
+            + (y - secondary_hinge[1]) ** 2
+            <= effective_secondary_hinge_radius**2
+        }
+        if not components[0].intersection(secondary_hinge_pixels):
+            raise ValueError(
+                "source mandible does not connect to the secondary hinge"
+            )
 
     effective_anatomy_upper_beak_polygon = (
         anatomy_upper_beak_polygon or upper_beak_polygon
     )
     effective_anatomy_hinge = anatomy_hinge or hinge
     effective_anatomy_hinge_radius = anatomy_hinge_radius or hinge_radius
+    effective_anatomy_secondary_hinge = (
+        anatomy_secondary_hinge or secondary_hinge
+    )
+    effective_anatomy_secondary_hinge_radius = (
+        anatomy_secondary_hinge_radius
+        or secondary_hinge_radius
+        or hinge_radius
+    )
     anatomy = beak_anatomy_metrics(
         hinge=effective_anatomy_hinge,
         hinge_radius=effective_anatomy_hinge_radius,
+        secondary_hinge=effective_anatomy_secondary_hinge,
+        secondary_hinge_radius=(
+            effective_anatomy_secondary_hinge_radius
+            if effective_anatomy_secondary_hinge is not None
+            else None
+        ),
         upper_beak_polygon=effective_anatomy_upper_beak_polygon,
         mandible_polygon=mandible_polygon,
         cavity_polygon=cavity_polygon,
@@ -724,6 +841,16 @@ def compose_mandible_patch(
         ],
         "anatomy_hinge": list(effective_anatomy_hinge),
         "anatomy_hinge_radius": effective_anatomy_hinge_radius,
+        "anatomy_secondary_hinge": (
+            list(effective_anatomy_secondary_hinge)
+            if effective_anatomy_secondary_hinge is not None
+            else None
+        ),
+        "anatomy_secondary_hinge_radius": (
+            effective_anatomy_secondary_hinge_radius
+            if effective_anatomy_secondary_hinge is not None
+            else None
+        ),
         "anatomy_direction_vector": (
             list(anatomy_direction_vector)
             if anatomy_direction_vector is not None
@@ -736,6 +863,14 @@ def compose_mandible_patch(
         ),
         "hinge": list(hinge),
         "hinge_radius": hinge_radius,
+        "secondary_hinge": (
+            list(secondary_hinge) if secondary_hinge is not None else None
+        ),
+        "secondary_hinge_radius": (
+            effective_secondary_hinge_radius
+            if secondary_hinge is not None
+            else None
+        ),
         "minimum_mandible_height": minimum_mandible_height,
         "minimum_connected_ratio": minimum_connected_ratio,
         "cavity_source": cavity_source,
@@ -801,10 +936,14 @@ def main() -> None:
     )
     parser.add_argument("--anatomy-hinge", nargs=2, type=int)
     parser.add_argument("--anatomy-hinge-radius", type=int)
+    parser.add_argument("--anatomy-secondary-hinge", nargs=2, type=int)
+    parser.add_argument("--anatomy-secondary-hinge-radius", type=int)
     parser.add_argument("--anatomy-direction-vector", nargs=2, type=int)
     parser.add_argument("--residual-clear-polygon", nargs="+", type=int)
     parser.add_argument("--hinge", nargs=2, type=int, required=True)
     parser.add_argument("--hinge-radius", type=int, default=6)
+    parser.add_argument("--secondary-hinge", nargs=2, type=int)
+    parser.add_argument("--secondary-hinge-radius", type=int)
     parser.add_argument("--minimum-mandible-height", type=int, default=8)
     parser.add_argument("--minimum-connected-ratio", type=float, default=0.9)
     parser.add_argument(
@@ -890,6 +1029,17 @@ def main() -> None:
             else None
         ),
         anatomy_hinge_radius=args.anatomy_hinge_radius,
+        anatomy_secondary_hinge=(
+            (
+                args.anatomy_secondary_hinge[0],
+                args.anatomy_secondary_hinge[1],
+            )
+            if args.anatomy_secondary_hinge
+            else None
+        ),
+        anatomy_secondary_hinge_radius=(
+            args.anatomy_secondary_hinge_radius
+        ),
         anatomy_direction_vector=(
             (
                 args.anatomy_direction_vector[0],
@@ -908,6 +1058,12 @@ def main() -> None:
         ),
         hinge=(args.hinge[0], args.hinge[1]),
         hinge_radius=args.hinge_radius,
+        secondary_hinge=(
+            (args.secondary_hinge[0], args.secondary_hinge[1])
+            if args.secondary_hinge
+            else None
+        ),
+        secondary_hinge_radius=args.secondary_hinge_radius,
         minimum_mandible_height=args.minimum_mandible_height,
         minimum_connected_ratio=args.minimum_connected_ratio,
         cavity_fill=tuple(args.cavity_fill),
