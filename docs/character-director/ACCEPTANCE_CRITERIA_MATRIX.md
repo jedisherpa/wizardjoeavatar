@@ -3,6 +3,11 @@
 Audit snapshot: 2026-07-18. This matrix covers both current implementation
 worktrees:
 
+> Historical snapshot: do not use this file as the current release verdict.
+> The commit-bound closure status is maintained in
+> `RELEASE_GATE_CHECKPOINT_2026-08-08.md`; current character admission remains
+> fail-closed while the Kingfisher pairwise review is incomplete.
+
 - Python/Companion: `/Users/paul/Documents/WizardJoeAsci/worktrees/wizardjoe-character-director`
   on `codex/character-director` at code receipt commit `b7b6101c86b6abd04622935331684b76e3ce8591`.
 - PrismGT: `/Users/paul/Documents/WizardJoeAsci/worktrees/prism-character-director`

@@ -86,3 +86,21 @@ they exist in the selected Git tree. The candidate must also close any input
 reported by fast mode, provide the referenced Git LFS objects and upstream
 historical ref, complete both generated-library rebuilds, pass the complete
 suite within its bound, and pass all five real-server smoke checks.
+
+## Fast closure receipt
+
+Commit `8ece8d8323e2b88b8d1b19617eee52c57e601df7` passes the fast gate.
+The verifier inspected 18,638 tracked files, resolved 142 manifest references,
+and reported zero issues. The receipt was written as
+`/tmp/character-director-release-fast-8ece8d83.json` with SHA-256
+`adaaf500c1691ec9d2ee16dd33b14d158df19e3c3fbb0bbda1f6186187d1f185`.
+
+This checkpoint also fixes optional Kingfisher pair-review evidence handling.
+An empty `pairwise_full_size_review.evidence_path` now means that no optional
+evidence artifact has been declared for that pair; it is not interpreted as a
+repository path. Required audit, receipt, ledger, dictionary, and shard paths
+remain fail-closed.
+
+The fast receipt proves commit closure only. Full release remains open: the
+Kingfisher pairwise review is deliberately fail-closed, with Pair 1 awaiting
+direct visual approval and zero pair-review poses admitted to production.
