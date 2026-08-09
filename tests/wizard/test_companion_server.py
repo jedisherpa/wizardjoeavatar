@@ -331,6 +331,43 @@ class CompanionServerTests(unittest.IsolatedAsyncioTestCase):
         self.assertIn("state", payload)
         await app.state.frame_hub.stop()
 
+    async def test_capability_query_exposes_the_verified_active_manifest(self):
+        app = self.create_companion_app()
+        missing, _ = await asgi_request(
+            app,
+            "GET",
+            "/api/avatar/wizard/capabilities",
+            headers=LOOPBACK_HEADERS,
+        )
+        accepted, payload = await asgi_request(
+            app,
+            "GET",
+            "/api/avatar/wizard/capabilities",
+            headers=LOOPBACK_HEADERS
+            + (("authorization", "Bearer " + APP_TOKEN),),
+        )
+
+        self.assertEqual(missing, 401)
+        self.assertEqual(accepted, 200)
+        self.assertEqual(payload["schema_version"], 1)
+        self.assertEqual(payload["character_id"], "wizard-joe-v1")
+        self.assertTrue(payload["runtime_admitted"])
+        self.assertEqual(
+            payload["runtime_epochs"],
+            {"wizard_runtime_epoch": app.state.frame_hub.runtime_epoch},
+        )
+        manifest = payload["capability_manifest"]
+        self.assertEqual(
+            payload["capability_manifest_sha256"],
+            manifest["manifest_sha256"],
+        )
+        self.assertEqual(
+            manifest["counts"]["capability_count"],
+            len(manifest["capabilities"]),
+        )
+        self.assertNotIn(str(Path.cwd()), json.dumps(payload))
+        await app.state.frame_hub.stop()
+
     async def test_replay_export_hashes_the_retained_response_bytes(self):
         app = self.create_companion_app()
         status, headers, body = await asgi_raw_request(

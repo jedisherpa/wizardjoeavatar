@@ -651,6 +651,29 @@ def create_app(
             "capabilities": list(package.capabilities),
         }
 
+    @app.get("/api/avatar/wizard/capabilities")
+    async def capabilities():
+        performance = frame_hub.performance
+        manifest = performance.capability_manifest
+        if not isinstance(manifest, Mapping):
+            raise HTTPException(
+                status_code=503,
+                detail={"code": "capability_manifest_not_ready"},
+            )
+        return {
+            "schema_version": 1,
+            "character_id": performance.character_id,
+            "runtime_epochs": {
+                character_epoch_field: frame_hub.runtime_epoch,
+            },
+            "runtime_admitted": performance.runtime_admitted,
+            "persona_id": performance.persona_id,
+            "package_sha256": performance.package_digest,
+            "admission_sha256": performance.admission_sha256,
+            "capability_manifest_sha256": performance.manifest_digest,
+            "capability_manifest": manifest,
+        }
+
     @app.post("/api/avatar/wizard/media-session")
     async def media_session(request: FastAPIRequest):
         require_connector(request)
