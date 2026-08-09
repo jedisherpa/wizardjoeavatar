@@ -46,7 +46,10 @@ class ReferenceOverlayTests(unittest.TestCase):
         )
         settled = by_authored_frame[28].animation_truth
         self.assertEqual(settled.effect_intensity, 0.0)
-        self.assertIn("action_settled", settled.active_markers)
+        self.assertIn(
+            "action_settled",
+            {event.marker_id for event in settled.presentation_marker_events},
+        )
 
         onset = by_authored_frame[14]
         tip = onset.animation_truth.staff_tip_stage

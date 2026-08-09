@@ -133,6 +133,7 @@ class PerformanceScoreTests(unittest.TestCase):
         score = CompiledScoreLoader().load(fixture)
         self.assertEqual(score.compiled_score_id, "compiled:fixture-001")
         invalid = score_document()
+        invalid["unknown"] = True
         with self.assertRaises(ScoreValidationError) as error:
             CompiledScoreLoader().from_mapping(invalid)
         self.assertEqual(error.exception.code, "unknown_field")

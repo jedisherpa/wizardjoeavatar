@@ -16,6 +16,35 @@ Machine authority:
 
 `assets/reference/characters/kingfisher/legacy-pairs-v1/pair-review-ledger.json`
 
+## 2026-08-08 Corpus Reset
+
+The user rejected the current `kingfisher-all` playback because many open
+beaks remain visibly misaligned. That report supersedes every observable
+internal pass. The ledger reset to 64 `pending` pairs and 2 rear-facing
+`not_observable` pairs. Pair 1's first strict flip review then moved it to
+`needs_rebuild`, so the current queue is 63 `pending`, 1 `needs_rebuild`, 2
+`not_observable`, 0 visual passes, 0 user approvals, and 0 runtime admissions.
+Prior candidates, receipts, metrics, and review evidence remain in history;
+none is production authority.
+
+The corrected unit of work is one locked closed/open pair, not a contact sheet,
+beak donor batch, or geometry-only review:
+
+1. Start from the pair's exact canonical closed alpha.
+2. Author only that pose's open mate. The upper bill, head, eyes, throat, body,
+   scale, canvas, and registration are immutable.
+3. Reject human-mouth, tongue, triangular-mouth, duplicate-bill, detached-tip,
+   and off-axis results even when their masks and registration metrics pass.
+4. Capture the exact closed and open source frames at native size.
+5. Generate `closed-open-flip.gif` from those exact two sources.
+6. Inspect the flip and locked side-by-side viewer before recording a visual
+   disposition.
+7. Do not begin the next pair until the current pair has an explicit result.
+
+Pair 1's first replacement attempt was rejected immediately because it still
+read as a broad triangular mouth instead of one Kingfisher lower mandible
+opening beneath a fixed upper bill. This is the intended fail-closed behavior.
+
 ## Pair Gate
 
 For each ordinal:
@@ -58,7 +87,7 @@ passing does not substitute for visual review.
 - pair count: 66;
 - pairwise passes: 0;
 - pending: 63;
-- needs rebuild: 1 (pair 62);
+- needs rebuild: 1 (pair 1);
 - not observable: 2 (pairs 4 and 5);
 - user approved: 0;
 - runtime admitted: 0.
@@ -156,6 +185,10 @@ python3 tools/manage_kingfisher_pairwise_review.py capture \
   --ordinal 59 \
   --output-dir assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-059
 ```
+
+Each capture writes `closed-projector.png`, `open-projector.png`,
+`closed-open-flip.gif`, and `pair-evidence-receipt.json`. The receipt records
+the hashes of both source alphas and every review artifact.
 
 ## Viewer
 

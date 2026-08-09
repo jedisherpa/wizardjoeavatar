@@ -774,7 +774,13 @@ class RuntimeIdentityEndpointTests(unittest.IsolatedAsyncioTestCase):
         self.assertEqual(first["server"]["port"], 8875)
         self.assertEqual(
             first["render"],
-            {"cols": 80, "rows": 45, "fps": 24.0, "cell_bytes": 4},
+            {
+                "cols": 80,
+                "rows": 45,
+                "fps": 24.0,
+                "cell_bytes": 4,
+                "render_mode": "cells",
+            },
         )
         self.assertRegex(first["python"]["executable_sha256"], r"^[0-9a-f]{64}$")
         self.assertRegex(first["launch"]["argv_sha256"], r"^[0-9a-f]{64}$")

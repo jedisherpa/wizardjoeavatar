@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import os
 from datetime import datetime, timezone
@@ -20,6 +21,10 @@ PAIRWISE_STATES = {
 }
 PASSING_STATES = {"pass", "not_observable"}
 ROOT = Path(__file__).resolve().parents[1]
+
+
+def _sha256_path(path: Path) -> str:
+    return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
 def _write_json_atomic(path: Path, value: object) -> None:
@@ -312,6 +317,34 @@ def _render_evidence_frame(
         temporary.unlink(missing_ok=True)
 
 
+def _write_flip_review(
+    closed_path: Path,
+    open_path: Path,
+    output_path: Path,
+) -> None:
+    with Image.open(closed_path) as closed_source:
+        closed = closed_source.convert("RGB")
+    with Image.open(open_path) as open_source:
+        opened = open_source.convert("RGB")
+    if closed.size != opened.size:
+        raise ValueError("closed/open evidence frames must share one canvas")
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    temporary = output_path.with_name(f".{output_path.name}.{os.getpid()}.tmp")
+    try:
+        closed.save(
+            temporary,
+            format="GIF",
+            save_all=True,
+            append_images=[opened],
+            duration=[650, 650],
+            loop=0,
+            disposal=2,
+        )
+        temporary.replace(output_path)
+    finally:
+        temporary.unlink(missing_ok=True)
+
+
 def capture_pairwise_evidence(
     ledger_path: Path,
     *,
@@ -343,6 +376,8 @@ def capture_pairwise_evidence(
     state = str(review.get("state", "pending"))
     closed_output = output_dir / "closed-projector.png"
     open_output = output_dir / "open-projector.png"
+    flip_output = output_dir / "closed-open-flip.gif"
+    receipt_output = output_dir / "pair-evidence-receipt.json"
     prefix = f"{ordinal:02d} / 66 - {slug}"
     _render_evidence_frame(
         resting_path,
@@ -354,18 +389,32 @@ def capture_pairwise_evidence(
         open_output,
         label=f"{prefix} - open - {state}",
     )
-    return {
+    _write_flip_review(closed_output, open_output, flip_output)
+    receipt = {
         "schema_version": 1,
         "protocol_id": PROTOCOL_ID,
+        "visual_unit": "one_locked_closed_open_pair",
         "ordinal": ordinal,
         "slug": slug,
         "state": state,
         "closed_source": str(resting_path),
+        "closed_source_sha256": _sha256_path(resting_path),
         "open_source": str(speaking_path),
+        "open_source_sha256": _sha256_path(speaking_path),
         "closed_evidence": str(closed_output),
+        "closed_evidence_sha256": _sha256_path(closed_output),
         "open_evidence": str(open_output),
+        "open_evidence_sha256": _sha256_path(open_output),
+        "flip_evidence": str(flip_output),
+        "flip_evidence_sha256": _sha256_path(flip_output),
         "user_approval_implied": False,
         "runtime_admission_implied": False,
+    }
+    _write_json_atomic(receipt_output, receipt)
+    return {
+        **receipt,
+        "evidence_receipt": str(receipt_output),
+        "evidence_receipt_sha256": _sha256_path(receipt_output),
     }
 
 

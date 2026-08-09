@@ -15,7 +15,7 @@ METADATA_PATH = ROOT / "assets" / "reference" / "motion_sources" / "feelings_pyt
 GRAPH_PATH = ROOT / "wizard_avatar" / "definitions" / "reference_avatar_animation_graph_v2.json"
 LIBRARY_PATH = ROOT / "wizard_avatar" / "definitions" / "reference_avatar_pose_cells.json"
 EXPECTED_NEW_POSES = 50
-EXPECTED_TOTAL_POSES = 186
+EXPECTED_TOTAL_POSES = 193
 
 
 def stable_json(payload: Any) -> str:
@@ -174,14 +174,26 @@ def integrate(*, check_only: bool = False) -> dict[str, Any]:
         raise ValueError(
             f"Expected {EXPECTED_TOTAL_POSES} Python poses, found {len(manifest['poses'])}"
         )
-    if set(graph["pose_classification"]) != set(existing_by_id):
-        raise ValueError("Animation graph classification does not cover the complete Python pose catalog")
+    missing_classifications = set(existing_by_id).difference(
+        graph["pose_classification"]
+    )
+    if missing_classifications:
+        raise ValueError(
+            "Animation graph classification does not cover the complete "
+            "Python pose catalog: " + ", ".join(sorted(missing_classifications))
+        )
 
     if check_only:
         library = json.loads(LIBRARY_PATH.read_text(encoding="utf-8"))
         library_ids = {str(pose["id"]) for pose in library["poses"]}
-        if library_ids != set(existing_by_id):
-            raise ValueError("Generated Python cell library is out of sync with the expanded manifest")
+        if not set(existing_by_id).issubset(library_ids):
+            raise ValueError(
+                "Generated Python cell library does not cover the expanded manifest"
+            )
+        if library_ids != set(graph["pose_classification"]):
+            raise ValueError(
+                "Generated Python cell library is out of sync with graph classification"
+            )
     else:
         if added_ids:
             manifest["version"] = int(manifest.get("version", 1)) + len(added_ids)

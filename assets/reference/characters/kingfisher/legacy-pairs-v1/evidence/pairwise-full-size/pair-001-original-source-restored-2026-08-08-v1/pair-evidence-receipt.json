@@ -1,0 +1,20 @@
+{
+  "closed_evidence": "assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-001-original-source-restored-2026-08-08-v1/closed-projector.png",
+  "closed_evidence_sha256": "7fdbef48479adc407ef6d5f3fcbe73fd1c50965d8c67ac307a203a84fd636349",
+  "closed_source": "/Users/paul/Library/Caches/WizardJoe/git-repair-liana-normalization/assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/001-neutral-front/001_ACT001_neutral_front_resting_beak_alpha.png",
+  "closed_source_sha256": "551941ad0704b16098b4374d2c3c8ce30b6ae8680c0fd398ce6abaef2519ade9",
+  "flip_evidence": "assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-001-original-source-restored-2026-08-08-v1/closed-open-flip.gif",
+  "flip_evidence_sha256": "cd93941bba68d30253033512ab4199720870424ee606c228ac50cf53eceac171",
+  "open_evidence": "assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-001-original-source-restored-2026-08-08-v1/open-projector.png",
+  "open_evidence_sha256": "77acad1a875d7e773d84134e049263dfcf9be997ba7c269f0c3c0003d798605a",
+  "open_source": "/Users/paul/Library/Caches/WizardJoe/git-repair-liana-normalization/assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/001-neutral-front/111_ACT111_neutral_front_speaking_beak_alpha.png",
+  "open_source_sha256": "fce4d995abd80f2c964f7c83f9db741cfd3d498a4c26251cf632c5d72460475c",
+  "ordinal": 1,
+  "protocol_id": "kingfisher-full-size-pairwise-v1",
+  "runtime_admission_implied": false,
+  "schema_version": 1,
+  "slug": "neutral-front",
+  "state": "needs_rebuild",
+  "user_approval_implied": false,
+  "visual_unit": "one_locked_closed_open_pair"
+}

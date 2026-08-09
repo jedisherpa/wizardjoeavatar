@@ -1,0 +1,20 @@
+{
+  "closed_evidence": "assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-001-reset-2026-08-08-v1/closed-projector.png",
+  "closed_evidence_sha256": "7fdbef48479adc407ef6d5f3fcbe73fd1c50965d8c67ac307a203a84fd636349",
+  "closed_source": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/001-neutral-front/001_ACT001_neutral_front_resting_beak_alpha.png",
+  "closed_source_sha256": "551941ad0704b16098b4374d2c3c8ce30b6ae8680c0fd398ce6abaef2519ade9",
+  "flip_evidence": "assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-001-reset-2026-08-08-v1/closed-open-flip.gif",
+  "flip_evidence_sha256": "cc4ad3c28c25d708d10be86638e4664a6707c1c20396f1ac0c8f4d155ad6f0c7",
+  "open_evidence": "assets/reference/characters/kingfisher/legacy-pairs-v1/evidence/pairwise-full-size/pair-001-reset-2026-08-08-v1/open-projector.png",
+  "open_evidence_sha256": "d4f48486f059223055153d0daa3d7d55f41fd8a864195e6e6931086b3316d691",
+  "open_source": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-work/001-neutral-front/111_ACT111_neutral_front_speaking_beak_alpha.png",
+  "open_source_sha256": "b88e251cfb2e653f4fd909f25a43a5d15eaf0bb03ea6a0380bb7ac1fd679d40d",
+  "ordinal": 1,
+  "protocol_id": "kingfisher-full-size-pairwise-v1",
+  "runtime_admission_implied": false,
+  "schema_version": 1,
+  "slug": "neutral-front",
+  "state": "needs_rebuild",
+  "user_approval_implied": false,
+  "visual_unit": "one_locked_closed_open_pair"
+}

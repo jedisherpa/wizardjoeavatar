@@ -711,6 +711,59 @@ class ProceduralWizardFrameSource:
                 provisional_root_screen,
                 render_scale,
             )
+            base_root_screen = self._fit_reference_root_to_stage(
+                local,
+                root_anchor,
+                self._reference_root_screen(sx, sy, state, render_scale),
+                render_scale,
+                side_reserve=REFERENCE_CONTACT_ROOT_RESERVE_CELLS,
+            )
+            (
+                root_screen,
+                contact_generation,
+                contact_anchor,
+                contact_lock_stage,
+                contact_root_offset,
+            ) = self._resolve_contact_locked_root(
+                snapshot.presentation,
+                state,
+                pose_id,
+                root_anchor,
+                base_root_screen,
+                render_scale,
+            )
+            if contact_anchor is not None and contact_lock_stage is not None:
+                contact_anchor_local = reference_pose_anchor(
+                    pose_id,
+                    contact_anchor,
+                    self.pose_library_path,
+                )
+                render_scale = self._fit_reference_scale_to_contact_lock(
+                    local,
+                    contact_anchor_local,
+                    contact_lock_stage,
+                    render_scale,
+                )
+                root_screen = (
+                    contact_lock_stage[0]
+                    - (contact_anchor_local[0] - root_anchor[0])
+                    * render_scale
+                    * REFERENCE_POSE_HORIZONTAL_SCALE,
+                    contact_lock_stage[1]
+                    - (contact_anchor_local[1] - root_anchor[1])
+                    * render_scale,
+                )
+            else:
+                root_screen = self._fit_reference_root_to_stage(
+                    local,
+                    root_anchor,
+                    root_screen,
+                    render_scale,
+                )
+            contact_root_offset = (
+                root_screen[0] - base_root_screen[0],
+                root_screen[1] - base_root_screen[1],
+            )
             if (
                 state.animation_clip_id
                 in {"idle_front", "idle_back", "idle_left", "idle_right"}
@@ -775,59 +828,6 @@ class ProceduralWizardFrameSource:
                 else 0,
                 head_offset_y,
                 body_pixel_sha256,
-            )
-            base_root_screen = self._fit_reference_root_to_stage(
-                local,
-                root_anchor,
-                self._reference_root_screen(sx, sy, state, render_scale),
-                render_scale,
-                side_reserve=REFERENCE_CONTACT_ROOT_RESERVE_CELLS,
-            )
-            (
-                root_screen,
-                contact_generation,
-                contact_anchor,
-                contact_lock_stage,
-                contact_root_offset,
-            ) = self._resolve_contact_locked_root(
-                snapshot.presentation,
-                state,
-                pose_id,
-                root_anchor,
-                base_root_screen,
-                render_scale,
-            )
-            if contact_anchor is not None and contact_lock_stage is not None:
-                contact_anchor_local = reference_pose_anchor(
-                    pose_id,
-                    contact_anchor,
-                    self.pose_library_path,
-                )
-                render_scale = self._fit_reference_scale_to_contact_lock(
-                    local,
-                    contact_anchor_local,
-                    contact_lock_stage,
-                    render_scale,
-                )
-                root_screen = (
-                    contact_lock_stage[0]
-                    - (contact_anchor_local[0] - root_anchor[0])
-                    * render_scale
-                    * REFERENCE_POSE_HORIZONTAL_SCALE,
-                    contact_lock_stage[1]
-                    - (contact_anchor_local[1] - root_anchor[1])
-                    * render_scale,
-                )
-            else:
-                root_screen = self._fit_reference_root_to_stage(
-                    local,
-                    root_anchor,
-                    root_screen,
-                    render_scale,
-                )
-            contact_root_offset = (
-                root_screen[0] - base_root_screen[0],
-                root_screen[1] - base_root_screen[1],
             )
         else:
             stage = self._permissioned_stage(permission_world)
@@ -1421,7 +1421,12 @@ class ProceduralWizardFrameSource:
             elif pose_id in {"profile_left", "profile_right"}:
                 aperture = None
             else:
-                aperture = self._reference_eye_aperture(canvas, shifted_anchor)
+                aperture = self._reference_eye_aperture(
+                    canvas,
+                    shifted_anchor,
+                    allow_sparse=pose_id
+                    in {"walk_front_left", "walk_front_right"},
+                )
             if aperture is not None:
                 key = (aperture.left, aperture.top, aperture.width, aperture.height)
                 if key not in seen_apertures:

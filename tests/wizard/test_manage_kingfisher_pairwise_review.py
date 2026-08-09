@@ -289,6 +289,10 @@ class ManageKingfisherPairwiseReviewTests(unittest.TestCase):
             )
 
             self.assertEqual(receipt["state"], "pass")
+            self.assertEqual(
+                receipt["visual_unit"],
+                "one_locked_closed_open_pair",
+            )
             for name, expected in (
                 ("closed-projector.png", (10, 20, 30)),
                 ("open-projector.png", (40, 50, 60)),
@@ -299,6 +303,21 @@ class ManageKingfisherPairwiseReviewTests(unittest.TestCase):
                         evidence.convert("RGB").getpixel((4, 46)),
                         expected,
                     )
+            self.assertTrue((output_dir / "closed-open-flip.gif").is_file())
+            saved_receipt = json.loads(
+                (output_dir / "pair-evidence-receipt.json").read_text(
+                    encoding="utf-8"
+                )
+            )
+            self.assertEqual(saved_receipt["ordinal"], 1)
+            self.assertEqual(
+                saved_receipt["closed_source_sha256"],
+                receipt["closed_source_sha256"],
+            )
+            self.assertEqual(
+                saved_receipt["open_source_sha256"],
+                receipt["open_source_sha256"],
+            )
 
 
 if __name__ == "__main__":
