@@ -63,6 +63,13 @@ in an alternating flip, before the next pair begins.
 10. Re-enable the pair-review release phase only after all observable pairs
     pass and the user approves the complete playback.
 
+The deferred-candidate test at
+`tests/wizard/test_build_kingfisher_runtime_candidate.py` currently proves the
+incomplete review cannot build a runtime package and that the 110-pose index is
+the shipping boundary. When the program resumes, restore the positive candidate
+package and closed/open choreography assertions from commit `8121d1e0`, then
+make them pass only after the pair-review completion gate passes.
+
 ## Integrity check
 
 Run the freeze verifier while this program remains deferred:

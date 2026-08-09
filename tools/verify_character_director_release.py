@@ -49,6 +49,7 @@ DEFAULT_CONTRACT: dict[str, Any] = {
         "uv.lock",
         "docs/cartoon-animation-program/registry.json",
         "tools/verify_character_director_release.py",
+        "tools/run_python_test_shards.py",
         "wizard_avatar/definitions/character_registry.json",
         "wizard_avatar/definitions/wizard_joe_character_package.json",
         "assets/reference/characters/kingfisher/compiled/library-index.json",
@@ -955,7 +956,18 @@ def run_full_gate(
             ),
             (
                 "complete-python-suite",
-                [str(python), "-m", "unittest", "discover", "-s", "tests"],
+                [
+                    str(python),
+                    "tools/run_python_test_shards.py",
+                    "--tests-root",
+                    "tests",
+                    "--jobs",
+                    "4",
+                    "--timeout-per-shard",
+                    str(max(60.0, full_test_timeout - 60.0)),
+                    "--output",
+                    "/tmp/character-director-python-suite-shards.json",
+                ],
                 full_test_timeout,
             ),
         ]

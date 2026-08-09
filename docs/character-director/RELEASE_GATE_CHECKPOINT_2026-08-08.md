@@ -59,7 +59,7 @@ Full mode first requires fast closure, then:
 6. Verifies the Kingfisher additional-pose freeze while smoke-testing the
    existing 110-pose Kingfisher library.
 7. Runs the focused gate tests, Python-scope boundary, and complete Python
-   suite with explicit time limits.
+   suite in deterministic process shards with explicit time limits.
 8. Starts the real loopback server and requires health plus an `INIT` message
    and binary WebSocket frame for Wizard Joe, the existing Kingfisher library,
    Dragon, Robin, and Speech.
@@ -119,3 +119,10 @@ requires a machine-checked freeze of every additional pair: zero approvals,
 zero admissions, and zero integrations. The resumable handoff is
 `KINGFISHER_ADDITIONAL_POSES_HANDOFF_2026-08-08.md`. A new commit-bound full
 receipt is required for the revised release scope.
+
+The first revised-scope full run against commit
+`8121d1e04c67240fa441ce6c58d6adafd3216ca7` passed every build, the
+Kingfisher freeze, focused tests, and Python boundary. Its single-process full
+suite remained healthy but exceeded the one-hour bound. The gate now partitions
+the same complete test-file inventory deterministically across four isolated
+Python processes; no test file is omitted, and every shard must pass.
