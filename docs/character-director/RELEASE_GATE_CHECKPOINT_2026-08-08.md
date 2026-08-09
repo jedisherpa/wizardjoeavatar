@@ -56,12 +56,13 @@ Full mode first requires fast closure, then:
 3. Materializes the declared historical remote ref from the real upstream.
 4. Runs `uv sync --frozen` and probes all verifier imports.
 5. Rebuilds Dragon and Robin/Speech review libraries from tracked sources.
-6. Runs the Kingfisher pair-review verifier.
+6. Verifies the Kingfisher additional-pose freeze while smoke-testing the
+   existing 110-pose Kingfisher library.
 7. Runs the focused gate tests, Python-scope boundary, and complete Python
    suite with explicit time limits.
 8. Starts the real loopback server and requires health plus an `INIT` message
-   and binary WebSocket frame for Wizard Joe, Kingfisher, Dragon, Robin, and
-   Speech.
+   and binary WebSocket frame for Wizard Joe, the existing Kingfisher library,
+   Dragon, Robin, and Speech.
 9. Requires the isolated checkout to remain free of unignored generated files.
 
 Use `--offline` only when every declared remote-tracking ref already exists in
@@ -107,6 +108,14 @@ binds the manifest and package digests, runtime admission identity, and the
 active character-specific runtime epoch; it does not derive capabilities or
 admit review-only characters on request.
 
-The fast receipt proves commit closure only. Full release remains open: the
-Kingfisher pairwise review is deliberately fail-closed, with Pair 1 awaiting
-direct visual approval and zero pair-review poses admitted to production.
+The fast receipt proves commit closure only. The full receipt against commit
+`524651cc678c0daf9ec8a47ae714450da3c2ab73` passed isolated clone, Git LFS,
+frozen dependencies, import closure, Dragon rebuild, and Robin/Speech rebuild,
+then stopped at the deliberately fail-closed Kingfisher pairwise review.
+
+The user subsequently deferred the 66-pair Kingfisher additional-pose program.
+The release now keeps the existing 110-pose Kingfisher library in scope and
+requires a machine-checked freeze of every additional pair: zero approvals,
+zero admissions, and zero integrations. The resumable handoff is
+`KINGFISHER_ADDITIONAL_POSES_HANDOFF_2026-08-08.md`. A new commit-bound full
+receipt is required for the revised release scope.

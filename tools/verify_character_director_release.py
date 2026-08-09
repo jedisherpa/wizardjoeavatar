@@ -51,14 +51,18 @@ DEFAULT_CONTRACT: dict[str, Any] = {
         "tools/verify_character_director_release.py",
         "wizard_avatar/definitions/character_registry.json",
         "wizard_avatar/definitions/wizard_joe_character_package.json",
+        "assets/reference/characters/kingfisher/compiled/library-index.json",
         "assets/reference/characters/kingfisher/pair-review-compiled/library-index.json",
         "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-review-ledger.json",
+        "assets/reference/characters/kingfisher/README.md",
+        "docs/character-director/KINGFISHER_ADDITIONAL_POSES_HANDOFF_2026-08-08.md",
     ],
     "required_trees": [
         "assets/reference/characters/dragon/interim-v001",
         "assets/reference/characters/dragon/source",
         "assets/reference/characters/dragon/source-repair",
         "assets/reference/characters/kingfisher/legacy-pairs-v1",
+        "assets/reference/characters/kingfisher/compiled",
         "assets/reference/characters/kingfisher/pair-review-compiled",
         "assets/reference/characters/robin_speech/source",
         "tests",
@@ -75,10 +79,19 @@ DEFAULT_CONTRACT: dict[str, Any] = {
             "kind": "character_package",
         },
         {
-            "path": "assets/reference/characters/kingfisher/pair-review-compiled/library-index.json",
+            "path": "assets/reference/characters/kingfisher/compiled/library-index.json",
             "kind": "hd_review_library",
         },
     ],
+    "deferred_programs": {
+        "kingfisher_additional_pose_pairs": {
+            "status": "deferred_by_user",
+            "handoff_path": "docs/character-director/KINGFISHER_ADDITIONAL_POSES_HANDOFF_2026-08-08.md",
+            "ledger_path": "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-review-ledger.json",
+            "review_index_path": "assets/reference/characters/kingfisher/pair-review-compiled/library-index.json",
+            "shipping_index_path": "assets/reference/characters/kingfisher/compiled/library-index.json",
+        }
+    },
     "locked_distributions": ["numpy", "scipy"],
     "remote_refs": ["codex/python-asciline-avatar"],
 }
@@ -882,6 +895,7 @@ def run_full_gate(
                     "import tools.compose_kingfisher_pair_render; "
                     "import tools.import_robin_speech_alpha_library; "
                     "import tools.rebuild_kingfisher_legacy_pairs; "
+                    "import tools.verify_deferred_kingfisher_scope; "
                     "import tools.verify_kingfisher_pair_review"
                 ),
             ],
@@ -905,11 +919,13 @@ def run_full_gate(
                 checkout / "assets/reference/characters/robin_speech/compiled",
             ),
             (
-                "kingfisher-pair-review",
+                "kingfisher-additional-pose-freeze",
                 [
                     str(python),
-                    "tools/verify_kingfisher_pair_review.py",
-                    "--index",
+                    "tools/verify_deferred_kingfisher_scope.py",
+                    "--shipping-index",
+                    "assets/reference/characters/kingfisher/compiled/library-index.json",
+                    "--review-index",
                     "assets/reference/characters/kingfisher/pair-review-compiled/library-index.json",
                     "--ledger",
                     "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-review-ledger.json",
@@ -953,8 +969,8 @@ def run_full_gate(
         indexes: list[tuple[str, Path | None]] = [
             ("wizard-default", None),
             (
-                "kingfisher-review",
-                checkout / "assets/reference/characters/kingfisher/pair-review-compiled/library-index.json",
+                "kingfisher-existing-library",
+                checkout / "assets/reference/characters/kingfisher/compiled/library-index.json",
             ),
             (
                 "dragon-review",

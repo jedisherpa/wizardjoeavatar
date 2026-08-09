@@ -30,6 +30,7 @@ This package contains the full Codex implementation specification for a procedur
 - [Character Director clean-clone reproduction](character-director/CLEAN_CLONE_REPRODUCTION_2026-07-17.md)
 - [Character Director two-hour soak receipt](character-director/SOAK_2H_2026-07-17.md)
 - [Character Director high-level direction V1](character-director/HIGH_LEVEL_DIRECTION_V1.md)
+- [Kingfisher additional-pose deferred handoff](character-director/KINGFISHER_ADDITIONAL_POSES_HANDOFF_2026-08-08.md)
 - [Connected Prism performance evidence](../evidence/character-director/connected-e2e-2026-07-17/README.md)
 
 ## Sections
