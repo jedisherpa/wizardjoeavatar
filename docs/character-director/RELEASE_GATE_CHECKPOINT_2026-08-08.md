@@ -126,3 +126,18 @@ Kingfisher freeze, focused tests, and Python boundary. Its single-process full
 suite remained healthy but exceeded the one-hour bound. The gate now partitions
 the same complete test-file inventory deterministically across four isolated
 Python processes; no test file is omitted, and every shard must pass.
+
+## Final full receipt
+
+The complete full gate **passes** at pushed commit
+`0a237c6bd396716a65be160292be94cd68b3f4a7`.
+
+The disposable clone materialized Git LFS, installed the frozen environment,
+rebuilt Dragon and Robin/Speech, verified the Kingfisher hold, passed focused
+tests and the Python boundary, executed all 164 discovered Python test files
+across four passing shards, passed all five HTTP/WebSocket runtime smokes, and
+remained clean.
+
+The committed receipt and full details are in
+`FINAL_RELEASE_RECEIPT_2026-08-09.md`. Its full-gate JSON has SHA-256
+`a6900fec95ace677b413754650e6cdc5fb97ee4dc9867d001ff95ed5b6cd42d8`.

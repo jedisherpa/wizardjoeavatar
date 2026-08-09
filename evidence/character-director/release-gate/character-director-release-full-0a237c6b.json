@@ -1,0 +1,514 @@
+{
+  "closure": {
+    "declared_file_count": 13,
+    "declared_tree_count": 10,
+    "manifest_reference_count": 8,
+    "references": [
+      {
+        "expected_sha256": "sha256:e35d9fee572e8f984a25a3776e2be51e1920b2a09f568170f12ccd3f0851b387",
+        "key": "package",
+        "manifest": "wizard_avatar/definitions/character_registry.json",
+        "path": "wizard_avatar/definitions/wizard_joe_character_package.json"
+      },
+      {
+        "expected_sha256": null,
+        "key": "pose_library",
+        "manifest": "wizard_avatar/definitions/wizard_joe_character_package.json",
+        "path": "wizard_avatar/definitions/reference_avatar_pose_cells.json"
+      },
+      {
+        "expected_sha256": null,
+        "key": "animation_graph",
+        "manifest": "wizard_avatar/definitions/wizard_joe_character_package.json",
+        "path": "wizard_avatar/definitions/reference_avatar_animation_graph_v2.json"
+      },
+      {
+        "expected_sha256": "3734d96f326afb38e9851be760054fe1a6995ed3fce56eee95cd55d74c3502b7",
+        "key": "path",
+        "manifest": "assets/reference/characters/kingfisher/compiled/library-index.json",
+        "path": "assets/reference/characters/kingfisher/compiled/kingfisher-choreography-dictionary-v1.json"
+      },
+      {
+        "expected_sha256": "c2f6ebe183cd00abe2c22bcc32553180b2cf984fb0fdc61d5487b9b08f79e997",
+        "key": "path",
+        "manifest": "assets/reference/characters/kingfisher/compiled/library-index.json",
+        "path": "assets/reference/characters/kingfisher/compiled/kingfisher_act_001_025.wjpose"
+      },
+      {
+        "expected_sha256": "a5277bd7f7746cf777409c62944c565064c6b35cd00fb3e959c60e06188e9b00",
+        "key": "path",
+        "manifest": "assets/reference/characters/kingfisher/compiled/library-index.json",
+        "path": "assets/reference/characters/kingfisher/compiled/kingfisher_act_026_050.wjpose"
+      },
+      {
+        "expected_sha256": "2ff680acec502a52893fe7252b23bee762aa1d1f5580a49ea0ef66dbaae71e61",
+        "key": "path",
+        "manifest": "assets/reference/characters/kingfisher/compiled/library-index.json",
+        "path": "assets/reference/characters/kingfisher/compiled/kingfisher_act_051_066.wjpose"
+      },
+      {
+        "expected_sha256": "973263f01f5f1a22839b125a69e1031d199833d0d3eecf062b7505273dad322d",
+        "key": "path",
+        "manifest": "assets/reference/characters/kingfisher/compiled/library-index.json",
+        "path": "assets/reference/characters/kingfisher/compiled/kingfisher_act_067_110.wjpose"
+      }
+    ],
+    "tracked_file_count": 18644
+  },
+  "commands": [
+    {
+      "command": [
+        "git",
+        "clone",
+        "--no-hardlinks",
+        "--no-checkout",
+        "/Users/paul/Library/Caches/WizardJoe/git-repair-liana-normalization",
+        "/var/folders/xs/rl7wpblj6jj1bhw1dbf0jsmm0000gp/T/character-director-release-fdkeh0gi/checkout"
+      ],
+      "duration_seconds": 2.047,
+      "name": "clone-selected-commit",
+      "passed": true,
+      "returncode": 0,
+      "stderr_tail": "Cloning into '/var/folders/xs/rl7wpblj6jj1bhw1dbf0jsmm0000gp/T/character-director-release-fdkeh0gi/checkout'...\ndone.\n",
+      "stdout_tail": ""
+    },
+    {
+      "command": [
+        "git",
+        "checkout",
+        "--detach",
+        "0a237c6bd396716a65be160292be94cd68b3f4a7"
+      ],
+      "duration_seconds": 7.292,
+      "name": "checkout-selected-commit",
+      "passed": true,
+      "returncode": 0,
+      "stderr_tail": "HEAD is now at 0a237c6b Bound complete Python release verification\n",
+      "stdout_tail": ""
+    },
+    {
+      "command": [
+        "git",
+        "lfs",
+        "version"
+      ],
+      "duration_seconds": 0.031,
+      "name": "git-lfs-version",
+      "passed": true,
+      "returncode": 0,
+      "stderr_tail": "",
+      "stdout_tail": "git-lfs/3.7.1 (GitHub; darwin arm64; go 1.25.3)\n"
+    },
+    {
+      "command": [
+        "git",
+        "lfs",
+        "install",
+        "--local"
+      ],
+      "duration_seconds": 0.102,
+      "name": "git-lfs-install-local",
+      "passed": true,
+      "returncode": 0,
+      "stderr_tail": "",
+      "stdout_tail": "Updated Git hooks.\nGit LFS initialized.\n"
+    },
+    {
+      "command": [
+        "git",
+        "lfs",
+        "fetch",
+        "origin",
+        "0a237c6bd396716a65be160292be94cd68b3f4a7"
+      ],
+      "duration_seconds": 7.519,
+      "name": "lfs-fetch-selected-commit",
+      "passed": true,
+      "returncode": 0,
+      "stderr_tail": "Fetching reference 0a237c6bd396716a65be160292be94cd68b3f4a7\n",
+      "stdout_tail": ""
+    },
+    {
+      "command": [
+        "git",
+        "lfs",
+        "checkout"
+      ],
+      "duration_seconds": 18.353,
+      "name": "lfs-checkout-selected-commit",
+      "passed": true,
+      "returncode": 0,
+      "stderr_tail": "",
+      "stdout_tail": "Checking out LFS objects: 100% (2361/2361), 8.6 GB | 621 MB/s, done.\n"
+    },
+    {
+      "command": [
+        "/Users/paul/.local/bin/uv",
+        "sync",
+        "--frozen"
+      ],
+      "duration_seconds": 0.157,
+      "name": "frozen-environment",
+      "passed": true,
+      "returncode": 0,
+      "stderr_tail": "warning: `VIRTUAL_ENV=/Users/paul/Library/Caches/WizardJoe/git-repair-liana-normalization/.venv` does not match the project environment path `.venv` and will be ignored; use `--active` to target the active environment instead\nUsing CPython 3.13.13\nCreating virtual environment at: .venv\nInstalled 22 packages in 90ms\n + annotated-doc==0.0.4\n + annotated-types==0.7.0\n + anyio==4.14.2\n + click==8.4.2\n + fastapi==0.139.0\n + h11==0.16.0\n + httptools==0.8.0\n + idna==3.18\n + numpy==2.5.1\n + pillow==12.3.0\n + pydantic==2.13.4\n + pydantic-core==2.46.4\n + python-dotenv==1.2.2\n + pyyaml==6.0.3\n + scipy==1.18.0\n + starlette==1.3.1\n + typing-extensions==4.16.0\n + typing-inspection==0.4.2\n + uvicorn==0.51.0\n + uvloop==0.22.1\n + watchfiles==1.2.0\n + websockets==16.1\n",
+      "stdout_tail": ""
+    },
+    {
+      "command": [
+        "/var/folders/xs/rl7wpblj6jj1bhw1dbf0jsmm0000gp/T/character-director-release-fdkeh0gi/checkout/.venv/bin/python",
+        "-c",
+        "import numpy; import scipy; import tools.analyze_user_capture_frames; import tools.build_dragon_repair_review; import tools.compose_kingfisher_pair_render; import tools.import_robin_speech_alpha_library; import tools.rebuild_kingfisher_legacy_pairs; import tools.verify_deferred_kingfisher_scope; import tools.verify_kingfisher_pair_review"
+      ],
+      "duration_seconds": 9.506,
+      "name": "verifier-import-closure",
+      "passed": true,
+      "returncode": 0,
+      "stderr_tail": "",
+      "stdout_tail": ""
+    },
+    {
+      "command": [
+        "/var/folders/xs/rl7wpblj6jj1bhw1dbf0jsmm0000gp/T/character-director-release-fdkeh0gi/checkout/.venv/bin/python",
+        "tools/build_dragon_repair_review.py"
+      ],
+      "duration_seconds": 9.807,
+      "name": "dragon-review-build",
+      "passed": true,
+      "returncode": 0,
+      "stderr_tail": "",
+      "stdout_tail": "{\"missing_asset_ids\": [], \"output\": \"/private/var/folders/xs/rl7wpblj6jj1bhw1dbf0jsmm0000gp/T/character-director-release-fdkeh0gi/checkout/assets/reference/characters/dragon/compiled/repair-review\", \"pose_count\": 134, \"runtime_admitted\": false}\n"
+    },
+    {
+      "command": [
+        "/var/folders/xs/rl7wpblj6jj1bhw1dbf0jsmm0000gp/T/character-director-release-fdkeh0gi/checkout/.venv/bin/python",
+        "tools/import_robin_speech_alpha_library.py"
+      ],
+      "duration_seconds": 846.816,
+      "name": "robin-speech-review-build",
+      "passed": true,
+      "returncode": 0,
+      "stderr_tail": "",
+      "stdout_tail": "       },\n        {\n          \"approval_state\": \"candidate_visual_review\",\n          \"bytes\": 21473441,\n          \"path\": \"speech_act_026_050.wjpose\",\n          \"pose_count\": 25,\n          \"pose_ids\": [\n            \"speech.act.026.warm-welcome\",\n            \"speech.act.027.intimate-confidence\",\n            \"speech.act.028.strong-declaration\",\n            \"speech.act.029.confidential-whisper\",\n            \"speech.act.030.rhetorical-question\",\n            \"speech.act.031.compare-two-options\",\n            \"speech.act.032.cause-and-effect\",\n            \"speech.act.033.count-one\",\n            \"speech.act.034.count-two\",\n            \"speech.act.035.count-three\",\n            \"speech.act.036.protective-boundary\",\n            \"speech.act.037.gentle-reassurance\",\n            \"speech.act.038.invitation-to-follow\",\n            \"speech.act.039.describe-a-vast-scene\",\n            \"speech.act.040.describe-a-tiny-detail\",\n            \"speech.act.041.centered-calm\",\n            \"speech.act.042.joy\",\n            \"speech.act.043.full-laughter\",\n            \"speech.act.044.excitement\",\n            \"speech.act.045.curiosity\",\n            \"speech.act.046.confident-hero\",\n            \"speech.act.047.compassion\",\n            \"speech.act.048.surprise\",\n            \"speech.act.049.confusion\",\n            \"speech.act.050.skepticism\"\n          ],\n          \"review_projection\": true,\n          \"runtime_admitted\": false,\n          \"sha256\": \"1c7943902a604579f432d0e2aaed557fdd2cc5413c7be52f46bf71a660904ee6\",\n          \"shard_id\": \"speech_act_026_050\",\n          \"source\": \"robin_speech_shared_canvas_alpha_source\"\n        },\n        {\n          \"approval_state\": \"candidate_visual_review\",\n          \"bytes\": 20904315,\n          \"path\": \"speech_act_051_075.wjpose\",\n          \"pose_count\": 25,\n          \"pose_ids\": [\n            \"speech.act.051.concern\",\n            \"speech.act.052.sadness\",\n            \"speech.act.053.embarrassment\",\n            \"speech.act.054.shame\",\n            \"speech.act.055.fear\",\n            \"speech.act.056.anxiety\",\n            \"speech.act.057.anger\",\n            \"speech.act.058.frustration\",\n            \"speech.act.059.determination\",\n            \"speech.act.060.fatigue\",\n            \"speech.act.061.deep-contemplation\",\n            \"speech.act.062.sudden-idea\",\n            \"speech.act.063.read-a-panel\",\n            \"speech.act.064.study-a-diagram\",\n            \"speech.act.065.write-or-tap\",\n            \"speech.act.066.select-a-control\",\n            \"speech.act.067.drag-an-interface-item\",\n            \"speech.act.068.push-an-object\",\n            \"speech.act.069.pull-an-object\",\n            \"speech.act.070.lift-from-floor\",\n            \"speech.act.071.carry-light-object\",\n            \"speech.act.072.carry-heavy-object\",\n            \"speech.act.073.offer-an-object\",\n            \"speech.act.074.receive-an-object\",\n            \"speech.act.075.brace-against-surface\"\n          ],\n          \"review_projection\": true,\n          \"runtime_admitted\": false,\n          \"sha256\": \"19c8242077cf691e6d98907bb3938e795eab7c9e1131dc7d00efcae391f2b799\",\n          \"shard_id\": \"speech_act_051_075\",\n          \"source\": \"robin_speech_shared_canvas_alpha_source\"\n        },\n        {\n          \"approval_state\": \"candidate_visual_review\",\n          \"bytes\": 17881116,\n          \"path\": \"speech_act_076_100.wjpose\",\n          \"pose_count\": 25,\n          \"pose_ids\": [\n            \"speech.act.076.walk-left-contact\",\n            \"speech.act.077.walk-left-passing\",\n            \"speech.act.078.walk-right-contact\",\n            \"speech.act.079.walk-right-passing\",\n            \"speech.act.080.run-contact\",\n            \"speech.act.081.run-airborne-phase\",\n            \"speech.act.082.sprint-launch\",\n            \"speech.act.083.skid-stop\",\n            \"speech.act.084.pivot-turn\",\n            \"speech.act.085.athletic-crouch\",\n            \"speech.act.086.jump-anticipation\",\n            \"speech.act.087.jump-apex\",\n            \"speech.act.088.controlled-fall\",\n            \"speech.act.089.soft-landing\",\n            \"speech.act.090.hard-landing\",\n            \"speech.act.091.forward-roll-entry\",\n            \"speech.act.092.forward-flip-tuck\",\n            \"speech.act.093.backflip-layout\",\n            \"speech.act.094.victory-pose\",\n            \"speech.act.095.dance-groove-left\",\n            \"speech.act.096.dance-groove-right\",\n            \"speech.act.097.dance-spin\",\n            \"speech.act.098.comic-tiptoe\",\n            \"speech.act.099.off-balance-recovery\",\n            \"speech.act.100.full-body-camera-rush\"\n          ],\n          \"review_projection\": true,\n          \"runtime_admitted\": false,\n          \"sha256\": \"6f0fb0d0291b3cc1b3dac9d719f437d160f4fde3cbf7cc82fc718e4e262bc903\",\n          \"shard_id\": \"speech_act_076_100\",\n          \"source\": \"robin_speech_shared_canvas_alpha_source\"\n        },\n        {\n          \"approval_state\": \"candidate_visual_review\",\n          \"bytes\": 15597535,\n          \"path\": \"speech_fly_001_025.wjpose\",\n          \"pose_count\": 25,\n          \"pose_ids\": [\n            \"speech.fly.001.preflight-compression\",\n            \"speech.fly.002.wing-spread-launch\",\n            \"speech.fly.003.first-downstroke\",\n            \"speech.fly.004.feet-clear\",\n            \"speech.fly.005.rising-takeoff\",\n            \"speech.fly.006.vertical-takeoff\",\n            \"speech.fly.007.running-takeoff\",\n            \"speech.fly.008.ledge-launch\",\n            \"speech.fly.009.front-glide\",\n            \"speech.fly.010.three-quarter-left-glide\",\n            \"speech.fly.011.left-profile-glide\",\n            \"speech.fly.012.back-three-quarter-glide\",\n            \"speech.fly.013.three-quarter-right-glide\",\n            \"speech.fly.014.cruise-mid-downstroke\",\n            \"speech.fly.015.cruise-bottom-downstroke\",\n            \"speech.fly.016.cruise-recovery\",\n            \"speech.fly.017.cruise-top-upstroke\",\n            \"speech.fly.018.slow-sustained-flight\",\n            \"speech.fly.019.fast-streamlined-flight\",\n            \"speech.fly.020.relaxed-soar\",\n            \"speech.fly.021.moderate-climb\",\n            \"speech.fly.022.steep-climb\",\n            \"speech.fly.023.controlled-descent\",\n            \"speech.fly.024.steep-dive\",\n            \"speech.fly.025.dive-pullout\"\n          ],\n          \"review_projection\": true,\n          \"runtime_admitted\": false,\n          \"sha256\": \"0e78ed9871afbabfc066bfa1c7a6d6f068e836f3b1c4afea4f56db3ef1df9e1a\",\n          \"shard_id\": \"speech_fly_001_025\",\n          \"source\": \"robin_speech_shared_canvas_alpha_source\"\n        },\n        {\n          \"approval_state\": \"candidate_visual_review\",\n          \"bytes\": 14422268,\n          \"path\": \"speech_fly_026_050.wjpose\",\n          \"pose_count\": 25,\n          \"pose_ids\": [\n            \"speech.fly.026.mild-bank-left\",\n            \"speech.fly.027.hard-bank-left\",\n            \"speech.fly.028.mild-bank-right\",\n            \"speech.fly.029.hard-bank-right\",\n            \"speech.fly.030.yaw-turn-left\",\n            \"speech.fly.031.yaw-turn-right\",\n            \"speech.fly.032.aerial-roll-left\",\n            \"speech.fly.033.aerial-roll-right\",\n            \"speech.fly.034.aerial-brake\",\n            \"speech.fly.035.reverse-direction-pivot\",\n            \"speech.fly.036.resist-a-gust\",\n            \"speech.fly.037.turbulence-recovery\",\n            \"speech.fly.038.dodge-left\",\n            \"speech.fly.039.dodge-right\",\n            \"speech.fly.040.near-hover-station-keeping\",\n            \"speech.fly.041.look-down-while-flying\",\n            \"speech.fly.042.look-up-while-flying\",\n            \"speech.fly.043.speak-while-flying\",\n            \"speech.fly.044.listen-while-flying\",\n            \"speech.fly.045.joyful-flight\",\n            \"speech.fly.046.alarmed-flight\",\n            \"speech.fly.047.landing-approach\",\n            \"speech.fly.048.landing-flare\",\n            \"speech.fly.049.feet-contact\",\n            \"speech.fly.050.landing-settle\"\n          ],\n          \"review_projection\": true,\n          \"runtime_admitted\": false,\n          \"sha256\": \"3857cd87fedc88914766a4185a8e80de44c892328617822f4c07c42787768c06\",\n          \"shard_id\": \"speech_fly_026_050\",\n          \"source\": \"robin_speech_shared_canvas_alpha_source\"\n        },\n        {\n          \"approval_state\": \"candidate_visual_review\",\n          \"bytes\": 16113903,\n          \"path\": \"speech_int_001_025.wjpose\",\n          \"pose_count\": 25,\n          \"pose_ids\": [\n            \"speech.int.001.shared-arrival\",\n            \"speech.int.002.notice-each-other\",\n            \"speech.int.003.warm-greeting\",\n            \"speech.int.004.wingtip-handshake\",\n            \"speech.int.005.high-five\",\n            \"speech.int.006.shoulder-bump\",\n            \"speech.int.007.shared-laugh\",\n            \"speech.int.008.quiet-companionship\",\n            \"speech.int.009.share-a-secret\",\n            \"speech.int.010.pose-for-the-audience\",\n            \"speech.int.011.robinprism-speaks\",\n            \"speech.int.012.robinspeech-speaks\",\n            \"speech.int.013.robinspeech-asks\",\n            \"speech.int.014.robinprism-answers\",\n            \"speech.int.015.robinprism-asks\",\n            \"speech.int.016.robinspeech-answers\",\n            \"speech.int.017.rapid-exchange\",\n            \"speech.int.018.robinprism-interrupts-politely\",\n            \"speech.int.019.robinspeech-interrupts-politely\",\n            \"speech.int.020.prism-hands-off\",\n            \"speech.int.021.speech-hands-off\",\n            \"speech.int.022.mild-disagreement\",\n            \"speech.int.023.clarify-misunderstanding\",\n            \"speech.int.024.mutual-agreement\",\n            \"speech.int.025.simultaneous-realization\"\n          ],\n          \"review_projection\": true,\n          \"runtime_admitted\": false,\n          \"sha256\": \"bf628bd70082ae790d2ad1e4cb16b9b13f0fda703b444cef6480a2036e4e89c7\",\n          \"shard_id\": \"speech_int_001_025\",\n          \"source\": \"robin_speech_shared_canvas_alpha_source\"\n        },\n        {\n          \"approval_state\": \"candidate_visual_review\",\n          \"bytes\": 16427207,\n          \"path\": \"speech_int_026_050.wjpose\",\n          \"pose_count\": 25,\n          \"pose_ids\": [\n            \"speech.int.026.welcome-together\",\n            \"speech.int.027.present-screen-left\",\n            \"speech.int.028.present-screen-right\",\n            \"speech.int.029.compare-two-options\",\n            \"speech.int.030.point-to-shared-evidence\",\n            \"speech.int.031.prism-explains-diagram\",\n            \"speech.int.032.speech-narrates-demonstration\",\n            \"speech.int.033.count-steps-together\",\n            \"speech.int.034.formal-debate\",\n            \"speech.int.035.synthesize-viewpoints\",\n            \"speech.int.036.warn-together\",\n            \"speech.int.037.reassure-together\",\n            \"speech.int.038.invite-the-audience\",\n            \"speech.int.039.celebrate-conclusion\",\n            \"speech.int.040.bow-after-presentation\",\n            \"speech.int.041.prism-comforts-speech\",\n            \"speech.int.042.speech-comforts-prism\",\n            \"speech.int.043.shared-concern\",\n            \"speech.int.044.shared-surprise\",\n            \"speech.int.045.back-to-back-fear\",\n            \"speech.int.046.speech-de-escalates-prism\",\n            \"speech.int.047.prism-de-escalates-speech\",\n            \"speech.int.048.frustrated-together\",\n            \"speech.int.049.prism-apologizes\",\n            \"speech.int.050.speech-apologizes\"\n          ],\n          \"review_projection\": true,\n          \"runtime_admitted\": false,\n          \"sha256\": \"d1466c5eaedda906cf30c15ab919dea809a304f87d5d815f9ee63ca3c1d4f729\",\n          \"shard_id\": \"speech_int_026_050\",\n          \"source\": \"robin_speech_shared_canvas_alpha_source\"\n        }\n      ],\n      \"source_manifest_sha256\": \"2c33d3e078b6cb731c1269e5db35dcc0af419b232e59d4882e912a6ec4d124f9\"\n    }\n  },\n  \"review_projection\": true,\n  \"runtime_admitted\": false,\n  \"schema_version\": 1,\n  \"source_manifest\": {\n    \"path\": \"assets/reference/characters/robin_speech/source/source-manifest-v003.json\",\n    \"sha256\": \"2c33d3e078b6cb731c1269e5db35dcc0af419b232e59d4882e912a6ec4d124f9\"\n  }\n}\n"
+    },
+    {
+      "command": [
+        "/var/folders/xs/rl7wpblj6jj1bhw1dbf0jsmm0000gp/T/character-director-release-fdkeh0gi/checkout/.venv/bin/python",
+        "tools/verify_deferred_kingfisher_scope.py",
+        "--shipping-index",
+        "assets/reference/characters/kingfisher/compiled/library-index.json",
+        "--review-index",
+        "assets/reference/characters/kingfisher/pair-review-compiled/library-index.json",
+        "--ledger",
+        "assets/reference/characters/kingfisher/legacy-pairs-v1/pair-review-ledger.json"
+      ],
+      "duration_seconds": 0.028,
+      "name": "kingfisher-additional-pose-freeze",
+      "passed": true,
+      "returncode": 0,
+      "stderr_tail": "",
+      "stdout_tail": "{\n  \"errors\": [],\n  \"gate\": \"kingfisher-additional-pose-freeze\",\n  \"passed\": true,\n  \"schema_version\": 1\n}\n"
+    },
+    {
+      "command": [
+        "/var/folders/xs/rl7wpblj6jj1bhw1dbf0jsmm0000gp/T/character-director-release-fdkeh0gi/checkout/.venv/bin/python",
+        "-m",
+        "unittest",
+        "tests.wizard.test_character_director_release_gate"
+      ],
+      "duration_seconds": 1.349,
+      "name": "release-gate-focused-tests",
+      "passed": true,
+      "returncode": 0,
+      "stderr_tail": ".........\n----------------------------------------------------------------------\nRan 9 tests in 1.291s\n\nOK\n",
+      "stdout_tail": ""
+    },
+    {
+      "command": [
+        "/var/folders/xs/rl7wpblj6jj1bhw1dbf0jsmm0000gp/T/character-director-release-fdkeh0gi/checkout/.venv/bin/python",
+        "tools/validate_python_scope.py",
+        "."
+      ],
+      "duration_seconds": 0.242,
+      "name": "python-scope-boundary",
+      "passed": true,
+      "returncode": 0,
+      "stderr_tail": "",
+      "stdout_tail": "{\n  \"ok\": true,\n  \"root\": \"/private/var/folders/xs/rl7wpblj6jj1bhw1dbf0jsmm0000gp/T/character-director-release-fdkeh0gi/checkout\",\n  \"scanned_file_count\": 81,\n  \"violation_count\": 0,\n  \"violations\": []\n}\n"
+    },
+    {
+      "command": [
+        "/var/folders/xs/rl7wpblj6jj1bhw1dbf0jsmm0000gp/T/character-director-release-fdkeh0gi/checkout/.venv/bin/python",
+        "tools/run_python_test_shards.py",
+        "--tests-root",
+        "tests",
+        "--jobs",
+        "4",
+        "--timeout-per-shard",
+        "3540.0",
+        "--output",
+        "/tmp/character-director-python-suite-shards.json"
+      ],
+      "duration_seconds": 3146.876,
+      "name": "complete-python-suite",
+      "passed": true,
+      "returncode": 0,
+      "stderr_tail": "",
+      "stdout_tail": "{\"executed_file_count\": 164, \"executed_shards\": [1, 2, 3, 4], \"gate\": \"complete-python-suite-sharded\", \"output\": \"/private/tmp/character-director-python-suite-shards.json\", \"passed\": true, \"test_file_count\": 164}\n"
+    }
+  ],
+  "commit": "0a237c6bd396716a65be160292be94cd68b3f4a7",
+  "contract_id": "character-director-python-release-v1",
+  "finished_at": "2026-08-09T08:27:41.697115Z",
+  "gate": "character-director-release",
+  "generated_libraries": {
+    "dragon-review-build": {
+      "build-receipt.json": "8523067cb889c70d8cd191d03b097aebd9c1fd793a1b7208eb9d1a48ebbc1aee",
+      "dragon_repair_01_can001_act013.wjpose": "070f11832e53a1ca83dd89f61c35df22078d8756e8bcae57eb200a9e87d77355",
+      "dragon_repair_02_act014_act037.wjpose": "0b3032067f93a7cd0df01dd618cfece9ef984090087267663411635e1435fc37",
+      "dragon_repair_03_act038_act061.wjpose": "dd22d562274f0ad2cfa79db7230876a75c68a599e2a4cb6722a100bb25118bfc",
+      "dragon_repair_04_act062_act085.wjpose": "fa67acb71083fc3a1df7dcc9a8a609e908937c3a5218a9868f90a3dd17c33027",
+      "dragon_repair_05_act086_act109.wjpose": "89d9d45fac18650dd8d71522d1139a1b1a349302b3194037c7644f212d4a414d",
+      "dragon_repair_06_act110_act123.wjpose": "82738010ef011717baeef3b6d6fad2a715e6c273fd91d84f4c20ac64e427e8f4",
+      "library-index.json": "301ce8dfda7547a48f8fe85960bd79cfb18453374f20e07bbb4faeba042f24ac",
+      "repair-review-acceptance-audit.json": "aaa2083e691fc4ca8526c678969762c67e25e63ae5e0b842e7b5fe2d0c3888fa"
+    },
+    "robin-speech-review-build": {
+      "build-receipt.json": "96ba11a9a8da2d1012fe9603385401683ef5e746102bb7d0c30815e457b23f80",
+      "robin/build-receipt.json": "8ff4bdff97ee2dc1959608cbfb88f83400ad1dd7f59fd858ac5630d6559e30db",
+      "robin/candidate-acceptance-audit.json": "3ff1a337eeacc3448e5176d9581398a9db99d729a4f2770496032f1ad1a6f030",
+      "robin/library-index.json": "1924a28a486971146df522ee1bdb4e0488d9d27eaa1ab0b3b8b928db6bf8d15c",
+      "robin/robin_act_001_025.wjpose": "63e46c1e0c49fc089185303a6c4e1b5cc07e3a7fedf7480a6f9d502cd40bf864",
+      "robin/robin_act_026_050.wjpose": "2764370a3407a68713a855659bc87a4095c96ec71f94995e6d0d4d6ca0ad210e",
+      "robin/robin_act_051_075.wjpose": "14da28ba6b7c77aa31d7f58096b8cdd949dfd2a06a442e8450bef529167922bb",
+      "robin/robin_act_076_100.wjpose": "f955750061d680b702998e4c827f24d4a3b7e59d16d8a26f26988d91c859a18a",
+      "robin/robin_fly_001_025.wjpose": "2bc8b113bdb8a3663eb74740ab3f6ce79e7d34146a542073b88e8608007b934d",
+      "robin/robin_fly_026_050.wjpose": "b55e27efef8a1fc2be0e9ce145d83579b9c240bb6849187730954f96df3e768d",
+      "robin/robin_int_001_025.wjpose": "028a3a538295a077eed6f6025010822daee6166322bd612d7cca4bfb7309c5c8",
+      "robin/robin_int_026_050.wjpose": "aa7573453832be7f469b51e1972d1716061ac3c1b3f6c7659db8d6a44703fa4b",
+      "speech/build-receipt.json": "ea20b828eb6adacedd75e216dcee202f13592e9279ba24634fc603e3c08ecbb7",
+      "speech/candidate-acceptance-audit.json": "31c65258ef2be947f3e0c3d233c29178ccfa3897c5f02c463f1cb53c8bfc5d1a",
+      "speech/library-index.json": "b0d93a1a019bd77671868616f800ed242a5e6e9e22539e82018f081ce6bd34ce",
+      "speech/speech_act_001_025.wjpose": "3c184e60724f107cd23dcce3fd27ccf248af431356b154ee43d32c05ef28ac43",
+      "speech/speech_act_026_050.wjpose": "1c7943902a604579f432d0e2aaed557fdd2cc5413c7be52f46bf71a660904ee6",
+      "speech/speech_act_051_075.wjpose": "19c8242077cf691e6d98907bb3938e795eab7c9e1131dc7d00efcae391f2b799",
+      "speech/speech_act_076_100.wjpose": "6f0fb0d0291b3cc1b3dac9d719f437d160f4fde3cbf7cc82fc718e4e262bc903",
+      "speech/speech_fly_001_025.wjpose": "0e78ed9871afbabfc066bfa1c7a6d6f068e836f3b1c4afea4f56db3ef1df9e1a",
+      "speech/speech_fly_026_050.wjpose": "3857cd87fedc88914766a4185a8e80de44c892328617822f4c07c42787768c06",
+      "speech/speech_int_001_025.wjpose": "bf628bd70082ae790d2ad1e4cb16b9b13f0fda703b444cef6480a2036e4e89c7",
+      "speech/speech_int_026_050.wjpose": "d1466c5eaedda906cf30c15ab919dea809a304f87d5d815f9ee63ca3c1d4f729"
+    }
+  },
+  "isolated_checkout": {
+    "commit": "0a237c6bd396716a65be160292be94cd68b3f4a7",
+    "finally_clean": true,
+    "initially_clean": true,
+    "path": "/var/folders/xs/rl7wpblj6jj1bhw1dbf0jsmm0000gp/T/character-director-release-fdkeh0gi/checkout"
+  },
+  "issues": [],
+  "mode": "full",
+  "passed": true,
+  "remote_refs": [
+    {
+      "branch": "codex/python-asciline-avatar",
+      "command": [
+        "git",
+        "fetch",
+        "--no-tags",
+        "https://github.com/jedisherpa/wizardjoeavatar.git",
+        "refs/heads/codex/python-asciline-avatar:refs/remotes/origin/codex/python-asciline-avatar"
+      ],
+      "duration_seconds": 0.537,
+      "name": "fetch-ref-codex/python-asciline-avatar",
+      "passed": true,
+      "returncode": 0,
+      "stderr_tail": "From https://github.com/jedisherpa/wizardjoeavatar\n * [new branch]        codex/python-asciline-avatar -> origin/codex/python-asciline-avatar\n",
+      "stdout_tail": ""
+    }
+  ],
+  "repository": "/Users/paul/Library/Caches/WizardJoe/git-repair-liana-normalization",
+  "revision": "0a237c6bd396716a65be160292be94cd68b3f4a7",
+  "runtime_smokes": [
+    {
+      "duration_seconds": 7.085,
+      "error": null,
+      "health": {
+        "character_id": "wizard-joe-v1",
+        "connector_enabled": false,
+        "frame_hub_error_code": null,
+        "frame_hub_running": false,
+        "hd_review_projection": true,
+        "hd_runtime_admitted": false,
+        "pid": 48488,
+        "protocol_version": 1,
+        "runtime_epoch": "wizard-52d6d97d841a4f0ebd57d42e45086464",
+        "schema_version": 1,
+        "started_at_monotonic_ms": 40580300,
+        "status": "ready"
+      },
+      "name": "wizard-default",
+      "passed": true,
+      "review_index": null,
+      "server_log_tail": "",
+      "websocket": {
+        "command": [
+          "/var/folders/xs/rl7wpblj6jj1bhw1dbf0jsmm0000gp/T/character-director-release-fdkeh0gi/checkout/.venv/bin/python",
+          "-c",
+          "from websockets.sync.client import connect; w=connect('ws://127.0.0.1:50975/ws/avatar/wizard?codec=adaptive', open_timeout=5); i=w.recv(timeout=5); f=w.recv(timeout=10); assert isinstance(i,str) and i.startswith('INIT:'); assert isinstance(f,bytes) and len(f)>0; w.close()"
+        ],
+        "duration_seconds": 0.135,
+        "name": "wizard-default-websocket",
+        "passed": true,
+        "returncode": 0,
+        "stderr_tail": "",
+        "stdout_tail": ""
+      }
+    },
+    {
+      "duration_seconds": 5.292,
+      "error": null,
+      "health": {
+        "character_id": "wizard-joe-v1",
+        "connector_enabled": false,
+        "frame_hub_error_code": null,
+        "frame_hub_running": false,
+        "hd_review_projection": true,
+        "hd_runtime_admitted": false,
+        "pid": 48499,
+        "protocol_version": 1,
+        "runtime_epoch": "wizard-1bf68922303c4123a57ee4b38571c026",
+        "schema_version": 1,
+        "started_at_monotonic_ms": 40586912,
+        "status": "ready"
+      },
+      "name": "kingfisher-existing-library",
+      "passed": true,
+      "review_index": "/var/folders/xs/rl7wpblj6jj1bhw1dbf0jsmm0000gp/T/character-director-release-fdkeh0gi/checkout/assets/reference/characters/kingfisher/compiled/library-index.json",
+      "server_log_tail": "",
+      "websocket": {
+        "command": [
+          "/var/folders/xs/rl7wpblj6jj1bhw1dbf0jsmm0000gp/T/character-director-release-fdkeh0gi/checkout/.venv/bin/python",
+          "-c",
+          "from websockets.sync.client import connect; w=connect('ws://127.0.0.1:51043/ws/avatar/wizard?codec=adaptive', open_timeout=5); i=w.recv(timeout=5); f=w.recv(timeout=10); assert isinstance(i,str) and i.startswith('INIT:'); assert isinstance(f,bytes) and len(f)>0; w.close()"
+        ],
+        "duration_seconds": 0.115,
+        "name": "kingfisher-existing-library-websocket",
+        "passed": true,
+        "returncode": 0,
+        "stderr_tail": "",
+        "stdout_tail": ""
+      }
+    },
+    {
+      "duration_seconds": 5.431,
+      "error": null,
+      "health": {
+        "character_id": "wizard-joe-v1",
+        "connector_enabled": false,
+        "frame_hub_error_code": null,
+        "frame_hub_running": false,
+        "hd_review_projection": true,
+        "hd_runtime_admitted": false,
+        "pid": 48508,
+        "protocol_version": 1,
+        "runtime_epoch": "wizard-ebf53cee171340beb782996282afd639",
+        "schema_version": 1,
+        "started_at_monotonic_ms": 40592249,
+        "status": "ready"
+      },
+      "name": "dragon-review",
+      "passed": true,
+      "review_index": "/var/folders/xs/rl7wpblj6jj1bhw1dbf0jsmm0000gp/T/character-director-release-fdkeh0gi/checkout/assets/reference/characters/dragon/compiled/repair-review/library-index.json",
+      "server_log_tail": "",
+      "websocket": {
+        "command": [
+          "/var/folders/xs/rl7wpblj6jj1bhw1dbf0jsmm0000gp/T/character-director-release-fdkeh0gi/checkout/.venv/bin/python",
+          "-c",
+          "from websockets.sync.client import connect; w=connect('ws://127.0.0.1:51098/ws/avatar/wizard?codec=adaptive', open_timeout=5); i=w.recv(timeout=5); f=w.recv(timeout=10); assert isinstance(i,str) and i.startswith('INIT:'); assert isinstance(f,bytes) and len(f)>0; w.close()"
+        ],
+        "duration_seconds": 0.116,
+        "name": "dragon-review-websocket",
+        "passed": true,
+        "returncode": 0,
+        "stderr_tail": "",
+        "stdout_tail": ""
+      }
+    },
+    {
+      "duration_seconds": 5.393,
+      "error": null,
+      "health": {
+        "character_id": "wizard-joe-v1",
+        "connector_enabled": false,
+        "frame_hub_error_code": null,
+        "frame_hub_running": false,
+        "hd_review_projection": true,
+        "hd_runtime_admitted": false,
+        "pid": 48520,
+        "protocol_version": 1,
+        "runtime_epoch": "wizard-7d6efad5b57f4f679f0c60d53c527cc4",
+        "schema_version": 1,
+        "started_at_monotonic_ms": 40597650,
+        "status": "ready"
+      },
+      "name": "robin-review",
+      "passed": true,
+      "review_index": "/var/folders/xs/rl7wpblj6jj1bhw1dbf0jsmm0000gp/T/character-director-release-fdkeh0gi/checkout/assets/reference/characters/robin_speech/compiled/robin/library-index.json",
+      "server_log_tail": "",
+      "websocket": {
+        "command": [
+          "/var/folders/xs/rl7wpblj6jj1bhw1dbf0jsmm0000gp/T/character-director-release-fdkeh0gi/checkout/.venv/bin/python",
+          "-c",
+          "from websockets.sync.client import connect; w=connect('ws://127.0.0.1:51150/ws/avatar/wizard?codec=adaptive', open_timeout=5); i=w.recv(timeout=5); f=w.recv(timeout=10); assert isinstance(i,str) and i.startswith('INIT:'); assert isinstance(f,bytes) and len(f)>0; w.close()"
+        ],
+        "duration_seconds": 0.122,
+        "name": "robin-review-websocket",
+        "passed": true,
+        "returncode": 0,
+        "stderr_tail": "",
+        "stdout_tail": ""
+      }
+    },
+    {
+      "duration_seconds": 5.455,
+      "error": null,
+      "health": {
+        "character_id": "wizard-joe-v1",
+        "connector_enabled": false,
+        "frame_hub_error_code": null,
+        "frame_hub_running": false,
+        "hd_review_projection": true,
+        "hd_runtime_admitted": false,
+        "pid": 48530,
+        "protocol_version": 1,
+        "runtime_epoch": "wizard-7d9ae6207f884f66bd7c9e180be2e8f4",
+        "schema_version": 1,
+        "started_at_monotonic_ms": 40603086,
+        "status": "ready"
+      },
+      "name": "speech-review",
+      "passed": true,
+      "review_index": "/var/folders/xs/rl7wpblj6jj1bhw1dbf0jsmm0000gp/T/character-director-release-fdkeh0gi/checkout/assets/reference/characters/robin_speech/compiled/speech/library-index.json",
+      "server_log_tail": "",
+      "websocket": {
+        "command": [
+          "/var/folders/xs/rl7wpblj6jj1bhw1dbf0jsmm0000gp/T/character-director-release-fdkeh0gi/checkout/.venv/bin/python",
+          "-c",
+          "from websockets.sync.client import connect; w=connect('ws://127.0.0.1:51202/ws/avatar/wizard?codec=adaptive', open_timeout=5); i=w.recv(timeout=5); f=w.recv(timeout=10); assert isinstance(i,str) and i.startswith('INIT:'); assert isinstance(f,bytes) and len(f)>0; w.close()"
+        ],
+        "duration_seconds": 0.109,
+        "name": "speech-review-websocket",
+        "passed": true,
+        "returncode": 0,
+        "stderr_tail": "",
+        "stdout_tail": ""
+      }
+    }
+  ],
+  "schema_version": 1,
+  "source_worktree": {
+    "dirty": true,
+    "entry_count": 366
+  },
+  "started_at": "2026-08-09T07:19:41.094845Z"
+}

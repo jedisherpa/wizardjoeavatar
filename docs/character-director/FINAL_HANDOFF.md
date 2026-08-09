@@ -2,6 +2,21 @@
 
 Date: 2026-07-17
 
+## 2026-08-09 Release Closure Addendum
+
+The Python release has advanced beyond the historical candidate documented
+below. Pushed commit `0a237c6bd396716a65be160292be94cd68b3f4a7` passes the
+complete clean-clone gate, all 164 Python test files, and five real
+HTTP/WebSocket runtime smokes. The user placed the Kingfisher 66-pair
+additional-pose program on hold; the existing 110-pose Kingfisher library
+remains in the release and the added pairs remain machine-verified as zero
+approved, zero admitted, and zero integrated.
+
+The authoritative current receipt is
+`FINAL_RELEASE_RECEIPT_2026-08-09.md`. The historical sections below remain as
+the audit trail for the earlier multi-repository implementation and its
+explicit evidence limits.
+
 ## 1. Executive Summary
 
 The existing ASCILINE Python Wizard Joe runtime now contains a governed,
@@ -293,12 +308,12 @@ coexistence verification, and shutdown.
 
 ## 31. Final Branch And Commit
 
-- Python implementation: `codex/character-director` at
-  `84b95fb8aaa4040b9c967c0ef64367ec9139cd26`.
+- Python release candidate: `codex/character-director` at
+  `0a237c6bd396716a65be160292be94cd68b3f4a7`.
 - Prism implementation: `codex/character-director-prism` at
   `0ead02c630fd3e9d9a69d008b19829e82846a7c5`.
-- This handoff is committed as a follow-up documentation receipt on the Python
-  branch.
+- The current Python full-gate receipt is committed under
+  `evidence/character-director/release-gate/`.
 
 ## 32. Acceptance-Criteria Matrix
 
@@ -307,10 +322,16 @@ blockers, commands, counts, and conservative status.
 
 ## 33. Direct Achievement Statement
 
-**Partially achieved.** The production architecture, governed connector,
-deterministic contracts, package supervision, automated correctness, and short
-cadence gate are implemented and verified. Fresh-clone source reproduction and
-a limited connected recording are also retained. The goal is not fully
-achieved until the real permission producer, complete audiovisual/professional
-visual review, the remaining long-duration/RSS runs, and independent-user
-package/rollback reproduction are complete.
+**Python release scope achieved; overall production evidence remains
+qualified.** The production architecture, governed connector, canonical
+permission producer, deterministic contracts, package supervision, source
+reproduction, automated correctness, character-library rebuilds, and real
+runtime smokes are implemented and verified. V9 has explicit product-owner
+animation approval. The Kingfisher additional-pose expansion is intentionally
+deferred and excluded from completion by user direction.
+
+The historical evidence record still does not claim completed eight-hour and
+24-hour V2 soaks or an independent-user package install/rollback drill. Those
+are release-operations follow-ups, not hidden claims inside this Python source
+receipt. The held Kingfisher expansion must follow its separate handoff before
+any of its additional poses can ship.

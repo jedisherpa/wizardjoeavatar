@@ -61,6 +61,12 @@ python3 tools/run_character_observer.py \
 - `KINGFISHER_PAIRWISE_REVIEW_PROTOCOL_V1_2026-07-31.md`: authoritative
   one-pair-at-a-time queue, reviewer contract, failure receipts, and current
   pair dispositions.
+- `KINGFISHER_ADDITIONAL_POSES_HANDOFF_2026-08-08.md`: frozen Kingfisher
+  expansion boundary, preserved evidence, exact resume point, and the native-
+  size one-pair-at-a-time approval workflow.
+- `FINAL_RELEASE_RECEIPT_2026-08-09.md`: immutable full-gate PASS for pushed
+  Python commit `0a237c6b`, including all 164 test files, five real runtime
+  smokes, and the machine-enforced Kingfisher deferral.
 - `reports/README.md`: specialist reports and ownership map.
 - `PHASE0_TRACKER.md`: accountable design and implementation gates.
 - `PHASE0_SYNTHESIS.md`: binding cross-repository architecture.
@@ -70,6 +76,8 @@ python3 tools/run_character_observer.py \
   statuses and evidence.
 - `PRODUCTION_VERIFICATION.md`: fresh automated, package, cadence, security, and
   visual verification results.
+- `RELEASE_GATE_CHECKPOINT_2026-08-08.md`: commit-bound clean-clone release
+  contract and the final passing receipt pointer.
 - `ATOMIC_ANIMATION_TRUTH_2026-07-18.md`: exact frame/trace, contact-lock,
   authored stop/reversal/cast implementation and clean-candidate evidence.
 - `reviews/RUNTIME_BOUND_CONTACT_653D400_TECHNICAL_REVIEW.md`: independent

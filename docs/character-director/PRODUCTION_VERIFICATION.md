@@ -2,6 +2,22 @@
 
 Date: 2026-07-18
 
+## 2026-08-09 Commit-Bound Closure
+
+The later Python candidate
+`0a237c6bd396716a65be160292be94cd68b3f4a7` passes the complete immutable
+release gate from a disposable clone. Git LFS materialization, frozen
+dependencies, verifier imports, Dragon and Robin/Speech rebuilds, the
+Kingfisher additional-pose freeze, focused tests, Python scope, all 164 Python
+test files in four passing shards, five real HTTP/WebSocket smokes, and final
+checkout cleanliness all pass.
+
+This supersedes the source-closure and Python-suite counts below. It does not
+rewrite the historical audiovisual, soak-duration, or independent-user package
+findings recorded by this report. See
+`FINAL_RELEASE_RECEIPT_2026-08-09.md` for the immutable receipt, hashes, exact
+scope, and reproduction command.
+
 Python candidate: `/Users/paul/Documents/WizardJoeAsci/worktrees/wizardjoe-character-director`
 
 Prism candidate: `/Users/paul/Documents/WizardJoeAsci/worktrees/prism-character-director`
