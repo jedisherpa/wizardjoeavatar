@@ -178,6 +178,39 @@ class CharacterDirectorReleaseGateTests(unittest.TestCase):
 
         self.assertTrue(receipt["passed"])
 
+    def test_fast_mode_ignores_absent_optional_pair_review_evidence(self) -> None:
+        self._write(
+            "release/library-index.json",
+            json.dumps(
+                {
+                    "legacy_pair_review": {
+                        "pairs": [
+                            {
+                                "pairwise_full_size_review": {
+                                    "evidence_path": "",
+                                }
+                            }
+                        ]
+                    }
+                }
+            ),
+        )
+        self._commit_all()
+        contract = self._contract(
+            required_files=["release/library-index.json"],
+            reference_manifests=[
+                {
+                    "path": "release/library-index.json",
+                    "kind": "hd_review_library",
+                }
+            ],
+        )
+
+        receipt = run_fast_gate(self.repo, "HEAD", contract)
+
+        self.assertTrue(receipt["passed"])
+        self.assertEqual(0, receipt["closure"]["manifest_reference_count"])
+
     def test_fast_mode_requires_verifier_distribution_in_all_lock_surfaces(self) -> None:
         self._write(
             "pyproject.toml",

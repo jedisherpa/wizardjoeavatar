@@ -271,8 +271,10 @@ def _manifest_references(
                         checksum = pair.get(f"{key[:-5]}_sha256")
                         yield key, raw, checksum if isinstance(checksum, str) else None
                 visual = pair.get("pairwise_full_size_review")
-                if isinstance(visual, dict) and isinstance(visual.get("evidence_path"), str):
-                    yield "evidence_path", visual["evidence_path"], None
+                if isinstance(visual, dict):
+                    evidence_path = visual.get("evidence_path")
+                    if isinstance(evidence_path, str) and evidence_path.strip():
+                        yield "evidence_path", evidence_path, None
         return
     raise ValueError(f"unknown reference manifest kind: {kind}")
 
