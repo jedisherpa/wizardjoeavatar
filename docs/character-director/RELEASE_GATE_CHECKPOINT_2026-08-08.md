@@ -89,17 +89,23 @@ suite within its bound, and pass all five real-server smoke checks.
 
 ## Fast closure receipt
 
-Commit `8ece8d8323e2b88b8d1b19617eee52c57e601df7` passes the fast gate.
+Commit `964d6c1b5d5a946494491768d12c8425019a451e` passes the fast gate.
 The verifier inspected 18,638 tracked files, resolved 142 manifest references,
 and reported zero issues. The receipt was written as
-`/tmp/character-director-release-fast-8ece8d83.json` with SHA-256
-`adaaf500c1691ec9d2ee16dd33b14d158df19e3c3fbb0bbda1f6186187d1f185`.
+`/tmp/character-director-release-fast-964d6c1b.json` with SHA-256
+`a46b6cf94c620ccab61b82c518d786190bb1aa4188ed697a03d6102060cb0bc5`.
 
 This checkpoint also fixes optional Kingfisher pair-review evidence handling.
 An empty `pairwise_full_size_review.evidence_path` now means that no optional
 evidence artifact has been declared for that pair; it is not interpreted as a
 repository path. Required audit, receipt, ledger, dictionary, and shard paths
 remain fail-closed.
+
+The candidate also exposes the exact verified active capability manifest at
+the authenticated `GET /api/avatar/wizard/capabilities` route. The response
+binds the manifest and package digests, runtime admission identity, and the
+active character-specific runtime epoch; it does not derive capabilities or
+admit review-only characters on request.
 
 The fast receipt proves commit closure only. Full release remains open: the
 Kingfisher pairwise review is deliberately fail-closed, with Pair 1 awaiting
