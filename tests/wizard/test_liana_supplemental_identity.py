@@ -8,7 +8,10 @@ from PIL import Image
 
 from tools.build_joeville_supplemental_identity import build_identity
 from wizard_avatar.hd_pose_artifact import HDPoseArtifact, HDPoseLibrary, sha256_path
-from wizard_avatar.stream import character_runtime_epoch_prefix
+from wizard_avatar.stream import (
+    character_runtime_epoch_field,
+    character_runtime_epoch_prefix,
+)
 
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -175,6 +178,10 @@ class LianaSupplementalIdentityTests(unittest.TestCase):
 
     def test_runtime_epoch_namespace_is_character_specific(self):
         self.assertEqual(character_runtime_epoch_prefix("liana-v1"), "liana")
+        self.assertEqual(
+            character_runtime_epoch_field("liana-v1"),
+            "liana_runtime_epoch",
+        )
         self.assertEqual(
             character_runtime_epoch_prefix("liora-kane-v1"), "liora_kane"
         )

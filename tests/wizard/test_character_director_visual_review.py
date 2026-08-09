@@ -1243,6 +1243,7 @@ class ManifestValidationTests(unittest.TestCase):
             "kingfisher_runtime_epoch",
             "crystail_runtime_epoch",
             "falcor_runtime_epoch",
+            "liana_runtime_epoch",
             "serena_quill_runtime_epoch",
             "aurelia_finch_runtime_epoch",
             "selene_hart_runtime_epoch",

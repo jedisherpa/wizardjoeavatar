@@ -75,6 +75,14 @@ def character_runtime_epoch_prefix(character_id: str) -> str:
     return normalized
 
 
+def character_runtime_epoch_field(character_id: str) -> str:
+    """Return the acknowledgement field owned by one character runtime."""
+
+    return "{}_runtime_epoch".format(
+        character_runtime_epoch_prefix(character_id)
+    )
+
+
 def _package_capability_manifest(
     frame_source: ProceduralWizardFrameSource,
 ) -> tuple[Mapping[str, object] | None, str, str]:

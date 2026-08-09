@@ -24,6 +24,7 @@ Character authorities use:
 - `kingfisher_runtime_epoch`
 - `crystail_runtime_epoch`
 - `falcor_runtime_epoch`
+- `liana_runtime_epoch`
 - `serena_quill_runtime_epoch`
 - `aurelia_finch_runtime_epoch`
 - `selene_hart_runtime_epoch`
@@ -55,6 +56,9 @@ character does not require weakening or replacing the evidence schema.
    active and supplied the acknowledgement. Evidence must never fabricate
    epochs for characters that were not involved.
 7. Version 1 manifests remain readable. New captures use version 2.
+8. Remote-command acknowledgements retain `runtime_epoch` for compatibility
+   and also emit the active character's namespaced field. The two values must
+   match because they identify the same live runtime authority.
 
 ## Verification
 

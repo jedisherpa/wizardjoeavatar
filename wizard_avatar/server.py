@@ -14,7 +14,7 @@ from pathlib import Path
 from typing import Any, Callable, Dict, Mapping, Optional
 from urllib.parse import urlsplit
 
-from .commanding import CommandEnvelopeV1, CommandValidationError
+from .commanding import CommandAckV1, CommandEnvelopeV1, CommandValidationError
 from .directed_performance import (
     DIRECTED_PERFORMANCE_MAX_BODY_BYTES,
     DirectedPerformanceError,
@@ -50,6 +50,7 @@ from .permission_world import (
 from .stream import (
     SubscriberLimitError,
     WizardFrameHub,
+    character_runtime_epoch_field,
     character_runtime_epoch_prefix,
 )
 from .runtime_identity import build_runtime_identity, refresh_runtime_identity
@@ -175,6 +176,14 @@ def create_app(
         score_repository=score_repository,
         allow_scoreless_governed_speech=allow_scoreless_governed_speech,
     )
+    character_epoch_field = character_runtime_epoch_field(
+        frame_source.character_package.character_id
+    )
+
+    def command_ack_payload(ack: CommandAckV1) -> Dict[str, object]:
+        payload = ack.to_dict()
+        payload[character_epoch_field] = ack.runtime_epoch
+        return payload
     started_at_monotonic_ms = time.monotonic_ns() // 1_000_000
     runtime_identity = build_runtime_identity(
         ROOT,
@@ -988,9 +997,12 @@ def create_app(
         if not result.ok:
             raise HTTPException(
                 status_code=400,
-                detail={"ack": ack.to_dict(), "message": result.message},
+                detail={
+                    "ack": command_ack_payload(ack),
+                    "message": result.message,
+                },
             )
-        return {"ack": ack.to_dict(), "state": result.state}
+        return {"ack": command_ack_payload(ack), "state": result.state}
 
     @app.websocket("/ws/ping")
     async def ping_ws(websocket: FastAPIWebSocket):

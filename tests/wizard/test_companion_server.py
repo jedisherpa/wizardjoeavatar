@@ -281,6 +281,40 @@ class CompanionServerTests(unittest.IsolatedAsyncioTestCase):
         self.assertEqual(accepted_status, 200)
         await app.state.frame_hub.stop()
 
+    async def test_ordered_command_ack_namespaces_the_active_character_epoch(self):
+        app = self.create_companion_app()
+        payload = {
+            "schema_version": 1,
+            "command_id": "namespaced-runtime-epoch-test",
+            "source_id": "focused-server-test",
+            "source_kind": "api",
+            "source_sequence": 1,
+            "source_epoch": "focused-server-test-epoch",
+            "kind": "action",
+            "payload": {"action": "explaining", "duration_ms": 900},
+            "issued_tick": 0,
+            "priority_class": "user",
+        }
+        body = json.dumps(payload, separators=(",", ":")).encode("utf-8")
+        status, response = await asgi_request(
+            app,
+            "POST",
+            "/api/avatar/wizard/command",
+            body,
+            LOOPBACK_HEADERS
+            + (
+                ("authorization", "Bearer " + APP_TOKEN),
+                ("content-type", "application/json"),
+            ),
+        )
+
+        self.assertEqual(status, 200)
+        self.assertEqual(
+            response["ack"]["wizard_runtime_epoch"],
+            response["ack"]["runtime_epoch"],
+        )
+        await app.state.frame_hub.stop()
+
     async def test_companion_reads_are_authenticated_except_versioned_health(self):
         app = self.create_companion_app()
         missing, _ = await asgi_request(
